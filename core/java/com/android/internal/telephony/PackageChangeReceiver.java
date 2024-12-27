@@ -54,26 +54,19 @@ public abstract class PackageChangeReceiver extends BroadcastReceiver {
         return looper;
     }
 
-    public void onPackageAdded(String packageName) {
-    }
+    public void onPackageAdded(String packageName) {}
 
-    public void onPackageRemoved(String packageName) {
-    }
+    public void onPackageRemoved(String packageName) {}
 
-    public void onPackageUpdateFinished(String packageName) {
-    }
+    public void onPackageUpdateFinished(String packageName) {}
 
-    public void onPackageModified(String packageName) {
-    }
+    public void onPackageModified(String packageName) {}
 
-    public void onHandleForceStop(String[] packages, boolean doit) {
-    }
+    public void onHandleForceStop(String[] packages, boolean doit) {}
 
-    public void onPackageDisappeared() {
-    }
+    public void onPackageDisappeared() {}
 
-    public void onPackageAppeared() {
-    }
+    public void onPackageAppeared() {}
 
     @Override // android.content.BroadcastReceiver
     public void onReceive(Context context, Intent intent) {

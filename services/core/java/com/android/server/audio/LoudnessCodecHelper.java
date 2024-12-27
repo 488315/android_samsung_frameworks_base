@@ -10,8 +10,9 @@ import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.Log;
 import android.util.SparseIntArray;
-import com.android.server.audio.LoudnessCodecHelper;
+
 import com.android.server.utils.EventLogger;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +31,8 @@ public final class LoudnessCodecHelper {
     static final int SPL_RANGE_UNKNOWN = 0;
     public static final EventLogger sLogger = new EventLogger(30, "Loudness updates");
     public final AudioService mAudioService;
-    public final LoudnessRemoteCallbackList mLoudnessUpdateDispatchers = new LoudnessRemoteCallbackList(this);
+    public final LoudnessRemoteCallbackList mLoudnessUpdateDispatchers =
+            new LoudnessRemoteCallbackList(this);
     public final Object mLock = new Object();
     public final HashMap mStartedConfigPiids = new HashMap();
     public final HashMap mStartedConfigInfo = new HashMap();
@@ -57,12 +59,18 @@ public final class LoudnessCodecHelper {
             if (obj == null || LoudnessCodecInputProperties.class != obj.getClass()) {
                 return false;
             }
-            LoudnessCodecInputProperties loudnessCodecInputProperties = (LoudnessCodecInputProperties) obj;
-            return this.mMetadataType == loudnessCodecInputProperties.mMetadataType && this.mIsDownmixing == loudnessCodecInputProperties.mIsDownmixing && this.mDeviceSplRange == loudnessCodecInputProperties.mDeviceSplRange;
+            LoudnessCodecInputProperties loudnessCodecInputProperties =
+                    (LoudnessCodecInputProperties) obj;
+            return this.mMetadataType == loudnessCodecInputProperties.mMetadataType
+                    && this.mIsDownmixing == loudnessCodecInputProperties.mIsDownmixing
+                    && this.mDeviceSplRange == loudnessCodecInputProperties.mDeviceSplRange;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(this.mMetadataType), Boolean.valueOf(this.mIsDownmixing), Integer.valueOf(this.mDeviceSplRange));
+            return Objects.hash(
+                    Integer.valueOf(this.mMetadataType),
+                    Boolean.valueOf(this.mIsDownmixing),
+                    Integer.valueOf(this.mDeviceSplRange));
         }
 
         public final String toString() {
@@ -88,10 +96,12 @@ public final class LoudnessCodecHelper {
 
         @Override // android.os.RemoteCallbackList
         public final void onCallbackDied(IInterface iInterface, Object obj) {
-            ILoudnessCodecUpdatesDispatcher iLoudnessCodecUpdatesDispatcher = (ILoudnessCodecUpdatesDispatcher) iInterface;
+            ILoudnessCodecUpdatesDispatcher iLoudnessCodecUpdatesDispatcher =
+                    (ILoudnessCodecUpdatesDispatcher) iInterface;
             Integer num = obj instanceof Integer ? (Integer) obj : null;
             if (num != null) {
-                LoudnessCodecHelper.sLogger.enqueue(new AudioServiceEvents$LoudnessEvent(2, 0, num.intValue()));
+                LoudnessCodecHelper.sLogger.enqueue(
+                        new AudioServiceEvents$LoudnessEvent(2, 0, num.intValue()));
                 LoudnessCodecHelper loudnessCodecHelper = this.mLoudnessCodecHelper;
                 final int intValue = num.intValue();
                 synchronized (loudnessCodecHelper.mLock) {
@@ -105,45 +115,63 @@ public final class LoudnessCodecHelper {
                         }
                     }
                     final int i2 = 0;
-                    loudnessCodecHelper.mStartedConfigPiids.entrySet().removeIf(new Predicate() { // from class: com.android.server.audio.LoudnessCodecHelper$$ExternalSyntheticLambda5
-                        @Override // java.util.function.Predicate
-                        public final boolean test(Object obj2) {
-                            int i3 = i2;
-                            int i4 = intValue;
-                            Map.Entry entry = (Map.Entry) obj2;
-                            switch (i3) {
-                                case 0:
-                                    if (((LoudnessCodecHelper.LoudnessTrackId) entry.getKey()).mPid == i4) {
-                                    }
-                                    break;
-                                default:
-                                    if (((LoudnessCodecHelper.LoudnessTrackId) entry.getKey()).mPid == i4) {
-                                    }
-                                    break;
-                            }
-                            return false;
-                        }
-                    });
+                    loudnessCodecHelper
+                            .mStartedConfigPiids
+                            .entrySet()
+                            .removeIf(
+                                    new Predicate() { // from class:
+                                                      // com.android.server.audio.LoudnessCodecHelper$$ExternalSyntheticLambda5
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj2) {
+                                            int i3 = i2;
+                                            int i4 = intValue;
+                                            Map.Entry entry = (Map.Entry) obj2;
+                                            switch (i3) {
+                                                case 0:
+                                                    if (((LoudnessCodecHelper.LoudnessTrackId)
+                                                                            entry.getKey())
+                                                                    .mPid
+                                                            == i4) {}
+                                                    break;
+                                                default:
+                                                    if (((LoudnessCodecHelper.LoudnessTrackId)
+                                                                            entry.getKey())
+                                                                    .mPid
+                                                            == i4) {}
+                                                    break;
+                                            }
+                                            return false;
+                                        }
+                                    });
                     final int i3 = 1;
-                    loudnessCodecHelper.mStartedConfigInfo.entrySet().removeIf(new Predicate() { // from class: com.android.server.audio.LoudnessCodecHelper$$ExternalSyntheticLambda5
-                        @Override // java.util.function.Predicate
-                        public final boolean test(Object obj2) {
-                            int i32 = i3;
-                            int i4 = intValue;
-                            Map.Entry entry = (Map.Entry) obj2;
-                            switch (i32) {
-                                case 0:
-                                    if (((LoudnessCodecHelper.LoudnessTrackId) entry.getKey()).mPid == i4) {
-                                    }
-                                    break;
-                                default:
-                                    if (((LoudnessCodecHelper.LoudnessTrackId) entry.getKey()).mPid == i4) {
-                                    }
-                                    break;
-                            }
-                            return false;
-                        }
-                    });
+                    loudnessCodecHelper
+                            .mStartedConfigInfo
+                            .entrySet()
+                            .removeIf(
+                                    new Predicate() { // from class:
+                                                      // com.android.server.audio.LoudnessCodecHelper$$ExternalSyntheticLambda5
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj2) {
+                                            int i32 = i3;
+                                            int i4 = intValue;
+                                            Map.Entry entry = (Map.Entry) obj2;
+                                            switch (i32) {
+                                                case 0:
+                                                    if (((LoudnessCodecHelper.LoudnessTrackId)
+                                                                            entry.getKey())
+                                                                    .mPid
+                                                            == i4) {}
+                                                    break;
+                                                default:
+                                                    if (((LoudnessCodecHelper.LoudnessTrackId)
+                                                                            entry.getKey())
+                                                                    .mPid
+                                                            == i4) {}
+                                                    break;
+                                            }
+                                            return false;
+                                        }
+                                    });
                 }
             }
             super.onCallbackDied(iLoudnessCodecUpdatesDispatcher, obj);
@@ -168,7 +196,8 @@ public final class LoudnessCodecHelper {
                 return false;
             }
             LoudnessTrackId loudnessTrackId = (LoudnessTrackId) obj;
-            return this.mSessionId == loudnessTrackId.mSessionId && this.mPid == loudnessTrackId.mPid;
+            return this.mSessionId == loudnessTrackId.mSessionId
+                    && this.mPid == loudnessTrackId.mPid;
         }
 
         public final int hashCode() {
@@ -190,9 +219,14 @@ public final class LoudnessCodecHelper {
         int beginBroadcast = loudnessRemoteCallbackList.beginBroadcast();
         for (int i2 = 0; i2 < beginBroadcast; i2++) {
             try {
-                loudnessRemoteCallbackList.getBroadcastItem(i2).dispatchLoudnessCodecParameterChange(i, persistableBundle);
+                loudnessRemoteCallbackList
+                        .getBroadcastItem(i2)
+                        .dispatchLoudnessCodecParameterChange(i, persistableBundle);
             } catch (RemoteException e) {
-                Log.e("AS.LoudnessCodecHelper", "Error dispatching for sessionId " + i + " bundle: " + persistableBundle, e);
+                Log.e(
+                        "AS.LoudnessCodecHelper",
+                        "Error dispatching for sessionId " + i + " bundle: " + persistableBundle,
+                        e);
             }
         }
         loudnessRemoteCallbackList.finishBroadcast();
@@ -207,7 +241,15 @@ public final class LoudnessCodecHelper {
                         int i = this.mPiidToPidCache.get(num.intValue(), -1);
                         Set set = (Set) this.mStartedConfigInfo.get(entry.getKey());
                         if (set != null) {
-                            printWriter.println(String.format("Player piid %d pid %d active codec types %s\n", num, Integer.valueOf(i), set.stream().map(new LoudnessCodecHelper$$ExternalSyntheticLambda0()).collect(Collectors.joining(", "))));
+                            printWriter.println(
+                                    String.format(
+                                            "Player piid %d pid %d active codec types %s\n",
+                                            num,
+                                            Integer.valueOf(i),
+                                            set.stream()
+                                                    .map(
+                                                            new LoudnessCodecHelper$$ExternalSyntheticLambda0())
+                                                    .collect(Collectors.joining(", "))));
                         }
                     }
                 }
@@ -221,34 +263,46 @@ public final class LoudnessCodecHelper {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:63:0x006d, code lost:
-    
-        if (r12 == 2) goto L51;
-     */
+
+       if (r12 == 2) goto L51;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:78:0x0093, code lost:
-    
-        if (r13 == 6) goto L54;
-     */
+
+       if (r13 == 6) goto L54;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.os.PersistableBundle getCodecBundle_l(int r12, java.lang.String r13, android.media.LoudnessCodecInfo r14) {
+    public final android.os.PersistableBundle getCodecBundle_l(
+            int r12, java.lang.String r13, android.media.LoudnessCodecInfo r14) {
         /*
             Method dump skipped, instructions count: 302
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.audio.LoudnessCodecHelper.getCodecBundle_l(int, java.lang.String, android.media.LoudnessCodecInfo):android.os.PersistableBundle");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.audio.LoudnessCodecHelper.getCodecBundle_l(int,"
+                    + " java.lang.String,"
+                    + " android.media.LoudnessCodecInfo):android.os.PersistableBundle");
     }
 
     public final PersistableBundle getLoudnessParams(LoudnessCodecInfo loudnessCodecInfo) {
         PersistableBundle codecBundle_l;
-        ArrayList devicesForAttributesInt = this.mAudioService.getDevicesForAttributesInt(new AudioAttributes.Builder().setUsage(1).setContentType(2).build(), false);
+        ArrayList devicesForAttributesInt =
+                this.mAudioService.getDevicesForAttributesInt(
+                        new AudioAttributes.Builder().setUsage(1).setContentType(2).build(), false);
         if (devicesForAttributesInt.isEmpty()) {
             return new PersistableBundle();
         }
-        AudioDeviceAttributes audioDeviceAttributes = (AudioDeviceAttributes) devicesForAttributesInt.get(0);
+        AudioDeviceAttributes audioDeviceAttributes =
+                (AudioDeviceAttributes) devicesForAttributesInt.get(0);
         synchronized (this.mLock) {
-            codecBundle_l = getCodecBundle_l(audioDeviceAttributes.getInternalType(), audioDeviceAttributes.getAddress(), loudnessCodecInfo);
+            codecBundle_l =
+                    getCodecBundle_l(
+                            audioDeviceAttributes.getInternalType(),
+                            audioDeviceAttributes.getAddress(),
+                            loudnessCodecInfo);
         }
         return codecBundle_l;
     }

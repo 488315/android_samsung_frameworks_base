@@ -9,23 +9,27 @@ import android.text.TextPaint;
 import android.text.format.DateFormat;
 import android.text.style.CharacterStyle;
 import android.widget.TextView;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TextAppearanceInfo implements Parcelable {
-    public static final Parcelable.Creator<TextAppearanceInfo> CREATOR = new Parcelable.Creator<TextAppearanceInfo>() { // from class: android.view.inputmethod.TextAppearanceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextAppearanceInfo createFromParcel(Parcel in) {
-            return new TextAppearanceInfo(in);
-        }
+    public static final Parcelable.Creator<TextAppearanceInfo> CREATOR =
+            new Parcelable.Creator<
+                    TextAppearanceInfo>() { // from class:
+                                            // android.view.inputmethod.TextAppearanceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextAppearanceInfo createFromParcel(Parcel in) {
+                    return new TextAppearanceInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextAppearanceInfo[] newArray(int size) {
-            return new TextAppearanceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextAppearanceInfo[] newArray(int size) {
+                    return new TextAppearanceInfo[size];
+                }
+            };
     private final boolean mAllCaps;
     private final boolean mElegantTextHeight;
     private final boolean mFallbackLineSpacing;
@@ -82,10 +86,12 @@ public final class TextAppearanceInfo implements Parcelable {
         if ((text instanceof Spanned) && text.length() > 0 && selectionStart > 0) {
             Spanned spannedText = (Spanned) text;
             int lastCh = selectionStart - 1;
-            CharacterStyle[] spans = (CharacterStyle[]) spannedText.getSpans(lastCh, lastCh, CharacterStyle.class);
+            CharacterStyle[] spans =
+                    (CharacterStyle[]) spannedText.getSpans(lastCh, lastCh, CharacterStyle.class);
             if (spans != null) {
                 for (CharacterStyle span : spans) {
-                    if (spannedText.getSpanStart(span) <= lastCh && lastCh < spannedText.getSpanEnd(span)) {
+                    if (spannedText.getSpanStart(span) <= lastCh
+                            && lastCh < spannedText.getSpanEnd(span)) {
                         span.updateDrawState(textPaint);
                     }
                 }
@@ -101,7 +107,29 @@ public final class TextAppearanceInfo implements Parcelable {
             textStyle = typeface.getStyle();
         }
         Builder builder = new Builder();
-        builder.setTextSize(textPaint.getTextSize()).setTextLocales(textPaint.getTextLocales()).setSystemFontFamilyName(systemFontFamilyName).setTextFontWeight(textWeight).setTextStyle(textStyle).setShadowDx(textPaint.getShadowLayerDx()).setShadowDy(textPaint.getShadowLayerDy()).setShadowRadius(textPaint.getShadowLayerRadius()).setShadowColor(textPaint.getShadowLayerColor()).setElegantTextHeight(textPaint.isElegantTextHeight()).setLetterSpacing(textPaint.getLetterSpacing()).setFontFeatureSettings(textPaint.getFontFeatureSettings()).setFontVariationSettings(textPaint.getFontVariationSettings()).setTextScaleX(textPaint.getTextScaleX()).setTextColor(text.length() == 0 ? textView.getCurrentTextColor() : textPaint.getColor()).setLinkTextColor(textPaint.linkColor).setAllCaps(textView.isAllCaps()).setFallbackLineSpacing(textView.isFallbackLineSpacing()).setLineBreakStyle(textView.getLineBreakStyle()).setLineBreakWordStyle(textView.getLineBreakWordStyle()).setHighlightTextColor(textView.getHighlightColor()).setHintTextColor(textView.getCurrentHintTextColor());
+        builder.setTextSize(textPaint.getTextSize())
+                .setTextLocales(textPaint.getTextLocales())
+                .setSystemFontFamilyName(systemFontFamilyName)
+                .setTextFontWeight(textWeight)
+                .setTextStyle(textStyle)
+                .setShadowDx(textPaint.getShadowLayerDx())
+                .setShadowDy(textPaint.getShadowLayerDy())
+                .setShadowRadius(textPaint.getShadowLayerRadius())
+                .setShadowColor(textPaint.getShadowLayerColor())
+                .setElegantTextHeight(textPaint.isElegantTextHeight())
+                .setLetterSpacing(textPaint.getLetterSpacing())
+                .setFontFeatureSettings(textPaint.getFontFeatureSettings())
+                .setFontVariationSettings(textPaint.getFontVariationSettings())
+                .setTextScaleX(textPaint.getTextScaleX())
+                .setTextColor(
+                        text.length() == 0 ? textView.getCurrentTextColor() : textPaint.getColor())
+                .setLinkTextColor(textPaint.linkColor)
+                .setAllCaps(textView.isAllCaps())
+                .setFallbackLineSpacing(textView.isFallbackLineSpacing())
+                .setLineBreakStyle(textView.getLineBreakStyle())
+                .setLineBreakWordStyle(textView.getLineBreakWordStyle())
+                .setHighlightTextColor(textView.getHighlightColor())
+                .setHintTextColor(textView.getCurrentHintTextColor());
         return builder.build();
     }
 
@@ -257,15 +285,105 @@ public final class TextAppearanceInfo implements Parcelable {
             return false;
         }
         TextAppearanceInfo that = (TextAppearanceInfo) o;
-        return Float.compare(that.mTextSize, this.mTextSize) == 0 && this.mTextFontWeight == that.mTextFontWeight && this.mTextStyle == that.mTextStyle && this.mAllCaps == that.mAllCaps && Float.compare(that.mShadowDx, this.mShadowDx) == 0 && Float.compare(that.mShadowDy, this.mShadowDy) == 0 && Float.compare(that.mShadowRadius, this.mShadowRadius) == 0 && that.mShadowColor == this.mShadowColor && this.mElegantTextHeight == that.mElegantTextHeight && this.mFallbackLineSpacing == that.mFallbackLineSpacing && Float.compare(that.mLetterSpacing, this.mLetterSpacing) == 0 && this.mLineBreakStyle == that.mLineBreakStyle && this.mLineBreakWordStyle == that.mLineBreakWordStyle && this.mHighlightTextColor == that.mHighlightTextColor && this.mTextColor == that.mTextColor && this.mLinkTextColor == that.mLinkTextColor && this.mHintTextColor == that.mHintTextColor && Objects.equals(this.mTextLocales, that.mTextLocales) && Objects.equals(this.mSystemFontFamilyName, that.mSystemFontFamilyName) && Objects.equals(this.mFontFeatureSettings, that.mFontFeatureSettings) && Objects.equals(this.mFontVariationSettings, that.mFontVariationSettings) && Float.compare(that.mTextScaleX, this.mTextScaleX) == 0;
+        return Float.compare(that.mTextSize, this.mTextSize) == 0
+                && this.mTextFontWeight == that.mTextFontWeight
+                && this.mTextStyle == that.mTextStyle
+                && this.mAllCaps == that.mAllCaps
+                && Float.compare(that.mShadowDx, this.mShadowDx) == 0
+                && Float.compare(that.mShadowDy, this.mShadowDy) == 0
+                && Float.compare(that.mShadowRadius, this.mShadowRadius) == 0
+                && that.mShadowColor == this.mShadowColor
+                && this.mElegantTextHeight == that.mElegantTextHeight
+                && this.mFallbackLineSpacing == that.mFallbackLineSpacing
+                && Float.compare(that.mLetterSpacing, this.mLetterSpacing) == 0
+                && this.mLineBreakStyle == that.mLineBreakStyle
+                && this.mLineBreakWordStyle == that.mLineBreakWordStyle
+                && this.mHighlightTextColor == that.mHighlightTextColor
+                && this.mTextColor == that.mTextColor
+                && this.mLinkTextColor == that.mLinkTextColor
+                && this.mHintTextColor == that.mHintTextColor
+                && Objects.equals(this.mTextLocales, that.mTextLocales)
+                && Objects.equals(this.mSystemFontFamilyName, that.mSystemFontFamilyName)
+                && Objects.equals(this.mFontFeatureSettings, that.mFontFeatureSettings)
+                && Objects.equals(this.mFontVariationSettings, that.mFontVariationSettings)
+                && Float.compare(that.mTextScaleX, this.mTextScaleX) == 0;
     }
 
     public int hashCode() {
-        return Objects.hash(Float.valueOf(this.mTextSize), this.mTextLocales, this.mSystemFontFamilyName, Integer.valueOf(this.mTextFontWeight), Integer.valueOf(this.mTextStyle), Boolean.valueOf(this.mAllCaps), Float.valueOf(this.mShadowDx), Float.valueOf(this.mShadowDy), Float.valueOf(this.mShadowRadius), Integer.valueOf(this.mShadowColor), Boolean.valueOf(this.mElegantTextHeight), Boolean.valueOf(this.mFallbackLineSpacing), Float.valueOf(this.mLetterSpacing), this.mFontFeatureSettings, this.mFontVariationSettings, Integer.valueOf(this.mLineBreakStyle), Integer.valueOf(this.mLineBreakWordStyle), Float.valueOf(this.mTextScaleX), Integer.valueOf(this.mHighlightTextColor), Integer.valueOf(this.mTextColor), Integer.valueOf(this.mHintTextColor), Integer.valueOf(this.mLinkTextColor));
+        return Objects.hash(
+                Float.valueOf(this.mTextSize),
+                this.mTextLocales,
+                this.mSystemFontFamilyName,
+                Integer.valueOf(this.mTextFontWeight),
+                Integer.valueOf(this.mTextStyle),
+                Boolean.valueOf(this.mAllCaps),
+                Float.valueOf(this.mShadowDx),
+                Float.valueOf(this.mShadowDy),
+                Float.valueOf(this.mShadowRadius),
+                Integer.valueOf(this.mShadowColor),
+                Boolean.valueOf(this.mElegantTextHeight),
+                Boolean.valueOf(this.mFallbackLineSpacing),
+                Float.valueOf(this.mLetterSpacing),
+                this.mFontFeatureSettings,
+                this.mFontVariationSettings,
+                Integer.valueOf(this.mLineBreakStyle),
+                Integer.valueOf(this.mLineBreakWordStyle),
+                Float.valueOf(this.mTextScaleX),
+                Integer.valueOf(this.mHighlightTextColor),
+                Integer.valueOf(this.mTextColor),
+                Integer.valueOf(this.mHintTextColor),
+                Integer.valueOf(this.mLinkTextColor));
     }
 
     public String toString() {
-        return "TextAppearanceInfo{mTextSize=" + this.mTextSize + ", mTextLocales=" + this.mTextLocales + ", mSystemFontFamilyName='" + this.mSystemFontFamilyName + DateFormat.QUOTE + ", mTextFontWeight=" + this.mTextFontWeight + ", mTextStyle=" + this.mTextStyle + ", mAllCaps=" + this.mAllCaps + ", mShadowDx=" + this.mShadowDx + ", mShadowDy=" + this.mShadowDy + ", mShadowRadius=" + this.mShadowRadius + ", mShadowColor=" + this.mShadowColor + ", mElegantTextHeight=" + this.mElegantTextHeight + ", mFallbackLineSpacing=" + this.mFallbackLineSpacing + ", mLetterSpacing=" + this.mLetterSpacing + ", mFontFeatureSettings='" + this.mFontFeatureSettings + DateFormat.QUOTE + ", mFontVariationSettings='" + this.mFontVariationSettings + DateFormat.QUOTE + ", mLineBreakStyle=" + this.mLineBreakStyle + ", mLineBreakWordStyle=" + this.mLineBreakWordStyle + ", mTextScaleX=" + this.mTextScaleX + ", mHighlightTextColor=" + this.mHighlightTextColor + ", mTextColor=" + this.mTextColor + ", mHintTextColor=" + this.mHintTextColor + ", mLinkTextColor=" + this.mLinkTextColor + '}';
+        return "TextAppearanceInfo{mTextSize="
+                + this.mTextSize
+                + ", mTextLocales="
+                + this.mTextLocales
+                + ", mSystemFontFamilyName='"
+                + this.mSystemFontFamilyName
+                + DateFormat.QUOTE
+                + ", mTextFontWeight="
+                + this.mTextFontWeight
+                + ", mTextStyle="
+                + this.mTextStyle
+                + ", mAllCaps="
+                + this.mAllCaps
+                + ", mShadowDx="
+                + this.mShadowDx
+                + ", mShadowDy="
+                + this.mShadowDy
+                + ", mShadowRadius="
+                + this.mShadowRadius
+                + ", mShadowColor="
+                + this.mShadowColor
+                + ", mElegantTextHeight="
+                + this.mElegantTextHeight
+                + ", mFallbackLineSpacing="
+                + this.mFallbackLineSpacing
+                + ", mLetterSpacing="
+                + this.mLetterSpacing
+                + ", mFontFeatureSettings='"
+                + this.mFontFeatureSettings
+                + DateFormat.QUOTE
+                + ", mFontVariationSettings='"
+                + this.mFontVariationSettings
+                + DateFormat.QUOTE
+                + ", mLineBreakStyle="
+                + this.mLineBreakStyle
+                + ", mLineBreakWordStyle="
+                + this.mLineBreakWordStyle
+                + ", mTextScaleX="
+                + this.mTextScaleX
+                + ", mHighlightTextColor="
+                + this.mHighlightTextColor
+                + ", mTextColor="
+                + this.mTextColor
+                + ", mHintTextColor="
+                + this.mHintTextColor
+                + ", mLinkTextColor="
+                + this.mLinkTextColor
+                + '}';
     }
 
     public static final class Builder {

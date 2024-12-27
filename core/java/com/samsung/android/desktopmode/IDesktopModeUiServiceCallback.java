@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IDesktopModeUiServiceCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.desktopmode.IDesktopModeUiServiceCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.desktopmode.IDesktopModeUiServiceCallback";
 
     void onAnimationComplete() throws RemoteException;
 
@@ -22,24 +23,19 @@ public interface IDesktopModeUiServiceCallback extends IInterface {
 
     public static class Default implements IDesktopModeUiServiceCallback {
         @Override // com.samsung.android.desktopmode.IDesktopModeUiServiceCallback
-        public void onClickButtonPositive() throws RemoteException {
-        }
+        public void onClickButtonPositive() throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiServiceCallback
-        public void onClickButtonNegative() throws RemoteException {
-        }
+        public void onClickButtonNegative() throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiServiceCallback
-        public void onShow() throws RemoteException {
-        }
+        public void onShow() throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiServiceCallback
-        public void onDismiss() throws RemoteException {
-        }
+        public void onDismiss() throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiServiceCallback
-        public void onAnimationComplete() throws RemoteException {
-        }
+        public void onAnimationComplete() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +43,7 @@ public interface IDesktopModeUiServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDesktopModeUiServiceCallback {
+    public abstract static class Stub extends Binder implements IDesktopModeUiServiceCallback {
         static final int TRANSACTION_onAnimationComplete = 5;
         static final int TRANSACTION_onClickButtonNegative = 2;
         static final int TRANSACTION_onClickButtonPositive = 1;
@@ -97,7 +93,8 @@ public interface IDesktopModeUiServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDesktopModeUiServiceCallback.DESCRIPTOR);
             }

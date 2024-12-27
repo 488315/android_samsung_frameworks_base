@@ -7,28 +7,28 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes6.dex */
 public class SemContextMovementAlert extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextMovementAlert> CREATOR = new Parcelable.Creator<SemContextMovementAlert>() { // from class: com.samsung.android.hardware.context.SemContextMovementAlert.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextMovementAlert createFromParcel(Parcel in) {
-            return new SemContextMovementAlert(in);
-        }
+    public static final Parcelable.Creator<SemContextMovementAlert> CREATOR =
+            new Parcelable.Creator<
+                    SemContextMovementAlert>() { // from class:
+                                                 // com.samsung.android.hardware.context.SemContextMovementAlert.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextMovementAlert createFromParcel(Parcel in) {
+                    return new SemContextMovementAlert(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextMovementAlert[] newArray(int size) {
-            return new SemContextMovementAlert[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextMovementAlert[] newArray(int size) {
+                    return new SemContextMovementAlert[size];
+                }
+            };
 
-    @Deprecated
-    public static final int MOVE = 1;
+    @Deprecated public static final int MOVE = 1;
 
-    @Deprecated
-    public static final int NO_MOVE = 2;
+    @Deprecated public static final int NO_MOVE = 2;
 
-    @Deprecated
-    public static final int UNKNOWN = 0;
+    @Deprecated public static final int UNKNOWN = 0;
     private Bundle mContext;
 
     SemContextMovementAlert() {

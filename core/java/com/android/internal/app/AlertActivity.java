@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
-import com.android.internal.app.AlertController;
 
 /* loaded from: classes5.dex */
 public abstract class AlertActivity extends Activity implements DialogInterface {
@@ -38,7 +37,8 @@ public abstract class AlertActivity extends Activity implements DialogInterface 
         return dispatchPopulateAccessibilityEvent(this, event);
     }
 
-    public static boolean dispatchPopulateAccessibilityEvent(Activity act, AccessibilityEvent event) {
+    public static boolean dispatchPopulateAccessibilityEvent(
+            Activity act, AccessibilityEvent event) {
         event.setClassName(Dialog.class.getName());
         event.setPackageName(act.getPackageName());
         ViewGroup.LayoutParams params = act.getWindow().getAttributes();

@@ -6,6 +6,7 @@ import android.filterfw.core.Frame;
 import android.filterfw.core.GenerateFieldPort;
 import android.filterfw.format.ImageFormat;
 import android.graphics.Bitmap;
+
 import java.io.OutputStream;
 
 /* loaded from: classes.dex */

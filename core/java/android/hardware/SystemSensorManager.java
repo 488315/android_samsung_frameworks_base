@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
-import android.hardware.SensorManager;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.Looper;
@@ -18,7 +17,9 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
+
 import dalvik.system.CloseGuard;
+
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.lang.ref.WeakReference;
@@ -36,7 +37,8 @@ public class SystemSensorManager extends SensorManager {
     private static final int CAPPED_SAMPLING_RATE_LEVEL = 1;
     static final long CHANGE_ID_SAMPLING_RATE_SENSORS_PERMISSION = 136069189;
     private static final boolean DEBUG_DYNAMIC_SENSOR = true;
-    private static final String HIGH_SAMPLING_RATE_SENSORS_PERMISSION = "android.permission.HIGH_SAMPLING_RATE_SENSORS";
+    private static final String HIGH_SAMPLING_RATE_SENSORS_PERMISSION =
+            "android.permission.HIGH_SAMPLING_RATE_SENSORS";
     private static final int MAX_LISTENER_COUNT = 128;
     private static final int MIN_DIRECT_CHANNEL_BUFFER_SIZE = 104;
     private CameraLightSensorManager mCameraLightManager;
@@ -55,12 +57,15 @@ public class SystemSensorManager extends SensorManager {
     private final ArrayList<Sensor> mFullSensorsList = new ArrayList<>();
     private List<Sensor> mFullDynamicSensorsList = new ArrayList();
     private final SparseArray<List<Sensor>> mFullRuntimeSensorListByDevice = new SparseArray<>();
-    private final SparseArray<SparseArray<List<Sensor>>> mRuntimeSensorListByDeviceByType = new SparseArray<>();
+    private final SparseArray<SparseArray<List<Sensor>>> mRuntimeSensorListByDeviceByType =
+            new SparseArray<>();
     private boolean mDynamicSensorListDirty = true;
     private final HashMap<Integer, Sensor> mHandleToSensor = new HashMap<>();
     private final HashMap<SensorEventListener, SensorEventQueue> mSensorListeners = new HashMap<>();
-    private final HashMap<TriggerEventListener, TriggerEventQueue> mTriggerListeners = new HashMap<>();
-    private HashMap<SensorManager.DynamicSensorCallback, Handler> mDynamicSensorCallbacks = new HashMap<>();
+    private final HashMap<TriggerEventListener, TriggerEventQueue> mTriggerListeners =
+            new HashMap<>();
+    private HashMap<SensorManager.DynamicSensorCallback, Handler> mDynamicSensorCallbacks =
+            new HashMap<>();
     private Optional<Boolean> mHasHighSamplingRateSensorsPermission = Optional.empty();
 
     private static native void nativeClassInit();
@@ -69,7 +74,8 @@ public class SystemSensorManager extends SensorManager {
 
     private static native long nativeCreate(String str);
 
-    private static native int nativeCreateDirectChannel(long j, int i, long j2, int i2, int i3, HardwareBuffer hardwareBuffer);
+    private static native int nativeCreateDirectChannel(
+            long j, int i, long j2, int i2, int i3, HardwareBuffer hardwareBuffer);
 
     private static native void nativeDestroyDirectChannel(long j, int i);
 
@@ -87,7 +93,8 @@ public class SystemSensorManager extends SensorManager {
 
     private static native boolean nativeIsReplayDataInjectionEnabled(long j);
 
-    private static native int nativeSetOperationParameter(long j, int i, int i2, float[] fArr, int[] iArr);
+    private static native int nativeSetOperationParameter(
+            long j, int i, int i2, float[] fArr, int[] iArr);
 
     public SystemSensorManager(Context context, Looper mainLooper) {
         synchronized (sLock) {
@@ -131,7 +138,8 @@ public class SystemSensorManager extends SensorManager {
             if (fullList == null) {
                 fullList = createRuntimeSensorListLocked(deviceId);
             }
-            SparseArray<List<Sensor>> deviceSensorListByType = this.mRuntimeSensorListByDeviceByType.get(deviceId);
+            SparseArray<List<Sensor>> deviceSensorListByType =
+                    this.mRuntimeSensorListByDeviceByType.get(deviceId);
             list = deviceSensorListByType.get(type);
             if (list == null) {
                 if (type == -1) {
@@ -180,7 +188,13 @@ public class SystemSensorManager extends SensorManager {
     }
 
     @Override // android.hardware.SensorManager
-    protected boolean registerListenerImpl(SensorEventListener listener, Sensor sensor, int delayUs, Handler handler, int maxBatchReportLatencyUs, int reservedFlags) {
+    protected boolean registerListenerImpl(
+            SensorEventListener listener,
+            Sensor sensor,
+            int delayUs,
+            Handler handler,
+            int maxBatchReportLatencyUs,
+            int reservedFlags) {
         String name;
         if (listener == null || sensor == null) {
             Log.e("SensorManager", "sensor or listener is null");
@@ -198,17 +212,31 @@ public class SystemSensorManager extends SensorManager {
         if (sensor.getName().contains("Camera Light Sensor")) {
             Looper looper = handler != null ? handler.getLooper() : null;
             if (handler != null) {
-                Log.d("SensorManager", "[CameraLightSensor] Use handler looper= " + handler.getLooper() + " mainLooper= " + this.mMainLooper);
+                Log.d(
+                        "SensorManager",
+                        "[CameraLightSensor] Use handler looper= "
+                                + handler.getLooper()
+                                + " mainLooper= "
+                                + this.mMainLooper);
             } else {
-                Log.d("SensorManager", "[CameraLightSensor] mainLooper= " + this.mMainLooper + ", Use CameraMangerThread looper.");
+                Log.d(
+                        "SensorManager",
+                        "[CameraLightSensor] mainLooper= "
+                                + this.mMainLooper
+                                + ", Use CameraMangerThread looper.");
             }
             cameraLightSensorRet = requestCameraLightSensor(looper, listener, sensor, true);
         }
         if (this.mSensorListeners.size() >= 128) {
-            throw new IllegalStateException("register failed, the sensor listeners size has exceeded the maximum limit 128");
+            throw new IllegalStateException(
+                    "register failed, the sensor listeners size has exceeded the maximum limit"
+                            + " 128");
         }
         String strlistener = listener.toString();
-        int delayUs2 = (strlistener == null || !strlistener.startsWith("com.tencent") || delayUs >= 5000) ? delayUs : 5000;
+        int delayUs2 =
+                (strlistener == null || !strlistener.startsWith("com.tencent") || delayUs >= 5000)
+                        ? delayUs
+                        : 5000;
         synchronized (this.mSensorListeners) {
             SensorEventQueue queue = this.mSensorListeners.get(listener);
             if (queue == null) {
@@ -225,26 +253,61 @@ public class SystemSensorManager extends SensorManager {
                 if (uid >= 10000) {
                     strlistener = "";
                 }
-                if (sensor.getName().contains("Palm") || sensor.getName().contains("Ear Hover Proximity")) {
+                if (sensor.getName().contains("Palm")
+                        || sensor.getName().contains("Ear Hover Proximity")) {
                     proGuard = true;
                     proGuardPkg = this.mContext.getPackageManager().getNameForUid(uid);
                 }
                 if (proGuard) {
                     fullClassName = fullClassName + "/" + proGuardPkg;
                 }
-                SensorEventQueue queue2 = new SensorEventQueue(listener, looper2, this, fullClassName);
+                SensorEventQueue queue2 =
+                        new SensorEventQueue(listener, looper2, this, fullClassName);
                 if (queue2.addSensor(sensor, delayUs2, maxBatchReportLatencyUs)) {
                     this.mSensorListeners.put(listener, queue2);
                 } else {
                     queue2.dispose();
-                    Log.d("SensorManager", "registerListener fail (1) :: " + sensor.getHandle() + ", " + sensor.getName() + ", " + delayUs2 + ", " + maxBatchReportLatencyUs + ", " + strlistener);
+                    Log.d(
+                            "SensorManager",
+                            "registerListener fail (1) :: "
+                                    + sensor.getHandle()
+                                    + ", "
+                                    + sensor.getName()
+                                    + ", "
+                                    + delayUs2
+                                    + ", "
+                                    + maxBatchReportLatencyUs
+                                    + ", "
+                                    + strlistener);
                     return false;
                 }
             } else if (!queue.addSensor(sensor, delayUs2, maxBatchReportLatencyUs)) {
-                Log.d("SensorManager", "registerListener fail (2) :: " + sensor.getHandle() + ", " + sensor.getName() + ", " + delayUs2 + ", " + maxBatchReportLatencyUs + ", " + strlistener);
+                Log.d(
+                        "SensorManager",
+                        "registerListener fail (2) :: "
+                                + sensor.getHandle()
+                                + ", "
+                                + sensor.getName()
+                                + ", "
+                                + delayUs2
+                                + ", "
+                                + maxBatchReportLatencyUs
+                                + ", "
+                                + strlistener);
                 return false;
             }
-            Log.d("SensorManager", "registerListener :: " + sensor.getHandle() + ", " + sensor.getName() + ", " + delayUs2 + ", " + maxBatchReportLatencyUs + ", " + strlistener);
+            Log.d(
+                    "SensorManager",
+                    "registerListener :: "
+                            + sensor.getHandle()
+                            + ", "
+                            + sensor.getName()
+                            + ", "
+                            + delayUs2
+                            + ", "
+                            + maxBatchReportLatencyUs
+                            + ", "
+                            + strlistener);
             if (sensor.getName().contains("Camera Light Sensor")) {
                 return cameraLightSensorRet;
             }
@@ -258,7 +321,9 @@ public class SystemSensorManager extends SensorManager {
         if (sensor != null && sensor.getReportingMode() == 2) {
             return;
         }
-        if (listener != null && this.mCameraLightManager != null && this.mCameraLightManager.isAllowListedListener(listener.toString())) {
+        if (listener != null
+                && this.mCameraLightManager != null
+                && this.mCameraLightManager.isAllowListedListener(listener.toString())) {
             requestCameraLightSensor(null, listener, sensor, false);
         }
         synchronized (this.mSensorListeners) {
@@ -275,7 +340,14 @@ public class SystemSensorManager extends SensorManager {
                     int uid = Binder.getCallingUid();
                     if (uid < 10000) {
                         if (sensor != null && listener != null) {
-                            Log.d("SensorManager", "unregisterListener :: " + sensor.getHandle() + ", " + sensor.getName() + ", " + listener.toString());
+                            Log.d(
+                                    "SensorManager",
+                                    "unregisterListener :: "
+                                            + sensor.getHandle()
+                                            + ", "
+                                            + sensor.getName()
+                                            + ", "
+                                            + listener.toString());
                         } else if (listener != null) {
                             Log.d("SensorManager", "unregisterListener :: " + listener.toString());
                         } else {
@@ -302,7 +374,9 @@ public class SystemSensorManager extends SensorManager {
             return false;
         }
         if (this.mTriggerListeners.size() >= 128) {
-            throw new IllegalStateException("request failed, the trigger listeners size has exceeded the maximum limit 128");
+            throw new IllegalStateException(
+                    "request failed, the trigger listeners size has exceeded the maximum limit"
+                            + " 128");
         }
         synchronized (this.mTriggerListeners) {
             TriggerEventQueue queue = this.mTriggerListeners.get(listener);
@@ -312,24 +386,47 @@ public class SystemSensorManager extends SensorManager {
                 } else {
                     fullClassName = listener.getClass().getName();
                 }
-                TriggerEventQueue queue2 = new TriggerEventQueue(listener, this.mMainLooper, this, fullClassName);
+                TriggerEventQueue queue2 =
+                        new TriggerEventQueue(listener, this.mMainLooper, this, fullClassName);
                 if (!queue2.addSensor(sensor, 0, 0)) {
                     queue2.dispose();
-                    Log.d("SensorManager", "requestTrigger :: fail (1) :: " + sensor.getHandle() + ", " + sensor.getName() + ", " + listener.toString());
+                    Log.d(
+                            "SensorManager",
+                            "requestTrigger :: fail (1) :: "
+                                    + sensor.getHandle()
+                                    + ", "
+                                    + sensor.getName()
+                                    + ", "
+                                    + listener.toString());
                     return false;
                 }
                 this.mTriggerListeners.put(listener, queue2);
             } else if (!queue.addSensor(sensor, 0, 0)) {
-                Log.d("SensorManager", "requestTrigger :: fail (2) :: " + sensor.getHandle() + ", " + sensor.getName() + ", " + listener.toString());
+                Log.d(
+                        "SensorManager",
+                        "requestTrigger :: fail (2) :: "
+                                + sensor.getHandle()
+                                + ", "
+                                + sensor.getName()
+                                + ", "
+                                + listener.toString());
                 return false;
             }
-            Log.d("SensorManager", "requestTrigger :: " + sensor.getHandle() + ", " + sensor.getName() + ", " + listener.toString());
+            Log.d(
+                    "SensorManager",
+                    "requestTrigger :: "
+                            + sensor.getHandle()
+                            + ", "
+                            + sensor.getName()
+                            + ", "
+                            + listener.toString());
             return true;
         }
     }
 
     @Override // android.hardware.SensorManager
-    protected boolean cancelTriggerSensorImpl(TriggerEventListener listener, Sensor sensor, boolean disable) {
+    protected boolean cancelTriggerSensorImpl(
+            TriggerEventListener listener, Sensor sensor, boolean disable) {
         boolean result;
         if (sensor != null && sensor.getReportingMode() != 2) {
             return false;
@@ -348,7 +445,14 @@ public class SystemSensorManager extends SensorManager {
                 this.mTriggerListeners.remove(listener);
                 queue.dispose();
                 if (sensor != null) {
-                    Log.d("SensorManager", "cancelTrigger :: " + sensor.getHandle() + ", " + sensor.getName() + ", " + listener.toString());
+                    Log.d(
+                            "SensorManager",
+                            "cancelTrigger :: "
+                                    + sensor.getHandle()
+                                    + ", "
+                                    + sensor.getName()
+                                    + ", "
+                                    + listener.toString());
                 } else {
                     Log.d("SensorManager", "cancelTrigger :: " + listener.toString());
                 }
@@ -379,13 +483,16 @@ public class SystemSensorManager extends SensorManager {
             if (enable) {
                 switch (mode) {
                     case 1:
-                        isDataInjectionModeEnabled = nativeIsDataInjectionEnabled(this.mNativeInstance);
+                        isDataInjectionModeEnabled =
+                                nativeIsDataInjectionEnabled(this.mNativeInstance);
                         break;
                     case 3:
-                        isDataInjectionModeEnabled = nativeIsReplayDataInjectionEnabled(this.mNativeInstance);
+                        isDataInjectionModeEnabled =
+                                nativeIsReplayDataInjectionEnabled(this.mNativeInstance);
                         break;
                     case 4:
-                        isDataInjectionModeEnabled = nativeIsHalBypassReplayDataInjectionEnabled(this.mNativeInstance);
+                        isDataInjectionModeEnabled =
+                                nativeIsHalBypassReplayDataInjectionEnabled(this.mNativeInstance);
                         break;
                 }
                 if (!isDataInjectionModeEnabled) {
@@ -398,7 +505,12 @@ public class SystemSensorManager extends SensorManager {
                 }
                 if (sInjectEventQueue == null) {
                     try {
-                        sInjectEventQueue = new InjectEventQueue(this.mMainLooper, this, mode, this.mContext.getPackageName());
+                        sInjectEventQueue =
+                                new InjectEventQueue(
+                                        this.mMainLooper,
+                                        this,
+                                        mode,
+                                        this.mContext.getPackageName());
                     } catch (RuntimeException e) {
                         Log.e("SensorManager", "Cannot create InjectEventQueue: " + e);
                     }
@@ -417,16 +529,22 @@ public class SystemSensorManager extends SensorManager {
     }
 
     @Override // android.hardware.SensorManager
-    protected boolean injectSensorDataImpl(Sensor sensor, float[] values, int accuracy, long timestamp) {
+    protected boolean injectSensorDataImpl(
+            Sensor sensor, float[] values, int accuracy, long timestamp) {
         synchronized (sLock) {
             if (sInjectEventQueue == null) {
-                Log.e("SensorManager", "Data injection mode not activated before calling injectSensorData");
+                Log.e(
+                        "SensorManager",
+                        "Data injection mode not activated before calling injectSensorData");
                 return false;
             }
-            if (sInjectEventQueue.getDataInjectionMode() != 4 && !sensor.isDataInjectionSupported()) {
+            if (sInjectEventQueue.getDataInjectionMode() != 4
+                    && !sensor.isDataInjectionSupported()) {
                 throw new IllegalArgumentException("sensor does not support data injection");
             }
-            int ret = sInjectEventQueue.injectSensorData(sensor.getHandle(), values, accuracy, timestamp);
+            int ret =
+                    sInjectEventQueue.injectSensorData(
+                            sensor.getHandle(), values, accuracy, timestamp);
             if (ret != 0) {
                 sInjectEventQueue.dispose();
                 sInjectEventQueue = null;
@@ -435,19 +553,23 @@ public class SystemSensorManager extends SensorManager {
         }
     }
 
-    private boolean requestCameraLightSensor(Looper cameraLooper, SensorEventListener listener, Sensor sensor, boolean enable) {
+    private boolean requestCameraLightSensor(
+            Looper cameraLooper, SensorEventListener listener, Sensor sensor, boolean enable) {
         if (enable) {
             if (this.mCameraLightManager == null) {
                 this.mCameraLightManager = new CameraLightSensorManager(this.mContext);
             }
-            if (this.mCameraLightManager != null && this.mCameraLightManager.registerCameraLightSensor(cameraLooper, listener, sensor)) {
+            if (this.mCameraLightManager != null
+                    && this.mCameraLightManager.registerCameraLightSensor(
+                            cameraLooper, listener, sensor)) {
                 Log.i("SensorManager", "[CameraLight] registerListener : " + listener.toString());
                 return true;
             }
             Log.e("SensorManager", "[CameraLight] registerListener fail : " + listener.toString());
             return false;
         }
-        if (this.mCameraLightManager == null || !this.mCameraLightManager.unRegisterCameraLightSensor(listener)) {
+        if (this.mCameraLightManager == null
+                || !this.mCameraLightManager.unRegisterCameraLightSensor(listener)) {
             return false;
         }
         Log.i("SensorManager", "[CameraLight] unregisteListener : " + listener.toString());
@@ -459,18 +581,26 @@ public class SystemSensorManager extends SensorManager {
         this.mHandleToSensor.remove(Integer.valueOf(sensor.getHandle()));
         if (sensor.getReportingMode() == 2) {
             synchronized (this.mTriggerListeners) {
-                HashMap<TriggerEventListener, TriggerEventQueue> triggerListeners = new HashMap<>(this.mTriggerListeners);
+                HashMap<TriggerEventListener, TriggerEventQueue> triggerListeners =
+                        new HashMap<>(this.mTriggerListeners);
                 for (TriggerEventListener l : triggerListeners.keySet()) {
-                    Log.i("SensorManager", "removed trigger listener" + l.toString() + " due to sensor disconnection");
+                    Log.i(
+                            "SensorManager",
+                            "removed trigger listener"
+                                    + l.toString()
+                                    + " due to sensor disconnection");
                     cancelTriggerSensorImpl(l, sensor, true);
                 }
             }
             return;
         }
         synchronized (this.mSensorListeners) {
-            HashMap<SensorEventListener, SensorEventQueue> sensorListeners = new HashMap<>(this.mSensorListeners);
+            HashMap<SensorEventListener, SensorEventQueue> sensorListeners =
+                    new HashMap<>(this.mSensorListeners);
             for (SensorEventListener l2 : sensorListeners.keySet()) {
-                Log.i("SensorManager", "removed event listener" + l2.toString() + " due to sensor disconnection");
+                Log.i(
+                        "SensorManager",
+                        "removed event listener" + l2.toString() + " due to sensor disconnection");
                 unregisterListenerImpl(l2, sensor);
             }
         }
@@ -485,7 +615,13 @@ public class SystemSensorManager extends SensorManager {
                 List<Sensor> updatedList = new ArrayList<>();
                 final List<Sensor> addedList = new ArrayList<>();
                 final List<Sensor> removedList = new ArrayList<>();
-                boolean changed = diffSortedSensorList(this.mFullDynamicSensorsList, list, updatedList, addedList, removedList);
+                boolean changed =
+                        diffSortedSensorList(
+                                this.mFullDynamicSensorsList,
+                                list,
+                                updatedList,
+                                addedList,
+                                removedList);
                 if (changed) {
                     Log.i("SensorManager", "DYNS dynamic sensor list cached should be updated");
                     this.mFullDynamicSensorsList = updatedList;
@@ -494,20 +630,24 @@ public class SystemSensorManager extends SensorManager {
                     }
                     Handler mainHandler = new Handler(this.mContext.getMainLooper());
                     synchronized (this.mDynamicSensorCallbacks) {
-                        for (Map.Entry<SensorManager.DynamicSensorCallback, Handler> entry : this.mDynamicSensorCallbacks.entrySet()) {
+                        for (Map.Entry<SensorManager.DynamicSensorCallback, Handler> entry :
+                                this.mDynamicSensorCallbacks.entrySet()) {
                             final SensorManager.DynamicSensorCallback callback = entry.getKey();
-                            Handler handler = entry.getValue() == null ? mainHandler : entry.getValue();
-                            handler.post(new Runnable() { // from class: android.hardware.SystemSensorManager.1
-                                @Override // java.lang.Runnable
-                                public void run() {
-                                    for (Sensor s2 : addedList) {
-                                        callback.onDynamicSensorConnected(s2);
-                                    }
-                                    for (Sensor s3 : removedList) {
-                                        callback.onDynamicSensorDisconnected(s3);
-                                    }
-                                }
-                            });
+                            Handler handler =
+                                    entry.getValue() == null ? mainHandler : entry.getValue();
+                            handler.post(
+                                    new Runnable() { // from class:
+                                        // android.hardware.SystemSensorManager.1
+                                        @Override // java.lang.Runnable
+                                        public void run() {
+                                            for (Sensor s2 : addedList) {
+                                                callback.onDynamicSensorConnected(s2);
+                                            }
+                                            for (Sensor s3 : removedList) {
+                                                callback.onDynamicSensorDisconnected(s3);
+                                            }
+                                        }
+                                    });
                         }
                     }
                     Iterator<Sensor> it = removedList.iterator();
@@ -538,23 +678,34 @@ public class SystemSensorManager extends SensorManager {
 
     private void setupRuntimeSensorBroadcastReceiver() {
         if (this.mRuntimeSensorBroadcastReceiver == null) {
-            this.mRuntimeSensorBroadcastReceiver = new BroadcastReceiver() { // from class: android.hardware.SystemSensorManager.2
-                @Override // android.content.BroadcastReceiver
-                public void onReceive(Context context, Intent intent) {
-                    if (intent.getAction().equals(VirtualDeviceManager.ACTION_VIRTUAL_DEVICE_REMOVED)) {
-                        synchronized (SystemSensorManager.this.mFullRuntimeSensorListByDevice) {
-                            int deviceId = intent.getIntExtra(VirtualDeviceManager.EXTRA_VIRTUAL_DEVICE_ID, 0);
-                            List<Sensor> removedSensors = (List) SystemSensorManager.this.mFullRuntimeSensorListByDevice.removeReturnOld(deviceId);
-                            if (removedSensors != null) {
-                                for (Sensor s : removedSensors) {
-                                    SystemSensorManager.this.cleanupSensorConnection(s);
+            this.mRuntimeSensorBroadcastReceiver =
+                    new BroadcastReceiver() { // from class: android.hardware.SystemSensorManager.2
+                        @Override // android.content.BroadcastReceiver
+                        public void onReceive(Context context, Intent intent) {
+                            if (intent.getAction()
+                                    .equals(VirtualDeviceManager.ACTION_VIRTUAL_DEVICE_REMOVED)) {
+                                synchronized (
+                                        SystemSensorManager.this.mFullRuntimeSensorListByDevice) {
+                                    int deviceId =
+                                            intent.getIntExtra(
+                                                    VirtualDeviceManager.EXTRA_VIRTUAL_DEVICE_ID,
+                                                    0);
+                                    List<Sensor> removedSensors =
+                                            (List)
+                                                    SystemSensorManager.this
+                                                            .mFullRuntimeSensorListByDevice
+                                                            .removeReturnOld(deviceId);
+                                    if (removedSensors != null) {
+                                        for (Sensor s : removedSensors) {
+                                            SystemSensorManager.this.cleanupSensorConnection(s);
+                                        }
+                                    }
+                                    SystemSensorManager.this.mRuntimeSensorListByDeviceByType
+                                            .remove(deviceId);
                                 }
                             }
-                            SystemSensorManager.this.mRuntimeSensorListByDeviceByType.remove(deviceId);
                         }
-                    }
-                }
-            };
+                    };
             IntentFilter filter = new IntentFilter("virtual_device_removed");
             filter.addAction(VirtualDeviceManager.ACTION_VIRTUAL_DEVICE_REMOVED);
             this.mContext.registerReceiver(this.mRuntimeSensorBroadcastReceiver, filter, 4);
@@ -566,40 +717,52 @@ public class SystemSensorManager extends SensorManager {
             return;
         }
         if (this.mVdm == null) {
-            this.mVdm = (VirtualDeviceManager) this.mContext.getSystemService(VirtualDeviceManager.class);
+            this.mVdm =
+                    (VirtualDeviceManager)
+                            this.mContext.getSystemService(VirtualDeviceManager.class);
             if (this.mVdm == null) {
                 return;
             }
         }
-        this.mVirtualDeviceListener = new VirtualDeviceManager.VirtualDeviceListener() { // from class: android.hardware.SystemSensorManager.3
-            @Override // android.companion.virtual.VirtualDeviceManager.VirtualDeviceListener
-            public void onVirtualDeviceClosed(int deviceId) {
-                synchronized (SystemSensorManager.this.mFullRuntimeSensorListByDevice) {
-                    List<Sensor> removedSensors = (List) SystemSensorManager.this.mFullRuntimeSensorListByDevice.removeReturnOld(deviceId);
-                    if (removedSensors != null) {
-                        for (Sensor s : removedSensors) {
-                            SystemSensorManager.this.cleanupSensorConnection(s);
+        this.mVirtualDeviceListener =
+                new VirtualDeviceManager.VirtualDeviceListener() { // from class:
+                    // android.hardware.SystemSensorManager.3
+                    @Override // android.companion.virtual.VirtualDeviceManager.VirtualDeviceListener
+                    public void onVirtualDeviceClosed(int deviceId) {
+                        synchronized (SystemSensorManager.this.mFullRuntimeSensorListByDevice) {
+                            List<Sensor> removedSensors =
+                                    (List)
+                                            SystemSensorManager.this.mFullRuntimeSensorListByDevice
+                                                    .removeReturnOld(deviceId);
+                            if (removedSensors != null) {
+                                for (Sensor s : removedSensors) {
+                                    SystemSensorManager.this.cleanupSensorConnection(s);
+                                }
+                            }
+                            SystemSensorManager.this.mRuntimeSensorListByDeviceByType.remove(
+                                    deviceId);
                         }
                     }
-                    SystemSensorManager.this.mRuntimeSensorListByDeviceByType.remove(deviceId);
-                }
-            }
-        };
-        this.mVdm.registerVirtualDeviceListener(this.mContext.getMainExecutor(), this.mVirtualDeviceListener);
+                };
+        this.mVdm.registerVirtualDeviceListener(
+                this.mContext.getMainExecutor(), this.mVirtualDeviceListener);
     }
 
     private void setupDynamicSensorBroadcastReceiver() {
         if (this.mDynamicSensorBroadcastReceiver == null) {
-            this.mDynamicSensorBroadcastReceiver = new BroadcastReceiver() { // from class: android.hardware.SystemSensorManager.4
-                @Override // android.content.BroadcastReceiver
-                public void onReceive(Context context, Intent intent) {
-                    if (intent.getAction().equals(Intent.ACTION_DYNAMIC_SENSOR_CHANGED)) {
-                        Log.i("SensorManager", "DYNS received DYNAMIC_SENSOR_CHANGED broadcast");
-                        SystemSensorManager.this.mDynamicSensorListDirty = true;
-                        SystemSensorManager.this.updateDynamicSensorList();
-                    }
-                }
-            };
+            this.mDynamicSensorBroadcastReceiver =
+                    new BroadcastReceiver() { // from class: android.hardware.SystemSensorManager.4
+                        @Override // android.content.BroadcastReceiver
+                        public void onReceive(Context context, Intent intent) {
+                            if (intent.getAction().equals(Intent.ACTION_DYNAMIC_SENSOR_CHANGED)) {
+                                Log.i(
+                                        "SensorManager",
+                                        "DYNS received DYNAMIC_SENSOR_CHANGED broadcast");
+                                SystemSensorManager.this.mDynamicSensorListDirty = true;
+                                SystemSensorManager.this.updateDynamicSensorList();
+                            }
+                        }
+                    };
             IntentFilter filter = new IntentFilter("dynamic_sensor_change");
             filter.addAction(Intent.ACTION_DYNAMIC_SENSOR_CHANGED);
             this.mContext.registerReceiver(this.mDynamicSensorBroadcastReceiver, filter, 4);
@@ -607,7 +770,8 @@ public class SystemSensorManager extends SensorManager {
     }
 
     @Override // android.hardware.SensorManager
-    protected void registerDynamicSensorCallbackImpl(SensorManager.DynamicSensorCallback callback, Handler handler) {
+    protected void registerDynamicSensorCallbackImpl(
+            SensorManager.DynamicSensorCallback callback, Handler handler) {
         Log.i("SensorManager", "DYNS Register dynamic sensor callback");
         if (callback == null) {
             throw new IllegalArgumentException("callback cannot be null");
@@ -622,25 +786,35 @@ public class SystemSensorManager extends SensorManager {
     }
 
     @Override // android.hardware.SensorManager
-    protected void unregisterDynamicSensorCallbackImpl(SensorManager.DynamicSensorCallback callback) {
+    protected void unregisterDynamicSensorCallbackImpl(
+            SensorManager.DynamicSensorCallback callback) {
         Log.i("SensorManager", "Removing dynamic sensor listener");
         synchronized (this.mDynamicSensorCallbacks) {
             this.mDynamicSensorCallbacks.remove(callback);
         }
     }
 
-    private static boolean diffSortedSensorList(List<Sensor> oldList, List<Sensor> newList, List<Sensor> updated, List<Sensor> added, List<Sensor> removed) {
+    private static boolean diffSortedSensorList(
+            List<Sensor> oldList,
+            List<Sensor> newList,
+            List<Sensor> updated,
+            List<Sensor> added,
+            List<Sensor> removed) {
         boolean changed = false;
         int i = 0;
         int j = 0;
         while (true) {
-            if (j < oldList.size() && (i >= newList.size() || newList.get(i).getHandle() > oldList.get(j).getHandle())) {
+            if (j < oldList.size()
+                    && (i >= newList.size()
+                            || newList.get(i).getHandle() > oldList.get(j).getHandle())) {
                 changed = true;
                 if (removed != null) {
                     removed.add(oldList.get(j));
                 }
                 j++;
-            } else if (i < newList.size() && (j >= oldList.size() || newList.get(i).getHandle() < oldList.get(j).getHandle())) {
+            } else if (i < newList.size()
+                    && (j >= oldList.size()
+                            || newList.get(i).getHandle() < oldList.get(j).getHandle())) {
                 changed = true;
                 if (added != null) {
                     added.add(newList.get(i));
@@ -650,7 +824,9 @@ public class SystemSensorManager extends SensorManager {
                 }
                 i++;
             } else {
-                if (i >= newList.size() || j >= oldList.size() || newList.get(i).getHandle() != oldList.get(j).getHandle()) {
+                if (i >= newList.size()
+                        || j >= oldList.size()
+                        || newList.get(i).getHandle() != oldList.get(j).getHandle()) {
                     break;
                 }
                 if (updated != null) {
@@ -672,13 +848,25 @@ public class SystemSensorManager extends SensorManager {
             throw new IllegalArgumentException("rate parameter invalid");
         }
         if (sensor == null && rate != 0) {
-            throw new IllegalArgumentException("when sensor is null, rate can only be DIRECT_RATE_STOP");
+            throw new IllegalArgumentException(
+                    "when sensor is null, rate can only be DIRECT_RATE_STOP");
         }
         int sensorHandle = sensor == null ? -1 : sensor.getHandle();
-        if (sensor != null && isSensorInCappedSet(sensor.getType()) && rate > 1 && this.mIsPackageDebuggable && !hasHighSamplingRateSensorsPermission() && Compatibility.isChangeEnabled(CHANGE_ID_SAMPLING_RATE_SENSORS_PERMISSION)) {
-            throw new SecurityException("To use the sampling rate level " + rate + ", app needs to declare the normal permission HIGH_SAMPLING_RATE_SENSORS.");
+        if (sensor != null
+                && isSensorInCappedSet(sensor.getType())
+                && rate > 1
+                && this.mIsPackageDebuggable
+                && !hasHighSamplingRateSensorsPermission()
+                && Compatibility.isChangeEnabled(CHANGE_ID_SAMPLING_RATE_SENSORS_PERMISSION)) {
+            throw new SecurityException(
+                    "To use the sampling rate level "
+                            + rate
+                            + ", app needs to declare the normal permission"
+                            + " HIGH_SAMPLING_RATE_SENSORS.");
         }
-        int ret = nativeConfigDirectChannel(this.mNativeInstance, channel.getNativeHandle(), sensorHandle, rate);
+        int ret =
+                nativeConfigDirectChannel(
+                        this.mNativeInstance, channel.getNativeHandle(), sensorHandle, rate);
         if (rate == 0) {
             if (ret == 0) {
                 return 1;
@@ -692,7 +880,8 @@ public class SystemSensorManager extends SensorManager {
     }
 
     @Override // android.hardware.SensorManager
-    protected SensorDirectChannel createDirectChannelImpl(MemoryFile memoryFile, HardwareBuffer hardwareBuffer) {
+    protected SensorDirectChannel createDirectChannelImpl(
+            MemoryFile memoryFile, HardwareBuffer hardwareBuffer) {
         long size;
         int id;
         int type;
@@ -704,12 +893,14 @@ public class SystemSensorManager extends SensorManager {
             try {
                 int fd = memoryFile.getFileDescriptor().getInt$();
                 if (memoryFile.length() < 104) {
-                    throw new IllegalArgumentException("Size of MemoryFile has to be greater than 104");
+                    throw new IllegalArgumentException(
+                            "Size of MemoryFile has to be greater than 104");
                 }
                 size = memoryFile.length();
                 id = nativeCreateDirectChannel(this.mNativeInstance, deviceId, size, 1, fd, null);
                 if (id <= 0) {
-                    throw new UncheckedIOException(new IOException("create MemoryFile direct channel failed " + id));
+                    throw new UncheckedIOException(
+                            new IOException("create MemoryFile direct channel failed " + id));
                 }
                 type = 1;
             } catch (IOException e) {
@@ -721,15 +912,20 @@ public class SystemSensorManager extends SensorManager {
             }
             if (hardwareBuffer.getHeight() == 1) {
                 if (hardwareBuffer.getWidth() < 104) {
-                    throw new IllegalArgumentException("Width if HardwareBuffer must be greater than 104");
+                    throw new IllegalArgumentException(
+                            "Width if HardwareBuffer must be greater than 104");
                 }
                 if ((hardwareBuffer.getUsage() & 8388608) == 0) {
-                    throw new IllegalArgumentException("HardwareBuffer must set usage flag USAGE_SENSOR_DIRECT_DATA");
+                    throw new IllegalArgumentException(
+                            "HardwareBuffer must set usage flag USAGE_SENSOR_DIRECT_DATA");
                 }
                 size = hardwareBuffer.getWidth();
-                id = nativeCreateDirectChannel(this.mNativeInstance, deviceId, size, 2, -1, hardwareBuffer);
+                id =
+                        nativeCreateDirectChannel(
+                                this.mNativeInstance, deviceId, size, 2, -1, hardwareBuffer);
                 if (id <= 0) {
-                    throw new UncheckedIOException(new IOException("create HardwareBuffer direct channel failed " + id));
+                    throw new UncheckedIOException(
+                            new IOException("create HardwareBuffer direct channel failed " + id));
                 }
                 type = 2;
             } else {
@@ -748,7 +944,7 @@ public class SystemSensorManager extends SensorManager {
         }
     }
 
-    private static abstract class BaseEventQueue {
+    private abstract static class BaseEventQueue {
         protected static final int OPERATING_MODE_DATA_INJECTION = 1;
         protected static final int OPERATING_MODE_HAL_BYPASS_REPLAY_DATA_INJECTION = 4;
         protected static final int OPERATING_MODE_NORMAL = 0;
@@ -768,9 +964,17 @@ public class SystemSensorManager extends SensorManager {
 
         private static native int nativeFlushSensor(long j);
 
-        private static native long nativeInitBaseEventQueue(long j, WeakReference<BaseEventQueue> weakReference, MessageQueue messageQueue, String str, int i, String str2, String str3);
+        private static native long nativeInitBaseEventQueue(
+                long j,
+                WeakReference<BaseEventQueue> weakReference,
+                MessageQueue messageQueue,
+                String str,
+                int i,
+                String str2,
+                String str3);
 
-        private static native int nativeInjectSensorData(long j, int i, float[] fArr, int i2, long j2);
+        private static native int nativeInjectSensorData(
+                long j, int i, float[] fArr, int i2, long j2);
 
         protected abstract void addSensorEvent(Sensor sensor);
 
@@ -781,7 +985,15 @@ public class SystemSensorManager extends SensorManager {
         protected abstract void removeSensorEvent(Sensor sensor);
 
         BaseEventQueue(Looper looper, SystemSensorManager manager, int mode, String packageName) {
-            this.mNativeSensorEventQueue = nativeInitBaseEventQueue(manager.mNativeInstance, new WeakReference(this), looper.getQueue(), packageName == null ? "" : packageName, mode, manager.mContext.getOpPackageName(), manager.mContext.getAttributionTag());
+            this.mNativeSensorEventQueue =
+                    nativeInitBaseEventQueue(
+                            manager.mNativeInstance,
+                            new WeakReference(this),
+                            looper.getQueue(),
+                            packageName == null ? "" : packageName,
+                            mode,
+                            manager.mContext.getOpPackageName(),
+                            manager.mContext.getAttributionTag());
             this.mCloseGuard.open("BaseEventQueue.dispose");
             this.mManager = manager;
         }
@@ -797,7 +1009,10 @@ public class SystemSensorManager extends SensorManager {
             }
             this.mActiveSensors.put(handle, true);
             addSensorEvent(sensor);
-            if (enableSensor(sensor, delayUs, maxBatchReportLatencyUs) == 0 || (maxBatchReportLatencyUs != 0 && (maxBatchReportLatencyUs <= 0 || enableSensor(sensor, delayUs, 0) == 0))) {
+            if (enableSensor(sensor, delayUs, maxBatchReportLatencyUs) == 0
+                    || (maxBatchReportLatencyUs != 0
+                            && (maxBatchReportLatencyUs <= 0
+                                    || enableSensor(sensor, delayUs, 0) == 0))) {
                 return true;
             }
             removeSensor(sensor, false);
@@ -808,7 +1023,8 @@ public class SystemSensorManager extends SensorManager {
             for (int i = 0; i < this.mActiveSensors.size(); i++) {
                 if (this.mActiveSensors.valueAt(i)) {
                     int handle = this.mActiveSensors.keyAt(i);
-                    Sensor sensor = (Sensor) this.mManager.mHandleToSensor.get(Integer.valueOf(handle));
+                    Sensor sensor =
+                            (Sensor) this.mManager.mHandleToSensor.get(Integer.valueOf(handle));
                     if (sensor != null) {
                         disableSensor(sensor);
                         this.mActiveSensors.put(handle, false);
@@ -871,14 +1087,29 @@ public class SystemSensorManager extends SensorManager {
             if (sensor == null) {
                 throw new NullPointerException();
             }
-            if (this.mManager.isSensorInCappedSet(sensor.getType()) && rateUs < 5000 && this.mManager.mIsPackageDebuggable && !this.mManager.hasHighSamplingRateSensorsPermission() && Compatibility.isChangeEnabled(SystemSensorManager.CHANGE_ID_SAMPLING_RATE_SENSORS_PERMISSION)) {
-                throw new SecurityException("To use the sampling rate of " + rateUs + " microseconds, app needs to declare the normal permission HIGH_SAMPLING_RATE_SENSORS.");
+            if (this.mManager.isSensorInCappedSet(sensor.getType())
+                    && rateUs < 5000
+                    && this.mManager.mIsPackageDebuggable
+                    && !this.mManager.hasHighSamplingRateSensorsPermission()
+                    && Compatibility.isChangeEnabled(
+                            SystemSensorManager.CHANGE_ID_SAMPLING_RATE_SENSORS_PERMISSION)) {
+                throw new SecurityException(
+                        "To use the sampling rate of "
+                                + rateUs
+                                + " microseconds, app needs to declare the normal permission"
+                                + " HIGH_SAMPLING_RATE_SENSORS.");
             }
-            return nativeEnableSensor(this.mNativeSensorEventQueue, sensor.getHandle(), rateUs, maxBatchReportLatencyUs);
+            return nativeEnableSensor(
+                    this.mNativeSensorEventQueue,
+                    sensor.getHandle(),
+                    rateUs,
+                    maxBatchReportLatencyUs);
         }
 
-        protected int injectSensorDataBase(int handle, float[] values, int accuracy, long timestamp) {
-            return nativeInjectSensorData(this.mNativeSensorEventQueue, handle, values, accuracy, timestamp);
+        protected int injectSensorDataBase(
+                int handle, float[] values, int accuracy, long timestamp) {
+            return nativeInjectSensorData(
+                    this.mNativeSensorEventQueue, handle, values, accuracy, timestamp);
         }
 
         private int disableSensor(Sensor sensor) {
@@ -891,15 +1122,19 @@ public class SystemSensorManager extends SensorManager {
             return nativeDisableSensor(this.mNativeSensorEventQueue, sensor.getHandle());
         }
 
-        protected void dispatchAdditionalInfoEvent(int handle, int type, int serial, float[] floatValues, int[] intValues) {
-        }
+        protected void dispatchAdditionalInfoEvent(
+                int handle, int type, int serial, float[] floatValues, int[] intValues) {}
     }
 
     static final class SensorEventQueue extends BaseEventQueue {
         private final SensorEventListener mListener;
         private final SparseArray<SensorEvent> mSensorsEvents;
 
-        public SensorEventQueue(SensorEventListener listener, Looper looper, SystemSensorManager manager, String packageName) {
+        public SensorEventQueue(
+                SensorEventListener listener,
+                Looper looper,
+                SystemSensorManager manager,
+                String packageName) {
             super(looper, manager, 0, packageName);
             this.mSensorsEvents = new SparseArray<>();
             this.mListener = listener;
@@ -907,7 +1142,9 @@ public class SystemSensorManager extends SensorManager {
 
         @Override // android.hardware.SystemSensorManager.BaseEventQueue
         public void addSensorEvent(Sensor sensor) {
-            SensorEvent t = new SensorEvent(Sensor.getMaxLengthValuesArray(sensor, this.mManager.mTargetSdkLevel));
+            SensorEvent t =
+                    new SensorEvent(
+                            Sensor.getMaxLengthValuesArray(sensor, this.mManager.mTargetSdkLevel));
             synchronized (this.mSensorsEvents) {
                 this.mSensorsEvents.put(sensor.getHandle(), t);
             }
@@ -921,7 +1158,8 @@ public class SystemSensorManager extends SensorManager {
         }
 
         @Override // android.hardware.SystemSensorManager.BaseEventQueue
-        protected void dispatchSensorEvent(int handle, float[] values, int inAccuracy, long timestamp) {
+        protected void dispatchSensorEvent(
+                int handle, float[] values, int inAccuracy, long timestamp) {
             SensorEvent t;
             Sensor sensor = (Sensor) this.mManager.mHandleToSensor.get(Integer.valueOf(handle));
             if (sensor == null) {
@@ -957,19 +1195,31 @@ public class SystemSensorManager extends SensorManager {
         @Override // android.hardware.SystemSensorManager.BaseEventQueue
         protected void dispatchFlushCompleteEvent(int handle) {
             Sensor sensor;
-            if (!(this.mListener instanceof SensorEventListener2) || (sensor = (Sensor) this.mManager.mHandleToSensor.get(Integer.valueOf(handle))) == null) {
+            if (!(this.mListener instanceof SensorEventListener2)
+                    || (sensor =
+                                    (Sensor)
+                                            this.mManager.mHandleToSensor.get(
+                                                    Integer.valueOf(handle)))
+                            == null) {
                 return;
             }
             ((SensorEventListener2) this.mListener).onFlushCompleted(sensor);
         }
 
         @Override // android.hardware.SystemSensorManager.BaseEventQueue
-        protected void dispatchAdditionalInfoEvent(int handle, int type, int serial, float[] floatValues, int[] intValues) {
+        protected void dispatchAdditionalInfoEvent(
+                int handle, int type, int serial, float[] floatValues, int[] intValues) {
             Sensor sensor;
-            if (!(this.mListener instanceof SensorEventCallback) || (sensor = (Sensor) this.mManager.mHandleToSensor.get(Integer.valueOf(handle))) == null) {
+            if (!(this.mListener instanceof SensorEventCallback)
+                    || (sensor =
+                                    (Sensor)
+                                            this.mManager.mHandleToSensor.get(
+                                                    Integer.valueOf(handle)))
+                            == null) {
                 return;
             }
-            SensorAdditionalInfo info = new SensorAdditionalInfo(sensor, type, serial, intValues, floatValues);
+            SensorAdditionalInfo info =
+                    new SensorAdditionalInfo(sensor, type, serial, intValues, floatValues);
             ((SensorEventCallback) this.mListener).onSensorAdditionalInfo(info);
         }
     }
@@ -978,7 +1228,11 @@ public class SystemSensorManager extends SensorManager {
         private final TriggerEventListener mListener;
         private final SparseArray<TriggerEvent> mTriggerEvents;
 
-        public TriggerEventQueue(TriggerEventListener listener, Looper looper, SystemSensorManager manager, String packageName) {
+        public TriggerEventQueue(
+                TriggerEventListener listener,
+                Looper looper,
+                SystemSensorManager manager,
+                String packageName) {
             super(looper, manager, 0, packageName);
             this.mTriggerEvents = new SparseArray<>();
             this.mListener = listener;
@@ -986,7 +1240,9 @@ public class SystemSensorManager extends SensorManager {
 
         @Override // android.hardware.SystemSensorManager.BaseEventQueue
         public void addSensorEvent(Sensor sensor) {
-            TriggerEvent t = new TriggerEvent(Sensor.getMaxLengthValuesArray(sensor, this.mManager.mTargetSdkLevel));
+            TriggerEvent t =
+                    new TriggerEvent(
+                            Sensor.getMaxLengthValuesArray(sensor, this.mManager.mTargetSdkLevel));
             synchronized (this.mTriggerEvents) {
                 this.mTriggerEvents.put(sensor.getHandle(), t);
             }
@@ -1000,7 +1256,8 @@ public class SystemSensorManager extends SensorManager {
         }
 
         @Override // android.hardware.SystemSensorManager.BaseEventQueue
-        protected void dispatchSensorEvent(int handle, float[] values, int accuracy, long timestamp) {
+        protected void dispatchSensorEvent(
+                int handle, float[] values, int accuracy, long timestamp) {
             TriggerEvent t;
             Sensor sensor = (Sensor) this.mManager.mHandleToSensor.get(Integer.valueOf(handle));
             if (sensor == null) {
@@ -1021,14 +1278,14 @@ public class SystemSensorManager extends SensorManager {
         }
 
         @Override // android.hardware.SystemSensorManager.BaseEventQueue
-        protected void dispatchFlushCompleteEvent(int handle) {
-        }
+        protected void dispatchFlushCompleteEvent(int handle) {}
     }
 
     final class InjectEventQueue extends BaseEventQueue {
         private int mMode;
 
-        public InjectEventQueue(Looper looper, SystemSensorManager manager, int mode, String packageName) {
+        public InjectEventQueue(
+                Looper looper, SystemSensorManager manager, int mode, String packageName) {
             super(looper, manager, mode, packageName);
             this.mMode = mode;
         }
@@ -1038,20 +1295,17 @@ public class SystemSensorManager extends SensorManager {
         }
 
         @Override // android.hardware.SystemSensorManager.BaseEventQueue
-        protected void dispatchSensorEvent(int handle, float[] values, int accuracy, long timestamp) {
-        }
+        protected void dispatchSensorEvent(
+                int handle, float[] values, int accuracy, long timestamp) {}
 
         @Override // android.hardware.SystemSensorManager.BaseEventQueue
-        protected void dispatchFlushCompleteEvent(int handle) {
-        }
+        protected void dispatchFlushCompleteEvent(int handle) {}
 
         @Override // android.hardware.SystemSensorManager.BaseEventQueue
-        protected void addSensorEvent(Sensor sensor) {
-        }
+        protected void addSensorEvent(Sensor sensor) {}
 
         @Override // android.hardware.SystemSensorManager.BaseEventQueue
-        protected void removeSensorEvent(Sensor sensor) {
-        }
+        protected void removeSensorEvent(Sensor sensor) {}
 
         int getDataInjectionMode() {
             return this.mMode;
@@ -1061,7 +1315,13 @@ public class SystemSensorManager extends SensorManager {
     @Override // android.hardware.SensorManager
     protected boolean setOperationParameterImpl(SensorAdditionalInfo parameter) {
         int handle = parameter.sensor != null ? parameter.sensor.getHandle() : -1;
-        return nativeSetOperationParameter(this.mNativeInstance, handle, parameter.type, parameter.floatValues, parameter.intValues) == 0;
+        return nativeSetOperationParameter(
+                        this.mNativeInstance,
+                        handle,
+                        parameter.type,
+                        parameter.floatValues,
+                        parameter.intValues)
+                == 0;
     }
 
     private boolean isDeviceSensorPolicyDefault(int deviceId) {
@@ -1069,7 +1329,9 @@ public class SystemSensorManager extends SensorManager {
             return true;
         }
         if (this.mVdm == null) {
-            this.mVdm = (VirtualDeviceManager) this.mContext.getSystemService(VirtualDeviceManager.class);
+            this.mVdm =
+                    (VirtualDeviceManager)
+                            this.mContext.getSystemService(VirtualDeviceManager.class);
         }
         if (this.mVdm == null || this.mVdm.getDevicePolicy(deviceId, 0) == 0) {
             return true;
@@ -1079,13 +1341,24 @@ public class SystemSensorManager extends SensorManager {
 
     /* JADX INFO: Access modifiers changed from: private */
     public boolean isSensorInCappedSet(int sensorType) {
-        return sensorType == 1 || sensorType == 35 || sensorType == 4 || sensorType == 16 || sensorType == 2 || sensorType == 14;
+        return sensorType == 1
+                || sensorType == 35
+                || sensorType == 4
+                || sensorType == 16
+                || sensorType == 2
+                || sensorType == 14;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public boolean hasHighSamplingRateSensorsPermission() {
         if (!this.mHasHighSamplingRateSensorsPermission.isPresent()) {
-            boolean granted = this.mContext.getPackageManager().checkPermission("android.permission.HIGH_SAMPLING_RATE_SENSORS", this.mContext.getApplicationInfo().packageName) == 0;
+            boolean granted =
+                    this.mContext
+                                    .getPackageManager()
+                                    .checkPermission(
+                                            "android.permission.HIGH_SAMPLING_RATE_SENSORS",
+                                            this.mContext.getApplicationInfo().packageName)
+                            == 0;
             this.mHasHighSamplingRateSensorsPermission = Optional.of(Boolean.valueOf(granted));
         }
         return this.mHasHighSamplingRateSensorsPermission.get().booleanValue();

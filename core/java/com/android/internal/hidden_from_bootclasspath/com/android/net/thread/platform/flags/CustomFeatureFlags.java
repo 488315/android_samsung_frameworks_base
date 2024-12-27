@@ -10,7 +10,12 @@ import java.util.function.Predicate;
 /* loaded from: classes5.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_THREAD_ENABLED_PLATFORM, Flags.FLAG_THREAD_USER_RESTRICTION_ENABLED, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(
+                    Arrays.asList(
+                            Flags.FLAG_THREAD_ENABLED_PLATFORM,
+                            Flags.FLAG_THREAD_USER_RESTRICTION_ENABLED,
+                            ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,22 +23,28 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.com.android.net.thread.platform.flags.FeatureFlags
     public boolean threadEnabledPlatform() {
-        return getValue(Flags.FLAG_THREAD_ENABLED_PLATFORM, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.com.android.net.thread.platform.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).threadEnabledPlatform();
-            }
-        });
+        return getValue(
+                Flags.FLAG_THREAD_ENABLED_PLATFORM,
+                new Predicate() { // from class:
+                                  // com.android.internal.hidden_from_bootclasspath.com.android.net.thread.platform.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).threadEnabledPlatform();
+                    }
+                });
     }
 
     @Override // com.android.internal.hidden_from_bootclasspath.com.android.net.thread.platform.flags.FeatureFlags
     public boolean threadUserRestrictionEnabled() {
-        return getValue(Flags.FLAG_THREAD_USER_RESTRICTION_ENABLED, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.com.android.net.thread.platform.flags.CustomFeatureFlags$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).threadUserRestrictionEnabled();
-            }
-        });
+        return getValue(
+                Flags.FLAG_THREAD_USER_RESTRICTION_ENABLED,
+                new Predicate() { // from class:
+                                  // com.android.internal.hidden_from_bootclasspath.com.android.net.thread.platform.flags.CustomFeatureFlags$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).threadUserRestrictionEnabled();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {
@@ -52,6 +63,7 @@ public class CustomFeatureFlags implements FeatureFlags {
     }
 
     public List<String> getFlagNames() {
-        return Arrays.asList(Flags.FLAG_THREAD_ENABLED_PLATFORM, Flags.FLAG_THREAD_USER_RESTRICTION_ENABLED);
+        return Arrays.asList(
+                Flags.FLAG_THREAD_ENABLED_PLATFORM, Flags.FLAG_THREAD_USER_RESTRICTION_ENABLED);
     }
 }

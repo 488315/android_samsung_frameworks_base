@@ -16,8 +16,7 @@ public class SQLiteCompatibilityWalFlags {
     private static volatile long sTruncateSize = -1;
     private static volatile String sWALSyncMode;
 
-    private SQLiteCompatibilityWalFlags() {
-    }
+    private SQLiteCompatibilityWalFlags() {}
 
     public static boolean isLegacyCompatibilityWalEnabled() {
         initIfNeeded();
@@ -45,11 +44,17 @@ public class SQLiteCompatibilityWalFlags {
         Application app = activityThread == null ? null : activityThread.getApplication();
         String flags = null;
         if (app == null) {
-            Log.w(TAG, "Cannot read global setting sqlite_compatibility_wal_flags - Application state not available");
+            Log.w(
+                    TAG,
+                    "Cannot read global setting sqlite_compatibility_wal_flags - Application state"
+                            + " not available");
         } else {
             try {
                 sCallingGlobalSettings = true;
-                flags = Settings.Global.getString(app.getContentResolver(), Settings.Global.SQLITE_COMPATIBILITY_WAL_FLAGS);
+                flags =
+                        Settings.Global.getString(
+                                app.getContentResolver(),
+                                Settings.Global.SQLITE_COMPATIBILITY_WAL_FLAGS);
             } finally {
                 sCallingGlobalSettings = false;
             }
@@ -65,10 +70,16 @@ public class SQLiteCompatibilityWalFlags {
         KeyValueListParser parser = new KeyValueListParser(',');
         try {
             parser.setString(flags);
-            sLegacyCompatibilityWalEnabled = parser.getBoolean("legacy_compatibility_wal_enabled", false);
+            sLegacyCompatibilityWalEnabled =
+                    parser.getBoolean("legacy_compatibility_wal_enabled", false);
             sWALSyncMode = parser.getString("wal_syncmode", SQLiteGlobal.getWALSyncMode());
             sTruncateSize = parser.getInt("truncate_size", -1);
-            Log.i(TAG, "Read compatibility WAL flags: legacy_compatibility_wal_enabled=" + sLegacyCompatibilityWalEnabled + ", wal_syncmode=" + sWALSyncMode);
+            Log.i(
+                    TAG,
+                    "Read compatibility WAL flags: legacy_compatibility_wal_enabled="
+                            + sLegacyCompatibilityWalEnabled
+                            + ", wal_syncmode="
+                            + sWALSyncMode);
             sInitialized = true;
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "Setting has invalid format: " + flags, e);

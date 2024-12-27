@@ -4,26 +4,30 @@ import android.content.ComponentName;
 import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.hidden_from_bootclasspath.android.hardware.biometrics.Flags;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public class PromptInfo implements Parcelable {
-    public static final Parcelable.Creator<PromptInfo> CREATOR = new Parcelable.Creator<PromptInfo>() { // from class: android.hardware.biometrics.PromptInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PromptInfo createFromParcel(Parcel in) {
-            return new PromptInfo(in);
-        }
+    public static final Parcelable.Creator<PromptInfo> CREATOR =
+            new Parcelable.Creator<
+                    PromptInfo>() { // from class: android.hardware.biometrics.PromptInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PromptInfo createFromParcel(Parcel in) {
+                    return new PromptInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PromptInfo[] newArray(int size) {
-            return new PromptInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PromptInfo[] newArray(int size) {
+                    return new PromptInfo[size];
+                }
+            };
     private boolean mAllowBackgroundAuthentication;
     private List<Integer> mAllowedSensorIds;
     private int mAuthenticators;
@@ -79,7 +83,11 @@ public class PromptInfo implements Parcelable {
         this.mSubtitle = in.readCharSequence();
         this.mUseDefaultSubtitle = in.readBoolean();
         this.mDescription = in.readCharSequence();
-        this.mContentView = (PromptContentViewParcelable) in.readParcelable(PromptContentViewParcelable.class.getClassLoader(), PromptContentViewParcelable.class);
+        this.mContentView =
+                (PromptContentViewParcelable)
+                        in.readParcelable(
+                                PromptContentViewParcelable.class.getClassLoader(),
+                                PromptContentViewParcelable.class);
         this.mDeviceCredentialTitle = in.readCharSequence();
         this.mDeviceCredentialSubtitle = in.readCharSequence();
         this.mDeviceCredentialDescription = in.readCharSequence();
@@ -95,7 +103,10 @@ public class PromptInfo implements Parcelable {
         this.mIsForLegacyFingerprintManager = in.readBoolean();
         this.mShowEmergencyCallButton = in.readBoolean();
         this.mUseParentProfileForDeviceCredential = in.readBoolean();
-        this.mComponentNameForConfirmDeviceCredentialActivity = (ComponentName) in.readParcelable(ComponentName.class.getClassLoader(), ComponentName.class);
+        this.mComponentNameForConfirmDeviceCredentialActivity =
+                (ComponentName)
+                        in.readParcelable(
+                                ComponentName.class.getClassLoader(), ComponentName.class);
         this.mSemDisplayId = in.readInt();
         this.mSemTaskId = in.readInt();
         this.mSemBiometricType = in.readInt();
@@ -154,14 +165,27 @@ public class PromptInfo implements Parcelable {
     }
 
     public boolean requiresTestOrInternalPermission() {
-        if (this.mIsForLegacyFingerprintManager && this.mAllowedSensorIds.size() == 1 && !this.mAllowBackgroundAuthentication) {
+        if (this.mIsForLegacyFingerprintManager
+                && this.mAllowedSensorIds.size() == 1
+                && !this.mAllowBackgroundAuthentication) {
             return false;
         }
-        return !this.mAllowedSensorIds.isEmpty() || this.mAllowBackgroundAuthentication || this.mIsForLegacyFingerprintManager || this.mIgnoreEnrollmentState || this.mShowEmergencyCallButton || this.mComponentNameForConfirmDeviceCredentialActivity != null;
+        return !this.mAllowedSensorIds.isEmpty()
+                || this.mAllowBackgroundAuthentication
+                || this.mIsForLegacyFingerprintManager
+                || this.mIgnoreEnrollmentState
+                || this.mShowEmergencyCallButton
+                || this.mComponentNameForConfirmDeviceCredentialActivity != null;
     }
 
     public boolean requiresInternalPermission() {
-        return this.mDisallowBiometricsIfPolicyExists || this.mUseDefaultTitle || this.mUseDefaultSubtitle || this.mDeviceCredentialTitle != null || this.mDeviceCredentialSubtitle != null || this.mDeviceCredentialDescription != null || this.mReceiveSystemEvents;
+        return this.mDisallowBiometricsIfPolicyExists
+                || this.mUseDefaultTitle
+                || this.mUseDefaultSubtitle
+                || this.mDeviceCredentialTitle != null
+                || this.mDeviceCredentialSubtitle != null
+                || this.mDeviceCredentialDescription != null
+                || this.mReceiveSystemEvents;
     }
 
     public boolean requiresAdvancedPermission() {
@@ -179,7 +203,9 @@ public class PromptInfo implements Parcelable {
     }
 
     public boolean isContentViewMoreOptionsButtonUsed() {
-        return Flags.customBiometricPrompt() && this.mContentView != null && (this.mContentView instanceof PromptContentViewWithMoreOptionsButton);
+        return Flags.customBiometricPrompt()
+                && this.mContentView != null
+                && (this.mContentView instanceof PromptContentViewWithMoreOptionsButton);
     }
 
     public void setLogo(int logoRes, Bitmap logoBitmap) {
@@ -274,11 +300,14 @@ public class PromptInfo implements Parcelable {
         this.mShowEmergencyCallButton = showEmergencyCallButton;
     }
 
-    public void setComponentNameForConfirmDeviceCredentialActivity(ComponentName componentNameForConfirmDeviceCredentialActivity) {
-        this.mComponentNameForConfirmDeviceCredentialActivity = componentNameForConfirmDeviceCredentialActivity;
+    public void setComponentNameForConfirmDeviceCredentialActivity(
+            ComponentName componentNameForConfirmDeviceCredentialActivity) {
+        this.mComponentNameForConfirmDeviceCredentialActivity =
+                componentNameForConfirmDeviceCredentialActivity;
     }
 
-    public void setUseParentProfileForDeviceCredential(boolean useParentProfileForDeviceCredential) {
+    public void setUseParentProfileForDeviceCredential(
+            boolean useParentProfileForDeviceCredential) {
         this.mUseParentProfileForDeviceCredential = useParentProfileForDeviceCredential;
     }
 
@@ -427,7 +456,9 @@ public class PromptInfo implements Parcelable {
     }
 
     private boolean semIsContentViewVerticalListUsed() {
-        return Flags.customBiometricPrompt() && this.mContentView != null && (this.mContentView instanceof PromptVerticalListContentView);
+        return Flags.customBiometricPrompt()
+                && this.mContentView != null
+                && (this.mContentView instanceof PromptVerticalListContentView);
     }
 
     public boolean semIsDescriptionOptionalUsed() {

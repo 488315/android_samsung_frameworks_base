@@ -1,6 +1,7 @@
 package android.os;
 
 import android.annotation.SystemApi;
+
 import com.android.internal.util.Preconditions;
 
 @SystemApi
@@ -21,7 +22,9 @@ public class SystemUpdateManager {
     private final ISystemUpdateManager mService;
 
     public SystemUpdateManager(ISystemUpdateManager service) {
-        this.mService = (ISystemUpdateManager) Preconditions.checkNotNull(service, "missing ISystemUpdateManager");
+        this.mService =
+                (ISystemUpdateManager)
+                        Preconditions.checkNotNull(service, "missing ISystemUpdateManager");
     }
 
     public Bundle retrieveSystemUpdateInfo() {

@@ -15,6 +15,7 @@ import android.util.MathUtils;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.PathInterpolator;
+
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
@@ -48,46 +49,58 @@ class RippleForeground extends RippleComponent {
     private float mTweenY;
     private boolean mUsingProperties;
     private static final TimeInterpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
-    private static final TimeInterpolator DECELERATE_INTERPOLATOR = new PathInterpolator(0.4f, 0.0f, 0.2f, 1.0f);
-    private static final FloatProperty<RippleForeground> TWEEN_RADIUS = new FloatProperty<RippleForeground>("tweenRadius") { // from class: android.graphics.drawable.RippleForeground.2
-        @Override // android.util.FloatProperty
-        public void setValue(RippleForeground object, float value) {
-            object.mTweenRadius = value;
-            object.onAnimationPropertyChanged();
-        }
+    private static final TimeInterpolator DECELERATE_INTERPOLATOR =
+            new PathInterpolator(0.4f, 0.0f, 0.2f, 1.0f);
+    private static final FloatProperty<RippleForeground> TWEEN_RADIUS =
+            new FloatProperty<RippleForeground>(
+                    "tweenRadius") { // from class: android.graphics.drawable.RippleForeground.2
+                @Override // android.util.FloatProperty
+                public void setValue(RippleForeground object, float value) {
+                    object.mTweenRadius = value;
+                    object.onAnimationPropertyChanged();
+                }
 
-        @Override // android.util.Property
-        public Float get(RippleForeground object) {
-            return Float.valueOf(object.mTweenRadius);
-        }
-    };
-    private static final FloatProperty<RippleForeground> TWEEN_ORIGIN = new FloatProperty<RippleForeground>("tweenOrigin") { // from class: android.graphics.drawable.RippleForeground.3
-        @Override // android.util.FloatProperty
-        public void setValue(RippleForeground object, float value) {
-            object.mTweenX = value;
-            object.mTweenY = value;
-            object.onAnimationPropertyChanged();
-        }
+                @Override // android.util.Property
+                public Float get(RippleForeground object) {
+                    return Float.valueOf(object.mTweenRadius);
+                }
+            };
+    private static final FloatProperty<RippleForeground> TWEEN_ORIGIN =
+            new FloatProperty<RippleForeground>(
+                    "tweenOrigin") { // from class: android.graphics.drawable.RippleForeground.3
+                @Override // android.util.FloatProperty
+                public void setValue(RippleForeground object, float value) {
+                    object.mTweenX = value;
+                    object.mTweenY = value;
+                    object.onAnimationPropertyChanged();
+                }
 
-        @Override // android.util.Property
-        public Float get(RippleForeground object) {
-            return Float.valueOf(object.mTweenX);
-        }
-    };
-    private static final FloatProperty<RippleForeground> OPACITY = new FloatProperty<RippleForeground>("opacity") { // from class: android.graphics.drawable.RippleForeground.4
-        @Override // android.util.FloatProperty
-        public void setValue(RippleForeground object, float value) {
-            object.mOpacity = value;
-            object.onAnimationPropertyChanged();
-        }
+                @Override // android.util.Property
+                public Float get(RippleForeground object) {
+                    return Float.valueOf(object.mTweenX);
+                }
+            };
+    private static final FloatProperty<RippleForeground> OPACITY =
+            new FloatProperty<RippleForeground>(
+                    "opacity") { // from class: android.graphics.drawable.RippleForeground.4
+                @Override // android.util.FloatProperty
+                public void setValue(RippleForeground object, float value) {
+                    object.mOpacity = value;
+                    object.onAnimationPropertyChanged();
+                }
 
-        @Override // android.util.Property
-        public Float get(RippleForeground object) {
-            return Float.valueOf(object.mOpacity);
-        }
-    };
+                @Override // android.util.Property
+                public Float get(RippleForeground object) {
+                    return Float.valueOf(object.mOpacity);
+                }
+            };
 
-    public RippleForeground(RippleDrawable owner, Rect bounds, float startingX, float startingY, boolean forceSoftware) {
+    public RippleForeground(
+            RippleDrawable owner,
+            Rect bounds,
+            float startingX,
+            float startingY,
+            boolean forceSoftware) {
         super(owner, bounds);
         this.mTargetX = 0.0f;
         this.mTargetY = 0.0f;
@@ -99,17 +112,20 @@ class RippleForeground extends RippleComponent {
         this.mRunningHwAnimators = new ArrayList<>();
         this.mRunningSwAnimators = new ArrayList<>();
         this.mStartRadius = 0.0f;
-        this.mAnimationListener = new AnimatorListenerAdapter() { // from class: android.graphics.drawable.RippleForeground.1
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animator) {
-                RippleForeground.this.mHasFinishedExit = true;
-                RippleForeground.this.pruneHwFinished();
-                RippleForeground.this.pruneSwFinished();
-                if (RippleForeground.this.mRunningHwAnimators.isEmpty()) {
-                    RippleForeground.this.clearHwProps();
-                }
-            }
-        };
+        this.mAnimationListener =
+                new AnimatorListenerAdapter() { // from class:
+                    // android.graphics.drawable.RippleForeground.1
+                    @Override // android.animation.AnimatorListenerAdapter,
+                    // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animator) {
+                        RippleForeground.this.mHasFinishedExit = true;
+                        RippleForeground.this.pruneHwFinished();
+                        RippleForeground.this.pruneSwFinished();
+                        if (RippleForeground.this.mRunningHwAnimators.isEmpty()) {
+                            RippleForeground.this.clearHwProps();
+                        }
+                    }
+                };
         this.mForceSoftware = forceSoftware;
         this.mStartingX = startingX;
         this.mStartingY = startingY;
@@ -201,7 +217,8 @@ class RippleForeground extends RippleComponent {
     }
 
     private long computeFadeOutDelay() {
-        long timeSinceEnter = AnimationUtils.currentAnimationTimeMillis() - this.mEnterStartedAtMillis;
+        long timeSinceEnter =
+                AnimationUtils.currentAnimationTimeMillis() - this.mEnterStartedAtMillis;
         if (timeSinceEnter <= 0 || timeSinceEnter >= 225) {
             return 0L;
         }
@@ -295,11 +312,13 @@ class RippleForeground extends RippleComponent {
     }
 
     private float getCurrentX() {
-        return MathUtils.lerp(this.mClampedStartingX - this.mBounds.exactCenterX(), this.mTargetX, this.mTweenX);
+        return MathUtils.lerp(
+                this.mClampedStartingX - this.mBounds.exactCenterX(), this.mTargetX, this.mTweenX);
     }
 
     private float getCurrentY() {
-        return MathUtils.lerp(this.mClampedStartingY - this.mBounds.exactCenterY(), this.mTargetY, this.mTweenY);
+        return MathUtils.lerp(
+                this.mClampedStartingY - this.mBounds.exactCenterY(), this.mTargetY, this.mTweenY);
     }
 
     private float getCurrentRadius() {

@@ -1,26 +1,27 @@
 package android.os;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.os.Parcelable;
 import android.text.format.DateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public final class WakeLockStats implements Parcelable {
-    public static final Parcelable.Creator<WakeLockStats> CREATOR = new Parcelable.Creator<WakeLockStats>() { // from class: android.os.WakeLockStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WakeLockStats createFromParcel(Parcel in) {
-            return new WakeLockStats(in);
-        }
+    public static final Parcelable.Creator<WakeLockStats> CREATOR =
+            new Parcelable.Creator<WakeLockStats>() { // from class: android.os.WakeLockStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WakeLockStats createFromParcel(Parcel in) {
+                    return new WakeLockStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WakeLockStats[] newArray(int size) {
-            return new WakeLockStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WakeLockStats[] newArray(int size) {
+                    return new WakeLockStats[size];
+                }
+            };
     private final List<WakeLock> mAggregatedWakeLocks;
     private final List<WakeLock> mWakeLocks;
 
@@ -37,7 +38,11 @@ public final class WakeLockStats implements Parcelable {
         }
 
         public boolean isDataValid() {
-            boolean isDataReasonable = this.timesAcquired > 0 && this.totalTimeHeldMs > 0 && this.timeHeldMs >= 0 && this.totalTimeHeldMs >= this.timeHeldMs;
+            boolean isDataReasonable =
+                    this.timesAcquired > 0
+                            && this.totalTimeHeldMs > 0
+                            && this.timeHeldMs >= 0
+                            && this.totalTimeHeldMs >= this.timeHeldMs;
             return isEmpty() || isDataReasonable;
         }
 
@@ -59,7 +64,13 @@ public final class WakeLockStats implements Parcelable {
         }
 
         public String toString() {
-            return "WakeLockData{timesAcquired=" + this.timesAcquired + ", totalTimeHeldMs=" + this.totalTimeHeldMs + ", timeHeldMs=" + this.timeHeldMs + "}";
+            return "WakeLockData{timesAcquired="
+                    + this.timesAcquired
+                    + ", totalTimeHeldMs="
+                    + this.totalTimeHeldMs
+                    + ", timeHeldMs="
+                    + this.timeHeldMs
+                    + "}";
         }
     }
 
@@ -71,7 +82,12 @@ public final class WakeLockStats implements Parcelable {
         public final WakeLockData totalWakeLockData;
         public final int uid;
 
-        public WakeLock(int uid, String name, boolean isAggregated, WakeLockData totalWakeLockData, WakeLockData backgroundWakeLockData) {
+        public WakeLock(
+                int uid,
+                String name,
+                boolean isAggregated,
+                WakeLockData totalWakeLockData,
+                WakeLockData backgroundWakeLockData) {
             this.uid = uid;
             this.name = name;
             this.isAggregated = isAggregated;
@@ -79,8 +95,14 @@ public final class WakeLockStats implements Parcelable {
             this.backgroundWakeLockData = backgroundWakeLockData;
         }
 
-        public static boolean isDataValid(WakeLockData totalWakeLockData, WakeLockData backgroundWakeLockData) {
-            return totalWakeLockData.totalTimeHeldMs > 0 && totalWakeLockData.isDataValid() && backgroundWakeLockData.isDataValid() && totalWakeLockData.timesAcquired >= backgroundWakeLockData.timesAcquired && totalWakeLockData.totalTimeHeldMs >= backgroundWakeLockData.totalTimeHeldMs && totalWakeLockData.timeHeldMs >= backgroundWakeLockData.timeHeldMs;
+        public static boolean isDataValid(
+                WakeLockData totalWakeLockData, WakeLockData backgroundWakeLockData) {
+            return totalWakeLockData.totalTimeHeldMs > 0
+                    && totalWakeLockData.isDataValid()
+                    && backgroundWakeLockData.isDataValid()
+                    && totalWakeLockData.timesAcquired >= backgroundWakeLockData.timesAcquired
+                    && totalWakeLockData.totalTimeHeldMs >= backgroundWakeLockData.totalTimeHeldMs
+                    && totalWakeLockData.timeHeldMs >= backgroundWakeLockData.timeHeldMs;
         }
 
         private WakeLock(Parcel in) {
@@ -101,7 +123,18 @@ public final class WakeLockStats implements Parcelable {
         }
 
         public String toString() {
-            return "WakeLock{uid=" + this.uid + ", name='" + this.name + DateFormat.QUOTE + ", isAggregated=" + this.isAggregated + ", totalWakeLockData=" + this.totalWakeLockData + ", backgroundWakeLockData=" + this.backgroundWakeLockData + '}';
+            return "WakeLock{uid="
+                    + this.uid
+                    + ", name='"
+                    + this.name
+                    + DateFormat.QUOTE
+                    + ", isAggregated="
+                    + this.isAggregated
+                    + ", totalWakeLockData="
+                    + this.totalWakeLockData
+                    + ", backgroundWakeLockData="
+                    + this.backgroundWakeLockData
+                    + '}';
         }
     }
 
@@ -158,6 +191,11 @@ public final class WakeLockStats implements Parcelable {
     }
 
     public String toString() {
-        return "WakeLockStats{mWakeLocks: [" + this.mWakeLocks + "], mAggregatedWakeLocks: [" + this.mAggregatedWakeLocks + NavigationBarInflaterView.SIZE_MOD_END + '}';
+        return "WakeLockStats{mWakeLocks: ["
+                + this.mWakeLocks
+                + "], mAggregatedWakeLocks: ["
+                + this.mAggregatedWakeLocks
+                + NavigationBarInflaterView.SIZE_MOD_END
+                + '}';
     }
 }

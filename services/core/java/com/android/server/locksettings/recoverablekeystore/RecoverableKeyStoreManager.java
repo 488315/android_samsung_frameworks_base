@@ -16,6 +16,7 @@ import android.security.keystore.recovery.WrappedApplicationKey;
 import android.system.keystore2.KeyDescriptor;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.HexDump;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
@@ -34,7 +35,9 @@ import com.android.server.locksettings.recoverablekeystore.storage.RecoverableKe
 import com.android.server.locksettings.recoverablekeystore.storage.RecoverySessionStorage;
 import com.android.server.locksettings.recoverablekeystore.storage.RecoverySnapshotStorage;
 import com.android.server.locksettings.recoverablekeystore.storage.RemoteLockscreenValidationSessionStorage;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
@@ -59,6 +62,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ScheduledExecutorService;
+
 import javax.crypto.AEADBadTagException;
 import javax.crypto.KeyGenerator;
 
@@ -79,7 +83,18 @@ public final class RecoverableKeyStoreManager {
     public final RecoverySnapshotStorage mSnapshotStorage;
     public final TestOnlyInsecureCertificateHelper mTestCertHelper;
 
-    public RecoverableKeyStoreManager(Context context, RecoverableKeyStoreDb recoverableKeyStoreDb, RecoverySessionStorage recoverySessionStorage, ScheduledExecutorService scheduledExecutorService, RecoverySnapshotStorage recoverySnapshotStorage, RecoverySnapshotListenersStorage recoverySnapshotListenersStorage, PlatformKeyManager platformKeyManager, ApplicationKeyStorage applicationKeyStorage, TestOnlyInsecureCertificateHelper testOnlyInsecureCertificateHelper, CleanupManager cleanupManager, RemoteLockscreenValidationSessionStorage remoteLockscreenValidationSessionStorage) {
+    public RecoverableKeyStoreManager(
+            Context context,
+            RecoverableKeyStoreDb recoverableKeyStoreDb,
+            RecoverySessionStorage recoverySessionStorage,
+            ScheduledExecutorService scheduledExecutorService,
+            RecoverySnapshotStorage recoverySnapshotStorage,
+            RecoverySnapshotListenersStorage recoverySnapshotListenersStorage,
+            PlatformKeyManager platformKeyManager,
+            ApplicationKeyStorage applicationKeyStorage,
+            TestOnlyInsecureCertificateHelper testOnlyInsecureCertificateHelper,
+            CleanupManager cleanupManager,
+            RemoteLockscreenValidationSessionStorage remoteLockscreenValidationSessionStorage) {
         this.mContext = context;
         this.mDatabase = recoverableKeyStoreDb;
         this.mRecoverySessionStorage = recoverySessionStorage;
@@ -96,10 +111,15 @@ public final class RecoverableKeyStoreManager {
             Log.e("RecoverableKeyStoreMgr", "Failed to verify known users", e);
         }
         try {
-            this.mRecoverableKeyGenerator = new RecoverableKeyGenerator(KeyGenerator.getInstance("AES"), this.mDatabase);
-            this.mRemoteLockscreenValidationSessionStorage = remoteLockscreenValidationSessionStorage;
+            this.mRecoverableKeyGenerator =
+                    new RecoverableKeyGenerator(KeyGenerator.getInstance("AES"), this.mDatabase);
+            this.mRemoteLockscreenValidationSessionStorage =
+                    remoteLockscreenValidationSessionStorage;
         } catch (NoSuchAlgorithmException e2) {
-            Log.wtf("RecoverableKeyStoreMgr", "AES keygen algorithm not available. AOSP must support this.", e2);
+            Log.wtf(
+                    "RecoverableKeyStoreMgr",
+                    "AES keygen algorithm not available. AOSP must support this.",
+                    e2);
             throw new ServiceSpecificException(22, e2.getMessage());
         }
     }
@@ -107,24 +127,52 @@ public final class RecoverableKeyStoreManager {
     public static byte[] decryptRecoveryKey(RecoverySessionStorage.Entry entry, byte[] bArr) {
         try {
             try {
-                return SecureBox.decrypt(null, entry.mLskfHash, KeySyncUtils.LOCALLY_ENCRYPTED_RECOVERY_KEY_HEADER, SecureBox.decrypt(null, entry.mKeyClaimant, ArrayUtils.concat(new byte[][]{KeySyncUtils.RECOVERY_RESPONSE_HEADER, entry.mVaultParams}), bArr));
+                return SecureBox.decrypt(
+                        null,
+                        entry.mLskfHash,
+                        KeySyncUtils.LOCALLY_ENCRYPTED_RECOVERY_KEY_HEADER,
+                        SecureBox.decrypt(
+                                null,
+                                entry.mKeyClaimant,
+                                ArrayUtils.concat(
+                                        new byte[][] {
+                                            KeySyncUtils.RECOVERY_RESPONSE_HEADER,
+                                            entry.mVaultParams
+                                        }),
+                                bArr));
             } catch (InvalidKeyException e) {
-                Log.e("RecoverableKeyStoreMgr", "Got InvalidKeyException during decrypting recovery key", e);
-                throw new ServiceSpecificException(26, "Failed to decrypt recovery key " + e.getMessage());
+                Log.e(
+                        "RecoverableKeyStoreMgr",
+                        "Got InvalidKeyException during decrypting recovery key",
+                        e);
+                throw new ServiceSpecificException(
+                        26, "Failed to decrypt recovery key " + e.getMessage());
             } catch (NoSuchAlgorithmException e2) {
                 throw new ServiceSpecificException(22, e2.getMessage());
             } catch (AEADBadTagException e3) {
-                Log.e("RecoverableKeyStoreMgr", "Got AEADBadTagException during decrypting recovery key", e3);
-                throw new ServiceSpecificException(26, "Failed to decrypt recovery key " + e3.getMessage());
+                Log.e(
+                        "RecoverableKeyStoreMgr",
+                        "Got AEADBadTagException during decrypting recovery key",
+                        e3);
+                throw new ServiceSpecificException(
+                        26, "Failed to decrypt recovery key " + e3.getMessage());
             }
         } catch (InvalidKeyException e4) {
-            Log.e("RecoverableKeyStoreMgr", "Got InvalidKeyException during decrypting recovery claim response", e4);
-            throw new ServiceSpecificException(26, "Failed to decrypt recovery key " + e4.getMessage());
+            Log.e(
+                    "RecoverableKeyStoreMgr",
+                    "Got InvalidKeyException during decrypting recovery claim response",
+                    e4);
+            throw new ServiceSpecificException(
+                    26, "Failed to decrypt recovery key " + e4.getMessage());
         } catch (NoSuchAlgorithmException e5) {
             throw new ServiceSpecificException(22, e5.getMessage());
         } catch (AEADBadTagException e6) {
-            Log.e("RecoverableKeyStoreMgr", "Got AEADBadTagException during decrypting recovery claim response", e6);
-            throw new ServiceSpecificException(26, "Failed to decrypt recovery key " + e6.getMessage());
+            Log.e(
+                    "RecoverableKeyStoreMgr",
+                    "Got AEADBadTagException during decrypting recovery claim response",
+                    e6);
+            throw new ServiceSpecificException(
+                    26, "Failed to decrypt recovery key " + e6.getMessage());
         }
     }
 
@@ -155,19 +203,32 @@ public final class RecoverableKeyStoreManager {
             try {
                 byte[] bArr2 = KeySyncUtils.ENCRYPTED_APPLICATION_KEY_HEADER;
                 if (metadata != null) {
-                    bArr2 = ArrayUtils.concat(new byte[][]{bArr2, metadata});
+                    bArr2 = ArrayUtils.concat(new byte[][] {bArr2, metadata});
                 }
                 hashMap.put(alias, SecureBox.decrypt(null, bArr, bArr2, encryptedKeyMaterial));
             } catch (InvalidKeyException e) {
-                Log.e("RecoverableKeyStoreMgr", "Got InvalidKeyException during decrypting application key with alias: " + alias, e);
-                StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Failed to recover key with alias '", alias, "': ");
+                Log.e(
+                        "RecoverableKeyStoreMgr",
+                        "Got InvalidKeyException during decrypting application key with alias: "
+                                + alias,
+                        e);
+                StringBuilder m =
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "Failed to recover key with alias '", alias, "': ");
                 m.append(e.getMessage());
                 throw new ServiceSpecificException(26, m.toString());
             } catch (NoSuchAlgorithmException e2) {
-                Log.wtf("RecoverableKeyStoreMgr", "Missing SecureBox algorithm. AOSP required to support this.", e2);
+                Log.wtf(
+                        "RecoverableKeyStoreMgr",
+                        "Missing SecureBox algorithm. AOSP required to support this.",
+                        e2);
                 throw new ServiceSpecificException(22, e2.getMessage());
             } catch (AEADBadTagException e3) {
-                Log.e("RecoverableKeyStoreMgr", "Got AEADBadTagException during decrypting application key with alias: " + alias, e3);
+                Log.e(
+                        "RecoverableKeyStoreMgr",
+                        "Got AEADBadTagException during decrypting application key with alias: "
+                                + alias,
+                        e3);
             }
         }
         if (list.isEmpty() || !hashMap.isEmpty()) {
@@ -178,14 +239,20 @@ public final class RecoverableKeyStoreManager {
     }
 
     public final void checkRecoverKeyStorePermission() {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.RECOVER_KEYSTORE", "Caller " + Binder.getCallingUid() + " doesn't have RecoverKeyStore permission.");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.RECOVER_KEYSTORE",
+                "Caller " + Binder.getCallingUid() + " doesn't have RecoverKeyStore permission.");
         int callingUserId = UserHandle.getCallingUserId();
         Binder.getCallingUid();
         this.mCleanupManager.registerRecoveryAgent(callingUserId);
     }
 
     public final void checkVerifyRemoteLockscreenPermission() {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.CHECK_REMOTE_LOCKSCREEN", "Caller " + Binder.getCallingUid() + " doesn't have CHECK_REMOTE_LOCKSCREEN permission.");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.CHECK_REMOTE_LOCKSCREEN",
+                "Caller "
+                        + Binder.getCallingUid()
+                        + " doesn't have CHECK_REMOTE_LOCKSCREEN permission.");
         int callingUserId = UserHandle.getCallingUserId();
         Binder.getCallingUid();
         this.mCleanupManager.registerRecoveryAgent(callingUserId);
@@ -198,7 +265,16 @@ public final class RecoverableKeyStoreManager {
         int callingUserId = UserHandle.getCallingUserId();
         try {
             try {
-                this.mApplicationKeyStorage.setSymmetricKeyEntry(callingUserId, callingUid, this.mRecoverableKeyGenerator.generateAndStoreKey(this.mPlatformKeyManager.getEncryptKey(callingUserId), callingUserId, callingUid, str, bArr), str);
+                this.mApplicationKeyStorage.setSymmetricKeyEntry(
+                        callingUserId,
+                        callingUid,
+                        this.mRecoverableKeyGenerator.generateAndStoreKey(
+                                this.mPlatformKeyManager.getEncryptKey(callingUserId),
+                                callingUserId,
+                                callingUid,
+                                str,
+                                bArr),
+                        str);
                 return getAlias(callingUserId, callingUid, str);
             } catch (RecoverableKeyStorageException | InvalidKeyException | KeyStoreException e) {
                 throw new ServiceSpecificException(22, e.getMessage());
@@ -215,7 +291,10 @@ public final class RecoverableKeyStoreManager {
     public final String getAlias(int i, int i2, String str) {
         this.mApplicationKeyStorage.getClass();
         Locale locale = Locale.US;
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "Get ", "/", "/"), str, "RecoverableAppKeyStore");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "Get ", "/", "/"),
+                str,
+                "RecoverableAppKeyStore");
         String internalAlias = ApplicationKeyStorage.getInternalAlias(i, i2, str);
         if (internalAlias == null) {
             return null;
@@ -226,10 +305,15 @@ public final class RecoverableKeyStoreManager {
         keyDescriptor.alias = internalAlias;
         keyDescriptor.blob = null;
         try {
-            return String.format("%s%016X", "recoverable_key:", Long.valueOf(KeyStore2.getInstance().grant(keyDescriptor, i2, 261).nspace));
+            return String.format(
+                    "%s%016X",
+                    "recoverable_key:",
+                    Long.valueOf(KeyStore2.getInstance().grant(keyDescriptor, i2, 261).nspace));
         } catch (android.security.KeyStoreException e) {
             if (e.getNumericErrorCode() == 6) {
-                Log.w("RecoverableAppKeyStore", "Failed to get grant for KeyStore key - key not found");
+                Log.w(
+                        "RecoverableAppKeyStore",
+                        "Failed to get grant for KeyStore key - key not found");
                 throw new ServiceSpecificException(30, e.getMessage());
             }
             Log.e("RecoverableAppKeyStore", "Failed to get grant for KeyStore key.", e);
@@ -237,7 +321,8 @@ public final class RecoverableKeyStoreManager {
         }
     }
 
-    public final RemoteLockscreenValidationResult handleVerifyCredentialResponse(VerifyCredentialResponse verifyCredentialResponse, int i) {
+    public final RemoteLockscreenValidationResult handleVerifyCredentialResponse(
+            VerifyCredentialResponse verifyCredentialResponse, int i) {
         int responseCode = verifyCredentialResponse.getResponseCode();
         RecoverableKeyStoreDb recoverableKeyStoreDb = this.mDatabase;
         if (responseCode == 0) {
@@ -246,9 +331,13 @@ public final class RecoverableKeyStoreManager {
             return new RemoteLockscreenValidationResult.Builder().setResultCode(1).build();
         }
         if (verifyCredentialResponse.getResponseCode() == 1) {
-            return new RemoteLockscreenValidationResult.Builder().setResultCode(3).setTimeoutMillis(verifyCredentialResponse.getTimeout()).build();
+            return new RemoteLockscreenValidationResult.Builder()
+                    .setResultCode(3)
+                    .setTimeoutMillis(verifyCredentialResponse.getTimeout())
+                    .build();
         }
-        recoverableKeyStoreDb.setBadRemoteGuessCounter(i, recoverableKeyStoreDb.getBadRemoteGuessCounter(i) + 1);
+        recoverableKeyStoreDb.setBadRemoteGuessCounter(
+                i, recoverableKeyStoreDb.getBadRemoteGuessCounter(i) + 1);
         return new RemoteLockscreenValidationResult.Builder().setResultCode(2).build();
     }
 
@@ -270,15 +359,24 @@ public final class RecoverableKeyStoreManager {
         Objects.requireNonNull(str, "alias is null");
         Objects.requireNonNull(bArr, "keyBytes is null");
         if (bArr.length != 32) {
-            Log.e("RecoverableKeyStoreMgr", "The given key for import doesn't have the required length 256");
+            Log.e(
+                    "RecoverableKeyStoreMgr",
+                    "The given key for import doesn't have the required length 256");
             throw new ServiceSpecificException(27, "The given key does not contain 256 bits.");
         }
         int callingUid = Binder.getCallingUid();
         int callingUserId = UserHandle.getCallingUserId();
         try {
             try {
-                this.mRecoverableKeyGenerator.importKey(this.mPlatformKeyManager.getEncryptKey(callingUserId), callingUserId, callingUid, str, bArr, bArr2);
-                this.mApplicationKeyStorage.setSymmetricKeyEntry(callingUserId, callingUid, bArr, str);
+                this.mRecoverableKeyGenerator.importKey(
+                        this.mPlatformKeyManager.getEncryptKey(callingUserId),
+                        callingUserId,
+                        callingUid,
+                        str,
+                        bArr,
+                        bArr2);
+                this.mApplicationKeyStorage.setSymmetricKeyEntry(
+                        callingUserId, callingUid, bArr, str);
                 return getAlias(callingUserId, callingUid, str);
             } catch (RecoverableKeyStorageException | InvalidKeyException | KeyStoreException e) {
                 throw new ServiceSpecificException(22, e.getMessage());
@@ -297,35 +395,88 @@ public final class RecoverableKeyStoreManager {
         int callingUserId = UserHandle.getCallingUserId();
         int callingUid = Binder.getCallingUid();
         this.mTestCertHelper.getClass();
-        String defaultCertificateAliasIfEmpty = TestOnlyInsecureCertificateHelper.getDefaultCertificateAliasIfEmpty(str);
-        if (!TrustedRootCertificates.getRootCertificates().containsKey(defaultCertificateAliasIfEmpty) && !"TEST_ONLY_INSECURE_CERTIFICATE_ALIAS".equals(defaultCertificateAliasIfEmpty)) {
+        String defaultCertificateAliasIfEmpty =
+                TestOnlyInsecureCertificateHelper.getDefaultCertificateAliasIfEmpty(str);
+        if (!TrustedRootCertificates.getRootCertificates()
+                        .containsKey(defaultCertificateAliasIfEmpty)
+                && !"TEST_ONLY_INSECURE_CERTIFICATE_ALIAS".equals(defaultCertificateAliasIfEmpty)) {
             throw new ServiceSpecificException(28, "Invalid root certificate alias");
         }
         RecoverableKeyStoreDb recoverableKeyStoreDb = this.mDatabase;
-        String activeRootOfTrust = recoverableKeyStoreDb.getActiveRootOfTrust(callingUserId, callingUid);
+        String activeRootOfTrust =
+                recoverableKeyStoreDb.getActiveRootOfTrust(callingUserId, callingUid);
         if (activeRootOfTrust == null) {
-            Log.d("RecoverableKeyStoreMgr", "Root of trust for recovery agent + " + callingUid + " is assigned for the first time to " + defaultCertificateAliasIfEmpty);
+            Log.d(
+                    "RecoverableKeyStoreMgr",
+                    "Root of trust for recovery agent + "
+                            + callingUid
+                            + " is assigned for the first time to "
+                            + defaultCertificateAliasIfEmpty);
         } else if (!activeRootOfTrust.equals(defaultCertificateAliasIfEmpty)) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(DirEncryptService$$ExternalSyntheticOutline0.m(callingUid, "Root of trust for recovery agent ", " is changed to ", defaultCertificateAliasIfEmpty, " from  "), activeRootOfTrust, "RecoverableKeyStoreMgr");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                            callingUid,
+                            "Root of trust for recovery agent ",
+                            " is changed to ",
+                            defaultCertificateAliasIfEmpty,
+                            " from  "),
+                    activeRootOfTrust,
+                    "RecoverableKeyStoreMgr");
         }
-        RecoverableKeyStoreDbHelper recoverableKeyStoreDbHelper = recoverableKeyStoreDb.mKeyStoreDbHelper;
+        RecoverableKeyStoreDbHelper recoverableKeyStoreDbHelper =
+                recoverableKeyStoreDb.mKeyStoreDbHelper;
         SQLiteDatabase writableDatabase = recoverableKeyStoreDbHelper.getWritableDatabase();
         new ContentValues().put("active_root_of_trust", defaultCertificateAliasIfEmpty);
         recoverableKeyStoreDb.ensureRecoveryServiceMetadataEntryExists(callingUserId, callingUid);
-        if (writableDatabase.update("recovery_service_metadata", r5, "user_id = ? AND uid = ?", new String[]{String.valueOf(callingUserId), String.valueOf(callingUid)}) < 0) {
-            throw new ServiceSpecificException(22, "Failed to set the root of trust in the local DB.");
+        if (writableDatabase.update(
+                        "recovery_service_metadata",
+                        r5,
+                        "user_id = ? AND uid = ?",
+                        new String[] {String.valueOf(callingUserId), String.valueOf(callingUid)})
+                < 0) {
+            throw new ServiceSpecificException(
+                    22, "Failed to set the root of trust in the local DB.");
         }
         try {
             CertXml parse = CertXml.parse(bArr);
             recoverableKeyStoreDb.mTestOnlyInsecureCertificateHelper.getClass();
-            Cursor query = recoverableKeyStoreDbHelper.getReadableDatabase().query("root_of_trust", new String[]{KnoxCustomManagerService.ID, "user_id", "uid", "root_alias", "cert_serial"}, "user_id = ? AND uid = ? AND root_alias = ?", new String[]{Integer.toString(callingUserId), Integer.toString(callingUid), TestOnlyInsecureCertificateHelper.getDefaultCertificateAliasIfEmpty(defaultCertificateAliasIfEmpty)}, null, null, null);
+            Cursor query =
+                    recoverableKeyStoreDbHelper
+                            .getReadableDatabase()
+                            .query(
+                                    "root_of_trust",
+                                    new String[] {
+                                        KnoxCustomManagerService.ID,
+                                        "user_id",
+                                        "uid",
+                                        "root_alias",
+                                        "cert_serial"
+                                    },
+                                    "user_id = ? AND uid = ? AND root_alias = ?",
+                                    new String[] {
+                                        Integer.toString(callingUserId),
+                                        Integer.toString(callingUid),
+                                        TestOnlyInsecureCertificateHelper
+                                                .getDefaultCertificateAliasIfEmpty(
+                                                        defaultCertificateAliasIfEmpty)
+                                    },
+                                    null,
+                                    null,
+                                    null);
             try {
                 int count = query.getCount();
                 Long l = null;
                 if (count != 0) {
                     if (count > 1) {
                         Locale locale = Locale.US;
-                        Log.wtf("RecoverableKeyStoreDb", count + " entries found for userId=" + callingUserId + " uid=" + callingUid + ". Should only ever be 0 or 1.");
+                        Log.wtf(
+                                "RecoverableKeyStoreDb",
+                                count
+                                        + " entries found for userId="
+                                        + callingUserId
+                                        + " uid="
+                                        + callingUid
+                                        + ". Should only ever be 0 or 1.");
                     } else {
                         query.moveToFirst();
                         int columnIndexOrThrow = query.getColumnIndexOrThrow("cert_serial");
@@ -336,40 +487,91 @@ public final class RecoverableKeyStoreManager {
                 }
                 query.close();
                 long j = parse.serial;
-                if (l != null && l.longValue() >= j && !"TEST_ONLY_INSECURE_CERTIFICATE_ALIAS".equals(defaultCertificateAliasIfEmpty)) {
+                if (l != null
+                        && l.longValue() >= j
+                        && !"TEST_ONLY_INSECURE_CERTIFICATE_ALIAS"
+                                .equals(defaultCertificateAliasIfEmpty)) {
                     if (l.longValue() == j) {
-                        Log.i("RecoverableKeyStoreMgr", "The cert file serial number is the same, so skip updating.");
+                        Log.i(
+                                "RecoverableKeyStoreMgr",
+                                "The cert file serial number is the same, so skip updating.");
                         return;
                     } else {
-                        Log.e("RecoverableKeyStoreMgr", "The cert file serial number is older than the one in database.");
-                        throw new ServiceSpecificException(29, "The cert file serial number is older than the one in database.");
+                        Log.e(
+                                "RecoverableKeyStoreMgr",
+                                "The cert file serial number is older than the one in database.");
+                        throw new ServiceSpecificException(
+                                29,
+                                "The cert file serial number is older than the one in database.");
                     }
                 }
-                Log.i("RecoverableKeyStoreMgr", "Updating the certificate with the new serial number " + j);
-                X509Certificate rootCertificate = TestOnlyInsecureCertificateHelper.getRootCertificate(defaultCertificateAliasIfEmpty);
-                Date validationDate = TestOnlyInsecureCertificateHelper.getValidationDate(defaultCertificateAliasIfEmpty);
+                Log.i(
+                        "RecoverableKeyStoreMgr",
+                        "Updating the certificate with the new serial number " + j);
+                X509Certificate rootCertificate =
+                        TestOnlyInsecureCertificateHelper.getRootCertificate(
+                                defaultCertificateAliasIfEmpty);
+                Date validationDate =
+                        TestOnlyInsecureCertificateHelper.getValidationDate(
+                                defaultCertificateAliasIfEmpty);
                 try {
-                    Log.d("RecoverableKeyStoreMgr", "Getting and validating a random endpoint certificate");
-                    CertPath endpointCert = parse.getEndpointCert(new SecureRandom().nextInt(parse.endpointCerts.size()), validationDate, rootCertificate);
+                    Log.d(
+                            "RecoverableKeyStoreMgr",
+                            "Getting and validating a random endpoint certificate");
+                    CertPath endpointCert =
+                            parse.getEndpointCert(
+                                    new SecureRandom().nextInt(parse.endpointCerts.size()),
+                                    validationDate,
+                                    rootCertificate);
                     try {
-                        Log.d("RecoverableKeyStoreMgr", "Saving the randomly chosen endpoint certificate to database");
-                        long recoveryServiceCertPath = recoverableKeyStoreDb.setRecoveryServiceCertPath(callingUserId, callingUid, defaultCertificateAliasIfEmpty, endpointCert);
+                        Log.d(
+                                "RecoverableKeyStoreMgr",
+                                "Saving the randomly chosen endpoint certificate to database");
+                        long recoveryServiceCertPath =
+                                recoverableKeyStoreDb.setRecoveryServiceCertPath(
+                                        callingUserId,
+                                        callingUid,
+                                        defaultCertificateAliasIfEmpty,
+                                        endpointCert);
                         if (recoveryServiceCertPath <= 0) {
                             if (recoveryServiceCertPath < 0) {
-                                throw new ServiceSpecificException(22, "Failed to set the certificate path in the local DB.");
+                                throw new ServiceSpecificException(
+                                        22, "Failed to set the certificate path in the local DB.");
                             }
                         } else {
-                            if (this.mDatabase.setRecoveryServiceCertSerial(callingUserId, callingUid, j, defaultCertificateAliasIfEmpty) < 0) {
-                                throw new ServiceSpecificException(22, "Failed to set the certificate serial number in the local DB.");
+                            if (this.mDatabase.setRecoveryServiceCertSerial(
+                                            callingUserId,
+                                            callingUid,
+                                            j,
+                                            defaultCertificateAliasIfEmpty)
+                                    < 0) {
+                                throw new ServiceSpecificException(
+                                        22,
+                                        "Failed to set the certificate serial number in the local"
+                                            + " DB.");
                             }
-                            if (recoverableKeyStoreDb.getLong(callingUserId, callingUid, "snapshot_version") != null) {
-                                recoverableKeyStoreDb.setShouldCreateSnapshot(callingUserId, callingUid);
-                                Log.i("RecoverableKeyStoreMgr", "This is a certificate change. Snapshot must be updated");
+                            if (recoverableKeyStoreDb.getLong(
+                                            callingUserId, callingUid, "snapshot_version")
+                                    != null) {
+                                recoverableKeyStoreDb.setShouldCreateSnapshot(
+                                        callingUserId, callingUid);
+                                Log.i(
+                                        "RecoverableKeyStoreMgr",
+                                        "This is a certificate change. Snapshot must be updated");
                             } else {
-                                Log.i("RecoverableKeyStoreMgr", "This is a certificate change. Snapshot didn't exist");
+                                Log.i(
+                                        "RecoverableKeyStoreMgr",
+                                        "This is a certificate change. Snapshot didn't exist");
                             }
-                            if (this.mDatabase.setLong(callingUserId, callingUid, new SecureRandom().nextLong(), "counter_id") < 0) {
-                                Log.e("RecoverableKeyStoreMgr", "Failed to set the counter id in the local DB.");
+                            if (this.mDatabase.setLong(
+                                            callingUserId,
+                                            callingUid,
+                                            new SecureRandom().nextLong(),
+                                            "counter_id")
+                                    < 0) {
+                                Log.e(
+                                        "RecoverableKeyStoreMgr",
+                                        "Failed to set the counter id in the local DB.");
                             }
                         }
                     } catch (CertificateEncodingException e) {
@@ -383,43 +585,65 @@ public final class RecoverableKeyStoreManager {
             } finally {
             }
         } catch (CertParsingException e3) {
-            Log.d("RecoverableKeyStoreMgr", "Failed to parse the input as a cert file: " + HexDump.toHexString(bArr));
+            Log.d(
+                    "RecoverableKeyStoreMgr",
+                    "Failed to parse the input as a cert file: " + HexDump.toHexString(bArr));
             throw new ServiceSpecificException(25, e3.getMessage());
         }
     }
 
-    public byte[] startRecoverySession(String str, byte[] bArr, byte[] bArr2, byte[] bArr3, List list) throws RemoteException {
+    public byte[] startRecoverySession(
+            String str, byte[] bArr, byte[] bArr2, byte[] bArr3, List list) throws RemoteException {
         checkRecoverKeyStorePermission();
         int callingUid = Binder.getCallingUid();
         if (list.size() != 1) {
-            throw new UnsupportedOperationException("Only a single KeyChainProtectionParams is supported");
+            throw new UnsupportedOperationException(
+                    "Only a single KeyChainProtectionParams is supported");
         }
         try {
             byte[] bArr4 = KeySyncUtils.THM_ENCRYPTED_RECOVERY_KEY_HEADER;
             try {
-                PublicKey generatePublic = KeyFactory.getInstance("EC").generatePublic(new X509EncodedKeySpec(bArr));
-                if (!Arrays.equals(SecureBox.encodePublicKey(generatePublic), Arrays.copyOf(bArr2, 65))) {
-                    throw new ServiceSpecificException(28, "The public keys given in verifierPublicKey and vaultParams do not match.");
+                PublicKey generatePublic =
+                        KeyFactory.getInstance("EC").generatePublic(new X509EncodedKeySpec(bArr));
+                if (!Arrays.equals(
+                        SecureBox.encodePublicKey(generatePublic), Arrays.copyOf(bArr2, 65))) {
+                    throw new ServiceSpecificException(
+                            28,
+                            "The public keys given in verifierPublicKey and vaultParams do not"
+                                + " match.");
                 }
                 byte[] bArr5 = new byte[16];
                 new SecureRandom().nextBytes(bArr5);
                 byte[] secret = ((KeyChainProtectionParams) list.get(0)).getSecret();
-                RecoverySessionStorage.Entry entry = new RecoverySessionStorage.Entry(str, secret, bArr5, bArr2);
+                RecoverySessionStorage.Entry entry =
+                        new RecoverySessionStorage.Entry(str, secret, bArr5, bArr2);
                 RecoverySessionStorage recoverySessionStorage = this.mRecoverySessionStorage;
                 if (recoverySessionStorage.mSessionsByUid.get(callingUid) == null) {
                     recoverySessionStorage.mSessionsByUid.put(callingUid, new ArrayList());
                 }
                 ((ArrayList) recoverySessionStorage.mSessionsByUid.get(callingUid)).add(entry);
-                Log.i("RecoverableKeyStoreMgr", "Received VaultParams for recovery: " + HexDump.toHexString(bArr2));
+                Log.i(
+                        "RecoverableKeyStoreMgr",
+                        "Received VaultParams for recovery: " + HexDump.toHexString(bArr2));
                 try {
                     MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
                     messageDigest.update(KeySyncUtils.THM_KF_HASH_PREFIX);
                     messageDigest.update(secret);
-                    return SecureBox.encrypt(generatePublic, null, ArrayUtils.concat(new byte[][]{KeySyncUtils.RECOVERY_CLAIM_HEADER, bArr2, bArr3}), ArrayUtils.concat(new byte[][]{messageDigest.digest(), bArr5}));
+                    return SecureBox.encrypt(
+                            generatePublic,
+                            null,
+                            ArrayUtils.concat(
+                                    new byte[][] {
+                                        KeySyncUtils.RECOVERY_CLAIM_HEADER, bArr2, bArr3
+                                    }),
+                            ArrayUtils.concat(new byte[][] {messageDigest.digest(), bArr5}));
                 } catch (InvalidKeyException e) {
                     throw new ServiceSpecificException(25, e.getMessage());
                 } catch (NoSuchAlgorithmException e2) {
-                    Log.wtf("RecoverableKeyStoreMgr", "SecureBox algorithm missing. AOSP must support this.", e2);
+                    Log.wtf(
+                            "RecoverableKeyStoreMgr",
+                            "SecureBox algorithm missing. AOSP must support this.",
+                            e2);
                     throw new ServiceSpecificException(22, e2.getMessage());
                 }
             } catch (NoSuchAlgorithmException e3) {

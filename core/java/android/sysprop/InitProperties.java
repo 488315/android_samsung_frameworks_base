@@ -1,6 +1,7 @@
 package android.sysprop;
 
 import android.os.SystemProperties;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,8 +12,7 @@ import java.util.function.Function;
 
 /* loaded from: classes3.dex */
 public final class InitProperties {
-    private InitProperties() {
-    }
+    private InitProperties() {}
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Boolean tryParseBoolean(String str) {
@@ -185,7 +185,8 @@ public final class InitProperties {
         return joiner.toString();
     }
 
-    private static <T extends Enum<T>> String formatEnumList(List<T> list, Function<T, String> elementFormatter) {
+    private static <T extends Enum<T>> String formatEnumList(
+            List<T> list, Function<T, String> elementFormatter) {
         StringJoiner joiner = new StringJoiner(",");
         Iterator<T> it = list.iterator();
         while (it.hasNext()) {
@@ -201,7 +202,9 @@ public final class InitProperties {
     }
 
     public static void userspace_reboot_in_progress(Boolean value) {
-        SystemProperties.set("sys.init.userspace_reboot.in_progress", value == null ? "" : value.booleanValue() ? "1" : "0");
+        SystemProperties.set(
+                "sys.init.userspace_reboot.in_progress",
+                value == null ? "" : value.booleanValue() ? "1" : "0");
     }
 
     public static Optional<Boolean> is_userspace_reboot_supported() {

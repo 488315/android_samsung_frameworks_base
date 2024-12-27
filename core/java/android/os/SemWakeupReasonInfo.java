@@ -1,22 +1,23 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class SemWakeupReasonInfo implements Cloneable, Parcelable {
-    public static final Parcelable.Creator<SemWakeupReasonInfo> CREATOR = new Parcelable.Creator<SemWakeupReasonInfo>() { // from class: android.os.SemWakeupReasonInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWakeupReasonInfo createFromParcel(Parcel in) {
-            return new SemWakeupReasonInfo(in);
-        }
+    public static final Parcelable.Creator<SemWakeupReasonInfo> CREATOR =
+            new Parcelable.Creator<
+                    SemWakeupReasonInfo>() { // from class: android.os.SemWakeupReasonInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWakeupReasonInfo createFromParcel(Parcel in) {
+                    return new SemWakeupReasonInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWakeupReasonInfo[] newArray(int size) {
-            return new SemWakeupReasonInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWakeupReasonInfo[] newArray(int size) {
+                    return new SemWakeupReasonInfo[size];
+                }
+            };
     private int count;
     private long recordTime;
     private String tag;

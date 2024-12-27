@@ -5,25 +5,29 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class Feature implements Parcelable {
-    public static final Parcelable.Creator<Feature> CREATOR = new Parcelable.Creator<Feature>() { // from class: android.app.ondeviceintelligence.Feature.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Feature[] newArray(int size) {
-            return new Feature[size];
-        }
+    public static final Parcelable.Creator<Feature> CREATOR =
+            new Parcelable.Creator<
+                    Feature>() { // from class: android.app.ondeviceintelligence.Feature.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Feature[] newArray(int size) {
+                    return new Feature[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Feature createFromParcel(Parcel in) {
-            return new Feature(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Feature createFromParcel(Parcel in) {
+                    return new Feature(in);
+                }
+            };
     private final PersistableBundle mFeatureParams;
     private final int mId;
     private final String mModelName;
@@ -31,14 +35,21 @@ public final class Feature implements Parcelable {
     private final int mType;
     private final int mVariant;
 
-    Feature(int id, String name, String modelName, int type, int variant, PersistableBundle featureParams) {
+    Feature(
+            int id,
+            String name,
+            String modelName,
+            int type,
+            int variant,
+            PersistableBundle featureParams) {
         this.mId = id;
         this.mName = name;
         this.mModelName = modelName;
         this.mType = type;
         this.mVariant = variant;
         this.mFeatureParams = featureParams;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFeatureParams);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFeatureParams);
     }
 
     public int getId() {
@@ -66,7 +77,19 @@ public final class Feature implements Parcelable {
     }
 
     public String toString() {
-        return "Feature { id = " + this.mId + ", name = " + this.mName + ", modelName = " + this.mModelName + ", type = " + this.mType + ", variant = " + this.mVariant + ", featureParams = " + this.mFeatureParams + " }";
+        return "Feature { id = "
+                + this.mId
+                + ", name = "
+                + this.mName
+                + ", modelName = "
+                + this.mModelName
+                + ", type = "
+                + this.mType
+                + ", variant = "
+                + this.mVariant
+                + ", featureParams = "
+                + this.mFeatureParams
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -77,7 +100,12 @@ public final class Feature implements Parcelable {
             return false;
         }
         Feature that = (Feature) o;
-        if (this.mId == that.mId && Objects.equals(this.mName, that.mName) && Objects.equals(this.mModelName, that.mModelName) && this.mType == that.mType && this.mVariant == that.mVariant && Objects.equals(this.mFeatureParams, that.mFeatureParams)) {
+        if (this.mId == that.mId
+                && Objects.equals(this.mName, that.mName)
+                && Objects.equals(this.mModelName, that.mModelName)
+                && this.mType == that.mType
+                && this.mVariant == that.mVariant
+                && Objects.equals(this.mFeatureParams, that.mFeatureParams)) {
             return true;
         }
         return false;
@@ -85,7 +113,14 @@ public final class Feature implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + this.mId;
-        return (((((((((_hash * 31) + Objects.hashCode(this.mName)) * 31) + Objects.hashCode(this.mModelName)) * 31) + this.mType) * 31) + this.mVariant) * 31) + Objects.hashCode(this.mFeatureParams);
+        return (((((((((_hash * 31) + Objects.hashCode(this.mName)) * 31)
+                                                                + Objects.hashCode(this.mModelName))
+                                                        * 31)
+                                                + this.mType)
+                                        * 31)
+                                + this.mVariant)
+                        * 31)
+                + Objects.hashCode(this.mFeatureParams);
     }
 
     @Override // android.os.Parcelable
@@ -119,14 +154,16 @@ public final class Feature implements Parcelable {
         String modelName = (flg & 4) == 0 ? null : in.readString();
         int type = in.readInt();
         int variant = in.readInt();
-        PersistableBundle featureParams = (PersistableBundle) in.readTypedObject(PersistableBundle.CREATOR);
+        PersistableBundle featureParams =
+                (PersistableBundle) in.readTypedObject(PersistableBundle.CREATOR);
         this.mId = id;
         this.mName = name;
         this.mModelName = modelName;
         this.mType = type;
         this.mVariant = variant;
         this.mFeatureParams = featureParams;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFeatureParams);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFeatureParams);
     }
 
     public static final class Builder {
@@ -180,13 +217,21 @@ public final class Feature implements Parcelable {
         public Feature build() {
             checkNotUsed();
             this.mBuilderFieldsSet |= 64;
-            Feature o = new Feature(this.mId, this.mName, this.mModelName, this.mType, this.mVariant, this.mFeatureParams);
+            Feature o =
+                    new Feature(
+                            this.mId,
+                            this.mName,
+                            this.mModelName,
+                            this.mType,
+                            this.mVariant,
+                            this.mFeatureParams);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 64) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }

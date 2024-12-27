@@ -11,7 +11,8 @@ public final class AudioConstants {
     public static final int EAR_PROTECT_LIMIT_INDEX_EFFECT_ON = 7;
     public static final int EAR_PROTECT_LIMIT_INDEX_NORMAL = 10;
     public static final int EAR_PROTECT_LIMIT_INDEX_VOLUME_MONITOR = 8;
-    public static final String EXCLUDE_NOTIFICATION_LIST = "/media/audio/notifications/exclude_notifications";
+    public static final String EXCLUDE_NOTIFICATION_LIST =
+            "/media/audio/notifications/exclude_notifications";
     public static final String EXCLUDE_RINGTONE_LIST = "/media/audio/ringtones/exclude_ringtones";
     public static final String H2W = "h2w";
     public static final String H2W_BEFORE_BOOT_COMPLETED = "h2w-before-boot-completed";
@@ -46,11 +47,13 @@ public final class AudioConstants {
     public static final String SETTING_SOUNDALIVE_CHECKED = "sound_alive_effect";
     public static final String SETTING_SOUND_BALANCE = "sound_balance";
     public static final String SETTING_SOUND_CRAFT_BUDS_ENABLE = "buds_enable";
-    public static final String SETTING_SOUND_CRAFT_BUDS_PLUGIN_PACKAGE_NAME = "buds_plugin_package_name";
+    public static final String SETTING_SOUND_CRAFT_BUDS_PLUGIN_PACKAGE_NAME =
+            "buds_plugin_package_name";
     public static final String SETTING_TUBEAMP_CHECKED = "tube_amp_effect";
     public static final String SETTING_UPSCALER_CHECKED = "k2hd_effect";
     public static final String SETTING_VOIP_CALL_MIC_MODE = "voip_call_mic_mode";
-    public static final String SETTING_VOIP_TRANSLATE_DURING_ALLOW_APPS = "translate_during_allow_apps";
+    public static final String SETTING_VOIP_TRANSLATE_DURING_ALLOW_APPS =
+            "translate_during_allow_apps";
     public static final String SETTING_VOIP_TRANSLATE_DURING_CALLS = "translate_during_calls";
     public static final String SETTING_VOIP_TRANSLATOR_ENABLE = "voip_translator_enable";
     public static final String SETTING_VOIP_TRANSLATOR_PACKAGE_NAME = "voip_translator_package";

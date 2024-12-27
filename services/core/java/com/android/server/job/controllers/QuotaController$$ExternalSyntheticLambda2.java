@@ -6,7 +6,8 @@ public final /* synthetic */ class QuotaController$$ExternalSyntheticLambda2 imp
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ QuotaController f$0;
 
-    public /* synthetic */ QuotaController$$ExternalSyntheticLambda2(QuotaController quotaController, int i) {
+    public /* synthetic */ QuotaController$$ExternalSyntheticLambda2(
+            QuotaController quotaController, int i) {
         this.$r8$classId = i;
         this.f$0 = quotaController;
     }

@@ -6,11 +6,13 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface ISemAuthnrService extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.authnrservice.manager.ISemAuthnrService";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.authnrservice.manager.ISemAuthnrService";
 
     boolean deleteFile(String str) throws RemoteException;
 
@@ -24,7 +26,8 @@ public interface ISemAuthnrService extends IInterface {
 
     byte[] getWrappedObject(byte[] bArr) throws RemoteException;
 
-    boolean initialize(ParcelFileDescriptor parcelFileDescriptor, long j, long j2) throws RemoteException;
+    boolean initialize(ParcelFileDescriptor parcelFileDescriptor, long j, long j2)
+            throws RemoteException;
 
     boolean initializeDrk() throws RemoteException;
 
@@ -59,7 +62,8 @@ public interface ISemAuthnrService extends IInterface {
         }
 
         @Override // com.samsung.android.authnrservice.manager.ISemAuthnrService
-        public boolean initialize(ParcelFileDescriptor fd, long offset, long len) throws RemoteException {
+        public boolean initialize(ParcelFileDescriptor fd, long offset, long len)
+                throws RemoteException {
             return false;
         }
 
@@ -159,7 +163,7 @@ public interface ISemAuthnrService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemAuthnrService {
+    public abstract static class Stub extends Binder implements ISemAuthnrService {
         static final int TRANSACTION_deleteFile = 11;
         static final int TRANSACTION_getDrkKeyHandle = 9;
         static final int TRANSACTION_getFiles = 12;
@@ -254,7 +258,8 @@ public interface ISemAuthnrService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemAuthnrService.DESCRIPTOR);
             }
@@ -269,7 +274,9 @@ public interface ISemAuthnrService extends IInterface {
                     reply.writeInt(_result);
                     return true;
                 case 2:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg1 = data.readLong();
                     long _arg2 = data.readLong();
                     data.enforceNoDataAvail();
@@ -434,7 +441,8 @@ public interface ISemAuthnrService extends IInterface {
             }
 
             @Override // com.samsung.android.authnrservice.manager.ISemAuthnrService
-            public boolean initialize(ParcelFileDescriptor fd, long offset, long len) throws RemoteException {
+            public boolean initialize(ParcelFileDescriptor fd, long offset, long len)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -688,7 +696,8 @@ public interface ISemAuthnrService extends IInterface {
             }
 
             @Override // com.samsung.android.authnrservice.manager.ISemAuthnrService
-            public List<String> getMatchedFilePaths(String path, String filter) throws RemoteException {
+            public List<String> getMatchedFilePaths(String path, String filter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -740,7 +749,8 @@ public interface ISemAuthnrService extends IInterface {
             }
 
             @Override // com.samsung.android.authnrservice.manager.ISemAuthnrService
-            public byte[] processPreloadedTa(int trustedAppType, byte[] data) throws RemoteException {
+            public byte[] processPreloadedTa(int trustedAppType, byte[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

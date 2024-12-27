@@ -4,6 +4,7 @@ import android.location.IGnssAntennaInfoListener;
 import android.location.LocationConstants;
 import android.location.util.identity.CallerIdentity;
 import android.os.IBinder;
+
 import com.android.internal.util.ConcurrentUtils;
 import com.android.server.location.LocationServiceThread;
 import com.android.server.location.gnss.hal.GnssNative;
@@ -11,13 +12,15 @@ import com.android.server.location.listeners.BinderListenerRegistration;
 import com.android.server.location.listeners.ListenerMultiplexer;
 import com.android.server.location.listeners.RemovableListenerRegistration;
 import com.android.server.location.nsflp.NSLocationProviderHelper;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class GnssAntennaInfoProvider extends ListenerMultiplexer implements GnssNative.BaseCallbacks, GnssNative.AntennaInfoCallbacks {
+public final class GnssAntennaInfoProvider extends ListenerMultiplexer
+        implements GnssNative.BaseCallbacks, GnssNative.AntennaInfoCallbacks {
     public volatile List mAntennaInfos;
     public final GnssNative mGnssNative;
     public NSLocationProviderHelper mNSLocationProviderHelper = null;
@@ -26,8 +29,13 @@ public final class GnssAntennaInfoProvider extends ListenerMultiplexer implement
     public final class AntennaInfoListenerRegistration extends BinderListenerRegistration {
         public final CallerIdentity mIdentity;
 
-        public AntennaInfoListenerRegistration(CallerIdentity callerIdentity, IGnssAntennaInfoListener iGnssAntennaInfoListener) {
-            super(callerIdentity.isMyProcess() ? LocationServiceThread.getExecutor() : ConcurrentUtils.DIRECT_EXECUTOR, iGnssAntennaInfoListener);
+        public AntennaInfoListenerRegistration(
+                CallerIdentity callerIdentity, IGnssAntennaInfoListener iGnssAntennaInfoListener) {
+            super(
+                    callerIdentity.isMyProcess()
+                            ? LocationServiceThread.getExecutor()
+                            : ConcurrentUtils.DIRECT_EXECUTOR,
+                    iGnssAntennaInfoListener);
             this.mIdentity = callerIdentity;
         }
 
@@ -75,11 +83,18 @@ public final class GnssAntennaInfoProvider extends ListenerMultiplexer implement
             String packageName = this.mIdentity.getPackageName();
             int uid = this.mIdentity.getUid();
             int pid = this.mIdentity.getPid();
-            NSLocationProviderHelper nSLocationProviderHelper = gnssAntennaInfoProvider.mNSLocationProviderHelper;
+            NSLocationProviderHelper nSLocationProviderHelper =
+                    gnssAntennaInfoProvider.mNSLocationProviderHelper;
             if (nSLocationProviderHelper == null) {
                 return;
             }
-            nSLocationProviderHelper.updateGnssDataListener(iBinder2, z, packageName, LocationConstants.LISTENER_TYPE.GNSS_ANTENNA_INFO, uid, pid);
+            nSLocationProviderHelper.updateGnssDataListener(
+                    iBinder2,
+                    z,
+                    packageName,
+                    LocationConstants.LISTENER_TYPE.GNSS_ANTENNA_INFO,
+                    uid,
+                    pid);
         }
     }
 
@@ -99,7 +114,8 @@ public final class GnssAntennaInfoProvider extends ListenerMultiplexer implement
         return null;
     }
 
-    @Override // com.android.server.location.listeners.ListenerMultiplexer, com.android.server.location.gnss.hal.GnssNative.BaseCallbacks
+    @Override // com.android.server.location.listeners.ListenerMultiplexer,
+              // com.android.server.location.gnss.hal.GnssNative.BaseCallbacks
     public final void onHalRestarted() {
         this.mGnssNative.startAntennaInfoListening();
     }
@@ -110,33 +126,50 @@ public final class GnssAntennaInfoProvider extends ListenerMultiplexer implement
     }
 
     @Override // com.android.server.location.listeners.ListenerMultiplexer
-    public final void onRegistrationAdded(Object obj, RemovableListenerRegistration removableListenerRegistration) {
+    public final void onRegistrationAdded(
+            Object obj, RemovableListenerRegistration removableListenerRegistration) {
         IBinder iBinder = (IBinder) obj;
         NSLocationProviderHelper nSLocationProviderHelper = this.mNSLocationProviderHelper;
-        if (nSLocationProviderHelper == null || !(removableListenerRegistration instanceof AntennaInfoListenerRegistration)) {
+        if (nSLocationProviderHelper == null
+                || !(removableListenerRegistration instanceof AntennaInfoListenerRegistration)) {
             return;
         }
-        CallerIdentity callerIdentity = ((AntennaInfoListenerRegistration) removableListenerRegistration).mIdentity;
-        nSLocationProviderHelper.addGnssDataListener(iBinder, callerIdentity.getPackageName(), LocationConstants.LISTENER_TYPE.GNSS_ANTENNA_INFO, callerIdentity.getUid(), callerIdentity.getPid(), true, true);
+        CallerIdentity callerIdentity =
+                ((AntennaInfoListenerRegistration) removableListenerRegistration).mIdentity;
+        nSLocationProviderHelper.addGnssDataListener(
+                iBinder,
+                callerIdentity.getPackageName(),
+                LocationConstants.LISTENER_TYPE.GNSS_ANTENNA_INFO,
+                callerIdentity.getUid(),
+                callerIdentity.getPid(),
+                true,
+                true);
     }
 
     @Override // com.android.server.location.listeners.ListenerMultiplexer
-    public final void onRegistrationRemoved(Object obj, RemovableListenerRegistration removableListenerRegistration) {
+    public final void onRegistrationRemoved(
+            Object obj, RemovableListenerRegistration removableListenerRegistration) {
         IBinder iBinder = (IBinder) obj;
         NSLocationProviderHelper nSLocationProviderHelper = this.mNSLocationProviderHelper;
-        if (nSLocationProviderHelper == null || !(removableListenerRegistration instanceof AntennaInfoListenerRegistration)) {
+        if (nSLocationProviderHelper == null
+                || !(removableListenerRegistration instanceof AntennaInfoListenerRegistration)) {
             return;
         }
-        CallerIdentity callerIdentity = ((AntennaInfoListenerRegistration) removableListenerRegistration).mIdentity;
-        nSLocationProviderHelper.removeGnssDataListener(iBinder, LocationConstants.LISTENER_TYPE.GNSS_ANTENNA_INFO, callerIdentity.getUid(), callerIdentity.getPid());
+        CallerIdentity callerIdentity =
+                ((AntennaInfoListenerRegistration) removableListenerRegistration).mIdentity;
+        nSLocationProviderHelper.removeGnssDataListener(
+                iBinder,
+                LocationConstants.LISTENER_TYPE.GNSS_ANTENNA_INFO,
+                callerIdentity.getUid(),
+                callerIdentity.getPid());
     }
 
     @Override // com.android.server.location.listeners.ListenerMultiplexer
-    public final /* bridge */ /* synthetic */ boolean registerWithService(Collection collection, Object obj) {
+    public final /* bridge */ /* synthetic */ boolean registerWithService(
+            Collection collection, Object obj) {
         return true;
     }
 
     @Override // com.android.server.location.listeners.ListenerMultiplexer
-    public final void unregisterWithService() {
-    }
+    public final void unregisterWithService() {}
 }

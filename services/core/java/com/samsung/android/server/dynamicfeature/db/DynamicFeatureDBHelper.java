@@ -3,25 +3,29 @@ package com.samsung.android.server.dynamicfeature.db;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
+
 import com.samsung.android.server.dynamicfeature.DFeature;
 import com.samsung.android.server.dynamicfeature.InfoBoard;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class DynamicFeatureDBHelper extends SQLiteOpenHelper {
-    public static final String TAG = "dynamicfeature_".concat(DynamicFeatureDBHelper.class.getName());
+    public static final String TAG =
+            "dynamicfeature_".concat(DynamicFeatureDBHelper.class.getName());
 
     /* JADX WARN: Code restructure failed: missing block: B:117:0x00ec, code lost:
-    
-        if (r11 == null) goto L29;
-     */
+
+       if (r11 == null) goto L29;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:98:0x01bf, code lost:
-    
-        if (r12 == null) goto L45;
-     */
+
+       if (r12 == null) goto L45;
+    */
     /* JADX WARN: Removed duplicated region for block: B:107:0x02c5  */
     /* JADX WARN: Removed duplicated region for block: B:122:0x02cb  */
     /* JADX WARN: Removed duplicated region for block: B:56:0x0290  */
@@ -35,7 +39,10 @@ public final class DynamicFeatureDBHelper extends SQLiteOpenHelper {
             Method dump skipped, instructions count: 719
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.dynamicfeature.db.DynamicFeatureDBHelper.dumpDB(android.database.sqlite.SQLiteDatabase, java.io.PrintWriter):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.dynamicfeature.db.DynamicFeatureDBHelper.dumpDB(android.database.sqlite.SQLiteDatabase,"
+                    + " java.io.PrintWriter):void");
     }
 
     public static void insertFeature(SQLiteDatabase sQLiteDatabase, DFeature dFeature) {
@@ -72,14 +79,15 @@ public final class DynamicFeatureDBHelper extends SQLiteOpenHelper {
             contentValues.put("signature", str2);
             sQLiteDatabase.insert("DF_FEATURE_TABLE", null, contentValues);
         } catch (Exception e) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("insertFeature : "), TAG);
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("insertFeature : "), TAG);
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:27:0x00c4, code lost:
-    
-        if (r1 == null) goto L23;
-     */
+
+       if (r1 == null) goto L23;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -176,7 +184,9 @@ public final class DynamicFeatureDBHelper extends SQLiteOpenHelper {
         Lcd:
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.dynamicfeature.db.DynamicFeatureDBHelper.loadFeatures(android.database.sqlite.SQLiteDatabase):java.util.ArrayList");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.dynamicfeature.db.DynamicFeatureDBHelper.loadFeatures(android.database.sqlite.SQLiteDatabase):java.util.ArrayList");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:27:0x00dc  */
@@ -190,7 +200,9 @@ public final class DynamicFeatureDBHelper extends SQLiteOpenHelper {
             Method dump skipped, instructions count: 282
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.dynamicfeature.db.DynamicFeatureDBHelper.loadParams(android.database.sqlite.SQLiteDatabase):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.dynamicfeature.db.DynamicFeatureDBHelper.loadParams(android.database.sqlite.SQLiteDatabase):void");
     }
 
     public static void replaceBasicInfo(SQLiteDatabase sQLiteDatabase) {
@@ -204,7 +216,8 @@ public final class DynamicFeatureDBHelper extends SQLiteOpenHelper {
             contentValues.put("lastUpdateTime", basicInfos.lastUpdatedTime);
             sQLiteDatabase.replace("DF_INFO_TABLE", null, contentValues);
         } catch (Exception e) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("replaceBasicInfo : "), TAG);
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("replaceBasicInfo : "), TAG);
         }
     }
 
@@ -221,22 +234,41 @@ public final class DynamicFeatureDBHelper extends SQLiteOpenHelper {
             contentValues.put("binaryType", paramInfos.binaryType);
             sQLiteDatabase.replace("DF_PARAM_TABLE", null, contentValues);
         } catch (Exception e) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("replaceBasicInfo : "), TAG);
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("replaceBasicInfo : "), TAG);
         }
     }
 
     @Override // android.database.sqlite.SQLiteOpenHelper
     public final void onCreate(SQLiteDatabase sQLiteDatabase) {
-        sQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS DF_FEATURE_TABLE (namespace TEXT,name TEXT,value TEXT,version INTEGER,property BOOLEAN,reboot BOOLEAN,package TEXT, signature TEXT, type TEXT,  PRIMARY KEY(namespace, name))");
-        sQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS DF_INFO_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT, virtualid TEXT,jobIntervalMill INTEGER,usertrial TEXT,lastUpdateTime TEXT )");
-        sQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS DF_PARAM_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT, mcc TEXT,mnc TEXT,csc TEXT,sdkVersion INTEGER,oneUiVersion TEXT, binaryType TEXT )");
+        sQLiteDatabase.execSQL(
+                "CREATE TABLE IF NOT EXISTS DF_FEATURE_TABLE (namespace TEXT,name TEXT,value"
+                    + " TEXT,version INTEGER,property BOOLEAN,reboot BOOLEAN,package TEXT,"
+                    + " signature TEXT, type TEXT,  PRIMARY KEY(namespace, name))");
+        sQLiteDatabase.execSQL(
+                "CREATE TABLE IF NOT EXISTS DF_INFO_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + " virtualid TEXT,jobIntervalMill INTEGER,usertrial TEXT,lastUpdateTime TEXT"
+                    + " )");
+        sQLiteDatabase.execSQL(
+                "CREATE TABLE IF NOT EXISTS DF_PARAM_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + " mcc TEXT,mnc TEXT,csc TEXT,sdkVersion INTEGER,oneUiVersion TEXT, binaryType"
+                    + " TEXT )");
     }
 
     @Override // android.database.sqlite.SQLiteOpenHelper
     public final void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
         sQLiteDatabase.execSQL("DROP TABLE IF EXISTS DF_FEATURE_TABLE");
-        sQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS DF_FEATURE_TABLE (namespace TEXT,name TEXT,value TEXT,version INTEGER,property BOOLEAN,reboot BOOLEAN,package TEXT, signature TEXT, type TEXT,  PRIMARY KEY(namespace, name))");
-        sQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS DF_INFO_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT, virtualid TEXT,jobIntervalMill INTEGER,usertrial TEXT,lastUpdateTime TEXT )");
-        sQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS DF_PARAM_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT, mcc TEXT,mnc TEXT,csc TEXT,sdkVersion INTEGER,oneUiVersion TEXT, binaryType TEXT )");
+        sQLiteDatabase.execSQL(
+                "CREATE TABLE IF NOT EXISTS DF_FEATURE_TABLE (namespace TEXT,name TEXT,value"
+                    + " TEXT,version INTEGER,property BOOLEAN,reboot BOOLEAN,package TEXT,"
+                    + " signature TEXT, type TEXT,  PRIMARY KEY(namespace, name))");
+        sQLiteDatabase.execSQL(
+                "CREATE TABLE IF NOT EXISTS DF_INFO_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + " virtualid TEXT,jobIntervalMill INTEGER,usertrial TEXT,lastUpdateTime TEXT"
+                    + " )");
+        sQLiteDatabase.execSQL(
+                "CREATE TABLE IF NOT EXISTS DF_PARAM_TABLE (_ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + " mcc TEXT,mnc TEXT,csc TEXT,sdkVersion INTEGER,oneUiVersion TEXT, binaryType"
+                    + " TEXT )");
     }
 }

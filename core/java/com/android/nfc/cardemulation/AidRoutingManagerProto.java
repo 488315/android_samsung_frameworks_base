@@ -9,7 +9,6 @@ public final class AidRoutingManagerProto {
         public static final long AIDS = 2237677961218L;
         public static final long ID = 1120986464257L;
 
-        public Route() {
-        }
+        public Route() {}
     }
 }

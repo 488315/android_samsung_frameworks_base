@@ -1,6 +1,7 @@
 package android.media.tv.tuner;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -23,10 +24,23 @@ public class DemuxCapabilities {
     private final int mVideoFilterCount;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FilterCapabilities {
-    }
+    public @interface FilterCapabilities {}
 
-    private DemuxCapabilities(int demuxCount, int recordCount, int playbackCount, int tsFilterCount, int sectionFilterCount, int audioFilterCount, int videoFilterCount, int pesFilterCount, int pcrFilterCount, long sectionFilterLength, int filterCaps, int[] filterCapsList, int[] linkCaps, boolean timeFilter) {
+    private DemuxCapabilities(
+            int demuxCount,
+            int recordCount,
+            int playbackCount,
+            int tsFilterCount,
+            int sectionFilterCount,
+            int audioFilterCount,
+            int videoFilterCount,
+            int pesFilterCount,
+            int pcrFilterCount,
+            long sectionFilterLength,
+            int filterCaps,
+            int[] filterCapsList,
+            int[] linkCaps,
+            boolean timeFilter) {
         this.mDemuxCount = demuxCount;
         this.mRecordCount = recordCount;
         this.mPlaybackCount = playbackCount;

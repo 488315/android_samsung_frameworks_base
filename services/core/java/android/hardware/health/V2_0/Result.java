@@ -6,6 +6,17 @@ import android.hardware.audio.common.V2_0.AudioChannelMask$$ExternalSyntheticOut
 /* loaded from: classes.dex */
 public abstract class Result {
     public static final String toString(int i) {
-        return i == 0 ? "SUCCESS" : i == 1 ? "NOT_SUPPORTED" : i == 2 ? "UNKNOWN" : i == 3 ? "NOT_FOUND" : i == 4 ? "CALLBACK_DIED" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i);
+        return i == 0
+                ? "SUCCESS"
+                : i == 1
+                        ? "NOT_SUPPORTED"
+                        : i == 2
+                                ? "UNKNOWN"
+                                : i == 3
+                                        ? "NOT_FOUND"
+                                        : i == 4
+                                                ? "CALLBACK_DIED"
+                                                : AudioChannelMask$$ExternalSyntheticOutline0.m(
+                                                        new StringBuilder("0x"), i);
     }
 }

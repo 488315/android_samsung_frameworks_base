@@ -15,10 +15,12 @@ public class DERBitString extends ASN1BitString {
             try {
                 return (DERBitString) fromByteArray((byte[]) obj);
             } catch (Exception e) {
-                throw new IllegalArgumentException("encoding error in getInstance: " + e.toString());
+                throw new IllegalArgumentException(
+                        "encoding error in getInstance: " + e.toString());
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public static DERBitString getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -59,10 +61,13 @@ public class DERBitString extends ASN1BitString {
         return StreamUtil.calculateBodyLength(this.data.length + 1) + 1 + this.data.length + 1;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1BitString, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1BitString,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     void encode(ASN1OutputStream out, boolean withTag) throws IOException {
         int len = this.data.length;
-        if (len == 0 || this.padBits == 0 || this.data[len - 1] == ((byte) (this.data[len - 1] & (255 << this.padBits)))) {
+        if (len == 0
+                || this.padBits == 0
+                || this.data[len - 1] == ((byte) (this.data[len - 1] & (255 << this.padBits)))) {
             out.writeEncoded(withTag, 3, (byte) this.padBits, this.data);
         } else {
             byte der = (byte) (this.data[len - 1] & (255 << this.padBits));
@@ -70,12 +75,14 @@ public class DERBitString extends ASN1BitString {
         }
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1BitString, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1BitString,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDERObject() {
         return this;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1BitString, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1BitString,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDLObject() {
         return this;
     }

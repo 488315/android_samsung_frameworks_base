@@ -4,20 +4,24 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
-public class ParsedPermissionGroupImpl extends ParsedComponentImpl implements ParsedPermissionGroup, Parcelable {
-    public static final Parcelable.Creator<ParsedPermissionGroupImpl> CREATOR = new Parcelable.Creator<ParsedPermissionGroupImpl>() { // from class: com.android.internal.pm.pkg.component.ParsedPermissionGroupImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedPermissionGroupImpl[] newArray(int size) {
-            return new ParsedPermissionGroupImpl[size];
-        }
+public class ParsedPermissionGroupImpl extends ParsedComponentImpl
+        implements ParsedPermissionGroup, Parcelable {
+    public static final Parcelable.Creator<ParsedPermissionGroupImpl> CREATOR =
+            new Parcelable.Creator<
+                    ParsedPermissionGroupImpl>() { // from class:
+                                                   // com.android.internal.pm.pkg.component.ParsedPermissionGroupImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedPermissionGroupImpl[] newArray(int size) {
+                    return new ParsedPermissionGroupImpl[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedPermissionGroupImpl createFromParcel(Parcel in) {
-            return new ParsedPermissionGroupImpl(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedPermissionGroupImpl createFromParcel(Parcel in) {
+                    return new ParsedPermissionGroupImpl(in);
+                }
+            };
     private int backgroundRequestDetailRes;
     private int backgroundRequestRes;
     private int priority;
@@ -25,11 +29,14 @@ public class ParsedPermissionGroupImpl extends ParsedComponentImpl implements Pa
     private int requestRes;
 
     public String toString() {
-        return "PermissionGroup{" + Integer.toHexString(System.identityHashCode(this)) + " " + getName() + "}";
+        return "PermissionGroup{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + getName()
+                + "}";
     }
 
-    public ParsedPermissionGroupImpl() {
-    }
+    public ParsedPermissionGroupImpl() {}
 
     @Override // com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
@@ -50,7 +57,12 @@ public class ParsedPermissionGroupImpl extends ParsedComponentImpl implements Pa
         this.priority = in.readInt();
     }
 
-    public ParsedPermissionGroupImpl(int requestDetailRes, int backgroundRequestRes, int backgroundRequestDetailRes, int requestRes, int priority) {
+    public ParsedPermissionGroupImpl(
+            int requestDetailRes,
+            int backgroundRequestRes,
+            int backgroundRequestDetailRes,
+            int requestRes,
+            int priority) {
         this.requestDetailRes = requestDetailRes;
         this.backgroundRequestRes = backgroundRequestRes;
         this.backgroundRequestDetailRes = backgroundRequestDetailRes;
@@ -114,6 +126,5 @@ public class ParsedPermissionGroupImpl extends ParsedComponentImpl implements Pa
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

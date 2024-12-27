@@ -15,6 +15,5 @@ public class ForceRestartMessageActionViewModel implements ActionViewModel {
     }
 
     @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
-    public void onPress() {
-    }
+    public void onPress() {}
 }

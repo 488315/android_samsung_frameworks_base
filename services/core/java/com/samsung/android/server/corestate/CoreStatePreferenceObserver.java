@@ -2,6 +2,7 @@ package com.samsung.android.server.corestate;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import java.util.HashMap;
 import java.util.Map;
 

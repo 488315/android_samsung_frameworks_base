@@ -14,11 +14,9 @@ public class DisplayRefreshRate {
     public static final int VARIABLE_REFRESH_RATE = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RefreshRate {
-    }
+    public @interface RefreshRate {}
 
-    private DisplayRefreshRate() {
-    }
+    private DisplayRefreshRate() {}
 
     public static int getRefreshRate(long frameIntervalNs) {
         long rate = Math.round(1.0E9d / frameIntervalNs);

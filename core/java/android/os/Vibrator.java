@@ -6,13 +6,12 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.AudioAttributes;
-import android.os.VibrationAttributes;
-import android.os.VibrationEffect;
-import android.os.VibratorInfo;
 import android.os.vibrator.VibrationConfig;
 import android.os.vibrator.VibratorFrequencyProfile;
 import android.util.Log;
+
 import com.samsung.android.vibrator.VibrationDebugInfo;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -52,12 +51,10 @@ public abstract class Vibrator {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VibrationEffectSupport {
-    }
+    public @interface VibrationEffectSupport {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VibrationIntensity {
-    }
+    public @interface VibrationIntensity {}
 
     public abstract void cancel();
 
@@ -67,7 +64,12 @@ public abstract class Vibrator {
 
     public abstract boolean hasVibrator();
 
-    public abstract void vibrate(int i, String str, VibrationEffect vibrationEffect, String str2, VibrationAttributes vibrationAttributes);
+    public abstract void vibrate(
+            int i,
+            String str,
+            VibrationEffect vibrationEffect,
+            String str2,
+            VibrationAttributes vibrationAttributes);
 
     public Vibrator() {
         this.mPackageName = ActivityThread.currentPackageName();
@@ -139,11 +141,18 @@ public abstract class Vibrator {
         return getConfig().getHapticChannelMaximumAmplitude();
     }
 
-    public boolean setAlwaysOnEffect(int alwaysOnId, VibrationEffect effect, VibrationAttributes attributes) {
-        return setAlwaysOnEffect(Process.myUid(), this.mPackageName, alwaysOnId, effect, attributes);
+    public boolean setAlwaysOnEffect(
+            int alwaysOnId, VibrationEffect effect, VibrationAttributes attributes) {
+        return setAlwaysOnEffect(
+                Process.myUid(), this.mPackageName, alwaysOnId, effect, attributes);
     }
 
-    public boolean setAlwaysOnEffect(int uid, String opPkg, int alwaysOnId, VibrationEffect effect, VibrationAttributes attributes) {
+    public boolean setAlwaysOnEffect(
+            int uid,
+            String opPkg,
+            int alwaysOnId,
+            VibrationEffect effect,
+            VibrationAttributes attributes) {
         Log.w(TAG, "Always-on effects aren't supported");
         return false;
     }
@@ -171,7 +180,13 @@ public abstract class Vibrator {
     @Deprecated
     public void vibrate(long[] pattern, int repeat, AudioAttributes attributes) {
         if (repeat < -1 || repeat >= pattern.length) {
-            Log.e(TAG, "vibrate called with repeat index out of bounds (pattern.length=" + pattern.length + ", index=" + repeat + NavigationBarInflaterView.KEY_CODE_END);
+            Log.e(
+                    TAG,
+                    "vibrate called with repeat index out of bounds (pattern.length="
+                            + pattern.length
+                            + ", index="
+                            + repeat
+                            + NavigationBarInflaterView.KEY_CODE_END);
             throw new ArrayIndexOutOfBoundsException();
         }
         try {
@@ -199,7 +214,8 @@ public abstract class Vibrator {
         vibrate(Process.myUid(), this.mPackageName, vibe, null, attributes);
     }
 
-    public void performHapticFeedback(int constant, boolean always, String reason, boolean fromIme) {
+    public void performHapticFeedback(
+            int constant, boolean always, String reason, boolean fromIme) {
         Log.w(TAG, "performHapticFeedback is not supported");
     }
 
@@ -263,16 +279,14 @@ public abstract class Vibrator {
     }
 
     @SystemApi
-    public void addVibratorStateListener(OnVibratorStateChangedListener listener) {
-    }
+    public void addVibratorStateListener(OnVibratorStateChangedListener listener) {}
 
     @SystemApi
-    public void addVibratorStateListener(Executor executor, OnVibratorStateChangedListener listener) {
-    }
+    public void addVibratorStateListener(
+            Executor executor, OnVibratorStateChangedListener listener) {}
 
     @SystemApi
-    public void removeVibratorStateListener(OnVibratorStateChangedListener listener) {
-    }
+    public void removeVibratorStateListener(OnVibratorStateChangedListener listener) {}
 
     public int semGetSupportedVibrationType() {
         return 0;
@@ -294,10 +308,18 @@ public abstract class Vibrator {
         return false;
     }
 
-    public void semVibrate(int type, int repeat, AudioAttributes attributes, SemMagnitudeTypes magnitudeType) {
+    public void semVibrate(
+            int type, int repeat, AudioAttributes attributes, SemMagnitudeTypes magnitudeType) {
         try {
-            VibrationEffect effect = VibrationEffect.semCreateHaptic(type, repeat, convertMagnitudeType(magnitudeType));
-            vibrate(Process.myUid(), this.mPackageName, effect, "semVibrate", new VibrationAttributes.Builder(attributes).build());
+            VibrationEffect effect =
+                    VibrationEffect.semCreateHaptic(
+                            type, repeat, convertMagnitudeType(magnitudeType));
+            vibrate(
+                    Process.myUid(),
+                    this.mPackageName,
+                    effect,
+                    "semVibrate",
+                    new VibrationAttributes.Builder(attributes).build());
         } catch (IllegalArgumentException iae) {
             Log.e(TAG, "Failed to create VibrationEffect", iae);
         }

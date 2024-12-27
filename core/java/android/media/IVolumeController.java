@@ -26,36 +26,28 @@ public interface IVolumeController extends IInterface {
 
     public static class Default implements IVolumeController {
         @Override // android.media.IVolumeController
-        public void displaySafeVolumeWarning(int flags) throws RemoteException {
-        }
+        public void displaySafeVolumeWarning(int flags) throws RemoteException {}
 
         @Override // android.media.IVolumeController
-        public void volumeChanged(int streamType, int flags) throws RemoteException {
-        }
+        public void volumeChanged(int streamType, int flags) throws RemoteException {}
 
         @Override // android.media.IVolumeController
-        public void masterMuteChanged(int flags) throws RemoteException {
-        }
+        public void masterMuteChanged(int flags) throws RemoteException {}
 
         @Override // android.media.IVolumeController
-        public void setLayoutDirection(int layoutDirection) throws RemoteException {
-        }
+        public void setLayoutDirection(int layoutDirection) throws RemoteException {}
 
         @Override // android.media.IVolumeController
-        public void dismiss() throws RemoteException {
-        }
+        public void dismiss() throws RemoteException {}
 
         @Override // android.media.IVolumeController
-        public void setA11yMode(int mode) throws RemoteException {
-        }
+        public void setA11yMode(int mode) throws RemoteException {}
 
         @Override // android.media.IVolumeController
-        public void displayCsdWarning(int warning, int displayDurationMs) throws RemoteException {
-        }
+        public void displayCsdWarning(int warning, int displayDurationMs) throws RemoteException {}
 
         @Override // android.media.IVolumeController
-        public void displayVolumeLimiterToast() throws RemoteException {
-        }
+        public void displayVolumeLimiterToast() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -63,7 +55,7 @@ public interface IVolumeController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVolumeController {
+    public abstract static class Stub extends Binder implements IVolumeController {
         public static final String DESCRIPTOR = "android.media.IVolumeController";
         static final int TRANSACTION_dismiss = 5;
         static final int TRANSACTION_displayCsdWarning = 7;
@@ -123,7 +115,8 @@ public interface IVolumeController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -264,7 +257,8 @@ public interface IVolumeController extends IInterface {
             }
 
             @Override // android.media.IVolumeController
-            public void displayCsdWarning(int warning, int displayDurationMs) throws RemoteException {
+            public void displayCsdWarning(int warning, int displayDurationMs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

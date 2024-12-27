@@ -3,6 +3,7 @@ package com.samsung.android.server.hwrs.samba;
 import android.os.SystemClock;
 import android.os.SystemService;
 import android.util.Log;
+
 import com.samsung.android.server.hwrs.utils.FileUtil;
 import com.samsung.android.server.hwrs.utils.StorageServiceException;
 
@@ -50,7 +51,13 @@ public abstract class ServerManager {
                 return;
             }
             if (SystemClock.elapsedRealtime() >= elapsedRealtime) {
-                throw new StorageServiceException("Service " + str + " currently " + state2 + "; waited 10000ms for " + state);
+                throw new StorageServiceException(
+                        "Service "
+                                + str
+                                + " currently "
+                                + state2
+                                + "; waited 10000ms for "
+                                + state);
             }
             try {
                 Thread.sleep(10L);

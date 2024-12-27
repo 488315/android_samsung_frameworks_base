@@ -13,8 +13,9 @@ import android.view.animation.ClipRectAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.wm.LocalAnimationAdapter;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,7 +23,8 @@ import java.io.PrintWriter;
 public final class WindowChangeAnimationSpec implements LocalAnimationAdapter.AnimationSpec {
     public final Animation mAnimation;
     public final boolean mIsThumbnail;
-    public final ThreadLocal mThreadLocalTmps = ThreadLocal.withInitial(new WindowChangeAnimationSpec$$ExternalSyntheticLambda0());
+    public final ThreadLocal mThreadLocalTmps =
+            ThreadLocal.withInitial(new WindowChangeAnimationSpec$$ExternalSyntheticLambda0());
     public final Rect mTmpRect = new Rect();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -32,7 +34,8 @@ public final class WindowChangeAnimationSpec implements LocalAnimationAdapter.An
         public final float[] mVecs = new float[4];
     }
 
-    public WindowChangeAnimationSpec(Rect rect, Rect rect2, DisplayInfo displayInfo, float f, boolean z) {
+    public WindowChangeAnimationSpec(
+            Rect rect, Rect rect2, DisplayInfo displayInfo, float f, boolean z) {
         Rect rect3 = new Rect(rect);
         Rect rect4 = new Rect(rect2);
         this.mIsThumbnail = z;
@@ -43,7 +46,8 @@ public final class WindowChangeAnimationSpec implements LocalAnimationAdapter.An
         float height = ((rect3.height() * 0.7f) / rect4.height()) + 0.3f;
         if (z) {
             AnimationSet animationSet = new AnimationSet(true);
-            AlphaAnimation alphaAnimation = new AlphaAnimation(1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE);
+            AlphaAnimation alphaAnimation =
+                    new AlphaAnimation(1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE);
             alphaAnimation.setDuration(j2);
             if (!z2) {
                 alphaAnimation.setStartOffset(j - j2);
@@ -65,7 +69,8 @@ public final class WindowChangeAnimationSpec implements LocalAnimationAdapter.An
             scaleAnimation2.setStartOffset(j - j2);
         }
         animationSet2.addAnimation(scaleAnimation2);
-        TranslateAnimation translateAnimation = new TranslateAnimation(rect3.left, rect4.left, rect3.top, rect4.top);
+        TranslateAnimation translateAnimation =
+                new TranslateAnimation(rect3.left, rect4.left, rect3.top, rect4.top);
         translateAnimation.setDuration(j);
         animationSet2.addAnimation(translateAnimation);
         Rect rect5 = new Rect(rect3);
@@ -76,15 +81,18 @@ public final class WindowChangeAnimationSpec implements LocalAnimationAdapter.An
         clipRectAnimation.setDuration(j);
         animationSet2.addAnimation(clipRectAnimation);
         this.mAnimation = animationSet2;
-        animationSet2.initialize(rect3.width(), rect3.height(), displayInfo.appWidth, displayInfo.appHeight);
+        animationSet2.initialize(
+                rect3.width(), rect3.height(), displayInfo.appWidth, displayInfo.appHeight);
     }
 
     @Override // com.android.server.wm.LocalAnimationAdapter.AnimationSpec
-    public final void apply(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, long j) {
+    public final void apply(
+            SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, long j) {
         TmpValues tmpValues = (TmpValues) this.mThreadLocalTmps.get();
         if (this.mIsThumbnail) {
             this.mAnimation.getTransformation(j, tmpValues.mTransformation);
-            transaction.setMatrix(surfaceControl, tmpValues.mTransformation.getMatrix(), tmpValues.mFloats);
+            transaction.setMatrix(
+                    surfaceControl, tmpValues.mTransformation.getMatrix(), tmpValues.mFloats);
             transaction.setAlpha(surfaceControl, tmpValues.mTransformation.getAlpha());
             return;
         }
@@ -115,7 +123,9 @@ public final class WindowChangeAnimationSpec implements LocalAnimationAdapter.An
     @Override // com.android.server.wm.LocalAnimationAdapter.AnimationSpec
     public final long calculateStatusBarTransitionStartTime() {
         long uptimeMillis = SystemClock.uptimeMillis();
-        return Math.max(uptimeMillis, (((long) (this.mAnimation.getDuration() * 0.99f)) + uptimeMillis) - 120);
+        return Math.max(
+                uptimeMillis,
+                (((long) (this.mAnimation.getDuration() * 0.99f)) + uptimeMillis) - 120);
     }
 
     @Override // com.android.server.wm.LocalAnimationAdapter.AnimationSpec

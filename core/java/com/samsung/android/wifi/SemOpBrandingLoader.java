@@ -7,8 +7,7 @@ public class SemOpBrandingLoader {
     private static SemOpBrandingLoader sInstance = null;
     private SemVendor mVendor = getSalesCode();
 
-    private SemOpBrandingLoader() {
-    }
+    private SemOpBrandingLoader() {}
 
     private SemVendor getSalesCode() {
         return getVendor(SystemProperties.get("ro.csc.sales_code"));

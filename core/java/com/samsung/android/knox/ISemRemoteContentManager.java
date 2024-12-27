@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -16,7 +17,8 @@ public interface ISemRemoteContentManager extends IInterface {
 
     void cancelCopyChunks(long j) throws RemoteException;
 
-    int copyChunks(int i, String str, int i2, String str2, long j, int i3, long j2, boolean z) throws RemoteException;
+    int copyChunks(int i, String str, int i2, String str2, long j, int i3, long j2, boolean z)
+            throws RemoteException;
 
     int copyFile(int i, String str, int i2, String str2) throws RemoteException;
 
@@ -36,7 +38,8 @@ public interface ISemRemoteContentManager extends IInterface {
 
     int moveFile(int i, String str, int i2, String str2) throws RemoteException;
 
-    long moveFilesForAppEx(int i, List<String> list, List<String> list2, int i2) throws RemoteException;
+    long moveFilesForAppEx(int i, List<String> list, List<String> list2, int i2)
+            throws RemoteException;
 
     long moveUnlimitedFiles(int i, Uri uri, int i2, int i3) throws RemoteException;
 
@@ -44,8 +47,8 @@ public interface ISemRemoteContentManager extends IInterface {
 
     public static class Default implements ISemRemoteContentManager {
         @Override // com.samsung.android.knox.ISemRemoteContentManager
-        public void registerRCPInterface(IRCPInterface rcpInterface, int userId) throws RemoteException {
-        }
+        public void registerRCPInterface(IRCPInterface rcpInterface, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemRemoteContentManager
         public IRCPInterface getRCPInterface() throws RemoteException {
@@ -53,22 +56,29 @@ public interface ISemRemoteContentManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemRemoteContentManager
-        public int moveFile(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+        public int moveFile(
+                int srcContainerId, String srcFilePath, int destContainerId, String destFilePath)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.knox.ISemRemoteContentManager
-        public int copyFileInternal(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+        public int copyFileInternal(
+                int srcContainerId, String srcFilePath, int destContainerId, String destFilePath)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.knox.ISemRemoteContentManager
-        public int copyFile(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+        public int copyFile(
+                int srcContainerId, String srcFilePath, int destContainerId, String destFilePath)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.knox.ISemRemoteContentManager
-        public long moveUnlimitedFiles(int requestApp, Uri uri, int fileCount, int containerId) throws RemoteException {
+        public long moveUnlimitedFiles(int requestApp, Uri uri, int fileCount, int containerId)
+                throws RemoteException {
             return 0L;
         }
 
@@ -93,21 +103,35 @@ public interface ISemRemoteContentManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemRemoteContentManager
-        public int copyChunks(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath, long offset, int length, long sessionId, boolean deleteSrc) throws RemoteException {
+        public int copyChunks(
+                int srcContainerId,
+                String srcFilePath,
+                int destContainerId,
+                String destFilePath,
+                long offset,
+                int length,
+                long sessionId,
+                boolean deleteSrc)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.knox.ISemRemoteContentManager
-        public void cancelCopyChunks(long sessionId) throws RemoteException {
-        }
+        public void cancelCopyChunks(long sessionId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemRemoteContentManager
-        public Bundle exchangeData(String pkgName, int userId, Bundle bundle) throws RemoteException {
+        public Bundle exchangeData(String pkgName, int userId, Bundle bundle)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.knox.ISemRemoteContentManager
-        public long moveFilesForAppEx(int requestApp, List<String> srcFilePaths, List<String> destFilePaths, int containerId) throws RemoteException {
+        public long moveFilesForAppEx(
+                int requestApp,
+                List<String> srcFilePaths,
+                List<String> destFilePaths,
+                int containerId)
+                throws RemoteException {
             return 0L;
         }
 
@@ -117,7 +141,7 @@ public interface ISemRemoteContentManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemRemoteContentManager {
+    public abstract static class Stub extends Binder implements ISemRemoteContentManager {
         static final int TRANSACTION_cancelCopyChunks = 12;
         static final int TRANSACTION_copyChunks = 11;
         static final int TRANSACTION_copyFile = 5;
@@ -194,7 +218,8 @@ public interface ISemRemoteContentManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemRemoteContentManager.DESCRIPTOR);
             }
@@ -297,7 +322,9 @@ public interface ISemRemoteContentManager extends IInterface {
                     long _arg6 = data.readLong();
                     boolean _arg7 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    int _result10 = copyChunks(_arg010, _arg110, _arg25, _arg35, _arg4, _arg5, _arg6, _arg7);
+                    int _result10 =
+                            copyChunks(
+                                    _arg010, _arg110, _arg25, _arg35, _arg4, _arg5, _arg6, _arg7);
                     reply.writeNoException();
                     reply.writeInt(_result10);
                     return true;
@@ -348,7 +375,8 @@ public interface ISemRemoteContentManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
-            public void registerRCPInterface(IRCPInterface rcpInterface, int userId) throws RemoteException {
+            public void registerRCPInterface(IRCPInterface rcpInterface, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -371,7 +399,8 @@ public interface ISemRemoteContentManager extends IInterface {
                     _data.writeInterfaceToken(ISemRemoteContentManager.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    IRCPInterface _result = IRCPInterface.Stub.asInterface(_reply.readStrongBinder());
+                    IRCPInterface _result =
+                            IRCPInterface.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -380,7 +409,12 @@ public interface ISemRemoteContentManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
-            public int moveFile(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+            public int moveFile(
+                    int srcContainerId,
+                    String srcFilePath,
+                    int destContainerId,
+                    String destFilePath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -400,7 +434,12 @@ public interface ISemRemoteContentManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
-            public int copyFileInternal(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+            public int copyFileInternal(
+                    int srcContainerId,
+                    String srcFilePath,
+                    int destContainerId,
+                    String destFilePath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -420,7 +459,12 @@ public interface ISemRemoteContentManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
-            public int copyFile(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+            public int copyFile(
+                    int srcContainerId,
+                    String srcFilePath,
+                    int destContainerId,
+                    String destFilePath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -440,7 +484,8 @@ public interface ISemRemoteContentManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
-            public long moveUnlimitedFiles(int requestApp, Uri uri, int fileCount, int containerId) throws RemoteException {
+            public long moveUnlimitedFiles(int requestApp, Uri uri, int fileCount, int containerId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -532,7 +577,16 @@ public interface ISemRemoteContentManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
-            public int copyChunks(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath, long offset, int length, long sessionId, boolean deleteSrc) throws RemoteException {
+            public int copyChunks(
+                    int srcContainerId,
+                    String srcFilePath,
+                    int destContainerId,
+                    String destFilePath,
+                    long offset,
+                    int length,
+                    long sessionId,
+                    boolean deleteSrc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -571,7 +625,8 @@ public interface ISemRemoteContentManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
-            public Bundle exchangeData(String pkgName, int userId, Bundle bundle) throws RemoteException {
+            public Bundle exchangeData(String pkgName, int userId, Bundle bundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -590,7 +645,12 @@ public interface ISemRemoteContentManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemRemoteContentManager
-            public long moveFilesForAppEx(int requestApp, List<String> srcFilePaths, List<String> destFilePaths, int containerId) throws RemoteException {
+            public long moveFilesForAppEx(
+                    int requestApp,
+                    List<String> srcFilePaths,
+                    List<String> destFilePaths,
+                    int containerId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

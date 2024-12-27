@@ -3,12 +3,14 @@ package com.android.server.biometrics.sensors.fingerprint;
 import android.os.Binder;
 import android.os.Handler;
 import android.util.Pair;
+
 import com.android.server.biometrics.sensors.AuthenticationClient;
 import com.android.server.biometrics.sensors.BaseClientMonitor;
 import com.android.server.biometrics.sensors.ClientMonitorCallback;
 import com.android.server.biometrics.sensors.EnrollClient;
 import com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintProvider;
 import com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintProvider$$ExternalSyntheticLambda10;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,29 +33,44 @@ public final class SemFpCallbackDispatcher implements ClientMonitorCallback {
         this.mHandler = handler;
     }
 
-    public final void dispatchChallengeListener(final int i, final int i2, boolean z, final long j) {
+    public final void dispatchChallengeListener(
+            final int i, final int i2, boolean z, final long j) {
         Iterator it = ((ArrayList) this.mChallengeListeners).iterator();
         while (it.hasNext()) {
-            SemFpEnrollSessionMonitor semFpEnrollSessionMonitor = (SemFpEnrollSessionMonitor) it.next();
+            SemFpEnrollSessionMonitor semFpEnrollSessionMonitor =
+                    (SemFpEnrollSessionMonitor) it.next();
             if (z) {
-                Runnable runnable = new Runnable() { // from class: com.android.server.biometrics.sensors.fingerprint.SemFpCallbackDispatcher$$ExternalSyntheticLambda6
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SemFpCallbackDispatcher semFpCallbackDispatcher = SemFpCallbackDispatcher.this;
-                        int i3 = i;
-                        int i4 = i2;
-                        long j2 = j;
-                        semFpCallbackDispatcher.getClass();
-                        Binder binder = new Binder();
-                        FingerprintProvider fingerprintProvider = (FingerprintProvider) semFpCallbackDispatcher.mProvider;
-                        fingerprintProvider.mHandler.post(new FingerprintProvider$$ExternalSyntheticLambda10(fingerprintProvider, i3, binder, i4, "EnrollSession", j2));
-                    }
-                };
+                Runnable runnable =
+                        new Runnable() { // from class:
+                                         // com.android.server.biometrics.sensors.fingerprint.SemFpCallbackDispatcher$$ExternalSyntheticLambda6
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemFpCallbackDispatcher semFpCallbackDispatcher =
+                                        SemFpCallbackDispatcher.this;
+                                int i3 = i;
+                                int i4 = i2;
+                                long j2 = j;
+                                semFpCallbackDispatcher.getClass();
+                                Binder binder = new Binder();
+                                FingerprintProvider fingerprintProvider =
+                                        (FingerprintProvider) semFpCallbackDispatcher.mProvider;
+                                fingerprintProvider.mHandler.post(
+                                        new FingerprintProvider$$ExternalSyntheticLambda10(
+                                                fingerprintProvider,
+                                                i3,
+                                                binder,
+                                                i4,
+                                                "EnrollSession",
+                                                j2));
+                            }
+                        };
                 synchronized (semFpEnrollSessionMonitor.mEnrollSessions) {
                     try {
-                        semFpEnrollSessionMonitor.mEnrollSessions.put(i, new Pair(runnable, Long.valueOf(j)));
+                        semFpEnrollSessionMonitor.mEnrollSessions.put(
+                                i, new Pair(runnable, Long.valueOf(j)));
                         if (semFpEnrollSessionMonitor.mEnrollSessions.size() == 1) {
-                            semFpEnrollSessionMonitor.mDisplayStateMonitor.registerStateCallback(semFpEnrollSessionMonitor);
+                            semFpEnrollSessionMonitor.mDisplayStateMonitor.registerStateCallback(
+                                    semFpEnrollSessionMonitor);
                         }
                     } finally {
                     }
@@ -63,7 +80,11 @@ public final class SemFpCallbackDispatcher implements ClientMonitorCallback {
                     try {
                         semFpEnrollSessionMonitor.mEnrollSessions.remove(i);
                         if (semFpEnrollSessionMonitor.mEnrollSessions.size() == 0) {
-                            ((CopyOnWriteArrayList) semFpEnrollSessionMonitor.mDisplayStateMonitor.mDisplayStateCallbacks).remove(semFpEnrollSessionMonitor);
+                            ((CopyOnWriteArrayList)
+                                            semFpEnrollSessionMonitor
+                                                    .mDisplayStateMonitor
+                                                    .mDisplayStateCallbacks)
+                                    .remove(semFpEnrollSessionMonitor);
                         }
                     } finally {
                     }
@@ -77,12 +98,16 @@ public final class SemFpCallbackDispatcher implements ClientMonitorCallback {
         if (baseClientMonitor instanceof AuthenticationClient) {
             Iterator it = ((ArrayList) this.mAuthenticationListeners).iterator();
             while (it.hasNext()) {
-                ((SemFpAuthenticationListener) it.next()).onAuthenticationFinished(baseClientMonitor.mSensorId, baseClientMonitor.mTargetUserId);
+                ((SemFpAuthenticationListener) it.next())
+                        .onAuthenticationFinished(
+                                baseClientMonitor.mSensorId, baseClientMonitor.mTargetUserId);
             }
         } else if (baseClientMonitor instanceof EnrollClient) {
             Iterator it2 = ((ArrayList) this.mEnrollListeners).iterator();
             while (it2.hasNext()) {
-                ((SemFpEnrollmentListener) it2.next()).onEnrollFinished(baseClientMonitor.mSensorId, baseClientMonitor.mTargetUserId);
+                ((SemFpEnrollmentListener) it2.next())
+                        .onEnrollFinished(
+                                baseClientMonitor.mSensorId, baseClientMonitor.mTargetUserId);
             }
         }
     }
@@ -92,12 +117,16 @@ public final class SemFpCallbackDispatcher implements ClientMonitorCallback {
         if (baseClientMonitor instanceof AuthenticationClient) {
             Iterator it = ((ArrayList) this.mAuthenticationListeners).iterator();
             while (it.hasNext()) {
-                ((SemFpAuthenticationListener) it.next()).onAuthenticationStarted(baseClientMonitor.mSensorId, baseClientMonitor.mTargetUserId);
+                ((SemFpAuthenticationListener) it.next())
+                        .onAuthenticationStarted(
+                                baseClientMonitor.mSensorId, baseClientMonitor.mTargetUserId);
             }
         } else if (baseClientMonitor instanceof EnrollClient) {
             Iterator it2 = ((ArrayList) this.mEnrollListeners).iterator();
             while (it2.hasNext()) {
-                ((SemFpEnrollmentListener) it2.next()).onEnrollStarted(baseClientMonitor.mSensorId, baseClientMonitor.mTargetUserId);
+                ((SemFpEnrollmentListener) it2.next())
+                        .onEnrollStarted(
+                                baseClientMonitor.mSensorId, baseClientMonitor.mTargetUserId);
             }
         }
     }

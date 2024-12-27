@@ -8,7 +8,6 @@ import android.graphics.ImageDecoder;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.CancellationSignal;
 import android.os.Environment;
@@ -16,7 +15,11 @@ import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Size;
+
 import com.android.internal.util.ArrayUtils;
+
+import libcore.io.IoUtils;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -24,7 +27,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.function.ToIntFunction;
-import libcore.io.IoUtils;
 
 /* loaded from: classes2.dex */
 public class ThumbnailUtils {
@@ -33,8 +35,7 @@ public class ThumbnailUtils {
     private static final int OPTIONS_SCALE_UP = 1;
     private static final String TAG = "ThumbnailUtils";
 
-    @Deprecated
-    public static final int TARGET_SIZE_MICRO_THUMBNAIL = 96;
+    @Deprecated public static final int TARGET_SIZE_MICRO_THUMBNAIL = 96;
 
     private static Size convertKind(int kind) {
         return MediaStore.Images.Thumbnails.getKindSize(kind);
@@ -50,7 +51,8 @@ public class ThumbnailUtils {
         }
 
         @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
-        public void onHeaderDecoded(ImageDecoder decoder, ImageDecoder.ImageInfo info, ImageDecoder.Source source) {
+        public void onHeaderDecoded(
+                ImageDecoder decoder, ImageDecoder.ImageInfo info, ImageDecoder.Source source) {
             if (this.signal != null) {
                 this.signal.throwIfCanceled();
             }
@@ -74,7 +76,8 @@ public class ThumbnailUtils {
         }
     }
 
-    public static Bitmap createAudioThumbnail(File file, Size size, CancellationSignal signal) throws IOException {
+    public static Bitmap createAudioThumbnail(File file, Size size, CancellationSignal signal)
+            throws IOException {
         if (signal != null) {
             signal.throwIfCanceled();
         }
@@ -85,7 +88,8 @@ public class ThumbnailUtils {
                 retriever.setDataSource(file.getAbsolutePath());
                 byte[] raw = retriever.getEmbeddedPicture();
                 if (raw != null) {
-                    Bitmap decodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(raw), resizer);
+                    Bitmap decodeBitmap =
+                            ImageDecoder.decodeBitmap(ImageDecoder.createSource(raw), resizer);
                     retriever.close();
                     return decodeBitmap;
                 }
@@ -98,27 +102,39 @@ public class ThumbnailUtils {
                 if (parent != null && parent.getName().equals(Environment.DIRECTORY_DOWNLOADS)) {
                     throw new IOException("No thumbnails in Downloads directories");
                 }
-                if (grandParent != null && "unknown".equals(Environment.getExternalStorageState(grandParent))) {
+                if (grandParent != null
+                        && "unknown".equals(Environment.getExternalStorageState(grandParent))) {
                     throw new IOException("No thumbnails in top-level directories");
                 }
-                File[] found = ArrayUtils.defeatNullable(file.getParentFile().listFiles(new FilenameFilter() { // from class: android.media.ThumbnailUtils$$ExternalSyntheticLambda0
-                    @Override // java.io.FilenameFilter
-                    public final boolean accept(File file2, String str) {
-                        return ThumbnailUtils.lambda$createAudioThumbnail$0(file2, str);
-                    }
-                }));
-                final ToIntFunction<File> score = new ToIntFunction() { // from class: android.media.ThumbnailUtils$$ExternalSyntheticLambda1
-                    @Override // java.util.function.ToIntFunction
-                    public final int applyAsInt(Object obj) {
-                        return ThumbnailUtils.lambda$createAudioThumbnail$1((File) obj);
-                    }
-                };
-                Comparator<File> bestScore = new Comparator() { // from class: android.media.ThumbnailUtils$$ExternalSyntheticLambda2
-                    @Override // java.util.Comparator
-                    public final int compare(Object obj, Object obj2) {
-                        return ThumbnailUtils.lambda$createAudioThumbnail$2(score, (File) obj, (File) obj2);
-                    }
-                };
+                File[] found =
+                        ArrayUtils.defeatNullable(
+                                file.getParentFile()
+                                        .listFiles(
+                                                new FilenameFilter() { // from class:
+                                                    // android.media.ThumbnailUtils$$ExternalSyntheticLambda0
+                                                    @Override // java.io.FilenameFilter
+                                                    public final boolean accept(
+                                                            File file2, String str) {
+                                                        return ThumbnailUtils
+                                                                .lambda$createAudioThumbnail$0(
+                                                                        file2, str);
+                                                    }
+                                                }));
+                final ToIntFunction<File> score = new ToIntFunction() { // from class:
+                            // android.media.ThumbnailUtils$$ExternalSyntheticLambda1
+                            @Override // java.util.function.ToIntFunction
+                            public final int applyAsInt(Object obj) {
+                                return ThumbnailUtils.lambda$createAudioThumbnail$1((File) obj);
+                            }
+                        };
+                Comparator<File> bestScore = new Comparator() { // from class:
+                            // android.media.ThumbnailUtils$$ExternalSyntheticLambda2
+                            @Override // java.util.Comparator
+                            public final int compare(Object obj, Object obj2) {
+                                return ThumbnailUtils.lambda$createAudioThumbnail$2(
+                                        score, (File) obj, (File) obj2);
+                            }
+                        };
                 File bestFile = (File) Arrays.asList(found).stream().max(bestScore).orElse(null);
                 if (bestFile == null) {
                     throw new IOException("No album art found");
@@ -164,7 +180,8 @@ public class ThumbnailUtils {
         }
     }
 
-    public static Bitmap createImageThumbnail(File file, Size size, CancellationSignal signal) throws IOException {
+    public static Bitmap createImageThumbnail(File file, Size size, CancellationSignal signal)
+            throws IOException {
         int orientation;
         ExifInterface exif;
         byte[] raw;
@@ -198,12 +215,21 @@ public class ThumbnailUtils {
                     break;
             }
         }
-        if (mimeType.equals("image/heif") || mimeType.equals("image/heif-sequence") || mimeType.equals("image/heic") || mimeType.equals("image/heic-sequence") || mimeType.equals(MediaFormat.MIMETYPE_IMAGE_AVIF)) {
+        if (mimeType.equals("image/heif")
+                || mimeType.equals("image/heif-sequence")
+                || mimeType.equals("image/heic")
+                || mimeType.equals("image/heic-sequence")
+                || mimeType.equals(MediaFormat.MIMETYPE_IMAGE_AVIF)) {
             try {
                 MediaMetadataRetriever retriever = new MediaMetadataRetriever();
                 try {
                     retriever.setDataSource(file.getAbsolutePath());
-                    bitmap = retriever.getThumbnailImageAtIndex(-1, new MediaMetadataRetriever.BitmapParams(), size.getWidth(), size.getWidth() * size.getHeight());
+                    bitmap =
+                            retriever.getThumbnailImageAtIndex(
+                                    -1,
+                                    new MediaMetadataRetriever.BitmapParams(),
+                                    size.getWidth(),
+                                    size.getWidth() * size.getHeight());
                     retriever.close();
                 } finally {
                 }
@@ -245,7 +271,8 @@ public class ThumbnailUtils {
         }
     }
 
-    public static Bitmap createVideoThumbnail(File file, Size size, CancellationSignal signal) throws IOException {
+    public static Bitmap createVideoThumbnail(File file, Size size, CancellationSignal signal)
+            throws IOException {
         if (signal != null) {
             signal.throwIfCanceled();
         }
@@ -256,21 +283,34 @@ public class ThumbnailUtils {
                 mmr.setDataSource(file.getAbsolutePath());
                 byte[] raw = mmr.getEmbeddedPicture();
                 if (raw != null) {
-                    Bitmap decodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(raw), resizer);
+                    Bitmap decodeBitmap =
+                            ImageDecoder.decodeBitmap(ImageDecoder.createSource(raw), resizer);
                     mmr.close();
                     return decodeBitmap;
                 }
-                MediaMetadataRetriever.BitmapParams params = new MediaMetadataRetriever.BitmapParams();
+                MediaMetadataRetriever.BitmapParams params =
+                        new MediaMetadataRetriever.BitmapParams();
                 params.setPreferredConfig(Bitmap.Config.ARGB_8888);
                 int width = Integer.parseInt(mmr.extractMetadata(18));
                 int height = Integer.parseInt(mmr.extractMetadata(19));
                 long thumbnailTimeUs = (Long.parseLong(mmr.extractMetadata(9)) * 1000) / 2;
                 if (size.getWidth() <= width || size.getHeight() <= height) {
-                    Bitmap bitmap = (Bitmap) Objects.requireNonNull(mmr.getScaledFrameAtTime(thumbnailTimeUs, 2, size.getWidth(), size.getHeight(), params));
+                    Bitmap bitmap =
+                            (Bitmap)
+                                    Objects.requireNonNull(
+                                            mmr.getScaledFrameAtTime(
+                                                    thumbnailTimeUs,
+                                                    2,
+                                                    size.getWidth(),
+                                                    size.getHeight(),
+                                                    params));
                     mmr.close();
                     return bitmap;
                 }
-                Bitmap bitmap2 = (Bitmap) Objects.requireNonNull(mmr.getFrameAtTime(thumbnailTimeUs, 2, params));
+                Bitmap bitmap2 =
+                        (Bitmap)
+                                Objects.requireNonNull(
+                                        mmr.getFrameAtTime(thumbnailTimeUs, 2, params));
                 mmr.close();
                 return bitmap2;
             } finally {
@@ -302,12 +342,14 @@ public class ThumbnailUtils {
     }
 
     @Deprecated
-    private static int computeSampleSize(BitmapFactory.Options options, int minSideLength, int maxNumOfPixels) {
+    private static int computeSampleSize(
+            BitmapFactory.Options options, int minSideLength, int maxNumOfPixels) {
         return 1;
     }
 
     @Deprecated
-    private static int computeInitialSampleSize(BitmapFactory.Options options, int minSideLength, int maxNumOfPixels) {
+    private static int computeInitialSampleSize(
+            BitmapFactory.Options options, int minSideLength, int maxNumOfPixels) {
         return 1;
     }
 
@@ -326,7 +368,8 @@ public class ThumbnailUtils {
     }
 
     @Deprecated
-    private static Bitmap transform(Matrix scaler, Bitmap source, int targetWidth, int targetHeight, int options) {
+    private static Bitmap transform(
+            Matrix scaler, Bitmap source, int targetWidth, int targetHeight, int options) {
         Matrix scaler2;
         Matrix scaler3 = scaler;
         boolean scaleUp = (options & 1) != 0;
@@ -338,7 +381,12 @@ public class ThumbnailUtils {
             Canvas c = new Canvas(b2);
             int deltaXHalf = Math.max(0, deltaX / 2);
             int deltaYHalf = Math.max(0, deltaY / 2);
-            Rect src = new Rect(deltaXHalf, deltaYHalf, Math.min(targetWidth, source.getWidth()) + deltaXHalf, Math.min(targetHeight, source.getHeight()) + deltaYHalf);
+            Rect src =
+                    new Rect(
+                            deltaXHalf,
+                            deltaYHalf,
+                            Math.min(targetWidth, source.getWidth()) + deltaXHalf,
+                            Math.min(targetHeight, source.getHeight()) + deltaYHalf);
             int dstX = (targetWidth - src.width()) / 2;
             int dstY = (targetHeight - src.height()) / 2;
             Rect dst = new Rect(dstX, dstY, targetWidth - dstX, targetHeight - dstY);
@@ -370,7 +418,11 @@ public class ThumbnailUtils {
                 scaler2 = null;
             }
         }
-        Bitmap b1 = scaler2 != null ? Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), scaler2, true) : source;
+        Bitmap b1 =
+                scaler2 != null
+                        ? Bitmap.createBitmap(
+                                source, 0, 0, source.getWidth(), source.getHeight(), scaler2, true)
+                        : source;
         if (recycle && b1 != source) {
             source.recycle();
         }
@@ -390,11 +442,13 @@ public class ThumbnailUtils {
         public int mThumbnailHeight;
         public int mThumbnailWidth;
 
-        private SizedThumbnailBitmap() {
-        }
+        private SizedThumbnailBitmap() {}
     }
 
     @Deprecated
-    private static void createThumbnailFromEXIF(String filePath, int targetSize, int maxPixels, SizedThumbnailBitmap sizedThumbBitmap) {
-    }
+    private static void createThumbnailFromEXIF(
+            String filePath,
+            int targetSize,
+            int maxPixels,
+            SizedThumbnailBitmap sizedThumbBitmap) {}
 }

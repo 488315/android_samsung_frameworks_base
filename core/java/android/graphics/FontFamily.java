@@ -4,12 +4,15 @@ import android.content.res.AssetManager;
 import android.graphics.fonts.Font;
 import android.graphics.fonts.FontVariationAxis;
 import android.text.TextUtils;
+
 import dalvik.annotation.optimization.CriticalNative;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import libcore.util.NativeAllocationRegistry;
 
 @Deprecated
 /* loaded from: classes.dex */
@@ -24,7 +27,8 @@ public class FontFamily {
 
     private static native boolean nAddFont(long j, ByteBuffer byteBuffer, int i, int i2, int i3);
 
-    private static native boolean nAddFontWeightStyle(long j, ByteBuffer byteBuffer, int i, int i2, int i3);
+    private static native boolean nAddFontWeightStyle(
+            long j, ByteBuffer byteBuffer, int i, int i2, int i3);
 
     @CriticalNative
     private static native long nCreateFamily(long j);
@@ -40,16 +44,21 @@ public class FontFamily {
     private static native long nInitBuilder(String str, int i);
 
     private static class NoImagePreloadHolder {
-        private static final NativeAllocationRegistry sBuilderRegistry = NativeAllocationRegistry.createMalloced(FontFamily.class.getClassLoader(), FontFamily.nGetBuilderReleaseFunc());
-        private static final NativeAllocationRegistry sFamilyRegistry = NativeAllocationRegistry.createMalloced(FontFamily.class.getClassLoader(), FontFamily.nGetFamilyReleaseFunc());
+        private static final NativeAllocationRegistry sBuilderRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        FontFamily.class.getClassLoader(), FontFamily.nGetBuilderReleaseFunc());
+        private static final NativeAllocationRegistry sFamilyRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        FontFamily.class.getClassLoader(), FontFamily.nGetFamilyReleaseFunc());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     public FontFamily() {
         this.mBuilderPtr = nInitBuilder(null, 0);
-        this.mNativeBuilderCleaner = NoImagePreloadHolder.sBuilderRegistry.registerNativeAllocation(this, this.mBuilderPtr);
+        this.mNativeBuilderCleaner =
+                NoImagePreloadHolder.sBuilderRegistry.registerNativeAllocation(
+                        this, this.mBuilderPtr);
     }
 
     public FontFamily(String[] langs, int variant) {
@@ -62,7 +71,9 @@ public class FontFamily {
             langsString = TextUtils.join(",", langs);
         }
         this.mBuilderPtr = nInitBuilder(langsString, variant);
-        this.mNativeBuilderCleaner = NoImagePreloadHolder.sBuilderRegistry.registerNativeAllocation(this, this.mBuilderPtr);
+        this.mNativeBuilderCleaner =
+                NoImagePreloadHolder.sBuilderRegistry.registerNativeAllocation(
+                        this, this.mBuilderPtr);
     }
 
     public boolean freeze() {
@@ -86,7 +97,8 @@ public class FontFamily {
         this.mBuilderPtr = 0L;
     }
 
-    public boolean addFont(String path, int ttcIndex, FontVariationAxis[] axes, int weight, int italic) {
+    public boolean addFont(
+            String path, int ttcIndex, FontVariationAxis[] axes, int weight, int italic) {
         if (this.mBuilderPtr == 0) {
             throw new IllegalStateException("Unable to call addFont after freezing.");
         }
@@ -95,10 +107,12 @@ public class FontFamily {
             try {
                 FileChannel fileChannel = file.getChannel();
                 long fontSize = fileChannel.size();
-                ByteBuffer fontBuffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, 0L, fontSize);
+                ByteBuffer fontBuffer =
+                        fileChannel.map(FileChannel.MapMode.READ_ONLY, 0L, fontSize);
                 if (axes != null) {
                     for (FontVariationAxis axis : axes) {
-                        nAddAxisValue(this.mBuilderPtr, axis.getOpenTypeTagValue(), axis.getStyleValue());
+                        nAddAxisValue(
+                                this.mBuilderPtr, axis.getOpenTypeTagValue(), axis.getStyleValue());
                     }
                 }
                 boolean nAddFont = nAddFont(this.mBuilderPtr, fontBuffer, ttcIndex, weight, italic);
@@ -111,7 +125,8 @@ public class FontFamily {
         }
     }
 
-    public boolean addFontFromBuffer(ByteBuffer font, int ttcIndex, FontVariationAxis[] axes, int weight, int italic) {
+    public boolean addFontFromBuffer(
+            ByteBuffer font, int ttcIndex, FontVariationAxis[] axes, int weight, int italic) {
         if (this.mBuilderPtr == 0) {
             throw new IllegalStateException("Unable to call addFontWeightStyle after freezing.");
         }
@@ -123,7 +138,15 @@ public class FontFamily {
         return nAddFontWeightStyle(this.mBuilderPtr, font, ttcIndex, weight, italic);
     }
 
-    public boolean addFontFromAssetManager(AssetManager mgr, String path, int cookie, boolean isAsset, int ttcIndex, int weight, int isItalic, FontVariationAxis[] axes) {
+    public boolean addFontFromAssetManager(
+            AssetManager mgr,
+            String path,
+            int cookie,
+            boolean isAsset,
+            int ttcIndex,
+            int weight,
+            int isItalic,
+            FontVariationAxis[] axes) {
         if (this.mBuilderPtr == 0) {
             throw new IllegalStateException("Unable to call addFontFromAsset after freezing.");
         }

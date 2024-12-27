@@ -13,24 +13,27 @@ import android.os.Parcelable;
 import android.os.UserHandle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes.dex */
 public class AppWidgetProviderInfo implements Parcelable {
-    public static final Parcelable.Creator<AppWidgetProviderInfo> CREATOR = new Parcelable.Creator<AppWidgetProviderInfo>() { // from class: android.appwidget.AppWidgetProviderInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppWidgetProviderInfo createFromParcel(Parcel parcel) {
-            return new AppWidgetProviderInfo(parcel);
-        }
+    public static final Parcelable.Creator<AppWidgetProviderInfo> CREATOR =
+            new Parcelable.Creator<AppWidgetProviderInfo>() { // from class:
+                // android.appwidget.AppWidgetProviderInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppWidgetProviderInfo createFromParcel(Parcel parcel) {
+                    return new AppWidgetProviderInfo(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppWidgetProviderInfo[] newArray(int size) {
-            return new AppWidgetProviderInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppWidgetProviderInfo[] newArray(int size) {
+                    return new AppWidgetProviderInfo[size];
+                }
+            };
     public static final int RESIZE_BOTH = 3;
     public static final int RESIZE_HORIZONTAL = 1;
     public static final int RESIZE_NONE = 0;
@@ -60,8 +63,7 @@ public class AppWidgetProviderInfo implements Parcelable {
     public int initialLayout;
     public boolean isExtendedFromAppWidgetProvider;
 
-    @Deprecated
-    public String label;
+    @Deprecated public String label;
     public int maxResizeHeight;
     public int maxResizeWidth;
     public int minHeight;
@@ -81,19 +83,15 @@ public class AppWidgetProviderInfo implements Parcelable {
     public int widgetFeatures;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CategoryFlags {
-    }
+    public @interface CategoryFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FeatureFlags {
-    }
+    public @interface FeatureFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResizeModeFlags {
-    }
+    public @interface ResizeModeFlags {}
 
-    public AppWidgetProviderInfo() {
-    }
+    public AppWidgetProviderInfo() {}
 
     public AppWidgetProviderInfo(Parcel in) {
         this.provider = (ComponentName) in.readTypedObject(ComponentName.CREATOR);
@@ -147,7 +145,14 @@ public class AppWidgetProviderInfo implements Parcelable {
 
     public final CharSequence loadDescription(Context context) {
         CharSequence description;
-        if (ResourceId.isValid(this.descriptionRes) && (description = context.getPackageManager().getText(this.providerInfo.packageName, this.descriptionRes, this.providerInfo.applicationInfo)) != null) {
+        if (ResourceId.isValid(this.descriptionRes)
+                && (description =
+                                context.getPackageManager()
+                                        .getText(
+                                                this.providerInfo.packageName,
+                                                this.descriptionRes,
+                                                this.providerInfo.applicationInfo))
+                        != null) {
             return description.toString().trim();
         }
         return null;
@@ -227,8 +232,10 @@ public class AppWidgetProviderInfo implements Parcelable {
         if (Flags.generatedPreviews()) {
             that.generatedPreviewCategories = this.generatedPreviewCategories;
         }
-        that.hidden_semGeneratedColorfulPreviewStates = this.hidden_semGeneratedColorfulPreviewStates;
-        that.hidden_semGeneratedMonotonePreviewStates = this.hidden_semGeneratedMonotonePreviewStates;
+        that.hidden_semGeneratedColorfulPreviewStates =
+                this.hidden_semGeneratedColorfulPreviewStates;
+        that.hidden_semGeneratedMonotonePreviewStates =
+                this.hidden_semGeneratedMonotonePreviewStates;
         that.hidden_semPreviewRecordResetStates = this.hidden_semPreviewRecordResetStates;
         return that;
     }
@@ -238,9 +245,12 @@ public class AppWidgetProviderInfo implements Parcelable {
         return 0;
     }
 
-    private Drawable loadDrawable(Context context, int density, int resourceId, boolean loadDefaultIcon) {
+    private Drawable loadDrawable(
+            Context context, int density, int resourceId, boolean loadDefaultIcon) {
         try {
-            Resources resources = context.getPackageManager().getResourcesForApplication(this.providerInfo.applicationInfo);
+            Resources resources =
+                    context.getPackageManager()
+                            .getResourcesForApplication(this.providerInfo.applicationInfo);
             if (ResourceId.isValid(resourceId)) {
                 if (density < 0) {
                     density = 0;
@@ -258,10 +268,14 @@ public class AppWidgetProviderInfo implements Parcelable {
     public void updateDimensions(DisplayMetrics displayMetrics) {
         this.minWidth = TypedValue.complexToDimensionPixelSize(this.minWidth, displayMetrics);
         this.minHeight = TypedValue.complexToDimensionPixelSize(this.minHeight, displayMetrics);
-        this.minResizeWidth = TypedValue.complexToDimensionPixelSize(this.minResizeWidth, displayMetrics);
-        this.minResizeHeight = TypedValue.complexToDimensionPixelSize(this.minResizeHeight, displayMetrics);
-        this.maxResizeWidth = TypedValue.complexToDimensionPixelSize(this.maxResizeWidth, displayMetrics);
-        this.maxResizeHeight = TypedValue.complexToDimensionPixelSize(this.maxResizeHeight, displayMetrics);
+        this.minResizeWidth =
+                TypedValue.complexToDimensionPixelSize(this.minResizeWidth, displayMetrics);
+        this.minResizeHeight =
+                TypedValue.complexToDimensionPixelSize(this.minResizeHeight, displayMetrics);
+        this.maxResizeWidth =
+                TypedValue.complexToDimensionPixelSize(this.maxResizeWidth, displayMetrics);
+        this.maxResizeHeight =
+                TypedValue.complexToDimensionPixelSize(this.maxResizeHeight, displayMetrics);
     }
 
     public String toString() {

@@ -1,6 +1,5 @@
 package android.media.audiofx;
 
-import android.media.audiofx.AudioEffect;
 import java.util.StringTokenizer;
 
 /* loaded from: classes2.dex */
@@ -22,26 +21,28 @@ public class PresetReverb extends AudioEffect {
         void onParameterChange(PresetReverb presetReverb, int i, int i2, short s);
     }
 
-    public PresetReverb(int priority, int audioSession) throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public PresetReverb(int priority, int audioSession)
+            throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
         super(EFFECT_TYPE_PRESET_REVERB, EFFECT_TYPE_NULL, priority, audioSession);
         this.mParamListener = null;
         this.mBaseParamListener = null;
         this.mParamListenerLock = new Object();
     }
 
-    public void setPreset(short preset) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setPreset(short preset)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         checkStatus(setParameter(0, preset));
     }
 
-    public short getPreset() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getPreset()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         short[] value = new short[1];
         checkStatus(getParameter(0, value));
         return value[0];
     }
 
     private class BaseParameterListener implements AudioEffect.OnParameterChangeListener {
-        private BaseParameterListener() {
-        }
+        private BaseParameterListener() {}
 
         @Override // android.media.audiofx.AudioEffect.OnParameterChangeListener
         public void onParameterChange(AudioEffect effect, int status, byte[] param, byte[] value) {
@@ -80,8 +81,7 @@ public class PresetReverb extends AudioEffect {
     public static class Settings {
         public short preset;
 
-        public Settings() {
-        }
+        public Settings() {}
 
         public Settings(String settings) {
             StringTokenizer st = new StringTokenizer(settings, "=;");
@@ -110,7 +110,8 @@ public class PresetReverb extends AudioEffect {
         }
     }
 
-    public Settings getProperties() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public Settings getProperties()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         Settings settings = new Settings();
         short[] value = new short[1];
         checkStatus(getParameter(0, value));
@@ -118,7 +119,8 @@ public class PresetReverb extends AudioEffect {
         return settings;
     }
 
-    public void setProperties(Settings settings) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setProperties(Settings settings)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         checkStatus(setParameter(0, settings.preset));
     }
 }

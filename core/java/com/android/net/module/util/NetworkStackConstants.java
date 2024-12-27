@@ -2,6 +2,7 @@ package com.android.net.module.util;
 
 import android.net.InetAddresses;
 import android.net.IpPrefix;
+
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -120,18 +121,25 @@ public final class NetworkStackConstants {
     public static final int UDP_SRCPORT_OFFSET = 0;
     public static final int VENDOR_SPECIFIC_IE_ID = 221;
     public static final byte[] ETHER_BROADCAST = {-1, -1, -1, -1, -1, -1};
-    public static final Inet4Address IPV4_ADDR_ALL = makeInet4Address((byte) -1, (byte) -1, (byte) -1, (byte) -1);
-    public static final Inet4Address IPV4_ADDR_ANY = makeInet4Address((byte) 0, (byte) 0, (byte) 0, (byte) 0);
-    public static final Inet6Address IPV6_ADDR_ANY = makeInet6Address(new byte[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+    public static final Inet4Address IPV4_ADDR_ALL =
+            makeInet4Address((byte) -1, (byte) -1, (byte) -1, (byte) -1);
+    public static final Inet4Address IPV4_ADDR_ANY =
+            makeInet4Address((byte) 0, (byte) 0, (byte) 0, (byte) 0);
+    public static final Inet6Address IPV6_ADDR_ANY =
+            makeInet6Address(new byte[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0});
     public static final IpPrefix CLAT_PREFIX = new IpPrefix("192.0.0.0/29");
-    public static final Inet6Address IPV6_ADDR_ALL_NODES_MULTICAST = (Inet6Address) InetAddresses.parseNumericAddress("ff02::1");
-    public static final Inet6Address IPV6_ADDR_ALL_ROUTERS_MULTICAST = (Inet6Address) InetAddresses.parseNumericAddress("ff02::2");
-    public static final Inet6Address IPV6_ADDR_ALL_HOSTS_MULTICAST = (Inet6Address) InetAddresses.parseNumericAddress("ff02::3");
-    public static final Inet6Address ALL_DHCP_RELAY_AGENTS_AND_SERVERS = (Inet6Address) InetAddresses.parseNumericAddress("ff02::1:2");
+    public static final Inet6Address IPV6_ADDR_ALL_NODES_MULTICAST =
+            (Inet6Address) InetAddresses.parseNumericAddress("ff02::1");
+    public static final Inet6Address IPV6_ADDR_ALL_ROUTERS_MULTICAST =
+            (Inet6Address) InetAddresses.parseNumericAddress("ff02::2");
+    public static final Inet6Address IPV6_ADDR_ALL_HOSTS_MULTICAST =
+            (Inet6Address) InetAddresses.parseNumericAddress("ff02::3");
+    public static final Inet6Address ALL_DHCP_RELAY_AGENTS_AND_SERVERS =
+            (Inet6Address) InetAddresses.parseNumericAddress("ff02::1:2");
 
     private static Inet4Address makeInet4Address(byte b1, byte b2, byte b3, byte b4) {
         try {
-            return (Inet4Address) InetAddress.getByAddress(new byte[]{b1, b2, b3, b4});
+            return (Inet4Address) InetAddress.getByAddress(new byte[] {b1, b2, b3, b4});
         } catch (UnknownHostException e) {
             throw new IllegalArgumentException("addr must be 4 bytes: this should never happen");
         }

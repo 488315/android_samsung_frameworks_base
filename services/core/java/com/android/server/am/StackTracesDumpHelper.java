@@ -7,11 +7,13 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.util.Slog;
 import android.util.SparseBooleanArray;
+
 import com.android.internal.os.ProcessCpuTracker;
 import com.android.internal.os.anr.AnrLatencyTracker;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.backup.BackupManagerConstants;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,7 +35,8 @@ import java.util.function.Supplier;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public abstract class StackTracesDumpHelper {
-    public static final SimpleDateFormat ANR_FILE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
+    public static final SimpleDateFormat ANR_FILE_DATE_FORMAT =
+            new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS");
     public static final int NATIVE_DUMP_TIMEOUT_MS;
     public static final int TEMP_DUMP_TIME_LIMIT;
 
@@ -82,18 +85,24 @@ public abstract class StackTracesDumpHelper {
             if (!file2.createNewFile()) {
                 throw new IOException("Unable to create ANR dump file: createNewFile failed");
             }
-            FileUtils.setPermissions(file2.getAbsolutePath(), FrameworkStatsLog.NON_A11Y_TOOL_SERVICE_WARNING_REPORT, -1, -1);
+            FileUtils.setPermissions(
+                    file2.getAbsolutePath(),
+                    FrameworkStatsLog.NON_A11Y_TOOL_SERVICE_WARNING_REPORT,
+                    -1,
+                    -1);
         }
         return file2;
     }
 
     public static long dumpJavaTracesTombstoned(int i, String str, long j) {
         long elapsedRealtime = SystemClock.elapsedRealtime();
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "----- dumping pid: ", " at ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(i, "----- dumping pid: ", " at ");
         m.append(SystemClock.uptimeMillis());
         m.append("\n");
         int appendtoANRFile = appendtoANRFile(str, m.toString());
-        boolean dumpJavaBacktraceToFileTimeout = Debug.dumpJavaBacktraceToFileTimeout(i, str, (int) (j / 1000));
+        boolean dumpJavaBacktraceToFileTimeout =
+                Debug.dumpJavaBacktraceToFileTimeout(i, str, (int) (j / 1000));
         if (dumpJavaBacktraceToFileTimeout) {
             try {
             } catch (Exception e) {
@@ -114,13 +123,13 @@ public abstract class StackTracesDumpHelper {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:159:0x00b9, code lost:
-    
-        if (r24 == null) goto L32;
-     */
+
+       if (r24 == null) goto L32;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:163:0x0097, code lost:
-    
-        if (r24 == null) goto L32;
-     */
+
+       if (r24 == null) goto L32;
+    */
     /* JADX WARN: Not initialized variable reg: 12, insn: 0x009e: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r12 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]), block:B:174:0x009e */
     /* JADX WARN: Removed duplicated region for block: B:31:0x00c7  */
     /* JADX WARN: Removed duplicated region for block: B:33:0x00cf  */
@@ -128,15 +137,38 @@ public abstract class StackTracesDumpHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static long dumpStackTraces(java.lang.String r19, java.util.ArrayList r20, java.util.concurrent.Future r21, java.util.concurrent.Future r22, java.util.concurrent.Future r23, com.android.internal.os.anr.AnrLatencyTracker r24) {
+    public static long dumpStackTraces(
+            java.lang.String r19,
+            java.util.ArrayList r20,
+            java.util.concurrent.Future r21,
+            java.util.concurrent.Future r22,
+            java.util.concurrent.Future r23,
+            com.android.internal.os.anr.AnrLatencyTracker r24) {
         /*
             Method dump skipped, instructions count: 618
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.StackTracesDumpHelper.dumpStackTraces(java.lang.String, java.util.ArrayList, java.util.concurrent.Future, java.util.concurrent.Future, java.util.concurrent.Future, com.android.internal.os.anr.AnrLatencyTracker):long");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.StackTracesDumpHelper.dumpStackTraces(java.lang.String,"
+                    + " java.util.ArrayList, java.util.concurrent.Future,"
+                    + " java.util.concurrent.Future, java.util.concurrent.Future,"
+                    + " com.android.internal.os.anr.AnrLatencyTracker):long");
     }
 
-    public static File dumpStackTraces(ArrayList arrayList, final ProcessCpuTracker processCpuTracker, final SparseBooleanArray sparseBooleanArray, Future future, StringWriter stringWriter, AtomicLong atomicLong, String str, String str2, String str3, Executor executor, Future future2, final AnrLatencyTracker anrLatencyTracker) {
+    public static File dumpStackTraces(
+            ArrayList arrayList,
+            final ProcessCpuTracker processCpuTracker,
+            final SparseBooleanArray sparseBooleanArray,
+            Future future,
+            StringWriter stringWriter,
+            AtomicLong atomicLong,
+            String str,
+            String str2,
+            String str3,
+            Executor executor,
+            Future future2,
+            final AnrLatencyTracker anrLatencyTracker) {
         String str4;
         if (anrLatencyTracker != null) {
             try {
@@ -149,46 +181,60 @@ public abstract class StackTracesDumpHelper {
             }
         }
         Slog.i("ActivityManager", "dumpStackTraces pids=" + sparseBooleanArray);
-        Supplier supplier = processCpuTracker != null ? new Supplier() { // from class: com.android.server.am.StackTracesDumpHelper$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                ProcessCpuTracker processCpuTracker2 = processCpuTracker;
-                SparseBooleanArray sparseBooleanArray2 = sparseBooleanArray;
-                AnrLatencyTracker anrLatencyTracker2 = anrLatencyTracker;
-                if (anrLatencyTracker2 != null) {
-                    anrLatencyTracker2.processCpuTrackerMethodsCalled();
-                }
-                ArrayList arrayList2 = new ArrayList();
-                synchronized (processCpuTracker2) {
-                    processCpuTracker2.init();
-                }
-                try {
-                    Thread.sleep(200L);
-                } catch (InterruptedException unused) {
-                }
-                synchronized (processCpuTracker2) {
-                    try {
-                        processCpuTracker2.update();
-                        int countWorkingStats = processCpuTracker2.countWorkingStats();
-                        for (int i = 0; i < countWorkingStats && arrayList2.size() < 2; i++) {
-                            ProcessCpuTracker.Stats workingStats = processCpuTracker2.getWorkingStats(i);
-                            if (sparseBooleanArray2.indexOfKey(workingStats.pid) >= 0) {
-                                arrayList2.add(Integer.valueOf(workingStats.pid));
-                            } else {
-                                Slog.i("ActivityManager", "Skipping next CPU consuming process, not a java proc: " + workingStats.pid);
+        Supplier supplier =
+                processCpuTracker != null
+                        ? new Supplier() { // from class:
+                            // com.android.server.am.StackTracesDumpHelper$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                ProcessCpuTracker processCpuTracker2 = processCpuTracker;
+                                SparseBooleanArray sparseBooleanArray2 = sparseBooleanArray;
+                                AnrLatencyTracker anrLatencyTracker2 = anrLatencyTracker;
+                                if (anrLatencyTracker2 != null) {
+                                    anrLatencyTracker2.processCpuTrackerMethodsCalled();
+                                }
+                                ArrayList arrayList2 = new ArrayList();
+                                synchronized (processCpuTracker2) {
+                                    processCpuTracker2.init();
+                                }
+                                try {
+                                    Thread.sleep(200L);
+                                } catch (InterruptedException unused) {
+                                }
+                                synchronized (processCpuTracker2) {
+                                    try {
+                                        processCpuTracker2.update();
+                                        int countWorkingStats =
+                                                processCpuTracker2.countWorkingStats();
+                                        for (int i = 0;
+                                                i < countWorkingStats && arrayList2.size() < 2;
+                                                i++) {
+                                            ProcessCpuTracker.Stats workingStats =
+                                                    processCpuTracker2.getWorkingStats(i);
+                                            if (sparseBooleanArray2.indexOfKey(workingStats.pid)
+                                                    >= 0) {
+                                                arrayList2.add(Integer.valueOf(workingStats.pid));
+                                            } else {
+                                                Slog.i(
+                                                        "ActivityManager",
+                                                        "Skipping next CPU consuming process, not a"
+                                                            + " java proc: "
+                                                                + workingStats.pid);
+                                            }
+                                        }
+                                    } catch (Throwable th2) {
+                                        throw th2;
+                                    }
+                                }
+                                if (anrLatencyTracker2 != null) {
+                                    anrLatencyTracker2.processCpuTrackerMethodsReturned();
+                                }
+                                return arrayList2;
                             }
                         }
-                    } catch (Throwable th2) {
-                        throw th2;
-                    }
-                }
-                if (anrLatencyTracker2 != null) {
-                    anrLatencyTracker2.processCpuTrackerMethodsReturned();
-                }
-                return arrayList2;
-            }
-        } : null;
-        CompletableFuture supplyAsync = supplier != null ? CompletableFuture.supplyAsync(supplier, executor) : null;
+                        : null;
+        CompletableFuture supplyAsync =
+                supplier != null ? CompletableFuture.supplyAsync(supplier, executor) : null;
         File file = new File("/data/anr");
         try {
             File createAnrDumpFile = createAnrDumpFile(file);
@@ -205,7 +251,14 @@ public abstract class StackTracesDumpHelper {
                 sb.append(str2 != null ? str2 : "");
                 appendtoANRFile(absolutePath, sb.toString());
             }
-            long dumpStackTraces = dumpStackTraces(createAnrDumpFile.getAbsolutePath(), arrayList, future, supplyAsync, future2, anrLatencyTracker);
+            long dumpStackTraces =
+                    dumpStackTraces(
+                            createAnrDumpFile.getAbsolutePath(),
+                            arrayList,
+                            future,
+                            supplyAsync,
+                            future2,
+                            anrLatencyTracker);
             if (atomicLong != null) {
                 atomicLong.set(dumpStackTraces);
             }
@@ -239,15 +292,27 @@ public abstract class StackTracesDumpHelper {
         int i2 = SystemProperties.getInt("tombstoned.max_anr_count", 64);
         long currentTimeMillis = System.currentTimeMillis();
         try {
-            Arrays.sort(listFiles, Comparator.comparingLong(new StackTracesDumpHelper$$ExternalSyntheticLambda1()).reversed());
+            Arrays.sort(
+                    listFiles,
+                    Comparator.comparingLong(new StackTracesDumpHelper$$ExternalSyntheticLambda1())
+                            .reversed());
             while (i < listFiles.length) {
-                i = (i <= i2 && currentTimeMillis - listFiles[i].lastModified() <= BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS) ? i + 1 : 0;
+                i =
+                        (i <= i2
+                                        && currentTimeMillis - listFiles[i].lastModified()
+                                                <= BackupManagerConstants
+                                                        .DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS)
+                                ? i + 1
+                                : 0;
                 if (!listFiles[i].delete()) {
                     Slog.w("ActivityManager", "Unable to prune stale trace file: " + listFiles[i]);
                 }
             }
         } catch (IllegalArgumentException e) {
-            Slog.w("ActivityManager", "tombstone modification times changed while sorting; not pruning", e);
+            Slog.w(
+                    "ActivityManager",
+                    "tombstone modification times changed while sorting; not pruning",
+                    e);
         }
     }
 }

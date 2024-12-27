@@ -1,8 +1,10 @@
 package com.android.server.permission.jarjar.kotlin.jvm.internal;
 
 import android.net.shared.InitialConfiguration$$ExternalSyntheticOutline0;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.permission.jarjar.kotlin.UninitializedPropertyAccessException;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,7 +36,8 @@ public abstract class Intrinsics {
         if (obj != null) {
             return;
         }
-        NullPointerException nullPointerException = new NullPointerException(str.concat(" must not be null"));
+        NullPointerException nullPointerException =
+                new NullPointerException(str.concat(" must not be null"));
         sanitizeStackTrace(nullPointerException);
         throw nullPointerException;
     }
@@ -51,7 +54,13 @@ public abstract class Intrinsics {
                 i++;
             }
             StackTraceElement stackTraceElement = stackTrace[i];
-            StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("Parameter specified as non-null is null: method ", stackTraceElement.getClassName(), ".", stackTraceElement.getMethodName(), ", parameter ");
+            StringBuilder m =
+                    InitialConfiguration$$ExternalSyntheticOutline0.m(
+                            "Parameter specified as non-null is null: method ",
+                            stackTraceElement.getClassName(),
+                            ".",
+                            stackTraceElement.getMethodName(),
+                            ", parameter ");
             m.append(str);
             NullPointerException nullPointerException = new NullPointerException(m.toString());
             sanitizeStackTrace(nullPointerException);
@@ -73,7 +82,10 @@ public abstract class Intrinsics {
     }
 
     public static void throwUninitializedPropertyAccessException(String str) {
-        UninitializedPropertyAccessException uninitializedPropertyAccessException = new UninitializedPropertyAccessException(XmlUtils$$ExternalSyntheticOutline0.m("lateinit property ", str, " has not been initialized"));
+        UninitializedPropertyAccessException uninitializedPropertyAccessException =
+                new UninitializedPropertyAccessException(
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "lateinit property ", str, " has not been initialized"));
         sanitizeStackTrace(uninitializedPropertyAccessException);
         throw uninitializedPropertyAccessException;
     }

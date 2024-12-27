@@ -2,11 +2,12 @@ package com.samsung.android.sume.core.plugin;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda3;
 import com.samsung.android.sume.core.channel.SurfaceChannelImpl$$ExternalSyntheticLambda13;
 import com.samsung.android.sume.core.descriptor.MFDescriptor;
-import com.samsung.android.sume.core.plugin.PluginStore;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -75,26 +76,41 @@ public abstract class PluginStore {
             return ((PluginAdapter) plugin).getPluginType().getName();
         }
         Class<?> objClass = plugin.getClass();
-        return (String) Arrays.stream(objClass.getGenericInterfaces()).filter(new Predicate() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda7
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return PluginStore.lambda$getPluginName$0((Type) obj);
-            }
-        }).map(new Function() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda8
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String typeName;
-                typeName = ((ParameterizedType) ((Type) obj)).getActualTypeArguments()[0].getTypeName();
-                return typeName;
-            }
-        }).filter(new Predicate() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda9
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean startsWith;
-                startsWith = ((String) obj).startsWith("com.samsung.android");
-                return startsWith;
-            }
-        }).findFirst().orElseThrow(new SurfaceChannelImpl$$ExternalSyntheticLambda13());
+        return (String)
+                Arrays.stream(objClass.getGenericInterfaces())
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda7
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return PluginStore.lambda$getPluginName$0((Type) obj);
+                                    }
+                                })
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda8
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        String typeName;
+                                        typeName =
+                                                ((ParameterizedType) ((Type) obj))
+                                                        .getActualTypeArguments()[0].getTypeName();
+                                        return typeName;
+                                    }
+                                })
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda9
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        boolean startsWith;
+                                        startsWith =
+                                                ((String) obj).startsWith("com.samsung.android");
+                                        return startsWith;
+                                    }
+                                })
+                        .findFirst()
+                        .orElseThrow(new SurfaceChannelImpl$$ExternalSyntheticLambda13());
     }
 
     static /* synthetic */ boolean lambda$getPluginName$0(Type it) {
@@ -102,17 +118,25 @@ public abstract class PluginStore {
     }
 
     public PluginStore add(Plugin<?>... plugins) {
-        Arrays.stream(plugins).flatMap(new Function() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((Plugin) obj).stream();
-            }
-        }).forEach(new Consumer() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda1
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                PluginStore.this.m9202lambda$add$3$comsamsungandroidsumecorepluginPluginStore((Plugin) obj);
-            }
-        });
+        Arrays.stream(plugins)
+                .flatMap(
+                        new Function() { // from class:
+                                         // com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Function
+                            public final Object apply(Object obj) {
+                                return ((Plugin) obj).stream();
+                            }
+                        })
+                .forEach(
+                        new Consumer() { // from class:
+                                         // com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                PluginStore.this
+                                        .m9202lambda$add$3$comsamsungandroidsumecorepluginPluginStore(
+                                                (Plugin) obj);
+                            }
+                        });
         return this;
     }
 
@@ -137,12 +161,16 @@ public abstract class PluginStore {
     }
 
     public synchronized void clear() {
-        this.registry.values().forEach(new Consumer() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda2
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((PluginStore.Entry) obj).getPluginFixture().release();
-            }
-        });
+        this.registry
+                .values()
+                .forEach(
+                        new Consumer() { // from class:
+                                         // com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                ((PluginStore.Entry) obj).getPluginFixture().release();
+                            }
+                        });
         this.registry.clear();
     }
 
@@ -168,36 +196,58 @@ public abstract class PluginStore {
 
     public static PluginStore of(List<PluginStore> pluginStores) {
         Def.require(!pluginStores.isEmpty());
-        Context context = (Context) pluginStores.stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda3
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return PluginStore.lambda$of$5((PluginStore) obj);
-            }
-        }).findFirst().flatMap(new Function() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda4
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Optional ofNullable;
-                ofNullable = Optional.ofNullable(((PluginStore) obj).getContext());
-                return ofNullable;
-            }
-        }).orElse(null);
+        Context context =
+                (Context)
+                        pluginStores.stream()
+                                .filter(
+                                        new Predicate() { // from class:
+                                                          // com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda3
+                                            @Override // java.util.function.Predicate
+                                            public final boolean test(Object obj) {
+                                                return PluginStore.lambda$of$5((PluginStore) obj);
+                                            }
+                                        })
+                                .findFirst()
+                                .flatMap(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda4
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                Optional ofNullable;
+                                                ofNullable =
+                                                        Optional.ofNullable(
+                                                                ((PluginStore) obj).getContext());
+                                                return ofNullable;
+                                            }
+                                        })
+                                .orElse(null);
         PluginStore pluginStore = of(context);
         if (pluginStores.size() == 1) {
             pluginStore.registry = pluginStores.get(0).registry;
         } else {
-            pluginStore.registry = (Map) pluginStores.stream().map(new Function() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda5
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    Map map;
-                    map = ((PluginStore) obj).registry;
-                    return map;
-                }
-            }).reduce(new BinaryOperator() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda6
-                @Override // java.util.function.BiFunction
-                public final Object apply(Object obj, Object obj2) {
-                    return PluginStore.lambda$of$8((Map) obj, (Map) obj2);
-                }
-            }).orElse(new HashMap());
+            pluginStore.registry =
+                    (Map)
+                            pluginStores.stream()
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda5
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    Map map;
+                                                    map = ((PluginStore) obj).registry;
+                                                    return map;
+                                                }
+                                            })
+                                    .reduce(
+                                            new BinaryOperator() { // from class:
+                                                                   // com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda6
+                                                @Override // java.util.function.BiFunction
+                                                public final Object apply(Object obj, Object obj2) {
+                                                    return PluginStore.lambda$of$8(
+                                                            (Map) obj, (Map) obj2);
+                                                }
+                                            })
+                                    .orElse(new HashMap());
         }
         return pluginStore;
     }
@@ -207,11 +257,18 @@ public abstract class PluginStore {
     }
 
     static /* synthetic */ Map lambda$of$8(Map x, Map y) {
-        return (Map) Stream.concat(x.entrySet().stream(), y.entrySet().stream()).collect(Collectors.toMap(new MediaBufferBase$$ExternalSyntheticLambda3(), new Function() { // from class: com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda10
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return (PluginStore.Entry) ((Map.Entry) obj).getValue();
-            }
-        }));
+        return (Map)
+                Stream.concat(x.entrySet().stream(), y.entrySet().stream())
+                        .collect(
+                                Collectors.toMap(
+                                        new MediaBufferBase$$ExternalSyntheticLambda3(),
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.plugin.PluginStore$$ExternalSyntheticLambda10
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return (PluginStore.Entry)
+                                                        ((Map.Entry) obj).getValue();
+                                            }
+                                        }));
     }
 }

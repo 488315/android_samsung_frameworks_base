@@ -8,19 +8,22 @@ import android.util.Size;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class DisplayHashParams implements Parcelable {
-    public static final Parcelable.Creator<DisplayHashParams> CREATOR = new Parcelable.Creator<DisplayHashParams>() { // from class: android.service.displayhash.DisplayHashParams.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisplayHashParams[] newArray(int size) {
-            return new DisplayHashParams[size];
-        }
+    public static final Parcelable.Creator<DisplayHashParams> CREATOR =
+            new Parcelable.Creator<
+                    DisplayHashParams>() { // from class:
+                                           // android.service.displayhash.DisplayHashParams.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisplayHashParams[] newArray(int size) {
+                    return new DisplayHashParams[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisplayHashParams createFromParcel(Parcel in) {
-            return new DisplayHashParams(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisplayHashParams createFromParcel(Parcel in) {
+                    return new DisplayHashParams(in);
+                }
+            };
     private final Size mBufferSize;
     private final boolean mGrayscaleBuffer;
 
@@ -57,7 +60,11 @@ public final class DisplayHashParams implements Parcelable {
     }
 
     public String toString() {
-        return "DisplayHashParams { bufferSize = " + this.mBufferSize + ", grayscaleBuffer = " + this.mGrayscaleBuffer + " }";
+        return "DisplayHashParams { bufferSize = "
+                + this.mBufferSize
+                + ", grayscaleBuffer = "
+                + this.mGrayscaleBuffer
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -86,6 +93,5 @@ public final class DisplayHashParams implements Parcelable {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

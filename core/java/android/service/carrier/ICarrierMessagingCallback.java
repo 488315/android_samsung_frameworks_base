@@ -20,24 +20,20 @@ public interface ICarrierMessagingCallback extends IInterface {
 
     public static class Default implements ICarrierMessagingCallback {
         @Override // android.service.carrier.ICarrierMessagingCallback
-        public void onFilterComplete(int result) throws RemoteException {
-        }
+        public void onFilterComplete(int result) throws RemoteException {}
 
         @Override // android.service.carrier.ICarrierMessagingCallback
-        public void onSendSmsComplete(int result, int messageRef) throws RemoteException {
-        }
+        public void onSendSmsComplete(int result, int messageRef) throws RemoteException {}
 
         @Override // android.service.carrier.ICarrierMessagingCallback
-        public void onSendMultipartSmsComplete(int result, int[] messageRefs) throws RemoteException {
-        }
+        public void onSendMultipartSmsComplete(int result, int[] messageRefs)
+                throws RemoteException {}
 
         @Override // android.service.carrier.ICarrierMessagingCallback
-        public void onSendMmsComplete(int result, byte[] sendConfPdu) throws RemoteException {
-        }
+        public void onSendMmsComplete(int result, byte[] sendConfPdu) throws RemoteException {}
 
         @Override // android.service.carrier.ICarrierMessagingCallback
-        public void onDownloadMmsComplete(int result) throws RemoteException {
-        }
+        public void onDownloadMmsComplete(int result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -45,7 +41,7 @@ public interface ICarrierMessagingCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICarrierMessagingCallback {
+    public abstract static class Stub extends Binder implements ICarrierMessagingCallback {
         public static final String DESCRIPTOR = "android.service.carrier.ICarrierMessagingCallback";
         static final int TRANSACTION_onDownloadMmsComplete = 5;
         static final int TRANSACTION_onFilterComplete = 1;
@@ -96,7 +92,8 @@ public interface ICarrierMessagingCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -180,7 +177,8 @@ public interface ICarrierMessagingCallback extends IInterface {
             }
 
             @Override // android.service.carrier.ICarrierMessagingCallback
-            public void onSendMultipartSmsComplete(int result, int[] messageRefs) throws RemoteException {
+            public void onSendMultipartSmsComplete(int result, int[] messageRefs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

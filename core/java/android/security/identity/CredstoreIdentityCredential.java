@@ -4,8 +4,9 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.security.KeyChain;
-import android.security.identity.CredstoreResultData;
+
 import com.samsung.android.security.mdf.MdfUtils;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -57,7 +59,13 @@ class CredstoreIdentityCredential extends IdentityCredential {
     private boolean mOperationHandleSet = false;
     private long mOperationHandle = 0;
 
-    CredstoreIdentityCredential(Context context, String credentialName, int cipherSuite, ICredential binder, CredstorePresentationSession session, int featureVersion) {
+    CredstoreIdentityCredential(
+            Context context,
+            String credentialName,
+            int cipherSuite,
+            ICredential binder,
+            CredstorePresentationSession session,
+            int featureVersion) {
         this.mContext = context;
         this.mCredentialName = credentialName;
         this.mCipherSuite = cipherSuite;
@@ -83,8 +91,13 @@ class CredstoreIdentityCredential extends IdentityCredential {
         } catch (RemoteException e) {
             throw new RuntimeException("Unexpected RemoteException ", e);
         } catch (ServiceSpecificException e2) {
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
-        } catch (IOException | KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException | CertificateException e3) {
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+        } catch (IOException
+                | KeyStoreException
+                | NoSuchAlgorithmException
+                | UnrecoverableKeyException
+                | CertificateException e3) {
             throw new RuntimeException("Unexpected exception ", e3);
         }
     }
@@ -96,9 +109,11 @@ class CredstoreIdentityCredential extends IdentityCredential {
     }
 
     @Override // android.security.identity.IdentityCredential
-    public void setReaderEphemeralPublicKey(PublicKey readerEphemeralPublicKey) throws InvalidKeyException {
+    public void setReaderEphemeralPublicKey(PublicKey readerEphemeralPublicKey)
+            throws InvalidKeyException {
         try {
-            byte[] uncompressedForm = Util.publicKeyEncodeUncompressedForm(readerEphemeralPublicKey);
+            byte[] uncompressedForm =
+                    Util.publicKeyEncodeUncompressedForm(readerEphemeralPublicKey);
             this.mBinder.setReaderEphemeralPublicKey(uncompressedForm);
             ensureEphemeralKeyPair();
             try {
@@ -121,7 +136,8 @@ class CredstoreIdentityCredential extends IdentityCredential {
         } catch (RemoteException e2) {
             throw new RuntimeException("Unexpected RemoteException ", e2);
         } catch (ServiceSpecificException e3) {
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e3.errorCode, e3);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e3.errorCode, e3);
         }
     }
 
@@ -138,13 +154,19 @@ class CredstoreIdentityCredential extends IdentityCredential {
             byte[] messageCiphertextAndAuthTag = cipher.doFinal(messagePlaintext);
             this.mEphemeralCounter++;
             return messageCiphertextAndAuthTag;
-        } catch (InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+        } catch (InvalidAlgorithmParameterException
+                | InvalidKeyException
+                | NoSuchAlgorithmException
+                | BadPaddingException
+                | IllegalBlockSizeException
+                | NoSuchPaddingException e) {
             throw new RuntimeException("Error encrypting message", e);
         }
     }
 
     @Override // android.security.identity.IdentityCredential
-    public byte[] decryptMessageFromReader(byte[] messageCiphertext) throws MessageDecryptionException {
+    public byte[] decryptMessageFromReader(byte[] messageCiphertext)
+            throws MessageDecryptionException {
         ByteBuffer iv = ByteBuffer.allocate(12);
         iv.putInt(0, 0);
         iv.putInt(4, 0);
@@ -155,7 +177,12 @@ class CredstoreIdentityCredential extends IdentityCredential {
             byte[] plainText = cipher.doFinal(messageCiphertext);
             this.mReadersExpectedEphemeralCounter++;
             return plainText;
-        } catch (InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+        } catch (InvalidAlgorithmParameterException
+                | InvalidKeyException
+                | NoSuchAlgorithmException
+                | BadPaddingException
+                | IllegalBlockSizeException
+                | NoSuchPaddingException e) {
             throw new MessageDecryptionException("Error decrypting message", e);
         }
     }
@@ -179,7 +206,8 @@ class CredstoreIdentityCredential extends IdentityCredential {
         } catch (RemoteException e2) {
             throw new RuntimeException("Unexpected RemoteException ", e2);
         } catch (ServiceSpecificException e3) {
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e3.errorCode, e3);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e3.errorCode, e3);
         }
     }
 
@@ -202,20 +230,34 @@ class CredstoreIdentityCredential extends IdentityCredential {
     public long getCredstoreOperationHandle() {
         if (!this.mOperationHandleSet) {
             try {
-                this.mOperationHandle = this.mBinder.selectAuthKey(this.mAllowUsingExhaustedKeys, this.mAllowUsingExpiredKeys, this.mIncrementKeyUsageCount);
+                this.mOperationHandle =
+                        this.mBinder.selectAuthKey(
+                                this.mAllowUsingExhaustedKeys,
+                                this.mAllowUsingExpiredKeys,
+                                this.mIncrementKeyUsageCount);
                 this.mOperationHandleSet = true;
             } catch (RemoteException e) {
                 throw new RuntimeException("Unexpected RemoteException ", e);
             } catch (ServiceSpecificException e2) {
                 int i = e2.errorCode;
-                throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+                throw new RuntimeException(
+                        "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
             }
         }
         return this.mOperationHandle;
     }
 
     @Override // android.security.identity.IdentityCredential
-    public ResultData getEntries(byte[] requestMessage, Map<String, Collection<String>> entriesToRequest, byte[] sessionTranscript, byte[] readerSignature) throws SessionTranscriptMismatchException, NoAuthenticationKeyAvailableException, InvalidReaderSignatureException, EphemeralPublicKeyNotFoundException, InvalidRequestMessageException {
+    public ResultData getEntries(
+            byte[] requestMessage,
+            Map<String, Collection<String>> entriesToRequest,
+            byte[] sessionTranscript,
+            byte[] readerSignature)
+            throws SessionTranscriptMismatchException,
+                    NoAuthenticationKeyAvailableException,
+                    InvalidReaderSignatureException,
+                    EphemeralPublicKeyNotFoundException,
+                    InvalidRequestMessageException {
         byte[] mac;
         GetEntriesResultParcel resultParcel;
         byte[] signature;
@@ -236,7 +278,15 @@ class CredstoreIdentityCredential extends IdentityCredential {
         }
         try {
             int i = 0;
-            GetEntriesResultParcel resultParcel2 = this.mBinder.getEntries(requestMessage != null ? requestMessage : new byte[0], rnsParcels, sessionTranscript != null ? sessionTranscript : new byte[0], readerSignature != null ? readerSignature : new byte[0], this.mAllowUsingExhaustedKeys, this.mAllowUsingExpiredKeys, this.mIncrementKeyUsageCount);
+            GetEntriesResultParcel resultParcel2 =
+                    this.mBinder.getEntries(
+                            requestMessage != null ? requestMessage : new byte[0],
+                            rnsParcels,
+                            sessionTranscript != null ? sessionTranscript : new byte[0],
+                            readerSignature != null ? readerSignature : new byte[0],
+                            this.mAllowUsingExhaustedKeys,
+                            this.mAllowUsingExpiredKeys,
+                            this.mIncrementKeyUsageCount);
             byte[] signature2 = resultParcel2.signature;
             if (signature2 != null && signature2.length == 0) {
                 signature2 = null;
@@ -247,7 +297,13 @@ class CredstoreIdentityCredential extends IdentityCredential {
             } else {
                 mac = mac2;
             }
-            CredstoreResultData.Builder resultDataBuilder = new CredstoreResultData.Builder(this.mFeatureVersion, resultParcel2.staticAuthenticationData, resultParcel2.deviceNameSpaces, mac, signature2);
+            CredstoreResultData.Builder resultDataBuilder =
+                    new CredstoreResultData.Builder(
+                            this.mFeatureVersion,
+                            resultParcel2.staticAuthenticationData,
+                            resultParcel2.deviceNameSpaces,
+                            mac,
+                            signature2);
             ResultNamespaceParcel[] resultNamespaceParcelArr = resultParcel2.resultNamespaces;
             int length = resultNamespaceParcelArr.length;
             int i2 = 0;
@@ -261,11 +317,17 @@ class CredstoreIdentityCredential extends IdentityCredential {
                     if (resultEntryParcel.status == 0) {
                         resultParcel = resultParcel2;
                         signature = signature2;
-                        resultDataBuilder.addEntry(resultNamespaceParcel.namespaceName, resultEntryParcel.name, resultEntryParcel.value);
+                        resultDataBuilder.addEntry(
+                                resultNamespaceParcel.namespaceName,
+                                resultEntryParcel.name,
+                                resultEntryParcel.value);
                     } else {
                         resultParcel = resultParcel2;
                         signature = signature2;
-                        resultDataBuilder.addErrorStatus(resultNamespaceParcel.namespaceName, resultEntryParcel.name, resultEntryParcel.status);
+                        resultDataBuilder.addErrorStatus(
+                                resultNamespaceParcel.namespaceName,
+                                resultEntryParcel.name,
+                                resultEntryParcel.status);
                     }
                     i3++;
                     resultParcel2 = resultParcel;
@@ -293,7 +355,8 @@ class CredstoreIdentityCredential extends IdentityCredential {
             if (e2.errorCode == 11) {
                 throw new SessionTranscriptMismatchException(e2.getMessage(), e2);
             }
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
         }
     }
 
@@ -303,13 +366,16 @@ class CredstoreIdentityCredential extends IdentityCredential {
     }
 
     @Override // android.security.identity.IdentityCredential
-    public void setAvailableAuthenticationKeys(int keyCount, int maxUsesPerKey, long minValidTimeMillis) {
+    public void setAvailableAuthenticationKeys(
+            int keyCount, int maxUsesPerKey, long minValidTimeMillis) {
         try {
-            this.mBinder.setAvailableAuthenticationKeys(keyCount, maxUsesPerKey, minValidTimeMillis);
+            this.mBinder.setAvailableAuthenticationKeys(
+                    keyCount, maxUsesPerKey, minValidTimeMillis);
         } catch (RemoteException e) {
             throw new RuntimeException("Unexpected RemoteException ", e);
         } catch (ServiceSpecificException e2) {
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
         }
     }
 
@@ -332,14 +398,17 @@ class CredstoreIdentityCredential extends IdentityCredential {
         } catch (RemoteException e) {
             throw new RuntimeException("Unexpected RemoteException ", e);
         } catch (ServiceSpecificException e2) {
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
         } catch (CertificateException e3) {
             throw new RuntimeException("Error decoding authenticationKey", e3);
         }
     }
 
     @Override // android.security.identity.IdentityCredential
-    public void storeStaticAuthenticationData(X509Certificate authenticationKey, byte[] staticAuthData) throws UnknownAuthenticationKeyException {
+    public void storeStaticAuthenticationData(
+            X509Certificate authenticationKey, byte[] staticAuthData)
+            throws UnknownAuthenticationKeyException {
         try {
             AuthKeyParcel authKeyParcel = new AuthKeyParcel();
             authKeyParcel.x509cert = authenticationKey.getEncoded();
@@ -350,19 +419,24 @@ class CredstoreIdentityCredential extends IdentityCredential {
             if (e2.errorCode == 9) {
                 throw new UnknownAuthenticationKeyException(e2.getMessage(), e2);
             }
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
         } catch (CertificateEncodingException e3) {
             throw new RuntimeException("Error encoding authenticationKey", e3);
         }
     }
 
     @Override // android.security.identity.IdentityCredential
-    public void storeStaticAuthenticationData(X509Certificate authenticationKey, Instant expirationDate, byte[] staticAuthData) throws UnknownAuthenticationKeyException {
+    public void storeStaticAuthenticationData(
+            X509Certificate authenticationKey, Instant expirationDate, byte[] staticAuthData)
+            throws UnknownAuthenticationKeyException {
         try {
             AuthKeyParcel authKeyParcel = new AuthKeyParcel();
             authKeyParcel.x509cert = authenticationKey.getEncoded();
-            long millisSinceEpoch = (expirationDate.getEpochSecond() * 1000) + (expirationDate.getNano() / 1000000);
-            this.mBinder.storeStaticAuthenticationDataWithExpiration(authKeyParcel, millisSinceEpoch, staticAuthData);
+            long millisSinceEpoch =
+                    (expirationDate.getEpochSecond() * 1000) + (expirationDate.getNano() / 1000000);
+            this.mBinder.storeStaticAuthenticationDataWithExpiration(
+                    authKeyParcel, millisSinceEpoch, staticAuthData);
         } catch (RemoteException e) {
             throw new RuntimeException("Unexpected RemoteException ", e);
         } catch (ServiceSpecificException e2) {
@@ -372,7 +446,8 @@ class CredstoreIdentityCredential extends IdentityCredential {
             if (e2.errorCode == 9) {
                 throw new UnknownAuthenticationKeyException(e2.getMessage(), e2);
             }
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
         } catch (CertificateEncodingException e3) {
             throw new RuntimeException("Error encoding authenticationKey", e3);
         }
@@ -386,7 +461,8 @@ class CredstoreIdentityCredential extends IdentityCredential {
         } catch (RemoteException e) {
             throw new RuntimeException("Unexpected RemoteException ", e);
         } catch (ServiceSpecificException e2) {
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
         }
     }
 
@@ -403,7 +479,9 @@ class CredstoreIdentityCredential extends IdentityCredential {
                 AuthenticationKeyMetadata md = null;
                 long expirationMillis = expirationsMillis[n];
                 if (expirationMillis != Long.MAX_VALUE) {
-                    md = new AuthenticationKeyMetadata(usageCount[n], Instant.ofEpochMilli(expirationMillis));
+                    md =
+                            new AuthenticationKeyMetadata(
+                                    usageCount[n], Instant.ofEpochMilli(expirationMillis));
                 }
                 mds.add(md);
             }
@@ -411,7 +489,8 @@ class CredstoreIdentityCredential extends IdentityCredential {
         } catch (RemoteException e) {
             throw new IllegalStateException("Unexpected RemoteException ", e);
         } catch (ServiceSpecificException e2) {
-            throw new IllegalStateException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+            throw new IllegalStateException(
+                    "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
         }
     }
 
@@ -426,7 +505,8 @@ class CredstoreIdentityCredential extends IdentityCredential {
             if (e2.errorCode == 12) {
                 throw new UnsupportedOperationException("Not supported", e2);
             }
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
         }
     }
 
@@ -438,7 +518,8 @@ class CredstoreIdentityCredential extends IdentityCredential {
         } catch (RemoteException e) {
             throw new RuntimeException("Unexpected RemoteException ", e);
         } catch (ServiceSpecificException e2) {
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
         }
     }
 
@@ -446,12 +527,14 @@ class CredstoreIdentityCredential extends IdentityCredential {
     public byte[] update(PersonalizationData personalizationData) {
         try {
             IWritableCredential binder = this.mBinder.update();
-            byte[] proofOfProvision = CredstoreWritableIdentityCredential.personalize(binder, personalizationData);
+            byte[] proofOfProvision =
+                    CredstoreWritableIdentityCredential.personalize(binder, personalizationData);
             return proofOfProvision;
         } catch (RemoteException e) {
             throw new RuntimeException("Unexpected RemoteException ", e);
         } catch (ServiceSpecificException e2) {
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e2.errorCode, e2);
         }
     }
 }

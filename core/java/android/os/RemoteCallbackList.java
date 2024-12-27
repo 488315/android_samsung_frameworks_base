@@ -1,9 +1,8 @@
 package android.os;
 
-import android.os.IBinder;
-import android.os.IInterface;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import java.io.PrintWriter;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -82,8 +81,7 @@ public class RemoteCallbackList<E extends IInterface> {
         }
     }
 
-    public void onCallbackDied(E callback) {
-    }
+    public void onCallbackDied(E callback) {}
 
     public void onCallbackDied(E callback, Object cookie) {
         onCallbackDied(callback);
@@ -92,7 +90,8 @@ public class RemoteCallbackList<E extends IInterface> {
     public int beginBroadcast() {
         synchronized (this.mCallbacks) {
             if (this.mBroadcastCount > 0) {
-                throw new IllegalStateException("beginBroadcast() called while already in a broadcast");
+                throw new IllegalStateException(
+                        "beginBroadcast() called while already in a broadcast");
             }
             int N = this.mCallbacks.size();
             this.mBroadcastCount = N;
@@ -222,7 +221,10 @@ public class RemoteCallbackList<E extends IInterface> {
                 this.mRecentCallers.append(Debug.getCallers(5));
                 this.mRecentCallers.append('\n');
                 if (this.mRecentCallers.length() >= 1000) {
-                    Slog.wtf(TAG, "More than 3000 remote callbacks registered. Recent callers:\n" + this.mRecentCallers.toString());
+                    Slog.wtf(
+                            TAG,
+                            "More than 3000 remote callbacks registered. Recent callers:\n"
+                                    + this.mRecentCallers.toString());
                     this.mRecentCallers = null;
                 }
             }

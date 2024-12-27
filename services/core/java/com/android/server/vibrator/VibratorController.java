@@ -9,13 +9,17 @@ import android.os.vibrator.PrimitiveSegment;
 import android.os.vibrator.RampSegment;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.desktopmode.DesktopModeService$$ExternalSyntheticOutline0;
-import com.samsung.android.server.vibrator.VibratorHelper;
-import java.util.function.Consumer;
+
 import libcore.util.NativeAllocationRegistry;
+
+import com.samsung.android.server.vibrator.VibratorHelper;
+
+import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -57,7 +61,8 @@ public final class VibratorController {
 
         private static native boolean isAvailable(long j);
 
-        private static native long nativeInit(int i, OnVibrationCompleteListener onVibrationCompleteListener);
+        private static native long nativeInit(
+                int i, OnVibrationCompleteListener onVibrationCompleteListener);
 
         private static native void off(long j);
 
@@ -65,17 +70,21 @@ public final class VibratorController {
 
         private static native void performCommonInputff(long j, int[] iArr, boolean z, int i);
 
-        private static native long performComposedEffect(long j, PrimitiveSegment[] primitiveSegmentArr, long j2);
+        private static native long performComposedEffect(
+                long j, PrimitiveSegment[] primitiveSegmentArr, long j2);
 
         private static native long performEffect(long j, long j2, long j3, long j4);
 
         private static native void performHapticEngine(long j, int[] iArr, int i);
 
-        private static native void performPrebakedHapticPattern(long j, long j2, long j3, boolean z);
+        private static native void performPrebakedHapticPattern(
+                long j, long j2, long j3, boolean z);
 
-        private static native long performPwleEffect(long j, RampSegment[] rampSegmentArr, int i, long j2);
+        private static native long performPwleEffect(
+                long j, RampSegment[] rampSegmentArr, int i, long j2);
 
-        private static native long sehPerformEffect(long j, long j2, long j3, Vibration vibration, boolean z);
+        private static native long sehPerformEffect(
+                long j, long j2, long j3, Vibration vibration, boolean z);
 
         private static native void setAmplitude(long j, float f);
 
@@ -143,7 +152,9 @@ public final class VibratorController {
             this.mNativePtr = nativeInit(i, onVibrationCompleteListener);
             long nativeFinalizer = getNativeFinalizer();
             if (nativeFinalizer != 0) {
-                NativeAllocationRegistry.createMalloced(VibratorController.class.getClassLoader(), nativeFinalizer).registerNativeAllocation(this, this.mNativePtr);
+                NativeAllocationRegistry.createMalloced(
+                                VibratorController.class.getClassLoader(), nativeFinalizer)
+                        .registerNativeAllocation(this, this.mNativePtr);
             }
         }
 
@@ -245,7 +256,10 @@ public final class VibratorController {
         void onComplete(int i, long j);
     }
 
-    public VibratorController(int i, OnVibrationCompleteListener onVibrationCompleteListener, NativeWrapper nativeWrapper) {
+    public VibratorController(
+            int i,
+            OnVibrationCompleteListener onVibrationCompleteListener,
+            NativeWrapper nativeWrapper) {
         int i2;
         this.mNativeWrapper = nativeWrapper;
         nativeWrapper.init(i, onVibrationCompleteListener);
@@ -253,14 +267,18 @@ public final class VibratorController {
         this.mVibratorInfoLoadSuccessful = nativeWrapper.getInfo(builder);
         this.mVibratorInfo = builder.build();
         if (!this.mVibratorInfoLoadSuccessful) {
-            NandswapManager$$ExternalSyntheticOutline0.m(i, "Vibrator controller initialization failed to load some HAL info for vibrator ", "VibratorController");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Vibrator controller initialization failed to load some HAL info for vibrator ",
+                    "VibratorController");
         }
         this.mVibratorType = 1;
         this.mSupportHapticEngine = nativeWrapper.supportsHapticEngine();
         this.mSupportIntensityControl = nativeWrapper.supportIntensityControl();
         this.mSupportFrequencyControl = nativeWrapper.supportsFrequencyControl();
         this.mSupportPrebakedHapticPattern = nativeWrapper.supportsPrebakedHapticPattern();
-        this.mSupportEnhancedSamsungHapticPattern = nativeWrapper.supportsEnhancedSamsungHapticPattern();
+        this.mSupportEnhancedSamsungHapticPattern =
+                nativeWrapper.supportsEnhancedSamsungHapticPattern();
         boolean hasFeature = nativeWrapper.hasFeature("INDEX_WIDE_BAND");
         this.mSupportIndexWideBand = hasFeature;
         if (this.mSupportPrebakedHapticPattern) {
@@ -287,19 +305,43 @@ public final class VibratorController {
         }
         StringBuilder sb = new StringBuilder("motor group: ");
         VibratorHelper vibratorHelper = VibratorHelper.sInstance;
-        sb.append(i2 != 1 ? i2 != 2 ? i2 != 3 ? i2 != 4 ? "SEM_SUPPORTED_VIBRATION_NONE" : "SEM_SUPPORTED_VIBRATION_TYPE_D" : "SEM_SUPPORTED_VIBRATION_TYPE_C" : "SEM_SUPPORTED_VIBRATION_TYPE_B" : "SEM_SUPPORTED_VIBRATION_TYPE_A");
+        sb.append(
+                i2 != 1
+                        ? i2 != 2
+                                ? i2 != 3
+                                        ? i2 != 4
+                                                ? "SEM_SUPPORTED_VIBRATION_NONE"
+                                                : "SEM_SUPPORTED_VIBRATION_TYPE_D"
+                                        : "SEM_SUPPORTED_VIBRATION_TYPE_C"
+                                : "SEM_SUPPORTED_VIBRATION_TYPE_B"
+                        : "SEM_SUPPORTED_VIBRATION_TYPE_A");
         sb.append(" (");
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, this.mVibratorType, ")", "VibratorController");
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                sb, this.mVibratorType, ")", "VibratorController");
         this.mVibratorGroup = i2;
     }
 
     public final void dump(IndentingPrintWriter indentingPrintWriter) {
         indentingPrintWriter.println("Vibrator (id=" + this.mVibratorInfo.getId() + "):");
         indentingPrintWriter.increaseIndent();
-        StringBuilder m = DesktopModeService$$ExternalSyntheticOutline0.m(DesktopModeService$$ExternalSyntheticOutline0.m(new StringBuilder("isVibrating = "), this.mIsVibrating, indentingPrintWriter, "isUnderExternalControl = "), this.mIsUnderExternalControl, indentingPrintWriter, "currentAmplitude = ");
+        StringBuilder m =
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        DesktopModeService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("isVibrating = "),
+                                this.mIsVibrating,
+                                indentingPrintWriter,
+                                "isUnderExternalControl = "),
+                        this.mIsUnderExternalControl,
+                        indentingPrintWriter,
+                        "currentAmplitude = ");
         m.append(this.mCurrentAmplitude);
         indentingPrintWriter.println(m.toString());
-        StringBuilder m2 = DesktopModeService$$ExternalSyntheticOutline0.m(new StringBuilder("vibratorInfoLoadSuccessful = "), this.mVibratorInfoLoadSuccessful, indentingPrintWriter, "vibratorStateListener size = ");
+        StringBuilder m2 =
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("vibratorInfoLoadSuccessful = "),
+                        this.mVibratorInfoLoadSuccessful,
+                        indentingPrintWriter,
+                        "vibratorStateListener size = ");
         m2.append(this.mVibratorStateListeners.getRegisteredCallbackCount());
         indentingPrintWriter.println(m2.toString());
         this.mVibratorInfo.dump(indentingPrintWriter);
@@ -313,20 +355,26 @@ public final class VibratorController {
     public final void notifyListenerOnVibrating(final boolean z) {
         if (this.mIsVibrating != z) {
             this.mIsVibrating = z;
-            this.mVibratorStateListeners.broadcast(new Consumer() { // from class: com.android.server.vibrator.VibratorController$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    VibratorController vibratorController = VibratorController.this;
-                    boolean z2 = z;
-                    IVibratorStateListener iVibratorStateListener = (IVibratorStateListener) obj;
-                    vibratorController.getClass();
-                    try {
-                        iVibratorStateListener.onVibrating(z2);
-                    } catch (RemoteException | RuntimeException e) {
-                        Slog.e("VibratorController", "Vibrator state listener failed to call", e);
-                    }
-                }
-            });
+            this.mVibratorStateListeners.broadcast(
+                    new Consumer() { // from class:
+                                     // com.android.server.vibrator.VibratorController$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            VibratorController vibratorController = VibratorController.this;
+                            boolean z2 = z;
+                            IVibratorStateListener iVibratorStateListener =
+                                    (IVibratorStateListener) obj;
+                            vibratorController.getClass();
+                            try {
+                                iVibratorStateListener.onVibrating(z2);
+                            } catch (RemoteException | RuntimeException e) {
+                                Slog.e(
+                                        "VibratorController",
+                                        "Vibrator state listener failed to call",
+                                        e);
+                            }
+                        }
+                    });
         }
     }
 
@@ -401,7 +449,19 @@ public final class VibratorController {
     }
 
     public final String toString() {
-        return "VibratorController{mVibratorInfo=" + this.mVibratorInfo + ", mVibratorInfoLoadSuccessful=" + this.mVibratorInfoLoadSuccessful + ", mIsVibrating=" + this.mIsVibrating + ", mCurrentAmplitude=" + this.mCurrentAmplitude + ", mIsUnderExternalControl=" + this.mIsUnderExternalControl + ", mVibratorStateListeners count=" + this.mVibratorStateListeners.getRegisteredCallbackCount() + '}';
+        return "VibratorController{mVibratorInfo="
+                + this.mVibratorInfo
+                + ", mVibratorInfoLoadSuccessful="
+                + this.mVibratorInfoLoadSuccessful
+                + ", mIsVibrating="
+                + this.mIsVibrating
+                + ", mCurrentAmplitude="
+                + this.mCurrentAmplitude
+                + ", mIsUnderExternalControl="
+                + this.mIsUnderExternalControl
+                + ", mVibratorStateListeners count="
+                + this.mVibratorStateListeners.getRegisteredCallbackCount()
+                + '}';
     }
 
     public final void updateAlwaysOn(int i, PrebakedSegment prebakedSegment) {
@@ -411,7 +471,10 @@ public final class VibratorController {
                     if (prebakedSegment == null) {
                         this.mNativeWrapper.alwaysOnDisable(i);
                     } else {
-                        this.mNativeWrapper.alwaysOnEnable(i, prebakedSegment.getEffectId(), prebakedSegment.getEffectStrength());
+                        this.mNativeWrapper.alwaysOnEnable(
+                                i,
+                                prebakedSegment.getEffectId(),
+                                prebakedSegment.getEffectStrength());
                     }
                 } catch (Throwable th) {
                     throw th;

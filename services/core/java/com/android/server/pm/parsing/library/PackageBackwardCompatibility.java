@@ -13,7 +13,8 @@ public class PackageBackwardCompatibility extends PackageSharedLibraryUpdater {
     public class AndroidTestRunnerSplitUpdater extends PackageSharedLibraryUpdater {
         @Override // com.android.server.pm.parsing.library.PackageSharedLibraryUpdater
         public final void updatePackage(ParsedPackage parsedPackage, boolean z, boolean z2) {
-            PackageSharedLibraryUpdater.prefixImplicitDependency(parsedPackage, "android.test.mock");
+            PackageSharedLibraryUpdater.prefixImplicitDependency(
+                    parsedPackage, "android.test.mock");
         }
     }
 
@@ -21,7 +22,9 @@ public class PackageBackwardCompatibility extends PackageSharedLibraryUpdater {
     public class RemoveUnnecessaryAndroidTestBaseLibrary extends PackageSharedLibraryUpdater {
         @Override // com.android.server.pm.parsing.library.PackageSharedLibraryUpdater
         public final void updatePackage(ParsedPackage parsedPackage, boolean z, boolean z2) {
-            parsedPackage.removeUsesLibrary("android.test.base").removeUsesOptionalLibrary("android.test.base");
+            parsedPackage
+                    .removeUsesLibrary("android.test.base")
+                    .removeUsesOptionalLibrary("android.test.base");
         }
     }
 
@@ -29,7 +32,9 @@ public class PackageBackwardCompatibility extends PackageSharedLibraryUpdater {
     public class RemoveUnnecessaryOrgApacheHttpLegacyLibrary extends PackageSharedLibraryUpdater {
         @Override // com.android.server.pm.parsing.library.PackageSharedLibraryUpdater
         public final void updatePackage(ParsedPackage parsedPackage, boolean z, boolean z2) {
-            parsedPackage.removeUsesLibrary("org.apache.http.legacy").removeUsesOptionalLibrary("org.apache.http.legacy");
+            parsedPackage
+                    .removeUsesLibrary("org.apache.http.legacy")
+                    .removeUsesOptionalLibrary("org.apache.http.legacy");
         }
     }
 
@@ -100,10 +105,13 @@ public class PackageBackwardCompatibility extends PackageSharedLibraryUpdater {
             com.android.server.pm.parsing.library.PackageBackwardCompatibility.INSTANCE = r2
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.parsing.library.PackageBackwardCompatibility.<clinit>():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.parsing.library.PackageBackwardCompatibility.<clinit>():void");
     }
 
-    public PackageBackwardCompatibility(boolean z, PackageSharedLibraryUpdater[] packageSharedLibraryUpdaterArr) {
+    public PackageBackwardCompatibility(
+            boolean z, PackageSharedLibraryUpdater[] packageSharedLibraryUpdaterArr) {
         this.mBootClassPathContainsATB = z;
         this.mPackageUpdaters = packageSharedLibraryUpdaterArr;
     }

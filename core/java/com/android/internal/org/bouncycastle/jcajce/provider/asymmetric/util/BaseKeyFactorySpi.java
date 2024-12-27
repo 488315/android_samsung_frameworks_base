@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter;
+
 import java.security.Key;
 import java.security.KeyFactorySpi;
 import java.security.PrivateKey;
@@ -13,14 +14,17 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 /* loaded from: classes5.dex */
-public abstract class BaseKeyFactorySpi extends KeyFactorySpi implements AsymmetricKeyInfoConverter {
+public abstract class BaseKeyFactorySpi extends KeyFactorySpi
+        implements AsymmetricKeyInfoConverter {
     @Override // java.security.KeyFactorySpi
     protected PrivateKey engineGeneratePrivate(KeySpec keySpec) throws InvalidKeySpecException {
         if (keySpec instanceof PKCS8EncodedKeySpec) {
             try {
-                return generatePrivate(PrivateKeyInfo.getInstance(((PKCS8EncodedKeySpec) keySpec).getEncoded()));
+                return generatePrivate(
+                        PrivateKeyInfo.getInstance(((PKCS8EncodedKeySpec) keySpec).getEncoded()));
             } catch (Exception e) {
-                throw new InvalidKeySpecException("encoded key spec not recognized: " + e.getMessage());
+                throw new InvalidKeySpecException(
+                        "encoded key spec not recognized: " + e.getMessage());
             }
         }
         throw new InvalidKeySpecException("key spec not recognized");
@@ -30,9 +34,12 @@ public abstract class BaseKeyFactorySpi extends KeyFactorySpi implements Asymmet
     protected PublicKey engineGeneratePublic(KeySpec keySpec) throws InvalidKeySpecException {
         if (keySpec instanceof X509EncodedKeySpec) {
             try {
-                return generatePublic(SubjectPublicKeyInfo.getInstance(((X509EncodedKeySpec) keySpec).getEncoded()));
+                return generatePublic(
+                        SubjectPublicKeyInfo.getInstance(
+                                ((X509EncodedKeySpec) keySpec).getEncoded()));
             } catch (Exception e) {
-                throw new InvalidKeySpecException("encoded key spec not recognized: " + e.getMessage());
+                throw new InvalidKeySpecException(
+                        "encoded key spec not recognized: " + e.getMessage());
             }
         }
         throw new InvalidKeySpecException("key spec not recognized");

@@ -1,12 +1,11 @@
 package android.os;
 
 import android.hardware.usb.UsbManager;
-import android.os.IVoldListener;
-import android.os.IVoldMountCallback;
-import android.os.IVoldTaskListener;
 import android.os.incremental.IncrementalFileSystemControlParcel;
 import android.provider.Telephony;
+
 import com.samsung.android.media.AudioParameter;
+
 import java.io.FileDescriptor;
 
 /* loaded from: classes3.dex */
@@ -55,7 +54,8 @@ public interface IVold extends IInterface {
 
     void addSandboxIds(int[] iArr, String[] strArr) throws RemoteException;
 
-    void asecCreate(String str, int i, String str2, String str3, int i2, boolean z) throws RemoteException;
+    void asecCreate(String str, int i, String str2, String str3, int i2, boolean z)
+            throws RemoteException;
 
     void asecDestroy(String str, boolean z) throws RemoteException;
 
@@ -87,13 +87,15 @@ public interface IVold extends IInterface {
 
     void commitChanges() throws RemoteException;
 
-    void cpFileAtData(String str, String str2, int i, int i2, IVoldTaskListener iVoldTaskListener) throws RemoteException;
+    void cpFileAtData(String str, String str2, int i, int i2, IVoldTaskListener iVoldTaskListener)
+            throws RemoteException;
 
     String createObb(String str, int i) throws RemoteException;
 
     int createPassStorage(String str, int i, int i2) throws RemoteException;
 
-    String createStubVolume(String str, String str2, String str3, String str4, String str5, int i) throws RemoteException;
+    String createStubVolume(String str, String str2, String str3, String str4, String str5, int i)
+            throws RemoteException;
 
     void createUserStorageKeys(int i, boolean z) throws RemoteException;
 
@@ -113,7 +115,8 @@ public interface IVold extends IInterface {
 
     void earlyBootEnded() throws RemoteException;
 
-    void encryptFstab(String str, String str2, boolean z, String str3, boolean z2, String[] strArr) throws RemoteException;
+    void encryptFstab(String str, String str2, boolean z, String str3, boolean z2, String[] strArr)
+            throws RemoteException;
 
     void ensureAppDirsCreated(String[] strArr, int i) throws RemoteException;
 
@@ -159,19 +162,23 @@ public interface IVold extends IInterface {
 
     void monitor() throws RemoteException;
 
-    void mount(String str, int i, int i2, IVoldMountCallback iVoldMountCallback) throws RemoteException;
+    void mount(String str, int i, int i2, IVoldMountCallback iVoldMountCallback)
+            throws RemoteException;
 
     FileDescriptor mountAppFuse(int i, int i2) throws RemoteException;
 
     void mountFstab(String str, String str2, boolean z, String[] strArr) throws RemoteException;
 
-    IncrementalFileSystemControlParcel mountIncFs(String str, String str2, int i, String str3) throws RemoteException;
+    IncrementalFileSystemControlParcel mountIncFs(String str, String str2, int i, String str3)
+            throws RemoteException;
 
     boolean mountSdpMediaStorageCmd(int i) throws RemoteException;
 
-    void moveStorage(String str, String str2, IVoldTaskListener iVoldTaskListener) throws RemoteException;
+    void moveStorage(String str, String str2, IVoldTaskListener iVoldTaskListener)
+            throws RemoteException;
 
-    void mvFileAtData(String str, String str2, int i, int i2, IVoldTaskListener iVoldTaskListener) throws RemoteException;
+    void mvFileAtData(String str, String str2, int i, int i2, IVoldTaskListener iVoldTaskListener)
+            throws RemoteException;
 
     boolean needsCheckpoint() throws RemoteException;
 
@@ -217,15 +224,28 @@ public interface IVold extends IInterface {
 
     void runIdleMaint(boolean z, IVoldTaskListener iVoldTaskListener) throws RemoteException;
 
-    void sdeEnable(String str, int i, int i2, boolean z, IVoldTaskListener iVoldTaskListener, IVoldMountCallback iVoldMountCallback) throws RemoteException;
+    void sdeEnable(
+            String str,
+            int i,
+            int i2,
+            boolean z,
+            IVoldTaskListener iVoldTaskListener,
+            IVoldMountCallback iVoldMountCallback)
+            throws RemoteException;
 
     void setCeStorageProtection(int i, byte[] bArr) throws RemoteException;
 
     boolean setDualDARPolicyCmd(int i, int i2) throws RemoteException;
 
-    void setGCUrgentPace(int i, int i2, float f, float f2, int i3, int i4, int i5) throws RemoteException;
+    void setGCUrgentPace(int i, int i2, float f, float f2, int i3, int i4, int i5)
+            throws RemoteException;
 
-    void setIncFsMountOptions(IncrementalFileSystemControlParcel incrementalFileSystemControlParcel, boolean z, boolean z2, String str) throws RemoteException;
+    void setIncFsMountOptions(
+            IncrementalFileSystemControlParcel incrementalFileSystemControlParcel,
+            boolean z,
+            boolean z2,
+            String str)
+            throws RemoteException;
 
     void setListener(IVoldListener iVoldListener) throws RemoteException;
 
@@ -267,104 +287,85 @@ public interface IVold extends IInterface {
 
     public static class Default implements IVold {
         @Override // android.os.IVold
-        public void setListener(IVoldListener listener) throws RemoteException {
-        }
+        public void setListener(IVoldListener listener) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void abortFuse() throws RemoteException {
-        }
+        public void abortFuse() throws RemoteException {}
 
         @Override // android.os.IVold
-        public void monitor() throws RemoteException {
-        }
+        public void monitor() throws RemoteException {}
 
         @Override // android.os.IVold
-        public void reset() throws RemoteException {
-        }
+        public void reset() throws RemoteException {}
 
         @Override // android.os.IVold
-        public void shutdown() throws RemoteException {
-        }
+        public void shutdown() throws RemoteException {}
 
         @Override // android.os.IVold
-        public void onUserAdded(int userId, int userSerial, int sharesStorageWithUserId) throws RemoteException {
-        }
+        public void onUserAdded(int userId, int userSerial, int sharesStorageWithUserId)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void onUserRemoved(int userId) throws RemoteException {
-        }
+        public void onUserRemoved(int userId) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void onUserStarted(int userId) throws RemoteException {
-        }
+        public void onUserStarted(int userId) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void onUserStopped(int userId) throws RemoteException {
-        }
+        public void onUserStopped(int userId) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void addAppIds(String[] packageNames, int[] appIds) throws RemoteException {
-        }
+        public void addAppIds(String[] packageNames, int[] appIds) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void addSandboxIds(int[] appIds, String[] sandboxIds) throws RemoteException {
-        }
+        public void addSandboxIds(int[] appIds, String[] sandboxIds) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void onSecureKeyguardStateChanged(boolean isShowing) throws RemoteException {
-        }
+        public void onSecureKeyguardStateChanged(boolean isShowing) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void partition(String diskId, int partitionType, int ratio) throws RemoteException {
-        }
+        public void partition(String diskId, int partitionType, int ratio) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void forgetPartition(String partGuid, String fsUuid) throws RemoteException {
-        }
+        public void forgetPartition(String partGuid, String fsUuid) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void mount(String volId, int mountFlags, int mountUserId, IVoldMountCallback callback) throws RemoteException {
-        }
+        public void mount(
+                String volId, int mountFlags, int mountUserId, IVoldMountCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void unmount(String volId) throws RemoteException {
-        }
+        public void unmount(String volId) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void format(String volId, String fsType) throws RemoteException {
-        }
+        public void format(String volId, String fsType) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void benchmark(String volId, IVoldTaskListener listener) throws RemoteException {
-        }
+        public void benchmark(String volId, IVoldTaskListener listener) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void moveStorage(String fromVolId, String toVolId, IVoldTaskListener listener) throws RemoteException {
-        }
+        public void moveStorage(String fromVolId, String toVolId, IVoldTaskListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void remountUid(int uid, int remountMode) throws RemoteException {
-        }
+        public void remountUid(int uid, int remountMode) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void remountAppStorageDirs(int uid, int pid, String[] packageNames) throws RemoteException {
-        }
+        public void remountAppStorageDirs(int uid, int pid, String[] packageNames)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void unmountAppStorageDirs(int uid, int pid, String[] packageNames) throws RemoteException {
-        }
+        public void unmountAppStorageDirs(int uid, int pid, String[] packageNames)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void setupAppDir(String path, int appUid) throws RemoteException {
-        }
+        public void setupAppDir(String path, int appUid) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void fixupAppDir(String path, int appUid) throws RemoteException {
-        }
+        public void fixupAppDir(String path, int appUid) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void ensureAppDirsCreated(String[] paths, int appUid) throws RemoteException {
-        }
+        public void ensureAppDirsCreated(String[] paths, int appUid) throws RemoteException {}
 
         @Override // android.os.IVold
         public String createObb(String sourcePath, int ownerGid) throws RemoteException {
@@ -372,20 +373,17 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.IVold
-        public void destroyObb(String volId) throws RemoteException {
-        }
+        public void destroyObb(String volId) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void fstrim(int fstrimFlags, IVoldTaskListener listener) throws RemoteException {
-        }
+        public void fstrim(int fstrimFlags, IVoldTaskListener listener) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void runIdleMaint(boolean needGC, IVoldTaskListener listener) throws RemoteException {
-        }
+        public void runIdleMaint(boolean needGC, IVoldTaskListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void abortIdleMaint(IVoldTaskListener listener) throws RemoteException {
-        }
+        public void abortIdleMaint(IVoldTaskListener listener) throws RemoteException {}
 
         @Override // android.os.IVold
         public int getStorageLifeTime() throws RemoteException {
@@ -393,12 +391,18 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.IVold
-        public void setGCUrgentPace(int neededSegments, int minSegmentThreshold, float dirtyReclaimRate, float reclaimWeight, int gcPeriod, int minGCSleepTime, int targetDirtyRatio) throws RemoteException {
-        }
+        public void setGCUrgentPace(
+                int neededSegments,
+                int minSegmentThreshold,
+                float dirtyReclaimRate,
+                float reclaimWeight,
+                int gcPeriod,
+                int minGCSleepTime,
+                int targetDirtyRatio)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void refreshLatestWrite() throws RemoteException {
-        }
+        public void refreshLatestWrite() throws RemoteException {}
 
         @Override // android.os.IVold
         public int getWriteAmount() throws RemoteException {
@@ -411,52 +415,60 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.IVold
-        public void unmountAppFuse(int uid, int mountId) throws RemoteException {
-        }
+        public void unmountAppFuse(int uid, int mountId) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void sdeEnable(String volId, int mountFlags, int mountUserId, boolean type, IVoldTaskListener listener, IVoldMountCallback callback) throws RemoteException {
-        }
+        public void sdeEnable(
+                String volId,
+                int mountFlags,
+                int mountUserId,
+                boolean type,
+                IVoldTaskListener listener,
+                IVoldMountCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void fbeEnable() throws RemoteException {
-        }
+        public void fbeEnable() throws RemoteException {}
 
         @Override // android.os.IVold
-        public void initUser0() throws RemoteException {
-        }
+        public void initUser0() throws RemoteException {}
 
         @Override // android.os.IVold
-        public void mountFstab(String blkDevice, String mountPoint, boolean isZoned, String[] userDevices) throws RemoteException {
-        }
+        public void mountFstab(
+                String blkDevice, String mountPoint, boolean isZoned, String[] userDevices)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void encryptFstab(String blkDevice, String mountPoint, boolean shouldFormat, String fsType, boolean isZoned, String[] userDevices) throws RemoteException {
-        }
+        public void encryptFstab(
+                String blkDevice,
+                String mountPoint,
+                boolean shouldFormat,
+                String fsType,
+                boolean isZoned,
+                String[] userDevices)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void setStorageBindingSeed(byte[] seed) throws RemoteException {
-        }
+        public void setStorageBindingSeed(byte[] seed) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void createUserStorageKeys(int userId, boolean ephemeral) throws RemoteException {
-        }
+        public void createUserStorageKeys(int userId, boolean ephemeral) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void destroyUserStorageKeys(int userId) throws RemoteException {
-        }
+        public void destroyUserStorageKeys(int userId) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void setCeStorageProtection(int userId, byte[] secret) throws RemoteException {
-        }
+        public void setCeStorageProtection(int userId, byte[] secret) throws RemoteException {}
 
         @Override // android.os.IVold
-        public int createPassStorage(String packageName, int userId, int uid) throws RemoteException {
+        public int createPassStorage(String packageName, int userId, int uid)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.IVold
-        public int destroyPassStorage(String packageName, int userId, int uid) throws RemoteException {
+        public int destroyPassStorage(String packageName, int userId, int uid)
+                throws RemoteException {
             return 0;
         }
 
@@ -466,17 +478,20 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.IVold
-        public int unlockPassStorage(String packageName, int userId, int uid) throws RemoteException {
+        public int unlockPassStorage(String packageName, int userId, int uid)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.IVold
-        public String getPassStorage(String packageName, int userId, int uid) throws RemoteException {
+        public String getPassStorage(String packageName, int userId, int uid)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IVold
-        public boolean isPassUnlocked(String packageName, int userId, int uid) throws RemoteException {
+        public boolean isPassUnlocked(String packageName, int userId, int uid)
+                throws RemoteException {
             return false;
         }
 
@@ -486,32 +501,30 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.IVold
-        public void unlockCeStorage(int userId, byte[] secret) throws RemoteException {
-        }
+        public void unlockCeStorage(int userId, byte[] secret) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void lockCeStorage(int userId) throws RemoteException {
-        }
+        public void lockCeStorage(int userId) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void prepareUserStorage(String uuid, int userId, int storageFlags) throws RemoteException {
-        }
+        public void prepareUserStorage(String uuid, int userId, int storageFlags)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void destroyUserStorage(String uuid, int userId, int storageFlags) throws RemoteException {
-        }
+        public void destroyUserStorage(String uuid, int userId, int storageFlags)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void prepareSandboxForApp(String packageName, int appId, String sandboxId, int userId) throws RemoteException {
-        }
+        public void prepareSandboxForApp(
+                String packageName, int appId, String sandboxId, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void destroySandboxForApp(String packageName, String sandboxId, int userId) throws RemoteException {
-        }
+        public void destroySandboxForApp(String packageName, String sandboxId, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void startCheckpoint(int retry) throws RemoteException {
-        }
+        public void startCheckpoint(int retry) throws RemoteException {}
 
         @Override // android.os.IVold
         public boolean needsCheckpoint() throws RemoteException {
@@ -529,28 +542,22 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.IVold
-        public void abortChanges(String device, boolean retry) throws RemoteException {
-        }
+        public void abortChanges(String device, boolean retry) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void commitChanges() throws RemoteException {
-        }
+        public void commitChanges() throws RemoteException {}
 
         @Override // android.os.IVold
-        public void prepareCheckpoint() throws RemoteException {
-        }
+        public void prepareCheckpoint() throws RemoteException {}
 
         @Override // android.os.IVold
-        public void restoreCheckpoint(String device) throws RemoteException {
-        }
+        public void restoreCheckpoint(String device) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void restoreCheckpointPart(String device, int count) throws RemoteException {
-        }
+        public void restoreCheckpointPart(String device, int count) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void markBootAttempt() throws RemoteException {
-        }
+        public void markBootAttempt() throws RemoteException {}
 
         @Override // android.os.IVold
         public boolean supportsCheckpoint() throws RemoteException {
@@ -568,24 +575,29 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.IVold
-        public void resetCheckpoint() throws RemoteException {
-        }
+        public void resetCheckpoint() throws RemoteException {}
 
         @Override // android.os.IVold
-        public void earlyBootEnded() throws RemoteException {
-        }
+        public void earlyBootEnded() throws RemoteException {}
 
         @Override // android.os.IVold
-        public String createStubVolume(String sourcePath, String mountPath, String fsType, String fsUuid, String fsLabel, int flags) throws RemoteException {
+        public String createStubVolume(
+                String sourcePath,
+                String mountPath,
+                String fsType,
+                String fsUuid,
+                String fsLabel,
+                int flags)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IVold
-        public void destroyStubVolume(String volId) throws RemoteException {
-        }
+        public void destroyStubVolume(String volId) throws RemoteException {}
 
         @Override // android.os.IVold
-        public FileDescriptor openAppFuseFile(int uid, int mountId, int fileId, int flags) throws RemoteException {
+        public FileDescriptor openAppFuseFile(int uid, int mountId, int fileId, int flags)
+                throws RemoteException {
             return null;
         }
 
@@ -595,25 +607,28 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.IVold
-        public IncrementalFileSystemControlParcel mountIncFs(String backingPath, String targetDir, int flags, String sysfsName) throws RemoteException {
+        public IncrementalFileSystemControlParcel mountIncFs(
+                String backingPath, String targetDir, int flags, String sysfsName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IVold
-        public void unmountIncFs(String dir) throws RemoteException {
-        }
+        public void unmountIncFs(String dir) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void setIncFsMountOptions(IncrementalFileSystemControlParcel control, boolean enableReadLogs, boolean enableReadTimeouts, String sysfsName) throws RemoteException {
-        }
+        public void setIncFsMountOptions(
+                IncrementalFileSystemControlParcel control,
+                boolean enableReadLogs,
+                boolean enableReadTimeouts,
+                String sysfsName)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void bindMount(String sourceDir, String targetDir) throws RemoteException {
-        }
+        public void bindMount(String sourceDir, String targetDir) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void destroyDsuMetadataKey(String dsuSlot) throws RemoteException {
-        }
+        public void destroyDsuMetadataKey(String dsuSlot) throws RemoteException {}
 
         @Override // android.os.IVold
         public long getStorageSize() throws RemoteException {
@@ -626,8 +641,7 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.IVold
-        public void runIdleDefrag(IVoldTaskListener listener) throws RemoteException {
-        }
+        public void runIdleDefrag(IVoldTaskListener listener) throws RemoteException {}
 
         @Override // android.os.IVold
         public long getUsedF2fsFileNode() throws RemoteException {
@@ -635,48 +649,52 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.IVold
-        public void mvFileAtData(String fromPath, String toPath, int mediaProviderUid, int callingAppUid, IVoldTaskListener listener) throws RemoteException {
-        }
+        public void mvFileAtData(
+                String fromPath,
+                String toPath,
+                int mediaProviderUid,
+                int callingAppUid,
+                IVoldTaskListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void cpFileAtData(String fromPath, String toPath, int mediaProviderUid, int callingAppUid, IVoldTaskListener listener) throws RemoteException {
-        }
+        public void cpFileAtData(
+                String fromPath,
+                String toPath,
+                int mediaProviderUid,
+                int callingAppUid,
+                IVoldTaskListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void setMpUidForFileSystem(int userId) throws RemoteException {
-        }
+        public void setMpUidForFileSystem(int userId) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void asecCreate(String id, int sizeMb, String fstype, String key, int ownerUid, boolean external) throws RemoteException {
-        }
+        public void asecCreate(
+                String id, int sizeMb, String fstype, String key, int ownerUid, boolean external)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void asecResize(String id, int sizeMb, String key) throws RemoteException {
-        }
+        public void asecResize(String id, int sizeMb, String key) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void asecFinalize(String id) throws RemoteException {
-        }
+        public void asecFinalize(String id) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void asecFixperms(String id, int gid, String filename) throws RemoteException {
-        }
+        public void asecFixperms(String id, int gid, String filename) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void asecDestroy(String id, boolean force) throws RemoteException {
-        }
+        public void asecDestroy(String id, boolean force) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void asecMount(String id, String key, int ownerUid, boolean readOnly) throws RemoteException {
-        }
+        public void asecMount(String id, String key, int ownerUid, boolean readOnly)
+                throws RemoteException {}
 
         @Override // android.os.IVold
-        public void asecUnmount(String id, boolean force) throws RemoteException {
-        }
+        public void asecUnmount(String id, boolean force) throws RemoteException {}
 
         @Override // android.os.IVold
-        public void asecRename(String oldId, String newId) throws RemoteException {
-        }
+        public void asecRename(String oldId, String newId) throws RemoteException {}
 
         @Override // android.os.IVold
         public String asecPath(String id) throws RemoteException {
@@ -694,8 +712,7 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.IVold
-        public void asecTrim(String id, int sizeMb, String key) throws RemoteException {
-        }
+        public void asecTrim(String id, int sizeMb, String key) throws RemoteException {}
 
         @Override // android.os.IVold
         public int asecGetUsedSpace(String id) throws RemoteException {
@@ -748,7 +765,7 @@ public interface IVold extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVold {
+    public abstract static class Stub extends Binder implements IVold {
         public static final String DESCRIPTOR = "android.os.IVold";
         static final int TRANSACTION_abortChanges = 63;
         static final int TRANSACTION_abortFuse = 2;
@@ -1114,7 +1131,8 @@ public interface IVold extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -1210,7 +1228,8 @@ public interface IVold extends IInterface {
                     String _arg011 = data.readString();
                     int _arg16 = data.readInt();
                     int _arg23 = data.readInt();
-                    IVoldMountCallback _arg3 = IVoldMountCallback.Stub.asInterface(data.readStrongBinder());
+                    IVoldMountCallback _arg3 =
+                            IVoldMountCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     mount(_arg011, _arg16, _arg23, _arg3);
                     reply.writeNoException();
@@ -1230,7 +1249,8 @@ public interface IVold extends IInterface {
                     return true;
                 case 18:
                     String _arg014 = data.readString();
-                    IVoldTaskListener _arg18 = IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IVoldTaskListener _arg18 =
+                            IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     benchmark(_arg014, _arg18);
                     reply.writeNoException();
@@ -1238,7 +1258,8 @@ public interface IVold extends IInterface {
                 case 19:
                     String _arg015 = data.readString();
                     String _arg19 = data.readString();
-                    IVoldTaskListener _arg24 = IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IVoldTaskListener _arg24 =
+                            IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     moveStorage(_arg015, _arg19, _arg24);
                     reply.writeNoException();
@@ -1303,20 +1324,23 @@ public interface IVold extends IInterface {
                     return true;
                 case 28:
                     int _arg024 = data.readInt();
-                    IVoldTaskListener _arg117 = IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IVoldTaskListener _arg117 =
+                            IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     fstrim(_arg024, _arg117);
                     reply.writeNoException();
                     return true;
                 case 29:
                     boolean _arg025 = data.readBoolean();
-                    IVoldTaskListener _arg118 = IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IVoldTaskListener _arg118 =
+                            IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     runIdleMaint(_arg025, _arg118);
                     reply.writeNoException();
                     return true;
                 case 30:
-                    IVoldTaskListener _arg026 = IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IVoldTaskListener _arg026 =
+                            IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     abortIdleMaint(_arg026);
                     reply.writeNoException();
@@ -1367,8 +1391,10 @@ public interface IVold extends IInterface {
                     int _arg122 = data.readInt();
                     int _arg28 = data.readInt();
                     boolean _arg33 = data.readBoolean();
-                    IVoldTaskListener _arg42 = IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
-                    IVoldMountCallback _arg52 = IVoldMountCallback.Stub.asInterface(data.readStrongBinder());
+                    IVoldTaskListener _arg42 =
+                            IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IVoldMountCallback _arg52 =
+                            IVoldMountCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     sdeEnable(_arg030, _arg122, _arg28, _arg33, _arg42, _arg52);
                     reply.writeNoException();
@@ -1616,7 +1642,8 @@ public interface IVold extends IInterface {
                     String _arg44 = data.readString();
                     int _arg54 = data.readInt();
                     data.enforceNoDataAvail();
-                    String _result18 = createStubVolume(_arg053, _arg140, _arg221, _arg37, _arg44, _arg54);
+                    String _result18 =
+                            createStubVolume(_arg053, _arg140, _arg221, _arg37, _arg44, _arg54);
                     reply.writeNoException();
                     reply.writeString(_result18);
                     return true;
@@ -1647,7 +1674,8 @@ public interface IVold extends IInterface {
                     int _arg223 = data.readInt();
                     String _arg39 = data.readString();
                     data.enforceNoDataAvail();
-                    IncrementalFileSystemControlParcel _result21 = mountIncFs(_arg056, _arg142, _arg223, _arg39);
+                    IncrementalFileSystemControlParcel _result21 =
+                            mountIncFs(_arg056, _arg142, _arg223, _arg39);
                     reply.writeNoException();
                     reply.writeTypedObject(_result21, 1);
                     return true;
@@ -1658,7 +1686,10 @@ public interface IVold extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 80:
-                    IncrementalFileSystemControlParcel _arg058 = (IncrementalFileSystemControlParcel) data.readTypedObject(IncrementalFileSystemControlParcel.CREATOR);
+                    IncrementalFileSystemControlParcel _arg058 =
+                            (IncrementalFileSystemControlParcel)
+                                    data.readTypedObject(
+                                            IncrementalFileSystemControlParcel.CREATOR);
                     boolean _arg143 = data.readBoolean();
                     boolean _arg224 = data.readBoolean();
                     String _arg310 = data.readString();
@@ -1690,7 +1721,8 @@ public interface IVold extends IInterface {
                     reply.writeInt(_result23);
                     return true;
                 case 85:
-                    IVoldTaskListener _arg061 = IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IVoldTaskListener _arg061 =
+                            IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     runIdleDefrag(_arg061);
                     reply.writeNoException();
@@ -1705,7 +1737,8 @@ public interface IVold extends IInterface {
                     String _arg145 = data.readString();
                     int _arg225 = data.readInt();
                     int _arg311 = data.readInt();
-                    IVoldTaskListener _arg45 = IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IVoldTaskListener _arg45 =
+                            IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     mvFileAtData(_arg062, _arg145, _arg225, _arg311, _arg45);
                     reply.writeNoException();
@@ -1715,7 +1748,8 @@ public interface IVold extends IInterface {
                     String _arg146 = data.readString();
                     int _arg226 = data.readInt();
                     int _arg312 = data.readInt();
-                    IVoldTaskListener _arg46 = IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
+                    IVoldTaskListener _arg46 =
+                            IVoldTaskListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     cpFileAtData(_arg063, _arg146, _arg226, _arg312, _arg46);
                     reply.writeNoException();
@@ -1980,7 +2014,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void onUserAdded(int userId, int userSerial, int sharesStorageWithUserId) throws RemoteException {
+            public void onUserAdded(int userId, int userSerial, int sharesStorageWithUserId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2096,7 +2131,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void partition(String diskId, int partitionType, int ratio) throws RemoteException {
+            public void partition(String diskId, int partitionType, int ratio)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2131,7 +2167,9 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void mount(String volId, int mountFlags, int mountUserId, IVoldMountCallback callback) throws RemoteException {
+            public void mount(
+                    String volId, int mountFlags, int mountUserId, IVoldMountCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2200,7 +2238,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void moveStorage(String fromVolId, String toVolId, IVoldTaskListener listener) throws RemoteException {
+            public void moveStorage(String fromVolId, String toVolId, IVoldTaskListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2235,7 +2274,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void remountAppStorageDirs(int uid, int pid, String[] packageNames) throws RemoteException {
+            public void remountAppStorageDirs(int uid, int pid, String[] packageNames)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2253,7 +2293,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void unmountAppStorageDirs(int uid, int pid, String[] packageNames) throws RemoteException {
+            public void unmountAppStorageDirs(int uid, int pid, String[] packageNames)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2374,7 +2415,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void runIdleMaint(boolean needGC, IVoldTaskListener listener) throws RemoteException {
+            public void runIdleMaint(boolean needGC, IVoldTaskListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2424,7 +2466,15 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void setGCUrgentPace(int neededSegments, int minSegmentThreshold, float dirtyReclaimRate, float reclaimWeight, int gcPeriod, int minGCSleepTime, int targetDirtyRatio) throws RemoteException {
+            public void setGCUrgentPace(
+                    int neededSegments,
+                    int minSegmentThreshold,
+                    float dirtyReclaimRate,
+                    float reclaimWeight,
+                    int gcPeriod,
+                    int minGCSleepTime,
+                    int targetDirtyRatio)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2514,7 +2564,14 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void sdeEnable(String volId, int mountFlags, int mountUserId, boolean type, IVoldTaskListener listener, IVoldMountCallback callback) throws RemoteException {
+            public void sdeEnable(
+                    String volId,
+                    int mountFlags,
+                    int mountUserId,
+                    boolean type,
+                    IVoldTaskListener listener,
+                    IVoldMountCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2565,7 +2622,9 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void mountFstab(String blkDevice, String mountPoint, boolean isZoned, String[] userDevices) throws RemoteException {
+            public void mountFstab(
+                    String blkDevice, String mountPoint, boolean isZoned, String[] userDevices)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2584,7 +2643,14 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void encryptFstab(String blkDevice, String mountPoint, boolean shouldFormat, String fsType, boolean isZoned, String[] userDevices) throws RemoteException {
+            public void encryptFstab(
+                    String blkDevice,
+                    String mountPoint,
+                    boolean shouldFormat,
+                    String fsType,
+                    boolean isZoned,
+                    String[] userDevices)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2621,7 +2687,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void createUserStorageKeys(int userId, boolean ephemeral) throws RemoteException {
+            public void createUserStorageKeys(int userId, boolean ephemeral)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2671,7 +2738,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public int createPassStorage(String packageName, int userId, int uid) throws RemoteException {
+            public int createPassStorage(String packageName, int userId, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2691,7 +2759,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public int destroyPassStorage(String packageName, int userId, int uid) throws RemoteException {
+            public int destroyPassStorage(String packageName, int userId, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2711,7 +2780,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public int lockPassStorage(String packageName, int userId, int uid) throws RemoteException {
+            public int lockPassStorage(String packageName, int userId, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2731,7 +2801,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public int unlockPassStorage(String packageName, int userId, int uid) throws RemoteException {
+            public int unlockPassStorage(String packageName, int userId, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2751,7 +2822,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public String getPassStorage(String packageName, int userId, int uid) throws RemoteException {
+            public String getPassStorage(String packageName, int userId, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2771,7 +2843,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public boolean isPassUnlocked(String packageName, int userId, int uid) throws RemoteException {
+            public boolean isPassUnlocked(String packageName, int userId, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2841,7 +2914,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void prepareUserStorage(String uuid, int userId, int storageFlags) throws RemoteException {
+            public void prepareUserStorage(String uuid, int userId, int storageFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2859,7 +2933,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void destroyUserStorage(String uuid, int userId, int storageFlags) throws RemoteException {
+            public void destroyUserStorage(String uuid, int userId, int storageFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2877,7 +2952,9 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void prepareSandboxForApp(String packageName, int appId, String sandboxId, int userId) throws RemoteException {
+            public void prepareSandboxForApp(
+                    String packageName, int appId, String sandboxId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -2896,7 +2973,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void destroySandboxForApp(String packageName, String sandboxId, int userId) throws RemoteException {
+            public void destroySandboxForApp(String packageName, String sandboxId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -3157,7 +3235,14 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public String createStubVolume(String sourcePath, String mountPath, String fsType, String fsUuid, String fsLabel, int flags) throws RemoteException {
+            public String createStubVolume(
+                    String sourcePath,
+                    String mountPath,
+                    String fsType,
+                    String fsUuid,
+                    String fsLabel,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -3196,7 +3281,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public FileDescriptor openAppFuseFile(int uid, int mountId, int fileId, int flags) throws RemoteException {
+            public FileDescriptor openAppFuseFile(int uid, int mountId, int fileId, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -3234,7 +3320,9 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public IncrementalFileSystemControlParcel mountIncFs(String backingPath, String targetDir, int flags, String sysfsName) throws RemoteException {
+            public IncrementalFileSystemControlParcel mountIncFs(
+                    String backingPath, String targetDir, int flags, String sysfsName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -3246,7 +3334,10 @@ public interface IVold extends IInterface {
                     _data.writeString(sysfsName);
                     this.mRemote.transact(78, _data, _reply, 32);
                     _reply.readException();
-                    IncrementalFileSystemControlParcel _result = (IncrementalFileSystemControlParcel) _reply.readTypedObject(IncrementalFileSystemControlParcel.CREATOR);
+                    IncrementalFileSystemControlParcel _result =
+                            (IncrementalFileSystemControlParcel)
+                                    _reply.readTypedObject(
+                                            IncrementalFileSystemControlParcel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3271,7 +3362,12 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void setIncFsMountOptions(IncrementalFileSystemControlParcel control, boolean enableReadLogs, boolean enableReadTimeouts, String sysfsName) throws RemoteException {
+            public void setIncFsMountOptions(
+                    IncrementalFileSystemControlParcel control,
+                    boolean enableReadLogs,
+                    boolean enableReadTimeouts,
+                    String sysfsName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -3390,7 +3486,13 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void mvFileAtData(String fromPath, String toPath, int mediaProviderUid, int callingAppUid, IVoldTaskListener listener) throws RemoteException {
+            public void mvFileAtData(
+                    String fromPath,
+                    String toPath,
+                    int mediaProviderUid,
+                    int callingAppUid,
+                    IVoldTaskListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -3410,7 +3512,13 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void cpFileAtData(String fromPath, String toPath, int mediaProviderUid, int callingAppUid, IVoldTaskListener listener) throws RemoteException {
+            public void cpFileAtData(
+                    String fromPath,
+                    String toPath,
+                    int mediaProviderUid,
+                    int callingAppUid,
+                    IVoldTaskListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -3446,7 +3554,14 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void asecCreate(String id, int sizeMb, String fstype, String key, int ownerUid, boolean external) throws RemoteException {
+            public void asecCreate(
+                    String id,
+                    int sizeMb,
+                    String fstype,
+                    String key,
+                    int ownerUid,
+                    boolean external)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -3536,7 +3651,8 @@ public interface IVold extends IInterface {
             }
 
             @Override // android.os.IVold
-            public void asecMount(String id, String key, int ownerUid, boolean readOnly) throws RemoteException {
+            public void asecMount(String id, String key, int ownerUid, boolean readOnly)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();

@@ -10,25 +10,28 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class ContentProviderOperation implements Parcelable {
-    public static final Parcelable.Creator<ContentProviderOperation> CREATOR = new Parcelable.Creator<ContentProviderOperation>() { // from class: android.content.ContentProviderOperation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentProviderOperation createFromParcel(Parcel source) {
-            return new ContentProviderOperation(source);
-        }
+    public static final Parcelable.Creator<ContentProviderOperation> CREATOR =
+            new Parcelable.Creator<ContentProviderOperation>() { // from class:
+                // android.content.ContentProviderOperation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentProviderOperation createFromParcel(Parcel source) {
+                    return new ContentProviderOperation(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentProviderOperation[] newArray(int size) {
-            return new ContentProviderOperation[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentProviderOperation[] newArray(int size) {
+                    return new ContentProviderOperation[size];
+                }
+            };
     private static final String TAG = "ContentProviderOperation";
     public static final int TYPE_ASSERT = 4;
     public static final int TYPE_CALL = 5;
@@ -210,7 +213,9 @@ public class ContentProviderOperation implements Parcelable {
         return this.mType == 4;
     }
 
-    public ContentProviderResult apply(ContentProvider provider, ContentProviderResult[] backRefs, int numBackRefs) throws OperationApplicationException {
+    public ContentProviderResult apply(
+            ContentProvider provider, ContentProviderResult[] backRefs, int numBackRefs)
+            throws OperationApplicationException {
         if (this.mExceptionAllowed) {
             try {
                 return applyInternal(provider, backRefs, numBackRefs);
@@ -221,7 +226,9 @@ public class ContentProviderOperation implements Parcelable {
         return applyInternal(provider, backRefs, numBackRefs);
     }
 
-    private ContentProviderResult applyInternal(ContentProvider provider, ContentProviderResult[] backRefs, int numBackRefs) throws OperationApplicationException {
+    private ContentProviderResult applyInternal(
+            ContentProvider provider, ContentProviderResult[] backRefs, int numBackRefs)
+            throws OperationApplicationException {
         int numRows;
         ContentValues values = resolveValueBackReferences(backRefs, numBackRefs);
         Bundle extras = resolveExtrasBackReferences(backRefs, numBackRefs);
@@ -231,14 +238,17 @@ public class ContentProviderOperation implements Parcelable {
         }
         if (this.mSelectionArgs != null) {
             extras = extras != null ? extras : new Bundle();
-            extras.putStringArray(ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS, resolveSelectionArgsBackReferences(backRefs, numBackRefs));
+            extras.putStringArray(
+                    ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS,
+                    resolveSelectionArgsBackReferences(backRefs, numBackRefs));
         }
         if (this.mType == 1) {
             Uri newUri = provider.insert(this.mUri, values, extras);
             if (newUri != null) {
                 return new ContentProviderResult(newUri);
             }
-            throw new OperationApplicationException("Insert into " + this.mUri + " returned no result");
+            throw new OperationApplicationException(
+                    "Insert into " + this.mUri + " returned no result");
         }
         if (this.mType == 5) {
             Bundle res = provider.call(this.mUri.getAuthority(), this.mMethod, this.mArg, extras);
@@ -259,7 +269,9 @@ public class ContentProviderOperation implements Parcelable {
                         for (Map.Entry<String, Object> entry : values.valueSet()) {
                             projectionList.add(entry.getKey());
                         }
-                        projection = (String[]) projectionList.toArray(new String[projectionList.size()]);
+                        projection =
+                                (String[])
+                                        projectionList.toArray(new String[projectionList.size()]);
                     }
                     Cursor cursor = provider.query(this.mUri, projection, extras, null);
                     try {
@@ -270,7 +282,13 @@ public class ContentProviderOperation implements Parcelable {
                                     String cursorValue = cursor.getString(i);
                                     String expectedValue = values.getAsString(projection[i]);
                                     if (!TextUtils.equals(cursorValue, expectedValue)) {
-                                        throw new OperationApplicationException("Found value " + cursorValue + " when expected " + expectedValue + " for column " + projection[i]);
+                                        throw new OperationApplicationException(
+                                                "Found value "
+                                                        + cursorValue
+                                                        + " when expected "
+                                                        + expectedValue
+                                                        + " for column "
+                                                        + projection[i]);
                                     }
                                 }
                             }
@@ -287,12 +305,14 @@ public class ContentProviderOperation implements Parcelable {
             }
         }
         if (this.mExpectedCount != null && this.mExpectedCount.intValue() != numRows) {
-            throw new OperationApplicationException("Expected " + this.mExpectedCount + " rows but actual " + numRows);
+            throw new OperationApplicationException(
+                    "Expected " + this.mExpectedCount + " rows but actual " + numRows);
         }
         return new ContentProviderResult(numRows);
     }
 
-    public ContentValues resolveValueBackReferences(ContentProviderResult[] backRefs, int numBackRefs) {
+    public ContentValues resolveValueBackReferences(
+            ContentProviderResult[] backRefs, int numBackRefs) {
         Object resolved;
         if (this.mValues != null) {
             ContentValues values = new ContentValues();
@@ -328,7 +348,8 @@ public class ContentProviderOperation implements Parcelable {
         return null;
     }
 
-    public String[] resolveSelectionArgsBackReferences(ContentProviderResult[] backRefs, int numBackRefs) {
+    public String[] resolveSelectionArgsBackReferences(
+            ContentProviderResult[] backRefs, int numBackRefs) {
         Object resolved;
         if (this.mSelectionArgs != null) {
             int max = -1;
@@ -403,19 +424,21 @@ public class ContentProviderOperation implements Parcelable {
     }
 
     public static class BackReference implements Parcelable {
-        public static final Parcelable.Creator<BackReference> CREATOR = new Parcelable.Creator<BackReference>() { // from class: android.content.ContentProviderOperation.BackReference.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BackReference createFromParcel(Parcel source) {
-                return new BackReference(source);
-            }
+        public static final Parcelable.Creator<BackReference> CREATOR =
+                new Parcelable.Creator<BackReference>() { // from class:
+                    // android.content.ContentProviderOperation.BackReference.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BackReference createFromParcel(Parcel source) {
+                        return new BackReference(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BackReference[] newArray(int size) {
-                return new BackReference[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BackReference[] newArray(int size) {
+                        return new BackReference[size];
+                    }
+                };
         private final int fromIndex;
         private final String fromKey;
 
@@ -436,7 +459,12 @@ public class ContentProviderOperation implements Parcelable {
         public Object resolve(ContentProviderResult[] backRefs, int numBackRefs) {
             if (this.fromIndex >= numBackRefs) {
                 Log.e(ContentProviderOperation.TAG, toString());
-                throw new ArrayIndexOutOfBoundsException("asked for back ref " + this.fromIndex + " but there are only " + numBackRefs + " back refs");
+                throw new ArrayIndexOutOfBoundsException(
+                        "asked for back ref "
+                                + this.fromIndex
+                                + " but there are only "
+                                + numBackRefs
+                                + " back refs");
             }
             ContentProviderResult backRef = backRefs[this.fromIndex];
             if (backRef.extras != null) {
@@ -497,7 +525,9 @@ public class ContentProviderOperation implements Parcelable {
             if (this.mType == 2 && (this.mValues == null || this.mValues.isEmpty())) {
                 throw new IllegalArgumentException("Empty values");
             }
-            if (this.mType == 4 && ((this.mValues == null || this.mValues.isEmpty()) && this.mExpectedCount == null)) {
+            if (this.mType == 4
+                    && ((this.mValues == null || this.mValues.isEmpty())
+                            && this.mExpectedCount == null)) {
                 throw new IllegalArgumentException("Empty values");
             }
             return new ContentProviderOperation(this);
@@ -571,7 +601,9 @@ public class ContentProviderOperation implements Parcelable {
             assertValuesAllowed();
             ArrayMap<String, Object> values = contentValues.getValues();
             for (int i = 0; i < values.size(); i++) {
-                setValue(values.keyAt(i), new BackReference(((Integer) values.valueAt(i)).intValue(), null));
+                setValue(
+                        values.keyAt(i),
+                        new BackReference(((Integer) values.valueAt(i)).intValue(), null));
             }
             return this;
         }
@@ -641,7 +673,8 @@ public class ContentProviderOperation implements Parcelable {
 
         public Builder withExpectedCount(int count) {
             if (this.mType != 2 && this.mType != 3 && this.mType != 4) {
-                throw new IllegalArgumentException("only updates, deletes, and asserts can have expected counts");
+                throw new IllegalArgumentException(
+                        "only updates, deletes, and asserts can have expected counts");
             }
             this.mExpectedCount = Integer.valueOf(count);
             return this;
@@ -669,7 +702,9 @@ public class ContentProviderOperation implements Parcelable {
                     return;
                 case 3:
                 default:
-                    throw new IllegalArgumentException("Values not supported for " + ContentProviderOperation.typeToString(this.mType));
+                    throw new IllegalArgumentException(
+                            "Values not supported for "
+                                    + ContentProviderOperation.typeToString(this.mType));
             }
         }
 
@@ -680,7 +715,9 @@ public class ContentProviderOperation implements Parcelable {
                 case 4:
                     return;
                 default:
-                    throw new IllegalArgumentException("Selection not supported for " + ContentProviderOperation.typeToString(this.mType));
+                    throw new IllegalArgumentException(
+                            "Selection not supported for "
+                                    + ContentProviderOperation.typeToString(this.mType));
             }
         }
 
@@ -693,7 +730,9 @@ public class ContentProviderOperation implements Parcelable {
                 case 5:
                     return;
                 default:
-                    throw new IllegalArgumentException("Extras not supported for " + ContentProviderOperation.typeToString(this.mType));
+                    throw new IllegalArgumentException(
+                            "Extras not supported for "
+                                    + ContentProviderOperation.typeToString(this.mType));
             }
         }
     }

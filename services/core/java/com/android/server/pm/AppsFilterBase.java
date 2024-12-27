@@ -8,6 +8,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags;
 import com.android.internal.pm.parsing.pkg.AndroidPackageInternal;
 import com.android.server.am.PendingIntentController$$ExternalSyntheticOutline0;
@@ -20,7 +21,9 @@ import com.android.server.utils.WatchedArrayMap;
 import com.android.server.utils.WatchedArraySet;
 import com.android.server.utils.WatchedSparseBooleanMatrix;
 import com.android.server.utils.WatchedSparseSetArray;
+
 import com.samsung.android.server.pm.PmServerUtils;
+
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -59,7 +62,13 @@ public abstract class AppsFilterBase {
     public volatile boolean mNeedToUpdateCacheForImplicitAccess = false;
     public final AtomicBoolean mCacheValid = new AtomicBoolean(false);
 
-    public static void dumpPackageSet(PrintWriter printWriter, Object obj, ArraySet arraySet, String str, String str2, AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
+    public static void dumpPackageSet(
+            PrintWriter printWriter,
+            Object obj,
+            ArraySet arraySet,
+            String str,
+            String str2,
+            AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
         if (arraySet == null || arraySet.size() <= 0) {
             return;
         }
@@ -69,65 +78,144 @@ public abstract class AppsFilterBase {
             while (it.hasNext()) {
                 Object next = it.next();
                 if (obj == null || obj.equals(next)) {
-                    printWriter.append((CharSequence) str2).append("  ").println((Object) appsFilterBase$$ExternalSyntheticLambda0.toString(next));
+                    printWriter
+                            .append((CharSequence) str2)
+                            .append("  ")
+                            .println(
+                                    (Object)
+                                            appsFilterBase$$ExternalSyntheticLambda0.toString(
+                                                    next));
                 }
             }
         }
     }
 
-    public static void dumpQueriesMap(PrintWriter printWriter, Integer num, WatchedSparseSetArray watchedSparseSetArray, String str, AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
+    public static void dumpQueriesMap(
+            PrintWriter printWriter,
+            Integer num,
+            WatchedSparseSetArray watchedSparseSetArray,
+            String str,
+            AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
         for (int i = 0; i < watchedSparseSetArray.mStorage.size(); i++) {
             int keyAt = watchedSparseSetArray.mStorage.keyAt(i);
             Integer valueOf = Integer.valueOf(keyAt);
             if (valueOf.equals(num)) {
-                dumpPackageSet(printWriter, null, watchedSparseSetArray.mStorage.get(keyAt), appsFilterBase$$ExternalSyntheticLambda0.toString(valueOf), str, appsFilterBase$$ExternalSyntheticLambda0);
+                dumpPackageSet(
+                        printWriter,
+                        null,
+                        watchedSparseSetArray.mStorage.get(keyAt),
+                        appsFilterBase$$ExternalSyntheticLambda0.toString(valueOf),
+                        str,
+                        appsFilterBase$$ExternalSyntheticLambda0);
             } else {
-                dumpPackageSet(printWriter, num, watchedSparseSetArray.mStorage.get(keyAt), appsFilterBase$$ExternalSyntheticLambda0.toString(valueOf), str, appsFilterBase$$ExternalSyntheticLambda0);
+                dumpPackageSet(
+                        printWriter,
+                        num,
+                        watchedSparseSetArray.mStorage.get(keyAt),
+                        appsFilterBase$$ExternalSyntheticLambda0.toString(valueOf),
+                        str,
+                        appsFilterBase$$ExternalSyntheticLambda0);
             }
         }
     }
 
     public final boolean canQueryPackage(AndroidPackage androidPackage, String str) {
-        if (UserHandle.getAppId(androidPackage.getUid()) >= 10000 && this.mFeatureConfig.packageIsEnabled(androidPackage) && !androidPackage.getRequestedPermissions().contains("android.permission.QUERY_ALL_PACKAGES")) {
-            return !androidPackage.getQueriesPackages().isEmpty() && androidPackage.getQueriesPackages().contains(str);
+        if (UserHandle.getAppId(androidPackage.getUid()) >= 10000
+                && this.mFeatureConfig.packageIsEnabled(androidPackage)
+                && !androidPackage
+                        .getRequestedPermissions()
+                        .contains("android.permission.QUERY_ALL_PACKAGES")) {
+            return !androidPackage.getQueriesPackages().isEmpty()
+                    && androidPackage.getQueriesPackages().contains(str);
         }
         return true;
     }
 
-    public void dumpForceQueryable(PrintWriter printWriter, Integer num, AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
+    public void dumpForceQueryable(
+            PrintWriter printWriter,
+            Integer num,
+            AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
         printWriter.println("  queries via forceQueryable:");
-        dumpPackageSet(printWriter, num, this.mForceQueryable.mStorage, "forceQueryable", "  ", appsFilterBase$$ExternalSyntheticLambda0);
+        dumpPackageSet(
+                printWriter,
+                num,
+                this.mForceQueryable.mStorage,
+                "forceQueryable",
+                "  ",
+                appsFilterBase$$ExternalSyntheticLambda0);
     }
 
-    public void dumpQueriesViaComponent(PrintWriter printWriter, Integer num, AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
+    public void dumpQueriesViaComponent(
+            PrintWriter printWriter,
+            Integer num,
+            AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
         printWriter.println("  queries via component:");
-        dumpQueriesMap(printWriter, num, this.mQueriesViaComponent, "    ", appsFilterBase$$ExternalSyntheticLambda0);
+        dumpQueriesMap(
+                printWriter,
+                num,
+                this.mQueriesViaComponent,
+                "    ",
+                appsFilterBase$$ExternalSyntheticLambda0);
     }
 
-    public void dumpQueriesViaImplicitlyQueryable(PrintWriter printWriter, Integer num, int[] iArr, AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
+    public void dumpQueriesViaImplicitlyQueryable(
+            PrintWriter printWriter,
+            Integer num,
+            int[] iArr,
+            AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
         printWriter.println("  queryable via interaction:");
         for (int i : iArr) {
             printWriter.append("    User ").append((CharSequence) Integer.toString(i)).println(":");
             Integer num2 = null;
-            dumpQueriesMap(printWriter, num == null ? null : Integer.valueOf(UserHandle.getUid(i, num.intValue())), this.mImplicitlyQueryable, "      ", appsFilterBase$$ExternalSyntheticLambda0);
+            dumpQueriesMap(
+                    printWriter,
+                    num == null ? null : Integer.valueOf(UserHandle.getUid(i, num.intValue())),
+                    this.mImplicitlyQueryable,
+                    "      ",
+                    appsFilterBase$$ExternalSyntheticLambda0);
             if (num != null) {
                 num2 = Integer.valueOf(UserHandle.getUid(i, num.intValue()));
             }
-            dumpQueriesMap(printWriter, num2, this.mRetainedImplicitlyQueryable, "      ", appsFilterBase$$ExternalSyntheticLambda0);
+            dumpQueriesMap(
+                    printWriter,
+                    num2,
+                    this.mRetainedImplicitlyQueryable,
+                    "      ",
+                    appsFilterBase$$ExternalSyntheticLambda0);
         }
     }
 
-    public void dumpQueriesViaPackage(PrintWriter printWriter, Integer num, AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
+    public void dumpQueriesViaPackage(
+            PrintWriter printWriter,
+            Integer num,
+            AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
         printWriter.println("  queries via package name:");
-        dumpQueriesMap(printWriter, num, this.mQueriesViaPackage, "    ", appsFilterBase$$ExternalSyntheticLambda0);
+        dumpQueriesMap(
+                printWriter,
+                num,
+                this.mQueriesViaPackage,
+                "    ",
+                appsFilterBase$$ExternalSyntheticLambda0);
     }
 
-    public void dumpQueriesViaUsesLibrary(PrintWriter printWriter, Integer num, AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
+    public void dumpQueriesViaUsesLibrary(
+            PrintWriter printWriter,
+            Integer num,
+            AppsFilterBase$$ExternalSyntheticLambda0 appsFilterBase$$ExternalSyntheticLambda0) {
         printWriter.println("  queryable via uses-library:");
-        dumpQueriesMap(printWriter, num, this.mQueryableViaUsesLibrary, "    ", appsFilterBase$$ExternalSyntheticLambda0);
+        dumpQueriesMap(
+                printWriter,
+                num,
+                this.mQueryableViaUsesLibrary,
+                "    ",
+                appsFilterBase$$ExternalSyntheticLambda0);
     }
 
-    public final SparseArray getVisibilityAllowList(PackageDataSnapshot packageDataSnapshot, PackageStateInternal packageStateInternal, int[] iArr, ArrayMap arrayMap) {
+    public final SparseArray getVisibilityAllowList(
+            PackageDataSnapshot packageDataSnapshot,
+            PackageStateInternal packageStateInternal,
+            int[] iArr,
+            ArrayMap arrayMap) {
         int binarySearch;
         int i;
         int i2;
@@ -146,11 +234,18 @@ public abstract class AppsFilterBase {
             int[] iArr4 = iArr2;
             int i6 = i3;
             while (size2 >= 0) {
-                PackageStateInternal packageStateInternal2 = (PackageStateInternal) arrayMap.valueAt(size2);
+                PackageStateInternal packageStateInternal2 =
+                        (PackageStateInternal) arrayMap.valueAt(size2);
                 int appId = packageStateInternal2.getAppId();
-                if (appId >= 10000 && (binarySearch = Arrays.binarySearch(iArr3, i3, i6, appId)) < 0) {
+                if (appId >= 10000
+                        && (binarySearch = Arrays.binarySearch(iArr3, i3, i6, appId)) < 0) {
                     i = i6;
-                    if (shouldFilterApplication(packageDataSnapshot, UserHandle.getUid(i5, appId), packageStateInternal2, packageStateInternal, i5)) {
+                    if (shouldFilterApplication(
+                            packageDataSnapshot,
+                            UserHandle.getUid(i5, appId),
+                            packageStateInternal2,
+                            packageStateInternal,
+                            i5)) {
                         i2 = 0;
                     } else {
                         int[] iArr5 = iArr4 == null ? new int[size] : iArr4;
@@ -181,8 +276,13 @@ public abstract class AppsFilterBase {
         return sparseArray;
     }
 
-    public SparseArray getVisibilityAllowList(PackageDataSnapshot packageDataSnapshot, PackageStateInternal packageStateInternal, int[] iArr, WatchedArrayMap watchedArrayMap) {
-        return getVisibilityAllowList(packageDataSnapshot, packageStateInternal, iArr, watchedArrayMap.mStorage);
+    public SparseArray getVisibilityAllowList(
+            PackageDataSnapshot packageDataSnapshot,
+            PackageStateInternal packageStateInternal,
+            int[] iArr,
+            WatchedArrayMap watchedArrayMap) {
+        return getVisibilityAllowList(
+                packageDataSnapshot, packageStateInternal, iArr, watchedArrayMap.mStorage);
     }
 
     public boolean isForceQueryable(int i) {
@@ -200,13 +300,25 @@ public abstract class AppsFilterBase {
         return watchedSparseSetArray.mStorage.contains(i, Integer.valueOf(i2));
     }
 
-    public boolean isQueryableViaComponentWhenRequireRecompute(ArrayMap arrayMap, PackageStateInternal packageStateInternal, ArraySet arraySet, AndroidPackage androidPackage, int i, int i2) {
+    public boolean isQueryableViaComponentWhenRequireRecompute(
+            ArrayMap arrayMap,
+            PackageStateInternal packageStateInternal,
+            ArraySet arraySet,
+            AndroidPackage androidPackage,
+            int i,
+            int i2) {
         if (packageStateInternal != null) {
-            return packageStateInternal.getPkg() != null && AppsFilterUtils.canQueryViaComponents(packageStateInternal.getPkg(), androidPackage, this.mProtectedBroadcasts);
+            return packageStateInternal.getPkg() != null
+                    && AppsFilterUtils.canQueryViaComponents(
+                            packageStateInternal.getPkg(),
+                            androidPackage,
+                            this.mProtectedBroadcasts);
         }
         for (int size = arraySet.size() - 1; size >= 0; size--) {
             AndroidPackageInternal pkg = ((PackageStateInternal) arraySet.valueAt(size)).getPkg();
-            if (pkg != null && AppsFilterUtils.canQueryViaComponents(pkg, androidPackage, this.mProtectedBroadcasts)) {
+            if (pkg != null
+                    && AppsFilterUtils.canQueryViaComponents(
+                            pkg, androidPackage, this.mProtectedBroadcasts)) {
                 return true;
             }
         }
@@ -233,23 +345,35 @@ public abstract class AppsFilterBase {
         return watchedSparseSetArray.mStorage.contains(i, Integer.valueOf(i2));
     }
 
-    public final boolean shouldFilterApplication(PackageDataSnapshot packageDataSnapshot, int i, Object obj, PackageStateInternal packageStateInternal, int i2) {
+    public final boolean shouldFilterApplication(
+            PackageDataSnapshot packageDataSnapshot,
+            int i,
+            Object obj,
+            PackageStateInternal packageStateInternal,
+            int i2) {
         int appId = UserHandle.getAppId(i);
-        if (appId < 10000 || packageStateInternal.getAppId() < 10000 || appId == packageStateInternal.getAppId()) {
+        if (appId < 10000
+                || packageStateInternal.getAppId() < 10000
+                || appId == packageStateInternal.getAppId()) {
             return false;
         }
         if (Process.isSdkSandboxUid(appId)) {
             int uid = UserHandle.getUid(i2, packageStateInternal.getAppId());
-            if (isForceQueryable(packageStateInternal.getAppId()) || isImplicitlyQueryable(i, uid)) {
+            if (isForceQueryable(packageStateInternal.getAppId())
+                    || isImplicitlyQueryable(i, uid)) {
                 return false;
             }
-            return (Flags.allowSdkSandboxQueryIntentActivities() && uid == Process.getAppUidForSdkSandboxUid(i)) ? false : true;
+            return (Flags.allowSdkSandboxQueryIntentActivities()
+                            && uid == Process.getAppUidForSdkSandboxUid(i))
+                    ? false
+                    : true;
         }
         if (this.mCacheReady && this.mCacheEnabled) {
             if (!shouldFilterApplicationUsingCache(i, packageStateInternal.getAppId(), i2)) {
                 return false;
             }
-        } else if (!shouldFilterApplicationInternal((Computer) packageDataSnapshot, i, obj, packageStateInternal, i2)) {
+        } else if (!shouldFilterApplicationInternal(
+                (Computer) packageDataSnapshot, i, obj, packageStateInternal, i2)) {
             return false;
         }
         if (this.mFeatureConfig.isLoggingEnabled(appId)) {
@@ -263,7 +387,12 @@ public abstract class AppsFilterBase {
         return true;
     }
 
-    public final boolean shouldFilterApplicationInternal(Computer computer, int i, Object obj, PackageStateInternal packageStateInternal, int i2) {
+    public final boolean shouldFilterApplicationInternal(
+            Computer computer,
+            int i,
+            Object obj,
+            PackageStateInternal packageStateInternal,
+            int i2) {
         if (!this.mFeatureConfig.isGloballyEnabled()) {
             return false;
         }
@@ -281,7 +410,8 @@ public abstract class AppsFilterBase {
         if (obj instanceof PackageStateInternal) {
             PackageStateInternal packageStateInternal3 = (PackageStateInternal) obj;
             if (packageStateInternal3.hasSharedUser()) {
-                SharedUserSetting sharedUser = computer.getSharedUser(packageStateInternal3.getSharedUserAppId());
+                SharedUserSetting sharedUser =
+                        computer.getSharedUser(packageStateInternal3.getSharedUserAppId());
                 if (sharedUser != null) {
                     arraySet.addAll(sharedUser.mPackages.mStorage);
                 }
@@ -299,48 +429,71 @@ public abstract class AppsFilterBase {
                     return false;
                 }
             }
-        } else if (packageStateInternal4.getPkg() != null && !this.mFeatureConfig.packageIsEnabled(packageStateInternal4.getPkg())) {
+        } else if (packageStateInternal4.getPkg() != null
+                && !this.mFeatureConfig.packageIsEnabled(packageStateInternal4.getPkg())) {
             return false;
         }
         if (packageStateInternal4 == null) {
             for (int size2 = arraySet.size() - 1; size2 >= 0; size2--) {
-                AndroidPackageInternal pkg2 = ((PackageStateInternal) arraySet.valueAt(size2)).getPkg();
-                if (pkg2 != null && pkg2.getRequestedPermissions().contains("android.permission.QUERY_ALL_PACKAGES")) {
+                AndroidPackageInternal pkg2 =
+                        ((PackageStateInternal) arraySet.valueAt(size2)).getPkg();
+                if (pkg2 != null
+                        && pkg2.getRequestedPermissions()
+                                .contains("android.permission.QUERY_ALL_PACKAGES")) {
                     return false;
                 }
             }
-        } else if (packageStateInternal4.getPkg() != null && packageStateInternal4.getPkg().getRequestedPermissions().contains("android.permission.QUERY_ALL_PACKAGES")) {
+        } else if (packageStateInternal4.getPkg() != null
+                && packageStateInternal4
+                        .getPkg()
+                        .getRequestedPermissions()
+                        .contains("android.permission.QUERY_ALL_PACKAGES")) {
             return false;
         }
         AndroidPackageInternal pkg3 = packageStateInternal.getPkg();
         if (pkg3 == null) {
             return !PmServerUtils.installedOnSdcardAsUser(packageStateInternal, 8192L, i2);
         }
-        if (pkg3.isStaticSharedLibrary() || isForceQueryable(appId2) || isQueryableViaPackage(appId, appId2)) {
+        if (pkg3.isStaticSharedLibrary()
+                || isForceQueryable(appId2)
+                || isQueryableViaPackage(appId, appId2)) {
             return false;
         }
         if (this.mQueriesViaComponentRequireRecompute.get()) {
-            if (isQueryableViaComponentWhenRequireRecompute(computer.getPackageStates(), packageStateInternal4, arraySet, pkg3, appId, appId2)) {
+            if (isQueryableViaComponentWhenRequireRecompute(
+                    computer.getPackageStates(),
+                    packageStateInternal4,
+                    arraySet,
+                    pkg3,
+                    appId,
+                    appId2)) {
                 return false;
             }
         } else if (isQueryableViaComponent(appId, appId2)) {
             return false;
         }
-        if (isImplicitlyQueryable(i, UserHandle.getUid(i2, appId2)) || isRetainedImplicitlyQueryable(i, UserHandle.getUid(i2, appId2))) {
+        if (isImplicitlyQueryable(i, UserHandle.getUid(i2, appId2))
+                || isRetainedImplicitlyQueryable(i, UserHandle.getUid(i2, appId2))) {
             return false;
         }
         String packageName = pkg3.getPackageName();
         if (!arraySet.isEmpty()) {
             int size3 = arraySet.size();
             for (int i3 = 0; i3 < size3; i3++) {
-                if (this.mOverlayReferenceMapper.isValidActor(packageName, ((PackageStateInternal) arraySet.valueAt(i3)).getPackageName())) {
+                if (this.mOverlayReferenceMapper.isValidActor(
+                        packageName,
+                        ((PackageStateInternal) arraySet.valueAt(i3)).getPackageName())) {
                     return false;
                 }
             }
-        } else if (this.mOverlayReferenceMapper.isValidActor(packageName, packageStateInternal4.getPackageName())) {
+        } else if (this.mOverlayReferenceMapper.isValidActor(
+                packageName, packageStateInternal4.getPackageName())) {
             return false;
         }
-        return (isQueryableViaUsesLibrary(appId, appId2) || isQueryableViaUsesPermission(appId, appId2)) ? false : true;
+        return (isQueryableViaUsesLibrary(appId, appId2)
+                        || isQueryableViaUsesPermission(appId, appId2))
+                ? false
+                : true;
     }
 
     public boolean shouldFilterApplicationUsingCache(int i, int i2, int i3) {
@@ -352,7 +505,12 @@ public abstract class AppsFilterBase {
         int uid = UserHandle.getUid(i3, i2);
         int indexOfKey2 = this.mShouldFilterCache.indexOfKey(uid);
         if (indexOfKey2 < 0) {
-            PendingIntentController$$ExternalSyntheticOutline0.m(i, uid, "Encountered calling -> target with no cached rules: ", " -> ", "AppsFilter");
+            PendingIntentController$$ExternalSyntheticOutline0.m(
+                    i,
+                    uid,
+                    "Encountered calling -> target with no cached rules: ",
+                    " -> ",
+                    "AppsFilter");
             return true;
         }
         WatchedSparseBooleanMatrix watchedSparseBooleanMatrix = this.mShouldFilterCache;

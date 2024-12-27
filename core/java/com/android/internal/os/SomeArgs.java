@@ -28,8 +28,7 @@ public final class SomeArgs {
     private SomeArgs mNext;
     int mWaitState = 0;
 
-    private SomeArgs() {
-    }
+    private SomeArgs() {}
 
     public static SomeArgs obtain() {
         synchronized (sPoolLock) {

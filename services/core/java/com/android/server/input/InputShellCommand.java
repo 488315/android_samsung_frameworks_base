@@ -11,8 +11,10 @@ import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.HashMap;
@@ -40,7 +42,11 @@ public final class InputShellCommand extends ShellCommand {
         arrayMap.put(118, 327680);
         MODIFIER = Collections.unmodifiableMap(arrayMap);
         ArrayMap arrayMap2 = new ArrayMap();
-        arrayMap2.put("keyboard", Integer.valueOf(FrameworkStatsLog.HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP));
+        arrayMap2.put(
+                "keyboard",
+                Integer.valueOf(
+                        FrameworkStatsLog
+                                .HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP));
         arrayMap2.put("dpad", 513);
         arrayMap2.put("gamepad", 1025);
         arrayMap2.put("touchscreen", 4098);
@@ -70,8 +76,15 @@ public final class InputShellCommand extends ShellCommand {
         this.mInputEventInjector.accept(keyEvent, Integer.valueOf(z ? 0 : 2));
     }
 
-    public final void injectMotionEvent(int i, int i2, long j, long j2, float f, float f2, float f3, int i3) {
-        injectMotionEvent(i, i2, j, j2, Map.of(0, Float.valueOf(f), 1, Float.valueOf(f2), 2, Float.valueOf(f3)), i3);
+    public final void injectMotionEvent(
+            int i, int i2, long j, long j2, float f, float f2, float f3, int i3) {
+        injectMotionEvent(
+                i,
+                i2,
+                j,
+                j2,
+                Map.of(0, Float.valueOf(f), 1, Float.valueOf(f2), 2, Float.valueOf(f3)),
+                i3);
     }
 
     public final void injectMotionEvent(int i, int i2, long j, long j2, Map map, int i3) {
@@ -104,7 +117,8 @@ public final class InputShellCommand extends ShellCommand {
         MotionEvent.PointerCoords[] pointerCoordsArr = {pointerCoords};
         pointerCoords.size = 1.0f;
         for (Map.Entry entry : map.entrySet()) {
-            pointerCoordsArr[0].setAxisValue(((Integer) entry.getKey()).intValue(), ((Float) entry.getValue()).floatValue());
+            pointerCoordsArr[0].setAxisValue(
+                    ((Integer) entry.getKey()).intValue(), ((Float) entry.getValue()).floatValue());
         }
         int i6 = (i3 != -1 || (i & 2) == 0) ? i3 : 0;
         int[] deviceIds = InputDevice.getDeviceIds();
@@ -122,7 +136,24 @@ public final class InputShellCommand extends ShellCommand {
                 i5 = 0;
             }
         }
-        this.mInputEventInjector.accept(MotionEvent.obtain(j, j2, i2, 1, pointerPropertiesArr, pointerCoordsArr, 0, 0, 1.0f, 1.0f, i5, 0, i, i6, 0), 2);
+        this.mInputEventInjector.accept(
+                MotionEvent.obtain(
+                        j,
+                        j2,
+                        i2,
+                        1,
+                        pointerPropertiesArr,
+                        pointerCoordsArr,
+                        0,
+                        0,
+                        1.0f,
+                        1.0f,
+                        i5,
+                        0,
+                        i,
+                        i6,
+                        0),
+                2);
     }
 
     public final int onCommand(String str) {
@@ -148,7 +179,8 @@ public final class InputShellCommand extends ShellCommand {
                             i2 = Math.max(parseInt, 0);
                         }
                     } catch (NumberFormatException unused) {
-                        throw new IllegalArgumentException("Error: Invalid arguments for display ID.");
+                        throw new IllegalArgumentException(
+                                "Error: Invalid arguments for display ID.");
                     }
                 }
             }
@@ -166,8 +198,17 @@ public final class InputShellCommand extends ShellCommand {
                 float parseFloat = Float.parseFloat(getNextArgRequired());
                 float parseFloat2 = Float.parseFloat(getNextArgRequired());
                 long uptimeMillis = SystemClock.uptimeMillis();
-                injectMotionEvent(i4, 0, uptimeMillis, uptimeMillis, parseFloat, parseFloat2, 1.0f, i3);
-                injectMotionEvent(i4, 1, uptimeMillis, uptimeMillis, parseFloat, parseFloat2, FullScreenMagnificationGestureHandler.MAX_SCALE, i3);
+                injectMotionEvent(
+                        i4, 0, uptimeMillis, uptimeMillis, parseFloat, parseFloat2, 1.0f, i3);
+                injectMotionEvent(
+                        i4,
+                        1,
+                        uptimeMillis,
+                        uptimeMillis,
+                        parseFloat,
+                        parseFloat2,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        i3);
             } else if ("swipe".equals(str3)) {
                 if (i == 0) {
                     i = 4098;
@@ -181,8 +222,24 @@ public final class InputShellCommand extends ShellCommand {
             } else if ("press".equals(str3)) {
                 int i5 = i == 0 ? 65540 : i;
                 long uptimeMillis2 = SystemClock.uptimeMillis();
-                injectMotionEvent(i5, 0, uptimeMillis2, uptimeMillis2, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f, i3);
-                injectMotionEvent(i5, 1, uptimeMillis2, uptimeMillis2, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, i3);
+                injectMotionEvent(
+                        i5,
+                        0,
+                        uptimeMillis2,
+                        uptimeMillis2,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        1.0f,
+                        i3);
+                injectMotionEvent(
+                        i5,
+                        1,
+                        uptimeMillis2,
+                        uptimeMillis2,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        i3);
             } else if ("roll".equals(str3)) {
                 if (i == 0) {
                     i = 65540;
@@ -190,7 +247,15 @@ public final class InputShellCommand extends ShellCommand {
                 float parseFloat3 = Float.parseFloat(getNextArgRequired());
                 float parseFloat4 = Float.parseFloat(getNextArgRequired());
                 long uptimeMillis3 = SystemClock.uptimeMillis();
-                injectMotionEvent(i, 2, uptimeMillis3, uptimeMillis3, parseFloat3, parseFloat4, FullScreenMagnificationGestureHandler.MAX_SCALE, i3);
+                injectMotionEvent(
+                        i,
+                        2,
+                        uptimeMillis3,
+                        uptimeMillis3,
+                        parseFloat3,
+                        parseFloat4,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        i3);
             } else if ("scroll".equals(str3)) {
                 runScroll(i, i3);
             } else if ("motionevent".equals(str3)) {
@@ -202,7 +267,9 @@ public final class InputShellCommand extends ShellCommand {
             }
             return 0;
         } catch (NumberFormatException unused2) {
-            throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Error: Invalid arguments for command: ", str3));
+            throw new IllegalArgumentException(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            "Error: Invalid arguments for command: ", str3));
         }
     }
 
@@ -216,31 +283,54 @@ public final class InputShellCommand extends ShellCommand {
             while (it.hasNext()) {
                 outPrintWriter.println("      " + ((String) it.next()));
             }
-            outPrintWriter.println("[axis_value] represents an option specifying the value of a given axis ");
-            outPrintWriter.println("      The syntax is as follows: --axis <axis_name>,<axis_value>");
-            outPrintWriter.println("            where <axis_name> is the name of the axis as defined in ");
-            outPrintWriter.println("            MotionEvent without the AXIS_ prefix (e.g. SCROLL, X)");
-            outPrintWriter.println("      Sample [axis_values] entry: `--axis Y,3`, `--axis SCROLL,-2`");
+            outPrintWriter.println(
+                    "[axis_value] represents an option specifying the value of a given axis ");
+            outPrintWriter.println(
+                    "      The syntax is as follows: --axis <axis_name>,<axis_value>");
+            outPrintWriter.println(
+                    "            where <axis_name> is the name of the axis as defined in ");
+            outPrintWriter.println(
+                    "            MotionEvent without the AXIS_ prefix (e.g. SCROLL, X)");
+            outPrintWriter.println(
+                    "      Sample [axis_values] entry: `--axis Y,3`, `--axis SCROLL,-2`");
             outPrintWriter.println();
-            outPrintWriter.printf("-d: specify the display ID.\n      (Default: %d for key event, %d for motion event if not specified.)", -1, 0);
+            outPrintWriter.printf(
+                    "-d: specify the display ID.\n"
+                        + "      (Default: %d for key event, %d for motion event if not"
+                        + " specified.)",
+                    -1, 0);
             outPrintWriter.println();
             outPrintWriter.println("The commands and default sources are:");
             outPrintWriter.println("      text <string> (Default: keyboard)");
-            outPrintWriter.println("      keyevent [--longpress|--duration <duration to hold key down in ms>] [--doubletap] [--async] [--delay <duration between keycodes in ms>] <key code number or name> ... (Default: keyboard)");
+            outPrintWriter.println(
+                    "      keyevent [--longpress|--duration <duration to hold key down in ms>]"
+                        + " [--doubletap] [--async] [--delay <duration between keycodes in ms>]"
+                        + " <key code number or name> ... (Default: keyboard)");
             outPrintWriter.println("      tap <x> <y> (Default: touchscreen)");
-            outPrintWriter.println("      swipe <x1> <y1> <x2> <y2> [duration(ms)] (Default: touchscreen)");
-            outPrintWriter.println("      draganddrop <x1> <y1> <x2> <y2> [duration(ms)] (Default: touchscreen)");
+            outPrintWriter.println(
+                    "      swipe <x1> <y1> <x2> <y2> [duration(ms)] (Default: touchscreen)");
+            outPrintWriter.println(
+                    "      draganddrop <x1> <y1> <x2> <y2> [duration(ms)] (Default: touchscreen)");
             outPrintWriter.println("      press (Default: trackball)");
             outPrintWriter.println("      roll <dx> <dy> (Default: trackball)");
-            outPrintWriter.println("      motionevent <DOWN|UP|MOVE|CANCEL> <x> <y> (Default: touchscreen)");
-            outPrintWriter.println("      scroll (Default: rotaryencoder). Has the following syntax:");
-            outPrintWriter.println("            scroll <x> <y> [axis_value] (for pointer-based sources)");
-            outPrintWriter.println("            scroll [axis_value] (for non-pointer-based sources)");
+            outPrintWriter.println(
+                    "      motionevent <DOWN|UP|MOVE|CANCEL> <x> <y> (Default: touchscreen)");
+            outPrintWriter.println(
+                    "      scroll (Default: rotaryencoder). Has the following syntax:");
+            outPrintWriter.println(
+                    "            scroll <x> <y> [axis_value] (for pointer-based sources)");
+            outPrintWriter.println(
+                    "            scroll [axis_value] (for non-pointer-based sources)");
             outPrintWriter.println("            Axis options: SCROLL, HSCROLL, VSCROLL");
-            outPrintWriter.println("            None or one or multiple axis value options can be specified.");
-            outPrintWriter.println("            To specify multiple axes, use one axis option for per axis.");
-            outPrintWriter.println("            Example: `scroll --axis VSCROLL,2 --axis SCROLL,-2.4`");
-            outPrintWriter.println("      keycombination [-t duration(ms)] <key code 1> <key code 2> ... (Default: keyboard, the key order is important here.)");
+            outPrintWriter.println(
+                    "            None or one or multiple axis value options can be specified.");
+            outPrintWriter.println(
+                    "            To specify multiple axes, use one axis option for per axis.");
+            outPrintWriter.println(
+                    "            Example: `scroll --axis VSCROLL,2 --axis SCROLL,-2.4`");
+            outPrintWriter.println(
+                    "      keycombination [-t duration(ms)] <key code 1> <key code 2> ... (Default:"
+                        + " keyboard, the key order is important here.)");
             outPrintWriter.close();
         } catch (Throwable th) {
             if (outPrintWriter != null) {
@@ -300,7 +390,8 @@ public final class InputShellCommand extends ShellCommand {
         while (i8 < size) {
             int keyCode = keyEventArr[i8].getKeyCode();
             Integer num2 = num;
-            injectKeyEvent(new KeyEvent(uptimeMillis, uptimeMillis, 1, keyCode, 0, i4, -1, 0, 0, i), true);
+            injectKeyEvent(
+                    new KeyEvent(uptimeMillis, uptimeMillis, 1, keyCode, 0, i4, -1, 0, 0, i), true);
             i4 &= ~((Integer) MODIFIER.getOrDefault(Integer.valueOf(keyCode), num2)).intValue();
             i8++;
             num = num2;
@@ -334,8 +425,10 @@ public final class InputShellCommand extends ShellCommand {
         boolean z6 = z4;
         long j3 = j;
         if (j2 > 0 && z2) {
-            getErrPrintWriter().println("--duration and --longpress cannot be used at the same time.");
-            throw new IllegalArgumentException("keyevent args should only contain either durationMs or longPress");
+            getErrPrintWriter()
+                    .println("--duration and --longpress cannot be used at the same time.");
+            throw new IllegalArgumentException(
+                    "keyevent args should only contain either durationMs or longPress");
         }
         if (z2) {
             j2 = ViewConfiguration.getLongPressTimeout();
@@ -409,8 +502,7 @@ public final class InputShellCommand extends ShellCommand {
         }
         f2 = parseFloat;
         f = parseFloat2;
-        if (i3 != 0) {
-        }
+        if (i3 != 0) {}
         f3 = 1.0f;
         float f42 = f3;
         long uptimeMillis2 = SystemClock.uptimeMillis();
@@ -442,17 +534,25 @@ public final class InputShellCommand extends ShellCommand {
             String nextArgRequired = getNextArgRequired();
             String[] split = nextArgRequired.split(",");
             if (split.length != 2) {
-                throw new IllegalArgumentException("Invalid --axis option value: ".concat(nextArgRequired));
+                throw new IllegalArgumentException(
+                        "Invalid --axis option value: ".concat(nextArgRequired));
             }
             String str = "AXIS_" + split[0];
             int axisFromString = MotionEvent.axisFromString(str);
             if (axisFromString == -1) {
-                throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Invalid axis name: ", str));
+                throw new IllegalArgumentException(
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                "Invalid axis name: ", str));
             }
             if (!of.contains(Integer.valueOf(axisFromString))) {
-                throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Unsupported axis: ", str));
+                throw new IllegalArgumentException(
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                "Unsupported axis: ", str));
             }
-            Pair create = Pair.create(Integer.valueOf(axisFromString), Float.valueOf(Float.parseFloat(split[1])));
+            Pair create =
+                    Pair.create(
+                            Integer.valueOf(axisFromString),
+                            Float.valueOf(Float.parseFloat(split[1])));
             hashMap.put((Integer) create.first, (Float) create.second);
         }
     }
@@ -496,7 +596,13 @@ public final class InputShellCommand extends ShellCommand {
         if (min > 0) {
             sleep(min);
             if (j >= ViewConfiguration.getLongPressTimeout()) {
-                injectKeyEvent(KeyEvent.changeTimeRepeat(keyEvent, uptimeMillis + ViewConfiguration.getLongPressTimeout(), 1, 128), z);
+                injectKeyEvent(
+                        KeyEvent.changeTimeRepeat(
+                                keyEvent,
+                                uptimeMillis + ViewConfiguration.getLongPressTimeout(),
+                                1,
+                                128),
+                        z);
                 long j2 = j - min;
                 if (j2 > 0) {
                     sleep(j2);
@@ -526,9 +632,25 @@ public final class InputShellCommand extends ShellCommand {
         long uptimeMillis2 = SystemClock.uptimeMillis();
         while (uptimeMillis2 < j) {
             float f = (uptimeMillis2 - uptimeMillis) / i3;
-            injectMotionEvent(i, 2, uptimeMillis, uptimeMillis2, ((parseFloat3 - parseFloat) * f) + parseFloat, ((parseFloat4 - parseFloat2) * f) + parseFloat2, 1.0f, i2);
+            injectMotionEvent(
+                    i,
+                    2,
+                    uptimeMillis,
+                    uptimeMillis2,
+                    ((parseFloat3 - parseFloat) * f) + parseFloat,
+                    ((parseFloat4 - parseFloat2) * f) + parseFloat2,
+                    1.0f,
+                    i2);
             uptimeMillis2 = SystemClock.uptimeMillis();
         }
-        injectMotionEvent(i, 1, uptimeMillis, uptimeMillis2, parseFloat3, parseFloat4, FullScreenMagnificationGestureHandler.MAX_SCALE, i2);
+        injectMotionEvent(
+                i,
+                1,
+                uptimeMillis,
+                uptimeMillis2,
+                parseFloat3,
+                parseFloat4,
+                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                i2);
     }
 }

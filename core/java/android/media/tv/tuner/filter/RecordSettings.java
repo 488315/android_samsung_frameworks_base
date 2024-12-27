@@ -2,6 +2,7 @@ package android.media.tv.tuner.filter;
 
 import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -61,28 +62,22 @@ public class RecordSettings extends Settings {
     private final int mTsIndexMask;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScHevcIndex {
-    }
+    public @interface ScHevcIndex {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScIndex {
-    }
+    public @interface ScIndex {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScIndexMask {
-    }
+    public @interface ScIndexMask {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScIndexType {
-    }
+    public @interface ScIndexType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScVvcIndex {
-    }
+    public @interface ScVvcIndex {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TsIndexMask {
-    }
+    public @interface TsIndexMask {}
 
     private RecordSettings(int mainType, int tsIndexType, int scIndexType, int scIndexMask) {
         super(TunerUtils.getFilterSubtype(mainType, 6));
@@ -133,7 +128,8 @@ public class RecordSettings extends Settings {
         }
 
         public RecordSettings build() {
-            return new RecordSettings(this.mMainType, this.mTsIndexMask, this.mScIndexType, this.mScIndexMask);
+            return new RecordSettings(
+                    this.mMainType, this.mTsIndexMask, this.mScIndexType, this.mScIndexMask);
         }
     }
 }

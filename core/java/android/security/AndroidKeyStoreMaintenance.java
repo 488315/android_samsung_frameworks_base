@@ -17,7 +17,8 @@ public class AndroidKeyStoreMaintenance {
     private static final String TAG = "AndroidKeyStoreMaintenance";
 
     private static IKeystoreMaintenance getService() {
-        return IKeystoreMaintenance.Stub.asInterface(ServiceManager.checkService("android.security.maintenance"));
+        return IKeystoreMaintenance.Stub.asInterface(
+                ServiceManager.checkService("android.security.maintenance"));
     }
 
     public static int onUserAdded(int userId) {
@@ -215,7 +216,9 @@ public class AndroidKeyStoreMaintenance {
         Lcd:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.security.AndroidKeyStoreMaintenance.clearNamespace(int, long):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.security.AndroidKeyStoreMaintenance.clearNamespace(int, long):int");
     }
 
     public static int migrateKeyNamespace(KeyDescriptor source, KeyDescriptor destination) {
@@ -232,14 +235,17 @@ public class AndroidKeyStoreMaintenance {
         }
     }
 
-    public static long[] getAllAppUidsAffectedBySid(int userId, long userSecureId) throws KeyStoreException {
+    public static long[] getAllAppUidsAffectedBySid(int userId, long userSecureId)
+            throws KeyStoreException {
         StrictMode.noteDiskWrite();
         try {
             return getService().getAppUidsAffectedBySid(userId, userSecureId);
         } catch (RemoteException | NullPointerException e) {
-            throw new KeyStoreException(4, "Failure to connect to Keystore while trying to get apps affected by SID.");
+            throw new KeyStoreException(
+                    4, "Failure to connect to Keystore while trying to get apps affected by SID.");
         } catch (ServiceSpecificException e2) {
-            throw new KeyStoreException(e2.errorCode, "Keystore error while trying to get apps affected by SID.");
+            throw new KeyStoreException(
+                    e2.errorCode, "Keystore error while trying to get apps affected by SID.");
         }
     }
 
@@ -248,9 +254,11 @@ public class AndroidKeyStoreMaintenance {
         try {
             getService().deleteAllKeys();
         } catch (RemoteException | NullPointerException e) {
-            throw new KeyStoreException(4, "Failure to connect to Keystore while trying to delete all keys.");
+            throw new KeyStoreException(
+                    4, "Failure to connect to Keystore while trying to delete all keys.");
         } catch (ServiceSpecificException e2) {
-            throw new KeyStoreException(e2.errorCode, "Keystore error while trying to delete all keys.");
+            throw new KeyStoreException(
+                    e2.errorCode, "Keystore error while trying to delete all keys.");
         }
     }
 }

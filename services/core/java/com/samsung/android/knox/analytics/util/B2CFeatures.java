@@ -3,23 +3,35 @@ package com.samsung.android.knox.analytics.util;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.shared.InitialConfiguration$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.analytics.database.Contract;
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.util.Iterator;
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class B2CFeatures {
-    public static final String ACTION_B2C_ACTIVATION = "com.samsung.android.knox.analytics.intent.action.B2C_ACTIVATION";
-    public static final String EXTRA_B2C_ACTIVATION_STATUS = "com.samsung.android.knox.analytics.intent.extra.B2C_ACTIVATION_STATUS";
-    public static final String EXTRA_B2C_FEATURE = "com.samsung.android.knox.analytics.intent.extra.B2C_FEATURE";
-    public static final String EXTRA_B2C_PACKAGE_NAME = "com.samsung.android.knox.analytics.intent.extra.B2C_PACKAGE_NAME";
+    public static final String ACTION_B2C_ACTIVATION =
+            "com.samsung.android.knox.analytics.intent.action.B2C_ACTIVATION";
+    public static final String EXTRA_B2C_ACTIVATION_STATUS =
+            "com.samsung.android.knox.analytics.intent.extra.B2C_ACTIVATION_STATUS";
+    public static final String EXTRA_B2C_FEATURE =
+            "com.samsung.android.knox.analytics.intent.extra.B2C_FEATURE";
+    public static final String EXTRA_B2C_PACKAGE_NAME =
+            "com.samsung.android.knox.analytics.intent.extra.B2C_PACKAGE_NAME";
     public static final String TAG = "[KnoxAnalytics] B2CFeatures";
 
     public static void addOrRemoveB2CFeature(Context context, String str, String str2, boolean z) {
         String str3 = TAG;
-        StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("addOrRemoveB2CFeature() - package ", str, " feature ", str2, " shouldAdd? ");
+        StringBuilder m =
+                InitialConfiguration$$ExternalSyntheticOutline0.m(
+                        "addOrRemoveB2CFeature() - package ",
+                        str,
+                        " feature ",
+                        str2,
+                        " shouldAdd? ");
         m.append(z);
         Log.d(str3, m.toString());
         if (z && str2 != null) {
@@ -32,10 +44,16 @@ public final class B2CFeatures {
         if (z) {
             return;
         }
-        String b2CFeatureByPackage = KnoxAnalyticsQueryResolver.getB2CFeatureByPackage(context, str);
-        context.getContentResolver().delete(Contract.B2CFeatures.CONTENT_URI, "packageName", new String[]{str});
+        String b2CFeatureByPackage =
+                KnoxAnalyticsQueryResolver.getB2CFeatureByPackage(context, str);
+        context.getContentResolver()
+                .delete(Contract.B2CFeatures.CONTENT_URI, "packageName", new String[] {str});
         if (b2CFeatureByPackage != null) {
-            context.getContentResolver().delete(Contract.FeaturesWhitelist.CONTENT_URI, LauncherConfigurationInternal.KEY_FEATURE_INT, new String[]{b2CFeatureByPackage});
+            context.getContentResolver()
+                    .delete(
+                            Contract.FeaturesWhitelist.CONTENT_URI,
+                            LauncherConfigurationInternal.KEY_FEATURE_INT,
+                            new String[] {b2CFeatureByPackage});
         }
     }
 
@@ -70,10 +88,18 @@ public final class B2CFeatures {
         List b2CFeaturesList = KnoxAnalyticsQueryResolver.getB2CFeaturesList(context);
         if (!b2CFeaturesList.isEmpty()) {
             b2CFeaturesList.add("KNOX_ANALYTICS");
-            context.getContentResolver().delete(Contract.FeaturesWhitelist.CONTENT_URI, LauncherConfigurationInternal.KEY_FEATURE_INT, (String[]) b2CFeaturesList.toArray(new String[0]));
+            context.getContentResolver()
+                    .delete(
+                            Contract.FeaturesWhitelist.CONTENT_URI,
+                            LauncherConfigurationInternal.KEY_FEATURE_INT,
+                            (String[]) b2CFeaturesList.toArray(new String[0]));
         }
         try {
-            context.getContentResolver().delete(Contract.FeaturesBlacklist.CONTENT_URI, LauncherConfigurationInternal.KEY_FEATURE_INT, new String[]{"*"});
+            context.getContentResolver()
+                    .delete(
+                            Contract.FeaturesBlacklist.CONTENT_URI,
+                            LauncherConfigurationInternal.KEY_FEATURE_INT,
+                            new String[] {"*"});
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "Failed to delete from FeaturesBlacklist", e);
         }

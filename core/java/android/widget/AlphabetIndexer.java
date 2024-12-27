@@ -3,6 +3,7 @@ package android.widget;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.util.SparseIntArray;
+
 import java.text.Collator;
 
 /* loaded from: classes4.dex */

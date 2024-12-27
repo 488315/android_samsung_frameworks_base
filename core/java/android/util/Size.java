@@ -56,7 +56,9 @@ public final class Size {
             throw e;
         }
         try {
-            return new Size(Integer.parseInt(string.substring(0, sep_ix)), Integer.parseInt(string.substring(sep_ix + 1)));
+            return new Size(
+                    Integer.parseInt(string.substring(0, sep_ix)),
+                    Integer.parseInt(string.substring(sep_ix + 1)));
         } catch (NumberFormatException e2) {
             throw invalidSize(string);
         }

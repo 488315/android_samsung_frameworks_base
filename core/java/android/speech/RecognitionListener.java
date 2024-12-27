@@ -22,12 +22,9 @@ public interface RecognitionListener {
 
     void onRmsChanged(float f);
 
-    default void onSegmentResults(Bundle segmentResults) {
-    }
+    default void onSegmentResults(Bundle segmentResults) {}
 
-    default void onEndOfSegmentedSession() {
-    }
+    default void onEndOfSegmentedSession() {}
 
-    default void onLanguageDetection(Bundle results) {
-    }
+    default void onLanguageDetection(Bundle results) {}
 }

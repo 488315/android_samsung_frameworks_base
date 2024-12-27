@@ -5,8 +5,10 @@ import android.content.Context;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.SystemService;
+
 import com.samsung.android.mcfds.lib.DeviceSyncManager;
 import com.samsung.android.server.continuity.common.ExecutorUtil;
 import com.samsung.android.server.continuity.sem.SemWrapper;
@@ -19,12 +21,15 @@ public final class SemContinuityService extends SystemService {
     public SemContinuityService(Context context) {
         super(context);
         int i = SemContinuityServiceImpl.$r8$clinit;
-        this.mSvcImpl = new SemContinuityServiceImpl(context, new McfDeviceSyncManager(new PreconditionObserver(context), new DeviceSyncManager(context)));
+        this.mSvcImpl =
+                new SemContinuityServiceImpl(
+                        context,
+                        new McfDeviceSyncManager(
+                                new PreconditionObserver(context), new DeviceSyncManager(context)));
     }
 
     @Override // com.android.server.SystemService
-    public final void onBootPhase(int i) {
-    }
+    public final void onBootPhase(int i) {}
 
     @Override // com.android.server.SystemService
     public final void onStart() {
@@ -43,27 +48,36 @@ public final class SemContinuityService extends SystemService {
     }
 
     @Override // com.android.server.SystemService
-    public final void onUserSwitching(SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
-        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("onUserSwitching : ", targetUser != null ? targetUser.getUserHandle().toString() : null, "->");
+    public final void onUserSwitching(
+            SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
+        StringBuilder m =
+                DumpUtils$$ExternalSyntheticOutline0.m(
+                        "onUserSwitching : ",
+                        targetUser != null ? targetUser.getUserHandle().toString() : null,
+                        "->");
         m.append(targetUser2.getUserHandle().toString());
         Log.d("[MCF_DS_SYS]_Service", m.toString());
         final UserHandle userHandle = targetUser2.getUserHandle();
         final SemContinuityServiceImpl semContinuityServiceImpl = this.mSvcImpl;
         semContinuityServiceImpl.getClass();
-        Runnable runnable = new Runnable() { // from class: com.samsung.android.server.continuity.AbstractSemContinuityServiceImpl$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                AbstractSemContinuityServiceImpl abstractSemContinuityServiceImpl = AbstractSemContinuityServiceImpl.this;
-                UserHandle userHandle2 = userHandle;
-                if (abstractSemContinuityServiceImpl.mCurrentUserId != -10000) {
-                    abstractSemContinuityServiceImpl.mMcfDsManager.stopUser();
-                }
-                UserHandle userHandle3 = SemWrapper.SEM_ALL;
-                abstractSemContinuityServiceImpl.mCurrentUserId = userHandle2.semGetIdentifier();
-                abstractSemContinuityServiceImpl.setCurrentUserHandle(userHandle2);
-                abstractSemContinuityServiceImpl.mMcfDsManager.startUser(userHandle2);
-            }
-        };
+        Runnable runnable =
+                new Runnable() { // from class:
+                                 // com.samsung.android.server.continuity.AbstractSemContinuityServiceImpl$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        AbstractSemContinuityServiceImpl abstractSemContinuityServiceImpl =
+                                AbstractSemContinuityServiceImpl.this;
+                        UserHandle userHandle2 = userHandle;
+                        if (abstractSemContinuityServiceImpl.mCurrentUserId != -10000) {
+                            abstractSemContinuityServiceImpl.mMcfDsManager.stopUser();
+                        }
+                        UserHandle userHandle3 = SemWrapper.SEM_ALL;
+                        abstractSemContinuityServiceImpl.mCurrentUserId =
+                                userHandle2.semGetIdentifier();
+                        abstractSemContinuityServiceImpl.setCurrentUserHandle(userHandle2);
+                        abstractSemContinuityServiceImpl.mMcfDsManager.startUser(userHandle2);
+                    }
+                };
         if (Looper.getMainLooper().equals(Looper.myLooper())) {
             runnable.run();
         } else {
@@ -80,7 +94,9 @@ public final class SemContinuityService extends SystemService {
         UserHandle userHandle2 = SemWrapper.SEM_ALL;
         int semGetIdentifier = userHandle.semGetIdentifier();
         boolean isManagedProfile = semContinuityServiceImpl.mUserManager.isManagedProfile();
-        Log.i("[MCF_DS_SYS]_SemContinuityServiceImpl", "onUserUnlocking - " + semGetIdentifier + ", " + isManagedProfile);
+        Log.i(
+                "[MCF_DS_SYS]_SemContinuityServiceImpl",
+                "onUserUnlocking - " + semGetIdentifier + ", " + isManagedProfile);
         if (semGetIdentifier != ActivityManager.semGetCurrentUser() || isManagedProfile) {
             return;
         }

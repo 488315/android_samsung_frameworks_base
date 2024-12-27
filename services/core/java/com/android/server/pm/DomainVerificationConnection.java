@@ -10,7 +10,10 @@ public final class DomainVerificationConnection {
 
     public DomainVerificationConnection(PackageManagerService packageManagerService) {
         this.mPm = packageManagerService;
-        this.mUmInternal = (UserManagerInternal) packageManagerService.mInjector.mGetLocalServiceProducer.produce(UserManagerInternal.class);
+        this.mUmInternal =
+                (UserManagerInternal)
+                        packageManagerService.mInjector.mGetLocalServiceProducer.produce(
+                                UserManagerInternal.class);
     }
 
     public final void schedule(int i, Object obj) {

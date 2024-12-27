@@ -16,6 +16,10 @@ final class CollectionsKt___CollectionsKt$elementAt$1 extends Lambda implements 
     @Override // com.android.server.permission.jarjar.kotlin.jvm.functions.Function1
     public final Object invoke(Object obj) {
         ((Number) obj).intValue();
-        throw new IndexOutOfBoundsException(WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(new StringBuilder("Collection doesn't contain element at index "), this.$index, '.'));
+        throw new IndexOutOfBoundsException(
+                WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Collection doesn't contain element at index "),
+                        this.$index,
+                        '.'));
     }
 }

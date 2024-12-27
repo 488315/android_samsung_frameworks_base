@@ -1,6 +1,5 @@
 package android.accessibilityservice;
 
-import android.accessibilityservice.IBrailleDisplayConnection;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,9 +8,11 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IBrailleDisplayController extends IInterface {
-    public static final String DESCRIPTOR = "android.accessibilityservice.IBrailleDisplayController";
+    public static final String DESCRIPTOR =
+            "android.accessibilityservice.IBrailleDisplayController";
 
-    void onConnected(IBrailleDisplayConnection iBrailleDisplayConnection, byte[] bArr) throws RemoteException;
+    void onConnected(IBrailleDisplayConnection iBrailleDisplayConnection, byte[] bArr)
+            throws RemoteException;
 
     void onConnectionFailed(int i) throws RemoteException;
 
@@ -21,20 +22,17 @@ public interface IBrailleDisplayController extends IInterface {
 
     public static class Default implements IBrailleDisplayController {
         @Override // android.accessibilityservice.IBrailleDisplayController
-        public void onConnected(IBrailleDisplayConnection connection, byte[] hidDescriptor) throws RemoteException {
-        }
+        public void onConnected(IBrailleDisplayConnection connection, byte[] hidDescriptor)
+                throws RemoteException {}
 
         @Override // android.accessibilityservice.IBrailleDisplayController
-        public void onConnectionFailed(int error) throws RemoteException {
-        }
+        public void onConnectionFailed(int error) throws RemoteException {}
 
         @Override // android.accessibilityservice.IBrailleDisplayController
-        public void onInput(byte[] input) throws RemoteException {
-        }
+        public void onInput(byte[] input) throws RemoteException {}
 
         @Override // android.accessibilityservice.IBrailleDisplayController
-        public void onDisconnected() throws RemoteException {
-        }
+        public void onDisconnected() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +40,7 @@ public interface IBrailleDisplayController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBrailleDisplayController {
+    public abstract static class Stub extends Binder implements IBrailleDisplayController {
         static final int TRANSACTION_onConnected = 1;
         static final int TRANSACTION_onConnectionFailed = 2;
         static final int TRANSACTION_onDisconnected = 4;
@@ -89,7 +87,8 @@ public interface IBrailleDisplayController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBrailleDisplayController.DESCRIPTOR);
             }
@@ -99,7 +98,8 @@ public interface IBrailleDisplayController extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IBrailleDisplayConnection _arg0 = IBrailleDisplayConnection.Stub.asInterface(data.readStrongBinder());
+                    IBrailleDisplayConnection _arg0 =
+                            IBrailleDisplayConnection.Stub.asInterface(data.readStrongBinder());
                     byte[] _arg1 = data.createByteArray();
                     data.enforceNoDataAvail();
                     onConnected(_arg0, _arg1);
@@ -139,7 +139,8 @@ public interface IBrailleDisplayController extends IInterface {
             }
 
             @Override // android.accessibilityservice.IBrailleDisplayController
-            public void onConnected(IBrailleDisplayConnection connection, byte[] hidDescriptor) throws RemoteException {
+            public void onConnected(IBrailleDisplayConnection connection, byte[] hidDescriptor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBrailleDisplayController.DESCRIPTOR);

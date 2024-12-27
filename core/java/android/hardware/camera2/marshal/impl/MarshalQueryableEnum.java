@@ -5,7 +5,7 @@ import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.utils.TypeReference;
 import android.util.Log;
-import java.lang.Enum;
+
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 
@@ -34,7 +34,10 @@ public class MarshalQueryableEnum<T extends Enum<T>> implements MarshalQueryable
             } else {
                 if (this.mNativeType == 0) {
                     if (enumValue < 0 || enumValue > 255) {
-                        throw new UnsupportedOperationException(String.format("Enum value %x too large to fit into unsigned byte", Integer.valueOf(enumValue)));
+                        throw new UnsupportedOperationException(
+                                String.format(
+                                        "Enum value %x too large to fit into unsigned byte",
+                                        Integer.valueOf(enumValue)));
                     }
                     buffer.put((byte) enumValue);
                     return;
@@ -54,7 +57,8 @@ public class MarshalQueryableEnum<T extends Enum<T>> implements MarshalQueryable
                     i = byteBuffer.getInt();
                     break;
                 default:
-                    throw new AssertionError("Unexpected native type; impossible since its not supported");
+                    throw new AssertionError(
+                            "Unexpected native type; impossible since its not supported");
             }
             return (T) MarshalQueryableEnum.getEnumFromValue(this.mClass, i);
         }
@@ -90,7 +94,11 @@ public class MarshalQueryableEnum<T extends Enum<T>> implements MarshalQueryable
 
     public static <T extends Enum<T>> void registerEnumValues(Class<T> enumType, int[] values) {
         if (enumType.getEnumConstants().length != values.length) {
-            throw new IllegalArgumentException("Expected values array to be the same size as the enumTypes values " + values.length + " for type " + enumType);
+            throw new IllegalArgumentException(
+                    "Expected values array to be the same size as the enumTypes values "
+                            + values.length
+                            + " for type "
+                            + enumType);
         }
         sEnumValues.put(enumType, values);
     }
@@ -128,7 +136,13 @@ public class MarshalQueryableEnum<T extends Enum<T>> implements MarshalQueryable
         }
         T[] values = enumType.getEnumConstants();
         if (ordinal < 0 || ordinal >= values.length) {
-            throw new IllegalArgumentException(String.format("Argument 'value' (%d) was not a valid enum value for type %s (registered? %b)", Integer.valueOf(value), enumType, Boolean.valueOf(registeredValues != null)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Argument 'value' (%d) was not a valid enum value for type %s"
+                                    + " (registered? %b)",
+                            Integer.valueOf(value),
+                            enumType,
+                            Boolean.valueOf(registeredValues != null)));
         }
         return values[ordinal];
     }

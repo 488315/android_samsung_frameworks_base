@@ -2,24 +2,27 @@ package com.samsung.android.mocca;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.Arrays;
 
 /* loaded from: classes6.dex */
 public final class ContextEvent implements Serializable, Parcelable {
-    public static final Parcelable.Creator<ContextEvent> CREATOR = new Parcelable.Creator<ContextEvent>() { // from class: com.samsung.android.mocca.ContextEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContextEvent createFromParcel(Parcel in) {
-            return new ContextEvent(in);
-        }
+    public static final Parcelable.Creator<ContextEvent> CREATOR =
+            new Parcelable.Creator<
+                    ContextEvent>() { // from class: com.samsung.android.mocca.ContextEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContextEvent createFromParcel(Parcel in) {
+                    return new ContextEvent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContextEvent[] newArray(int size) {
-            return new ContextEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContextEvent[] newArray(int size) {
+                    return new ContextEvent[size];
+                }
+            };
     private static final long serialVersionUID = 4417824416088197504L;
     public final byte[] data;
     public final String deviceId;
@@ -63,8 +66,7 @@ public final class ContextEvent implements Serializable, Parcelable {
         private String mType = null;
         private byte[] mData = null;
 
-        protected ContextEventBuilder() {
-        }
+        protected ContextEventBuilder() {}
 
         public ContextEventBuilder setTimestamp(long timestamp) {
             this.mTimestamp = timestamp;
@@ -87,7 +89,10 @@ public final class ContextEvent implements Serializable, Parcelable {
         }
 
         public ContextEvent build() {
-            if (this.mTimestamp < 0 || this.mDeviceId == null || this.mType == null || this.mData == null) {
+            if (this.mTimestamp < 0
+                    || this.mDeviceId == null
+                    || this.mType == null
+                    || this.mData == null) {
                 return null;
             }
             return new ContextEvent(this.mTimestamp, this.mDeviceId, this.mType, this.mData);

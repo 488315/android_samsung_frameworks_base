@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
+
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
@@ -12,24 +13,25 @@ import java.util.function.BiConsumer;
 
 /* loaded from: classes6.dex */
 public final class ContextParam implements Parcelable {
-    public static final Parcelable.Creator<ContextParam> CREATOR = new Parcelable.Creator<ContextParam>() { // from class: com.samsung.android.mocca.ContextParam.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContextParam createFromParcel(Parcel in) {
-            return new ContextParam(in);
-        }
+    public static final Parcelable.Creator<ContextParam> CREATOR =
+            new Parcelable.Creator<
+                    ContextParam>() { // from class: com.samsung.android.mocca.ContextParam.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContextParam createFromParcel(Parcel in) {
+                    return new ContextParam(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContextParam[] newArray(int size) {
-            return new ContextParam[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContextParam[] newArray(int size) {
+                    return new ContextParam[size];
+                }
+            };
     private static final String TAG = "ContextParam";
     private final ArrayMap<String, Object> mParams = new ArrayMap<>();
 
-    public ContextParam() {
-    }
+    public ContextParam() {}
 
     public ContextParam(Bundle param) {
         Set<String> keys = param.keySet();
@@ -49,12 +51,14 @@ public final class ContextParam implements Parcelable {
     @Override // android.os.Parcelable
     public void writeToParcel(final Parcel dest, int flags) {
         dest.writeInt(this.mParams.size());
-        this.mParams.forEach(new BiConsumer() { // from class: com.samsung.android.mocca.ContextParam$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                ContextParam.lambda$writeToParcel$0(Parcel.this, (String) obj, obj2);
-            }
-        });
+        this.mParams.forEach(
+                new BiConsumer() { // from class:
+                                   // com.samsung.android.mocca.ContextParam$$ExternalSyntheticLambda0
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        ContextParam.lambda$writeToParcel$0(Parcel.this, (String) obj, obj2);
+                    }
+                });
     }
 
     static /* synthetic */ void lambda$writeToParcel$0(Parcel dest, String k, Object v) {

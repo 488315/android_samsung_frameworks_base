@@ -3,6 +3,7 @@ package com.android.internal.infra;
 import android.content.ComponentName;
 import android.util.ArraySet;
 import android.util.SparseArray;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -11,7 +12,8 @@ public class GlobalWhitelistState {
     protected final Object mGlobalWhitelistStateLock = new Object();
     protected SparseArray<WhitelistHelper> mWhitelisterHelpers;
 
-    public void setWhitelist(int userId, List<String> packageNames, List<ComponentName> components) {
+    public void setWhitelist(
+            int userId, List<String> packageNames, List<ComponentName> components) {
         synchronized (this.mGlobalWhitelistStateLock) {
             if (this.mWhitelisterHelpers == null) {
                 this.mWhitelisterHelpers = new SparseArray<>(1);

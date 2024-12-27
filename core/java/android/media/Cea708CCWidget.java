@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.media.Cea708CCParser;
-import android.media.ClosedCaptionWidget;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Layout;
@@ -23,7 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.CaptioningManager;
 import android.widget.RelativeLayout;
+
 import com.android.internal.widget.SubtitleView;
+
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,15 +77,16 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
     static class ScaledLayout extends ViewGroup {
         private static final boolean DEBUG = false;
         private static final String TAG = "ScaledLayout";
-        private static final Comparator<Rect> mRectTopLeftSorter = new Comparator<Rect>() { // from class: android.media.Cea708CCWidget.ScaledLayout.1
-            @Override // java.util.Comparator
-            public int compare(Rect lhs, Rect rhs) {
-                if (lhs.top != rhs.top) {
-                    return lhs.top - rhs.top;
-                }
-                return lhs.left - rhs.left;
-            }
-        };
+        private static final Comparator<Rect> mRectTopLeftSorter =
+                new Comparator<Rect>() { // from class: android.media.Cea708CCWidget.ScaledLayout.1
+                    @Override // java.util.Comparator
+                    public int compare(Rect lhs, Rect rhs) {
+                        if (lhs.top != rhs.top) {
+                            return lhs.top - rhs.top;
+                        }
+                        return lhs.left - rhs.left;
+                    }
+                };
         private Rect[] mRectArray;
 
         public ScaledLayout(Context context) {
@@ -100,7 +101,11 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
             public float scaleStartCol;
             public float scaleStartRow;
 
-            public ScaledLayoutParams(float scaleStartRow, float scaleEndRow, float scaleStartCol, float scaleEndCol) {
+            public ScaledLayoutParams(
+                    float scaleStartRow,
+                    float scaleEndRow,
+                    float scaleStartCol,
+                    float scaleEndCol) {
                 super(-1, -1);
                 this.scaleStartRow = scaleStartRow;
                 this.scaleEndRow = scaleEndRow;
@@ -136,32 +141,49 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                 View child = getChildAt(i);
                 ViewGroup.LayoutParams params = child.getLayoutParams();
                 if (!(params instanceof ScaledLayoutParams)) {
-                    throw new RuntimeException("A child of ScaledLayout cannot have the UNSPECIFIED scale factors");
+                    throw new RuntimeException(
+                            "A child of ScaledLayout cannot have the UNSPECIFIED scale factors");
                 }
                 float scaleStartRow = ((ScaledLayoutParams) params).scaleStartRow;
                 float scaleEndRow = ((ScaledLayoutParams) params).scaleEndRow;
                 float scaleStartCol = ((ScaledLayoutParams) params).scaleStartCol;
                 float scaleEndCol = ((ScaledLayoutParams) params).scaleEndCol;
                 if (scaleStartRow < 0.0f || scaleStartRow > 1.0f) {
-                    throw new RuntimeException("A child of ScaledLayout should have a range of scaleStartRow between 0 and 1");
+                    throw new RuntimeException(
+                            "A child of ScaledLayout should have a range of scaleStartRow between 0"
+                                    + " and 1");
                 }
                 if (scaleEndRow < scaleStartRow || scaleStartRow > 1.0f) {
-                    throw new RuntimeException("A child of ScaledLayout should have a range of scaleEndRow between scaleStartRow and 1");
+                    throw new RuntimeException(
+                            "A child of ScaledLayout should have a range of scaleEndRow between"
+                                    + " scaleStartRow and 1");
                 }
                 if (scaleEndCol < 0.0f || scaleEndCol > 1.0f) {
-                    throw new RuntimeException("A child of ScaledLayout should have a range of scaleStartCol between 0 and 1");
+                    throw new RuntimeException(
+                            "A child of ScaledLayout should have a range of scaleStartCol between 0"
+                                    + " and 1");
                 }
                 if (scaleEndCol < scaleStartCol || scaleEndCol > 1.0f) {
-                    throw new RuntimeException("A child of ScaledLayout should have a range of scaleEndCol between scaleStartCol and 1");
+                    throw new RuntimeException(
+                            "A child of ScaledLayout should have a range of scaleEndCol between"
+                                    + " scaleStartCol and 1");
                 }
                 int widthSpecSize2 = widthSpecSize;
                 int heightSpecSize2 = heightSpecSize;
-                this.mRectArray[i] = new Rect((int) (width * scaleStartCol), (int) (height * scaleStartRow), (int) (width * scaleEndCol), (int) (height * scaleEndRow));
-                int childWidthSpec = View.MeasureSpec.makeMeasureSpec((int) (width * (scaleEndCol - scaleStartCol)), 1073741824);
+                this.mRectArray[i] =
+                        new Rect(
+                                (int) (width * scaleStartCol),
+                                (int) (height * scaleStartRow),
+                                (int) (width * scaleEndCol),
+                                (int) (height * scaleEndRow));
+                int childWidthSpec =
+                        View.MeasureSpec.makeMeasureSpec(
+                                (int) (width * (scaleEndCol - scaleStartCol)), 1073741824);
                 int childHeightSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
                 child.measure(childWidthSpec, childHeightSpec);
                 if (child.getMeasuredHeight() > this.mRectArray[i].height()) {
-                    int overflowedHeight = ((child.getMeasuredHeight() - this.mRectArray[i].height()) + 1) / 2;
+                    int overflowedHeight =
+                            ((child.getMeasuredHeight() - this.mRectArray[i].height()) + 1) / 2;
                     this.mRectArray[i].bottom += overflowedHeight;
                     this.mRectArray[i].top -= overflowedHeight;
                     if (this.mRectArray[i].top < 0) {
@@ -173,7 +195,9 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                         this.mRectArray[i].bottom = height;
                     }
                 }
-                int childHeightSpec2 = View.MeasureSpec.makeMeasureSpec((int) (height * (scaleEndRow - scaleStartRow)), 1073741824);
+                int childHeightSpec2 =
+                        View.MeasureSpec.makeMeasureSpec(
+                                (int) (height * (scaleEndRow - scaleStartRow)), 1073741824);
                 child.measure(childWidthSpec, childHeightSpec2);
                 i++;
                 widthSpecSize = widthSpecSize2;
@@ -196,7 +220,11 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                 for (int j = i3 + 1; j < visibleRectCount; j++) {
                     if (Rect.intersects(visibleRectArray[i3], visibleRectArray[j])) {
                         visibleRectGroup[j] = visibleRectGroup[i3];
-                        visibleRectArray[j].set(visibleRectArray[j].left, visibleRectArray[i3].bottom, visibleRectArray[j].right, visibleRectArray[i3].bottom + visibleRectArray[j].height());
+                        visibleRectArray[j].set(
+                                visibleRectArray[j].left,
+                                visibleRectArray[i3].bottom,
+                                visibleRectArray[j].right,
+                                visibleRectArray[i3].bottom + visibleRectArray[j].height());
                     }
                 }
             }
@@ -205,7 +233,11 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                     int overflowedHeight2 = visibleRectArray[i4].bottom - height;
                     for (int j2 = 0; j2 <= i4; j2++) {
                         if (visibleRectGroup[i4] == visibleRectGroup[j2]) {
-                            visibleRectArray[j2].set(visibleRectArray[j2].left, visibleRectArray[j2].top - overflowedHeight2, visibleRectArray[j2].right, visibleRectArray[j2].bottom - overflowedHeight2);
+                            visibleRectArray[j2].set(
+                                    visibleRectArray[j2].left,
+                                    visibleRectArray[j2].top - overflowedHeight2,
+                                    visibleRectArray[j2].right,
+                                    visibleRectArray[j2].bottom - overflowedHeight2);
                         }
                     }
                 }
@@ -264,10 +296,14 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         public CCLayout(Context context) {
             super(context);
             this.mSafeTitleAreaLayout = new ScaledLayout(context);
-            addView(this.mSafeTitleAreaLayout, new ScaledLayout.ScaledLayoutParams(0.1f, 0.9f, 0.1f, 0.9f));
+            addView(
+                    this.mSafeTitleAreaLayout,
+                    new ScaledLayout.ScaledLayoutParams(0.1f, 0.9f, 0.1f, 0.9f));
         }
 
-        public void addOrUpdateViewToSafeTitleArea(CCWindowLayout captionWindowLayout, ScaledLayout.ScaledLayoutParams scaledLayoutParams) {
+        public void addOrUpdateViewToSafeTitleArea(
+                CCWindowLayout captionWindowLayout,
+                ScaledLayout.ScaledLayoutParams scaledLayoutParams) {
             int index = this.mSafeTitleAreaLayout.indexOfChild(captionWindowLayout);
             if (index < 0) {
                 this.mSafeTitleAreaLayout.addView(captionWindowLayout, scaledLayoutParams);
@@ -284,7 +320,8 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         public void setCaptionStyle(CaptioningManager.CaptionStyle style) {
             int count = this.mSafeTitleAreaLayout.getChildCount();
             for (int i = 0; i < count; i++) {
-                CCWindowLayout windowLayout = (CCWindowLayout) this.mSafeTitleAreaLayout.getChildAt(i);
+                CCWindowLayout windowLayout =
+                        (CCWindowLayout) this.mSafeTitleAreaLayout.getChildAt(i);
                 windowLayout.setCaptionStyle(style);
             }
         }
@@ -293,7 +330,8 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         public void setFontScale(float fontScale) {
             int count = this.mSafeTitleAreaLayout.getChildCount();
             for (int i = 0; i < count; i++) {
-                CCWindowLayout windowLayout = (CCWindowLayout) this.mSafeTitleAreaLayout.getChildAt(i);
+                CCWindowLayout windowLayout =
+                        (CCWindowLayout) this.mSafeTitleAreaLayout.getChildAt(i);
                 windowLayout.setFontScale(fontScale);
             }
         }
@@ -313,7 +351,8 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         private CCWindowLayout mCurrentWindowLayout;
         private boolean mIsDelayed = false;
         private final CCWindowLayout[] mCaptionWindowLayouts = new CCWindowLayout[8];
-        private final ArrayList<Cea708CCParser.CaptionEvent> mPendingCaptionEvents = new ArrayList<>();
+        private final ArrayList<Cea708CCParser.CaptionEvent> mPendingCaptionEvents =
+                new ArrayList<>();
         private final Handler mHandler = new Handler(this);
 
         public CCHandler(CCLayout ccLayout) {
@@ -391,7 +430,9 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
 
         private void setCurrentWindowLayout(int windowId) {
             CCWindowLayout windowLayout;
-            if (windowId < 0 || windowId >= this.mCaptionWindowLayouts.length || (windowLayout = this.mCaptionWindowLayouts[windowId]) == null) {
+            if (windowId < 0
+                    || windowId >= this.mCaptionWindowLayouts.length
+                    || (windowLayout = this.mCaptionWindowLayouts[windowId]) == null) {
                 return;
             }
             this.mCurrentWindowLayout = windowLayout;
@@ -401,7 +442,8 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
             CCWindowLayout windowLayout;
             ArrayList<CCWindowLayout> windows = new ArrayList<>();
             for (int i = 0; i < 8; i++) {
-                if (((1 << i) & windowBitmap) != 0 && (windowLayout = this.mCaptionWindowLayouts[i]) != null) {
+                if (((1 << i) & windowBitmap) != 0
+                        && (windowLayout = this.mCaptionWindowLayouts[i]) != null) {
                     windows.add(windowLayout);
                 }
             }
@@ -490,7 +532,9 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
 
         private void defineWindow(Cea708CCParser.CaptionWindow window) {
             int windowId;
-            if (window == null || (windowId = window.id) < 0 || windowId >= this.mCaptionWindowLayouts.length) {
+            if (window == null
+                    || (windowId = window.id) < 0
+                    || windowId >= this.mCaptionWindowLayouts.length) {
                 return;
             }
             CCWindowLayout windowLayout = this.mCaptionWindowLayouts[windowId];
@@ -599,7 +643,8 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
             this(context, attrs, defStyleAttr, 0);
         }
 
-        public CCWindowLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        public CCWindowLayout(
+                Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
             super(context, attrs, defStyleAttr, defStyleRes);
             this.mRowLimit = 0;
             this.mBuilder = new SpannableStringBuilder();
@@ -608,7 +653,8 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
             this.mCCView = new CCView(context);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(-2, -2);
             addView(this.mCCView, params);
-            CaptioningManager captioningManager = (CaptioningManager) context.getSystemService(Context.CAPTIONING_SERVICE);
+            CaptioningManager captioningManager =
+                    (CaptioningManager) context.getSystemService(Context.CAPTIONING_SERVICE);
             this.mFontScale = captioningManager.getFontScale();
             setCaptionStyle(captioningManager.getUserStyle());
             this.mCCView.setText("");
@@ -674,8 +720,7 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
             }
         }
 
-        public void setPenColor(Cea708CCParser.CaptionPenColor penColor) {
-        }
+        public void setPenColor(Cea708CCParser.CaptionPenColor penColor) {}
 
         public void setPenLocation(int row, int column) {
             if (this.mRow >= 0) {
@@ -686,15 +731,13 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
             this.mRow = row;
         }
 
-        public void setWindowAttr(Cea708CCParser.CaptionWindowAttr windowAttr) {
-        }
+        public void setWindowAttr(Cea708CCParser.CaptionWindowAttr windowAttr) {}
 
         public void sendBuffer(String buffer) {
             appendText(buffer);
         }
 
-        public void sendControl(char control) {
-        }
+        public void sendControl(char control) {}
 
         public void initWindow(CCLayout ccLayout, Cea708CCParser.CaptionWindow captionWindow) {
             if (this.mCCLayout != ccLayout) {
@@ -705,14 +748,24 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                 this.mCCLayout.addOnLayoutChangeListener(this);
                 updateWidestChar();
             }
-            float scaleRow = captionWindow.anchorVertical / (captionWindow.relativePositioning ? 99 : 74);
-            float scaleCol = captionWindow.anchorHorizontal / (captionWindow.relativePositioning ? 99 : 209);
+            float scaleRow =
+                    captionWindow.anchorVertical / (captionWindow.relativePositioning ? 99 : 74);
+            float scaleCol =
+                    captionWindow.anchorHorizontal / (captionWindow.relativePositioning ? 99 : 209);
             if (scaleRow < 0.0f || scaleRow > 1.0f) {
-                Log.i(TAG, "The vertical position of the anchor point should be at the range of 0 and 1 but " + scaleRow);
+                Log.i(
+                        TAG,
+                        "The vertical position of the anchor point should be at the range of 0 and"
+                                + " 1 but "
+                                + scaleRow);
                 scaleRow = Math.max(0.0f, Math.min(scaleRow, 1.0f));
             }
             if (scaleCol < 0.0f || scaleCol > 1.0f) {
-                Log.i(TAG, "The horizontal position of the anchor point should be at the range of 0 and 1 but " + scaleCol);
+                Log.i(
+                        TAG,
+                        "The horizontal position of the anchor point should be at the range of 0"
+                                + " and 1 but "
+                                + scaleCol);
                 scaleCol = Math.max(0.0f, Math.min(scaleCol, 1.0f));
             }
             int gravity = 17;
@@ -740,7 +793,10 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                     paint.setTypeface(this.mCaptionStyle.getTypeface());
                     paint.setTextSize(this.mTextSize);
                     float maxWindowWidth = paint.measureText(widestTextBuilder.toString());
-                    float halfMaxWidthScale = this.mCCLayout.getWidth() > 0 ? (maxWindowWidth / 2.0f) / (this.mCCLayout.getWidth() * 0.8f) : 0.0f;
+                    float halfMaxWidthScale =
+                            this.mCCLayout.getWidth() > 0
+                                    ? (maxWindowWidth / 2.0f) / (this.mCCLayout.getWidth() * 0.8f)
+                                    : 0.0f;
                     if (halfMaxWidthScale > 0.0f && halfMaxWidthScale < scaleCol) {
                         this.mCCView.setAlignment(Layout.Alignment.ALIGN_NORMAL);
                         scaleStartCol = scaleCol - halfMaxWidthScale;
@@ -777,7 +833,10 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                     scaleEndRow = scaleRow;
                     break;
             }
-            this.mCCLayout.addOrUpdateViewToSafeTitleArea(this, new ScaledLayout.ScaledLayoutParams(scaleStartRow, scaleEndRow, scaleStartCol, scaleEndCol));
+            this.mCCLayout.addOrUpdateViewToSafeTitleArea(
+                    this,
+                    new ScaledLayout.ScaledLayoutParams(
+                            scaleStartRow, scaleEndRow, scaleStartCol, scaleEndCol));
             setCaptionWindowId(captionWindow.id);
             setRowLimit(captionWindow.rowCount);
             setGravity(gravity);
@@ -789,7 +848,16 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         }
 
         @Override // android.view.View.OnLayoutChangeListener
-        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        public void onLayoutChange(
+                View v,
+                int left,
+                int top,
+                int right,
+                int bottom,
+                int oldLeft,
+                int oldTop,
+                int oldRight,
+                int oldBottom) {
             int width = right - left;
             int height = bottom - top;
             if (width != this.mLastCaptionLayoutWidth || height != this.mLastCaptionLayoutHeight) {
@@ -805,7 +873,7 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
             Charset latin1 = Charset.forName("ISO-8859-1");
             float widestCharWidth = 0.0f;
             for (int i = 0; i < 256; i++) {
-                String ch = new String(new byte[]{(byte) i}, latin1);
+                String ch = new String(new byte[] {(byte) i}, latin1);
                 float charWidth = paint.measureText(ch);
                 if (widestCharWidth < charWidth) {
                     widestCharWidth = charWidth;
@@ -880,7 +948,13 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
                 }
             }
             String[] lines = TextUtils.split(this.mBuilder.toString(), "\n");
-            String truncatedText = TextUtils.join("\n", Arrays.copyOfRange(lines, Math.max(0, lines.length - (this.mRowLimit + 1)), lines.length));
+            String truncatedText =
+                    TextUtils.join(
+                            "\n",
+                            Arrays.copyOfRange(
+                                    lines,
+                                    Math.max(0, lines.length - (this.mRowLimit + 1)),
+                                    lines.length));
             this.mBuilder.delete(0, this.mBuilder.length() - truncatedText.length());
             int start = 0;
             int last = this.mBuilder.length() - 1;
@@ -916,7 +990,8 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
 
     /* compiled from: Cea708CaptionRenderer.java */
     static class CCView extends SubtitleView {
-        private static final CaptioningManager.CaptionStyle DEFAULT_CAPTION_STYLE = CaptioningManager.CaptionStyle.DEFAULT;
+        private static final CaptioningManager.CaptionStyle DEFAULT_CAPTION_STYLE =
+                CaptioningManager.CaptionStyle.DEFAULT;
 
         public CCView(Context context) {
             this(context, null);
@@ -935,8 +1010,14 @@ class Cea708CCWidget extends ClosedCaptionWidget implements Cea708CCParser.Displ
         }
 
         public void setCaptionStyle(CaptioningManager.CaptionStyle style) {
-            setForegroundColor(style.hasForegroundColor() ? style.foregroundColor : DEFAULT_CAPTION_STYLE.foregroundColor);
-            setBackgroundColor(style.hasBackgroundColor() ? style.backgroundColor : DEFAULT_CAPTION_STYLE.backgroundColor);
+            setForegroundColor(
+                    style.hasForegroundColor()
+                            ? style.foregroundColor
+                            : DEFAULT_CAPTION_STYLE.foregroundColor);
+            setBackgroundColor(
+                    style.hasBackgroundColor()
+                            ? style.backgroundColor
+                            : DEFAULT_CAPTION_STYLE.backgroundColor);
             setEdgeType(style.hasEdgeType() ? style.edgeType : DEFAULT_CAPTION_STYLE.edgeType);
             setEdgeColor(style.hasEdgeColor() ? style.edgeColor : DEFAULT_CAPTION_STYLE.edgeColor);
             setTypeface(style.getTypeface());

@@ -6,6 +6,7 @@ import android.provider.Telephony;
 import android.telephony.PhoneNumberUtils;
 import android.util.Slog;
 import android.util.SparseIntArray;
+
 import java.util.function.BiConsumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -31,7 +32,15 @@ public final class MmsQueryHelper {
     }
 
     public final String getMmsAddress(int i, String str) {
-        Cursor query = this.mContext.getContentResolver().query(Telephony.Mms.Addr.getAddrUriForMessage(str), new String[]{"address", "type"}, null, null, null);
+        Cursor query =
+                this.mContext
+                        .getContentResolver()
+                        .query(
+                                Telephony.Mms.Addr.getAddrUriForMessage(str),
+                                new String[] {"address", "type"},
+                                null,
+                                null,
+                                null);
         try {
             if (query == null) {
                 Slog.w("MmsQueryHelper", "Cursor is null when querying MMS address table.");

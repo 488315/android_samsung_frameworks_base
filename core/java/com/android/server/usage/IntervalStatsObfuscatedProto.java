@@ -19,8 +19,7 @@ public final class IntervalStatsObfuscatedProto {
         public static final long COUNT = 1120986464257L;
         public static final long TIME_MS = 1112396529666L;
 
-        public CountAndTime() {
-        }
+        public CountAndTime() {}
     }
 
     public final class Configuration {
@@ -30,15 +29,13 @@ public final class IntervalStatsObfuscatedProto {
         public static final long LAST_TIME_ACTIVE_MS = 1112396529666L;
         public static final long TOTAL_TIME_ACTIVE_MS = 1112396529667L;
 
-        public Configuration() {
-        }
+        public Configuration() {}
     }
 
     public final class PackageUsage {
         public static final long PACKAGE_NAME = 1138166333441L;
         public static final long TIME_MS = 1112396529666L;
 
-        public PackageUsage() {
-        }
+        public PackageUsage() {}
     }
 }

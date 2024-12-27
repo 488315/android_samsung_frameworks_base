@@ -18,23 +18,25 @@ import android.system.Os;
 import android.system.OsConstants;
 import android.util.ExceptionUtils;
 import android.util.Slog;
+
 import com.android.internal.util.FastXmlSerializer;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.XmlUtils;
 import com.android.internal.util.function.pooled.PooledLambda;
-import com.android.server.blob.BlobAccessMode;
-import com.android.server.blob.BlobStoreConfig;
-import com.android.server.blob.BlobStoreManagerService;
+
+import libcore.io.IoUtils;
+
 import com.samsung.android.knox.analytics.util.KnoxAnalyticsDataConverter;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlSerializer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -54,7 +56,14 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
     public int mState = 0;
     public final BlobAccessMode mBlobAccessMode = new BlobAccessMode();
 
-    public BlobStoreSession(Context context, long j, BlobHandle blobHandle, int i, String str, long j2, BlobStoreManagerService.SessionStateChangeListener sessionStateChangeListener) {
+    public BlobStoreSession(
+            Context context,
+            long j,
+            BlobHandle blobHandle,
+            int i,
+            String str,
+            long j2,
+            BlobStoreManagerService.SessionStateChangeListener sessionStateChangeListener) {
         this.mContext = context;
         this.mBlobHandle = blobHandle;
         this.mSessionId = j;
@@ -64,11 +73,19 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
         this.mListener = sessionStateChangeListener;
     }
 
-    public static BlobStoreSession createFromXml(XmlPullParser xmlPullParser, int i, Context context, BlobStoreManagerService.SessionStateChangeListener sessionStateChangeListener) {
+    public static BlobStoreSession createFromXml(
+            XmlPullParser xmlPullParser,
+            int i,
+            Context context,
+            BlobStoreManagerService.SessionStateChangeListener sessionStateChangeListener) {
         long readLongAttribute = XmlUtils.readLongAttribute(xmlPullParser, "id");
-        String readStringAttribute = XmlUtils.readStringAttribute(xmlPullParser, KnoxAnalyticsDataConverter.PAYLOAD);
+        String readStringAttribute =
+                XmlUtils.readStringAttribute(xmlPullParser, KnoxAnalyticsDataConverter.PAYLOAD);
         int readIntAttribute = XmlUtils.readIntAttribute(xmlPullParser, "u");
-        long readLongAttribute2 = i >= 5 ? XmlUtils.readLongAttribute(xmlPullParser, "crt") : System.currentTimeMillis();
+        long readLongAttribute2 =
+                i >= 5
+                        ? XmlUtils.readLongAttribute(xmlPullParser, "crt")
+                        : System.currentTimeMillis();
         int depth = xmlPullParser.getDepth();
         BlobHandle blobHandle = null;
         BlobAccessMode blobAccessMode = null;
@@ -87,7 +104,15 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
             Slog.wtf("BlobStore", "blobAccessMode should be available");
             return null;
         }
-        BlobStoreSession blobStoreSession = new BlobStoreSession(context, readLongAttribute, blobHandle, readIntAttribute, readStringAttribute, readLongAttribute2, sessionStateChangeListener);
+        BlobStoreSession blobStoreSession =
+                new BlobStoreSession(
+                        context,
+                        readLongAttribute,
+                        blobHandle,
+                        readIntAttribute,
+                        readStringAttribute,
+                        readLongAttribute2,
+                        sessionStateChangeListener);
         BlobAccessMode blobAccessMode2 = blobStoreSession.mBlobAccessMode;
         blobAccessMode2.getClass();
         if ((blobAccessMode.mAccessType & 8) != 0) {
@@ -130,16 +155,24 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
         synchronized (this.mSessionLock) {
             try {
                 if (this.mState != 1) {
-                    throw new IllegalStateException("Not allowed to change access type in state: ".concat(stateToString(this.mState)));
+                    throw new IllegalStateException(
+                            "Not allowed to change access type in state: "
+                                    .concat(stateToString(this.mState)));
                 }
                 int size = this.mBlobAccessMode.mAllowedPackages.size();
                 boolean z = BlobStoreConfig.LOGV;
-                if (size >= BlobStoreConfig.DeviceConfigProperties.MAX_BLOB_ACCESS_PERMITTED_PACKAGES) {
-                    throw new ParcelableException(new LimitExceededException("Too many packages permitted to access the blob: " + this.mBlobAccessMode.mAllowedPackages.size()));
+                if (size
+                        >= BlobStoreConfig.DeviceConfigProperties
+                                .MAX_BLOB_ACCESS_PERMITTED_PACKAGES) {
+                    throw new ParcelableException(
+                            new LimitExceededException(
+                                    "Too many packages permitted to access the blob: "
+                                            + this.mBlobAccessMode.mAllowedPackages.size()));
                 }
                 BlobAccessMode blobAccessMode = this.mBlobAccessMode;
                 blobAccessMode.mAccessType |= 8;
-                blobAccessMode.mAllowedPackages.add(new BlobAccessMode.PackageIdentifier(str, bArr));
+                blobAccessMode.mAllowedPackages.add(
+                        new BlobAccessMode.PackageIdentifier(str, bArr));
             } catch (Throwable th) {
                 throw th;
             }
@@ -151,7 +184,9 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
         synchronized (this.mSessionLock) {
             try {
                 if (this.mState != 1) {
-                    throw new IllegalStateException("Not allowed to change access type in state: ".concat(stateToString(this.mState)));
+                    throw new IllegalStateException(
+                            "Not allowed to change access type in state: "
+                                    .concat(stateToString(this.mState)));
                 }
                 this.mBlobAccessMode.mAccessType |= 2;
             } catch (Throwable th) {
@@ -165,7 +200,9 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
         synchronized (this.mSessionLock) {
             try {
                 if (this.mState != 1) {
-                    throw new IllegalStateException("Not allowed to change access type in state: ".concat(stateToString(this.mState)));
+                    throw new IllegalStateException(
+                            "Not allowed to change access type in state: "
+                                    .concat(stateToString(this.mState)));
                 }
                 this.mBlobAccessMode.mAccessType |= 4;
             } catch (Throwable th) {
@@ -178,7 +215,9 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
         if (Binder.getCallingUid() == this.mOwnerUid) {
             return;
         }
-        throw new SecurityException(AmFmBandRange$$ExternalSyntheticOutline0.m(this.mOwnerUid, new StringBuilder(), " is not the session owner"));
+        throw new SecurityException(
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        this.mOwnerUid, new StringBuilder(), " is not the session owner"));
     }
 
     public final void close() {
@@ -191,7 +230,9 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
             try {
                 if (this.mState != 1) {
                     if (i != 0) {
-                        throw new IllegalStateException("Not allowed to delete or abandon a session with state: ".concat(stateToString(this.mState)));
+                        throw new IllegalStateException(
+                                "Not allowed to delete or abandon a session with state: "
+                                        .concat(stateToString(this.mState)));
                     }
                     return;
                 }
@@ -199,7 +240,12 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
                 revokeAllFds();
                 if (z) {
                     BlobStoreManagerService blobStoreManagerService = BlobStoreManagerService.this;
-                    blobStoreManagerService.mHandler.post(PooledLambda.obtainRunnable(new BlobStoreManagerService$SessionStateChangeListener$$ExternalSyntheticLambda0(), blobStoreManagerService, this).recycleOnUse());
+                    blobStoreManagerService.mHandler.post(
+                            PooledLambda.obtainRunnable(
+                                            new BlobStoreManagerService$SessionStateChangeListener$$ExternalSyntheticLambda0(),
+                                            blobStoreManagerService,
+                                            this)
+                                    .recycleOnUse());
                 }
             } catch (Throwable th) {
                 throw th;
@@ -247,10 +293,16 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
         synchronized (this.mSessionLock) {
             try {
                 if (this.mState != 1) {
-                    throw new IllegalStateException("Not allowed to get access type in state: ".concat(stateToString(this.mState)));
+                    throw new IllegalStateException(
+                            "Not allowed to get access type in state: "
+                                    .concat(stateToString(this.mState)));
                 }
                 BlobAccessMode blobAccessMode = this.mBlobAccessMode;
-                contains = (blobAccessMode.mAccessType & 8) == 0 ? false : blobAccessMode.mAllowedPackages.contains(new BlobAccessMode.PackageIdentifier(str, bArr));
+                contains =
+                        (blobAccessMode.mAccessType & 8) == 0
+                                ? false
+                                : blobAccessMode.mAllowedPackages.contains(
+                                        new BlobAccessMode.PackageIdentifier(str, bArr));
             } finally {
             }
         }
@@ -264,7 +316,9 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
             try {
                 z = true;
                 if (this.mState != 1) {
-                    throw new IllegalStateException("Not allowed to get access type in state: ".concat(stateToString(this.mState)));
+                    throw new IllegalStateException(
+                            "Not allowed to get access type in state: "
+                                    .concat(stateToString(this.mState)));
                 }
                 if ((this.mBlobAccessMode.mAccessType & 2) == 0) {
                     z = false;
@@ -282,7 +336,9 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
             try {
                 z = true;
                 if (this.mState != 1) {
-                    throw new IllegalStateException("Not allowed to get access type in state: ".concat(stateToString(this.mState)));
+                    throw new IllegalStateException(
+                            "Not allowed to get access type in state: "
+                                    .concat(stateToString(this.mState)));
                 }
                 if ((this.mBlobAccessMode.mAccessType & 4) == 0) {
                     z = false;
@@ -305,7 +361,9 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
                     z = true;
                 }
                 if (z) {
-                    throw new IllegalStateException("Not allowed to open session with state: ".concat(stateToString(this.mState)));
+                    throw new IllegalStateException(
+                            "Not allowed to open session with state: "
+                                    .concat(stateToString(this.mState)));
                 }
                 this.mState = 1;
             } catch (Throwable th) {
@@ -321,7 +379,8 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
         synchronized (this.mSessionLock) {
             try {
                 if (this.mState != 1) {
-                    throw new IllegalStateException("Not allowed to read in state: ".concat(stateToString(this.mState)));
+                    throw new IllegalStateException(
+                            "Not allowed to read in state: ".concat(stateToString(this.mState)));
                 }
                 boolean z = BlobStoreConfig.LOGV;
                 if (!BlobStoreConfig.DeviceConfigProperties.USE_REVOCABLE_FD_FOR_READS) {
@@ -334,17 +393,23 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
                 try {
                     fileDescriptor = openReadInternal();
                     try {
-                        RevocableFileDescriptor revocableFileDescriptor2 = new RevocableFileDescriptor(this.mContext, fileDescriptor);
+                        RevocableFileDescriptor revocableFileDescriptor2 =
+                                new RevocableFileDescriptor(this.mContext, fileDescriptor);
                         synchronized (this.mSessionLock) {
                             if (this.mState != 1) {
                                 IoUtils.closeQuietly(fileDescriptor);
-                                throw new IllegalStateException("Not allowed to read in state: ".concat(stateToString(this.mState)));
+                                throw new IllegalStateException(
+                                        "Not allowed to read in state: "
+                                                .concat(stateToString(this.mState)));
                             }
                             synchronized (this.mRevocableFds) {
                                 this.mRevocableFds.add(revocableFileDescriptor2);
                             }
-                            revocableFileDescriptor2.addOnCloseListener(new BlobStoreSession$$ExternalSyntheticLambda0(this, revocableFileDescriptor2));
-                            revocableFileDescriptor = revocableFileDescriptor2.getRevocableFileDescriptor();
+                            revocableFileDescriptor2.addOnCloseListener(
+                                    new BlobStoreSession$$ExternalSyntheticLambda0(
+                                            this, revocableFileDescriptor2));
+                            revocableFileDescriptor =
+                                    revocableFileDescriptor2.getRevocableFileDescriptor();
                         }
                         return revocableFileDescriptor;
                     } catch (IOException e2) {
@@ -381,22 +446,31 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
         assertCallerIsOwner();
         synchronized (this.mSessionLock) {
             if (this.mState != 1) {
-                throw new IllegalStateException("Not allowed to write in state: ".concat(stateToString(this.mState)));
+                throw new IllegalStateException(
+                        "Not allowed to write in state: ".concat(stateToString(this.mState)));
             }
         }
         try {
             fileDescriptor = openWriteInternal(j, j2);
             try {
-                RevocableFileDescriptor revocableFileDescriptor2 = new RevocableFileDescriptor(this.mContext, fileDescriptor, BlobStoreUtils.getRevocableFdHandler());
+                RevocableFileDescriptor revocableFileDescriptor2 =
+                        new RevocableFileDescriptor(
+                                this.mContext,
+                                fileDescriptor,
+                                BlobStoreUtils.getRevocableFdHandler());
                 synchronized (this.mSessionLock) {
                     if (this.mState != 1) {
                         IoUtils.closeQuietly(fileDescriptor);
-                        throw new IllegalStateException("Not allowed to write in state: ".concat(stateToString(this.mState)));
+                        throw new IllegalStateException(
+                                "Not allowed to write in state: "
+                                        .concat(stateToString(this.mState)));
                     }
                     synchronized (this.mRevocableFds) {
                         this.mRevocableFds.add(revocableFileDescriptor2);
                     }
-                    revocableFileDescriptor2.addOnCloseListener(new BlobStoreSession$$ExternalSyntheticLambda0(this, revocableFileDescriptor2));
+                    revocableFileDescriptor2.addOnCloseListener(
+                            new BlobStoreSession$$ExternalSyntheticLambda0(
+                                    this, revocableFileDescriptor2));
                     revocableFileDescriptor = revocableFileDescriptor2.getRevocableFileDescriptor();
                 }
                 return revocableFileDescriptor;
@@ -417,12 +491,17 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
             if (sessionFile == null) {
                 throw new IllegalStateException("Couldn't get the file for this session");
             }
-            FileDescriptor open = Os.open(sessionFile.getPath(), OsConstants.O_CREAT | OsConstants.O_RDWR, FrameworkStatsLog.NON_A11Y_TOOL_SERVICE_WARNING_REPORT);
+            FileDescriptor open =
+                    Os.open(
+                            sessionFile.getPath(),
+                            OsConstants.O_CREAT | OsConstants.O_RDWR,
+                            FrameworkStatsLog.NON_A11Y_TOOL_SERVICE_WARNING_REPORT);
             if (j > 0 && Os.lseek(open, j, OsConstants.SEEK_SET) != j) {
                 throw new IllegalStateException("Failed to seek " + j + "; curOffset=" + j);
             }
             if (j2 > 0) {
-                ((StorageManager) this.mContext.getSystemService(StorageManager.class)).allocateBytes(open, j2);
+                ((StorageManager) this.mContext.getSystemService(StorageManager.class))
+                        .allocateBytes(open, j2);
             }
             return open;
         } catch (ErrnoException e) {
@@ -468,7 +547,8 @@ class BlobStoreSession extends IBlobStoreSession.Stub {
     public final void writeToXml(XmlSerializer xmlSerializer) {
         synchronized (this.mSessionLock) {
             XmlUtils.writeLongAttribute(xmlSerializer, "id", this.mSessionId);
-            XmlUtils.writeStringAttribute(xmlSerializer, KnoxAnalyticsDataConverter.PAYLOAD, this.mOwnerPackageName);
+            XmlUtils.writeStringAttribute(
+                    xmlSerializer, KnoxAnalyticsDataConverter.PAYLOAD, this.mOwnerPackageName);
             XmlUtils.writeIntAttribute(xmlSerializer, "u", this.mOwnerUid);
             XmlUtils.writeLongAttribute(xmlSerializer, "crt", this.mCreationTimeMs);
             FastXmlSerializer fastXmlSerializer = (FastXmlSerializer) xmlSerializer;

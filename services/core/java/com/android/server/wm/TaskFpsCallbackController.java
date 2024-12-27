@@ -3,6 +3,7 @@ package com.android.server.wm;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.window.ITaskFpsCallback;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,12 +25,15 @@ final class TaskFpsCallbackController {
             return;
         }
         this.mTaskFpsCallbacks.put(asBinder, Long.valueOf(nativeRegister(iTaskFpsCallback, i)));
-        IBinder.DeathRecipient deathRecipient = new IBinder.DeathRecipient() { // from class: com.android.server.wm.TaskFpsCallbackController$$ExternalSyntheticLambda0
-            @Override // android.os.IBinder.DeathRecipient
-            public final void binderDied() {
-                TaskFpsCallbackController.this.unregisterListener(iTaskFpsCallback);
-            }
-        };
+        IBinder.DeathRecipient deathRecipient =
+                new IBinder
+                        .DeathRecipient() { // from class:
+                                            // com.android.server.wm.TaskFpsCallbackController$$ExternalSyntheticLambda0
+                    @Override // android.os.IBinder.DeathRecipient
+                    public final void binderDied() {
+                        TaskFpsCallbackController.this.unregisterListener(iTaskFpsCallback);
+                    }
+                };
         try {
             asBinder.linkToDeath(deathRecipient, 0);
             this.mDeathRecipients.put(asBinder, deathRecipient);

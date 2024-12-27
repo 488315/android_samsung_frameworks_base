@@ -28,7 +28,8 @@ public class CameraExtensionForwardProcessor {
     private ImageWriter mOutputWriter = null;
     private boolean mOutputAbandoned = false;
 
-    public CameraExtensionForwardProcessor(IPreviewImageProcessorImpl processor, int format, long surfaceUsage, Handler handler) {
+    public CameraExtensionForwardProcessor(
+            IPreviewImageProcessorImpl processor, int format, long surfaceUsage, Handler handler) {
         this.mProcessor = processor;
         this.mOutputSurfaceUsage = surfaceUsage;
         this.mOutputSurfaceFormat = format;
@@ -51,7 +52,9 @@ public class CameraExtensionForwardProcessor {
         try {
             initializePipeline();
         } catch (RemoteException e) {
-            Log.e(TAG, "Failed to initialize forward processor, extension service does not respond!");
+            Log.e(
+                    TAG,
+                    "Failed to initialize forward processor, extension service does not respond!");
         }
     }
 
@@ -71,27 +74,44 @@ public class CameraExtensionForwardProcessor {
             this.mOutputWriter = null;
         }
         if (this.mIntermediateReader == null) {
-            this.mIntermediateReader = ImageReader.newInstance(this.mResolution.getWidth(), this.mResolution.getHeight(), 35, 3, this.mOutputSurfaceUsage);
+            this.mIntermediateReader =
+                    ImageReader.newInstance(
+                            this.mResolution.getWidth(),
+                            this.mResolution.getHeight(),
+                            35,
+                            3,
+                            this.mOutputSurfaceUsage);
             this.mIntermediateSurface = this.mIntermediateReader.getSurface();
-            this.mIntermediateReader.setOnImageAvailableListener(new ForwardCallback(), this.mHandler);
+            this.mIntermediateReader.setOnImageAvailableListener(
+                    new ForwardCallback(), this.mHandler);
             this.mProcessor.onOutputSurface(this.mIntermediateSurface, this.mOutputSurfaceFormat);
             this.mProcessor.onImageFormatUpdate(35);
-            android.hardware.camera2.extension.Size sz = new android.hardware.camera2.extension.Size();
+            android.hardware.camera2.extension.Size sz =
+                    new android.hardware.camera2.extension.Size();
             sz.width = this.mResolution.getWidth();
             sz.height = this.mResolution.getHeight();
             this.mProcessor.onResolutionUpdate(sz);
         }
     }
 
-    public void process(ParcelImage image, TotalCaptureResult totalCaptureResult, IProcessResultImpl resultCallback) throws RemoteException {
-        if (this.mIntermediateSurface != null && this.mIntermediateSurface.isValid() && !this.mOutputAbandoned) {
-            this.mProcessor.process(image, totalCaptureResult.getNativeMetadata(), totalCaptureResult.getSequenceId(), resultCallback);
+    public void process(
+            ParcelImage image,
+            TotalCaptureResult totalCaptureResult,
+            IProcessResultImpl resultCallback)
+            throws RemoteException {
+        if (this.mIntermediateSurface != null
+                && this.mIntermediateSurface.isValid()
+                && !this.mOutputAbandoned) {
+            this.mProcessor.process(
+                    image,
+                    totalCaptureResult.getNativeMetadata(),
+                    totalCaptureResult.getSequenceId(),
+                    resultCallback);
         }
     }
 
     private class ForwardCallback implements ImageReader.OnImageAvailableListener {
-        private ForwardCallback() {
-        }
+        private ForwardCallback() {}
 
         @Override // android.media.ImageReader.OnImageAvailableListener
         public void onImageAvailable(ImageReader reader) {
@@ -101,15 +121,24 @@ public class CameraExtensionForwardProcessor {
                     Log.e(CameraExtensionForwardProcessor.TAG, "Invalid image");
                     return;
                 }
-                if (CameraExtensionForwardProcessor.this.mOutputSurface != null && CameraExtensionForwardProcessor.this.mOutputSurface.isValid() && !CameraExtensionForwardProcessor.this.mOutputAbandoned) {
+                if (CameraExtensionForwardProcessor.this.mOutputSurface != null
+                        && CameraExtensionForwardProcessor.this.mOutputSurface.isValid()
+                        && !CameraExtensionForwardProcessor.this.mOutputAbandoned) {
                     if (CameraExtensionForwardProcessor.this.mOutputWriter == null) {
-                        CameraExtensionForwardProcessor.this.mOutputWriter = ImageWriter.newInstance(CameraExtensionForwardProcessor.this.mOutputSurface, 3, processedImage.getFormat());
+                        CameraExtensionForwardProcessor.this.mOutputWriter =
+                                ImageWriter.newInstance(
+                                        CameraExtensionForwardProcessor.this.mOutputSurface,
+                                        3,
+                                        processedImage.getFormat());
                     }
                     try {
-                        CameraExtensionForwardProcessor.this.mOutputWriter.queueInputImage(processedImage);
+                        CameraExtensionForwardProcessor.this.mOutputWriter.queueInputImage(
+                                processedImage);
                         return;
                     } catch (IllegalStateException e) {
-                        Log.e(CameraExtensionForwardProcessor.TAG, "Failed to queue processed buffer!");
+                        Log.e(
+                                CameraExtensionForwardProcessor.TAG,
+                                "Failed to queue processed buffer!");
                         processedImage.close();
                         CameraExtensionForwardProcessor.this.mOutputAbandoned = true;
                         return;

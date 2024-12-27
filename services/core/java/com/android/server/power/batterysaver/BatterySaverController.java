@@ -9,10 +9,11 @@ import android.os.BatterySaverPolicyConfig;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
+
 import com.android.server.LocalServices;
 import com.android.server.pm.PackageManagerService;
 import com.android.server.power.Slog;
-import com.android.server.power.batterysaver.BatterySaverPolicy;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Optional;
@@ -33,41 +34,44 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
     public PowerManager mPowerManager;
     public Optional mPowerSaveModeChangedListenerPackage;
     public final ArrayList mListeners = new ArrayList();
-    public final AnonymousClass1 mReceiver = new BroadcastReceiver() { // from class: com.android.server.power.batterysaver.BatterySaverController.1
-        @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
-            boolean z;
-            z = true;
-            String action = intent.getAction();
-            action.getClass();
-            switch (action) {
-                case "android.intent.action.SCREEN_OFF":
-                case "android.intent.action.SCREEN_ON":
-                    if (BatterySaverController.this.isPolicyEnabled()) {
-                        BatterySaverController.this.mHandler.postStateChanged(5, false);
-                        return;
-                    } else {
-                        BatterySaverController.this.updateBatterySavingStats();
-                        return;
+    public final AnonymousClass1 mReceiver =
+            new BroadcastReceiver() { // from class:
+                                      // com.android.server.power.batterysaver.BatterySaverController.1
+                @Override // android.content.BroadcastReceiver
+                public final void onReceive(Context context, Intent intent) {
+                    boolean z;
+                    z = true;
+                    String action = intent.getAction();
+                    action.getClass();
+                    switch (action) {
+                        case "android.intent.action.SCREEN_OFF":
+                        case "android.intent.action.SCREEN_ON":
+                            if (BatterySaverController.this.isPolicyEnabled()) {
+                                BatterySaverController.this.mHandler.postStateChanged(5, false);
+                                return;
+                            } else {
+                                BatterySaverController.this.updateBatterySavingStats();
+                                return;
+                            }
+                        case "android.intent.action.BATTERY_CHANGED":
+                            synchronized (BatterySaverController.this.mLock) {
+                                BatterySaverController batterySaverController =
+                                        BatterySaverController.this;
+                                if (intent.getIntExtra("plugged", 0) == 0) {
+                                    z = false;
+                                }
+                                batterySaverController.mIsPluggedIn = z;
+                                break;
+                            }
+                        case "android.os.action.LIGHT_DEVICE_IDLE_MODE_CHANGED":
+                        case "android.os.action.DEVICE_IDLE_MODE_CHANGED":
+                            break;
+                        default:
+                            return;
                     }
-                case "android.intent.action.BATTERY_CHANGED":
-                    synchronized (BatterySaverController.this.mLock) {
-                        BatterySaverController batterySaverController = BatterySaverController.this;
-                        if (intent.getIntExtra("plugged", 0) == 0) {
-                            z = false;
-                        }
-                        batterySaverController.mIsPluggedIn = z;
-                        break;
-                    }
-                case "android.os.action.LIGHT_DEVICE_IDLE_MODE_CHANGED":
-                case "android.os.action.DEVICE_IDLE_MODE_CHANGED":
-                    break;
-                default:
-                    return;
-            }
-            BatterySaverController.this.updateBatterySavingStats();
-        }
-    };
+                    BatterySaverController.this.updateBatterySavingStats();
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
@@ -88,7 +92,9 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
                 Method dump skipped, instructions count: 412
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.batterysaver.BatterySaverController.MyHandler.dispatchMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.power.batterysaver.BatterySaverController.MyHandler.dispatchMessage(android.os.Message):void");
         }
 
         public final void postStateChanged(int i, boolean z) {
@@ -97,7 +103,12 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
     }
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.power.batterysaver.BatterySaverController$1] */
-    public BatterySaverController(Object obj, Context context, Looper looper, BatterySaverPolicy batterySaverPolicy, BatterySavingStats batterySavingStats) {
+    public BatterySaverController(
+            Object obj,
+            Context context,
+            Looper looper,
+            BatterySaverPolicy batterySaverPolicy,
+            BatterySavingStats batterySavingStats) {
         this.mLock = obj;
         this.mContext = context;
         this.mHandler = new MyHandler(looper);
@@ -121,7 +132,11 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
                 }
                 boolean z3 = this.mFullEnabledRaw;
                 BatterySaverPolicy batterySaverPolicy = this.mBatterySaverPolicy;
-                if (z3 ? batterySaverPolicy.setPolicyLevel(2) : this.mAdaptiveEnabledRaw ? batterySaverPolicy.setPolicyLevel(1) : batterySaverPolicy.setPolicyLevel(0)) {
+                if (z3
+                        ? batterySaverPolicy.setPolicyLevel(2)
+                        : this.mAdaptiveEnabledRaw
+                                ? batterySaverPolicy.setPolicyLevel(1)
+                                : batterySaverPolicy.setPolicyLevel(0)) {
                     this.mHandler.postStateChanged(i, true);
                 }
             } catch (Throwable th) {
@@ -135,13 +150,43 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
         batterySaverPolicy.getClass();
         BatterySaverPolicy.Policy policy = batterySaverPolicy.mFullPolicy;
         policy.getClass();
-        return new BatterySaverPolicyConfig.Builder().setAdjustBrightnessFactor(policy.adjustBrightnessFactor).setAdvertiseIsEnabled(policy.advertiseIsEnabled).setDeferFullBackup(policy.deferFullBackup).setDeferKeyValueBackup(policy.deferKeyValueBackup).setDisableAnimation(policy.disableAnimation).setDisableAod(policy.disableAod).setDisableLaunchBoost(policy.disableLaunchBoost).setDisableOptionalSensors(policy.disableOptionalSensors).setDisableVibration(policy.disableVibration).setEnableAdjustBrightness(policy.enableAdjustBrightness).setEnableDataSaver(policy.enableDataSaver).setEnableFirewall(policy.enableFirewall).setEnableNightMode(policy.enableNightMode).setEnableQuickDoze(policy.enableQuickDoze).setForceAllAppsStandby(policy.forceAllAppsStandby).setForceBackgroundCheck(policy.forceBackgroundCheck).setLocationMode(policy.locationMode).setSoundTriggerMode(policy.soundTriggerMode).build();
+        return new BatterySaverPolicyConfig.Builder()
+                .setAdjustBrightnessFactor(policy.adjustBrightnessFactor)
+                .setAdvertiseIsEnabled(policy.advertiseIsEnabled)
+                .setDeferFullBackup(policy.deferFullBackup)
+                .setDeferKeyValueBackup(policy.deferKeyValueBackup)
+                .setDisableAnimation(policy.disableAnimation)
+                .setDisableAod(policy.disableAod)
+                .setDisableLaunchBoost(policy.disableLaunchBoost)
+                .setDisableOptionalSensors(policy.disableOptionalSensors)
+                .setDisableVibration(policy.disableVibration)
+                .setEnableAdjustBrightness(policy.enableAdjustBrightness)
+                .setEnableDataSaver(policy.enableDataSaver)
+                .setEnableFirewall(policy.enableFirewall)
+                .setEnableNightMode(policy.enableNightMode)
+                .setEnableQuickDoze(policy.enableQuickDoze)
+                .setForceAllAppsStandby(policy.forceAllAppsStandby)
+                .setForceBackgroundCheck(policy.forceBackgroundCheck)
+                .setLocationMode(policy.locationMode)
+                .setSoundTriggerMode(policy.soundTriggerMode)
+                .build();
     }
 
     public final Optional getPowerSaveModeChangedListenerPackage() {
         if (this.mPowerSaveModeChangedListenerPackage == null) {
             String string = this.mContext.getString(R.string.ext_media_new_notification_message);
-            this.mPowerSaveModeChangedListenerPackage = string.equals(PackageManagerService.ensureSystemPackageName(((PackageManagerService.PackageManagerInternalImpl) ((PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class))).mService.snapshotComputer(), string)) ? Optional.of(string) : Optional.empty();
+            this.mPowerSaveModeChangedListenerPackage =
+                    string.equals(
+                                    PackageManagerService.ensureSystemPackageName(
+                                            ((PackageManagerService.PackageManagerInternalImpl)
+                                                            ((PackageManagerInternal)
+                                                                    LocalServices.getService(
+                                                                            PackageManagerInternal
+                                                                                    .class)))
+                                                    .mService.snapshotComputer(),
+                                            string))
+                            ? Optional.of(string)
+                            : Optional.empty();
         }
         return this.mPowerSaveModeChangedListenerPackage;
     }
@@ -150,7 +195,10 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
         boolean z;
         synchronized (this.mLock) {
             try {
-                z = this.mFullEnabledRaw || (this.mAdaptiveEnabledRaw && this.mBatterySaverPolicy.shouldAdvertiseIsEnabled());
+                z =
+                        this.mFullEnabledRaw
+                                || (this.mAdaptiveEnabledRaw
+                                        && this.mBatterySaverPolicy.shouldAdvertiseIsEnabled());
             } finally {
             }
         }
@@ -165,8 +213,10 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
         return z;
     }
 
-    public final boolean setAdaptivePolicyLocked(BatterySaverPolicyConfig batterySaverPolicyConfig) {
-        BatterySaverPolicy.Policy fromConfig = BatterySaverPolicy.Policy.fromConfig(batterySaverPolicyConfig);
+    public final boolean setAdaptivePolicyLocked(
+            BatterySaverPolicyConfig batterySaverPolicyConfig) {
+        BatterySaverPolicy.Policy fromConfig =
+                BatterySaverPolicy.Policy.fromConfig(batterySaverPolicyConfig);
         BatterySaverPolicy batterySaverPolicy = this.mBatterySaverPolicy;
         if (fromConfig == null) {
             batterySaverPolicy.getClass();
@@ -184,7 +234,8 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
     }
 
     public final boolean setFullPolicyLocked(BatterySaverPolicyConfig batterySaverPolicyConfig) {
-        BatterySaverPolicy.Policy fromConfig = BatterySaverPolicy.Policy.fromConfig(batterySaverPolicyConfig);
+        BatterySaverPolicy.Policy fromConfig =
+                BatterySaverPolicy.Policy.fromConfig(batterySaverPolicyConfig);
         BatterySaverPolicy batterySaverPolicy = this.mBatterySaverPolicy;
         if (fromConfig == null) {
             batterySaverPolicy.getClass();
@@ -203,7 +254,8 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
 
     public final void updateBatterySavingStats() {
         if (this.mPowerManager == null) {
-            PowerManager powerManager = (PowerManager) this.mContext.getSystemService(PowerManager.class);
+            PowerManager powerManager =
+                    (PowerManager) this.mContext.getSystemService(PowerManager.class);
             Objects.requireNonNull(powerManager);
             this.mPowerManager = powerManager;
         }
@@ -215,7 +267,10 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
         }
         boolean isInteractive = powerManager2.isInteractive();
         int i2 = 2;
-        int i3 = powerManager2.isDeviceIdleMode() ? 2 : powerManager2.isLightDeviceIdleMode() ? 1 : 0;
+        int i3 =
+                powerManager2.isDeviceIdleMode()
+                        ? 2
+                        : powerManager2.isLightDeviceIdleMode() ? 1 : 0;
         synchronized (this.mLock) {
             BatterySavingStats batterySavingStats = this.mBatterySavingStats;
             if (this.mFullEnabledRaw) {
@@ -225,7 +280,8 @@ public final class BatterySaverController implements BatterySaverPolicy.BatteryS
             }
             boolean z = this.mIsPluggedIn;
             synchronized (batterySavingStats.mLock) {
-                batterySavingStats.transitionStateLocked(BatterySavingStats.statesToIndex(i2, isInteractive ? 1 : 0, i3, z ? 1 : 0));
+                batterySavingStats.transitionStateLocked(
+                        BatterySavingStats.statesToIndex(i2, isInteractive ? 1 : 0, i3, z ? 1 : 0));
             }
         }
     }

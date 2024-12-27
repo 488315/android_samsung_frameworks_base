@@ -9,11 +9,12 @@ import android.service.gatekeeper.IGateKeeperService;
 public abstract class GateKeeper {
     public static final long INVALID_SECURE_USER_ID = 0;
 
-    private GateKeeper() {
-    }
+    private GateKeeper() {}
 
     public static IGateKeeperService getService() {
-        IGateKeeperService service = IGateKeeperService.Stub.asInterface(ServiceManager.getService("android.service.gatekeeper.IGateKeeperService"));
+        IGateKeeperService service =
+                IGateKeeperService.Stub.asInterface(
+                        ServiceManager.getService("android.service.gatekeeper.IGateKeeperService"));
         if (service == null) {
             throw new IllegalStateException("Gatekeeper service not available");
         }

@@ -12,8 +12,7 @@ public interface IAudioRoutesObserver extends IInterface {
 
     public static class Default implements IAudioRoutesObserver {
         @Override // android.media.IAudioRoutesObserver
-        public void dispatchAudioRoutesChanged(AudioRoutesInfo newRoutes) throws RemoteException {
-        }
+        public void dispatchAudioRoutesChanged(AudioRoutesInfo newRoutes) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IAudioRoutesObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAudioRoutesObserver {
+    public abstract static class Stub extends Binder implements IAudioRoutesObserver {
         public static final String DESCRIPTOR = "android.media.IAudioRoutesObserver";
         static final int TRANSACTION_dispatchAudioRoutesChanged = 1;
 
@@ -60,7 +59,8 @@ public interface IAudioRoutesObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +70,8 @@ public interface IAudioRoutesObserver extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AudioRoutesInfo _arg0 = (AudioRoutesInfo) data.readTypedObject(AudioRoutesInfo.CREATOR);
+                    AudioRoutesInfo _arg0 =
+                            (AudioRoutesInfo) data.readTypedObject(AudioRoutesInfo.CREATOR);
                     data.enforceNoDataAvail();
                     dispatchAudioRoutesChanged(_arg0);
                     return true;
@@ -96,7 +97,8 @@ public interface IAudioRoutesObserver extends IInterface {
             }
 
             @Override // android.media.IAudioRoutesObserver
-            public void dispatchAudioRoutesChanged(AudioRoutesInfo newRoutes) throws RemoteException {
+            public void dispatchAudioRoutesChanged(AudioRoutesInfo newRoutes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

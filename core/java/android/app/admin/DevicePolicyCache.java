@@ -1,6 +1,7 @@
 package android.app.admin;
 
 import com.android.server.LocalServices;
+
 import java.util.Collections;
 import java.util.Map;
 
@@ -18,19 +19,19 @@ public abstract class DevicePolicyCache {
 
     public abstract boolean isScreenCaptureAllowed(int i);
 
-    protected DevicePolicyCache() {
-    }
+    protected DevicePolicyCache() {}
 
     public static DevicePolicyCache getInstance() {
-        DevicePolicyManagerInternal dpmi = (DevicePolicyManagerInternal) LocalServices.getService(DevicePolicyManagerInternal.class);
+        DevicePolicyManagerInternal dpmi =
+                (DevicePolicyManagerInternal)
+                        LocalServices.getService(DevicePolicyManagerInternal.class);
         return dpmi != null ? dpmi.getDevicePolicyCache() : EmptyDevicePolicyCache.INSTANCE;
     }
 
     private static class EmptyDevicePolicyCache extends DevicePolicyCache {
         private static final EmptyDevicePolicyCache INSTANCE = new EmptyDevicePolicyCache();
 
-        private EmptyDevicePolicyCache() {
-        }
+        private EmptyDevicePolicyCache() {}
 
         @Override // android.app.admin.DevicePolicyCache
         public boolean isScreenCaptureAllowed(int userHandle) {

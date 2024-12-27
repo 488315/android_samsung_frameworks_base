@@ -9,6 +9,7 @@ import android.os.ShellCommand;
 import android.os.UserHandle;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.AuthenticationStatsCollector;
 import com.android.server.biometrics.Utils;
@@ -16,6 +17,7 @@ import com.android.server.biometrics.sensors.BaseClientMonitor;
 import com.android.server.biometrics.sensors.BiometricNotificationImpl;
 import com.android.server.biometrics.sensors.ClientMonitorCallback;
 import com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintProvider;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,8 +45,11 @@ public final class FingerprintShellCommand extends ShellCommand {
             try {
                 Pair singleProvider = fingerprintService.mRegistry.getSingleProvider();
                 if (singleProvider != null) {
-                    AuthenticationStatsCollector authenticationStatsCollector = ((FingerprintProvider) singleProvider.second).mAuthenticationStatsCollector;
-                    BiometricNotificationImpl biometricNotificationImpl = authenticationStatsCollector.mBiometricNotification;
+                    AuthenticationStatsCollector authenticationStatsCollector =
+                            ((FingerprintProvider) singleProvider.second)
+                                    .mAuthenticationStatsCollector;
+                    BiometricNotificationImpl biometricNotificationImpl =
+                            authenticationStatsCollector.mBiometricNotification;
                     Context context2 = authenticationStatsCollector.mContext;
                     biometricNotificationImpl.getClass();
                     BiometricNotificationImpl.sendFpEnrollNotification(context2);
@@ -65,7 +70,10 @@ public final class FingerprintShellCommand extends ShellCommand {
             Slog.i("FingerprintService", "Simulate virtual HAL finger down event");
             Pair singleProvider = fingerprintService.mRegistry.getSingleProvider();
             if (singleProvider != null) {
-                ((FingerprintProvider) ((ServiceProvider) singleProvider.second)).simulateVhalFingerDown(UserHandle.getCallingUserId(), ((Integer) singleProvider.first).intValue());
+                ((FingerprintProvider) ((ServiceProvider) singleProvider.second))
+                        .simulateVhalFingerDown(
+                                UserHandle.getCallingUserId(),
+                                ((Integer) singleProvider.first).intValue());
             }
         }
     }
@@ -81,28 +89,35 @@ public final class FingerprintShellCommand extends ShellCommand {
             Slog.i("FingerprintService", "Sync virtual enrollments");
             int currentUser = ActivityManager.getCurrentUser();
             FingerprintServiceRegistry fingerprintServiceRegistry = fingerprintService.mRegistry;
-            final CountDownLatch countDownLatch = new CountDownLatch(fingerprintServiceRegistry.getProviders().size());
+            final CountDownLatch countDownLatch =
+                    new CountDownLatch(fingerprintServiceRegistry.getProviders().size());
             Iterator it = fingerprintServiceRegistry.getProviders().iterator();
             while (it.hasNext()) {
-                FingerprintProvider fingerprintProvider = (FingerprintProvider) ((ServiceProvider) it.next());
+                FingerprintProvider fingerprintProvider =
+                        (FingerprintProvider) ((ServiceProvider) it.next());
                 Iterator it2 = ((ArrayList) fingerprintProvider.getSensorProperties()).iterator();
                 while (it2.hasNext()) {
-                    fingerprintProvider.scheduleInternalCleanup(((FingerprintSensorPropertiesInternal) it2.next()).sensorId, currentUser, new ClientMonitorCallback() { // from class: com.android.server.biometrics.sensors.fingerprint.FingerprintService.3
-                        public final /* synthetic */ CountDownLatch val$latch;
+                    fingerprintProvider.scheduleInternalCleanup(
+                            ((FingerprintSensorPropertiesInternal) it2.next()).sensorId,
+                            currentUser,
+                            new ClientMonitorCallback() { // from class:
+                                                          // com.android.server.biometrics.sensors.fingerprint.FingerprintService.3
+                                public final /* synthetic */ CountDownLatch val$latch;
 
-                        public AnonymousClass3(final CountDownLatch countDownLatch2) {
-                            r1 = countDownLatch2;
-                        }
+                                public AnonymousClass3(final CountDownLatch countDownLatch2) {
+                                    r1 = countDownLatch2;
+                                }
 
-                        @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
-                        public final void onClientFinished(BaseClientMonitor baseClientMonitor, boolean z2) {
-                            r1.countDown();
-                            if (z2) {
-                                return;
-                            }
-                            Slog.e("FingerprintService", "Sync virtual enrollments failed");
-                        }
-                    });
+                                @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
+                                public final void onClientFinished(
+                                        BaseClientMonitor baseClientMonitor, boolean z2) {
+                                    r1.countDown();
+                                    if (z2) {
+                                        return;
+                                    }
+                                    Slog.e("FingerprintService", "Sync virtual enrollments failed");
+                                }
+                            });
                 }
             }
             try {
@@ -182,7 +197,12 @@ public final class FingerprintShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("      Print this help text.");
         outPrintWriter.println("  sync");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      Sync enrollments now (virtualized sensors only).", "  fingerdown", "      Simulate finger down event (virtualized sensors only).", "  notification");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      Sync enrollments now (virtualized sensors only).",
+                "  fingerdown",
+                "      Simulate finger down event (virtualized sensors only).",
+                "  notification");
         outPrintWriter.println("     Sends a Fingerprint re-enrollment notification");
     }
 }

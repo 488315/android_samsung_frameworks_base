@@ -7,8 +7,7 @@ public class Point {
     public float x;
     public float y;
 
-    public Point() {
-    }
+    public Point() {}
 
     public Point(float x, float y) {
         this.x = x;
@@ -76,7 +75,9 @@ public class Point {
     }
 
     public Point rotated(float radians) {
-        return new Point((float) ((Math.cos(radians) * this.x) - (Math.sin(radians) * this.y)), (float) ((Math.sin(radians) * this.x) + (Math.cos(radians) * this.y)));
+        return new Point(
+                (float) ((Math.cos(radians) * this.x) - (Math.sin(radians) * this.y)),
+                (float) ((Math.sin(radians) * this.x) + (Math.cos(radians) * this.y)));
     }
 
     public Point rotatedAround(Point center, float radians) {
@@ -84,6 +85,10 @@ public class Point {
     }
 
     public String toString() {
-        return NavigationBarInflaterView.KEY_CODE_START + this.x + ", " + this.y + NavigationBarInflaterView.KEY_CODE_END;
+        return NavigationBarInflaterView.KEY_CODE_START
+                + this.x
+                + ", "
+                + this.y
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

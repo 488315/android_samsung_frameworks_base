@@ -15,13 +15,16 @@ import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.Binder;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.android.server.am.Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.adapterlayer.PackageManagerAdapter;
 import com.android.server.enterprise.storage.EdmStorageProvider;
+
 import com.samsung.android.knox.EnrollData;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.localservice.ConstrainedModeInternal;
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,24 +49,37 @@ public final class ConstrainedModeService extends ConstrainedModeInternal {
 
     public ConstrainedModeService(Context context) {
         this.mEdmStorageProvider = null;
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.enterprise.constrained.ConstrainedModeService.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                ConstrainedModeService constrainedModeService;
-                List constrainedStateAll;
-                if (!intent.getAction().equals("android.intent.action.LOCALE_CHANGED") || (constrainedStateAll = (constrainedModeService = ConstrainedModeService.this).getConstrainedStateAll()) == null) {
-                    return;
-                }
-                Iterator it = ((ArrayList) constrainedStateAll).iterator();
-                while (it.hasNext()) {
-                    EnrollData enrollData = (EnrollData) it.next();
-                    constrainedModeService.showConstrainedStateNotification(enrollData.getPackageName(), null, null, null, false);
-                    if (enrollData.getConstrainedState() == 0) {
-                        constrainedModeService.showConstrainedStateNotification(enrollData.getPackageName(), enrollData.getComment(), enrollData.getDownloadUrl(), enrollData.getTargetPkgName(), true);
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.enterprise.constrained.ConstrainedModeService.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        ConstrainedModeService constrainedModeService;
+                        List constrainedStateAll;
+                        if (!intent.getAction().equals("android.intent.action.LOCALE_CHANGED")
+                                || (constrainedStateAll =
+                                                (constrainedModeService =
+                                                                ConstrainedModeService.this)
+                                                        .getConstrainedStateAll())
+                                        == null) {
+                            return;
+                        }
+                        Iterator it = ((ArrayList) constrainedStateAll).iterator();
+                        while (it.hasNext()) {
+                            EnrollData enrollData = (EnrollData) it.next();
+                            constrainedModeService.showConstrainedStateNotification(
+                                    enrollData.getPackageName(), null, null, null, false);
+                            if (enrollData.getConstrainedState() == 0) {
+                                constrainedModeService.showConstrainedStateNotification(
+                                        enrollData.getPackageName(),
+                                        enrollData.getComment(),
+                                        enrollData.getDownloadUrl(),
+                                        enrollData.getTargetPkgName(),
+                                        true);
+                            }
+                        }
                     }
-                }
-            }
-        };
+                };
         this.mContext = context;
         this.mEdmStorageProvider = new EdmStorageProvider(context);
         IntentFilter intentFilter = new IntentFilter();
@@ -71,24 +87,30 @@ public final class ConstrainedModeService extends ConstrainedModeInternal {
         context.registerReceiver(broadcastReceiver, intentFilter);
         this.mPackageManagerAdapter = PackageManagerAdapter.getInstance(context);
         updateConstrainedStateData(false);
-        new Thread(new Runnable() { // from class: com.android.server.enterprise.constrained.ConstrainedModeService.2
-            @Override // java.lang.Runnable
-            public final void run() {
-                boolean z = false;
-                while (!z) {
-                    if (INotificationManager.Stub.asInterface(ServiceManager.getService("notification")) != null) {
-                        ConstrainedModeService.this.updateConstrainedStateData(true);
-                        z = true;
-                    } else {
-                        try {
-                            Thread.sleep(1000L);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            }
-        }).start();
+        new Thread(
+                        new Runnable() { // from class:
+                                         // com.android.server.enterprise.constrained.ConstrainedModeService.2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                boolean z = false;
+                                while (!z) {
+                                    if (INotificationManager.Stub.asInterface(
+                                                    ServiceManager.getService("notification"))
+                                            != null) {
+                                        ConstrainedModeService.this.updateConstrainedStateData(
+                                                true);
+                                        z = true;
+                                    } else {
+                                        try {
+                                            Thread.sleep(1000L);
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                .start();
     }
 
     public static List split(byte[] bArr, byte[] bArr2) {
@@ -130,11 +152,15 @@ public final class ConstrainedModeService extends ConstrainedModeInternal {
 
     public final void cleanUpConstrainedState(int i) {
         if (i != Binder.getCallingUid()) {
-            this.mContext.enforceCallingOrSelfPermission("android.permission.BIND_DEVICE_ADMIN", "Only system or itself can remove an EDM admin");
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BIND_DEVICE_ADMIN",
+                    "Only system or itself can remove an EDM admin");
         }
         ContentValues contentValues = new ContentValues();
-        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(1, contentValues, Constants.JSON_CLIENT_DATA_STATUS, i, "adminUid");
-        if (this.mEdmStorageProvider.getValue(contentValues, "ConstrainedStateTable", "adminUid") == null) {
+        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                1, contentValues, Constants.JSON_CLIENT_DATA_STATUS, i, "adminUid");
+        if (this.mEdmStorageProvider.getValue(contentValues, "ConstrainedStateTable", "adminUid")
+                == null) {
             Log.d("ConstrainedMode", "constrained state will go on");
             return;
         }
@@ -149,13 +175,13 @@ public final class ConstrainedModeService extends ConstrainedModeInternal {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x003e, code lost:
-    
-        android.util.Log.i("ConstrainedMode", "remove! " + ((java.lang.String) r1.getKey()));
-        new java.io.File("/efs/constrained", (java.lang.String) r1.getKey()).delete();
-        r20.mEdmStorageProvider.putInt(r21, 0, 1, "ConstrainedStateTable", com.samsung.android.knoxguard.service.utils.Constants.JSON_CLIENT_DATA_STATUS);
-        showConstrainedStateNotification(r22, null, null, null, false);
-        updateConstrainedStateData(true);
-     */
+
+       android.util.Log.i("ConstrainedMode", "remove! " + ((java.lang.String) r1.getKey()));
+       new java.io.File("/efs/constrained", (java.lang.String) r1.getKey()).delete();
+       r20.mEdmStorageProvider.putInt(r21, 0, 1, "ConstrainedStateTable", com.samsung.android.knoxguard.service.utils.Constants.JSON_CLIENT_DATA_STATUS);
+       showConstrainedStateNotification(r22, null, null, null, false);
+       updateConstrainedStateData(true);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -165,7 +191,10 @@ public final class ConstrainedModeService extends ConstrainedModeInternal {
             Method dump skipped, instructions count: 283
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.constrained.ConstrainedModeService.disableConstrainedStateInternal(int, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.constrained.ConstrainedModeService.disableConstrainedStateInternal(int,"
+                    + " java.lang.String):boolean");
     }
 
     public final void dump(PrintWriter printWriter) {
@@ -218,12 +247,22 @@ public final class ConstrainedModeService extends ConstrainedModeInternal {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean enableConstrainedState(int r17, java.lang.String r18, java.lang.String r19, java.lang.String r20, java.lang.String r21, int r22) {
+    public final boolean enableConstrainedState(
+            int r17,
+            java.lang.String r18,
+            java.lang.String r19,
+            java.lang.String r20,
+            java.lang.String r21,
+            int r22) {
         /*
             Method dump skipped, instructions count: 466
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.constrained.ConstrainedModeService.enableConstrainedState(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.constrained.ConstrainedModeService.enableConstrainedState(int,"
+                    + " java.lang.String, java.lang.String, java.lang.String, java.lang.String,"
+                    + " int):boolean");
     }
 
     public final int getConstrainedState() {
@@ -288,14 +327,18 @@ public final class ConstrainedModeService extends ConstrainedModeInternal {
         return false;
     }
 
-    public final void showConstrainedStateNotification(String str, String str2, String str3, String str4, boolean z) {
-        String m$1 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, "_ConstrainedNoti");
-        NotificationManager notificationManager = (NotificationManager) this.mContext.getSystemService("notification");
+    public final void showConstrainedStateNotification(
+            String str, String str2, String str3, String str4, boolean z) {
+        String m$1 =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, "_ConstrainedNoti");
+        NotificationManager notificationManager =
+                (NotificationManager) this.mContext.getSystemService("notification");
         if (notificationManager == null) {
             Log.d("ConstrainedMode", "Failed to get NotificationManager");
             return;
         }
-        notificationManager.createNotificationChannel(new NotificationChannel("CONSTRAINED_MODE", str, 4));
+        notificationManager.createNotificationChannel(
+                new NotificationChannel("CONSTRAINED_MODE", str, 4));
         if (!z) {
             notificationManager.cancel(4558);
             return;
@@ -305,8 +348,13 @@ public final class ConstrainedModeService extends ConstrainedModeInternal {
         builder.setSmallIcon(R.drawable.pointer_grabbing_icon);
         builder.setContentTitle(this.mContext.getString(R.string.find));
         if (str2.equals("DEFAULT")) {
-            builder.setContentText(this.mContext.getString(R.string.grant_credentials_permission_message_footer));
-            builder.setStyle(new Notification.BigTextStyle().bigText(this.mContext.getString(R.string.grant_credentials_permission_message_footer)));
+            builder.setContentText(
+                    this.mContext.getString(R.string.grant_credentials_permission_message_footer));
+            builder.setStyle(
+                    new Notification.BigTextStyle()
+                            .bigText(
+                                    this.mContext.getString(
+                                            R.string.grant_credentials_permission_message_footer)));
         } else {
             builder.setContentText(str2);
             builder.setStyle(new Notification.BigTextStyle().bigText(str2));
@@ -314,13 +362,16 @@ public final class ConstrainedModeService extends ConstrainedModeInternal {
         builder.setPriority(2);
         builder.setOngoing(true);
         if (str3 != null && str3.length() > 0) {
-            Intent intent = new Intent("com.samsung.android.knox.intent.action.CHECK_REENROLLMENT_INTERNAL");
+            Intent intent =
+                    new Intent(
+                            "com.samsung.android.knox.intent.action.CHECK_REENROLLMENT_INTERNAL");
             intent.putExtra("pkg", str);
             intent.putExtra("url", str3);
             if (str4 != null && str4.length() > 0) {
                 intent.putExtra("targetPkgName", str4);
             }
-            builder.setContentIntent(PendingIntent.getBroadcast(this.mContext, m$1.hashCode(), intent, 67108864));
+            builder.setContentIntent(
+                    PendingIntent.getBroadcast(this.mContext, m$1.hashCode(), intent, 67108864));
         }
         notificationManager.notify(4558, builder.build());
     }
@@ -339,6 +390,8 @@ public final class ConstrainedModeService extends ConstrainedModeInternal {
             Method dump skipped, instructions count: 800
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.constrained.ConstrainedModeService.updateConstrainedStateData(boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.constrained.ConstrainedModeService.updateConstrainedStateData(boolean):void");
     }
 }

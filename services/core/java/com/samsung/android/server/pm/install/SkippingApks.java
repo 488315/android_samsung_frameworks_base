@@ -1,6 +1,7 @@
 package com.samsung.android.server.pm.install;
 
 import android.text.TextUtils;
+
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -29,7 +30,8 @@ public final class SkippingApks {
         }
         try {
             try {
-                DataInputStream dataInputStream4 = new DataInputStream(new BufferedInputStream(new FileInputStream(str)));
+                DataInputStream dataInputStream4 =
+                        new DataInputStream(new BufferedInputStream(new FileInputStream(str)));
                 try {
                     int available = dataInputStream4.available();
                     int i = available;

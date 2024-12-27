@@ -32,7 +32,8 @@ public final class PowerEntity implements Parcelable {
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             powerEntity.states = (State[]) parcel.createTypedArray(State.CREATOR);
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");

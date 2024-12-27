@@ -4,6 +4,7 @@ import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
+
 import javax.microedition.khronos.opengles.GL;
 
 /* loaded from: classes3.dex */
@@ -57,7 +58,8 @@ class GLErrorWrapper extends GLWrapperBase {
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glBindTexture(int target, int texture) {
         checkThread();
         this.mgl.glBindTexture(target, texture);
@@ -148,29 +150,59 @@ class GLErrorWrapper extends GLWrapperBase {
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glCompressedTexImage2D(int target, int level, int internalformat, int width, int height, int border, int imageSize, Buffer data) {
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
+    public void glCompressedTexImage2D(
+            int target,
+            int level,
+            int internalformat,
+            int width,
+            int height,
+            int border,
+            int imageSize,
+            Buffer data) {
         checkThread();
-        this.mgl.glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data);
+        this.mgl.glCompressedTexImage2D(
+                target, level, internalformat, width, height, border, imageSize, data);
         checkError();
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glCompressedTexSubImage2D(int target, int level, int xoffset, int yoffset, int width, int height, int format, int imageSize, Buffer data) {
+    public void glCompressedTexSubImage2D(
+            int target,
+            int level,
+            int xoffset,
+            int yoffset,
+            int width,
+            int height,
+            int format,
+            int imageSize,
+            Buffer data) {
         checkThread();
-        this.mgl.glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data);
+        this.mgl.glCompressedTexSubImage2D(
+                target, level, xoffset, yoffset, width, height, format, imageSize, data);
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glCopyTexImage2D(int target, int level, int internalformat, int x, int y, int width, int height, int border) {
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
+    public void glCopyTexImage2D(
+            int target,
+            int level,
+            int internalformat,
+            int x,
+            int y,
+            int width,
+            int height,
+            int border) {
         checkThread();
         this.mgl.glCopyTexImage2D(target, level, internalformat, x, y, width, height, border);
         checkError();
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glCopyTexSubImage2D(int target, int level, int xoffset, int yoffset, int x, int y, int width, int height) {
+    public void glCopyTexSubImage2D(
+            int target, int level, int xoffset, int yoffset, int x, int y, int width, int height) {
         checkThread();
         this.mgl.glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
         checkError();
@@ -253,14 +285,17 @@ class GLErrorWrapper extends GLWrapperBase {
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11Ext, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11Ext,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glEnable(int cap) {
         checkThread();
         this.mgl.glEnable(cap);
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11Ext
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11Ext
     public void glEnableClientState(int array) {
         checkThread();
         this.mgl.glEnableClientState(array);
@@ -331,7 +366,8 @@ class GLErrorWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glFrustumf(float left, float right, float bottom, float top, float near, float far) {
+    public void glFrustumf(
+            float left, float right, float bottom, float top, float near, float far) {
         checkThread();
         this.mgl.glFrustumf(left, right, bottom, top, near, far);
         checkError();
@@ -365,14 +401,16 @@ class GLErrorWrapper extends GLWrapperBase {
         return result;
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glGetIntegerv(int pname, int[] params, int offset) {
         checkThread();
         this.mgl.glGetIntegerv(pname, params, offset);
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glGetIntegerv(int pname, IntBuffer params) {
         checkThread();
         this.mgl.glGetIntegerv(pname, params);
@@ -710,7 +748,8 @@ class GLErrorWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glReadPixels(int x, int y, int width, int height, int format, int type, Buffer pixels) {
+    public void glReadPixels(
+            int x, int y, int width, int height, int format, int type, Buffer pixels) {
         checkThread();
         this.mgl.glReadPixels(x, y, width, height, format, type, pixels);
         checkError();
@@ -786,7 +825,8 @@ class GLErrorWrapper extends GLWrapperBase {
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glStencilOp(int fail, int zfail, int zpass) {
         checkThread();
         this.mgl.glStencilOp(fail, zfail, zpass);
@@ -800,42 +840,48 @@ class GLErrorWrapper extends GLWrapperBase {
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glTexEnvf(int target, int pname, float param) {
         checkThread();
         this.mgl.glTexEnvf(target, pname, param);
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glTexEnvfv(int target, int pname, float[] params, int offset) {
         checkThread();
         this.mgl.glTexEnvfv(target, pname, params, offset);
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glTexEnvfv(int target, int pname, FloatBuffer params) {
         checkThread();
         this.mgl.glTexEnvfv(target, pname, params);
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glTexEnvx(int target, int pname, int param) {
         checkThread();
         this.mgl.glTexEnvx(target, pname, param);
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glTexEnvxv(int target, int pname, int[] params, int offset) {
         checkThread();
         this.mgl.glTexEnvxv(target, pname, params, offset);
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glTexEnvxv(int target, int pname, IntBuffer params) {
         checkThread();
         this.mgl.glTexEnvxv(target, pname, params);
@@ -843,13 +889,24 @@ class GLErrorWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glTexImage2D(int target, int level, int internalformat, int width, int height, int border, int format, int type, Buffer pixels) {
+    public void glTexImage2D(
+            int target,
+            int level,
+            int internalformat,
+            int width,
+            int height,
+            int border,
+            int format,
+            int type,
+            Buffer pixels) {
         checkThread();
-        this.mgl.glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
+        this.mgl.glTexImage2D(
+                target, level, internalformat, width, height, border, format, type, pixels);
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public void glTexParameterf(int target, int pname, float param) {
         checkThread();
         this.mgl.glTexParameterf(target, pname, param);
@@ -878,9 +935,19 @@ class GLErrorWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public void glTexSubImage2D(int target, int level, int xoffset, int yoffset, int width, int height, int format, int type, Buffer pixels) {
+    public void glTexSubImage2D(
+            int target,
+            int level,
+            int xoffset,
+            int yoffset,
+            int width,
+            int height,
+            int format,
+            int type,
+            Buffer pixels) {
         checkThread();
-        this.mgl.glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels);
+        this.mgl.glTexSubImage2D(
+                target, level, xoffset, yoffset, width, height, format, type, pixels);
         checkError();
     }
 
@@ -1025,9 +1092,11 @@ class GLErrorWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL10Ext
-    public int glQueryMatrixxOES(int[] mantissa, int mantissaOffset, int[] exponent, int exponentOffset) {
+    public int glQueryMatrixxOES(
+            int[] mantissa, int mantissaOffset, int[] exponent, int exponentOffset) {
         checkThread();
-        int valid = this.mgl10Ext.glQueryMatrixxOES(mantissa, mantissaOffset, exponent, exponentOffset);
+        int valid =
+                this.mgl10Ext.glQueryMatrixxOES(mantissa, mantissaOffset, exponent, exponentOffset);
         checkError();
         return valid;
     }
@@ -1435,7 +1504,8 @@ class GLErrorWrapper extends GLWrapperBase {
         checkError();
     }
 
-    @Override // javax.microedition.khronos.opengles.GL11, javax.microedition.khronos.opengles.GL11Ext
+    @Override // javax.microedition.khronos.opengles.GL11,
+              // javax.microedition.khronos.opengles.GL11Ext
     public void glTexParameterfv(int target, int pname, float[] params, int offset) {
         checkThread();
         this.mgl11.glTexParameterfv(target, pname, params, offset);
@@ -1591,16 +1661,20 @@ class GLErrorWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glFramebufferRenderbufferOES(int target, int attachment, int renderbuffertarget, int renderbuffer) {
+    public void glFramebufferRenderbufferOES(
+            int target, int attachment, int renderbuffertarget, int renderbuffer) {
         checkThread();
-        this.mgl11ExtensionPack.glFramebufferRenderbufferOES(target, attachment, renderbuffertarget, renderbuffer);
+        this.mgl11ExtensionPack.glFramebufferRenderbufferOES(
+                target, attachment, renderbuffertarget, renderbuffer);
         checkError();
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glFramebufferTexture2DOES(int target, int attachment, int textarget, int texture, int level) {
+    public void glFramebufferTexture2DOES(
+            int target, int attachment, int textarget, int texture, int level) {
         checkThread();
-        this.mgl11ExtensionPack.glFramebufferTexture2DOES(target, attachment, textarget, texture, level);
+        this.mgl11ExtensionPack.glFramebufferTexture2DOES(
+                target, attachment, textarget, texture, level);
         checkError();
     }
 
@@ -1640,16 +1714,20 @@ class GLErrorWrapper extends GLWrapperBase {
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetFramebufferAttachmentParameterivOES(int target, int attachment, int pname, int[] params, int offset) {
+    public void glGetFramebufferAttachmentParameterivOES(
+            int target, int attachment, int pname, int[] params, int offset) {
         checkThread();
-        this.mgl11ExtensionPack.glGetFramebufferAttachmentParameterivOES(target, attachment, pname, params, offset);
+        this.mgl11ExtensionPack.glGetFramebufferAttachmentParameterivOES(
+                target, attachment, pname, params, offset);
         checkError();
     }
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public void glGetFramebufferAttachmentParameterivOES(int target, int attachment, int pname, IntBuffer params) {
+    public void glGetFramebufferAttachmentParameterivOES(
+            int target, int attachment, int pname, IntBuffer params) {
         checkThread();
-        this.mgl11ExtensionPack.glGetFramebufferAttachmentParameterivOES(target, attachment, pname, params);
+        this.mgl11ExtensionPack.glGetFramebufferAttachmentParameterivOES(
+                target, attachment, pname, params);
         checkError();
     }
 

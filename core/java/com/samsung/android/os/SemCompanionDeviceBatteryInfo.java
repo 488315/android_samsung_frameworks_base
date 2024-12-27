@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public final class SemCompanionDeviceBatteryInfo implements Parcelable {
-    public static final Parcelable.Creator<SemCompanionDeviceBatteryInfo> CREATOR = new Parcelable.Creator<SemCompanionDeviceBatteryInfo>() { // from class: com.samsung.android.os.SemCompanionDeviceBatteryInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemCompanionDeviceBatteryInfo createFromParcel(Parcel in) {
-            return new SemCompanionDeviceBatteryInfo(in);
-        }
+    public static final Parcelable.Creator<SemCompanionDeviceBatteryInfo> CREATOR =
+            new Parcelable.Creator<
+                    SemCompanionDeviceBatteryInfo>() { // from class:
+                                                       // com.samsung.android.os.SemCompanionDeviceBatteryInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemCompanionDeviceBatteryInfo createFromParcel(Parcel in) {
+                    return new SemCompanionDeviceBatteryInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemCompanionDeviceBatteryInfo[] newArray(int size) {
-            return new SemCompanionDeviceBatteryInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemCompanionDeviceBatteryInfo[] newArray(int size) {
+                    return new SemCompanionDeviceBatteryInfo[size];
+                }
+            };
     private String mAddress;
     private int mBatteryLevel;
     private int mBatteryStatus;

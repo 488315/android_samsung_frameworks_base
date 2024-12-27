@@ -5,17 +5,18 @@ import android.net.wifi.sharedconnectivity.app.HotspotNetworkConnectionStatus;
 import android.net.wifi.sharedconnectivity.app.KnownNetwork;
 import android.net.wifi.sharedconnectivity.app.KnownNetworkConnectionStatus;
 import android.net.wifi.sharedconnectivity.app.SharedConnectivitySettingsState;
-import android.net.wifi.sharedconnectivity.service.ISharedConnectivityCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface ISharedConnectivityService extends IInterface {
-    public static final String DESCRIPTOR = "android.net.wifi.sharedconnectivity.service.ISharedConnectivityService";
+    public static final String DESCRIPTOR =
+            "android.net.wifi.sharedconnectivity.service.ISharedConnectivityService";
 
     void connectHotspotNetwork(HotspotNetwork hotspotNetwork) throws RemoteException;
 
@@ -35,34 +36,31 @@ public interface ISharedConnectivityService extends IInterface {
 
     SharedConnectivitySettingsState getSettingsState() throws RemoteException;
 
-    void registerCallback(ISharedConnectivityCallback iSharedConnectivityCallback) throws RemoteException;
+    void registerCallback(ISharedConnectivityCallback iSharedConnectivityCallback)
+            throws RemoteException;
 
-    void unregisterCallback(ISharedConnectivityCallback iSharedConnectivityCallback) throws RemoteException;
+    void unregisterCallback(ISharedConnectivityCallback iSharedConnectivityCallback)
+            throws RemoteException;
 
     public static class Default implements ISharedConnectivityService {
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-        public void registerCallback(ISharedConnectivityCallback callback) throws RemoteException {
-        }
+        public void registerCallback(ISharedConnectivityCallback callback) throws RemoteException {}
 
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-        public void unregisterCallback(ISharedConnectivityCallback callback) throws RemoteException {
-        }
+        public void unregisterCallback(ISharedConnectivityCallback callback)
+                throws RemoteException {}
 
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-        public void connectHotspotNetwork(HotspotNetwork network) throws RemoteException {
-        }
+        public void connectHotspotNetwork(HotspotNetwork network) throws RemoteException {}
 
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-        public void disconnectHotspotNetwork(HotspotNetwork network) throws RemoteException {
-        }
+        public void disconnectHotspotNetwork(HotspotNetwork network) throws RemoteException {}
 
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-        public void connectKnownNetwork(KnownNetwork network) throws RemoteException {
-        }
+        public void connectKnownNetwork(KnownNetwork network) throws RemoteException {}
 
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-        public void forgetKnownNetwork(KnownNetwork network) throws RemoteException {
-        }
+        public void forgetKnownNetwork(KnownNetwork network) throws RemoteException {}
 
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
         public List<HotspotNetwork> getHotspotNetworks() throws RemoteException {
@@ -80,12 +78,14 @@ public interface ISharedConnectivityService extends IInterface {
         }
 
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-        public HotspotNetworkConnectionStatus getHotspotNetworkConnectionStatus() throws RemoteException {
+        public HotspotNetworkConnectionStatus getHotspotNetworkConnectionStatus()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-        public KnownNetworkConnectionStatus getKnownNetworkConnectionStatus() throws RemoteException {
+        public KnownNetworkConnectionStatus getKnownNetworkConnectionStatus()
+                throws RemoteException {
             return null;
         }
 
@@ -95,7 +95,7 @@ public interface ISharedConnectivityService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISharedConnectivityService {
+    public abstract static class Stub extends Binder implements ISharedConnectivityService {
         static final int TRANSACTION_connectHotspotNetwork = 3;
         static final int TRANSACTION_connectKnownNetwork = 5;
         static final int TRANSACTION_disconnectHotspotNetwork = 4;
@@ -163,7 +163,8 @@ public interface ISharedConnectivityService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISharedConnectivityService.DESCRIPTOR);
             }
@@ -173,25 +174,29 @@ public interface ISharedConnectivityService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ISharedConnectivityCallback _arg0 = ISharedConnectivityCallback.Stub.asInterface(data.readStrongBinder());
+                    ISharedConnectivityCallback _arg0 =
+                            ISharedConnectivityCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallback(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    ISharedConnectivityCallback _arg02 = ISharedConnectivityCallback.Stub.asInterface(data.readStrongBinder());
+                    ISharedConnectivityCallback _arg02 =
+                            ISharedConnectivityCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCallback(_arg02);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    HotspotNetwork _arg03 = (HotspotNetwork) data.readTypedObject(HotspotNetwork.CREATOR);
+                    HotspotNetwork _arg03 =
+                            (HotspotNetwork) data.readTypedObject(HotspotNetwork.CREATOR);
                     data.enforceNoDataAvail();
                     connectHotspotNetwork(_arg03);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    HotspotNetwork _arg04 = (HotspotNetwork) data.readTypedObject(HotspotNetwork.CREATOR);
+                    HotspotNetwork _arg04 =
+                            (HotspotNetwork) data.readTypedObject(HotspotNetwork.CREATOR);
                     data.enforceNoDataAvail();
                     disconnectHotspotNetwork(_arg04);
                     reply.writeNoException();
@@ -255,7 +260,8 @@ public interface ISharedConnectivityService extends IInterface {
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-            public void registerCallback(ISharedConnectivityCallback callback) throws RemoteException {
+            public void registerCallback(ISharedConnectivityCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -270,7 +276,8 @@ public interface ISharedConnectivityService extends IInterface {
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-            public void unregisterCallback(ISharedConnectivityCallback callback) throws RemoteException {
+            public void unregisterCallback(ISharedConnectivityCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -352,7 +359,8 @@ public interface ISharedConnectivityService extends IInterface {
                     _data.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    List<HotspotNetwork> _result = _reply.createTypedArrayList(HotspotNetwork.CREATOR);
+                    List<HotspotNetwork> _result =
+                            _reply.createTypedArrayList(HotspotNetwork.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -384,7 +392,9 @@ public interface ISharedConnectivityService extends IInterface {
                     _data.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    SharedConnectivitySettingsState _result = (SharedConnectivitySettingsState) _reply.readTypedObject(SharedConnectivitySettingsState.CREATOR);
+                    SharedConnectivitySettingsState _result =
+                            (SharedConnectivitySettingsState)
+                                    _reply.readTypedObject(SharedConnectivitySettingsState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -393,14 +403,17 @@ public interface ISharedConnectivityService extends IInterface {
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-            public HotspotNetworkConnectionStatus getHotspotNetworkConnectionStatus() throws RemoteException {
+            public HotspotNetworkConnectionStatus getHotspotNetworkConnectionStatus()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    HotspotNetworkConnectionStatus _result = (HotspotNetworkConnectionStatus) _reply.readTypedObject(HotspotNetworkConnectionStatus.CREATOR);
+                    HotspotNetworkConnectionStatus _result =
+                            (HotspotNetworkConnectionStatus)
+                                    _reply.readTypedObject(HotspotNetworkConnectionStatus.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -409,14 +422,17 @@ public interface ISharedConnectivityService extends IInterface {
             }
 
             @Override // android.net.wifi.sharedconnectivity.service.ISharedConnectivityService
-            public KnownNetworkConnectionStatus getKnownNetworkConnectionStatus() throws RemoteException {
+            public KnownNetworkConnectionStatus getKnownNetworkConnectionStatus()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(ISharedConnectivityService.DESCRIPTOR);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    KnownNetworkConnectionStatus _result = (KnownNetworkConnectionStatus) _reply.readTypedObject(KnownNetworkConnectionStatus.CREATOR);
+                    KnownNetworkConnectionStatus _result =
+                            (KnownNetworkConnectionStatus)
+                                    _reply.readTypedObject(KnownNetworkConnectionStatus.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

@@ -2,6 +2,7 @@ package com.android.internal.util;
 
 import android.util.Log;
 import android.util.Printer;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -29,12 +30,12 @@ public class FastPrintWriter extends PrintWriter {
     private final Writer mWriter;
 
     private static class DummyWriter extends Writer {
-        private DummyWriter() {
-        }
+        private DummyWriter() {}
 
         @Override // java.io.Writer, java.io.Closeable, java.lang.AutoCloseable
         public void close() throws IOException {
-            UnsupportedOperationException ex = new UnsupportedOperationException("Shouldn't be here");
+            UnsupportedOperationException ex =
+                    new UnsupportedOperationException("Shouldn't be here");
             throw ex;
         }
 
@@ -244,7 +245,10 @@ public class FastPrintWriter extends PrintWriter {
                 int nonEolOff = 0;
                 int sepLen = this.mSeparator.length();
                 int len = sepLen < this.mPos ? sepLen : this.mPos;
-                while (nonEolOff < len && this.mText[(this.mPos - 1) - nonEolOff] == this.mSeparator.charAt((this.mSeparator.length() - 1) - nonEolOff)) {
+                while (nonEolOff < len
+                        && this.mText[(this.mPos - 1) - nonEolOff]
+                                == this.mSeparator.charAt(
+                                        (this.mSeparator.length() - 1) - nonEolOff)) {
                     nonEolOff++;
                 }
                 if (nonEolOff >= this.mPos) {

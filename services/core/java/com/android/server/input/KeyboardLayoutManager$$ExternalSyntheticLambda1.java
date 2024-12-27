@@ -2,14 +2,16 @@ package com.android.server.input;
 
 import android.content.res.Resources;
 import android.hardware.input.KeyboardLayout;
-import com.android.server.input.KeyboardLayoutManager;
+
+import libcore.io.Streams;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
-import libcore.io.Streams;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class KeyboardLayoutManager$$ExternalSyntheticLambda1 implements KeyboardLayoutManager.KeyboardLayoutVisitor {
+public final /* synthetic */ class KeyboardLayoutManager$$ExternalSyntheticLambda1
+        implements KeyboardLayoutManager.KeyboardLayoutVisitor {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ String[] f$0;
 
@@ -19,13 +21,15 @@ public final /* synthetic */ class KeyboardLayoutManager$$ExternalSyntheticLambd
     }
 
     @Override // com.android.server.input.KeyboardLayoutManager.KeyboardLayoutVisitor
-    public final void visitKeyboardLayout(Resources resources, int i, KeyboardLayout keyboardLayout) {
+    public final void visitKeyboardLayout(
+            Resources resources, int i, KeyboardLayout keyboardLayout) {
         int i2 = this.$r8$classId;
         String[] strArr = this.f$0;
         switch (i2) {
             case 0:
                 try {
-                    InputStreamReader inputStreamReader = new InputStreamReader(resources.openRawResource(i));
+                    InputStreamReader inputStreamReader =
+                            new InputStreamReader(resources.openRawResource(i));
                     try {
                         strArr[0] = keyboardLayout.getDescriptor();
                         strArr[1] = Streams.readFully(inputStreamReader);
@@ -44,7 +48,8 @@ public final /* synthetic */ class KeyboardLayoutManager$$ExternalSyntheticLambd
                 }
             default:
                 try {
-                    InputStreamReader inputStreamReader2 = new InputStreamReader(resources.openRawResource(i));
+                    InputStreamReader inputStreamReader2 =
+                            new InputStreamReader(resources.openRawResource(i));
                     try {
                         strArr[0] = Streams.readFully(inputStreamReader2);
                         inputStreamReader2.close();

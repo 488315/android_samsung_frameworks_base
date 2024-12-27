@@ -3,26 +3,29 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class HeadTracking implements Parcelable {
-    public static final Parcelable.Creator<HeadTracking> CREATOR = new Parcelable.Creator<HeadTracking>() { // from class: android.media.audio.common.HeadTracking.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HeadTracking createFromParcel(Parcel _aidl_source) {
-            HeadTracking _aidl_out = new HeadTracking();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<HeadTracking> CREATOR =
+            new Parcelable.Creator<
+                    HeadTracking>() { // from class: android.media.audio.common.HeadTracking.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HeadTracking createFromParcel(Parcel _aidl_source) {
+                    HeadTracking _aidl_out = new HeadTracking();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HeadTracking[] newArray(int _aidl_size) {
-            return new HeadTracking[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HeadTracking[] newArray(int _aidl_size) {
+                    return new HeadTracking[_aidl_size];
+                }
+            };
 
     public @interface ConnectionMode {
         public static final byte DIRECT_TO_SENSOR_SW = 1;
@@ -97,19 +100,21 @@ public class HeadTracking implements Parcelable {
     }
 
     public static final class SensorData implements Parcelable {
-        public static final Parcelable.Creator<SensorData> CREATOR = new Parcelable.Creator<SensorData>() { // from class: android.media.audio.common.HeadTracking.SensorData.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SensorData createFromParcel(Parcel _aidl_source) {
-                return new SensorData(_aidl_source);
-            }
+        public static final Parcelable.Creator<SensorData> CREATOR =
+                new Parcelable.Creator<SensorData>() { // from class:
+                    // android.media.audio.common.HeadTracking.SensorData.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SensorData createFromParcel(Parcel _aidl_source) {
+                        return new SensorData(_aidl_source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SensorData[] newArray(int _aidl_size) {
-                return new SensorData[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SensorData[] newArray(int _aidl_size) {
+                        return new SensorData[_aidl_size];
+                    }
+                };
         public static final int headToStage = 0;
         private int _tag;
         private Object _value;
@@ -185,7 +190,12 @@ public class HeadTracking implements Parcelable {
 
         private void _assertTag(int tag) {
             if (getTag() != tag) {
-                throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+                throw new IllegalStateException(
+                        "bad access: "
+                                + _tagString(tag)
+                                + ", "
+                                + _tagString(getTag())
+                                + " is available.");
             }
         }
 

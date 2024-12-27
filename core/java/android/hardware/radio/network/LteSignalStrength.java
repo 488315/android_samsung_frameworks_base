@@ -3,25 +3,28 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class LteSignalStrength implements Parcelable {
-    public static final Parcelable.Creator<LteSignalStrength> CREATOR = new Parcelable.Creator<LteSignalStrength>() { // from class: android.hardware.radio.network.LteSignalStrength.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LteSignalStrength createFromParcel(Parcel _aidl_source) {
-            LteSignalStrength _aidl_out = new LteSignalStrength();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<LteSignalStrength> CREATOR =
+            new Parcelable.Creator<LteSignalStrength>() { // from class:
+                // android.hardware.radio.network.LteSignalStrength.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LteSignalStrength createFromParcel(Parcel _aidl_source) {
+                    LteSignalStrength _aidl_out = new LteSignalStrength();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LteSignalStrength[] newArray(int _aidl_size) {
-            return new LteSignalStrength[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LteSignalStrength[] newArray(int _aidl_size) {
+                    return new LteSignalStrength[_aidl_size];
+                }
+            };
     public int signalStrength = 0;
     public int rsrp = 0;
     public int rsrq = 0;

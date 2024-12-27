@@ -6,20 +6,30 @@ import android.provider.Telephony;
 
 /* loaded from: classes5.dex */
 public class OperatorInfo implements Parcelable {
-    public static final Parcelable.Creator<OperatorInfo> CREATOR = new Parcelable.Creator<OperatorInfo>() { // from class: com.android.internal.telephony.OperatorInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OperatorInfo createFromParcel(Parcel in) {
-            OperatorInfo opInfo = new OperatorInfo(in.readString(), in.readString(), in.readString(), (State) in.readSerializable(State.class.getClassLoader(), State.class), in.readInt());
-            return opInfo;
-        }
+    public static final Parcelable.Creator<OperatorInfo> CREATOR =
+            new Parcelable.Creator<
+                    OperatorInfo>() { // from class: com.android.internal.telephony.OperatorInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OperatorInfo createFromParcel(Parcel in) {
+                    OperatorInfo opInfo =
+                            new OperatorInfo(
+                                    in.readString(),
+                                    in.readString(),
+                                    in.readString(),
+                                    (State)
+                                            in.readSerializable(
+                                                    State.class.getClassLoader(), State.class),
+                                    in.readInt());
+                    return opInfo;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OperatorInfo[] newArray(int size) {
-            return new OperatorInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OperatorInfo[] newArray(int size) {
+                    return new OperatorInfo[size];
+                }
+            };
     private String mOperatorAlphaLong;
     private String mOperatorAlphaShort;
     private String mOperatorNumeric;
@@ -53,7 +63,11 @@ public class OperatorInfo implements Parcelable {
         return this.mRan;
     }
 
-    OperatorInfo(String operatorAlphaLong, String operatorAlphaShort, String operatorNumeric, State state) {
+    OperatorInfo(
+            String operatorAlphaLong,
+            String operatorAlphaShort,
+            String operatorNumeric,
+            State state) {
         this.mState = State.UNKNOWN;
         this.mRan = 0;
         this.mOperatorAlphaLong = operatorAlphaLong;
@@ -62,21 +76,32 @@ public class OperatorInfo implements Parcelable {
         this.mState = state;
     }
 
-    OperatorInfo(String operatorAlphaLong, String operatorAlphaShort, String operatorNumeric, State state, int ran) {
+    OperatorInfo(
+            String operatorAlphaLong,
+            String operatorAlphaShort,
+            String operatorNumeric,
+            State state,
+            int ran) {
         this(operatorAlphaLong, operatorAlphaShort, operatorNumeric, state);
         this.mRan = ran;
     }
 
-    public OperatorInfo(String operatorAlphaLong, String operatorAlphaShort, String operatorNumeric, String stateString) {
+    public OperatorInfo(
+            String operatorAlphaLong,
+            String operatorAlphaShort,
+            String operatorNumeric,
+            String stateString) {
         this(operatorAlphaLong, operatorAlphaShort, operatorNumeric, rilStateToState(stateString));
     }
 
-    public OperatorInfo(String operatorAlphaLong, String operatorAlphaShort, String operatorNumeric, int ran) {
+    public OperatorInfo(
+            String operatorAlphaLong, String operatorAlphaShort, String operatorNumeric, int ran) {
         this(operatorAlphaLong, operatorAlphaShort, operatorNumeric);
         this.mRan = ran;
     }
 
-    public OperatorInfo(String operatorAlphaLong, String operatorAlphaShort, String operatorNumeric) {
+    public OperatorInfo(
+            String operatorAlphaLong, String operatorAlphaShort, String operatorNumeric) {
         this(operatorAlphaLong, operatorAlphaShort, operatorNumeric, State.UNKNOWN);
     }
 
@@ -97,7 +122,16 @@ public class OperatorInfo implements Parcelable {
     }
 
     public String toString() {
-        return "OperatorInfo " + this.mOperatorAlphaLong + "/" + this.mOperatorAlphaShort + "/" + this.mOperatorNumeric + "/" + this.mState + "/" + this.mRan;
+        return "OperatorInfo "
+                + this.mOperatorAlphaLong
+                + "/"
+                + this.mOperatorAlphaShort
+                + "/"
+                + this.mOperatorNumeric
+                + "/"
+                + this.mState
+                + "/"
+                + this.mRan;
     }
 
     @Override // android.os.Parcelable

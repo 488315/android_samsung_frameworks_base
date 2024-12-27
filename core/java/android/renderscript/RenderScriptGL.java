@@ -2,7 +2,6 @@ package android.renderscript;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;
-import android.renderscript.RenderScript;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 
@@ -111,7 +110,23 @@ public class RenderScriptGL extends RenderScript {
         this.mHeight = 0;
         long device = nDeviceCreate();
         int dpi = ctx.getResources().getDisplayMetrics().densityDpi;
-        this.mContext = nContextCreateGL(device, 0, sdkVersion, this.mSurfaceConfig.mColorMin, this.mSurfaceConfig.mColorPref, this.mSurfaceConfig.mAlphaMin, this.mSurfaceConfig.mAlphaPref, this.mSurfaceConfig.mDepthMin, this.mSurfaceConfig.mDepthPref, this.mSurfaceConfig.mStencilMin, this.mSurfaceConfig.mStencilPref, this.mSurfaceConfig.mSamplesMin, this.mSurfaceConfig.mSamplesPref, this.mSurfaceConfig.mSamplesQ, dpi);
+        this.mContext =
+                nContextCreateGL(
+                        device,
+                        0,
+                        sdkVersion,
+                        this.mSurfaceConfig.mColorMin,
+                        this.mSurfaceConfig.mColorPref,
+                        this.mSurfaceConfig.mAlphaMin,
+                        this.mSurfaceConfig.mAlphaPref,
+                        this.mSurfaceConfig.mDepthMin,
+                        this.mSurfaceConfig.mDepthPref,
+                        this.mSurfaceConfig.mStencilMin,
+                        this.mSurfaceConfig.mStencilPref,
+                        this.mSurfaceConfig.mSamplesMin,
+                        this.mSurfaceConfig.mSamplesPref,
+                        this.mSurfaceConfig.mSamplesQ,
+                        dpi);
         if (this.mContext == 0) {
             throw new RSDriverException("Failed to create RS context.");
         }

@@ -1,6 +1,7 @@
 package com.android.internal.graphics.cam;
 
 import android.hardware.scontext.SContextConstants;
+
 import com.android.internal.graphics.ColorUtils;
 
 /* loaded from: classes5.dex */
@@ -55,7 +56,16 @@ public class Cam {
         return this.mBstar;
     }
 
-    Cam(float hue, float chroma, float j, float q, float m, float s, float jstar, float astar, float bstar) {
+    Cam(
+            float hue,
+            float chroma,
+            float j,
+            float q,
+            float m,
+            float s,
+            float jstar,
+            float astar,
+            float bstar) {
         this.mHue = hue;
         this.mChroma = chroma;
         this.mJ = j;
@@ -107,12 +117,20 @@ public class Cam {
         float ac = frame.getNbb() * p2;
         float atan22 = ac / frame.getAw();
         float j = ((float) Math.pow(atan22, frame.getC() * frame.getZ())) * 100.0f;
-        float q = (4.0f / frame.getC()) * ((float) Math.sqrt(j / 100.0f)) * (frame.getAw() + 4.0f) * frame.getFlRoot();
+        float q =
+                (4.0f / frame.getC())
+                        * ((float) Math.sqrt(j / 100.0f))
+                        * (frame.getAw() + 4.0f)
+                        * frame.getFlRoot();
         float huePrime = ((double) hue) < 20.14d ? hue + 360.0f : hue;
-        float eHue = ((float) (Math.cos(((huePrime * 3.141592653589793d) / 180.0d) + 2.0d) + 3.8d)) * 0.25f;
+        float eHue =
+                ((float) (Math.cos(((huePrime * 3.141592653589793d) / 180.0d) + 2.0d) + 3.8d))
+                        * 0.25f;
         float p1 = 3846.1538f * eHue * frame.getNc() * frame.getNcb();
         float t = (((float) Math.sqrt((a * a) + (b * b))) * p1) / (0.305f + u);
-        float alpha = ((float) Math.pow(t, 0.9d)) * ((float) Math.pow(1.64d - Math.pow(0.29d, frame.getN()), 0.73d));
+        float alpha =
+                ((float) Math.pow(t, 0.9d))
+                        * ((float) Math.pow(1.64d - Math.pow(0.29d, frame.getN()), 0.73d));
         float c = ((float) Math.sqrt(j / 100.0d)) * alpha;
         float m = frame.getFlRoot() * c;
         float s = ((float) Math.sqrt((frame.getC() * alpha) / (frame.getAw() + 4.0f))) * 50.0f;
@@ -128,7 +146,11 @@ public class Cam {
     }
 
     private static Cam fromJchInFrame(float j, float c, float h, Frame frame) {
-        float q = (4.0f / frame.getC()) * ((float) Math.sqrt(j / 100.0d)) * (frame.getAw() + 4.0f) * frame.getFlRoot();
+        float q =
+                (4.0f / frame.getC())
+                        * ((float) Math.sqrt(j / 100.0d))
+                        * (frame.getAw() + 4.0f)
+                        * frame.getFlRoot();
         float m = c * frame.getFlRoot();
         float alpha = c / ((float) Math.sqrt(j / 100.0d));
         float s = ((float) Math.sqrt((frame.getC() * alpha) / (frame.getAw() + 4.0f))) * 50.0f;
@@ -155,32 +177,62 @@ public class Cam {
 
     public int viewed(Frame frame) {
         float alpha;
-        if (getChroma() == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || getJ() == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
+        if (getChroma() == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                || getJ() == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
             alpha = 0.0f;
         } else {
             alpha = getChroma() / ((float) Math.sqrt(getJ() / 100.0d));
         }
-        float t = (float) Math.pow(alpha / Math.pow(1.64d - Math.pow(0.29d, frame.getN()), 0.73d), 1.1111111111111112d);
+        float t =
+                (float)
+                        Math.pow(
+                                alpha / Math.pow(1.64d - Math.pow(0.29d, frame.getN()), 0.73d),
+                                1.1111111111111112d);
         float hRad = (getHue() * 3.1415927f) / 180.0f;
         float eHue = ((float) (Math.cos(hRad + 2.0d) + 3.8d)) * 0.25f;
-        float ac = frame.getAw() * ((float) Math.pow(getJ() / 100.0d, (1.0d / frame.getC()) / frame.getZ()));
+        float ac =
+                frame.getAw()
+                        * ((float) Math.pow(getJ() / 100.0d, (1.0d / frame.getC()) / frame.getZ()));
         float p1 = 3846.1538f * eHue * frame.getNc() * frame.getNcb();
         float p2 = ac / frame.getNbb();
         float hSin = (float) Math.sin(hRad);
         float hCos = (float) Math.cos(hRad);
-        float gamma = (((0.305f + p2) * 23.0f) * t) / (((23.0f * p1) + ((11.0f * t) * hCos)) + ((108.0f * t) * hSin));
+        float gamma =
+                (((0.305f + p2) * 23.0f) * t)
+                        / (((23.0f * p1) + ((11.0f * t) * hCos)) + ((108.0f * t) * hSin));
         float a = gamma * hCos;
         float b = gamma * hSin;
         float rA = (((p2 * 460.0f) + (451.0f * a)) + (288.0f * b)) / 1403.0f;
         float gA = (((p2 * 460.0f) - (891.0f * a)) - (261.0f * b)) / 1403.0f;
         float bA = (((460.0f * p2) - (220.0f * a)) - (6300.0f * b)) / 1403.0f;
         float alpha2 = Math.abs(rA);
-        float rCBase = (float) Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, (Math.abs(rA) * 27.13d) / (400.0d - alpha2));
-        float rC = Math.signum(rA) * (100.0f / frame.getFl()) * ((float) Math.pow(rCBase, 2.380952380952381d));
-        float gCBase = (float) Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, (Math.abs(gA) * 27.13d) / (400.0d - Math.abs(gA)));
-        float gC = Math.signum(gA) * (100.0f / frame.getFl()) * ((float) Math.pow(gCBase, 2.380952380952381d));
-        float bCBase = (float) Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, (Math.abs(bA) * 27.13d) / (400.0d - Math.abs(bA)));
-        float bC = Math.signum(bA) * (100.0f / frame.getFl()) * ((float) Math.pow(bCBase, 2.380952380952381d));
+        float rCBase =
+                (float)
+                        Math.max(
+                                SContextConstants.ENVIRONMENT_VALUE_UNKNOWN,
+                                (Math.abs(rA) * 27.13d) / (400.0d - alpha2));
+        float rC =
+                Math.signum(rA)
+                        * (100.0f / frame.getFl())
+                        * ((float) Math.pow(rCBase, 2.380952380952381d));
+        float gCBase =
+                (float)
+                        Math.max(
+                                SContextConstants.ENVIRONMENT_VALUE_UNKNOWN,
+                                (Math.abs(gA) * 27.13d) / (400.0d - Math.abs(gA)));
+        float gC =
+                Math.signum(gA)
+                        * (100.0f / frame.getFl())
+                        * ((float) Math.pow(gCBase, 2.380952380952381d));
+        float bCBase =
+                (float)
+                        Math.max(
+                                SContextConstants.ENVIRONMENT_VALUE_UNKNOWN,
+                                (Math.abs(bA) * 27.13d) / (400.0d - Math.abs(bA)));
+        float bC =
+                Math.signum(bA)
+                        * (100.0f / frame.getFl())
+                        * ((float) Math.pow(bCBase, 2.380952380952381d));
         float rF = rC / frame.getRgbD()[0];
         float gF = gC / frame.getRgbD()[1];
         float bF = bC / frame.getRgbD()[2];
@@ -196,7 +248,9 @@ public class Cam {
         if (frame == Frame.DEFAULT) {
             return HctSolver.solveToInt(hue, chroma, lstar);
         }
-        if (chroma < 1.0d || Math.round(lstar) <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || Math.round(lstar) >= 100.0d) {
+        if (chroma < 1.0d
+                || Math.round(lstar) <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                || Math.round(lstar) >= 100.0d) {
             return CamUtils.intFromLstar(lstar);
         }
         float hue2 = hue >= 0.0f ? Math.min(360.0f, hue) : 0.0f;
@@ -243,7 +297,9 @@ public class Cam {
             float dL = Math.abs(lstar - clippedLstar);
             if (dL < 0.2f) {
                 Cam camClipped = fromInt(clipped);
-                float dE = camClipped.distance(fromJch(camClipped.getJ(), camClipped.getChroma(), hue));
+                float dE =
+                        camClipped.distance(
+                                fromJch(camClipped.getJ(), camClipped.getChroma(), hue));
                 if (dE <= 1.0f) {
                     bestdL = dL;
                     bestdE = dE;

@@ -1,6 +1,7 @@
 package android.webkit;
 
 import android.annotation.SystemApi;
+
 import java.util.Map;
 
 /* loaded from: classes4.dex */
@@ -39,30 +40,23 @@ public class WebStorage {
         }
     }
 
-    public void getOrigins(ValueCallback<Map> callback) {
-    }
+    public void getOrigins(ValueCallback<Map> callback) {}
 
-    public void getUsageForOrigin(String origin, ValueCallback<Long> callback) {
-    }
+    public void getUsageForOrigin(String origin, ValueCallback<Long> callback) {}
 
-    public void getQuotaForOrigin(String origin, ValueCallback<Long> callback) {
-    }
+    public void getQuotaForOrigin(String origin, ValueCallback<Long> callback) {}
 
     @Deprecated
-    public void setQuotaForOrigin(String origin, long quota) {
-    }
+    public void setQuotaForOrigin(String origin, long quota) {}
 
-    public void deleteOrigin(String origin) {
-    }
+    public void deleteOrigin(String origin) {}
 
-    public void deleteAllData() {
-    }
+    public void deleteAllData() {}
 
     public static WebStorage getInstance() {
         return WebViewFactory.getProvider().getWebStorage();
     }
 
     @SystemApi
-    public WebStorage() {
-    }
+    public WebStorage() {}
 }

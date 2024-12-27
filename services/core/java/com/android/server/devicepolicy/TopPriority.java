@@ -5,6 +5,7 @@ import android.app.admin.DpcAuthority;
 import android.app.admin.PolicyValue;
 import android.app.admin.RoleAuthority;
 import android.app.admin.UnknownAuthority;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -28,7 +29,16 @@ public final class TopPriority extends ResolutionMechanism {
     public final android.app.admin.ResolutionMechanism getParcelableResolutionMechanism() {
         ArrayList arrayList = new ArrayList();
         for (String str : this.mHighestToLowestPriorityAuthorities) {
-            arrayList.add((str == null || str.isEmpty()) ? UnknownAuthority.UNKNOWN_AUTHORITY : "enterprise".equals(str) ? DpcAuthority.DPC_AUTHORITY : "device_admin".equals(str) ? DeviceAdminAuthority.DEVICE_ADMIN_AUTHORITY : str.startsWith("role:") ? new RoleAuthority(Set.of(str.substring(5))) : UnknownAuthority.UNKNOWN_AUTHORITY);
+            arrayList.add(
+                    (str == null || str.isEmpty())
+                            ? UnknownAuthority.UNKNOWN_AUTHORITY
+                            : "enterprise".equals(str)
+                                    ? DpcAuthority.DPC_AUTHORITY
+                                    : "device_admin".equals(str)
+                                            ? DeviceAdminAuthority.DEVICE_ADMIN_AUTHORITY
+                                            : str.startsWith("role:")
+                                                    ? new RoleAuthority(Set.of(str.substring(5)))
+                                                    : UnknownAuthority.UNKNOWN_AUTHORITY);
         }
         return new android.app.admin.TopPriority(arrayList);
     }
@@ -39,20 +49,28 @@ public final class TopPriority extends ResolutionMechanism {
             return null;
         }
         for (final String str : this.mHighestToLowestPriorityAuthorities) {
-            Optional findFirst = linkedHashMap.keySet().stream().filter(new Predicate() { // from class: com.android.server.devicepolicy.TopPriority$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return ((EnforcingAdmin) obj).hasAuthority(str);
-                }
-            }).findFirst();
+            Optional findFirst =
+                    linkedHashMap.keySet().stream()
+                            .filter(
+                                    new Predicate() { // from class:
+                                                      // com.android.server.devicepolicy.TopPriority$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            return ((EnforcingAdmin) obj).hasAuthority(str);
+                                        }
+                                    })
+                            .findFirst();
             if (findFirst.isPresent()) {
                 return (PolicyValue) linkedHashMap.get(findFirst.get());
             }
         }
-        return (PolicyValue) ((Map.Entry) linkedHashMap.entrySet().stream().findFirst().get()).getValue();
+        return (PolicyValue)
+                ((Map.Entry) linkedHashMap.entrySet().stream().findFirst().get()).getValue();
     }
 
     public final String toString() {
-        return "TopPriority { mHighestToLowestPriorityAuthorities= " + this.mHighestToLowestPriorityAuthorities + " }";
+        return "TopPriority { mHighestToLowestPriorityAuthorities= "
+                + this.mHighestToLowestPriorityAuthorities
+                + " }";
     }
 }

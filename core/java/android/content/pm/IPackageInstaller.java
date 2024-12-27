@@ -4,9 +4,6 @@ import android.Manifest;
 import android.app.ActivityThread;
 import android.app.PendingIntent;
 import android.content.IntentSender;
-import android.content.pm.IPackageInstallerCallback;
-import android.content.pm.IPackageInstallerSession;
-import android.content.pm.PackageInstaller;
 import android.graphics.Bitmap;
 import android.os.Binder;
 import android.os.IBinder;
@@ -17,6 +14,7 @@ import android.os.PermissionEnforcer;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -27,9 +25,15 @@ public interface IPackageInstaller extends IInterface {
 
     void bypassNextStagedInstallerCheck(boolean z) throws RemoteException;
 
-    void checkInstallConstraints(String str, List<String> list, PackageInstaller.InstallConstraints installConstraints, RemoteCallback remoteCallback) throws RemoteException;
+    void checkInstallConstraints(
+            String str,
+            List<String> list,
+            PackageInstaller.InstallConstraints installConstraints,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    int createSession(PackageInstaller.SessionParams sessionParams, String str, String str2, int i) throws RemoteException;
+    int createSession(PackageInstaller.SessionParams sessionParams, String str, String str2, int i)
+            throws RemoteException;
 
     void disableVerificationForUid(int i) throws RemoteException;
 
@@ -41,23 +45,37 @@ public interface IPackageInstaller extends IInterface {
 
     ParceledListSlice getStagedSessions() throws RemoteException;
 
-    void installExistingPackage(String str, int i, int i2, IntentSender intentSender, int i3, List<String> list) throws RemoteException;
+    void installExistingPackage(
+            String str, int i, int i2, IntentSender intentSender, int i3, List<String> list)
+            throws RemoteException;
 
-    void installPackageArchived(ArchivedPackageParcel archivedPackageParcel, PackageInstaller.SessionParams sessionParams, IntentSender intentSender, String str, UserHandle userHandle) throws RemoteException;
+    void installPackageArchived(
+            ArchivedPackageParcel archivedPackageParcel,
+            PackageInstaller.SessionParams sessionParams,
+            IntentSender intentSender,
+            String str,
+            UserHandle userHandle)
+            throws RemoteException;
 
     IPackageInstallerSession openSession(int i) throws RemoteException;
 
     IPackageInstallerSession openSessionQuick(int i, String str) throws RemoteException;
 
-    void registerCallback(IPackageInstallerCallback iPackageInstallerCallback, int i) throws RemoteException;
+    void registerCallback(IPackageInstallerCallback iPackageInstallerCallback, int i)
+            throws RemoteException;
 
-    void reportUnarchivalStatus(int i, int i2, long j, PendingIntent pendingIntent, UserHandle userHandle) throws RemoteException;
+    void reportUnarchivalStatus(
+            int i, int i2, long j, PendingIntent pendingIntent, UserHandle userHandle)
+            throws RemoteException;
 
-    void requestArchive(String str, String str2, int i, IntentSender intentSender, UserHandle userHandle) throws RemoteException;
+    void requestArchive(
+            String str, String str2, int i, IntentSender intentSender, UserHandle userHandle)
+            throws RemoteException;
 
     ParcelFileDescriptor requestCopy(String str, long j) throws RemoteException;
 
-    void requestUnarchive(String str, String str2, IntentSender intentSender, UserHandle userHandle) throws RemoteException;
+    void requestUnarchive(String str, String str2, IntentSender intentSender, UserHandle userHandle)
+            throws RemoteException;
 
     void setAllowUnlimitedSilentUpdates(String str) throws RemoteException;
 
@@ -67,35 +85,48 @@ public interface IPackageInstaller extends IInterface {
 
     void setUnknownSourceConfirmResult(int i, boolean z) throws RemoteException;
 
-    void uninstall(VersionedPackage versionedPackage, String str, int i, IntentSender intentSender, int i2) throws RemoteException;
+    void uninstall(
+            VersionedPackage versionedPackage, String str, int i, IntentSender intentSender, int i2)
+            throws RemoteException;
 
-    void uninstallExistingPackage(VersionedPackage versionedPackage, String str, IntentSender intentSender, int i) throws RemoteException;
+    void uninstallExistingPackage(
+            VersionedPackage versionedPackage, String str, IntentSender intentSender, int i)
+            throws RemoteException;
 
-    void unregisterCallback(IPackageInstallerCallback iPackageInstallerCallback) throws RemoteException;
+    void unregisterCallback(IPackageInstallerCallback iPackageInstallerCallback)
+            throws RemoteException;
 
     void updateSessionAppIcon(int i, Bitmap bitmap) throws RemoteException;
 
     void updateSessionAppLabel(int i, String str) throws RemoteException;
 
-    void waitForInstallConstraints(String str, List<String> list, PackageInstaller.InstallConstraints installConstraints, IntentSender intentSender, long j) throws RemoteException;
+    void waitForInstallConstraints(
+            String str,
+            List<String> list,
+            PackageInstaller.InstallConstraints installConstraints,
+            IntentSender intentSender,
+            long j)
+            throws RemoteException;
 
     public static class Default implements IPackageInstaller {
         @Override // android.content.pm.IPackageInstaller
-        public int createSession(PackageInstaller.SessionParams params, String installerPackageName, String installerAttributionTag, int userId) throws RemoteException {
+        public int createSession(
+                PackageInstaller.SessionParams params,
+                String installerPackageName,
+                String installerAttributionTag,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.IPackageInstaller
-        public void updateSessionAppIcon(int sessionId, Bitmap appIcon) throws RemoteException {
-        }
+        public void updateSessionAppIcon(int sessionId, Bitmap appIcon) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void updateSessionAppLabel(int sessionId, String appLabel) throws RemoteException {
-        }
+        public void updateSessionAppLabel(int sessionId, String appLabel) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void abandonSession(int sessionId) throws RemoteException {
-        }
+        public void abandonSession(int sessionId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
         public IPackageInstallerSession openSession(int sessionId) throws RemoteException {
@@ -113,7 +144,8 @@ public interface IPackageInstaller extends IInterface {
         }
 
         @Override // android.content.pm.IPackageInstaller
-        public ParceledListSlice getMySessions(String installerPackageName, int userId) throws RemoteException {
+        public ParceledListSlice getMySessions(String installerPackageName, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -123,84 +155,124 @@ public interface IPackageInstaller extends IInterface {
         }
 
         @Override // android.content.pm.IPackageInstaller
-        public void registerCallback(IPackageInstallerCallback callback, int userId) throws RemoteException {
-        }
+        public void registerCallback(IPackageInstallerCallback callback, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void unregisterCallback(IPackageInstallerCallback callback) throws RemoteException {
-        }
+        public void unregisterCallback(IPackageInstallerCallback callback) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void uninstall(VersionedPackage versionedPackage, String callerPackageName, int flags, IntentSender statusReceiver, int userId) throws RemoteException {
-        }
+        public void uninstall(
+                VersionedPackage versionedPackage,
+                String callerPackageName,
+                int flags,
+                IntentSender statusReceiver,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void uninstallExistingPackage(VersionedPackage versionedPackage, String callerPackageName, IntentSender statusReceiver, int userId) throws RemoteException {
-        }
+        public void uninstallExistingPackage(
+                VersionedPackage versionedPackage,
+                String callerPackageName,
+                IntentSender statusReceiver,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void installExistingPackage(String packageName, int installFlags, int installReason, IntentSender statusReceiver, int userId, List<String> whiteListedPermissions) throws RemoteException {
-        }
+        public void installExistingPackage(
+                String packageName,
+                int installFlags,
+                int installReason,
+                IntentSender statusReceiver,
+                int userId,
+                List<String> whiteListedPermissions)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void setPermissionsResult(int sessionId, boolean accepted) throws RemoteException {
-        }
+        public void setPermissionsResult(int sessionId, boolean accepted) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void bypassNextStagedInstallerCheck(boolean value) throws RemoteException {
-        }
+        public void bypassNextStagedInstallerCheck(boolean value) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void bypassNextAllowedApexUpdateCheck(boolean value) throws RemoteException {
-        }
+        public void bypassNextAllowedApexUpdateCheck(boolean value) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void disableVerificationForUid(int uid) throws RemoteException {
-        }
+        public void disableVerificationForUid(int uid) throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void setAllowUnlimitedSilentUpdates(String installerPackageName) throws RemoteException {
-        }
+        public void setAllowUnlimitedSilentUpdates(String installerPackageName)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void setSilentUpdatesThrottleTime(long throttleTimeInSeconds) throws RemoteException {
-        }
+        public void setSilentUpdatesThrottleTime(long throttleTimeInSeconds)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void checkInstallConstraints(String installerPackageName, List<String> packageNames, PackageInstaller.InstallConstraints constraints, RemoteCallback callback) throws RemoteException {
-        }
+        public void checkInstallConstraints(
+                String installerPackageName,
+                List<String> packageNames,
+                PackageInstaller.InstallConstraints constraints,
+                RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void waitForInstallConstraints(String installerPackageName, List<String> packageNames, PackageInstaller.InstallConstraints constraints, IntentSender callback, long timeout) throws RemoteException {
-        }
+        public void waitForInstallConstraints(
+                String installerPackageName,
+                List<String> packageNames,
+                PackageInstaller.InstallConstraints constraints,
+                IntentSender callback,
+                long timeout)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void requestArchive(String packageName, String callerPackageName, int flags, IntentSender statusReceiver, UserHandle userHandle) throws RemoteException {
-        }
+        public void requestArchive(
+                String packageName,
+                String callerPackageName,
+                int flags,
+                IntentSender statusReceiver,
+                UserHandle userHandle)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void requestUnarchive(String packageName, String callerPackageName, IntentSender statusReceiver, UserHandle userHandle) throws RemoteException {
-        }
+        public void requestUnarchive(
+                String packageName,
+                String callerPackageName,
+                IntentSender statusReceiver,
+                UserHandle userHandle)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void installPackageArchived(ArchivedPackageParcel archivedPackageParcel, PackageInstaller.SessionParams params, IntentSender statusReceiver, String installerPackageName, UserHandle userHandle) throws RemoteException {
-        }
+        public void installPackageArchived(
+                ArchivedPackageParcel archivedPackageParcel,
+                PackageInstaller.SessionParams params,
+                IntentSender statusReceiver,
+                String installerPackageName,
+                UserHandle userHandle)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void reportUnarchivalStatus(int unarchiveId, int status, long requiredStorageBytes, PendingIntent userActionIntent, UserHandle userHandle) throws RemoteException {
-        }
+        public void reportUnarchivalStatus(
+                int unarchiveId,
+                int status,
+                long requiredStorageBytes,
+                PendingIntent userActionIntent,
+                UserHandle userHandle)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public void setUnknownSourceConfirmResult(int sessionId, boolean accepted) throws RemoteException {
-        }
+        public void setUnknownSourceConfirmResult(int sessionId, boolean accepted)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageInstaller
-        public ParcelFileDescriptor requestCopy(String name, long lengthBytes) throws RemoteException {
+        public ParcelFileDescriptor requestCopy(String name, long lengthBytes)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageInstaller
-        public IPackageInstallerSession openSessionQuick(int sessionId, String tempStagingDirPath) throws RemoteException {
+        public IPackageInstallerSession openSessionQuick(int sessionId, String tempStagingDirPath)
+                throws RemoteException {
             return null;
         }
 
@@ -210,7 +282,7 @@ public interface IPackageInstaller extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPackageInstaller {
+    public abstract static class Stub extends Binder implements IPackageInstaller {
         public static final String DESCRIPTOR = "android.content.pm.IPackageInstaller";
         static final int TRANSACTION_abandonSession = 4;
         static final int TRANSACTION_bypassNextAllowedApexUpdateCheck = 17;
@@ -253,7 +325,9 @@ public interface IPackageInstaller extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IPackageInstaller asInterface(IBinder obj) {
@@ -343,7 +417,8 @@ public interface IPackageInstaller extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -353,7 +428,9 @@ public interface IPackageInstaller extends IInterface {
             }
             switch (code) {
                 case 1:
-                    PackageInstaller.SessionParams _arg0 = (PackageInstaller.SessionParams) data.readTypedObject(PackageInstaller.SessionParams.CREATOR);
+                    PackageInstaller.SessionParams _arg0 =
+                            (PackageInstaller.SessionParams)
+                                    data.readTypedObject(PackageInstaller.SessionParams.CREATOR);
                     String _arg1 = data.readString();
                     String _arg2 = data.readString();
                     int _arg3 = data.readInt();
@@ -417,20 +494,23 @@ public interface IPackageInstaller extends IInterface {
                     reply.writeTypedObject(_result6, 1);
                     return true;
                 case 10:
-                    IPackageInstallerCallback _arg09 = IPackageInstallerCallback.Stub.asInterface(data.readStrongBinder());
+                    IPackageInstallerCallback _arg09 =
+                            IPackageInstallerCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg15 = data.readInt();
                     data.enforceNoDataAvail();
                     registerCallback(_arg09, _arg15);
                     reply.writeNoException();
                     return true;
                 case 11:
-                    IPackageInstallerCallback _arg010 = IPackageInstallerCallback.Stub.asInterface(data.readStrongBinder());
+                    IPackageInstallerCallback _arg010 =
+                            IPackageInstallerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCallback(_arg010);
                     reply.writeNoException();
                     return true;
                 case 12:
-                    VersionedPackage _arg011 = (VersionedPackage) data.readTypedObject(VersionedPackage.CREATOR);
+                    VersionedPackage _arg011 =
+                            (VersionedPackage) data.readTypedObject(VersionedPackage.CREATOR);
                     String _arg16 = data.readString();
                     int _arg22 = data.readInt();
                     IntentSender _arg32 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
@@ -440,7 +520,8 @@ public interface IPackageInstaller extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 13:
-                    VersionedPackage _arg012 = (VersionedPackage) data.readTypedObject(VersionedPackage.CREATOR);
+                    VersionedPackage _arg012 =
+                            (VersionedPackage) data.readTypedObject(VersionedPackage.CREATOR);
                     String _arg17 = data.readString();
                     IntentSender _arg23 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     int _arg33 = data.readInt();
@@ -499,8 +580,12 @@ public interface IPackageInstaller extends IInterface {
                 case 21:
                     String _arg020 = data.readString();
                     List<String> _arg110 = data.createStringArrayList();
-                    PackageInstaller.InstallConstraints _arg25 = (PackageInstaller.InstallConstraints) data.readTypedObject(PackageInstaller.InstallConstraints.CREATOR);
-                    RemoteCallback _arg35 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    PackageInstaller.InstallConstraints _arg25 =
+                            (PackageInstaller.InstallConstraints)
+                                    data.readTypedObject(
+                                            PackageInstaller.InstallConstraints.CREATOR);
+                    RemoteCallback _arg35 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     checkInstallConstraints(_arg020, _arg110, _arg25, _arg35);
                     reply.writeNoException();
@@ -508,7 +593,10 @@ public interface IPackageInstaller extends IInterface {
                 case 22:
                     String _arg021 = data.readString();
                     List<String> _arg111 = data.createStringArrayList();
-                    PackageInstaller.InstallConstraints _arg26 = (PackageInstaller.InstallConstraints) data.readTypedObject(PackageInstaller.InstallConstraints.CREATOR);
+                    PackageInstaller.InstallConstraints _arg26 =
+                            (PackageInstaller.InstallConstraints)
+                                    data.readTypedObject(
+                                            PackageInstaller.InstallConstraints.CREATOR);
                     IntentSender _arg36 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     long _arg43 = data.readLong();
                     data.enforceNoDataAvail();
@@ -535,8 +623,12 @@ public interface IPackageInstaller extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 25:
-                    ArchivedPackageParcel _arg024 = (ArchivedPackageParcel) data.readTypedObject(ArchivedPackageParcel.CREATOR);
-                    PackageInstaller.SessionParams _arg114 = (PackageInstaller.SessionParams) data.readTypedObject(PackageInstaller.SessionParams.CREATOR);
+                    ArchivedPackageParcel _arg024 =
+                            (ArchivedPackageParcel)
+                                    data.readTypedObject(ArchivedPackageParcel.CREATOR);
+                    PackageInstaller.SessionParams _arg114 =
+                            (PackageInstaller.SessionParams)
+                                    data.readTypedObject(PackageInstaller.SessionParams.CREATOR);
                     IntentSender _arg29 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     String _arg39 = data.readString();
                     UserHandle _arg45 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
@@ -548,7 +640,8 @@ public interface IPackageInstaller extends IInterface {
                     int _arg025 = data.readInt();
                     int _arg115 = data.readInt();
                     long _arg210 = data.readLong();
-                    PendingIntent _arg310 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg310 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     UserHandle _arg46 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
                     reportUnarchivalStatus(_arg025, _arg115, _arg210, _arg310, _arg46);
@@ -599,7 +692,12 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public int createSession(PackageInstaller.SessionParams params, String installerPackageName, String installerAttributionTag, int userId) throws RemoteException {
+            public int createSession(
+                    PackageInstaller.SessionParams params,
+                    String installerPackageName,
+                    String installerAttributionTag,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -635,7 +733,8 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void updateSessionAppLabel(int sessionId, String appLabel) throws RemoteException {
+            public void updateSessionAppLabel(int sessionId, String appLabel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -674,7 +773,8 @@ public interface IPackageInstaller extends IInterface {
                     _data.writeInt(sessionId);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    IPackageInstallerSession _result = IPackageInstallerSession.Stub.asInterface(_reply.readStrongBinder());
+                    IPackageInstallerSession _result =
+                            IPackageInstallerSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -683,7 +783,8 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public PackageInstaller.SessionInfo getSessionInfo(int sessionId) throws RemoteException {
+            public PackageInstaller.SessionInfo getSessionInfo(int sessionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -691,7 +792,9 @@ public interface IPackageInstaller extends IInterface {
                     _data.writeInt(sessionId);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    PackageInstaller.SessionInfo _result = (PackageInstaller.SessionInfo) _reply.readTypedObject(PackageInstaller.SessionInfo.CREATOR);
+                    PackageInstaller.SessionInfo _result =
+                            (PackageInstaller.SessionInfo)
+                                    _reply.readTypedObject(PackageInstaller.SessionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -708,7 +811,8 @@ public interface IPackageInstaller extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -717,7 +821,8 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public ParceledListSlice getMySessions(String installerPackageName, int userId) throws RemoteException {
+            public ParceledListSlice getMySessions(String installerPackageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -726,7 +831,8 @@ public interface IPackageInstaller extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -742,7 +848,8 @@ public interface IPackageInstaller extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -751,7 +858,8 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void registerCallback(IPackageInstallerCallback callback, int userId) throws RemoteException {
+            public void registerCallback(IPackageInstallerCallback callback, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -767,7 +875,8 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void unregisterCallback(IPackageInstallerCallback callback) throws RemoteException {
+            public void unregisterCallback(IPackageInstallerCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -782,7 +891,13 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void uninstall(VersionedPackage versionedPackage, String callerPackageName, int flags, IntentSender statusReceiver, int userId) throws RemoteException {
+            public void uninstall(
+                    VersionedPackage versionedPackage,
+                    String callerPackageName,
+                    int flags,
+                    IntentSender statusReceiver,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -801,7 +916,12 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void uninstallExistingPackage(VersionedPackage versionedPackage, String callerPackageName, IntentSender statusReceiver, int userId) throws RemoteException {
+            public void uninstallExistingPackage(
+                    VersionedPackage versionedPackage,
+                    String callerPackageName,
+                    IntentSender statusReceiver,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -819,7 +939,14 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void installExistingPackage(String packageName, int installFlags, int installReason, IntentSender statusReceiver, int userId, List<String> whiteListedPermissions) throws RemoteException {
+            public void installExistingPackage(
+                    String packageName,
+                    int installFlags,
+                    int installReason,
+                    IntentSender statusReceiver,
+                    int userId,
+                    List<String> whiteListedPermissions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -839,7 +966,8 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void setPermissionsResult(int sessionId, boolean accepted) throws RemoteException {
+            public void setPermissionsResult(int sessionId, boolean accepted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -900,7 +1028,8 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void setAllowUnlimitedSilentUpdates(String installerPackageName) throws RemoteException {
+            public void setAllowUnlimitedSilentUpdates(String installerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -915,7 +1044,8 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void setSilentUpdatesThrottleTime(long throttleTimeInSeconds) throws RemoteException {
+            public void setSilentUpdatesThrottleTime(long throttleTimeInSeconds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -930,7 +1060,12 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void checkInstallConstraints(String installerPackageName, List<String> packageNames, PackageInstaller.InstallConstraints constraints, RemoteCallback callback) throws RemoteException {
+            public void checkInstallConstraints(
+                    String installerPackageName,
+                    List<String> packageNames,
+                    PackageInstaller.InstallConstraints constraints,
+                    RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -948,7 +1083,13 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void waitForInstallConstraints(String installerPackageName, List<String> packageNames, PackageInstaller.InstallConstraints constraints, IntentSender callback, long timeout) throws RemoteException {
+            public void waitForInstallConstraints(
+                    String installerPackageName,
+                    List<String> packageNames,
+                    PackageInstaller.InstallConstraints constraints,
+                    IntentSender callback,
+                    long timeout)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -967,7 +1108,13 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void requestArchive(String packageName, String callerPackageName, int flags, IntentSender statusReceiver, UserHandle userHandle) throws RemoteException {
+            public void requestArchive(
+                    String packageName,
+                    String callerPackageName,
+                    int flags,
+                    IntentSender statusReceiver,
+                    UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -986,7 +1133,12 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void requestUnarchive(String packageName, String callerPackageName, IntentSender statusReceiver, UserHandle userHandle) throws RemoteException {
+            public void requestUnarchive(
+                    String packageName,
+                    String callerPackageName,
+                    IntentSender statusReceiver,
+                    UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1004,7 +1156,13 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void installPackageArchived(ArchivedPackageParcel archivedPackageParcel, PackageInstaller.SessionParams params, IntentSender statusReceiver, String installerPackageName, UserHandle userHandle) throws RemoteException {
+            public void installPackageArchived(
+                    ArchivedPackageParcel archivedPackageParcel,
+                    PackageInstaller.SessionParams params,
+                    IntentSender statusReceiver,
+                    String installerPackageName,
+                    UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1023,7 +1181,13 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void reportUnarchivalStatus(int unarchiveId, int status, long requiredStorageBytes, PendingIntent userActionIntent, UserHandle userHandle) throws RemoteException {
+            public void reportUnarchivalStatus(
+                    int unarchiveId,
+                    int status,
+                    long requiredStorageBytes,
+                    PendingIntent userActionIntent,
+                    UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1042,7 +1206,8 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public void setUnknownSourceConfirmResult(int sessionId, boolean accepted) throws RemoteException {
+            public void setUnknownSourceConfirmResult(int sessionId, boolean accepted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1058,7 +1223,8 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public ParcelFileDescriptor requestCopy(String name, long lengthBytes) throws RemoteException {
+            public ParcelFileDescriptor requestCopy(String name, long lengthBytes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1067,7 +1233,9 @@ public interface IPackageInstaller extends IInterface {
                     _data.writeLong(lengthBytes);
                     this.mRemote.transact(28, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1076,7 +1244,8 @@ public interface IPackageInstaller extends IInterface {
             }
 
             @Override // android.content.pm.IPackageInstaller
-            public IPackageInstallerSession openSessionQuick(int sessionId, String tempStagingDirPath) throws RemoteException {
+            public IPackageInstallerSession openSessionQuick(
+                    int sessionId, String tempStagingDirPath) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1085,7 +1254,8 @@ public interface IPackageInstaller extends IInterface {
                     _data.writeString(tempStagingDirPath);
                     this.mRemote.transact(29, _data, _reply, 0);
                     _reply.readException();
-                    IPackageInstallerSession _result = IPackageInstallerSession.Stub.asInterface(_reply.readStrongBinder());
+                    IPackageInstallerSession _result =
+                            IPackageInstallerSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1095,7 +1265,8 @@ public interface IPackageInstaller extends IInterface {
         }
 
         protected void setPermissionsResult_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.INSTALL_PACKAGES, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.INSTALL_PACKAGES, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

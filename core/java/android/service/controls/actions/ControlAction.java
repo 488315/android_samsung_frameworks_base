@@ -2,18 +2,21 @@ package android.service.controls.actions;
 
 import android.os.Bundle;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public abstract class ControlAction {
-    public static final ControlAction ERROR_ACTION = new ControlAction() { // from class: android.service.controls.actions.ControlAction.1
-        @Override // android.service.controls.actions.ControlAction
-        public int getActionType() {
-            return -1;
-        }
-    };
+    public static final ControlAction ERROR_ACTION =
+            new ControlAction() { // from class: android.service.controls.actions.ControlAction.1
+                @Override // android.service.controls.actions.ControlAction
+                public int getActionType() {
+                    return -1;
+                }
+            };
     private static final String KEY_ACTION_TYPE = "key_action_type";
     private static final String KEY_CHALLENGE_VALUE = "key_challenge_value";
     private static final String KEY_TEMPLATE_ID = "key_template_id";
@@ -34,12 +37,10 @@ public abstract class ControlAction {
     private final String mTemplateId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ActionType {
-    }
+    public @interface ActionType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResponseResult {
-    }
+    public @interface ResponseResult {}
 
     public abstract int getActionType();
 

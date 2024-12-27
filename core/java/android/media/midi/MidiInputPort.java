@@ -3,13 +3,16 @@ package android.media.midi;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+
 import dalvik.system.CloseGuard;
+
+import libcore.io.IoUtils;
+
 import java.io.Closeable;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
-import libcore.io.IoUtils;
 
 /* loaded from: classes2.dex */
 public final class MidiInputPort extends MidiReceiver implements Closeable {

@@ -14,11 +14,13 @@ import android.system.OsConstants;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptService$$ExternalSyntheticOutline0;
-import com.android.server.pm.Installer;
 import com.android.server.utils.Slogf;
+
 import com.samsung.android.server.pm.PmLog;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -33,7 +35,10 @@ public final class UserDataPreparer {
     public final PackageManagerTracedLock mInstallLock;
     public final Installer mInstaller;
 
-    public UserDataPreparer(Installer installer, PackageManagerTracedLock packageManagerTracedLock, Context context) {
+    public UserDataPreparer(
+            Installer installer,
+            PackageManagerTracedLock packageManagerTracedLock,
+            Context context) {
         this.mInstallLock = packageManagerTracedLock;
         this.mContext = context;
         this.mInstaller = installer;
@@ -44,14 +49,25 @@ public final class UserDataPreparer {
         Slog.v("UserDataPreparer", "Found " + file + " with serial number " + serialNumber);
         if (serialNumber != -1) {
             if (serialNumber != i) {
-                throw new IOException(ArrayUtils$$ExternalSyntheticOutline0.m(serialNumber, i, "Found serial number ", " doesn't match expected "));
+                throw new IOException(
+                        ArrayUtils$$ExternalSyntheticOutline0.m(
+                                serialNumber,
+                                i,
+                                "Found serial number ",
+                                " doesn't match expected "));
             }
             return;
         }
-        Slog.d("UserDataPreparer", "Serial number missing on " + file + "; assuming current is valid");
+        Slog.d(
+                "UserDataPreparer",
+                "Serial number missing on " + file + "; assuming current is valid");
         try {
             try {
-                Os.setxattr(file.getAbsolutePath(), "user.serial", Integer.toString(i).getBytes(StandardCharsets.UTF_8), OsConstants.XATTR_CREATE);
+                Os.setxattr(
+                        file.getAbsolutePath(),
+                        "user.serial",
+                        Integer.toString(i).getBytes(StandardCharsets.UTF_8),
+                        OsConstants.XATTR_CREATE);
             } catch (ErrnoException e) {
                 throw e.rethrowAsIOException();
             }
@@ -77,7 +93,8 @@ public final class UserDataPreparer {
     }
 
     public final void destroyUserDataLI(int i, int i2, String str) {
-        StorageManager storageManager = (StorageManager) this.mContext.getSystemService(StorageManager.class);
+        StorageManager storageManager =
+                (StorageManager) this.mContext.getSystemService(StorageManager.class);
         try {
             Installer installer = this.mInstaller;
             if (installer.checkBeforeRemote()) {
@@ -99,7 +116,9 @@ public final class UserDataPreparer {
             }
             storageManager.destroyUserStorage(str, i, i2);
         } catch (Exception e2) {
-            StringBuilder m = DirEncryptService$$ExternalSyntheticOutline0.m(i, "Failed to destroy user ", " on volume ", str, ": ");
+            StringBuilder m =
+                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                            i, "Failed to destroy user ", " on volume ", str, ": ");
             m.append(e2);
             PackageManagerServiceUtils.logCriticalInfo(5, m.toString());
         }
@@ -137,7 +156,8 @@ public final class UserDataPreparer {
         PackageManagerTracedLock packageManagerTracedLock = this.mInstallLock;
         packageManagerTracedLock.mLock.lock();
         try {
-            StorageManager storageManager = (StorageManager) this.mContext.getSystemService(StorageManager.class);
+            StorageManager storageManager =
+                    (StorageManager) this.mContext.getSystemService(StorageManager.class);
             prepareUserDataLI(null, userInfo, i, true);
             Iterator it = storageManager.getWritablePrivateVolumes().iterator();
             while (it.hasNext()) {
@@ -160,9 +180,16 @@ public final class UserDataPreparer {
     public final void prepareUserDataLI(String str, UserInfo userInfo, int i, boolean z) {
         int i2 = userInfo.id;
         int i3 = userInfo.serialNumber;
-        StorageManager storageManager = (StorageManager) this.mContext.getSystemService(StorageManager.class);
+        StorageManager storageManager =
+                (StorageManager) this.mContext.getSystemService(StorageManager.class);
         boolean z2 = userInfo.lastLoggedInTime == 0;
-        Slogf.d("UserDataPreparer", "Preparing user data; volumeUuid=%s, userId=%d, flags=0x%x, isNewUser=%s", str, Integer.valueOf(i2), Integer.valueOf(i), Boolean.valueOf(z2));
+        Slogf.d(
+                "UserDataPreparer",
+                "Preparing user data; volumeUuid=%s, userId=%d, flags=0x%x, isNewUser=%s",
+                str,
+                Integer.valueOf(i2),
+                Integer.valueOf(i),
+                Boolean.valueOf(z2));
         try {
             storageManager.prepareUserStorage(str, i2, i);
             if ((i & 1) != 0) {
@@ -195,12 +222,20 @@ public final class UserDataPreparer {
             SystemProperties.set(str2, "true");
         } catch (Exception e2) {
             if (z2) {
-                StringBuilder m = DirEncryptService$$ExternalSyntheticOutline0.m(i2, "Destroying user ", " on volume ", str, " because we failed to prepare: ");
+                StringBuilder m =
+                        DirEncryptService$$ExternalSyntheticOutline0.m(
+                                i2,
+                                "Destroying user ",
+                                " on volume ",
+                                str,
+                                " because we failed to prepare: ");
                 m.append(e2);
                 PackageManagerServiceUtils.logCriticalInfo(6, m.toString());
                 destroyUserDataLI(i2, i, str);
             } else {
-                StringBuilder m2 = DirEncryptService$$ExternalSyntheticOutline0.m(i2, "Failed to prepare user ", " on volume ", str, ": ");
+                StringBuilder m2 =
+                        DirEncryptService$$ExternalSyntheticOutline0.m(
+                                i2, "Failed to prepare user ", " on volume ", str, ": ");
                 m2.append(e2);
                 PackageManagerServiceUtils.logCriticalInfo(6, m2.toString());
             }
@@ -211,10 +246,12 @@ public final class UserDataPreparer {
             try {
                 Log.e("UserDataPreparer", "prepareUserData failed for user " + i2, e2);
                 if (z2 && i2 == 0 && str == null) {
-                    RecoverySystem.rebootPromptAndWipeUserData(this.mContext, "failed to prepare internal storage for system user");
+                    RecoverySystem.rebootPromptAndWipeUserData(
+                            this.mContext, "failed to prepare internal storage for system user");
                 }
                 if (z2 && i2 == 77) {
-                    PmLog.logDebugInfoAndLogcat("Failed to prepare user data of Maintenance mode", "MaintenanceMode");
+                    PmLog.logDebugInfoAndLogcat(
+                            "Failed to prepare user data of Maintenance mode", "MaintenanceMode");
                     throw new RuntimeException("Failed to prepare user data of Maintenance mode");
                 }
             } catch (IOException e3) {
@@ -238,12 +275,21 @@ public final class UserDataPreparer {
                     int parseInt = Integer.parseInt(file.getName());
                     UserInfo userInfo2 = (UserInfo) sparseArray.get(parseInt);
                     if (userInfo2 == null) {
-                        PackageManagerServiceUtils.logCriticalInfo(5, "Destroying user directory " + file + " because no matching user was found");
+                        PackageManagerServiceUtils.logCriticalInfo(
+                                5,
+                                "Destroying user directory "
+                                        + file
+                                        + " because no matching user was found");
                     } else {
                         try {
                             enforceSerialNumber(file, userInfo2.serialNumber);
                         } catch (IOException e) {
-                            PackageManagerServiceUtils.logCriticalInfo(5, "Destroying user directory " + file + " because we failed to enforce serial number: " + e);
+                            PackageManagerServiceUtils.logCriticalInfo(
+                                    5,
+                                    "Destroying user directory "
+                                            + file
+                                            + " because we failed to enforce serial number: "
+                                            + e);
                         }
                     }
                     PackageManagerTracedLock packageManagerTracedLock = this.mInstallLock;

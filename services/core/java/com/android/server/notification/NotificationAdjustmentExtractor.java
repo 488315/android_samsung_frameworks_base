@@ -6,8 +6,7 @@ import android.content.Context;
 /* loaded from: classes2.dex */
 public class NotificationAdjustmentExtractor implements NotificationSignalExtractor {
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void initialize(Context context, NotificationUsageStats notificationUsageStats) {
-    }
+    public final void initialize(Context context, NotificationUsageStats notificationUsageStats) {}
 
     @Override // com.android.server.notification.NotificationSignalExtractor
     public final RankingReconsideration process(NotificationRecord notificationRecord) {
@@ -19,10 +18,8 @@ public class NotificationAdjustmentExtractor implements NotificationSignalExtrac
     }
 
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void setConfig(RankingConfig rankingConfig) {
-    }
+    public final void setConfig(RankingConfig rankingConfig) {}
 
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void setZenHelper(ZenModeHelper zenModeHelper) {
-    }
+    public final void setZenHelper(ZenModeHelper zenModeHelper) {}
 }

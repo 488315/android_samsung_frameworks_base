@@ -10,7 +10,8 @@ import java.util.function.Predicate;
 /* loaded from: classes5.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_HD_RADIO_IMPROVED, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(Arrays.asList(Flags.FLAG_HD_RADIO_IMPROVED, ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,12 +19,15 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.hardware.radio.FeatureFlags
     public boolean hdRadioImproved() {
-        return getValue(Flags.FLAG_HD_RADIO_IMPROVED, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.hardware.radio.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).hdRadioImproved();
-            }
-        });
+        return getValue(
+                Flags.FLAG_HD_RADIO_IMPROVED,
+                new Predicate() { // from class:
+                                  // com.android.internal.hidden_from_bootclasspath.android.hardware.radio.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).hdRadioImproved();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {

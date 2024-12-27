@@ -4,6 +4,7 @@ import android.companion.virtualcamera.SupportedStreamConfiguration$$ExternalSyn
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -32,16 +33,20 @@ public final class ProgramFilter implements Parcelable {
                 if (parcel.dataPosition() - dataPosition < readInt) {
                     programFilter.identifierTypes = parcel.createIntArray();
                     if (parcel.dataPosition() - dataPosition < readInt) {
-                        programFilter.identifiers = (ProgramIdentifier[]) parcel.createTypedArray(ProgramIdentifier.CREATOR);
+                        programFilter.identifiers =
+                                (ProgramIdentifier[])
+                                        parcel.createTypedArray(ProgramIdentifier.CREATOR);
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             programFilter.includeCategories = parcel.readBoolean();
                             if (parcel.dataPosition() - dataPosition < readInt) {
                                 programFilter.excludeModifications = parcel.readBoolean();
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -99,7 +104,14 @@ public final class ProgramFilter implements Parcelable {
             return false;
         }
         ProgramFilter programFilter = (ProgramFilter) obj;
-        return Objects.deepEquals(this.identifierTypes, programFilter.identifierTypes) && Objects.deepEquals(this.identifiers, programFilter.identifiers) && Objects.deepEquals(Boolean.valueOf(this.includeCategories), Boolean.valueOf(programFilter.includeCategories)) && Objects.deepEquals(Boolean.valueOf(this.excludeModifications), Boolean.valueOf(programFilter.excludeModifications));
+        return Objects.deepEquals(this.identifierTypes, programFilter.identifierTypes)
+                && Objects.deepEquals(this.identifiers, programFilter.identifiers)
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.includeCategories),
+                        Boolean.valueOf(programFilter.includeCategories))
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.excludeModifications),
+                        Boolean.valueOf(programFilter.excludeModifications));
     }
 
     public final int getStability() {
@@ -108,17 +120,30 @@ public final class ProgramFilter implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public final int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.identifierTypes, this.identifiers, Boolean.valueOf(this.includeCategories), Boolean.valueOf(this.excludeModifications)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.identifierTypes,
+                                this.identifiers,
+                                Boolean.valueOf(this.includeCategories),
+                                Boolean.valueOf(this.excludeModifications))
+                        .toArray());
     }
 
     public final String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        stringJoiner.add("identifierTypes: " + IdentifierType$$.arrayToString(this.identifierTypes));
-        StringBuilder m = AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.identifiers), "includeCategories: ", new StringBuilder("identifiers: "), stringJoiner);
+        stringJoiner.add(
+                "identifierTypes: " + IdentifierType$$.arrayToString(this.identifierTypes));
+        StringBuilder m =
+                AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                        Arrays.toString(this.identifiers),
+                        "includeCategories: ",
+                        new StringBuilder("identifiers: "),
+                        stringJoiner);
         m.append(this.includeCategories);
         stringJoiner.add(m.toString());
         stringJoiner.add("excludeModifications: " + this.excludeModifications);
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, new StringBuilder("ProgramFilter"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner, new StringBuilder("ProgramFilter"));
     }
 
     @Override // android.os.Parcelable
@@ -131,6 +156,7 @@ public final class ProgramFilter implements Parcelable {
         parcel.writeBoolean(this.excludeModifications);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

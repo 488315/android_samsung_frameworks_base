@@ -5,21 +5,26 @@ import android.util.AtomicFile;
 import android.util.Log;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.util.HexDump;
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.SecureRandom;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class WatchlistSettings {
-    public static final WatchlistSettings sInstance = new WatchlistSettings(new File(Environment.getDataSystemDirectory(), "watchlist_settings.xml"));
+    public static final WatchlistSettings sInstance =
+            new WatchlistSettings(
+                    new File(Environment.getDataSystemDirectory(), "watchlist_settings.xml"));
     public final byte[] mPrivacySecretKey;
     public final AtomicFile mXmlFile;
 
@@ -38,9 +43,11 @@ public final class WatchlistSettings {
                         while (XmlUtils.nextElementWithin(resolvePullParser, depth)) {
                             if (resolvePullParser.getName().equals("secret-key")) {
                                 resolvePullParser.require(2, null, "secret-key");
-                                byte[] hexStringToByteArray = HexDump.hexStringToByteArray(resolvePullParser.nextText());
+                                byte[] hexStringToByteArray =
+                                        HexDump.hexStringToByteArray(resolvePullParser.nextText());
                                 resolvePullParser.require(3, null, "secret-key");
-                                if (hexStringToByteArray == null || hexStringToByteArray.length != 48) {
+                                if (hexStringToByteArray == null
+                                        || hexStringToByteArray.length != 48) {
                                     Log.e("WatchlistSettings", "Unable to parse secret key");
                                     hexStringToByteArray = null;
                                 }
@@ -64,7 +71,12 @@ public final class WatchlistSettings {
                 } catch (RuntimeException e) {
                     Slog.e("WatchlistSettings", "Failed parsing xml", e);
                 }
-            } catch (IOException | IllegalStateException | IndexOutOfBoundsException | NullPointerException | NumberFormatException | XmlPullParserException e2) {
+            } catch (IOException
+                    | IllegalStateException
+                    | IndexOutOfBoundsException
+                    | NullPointerException
+                    | NumberFormatException
+                    | XmlPullParserException e2) {
                 Slog.e("WatchlistSettings", "Failed parsing xml", e2);
             }
         }
@@ -85,7 +97,10 @@ public final class WatchlistSettings {
                     resolveSerializer.endDocument();
                     this.mXmlFile.finishWrite(startWrite);
                 } catch (IOException e3) {
-                    Log.w("WatchlistSettings", "Failed to write display settings, restoring backup.", e3);
+                    Log.w(
+                            "WatchlistSettings",
+                            "Failed to write display settings, restoring backup.",
+                            e3);
                     this.mXmlFile.failWrite(startWrite);
                 }
             } catch (IOException e4) {

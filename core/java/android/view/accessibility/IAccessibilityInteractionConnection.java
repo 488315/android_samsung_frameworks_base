@@ -9,71 +9,204 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.MagnificationSpec;
 import android.view.SurfaceControl;
-import android.view.accessibility.IAccessibilityInteractionConnectionCallback;
 import android.window.ScreenCapture;
 
 /* loaded from: classes4.dex */
 public interface IAccessibilityInteractionConnection extends IInterface {
-    void attachAccessibilityOverlayToWindow(SurfaceControl surfaceControl, int i, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback) throws RemoteException;
+    void attachAccessibilityOverlayToWindow(
+            SurfaceControl surfaceControl,
+            int i,
+            IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback)
+            throws RemoteException;
 
     void clearAccessibilityFocus() throws RemoteException;
 
-    void findAccessibilityNodeInfoByAccessibilityId(long j, Region region, int i, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, int i2, int i3, long j2, MagnificationSpec magnificationSpec, float[] fArr, Bundle bundle) throws RemoteException;
+    void findAccessibilityNodeInfoByAccessibilityId(
+            long j,
+            Region region,
+            int i,
+            IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback,
+            int i2,
+            int i3,
+            long j2,
+            MagnificationSpec magnificationSpec,
+            float[] fArr,
+            Bundle bundle)
+            throws RemoteException;
 
-    void findAccessibilityNodeInfosByText(long j, String str, Region region, int i, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, int i2, int i3, long j2, MagnificationSpec magnificationSpec, float[] fArr) throws RemoteException;
+    void findAccessibilityNodeInfosByText(
+            long j,
+            String str,
+            Region region,
+            int i,
+            IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback,
+            int i2,
+            int i3,
+            long j2,
+            MagnificationSpec magnificationSpec,
+            float[] fArr)
+            throws RemoteException;
 
-    void findAccessibilityNodeInfosByViewId(long j, String str, Region region, int i, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, int i2, int i3, long j2, MagnificationSpec magnificationSpec, float[] fArr) throws RemoteException;
+    void findAccessibilityNodeInfosByViewId(
+            long j,
+            String str,
+            Region region,
+            int i,
+            IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback,
+            int i2,
+            int i3,
+            long j2,
+            MagnificationSpec magnificationSpec,
+            float[] fArr)
+            throws RemoteException;
 
-    void findFocus(long j, int i, Region region, int i2, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, int i3, int i4, long j2, MagnificationSpec magnificationSpec, float[] fArr) throws RemoteException;
+    void findFocus(
+            long j,
+            int i,
+            Region region,
+            int i2,
+            IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback,
+            int i3,
+            int i4,
+            long j2,
+            MagnificationSpec magnificationSpec,
+            float[] fArr)
+            throws RemoteException;
 
-    void focusSearch(long j, int i, Region region, int i2, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, int i3, int i4, long j2, MagnificationSpec magnificationSpec, float[] fArr) throws RemoteException;
+    void focusSearch(
+            long j,
+            int i,
+            Region region,
+            int i2,
+            IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback,
+            int i3,
+            int i4,
+            long j2,
+            MagnificationSpec magnificationSpec,
+            float[] fArr)
+            throws RemoteException;
 
     void notifyOutsideTouch() throws RemoteException;
 
-    void performAccessibilityAction(long j, int i, Bundle bundle, int i2, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, int i3, int i4, long j2) throws RemoteException;
+    void performAccessibilityAction(
+            long j,
+            int i,
+            Bundle bundle,
+            int i2,
+            IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback,
+            int i3,
+            int i4,
+            long j2)
+            throws RemoteException;
 
-    void takeScreenshotOfWindow(int i, ScreenCapture.ScreenCaptureListener screenCaptureListener, IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback) throws RemoteException;
+    void takeScreenshotOfWindow(
+            int i,
+            ScreenCapture.ScreenCaptureListener screenCaptureListener,
+            IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback)
+            throws RemoteException;
 
     public static class Default implements IAccessibilityInteractionConnection {
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void findAccessibilityNodeInfoByAccessibilityId(long accessibilityNodeId, Region bounds, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues, Bundle arguments) throws RemoteException {
-        }
+        public void findAccessibilityNodeInfoByAccessibilityId(
+                long accessibilityNodeId,
+                Region bounds,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid,
+                MagnificationSpec spec,
+                float[] matrixValues,
+                Bundle arguments)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void findAccessibilityNodeInfosByViewId(long accessibilityNodeId, String viewId, Region bounds, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrix) throws RemoteException {
-        }
+        public void findAccessibilityNodeInfosByViewId(
+                long accessibilityNodeId,
+                String viewId,
+                Region bounds,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid,
+                MagnificationSpec spec,
+                float[] matrix)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void findAccessibilityNodeInfosByText(long accessibilityNodeId, String text, Region bounds, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues) throws RemoteException {
-        }
+        public void findAccessibilityNodeInfosByText(
+                long accessibilityNodeId,
+                String text,
+                Region bounds,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid,
+                MagnificationSpec spec,
+                float[] matrixValues)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void findFocus(long accessibilityNodeId, int focusType, Region bounds, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues) throws RemoteException {
-        }
+        public void findFocus(
+                long accessibilityNodeId,
+                int focusType,
+                Region bounds,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid,
+                MagnificationSpec spec,
+                float[] matrixValues)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void focusSearch(long accessibilityNodeId, int direction, Region bounds, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues) throws RemoteException {
-        }
+        public void focusSearch(
+                long accessibilityNodeId,
+                int direction,
+                Region bounds,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid,
+                MagnificationSpec spec,
+                float[] matrixValues)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void performAccessibilityAction(long accessibilityNodeId, int action, Bundle arguments, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid) throws RemoteException {
-        }
+        public void performAccessibilityAction(
+                long accessibilityNodeId,
+                int action,
+                Bundle arguments,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void clearAccessibilityFocus() throws RemoteException {
-        }
+        public void clearAccessibilityFocus() throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void notifyOutsideTouch() throws RemoteException {
-        }
+        public void notifyOutsideTouch() throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void takeScreenshotOfWindow(int interactionId, ScreenCapture.ScreenCaptureListener listener, IAccessibilityInteractionConnectionCallback callback) throws RemoteException {
-        }
+        public void takeScreenshotOfWindow(
+                int interactionId,
+                ScreenCapture.ScreenCaptureListener listener,
+                IAccessibilityInteractionConnectionCallback callback)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void attachAccessibilityOverlayToWindow(SurfaceControl sc, int interactionId, IAccessibilityInteractionConnectionCallback callback) throws RemoteException {
-        }
+        public void attachAccessibilityOverlayToWindow(
+                SurfaceControl sc,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -81,8 +214,10 @@ public interface IAccessibilityInteractionConnection extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAccessibilityInteractionConnection {
-        public static final String DESCRIPTOR = "android.view.accessibility.IAccessibilityInteractionConnection";
+    public abstract static class Stub extends Binder
+            implements IAccessibilityInteractionConnection {
+        public static final String DESCRIPTOR =
+                "android.view.accessibility.IAccessibilityInteractionConnection";
         static final int TRANSACTION_attachAccessibilityOverlayToWindow = 10;
         static final int TRANSACTION_clearAccessibilityFocus = 7;
         static final int TRANSACTION_findAccessibilityNodeInfoByAccessibilityId = 1;
@@ -147,7 +282,8 @@ public interface IAccessibilityInteractionConnection extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -160,83 +296,110 @@ public interface IAccessibilityInteractionConnection extends IInterface {
                     long _arg0 = data.readLong();
                     Region _arg1 = (Region) data.readTypedObject(Region.CREATOR);
                     int _arg2 = data.readInt();
-                    IAccessibilityInteractionConnectionCallback _arg3 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityInteractionConnectionCallback _arg3 =
+                            IAccessibilityInteractionConnectionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg4 = data.readInt();
                     int _arg5 = data.readInt();
                     long _arg6 = data.readLong();
-                    MagnificationSpec _arg7 = (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
+                    MagnificationSpec _arg7 =
+                            (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
                     float[] _arg8 = data.createFloatArray();
                     Bundle _arg9 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    findAccessibilityNodeInfoByAccessibilityId(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
+                    findAccessibilityNodeInfoByAccessibilityId(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
                     return true;
                 case 2:
                     long _arg02 = data.readLong();
                     String _arg12 = data.readString();
                     Region _arg22 = (Region) data.readTypedObject(Region.CREATOR);
                     int _arg32 = data.readInt();
-                    IAccessibilityInteractionConnectionCallback _arg42 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityInteractionConnectionCallback _arg42 =
+                            IAccessibilityInteractionConnectionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg52 = data.readInt();
                     int _arg62 = data.readInt();
                     long _arg72 = data.readLong();
-                    MagnificationSpec _arg82 = (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
+                    MagnificationSpec _arg82 =
+                            (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
                     float[] _arg92 = data.createFloatArray();
                     data.enforceNoDataAvail();
-                    findAccessibilityNodeInfosByViewId(_arg02, _arg12, _arg22, _arg32, _arg42, _arg52, _arg62, _arg72, _arg82, _arg92);
+                    findAccessibilityNodeInfosByViewId(
+                            _arg02, _arg12, _arg22, _arg32, _arg42, _arg52, _arg62, _arg72, _arg82,
+                            _arg92);
                     return true;
                 case 3:
                     long _arg03 = data.readLong();
                     String _arg13 = data.readString();
                     Region _arg23 = (Region) data.readTypedObject(Region.CREATOR);
                     int _arg33 = data.readInt();
-                    IAccessibilityInteractionConnectionCallback _arg43 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityInteractionConnectionCallback _arg43 =
+                            IAccessibilityInteractionConnectionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg53 = data.readInt();
                     int _arg63 = data.readInt();
                     long _arg73 = data.readLong();
-                    MagnificationSpec _arg83 = (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
+                    MagnificationSpec _arg83 =
+                            (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
                     float[] _arg93 = data.createFloatArray();
                     data.enforceNoDataAvail();
-                    findAccessibilityNodeInfosByText(_arg03, _arg13, _arg23, _arg33, _arg43, _arg53, _arg63, _arg73, _arg83, _arg93);
+                    findAccessibilityNodeInfosByText(
+                            _arg03, _arg13, _arg23, _arg33, _arg43, _arg53, _arg63, _arg73, _arg83,
+                            _arg93);
                     return true;
                 case 4:
                     long _arg04 = data.readLong();
                     int _arg14 = data.readInt();
                     Region _arg24 = (Region) data.readTypedObject(Region.CREATOR);
                     int _arg34 = data.readInt();
-                    IAccessibilityInteractionConnectionCallback _arg44 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityInteractionConnectionCallback _arg44 =
+                            IAccessibilityInteractionConnectionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg54 = data.readInt();
                     int _arg64 = data.readInt();
                     long _arg74 = data.readLong();
-                    MagnificationSpec _arg84 = (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
+                    MagnificationSpec _arg84 =
+                            (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
                     float[] _arg94 = data.createFloatArray();
                     data.enforceNoDataAvail();
-                    findFocus(_arg04, _arg14, _arg24, _arg34, _arg44, _arg54, _arg64, _arg74, _arg84, _arg94);
+                    findFocus(
+                            _arg04, _arg14, _arg24, _arg34, _arg44, _arg54, _arg64, _arg74, _arg84,
+                            _arg94);
                     return true;
                 case 5:
                     long _arg05 = data.readLong();
                     int _arg15 = data.readInt();
                     Region _arg25 = (Region) data.readTypedObject(Region.CREATOR);
                     int _arg35 = data.readInt();
-                    IAccessibilityInteractionConnectionCallback _arg45 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityInteractionConnectionCallback _arg45 =
+                            IAccessibilityInteractionConnectionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg55 = data.readInt();
                     int _arg65 = data.readInt();
                     long _arg75 = data.readLong();
-                    MagnificationSpec _arg85 = (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
+                    MagnificationSpec _arg85 =
+                            (MagnificationSpec) data.readTypedObject(MagnificationSpec.CREATOR);
                     float[] _arg95 = data.createFloatArray();
                     data.enforceNoDataAvail();
-                    focusSearch(_arg05, _arg15, _arg25, _arg35, _arg45, _arg55, _arg65, _arg75, _arg85, _arg95);
+                    focusSearch(
+                            _arg05, _arg15, _arg25, _arg35, _arg45, _arg55, _arg65, _arg75, _arg85,
+                            _arg95);
                     return true;
                 case 6:
                     long _arg06 = data.readLong();
                     int _arg16 = data.readInt();
                     Bundle _arg26 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg36 = data.readInt();
-                    IAccessibilityInteractionConnectionCallback _arg46 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityInteractionConnectionCallback _arg46 =
+                            IAccessibilityInteractionConnectionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg56 = data.readInt();
                     int _arg66 = data.readInt();
                     long _arg76 = data.readLong();
                     data.enforceNoDataAvail();
-                    performAccessibilityAction(_arg06, _arg16, _arg26, _arg36, _arg46, _arg56, _arg66, _arg76);
+                    performAccessibilityAction(
+                            _arg06, _arg16, _arg26, _arg36, _arg46, _arg56, _arg66, _arg76);
                     return true;
                 case 7:
                     clearAccessibilityFocus();
@@ -246,15 +409,23 @@ public interface IAccessibilityInteractionConnection extends IInterface {
                     return true;
                 case 9:
                     int _arg07 = data.readInt();
-                    ScreenCapture.ScreenCaptureListener _arg17 = (ScreenCapture.ScreenCaptureListener) data.readTypedObject(ScreenCapture.ScreenCaptureListener.CREATOR);
-                    IAccessibilityInteractionConnectionCallback _arg27 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(data.readStrongBinder());
+                    ScreenCapture.ScreenCaptureListener _arg17 =
+                            (ScreenCapture.ScreenCaptureListener)
+                                    data.readTypedObject(
+                                            ScreenCapture.ScreenCaptureListener.CREATOR);
+                    IAccessibilityInteractionConnectionCallback _arg27 =
+                            IAccessibilityInteractionConnectionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     takeScreenshotOfWindow(_arg07, _arg17, _arg27);
                     return true;
                 case 10:
-                    SurfaceControl _arg08 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _arg08 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     int _arg18 = data.readInt();
-                    IAccessibilityInteractionConnectionCallback _arg28 = IAccessibilityInteractionConnectionCallback.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityInteractionConnectionCallback _arg28 =
+                            IAccessibilityInteractionConnectionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     attachAccessibilityOverlayToWindow(_arg08, _arg18, _arg28);
                     return true;
@@ -280,7 +451,18 @@ public interface IAccessibilityInteractionConnection extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnection
-            public void findAccessibilityNodeInfoByAccessibilityId(long accessibilityNodeId, Region bounds, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues, Bundle arguments) throws RemoteException {
+            public void findAccessibilityNodeInfoByAccessibilityId(
+                    long accessibilityNodeId,
+                    Region bounds,
+                    int interactionId,
+                    IAccessibilityInteractionConnectionCallback callback,
+                    int flags,
+                    int interrogatingPid,
+                    long interrogatingTid,
+                    MagnificationSpec spec,
+                    float[] matrixValues,
+                    Bundle arguments)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -360,7 +542,18 @@ public interface IAccessibilityInteractionConnection extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnection
-            public void findAccessibilityNodeInfosByViewId(long accessibilityNodeId, String viewId, Region bounds, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrix) throws RemoteException {
+            public void findAccessibilityNodeInfosByViewId(
+                    long accessibilityNodeId,
+                    String viewId,
+                    Region bounds,
+                    int interactionId,
+                    IAccessibilityInteractionConnectionCallback callback,
+                    int flags,
+                    int interrogatingPid,
+                    long interrogatingTid,
+                    MagnificationSpec spec,
+                    float[] matrix)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -440,7 +633,18 @@ public interface IAccessibilityInteractionConnection extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnection
-            public void findAccessibilityNodeInfosByText(long accessibilityNodeId, String text, Region bounds, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues) throws RemoteException {
+            public void findAccessibilityNodeInfosByText(
+                    long accessibilityNodeId,
+                    String text,
+                    Region bounds,
+                    int interactionId,
+                    IAccessibilityInteractionConnectionCallback callback,
+                    int flags,
+                    int interrogatingPid,
+                    long interrogatingTid,
+                    MagnificationSpec spec,
+                    float[] matrixValues)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -520,7 +724,18 @@ public interface IAccessibilityInteractionConnection extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnection
-            public void findFocus(long accessibilityNodeId, int focusType, Region bounds, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues) throws RemoteException {
+            public void findFocus(
+                    long accessibilityNodeId,
+                    int focusType,
+                    Region bounds,
+                    int interactionId,
+                    IAccessibilityInteractionConnectionCallback callback,
+                    int flags,
+                    int interrogatingPid,
+                    long interrogatingTid,
+                    MagnificationSpec spec,
+                    float[] matrixValues)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -600,7 +815,18 @@ public interface IAccessibilityInteractionConnection extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnection
-            public void focusSearch(long accessibilityNodeId, int direction, Region bounds, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrixValues) throws RemoteException {
+            public void focusSearch(
+                    long accessibilityNodeId,
+                    int direction,
+                    Region bounds,
+                    int interactionId,
+                    IAccessibilityInteractionConnectionCallback callback,
+                    int flags,
+                    int interrogatingPid,
+                    long interrogatingTid,
+                    MagnificationSpec spec,
+                    float[] matrixValues)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -680,7 +906,16 @@ public interface IAccessibilityInteractionConnection extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnection
-            public void performAccessibilityAction(long accessibilityNodeId, int action, Bundle arguments, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid) throws RemoteException {
+            public void performAccessibilityAction(
+                    long accessibilityNodeId,
+                    int action,
+                    Bundle arguments,
+                    int interactionId,
+                    IAccessibilityInteractionConnectionCallback callback,
+                    int flags,
+                    int interrogatingPid,
+                    long interrogatingTid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -721,7 +956,11 @@ public interface IAccessibilityInteractionConnection extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnection
-            public void takeScreenshotOfWindow(int interactionId, ScreenCapture.ScreenCaptureListener listener, IAccessibilityInteractionConnectionCallback callback) throws RemoteException {
+            public void takeScreenshotOfWindow(
+                    int interactionId,
+                    ScreenCapture.ScreenCaptureListener listener,
+                    IAccessibilityInteractionConnectionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -735,7 +974,11 @@ public interface IAccessibilityInteractionConnection extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityInteractionConnection
-            public void attachAccessibilityOverlayToWindow(SurfaceControl sc, int interactionId, IAccessibilityInteractionConnectionCallback callback) throws RemoteException {
+            public void attachAccessibilityOverlayToWindow(
+                    SurfaceControl sc,
+                    int interactionId,
+                    IAccessibilityInteractionConnectionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -6,8 +6,7 @@ public class Float2 {
     public float x;
     public float y;
 
-    public Float2() {
-    }
+    public Float2() {}
 
     public Float2(Float2 data) {
         this.x = data.x;

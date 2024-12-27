@@ -10,10 +10,12 @@ import android.util.Log;
 import android.util.Slog;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.modules.expresslog.Counter;
 import com.android.server.AppSchedulingModuleThread;
 import com.android.server.job.JobSchedulerService;
 import com.android.server.job.JobSchedulerService$$ExternalSyntheticLambda5;
+
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.PriorityQueue;
@@ -36,7 +38,9 @@ public final class TimeController extends StateController {
     public final class AnonymousClass1 implements Comparator {
         @Override // java.util.Comparator
         public final int compare(Object obj, Object obj2) {
-            return Long.compare(((JobStatus) obj).latestRunTimeElapsedMillis, ((JobStatus) obj2).latestRunTimeElapsedMillis);
+            return Long.compare(
+                    ((JobStatus) obj).latestRunTimeElapsedMillis,
+                    ((JobStatus) obj2).latestRunTimeElapsedMillis);
         }
     }
 
@@ -51,69 +55,78 @@ public final class TimeController extends StateController {
         this.mAlarmService = null;
         this.mTrackedJobs = new PriorityQueue(new AnonymousClass1());
         final int i = 0;
-        this.mDeadlineExpiredListener = new AlarmManager.OnAlarmListener(this) { // from class: com.android.server.job.controllers.TimeController.2
-            public final /* synthetic */ TimeController this$0;
+        this.mDeadlineExpiredListener =
+                new AlarmManager.OnAlarmListener(
+                        this) { // from class: com.android.server.job.controllers.TimeController.2
+                    public final /* synthetic */ TimeController this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.app.AlarmManager.OnAlarmListener
-            public final void onAlarm() {
-                switch (i) {
-                    case 0:
-                        if (TimeController.DEBUG) {
-                            Slog.d("JobScheduler.Time", "Deadline-expired alarm fired");
+                    @Override // android.app.AlarmManager.OnAlarmListener
+                    public final void onAlarm() {
+                        switch (i) {
+                            case 0:
+                                if (TimeController.DEBUG) {
+                                    Slog.d("JobScheduler.Time", "Deadline-expired alarm fired");
+                                }
+                                this.this$0.checkExpiredDeadlinesAndResetAlarm();
+                                break;
+                            default:
+                                if (TimeController.DEBUG) {
+                                    Slog.d("JobScheduler.Time", "Delay-expired alarm fired");
+                                }
+                                TimeController timeController = this.this$0;
+                                JobSchedulerService.sElapsedRealtimeClock.getClass();
+                                timeController.mLastFiredDelayExpiredElapsedMillis =
+                                        SystemClock.elapsedRealtime();
+                                this.this$0.checkExpiredDelaysAndResetAlarm();
+                                break;
                         }
-                        this.this$0.checkExpiredDeadlinesAndResetAlarm();
-                        break;
-                    default:
-                        if (TimeController.DEBUG) {
-                            Slog.d("JobScheduler.Time", "Delay-expired alarm fired");
-                        }
-                        TimeController timeController = this.this$0;
-                        JobSchedulerService.sElapsedRealtimeClock.getClass();
-                        timeController.mLastFiredDelayExpiredElapsedMillis = SystemClock.elapsedRealtime();
-                        this.this$0.checkExpiredDelaysAndResetAlarm();
-                        break;
-                }
-            }
-        };
+                    }
+                };
         final int i2 = 1;
-        this.mNextDelayExpiredListener = new AlarmManager.OnAlarmListener(this) { // from class: com.android.server.job.controllers.TimeController.2
-            public final /* synthetic */ TimeController this$0;
+        this.mNextDelayExpiredListener =
+                new AlarmManager.OnAlarmListener(
+                        this) { // from class: com.android.server.job.controllers.TimeController.2
+                    public final /* synthetic */ TimeController this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.app.AlarmManager.OnAlarmListener
-            public final void onAlarm() {
-                switch (i2) {
-                    case 0:
-                        if (TimeController.DEBUG) {
-                            Slog.d("JobScheduler.Time", "Deadline-expired alarm fired");
+                    @Override // android.app.AlarmManager.OnAlarmListener
+                    public final void onAlarm() {
+                        switch (i2) {
+                            case 0:
+                                if (TimeController.DEBUG) {
+                                    Slog.d("JobScheduler.Time", "Deadline-expired alarm fired");
+                                }
+                                this.this$0.checkExpiredDeadlinesAndResetAlarm();
+                                break;
+                            default:
+                                if (TimeController.DEBUG) {
+                                    Slog.d("JobScheduler.Time", "Delay-expired alarm fired");
+                                }
+                                TimeController timeController = this.this$0;
+                                JobSchedulerService.sElapsedRealtimeClock.getClass();
+                                timeController.mLastFiredDelayExpiredElapsedMillis =
+                                        SystemClock.elapsedRealtime();
+                                this.this$0.checkExpiredDelaysAndResetAlarm();
+                                break;
                         }
-                        this.this$0.checkExpiredDeadlinesAndResetAlarm();
-                        break;
-                    default:
-                        if (TimeController.DEBUG) {
-                            Slog.d("JobScheduler.Time", "Delay-expired alarm fired");
-                        }
-                        TimeController timeController = this.this$0;
-                        JobSchedulerService.sElapsedRealtimeClock.getClass();
-                        timeController.mLastFiredDelayExpiredElapsedMillis = SystemClock.elapsedRealtime();
-                        this.this$0.checkExpiredDelaysAndResetAlarm();
-                        break;
-                }
-            }
-        };
+                    }
+                };
         this.mNextJobExpiredElapsedMillis = Long.MAX_VALUE;
         this.mNextDelayExpiredElapsedMillis = Long.MAX_VALUE;
     }
 
     public static boolean canStopTrackingJobLocked(JobStatus jobStatus) {
-        return (!jobStatus.hasConstraint(Integer.MIN_VALUE) || jobStatus.isConstraintSatisfied(Integer.MIN_VALUE)) && (!jobStatus.hasConstraint(1073741824) || jobStatus.isConstraintSatisfied(1073741824));
+        return (!jobStatus.hasConstraint(Integer.MIN_VALUE)
+                        || jobStatus.isConstraintSatisfied(Integer.MIN_VALUE))
+                && (!jobStatus.hasConstraint(1073741824)
+                        || jobStatus.isConstraintSatisfied(1073741824));
     }
 
     public static boolean evaluateDeadlineConstraint(JobStatus jobStatus, long j) {
@@ -158,13 +171,18 @@ public final class TimeController extends StateController {
                                 str = jobStatus.sourcePackageName;
                                 break;
                             } else if (DEBUG) {
-                                Slog.i("JobScheduler.Time", "Skipping " + jobStatus + " because deadline won't make it ready.");
+                                Slog.i(
+                                        "JobScheduler.Time",
+                                        "Skipping "
+                                                + jobStatus
+                                                + " because deadline won't make it ready.");
                             }
                         } else {
                             if (jobStatus.isReady(jobStatus.mSatisfiedConstraintsOfInterest)) {
                                 this.mStateChangedListener.onRunJobNow(jobStatus);
                             }
-                            Counter.logIncrement("job_scheduler.value_job_scheduler_job_deadline_expired_counter");
+                            Counter.logIncrement(
+                                    "job_scheduler.value_job_scheduler_job_deadline_expired_counter");
                             it.remove();
                         }
                     }
@@ -190,7 +208,8 @@ public final class TimeController extends StateController {
                     JobStatus jobStatus = (JobStatus) it.next();
                     if (jobStatus.hasConstraint(Integer.MIN_VALUE)) {
                         if (jobStatus.earliestRunTimeElapsedMillis <= elapsedRealtime) {
-                            jobStatus.setConstraintSatisfied(Integer.MIN_VALUE, elapsedRealtime, true);
+                            jobStatus.setConstraintSatisfied(
+                                    Integer.MIN_VALUE, elapsedRealtime, true);
                             if (canStopTrackingJobLocked(jobStatus)) {
                                 it.remove();
                             }
@@ -203,7 +222,11 @@ public final class TimeController extends StateController {
                                 j = j2;
                             }
                         } else if (DEBUG) {
-                            Slog.i("JobScheduler.Time", "Skipping " + jobStatus + " because delay won't make it ready.");
+                            Slog.i(
+                                    "JobScheduler.Time",
+                                    "Skipping "
+                                            + jobStatus
+                                            + " because delay won't make it ready.");
                         }
                     }
                 }
@@ -218,18 +241,24 @@ public final class TimeController extends StateController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(IndentingPrintWriter indentingPrintWriter, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            IndentingPrintWriter indentingPrintWriter,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         JobSchedulerService.sElapsedRealtimeClock.getClass();
         long elapsedRealtime = SystemClock.elapsedRealtime();
         indentingPrintWriter.println("Elapsed clock: " + elapsedRealtime);
         indentingPrintWriter.print("Next delay alarm in ");
-        TimeUtils.formatDuration(this.mNextDelayExpiredElapsedMillis, elapsedRealtime, indentingPrintWriter);
+        TimeUtils.formatDuration(
+                this.mNextDelayExpiredElapsedMillis, elapsedRealtime, indentingPrintWriter);
         indentingPrintWriter.println();
         indentingPrintWriter.print("Last delay alarm fired @ ");
-        TimeUtils.formatDuration(elapsedRealtime, this.mLastFiredDelayExpiredElapsedMillis, indentingPrintWriter);
+        TimeUtils.formatDuration(
+                elapsedRealtime, this.mLastFiredDelayExpiredElapsedMillis, indentingPrintWriter);
         indentingPrintWriter.println();
         indentingPrintWriter.print("Next deadline alarm in ");
-        TimeUtils.formatDuration(this.mNextJobExpiredElapsedMillis, elapsedRealtime, indentingPrintWriter);
+        TimeUtils.formatDuration(
+                this.mNextJobExpiredElapsedMillis, elapsedRealtime, indentingPrintWriter);
         indentingPrintWriter.println();
         indentingPrintWriter.println();
         Iterator it = this.mTrackedJobs.iterator();
@@ -242,13 +271,19 @@ public final class TimeController extends StateController {
                 UserHandle.formatUid(indentingPrintWriter, jobStatus.sourceUid);
                 indentingPrintWriter.print(": Delay=");
                 if (jobStatus.hasConstraint(Integer.MIN_VALUE)) {
-                    TimeUtils.formatDuration(jobStatus.earliestRunTimeElapsedMillis, elapsedRealtime, indentingPrintWriter);
+                    TimeUtils.formatDuration(
+                            jobStatus.earliestRunTimeElapsedMillis,
+                            elapsedRealtime,
+                            indentingPrintWriter);
                 } else {
                     indentingPrintWriter.print("N/A");
                 }
                 indentingPrintWriter.print(", Deadline=");
                 if (jobStatus.hasConstraint(1073741824)) {
-                    TimeUtils.formatDuration(jobStatus.latestRunTimeElapsedMillis, elapsedRealtime, indentingPrintWriter);
+                    TimeUtils.formatDuration(
+                            jobStatus.latestRunTimeElapsedMillis,
+                            elapsedRealtime,
+                            indentingPrintWriter);
                 } else {
                     indentingPrintWriter.print("N/A");
                 }
@@ -258,15 +293,20 @@ public final class TimeController extends StateController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(ProtoOutputStream protoOutputStream, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            ProtoOutputStream protoOutputStream,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         long j = 2246267895812L;
         long start = protoOutputStream.start(2246267895812L);
         long start2 = protoOutputStream.start(1146756268040L);
         JobSchedulerService.sElapsedRealtimeClock.getClass();
         long elapsedRealtime = SystemClock.elapsedRealtime();
         protoOutputStream.write(1112396529665L, elapsedRealtime);
-        protoOutputStream.write(1112396529666L, this.mNextDelayExpiredElapsedMillis - elapsedRealtime);
-        protoOutputStream.write(1112396529667L, this.mNextJobExpiredElapsedMillis - elapsedRealtime);
+        protoOutputStream.write(
+                1112396529666L, this.mNextDelayExpiredElapsedMillis - elapsedRealtime);
+        protoOutputStream.write(
+                1112396529667L, this.mNextJobExpiredElapsedMillis - elapsedRealtime);
         Iterator it = this.mTrackedJobs.iterator();
         while (it.hasNext()) {
             JobStatus jobStatus = (JobStatus) it.next();
@@ -274,9 +314,11 @@ public final class TimeController extends StateController {
                 long start3 = protoOutputStream.start(j);
                 jobStatus.writeToShortProto(protoOutputStream, 1146756268033L);
                 protoOutputStream.write(1133871366147L, jobStatus.hasConstraint(Integer.MIN_VALUE));
-                protoOutputStream.write(1112396529668L, jobStatus.earliestRunTimeElapsedMillis - elapsedRealtime);
+                protoOutputStream.write(
+                        1112396529668L, jobStatus.earliestRunTimeElapsedMillis - elapsedRealtime);
                 protoOutputStream.write(1133871366149L, jobStatus.hasConstraint(1073741824));
-                protoOutputStream.write(1112396529670L, jobStatus.latestRunTimeElapsedMillis - elapsedRealtime);
+                protoOutputStream.write(
+                        1112396529670L, jobStatus.latestRunTimeElapsedMillis - elapsedRealtime);
                 protoOutputStream.end(start3);
                 j = 2246267895812L;
             }
@@ -302,13 +344,15 @@ public final class TimeController extends StateController {
                         this.mStateChangedListener.onRunJobNow(jobStatus);
                     }
                     this.mTrackedJobs.remove(jobStatus);
-                    Counter.logIncrement("job_scheduler.value_job_scheduler_job_deadline_expired_counter");
+                    Counter.logIncrement(
+                            "job_scheduler.value_job_scheduler_job_deadline_expired_counter");
                 } else if (wouldBeReadyWithConstraintLocked(jobStatus, 1073741824)) {
                     setDeadlineExpiredAlarmLocked(j2, jobSchedulerService.deriveWorkSource(i, str));
                 }
             }
         }
-        if (!jobStatus.hasConstraint(Integer.MIN_VALUE) || jobStatus.isConstraintSatisfied(Integer.MIN_VALUE)) {
+        if (!jobStatus.hasConstraint(Integer.MIN_VALUE)
+                || jobStatus.isConstraintSatisfied(Integer.MIN_VALUE)) {
             return;
         }
         long j3 = this.mNextDelayExpiredElapsedMillis;
@@ -333,7 +377,8 @@ public final class TimeController extends StateController {
             maybeStopTrackingJobLocked(jobStatus, null);
             JobSchedulerService.sElapsedRealtimeClock.getClass();
             long elapsedRealtime = SystemClock.elapsedRealtime();
-            if (jobStatus.hasConstraint(1073741824) && evaluateDeadlineConstraint(jobStatus, elapsedRealtime)) {
+            if (jobStatus.hasConstraint(1073741824)
+                    && evaluateDeadlineConstraint(jobStatus, elapsedRealtime)) {
                 return;
             }
             boolean hasConstraint = jobStatus.hasConstraint(Integer.MIN_VALUE);
@@ -346,11 +391,16 @@ public final class TimeController extends StateController {
             }
             this.mTrackedJobs.add(jobStatus);
             jobStatus.setTrackingController(32);
-            WorkSource deriveWorkSource = this.mService.deriveWorkSource(jobStatus.sourceUid, jobStatus.sourcePackageName);
-            if (jobStatus.hasConstraint(Integer.MIN_VALUE) && wouldBeReadyWithConstraintLocked(jobStatus, Integer.MIN_VALUE) && j < this.mNextDelayExpiredElapsedMillis) {
+            WorkSource deriveWorkSource =
+                    this.mService.deriveWorkSource(
+                            jobStatus.sourceUid, jobStatus.sourcePackageName);
+            if (jobStatus.hasConstraint(Integer.MIN_VALUE)
+                    && wouldBeReadyWithConstraintLocked(jobStatus, Integer.MIN_VALUE)
+                    && j < this.mNextDelayExpiredElapsedMillis) {
                 setDelayExpiredAlarmLocked(j, deriveWorkSource);
             }
-            if (jobStatus.hasConstraint(1073741824) && wouldBeReadyWithConstraintLocked(jobStatus, 1073741824)) {
+            if (jobStatus.hasConstraint(1073741824)
+                    && wouldBeReadyWithConstraintLocked(jobStatus, 1073741824)) {
                 long j2 = this.mNextJobExpiredElapsedMillis;
                 long j3 = jobStatus.latestRunTimeElapsedMillis;
                 if (j3 < j2) {
@@ -381,7 +431,8 @@ public final class TimeController extends StateController {
             return;
         }
         this.mNextJobExpiredElapsedMillis = max;
-        updateAlarmWithListenerLocked("*job.deadline*", 2, this.mDeadlineExpiredListener, max, workSource);
+        updateAlarmWithListenerLocked(
+                "*job.deadline*", 2, this.mDeadlineExpiredListener, max, workSource);
     }
 
     public final void setDelayExpiredAlarmLocked(long j, WorkSource workSource) {
@@ -392,10 +443,16 @@ public final class TimeController extends StateController {
             return;
         }
         this.mNextDelayExpiredElapsedMillis = max2;
-        updateAlarmWithListenerLocked("*job.delay*", 3, this.mNextDelayExpiredListener, max2, workSource);
+        updateAlarmWithListenerLocked(
+                "*job.delay*", 3, this.mNextDelayExpiredListener, max2, workSource);
     }
 
-    public final void updateAlarmWithListenerLocked(String str, int i, AlarmManager.OnAlarmListener onAlarmListener, long j, WorkSource workSource) {
+    public final void updateAlarmWithListenerLocked(
+            String str,
+            int i,
+            AlarmManager.OnAlarmListener onAlarmListener,
+            long j,
+            WorkSource workSource) {
         if (this.mAlarmService == null) {
             this.mAlarmService = (AlarmManager) this.mContext.getSystemService("alarm");
         }
@@ -406,6 +463,14 @@ public final class TimeController extends StateController {
         if (DEBUG) {
             Slog.d("JobScheduler.Time", "Setting " + str + " for: " + j);
         }
-        this.mAlarmService.set(i, j, -1L, 0L, str, onAlarmListener, AppSchedulingModuleThread.getHandler(), workSource);
+        this.mAlarmService.set(
+                i,
+                j,
+                -1L,
+                0L,
+                str,
+                onAlarmListener,
+                AppSchedulingModuleThread.getHandler(),
+                workSource);
     }
 }

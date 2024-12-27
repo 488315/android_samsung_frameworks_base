@@ -9,8 +9,7 @@ public class MultiSelection {
     private static boolean mNeedToScroll = false;
     private static int mHoveredIcon = -1;
 
-    private MultiSelection() {
-    }
+    private MultiSelection() {}
 
     public static final int getSelectionStart(CharSequence text) {
         if (text instanceof Spanned) {
@@ -27,13 +26,13 @@ public class MultiSelection {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:53:0x00d1, code lost:
-    
-        if (r4 == r2) goto L88;
-     */
+
+       if (r4 == r2) goto L88;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:54:?, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Removed duplicated region for block: B:31:0x008f  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -44,7 +43,10 @@ public class MultiSelection {
             Method dump skipped, instructions count: 288
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.MultiSelection.setSelection(android.text.Spannable, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.text.MultiSelection.setSelection(android.text.Spannable, int,"
+                    + " int):void");
     }
 
     public static final void removeCurSelection(Spannable text) {
@@ -148,12 +150,10 @@ public class MultiSelection {
     }
 
     private static final class START implements NoCopySpan {
-        private START() {
-        }
+        private START() {}
     }
 
     private static final class END implements NoCopySpan {
-        private END() {
-        }
+        private END() {}
     }
 }

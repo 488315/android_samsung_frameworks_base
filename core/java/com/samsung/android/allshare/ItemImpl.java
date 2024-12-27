@@ -4,26 +4,28 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import com.samsung.android.allshare.Item;
-import com.samsung.android.allshare.ItemCreator;
+
 import com.sec.android.allshare.iface.message.AllShareKey;
+
 import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
 final class ItemImpl extends Item {
-    public static final Parcelable.Creator<ItemImpl> CREATOR = new Parcelable.Creator<ItemImpl>() { // from class: com.samsung.android.allshare.ItemImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ItemImpl createFromParcel(Parcel src) {
-            return new ItemImpl(src);
-        }
+    public static final Parcelable.Creator<ItemImpl> CREATOR =
+            new Parcelable.Creator<
+                    ItemImpl>() { // from class: com.samsung.android.allshare.ItemImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ItemImpl createFromParcel(Parcel src) {
+                    return new ItemImpl(src);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ItemImpl[] newArray(int size) {
-            return new ItemImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ItemImpl[] newArray(int size) {
+                    return new ItemImpl[size];
+                }
+            };
     private static final String DATETIME_FORMAT = "CCYY-MM-DDThh:mm:ss";
     private static final String DATETIME_FORMAT_WITH_MS = "CCYY-MM-DDThh:mm:ss.sss";
     private static final String DATETIME_FORMAT_WITH_MS_OFFSET = "CCYY-MM-DDThh:mm:ss.sss+hh:mm";
@@ -32,8 +34,10 @@ final class ItemImpl extends Item {
     private static final String DATETIME_FORMAT_WITH_OFFSET_Z = "CCYY-MM-DDThh:mm:ssZ";
     private static final String DATETIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
     private static final String DATETIME_PATTERN_WITH_MS = "yyyy-MM-dd'T'HH:mm:ss.SSS";
-    private static final String DATETIME_PATTERN_WITH_MS_WITH_OFFSET = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
-    private static final String DATETIME_PATTERN_WITH_MS_WITH_OFFSET_Z = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+    private static final String DATETIME_PATTERN_WITH_MS_WITH_OFFSET =
+            "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
+    private static final String DATETIME_PATTERN_WITH_MS_WITH_OFFSET_Z =
+            "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
     private static final String DATETIME_PATTERN_WITH_OFFSET = "yyyy-MM-dd'T'HH:mm:ssZZZZZ";
     private static final String DATETIME_PATTERN_WITH_OFFSET_Z = "yyyy-MM-dd'T'HH:mm:ss'Z'";
     private static final String DATE_FORMAT = "CCYY-MM-DD";
@@ -48,12 +52,17 @@ final class ItemImpl extends Item {
 
     @Override // com.samsung.android.allshare.Item
     public String getTitle() {
-        return this.mBundle == null ? "" : this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_TITLE);
+        return this.mBundle == null
+                ? ""
+                : this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_TITLE);
     }
 
     @Override // com.samsung.android.allshare.Item
     public Uri getURI() {
-        return (Uri) (this.mBundle == null ? null : this.mBundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM_URI));
+        return (Uri)
+                (this.mBundle == null
+                        ? null
+                        : this.mBundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM_URI));
     }
 
     private static String getFormatter(String dateStr) {
@@ -89,7 +98,8 @@ final class ItemImpl extends Item {
     protected final String getObjectID() {
         String objID;
         Bundle bundle = getBundle();
-        if (bundle == null || (objID = bundle.getString(AllShareKey.BUNDLE_STRING_OBJECT_ID)) == null) {
+        if (bundle == null
+                || (objID = bundle.getString(AllShareKey.BUNDLE_STRING_OBJECT_ID)) == null) {
             return "";
         }
         return objID;
@@ -136,12 +146,16 @@ final class ItemImpl extends Item {
 
     @Override // com.samsung.android.allshare.Item
     public String getMimetype() {
-        return this.mBundle == null ? "" : this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
+        return this.mBundle == null
+                ? ""
+                : this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
     }
 
     @Override // com.samsung.android.allshare.Item
     public String getExtension() {
-        return this.mBundle == null ? "" : this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_EXTENSION);
+        return this.mBundle == null
+                ? ""
+                : this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_EXTENSION);
     }
 
     @Override // com.samsung.android.allshare.Item
@@ -184,11 +198,13 @@ final class ItemImpl extends Item {
         if (this.mBundle == null) {
             return Item.ContentBuildType.UNKNOWN;
         }
-        String itemConstructor = this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_CONSTRUCTOR_KEY);
+        String itemConstructor =
+                this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_CONSTRUCTOR_KEY);
         if (itemConstructor == null || itemConstructor.isEmpty()) {
             return Item.ContentBuildType.UNKNOWN;
         }
-        ItemCreator.ConstructorType conType = ItemCreator.ConstructorType.stringToEnum(itemConstructor);
+        ItemCreator.ConstructorType conType =
+                ItemCreator.ConstructorType.stringToEnum(itemConstructor);
         switch (conType) {
         }
         return Item.ContentBuildType.UNKNOWN;
@@ -216,19 +232,22 @@ final class ItemImpl extends Item {
         ResourceImpl(Bundle bundle) {
             super();
             this.mBundle = null;
-            this.CREATOR = new Parcelable.Creator<ResourceImpl>() { // from class: com.samsung.android.allshare.ItemImpl.ResourceImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public ResourceImpl createFromParcel(Parcel source) {
-                    return new ResourceImpl(source);
-                }
+            this.CREATOR =
+                    new Parcelable.Creator<
+                            ResourceImpl>() { // from class:
+                                              // com.samsung.android.allshare.ItemImpl.ResourceImpl.1
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public ResourceImpl createFromParcel(Parcel source) {
+                            return new ResourceImpl(source);
+                        }
 
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public ResourceImpl[] newArray(int size) {
-                    return new ResourceImpl[size];
-                }
-            };
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public ResourceImpl[] newArray(int size) {
+                            return new ResourceImpl[size];
+                        }
+                    };
             this.mBundle = bundle;
         }
 
@@ -249,7 +268,8 @@ final class ItemImpl extends Item {
             if (this.mBundle == null) {
                 return Item.SeekMode.UNKNOWN;
             }
-            String seekModeStr = this.mBundle.getString(AllShareKey.BUNDLE_STRING_RESOURCE_ITEM_SEEKMODE);
+            String seekModeStr =
+                    this.mBundle.getString(AllShareKey.BUNDLE_STRING_RESOURCE_ITEM_SEEKMODE);
             if (seekModeStr == null) {
                 return Item.SeekMode.UNKNOWN;
             }
@@ -318,19 +338,22 @@ final class ItemImpl extends Item {
         private ResourceImpl(Parcel src) {
             super();
             this.mBundle = null;
-            this.CREATOR = new Parcelable.Creator<ResourceImpl>() { // from class: com.samsung.android.allshare.ItemImpl.ResourceImpl.1
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public ResourceImpl createFromParcel(Parcel source) {
-                    return new ResourceImpl(source);
-                }
+            this.CREATOR =
+                    new Parcelable.Creator<
+                            ResourceImpl>() { // from class:
+                                              // com.samsung.android.allshare.ItemImpl.ResourceImpl.1
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public ResourceImpl createFromParcel(Parcel source) {
+                            return new ResourceImpl(source);
+                        }
 
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public ResourceImpl[] newArray(int size) {
-                    return new ResourceImpl[size];
-                }
-            };
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public ResourceImpl[] newArray(int size) {
+                            return new ResourceImpl[size];
+                        }
+                    };
             readFromParcel(src);
         }
     }

@@ -7,9 +7,10 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.service.gatekeeper.IGateKeeperService;
 import android.util.Log;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockSettingsInternal;
-import com.android.server.knox.dar.DarManagerService;
+
 import java.security.SecureRandom;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,8 +25,7 @@ public final class VirtualLockImpl {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GateKeeperDiedRecipient implements IBinder.DeathRecipient {
-        public GateKeeperDiedRecipient() {
-        }
+        public GateKeeperDiedRecipient() {}
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
@@ -52,7 +52,10 @@ public final class VirtualLockImpl {
             try {
                 sQLiteDatabase = darDatabaseCache.mDatabaseHelper.getWritableDatabase();
                 sQLiteDatabase.beginTransaction();
-                sQLiteDatabase.delete("dar_info", "name=? AND user=?", new String[]{"vl.rst.token.handle", Integer.toString(i)});
+                sQLiteDatabase.delete(
+                        "dar_info",
+                        "name=? AND user=?",
+                        new String[] {"vl.rst.token.handle", Integer.toString(i)});
                 sQLiteDatabase.setTransactionSuccessful();
                 sQLiteDatabase.endTransaction();
                 sQLiteDatabase.close();
@@ -105,7 +108,8 @@ public final class VirtualLockImpl {
         if (iGateKeeperService != null) {
             return iGateKeeperService;
         }
-        IBinder service = ServiceManager.getService("android.service.gatekeeper.IGateKeeperService");
+        IBinder service =
+                ServiceManager.getService("android.service.gatekeeper.IGateKeeperService");
         if (service == null) {
             Log.e("VirtualLockImpl", "Unable to acquire GateKeeperService");
             return null;

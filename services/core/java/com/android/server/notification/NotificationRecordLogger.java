@@ -2,8 +2,10 @@ package com.android.server.notification;
 
 import android.app.NotificationChannel;
 import android.util.Log;
+
 import com.android.internal.logging.InstanceId;
 import com.android.internal.logging.UiEventLogger;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -137,7 +139,8 @@ public interface NotificationRecordLogger {
     public final class NotificationRecordPair {
         public final NotificationRecord r;
 
-        public NotificationRecordPair(NotificationRecord notificationRecord, NotificationRecord notificationRecord2) {
+        public NotificationRecordPair(
+                NotificationRecord notificationRecord, NotificationRecord notificationRecord2) {
             this.r = notificationRecord;
         }
     }
@@ -179,12 +182,22 @@ public interface NotificationRecordLogger {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public NotificationReported(com.android.server.notification.NotificationRecordLogger.NotificationRecordPair r6, com.android.server.notification.NotificationRecordLogger.NotificationReportedEvent r7, int r8, int r9, com.android.internal.logging.InstanceId r10) {
+        public NotificationReported(
+                com.android.server.notification.NotificationRecordLogger.NotificationRecordPair r6,
+                com.android.server.notification.NotificationRecordLogger.NotificationReportedEvent
+                        r7,
+                int r8,
+                int r9,
+                com.android.internal.logging.InstanceId r10) {
             /*
                 Method dump skipped, instructions count: 443
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.NotificationRecordLogger.NotificationReported.<init>(com.android.server.notification.NotificationRecordLogger$NotificationRecordPair, com.android.server.notification.NotificationRecordLogger$NotificationReportedEvent, int, int, com.android.internal.logging.InstanceId):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.notification.NotificationRecordLogger.NotificationReported.<init>(com.android.server.notification.NotificationRecordLogger$NotificationRecordPair,"
+                        + " com.android.server.notification.NotificationRecordLogger$NotificationReportedEvent,"
+                        + " int, int, com.android.internal.logging.InstanceId):void");
         }
     }
 
@@ -205,10 +218,29 @@ public interface NotificationRecordLogger {
         }
     }
 
-    static NotificationReported prepareToLogNotificationPosted(NotificationRecord notificationRecord, NotificationRecord notificationRecord2, int i, int i2, InstanceId instanceId) {
+    static NotificationReported prepareToLogNotificationPosted(
+            NotificationRecord notificationRecord,
+            NotificationRecord notificationRecord2,
+            int i,
+            int i2,
+            InstanceId instanceId) {
         int i3;
-        NotificationRecordPair notificationRecordPair = new NotificationRecordPair(notificationRecord, notificationRecord2);
-        if (notificationRecord2 != null && i2 <= 0 && Objects.equals(notificationRecord.sbn.getChannelIdLogTag(), notificationRecord2.sbn.getChannelIdLogTag()) && Objects.equals(notificationRecord.sbn.getGroupLogTag(), notificationRecord2.sbn.getGroupLogTag()) && notificationRecord.sbn.getNotification().isGroupSummary() == notificationRecord2.sbn.getNotification().isGroupSummary() && Objects.equals(notificationRecord.sbn.getNotification().category, notificationRecord2.sbn.getNotification().category) && (i3 = notificationRecord.mImportance) == notificationRecord2.mImportance) {
+        NotificationRecordPair notificationRecordPair =
+                new NotificationRecordPair(notificationRecord, notificationRecord2);
+        if (notificationRecord2 != null
+                && i2 <= 0
+                && Objects.equals(
+                        notificationRecord.sbn.getChannelIdLogTag(),
+                        notificationRecord2.sbn.getChannelIdLogTag())
+                && Objects.equals(
+                        notificationRecord.sbn.getGroupLogTag(),
+                        notificationRecord2.sbn.getGroupLogTag())
+                && notificationRecord.sbn.getNotification().isGroupSummary()
+                        == notificationRecord2.sbn.getNotification().isGroupSummary()
+                && Objects.equals(
+                        notificationRecord.sbn.getNotification().category,
+                        notificationRecord2.sbn.getNotification().category)
+                && (i3 = notificationRecord.mImportance) == notificationRecord2.mImportance) {
             NotificationChannel notificationChannel = notificationRecord.mChannel;
             if (notificationChannel != null) {
                 i3 = NotificationChannelLogger.getLoggingImportance(notificationChannel, i3);
@@ -219,13 +251,22 @@ public interface NotificationRecordLogger {
                 i4 = NotificationChannelLogger.getLoggingImportance(notificationChannel2, i4);
             }
             if (i3 == i4) {
-                if (Math.abs(notificationRecord.mRankingScore - notificationRecord2.mRankingScore) < 1.0E-4d) {
+                if (Math.abs(notificationRecord.mRankingScore - notificationRecord2.mRankingScore)
+                        < 1.0E-4d) {
                     return null;
                 }
             }
         }
-        NotificationReportedEvent notificationReportedEvent = NotificationReportedEvent.NOTIFICATION_POSTED;
-        return new NotificationReported(notificationRecordPair, notificationRecord2 != null ? NotificationReportedEvent.NOTIFICATION_UPDATED : NotificationReportedEvent.NOTIFICATION_POSTED, i, i2, instanceId);
+        NotificationReportedEvent notificationReportedEvent =
+                NotificationReportedEvent.NOTIFICATION_POSTED;
+        return new NotificationReported(
+                notificationRecordPair,
+                notificationRecord2 != null
+                        ? NotificationReportedEvent.NOTIFICATION_UPDATED
+                        : NotificationReportedEvent.NOTIFICATION_POSTED,
+                i,
+                i2,
+                instanceId);
     }
 
     default void logNotificationCancelled(NotificationRecord notificationRecord, int i, int i2) {
@@ -234,19 +275,27 @@ public interface NotificationRecordLogger {
             Log.wtf("NotificationRecordLogger", "Unexpected surface: " + i2 + " with reason " + i);
         } else if (i == 2) {
             if (i2 == 0) {
-                notificationCancelledEvent = NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_OTHER;
+                notificationCancelledEvent =
+                        NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_OTHER;
             } else if (i2 == 1) {
-                notificationCancelledEvent = NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_PEEK;
+                notificationCancelledEvent =
+                        NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_PEEK;
             } else if (i2 == 2) {
-                notificationCancelledEvent = NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_AOD;
+                notificationCancelledEvent =
+                        NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_AOD;
             } else if (i2 == 3) {
-                notificationCancelledEvent = NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_SHADE;
+                notificationCancelledEvent =
+                        NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_SHADE;
             } else if (i2 == 4) {
-                notificationCancelledEvent = NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_BUBBLE;
+                notificationCancelledEvent =
+                        NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_BUBBLE;
             } else if (i2 != 5) {
-                Log.wtf("NotificationRecordLogger", "Unexpected surface: " + i2 + " with reason " + i);
+                Log.wtf(
+                        "NotificationRecordLogger",
+                        "Unexpected surface: " + i2 + " with reason " + i);
             } else {
-                notificationCancelledEvent = NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_LOCKSCREEN;
+                notificationCancelledEvent =
+                        NotificationCancelledEvent.NOTIFICATION_CANCEL_USER_LOCKSCREEN;
             }
         } else if (1 <= i && i <= 21) {
             notificationCancelledEvent = NotificationCancelledEvent.values()[i];

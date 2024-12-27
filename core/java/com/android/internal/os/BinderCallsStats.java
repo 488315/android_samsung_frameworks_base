@@ -23,13 +23,11 @@ import android.util.KeyValueListParser;
 import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.os.BinderCallsStats;
-import com.android.internal.os.BinderInternal;
-import com.android.internal.os.BinderLatencyObserver;
-import com.android.internal.os.BinderStats;
-import com.android.internal.os.CachedDeviceState;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -141,8 +139,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
     }
 
     private static class OverflowBinder extends Binder {
-        private OverflowBinder() {
-        }
+        private OverflowBinder() {}
     }
 
     public static class Injector {
@@ -192,35 +189,46 @@ public class BinderCallsStats implements BinderInternal.Observer {
         this.mEntries = new ArrayList<>();
         this.mEnablePackageStats = false;
         this.mSendUidsToObserver = new ArraySet<>(32);
-        this.mCallStatsObserverRunnable = new Runnable() { // from class: com.android.internal.os.BinderCallsStats.1
-            @Override // java.lang.Runnable
-            public void run() {
-                if (BinderCallsStats.this.mCallStatsObserver == null) {
-                    return;
-                }
-                BinderCallsStats.this.noteCallsStatsDelayed();
-                synchronized (BinderCallsStats.this.mLock) {
-                    int size = BinderCallsStats.this.mSendUidsToObserver.size();
-                    for (int i = 0; i < size; i++) {
-                        UidEntry uidEntry = (UidEntry) BinderCallsStats.this.mUidEntries.get(((Integer) BinderCallsStats.this.mSendUidsToObserver.valueAt(i)).intValue());
-                        if (uidEntry != null) {
-                            ArrayMap<CallStatKey, CallStat> callStats = uidEntry.mCallStats;
-                            int csize = callStats.size();
-                            ArrayList<CallStat> tmpCallStats = new ArrayList<>(csize);
-                            for (int j = 0; j < csize; j++) {
-                                tmpCallStats.add(callStats.valueAt(j).m7833clone());
+        this.mCallStatsObserverRunnable =
+                new Runnable() { // from class: com.android.internal.os.BinderCallsStats.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        if (BinderCallsStats.this.mCallStatsObserver == null) {
+                            return;
+                        }
+                        BinderCallsStats.this.noteCallsStatsDelayed();
+                        synchronized (BinderCallsStats.this.mLock) {
+                            int size = BinderCallsStats.this.mSendUidsToObserver.size();
+                            for (int i = 0; i < size; i++) {
+                                UidEntry uidEntry =
+                                        (UidEntry)
+                                                BinderCallsStats.this.mUidEntries.get(
+                                                        ((Integer)
+                                                                        BinderCallsStats.this
+                                                                                .mSendUidsToObserver
+                                                                                .valueAt(i))
+                                                                .intValue());
+                                if (uidEntry != null) {
+                                    ArrayMap<CallStatKey, CallStat> callStats = uidEntry.mCallStats;
+                                    int csize = callStats.size();
+                                    ArrayList<CallStat> tmpCallStats = new ArrayList<>(csize);
+                                    for (int j = 0; j < csize; j++) {
+                                        tmpCallStats.add(callStats.valueAt(j).m7833clone());
+                                    }
+                                    BinderCallsStats.this.mCallStatsObserver.noteCallStats(
+                                            uidEntry.workSourceUid,
+                                            uidEntry.incrementalCallCount,
+                                            tmpCallStats);
+                                    uidEntry.incrementalCallCount = 0L;
+                                    for (int j2 = callStats.size() - 1; j2 >= 0; j2--) {
+                                        callStats.valueAt(j2).incrementalCallCount = 0L;
+                                    }
+                                }
                             }
-                            BinderCallsStats.this.mCallStatsObserver.noteCallStats(uidEntry.workSourceUid, uidEntry.incrementalCallCount, tmpCallStats);
-                            uidEntry.incrementalCallCount = 0L;
-                            for (int j2 = callStats.size() - 1; j2 >= 0; j2--) {
-                                callStats.valueAt(j2).incrementalCallCount = 0L;
-                            }
+                            BinderCallsStats.this.mSendUidsToObserver.clear();
                         }
                     }
-                    BinderCallsStats.this.mSendUidsToObserver.clear();
-                }
-            }
-        };
+                };
         this.mNativeTidsLock = new Object();
         this.mNativeTids = new IntArray(0);
         this.mRandom = injector.getRandomGenerator();
@@ -330,7 +338,11 @@ public class BinderCallsStats implements BinderInternal.Observer {
     }
 
     @Override // com.android.internal.os.BinderInternal.Observer
-    public void callEnded(BinderInternal.CallSession s, int parcelRequestSize, int parcelReplySize, int workSourceUid) {
+    public void callEnded(
+            BinderInternal.CallSession s,
+            int parcelRequestSize,
+            int parcelReplySize,
+            int workSourceUid) {
         if (s == null) {
             return;
         }
@@ -340,7 +352,11 @@ public class BinderCallsStats implements BinderInternal.Observer {
         }
     }
 
-    private void processCallEnded(BinderInternal.CallSession s, int parcelRequestSize, int parcelReplySize, int workSourceUid) {
+    private void processCallEnded(
+            BinderInternal.CallSession s,
+            int parcelRequestSize,
+            int parcelReplySize,
+            int workSourceUid) {
         boolean recordCall;
         UidEntry uidEntry;
         long duration;
@@ -372,11 +388,13 @@ public class BinderCallsStats implements BinderInternal.Observer {
                 duration = 0;
                 latencyDuration = 0;
             }
-            boolean screenInteractive = this.mTrackScreenInteractive ? this.mDeviceState.isScreenInteractive() : false;
+            boolean screenInteractive =
+                    this.mTrackScreenInteractive ? this.mDeviceState.isScreenInteractive() : false;
             int callingUid = this.mTrackDirectCallingUid ? getCallingUid() : -1;
             int callingPid = getCallingPid();
             if (this.mEnablePackageStats) {
-                String packageName2 = callingPid > 0 ? getPackageName(callingPid, callingUid) : "async";
+                String packageName2 =
+                        callingPid > 0 ? getPackageName(callingPid, callingUid) : "async";
                 packageName = packageName2;
             } else {
                 packageName = null;
@@ -400,7 +418,14 @@ public class BinderCallsStats implements BinderInternal.Observer {
                                     uidEntry.recordedCallCount++;
                                     obj = obj2;
                                     try {
-                                        CallStat callStat = uidEntry.getOrCreate(callingUid, s.binderClass, s.transactionCode, screenInteractive, false, packageName);
+                                        CallStat callStat =
+                                                uidEntry.getOrCreate(
+                                                        callingUid,
+                                                        s.binderClass,
+                                                        s.transactionCode,
+                                                        screenInteractive,
+                                                        false,
+                                                        packageName);
                                         boolean isNewCallStat = callStat.callCount == 0;
                                         if (isNewCallStat) {
                                             try {
@@ -414,9 +439,12 @@ public class BinderCallsStats implements BinderInternal.Observer {
                                         callStat.incrementalCallCount++;
                                         callStat.recordedCallCount++;
                                         callStat.cpuTimeMicros += duration;
-                                        callStat.maxCpuTimeMicros = Math.max(callStat.maxCpuTimeMicros, duration);
+                                        callStat.maxCpuTimeMicros =
+                                                Math.max(callStat.maxCpuTimeMicros, duration);
                                         callStat.latencyMicros += latencyDuration;
-                                        callStat.maxLatencyMicros = Math.max(callStat.maxLatencyMicros, latencyDuration);
+                                        callStat.maxLatencyMicros =
+                                                Math.max(
+                                                        callStat.maxLatencyMicros, latencyDuration);
                                         if (this.mDetailedTracking) {
                                             long j2 = callStat.exceptionCount;
                                             if (!s.exceptionThrown) {
@@ -424,8 +452,14 @@ public class BinderCallsStats implements BinderInternal.Observer {
                                             }
                                             callStat.exceptionCount = j2 + j;
                                             try {
-                                                callStat.maxRequestSizeBytes = Math.max(callStat.maxRequestSizeBytes, parcelRequestSize);
-                                                callStat.maxReplySizeBytes = Math.max(callStat.maxReplySizeBytes, parcelReplySize);
+                                                callStat.maxRequestSizeBytes =
+                                                        Math.max(
+                                                                callStat.maxRequestSizeBytes,
+                                                                parcelRequestSize);
+                                                callStat.maxReplySizeBytes =
+                                                        Math.max(
+                                                                callStat.maxReplySizeBytes,
+                                                                parcelReplySize);
                                             } catch (Throwable th2) {
                                                 th = th2;
                                                 throw th;
@@ -436,13 +470,20 @@ public class BinderCallsStats implements BinderInternal.Observer {
                                     }
                                 } else {
                                     obj = obj2;
-                                    CallStat callStat2 = uidEntry.get(callingUid, s.binderClass, s.transactionCode, screenInteractive, packageName);
+                                    CallStat callStat2 =
+                                            uidEntry.get(
+                                                    callingUid,
+                                                    s.binderClass,
+                                                    s.transactionCode,
+                                                    screenInteractive,
+                                                    packageName);
                                     if (callStat2 != null) {
                                         callStat2.callCount++;
                                         callStat2.incrementalCallCount++;
                                     }
                                 }
-                                if (this.mCallStatsObserver != null && !UserHandle.isCore(workSourceUid)) {
+                                if (this.mCallStatsObserver != null
+                                        && !UserHandle.isCore(workSourceUid)) {
                                     this.mSendUidsToObserver.add(Integer.valueOf(workSourceUid));
                                 }
                             }
@@ -467,7 +508,10 @@ public class BinderCallsStats implements BinderInternal.Observer {
         }
         int hash = e.binderClass.hashCode();
         int hash2 = ((((hash * 31) + e.transactionCode) * 31) + e.callingUid) * 31;
-        int i = e.screenInteractive ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT;
+        int i =
+                e.screenInteractive
+                        ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP
+                        : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT;
         int hash3 = this.mShardingOffset;
         return (hash3 + (hash2 + i)) % this.mShardingModulo == 0;
     }
@@ -543,7 +587,9 @@ public class BinderCallsStats implements BinderInternal.Observer {
     }
 
     private boolean canCollect() {
-        if (!CoreRune.IS_DEBUG_LEVEL_LOW || this.mRecordingAllTransactionsForUid || this.mIgnoreBatteryStatus) {
+        if (!CoreRune.IS_DEBUG_LEVEL_LOW
+                || this.mRecordingAllTransactionsForUid
+                || this.mIgnoreBatteryStatus) {
             return true;
         }
         return (this.mDeviceState == null || this.mDeviceState.isCharging()) ? false : true;
@@ -567,9 +613,15 @@ public class BinderCallsStats implements BinderInternal.Observer {
         if (this.mAddDebugEntries && this.mBatteryStopwatch != null) {
             resultCallStats.add(createDebugEntry("start_time_millis", this.mStartElapsedTime));
             resultCallStats.add(createDebugEntry("end_time_millis", SystemClock.elapsedRealtime()));
-            resultCallStats.add(createDebugEntry("battery_time_millis", this.mBatteryStopwatch.getMillis()));
-            resultCallStats.add(createDebugEntry(SettingsObserver.SETTINGS_SAMPLING_INTERVAL_KEY, this.mPeriodicSamplingInterval));
-            resultCallStats.add(createDebugEntry(SettingsObserver.SETTINGS_SHARDING_MODULO_KEY, this.mShardingModulo));
+            resultCallStats.add(
+                    createDebugEntry("battery_time_millis", this.mBatteryStopwatch.getMillis()));
+            resultCallStats.add(
+                    createDebugEntry(
+                            SettingsObserver.SETTINGS_SAMPLING_INTERVAL_KEY,
+                            this.mPeriodicSamplingInterval));
+            resultCallStats.add(
+                    createDebugEntry(
+                            SettingsObserver.SETTINGS_SHARDING_MODULO_KEY, this.mShardingModulo));
         }
         return resultCallStats;
     }
@@ -620,7 +672,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
             this.mExtraInfo = extraInfo;
         }
 
-        public static HeavyBinderCallerInfo create(String packageName, int uid, float ratio, String extraInfo) {
+        public static HeavyBinderCallerInfo create(
+                String packageName, int uid, float ratio, String extraInfo) {
             return new HeavyBinderCallerInfo(packageName, uid, ratio, extraInfo);
         }
     }
@@ -639,22 +692,41 @@ public class BinderCallsStats implements BinderInternal.Observer {
                 entries.add(e);
                 totalCpuTime += e.cpuTimeMicros;
             }
-            entries.sort(Comparator.comparingLong(new ToLongFunction() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda3
-                @Override // java.util.function.ToLongFunction
-                public final long applyAsLong(Object obj) {
-                    long j;
-                    j = ((BinderCallsStats.UidEntry) obj).cpuTimeMicros;
-                    return j;
-                }
-            }).reversed());
+            entries.sort(
+                    Comparator.comparingLong(
+                                    new ToLongFunction() { // from class:
+                                                           // com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda3
+                                        @Override // java.util.function.ToLongFunction
+                                        public final long applyAsLong(Object obj) {
+                                            long j;
+                                            j = ((BinderCallsStats.UidEntry) obj).cpuTimeMicros;
+                                            return j;
+                                        }
+                                    })
+                            .reversed());
             int numOfTopProcesses = uidEntriesSize < 3 ? uidEntriesSize : 3;
             for (int i2 = 0; i2 < numOfTopProcesses; i2++) {
-                Slog.i(TAG, "Top[" + (i2 + 1) + "] UID:" + entries.get(i2).workSourceUid + ", CallCount:" + entries.get(i2).callCount + NavigationBarInflaterView.KEY_CODE_START + entries.get(i2).recordedCallCount + "), cpuTime:" + entries.get(i2).cpuTimeMicros);
+                Slog.i(
+                        TAG,
+                        "Top["
+                                + (i2 + 1)
+                                + "] UID:"
+                                + entries.get(i2).workSourceUid
+                                + ", CallCount:"
+                                + entries.get(i2).callCount
+                                + NavigationBarInflaterView.KEY_CODE_START
+                                + entries.get(i2).recordedCallCount
+                                + "), cpuTime:"
+                                + entries.get(i2).cpuTimeMicros);
             }
             UidEntry top = entries.get(0);
             float ratio = (top.cpuTimeMicros * 100.0f) / totalCpuTime;
             if (((int) ratio) >= threshold) {
-                Slog.i(TAG, "Heavy Binder Caller is detected. It occupies " + String.format("%.2f", Float.valueOf(ratio)) + "% in the binder_calls_stats");
+                Slog.i(
+                        TAG,
+                        "Heavy Binder Caller is detected. It occupies "
+                                + String.format("%.2f", Float.valueOf(ratio))
+                                + "% in the binder_calls_stats");
                 String extraInfo = top.getExtraInfo(5);
                 try {
                     packageName = AppGlobals.getPackageManager().getNameForUid(top.workSourceUid);
@@ -666,7 +738,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
                     packageName = "UID:" + String.valueOf(top.workSourceUid);
                 }
                 Slog.i(TAG, "extra info : " + extraInfo);
-                return HeavyBinderCallerInfo.create(packageName, top.workSourceUid, ratio, extraInfo);
+                return HeavyBinderCallerInfo.create(
+                        packageName, top.workSourceUid, ratio, extraInfo);
             }
         }
         return null;
@@ -675,7 +748,10 @@ public class BinderCallsStats implements BinderInternal.Observer {
     public boolean isNeededResetData() {
         long currentTime = System.currentTimeMillis();
         synchronized (this.mLock) {
-            if (canCollect() && !this.mDeviceState.isScreenInteractive() && this.mCallStatsCount >= this.mMaxBinderCallStatsCount && currentTime - this.mNeededResetDataTime > 43200000) {
+            if (canCollect()
+                    && !this.mDeviceState.isScreenInteractive()
+                    && this.mCallStatsCount >= this.mMaxBinderCallStatsCount
+                    && currentTime - this.mNeededResetDataTime > 43200000) {
                 this.mNeededResetDataTime = currentTime;
                 return true;
             }
@@ -717,9 +793,14 @@ public class BinderCallsStats implements BinderInternal.Observer {
                                     tmpExportedKey.binderClass = stat.binderClass;
                                     ExportedCallStat exported = resultsPerUid.get(tmpExportedKey);
                                     if (exported == null) {
-                                        ExportedCallStat exported2 = getExportedCallStat(entry2.workSourceUid, stat);
+                                        ExportedCallStat exported2 =
+                                                getExportedCallStat(entry2.workSourceUid, stat);
                                         uidEntriesSize = uidEntriesSize2;
-                                        C1ExportedCallStatKey exportedKey = new C1ExportedCallStatKey(stat.transactionCode, stat.screenInteractive, stat.binderClass);
+                                        C1ExportedCallStatKey exportedKey =
+                                                new C1ExportedCallStatKey(
+                                                        stat.transactionCode,
+                                                        stat.screenInteractive,
+                                                        stat.binderClass);
                                         resultsPerUid.put(exportedKey, exported2);
                                         entry = entry2;
                                         it = it2;
@@ -746,23 +827,40 @@ public class BinderCallsStats implements BinderInternal.Observer {
                                 throw th;
                             }
                         }
-                        resultsPerUid.entrySet().iterator().forEachRemaining(new Consumer() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda0
-                            @Override // java.util.function.Consumer
-                            public final void accept(Object obj) {
-                                resultCallStats.add((BinderCallsStats.ExportedCallStat) ((Map.Entry) obj).getValue());
-                            }
-                        });
+                        resultsPerUid
+                                .entrySet()
+                                .iterator()
+                                .forEachRemaining(
+                                        new Consumer() { // from class:
+                                                         // com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Consumer
+                                            public final void accept(Object obj) {
+                                                resultCallStats.add(
+                                                        (BinderCallsStats.ExportedCallStat)
+                                                                ((Map.Entry) obj).getValue());
+                                            }
+                                        });
                         resultsPerUid.clear();
                         entryIdx++;
                         uidEntriesSize2 = uidEntriesSize2;
                     }
                     resolveBinderMethodNames(resultCallStats);
                     if (this.mAddDebugEntries && this.mBatteryStopwatch != null) {
-                        resultCallStats.add(createDebugEntry("start_time_millis", this.mStartElapsedTime));
-                        resultCallStats.add(createDebugEntry("end_time_millis", SystemClock.elapsedRealtime()));
-                        resultCallStats.add(createDebugEntry("battery_time_millis", this.mBatteryStopwatch.getMillis()));
-                        resultCallStats.add(createDebugEntry(SettingsObserver.SETTINGS_SAMPLING_INTERVAL_KEY, this.mPeriodicSamplingInterval));
-                        resultCallStats.add(createDebugEntry(SettingsObserver.SETTINGS_SHARDING_MODULO_KEY, this.mShardingModulo));
+                        resultCallStats.add(
+                                createDebugEntry("start_time_millis", this.mStartElapsedTime));
+                        resultCallStats.add(
+                                createDebugEntry("end_time_millis", SystemClock.elapsedRealtime()));
+                        resultCallStats.add(
+                                createDebugEntry(
+                                        "battery_time_millis", this.mBatteryStopwatch.getMillis()));
+                        resultCallStats.add(
+                                createDebugEntry(
+                                        SettingsObserver.SETTINGS_SAMPLING_INTERVAL_KEY,
+                                        this.mPeriodicSamplingInterval));
+                        resultCallStats.add(
+                                createDebugEntry(
+                                        SettingsObserver.SETTINGS_SHARDING_MODULO_KEY,
+                                        this.mShardingModulo));
                     }
                     return resultCallStats;
                 } catch (Throwable th2) {
@@ -784,7 +882,10 @@ public class BinderCallsStats implements BinderInternal.Observer {
             this(0, false, null);
         }
 
-        public C1ExportedCallStatKey(int transactionCode, boolean screenInteractive, Class<? extends Binder> binderClass) {
+        public C1ExportedCallStatKey(
+                int transactionCode,
+                boolean screenInteractive,
+                Class<? extends Binder> binderClass) {
             this.transactionCode = transactionCode;
             this.screenInteractive = screenInteractive;
             this.binderClass = binderClass;
@@ -799,7 +900,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
             }
             try {
                 C1ExportedCallStatKey key = (C1ExportedCallStatKey) o;
-                if (this.transactionCode != key.transactionCode || this.screenInteractive != key.screenInteractive) {
+                if (this.transactionCode != key.transactionCode
+                        || this.screenInteractive != key.screenInteractive) {
                     return false;
                 }
                 if (!this.binderClass.equals(key.binderClass)) {
@@ -814,7 +916,10 @@ public class BinderCallsStats implements BinderInternal.Observer {
 
         public int hashCode() {
             int result = this.binderClass.hashCode();
-            return (((result * 31) + this.transactionCode) * 31) + (this.screenInteractive ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
+            return (((result * 31) + this.transactionCode) * 31)
+                    + (this.screenInteractive
+                            ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP
+                            : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
         }
     }
 
@@ -822,7 +927,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
         return getExportedCallStats(workSourceUid, false);
     }
 
-    public ArrayList<ExportedCallStat> getExportedCallStats(int workSourceUid, boolean applySharding) {
+    public ArrayList<ExportedCallStat> getExportedCallStats(
+            int workSourceUid, boolean applySharding) {
         ArrayList<ExportedCallStat> resultCallStats = new ArrayList<>();
         store(5, this.mCpuUsageThreshold);
         synchronized (this.mLock) {
@@ -862,20 +968,27 @@ public class BinderCallsStats implements BinderInternal.Observer {
         String methodName;
         ExportedCallStat previous = null;
         String previousMethodName = null;
-        resultCallStats.sort(new Comparator() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda4
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int compareByBinderClassAndCode;
-                compareByBinderClassAndCode = BinderCallsStats.compareByBinderClassAndCode((BinderCallsStats.ExportedCallStat) obj, (BinderCallsStats.ExportedCallStat) obj2);
-                return compareByBinderClassAndCode;
-            }
-        });
+        resultCallStats.sort(
+                new Comparator() { // from class:
+                                   // com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda4
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        int compareByBinderClassAndCode;
+                        compareByBinderClassAndCode =
+                                BinderCallsStats.compareByBinderClassAndCode(
+                                        (BinderCallsStats.ExportedCallStat) obj,
+                                        (BinderCallsStats.ExportedCallStat) obj2);
+                        return compareByBinderClassAndCode;
+                    }
+                });
         BinderTransactionNameResolver resolver = new BinderTransactionNameResolver();
         Iterator<ExportedCallStat> it = resultCallStats.iterator();
         while (it.hasNext()) {
             ExportedCallStat exported = it.next();
-            boolean isClassDifferent = previous == null || !previous.className.equals(exported.className);
-            boolean isCodeDifferent = previous == null || previous.transactionCode != exported.transactionCode;
+            boolean isClassDifferent =
+                    previous == null || !previous.className.equals(exported.className);
+            boolean isCodeDifferent =
+                    previous == null || previous.transactionCode != exported.transactionCode;
             if (isClassDifferent || isCodeDifferent) {
                 methodName = resolver.getMethodName(exported.binderClass, exported.transactionCode);
             } else {
@@ -914,7 +1027,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
         }
     }
 
-    public void dump(PrintWriter pw, AppIdToPackageMap packageMap, int workSourceUid, boolean verbose) {
+    public void dump(
+            PrintWriter pw, AppIdToPackageMap packageMap, int workSourceUid, boolean verbose) {
         store(5, this.mCpuUsageThreshold);
         synchronized (this.mLock) {
             dumpLocked(pw, packageMap, workSourceUid, verbose);
@@ -944,8 +1058,7 @@ public class BinderCallsStats implements BinderInternal.Observer {
         public String packageName;
         public int recordedCallCount;
 
-        C1SimpleCallStat() {
-        }
+        C1SimpleCallStat() {}
     }
 
     private void printCallStatsByPackage(PrintWriter pw, UidEntry entry) {
@@ -966,24 +1079,35 @@ public class BinderCallsStats implements BinderInternal.Observer {
             }
         }
         List<C1SimpleCallStat> statsValues = new ArrayList<>(result.values());
-        statsValues.sort(Comparator.comparingLong(new ToLongFunction() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda1
-            @Override // java.util.function.ToLongFunction
-            public final long applyAsLong(Object obj) {
-                long j;
-                j = ((BinderCallsStats.C1SimpleCallStat) obj).cpuTimeMicros;
-                return j;
-            }
-        }).reversed());
+        statsValues.sort(
+                Comparator.comparingLong(
+                                new ToLongFunction() { // from class:
+                                                       // com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.ToLongFunction
+                                    public final long applyAsLong(Object obj) {
+                                        long j;
+                                        j = ((BinderCallsStats.C1SimpleCallStat) obj).cpuTimeMicros;
+                                        return j;
+                                    }
+                                })
+                        .reversed());
         for (C1SimpleCallStat elem : statsValues) {
             double ratio = (elem.cpuTimeMicros * 100.0d) / entry.cpuTimeMicros;
             if (ratio >= 1.0d) {
                 pw.print("          ");
-                pw.println(String.format(" (%3.0f%%/%8d/%8d/%s)", Double.valueOf(ratio), Integer.valueOf(elem.recordedCallCount), Integer.valueOf(elem.callCount), elem.packageName));
+                pw.println(
+                        String.format(
+                                " (%3.0f%%/%8d/%8d/%s)",
+                                Double.valueOf(ratio),
+                                Integer.valueOf(elem.recordedCallCount),
+                                Integer.valueOf(elem.callCount),
+                                elem.packageName));
             }
         }
     }
 
-    private void dumpLocked(PrintWriter pw, AppIdToPackageMap packageMap, int workSourceUid, boolean verbose) {
+    private void dumpLocked(
+            PrintWriter pw, AppIdToPackageMap packageMap, int workSourceUid, boolean verbose) {
         boolean verbose2;
         List<ExportedCallStat> exportedCallStats;
         List<ExportedCallStat> exportedCallStats2;
@@ -1003,7 +1127,13 @@ public class BinderCallsStats implements BinderInternal.Observer {
         String str = "";
         String datasetSizeDesc = verbose2 ? "" : "(top 90% by cpu time) ";
         StringBuilder sb = new StringBuilder();
-        pw.println("Per-UID raw data " + datasetSizeDesc + "(package/uid, worksource, call_desc, screen_interactive, cpu_time_micros, max_cpu_time_micros, latency_time_micros, max_latency_time_micros, exception_count, max_request_size_bytes, max_reply_size_bytes, recorded_call_count, call_count):");
+        pw.println(
+                "Per-UID raw data "
+                        + datasetSizeDesc
+                        + "(package/uid, worksource, call_desc, screen_interactive,"
+                        + " cpu_time_micros, max_cpu_time_micros, latency_time_micros,"
+                        + " max_latency_time_micros, exception_count, max_request_size_bytes,"
+                        + " max_reply_size_bytes, recorded_call_count, call_count):");
         if (workSourceUid != -1) {
             if (this.mEnablePackageStats) {
                 exportedCallStats = getExportedCallStatsPerPackage(workSourceUid);
@@ -1011,16 +1141,24 @@ public class BinderCallsStats implements BinderInternal.Observer {
                 exportedCallStats = getExportedCallStats(workSourceUid, true);
             }
         } else {
-            exportedCallStats = this.mEnablePackageStats ? getExportedCallStatsPerPackage() : getExportedCallStats(true);
+            exportedCallStats =
+                    this.mEnablePackageStats
+                            ? getExportedCallStatsPerPackage()
+                            : getExportedCallStats(true);
         }
-        exportedCallStats.sort(new Comparator() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda5
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int compareByCpuDesc;
-                compareByCpuDesc = BinderCallsStats.compareByCpuDesc((BinderCallsStats.ExportedCallStat) obj, (BinderCallsStats.ExportedCallStat) obj2);
-                return compareByCpuDesc;
-            }
-        });
+        exportedCallStats.sort(
+                new Comparator() { // from class:
+                                   // com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda5
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        int compareByCpuDesc;
+                        compareByCpuDesc =
+                                BinderCallsStats.compareByCpuDesc(
+                                        (BinderCallsStats.ExportedCallStat) obj,
+                                        (BinderCallsStats.ExportedCallStat) obj2);
+                        return compareByCpuDesc;
+                    }
+                });
         Iterator<ExportedCallStat> it = exportedCallStats.iterator();
         while (it.hasNext()) {
             ExportedCallStat e = it.next();
@@ -1029,7 +1167,37 @@ public class BinderCallsStats implements BinderInternal.Observer {
                 List<ExportedCallStat> exportedCallStats3 = exportedCallStats;
                 boolean verbose3 = verbose2;
                 Iterator<ExportedCallStat> it2 = it;
-                sb.append("    ").append('<').append(e.packageName).append('>').append(packageMap.mapUid(e.callingUid)).append(',').append(packageMap.mapUid(e.workSourceUid)).append(',').append(e.className).append('#').append(e.methodName).append(',').append(e.screenInteractive).append(',').append(e.cpuTimeMicros).append(',').append(e.maxCpuTimeMicros).append(',').append(e.latencyMicros).append(',').append(e.maxLatencyMicros).append(',').append(this.mDetailedTracking ? e.exceptionCount : 95L).append(',').append(this.mDetailedTracking ? e.maxRequestSizeBytes : 95L).append(',').append(this.mDetailedTracking ? e.maxReplySizeBytes : 95L).append(',').append(e.recordedCallCount).append(',').append(e.callCount);
+                sb.append("    ")
+                        .append('<')
+                        .append(e.packageName)
+                        .append('>')
+                        .append(packageMap.mapUid(e.callingUid))
+                        .append(',')
+                        .append(packageMap.mapUid(e.workSourceUid))
+                        .append(',')
+                        .append(e.className)
+                        .append('#')
+                        .append(e.methodName)
+                        .append(',')
+                        .append(e.screenInteractive)
+                        .append(',')
+                        .append(e.cpuTimeMicros)
+                        .append(',')
+                        .append(e.maxCpuTimeMicros)
+                        .append(',')
+                        .append(e.latencyMicros)
+                        .append(',')
+                        .append(e.maxLatencyMicros)
+                        .append(',')
+                        .append(this.mDetailedTracking ? e.exceptionCount : 95L)
+                        .append(',')
+                        .append(this.mDetailedTracking ? e.maxRequestSizeBytes : 95L)
+                        .append(',')
+                        .append(this.mDetailedTracking ? e.maxReplySizeBytes : 95L)
+                        .append(',')
+                        .append(e.recordedCallCount)
+                        .append(',')
+                        .append(e.callCount);
                 pw.println(sb);
                 it = it2;
                 verbose2 = verbose3;
@@ -1061,55 +1229,74 @@ public class BinderCallsStats implements BinderInternal.Observer {
                 totalRecordedCallsCount2 += e3.recordedCallCount;
                 totalCallsCount += e3.callCount;
             }
-            entries.sort(Comparator.comparingDouble(new ToDoubleFunction() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda6
-                /*  JADX ERROR: JadxRuntimeException in pass: ModVisitor
-                    jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r0v0 double, still in use, count: 1, list:
-                      (r0v0 double) from 0x0006: RETURN (r0v0 double)
-                    	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
-                    	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
-                    	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
-                    	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
-                    	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
-                    	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
-                    */
-                @Override // java.util.function.ToDoubleFunction
-                public final double applyAsDouble(java.lang.Object r3) {
-                    /*
-                        r2 = this;
-                        com.android.internal.os.BinderCallsStats$UidEntry r3 = (com.android.internal.os.BinderCallsStats.UidEntry) r3
-                        double r0 = com.android.internal.os.BinderCallsStats.lambda$dumpLocked$3(r3)
-                        return r0
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda6.applyAsDouble(java.lang.Object):double");
-                }
-            }).reversed());
+            entries.sort(
+                    Comparator.comparingDouble(
+                                    new ToDoubleFunction() { // from class:
+                                        // com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda6
+                                        /*  JADX ERROR: JadxRuntimeException in pass: ModVisitor
+                                        jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r0v0 double, still in use, count: 1, list:
+                                          (r0v0 double) from 0x0006: RETURN (r0v0 double)
+                                        	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
+                                        	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
+                                        	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
+                                        	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
+                                        	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
+                                        	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
+                                        */
+                                        @Override // java.util.function.ToDoubleFunction
+                                        public final double applyAsDouble(java.lang.Object r3) {
+                                            /*
+                                                r2 = this;
+                                                com.android.internal.os.BinderCallsStats$UidEntry r3 = (com.android.internal.os.BinderCallsStats.UidEntry) r3
+                                                double r0 = com.android.internal.os.BinderCallsStats.lambda$dumpLocked$3(r3)
+                                                return r0
+                                            */
+                                            throw new UnsupportedOperationException(
+                                                    "Method not decompiled:"
+                                                        + " com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda6.applyAsDouble(java.lang.Object):double");
+                                        }
+                                    })
+                            .reversed());
             exportedCallStats2 = exportedCallStats4;
             totalRecordedCallsCount = totalRecordedCallsCount2;
             totalCpuTime = totalCpuTime2;
         }
-        pw.println("Per-UID Summary " + datasetSizeDesc + "(cpu_time, % of total cpu_time, recorded_call_count, call_count, package/uid):");
-        List<UidEntry> summaryEntries = verbose4 ? entries : getHighestValues(entries, new ToDoubleFunction() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda7
-            /*  JADX ERROR: JadxRuntimeException in pass: ModVisitor
-                jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r0v0 double, still in use, count: 1, list:
-                  (r0v0 double) from 0x0006: RETURN (r0v0 double)
-                	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
-                	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
-                	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
-                	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
-                	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
-                	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
-                */
-            @Override // java.util.function.ToDoubleFunction
-            public final double applyAsDouble(java.lang.Object r3) {
-                /*
-                    r2 = this;
-                    com.android.internal.os.BinderCallsStats$UidEntry r3 = (com.android.internal.os.BinderCallsStats.UidEntry) r3
-                    double r0 = com.android.internal.os.BinderCallsStats.lambda$dumpLocked$4(r3)
-                    return r0
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda7.applyAsDouble(java.lang.Object):double");
-            }
-        }, 0.9d);
+        pw.println(
+                "Per-UID Summary "
+                        + datasetSizeDesc
+                        + "(cpu_time, % of total cpu_time, recorded_call_count, call_count,"
+                        + " package/uid):");
+        List<UidEntry> summaryEntries =
+                verbose4
+                        ? entries
+                        : getHighestValues(
+                                entries,
+                                new ToDoubleFunction() { // from class:
+                                    // com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda7
+                                    /*  JADX ERROR: JadxRuntimeException in pass: ModVisitor
+                                    jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r0v0 double, still in use, count: 1, list:
+                                      (r0v0 double) from 0x0006: RETURN (r0v0 double)
+                                    	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
+                                    	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
+                                    	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
+                                    	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
+                                    	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
+                                    	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
+                                    */
+                                    @Override // java.util.function.ToDoubleFunction
+                                    public final double applyAsDouble(java.lang.Object r3) {
+                                        /*
+                                            r2 = this;
+                                            com.android.internal.os.BinderCallsStats$UidEntry r3 = (com.android.internal.os.BinderCallsStats.UidEntry) r3
+                                            double r0 = com.android.internal.os.BinderCallsStats.lambda$dumpLocked$4(r3)
+                                            return r0
+                                        */
+                                        throw new UnsupportedOperationException(
+                                                "Method not decompiled:"
+                                                    + " com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda7.applyAsDouble(java.lang.Object):double");
+                                    }
+                                },
+                                0.9d);
         Iterator<UidEntry> it3 = summaryEntries.iterator();
         while (it3.hasNext()) {
             UidEntry entry = it3.next();
@@ -1119,7 +1306,14 @@ public class BinderCallsStats implements BinderInternal.Observer {
             String str2 = str;
             Iterator<UidEntry> it4 = it3;
             long totalRecordedCallsCount4 = totalRecordedCallsCount;
-            pw.println(String.format("  %10d %3.0f%% %8d %8d %s", Long.valueOf(entry.cpuTimeMicros), Double.valueOf((entry.cpuTimeMicros * 100.0d) / totalCpuTime), Long.valueOf(entry.recordedCallCount), Long.valueOf(entry.callCount), uidStr));
+            pw.println(
+                    String.format(
+                            "  %10d %3.0f%% %8d %8d %s",
+                            Long.valueOf(entry.cpuTimeMicros),
+                            Double.valueOf((entry.cpuTimeMicros * 100.0d) / totalCpuTime),
+                            Long.valueOf(entry.recordedCallCount),
+                            Long.valueOf(entry.callCount),
+                            uidStr));
             if (this.mEnablePackageStats) {
                 printCallStatsByPackage(pw, entry);
             }
@@ -1133,25 +1327,43 @@ public class BinderCallsStats implements BinderInternal.Observer {
         long totalRecordedCallsCount5 = totalRecordedCallsCount;
         pw.println();
         if (workSourceUid == -1) {
-            pw.println(String.format("  Summary: total_cpu_time=%d, calls_count=%d, avg_call_cpu_time=%.0f", Long.valueOf(totalCpuTime), Long.valueOf(totalCallsCount), Double.valueOf(totalCpuTime / totalRecordedCallsCount5)));
+            pw.println(
+                    String.format(
+                            "  Summary: total_cpu_time=%d, calls_count=%d, avg_call_cpu_time=%.0f",
+                            Long.valueOf(totalCpuTime),
+                            Long.valueOf(totalCallsCount),
+                            Double.valueOf(totalCpuTime / totalRecordedCallsCount5)));
             pw.println();
         }
         pw.println("Exceptions thrown (exception_count, class_name):");
         final List<Pair<String, Integer>> exceptionEntries = new ArrayList<>();
-        this.mExceptionCounts.entrySet().iterator().forEachRemaining(new Consumer() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda8
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                exceptionEntries.add(Pair.create((String) r2.getKey(), (Integer) ((Map.Entry) obj).getValue()));
-            }
-        });
-        exceptionEntries.sort(new Comparator() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda9
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int compare;
-                compare = Integer.compare(((Integer) ((Pair) obj2).second).intValue(), ((Integer) ((Pair) obj).second).intValue());
-                return compare;
-            }
-        });
+        this.mExceptionCounts
+                .entrySet()
+                .iterator()
+                .forEachRemaining(
+                        new Consumer() { // from class:
+                                         // com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda8
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                exceptionEntries.add(
+                                        Pair.create(
+                                                (String) r2.getKey(),
+                                                (Integer) ((Map.Entry) obj).getValue()));
+                            }
+                        });
+        exceptionEntries.sort(
+                new Comparator() { // from class:
+                                   // com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda9
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        int compare;
+                        compare =
+                                Integer.compare(
+                                        ((Integer) ((Pair) obj2).second).intValue(),
+                                        ((Integer) ((Pair) obj).second).intValue());
+                        return compare;
+                    }
+                });
         for (Pair<String, Integer> entry2 : exceptionEntries) {
             pw.println(String.format("  %6d %s", entry2.second, entry2.first));
         }
@@ -1196,7 +1408,11 @@ public class BinderCallsStats implements BinderInternal.Observer {
         try {
             try {
                 try {
-                    br = new BufferedReader(new FileReader(String.format("/proc/%d/cmdline", Integer.valueOf(pid)), Charset.defaultCharset()));
+                    br =
+                            new BufferedReader(
+                                    new FileReader(
+                                            String.format("/proc/%d/cmdline", Integer.valueOf(pid)),
+                                            Charset.defaultCharset()));
                     String packageName2 = br.readLine();
                     if (packageName2 != null) {
                         packageName = packageName2.trim();
@@ -1311,7 +1527,10 @@ public class BinderCallsStats implements BinderInternal.Observer {
 
     public void setSamplingInterval(int samplingInterval) {
         if (samplingInterval <= 0) {
-            Slog.w(TAG, "Ignored invalid sampling interval (value must be positive): " + samplingInterval);
+            Slog.w(
+                    TAG,
+                    "Ignored invalid sampling interval (value must be positive): "
+                            + samplingInterval);
             return;
         }
         synchronized (this.mLock) {
@@ -1324,7 +1543,9 @@ public class BinderCallsStats implements BinderInternal.Observer {
 
     public void setShardingModulo(int shardingModulo) {
         if (shardingModulo <= 0) {
-            Slog.w(TAG, "Ignored invalid sharding modulo (value must be positive): " + shardingModulo);
+            Slog.w(
+                    TAG,
+                    "Ignored invalid sharding modulo (value must be positive): " + shardingModulo);
             return;
         }
         synchronized (this.mLock) {
@@ -1390,7 +1611,13 @@ public class BinderCallsStats implements BinderInternal.Observer {
             out.setDataPosition(0);
             this.mBinderStats.writeToParcel(out, 0);
             if (out.dataSize() >= 2097152) {
-                Slog.e(TAG, "The state of stats data looks abnormal. parcel(" + out.dataSize() + "), entry_num(" + this.mBinderStats.getSize() + NavigationBarInflaterView.KEY_CODE_END);
+                Slog.e(
+                        TAG,
+                        "The state of stats data looks abnormal. parcel("
+                                + out.dataSize()
+                                + "), entry_num("
+                                + this.mBinderStats.getSize()
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
             FileOutputStream fos = null;
             try {
@@ -1439,7 +1666,15 @@ public class BinderCallsStats implements BinderInternal.Observer {
         synchronized (this.mLock) {
             try {
                 long duration = System.currentTimeMillis() - this.mStartCurrentTime;
-                Slog.i(TAG, "Collected cpu time : " + this.mCollectedCpuTime + "us, collected call count : " + this.mCollectedCallCount + " for " + duration + " ms");
+                Slog.i(
+                        TAG,
+                        "Collected cpu time : "
+                                + this.mCollectedCpuTime
+                                + "us, collected call count : "
+                                + this.mCollectedCallCount
+                                + " for "
+                                + duration
+                                + " ms");
                 this.mCollectedCpuTime = 0L;
                 this.mCollectedCallCount = 0L;
                 int uidEntriesSize = this.mUidEntries.size();
@@ -1455,7 +1690,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
                         CallStat stat = it.next();
                         if (exportNeeded) {
                             try {
-                                resultCallStats.add(getExportedCallStatPerPackage(entry.workSourceUid, stat));
+                                resultCallStats.add(
+                                        getExportedCallStatPerPackage(entry.workSourceUid, stat));
                             } catch (Throwable th) {
                                 th = th;
                                 throw th;
@@ -1466,16 +1702,32 @@ public class BinderCallsStats implements BinderInternal.Observer {
                         Iterator<CallStat> it2 = it;
                         boolean exportNeeded2 = exportNeeded;
                         try {
-                            CallStat targetStat = targetEntry.getOrCreate(stat.callingUid, stat.binderClass, stat.transactionCode, stat.screenInteractive, this.mCallStatsCount >= ((long) this.mMaxBinderCallStatsCount), stat.packageName);
+                            CallStat targetStat =
+                                    targetEntry.getOrCreate(
+                                            stat.callingUid,
+                                            stat.binderClass,
+                                            stat.transactionCode,
+                                            stat.screenInteractive,
+                                            this.mCallStatsCount
+                                                    >= ((long) this.mMaxBinderCallStatsCount),
+                                            stat.packageName);
                             targetStat.recordedCallCount += stat.recordedCallCount;
                             targetStat.callCount += stat.callCount;
                             targetStat.cpuTimeMicros += stat.cpuTimeMicros;
-                            targetStat.maxCpuTimeMicros = Math.max(stat.maxCpuTimeMicros, targetStat.maxCpuTimeMicros);
+                            targetStat.maxCpuTimeMicros =
+                                    Math.max(stat.maxCpuTimeMicros, targetStat.maxCpuTimeMicros);
                             targetStat.latencyMicros += stat.latencyMicros;
-                            targetStat.maxLatencyMicros = Math.max(stat.maxLatencyMicros, targetStat.maxLatencyMicros);
+                            targetStat.maxLatencyMicros =
+                                    Math.max(stat.maxLatencyMicros, targetStat.maxLatencyMicros);
                             if (this.mDetailedTracking) {
-                                targetStat.maxRequestSizeBytes = Math.max(stat.maxRequestSizeBytes, targetStat.maxRequestSizeBytes);
-                                targetStat.maxReplySizeBytes = Math.max(stat.maxReplySizeBytes, targetStat.maxReplySizeBytes);
+                                targetStat.maxRequestSizeBytes =
+                                        Math.max(
+                                                stat.maxRequestSizeBytes,
+                                                targetStat.maxRequestSizeBytes);
+                                targetStat.maxReplySizeBytes =
+                                        Math.max(
+                                                stat.maxReplySizeBytes,
+                                                targetStat.maxReplySizeBytes);
                                 targetStat.exceptionCount += stat.exceptionCount;
                             }
                             targetStat.incrementalCallCount += stat.incrementalCallCount;
@@ -1493,11 +1745,21 @@ public class BinderCallsStats implements BinderInternal.Observer {
                 if (exportNeeded3) {
                     resolveBinderMethodNames(resultCallStats);
                     if (this.mAddDebugEntries && this.mBatteryStopwatch != null) {
-                        resultCallStats.add(createDebugEntry("start_time_millis", this.mStartElapsedTime));
-                        resultCallStats.add(createDebugEntry("end_time_millis", SystemClock.elapsedRealtime()));
-                        resultCallStats.add(createDebugEntry("battery_time_millis", this.mBatteryStopwatch.getMillis()));
-                        resultCallStats.add(createDebugEntry(SettingsObserver.SETTINGS_SAMPLING_INTERVAL_KEY, this.mPeriodicSamplingInterval));
-                        resultCallStats.add(createDebugEntry(SettingsObserver.SETTINGS_SHARDING_MODULO_KEY, this.mShardingModulo));
+                        resultCallStats.add(
+                                createDebugEntry("start_time_millis", this.mStartElapsedTime));
+                        resultCallStats.add(
+                                createDebugEntry("end_time_millis", SystemClock.elapsedRealtime()));
+                        resultCallStats.add(
+                                createDebugEntry(
+                                        "battery_time_millis", this.mBatteryStopwatch.getMillis()));
+                        resultCallStats.add(
+                                createDebugEntry(
+                                        SettingsObserver.SETTINGS_SAMPLING_INTERVAL_KEY,
+                                        this.mPeriodicSamplingInterval));
+                        resultCallStats.add(
+                                createDebugEntry(
+                                        SettingsObserver.SETTINGS_SHARDING_MODULO_KEY,
+                                        this.mShardingModulo));
                     }
                 }
                 return resultCallStats;
@@ -1512,14 +1774,19 @@ public class BinderCallsStats implements BinderInternal.Observer {
         long tempStartCurrentTimeForSEC = this.mStartCurrentTimeForSEC;
         resetForSEC();
         if (cpuUsage >= this.mCpuUsageThreshold) {
-            exportedCallStats.sort(new Comparator() { // from class: com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda2
-                @Override // java.util.Comparator
-                public final int compare(Object obj, Object obj2) {
-                    int compareByActCpuDesc;
-                    compareByActCpuDesc = BinderCallsStats.compareByActCpuDesc((BinderCallsStats.ExportedCallStat) obj, (BinderCallsStats.ExportedCallStat) obj2);
-                    return compareByActCpuDesc;
-                }
-            });
+            exportedCallStats.sort(
+                    new Comparator() { // from class:
+                                       // com.android.internal.os.BinderCallsStats$$ExternalSyntheticLambda2
+                        @Override // java.util.Comparator
+                        public final int compare(Object obj, Object obj2) {
+                            int compareByActCpuDesc;
+                            compareByActCpuDesc =
+                                    BinderCallsStats.compareByActCpuDesc(
+                                            (BinderCallsStats.ExportedCallStat) obj,
+                                            (BinderCallsStats.ExportedCallStat) obj2);
+                            return compareByActCpuDesc;
+                        }
+                    });
             int count = 0;
             BinderStats.BinderStatsEntry entry = new BinderStats.BinderStatsEntry();
             entry.mStartTime = tempStartCurrentTimeForSEC;
@@ -1567,7 +1834,12 @@ public class BinderCallsStats implements BinderInternal.Observer {
         public final boolean screenInteractive;
         public final int transactionCode;
 
-        public CallStat(int callingUid, Class<? extends Binder> binderClass, int transactionCode, boolean screenInteractive, String packageName) {
+        public CallStat(
+                int callingUid,
+                Class<? extends Binder> binderClass,
+                int transactionCode,
+                boolean screenInteractive,
+                String packageName) {
             this.callingUid = callingUid;
             this.binderClass = binderClass;
             this.transactionCode = transactionCode;
@@ -1577,7 +1849,13 @@ public class BinderCallsStats implements BinderInternal.Observer {
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
         public CallStat m7833clone() {
-            CallStat clone = new CallStat(this.callingUid, this.binderClass, this.transactionCode, this.screenInteractive, this.packageName);
+            CallStat clone =
+                    new CallStat(
+                            this.callingUid,
+                            this.binderClass,
+                            this.transactionCode,
+                            this.screenInteractive,
+                            this.packageName);
             clone.recordedCallCount = this.recordedCallCount;
             clone.callCount = this.callCount;
             clone.cpuTimeMicros = this.cpuTimeMicros;
@@ -1593,8 +1871,28 @@ public class BinderCallsStats implements BinderInternal.Observer {
         }
 
         public String toString() {
-            String methodName = new BinderTransactionNameResolver().getMethodName(this.binderClass, this.transactionCode);
-            return "CallStat{packageName=" + this.packageName + ", callingUid=" + this.callingUid + ", transaction=" + this.binderClass.getSimpleName() + '.' + methodName + ", callCount=" + this.callCount + ", incrementalCallCount=" + this.incrementalCallCount + ", recordedCallCount=" + this.recordedCallCount + ", cpuTimeMicros=" + this.cpuTimeMicros + ", latencyMicros=" + this.latencyMicros + '}';
+            String methodName =
+                    new BinderTransactionNameResolver()
+                            .getMethodName(this.binderClass, this.transactionCode);
+            return "CallStat{packageName="
+                    + this.packageName
+                    + ", callingUid="
+                    + this.callingUid
+                    + ", transaction="
+                    + this.binderClass.getSimpleName()
+                    + '.'
+                    + methodName
+                    + ", callCount="
+                    + this.callCount
+                    + ", incrementalCallCount="
+                    + this.incrementalCallCount
+                    + ", recordedCallCount="
+                    + this.recordedCallCount
+                    + ", cpuTimeMicros="
+                    + this.cpuTimeMicros
+                    + ", latencyMicros="
+                    + this.latencyMicros
+                    + '}';
         }
     }
 
@@ -1614,12 +1912,19 @@ public class BinderCallsStats implements BinderInternal.Observer {
             if (this.packageName != null) {
                 samePackage = this.packageName.equals(key.packageName);
             }
-            return this.callingUid == key.callingUid && samePackage && this.transactionCode == key.transactionCode && this.screenInteractive == key.screenInteractive && this.binderClass.equals(key.binderClass);
+            return this.callingUid == key.callingUid
+                    && samePackage
+                    && this.transactionCode == key.transactionCode
+                    && this.screenInteractive == key.screenInteractive
+                    && this.binderClass.equals(key.binderClass);
         }
 
         public int hashCode() {
             int result = this.binderClass.hashCode();
-            return (((((result * 31) + this.transactionCode) * 31) + this.callingUid) * 31) + (this.screenInteractive ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
+            return (((((result * 31) + this.transactionCode) * 31) + this.callingUid) * 31)
+                    + (this.screenInteractive
+                            ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP
+                            : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
         }
     }
 
@@ -1637,7 +1942,12 @@ public class BinderCallsStats implements BinderInternal.Observer {
             this.workSourceUid = uid;
         }
 
-        CallStat get(int callingUid, Class<? extends Binder> binderClass, int transactionCode, boolean screenInteractive, String packageName) {
+        CallStat get(
+                int callingUid,
+                Class<? extends Binder> binderClass,
+                int transactionCode,
+                boolean screenInteractive,
+                String packageName) {
             this.mTempKey.callingUid = callingUid;
             this.mTempKey.binderClass = binderClass;
             this.mTempKey.transactionCode = transactionCode;
@@ -1646,11 +1956,24 @@ public class BinderCallsStats implements BinderInternal.Observer {
             return this.mCallStats.get(this.mTempKey);
         }
 
-        CallStat getOrCreate(int callingUid, Class<? extends Binder> binderClass, int transactionCode, boolean screenInteractive, boolean maxCallStatsReached, String packageName) {
-            CallStat mapCallStat = get(callingUid, binderClass, transactionCode, screenInteractive, packageName);
+        CallStat getOrCreate(
+                int callingUid,
+                Class<? extends Binder> binderClass,
+                int transactionCode,
+                boolean screenInteractive,
+                boolean maxCallStatsReached,
+                String packageName) {
+            CallStat mapCallStat =
+                    get(callingUid, binderClass, transactionCode, screenInteractive, packageName);
             if (mapCallStat == null) {
                 if (maxCallStatsReached) {
-                    CallStat mapCallStat2 = get(-1, BinderCallsStats.OVERFLOW_BINDER, -1, false, BinderCallsStats.OVERFLOW_PACKAGE_NAME);
+                    CallStat mapCallStat2 =
+                            get(
+                                    -1,
+                                    BinderCallsStats.OVERFLOW_BINDER,
+                                    -1,
+                                    false,
+                                    BinderCallsStats.OVERFLOW_PACKAGE_NAME);
                     if (mapCallStat2 != null) {
                         return mapCallStat2;
                     }
@@ -1660,7 +1983,13 @@ public class BinderCallsStats implements BinderInternal.Observer {
                     screenInteractive = false;
                     packageName = BinderCallsStats.OVERFLOW_PACKAGE_NAME;
                 }
-                CallStat mapCallStat3 = new CallStat(callingUid, binderClass, transactionCode, screenInteractive, packageName);
+                CallStat mapCallStat3 =
+                        new CallStat(
+                                callingUid,
+                                binderClass,
+                                transactionCode,
+                                screenInteractive,
+                                packageName);
                 CallStatKey key = new CallStatKey();
                 key.callingUid = callingUid;
                 key.binderClass = binderClass;
@@ -1679,19 +2008,33 @@ public class BinderCallsStats implements BinderInternal.Observer {
 
         public String getExtraInfo(int N) {
             List<CallStat> topEntries = new ArrayList<>(this.mCallStats.values());
-            topEntries.sort(Comparator.comparingLong(new ToLongFunction() { // from class: com.android.internal.os.BinderCallsStats$UidEntry$$ExternalSyntheticLambda0
-                @Override // java.util.function.ToLongFunction
-                public final long applyAsLong(Object obj) {
-                    long j;
-                    j = ((BinderCallsStats.CallStat) obj).cpuTimeMicros;
-                    return j;
-                }
-            }).reversed());
+            topEntries.sort(
+                    Comparator.comparingLong(
+                                    new ToLongFunction() { // from class:
+                                                           // com.android.internal.os.BinderCallsStats$UidEntry$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.ToLongFunction
+                                        public final long applyAsLong(Object obj) {
+                                            long j;
+                                            j = ((BinderCallsStats.CallStat) obj).cpuTimeMicros;
+                                            return j;
+                                        }
+                                    })
+                            .reversed());
             StringBuilder sb = new StringBuilder();
             int entryNum = 0;
             for (CallStat stat : topEntries) {
-                String methodName = new BinderTransactionNameResolver().getMethodName(stat.binderClass, stat.transactionCode);
-                sb.append(stat.binderClass.getSimpleName()).append('.').append(methodName).append(',').append(stat.cpuTimeMicros).append(',').append(stat.recordedCallCount).append(',').append(stat.callCount);
+                String methodName =
+                        new BinderTransactionNameResolver()
+                                .getMethodName(stat.binderClass, stat.transactionCode);
+                sb.append(stat.binderClass.getSimpleName())
+                        .append('.')
+                        .append(methodName)
+                        .append(',')
+                        .append(stat.cpuTimeMicros)
+                        .append(',')
+                        .append(stat.recordedCallCount)
+                        .append(',')
+                        .append(stat.callCount);
                 entryNum++;
                 if (entryNum >= N) {
                     break;
@@ -1702,7 +2045,13 @@ public class BinderCallsStats implements BinderInternal.Observer {
         }
 
         public String toString() {
-            return "UidEntry{cpuTimeMicros=" + this.cpuTimeMicros + ", callCount=" + this.callCount + ", mCallStats=" + this.mCallStats + '}';
+            return "UidEntry{cpuTimeMicros="
+                    + this.cpuTimeMicros
+                    + ", callCount="
+                    + this.callCount
+                    + ", mCallStats="
+                    + this.mCallStats
+                    + '}';
         }
 
         public boolean equals(Object o) {
@@ -1730,7 +2079,8 @@ public class BinderCallsStats implements BinderInternal.Observer {
         return this.mLatencyObserver;
     }
 
-    public static <T> List<T> getHighestValues(List<T> list, ToDoubleFunction<T> toDoubleFunction, double percentile) {
+    public static <T> List<T> getHighestValues(
+            List<T> list, ToDoubleFunction<T> toDoubleFunction, double percentile) {
         List<T> sortedList = new ArrayList<>(list);
         sortedList.sort(Comparator.comparingDouble(toDoubleFunction).reversed());
         double total = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
@@ -1752,7 +2102,9 @@ public class BinderCallsStats implements BinderInternal.Observer {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int compareByActCpuDesc(ExportedCallStat a, ExportedCallStat b) {
-        return Long.compare((b.cpuTimeMicros / b.recordedCallCount) * b.callCount, (a.cpuTimeMicros / a.recordedCallCount) * a.callCount);
+        return Long.compare(
+                (b.cpuTimeMicros / b.recordedCallCount) * b.callCount,
+                (a.cpuTimeMicros / a.recordedCallCount) * a.callCount);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1778,12 +2130,18 @@ public class BinderCallsStats implements BinderInternal.Observer {
         public static final String SETTINGS_DETAILED_TRACKING_KEY = "detailed_tracking";
         public static final String SETTINGS_ENABLED_KEY = "enabled";
         public static final String SETTINGS_IGNORE_BATTERY_STATUS_KEY = "ignore_battery_status";
-        public static final String SETTINGS_LATENCY_HISTOGRAM_BUCKET_COUNT_KEY = "latency_histogram_bucket_count";
-        public static final String SETTINGS_LATENCY_HISTOGRAM_BUCKET_SCALE_FACTOR_KEY = "latency_histogram_bucket_scale_factor";
-        public static final String SETTINGS_LATENCY_HISTOGRAM_FIRST_BUCKET_SIZE_KEY = "latency_histogram_first_bucket_size";
-        public static final String SETTINGS_LATENCY_OBSERVER_PUSH_INTERVAL_MINUTES_KEY = "latency_observer_push_interval_minutes";
-        public static final String SETTINGS_LATENCY_OBSERVER_SAMPLING_INTERVAL_KEY = "latency_observer_sampling_interval";
-        public static final String SETTINGS_LATENCY_OBSERVER_SHARDING_MODULO_KEY = "latency_observer_sharding_modulo";
+        public static final String SETTINGS_LATENCY_HISTOGRAM_BUCKET_COUNT_KEY =
+                "latency_histogram_bucket_count";
+        public static final String SETTINGS_LATENCY_HISTOGRAM_BUCKET_SCALE_FACTOR_KEY =
+                "latency_histogram_bucket_scale_factor";
+        public static final String SETTINGS_LATENCY_HISTOGRAM_FIRST_BUCKET_SIZE_KEY =
+                "latency_histogram_first_bucket_size";
+        public static final String SETTINGS_LATENCY_OBSERVER_PUSH_INTERVAL_MINUTES_KEY =
+                "latency_observer_push_interval_minutes";
+        public static final String SETTINGS_LATENCY_OBSERVER_SAMPLING_INTERVAL_KEY =
+                "latency_observer_sampling_interval";
+        public static final String SETTINGS_LATENCY_OBSERVER_SHARDING_MODULO_KEY =
+                "latency_observer_sharding_modulo";
         public static final String SETTINGS_MAX_CALL_STATS_KEY = "max_call_stats_count";
         public static final String SETTINGS_SAMPLING_INTERVAL_KEY = "sampling_interval";
         public static final String SETTINGS_SHARDING_MODULO_KEY = "sharding_modulo";
@@ -1815,15 +2173,20 @@ public class BinderCallsStats implements BinderInternal.Observer {
 
         void onChange() {
             try {
-                this.mParser.setString(Settings.Global.getString(this.mContext.getContentResolver(), Settings.Global.BINDER_CALLS_STATS));
+                this.mParser.setString(
+                        Settings.Global.getString(
+                                this.mContext.getContentResolver(),
+                                Settings.Global.BINDER_CALLS_STATS));
             } catch (IllegalArgumentException e) {
                 Slog.e(BinderCallsStats.TAG, "Bad binder call stats settings", e);
             }
             this.mBinderCallsStats.setDetailedTracking(false);
             this.mBinderCallsStats.setTrackScreenInteractive(false);
             this.mBinderCallsStats.setTrackDirectCallerUid(false);
-            this.mBinderCallsStats.setIgnoreBatteryStatus(this.mParser.getBoolean(SETTINGS_IGNORE_BATTERY_STATUS_KEY, false));
-            this.mBinderCallsStats.setCollectLatencyData(this.mParser.getBoolean(SETTINGS_COLLECT_LATENCY_DATA_KEY, true));
+            this.mBinderCallsStats.setIgnoreBatteryStatus(
+                    this.mParser.getBoolean(SETTINGS_IGNORE_BATTERY_STATUS_KEY, false));
+            this.mBinderCallsStats.setCollectLatencyData(
+                    this.mParser.getBoolean(SETTINGS_COLLECT_LATENCY_DATA_KEY, true));
             configureLatencyObserver(this.mParser, this.mBinderCallsStats.getLatencyObserver());
             boolean enabled = this.mParser.getBoolean("enabled", true);
             if (this.mEnabled != enabled) {
@@ -1839,11 +2202,18 @@ public class BinderCallsStats implements BinderInternal.Observer {
             }
         }
 
-        public static void configureLatencyObserver(KeyValueListParser mParser, BinderLatencyObserver binderLatencyObserver) {
-            binderLatencyObserver.setSamplingInterval(mParser.getInt(SETTINGS_LATENCY_OBSERVER_SAMPLING_INTERVAL_KEY, 10));
-            binderLatencyObserver.setShardingModulo(mParser.getInt(SETTINGS_LATENCY_OBSERVER_SHARDING_MODULO_KEY, 1));
-            binderLatencyObserver.setHistogramBucketsParams(mParser.getInt(SETTINGS_LATENCY_HISTOGRAM_BUCKET_COUNT_KEY, 100), mParser.getInt(SETTINGS_LATENCY_HISTOGRAM_FIRST_BUCKET_SIZE_KEY, 5), mParser.getFloat(SETTINGS_LATENCY_HISTOGRAM_BUCKET_SCALE_FACTOR_KEY, 1.125f));
-            binderLatencyObserver.setPushInterval(mParser.getInt(SETTINGS_LATENCY_OBSERVER_PUSH_INTERVAL_MINUTES_KEY, 360));
+        public static void configureLatencyObserver(
+                KeyValueListParser mParser, BinderLatencyObserver binderLatencyObserver) {
+            binderLatencyObserver.setSamplingInterval(
+                    mParser.getInt(SETTINGS_LATENCY_OBSERVER_SAMPLING_INTERVAL_KEY, 10));
+            binderLatencyObserver.setShardingModulo(
+                    mParser.getInt(SETTINGS_LATENCY_OBSERVER_SHARDING_MODULO_KEY, 1));
+            binderLatencyObserver.setHistogramBucketsParams(
+                    mParser.getInt(SETTINGS_LATENCY_HISTOGRAM_BUCKET_COUNT_KEY, 100),
+                    mParser.getInt(SETTINGS_LATENCY_HISTOGRAM_FIRST_BUCKET_SIZE_KEY, 5),
+                    mParser.getFloat(SETTINGS_LATENCY_HISTOGRAM_BUCKET_SCALE_FACTOR_KEY, 1.125f));
+            binderLatencyObserver.setPushInterval(
+                    mParser.getInt(SETTINGS_LATENCY_OBSERVER_PUSH_INTERVAL_MINUTES_KEY, 360));
         }
     }
 }

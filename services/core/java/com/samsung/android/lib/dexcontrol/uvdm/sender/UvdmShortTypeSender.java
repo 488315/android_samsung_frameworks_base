@@ -30,7 +30,8 @@ public final class UvdmShortTypeSender extends UvdmSendExecutor {
                             if (uvdmFileHelper2 == null) {
                                 return;
                             }
-                            int ioctl_shortDataWrite = uvdmFileHelper2.ioctl_shortDataWrite(this.mPid, bArr);
+                            int ioctl_shortDataWrite =
+                                    uvdmFileHelper2.ioctl_shortDataWrite(this.mPid, bArr);
                             int i4 = ioctl_shortDataWrite >= 0 ? 0 : -2;
                             SLog.d("UvdmShortTypeSender", "ccic_write : " + ioctl_shortDataWrite);
                             i2 = i4;
@@ -39,7 +40,9 @@ public final class UvdmShortTypeSender extends UvdmSendExecutor {
                         if (uvdmFileHelper3 == null) {
                             return;
                         }
-                        SLog.d("UvdmShortTypeSender", "ccic_close : " + uvdmFileHelper3.ccic_close());
+                        SLog.d(
+                                "UvdmShortTypeSender",
+                                "ccic_close : " + uvdmFileHelper3.ccic_close());
                     } else {
                         i2 = -1;
                     }

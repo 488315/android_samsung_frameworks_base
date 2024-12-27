@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -23,28 +24,23 @@ public interface ITvInputManagerCallback extends IInterface {
 
     public static class Default implements ITvInputManagerCallback {
         @Override // android.media.tv.ITvInputManagerCallback
-        public void onInputAdded(String inputId) throws RemoteException {
-        }
+        public void onInputAdded(String inputId) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputManagerCallback
-        public void onInputRemoved(String inputId) throws RemoteException {
-        }
+        public void onInputRemoved(String inputId) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputManagerCallback
-        public void onInputUpdated(String inputId) throws RemoteException {
-        }
+        public void onInputUpdated(String inputId) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputManagerCallback
-        public void onInputStateChanged(String inputId, int state) throws RemoteException {
-        }
+        public void onInputStateChanged(String inputId, int state) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputManagerCallback
-        public void onTvInputInfoUpdated(TvInputInfo TvInputInfo) throws RemoteException {
-        }
+        public void onTvInputInfoUpdated(TvInputInfo TvInputInfo) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputManagerCallback
-        public void onCurrentTunedInfosUpdated(List<TunedInfo> currentTunedInfos) throws RemoteException {
-        }
+        public void onCurrentTunedInfosUpdated(List<TunedInfo> currentTunedInfos)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -52,7 +48,7 @@ public interface ITvInputManagerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvInputManagerCallback {
+    public abstract static class Stub extends Binder implements ITvInputManagerCallback {
         public static final String DESCRIPTOR = "android.media.tv.ITvInputManagerCallback";
         static final int TRANSACTION_onCurrentTunedInfosUpdated = 6;
         static final int TRANSACTION_onInputAdded = 1;
@@ -106,7 +102,8 @@ public interface ITvInputManagerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -229,7 +226,8 @@ public interface ITvInputManagerCallback extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputManagerCallback
-            public void onCurrentTunedInfosUpdated(List<TunedInfo> currentTunedInfos) throws RemoteException {
+            public void onCurrentTunedInfosUpdated(List<TunedInfo> currentTunedInfos)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

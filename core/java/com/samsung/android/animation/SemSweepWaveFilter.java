@@ -15,7 +15,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ListView;
-import com.samsung.android.animation.SemSweepListAnimator;
 
 /* loaded from: classes5.dex */
 public class SemSweepWaveFilter extends SemAbsSweepAnimationFilter {
@@ -118,7 +117,12 @@ public class SemSweepWaveFilter extends SemAbsSweepAnimationFilter {
     }
 
     @Override // com.samsung.android.animation.SemAbsSweepAnimationFilter
-    public ValueAnimator createActionUpAnimator(View viewForeground, float adjustedVelocityX, int scaledTouchSlop, float deltaX, boolean isSweepPattern) {
+    public ValueAnimator createActionUpAnimator(
+            View viewForeground,
+            float adjustedVelocityX,
+            int scaledTouchSlop,
+            float deltaX,
+            boolean isSweepPattern) {
         long duration;
         float endX;
         int width = viewForeground.getWidth();
@@ -180,7 +184,10 @@ public class SemSweepWaveFilter extends SemAbsSweepAnimationFilter {
         int viewLeft = view.getLeft();
         View parentView = (View) view.getParent();
         if (parentView != null && (parentView instanceof ViewGroup)) {
-            viewTop = parentView instanceof ListView ? view.getTop() : view.getTop() + parentView.getTop();
+            viewTop =
+                    parentView instanceof ListView
+                            ? view.getTop()
+                            : view.getTop() + parentView.getTop();
         }
         this.mSweepRect = new Rect(viewLeft, viewTop, viewWidth, viewTop + viewHeight);
         if (this.mSweepBitmap == null) {
@@ -208,13 +215,20 @@ public class SemSweepWaveFilter extends SemAbsSweepAnimationFilter {
     }
 
     @Override // com.samsung.android.animation.SemAbsSweepAnimationFilter
-    public void initAnimationFilter(View viewForeground, float deltaX, int position, SemSweepListAnimator.OnSweepListener listener, SemSweepListAnimator.SweepConfiguration sweepConfig) {
+    public void initAnimationFilter(
+            View viewForeground,
+            float deltaX,
+            int position,
+            SemSweepListAnimator.OnSweepListener listener,
+            SemSweepListAnimator.SweepConfiguration sweepConfig) {
         this.mViewForeground = viewForeground;
         initWaveParams(deltaX, position, listener);
     }
 
-    private void initWaveParams(float deltaX, final int itemIndex, SemSweepListAnimator.OnSweepListener listener) {
-        View child = this.mListView.getChildAt(itemIndex - this.mListView.getFirstVisiblePosition());
+    private void initWaveParams(
+            float deltaX, final int itemIndex, SemSweepListAnimator.OnSweepListener listener) {
+        View child =
+                this.mListView.getChildAt(itemIndex - this.mListView.getFirstVisiblePosition());
         if (child == null) {
             return;
         }
@@ -233,15 +247,23 @@ public class SemSweepWaveFilter extends SemAbsSweepAnimationFilter {
             return;
         }
         this.waveValueAnimator = ValueAnimator.ofFloat(0.0f, 1.0f);
-        this.waveValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemSweepWaveFilter.1
-            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float fraction = animation.getAnimatedFraction();
-                SemSweepWaveFilter.this.incrementYdown = SemSweepWaveFilter.this.waveHeight * fraction * 2.0f;
-                SemSweepWaveFilter.this.incrementYup = (-fraction) * SemSweepWaveFilter.this.waveHeight * 2.0f;
-                SemSweepWaveFilter.this.doDrawWaveEffect(SemSweepWaveFilter.this.mViewForeground, SemSweepWaveFilter.this.mDeltaX, itemIndex);
-            }
-        });
+        this.waveValueAnimator.addUpdateListener(
+                new ValueAnimator
+                        .AnimatorUpdateListener() { // from class:
+                                                    // com.samsung.android.animation.SemSweepWaveFilter.1
+                    @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        float fraction = animation.getAnimatedFraction();
+                        SemSweepWaveFilter.this.incrementYdown =
+                                SemSweepWaveFilter.this.waveHeight * fraction * 2.0f;
+                        SemSweepWaveFilter.this.incrementYup =
+                                (-fraction) * SemSweepWaveFilter.this.waveHeight * 2.0f;
+                        SemSweepWaveFilter.this.doDrawWaveEffect(
+                                SemSweepWaveFilter.this.mViewForeground,
+                                SemSweepWaveFilter.this.mDeltaX,
+                                itemIndex);
+                    }
+                });
         this.waveValueAnimator.setRepeatCount(-1);
         this.waveValueAnimator.setRepeatMode(1);
         this.waveValueAnimator.setDuration(1300L);
@@ -275,26 +297,80 @@ public class SemSweepWaveFilter extends SemAbsSweepAnimationFilter {
         }
     }
 
-    private void drawWaveInto(Canvas canvas, Rect rect, float waveCenterX, boolean drawLeftFirst, Paint leftPaint, Paint rightPaint) {
+    private void drawWaveInto(
+            Canvas canvas,
+            Rect rect,
+            float waveCenterX,
+            boolean drawLeftFirst,
+            Paint leftPaint,
+            Paint rightPaint) {
         float startXdown = waveCenterX + (this.waveWidth / 2.0f);
         float startYdown = this.incrementYdown - (this.waveHeight * 2.0f);
         float listWidth = this.mListView.getWidth();
         this.mPathDown.reset();
         this.mPathDown.moveTo(0.0f, startYdown);
         this.mPathDown.lineTo(this.waveWidth + startXdown, startYdown);
-        this.mPathDown.cubicTo(this.waveWidth + startXdown, this.waveControlPointHeight + startYdown, startXdown, (this.waveHeight + startYdown) - this.waveControlPointHeight, startXdown, startYdown + this.waveHeight);
-        this.mPathDown.cubicTo(startXdown, this.waveControlPointHeight + this.waveHeight + startYdown, startXdown + this.waveWidth, ((this.waveHeight * 2.0f) + startYdown) - this.waveControlPointHeight, startXdown + this.waveWidth, startYdown + (this.waveHeight * 2.0f));
-        this.mPathDown.cubicTo(this.waveWidth + startXdown, (this.waveHeight * 2.0f) + startYdown + this.waveControlPointHeight, startXdown, ((this.waveHeight * 3.0f) + startYdown) - this.waveControlPointHeight, startXdown, startYdown + (this.waveHeight * 3.0f));
-        this.mPathDown.cubicTo(startXdown, this.waveControlPointHeight + (this.waveHeight * 3.0f) + startYdown, startXdown + this.waveWidth, ((this.waveHeight * 4.0f) + startYdown) - this.waveControlPointHeight, startXdown + this.waveWidth, startYdown + (this.waveHeight * 4.0f));
+        this.mPathDown.cubicTo(
+                this.waveWidth + startXdown,
+                this.waveControlPointHeight + startYdown,
+                startXdown,
+                (this.waveHeight + startYdown) - this.waveControlPointHeight,
+                startXdown,
+                startYdown + this.waveHeight);
+        this.mPathDown.cubicTo(
+                startXdown,
+                this.waveControlPointHeight + this.waveHeight + startYdown,
+                startXdown + this.waveWidth,
+                ((this.waveHeight * 2.0f) + startYdown) - this.waveControlPointHeight,
+                startXdown + this.waveWidth,
+                startYdown + (this.waveHeight * 2.0f));
+        this.mPathDown.cubicTo(
+                this.waveWidth + startXdown,
+                (this.waveHeight * 2.0f) + startYdown + this.waveControlPointHeight,
+                startXdown,
+                ((this.waveHeight * 3.0f) + startYdown) - this.waveControlPointHeight,
+                startXdown,
+                startYdown + (this.waveHeight * 3.0f));
+        this.mPathDown.cubicTo(
+                startXdown,
+                this.waveControlPointHeight + (this.waveHeight * 3.0f) + startYdown,
+                startXdown + this.waveWidth,
+                ((this.waveHeight * 4.0f) + startYdown) - this.waveControlPointHeight,
+                startXdown + this.waveWidth,
+                startYdown + (this.waveHeight * 4.0f));
         this.mPathDown.lineTo(0.0f, (this.waveHeight * 4.0f) + startYdown);
         this.mPathDown.close();
         this.mPathUp.reset();
         this.mPathUp.moveTo(listWidth, startYdown);
         this.mPathUp.lineTo(this.waveWidth + startXdown, startYdown);
-        this.mPathUp.cubicTo(this.waveWidth + startXdown, this.waveControlPointHeight + startYdown, startXdown, (this.waveHeight + startYdown) - this.waveControlPointHeight, startXdown, startYdown + this.waveHeight);
-        this.mPathUp.cubicTo(startXdown, this.waveControlPointHeight + this.waveHeight + startYdown, startXdown + this.waveWidth, ((this.waveHeight * 2.0f) + startYdown) - this.waveControlPointHeight, startXdown + this.waveWidth, startYdown + (this.waveHeight * 2.0f));
-        this.mPathUp.cubicTo(this.waveWidth + startXdown, (this.waveHeight * 2.0f) + startYdown + this.waveControlPointHeight, startXdown, ((this.waveHeight * 3.0f) + startYdown) - this.waveControlPointHeight, startXdown, startYdown + (this.waveHeight * 3.0f));
-        this.mPathUp.cubicTo(startXdown, (this.waveHeight * 3.0f) + startYdown + this.waveControlPointHeight, startXdown + this.waveWidth, ((this.waveHeight * 4.0f) + startYdown) - this.waveControlPointHeight, startXdown + this.waveWidth, startYdown + (this.waveHeight * 4.0f));
+        this.mPathUp.cubicTo(
+                this.waveWidth + startXdown,
+                this.waveControlPointHeight + startYdown,
+                startXdown,
+                (this.waveHeight + startYdown) - this.waveControlPointHeight,
+                startXdown,
+                startYdown + this.waveHeight);
+        this.mPathUp.cubicTo(
+                startXdown,
+                this.waveControlPointHeight + this.waveHeight + startYdown,
+                startXdown + this.waveWidth,
+                ((this.waveHeight * 2.0f) + startYdown) - this.waveControlPointHeight,
+                startXdown + this.waveWidth,
+                startYdown + (this.waveHeight * 2.0f));
+        this.mPathUp.cubicTo(
+                this.waveWidth + startXdown,
+                (this.waveHeight * 2.0f) + startYdown + this.waveControlPointHeight,
+                startXdown,
+                ((this.waveHeight * 3.0f) + startYdown) - this.waveControlPointHeight,
+                startXdown,
+                startYdown + (this.waveHeight * 3.0f));
+        this.mPathUp.cubicTo(
+                startXdown,
+                (this.waveHeight * 3.0f) + startYdown + this.waveControlPointHeight,
+                startXdown + this.waveWidth,
+                ((this.waveHeight * 4.0f) + startYdown) - this.waveControlPointHeight,
+                startXdown + this.waveWidth,
+                startYdown + (this.waveHeight * 4.0f));
         this.mPathUp.lineTo(listWidth, (this.waveHeight * 4.0f) + startYdown);
         this.mPathUp.close();
         int saveCount = canvas.save();

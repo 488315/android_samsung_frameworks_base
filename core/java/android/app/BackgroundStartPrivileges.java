@@ -1,7 +1,9 @@
 package android.app;
 
 import android.os.IBinder;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -9,18 +11,27 @@ public class BackgroundStartPrivileges {
     private final boolean mAllowsBackgroundActivityStarts;
     private final boolean mAllowsBackgroundForegroundServiceStarts;
     private final IBinder mOriginatingToken;
-    public static final BackgroundStartPrivileges NONE = new BackgroundStartPrivileges(false, false, null);
-    public static final BackgroundStartPrivileges ALLOW_BAL = new BackgroundStartPrivileges(true, true, null);
-    public static final BackgroundStartPrivileges ALLOW_FGS = new BackgroundStartPrivileges(false, true, null);
+    public static final BackgroundStartPrivileges NONE =
+            new BackgroundStartPrivileges(false, false, null);
+    public static final BackgroundStartPrivileges ALLOW_BAL =
+            new BackgroundStartPrivileges(true, true, null);
+    public static final BackgroundStartPrivileges ALLOW_FGS =
+            new BackgroundStartPrivileges(false, true, null);
 
-    private BackgroundStartPrivileges(boolean allowsBackgroundActivityStarts, boolean allowsBackgroundForegroundServiceStarts, IBinder originatingToken) {
-        Preconditions.checkArgument(!allowsBackgroundActivityStarts || allowsBackgroundForegroundServiceStarts, "backgroundActivityStarts implies bgFgServiceStarts");
+    private BackgroundStartPrivileges(
+            boolean allowsBackgroundActivityStarts,
+            boolean allowsBackgroundForegroundServiceStarts,
+            IBinder originatingToken) {
+        Preconditions.checkArgument(
+                !allowsBackgroundActivityStarts || allowsBackgroundForegroundServiceStarts,
+                "backgroundActivityStarts implies bgFgServiceStarts");
         this.mAllowsBackgroundActivityStarts = allowsBackgroundActivityStarts;
         this.mAllowsBackgroundForegroundServiceStarts = allowsBackgroundForegroundServiceStarts;
         this.mOriginatingToken = originatingToken;
     }
 
-    public static BackgroundStartPrivileges allowBackgroundActivityStarts(IBinder originatingToken) {
+    public static BackgroundStartPrivileges allowBackgroundActivityStarts(
+            IBinder originatingToken) {
         if (originatingToken == null) {
             return ALLOW_BAL;
         }
@@ -34,16 +45,24 @@ public class BackgroundStartPrivileges {
         if (this == NONE) {
             return other;
         }
-        boolean allowsBackgroundActivityStarts = allowsBackgroundActivityStarts() || other.allowsBackgroundActivityStarts();
-        boolean allowsBackgroundFgsStarts = allowsBackgroundFgsStarts() || other.allowsBackgroundFgsStarts();
+        boolean allowsBackgroundActivityStarts =
+                allowsBackgroundActivityStarts() || other.allowsBackgroundActivityStarts();
+        boolean allowsBackgroundFgsStarts =
+                allowsBackgroundFgsStarts() || other.allowsBackgroundFgsStarts();
         if (this.mOriginatingToken == other.mOriginatingToken) {
-            if (this.mAllowsBackgroundActivityStarts == allowsBackgroundActivityStarts && this.mAllowsBackgroundForegroundServiceStarts == allowsBackgroundFgsStarts) {
+            if (this.mAllowsBackgroundActivityStarts == allowsBackgroundActivityStarts
+                    && this.mAllowsBackgroundForegroundServiceStarts == allowsBackgroundFgsStarts) {
                 return this;
             }
-            if (other.mAllowsBackgroundActivityStarts == allowsBackgroundActivityStarts && other.mAllowsBackgroundForegroundServiceStarts == allowsBackgroundFgsStarts) {
+            if (other.mAllowsBackgroundActivityStarts == allowsBackgroundActivityStarts
+                    && other.mAllowsBackgroundForegroundServiceStarts
+                            == allowsBackgroundFgsStarts) {
                 return other;
             }
-            return new BackgroundStartPrivileges(allowsBackgroundActivityStarts, allowsBackgroundFgsStarts, this.mOriginatingToken);
+            return new BackgroundStartPrivileges(
+                    allowsBackgroundActivityStarts,
+                    allowsBackgroundFgsStarts,
+                    this.mOriginatingToken);
         }
         if (allowsBackgroundActivityStarts) {
             return ALLOW_BAL;
@@ -81,7 +100,8 @@ public class BackgroundStartPrivileges {
     }
 
     public boolean allowsAny() {
-        return this.mAllowsBackgroundActivityStarts || this.mAllowsBackgroundForegroundServiceStarts;
+        return this.mAllowsBackgroundActivityStarts
+                || this.mAllowsBackgroundForegroundServiceStarts;
     }
 
     public boolean allowsNothing() {
@@ -102,6 +122,12 @@ public class BackgroundStartPrivileges {
         if (this == NONE) {
             return "BSP.NONE";
         }
-        return "BackgroundStartPrivileges[allowsBackgroundActivityStarts=" + this.mAllowsBackgroundActivityStarts + ", allowsBackgroundForegroundServiceStarts=" + this.mAllowsBackgroundForegroundServiceStarts + ", originatingToken=" + this.mOriginatingToken + ']';
+        return "BackgroundStartPrivileges[allowsBackgroundActivityStarts="
+                + this.mAllowsBackgroundActivityStarts
+                + ", allowsBackgroundForegroundServiceStarts="
+                + this.mAllowsBackgroundForegroundServiceStarts
+                + ", originatingToken="
+                + this.mOriginatingToken
+                + ']';
     }
 }

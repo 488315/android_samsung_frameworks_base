@@ -10,6 +10,7 @@ import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.asn1.x509.Extension;
 import com.android.internal.org.bouncycastle.asn1.x509.GeneralName;
 import com.android.internal.org.bouncycastle.util.Integers;
+
 import java.io.IOException;
 import java.security.cert.CertificateParsingException;
 import java.security.cert.X509Certificate;
@@ -25,17 +26,20 @@ public class X509ExtensionUtil {
         return ASN1Primitive.fromByteArray(octs.getOctets());
     }
 
-    public static Collection getIssuerAlternativeNames(X509Certificate cert) throws CertificateParsingException {
+    public static Collection getIssuerAlternativeNames(X509Certificate cert)
+            throws CertificateParsingException {
         byte[] extVal = cert.getExtensionValue(Extension.issuerAlternativeName.getId());
         return getAlternativeNames(extVal);
     }
 
-    public static Collection getSubjectAlternativeNames(X509Certificate cert) throws CertificateParsingException {
+    public static Collection getSubjectAlternativeNames(X509Certificate cert)
+            throws CertificateParsingException {
         byte[] extVal = cert.getExtensionValue(Extension.subjectAlternativeName.getId());
         return getAlternativeNames(extVal);
     }
 
-    private static Collection getAlternativeNames(byte[] extVal) throws CertificateParsingException {
+    private static Collection getAlternativeNames(byte[] extVal)
+            throws CertificateParsingException {
         if (extVal == null) {
             return Collections.EMPTY_LIST;
         }

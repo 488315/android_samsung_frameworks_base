@@ -9,7 +9,8 @@ public interface AudioRouting {
         void onRoutingChanged(AudioRouting audioRouting);
     }
 
-    void addOnRoutingChangedListener(OnRoutingChangedListener onRoutingChangedListener, Handler handler);
+    void addOnRoutingChangedListener(
+            OnRoutingChangedListener onRoutingChangedListener, Handler handler);
 
     AudioDeviceInfo getPreferredDevice();
 

@@ -6,19 +6,21 @@ import android.text.TextUtils;
 
 /* loaded from: classes.dex */
 public class SyncAdapterType implements Parcelable {
-    public static final Parcelable.Creator<SyncAdapterType> CREATOR = new Parcelable.Creator<SyncAdapterType>() { // from class: android.content.SyncAdapterType.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncAdapterType createFromParcel(Parcel source) {
-            return new SyncAdapterType(source);
-        }
+    public static final Parcelable.Creator<SyncAdapterType> CREATOR =
+            new Parcelable.Creator<
+                    SyncAdapterType>() { // from class: android.content.SyncAdapterType.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncAdapterType createFromParcel(Parcel source) {
+                    return new SyncAdapterType(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncAdapterType[] newArray(int size) {
-            return new SyncAdapterType[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncAdapterType[] newArray(int size) {
+                    return new SyncAdapterType[size];
+                }
+            };
     public final String accountType;
     private final boolean allowParallelSyncs;
     public final String authority;
@@ -29,7 +31,8 @@ public class SyncAdapterType implements Parcelable {
     private final boolean supportsUploading;
     private final boolean userVisible;
 
-    public SyncAdapterType(String authority, String accountType, boolean userVisible, boolean supportsUploading) {
+    public SyncAdapterType(
+            String authority, String accountType, boolean userVisible, boolean supportsUploading) {
         if (TextUtils.isEmpty(authority)) {
             throw new IllegalArgumentException("the authority must not be empty: " + authority);
         }
@@ -47,7 +50,15 @@ public class SyncAdapterType implements Parcelable {
         this.packageName = null;
     }
 
-    public SyncAdapterType(String authority, String accountType, boolean userVisible, boolean supportsUploading, boolean isAlwaysSyncable, boolean allowParallelSyncs, String settingsActivity, String packageName) {
+    public SyncAdapterType(
+            String authority,
+            String accountType,
+            boolean userVisible,
+            boolean supportsUploading,
+            boolean isAlwaysSyncable,
+            boolean allowParallelSyncs,
+            String settingsActivity,
+            String packageName) {
         if (TextUtils.isEmpty(authority)) {
             throw new IllegalArgumentException("the authority must not be empty: " + authority);
         }
@@ -85,35 +96,40 @@ public class SyncAdapterType implements Parcelable {
 
     public boolean supportsUploading() {
         if (this.isKey) {
-            throw new IllegalStateException("this method is not allowed to be called when this is a key");
+            throw new IllegalStateException(
+                    "this method is not allowed to be called when this is a key");
         }
         return this.supportsUploading;
     }
 
     public boolean isUserVisible() {
         if (this.isKey) {
-            throw new IllegalStateException("this method is not allowed to be called when this is a key");
+            throw new IllegalStateException(
+                    "this method is not allowed to be called when this is a key");
         }
         return this.userVisible;
     }
 
     public boolean allowParallelSyncs() {
         if (this.isKey) {
-            throw new IllegalStateException("this method is not allowed to be called when this is a key");
+            throw new IllegalStateException(
+                    "this method is not allowed to be called when this is a key");
         }
         return this.allowParallelSyncs;
     }
 
     public boolean isAlwaysSyncable() {
         if (this.isKey) {
-            throw new IllegalStateException("this method is not allowed to be called when this is a key");
+            throw new IllegalStateException(
+                    "this method is not allowed to be called when this is a key");
         }
         return this.isAlwaysSyncable;
     }
 
     public String getSettingsActivity() {
         if (this.isKey) {
-            throw new IllegalStateException("this method is not allowed to be called when this is a key");
+            throw new IllegalStateException(
+                    "this method is not allowed to be called when this is a key");
         }
         return this.settingsActivity;
     }
@@ -144,9 +160,29 @@ public class SyncAdapterType implements Parcelable {
 
     public String toString() {
         if (this.isKey) {
-            return "SyncAdapterType Key {name=" + this.authority + ", type=" + this.accountType + "}";
+            return "SyncAdapterType Key {name="
+                    + this.authority
+                    + ", type="
+                    + this.accountType
+                    + "}";
         }
-        return "SyncAdapterType {name=" + this.authority + ", type=" + this.accountType + ", userVisible=" + this.userVisible + ", supportsUploading=" + this.supportsUploading + ", isAlwaysSyncable=" + this.isAlwaysSyncable + ", allowParallelSyncs=" + this.allowParallelSyncs + ", settingsActivity=" + this.settingsActivity + ", packageName=" + this.packageName + "}";
+        return "SyncAdapterType {name="
+                + this.authority
+                + ", type="
+                + this.accountType
+                + ", userVisible="
+                + this.userVisible
+                + ", supportsUploading="
+                + this.supportsUploading
+                + ", isAlwaysSyncable="
+                + this.isAlwaysSyncable
+                + ", allowParallelSyncs="
+                + this.allowParallelSyncs
+                + ", settingsActivity="
+                + this.settingsActivity
+                + ", packageName="
+                + this.packageName
+                + "}";
     }
 
     @Override // android.os.Parcelable
@@ -170,6 +206,14 @@ public class SyncAdapterType implements Parcelable {
     }
 
     public SyncAdapterType(Parcel source) {
-        this(source.readString(), source.readString(), source.readInt() != 0, source.readInt() != 0, source.readInt() != 0, source.readInt() != 0, source.readString(), source.readString());
+        this(
+                source.readString(),
+                source.readString(),
+                source.readInt() != 0,
+                source.readInt() != 0,
+                source.readInt() != 0,
+                source.readInt() != 0,
+                source.readString(),
+                source.readString());
     }
 }

@@ -15,7 +15,17 @@ public final class InstalledAppInfo {
     public String installAuthorityDate = "";
     public String initPkg = "NA";
 
-    public final void set(String str, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10) {
+    public final void set(
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            String str5,
+            String str6,
+            String str7,
+            String str8,
+            String str9,
+            String str10) {
         this.name = str;
         this.signature = str2;
         this.execute = str3;

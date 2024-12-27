@@ -11,19 +11,22 @@ import android.view.View;
 
 /* loaded from: classes4.dex */
 public class SemRemoteViewsDrawableAnimation extends SemRemoteViewsAnimation {
-    public static final Parcelable.Creator<SemRemoteViewsDrawableAnimation> CREATOR = new Parcelable.Creator<SemRemoteViewsDrawableAnimation>() { // from class: android.widget.SemRemoteViewsDrawableAnimation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemRemoteViewsDrawableAnimation createFromParcel(Parcel in) {
-            return new SemRemoteViewsDrawableAnimation(in);
-        }
+    public static final Parcelable.Creator<SemRemoteViewsDrawableAnimation> CREATOR =
+            new Parcelable.Creator<
+                    SemRemoteViewsDrawableAnimation>() { // from class:
+                                                         // android.widget.SemRemoteViewsDrawableAnimation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemRemoteViewsDrawableAnimation createFromParcel(Parcel in) {
+                    return new SemRemoteViewsDrawableAnimation(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemRemoteViewsDrawableAnimation[] newArray(int size) {
-            return new SemRemoteViewsDrawableAnimation[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemRemoteViewsDrawableAnimation[] newArray(int size) {
+                    return new SemRemoteViewsDrawableAnimation[size];
+                }
+            };
     private static final String LOG_TAG = "SemRemoteViewsDrawableAnimation";
     private Animatable2 mAnimatableDrawable;
     private final boolean mNeedToStart;
@@ -94,7 +97,8 @@ public class SemRemoteViewsDrawableAnimation extends SemRemoteViewsAnimation {
                 imageView.setImageURI(this.mUri);
             }
             Object drawable = imageView.getDrawable();
-            if ((drawable instanceof AnimatedImageDrawable) || (drawable instanceof AnimatedVectorDrawable)) {
+            if ((drawable instanceof AnimatedImageDrawable)
+                    || (drawable instanceof AnimatedVectorDrawable)) {
                 this.mAnimatableDrawable = (Animatable2) drawable;
                 if (this.mNeedToStart) {
                     this.mAnimatableDrawable.start();
@@ -112,6 +116,5 @@ public class SemRemoteViewsDrawableAnimation extends SemRemoteViewsAnimation {
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.SemRemoteViewsAnimation
     /* renamed from: endAnimation */
-    public void lambda$play$0(View root) {
-    }
+    public void lambda$play$0(View root) {}
 }

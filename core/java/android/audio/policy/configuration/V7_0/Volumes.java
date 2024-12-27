@@ -1,11 +1,13 @@
 package android.audio.policy.configuration.V7_0;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class Volumes {
@@ -26,7 +28,8 @@ public class Volumes {
         return this.reference;
     }
 
-    static Volumes read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Volumes read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         Volumes _instance = new Volumes();
         _parser.getDepth();

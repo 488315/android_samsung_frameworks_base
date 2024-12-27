@@ -2,9 +2,11 @@ package android.security.net.config;
 
 import android.security.Flags;
 import android.util.Pair;
+
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+
 import javax.net.ssl.X509TrustManager;
 
 /* loaded from: classes3.dex */
@@ -46,7 +48,10 @@ public final class ApplicationConfig {
             if (domain.hostname.equals(hostname2)) {
                 return config;
             }
-            if (domain.subdomainsIncluded && hostname2.endsWith(domain.hostname) && hostname2.charAt((hostname2.length() - domain.hostname.length()) - 1) == '.') {
+            if (domain.subdomainsIncluded
+                    && hostname2.endsWith(domain.hostname)
+                    && hostname2.charAt((hostname2.length() - domain.hostname.length()) - 1)
+                            == '.') {
                 if (bestMatch == null) {
                     bestMatch = entry;
                 } else if (domain.hostname.length() > bestMatch.first.hostname.length()) {

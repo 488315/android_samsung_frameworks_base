@@ -8,66 +8,101 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.inputmethod.TextAttribute;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes5.dex */
 public interface IRemoteAccessibilityInputConnection extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.inputmethod.IRemoteAccessibilityInputConnection";
+    public static final String DESCRIPTOR =
+            "com.android.internal.inputmethod.IRemoteAccessibilityInputConnection";
 
-    void clearMetaKeyStates(InputConnectionCommandHeader inputConnectionCommandHeader, int i) throws RemoteException;
+    void clearMetaKeyStates(InputConnectionCommandHeader inputConnectionCommandHeader, int i)
+            throws RemoteException;
 
-    void commitText(InputConnectionCommandHeader inputConnectionCommandHeader, CharSequence charSequence, int i, TextAttribute textAttribute) throws RemoteException;
+    void commitText(
+            InputConnectionCommandHeader inputConnectionCommandHeader,
+            CharSequence charSequence,
+            int i,
+            TextAttribute textAttribute)
+            throws RemoteException;
 
-    void deleteSurroundingText(InputConnectionCommandHeader inputConnectionCommandHeader, int i, int i2) throws RemoteException;
+    void deleteSurroundingText(
+            InputConnectionCommandHeader inputConnectionCommandHeader, int i, int i2)
+            throws RemoteException;
 
-    void getCursorCapsMode(InputConnectionCommandHeader inputConnectionCommandHeader, int i, AndroidFuture androidFuture) throws RemoteException;
+    void getCursorCapsMode(
+            InputConnectionCommandHeader inputConnectionCommandHeader,
+            int i,
+            AndroidFuture androidFuture)
+            throws RemoteException;
 
-    void getSurroundingText(InputConnectionCommandHeader inputConnectionCommandHeader, int i, int i2, int i3, AndroidFuture androidFuture) throws RemoteException;
+    void getSurroundingText(
+            InputConnectionCommandHeader inputConnectionCommandHeader,
+            int i,
+            int i2,
+            int i3,
+            AndroidFuture androidFuture)
+            throws RemoteException;
 
-    void performContextMenuAction(InputConnectionCommandHeader inputConnectionCommandHeader, int i) throws RemoteException;
+    void performContextMenuAction(InputConnectionCommandHeader inputConnectionCommandHeader, int i)
+            throws RemoteException;
 
-    void performEditorAction(InputConnectionCommandHeader inputConnectionCommandHeader, int i) throws RemoteException;
+    void performEditorAction(InputConnectionCommandHeader inputConnectionCommandHeader, int i)
+            throws RemoteException;
 
-    void sendKeyEvent(InputConnectionCommandHeader inputConnectionCommandHeader, KeyEvent keyEvent) throws RemoteException;
+    void sendKeyEvent(InputConnectionCommandHeader inputConnectionCommandHeader, KeyEvent keyEvent)
+            throws RemoteException;
 
-    void setSelection(InputConnectionCommandHeader inputConnectionCommandHeader, int i, int i2) throws RemoteException;
+    void setSelection(InputConnectionCommandHeader inputConnectionCommandHeader, int i, int i2)
+            throws RemoteException;
 
     public static class Default implements IRemoteAccessibilityInputConnection {
         @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-        public void commitText(InputConnectionCommandHeader header, CharSequence text, int newCursorPosition, TextAttribute textAttribute) throws RemoteException {
-        }
+        public void commitText(
+                InputConnectionCommandHeader header,
+                CharSequence text,
+                int newCursorPosition,
+                TextAttribute textAttribute)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-        public void setSelection(InputConnectionCommandHeader header, int start, int end) throws RemoteException {
-        }
+        public void setSelection(InputConnectionCommandHeader header, int start, int end)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-        public void getSurroundingText(InputConnectionCommandHeader header, int beforeLength, int afterLength, int flags, AndroidFuture future) throws RemoteException {
-        }
+        public void getSurroundingText(
+                InputConnectionCommandHeader header,
+                int beforeLength,
+                int afterLength,
+                int flags,
+                AndroidFuture future)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-        public void deleteSurroundingText(InputConnectionCommandHeader header, int beforeLength, int afterLength) throws RemoteException {
-        }
+        public void deleteSurroundingText(
+                InputConnectionCommandHeader header, int beforeLength, int afterLength)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-        public void sendKeyEvent(InputConnectionCommandHeader header, KeyEvent event) throws RemoteException {
-        }
+        public void sendKeyEvent(InputConnectionCommandHeader header, KeyEvent event)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-        public void performEditorAction(InputConnectionCommandHeader header, int actionCode) throws RemoteException {
-        }
+        public void performEditorAction(InputConnectionCommandHeader header, int actionCode)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-        public void performContextMenuAction(InputConnectionCommandHeader header, int id) throws RemoteException {
-        }
+        public void performContextMenuAction(InputConnectionCommandHeader header, int id)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-        public void getCursorCapsMode(InputConnectionCommandHeader header, int reqModes, AndroidFuture future) throws RemoteException {
-        }
+        public void getCursorCapsMode(
+                InputConnectionCommandHeader header, int reqModes, AndroidFuture future)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-        public void clearMetaKeyStates(InputConnectionCommandHeader header, int states) throws RemoteException {
-        }
+        public void clearMetaKeyStates(InputConnectionCommandHeader header, int states)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -75,7 +110,8 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteAccessibilityInputConnection {
+    public abstract static class Stub extends Binder
+            implements IRemoteAccessibilityInputConnection {
         static final int TRANSACTION_clearMetaKeyStates = 9;
         static final int TRANSACTION_commitText = 1;
         static final int TRANSACTION_deleteSurroundingText = 4;
@@ -94,7 +130,8 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IRemoteAccessibilityInputConnection.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IRemoteAccessibilityInputConnection.DESCRIPTOR);
             if (iin != null && (iin instanceof IRemoteAccessibilityInputConnection)) {
                 return (IRemoteAccessibilityInputConnection) iin;
             }
@@ -137,7 +174,8 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteAccessibilityInputConnection.DESCRIPTOR);
             }
@@ -147,63 +185,85 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             }
             switch (code) {
                 case 1:
-                    InputConnectionCommandHeader _arg0 = (InputConnectionCommandHeader) data.readTypedObject(InputConnectionCommandHeader.CREATOR);
-                    CharSequence _arg1 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    InputConnectionCommandHeader _arg0 =
+                            (InputConnectionCommandHeader)
+                                    data.readTypedObject(InputConnectionCommandHeader.CREATOR);
+                    CharSequence _arg1 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     int _arg2 = data.readInt();
-                    TextAttribute _arg3 = (TextAttribute) data.readTypedObject(TextAttribute.CREATOR);
+                    TextAttribute _arg3 =
+                            (TextAttribute) data.readTypedObject(TextAttribute.CREATOR);
                     data.enforceNoDataAvail();
                     commitText(_arg0, _arg1, _arg2, _arg3);
                     return true;
                 case 2:
-                    InputConnectionCommandHeader _arg02 = (InputConnectionCommandHeader) data.readTypedObject(InputConnectionCommandHeader.CREATOR);
+                    InputConnectionCommandHeader _arg02 =
+                            (InputConnectionCommandHeader)
+                                    data.readTypedObject(InputConnectionCommandHeader.CREATOR);
                     int _arg12 = data.readInt();
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
                     setSelection(_arg02, _arg12, _arg22);
                     return true;
                 case 3:
-                    InputConnectionCommandHeader _arg03 = (InputConnectionCommandHeader) data.readTypedObject(InputConnectionCommandHeader.CREATOR);
+                    InputConnectionCommandHeader _arg03 =
+                            (InputConnectionCommandHeader)
+                                    data.readTypedObject(InputConnectionCommandHeader.CREATOR);
                     int _arg13 = data.readInt();
                     int _arg23 = data.readInt();
                     int _arg32 = data.readInt();
-                    AndroidFuture _arg4 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg4 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getSurroundingText(_arg03, _arg13, _arg23, _arg32, _arg4);
                     return true;
                 case 4:
-                    InputConnectionCommandHeader _arg04 = (InputConnectionCommandHeader) data.readTypedObject(InputConnectionCommandHeader.CREATOR);
+                    InputConnectionCommandHeader _arg04 =
+                            (InputConnectionCommandHeader)
+                                    data.readTypedObject(InputConnectionCommandHeader.CREATOR);
                     int _arg14 = data.readInt();
                     int _arg24 = data.readInt();
                     data.enforceNoDataAvail();
                     deleteSurroundingText(_arg04, _arg14, _arg24);
                     return true;
                 case 5:
-                    InputConnectionCommandHeader _arg05 = (InputConnectionCommandHeader) data.readTypedObject(InputConnectionCommandHeader.CREATOR);
+                    InputConnectionCommandHeader _arg05 =
+                            (InputConnectionCommandHeader)
+                                    data.readTypedObject(InputConnectionCommandHeader.CREATOR);
                     KeyEvent _arg15 = (KeyEvent) data.readTypedObject(KeyEvent.CREATOR);
                     data.enforceNoDataAvail();
                     sendKeyEvent(_arg05, _arg15);
                     return true;
                 case 6:
-                    InputConnectionCommandHeader _arg06 = (InputConnectionCommandHeader) data.readTypedObject(InputConnectionCommandHeader.CREATOR);
+                    InputConnectionCommandHeader _arg06 =
+                            (InputConnectionCommandHeader)
+                                    data.readTypedObject(InputConnectionCommandHeader.CREATOR);
                     int _arg16 = data.readInt();
                     data.enforceNoDataAvail();
                     performEditorAction(_arg06, _arg16);
                     return true;
                 case 7:
-                    InputConnectionCommandHeader _arg07 = (InputConnectionCommandHeader) data.readTypedObject(InputConnectionCommandHeader.CREATOR);
+                    InputConnectionCommandHeader _arg07 =
+                            (InputConnectionCommandHeader)
+                                    data.readTypedObject(InputConnectionCommandHeader.CREATOR);
                     int _arg17 = data.readInt();
                     data.enforceNoDataAvail();
                     performContextMenuAction(_arg07, _arg17);
                     return true;
                 case 8:
-                    InputConnectionCommandHeader _arg08 = (InputConnectionCommandHeader) data.readTypedObject(InputConnectionCommandHeader.CREATOR);
+                    InputConnectionCommandHeader _arg08 =
+                            (InputConnectionCommandHeader)
+                                    data.readTypedObject(InputConnectionCommandHeader.CREATOR);
                     int _arg18 = data.readInt();
-                    AndroidFuture _arg25 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg25 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getCursorCapsMode(_arg08, _arg18, _arg25);
                     return true;
                 case 9:
-                    InputConnectionCommandHeader _arg09 = (InputConnectionCommandHeader) data.readTypedObject(InputConnectionCommandHeader.CREATOR);
+                    InputConnectionCommandHeader _arg09 =
+                            (InputConnectionCommandHeader)
+                                    data.readTypedObject(InputConnectionCommandHeader.CREATOR);
                     int _arg19 = data.readInt();
                     data.enforceNoDataAvail();
                     clearMetaKeyStates(_arg09, _arg19);
@@ -230,7 +290,12 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-            public void commitText(InputConnectionCommandHeader header, CharSequence text, int newCursorPosition, TextAttribute textAttribute) throws RemoteException {
+            public void commitText(
+                    InputConnectionCommandHeader header,
+                    CharSequence text,
+                    int newCursorPosition,
+                    TextAttribute textAttribute)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
@@ -250,7 +315,8 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-            public void setSelection(InputConnectionCommandHeader header, int start, int end) throws RemoteException {
+            public void setSelection(InputConnectionCommandHeader header, int start, int end)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
@@ -264,7 +330,13 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-            public void getSurroundingText(InputConnectionCommandHeader header, int beforeLength, int afterLength, int flags, AndroidFuture future) throws RemoteException {
+            public void getSurroundingText(
+                    InputConnectionCommandHeader header,
+                    int beforeLength,
+                    int afterLength,
+                    int flags,
+                    AndroidFuture future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
@@ -280,7 +352,9 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-            public void deleteSurroundingText(InputConnectionCommandHeader header, int beforeLength, int afterLength) throws RemoteException {
+            public void deleteSurroundingText(
+                    InputConnectionCommandHeader header, int beforeLength, int afterLength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
@@ -294,7 +368,8 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-            public void sendKeyEvent(InputConnectionCommandHeader header, KeyEvent event) throws RemoteException {
+            public void sendKeyEvent(InputConnectionCommandHeader header, KeyEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
@@ -307,7 +382,8 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-            public void performEditorAction(InputConnectionCommandHeader header, int actionCode) throws RemoteException {
+            public void performEditorAction(InputConnectionCommandHeader header, int actionCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
@@ -320,7 +396,8 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-            public void performContextMenuAction(InputConnectionCommandHeader header, int id) throws RemoteException {
+            public void performContextMenuAction(InputConnectionCommandHeader header, int id)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
@@ -333,7 +410,9 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-            public void getCursorCapsMode(InputConnectionCommandHeader header, int reqModes, AndroidFuture future) throws RemoteException {
+            public void getCursorCapsMode(
+                    InputConnectionCommandHeader header, int reqModes, AndroidFuture future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);
@@ -347,7 +426,8 @@ public interface IRemoteAccessibilityInputConnection extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IRemoteAccessibilityInputConnection
-            public void clearMetaKeyStates(InputConnectionCommandHeader header, int states) throws RemoteException {
+            public void clearMetaKeyStates(InputConnectionCommandHeader header, int states)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteAccessibilityInputConnection.DESCRIPTOR);

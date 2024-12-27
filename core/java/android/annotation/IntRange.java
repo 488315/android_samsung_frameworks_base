@@ -5,7 +5,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.ANNOTATION_TYPE})
+@Target({
+    ElementType.METHOD,
+    ElementType.PARAMETER,
+    ElementType.FIELD,
+    ElementType.LOCAL_VARIABLE,
+    ElementType.ANNOTATION_TYPE
+})
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
 public @interface IntRange {

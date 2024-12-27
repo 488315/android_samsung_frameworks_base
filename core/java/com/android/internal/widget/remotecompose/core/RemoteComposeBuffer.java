@@ -1,6 +1,7 @@
 package com.android.internal.widget.remotecompose.core;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.widget.remotecompose.core.operations.BitmapData;
 import com.android.internal.widget.remotecompose.core.operations.ClickArea;
 import com.android.internal.widget.remotecompose.core.operations.ClipPath;
@@ -39,6 +40,7 @@ import com.android.internal.widget.remotecompose.core.operations.Theme;
 import com.android.internal.widget.remotecompose.core.operations.Utils;
 import com.android.internal.widget.remotecompose.core.operations.paint.PaintBundle;
 import com.android.internal.widget.remotecompose.core.operations.utilities.easing.FloatAnimation;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -108,7 +110,19 @@ public class RemoteComposeBuffer {
         header(width, height, contentDescription, 0L);
     }
 
-    public void drawBitmap(Object image, int imageWidth, int imageHeight, int srcLeft, int srcTop, int srcRight, int srcBottom, int dstLeft, int dstTop, int dstRight, int dstBottom, String contentDescription) {
+    public void drawBitmap(
+            Object image,
+            int imageWidth,
+            int imageHeight,
+            int srcLeft,
+            int srcTop,
+            int srcRight,
+            int srcBottom,
+            int dstLeft,
+            int dstTop,
+            int dstRight,
+            int dstBottom,
+            String contentDescription) {
         int imageId = this.mRemoteComposeState.dataGetId(image);
         if (imageId == -1) {
             imageId = this.mRemoteComposeState.cache(image);
@@ -119,7 +133,18 @@ public class RemoteComposeBuffer {
         if (contentDescription != null) {
             contentDescriptionId = addText(contentDescription);
         }
-        DrawBitmapInt.COMPANION.apply(this.mBuffer, imageId, srcLeft, srcTop, srcRight, srcBottom, dstLeft, dstTop, dstRight, dstBottom, contentDescriptionId);
+        DrawBitmapInt.COMPANION.apply(
+                this.mBuffer,
+                imageId,
+                srcLeft,
+                srcTop,
+                srcRight,
+                srcBottom,
+                dstLeft,
+                dstTop,
+                dstRight,
+                dstBottom,
+                contentDescriptionId);
     }
 
     public int addText(String text) {
@@ -132,7 +157,14 @@ public class RemoteComposeBuffer {
         return id;
     }
 
-    public void addClickArea(int id, String contentDescription, float left, float top, float right, float bottom, String metadata) {
+    public void addClickArea(
+            int id,
+            String contentDescription,
+            float left,
+            float top,
+            float right,
+            float bottom,
+            String metadata) {
         int metadataId;
         int contentDescriptionId = contentDescription != null ? addText(contentDescription) : 0;
         if (metadata == null) {
@@ -141,18 +173,26 @@ public class RemoteComposeBuffer {
             int metadataId2 = addText(metadata);
             metadataId = metadataId2;
         }
-        ClickArea.COMPANION.apply(this.mBuffer, id, contentDescriptionId, left, top, right, bottom, metadataId);
+        ClickArea.COMPANION.apply(
+                this.mBuffer, id, contentDescriptionId, left, top, right, bottom, metadataId);
     }
 
     public void setRootContentBehavior(int scroll, int alignment, int sizing, int mode) {
         RootContentBehavior.COMPANION.apply(this.mBuffer, scroll, alignment, sizing, mode);
     }
 
-    public void addDrawArc(float left, float top, float right, float bottom, float startAngle, float sweepAngle) {
+    public void addDrawArc(
+            float left, float top, float right, float bottom, float startAngle, float sweepAngle) {
         DrawArc.COMPANION.apply(this.mBuffer, left, top, right, bottom, startAngle, sweepAngle);
     }
 
-    public void addDrawBitmap(Object image, float left, float top, float right, float bottom, String contentDescription) {
+    public void addDrawBitmap(
+            Object image,
+            float left,
+            float top,
+            float right,
+            float bottom,
+            String contentDescription) {
         int imageId = this.mRemoteComposeState.dataGetId(image);
         if (imageId == -1) {
             imageId = this.mRemoteComposeState.cache(image);
@@ -165,7 +205,8 @@ public class RemoteComposeBuffer {
         if (contentDescription != null) {
             contentDescriptionId = addText(contentDescription);
         }
-        DrawBitmap.COMPANION.apply(this.mBuffer, imageId, left, top, right, bottom, contentDescriptionId);
+        DrawBitmap.COMPANION.apply(
+                this.mBuffer, imageId, left, top, right, bottom, contentDescriptionId);
     }
 
     public void addDrawCircle(float centerX, float centerY, float radius) {
@@ -196,7 +237,8 @@ public class RemoteComposeBuffer {
         DrawRect.COMPANION.apply(this.mBuffer, left, top, right, bottom);
     }
 
-    public void addDrawRoundRect(float left, float top, float right, float bottom, float radiusX, float radiusY) {
+    public void addDrawRoundRect(
+            float left, float top, float right, float bottom, float radiusX, float radiusY) {
         DrawRoundRect.COMPANION.apply(this.mBuffer, left, top, right, bottom, radiusX, radiusY);
     }
 
@@ -209,13 +251,31 @@ public class RemoteComposeBuffer {
         DrawTextOnPath.COMPANION.apply(this.mBuffer, textId, pathId, hOffset, vOffset);
     }
 
-    public void addDrawTextRun(String text, int start, int end, int contextStart, int contextEnd, float x, float y, boolean rtl) {
+    public void addDrawTextRun(
+            String text,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            float x,
+            float y,
+            boolean rtl) {
         int textId = addText(text);
-        DrawText.COMPANION.apply(this.mBuffer, textId, start, end, contextStart, contextEnd, x, y, rtl);
+        DrawText.COMPANION.apply(
+                this.mBuffer, textId, start, end, contextStart, contextEnd, x, y, rtl);
     }
 
-    public void addDrawTextRun(int textId, int start, int end, int contextStart, int contextEnd, float x, float y, boolean rtl) {
-        DrawText.COMPANION.apply(this.mBuffer, textId, start, end, contextStart, contextEnd, x, y, rtl);
+    public void addDrawTextRun(
+            int textId,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            float x,
+            float y,
+            boolean rtl) {
+        DrawText.COMPANION.apply(
+                this.mBuffer, textId, start, end, contextStart, contextEnd, x, y, rtl);
     }
 
     public void drawTextAnchored(String text, float x, float y, float panX, float panY, int flags) {
@@ -234,7 +294,15 @@ public class RemoteComposeBuffer {
     }
 
     public int createTextFromFloat(float value, short digitsBefore, short digitsAfter, int flags) {
-        String placeHolder = Utils.floatToString(value) + NavigationBarInflaterView.KEY_CODE_START + ((int) digitsBefore) + "," + ((int) digitsAfter) + "," + flags + NavigationBarInflaterView.KEY_CODE_END;
+        String placeHolder =
+                Utils.floatToString(value)
+                        + NavigationBarInflaterView.KEY_CODE_START
+                        + ((int) digitsBefore)
+                        + ","
+                        + ((int) digitsAfter)
+                        + ","
+                        + flags
+                        + NavigationBarInflaterView.KEY_CODE_END;
         int id = this.mRemoteComposeState.dataGetId(placeHolder);
         if (id == -1) {
             id = this.mRemoteComposeState.cache(placeHolder);
@@ -304,25 +372,29 @@ public class RemoteComposeBuffer {
         return "v1.0";
     }
 
-    public static RemoteComposeBuffer fromFile(String path, RemoteComposeState remoteComposeState) throws IOException {
+    public static RemoteComposeBuffer fromFile(String path, RemoteComposeState remoteComposeState)
+            throws IOException {
         RemoteComposeBuffer buffer = new RemoteComposeBuffer(remoteComposeState);
         read(new File(path), buffer);
         return buffer;
     }
 
-    public RemoteComposeBuffer fromFile(File file, RemoteComposeState remoteComposeState) throws IOException {
+    public RemoteComposeBuffer fromFile(File file, RemoteComposeState remoteComposeState)
+            throws IOException {
         RemoteComposeBuffer buffer = new RemoteComposeBuffer(remoteComposeState);
         read(file, buffer);
         return buffer;
     }
 
-    public static RemoteComposeBuffer fromInputStream(InputStream inputStream, RemoteComposeState remoteComposeState) {
+    public static RemoteComposeBuffer fromInputStream(
+            InputStream inputStream, RemoteComposeState remoteComposeState) {
         RemoteComposeBuffer buffer = new RemoteComposeBuffer(remoteComposeState);
         read(inputStream, buffer);
         return buffer;
     }
 
-    RemoteComposeBuffer copyFromOperations(ArrayList<Operation> operations, RemoteComposeBuffer buffer) {
+    RemoteComposeBuffer copyFromOperations(
+            ArrayList<Operation> operations, RemoteComposeBuffer buffer) {
         Iterator<Operation> it = operations.iterator();
         while (it.hasNext()) {
             Operation operation = it.next();
@@ -476,7 +548,8 @@ public class RemoteComposeBuffer {
         return id;
     }
 
-    public static float[] packAnimation(float duration, int type, float[] spec, float initialValue, float wrap) {
+    public static float[] packAnimation(
+            float duration, int type, float[] spec, float initialValue, float wrap) {
         return FloatAnimation.packToFloatArray(duration, type, spec, initialValue, wrap);
     }
 }

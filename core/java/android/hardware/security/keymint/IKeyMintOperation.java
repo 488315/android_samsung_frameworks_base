@@ -9,40 +9,57 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IKeyMintOperation extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$security$keymint$IKeyMintOperation".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$security$keymint$IKeyMintOperation".replace('$', '.');
     public static final String HASH = "74a538630d5d90f732f361a2313cbb69b09eb047";
     public static final int VERSION = 3;
 
     void abort() throws RemoteException;
 
-    byte[] finish(byte[] bArr, byte[] bArr2, HardwareAuthToken hardwareAuthToken, TimeStampToken timeStampToken, byte[] bArr3) throws RemoteException;
+    byte[] finish(
+            byte[] bArr,
+            byte[] bArr2,
+            HardwareAuthToken hardwareAuthToken,
+            TimeStampToken timeStampToken,
+            byte[] bArr3)
+            throws RemoteException;
 
     String getInterfaceHash() throws RemoteException;
 
     int getInterfaceVersion() throws RemoteException;
 
-    byte[] update(byte[] bArr, HardwareAuthToken hardwareAuthToken, TimeStampToken timeStampToken) throws RemoteException;
+    byte[] update(byte[] bArr, HardwareAuthToken hardwareAuthToken, TimeStampToken timeStampToken)
+            throws RemoteException;
 
-    void updateAad(byte[] bArr, HardwareAuthToken hardwareAuthToken, TimeStampToken timeStampToken) throws RemoteException;
+    void updateAad(byte[] bArr, HardwareAuthToken hardwareAuthToken, TimeStampToken timeStampToken)
+            throws RemoteException;
 
     public static class Default implements IKeyMintOperation {
         @Override // android.hardware.security.keymint.IKeyMintOperation
-        public void updateAad(byte[] input, HardwareAuthToken authToken, TimeStampToken timeStampToken) throws RemoteException {
-        }
+        public void updateAad(
+                byte[] input, HardwareAuthToken authToken, TimeStampToken timeStampToken)
+                throws RemoteException {}
 
         @Override // android.hardware.security.keymint.IKeyMintOperation
-        public byte[] update(byte[] input, HardwareAuthToken authToken, TimeStampToken timeStampToken) throws RemoteException {
+        public byte[] update(
+                byte[] input, HardwareAuthToken authToken, TimeStampToken timeStampToken)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.security.keymint.IKeyMintOperation
-        public byte[] finish(byte[] input, byte[] signature, HardwareAuthToken authToken, TimeStampToken timestampToken, byte[] confirmationToken) throws RemoteException {
+        public byte[] finish(
+                byte[] input,
+                byte[] signature,
+                HardwareAuthToken authToken,
+                TimeStampToken timestampToken,
+                byte[] confirmationToken)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.security.keymint.IKeyMintOperation
-        public void abort() throws RemoteException {
-        }
+        public void abort() throws RemoteException {}
 
         @Override // android.hardware.security.keymint.IKeyMintOperation
         public int getInterfaceVersion() {
@@ -60,7 +77,7 @@ public interface IKeyMintOperation extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyMintOperation {
+    public abstract static class Stub extends Binder implements IKeyMintOperation {
         static final int TRANSACTION_abort = 4;
         static final int TRANSACTION_finish = 3;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -114,7 +131,8 @@ public interface IKeyMintOperation extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -136,16 +154,20 @@ public interface IKeyMintOperation extends IInterface {
             switch (code) {
                 case 1:
                     byte[] _arg0 = data.createByteArray();
-                    HardwareAuthToken _arg1 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
-                    TimeStampToken _arg2 = (TimeStampToken) data.readTypedObject(TimeStampToken.CREATOR);
+                    HardwareAuthToken _arg1 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    TimeStampToken _arg2 =
+                            (TimeStampToken) data.readTypedObject(TimeStampToken.CREATOR);
                     data.enforceNoDataAvail();
                     updateAad(_arg0, _arg1, _arg2);
                     reply.writeNoException();
                     return true;
                 case 2:
                     byte[] _arg02 = data.createByteArray();
-                    HardwareAuthToken _arg12 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
-                    TimeStampToken _arg22 = (TimeStampToken) data.readTypedObject(TimeStampToken.CREATOR);
+                    HardwareAuthToken _arg12 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    TimeStampToken _arg22 =
+                            (TimeStampToken) data.readTypedObject(TimeStampToken.CREATOR);
                     data.enforceNoDataAvail();
                     byte[] _result = update(_arg02, _arg12, _arg22);
                     reply.writeNoException();
@@ -154,8 +176,10 @@ public interface IKeyMintOperation extends IInterface {
                 case 3:
                     byte[] _arg03 = data.createByteArray();
                     byte[] _arg13 = data.createByteArray();
-                    HardwareAuthToken _arg23 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
-                    TimeStampToken _arg3 = (TimeStampToken) data.readTypedObject(TimeStampToken.CREATOR);
+                    HardwareAuthToken _arg23 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    TimeStampToken _arg3 =
+                            (TimeStampToken) data.readTypedObject(TimeStampToken.CREATOR);
                     byte[] _arg4 = data.createByteArray();
                     data.enforceNoDataAvail();
                     byte[] _result2 = finish(_arg03, _arg13, _arg23, _arg3, _arg4);
@@ -190,7 +214,9 @@ public interface IKeyMintOperation extends IInterface {
             }
 
             @Override // android.hardware.security.keymint.IKeyMintOperation
-            public void updateAad(byte[] input, HardwareAuthToken authToken, TimeStampToken timeStampToken) throws RemoteException {
+            public void updateAad(
+                    byte[] input, HardwareAuthToken authToken, TimeStampToken timeStampToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -211,7 +237,9 @@ public interface IKeyMintOperation extends IInterface {
             }
 
             @Override // android.hardware.security.keymint.IKeyMintOperation
-            public byte[] update(byte[] input, HardwareAuthToken authToken, TimeStampToken timeStampToken) throws RemoteException {
+            public byte[] update(
+                    byte[] input, HardwareAuthToken authToken, TimeStampToken timeStampToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -234,7 +262,13 @@ public interface IKeyMintOperation extends IInterface {
             }
 
             @Override // android.hardware.security.keymint.IKeyMintOperation
-            public byte[] finish(byte[] input, byte[] signature, HardwareAuthToken authToken, TimeStampToken timestampToken, byte[] confirmationToken) throws RemoteException {
+            public byte[] finish(
+                    byte[] input,
+                    byte[] signature,
+                    HardwareAuthToken authToken,
+                    TimeStampToken timestampToken,
+                    byte[] confirmationToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();

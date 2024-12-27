@@ -1,9 +1,9 @@
 package android.service.notification;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.service.notification.ZenModeConfig;
 import android.util.ArraySet;
 import android.util.Log;
+
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.TimeZone;
@@ -17,7 +17,11 @@ public class ScheduleCalendar {
     private final Calendar mCalendar = Calendar.getInstance();
 
     public String toString() {
-        return "ScheduleCalendar[mDays=" + this.mDays + ", mSchedule=" + this.mSchedule + NavigationBarInflaterView.SIZE_MOD_END;
+        return "ScheduleCalendar[mDays="
+                + this.mDays
+                + ", mSchedule="
+                + this.mSchedule
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public boolean exitAtAlarm() {
@@ -58,7 +62,8 @@ public class ScheduleCalendar {
         if (this.mSchedule == null) {
             return 0L;
         }
-        long nextStart = getNextTime(now, this.mSchedule.startHour, this.mSchedule.startMinute, true);
+        long nextStart =
+                getNextTime(now, this.mSchedule.startHour, this.mSchedule.startMinute, true);
         long nextEnd = getNextTime(now, this.mSchedule.endHour, this.mSchedule.endMinute, false);
         long nextScheduleTime = Math.min(nextStart, nextEnd);
         return nextScheduleTime;
@@ -87,7 +92,8 @@ public class ScheduleCalendar {
         if (this.mSchedule == null || this.mDays.size() == 0) {
             return false;
         }
-        long start = getClosestActualTime(time, this.mSchedule.startHour, this.mSchedule.startMinute);
+        long start =
+                getClosestActualTime(time, this.mSchedule.startHour, this.mSchedule.startMinute);
         long end2 = getTime(time, this.mSchedule.endHour, this.mSchedule.endMinute);
         if (end2 > start) {
             end = end2;
@@ -102,23 +108,31 @@ public class ScheduleCalendar {
         if (this.mSchedule == null || this.mDays.size() == 0) {
             return false;
         }
-        long start = getClosestActualTime(alarm, this.mSchedule.startHour, this.mSchedule.startMinute);
+        long start =
+                getClosestActualTime(alarm, this.mSchedule.startHour, this.mSchedule.startMinute);
         long end2 = getTime(alarm, this.mSchedule.endHour, this.mSchedule.endMinute);
         if (end2 > start) {
             end = end2;
         } else {
             end = addDays(end2, 1);
         }
-        return (isInSchedule(-1, alarm, start, end) && isInSchedule(-1, now, start, end)) || (isInSchedule(0, alarm, start, end) && isInSchedule(0, now, start, end));
+        return (isInSchedule(-1, alarm, start, end) && isInSchedule(-1, now, start, end))
+                || (isInSchedule(0, alarm, start, end) && isInSchedule(0, now, start, end));
     }
 
     public boolean shouldExitForAlarm(long time) {
-        return this.mSchedule != null && this.mSchedule.exitAtAlarm && this.mSchedule.nextAlarm != 0 && time >= this.mSchedule.nextAlarm && isAlarmInSchedule(this.mSchedule.nextAlarm, time);
+        return this.mSchedule != null
+                && this.mSchedule.exitAtAlarm
+                && this.mSchedule.nextAlarm != 0
+                && time >= this.mSchedule.nextAlarm
+                && isAlarmInSchedule(this.mSchedule.nextAlarm, time);
     }
 
     private boolean isInSchedule(int daysOffset, long time, long start, long end) {
         int day = ((((getDayOfWeek(time) - 1) + (daysOffset % 7)) + 7) % 7) + 1;
-        return this.mDays.contains(Integer.valueOf(day)) && time >= addDays(start, daysOffset) && time < addDays(end, daysOffset);
+        return this.mDays.contains(Integer.valueOf(day))
+                && time >= addDays(start, daysOffset)
+                && time < addDays(end, daysOffset);
     }
 
     private int getDayOfWeek(long time) {

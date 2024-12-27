@@ -6,6 +6,7 @@ import android.os.Message;
 import android.os.Trace;
 import android.view.Surface;
 import android.view.flags.Flags;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes.dex */
@@ -38,7 +39,9 @@ public class SurfaceTexture {
 
     private native void nativeGetTransformMatrix(float[] fArr);
 
-    private native void nativeInit(boolean z, int i, boolean z2, WeakReference<SurfaceTexture> weakReference) throws Surface.OutOfResourcesException;
+    private native void nativeInit(
+            boolean z, int i, boolean z2, WeakReference<SurfaceTexture> weakReference)
+            throws Surface.OutOfResourcesException;
 
     private native boolean nativeIsReleased();
 
@@ -52,8 +55,7 @@ public class SurfaceTexture {
 
     @Deprecated
     public static class OutOfResourcesException extends Exception {
-        public OutOfResourcesException() {
-        }
+        public OutOfResourcesException() {}
 
         public OutOfResourcesException(String name) {
             super(name);
@@ -80,7 +82,8 @@ public class SurfaceTexture {
         setOnFrameAvailableListener(listener, null);
     }
 
-    public void setOnFrameAvailableListener(final OnFrameAvailableListener listener, Handler handler) {
+    public void setOnFrameAvailableListener(
+            final OnFrameAvailableListener listener, Handler handler) {
         Looper looper;
         if (listener != null) {
             if (handler != null) {
@@ -88,12 +91,14 @@ public class SurfaceTexture {
             } else {
                 looper = this.mCreatorLooper != null ? this.mCreatorLooper : Looper.getMainLooper();
             }
-            this.mOnFrameAvailableHandler = new Handler(looper, null, true) { // from class: android.graphics.SurfaceTexture.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    listener.onFrameAvailable(SurfaceTexture.this);
-                }
-            };
+            this.mOnFrameAvailableHandler =
+                    new Handler(
+                            looper, null, true) { // from class: android.graphics.SurfaceTexture.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            listener.onFrameAvailable(SurfaceTexture.this);
+                        }
+                    };
             return;
         }
         this.mOnFrameAvailableHandler = null;
@@ -119,18 +124,24 @@ public class SurfaceTexture {
             } else {
                 looper = this.mCreatorLooper != null ? this.mCreatorLooper : Looper.getMainLooper();
             }
-            this.mOnSetFrameRateHandler = new Handler(looper, null, true) { // from class: android.graphics.SurfaceTexture.2
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    Trace.traceBegin(8L, "onSetFrameRateHandler");
-                    try {
-                        SetFrameRateArgs args = (SetFrameRateArgs) msg.obj;
-                        listener.onSetFrameRate(SurfaceTexture.this, args.mFrameRate, args.mCompatibility, args.mChangeFrameRateStrategy);
-                    } finally {
-                        Trace.traceEnd(8L);
-                    }
-                }
-            };
+            this.mOnSetFrameRateHandler =
+                    new Handler(
+                            looper, null, true) { // from class: android.graphics.SurfaceTexture.2
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            Trace.traceBegin(8L, "onSetFrameRateHandler");
+                            try {
+                                SetFrameRateArgs args = (SetFrameRateArgs) msg.obj;
+                                listener.onSetFrameRate(
+                                        SurfaceTexture.this,
+                                        args.mFrameRate,
+                                        args.mCompatibility,
+                                        args.mChangeFrameRateStrategy);
+                            } finally {
+                                Trace.traceEnd(8L);
+                            }
+                        }
+                    };
             return;
         }
         this.mOnSetFrameRateHandler = null;
@@ -201,12 +212,18 @@ public class SurfaceTexture {
         }
     }
 
-    private static void postOnSetFrameRateEventFromNative(WeakReference<SurfaceTexture> weakSelf, float frameRate, int compatibility, int changeFrameRateStrategy) {
+    private static void postOnSetFrameRateEventFromNative(
+            WeakReference<SurfaceTexture> weakSelf,
+            float frameRate,
+            int compatibility,
+            int changeFrameRateStrategy) {
         SurfaceTexture st;
         Handler handler;
         Trace.traceBegin(8L, "postOnSetFrameRateEventFromNative");
         try {
-            if (Flags.toolkitSetFrameRateReadOnly() && (st = weakSelf.get()) != null && (handler = st.mOnSetFrameRateHandler) != null) {
+            if (Flags.toolkitSetFrameRateReadOnly()
+                    && (st = weakSelf.get()) != null
+                    && (handler = st.mOnSetFrameRateHandler) != null) {
                 Message msg = new Message();
                 msg.obj = new SetFrameRateArgs(frameRate, compatibility, changeFrameRateStrategy);
                 handler.sendMessage(msg);

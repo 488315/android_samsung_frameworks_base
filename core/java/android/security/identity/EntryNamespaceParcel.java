@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class EntryNamespaceParcel implements Parcelable {
-    public static final Parcelable.Creator<EntryNamespaceParcel> CREATOR = new Parcelable.Creator<EntryNamespaceParcel>() { // from class: android.security.identity.EntryNamespaceParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EntryNamespaceParcel createFromParcel(Parcel _aidl_source) {
-            EntryNamespaceParcel _aidl_out = new EntryNamespaceParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<EntryNamespaceParcel> CREATOR =
+            new Parcelable.Creator<
+                    EntryNamespaceParcel>() { // from class:
+                                              // android.security.identity.EntryNamespaceParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EntryNamespaceParcel createFromParcel(Parcel _aidl_source) {
+                    EntryNamespaceParcel _aidl_out = new EntryNamespaceParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EntryNamespaceParcel[] newArray(int _aidl_size) {
-            return new EntryNamespaceParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EntryNamespaceParcel[] newArray(int _aidl_size) {
+                    return new EntryNamespaceParcel[_aidl_size];
+                }
+            };
     public EntryParcel[] entries;
     public String namespaceName;
 

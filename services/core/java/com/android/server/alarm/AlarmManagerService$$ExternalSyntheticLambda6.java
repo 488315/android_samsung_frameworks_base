@@ -2,13 +2,16 @@ package com.android.server.alarm;
 
 import android.content.Intent;
 import android.os.UserHandle;
+
 import com.android.internal.util.jobs.ArrayUtils;
 import com.android.server.ProfileService$1$$ExternalSyntheticOutline0;
+
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class AlarmManagerService$$ExternalSyntheticLambda6 implements Predicate {
+public final /* synthetic */ class AlarmManagerService$$ExternalSyntheticLambda6
+        implements Predicate {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -25,7 +28,9 @@ public final /* synthetic */ class AlarmManagerService$$ExternalSyntheticLambda6
             case 0:
                 Alarm alarm = (Alarm) obj;
                 Intent intent = AlarmManagerService.NEXT_ALARM_CLOCK_CHANGED_INTENT;
-                if (!ArrayUtils.contains((int[]) obj2, alarm.uid) || alarm.listener == null || alarm.windowLength != 0) {
+                if (!ArrayUtils.contains((int[]) obj2, alarm.uid)
+                        || alarm.listener == null
+                        || alarm.windowLength != 0) {
                     return false;
                 }
                 StringBuilder sb = new StringBuilder("Alarm ");
@@ -33,7 +38,8 @@ public final /* synthetic */ class AlarmManagerService$$ExternalSyntheticLambda6
                 sb.append(" being removed for ");
                 sb.append(UserHandle.formatUid(alarm.uid));
                 sb.append(":");
-                ProfileService$1$$ExternalSyntheticOutline0.m(sb, alarm.packageName, " because the app got frozen", "AlarmManager");
+                ProfileService$1$$ExternalSyntheticOutline0.m(
+                        sb, alarm.packageName, " because the app got frozen", "AlarmManager");
                 return true;
             case 1:
                 Intent intent2 = AlarmManagerService.NEXT_ALARM_CLOCK_CHANGED_INTENT;

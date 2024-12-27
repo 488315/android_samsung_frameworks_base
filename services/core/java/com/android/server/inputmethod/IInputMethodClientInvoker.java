@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.util.Slog;
 import android.view.InputChannel;
+
 import com.android.internal.inputmethod.IInputMethodClient;
 import com.android.internal.inputmethod.InputBindResult;
 
@@ -15,7 +16,8 @@ public final class IInputMethodClientInvoker {
     public final boolean mIsProxy;
     public final IInputMethodClient mTarget;
 
-    public IInputMethodClientInvoker(IInputMethodClient iInputMethodClient, boolean z, Handler handler) {
+    public IInputMethodClientInvoker(
+            IInputMethodClient iInputMethodClient, boolean z, Handler handler) {
         this.mTarget = iInputMethodClient;
         this.mIsProxy = z;
         this.mHandler = handler;
@@ -27,7 +29,8 @@ public final class IInputMethodClientInvoker {
         }
         StringBuilder sb = new StringBuilder("IPC failed at IInputMethodClientInvoker#");
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-        sb.append(stackTrace.length <= 4 ? "<bottom of call stack>" : stackTrace[4].getMethodName());
+        sb.append(
+                stackTrace.length <= 4 ? "<bottom of call stack>" : stackTrace[4].getMethodName());
         Slog.w("InputMethodManagerService", sb.toString(), remoteException);
     }
 
@@ -114,7 +117,8 @@ public final class IInputMethodClientInvoker {
 
     public final void setActive(boolean z, boolean z2) {
         if (!this.mIsProxy) {
-            this.mHandler.post(new IInputMethodClientInvoker$$ExternalSyntheticLambda2(this, z, z2, 1));
+            this.mHandler.post(
+                    new IInputMethodClientInvoker$$ExternalSyntheticLambda2(this, z, z2, 1));
         } else {
             try {
                 this.mTarget.setActive(z, z2);

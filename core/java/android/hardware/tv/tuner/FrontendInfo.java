@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class FrontendInfo implements Parcelable {
-    public static final Parcelable.Creator<FrontendInfo> CREATOR = new Parcelable.Creator<FrontendInfo>() { // from class: android.hardware.tv.tuner.FrontendInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendInfo createFromParcel(Parcel _aidl_source) {
-            FrontendInfo _aidl_out = new FrontendInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FrontendInfo> CREATOR =
+            new Parcelable.Creator<
+                    FrontendInfo>() { // from class: android.hardware.tv.tuner.FrontendInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendInfo createFromParcel(Parcel _aidl_source) {
+                    FrontendInfo _aidl_out = new FrontendInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendInfo[] newArray(int _aidl_size) {
-            return new FrontendInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendInfo[] newArray(int _aidl_size) {
+                    return new FrontendInfo[_aidl_size];
+                }
+            };
     public FrontendCapabilities frontendCaps;
     public int[] statusCaps;
     public int type = 0;
@@ -132,7 +134,9 @@ public class FrontendInfo implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.frontendCaps = (FrontendCapabilities) _aidl_parcel.readTypedObject(FrontendCapabilities.CREATOR);
+                this.frontendCaps =
+                        (FrontendCapabilities)
+                                _aidl_parcel.readTypedObject(FrontendCapabilities.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

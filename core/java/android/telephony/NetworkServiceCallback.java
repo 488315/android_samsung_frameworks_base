@@ -2,6 +2,7 @@ package android.telephony;
 
 import android.annotation.SystemApi;
 import android.os.RemoteException;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -18,23 +19,25 @@ public class NetworkServiceCallback {
     private final INetworkServiceCallback mCallback;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Result {
-    }
+    public @interface Result {}
 
     public NetworkServiceCallback(INetworkServiceCallback callback) {
         this.mCallback = callback;
     }
 
-    public void onRequestNetworkRegistrationInfoComplete(int result, NetworkRegistrationInfo state) {
+    public void onRequestNetworkRegistrationInfoComplete(
+            int result, NetworkRegistrationInfo state) {
         if (this.mCallback != null) {
             try {
                 this.mCallback.onRequestNetworkRegistrationInfoComplete(result, state);
                 return;
             } catch (RemoteException e) {
-                com.android.telephony.Rlog.e(mTag, "Failed to onRequestNetworkRegistrationInfoComplete on the remote");
+                com.android.telephony.Rlog.e(
+                        mTag, "Failed to onRequestNetworkRegistrationInfoComplete on the remote");
                 return;
             }
         }
-        com.android.telephony.Rlog.e(mTag, "onRequestNetworkRegistrationInfoComplete callback is null.");
+        com.android.telephony.Rlog.e(
+                mTag, "onRequestNetworkRegistrationInfoComplete callback is null.");
     }
 }

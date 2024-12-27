@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 /* loaded from: classes4.dex */
 public class ViewSwitcher extends ViewAnimator {
@@ -30,7 +29,8 @@ public class ViewSwitcher extends ViewAnimator {
         super.addView(child, index, params);
     }
 
-    @Override // android.widget.ViewAnimator, android.widget.FrameLayout, android.view.ViewGroup, android.view.View
+    @Override // android.widget.ViewAnimator, android.widget.FrameLayout, android.view.ViewGroup,
+              // android.view.View
     public CharSequence getAccessibilityClassName() {
         return ViewSwitcher.class.getName();
     }

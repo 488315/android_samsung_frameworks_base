@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ArchivedPackageParcel implements Parcelable {
-    public static final Parcelable.Creator<ArchivedPackageParcel> CREATOR = new Parcelable.Creator<ArchivedPackageParcel>() { // from class: android.content.pm.ArchivedPackageParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ArchivedPackageParcel createFromParcel(Parcel _aidl_source) {
-            ArchivedPackageParcel _aidl_out = new ArchivedPackageParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ArchivedPackageParcel> CREATOR =
+            new Parcelable.Creator<ArchivedPackageParcel>() { // from class:
+                // android.content.pm.ArchivedPackageParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ArchivedPackageParcel createFromParcel(Parcel _aidl_source) {
+                    ArchivedPackageParcel _aidl_out = new ArchivedPackageParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ArchivedPackageParcel[] newArray(int _aidl_size) {
-            return new ArchivedPackageParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ArchivedPackageParcel[] newArray(int _aidl_size) {
+                    return new ArchivedPackageParcel[_aidl_size];
+                }
+            };
     public ArchivedActivityParcel[] archivedActivities;
     public String defaultToDeviceProtectedStorage;
     public String packageName;
@@ -72,7 +74,8 @@ public class ArchivedPackageParcel implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.signingDetails = (SigningDetails) _aidl_parcel.readTypedObject(SigningDetails.CREATOR);
+            this.signingDetails =
+                    (SigningDetails) _aidl_parcel.readTypedObject(SigningDetails.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -127,7 +130,9 @@ public class ArchivedPackageParcel implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.archivedActivities = (ArchivedActivityParcel[]) _aidl_parcel.createTypedArray(ArchivedActivityParcel.CREATOR);
+                this.archivedActivities =
+                        (ArchivedActivityParcel[])
+                                _aidl_parcel.createTypedArray(ArchivedActivityParcel.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

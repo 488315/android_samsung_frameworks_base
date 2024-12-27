@@ -15,6 +15,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.google.android.mms.ContentType;
 import com.google.android.mms.InvalidHeaderValueException;
 import com.google.android.mms.MmsException;
@@ -22,6 +23,7 @@ import com.google.android.mms.util.PduCache;
 import com.google.android.mms.util.PduCacheEntry;
 import com.google.android.mms.util.SqliteWrapper;
 import com.samsung.android.feature.SemCscFeature;
+
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -101,8 +103,46 @@ public class PduPersister {
     private final SemCscFeature mCscFeature = SemCscFeature.getInstance();
     private final TelephonyManager mTelephonyManager;
     private static final int[] ADDRESS_FIELDS = {129, 130, 137, 151};
-    private static final String[] PDU_PROJECTION = {"_id", Telephony.BaseMmsColumns.MESSAGE_BOX, "thread_id", Telephony.BaseMmsColumns.RETRIEVE_TEXT, Telephony.BaseMmsColumns.SUBJECT, Telephony.BaseMmsColumns.CONTENT_LOCATION, Telephony.BaseMmsColumns.CONTENT_TYPE, Telephony.BaseMmsColumns.MESSAGE_CLASS, Telephony.BaseMmsColumns.MESSAGE_ID, Telephony.BaseMmsColumns.RESPONSE_TEXT, Telephony.BaseMmsColumns.TRANSACTION_ID, Telephony.BaseMmsColumns.CONTENT_CLASS, Telephony.BaseMmsColumns.DELIVERY_REPORT, Telephony.BaseMmsColumns.MESSAGE_TYPE, "v", Telephony.BaseMmsColumns.PRIORITY, Telephony.BaseMmsColumns.READ_REPORT, Telephony.BaseMmsColumns.READ_STATUS, Telephony.BaseMmsColumns.REPORT_ALLOWED, Telephony.BaseMmsColumns.RETRIEVE_STATUS, Telephony.BaseMmsColumns.STATUS, "date", Telephony.BaseMmsColumns.DELIVERY_TIME, Telephony.BaseMmsColumns.EXPIRY, Telephony.BaseMmsColumns.MESSAGE_SIZE, Telephony.BaseMmsColumns.SUBJECT_CHARSET, Telephony.BaseMmsColumns.RETRIEVE_TEXT_CHARSET};
-    private static final String[] PART_PROJECTION = {"_id", Telephony.Mms.Part.CHARSET, Telephony.Mms.Part.CONTENT_DISPOSITION, "cid", Telephony.Mms.Part.CONTENT_LOCATION, "ct", Telephony.Mms.Part.FILENAME, "name", "text"};
+    private static final String[] PDU_PROJECTION = {
+        "_id",
+        Telephony.BaseMmsColumns.MESSAGE_BOX,
+        "thread_id",
+        Telephony.BaseMmsColumns.RETRIEVE_TEXT,
+        Telephony.BaseMmsColumns.SUBJECT,
+        Telephony.BaseMmsColumns.CONTENT_LOCATION,
+        Telephony.BaseMmsColumns.CONTENT_TYPE,
+        Telephony.BaseMmsColumns.MESSAGE_CLASS,
+        Telephony.BaseMmsColumns.MESSAGE_ID,
+        Telephony.BaseMmsColumns.RESPONSE_TEXT,
+        Telephony.BaseMmsColumns.TRANSACTION_ID,
+        Telephony.BaseMmsColumns.CONTENT_CLASS,
+        Telephony.BaseMmsColumns.DELIVERY_REPORT,
+        Telephony.BaseMmsColumns.MESSAGE_TYPE,
+        "v",
+        Telephony.BaseMmsColumns.PRIORITY,
+        Telephony.BaseMmsColumns.READ_REPORT,
+        Telephony.BaseMmsColumns.READ_STATUS,
+        Telephony.BaseMmsColumns.REPORT_ALLOWED,
+        Telephony.BaseMmsColumns.RETRIEVE_STATUS,
+        Telephony.BaseMmsColumns.STATUS,
+        "date",
+        Telephony.BaseMmsColumns.DELIVERY_TIME,
+        Telephony.BaseMmsColumns.EXPIRY,
+        Telephony.BaseMmsColumns.MESSAGE_SIZE,
+        Telephony.BaseMmsColumns.SUBJECT_CHARSET,
+        Telephony.BaseMmsColumns.RETRIEVE_TEXT_CHARSET
+    };
+    private static final String[] PART_PROJECTION = {
+        "_id",
+        Telephony.Mms.Part.CHARSET,
+        Telephony.Mms.Part.CONTENT_DISPOSITION,
+        "cid",
+        Telephony.Mms.Part.CONTENT_LOCATION,
+        "ct",
+        Telephony.Mms.Part.FILENAME,
+        "name",
+        "text"
+    };
     private static final HashMap<Uri, Integer> MESSAGE_BOX_MAP = new HashMap<>();
 
     static {
@@ -191,24 +231,28 @@ public class PduPersister {
         return sPersister;
     }
 
-    private void setEncodedStringValueToHeaders(Cursor c, int columnIndex, PduHeaders headers, int mapColumn) {
+    private void setEncodedStringValueToHeaders(
+            Cursor c, int columnIndex, PduHeaders headers, int mapColumn) {
         String s = c.getString(columnIndex);
         if (s != null && s.length() > 0) {
-            int charsetColumnIndex = CHARSET_COLUMN_INDEX_MAP.get(Integer.valueOf(mapColumn)).intValue();
+            int charsetColumnIndex =
+                    CHARSET_COLUMN_INDEX_MAP.get(Integer.valueOf(mapColumn)).intValue();
             int charset = c.getInt(charsetColumnIndex);
             EncodedStringValue value = new EncodedStringValue(charset, getBytes(s));
             headers.setEncodedStringValue(value, mapColumn);
         }
     }
 
-    private void setTextStringToHeaders(Cursor c, int columnIndex, PduHeaders headers, int mapColumn) {
+    private void setTextStringToHeaders(
+            Cursor c, int columnIndex, PduHeaders headers, int mapColumn) {
         String s = c.getString(columnIndex);
         if (s != null) {
             headers.setTextString(getBytes(s), mapColumn);
         }
     }
 
-    private void setOctetToHeaders(Cursor c, int columnIndex, PduHeaders headers, int mapColumn) throws InvalidHeaderValueException {
+    private void setOctetToHeaders(Cursor c, int columnIndex, PduHeaders headers, int mapColumn)
+            throws InvalidHeaderValueException {
         if (!c.isNull(columnIndex)) {
             int b = c.getInt(columnIndex);
             headers.setOctet(b, mapColumn);
@@ -260,12 +304,15 @@ public class PduPersister {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public com.google.android.mms.pdu.GenericPdu load(android.net.Uri r21) throws com.google.android.mms.MmsException {
+    public com.google.android.mms.pdu.GenericPdu load(android.net.Uri r21)
+            throws com.google.android.mms.MmsException {
         /*
             Method dump skipped, instructions count: 722
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.mms.pdu.PduPersister.load(android.net.Uri):com.google.android.mms.pdu.GenericPdu");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.google.android.mms.pdu.PduPersister.load(android.net.Uri):com.google.android.mms.pdu.GenericPdu");
     }
 
     private void persistAddress(long msgId, int type, EncodedStringValue[] array) {
@@ -279,16 +326,24 @@ public class PduPersister {
         return toIsoString(part.getContentType());
     }
 
-    public Uri persistPart(PduPart part, long msgId, HashMap<Uri, InputStream> preOpenedFiles) throws MmsException {
+    public Uri persistPart(PduPart part, long msgId, HashMap<Uri, InputStream> preOpenedFiles)
+            throws MmsException {
         return persistPart(part, msgId, preOpenedFiles, 0, false, false);
     }
 
-    private void persistData(PduPart part, Uri uri, String contentType, HashMap<Uri, InputStream> preOpenedFiles) throws MmsException {
+    private void persistData(
+            PduPart part, Uri uri, String contentType, HashMap<Uri, InputStream> preOpenedFiles)
+            throws MmsException {
         persistData(part, uri, contentType, preOpenedFiles, false, false);
     }
 
     private void updateAddress(long msgId, int type, EncodedStringValue[] array) {
-        SqliteWrapper.delete(this.mContext, this.mContentResolver, Uri.parse("content://mms/" + msgId + "/addr"), "type=" + type, null);
+        SqliteWrapper.delete(
+                this.mContext,
+                this.mContentResolver,
+                Uri.parse("content://mms/" + msgId + "/addr"),
+                "type=" + type,
+                null);
         if (array != null) {
             persistAddress(msgId, type, array);
         }
@@ -298,7 +353,8 @@ public class PduPersister {
         updateHeaders(uri, sendReq, 0);
     }
 
-    private void updatePart(Uri uri, PduPart part, HashMap<Uri, InputStream> preOpenedFiles) throws MmsException {
+    private void updatePart(Uri uri, PduPart part, HashMap<Uri, InputStream> preOpenedFiles)
+            throws MmsException {
         ContentValues values = new ContentValues(7);
         int charset = part.getCharset();
         if (charset != 0) {
@@ -338,7 +394,8 @@ public class PduPersister {
         throw new MmsException("MIME type of the part must be set.");
     }
 
-    public void updateParts(Uri uri, PduBody body, HashMap<Uri, InputStream> preOpenedFiles) throws MmsException {
+    public void updateParts(Uri uri, PduBody body, HashMap<Uri, InputStream> preOpenedFiles)
+            throws MmsException {
         try {
             synchronized (PDU_CACHE_INSTANCE) {
                 if (PDU_CACHE_INSTANCE.isUpdating(uri)) {
@@ -361,7 +418,9 @@ public class PduPersister {
             for (int i = 0; i < partsNum; i++) {
                 PduPart part = body.getPart(i);
                 Uri partUri = part.getDataUri();
-                if (partUri != null && !TextUtils.isEmpty(partUri.getAuthority()) && partUri.getAuthority().startsWith("mms")) {
+                if (partUri != null
+                        && !TextUtils.isEmpty(partUri.getAuthority())
+                        && partUri.getAuthority().startsWith("mms")) {
                     toBeUpdated.put(partUri, part);
                     if (filter.length() > 1) {
                         filter.append(" AND ");
@@ -374,7 +433,12 @@ public class PduPersister {
             }
             filter.append(')');
             long msgId = ContentUris.parseId(uri);
-            SqliteWrapper.delete(this.mContext, this.mContentResolver, Uri.parse(Telephony.Mms.CONTENT_URI + "/" + msgId + "/part"), filter.length() > 2 ? filter.toString() : null, null);
+            SqliteWrapper.delete(
+                    this.mContext,
+                    this.mContentResolver,
+                    Uri.parse(Telephony.Mms.CONTENT_URI + "/" + msgId + "/part"),
+                    filter.length() > 2 ? filter.toString() : null,
+                    null);
             Iterator<PduPart> it = toBeCreated.iterator();
             while (it.hasNext()) {
                 persistPart(it.next(), msgId, preOpenedFiles);
@@ -395,11 +459,21 @@ public class PduPersister {
         }
     }
 
-    public Uri persist(GenericPdu pdu, Uri uri, boolean createThreadId, boolean groupMmsEnabled, HashMap<Uri, InputStream> preOpenedFiles) throws MmsException {
+    public Uri persist(
+            GenericPdu pdu,
+            Uri uri,
+            boolean createThreadId,
+            boolean groupMmsEnabled,
+            HashMap<Uri, InputStream> preOpenedFiles)
+            throws MmsException {
         return persist(pdu, 0, uri, createThreadId, groupMmsEnabled, preOpenedFiles, false, false);
     }
 
-    private void loadRecipients(int addressType, HashSet<String> recipients, HashMap<Integer, EncodedStringValue[]> addressMap, boolean excludeMyNumber) {
+    private void loadRecipients(
+            int addressType,
+            HashSet<String> recipients,
+            HashMap<Integer, EncodedStringValue[]> addressMap,
+            boolean excludeMyNumber) {
         EncodedStringValue[] array = addressMap.get(Integer.valueOf(addressType));
         if (array == null) {
             return;
@@ -408,7 +482,10 @@ public class PduPersister {
         Set<String> myPhoneNumbers = new HashSet<>();
         if (excludeMyNumber) {
             for (SubscriptionInfo subInfo : subscriptionManager.getActiveSubscriptionInfoList()) {
-                String myNumber = ((TelephonyManager) this.mContext.getSystemService(TelephonyManager.class)).createForSubscriptionId(subInfo.getSubscriptionId()).getLine1Number();
+                String myNumber =
+                        ((TelephonyManager) this.mContext.getSystemService(TelephonyManager.class))
+                                .createForSubscriptionId(subInfo.getSubscriptionId())
+                                .getLine1Number();
                 if (myNumber != null) {
                     myPhoneNumbers.add(myNumber);
                 }
@@ -423,7 +500,8 @@ public class PduPersister {
                         if (!it.hasNext()) {
                             break;
                         }
-                        if (!PhoneNumberUtils.compare(number, it.next()) && !recipients.contains(number)) {
+                        if (!PhoneNumberUtils.compare(number, it.next())
+                                && !recipients.contains(number)) {
                             recipients.add(number);
                             break;
                         }
@@ -442,7 +520,9 @@ public class PduPersister {
         }
         Integer msgBox = MESSAGE_BOX_MAP.get(to);
         if (msgBox == null) {
-            throw new MmsException("Bad destination, must be one of content://mms/inbox, content://mms/sent, content://mms/drafts, content://mms/outbox, content://mms/temp.");
+            throw new MmsException(
+                    "Bad destination, must be one of content://mms/inbox, content://mms/sent,"
+                        + " content://mms/drafts, content://mms/outbox, content://mms/temp.");
         }
         ContentValues values = new ContentValues(1);
         values.put(Telephony.BaseMmsColumns.MESSAGE_BOX, msgBox);
@@ -478,7 +558,14 @@ public class PduPersister {
         Uri.Builder uriBuilder = Telephony.MmsSms.PendingMessages.CONTENT_URI.buildUpon();
         uriBuilder.appendQueryParameter("protocol", "mms");
         String[] selectionArgs = {String.valueOf(10), String.valueOf(dueTime)};
-        return SqliteWrapper.query(this.mContext, this.mContentResolver, uriBuilder.build(), null, "err_type < ? AND due_time <= ?", selectionArgs, Telephony.MmsSms.PendingMessages.DUE_TIME);
+        return SqliteWrapper.query(
+                this.mContext,
+                this.mContentResolver,
+                uriBuilder.build(),
+                null,
+                "err_type < ? AND due_time <= ?",
+                selectionArgs,
+                Telephony.MmsSms.PendingMessages.DUE_TIME);
     }
 
     public void updateHeaders(Uri uri, SendReq sendReq, int simSlot) {
@@ -546,7 +633,9 @@ public class PduPersister {
         EncodedStringValue subject = sendReq.getSubject();
         if (subject != null) {
             values.put(Telephony.BaseMmsColumns.SUBJECT, toIsoString(subject.getTextString()));
-            values.put(Telephony.BaseMmsColumns.SUBJECT_CHARSET, Integer.valueOf(subject.getCharacterSet()));
+            values.put(
+                    Telephony.BaseMmsColumns.SUBJECT_CHARSET,
+                    Integer.valueOf(subject.getCharacterSet()));
         } else {
             values.put(Telephony.BaseMmsColumns.SUBJECT, "");
         }
@@ -609,23 +698,35 @@ public class PduPersister {
             if (this.mCscFeature.getBoolean("CscFeature_Common_SupportTwoPhoneService", false)) {
                 if (this.mTelephonyManager.getPhoneCount() > 1) {
                     if (twoPhoneServiceUid > 0) {
-                        threadId = Telephony.Threads.semGetOrCreateThreadId(this.mContext, recipients, true, simSlot, twoPhoneServiceUid);
+                        threadId =
+                                Telephony.Threads.semGetOrCreateThreadId(
+                                        this.mContext,
+                                        recipients,
+                                        true,
+                                        simSlot,
+                                        twoPhoneServiceUid);
                     } else {
-                        threadId = Telephony.Threads.getOrCreateThreadId(this.mContext, recipients, simSlot);
+                        threadId =
+                                Telephony.Threads.getOrCreateThreadId(
+                                        this.mContext, recipients, simSlot);
                     }
                 } else if (twoPhoneServiceUid > 0) {
-                    threadId = Telephony.Threads.semGetOrCreateThreadId(this.mContext, recipients, true, 0, twoPhoneServiceUid);
+                    threadId =
+                            Telephony.Threads.semGetOrCreateThreadId(
+                                    this.mContext, recipients, true, 0, twoPhoneServiceUid);
                 } else {
                     threadId = Telephony.Threads.getOrCreateThreadId(this.mContext, recipients);
                 }
             } else if (this.mTelephonyManager.getPhoneCount() > 1) {
-                threadId = Telephony.Threads.getOrCreateThreadId(this.mContext, recipients, simSlot);
+                threadId =
+                        Telephony.Threads.getOrCreateThreadId(this.mContext, recipients, simSlot);
             } else {
                 threadId = Telephony.Threads.getOrCreateThreadId(this.mContext, recipients);
             }
             values.put("thread_id", Long.valueOf(threadId));
         }
-        if (this.mCscFeature.getBoolean("CscFeature_Common_SupportTwoPhoneService", false) && twoPhoneServiceUid > 0) {
+        if (this.mCscFeature.getBoolean("CscFeature_Common_SupportTwoPhoneService", false)
+                && twoPhoneServiceUid > 0) {
             values.put("using_mode", Integer.valueOf(twoPhoneServiceUid));
         }
         long reserved = sendReq.getReserved();
@@ -636,19 +737,19 @@ public class PduPersister {
     }
 
     /*  JADX ERROR: Types fix failed
-        java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
-        */
+    java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
+    */
     /* JADX WARN: Failed to apply debug info
     java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
     	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
@@ -672,15 +773,33 @@ public class PduPersister {
     /* JADX WARN: Not initialized variable reg: 17, insn: 0x0419: MOVE (r7 I:??[OBJECT, ARRAY]) = (r17 I:??[OBJECT, ARRAY] A[D('os' java.io.OutputStream)]), block:B:272:0x0416 */
     /* JADX WARN: Not initialized variable reg: 17, insn: 0x041f: MOVE (r7 I:??[OBJECT, ARRAY]) = (r17 I:??[OBJECT, ARRAY] A[D('os' java.io.OutputStream)]), block:B:270:0x041d */
     /* JADX WARN: Not initialized variable reg: 17, insn: 0x0425: MOVE (r7 I:??[OBJECT, ARRAY]) = (r17 I:??[OBJECT, ARRAY] A[D('os' java.io.OutputStream)]), block:B:268:0x0423 */
-    private void persistData(com.google.android.mms.pdu.PduPart r25, android.net.Uri r26, java.lang.String r27, java.util.HashMap<android.net.Uri, java.io.InputStream> r28, boolean r29, boolean r30) throws com.google.android.mms.MmsException {
+    private void persistData(
+            com.google.android.mms.pdu.PduPart r25,
+            android.net.Uri r26,
+            java.lang.String r27,
+            java.util.HashMap<android.net.Uri, java.io.InputStream> r28,
+            boolean r29,
+            boolean r30)
+            throws com.google.android.mms.MmsException {
         /*
             Method dump skipped, instructions count: 1226
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.mms.pdu.PduPersister.persistData(com.google.android.mms.pdu.PduPart, android.net.Uri, java.lang.String, java.util.HashMap, boolean, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.google.android.mms.pdu.PduPersister.persistData(com.google.android.mms.pdu.PduPart,"
+                    + " android.net.Uri, java.lang.String, java.util.HashMap, boolean,"
+                    + " boolean):void");
     }
 
-    public Uri persistPart(PduPart part, long msgId, HashMap<Uri, InputStream> preOpenedFiles, int simSlot, boolean bSpam, boolean hasVendorDrmEngine) throws MmsException {
+    public Uri persistPart(
+            PduPart part,
+            long msgId,
+            HashMap<Uri, InputStream> preOpenedFiles,
+            int simSlot,
+            boolean bSpam,
+            boolean hasVendorDrmEngine)
+            throws MmsException {
         Uri uri;
         String contentType;
         if (bSpam) {
@@ -778,10 +897,26 @@ public class PduPersister {
     private void loadAddress(long msgId, PduHeaders headers, boolean bSpam) {
         Cursor c;
         if (bSpam) {
-            Cursor c2 = SqliteWrapper.query(this.mContext, this.mContentResolver, Uri.parse("content://spammms/" + msgId + "/spamaddr"), new String[]{"address", Telephony.Mms.Addr.CHARSET, "type"}, null, null, null);
+            Cursor c2 =
+                    SqliteWrapper.query(
+                            this.mContext,
+                            this.mContentResolver,
+                            Uri.parse("content://spammms/" + msgId + "/spamaddr"),
+                            new String[] {"address", Telephony.Mms.Addr.CHARSET, "type"},
+                            null,
+                            null,
+                            null);
             c = c2;
         } else {
-            Cursor c3 = SqliteWrapper.query(this.mContext, this.mContentResolver, Uri.parse("content://mms/" + msgId + "/addr"), new String[]{"address", Telephony.Mms.Addr.CHARSET, "type"}, null, null, null);
+            Cursor c3 =
+                    SqliteWrapper.query(
+                            this.mContext,
+                            this.mContentResolver,
+                            Uri.parse("content://mms/" + msgId + "/addr"),
+                            new String[] {"address", Telephony.Mms.Addr.CHARSET, "type"},
+                            null,
+                            null,
+                            null);
             c = c3;
         }
         if (c != null) {
@@ -794,10 +929,14 @@ public class PduPersister {
                             case 129:
                             case 130:
                             case 151:
-                                headers.appendEncodedStringValue(new EncodedStringValue(c.getInt(1), getBytes(addr)), addrType);
+                                headers.appendEncodedStringValue(
+                                        new EncodedStringValue(c.getInt(1), getBytes(addr)),
+                                        addrType);
                                 break;
                             case 137:
-                                headers.setEncodedStringValue(new EncodedStringValue(c.getInt(1), getBytes(addr)), addrType);
+                                headers.setEncodedStringValue(
+                                        new EncodedStringValue(c.getInt(1), getBytes(addr)),
+                                        addrType);
                                 break;
                             default:
                                 Log.e(TAG, "Unknown address type: " + addrType);
@@ -817,12 +956,15 @@ public class PduPersister {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private com.google.android.mms.pdu.PduPart[] loadParts(long r28, boolean r30) throws com.google.android.mms.MmsException {
+    private com.google.android.mms.pdu.PduPart[] loadParts(long r28, boolean r30)
+            throws com.google.android.mms.MmsException {
         /*
             Method dump skipped, instructions count: 631
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.mms.pdu.PduPersister.loadParts(long, boolean):com.google.android.mms.pdu.PduPart[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.google.android.mms.pdu.PduPersister.loadParts(long,"
+                    + " boolean):com.google.android.mms.pdu.PduPart[]");
     }
 
     private static boolean isOma13Encoding(String filename) {
@@ -830,7 +972,9 @@ public class PduPersister {
         if (filename == null) {
             return false;
         }
-        if (filename.length() >= 5 && filename.startsWith(ENCODING_PREFIX) && filename.endsWith(ENCODING_SUFFIX)) {
+        if (filename.length() >= 5
+                && filename.startsWith(ENCODING_PREFIX)
+                && filename.endsWith(ENCODING_SUFFIX)) {
             result = true;
         }
         Log.d(TAG, "pdupersister isOma13Encoding:" + result);
@@ -840,27 +984,58 @@ public class PduPersister {
     public Cursor getPendingMessages(int simSlot, long dueTime) {
         Uri.Builder uriBuilder = Telephony.MmsSms.PendingMessages.CONTENT_URI.buildUpon();
         uriBuilder.appendQueryParameter("protocol", "mms");
-        String[] selectionArgs = {String.valueOf(10), String.valueOf(dueTime), String.valueOf(simSlot)};
-        return SqliteWrapper.query(this.mContext, this.mContentResolver, uriBuilder.build(), null, "err_type < ? AND due_time <= ? AND sim_slot2 = ?", selectionArgs, Telephony.MmsSms.PendingMessages.DUE_TIME);
+        String[] selectionArgs = {
+            String.valueOf(10), String.valueOf(dueTime), String.valueOf(simSlot)
+        };
+        return SqliteWrapper.query(
+                this.mContext,
+                this.mContentResolver,
+                uriBuilder.build(),
+                null,
+                "err_type < ? AND due_time <= ? AND sim_slot2 = ?",
+                selectionArgs,
+                Telephony.MmsSms.PendingMessages.DUE_TIME);
     }
 
     public Uri persist(GenericPdu pdu, Uri uri, int reqAppId, int reqMsgId) throws MmsException {
         return persist(pdu, 0, uri, reqAppId, reqMsgId, (HashMap<Uri, InputStream>) null);
     }
 
-    public Uri persist(GenericPdu pdu, int simSlot, Uri uri, int reqAppId, int reqMsgId) throws MmsException {
+    public Uri persist(GenericPdu pdu, int simSlot, Uri uri, int reqAppId, int reqMsgId)
+            throws MmsException {
         return persist(pdu, simSlot, uri, reqAppId, reqMsgId, (HashMap<Uri, InputStream>) null);
     }
 
-    public Uri persist(GenericPdu pdu, Uri uri, int reqAppId, int reqMsgId, HashMap<Uri, InputStream> preOpenedFiles) throws MmsException {
+    public Uri persist(
+            GenericPdu pdu,
+            Uri uri,
+            int reqAppId,
+            int reqMsgId,
+            HashMap<Uri, InputStream> preOpenedFiles)
+            throws MmsException {
         return persist(pdu, 0, uri, reqAppId, reqMsgId, preOpenedFiles);
     }
 
-    public Uri persist(GenericPdu pdu, int simSlot, Uri uri, int reqAppId, int reqMsgId, HashMap<Uri, InputStream> preOpenedFiles) throws MmsException {
+    public Uri persist(
+            GenericPdu pdu,
+            int simSlot,
+            Uri uri,
+            int reqAppId,
+            int reqMsgId,
+            HashMap<Uri, InputStream> preOpenedFiles)
+            throws MmsException {
         return persist(pdu, simSlot, uri, reqAppId, reqMsgId, preOpenedFiles, 0);
     }
 
-    public Uri persist(GenericPdu pdu, int simSlot, Uri uri, int reqAppId, int reqMsgId, HashMap<Uri, InputStream> preOpenedFiles, int twoPhoneServiceUid) throws MmsException {
+    public Uri persist(
+            GenericPdu pdu,
+            int simSlot,
+            Uri uri,
+            int reqAppId,
+            int reqMsgId,
+            HashMap<Uri, InputStream> preOpenedFiles,
+            int twoPhoneServiceUid)
+            throws MmsException {
         PduBody body;
         int i;
         PduBody body2;
@@ -869,7 +1044,9 @@ public class PduPersister {
         }
         Integer msgBox = MESSAGE_BOX_MAP.get(uri);
         if (msgBox == null) {
-            throw new MmsException("Bad destination, must be one of content://mms/inbox, content://mms/sent, content://mms/drafts, content://mms/outbox, content://mms/temp.");
+            throw new MmsException(
+                    "Bad destination, must be one of content://mms/inbox, content://mms/sent,"
+                        + " content://mms/drafts, content://mms/outbox, content://mms/temp.");
         }
         PDU_CACHE_INSTANCE.purge(uri);
         PduHeaders header = pdu.getPduHeaders();
@@ -959,11 +1136,16 @@ public class PduPersister {
             if (!this.mCscFeature.getBoolean("CscFeature_Common_SupportTwoPhoneService", false)) {
                 threadId = Telephony.Threads.getOrCreateThreadId(this.mContext, recipients);
             } else {
-                threadId = twoPhoneServiceUid > 0 ? Telephony.Threads.semGetOrCreateThreadId(this.mContext, recipients, true, 0, twoPhoneServiceUid) : Telephony.Threads.getOrCreateThreadId(this.mContext, recipients);
+                threadId =
+                        twoPhoneServiceUid > 0
+                                ? Telephony.Threads.semGetOrCreateThreadId(
+                                        this.mContext, recipients, true, 0, twoPhoneServiceUid)
+                                : Telephony.Threads.getOrCreateThreadId(this.mContext, recipients);
             }
         }
         values.put("thread_id", Long.valueOf(threadId));
-        if (this.mCscFeature.getBoolean("CscFeature_Common_SupportTwoPhoneService", false) && twoPhoneServiceUid > 0) {
+        if (this.mCscFeature.getBoolean("CscFeature_Common_SupportTwoPhoneService", false)
+                && twoPhoneServiceUid > 0) {
             values.put("using_mode", Integer.valueOf(twoPhoneServiceUid));
         }
         long dummyId = System.nanoTime();
@@ -991,7 +1173,13 @@ public class PduPersister {
         long msgId = ContentUris.parseId(res);
         ContentValues values2 = new ContentValues(1);
         values2.put(Telephony.Mms.Part.MSG_ID, Long.valueOf(msgId));
-        SqliteWrapper.update(this.mContext, this.mContentResolver, Uri.parse("content://mms/" + dummyId + "/part"), values2, null, null);
+        SqliteWrapper.update(
+                this.mContext,
+                this.mContentResolver,
+                Uri.parse("content://mms/" + dummyId + "/part"),
+                values2,
+                null,
+                null);
         Uri res2 = Uri.parse(uri + "/" + msgId);
         int[] iArr = ADDRESS_FIELDS;
         int length2 = iArr.length;
@@ -1038,20 +1226,49 @@ public class PduPersister {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.net.Uri persist(com.google.android.mms.pdu.GenericPdu r41, int r42, android.net.Uri r43, boolean r44, boolean r45, java.util.HashMap<android.net.Uri, java.io.InputStream> r46, boolean r47, boolean r48, int r49) throws com.google.android.mms.MmsException {
+    public android.net.Uri persist(
+            com.google.android.mms.pdu.GenericPdu r41,
+            int r42,
+            android.net.Uri r43,
+            boolean r44,
+            boolean r45,
+            java.util.HashMap<android.net.Uri, java.io.InputStream> r46,
+            boolean r47,
+            boolean r48,
+            int r49)
+            throws com.google.android.mms.MmsException {
         /*
             Method dump skipped, instructions count: 1056
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.mms.pdu.PduPersister.persist(com.google.android.mms.pdu.GenericPdu, int, android.net.Uri, boolean, boolean, java.util.HashMap, boolean, boolean, int):android.net.Uri");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.google.android.mms.pdu.PduPersister.persist(com.google.android.mms.pdu.GenericPdu,"
+                    + " int, android.net.Uri, boolean, boolean, java.util.HashMap, boolean,"
+                    + " boolean, int):android.net.Uri");
     }
 
-    public Uri persist(GenericPdu pdu, Uri uri, boolean createThreadId, boolean groupMmsEnabled, HashMap<Uri, InputStream> preOpenedFiles, boolean bSpam) throws MmsException {
+    public Uri persist(
+            GenericPdu pdu,
+            Uri uri,
+            boolean createThreadId,
+            boolean groupMmsEnabled,
+            HashMap<Uri, InputStream> preOpenedFiles,
+            boolean bSpam)
+            throws MmsException {
         return persist(pdu, 0, uri, createThreadId, groupMmsEnabled, preOpenedFiles, bSpam, true);
     }
 
-    public Uri persist(GenericPdu pdu, int simSlot, Uri uri, boolean createThreadId, boolean groupMmsEnabled, HashMap<Uri, InputStream> preOpenedFiles) throws MmsException {
-        return persist(pdu, simSlot, uri, createThreadId, groupMmsEnabled, preOpenedFiles, false, false);
+    public Uri persist(
+            GenericPdu pdu,
+            int simSlot,
+            Uri uri,
+            boolean createThreadId,
+            boolean groupMmsEnabled,
+            HashMap<Uri, InputStream> preOpenedFiles)
+            throws MmsException {
+        return persist(
+                pdu, simSlot, uri, createThreadId, groupMmsEnabled, preOpenedFiles, false, false);
     }
 
     public Uri persist(GenericPdu pdu, int simSlot, Uri uri) throws MmsException {
@@ -1062,32 +1279,73 @@ public class PduPersister {
         return persist(pdu, simSlot, uri, true, false, null, bSpam, true);
     }
 
-    public Uri persist(GenericPdu pdu, Uri uri, boolean createThreadId, boolean groupMmsEnabled, HashMap<Uri, InputStream> preOpenedFiles, boolean bSpam, boolean hasVendorDrmEngine) throws MmsException {
-        return persist(pdu, 0, uri, createThreadId, groupMmsEnabled, preOpenedFiles, bSpam, hasVendorDrmEngine);
+    public Uri persist(
+            GenericPdu pdu,
+            Uri uri,
+            boolean createThreadId,
+            boolean groupMmsEnabled,
+            HashMap<Uri, InputStream> preOpenedFiles,
+            boolean bSpam,
+            boolean hasVendorDrmEngine)
+            throws MmsException {
+        return persist(
+                pdu,
+                0,
+                uri,
+                createThreadId,
+                groupMmsEnabled,
+                preOpenedFiles,
+                bSpam,
+                hasVendorDrmEngine);
     }
 
-    public Uri persist(GenericPdu pdu, int simSlot, Uri uri, boolean createThreadId, boolean groupMmsEnabled, HashMap<Uri, InputStream> preOpenedFiles, boolean bSpam, boolean hasVendorDrmEngine) throws MmsException {
-        return persist(pdu, simSlot, uri, createThreadId, groupMmsEnabled, preOpenedFiles, bSpam, hasVendorDrmEngine, 0);
+    public Uri persist(
+            GenericPdu pdu,
+            int simSlot,
+            Uri uri,
+            boolean createThreadId,
+            boolean groupMmsEnabled,
+            HashMap<Uri, InputStream> preOpenedFiles,
+            boolean bSpam,
+            boolean hasVendorDrmEngine)
+            throws MmsException {
+        return persist(
+                pdu,
+                simSlot,
+                uri,
+                createThreadId,
+                groupMmsEnabled,
+                preOpenedFiles,
+                bSpam,
+                hasVendorDrmEngine,
+                0);
     }
 
     private boolean isSupportOMA13NameEncoding(int simSlot) {
         final String matchedCode;
         if (simSlot == 0) {
-            matchedCode = SystemProperties.get("mdc.matched_code", SystemProperties.get("ro.csc.sales_code", ""));
+            matchedCode =
+                    SystemProperties.get(
+                            "mdc.matched_code", SystemProperties.get("ro.csc.sales_code", ""));
         } else {
-            matchedCode = SystemProperties.get("mdc.matched_code2", SystemProperties.get("ro.csc.sales_code", ""));
+            matchedCode =
+                    SystemProperties.get(
+                            "mdc.matched_code2", SystemProperties.get("ro.csc.sales_code", ""));
         }
         if (TextUtils.isEmpty(matchedCode)) {
             return false;
         }
         String[] supportCode = {"CHC", "CHM", "CHN", "KTC", "LUC", "SKC", "KOO", "K06", "K01"};
-        return Arrays.stream(supportCode).anyMatch(new Predicate() { // from class: com.google.android.mms.pdu.PduPersister$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((String) obj).equals(matchedCode);
-                return equals;
-            }
-        });
+        return Arrays.stream(supportCode)
+                .anyMatch(
+                        new Predicate() { // from class:
+                                          // com.google.android.mms.pdu.PduPersister$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                boolean equals;
+                                equals = ((String) obj).equals(matchedCode);
+                                return equals;
+                            }
+                        });
     }
 }

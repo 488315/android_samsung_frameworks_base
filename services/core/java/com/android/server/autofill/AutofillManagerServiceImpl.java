@@ -34,6 +34,7 @@ import android.view.autofill.AutofillId;
 import android.view.autofill.AutofillManager;
 import android.view.autofill.AutofillValue;
 import android.view.autofill.IAutoFillManagerClient;
+
 import com.android.internal.infra.AbstractRemoteService;
 import com.android.internal.infra.ServiceConnector;
 import com.android.internal.logging.MetricsLogger;
@@ -46,10 +47,6 @@ import com.android.server.accessibility.ProxyManager$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerConstants$$ExternalSyntheticOutline0;
 import com.android.server.am.AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0;
 import com.android.server.am.BroadcastStats$$ExternalSyntheticOutline0;
-import com.android.server.autofill.AutofillManagerService;
-import com.android.server.autofill.AutofillManagerServiceShellCommand;
-import com.android.server.autofill.Helper;
-import com.android.server.autofill.RemoteAugmentedAutofillService;
 import com.android.server.autofill.ui.AutoFillUI;
 import com.android.server.autofill.ui.AutoFillUI$$ExternalSyntheticLambda3;
 import com.android.server.autofill.ui.PendingUi;
@@ -58,7 +55,9 @@ import com.android.server.infra.AbstractMasterSystemService;
 import com.android.server.infra.AbstractPerUserSystemService;
 import com.android.server.inputmethod.InputMethodManagerInternal;
 import com.android.server.wm.ActivityTaskManagerInternal;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,13 +95,14 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.autofill.AutofillManagerServiceImpl$1, reason: invalid class name */
-    public final class AnonymousClass1 implements RemoteAugmentedAutofillService.RemoteAugmentedAutofillServiceCallbacks {
-        public AnonymousClass1() {
-        }
+    public final class AnonymousClass1
+            implements RemoteAugmentedAutofillService.RemoteAugmentedAutofillServiceCallbacks {
+        public AnonymousClass1() {}
 
         public final void onServiceDied(Object obj) {
             Slog.w("AutofillManagerServiceImpl", "remote augmented autofill service died");
-            RemoteAugmentedAutofillService remoteAugmentedAutofillService = AutofillManagerServiceImpl.this.mRemoteAugmentedAutofillService;
+            RemoteAugmentedAutofillService remoteAugmentedAutofillService =
+                    AutofillManagerServiceImpl.this.mRemoteAugmentedAutofillService;
             if (remoteAugmentedAutofillService != null) {
                 remoteAugmentedAutofillService.unbind();
             }
@@ -111,12 +111,14 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class InlineSuggestionRenderCallbacksImpl implements AbstractRemoteService.VultureCallback {
-        public InlineSuggestionRenderCallbacksImpl() {
-        }
+    public final class InlineSuggestionRenderCallbacksImpl
+            implements AbstractRemoteService.VultureCallback {
+        public InlineSuggestionRenderCallbacksImpl() {}
 
         public final void onServiceDied(Object obj) {
-            Slog.w("AutofillManagerServiceImpl", "remote service died: " + ((RemoteInlineSuggestionRenderService) obj));
+            Slog.w(
+                    "AutofillManagerServiceImpl",
+                    "remote service died: " + ((RemoteInlineSuggestionRenderService) obj));
             synchronized (AutofillManagerServiceImpl.this.mLock) {
                 AutofillManagerServiceImpl.this.resetExtServiceLocked();
             }
@@ -125,8 +127,7 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PruneTask extends AsyncTask {
-        public PruneTask() {
-        }
+        public PruneTask() {}
 
         @Override // android.os.AsyncTask
         public final Object doInBackground(Object[] objArr) {
@@ -138,16 +139,20 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                     size = AutofillManagerServiceImpl.this.mSessions.size();
                     sparseArray = new SparseArray(size);
                     for (int i2 = 0; i2 < size; i2++) {
-                        Session session = (Session) AutofillManagerServiceImpl.this.mSessions.valueAt(i2);
+                        Session session =
+                                (Session) AutofillManagerServiceImpl.this.mSessions.valueAt(i2);
                         sparseArray.put(session.id, session.mActivityToken);
                     }
                 } finally {
                 }
             }
-            ActivityTaskManagerInternal activityTaskManagerInternal = (ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class);
+            ActivityTaskManagerInternal activityTaskManagerInternal =
+                    (ActivityTaskManagerInternal)
+                            LocalServices.getService(ActivityTaskManagerInternal.class);
             int i3 = 0;
             while (i3 < size) {
-                if (activityTaskManagerInternal.getActivityName((IBinder) sparseArray.valueAt(i3)) != null) {
+                if (activityTaskManagerInternal.getActivityName((IBinder) sparseArray.valueAt(i3))
+                        != null) {
                     sparseArray.removeAt(i3);
                     i3--;
                     size--;
@@ -157,15 +162,26 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             synchronized (AutofillManagerServiceImpl.this.mLock) {
                 for (i = 0; i < size; i++) {
                     try {
-                        Session session2 = (Session) AutofillManagerServiceImpl.this.mSessions.get(sparseArray.keyAt(i));
+                        Session session2 =
+                                (Session)
+                                        AutofillManagerServiceImpl.this.mSessions.get(
+                                                sparseArray.keyAt(i));
                         if (session2 != null && sparseArray.valueAt(i) == session2.mActivityToken) {
                             if (!session2.mSessionFlags.mShowingSaveUi) {
                                 if (Helper.sDebug) {
-                                    Slog.i("AutofillManagerServiceImpl", "Prune session " + session2.id + " (" + session2.mActivityToken + ")");
+                                    Slog.i(
+                                            "AutofillManagerServiceImpl",
+                                            "Prune session "
+                                                    + session2.id
+                                                    + " ("
+                                                    + session2.mActivityToken
+                                                    + ")");
                                 }
                                 session2.removeFromServiceLocked();
                             } else if (Helper.sVerbose) {
-                                Slog.v("AutofillManagerServiceImpl", "Session " + session2.id + " is saving");
+                                Slog.v(
+                                        "AutofillManagerServiceImpl",
+                                        "Session " + session2.id + " is saving");
                             }
                         }
                     } finally {
@@ -176,7 +192,16 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         }
     }
 
-    public AutofillManagerServiceImpl(AutofillManagerService autofillManagerService, Object obj, LocalLog localLog, LocalLog localLog2, int i, AutoFillUI autoFillUI, AutofillManagerService.DisabledInfoCache disabledInfoCache, boolean z, AutofillManagerService.DisabledInfoCache disabledInfoCache2) {
+    public AutofillManagerServiceImpl(
+            AutofillManagerService autofillManagerService,
+            Object obj,
+            LocalLog localLog,
+            LocalLog localLog2,
+            int i,
+            AutoFillUI autoFillUI,
+            AutofillManagerService.DisabledInfoCache disabledInfoCache,
+            boolean z,
+            AutofillManagerService.DisabledInfoCache disabledInfoCache2) {
         super(autofillManagerService, obj, i);
         this.mMetricsLogger = new MetricsLogger();
         this.mHandler = new Handler(Looper.getMainLooper(), null, true);
@@ -185,20 +210,30 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         this.mUiLatencyHistory = localLog;
         this.mWtfHistory = localLog2;
         this.mUi = autoFillUI;
-        this.mFieldClassificationStrategy = new FieldClassificationStrategy(autofillManagerService.getContext(), i);
+        this.mFieldClassificationStrategy =
+                new FieldClassificationStrategy(autofillManagerService.getContext(), i);
         this.mAutofillCompatState = disabledInfoCache;
-        this.mInputMethodManagerInternal = (InputMethodManagerInternal) LocalServices.getService(InputMethodManagerInternal.class);
-        this.mContentCaptureManagerInternal = (ContentCaptureManagerService.LocalService) LocalServices.getService(ContentCaptureManagerService.LocalService.class);
+        this.mInputMethodManagerInternal =
+                (InputMethodManagerInternal)
+                        LocalServices.getService(InputMethodManagerInternal.class);
+        this.mContentCaptureManagerInternal =
+                (ContentCaptureManagerService.LocalService)
+                        LocalServices.getService(ContentCaptureManagerService.LocalService.class);
         this.mDisabledInfoCache = disabledInfoCache2;
         updateLocked(z);
     }
 
-    public final int addClientLocked(IAutoFillManagerClient iAutoFillManagerClient, ComponentName componentName, boolean z) {
+    public final int addClientLocked(
+            IAutoFillManagerClient iAutoFillManagerClient, ComponentName componentName, boolean z) {
         synchronized (this.mLock) {
             try {
-                String string = this.mMaster.getContext().getResources().getString(R.string.date_time);
+                String string =
+                        this.mMaster.getContext().getResources().getString(R.string.date_time);
                 ComponentName componentName2 = null;
-                ComponentName unflattenFromString = (string == null || string.isEmpty()) ? null : ComponentName.unflattenFromString(string);
+                ComponentName unflattenFromString =
+                        (string == null || string.isEmpty())
+                                ? null
+                                : ComponentName.unflattenFromString(string);
                 if (unflattenFromString == null) {
                     Slog.w("AutofillManagerServiceImpl", "Invalid CredentialAutofillService");
                 }
@@ -218,7 +253,13 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 if (isEnabledLocked()) {
                     return 1;
                 }
-                return (componentName != null && isAugmentedAutofillServiceAvailableLocked() && ((AutofillManagerService) this.mMaster).mAugmentedAutofillState.isWhitelisted(this.mUserId, componentName)) ? 8 : 0;
+                return (componentName != null
+                                && isAugmentedAutofillServiceAvailableLocked()
+                                && ((AutofillManagerService) this.mMaster)
+                                        .mAugmentedAutofillState.isWhitelisted(
+                                                this.mUserId, componentName))
+                        ? 8
+                        : 0;
             } catch (Throwable th) {
                 throw th;
             }
@@ -250,14 +291,21 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         }
     }
 
-    public final void disableAutofillForActivity(ComponentName componentName, long j, int i, boolean z) {
+    public final void disableAutofillForActivity(
+            ComponentName componentName, long j, int i, boolean z) {
         synchronized (this.mLock) {
             long elapsedRealtime = SystemClock.elapsedRealtime() + j;
             if (elapsedRealtime < 0) {
                 elapsedRealtime = Long.MAX_VALUE;
             }
-            this.mDisabledInfoCache.addDisabledActivityLocked(componentName, elapsedRealtime, this.mUserId);
-            this.mMetricsLogger.write(Helper.newLogMaker(1232, componentName, getServicePackageName(), i, z).addTaggedData(EndpointMonitorConst.TRACE_EVENT_SYS_ENTER_SETREUID, Integer.valueOf(j > 2147483647L ? Integer.MAX_VALUE : (int) j)));
+            this.mDisabledInfoCache.addDisabledActivityLocked(
+                    componentName, elapsedRealtime, this.mUserId);
+            this.mMetricsLogger.write(
+                    Helper.newLogMaker(1232, componentName, getServicePackageName(), i, z)
+                            .addTaggedData(
+                                    EndpointMonitorConst.TRACE_EVENT_SYS_ENTER_SETREUID,
+                                    Integer.valueOf(
+                                            j > 2147483647L ? Integer.MAX_VALUE : (int) j)));
         }
     }
 
@@ -268,12 +316,19 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 elapsedRealtime = Long.MAX_VALUE;
             }
             this.mDisabledInfoCache.addDisabledAppLocked(this.mUserId, str, elapsedRealtime);
-            this.mMetricsLogger.write(Helper.newLogMaker(1231, i, getServicePackageName(), z).setPackageName(str).addTaggedData(EndpointMonitorConst.TRACE_EVENT_SYS_ENTER_SETREUID, Integer.valueOf(j > 2147483647L ? Integer.MAX_VALUE : (int) j)));
+            this.mMetricsLogger.write(
+                    Helper.newLogMaker(1231, i, getServicePackageName(), z)
+                            .setPackageName(str)
+                            .addTaggedData(
+                                    EndpointMonitorConst.TRACE_EVENT_SYS_ENTER_SETREUID,
+                                    Integer.valueOf(
+                                            j > 2147483647L ? Integer.MAX_VALUE : (int) j)));
         }
     }
 
     public final void disableOwnedAutofillServicesLocked(int i) {
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "disableOwnedServices(", "): ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(i, "disableOwnedServices(", "): ");
         m.append(this.mInfo);
         Slog.i("AutofillManagerServiceImpl", m.toString());
         AutofillServiceInfo autofillServiceInfo = this.mInfo;
@@ -282,7 +337,11 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         }
         ServiceInfo serviceInfo = autofillServiceInfo.getServiceInfo();
         if (serviceInfo.applicationInfo.uid != i) {
-            StringBuilder m2 = BatteryService$$ExternalSyntheticOutline0.m(i, "disableOwnedServices(): ignored when called by UID ", " instead of ");
+            StringBuilder m2 =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i,
+                            "disableOwnedServices(): ignored when called by UID ",
+                            " instead of ");
             m2.append(serviceInfo.applicationInfo.uid);
             m2.append(" for service ");
             m2.append(this.mInfo);
@@ -295,10 +354,20 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             ComponentName componentName = serviceInfo.getComponentName();
             if (componentName.equals(ComponentName.unflattenFromString(componentNameLocked))) {
                 this.mMetricsLogger.action(1135, componentName.getPackageName());
-                Settings.Secure.putStringForUser(this.mMaster.getContext().getContentResolver(), "autofill_service", null, this.mUserId);
+                Settings.Secure.putStringForUser(
+                        this.mMaster.getContext().getContentResolver(),
+                        "autofill_service",
+                        null,
+                        this.mUserId);
                 forceRemoveAllSessionsLocked();
             } else {
-                Slog.w("AutofillManagerServiceImpl", "disableOwnedServices(): ignored because current service (" + serviceInfo + ") does not match Settings (" + componentNameLocked + ")");
+                Slog.w(
+                        "AutofillManagerServiceImpl",
+                        "disableOwnedServices(): ignored because current service ("
+                                + serviceInfo
+                                + ") does not match Settings ("
+                                + componentNameLocked
+                                + ")");
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
         } catch (Throwable th) {
@@ -323,12 +392,14 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         }
         printWriter.print("    ");
         printWriter.print("Default component: ");
-        printWriter.println(this.mMaster.getContext().getString(R.string.date_picker_decrement_month_button));
+        printWriter.println(
+                this.mMaster.getContext().getString(R.string.date_picker_decrement_month_button));
         printWriter.println();
         printWriter.print("    ");
         printWriter.println("mAugmentedAutofillName: ");
         printWriter.print("      ");
-        ((AutofillManagerService) this.mMaster).mAugmentedAutofillResolver.dumpShort(this.mUserId, printWriter);
+        ((AutofillManagerService) this.mMaster)
+                .mAugmentedAutofillResolver.dumpShort(this.mUserId, printWriter);
         printWriter.println();
         if (this.mRemoteAugmentedAutofillService != null) {
             printWriter.print("    ");
@@ -347,7 +418,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         printWriter.print("Default component: ");
         printWriter.println(this.mMaster.getContext().getString(R.string.db_default_sync_mode));
         printWriter.print("      ");
-        ((AutofillManagerService) this.mMaster).mFieldClassificationResolver.dumpShort(this.mUserId, printWriter);
+        ((AutofillManagerService) this.mMaster)
+                .mFieldClassificationResolver.dumpShort(this.mUserId, printWriter);
         printWriter.println();
         if (this.mRemoteFieldClassificationService != null) {
             printWriter.print("    ");
@@ -372,7 +444,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         printWriter.print("    ");
         printWriter.print("Compat pkgs: ");
         AutofillServiceInfo autofillServiceInfo = this.mInfo;
-        Object compatibilityPackages = autofillServiceInfo != null ? autofillServiceInfo.getCompatibilityPackages() : null;
+        Object compatibilityPackages =
+                autofillServiceInfo != null ? autofillServiceInfo.getCompatibilityPackages() : null;
         if (compatibilityPackages == null) {
             printWriter.println("N/A");
         } else {
@@ -381,13 +454,21 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         printWriter.print("    ");
         printWriter.print("Inline Suggestions Enabled: ");
         AutofillServiceInfo autofillServiceInfo2 = this.mInfo;
-        AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "    ", "Last prune: ", autofillServiceInfo2 != null ? autofillServiceInfo2.isInlineSuggestionsEnabled() : false);
+        AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                printWriter,
+                "    ",
+                "Last prune: ",
+                autofillServiceInfo2 != null
+                        ? autofillServiceInfo2.isInlineSuggestionsEnabled()
+                        : false);
         printWriter.println(this.mLastPrune);
         AutofillManagerService.DisabledInfoCache disabledInfoCache = this.mDisabledInfoCache;
         int i = this.mUserId;
         synchronized (disabledInfoCache.mLock) {
             try {
-                AutofillManagerService.AutofillDisabledInfo autofillDisabledInfo = (AutofillManagerService.AutofillDisabledInfo) disabledInfoCache.mCache.get(i);
+                AutofillManagerService.AutofillDisabledInfo autofillDisabledInfo =
+                        (AutofillManagerService.AutofillDisabledInfo)
+                                disabledInfoCache.mCache.get(i);
                 if (autofillDisabledInfo != null) {
                     autofillDisabledInfo.dumpLocked(printWriter);
                 }
@@ -413,10 +494,14 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 session.getClass();
                 printWriter.print("      ");
                 printWriter.print("id: ");
-                BroadcastStats$$ExternalSyntheticOutline0.m(session.id, printWriter, "      ", "uid: ");
-                BroadcastStats$$ExternalSyntheticOutline0.m(session.uid, printWriter, "      ", "taskId: ");
-                BroadcastStats$$ExternalSyntheticOutline0.m(session.taskId, printWriter, "      ", "flags: ");
-                BroadcastStats$$ExternalSyntheticOutline0.m(session.mFlags, printWriter, "      ", "displayId: ");
+                BroadcastStats$$ExternalSyntheticOutline0.m(
+                        session.id, printWriter, "      ", "uid: ");
+                BroadcastStats$$ExternalSyntheticOutline0.m(
+                        session.uid, printWriter, "      ", "taskId: ");
+                BroadcastStats$$ExternalSyntheticOutline0.m(
+                        session.taskId, printWriter, "      ", "flags: ");
+                BroadcastStats$$ExternalSyntheticOutline0.m(
+                        session.mFlags, printWriter, "      ", "displayId: ");
                 printWriter.println(session.mContext.getDisplayId());
                 printWriter.print("      ");
                 printWriter.print("state: ");
@@ -429,7 +514,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 printWriter.println(session.mActivityToken);
                 printWriter.print("      ");
                 printWriter.print("mStartTime: ");
-                ActivityManagerConstants$$ExternalSyntheticOutline0.m(session.mStartTime, printWriter, "      ", "Time to show UI: ");
+                ActivityManagerConstants$$ExternalSyntheticOutline0.m(
+                        session.mStartTime, printWriter, "      ", "Time to show UI: ");
                 long j = session.mUiShownTime;
                 if (j == 0) {
                     printWriter.println("N/A");
@@ -474,9 +560,14 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                     printWriter.print(logMaker.getTaggedData(1454));
                     Session.dumpNumericValue(printWriter, logMaker, "FLAGS", 1452);
                     Session.dumpNumericValue(printWriter, logMaker, "NUM_DATASETS", 909);
-                    Session.dumpNumericValue(printWriter, logMaker, "UI_LATENCY", EndpointMonitorConst.TRACE_EVENT_SYS_ENTER_SETREUID);
+                    Session.dumpNumericValue(
+                            printWriter,
+                            logMaker,
+                            "UI_LATENCY",
+                            EndpointMonitorConst.TRACE_EVENT_SYS_ENTER_SETREUID);
                     Object taggedData = logMaker.getTaggedData(1453);
-                    int intValue = !(taggedData instanceof Number) ? 0 : ((Number) taggedData).intValue();
+                    int intValue =
+                            !(taggedData instanceof Number) ? 0 : ((Number) taggedData).intValue();
                     if (intValue != 0) {
                         printWriter.print(", AUTH_STATUS=");
                         if (intValue != 912) {
@@ -525,8 +616,13 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 printWriter.println(session.mCurrentViewId);
                 printWriter.print("      ");
                 printWriter.print("mDestroyed: ");
-                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "      ", "mShowingSaveUi: ", session.mDestroyed);
-                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "      ", "mPendingSaveUi: ", session.mSessionFlags.mShowingSaveUi);
+                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                        printWriter, "      ", "mShowingSaveUi: ", session.mDestroyed);
+                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                        printWriter,
+                        "      ",
+                        "mPendingSaveUi: ",
+                        session.mSessionFlags.mShowingSaveUi);
                 printWriter.println(session.mPendingSaveUi);
                 int size3 = session.mViewStates.size();
                 printWriter.print("      ");
@@ -616,7 +712,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 }
                 printWriter.print("      ");
                 printWriter.print("mCompatMode: ");
-                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "      ", "mUrlBar: ", session.mCompatMode);
+                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                        printWriter, "      ", "mUrlBar: ", session.mCompatMode);
                 if (session.mUrlBar == null) {
                     printWriter.println("N/A");
                 } else {
@@ -635,7 +732,11 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 }
                 printWriter.print("      ");
                 printWriter.print("mSaveOnAllViewsInvisible: ");
-                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "      ", "mSelectedDatasetIds: ", session.mSaveOnAllViewsInvisible);
+                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                        printWriter,
+                        "      ",
+                        "mSelectedDatasetIds: ",
+                        session.mSaveOnAllViewsInvisible);
                 printWriter.println(session.mSelectedDatasetIds);
                 if (session.mSessionFlags.mAugmentedAutofillOnly) {
                     printWriter.print("      ");
@@ -680,7 +781,9 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             this.mClients.dump(printWriter, "      ");
         }
         FillEventHistory fillEventHistory = this.mEventHistory;
-        if (fillEventHistory == null || fillEventHistory.getEvents() == null || this.mEventHistory.getEvents().size() == 0) {
+        if (fillEventHistory == null
+                || fillEventHistory.getEvents() == null
+                || this.mEventHistory.getEvents().size() == 0) {
             printWriter.print("    ");
             printWriter.println("No event on last fill response");
         } else {
@@ -690,7 +793,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             int size5 = this.mEventHistory.getEvents().size();
             for (int i8 = 0; i8 < size5; i8++) {
                 FillEventHistory.Event event = this.mEventHistory.getEvents().get(i8);
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i8, "  ", ": eventType=");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(i8, "  ", ": eventType=");
                 m.append(event.getType());
                 m.append(" datasetId=");
                 m.append(event.getDatasetId());
@@ -711,7 +815,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         ComponentName serviceComponentName = fieldClassificationStrategy.getServiceComponentName();
         printWriter.print("      ");
         printWriter.print("User ID: ");
-        BroadcastStats$$ExternalSyntheticOutline0.m(fieldClassificationStrategy.mUserId, printWriter, "      ", "Queued commands: ");
+        BroadcastStats$$ExternalSyntheticOutline0.m(
+                fieldClassificationStrategy.mUserId, printWriter, "      ", "Queued commands: ");
         ArrayList arrayList2 = fieldClassificationStrategy.mQueuedCommands;
         if (arrayList2 == null) {
             printWriter.println("N/A");
@@ -728,7 +833,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         try {
             printWriter.print("      ");
             printWriter.print("Available algorithms: ");
-            printWriter.println(Arrays.toString(fieldClassificationStrategy.getAvailableAlgorithms()));
+            printWriter.println(
+                    Arrays.toString(fieldClassificationStrategy.getAvailableAlgorithms()));
             printWriter.print("      ");
             printWriter.print("Default algorithm: ");
             printWriter.println(fieldClassificationStrategy.getDefaultAlgorithm());
@@ -739,9 +845,9 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:123:0x01b6, code lost:
-    
-        r15 = false;
-     */
+
+       r15 = false;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:17:0x06bb  */
     /* JADX WARN: Removed duplicated region for block: B:20:0x070c  */
@@ -762,7 +868,10 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             Method dump skipped, instructions count: 2020
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.autofill.AutofillManagerServiceImpl.finishSessionLocked(int, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.autofill.AutofillManagerServiceImpl.finishSessionLocked(int,"
+                    + " int, int):void");
     }
 
     public final void forceRemoveAllSessionsLocked() {
@@ -770,7 +879,9 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         boolean z = false;
         if (size == 0) {
             AutoFillUI autoFillUI = this.mUi;
-            autoFillUI.mHandler.post(new AutoFillUI$$ExternalSyntheticLambda3(autoFillUI, null, 0 == true ? 1 : 0, z));
+            autoFillUI.mHandler.post(
+                    new AutoFillUI$$ExternalSyntheticLambda3(
+                            autoFillUI, null, 0 == true ? 1 : 0, z));
         } else {
             for (int i = size - 1; i >= 0; i--) {
                 ((Session) this.mSessions.valueAt(i)).forceRemoveFromServiceLocked(0);
@@ -782,10 +893,12 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         for (int size = this.mSessions.size() - 1; size >= 0; size--) {
             Session session = (Session) this.mSessions.valueAt(size);
             if (Helper.sVerbose) {
-                StringBuilder sb = new StringBuilder("forceRemoveFromServiceIfForAugmentedOnlyLocked(");
+                StringBuilder sb =
+                        new StringBuilder("forceRemoveFromServiceIfForAugmentedOnlyLocked(");
                 sb.append(session.id);
                 sb.append("): ");
-                ProxyManager$$ExternalSyntheticOutline0.m("AutofillSession", sb, session.mSessionFlags.mAugmentedAutofillOnly);
+                ProxyManager$$ExternalSyntheticOutline0.m(
+                        "AutofillSession", sb, session.mSessionFlags.mAugmentedAutofillOnly);
             }
             if (session.mSessionFlags.mAugmentedAutofillOnly) {
                 session.forceRemoveFromServiceLocked(0);
@@ -796,10 +909,12 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
     public final FillEventHistory getFillEventHistory(int i) {
         synchronized (this.mLock) {
             try {
-                if (this.mEventHistory != null && isCalledByServiceLocked(i, "getFillEventHistory")) {
+                if (this.mEventHistory != null
+                        && isCalledByServiceLocked(i, "getFillEventHistory")) {
                     return this.mEventHistory;
                 }
-                if (this.mAugmentedAutofillEventHistory == null || !isCalledByAugmentedAutofillServiceLocked(i, "getFillEventHistory")) {
+                if (this.mAugmentedAutofillEventHistory == null
+                        || !isCalledByAugmentedAutofillServiceLocked(i, "getFillEventHistory")) {
                     return null;
                 }
                 return this.mAugmentedAutofillEventHistory;
@@ -833,7 +948,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.autofill.RemoteAugmentedAutofillService getRemoteAugmentedAutofillServiceLocked() {
+    public final com.android.server.autofill.RemoteAugmentedAutofillService
+            getRemoteAugmentedAutofillServiceLocked() {
         /*
             r14 = this;
             com.android.server.autofill.RemoteAugmentedAutofillService r0 = r14.mRemoteAugmentedAutofillService
@@ -937,7 +1053,9 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             com.android.server.autofill.RemoteAugmentedAutofillService r14 = r14.mRemoteAugmentedAutofillService
             return r14
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.autofill.AutofillManagerServiceImpl.getRemoteAugmentedAutofillServiceLocked():com.android.server.autofill.RemoteAugmentedAutofillService");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.autofill.AutofillManagerServiceImpl.getRemoteAugmentedAutofillServiceLocked():com.android.server.autofill.RemoteAugmentedAutofillService");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:22:0x008f  */
@@ -946,7 +1064,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.autofill.RemoteFieldClassificationService getRemoteFieldClassificationServiceLocked() {
+    public final com.android.server.autofill.RemoteFieldClassificationService
+            getRemoteFieldClassificationServiceLocked() {
         /*
             r12 = this;
             com.android.server.autofill.RemoteFieldClassificationService r0 = r12.mRemoteFieldClassificationService
@@ -1050,7 +1169,9 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             com.android.server.autofill.RemoteFieldClassificationService r12 = r12.mRemoteFieldClassificationService
             return r12
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.autofill.AutofillManagerServiceImpl.getRemoteFieldClassificationServiceLocked():com.android.server.autofill.RemoteFieldClassificationService");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.autofill.AutofillManagerServiceImpl.getRemoteFieldClassificationServiceLocked():com.android.server.autofill.RemoteFieldClassificationService");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:10:0x0081  */
@@ -1061,7 +1182,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.autofill.RemoteInlineSuggestionRenderService getRemoteInlineSuggestionRenderServiceLocked() {
+    public final com.android.server.autofill.RemoteInlineSuggestionRenderService
+            getRemoteInlineSuggestionRenderServiceLocked() {
         /*
             r12 = this;
             com.android.server.autofill.RemoteInlineSuggestionRenderService r0 = r12.mRemoteInlineSuggestionRenderService
@@ -1151,7 +1273,9 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             com.android.server.autofill.RemoteInlineSuggestionRenderService r12 = r12.mRemoteInlineSuggestionRenderService
             return r12
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.autofill.AutofillManagerServiceImpl.getRemoteInlineSuggestionRenderServiceLocked():com.android.server.autofill.RemoteInlineSuggestionRenderService");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.autofill.AutofillManagerServiceImpl.getRemoteInlineSuggestionRenderServiceLocked():com.android.server.autofill.RemoteInlineSuggestionRenderService");
     }
 
     public final String[] getUrlBarResourceIdsForCompatMode(String str) {
@@ -1165,7 +1289,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 if (sparseArray != null) {
                     ArrayMap arrayMap = (ArrayMap) sparseArray.get(i);
                     if (arrayMap != null) {
-                        AutofillManagerService.PackageCompatState packageCompatState = (AutofillManagerService.PackageCompatState) arrayMap.get(str);
+                        AutofillManagerService.PackageCompatState packageCompatState =
+                                (AutofillManagerService.PackageCompatState) arrayMap.get(str);
                         if (packageCompatState != null) {
                             strArr = packageCompatState.urlBarResourceIds;
                         }
@@ -1204,17 +1329,38 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         boolean z = ((AutofillManagerService) abstractMasterSystemService).verbose;
         int i = this.mUserId;
         if (z) {
-            Slog.v("AutofillManagerServiceImpl", "isAugmentedAutofillService(): setupCompleted=" + this.mSetupComplete + ", disabled=" + this.mDisabled + ", augmentedService=" + ((AutofillManagerService) abstractMasterSystemService).mAugmentedAutofillResolver.getServiceName(i));
+            Slog.v(
+                    "AutofillManagerServiceImpl",
+                    "isAugmentedAutofillService(): setupCompleted="
+                            + this.mSetupComplete
+                            + ", disabled="
+                            + this.mDisabled
+                            + ", augmentedService="
+                            + ((AutofillManagerService) abstractMasterSystemService)
+                                    .mAugmentedAutofillResolver.getServiceName(i));
         }
-        return (!this.mSetupComplete || this.mDisabled || ((AutofillManagerService) abstractMasterSystemService).mAugmentedAutofillResolver.getServiceName(i) == null) ? false : true;
+        return (!this.mSetupComplete
+                        || this.mDisabled
+                        || ((AutofillManagerService) abstractMasterSystemService)
+                                        .mAugmentedAutofillResolver.getServiceName(i)
+                                == null)
+                ? false
+                : true;
     }
 
     public final boolean isCalledByAugmentedAutofillServiceLocked(int i, String str) {
         int i2;
-        RemoteAugmentedAutofillService remoteAugmentedAutofillServiceLocked = getRemoteAugmentedAutofillServiceLocked();
+        RemoteAugmentedAutofillService remoteAugmentedAutofillServiceLocked =
+                getRemoteAugmentedAutofillServiceLocked();
         int i3 = this.mUserId;
         if (remoteAugmentedAutofillServiceLocked == null) {
-            Slog.w("AutofillManagerServiceImpl", str + "() called by UID " + i + ", but there is no augmented autofill service defined for user " + i3);
+            Slog.w(
+                    "AutofillManagerServiceImpl",
+                    str
+                            + "() called by UID "
+                            + i
+                            + ", but there is no augmented autofill service defined for user "
+                            + i3);
             return false;
         }
         ServiceInfo serviceInfo = this.mRemoteAugmentedAutofillServiceInfo;
@@ -1222,7 +1368,9 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         AbstractMasterSystemService abstractMasterSystemService = this.mMaster;
         if (serviceInfo == null) {
             if (((AutofillManagerService) abstractMasterSystemService).verbose) {
-                Slog.v("AutofillManagerServiceImpl", "getAugmentedAutofillServiceUid(): no mRemoteAugmentedAutofillServiceInfo");
+                Slog.v(
+                        "AutofillManagerServiceImpl",
+                        "getAugmentedAutofillServiceUid(): no mRemoteAugmentedAutofillServiceInfo");
             }
             i2 = -1;
         } else {
@@ -1240,7 +1388,9 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         if (serviceInfo2 != null) {
             i4 = serviceInfo2.applicationInfo.uid;
         } else if (((AutofillManagerService) abstractMasterSystemService).verbose) {
-            Slog.v("AutofillManagerServiceImpl", "getAugmentedAutofillServiceUid(): no mRemoteAugmentedAutofillServiceInfo");
+            Slog.v(
+                    "AutofillManagerServiceImpl",
+                    "getAugmentedAutofillServiceUid(): no mRemoteAugmentedAutofillServiceInfo");
         }
         sb.append(i4);
         sb.append(" for user ");
@@ -1254,12 +1404,19 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         if (serviceUidLocked == i) {
             return true;
         }
-        Slog.w("AutofillManagerServiceImpl", str + "() called by UID " + i + ", but service UID is " + serviceUidLocked);
+        Slog.w(
+                "AutofillManagerServiceImpl",
+                str + "() called by UID " + i + ", but service UID is " + serviceUidLocked);
         return false;
     }
 
     public final boolean isFieldClassificationEnabledLocked() {
-        return Settings.Secure.getIntForUser(this.mMaster.getContext().getContentResolver(), "autofill_field_classification", 1, this.mUserId) == 1;
+        return Settings.Secure.getIntForUser(
+                        this.mMaster.getContext().getContentResolver(),
+                        "autofill_field_classification",
+                        1,
+                        this.mUserId)
+                == 1;
     }
 
     public final boolean isFieldClassificationServiceAvailableLocked() {
@@ -1267,9 +1424,23 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         boolean z = ((AutofillManagerService) abstractMasterSystemService).verbose;
         int i = this.mUserId;
         if (z) {
-            Slog.v("AutofillManagerServiceImpl", "isFieldClassificationService(): setupCompleted=" + this.mSetupComplete + ", disabled=" + this.mDisabled + ", augmentedService=" + ((AutofillManagerService) abstractMasterSystemService).mFieldClassificationResolver.getServiceName(i));
+            Slog.v(
+                    "AutofillManagerServiceImpl",
+                    "isFieldClassificationService(): setupCompleted="
+                            + this.mSetupComplete
+                            + ", disabled="
+                            + this.mDisabled
+                            + ", augmentedService="
+                            + ((AutofillManagerService) abstractMasterSystemService)
+                                    .mFieldClassificationResolver.getServiceName(i));
         }
-        return (!this.mSetupComplete || this.mDisabled || ((AutofillManagerService) abstractMasterSystemService).mFieldClassificationResolver.getServiceName(i) == null) ? false : true;
+        return (!this.mSetupComplete
+                        || this.mDisabled
+                        || ((AutofillManagerService) abstractMasterSystemService)
+                                        .mFieldClassificationResolver.getServiceName(i)
+                                == null)
+                ? false
+                : true;
     }
 
     public final boolean isPccClassificationEnabled() {
@@ -1292,14 +1463,22 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
     public final boolean isValidEventLocked(int i, String str) {
         FillEventHistory fillEventHistory = this.mEventHistory;
         if (fillEventHistory == null) {
-            Slog.w("AutofillManagerServiceImpl", str.concat(": not logging event because history is null"));
+            Slog.w(
+                    "AutofillManagerServiceImpl",
+                    str.concat(": not logging event because history is null"));
             return false;
         }
         if (i == fillEventHistory.getSessionId()) {
             return true;
         }
         if (Helper.sDebug) {
-            Slog.d("AutofillManagerServiceImpl", str + ": not logging event for session " + i + " because tracked session is " + this.mEventHistory.getSessionId());
+            Slog.d(
+                    "AutofillManagerServiceImpl",
+                    str
+                            + ": not logging event for session "
+                            + i
+                            + " because tracked session is "
+                            + this.mEventHistory.getSessionId());
         }
         return false;
     }
@@ -1312,9 +1491,22 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         for (int i = 0; i < size; i++) {
             int keyAt = this.mSessions.keyAt(i);
             AutofillServiceInfo autofillServiceInfo = this.mInfo;
-            String flattenToShortString = autofillServiceInfo == null ? "no_svc" : autofillServiceInfo.getServiceInfo().getComponentName().flattenToShortString();
+            String flattenToShortString =
+                    autofillServiceInfo == null
+                            ? "no_svc"
+                            : autofillServiceInfo
+                                    .getServiceInfo()
+                                    .getComponentName()
+                                    .flattenToShortString();
             ServiceInfo serviceInfo = this.mRemoteAugmentedAutofillServiceInfo;
-            arrayList.add(String.format("%d:%s:%s", Integer.valueOf(keyAt), flattenToShortString, serviceInfo == null ? "no_aug" : serviceInfo.getComponentName().flattenToShortString()));
+            arrayList.add(
+                    String.format(
+                            "%d:%s:%s",
+                            Integer.valueOf(keyAt),
+                            flattenToShortString,
+                            serviceInfo == null
+                                    ? "no_aug"
+                                    : serviceInfo.getComponentName().flattenToShortString()));
         }
     }
 
@@ -1323,7 +1515,10 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             try {
                 FillEventHistory fillEventHistory = this.mAugmentedAutofillEventHistory;
                 if (fillEventHistory != null && fillEventHistory.getSessionId() == i) {
-                    this.mAugmentedAutofillEventHistory.addEvent(new FillEventHistory.Event(0, str, bundle, null, null, null, null, null, null, null, null));
+                    this.mAugmentedAutofillEventHistory.addEvent(
+                            new FillEventHistory.Event(
+                                    0, str, bundle, null, null, null, null, null, null, null,
+                                    null));
                 }
             } finally {
             }
@@ -1334,7 +1529,10 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         synchronized (this.mLock) {
             try {
                 if (isValidEventLocked(i, "logDatasetShown")) {
-                    this.mEventHistory.addEvent(new FillEventHistory.Event(5, null, bundle, null, null, null, null, null, null, null, null, 0, i2));
+                    this.mEventHistory.addEvent(
+                            new FillEventHistory.Event(
+                                    5, null, bundle, null, null, null, null, null, null, null, null,
+                                    0, i2));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1347,15 +1545,21 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             try {
                 if (isValidEventLocked(i, "logViewEntered")) {
                     if (this.mEventHistory.getEvents() != null) {
-                        Iterator<FillEventHistory.Event> it = this.mEventHistory.getEvents().iterator();
+                        Iterator<FillEventHistory.Event> it =
+                                this.mEventHistory.getEvents().iterator();
                         while (it.hasNext()) {
                             if (it.next().getType() == 6) {
-                                Slog.v("AutofillManagerServiceImpl", "logViewEntered: already logged TYPE_VIEW_REQUESTED_AUTOFILL");
+                                Slog.v(
+                                        "AutofillManagerServiceImpl",
+                                        "logViewEntered: already logged"
+                                            + " TYPE_VIEW_REQUESTED_AUTOFILL");
                                 return;
                             }
                         }
                     }
-                    this.mEventHistory.addEvent(new FillEventHistory.Event(6, null, null, null, null, null, null, null, null, null, null));
+                    this.mEventHistory.addEvent(
+                            new FillEventHistory.Event(
+                                    6, null, null, null, null, null, null, null, null, null, null));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1366,19 +1570,27 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
     @Override // com.android.server.infra.AbstractPerUserSystemService
     public final ServiceInfo newServiceInfoLocked(ComponentName componentName) {
         AbstractMasterSystemService abstractMasterSystemService = this.mMaster;
-        PackageManager packageManager = abstractMasterSystemService.getContext().getPackageManager();
+        PackageManager packageManager =
+                abstractMasterSystemService.getContext().getPackageManager();
         Intent intent = new Intent("android.service.autofill.AutofillService");
         int i = this.mUserId;
         Iterator it = packageManager.queryIntentServicesAsUser(intent, 8388736, i).iterator();
         while (it.hasNext()) {
             if (((ResolveInfo) it.next()).serviceInfo.getComponentName().equals(componentName)) {
-                AutofillServiceInfo autofillServiceInfo = new AutofillServiceInfo(abstractMasterSystemService.getContext(), componentName, i);
+                AutofillServiceInfo autofillServiceInfo =
+                        new AutofillServiceInfo(
+                                abstractMasterSystemService.getContext(), componentName, i);
                 this.mInfo = autofillServiceInfo;
                 return autofillServiceInfo.getServiceInfo();
             }
         }
-        Slog.w("AutofillManagerServiceImpl", "Autofill service from '" + componentName.getPackageName() + "' doesnot have intent filter android.service.autofill.AutofillService");
-        throw new SecurityException("Service does not declare intent filter android.service.autofill.AutofillService");
+        Slog.w(
+                "AutofillManagerServiceImpl",
+                "Autofill service from '"
+                        + componentName.getPackageName()
+                        + "' doesnot have intent filter android.service.autofill.AutofillService");
+        throw new SecurityException(
+                "Service does not declare intent filter android.service.autofill.AutofillService");
     }
 
     public final void onPendingSaveUi(final int i, final IBinder iBinder) {
@@ -1390,55 +1602,90 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 for (int size = this.mSessions.size() - 1; size >= 0; size--) {
                     Session session = (Session) this.mSessions.valueAt(size);
                     PendingUi pendingUi = session.mPendingSaveUi;
-                    if (pendingUi != null && pendingUi.mState == 2 && iBinder.equals(pendingUi.mToken)) {
+                    if (pendingUi != null
+                            && pendingUi.mState == 2
+                            && iBinder.equals(pendingUi.mToken)) {
                         final AutoFillUI uiForShowing = session.getUiForShowing();
-                        uiForShowing.mHandler.post(new Runnable() { // from class: com.android.server.autofill.ui.AutoFillUI$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                AutoFillUI autoFillUI = AutoFillUI.this;
-                                int i2 = i;
-                                IBinder iBinder2 = iBinder;
-                                SaveUi saveUi = autoFillUI.mSaveUi;
-                                if (saveUi == null) {
-                                    BrailleDisplayConnection$$ExternalSyntheticOutline0.m(i2, "onPendingSaveUi(", "): no save ui", "AutofillUI");
-                                    return;
-                                }
-                                PendingUi pendingUi2 = saveUi.mPendingUi;
-                                if (!pendingUi2.mToken.equals(iBinder2)) {
-                                    Slog.w("SaveUi", "restore(" + i2 + "): got token " + iBinder2 + " instead of " + pendingUi2.mToken);
-                                    return;
-                                }
-                                LogMaker newLogMaker = Helper.newLogMaker(1134, saveUi.mComponentName, saveUi.mServicePackageName, pendingUi2.sessionId, saveUi.mCompatMode);
-                                try {
-                                    if (i2 == 1) {
-                                        newLogMaker.setType(5);
-                                        if (Helper.sDebug) {
-                                            Slog.d("SaveUi", "Cancelling pending save dialog for " + iBinder2);
+                        uiForShowing.mHandler.post(
+                                new Runnable() { // from class:
+                                                 // com.android.server.autofill.ui.AutoFillUI$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        AutoFillUI autoFillUI = AutoFillUI.this;
+                                        int i2 = i;
+                                        IBinder iBinder2 = iBinder;
+                                        SaveUi saveUi = autoFillUI.mSaveUi;
+                                        if (saveUi == null) {
+                                            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                                                    i2,
+                                                    "onPendingSaveUi(",
+                                                    "): no save ui",
+                                                    "AutofillUI");
+                                            return;
                                         }
-                                        saveUi.hide();
-                                    } else if (i2 != 2) {
-                                        newLogMaker.setType(11);
-                                        Slog.w("SaveUi", "restore(): invalid operation " + i2);
-                                    } else {
-                                        if (Helper.sDebug) {
-                                            Slog.d("SaveUi", "Restoring save dialog for " + iBinder2);
+                                        PendingUi pendingUi2 = saveUi.mPendingUi;
+                                        if (!pendingUi2.mToken.equals(iBinder2)) {
+                                            Slog.w(
+                                                    "SaveUi",
+                                                    "restore("
+                                                            + i2
+                                                            + "): got token "
+                                                            + iBinder2
+                                                            + " instead of "
+                                                            + pendingUi2.mToken);
+                                            return;
                                         }
-                                        newLogMaker.setType(1);
-                                        saveUi.show();
+                                        LogMaker newLogMaker =
+                                                Helper.newLogMaker(
+                                                        1134,
+                                                        saveUi.mComponentName,
+                                                        saveUi.mServicePackageName,
+                                                        pendingUi2.sessionId,
+                                                        saveUi.mCompatMode);
+                                        try {
+                                            if (i2 == 1) {
+                                                newLogMaker.setType(5);
+                                                if (Helper.sDebug) {
+                                                    Slog.d(
+                                                            "SaveUi",
+                                                            "Cancelling pending save dialog for "
+                                                                    + iBinder2);
+                                                }
+                                                saveUi.hide();
+                                            } else if (i2 != 2) {
+                                                newLogMaker.setType(11);
+                                                Slog.w(
+                                                        "SaveUi",
+                                                        "restore(): invalid operation " + i2);
+                                            } else {
+                                                if (Helper.sDebug) {
+                                                    Slog.d(
+                                                            "SaveUi",
+                                                            "Restoring save dialog for "
+                                                                    + iBinder2);
+                                                }
+                                                newLogMaker.setType(1);
+                                                saveUi.show();
+                                            }
+                                            saveUi.mMetricsLogger.write(newLogMaker);
+                                            pendingUi2.mState = 4;
+                                        } catch (Throwable th) {
+                                            saveUi.mMetricsLogger.write(newLogMaker);
+                                            throw th;
+                                        }
                                     }
-                                    saveUi.mMetricsLogger.write(newLogMaker);
-                                    pendingUi2.mState = 4;
-                                } catch (Throwable th) {
-                                    saveUi.mMetricsLogger.write(newLogMaker);
-                                    throw th;
-                                }
-                            }
-                        });
+                                });
                         return;
                     }
                 }
                 if (Helper.sDebug) {
-                    Slog.d("AutofillManagerServiceImpl", "No pending Save UI for token " + iBinder + " and operation " + DebugUtils.flagsToString(AutofillManager.class, "PENDING_UI_OPERATION_", i));
+                    Slog.d(
+                            "AutofillManagerServiceImpl",
+                            "No pending Save UI for token "
+                                    + iBinder
+                                    + " and operation "
+                                    + DebugUtils.flagsToString(
+                                            AutofillManager.class, "PENDING_UI_OPERATION_", i));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1446,16 +1693,29 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         }
     }
 
-    public final void requestSavedPasswordCount(final AutofillManagerServiceShellCommand.AnonymousClass1 anonymousClass1) {
+    public final void requestSavedPasswordCount(
+            final AutofillManagerServiceShellCommand.AnonymousClass1 anonymousClass1) {
         AbstractMasterSystemService abstractMasterSystemService = this.mMaster;
-        AutofillManagerService autofillManagerService = (AutofillManagerService) abstractMasterSystemService;
-        new RemoteFillService(abstractMasterSystemService.getContext(), this.mInfo.getServiceInfo().getComponentName(), this.mUserId, null, autofillManagerService.mAllowInstantService, autofillManagerService.mCredentialAutofillService).run(new ServiceConnector.VoidJob() { // from class: com.android.server.autofill.RemoteFillService$$ExternalSyntheticLambda1
-            public final void runNoResult(Object obj) {
-                IResultReceiver iResultReceiver = anonymousClass1;
-                int i = RemoteFillService.$r8$clinit;
-                ((IAutoFillService) obj).onSavedPasswordCountRequest(iResultReceiver);
-            }
-        });
+        AutofillManagerService autofillManagerService =
+                (AutofillManagerService) abstractMasterSystemService;
+        new RemoteFillService(
+                        abstractMasterSystemService.getContext(),
+                        this.mInfo.getServiceInfo().getComponentName(),
+                        this.mUserId,
+                        null,
+                        autofillManagerService.mAllowInstantService,
+                        autofillManagerService.mCredentialAutofillService)
+                .run(
+                        new ServiceConnector
+                                .VoidJob() { // from class:
+                                             // com.android.server.autofill.RemoteFillService$$ExternalSyntheticLambda1
+                            public final void runNoResult(Object obj) {
+                                IResultReceiver iResultReceiver = anonymousClass1;
+                                int i = RemoteFillService.$r8$clinit;
+                                ((IAutoFillService) obj)
+                                        .onSavedPasswordCountRequest(iResultReceiver);
+                            }
+                        });
     }
 
     public final void resetExtServiceLocked() {
@@ -1469,7 +1729,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                     Slog.d("FieldClassificationStrategy", "reset(): unbinding service.");
                 }
                 try {
-                    fieldClassificationStrategy.mContext.unbindService(fieldClassificationStrategy.mServiceConnection);
+                    fieldClassificationStrategy.mContext.unbindService(
+                            fieldClassificationStrategy.mServiceConnection);
                 } catch (IllegalArgumentException e) {
                     Slog.w("FieldClassificationStrategy", "reset(): " + e.getMessage());
                 }
@@ -1478,7 +1739,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 Slog.d("FieldClassificationStrategy", "reset(): service is not bound. Do nothing.");
             }
         }
-        RemoteInlineSuggestionRenderService remoteInlineSuggestionRenderService = this.mRemoteInlineSuggestionRenderService;
+        RemoteInlineSuggestionRenderService remoteInlineSuggestionRenderService =
+                this.mRemoteInlineSuggestionRenderService;
         if (remoteInlineSuggestionRenderService != null) {
             remoteInlineSuggestionRenderService.destroy();
             this.mRemoteInlineSuggestionRenderService = null;
@@ -1498,7 +1760,11 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                     session.updateTrackedIdsLocked();
                     return true;
                 }
-                Slog.w("AutofillSession", "Call to Session#switchActivity() rejected - session: " + session.id + " destroyed");
+                Slog.w(
+                        "AutofillSession",
+                        "Call to Session#switchActivity() rejected - session: "
+                                + session.id
+                                + " destroyed");
                 return true;
             } finally {
             }
@@ -1506,21 +1772,21 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:42:0x003c, code lost:
-    
-        r7 = r9.mLock;
-     */
+
+       r7 = r9.mLock;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:43:0x003e, code lost:
-    
-        monitor-enter(r7);
-     */
+
+       monitor-enter(r7);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:45:0x003f, code lost:
-    
-        r8 = r9.mDestroyed;
-     */
+
+       r8 = r9.mDestroyed;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x0041, code lost:
-    
-        monitor-exit(r7);
-     */
+
+       monitor-exit(r7);
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r7v10 */
     /* JADX WARN: Type inference failed for: r7v16 */
@@ -1625,7 +1891,9 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L9
             throw r11
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.autofill.AutofillManagerServiceImpl.sendStateToClients(boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.autofill.AutofillManagerServiceImpl.sendStateToClients(boolean):void");
     }
 
     public final boolean setAugmentedAutofillWhitelistLocked(int i, List list, List list2) {
@@ -1634,14 +1902,23 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             return false;
         }
         if (((AutofillManagerService) this.mMaster).verbose) {
-            Slog.v("AutofillManagerServiceImpl", "setAugmentedAutofillWhitelistLocked(packages=" + list + ", activities=" + list2 + ")");
+            Slog.v(
+                    "AutofillManagerServiceImpl",
+                    "setAugmentedAutofillWhitelistLocked(packages="
+                            + list
+                            + ", activities="
+                            + list2
+                            + ")");
         }
         synchronized (this.mLock) {
             try {
                 if (((AutofillManagerService) this.mMaster).verbose) {
-                    Slog.v("AutofillManagerServiceImpl", "whitelisting packages: " + list + "and activities: " + list2);
+                    Slog.v(
+                            "AutofillManagerServiceImpl",
+                            "whitelisting packages: " + list + "and activities: " + list2);
                 }
-                ((AutofillManagerService) this.mMaster).mAugmentedAutofillState.setWhitelist(this.mUserId, list, list2);
+                ((AutofillManagerService) this.mMaster)
+                        .mAugmentedAutofillState.setWhitelist(this.mUserId, list, list2);
             } catch (Throwable th) {
                 throw th;
             }
@@ -1650,7 +1927,9 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         if (serviceInfo != null) {
             str = serviceInfo.getComponentName().flattenToShortString();
         } else {
-            Slog.e("AutofillManagerServiceImpl", "setAugmentedAutofillWhitelistLocked(): no service");
+            Slog.e(
+                    "AutofillManagerServiceImpl",
+                    "setAugmentedAutofillWhitelistLocked(): no service");
             str = "N/A";
         }
         LogMaker addTaggedData = new LogMaker(1721).addTaggedData(908, str);
@@ -1671,7 +1950,10 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         }
         Session session = (Session) this.mSessions.get(i);
         if (session == null || i2 != session.uid) {
-            Slog.v("AutofillManagerServiceImpl", DualAppManagerService$$ExternalSyntheticOutline0.m(i, i2, "setAutofillFailure(): no session for ", "(", ")"));
+            Slog.v(
+                    "AutofillManagerServiceImpl",
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            i, i2, "setAutofillFailure(): no session for ", "(", ")"));
             return;
         }
         if (Helper.sVerbose && !list.isEmpty()) {
@@ -1686,19 +1968,31 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                 viewState.resetState(4);
                 viewState.setState(viewState.mState | 1024);
                 if (Helper.sVerbose) {
-                    Slog.v("AutofillSession", "Changed state of " + autofillId + " to " + viewState.getStateAsString());
+                    Slog.v(
+                            "AutofillSession",
+                            "Changed state of "
+                                    + autofillId
+                                    + " to "
+                                    + viewState.getStateAsString());
                 }
             }
         }
-        session.mPresentationStatsEventLogger.mEventInternal.ifPresent(new PresentationStatsEventLogger$$ExternalSyntheticLambda1(list.size(), 11));
+        session.mPresentationStatsEventLogger.mEventInternal.ifPresent(
+                new PresentationStatsEventLogger$$ExternalSyntheticLambda1(list.size(), 11));
     }
 
     public final void setHasCallback(int i, int i2, boolean z) {
         Session session;
-        if (isEnabledLocked() && (session = (Session) this.mSessions.get(i)) != null && i2 == session.uid) {
+        if (isEnabledLocked()
+                && (session = (Session) this.mSessions.get(i)) != null
+                && i2 == session.uid) {
             synchronized (this.mLock) {
                 if (session.mDestroyed) {
-                    Slog.w("AutofillSession", "Call to Session#setHasCallbackLocked() rejected - session: " + session.id + " destroyed");
+                    Slog.w(
+                            "AutofillSession",
+                            "Call to Session#setHasCallbackLocked() rejected - session: "
+                                    + session.id
+                                    + " destroyed");
                 } else {
                     session.mHasCallback = z;
                 }
@@ -1711,7 +2005,15 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             try {
                 if (isCalledByServiceLocked(i, "setUserData")) {
                     this.mUserData = userData;
-                    this.mMetricsLogger.write(new LogMaker(1272).setPackageName(getServicePackageName()).addTaggedData(914, Integer.valueOf(userData == null ? 0 : userData.getCategoryIds().length)));
+                    this.mMetricsLogger.write(
+                            new LogMaker(1272)
+                                    .setPackageName(getServicePackageName())
+                                    .addTaggedData(
+                                            914,
+                                            Integer.valueOf(
+                                                    userData == null
+                                                            ? 0
+                                                            : userData.getCategoryIds().length)));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1726,7 +2028,10 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         }
         Session session = (Session) this.mSessions.get(i);
         if (session == null || i2 != session.uid) {
-            Slog.v("AutofillManagerServiceImpl", DualAppManagerService$$ExternalSyntheticOutline0.m(i, i2, "setViewAutofilled(): no session for ", "(", ")"));
+            Slog.v(
+                    "AutofillManagerServiceImpl",
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            i, i2, "setViewAutofilled(): no session for ", "(", ")"));
             return;
         }
         if (Helper.sVerbose) {
@@ -1735,7 +2040,8 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         if (autofillId.getSessionId() == 0) {
             autofillId.setSessionId(session.id);
         }
-        session.mPresentationStatsEventLogger.mEventInternal.ifPresent(new PresentationStatsEventLogger$$ExternalSyntheticLambda4(1, autofillId));
+        session.mPresentationStatsEventLogger.mEventInternal.ifPresent(
+                new PresentationStatsEventLogger$$ExternalSyntheticLambda4(1, autofillId));
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -1750,12 +2056,29 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final long startSessionLocked(android.os.IBinder r30, int r31, int r32, android.os.IBinder r33, android.view.autofill.AutofillId r34, android.graphics.Rect r35, android.view.autofill.AutofillValue r36, boolean r37, android.content.ComponentName r38, boolean r39, boolean r40, int r41) {
+    public final long startSessionLocked(
+            android.os.IBinder r30,
+            int r31,
+            int r32,
+            android.os.IBinder r33,
+            android.view.autofill.AutofillId r34,
+            android.graphics.Rect r35,
+            android.view.autofill.AutofillValue r36,
+            boolean r37,
+            android.content.ComponentName r38,
+            boolean r39,
+            boolean r40,
+            int r41) {
         /*
             Method dump skipped, instructions count: 732
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.autofill.AutofillManagerServiceImpl.startSessionLocked(android.os.IBinder, int, int, android.os.IBinder, android.view.autofill.AutofillId, android.graphics.Rect, android.view.autofill.AutofillValue, boolean, android.content.ComponentName, boolean, boolean, int):long");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.autofill.AutofillManagerServiceImpl.startSessionLocked(android.os.IBinder,"
+                    + " int, int, android.os.IBinder, android.view.autofill.AutofillId,"
+                    + " android.graphics.Rect, android.view.autofill.AutofillValue, boolean,"
+                    + " android.content.ComponentName, boolean, boolean, int):long");
     }
 
     public final String toString() {
@@ -1763,7 +2086,10 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         sb.append(this.mUserId);
         sb.append(", component=");
         AutofillServiceInfo autofillServiceInfo = this.mInfo;
-        sb.append(autofillServiceInfo != null ? autofillServiceInfo.getServiceInfo().getComponentName() : null);
+        sb.append(
+                autofillServiceInfo != null
+                        ? autofillServiceInfo.getServiceInfo().getComponentName()
+                        : null);
         sb.append("]");
         return sb.toString();
     }
@@ -1790,7 +2116,10 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             try {
                 if (this.mRemoteAugmentedAutofillService != null) {
                     if (Helper.sVerbose) {
-                        Slog.v("AutofillManagerServiceImpl", "updateRemoteAugmentedAutofillService(): destroying old remote service");
+                        Slog.v(
+                                "AutofillManagerServiceImpl",
+                                "updateRemoteAugmentedAutofillService(): destroying old remote"
+                                    + " service");
                     }
                     forceRemoveForAugmentedOnlySessionsLocked();
                     this.mRemoteAugmentedAutofillService.unbind();
@@ -1798,16 +2127,24 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
                     this.mRemoteAugmentedAutofillServiceInfo = null;
                     AbstractMasterSystemService abstractMasterSystemService = this.mMaster;
                     if (((AutofillManagerService) abstractMasterSystemService).verbose) {
-                        Slog.v("AutofillManagerServiceImpl", "resetting augmented autofill whitelist");
+                        Slog.v(
+                                "AutofillManagerServiceImpl",
+                                "resetting augmented autofill whitelist");
                     }
-                    ((AutofillManagerService) abstractMasterSystemService).mAugmentedAutofillState.resetWhitelist(this.mUserId);
+                    ((AutofillManagerService) abstractMasterSystemService)
+                            .mAugmentedAutofillState.resetWhitelist(this.mUserId);
                 }
-                boolean isAugmentedAutofillServiceAvailableLocked = isAugmentedAutofillServiceAvailableLocked();
+                boolean isAugmentedAutofillServiceAvailableLocked =
+                        isAugmentedAutofillServiceAvailableLocked();
                 if (Helper.sVerbose) {
-                    Slog.v("AutofillManagerServiceImpl", "updateRemoteAugmentedAutofillService(): " + isAugmentedAutofillServiceAvailableLocked);
+                    Slog.v(
+                            "AutofillManagerServiceImpl",
+                            "updateRemoteAugmentedAutofillService(): "
+                                    + isAugmentedAutofillServiceAvailableLocked);
                 }
                 if (isAugmentedAutofillServiceAvailableLocked) {
-                    this.mRemoteAugmentedAutofillService = getRemoteAugmentedAutofillServiceLocked();
+                    this.mRemoteAugmentedAutofillService =
+                            getRemoteAugmentedAutofillServiceLocked();
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1820,18 +2157,26 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
             try {
                 if (this.mRemoteFieldClassificationService != null) {
                     if (Helper.sVerbose) {
-                        Slog.v("AutofillManagerServiceImpl", "updateRemoteFieldClassificationService(): destroying old remote service");
+                        Slog.v(
+                                "AutofillManagerServiceImpl",
+                                "updateRemoteFieldClassificationService(): destroying old remote"
+                                    + " service");
                     }
                     this.mRemoteFieldClassificationService.unbind();
                     this.mRemoteFieldClassificationService = null;
                     this.mRemoteFieldClassificationServiceInfo = null;
                 }
-                boolean isFieldClassificationServiceAvailableLocked = isFieldClassificationServiceAvailableLocked();
+                boolean isFieldClassificationServiceAvailableLocked =
+                        isFieldClassificationServiceAvailableLocked();
                 if (Helper.sVerbose) {
-                    Slog.v("AutofillManagerServiceImpl", "updateRemoteFieldClassificationService(): " + isFieldClassificationServiceAvailableLocked);
+                    Slog.v(
+                            "AutofillManagerServiceImpl",
+                            "updateRemoteFieldClassificationService(): "
+                                    + isFieldClassificationServiceAvailableLocked);
                 }
                 if (isFieldClassificationServiceAvailableLocked) {
-                    this.mRemoteFieldClassificationService = getRemoteFieldClassificationServiceLocked();
+                    this.mRemoteFieldClassificationService =
+                            getRemoteFieldClassificationServiceLocked();
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1839,7 +2184,14 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         }
     }
 
-    public final void updateSessionLocked(int i, AutofillId autofillId, Rect rect, AutofillValue autofillValue, int i2, int i3, int i4) {
+    public final void updateSessionLocked(
+            int i,
+            AutofillId autofillId,
+            Rect rect,
+            AutofillValue autofillValue,
+            int i2,
+            int i3,
+            int i4) {
         Session session = (Session) this.mSessions.get(i);
         if (session != null && session.uid == i2) {
             session.updateLocked(autofillId, rect, autofillValue, i3, i4);
@@ -1847,10 +2199,15 @@ public final class AutofillManagerServiceImpl extends AbstractPerUserSystemServi
         }
         if ((i4 & 1) == 0) {
             if (Helper.sVerbose) {
-                Slog.v("AutofillManagerServiceImpl", DualAppManagerService$$ExternalSyntheticOutline0.m(i, i2, "updateSessionLocked(): session gone for ", "(", ")"));
+                Slog.v(
+                        "AutofillManagerServiceImpl",
+                        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                i, i2, "updateSessionLocked(): session gone for ", "(", ")"));
             }
         } else if (Helper.sDebug) {
-            Slog.d("AutofillManagerServiceImpl", "restarting session " + i + " due to manual request on " + autofillId);
+            Slog.d(
+                    "AutofillManagerServiceImpl",
+                    "restarting session " + i + " due to manual request on " + autofillId);
         }
     }
 }

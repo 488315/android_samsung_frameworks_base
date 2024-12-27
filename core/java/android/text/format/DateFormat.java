@@ -10,7 +10,9 @@ import android.provider.Settings;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.SpannedString;
+
 import com.android.internal.content.NativeLibraryHelper;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,45 +23,32 @@ import java.util.TimeZone;
 /* loaded from: classes4.dex */
 public class DateFormat {
 
-    @Deprecated
-    public static final char AM_PM = 'a';
+    @Deprecated public static final char AM_PM = 'a';
 
-    @Deprecated
-    public static final char CAPITAL_AM_PM = 'A';
+    @Deprecated public static final char CAPITAL_AM_PM = 'A';
 
-    @Deprecated
-    public static final char DATE = 'd';
+    @Deprecated public static final char DATE = 'd';
 
-    @Deprecated
-    public static final char DAY = 'E';
+    @Deprecated public static final char DAY = 'E';
     static final long DISALLOW_DUPLICATE_FIELD_IN_SKELETON = 170233598;
 
-    @Deprecated
-    public static final char HOUR = 'h';
+    @Deprecated public static final char HOUR = 'h';
 
-    @Deprecated
-    public static final char HOUR_OF_DAY = 'k';
+    @Deprecated public static final char HOUR_OF_DAY = 'k';
 
-    @Deprecated
-    public static final char MINUTE = 'm';
+    @Deprecated public static final char MINUTE = 'm';
 
-    @Deprecated
-    public static final char MONTH = 'M';
+    @Deprecated public static final char MONTH = 'M';
 
-    @Deprecated
-    public static final char QUOTE = '\'';
+    @Deprecated public static final char QUOTE = '\'';
 
-    @Deprecated
-    public static final char SECONDS = 's';
+    @Deprecated public static final char SECONDS = 's';
 
-    @Deprecated
-    public static final char STANDALONE_MONTH = 'L';
+    @Deprecated public static final char STANDALONE_MONTH = 'L';
 
-    @Deprecated
-    public static final char TIME_ZONE = 'z';
+    @Deprecated public static final char TIME_ZONE = 'z';
 
-    @Deprecated
-    public static final char YEAR = 'y';
+    @Deprecated public static final char YEAR = 'y';
     private static boolean sIs24Hour;
     private static Locale sIs24HourLocale;
     private static final Object sLocaleLock = new Object();
@@ -69,7 +58,9 @@ public class DateFormat {
     }
 
     public static boolean is24HourFormat(Context context, int userHandle) {
-        String value = Settings.System.getStringForUser(context.getContentResolver(), Settings.System.TIME_12_24, userHandle);
+        String value =
+                Settings.System.getStringForUser(
+                        context.getContentResolver(), Settings.System.TIME_12_24, userHandle);
         if (value != null) {
             return value.equals("24");
         }
@@ -102,7 +93,8 @@ public class DateFormat {
     public static String getBestDateTimePattern(Locale locale, String skeleton) {
         ULocale uLocale = ULocale.forLocale(locale);
         DateTimePatternGenerator dtpg = DateTimePatternGenerator.getInstance(uLocale);
-        boolean allowDuplicateFields = !CompatChanges.isChangeEnabled(DISALLOW_DUPLICATE_FIELD_IN_SKELETON);
+        boolean allowDuplicateFields =
+                !CompatChanges.isChangeEnabled(DISALLOW_DUPLICATE_FIELD_IN_SKELETON);
         String pattern = dtpg.getBestPattern(skeleton, 0, allowDuplicateFields);
         return getCompatibleEnglishPattern(uLocale, pattern);
     }
@@ -119,7 +111,10 @@ public class DateFormat {
     public static String getTimeFormatString(Context context, int userHandle) {
         ULocale uLocale = ULocale.forLocale(context.getResources().getConfiguration().locale);
         DateTimePatternGenerator dtpg = DateTimePatternGenerator.getInstance(uLocale);
-        String pattern = is24HourFormat(context, userHandle) ? dtpg.getBestPattern("Hm") : dtpg.getBestPattern("hm");
+        String pattern =
+                is24HourFormat(context, userHandle)
+                        ? dtpg.getBestPattern("Hm")
+                        : dtpg.getBestPattern("hm");
         return getCompatibleEnglishPattern(uLocale, pattern);
     }
 
@@ -169,7 +164,8 @@ public class DateFormat {
                 continue;
             } else {
                 if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
-                    throw new IllegalArgumentException("Bad pattern character '" + ch + "' in " + pattern);
+                    throw new IllegalArgumentException(
+                            "Bad pattern character '" + ch + "' in " + pattern);
                 }
                 if (ch != '\'') {
                     continue;
@@ -393,11 +389,17 @@ public class DateFormat {
     }
 
     private static String zeroPad(int inValue, int inMinDigits) {
-        return String.format(Locale.getDefault(), "%0" + inMinDigits + XmlTags.ATTR_DESCRIPTION, Integer.valueOf(inValue));
+        return String.format(
+                Locale.getDefault(),
+                "%0" + inMinDigits + XmlTags.ATTR_DESCRIPTION,
+                Integer.valueOf(inValue));
     }
 
     public static DateFormatSymbols getIcuDateFormatSymbols(Locale locale) {
-        return new DateFormatSymbols((Class<? extends android.icu.util.Calendar>) android.icu.util.GregorianCalendar.class, locale);
+        return new DateFormatSymbols(
+                (Class<? extends android.icu.util.Calendar>)
+                        android.icu.util.GregorianCalendar.class,
+                locale);
     }
 
     private static String getCompatibleEnglishPattern(ULocale locale, String pattern) {

@@ -11,23 +11,27 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.util.Objects;
 
 /* loaded from: classes5.dex */
 public class ScreenshotRequest implements Parcelable {
-    public static final Parcelable.Creator<ScreenshotRequest> CREATOR = new Parcelable.Creator<ScreenshotRequest>() { // from class: com.android.internal.util.ScreenshotRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ScreenshotRequest createFromParcel(Parcel source) {
-            return new ScreenshotRequest(source);
-        }
+    public static final Parcelable.Creator<ScreenshotRequest> CREATOR =
+            new Parcelable.Creator<
+                    ScreenshotRequest>() { // from class:
+                                           // com.android.internal.util.ScreenshotRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ScreenshotRequest createFromParcel(Parcel source) {
+                    return new ScreenshotRequest(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ScreenshotRequest[] newArray(int size) {
-            return new ScreenshotRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ScreenshotRequest[] newArray(int size) {
+                    return new ScreenshotRequest[size];
+                }
+            };
     private static final String TAG = "ScreenshotRequest";
     private final Bitmap mBitmap;
     private final Rect mBoundsInScreen;
@@ -38,7 +42,15 @@ public class ScreenshotRequest implements Parcelable {
     private final int mType;
     private final int mUserId;
 
-    private ScreenshotRequest(int type, int source, ComponentName topComponent, int taskId, int userId, Bitmap bitmap, Rect boundsInScreen, Insets insets) {
+    private ScreenshotRequest(
+            int type,
+            int source,
+            ComponentName topComponent,
+            int taskId,
+            int userId,
+            Bitmap bitmap,
+            Rect boundsInScreen,
+            Insets insets) {
         this.mType = type;
         this.mSource = source;
         this.mTopComponent = topComponent;
@@ -55,7 +67,9 @@ public class ScreenshotRequest implements Parcelable {
         this.mTopComponent = (ComponentName) in.readTypedObject(ComponentName.CREATOR);
         this.mTaskId = in.readInt();
         this.mUserId = in.readInt();
-        this.mBitmap = HardwareBitmapBundler.bundleToHardwareBitmap((Bundle) in.readTypedObject(Bundle.CREATOR));
+        this.mBitmap =
+                HardwareBitmapBundler.bundleToHardwareBitmap(
+                        (Bundle) in.readTypedObject(Bundle.CREATOR));
         this.mBoundsInScreen = (Rect) in.readTypedObject(Rect.CREATOR);
         this.mInsets = (Insets) in.readTypedObject(Insets.CREATOR);
     }
@@ -129,12 +143,23 @@ public class ScreenshotRequest implements Parcelable {
 
         public ScreenshotRequest build() {
             if (this.mType == 1 && this.mBitmap != null) {
-                Log.w(ScreenshotRequest.TAG, "Bitmap provided, but request is fullscreen. Bitmap will be ignored.");
+                Log.w(
+                        ScreenshotRequest.TAG,
+                        "Bitmap provided, but request is fullscreen. Bitmap will be ignored.");
             }
             if (this.mType == 3 && this.mBitmap == null) {
-                throw new IllegalStateException("Request is PROVIDED_IMAGE, but no bitmap is provided!");
+                throw new IllegalStateException(
+                        "Request is PROVIDED_IMAGE, but no bitmap is provided!");
             }
-            return new ScreenshotRequest(this.mType, this.mSource, this.mTopComponent, this.mTaskId, this.mUserId, this.mBitmap, this.mBoundsInScreen, this.mInsets);
+            return new ScreenshotRequest(
+                    this.mType,
+                    this.mSource,
+                    this.mTopComponent,
+                    this.mTaskId,
+                    this.mUserId,
+                    this.mBitmap,
+                    this.mBoundsInScreen,
+                    this.mInsets);
         }
 
         public Builder setTopComponent(ComponentName topComponent) {
@@ -172,8 +197,7 @@ public class ScreenshotRequest implements Parcelable {
         private static final String KEY_BUFFER = "bitmap_util_buffer";
         private static final String KEY_COLOR_SPACE = "bitmap_util_color_space";
 
-        private HardwareBitmapBundler() {
-        }
+        private HardwareBitmapBundler() {}
 
         /* JADX INFO: Access modifiers changed from: private */
         public static Bundle hardwareBitmapToBundle(Bitmap bitmap) {
@@ -182,7 +206,8 @@ public class ScreenshotRequest implements Parcelable {
                 return null;
             }
             if (bitmap.getConfig() != Bitmap.Config.HARDWARE) {
-                throw new IllegalArgumentException("Passed bitmap must have hardware config, found: " + bitmap.getConfig());
+                throw new IllegalArgumentException(
+                        "Passed bitmap must have hardware config, found: " + bitmap.getConfig());
             }
             if (bitmap.getColorSpace() == null) {
                 colorSpace = new ParcelableColorSpace(ColorSpace.get(ColorSpace.Named.SRGB));
@@ -201,9 +226,14 @@ public class ScreenshotRequest implements Parcelable {
                 return null;
             }
             if (bundle.containsKey(KEY_BUFFER) && bundle.containsKey(KEY_COLOR_SPACE)) {
-                HardwareBuffer buffer = (HardwareBuffer) bundle.getParcelable(KEY_BUFFER, HardwareBuffer.class);
-                ParcelableColorSpace colorSpace = (ParcelableColorSpace) bundle.getParcelable(KEY_COLOR_SPACE, ParcelableColorSpace.class);
-                return Bitmap.wrapHardwareBuffer((HardwareBuffer) Objects.requireNonNull(buffer), colorSpace.getColorSpace());
+                HardwareBuffer buffer =
+                        (HardwareBuffer) bundle.getParcelable(KEY_BUFFER, HardwareBuffer.class);
+                ParcelableColorSpace colorSpace =
+                        (ParcelableColorSpace)
+                                bundle.getParcelable(KEY_COLOR_SPACE, ParcelableColorSpace.class);
+                return Bitmap.wrapHardwareBuffer(
+                        (HardwareBuffer) Objects.requireNonNull(buffer),
+                        colorSpace.getColorSpace());
             }
             throw new IllegalArgumentException("Bundle does not contain a hardware bitmap");
         }

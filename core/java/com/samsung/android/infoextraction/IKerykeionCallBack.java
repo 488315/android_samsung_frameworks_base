@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -15,8 +16,7 @@ public interface IKerykeionCallBack extends IInterface {
 
     public static class Default implements IKerykeionCallBack {
         @Override // com.samsung.android.infoextraction.IKerykeionCallBack
-        public void onCompleted(List<SemExtractedInfo> results) throws RemoteException {
-        }
+        public void onCompleted(List<SemExtractedInfo> results) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IKerykeionCallBack extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKerykeionCallBack {
+    public abstract static class Stub extends Binder implements IKerykeionCallBack {
         static final int TRANSACTION_onCompleted = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IKerykeionCallBack extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKerykeionCallBack.DESCRIPTOR);
             }
@@ -72,7 +73,8 @@ public interface IKerykeionCallBack extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<SemExtractedInfo> _arg0 = data.createTypedArrayList(SemExtractedInfo.CREATOR);
+                    List<SemExtractedInfo> _arg0 =
+                            data.createTypedArrayList(SemExtractedInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onCompleted(_arg0);
                     reply.writeNoException();

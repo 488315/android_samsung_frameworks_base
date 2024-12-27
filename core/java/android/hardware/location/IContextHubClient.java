@@ -1,6 +1,5 @@
 package android.hardware.location;
 
-import android.hardware.location.IContextHubTransactionCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -19,7 +18,10 @@ public interface IContextHubClient extends IInterface {
 
     int sendMessageToNanoApp(NanoAppMessage nanoAppMessage) throws RemoteException;
 
-    int sendReliableMessageToNanoApp(NanoAppMessage nanoAppMessage, IContextHubTransactionCallback iContextHubTransactionCallback) throws RemoteException;
+    int sendReliableMessageToNanoApp(
+            NanoAppMessage nanoAppMessage,
+            IContextHubTransactionCallback iContextHubTransactionCallback)
+            throws RemoteException;
 
     public static class Default implements IContextHubClient {
         @Override // android.hardware.location.IContextHubClient
@@ -28,8 +30,7 @@ public interface IContextHubClient extends IInterface {
         }
 
         @Override // android.hardware.location.IContextHubClient
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubClient
         public int getId() throws RemoteException {
@@ -37,15 +38,16 @@ public interface IContextHubClient extends IInterface {
         }
 
         @Override // android.hardware.location.IContextHubClient
-        public void callbackFinished() throws RemoteException {
-        }
+        public void callbackFinished() throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubClient
-        public void reliableMessageCallbackFinished(int messageSequenceNumber, byte errorCode) throws RemoteException {
-        }
+        public void reliableMessageCallbackFinished(int messageSequenceNumber, byte errorCode)
+                throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubClient
-        public int sendReliableMessageToNanoApp(NanoAppMessage message, IContextHubTransactionCallback transactionCallback) throws RemoteException {
+        public int sendReliableMessageToNanoApp(
+                NanoAppMessage message, IContextHubTransactionCallback transactionCallback)
+                throws RemoteException {
             return 0;
         }
 
@@ -55,7 +57,7 @@ public interface IContextHubClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContextHubClient {
+    public abstract static class Stub extends Binder implements IContextHubClient {
         public static final String DESCRIPTOR = "android.hardware.location.IContextHubClient";
         static final int TRANSACTION_callbackFinished = 4;
         static final int TRANSACTION_close = 2;
@@ -109,7 +111,8 @@ public interface IContextHubClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -119,7 +122,8 @@ public interface IContextHubClient extends IInterface {
             }
             switch (code) {
                 case 1:
-                    NanoAppMessage _arg0 = (NanoAppMessage) data.readTypedObject(NanoAppMessage.CREATOR);
+                    NanoAppMessage _arg0 =
+                            (NanoAppMessage) data.readTypedObject(NanoAppMessage.CREATOR);
                     data.enforceNoDataAvail();
                     int _result = sendMessageToNanoApp(_arg0);
                     reply.writeNoException();
@@ -146,8 +150,11 @@ public interface IContextHubClient extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 6:
-                    NanoAppMessage _arg03 = (NanoAppMessage) data.readTypedObject(NanoAppMessage.CREATOR);
-                    IContextHubTransactionCallback _arg12 = IContextHubTransactionCallback.Stub.asInterface(data.readStrongBinder());
+                    NanoAppMessage _arg03 =
+                            (NanoAppMessage) data.readTypedObject(NanoAppMessage.CREATOR);
+                    IContextHubTransactionCallback _arg12 =
+                            IContextHubTransactionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result3 = sendReliableMessageToNanoApp(_arg03, _arg12);
                     reply.writeNoException();
@@ -236,7 +243,8 @@ public interface IContextHubClient extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubClient
-            public void reliableMessageCallbackFinished(int messageSequenceNumber, byte errorCode) throws RemoteException {
+            public void reliableMessageCallbackFinished(int messageSequenceNumber, byte errorCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -252,7 +260,9 @@ public interface IContextHubClient extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubClient
-            public int sendReliableMessageToNanoApp(NanoAppMessage message, IContextHubTransactionCallback transactionCallback) throws RemoteException {
+            public int sendReliableMessageToNanoApp(
+                    NanoAppMessage message, IContextHubTransactionCallback transactionCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

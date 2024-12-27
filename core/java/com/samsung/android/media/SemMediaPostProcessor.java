@@ -1,6 +1,7 @@
 package com.samsung.android.media;
 
 import android.view.Surface;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -73,7 +74,8 @@ public final class SemMediaPostProcessor {
 
     private static final native void native_init();
 
-    private static final native boolean native_is_supported(int i, String[] strArr, Object[] objArr);
+    private static final native boolean native_is_supported(
+            int i, String[] strArr, Object[] objArr);
 
     private final native void native_queueInputBuffer(int i, long j, int i2);
 
@@ -505,7 +507,8 @@ public final class SemMediaPostProcessor {
         return native_createInputSurface();
     }
 
-    public void configure(ProcessingFormat config, Surface surface) throws IllegalStateException, IllegalArgumentException {
+    public void configure(ProcessingFormat config, Surface surface)
+            throws IllegalStateException, IllegalArgumentException {
         String[] keys = (String[]) config.format.keySet().toArray(new String[0]);
         Object[] values = config.format.values().toArray(new Object[0]);
         native_configure(keys, values, surface);
@@ -519,7 +522,8 @@ public final class SemMediaPostProcessor {
         native_setParameter(key, value);
     }
 
-    public ByteBuffer dequeueInputBuffer(BufferInfo bufferInfo, long timeoutUs) throws IllegalStateException {
+    public ByteBuffer dequeueInputBuffer(BufferInfo bufferInfo, long timeoutUs)
+            throws IllegalStateException {
         return native_dequeueInputBuffer(bufferInfo, timeoutUs);
     }
 
@@ -527,7 +531,8 @@ public final class SemMediaPostProcessor {
         native_queueInputBuffer(bufferInfo.index, bufferInfo.timeUs, bufferInfo.flags);
     }
 
-    public ByteBuffer dequeueOutputBuffer(BufferInfo bufferInfo, long timeoutUs) throws IllegalStateException {
+    public ByteBuffer dequeueOutputBuffer(BufferInfo bufferInfo, long timeoutUs)
+            throws IllegalStateException {
         return native_dequeueOutputBuffer(bufferInfo, timeoutUs);
     }
 
@@ -543,7 +548,8 @@ public final class SemMediaPostProcessor {
         native_signalEndOfInputStream();
     }
 
-    public void renderAndReleaseOutputBuffer(int index, long timeUs, long realTimeNs) throws IllegalStateException {
+    public void renderAndReleaseOutputBuffer(int index, long timeUs, long realTimeNs)
+            throws IllegalStateException {
         native_renderAndReleaseOutputBuffer(index, timeUs, realTimeNs);
     }
 

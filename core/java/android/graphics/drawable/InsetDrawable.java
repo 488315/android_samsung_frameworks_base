@@ -6,13 +6,15 @@ import android.graphics.Bitmap;
 import android.graphics.Insets;
 import android.graphics.Outline;
 import android.graphics.Rect;
-import android.graphics.drawable.DrawableWrapper;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class InsetDrawable extends DrawableWrapper {
@@ -32,7 +34,8 @@ public class InsetDrawable extends DrawableWrapper {
         this(drawable, inset, inset, inset, inset);
     }
 
-    public InsetDrawable(Drawable drawable, int insetLeft, int insetTop, int insetRight, int insetBottom) {
+    public InsetDrawable(
+            Drawable drawable, int insetLeft, int insetTop, int insetRight, int insetBottom) {
         this(new InsetState(null, null), (Resources) null);
         this.mState.mInsetLeft = new InsetValue(0.0f, insetLeft);
         this.mState.mInsetTop = new InsetValue(0.0f, insetTop);
@@ -41,7 +44,12 @@ public class InsetDrawable extends DrawableWrapper {
         setDrawable(drawable);
     }
 
-    public InsetDrawable(Drawable drawable, float insetLeftFraction, float insetTopFraction, float insetRightFraction, float insetBottomFraction) {
+    public InsetDrawable(
+            Drawable drawable,
+            float insetLeftFraction,
+            float insetTopFraction,
+            float insetRightFraction,
+            float insetBottomFraction) {
         this(new InsetState(null, null), (Resources) null);
         this.mState.mInsetLeft = new InsetValue(insetLeftFraction, 0);
         this.mState.mInsetTop = new InsetValue(insetTopFraction, 0);
@@ -51,7 +59,9 @@ public class InsetDrawable extends DrawableWrapper {
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.InsetDrawable);
         super.inflate(r, parser, attrs, theme);
         updateStateFromTypedArray(a);
@@ -81,7 +91,10 @@ public class InsetDrawable extends DrawableWrapper {
     private void verifyRequiredAttributes(TypedArray a) throws XmlPullParserException {
         if (getDrawable() == null) {
             if (this.mState.mThemeAttrs == null || this.mState.mThemeAttrs[1] == 0) {
-                throw new XmlPullParserException(a.getPositionDescription() + ": <inset> tag requires a 'drawable' attribute or child tag defining a drawable");
+                throw new XmlPullParserException(
+                        a.getPositionDescription()
+                                + ": <inset> tag requires a 'drawable' attribute or child tag"
+                                + " defining a drawable");
             }
         }
     }
@@ -140,14 +153,21 @@ public class InsetDrawable extends DrawableWrapper {
         padding.right += this.mTmpInsetRect.right;
         padding.top += this.mTmpInsetRect.top;
         padding.bottom += this.mTmpInsetRect.bottom;
-        return pad || (((this.mTmpInsetRect.left | this.mTmpInsetRect.right) | this.mTmpInsetRect.top) | this.mTmpInsetRect.bottom) != 0;
+        return pad
+                || (((this.mTmpInsetRect.left | this.mTmpInsetRect.right) | this.mTmpInsetRect.top)
+                                | this.mTmpInsetRect.bottom)
+                        != 0;
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
     public Insets getOpticalInsets() {
         Insets contentInsets = super.getOpticalInsets();
         getInsets(this.mTmpInsetRect);
-        return Insets.of(contentInsets.left + this.mTmpInsetRect.left, contentInsets.top + this.mTmpInsetRect.top, contentInsets.right + this.mTmpInsetRect.right, contentInsets.bottom + this.mTmpInsetRect.bottom);
+        return Insets.of(
+                contentInsets.left + this.mTmpInsetRect.left,
+                contentInsets.top + this.mTmpInsetRect.top,
+                contentInsets.right + this.mTmpInsetRect.right,
+                contentInsets.bottom + this.mTmpInsetRect.bottom);
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
@@ -155,7 +175,11 @@ public class InsetDrawable extends DrawableWrapper {
         InsetState insetState = this.mState;
         int opacity = getDrawable().getOpacity();
         getInsets(this.mTmpInsetRect);
-        if (opacity == -1 && (this.mTmpInsetRect.left > 0 || this.mTmpInsetRect.top > 0 || this.mTmpInsetRect.right > 0 || this.mTmpInsetRect.bottom > 0)) {
+        if (opacity == -1
+                && (this.mTmpInsetRect.left > 0
+                        || this.mTmpInsetRect.top > 0
+                        || this.mTmpInsetRect.right > 0
+                        || this.mTmpInsetRect.bottom > 0)) {
             return -3;
         }
         return opacity;
@@ -179,7 +203,9 @@ public class InsetDrawable extends DrawableWrapper {
         if (childWidth < 0 || fraction >= 1.0f) {
             return -1;
         }
-        return ((int) (childWidth / (1.0f - fraction))) + this.mState.mInsetLeft.mDimension + this.mState.mInsetRight.mDimension;
+        return ((int) (childWidth / (1.0f - fraction)))
+                + this.mState.mInsetLeft.mDimension
+                + this.mState.mInsetRight.mDimension;
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
@@ -189,7 +215,9 @@ public class InsetDrawable extends DrawableWrapper {
         if (childHeight < 0 || fraction >= 1.0f) {
             return -1;
         }
-        return ((int) (childHeight / (1.0f - fraction))) + this.mState.mInsetTop.mDimension + this.mState.mInsetBottom.mDimension;
+        return ((int) (childHeight / (1.0f - fraction)))
+                + this.mState.mInsetTop.mDimension
+                + this.mState.mInsetBottom.mDimension;
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
@@ -242,7 +270,8 @@ public class InsetDrawable extends DrawableWrapper {
             this.mInsetBottom.scaleFromDensity(sourceDensity, targetDensity);
         }
 
-        @Override // android.graphics.drawable.DrawableWrapper.DrawableWrapperState, android.graphics.drawable.Drawable.ConstantState
+        @Override // android.graphics.drawable.DrawableWrapper.DrawableWrapperState,
+        // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable(Resources res) {
             InsetState state;
             if (res != null) {
@@ -279,7 +308,8 @@ public class InsetDrawable extends DrawableWrapper {
 
         void scaleFromDensity(int sourceDensity, int targetDensity) {
             if (this.mDimension != 0) {
-                this.mDimension = Bitmap.scaleFromDensity(this.mDimension, sourceDensity, targetDensity);
+                this.mDimension =
+                        Bitmap.scaleFromDensity(this.mDimension, sourceDensity, targetDensity);
             }
         }
 

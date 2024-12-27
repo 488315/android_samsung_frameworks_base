@@ -160,7 +160,7 @@ public class SecP192R1Point extends ECPoint.AbstractFp {
         if (!Z1IsOne) {
             SecP192R1Field.multiply(Z3.x, Z1.x, Z3.x);
         }
-        return new SecP192R1Point(curve, X3, Y3, new ECFieldElement[]{Z3});
+        return new SecP192R1Point(curve, X3, Y3, new ECFieldElement[] {Z3});
     }
 
     @Override // com.android.internal.org.bouncycastle.math.ec.ECPoint

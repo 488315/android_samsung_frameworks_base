@@ -7,19 +7,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class CVMessage implements Parcelable {
-    public static final Parcelable.Creator<CVMessage> CREATOR = new Parcelable.Creator<CVMessage>() { // from class: com.sec.android.allshare.iface.CVMessage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CVMessage createFromParcel(Parcel src) {
-            return new CVMessage(src);
-        }
+    public static final Parcelable.Creator<CVMessage> CREATOR =
+            new Parcelable.Creator<
+                    CVMessage>() { // from class: com.sec.android.allshare.iface.CVMessage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CVMessage createFromParcel(Parcel src) {
+                    return new CVMessage(src);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CVMessage[] newArray(int size) {
-            return new CVMessage[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CVMessage[] newArray(int size) {
+                    return new CVMessage[size];
+                }
+            };
     public static final int CVM_TYPE_EVENT = 4;
     public static final int CVM_TYPE_REQUEST = 2;
     public static final int CVM_TYPE_RESPONSE = 3;

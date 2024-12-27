@@ -16,18 +16,21 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.app.GameManagerService;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -55,7 +58,8 @@ public final class CompatModePackages {
                 return;
             }
             CompatModePackages compatModePackages = CompatModePackages.this;
-            WindowManagerGlobalLock windowManagerGlobalLock = compatModePackages.mService.mGlobalLock;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    compatModePackages.mService.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
@@ -71,7 +75,8 @@ public final class CompatModePackages {
                 try {
                     TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(fileOutputStream);
                     resolveSerializer.startDocument((String) null, Boolean.TRUE);
-                    resolveSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+                    resolveSerializer.setFeature(
+                            "http://xmlpull.org/v1/doc/features.html#indent-output", true);
                     resolveSerializer.startTag((String) null, "compat-packages");
                     IPackageManager packageManager = AppGlobals.getPackageManager();
                     for (Map.Entry entry : hashMap.entrySet()) {
@@ -84,8 +89,12 @@ public final class CompatModePackages {
                                 applicationInfo = null;
                             }
                             if (applicationInfo != null) {
-                                CompatibilityInfo compatibilityInfoForPackageLocked = compatModePackages.compatibilityInfoForPackageLocked(applicationInfo);
-                                if (!compatibilityInfoForPackageLocked.alwaysSupportsScreen() && !compatibilityInfoForPackageLocked.neverSupportsScreen()) {
+                                CompatibilityInfo compatibilityInfoForPackageLocked =
+                                        compatModePackages.compatibilityInfoForPackageLocked(
+                                                applicationInfo);
+                                if (!compatibilityInfoForPackageLocked.alwaysSupportsScreen()
+                                        && !compatibilityInfoForPackageLocked
+                                                .neverSupportsScreen()) {
                                     resolveSerializer.startTag((String) null, "pkg");
                                     resolveSerializer.attribute((String) null, "name", str);
                                     resolveSerializer.attributeInt((String) null, "mode", intValue);
@@ -111,13 +120,15 @@ public final class CompatModePackages {
         }
     }
 
-    public CompatModePackages(Handler handler, ActivityTaskManagerService activityTaskManagerService, File file) {
+    public CompatModePackages(
+            Handler handler, ActivityTaskManagerService activityTaskManagerService, File file) {
         FileInputStream openRead;
         TypedXmlPullParser resolvePullParser;
         int eventType;
         String attributeValue;
         this.mService = activityTaskManagerService;
-        AtomicFile atomicFile = new AtomicFile(new File(file, "packages-compat.xml"), "compat-mode");
+        AtomicFile atomicFile =
+                new AtomicFile(new File(file, "packages-compat.xml"), "compat-mode");
         this.mFile = atomicFile;
         this.mHandler = new CompatHandler(handler.getLooper());
         FileInputStream fileInputStream = null;
@@ -181,8 +192,17 @@ public final class CompatModePackages {
                     do {
                         if (next == 2) {
                             String name = resolvePullParser.getName();
-                            if (resolvePullParser.getDepth() == 2 && "pkg".equals(name) && (attributeValue = resolvePullParser.getAttributeValue((String) null, "name")) != null) {
-                                this.mPackages.put(attributeValue, Integer.valueOf(resolvePullParser.getAttributeInt((String) null, "mode", 0)));
+                            if (resolvePullParser.getDepth() == 2
+                                    && "pkg".equals(name)
+                                    && (attributeValue =
+                                                    resolvePullParser.getAttributeValue(
+                                                            (String) null, "name"))
+                                            != null) {
+                                this.mPackages.put(
+                                        attributeValue,
+                                        Integer.valueOf(
+                                                resolvePullParser.getAttributeInt(
+                                                        (String) null, "mode", 0)));
                             }
                         }
                         next = resolvePullParser.next();
@@ -198,16 +218,35 @@ public final class CompatModePackages {
         }
     }
 
-    public final CompatibilityInfo compatibilityInfoForPackageLocked(ApplicationInfo applicationInfo) {
+    public final CompatibilityInfo compatibilityInfoForPackageLocked(
+            ApplicationInfo applicationInfo) {
         boolean z = (getPackageFlags(applicationInfo.packageName) & 2) != 0;
-        CompatibilityInfo.CompatScale compatScaleFromProvider = getCompatScaleFromProvider(applicationInfo.uid, applicationInfo.packageName);
-        float compatScale = compatScaleFromProvider != null ? compatScaleFromProvider.mScaleFactor : getCompatScale(applicationInfo.uid, applicationInfo.packageName, false);
-        float f = compatScaleFromProvider != null ? compatScaleFromProvider.mDensityScaleFactor : compatScale;
+        CompatibilityInfo.CompatScale compatScaleFromProvider =
+                getCompatScaleFromProvider(applicationInfo.uid, applicationInfo.packageName);
+        float compatScale =
+                compatScaleFromProvider != null
+                        ? compatScaleFromProvider.mScaleFactor
+                        : getCompatScale(applicationInfo.uid, applicationInfo.packageName, false);
+        float f =
+                compatScaleFromProvider != null
+                        ? compatScaleFromProvider.mDensityScaleFactor
+                        : compatScale;
         Configuration globalConfiguration = this.mService.getGlobalConfiguration();
-        CompatibilityInfo compatibilityInfo = new CompatibilityInfo(applicationInfo, globalConfiguration.screenLayout, globalConfiguration.smallestScreenWidthDp, z, compatScale, f);
+        CompatibilityInfo compatibilityInfo =
+                new CompatibilityInfo(
+                        applicationInfo,
+                        globalConfiguration.screenLayout,
+                        globalConfiguration.smallestScreenWidthDp,
+                        z,
+                        compatScale,
+                        f);
         if (applicationInfo.flags != 0 && applicationInfo.sourceDir != null) {
-            if (!compatibilityInfo.supportsScreen() && !"android".equals(applicationInfo.packageName)) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("Use legacy screen compat mode: "), applicationInfo.packageName, "ActivityTaskManager");
+            if (!compatibilityInfo.supportsScreen()
+                    && !"android".equals(applicationInfo.packageName)) {
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Use legacy screen compat mode: "),
+                        applicationInfo.packageName,
+                        "ActivityTaskManager");
                 this.mLegacyScreenCompatPackages.put(applicationInfo.packageName.hashCode(), true);
             } else if (this.mLegacyScreenCompatPackages.size() > 0) {
                 this.mLegacyScreenCompatPackages.delete(applicationInfo.packageName.hashCode());
@@ -225,7 +264,69 @@ public final class CompatModePackages {
         boolean isChangeEnabled = CompatChanges.isChangeEnabled(168419799L, str, userHandleForUid);
         boolean isChangeEnabled2 = CompatChanges.isChangeEnabled(273564678L, str, userHandleForUid);
         if (isChangeEnabled || isChangeEnabled2) {
-            float f = CompatChanges.isChangeEnabled(182811243L, str, userHandleForUid) ? 0.9f : CompatChanges.isChangeEnabled(189969734L, str, userHandleForUid) ? 0.85f : CompatChanges.isChangeEnabled(176926753L, str, userHandleForUid) ? 0.8f : CompatChanges.isChangeEnabled(189969779L, str, userHandleForUid) ? 0.75f : CompatChanges.isChangeEnabled(176926829L, str, userHandleForUid) ? 0.7f : CompatChanges.isChangeEnabled(189969744L, str, userHandleForUid) ? 0.65f : CompatChanges.isChangeEnabled(176926771L, str, userHandleForUid) ? 0.6f : CompatChanges.isChangeEnabled(189970036L, str, userHandleForUid) ? 0.55f : CompatChanges.isChangeEnabled(176926741L, str, userHandleForUid) ? 0.5f : CompatChanges.isChangeEnabled(189969782L, str, userHandleForUid) ? 0.45f : CompatChanges.isChangeEnabled(189970038L, str, userHandleForUid) ? 0.4f : CompatChanges.isChangeEnabled(189969749L, str, userHandleForUid) ? 0.35f : CompatChanges.isChangeEnabled(189970040L, str, userHandleForUid) ? 0.3f : 1.0f;
+            float f =
+                    CompatChanges.isChangeEnabled(182811243L, str, userHandleForUid)
+                            ? 0.9f
+                            : CompatChanges.isChangeEnabled(189969734L, str, userHandleForUid)
+                                    ? 0.85f
+                                    : CompatChanges.isChangeEnabled(
+                                                    176926753L, str, userHandleForUid)
+                                            ? 0.8f
+                                            : CompatChanges.isChangeEnabled(
+                                                            189969779L, str, userHandleForUid)
+                                                    ? 0.75f
+                                                    : CompatChanges.isChangeEnabled(
+                                                                    176926829L,
+                                                                    str,
+                                                                    userHandleForUid)
+                                                            ? 0.7f
+                                                            : CompatChanges.isChangeEnabled(
+                                                                            189969744L,
+                                                                            str,
+                                                                            userHandleForUid)
+                                                                    ? 0.65f
+                                                                    : CompatChanges.isChangeEnabled(
+                                                                                    176926771L,
+                                                                                    str,
+                                                                                    userHandleForUid)
+                                                                            ? 0.6f
+                                                                            : CompatChanges
+                                                                                            .isChangeEnabled(
+                                                                                                    189970036L,
+                                                                                                    str,
+                                                                                                    userHandleForUid)
+                                                                                    ? 0.55f
+                                                                                    : CompatChanges
+                                                                                                    .isChangeEnabled(
+                                                                                                            176926741L,
+                                                                                                            str,
+                                                                                                            userHandleForUid)
+                                                                                            ? 0.5f
+                                                                                            : CompatChanges
+                                                                                                            .isChangeEnabled(
+                                                                                                                    189969782L,
+                                                                                                                    str,
+                                                                                                                    userHandleForUid)
+                                                                                                    ? 0.45f
+                                                                                                    : CompatChanges
+                                                                                                                    .isChangeEnabled(
+                                                                                                                            189970038L,
+                                                                                                                            str,
+                                                                                                                            userHandleForUid)
+                                                                                                            ? 0.4f
+                                                                                                            : CompatChanges
+                                                                                                                            .isChangeEnabled(
+                                                                                                                                    189969749L,
+                                                                                                                                    str,
+                                                                                                                                    userHandleForUid)
+                                                                                                                    ? 0.35f
+                                                                                                                    : CompatChanges
+                                                                                                                                    .isChangeEnabled(
+                                                                                                                                            189970040L,
+                                                                                                                                            str,
+                                                                                                                                            userHandleForUid)
+                                                                                                                            ? 0.3f
+                                                                                                                            : 1.0f;
             if (f != 1.0f) {
                 return isChangeEnabled2 ? f : 1.0f / f;
             }
@@ -233,7 +334,11 @@ public final class CompatModePackages {
         ActivityTaskManagerService activityTaskManagerService = this.mService;
         if (activityTaskManagerService.mHasLeanbackFeature) {
             Configuration globalConfiguration = activityTaskManagerService.getGlobalConfiguration();
-            int i2 = (int) ((globalConfiguration.smallestScreenWidthDp * (globalConfiguration.densityDpi / 160.0f)) + 0.5f);
+            int i2 =
+                    (int)
+                            ((globalConfiguration.smallestScreenWidthDp
+                                            * (globalConfiguration.densityDpi / 160.0f))
+                                    + 0.5f);
             if (i2 > 1080 && !CompatChanges.isChangeEnabled(157629738L, str, userHandleForUid)) {
                 return i2 / 1080.0f;
             }
@@ -247,10 +352,17 @@ public final class CompatModePackages {
             if (i2 >= this.mProviders.size()) {
                 return null;
             }
-            GameManagerService.LocalService localService = (GameManagerService.LocalService) ((CompatScaleProvider) this.mProviders.valueAt(i2));
+            GameManagerService.LocalService localService =
+                    (GameManagerService.LocalService)
+                            ((CompatScaleProvider) this.mProviders.valueAt(i2));
             localService.getClass();
-            float resolutionScalingFactor = localService.getResolutionScalingFactor(str, UserHandle.getUserHandleForUid(i).getIdentifier());
-            CompatibilityInfo.CompatScale compatScale = resolutionScalingFactor > FullScreenMagnificationGestureHandler.MAX_SCALE ? new CompatibilityInfo.CompatScale(1.0f / resolutionScalingFactor) : null;
+            float resolutionScalingFactor =
+                    localService.getResolutionScalingFactor(
+                            str, UserHandle.getUserHandleForUid(i).getIdentifier());
+            CompatibilityInfo.CompatScale compatScale =
+                    resolutionScalingFactor > FullScreenMagnificationGestureHandler.MAX_SCALE
+                            ? new CompatibilityInfo.CompatScale(1.0f / resolutionScalingFactor)
+                            : null;
             if (compatScale != null) {
                 return compatScale;
             }
@@ -273,9 +385,9 @@ public final class CompatModePackages {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x001a, code lost:
-    
-        if ((r1 & 2) == 0) goto L11;
-     */
+
+       if ((r1 & 2) == 0) goto L11;
+    */
     /* JADX WARN: Removed duplicated region for block: B:14:0x002e  */
     /* JADX WARN: Removed duplicated region for block: B:17:0x003a  */
     /* JADX WARN: Removed duplicated region for block: B:19:0x0043  */
@@ -285,7 +397,8 @@ public final class CompatModePackages {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setPackageScreenCompatModeLocked(android.content.pm.ApplicationInfo r13, int r14) {
+    public final void setPackageScreenCompatModeLocked(
+            android.content.pm.ApplicationInfo r13, int r14) {
         /*
             r12 = this;
             java.lang.String r0 = r13.packageName
@@ -382,6 +495,9 @@ public final class CompatModePackages {
         Lb8:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.CompatModePackages.setPackageScreenCompatModeLocked(android.content.pm.ApplicationInfo, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.CompatModePackages.setPackageScreenCompatModeLocked(android.content.pm.ApplicationInfo,"
+                    + " int):void");
     }
 }

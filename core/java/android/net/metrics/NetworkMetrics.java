@@ -1,7 +1,9 @@
 package android.net.metrics;
 
 import android.hardware.scontext.SContextConstants;
+
 import com.android.internal.util.TokenBucket;
+
 import java.util.BitSet;
 import java.util.StringJoiner;
 
@@ -37,9 +39,11 @@ public class NetworkMetrics {
         if (this.pendingSummary == null) {
             this.pendingSummary = new Summary(this.netId, this.transports);
         }
-        boolean isSuccess = this.dnsMetrics.addResult((byte) eventType, (byte) returnCode, latencyMs);
+        boolean isSuccess =
+                this.dnsMetrics.addResult((byte) eventType, (byte) returnCode, latencyMs);
         this.pendingSummary.dnsLatencies.count(latencyMs);
-        this.pendingSummary.dnsErrorRate.count(isSuccess ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN : 1.0d);
+        this.pendingSummary.dnsErrorRate.count(
+                isSuccess ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN : 1.0d);
         if (returnCode == 255 || latencyMs >= 1000) {
             this.pendingSummary.dnsDelayedResponseCnt.count(1.0d);
         }
@@ -50,7 +54,8 @@ public class NetworkMetrics {
             this.pendingSummary = new Summary(this.netId, this.transports);
         }
         boolean isSuccess = this.connectMetrics.addEvent(error, latencyMs, ipAddr);
-        this.pendingSummary.connectErrorRate.count(isSuccess ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN : 1.0d);
+        this.pendingSummary.connectErrorRate.count(
+                isSuccess ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN : 1.0d);
         if (ConnectStats.isNonBlocking(error)) {
             this.pendingSummary.connectLatencies.count(latencyMs);
         }
@@ -94,13 +99,38 @@ public class NetworkMetrics {
         public String toString() {
             StringJoiner j = new StringJoiner(", ", "{", "}");
             j.add("netId=" + this.netId);
-            j.add("transports=" + BitSet.valueOf(new long[]{this.transports}));
-            j.add(String.format("dns avg=%dms max=%dms err=%.1f%% tot=%d", Integer.valueOf((int) this.dnsLatencies.average()), Integer.valueOf((int) this.dnsLatencies.max), Double.valueOf(this.dnsErrorRate.average() * 100.0d), Integer.valueOf(this.dnsErrorRate.count)));
-            j.add(String.format("delayed rsp=%d", Integer.valueOf(this.dnsDelayedResponseCnt.count)));
-            j.add(String.format("connect avg=%dms max=%dms err=%.1f%% tot=%d", Integer.valueOf((int) this.connectLatencies.average()), Integer.valueOf((int) this.connectLatencies.max), Double.valueOf(this.connectErrorRate.average() * 100.0d), Integer.valueOf(this.connectErrorRate.count)));
-            j.add(String.format("tcp avg_loss=%.1f%% total_sent=%d total_lost=%d", Double.valueOf(this.tcpLossRate.average() * 100.0d), Integer.valueOf(this.tcpLossRate.count), Integer.valueOf((int) this.tcpLossRate.sum)));
-            j.add(String.format("tcp rtt=%dms", Integer.valueOf((int) (this.roundTripTimeUs.average() / 1000.0d))));
-            j.add(String.format("tcp sent-ack_diff=%dms", Integer.valueOf((int) this.sentAckTimeDiffenceMs.average())));
+            j.add("transports=" + BitSet.valueOf(new long[] {this.transports}));
+            j.add(
+                    String.format(
+                            "dns avg=%dms max=%dms err=%.1f%% tot=%d",
+                            Integer.valueOf((int) this.dnsLatencies.average()),
+                            Integer.valueOf((int) this.dnsLatencies.max),
+                            Double.valueOf(this.dnsErrorRate.average() * 100.0d),
+                            Integer.valueOf(this.dnsErrorRate.count)));
+            j.add(
+                    String.format(
+                            "delayed rsp=%d", Integer.valueOf(this.dnsDelayedResponseCnt.count)));
+            j.add(
+                    String.format(
+                            "connect avg=%dms max=%dms err=%.1f%% tot=%d",
+                            Integer.valueOf((int) this.connectLatencies.average()),
+                            Integer.valueOf((int) this.connectLatencies.max),
+                            Double.valueOf(this.connectErrorRate.average() * 100.0d),
+                            Integer.valueOf(this.connectErrorRate.count)));
+            j.add(
+                    String.format(
+                            "tcp avg_loss=%.1f%% total_sent=%d total_lost=%d",
+                            Double.valueOf(this.tcpLossRate.average() * 100.0d),
+                            Integer.valueOf(this.tcpLossRate.count),
+                            Integer.valueOf((int) this.tcpLossRate.sum)));
+            j.add(
+                    String.format(
+                            "tcp rtt=%dms",
+                            Integer.valueOf((int) (this.roundTripTimeUs.average() / 1000.0d))));
+            j.add(
+                    String.format(
+                            "tcp sent-ack_diff=%dms",
+                            Integer.valueOf((int) this.sentAckTimeDiffenceMs.average())));
             return j.toString();
         }
     }
@@ -110,8 +140,7 @@ public class NetworkMetrics {
         public double max = Double.MIN_VALUE;
         public double sum;
 
-        Metrics() {
-        }
+        Metrics() {}
 
         void merge(Metrics that) {
             this.count += that.count;

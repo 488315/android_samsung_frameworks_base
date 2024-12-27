@@ -6,8 +6,9 @@ import android.util.AttributeSet;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+
 import com.android.internal.R;
+
 import java.util.regex.Pattern;
 
 /* loaded from: classes4.dex */
@@ -211,11 +212,18 @@ public class TableLayout extends LinearLayout {
     }
 
     @Override // android.widget.LinearLayout
-    void measureChildBeforeLayout(View child, int childIndex, int widthMeasureSpec, int totalWidth, int heightMeasureSpec, int totalHeight) {
+    void measureChildBeforeLayout(
+            View child,
+            int childIndex,
+            int widthMeasureSpec,
+            int totalWidth,
+            int heightMeasureSpec,
+            int totalHeight) {
         if (child instanceof TableRow) {
             ((TableRow) child).setColumnsWidthConstraints(this.mMaxWidths);
         }
-        super.measureChildBeforeLayout(child, childIndex, widthMeasureSpec, totalWidth, heightMeasureSpec, totalHeight);
+        super.measureChildBeforeLayout(
+                child, childIndex, widthMeasureSpec, totalWidth, heightMeasureSpec, totalHeight);
     }
 
     @Override // android.widget.LinearLayout
@@ -255,7 +263,12 @@ public class TableLayout extends LinearLayout {
                         this.mMaxWidths = new int[newLength];
                         firstRow = firstRow2;
                         System.arraycopy(oldMaxWidths, 0, this.mMaxWidths, 0, oldMaxWidths.length);
-                        System.arraycopy(widths, oldMaxWidths.length, this.mMaxWidths, oldMaxWidths.length, difference);
+                        System.arraycopy(
+                                widths,
+                                oldMaxWidths.length,
+                                this.mMaxWidths,
+                                oldMaxWidths.length,
+                                difference);
                     }
                     int[] maxWidths = this.mMaxWidths;
                     int length2 = Math.min(length, newLength);
@@ -278,17 +291,21 @@ public class TableLayout extends LinearLayout {
         for (int width : this.mMaxWidths) {
             totalWidth += width;
         }
-        int size = (View.MeasureSpec.getSize(widthMeasureSpec) - this.mPaddingLeft) - this.mPaddingRight;
+        int size =
+                (View.MeasureSpec.getSize(widthMeasureSpec) - this.mPaddingLeft)
+                        - this.mPaddingRight;
         if (totalWidth > size && (this.mShrinkAllColumns || this.mShrinkableColumns.size() > 0)) {
             mutateColumnsWidth(this.mShrinkableColumns, this.mShrinkAllColumns, size, totalWidth);
         } else if (totalWidth < size) {
             if (this.mStretchAllColumns || this.mStretchableColumns.size() > 0) {
-                mutateColumnsWidth(this.mStretchableColumns, this.mStretchAllColumns, size, totalWidth);
+                mutateColumnsWidth(
+                        this.mStretchableColumns, this.mStretchAllColumns, size, totalWidth);
             }
         }
     }
 
-    private void mutateColumnsWidth(SparseBooleanArray columns, boolean allColumns, int size, int totalWidth) {
+    private void mutateColumnsWidth(
+            SparseBooleanArray columns, boolean allColumns, int size, int totalWidth) {
         int skipped = 0;
         int[] maxWidths = this.mMaxWidths;
         int length = maxWidths.length;
@@ -402,11 +419,11 @@ public class TableLayout extends LinearLayout {
         }
     }
 
-    private class PassThroughHierarchyChangeListener implements ViewGroup.OnHierarchyChangeListener {
+    private class PassThroughHierarchyChangeListener
+            implements ViewGroup.OnHierarchyChangeListener {
         private ViewGroup.OnHierarchyChangeListener mOnHierarchyChangeListener;
 
-        private PassThroughHierarchyChangeListener() {
-        }
+        private PassThroughHierarchyChangeListener() {}
 
         @Override // android.view.ViewGroup.OnHierarchyChangeListener
         public void onChildViewAdded(View parent, View child) {

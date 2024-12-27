@@ -1,6 +1,7 @@
 package com.samsung.android.wifi;
 
 import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -81,7 +82,11 @@ public class SemWifiApSmartWhiteList {
                 e.printStackTrace();
             }
             try {
-                String[] cmd = {"/system/bin/sh", "-c", "/system/bin/chmod 665 /data/misc/wifi_hostapd/smart_tethering.accept"};
+                String[] cmd = {
+                    "/system/bin/sh",
+                    "-c",
+                    "/system/bin/chmod 665 /data/misc/wifi_hostapd/smart_tethering.accept"
+                };
                 Process p = Runtime.getRuntime().exec(cmd);
                 try {
                     p.waitFor();
@@ -100,7 +105,8 @@ public class SemWifiApSmartWhiteList {
         BufferedReader buf = null;
         try {
             try {
-                FileInputStream fis = new FileInputStream("/data/misc/wifi_hostapd/smart_tethering.accept");
+                FileInputStream fis =
+                        new FileInputStream("/data/misc/wifi_hostapd/smart_tethering.accept");
                 InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
                 buf = new BufferedReader(isr, 64);
                 while (true) {
@@ -163,7 +169,11 @@ public class SemWifiApSmartWhiteList {
         try {
             try {
                 try {
-                    fw = new OutputStreamWriter(new FileOutputStream("/data/misc/wifi_hostapd/smart_tethering.accept"), StandardCharsets.UTF_8);
+                    fw =
+                            new OutputStreamWriter(
+                                    new FileOutputStream(
+                                            "/data/misc/wifi_hostapd/smart_tethering.accept"),
+                                    StandardCharsets.UTF_8);
                     Iterator<SmartWhiteList> it = mSmartWhiteList.iterator();
                     while (it.hasNext()) {
                         SmartWhiteList wl = it.next();
@@ -309,7 +319,10 @@ public class SemWifiApSmartWhiteList {
     }
 
     private boolean isMacAddress(String macAddressCandidate) {
-        Pattern macPattern = Pattern.compile("[0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0 -9a-fA-F]{2}[-:][0-9a-fA-F]{2}");
+        Pattern macPattern =
+                Pattern.compile(
+                        "[0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0"
+                            + " -9a-fA-F]{2}[-:][0-9a-fA-F]{2}");
         Matcher m = macPattern.matcher(macAddressCandidate);
         return m.matches();
     }

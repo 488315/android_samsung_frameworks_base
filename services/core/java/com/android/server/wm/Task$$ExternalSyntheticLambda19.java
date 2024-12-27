@@ -1,7 +1,7 @@
 package com.android.server.wm;
 
 import android.content.ComponentName;
-import com.android.server.wm.ActivityRecord;
+
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,8 +22,12 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda19 implements Pr
         switch (i) {
             case 0:
                 ActivityRecord[] activityRecordArr = (ActivityRecord[]) obj2;
-                ActivityRecord topNonFinishingActivity = ((TaskFragment) obj).getTopNonFinishingActivity(true, true);
-                if (topNonFinishingActivity == null || !topNonFinishingActivity.isState(ActivityRecord.State.RESUMED, ActivityRecord.State.PAUSING) || !topNonFinishingActivity.supportsPictureInPicture()) {
+                ActivityRecord topNonFinishingActivity =
+                        ((TaskFragment) obj).getTopNonFinishingActivity(true, true);
+                if (topNonFinishingActivity == null
+                        || !topNonFinishingActivity.isState(
+                                ActivityRecord.State.RESUMED, ActivityRecord.State.PAUSING)
+                        || !topNonFinishingActivity.supportsPictureInPicture()) {
                     return false;
                 }
                 activityRecordArr[0] = topNonFinishingActivity;
@@ -46,7 +50,8 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda19 implements Pr
                     while (true) {
                         TaskFragment taskFragment2 = taskFragment;
                         taskFragment = asTaskFragment;
-                        if (taskFragment != null && taskFragment2.getBounds().equals(taskFragment.getBounds())) {
+                        if (taskFragment != null
+                                && taskFragment2.getBounds().equals(taskFragment.getBounds())) {
                             if (taskFragment.asTask() != null) {
                                 return true;
                             }
@@ -58,11 +63,13 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda19 implements Pr
             case 2:
                 ComponentName componentName = (ComponentName) obj2;
                 ActivityRecord activityRecord3 = (ActivityRecord) obj;
-                return activityRecord3.info.packageName.equals(componentName.getPackageName()) && activityRecord3.info.name.equals(componentName.getClassName());
+                return activityRecord3.info.packageName.equals(componentName.getPackageName())
+                        && activityRecord3.info.name.equals(componentName.getClassName());
             default:
                 Task task = (Task) obj2;
                 task.getClass();
-                return ((ActivityRecord) obj).packageName.equals(task.realActivity.getPackageName());
+                return ((ActivityRecord) obj)
+                        .packageName.equals(task.realActivity.getPackageName());
         }
     }
 }

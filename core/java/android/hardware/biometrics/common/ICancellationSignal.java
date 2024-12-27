@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ICancellationSignal extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$biometrics$common$ICancellationSignal".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$biometrics$common$ICancellationSignal".replace('$', '.');
     public static final String HASH = "8a6cd86630181a4df6f20056259ec200ffe39209";
     public static final int VERSION = 4;
 
@@ -20,8 +21,7 @@ public interface ICancellationSignal extends IInterface {
 
     public static class Default implements ICancellationSignal {
         @Override // android.hardware.biometrics.common.ICancellationSignal
-        public void cancel() throws RemoteException {
-        }
+        public void cancel() throws RemoteException {}
 
         @Override // android.hardware.biometrics.common.ICancellationSignal
         public int getInterfaceVersion() {
@@ -39,7 +39,7 @@ public interface ICancellationSignal extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICancellationSignal {
+    public abstract static class Stub extends Binder implements ICancellationSignal {
         static final int TRANSACTION_cancel = 1;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -84,7 +84,8 @@ public interface ICancellationSignal extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);

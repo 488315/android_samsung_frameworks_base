@@ -4,6 +4,7 @@ import android.content.ContentProviderClient;
 import android.content.ContentValues;
 import android.net.Uri;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +29,8 @@ public class MediaInserter {
         insert(tableUri, values, true);
     }
 
-    private void insert(Uri tableUri, ContentValues values, boolean priority) throws RemoteException {
+    private void insert(Uri tableUri, ContentValues values, boolean priority)
+            throws RemoteException {
         HashMap<Uri, List<ContentValues>> rowmap = priority ? this.mPriorityRowMap : this.mRowMap;
         List<ContentValues> list = rowmap.get(tableUri);
         if (list == null) {

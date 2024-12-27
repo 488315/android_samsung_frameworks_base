@@ -10,10 +10,14 @@ import android.util.IndentingPrintWriter;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.R;
-import com.android.internal.os.PowerProfileProto;
 import com.android.internal.power.ModemPowerProfile;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
@@ -22,8 +26,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.function.BiConsumer;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public class PowerProfile {
@@ -36,24 +38,21 @@ public class PowerProfile {
     private static final String CPU_SCALING_POLICY_POWER_POLICY = "cpu.scaling_policy_power.policy";
     private static final String CPU_SCALING_STEP_POWER_POLICY = "cpu.scaling_step_power.policy";
 
-    @Deprecated
-    public static final String POWER_AMBIENT_DISPLAY = "ambient.on";
+    @Deprecated public static final String POWER_AMBIENT_DISPLAY = "ambient.on";
     public static final String POWER_AUDIO = "audio";
     public static final String POWER_BATTERY_CAPACITY = "battery.capacity";
     public static final String POWER_BATTERY_TYPICAL_CAPACITY = "battery.typical.capacity";
 
-    @Deprecated
-    public static final String POWER_BLUETOOTH_ACTIVE = "bluetooth.active";
+    @Deprecated public static final String POWER_BLUETOOTH_ACTIVE = "bluetooth.active";
 
-    @Deprecated
-    public static final String POWER_BLUETOOTH_AT_CMD = "bluetooth.at";
+    @Deprecated public static final String POWER_BLUETOOTH_AT_CMD = "bluetooth.at";
     public static final String POWER_BLUETOOTH_CONTROLLER_IDLE = "bluetooth.controller.idle";
-    public static final String POWER_BLUETOOTH_CONTROLLER_OPERATING_VOLTAGE = "bluetooth.controller.voltage";
+    public static final String POWER_BLUETOOTH_CONTROLLER_OPERATING_VOLTAGE =
+            "bluetooth.controller.voltage";
     public static final String POWER_BLUETOOTH_CONTROLLER_RX = "bluetooth.controller.rx";
     public static final String POWER_BLUETOOTH_CONTROLLER_TX = "bluetooth.controller.tx";
 
-    @Deprecated
-    public static final String POWER_BLUETOOTH_ON = "bluetooth.on";
+    @Deprecated public static final String POWER_BLUETOOTH_ON = "bluetooth.on";
     public static final int POWER_BRACKETS_UNSPECIFIED = -1;
     public static final String POWER_CAMERA = "camera.avg";
     public static final String POWER_CPU_ACTIVE = "cpu.active";
@@ -68,7 +67,8 @@ public class PowerProfile {
     public static final String POWER_GROUP_DISPLAY_SCREEN_ON = "screen.on.display";
     public static final String POWER_MEMORY = "memory.bandwidths";
     public static final String POWER_MODEM_CONTROLLER_IDLE = "modem.controller.idle";
-    public static final String POWER_MODEM_CONTROLLER_OPERATING_VOLTAGE = "modem.controller.voltage";
+    public static final String POWER_MODEM_CONTROLLER_OPERATING_VOLTAGE =
+            "modem.controller.voltage";
     public static final String POWER_MODEM_CONTROLLER_RX = "modem.controller.rx";
     public static final String POWER_MODEM_CONTROLLER_SLEEP = "modem.controller.sleep";
     public static final String POWER_MODEM_CONTROLLER_TX = "modem.controller.tx";
@@ -76,11 +76,9 @@ public class PowerProfile {
     public static final String POWER_RADIO_ON = "radio.on";
     public static final String POWER_RADIO_SCANNING = "radio.scanning";
 
-    @Deprecated
-    public static final String POWER_SCREEN_FULL = "screen.full";
+    @Deprecated public static final String POWER_SCREEN_FULL = "screen.full";
 
-    @Deprecated
-    public static final String POWER_SCREEN_ON = "screen.on";
+    @Deprecated public static final String POWER_SCREEN_ON = "screen.on";
     public static final String POWER_VIDEO = "video";
     public static final String POWER_WIFI_ACTIVE = "wifi.active";
     public static final String POWER_WIFI_BATCHED_SCAN = "wifi.batchedscan";
@@ -111,12 +109,10 @@ public class PowerProfile {
     private static final Object sLock = new Object();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PowerGroup {
-    }
+    public @interface PowerGroup {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Subsystem {
-    }
+    public @interface Subsystem {}
 
     public PowerProfile() {
         synchronized (sLock) {
@@ -186,7 +182,8 @@ public class PowerProfile {
                         break;
                     }
                     if (parsingArray && !element.equals("value")) {
-                        sPowerArrayMap.put(arrayName, (Double[]) array.toArray(new Double[array.size()]));
+                        sPowerArrayMap.put(
+                                arrayName, (Double[]) array.toArray(new Double[array.size()]));
                         parsingArray = false;
                     }
                     if (element.equals(TAG_ARRAY)) {
@@ -216,7 +213,8 @@ public class PowerProfile {
                     }
                 }
                 if (parsingArray) {
-                    sPowerArrayMap.put(arrayName, (Double[]) array.toArray(new Double[array.size()]));
+                    sPowerArrayMap.put(
+                            arrayName, (Double[]) array.toArray(new Double[array.size()]));
                 }
                 if (resources != null) {
                     getDefaultValuesFromConfig(resources);
@@ -235,11 +233,24 @@ public class PowerProfile {
 
     private static void getDefaultValuesFromConfig(Resources resources) {
         int value;
-        int[] configResIds = {R.integer.config_bluetooth_idle_cur_ma, R.integer.config_bluetooth_rx_cur_ma, R.integer.config_bluetooth_tx_cur_ma, R.integer.config_bluetooth_operating_voltage_mv};
-        String[] configResIdKeys = {POWER_BLUETOOTH_CONTROLLER_IDLE, POWER_BLUETOOTH_CONTROLLER_RX, POWER_BLUETOOTH_CONTROLLER_TX, POWER_BLUETOOTH_CONTROLLER_OPERATING_VOLTAGE};
+        int[] configResIds = {
+            R.integer.config_bluetooth_idle_cur_ma,
+            R.integer.config_bluetooth_rx_cur_ma,
+            R.integer.config_bluetooth_tx_cur_ma,
+            R.integer.config_bluetooth_operating_voltage_mv
+        };
+        String[] configResIdKeys = {
+            POWER_BLUETOOTH_CONTROLLER_IDLE,
+            POWER_BLUETOOTH_CONTROLLER_RX,
+            POWER_BLUETOOTH_CONTROLLER_TX,
+            POWER_BLUETOOTH_CONTROLLER_OPERATING_VOLTAGE
+        };
         for (int i = 0; i < configResIds.length; i++) {
             String key = configResIdKeys[i];
-            if ((!sPowerItemMap.containsKey(key) || sPowerItemMap.get(key).doubleValue() <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) && (value = resources.getInteger(configResIds[i])) > 0) {
+            if ((!sPowerItemMap.containsKey(key)
+                            || sPowerItemMap.get(key).doubleValue()
+                                    <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)
+                    && (value = resources.getInteger(configResIds[i])) > 0) {
                 sPowerItemMap.put(key, Double.valueOf(value));
             }
         }
@@ -251,7 +262,12 @@ public class PowerProfile {
             this.mCpuClusters = new CpuClusterKey[data.length];
             for (int cluster = 0; cluster < data.length; cluster++) {
                 int numCpusInCluster = (int) Math.round(data[cluster].doubleValue());
-                this.mCpuClusters[cluster] = new CpuClusterKey(CPU_CORE_SPEED_PREFIX + cluster, CPU_CLUSTER_POWER_COUNT + cluster, CPU_CORE_POWER_PREFIX + cluster, numCpusInCluster);
+                this.mCpuClusters[cluster] =
+                        new CpuClusterKey(
+                                CPU_CORE_SPEED_PREFIX + cluster,
+                                CPU_CLUSTER_POWER_COUNT + cluster,
+                                CPU_CORE_POWER_PREFIX + cluster,
+                                numCpusInCluster);
             }
             return;
         }
@@ -260,7 +276,12 @@ public class PowerProfile {
         if (sPowerItemMap.containsKey(CPU_PER_CLUSTER_CORE_COUNT)) {
             numCpus = (int) Math.round(sPowerItemMap.get(CPU_PER_CLUSTER_CORE_COUNT).doubleValue());
         }
-        this.mCpuClusters[0] = new CpuClusterKey("cpu.core_speeds.cluster0", "cpu.cluster_power.cluster0", "cpu.core_power.cluster0", numCpus);
+        this.mCpuClusters[0] =
+                new CpuClusterKey(
+                        "cpu.core_speeds.cluster0",
+                        "cpu.cluster_power.cluster0",
+                        "cpu.core_power.cluster0",
+                        numCpus);
     }
 
     private void initCpuScalingPolicies() {
@@ -269,13 +290,15 @@ public class PowerProfile {
         int policyCount = 0;
         for (String key : sPowerItemMap.keySet()) {
             if (key.startsWith(CPU_SCALING_POLICY_POWER_POLICY)) {
-                int policy = Integer.parseInt(key.substring(CPU_SCALING_POLICY_POWER_POLICY.length()));
+                int policy =
+                        Integer.parseInt(key.substring(CPU_SCALING_POLICY_POWER_POLICY.length()));
                 policyCount = Math.max(policyCount, policy + 1);
             }
         }
         for (String key2 : sPowerArrayMap.keySet()) {
             if (key2.startsWith(CPU_SCALING_STEP_POWER_POLICY)) {
-                int policy2 = Integer.parseInt(key2.substring(CPU_SCALING_STEP_POWER_POLICY.length()));
+                int policy2 =
+                        Integer.parseInt(key2.substring(CPU_SCALING_STEP_POWER_POLICY.length()));
                 policyCount = Math.max(policyCount, policy2 + 1);
             }
         }
@@ -293,7 +316,11 @@ public class PowerProfile {
                     } else {
                         primitiveStepPower = new double[0];
                     }
-                    this.mCpuScalingPolicies.put(policy3, new CpuScalingPolicyPower(policyPower != null ? policyPower.doubleValue() : 0.0d, primitiveStepPower));
+                    this.mCpuScalingPolicies.put(
+                            policy3,
+                            new CpuScalingPolicyPower(
+                                    policyPower != null ? policyPower.doubleValue() : 0.0d,
+                                    primitiveStepPower));
                 }
             }
             return;
@@ -317,13 +344,18 @@ public class PowerProfile {
                 } else {
                     stepPower = new double[1];
                 }
-                this.mCpuScalingPolicies.put(cpuId2, new CpuScalingPolicyPower(clusterPower, stepPower));
+                this.mCpuScalingPolicies.put(
+                        cpuId2, new CpuScalingPolicyPower(clusterPower, stepPower));
                 cpuId2 += cpuCluster.numCpus;
             }
             return;
         }
         this.mCpuScalingPolicies = new SparseArray<>(1);
-        this.mCpuScalingPolicies.put(0, new CpuScalingPolicyPower(getAveragePower(POWER_CPU_ACTIVE), new double[]{SContextConstants.ENVIRONMENT_VALUE_UNKNOWN}));
+        this.mCpuScalingPolicies.put(
+                0,
+                new CpuScalingPolicyPower(
+                        getAveragePower(POWER_CPU_ACTIVE),
+                        new double[] {SContextConstants.ENVIRONMENT_VALUE_UNKNOWN}));
     }
 
     private void initCpuPowerBrackets() {
@@ -346,7 +378,8 @@ public class PowerProfile {
             }
         }
         if (anyBracketsSpecified && !allBracketsSpecified) {
-            throw new RuntimeException("Power brackets should be specified for all scaling policies or none");
+            throw new RuntimeException(
+                    "Power brackets should be specified for all scaling policies or none");
         }
         if (!allBracketsSpecified) {
             this.mCpuPowerBracketCount = -1;
@@ -358,7 +391,11 @@ public class PowerProfile {
             CpuScalingPolicyPower cpuScalingPolicyPower2 = this.mCpuScalingPolicies.valueAt(i2);
             Double[] data = sPowerArrayMap.get(CPU_POWER_BRACKETS_PREFIX + policy2);
             if (data.length != cpuScalingPolicyPower2.powerBrackets.length) {
-                throw new RuntimeException("Wrong number of items in cpu.power_brackets.policy" + policy2 + ", expected: " + cpuScalingPolicyPower2.powerBrackets.length);
+                throw new RuntimeException(
+                        "Wrong number of items in cpu.power_brackets.policy"
+                                + policy2
+                                + ", expected: "
+                                + cpuScalingPolicyPower2.powerBrackets.length);
             }
             for (int j = 0; j < data.length; j++) {
                 int bracket = (int) Math.round(data[j].doubleValue());
@@ -393,7 +430,9 @@ public class PowerProfile {
 
     public double getAveragePowerForCpuScalingStep(int policy, int step) {
         CpuScalingPolicyPower cpuScalingPolicyPower = this.mCpuScalingPolicies.get(policy);
-        if (cpuScalingPolicyPower != null && step >= 0 && step < cpuScalingPolicyPower.stepPower.length) {
+        if (cpuScalingPolicyPower != null
+                && step >= 0
+                && step < cpuScalingPolicyPower.stepPower.length) {
             return cpuScalingPolicyPower.stepPower[step];
         }
         return SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
@@ -405,7 +444,8 @@ public class PowerProfile {
         public final String freqKey;
         public final int numCpus;
 
-        private CpuClusterKey(String freqKey, String clusterPowerKey, String corePowerKey, int numCpus) {
+        private CpuClusterKey(
+                String freqKey, String clusterPowerKey, String corePowerKey, int numCpus) {
             this.freqKey = freqKey;
             this.clusterPowerKey = clusterPowerKey;
             this.corePowerKey = corePowerKey;
@@ -459,7 +499,9 @@ public class PowerProfile {
 
     public int getCpuPowerBracketForScalingStep(int policy, int step) {
         CpuScalingPolicyPower cpuScalingPolicyPower = this.mCpuScalingPolicies.get(policy);
-        if (cpuScalingPolicyPower != null && step >= 0 && step < cpuScalingPolicyPower.powerBrackets.length) {
+        if (cpuScalingPolicyPower != null
+                && step >= 0
+                && step < cpuScalingPolicyPower.powerBrackets.length) {
             return cpuScalingPolicyPower.powerBrackets[step];
         }
         return 0;
@@ -468,7 +510,17 @@ public class PowerProfile {
     private void initDisplays() {
         this.mNumDisplays = 0;
         while (true) {
-            if (Double.isNaN(getAveragePowerForOrdinal(POWER_GROUP_DISPLAY_AMBIENT, this.mNumDisplays, Double.NaN)) && Double.isNaN(getAveragePowerForOrdinal(POWER_GROUP_DISPLAY_SCREEN_ON, this.mNumDisplays, Double.NaN)) && Double.isNaN(getAveragePowerForOrdinal(POWER_GROUP_DISPLAY_SCREEN_FULL, this.mNumDisplays, Double.NaN))) {
+            if (Double.isNaN(
+                            getAveragePowerForOrdinal(
+                                    POWER_GROUP_DISPLAY_AMBIENT, this.mNumDisplays, Double.NaN))
+                    && Double.isNaN(
+                            getAveragePowerForOrdinal(
+                                    POWER_GROUP_DISPLAY_SCREEN_ON, this.mNumDisplays, Double.NaN))
+                    && Double.isNaN(
+                            getAveragePowerForOrdinal(
+                                    POWER_GROUP_DISPLAY_SCREEN_FULL,
+                                    this.mNumDisplays,
+                                    Double.NaN))) {
                 break;
             } else {
                 this.mNumDisplays++;
@@ -552,7 +604,9 @@ public class PowerProfile {
     }
 
     public double getAveragePower(String type) {
-        return isIgnoreType(type) ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN : getAveragePowerOrDefault(type, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
+        return isIgnoreType(type)
+                ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                : getAveragePowerOrDefault(type, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
     }
 
     public double getAverageBatteryDrainOrDefaultMa(long key, double defaultValue) {
@@ -583,7 +637,9 @@ public class PowerProfile {
         }
         Double[] values = sPowerArrayMap.get(type);
         if (values.length <= level || level < 0) {
-            return (level < 0 || values.length == 0) ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN : values[values.length - 1].doubleValue();
+            return (level < 0 || values.length == 0)
+                    ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                    : values[values.length - 1].doubleValue();
         }
         return values[level].doubleValue();
     }
@@ -594,7 +650,8 @@ public class PowerProfile {
     }
 
     public double getAveragePowerForOrdinal(String group, int ordinal) {
-        return getAveragePowerForOrdinal(group, ordinal, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
+        return getAveragePowerForOrdinal(
+                group, ordinal, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
     }
 
     public double getBatteryCapacity() {
@@ -612,7 +669,9 @@ public class PowerProfile {
         for (int cluster = 0; cluster < this.mCpuClusters.length; cluster++) {
             long token = proto.start(2246267895848L);
             proto.write(1120986464257L, cluster);
-            proto.write(1103806595074L, sPowerItemMap.get(this.mCpuClusters[cluster].clusterPowerKey).doubleValue());
+            proto.write(
+                    1103806595074L,
+                    sPowerItemMap.get(this.mCpuClusters[cluster].clusterPowerKey).doubleValue());
             proto.write(1120986464259L, this.mCpuClusters[cluster].numCpus);
             for (Double speed : sPowerArrayMap.get(this.mCpuClusters[cluster].freqKey)) {
                 proto.write(PowerProfileProto.CpuCluster.SPEED, speed.doubleValue());
@@ -625,22 +684,41 @@ public class PowerProfile {
         writePowerConstantToProto(proto, POWER_WIFI_SCAN, 1103806595076L);
         writePowerConstantToProto(proto, POWER_WIFI_ON, 1103806595077L);
         writePowerConstantToProto(proto, POWER_WIFI_ACTIVE, 1103806595078L);
-        writePowerConstantToProto(proto, POWER_WIFI_CONTROLLER_IDLE, PowerProfileProto.WIFI_CONTROLLER_IDLE);
+        writePowerConstantToProto(
+                proto, POWER_WIFI_CONTROLLER_IDLE, PowerProfileProto.WIFI_CONTROLLER_IDLE);
         writePowerConstantToProto(proto, POWER_WIFI_CONTROLLER_RX, 1103806595080L);
         writePowerConstantToProto(proto, POWER_WIFI_CONTROLLER_TX, 1103806595081L);
-        writePowerConstantArrayToProto(proto, POWER_WIFI_CONTROLLER_TX_LEVELS, PowerProfileProto.WIFI_CONTROLLER_TX_LEVELS);
-        writePowerConstantToProto(proto, POWER_WIFI_CONTROLLER_OPERATING_VOLTAGE, PowerProfileProto.WIFI_CONTROLLER_OPERATING_VOLTAGE);
-        writePowerConstantToProto(proto, POWER_BLUETOOTH_CONTROLLER_IDLE, PowerProfileProto.BLUETOOTH_CONTROLLER_IDLE);
-        writePowerConstantToProto(proto, POWER_BLUETOOTH_CONTROLLER_RX, PowerProfileProto.BLUETOOTH_CONTROLLER_RX);
-        writePowerConstantToProto(proto, POWER_BLUETOOTH_CONTROLLER_TX, PowerProfileProto.BLUETOOTH_CONTROLLER_TX);
-        writePowerConstantToProto(proto, POWER_BLUETOOTH_CONTROLLER_OPERATING_VOLTAGE, PowerProfileProto.BLUETOOTH_CONTROLLER_OPERATING_VOLTAGE);
-        writePowerConstantToProto(proto, POWER_MODEM_CONTROLLER_SLEEP, PowerProfileProto.MODEM_CONTROLLER_SLEEP);
-        writePowerConstantToProto(proto, POWER_MODEM_CONTROLLER_IDLE, PowerProfileProto.MODEM_CONTROLLER_IDLE);
+        writePowerConstantArrayToProto(
+                proto,
+                POWER_WIFI_CONTROLLER_TX_LEVELS,
+                PowerProfileProto.WIFI_CONTROLLER_TX_LEVELS);
+        writePowerConstantToProto(
+                proto,
+                POWER_WIFI_CONTROLLER_OPERATING_VOLTAGE,
+                PowerProfileProto.WIFI_CONTROLLER_OPERATING_VOLTAGE);
+        writePowerConstantToProto(
+                proto,
+                POWER_BLUETOOTH_CONTROLLER_IDLE,
+                PowerProfileProto.BLUETOOTH_CONTROLLER_IDLE);
+        writePowerConstantToProto(
+                proto, POWER_BLUETOOTH_CONTROLLER_RX, PowerProfileProto.BLUETOOTH_CONTROLLER_RX);
+        writePowerConstantToProto(
+                proto, POWER_BLUETOOTH_CONTROLLER_TX, PowerProfileProto.BLUETOOTH_CONTROLLER_TX);
+        writePowerConstantToProto(
+                proto,
+                POWER_BLUETOOTH_CONTROLLER_OPERATING_VOLTAGE,
+                PowerProfileProto.BLUETOOTH_CONTROLLER_OPERATING_VOLTAGE);
+        writePowerConstantToProto(
+                proto, POWER_MODEM_CONTROLLER_SLEEP, PowerProfileProto.MODEM_CONTROLLER_SLEEP);
+        writePowerConstantToProto(
+                proto, POWER_MODEM_CONTROLLER_IDLE, PowerProfileProto.MODEM_CONTROLLER_IDLE);
         writePowerConstantToProto(proto, POWER_MODEM_CONTROLLER_RX, 1103806595090L);
-        writePowerConstantArrayToProto(proto, POWER_MODEM_CONTROLLER_TX, PowerProfileProto.MODEM_CONTROLLER_TX);
+        writePowerConstantArrayToProto(
+                proto, POWER_MODEM_CONTROLLER_TX, PowerProfileProto.MODEM_CONTROLLER_TX);
         writePowerConstantToProto(proto, POWER_MODEM_CONTROLLER_OPERATING_VOLTAGE, 1103806595092L);
         writePowerConstantToProto(proto, POWER_GPS_ON, 1103806595093L);
-        writePowerConstantArrayToProto(proto, POWER_GPS_SIGNAL_QUALITY_BASED, PowerProfileProto.GPS_SIGNAL_QUALITY_BASED);
+        writePowerConstantArrayToProto(
+                proto, POWER_GPS_SIGNAL_QUALITY_BASED, PowerProfileProto.GPS_SIGNAL_QUALITY_BASED);
         writePowerConstantToProto(proto, POWER_GPS_OPERATING_VOLTAGE, 1103806595095L);
         writePowerConstantToProto(proto, POWER_BLUETOOTH_ON, 1103806595096L);
         writePowerConstantToProto(proto, POWER_BLUETOOTH_ACTIVE, 1103806595097L);
@@ -656,24 +734,32 @@ public class PowerProfile {
         writePowerConstantToProto(proto, POWER_FLASHLIGHT, 1103806595107L);
         writePowerConstantToProto(proto, POWER_MEMORY, 1103806595108L);
         writePowerConstantToProto(proto, POWER_CAMERA, 1103806595109L);
-        writePowerConstantToProto(proto, POWER_WIFI_BATCHED_SCAN, PowerProfileProto.WIFI_BATCHED_SCAN);
-        writePowerConstantToProto(proto, POWER_BATTERY_CAPACITY, PowerProfileProto.BATTERY_CAPACITY);
+        writePowerConstantToProto(
+                proto, POWER_WIFI_BATCHED_SCAN, PowerProfileProto.WIFI_BATCHED_SCAN);
+        writePowerConstantToProto(
+                proto, POWER_BATTERY_CAPACITY, PowerProfileProto.BATTERY_CAPACITY);
     }
 
     public void dump(PrintWriter pw) {
         final IndentingPrintWriter ipw = new IndentingPrintWriter(pw);
-        sPowerItemMap.forEach(new BiConsumer() { // from class: com.android.internal.os.PowerProfile$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                PowerProfile.lambda$dump$0(IndentingPrintWriter.this, (String) obj, (Double) obj2);
-            }
-        });
-        sPowerArrayMap.forEach(new BiConsumer() { // from class: com.android.internal.os.PowerProfile$$ExternalSyntheticLambda1
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                PowerProfile.lambda$dump$1(IndentingPrintWriter.this, (String) obj, (Double[]) obj2);
-            }
-        });
+        sPowerItemMap.forEach(
+                new BiConsumer() { // from class:
+                                   // com.android.internal.os.PowerProfile$$ExternalSyntheticLambda0
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        PowerProfile.lambda$dump$0(
+                                IndentingPrintWriter.this, (String) obj, (Double) obj2);
+                    }
+                });
+        sPowerArrayMap.forEach(
+                new BiConsumer() { // from class:
+                                   // com.android.internal.os.PowerProfile$$ExternalSyntheticLambda1
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        PowerProfile.lambda$dump$1(
+                                IndentingPrintWriter.this, (String) obj, (Double[]) obj2);
+                    }
+                });
         ipw.println("Modem values:");
         ipw.increaseIndent();
         sModemPowerProfile.dump(ipw);
@@ -685,7 +771,8 @@ public class PowerProfile {
         ipw.println();
     }
 
-    static /* synthetic */ void lambda$dump$1(IndentingPrintWriter ipw, String key, Double[] value) {
+    static /* synthetic */ void lambda$dump$1(
+            IndentingPrintWriter ipw, String key, Double[] value) {
         ipw.print(key, Arrays.toString(value));
         ipw.println();
     }

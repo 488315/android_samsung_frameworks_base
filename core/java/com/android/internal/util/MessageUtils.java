@@ -2,6 +2,7 @@ package com.android.internal.util;
 
 import android.util.Log;
 import android.util.SparseArray;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
@@ -12,11 +13,13 @@ public class MessageUtils {
     public static final String[] DEFAULT_PREFIXES = {"CMD_", "EVENT_"};
 
     public static class DuplicateConstantError extends Error {
-        private DuplicateConstantError() {
-        }
+        private DuplicateConstantError() {}
 
         public DuplicateConstantError(String name1, String name2, int value) {
-            super(String.format("Duplicate constant value: both %s and %s = %d", name1, name2, Integer.valueOf(value)));
+            super(
+                    String.format(
+                            "Duplicate constant value: both %s and %s = %d",
+                            name1, name2, Integer.valueOf(value)));
         }
     }
 
@@ -49,10 +52,12 @@ public class MessageUtils {
                                         int value = field.getInt(null);
                                         String previousName = messageNames.get(value);
                                         if (previousName != null && !previousName.equals(name)) {
-                                            throw new DuplicateConstantError(name, previousName, value);
+                                            throw new DuplicateConstantError(
+                                                    name, previousName, value);
                                         }
                                         messageNames.put(value, name);
-                                    } catch (ExceptionInInitializerError | IllegalArgumentException e) {
+                                    } catch (ExceptionInInitializerError
+                                            | IllegalArgumentException e) {
                                     }
                                 } catch (IllegalAccessException | SecurityException e2) {
                                 }

@@ -1,6 +1,7 @@
 package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -31,22 +32,25 @@ public class IsdbsFrontendSettings extends FrontendSettings {
     private final int mSymbolRate;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CodeRate {
-    }
+    public @interface CodeRate {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Modulation {
-    }
+    public @interface Modulation {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Rolloff {
-    }
+    public @interface Rolloff {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StreamIdType {
-    }
+    public @interface StreamIdType {}
 
-    private IsdbsFrontendSettings(long frequency, int streamId, int streamIdType, int modulation, int codeRate, int symbolRate, int rolloff) {
+    private IsdbsFrontendSettings(
+            long frequency,
+            int streamId,
+            int streamIdType,
+            int modulation,
+            int codeRate,
+            int symbolRate,
+            int rolloff) {
         super(frequency);
         this.mStreamId = streamId;
         this.mStreamIdType = streamIdType;
@@ -144,7 +148,14 @@ public class IsdbsFrontendSettings extends FrontendSettings {
         }
 
         public IsdbsFrontendSettings build() {
-            return new IsdbsFrontendSettings(this.mFrequency, this.mStreamId, this.mStreamIdType, this.mModulation, this.mCodeRate, this.mSymbolRate, this.mRolloff);
+            return new IsdbsFrontendSettings(
+                    this.mFrequency,
+                    this.mStreamId,
+                    this.mStreamIdType,
+                    this.mModulation,
+                    this.mCodeRate,
+                    this.mSymbolRate,
+                    this.mRolloff);
         }
     }
 

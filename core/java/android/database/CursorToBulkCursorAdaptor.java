@@ -4,13 +4,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Consumer;
 
 /* loaded from: classes.dex */
-public final class CursorToBulkCursorAdaptor extends BulkCursorNative implements IBinder.DeathRecipient {
+public final class CursorToBulkCursorAdaptor extends BulkCursorNative
+        implements IBinder.DeathRecipient {
     private static final String TAG = "Cursor";
     private CrossProcessCursor mCursor;
     private CursorWindow mFilledWindow;
@@ -21,7 +23,8 @@ public final class CursorToBulkCursorAdaptor extends BulkCursorNative implements
     private static final class ContentObserverProxy extends ContentObserver {
         protected IContentObserver mRemote;
 
-        public ContentObserverProxy(IContentObserver remoteObserver, IBinder.DeathRecipient recipient) {
+        public ContentObserverProxy(
+                IContentObserver remoteObserver, IBinder.DeathRecipient recipient) {
             super(null);
             this.mRemote = remoteObserver;
             try {
@@ -43,12 +46,14 @@ public final class CursorToBulkCursorAdaptor extends BulkCursorNative implements
         public void onChange(boolean selfChange, Collection<Uri> uris, int flags, int userId) {
             final ArrayList<Uri> asList = new ArrayList<>();
             Objects.requireNonNull(asList);
-            uris.forEach(new Consumer() { // from class: android.database.CursorToBulkCursorAdaptor$ContentObserverProxy$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    asList.add((Uri) obj);
-                }
-            });
+            uris.forEach(
+                    new Consumer() { // from class:
+                        // android.database.CursorToBulkCursorAdaptor$ContentObserverProxy$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            asList.add((Uri) obj);
+                        }
+                    });
             Uri[] asArray = (Uri[]) asList.toArray(new Uri[asList.size()]);
             try {
                 this.mRemote.onChangeEtc(selfChange, asArray, flags, userId);
@@ -57,7 +62,8 @@ public final class CursorToBulkCursorAdaptor extends BulkCursorNative implements
         }
     }
 
-    public CursorToBulkCursorAdaptor(Cursor cursor, IContentObserver observer, String providerName) {
+    public CursorToBulkCursorAdaptor(
+            Cursor cursor, IContentObserver observer, String providerName) {
         if (cursor instanceof CrossProcessCursor) {
             this.mCursor = (CrossProcessCursor) cursor;
         } else {
@@ -131,7 +137,8 @@ public final class CursorToBulkCursorAdaptor extends BulkCursorNative implements
                 if (window == null) {
                     this.mFilledWindow = new CursorWindow(this.mProviderName);
                     window = this.mFilledWindow;
-                } else if (position < window.getStartPosition() || position >= window.getStartPosition() + window.getNumRows()) {
+                } else if (position < window.getStartPosition()
+                        || position >= window.getStartPosition() + window.getNumRows()) {
                     window.clear();
                 }
                 this.mCursor.fillWindow(position, window);
@@ -182,7 +189,12 @@ public final class CursorToBulkCursorAdaptor extends BulkCursorNative implements
                 createAndRegisterObserverProxyLocked(observer);
                 return this.mCursor.getCount();
             } catch (IllegalStateException e) {
-                IllegalStateException leakProgram = new IllegalStateException(this.mProviderName + " Requery misuse db, mCursor isClosed:" + this.mCursor.isClosed(), e);
+                IllegalStateException leakProgram =
+                        new IllegalStateException(
+                                this.mProviderName
+                                        + " Requery misuse db, mCursor isClosed:"
+                                        + this.mCursor.isClosed(),
+                                e);
                 throw leakProgram;
             }
         }

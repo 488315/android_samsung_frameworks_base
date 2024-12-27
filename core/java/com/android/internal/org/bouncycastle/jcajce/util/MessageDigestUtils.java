@@ -1,10 +1,12 @@
 package com.android.internal.org.bouncycastle.jcajce.util;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.nist.NISTObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
+
 import java.util.HashMap;
 import java.util.Map;
 

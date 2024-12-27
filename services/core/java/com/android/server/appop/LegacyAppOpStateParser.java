@@ -6,13 +6,15 @@ import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class LegacyAppOpStateParser {
-    public static void readOp(TypedXmlPullParser typedXmlPullParser, int i, String str, SparseArray sparseArray) {
+    public static void readOp(
+            TypedXmlPullParser typedXmlPullParser, int i, String str, SparseArray sparseArray) {
         int attributeInt = typedXmlPullParser.getAttributeInt((String) null, "n");
         int opToDefaultMode = AppOpsManager.opToDefaultMode(attributeInt);
         int attributeInt2 = typedXmlPullParser.getAttributeInt((String) null, "m", opToDefaultMode);
@@ -44,7 +46,9 @@ public final class LegacyAppOpStateParser {
             }
             if (next != 3 && next != 4) {
                 if (typedXmlPullParser.getName().equals("uid")) {
-                    int userId = UserHandle.getUserId(typedXmlPullParser.getAttributeInt((String) null, "n"));
+                    int userId =
+                            UserHandle.getUserId(
+                                    typedXmlPullParser.getAttributeInt((String) null, "n"));
                     int depth2 = typedXmlPullParser.getDepth();
                     while (true) {
                         int next2 = typedXmlPullParser.next();
@@ -53,14 +57,19 @@ public final class LegacyAppOpStateParser {
                                 if (typedXmlPullParser.getName().equals("op")) {
                                     readOp(typedXmlPullParser, userId, attributeValue, sparseArray);
                                 } else {
-                                    Slog.w("LegacyAppOpStateParser", "Unknown element under <pkg>: " + typedXmlPullParser.getName());
+                                    Slog.w(
+                                            "LegacyAppOpStateParser",
+                                            "Unknown element under <pkg>: "
+                                                    + typedXmlPullParser.getName());
                                     XmlUtils.skipCurrentTag(typedXmlPullParser);
                                 }
                             }
                         }
                     }
                 } else {
-                    Slog.w("LegacyAppOpStateParser", "Unknown element under <pkg>: " + typedXmlPullParser.getName());
+                    Slog.w(
+                            "LegacyAppOpStateParser",
+                            "Unknown element under <pkg>: " + typedXmlPullParser.getName());
                     XmlUtils.skipCurrentTag(typedXmlPullParser);
                 }
             }
@@ -68,47 +77,50 @@ public final class LegacyAppOpStateParser {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0039, code lost:
-    
-        if (r6 != 4) goto L66;
-     */
+
+       if (r6 != 4) goto L66;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x003c, code lost:
-    
-        r6 = r2.getName();
-     */
+
+       r6 = r2.getName();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x0047, code lost:
-    
-        if (r6.equals("pkg") == false) goto L67;
-     */
+
+       if (r6.equals("pkg") == false) goto L67;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x0054, code lost:
-    
-        if (r6.equals("uid") == false) goto L70;
-     */
+
+       if (r6.equals("uid") == false) goto L70;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0061, code lost:
-    
-        if (r6.equals("user") == false) goto L71;
-     */
+
+       if (r6.equals("user") == false) goto L71;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x0067, code lost:
-    
-        android.util.Slog.w("LegacyAppOpStateParser", "Unknown element under <app-ops>: " + r2.getName());
-        com.android.internal.util.XmlUtils.skipCurrentTag(r2);
-     */
+
+       android.util.Slog.w("LegacyAppOpStateParser", "Unknown element under <app-ops>: " + r2.getName());
+       com.android.internal.util.XmlUtils.skipCurrentTag(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:43:0x0063, code lost:
-    
-        readUser(r2, r11);
-     */
+
+       readUser(r2, r11);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x0056, code lost:
-    
-        readUidOps(r2, r10);
-     */
+
+       readUidOps(r2, r10);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:49:0x0049, code lost:
-    
-        readPackage(r2, r11);
-     */
+
+       readPackage(r2, r11);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int readState(android.util.AtomicFile r9, android.util.SparseArray r10, android.util.SparseArray r11) {
+    public static int readState(
+            android.util.AtomicFile r9,
+            android.util.SparseArray r10,
+            android.util.SparseArray r11) {
         /*
             java.lang.String r0 = "LegacyAppOpStateParser"
             java.io.FileInputStream r1 = r9.openRead()     // Catch: java.io.IOException -> L89 org.xmlpull.v1.XmlPullParserException -> L8b java.io.FileNotFoundException -> Lae
@@ -220,7 +232,10 @@ public final class LegacyAppOpStateParser {
             r9 = -2
             return r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.appop.LegacyAppOpStateParser.readState(android.util.AtomicFile, android.util.SparseArray, android.util.SparseArray):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.appop.LegacyAppOpStateParser.readState(android.util.AtomicFile,"
+                    + " android.util.SparseArray, android.util.SparseArray):int");
     }
 
     public static void readUidOps(TypedXmlPullParser typedXmlPullParser, SparseArray sparseArray) {
@@ -247,7 +262,9 @@ public final class LegacyAppOpStateParser {
                         sparseIntArray.put(attributeInt2, attributeInt3);
                     }
                 } else {
-                    Slog.w("LegacyAppOpStateParser", "Unknown element under <uid>: " + typedXmlPullParser.getName());
+                    Slog.w(
+                            "LegacyAppOpStateParser",
+                            "Unknown element under <uid>: " + typedXmlPullParser.getName());
                     XmlUtils.skipCurrentTag(typedXmlPullParser);
                 }
             }
@@ -267,23 +284,33 @@ public final class LegacyAppOpStateParser {
             }
             if (next != 3 && next != 4) {
                 if (typedXmlPullParser.getName().equals("pkg")) {
-                    String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "n");
+                    String attributeValue =
+                            typedXmlPullParser.getAttributeValue((String) null, "n");
                     int depth2 = typedXmlPullParser.getDepth();
                     while (true) {
                         int next2 = typedXmlPullParser.next();
                         if (next2 != 1 && (next2 != 3 || typedXmlPullParser.getDepth() > depth2)) {
                             if (next2 != 3 && next2 != 4) {
                                 if (typedXmlPullParser.getName().equals("op")) {
-                                    readOp(typedXmlPullParser, attributeInt, attributeValue, sparseArray);
+                                    readOp(
+                                            typedXmlPullParser,
+                                            attributeInt,
+                                            attributeValue,
+                                            sparseArray);
                                 } else {
-                                    Slog.w("LegacyAppOpStateParser", "Unknown element under <pkg>: " + typedXmlPullParser.getName());
+                                    Slog.w(
+                                            "LegacyAppOpStateParser",
+                                            "Unknown element under <pkg>: "
+                                                    + typedXmlPullParser.getName());
                                     XmlUtils.skipCurrentTag(typedXmlPullParser);
                                 }
                             }
                         }
                     }
                 } else {
-                    Slog.w("LegacyAppOpStateParser", "Unknown element under <user>: " + typedXmlPullParser.getName());
+                    Slog.w(
+                            "LegacyAppOpStateParser",
+                            "Unknown element under <user>: " + typedXmlPullParser.getName());
                     XmlUtils.skipCurrentTag(typedXmlPullParser);
                 }
             }

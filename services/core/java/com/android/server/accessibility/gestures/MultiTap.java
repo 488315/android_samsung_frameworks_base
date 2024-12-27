@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
-import com.android.server.accessibility.gestures.GestureMatcher;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,7 +17,11 @@ public class MultiTap extends GestureMatcher {
     public final int mTargetTaps;
     public final int mTouchSlop;
 
-    public MultiTap(Context context, int i, int i2, GestureMatcher.StateChangeListener stateChangeListener) {
+    public MultiTap(
+            Context context,
+            int i,
+            int i2,
+            GestureMatcher.StateChangeListener stateChangeListener) {
         super(i2, new Handler(context.getMainLooper()), stateChangeListener);
         this.mTargetTaps = i;
         this.mDoubleTapSlop = ViewConfiguration.get(context).getScaledDoubleTapSlop();
@@ -50,7 +54,9 @@ public class MultiTap extends GestureMatcher {
     public final boolean isInsideSlop(int i, MotionEvent motionEvent) {
         float x = this.mBaseX - motionEvent.getX();
         float y = this.mBaseY - motionEvent.getY();
-        return (x == FullScreenMagnificationGestureHandler.MAX_SCALE && y == FullScreenMagnificationGestureHandler.MAX_SCALE) || Math.hypot((double) x, (double) y) <= ((double) i);
+        return (x == FullScreenMagnificationGestureHandler.MAX_SCALE
+                        && y == FullScreenMagnificationGestureHandler.MAX_SCALE)
+                || Math.hypot((double) x, (double) y) <= ((double) i);
     }
 
     @Override // com.android.server.accessibility.gestures.GestureMatcher
@@ -112,6 +118,12 @@ public class MultiTap extends GestureMatcher {
 
     @Override // com.android.server.accessibility.gestures.GestureMatcher
     public final String toString() {
-        return super.toString() + ", Taps:" + this.mCurrentTaps + ", mBaseX: " + Float.toString(this.mBaseX) + ", mBaseY: " + Float.toString(this.mBaseY);
+        return super.toString()
+                + ", Taps:"
+                + this.mCurrentTaps
+                + ", mBaseX: "
+                + Float.toString(this.mBaseX)
+                + ", mBaseY: "
+                + Float.toString(this.mBaseY);
     }
 }

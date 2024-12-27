@@ -1,11 +1,13 @@
 package com.android.server.enterprise.nap;
 
 import android.hardware.usb.V1_1.PortStatus_1_1$$ExternalSyntheticOutline0;
+
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
-import com.android.server.enterprise.nap.NetworkAnalyticsService;
+
 import com.samsung.android.knox.net.nap.serviceprovider.INetworkAnalyticsService;
+
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,20 +32,33 @@ public final class NetworkAnalyticsConnectionManager {
     }
 
     public final INetworkAnalyticsService getBinderForPackage(String str) {
-        NetworkAnalyticsService.NetworkAnalyticsServiceConnection networkAnalyticsServiceConnection = (NetworkAnalyticsService.NetworkAnalyticsServiceConnection) this.binderMap.get(str);
+        NetworkAnalyticsService.NetworkAnalyticsServiceConnection
+                networkAnalyticsServiceConnection =
+                        (NetworkAnalyticsService.NetworkAnalyticsServiceConnection)
+                                this.binderMap.get(str);
         if (networkAnalyticsServiceConnection == null) {
             return null;
         }
         if (DBG) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("getBinderForPackage: binder is not null for ", str, "NetworkAnalytics:ConnectionManager");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "getBinderForPackage: binder is not null for ",
+                    str,
+                    "NetworkAnalytics:ConnectionManager");
         }
         return networkAnalyticsServiceConnection.napInterface;
     }
 
-    public final NetworkAnalyticsService.NetworkAnalyticsServiceConnection getServiceConnectionForPackage(String str) {
-        NetworkAnalyticsService.NetworkAnalyticsServiceConnection networkAnalyticsServiceConnection = (NetworkAnalyticsService.NetworkAnalyticsServiceConnection) this.binderMap.get(str);
+    public final NetworkAnalyticsService.NetworkAnalyticsServiceConnection
+            getServiceConnectionForPackage(String str) {
+        NetworkAnalyticsService.NetworkAnalyticsServiceConnection
+                networkAnalyticsServiceConnection =
+                        (NetworkAnalyticsService.NetworkAnalyticsServiceConnection)
+                                this.binderMap.get(str);
         if (networkAnalyticsServiceConnection != null && DBG) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("getServiceConnectionForPackage: service connection is not null for ", str, "NetworkAnalytics:ConnectionManager");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "getServiceConnectionForPackage: service connection is not null for ",
+                    str,
+                    "NetworkAnalytics:ConnectionManager");
         }
         return networkAnalyticsServiceConnection;
     }
@@ -51,19 +66,28 @@ public final class NetworkAnalyticsConnectionManager {
     public final boolean isProfilePresentForPackage(String str, String str2) {
         boolean z = DBG;
         if (z) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("isProfilePresentForPackage for packageName = ", str, "NetworkAnalytics:ConnectionManager");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "isProfilePresentForPackage for packageName = ",
+                    str,
+                    "NetworkAnalytics:ConnectionManager");
         }
         List list = (List) this.profilesForPackage.get(str);
         boolean contains = list != null ? list.contains(str2) : false;
         if (z) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m("isProfilePresentForPackage for packageName is = ", "NetworkAnalytics:ConnectionManager", contains);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    "isProfilePresentForPackage for packageName is = ",
+                    "NetworkAnalytics:ConnectionManager",
+                    contains);
         }
         return contains;
     }
 
     public final void removeBinderForPackage(String str) {
         if (DBG) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("removeBinderForPackage completely for packageName = ", str, "NetworkAnalytics:ConnectionManager");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "removeBinderForPackage completely for packageName = ",
+                    str,
+                    "NetworkAnalytics:ConnectionManager");
         }
         this.binderMap.remove(str);
     }
@@ -71,7 +95,10 @@ public final class NetworkAnalyticsConnectionManager {
     public final void removeProfileForPackage(String str, String str2) {
         boolean z = DBG;
         if (z) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("removeProfileForPackage for packageName = ", str, "NetworkAnalytics:ConnectionManager");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "removeProfileForPackage for packageName = ",
+                    str,
+                    "NetworkAnalytics:ConnectionManager");
         }
         List list = (List) this.profilesForPackage.get(str);
         if (list != null) {
@@ -89,7 +116,10 @@ public final class NetworkAnalyticsConnectionManager {
             }
         }
         if (z) {
-            GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("removeProfileForPackage for activatedProfileCounter = "), this.activatedProfileCounter, "NetworkAnalytics:ConnectionManager");
+            GestureWakeup$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("removeProfileForPackage for activatedProfileCounter = "),
+                    this.activatedProfileCounter,
+                    "NetworkAnalytics:ConnectionManager");
         }
     }
 }

@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SehPhonebookInfo implements Parcelable {
-    public static final Parcelable.Creator<SehPhonebookInfo> CREATOR = new Parcelable.Creator<SehPhonebookInfo>() { // from class: vendor.samsung.hardware.radio.sim.SehPhonebookInfo.1
-        @Override // android.os.Parcelable.Creator
-        public SehPhonebookInfo createFromParcel(Parcel _aidl_source) {
-            SehPhonebookInfo _aidl_out = new SehPhonebookInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehPhonebookInfo> CREATOR =
+            new Parcelable.Creator<
+                    SehPhonebookInfo>() { // from class:
+                                          // vendor.samsung.hardware.radio.sim.SehPhonebookInfo.1
+                @Override // android.os.Parcelable.Creator
+                public SehPhonebookInfo createFromParcel(Parcel _aidl_source) {
+                    SehPhonebookInfo _aidl_out = new SehPhonebookInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehPhonebookInfo[] newArray(int _aidl_size) {
-            return new SehPhonebookInfo[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehPhonebookInfo[] newArray(int _aidl_size) {
+                    return new SehPhonebookInfo[_aidl_size];
+                }
+            };
     public int totalCount = 0;
     public int usedCount = 0;
     public int firstIndex = 0;

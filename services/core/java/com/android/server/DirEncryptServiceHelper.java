@@ -24,12 +24,15 @@ import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.util.Log;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.internal.widget.LockPatternUtils;
+
 import com.samsung.android.security.DirEncryptionWrapper;
 import com.samsung.android.security.IDirEncryptServiceListener;
 import com.samsung.android.security.SemSdCardEncryption;
 import com.samsung.android.security.SemSdCardEncryptionPolicy;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -90,18 +93,29 @@ public final class DirEncryptServiceHelper {
                     }
                     String str = string;
                     if (this.notification_builder == null) {
-                        this.notification_builder = DirEncryptServiceHelper.this.getNotification(null, i, string2, str, str);
+                        this.notification_builder =
+                                DirEncryptServiceHelper.this.getNotification(
+                                        null, i, string2, str, str);
                     }
                     this.notification_builder.setSmallIcon(i);
                     this.notification_builder.setOngoing(true);
                     this.notification_builder.setProgress(100, this.mProgress, false);
-                    this.notification_builder.setContentTitle(string2 + ": \u202a" + this.mProgress + "%");
+                    this.notification_builder.setContentTitle(
+                            string2 + ": \u202a" + this.mProgress + "%");
                     if (this.mStop) {
                         this.notification_builder = null;
                     } else {
-                        NotificationManager notificationManager = (NotificationManager) this.mContext.getSystemService("notification");
-                        notificationManager.createNotificationChannel(new NotificationChannel("sdcard_encryption_channel", this.mContext.getResources().getString(17042740), 2));
-                        notificationManager.notify(SemSdCardEncryption.SECURITY_POLICY_NOTIFICATION_ID, this.notification_builder.build());
+                        NotificationManager notificationManager =
+                                (NotificationManager)
+                                        this.mContext.getSystemService("notification");
+                        notificationManager.createNotificationChannel(
+                                new NotificationChannel(
+                                        "sdcard_encryption_channel",
+                                        this.mContext.getResources().getString(17042740),
+                                        2));
+                        notificationManager.notify(
+                                SemSdCardEncryption.SECURITY_POLICY_NOTIFICATION_ID,
+                                this.notification_builder.build());
                         DirEncryptServiceHelper.this.mHandler.postDelayed(this, 500L);
                     }
                 } catch (Throwable th) {
@@ -113,8 +127,7 @@ public final class DirEncryptServiceHelper {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SDStorageEventListener extends StorageEventListener {
-        public SDStorageEventListener() {
-        }
+        public SDStorageEventListener() {}
 
         public final void onVolumeStateChanged(VolumeInfo volumeInfo, int i, int i2) {
             DiskInfo diskInfo;
@@ -129,73 +142,109 @@ public final class DirEncryptServiceHelper {
             String environmentForState = VolumeInfo.getEnvironmentForState(i);
             String environmentForState2 = VolumeInfo.getEnvironmentForState(i2);
             if (environmentForState2.equals(environmentForState)) {
-                Log.i("DirEncryptServiceHelper", XmlUtils$$ExternalSyntheticOutline0.m("newState is a same state with oldState:: newState: ", environmentForState2, " , oldState: ", environmentForState, " !!!"));
+                Log.i(
+                        "DirEncryptServiceHelper",
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "newState is a same state with oldState:: newState: ",
+                                environmentForState2,
+                                " , oldState: ",
+                                environmentForState,
+                                " !!!"));
             }
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(new StringBuilder("onVolumeStateChanged UUID : "), volumeInfo.fsUuid, "DirEncryptServiceHelper");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("onVolumeStateChanged UUID : "),
+                    volumeInfo.fsUuid,
+                    "DirEncryptServiceHelper");
             DirEncryptServiceHelper.this.mDew.setExternalSDvolId(volumeInfo.id);
             DirEncryptServiceHelper.this.mDew.setExternalSDvolFsUuid(volumeInfo.fsUuid);
             DirEncryptServiceHelper.this.mDew.setExternalSDvolState(environmentForState2);
-            boolean equals = "trigger_restart_min_framework".equals(SystemProperties.get("vold.decrypt", ""));
-            if (DirEncryptServiceHelper.this.mDew.getCurrentUserID() != 0 || environmentForState == null || environmentForState.equals(environmentForState2)) {
+            boolean equals =
+                    "trigger_restart_min_framework"
+                            .equals(SystemProperties.get("vold.decrypt", ""));
+            if (DirEncryptServiceHelper.this.mDew.getCurrentUserID() != 0
+                    || environmentForState == null
+                    || environmentForState.equals(environmentForState2)) {
                 return;
             }
             StringBuilder sb = new StringBuilder("onVolumeStateChanged:: ");
             sb.append(volumeInfo.id);
             sb.append(" , ");
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, volumeInfo.path, " , oldstate: ", environmentForState, " newState: ");
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, environmentForState2, "DirEncryptServiceHelper");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    sb, volumeInfo.path, " , oldstate: ", environmentForState, " newState: ");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    sb, environmentForState2, "DirEncryptServiceHelper");
             if (equals) {
                 return;
             }
-            if (!DirEncryptServiceHelper.this.mBootCompleted && "unmounted".equals(environmentForState) && "removed".equals(environmentForState2)) {
+            if (!DirEncryptServiceHelper.this.mBootCompleted
+                    && "unmounted".equals(environmentForState)
+                    && "removed".equals(environmentForState2)) {
                 return;
             }
-            DirEncryptServiceHelper.this.mHandler.obtainMessage(3, environmentForState2).sendToTarget();
+            DirEncryptServiceHelper.this
+                    .mHandler
+                    .obtainMessage(3, environmentForState2)
+                    .sendToTarget();
         }
     }
 
     public DirEncryptServiceHelper(Context context) {
         this.mDew = null;
         this.mAnimator = null;
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.DirEncryptServiceHelper.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, final Intent intent) {
-                new Thread() { // from class: com.android.server.DirEncryptServiceHelper.1.1
-                    @Override // java.lang.Thread, java.lang.Runnable
-                    public final void run() {
-                        String action = intent.getAction();
-                        Log.i("DirEncryptServiceHelper", "received " + action);
-                        if ("com.samsung.android.security.SemSdCardEncryption.UNMOUNT_POLICY".equals(action)) {
-                            Log.i("DirEncryptServiceHelper", "Unmount policy noti pressed");
-                            DirEncryptServiceHelper.this.mHandler.obtainMessage(10).sendToTarget();
-                            return;
-                        }
-                        if ("android.intent.action.USER_SWITCHED".equals(action) && DirEncryptServiceHelper.this.mBootCompleted) {
-                            Log.i("DirEncryptServiceHelper", "Switch User");
-                            if (DirEncryptServiceHelper.this.isSdCardEncryped()) {
-                                try {
-                                    DirEncryptServiceHelper.this.mDew.unmountVolume();
-                                    DirEncryptServiceHelper.this.mDew.mountVolume();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.DirEncryptServiceHelper.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, final Intent intent) {
+                        new Thread() { // from class: com.android.server.DirEncryptServiceHelper.1.1
+                            @Override // java.lang.Thread, java.lang.Runnable
+                            public final void run() {
+                                String action = intent.getAction();
+                                Log.i("DirEncryptServiceHelper", "received " + action);
+                                if ("com.samsung.android.security.SemSdCardEncryption.UNMOUNT_POLICY"
+                                        .equals(action)) {
+                                    Log.i("DirEncryptServiceHelper", "Unmount policy noti pressed");
+                                    DirEncryptServiceHelper.this
+                                            .mHandler
+                                            .obtainMessage(10)
+                                            .sendToTarget();
+                                    return;
+                                }
+                                if ("android.intent.action.USER_SWITCHED".equals(action)
+                                        && DirEncryptServiceHelper.this.mBootCompleted) {
+                                    Log.i("DirEncryptServiceHelper", "Switch User");
+                                    if (DirEncryptServiceHelper.this.isSdCardEncryped()) {
+                                        try {
+                                            DirEncryptServiceHelper.this.mDew.unmountVolume();
+                                            DirEncryptServiceHelper.this.mDew.mountVolume();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
                                 }
                             }
-                        }
+                        }.start();
                     }
-                }.start();
-            }
-        };
+                };
         this.mContext = context;
         this.mAnimator = new AnimatingNotification(context);
         this.mDew = new DirEncryptionWrapper(context);
-        context.registerReceiver(broadcastReceiver, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("com.samsung.android.security.SemSdCardEncryption.UNMOUNT_POLICY", "android.intent.action.USER_SWITCHED"), null, null);
+        context.registerReceiver(
+                broadcastReceiver,
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        "com.samsung.android.security.SemSdCardEncryption.UNMOUNT_POLICY",
+                        "android.intent.action.USER_SWITCHED"),
+                null,
+                null);
     }
 
     public static String getCurrentTime() {
         try {
-            return new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.US).format(new Date(System.currentTimeMillis()));
+            return new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.US)
+                    .format(new Date(System.currentTimeMillis()));
         } catch (Exception e) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "Exception : ", "DirEncryptServiceHelper");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e, "Exception : ", "DirEncryptServiceHelper");
             return "Unknown";
         }
     }
@@ -211,7 +260,16 @@ public final class DirEncryptServiceHelper {
             z = false;
         }
         String str = SystemProperties.get("sec.fle.encryption.status", "");
-        Log.i("DirEncryptServiceHelper", "checkSdCardMetafile result:" + str + " unlocked:" + isCeStorageUnlocked + " Policy:" + isAdminApplied + " skipMounting:" + z);
+        Log.i(
+                "DirEncryptServiceHelper",
+                "checkSdCardMetafile result:"
+                        + str
+                        + " unlocked:"
+                        + isCeStorageUnlocked
+                        + " Policy:"
+                        + isAdminApplied
+                        + " skipMounting:"
+                        + z);
         if ("encrypted".equals(str)) {
             Log.i("DirEncryptServiceHelper", "ENC_META_CHECK : Encryption State Normal");
             if (z) {
@@ -226,7 +284,9 @@ public final class DirEncryptServiceHelper {
                 Log.i("DirEncryptServiceHelper", "ENC_META_CHECK : EAS Policy Set");
                 startCryptSDCardSettingsActivity();
             } else {
-                Log.i("DirEncryptServiceHelper", "SD card has encrypting/decrypting state -> Self Encrypting/Decrypting!!");
+                Log.i(
+                        "DirEncryptServiceHelper",
+                        "SD card has encrypting/decrypting state -> Self Encrypting/Decrypting!!");
                 if (z) {
                     Log.i("DirEncryptServiceHelper", "checkSdCardMetafile but user locked yet");
                     return;
@@ -249,7 +309,8 @@ public final class DirEncryptServiceHelper {
 
     public final void clearNotification() {
         Log.i("DirEncryptServiceHelper", "clearNotification");
-        ((NotificationManager) this.mContext.getSystemService("notification")).cancel(SemSdCardEncryption.SECURITY_POLICY_NOTIFICATION_ID);
+        ((NotificationManager) this.mContext.getSystemService("notification"))
+                .cancel(SemSdCardEncryption.SECURITY_POLICY_NOTIFICATION_ID);
         this.mPrevPercent = -1;
     }
 
@@ -300,7 +361,9 @@ public final class DirEncryptServiceHelper {
         }
         if ("MoveMount".equals(str)) {
             if (!isSdCardEncryped() && this.mLastError != 8) {
-                Log.i("DirEncryptServiceHelper", "Since encrypt is OFF: no final mount command (DECRYPTED)");
+                Log.i(
+                        "DirEncryptServiceHelper",
+                        "Since encrypt is OFF: no final mount command (DECRYPTED)");
                 setStatus(0);
                 notifyEncryptionStatusChanged(3, 0, 0, "Mount");
                 Log.i("DirEncryptServiceHelper", "delete uuid");
@@ -314,12 +377,17 @@ public final class DirEncryptServiceHelper {
             }
             if (isSdCardEncryped()) {
                 if (isSdCardEncryped()) {
-                    Log.i("DirEncryptServiceHelper", "MOVE_MOUNT => ENCRYPTING, ENCRYPTED or OTHER_ENCRYPT");
+                    Log.i(
+                            "DirEncryptServiceHelper",
+                            "MOVE_MOUNT => ENCRYPTING, ENCRYPTED or OTHER_ENCRYPT");
                     return;
                 }
                 return;
             } else {
-                Log.i("DirEncryptServiceHelper", "looks like encryption policies were received while SD card decryption was on going (DECRYPTING)!!");
+                Log.i(
+                        "DirEncryptServiceHelper",
+                        "looks like encryption policies were received while SD card decryption was"
+                            + " on going (DECRYPTING)!!");
                 showNotification(2, 0, "success");
                 setStatus(0);
                 notifyEncryptionStatusChanged(3, 0, 0, "busy");
@@ -379,7 +447,8 @@ public final class DirEncryptServiceHelper {
         }
     }
 
-    public final Notification.Builder getNotification(PendingIntent pendingIntent, int i, String str, String str2, String str3) {
+    public final Notification.Builder getNotification(
+            PendingIntent pendingIntent, int i, String str, String str2, String str3) {
         Notification.Builder builder = new Notification.Builder(this.mContext);
         builder.setSmallIcon(i);
         builder.setPriority(0);
@@ -395,13 +464,15 @@ public final class DirEncryptServiceHelper {
     }
 
     public final String getTopClassName() {
-        List<ActivityManager.RunningTaskInfo> runningTasks = ((ActivityManager) this.mContext.getSystemService("activity")).getRunningTasks(1);
+        List<ActivityManager.RunningTaskInfo> runningTasks =
+                ((ActivityManager) this.mContext.getSystemService("activity")).getRunningTasks(1);
         return !runningTasks.isEmpty() ? runningTasks.get(0).topActivity.getClassName() : "";
     }
 
     public final int isAdminApplied() {
         SemSdCardEncryptionPolicy semSdCardEncryptionPolicy = new SemSdCardEncryptionPolicy();
-        if (!((DevicePolicyManager) this.mContext.getSystemService("device_policy")).semGetRequireStorageCardEncryption(null)) {
+        if (!((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                .semGetRequireStorageCardEncryption(null)) {
             return 0;
         }
         semSdCardEncryptionPolicy.mIsPolicy = 1;
@@ -412,7 +483,15 @@ public final class DirEncryptServiceHelper {
         String str = SystemProperties.get("sec.fle.encryption.status", "");
         String str2 = SystemProperties.get("persist.vold.ext_encrypted_type", "");
         String volumeState = this.mDew.getVolumeState();
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("isSdCardEncryped state: ", volumeState, " isExistMeta: ", str, " isEncryptionType: "), str2, "DirEncryptServiceHelper");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                InitialConfiguration$$ExternalSyntheticOutline0.m(
+                        "isSdCardEncryped state: ",
+                        volumeState,
+                        " isExistMeta: ",
+                        str,
+                        " isEncryptionType: "),
+                str2,
+                "DirEncryptServiceHelper");
         if (volumeState == null || !"mounted".equals(volumeState)) {
             return false;
         }
@@ -428,7 +507,8 @@ public final class DirEncryptServiceHelper {
                 try {
                     try {
                         Log.i("DirEncryptServiceHelper", "Listener :" + broadcastItem);
-                        broadcastItem.onEncryptionStatusChanged(this.mDew.getExternalSDvolId(), i, str, i2, i3);
+                        broadcastItem.onEncryptionStatusChanged(
+                                this.mDew.getExternalSDvolId(), i, str, i2, i3);
                     } catch (Exception e) {
                         Log.i("DirEncryptServiceHelper", "Listener failed: " + e);
                     }
@@ -479,7 +559,12 @@ public final class DirEncryptServiceHelper {
                     str6 = string5;
                     str2 = str6;
                     str3 = string6;
-                    pendingIntent = PendingIntent.getActivity(this.mContext, 0, new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION"), 201326592);
+                    pendingIntent =
+                            PendingIntent.getActivity(
+                                    this.mContext,
+                                    0,
+                                    new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION"),
+                                    201326592);
                     i4 = 17302328;
                 } else {
                     if (i == 5) {
@@ -515,7 +600,12 @@ public final class DirEncryptServiceHelper {
                             string7 = this.mContext.getResources().getString(17042736);
                             string8 = this.mContext.getResources().getString(17042733);
                         }
-                        activity2 = PendingIntent.getActivity(this.mContext, 0, new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION"), 201326592);
+                        activity2 =
+                                PendingIntent.getActivity(
+                                        this.mContext,
+                                        0,
+                                        new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION"),
+                                        201326592);
                         this.mLastError = 4;
                     } else if (i == 7) {
                         String string9 = this.mContext.getResources().getString(17042787);
@@ -523,7 +613,8 @@ public final class DirEncryptServiceHelper {
                         Context context = this.mContext;
                         Intent intent = new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION");
                         intent.putExtra("adminStart", "1");
-                        PendingIntent activity3 = PendingIntent.getActivity(context, 0, intent, 201326592);
+                        PendingIntent activity3 =
+                                PendingIntent.getActivity(context, 0, intent, 201326592);
                         str2 = string9;
                         str3 = string10;
                         pendingIntent = activity3;
@@ -531,7 +622,13 @@ public final class DirEncryptServiceHelper {
                     } else if (i == 10) {
                         String string11 = this.mContext.getResources().getString(17042748);
                         String string12 = this.mContext.getResources().getString(17042747);
-                        PendingIntent broadcast = PendingIntent.getBroadcast(this.mContext, 0, new Intent("com.samsung.android.security.SemSdCardEncryption.UNMOUNT_POLICY"), 201326592);
+                        PendingIntent broadcast =
+                                PendingIntent.getBroadcast(
+                                        this.mContext,
+                                        0,
+                                        new Intent(
+                                                "com.samsung.android.security.SemSdCardEncryption.UNMOUNT_POLICY"),
+                                        201326592);
                         this.mLastError = 0;
                         str2 = string11;
                         str3 = string12;
@@ -557,7 +654,12 @@ public final class DirEncryptServiceHelper {
                             string8 = this.mContext.getResources().getString(17042733);
                         }
                         this.mLastError = 11;
-                        activity2 = PendingIntent.getActivity(this.mContext, 0, new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION"), 201326592);
+                        activity2 =
+                                PendingIntent.getActivity(
+                                        this.mContext,
+                                        0,
+                                        new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION"),
+                                        201326592);
                     }
                     str6 = string7;
                     str2 = str6;
@@ -589,7 +691,12 @@ public final class DirEncryptServiceHelper {
                     i4 = i5;
                     str3 = str2;
                 } else {
-                    activity = PendingIntent.getActivity(this.mContext, 0, new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION"), 201326592);
+                    activity =
+                            PendingIntent.getActivity(
+                                    this.mContext,
+                                    0,
+                                    new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION"),
+                                    201326592);
                     string4 = this.mContext.getResources().getString(17042738);
                     this.mLastError = 5;
                     i5 = 17302328;
@@ -626,7 +733,12 @@ public final class DirEncryptServiceHelper {
                     i4 = i5;
                     str3 = str2;
                 } else {
-                    activity = PendingIntent.getActivity(this.mContext, 0, new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION"), 201326592);
+                    activity =
+                            PendingIntent.getActivity(
+                                    this.mContext,
+                                    0,
+                                    new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION"),
+                                    201326592);
                     string4 = this.mContext.getResources().getString(17042733);
                     this.mLastError = 6;
                     i5 = 17302236;
@@ -665,15 +777,22 @@ public final class DirEncryptServiceHelper {
         if (build != null) {
             build.flags |= 17;
             build.defaults |= 4;
-            NotificationManager notificationManager = (NotificationManager) this.mContext.getSystemService("notification");
-            notificationManager.createNotificationChannel(new NotificationChannel("sdcard_encryption_channel", this.mContext.getResources().getString(17042740), 2));
+            NotificationManager notificationManager =
+                    (NotificationManager) this.mContext.getSystemService("notification");
+            notificationManager.createNotificationChannel(
+                    new NotificationChannel(
+                            "sdcard_encryption_channel",
+                            this.mContext.getResources().getString(17042740),
+                            2));
             notificationManager.notify(SemSdCardEncryption.SECURITY_POLICY_NOTIFICATION_ID, build);
         }
     }
 
     public final void startCryptSDCardSettingsActivity() {
         Log.d("DirEncryptServiceHelper", "isCryptSDCardSettings : " + getTopClassName());
-        if (getTopClassName() == null || !getTopClassName().equals("com.android.settings.Settings$CryptSDCardSettingsActivity")) {
+        if (getTopClassName() == null
+                || !getTopClassName()
+                        .equals("com.android.settings.Settings$CryptSDCardSettingsActivity")) {
             Log.d("DirEncryptServiceHelper", "startCryptSDCardSettingsActivity");
             Intent intent = new Intent("com.sec.app.action.START_SDCARD_ENCRYPTION");
             intent.setFlags(272629760);
@@ -683,7 +802,9 @@ public final class DirEncryptServiceHelper {
             try {
                 this.mContext.startActivity(intent);
             } catch (ActivityNotFoundException e) {
-                Log.e("DirEncryptServiceHelper", "startCryptSDCardSettingsActivity Failed to start intent activity" + e);
+                Log.e(
+                        "DirEncryptServiceHelper",
+                        "startCryptSDCardSettingsActivity Failed to start intent activity" + e);
             }
         }
     }

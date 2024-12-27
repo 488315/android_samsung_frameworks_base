@@ -3,7 +3,7 @@ package android.widget;
 import android.database.DataSetObserver;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -16,7 +16,10 @@ public class HeaderViewListAdapter implements WrapperListAdapter, Filterable {
     ArrayList<ListView.FixedViewInfo> mHeaderViewInfos;
     private final boolean mIsFilterable;
 
-    public HeaderViewListAdapter(ArrayList<ListView.FixedViewInfo> headerViewInfos, ArrayList<ListView.FixedViewInfo> footerViewInfos, ListAdapter adapter) {
+    public HeaderViewListAdapter(
+            ArrayList<ListView.FixedViewInfo> headerViewInfos,
+            ArrayList<ListView.FixedViewInfo> footerViewInfos,
+            ListAdapter adapter) {
         this.mAdapter = adapter;
         this.mIsFilterable = adapter instanceof Filterable;
         if (headerViewInfos == null) {
@@ -29,7 +32,9 @@ public class HeaderViewListAdapter implements WrapperListAdapter, Filterable {
         } else {
             this.mFooterViewInfos = footerViewInfos;
         }
-        this.mAreAllFixedViewsSelectable = areAllListInfosSelectable(this.mHeaderViewInfos) && areAllListInfosSelectable(this.mFooterViewInfos);
+        this.mAreAllFixedViewsSelectable =
+                areAllListInfosSelectable(this.mHeaderViewInfos)
+                        && areAllListInfosSelectable(this.mFooterViewInfos);
     }
 
     public int getHeadersCount() {
@@ -71,7 +76,8 @@ public class HeaderViewListAdapter implements WrapperListAdapter, Filterable {
                 i++;
             } else {
                 this.mHeaderViewInfos.remove(i);
-                if (areAllListInfosSelectable(this.mHeaderViewInfos) && areAllListInfosSelectable(this.mFooterViewInfos)) {
+                if (areAllListInfosSelectable(this.mHeaderViewInfos)
+                        && areAllListInfosSelectable(this.mFooterViewInfos)) {
                     z = true;
                 }
                 this.mAreAllFixedViewsSelectable = z;
@@ -92,7 +98,8 @@ public class HeaderViewListAdapter implements WrapperListAdapter, Filterable {
                 i++;
             } else {
                 this.mFooterViewInfos.remove(i);
-                if (areAllListInfosSelectable(this.mHeaderViewInfos) && areAllListInfosSelectable(this.mFooterViewInfos)) {
+                if (areAllListInfosSelectable(this.mHeaderViewInfos)
+                        && areAllListInfosSelectable(this.mFooterViewInfos)) {
                     z = true;
                 }
                 this.mAreAllFixedViewsSelectable = z;

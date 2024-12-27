@@ -6,7 +6,9 @@ import android.media.MediaExtractor;
 import android.media.MediaFormat;
 import android.net.Uri;
 import android.os.Build;
+
 import com.samsung.android.feature.SemFloatingFeature;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
@@ -156,11 +158,19 @@ public class SEFHelper {
             ret = createDefaultRegion();
         } else if (this.mRecordingMode == 2 || this.mRecordingMode == 1) {
             ret = slowfastSEFParser(this.mSEFData);
-        } else if (this.mRecordingMode == 8 || this.mRecordingMode == 7 || this.mRecordingMode == 9 || this.mRecordingMode == 22 || this.mRecordingMode == 18) {
+        } else if (this.mRecordingMode == 8
+                || this.mRecordingMode == 7
+                || this.mRecordingMode == 9
+                || this.mRecordingMode == 22
+                || this.mRecordingMode == 18) {
             ret = superslowSEFParser(this.mSEFData);
-        } else if (this.mRecordingMode == 12 || ((this.mRecordingMode == 21 && this.mRecordingFps > 120) || this.mRecordingMode == 19)) {
+        } else if (this.mRecordingMode == 12
+                || ((this.mRecordingMode == 21 && this.mRecordingFps > 120)
+                        || this.mRecordingMode == 19)) {
             ret = newslowSEFParser(this.mSEFData);
-        } else if (this.mRecordingMode == 13 || this.mRecordingMode == 15 || this.mRecordingMode == 21) {
+        } else if (this.mRecordingMode == 13
+                || this.mRecordingMode == 15
+                || this.mRecordingMode == 21) {
             ret = newslowSEFParserV2(this.mSEFData);
         }
         if (!ret) {
@@ -271,7 +281,9 @@ public class SEFHelper {
             r1.printStackTrace()
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.transcode.util.SEFHelper.extractSEFData():java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.transcode.util.SEFHelper.extractSEFData():java.lang.String");
     }
 
     public List<Region> getRegionList() {
@@ -282,7 +294,10 @@ public class SEFHelper {
         MediaExtractor me = null;
         try {
             try {
-                me = this.mUri != null ? CodecsHelper.createExtractor(this.mContext, this.mUri) : CodecsHelper.createExtractor(this.mFilepath);
+                me =
+                        this.mUri != null
+                                ? CodecsHelper.createExtractor(this.mContext, this.mUri)
+                                : CodecsHelper.createExtractor(this.mFilepath);
                 int videoTrack = CodecsHelper.getAndSelectVideoTrackIndex(me);
                 MediaFormat inputFormat = me.getTrackFormat(videoTrack);
                 long duration = inputFormat.getLong(MediaFormat.KEY_DURATION);
@@ -305,22 +320,27 @@ public class SEFHelper {
                     this.mRegionList.add(slowRegion);
                     if (is120fpsSlowMotionVideo()) {
                         Region slowRegion2 = new Region();
-                        slowRegion2.mRegionStartTime = (int) ((2 * duration) / JobInfo.MIN_BACKOFF_MILLIS);
-                        slowRegion2.mRegionEndTime = (int) ((duration * 8) / JobInfo.MIN_BACKOFF_MILLIS);
+                        slowRegion2.mRegionStartTime =
+                                (int) ((2 * duration) / JobInfo.MIN_BACKOFF_MILLIS);
+                        slowRegion2.mRegionEndTime =
+                                (int) ((duration * 8) / JobInfo.MIN_BACKOFF_MILLIS);
                         slowRegion2.mRegionSpeedType = Speed.TWO_TIMES;
                         slowRegion2.mRegionSpeed = slowRegion2.mRegionSpeedType.value;
                         this.mRegionList.add(slowRegion2);
                     }
                     Region slowRegion3 = new Region();
-                    slowRegion3.mRegionStartTime = (int) ((8 * duration) / JobInfo.MIN_BACKOFF_MILLIS);
+                    slowRegion3.mRegionStartTime =
+                            (int) ((8 * duration) / JobInfo.MIN_BACKOFF_MILLIS);
                     slowRegion3.mRegionEndTime = (int) (duration / 1000);
                     slowRegion3.mRegionSpeedType = Speed.EIGHT_TIMES;
                     slowRegion3.mRegionSpeed = slowRegion3.mRegionSpeedType.value;
                     this.mRegionList.add(slowRegion3);
                 } else {
                     Region slowRegion4 = new Region();
-                    slowRegion4.mRegionStartTime = (int) ((2 * duration) / JobInfo.MIN_BACKOFF_MILLIS);
-                    slowRegion4.mRegionEndTime = (int) ((8 * duration) / JobInfo.MIN_BACKOFF_MILLIS);
+                    slowRegion4.mRegionStartTime =
+                            (int) ((2 * duration) / JobInfo.MIN_BACKOFF_MILLIS);
+                    slowRegion4.mRegionEndTime =
+                            (int) ((8 * duration) / JobInfo.MIN_BACKOFF_MILLIS);
                     if (this.mRecordingMode == 1) {
                         slowRegion4.mRegionSpeedType = Speed.ONE_EIGHTH;
                     } else if (this.mRecordingMode == 2) {
@@ -331,10 +351,18 @@ public class SEFHelper {
                 }
                 for (int i = 0; i < this.mRegionList.size(); i++) {
                     LogS.d("TranscodeLib", "Region List " + i);
-                    LogS.d("TranscodeLib", "Region regionStartTime " + this.mRegionList.get(i).mRegionStartTime);
-                    LogS.d("TranscodeLib", "Region regionEndTime " + this.mRegionList.get(i).mRegionEndTime);
-                    LogS.d("TranscodeLib", "Region regionSpeed " + this.mRegionList.get(i).mRegionSpeed);
-                    LogS.d("TranscodeLib", "Region regionSpeedType " + this.mRegionList.get(i).mRegionSpeedType);
+                    LogS.d(
+                            "TranscodeLib",
+                            "Region regionStartTime " + this.mRegionList.get(i).mRegionStartTime);
+                    LogS.d(
+                            "TranscodeLib",
+                            "Region regionEndTime " + this.mRegionList.get(i).mRegionEndTime);
+                    LogS.d(
+                            "TranscodeLib",
+                            "Region regionSpeed " + this.mRegionList.get(i).mRegionSpeed);
+                    LogS.d(
+                            "TranscodeLib",
+                            "Region regionSpeedType " + this.mRegionList.get(i).mRegionSpeedType);
                 }
                 return true;
             } catch (IOException e) {
@@ -465,14 +493,24 @@ public class SEFHelper {
                 slowRegion8.mRegionSpeedType = getSpeed(slowRegion8.mRegionSpeed);
                 this.mRegionList.add(slowRegion8);
             } else {
-                LogS.d("TranscodeLib", "There is not slowDataregion, length: " + slowDataregion.length);
+                LogS.d(
+                        "TranscodeLib",
+                        "There is not slowDataregion, length: " + slowDataregion.length);
             }
             for (int i = 0; i < this.mRegionList.size(); i++) {
                 LogS.d("TranscodeLib", "Region List " + i);
-                LogS.d("TranscodeLib", "Region regionStartTime " + this.mRegionList.get(i).mRegionStartTime);
-                LogS.d("TranscodeLib", "Region regionEndTime " + this.mRegionList.get(i).mRegionEndTime);
-                LogS.d("TranscodeLib", "Region regionSpeed " + this.mRegionList.get(i).mRegionSpeed);
-                LogS.d("TranscodeLib", "Region regionSpeedType " + this.mRegionList.get(i).mRegionSpeedType);
+                LogS.d(
+                        "TranscodeLib",
+                        "Region regionStartTime " + this.mRegionList.get(i).mRegionStartTime);
+                LogS.d(
+                        "TranscodeLib",
+                        "Region regionEndTime " + this.mRegionList.get(i).mRegionEndTime);
+                LogS.d(
+                        "TranscodeLib",
+                        "Region regionSpeed " + this.mRegionList.get(i).mRegionSpeed);
+                LogS.d(
+                        "TranscodeLib",
+                        "Region regionSpeedType " + this.mRegionList.get(i).mRegionSpeedType);
             }
             return true;
         } catch (NumberFormatException nfe) {
@@ -626,14 +664,24 @@ public class SEFHelper {
                 slowRegion8.mRegionSpeedType = getSpeed(slowRegion8.mRegionSpeed);
                 this.mRegionList.add(slowRegion8);
             } else {
-                LogS.d("TranscodeLib", "There is not slowDataregion, length: " + slowDataregion.length);
+                LogS.d(
+                        "TranscodeLib",
+                        "There is not slowDataregion, length: " + slowDataregion.length);
             }
             for (int i = 0; i < this.mRegionList.size(); i++) {
                 LogS.d("TranscodeLib", "Region List " + i);
-                LogS.d("TranscodeLib", "Region regionStartTime " + this.mRegionList.get(i).mRegionStartTime);
-                LogS.d("TranscodeLib", "Region regionEndTime " + this.mRegionList.get(i).mRegionEndTime);
-                LogS.d("TranscodeLib", "Region regionSpeed " + this.mRegionList.get(i).mRegionSpeed);
-                LogS.d("TranscodeLib", "Region regionSpeedType " + this.mRegionList.get(i).mRegionSpeedType);
+                LogS.d(
+                        "TranscodeLib",
+                        "Region regionStartTime " + this.mRegionList.get(i).mRegionStartTime);
+                LogS.d(
+                        "TranscodeLib",
+                        "Region regionEndTime " + this.mRegionList.get(i).mRegionEndTime);
+                LogS.d(
+                        "TranscodeLib",
+                        "Region regionSpeed " + this.mRegionList.get(i).mRegionSpeed);
+                LogS.d(
+                        "TranscodeLib",
+                        "Region regionSpeedType " + this.mRegionList.get(i).mRegionSpeedType);
             }
             return true;
         } catch (NumberFormatException nfe) {
@@ -643,18 +691,25 @@ public class SEFHelper {
     }
 
     private boolean is120fpsSlowMotionVideo() {
-        return this.mRecordingMode == 13 || this.mRecordingMode == 15 || (this.mRecordingMode == 21 && this.mRecordingFps == 120);
+        return this.mRecordingMode == 13
+                || this.mRecordingMode == 15
+                || (this.mRecordingMode == 21 && this.mRecordingFps == 120);
     }
 
     private boolean isSlowMotionV2() {
-        return this.mRecordingMode == 13 || this.mRecordingMode == 15 || this.mRecordingMode == 12 || this.mRecordingMode == 21 || this.mRecordingMode == 19;
+        return this.mRecordingMode == 13
+                || this.mRecordingMode == 15
+                || this.mRecordingMode == 12
+                || this.mRecordingMode == 21
+                || this.mRecordingMode == 19;
     }
 
     public static boolean supportMTK_SSM() {
         if (Build.VERSION.SEM_PLATFORM_INT > 130100) {
             return true;
         }
-        return SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_MMFW_SUPPORT_MTK_SSM_SM_VIDEO");
+        return SemFloatingFeature.getInstance()
+                .getBoolean("SEC_FLOATING_FEATURE_MMFW_SUPPORT_MTK_SSM_SM_VIDEO");
     }
 
     private boolean checkValidSEFData(String data) {
@@ -699,16 +754,45 @@ public class SEFHelper {
             int i = 0;
             while (true) {
                 if (i < this.mRegionList.size()) {
-                    if (sampleTime2 < this.mRegionList.get(i).mRegionStartTime * 1000 || sampleTime2 >= this.mRegionList.get(i).mRegionEndTime * 1000) {
+                    if (sampleTime2 < this.mRegionList.get(i).mRegionStartTime * 1000
+                            || sampleTime2 >= this.mRegionList.get(i).mRegionEndTime * 1000) {
                         if (sampleTime2 >= this.mRegionList.get(i).mRegionEndTime * 1000) {
                             Speed playSpeed = this.mRegionList.get(i).mRegionSpeedType;
                             float timescale = getTimeScale(playSpeed);
-                            timedelta = ((double) timescale) > 1.0d ? (long) (timedelta + ((timescale - 1.0d) * (this.mRegionList.get(i).mRegionEndTime - this.mRegionList.get(i).mRegionStartTime) * 1000.0d)) : (long) (timedelta - (((1.0d - timescale) * 1000.0d) * (this.mRegionList.get(i).mRegionEndTime - this.mRegionList.get(i).mRegionStartTime)));
+                            timedelta =
+                                    ((double) timescale) > 1.0d
+                                            ? (long)
+                                                    (timedelta
+                                                            + ((timescale - 1.0d)
+                                                                    * (this.mRegionList.get(i)
+                                                                                    .mRegionEndTime
+                                                                            - this.mRegionList.get(
+                                                                                            i)
+                                                                                    .mRegionStartTime)
+                                                                    * 1000.0d))
+                                            : (long)
+                                                    (timedelta
+                                                            - (((1.0d - timescale) * 1000.0d)
+                                                                    * (this.mRegionList.get(i)
+                                                                                    .mRegionEndTime
+                                                                            - this.mRegionList.get(
+                                                                                            i)
+                                                                                    .mRegionStartTime)));
                         }
                         i++;
                     } else {
                         Speed playSpeed2 = this.mRegionList.get(i).mRegionSpeedType;
-                        tempSampleTime = (this.mRegionList.get(i).mRegionStartTime * 1000) + (((sampleTime2 - (this.mRegionList.get(i).mRegionStartTime * 1000)) * ((long) (1000000.0f * getTimeScale(playSpeed2)))) / 1000000);
+                        tempSampleTime =
+                                (this.mRegionList.get(i).mRegionStartTime * 1000)
+                                        + (((sampleTime2
+                                                                - (this.mRegionList.get(i)
+                                                                                .mRegionStartTime
+                                                                        * 1000))
+                                                        * ((long)
+                                                                (1000000.0f
+                                                                        * getTimeScale(
+                                                                                playSpeed2))))
+                                                / 1000000);
                         break;
                     }
                 } else {

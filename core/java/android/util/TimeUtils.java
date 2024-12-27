@@ -2,9 +2,11 @@ package android.util;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.SystemClock;
+
 import com.android.i18n.timezone.CountryTimeZones;
 import com.android.i18n.timezone.TimeZoneFinder;
 import com.android.i18n.timezone.ZoneInfoDb;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -23,8 +25,10 @@ public class TimeUtils {
     private static final int SECONDS_PER_DAY = 86400;
     private static final int SECONDS_PER_HOUR = 3600;
     private static final int SECONDS_PER_MINUTE = 60;
-    private static final SimpleDateFormat sLoggingFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    public static final SimpleDateFormat sDumpDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    private static final SimpleDateFormat sLoggingFormat =
+            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final SimpleDateFormat sDumpDateFormat =
+            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     public static final Instant MIN_USE_DATE_OF_TIMEZONE = Instant.ofEpochMilli(1546300800000L);
     private static final Object sFormatSync = new Object();
     private static char[] sFormatStr = new char[29];
@@ -38,14 +42,20 @@ public class TimeUtils {
         return null;
     }
 
-    private static android.icu.util.TimeZone getIcuTimeZone(int offsetMillis, boolean isDst, long whenMillis, String countryIso) {
+    private static android.icu.util.TimeZone getIcuTimeZone(
+            int offsetMillis, boolean isDst, long whenMillis, String countryIso) {
         CountryTimeZones.OffsetResult offsetResult;
         if (countryIso == null) {
             return null;
         }
         android.icu.util.TimeZone bias = android.icu.util.TimeZone.getDefault();
-        CountryTimeZones countryTimeZones = TimeZoneFinder.getInstance().lookupCountryTimeZones(countryIso);
-        if (countryTimeZones == null || (offsetResult = countryTimeZones.lookupByOffsetWithBias(whenMillis, bias, offsetMillis, isDst)) == null) {
+        CountryTimeZones countryTimeZones =
+                TimeZoneFinder.getInstance().lookupCountryTimeZones(countryIso);
+        if (countryTimeZones == null
+                || (offsetResult =
+                                countryTimeZones.lookupByOffsetWithBias(
+                                        whenMillis, bias, offsetMillis, isDst))
+                        == null) {
             return null;
         }
         return offsetResult.getTimeZone();
@@ -56,12 +66,14 @@ public class TimeUtils {
             throw new NullPointerException("countryCode == null");
         }
         TimeZoneFinder timeZoneFinder = TimeZoneFinder.getInstance();
-        CountryTimeZones countryTimeZones = timeZoneFinder.lookupCountryTimeZones(countryCode.toLowerCase());
+        CountryTimeZones countryTimeZones =
+                timeZoneFinder.lookupCountryTimeZones(countryCode.toLowerCase());
         if (countryTimeZones == null) {
             return null;
         }
         List<String> timeZoneIds = new ArrayList<>();
-        for (CountryTimeZones.TimeZoneMapping timeZoneMapping : countryTimeZones.getTimeZoneMappings()) {
+        for (CountryTimeZones.TimeZoneMapping timeZoneMapping :
+                countryTimeZones.getTimeZoneMappings()) {
             if (timeZoneMapping.isShownInPickerAt(MIN_USE_DATE_OF_TIMEZONE)) {
                 timeZoneIds.add(timeZoneMapping.getTimeZoneId());
             }
@@ -94,7 +106,8 @@ public class TimeUtils {
         return 0;
     }
 
-    private static int printFieldLocked(char[] formatStr, int amt, char suffix, int pos, boolean always, int zeropad) {
+    private static int printFieldLocked(
+            char[] formatStr, int amt, char suffix, int pos, boolean always, int zeropad) {
         if (always || amt > 0) {
             if (amt > 999) {
                 int tmp = 0;
@@ -130,9 +143,9 @@ public class TimeUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:67:0x0133, code lost:
-    
-        if (r9 != r8) goto L80;
-     */
+
+       if (r9 != r8) goto L80;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -142,7 +155,9 @@ public class TimeUtils {
             Method dump skipped, instructions count: 340
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.TimeUtils.formatDurationLocked(long, int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.util.TimeUtils.formatDurationLocked(long,"
+                    + " int):int");
     }
 
     public static void formatDuration(long duration, StringBuilder builder) {

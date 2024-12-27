@@ -18,9 +18,11 @@ public class EGLExt {
 
     private static native void _nativeClassInit();
 
-    private static native int eglDupNativeFenceFDANDROIDImpl(EGLDisplay eGLDisplay, EGLSync eGLSync);
+    private static native int eglDupNativeFenceFDANDROIDImpl(
+            EGLDisplay eGLDisplay, EGLSync eGLSync);
 
-    public static native boolean eglPresentationTimeANDROID(EGLDisplay eGLDisplay, EGLSurface eGLSurface, long j);
+    public static native boolean eglPresentationTimeANDROID(
+            EGLDisplay eGLDisplay, EGLSurface eGLSurface, long j);
 
     static {
         _nativeClassInit();

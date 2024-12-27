@@ -12,6 +12,7 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.math.ec.ECAlgorithms;
 import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -39,8 +40,10 @@ public class X9Curve extends ASN1Object implements X9ObjectIdentifiers {
         this.fieldIdentifier = fieldID.getIdentifier();
         if (this.fieldIdentifier.equals((ASN1Primitive) prime_field)) {
             BigInteger p = ((ASN1Integer) fieldID.getParameters()).getValue();
-            BigInteger A = new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets());
-            BigInteger B = new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(1)).getOctets());
+            BigInteger A =
+                    new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets());
+            BigInteger B =
+                    new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(1)).getOctets());
             this.curve = new ECCurve.Fp(p, A, B, order, cofactor);
         } else if (this.fieldIdentifier.equals((ASN1Primitive) characteristic_two_field)) {
             ASN1Sequence parameters = ASN1Sequence.getInstance(fieldID.getParameters());
@@ -62,8 +65,10 @@ public class X9Curve extends ASN1Object implements X9ObjectIdentifiers {
             } else {
                 throw new IllegalArgumentException("This type of EC basis is not implemented");
             }
-            BigInteger A2 = new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets());
-            BigInteger B2 = new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(1)).getOctets());
+            BigInteger A2 =
+                    new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(0)).getOctets());
+            BigInteger B2 =
+                    new BigInteger(1, ASN1OctetString.getInstance(seq.getObjectAt(1)).getOctets());
             this.curve = new ECCurve.F2m(m, k1, k2, k3, A2, B2, order, cofactor);
         } else {
             throw new IllegalArgumentException("This type of ECCurve is not implemented");
@@ -93,7 +98,8 @@ public class X9Curve extends ASN1Object implements X9ObjectIdentifiers {
         return Arrays.clone(this.seed);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(3);
         if (this.fieldIdentifier.equals((ASN1Primitive) prime_field)) {

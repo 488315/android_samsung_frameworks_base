@@ -5,9 +5,11 @@ import android.app.role.RoleManager;
 import android.content.Context;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.filter.IFilter;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,7 +30,8 @@ public final class NFCPackageFilter implements IFilter {
     public final void deInit() {
         RoleManager roleManager = (RoleManager) this.mContext.getSystemService("role");
         if (roleManager != null) {
-            roleManager.removeOnRoleHoldersChangedListenerAsUser(this.mOnRoleHoldersChangedListener, UserHandle.of(this.userId));
+            roleManager.removeOnRoleHoldersChangedListenerAsUser(
+                    this.mOnRoleHoldersChangedListener, UserHandle.of(this.userId));
         }
     }
 
@@ -51,13 +54,16 @@ public final class NFCPackageFilter implements IFilter {
                 Slog.e("NFCFilter", "ROLE_WALLET is not available");
                 return null;
             }
-            List roleHoldersAsUser = roleManager.getRoleHoldersAsUser("android.app.role.WALLET", UserHandle.of(this.userId));
+            List roleHoldersAsUser =
+                    roleManager.getRoleHoldersAsUser(
+                            "android.app.role.WALLET", UserHandle.of(this.userId));
             if (roleHoldersAsUser.isEmpty()) {
                 return null;
             }
             return (String) roleHoldersAsUser.get(0);
         } catch (Exception e) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception "), "NFCFilter");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception "), "NFCFilter");
             return null;
         }
     }
@@ -68,18 +74,24 @@ public final class NFCPackageFilter implements IFilter {
         this.mContext = context;
         this.userId = context.getUserId();
         setPaymentDefaultPackage(getPaymentDefaultPackageFromRoleManager());
-        this.mOnRoleHoldersChangedListener = new OnRoleHoldersChangedListener() { // from class: com.android.server.am.mars.filter.filter.NFCPackageFilter$$ExternalSyntheticLambda0
-            public final void onRoleHoldersChanged(String str, UserHandle userHandle) {
-                NFCPackageFilter nFCPackageFilter = NFCPackageFilter.this;
-                nFCPackageFilter.getClass();
-                if (str.equals("android.app.role.WALLET")) {
-                    nFCPackageFilter.setPaymentDefaultPackage(nFCPackageFilter.getPaymentDefaultPackageFromRoleManager());
-                }
-            }
-        };
+        this.mOnRoleHoldersChangedListener =
+                new OnRoleHoldersChangedListener() { // from class:
+                                                     // com.android.server.am.mars.filter.filter.NFCPackageFilter$$ExternalSyntheticLambda0
+                    public final void onRoleHoldersChanged(String str, UserHandle userHandle) {
+                        NFCPackageFilter nFCPackageFilter = NFCPackageFilter.this;
+                        nFCPackageFilter.getClass();
+                        if (str.equals("android.app.role.WALLET")) {
+                            nFCPackageFilter.setPaymentDefaultPackage(
+                                    nFCPackageFilter.getPaymentDefaultPackageFromRoleManager());
+                        }
+                    }
+                };
         RoleManager roleManager = (RoleManager) this.mContext.getSystemService("role");
         if (roleManager != null) {
-            roleManager.addOnRoleHoldersChangedListenerAsUser(context.getMainExecutor(), this.mOnRoleHoldersChangedListener, UserHandle.of(this.userId));
+            roleManager.addOnRoleHoldersChangedListenerAsUser(
+                    context.getMainExecutor(),
+                    this.mOnRoleHoldersChangedListener,
+                    UserHandle.of(this.userId));
         }
     }
 

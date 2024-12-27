@@ -1,6 +1,7 @@
 package com.samsung.android.jdsms;
 
 import android.os.Process;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,8 +10,7 @@ import java.util.Set;
 final class UidAllowList {
     private static final Set<String> mAllowList;
 
-    UidAllowList() {
-    }
+    UidAllowList() {}
 
     static {
         HashSet<String> modifiableSet = new HashSet<>();

@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IPowerHintSession extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$power$IPowerHintSession".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$power$IPowerHintSession".replace('$', '.');
     public static final String HASH = "d111735ed2b89b6c32443aac9b162b1afbbea3f2";
     public static final int VERSION = 5;
 
@@ -37,36 +38,28 @@ public interface IPowerHintSession extends IInterface {
 
     public static class Default implements IPowerHintSession {
         @Override // android.hardware.power.IPowerHintSession
-        public void updateTargetWorkDuration(long targetDurationNanos) throws RemoteException {
-        }
+        public void updateTargetWorkDuration(long targetDurationNanos) throws RemoteException {}
 
         @Override // android.hardware.power.IPowerHintSession
-        public void reportActualWorkDuration(WorkDuration[] durations) throws RemoteException {
-        }
+        public void reportActualWorkDuration(WorkDuration[] durations) throws RemoteException {}
 
         @Override // android.hardware.power.IPowerHintSession
-        public void pause() throws RemoteException {
-        }
+        public void pause() throws RemoteException {}
 
         @Override // android.hardware.power.IPowerHintSession
-        public void resume() throws RemoteException {
-        }
+        public void resume() throws RemoteException {}
 
         @Override // android.hardware.power.IPowerHintSession
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.power.IPowerHintSession
-        public void sendHint(int hint) throws RemoteException {
-        }
+        public void sendHint(int hint) throws RemoteException {}
 
         @Override // android.hardware.power.IPowerHintSession
-        public void setThreads(int[] threadIds) throws RemoteException {
-        }
+        public void setThreads(int[] threadIds) throws RemoteException {}
 
         @Override // android.hardware.power.IPowerHintSession
-        public void setMode(int type, boolean enabled) throws RemoteException {
-        }
+        public void setMode(int type, boolean enabled) throws RemoteException {}
 
         @Override // android.hardware.power.IPowerHintSession
         public SessionConfig getSessionConfig() throws RemoteException {
@@ -89,7 +82,7 @@ public interface IPowerHintSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPowerHintSession {
+    public abstract static class Stub extends Binder implements IPowerHintSession {
         static final int TRANSACTION_close = 5;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -158,7 +151,8 @@ public interface IPowerHintSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -184,7 +178,8 @@ public interface IPowerHintSession extends IInterface {
                     updateTargetWorkDuration(_arg0);
                     return true;
                 case 2:
-                    WorkDuration[] _arg02 = (WorkDuration[]) data.createTypedArray(WorkDuration.CREATOR);
+                    WorkDuration[] _arg02 =
+                            (WorkDuration[]) data.createTypedArray(WorkDuration.CREATOR);
                     data.enforceNoDataAvail();
                     reportActualWorkDuration(_arg02);
                     return true;
@@ -250,7 +245,8 @@ public interface IPowerHintSession extends IInterface {
                     _data.writeLong(targetDurationNanos);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method updateTargetWorkDuration is unimplemented.");
+                        throw new RemoteException(
+                                "Method updateTargetWorkDuration is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -265,7 +261,8 @@ public interface IPowerHintSession extends IInterface {
                     _data.writeTypedArray(durations, 0);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method reportActualWorkDuration is unimplemented.");
+                        throw new RemoteException(
+                                "Method reportActualWorkDuration is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -374,7 +371,8 @@ public interface IPowerHintSession extends IInterface {
                         throw new RemoteException("Method getSessionConfig is unimplemented.");
                     }
                     _reply.readException();
-                    SessionConfig _result = (SessionConfig) _reply.readTypedObject(SessionConfig.CREATOR);
+                    SessionConfig _result =
+                            (SessionConfig) _reply.readTypedObject(SessionConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

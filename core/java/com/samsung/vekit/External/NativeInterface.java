@@ -3,6 +3,7 @@ package com.samsung.vekit.External;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.Surface;
+
 import com.samsung.vekit.Common.Object.AnalyzeInfo;
 import com.samsung.vekit.Common.Object.DoodlePoint;
 import com.samsung.vekit.Common.Object.DoodleStroke;
@@ -18,6 +19,7 @@ import com.samsung.vekit.Common.Type.FrameworkType;
 import com.samsung.vekit.Common.Type.SeekType;
 import com.samsung.vekit.Common.Type.ViewMode;
 import com.samsung.vekit.Control.VEController;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,7 +58,8 @@ public class NativeInterface {
 
     public native void changePortraitVideoKeyFrame(Element element, PVKeyFrame pVKeyFrame);
 
-    public native void changePortraitVideoKeyFrameList(Element element, ArrayList<PVKeyFrame> arrayList);
+    public native void changePortraitVideoKeyFrameList(
+            Element element, ArrayList<PVKeyFrame> arrayList);
 
     public native void clear(Element element);
 
@@ -88,7 +91,14 @@ public class NativeInterface {
 
     public native FrcSupportInfo getFrcSupportInfo(int i);
 
-    public native void initializeFramework(Surface surface, int i, int i2, int i3, int i4, ViewMode viewMode, FrameworkType frameworkType);
+    public native void initializeFramework(
+            Surface surface,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            ViewMode viewMode,
+            FrameworkType frameworkType);
 
     public native void loadAnalyzeSolution(AnalyzeType analyzeType);
 
@@ -156,7 +166,9 @@ public class NativeInterface {
                 sInstanceIdCnt = Integer.valueOf(sInstanceIdCnt.intValue() + 1);
                 return hashMap.get(num);
             }
-            Log.e("NativeInterface", "ERROR already Max native interface instances(" + size + ") running");
+            Log.e(
+                    "NativeInterface",
+                    "ERROR already Max native interface instances(" + size + ") running");
             return null;
         }
     }

@@ -1,7 +1,5 @@
 package android.hardware.radio.config;
 
-import android.hardware.radio.config.IRadioConfigIndication;
-import android.hardware.radio.config.IRadioConfigResponse;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioConfig extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$config$IRadioConfig".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$config$IRadioConfig".replace('$', '.');
     public static final String HASH = "1e3dcfffc1e90fc886cf5a22ecaa94601b115710";
     public static final int VERSION = 3;
 
@@ -32,46 +31,44 @@ public interface IRadioConfig extends IInterface {
 
     void setPreferredDataModem(int i, byte b) throws RemoteException;
 
-    void setResponseFunctions(IRadioConfigResponse iRadioConfigResponse, IRadioConfigIndication iRadioConfigIndication) throws RemoteException;
+    void setResponseFunctions(
+            IRadioConfigResponse iRadioConfigResponse,
+            IRadioConfigIndication iRadioConfigIndication)
+            throws RemoteException;
 
     void setSimSlotsMapping(int i, SlotPortMapping[] slotPortMappingArr) throws RemoteException;
 
     public static class Default implements IRadioConfig {
         @Override // android.hardware.radio.config.IRadioConfig
-        public void getHalDeviceCapabilities(int serial) throws RemoteException {
-        }
+        public void getHalDeviceCapabilities(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.config.IRadioConfig
-        public void getNumOfLiveModems(int serial) throws RemoteException {
-        }
+        public void getNumOfLiveModems(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.config.IRadioConfig
-        public void getPhoneCapability(int serial) throws RemoteException {
-        }
+        public void getPhoneCapability(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.config.IRadioConfig
-        public void getSimSlotsStatus(int serial) throws RemoteException {
-        }
+        public void getSimSlotsStatus(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.config.IRadioConfig
-        public void setNumOfLiveModems(int serial, byte numOfLiveModems) throws RemoteException {
-        }
+        public void setNumOfLiveModems(int serial, byte numOfLiveModems) throws RemoteException {}
 
         @Override // android.hardware.radio.config.IRadioConfig
-        public void setPreferredDataModem(int serial, byte modemId) throws RemoteException {
-        }
+        public void setPreferredDataModem(int serial, byte modemId) throws RemoteException {}
 
         @Override // android.hardware.radio.config.IRadioConfig
-        public void setResponseFunctions(IRadioConfigResponse radioConfigResponse, IRadioConfigIndication radioConfigIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                IRadioConfigResponse radioConfigResponse,
+                IRadioConfigIndication radioConfigIndication)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.config.IRadioConfig
-        public void setSimSlotsMapping(int serial, SlotPortMapping[] slotMap) throws RemoteException {
-        }
+        public void setSimSlotsMapping(int serial, SlotPortMapping[] slotMap)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.config.IRadioConfig
-        public void getSimultaneousCallingSupport(int serial) throws RemoteException {
-        }
+        public void getSimultaneousCallingSupport(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.config.IRadioConfig
         public int getInterfaceVersion() {
@@ -89,7 +86,7 @@ public interface IRadioConfig extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioConfig {
+    public abstract static class Stub extends Binder implements IRadioConfig {
         static final int TRANSACTION_getHalDeviceCapabilities = 1;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -124,7 +121,8 @@ public interface IRadioConfig extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -177,14 +175,17 @@ public interface IRadioConfig extends IInterface {
                     setPreferredDataModem(_arg06, _arg12);
                     return true;
                 case 7:
-                    IRadioConfigResponse _arg07 = IRadioConfigResponse.Stub.asInterface(data.readStrongBinder());
-                    IRadioConfigIndication _arg13 = IRadioConfigIndication.Stub.asInterface(data.readStrongBinder());
+                    IRadioConfigResponse _arg07 =
+                            IRadioConfigResponse.Stub.asInterface(data.readStrongBinder());
+                    IRadioConfigIndication _arg13 =
+                            IRadioConfigIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg07, _arg13);
                     return true;
                 case 8:
                     int _arg08 = data.readInt();
-                    SlotPortMapping[] _arg14 = (SlotPortMapping[]) data.createTypedArray(SlotPortMapping.CREATOR);
+                    SlotPortMapping[] _arg14 =
+                            (SlotPortMapping[]) data.createTypedArray(SlotPortMapping.CREATOR);
                     data.enforceNoDataAvail();
                     setSimSlotsMapping(_arg08, _arg14);
                     return true;
@@ -224,7 +225,8 @@ public interface IRadioConfig extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getHalDeviceCapabilities is unimplemented.");
+                        throw new RemoteException(
+                                "Method getHalDeviceCapabilities is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -277,7 +279,8 @@ public interface IRadioConfig extends IInterface {
             }
 
             @Override // android.hardware.radio.config.IRadioConfig
-            public void setNumOfLiveModems(int serial, byte numOfLiveModems) throws RemoteException {
+            public void setNumOfLiveModems(int serial, byte numOfLiveModems)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -309,7 +312,10 @@ public interface IRadioConfig extends IInterface {
             }
 
             @Override // android.hardware.radio.config.IRadioConfig
-            public void setResponseFunctions(IRadioConfigResponse radioConfigResponse, IRadioConfigIndication radioConfigIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    IRadioConfigResponse radioConfigResponse,
+                    IRadioConfigIndication radioConfigIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -325,7 +331,8 @@ public interface IRadioConfig extends IInterface {
             }
 
             @Override // android.hardware.radio.config.IRadioConfig
-            public void setSimSlotsMapping(int serial, SlotPortMapping[] slotMap) throws RemoteException {
+            public void setSimSlotsMapping(int serial, SlotPortMapping[] slotMap)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -348,7 +355,8 @@ public interface IRadioConfig extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(9, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getSimultaneousCallingSupport is unimplemented.");
+                        throw new RemoteException(
+                                "Method getSimultaneousCallingSupport is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

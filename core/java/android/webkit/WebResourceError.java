@@ -9,6 +9,5 @@ public abstract class WebResourceError {
     public abstract int getErrorCode();
 
     @SystemApi
-    public WebResourceError() {
-    }
+    public WebResourceError() {}
 }

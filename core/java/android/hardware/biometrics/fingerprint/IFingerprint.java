@@ -1,7 +1,5 @@
 package android.hardware.biometrics.fingerprint;
 
-import android.hardware.biometrics.fingerprint.ISession;
-import android.hardware.biometrics.fingerprint.ISessionCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IFingerprint extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$biometrics$fingerprint$IFingerprint".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$biometrics$fingerprint$IFingerprint".replace('$', '.');
     public static final String HASH = "41a730a7a6b5aa9cebebce70ee5b5e509b0af6fb";
     public static final int VERSION = 4;
 
@@ -29,7 +28,8 @@ public interface IFingerprint extends IInterface {
         }
 
         @Override // android.hardware.biometrics.fingerprint.IFingerprint
-        public ISession createSession(int sensorId, int userId, ISessionCallback cb) throws RemoteException {
+        public ISession createSession(int sensorId, int userId, ISessionCallback cb)
+                throws RemoteException {
             return null;
         }
 
@@ -49,7 +49,7 @@ public interface IFingerprint extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFingerprint {
+    public abstract static class Stub extends Binder implements IFingerprint {
         static final int TRANSACTION_createSession = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -97,7 +97,8 @@ public interface IFingerprint extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -125,7 +126,8 @@ public interface IFingerprint extends IInterface {
                 case 2:
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
-                    ISessionCallback _arg2 = ISessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ISessionCallback _arg2 =
+                            ISessionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     ISession _result2 = createSession(_arg0, _arg1, _arg2);
                     reply.writeNoException();
@@ -165,7 +167,8 @@ public interface IFingerprint extends IInterface {
                         throw new RemoteException("Method getSensorProps is unimplemented.");
                     }
                     _reply.readException();
-                    SensorProps[] _result = (SensorProps[]) _reply.createTypedArray(SensorProps.CREATOR);
+                    SensorProps[] _result =
+                            (SensorProps[]) _reply.createTypedArray(SensorProps.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -174,7 +177,8 @@ public interface IFingerprint extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.IFingerprint
-            public ISession createSession(int sensorId, int userId, ISessionCallback cb) throws RemoteException {
+            public ISession createSession(int sensorId, int userId, ISessionCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

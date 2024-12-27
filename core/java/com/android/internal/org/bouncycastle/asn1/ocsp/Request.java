@@ -22,7 +22,8 @@ public class Request extends ASN1Object {
     private Request(ASN1Sequence seq) {
         this.reqCert = CertID.getInstance(seq.getObjectAt(0));
         if (seq.size() == 2) {
-            this.singleRequestExtensions = Extensions.getInstance((ASN1TaggedObject) seq.getObjectAt(1), true);
+            this.singleRequestExtensions =
+                    Extensions.getInstance((ASN1TaggedObject) seq.getObjectAt(1), true);
         }
     }
 
@@ -48,7 +49,8 @@ public class Request extends ASN1Object {
         return this.singleRequestExtensions;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         v.add(this.reqCert);

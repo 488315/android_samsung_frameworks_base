@@ -2,7 +2,6 @@ package com.samsung.android.knox.tima.attestation;
 
 import android.os.RemoteException;
 import android.util.Log;
-import com.samsung.android.knox.tima.attestation.IEnhancedAttestationPolicyCallback;
 
 /* loaded from: classes6.dex */
 public abstract class EnhancedAttestationPolicyCallback {
@@ -11,8 +10,7 @@ public abstract class EnhancedAttestationPolicyCallback {
 
     abstract void onAttestationFinished(EnhancedAttestationResult enhancedAttestationResult);
 
-    EnhancedAttestationPolicyCallback() {
-    }
+    EnhancedAttestationPolicyCallback() {}
 
     private class EaAttestationPolicyCallback extends IEnhancedAttestationPolicyCallback.Stub {
         private String mNonce;
@@ -23,7 +21,9 @@ public abstract class EnhancedAttestationPolicyCallback {
 
         @Override // com.samsung.android.knox.tima.attestation.IEnhancedAttestationPolicyCallback
         public void onAttestationFinished(EnhancedAttestationResult result) throws RemoteException {
-            Log.d(EnhancedAttestationPolicyCallback.TAG, "onAttestationFinished: " + this.mNonce.length());
+            Log.d(
+                    EnhancedAttestationPolicyCallback.TAG,
+                    "onAttestationFinished: " + this.mNonce.length());
             EnhancedAttestationPolicy.getInstance().removeFromTrackMap(this.mNonce);
             EnhancedAttestationPolicyCallback.this.acb.onAttestationFinished(result);
         }

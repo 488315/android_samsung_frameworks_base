@@ -1,6 +1,7 @@
 package com.samsung.android.media;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -36,8 +37,10 @@ public class AudioParameter {
     public static final String SEC_GLOBAL_EFFECT_DOLBY_ENABLE = "g_effect_dolby_enable";
     public static final String SEC_GLOBAL_EFFECT_DOLBY_PROFILE = "g_effect_dolby_profile";
     public static final String SEC_GLOBAL_EFFECT_DV_ADAPT_SOUND = "g_effect_dv_adapt_sound";
-    public static final String SEC_GLOBAL_EFFECT_GOOGLE_RESAMPLER_ENABLE = "g_effect_google_resampler_enable";
-    public static final String SEC_GLOBAL_EFFECT_HEADTRACKER_AVAILABLE = "g_effect_headtracker_available";
+    public static final String SEC_GLOBAL_EFFECT_GOOGLE_RESAMPLER_ENABLE =
+            "g_effect_google_resampler_enable";
+    public static final String SEC_GLOBAL_EFFECT_HEADTRACKER_AVAILABLE =
+            "g_effect_headtracker_available";
     public static final String SEC_GLOBAL_EFFECT_MYSPACE_TYPE = "g_effect_myspace_type";
     public static final String SEC_GLOBAL_EFFECT_OFFLOAD_VSP_PARAM = "g_effect_offload_vsp_param";
     public static final String SEC_GLOBAL_EFFECT_PARAM_KEY = "g_effect_param_key";
@@ -54,7 +57,8 @@ public class AudioParameter {
     public static final String SEC_GLOBAL_KNOX_AUDIORECORD_ALLOWED = "g_knox_audiorecord_allowed";
     public static final String SEC_GLOBAL_KNOX_MICROPHONE_ALLOWED = "g_knox_microphone_allowed";
     public static final String SEC_GLOBAL_MULTI_SOUND_PIN_APP_NAME = "g_multi_sound_pin_app_name";
-    public static final String SEC_GLOBAL_MULTI_SOUND_PRIORITY_DEVICE = "g_multi_sound_priority_device";
+    public static final String SEC_GLOBAL_MULTI_SOUND_PRIORITY_DEVICE =
+            "g_multi_sound_priority_device";
     public static final String SEC_GLOBAL_PCM_DUMP_AP_CALL_STATE = "g_pcm_dump_ap_call_state";
     public static final String SEC_GLOBAL_PCM_DUMP_STATE = "g_pcm_dump_state";
     public static final String SEC_GLOBAL_PREFIX = "g_";
@@ -62,27 +66,37 @@ public class AudioParameter {
     public static final String SEC_GLOBAL_PTT_MODE = "g_ptt_mode";
     public static final String SEC_GLOBAL_PTT_MODE_3RD_PARTY = "ptt_mode";
     public static final String SEC_GLOBAL_RECORD_BEAMFORMING_MODE = "g_record_beamforming_mode";
-    public static final String SEC_GLOBAL_RECORD_CONVERSATION_ENERGY_KEY = "g_record_conversation_energy_key";
+    public static final String SEC_GLOBAL_RECORD_CONVERSATION_ENERGY_KEY =
+            "g_record_conversation_energy_key";
     public static final String SEC_GLOBAL_RECORD_INPUT_LATENCY = "g_record_input_latency";
-    public static final String SEC_GLOBAL_RECORD_NSRI_SECURITY_ENABLE = "g_record_nsri_security_enable";
-    public static final String SEC_GLOBAL_RECORD_SEC_VOICE_RECORDER_ENABLE = "g_record_sec_voice_recorder_enable";
+    public static final String SEC_GLOBAL_RECORD_NSRI_SECURITY_ENABLE =
+            "g_record_nsri_security_enable";
+    public static final String SEC_GLOBAL_RECORD_SEC_VOICE_RECORDER_ENABLE =
+            "g_record_sec_voice_recorder_enable";
     public static final String SEC_GLOBAL_RECORD_TX_INVERSION = "g_record_tx_inversion";
     public static final String SEC_GLOBAL_SCO_SAMPLERATE = "g_sco_samplerate";
     public static final String SEC_GLOBAL_SET_A2DP_AV_SYNC = "g_a2dp_av_sync";
     public static final String SEC_GLOBAL_SHUTDOWN_MUTE = "g_shutdown_mute";
     public static final String SEC_GLOBAL_SHUTDOWN_SUSPEND = "g_shutdown_suspend";
     public static final String SEC_GLOBAL_SOUND_PATH_ACTIVE_ADDRESS = "g_sound_path_active_address";
-    public static final String SEC_GLOBAL_SOUND_PATH_AVAILABLE_DEVICES = "g_sound_path_available_devices";
+    public static final String SEC_GLOBAL_SOUND_PATH_AVAILABLE_DEVICES =
+            "g_sound_path_available_devices";
     public static final String SEC_GLOBAL_TUNING_RELOAD_VOLUME = "g_tuning_reload_volume";
-    public static final String SEC_GLOBAL_TUNING_SOUNDBOOSTER_RELOAD = "g_tuning_soundbooster_reload";
+    public static final String SEC_GLOBAL_TUNING_SOUNDBOOSTER_RELOAD =
+            "g_tuning_soundbooster_reload";
     public static final String SEC_GLOBAL_UHQ_RESTORED_TRACK_ENABLE = "g_uhq_restored_track_enable";
-    public static final String SEC_GLOBAL_VOICE_WAKEUP_BABYCRY_ENABLE = "g_voice_wakeup_babycry_enable";
+    public static final String SEC_GLOBAL_VOICE_WAKEUP_BABYCRY_ENABLE =
+            "g_voice_wakeup_babycry_enable";
     public static final String SEC_GLOBAL_VOICE_WAKEUP_ENABLE = "g_voice_wakeup_enable";
-    public static final String SEC_GLOBAL_VOICE_WAKEUP_KEYWORD_GRAMMAR_PATH = "g_voice_wakeup_keyword_grammar_path";
+    public static final String SEC_GLOBAL_VOICE_WAKEUP_KEYWORD_GRAMMAR_PATH =
+            "g_voice_wakeup_keyword_grammar_path";
     public static final String SEC_GLOBAL_VOICE_WAKEUP_KEYWORD_PATH = "g_voice_wakeup_keyword_path";
-    public static final String SEC_GLOBAL_VOICE_WAKEUP_REGISTER_VOICE_KEYWORD = "g_voice_wakeup_register_voice_keyword";
-    public static final String SEC_GLOBAL_VOICE_WAKEUP_SEAMLESS_ENABLE = "g_voice_wakeup_seamless_enable";
-    public static final String SEC_GLOBAL_VOICE_WAKEUP_TRIGGER_BACKLOG_TIME = "g_voice_wakeup_trigger_backlog_time";
+    public static final String SEC_GLOBAL_VOICE_WAKEUP_REGISTER_VOICE_KEYWORD =
+            "g_voice_wakeup_register_voice_keyword";
+    public static final String SEC_GLOBAL_VOICE_WAKEUP_SEAMLESS_ENABLE =
+            "g_voice_wakeup_seamless_enable";
+    public static final String SEC_GLOBAL_VOICE_WAKEUP_TRIGGER_BACKLOG_TIME =
+            "g_voice_wakeup_trigger_backlog_time";
     public static final String SEC_GLOBAL_VOLUME_MONITOR_WARNING = "g_volume_monitor_warning_level";
     public static final String SEC_GLOBAL_VOLUME_SITUATION_KEY = "g_volume_situation_key";
     public static final String SEC_LOCAL_ALL_SOUND_MUTE_ENABLE = "l_all_sound_mute_enable";
@@ -97,12 +111,15 @@ public class AudioParameter {
     public static final String SEC_LOCAL_CALL_RAT_TYPE = "l_call_rat_type";
     public static final String SEC_LOCAL_CALL_RIL_STATE_CONNECTED = "l_call_ril_state_connected";
     public static final String SEC_LOCAL_CALL_TRANSLATION_MODE = "l_call_translation_mode";
-    public static final String SEC_LOCAL_CALL_VOIP_EXTRA_VOLUME_ENABLE = "l_call_voip_extra_volume_enable";
+    public static final String SEC_LOCAL_CALL_VOIP_EXTRA_VOLUME_ENABLE =
+            "l_call_voip_extra_volume_enable";
     public static final String SEC_LOCAL_DEVICE_CURRENT_OUTPUT = "l_device_current_output";
     public static final String SEC_LOCAL_DEX_KEY = "l_dex_key";
     public static final String SEC_LOCAL_DIRECT_POWER_ENABLE = "l_direct_power_enable";
-    public static final String SEC_LOCAL_DUAL_SPEAKER_AMP_LEFT_POWER_ENABLE = "l_dual_speaker_amp_left_power_enable";
-    public static final String SEC_LOCAL_DUAL_SPEAKER_CALLING_PACKAGE = "l_dual_speaker_calling_package";
+    public static final String SEC_LOCAL_DUAL_SPEAKER_AMP_LEFT_POWER_ENABLE =
+            "l_dual_speaker_amp_left_power_enable";
+    public static final String SEC_LOCAL_DUAL_SPEAKER_CALLING_PACKAGE =
+            "l_dual_speaker_calling_package";
     public static final String SEC_LOCAL_DUAL_SPEAKER_ENABLE = "l_dual_speaker_enable";
     public static final String SEC_LOCAL_DVFS_MIN_LOCK = "l_dvfs_min_lock";
     public static final String SEC_LOCAL_EFFECT_LISTENBACK_KEY = "l_effect_listenback_key";
@@ -111,7 +128,8 @@ public class AudioParameter {
     public static final String SEC_LOCAL_FMRADIO_RECORD_ACTIVE = "l_fmradio_record_active";
     public static final String SEC_LOCAL_GAME_CHAT_ENABLE = "l_game_chat_enable";
     public static final String SEC_LOCAL_GUARD_CALL_MODE = "l_guard_call_mode";
-    public static final String SEC_LOCAL_GUARD_CALL_MODE_CALLING_PID = "l_guard_call_mode_calling_pid";
+    public static final String SEC_LOCAL_GUARD_CALL_MODE_CALLING_PID =
+            "l_guard_call_mode_calling_pid";
     public static final String SEC_LOCAL_GUARD_CALL_MODE_SKIP = "l_guard_call_mode_skip";
     public static final String SEC_LOCAL_HIDDEN_SOUND_KEY = "l_hidden_sound_key";
     public static final String SEC_LOCAL_HW_FLAT_MOTION_STATE = "l_hw_flat_motion_state";
@@ -120,8 +138,10 @@ public class AudioParameter {
     public static final String SEC_LOCAL_IS_USING_AUDIO = "l_is_using_audio";
     public static final String SEC_LOCAL_KARAOKE_ENABLE = "l_karaoke_enable";
     public static final String SEC_LOCAL_MONO_TYPE = "l_mono_type";
-    public static final String SEC_LOCAL_MULTI_SOUND_ACTIVE_TRACK_DEVICE = "l_multi_sound_active_track_device";
-    public static final String SEC_LOCAL_MULTI_SOUND_ACTIVE_TRACK_UID = "l_multi_sound_active_track_uid";
+    public static final String SEC_LOCAL_MULTI_SOUND_ACTIVE_TRACK_DEVICE =
+            "l_multi_sound_active_track_device";
+    public static final String SEC_LOCAL_MULTI_SOUND_ACTIVE_TRACK_UID =
+            "l_multi_sound_active_track_uid";
     public static final String SEC_LOCAL_MULTI_SOUND_KEY = "l_multi_sound_key";
     public static final String SEC_LOCAL_PREFIX = "l_";
     public static final String SEC_LOCAL_RECORD_ACTIVE_ENABLE = "l_record_active_enable";
@@ -132,27 +152,35 @@ public class AudioParameter {
     public static final String SEC_LOCAL_SET_FROM_AUDIOSERVICE = "l_set_from_audioservice";
     public static final String SEC_LOCAL_SET_SAFE_MEDIA_VOLUME = "l_set_safe_media_volume";
     public static final String SEC_LOCAL_SIMULATE_DEVICE_ENABLE = "l_simulate_device_enable";
-    public static final String SEC_LOCAL_SMART_VEIW_SPLIT_SOUND_ENABLE = "l_smart_view_split_sound_enable";
+    public static final String SEC_LOCAL_SMART_VEIW_SPLIT_SOUND_ENABLE =
+            "l_smart_view_split_sound_enable";
     public static final String SEC_LOCAL_SMART_VIEW_ENABLE = "l_smart_view_enable";
-    public static final String SEC_LOCAL_SMART_VIEW_FIXED_VOLUME_ENABLE = "l_smart_view_fixed_volume_enable";
-    public static final String SEC_LOCAL_SMART_VIEW_MIRRORING_ACTIVE = "l_smart_view_mirroring_active";
-    public static final String SEC_LOCAL_SOUND_ASSISTANT_LR_SWITCH_ENABLE = "l_sound_assistant_lr_switch_enable";
-    public static final String SEC_LOCAL_SOUND_ASSISTANT_RING_VIA_HEADSET_ENABLE = "l_sound_assistant_ring_via_headset_enable";
+    public static final String SEC_LOCAL_SMART_VIEW_FIXED_VOLUME_ENABLE =
+            "l_smart_view_fixed_volume_enable";
+    public static final String SEC_LOCAL_SMART_VIEW_MIRRORING_ACTIVE =
+            "l_smart_view_mirroring_active";
+    public static final String SEC_LOCAL_SOUND_ASSISTANT_LR_SWITCH_ENABLE =
+            "l_sound_assistant_lr_switch_enable";
+    public static final String SEC_LOCAL_SOUND_ASSISTANT_RING_VIA_HEADSET_ENABLE =
+            "l_sound_assistant_ring_via_headset_enable";
     public static final String SEC_LOCAL_SPEAKER_BALANCE = "l_speaker_balance";
     public static final String SEC_LOCAL_STREAM_ACTIVE = "l_stream_active";
     public static final String SEC_LOCAL_SUPPORT_ABSOLUTE_VOLUME = "l_support_absolute_volume";
     public static final String SEC_LOCAL_SYSTEM_READY = "l_system_ready";
     public static final String SEC_LOCAL_VIDEO_CALL_MONSTER_SOUND = "l_mic_input_control_mode_2mic";
     public static final String SEC_LOCAL_VIDEO_CALL_VOICE_EFFECT = "l_mic_input_control_mode";
-    public static final String SEC_LOCAL_VIDEO_CALL_VOICE_EFFECT_CALL = "l_mic_input_control_mode_call";
+    public static final String SEC_LOCAL_VIDEO_CALL_VOICE_EFFECT_CALL =
+            "l_mic_input_control_mode_call";
     public static final String SEC_LOCAL_VOICE_CALL_MONSTER_SOUND = "l_call_nc_booster_enable";
     public static final String SEC_LOCAL_VOICE_RX_CONTROL_MODE = "l_voice_rx_control_mode";
     public static final String SEC_LOCAL_VOICE_TX_CONTROL_MODE = "l_voice_tx_control_mode";
-    public static final String SEC_LOCAL_VOIP_TRANSLATE_PACKAGE_NAME = "l_voip_translate_package_name";
+    public static final String SEC_LOCAL_VOIP_TRANSLATE_PACKAGE_NAME =
+            "l_voip_translate_package_name";
     public static final String SEC_LOCAL_VOLUME_FINE_KEY = "l_volume_fine_key";
     public static final String SEC_LOCAL_VOLUME_LIMIT_KEY = "l_volume_limit_key";
     public static final String SEC_LOCAL_VOLUME_MONITOR_ONOFF = "l_volume_monitor_onoff";
-    public static final String SEC_LOCAL_VOLUME_PREVENT_OVERHEAT_KEY = "l_volume_prevent_overheat_key";
+    public static final String SEC_LOCAL_VOLUME_PREVENT_OVERHEAT_KEY =
+            "l_volume_prevent_overheat_key";
     public static final String SEC_LOCAL_VOLUME_TABLE = "l_volume_table";
     public static final String SUBKEY_AUDIO_PARAM = "audioParam";
     public static final String SUBKEY_AURACAST_UID_ADD = "uid_add";
@@ -192,7 +220,8 @@ public class AudioParameter {
     public static final String SUBKEY_VOLUME_PREVENT_OVERHEAT_UID = "uid";
     public static final String SUBKEY_VOLUME_SITUATION_DEVICE = "device";
     public static final String SUBKEY_VOLUME_SITUATION_TYPE = "type";
-    public static final List<String> VALUES_VM_CSD_100_WARNING = Arrays.asList("8", "9", "10", "11");
+    public static final List<String> VALUES_VM_CSD_100_WARNING =
+            Arrays.asList("8", "9", "10", "11");
     public static final String VALUE_2MIC = "2mic";
     public static final String VALUE_ACTIVE_SOUND_INFO = "active_sound_info";
     public static final String VALUE_ALWAYS_MIC_ON = "always_mic_on";
@@ -224,7 +253,8 @@ public class AudioParameter {
         this.mAudioParams = new LinkedHashMap<>();
         this.mHasLocalParameter = false;
         if (audioParams != null) {
-            StringTokenizer st1 = new StringTokenizer(audioParams, NavigationBarInflaterView.GRAVITY_SEPARATOR);
+            StringTokenizer st1 =
+                    new StringTokenizer(audioParams, NavigationBarInflaterView.GRAVITY_SEPARATOR);
             while (st1.hasMoreTokens()) {
                 String token = st1.nextToken();
                 StringTokenizer st2 = new StringTokenizer(token, "=");
@@ -243,14 +273,22 @@ public class AudioParameter {
         this.mHasLocalParameter = false;
         this.mAudioParams = audioParameters;
         if (audioParameters != null) {
-            this.mHasLocalParameter = audioParameters.keySet().stream().anyMatch(new Predicate() { // from class: com.samsung.android.media.AudioParameter$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    boolean startsWith;
-                    startsWith = ((String) obj).startsWith(AudioParameter.SEC_LOCAL_PREFIX);
-                    return startsWith;
-                }
-            });
+            this.mHasLocalParameter =
+                    audioParameters.keySet().stream()
+                            .anyMatch(
+                                    new Predicate() { // from class:
+                                                      // com.samsung.android.media.AudioParameter$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            boolean startsWith;
+                                            startsWith =
+                                                    ((String) obj)
+                                                            .startsWith(
+                                                                    AudioParameter
+                                                                            .SEC_LOCAL_PREFIX);
+                                            return startsWith;
+                                        }
+                                    });
         }
     }
 

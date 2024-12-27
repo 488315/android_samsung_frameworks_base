@@ -7,7 +7,9 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewConfiguration;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -40,8 +42,7 @@ public final class RotaryInputGraphView extends View {
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.android.server.input.debug.RotaryInputGraphView$CyclicBuffer$1, reason: invalid class name */
         public final class AnonymousClass1 implements Iterator {
-            public AnonymousClass1() {
-            }
+            public AnonymousClass1() {}
 
             @Override // java.util.Iterator
             public final boolean hasNext() {
@@ -88,7 +89,8 @@ public final class RotaryInputGraphView extends View {
         this.mFrameCenterPosition = FullScreenMagnificationGestureHandler.MAX_SCALE;
         this.mDm = ((View) this).mContext.getResources().getDisplayMetrics();
         this.mFrameCenterToBorderDistance = r4.heightPixels;
-        this.mScaledVerticalScrollFactor = ViewConfiguration.get(context).getScaledVerticalScrollFactor();
+        this.mScaledVerticalScrollFactor =
+                ViewConfiguration.get(context).getScaledVerticalScrollFactor();
         paint.setColor(-1082909881);
         paint.setStrokeWidth(applyDimensionSp(2, r4));
         paint2.setColor(-65281);
@@ -119,15 +121,39 @@ public final class RotaryInputGraphView extends View {
         int i2 = (applyDimensionSp + height) / 2;
         float f2 = applyDimensionSp;
         float width = getWidth();
-        canvas.drawLine(FullScreenMagnificationGestureHandler.MAX_SCALE, f2, width, f2, this.mFramePaint);
+        canvas.drawLine(
+                FullScreenMagnificationGestureHandler.MAX_SCALE, f2, width, f2, this.mFramePaint);
         float f3 = i2;
-        canvas.drawLine(FullScreenMagnificationGestureHandler.MAX_SCALE, f3, width, f3, this.mFramePaint);
+        canvas.drawLine(
+                FullScreenMagnificationGestureHandler.MAX_SCALE, f3, width, f3, this.mFramePaint);
         float f4 = height;
-        canvas.drawLine(FullScreenMagnificationGestureHandler.MAX_SCALE, f4, width, f4, this.mFramePaint);
+        canvas.drawLine(
+                FullScreenMagnificationGestureHandler.MAX_SCALE, f4, width, f4, this.mFramePaint);
         int applyDimensionSp2 = applyDimensionSp(2, this.mDm);
-        canvas.drawText(String.format(this.mDefaultLocale, "%.1f", Float.valueOf(this.mFrameCenterPosition + this.mFrameCenterToBorderDistance)), FullScreenMagnificationGestureHandler.MAX_SCALE, applyDimensionSp - applyDimensionSp2, this.mFrameTextPaint);
-        canvas.drawText(String.format(this.mDefaultLocale, "%.1f", Float.valueOf(this.mFrameCenterPosition)), FullScreenMagnificationGestureHandler.MAX_SCALE, i2 - applyDimensionSp2, this.mFrameTextPaint);
-        canvas.drawText(String.format(this.mDefaultLocale, "%.1f", Float.valueOf(this.mFrameCenterPosition - this.mFrameCenterToBorderDistance)), FullScreenMagnificationGestureHandler.MAX_SCALE, height - applyDimensionSp2, this.mFrameTextPaint);
+        canvas.drawText(
+                String.format(
+                        this.mDefaultLocale,
+                        "%.1f",
+                        Float.valueOf(
+                                this.mFrameCenterPosition + this.mFrameCenterToBorderDistance)),
+                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                applyDimensionSp - applyDimensionSp2,
+                this.mFrameTextPaint);
+        canvas.drawText(
+                String.format(
+                        this.mDefaultLocale, "%.1f", Float.valueOf(this.mFrameCenterPosition)),
+                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                i2 - applyDimensionSp2,
+                this.mFrameTextPaint);
+        canvas.drawText(
+                String.format(
+                        this.mDefaultLocale,
+                        "%.1f",
+                        Float.valueOf(
+                                this.mFrameCenterPosition - this.mFrameCenterToBorderDistance)),
+                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                height - applyDimensionSp2,
+                this.mFrameTextPaint);
         CyclicBuffer cyclicBuffer = this.mGraphValues;
         if (cyclicBuffer.mSize == 0) {
             return;
@@ -149,8 +175,14 @@ public final class RotaryInputGraphView extends View {
             float f8 = graphValue.mPos;
             int i5 = i2;
             long j2 = j;
-            float f9 = (((r10 - i4) / MAX_SHOWN_TIME_INTERVAL) * width) + FullScreenMagnificationGestureHandler.MAX_SCALE;
-            float f10 = f3 - (((f8 - this.mFrameCenterPosition) / this.mFrameCenterToBorderDistance) * (i5 - applyDimensionSp));
+            float f9 =
+                    (((r10 - i4) / MAX_SHOWN_TIME_INTERVAL) * width)
+                            + FullScreenMagnificationGestureHandler.MAX_SCALE;
+            float f10 =
+                    f3
+                            - (((f8 - this.mFrameCenterPosition)
+                                            / this.mFrameCenterToBorderDistance)
+                                    * (i5 - applyDimensionSp));
             canvas.drawPoint(f9, f10, this.mGraphPointPaint);
             if (i4 != 0) {
                 f = f9;

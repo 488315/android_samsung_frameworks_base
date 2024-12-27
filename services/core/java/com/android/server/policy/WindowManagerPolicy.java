@@ -2,6 +2,7 @@ package com.android.server.policy;
 
 import android.view.WindowManager;
 import android.view.WindowManagerPolicyConstants;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.wm.WmCoverState;
@@ -16,8 +17,7 @@ public interface WindowManagerPolicy extends WindowManagerPolicyConstants {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface ScreenOffListener {
-    }
+    public interface ScreenOffListener {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface WindowManagerFuncs {
@@ -55,12 +55,12 @@ public interface WindowManagerPolicy extends WindowManagerPolicyConstants {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface WindowState {
-    }
+    public interface WindowState {}
 
     static int getWindowLayerFromTypeLw(int i) {
         if (WindowManager.LayoutParams.isSystemAlertWindowType(i)) {
-            throw new IllegalArgumentException("Use getWindowLayerFromTypeLw() or getWindowLayerLw() for alert window types");
+            throw new IllegalArgumentException(
+                    "Use getWindowLayerFromTypeLw() or getWindowLayerLw() for alert window types");
         }
         return getWindowLayerFromTypeLw(i, false, false);
     }
@@ -95,12 +95,15 @@ public interface WindowManagerPolicy extends WindowManagerPolicyConstants {
             case 2029:
             default:
                 switch (i) {
-                    case FrameworkStatsLog.MEDIA_CODEC_RENDERED__RESOLUTION__RESOLUTION_1080P_FHD /* 2095 */:
+                    case FrameworkStatsLog
+                            .MEDIA_CODEC_RENDERED__RESOLUTION__RESOLUTION_1080P_FHD /* 2095 */:
                         i2 = 6;
                         break;
                     case 2099:
                     case 2411:
-                        if (!WmCoverState.sIsEnabled || (i2 = WmCoverState.getInstance().getWindowLayerFromTypeLw(i)) == -1) {
+                        if (!WmCoverState.sIsEnabled
+                                || (i2 = WmCoverState.getInstance().getWindowLayerFromTypeLw(i))
+                                        == -1) {
                             i2 = 21;
                             break;
                         }
@@ -160,7 +163,8 @@ public interface WindowManagerPolicy extends WindowManagerPolicyConstants {
                         i2 = 22;
                         break;
                     case 2431:
-                    case FrameworkStatsLog.MEDIA_CODEC_RENDERED__RESOLUTION__RESOLUTION_1080X2400 /* 2618 */:
+                    case FrameworkStatsLog
+                            .MEDIA_CODEC_RENDERED__RESOLUTION__RESOLUTION_1080X2400 /* 2618 */:
                     case 2624:
                         i2 = 12;
                         break;
@@ -191,10 +195,14 @@ public interface WindowManagerPolicy extends WindowManagerPolicyConstants {
                 if (i2 > 0) {
                     return i2;
                 }
-                NandswapManager$$ExternalSyntheticOutline0.m(i, "Unknown window type: ", "WindowManager");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        i, "Unknown window type: ", "WindowManager");
                 return 3;
             case 2005:
-                if (!WmCoverState.sIsEnabled || (windowLayerFromTypeLw = WmCoverState.getInstance().getWindowLayerFromTypeLw(i)) == -1) {
+                if (!WmCoverState.sIsEnabled
+                        || (windowLayerFromTypeLw =
+                                        WmCoverState.getInstance().getWindowLayerFromTypeLw(i))
+                                == -1) {
                     return 21;
                 }
                 return windowLayerFromTypeLw;
@@ -257,10 +265,12 @@ public interface WindowManagerPolicy extends WindowManagerPolicyConstants {
 
     static int getWindowLayerLw(WindowState windowState) {
         com.android.server.wm.WindowState windowState2;
-        com.android.server.wm.WindowState windowState3 = (com.android.server.wm.WindowState) windowState;
+        com.android.server.wm.WindowState windowState3 =
+                (com.android.server.wm.WindowState) windowState;
         windowState3.getClass();
         com.android.server.wm.WindowState windowState4 = windowState3;
-        loop0: while (true) {
+        loop0:
+        while (true) {
             windowState2 = windowState4;
             while (windowState4 != null && windowState4.mIsChildWindow) {
                 windowState4 = windowState4.getParentWindow();
@@ -269,6 +279,7 @@ public interface WindowManagerPolicy extends WindowManagerPolicyConstants {
                 }
             }
         }
-        return getWindowLayerFromTypeLw(windowState2.mAttrs.type, windowState3.mOwnerCanAddInternalSystemWindow, false);
+        return getWindowLayerFromTypeLw(
+                windowState2.mAttrs.type, windowState3.mOwnerCanAddInternalSystemWindow, false);
     }
 }

@@ -10,8 +10,7 @@ public class ClearCallingIdentityContext implements SafeCloseable {
         return new ClearCallingIdentityContext();
     }
 
-    private ClearCallingIdentityContext() {
-    }
+    private ClearCallingIdentityContext() {}
 
     @Override // android.media.permission.SafeCloseable, java.lang.AutoCloseable
     public void close() {

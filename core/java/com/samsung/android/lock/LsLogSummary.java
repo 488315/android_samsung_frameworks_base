@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.AtomicFile;
 import android.util.Log;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -316,7 +317,8 @@ public class LsLogSummary {
             this.mVersion++;
         }
 
-        private synchronized void putIfUnchanged(int type, String key, Object value, int userId, int version) {
+        private synchronized void putIfUnchanged(
+                int type, String key, Object value, int userId, int version) {
             if (!contains(type, key, userId) && this.mVersion == version) {
                 this.mCache.put(new CacheKey().set(type, key, userId), value);
             }
@@ -367,8 +369,7 @@ public class LsLogSummary {
             int type;
             int userId;
 
-            private CacheKey() {
-            }
+            private CacheKey() {}
 
             public CacheKey set(int type, String key, int userId) {
                 this.type = type;
@@ -382,7 +383,9 @@ public class LsLogSummary {
                     return false;
                 }
                 CacheKey o = (CacheKey) obj;
-                return this.userId == o.userId && this.type == o.type && Objects.equals(this.key, o.key);
+                return this.userId == o.userId
+                        && this.type == o.type
+                        && Objects.equals(this.key, o.key);
             }
 
             public int hashCode() {

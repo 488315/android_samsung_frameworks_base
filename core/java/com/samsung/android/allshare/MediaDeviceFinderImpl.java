@@ -5,13 +5,13 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.os.Looper;
 import android.sec.clipboard.data.ClipboardConstants;
-import com.samsung.android.allshare.Device;
-import com.samsung.android.allshare.DeviceFinder;
+
 import com.samsung.android.allshare.media.MediaDeviceFinder;
 import com.sec.android.allshare.iface.CVMessage;
 import com.sec.android.allshare.iface.message.AllShareAction;
 import com.sec.android.allshare.iface.message.AllShareEvent;
 import com.sec.android.allshare.iface.message.AllShareKey;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +24,8 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
     private static HashMap<Device.DeviceType, String> mDeviceTypeToEventMap;
     private IAllShareConnector mAllShareConnector;
     private AllShareEventHandler mEventHandler;
-    private HashMap<String, DeviceFinder.IDeviceFinderEventListener> mDiscoveryListenerMap = new HashMap<>();
+    private HashMap<String, DeviceFinder.IDeviceFinderEventListener> mDiscoveryListenerMap =
+            new HashMap<>();
     private HashMap<String, AVPlayerImpl> mAVPlayerMap = new HashMap<>();
     private HashMap<String, ImageViewerImpl> mImageViewerMap = new HashMap<>();
     private HashMap<String, ScreenSharingDeviceImpl> mScreenSharingDeviceMap = new HashMap<>();
@@ -33,18 +34,29 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
     static {
         mDeviceTypeToEventMap = null;
         mDeviceTypeToEventMap = new HashMap<>();
-        mDeviceTypeToEventMap.put(Device.DeviceType.DEVICE_PROVIDER, AllShareEvent.EVENT_PROVIDER_DISCOVERY);
-        mDeviceTypeToEventMap.put(Device.DeviceType.DEVICE_AVPLAYER, AllShareEvent.EVENT_AV_PLAYER_DISCOVERY);
-        mDeviceTypeToEventMap.put(Device.DeviceType.DEVICE_IMAGEVIEWER, AllShareEvent.EVENT_IMAGE_VIEWER_DISCOVERY);
-        mDeviceTypeToEventMap.put(Device.DeviceType.DEVICE_SCREENSHARING, AllShareEvent.EVENT_SCREENSHARING_DISCOVERY);
+        mDeviceTypeToEventMap.put(
+                Device.DeviceType.DEVICE_PROVIDER, AllShareEvent.EVENT_PROVIDER_DISCOVERY);
+        mDeviceTypeToEventMap.put(
+                Device.DeviceType.DEVICE_AVPLAYER, AllShareEvent.EVENT_AV_PLAYER_DISCOVERY);
+        mDeviceTypeToEventMap.put(
+                Device.DeviceType.DEVICE_IMAGEVIEWER, AllShareEvent.EVENT_IMAGE_VIEWER_DISCOVERY);
+        mDeviceTypeToEventMap.put(
+                Device.DeviceType.DEVICE_SCREENSHARING,
+                AllShareEvent.EVENT_SCREENSHARING_DISCOVERY);
         mDeviceTypeToEventMap.put(Device.DeviceType.UNKNOWN, AllShareEvent.EVENT_DMR_DISCOVERY);
         mDeviceEventToDeviceTypeMap = null;
         mDeviceEventToDeviceTypeMap = new HashMap<>();
-        mDeviceEventToDeviceTypeMap.put(AllShareEvent.EVENT_PROVIDER_DISCOVERY, Device.DeviceType.DEVICE_PROVIDER);
-        mDeviceEventToDeviceTypeMap.put(AllShareEvent.EVENT_AV_PLAYER_DISCOVERY, Device.DeviceType.DEVICE_AVPLAYER);
-        mDeviceEventToDeviceTypeMap.put(AllShareEvent.EVENT_IMAGE_VIEWER_DISCOVERY, Device.DeviceType.DEVICE_IMAGEVIEWER);
-        mDeviceEventToDeviceTypeMap.put(AllShareEvent.EVENT_SCREENSHARING_DISCOVERY, Device.DeviceType.DEVICE_SCREENSHARING);
-        mDeviceEventToDeviceTypeMap.put(AllShareEvent.EVENT_DMR_DISCOVERY, Device.DeviceType.UNKNOWN);
+        mDeviceEventToDeviceTypeMap.put(
+                AllShareEvent.EVENT_PROVIDER_DISCOVERY, Device.DeviceType.DEVICE_PROVIDER);
+        mDeviceEventToDeviceTypeMap.put(
+                AllShareEvent.EVENT_AV_PLAYER_DISCOVERY, Device.DeviceType.DEVICE_AVPLAYER);
+        mDeviceEventToDeviceTypeMap.put(
+                AllShareEvent.EVENT_IMAGE_VIEWER_DISCOVERY, Device.DeviceType.DEVICE_IMAGEVIEWER);
+        mDeviceEventToDeviceTypeMap.put(
+                AllShareEvent.EVENT_SCREENSHARING_DISCOVERY,
+                Device.DeviceType.DEVICE_SCREENSHARING);
+        mDeviceEventToDeviceTypeMap.put(
+                AllShareEvent.EVENT_DMR_DISCOVERY, Device.DeviceType.UNKNOWN);
     }
 
     MediaDeviceFinderImpl(IAllShareConnector connector) {
@@ -53,7 +65,8 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
             DLog.w_api(TAG_CLASS, "Connection FAIL: AllShare Service Connector does not exist");
         } else {
             this.mAllShareConnector = connector;
-            this.mEventHandler = new AllShareEventHandlerForMediaDevice(ServiceConnector.getMainLooper(), this);
+            this.mEventHandler =
+                    new AllShareEventHandlerForMediaDevice(ServiceConnector.getMainLooper(), this);
         }
     }
 
@@ -71,25 +84,39 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
             DeviceFinder.IDeviceFinderEventListener listener = null;
             MediaDeviceFinderImpl mdfi = this.mWeakRef.get();
             if (mdfi == null) {
-                DLog.w_api(MediaDeviceFinderImpl.TAG_CLASS, "mEventHandler.handleEventMessage : mWeakRef is null");
+                DLog.w_api(
+                        MediaDeviceFinderImpl.TAG_CLASS,
+                        "mEventHandler.handleEventMessage : mWeakRef is null");
                 return;
             }
             try {
-                listener = (DeviceFinder.IDeviceFinderEventListener) mdfi.mDiscoveryListenerMap.get(evt_id);
+                listener =
+                        (DeviceFinder.IDeviceFinderEventListener)
+                                mdfi.mDiscoveryListenerMap.get(evt_id);
             } catch (Exception e) {
-                DLog.w_api(MediaDeviceFinderImpl.TAG_CLASS, "mEventHandler.handleEventMessage : Exception", e);
+                DLog.w_api(
+                        MediaDeviceFinderImpl.TAG_CLASS,
+                        "mEventHandler.handleEventMessage : Exception",
+                        e);
             }
-            Device.DeviceType deviceType = (Device.DeviceType) MediaDeviceFinderImpl.mDeviceEventToDeviceTypeMap.get(evt_id);
+            Device.DeviceType deviceType =
+                    (Device.DeviceType)
+                            MediaDeviceFinderImpl.mDeviceEventToDeviceTypeMap.get(evt_id);
             Bundle msgBundle = cvm.getBundle();
             String eventType = msgBundle.getString(AllShareKey.BUNDLE_STRING_TYPE);
-            Bundle deviceBundle = (Bundle) msgBundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_DEVICE);
+            Bundle deviceBundle =
+                    (Bundle) msgBundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_DEVICE);
             if (deviceBundle == null) {
-                DLog.w_api(MediaDeviceFinderImpl.TAG_CLASS, "mEventHandler.handleEventMessage : deviceBundle is null");
+                DLog.w_api(
+                        MediaDeviceFinderImpl.TAG_CLASS,
+                        "mEventHandler.handleEventMessage : deviceBundle is null");
                 return;
             }
             Device device = mdfi.getDeviceFromMap(deviceBundle, deviceType);
             if (device == null) {
-                DLog.w_api(MediaDeviceFinderImpl.TAG_CLASS, "mEventHandler.handleEventMessage : device is null");
+                DLog.w_api(
+                        MediaDeviceFinderImpl.TAG_CLASS,
+                        "mEventHandler.handleEventMessage : device is null");
                 return;
             }
             if (ClipboardConstants.USER_ADDED.equals(eventType)) {
@@ -109,7 +136,9 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
                 return;
             }
             if (!ClipboardConstants.USER_REMOVED.equals(eventType)) {
-                DLog.w_api(MediaDeviceFinderImpl.TAG_CLASS, "mEventHandler.handleEventMessage : eventType=" + eventType);
+                DLog.w_api(
+                        MediaDeviceFinderImpl.TAG_CLASS,
+                        "mEventHandler.handleEventMessage : eventType=" + eventType);
                 return;
             }
             try {
@@ -130,7 +159,8 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
     @Override // com.samsung.android.allshare.DeviceFinder
     public final void refresh() {
         DLog.i_api(TAG_CLASS, "refresh");
-        if (this.mAllShareConnector == null || !this.mAllShareConnector.isAllShareServiceConnected()) {
+        if (this.mAllShareConnector == null
+                || !this.mAllShareConnector.isAllShareServiceConnected()) {
             DLog.w_api(TAG_CLASS, "refresh : mAllShareConnector is null");
             return;
         }
@@ -139,7 +169,8 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
         if (ctx != null && (applicationID = ctx.getPackageName()) == null) {
             applicationID = "";
         }
-        SyncActionInvoker builder = new SyncActionInvoker(AllShareAction.ACTION_DEVICE_FINDER_REFRESH);
+        SyncActionInvoker builder =
+                new SyncActionInvoker(AllShareAction.ACTION_DEVICE_FINDER_REFRESH);
         builder.putString("BUNDLE_STRING_ID", applicationID);
         builder.invoke();
     }
@@ -147,18 +178,22 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
     @Override // com.samsung.android.allshare.DeviceFinder
     public void refresh(Device.DeviceType type) {
         DLog.i_api(TAG_CLASS, "refresh(" + type + NavigationBarInflaterView.KEY_CODE_END);
-        if (this.mAllShareConnector == null || !this.mAllShareConnector.isAllShareServiceConnected()) {
+        if (this.mAllShareConnector == null
+                || !this.mAllShareConnector.isAllShareServiceConnected()) {
             DLog.w_api(TAG_CLASS, "refresh(" + type + ") : mAllShareConnector is null");
             return;
         }
-        SyncActionInvoker builder = new SyncActionInvoker(AllShareAction.ACTION_DEVICE_FINDER_REFRESH_TARGET);
+        SyncActionInvoker builder =
+                new SyncActionInvoker(AllShareAction.ACTION_DEVICE_FINDER_REFRESH_TARGET);
         builder.putString(AllShareKey.BUNDLE_ENUM_DEVICE_TYPE, String.valueOf(type));
         builder.invoke();
     }
 
     @Override // com.samsung.android.allshare.DeviceFinder
-    public void setDeviceFinderEventListener(Device.DeviceType deviceType, DeviceFinder.IDeviceFinderEventListener l) {
-        if (this.mAllShareConnector == null || !this.mAllShareConnector.isAllShareServiceConnected()) {
+    public void setDeviceFinderEventListener(
+            Device.DeviceType deviceType, DeviceFinder.IDeviceFinderEventListener l) {
+        if (this.mAllShareConnector == null
+                || !this.mAllShareConnector.isAllShareServiceConnected()) {
             DLog.w_api(TAG_CLASS, "setEventListener error! AllShareService is not connected");
             return;
         }
@@ -171,55 +206,91 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
             DLog.w_api(TAG_CLASS, "setEventListener error! deviceTypeEvent is null");
             return;
         }
-        DeviceFinder.IDeviceFinderEventListener oldListener = this.mDiscoveryListenerMap.get(deviceTypeEvent);
+        DeviceFinder.IDeviceFinderEventListener oldListener =
+                this.mDiscoveryListenerMap.get(deviceTypeEvent);
         this.mDiscoveryListenerMap.put(deviceTypeEvent, l);
         if (oldListener == null && l != null) {
-            this.mAllShareConnector.subscribeAllShareEvent(deviceTypeEvent, null, this.mEventHandler);
+            this.mAllShareConnector.subscribeAllShareEvent(
+                    deviceTypeEvent, null, this.mEventHandler);
         } else if (oldListener != null && l == null) {
-            this.mAllShareConnector.unsubscribeAllShareEvent(deviceTypeEvent, null, this.mEventHandler);
+            this.mAllShareConnector.unsubscribeAllShareEvent(
+                    deviceTypeEvent, null, this.mEventHandler);
         }
     }
 
     @Override // com.samsung.android.allshare.DeviceFinder
     public final ArrayList<Device> getDevices(Device.DeviceType deviceType, String NIC) {
-        if (this.mAllShareConnector == null || !this.mAllShareConnector.isAllShareServiceConnected()) {
+        if (this.mAllShareConnector == null
+                || !this.mAllShareConnector.isAllShareServiceConnected()) {
             return new ArrayList<>();
         }
-        DLog.i_api(TAG_CLASS, "getDevices - type[" + deviceType + "], NIC[" + NIC + NavigationBarInflaterView.SIZE_MOD_END);
-        return privateGetDevices(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_BY_TYPE_IFACE_SYNC, null, deviceType, NIC);
+        DLog.i_api(
+                TAG_CLASS,
+                "getDevices - type["
+                        + deviceType
+                        + "], NIC["
+                        + NIC
+                        + NavigationBarInflaterView.SIZE_MOD_END);
+        return privateGetDevices(
+                AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_BY_TYPE_IFACE_SYNC,
+                null,
+                deviceType,
+                NIC);
     }
 
     @Override // com.samsung.android.allshare.DeviceFinder
-    public final ArrayList<Device> getDevices(Device.DeviceDomain domain, Device.DeviceType deviceType) {
-        if (this.mAllShareConnector == null || !this.mAllShareConnector.isAllShareServiceConnected()) {
+    public final ArrayList<Device> getDevices(
+            Device.DeviceDomain domain, Device.DeviceType deviceType) {
+        if (this.mAllShareConnector == null
+                || !this.mAllShareConnector.isAllShareServiceConnected()) {
             return new ArrayList<>();
         }
-        DLog.i_api(TAG_CLASS, "getDevices - type[" + deviceType + "], domain[" + domain + NavigationBarInflaterView.SIZE_MOD_END);
-        return privateGetDevices(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_BY_DOMAIN_SYNC, domain, deviceType, null);
+        DLog.i_api(
+                TAG_CLASS,
+                "getDevices - type["
+                        + deviceType
+                        + "], domain["
+                        + domain
+                        + NavigationBarInflaterView.SIZE_MOD_END);
+        return privateGetDevices(
+                AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_BY_DOMAIN_SYNC,
+                domain,
+                deviceType,
+                null);
     }
 
     @Override // com.samsung.android.allshare.DeviceFinder
     public final ArrayList<Device> getDevices(Device.DeviceType deviceType) {
-        if (this.mAllShareConnector == null || !this.mAllShareConnector.isAllShareServiceConnected()) {
+        if (this.mAllShareConnector == null
+                || !this.mAllShareConnector.isAllShareServiceConnected()) {
             return new ArrayList<>();
         }
-        DLog.i_api(TAG_CLASS, "getDevices - type[" + deviceType + NavigationBarInflaterView.SIZE_MOD_END);
-        return privateGetDevices(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_SYNC, null, deviceType, null);
+        DLog.i_api(
+                TAG_CLASS,
+                "getDevices - type[" + deviceType + NavigationBarInflaterView.SIZE_MOD_END);
+        return privateGetDevices(
+                AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_SYNC, null, deviceType, null);
     }
 
     @Override // com.samsung.android.allshare.DeviceFinder
     public final Device getDevice(String id, Device.DeviceType deviceType) {
-        if (this.mAllShareConnector == null || !this.mAllShareConnector.isAllShareServiceConnected() || id == null || id.isEmpty() || deviceType == null) {
+        if (this.mAllShareConnector == null
+                || !this.mAllShareConnector.isAllShareServiceConnected()
+                || id == null
+                || id.isEmpty()
+                || deviceType == null) {
             return null;
         }
-        SyncActionInvoker builder = new SyncActionInvoker(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICE_BY_ID_SYNC);
+        SyncActionInvoker builder =
+                new SyncActionInvoker(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICE_BY_ID_SYNC);
         builder.putString("BUNDLE_STRING_ID", id);
         builder.putString(AllShareKey.BUNDLE_ENUM_DEVICE_TYPE, deviceType.enumToString());
         Bundle device_bundle = builder.invoke();
         if (device_bundle == null) {
             return null;
         }
-        Bundle req_bundle = (Bundle) device_bundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_DEVICE);
+        Bundle req_bundle =
+                (Bundle) device_bundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_DEVICE);
         return getDeviceFromMap(req_bundle, deviceType);
     }
 
@@ -313,19 +384,23 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
                 return this.mAVPlayerMap.get(id);
             case DEVICE_IMAGEVIEWER:
                 if (!this.mImageViewerMap.containsKey(id)) {
-                    ImageViewerImpl imageViewer = new ImageViewerImpl(this.mAllShareConnector, deviceImpl);
+                    ImageViewerImpl imageViewer =
+                            new ImageViewerImpl(this.mAllShareConnector, deviceImpl);
                     this.mImageViewerMap.put(id, imageViewer);
                 }
                 return this.mImageViewerMap.get(id);
             case DEVICE_SCREENSHARING:
                 if (!this.mScreenSharingDeviceMap.containsKey(id)) {
-                    ScreenSharingDeviceImpl upnpDevice = new ScreenSharingDeviceImpl(this.mAllShareConnector, deviceImpl);
+                    ScreenSharingDeviceImpl upnpDevice =
+                            new ScreenSharingDeviceImpl(this.mAllShareConnector, deviceImpl);
                     this.mScreenSharingDeviceMap.put(id, upnpDevice);
                 }
                 return this.mScreenSharingDeviceMap.get(id);
             case UNKNOWN:
                 if (!this.mUnknownDeviceMap.containsKey(id)) {
-                    if (!deviceImpl.isSupportedByType(1) && !deviceImpl.isSupportedByType(3) && !deviceImpl.isSupportedByType(2)) {
+                    if (!deviceImpl.isSupportedByType(1)
+                            && !deviceImpl.isSupportedByType(3)
+                            && !deviceImpl.isSupportedByType(2)) {
                         DLog.w_api(TAG_CLASS, "all types are not supported");
                     }
                     this.mUnknownDeviceMap.put(id, deviceImpl);
@@ -336,16 +411,23 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
         }
     }
 
-    private ArrayList<Device> privateGetDevices(String action, Device.DeviceDomain domain, Device.DeviceType deviceType, String deviceIface) {
+    private ArrayList<Device> privateGetDevices(
+            String action,
+            Device.DeviceDomain domain,
+            Device.DeviceType deviceType,
+            String deviceIface) {
         ArrayList<Device> result = new ArrayList<>();
         if (deviceType == null) {
             return result;
         }
         SyncActionInvoker builder = new SyncActionInvoker(action);
-        if (action.equals(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_BY_DOMAIN_SYNC) && domain != null) {
+        if (action.equals(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_BY_DOMAIN_SYNC)
+                && domain != null) {
             builder.putString(AllShareKey.BUNDLE_ENUM_DEVICE_DOMAIN, domain.enumToString());
             builder.putString(AllShareKey.BUNDLE_ENUM_DEVICE_TYPE, deviceType.enumToString());
-        } else if (action.equals(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_BY_TYPE_IFACE_SYNC) && deviceIface != null && deviceIface.length() > 0) {
+        } else if (action.equals(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_BY_TYPE_IFACE_SYNC)
+                && deviceIface != null
+                && deviceIface.length() > 0) {
             builder.putString(AllShareKey.BUNDLE_STRING_BOUND_INTERFACE, deviceIface);
             builder.putString(AllShareKey.BUNDLE_ENUM_DEVICE_TYPE, deviceType.enumToString());
         } else if (action.equals(AllShareAction.ACTION_DEVICE_FINDER_GET_DEVICES_SYNC)) {
@@ -357,7 +439,8 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
         if (resBundle == null) {
             return result;
         }
-        ArrayList<Bundle> devices = resBundle.getParcelableArrayList(AllShareKey.BUNDLE_PARCELABLE_ARRAYLIST_DEVICE);
+        ArrayList<Bundle> devices =
+                resBundle.getParcelableArrayList(AllShareKey.BUNDLE_PARCELABLE_ARRAYLIST_DEVICE);
         if (devices == null || devices.size() == 0) {
             DLog.d_api(TAG_CLASS, "device list is empty or null!");
             return result;
@@ -399,7 +482,12 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
 
         Bundle invoke() {
             CVMessage resMessage;
-            if (MediaDeviceFinderImpl.this.mAllShareConnector == null || !MediaDeviceFinderImpl.this.mAllShareConnector.isAllShareServiceConnected() || (resMessage = MediaDeviceFinderImpl.this.mAllShareConnector.requestCVMSync(this.mMessage)) == null) {
+            if (MediaDeviceFinderImpl.this.mAllShareConnector == null
+                    || !MediaDeviceFinderImpl.this.mAllShareConnector.isAllShareServiceConnected()
+                    || (resMessage =
+                                    MediaDeviceFinderImpl.this.mAllShareConnector.requestCVMSync(
+                                            this.mMessage))
+                            == null) {
                 return null;
             }
             return resMessage.getBundle();
@@ -408,7 +496,9 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
 
     @Override // com.samsung.android.allshare.DeviceFinder
     public void registerSearchTarget(ArrayList<Device.DeviceType> deviceTypeList) {
-        if (this.mAllShareConnector == null || !this.mAllShareConnector.isAllShareServiceConnected() || deviceTypeList == null) {
+        if (this.mAllShareConnector == null
+                || !this.mAllShareConnector.isAllShareServiceConnected()
+                || deviceTypeList == null) {
             return;
         }
         String applicationID = "";
@@ -422,15 +512,20 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
             Device.DeviceType devType = it.next();
             devTypeList.add(devType.enumToString());
         }
-        SyncActionInvoker builder = new SyncActionInvoker(AllShareAction.ACTION_DEVICE_FINDER_REGISTER_SEARCH_TARGET_SYNC);
+        SyncActionInvoker builder =
+                new SyncActionInvoker(
+                        AllShareAction.ACTION_DEVICE_FINDER_REGISTER_SEARCH_TARGET_SYNC);
         builder.putString("BUNDLE_STRING_ID", applicationID);
-        builder.putStringArrayList(AllShareKey.BUNDLE_STRINGARRAYLIST_DEVICE_TYPE_LIST, devTypeList);
+        builder.putStringArrayList(
+                AllShareKey.BUNDLE_STRINGARRAYLIST_DEVICE_TYPE_LIST, devTypeList);
         builder.invoke();
     }
 
     @Override // com.samsung.android.allshare.DeviceFinder
     public void unregisterSearchTarget(ArrayList<Device.DeviceType> deviceTypeList) {
-        if (this.mAllShareConnector == null || !this.mAllShareConnector.isAllShareServiceConnected() || deviceTypeList == null) {
+        if (this.mAllShareConnector == null
+                || !this.mAllShareConnector.isAllShareServiceConnected()
+                || deviceTypeList == null) {
             return;
         }
         String applicationID = "";
@@ -444,9 +539,12 @@ final class MediaDeviceFinderImpl extends MediaDeviceFinder {
             Device.DeviceType devType = it.next();
             devTypeList.add(devType.enumToString());
         }
-        SyncActionInvoker builder = new SyncActionInvoker(AllShareAction.ACTION_DEVICE_FINDER_UNREGISTER_SEARCH_TARGET_SYNC);
+        SyncActionInvoker builder =
+                new SyncActionInvoker(
+                        AllShareAction.ACTION_DEVICE_FINDER_UNREGISTER_SEARCH_TARGET_SYNC);
         builder.putString("BUNDLE_STRING_ID", applicationID);
-        builder.putStringArrayList(AllShareKey.BUNDLE_STRINGARRAYLIST_DEVICE_TYPE_LIST, devTypeList);
+        builder.putStringArrayList(
+                AllShareKey.BUNDLE_STRINGARRAYLIST_DEVICE_TYPE_LIST, devTypeList);
         builder.invoke();
     }
 

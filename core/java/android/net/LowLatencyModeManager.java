@@ -12,6 +12,7 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -35,65 +36,85 @@ public class LowLatencyModeManager {
     private int mUlLevel;
     private Messenger mServiceMessenger = null;
     private Messenger mServiceMessenger2 = null;
-    private Handler mReceiverHandler = new Handler() { // from class: android.net.LowLatencyModeManager.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            if (msg == null) {
-            }
-            int error = msg.getData().getInt("error");
-            switch (msg.what) {
-                case 1:
-                    LowLatencyModeManager.this.log("set latency done, error:" + error);
-                    LowLatencyModeManager.this.unbindRilService(msg.getData().getInt("slotId"));
-                    break;
-                case 2:
-                    LowLatencyModeManager.this.log("get latency done, error:" + error);
-                    if (error == 0) {
-                        byte[] buf = msg.getData().getByteArray("response");
-                        if (buf == null || buf.length != 4) {
-                            LowLatencyModeManager.this.log("get latency wrong result format");
+    private Handler mReceiverHandler =
+            new Handler() { // from class: android.net.LowLatencyModeManager.1
+                @Override // android.os.Handler
+                public void handleMessage(Message msg) {
+                    if (msg == null) {}
+                    int error = msg.getData().getInt("error");
+                    switch (msg.what) {
+                        case 1:
+                            LowLatencyModeManager.this.log("set latency done, error:" + error);
+                            LowLatencyModeManager.this.unbindRilService(
+                                    msg.getData().getInt("slotId"));
                             break;
-                        } else {
-                            LowLatencyModeManager.this.log("get latency settings from modem, ul:" + ((int) buf[0]) + ",dl:" + ((int) buf[1]) + ",prio:" + ((int) buf[2]) + ",ets:" + ((int) buf[3]));
-                            LatencyResult result = new LatencyResult(buf[0], buf[1], buf[2] == 1, buf[3] == 1);
-                            if (LowLatencyModeManager.this.mCallback != null) {
-                                LowLatencyModeManager.this.mCallback.onGetLatencyDone(result);
-                                LowLatencyModeManager.this.mCallback = null;
+                        case 2:
+                            LowLatencyModeManager.this.log("get latency done, error:" + error);
+                            if (error == 0) {
+                                byte[] buf = msg.getData().getByteArray("response");
+                                if (buf == null || buf.length != 4) {
+                                    LowLatencyModeManager.this.log(
+                                            "get latency wrong result format");
+                                    break;
+                                } else {
+                                    LowLatencyModeManager.this.log(
+                                            "get latency settings from modem, ul:"
+                                                    + ((int) buf[0])
+                                                    + ",dl:"
+                                                    + ((int) buf[1])
+                                                    + ",prio:"
+                                                    + ((int) buf[2])
+                                                    + ",ets:"
+                                                    + ((int) buf[3]));
+                                    LatencyResult result =
+                                            new LatencyResult(
+                                                    buf[0], buf[1], buf[2] == 1, buf[3] == 1);
+                                    if (LowLatencyModeManager.this.mCallback != null) {
+                                        LowLatencyModeManager.this.mCallback.onGetLatencyDone(
+                                                result);
+                                        LowLatencyModeManager.this.mCallback = null;
+                                    }
+                                }
                             }
-                        }
+                            LowLatencyModeManager.this.unbindRilService(
+                                    msg.getData().getInt("slotId"));
+                            break;
                     }
-                    LowLatencyModeManager.this.unbindRilService(msg.getData().getInt("slotId"));
-                    break;
-            }
-        }
-    };
+                }
+            };
     private Messenger mSvcModeMessenger = new Messenger(this.mReceiverHandler);
-    private ServiceConnection mSecPhoneServiceConnection = new ServiceConnection() { // from class: android.net.LowLatencyModeManager.2
-        @Override // android.content.ServiceConnection
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            LowLatencyModeManager.this.log("onServiceConnected(), classname:" + className.getClassName());
-            LowLatencyModeManager.this.mServiceMessenger = new Messenger(service);
-        }
+    private ServiceConnection mSecPhoneServiceConnection =
+            new ServiceConnection() { // from class: android.net.LowLatencyModeManager.2
+                @Override // android.content.ServiceConnection
+                public void onServiceConnected(ComponentName className, IBinder service) {
+                    LowLatencyModeManager.this.log(
+                            "onServiceConnected(), classname:" + className.getClassName());
+                    LowLatencyModeManager.this.mServiceMessenger = new Messenger(service);
+                }
 
-        @Override // android.content.ServiceConnection
-        public void onServiceDisconnected(ComponentName className) {
-            LowLatencyModeManager.this.log("onServiceDisconnected(), classname:" + className.getClassName());
-            LowLatencyModeManager.this.mServiceMessenger = null;
-        }
-    };
-    private ServiceConnection mSecPhoneServiceConnection2 = new ServiceConnection() { // from class: android.net.LowLatencyModeManager.3
-        @Override // android.content.ServiceConnection
-        public void onServiceConnected(ComponentName className, IBinder service) {
-            LowLatencyModeManager.this.log("onServiceConnected(), classname:" + className.getClassName());
-            LowLatencyModeManager.this.mServiceMessenger2 = new Messenger(service);
-        }
+                @Override // android.content.ServiceConnection
+                public void onServiceDisconnected(ComponentName className) {
+                    LowLatencyModeManager.this.log(
+                            "onServiceDisconnected(), classname:" + className.getClassName());
+                    LowLatencyModeManager.this.mServiceMessenger = null;
+                }
+            };
+    private ServiceConnection mSecPhoneServiceConnection2 =
+            new ServiceConnection() { // from class: android.net.LowLatencyModeManager.3
+                @Override // android.content.ServiceConnection
+                public void onServiceConnected(ComponentName className, IBinder service) {
+                    LowLatencyModeManager.this.log(
+                            "onServiceConnected(), classname:" + className.getClassName());
+                    LowLatencyModeManager.this.mServiceMessenger2 = new Messenger(service);
+                }
 
-        @Override // android.content.ServiceConnection
-        public void onServiceDisconnected(ComponentName className) {
-            LowLatencyModeManager.this.log("onServiceDisconnected(), classname:" + className.getClassName());
-            LowLatencyModeManager.this.mServiceMessenger2 = null;
-        }
-    };
+                @Override // android.content.ServiceConnection
+                public void onServiceDisconnected(ComponentName className) {
+                    LowLatencyModeManager.this.log(
+                            "onServiceDisconnected(), classname:" + className.getClassName());
+                    LowLatencyModeManager.this.mServiceMessenger2 = null;
+                }
+            };
 
     public static class LatencyResult {
         private int mDlLevel;
@@ -126,8 +147,7 @@ public class LowLatencyModeManager {
     }
 
     public static class LatencyCallback {
-        public void onGetLatencyDone(LatencyResult result) {
-        }
+        public void onGetLatencyDone(LatencyResult result) {}
     }
 
     public LowLatencyModeManager(Context context) {
@@ -135,7 +155,8 @@ public class LowLatencyModeManager {
     }
 
     public void getLowLatencyMode(LatencyCallback callback) {
-        int defaultDataSlotId = SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultDataSubscriptionId());
+        int defaultDataSlotId =
+                SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultDataSubscriptionId());
         if (!SubscriptionManager.isValidPhoneId(defaultDataSlotId)) {
             loge("invalid default datat slotId id, " + defaultDataSlotId);
         } else {
@@ -206,7 +227,8 @@ public class LowLatencyModeManager {
     }
 
     public void setLowLatencyMode(int ulevel, int dlevel, boolean prio, boolean extension) {
-        int defaultDataSlotId = SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultDataSubscriptionId());
+        int defaultDataSlotId =
+                SubscriptionManager.getPhoneId(SubscriptionManager.getDefaultDataSubscriptionId());
         if (!SubscriptionManager.isValidPhoneId(defaultDataSlotId)) {
             loge("invalid default datat slotId id, " + defaultDataSlotId);
         } else {
@@ -214,7 +236,8 @@ public class LowLatencyModeManager {
         }
     }
 
-    public void setLowLatencyMode(int slotId, int ulevel, int dlevel, boolean prio, boolean extension) {
+    public void setLowLatencyMode(
+            int slotId, int ulevel, int dlevel, boolean prio, boolean extension) {
         if (!SubscriptionManager.isValidPhoneId(slotId)) {
             loge("invalid slotId id, " + slotId);
             return;
@@ -234,7 +257,17 @@ public class LowLatencyModeManager {
             } else if (slotId == 1) {
                 connectToRilService2();
             }
-            log("set latency mode, ulevel:" + ulevel + ",dlevel:" + dlevel + ", prio:" + prio + ",extension:" + extension + ",slotId:" + slotId);
+            log(
+                    "set latency mode, ulevel:"
+                            + ulevel
+                            + ",dlevel:"
+                            + dlevel
+                            + ", prio:"
+                            + prio
+                            + ",extension:"
+                            + extension
+                            + ",slotId:"
+                            + slotId);
             this.mUlLevel = ulevel;
             this.mDlLevel = dlevel;
             this.mPrioDefault = prio;
@@ -302,7 +335,9 @@ public class LowLatencyModeManager {
             }
             return;
         }
-        if (slotId == 1 && this.mServiceMessenger2 != null && this.mSecPhoneServiceConnection2 != null) {
+        if (slotId == 1
+                && this.mServiceMessenger2 != null
+                && this.mSecPhoneServiceConnection2 != null) {
             try {
                 log("unbindRilService2");
                 this.mContext.unbindService(this.mSecPhoneServiceConnection2);

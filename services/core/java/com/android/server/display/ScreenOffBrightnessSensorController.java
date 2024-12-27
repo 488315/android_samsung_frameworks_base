@@ -6,7 +6,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
 import android.util.IndentingPrintWriter;
+
 import com.android.server.desktopmode.DesktopModeService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,7 +24,14 @@ public final class ScreenOffBrightnessSensorController implements SensorEventLis
     public int mLastSensorValue = -1;
     public long mSensorDisableTime = -1;
 
-    public ScreenOffBrightnessSensorController(SensorManager sensorManager, Sensor sensor, Handler handler, DisplayPowerController$$ExternalSyntheticLambda11 displayPowerController$$ExternalSyntheticLambda11, int[] iArr, BrightnessMappingStrategy brightnessMappingStrategy) {
+    public ScreenOffBrightnessSensorController(
+            SensorManager sensorManager,
+            Sensor sensor,
+            Handler handler,
+            DisplayPowerController$$ExternalSyntheticLambda11
+                    displayPowerController$$ExternalSyntheticLambda11,
+            int[] iArr,
+            BrightnessMappingStrategy brightnessMappingStrategy) {
         this.mSensorManager = sensorManager;
         this.mLightSensor = sensor;
         this.mHandler = handler;
@@ -35,7 +44,12 @@ public final class ScreenOffBrightnessSensorController implements SensorEventLis
         printWriter.println("Screen Off Brightness Sensor Controller:");
         IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter);
         indentingPrintWriter.increaseIndent();
-        StringBuilder m = DesktopModeService$$ExternalSyntheticOutline0.m(new StringBuilder("registered="), this.mRegistered, indentingPrintWriter, "lastSensorValue=");
+        StringBuilder m =
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("registered="),
+                        this.mRegistered,
+                        indentingPrintWriter,
+                        "lastSensorValue=");
         m.append(this.mLastSensorValue);
         indentingPrintWriter.println(m.toString());
     }
@@ -43,15 +57,18 @@ public final class ScreenOffBrightnessSensorController implements SensorEventLis
     public final float getAutomaticScreenBrightness() {
         int i;
         int i2 = this.mLastSensorValue;
-        if (i2 < 0 || i2 >= this.mSensorValueToLux.length || ((!this.mRegistered && this.mClock.uptimeMillis() - this.mSensorDisableTime > 1500) || (i = this.mSensorValueToLux[this.mLastSensorValue]) < 0)) {
+        if (i2 < 0
+                || i2 >= this.mSensorValueToLux.length
+                || ((!this.mRegistered
+                                && this.mClock.uptimeMillis() - this.mSensorDisableTime > 1500)
+                        || (i = this.mSensorValueToLux[this.mLastSensorValue]) < 0)) {
             return Float.NaN;
         }
         return this.mBrightnessMapper.getBrightness(null, i, -1);
     }
 
     @Override // android.hardware.SensorEventListener
-    public final void onAccuracyChanged(Sensor sensor, int i) {
-    }
+    public final void onAccuracyChanged(Sensor sensor, int i) {}
 
     @Override // android.hardware.SensorEventListener
     public final void onSensorChanged(SensorEvent sensorEvent) {
@@ -62,7 +79,8 @@ public final class ScreenOffBrightnessSensorController implements SensorEventLis
 
     public final void setLightSensorEnabled(boolean z) {
         if (z && !this.mRegistered) {
-            this.mRegistered = this.mSensorManager.registerListener(this, this.mLightSensor, 3, this.mHandler);
+            this.mRegistered =
+                    this.mSensorManager.registerListener(this, this.mLightSensor, 3, this.mHandler);
             this.mLastSensorValue = -1;
         } else {
             if (z || !this.mRegistered) {

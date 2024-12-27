@@ -7,6 +7,5 @@ class LinkSpec {
     int start;
     String url;
 
-    LinkSpec() {
-    }
+    LinkSpec() {}
 }

@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class NanoappInfo implements Parcelable {
-    public static final Parcelable.Creator<NanoappInfo> CREATOR = new Parcelable.Creator<NanoappInfo>() { // from class: android.hardware.contexthub.NanoappInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoappInfo createFromParcel(Parcel _aidl_source) {
-            NanoappInfo _aidl_out = new NanoappInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<NanoappInfo> CREATOR =
+            new Parcelable.Creator<
+                    NanoappInfo>() { // from class: android.hardware.contexthub.NanoappInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoappInfo createFromParcel(Parcel _aidl_source) {
+                    NanoappInfo _aidl_out = new NanoappInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoappInfo[] newArray(int _aidl_size) {
-            return new NanoappInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoappInfo[] newArray(int _aidl_size) {
+                    return new NanoappInfo[_aidl_size];
+                }
+            };
     public String[] permissions;
     public NanoappRpcService[] rpcServices;
     public long nanoappId = 0;
@@ -92,7 +94,9 @@ public class NanoappInfo implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.rpcServices = (NanoappRpcService[]) _aidl_parcel.createTypedArray(NanoappRpcService.CREATOR);
+                this.rpcServices =
+                        (NanoappRpcService[])
+                                _aidl_parcel.createTypedArray(NanoappRpcService.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

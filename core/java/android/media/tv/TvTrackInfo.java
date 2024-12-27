@@ -4,26 +4,29 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class TvTrackInfo implements Parcelable {
-    public static final Parcelable.Creator<TvTrackInfo> CREATOR = new Parcelable.Creator<TvTrackInfo>() { // from class: android.media.tv.TvTrackInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvTrackInfo createFromParcel(Parcel in) {
-            return new TvTrackInfo(in);
-        }
+    public static final Parcelable.Creator<TvTrackInfo> CREATOR =
+            new Parcelable.Creator<TvTrackInfo>() { // from class: android.media.tv.TvTrackInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvTrackInfo createFromParcel(Parcel in) {
+                    return new TvTrackInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvTrackInfo[] newArray(int size) {
-            return new TvTrackInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvTrackInfo[] newArray(int size) {
+                    return new TvTrackInfo[size];
+                }
+            };
     public static final String EXTRA_BUNDLE_KEY_COMPONENT_TAG = "component_tag";
     public static final String EXTRA_BUNDLE_KEY_PID = "pid";
     public static final int TYPE_AUDIO = 0;
@@ -48,10 +51,26 @@ public final class TvTrackInfo implements Parcelable {
     private final int mVideoWidth;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
-    private TvTrackInfo(int type, String id, String language, CharSequence description, String encoding, boolean encrypted, int audioChannelCount, int audioSampleRate, boolean audioDescription, boolean hardOfHearing, boolean spokenSubtitle, int videoWidth, int videoHeight, float videoFrameRate, float videoPixelAspectRatio, byte videoActiveFormatDescription, Bundle extra) {
+    private TvTrackInfo(
+            int type,
+            String id,
+            String language,
+            CharSequence description,
+            String encoding,
+            boolean encrypted,
+            int audioChannelCount,
+            int audioSampleRate,
+            boolean audioDescription,
+            boolean hardOfHearing,
+            boolean spokenSubtitle,
+            int videoWidth,
+            int videoHeight,
+            float videoFrameRate,
+            float videoPixelAspectRatio,
+            byte videoActiveFormatDescription,
+            Bundle extra) {
         this.mType = type;
         this.mId = id;
         this.mLanguage = language;
@@ -224,14 +243,27 @@ public final class TvTrackInfo implements Parcelable {
             return false;
         }
         TvTrackInfo obj = (TvTrackInfo) o;
-        if (!TextUtils.equals(this.mId, obj.mId) || this.mType != obj.mType || !TextUtils.equals(this.mLanguage, obj.mLanguage) || !TextUtils.equals(this.mDescription, obj.mDescription) || !TextUtils.equals(this.mEncoding, obj.mEncoding) || this.mEncrypted != obj.mEncrypted) {
+        if (!TextUtils.equals(this.mId, obj.mId)
+                || this.mType != obj.mType
+                || !TextUtils.equals(this.mLanguage, obj.mLanguage)
+                || !TextUtils.equals(this.mDescription, obj.mDescription)
+                || !TextUtils.equals(this.mEncoding, obj.mEncoding)
+                || this.mEncrypted != obj.mEncrypted) {
             return false;
         }
         switch (this.mType) {
             case 0:
-                return this.mAudioChannelCount == obj.mAudioChannelCount && this.mAudioSampleRate == obj.mAudioSampleRate && this.mAudioDescription == obj.mAudioDescription && this.mHardOfHearing == obj.mHardOfHearing && this.mSpokenSubtitle == obj.mSpokenSubtitle;
+                return this.mAudioChannelCount == obj.mAudioChannelCount
+                        && this.mAudioSampleRate == obj.mAudioSampleRate
+                        && this.mAudioDescription == obj.mAudioDescription
+                        && this.mHardOfHearing == obj.mHardOfHearing
+                        && this.mSpokenSubtitle == obj.mSpokenSubtitle;
             case 1:
-                return this.mVideoWidth == obj.mVideoWidth && this.mVideoHeight == obj.mVideoHeight && this.mVideoFrameRate == obj.mVideoFrameRate && this.mVideoPixelAspectRatio == obj.mVideoPixelAspectRatio && this.mVideoActiveFormatDescription == obj.mVideoActiveFormatDescription;
+                return this.mVideoWidth == obj.mVideoWidth
+                        && this.mVideoHeight == obj.mVideoHeight
+                        && this.mVideoFrameRate == obj.mVideoFrameRate
+                        && this.mVideoPixelAspectRatio == obj.mVideoPixelAspectRatio
+                        && this.mVideoActiveFormatDescription == obj.mVideoActiveFormatDescription;
             case 2:
                 return this.mHardOfHearing == obj.mHardOfHearing;
             default:
@@ -240,12 +272,22 @@ public final class TvTrackInfo implements Parcelable {
     }
 
     public int hashCode() {
-        int result = Objects.hash(this.mId, Integer.valueOf(this.mType), this.mLanguage, this.mDescription);
+        int result =
+                Objects.hash(
+                        this.mId, Integer.valueOf(this.mType), this.mLanguage, this.mDescription);
         if (this.mType == 0) {
-            return Objects.hash(Integer.valueOf(result), Integer.valueOf(this.mAudioChannelCount), Integer.valueOf(this.mAudioSampleRate));
+            return Objects.hash(
+                    Integer.valueOf(result),
+                    Integer.valueOf(this.mAudioChannelCount),
+                    Integer.valueOf(this.mAudioSampleRate));
         }
         if (this.mType == 1) {
-            return Objects.hash(Integer.valueOf(result), Integer.valueOf(this.mVideoWidth), Integer.valueOf(this.mVideoHeight), Float.valueOf(this.mVideoFrameRate), Float.valueOf(this.mVideoPixelAspectRatio));
+            return Objects.hash(
+                    Integer.valueOf(result),
+                    Integer.valueOf(this.mVideoWidth),
+                    Integer.valueOf(this.mVideoHeight),
+                    Float.valueOf(this.mVideoFrameRate),
+                    Float.valueOf(this.mVideoPixelAspectRatio));
         }
         return result;
     }
@@ -387,7 +429,24 @@ public final class TvTrackInfo implements Parcelable {
         }
 
         public TvTrackInfo build() {
-            return new TvTrackInfo(this.mType, this.mId, this.mLanguage, this.mDescription, this.mEncoding, this.mEncrypted, this.mAudioChannelCount, this.mAudioSampleRate, this.mAudioDescription, this.mHardOfHearing, this.mSpokenSubtitle, this.mVideoWidth, this.mVideoHeight, this.mVideoFrameRate, this.mVideoPixelAspectRatio, this.mVideoActiveFormatDescription, this.mExtra);
+            return new TvTrackInfo(
+                    this.mType,
+                    this.mId,
+                    this.mLanguage,
+                    this.mDescription,
+                    this.mEncoding,
+                    this.mEncrypted,
+                    this.mAudioChannelCount,
+                    this.mAudioSampleRate,
+                    this.mAudioDescription,
+                    this.mHardOfHearing,
+                    this.mSpokenSubtitle,
+                    this.mVideoWidth,
+                    this.mVideoHeight,
+                    this.mVideoFrameRate,
+                    this.mVideoPixelAspectRatio,
+                    this.mVideoActiveFormatDescription,
+                    this.mExtra);
         }
     }
 }

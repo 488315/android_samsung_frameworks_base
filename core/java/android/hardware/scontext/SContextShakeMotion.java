@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextShakeMotion extends SContextEventContext {
-    public static final Parcelable.Creator<SContextShakeMotion> CREATOR = new Parcelable.Creator<SContextShakeMotion>() { // from class: android.hardware.scontext.SContextShakeMotion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextShakeMotion createFromParcel(Parcel in) {
-            return new SContextShakeMotion(in);
-        }
+    public static final Parcelable.Creator<SContextShakeMotion> CREATOR =
+            new Parcelable.Creator<SContextShakeMotion>() { // from class:
+                // android.hardware.scontext.SContextShakeMotion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextShakeMotion createFromParcel(Parcel in) {
+                    return new SContextShakeMotion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextShakeMotion[] newArray(int size) {
-            return new SContextShakeMotion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextShakeMotion[] newArray(int size) {
+                    return new SContextShakeMotion[size];
+                }
+            };
     private Bundle mContext;
 
     SContextShakeMotion() {
@@ -34,7 +36,8 @@ public class SContextShakeMotion extends SContextEventContext {
         return this.mContext.getInt("Action");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

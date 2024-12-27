@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface ISatelliteTransmissionUpdateCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.satellite.ISatelliteTransmissionUpdateCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.satellite.ISatelliteTransmissionUpdateCallback";
 
     void onReceiveDatagramStateChanged(int i, int i2, int i3) throws RemoteException;
 
@@ -20,20 +21,19 @@ public interface ISatelliteTransmissionUpdateCallback extends IInterface {
 
     public static class Default implements ISatelliteTransmissionUpdateCallback {
         @Override // android.telephony.satellite.ISatelliteTransmissionUpdateCallback
-        public void onSendDatagramStateChanged(int datagramType, int state, int sendPendingCount, int errorCode) throws RemoteException {
-        }
+        public void onSendDatagramStateChanged(
+                int datagramType, int state, int sendPendingCount, int errorCode)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.ISatelliteTransmissionUpdateCallback
-        public void onReceiveDatagramStateChanged(int state, int receivePendingCount, int errorCode) throws RemoteException {
-        }
+        public void onReceiveDatagramStateChanged(int state, int receivePendingCount, int errorCode)
+                throws RemoteException {}
 
         @Override // android.telephony.satellite.ISatelliteTransmissionUpdateCallback
-        public void onSatellitePositionChanged(PointingInfo pointingInfo) throws RemoteException {
-        }
+        public void onSatellitePositionChanged(PointingInfo pointingInfo) throws RemoteException {}
 
         @Override // android.telephony.satellite.ISatelliteTransmissionUpdateCallback
-        public void onSendDatagramRequested(int datagramType) throws RemoteException {
-        }
+        public void onSendDatagramRequested(int datagramType) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -41,7 +41,8 @@ public interface ISatelliteTransmissionUpdateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatelliteTransmissionUpdateCallback {
+    public abstract static class Stub extends Binder
+            implements ISatelliteTransmissionUpdateCallback {
         static final int TRANSACTION_onReceiveDatagramStateChanged = 2;
         static final int TRANSACTION_onSatellitePositionChanged = 3;
         static final int TRANSACTION_onSendDatagramRequested = 4;
@@ -55,7 +56,8 @@ public interface ISatelliteTransmissionUpdateCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof ISatelliteTransmissionUpdateCallback)) {
                 return (ISatelliteTransmissionUpdateCallback) iin;
             }
@@ -88,7 +90,8 @@ public interface ISatelliteTransmissionUpdateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
             }
@@ -144,7 +147,9 @@ public interface ISatelliteTransmissionUpdateCallback extends IInterface {
             }
 
             @Override // android.telephony.satellite.ISatelliteTransmissionUpdateCallback
-            public void onSendDatagramStateChanged(int datagramType, int state, int sendPendingCount, int errorCode) throws RemoteException {
+            public void onSendDatagramStateChanged(
+                    int datagramType, int state, int sendPendingCount, int errorCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
@@ -159,7 +164,8 @@ public interface ISatelliteTransmissionUpdateCallback extends IInterface {
             }
 
             @Override // android.telephony.satellite.ISatelliteTransmissionUpdateCallback
-            public void onReceiveDatagramStateChanged(int state, int receivePendingCount, int errorCode) throws RemoteException {
+            public void onReceiveDatagramStateChanged(
+                    int state, int receivePendingCount, int errorCode) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);
@@ -173,7 +179,8 @@ public interface ISatelliteTransmissionUpdateCallback extends IInterface {
             }
 
             @Override // android.telephony.satellite.ISatelliteTransmissionUpdateCallback
-            public void onSatellitePositionChanged(PointingInfo pointingInfo) throws RemoteException {
+            public void onSatellitePositionChanged(PointingInfo pointingInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteTransmissionUpdateCallback.DESCRIPTOR);

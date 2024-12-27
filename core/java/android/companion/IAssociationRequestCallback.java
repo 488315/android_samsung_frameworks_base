@@ -20,16 +20,13 @@ public interface IAssociationRequestCallback extends IInterface {
 
     public static class Default implements IAssociationRequestCallback {
         @Override // android.companion.IAssociationRequestCallback
-        public void onAssociationPending(PendingIntent pendingIntent) throws RemoteException {
-        }
+        public void onAssociationPending(PendingIntent pendingIntent) throws RemoteException {}
 
         @Override // android.companion.IAssociationRequestCallback
-        public void onAssociationCreated(AssociationInfo associationInfo) throws RemoteException {
-        }
+        public void onAssociationCreated(AssociationInfo associationInfo) throws RemoteException {}
 
         @Override // android.companion.IAssociationRequestCallback
-        public void onFailure(CharSequence error) throws RemoteException {
-        }
+        public void onFailure(CharSequence error) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,7 +34,7 @@ public interface IAssociationRequestCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAssociationRequestCallback {
+    public abstract static class Stub extends Binder implements IAssociationRequestCallback {
         static final int TRANSACTION_onAssociationCreated = 2;
         static final int TRANSACTION_onAssociationPending = 1;
         static final int TRANSACTION_onFailure = 3;
@@ -81,7 +78,8 @@ public interface IAssociationRequestCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAssociationRequestCallback.DESCRIPTOR);
             }
@@ -91,17 +89,20 @@ public interface IAssociationRequestCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    PendingIntent _arg0 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg0 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     onAssociationPending(_arg0);
                     return true;
                 case 2:
-                    AssociationInfo _arg02 = (AssociationInfo) data.readTypedObject(AssociationInfo.CREATOR);
+                    AssociationInfo _arg02 =
+                            (AssociationInfo) data.readTypedObject(AssociationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onAssociationCreated(_arg02);
                     return true;
                 case 3:
-                    CharSequence _arg03 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg03 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg03);
                     return true;
@@ -139,7 +140,8 @@ public interface IAssociationRequestCallback extends IInterface {
             }
 
             @Override // android.companion.IAssociationRequestCallback
-            public void onAssociationCreated(AssociationInfo associationInfo) throws RemoteException {
+            public void onAssociationCreated(AssociationInfo associationInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAssociationRequestCallback.DESCRIPTOR);

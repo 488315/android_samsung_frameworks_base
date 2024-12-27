@@ -5,21 +5,25 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class SmartClipRemoteRequestResult implements Parcelable {
-    public static final Parcelable.Creator<SmartClipRemoteRequestResult> CREATOR = new Parcelable.Creator<SmartClipRemoteRequestResult>() { // from class: com.samsung.android.content.smartclip.SmartClipRemoteRequestResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartClipRemoteRequestResult createFromParcel(Parcel in) {
-            SmartClipRemoteRequestResult data = new SmartClipRemoteRequestResult(0, 0, null);
-            data.readFromParcel(in);
-            return data;
-        }
+    public static final Parcelable.Creator<SmartClipRemoteRequestResult> CREATOR =
+            new Parcelable.Creator<
+                    SmartClipRemoteRequestResult>() { // from class:
+                                                      // com.samsung.android.content.smartclip.SmartClipRemoteRequestResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartClipRemoteRequestResult createFromParcel(Parcel in) {
+                    SmartClipRemoteRequestResult data =
+                            new SmartClipRemoteRequestResult(0, 0, null);
+                    data.readFromParcel(in);
+                    return data;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartClipRemoteRequestResult[] newArray(int size) {
-            return new SmartClipRemoteRequestResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartClipRemoteRequestResult[] newArray(int size) {
+                    return new SmartClipRemoteRequestResult[size];
+                }
+            };
     public int mRequestId;
     public int mRequestType = 0;
     public Parcelable mResultData;

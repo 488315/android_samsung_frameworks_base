@@ -2,6 +2,7 @@ package com.android.internal.midi;
 
 import android.media.midi.MidiReceiver;
 import android.media.midi.MidiSender;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -22,17 +23,18 @@ public final class MidiDispatcher extends MidiReceiver {
 
     public MidiDispatcher(MidiReceiverFailureHandler failureHandler) {
         this.mReceivers = new CopyOnWriteArrayList<>();
-        this.mSender = new MidiSender() { // from class: com.android.internal.midi.MidiDispatcher.1
-            @Override // android.media.midi.MidiSender
-            public void onConnect(MidiReceiver receiver) {
-                MidiDispatcher.this.mReceivers.add(receiver);
-            }
+        this.mSender =
+                new MidiSender() { // from class: com.android.internal.midi.MidiDispatcher.1
+                    @Override // android.media.midi.MidiSender
+                    public void onConnect(MidiReceiver receiver) {
+                        MidiDispatcher.this.mReceivers.add(receiver);
+                    }
 
-            @Override // android.media.midi.MidiSender
-            public void onDisconnect(MidiReceiver receiver) {
-                MidiDispatcher.this.mReceivers.remove(receiver);
-            }
-        };
+                    @Override // android.media.midi.MidiSender
+                    public void onDisconnect(MidiReceiver receiver) {
+                        MidiDispatcher.this.mReceivers.remove(receiver);
+                    }
+                };
         this.mFailureHandler = failureHandler;
     }
 

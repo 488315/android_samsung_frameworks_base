@@ -7,6 +7,7 @@ import android.media.MediaMetrics;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -54,8 +55,7 @@ public final class CellInfo {
                 }
             }
 
-            private hidl_discriminator() {
-            }
+            private hidl_discriminator() {}
         }
 
         public void gsm(CellInfoGsm gsm) {
@@ -66,7 +66,15 @@ public final class CellInfo {
         public CellInfoGsm gsm() {
             if (this.hidl_d != 0) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !CellInfoGsm.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -82,7 +90,15 @@ public final class CellInfo {
         public CellInfoWcdma wcdma() {
             if (this.hidl_d != 1) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !CellInfoWcdma.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -98,7 +114,15 @@ public final class CellInfo {
         public CellInfoTdscdma tdscdma() {
             if (this.hidl_d != 2) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !CellInfoTdscdma.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -114,7 +138,15 @@ public final class CellInfo {
         public CellInfoLte lte() {
             if (this.hidl_d != 3) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !CellInfoLte.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -130,7 +162,15 @@ public final class CellInfo {
         public CellInfoNr nr() {
             if (this.hidl_d != 4) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !CellInfoNr.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -146,7 +186,15 @@ public final class CellInfo {
         public CellInfoCdma cdma() {
             if (this.hidl_d != 5) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !CellInfoCdma.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -173,7 +221,9 @@ public final class CellInfo {
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)), Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)),
+                    Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
         }
 
         public final String toString() {
@@ -205,7 +255,8 @@ public final class CellInfo {
                     builder.append(cdma());
                     break;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
             builder.append("}");
             return builder.toString();
@@ -216,11 +267,13 @@ public final class CellInfo {
             readEmbeddedFromParcel(parcel, blob, 0L);
         }
 
-        public static final ArrayList<CellInfoRatSpecificInfo> readVectorFromParcel(HwParcel parcel) {
+        public static final ArrayList<CellInfoRatSpecificInfo> readVectorFromParcel(
+                HwParcel parcel) {
             ArrayList<CellInfoRatSpecificInfo> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 192, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 192, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 CellInfoRatSpecificInfo _hidl_vec_element = new CellInfoRatSpecificInfo();
@@ -230,35 +283,43 @@ public final class CellInfo {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.hidl_d = _hidl_blob.getInt8(0 + _hidl_offset);
             switch (this.hidl_d) {
                 case 0:
                     this.hidl_o = new CellInfoGsm();
-                    ((CellInfoGsm) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
+                    ((CellInfoGsm) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
                     return;
                 case 1:
                     this.hidl_o = new CellInfoWcdma();
-                    ((CellInfoWcdma) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
+                    ((CellInfoWcdma) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
                     return;
                 case 2:
                     this.hidl_o = new CellInfoTdscdma();
-                    ((CellInfoTdscdma) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
+                    ((CellInfoTdscdma) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
                     return;
                 case 3:
                     this.hidl_o = new CellInfoLte();
-                    ((CellInfoLte) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
+                    ((CellInfoLte) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
                     return;
                 case 4:
                     this.hidl_o = new CellInfoNr();
-                    ((CellInfoNr) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
+                    ((CellInfoNr) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
                     return;
                 case 5:
                     this.hidl_o = new CellInfoCdma();
-                    ((CellInfoCdma) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
+                    ((CellInfoCdma) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
                     return;
                 default:
-                    throw new IllegalStateException("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new IllegalStateException(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
 
@@ -268,7 +329,8 @@ public final class CellInfo {
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<CellInfoRatSpecificInfo> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<CellInfoRatSpecificInfo> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -303,7 +365,8 @@ public final class CellInfo {
                     cdma().writeEmbeddedToBlob(_hidl_blob, 8 + _hidl_offset);
                     return;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
     }
@@ -316,18 +379,37 @@ public final class CellInfo {
             return false;
         }
         CellInfo other = (CellInfo) otherObject;
-        if (this.registered == other.registered && this.timeStampType == other.timeStampType && this.timeStamp == other.timeStamp && this.connectionStatus == other.connectionStatus && HidlSupport.deepEquals(this.ratSpecificInfo, other.ratSpecificInfo)) {
+        if (this.registered == other.registered
+                && this.timeStampType == other.timeStampType
+                && this.timeStamp == other.timeStamp
+                && this.connectionStatus == other.connectionStatus
+                && HidlSupport.deepEquals(this.ratSpecificInfo, other.ratSpecificInfo)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.registered))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.timeStampType))), Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.timeStamp))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.connectionStatus))), Integer.valueOf(HidlSupport.deepHashCode(this.ratSpecificInfo)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.registered))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.timeStampType))),
+                Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.timeStamp))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.connectionStatus))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.ratSpecificInfo)));
     }
 
     public final String toString() {
-        return "{.registered = " + this.registered + ", .timeStampType = " + TimeStampType.toString(this.timeStampType) + ", .timeStamp = " + this.timeStamp + ", .connectionStatus = " + CellConnectionStatus.toString(this.connectionStatus) + ", .ratSpecificInfo = " + this.ratSpecificInfo + "}";
+        return "{.registered = "
+                + this.registered
+                + ", .timeStampType = "
+                + TimeStampType.toString(this.timeStampType)
+                + ", .timeStamp = "
+                + this.timeStamp
+                + ", .connectionStatus = "
+                + CellConnectionStatus.toString(this.connectionStatus)
+                + ", .ratSpecificInfo = "
+                + this.ratSpecificInfo
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -339,7 +421,8 @@ public final class CellInfo {
         ArrayList<CellInfo> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 216, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 216, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CellInfo _hidl_vec_element = new CellInfo();
@@ -349,7 +432,8 @@ public final class CellInfo {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.registered = _hidl_blob.getBool(0 + _hidl_offset);
         this.timeStampType = _hidl_blob.getInt32(4 + _hidl_offset);
         this.timeStamp = _hidl_blob.getInt64(8 + _hidl_offset);

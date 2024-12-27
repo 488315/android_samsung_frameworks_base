@@ -11,8 +11,9 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.net.IOemNetdUnsolicitedEventListener;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +24,10 @@ public interface IOemNetd extends IInterface {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IOemNetd {
         @Override // com.android.internal.net.IOemNetd
-        public void activateClo(String str) throws RemoteException {
-        }
+        public void activateClo(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void activateCloGro() throws RemoteException {
-        }
+        public void activateCloGro() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int addApeRule(boolean z, String str, int i) throws RemoteException {
@@ -36,7 +35,8 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public int addIpToPrioList(List list, List list2, List list3, List list4, List list5) throws RemoteException {
+        public int addIpToPrioList(List list, List list2, List list3, List list4, List list5)
+                throws RemoteException {
             return 0;
         }
 
@@ -46,56 +46,52 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void addMptcpChain(String str, String str2) throws RemoteException {
-        }
+        public void addMptcpChain(String str, String str2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addMptcpIpAcceptRule(String str, String str2, String str3) throws RemoteException {
-        }
+        public void addMptcpIpAcceptRule(String str, String str2, String str3)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addMptcpLinkIface(String str) throws RemoteException {
-        }
+        public void addMptcpLinkIface(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addMptcpSocksRule(String str, String str2, String str3, int i, String str4) throws RemoteException {
-        }
+        public void addMptcpSocksRule(String str, String str2, String str3, int i, String str4)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addMptcpSocksSkipRule(String str, String str2, String str3) throws RemoteException {
-        }
+        public void addMptcpSocksSkipRule(String str, String str2, String str3)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addMptcpSocksSkipRuleProto(String str, String str2, String str3, int i, String str4) throws RemoteException {
-        }
+        public void addMptcpSocksSkipRuleProto(
+                String str, String str2, String str3, int i, String str4) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addMptcpSourcePortAcceptRule(String str, String str2, int i) throws RemoteException {
-        }
+        public void addMptcpSourcePortAcceptRule(String str, String str2, int i)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addMptcpSourceRoute(String str, String str2, String str3) throws RemoteException {
-        }
+        public void addMptcpSourceRoute(String str, String str2, String str3)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addMptcpUidSocksRule(String str, String str2, String str3, int i, int i2, String str4) throws RemoteException {
-        }
+        public void addMptcpUidSocksRule(
+                String str, String str2, String str3, int i, int i2, String str4)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addPortFwdRules(String str, String str2, String str3, String str4, int i) throws RemoteException {
-        }
+        public void addPortFwdRules(String str, String str2, String str3, String str4, int i)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addTosPolicy(int i, int i2) throws RemoteException {
-        }
+        public void addTosPolicy(int i, int i2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addUidToMptcpChain(String str, int i, String str2) throws RemoteException {
-        }
+        public void addUidToMptcpChain(String str, int i, String str2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void addUserToNwFilterRange(int i) throws RemoteException {
-        }
+        public void addUserToNwFilterRange(int i) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -103,28 +99,22 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void cleanAllBlock() throws RemoteException {
-        }
+        public void cleanAllBlock() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void cleanBlockPorts() throws RemoteException {
-        }
+        public void cleanBlockPorts() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void cleanOnlyAllowIPs() throws RemoteException {
-        }
+        public void cleanOnlyAllowIPs() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void clearEbpfMap(int i) throws RemoteException {
-        }
+        public void clearEbpfMap(int i) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void clearKnoxNwFilterProxyEntries() throws RemoteException {
-        }
+        public void clearKnoxNwFilterProxyEntries() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void clearNetworkFilterEntries(int i) throws RemoteException {
-        }
+        public void clearNetworkFilterEntries(int i) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int clearPriorityMap() throws RemoteException {
@@ -132,37 +122,34 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void clearTosMap() throws RemoteException {
-        }
+        public void clearTosMap() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void deactivateClo(String str) throws RemoteException {
-        }
+        public void deactivateClo(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void deactivateCloGro() throws RemoteException {
-        }
+        public void deactivateCloGro() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public int delIpToPrioList(List list, List list2, List list3, List list4, List list5) throws RemoteException {
+        public int delIpToPrioList(List list, List list2, List list3, List list4, List list5)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void delMptcpIpAcceptRule(String str, String str2, String str3) throws RemoteException {
-        }
+        public void delMptcpIpAcceptRule(String str, String str2, String str3)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void delMptcpSourcePortAcceptRule(String str, String str2, int i) throws RemoteException {
-        }
+        public void delMptcpSourcePortAcceptRule(String str, String str2, int i)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void delMptcpSourceRoute(String str, String str2, String str3) throws RemoteException {
-        }
+        public void delMptcpSourceRoute(String str, String str2, String str3)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void disableMptcpMode() throws RemoteException {
-        }
+        public void disableMptcpMode() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int disableTlsPacketTracing(String str) throws RemoteException {
@@ -170,20 +157,17 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void enableIpOptionModification(boolean z) throws RemoteException {
-        }
+        public void enableIpOptionModification(boolean z) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void enableKnoxVpnFlagForTether(boolean z) throws RemoteException {
-        }
+        public void enableKnoxVpnFlagForTether(boolean z) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void enableMptcpModes(String str) throws RemoteException {
-        }
+        public void enableMptcpModes(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void enablePortInfoEntries(int i, int i2, int i3, boolean z) throws RemoteException {
-        }
+        public void enablePortInfoEntries(int i, int i2, int i3, boolean z)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int enableTlsPacketTracing(String str) throws RemoteException {
@@ -191,20 +175,17 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void exemptUidFromNwFilterRange(UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
-        }
+        public void exemptUidFromNwFilterRange(UidRangeParcel[] uidRangeParcelArr)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void firewallBuild() throws RemoteException {
-        }
+        public void firewallBuild() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void firewallSetRuleMobileData(int i, boolean z) throws RemoteException {
-        }
+        public void firewallSetRuleMobileData(int i, boolean z) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void firewallSetRuleWifi(int i, boolean z) throws RemoteException {
-        }
+        public void firewallSetRuleWifi(int i, boolean z) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int flushArpEntry(String str) throws RemoteException {
@@ -272,12 +253,11 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void gmsCoreSetUidUrlMobileDataRule(int i, String str, int i2) throws RemoteException {
-        }
+        public void gmsCoreSetUidUrlMobileDataRule(int i, String str, int i2)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void gmsCoreSetUidUrlWifiRule(int i, String str, int i2) throws RemoteException {
-        }
+        public void gmsCoreSetUidUrlWifiRule(int i, String str, int i2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int hotspotOff(String str) throws RemoteException {
@@ -290,8 +270,7 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void interfaceSetAutoConf(String str, boolean z) throws RemoteException {
-        }
+        public void interfaceSetAutoConf(String str, boolean z) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public boolean isAlive() throws RemoteException {
@@ -309,44 +288,40 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void knoxVpnBlockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
-        }
+        public void knoxVpnBlockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void knoxVpnBlockUserWideDnsQuery(boolean z, int i) throws RemoteException {
-        }
+        public void knoxVpnBlockUserWideDnsQuery(boolean z, int i) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void knoxVpnDestroyBlockedKnoxNetwork() throws RemoteException {
-        }
+        public void knoxVpnDestroyBlockedKnoxNetwork() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void knoxVpnExemptDnsQueryForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
-        }
+        public void knoxVpnExemptDnsQueryForUid(int i, UidRangeParcel[] uidRangeParcelArr)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void knoxVpnExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
-        }
+        public void knoxVpnExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void knoxVpnInsertUidForDnsAuthorization(int[] iArr) throws RemoteException {
-        }
+        public void knoxVpnInsertUidForDnsAuthorization(int[] iArr) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void knoxVpnRemoveExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
-        }
+        public void knoxVpnRemoveExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void knoxVpnRemoveExemptedDnsQueryForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
-        }
+        public void knoxVpnRemoveExemptedDnsQueryForUid(int i, UidRangeParcel[] uidRangeParcelArr)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void knoxVpnRemoveUidFromDnsAuthorization() throws RemoteException {
-        }
+        public void knoxVpnRemoveUidFromDnsAuthorization() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void knoxVpnUnblockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
-        }
+        public void knoxVpnUnblockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public long[] l4StatsGet() throws RemoteException {
@@ -354,32 +329,30 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void makeBlockChildChain() throws RemoteException {
-        }
+        public void makeBlockChildChain() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void makeVideoCallChain() throws RemoteException {
-        }
+        public void makeVideoCallChain() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void modifyEpdg(boolean z, String str, String str2, boolean z2) throws RemoteException {
-        }
+        public void modifyEpdg(boolean z, String str, String str2, boolean z2)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void networkAddLegacyRoute(int i, String str, String str2, String str3, int i2) throws RemoteException {
-        }
+        public void networkAddLegacyRoute(int i, String str, String str2, String str3, int i2)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void networkAddUidRanges(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
-        }
+        public void networkAddUidRanges(int i, UidRangeParcel[] uidRangeParcelArr)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void networkRemoveLegacyRoute(int i, String str, String str2, String str3, int i2) throws RemoteException {
-        }
+        public void networkRemoveLegacyRoute(int i, String str, String str2, String str3, int i2)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void networkRemoveUidRanges(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
-        }
+        public void networkRemoveUidRanges(int i, UidRangeParcel[] uidRangeParcelArr)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int pauseDevice(String str, boolean z, String str2, long j) throws RemoteException {
@@ -387,7 +360,8 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public int prioDevice(boolean z, List list, List list2, List list3, List list4) throws RemoteException {
+        public int prioDevice(boolean z, List list, List list2, List list3, List list4)
+                throws RemoteException {
             return 0;
         }
 
@@ -417,64 +391,61 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void registerCloEventListener(ICloEventObserver iCloEventObserver) throws RemoteException {
-        }
+        public void registerCloEventListener(ICloEventObserver iCloEventObserver)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void registerDomainFilterEventListener(IDomainFilterEventListener iDomainFilterEventListener) throws RemoteException {
-        }
+        public void registerDomainFilterEventListener(
+                IDomainFilterEventListener iDomainFilterEventListener) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void registerNetdTetherEventListener(INetdTetherEventListener iNetdTetherEventListener) throws RemoteException {
-        }
+        public void registerNetdTetherEventListener(
+                INetdTetherEventListener iNetdTetherEventListener) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void registerOemUnsolicitedEventListener(IOemNetdUnsolicitedEventListener iOemNetdUnsolicitedEventListener) throws RemoteException {
-        }
+        public void registerOemUnsolicitedEventListener(
+                IOemNetdUnsolicitedEventListener iOemNetdUnsolicitedEventListener)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void removeExemptUidFromNwFilterRange(UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
-        }
+        public void removeExemptUidFromNwFilterRange(UidRangeParcel[] uidRangeParcelArr)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void removeKnoxNwFilterProxyApp(int i) throws RemoteException {
-        }
+        public void removeKnoxNwFilterProxyApp(int i) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void removeMptcpChain(String str, String str2) throws RemoteException {
-        }
+        public void removeMptcpChain(String str, String str2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void removeMptcpLinkIface(String str) throws RemoteException {
-        }
+        public void removeMptcpLinkIface(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void removeMptcpSocksRule(String str, String str2, String str3, int i, String str4) throws RemoteException {
-        }
+        public void removeMptcpSocksRule(String str, String str2, String str3, int i, String str4)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void removeMptcpSocksSkipRule(String str, String str2, String str3) throws RemoteException {
-        }
+        public void removeMptcpSocksSkipRule(String str, String str2, String str3)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void removeMptcpSocksSkipRuleProto(String str, String str2, String str3, int i, String str4) throws RemoteException {
-        }
+        public void removeMptcpSocksSkipRuleProto(
+                String str, String str2, String str3, int i, String str4) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void removeMptcpUidSocksRule(String str, String str2, String str3, int i, int i2, String str4) throws RemoteException {
-        }
+        public void removeMptcpUidSocksRule(
+                String str, String str2, String str3, int i, int i2, String str4)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void removeTosPolicy(int i) throws RemoteException {
-        }
+        public void removeTosPolicy(int i) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void removeUidFromMptcpChain(String str, int i, String str2) throws RemoteException {
-        }
+        public void removeUidFromMptcpChain(String str, int i, String str2)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void removeUserFromNwFilterRange(int i) throws RemoteException {
-        }
+        public void removeUserFromNwFilterRange(int i) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int replaceApeRule(String str, int i, int i2) throws RemoteException {
@@ -507,88 +478,70 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void setAdvertiseWindowSize(int i) throws RemoteException {
-        }
+        public void setAdvertiseWindowSize(int i) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setAllowHostAlone(String str) throws RemoteException {
-        }
+        public void setAllowHostAlone(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setAllowListIPs(String str) throws RemoteException {
-        }
+        public void setAllowListIPs(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setBlockAllDNSPackets(boolean z) throws RemoteException {
-        }
+        public void setBlockAllDNSPackets(boolean z) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setBlockAllPackets() throws RemoteException {
-        }
+        public void setBlockAllPackets() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setBlockHostAlone(String str) throws RemoteException {
-        }
+        public void setBlockHostAlone(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setBlockListIPs(String str) throws RemoteException {
-        }
+        public void setBlockListIPs(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setBlockPorts(String str, int i, String str2) throws RemoteException {
-        }
+        public void setBlockPorts(String str, int i, String str2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setDnsCacheStatus(int i, boolean z) throws RemoteException {
-        }
+        public void setDnsCacheStatus(int i, boolean z) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setEpdgInterfaceDropRule(String str, String str2, boolean z) throws RemoteException {
-        }
+        public void setEpdgInterfaceDropRule(String str, String str2, boolean z)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setHttpProxyPort(int i, int i2) throws RemoteException {
-        }
+        public void setHttpProxyPort(int i, int i2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setKnoxNwFilterProxyApp(int i) throws RemoteException {
-        }
+        public void setKnoxNwFilterProxyApp(int i) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setKnoxVpn(int i, boolean z) throws RemoteException {
-        }
+        public void setKnoxVpn(int i, boolean z) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setMptcpDestBaseMarkRule(boolean z, String str, String str2, int i, int i2) throws RemoteException {
-        }
+        public void setMptcpDestBaseMarkRule(boolean z, String str, String str2, int i, int i2)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setMptcpPrivateIpRoute(boolean z, String str, int i) throws RemoteException {
-        }
+        public void setMptcpPrivateIpRoute(boolean z, String str, int i) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setMptcpTcpBufferSize(String str, String str2) throws RemoteException {
-        }
+        public void setMptcpTcpBufferSize(String str, String str2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setMptcpUIDRoute(boolean z, String str, int i, String str2, String str3) throws RemoteException {
-        }
+        public void setMptcpUIDRoute(boolean z, String str, int i, String str2, String str3)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setMtuValueMptcp(String str, int i) throws RemoteException {
-        }
+        public void setMtuValueMptcp(String str, int i) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setNetworkInfo(int i, boolean z, int i2) throws RemoteException {
-        }
+        public void setNetworkInfo(int i, boolean z, int i2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setNwFilterNetId(int i, int i2) throws RemoteException {
-        }
+        public void setNwFilterNetId(int i, int i2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void setOnlyAllowIPs(String str) throws RemoteException {
-        }
+        public void setOnlyAllowIPs(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int setQboxUid(int i, boolean z) throws RemoteException {
@@ -596,8 +549,7 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void spegRestrictNetworkConnection(int i, boolean z) throws RemoteException {
-        }
+        public void spegRestrictNetworkConnection(int i, boolean z) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int startL4s(String str) throws RemoteException {
@@ -610,8 +562,7 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void startTosMarker(String str) throws RemoteException {
-        }
+        public void startTosMarker(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int startTrafficStatsController(String str) throws RemoteException {
@@ -619,8 +570,7 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void startVideoStats(String str, int i, int i2) throws RemoteException {
-        }
+        public void startVideoStats(String str, int i, int i2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int stopL4s(String str) throws RemoteException {
@@ -633,8 +583,7 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void stopTosMarker(String str) throws RemoteException {
-        }
+        public void stopTosMarker(String str) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
         public int stopTrafficStatsController(String str) throws RemoteException {
@@ -642,52 +591,43 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // com.android.internal.net.IOemNetd
-        public void stopVideoStats(String str, int i, int i2) throws RemoteException {
-        }
+        public void stopVideoStats(String str, int i, int i2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void tcSetTCRule(boolean z, String str, String str2) throws RemoteException {
-        }
+        public void tcSetTCRule(boolean z, String str, String str2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void unregisterCloEventListener() throws RemoteException {
-        }
+        public void unregisterCloEventListener() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void unregisterDomainFilterEventListener() throws RemoteException {
-        }
+        public void unregisterDomainFilterEventListener() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void unregisterNetdTetherEventListener() throws RemoteException {
-        }
+        public void unregisterNetdTetherEventListener() throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void updateDomainFilterCache(int i, String[] strArr) throws RemoteException {
-        }
+        public void updateDomainFilterCache(int i, String[] strArr) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void updateGroFlushTime(long j) throws RemoteException {
-        }
+        public void updateGroFlushTime(long j) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void updateGroPshOption(int i) throws RemoteException {
-        }
+        public void updateGroPshOption(int i) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void updateInputFilterAppWideRules(int[] iArr, int i, int i2) throws RemoteException {
-        }
+        public void updateInputFilterAppWideRules(int[] iArr, int i, int i2)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void updateInputFilterExemptRules(int i, int i2) throws RemoteException {
-        }
+        public void updateInputFilterExemptRules(int i, int i2) throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void updateInputFilterUserWideRules(int[] iArr, int i, int i2) throws RemoteException {
-        }
+        public void updateInputFilterUserWideRules(int[] iArr, int i, int i2)
+                throws RemoteException {}
 
         @Override // com.android.internal.net.IOemNetd
-        public void updateMptcpSourceRule(boolean z, String str, String str2) throws RemoteException {
-        }
+        public void updateMptcpSourceRule(boolean z, String str, String str2)
+                throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -749,7 +689,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public int addIpToPrioList(List list, List list2, List list3, List list4, List list5) throws RemoteException {
+            public int addIpToPrioList(List list, List list2, List list3, List list4, List list5)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -803,7 +744,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void addMptcpIpAcceptRule(String str, String str2, String str3) throws RemoteException {
+            public void addMptcpIpAcceptRule(String str, String str2, String str3)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -835,7 +777,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void addMptcpSocksRule(String str, String str2, String str3, int i, String str4) throws RemoteException {
+            public void addMptcpSocksRule(String str, String str2, String str3, int i, String str4)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -854,7 +797,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void addMptcpSocksSkipRule(String str, String str2, String str3) throws RemoteException {
+            public void addMptcpSocksSkipRule(String str, String str2, String str3)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -871,7 +815,9 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void addMptcpSocksSkipRuleProto(String str, String str2, String str3, int i, String str4) throws RemoteException {
+            public void addMptcpSocksSkipRuleProto(
+                    String str, String str2, String str3, int i, String str4)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -890,7 +836,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void addMptcpSourcePortAcceptRule(String str, String str2, int i) throws RemoteException {
+            public void addMptcpSourcePortAcceptRule(String str, String str2, int i)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -907,7 +854,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void addMptcpSourceRoute(String str, String str2, String str3) throws RemoteException {
+            public void addMptcpSourceRoute(String str, String str2, String str3)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -915,7 +863,12 @@ public interface IOemNetd extends IInterface {
                     obtain.writeString(str);
                     obtain.writeString(str2);
                     obtain.writeString(str3);
-                    this.mRemote.transact(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_DPC_SETUP_STARTED, obtain, obtain2, 0);
+                    this.mRemote.transact(
+                            FrameworkStatsLog
+                                    .DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_DPC_SETUP_STARTED,
+                            obtain,
+                            obtain2,
+                            0);
                     obtain2.readException();
                 } finally {
                     obtain2.recycle();
@@ -924,7 +877,9 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void addMptcpUidSocksRule(String str, String str2, String str3, int i, int i2, String str4) throws RemoteException {
+            public void addMptcpUidSocksRule(
+                    String str, String str2, String str3, int i, int i2, String str4)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -944,7 +899,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void addPortFwdRules(String str, String str2, String str3, String str4, int i) throws RemoteException {
+            public void addPortFwdRules(String str, String str2, String str3, String str4, int i)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -1133,7 +1089,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public int delIpToPrioList(List list, List list2, List list3, List list4, List list5) throws RemoteException {
+            public int delIpToPrioList(List list, List list2, List list3, List list4, List list5)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1153,7 +1110,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void delMptcpIpAcceptRule(String str, String str2, String str3) throws RemoteException {
+            public void delMptcpIpAcceptRule(String str, String str2, String str3)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1170,7 +1128,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void delMptcpSourcePortAcceptRule(String str, String str2, int i) throws RemoteException {
+            public void delMptcpSourcePortAcceptRule(String str, String str2, int i)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1187,7 +1146,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void delMptcpSourceRoute(String str, String str2, String str3) throws RemoteException {
+            public void delMptcpSourceRoute(String str, String str2, String str3)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1195,7 +1155,12 @@ public interface IOemNetd extends IInterface {
                     obtain.writeString(str);
                     obtain.writeString(str2);
                     obtain.writeString(str3);
-                    this.mRemote.transact(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_DPC_SETUP_COMPLETED, obtain, obtain2, 0);
+                    this.mRemote.transact(
+                            FrameworkStatsLog
+                                    .DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_DPC_SETUP_COMPLETED,
+                            obtain,
+                            obtain2,
+                            0);
                     obtain2.readException();
                 } finally {
                     obtain2.recycle();
@@ -1273,7 +1238,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void enablePortInfoEntries(int i, int i2, int i3, boolean z) throws RemoteException {
+            public void enablePortInfoEntries(int i, int i2, int i3, boolean z)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -1304,7 +1270,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void exemptUidFromNwFilterRange(UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
+            public void exemptUidFromNwFilterRange(UidRangeParcel[] uidRangeParcelArr)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -1526,7 +1493,8 @@ public interface IOemNetd extends IInterface {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
                     this.mRemote.transact(92, obtain, obtain2, 0);
                     obtain2.readException();
-                    return (TrafficTimeStatsParcel) obtain2.readTypedObject(TrafficTimeStatsParcel.CREATOR);
+                    return (TrafficTimeStatsParcel)
+                            obtain2.readTypedObject(TrafficTimeStatsParcel.CREATOR);
                 } finally {
                     obtain2.recycle();
                     obtain.recycle();
@@ -1549,7 +1517,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public TetherStatsParcel[] getVideoStats(String str, int i, int i2) throws RemoteException {
+            public TetherStatsParcel[] getVideoStats(String str, int i, int i2)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1559,7 +1528,8 @@ public interface IOemNetd extends IInterface {
                     obtain.writeInt(i2);
                     this.mRemote.transact(52, obtain, obtain2, 0);
                     obtain2.readException();
-                    return (TetherStatsParcel[]) obtain2.createTypedArray(TetherStatsParcel.CREATOR);
+                    return (TetherStatsParcel[])
+                            obtain2.createTypedArray(TetherStatsParcel.CREATOR);
                 } finally {
                     obtain2.recycle();
                     obtain.recycle();
@@ -1567,7 +1537,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void gmsCoreSetUidUrlMobileDataRule(int i, String str, int i2) throws RemoteException {
+            public void gmsCoreSetUidUrlMobileDataRule(int i, String str, int i2)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -1686,7 +1657,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void knoxVpnBlockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
+            public void knoxVpnBlockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -1723,7 +1695,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void knoxVpnExemptDnsQueryForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
+            public void knoxVpnExemptDnsQueryForUid(int i, UidRangeParcel[] uidRangeParcelArr)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -1736,7 +1709,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void knoxVpnExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
+            public void knoxVpnExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -1761,7 +1735,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void knoxVpnRemoveExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
+            public void knoxVpnRemoveExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -1774,7 +1749,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void knoxVpnRemoveExemptedDnsQueryForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
+            public void knoxVpnRemoveExemptedDnsQueryForUid(
+                    int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -1798,7 +1774,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void knoxVpnUnblockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
+            public void knoxVpnUnblockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -1848,7 +1825,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void modifyEpdg(boolean z, String str, String str2, boolean z2) throws RemoteException {
+            public void modifyEpdg(boolean z, String str, String str2, boolean z2)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -1863,7 +1841,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void networkAddLegacyRoute(int i, String str, String str2, String str3, int i2) throws RemoteException {
+            public void networkAddLegacyRoute(int i, String str, String str2, String str3, int i2)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1882,7 +1861,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void networkAddUidRanges(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
+            public void networkAddUidRanges(int i, UidRangeParcel[] uidRangeParcelArr)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1898,7 +1878,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void networkRemoveLegacyRoute(int i, String str, String str2, String str3, int i2) throws RemoteException {
+            public void networkRemoveLegacyRoute(
+                    int i, String str, String str2, String str3, int i2) throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1917,7 +1898,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void networkRemoveUidRanges(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
+            public void networkRemoveUidRanges(int i, UidRangeParcel[] uidRangeParcelArr)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1933,7 +1915,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public int pauseDevice(String str, boolean z, String str2, long j) throws RemoteException {
+            public int pauseDevice(String str, boolean z, String str2, long j)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1952,7 +1935,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public int prioDevice(boolean z, List list, List list2, List list3, List list4) throws RemoteException {
+            public int prioDevice(boolean z, List list, List list2, List list3, List list4)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2056,7 +2040,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void registerCloEventListener(ICloEventObserver iCloEventObserver) throws RemoteException {
+            public void registerCloEventListener(ICloEventObserver iCloEventObserver)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2071,7 +2056,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void registerDomainFilterEventListener(IDomainFilterEventListener iDomainFilterEventListener) throws RemoteException {
+            public void registerDomainFilterEventListener(
+                    IDomainFilterEventListener iDomainFilterEventListener) throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -2083,7 +2069,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void registerNetdTetherEventListener(INetdTetherEventListener iNetdTetherEventListener) throws RemoteException {
+            public void registerNetdTetherEventListener(
+                    INetdTetherEventListener iNetdTetherEventListener) throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -2095,7 +2082,9 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void registerOemUnsolicitedEventListener(IOemNetdUnsolicitedEventListener iOemNetdUnsolicitedEventListener) throws RemoteException {
+            public void registerOemUnsolicitedEventListener(
+                    IOemNetdUnsolicitedEventListener iOemNetdUnsolicitedEventListener)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2110,7 +2099,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void removeExemptUidFromNwFilterRange(UidRangeParcel[] uidRangeParcelArr) throws RemoteException {
+            public void removeExemptUidFromNwFilterRange(UidRangeParcel[] uidRangeParcelArr)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -2165,7 +2155,9 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void removeMptcpSocksRule(String str, String str2, String str3, int i, String str4) throws RemoteException {
+            public void removeMptcpSocksRule(
+                    String str, String str2, String str3, int i, String str4)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2184,7 +2176,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void removeMptcpSocksSkipRule(String str, String str2, String str3) throws RemoteException {
+            public void removeMptcpSocksSkipRule(String str, String str2, String str3)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2201,7 +2194,9 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void removeMptcpSocksSkipRuleProto(String str, String str2, String str3, int i, String str4) throws RemoteException {
+            public void removeMptcpSocksSkipRuleProto(
+                    String str, String str2, String str3, int i, String str4)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2220,7 +2215,9 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void removeMptcpUidSocksRule(String str, String str2, String str3, int i, int i2, String str4) throws RemoteException {
+            public void removeMptcpUidSocksRule(
+                    String str, String str2, String str3, int i, int i2, String str4)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2252,7 +2249,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void removeUidFromMptcpChain(String str, int i, String str2) throws RemoteException {
+            public void removeUidFromMptcpChain(String str, int i, String str2)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2351,7 +2349,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public String runTcpMonitorShellCommand(String str, String str2) throws RemoteException {
+            public String runTcpMonitorShellCommand(String str, String str2)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2368,7 +2367,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public String runVpnRulesCommand(int i, String str, String str2) throws RemoteException {
+            public String runVpnRulesCommand(int i, String str, String str2)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2496,7 +2496,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void setEpdgInterfaceDropRule(String str, String str2, boolean z) throws RemoteException {
+            public void setEpdgInterfaceDropRule(String str, String str2, boolean z)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -2548,7 +2549,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void setMptcpDestBaseMarkRule(boolean z, String str, String str2, int i, int i2) throws RemoteException {
+            public void setMptcpDestBaseMarkRule(boolean z, String str, String str2, int i, int i2)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2558,7 +2560,12 @@ public interface IOemNetd extends IInterface {
                     obtain.writeString(str2);
                     obtain.writeInt(i);
                     obtain.writeInt(i2);
-                    this.mRemote.transact(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__BIND_CROSS_PROFILE_SERVICE, obtain, obtain2, 0);
+                    this.mRemote.transact(
+                            FrameworkStatsLog
+                                    .DEVICE_POLICY_EVENT__EVENT_ID__BIND_CROSS_PROFILE_SERVICE,
+                            obtain,
+                            obtain2,
+                            0);
                     obtain2.readException();
                 } finally {
                     obtain2.recycle();
@@ -2567,7 +2574,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void setMptcpPrivateIpRoute(boolean z, String str, int i) throws RemoteException {
+            public void setMptcpPrivateIpRoute(boolean z, String str, int i)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2600,7 +2608,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void setMptcpUIDRoute(boolean z, String str, int i, String str2, String str3) throws RemoteException {
+            public void setMptcpUIDRoute(boolean z, String str, int i, String str2, String str3)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -2610,7 +2619,12 @@ public interface IOemNetd extends IInterface {
                     obtain.writeInt(i);
                     obtain.writeString(str2);
                     obtain.writeString(str3);
-                    this.mRemote.transact(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_ORGANIZATION_OWNED_MANAGED_PROFILE, obtain, obtain2, 0);
+                    this.mRemote.transact(
+                            FrameworkStatsLog
+                                    .DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_ORGANIZATION_OWNED_MANAGED_PROFILE,
+                            obtain,
+                            obtain2,
+                            0);
                     obtain2.readException();
                 } finally {
                     obtain2.recycle();
@@ -2941,7 +2955,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void updateInputFilterAppWideRules(int[] iArr, int i, int i2) throws RemoteException {
+            public void updateInputFilterAppWideRules(int[] iArr, int i, int i2)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -2968,7 +2983,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void updateInputFilterUserWideRules(int[] iArr, int i, int i2) throws RemoteException {
+            public void updateInputFilterUserWideRules(int[] iArr, int i, int i2)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 try {
                     obtain.writeInterfaceToken("com.android.internal.net.IOemNetd");
@@ -2982,7 +2998,8 @@ public interface IOemNetd extends IInterface {
             }
 
             @Override // com.android.internal.net.IOemNetd
-            public void updateMptcpSourceRule(boolean z, String str, String str2) throws RemoteException {
+            public void updateMptcpSourceRule(boolean z, String str, String str2)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain(asBinder());
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -3007,8 +3024,11 @@ public interface IOemNetd extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("com.android.internal.net.IOemNetd");
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IOemNetd)) ? new Proxy(iBinder) : (IOemNetd) queryLocalInterface;
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface("com.android.internal.net.IOemNetd");
+            return (queryLocalInterface == null || !(queryLocalInterface instanceof IOemNetd))
+                    ? new Proxy(iBinder)
+                    : (IOemNetd) queryLocalInterface;
         }
 
         @Override // android.os.IInterface
@@ -3017,7 +3037,8 @@ public interface IOemNetd extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface("com.android.internal.net.IOemNetd");
             }
@@ -3034,32 +3055,38 @@ public interface IOemNetd extends IInterface {
                     parcel2.writeBoolean(isAlive);
                     return true;
                 case 2:
-                    IOemNetdUnsolicitedEventListener asInterface = IOemNetdUnsolicitedEventListener.Stub.asInterface(parcel.readStrongBinder());
+                    IOemNetdUnsolicitedEventListener asInterface =
+                            IOemNetdUnsolicitedEventListener.Stub.asInterface(
+                                    parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
                     registerOemUnsolicitedEventListener(asInterface);
                     parcel2.writeNoException();
                     return true;
                 case 3:
                     int readInt = parcel.readInt();
-                    UidRangeParcel[] uidRangeParcelArr = (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
+                    UidRangeParcel[] uidRangeParcelArr =
+                            (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
                     parcel.enforceNoDataAvail();
                     knoxVpnBlockDnsQueriesForUid(readInt, uidRangeParcelArr);
                     return true;
                 case 4:
                     int readInt2 = parcel.readInt();
-                    UidRangeParcel[] uidRangeParcelArr2 = (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
+                    UidRangeParcel[] uidRangeParcelArr2 =
+                            (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
                     parcel.enforceNoDataAvail();
                     knoxVpnUnblockDnsQueriesForUid(readInt2, uidRangeParcelArr2);
                     return true;
                 case 5:
                     int readInt3 = parcel.readInt();
-                    UidRangeParcel[] uidRangeParcelArr3 = (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
+                    UidRangeParcel[] uidRangeParcelArr3 =
+                            (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
                     parcel.enforceNoDataAvail();
                     knoxVpnExemptDnsQueryForUid(readInt3, uidRangeParcelArr3);
                     return true;
                 case 6:
                     int readInt4 = parcel.readInt();
-                    UidRangeParcel[] uidRangeParcelArr4 = (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
+                    UidRangeParcel[] uidRangeParcelArr4 =
+                            (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
                     parcel.enforceNoDataAvail();
                     knoxVpnRemoveExemptedDnsQueryForUid(readInt4, uidRangeParcelArr4);
                     return true;
@@ -3068,13 +3095,15 @@ public interface IOemNetd extends IInterface {
                     return true;
                 case 8:
                     int readInt5 = parcel.readInt();
-                    UidRangeParcel[] uidRangeParcelArr5 = (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
+                    UidRangeParcel[] uidRangeParcelArr5 =
+                            (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
                     parcel.enforceNoDataAvail();
                     knoxVpnExemptUidFromKnoxVpn(readInt5, uidRangeParcelArr5);
                     return true;
                 case 9:
                     int readInt6 = parcel.readInt();
-                    UidRangeParcel[] uidRangeParcelArr6 = (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
+                    UidRangeParcel[] uidRangeParcelArr6 =
+                            (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
                     parcel.enforceNoDataAvail();
                     knoxVpnRemoveExemptUidFromKnoxVpn(readInt6, uidRangeParcelArr6);
                     return true;
@@ -3122,7 +3151,8 @@ public interface IOemNetd extends IInterface {
                     int readInt16 = parcel.readInt();
                     String readString = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String runKnoxFirewallRulesCommand = runKnoxFirewallRulesCommand(readInt16, readString);
+                    String runKnoxFirewallRulesCommand =
+                            runKnoxFirewallRulesCommand(readInt16, readString);
                     parcel2.writeNoException();
                     parcel2.writeString(runKnoxFirewallRulesCommand);
                     return true;
@@ -3134,13 +3164,19 @@ public interface IOemNetd extends IInterface {
                 case 19:
                     IBinder readStrongBinder = parcel.readStrongBinder();
                     if (readStrongBinder != null) {
-                        IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.android.internal.net.INetdTetherEventListener");
-                        if (queryLocalInterface == null || !(queryLocalInterface instanceof INetdTetherEventListener)) {
-                            INetdTetherEventListener$Stub$Proxy iNetdTetherEventListener$Stub$Proxy = new INetdTetherEventListener$Stub$Proxy();
+                        IInterface queryLocalInterface =
+                                readStrongBinder.queryLocalInterface(
+                                        "com.android.internal.net.INetdTetherEventListener");
+                        if (queryLocalInterface == null
+                                || !(queryLocalInterface instanceof INetdTetherEventListener)) {
+                            INetdTetherEventListener$Stub$Proxy
+                                    iNetdTetherEventListener$Stub$Proxy =
+                                            new INetdTetherEventListener$Stub$Proxy();
                             iNetdTetherEventListener$Stub$Proxy.mRemote = readStrongBinder;
                             iNetdTetherEventListener = iNetdTetherEventListener$Stub$Proxy;
                         } else {
-                            iNetdTetherEventListener = (INetdTetherEventListener) queryLocalInterface;
+                            iNetdTetherEventListener =
+                                    (INetdTetherEventListener) queryLocalInterface;
                         }
                     }
                     parcel.enforceNoDataAvail();
@@ -3157,14 +3193,16 @@ public interface IOemNetd extends IInterface {
                     return true;
                 case 22:
                     int readInt18 = parcel.readInt();
-                    UidRangeParcel[] uidRangeParcelArr7 = (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
+                    UidRangeParcel[] uidRangeParcelArr7 =
+                            (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
                     parcel.enforceNoDataAvail();
                     networkAddUidRanges(readInt18, uidRangeParcelArr7);
                     parcel2.writeNoException();
                     return true;
                 case 23:
                     int readInt19 = parcel.readInt();
-                    UidRangeParcel[] uidRangeParcelArr8 = (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
+                    UidRangeParcel[] uidRangeParcelArr8 =
+                            (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
                     parcel.enforceNoDataAvail();
                     networkRemoveUidRanges(readInt19, uidRangeParcelArr8);
                     parcel2.writeNoException();
@@ -3178,13 +3216,19 @@ public interface IOemNetd extends IInterface {
                 case 25:
                     IBinder readStrongBinder2 = parcel.readStrongBinder();
                     if (readStrongBinder2 != null) {
-                        IInterface queryLocalInterface2 = readStrongBinder2.queryLocalInterface("com.android.internal.net.IDomainFilterEventListener");
-                        if (queryLocalInterface2 == null || !(queryLocalInterface2 instanceof IDomainFilterEventListener)) {
-                            IDomainFilterEventListener$Stub$Proxy iDomainFilterEventListener$Stub$Proxy = new IDomainFilterEventListener$Stub$Proxy();
+                        IInterface queryLocalInterface2 =
+                                readStrongBinder2.queryLocalInterface(
+                                        "com.android.internal.net.IDomainFilterEventListener");
+                        if (queryLocalInterface2 == null
+                                || !(queryLocalInterface2 instanceof IDomainFilterEventListener)) {
+                            IDomainFilterEventListener$Stub$Proxy
+                                    iDomainFilterEventListener$Stub$Proxy =
+                                            new IDomainFilterEventListener$Stub$Proxy();
                             iDomainFilterEventListener$Stub$Proxy.mRemote = readStrongBinder2;
                             iDomainFilterEventListener = iDomainFilterEventListener$Stub$Proxy;
                         } else {
-                            iDomainFilterEventListener = (IDomainFilterEventListener) queryLocalInterface2;
+                            iDomainFilterEventListener =
+                                    (IDomainFilterEventListener) queryLocalInterface2;
                         }
                     }
                     parcel.enforceNoDataAvail();
@@ -3224,7 +3268,8 @@ public interface IOemNetd extends IInterface {
                     int readInt26 = parcel.readInt();
                     int readInt27 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String networkFilterTcpV4Entry = getNetworkFilterTcpV4Entry(readInt26, readInt27);
+                    String networkFilterTcpV4Entry =
+                            getNetworkFilterTcpV4Entry(readInt26, readInt27);
                     parcel2.writeNoException();
                     parcel2.writeString(networkFilterTcpV4Entry);
                     return true;
@@ -3232,7 +3277,8 @@ public interface IOemNetd extends IInterface {
                     int readInt28 = parcel.readInt();
                     int readInt29 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String networkFilterTcpV6Entry = getNetworkFilterTcpV6Entry(readInt28, readInt29);
+                    String networkFilterTcpV6Entry =
+                            getNetworkFilterTcpV6Entry(readInt28, readInt29);
                     parcel2.writeNoException();
                     parcel2.writeString(networkFilterTcpV6Entry);
                     return true;
@@ -3240,7 +3286,8 @@ public interface IOemNetd extends IInterface {
                     int readInt30 = parcel.readInt();
                     int readInt31 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    String networkFilterUdpV6Entry = getNetworkFilterUdpV6Entry(readInt30, readInt31);
+                    String networkFilterUdpV6Entry =
+                            getNetworkFilterUdpV6Entry(readInt30, readInt31);
                     parcel2.writeNoException();
                     parcel2.writeString(networkFilterUdpV6Entry);
                     return true;
@@ -3274,12 +3321,14 @@ public interface IOemNetd extends IInterface {
                     removeUserFromNwFilterRange(readInt37);
                     return true;
                 case 39:
-                    UidRangeParcel[] uidRangeParcelArr9 = (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
+                    UidRangeParcel[] uidRangeParcelArr9 =
+                            (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
                     parcel.enforceNoDataAvail();
                     exemptUidFromNwFilterRange(uidRangeParcelArr9);
                     return true;
                 case 40:
-                    UidRangeParcel[] uidRangeParcelArr10 = (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
+                    UidRangeParcel[] uidRangeParcelArr10 =
+                            (UidRangeParcel[]) parcel.createTypedArray(UidRangeParcel.CREATOR);
                     parcel.enforceNoDataAvail();
                     removeExemptUidFromNwFilterRange(uidRangeParcelArr10);
                     return true;
@@ -3351,7 +3400,8 @@ public interface IOemNetd extends IInterface {
                     int readInt47 = parcel.readInt();
                     int readInt48 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    TetherStatsParcel[] videoStats = getVideoStats(readString7, readInt47, readInt48);
+                    TetherStatsParcel[] videoStats =
+                            getVideoStats(readString7, readInt47, readInt48);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(videoStats, 1);
                     return true;
@@ -3523,7 +3573,8 @@ public interface IOemNetd extends IInterface {
                     String readString24 = parcel.readString();
                     long readLong = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    int pauseDevice = pauseDevice(readString23, readBoolean14, readString24, readLong);
+                    int pauseDevice =
+                            pauseDevice(readString23, readBoolean14, readString24, readLong);
                     parcel2.writeNoException();
                     parcel2.writeInt(pauseDevice);
                     return true;
@@ -3574,7 +3625,13 @@ public interface IOemNetd extends IInterface {
                     ArrayList<String> createStringArrayList4 = parcel.createStringArrayList();
                     ArrayList<String> createStringArrayList5 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    int prioDevice = prioDevice(readBoolean15, createStringArrayList2, createStringArrayList3, createStringArrayList4, createStringArrayList5);
+                    int prioDevice =
+                            prioDevice(
+                                    readBoolean15,
+                                    createStringArrayList2,
+                                    createStringArrayList3,
+                                    createStringArrayList4,
+                                    createStringArrayList5);
                     parcel2.writeNoException();
                     parcel2.writeInt(prioDevice);
                     return true;
@@ -3585,7 +3642,13 @@ public interface IOemNetd extends IInterface {
                     ArrayList<String> createStringArrayList9 = parcel.createStringArrayList();
                     ArrayList<String> createStringArrayList10 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    int addIpToPrioList = addIpToPrioList(createStringArrayList6, createStringArrayList7, createStringArrayList8, createStringArrayList9, createStringArrayList10);
+                    int addIpToPrioList =
+                            addIpToPrioList(
+                                    createStringArrayList6,
+                                    createStringArrayList7,
+                                    createStringArrayList8,
+                                    createStringArrayList9,
+                                    createStringArrayList10);
                     parcel2.writeNoException();
                     parcel2.writeInt(addIpToPrioList);
                     return true;
@@ -3596,7 +3659,13 @@ public interface IOemNetd extends IInterface {
                     ArrayList<String> createStringArrayList14 = parcel.createStringArrayList();
                     ArrayList<String> createStringArrayList15 = parcel.createStringArrayList();
                     parcel.enforceNoDataAvail();
-                    int delIpToPrioList = delIpToPrioList(createStringArrayList11, createStringArrayList12, createStringArrayList13, createStringArrayList14, createStringArrayList15);
+                    int delIpToPrioList =
+                            delIpToPrioList(
+                                    createStringArrayList11,
+                                    createStringArrayList12,
+                                    createStringArrayList13,
+                                    createStringArrayList14,
+                                    createStringArrayList15);
                     parcel2.writeNoException();
                     parcel2.writeInt(delIpToPrioList);
                     return true;
@@ -3633,7 +3702,8 @@ public interface IOemNetd extends IInterface {
                     String readString31 = parcel.readString();
                     String readString32 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String runTcpMonitorShellCommand = runTcpMonitorShellCommand(readString31, readString32);
+                    String runTcpMonitorShellCommand =
+                            runTcpMonitorShellCommand(readString31, readString32);
                     parcel2.writeNoException();
                     parcel2.writeString(runTcpMonitorShellCommand);
                     return true;
@@ -3650,14 +3720,16 @@ public interface IOemNetd extends IInterface {
                     String readString36 = parcel.readString();
                     int readInt66 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    addPortFwdRules(readString33, readString34, readString35, readString36, readInt66);
+                    addPortFwdRules(
+                            readString33, readString34, readString35, readString36, readInt66);
                     return true;
                 case 96:
                     int readInt67 = parcel.readInt();
                     String readString37 = parcel.readString();
                     String readString38 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    String runVpnRulesCommand = runVpnRulesCommand(readInt67, readString37, readString38);
+                    String runVpnRulesCommand =
+                            runVpnRulesCommand(readInt67, readString37, readString38);
                     parcel2.writeNoException();
                     parcel2.writeString(runVpnRulesCommand);
                     return true;
@@ -3689,7 +3761,8 @@ public interface IOemNetd extends IInterface {
                     String readString46 = parcel.readString();
                     int readInt69 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    networkAddLegacyRoute(readInt68, readString44, readString45, readString46, readInt69);
+                    networkAddLegacyRoute(
+                            readInt68, readString44, readString45, readString46, readInt69);
                     parcel2.writeNoException();
                     return true;
                 case 101:
@@ -3699,7 +3772,8 @@ public interface IOemNetd extends IInterface {
                     String readString49 = parcel.readString();
                     int readInt71 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    networkRemoveLegacyRoute(readInt70, readString47, readString48, readString49, readInt71);
+                    networkRemoveLegacyRoute(
+                            readInt70, readString47, readString48, readString49, readInt71);
                     parcel2.writeNoException();
                     return true;
                 case 102:
@@ -3811,7 +3885,8 @@ public interface IOemNetd extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 123:
-                    ICloEventObserver asInterface2 = ICloEventObserver.Stub.asInterface(parcel.readStrongBinder());
+                    ICloEventObserver asInterface2 =
+                            ICloEventObserver.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
                     registerCloEventListener(asInterface2);
                     parcel2.writeNoException();
@@ -3863,7 +3938,8 @@ public interface IOemNetd extends IInterface {
                     int readInt79 = parcel.readInt();
                     String readString71 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addMptcpSocksRule(readString68, readString69, readString70, readInt79, readString71);
+                    addMptcpSocksRule(
+                            readString68, readString69, readString70, readInt79, readString71);
                     parcel2.writeNoException();
                     return true;
                 case 132:
@@ -3873,7 +3949,8 @@ public interface IOemNetd extends IInterface {
                     int readInt80 = parcel.readInt();
                     String readString75 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeMptcpSocksRule(readString72, readString73, readString74, readInt80, readString75);
+                    removeMptcpSocksRule(
+                            readString72, readString73, readString74, readInt80, readString75);
                     parcel2.writeNoException();
                     return true;
                 case 133:
@@ -3910,7 +3987,13 @@ public interface IOemNetd extends IInterface {
                     int readInt82 = parcel.readInt();
                     String readString85 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addMptcpUidSocksRule(readString82, readString83, readString84, readInt81, readInt82, readString85);
+                    addMptcpUidSocksRule(
+                            readString82,
+                            readString83,
+                            readString84,
+                            readInt81,
+                            readInt82,
+                            readString85);
                     parcel2.writeNoException();
                     return true;
                 case 138:
@@ -3921,7 +4004,13 @@ public interface IOemNetd extends IInterface {
                     int readInt84 = parcel.readInt();
                     String readString89 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeMptcpUidSocksRule(readString86, readString87, readString88, readInt83, readInt84, readString89);
+                    removeMptcpUidSocksRule(
+                            readString86,
+                            readString87,
+                            readString88,
+                            readInt83,
+                            readInt84,
+                            readString89);
                     parcel2.writeNoException();
                     return true;
                 case 139:
@@ -3963,7 +4052,8 @@ public interface IOemNetd extends IInterface {
                     int readInt87 = parcel.readInt();
                     String readString103 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    addMptcpSocksSkipRuleProto(readString100, readString101, readString102, readInt87, readString103);
+                    addMptcpSocksSkipRuleProto(
+                            readString100, readString101, readString102, readInt87, readString103);
                     parcel2.writeNoException();
                     return true;
                 case 144:
@@ -3973,7 +4063,8 @@ public interface IOemNetd extends IInterface {
                     int readInt88 = parcel.readInt();
                     String readString107 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    removeMptcpSocksSkipRuleProto(readString104, readString105, readString106, readInt88, readString107);
+                    removeMptcpSocksSkipRuleProto(
+                            readString104, readString105, readString106, readInt88, readString107);
                     parcel2.writeNoException();
                     return true;
                 case 145:
@@ -4022,17 +4113,20 @@ public interface IOemNetd extends IInterface {
                     setMptcpPrivateIpRoute(readBoolean25, readString117, readInt92);
                     parcel2.writeNoException();
                     return true;
-                case FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__BIND_CROSS_PROFILE_SERVICE /* 151 */:
+                case FrameworkStatsLog
+                        .DEVICE_POLICY_EVENT__EVENT_ID__BIND_CROSS_PROFILE_SERVICE /* 151 */:
                     boolean readBoolean26 = parcel.readBoolean();
                     String readString118 = parcel.readString();
                     String readString119 = parcel.readString();
                     int readInt93 = parcel.readInt();
                     int readInt94 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    setMptcpDestBaseMarkRule(readBoolean26, readString118, readString119, readInt93, readInt94);
+                    setMptcpDestBaseMarkRule(
+                            readBoolean26, readString118, readString119, readInt93, readInt94);
                     parcel2.writeNoException();
                     return true;
-                case FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_DPC_SETUP_STARTED /* 152 */:
+                case FrameworkStatsLog
+                        .DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_DPC_SETUP_STARTED /* 152 */:
                     String readString120 = parcel.readString();
                     String readString121 = parcel.readString();
                     String readString122 = parcel.readString();
@@ -4040,7 +4134,8 @@ public interface IOemNetd extends IInterface {
                     addMptcpSourceRoute(readString120, readString121, readString122);
                     parcel2.writeNoException();
                     return true;
-                case FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_DPC_SETUP_COMPLETED /* 153 */:
+                case FrameworkStatsLog
+                        .DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_DPC_SETUP_COMPLETED /* 153 */:
                     String readString123 = parcel.readString();
                     String readString124 = parcel.readString();
                     String readString125 = parcel.readString();
@@ -4048,14 +4143,16 @@ public interface IOemNetd extends IInterface {
                     delMptcpSourceRoute(readString123, readString124, readString125);
                     parcel2.writeNoException();
                     return true;
-                case FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_ORGANIZATION_OWNED_MANAGED_PROFILE /* 154 */:
+                case FrameworkStatsLog
+                        .DEVICE_POLICY_EVENT__EVENT_ID__PROVISIONING_ORGANIZATION_OWNED_MANAGED_PROFILE /* 154 */:
                     boolean readBoolean27 = parcel.readBoolean();
                     String readString126 = parcel.readString();
                     int readInt95 = parcel.readInt();
                     String readString127 = parcel.readString();
                     String readString128 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    setMptcpUIDRoute(readBoolean27, readString126, readInt95, readString127, readString128);
+                    setMptcpUIDRoute(
+                            readBoolean27, readString126, readInt95, readString127, readString128);
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -4070,7 +4167,8 @@ public interface IOemNetd extends IInterface {
 
     int addApeRule(boolean z, String str, int i) throws RemoteException;
 
-    int addIpToPrioList(List list, List list2, List list3, List list4, List list5) throws RemoteException;
+    int addIpToPrioList(List list, List list2, List list3, List list4, List list5)
+            throws RemoteException;
 
     int addMnxbRule(boolean z, String str, int i) throws RemoteException;
 
@@ -4080,19 +4178,23 @@ public interface IOemNetd extends IInterface {
 
     void addMptcpLinkIface(String str) throws RemoteException;
 
-    void addMptcpSocksRule(String str, String str2, String str3, int i, String str4) throws RemoteException;
+    void addMptcpSocksRule(String str, String str2, String str3, int i, String str4)
+            throws RemoteException;
 
     void addMptcpSocksSkipRule(String str, String str2, String str3) throws RemoteException;
 
-    void addMptcpSocksSkipRuleProto(String str, String str2, String str3, int i, String str4) throws RemoteException;
+    void addMptcpSocksSkipRuleProto(String str, String str2, String str3, int i, String str4)
+            throws RemoteException;
 
     void addMptcpSourcePortAcceptRule(String str, String str2, int i) throws RemoteException;
 
     void addMptcpSourceRoute(String str, String str2, String str3) throws RemoteException;
 
-    void addMptcpUidSocksRule(String str, String str2, String str3, int i, int i2, String str4) throws RemoteException;
+    void addMptcpUidSocksRule(String str, String str2, String str3, int i, int i2, String str4)
+            throws RemoteException;
 
-    void addPortFwdRules(String str, String str2, String str3, String str4, int i) throws RemoteException;
+    void addPortFwdRules(String str, String str2, String str3, String str4, int i)
+            throws RemoteException;
 
     void addTosPolicy(int i, int i2) throws RemoteException;
 
@@ -4120,7 +4222,8 @@ public interface IOemNetd extends IInterface {
 
     void deactivateCloGro() throws RemoteException;
 
-    int delIpToPrioList(List list, List list2, List list3, List list4, List list5) throws RemoteException;
+    int delIpToPrioList(List list, List list2, List list3, List list4, List list5)
+            throws RemoteException;
 
     void delMptcpIpAcceptRule(String str, String str2, String str3) throws RemoteException;
 
@@ -4192,25 +4295,31 @@ public interface IOemNetd extends IInterface {
 
     int isMBBPathsPresent() throws RemoteException;
 
-    void knoxVpnBlockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException;
+    void knoxVpnBlockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr)
+            throws RemoteException;
 
     void knoxVpnBlockUserWideDnsQuery(boolean z, int i) throws RemoteException;
 
     void knoxVpnDestroyBlockedKnoxNetwork() throws RemoteException;
 
-    void knoxVpnExemptDnsQueryForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException;
+    void knoxVpnExemptDnsQueryForUid(int i, UidRangeParcel[] uidRangeParcelArr)
+            throws RemoteException;
 
-    void knoxVpnExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException;
+    void knoxVpnExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr)
+            throws RemoteException;
 
     void knoxVpnInsertUidForDnsAuthorization(int[] iArr) throws RemoteException;
 
-    void knoxVpnRemoveExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException;
+    void knoxVpnRemoveExemptUidFromKnoxVpn(int i, UidRangeParcel[] uidRangeParcelArr)
+            throws RemoteException;
 
-    void knoxVpnRemoveExemptedDnsQueryForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException;
+    void knoxVpnRemoveExemptedDnsQueryForUid(int i, UidRangeParcel[] uidRangeParcelArr)
+            throws RemoteException;
 
     void knoxVpnRemoveUidFromDnsAuthorization() throws RemoteException;
 
-    void knoxVpnUnblockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException;
+    void knoxVpnUnblockDnsQueriesForUid(int i, UidRangeParcel[] uidRangeParcelArr)
+            throws RemoteException;
 
     long[] l4StatsGet() throws RemoteException;
 
@@ -4220,11 +4329,13 @@ public interface IOemNetd extends IInterface {
 
     void modifyEpdg(boolean z, String str, String str2, boolean z2) throws RemoteException;
 
-    void networkAddLegacyRoute(int i, String str, String str2, String str3, int i2) throws RemoteException;
+    void networkAddLegacyRoute(int i, String str, String str2, String str3, int i2)
+            throws RemoteException;
 
     void networkAddUidRanges(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException;
 
-    void networkRemoveLegacyRoute(int i, String str, String str2, String str3, int i2) throws RemoteException;
+    void networkRemoveLegacyRoute(int i, String str, String str2, String str3, int i2)
+            throws RemoteException;
 
     void networkRemoveUidRanges(int i, UidRangeParcel[] uidRangeParcelArr) throws RemoteException;
 
@@ -4244,13 +4355,18 @@ public interface IOemNetd extends IInterface {
 
     void registerCloEventListener(ICloEventObserver iCloEventObserver) throws RemoteException;
 
-    void registerDomainFilterEventListener(IDomainFilterEventListener iDomainFilterEventListener) throws RemoteException;
+    void registerDomainFilterEventListener(IDomainFilterEventListener iDomainFilterEventListener)
+            throws RemoteException;
 
-    void registerNetdTetherEventListener(INetdTetherEventListener iNetdTetherEventListener) throws RemoteException;
+    void registerNetdTetherEventListener(INetdTetherEventListener iNetdTetherEventListener)
+            throws RemoteException;
 
-    void registerOemUnsolicitedEventListener(IOemNetdUnsolicitedEventListener iOemNetdUnsolicitedEventListener) throws RemoteException;
+    void registerOemUnsolicitedEventListener(
+            IOemNetdUnsolicitedEventListener iOemNetdUnsolicitedEventListener)
+            throws RemoteException;
 
-    void removeExemptUidFromNwFilterRange(UidRangeParcel[] uidRangeParcelArr) throws RemoteException;
+    void removeExemptUidFromNwFilterRange(UidRangeParcel[] uidRangeParcelArr)
+            throws RemoteException;
 
     void removeKnoxNwFilterProxyApp(int i) throws RemoteException;
 
@@ -4258,13 +4374,16 @@ public interface IOemNetd extends IInterface {
 
     void removeMptcpLinkIface(String str) throws RemoteException;
 
-    void removeMptcpSocksRule(String str, String str2, String str3, int i, String str4) throws RemoteException;
+    void removeMptcpSocksRule(String str, String str2, String str3, int i, String str4)
+            throws RemoteException;
 
     void removeMptcpSocksSkipRule(String str, String str2, String str3) throws RemoteException;
 
-    void removeMptcpSocksSkipRuleProto(String str, String str2, String str3, int i, String str4) throws RemoteException;
+    void removeMptcpSocksSkipRuleProto(String str, String str2, String str3, int i, String str4)
+            throws RemoteException;
 
-    void removeMptcpUidSocksRule(String str, String str2, String str3, int i, int i2, String str4) throws RemoteException;
+    void removeMptcpUidSocksRule(String str, String str2, String str3, int i, int i2, String str4)
+            throws RemoteException;
 
     void removeTosPolicy(int i) throws RemoteException;
 
@@ -4310,13 +4429,15 @@ public interface IOemNetd extends IInterface {
 
     void setKnoxVpn(int i, boolean z) throws RemoteException;
 
-    void setMptcpDestBaseMarkRule(boolean z, String str, String str2, int i, int i2) throws RemoteException;
+    void setMptcpDestBaseMarkRule(boolean z, String str, String str2, int i, int i2)
+            throws RemoteException;
 
     void setMptcpPrivateIpRoute(boolean z, String str, int i) throws RemoteException;
 
     void setMptcpTcpBufferSize(String str, String str2) throws RemoteException;
 
-    void setMptcpUIDRoute(boolean z, String str, int i, String str2, String str3) throws RemoteException;
+    void setMptcpUIDRoute(boolean z, String str, int i, String str2, String str3)
+            throws RemoteException;
 
     void setMtuValueMptcp(String str, int i) throws RemoteException;
 

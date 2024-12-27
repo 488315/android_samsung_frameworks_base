@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class NtnSignalStrength implements Parcelable {
-    public static final Parcelable.Creator<NtnSignalStrength> CREATOR = new Parcelable.Creator<NtnSignalStrength>() { // from class: android.telephony.satellite.stub.NtnSignalStrength.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NtnSignalStrength createFromParcel(Parcel _aidl_source) {
-            NtnSignalStrength _aidl_out = new NtnSignalStrength();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<NtnSignalStrength> CREATOR =
+            new Parcelable.Creator<
+                    NtnSignalStrength>() { // from class:
+                                           // android.telephony.satellite.stub.NtnSignalStrength.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NtnSignalStrength createFromParcel(Parcel _aidl_source) {
+                    NtnSignalStrength _aidl_out = new NtnSignalStrength();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NtnSignalStrength[] newArray(int _aidl_size) {
-            return new NtnSignalStrength[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NtnSignalStrength[] newArray(int _aidl_size) {
+                    return new NtnSignalStrength[_aidl_size];
+                }
+            };
     public int signalStrengthLevel;
 
     @Override // android.os.Parcelable

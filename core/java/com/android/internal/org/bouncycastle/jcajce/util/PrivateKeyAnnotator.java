@@ -11,8 +11,10 @@ public class PrivateKeyAnnotator {
         return new AnnotatedPrivateKey(privKey, label);
     }
 
-    public static AnnotatedPrivateKey annotate(PrivateKey privKey, Map<String, Object> annotations) {
+    public static AnnotatedPrivateKey annotate(
+            PrivateKey privKey, Map<String, Object> annotations) {
         Map savedAnnotations = new HashMap(annotations);
-        return new AnnotatedPrivateKey(privKey, (Map<String, Object>) Collections.unmodifiableMap(savedAnnotations));
+        return new AnnotatedPrivateKey(
+                privKey, (Map<String, Object>) Collections.unmodifiableMap(savedAnnotations));
     }
 }

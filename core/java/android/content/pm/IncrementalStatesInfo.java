@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class IncrementalStatesInfo implements Parcelable {
-    public static final Parcelable.Creator<IncrementalStatesInfo> CREATOR = new Parcelable.Creator<IncrementalStatesInfo>() { // from class: android.content.pm.IncrementalStatesInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IncrementalStatesInfo createFromParcel(Parcel source) {
-            return new IncrementalStatesInfo(source);
-        }
+    public static final Parcelable.Creator<IncrementalStatesInfo> CREATOR =
+            new Parcelable.Creator<IncrementalStatesInfo>() { // from class:
+                // android.content.pm.IncrementalStatesInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IncrementalStatesInfo createFromParcel(Parcel source) {
+                    return new IncrementalStatesInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IncrementalStatesInfo[] newArray(int size) {
-            return new IncrementalStatesInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IncrementalStatesInfo[] newArray(int size) {
+                    return new IncrementalStatesInfo[size];
+                }
+            };
     private final boolean mIsLoading;
     private long mLoadingCompletedTime;
     private final float mProgress;

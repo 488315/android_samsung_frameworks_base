@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.internal.R;
-import com.android.internal.widget.AccountViewAdapter;
 
 /* loaded from: classes5.dex */
 public class AccountItemView extends LinearLayout {
@@ -25,7 +25,8 @@ public class AccountItemView extends LinearLayout {
 
     public AccountItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflator =
+                (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflator.inflate(R.layout.simple_account_item, (ViewGroup) null);
         addView(view);
         initViewItem(view);

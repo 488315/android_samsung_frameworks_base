@@ -3,23 +3,26 @@ package android.window;
 import android.content.res.Configuration;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public class WindowContextInfo implements Parcelable {
-    public static final Parcelable.Creator<WindowContextInfo> CREATOR = new Parcelable.Creator<WindowContextInfo>() { // from class: android.window.WindowContextInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContextInfo createFromParcel(Parcel in) {
-            return new WindowContextInfo(in);
-        }
+    public static final Parcelable.Creator<WindowContextInfo> CREATOR =
+            new Parcelable.Creator<
+                    WindowContextInfo>() { // from class: android.window.WindowContextInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContextInfo createFromParcel(Parcel in) {
+                    return new WindowContextInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContextInfo[] newArray(int size) {
-            return new WindowContextInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContextInfo[] newArray(int size) {
+                    return new WindowContextInfo[size];
+                }
+            };
     private final Configuration mConfiguration;
     private final int mDisplayId;
 
@@ -60,7 +63,8 @@ public class WindowContextInfo implements Parcelable {
             return false;
         }
         WindowContextInfo other = (WindowContextInfo) o;
-        if (Objects.equals(this.mConfiguration, other.mConfiguration) && this.mDisplayId == other.mDisplayId) {
+        if (Objects.equals(this.mConfiguration, other.mConfiguration)
+                && this.mDisplayId == other.mDisplayId) {
             return true;
         }
         return false;
@@ -72,6 +76,10 @@ public class WindowContextInfo implements Parcelable {
     }
 
     public String toString() {
-        return "WindowContextInfo{config=" + this.mConfiguration + ", displayId=" + this.mDisplayId + "}";
+        return "WindowContextInfo{config="
+                + this.mConfiguration
+                + ", displayId="
+                + this.mDisplayId
+                + "}";
     }
 }

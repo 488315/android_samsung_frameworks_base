@@ -7,6 +7,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.CertificateList;
 import com.android.internal.org.bouncycastle.asn1.x509.Extension;
 import com.android.internal.org.bouncycastle.asn1.x509.IssuingDistributionPoint;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
+
 import java.security.cert.CRLException;
 
 /* loaded from: classes5.dex */
@@ -33,7 +34,9 @@ class X509CRLObject extends X509CRLImpl {
                 if (this.hashValue != otherBC.hashValue) {
                     return false;
                 }
-            } else if ((this.internalCRLValue == null || otherBC.internalCRLValue == null) && (signature = this.c.getSignature()) != null && !signature.equals(otherBC.c.getSignature())) {
+            } else if ((this.internalCRLValue == null || otherBC.internalCRLValue == null)
+                    && (signature = this.c.getSignature()) != null
+                    && !signature.equals(otherBC.c.getSignature())) {
                 return false;
             }
         }
@@ -62,7 +65,14 @@ class X509CRLObject extends X509CRLImpl {
             } catch (CRLException e) {
                 encoding = null;
             }
-            X509CRLInternal temp = new X509CRLInternal(this.bcHelper, this.c, this.sigAlgName, this.sigAlgParams, this.isIndirect, encoding);
+            X509CRLInternal temp =
+                    new X509CRLInternal(
+                            this.bcHelper,
+                            this.c,
+                            this.sigAlgName,
+                            this.sigAlgParams,
+                            this.isIndirect,
+                            encoding);
             synchronized (this.cacheLock) {
                 if (this.internalCRLValue == null) {
                     this.internalCRLValue = temp;

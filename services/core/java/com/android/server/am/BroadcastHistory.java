@@ -1,6 +1,7 @@
 package com.android.server.am;
 
 import android.content.Intent;
+
 import java.io.PrintWriter;
 import java.lang.ref.SoftReference;
 import java.text.SimpleDateFormat;
@@ -32,7 +33,8 @@ public final class BroadcastHistory {
         MAX_ABORTED_BROADCAST_HISTORY = BroadcastConstants.MAX_HISTORY_ABORTED_BROADCAST;
     }
 
-    public BroadcastHistory(ActivityManagerService activityManagerService, BroadcastConstants broadcastConstants) {
+    public BroadcastHistory(
+            ActivityManagerService activityManagerService, BroadcastConstants broadcastConstants) {
         int i = broadcastConstants.MAX_HISTORY_COMPLETE_SIZE;
         this.MAX_BROADCAST_HISTORY = i;
         int i2 = broadcastConstants.MAX_HISTORY_SUMMARY_SIZE;
@@ -47,7 +49,11 @@ public final class BroadcastHistory {
         this.mService = activityManagerService;
     }
 
-    public static void dumpBroadcastList(PrintWriter printWriter, SimpleDateFormat simpleDateFormat, ArrayList arrayList, String str) {
+    public static void dumpBroadcastList(
+            PrintWriter printWriter,
+            SimpleDateFormat simpleDateFormat,
+            ArrayList arrayList,
+            String str) {
         printWriter.print("  ");
         printWriter.print(str);
         printWriter.println(" broadcasts:");

@@ -3,26 +3,32 @@ package com.android.internal.os;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
+
 import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes5.dex */
 public final class LongMultiStateCounter implements Parcelable {
-    public static final Parcelable.Creator<LongMultiStateCounter> CREATOR = new Parcelable.Creator<LongMultiStateCounter>() { // from class: com.android.internal.os.LongMultiStateCounter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LongMultiStateCounter createFromParcel(Parcel in) {
-            return new LongMultiStateCounter(in);
-        }
+    public static final Parcelable.Creator<LongMultiStateCounter> CREATOR =
+            new Parcelable.Creator<
+                    LongMultiStateCounter>() { // from class:
+                                               // com.android.internal.os.LongMultiStateCounter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LongMultiStateCounter createFromParcel(Parcel in) {
+                    return new LongMultiStateCounter(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LongMultiStateCounter[] newArray(int size) {
-            return new LongMultiStateCounter[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LongMultiStateCounter[] newArray(int size) {
+                    return new LongMultiStateCounter[size];
+                }
+            };
     private static NativeAllocationRegistry sRegistry;
     final long mNativeObject;
     private final int mStateCount;
@@ -83,15 +89,17 @@ public final class LongMultiStateCounter implements Parcelable {
         if (sRegistry == null) {
             synchronized (LongMultiStateCounter.class) {
                 if (sRegistry == null) {
-                    sRegistry = NativeAllocationRegistry.createMalloced(LongMultiStateCounter.class.getClassLoader(), native_getReleaseFunc());
+                    sRegistry =
+                            NativeAllocationRegistry.createMalloced(
+                                    LongMultiStateCounter.class.getClassLoader(),
+                                    native_getReleaseFunc());
                 }
             }
         }
         sRegistry.registerNativeAllocation(this, this.mNativeObject);
     }
 
-    private void registerNativeAllocation$ravenwood() {
-    }
+    private void registerNativeAllocation$ravenwood() {}
 
     public int getStateCount() {
         return this.mStateCount;
@@ -103,7 +111,12 @@ public final class LongMultiStateCounter implements Parcelable {
 
     public void setState(int state, long timestampMs) {
         if (state < 0 || state >= this.mStateCount) {
-            throw new IllegalArgumentException("State: " + state + ", outside the range: [0-" + (this.mStateCount - 1) + NavigationBarInflaterView.SIZE_MOD_END);
+            throw new IllegalArgumentException(
+                    "State: "
+                            + state
+                            + ", outside the range: [0-"
+                            + (this.mStateCount - 1)
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         }
         native_setState(this.mNativeObject, state, timestampMs);
     }
@@ -126,7 +139,12 @@ public final class LongMultiStateCounter implements Parcelable {
 
     public long getCount(int state) {
         if (state < 0 || state >= this.mStateCount) {
-            throw new IllegalArgumentException("State: " + state + ", outside the range: [0-" + this.mStateCount + NavigationBarInflaterView.SIZE_MOD_END);
+            throw new IllegalArgumentException(
+                    "State: "
+                            + state
+                            + ", outside the range: [0-"
+                            + this.mStateCount
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         }
         return native_getCount(this.mNativeObject, state);
     }

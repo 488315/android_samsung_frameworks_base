@@ -1,6 +1,7 @@
 package com.android.framework.protobuf;
 
 import android.media.tv.TvContract;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.ref.SoftReference;
@@ -14,11 +15,12 @@ final class ByteBufferWriter {
     private static final int MAX_CACHED_BUFFER_SIZE = 16384;
     private static final int MIN_CACHED_BUFFER_SIZE = 1024;
     private static final ThreadLocal<SoftReference<byte[]>> BUFFER = new ThreadLocal<>();
-    private static final Class<?> FILE_OUTPUT_STREAM_CLASS = safeGetClass("java.io.FileOutputStream");
-    private static final long CHANNEL_FIELD_OFFSET = getChannelFieldOffset(FILE_OUTPUT_STREAM_CLASS);
+    private static final Class<?> FILE_OUTPUT_STREAM_CLASS =
+            safeGetClass("java.io.FileOutputStream");
+    private static final long CHANNEL_FIELD_OFFSET =
+            getChannelFieldOffset(FILE_OUTPUT_STREAM_CLASS);
 
-    private ByteBufferWriter() {
-    }
+    private ByteBufferWriter() {}
 
     static void clearCachedBuffer() {
         BUFFER.set(null);
@@ -28,7 +30,10 @@ final class ByteBufferWriter {
         int initialPos = buffer.position();
         try {
             if (buffer.hasArray()) {
-                output.write(buffer.array(), buffer.arrayOffset() + buffer.position(), buffer.remaining());
+                output.write(
+                        buffer.array(),
+                        buffer.arrayOffset() + buffer.position(),
+                        buffer.remaining());
             } else if (!writeToChannel(buffer, output)) {
                 byte[] array = getOrCreateBuffer(buffer.remaining());
                 while (buffer.hasRemaining()) {
@@ -55,7 +60,8 @@ final class ByteBufferWriter {
     }
 
     private static boolean needToReallocate(int requestedSize, int bufferLength) {
-        return bufferLength < requestedSize && ((float) bufferLength) < ((float) requestedSize) * 0.5f;
+        return bufferLength < requestedSize
+                && ((float) bufferLength) < ((float) requestedSize) * 0.5f;
     }
 
     private static byte[] getBuffer() {
@@ -70,7 +76,8 @@ final class ByteBufferWriter {
         BUFFER.set(new SoftReference<>(value));
     }
 
-    private static boolean writeToChannel(ByteBuffer buffer, OutputStream output) throws IOException {
+    private static boolean writeToChannel(ByteBuffer buffer, OutputStream output)
+            throws IOException {
         if (CHANNEL_FIELD_OFFSET >= 0 && FILE_OUTPUT_STREAM_CLASS.isInstance(output)) {
             WritableByteChannel channel = null;
             try {

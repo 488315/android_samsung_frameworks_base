@@ -3,34 +3,38 @@ package android.os.vibrator.persistence;
 import android.os.VibrationEffect;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.vibrator.persistence.VibrationEffectXmlParser;
 import com.android.internal.vibrator.persistence.XmlConstants;
 import com.android.internal.vibrator.persistence.XmlParserException;
 import com.android.internal.vibrator.persistence.XmlReader;
 import com.android.internal.vibrator.persistence.XmlValidator;
 import com.android.modules.utils.TypedXmlPullParser;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes3.dex */
 public final class VibrationXmlParser {
-    public static final String APPLICATION_VIBRATION_XML_MIME_TYPE = "application/vnd.android.haptics.vibration+xml";
+    public static final String APPLICATION_VIBRATION_XML_MIME_TYPE =
+            "application/vnd.android.haptics.vibration+xml";
     public static final int FLAG_ALLOW_HIDDEN_APIS = 1;
     private static final String TAG = "VibrationXmlParser";
 
     /* JADX INFO: Access modifiers changed from: private */
     interface ElementParser<T> {
-        T parse(TypedXmlPullParser typedXmlPullParser, int i) throws IOException, XmlParserException;
+        T parse(TypedXmlPullParser typedXmlPullParser, int i)
+                throws IOException, XmlParserException;
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Flags {
-    }
+    public @interface Flags {}
 
     public static boolean isSupportedMimeType(String mimeType) {
         return APPLICATION_VIBRATION_XML_MIME_TYPE.equals(mimeType);
@@ -40,16 +44,25 @@ public final class VibrationXmlParser {
         return parseVibrationEffect(reader, 0);
     }
 
-    public static VibrationEffect parseVibrationEffect(Reader reader, int flags) throws IOException {
+    public static VibrationEffect parseVibrationEffect(Reader reader, int flags)
+            throws IOException {
         try {
-            return (VibrationEffect) parseDocumentInternal(reader, flags, new ElementParser() { // from class: android.os.vibrator.persistence.VibrationXmlParser$$ExternalSyntheticLambda1
-                @Override // android.os.vibrator.persistence.VibrationXmlParser.ElementParser
-                public final Object parse(TypedXmlPullParser typedXmlPullParser, int i) {
-                    VibrationEffect parseVibrationEffectInternal;
-                    parseVibrationEffectInternal = VibrationXmlParser.parseVibrationEffectInternal(typedXmlPullParser, i);
-                    return parseVibrationEffectInternal;
-                }
-            });
+            return (VibrationEffect)
+                    parseDocumentInternal(
+                            reader,
+                            flags,
+                            new ElementParser() { // from class:
+                                                  // android.os.vibrator.persistence.VibrationXmlParser$$ExternalSyntheticLambda1
+                                @Override // android.os.vibrator.persistence.VibrationXmlParser.ElementParser
+                                public final Object parse(
+                                        TypedXmlPullParser typedXmlPullParser, int i) {
+                                    VibrationEffect parseVibrationEffectInternal;
+                                    parseVibrationEffectInternal =
+                                            VibrationXmlParser.parseVibrationEffectInternal(
+                                                    typedXmlPullParser, i);
+                                    return parseVibrationEffectInternal;
+                                }
+                            });
         } catch (XmlParserException | XmlPullParserException e) {
             Slog.w(TAG, "Error parsing vibration XML", e);
             return null;
@@ -62,21 +75,30 @@ public final class VibrationXmlParser {
 
     public static ParsedVibration parseDocument(Reader reader, int flags) throws IOException {
         try {
-            return (ParsedVibration) parseDocumentInternal(reader, flags, new ElementParser() { // from class: android.os.vibrator.persistence.VibrationXmlParser$$ExternalSyntheticLambda0
-                @Override // android.os.vibrator.persistence.VibrationXmlParser.ElementParser
-                public final Object parse(TypedXmlPullParser typedXmlPullParser, int i) {
-                    ParsedVibration parseElementInternal;
-                    parseElementInternal = VibrationXmlParser.parseElementInternal(typedXmlPullParser, i);
-                    return parseElementInternal;
-                }
-            });
+            return (ParsedVibration)
+                    parseDocumentInternal(
+                            reader,
+                            flags,
+                            new ElementParser() { // from class:
+                                                  // android.os.vibrator.persistence.VibrationXmlParser$$ExternalSyntheticLambda0
+                                @Override // android.os.vibrator.persistence.VibrationXmlParser.ElementParser
+                                public final Object parse(
+                                        TypedXmlPullParser typedXmlPullParser, int i) {
+                                    ParsedVibration parseElementInternal;
+                                    parseElementInternal =
+                                            VibrationXmlParser.parseElementInternal(
+                                                    typedXmlPullParser, i);
+                                    return parseElementInternal;
+                                }
+                            });
         } catch (XmlParserException | XmlPullParserException e) {
             Slog.w(TAG, "Error parsing vibration/vibration-select XML", e);
             return null;
         }
     }
 
-    public static ParsedVibration parseElement(TypedXmlPullParser parser, int flags) throws IOException, VibrationXmlParserException {
+    public static ParsedVibration parseElement(TypedXmlPullParser parser, int flags)
+            throws IOException, VibrationXmlParserException {
         try {
             return parseElementInternal(parser, flags);
         } catch (XmlParserException e) {
@@ -96,7 +118,8 @@ public final class VibrationXmlParser {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    public static ParsedVibration parseElementInternal(TypedXmlPullParser parser, int flags) throws IOException, XmlParserException {
+    public static ParsedVibration parseElementInternal(TypedXmlPullParser parser, int flags)
+            throws IOException, XmlParserException {
         char c;
         XmlValidator.checkStartTag(parser);
         String tagName = parser.getName();
@@ -125,11 +148,13 @@ public final class VibrationXmlParser {
             case 1:
                 return parseVibrationSelectInternal(parser, flags);
             default:
-                throw new XmlParserException("Unexpected tag name when parsing element: " + tagName);
+                throw new XmlParserException(
+                        "Unexpected tag name when parsing element: " + tagName);
         }
     }
 
-    private static ParsedVibration parseVibrationSelectInternal(TypedXmlPullParser parser, int flags) throws IOException, XmlParserException {
+    private static ParsedVibration parseVibrationSelectInternal(
+            TypedXmlPullParser parser, int flags) throws IOException, XmlParserException {
         XmlValidator.checkStartTag(parser, XmlConstants.TAG_VIBRATION_SELECT);
         XmlValidator.checkTagHasNoUnexpectedAttributes(parser, new String[0]);
         int rootDepth = parser.getDepth();
@@ -141,7 +166,8 @@ public final class VibrationXmlParser {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static VibrationEffect parseVibrationEffectInternal(TypedXmlPullParser parser, int flags) throws IOException, XmlParserException {
+    public static VibrationEffect parseVibrationEffectInternal(TypedXmlPullParser parser, int flags)
+            throws IOException, XmlParserException {
         int parserFlags = 0;
         if ((flags & 1) != 0) {
             parserFlags = 0 | 1;
@@ -149,7 +175,9 @@ public final class VibrationXmlParser {
         return VibrationEffectXmlParser.parseTag(parser, parserFlags).deserialize();
     }
 
-    private static <T> T parseDocumentInternal(Reader reader, int flags, ElementParser<T> parseLogic) throws IOException, XmlParserException, XmlPullParserException {
+    private static <T> T parseDocumentInternal(
+            Reader reader, int flags, ElementParser<T> parseLogic)
+            throws IOException, XmlParserException, XmlPullParserException {
         TypedXmlPullParser parser = Xml.newFastPullParser();
         parser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
         parser.setInput(reader);
@@ -159,6 +187,5 @@ public final class VibrationXmlParser {
         return result;
     }
 
-    private VibrationXmlParser() {
-    }
+    private VibrationXmlParser() {}
 }

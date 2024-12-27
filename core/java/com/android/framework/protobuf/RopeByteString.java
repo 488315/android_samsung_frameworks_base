@@ -1,7 +1,7 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.ByteString;
 import com.android.internal.logging.nano.MetricsProto;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InvalidObjectException;
@@ -18,7 +18,55 @@ import java.util.NoSuchElementException;
 
 /* loaded from: classes3.dex */
 final class RopeByteString extends ByteString {
-    static final int[] minLengthByDepth = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, MetricsProto.MetricsEvent.FUELGAUGE_ANOMALY_DETAIL, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229, 832040, 1346269, 2178309, 3524578, 5702887, 9227465, 14930352, 24157817, 39088169, 63245986, 102334155, 165580141, 267914296, 433494437, 701408733, 1134903170, 1836311903, Integer.MAX_VALUE};
+    static final int[] minLengthByDepth = {
+        1,
+        1,
+        2,
+        3,
+        5,
+        8,
+        13,
+        21,
+        34,
+        55,
+        89,
+        144,
+        233,
+        377,
+        610,
+        MetricsProto.MetricsEvent.FUELGAUGE_ANOMALY_DETAIL,
+        1597,
+        2584,
+        4181,
+        6765,
+        10946,
+        17711,
+        28657,
+        46368,
+        75025,
+        121393,
+        196418,
+        317811,
+        514229,
+        832040,
+        1346269,
+        2178309,
+        3524578,
+        5702887,
+        9227465,
+        14930352,
+        24157817,
+        39088169,
+        63245986,
+        102334155,
+        165580141,
+        267914296,
+        433494437,
+        701408733,
+        1134903170,
+        1836311903,
+        Integer.MAX_VALUE
+    };
     private static final long serialVersionUID = 1;
     private final ByteString left;
     private final int leftLength;
@@ -52,7 +100,8 @@ final class RopeByteString extends ByteString {
                 return new RopeByteString(leftRope.left, newRight);
             }
             ByteString newRight2 = leftRope.left;
-            if (newRight2.getTreeDepth() > leftRope.right.getTreeDepth() && leftRope.getTreeDepth() > right.getTreeDepth()) {
+            if (newRight2.getTreeDepth() > leftRope.right.getTreeDepth()
+                    && leftRope.getTreeDepth() > right.getTreeDepth()) {
                 ByteString newRight3 = new RopeByteString(leftRope.right, right);
                 return new RopeByteString(leftRope.left, newRight3);
             }
@@ -106,7 +155,9 @@ final class RopeByteString extends ByteString {
     @Override // com.android.framework.protobuf.ByteString, java.lang.Iterable
     /* renamed from: iterator */
     public Iterator<Byte> iterator2() {
-        return new ByteString.AbstractByteIterator() { // from class: com.android.framework.protobuf.RopeByteString.1
+        return new ByteString
+                .AbstractByteIterator() { // from class:
+                                          // com.android.framework.protobuf.RopeByteString.1
             ByteString.ByteIterator current = nextPiece();
             final PieceIterator pieces;
 
@@ -172,17 +223,20 @@ final class RopeByteString extends ByteString {
     }
 
     @Override // com.android.framework.protobuf.ByteString
-    protected void copyToInternal(byte[] target, int sourceOffset, int targetOffset, int numberToCopy) {
+    protected void copyToInternal(
+            byte[] target, int sourceOffset, int targetOffset, int numberToCopy) {
         if (sourceOffset + numberToCopy <= this.leftLength) {
             this.left.copyToInternal(target, sourceOffset, targetOffset, numberToCopy);
         } else {
             if (sourceOffset >= this.leftLength) {
-                this.right.copyToInternal(target, sourceOffset - this.leftLength, targetOffset, numberToCopy);
+                this.right.copyToInternal(
+                        target, sourceOffset - this.leftLength, targetOffset, numberToCopy);
                 return;
             }
             int leftLength = this.leftLength - sourceOffset;
             this.left.copyToInternal(target, sourceOffset, targetOffset, leftLength);
-            this.right.copyToInternal(target, 0, targetOffset + leftLength, numberToCopy - leftLength);
+            this.right.copyToInternal(
+                    target, 0, targetOffset + leftLength, numberToCopy - leftLength);
         }
     }
 
@@ -351,7 +405,8 @@ final class RopeByteString extends ByteString {
 
     @Override // com.android.framework.protobuf.ByteString
     public CodedInputStream newCodedInput() {
-        return CodedInputStream.newInstance((Iterable<ByteBuffer>) asReadOnlyByteBufferList(), true);
+        return CodedInputStream.newInstance(
+                (Iterable<ByteBuffer>) asReadOnlyByteBufferList(), true);
     }
 
     @Override // com.android.framework.protobuf.ByteString
@@ -388,7 +443,8 @@ final class RopeByteString extends ByteString {
                     doBalance(rbs.right);
                     return;
                 }
-                throw new IllegalArgumentException("Has a new type of ByteString been created? Found " + root.getClass());
+                throw new IllegalArgumentException(
+                        "Has a new type of ByteString been created? Found " + root.getClass());
             }
         }
 
@@ -493,7 +549,8 @@ final class RopeByteString extends ByteString {
     }
 
     private void readObject(ObjectInputStream in) throws IOException {
-        throw new InvalidObjectException("RopeByteStream instances are not to be serialized directly");
+        throw new InvalidObjectException(
+                "RopeByteStream instances are not to be serialized directly");
     }
 
     private class RopeInputStream extends InputStream {

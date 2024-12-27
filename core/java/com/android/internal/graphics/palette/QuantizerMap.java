@@ -1,7 +1,7 @@
 package com.android.internal.graphics.palette;
 
 import android.app.backup.BackupRestoreEventLogger$$ExternalSyntheticLambda0;
-import com.android.internal.graphics.palette.Palette;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +16,16 @@ public final class QuantizerMap implements Quantizer {
     public void quantize(int[] pixels, int colorCount) {
         HashMap<Integer, Integer> colorToCount = new HashMap<>();
         for (int pixel : pixels) {
-            colorToCount.merge(Integer.valueOf(pixel), 1, new BackupRestoreEventLogger$$ExternalSyntheticLambda0());
+            colorToCount.merge(
+                    Integer.valueOf(pixel),
+                    1,
+                    new BackupRestoreEventLogger$$ExternalSyntheticLambda0());
         }
         this.mColorToCount = colorToCount;
         List<Palette.Swatch> swatches = new ArrayList<>();
         for (Map.Entry<Integer, Integer> entry : colorToCount.entrySet()) {
-            swatches.add(new Palette.Swatch(entry.getKey().intValue(), entry.getValue().intValue()));
+            swatches.add(
+                    new Palette.Swatch(entry.getKey().intValue(), entry.getValue().intValue()));
         }
         this.mPalette = Palette.from(swatches);
     }

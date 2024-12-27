@@ -4,14 +4,16 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.drawable.DrawableWrapper;
 import android.util.AttributeSet;
 import android.util.MathUtils;
 import android.util.TypedValue;
+
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class RotateDrawable extends DrawableWrapper {
@@ -23,7 +25,9 @@ public class RotateDrawable extends DrawableWrapper {
     }
 
     @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.RotateDrawable);
         super.inflate(r, parser, attrs, theme);
         updateStateFromTypedArray(a);
@@ -53,7 +57,10 @@ public class RotateDrawable extends DrawableWrapper {
     private void verifyRequiredAttributes(TypedArray a) throws XmlPullParserException {
         if (getDrawable() == null) {
             if (this.mState.mThemeAttrs == null || this.mState.mThemeAttrs[1] == 0) {
-                throw new XmlPullParserException(a.getPositionDescription() + ": <rotate> tag requires a 'drawable' attribute or child tag defining a drawable");
+                throw new XmlPullParserException(
+                        a.getPositionDescription()
+                                + ": <rotate> tag requires a 'drawable' attribute or child tag"
+                                + " defining a drawable");
             }
         }
     }
@@ -207,7 +214,8 @@ public class RotateDrawable extends DrawableWrapper {
             }
         }
 
-        @Override // android.graphics.drawable.DrawableWrapper.DrawableWrapperState, android.graphics.drawable.Drawable.ConstantState
+        @Override // android.graphics.drawable.DrawableWrapper.DrawableWrapperState,
+        // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable(Resources res) {
             return new RotateDrawable(this, res);
         }

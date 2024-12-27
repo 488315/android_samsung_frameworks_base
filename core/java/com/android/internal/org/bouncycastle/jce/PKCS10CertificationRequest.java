@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jce;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encoding;
 import com.android.internal.org.bouncycastle.asn1.ASN1InputStream;
@@ -23,6 +24,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.X509Name;
 import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.IOException;
 import java.security.AlgorithmParameters;
 import java.security.GeneralSecurityException;
@@ -40,6 +42,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Set;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes5.dex */
@@ -109,20 +112,29 @@ public class PKCS10CertificationRequest extends CertificationRequest {
         noParams.add(OIWObjectIdentifiers.dsaWithSHA1);
         noParams.add(NISTObjectIdentifiers.dsa_with_sha224);
         noParams.add(NISTObjectIdentifiers.dsa_with_sha256);
-        AlgorithmIdentifier sha1AlgId = new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);
+        AlgorithmIdentifier sha1AlgId =
+                new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);
         params.put("SHA1WITHRSAANDMGF1", creatPSSParams(sha1AlgId, 20));
-        AlgorithmIdentifier sha224AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha224, DERNull.INSTANCE);
+        AlgorithmIdentifier sha224AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha224, DERNull.INSTANCE);
         params.put("SHA224WITHRSAANDMGF1", creatPSSParams(sha224AlgId, 28));
-        AlgorithmIdentifier sha256AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha256, DERNull.INSTANCE);
+        AlgorithmIdentifier sha256AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha256, DERNull.INSTANCE);
         params.put("SHA256WITHRSAANDMGF1", creatPSSParams(sha256AlgId, 32));
-        AlgorithmIdentifier sha384AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha384, DERNull.INSTANCE);
+        AlgorithmIdentifier sha384AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha384, DERNull.INSTANCE);
         params.put("SHA384WITHRSAANDMGF1", creatPSSParams(sha384AlgId, 48));
-        AlgorithmIdentifier sha512AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha512, DERNull.INSTANCE);
+        AlgorithmIdentifier sha512AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha512, DERNull.INSTANCE);
         params.put("SHA512WITHRSAANDMGF1", creatPSSParams(sha512AlgId, 64));
     }
 
     private static RSASSAPSSparams creatPSSParams(AlgorithmIdentifier hashAlgId, int saltSize) {
-        return new RSASSAPSSparams(hashAlgId, new AlgorithmIdentifier(PKCSObjectIdentifiers.id_mgf1, hashAlgId), new ASN1Integer(saltSize), new ASN1Integer(1L));
+        return new RSASSAPSSparams(
+                hashAlgId,
+                new AlgorithmIdentifier(PKCSObjectIdentifiers.id_mgf1, hashAlgId),
+                new ASN1Integer(saltSize),
+                new ASN1Integer(1L));
     }
 
     private static ASN1Sequence toDERSequence(byte[] bytes) {
@@ -142,8 +154,23 @@ public class PKCS10CertificationRequest extends CertificationRequest {
         super(sequence);
     }
 
-    public PKCS10CertificationRequest(String signatureAlgorithm, X509Name subject, PublicKey key, ASN1Set attributes, PrivateKey signingKey) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException, SignatureException {
-        this(signatureAlgorithm, subject, key, attributes, signingKey, BouncyCastleProvider.PROVIDER_NAME);
+    public PKCS10CertificationRequest(
+            String signatureAlgorithm,
+            X509Name subject,
+            PublicKey key,
+            ASN1Set attributes,
+            PrivateKey signingKey)
+            throws NoSuchAlgorithmException,
+                    NoSuchProviderException,
+                    InvalidKeyException,
+                    SignatureException {
+        this(
+                signatureAlgorithm,
+                subject,
+                key,
+                attributes,
+                signingKey,
+                BouncyCastleProvider.PROVIDER_NAME);
     }
 
     private static X509Name convertName(X500Principal name) {
@@ -154,15 +181,50 @@ public class PKCS10CertificationRequest extends CertificationRequest {
         }
     }
 
-    public PKCS10CertificationRequest(String signatureAlgorithm, X500Principal subject, PublicKey key, ASN1Set attributes, PrivateKey signingKey) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException, SignatureException {
-        this(signatureAlgorithm, convertName(subject), key, attributes, signingKey, BouncyCastleProvider.PROVIDER_NAME);
+    public PKCS10CertificationRequest(
+            String signatureAlgorithm,
+            X500Principal subject,
+            PublicKey key,
+            ASN1Set attributes,
+            PrivateKey signingKey)
+            throws NoSuchAlgorithmException,
+                    NoSuchProviderException,
+                    InvalidKeyException,
+                    SignatureException {
+        this(
+                signatureAlgorithm,
+                convertName(subject),
+                key,
+                attributes,
+                signingKey,
+                BouncyCastleProvider.PROVIDER_NAME);
     }
 
-    public PKCS10CertificationRequest(String signatureAlgorithm, X500Principal subject, PublicKey key, ASN1Set attributes, PrivateKey signingKey, String provider) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException, SignatureException {
+    public PKCS10CertificationRequest(
+            String signatureAlgorithm,
+            X500Principal subject,
+            PublicKey key,
+            ASN1Set attributes,
+            PrivateKey signingKey,
+            String provider)
+            throws NoSuchAlgorithmException,
+                    NoSuchProviderException,
+                    InvalidKeyException,
+                    SignatureException {
         this(signatureAlgorithm, convertName(subject), key, attributes, signingKey, provider);
     }
 
-    public PKCS10CertificationRequest(String signatureAlgorithm, X509Name subject, PublicKey key, ASN1Set attributes, PrivateKey signingKey, String provider) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException, SignatureException {
+    public PKCS10CertificationRequest(
+            String signatureAlgorithm,
+            X509Name subject,
+            PublicKey key,
+            ASN1Set attributes,
+            PrivateKey signingKey,
+            String provider)
+            throws NoSuchAlgorithmException,
+                    NoSuchProviderException,
+                    InvalidKeyException,
+                    SignatureException {
         Signature sig;
         String algorithmName = Strings.toUpperCase(signatureAlgorithm);
         ASN1ObjectIdentifier sigOID = (ASN1ObjectIdentifier) algorithms.get(algorithmName);
@@ -182,13 +244,16 @@ public class PKCS10CertificationRequest extends CertificationRequest {
         if (noParams.contains(sigOID)) {
             this.sigAlgId = new AlgorithmIdentifier(sigOID);
         } else if (params.containsKey(algorithmName)) {
-            this.sigAlgId = new AlgorithmIdentifier(sigOID, (ASN1Encodable) params.get(algorithmName));
+            this.sigAlgId =
+                    new AlgorithmIdentifier(sigOID, (ASN1Encodable) params.get(algorithmName));
         } else {
             this.sigAlgId = new AlgorithmIdentifier(sigOID, DERNull.INSTANCE);
         }
         try {
             ASN1Sequence seq = (ASN1Sequence) ASN1Primitive.fromByteArray(key.getEncoded());
-            this.reqInfo = new CertificationRequestInfo(subject, SubjectPublicKeyInfo.getInstance(seq), attributes);
+            this.reqInfo =
+                    new CertificationRequestInfo(
+                            subject, SubjectPublicKeyInfo.getInstance(seq), attributes);
             if (provider == null) {
                 sig = Signature.getInstance(signatureAlgorithm);
             } else {
@@ -206,20 +271,25 @@ public class PKCS10CertificationRequest extends CertificationRequest {
         }
     }
 
-    public PublicKey getPublicKey() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException {
+    public PublicKey getPublicKey()
+            throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException {
         return getPublicKey(BouncyCastleProvider.PROVIDER_NAME);
     }
 
-    public PublicKey getPublicKey(String provider) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException {
+    public PublicKey getPublicKey(String provider)
+            throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException {
         SubjectPublicKeyInfo subjectPKInfo = this.reqInfo.getSubjectPublicKeyInfo();
         try {
-            X509EncodedKeySpec xspec = new X509EncodedKeySpec(new DERBitString(subjectPKInfo).getOctets());
+            X509EncodedKeySpec xspec =
+                    new X509EncodedKeySpec(new DERBitString(subjectPKInfo).getOctets());
             AlgorithmIdentifier keyAlg = subjectPKInfo.getAlgorithm();
             try {
                 if (provider == null) {
-                    return KeyFactory.getInstance(keyAlg.getAlgorithm().getId()).generatePublic(xspec);
+                    return KeyFactory.getInstance(keyAlg.getAlgorithm().getId())
+                            .generatePublic(xspec);
                 }
-                return KeyFactory.getInstance(keyAlg.getAlgorithm().getId(), provider).generatePublic(xspec);
+                return KeyFactory.getInstance(keyAlg.getAlgorithm().getId(), provider)
+                        .generatePublic(xspec);
             } catch (NoSuchAlgorithmException e) {
                 if (keyAlgorithms.get(keyAlg.getAlgorithm()) == null) {
                     throw e;
@@ -237,15 +307,27 @@ public class PKCS10CertificationRequest extends CertificationRequest {
         }
     }
 
-    public boolean verify() throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException, SignatureException {
+    public boolean verify()
+            throws NoSuchAlgorithmException,
+                    NoSuchProviderException,
+                    InvalidKeyException,
+                    SignatureException {
         return verify(BouncyCastleProvider.PROVIDER_NAME);
     }
 
-    public boolean verify(String provider) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException, SignatureException {
+    public boolean verify(String provider)
+            throws NoSuchAlgorithmException,
+                    NoSuchProviderException,
+                    InvalidKeyException,
+                    SignatureException {
         return verify(getPublicKey(provider), provider);
     }
 
-    public boolean verify(PublicKey pubKey, String provider) throws NoSuchAlgorithmException, NoSuchProviderException, InvalidKeyException, SignatureException {
+    public boolean verify(PublicKey pubKey, String provider)
+            throws NoSuchAlgorithmException,
+                    NoSuchProviderException,
+                    InvalidKeyException,
+                    SignatureException {
         Signature sig;
         Signature sig2;
         try {
@@ -277,7 +359,8 @@ public class PKCS10CertificationRequest extends CertificationRequest {
         }
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.util.Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.util.Encodable
     public byte[] getEncoded() {
         try {
             return getEncoded(ASN1Encoding.DER);
@@ -286,16 +369,20 @@ public class PKCS10CertificationRequest extends CertificationRequest {
         }
     }
 
-    private void setSignatureParameters(Signature signature, ASN1Encodable params2) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    private void setSignatureParameters(Signature signature, ASN1Encodable params2)
+            throws NoSuchAlgorithmException, SignatureException, InvalidKeyException {
         if (params2 != null && !DERNull.INSTANCE.equals(params2)) {
-            AlgorithmParameters sigParams = AlgorithmParameters.getInstance(signature.getAlgorithm(), signature.getProvider());
+            AlgorithmParameters sigParams =
+                    AlgorithmParameters.getInstance(
+                            signature.getAlgorithm(), signature.getProvider());
             try {
                 sigParams.init(params2.toASN1Primitive().getEncoded(ASN1Encoding.DER));
                 if (signature.getAlgorithm().endsWith("MGF1")) {
                     try {
                         signature.setParameter(sigParams.getParameterSpec(PSSParameterSpec.class));
                     } catch (GeneralSecurityException e) {
-                        throw new SignatureException("Exception extracting parameters: " + e.getMessage());
+                        throw new SignatureException(
+                                "Exception extracting parameters: " + e.getMessage());
                     }
                 }
             } catch (IOException e2) {
@@ -306,7 +393,10 @@ public class PKCS10CertificationRequest extends CertificationRequest {
 
     static String getSignatureName(AlgorithmIdentifier sigAlgId) {
         ASN1Encodable params2 = sigAlgId.getParameters();
-        if (params2 != null && !DERNull.INSTANCE.equals(params2) && sigAlgId.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
+        if (params2 != null
+                && !DERNull.INSTANCE.equals(params2)
+                && sigAlgId.getAlgorithm()
+                        .equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
             RSASSAPSSparams rsaParams = RSASSAPSSparams.getInstance(params2);
             return getDigestAlgName(rsaParams.getHashAlgorithm().getAlgorithm()) + "withRSAandMGF1";
         }

@@ -7,7 +7,10 @@ public class IntegrityUtils {
     private static final char[] HEX_CHARS = "0123456789ABCDEF".toCharArray();
 
     public static byte[] getBytesFromHexDigest(String hexDigest) {
-        Preconditions.checkArgument(hexDigest.length() % 2 == 0, "Invalid hex encoding %s: must have even length", hexDigest);
+        Preconditions.checkArgument(
+                hexDigest.length() % 2 == 0,
+                "Invalid hex encoding %s: must have even length",
+                hexDigest);
         byte[] rawBytes = new byte[hexDigest.length() / 2];
         for (int i = 0; i < rawBytes.length; i++) {
             int upperNibble = hexDigest.charAt(i * 2);

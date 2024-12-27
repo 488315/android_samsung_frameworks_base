@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Trace;
 import android.util.Slog;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 
@@ -16,7 +17,11 @@ public abstract class BroadcastQueue {
     public final ActivityManagerService mService;
     public final BroadcastSkipPolicy mSkipPolicy;
 
-    public BroadcastQueue(ActivityManagerService activityManagerService, Handler handler, BroadcastSkipPolicy broadcastSkipPolicy, BroadcastHistory broadcastHistory) {
+    public BroadcastQueue(
+            ActivityManagerService activityManagerService,
+            Handler handler,
+            BroadcastSkipPolicy broadcastSkipPolicy,
+            BroadcastHistory broadcastHistory) {
         Objects.requireNonNull(activityManagerService);
         this.mService = activityManagerService;
         Objects.requireNonNull(handler);
@@ -46,9 +51,11 @@ public abstract class BroadcastQueue {
         Trace.asyncTraceForTrackEnd(64L, "BroadcastQueue", i);
     }
 
-    public abstract boolean dumpLocked(PrintWriter printWriter, boolean z, boolean z2, boolean z3, String str, boolean z4);
+    public abstract boolean dumpLocked(
+            PrintWriter printWriter, boolean z, boolean z2, boolean z3, String str, boolean z4);
 
-    public abstract boolean finishReceiverLocked(ProcessRecord processRecord, int i, String str, Bundle bundle, boolean z);
+    public abstract boolean finishReceiverLocked(
+            ProcessRecord processRecord, int i, String str, Bundle bundle, boolean z);
 
     public final String toString() {
         return this.mQueueName;

@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface ISatelliteModemStateCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.satellite.ISatelliteModemStateCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.satellite.ISatelliteModemStateCallback";
 
     void onEmergencyModeChanged(boolean z) throws RemoteException;
 
@@ -20,20 +21,17 @@ public interface ISatelliteModemStateCallback extends IInterface {
 
     public static class Default implements ISatelliteModemStateCallback {
         @Override // android.telephony.satellite.ISatelliteModemStateCallback
-        public void onSatelliteModemStateChanged(int state) throws RemoteException {
-        }
+        public void onSatelliteModemStateChanged(int state) throws RemoteException {}
 
         @Override // android.telephony.satellite.ISatelliteModemStateCallback
-        public void onEmergencyModeChanged(boolean isEmergency) throws RemoteException {
-        }
+        public void onEmergencyModeChanged(boolean isEmergency) throws RemoteException {}
 
         @Override // android.telephony.satellite.ISatelliteModemStateCallback
-        public void onRegistrationFailure(int causeCode) throws RemoteException {
-        }
+        public void onRegistrationFailure(int causeCode) throws RemoteException {}
 
         @Override // android.telephony.satellite.ISatelliteModemStateCallback
-        public void onTerrestrialNetworkAvailableChanged(boolean isAvailable) throws RemoteException {
-        }
+        public void onTerrestrialNetworkAvailableChanged(boolean isAvailable)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -41,7 +39,7 @@ public interface ISatelliteModemStateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatelliteModemStateCallback {
+    public abstract static class Stub extends Binder implements ISatelliteModemStateCallback {
         static final int TRANSACTION_onEmergencyModeChanged = 2;
         static final int TRANSACTION_onRegistrationFailure = 3;
         static final int TRANSACTION_onSatelliteModemStateChanged = 1;
@@ -88,7 +86,8 @@ public interface ISatelliteModemStateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISatelliteModemStateCallback.DESCRIPTOR);
             }
@@ -175,7 +174,8 @@ public interface ISatelliteModemStateCallback extends IInterface {
             }
 
             @Override // android.telephony.satellite.ISatelliteModemStateCallback
-            public void onTerrestrialNetworkAvailableChanged(boolean isAvailable) throws RemoteException {
+            public void onTerrestrialNetworkAvailableChanged(boolean isAvailable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteModemStateCallback.DESCRIPTOR);

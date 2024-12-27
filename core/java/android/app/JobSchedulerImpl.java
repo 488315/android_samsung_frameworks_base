@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.pm.ParceledListSlice;
 import android.os.RemoteException;
 import android.util.ArrayMap;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -197,7 +198,8 @@ public class JobSchedulerImpl extends JobScheduler {
     }
 
     @Override // android.app.job.JobScheduler
-    public void notePendingUserRequestedAppStop(String packageName, int userId, String debugReason) {
+    public void notePendingUserRequestedAppStop(
+            String packageName, int userId, String debugReason) {
         try {
             this.mBinder.notePendingUserRequestedAppStop(packageName, userId, debugReason);
         } catch (RemoteException e) {

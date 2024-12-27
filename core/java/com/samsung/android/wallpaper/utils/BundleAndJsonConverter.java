@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.JsonReader;
 import android.util.JsonWriter;
 import android.util.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -27,8 +28,7 @@ class BundleAndJsonConverter {
     private static final String JSON_VALUE_TYPE_PREFIX_STRING = "S";
     private static final String TAG = BundleAndJsonConverter.class.getSimpleName();
 
-    BundleAndJsonConverter() {
-    }
+    BundleAndJsonConverter() {}
 
     public Bundle convertJsonToBundle(String jsonStr) {
         if (jsonStr == null) {
@@ -81,7 +81,13 @@ class BundleAndJsonConverter {
             } else {
                 String typePrefix = determineDataTypePrefix(value);
                 if (typePrefix == null) {
-                    Log.i(TAG, "writeBundleToJson: unsupported value type : key=" + key + ", type=" + value.getClass().getSimpleName() + ", skipping..");
+                    Log.i(
+                            TAG,
+                            "writeBundleToJson: unsupported value type : key="
+                                    + key
+                                    + ", type="
+                                    + value.getClass().getSimpleName()
+                                    + ", skipping..");
                 } else {
                     writer.name(key);
                     if (JSON_VALUE_TYPE_PREFIX_BUNDLE.equals(typePrefix)) {
@@ -96,7 +102,8 @@ class BundleAndJsonConverter {
         writer.endObject();
     }
 
-    private void putJsonObjectFieldsToBundle(JsonReader reader, Bundle resultBundle) throws IOException {
+    private void putJsonObjectFieldsToBundle(JsonReader reader, Bundle resultBundle)
+            throws IOException {
         reader.beginObject();
         while (reader.hasNext()) {
             String key = reader.nextName();

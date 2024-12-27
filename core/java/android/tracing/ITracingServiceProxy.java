@@ -16,12 +16,10 @@ public interface ITracingServiceProxy extends IInterface {
 
     public static class Default implements ITracingServiceProxy {
         @Override // android.tracing.ITracingServiceProxy
-        public void notifyTraceSessionEnded(boolean sessionStolen) throws RemoteException {
-        }
+        public void notifyTraceSessionEnded(boolean sessionStolen) throws RemoteException {}
 
         @Override // android.tracing.ITracingServiceProxy
-        public void reportTrace(TraceReportParams params) throws RemoteException {
-        }
+        public void reportTrace(TraceReportParams params) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ITracingServiceProxy extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITracingServiceProxy {
+    public abstract static class Stub extends Binder implements ITracingServiceProxy {
         static final int TRANSACTION_notifyTraceSessionEnded = 1;
         static final int TRANSACTION_reportTrace = 2;
 
@@ -70,7 +68,8 @@ public interface ITracingServiceProxy extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITracingServiceProxy.DESCRIPTOR);
             }
@@ -85,7 +84,8 @@ public interface ITracingServiceProxy extends IInterface {
                     notifyTraceSessionEnded(_arg0);
                     return true;
                 case 2:
-                    TraceReportParams _arg02 = (TraceReportParams) data.readTypedObject(TraceReportParams.CREATOR);
+                    TraceReportParams _arg02 =
+                            (TraceReportParams) data.readTypedObject(TraceReportParams.CREATOR);
                     data.enforceNoDataAvail();
                     reportTrace(_arg02);
                     return true;

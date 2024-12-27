@@ -8,5 +8,9 @@ public abstract class TransitionPropagation {
 
     public abstract String[] getPropagationProperties();
 
-    public abstract long getStartDelay(ViewGroup viewGroup, Transition transition, TransitionValues transitionValues, TransitionValues transitionValues2);
+    public abstract long getStartDelay(
+            ViewGroup viewGroup,
+            Transition transition,
+            TransitionValues transitionValues,
+            TransitionValues transitionValues2);
 }

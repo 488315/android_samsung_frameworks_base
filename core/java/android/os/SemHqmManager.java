@@ -15,7 +15,15 @@ public class SemHqmManager {
         this.mHandler = handler;
     }
 
-    public boolean sendHWParamServer(int type, String Id, String Ver, String Manufacture, String HitType, String Feature, String logMaps, String envlogMaps) {
+    public boolean sendHWParamServer(
+            int type,
+            String Id,
+            String Ver,
+            String Manufacture,
+            String HitType,
+            String Feature,
+            String logMaps,
+            String envlogMaps) {
         boolean sendHWParamServer;
         if (this.mService == null) {
             return false;
@@ -23,7 +31,16 @@ public class SemHqmManager {
         synchronized (BDlock) {
             try {
                 try {
-                    sendHWParamServer = this.mService.sendHWParamServer(type, Id, Ver, Manufacture, HitType, Feature, logMaps, envlogMaps);
+                    sendHWParamServer =
+                            this.mService.sendHWParamServer(
+                                    type,
+                                    Id,
+                                    Ver,
+                                    Manufacture,
+                                    HitType,
+                                    Feature,
+                                    logMaps,
+                                    envlogMaps);
                 } catch (Exception e) {
                     printExceptionTrace(e);
                     return false;
@@ -35,7 +52,16 @@ public class SemHqmManager {
         return sendHWParamServer;
     }
 
-    public boolean sendHWParamToHQM(int type, String id, String feature, String hitType, String ver, String manufacture, String dev_custom_dataset, String custom_dataset, String pri_custom_dataset) {
+    public boolean sendHWParamToHQM(
+            int type,
+            String id,
+            String feature,
+            String hitType,
+            String ver,
+            String manufacture,
+            String dev_custom_dataset,
+            String custom_dataset,
+            String pri_custom_dataset) {
         boolean sendHWParamToHQM;
         if (this.mService == null) {
             return false;
@@ -43,7 +69,17 @@ public class SemHqmManager {
         synchronized (BDlock) {
             try {
                 try {
-                    sendHWParamToHQM = this.mService.sendHWParamToHQM(type, id, feature, hitType, ver, manufacture, dev_custom_dataset, custom_dataset, pri_custom_dataset);
+                    sendHWParamToHQM =
+                            this.mService.sendHWParamToHQM(
+                                    type,
+                                    id,
+                                    feature,
+                                    hitType,
+                                    ver,
+                                    manufacture,
+                                    dev_custom_dataset,
+                                    custom_dataset,
+                                    pri_custom_dataset);
                 } catch (Exception e) {
                     printExceptionTrace(e);
                     return false;
@@ -55,7 +91,17 @@ public class SemHqmManager {
         return sendHWParamToHQM;
     }
 
-    public boolean sendHWParamToHQMwithAppId(int type, String id, String feature, String hitType, String ver, String manufacture, String dev_custom_dataset, String custom_dataset, String pri_custom_dataset, String appID) {
+    public boolean sendHWParamToHQMwithAppId(
+            int type,
+            String id,
+            String feature,
+            String hitType,
+            String ver,
+            String manufacture,
+            String dev_custom_dataset,
+            String custom_dataset,
+            String pri_custom_dataset,
+            String appID) {
         boolean sendHWParamToHQMwithAppId;
         if (this.mService == null) {
             return false;
@@ -63,7 +109,18 @@ public class SemHqmManager {
         synchronized (BDlock) {
             try {
                 try {
-                    sendHWParamToHQMwithAppId = this.mService.sendHWParamToHQMwithAppId(type, id, feature, hitType, ver, manufacture, dev_custom_dataset, custom_dataset, pri_custom_dataset, appID);
+                    sendHWParamToHQMwithAppId =
+                            this.mService.sendHWParamToHQMwithAppId(
+                                    type,
+                                    id,
+                                    feature,
+                                    hitType,
+                                    ver,
+                                    manufacture,
+                                    dev_custom_dataset,
+                                    custom_dataset,
+                                    pri_custom_dataset,
+                                    appID);
                 } catch (Exception e) {
                     printExceptionTrace(e);
                     return false;
@@ -75,7 +132,18 @@ public class SemHqmManager {
         return sendHWParamToHQMwithAppId;
     }
 
-    public boolean sendHWParamToHQMwithFile(int type, String id, String feature, String hitType, String ver, String manufacture, String dev_custom_dataset, String custom_dataset, String pri_custom_dataset, String appID, String filePath) {
+    public boolean sendHWParamToHQMwithFile(
+            int type,
+            String id,
+            String feature,
+            String hitType,
+            String ver,
+            String manufacture,
+            String dev_custom_dataset,
+            String custom_dataset,
+            String pri_custom_dataset,
+            String appID,
+            String filePath) {
         boolean sendHWParamToHQMwithFile;
         if (this.mService == null) {
             return false;
@@ -83,7 +151,19 @@ public class SemHqmManager {
         synchronized (BDlock) {
             try {
                 try {
-                    sendHWParamToHQMwithFile = this.mService.sendHWParamToHQMwithFile(type, id, feature, hitType, ver, manufacture, dev_custom_dataset, custom_dataset, pri_custom_dataset, appID, filePath);
+                    sendHWParamToHQMwithFile =
+                            this.mService.sendHWParamToHQMwithFile(
+                                    type,
+                                    id,
+                                    feature,
+                                    hitType,
+                                    ver,
+                                    manufacture,
+                                    dev_custom_dataset,
+                                    custom_dataset,
+                                    pri_custom_dataset,
+                                    appID,
+                                    filePath);
                 } catch (Exception e) {
                     printExceptionTrace(e);
                     return false;

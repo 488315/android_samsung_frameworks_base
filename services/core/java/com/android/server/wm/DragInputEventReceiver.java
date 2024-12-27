@@ -15,7 +15,8 @@ public final class DragInputEventReceiver extends InputEventReceiver {
     public boolean mMuteInput;
     public boolean mStylusButtonDownAtStart;
 
-    public DragInputEventReceiver(InputChannel inputChannel, Looper looper, DragDropController dragDropController) {
+    public DragInputEventReceiver(
+            InputChannel inputChannel, Looper looper, DragDropController dragDropController) {
         super(inputChannel, looper);
         this.mIsStartEvent = true;
         this.mMuteInput = false;
@@ -25,7 +26,9 @@ public final class DragInputEventReceiver extends InputEventReceiver {
     public final void onInputEvent(InputEvent inputEvent) {
         try {
             try {
-                if ((inputEvent instanceof MotionEvent) && (inputEvent.getSource() & 2) != 0 && !this.mMuteInput) {
+                if ((inputEvent instanceof MotionEvent)
+                        && (inputEvent.getSource() & 2) != 0
+                        && !this.mMuteInput) {
                     MotionEvent motionEvent = (MotionEvent) inputEvent;
                     float rawX = motionEvent.getRawX();
                     float rawY = motionEvent.getRawY();
@@ -41,7 +44,9 @@ public final class DragInputEventReceiver extends InputEventReceiver {
                         return;
                     }
                     if (action == 1) {
-                        Slog.d("WindowManager", "Got UP on move channel; dropping at " + rawX + "," + rawY);
+                        Slog.d(
+                                "WindowManager",
+                                "Got UP on move channel; dropping at " + rawX + "," + rawY);
                         this.mMuteInput = true;
                     } else if (action != 2) {
                         if (action != 3) {
@@ -52,7 +57,9 @@ public final class DragInputEventReceiver extends InputEventReceiver {
                             this.mMuteInput = true;
                         }
                     } else if (this.mStylusButtonDownAtStart && !z) {
-                        Slog.d("WindowManager", "Button no longer pressed; dropping at " + rawX + "," + rawY);
+                        Slog.d(
+                                "WindowManager",
+                                "Button no longer pressed; dropping at " + rawX + "," + rawY);
                         this.mMuteInput = true;
                     }
                     this.mDragDropController.handleMotionEvent(!this.mMuteInput, rawX, rawY);

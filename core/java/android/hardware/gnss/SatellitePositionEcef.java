@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class SatellitePositionEcef implements Parcelable {
-    public static final Parcelable.Creator<SatellitePositionEcef> CREATOR = new Parcelable.Creator<SatellitePositionEcef>() { // from class: android.hardware.gnss.SatellitePositionEcef.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatellitePositionEcef createFromParcel(Parcel _aidl_source) {
-            SatellitePositionEcef _aidl_out = new SatellitePositionEcef();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SatellitePositionEcef> CREATOR =
+            new Parcelable.Creator<SatellitePositionEcef>() { // from class:
+                // android.hardware.gnss.SatellitePositionEcef.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatellitePositionEcef createFromParcel(Parcel _aidl_source) {
+                    SatellitePositionEcef _aidl_out = new SatellitePositionEcef();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatellitePositionEcef[] newArray(int _aidl_size) {
-            return new SatellitePositionEcef[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatellitePositionEcef[] newArray(int _aidl_size) {
+                    return new SatellitePositionEcef[_aidl_size];
+                }
+            };
     public double posXMeters = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     public double posYMeters = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     public double posZMeters = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;

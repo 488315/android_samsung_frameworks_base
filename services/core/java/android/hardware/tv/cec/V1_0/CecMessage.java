@@ -4,6 +4,7 @@ import android.hardware.audio.common.V2_0.AudioConfig$$ExternalSyntheticOutline0
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,15 +23,26 @@ public final class CecMessage {
             return false;
         }
         CecMessage cecMessage = (CecMessage) obj;
-        return this.initiator == cecMessage.initiator && this.destination == cecMessage.destination && HidlSupport.deepEquals(this.body, cecMessage.body);
+        return this.initiator == cecMessage.initiator
+                && this.destination == cecMessage.destination
+                && HidlSupport.deepEquals(this.body, cecMessage.body);
     }
 
     public final int hashCode() {
-        return Objects.hash(AudioConfig$$ExternalSyntheticOutline0.m(this.initiator), AudioConfig$$ExternalSyntheticOutline0.m(this.destination), Integer.valueOf(HidlSupport.deepHashCode(this.body)));
+        return Objects.hash(
+                AudioConfig$$ExternalSyntheticOutline0.m(this.initiator),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.destination),
+                Integer.valueOf(HidlSupport.deepHashCode(this.body)));
     }
 
     public final String toString() {
-        return "{.initiator = " + CecLogicalAddress.toString(this.initiator) + ", .destination = " + CecLogicalAddress.toString(this.destination) + ", .body = " + this.body + "}";
+        return "{.initiator = "
+                + CecLogicalAddress.toString(this.initiator)
+                + ", .destination = "
+                + CecLogicalAddress.toString(this.destination)
+                + ", .body = "
+                + this.body
+                + "}";
     }
 
     public final void writeToParcel(HwParcel hwParcel) {

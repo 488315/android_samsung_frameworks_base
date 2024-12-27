@@ -20,20 +20,16 @@ public interface IMoccaEventListener extends IInterface {
 
     public static class Default implements IMoccaEventListener {
         @Override // com.samsung.android.mocca.IMoccaEventListener
-        public void onContextChanged(ContextEvent event) throws RemoteException {
-        }
+        public void onContextChanged(ContextEvent event) throws RemoteException {}
 
         @Override // com.samsung.android.mocca.IMoccaEventListener
-        public void onContextStopped(String contextType) throws RemoteException {
-        }
+        public void onContextStopped(String contextType) throws RemoteException {}
 
         @Override // com.samsung.android.mocca.IMoccaEventListener
-        public void onContextAvailable(String contextType) throws RemoteException {
-        }
+        public void onContextAvailable(String contextType) throws RemoteException {}
 
         @Override // com.samsung.android.mocca.IMoccaEventListener
-        public void onContextUnavailable(String contextType) throws RemoteException {
-        }
+        public void onContextUnavailable(String contextType) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -41,7 +37,7 @@ public interface IMoccaEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMoccaEventListener {
+    public abstract static class Stub extends Binder implements IMoccaEventListener {
         static final int TRANSACTION_onContextAvailable = 3;
         static final int TRANSACTION_onContextChanged = 1;
         static final int TRANSACTION_onContextStopped = 2;
@@ -88,7 +84,8 @@ public interface IMoccaEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMoccaEventListener.DESCRIPTOR);
             }

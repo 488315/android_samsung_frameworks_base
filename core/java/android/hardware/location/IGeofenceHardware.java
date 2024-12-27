@@ -2,8 +2,6 @@ package android.hardware.location;
 
 import android.Manifest;
 import android.app.ActivityThread;
-import android.hardware.location.IGeofenceHardwareCallback;
-import android.hardware.location.IGeofenceHardwareMonitorCallback;
 import android.location.IFusedGeofenceHardware;
 import android.location.IGpsGeofenceHardware;
 import android.os.Binder;
@@ -15,7 +13,11 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IGeofenceHardware extends IInterface {
-    boolean addCircularFence(int i, GeofenceHardwareRequestParcelable geofenceHardwareRequestParcelable, IGeofenceHardwareCallback iGeofenceHardwareCallback) throws RemoteException;
+    boolean addCircularFence(
+            int i,
+            GeofenceHardwareRequestParcelable geofenceHardwareRequestParcelable,
+            IGeofenceHardwareCallback iGeofenceHardwareCallback)
+            throws RemoteException;
 
     int[] getMonitoringTypes() throws RemoteException;
 
@@ -23,26 +25,30 @@ public interface IGeofenceHardware extends IInterface {
 
     boolean pauseGeofence(int i, int i2) throws RemoteException;
 
-    boolean registerForMonitorStateChangeCallback(int i, IGeofenceHardwareMonitorCallback iGeofenceHardwareMonitorCallback) throws RemoteException;
+    boolean registerForMonitorStateChangeCallback(
+            int i, IGeofenceHardwareMonitorCallback iGeofenceHardwareMonitorCallback)
+            throws RemoteException;
 
     boolean removeGeofence(int i, int i2) throws RemoteException;
 
     boolean resumeGeofence(int i, int i2, int i3) throws RemoteException;
 
-    void setFusedGeofenceHardware(IFusedGeofenceHardware iFusedGeofenceHardware) throws RemoteException;
+    void setFusedGeofenceHardware(IFusedGeofenceHardware iFusedGeofenceHardware)
+            throws RemoteException;
 
     void setGpsGeofenceHardware(IGpsGeofenceHardware iGpsGeofenceHardware) throws RemoteException;
 
-    boolean unregisterForMonitorStateChangeCallback(int i, IGeofenceHardwareMonitorCallback iGeofenceHardwareMonitorCallback) throws RemoteException;
+    boolean unregisterForMonitorStateChangeCallback(
+            int i, IGeofenceHardwareMonitorCallback iGeofenceHardwareMonitorCallback)
+            throws RemoteException;
 
     public static class Default implements IGeofenceHardware {
         @Override // android.hardware.location.IGeofenceHardware
-        public void setGpsGeofenceHardware(IGpsGeofenceHardware service) throws RemoteException {
-        }
+        public void setGpsGeofenceHardware(IGpsGeofenceHardware service) throws RemoteException {}
 
         @Override // android.hardware.location.IGeofenceHardware
-        public void setFusedGeofenceHardware(IFusedGeofenceHardware service) throws RemoteException {
-        }
+        public void setFusedGeofenceHardware(IFusedGeofenceHardware service)
+                throws RemoteException {}
 
         @Override // android.hardware.location.IGeofenceHardware
         public int[] getMonitoringTypes() throws RemoteException {
@@ -55,7 +61,11 @@ public interface IGeofenceHardware extends IInterface {
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public boolean addCircularFence(int monitoringType, GeofenceHardwareRequestParcelable request, IGeofenceHardwareCallback callback) throws RemoteException {
+        public boolean addCircularFence(
+                int monitoringType,
+                GeofenceHardwareRequestParcelable request,
+                IGeofenceHardwareCallback callback)
+                throws RemoteException {
             return false;
         }
 
@@ -70,17 +80,22 @@ public interface IGeofenceHardware extends IInterface {
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public boolean resumeGeofence(int id, int monitoringType, int monitorTransitions) throws RemoteException {
+        public boolean resumeGeofence(int id, int monitoringType, int monitorTransitions)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public boolean registerForMonitorStateChangeCallback(int monitoringType, IGeofenceHardwareMonitorCallback callback) throws RemoteException {
+        public boolean registerForMonitorStateChangeCallback(
+                int monitoringType, IGeofenceHardwareMonitorCallback callback)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.location.IGeofenceHardware
-        public boolean unregisterForMonitorStateChangeCallback(int monitoringType, IGeofenceHardwareMonitorCallback callback) throws RemoteException {
+        public boolean unregisterForMonitorStateChangeCallback(
+                int monitoringType, IGeofenceHardwareMonitorCallback callback)
+                throws RemoteException {
             return false;
         }
 
@@ -90,7 +105,7 @@ public interface IGeofenceHardware extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGeofenceHardware {
+    public abstract static class Stub extends Binder implements IGeofenceHardware {
         public static final String DESCRIPTOR = "android.hardware.location.IGeofenceHardware";
         static final int TRANSACTION_addCircularFence = 5;
         static final int TRANSACTION_getMonitoringTypes = 3;
@@ -114,7 +129,9 @@ public interface IGeofenceHardware extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IGeofenceHardware asInterface(IBinder obj) {
@@ -166,7 +183,8 @@ public interface IGeofenceHardware extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -176,13 +194,15 @@ public interface IGeofenceHardware extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IGpsGeofenceHardware _arg0 = IGpsGeofenceHardware.Stub.asInterface(data.readStrongBinder());
+                    IGpsGeofenceHardware _arg0 =
+                            IGpsGeofenceHardware.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setGpsGeofenceHardware(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IFusedGeofenceHardware _arg02 = IFusedGeofenceHardware.Stub.asInterface(data.readStrongBinder());
+                    IFusedGeofenceHardware _arg02 =
+                            IFusedGeofenceHardware.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setFusedGeofenceHardware(_arg02);
                     reply.writeNoException();
@@ -201,8 +221,11 @@ public interface IGeofenceHardware extends IInterface {
                     return true;
                 case 5:
                     int _arg04 = data.readInt();
-                    GeofenceHardwareRequestParcelable _arg1 = (GeofenceHardwareRequestParcelable) data.readTypedObject(GeofenceHardwareRequestParcelable.CREATOR);
-                    IGeofenceHardwareCallback _arg2 = IGeofenceHardwareCallback.Stub.asInterface(data.readStrongBinder());
+                    GeofenceHardwareRequestParcelable _arg1 =
+                            (GeofenceHardwareRequestParcelable)
+                                    data.readTypedObject(GeofenceHardwareRequestParcelable.CREATOR);
+                    IGeofenceHardwareCallback _arg2 =
+                            IGeofenceHardwareCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result3 = addCircularFence(_arg04, _arg1, _arg2);
                     reply.writeNoException();
@@ -235,7 +258,9 @@ public interface IGeofenceHardware extends IInterface {
                     return true;
                 case 9:
                     int _arg08 = data.readInt();
-                    IGeofenceHardwareMonitorCallback _arg15 = IGeofenceHardwareMonitorCallback.Stub.asInterface(data.readStrongBinder());
+                    IGeofenceHardwareMonitorCallback _arg15 =
+                            IGeofenceHardwareMonitorCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result7 = registerForMonitorStateChangeCallback(_arg08, _arg15);
                     reply.writeNoException();
@@ -243,7 +268,9 @@ public interface IGeofenceHardware extends IInterface {
                     return true;
                 case 10:
                     int _arg09 = data.readInt();
-                    IGeofenceHardwareMonitorCallback _arg16 = IGeofenceHardwareMonitorCallback.Stub.asInterface(data.readStrongBinder());
+                    IGeofenceHardwareMonitorCallback _arg16 =
+                            IGeofenceHardwareMonitorCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result8 = unregisterForMonitorStateChangeCallback(_arg09, _arg16);
                     reply.writeNoException();
@@ -271,7 +298,8 @@ public interface IGeofenceHardware extends IInterface {
             }
 
             @Override // android.hardware.location.IGeofenceHardware
-            public void setGpsGeofenceHardware(IGpsGeofenceHardware service) throws RemoteException {
+            public void setGpsGeofenceHardware(IGpsGeofenceHardware service)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -286,7 +314,8 @@ public interface IGeofenceHardware extends IInterface {
             }
 
             @Override // android.hardware.location.IGeofenceHardware
-            public void setFusedGeofenceHardware(IFusedGeofenceHardware service) throws RemoteException {
+            public void setFusedGeofenceHardware(IFusedGeofenceHardware service)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -334,7 +363,11 @@ public interface IGeofenceHardware extends IInterface {
             }
 
             @Override // android.hardware.location.IGeofenceHardware
-            public boolean addCircularFence(int monitoringType, GeofenceHardwareRequestParcelable request, IGeofenceHardwareCallback callback) throws RemoteException {
+            public boolean addCircularFence(
+                    int monitoringType,
+                    GeofenceHardwareRequestParcelable request,
+                    IGeofenceHardwareCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -389,7 +422,8 @@ public interface IGeofenceHardware extends IInterface {
             }
 
             @Override // android.hardware.location.IGeofenceHardware
-            public boolean resumeGeofence(int id, int monitoringType, int monitorTransitions) throws RemoteException {
+            public boolean resumeGeofence(int id, int monitoringType, int monitorTransitions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -408,7 +442,9 @@ public interface IGeofenceHardware extends IInterface {
             }
 
             @Override // android.hardware.location.IGeofenceHardware
-            public boolean registerForMonitorStateChangeCallback(int monitoringType, IGeofenceHardwareMonitorCallback callback) throws RemoteException {
+            public boolean registerForMonitorStateChangeCallback(
+                    int monitoringType, IGeofenceHardwareMonitorCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -426,7 +462,9 @@ public interface IGeofenceHardware extends IInterface {
             }
 
             @Override // android.hardware.location.IGeofenceHardware
-            public boolean unregisterForMonitorStateChangeCallback(int monitoringType, IGeofenceHardwareMonitorCallback callback) throws RemoteException {
+            public boolean unregisterForMonitorStateChangeCallback(
+                    int monitoringType, IGeofenceHardwareMonitorCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -445,35 +483,45 @@ public interface IGeofenceHardware extends IInterface {
         }
 
         protected void getMonitoringTypes_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         protected void getStatusOfMonitoringType_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         protected void addCircularFence_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         protected void removeGeofence_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         protected void pauseGeofence_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         protected void resumeGeofence_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
-        protected void registerForMonitorStateChangeCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+        protected void registerForMonitorStateChangeCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
-        protected void unregisterForMonitorStateChangeCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+        protected void unregisterForMonitorStateChangeCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

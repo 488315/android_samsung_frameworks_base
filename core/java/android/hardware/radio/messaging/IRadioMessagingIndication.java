@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioMessagingIndication extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$messaging$IRadioMessagingIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$messaging$IRadioMessagingIndication".replace('$', '.');
     public static final String HASH = "30b0bc0e84679bc3b5ccb3a52da34c47cda6b7eb";
     public static final int VERSION = 3;
 
@@ -32,32 +33,25 @@ public interface IRadioMessagingIndication extends IInterface {
 
     public static class Default implements IRadioMessagingIndication {
         @Override // android.hardware.radio.messaging.IRadioMessagingIndication
-        public void cdmaNewSms(int type, CdmaSmsMessage msg) throws RemoteException {
-        }
+        public void cdmaNewSms(int type, CdmaSmsMessage msg) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessagingIndication
-        public void cdmaRuimSmsStorageFull(int type) throws RemoteException {
-        }
+        public void cdmaRuimSmsStorageFull(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessagingIndication
-        public void newBroadcastSms(int type, byte[] data) throws RemoteException {
-        }
+        public void newBroadcastSms(int type, byte[] data) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessagingIndication
-        public void newSms(int type, byte[] pdu) throws RemoteException {
-        }
+        public void newSms(int type, byte[] pdu) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessagingIndication
-        public void newSmsOnSim(int type, int recordNumber) throws RemoteException {
-        }
+        public void newSmsOnSim(int type, int recordNumber) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessagingIndication
-        public void newSmsStatusReport(int type, byte[] pdu) throws RemoteException {
-        }
+        public void newSmsStatusReport(int type, byte[] pdu) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessagingIndication
-        public void simSmsStorageFull(int type) throws RemoteException {
-        }
+        public void simSmsStorageFull(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessagingIndication
         public int getInterfaceVersion() {
@@ -75,7 +69,7 @@ public interface IRadioMessagingIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioMessagingIndication {
+    public abstract static class Stub extends Binder implements IRadioMessagingIndication {
         static final int TRANSACTION_cdmaNewSms = 1;
         static final int TRANSACTION_cdmaRuimSmsStorageFull = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -108,7 +102,8 @@ public interface IRadioMessagingIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -130,7 +125,8 @@ public interface IRadioMessagingIndication extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    CdmaSmsMessage _arg1 = (CdmaSmsMessage) data.readTypedObject(CdmaSmsMessage.CREATOR);
+                    CdmaSmsMessage _arg1 =
+                            (CdmaSmsMessage) data.readTypedObject(CdmaSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     cdmaNewSms(_arg0, _arg1);
                     return true;
@@ -215,7 +211,8 @@ public interface IRadioMessagingIndication extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method cdmaRuimSmsStorageFull is unimplemented.");
+                        throw new RemoteException(
+                                "Method cdmaRuimSmsStorageFull is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

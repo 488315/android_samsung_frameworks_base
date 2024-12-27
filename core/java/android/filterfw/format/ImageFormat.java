@@ -11,7 +11,8 @@ public class ImageFormat {
     public static final int COLORSPACE_RGBA = 3;
     public static final int COLORSPACE_YUV = 4;
 
-    public static MutableFrameFormat create(int width, int height, int colorspace, int bytesPerSample, int target) {
+    public static MutableFrameFormat create(
+            int width, int height, int colorspace, int bytesPerSample, int target) {
         MutableFrameFormat result = new MutableFrameFormat(2, target);
         result.setDimensions(width, height);
         result.setBytesPerSample(bytesPerSample);

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.PathInterpolator;
+
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.globalactions.util.ConditionChecker;
 import com.samsung.android.globalactions.util.LogWrapper;
@@ -52,7 +53,8 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
     private final int HIDE_DIALOG_WITHOUT_DISMISS_DURATION = 0;
     private final float ALPHA_HIDE = 0.0f;
     private final float ALPHA_SHOW = 1.0f;
-    private final PathInterpolator CONFIRM_ANIMATION_INTERPOLATOR = new PathInterpolator(0.17f, 0.17f, 0.2f, 1.0f);
+    private final PathInterpolator CONFIRM_ANIMATION_INTERPOLATOR =
+            new PathInterpolator(0.17f, 0.17f, 0.2f, 1.0f);
     private final int ALPHA_HIDE_INT = 0;
     private final int ALPHA_SHOW_INT = 255;
 
@@ -79,7 +81,8 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
 
         ViewGroup getListView();
 
-        ViewGroup getPowerOffViewForSafeModeVI(GlobalActionsContentItemView globalActionsContentItemView);
+        ViewGroup getPowerOffViewForSafeModeVI(
+                GlobalActionsContentItemView globalActionsContentItemView);
 
         ViewGroup getRootView();
 
@@ -96,7 +99,11 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
         }
     }
 
-    public SamsungGlobalActionsAnimator(Context context, ConditionChecker conditionChecker, LogWrapper logWrapper, ViewStateController stateController) {
+    public SamsungGlobalActionsAnimator(
+            Context context,
+            ConditionChecker conditionChecker,
+            LogWrapper logWrapper,
+            ViewStateController stateController) {
         this.mContext = context;
         this.mConditionChecker = conditionChecker;
         this.mLogWrapper = logWrapper;
@@ -121,12 +128,16 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
     public void startShowAnimation() {
         AnimatorSet animatorSet = getDefaultAnimatorSet(true);
         animatorSet.setDuration(300L);
-        animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.1
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                SamsungGlobalActionsAnimator.this.mViewStateController.setState(ViewAnimationState.IDLE);
-            }
-        });
+        animatorSet.addListener(
+                new AnimatorListenerAdapter() { // from class:
+                                                // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.1
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        SamsungGlobalActionsAnimator.this.mViewStateController.setState(
+                                ViewAnimationState.IDLE);
+                    }
+                });
         this.mViewStateController.setState(ViewAnimationState.SHOW_ANIMATE);
         animatorSet.start();
     }
@@ -143,24 +154,32 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
         } else {
             animatorSet.setDuration(300L);
         }
-        animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.2
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                Dialog dialog = SamsungGlobalActionsAnimator.this.mCallback.getDialog();
-                if (dialog != null) {
-                    dialog.getWindow().getDecorView().setVisibility(8);
-                }
-                if (!isSecureConfirming) {
-                    SamsungGlobalActionsAnimator.this.mCallback.getDismissRunnable().run();
-                }
-                if (isSecureConfirming && SamsungGlobalActionsAnimator.this.mCallback.getClearCoverState()) {
-                    SamsungGlobalActionsAnimator.this.mCallback.setFlagsForForceDismiss(true);
-                }
-                SamsungGlobalActionsAnimator.this.mViewStateController.setState(ViewAnimationState.IDLE);
-            }
-        });
+        animatorSet.addListener(
+                new AnimatorListenerAdapter() { // from class:
+                                                // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.2
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        Dialog dialog = SamsungGlobalActionsAnimator.this.mCallback.getDialog();
+                        if (dialog != null) {
+                            dialog.getWindow().getDecorView().setVisibility(8);
+                        }
+                        if (!isSecureConfirming) {
+                            SamsungGlobalActionsAnimator.this.mCallback.getDismissRunnable().run();
+                        }
+                        if (isSecureConfirming
+                                && SamsungGlobalActionsAnimator.this.mCallback
+                                        .getClearCoverState()) {
+                            SamsungGlobalActionsAnimator.this.mCallback.setFlagsForForceDismiss(
+                                    true);
+                        }
+                        SamsungGlobalActionsAnimator.this.mViewStateController.setState(
+                                ViewAnimationState.IDLE);
+                    }
+                });
         if (this.mCallback.getDialog() != null) {
-            WindowManager.LayoutParams params = this.mCallback.getDialog().getWindow().getAttributes();
+            WindowManager.LayoutParams params =
+                    this.mCallback.getDialog().getWindow().getAttributes();
             params.dimAmount = 0.0f;
             this.mCallback.getDialog().getWindow().setAttributes(params);
         }
@@ -174,23 +193,33 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
         initializeSelectedActionView();
         initializeConfirmBackgroundView();
         this.mViewStateController.setState(ViewAnimationState.SHOW_ANIMATE);
-        this.mViewTreeObserverListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator$$ExternalSyntheticLambda2
-            @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-            public final void onGlobalLayout() {
-                SamsungGlobalActionsAnimator.this.lambda$startShowConfirmAnimation$0();
-            }
-        };
-        this.mConfirmationView.getViewTreeObserver().addOnGlobalLayoutListener(this.mViewTreeObserverListener);
+        this.mViewTreeObserverListener =
+                new ViewTreeObserver
+                        .OnGlobalLayoutListener() { // from class:
+                                                    // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator$$ExternalSyntheticLambda2
+                    @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
+                    public final void onGlobalLayout() {
+                        SamsungGlobalActionsAnimator.this.lambda$startShowConfirmAnimation$0();
+                    }
+                };
+        this.mConfirmationView
+                .getViewTreeObserver()
+                .addOnGlobalLayoutListener(this.mViewTreeObserverListener);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startShowConfirmAnimation$0() {
-        this.mConfirmationView.getViewTreeObserver().removeOnGlobalLayoutListener(this.mViewTreeObserverListener);
+        this.mConfirmationView
+                .getViewTreeObserver()
+                .removeOnGlobalLayoutListener(this.mViewTreeObserverListener);
         saveOriginalConfirmViewLocation();
         float deltaY = (this.mConfirmIconView.getHeight() * 0.3f) / 2.0f;
         setLocationForDescriptionView(deltaY);
         this.mConfirmIconView.setY(getOriginalLocationY(this.mSelectedActionView));
-        this.mConfirmIconView.setX(getOriginalLocationX(this.mCallback.getConfirmIconLabelView(this.mSelectedActionView)) - this.mRootView.getPaddingLeft());
+        this.mConfirmIconView.setX(
+                getOriginalLocationX(
+                                this.mCallback.getConfirmIconLabelView(this.mSelectedActionView))
+                        - this.mRootView.getPaddingLeft());
         this.mShowConfirmAnimatorSet = getDefaultConfirmAnimatorSet(true);
         this.mShowConfirmAnimatorSet.start();
     }
@@ -214,25 +243,38 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
         initializeSelectedActionView();
         initializeConfirmBackgroundView();
         this.mViewStateController.setState(ViewAnimationState.SHOW_ANIMATE);
-        this.mViewTreeObserverListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator$$ExternalSyntheticLambda1
-            @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-            public final void onGlobalLayout() {
-                SamsungGlobalActionsAnimator.this.lambda$startShowSafeModeAnimation$1();
-            }
-        };
-        this.mConfirmationView.getViewTreeObserver().addOnGlobalLayoutListener(this.mViewTreeObserverListener);
+        this.mViewTreeObserverListener =
+                new ViewTreeObserver
+                        .OnGlobalLayoutListener() { // from class:
+                                                    // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator$$ExternalSyntheticLambda1
+                    @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
+                    public final void onGlobalLayout() {
+                        SamsungGlobalActionsAnimator.this.lambda$startShowSafeModeAnimation$1();
+                    }
+                };
+        this.mConfirmationView
+                .getViewTreeObserver()
+                .addOnGlobalLayoutListener(this.mViewTreeObserverListener);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startShowSafeModeAnimation$1() {
-        this.mConfirmationView.getViewTreeObserver().removeOnGlobalLayoutListener(this.mViewTreeObserverListener);
+        this.mConfirmationView
+                .getViewTreeObserver()
+                .removeOnGlobalLayoutListener(this.mViewTreeObserverListener);
         saveOriginalConfirmViewLocation();
         float deltaY = (this.mConfirmIconView.getHeight() * 0.3f) / 2.0f;
         setLocationForDescriptionView(deltaY);
         this.mConfirmIconView.setY(getOriginalLocationY(this.mSelectedActionView));
         this.mPowerOffIconView.setY(getOriginalLocationY(this.mSelectedActionView));
-        this.mConfirmIconView.setX(getOriginalLocationX(this.mCallback.getConfirmIconLabelView(this.mSelectedActionView)) - this.mRootView.getPaddingLeft());
-        this.mPowerOffIconView.setX(getOriginalLocationX(this.mCallback.getConfirmIconLabelView(this.mSelectedActionView)) - this.mRootView.getPaddingLeft());
+        this.mConfirmIconView.setX(
+                getOriginalLocationX(
+                                this.mCallback.getConfirmIconLabelView(this.mSelectedActionView))
+                        - this.mRootView.getPaddingLeft());
+        this.mPowerOffIconView.setX(
+                getOriginalLocationX(
+                                this.mCallback.getConfirmIconLabelView(this.mSelectedActionView))
+                        - this.mRootView.getPaddingLeft());
         this.mShowConfirmAnimatorSet = getDefaultConfirmAnimatorSet(true);
         this.mShowConfirmAnimatorSet.playTogether(getSafeModeConfirmAnimation(true));
         this.mShowConfirmAnimatorSet.start();
@@ -250,18 +292,25 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
     public void startSetSafeModeAnimation() {
         saveOriginalConfirmViewLocation();
         initializeConfirmViewForSafeMode();
-        this.mViewTreeObserverListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator$$ExternalSyntheticLambda0
-            @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-            public final void onGlobalLayout() {
-                SamsungGlobalActionsAnimator.this.lambda$startSetSafeModeAnimation$2();
-            }
-        };
-        this.mConfirmationView.getViewTreeObserver().addOnGlobalLayoutListener(this.mViewTreeObserverListener);
+        this.mViewTreeObserverListener =
+                new ViewTreeObserver
+                        .OnGlobalLayoutListener() { // from class:
+                                                    // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator$$ExternalSyntheticLambda0
+                    @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
+                    public final void onGlobalLayout() {
+                        SamsungGlobalActionsAnimator.this.lambda$startSetSafeModeAnimation$2();
+                    }
+                };
+        this.mConfirmationView
+                .getViewTreeObserver()
+                .addOnGlobalLayoutListener(this.mViewTreeObserverListener);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$startSetSafeModeAnimation$2() {
-        this.mConfirmationView.getViewTreeObserver().removeOnGlobalLayoutListener(this.mViewTreeObserverListener);
+        this.mConfirmationView
+                .getViewTreeObserver()
+                .removeOnGlobalLayoutListener(this.mViewTreeObserverListener);
         float deltaY = (this.mConfirmIconView.getHeight() * 0.3f) / 2.0f;
         startAnimationForSafeModeOnConfirm(deltaY);
     }
@@ -304,7 +353,8 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
 
     @Override // com.samsung.android.globalactions.presentation.view.GlobalActionsAnimator
     public boolean isHideConfirmAnimationRunning() {
-        return this.mDismissConfirmAnimatorSet != null && this.mDismissConfirmAnimatorSet.isRunning();
+        return this.mDismissConfirmAnimatorSet != null
+                && this.mDismissConfirmAnimatorSet.isRunning();
     }
 
     @Override // com.samsung.android.globalactions.presentation.view.GlobalActionsAnimator
@@ -335,18 +385,28 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
         GlobalActionsContentItemView item = this.mCallback.createConfirmView();
         this.mConfirmationView = this.mCallback.getConfirmationView();
         this.mConfirmIconView = this.mCallback.getConfirmIconLabelView(this.mConfirmationView);
-        this.mConfirmDescriptionView = this.mCallback.getConfirmDescriptionView(this.mConfirmationView);
+        this.mConfirmDescriptionView =
+                this.mCallback.getConfirmDescriptionView(this.mConfirmationView);
         return item;
     }
 
     private AnimatorSet getDefaultAnimatorSet(boolean show) {
         ObjectAnimator backgroundAlpha;
         AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator contentsAlpha = ObjectAnimator.ofFloat(this.mRootView, "alpha", show ? 0.0f : 1.0f, show ? 1.0f : 0.0f);
+        ObjectAnimator contentsAlpha =
+                ObjectAnimator.ofFloat(
+                        this.mRootView, "alpha", show ? 0.0f : 1.0f, show ? 1.0f : 0.0f);
         if (this.mBackgroundView.getBackground() != null) {
-            backgroundAlpha = ObjectAnimator.ofInt(this.mBackgroundView.getBackground().mutate(), "alpha", show ? 0 : 255, show ? 255 : 0);
+            backgroundAlpha =
+                    ObjectAnimator.ofInt(
+                            this.mBackgroundView.getBackground().mutate(),
+                            "alpha",
+                            show ? 0 : 255,
+                            show ? 255 : 0);
         } else {
-            backgroundAlpha = ObjectAnimator.ofFloat(this.mBackgroundView, "alpha", show ? 0.0f : 1.0f, show ? 1.0f : 0.0f);
+            backgroundAlpha =
+                    ObjectAnimator.ofFloat(
+                            this.mBackgroundView, "alpha", show ? 0.0f : 1.0f, show ? 1.0f : 0.0f);
         }
         animatorSet.playTogether(backgroundAlpha, contentsAlpha);
         return animatorSet;
@@ -354,14 +414,57 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
 
     private AnimatorSet getDefaultConfirmAnimatorSet(boolean show) {
         AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator iconScaleX = ObjectAnimator.ofFloat(this.mConfirmIconView, "scaleX", this.mConfirmIconView.getScaleX(), show ? 1.3f : 1.0f);
-        ObjectAnimator iconScaleY = ObjectAnimator.ofFloat(this.mConfirmIconView, "scaleY", this.mConfirmIconView.getScaleY(), show ? 1.3f : 1.0f);
-        ObjectAnimator iconTranslationY = ObjectAnimator.ofFloat(this.mConfirmIconView, "y", this.mConfirmIconView.getY(), show ? this.mOriginalConfirmLocationY : getOriginalLocationY(this.mSelectedActionView));
-        ObjectAnimator iconTranslationX = ObjectAnimator.ofFloat(this.mConfirmIconView, "x", this.mConfirmIconView.getX(), show ? this.mOriginalConfirmLocationX - this.mRootView.getPaddingLeft() : getOriginalLocationX(this.mCallback.getConfirmIconLabelView(this.mSelectedActionView)) - this.mRootView.getPaddingLeft());
-        ObjectAnimator descriptionAlpha = ObjectAnimator.ofFloat(this.mConfirmDescriptionView, "alpha", this.mConfirmDescriptionView.getAlpha(), show ? 1.0f : 0.0f);
+        ObjectAnimator iconScaleX =
+                ObjectAnimator.ofFloat(
+                        this.mConfirmIconView,
+                        "scaleX",
+                        this.mConfirmIconView.getScaleX(),
+                        show ? 1.3f : 1.0f);
+        ObjectAnimator iconScaleY =
+                ObjectAnimator.ofFloat(
+                        this.mConfirmIconView,
+                        "scaleY",
+                        this.mConfirmIconView.getScaleY(),
+                        show ? 1.3f : 1.0f);
+        ObjectAnimator iconTranslationY =
+                ObjectAnimator.ofFloat(
+                        this.mConfirmIconView,
+                        "y",
+                        this.mConfirmIconView.getY(),
+                        show
+                                ? this.mOriginalConfirmLocationY
+                                : getOriginalLocationY(this.mSelectedActionView));
+        ObjectAnimator iconTranslationX =
+                ObjectAnimator.ofFloat(
+                        this.mConfirmIconView,
+                        "x",
+                        this.mConfirmIconView.getX(),
+                        show
+                                ? this.mOriginalConfirmLocationX - this.mRootView.getPaddingLeft()
+                                : getOriginalLocationX(
+                                                this.mCallback.getConfirmIconLabelView(
+                                                        this.mSelectedActionView))
+                                        - this.mRootView.getPaddingLeft());
+        ObjectAnimator descriptionAlpha =
+                ObjectAnimator.ofFloat(
+                        this.mConfirmDescriptionView,
+                        "alpha",
+                        this.mConfirmDescriptionView.getAlpha(),
+                        show ? 1.0f : 0.0f);
         descriptionAlpha.setDuration(400L);
-        ObjectAnimator backgroundAlpha = ObjectAnimator.ofInt(this.mRootView.getBackground().mutate(), "alpha", this.mRootView.getBackground().mutate().getAlpha(), show ? 255 : 0);
-        animatorSet.playTogether(iconScaleX, iconScaleY, descriptionAlpha, backgroundAlpha, iconTranslationY, iconTranslationX);
+        ObjectAnimator backgroundAlpha =
+                ObjectAnimator.ofInt(
+                        this.mRootView.getBackground().mutate(),
+                        "alpha",
+                        this.mRootView.getBackground().mutate().getAlpha(),
+                        show ? 255 : 0);
+        animatorSet.playTogether(
+                iconScaleX,
+                iconScaleY,
+                descriptionAlpha,
+                backgroundAlpha,
+                iconTranslationY,
+                iconTranslationX);
         animatorSet.setInterpolator(this.CONFIRM_ANIMATION_INTERPOLATOR);
         animatorSet.setDuration(300L);
         addAnimatorListenerAdapter(animatorSet, show);
@@ -370,58 +473,99 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
 
     private void addAnimatorListenerAdapter(AnimatorSet animatorSet, boolean show) {
         if (show) {
-            animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.3
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animation) {
-                    SamsungGlobalActionsAnimator.this.mLogWrapper.logDebug(SamsungGlobalActionsAnimator.TAG, "onAnimationStart() : show");
-                    SamsungGlobalActionsAnimator.this.mCallback.requestFocusFor(SamsungGlobalActionsAnimator.this.mConfirmIconView, SamsungGlobalActionsAnimator.this.mSelectedActionView);
-                    SamsungGlobalActionsAnimator.this.mConfirmIconView.setAlpha(1.0f);
-                    SamsungGlobalActionsAnimator.this.mConfirmDescriptionView.setAlpha(0.0f);
-                    SamsungGlobalActionsAnimator.this.mConfirmIconView.setScaleX(1.0f);
-                    SamsungGlobalActionsAnimator.this.mConfirmIconView.setScaleY(1.0f);
-                    SamsungGlobalActionsAnimator.this.mSelectedActionView.setVisibility(4);
-                    SamsungGlobalActionsAnimator.this.mTargetListView.animate().alpha(0.0f).setDuration(200L).start();
-                    SamsungGlobalActionsAnimator.this.mBottomView.animate().alpha(0.0f).setDuration(200L).start();
-                }
+            animatorSet.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.3
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationStart(Animator animation) {
+                            SamsungGlobalActionsAnimator.this.mLogWrapper.logDebug(
+                                    SamsungGlobalActionsAnimator.TAG, "onAnimationStart() : show");
+                            SamsungGlobalActionsAnimator.this.mCallback.requestFocusFor(
+                                    SamsungGlobalActionsAnimator.this.mConfirmIconView,
+                                    SamsungGlobalActionsAnimator.this.mSelectedActionView);
+                            SamsungGlobalActionsAnimator.this.mConfirmIconView.setAlpha(1.0f);
+                            SamsungGlobalActionsAnimator.this.mConfirmDescriptionView.setAlpha(
+                                    0.0f);
+                            SamsungGlobalActionsAnimator.this.mConfirmIconView.setScaleX(1.0f);
+                            SamsungGlobalActionsAnimator.this.mConfirmIconView.setScaleY(1.0f);
+                            SamsungGlobalActionsAnimator.this.mSelectedActionView.setVisibility(4);
+                            SamsungGlobalActionsAnimator.this
+                                    .mTargetListView
+                                    .animate()
+                                    .alpha(0.0f)
+                                    .setDuration(200L)
+                                    .start();
+                            SamsungGlobalActionsAnimator.this
+                                    .mBottomView
+                                    .animate()
+                                    .alpha(0.0f)
+                                    .setDuration(200L)
+                                    .start();
+                        }
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    SamsungGlobalActionsAnimator.this.mLogWrapper.logDebug(SamsungGlobalActionsAnimator.TAG, "onAnimationEnd() : show");
-                    SamsungGlobalActionsAnimator.this.mConfirmDescriptionView.setAlpha(1.0f);
-                    SamsungGlobalActionsAnimator.this.mConfirmIconView.setScaleX(1.3f);
-                    SamsungGlobalActionsAnimator.this.mConfirmIconView.setScaleY(1.3f);
-                    SamsungGlobalActionsAnimator.this.mSelectedActionView.setVisibility(0);
-                    SamsungGlobalActionsAnimator.this.mTargetListView.setVisibility(4);
-                    SamsungGlobalActionsAnimator.this.mBottomView.setVisibility(8);
-                    SamsungGlobalActionsAnimator.this.mShowConfirmAnimatorSet = null;
-                    SamsungGlobalActionsAnimator.this.mViewStateController.setState(ViewAnimationState.IDLE);
-                }
-            });
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            SamsungGlobalActionsAnimator.this.mLogWrapper.logDebug(
+                                    SamsungGlobalActionsAnimator.TAG, "onAnimationEnd() : show");
+                            SamsungGlobalActionsAnimator.this.mConfirmDescriptionView.setAlpha(
+                                    1.0f);
+                            SamsungGlobalActionsAnimator.this.mConfirmIconView.setScaleX(1.3f);
+                            SamsungGlobalActionsAnimator.this.mConfirmIconView.setScaleY(1.3f);
+                            SamsungGlobalActionsAnimator.this.mSelectedActionView.setVisibility(0);
+                            SamsungGlobalActionsAnimator.this.mTargetListView.setVisibility(4);
+                            SamsungGlobalActionsAnimator.this.mBottomView.setVisibility(8);
+                            SamsungGlobalActionsAnimator.this.mShowConfirmAnimatorSet = null;
+                            SamsungGlobalActionsAnimator.this.mViewStateController.setState(
+                                    ViewAnimationState.IDLE);
+                        }
+                    });
         } else {
-            animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.4
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animation) {
-                    SamsungGlobalActionsAnimator.this.mLogWrapper.logDebug(SamsungGlobalActionsAnimator.TAG, "onAnimationStart() : hide");
-                    SamsungGlobalActionsAnimator.this.mTargetListView.setVisibility(0);
-                    SamsungGlobalActionsAnimator.this.mBottomView.setVisibility(0);
-                    SamsungGlobalActionsAnimator.this.mSelectedActionView.setVisibility(4);
-                    SamsungGlobalActionsAnimator.this.mTargetListView.animate().alpha(1.0f).setDuration(200L).start();
-                    SamsungGlobalActionsAnimator.this.mBottomView.animate().alpha(1.0f).setDuration(200L).start();
-                }
+            animatorSet.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.4
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationStart(Animator animation) {
+                            SamsungGlobalActionsAnimator.this.mLogWrapper.logDebug(
+                                    SamsungGlobalActionsAnimator.TAG, "onAnimationStart() : hide");
+                            SamsungGlobalActionsAnimator.this.mTargetListView.setVisibility(0);
+                            SamsungGlobalActionsAnimator.this.mBottomView.setVisibility(0);
+                            SamsungGlobalActionsAnimator.this.mSelectedActionView.setVisibility(4);
+                            SamsungGlobalActionsAnimator.this
+                                    .mTargetListView
+                                    .animate()
+                                    .alpha(1.0f)
+                                    .setDuration(200L)
+                                    .start();
+                            SamsungGlobalActionsAnimator.this
+                                    .mBottomView
+                                    .animate()
+                                    .alpha(1.0f)
+                                    .setDuration(200L)
+                                    .start();
+                        }
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    SamsungGlobalActionsAnimator.this.mLogWrapper.logDebug(SamsungGlobalActionsAnimator.TAG, "onAnimationEnd() : hide");
-                    SamsungGlobalActionsAnimator.this.mCallback.requestFocusFor(SamsungGlobalActionsAnimator.this.mSelectedActionView, SamsungGlobalActionsAnimator.this.mConfirmationView);
-                    SamsungGlobalActionsAnimator.this.mSelectedActionView.setVisibility(0);
-                    SamsungGlobalActionsAnimator.this.mConfirmationView.removeAllViews();
-                    SamsungGlobalActionsAnimator.this.mConfirmationView.setVisibility(8);
-                    SamsungGlobalActionsAnimator.this.mRootView.setDescendantFocusability(262144);
-                    SamsungGlobalActionsAnimator.this.mDismissConfirmAnimatorSet = null;
-                    SamsungGlobalActionsAnimator.this.mPowerOffIconView = null;
-                    SamsungGlobalActionsAnimator.this.mViewStateController.setState(ViewAnimationState.IDLE);
-                }
-            });
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            SamsungGlobalActionsAnimator.this.mLogWrapper.logDebug(
+                                    SamsungGlobalActionsAnimator.TAG, "onAnimationEnd() : hide");
+                            SamsungGlobalActionsAnimator.this.mCallback.requestFocusFor(
+                                    SamsungGlobalActionsAnimator.this.mSelectedActionView,
+                                    SamsungGlobalActionsAnimator.this.mConfirmationView);
+                            SamsungGlobalActionsAnimator.this.mSelectedActionView.setVisibility(0);
+                            SamsungGlobalActionsAnimator.this.mConfirmationView.removeAllViews();
+                            SamsungGlobalActionsAnimator.this.mConfirmationView.setVisibility(8);
+                            SamsungGlobalActionsAnimator.this.mRootView.setDescendantFocusability(
+                                    262144);
+                            SamsungGlobalActionsAnimator.this.mDismissConfirmAnimatorSet = null;
+                            SamsungGlobalActionsAnimator.this.mPowerOffIconView = null;
+                            SamsungGlobalActionsAnimator.this.mViewStateController.setState(
+                                    ViewAnimationState.IDLE);
+                        }
+                    });
         }
     }
 
@@ -431,7 +575,9 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
     }
 
     private void setLocationForDescriptionView(float deltaY) {
-        float descriptionLocationY = (this.mOriginalConfirmLocationY - deltaY) + (this.mConfirmIconView.getHeight() * 1.3f);
+        float descriptionLocationY =
+                (this.mOriginalConfirmLocationY - deltaY)
+                        + (this.mConfirmIconView.getHeight() * 1.3f);
         this.mConfirmDescriptionView.setY((int) descriptionLocationY);
     }
 
@@ -447,38 +593,84 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
         this.mConfirmIconView.setScaleX(1.3f);
         this.mConfirmIconView.setScaleY(1.3f);
         this.mConfirmIconView.setY(this.mOriginalConfirmLocationY + delta);
-        float descriptionLocationY = this.mOriginalConfirmLocationY + (this.mConfirmIconView.getHeight() * 1.3f);
+        float descriptionLocationY =
+                this.mOriginalConfirmLocationY + (this.mConfirmIconView.getHeight() * 1.3f);
         this.mConfirmDescriptionView.setY((int) descriptionLocationY);
-        ObjectAnimator safeModeIconShow = ObjectAnimator.ofFloat(this.mConfirmIconView, "alpha", 0.0f, 1.0f);
-        ObjectAnimator powerOffIconHide = ObjectAnimator.ofFloat(this.mPowerOffIconView, "alpha", 1.0f, 0.0f);
+        ObjectAnimator safeModeIconShow =
+                ObjectAnimator.ofFloat(this.mConfirmIconView, "alpha", 0.0f, 1.0f);
+        ObjectAnimator powerOffIconHide =
+                ObjectAnimator.ofFloat(this.mPowerOffIconView, "alpha", 1.0f, 0.0f);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.setDuration(200L);
         animatorSet.playTogether(safeModeIconShow, powerOffIconHide);
-        animatorSet.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.5
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                SamsungGlobalActionsAnimator.this.mViewStateController.setState(ViewAnimationState.IDLE);
-            }
-        });
+        animatorSet.addListener(
+                new AnimatorListenerAdapter() { // from class:
+                                                // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsAnimator.5
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        SamsungGlobalActionsAnimator.this.mViewStateController.setState(
+                                ViewAnimationState.IDLE);
+                    }
+                });
         this.mViewStateController.setState(ViewAnimationState.SHOW_ANIMATE);
         animatorSet.start();
     }
 
     private AnimatorSet getSafeModeConfirmAnimation(boolean show) {
         AnimatorSet animatorSet = new AnimatorSet();
-        ObjectAnimator powerOffIconScaleX = ObjectAnimator.ofFloat(this.mPowerOffIconView, "scaleX", this.mPowerOffIconView.getScaleX(), show ? 1.3f : 1.0f);
-        ObjectAnimator powerOffIconScaleY = ObjectAnimator.ofFloat(this.mPowerOffIconView, "scaleY", this.mPowerOffIconView.getScaleY(), show ? 1.3f : 1.0f);
-        ObjectAnimator powerOffIconTranslationY = ObjectAnimator.ofFloat(this.mPowerOffIconView, "y", this.mPowerOffIconView.getY(), show ? this.mOriginalConfirmLocationY : getOriginalLocationY(this.mSelectedActionView));
+        ObjectAnimator powerOffIconScaleX =
+                ObjectAnimator.ofFloat(
+                        this.mPowerOffIconView,
+                        "scaleX",
+                        this.mPowerOffIconView.getScaleX(),
+                        show ? 1.3f : 1.0f);
+        ObjectAnimator powerOffIconScaleY =
+                ObjectAnimator.ofFloat(
+                        this.mPowerOffIconView,
+                        "scaleY",
+                        this.mPowerOffIconView.getScaleY(),
+                        show ? 1.3f : 1.0f);
+        ObjectAnimator powerOffIconTranslationY =
+                ObjectAnimator.ofFloat(
+                        this.mPowerOffIconView,
+                        "y",
+                        this.mPowerOffIconView.getY(),
+                        show
+                                ? this.mOriginalConfirmLocationY
+                                : getOriginalLocationY(this.mSelectedActionView));
         int deltaX = (this.mConfirmIconView.getWidth() - this.mPowerOffIconView.getWidth()) / 2;
-        ObjectAnimator powerOffIconTranslationX = ObjectAnimator.ofFloat(this.mPowerOffIconView, "x", this.mPowerOffIconView.getX(), show ? (this.mOriginalConfirmLocationX + deltaX) - this.mRootView.getPaddingLeft() : getOriginalLocationX(this.mCallback.getConfirmIconLabelView(this.mSelectedActionView)) - this.mRootView.getPaddingLeft());
-        animatorSet.playTogether(powerOffIconScaleX, powerOffIconScaleY, powerOffIconTranslationY, powerOffIconTranslationX);
+        ObjectAnimator powerOffIconTranslationX =
+                ObjectAnimator.ofFloat(
+                        this.mPowerOffIconView,
+                        "x",
+                        this.mPowerOffIconView.getX(),
+                        show
+                                ? (this.mOriginalConfirmLocationX + deltaX)
+                                        - this.mRootView.getPaddingLeft()
+                                : getOriginalLocationX(
+                                                this.mCallback.getConfirmIconLabelView(
+                                                        this.mSelectedActionView))
+                                        - this.mRootView.getPaddingLeft());
+        animatorSet.playTogether(
+                powerOffIconScaleX,
+                powerOffIconScaleY,
+                powerOffIconTranslationY,
+                powerOffIconTranslationX);
         AnimatorSet animatorSetAlpha = new AnimatorSet();
         if (show) {
-            ObjectAnimator safeModeIconShow = ObjectAnimator.ofFloat(this.mConfirmIconView, "alpha", this.mConfirmIconView.getAlpha(), 1.0f);
+            ObjectAnimator safeModeIconShow =
+                    ObjectAnimator.ofFloat(
+                            this.mConfirmIconView, "alpha", this.mConfirmIconView.getAlpha(), 1.0f);
             animatorSetAlpha.playTogether(safeModeIconShow);
             this.mPowerOffIconView.setAlpha(0.0f);
         } else {
-            ObjectAnimator powerOffIconShow = ObjectAnimator.ofFloat(this.mPowerOffIconView, "alpha", this.mPowerOffIconView.getAlpha(), 1.0f);
+            ObjectAnimator powerOffIconShow =
+                    ObjectAnimator.ofFloat(
+                            this.mPowerOffIconView,
+                            "alpha",
+                            this.mPowerOffIconView.getAlpha(),
+                            1.0f);
             animatorSetAlpha.playTogether(powerOffIconShow);
             this.mConfirmIconView.setAlpha(0.0f);
         }
@@ -500,6 +692,9 @@ public class SamsungGlobalActionsAnimator implements GlobalActionsAnimator {
     }
 
     private String getDarkThemeBackgroundColor() {
-        return SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_FOLDABLE_TYPE_FOLD") ? "#000000" : "#0A0A0A";
+        return SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_FOLDABLE_TYPE_FOLD")
+                ? "#000000"
+                : "#0A0A0A";
     }
 }

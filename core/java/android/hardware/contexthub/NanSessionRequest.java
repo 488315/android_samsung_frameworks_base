@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class NanSessionRequest implements Parcelable {
-    public static final Parcelable.Creator<NanSessionRequest> CREATOR = new Parcelable.Creator<NanSessionRequest>() { // from class: android.hardware.contexthub.NanSessionRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanSessionRequest createFromParcel(Parcel _aidl_source) {
-            NanSessionRequest _aidl_out = new NanSessionRequest();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<NanSessionRequest> CREATOR =
+            new Parcelable.Creator<NanSessionRequest>() { // from class:
+                // android.hardware.contexthub.NanSessionRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanSessionRequest createFromParcel(Parcel _aidl_source) {
+                    NanSessionRequest _aidl_out = new NanSessionRequest();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanSessionRequest[] newArray(int _aidl_size) {
-            return new NanSessionRequest[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanSessionRequest[] newArray(int _aidl_size) {
+                    return new NanSessionRequest[_aidl_size];
+                }
+            };
     public boolean enable = false;
 
     @Override // android.os.Parcelable

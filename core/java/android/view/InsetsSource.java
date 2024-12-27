@@ -7,8 +7,9 @@ import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
 import android.util.NtpTrustedTime;
 import android.util.proto.ProtoOutputStream;
-import android.view.WindowInsets;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -44,27 +45,26 @@ public class InsetsSource implements Parcelable {
     public static final int ID_IME = createId(null, 0, WindowInsets.Type.ime());
     public static final int ID_IME_CAPTION_BAR = createId(null, 1, WindowInsets.Type.captionBar());
     private static final Rect[] NO_BOUNDING_RECTS = new Rect[0];
-    public static final Parcelable.Creator<InsetsSource> CREATOR = new Parcelable.Creator<InsetsSource>() { // from class: android.view.InsetsSource.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InsetsSource createFromParcel(Parcel in) {
-            return new InsetsSource(in);
-        }
+    public static final Parcelable.Creator<InsetsSource> CREATOR =
+            new Parcelable.Creator<InsetsSource>() { // from class: android.view.InsetsSource.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InsetsSource createFromParcel(Parcel in) {
+                    return new InsetsSource(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InsetsSource[] newArray(int size) {
-            return new InsetsSource[size];
-        }
-    };
-
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Flags {
-    }
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InsetsSource[] newArray(int size) {
+                    return new InsetsSource[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InternalInsetsSide {
-    }
+    public @interface Flags {}
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface InternalInsetsSide {}
 
     public InsetsSource(int id, int type) {
         this.mMinimizedInsetHint = new Rect();
@@ -95,7 +95,8 @@ public class InsetsSource implements Parcelable {
         this.mVisibleFrame = rect;
         this.mFlags = other.mFlags;
         this.mSideHint = other.mSideHint;
-        this.mBoundingRects = other.mBoundingRects != null ? (Rect[]) other.mBoundingRects.clone() : null;
+        this.mBoundingRects =
+                other.mBoundingRects != null ? (Rect[]) other.mBoundingRects.clone() : null;
         if (CoreRune.FW_MINIMIZED_IME_INSET_ANIM) {
             this.mMinimizedInsetHint = other.mMinimizedInsetHint;
         }
@@ -113,7 +114,8 @@ public class InsetsSource implements Parcelable {
         this.mVisibleFrame = rect;
         this.mFlags = other.mFlags;
         this.mSideHint = other.mSideHint;
-        this.mBoundingRects = other.mBoundingRects != null ? (Rect[]) other.mBoundingRects.clone() : null;
+        this.mBoundingRects =
+                other.mBoundingRects != null ? (Rect[]) other.mBoundingRects.clone() : null;
         if (CoreRune.FW_MINIMIZED_IME_INSET_ANIM) {
             this.mMinimizedInsetHint = other.mMinimizedInsetHint;
         }
@@ -205,7 +207,10 @@ public class InsetsSource implements Parcelable {
     }
 
     public Insets calculateVisibleInsets(Rect relativeFrame) {
-        return calculateInsets(relativeFrame, this.mVisibleFrame != null ? this.mVisibleFrame : this.mFrame, false);
+        return calculateInsets(
+                relativeFrame,
+                this.mVisibleFrame != null ? this.mVisibleFrame : this.mFrame,
+                false);
     }
 
     private Insets calculateInsets(Rect relativeFrame, Rect frame, boolean ignoreVisibility) {
@@ -270,7 +275,13 @@ public class InsetsSource implements Parcelable {
         Rect frame = getFrame();
         if (this.mBoundingRects == null) {
             if (this.mTmpBoundingRect.setIntersect(frame, relativeFrame)) {
-                return new Rect[]{new Rect(this.mTmpBoundingRect.left - relativeFrame.left, this.mTmpBoundingRect.top - relativeFrame.top, this.mTmpBoundingRect.right - relativeFrame.left, this.mTmpBoundingRect.bottom - relativeFrame.top)};
+                return new Rect[] {
+                    new Rect(
+                            this.mTmpBoundingRect.left - relativeFrame.left,
+                            this.mTmpBoundingRect.top - relativeFrame.top,
+                            this.mTmpBoundingRect.right - relativeFrame.left,
+                            this.mTmpBoundingRect.bottom - relativeFrame.top)
+                };
             }
             return NO_BOUNDING_RECTS;
         }
@@ -288,9 +299,19 @@ public class InsetsSource implements Parcelable {
         }
         ArrayList<Rect> validBoundingRects2 = new ArrayList<>();
         for (Rect boundingRect2 : this.mBoundingRects) {
-            Rect absBoundingRect = new Rect(boundingRect2.left + frame.left, boundingRect2.top + frame.top, boundingRect2.right + frame.left, boundingRect2.bottom + frame.top);
+            Rect absBoundingRect =
+                    new Rect(
+                            boundingRect2.left + frame.left,
+                            boundingRect2.top + frame.top,
+                            boundingRect2.right + frame.left,
+                            boundingRect2.bottom + frame.top);
             if (this.mTmpBoundingRect.setIntersect(absBoundingRect, relativeFrame)) {
-                validBoundingRects2.add(new Rect(this.mTmpBoundingRect.left - relativeFrame.left, this.mTmpBoundingRect.top - relativeFrame.top, this.mTmpBoundingRect.right - relativeFrame.left, this.mTmpBoundingRect.bottom - relativeFrame.top));
+                validBoundingRects2.add(
+                        new Rect(
+                                this.mTmpBoundingRect.left - relativeFrame.left,
+                                this.mTmpBoundingRect.top - relativeFrame.top,
+                                this.mTmpBoundingRect.right - relativeFrame.left,
+                                this.mTmpBoundingRect.bottom - relativeFrame.top));
             }
         }
         if (validBoundingRects2.isEmpty()) {
@@ -351,7 +372,9 @@ public class InsetsSource implements Parcelable {
         if (index < 0 || index >= 2048) {
             throw new IllegalArgumentException();
         }
-        return ((System.identityHashCode(owner) % 65536) << 16) + (index << 5) + WindowInsets.Type.indexOf(type);
+        return ((System.identityHashCode(owner) % 65536) << 16)
+                + (index << 5)
+                + WindowInsets.Type.indexOf(type);
     }
 
     public static int getIndex(int id) {
@@ -384,7 +407,8 @@ public class InsetsSource implements Parcelable {
 
     public void dumpDebug(ProtoOutputStream proto, long fieldId) {
         long token = proto.start(fieldId);
-        if (!com.android.internal.hidden_from_bootclasspath.android.os.Flags.androidOsBuildVanillaIceCream()) {
+        if (!com.android.internal.hidden_from_bootclasspath.android.os.Flags
+                .androidOsBuildVanillaIceCream()) {
             proto.write(1138166333441L, WindowInsets.Type.toString(this.mType));
         }
         this.mFrame.dumpDebug(proto, 1146756268034L);
@@ -431,20 +455,35 @@ public class InsetsSource implements Parcelable {
             return false;
         }
         InsetsSource that = (InsetsSource) o;
-        if ((CoreRune.FW_MINIMIZED_IME_INSET_ANIM && !this.mMinimizedInsetHint.equals(that.mMinimizedInsetHint)) || this.mId != that.mId || this.mType != that.mType || this.mVisible != that.mVisible || this.mFlags != that.mFlags || this.mSideHint != that.mSideHint) {
+        if ((CoreRune.FW_MINIMIZED_IME_INSET_ANIM
+                        && !this.mMinimizedInsetHint.equals(that.mMinimizedInsetHint))
+                || this.mId != that.mId
+                || this.mType != that.mType
+                || this.mVisible != that.mVisible
+                || this.mFlags != that.mFlags
+                || this.mSideHint != that.mSideHint) {
             return false;
         }
         if (excludeInvisibleImeFrames && !this.mVisible && this.mType == WindowInsets.Type.ime()) {
             return true;
         }
-        if (!Objects.equals(this.mVisibleFrame, that.mVisibleFrame) || !this.mFrame.equals(that.mFrame)) {
+        if (!Objects.equals(this.mVisibleFrame, that.mVisibleFrame)
+                || !this.mFrame.equals(that.mFrame)) {
             return false;
         }
         return Arrays.equals(this.mBoundingRects, that.mBoundingRects);
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mId), Integer.valueOf(this.mType), this.mFrame, this.mVisibleFrame, Boolean.valueOf(this.mVisible), Integer.valueOf(this.mFlags), Integer.valueOf(this.mSideHint), Integer.valueOf(Arrays.hashCode(this.mBoundingRects)));
+        return Objects.hash(
+                Integer.valueOf(this.mId),
+                Integer.valueOf(this.mType),
+                this.mFrame,
+                this.mVisibleFrame,
+                Boolean.valueOf(this.mVisible),
+                Integer.valueOf(this.mFlags),
+                Integer.valueOf(this.mSideHint),
+                Integer.valueOf(Arrays.hashCode(this.mBoundingRects)));
     }
 
     public InsetsSource(Parcel in) {
@@ -499,6 +538,20 @@ public class InsetsSource implements Parcelable {
     }
 
     public String toString() {
-        return "InsetsSource: {" + Integer.toHexString(this.mId) + " mType=" + WindowInsets.Type.toString(this.mType) + " mFrame=" + this.mFrame.toShortString() + " mVisible=" + this.mVisible + " mFlags=" + flagsToString(this.mFlags) + " mSideHint=" + sideToString(this.mSideHint) + " mBoundingRects=" + Arrays.toString(this.mBoundingRects) + "}";
+        return "InsetsSource: {"
+                + Integer.toHexString(this.mId)
+                + " mType="
+                + WindowInsets.Type.toString(this.mType)
+                + " mFrame="
+                + this.mFrame.toShortString()
+                + " mVisible="
+                + this.mVisible
+                + " mFlags="
+                + flagsToString(this.mFlags)
+                + " mSideHint="
+                + sideToString(this.mSideHint)
+                + " mBoundingRects="
+                + Arrays.toString(this.mBoundingRects)
+                + "}";
     }
 }

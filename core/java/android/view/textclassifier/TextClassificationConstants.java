@@ -1,6 +1,7 @@
 package android.view.textclassifier;
 
 import android.provider.DeviceConfig;
+
 import com.android.internal.util.IndentingPrintWriter;
 
 /* loaded from: classes4.dex */
@@ -21,11 +22,13 @@ public final class TextClassificationConstants {
     private static final boolean SMART_SELECT_ANIMATION_ENABLED_DEFAULT = true;
     private static final String SMART_TEXT_SHARE_ENABLED = "smart_text_share_enabled";
     private static final boolean SMART_TEXT_SHARE_ENABLED_DEFAULT = true;
-    static final String SYSTEM_TEXT_CLASSIFIER_API_TIMEOUT_IN_SECOND = "system_textclassifier_api_timeout_in_second";
+    static final String SYSTEM_TEXT_CLASSIFIER_API_TIMEOUT_IN_SECOND =
+            "system_textclassifier_api_timeout_in_second";
     private static final long SYSTEM_TEXT_CLASSIFIER_API_TIMEOUT_IN_SECOND_DEFAULT = 60;
     static final String SYSTEM_TEXT_CLASSIFIER_ENABLED = "system_textclassifier_enabled";
     private static final boolean SYSTEM_TEXT_CLASSIFIER_ENABLED_DEFAULT = true;
-    static final String TEXT_CLASSIFIER_SERVICE_PACKAGE_OVERRIDE = "textclassifier_service_package_override";
+    static final String TEXT_CLASSIFIER_SERVICE_PACKAGE_OVERRIDE =
+            "textclassifier_service_package_override";
     private static int sGenerateLinksMaxTextLength;
     private static boolean sLocalTextClassifierEnabled;
     private static volatile boolean sMemoizedValuesInitialized;
@@ -48,15 +51,21 @@ public final class TextClassificationConstants {
             if (sMemoizedValuesInitialized) {
                 return;
             }
-            DeviceConfig.Properties properties = DeviceConfig.getProperties("textclassifier", new String[0]);
-            sLocalTextClassifierEnabled = properties.getBoolean(LOCAL_TEXT_CLASSIFIER_ENABLED, true);
+            DeviceConfig.Properties properties =
+                    DeviceConfig.getProperties("textclassifier", new String[0]);
+            sLocalTextClassifierEnabled =
+                    properties.getBoolean(LOCAL_TEXT_CLASSIFIER_ENABLED, true);
             sModelDarkLaunchEnabled = properties.getBoolean(MODEL_DARK_LAUNCH_ENABLED, false);
             sSmartSelectionEnabled = properties.getBoolean(SMART_SELECTION_ENABLED, true);
             sSmartTextShareEnabled = properties.getBoolean(SMART_TEXT_SHARE_ENABLED, true);
             sSmartLinkifyEnabled = properties.getBoolean(SMART_LINKIFY_ENABLED, true);
-            sSmartSelectAnimationEnabled = properties.getBoolean(SMART_SELECT_ANIMATION_ENABLED, true);
+            sSmartSelectAnimationEnabled =
+                    properties.getBoolean(SMART_SELECT_ANIMATION_ENABLED, true);
             sGenerateLinksMaxTextLength = properties.getInt(GENERATE_LINKS_MAX_TEXT_LENGTH, 100000);
-            sSystemTextClassifierApiTimeoutInSecond = properties.getLong(SYSTEM_TEXT_CLASSIFIER_API_TIMEOUT_IN_SECOND, SYSTEM_TEXT_CLASSIFIER_API_TIMEOUT_IN_SECOND_DEFAULT);
+            sSystemTextClassifierApiTimeoutInSecond =
+                    properties.getLong(
+                            SYSTEM_TEXT_CLASSIFIER_API_TIMEOUT_IN_SECOND,
+                            SYSTEM_TEXT_CLASSIFIER_API_TIMEOUT_IN_SECOND_DEFAULT);
             sSmartSelectionTrimDelta = properties.getInt(SMART_SELECTION_TRIM_DELTA, 120);
             sMemoizedValuesInitialized = true;
         }
@@ -67,7 +76,10 @@ public final class TextClassificationConstants {
     }
 
     public String getTextClassifierServicePackageOverride() {
-        return DeviceConfig.getString("textclassifier", TEXT_CLASSIFIER_SERVICE_PACKAGE_OVERRIDE, DEFAULT_TEXT_CLASSIFIER_SERVICE_PACKAGE_OVERRIDE);
+        return DeviceConfig.getString(
+                "textclassifier",
+                TEXT_CLASSIFIER_SERVICE_PACKAGE_OVERRIDE,
+                DEFAULT_TEXT_CLASSIFIER_SERVICE_PACKAGE_OVERRIDE);
     }
 
     public boolean isLocalTextClassifierEnabled() {
@@ -122,17 +134,30 @@ public final class TextClassificationConstants {
     void dump(IndentingPrintWriter pw) {
         pw.println("TextClassificationConstants:");
         pw.increaseIndent();
-        pw.print(GENERATE_LINKS_MAX_TEXT_LENGTH, Integer.valueOf(getGenerateLinksMaxTextLength())).println();
-        pw.print(LOCAL_TEXT_CLASSIFIER_ENABLED, Boolean.valueOf(isLocalTextClassifierEnabled())).println();
+        pw.print(GENERATE_LINKS_MAX_TEXT_LENGTH, Integer.valueOf(getGenerateLinksMaxTextLength()))
+                .println();
+        pw.print(LOCAL_TEXT_CLASSIFIER_ENABLED, Boolean.valueOf(isLocalTextClassifierEnabled()))
+                .println();
         pw.print(MODEL_DARK_LAUNCH_ENABLED, Boolean.valueOf(isModelDarkLaunchEnabled())).println();
         pw.print(SMART_LINKIFY_ENABLED, Boolean.valueOf(isSmartLinkifyEnabled())).println();
-        pw.print(SMART_SELECT_ANIMATION_ENABLED, Boolean.valueOf(isSmartSelectionAnimationEnabled())).println();
+        pw.print(
+                        SMART_SELECT_ANIMATION_ENABLED,
+                        Boolean.valueOf(isSmartSelectionAnimationEnabled()))
+                .println();
         pw.print(SMART_SELECTION_ENABLED, Boolean.valueOf(isSmartSelectionEnabled())).println();
         pw.print(SMART_TEXT_SHARE_ENABLED, Boolean.valueOf(isSmartTextShareEnabled())).println();
-        pw.print(SYSTEM_TEXT_CLASSIFIER_ENABLED, Boolean.valueOf(isSystemTextClassifierEnabled())).println();
-        pw.print(TEXT_CLASSIFIER_SERVICE_PACKAGE_OVERRIDE, getTextClassifierServicePackageOverride()).println();
-        pw.print(SYSTEM_TEXT_CLASSIFIER_API_TIMEOUT_IN_SECOND, Long.valueOf(getSystemTextClassifierApiTimeoutInSecond())).println();
-        pw.print(SMART_SELECTION_TRIM_DELTA, Integer.valueOf(getSmartSelectionTrimDelta())).println();
+        pw.print(SYSTEM_TEXT_CLASSIFIER_ENABLED, Boolean.valueOf(isSystemTextClassifierEnabled()))
+                .println();
+        pw.print(
+                        TEXT_CLASSIFIER_SERVICE_PACKAGE_OVERRIDE,
+                        getTextClassifierServicePackageOverride())
+                .println();
+        pw.print(
+                        SYSTEM_TEXT_CLASSIFIER_API_TIMEOUT_IN_SECOND,
+                        Long.valueOf(getSystemTextClassifierApiTimeoutInSecond()))
+                .println();
+        pw.print(SMART_SELECTION_TRIM_DELTA, Integer.valueOf(getSmartSelectionTrimDelta()))
+                .println();
         pw.decreaseIndent();
     }
 }

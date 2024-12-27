@@ -14,8 +14,7 @@ public interface ITaskFpsCallback extends IInterface {
 
     public static class Default implements ITaskFpsCallback {
         @Override // android.window.ITaskFpsCallback
-        public void onFpsReported(float fps) throws RemoteException {
-        }
+        public void onFpsReported(float fps) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface ITaskFpsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITaskFpsCallback {
+    public abstract static class Stub extends Binder implements ITaskFpsCallback {
         static final int TRANSACTION_onFpsReported = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface ITaskFpsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITaskFpsCallback.DESCRIPTOR);
             }

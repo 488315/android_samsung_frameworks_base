@@ -4,8 +4,7 @@ package com.android.internal.org.bouncycastle.crypto;
 public class CryptoException extends Exception {
     private Throwable cause;
 
-    public CryptoException() {
-    }
+    public CryptoException() {}
 
     public CryptoException(String message) {
         super(message);

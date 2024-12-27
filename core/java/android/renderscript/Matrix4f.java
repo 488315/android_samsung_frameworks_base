@@ -230,7 +230,18 @@ public class Matrix4f {
         int r0 = (j + 1) % 4;
         int r1 = (j + 2) % 4;
         int r2 = (j + 3) % 4;
-        float minor = ((this.mMat[(r0 * 4) + c0] * ((this.mMat[(r1 * 4) + c1] * this.mMat[(r2 * 4) + c2]) - (this.mMat[(r2 * 4) + c1] * this.mMat[(r1 * 4) + c2]))) - (this.mMat[(r1 * 4) + c0] * ((this.mMat[(r0 * 4) + c1] * this.mMat[(r2 * 4) + c2]) - (this.mMat[(r2 * 4) + c1] * this.mMat[(r0 * 4) + c2])))) + (this.mMat[(r2 * 4) + c0] * ((this.mMat[(r0 * 4) + c1] * this.mMat[(r1 * 4) + c2]) - (this.mMat[(r1 * 4) + c1] * this.mMat[(r0 * 4) + c2])));
+        float minor =
+                ((this.mMat[(r0 * 4) + c0]
+                                        * ((this.mMat[(r1 * 4) + c1] * this.mMat[(r2 * 4) + c2])
+                                                - (this.mMat[(r2 * 4) + c1]
+                                                        * this.mMat[(r1 * 4) + c2])))
+                                - (this.mMat[(r1 * 4) + c0]
+                                        * ((this.mMat[(r0 * 4) + c1] * this.mMat[(r2 * 4) + c2])
+                                                - (this.mMat[(r2 * 4) + c1]
+                                                        * this.mMat[(r0 * 4) + c2]))))
+                        + (this.mMat[(r2 * 4) + c0]
+                                * ((this.mMat[(r0 * 4) + c1] * this.mMat[(r1 * 4) + c2])
+                                        - (this.mMat[(r1 * 4) + c1] * this.mMat[(r0 * 4) + c2])));
         if (((i + j) & 1) == 0) {
             return minor;
         }
@@ -245,7 +256,11 @@ public class Matrix4f {
                 result.mMat[(i * 4) + j] = computeCofactor(i, j);
             }
         }
-        float det = (this.mMat[0] * result.mMat[0]) + (this.mMat[4] * result.mMat[1]) + (this.mMat[8] * result.mMat[2]) + (this.mMat[12] * result.mMat[3]);
+        float det =
+                (this.mMat[0] * result.mMat[0])
+                        + (this.mMat[4] * result.mMat[1])
+                        + (this.mMat[8] * result.mMat[2])
+                        + (this.mMat[12] * result.mMat[3]);
         if (Math.abs(det) < 1.0E-6d) {
             return false;
         }
@@ -263,7 +278,11 @@ public class Matrix4f {
                 result.mMat[(j * 4) + i] = computeCofactor(i, j);
             }
         }
-        float det = (this.mMat[0] * result.mMat[0]) + (this.mMat[4] * result.mMat[4]) + (this.mMat[8] * result.mMat[8]) + (this.mMat[12] * result.mMat[12]);
+        float det =
+                (this.mMat[0] * result.mMat[0])
+                        + (this.mMat[4] * result.mMat[4])
+                        + (this.mMat[8] * result.mMat[8])
+                        + (this.mMat[12] * result.mMat[12]);
         if (Math.abs(det) < 1.0E-6d) {
             return false;
         }

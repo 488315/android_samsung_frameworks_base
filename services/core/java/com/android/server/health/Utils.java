@@ -1,6 +1,7 @@
 package com.android.server.health;
 
 import android.hardware.health.HealthInfo;
+
 import vendor.samsung.hardware.health.SehHealthInfo;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,8 +31,10 @@ public abstract class Utils {
         healthInfo.batteryTechnology = healthInfo2.batteryTechnology;
         healthInfo.batteryCurrentAverageMicroamps = healthInfo2.batteryCurrentAverageMicroamps;
         healthInfo.batteryCapacityLevel = healthInfo2.batteryCapacityLevel;
-        healthInfo.batteryChargeTimeToFullNowSeconds = healthInfo2.batteryChargeTimeToFullNowSeconds;
-        healthInfo.batteryFullChargeDesignCapacityUah = healthInfo2.batteryFullChargeDesignCapacityUah;
+        healthInfo.batteryChargeTimeToFullNowSeconds =
+                healthInfo2.batteryChargeTimeToFullNowSeconds;
+        healthInfo.batteryFullChargeDesignCapacityUah =
+                healthInfo2.batteryFullChargeDesignCapacityUah;
         sehHealthInfo.batteryCurrentNow = sehHealthInfo2.batteryCurrentNow;
         sehHealthInfo.batteryOnline = sehHealthInfo2.batteryOnline;
         sehHealthInfo.batteryChargeType = sehHealthInfo2.batteryChargeType;

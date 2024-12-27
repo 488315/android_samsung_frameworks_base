@@ -14,17 +14,17 @@ import android.security.keystore.recovery.KeyChainProtectionParams;
 import android.security.keystore.recovery.KeyChainSnapshot;
 import android.security.keystore.recovery.RecoveryCertPath;
 import android.security.keystore.recovery.WrappedApplicationKey;
-import com.android.internal.widget.ICheckCredentialProgressCallback;
-import com.android.internal.widget.IRemoteLockMonitorCallback;
-import com.android.internal.widget.IWeakEscrowTokenActivatedListener;
-import com.android.internal.widget.IWeakEscrowTokenRemovedListener;
+
 import com.samsung.android.knox.dar.ddar.IDualDarAuthProgressCallback;
+
 import java.util.List;
 import java.util.Map;
 
 /* loaded from: classes5.dex */
 public interface ILockSettings extends IInterface {
-    long addWeakEscrowToken(byte[] bArr, int i, IWeakEscrowTokenActivatedListener iWeakEscrowTokenActivatedListener) throws RemoteException;
+    long addWeakEscrowToken(
+            byte[] bArr, int i, IWeakEscrowTokenActivatedListener iWeakEscrowTokenActivatedListener)
+            throws RemoteException;
 
     boolean changeToken(byte[] bArr, long j, byte[] bArr2, long j2, int i) throws RemoteException;
 
@@ -40,13 +40,23 @@ public interface ILockSettings extends IInterface {
 
     boolean checkCarrierPassword(byte[] bArr, int i) throws RemoteException;
 
-    VerifyCredentialResponse checkCredential(LockscreenCredential lockscreenCredential, int i, ICheckCredentialProgressCallback iCheckCredentialProgressCallback) throws RemoteException;
+    VerifyCredentialResponse checkCredential(
+            LockscreenCredential lockscreenCredential,
+            int i,
+            ICheckCredentialProgressCallback iCheckCredentialProgressCallback)
+            throws RemoteException;
 
-    VerifyCredentialResponse checkCredentialForDualDarDo(LockscreenCredential lockscreenCredential, int i, int i2, IDualDarAuthProgressCallback iDualDarAuthProgressCallback) throws RemoteException;
+    VerifyCredentialResponse checkCredentialForDualDarDo(
+            LockscreenCredential lockscreenCredential,
+            int i,
+            int i2,
+            IDualDarAuthProgressCallback iDualDarAuthProgressCallback)
+            throws RemoteException;
 
     boolean checkFMMPassword(byte[] bArr, int i) throws RemoteException;
 
-    void checkRemoteLockPassword(int i, byte[] bArr, int i2, IRemoteCallback iRemoteCallback) throws RemoteException;
+    void checkRemoteLockPassword(int i, byte[] bArr, int i2, IRemoteCallback iRemoteCallback)
+            throws RemoteException;
 
     void closeSession(String str) throws RemoteException;
 
@@ -108,7 +118,8 @@ public interface ILockSettings extends IInterface {
 
     String importKeyWithMetadata(String str, byte[] bArr, byte[] bArr2) throws RemoteException;
 
-    void initRecoveryServiceWithSigFile(String str, byte[] bArr, byte[] bArr2) throws RemoteException;
+    void initRecoveryServiceWithSigFile(String str, byte[] bArr, byte[] bArr2)
+            throws RemoteException;
 
     boolean isRemoteLock(int i) throws RemoteException;
 
@@ -118,17 +129,21 @@ public interface ILockSettings extends IInterface {
 
     boolean isWeakEscrowTokenValid(long j, byte[] bArr, int i) throws RemoteException;
 
-    void notifyPasswordChangedForEnterpriseUser(LockscreenCredential lockscreenCredential, int i) throws RemoteException;
+    void notifyPasswordChangedForEnterpriseUser(LockscreenCredential lockscreenCredential, int i)
+            throws RemoteException;
 
-    Map recoverKeyChainSnapshot(String str, byte[] bArr, List<WrappedApplicationKey> list) throws RemoteException;
+    Map recoverKeyChainSnapshot(String str, byte[] bArr, List<WrappedApplicationKey> list)
+            throws RemoteException;
 
     boolean refreshStoredPinLength(int i) throws RemoteException;
 
-    void registerRemoteLockCallback(int i, IRemoteLockMonitorCallback iRemoteLockMonitorCallback) throws RemoteException;
+    void registerRemoteLockCallback(int i, IRemoteLockMonitorCallback iRemoteLockMonitorCallback)
+            throws RemoteException;
 
     void registerStrongAuthTracker(IStrongAuthTracker iStrongAuthTracker) throws RemoteException;
 
-    boolean registerWeakEscrowTokenRemovedListener(IWeakEscrowTokenRemovedListener iWeakEscrowTokenRemovedListener) throws RemoteException;
+    boolean registerWeakEscrowTokenRemovedListener(
+            IWeakEscrowTokenRemovedListener iWeakEscrowTokenRemovedListener) throws RemoteException;
 
     void removeCachedUnifiedChallenge(int i) throws RemoteException;
 
@@ -168,9 +183,18 @@ public interface ILockSettings extends IInterface {
 
     void setLockCarrierPassword(byte[] bArr, int i) throws RemoteException;
 
-    boolean setLockCredential(LockscreenCredential lockscreenCredential, LockscreenCredential lockscreenCredential2, int i) throws RemoteException;
+    boolean setLockCredential(
+            LockscreenCredential lockscreenCredential,
+            LockscreenCredential lockscreenCredential2,
+            int i)
+            throws RemoteException;
 
-    boolean setLockCredentialWithIgnoreNotifyIfNeeded(LockscreenCredential lockscreenCredential, LockscreenCredential lockscreenCredential2, int i, boolean z) throws RemoteException;
+    boolean setLockCredentialWithIgnoreNotifyIfNeeded(
+            LockscreenCredential lockscreenCredential,
+            LockscreenCredential lockscreenCredential2,
+            int i,
+            boolean z)
+            throws RemoteException;
 
     void setLockFMMPassword(byte[] bArr, int i) throws RemoteException;
 
@@ -186,7 +210,8 @@ public interface ILockSettings extends IInterface {
 
     void setSecurityDebugLevel(int i) throws RemoteException;
 
-    void setSeparateProfileChallengeEnabled(int i, boolean z, LockscreenCredential lockscreenCredential) throws RemoteException;
+    void setSeparateProfileChallengeEnabled(
+            int i, boolean z, LockscreenCredential lockscreenCredential) throws RemoteException;
 
     void setServerParams(byte[] bArr) throws RemoteException;
 
@@ -196,7 +221,14 @@ public interface ILockSettings extends IInterface {
 
     void setString(String str, String str2, int i) throws RemoteException;
 
-    byte[] startRecoverySessionWithCertPath(String str, String str2, RecoveryCertPath recoveryCertPath, byte[] bArr, byte[] bArr2, List<KeyChainProtectionParams> list) throws RemoteException;
+    byte[] startRecoverySessionWithCertPath(
+            String str,
+            String str2,
+            RecoveryCertPath recoveryCertPath,
+            byte[] bArr,
+            byte[] bArr2,
+            List<KeyChainProtectionParams> list)
+            throws RemoteException;
 
     RemoteLockscreenValidationSession startRemoteLockscreenValidation() throws RemoteException;
 
@@ -206,11 +238,13 @@ public interface ILockSettings extends IInterface {
 
     void unlockUserKeyIfUnsecured(int i) throws RemoteException;
 
-    void unregisterRemoteLockCallback(int i, IRemoteLockMonitorCallback iRemoteLockMonitorCallback) throws RemoteException;
+    void unregisterRemoteLockCallback(int i, IRemoteLockMonitorCallback iRemoteLockMonitorCallback)
+            throws RemoteException;
 
     void unregisterStrongAuthTracker(IStrongAuthTracker iStrongAuthTracker) throws RemoteException;
 
-    boolean unregisterWeakEscrowTokenRemovedListener(IWeakEscrowTokenRemovedListener iWeakEscrowTokenRemovedListener) throws RemoteException;
+    boolean unregisterWeakEscrowTokenRemovedListener(
+            IWeakEscrowTokenRemovedListener iWeakEscrowTokenRemovedListener) throws RemoteException;
 
     boolean updateCarrierLock(int i) throws RemoteException;
 
@@ -220,29 +254,30 @@ public interface ILockSettings extends IInterface {
 
     RemoteLockscreenValidationResult validateRemoteLockscreen(byte[] bArr) throws RemoteException;
 
-    VerifyCredentialResponse verifyCredential(LockscreenCredential lockscreenCredential, int i, int i2) throws RemoteException;
+    VerifyCredentialResponse verifyCredential(
+            LockscreenCredential lockscreenCredential, int i, int i2) throws RemoteException;
 
-    VerifyCredentialResponse verifyGatekeeperPasswordHandle(long j, long j2, int i) throws RemoteException;
+    VerifyCredentialResponse verifyGatekeeperPasswordHandle(long j, long j2, int i)
+            throws RemoteException;
 
-    VerifyCredentialResponse verifyTiedProfileChallenge(LockscreenCredential lockscreenCredential, int i, int i2) throws RemoteException;
+    VerifyCredentialResponse verifyTiedProfileChallenge(
+            LockscreenCredential lockscreenCredential, int i, int i2) throws RemoteException;
 
     VerifyCredentialResponse verifyToken(byte[] bArr, long j, int i) throws RemoteException;
 
     public static class Default implements ILockSettings {
         @Override // com.android.internal.widget.ILockSettings
-        public void setBoolean(String key, boolean value, int userId) throws RemoteException {
-        }
+        public void setBoolean(String key, boolean value, int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setLong(String key, long value, int userId) throws RemoteException {
-        }
+        public void setLong(String key, long value, int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setString(String key, String value, int userId) throws RemoteException {
-        }
+        public void setString(String key, String value, int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public boolean getBoolean(String key, boolean defaultValue, int userId) throws RemoteException {
+        public boolean getBoolean(String key, boolean defaultValue, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -252,42 +287,51 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public String getString(String key, String defaultValue, int userId) throws RemoteException {
+        public String getString(String key, String defaultValue, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public boolean setLockCredential(LockscreenCredential credential, LockscreenCredential savedCredential, int userId) throws RemoteException {
+        public boolean setLockCredential(
+                LockscreenCredential credential, LockscreenCredential savedCredential, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void resetKeyStore(int userId) throws RemoteException {
-        }
+        public void resetKeyStore(int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public VerifyCredentialResponse checkCredential(LockscreenCredential credential, int userId, ICheckCredentialProgressCallback progressCallback) throws RemoteException {
+        public VerifyCredentialResponse checkCredential(
+                LockscreenCredential credential,
+                int userId,
+                ICheckCredentialProgressCallback progressCallback)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public VerifyCredentialResponse verifyCredential(LockscreenCredential credential, int userId, int flags) throws RemoteException {
+        public VerifyCredentialResponse verifyCredential(
+                LockscreenCredential credential, int userId, int flags) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public VerifyCredentialResponse verifyTiedProfileChallenge(LockscreenCredential credential, int userId, int flags) throws RemoteException {
+        public VerifyCredentialResponse verifyTiedProfileChallenge(
+                LockscreenCredential credential, int userId, int flags) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public VerifyCredentialResponse verifyGatekeeperPasswordHandle(long gatekeeperPasswordHandle, long challenge, int userId) throws RemoteException {
+        public VerifyCredentialResponse verifyGatekeeperPasswordHandle(
+                long gatekeeperPasswordHandle, long challenge, int userId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void removeGatekeeperPasswordHandle(long gatekeeperPasswordHandle) throws RemoteException {
-        }
+        public void removeGatekeeperPasswordHandle(long gatekeeperPasswordHandle)
+                throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public int getCredentialType(int userId) throws RemoteException {
@@ -305,13 +349,15 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public byte[] getHashFactor(LockscreenCredential currentCredential, int userId) throws RemoteException {
+        public byte[] getHashFactor(LockscreenCredential currentCredential, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setSeparateProfileChallengeEnabled(int userId, boolean enabled, LockscreenCredential managedUserPassword) throws RemoteException {
-        }
+        public void setSeparateProfileChallengeEnabled(
+                int userId, boolean enabled, LockscreenCredential managedUserPassword)
+                throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public boolean getSeparateProfileChallengeEnabled(int userId) throws RemoteException {
@@ -319,32 +365,27 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void registerStrongAuthTracker(IStrongAuthTracker tracker) throws RemoteException {
-        }
+        public void registerStrongAuthTracker(IStrongAuthTracker tracker) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void unregisterStrongAuthTracker(IStrongAuthTracker tracker) throws RemoteException {
-        }
+        public void unregisterStrongAuthTracker(IStrongAuthTracker tracker)
+                throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void requireStrongAuth(int strongAuthReason, int userId) throws RemoteException {
-        }
+        public void requireStrongAuth(int strongAuthReason, int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void reportSuccessfulBiometricUnlock(boolean isStrongBiometric, int userId) throws RemoteException {
-        }
+        public void reportSuccessfulBiometricUnlock(boolean isStrongBiometric, int userId)
+                throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void scheduleNonStrongBiometricIdleTimeout(int userId) throws RemoteException {
-        }
+        public void scheduleNonStrongBiometricIdleTimeout(int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void systemReady() throws RemoteException {
-        }
+        public void systemReady() throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void userPresent(int userId) throws RemoteException {
-        }
+        public void userPresent(int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public int getStrongAuthForUser(int userId) throws RemoteException {
@@ -357,8 +398,11 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void initRecoveryServiceWithSigFile(String rootCertificateAlias, byte[] recoveryServiceCertFile, byte[] recoveryServiceSigFile) throws RemoteException {
-        }
+        public void initRecoveryServiceWithSigFile(
+                String rootCertificateAlias,
+                byte[] recoveryServiceCertFile,
+                byte[] recoveryServiceSigFile)
+                throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public KeyChainSnapshot getKeyChainSnapshot() throws RemoteException {
@@ -371,7 +415,8 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public String generateKeyWithMetadata(String alias, byte[] metadata) throws RemoteException {
+        public String generateKeyWithMetadata(String alias, byte[] metadata)
+                throws RemoteException {
             return null;
         }
 
@@ -381,7 +426,8 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public String importKeyWithMetadata(String alias, byte[] keyBytes, byte[] metadata) throws RemoteException {
+        public String importKeyWithMetadata(String alias, byte[] keyBytes, byte[] metadata)
+                throws RemoteException {
             return null;
         }
 
@@ -391,20 +437,16 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void removeKey(String alias) throws RemoteException {
-        }
+        public void removeKey(String alias) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setSnapshotCreatedPendingIntent(PendingIntent intent) throws RemoteException {
-        }
+        public void setSnapshotCreatedPendingIntent(PendingIntent intent) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setServerParams(byte[] serverParams) throws RemoteException {
-        }
+        public void setServerParams(byte[] serverParams) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setRecoveryStatus(String alias, int status) throws RemoteException {
-        }
+        public void setRecoveryStatus(String alias, int status) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public Map getRecoveryStatus() throws RemoteException {
@@ -412,8 +454,7 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setRecoverySecretTypes(int[] secretTypes) throws RemoteException {
-        }
+        public void setRecoverySecretTypes(int[] secretTypes) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public int[] getRecoverySecretTypes() throws RemoteException {
@@ -421,26 +462,38 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public byte[] startRecoverySessionWithCertPath(String sessionId, String rootCertificateAlias, RecoveryCertPath verifierCertPath, byte[] vaultParams, byte[] vaultChallenge, List<KeyChainProtectionParams> secrets) throws RemoteException {
+        public byte[] startRecoverySessionWithCertPath(
+                String sessionId,
+                String rootCertificateAlias,
+                RecoveryCertPath verifierCertPath,
+                byte[] vaultParams,
+                byte[] vaultChallenge,
+                List<KeyChainProtectionParams> secrets)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public Map recoverKeyChainSnapshot(String sessionId, byte[] recoveryKeyBlob, List<WrappedApplicationKey> applicationKeys) throws RemoteException {
+        public Map recoverKeyChainSnapshot(
+                String sessionId,
+                byte[] recoveryKeyBlob,
+                List<WrappedApplicationKey> applicationKeys)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void closeSession(String sessionId) throws RemoteException {
-        }
+        public void closeSession(String sessionId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public RemoteLockscreenValidationSession startRemoteLockscreenValidation() throws RemoteException {
+        public RemoteLockscreenValidationSession startRemoteLockscreenValidation()
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public RemoteLockscreenValidationResult validateRemoteLockscreen(byte[] encryptedCredential) throws RemoteException {
+        public RemoteLockscreenValidationResult validateRemoteLockscreen(byte[] encryptedCredential)
+                throws RemoteException {
             return null;
         }
 
@@ -455,21 +508,24 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void removeCachedUnifiedChallenge(int userId) throws RemoteException {
-        }
+        public void removeCachedUnifiedChallenge(int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public boolean registerWeakEscrowTokenRemovedListener(IWeakEscrowTokenRemovedListener listener) throws RemoteException {
+        public boolean registerWeakEscrowTokenRemovedListener(
+                IWeakEscrowTokenRemovedListener listener) throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public boolean unregisterWeakEscrowTokenRemovedListener(IWeakEscrowTokenRemovedListener listener) throws RemoteException {
+        public boolean unregisterWeakEscrowTokenRemovedListener(
+                IWeakEscrowTokenRemovedListener listener) throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public long addWeakEscrowToken(byte[] token, int userId, IWeakEscrowTokenActivatedListener callback) throws RemoteException {
+        public long addWeakEscrowToken(
+                byte[] token, int userId, IWeakEscrowTokenActivatedListener callback)
+                throws RemoteException {
             return 0L;
         }
 
@@ -484,21 +540,21 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public boolean isWeakEscrowTokenValid(long handle, byte[] token, int userId) throws RemoteException {
+        public boolean isWeakEscrowTokenValid(long handle, byte[] token, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void unlockUserKeyIfUnsecured(int userId) throws RemoteException {
-        }
+        public void unlockUserKeyIfUnsecured(int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void registerRemoteLockCallback(int type, IRemoteLockMonitorCallback callback) throws RemoteException {
-        }
+        public void registerRemoteLockCallback(int type, IRemoteLockMonitorCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void unregisterRemoteLockCallback(int type, IRemoteLockMonitorCallback callback) throws RemoteException {
-        }
+        public void unregisterRemoteLockCallback(int type, IRemoteLockMonitorCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public boolean setKnoxGuard(int userId, RemoteLockInfo data) throws RemoteException {
@@ -506,20 +562,18 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setRemoteLock(int userId, RemoteLockInfo data) throws RemoteException {
-        }
+        public void setRemoteLock(int userId, RemoteLockInfo data) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void checkRemoteLockPassword(int type, byte[] password, int userId, IRemoteCallback callback) throws RemoteException {
-        }
+        public void checkRemoteLockPassword(
+                int type, byte[] password, int userId, IRemoteCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void requestRemoteLockInfo(int userId) throws RemoteException {
-        }
+        public void requestRemoteLockInfo(int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setLockFMMPassword(byte[] password, int userId) throws RemoteException {
-        }
+        public void setLockFMMPassword(byte[] password, int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public boolean haveFMMPassword(int userId) throws RemoteException {
@@ -542,12 +596,10 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setCarrierLockEnabled(int userId) throws RemoteException {
-        }
+        public void setCarrierLockEnabled(int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setLockCarrierPassword(byte[] password, int userId) throws RemoteException {
-        }
+        public void setLockCarrierPassword(byte[] password, int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public boolean haveCarrierPassword(int userId) throws RemoteException {
@@ -565,12 +617,10 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setLockModeChangedCallback(IRemoteCallback callback) throws RemoteException {
-        }
+        public void setLockModeChangedCallback(IRemoteCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void sendLockTypeChangedInfo(int secureState) throws RemoteException {
-        }
+        public void sendLockTypeChangedInfo(int secureState) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public int getFailureCount(int userId) throws RemoteException {
@@ -583,8 +633,7 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void expirePreviousData() throws RemoteException {
-        }
+        public void expirePreviousData() throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public boolean isSupportWeaver() throws RemoteException {
@@ -592,32 +641,26 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setSecurityDebugLevel(int level) throws RemoteException {
-        }
+        public void setSecurityDebugLevel(int level) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setShellCommandCallback(IRemoteCallback callback) throws RemoteException {
-        }
+        public void setShellCommandCallback(IRemoteCallback callback) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setAppLockPin(String password, int userId) throws RemoteException {
-        }
+        public void setAppLockPin(String password, int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setAppLockPassword(String password, int userId) throws RemoteException {
-        }
+        public void setAppLockPassword(String password, int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setAppLockPattern(String password, int userId) throws RemoteException {
-        }
+        public void setAppLockPattern(String password, int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setAppLockBackupPin(String password, int userId) throws RemoteException {
-        }
+        public void setAppLockBackupPin(String password, int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public void setAppLockFingerprintPassword(String password, int userId) throws RemoteException {
-        }
+        public void setAppLockFingerprintPassword(String password, int userId)
+                throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
         public boolean checkAppLockPin(String password, int userId) throws RemoteException {
@@ -630,7 +673,8 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public boolean checkAppLockPatternWithHash(String password, int userId, byte[] hash) throws RemoteException {
+        public boolean checkAppLockPatternWithHash(String password, int userId, byte[] hash)
+                throws RemoteException {
             return false;
         }
 
@@ -640,7 +684,8 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public boolean checkAppLockFingerprintPassword(String password, int userId) throws RemoteException {
+        public boolean checkAppLockFingerprintPassword(String password, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -670,30 +715,42 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public boolean setLockCredentialWithIgnoreNotifyIfNeeded(LockscreenCredential credential, LockscreenCredential savedCredential, int userId, boolean ignoreNotifyPasswordChanged) throws RemoteException {
+        public boolean setLockCredentialWithIgnoreNotifyIfNeeded(
+                LockscreenCredential credential,
+                LockscreenCredential savedCredential,
+                int userId,
+                boolean ignoreNotifyPasswordChanged)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void notifyPasswordChangedForEnterpriseUser(LockscreenCredential newCredential, int userId) throws RemoteException {
-        }
+        public void notifyPasswordChangedForEnterpriseUser(
+                LockscreenCredential newCredential, int userId) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public VerifyCredentialResponse verifyToken(byte[] token, long tokenHandle, int userId) throws RemoteException {
+        public VerifyCredentialResponse verifyToken(byte[] token, long tokenHandle, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public boolean changeToken(byte[] newToken, long newHandle, byte[] oldToken, long oldHandle, int userId) throws RemoteException {
+        public boolean changeToken(
+                byte[] newToken, long newHandle, byte[] oldToken, long oldHandle, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.widget.ILockSettings
-        public void updateSdpMdfppForSystem(int userId, long value) throws RemoteException {
-        }
+        public void updateSdpMdfppForSystem(int userId, long value) throws RemoteException {}
 
         @Override // com.android.internal.widget.ILockSettings
-        public VerifyCredentialResponse checkCredentialForDualDarDo(LockscreenCredential credential, int userId, int option, IDualDarAuthProgressCallback progressCallback) throws RemoteException {
+        public VerifyCredentialResponse checkCredentialForDualDarDo(
+                LockscreenCredential credential,
+                int userId,
+                int option,
+                IDualDarAuthProgressCallback progressCallback)
+                throws RemoteException {
             return null;
         }
 
@@ -703,7 +760,7 @@ public interface ILockSettings extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILockSettings {
+    public abstract static class Stub extends Binder implements ILockSettings {
         public static final String DESCRIPTOR = "com.android.internal.widget.ILockSettings";
         static final int TRANSACTION_addWeakEscrowToken = 53;
         static final int TRANSACTION_changeToken = 100;
@@ -1045,7 +1102,8 @@ public interface ILockSettings extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -1106,8 +1164,12 @@ public interface ILockSettings extends IInterface {
                     reply.writeString(_result3);
                     return true;
                 case 7:
-                    LockscreenCredential _arg07 = (LockscreenCredential) data.readTypedObject(LockscreenCredential.CREATOR);
-                    LockscreenCredential _arg17 = (LockscreenCredential) data.readTypedObject(LockscreenCredential.CREATOR);
+                    LockscreenCredential _arg07 =
+                            (LockscreenCredential)
+                                    data.readTypedObject(LockscreenCredential.CREATOR);
+                    LockscreenCredential _arg17 =
+                            (LockscreenCredential)
+                                    data.readTypedObject(LockscreenCredential.CREATOR);
                     int _arg27 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result4 = setLockCredential(_arg07, _arg17, _arg27);
@@ -1121,16 +1183,22 @@ public interface ILockSettings extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 9:
-                    LockscreenCredential _arg09 = (LockscreenCredential) data.readTypedObject(LockscreenCredential.CREATOR);
+                    LockscreenCredential _arg09 =
+                            (LockscreenCredential)
+                                    data.readTypedObject(LockscreenCredential.CREATOR);
                     int _arg18 = data.readInt();
-                    ICheckCredentialProgressCallback _arg28 = ICheckCredentialProgressCallback.Stub.asInterface(data.readStrongBinder());
+                    ICheckCredentialProgressCallback _arg28 =
+                            ICheckCredentialProgressCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     VerifyCredentialResponse _result5 = checkCredential(_arg09, _arg18, _arg28);
                     reply.writeNoException();
                     reply.writeTypedObject(_result5, 1);
                     return true;
                 case 10:
-                    LockscreenCredential _arg010 = (LockscreenCredential) data.readTypedObject(LockscreenCredential.CREATOR);
+                    LockscreenCredential _arg010 =
+                            (LockscreenCredential)
+                                    data.readTypedObject(LockscreenCredential.CREATOR);
                     int _arg19 = data.readInt();
                     int _arg29 = data.readInt();
                     data.enforceNoDataAvail();
@@ -1139,11 +1207,14 @@ public interface ILockSettings extends IInterface {
                     reply.writeTypedObject(_result6, 1);
                     return true;
                 case 11:
-                    LockscreenCredential _arg011 = (LockscreenCredential) data.readTypedObject(LockscreenCredential.CREATOR);
+                    LockscreenCredential _arg011 =
+                            (LockscreenCredential)
+                                    data.readTypedObject(LockscreenCredential.CREATOR);
                     int _arg110 = data.readInt();
                     int _arg210 = data.readInt();
                     data.enforceNoDataAvail();
-                    VerifyCredentialResponse _result7 = verifyTiedProfileChallenge(_arg011, _arg110, _arg210);
+                    VerifyCredentialResponse _result7 =
+                            verifyTiedProfileChallenge(_arg011, _arg110, _arg210);
                     reply.writeNoException();
                     reply.writeTypedObject(_result7, 1);
                     return true;
@@ -1152,7 +1223,8 @@ public interface ILockSettings extends IInterface {
                     long _arg111 = data.readLong();
                     int _arg211 = data.readInt();
                     data.enforceNoDataAvail();
-                    VerifyCredentialResponse _result8 = verifyGatekeeperPasswordHandle(_arg012, _arg111, _arg211);
+                    VerifyCredentialResponse _result8 =
+                            verifyGatekeeperPasswordHandle(_arg012, _arg111, _arg211);
                     reply.writeNoException();
                     reply.writeTypedObject(_result8, 1);
                     return true;
@@ -1184,7 +1256,9 @@ public interface ILockSettings extends IInterface {
                     reply.writeBoolean(_result11);
                     return true;
                 case 17:
-                    LockscreenCredential _arg017 = (LockscreenCredential) data.readTypedObject(LockscreenCredential.CREATOR);
+                    LockscreenCredential _arg017 =
+                            (LockscreenCredential)
+                                    data.readTypedObject(LockscreenCredential.CREATOR);
                     int _arg112 = data.readInt();
                     data.enforceNoDataAvail();
                     byte[] _result12 = getHashFactor(_arg017, _arg112);
@@ -1194,7 +1268,9 @@ public interface ILockSettings extends IInterface {
                 case 18:
                     int _arg018 = data.readInt();
                     boolean _arg113 = data.readBoolean();
-                    LockscreenCredential _arg212 = (LockscreenCredential) data.readTypedObject(LockscreenCredential.CREATOR);
+                    LockscreenCredential _arg212 =
+                            (LockscreenCredential)
+                                    data.readTypedObject(LockscreenCredential.CREATOR);
                     data.enforceNoDataAvail();
                     setSeparateProfileChallengeEnabled(_arg018, _arg113, _arg212);
                     reply.writeNoException();
@@ -1207,13 +1283,15 @@ public interface ILockSettings extends IInterface {
                     reply.writeBoolean(_result13);
                     return true;
                 case 20:
-                    IStrongAuthTracker _arg020 = IStrongAuthTracker.Stub.asInterface(data.readStrongBinder());
+                    IStrongAuthTracker _arg020 =
+                            IStrongAuthTracker.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerStrongAuthTracker(_arg020);
                     reply.writeNoException();
                     return true;
                 case 21:
-                    IStrongAuthTracker _arg021 = IStrongAuthTracker.Stub.asInterface(data.readStrongBinder());
+                    IStrongAuthTracker _arg021 =
+                            IStrongAuthTracker.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterStrongAuthTracker(_arg021);
                     reply.writeNoException();
@@ -1321,7 +1399,8 @@ public interface ILockSettings extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 37:
-                    PendingIntent _arg035 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg035 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     setSnapshotCreatedPendingIntent(_arg035);
                     reply.writeNoException();
@@ -1358,19 +1437,24 @@ public interface ILockSettings extends IInterface {
                 case 43:
                     String _arg039 = data.readString();
                     String _arg121 = data.readString();
-                    RecoveryCertPath _arg215 = (RecoveryCertPath) data.readTypedObject(RecoveryCertPath.CREATOR);
+                    RecoveryCertPath _arg215 =
+                            (RecoveryCertPath) data.readTypedObject(RecoveryCertPath.CREATOR);
                     byte[] _arg3 = data.createByteArray();
                     byte[] _arg4 = data.createByteArray();
-                    List<KeyChainProtectionParams> _arg5 = data.createTypedArrayList(KeyChainProtectionParams.CREATOR);
+                    List<KeyChainProtectionParams> _arg5 =
+                            data.createTypedArrayList(KeyChainProtectionParams.CREATOR);
                     data.enforceNoDataAvail();
-                    byte[] _result24 = startRecoverySessionWithCertPath(_arg039, _arg121, _arg215, _arg3, _arg4, _arg5);
+                    byte[] _result24 =
+                            startRecoverySessionWithCertPath(
+                                    _arg039, _arg121, _arg215, _arg3, _arg4, _arg5);
                     reply.writeNoException();
                     reply.writeByteArray(_result24);
                     return true;
                 case 44:
                     String _arg040 = data.readString();
                     byte[] _arg122 = data.createByteArray();
-                    List<WrappedApplicationKey> _arg216 = data.createTypedArrayList(WrappedApplicationKey.CREATOR);
+                    List<WrappedApplicationKey> _arg216 =
+                            data.createTypedArrayList(WrappedApplicationKey.CREATOR);
                     data.enforceNoDataAvail();
                     Map _result25 = recoverKeyChainSnapshot(_arg040, _arg122, _arg216);
                     reply.writeNoException();
@@ -1413,14 +1497,18 @@ public interface ILockSettings extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 51:
-                    IWeakEscrowTokenRemovedListener _arg045 = IWeakEscrowTokenRemovedListener.Stub.asInterface(data.readStrongBinder());
+                    IWeakEscrowTokenRemovedListener _arg045 =
+                            IWeakEscrowTokenRemovedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result30 = registerWeakEscrowTokenRemovedListener(_arg045);
                     reply.writeNoException();
                     reply.writeBoolean(_result30);
                     return true;
                 case 52:
-                    IWeakEscrowTokenRemovedListener _arg046 = IWeakEscrowTokenRemovedListener.Stub.asInterface(data.readStrongBinder());
+                    IWeakEscrowTokenRemovedListener _arg046 =
+                            IWeakEscrowTokenRemovedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result31 = unregisterWeakEscrowTokenRemovedListener(_arg046);
                     reply.writeNoException();
@@ -1429,7 +1517,9 @@ public interface ILockSettings extends IInterface {
                 case 53:
                     byte[] _arg047 = data.createByteArray();
                     int _arg123 = data.readInt();
-                    IWeakEscrowTokenActivatedListener _arg217 = IWeakEscrowTokenActivatedListener.Stub.asInterface(data.readStrongBinder());
+                    IWeakEscrowTokenActivatedListener _arg217 =
+                            IWeakEscrowTokenActivatedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     long _result32 = addWeakEscrowToken(_arg047, _arg123, _arg217);
                     reply.writeNoException();
@@ -1468,21 +1558,24 @@ public interface ILockSettings extends IInterface {
                     return true;
                 case 58:
                     int _arg052 = data.readInt();
-                    IRemoteLockMonitorCallback _arg127 = IRemoteLockMonitorCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteLockMonitorCallback _arg127 =
+                            IRemoteLockMonitorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerRemoteLockCallback(_arg052, _arg127);
                     reply.writeNoException();
                     return true;
                 case 59:
                     int _arg053 = data.readInt();
-                    IRemoteLockMonitorCallback _arg128 = IRemoteLockMonitorCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteLockMonitorCallback _arg128 =
+                            IRemoteLockMonitorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterRemoteLockCallback(_arg053, _arg128);
                     reply.writeNoException();
                     return true;
                 case 60:
                     int _arg054 = data.readInt();
-                    RemoteLockInfo _arg129 = (RemoteLockInfo) data.readTypedObject(RemoteLockInfo.CREATOR);
+                    RemoteLockInfo _arg129 =
+                            (RemoteLockInfo) data.readTypedObject(RemoteLockInfo.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result36 = setKnoxGuard(_arg054, _arg129);
                     reply.writeNoException();
@@ -1490,7 +1583,8 @@ public interface ILockSettings extends IInterface {
                     return true;
                 case 61:
                     int _arg055 = data.readInt();
-                    RemoteLockInfo _arg130 = (RemoteLockInfo) data.readTypedObject(RemoteLockInfo.CREATOR);
+                    RemoteLockInfo _arg130 =
+                            (RemoteLockInfo) data.readTypedObject(RemoteLockInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setRemoteLock(_arg055, _arg130);
                     reply.writeNoException();
@@ -1499,7 +1593,8 @@ public interface ILockSettings extends IInterface {
                     int _arg056 = data.readInt();
                     byte[] _arg131 = data.createByteArray();
                     int _arg219 = data.readInt();
-                    IRemoteCallback _arg32 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg32 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     checkRemoteLockPassword(_arg056, _arg131, _arg219, _arg32);
                     reply.writeNoException();
@@ -1582,7 +1677,8 @@ public interface ILockSettings extends IInterface {
                     reply.writeBoolean(_result43);
                     return true;
                 case 74:
-                    IRemoteCallback _arg068 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg068 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setLockModeChangedCallback(_arg068);
                     return true;
@@ -1617,7 +1713,8 @@ public interface ILockSettings extends IInterface {
                     setSecurityDebugLevel(_arg071);
                     return true;
                 case 81:
-                    IRemoteCallback _arg072 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg072 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setShellCommandCallback(_arg072);
                     return true;
@@ -1733,17 +1830,25 @@ public interface ILockSettings extends IInterface {
                     reply.writeBoolean(_result56);
                     return true;
                 case 97:
-                    LockscreenCredential _arg088 = (LockscreenCredential) data.readTypedObject(LockscreenCredential.CREATOR);
-                    LockscreenCredential _arg146 = (LockscreenCredential) data.readTypedObject(LockscreenCredential.CREATOR);
+                    LockscreenCredential _arg088 =
+                            (LockscreenCredential)
+                                    data.readTypedObject(LockscreenCredential.CREATOR);
+                    LockscreenCredential _arg146 =
+                            (LockscreenCredential)
+                                    data.readTypedObject(LockscreenCredential.CREATOR);
                     int _arg221 = data.readInt();
                     boolean _arg33 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    boolean _result57 = setLockCredentialWithIgnoreNotifyIfNeeded(_arg088, _arg146, _arg221, _arg33);
+                    boolean _result57 =
+                            setLockCredentialWithIgnoreNotifyIfNeeded(
+                                    _arg088, _arg146, _arg221, _arg33);
                     reply.writeNoException();
                     reply.writeBoolean(_result57);
                     return true;
                 case 98:
-                    LockscreenCredential _arg089 = (LockscreenCredential) data.readTypedObject(LockscreenCredential.CREATOR);
+                    LockscreenCredential _arg089 =
+                            (LockscreenCredential)
+                                    data.readTypedObject(LockscreenCredential.CREATOR);
                     int _arg147 = data.readInt();
                     data.enforceNoDataAvail();
                     notifyPasswordChangedForEnterpriseUser(_arg089, _arg147);
@@ -1777,12 +1882,16 @@ public interface ILockSettings extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 102:
-                    LockscreenCredential _arg093 = (LockscreenCredential) data.readTypedObject(LockscreenCredential.CREATOR);
+                    LockscreenCredential _arg093 =
+                            (LockscreenCredential)
+                                    data.readTypedObject(LockscreenCredential.CREATOR);
                     int _arg151 = data.readInt();
                     int _arg224 = data.readInt();
-                    IDualDarAuthProgressCallback _arg35 = IDualDarAuthProgressCallback.Stub.asInterface(data.readStrongBinder());
+                    IDualDarAuthProgressCallback _arg35 =
+                            IDualDarAuthProgressCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    VerifyCredentialResponse _result60 = checkCredentialForDualDarDo(_arg093, _arg151, _arg224, _arg35);
+                    VerifyCredentialResponse _result60 =
+                            checkCredentialForDualDarDo(_arg093, _arg151, _arg224, _arg35);
                     reply.writeNoException();
                     reply.writeTypedObject(_result60, 1);
                     return true;
@@ -1859,7 +1968,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean getBoolean(String key, boolean defaultValue, int userId) throws RemoteException {
+            public boolean getBoolean(String key, boolean defaultValue, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1897,7 +2007,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public String getString(String key, String defaultValue, int userId) throws RemoteException {
+            public String getString(String key, String defaultValue, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1916,7 +2027,11 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean setLockCredential(LockscreenCredential credential, LockscreenCredential savedCredential, int userId) throws RemoteException {
+            public boolean setLockCredential(
+                    LockscreenCredential credential,
+                    LockscreenCredential savedCredential,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1950,7 +2065,11 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public VerifyCredentialResponse checkCredential(LockscreenCredential credential, int userId, ICheckCredentialProgressCallback progressCallback) throws RemoteException {
+            public VerifyCredentialResponse checkCredential(
+                    LockscreenCredential credential,
+                    int userId,
+                    ICheckCredentialProgressCallback progressCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1960,7 +2079,9 @@ public interface ILockSettings extends IInterface {
                     _data.writeStrongInterface(progressCallback);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    VerifyCredentialResponse _result = (VerifyCredentialResponse) _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    VerifyCredentialResponse _result =
+                            (VerifyCredentialResponse)
+                                    _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1969,7 +2090,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public VerifyCredentialResponse verifyCredential(LockscreenCredential credential, int userId, int flags) throws RemoteException {
+            public VerifyCredentialResponse verifyCredential(
+                    LockscreenCredential credential, int userId, int flags) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1979,7 +2101,9 @@ public interface ILockSettings extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    VerifyCredentialResponse _result = (VerifyCredentialResponse) _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    VerifyCredentialResponse _result =
+                            (VerifyCredentialResponse)
+                                    _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1988,7 +2112,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public VerifyCredentialResponse verifyTiedProfileChallenge(LockscreenCredential credential, int userId, int flags) throws RemoteException {
+            public VerifyCredentialResponse verifyTiedProfileChallenge(
+                    LockscreenCredential credential, int userId, int flags) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1998,7 +2123,9 @@ public interface ILockSettings extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    VerifyCredentialResponse _result = (VerifyCredentialResponse) _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    VerifyCredentialResponse _result =
+                            (VerifyCredentialResponse)
+                                    _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2007,7 +2134,9 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public VerifyCredentialResponse verifyGatekeeperPasswordHandle(long gatekeeperPasswordHandle, long challenge, int userId) throws RemoteException {
+            public VerifyCredentialResponse verifyGatekeeperPasswordHandle(
+                    long gatekeeperPasswordHandle, long challenge, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2017,7 +2146,9 @@ public interface ILockSettings extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(12, _data, _reply, 0);
                     _reply.readException();
-                    VerifyCredentialResponse _result = (VerifyCredentialResponse) _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    VerifyCredentialResponse _result =
+                            (VerifyCredentialResponse)
+                                    _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2026,7 +2157,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void removeGatekeeperPasswordHandle(long gatekeeperPasswordHandle) throws RemoteException {
+            public void removeGatekeeperPasswordHandle(long gatekeeperPasswordHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2092,7 +2224,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public byte[] getHashFactor(LockscreenCredential currentCredential, int userId) throws RemoteException {
+            public byte[] getHashFactor(LockscreenCredential currentCredential, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2110,7 +2243,9 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void setSeparateProfileChallengeEnabled(int userId, boolean enabled, LockscreenCredential managedUserPassword) throws RemoteException {
+            public void setSeparateProfileChallengeEnabled(
+                    int userId, boolean enabled, LockscreenCredential managedUserPassword)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2144,7 +2279,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void registerStrongAuthTracker(IStrongAuthTracker tracker) throws RemoteException {
+            public void registerStrongAuthTracker(IStrongAuthTracker tracker)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2159,7 +2295,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void unregisterStrongAuthTracker(IStrongAuthTracker tracker) throws RemoteException {
+            public void unregisterStrongAuthTracker(IStrongAuthTracker tracker)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2190,7 +2327,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void reportSuccessfulBiometricUnlock(boolean isStrongBiometric, int userId) throws RemoteException {
+            public void reportSuccessfulBiometricUnlock(boolean isStrongBiometric, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2284,7 +2422,11 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void initRecoveryServiceWithSigFile(String rootCertificateAlias, byte[] recoveryServiceCertFile, byte[] recoveryServiceSigFile) throws RemoteException {
+            public void initRecoveryServiceWithSigFile(
+                    String rootCertificateAlias,
+                    byte[] recoveryServiceCertFile,
+                    byte[] recoveryServiceSigFile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2308,7 +2450,8 @@ public interface ILockSettings extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(30, _data, _reply, 0);
                     _reply.readException();
-                    KeyChainSnapshot _result = (KeyChainSnapshot) _reply.readTypedObject(KeyChainSnapshot.CREATOR);
+                    KeyChainSnapshot _result =
+                            (KeyChainSnapshot) _reply.readTypedObject(KeyChainSnapshot.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2334,7 +2477,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public String generateKeyWithMetadata(String alias, byte[] metadata) throws RemoteException {
+            public String generateKeyWithMetadata(String alias, byte[] metadata)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2370,7 +2514,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public String importKeyWithMetadata(String alias, byte[] keyBytes, byte[] metadata) throws RemoteException {
+            public String importKeyWithMetadata(String alias, byte[] keyBytes, byte[] metadata)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2421,7 +2566,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void setSnapshotCreatedPendingIntent(PendingIntent intent) throws RemoteException {
+            public void setSnapshotCreatedPendingIntent(PendingIntent intent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2515,7 +2661,14 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public byte[] startRecoverySessionWithCertPath(String sessionId, String rootCertificateAlias, RecoveryCertPath verifierCertPath, byte[] vaultParams, byte[] vaultChallenge, List<KeyChainProtectionParams> secrets) throws RemoteException {
+            public byte[] startRecoverySessionWithCertPath(
+                    String sessionId,
+                    String rootCertificateAlias,
+                    RecoveryCertPath verifierCertPath,
+                    byte[] vaultParams,
+                    byte[] vaultChallenge,
+                    List<KeyChainProtectionParams> secrets)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2537,7 +2690,11 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public Map recoverKeyChainSnapshot(String sessionId, byte[] recoveryKeyBlob, List<WrappedApplicationKey> applicationKeys) throws RemoteException {
+            public Map recoverKeyChainSnapshot(
+                    String sessionId,
+                    byte[] recoveryKeyBlob,
+                    List<WrappedApplicationKey> applicationKeys)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2572,14 +2729,18 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public RemoteLockscreenValidationSession startRemoteLockscreenValidation() throws RemoteException {
+            public RemoteLockscreenValidationSession startRemoteLockscreenValidation()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(46, _data, _reply, 0);
                     _reply.readException();
-                    RemoteLockscreenValidationSession _result = (RemoteLockscreenValidationSession) _reply.readTypedObject(RemoteLockscreenValidationSession.CREATOR);
+                    RemoteLockscreenValidationSession _result =
+                            (RemoteLockscreenValidationSession)
+                                    _reply.readTypedObject(
+                                            RemoteLockscreenValidationSession.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2588,7 +2749,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public RemoteLockscreenValidationResult validateRemoteLockscreen(byte[] encryptedCredential) throws RemoteException {
+            public RemoteLockscreenValidationResult validateRemoteLockscreen(
+                    byte[] encryptedCredential) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2596,7 +2758,10 @@ public interface ILockSettings extends IInterface {
                     _data.writeByteArray(encryptedCredential);
                     this.mRemote.transact(47, _data, _reply, 0);
                     _reply.readException();
-                    RemoteLockscreenValidationResult _result = (RemoteLockscreenValidationResult) _reply.readTypedObject(RemoteLockscreenValidationResult.CREATOR);
+                    RemoteLockscreenValidationResult _result =
+                            (RemoteLockscreenValidationResult)
+                                    _reply.readTypedObject(
+                                            RemoteLockscreenValidationResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2653,7 +2818,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean registerWeakEscrowTokenRemovedListener(IWeakEscrowTokenRemovedListener listener) throws RemoteException {
+            public boolean registerWeakEscrowTokenRemovedListener(
+                    IWeakEscrowTokenRemovedListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2670,7 +2836,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean unregisterWeakEscrowTokenRemovedListener(IWeakEscrowTokenRemovedListener listener) throws RemoteException {
+            public boolean unregisterWeakEscrowTokenRemovedListener(
+                    IWeakEscrowTokenRemovedListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2687,7 +2854,9 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public long addWeakEscrowToken(byte[] token, int userId, IWeakEscrowTokenActivatedListener callback) throws RemoteException {
+            public long addWeakEscrowToken(
+                    byte[] token, int userId, IWeakEscrowTokenActivatedListener callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2742,7 +2911,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean isWeakEscrowTokenValid(long handle, byte[] token, int userId) throws RemoteException {
+            public boolean isWeakEscrowTokenValid(long handle, byte[] token, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2776,7 +2946,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void registerRemoteLockCallback(int type, IRemoteLockMonitorCallback callback) throws RemoteException {
+            public void registerRemoteLockCallback(int type, IRemoteLockMonitorCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2792,7 +2963,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void unregisterRemoteLockCallback(int type, IRemoteLockMonitorCallback callback) throws RemoteException {
+            public void unregisterRemoteLockCallback(int type, IRemoteLockMonitorCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2842,7 +3014,9 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void checkRemoteLockPassword(int type, byte[] password, int userId, IRemoteCallback callback) throws RemoteException {
+            public void checkRemoteLockPassword(
+                    int type, byte[] password, int userId, IRemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3008,7 +3182,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean checkCarrierPassword(byte[] password, int userId) throws RemoteException {
+            public boolean checkCarrierPassword(byte[] password, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3043,7 +3218,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void setLockModeChangedCallback(IRemoteCallback callback) throws RemoteException {
+            public void setLockModeChangedCallback(IRemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -3215,7 +3391,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void setAppLockFingerprintPassword(String password, int userId) throws RemoteException {
+            public void setAppLockFingerprintPassword(String password, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3249,7 +3426,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean checkAppLockPassword(String password, int userId) throws RemoteException {
+            public boolean checkAppLockPassword(String password, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3267,7 +3445,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean checkAppLockPatternWithHash(String password, int userId, byte[] hash) throws RemoteException {
+            public boolean checkAppLockPatternWithHash(String password, int userId, byte[] hash)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3286,7 +3465,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean checkAppLockBackupPin(String password, int userId) throws RemoteException {
+            public boolean checkAppLockBackupPin(String password, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3304,7 +3484,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean checkAppLockFingerprintPassword(String password, int userId) throws RemoteException {
+            public boolean checkAppLockFingerprintPassword(String password, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3407,7 +3588,12 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean setLockCredentialWithIgnoreNotifyIfNeeded(LockscreenCredential credential, LockscreenCredential savedCredential, int userId, boolean ignoreNotifyPasswordChanged) throws RemoteException {
+            public boolean setLockCredentialWithIgnoreNotifyIfNeeded(
+                    LockscreenCredential credential,
+                    LockscreenCredential savedCredential,
+                    int userId,
+                    boolean ignoreNotifyPasswordChanged)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3427,7 +3613,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public void notifyPasswordChangedForEnterpriseUser(LockscreenCredential newCredential, int userId) throws RemoteException {
+            public void notifyPasswordChangedForEnterpriseUser(
+                    LockscreenCredential newCredential, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3443,7 +3630,8 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public VerifyCredentialResponse verifyToken(byte[] token, long tokenHandle, int userId) throws RemoteException {
+            public VerifyCredentialResponse verifyToken(byte[] token, long tokenHandle, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3453,7 +3641,9 @@ public interface ILockSettings extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(99, _data, _reply, 0);
                     _reply.readException();
-                    VerifyCredentialResponse _result = (VerifyCredentialResponse) _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    VerifyCredentialResponse _result =
+                            (VerifyCredentialResponse)
+                                    _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3462,7 +3652,9 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public boolean changeToken(byte[] newToken, long newHandle, byte[] oldToken, long oldHandle, int userId) throws RemoteException {
+            public boolean changeToken(
+                    byte[] newToken, long newHandle, byte[] oldToken, long oldHandle, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3499,7 +3691,12 @@ public interface ILockSettings extends IInterface {
             }
 
             @Override // com.android.internal.widget.ILockSettings
-            public VerifyCredentialResponse checkCredentialForDualDarDo(LockscreenCredential credential, int userId, int option, IDualDarAuthProgressCallback progressCallback) throws RemoteException {
+            public VerifyCredentialResponse checkCredentialForDualDarDo(
+                    LockscreenCredential credential,
+                    int userId,
+                    int option,
+                    IDualDarAuthProgressCallback progressCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3510,7 +3707,9 @@ public interface ILockSettings extends IInterface {
                     _data.writeStrongInterface(progressCallback);
                     this.mRemote.transact(102, _data, _reply, 0);
                     _reply.readException();
-                    VerifyCredentialResponse _result = (VerifyCredentialResponse) _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
+                    VerifyCredentialResponse _result =
+                            (VerifyCredentialResponse)
+                                    _reply.readTypedObject(VerifyCredentialResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

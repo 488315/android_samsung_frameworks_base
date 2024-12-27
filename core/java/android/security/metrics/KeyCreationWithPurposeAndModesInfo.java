@@ -6,21 +6,25 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class KeyCreationWithPurposeAndModesInfo implements Parcelable {
-    public static final Parcelable.Creator<KeyCreationWithPurposeAndModesInfo> CREATOR = new Parcelable.Creator<KeyCreationWithPurposeAndModesInfo>() { // from class: android.security.metrics.KeyCreationWithPurposeAndModesInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyCreationWithPurposeAndModesInfo createFromParcel(Parcel _aidl_source) {
-            KeyCreationWithPurposeAndModesInfo _aidl_out = new KeyCreationWithPurposeAndModesInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<KeyCreationWithPurposeAndModesInfo> CREATOR =
+            new Parcelable.Creator<
+                    KeyCreationWithPurposeAndModesInfo>() { // from class:
+                                                            // android.security.metrics.KeyCreationWithPurposeAndModesInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyCreationWithPurposeAndModesInfo createFromParcel(Parcel _aidl_source) {
+                    KeyCreationWithPurposeAndModesInfo _aidl_out =
+                            new KeyCreationWithPurposeAndModesInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyCreationWithPurposeAndModesInfo[] newArray(int _aidl_size) {
-            return new KeyCreationWithPurposeAndModesInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyCreationWithPurposeAndModesInfo[] newArray(int _aidl_size) {
+                    return new KeyCreationWithPurposeAndModesInfo[_aidl_size];
+                }
+            };
     public int algorithm;
     public int purpose_bitmap = 0;
     public int padding_mode_bitmap = 0;

@@ -1,8 +1,8 @@
 package com.android.server.hdmi;
 
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
-import com.android.server.hdmi.HdmiControlService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -13,15 +13,15 @@ public final class SetArcTransmissionStateAction extends HdmiCecFeatureAction {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.hdmi.SetArcTransmissionStateAction$1, reason: invalid class name */
     public final class AnonymousClass1 implements HdmiControlService.SendMessageCallback {
-        public /* synthetic */ AnonymousClass1() {
-        }
+        public /* synthetic */ AnonymousClass1() {}
 
         @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
         public void onSendCompleted(int i) {
             if (i != 1) {
                 return;
             }
-            SetArcTransmissionStateAction setArcTransmissionStateAction = SetArcTransmissionStateAction.this;
+            SetArcTransmissionStateAction setArcTransmissionStateAction =
+                    SetArcTransmissionStateAction.this;
             setArcTransmissionStateAction.disableArc();
             HdmiLogger.debug("Failed to send <Report Arc Initiated>.", new Object[0]);
             setArcTransmissionStateAction.finish(true);
@@ -30,7 +30,8 @@ public final class SetArcTransmissionStateAction extends HdmiCecFeatureAction {
 
     public SetArcTransmissionStateAction(HdmiCecLocalDevice hdmiCecLocalDevice, int i, boolean z) {
         super(hdmiCecLocalDevice);
-        if (!HdmiUtils.verifyAddressType(getSourceAddress(), 0) || !HdmiUtils.verifyAddressType(i, 5)) {
+        if (!HdmiUtils.verifyAddressType(getSourceAddress(), 0)
+                || !HdmiUtils.verifyAddressType(i, 5)) {
             Slog.w("SetArcTransmissionStateAction", "Device type mismatch, stop the action.");
             finish(true);
         }
@@ -41,7 +42,12 @@ public final class SetArcTransmissionStateAction extends HdmiCecFeatureAction {
     public final void disableArc() {
         Slog.i("SetArcTransmissionStateAction", "Disabling ARC");
         ((HdmiCecLocalDeviceTv) this.mSource).disableArc();
-        sendCommand(HdmiCecMessage.build(getSourceAddress(), this.mAvrAddress, FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__PLATFORM_PROVISIONING_ERROR));
+        sendCommand(
+                HdmiCecMessage.build(
+                        getSourceAddress(),
+                        this.mAvrAddress,
+                        FrameworkStatsLog
+                                .DEVICE_POLICY_EVENT__EVENT_ID__PLATFORM_PROVISIONING_ERROR));
     }
 
     @Override // com.android.server.hdmi.HdmiCecFeatureAction
@@ -54,7 +60,9 @@ public final class SetArcTransmissionStateAction extends HdmiCecFeatureAction {
 
     @Override // com.android.server.hdmi.HdmiCecFeatureAction
     public final boolean processCommand(HdmiCecMessage hdmiCecMessage) {
-        if (this.mState != 1 || hdmiCecMessage.mOpcode != 0 || (hdmiCecMessage.mParams[0] & 255) != 193) {
+        if (this.mState != 1
+                || hdmiCecMessage.mOpcode != 0
+                || (hdmiCecMessage.mParams[0] & 255) != 193) {
             return false;
         }
         HdmiLogger.debug("Feature aborted for <Report Arc Initiated>", new Object[0]);
@@ -71,7 +79,8 @@ public final class SetArcTransmissionStateAction extends HdmiCecFeatureAction {
         } else {
             AnonymousClass1 anonymousClass1 = new AnonymousClass1();
             HdmiCecLocalDevice hdmiCecLocalDevice = this.mSource;
-            hdmiCecLocalDevice.addAndStartAction(new RequestSadAction(hdmiCecLocalDevice, anonymousClass1));
+            hdmiCecLocalDevice.addAndStartAction(
+                    new RequestSadAction(hdmiCecLocalDevice, anonymousClass1));
         }
     }
 }

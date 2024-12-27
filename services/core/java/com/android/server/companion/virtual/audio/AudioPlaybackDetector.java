@@ -7,6 +7,7 @@ import android.media.AudioPlaybackConfiguration;
 import android.os.RemoteException;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +30,9 @@ public final class AudioPlaybackDetector extends AudioManager.AudioPlaybackCallb
         if (virtualAudioController != null) {
             synchronized (virtualAudioController.mLock) {
                 try {
-                    ArraySet findPlayingAppUids = VirtualAudioController.findPlayingAppUids(virtualAudioController.mRunningAppUids, list);
+                    ArraySet findPlayingAppUids =
+                            VirtualAudioController.findPlayingAppUids(
+                                    virtualAudioController.mRunningAppUids, list);
                     if (!virtualAudioController.mPlayingAppUids.equals(findPlayingAppUids)) {
                         virtualAudioController.mPlayingAppUids = findPlayingAppUids;
                         virtualAudioController.notifyAppsNeedingAudioRoutingChanged();
@@ -42,19 +45,25 @@ public final class AudioPlaybackDetector extends AudioManager.AudioPlaybackCallb
                 arrayList = new ArrayList();
                 Iterator it = list.iterator();
                 while (it.hasNext()) {
-                    AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) it.next();
-                    if (arraySet.contains(Integer.valueOf(audioPlaybackConfiguration.getClientUid()))) {
+                    AudioPlaybackConfiguration audioPlaybackConfiguration =
+                            (AudioPlaybackConfiguration) it.next();
+                    if (arraySet.contains(
+                            Integer.valueOf(audioPlaybackConfiguration.getClientUid()))) {
                         arrayList.add(audioPlaybackConfiguration);
                     }
                 }
             }
             synchronized (virtualAudioController.mCallbackLock) {
-                IAudioConfigChangedCallback iAudioConfigChangedCallback = virtualAudioController.mConfigChangedCallback;
+                IAudioConfigChangedCallback iAudioConfigChangedCallback =
+                        virtualAudioController.mConfigChangedCallback;
                 if (iAudioConfigChangedCallback != null) {
                     try {
                         iAudioConfigChangedCallback.onPlaybackConfigChanged(arrayList);
                     } catch (RemoteException e) {
-                        Slog.e("VirtualAudioController", "RemoteException when calling onPlaybackConfigChanged", e);
+                        Slog.e(
+                                "VirtualAudioController",
+                                "RemoteException when calling onPlaybackConfigChanged",
+                                e);
                     }
                 }
             }

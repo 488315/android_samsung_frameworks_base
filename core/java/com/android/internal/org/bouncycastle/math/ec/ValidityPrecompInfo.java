@@ -7,8 +7,7 @@ class ValidityPrecompInfo implements PreCompInfo {
     private boolean curveEquationPassed = false;
     private boolean orderPassed = false;
 
-    ValidityPrecompInfo() {
-    }
+    ValidityPrecompInfo() {}
 
     boolean hasFailed() {
         return this.failed;

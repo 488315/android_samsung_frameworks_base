@@ -1,15 +1,18 @@
 package android.audio.policy.configuration.V7_0;
 
-import java.io.IOException;
-import java.io.InputStream;
-import javax.xml.datatype.DatatypeConfigurationException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+
 /* loaded from: classes.dex */
 public class XmlParser {
-    public static AudioPolicyConfiguration read(InputStream in) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    public static AudioPolicyConfiguration read(InputStream in)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         XmlPullParser _parser = XmlPullParserFactory.newInstance().newPullParser();
         _parser.setFeature("http://xmlpull.org/v1/doc/features.html#process-namespaces", true);
         _parser.setInput(in, null);
@@ -22,7 +25,8 @@ public class XmlParser {
         return _value;
     }
 
-    public static String readText(XmlPullParser _parser) throws XmlPullParserException, IOException {
+    public static String readText(XmlPullParser _parser)
+            throws XmlPullParserException, IOException {
         if (_parser.next() != 4) {
             return "";
         }

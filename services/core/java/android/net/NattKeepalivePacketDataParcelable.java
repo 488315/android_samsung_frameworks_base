@@ -5,6 +5,7 @@ import android.hardware.broadcastradio.AmFmBandRange$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
@@ -22,7 +23,8 @@ public class NattKeepalivePacketDataParcelable implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            NattKeepalivePacketDataParcelable nattKeepalivePacketDataParcelable = new NattKeepalivePacketDataParcelable();
+            NattKeepalivePacketDataParcelable nattKeepalivePacketDataParcelable =
+                    new NattKeepalivePacketDataParcelable();
             nattKeepalivePacketDataParcelable.readFromParcel(parcel);
             return nattKeepalivePacketDataParcelable;
         }
@@ -54,7 +56,8 @@ public class NattKeepalivePacketDataParcelable implements Parcelable {
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             this.dstPort = parcel.readInt();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                             parcel.setDataPosition(dataPosition + readInt);
                             return;
@@ -84,10 +87,18 @@ public class NattKeepalivePacketDataParcelable implements Parcelable {
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         stringJoiner.add("srcAddress: " + Arrays.toString(this.srcAddress));
-        StringBuilder m = AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("srcPort: "), this.srcPort, stringJoiner, "dstAddress: ");
+        StringBuilder m =
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("srcPort: "), this.srcPort, stringJoiner, "dstAddress: ");
         m.append(Arrays.toString(this.dstAddress));
         stringJoiner.add(m.toString());
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("dstPort: "), this.dstPort, stringJoiner, "NattKeepalivePacketDataParcelable"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("dstPort: "),
+                        this.dstPort,
+                        stringJoiner,
+                        "NattKeepalivePacketDataParcelable"));
     }
 
     @Override // android.os.Parcelable
@@ -97,7 +108,9 @@ public class NattKeepalivePacketDataParcelable implements Parcelable {
         parcel.writeByteArray(this.srcAddress);
         parcel.writeInt(this.srcPort);
         parcel.writeByteArray(this.dstAddress);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.dstPort, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.dstPort, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

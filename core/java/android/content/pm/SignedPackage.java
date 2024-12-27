@@ -1,6 +1,7 @@
 package android.content.pm;
 
 import android.annotation.SystemApi;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -40,10 +41,13 @@ public class SignedPackage {
             return false;
         }
         SignedPackage that = (SignedPackage) o;
-        return this.mData.packageName.equals(that.mData.packageName) && Arrays.equals(this.mData.certificateDigest, that.mData.certificateDigest);
+        return this.mData.packageName.equals(that.mData.packageName)
+                && Arrays.equals(this.mData.certificateDigest, that.mData.certificateDigest);
     }
 
     public int hashCode() {
-        return Objects.hash(this.mData.packageName, Integer.valueOf(Arrays.hashCode(this.mData.certificateDigest)));
+        return Objects.hash(
+                this.mData.packageName,
+                Integer.valueOf(Arrays.hashCode(this.mData.certificateDigest)));
     }
 }

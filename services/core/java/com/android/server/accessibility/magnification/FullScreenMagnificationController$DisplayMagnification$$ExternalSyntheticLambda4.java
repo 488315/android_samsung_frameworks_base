@@ -8,16 +8,20 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.DisplayInfo;
 import android.view.MagnificationSpec;
+
 import com.android.internal.util.function.QuintConsumer;
-import com.android.server.accessibility.magnification.FullScreenMagnificationController;
+
 import java.util.Locale;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class FullScreenMagnificationController$DisplayMagnification$$ExternalSyntheticLambda4 implements QuintConsumer {
+public final /* synthetic */
+class FullScreenMagnificationController$DisplayMagnification$$ExternalSyntheticLambda4
+        implements QuintConsumer {
     public final void accept(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
         float f;
-        FullScreenMagnificationController.DisplayMagnification displayMagnification = (FullScreenMagnificationController.DisplayMagnification) obj;
+        FullScreenMagnificationController.DisplayMagnification displayMagnification =
+                (FullScreenMagnificationController.DisplayMagnification) obj;
         int intValue = ((Integer) obj2).intValue();
         int intValue2 = ((Integer) obj3).intValue();
         int intValue3 = ((Integer) obj4).intValue();
@@ -28,7 +32,8 @@ public final /* synthetic */ class FullScreenMagnificationController$DisplayMagn
                 rect.set(displayMagnification.mMagnificationBounds);
                 if (rect.intersects(intValue, intValue2, intValue3, intValue4)) {
                     Rect rect2 = displayMagnification.mTempRect1;
-                    MagnificationSpec magnificationSpec = displayMagnification.mSpecAnimationBridge.mSentMagnificationSpec;
+                    MagnificationSpec magnificationSpec =
+                            displayMagnification.mSpecAnimationBridge.mSentMagnificationSpec;
                     float f2 = magnificationSpec.scale;
                     float f3 = magnificationSpec.offsetX;
                     float f4 = magnificationSpec.offsetY;
@@ -36,9 +41,14 @@ public final /* synthetic */ class FullScreenMagnificationController$DisplayMagn
                     rect2.offset((int) (-f3), (int) (-f4));
                     rect2.scale(1.0f / f2);
                     DisplayMetrics displayMetrics = new DisplayMetrics();
-                    DisplayInfo displayInfo = FullScreenMagnificationController.this.mDisplayManagerInternal.getDisplayInfo(displayMagnification.mDisplayId);
+                    DisplayInfo displayInfo =
+                            FullScreenMagnificationController.this.mDisplayManagerInternal
+                                    .getDisplayInfo(displayMagnification.mDisplayId);
                     if (displayInfo != null) {
-                        displayInfo.getLogicalMetrics(displayMetrics, CompatibilityInfo.DEFAULT_COMPATIBILITY_INFO, (Configuration) null);
+                        displayInfo.getLogicalMetrics(
+                                displayMetrics,
+                                CompatibilityInfo.DEFAULT_COMPATIBILITY_INFO,
+                                (Configuration) null);
                     } else {
                         displayMetrics.setToDefaults();
                     }
@@ -48,7 +58,10 @@ public final /* synthetic */ class FullScreenMagnificationController$DisplayMagn
                     int width2 = rect2.width();
                     float f5 = FullScreenMagnificationGestureHandler.MAX_SCALE;
                     if (i > width2) {
-                        f = TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == 0 ? intValue - rect2.left : intValue3 - rect2.right;
+                        f =
+                                TextUtils.getLayoutDirectionFromLocale(Locale.getDefault()) == 0
+                                        ? intValue - rect2.left
+                                        : intValue3 - rect2.right;
                     } else {
                         if (intValue < rect2.left) {
                             f = (intValue - r3) - width;

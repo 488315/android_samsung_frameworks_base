@@ -5,19 +5,20 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ObbInfo implements Parcelable {
-    public static final Parcelable.Creator<ObbInfo> CREATOR = new Parcelable.Creator<ObbInfo>() { // from class: android.content.res.ObbInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ObbInfo createFromParcel(Parcel source) {
-            return new ObbInfo(source);
-        }
+    public static final Parcelable.Creator<ObbInfo> CREATOR =
+            new Parcelable.Creator<ObbInfo>() { // from class: android.content.res.ObbInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ObbInfo createFromParcel(Parcel source) {
+                    return new ObbInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ObbInfo[] newArray(int size) {
-            return new ObbInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ObbInfo[] newArray(int size) {
+                    return new ObbInfo[size];
+                }
+            };
     public static final int OBB_OVERLAY = 1;
     public String filename;
     public int flags;
@@ -25,11 +26,18 @@ public class ObbInfo implements Parcelable {
     public byte[] salt;
     public int version;
 
-    ObbInfo() {
-    }
+    ObbInfo() {}
 
     public String toString() {
-        return "ObbInfo{" + Integer.toHexString(System.identityHashCode(this)) + " packageName=" + this.packageName + ",version=" + this.version + ",flags=" + this.flags + '}';
+        return "ObbInfo{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " packageName="
+                + this.packageName
+                + ",version="
+                + this.version
+                + ",flags="
+                + this.flags
+                + '}';
     }
 
     @Override // android.os.Parcelable

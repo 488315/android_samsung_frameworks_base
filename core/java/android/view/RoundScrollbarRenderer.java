@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -36,7 +37,10 @@ class RoundScrollbarRenderer {
         this.mTrackPaint.setStrokeCap(Paint.Cap.ROUND);
         this.mTrackPaint.setStyle(Paint.Style.STROKE);
         this.mParent = parent;
-        this.mMaskThickness = parent.getContext().getResources().getDimensionPixelSize(R.dimen.circular_display_mask_thickness);
+        this.mMaskThickness =
+                parent.getContext()
+                        .getResources()
+                        .getDimensionPixelSize(R.dimen.circular_display_mask_thickness);
     }
 
     public void drawRoundScrollbars(Canvas canvas, float alpha, Rect bounds, boolean drawToLeft) {
@@ -55,7 +59,8 @@ class RoundScrollbarRenderer {
         } else if (maxScroll <= scrollExtent) {
             return;
         }
-        if (Math.abs(maxScroll - this.mPreviousMaxScroll) > 20.0f && this.mPreviousMaxScroll != 0.0f) {
+        if (Math.abs(maxScroll - this.mPreviousMaxScroll) > 20.0f
+                && this.mPreviousMaxScroll != 0.0f) {
             this.mMaxScrollDiff += maxScroll - this.mPreviousMaxScroll;
             this.mCurrentScrollDiff += newScroll - this.mPreviousCurrentScroll;
         }
@@ -77,10 +82,24 @@ class RoundScrollbarRenderer {
         this.mTrackPaint.setStrokeWidth(thumbWidth);
         setThumbColor(applyAlpha(-1, alpha));
         setTrackColor(applyAlpha(DEFAULT_TRACK_COLOR, alpha));
-        float sweepAngle = clamp((linearThumbLength / maxScroll) * SCROLLBAR_ANGLE_RANGE, MIN_SCROLLBAR_ANGLE_SWIPE, MAX_SCROLLBAR_ANGLE_SWIPE);
-        float startAngle = clamp((((SCROLLBAR_ANGLE_RANGE - sweepAngle) * currentScroll) / (maxScroll - linearThumbLength)) - 14.4f, -14.4f, 14.4f - sweepAngle);
+        float sweepAngle =
+                clamp(
+                        (linearThumbLength / maxScroll) * SCROLLBAR_ANGLE_RANGE,
+                        MIN_SCROLLBAR_ANGLE_SWIPE,
+                        MAX_SCROLLBAR_ANGLE_SWIPE);
+        float startAngle =
+                clamp(
+                        (((SCROLLBAR_ANGLE_RANGE - sweepAngle) * currentScroll)
+                                        / (maxScroll - linearThumbLength))
+                                - 14.4f,
+                        -14.4f,
+                        14.4f - sweepAngle);
         float inset = (thumbWidth / 2.0f) + this.mMaskThickness;
-        this.mRect.set(bounds.left + inset, bounds.top + inset, bounds.right - inset, bounds.bottom - inset);
+        this.mRect.set(
+                bounds.left + inset,
+                bounds.top + inset,
+                bounds.right - inset,
+                bounds.bottom - inset);
         if (drawToLeft) {
             canvas.drawArc(this.mRect, 194.4f, -28.8f, false, this.mTrackPaint);
             canvas.drawArc(this.mRect, 180.0f - startAngle, -sweepAngle, false, this.mThumbPaint);
@@ -128,6 +147,7 @@ class RoundScrollbarRenderer {
     }
 
     private float dpToPx(float dp) {
-        return (this.mParent.getContext().getResources().getDisplayMetrics().densityDpi * dp) / 160.0f;
+        return (this.mParent.getContext().getResources().getDisplayMetrics().densityDpi * dp)
+                / 160.0f;
     }
 }

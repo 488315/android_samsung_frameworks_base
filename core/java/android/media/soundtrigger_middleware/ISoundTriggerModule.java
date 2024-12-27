@@ -12,7 +12,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISoundTriggerModule extends IInterface {
-    public static final String DESCRIPTOR = "android.media.soundtrigger_middleware.ISoundTriggerModule";
+    public static final String DESCRIPTOR =
+            "android.media.soundtrigger_middleware.ISoundTriggerModule";
 
     void detach() throws RemoteException;
 
@@ -46,25 +47,23 @@ public interface ISoundTriggerModule extends IInterface {
         }
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
-        public void unloadModel(int modelHandle) throws RemoteException {
-        }
+        public void unloadModel(int modelHandle) throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
-        public IBinder startRecognition(int modelHandle, RecognitionConfig config) throws RemoteException {
+        public IBinder startRecognition(int modelHandle, RecognitionConfig config)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
-        public void stopRecognition(int modelHandle) throws RemoteException {
-        }
+        public void stopRecognition(int modelHandle) throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
-        public void forceRecognitionEvent(int modelHandle) throws RemoteException {
-        }
+        public void forceRecognitionEvent(int modelHandle) throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
-        public void setModelParameter(int modelHandle, int modelParam, int value) throws RemoteException {
-        }
+        public void setModelParameter(int modelHandle, int modelParam, int value)
+                throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
         public int getModelParameter(int modelHandle, int modelParam) throws RemoteException {
@@ -72,13 +71,13 @@ public interface ISoundTriggerModule extends IInterface {
         }
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
-        public ModelParameterRange queryModelParameterSupport(int modelHandle, int modelParam) throws RemoteException {
+        public ModelParameterRange queryModelParameterSupport(int modelHandle, int modelParam)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
-        public void detach() throws RemoteException {
-        }
+        public void detach() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -86,7 +85,7 @@ public interface ISoundTriggerModule extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISoundTriggerModule {
+    public abstract static class Stub extends Binder implements ISoundTriggerModule {
         static final int TRANSACTION_detach = 10;
         static final int TRANSACTION_forceRecognitionEvent = 6;
         static final int TRANSACTION_getModelParameter = 8;
@@ -119,7 +118,8 @@ public interface ISoundTriggerModule extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISoundTriggerModule.DESCRIPTOR);
             }
@@ -136,7 +136,8 @@ public interface ISoundTriggerModule extends IInterface {
                     reply.writeInt(_result);
                     return true;
                 case 2:
-                    PhraseSoundModel _arg02 = (PhraseSoundModel) data.readTypedObject(PhraseSoundModel.CREATOR);
+                    PhraseSoundModel _arg02 =
+                            (PhraseSoundModel) data.readTypedObject(PhraseSoundModel.CREATOR);
                     data.enforceNoDataAvail();
                     int _result2 = loadPhraseModel(_arg02);
                     reply.writeNoException();
@@ -150,7 +151,8 @@ public interface ISoundTriggerModule extends IInterface {
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    RecognitionConfig _arg1 = (RecognitionConfig) data.readTypedObject(RecognitionConfig.CREATOR);
+                    RecognitionConfig _arg1 =
+                            (RecognitionConfig) data.readTypedObject(RecognitionConfig.CREATOR);
                     data.enforceNoDataAvail();
                     IBinder _result3 = startRecognition(_arg04, _arg1);
                     reply.writeNoException();
@@ -267,7 +269,8 @@ public interface ISoundTriggerModule extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
-            public IBinder startRecognition(int modelHandle, RecognitionConfig config) throws RemoteException {
+            public IBinder startRecognition(int modelHandle, RecognitionConfig config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -315,7 +318,8 @@ public interface ISoundTriggerModule extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
-            public void setModelParameter(int modelHandle, int modelParam, int value) throws RemoteException {
+            public void setModelParameter(int modelHandle, int modelParam, int value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -350,7 +354,8 @@ public interface ISoundTriggerModule extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerModule
-            public ModelParameterRange queryModelParameterSupport(int modelHandle, int modelParam) throws RemoteException {
+            public ModelParameterRange queryModelParameterSupport(int modelHandle, int modelParam)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -359,7 +364,9 @@ public interface ISoundTriggerModule extends IInterface {
                     _data.writeInt(modelParam);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    ModelParameterRange _result = (ModelParameterRange) _reply.readTypedObject(ModelParameterRange.CREATOR);
+                    ModelParameterRange _result =
+                            (ModelParameterRange)
+                                    _reply.readTypedObject(ModelParameterRange.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

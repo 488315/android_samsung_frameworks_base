@@ -6,21 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ApexInfo implements Parcelable {
-    public static final Parcelable.Creator<ApexInfo> CREATOR = new Parcelable.Creator<ApexInfo>() { // from class: android.apex.ApexInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApexInfo createFromParcel(Parcel _aidl_source) {
-            ApexInfo _aidl_out = new ApexInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ApexInfo> CREATOR =
+            new Parcelable.Creator<ApexInfo>() { // from class: android.apex.ApexInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApexInfo createFromParcel(Parcel _aidl_source) {
+                    ApexInfo _aidl_out = new ApexInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApexInfo[] newArray(int _aidl_size) {
-            return new ApexInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApexInfo[] newArray(int _aidl_size) {
+                    return new ApexInfo[_aidl_size];
+                }
+            };
     public String moduleName;
     public String modulePath;
     public String preinstalledModulePath;

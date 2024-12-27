@@ -12,8 +12,7 @@ public interface IHdmiDeviceEventListener extends IInterface {
 
     public static class Default implements IHdmiDeviceEventListener {
         @Override // android.hardware.hdmi.IHdmiDeviceEventListener
-        public void onStatusChanged(HdmiDeviceInfo deviceInfo, int status) throws RemoteException {
-        }
+        public void onStatusChanged(HdmiDeviceInfo deviceInfo, int status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IHdmiDeviceEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHdmiDeviceEventListener {
+    public abstract static class Stub extends Binder implements IHdmiDeviceEventListener {
         public static final String DESCRIPTOR = "android.hardware.hdmi.IHdmiDeviceEventListener";
         static final int TRANSACTION_onStatusChanged = 1;
 
@@ -60,7 +59,8 @@ public interface IHdmiDeviceEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +70,8 @@ public interface IHdmiDeviceEventListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    HdmiDeviceInfo _arg0 = (HdmiDeviceInfo) data.readTypedObject(HdmiDeviceInfo.CREATOR);
+                    HdmiDeviceInfo _arg0 =
+                            (HdmiDeviceInfo) data.readTypedObject(HdmiDeviceInfo.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     onStatusChanged(_arg0, _arg1);
@@ -97,7 +98,8 @@ public interface IHdmiDeviceEventListener extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiDeviceEventListener
-            public void onStatusChanged(HdmiDeviceInfo deviceInfo, int status) throws RemoteException {
+            public void onStatusChanged(HdmiDeviceInfo deviceInfo, int status)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

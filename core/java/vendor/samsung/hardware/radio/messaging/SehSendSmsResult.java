@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SehSendSmsResult implements Parcelable {
-    public static final Parcelable.Creator<SehSendSmsResult> CREATOR = new Parcelable.Creator<SehSendSmsResult>() { // from class: vendor.samsung.hardware.radio.messaging.SehSendSmsResult.1
-        @Override // android.os.Parcelable.Creator
-        public SehSendSmsResult createFromParcel(Parcel _aidl_source) {
-            SehSendSmsResult _aidl_out = new SehSendSmsResult();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehSendSmsResult> CREATOR =
+            new Parcelable.Creator<
+                    SehSendSmsResult>() { // from class:
+                                          // vendor.samsung.hardware.radio.messaging.SehSendSmsResult.1
+                @Override // android.os.Parcelable.Creator
+                public SehSendSmsResult createFromParcel(Parcel _aidl_source) {
+                    SehSendSmsResult _aidl_out = new SehSendSmsResult();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehSendSmsResult[] newArray(int _aidl_size) {
-            return new SehSendSmsResult[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehSendSmsResult[] newArray(int _aidl_size) {
+                    return new SehSendSmsResult[_aidl_size];
+                }
+            };
     public String ackPDU;
     public int messageRef = 0;
     public int errorCode = 0;

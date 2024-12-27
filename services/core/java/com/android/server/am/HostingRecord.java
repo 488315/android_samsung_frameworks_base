@@ -31,7 +31,16 @@ public final class HostingRecord {
         this(str, str2, 0, null, -1, false, null, null, "unknown");
     }
 
-    public HostingRecord(String str, String str2, int i, String str3, int i2, boolean z, String str4, String str5, String str6) {
+    public HostingRecord(
+            String str,
+            String str2,
+            int i,
+            String str3,
+            int i2,
+            boolean z,
+            String str4,
+            String str5,
+            String str6) {
         this.mHostingType = str;
         this.mHostingName = str2;
         this.mHostingZygote = i;

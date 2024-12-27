@@ -2,37 +2,43 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.IntPredicate;
 
 /* loaded from: classes4.dex */
 public final class ActivityStatsTechSpecificInfo implements Parcelable {
-    public static final Parcelable.Creator<ActivityStatsTechSpecificInfo> CREATOR = new Parcelable.Creator<ActivityStatsTechSpecificInfo>() { // from class: android.telephony.ActivityStatsTechSpecificInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityStatsTechSpecificInfo createFromParcel(Parcel in) {
-            int rat = in.readInt();
-            int frequencyRange = in.readInt();
-            int[] txTimeMs = new int[5];
-            in.readIntArray(txTimeMs);
-            int rxTimeMs = in.readInt();
-            return new ActivityStatsTechSpecificInfo(rat, frequencyRange, txTimeMs, rxTimeMs);
-        }
+    public static final Parcelable.Creator<ActivityStatsTechSpecificInfo> CREATOR =
+            new Parcelable.Creator<
+                    ActivityStatsTechSpecificInfo>() { // from class:
+                                                       // android.telephony.ActivityStatsTechSpecificInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityStatsTechSpecificInfo createFromParcel(Parcel in) {
+                    int rat = in.readInt();
+                    int frequencyRange = in.readInt();
+                    int[] txTimeMs = new int[5];
+                    in.readIntArray(txTimeMs);
+                    int rxTimeMs = in.readInt();
+                    return new ActivityStatsTechSpecificInfo(
+                            rat, frequencyRange, txTimeMs, rxTimeMs);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityStatsTechSpecificInfo[] newArray(int size) {
-            return new ActivityStatsTechSpecificInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityStatsTechSpecificInfo[] newArray(int size) {
+                    return new ActivityStatsTechSpecificInfo[size];
+                }
+            };
     private static final int TX_POWER_LEVELS = 5;
     private int mFrequencyRange;
     private int mRat;
     private int mRxTimeMs;
     private int[] mTxTimeMs;
 
-    public ActivityStatsTechSpecificInfo(int rat, int frequencyRange, int[] txTimeMs, int rxTimeMs) {
+    public ActivityStatsTechSpecificInfo(
+            int rat, int frequencyRange, int[] txTimeMs, int rxTimeMs) {
         Objects.requireNonNull(txTimeMs);
         if (txTimeMs.length != 5) {
             throw new IllegalArgumentException("txTimeMs must have length == TX_POWER_LEVELS");
@@ -88,12 +94,15 @@ public final class ActivityStatsTechSpecificInfo implements Parcelable {
     }
 
     public boolean isTxPowerValid() {
-        return Arrays.stream(this.mTxTimeMs).allMatch(new IntPredicate() { // from class: android.telephony.ActivityStatsTechSpecificInfo$$ExternalSyntheticLambda0
-            @Override // java.util.function.IntPredicate
-            public final boolean test(int i) {
-                return ActivityStatsTechSpecificInfo.lambda$isTxPowerValid$0(i);
-            }
-        });
+        return Arrays.stream(this.mTxTimeMs)
+                .allMatch(
+                        new IntPredicate() { // from class:
+                                             // android.telephony.ActivityStatsTechSpecificInfo$$ExternalSyntheticLambda0
+                            @Override // java.util.function.IntPredicate
+                            public final boolean test(int i) {
+                                return ActivityStatsTechSpecificInfo.lambda$isTxPowerValid$0(i);
+                            }
+                        });
     }
 
     public boolean isRxPowerValid() {
@@ -101,12 +110,18 @@ public final class ActivityStatsTechSpecificInfo implements Parcelable {
     }
 
     public boolean isTxPowerEmpty() {
-        return this.mTxTimeMs == null || this.mTxTimeMs.length == 0 || Arrays.stream(this.mTxTimeMs).allMatch(new IntPredicate() { // from class: android.telephony.ActivityStatsTechSpecificInfo$$ExternalSyntheticLambda1
-            @Override // java.util.function.IntPredicate
-            public final boolean test(int i) {
-                return ActivityStatsTechSpecificInfo.lambda$isTxPowerEmpty$1(i);
-            }
-        });
+        return this.mTxTimeMs == null
+                || this.mTxTimeMs.length == 0
+                || Arrays.stream(this.mTxTimeMs)
+                        .allMatch(
+                                new IntPredicate() { // from class:
+                                                     // android.telephony.ActivityStatsTechSpecificInfo$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.IntPredicate
+                                    public final boolean test(int i) {
+                                        return ActivityStatsTechSpecificInfo
+                                                .lambda$isTxPowerEmpty$1(i);
+                                    }
+                                });
     }
 
     static /* synthetic */ boolean lambda$isTxPowerEmpty$1(int i) {
@@ -118,7 +133,11 @@ public final class ActivityStatsTechSpecificInfo implements Parcelable {
     }
 
     public int hashCode() {
-        int result = Objects.hash(Integer.valueOf(this.mRat), Integer.valueOf(this.mFrequencyRange), Integer.valueOf(this.mRxTimeMs));
+        int result =
+                Objects.hash(
+                        Integer.valueOf(this.mRat),
+                        Integer.valueOf(this.mFrequencyRange),
+                        Integer.valueOf(this.mRxTimeMs));
         return (result * 31) + Arrays.hashCode(this.mTxTimeMs);
     }
 
@@ -130,7 +149,10 @@ public final class ActivityStatsTechSpecificInfo implements Parcelable {
             return false;
         }
         ActivityStatsTechSpecificInfo that = (ActivityStatsTechSpecificInfo) o;
-        return this.mRat == that.mRat && this.mFrequencyRange == that.mFrequencyRange && Arrays.equals(this.mTxTimeMs, that.mTxTimeMs) && this.mRxTimeMs == that.mRxTimeMs;
+        return this.mRat == that.mRat
+                && this.mFrequencyRange == that.mFrequencyRange
+                && Arrays.equals(this.mTxTimeMs, that.mTxTimeMs)
+                && this.mRxTimeMs == that.mRxTimeMs;
     }
 
     private static String ratToString(int type) {
@@ -155,7 +177,15 @@ public final class ActivityStatsTechSpecificInfo implements Parcelable {
     }
 
     public String toString() {
-        return "{mRat=" + ratToString(this.mRat) + ",mFrequencyRange=" + ServiceState.frequencyRangeToString(this.mFrequencyRange) + ",mTxTimeMs[]=" + Arrays.toString(this.mTxTimeMs) + ",mRxTimeMs=" + this.mRxTimeMs + "}";
+        return "{mRat="
+                + ratToString(this.mRat)
+                + ",mFrequencyRange="
+                + ServiceState.frequencyRangeToString(this.mFrequencyRange)
+                + ",mTxTimeMs[]="
+                + Arrays.toString(this.mTxTimeMs)
+                + ",mRxTimeMs="
+                + this.mRxTimeMs
+                + "}";
     }
 
     @Override // android.os.Parcelable

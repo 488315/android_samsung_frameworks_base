@@ -5,6 +5,7 @@ import android.hardware.fingerprint.FingerprintAuthenticateOptions;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Slog;
+
 import com.android.server.biometrics.Utils;
 import com.android.server.biometrics.sensors.ClientMonitorCallbackConverter;
 import com.android.server.biometrics.sensors.fingerprint.SemUdfpsSysUiImpl;
@@ -12,7 +13,8 @@ import com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintProvide
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class FingerprintProvider$$ExternalSyntheticLambda18 implements Runnable {
+public final /* synthetic */ class FingerprintProvider$$ExternalSyntheticLambda18
+        implements Runnable {
     public final /* synthetic */ FingerprintProvider f$0;
     public final /* synthetic */ FingerprintAuthenticateOptions f$1;
     public final /* synthetic */ Bundle f$10;
@@ -25,7 +27,18 @@ public final /* synthetic */ class FingerprintProvider$$ExternalSyntheticLambda1
     public final /* synthetic */ int f$8;
     public final /* synthetic */ boolean f$9;
 
-    public /* synthetic */ FingerprintProvider$$ExternalSyntheticLambda18(FingerprintProvider fingerprintProvider, FingerprintAuthenticateOptions fingerprintAuthenticateOptions, IBinder iBinder, long j, ClientMonitorCallbackConverter clientMonitorCallbackConverter, long j2, boolean z, int i, int i2, boolean z2, Bundle bundle) {
+    public /* synthetic */ FingerprintProvider$$ExternalSyntheticLambda18(
+            FingerprintProvider fingerprintProvider,
+            FingerprintAuthenticateOptions fingerprintAuthenticateOptions,
+            IBinder iBinder,
+            long j,
+            ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+            long j2,
+            boolean z,
+            int i,
+            int i2,
+            boolean z2,
+            Bundle bundle) {
         this.f$0 = fingerprintProvider;
         this.f$1 = fingerprintAuthenticateOptions;
         this.f$2 = iBinder;
@@ -55,17 +68,45 @@ public final /* synthetic */ class FingerprintProvider$$ExternalSyntheticLambda1
         fingerprintProvider.getClass();
         int userId = fingerprintAuthenticateOptions.getUserId();
         int sensorId = fingerprintAuthenticateOptions.getSensorId();
-        final SemFingerprintAuthenticationClient semFingerprintAuthenticationClient = new SemFingerprintAuthenticationClient(fingerprintProvider.mContext, ((Sensor) fingerprintProvider.mFingerprintSensors.mSensors.get(sensorId)).mLazySession, iBinder, j, clientMonitorCallbackConverter, j2, z, fingerprintAuthenticateOptions, i, fingerprintProvider.createLogger$1(2, i2, fingerprintProvider.mAuthenticationStatsCollector), fingerprintProvider.mBiometricContext, Utils.isStrongBiometric(sensorId), fingerprintProvider.mTaskStackListener, fingerprintProvider.mAuthenticationStateListeners, z2, ((Sensor) fingerprintProvider.mFingerprintSensors.mSensors.get(sensorId)).mSensorProperties, Utils.getCurrentStrength(sensorId), ((Sensor) fingerprintProvider.mFingerprintSensors.mSensors.get(sensorId)).getLockoutTracker(true), bundle, fingerprintProvider.mPowerSinglePressedTimeStamp);
+        final SemFingerprintAuthenticationClient semFingerprintAuthenticationClient =
+                new SemFingerprintAuthenticationClient(
+                        fingerprintProvider.mContext,
+                        ((Sensor) fingerprintProvider.mFingerprintSensors.mSensors.get(sensorId))
+                                .mLazySession,
+                        iBinder,
+                        j,
+                        clientMonitorCallbackConverter,
+                        j2,
+                        z,
+                        fingerprintAuthenticateOptions,
+                        i,
+                        fingerprintProvider.createLogger$1(
+                                2, i2, fingerprintProvider.mAuthenticationStatsCollector),
+                        fingerprintProvider.mBiometricContext,
+                        Utils.isStrongBiometric(sensorId),
+                        fingerprintProvider.mTaskStackListener,
+                        fingerprintProvider.mAuthenticationStateListeners,
+                        z2,
+                        ((Sensor) fingerprintProvider.mFingerprintSensors.mSensors.get(sensorId))
+                                .mSensorProperties,
+                        Utils.getCurrentStrength(sensorId),
+                        ((Sensor) fingerprintProvider.mFingerprintSensors.mSensors.get(sensorId))
+                                .getLockoutTracker(true),
+                        bundle,
+                        fingerprintProvider.mPowerSinglePressedTimeStamp);
         semFingerprintAuthenticationClient.mShouldVibrate = true;
         if (semFingerprintAuthenticationClient.isBiometricPrompt()) {
-            semFingerprintAuthenticationClient.mPromptInfo = semFingerprintAuthenticationClient.getBiometricPromptInfo(semFingerprintAuthenticationClient.mCookie);
+            semFingerprintAuthenticationClient.mPromptInfo =
+                    semFingerprintAuthenticationClient.getBiometricPromptInfo(
+                            semFingerprintAuthenticationClient.mCookie);
         }
         if (semFingerprintAuthenticationClient.mIsKeyguard) {
             semFingerprintAuthenticationClient.mPrivilegedFlags |= 27;
         } else if (semFingerprintAuthenticationClient.mIsSettingApp) {
             semFingerprintAuthenticationClient.mPrivilegedFlags |= 2;
         }
-        semFingerprintAuthenticationClient.mPrivilegedFlags |= semFingerprintAuthenticationClient.mAttribute.getInt("sem_privileged_attr", 0);
+        semFingerprintAuthenticationClient.mPrivilegedFlags |=
+                semFingerprintAuthenticationClient.mAttribute.getInt("sem_privileged_attr", 0);
         PromptInfo promptInfo = semFingerprintAuthenticationClient.mPromptInfo;
         if (promptInfo != null) {
             int semGetPrivilegedFlag = promptInfo.semGetPrivilegedFlag();
@@ -89,52 +130,80 @@ public final /* synthetic */ class FingerprintProvider$$ExternalSyntheticLambda1
         } else {
             semFingerprintAuthenticationClient.mAttribute.getInt("EXTRA_KEY_DISPLAY_ID");
         }
-        Slog.i("FingerprintAuthenticationClient.Ext", "FingerprintClientExt: " + Integer.toBinaryString(semFingerprintAuthenticationClient.mPrivilegedFlags) + ", " + Integer.toBinaryString(semFingerprintAuthenticationClient.mPromptPrivilegedFlags));
+        Slog.i(
+                "FingerprintAuthenticationClient.Ext",
+                "FingerprintClientExt: "
+                        + Integer.toBinaryString(
+                                semFingerprintAuthenticationClient.mPrivilegedFlags)
+                        + ", "
+                        + Integer.toBinaryString(
+                                semFingerprintAuthenticationClient.mPromptPrivilegedFlags));
         semFingerprintAuthenticationClient.mShouldCancelIfBackgroundAuthentication = true;
         if (semFingerprintAuthenticationClient.mSensorProps.isAnyUdfpsType()) {
-            SemUdfpsSysUiImpl createUdfpsSysUiImpl = semFingerprintAuthenticationClient.createUdfpsSysUiImpl(semFingerprintAuthenticationClient.hasPrivilegedFlag(16) || (semFingerprintAuthenticationClient.mAttribute.getInt("EXTRA_KEY_AUTH_FLAG", 0) & 32768) != 0);
+            SemUdfpsSysUiImpl createUdfpsSysUiImpl =
+                    semFingerprintAuthenticationClient.createUdfpsSysUiImpl(
+                            semFingerprintAuthenticationClient.hasPrivilegedFlag(16)
+                                    || (semFingerprintAuthenticationClient.mAttribute.getInt(
+                                                            "EXTRA_KEY_AUTH_FLAG", 0)
+                                                    & 32768)
+                                            != 0);
             semFingerprintAuthenticationClient.mUdfpsImpl = createUdfpsSysUiImpl;
             if (semFingerprintAuthenticationClient.mIsKeyguard) {
                 createUdfpsSysUiImpl.mSysUiType = 4;
             }
             if (!semFingerprintAuthenticationClient.isBiometricPrompt()) {
-                semFingerprintAuthenticationClient.mUdfpsImpl.checkGuideLayerAndTouchBlock(semFingerprintAuthenticationClient.mPrivilegedFlags);
+                semFingerprintAuthenticationClient.mUdfpsImpl.checkGuideLayerAndTouchBlock(
+                        semFingerprintAuthenticationClient.mPrivilegedFlags);
                 SemUdfpsSysUiImpl semUdfpsSysUiImpl = semFingerprintAuthenticationClient.mUdfpsImpl;
                 Bundle bundle2 = semFingerprintAuthenticationClient.mAttribute;
                 int i3 = semFingerprintAuthenticationClient.mPrivilegedFlags;
                 semUdfpsSysUiImpl.getClass();
-                if (bundle2.getString("EXTRA_KEY_ICON_COLOR") != null || bundle2.getString("EXTRA_KEY_ICON_CONTAINER_COLOR") != null || (i3 & 32) != 0) {
+                if (bundle2.getString("EXTRA_KEY_ICON_COLOR") != null
+                        || bundle2.getString("EXTRA_KEY_ICON_CONTAINER_COLOR") != null
+                        || (i3 & 32) != 0) {
                     Bundle bundle3 = new Bundle();
                     semUdfpsSysUiImpl.mCustomIconAttribute = bundle3;
-                    bundle3.putString("EXTRA_KEY_ICON_COLOR", bundle2.getString("EXTRA_KEY_ICON_COLOR"));
-                    semUdfpsSysUiImpl.mCustomIconAttribute.putString("EXTRA_KEY_ICON_CONTAINER_COLOR", bundle2.getString("EXTRA_KEY_ICON_CONTAINER_COLOR"));
+                    bundle3.putString(
+                            "EXTRA_KEY_ICON_COLOR", bundle2.getString("EXTRA_KEY_ICON_COLOR"));
+                    semUdfpsSysUiImpl.mCustomIconAttribute.putString(
+                            "EXTRA_KEY_ICON_CONTAINER_COLOR",
+                            bundle2.getString("EXTRA_KEY_ICON_CONTAINER_COLOR"));
                     semUdfpsSysUiImpl.mCustomIconAttribute.putInt("sem_privileged_attr", i3);
                 }
-                semFingerprintAuthenticationClient.mUdfpsImpl.setSysUiListener(new SemUdfpsSysUiImpl.SysUiCallback() { // from class: com.android.server.biometrics.sensors.fingerprint.aidl.SemFingerprintAuthenticationClient.1
-                    public AnonymousClass1() {
-                    }
+                semFingerprintAuthenticationClient.mUdfpsImpl.setSysUiListener(
+                        new SemUdfpsSysUiImpl
+                                .SysUiCallback() { // from class:
+                                                   // com.android.server.biometrics.sensors.fingerprint.aidl.SemFingerprintAuthenticationClient.1
+                            public AnonymousClass1() {}
 
-                    @Override // com.android.server.biometrics.sensors.fingerprint.SemUdfpsSysUiImpl.SysUiCallback
-                    public final void onSysUiDismissed() {
-                        SemFingerprintAuthenticationClient.this.onUserCanceled();
-                    }
+                            @Override // com.android.server.biometrics.sensors.fingerprint.SemUdfpsSysUiImpl.SysUiCallback
+                            public final void onSysUiDismissed() {
+                                SemFingerprintAuthenticationClient.this.onUserCanceled();
+                            }
 
-                    @Override // com.android.server.biometrics.sensors.fingerprint.SemUdfpsSysUiImpl.SysUiCallback
-                    public final void onSysUiError(int i4, int i5) {
-                        SemFingerprintAuthenticationClient semFingerprintAuthenticationClient2 = SemFingerprintAuthenticationClient.this;
-                        if (i4 == 2 && i5 == 2 && semFingerprintAuthenticationClient2.mIsKeyguard) {
-                            semFingerprintAuthenticationClient2.mErrorEscrow = 8;
-                            semFingerprintAuthenticationClient2.mVendorErrorEscrow = 5000;
-                        }
-                        if (semFingerprintAuthenticationClient2.mAuthAttempted) {
-                            semFingerprintAuthenticationClient2.cancel();
-                        } else {
-                            semFingerprintAuthenticationClient2.onError(5, 0);
-                        }
-                    }
-                });
+                            @Override // com.android.server.biometrics.sensors.fingerprint.SemUdfpsSysUiImpl.SysUiCallback
+                            public final void onSysUiError(int i4, int i5) {
+                                SemFingerprintAuthenticationClient
+                                        semFingerprintAuthenticationClient2 =
+                                                SemFingerprintAuthenticationClient.this;
+                                if (i4 == 2
+                                        && i5 == 2
+                                        && semFingerprintAuthenticationClient2.mIsKeyguard) {
+                                    semFingerprintAuthenticationClient2.mErrorEscrow = 8;
+                                    semFingerprintAuthenticationClient2.mVendorErrorEscrow = 5000;
+                                }
+                                if (semFingerprintAuthenticationClient2.mAuthAttempted) {
+                                    semFingerprintAuthenticationClient2.cancel();
+                                } else {
+                                    semFingerprintAuthenticationClient2.onError(5, 0);
+                                }
+                            }
+                        });
             }
         }
-        fingerprintProvider.scheduleForSensor$1(sensorId, semFingerprintAuthenticationClient, fingerprintProvider.new AnonymousClass6(userId, sensorId, j));
+        fingerprintProvider.scheduleForSensor$1(
+                sensorId,
+                semFingerprintAuthenticationClient,
+                fingerprintProvider.new AnonymousClass6(userId, sensorId, j));
     }
 }

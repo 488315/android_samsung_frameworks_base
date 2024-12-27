@@ -37,12 +37,14 @@ public final class CancellationGroup {
             if (!this.mCanceled) {
                 this.mCanceled = true;
                 if (this.mFutureList != null) {
-                    this.mFutureList.forEach(new Consumer() { // from class: com.android.internal.inputmethod.CancellationGroup$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            ((CompletableFuture) obj).cancel(false);
-                        }
-                    });
+                    this.mFutureList.forEach(
+                            new Consumer() { // from class:
+                                             // com.android.internal.inputmethod.CancellationGroup$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    ((CompletableFuture) obj).cancel(false);
+                                }
+                            });
                     this.mFutureList.clear();
                     this.mFutureList = null;
                 }

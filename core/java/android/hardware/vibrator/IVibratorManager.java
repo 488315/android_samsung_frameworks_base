@@ -1,7 +1,5 @@
 package android.hardware.vibrator;
 
-import android.hardware.vibrator.IVibrator;
-import android.hardware.vibrator.IVibratorCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -18,7 +16,8 @@ public interface IVibratorManager extends IInterface {
     public static final int CAP_PREPARE_PERFORM = 4;
     public static final int CAP_SYNC = 1;
     public static final int CAP_TRIGGER_CALLBACK = 128;
-    public static final String DESCRIPTOR = "android$hardware$vibrator$IVibratorManager".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$vibrator$IVibratorManager".replace('$', '.');
     public static final String HASH = "ea8742d6993e1a82917da38b9938e537aa7fcb54";
     public static final int VERSION = 2;
 
@@ -55,16 +54,13 @@ public interface IVibratorManager extends IInterface {
         }
 
         @Override // android.hardware.vibrator.IVibratorManager
-        public void prepareSynced(int[] vibratorIds) throws RemoteException {
-        }
+        public void prepareSynced(int[] vibratorIds) throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibratorManager
-        public void triggerSynced(IVibratorCallback callback) throws RemoteException {
-        }
+        public void triggerSynced(IVibratorCallback callback) throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibratorManager
-        public void cancelSynced() throws RemoteException {
-        }
+        public void cancelSynced() throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibratorManager
         public int getInterfaceVersion() {
@@ -82,7 +78,7 @@ public interface IVibratorManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVibratorManager {
+    public abstract static class Stub extends Binder implements IVibratorManager {
         static final int TRANSACTION_cancelSynced = 6;
         static final int TRANSACTION_getCapabilities = 1;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -114,7 +110,8 @@ public interface IVibratorManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -158,7 +155,8 @@ public interface IVibratorManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 5:
-                    IVibratorCallback _arg03 = IVibratorCallback.Stub.asInterface(data.readStrongBinder());
+                    IVibratorCallback _arg03 =
+                            IVibratorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     triggerSynced(_arg03);
                     reply.writeNoException();

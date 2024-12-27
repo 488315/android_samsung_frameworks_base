@@ -24,7 +24,8 @@ public class PaddedBufferedBlockCipher extends BufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public void init(boolean forEncryption, CipherParameters params) throws IllegalArgumentException {
+    public void init(boolean forEncryption, CipherParameters params)
+            throws IllegalArgumentException {
         this.forEncryption = forEncryption;
         reset();
         if (params instanceof ParametersWithRandom) {
@@ -61,7 +62,8 @@ public class PaddedBufferedBlockCipher extends BufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int processByte(byte in, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int processByte(byte in, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         int resultLen = 0;
         if (this.bufOff == this.buf.length) {
             resultLen = this.cipher.processBlock(this.buf, 0, out, outOff);
@@ -75,7 +77,8 @@ public class PaddedBufferedBlockCipher extends BufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int processBytes(byte[] in, int inOff, int len, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int processBytes(byte[] in, int inOff, int len, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         if (len < 0) {
             throw new IllegalArgumentException("Can't have a negative input length!");
         }
@@ -104,7 +107,8 @@ public class PaddedBufferedBlockCipher extends BufferedBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher
-    public int doFinal(byte[] out, int outOff) throws DataLengthException, IllegalStateException, InvalidCipherTextException {
+    public int doFinal(byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException, InvalidCipherTextException {
         int blockSize = this.cipher.getBlockSize();
         int resultLen = 0;
         if (this.forEncryption) {

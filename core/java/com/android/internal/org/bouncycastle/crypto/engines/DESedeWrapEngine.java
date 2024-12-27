@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto.engines;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 import com.android.internal.org.bouncycastle.crypto.CryptoServicesRegistrar;
 import com.android.internal.org.bouncycastle.crypto.Digest;
@@ -12,12 +13,23 @@ import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.security.SecureRandom;
 
 /* loaded from: classes5.dex */
 public class DESedeWrapEngine implements Wrapper {
-    private static final byte[] IV2 = {74, -35, -94, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50, 121, -24, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT, 5};
+    private static final byte[] IV2 = {
+        74,
+        -35,
+        -94,
+        SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50,
+        121,
+        -24,
+        SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT,
+        5
+    };
     private CBCBlockCipher engine;
     private boolean forWrapping;
     private byte[] iv;
@@ -93,7 +105,9 @@ public class DESedeWrapEngine implements Wrapper {
         byte[] TEMP3 = reverse(TEMP2);
         ParametersWithIV param2 = new ParametersWithIV(this.param, IV2);
         this.engine.init(true, param2);
-        for (int currentBytePos2 = 0; currentBytePos2 != TEMP3.length; currentBytePos2 += blockSize) {
+        for (int currentBytePos2 = 0;
+                currentBytePos2 != TEMP3.length;
+                currentBytePos2 += blockSize) {
             this.engine.processBlock(TEMP3, currentBytePos2, TEMP3, currentBytePos2);
         }
         return TEMP3;
@@ -125,7 +139,9 @@ public class DESedeWrapEngine implements Wrapper {
         this.paramPlusIV = new ParametersWithIV(this.param, this.iv);
         this.engine.init(false, this.paramPlusIV);
         byte[] WKCKS = new byte[TEMP1.length];
-        for (int currentBytePos2 = 0; currentBytePos2 != WKCKS.length; currentBytePos2 += blockSize) {
+        for (int currentBytePos2 = 0;
+                currentBytePos2 != WKCKS.length;
+                currentBytePos2 += blockSize) {
             this.engine.processBlock(TEMP1, currentBytePos2, WKCKS, currentBytePos2);
         }
         int currentBytePos3 = WKCKS.length;

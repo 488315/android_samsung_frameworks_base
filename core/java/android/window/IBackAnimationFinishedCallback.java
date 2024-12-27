@@ -14,8 +14,7 @@ public interface IBackAnimationFinishedCallback extends IInterface {
 
     public static class Default implements IBackAnimationFinishedCallback {
         @Override // android.window.IBackAnimationFinishedCallback
-        public void onAnimationFinished(boolean triggerBack) throws RemoteException {
-        }
+        public void onAnimationFinished(boolean triggerBack) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IBackAnimationFinishedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBackAnimationFinishedCallback {
+    public abstract static class Stub extends Binder implements IBackAnimationFinishedCallback {
         static final int TRANSACTION_onAnimationFinished = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IBackAnimationFinishedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBackAnimationFinishedCallback.DESCRIPTOR);
             }

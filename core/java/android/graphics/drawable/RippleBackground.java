@@ -11,18 +11,20 @@ import android.view.animation.LinearInterpolator;
 /* loaded from: classes.dex */
 class RippleBackground extends RippleComponent {
     private static final TimeInterpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
-    private static final BackgroundProperty OPACITY = new BackgroundProperty("opacity") { // from class: android.graphics.drawable.RippleBackground.1
-        @Override // android.util.FloatProperty
-        public void setValue(RippleBackground object, float value) {
-            object.mOpacity = value;
-            object.invalidateSelf();
-        }
+    private static final BackgroundProperty OPACITY =
+            new BackgroundProperty(
+                    "opacity") { // from class: android.graphics.drawable.RippleBackground.1
+                @Override // android.util.FloatProperty
+                public void setValue(RippleBackground object, float value) {
+                    object.mOpacity = value;
+                    object.invalidateSelf();
+                }
 
-        @Override // android.util.Property
-        public Float get(RippleBackground object) {
-            return Float.valueOf(object.mOpacity);
-        }
-    };
+                @Override // android.util.Property
+                public Float get(RippleBackground object) {
+                    return Float.valueOf(object.mOpacity);
+                }
+            };
     private static final int OPACITY_DURATION = 80;
     private ObjectAnimator mAnimator;
     private boolean mFocused;
@@ -85,7 +87,7 @@ class RippleBackground extends RippleComponent {
         }
     }
 
-    private static abstract class BackgroundProperty extends FloatProperty<RippleBackground> {
+    private abstract static class BackgroundProperty extends FloatProperty<RippleBackground> {
         public BackgroundProperty(String name) {
             super(name);
         }

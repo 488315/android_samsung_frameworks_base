@@ -15,8 +15,10 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.sec.clipboard.data.ClipboardConstants;
 import android.text.TextUtils;
+
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.provider.SemKnoxPolicyContract;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +30,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class ClipboardPolicyObserver extends ContentObserver {
     private static final String ALL_PACKAGES = "*";
     private static final String AUTHORITY = "com.sec.knox.rcppolicyprovider";
-    private static final String SAMSUNG_COCKTAILBAR_PKGNAME = "com.samsung.android.app.cocktailbarservice";
+    private static final String SAMSUNG_COCKTAILBAR_PKGNAME =
+            "com.samsung.android.app.cocktailbarservice";
     private static final String SAMSUNG_HONEYBOARD_PKGNAME = "com.samsung.android.honeyboard";
     private static final String SAMSUNG_KEYBOARD_PKGNAME = "com.sec.android.inputmethod";
     private static final String TABLE_NAME = "RCP_DATA";
@@ -48,13 +51,19 @@ public class ClipboardPolicyObserver extends ContentObserver {
     private boolean mIsInitialized;
     private SemPersonaManager mPersonaManager;
     private IUserManager mUm;
-    private static final Uri CONTENT_URI = Uri.parse("content://com.sec.knox.rcppolicyprovider/RCP_DATA");
+    private static final Uri CONTENT_URI =
+            Uri.parse("content://com.sec.knox.rcppolicyprovider/RCP_DATA");
     private static final Uri CLIPBOARD_ALLOWED_URI = ClipboardConstants.CLIPBOARD_ALLOWED_URI;
-    private static final Uri CLIPBOARD_SHARED_ALLOWED_URI = ClipboardConstants.CLIPBOARD_SHARED_ALLOWED_URI;
-    private static final Uri CLIPBOARD_RESCTRICTION_URI = Uri.parse("content://com.sec.knox.provider/RestrictionPolicy1");
-    private static final Uri CLIPBOARD_APPLICATION_URI = Uri.parse("content://com.sec.knox.provider2/ApplicationPolicy");
-    private static final Uri CLIPBOARD_ALLOWED_DENYLIST_APP_URI = ClipboardConstants.CLIPBOARD_ALLOWED_DENYLIST_APP_URI;
-    private static final Uri CLIPBOARD_ALLOWED_ALLOWLIST_APP_URI = ClipboardConstants.CLIPBOARD_ALLOWED_ALLOWLIST_APP_URI;
+    private static final Uri CLIPBOARD_SHARED_ALLOWED_URI =
+            ClipboardConstants.CLIPBOARD_SHARED_ALLOWED_URI;
+    private static final Uri CLIPBOARD_RESCTRICTION_URI =
+            Uri.parse("content://com.sec.knox.provider/RestrictionPolicy1");
+    private static final Uri CLIPBOARD_APPLICATION_URI =
+            Uri.parse("content://com.sec.knox.provider2/ApplicationPolicy");
+    private static final Uri CLIPBOARD_ALLOWED_DENYLIST_APP_URI =
+            ClipboardConstants.CLIPBOARD_ALLOWED_DENYLIST_APP_URI;
+    private static final Uri CLIPBOARD_ALLOWED_ALLOWLIST_APP_URI =
+            ClipboardConstants.CLIPBOARD_ALLOWED_ALLOWLIST_APP_URI;
 
     public interface ClipboardPolicyChangeListener {
         void onChanged();
@@ -100,7 +109,9 @@ public class ClipboardPolicyObserver extends ContentObserver {
         if (instance == null) {
             synchronized (ClipboardPolicyObserver.class) {
                 if (instance == null) {
-                    instance = new ClipboardPolicyObserver(context, new Handler(context.getMainLooper()));
+                    instance =
+                            new ClipboardPolicyObserver(
+                                    context, new Handler(context.getMainLooper()));
                 }
             }
         }
@@ -149,8 +160,16 @@ public class ClipboardPolicyObserver extends ContentObserver {
             for (int i = 0; idList != null && i < idList.size(); i++) {
                 int userId = idList.get(i).intValue();
                 if (userId > -1) {
-                    this.mClipboardSharedAllowedKnoxToPersonalPolicy.put(Integer.valueOf(userId), Boolean.valueOf(getPersonaManager().isShareClipboardDataToOwnerAllowed(userId)));
-                    this.mClipboardSharedAllowedPersonalToKnoxPolicy.put(Integer.valueOf(userId), Boolean.valueOf(getPersonaManager().isShareClipboardDataToContainerAllowed(userId)));
+                    this.mClipboardSharedAllowedKnoxToPersonalPolicy.put(
+                            Integer.valueOf(userId),
+                            Boolean.valueOf(
+                                    getPersonaManager()
+                                            .isShareClipboardDataToOwnerAllowed(userId)));
+                    this.mClipboardSharedAllowedPersonalToKnoxPolicy.put(
+                            Integer.valueOf(userId),
+                            Boolean.valueOf(
+                                    getPersonaManager()
+                                            .isShareClipboardDataToContainerAllowed(userId)));
                 } else {
                     Log.secD(this.TAG, "Wrong user : " + userId);
                 }
@@ -162,17 +181,37 @@ public class ClipboardPolicyObserver extends ContentObserver {
 
     private void updateClipboardAllowedMap(int userId) {
         String[] selectionArgs = {"false", Integer.toString(userId)};
-        Cursor cursor = this.mContext.getContentResolver().query(CLIPBOARD_RESCTRICTION_URI, null, SemKnoxPolicyContract.RestrictionPolicy.CLIPBOARD_ALLOWED_AS_USER, selectionArgs, null);
+        Cursor cursor =
+                this.mContext
+                        .getContentResolver()
+                        .query(
+                                CLIPBOARD_RESCTRICTION_URI,
+                                null,
+                                SemKnoxPolicyContract.RestrictionPolicy.CLIPBOARD_ALLOWED_AS_USER,
+                                selectionArgs,
+                                null);
         try {
             if (cursor != null) {
                 try {
                     cursor.moveToFirst();
-                    String result = cursor.getString(cursor.getColumnIndex(SemKnoxPolicyContract.RestrictionPolicy.CLIPBOARD_ALLOWED_AS_USER));
-                    this.mClipboardAllowedPolicy.put(Integer.valueOf(userId), Boolean.valueOf(result));
-                    Log.secD(this.TAG, "updateClipboardAllowedMap - userId : " + userId + ", result : " + result);
+                    String result =
+                            cursor.getString(
+                                    cursor.getColumnIndex(
+                                            SemKnoxPolicyContract.RestrictionPolicy
+                                                    .CLIPBOARD_ALLOWED_AS_USER));
+                    this.mClipboardAllowedPolicy.put(
+                            Integer.valueOf(userId), Boolean.valueOf(result));
+                    Log.secD(
+                            this.TAG,
+                            "updateClipboardAllowedMap - userId : "
+                                    + userId
+                                    + ", result : "
+                                    + result);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.secD(this.TAG, "updateClipboardAllowedMap, exception is occured hence set true");
+                    Log.secD(
+                            this.TAG,
+                            "updateClipboardAllowedMap, exception is occured hence set true");
                     this.mClipboardAllowedPolicy.put(Integer.valueOf(userId), true);
                 }
                 return;
@@ -186,17 +225,38 @@ public class ClipboardPolicyObserver extends ContentObserver {
 
     private void updateClipboardSharedAllowedMap(int userId) {
         String[] selectionArgs = {Integer.toString(userId)};
-        Cursor cursor = this.mContext.getContentResolver().query(CLIPBOARD_RESCTRICTION_URI, null, SemKnoxPolicyContract.RestrictionPolicy.CLIPBOARD_SHARE_ALLOWED_AS_USER, selectionArgs, null);
+        Cursor cursor =
+                this.mContext
+                        .getContentResolver()
+                        .query(
+                                CLIPBOARD_RESCTRICTION_URI,
+                                null,
+                                SemKnoxPolicyContract.RestrictionPolicy
+                                        .CLIPBOARD_SHARE_ALLOWED_AS_USER,
+                                selectionArgs,
+                                null);
         try {
             if (cursor != null) {
                 try {
                     cursor.moveToFirst();
-                    String result = cursor.getString(cursor.getColumnIndex(SemKnoxPolicyContract.RestrictionPolicy.CLIPBOARD_SHARE_ALLOWED_AS_USER));
-                    this.mClipboardSharedAllowedPolicy.put(Integer.valueOf(userId), Boolean.valueOf(result));
-                    Log.secD(this.TAG, "updateClipboardSharedAllowedMap - userId : " + userId + ", result : " + result);
+                    String result =
+                            cursor.getString(
+                                    cursor.getColumnIndex(
+                                            SemKnoxPolicyContract.RestrictionPolicy
+                                                    .CLIPBOARD_SHARE_ALLOWED_AS_USER));
+                    this.mClipboardSharedAllowedPolicy.put(
+                            Integer.valueOf(userId), Boolean.valueOf(result));
+                    Log.secD(
+                            this.TAG,
+                            "updateClipboardSharedAllowedMap - userId : "
+                                    + userId
+                                    + ", result : "
+                                    + result);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.secD(this.TAG, "updateClipboardSharedAllowedMap, exception is occured hence set true");
+                    Log.secD(
+                            this.TAG,
+                            "updateClipboardSharedAllowedMap, exception is occured hence set true");
                     this.mClipboardSharedAllowedPolicy.put(Integer.valueOf(userId), true);
                 }
                 return;
@@ -209,17 +269,17 @@ public class ClipboardPolicyObserver extends ContentObserver {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x004d, code lost:
-    
-        if (r0.isClosed() == false) goto L21;
-     */
+
+       if (r0.isClosed() == false) goto L21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0064, code lost:
-    
-        r0.close();
-     */
+
+       r0.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0062, code lost:
-    
-        if (r0.isClosed() == false) goto L21;
-     */
+
+       if (r0.isClosed() == false) goto L21;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -291,21 +351,23 @@ public class ClipboardPolicyObserver extends ContentObserver {
             r2.unlock()
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.sec.clipboard.util.ClipboardPolicyObserver.updateClipboardDenyListMap(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.sec.clipboard.util.ClipboardPolicyObserver.updateClipboardDenyListMap(int):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x004d, code lost:
-    
-        if (r0.isClosed() == false) goto L21;
-     */
+
+       if (r0.isClosed() == false) goto L21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0064, code lost:
-    
-        r0.close();
-     */
+
+       r0.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0062, code lost:
-    
-        if (r0.isClosed() == false) goto L21;
-     */
+
+       if (r0.isClosed() == false) goto L21;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -377,7 +439,9 @@ public class ClipboardPolicyObserver extends ContentObserver {
             r2.unlock()
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.sec.clipboard.util.ClipboardPolicyObserver.updateClipboardAllowListMap(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.sec.clipboard.util.ClipboardPolicyObserver.updateClipboardAllowListMap(int):void");
     }
 
     public int getPersonaId() {
@@ -415,14 +479,22 @@ public class ClipboardPolicyObserver extends ContentObserver {
         if (this.mClipboardSharedAllowedPolicy.get(Integer.valueOf(userId)) == null) {
             return true;
         }
-        boolean result = this.mClipboardSharedAllowedPolicy.get(Integer.valueOf(userId)).booleanValue();
+        boolean result =
+                this.mClipboardSharedAllowedPolicy.get(Integer.valueOf(userId)).booleanValue();
         return result;
     }
 
     public boolean isAllowedSharingKnoxDataToPersonal(int userId) {
         boolean canCrossCopyPaste = isAllowCrossProfileCopyPaste(userId);
         boolean canClipboardSharedAllowed = isClipboardSharedAllowed(userId);
-        Log.secD(this.TAG, "isAllowedSharingKnoxDataToPersonal: " + canCrossCopyPaste + ", canClipboardSharedAllowed: " + canClipboardSharedAllowed + ", userId=" + userId);
+        Log.secD(
+                this.TAG,
+                "isAllowedSharingKnoxDataToPersonal: "
+                        + canCrossCopyPaste
+                        + ", canClipboardSharedAllowed: "
+                        + canClipboardSharedAllowed
+                        + ", userId="
+                        + userId);
         return canCrossCopyPaste && canClipboardSharedAllowed;
     }
 
@@ -432,11 +504,17 @@ public class ClipboardPolicyObserver extends ContentObserver {
             Bundle b = this.mUm.getUserRestrictions(userId);
             canCrossCopyPaste = !b.getBoolean(UserManager.DISALLOW_CROSS_PROFILE_COPY_PASTE);
         } catch (RemoteException e) {
-            Log.secD(this.TAG, "get DISALLOW_CROSS_PROFILE_COPY_PASTE value failed: RemoteException occured " + e);
+            Log.secD(
+                    this.TAG,
+                    "get DISALLOW_CROSS_PROFILE_COPY_PASTE value failed: RemoteException occured "
+                            + e);
         } catch (SecurityException e2) {
-            Log.secD(this.TAG, "getUserRestrictions failed : SecurityException occured " + e2.getMessage());
+            Log.secD(
+                    this.TAG,
+                    "getUserRestrictions failed : SecurityException occured " + e2.getMessage());
         }
-        Log.secD(this.TAG, "AllowCrossProfileCopyPaste =" + canCrossCopyPaste + " userId=" + userId);
+        Log.secD(
+                this.TAG, "AllowCrossProfileCopyPaste =" + canCrossCopyPaste + " userId=" + userId);
         return canCrossCopyPaste;
     }
 
@@ -446,7 +524,10 @@ public class ClipboardPolicyObserver extends ContentObserver {
         if (this.mClipboardSharedAllowedPersonalToKnoxPolicy.get(Integer.valueOf(userId)) == null) {
             result = true;
         } else {
-            result = this.mClipboardSharedAllowedPersonalToKnoxPolicy.get(Integer.valueOf(userId)).booleanValue();
+            result =
+                    this.mClipboardSharedAllowedPersonalToKnoxPolicy
+                            .get(Integer.valueOf(userId))
+                            .booleanValue();
         }
         boolean canClipboardSharedAllowed = isClipboardSharedAllowed(0);
         return result && canClipboardSharedAllowed;
@@ -482,18 +563,30 @@ public class ClipboardPolicyObserver extends ContentObserver {
             Iterator<Long> it = mdmAdminUids.iterator();
             while (it.hasNext()) {
                 long uid = it.next().longValue();
-                Map<Long, List<String>> denyListMap = this.mClipboardDenyListPolicy.get(Integer.valueOf(userId));
-                Map<Long, List<String>> allowListMap = this.mClipboardAllowListPolicy.get(Integer.valueOf(userId));
-                List<String> denyList = denyListMap != null ? denyListMap.get(Long.valueOf(uid)) : null;
-                List<String> allowList = allowListMap != null ? allowListMap.get(Long.valueOf(uid)) : null;
+                Map<Long, List<String>> denyListMap =
+                        this.mClipboardDenyListPolicy.get(Integer.valueOf(userId));
+                Map<Long, List<String>> allowListMap =
+                        this.mClipboardAllowListPolicy.get(Integer.valueOf(userId));
+                List<String> denyList =
+                        denyListMap != null ? denyListMap.get(Long.valueOf(uid)) : null;
+                List<String> allowList =
+                        allowListMap != null ? allowListMap.get(Long.valueOf(uid)) : null;
                 boolean isDenyListIncludePackage = isListIncludePackage(denyList, packageName);
-                if (isDenyListIncludePackage && !(isAllowed = isListIncludePackage(allowList, packageName))) {
+                if (isDenyListIncludePackage
+                        && !(isAllowed = isListIncludePackage(allowList, packageName))) {
                     break;
                 }
             }
             this.mClipboardDenyListPolicyLock.readLock().unlock();
             this.mClipboardAllowListPolicyLock.readLock().unlock();
-            Log.secD(this.TAG, "isPackageAllowed, userId : " + userId + ", packageName : " + packageName + ", isAllowed : " + isAllowed);
+            Log.secD(
+                    this.TAG,
+                    "isPackageAllowed, userId : "
+                            + userId
+                            + ", packageName : "
+                            + packageName
+                            + ", isAllowed : "
+                            + isAllowed);
             return isAllowed;
         } finally {
             this.mClipboardDenyListPolicyLock.readLock().unlock();
@@ -502,7 +595,12 @@ public class ClipboardPolicyObserver extends ContentObserver {
     }
 
     private boolean isKnoxVersion1(String packageName) {
-        return (TextUtils.isEmpty(packageName) || !packageName.startsWith("sec_container_") || packageName.contains("com.sec.knox.containeragent") || packageName.contains("com.sec.android.app.knoxlauncher")) ? false : true;
+        return (TextUtils.isEmpty(packageName)
+                        || !packageName.startsWith("sec_container_")
+                        || packageName.contains("com.sec.knox.containeragent")
+                        || packageName.contains("com.sec.android.app.knoxlauncher"))
+                ? false
+                : true;
     }
 
     private boolean isListIncludePackage(List<String> list, String packageName) {
@@ -521,11 +619,16 @@ public class ClipboardPolicyObserver extends ContentObserver {
         int callerUid = Binder.getCallingUid();
         String callerPackageName = "";
         String[] packageList = this.mContext.getPackageManager().getPackagesForUid(callerUid);
-        if (packageList != null && packageList.length == 1 && !SAMSUNG_KEYBOARD_PKGNAME.equals(packageList[0]) && !"com.samsung.android.honeyboard".equals(packageList[0]) && !"com.samsung.android.app.cocktailbarservice".equals(packageList[0])) {
+        if (packageList != null
+                && packageList.length == 1
+                && !SAMSUNG_KEYBOARD_PKGNAME.equals(packageList[0])
+                && !"com.samsung.android.honeyboard".equals(packageList[0])
+                && !"com.samsung.android.app.cocktailbarservice".equals(packageList[0])) {
             return packageList[0];
         }
         long identity = Binder.clearCallingIdentity();
-        ActivityManager activityManager = (ActivityManager) this.mContext.getSystemService("activity");
+        ActivityManager activityManager =
+                (ActivityManager) this.mContext.getSystemService("activity");
         List<ActivityManager.RunningTaskInfo> runningTaskInfo = activityManager.getRunningTasks(1);
         if (runningTaskInfo != null && runningTaskInfo.size() > 0) {
             ActivityManager.RunningTaskInfo foregroundTaskInfo = runningTaskInfo.get(0);

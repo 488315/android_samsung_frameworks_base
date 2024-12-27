@@ -114,14 +114,20 @@ public class PackedIntVector {
 
     private final void growBuffer() {
         int columns = this.mColumns;
-        int[] newvalues = ArrayUtils.newUnpaddedIntArray(GrowingArrayUtils.growSize(size()) * columns);
+        int[] newvalues =
+                ArrayUtils.newUnpaddedIntArray(GrowingArrayUtils.growSize(size()) * columns);
         int newsize = newvalues.length / columns;
         int[] valuegap = this.mValueGap;
         int rowgapstart = this.mRowGapStart;
         int after = this.mRows - (this.mRowGapLength + rowgapstart);
         if (this.mValues != null) {
             System.arraycopy(this.mValues, 0, newvalues, 0, columns * rowgapstart);
-            System.arraycopy(this.mValues, (this.mRows - after) * columns, newvalues, (newsize - after) * columns, after * columns);
+            System.arraycopy(
+                    this.mValues,
+                    (this.mRows - after) * columns,
+                    newvalues,
+                    (newsize - after) * columns,
+                    after * columns);
         }
         for (int i = 0; i < columns; i++) {
             if (valuegap[i] >= rowgapstart) {

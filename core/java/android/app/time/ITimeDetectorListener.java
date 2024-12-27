@@ -14,8 +14,7 @@ public interface ITimeDetectorListener extends IInterface {
 
     public static class Default implements ITimeDetectorListener {
         @Override // android.app.time.ITimeDetectorListener
-        public void onChange() throws RemoteException {
-        }
+        public void onChange() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface ITimeDetectorListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITimeDetectorListener {
+    public abstract static class Stub extends Binder implements ITimeDetectorListener {
         static final int TRANSACTION_onChange = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface ITimeDetectorListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITimeDetectorListener.DESCRIPTOR);
             }

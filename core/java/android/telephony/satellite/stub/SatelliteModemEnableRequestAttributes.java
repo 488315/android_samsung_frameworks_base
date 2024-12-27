@@ -6,21 +6,25 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class SatelliteModemEnableRequestAttributes implements Parcelable {
-    public static final Parcelable.Creator<SatelliteModemEnableRequestAttributes> CREATOR = new Parcelable.Creator<SatelliteModemEnableRequestAttributes>() { // from class: android.telephony.satellite.stub.SatelliteModemEnableRequestAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteModemEnableRequestAttributes createFromParcel(Parcel _aidl_source) {
-            SatelliteModemEnableRequestAttributes _aidl_out = new SatelliteModemEnableRequestAttributes();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SatelliteModemEnableRequestAttributes> CREATOR =
+            new Parcelable.Creator<
+                    SatelliteModemEnableRequestAttributes>() { // from class:
+                                                               // android.telephony.satellite.stub.SatelliteModemEnableRequestAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteModemEnableRequestAttributes createFromParcel(Parcel _aidl_source) {
+                    SatelliteModemEnableRequestAttributes _aidl_out =
+                            new SatelliteModemEnableRequestAttributes();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteModemEnableRequestAttributes[] newArray(int _aidl_size) {
-            return new SatelliteModemEnableRequestAttributes[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteModemEnableRequestAttributes[] newArray(int _aidl_size) {
+                    return new SatelliteModemEnableRequestAttributes[_aidl_size];
+                }
+            };
     public SatelliteSubscriptionInfo satelliteSubscriptionInfo;
     public boolean isEnabled = false;
     public boolean isDemoMode = false;
@@ -77,7 +81,9 @@ public class SatelliteModemEnableRequestAttributes implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.satelliteSubscriptionInfo = (SatelliteSubscriptionInfo) _aidl_parcel.readTypedObject(SatelliteSubscriptionInfo.CREATOR);
+                this.satelliteSubscriptionInfo =
+                        (SatelliteSubscriptionInfo)
+                                _aidl_parcel.readTypedObject(SatelliteSubscriptionInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

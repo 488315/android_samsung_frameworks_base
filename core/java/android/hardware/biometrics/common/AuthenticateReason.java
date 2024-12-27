@@ -7,19 +7,21 @@ import android.os.ParcelableHolder;
 
 /* loaded from: classes2.dex */
 public final class AuthenticateReason implements Parcelable {
-    public static final Parcelable.Creator<AuthenticateReason> CREATOR = new Parcelable.Creator<AuthenticateReason>() { // from class: android.hardware.biometrics.common.AuthenticateReason.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticateReason createFromParcel(Parcel _aidl_source) {
-            return new AuthenticateReason(_aidl_source);
-        }
+    public static final Parcelable.Creator<AuthenticateReason> CREATOR =
+            new Parcelable.Creator<AuthenticateReason>() { // from class:
+                // android.hardware.biometrics.common.AuthenticateReason.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticateReason createFromParcel(Parcel _aidl_source) {
+                    return new AuthenticateReason(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticateReason[] newArray(int _aidl_size) {
-            return new AuthenticateReason[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticateReason[] newArray(int _aidl_size) {
+                    return new AuthenticateReason[_aidl_size];
+                }
+            };
     public static final int faceAuthenticateReason = 1;
     public static final int fingerprintAuthenticateReason = 2;
     public static final int vendorAuthenticateReason = 0;
@@ -168,7 +170,12 @@ public final class AuthenticateReason implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 
@@ -191,21 +198,23 @@ public final class AuthenticateReason implements Parcelable {
     }
 
     public static class Vendor implements Parcelable {
-        public static final Parcelable.Creator<Vendor> CREATOR = new Parcelable.Creator<Vendor>() { // from class: android.hardware.biometrics.common.AuthenticateReason.Vendor.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Vendor createFromParcel(Parcel _aidl_source) {
-                Vendor _aidl_out = new Vendor();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<Vendor> CREATOR =
+                new Parcelable.Creator<Vendor>() { // from class:
+                    // android.hardware.biometrics.common.AuthenticateReason.Vendor.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Vendor createFromParcel(Parcel _aidl_source) {
+                        Vendor _aidl_out = new Vendor();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Vendor[] newArray(int _aidl_size) {
-                return new Vendor[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Vendor[] newArray(int _aidl_size) {
+                        return new Vendor[_aidl_size];
+                    }
+                };
         public final ParcelableHolder extension = new ParcelableHolder(1);
 
         @Override // android.os.Parcelable

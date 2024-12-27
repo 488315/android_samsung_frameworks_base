@@ -4,32 +4,37 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public final class SystemUpdateInfo implements Parcelable {
     private static final String ATTR_ORIGINAL_BUILD = "original-build";
     private static final String ATTR_RECEIVED_TIME = "received-time";
     private static final String ATTR_SECURITY_PATCH_STATE = "security-patch-state";
-    public static final Parcelable.Creator<SystemUpdateInfo> CREATOR = new Parcelable.Creator<SystemUpdateInfo>() { // from class: android.app.admin.SystemUpdateInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SystemUpdateInfo createFromParcel(Parcel in) {
-            return new SystemUpdateInfo(in);
-        }
+    public static final Parcelable.Creator<SystemUpdateInfo> CREATOR =
+            new Parcelable.Creator<
+                    SystemUpdateInfo>() { // from class: android.app.admin.SystemUpdateInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SystemUpdateInfo createFromParcel(Parcel in) {
+                    return new SystemUpdateInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SystemUpdateInfo[] newArray(int size) {
-            return new SystemUpdateInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SystemUpdateInfo[] newArray(int size) {
+                    return new SystemUpdateInfo[size];
+                }
+            };
     public static final int SECURITY_PATCH_STATE_FALSE = 1;
     public static final int SECURITY_PATCH_STATE_TRUE = 2;
     public static final int SECURITY_PATCH_STATE_UNKNOWN = 0;
@@ -38,8 +43,7 @@ public final class SystemUpdateInfo implements Parcelable {
     private final int mSecurityPatchState;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SecurityPatchState {
-    }
+    public @interface SecurityPatchState {}
 
     private SystemUpdateInfo(long receivedTime, int securityPatchState) {
         this.mReceivedTime = receivedTime;
@@ -108,7 +112,10 @@ public final class SystemUpdateInfo implements Parcelable {
     }
 
     public String toString() {
-        return String.format("SystemUpdateInfo (receivedTime = %d, securityPatchState = %s)", Long.valueOf(this.mReceivedTime), securityPatchStateToString(this.mSecurityPatchState));
+        return String.format(
+                "SystemUpdateInfo (receivedTime = %d, securityPatchState = %s)",
+                Long.valueOf(this.mReceivedTime),
+                securityPatchStateToString(this.mSecurityPatchState));
     }
 
     private static String securityPatchStateToString(int state) {
@@ -132,13 +139,15 @@ public final class SystemUpdateInfo implements Parcelable {
             return false;
         }
         SystemUpdateInfo that = (SystemUpdateInfo) o;
-        if (this.mReceivedTime == that.mReceivedTime && this.mSecurityPatchState == that.mSecurityPatchState) {
+        if (this.mReceivedTime == that.mReceivedTime
+                && this.mSecurityPatchState == that.mSecurityPatchState) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Long.valueOf(this.mReceivedTime), Integer.valueOf(this.mSecurityPatchState));
+        return Objects.hash(
+                Long.valueOf(this.mReceivedTime), Integer.valueOf(this.mSecurityPatchState));
     }
 }

@@ -3,6 +3,7 @@ package android.hardware;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Range;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,19 +20,21 @@ public class CameraSessionStats implements Parcelable {
     public static final int CAMERA_STATE_OPEN = 0;
     public static final int CAMERA_STATE_OPENING = 100;
     public static final int CAMERA_STATE_OPENING_FAILED = 101;
-    public static final Parcelable.Creator<CameraSessionStats> CREATOR = new Parcelable.Creator<CameraSessionStats>() { // from class: android.hardware.CameraSessionStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraSessionStats createFromParcel(Parcel in) {
-            return new CameraSessionStats(in);
-        }
+    public static final Parcelable.Creator<CameraSessionStats> CREATOR =
+            new Parcelable.Creator<
+                    CameraSessionStats>() { // from class: android.hardware.CameraSessionStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraSessionStats createFromParcel(Parcel in) {
+                    return new CameraSessionStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraSessionStats[] newArray(int size) {
-            return new CameraSessionStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraSessionStats[] newArray(int size) {
+                    return new CameraSessionStats[size];
+                }
+            };
     private int mApiLevel;
     private CameraExtensionSessionStats mCameraExtensionSessionStats;
     private String mCameraId;
@@ -77,7 +80,19 @@ public class CameraSessionStats implements Parcelable {
         this.mCameraExtensionSessionStats = new CameraExtensionSessionStats();
     }
 
-    public CameraSessionStats(String cameraId, int facing, int newCameraState, String clientName, int apiLevel, boolean isNdk, int creationDuration, float maxPreviewFps, int sessionType, int internalReconfigure, long logId, int sessionIdx) {
+    public CameraSessionStats(
+            String cameraId,
+            int facing,
+            int newCameraState,
+            String clientName,
+            int apiLevel,
+            boolean isNdk,
+            int creationDuration,
+            float maxPreviewFps,
+            int sessionType,
+            int internalReconfigure,
+            long logId,
+            int sessionIdx) {
         this.mCameraId = cameraId;
         this.mFacing = facing;
         this.mNewCameraState = newCameraState;
@@ -157,7 +172,8 @@ public class CameraSessionStats implements Parcelable {
         this.mUsedUltraWide = in.readBoolean();
         this.mUsedZoomOverride = in.readBoolean();
         this.mSessionIndex = in.readInt();
-        this.mCameraExtensionSessionStats = CameraExtensionSessionStats.CREATOR.createFromParcel(in);
+        this.mCameraExtensionSessionStats =
+                CameraExtensionSessionStats.CREATOR.createFromParcel(in);
         int minFps = in.readInt();
         int maxFps = in.readInt();
         this.mMostRequestedFpsRange = new Range<>(Integer.valueOf(minFps), Integer.valueOf(maxFps));

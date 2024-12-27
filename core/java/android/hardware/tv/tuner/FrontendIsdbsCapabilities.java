@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class FrontendIsdbsCapabilities implements Parcelable {
-    public static final Parcelable.Creator<FrontendIsdbsCapabilities> CREATOR = new Parcelable.Creator<FrontendIsdbsCapabilities>() { // from class: android.hardware.tv.tuner.FrontendIsdbsCapabilities.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendIsdbsCapabilities createFromParcel(Parcel _aidl_source) {
-            FrontendIsdbsCapabilities _aidl_out = new FrontendIsdbsCapabilities();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FrontendIsdbsCapabilities> CREATOR =
+            new Parcelable.Creator<FrontendIsdbsCapabilities>() { // from class:
+                // android.hardware.tv.tuner.FrontendIsdbsCapabilities.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendIsdbsCapabilities createFromParcel(Parcel _aidl_source) {
+                    FrontendIsdbsCapabilities _aidl_out = new FrontendIsdbsCapabilities();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendIsdbsCapabilities[] newArray(int _aidl_size) {
-            return new FrontendIsdbsCapabilities[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendIsdbsCapabilities[] newArray(int _aidl_size) {
+                    return new FrontendIsdbsCapabilities[_aidl_size];
+                }
+            };
     public int modulationCap = 0;
     public int coderateCap = 0;
 

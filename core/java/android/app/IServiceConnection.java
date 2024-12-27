@@ -13,8 +13,8 @@ public interface IServiceConnection extends IInterface {
 
     public static class Default implements IServiceConnection {
         @Override // android.app.IServiceConnection
-        public void connected(ComponentName name, IBinder service, boolean dead) throws RemoteException {
-        }
+        public void connected(ComponentName name, IBinder service, boolean dead)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +22,7 @@ public interface IServiceConnection extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IServiceConnection {
+    public abstract static class Stub extends Binder implements IServiceConnection {
         public static final String DESCRIPTOR = "android.app.IServiceConnection";
         static final int TRANSACTION_connected = 1;
 
@@ -61,7 +61,8 @@ public interface IServiceConnection extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -71,7 +72,8 @@ public interface IServiceConnection extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     IBinder _arg1 = data.readStrongBinder();
                     boolean _arg2 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -99,7 +101,8 @@ public interface IServiceConnection extends IInterface {
             }
 
             @Override // android.app.IServiceConnection
-            public void connected(ComponentName name, IBinder service, boolean dead) throws RemoteException {
+            public void connected(ComponentName name, IBinder service, boolean dead)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

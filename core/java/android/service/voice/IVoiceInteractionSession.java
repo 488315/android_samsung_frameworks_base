@@ -11,6 +11,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.ThreadedRenderer;
+
 import com.android.internal.app.IVoiceInteractionSessionShowCallback;
 
 /* loaded from: classes3.dex */
@@ -19,17 +20,30 @@ public interface IVoiceInteractionSession extends IInterface {
 
     void destroy() throws RemoteException;
 
-    void handleAssist(int i, IBinder iBinder, Bundle bundle, AssistStructure assistStructure, AssistContent assistContent, int i2, int i3) throws RemoteException;
+    void handleAssist(
+            int i,
+            IBinder iBinder,
+            Bundle bundle,
+            AssistStructure assistStructure,
+            AssistContent assistContent,
+            int i2,
+            int i3)
+            throws RemoteException;
 
     void handleScreenshot(Bitmap bitmap) throws RemoteException;
 
     void hide() throws RemoteException;
 
-    void notifyVisibleActivityInfoChanged(VisibleActivityInfo visibleActivityInfo, int i) throws RemoteException;
+    void notifyVisibleActivityInfoChanged(VisibleActivityInfo visibleActivityInfo, int i)
+            throws RemoteException;
 
     void onLockscreenShown() throws RemoteException;
 
-    void show(Bundle bundle, int i, IVoiceInteractionSessionShowCallback iVoiceInteractionSessionShowCallback) throws RemoteException;
+    void show(
+            Bundle bundle,
+            int i,
+            IVoiceInteractionSessionShowCallback iVoiceInteractionSessionShowCallback)
+            throws RemoteException;
 
     void taskFinished(Intent intent, int i) throws RemoteException;
 
@@ -37,44 +51,45 @@ public interface IVoiceInteractionSession extends IInterface {
 
     public static class Default implements IVoiceInteractionSession {
         @Override // android.service.voice.IVoiceInteractionSession
-        public void show(Bundle sessionArgs, int flags, IVoiceInteractionSessionShowCallback showCallback) throws RemoteException {
-        }
+        public void show(
+                Bundle sessionArgs, int flags, IVoiceInteractionSessionShowCallback showCallback)
+                throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionSession
-        public void hide() throws RemoteException {
-        }
+        public void hide() throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionSession
-        public void handleAssist(int taskId, IBinder activityId, Bundle assistData, AssistStructure structure, AssistContent content, int index, int count) throws RemoteException {
-        }
+        public void handleAssist(
+                int taskId,
+                IBinder activityId,
+                Bundle assistData,
+                AssistStructure structure,
+                AssistContent content,
+                int index,
+                int count)
+                throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionSession
-        public void handleScreenshot(Bitmap screenshot) throws RemoteException {
-        }
+        public void handleScreenshot(Bitmap screenshot) throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionSession
-        public void taskStarted(Intent intent, int taskId) throws RemoteException {
-        }
+        public void taskStarted(Intent intent, int taskId) throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionSession
-        public void taskFinished(Intent intent, int taskId) throws RemoteException {
-        }
+        public void taskFinished(Intent intent, int taskId) throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionSession
-        public void closeSystemDialogs() throws RemoteException {
-        }
+        public void closeSystemDialogs() throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionSession
-        public void onLockscreenShown() throws RemoteException {
-        }
+        public void onLockscreenShown() throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionSession
-        public void destroy() throws RemoteException {
-        }
+        public void destroy() throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionSession
-        public void notifyVisibleActivityInfoChanged(VisibleActivityInfo visibleActivityInfo, int type) throws RemoteException {
-        }
+        public void notifyVisibleActivityInfoChanged(
+                VisibleActivityInfo visibleActivityInfo, int type) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -82,7 +97,7 @@ public interface IVoiceInteractionSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoiceInteractionSession {
+    public abstract static class Stub extends Binder implements IVoiceInteractionSession {
         public static final String DESCRIPTOR = "android.service.voice.IVoiceInteractionSession";
         static final int TRANSACTION_closeSystemDialogs = 7;
         static final int TRANSACTION_destroy = 9;
@@ -148,7 +163,8 @@ public interface IVoiceInteractionSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -160,7 +176,9 @@ public interface IVoiceInteractionSession extends IInterface {
                 case 1:
                     Bundle _arg0 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg1 = data.readInt();
-                    IVoiceInteractionSessionShowCallback _arg2 = IVoiceInteractionSessionShowCallback.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractionSessionShowCallback _arg2 =
+                            IVoiceInteractionSessionShowCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     show(_arg0, _arg1, _arg2);
                     return true;
@@ -171,8 +189,10 @@ public interface IVoiceInteractionSession extends IInterface {
                     int _arg02 = data.readInt();
                     IBinder _arg12 = data.readStrongBinder();
                     Bundle _arg22 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    AssistStructure _arg3 = (AssistStructure) data.readTypedObject(AssistStructure.CREATOR);
-                    AssistContent _arg4 = (AssistContent) data.readTypedObject(AssistContent.CREATOR);
+                    AssistStructure _arg3 =
+                            (AssistStructure) data.readTypedObject(AssistStructure.CREATOR);
+                    AssistContent _arg4 =
+                            (AssistContent) data.readTypedObject(AssistContent.CREATOR);
                     int _arg5 = data.readInt();
                     int _arg6 = data.readInt();
                     data.enforceNoDataAvail();
@@ -205,7 +225,8 @@ public interface IVoiceInteractionSession extends IInterface {
                     destroy();
                     return true;
                 case 10:
-                    VisibleActivityInfo _arg06 = (VisibleActivityInfo) data.readTypedObject(VisibleActivityInfo.CREATOR);
+                    VisibleActivityInfo _arg06 =
+                            (VisibleActivityInfo) data.readTypedObject(VisibleActivityInfo.CREATOR);
                     int _arg15 = data.readInt();
                     data.enforceNoDataAvail();
                     notifyVisibleActivityInfoChanged(_arg06, _arg15);
@@ -232,7 +253,11 @@ public interface IVoiceInteractionSession extends IInterface {
             }
 
             @Override // android.service.voice.IVoiceInteractionSession
-            public void show(Bundle sessionArgs, int flags, IVoiceInteractionSessionShowCallback showCallback) throws RemoteException {
+            public void show(
+                    Bundle sessionArgs,
+                    int flags,
+                    IVoiceInteractionSessionShowCallback showCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -257,7 +282,15 @@ public interface IVoiceInteractionSession extends IInterface {
             }
 
             @Override // android.service.voice.IVoiceInteractionSession
-            public void handleAssist(int taskId, IBinder activityId, Bundle assistData, AssistStructure structure, AssistContent content, int index, int count) throws RemoteException {
+            public void handleAssist(
+                    int taskId,
+                    IBinder activityId,
+                    Bundle assistData,
+                    AssistStructure structure,
+                    AssistContent content,
+                    int index,
+                    int count)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -346,7 +379,8 @@ public interface IVoiceInteractionSession extends IInterface {
             }
 
             @Override // android.service.voice.IVoiceInteractionSession
-            public void notifyVisibleActivityInfoChanged(VisibleActivityInfo visibleActivityInfo, int type) throws RemoteException {
+            public void notifyVisibleActivityInfoChanged(
+                    VisibleActivityInfo visibleActivityInfo, int type) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -14,11 +14,13 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.AppSchedulingModuleThread;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 import com.android.server.job.JobSchedulerService;
 import com.android.server.job.JobSchedulerService$$ExternalSyntheticLambda5;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Predicate;
@@ -53,9 +55,15 @@ public final class ContentObserverController extends StateController {
             }
             if (triggerContentUris != null) {
                 for (JobInfo.TriggerContentUri triggerContentUri : triggerContentUris) {
-                    ObserverInstance observerInstance = (ObserverInstance) arrayMap.get(triggerContentUri);
+                    ObserverInstance observerInstance =
+                            (ObserverInstance) arrayMap.get(triggerContentUri);
                     if (observerInstance == null) {
-                        observerInstance = ContentObserverController.this.new ObserverInstance(ContentObserverController.this.mHandler, triggerContentUri, i);
+                        observerInstance =
+                                ContentObserverController.this
+                                .new ObserverInstance(
+                                        ContentObserverController.this.mHandler,
+                                        triggerContentUri,
+                                        i);
                         arrayMap.put(triggerContentUri, observerInstance);
                         boolean z = (triggerContentUri.getFlags() & 1) != 0;
                         if (ContentObserverController.DEBUG) {
@@ -66,11 +74,23 @@ public final class ContentObserverController extends StateController {
                             sb.append(" andDescendants=");
                             sb.append(z);
                             sb.append(" sourceUserId=");
-                            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb, i, "JobScheduler.ContentObserver");
+                            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                                    sb, i, "JobScheduler.ContentObserver");
                         }
-                        ContentObserverController.this.mContext.getContentResolver().registerContentObserver(triggerContentUri.getUri(), z, observerInstance, i);
+                        ContentObserverController.this
+                                .mContext
+                                .getContentResolver()
+                                .registerContentObserver(
+                                        triggerContentUri.getUri(), z, observerInstance, i);
                     } else if (ContentObserverController.DEBUG) {
-                        Slog.v("JobScheduler.ContentObserver", "Reusing existing observer " + observerInstance + " for " + triggerContentUri.getUri() + " andDescendants=" + ((triggerContentUri.getFlags() & 1) != 0));
+                        Slog.v(
+                                "JobScheduler.ContentObserver",
+                                "Reusing existing observer "
+                                        + observerInstance
+                                        + " for "
+                                        + triggerContentUri.getUri()
+                                        + " andDescendants="
+                                        + ((triggerContentUri.getFlags() & 1) != 0));
                     }
                     observerInstance.mJobs.add(this);
                     this.mMyObservers.add(observerInstance);
@@ -85,11 +105,23 @@ public final class ContentObserverController extends StateController {
                 observerInstance.mJobs.remove(this);
                 if (observerInstance.mJobs.size() == 0) {
                     if (ContentObserverController.DEBUG) {
-                        Slog.i("JobScheduler.ContentObserver", "Unregistering observer " + observerInstance + " for " + observerInstance.mUri.getUri());
+                        Slog.i(
+                                "JobScheduler.ContentObserver",
+                                "Unregistering observer "
+                                        + observerInstance
+                                        + " for "
+                                        + observerInstance.mUri.getUri());
                     }
-                    ContentObserverController contentObserverController = ContentObserverController.this;
-                    contentObserverController.mContext.getContentResolver().unregisterContentObserver(observerInstance);
-                    ArrayMap arrayMap = (ArrayMap) contentObserverController.mObservers.get(observerInstance.mUserId);
+                    ContentObserverController contentObserverController =
+                            ContentObserverController.this;
+                    contentObserverController
+                            .mContext
+                            .getContentResolver()
+                            .unregisterContentObserver(observerInstance);
+                    ArrayMap arrayMap =
+                            (ArrayMap)
+                                    contentObserverController.mObservers.get(
+                                            observerInstance.mUserId);
                     if (arrayMap != null) {
                         arrayMap.remove(observerInstance.mUri);
                     }
@@ -103,7 +135,8 @@ public final class ContentObserverController extends StateController {
             ContentObserverController contentObserverController = ContentObserverController.this;
             if (!z) {
                 this.mTriggerPending = true;
-                contentObserverController.mHandler.postDelayed(this.mTimeoutRunner, jobStatus.getTriggerContentMaxDelay());
+                contentObserverController.mHandler.postDelayed(
+                        this.mTimeoutRunner, jobStatus.getTriggerContentMaxDelay());
             }
             Handler handler = contentObserverController.mHandler;
             TriggerRunnable triggerRunnable = this.mExecuteRunner;
@@ -124,7 +157,8 @@ public final class ContentObserverController extends StateController {
         public final JobInfo.TriggerContentUri mUri;
         public final int mUserId;
 
-        public ObserverInstance(Handler handler, JobInfo.TriggerContentUri triggerContentUri, int i) {
+        public ObserverInstance(
+                Handler handler, JobInfo.TriggerContentUri triggerContentUri, int i) {
             super(handler);
             this.mJobs = new ArraySet();
             this.mUri = triggerContentUri;
@@ -141,7 +175,8 @@ public final class ContentObserverController extends StateController {
                 sb.append(" when mUri=");
                 sb.append(this.mUri);
                 sb.append(" mUserId=");
-                SystemServiceManager$$ExternalSyntheticOutline0.m(sb, this.mUserId, "JobScheduler.ContentObserver");
+                SystemServiceManager$$ExternalSyntheticOutline0.m(
+                        sb, this.mUserId, "JobScheduler.ContentObserver");
             }
             synchronized (ContentObserverController.this.mLock) {
                 try {
@@ -184,11 +219,16 @@ public final class ContentObserverController extends StateController {
                     z = false;
                     if (jobInstance.mTriggerPending) {
                         JobSchedulerService.sElapsedRealtimeClock.getClass();
-                        boolean constraintSatisfied = jobInstance.mJobStatus.setConstraintSatisfied(67108864, SystemClock.elapsedRealtime(), true);
+                        boolean constraintSatisfied =
+                                jobInstance.mJobStatus.setConstraintSatisfied(
+                                        67108864, SystemClock.elapsedRealtime(), true);
                         if (jobInstance.mTriggerPending) {
-                            ContentObserverController contentObserverController = ContentObserverController.this;
-                            contentObserverController.mHandler.removeCallbacks(jobInstance.mExecuteRunner);
-                            contentObserverController.mHandler.removeCallbacks(jobInstance.mTimeoutRunner);
+                            ContentObserverController contentObserverController =
+                                    ContentObserverController.this;
+                            contentObserverController.mHandler.removeCallbacks(
+                                    jobInstance.mExecuteRunner);
+                            contentObserverController.mHandler.removeCallbacks(
+                                    jobInstance.mTimeoutRunner);
                             jobInstance.mTriggerPending = false;
                         }
                         z = constraintSatisfied;
@@ -200,7 +240,8 @@ public final class ContentObserverController extends StateController {
             if (z) {
                 ArraySet arraySet = new ArraySet();
                 arraySet.add(jobInstance.mJobStatus);
-                ContentObserverController.this.mStateChangedListener.onControllerStateChanged(arraySet);
+                ContentObserverController.this.mStateChangedListener.onControllerStateChanged(
+                        arraySet);
             }
         }
     }
@@ -217,7 +258,10 @@ public final class ContentObserverController extends StateController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(IndentingPrintWriter indentingPrintWriter, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            IndentingPrintWriter indentingPrintWriter,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         Predicate predicate = jobSchedulerService$$ExternalSyntheticLambda5;
         for (int i = 0; i < this.mTrackedTasks.size(); i++) {
             JobStatus jobStatus = (JobStatus) this.mTrackedTasks.valueAt(i);
@@ -247,11 +291,14 @@ public final class ContentObserverController extends StateController {
                         if (i4 >= size3) {
                             break;
                         }
-                        if (predicate.test(((JobInstance) observerInstance.mJobs.valueAt(i4)).mJobStatus)) {
-                            JobInfo.TriggerContentUri triggerContentUri = (JobInfo.TriggerContentUri) arrayMap.keyAt(i3);
+                        if (predicate.test(
+                                ((JobInstance) observerInstance.mJobs.valueAt(i4)).mJobStatus)) {
+                            JobInfo.TriggerContentUri triggerContentUri =
+                                    (JobInfo.TriggerContentUri) arrayMap.keyAt(i3);
                             indentingPrintWriter.print(triggerContentUri.getUri());
                             indentingPrintWriter.print(" 0x");
-                            indentingPrintWriter.print(Integer.toHexString(triggerContentUri.getFlags()));
+                            indentingPrintWriter.print(
+                                    Integer.toHexString(triggerContentUri.getFlags()));
                             indentingPrintWriter.print(" (");
                             indentingPrintWriter.print(System.identityHashCode(observerInstance));
                             indentingPrintWriter.println("):");
@@ -259,7 +306,8 @@ public final class ContentObserverController extends StateController {
                             indentingPrintWriter.println("Jobs:");
                             indentingPrintWriter.increaseIndent();
                             for (int i5 = 0; i5 < size3; i5++) {
-                                JobInstance jobInstance = (JobInstance) observerInstance.mJobs.valueAt(i5);
+                                JobInstance jobInstance =
+                                        (JobInstance) observerInstance.mJobs.valueAt(i5);
                                 indentingPrintWriter.print("#");
                                 jobInstance.mJobStatus.printUniqueId(indentingPrintWriter);
                                 indentingPrintWriter.print(" from ");
@@ -270,19 +318,31 @@ public final class ContentObserverController extends StateController {
                                     indentingPrintWriter.increaseIndent();
                                     if (jobInstance.mTriggerPending) {
                                         indentingPrintWriter.print("Trigger pending: update=");
-                                        TimeUtils.formatDuration(jobStatus2.getTriggerContentUpdateDelay(), indentingPrintWriter);
+                                        TimeUtils.formatDuration(
+                                                jobStatus2.getTriggerContentUpdateDelay(),
+                                                indentingPrintWriter);
                                         indentingPrintWriter.print(", max=");
-                                        TimeUtils.formatDuration(jobStatus2.getTriggerContentMaxDelay(), indentingPrintWriter);
+                                        TimeUtils.formatDuration(
+                                                jobStatus2.getTriggerContentMaxDelay(),
+                                                indentingPrintWriter);
                                         indentingPrintWriter.println();
                                     }
                                     indentingPrintWriter.println("Changed Authorities:");
-                                    for (int i6 = 0; i6 < jobInstance.mChangedAuthorities.size(); i6++) {
-                                        indentingPrintWriter.println((String) jobInstance.mChangedAuthorities.valueAt(i6));
+                                    for (int i6 = 0;
+                                            i6 < jobInstance.mChangedAuthorities.size();
+                                            i6++) {
+                                        indentingPrintWriter.println(
+                                                (String)
+                                                        jobInstance.mChangedAuthorities.valueAt(
+                                                                i6));
                                     }
                                     if (jobInstance.mChangedUris != null) {
                                         indentingPrintWriter.println("          Changed URIs:");
-                                        for (int i7 = 0; i7 < jobInstance.mChangedUris.size(); i7++) {
-                                            indentingPrintWriter.println(jobInstance.mChangedUris.valueAt(i7));
+                                        for (int i7 = 0;
+                                                i7 < jobInstance.mChangedUris.size();
+                                                i7++) {
+                                            indentingPrintWriter.println(
+                                                    jobInstance.mChangedUris.valueAt(i7));
                                         }
                                     }
                                     indentingPrintWriter.decreaseIndent();
@@ -308,7 +368,10 @@ public final class ContentObserverController extends StateController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(ProtoOutputStream protoOutputStream, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            ProtoOutputStream protoOutputStream,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         long j;
         long j2;
         ArrayMap arrayMap;
@@ -349,11 +412,13 @@ public final class ContentObserverController extends StateController {
                         i = size2;
                         break;
                     }
-                    if (predicate.test(((JobInstance) observerInstance2.mJobs.valueAt(i6)).mJobStatus)) {
+                    if (predicate.test(
+                            ((JobInstance) observerInstance2.mJobs.valueAt(i6)).mJobStatus)) {
                         j = start;
                         j2 = start2;
                         long start5 = protoOutputStream.start(2246267895810L);
-                        JobInfo.TriggerContentUri triggerContentUri = (JobInfo.TriggerContentUri) arrayMap2.keyAt(i5);
+                        JobInfo.TriggerContentUri triggerContentUri =
+                                (JobInfo.TriggerContentUri) arrayMap2.keyAt(i5);
                         Uri uri = triggerContentUri.getUri();
                         if (uri != null) {
                             protoOutputStream.write(1138166333441L, uri.toString());
@@ -362,10 +427,12 @@ public final class ContentObserverController extends StateController {
                         int i7 = 0;
                         while (i7 < size3) {
                             long start6 = protoOutputStream.start(2246267895811L);
-                            JobInstance jobInstance = (JobInstance) observerInstance2.mJobs.valueAt(i7);
+                            JobInstance jobInstance =
+                                    (JobInstance) observerInstance2.mJobs.valueAt(i7);
                             ArrayMap arrayMap3 = arrayMap2;
                             int i8 = size2;
-                            jobInstance.mJobStatus.writeToShortProto(protoOutputStream, 1146756268033L);
+                            jobInstance.mJobStatus.writeToShortProto(
+                                    protoOutputStream, 1146756268033L);
                             JobStatus jobStatus2 = jobInstance.mJobStatus;
                             ObserverInstance observerInstance3 = observerInstance2;
                             int i9 = size3;
@@ -376,19 +443,29 @@ public final class ContentObserverController extends StateController {
                             } else {
                                 if (jobInstance.mTriggerPending) {
                                     observerInstance = observerInstance3;
-                                    protoOutputStream.write(1112396529667L, jobStatus2.getTriggerContentUpdateDelay());
-                                    protoOutputStream.write(1112396529668L, jobStatus2.getTriggerContentMaxDelay());
+                                    protoOutputStream.write(
+                                            1112396529667L,
+                                            jobStatus2.getTriggerContentUpdateDelay());
+                                    protoOutputStream.write(
+                                            1112396529668L, jobStatus2.getTriggerContentMaxDelay());
                                 } else {
                                     observerInstance = observerInstance3;
                                 }
-                                for (int i10 = 0; i10 < jobInstance.mChangedAuthorities.size(); i10++) {
-                                    protoOutputStream.write(2237677961221L, (String) jobInstance.mChangedAuthorities.valueAt(i10));
+                                for (int i10 = 0;
+                                        i10 < jobInstance.mChangedAuthorities.size();
+                                        i10++) {
+                                    protoOutputStream.write(
+                                            2237677961221L,
+                                            (String) jobInstance.mChangedAuthorities.valueAt(i10));
                                 }
                                 if (jobInstance.mChangedUris != null) {
-                                    for (int i11 = 0; i11 < jobInstance.mChangedUris.size(); i11++) {
+                                    for (int i11 = 0;
+                                            i11 < jobInstance.mChangedUris.size();
+                                            i11++) {
                                         Uri uri2 = (Uri) jobInstance.mChangedUris.valueAt(i11);
                                         if (uri2 != null) {
-                                            protoOutputStream.write(2237677961222L, uri2.toString());
+                                            protoOutputStream.write(
+                                                    2237677961222L, uri2.toString());
                                         }
                                     }
                                 }
@@ -449,7 +526,8 @@ public final class ContentObserverController extends StateController {
                 }
                 Iterator it = jobStatus.changedAuthorities.iterator();
                 while (it.hasNext()) {
-                    jobStatus.contentObserverJobInstance.mChangedAuthorities.add((String) it.next());
+                    jobStatus.contentObserverJobInstance.mChangedAuthorities.add(
+                            (String) it.next());
                 }
                 if (jobStatus.changedUris != null) {
                     JobInstance jobInstance3 = jobStatus.contentObserverJobInstance;
@@ -482,7 +560,8 @@ public final class ContentObserverController extends StateController {
             JobInstance jobInstance = jobStatus.contentObserverJobInstance;
             if (jobInstance != null) {
                 if (jobInstance.mTriggerPending) {
-                    ContentObserverController contentObserverController = ContentObserverController.this;
+                    ContentObserverController contentObserverController =
+                            ContentObserverController.this;
                     contentObserverController.mHandler.removeCallbacks(jobInstance.mExecuteRunner);
                     contentObserverController.mHandler.removeCallbacks(jobInstance.mTimeoutRunner);
                     jobInstance.mTriggerPending = false;
@@ -514,7 +593,8 @@ public final class ContentObserverController extends StateController {
     @Override // com.android.server.job.controllers.StateController
     public final void prepareForExecutionLocked(JobStatus jobStatus) {
         JobInstance jobInstance;
-        if (!jobStatus.hasContentTriggerConstraint() || (jobInstance = jobStatus.contentObserverJobInstance) == null) {
+        if (!jobStatus.hasContentTriggerConstraint()
+                || (jobInstance = jobStatus.contentObserverJobInstance) == null) {
             return;
         }
         jobStatus.changedUris = jobInstance.mChangedUris;
@@ -534,7 +614,8 @@ public final class ContentObserverController extends StateController {
     @Override // com.android.server.job.controllers.StateController
     public final void unprepareFromExecutionLocked(JobStatus jobStatus) {
         JobInstance jobInstance;
-        if (!jobStatus.hasContentTriggerConstraint() || (jobInstance = jobStatus.contentObserverJobInstance) == null) {
+        if (!jobStatus.hasContentTriggerConstraint()
+                || (jobInstance = jobStatus.contentObserverJobInstance) == null) {
             return;
         }
         ArraySet arraySet = jobInstance.mChangedUris;

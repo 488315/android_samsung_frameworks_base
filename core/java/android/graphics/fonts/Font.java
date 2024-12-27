@@ -11,9 +11,14 @@ import android.os.ParcelFileDescriptor;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.util.proto.ProtoStream;
+
 import com.android.internal.util.Preconditions;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,7 +33,6 @@ import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.Objects;
 import java.util.Set;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public final class Font {
@@ -92,11 +96,14 @@ public final class Font {
     private static native ByteBuffer nNewByteBuffer(long j);
 
     private static class NoImagePreloadHolder {
-        private static final NativeAllocationRegistry BUFFER_REGISTRY = NativeAllocationRegistry.createMalloced(ByteBuffer.class.getClassLoader(), Font.nGetReleaseNativeFont());
-        private static final NativeAllocationRegistry FONT_REGISTRY = NativeAllocationRegistry.createMalloced(Font.class.getClassLoader(), Font.nGetReleaseNativeFont());
+        private static final NativeAllocationRegistry BUFFER_REGISTRY =
+                NativeAllocationRegistry.createMalloced(
+                        ByteBuffer.class.getClassLoader(), Font.nGetReleaseNativeFont());
+        private static final NativeAllocationRegistry FONT_REGISTRY =
+                NativeAllocationRegistry.createMalloced(
+                        Font.class.getClassLoader(), Font.nGetReleaseNativeFont());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     public static final class Builder {
@@ -113,7 +120,8 @@ public final class Font {
         @CriticalNative
         private static native void nAddAxis(long j, int i, float f);
 
-        private static native long nBuild(long j, ByteBuffer byteBuffer, String str, String str2, int i, boolean z, int i2);
+        private static native long nBuild(
+                long j, ByteBuffer byteBuffer, String str, String str2, int i, boolean z, int i2);
 
         @FastNative
         private static native long nClone(long j, long j2, int i, boolean z, int i2);
@@ -128,7 +136,8 @@ public final class Font {
             this.mAxes = null;
             Preconditions.checkNotNull(buffer, "buffer can not be null");
             if (!buffer.isDirect()) {
-                throw new IllegalArgumentException("Only direct buffer can be used as the source of font data.");
+                throw new IllegalArgumentException(
+                        "Only direct buffer can be used as the source of font data.");
             }
             this.mBuffer = buffer;
         }
@@ -275,7 +284,8 @@ public final class Font {
             this.mTtcIndex = font.getTtcIndex();
         }
 
-        public static ByteBuffer createBuffer(AssetManager am, String path, boolean isAsset, int cookie) throws IOException {
+        public static ByteBuffer createBuffer(
+                AssetManager am, String path, boolean isAsset, int cookie) throws IOException {
             InputStream assetStream;
             AssetFileDescriptor assetFD;
             Preconditions.checkNotNull(am, "assetManager can not be null");
@@ -293,7 +303,8 @@ public final class Font {
                     FileChannel fc = fis.getChannel();
                     long startOffset = assetFD.getStartOffset();
                     long declaredLength = assetFD.getDeclaredLength();
-                    MappedByteBuffer map = fc.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
+                    MappedByteBuffer map =
+                            fc.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
                     if (fis != null) {
                         fis.close();
                     }
@@ -362,7 +373,8 @@ public final class Font {
                 throw new IOException("Failed to read font contents", this.mException);
             }
             if (this.mWeight == -1 || this.mItalic == -1) {
-                int analyzeStyle = FontFileUtil.analyzeStyle(this.mBuffer, this.mTtcIndex, this.mAxes);
+                int analyzeStyle =
+                        FontFileUtil.analyzeStyle(this.mBuffer, this.mTtcIndex, this.mAxes);
                 if (!FontFileUtil.isSuccess(analyzeStyle)) {
                     this.mWeight = 400;
                     this.mItalic = 0;
@@ -381,15 +393,32 @@ public final class Font {
             long nInitBuilder = nInitBuilder();
             if (this.mAxes != null) {
                 for (FontVariationAxis fontVariationAxis : this.mAxes) {
-                    nAddAxis(nInitBuilder, fontVariationAxis.getOpenTypeTagValue(), fontVariationAxis.getStyleValue());
+                    nAddAxis(
+                            nInitBuilder,
+                            fontVariationAxis.getOpenTypeTagValue(),
+                            fontVariationAxis.getStyleValue());
                 }
             }
             ByteBuffer asReadOnlyBuffer = this.mBuffer.asReadOnlyBuffer();
             String absolutePath = this.mFile == null ? "" : this.mFile.getAbsolutePath();
             if (this.mFont == null) {
-                return new Font(nBuild(nInitBuilder, asReadOnlyBuffer, absolutePath, this.mLocaleList, this.mWeight, z, this.mTtcIndex));
+                return new Font(
+                        nBuild(
+                                nInitBuilder,
+                                asReadOnlyBuffer,
+                                absolutePath,
+                                this.mLocaleList,
+                                this.mWeight,
+                                z,
+                                this.mTtcIndex));
             }
-            return new Font(nClone(this.mFont.getNativePtr(), nInitBuilder, this.mWeight, z, this.mTtcIndex));
+            return new Font(
+                    nClone(
+                            this.mFont.getNativePtr(),
+                            nInitBuilder,
+                            this.mWeight,
+                            z,
+                            this.mTtcIndex));
         }
     }
 
@@ -432,7 +461,10 @@ public final class Font {
         synchronized (this.mLock) {
             if (this.mFontStyle == null) {
                 int packedStyle = nGetPackedStyle(this.mNativePtr);
-                this.mFontStyle = new FontStyle(FontFileUtil.unpackWeight(packedStyle), FontFileUtil.unpackItalic(packedStyle) ? 1 : 0);
+                this.mFontStyle =
+                        new FontStyle(
+                                FontFileUtil.unpackWeight(packedStyle),
+                                FontFileUtil.unpackItalic(packedStyle) ? 1 : 0);
             }
             fontStyle = this.mFontStyle;
         }
@@ -452,9 +484,16 @@ public final class Font {
                 for (int i = 0; i < axisCount; i++) {
                     long packedAxis = nGetAxisInfo(this.mNativePtr, i);
                     float value = Float.intBitsToFloat((int) (4294967295L & packedAxis));
-                    charBuffer[0] = (char) ((BatteryStats.STEP_LEVEL_MODIFIED_MODE_MASK & packedAxis) >>> 56);
-                    charBuffer[1] = (char) ((BatteryStats.STEP_LEVEL_INITIAL_MODE_MASK & packedAxis) >>> 48);
-                    charBuffer[2] = (char) ((BatteryStats.STEP_LEVEL_LEVEL_MASK & packedAxis) >>> 40);
+                    charBuffer[0] =
+                            (char)
+                                    ((BatteryStats.STEP_LEVEL_MODIFIED_MODE_MASK & packedAxis)
+                                            >>> 56);
+                    charBuffer[1] =
+                            (char)
+                                    ((BatteryStats.STEP_LEVEL_INITIAL_MODE_MASK & packedAxis)
+                                            >>> 48);
+                    charBuffer[2] =
+                            (char) ((BatteryStats.STEP_LEVEL_LEVEL_MASK & packedAxis) >>> 40);
                     charBuffer[3] = (char) ((ProtoStream.FIELD_TYPE_MASK & packedAxis) >>> 32);
                     this.mAxes[i] = new FontVariationAxis(new String(charBuffer), value);
                 }
@@ -505,14 +544,19 @@ public final class Font {
         if (myBuffer.capacity() != otherBuffer.capacity()) {
             return false;
         }
-        if (getSourceIdentifier() == other.getSourceIdentifier() && myBuffer.position() == otherBuffer.position()) {
+        if (getSourceIdentifier() == other.getSourceIdentifier()
+                && myBuffer.position() == otherBuffer.position()) {
             return true;
         }
         return myBuffer.equals(otherBuffer);
     }
 
     public boolean paramEquals(Font f) {
-        return f.getStyle().equals(getStyle()) && f.getTtcIndex() == getTtcIndex() && Arrays.equals(f.getAxes(), getAxes()) && Objects.equals(f.getLocaleList(), getLocaleList()) && Objects.equals(getFile(), f.getFile());
+        return f.getStyle().equals(getStyle())
+                && f.getTtcIndex() == getTtcIndex()
+                && Arrays.equals(f.getAxes(), getAxes())
+                && Objects.equals(f.getLocaleList(), getLocaleList())
+                && Objects.equals(getFile(), f.getFile());
     }
 
     public boolean equals(Object o) {
@@ -533,11 +577,27 @@ public final class Font {
     }
 
     public int hashCode() {
-        return Objects.hash(getStyle(), Integer.valueOf(getTtcIndex()), Integer.valueOf(Arrays.hashCode(getAxes())), getLocaleList());
+        return Objects.hash(
+                getStyle(),
+                Integer.valueOf(getTtcIndex()),
+                Integer.valueOf(Arrays.hashCode(getAxes())),
+                getLocaleList());
     }
 
     public String toString() {
-        return "Font {path=" + getFile() + ", style=" + getStyle() + ", ttcIndex=" + getTtcIndex() + ", axes=" + FontVariationAxis.toFontVariationSettings(getAxes()) + ", localeList=" + getLocaleList() + ", buffer=" + getBuffer() + "}";
+        return "Font {path="
+                + getFile()
+                + ", style="
+                + getStyle()
+                + ", ttcIndex="
+                + getTtcIndex()
+                + ", axes="
+                + FontVariationAxis.toFontVariationSettings(getAxes())
+                + ", localeList="
+                + getLocaleList()
+                + ", buffer="
+                + getBuffer()
+                + "}";
     }
 
     public static Set<Font> getAvailableFonts() {

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
-import com.samsung.android.knox.mtd.IMtdCallback;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +38,8 @@ public class KMTDManager {
         if (this.mMtdService != null) {
             try {
                 int userID = getUserID(uid);
-                this.mMtdService.analyzeURL(url, pkgName, userID, getManagedProfileFlag(userID), launchIntent);
+                this.mMtdService.analyzeURL(
+                        url, pkgName, userID, getManagedProfileFlag(userID), launchIntent);
             } catch (Exception e) {
                 Log.e(TAG, "Exception in KFBP Manager Service", e);
             }
@@ -49,7 +50,8 @@ public class KMTDManager {
         if (this.mMtdService != null) {
             try {
                 int userID = getUserID(uid);
-                this.mMtdService.analyzeContent(content, pkgName, userID, getManagedProfileFlag(userID), uid);
+                this.mMtdService.analyzeContent(
+                        content, pkgName, userID, getManagedProfileFlag(userID), uid);
             } catch (Exception e) {
                 Log.e(TAG, "Exception in KFBP Manager Service", e);
             }
@@ -68,12 +70,14 @@ public class KMTDManager {
 
     public void analyzeUrls(List<String> urlList, final MtdResultCallback cb, String location) {
         if (this.mMtdService != null) {
-            IMtdCallback mtdCallback = new IMtdCallback.Stub() { // from class: com.samsung.android.knox.mtd.KMTDManager.1
-                @Override // com.samsung.android.knox.mtd.IMtdCallback
-                public void onFinished(List<AnalysisResult> result) {
-                    cb.onFinished(result);
-                }
-            };
+            IMtdCallback mtdCallback =
+                    new IMtdCallback
+                            .Stub() { // from class: com.samsung.android.knox.mtd.KMTDManager.1
+                        @Override // com.samsung.android.knox.mtd.IMtdCallback
+                        public void onFinished(List<AnalysisResult> result) {
+                            cb.onFinished(result);
+                        }
+                    };
             try {
                 this.mMtdService.analyzeURLs(urlList, mtdCallback, location);
             } catch (Exception e) {
@@ -84,12 +88,14 @@ public class KMTDManager {
 
     public void analyzeContents(List<String> contentList, final MtdResultCallback cb) {
         if (this.mMtdService != null) {
-            IMtdCallback mtdCallback = new IMtdCallback.Stub() { // from class: com.samsung.android.knox.mtd.KMTDManager.2
-                @Override // com.samsung.android.knox.mtd.IMtdCallback
-                public void onFinished(List<AnalysisResult> result) {
-                    cb.onFinished(result);
-                }
-            };
+            IMtdCallback mtdCallback =
+                    new IMtdCallback
+                            .Stub() { // from class: com.samsung.android.knox.mtd.KMTDManager.2
+                        @Override // com.samsung.android.knox.mtd.IMtdCallback
+                        public void onFinished(List<AnalysisResult> result) {
+                            cb.onFinished(result);
+                        }
+                    };
             try {
                 this.mMtdService.analyzeContents(contentList, mtdCallback);
             } catch (Exception e) {

@@ -10,7 +10,11 @@ public final class SemCustomVibration extends SemVibration {
     public final SemHapticSegment mSemHapticSegment;
     public final VibrationSettings mSettings;
 
-    public SemCustomVibration(Context context, SemVibrationBundle semVibrationBundle, SemHapticSegment semHapticSegment, VibrationSettings vibrationSettings) {
+    public SemCustomVibration(
+            Context context,
+            SemVibrationBundle semVibrationBundle,
+            SemHapticSegment semHapticSegment,
+            VibrationSettings vibrationSettings) {
         super(semVibrationBundle);
         this.mContext = context;
         this.mSemHapticSegment = semHapticSegment;
@@ -149,7 +153,9 @@ public final class SemCustomVibration extends SemVibration {
             android.os.Binder.restoreCallingIdentity(r4)
             throw r13
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.vibrator.SemCustomVibration.getVibration():com.android.server.vibrator.HalVibration");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.vibrator.SemCustomVibration.getVibration():com.android.server.vibrator.HalVibration");
     }
 
     public final String toString() {

@@ -3,26 +3,28 @@ package android.hardware.radio.sim;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SimApdu implements Parcelable {
-    public static final Parcelable.Creator<SimApdu> CREATOR = new Parcelable.Creator<SimApdu>() { // from class: android.hardware.radio.sim.SimApdu.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SimApdu createFromParcel(Parcel _aidl_source) {
-            SimApdu _aidl_out = new SimApdu();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SimApdu> CREATOR =
+            new Parcelable.Creator<SimApdu>() { // from class: android.hardware.radio.sim.SimApdu.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SimApdu createFromParcel(Parcel _aidl_source) {
+                    SimApdu _aidl_out = new SimApdu();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SimApdu[] newArray(int _aidl_size) {
-            return new SimApdu[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SimApdu[] newArray(int _aidl_size) {
+                    return new SimApdu[_aidl_size];
+                }
+            };
     public String data;
     public int sessionId = 0;
     public int cla = 0;

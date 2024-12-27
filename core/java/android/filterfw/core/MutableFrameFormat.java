@@ -4,8 +4,7 @@ import java.util.Arrays;
 
 /* loaded from: classes.dex */
 public class MutableFrameFormat extends FrameFormat {
-    public MutableFrameFormat() {
-    }
+    public MutableFrameFormat() {}
 
     public MutableFrameFormat(int baseType, int target) {
         super(baseType, target);

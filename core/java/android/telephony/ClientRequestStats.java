@@ -4,25 +4,28 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateFormat;
 import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public final class ClientRequestStats implements Parcelable {
-    public static final Parcelable.Creator<ClientRequestStats> CREATOR = new Parcelable.Creator<ClientRequestStats>() { // from class: android.telephony.ClientRequestStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClientRequestStats createFromParcel(Parcel in) {
-            return new ClientRequestStats(in);
-        }
+    public static final Parcelable.Creator<ClientRequestStats> CREATOR =
+            new Parcelable.Creator<
+                    ClientRequestStats>() { // from class: android.telephony.ClientRequestStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClientRequestStats createFromParcel(Parcel in) {
+                    return new ClientRequestStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClientRequestStats[] newArray(int size) {
-            return new ClientRequestStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClientRequestStats[] newArray(int size) {
+                    return new ClientRequestStats[size];
+                }
+            };
     private static final int REQUEST_HISTOGRAM_BUCKET_COUNT = 5;
     private String mCallingPackage;
     private long mCompletedRequestsCount;
@@ -110,7 +113,8 @@ public final class ClientRequestStats implements Parcelable {
         synchronized (this.mRequestHistograms) {
             list = new ArrayList<>(this.mRequestHistograms.size());
             for (int i = 0; i < this.mRequestHistograms.size(); i++) {
-                TelephonyHistogram entry = new TelephonyHistogram(this.mRequestHistograms.valueAt(i));
+                TelephonyHistogram entry =
+                        new TelephonyHistogram(this.mRequestHistograms.valueAt(i));
                 list.add(entry);
             }
         }
@@ -129,7 +133,18 @@ public final class ClientRequestStats implements Parcelable {
     }
 
     public String toString() {
-        return "ClientRequestStats{mCallingPackage='" + this.mCallingPackage + DateFormat.QUOTE + ", mCompletedRequestsWakelockTime=" + this.mCompletedRequestsWakelockTime + ", mCompletedRequestsCount=" + this.mCompletedRequestsCount + ", mPendingRequestsWakelockTime=" + this.mPendingRequestsWakelockTime + ", mPendingRequestsCount=" + this.mPendingRequestsCount + '}';
+        return "ClientRequestStats{mCallingPackage='"
+                + this.mCallingPackage
+                + DateFormat.QUOTE
+                + ", mCompletedRequestsWakelockTime="
+                + this.mCompletedRequestsWakelockTime
+                + ", mCompletedRequestsCount="
+                + this.mCompletedRequestsCount
+                + ", mPendingRequestsWakelockTime="
+                + this.mPendingRequestsWakelockTime
+                + ", mPendingRequestsCount="
+                + this.mPendingRequestsCount
+                + '}';
     }
 
     @Override // android.os.Parcelable

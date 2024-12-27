@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class DemuxFilterMmtpRecordEvent implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterMmtpRecordEvent> CREATOR = new Parcelable.Creator<DemuxFilterMmtpRecordEvent>() { // from class: android.hardware.tv.tuner.DemuxFilterMmtpRecordEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterMmtpRecordEvent createFromParcel(Parcel _aidl_source) {
-            DemuxFilterMmtpRecordEvent _aidl_out = new DemuxFilterMmtpRecordEvent();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DemuxFilterMmtpRecordEvent> CREATOR =
+            new Parcelable.Creator<DemuxFilterMmtpRecordEvent>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterMmtpRecordEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterMmtpRecordEvent createFromParcel(Parcel _aidl_source) {
+                    DemuxFilterMmtpRecordEvent _aidl_out = new DemuxFilterMmtpRecordEvent();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterMmtpRecordEvent[] newArray(int _aidl_size) {
-            return new DemuxFilterMmtpRecordEvent[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterMmtpRecordEvent[] newArray(int _aidl_size) {
+                    return new DemuxFilterMmtpRecordEvent[_aidl_size];
+                }
+            };
     public int scHevcIndexMask = 0;
     public long byteNumber = 0;
     public long pts = 0;

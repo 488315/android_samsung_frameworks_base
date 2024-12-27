@@ -9,6 +9,7 @@ import android.os.Message;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,8 +31,7 @@ public final class AudioPlayerStateMonitor {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioManagerPlaybackListener extends AudioManager.AudioPlaybackCallback {
-        public AudioManagerPlaybackListener() {
-        }
+        public AudioManagerPlaybackListener() {}
 
         @Override // android.media.AudioManager.AudioPlaybackCallback
         public final void onPlaybackConfigChanged(List list) {
@@ -42,41 +42,82 @@ public final class AudioPlayerStateMonitor {
                     ArrayMap arrayMap = new ArrayMap();
                     Iterator it = list.iterator();
                     while (it.hasNext()) {
-                        AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) it.next();
+                        AudioPlaybackConfiguration audioPlaybackConfiguration =
+                                (AudioPlaybackConfiguration) it.next();
                         if (audioPlaybackConfiguration.isActive()) {
-                            ((ArraySet) AudioPlayerStateMonitor.this.mActiveAudioUids).add(Integer.valueOf(audioPlaybackConfiguration.getClientUid()));
-                            arrayMap.put(Integer.valueOf(audioPlaybackConfiguration.getPlayerInterfaceId()), audioPlaybackConfiguration);
+                            ((ArraySet) AudioPlayerStateMonitor.this.mActiveAudioUids)
+                                    .add(
+                                            Integer.valueOf(
+                                                    audioPlaybackConfiguration.getClientUid()));
+                            arrayMap.put(
+                                    Integer.valueOf(
+                                            audioPlaybackConfiguration.getPlayerInterfaceId()),
+                                    audioPlaybackConfiguration);
                         }
                     }
                     for (int i2 = 0; i2 < arrayMap.size(); i2++) {
-                        AudioPlaybackConfiguration audioPlaybackConfiguration2 = (AudioPlaybackConfiguration) arrayMap.valueAt(i2);
+                        AudioPlaybackConfiguration audioPlaybackConfiguration2 =
+                                (AudioPlaybackConfiguration) arrayMap.valueAt(i2);
                         int clientUid = audioPlaybackConfiguration2.getClientUid();
-                        if (!AudioPlayerStateMonitor.this.mPrevActiveAudioPlaybackConfigs.containsKey(Integer.valueOf(audioPlaybackConfiguration2.getPlayerInterfaceId()))) {
+                        if (!AudioPlayerStateMonitor.this.mPrevActiveAudioPlaybackConfigs
+                                .containsKey(
+                                        Integer.valueOf(
+                                                audioPlaybackConfiguration2
+                                                        .getPlayerInterfaceId()))) {
                             if (AudioPlayerStateMonitor.DEBUG) {
-                                Log.d(AudioPlayerStateMonitor.TAG, "Found a new active media playback. " + audioPlaybackConfiguration2);
+                                Log.d(
+                                        AudioPlayerStateMonitor.TAG,
+                                        "Found a new active media playback. "
+                                                + audioPlaybackConfiguration2);
                             }
-                            int indexOf = ((ArrayList) AudioPlayerStateMonitor.this.mSortedAudioPlaybackClientUids).indexOf(Integer.valueOf(clientUid));
+                            int indexOf =
+                                    ((ArrayList)
+                                                    AudioPlayerStateMonitor.this
+                                                            .mSortedAudioPlaybackClientUids)
+                                            .indexOf(Integer.valueOf(clientUid));
                             if (indexOf != 0) {
                                 if (indexOf > 0) {
-                                    ((ArrayList) AudioPlayerStateMonitor.this.mSortedAudioPlaybackClientUids).remove(indexOf);
+                                    ((ArrayList)
+                                                    AudioPlayerStateMonitor.this
+                                                            .mSortedAudioPlaybackClientUids)
+                                            .remove(indexOf);
                                 }
-                                ((ArrayList) AudioPlayerStateMonitor.this.mSortedAudioPlaybackClientUids).add(0, Integer.valueOf(clientUid));
+                                ((ArrayList)
+                                                AudioPlayerStateMonitor.this
+                                                        .mSortedAudioPlaybackClientUids)
+                                        .add(0, Integer.valueOf(clientUid));
                             }
                         }
                     }
                     if (((ArraySet) AudioPlayerStateMonitor.this.mActiveAudioUids).size() > 0) {
-                        AudioPlayerStateMonitor audioPlayerStateMonitor = AudioPlayerStateMonitor.this;
-                        if (!((ArraySet) audioPlayerStateMonitor.mActiveAudioUids).contains(((ArrayList) audioPlayerStateMonitor.mSortedAudioPlaybackClientUids).get(0))) {
+                        AudioPlayerStateMonitor audioPlayerStateMonitor =
+                                AudioPlayerStateMonitor.this;
+                        if (!((ArraySet) audioPlayerStateMonitor.mActiveAudioUids)
+                                .contains(
+                                        ((ArrayList)
+                                                        audioPlayerStateMonitor
+                                                                .mSortedAudioPlaybackClientUids)
+                                                .get(0))) {
                             int i3 = 1;
                             while (true) {
-                                if (i3 >= ((ArrayList) AudioPlayerStateMonitor.this.mSortedAudioPlaybackClientUids).size()) {
+                                if (i3
+                                        >= ((ArrayList)
+                                                        AudioPlayerStateMonitor.this
+                                                                .mSortedAudioPlaybackClientUids)
+                                                .size()) {
                                     i3 = -1;
                                     i = -1;
                                     break;
                                 } else {
-                                    Integer num = (Integer) ((ArrayList) AudioPlayerStateMonitor.this.mSortedAudioPlaybackClientUids).get(i3);
+                                    Integer num =
+                                            (Integer)
+                                                    ((ArrayList)
+                                                                    AudioPlayerStateMonitor.this
+                                                                            .mSortedAudioPlaybackClientUids)
+                                                            .get(i3);
                                     i = num.intValue();
-                                    if (((ArraySet) AudioPlayerStateMonitor.this.mActiveAudioUids).contains(num)) {
+                                    if (((ArraySet) AudioPlayerStateMonitor.this.mActiveAudioUids)
+                                            .contains(num)) {
                                         break;
                                     } else {
                                         i3++;
@@ -84,23 +125,46 @@ public final class AudioPlayerStateMonitor {
                                 }
                             }
                             while (i3 > 0) {
-                                List list2 = AudioPlayerStateMonitor.this.mSortedAudioPlaybackClientUids;
-                                ((ArrayList) list2).set(i3, (Integer) ((ArrayList) list2).get(i3 - 1));
+                                List list2 =
+                                        AudioPlayerStateMonitor.this.mSortedAudioPlaybackClientUids;
+                                ((ArrayList) list2)
+                                        .set(i3, (Integer) ((ArrayList) list2).get(i3 - 1));
                                 i3--;
                             }
-                            ((ArrayList) AudioPlayerStateMonitor.this.mSortedAudioPlaybackClientUids).set(0, Integer.valueOf(i));
+                            ((ArrayList)
+                                            AudioPlayerStateMonitor.this
+                                                    .mSortedAudioPlaybackClientUids)
+                                    .set(0, Integer.valueOf(i));
                         }
                     }
                     Iterator it2 = list.iterator();
                     while (it2.hasNext()) {
-                        AudioPlaybackConfiguration audioPlaybackConfiguration3 = (AudioPlaybackConfiguration) it2.next();
-                        if ((AudioPlayerStateMonitor.this.mPrevActiveAudioPlaybackConfigs.remove(Integer.valueOf(audioPlaybackConfiguration3.getPlayerInterfaceId())) != null) != audioPlaybackConfiguration3.isActive()) {
-                            AudioPlayerStateMonitor.m645$$Nest$msendAudioPlayerActiveStateChangedMessageLocked(AudioPlayerStateMonitor.this, audioPlaybackConfiguration3, false);
+                        AudioPlaybackConfiguration audioPlaybackConfiguration3 =
+                                (AudioPlaybackConfiguration) it2.next();
+                        if ((AudioPlayerStateMonitor.this.mPrevActiveAudioPlaybackConfigs.remove(
+                                                Integer.valueOf(
+                                                        audioPlaybackConfiguration3
+                                                                .getPlayerInterfaceId()))
+                                        != null)
+                                != audioPlaybackConfiguration3.isActive()) {
+                            AudioPlayerStateMonitor
+                                    .m645$$Nest$msendAudioPlayerActiveStateChangedMessageLocked(
+                                            AudioPlayerStateMonitor.this,
+                                            audioPlaybackConfiguration3,
+                                            false);
                         }
                     }
-                    Iterator it3 = AudioPlayerStateMonitor.this.mPrevActiveAudioPlaybackConfigs.values().iterator();
+                    Iterator it3 =
+                            AudioPlayerStateMonitor.this
+                                    .mPrevActiveAudioPlaybackConfigs
+                                    .values()
+                                    .iterator();
                     while (it3.hasNext()) {
-                        AudioPlayerStateMonitor.m645$$Nest$msendAudioPlayerActiveStateChangedMessageLocked(AudioPlayerStateMonitor.this, (AudioPlaybackConfiguration) it3.next(), true);
+                        AudioPlayerStateMonitor
+                                .m645$$Nest$msendAudioPlayerActiveStateChangedMessageLocked(
+                                        AudioPlayerStateMonitor.this,
+                                        (AudioPlaybackConfiguration) it3.next(),
+                                        true);
                     }
                     AudioPlayerStateMonitor.this.mPrevActiveAudioPlaybackConfigs = arrayMap;
                 } catch (Throwable th) {
@@ -114,7 +178,9 @@ public final class AudioPlayerStateMonitor {
     public final class MessageHandler extends Handler {
         public final OnAudioPlayerActiveStateChangedListener mListener;
 
-        public MessageHandler(Looper looper, OnAudioPlayerActiveStateChangedListener onAudioPlayerActiveStateChangedListener) {
+        public MessageHandler(
+                Looper looper,
+                OnAudioPlayerActiveStateChangedListener onAudioPlayerActiveStateChangedListener) {
             super(looper);
             this.mListener = onAudioPlayerActiveStateChangedListener;
         }
@@ -124,20 +190,27 @@ public final class AudioPlayerStateMonitor {
             if (message.what != 1) {
                 return;
             }
-            this.mListener.onAudioPlayerActiveStateChanged((AudioPlaybackConfiguration) message.obj, message.arg1 != 0);
+            this.mListener.onAudioPlayerActiveStateChanged(
+                    (AudioPlaybackConfiguration) message.obj, message.arg1 != 0);
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface OnAudioPlayerActiveStateChangedListener {
-        void onAudioPlayerActiveStateChanged(AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z);
+        void onAudioPlayerActiveStateChanged(
+                AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z);
     }
 
     /* renamed from: -$$Nest$msendAudioPlayerActiveStateChangedMessageLocked, reason: not valid java name */
-    public static void m645$$Nest$msendAudioPlayerActiveStateChangedMessageLocked(AudioPlayerStateMonitor audioPlayerStateMonitor, AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z) {
+    public static void m645$$Nest$msendAudioPlayerActiveStateChangedMessageLocked(
+            AudioPlayerStateMonitor audioPlayerStateMonitor,
+            AudioPlaybackConfiguration audioPlaybackConfiguration,
+            boolean z) {
         Iterator it = ((ArrayMap) audioPlayerStateMonitor.mListenerMap).values().iterator();
         while (it.hasNext()) {
-            ((MessageHandler) it.next()).obtainMessage(1, z ? 1 : 0, 0, audioPlaybackConfiguration).sendToTarget();
+            ((MessageHandler) it.next())
+                    .obtainMessage(1, z ? 1 : 0, 0, audioPlaybackConfiguration)
+                    .sendToTarget();
         }
     }
 
@@ -148,7 +221,8 @@ public final class AudioPlayerStateMonitor {
     }
 
     public AudioPlayerStateMonitor(Context context) {
-        ((AudioManager) context.getSystemService("audio")).registerAudioPlaybackCallback(new AudioManagerPlaybackListener(), null);
+        ((AudioManager) context.getSystemService("audio"))
+                .registerAudioPlaybackCallback(new AudioManagerPlaybackListener(), null);
     }
 
     public static AudioPlayerStateMonitor getInstance(Context context) {
@@ -171,9 +245,12 @@ public final class AudioPlayerStateMonitor {
             try {
                 printWriter.println("Audio playback (lastly played comes first)");
                 for (int i = 0; i < ((ArrayList) this.mSortedAudioPlaybackClientUids).size(); i++) {
-                    int intValue = ((Integer) ((ArrayList) this.mSortedAudioPlaybackClientUids).get(i)).intValue();
+                    int intValue =
+                            ((Integer) ((ArrayList) this.mSortedAudioPlaybackClientUids).get(i))
+                                    .intValue();
                     printWriter.print("  uid=" + intValue + " packages=");
-                    String[] packagesForUid = context.getPackageManager().getPackagesForUid(intValue);
+                    String[] packagesForUid =
+                            context.getPackageManager().getPackagesForUid(intValue);
                     if (packagesForUid != null && packagesForUid.length > 0) {
                         for (String str : packagesForUid) {
                             printWriter.print(str + " ");
@@ -195,10 +272,17 @@ public final class AudioPlayerStateMonitor {
         return contains;
     }
 
-    public final void registerListener(OnAudioPlayerActiveStateChangedListener onAudioPlayerActiveStateChangedListener, Handler handler) {
+    public final void registerListener(
+            OnAudioPlayerActiveStateChangedListener onAudioPlayerActiveStateChangedListener,
+            Handler handler) {
         synchronized (this.mLock) {
             try {
-                ((ArrayMap) this.mListenerMap).put(onAudioPlayerActiveStateChangedListener, new MessageHandler(handler == null ? Looper.myLooper() : handler.getLooper(), onAudioPlayerActiveStateChangedListener));
+                ((ArrayMap) this.mListenerMap)
+                        .put(
+                                onAudioPlayerActiveStateChangedListener,
+                                new MessageHandler(
+                                        handler == null ? Looper.myLooper() : handler.getLooper(),
+                                        onAudioPlayerActiveStateChangedListener));
             } catch (Throwable th) {
                 throw th;
             }

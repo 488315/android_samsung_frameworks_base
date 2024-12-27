@@ -11,6 +11,7 @@ import com.android.internal.org.bouncycastle.asn1.DERIA5String;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -58,15 +59,19 @@ public class NetscapeCertRequest extends ASN1Object {
             this.challenge = ((DERIA5String) pkac.getObjectAt(1)).getString();
             this.content = new DERBitString(pkac);
             SubjectPublicKeyInfo pubkeyinfo = SubjectPublicKeyInfo.getInstance(pkac.getObjectAt(0));
-            X509EncodedKeySpec xspec = new X509EncodedKeySpec(new DERBitString(pubkeyinfo).getBytes());
+            X509EncodedKeySpec xspec =
+                    new X509EncodedKeySpec(new DERBitString(pubkeyinfo).getBytes());
             this.keyAlg = pubkeyinfo.getAlgorithm();
-            this.pubkey = KeyFactory.getInstance(this.keyAlg.getAlgorithm().getId()).generatePublic(xspec);
+            this.pubkey =
+                    KeyFactory.getInstance(this.keyAlg.getAlgorithm().getId())
+                            .generatePublic(xspec);
         } catch (Exception e) {
             throw new IllegalArgumentException(e.toString());
         }
     }
 
-    public NetscapeCertRequest(String challenge, AlgorithmIdentifier signing_alg, PublicKey pub_key) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchProviderException {
+    public NetscapeCertRequest(String challenge, AlgorithmIdentifier signing_alg, PublicKey pub_key)
+            throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchProviderException {
         this.challenge = challenge;
         this.sigAlg = signing_alg;
         this.pubkey = pub_key;
@@ -112,7 +117,11 @@ public class NetscapeCertRequest extends ASN1Object {
         this.pubkey = value;
     }
 
-    public boolean verify(String challenge) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchProviderException {
+    public boolean verify(String challenge)
+            throws NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    SignatureException,
+                    NoSuchProviderException {
         if (!challenge.equals(this.challenge)) {
             return false;
         }
@@ -122,11 +131,21 @@ public class NetscapeCertRequest extends ASN1Object {
         return sig.verify(this.sigBits);
     }
 
-    public void sign(PrivateKey priv_key) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchProviderException, InvalidKeySpecException {
+    public void sign(PrivateKey priv_key)
+            throws NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    SignatureException,
+                    NoSuchProviderException,
+                    InvalidKeySpecException {
         sign(priv_key, null);
     }
 
-    public void sign(PrivateKey priv_key, SecureRandom rand) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, NoSuchProviderException, InvalidKeySpecException {
+    public void sign(PrivateKey priv_key, SecureRandom rand)
+            throws NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    SignatureException,
+                    NoSuchProviderException,
+                    InvalidKeySpecException {
         Signature sig = Signature.getInstance(this.sigAlg.getAlgorithm().getId());
         if (rand != null) {
             sig.initSign(priv_key, rand);
@@ -144,12 +163,14 @@ public class NetscapeCertRequest extends ASN1Object {
         }
     }
 
-    private ASN1Primitive getKeySpec() throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchProviderException {
+    private ASN1Primitive getKeySpec()
+            throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchProviderException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             baos.write(this.pubkey.getEncoded());
             baos.close();
-            ASN1InputStream derin = new ASN1InputStream(new ByteArrayInputStream(baos.toByteArray()));
+            ASN1InputStream derin =
+                    new ASN1InputStream(new ByteArrayInputStream(baos.toByteArray()));
             ASN1Primitive obj = derin.readObject();
             return obj;
         } catch (IOException ioe) {
@@ -157,7 +178,8 @@ public class NetscapeCertRequest extends ASN1Object {
         }
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector spkac = new ASN1EncodableVector();
         ASN1EncodableVector pkac = new ASN1EncodableVector();

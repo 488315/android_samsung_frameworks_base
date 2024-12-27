@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Loader;
 import android.os.Handler;
 import android.os.Message;
-import android.print.PrintManager;
 import android.printservice.recommendation.RecommendationInfo;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -35,12 +36,15 @@ public class PrintServiceRecommendationsLoader extends Loader<List<Recommendatio
 
     @Override // android.content.Loader
     protected void onStartLoading() {
-        this.mListener = new PrintManager.PrintServiceRecommendationsChangeListener() { // from class: android.print.PrintServiceRecommendationsLoader.1
-            @Override // android.print.PrintManager.PrintServiceRecommendationsChangeListener
-            public void onPrintServiceRecommendationsChanged() {
-                PrintServiceRecommendationsLoader.this.queueNewResult();
-            }
-        };
+        this.mListener =
+                new PrintManager
+                        .PrintServiceRecommendationsChangeListener() { // from class:
+                                                                       // android.print.PrintServiceRecommendationsLoader.1
+                    @Override // android.print.PrintManager.PrintServiceRecommendationsChangeListener
+                    public void onPrintServiceRecommendationsChanged() {
+                        PrintServiceRecommendationsLoader.this.queueNewResult();
+                    }
+                };
         this.mPrintManager.addPrintServiceRecommendationsChangeListener(this.mListener, null);
         deliverResult(this.mPrintManager.getPrintServiceRecommendations());
     }

@@ -5,12 +5,14 @@ import android.hardware.hdmi.IHdmiControlService;
 import android.net.util.NetworkConstants;
 import android.os.ShellCommand;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.ProxyManager$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerServiceShellCommand$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -22,16 +24,39 @@ public final class HdmiControlShellCommand extends ShellCommand {
     public final IHdmiControlService.Stub mBinderService;
     public final CountDownLatch mLatch = new CountDownLatch(1);
     public final AtomicInteger mCecResult = new AtomicInteger();
-    public final AnonymousClass1 mHdmiControlCallback = new IHdmiControlCallback.Stub() { // from class: com.android.server.hdmi.HdmiControlShellCommand.1
-        public final void onComplete(int i) {
-            PrintWriter outPrintWriter = HdmiControlShellCommand.this.getOutPrintWriter();
-            StringBuilder sb = new StringBuilder(" done (");
-            HdmiControlShellCommand.this.getClass();
-            ProxyManager$$ExternalSyntheticOutline0.m(outPrintWriter, i != 0 ? i != 1 ? i != 2 ? i != 3 ? i != 5 ? i != 6 ? i != 7 ? Integer.toString(i) : "Communication Failed" : "Incorrect mode" : "Exception" : "Target not available" : "Source not available" : "Timeout" : "Success", ")", sb);
-            HdmiControlShellCommand.this.mCecResult.set(i);
-            HdmiControlShellCommand.this.mLatch.countDown();
-        }
-    };
+    public final AnonymousClass1 mHdmiControlCallback =
+            new IHdmiControlCallback
+                    .Stub() { // from class: com.android.server.hdmi.HdmiControlShellCommand.1
+                public final void onComplete(int i) {
+                    PrintWriter outPrintWriter = HdmiControlShellCommand.this.getOutPrintWriter();
+                    StringBuilder sb = new StringBuilder(" done (");
+                    HdmiControlShellCommand.this.getClass();
+                    ProxyManager$$ExternalSyntheticOutline0.m(
+                            outPrintWriter,
+                            i != 0
+                                    ? i != 1
+                                            ? i != 2
+                                                    ? i != 3
+                                                            ? i != 5
+                                                                    ? i != 6
+                                                                            ? i != 7
+                                                                                    ? Integer
+                                                                                            .toString(
+                                                                                                    i)
+                                                                                    : "Communication"
+                                                                                          + " Failed"
+                                                                            : "Incorrect mode"
+                                                                    : "Exception"
+                                                            : "Target not available"
+                                                    : "Source not available"
+                                            : "Timeout"
+                                    : "Success",
+                            ")",
+                            sb);
+                    HdmiControlShellCommand.this.mCecResult.set(i);
+                    HdmiControlShellCommand.this.mLatch.countDown();
+                }
+            };
 
     /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.hdmi.HdmiControlShellCommand$1] */
     public HdmiControlShellCommand(IHdmiControlService.Stub stub) {
@@ -120,21 +145,33 @@ public final class HdmiControlShellCommand extends ShellCommand {
                 String nextArgRequired = getNextArgRequired();
                 nextArgRequired.getClass();
                 if (nextArgRequired.equals("get")) {
-                    AccountManagerServiceShellCommand$$ExternalSyntheticOutline0.m(outPrintWriter, "CEC dumpsys message history size = ", this.mBinderService.getMessageHistorySize());
+                    AccountManagerServiceShellCommand$$ExternalSyntheticOutline0.m(
+                            outPrintWriter,
+                            "CEC dumpsys message history size = ",
+                            this.mBinderService.getMessageHistorySize());
                 } else {
                     if (!nextArgRequired.equals("set")) {
-                        throw new IllegalArgumentException("Unknown operation: ".concat(nextArgRequired));
+                        throw new IllegalArgumentException(
+                                "Unknown operation: ".concat(nextArgRequired));
                     }
                     String nextArgRequired2 = getNextArgRequired();
                     try {
                         int parseInt = Integer.parseInt(nextArgRequired2);
                         if (this.mBinderService.setMessageHistorySize(parseInt)) {
-                            AccountManagerServiceShellCommand$$ExternalSyntheticOutline0.m(outPrintWriter, "Setting CEC dumpsys message history size to ", parseInt);
+                            AccountManagerServiceShellCommand$$ExternalSyntheticOutline0.m(
+                                    outPrintWriter,
+                                    "Setting CEC dumpsys message history size to ",
+                                    parseInt);
                         } else {
-                            outPrintWriter.println("Message history size not changed, was it lower than the minimum size?");
+                            outPrintWriter.println(
+                                    "Message history size not changed, was it lower than the"
+                                        + " minimum size?");
                         }
                     } catch (NumberFormatException unused) {
-                        BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(outPrintWriter, "Cannot set CEC dumpsys message history size to ", nextArgRequired2);
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(
+                                outPrintWriter,
+                                "Cannot set CEC dumpsys message history size to ",
+                                nextArgRequired2);
                         return 1;
                     }
                 }
@@ -146,7 +183,8 @@ public final class HdmiControlShellCommand extends ShellCommand {
                 return (receiveCallback("One Touch Play") && this.mCecResult.get() == 0) ? 0 : 1;
             case 2:
                 if (1 > getRemainingArgsCount()) {
-                    throw new IllegalArgumentException("Please indicate if ARC mode should be turned \"on\" or \"off\".");
+                    throw new IllegalArgumentException(
+                            "Please indicate if ARC mode should be turned \"on\" or \"off\".");
                 }
                 String nextArg = getNextArg();
                 if (nextArg.equals("on")) {
@@ -154,7 +192,8 @@ public final class HdmiControlShellCommand extends ShellCommand {
                     this.mBinderService.setArcMode(true);
                 } else {
                     if (!nextArg.equals("off")) {
-                        throw new IllegalArgumentException("Please indicate if ARC mode should be turned \"on\" or \"off\".");
+                        throw new IllegalArgumentException(
+                                "Please indicate if ARC mode should be turned \"on\" or \"off\".");
                     }
                     outPrintWriter.println("Setting ARC mode off");
                     this.mBinderService.setArcMode(false);
@@ -163,7 +202,9 @@ public final class HdmiControlShellCommand extends ShellCommand {
             case 3:
             case 4:
                 if (1 > getRemainingArgsCount()) {
-                    throw new IllegalArgumentException("Please indicate if System Audio Mode should be turned \"on\" or \"off\".");
+                    throw new IllegalArgumentException(
+                            "Please indicate if System Audio Mode should be turned \"on\" or"
+                                + " \"off\".");
                 }
                 String nextArg2 = getNextArg();
                 if (nextArg2.equals("on")) {
@@ -171,12 +212,16 @@ public final class HdmiControlShellCommand extends ShellCommand {
                     this.mBinderService.setSystemAudioMode(true, this.mHdmiControlCallback);
                 } else {
                     if (!nextArg2.equals("off")) {
-                        throw new IllegalArgumentException("Please indicate if System Audio Mode should be turned \"on\" or \"off\".");
+                        throw new IllegalArgumentException(
+                                "Please indicate if System Audio Mode should be turned \"on\" or"
+                                    + " \"off\".");
                     }
                     outPrintWriter.println("Setting System Audio Mode off");
                     this.mBinderService.setSystemAudioMode(false, this.mHdmiControlCallback);
                 }
-                return (receiveCallback("Set System Audio Mode") && this.mCecResult.get() == 0) ? 0 : 1;
+                return (receiveCallback("Set System Audio Mode") && this.mCecResult.get() == 0)
+                        ? 0
+                        : 1;
             case 5:
                 if (getRemainingArgsCount() != 1) {
                     throw new IllegalArgumentException("Expected exactly 1 argument.");
@@ -274,7 +319,8 @@ public final class HdmiControlShellCommand extends ShellCommand {
                             z = Boolean.parseBoolean(getNextArgRequired());
                             break;
                         default:
-                            throw new IllegalArgumentException("Unknown argument: ".concat(nextOption));
+                            throw new IllegalArgumentException(
+                                    "Unknown argument: ".concat(nextOption));
                     }
                     nextOption = getNextArg();
                 }
@@ -296,18 +342,28 @@ public final class HdmiControlShellCommand extends ShellCommand {
                 if (nextArgRequired3.equals("get")) {
                     String nextArgRequired4 = getNextArgRequired();
                     try {
-                        outPrintWriter.println(nextArgRequired4 + " = " + this.mBinderService.getCecSettingStringValue(nextArgRequired4));
+                        outPrintWriter.println(
+                                nextArgRequired4
+                                        + " = "
+                                        + this.mBinderService.getCecSettingStringValue(
+                                                nextArgRequired4));
                     } catch (IllegalArgumentException unused2) {
-                        outPrintWriter.println(nextArgRequired4 + " = " + this.mBinderService.getCecSettingIntValue(nextArgRequired4));
+                        outPrintWriter.println(
+                                nextArgRequired4
+                                        + " = "
+                                        + this.mBinderService.getCecSettingIntValue(
+                                                nextArgRequired4));
                     }
                 } else {
                     if (!nextArgRequired3.equals("set")) {
-                        throw new IllegalArgumentException("Unknown operation: ".concat(nextArgRequired3));
+                        throw new IllegalArgumentException(
+                                "Unknown operation: ".concat(nextArgRequired3));
                     }
                     String nextArgRequired5 = getNextArgRequired();
                     String nextArgRequired6 = getNextArgRequired();
                     try {
-                        this.mBinderService.setCecSettingStringValue(nextArgRequired5, nextArgRequired6);
+                        this.mBinderService.setCecSettingStringValue(
+                                nextArgRequired5, nextArgRequired6);
                         outPrintWriter.println(nextArgRequired5 + " = " + nextArgRequired6);
                     } catch (IllegalArgumentException unused3) {
                         int parseInt3 = Integer.parseInt(nextArgRequired6);
@@ -315,7 +371,8 @@ public final class HdmiControlShellCommand extends ShellCommand {
                         StringBuilder sb = new StringBuilder();
                         sb.append(nextArgRequired5);
                         sb.append(" = ");
-                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(sb, parseInt3, outPrintWriter);
+                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                sb, parseInt3, outPrintWriter);
                     }
                 }
                 return 0;
@@ -332,10 +389,15 @@ public final class HdmiControlShellCommand extends ShellCommand {
             return handleShellCommand(str);
         } catch (Exception e) {
             PrintWriter errPrintWriter = this.getErrPrintWriter();
-            StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Caught error for command '", str, "': ");
+            StringBuilder m =
+                    DumpUtils$$ExternalSyntheticOutline0.m(
+                            "Caught error for command '", str, "': ");
             m.append(e.getMessage());
             errPrintWriter.println(m.toString());
-            Slog.e("HdmiShellCommand", "Error handling hdmi_control shell command: ".concat(str), e);
+            Slog.e(
+                    "HdmiShellCommand",
+                    "Error handling hdmi_control shell command: ".concat(str),
+                    e);
             return 1;
         }
     }
@@ -346,12 +408,39 @@ public final class HdmiControlShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("      Print this help text.");
         outPrintWriter.println("  onetouchplay, otp");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      Send the \"One Touch Play\" feature from a source to the TV", "  vendorcommand --device_type <originating device type>", "                --destination <destination device>", "                --args <vendor specific arguments>");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "                [--id <true if vendor command should be sent with vendor id>]", "      Send a Vendor Command to the given target device", "  cec_setting get <setting name>", "      Get the current value of a CEC setting");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  cec_setting set <setting name> <value>", "      Set the value of a CEC setting", "  setsystemaudiomode, setsam [on|off]", "      Sets the System Audio Mode feature on or off on TV devices");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  setarc [on|off]", "      Sets the ARC feature on or off on TV devices", "  deviceselect <device id>", "      Switch to device with given id");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      The device's id is represented by its logical address.", "  history_size get", "      Gets the number of messages that can be stored in dumpsys history", "  history_size set <new_size>");
-        outPrintWriter.println("      Changes the number of messages that can be stored in dumpsys history to new_size");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      Send the \"One Touch Play\" feature from a source to the TV",
+                "  vendorcommand --device_type <originating device type>",
+                "                --destination <destination device>",
+                "                --args <vendor specific arguments>");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "                [--id <true if vendor command should be sent with vendor id>]",
+                "      Send a Vendor Command to the given target device",
+                "  cec_setting get <setting name>",
+                "      Get the current value of a CEC setting");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  cec_setting set <setting name> <value>",
+                "      Set the value of a CEC setting",
+                "  setsystemaudiomode, setsam [on|off]",
+                "      Sets the System Audio Mode feature on or off on TV devices");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  setarc [on|off]",
+                "      Sets the ARC feature on or off on TV devices",
+                "  deviceselect <device id>",
+                "      Switch to device with given id");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      The device's id is represented by its logical address.",
+                "  history_size get",
+                "      Gets the number of messages that can be stored in dumpsys history",
+                "  history_size set <new_size>");
+        outPrintWriter.println(
+                "      Changes the number of messages that can be stored in dumpsys history to"
+                    + " new_size");
     }
 
     public final boolean receiveCallback(String str) {

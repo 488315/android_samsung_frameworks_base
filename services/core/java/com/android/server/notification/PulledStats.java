@@ -3,7 +3,9 @@ package com.android.server.notification;
 import android.os.ParcelFileDescriptor;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -24,7 +26,8 @@ public final class PulledStats {
     public final ParcelFileDescriptor toParcelFileDescriptor(final int i) {
         final ParcelFileDescriptor[] createPipe = ParcelFileDescriptor.createPipe();
         if (i != 1) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Unknown pulled stats request: ", "PulledStats");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i, "Unknown pulled stats request: ", "PulledStats");
         } else {
             new Thread() { // from class: com.android.server.notification.PulledStats.1
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -35,8 +38,10 @@ public final class PulledStats {
                 @Override // java.lang.Thread, java.lang.Runnable
                 public final void run() {
                     try {
-                        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream = new ParcelFileDescriptor.AutoCloseOutputStream(createPipe[1]);
-                        ProtoOutputStream protoOutputStream = new ProtoOutputStream(autoCloseOutputStream);
+                        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream =
+                                new ParcelFileDescriptor.AutoCloseOutputStream(createPipe[1]);
+                        ProtoOutputStream protoOutputStream =
+                                new ProtoOutputStream(autoCloseOutputStream);
                         PulledStats.this.writeToProto(i, protoOutputStream);
                         protoOutputStream.flush();
                         autoCloseOutputStream.close();
@@ -51,7 +56,8 @@ public final class PulledStats {
 
     public void writeToProto(int i, ProtoOutputStream protoOutputStream) {
         if (i != 1) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Unknown pulled stats request: ", "PulledStats");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i, "Unknown pulled stats request: ", "PulledStats");
             return;
         }
         Iterator it = ((ArrayList) this.mUndecoratedPackageNames).iterator();

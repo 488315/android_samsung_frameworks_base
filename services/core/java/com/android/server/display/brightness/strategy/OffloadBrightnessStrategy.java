@@ -7,6 +7,7 @@ import com.android.server.display.brightness.BrightnessReason;
 import com.android.server.display.brightness.StrategyExecutionRequest;
 import com.android.server.display.brightness.StrategySelectionNotifyRequest;
 import com.android.server.display.feature.DisplayManagerFlags;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,7 +22,11 @@ public final class OffloadBrightnessStrategy implements DisplayBrightnessStrateg
 
     @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
     public final void dump(PrintWriter printWriter) {
-        AggressivePolicyHandler$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "OffloadBrightnessStrategy:", "  mOffloadScreenBrightness:"), this.mOffloadScreenBrightness, printWriter);
+        AggressivePolicyHandler$$ExternalSyntheticOutline0.m(
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                        printWriter, "OffloadBrightnessStrategy:", "  mOffloadScreenBrightness:"),
+                this.mOffloadScreenBrightness,
+                printWriter);
     }
 
     @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
@@ -35,16 +40,20 @@ public final class OffloadBrightnessStrategy implements DisplayBrightnessStrateg
     }
 
     @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
-    public final void strategySelectionPostProcessor(StrategySelectionNotifyRequest strategySelectionNotifyRequest) {
-        DisplayBrightnessStrategy displayBrightnessStrategy = strategySelectionNotifyRequest.mSelectedDisplayBrightnessStrategy;
-        if (displayBrightnessStrategy.getName().equals("OffloadBrightnessStrategy") || displayBrightnessStrategy.getName().equals("InvalidBrightnessStrategy")) {
+    public final void strategySelectionPostProcessor(
+            StrategySelectionNotifyRequest strategySelectionNotifyRequest) {
+        DisplayBrightnessStrategy displayBrightnessStrategy =
+                strategySelectionNotifyRequest.mSelectedDisplayBrightnessStrategy;
+        if (displayBrightnessStrategy.getName().equals("OffloadBrightnessStrategy")
+                || displayBrightnessStrategy.getName().equals("InvalidBrightnessStrategy")) {
             return;
         }
         this.mOffloadScreenBrightness = Float.NaN;
     }
 
     @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
-    public final DisplayBrightnessState updateBrightness(StrategyExecutionRequest strategyExecutionRequest) {
+    public final DisplayBrightnessState updateBrightness(
+            StrategyExecutionRequest strategyExecutionRequest) {
         float f = this.mOffloadScreenBrightness;
         if (this.mDisplayManagerFlags.mRefactorDisplayPowerController.isEnabled()) {
             this.mOffloadScreenBrightness = Float.NaN;

@@ -116,8 +116,7 @@ public final class AppBackgroundRestrictionsInfo {
         public static final long FGS_DURATION = 1112396529666L;
         public static final long FGS_NOTIFICATION_VISIBLE = 1133871366145L;
 
-        public FgsTrackerInfo() {
-        }
+        public FgsTrackerInfo() {}
     }
 
     public final class BatteryTrackerInfo {
@@ -127,21 +126,18 @@ public final class AppBackgroundRestrictionsInfo {
         public static final long BATTERY_USAGE_FGS = 1120986464259L;
         public static final long BATTERY_USAGE_FOREGROUND = 1120986464260L;
 
-        public BatteryTrackerInfo() {
-        }
+        public BatteryTrackerInfo() {}
     }
 
     public final class BroadcastEventsTrackerInfo {
         public static final long BROADCASTS_SENT = 1120986464257L;
 
-        public BroadcastEventsTrackerInfo() {
-        }
+        public BroadcastEventsTrackerInfo() {}
     }
 
     public final class BindServiceEventsTrackerInfo {
         public static final long BIND_SERVICE_REQUESTS = 1120986464257L;
 
-        public BindServiceEventsTrackerInfo() {
-        }
+        public BindServiceEventsTrackerInfo() {}
     }
 }

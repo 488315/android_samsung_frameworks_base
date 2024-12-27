@@ -17,28 +17,30 @@ public interface IGeofenceHardwareCallback extends IInterface {
 
     void onGeofenceResume(int i, int i2) throws RemoteException;
 
-    void onGeofenceTransition(int i, int i2, Location location, long j, int i3) throws RemoteException;
+    void onGeofenceTransition(int i, int i2, Location location, long j, int i3)
+            throws RemoteException;
 
     public static class Default implements IGeofenceHardwareCallback {
         @Override // android.hardware.location.IGeofenceHardwareCallback
-        public void onGeofenceTransition(int geofenceId, int transition, Location location, long timestamp, int monitoringType) throws RemoteException {
-        }
+        public void onGeofenceTransition(
+                int geofenceId,
+                int transition,
+                Location location,
+                long timestamp,
+                int monitoringType)
+                throws RemoteException {}
 
         @Override // android.hardware.location.IGeofenceHardwareCallback
-        public void onGeofenceAdd(int geofenceId, int status) throws RemoteException {
-        }
+        public void onGeofenceAdd(int geofenceId, int status) throws RemoteException {}
 
         @Override // android.hardware.location.IGeofenceHardwareCallback
-        public void onGeofenceRemove(int geofenceId, int status) throws RemoteException {
-        }
+        public void onGeofenceRemove(int geofenceId, int status) throws RemoteException {}
 
         @Override // android.hardware.location.IGeofenceHardwareCallback
-        public void onGeofencePause(int geofenceId, int status) throws RemoteException {
-        }
+        public void onGeofencePause(int geofenceId, int status) throws RemoteException {}
 
         @Override // android.hardware.location.IGeofenceHardwareCallback
-        public void onGeofenceResume(int geofenceId, int status) throws RemoteException {
-        }
+        public void onGeofenceResume(int geofenceId, int status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -46,8 +48,9 @@ public interface IGeofenceHardwareCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGeofenceHardwareCallback {
-        public static final String DESCRIPTOR = "android.hardware.location.IGeofenceHardwareCallback";
+    public abstract static class Stub extends Binder implements IGeofenceHardwareCallback {
+        public static final String DESCRIPTOR =
+                "android.hardware.location.IGeofenceHardwareCallback";
         static final int TRANSACTION_onGeofenceAdd = 2;
         static final int TRANSACTION_onGeofencePause = 4;
         static final int TRANSACTION_onGeofenceRemove = 3;
@@ -97,7 +100,8 @@ public interface IGeofenceHardwareCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -161,7 +165,13 @@ public interface IGeofenceHardwareCallback extends IInterface {
             }
 
             @Override // android.hardware.location.IGeofenceHardwareCallback
-            public void onGeofenceTransition(int geofenceId, int transition, Location location, long timestamp, int monitoringType) throws RemoteException {
+            public void onGeofenceTransition(
+                    int geofenceId,
+                    int transition,
+                    Location location,
+                    long timestamp,
+                    int monitoringType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -2,16 +2,19 @@ package com.android.server.stats.pull;
 
 import com.android.internal.os.KernelCpuUidTimeReader;
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class StatsPullAtomService$$ExternalSyntheticLambda13 implements KernelCpuUidTimeReader.Callback {
+public final /* synthetic */ class StatsPullAtomService$$ExternalSyntheticLambda13
+        implements KernelCpuUidTimeReader.Callback {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ List f$0;
     public final /* synthetic */ int f$1;
 
-    public /* synthetic */ StatsPullAtomService$$ExternalSyntheticLambda13(int i, int i2, List list) {
+    public /* synthetic */ StatsPullAtomService$$ExternalSyntheticLambda13(
+            int i, int i2, List list) {
         this.$r8$classId = i2;
         this.f$0 = list;
         this.f$1 = i;

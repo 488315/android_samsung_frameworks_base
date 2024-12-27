@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.internal.view.AppearanceRegion;
 
 /* loaded from: classes5.dex */
@@ -13,22 +14,36 @@ public interface IStatusBarCarLife extends IInterface {
 
     void abortTransient(int i, int i2) throws RemoteException;
 
-    void onSystemBarAttributesChanged(int i, int i2, AppearanceRegion[] appearanceRegionArr, boolean z, int i3, int i4, String str) throws RemoteException;
+    void onSystemBarAttributesChanged(
+            int i,
+            int i2,
+            AppearanceRegion[] appearanceRegionArr,
+            boolean z,
+            int i3,
+            int i4,
+            String str)
+            throws RemoteException;
 
     void showTransient(int i, int i2, boolean z) throws RemoteException;
 
     public static class Default implements IStatusBarCarLife {
         @Override // com.android.internal.carlife.IStatusBarCarLife
-        public void onSystemBarAttributesChanged(int displayId, int appearance, AppearanceRegion[] appearanceRegions, boolean navbarColorManagedByIme, int behavior, int requestedVisibleTypes, String packageName) throws RemoteException {
-        }
+        public void onSystemBarAttributesChanged(
+                int displayId,
+                int appearance,
+                AppearanceRegion[] appearanceRegions,
+                boolean navbarColorManagedByIme,
+                int behavior,
+                int requestedVisibleTypes,
+                String packageName)
+                throws RemoteException {}
 
         @Override // com.android.internal.carlife.IStatusBarCarLife
-        public void showTransient(int displayId, int types, boolean isGestureOnSystemBar) throws RemoteException {
-        }
+        public void showTransient(int displayId, int types, boolean isGestureOnSystemBar)
+                throws RemoteException {}
 
         @Override // com.android.internal.carlife.IStatusBarCarLife
-        public void abortTransient(int displayId, int types) throws RemoteException {
-        }
+        public void abortTransient(int displayId, int types) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +51,7 @@ public interface IStatusBarCarLife extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStatusBarCarLife {
+    public abstract static class Stub extends Binder implements IStatusBarCarLife {
         static final int TRANSACTION_abortTransient = 3;
         static final int TRANSACTION_onSystemBarAttributesChanged = 1;
         static final int TRANSACTION_showTransient = 2;
@@ -80,7 +95,8 @@ public interface IStatusBarCarLife extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IStatusBarCarLife.DESCRIPTOR);
             }
@@ -92,7 +108,8 @@ public interface IStatusBarCarLife extends IInterface {
                 case 1:
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
-                    AppearanceRegion[] _arg2 = (AppearanceRegion[]) data.createTypedArray(AppearanceRegion.CREATOR);
+                    AppearanceRegion[] _arg2 =
+                            (AppearanceRegion[]) data.createTypedArray(AppearanceRegion.CREATOR);
                     boolean _arg3 = data.readBoolean();
                     int _arg4 = data.readInt();
                     int _arg5 = data.readInt();
@@ -135,7 +152,15 @@ public interface IStatusBarCarLife extends IInterface {
             }
 
             @Override // com.android.internal.carlife.IStatusBarCarLife
-            public void onSystemBarAttributesChanged(int displayId, int appearance, AppearanceRegion[] appearanceRegions, boolean navbarColorManagedByIme, int behavior, int requestedVisibleTypes, String packageName) throws RemoteException {
+            public void onSystemBarAttributesChanged(
+                    int displayId,
+                    int appearance,
+                    AppearanceRegion[] appearanceRegions,
+                    boolean navbarColorManagedByIme,
+                    int behavior,
+                    int requestedVisibleTypes,
+                    String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IStatusBarCarLife.DESCRIPTOR);
@@ -153,7 +178,8 @@ public interface IStatusBarCarLife extends IInterface {
             }
 
             @Override // com.android.internal.carlife.IStatusBarCarLife
-            public void showTransient(int displayId, int types, boolean isGestureOnSystemBar) throws RemoteException {
+            public void showTransient(int displayId, int types, boolean isGestureOnSystemBar)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IStatusBarCarLife.DESCRIPTOR);

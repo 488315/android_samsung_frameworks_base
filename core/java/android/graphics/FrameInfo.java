@@ -24,10 +24,15 @@ public final class FrameInfo {
     public long[] frameInfo = new long[12];
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FrameInfoFlags {
-    }
+    public @interface FrameInfoFlags {}
 
-    public void setVsync(long intendedVsync, long usedVsync, long frameTimelineVsyncId, long frameDeadline, long frameStartTime, long frameInterval) {
+    public void setVsync(
+            long intendedVsync,
+            long usedVsync,
+            long frameTimelineVsyncId,
+            long frameDeadline,
+            long frameStartTime,
+            long frameInterval) {
         this.frameInfo[1] = frameTimelineVsyncId;
         this.frameInfo[2] = intendedVsync;
         this.frameInfo[3] = usedVsync;

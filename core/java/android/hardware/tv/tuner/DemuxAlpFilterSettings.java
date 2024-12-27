@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class DemuxAlpFilterSettings implements Parcelable {
-    public static final Parcelable.Creator<DemuxAlpFilterSettings> CREATOR = new Parcelable.Creator<DemuxAlpFilterSettings>() { // from class: android.hardware.tv.tuner.DemuxAlpFilterSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxAlpFilterSettings createFromParcel(Parcel _aidl_source) {
-            DemuxAlpFilterSettings _aidl_out = new DemuxAlpFilterSettings();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DemuxAlpFilterSettings> CREATOR =
+            new Parcelable.Creator<DemuxAlpFilterSettings>() { // from class:
+                // android.hardware.tv.tuner.DemuxAlpFilterSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxAlpFilterSettings createFromParcel(Parcel _aidl_source) {
+                    DemuxAlpFilterSettings _aidl_out = new DemuxAlpFilterSettings();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxAlpFilterSettings[] newArray(int _aidl_size) {
-            return new DemuxAlpFilterSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxAlpFilterSettings[] newArray(int _aidl_size) {
+                    return new DemuxAlpFilterSettings[_aidl_size];
+                }
+            };
     public DemuxAlpFilterSettingsFilterSettings filterSettings;
     public int packetType = 0;
     public byte lengthType = 0;
@@ -72,7 +74,10 @@ public class DemuxAlpFilterSettings implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.filterSettings = (DemuxAlpFilterSettingsFilterSettings) _aidl_parcel.readTypedObject(DemuxAlpFilterSettingsFilterSettings.CREATOR);
+                this.filterSettings =
+                        (DemuxAlpFilterSettingsFilterSettings)
+                                _aidl_parcel.readTypedObject(
+                                        DemuxAlpFilterSettingsFilterSettings.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

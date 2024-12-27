@@ -4,23 +4,27 @@ import android.annotation.NonNull;
 import android.content.IntentFilter;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 
 /* loaded from: classes5.dex */
 public class ParsedIntentInfoImpl implements ParsedIntentInfo, Parcelable {
-    public static final Parcelable.Creator<ParsedIntentInfoImpl> CREATOR = new Parcelable.Creator<ParsedIntentInfoImpl>() { // from class: com.android.internal.pm.pkg.component.ParsedIntentInfoImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedIntentInfoImpl[] newArray(int size) {
-            return new ParsedIntentInfoImpl[size];
-        }
+    public static final Parcelable.Creator<ParsedIntentInfoImpl> CREATOR =
+            new Parcelable.Creator<
+                    ParsedIntentInfoImpl>() { // from class:
+                                              // com.android.internal.pm.pkg.component.ParsedIntentInfoImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedIntentInfoImpl[] newArray(int size) {
+                    return new ParsedIntentInfoImpl[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedIntentInfoImpl createFromParcel(Parcel in) {
-            return new ParsedIntentInfoImpl(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedIntentInfoImpl createFromParcel(Parcel in) {
+                    return new ParsedIntentInfoImpl(in);
+                }
+            };
     private boolean mHasDefault;
     private int mIcon;
     private IntentFilter mIntentFilter;
@@ -109,10 +113,10 @@ public class ParsedIntentInfoImpl implements ParsedIntentInfo, Parcelable {
         this.mNonLocalizedLabel = nonLocalizedLabel;
         this.mIcon = icon;
         this.mIntentFilter = intentFilter;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mIntentFilter);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mIntentFilter);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

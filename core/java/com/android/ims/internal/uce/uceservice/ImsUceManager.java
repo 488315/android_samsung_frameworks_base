@@ -5,12 +5,13 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import com.android.ims.internal.uce.uceservice.IUceService;
 
 /* loaded from: classes5.dex */
 public class ImsUceManager {
-    public static final String ACTION_UCE_SERVICE_DOWN = "com.android.ims.internal.uce.UCE_SERVICE_DOWN";
-    public static final String ACTION_UCE_SERVICE_UP = "com.android.ims.internal.uce.UCE_SERVICE_UP";
+    public static final String ACTION_UCE_SERVICE_DOWN =
+            "com.android.ims.internal.uce.UCE_SERVICE_DOWN";
+    public static final String ACTION_UCE_SERVICE_UP =
+            "com.android.ims.internal.uce.UCE_SERVICE_UP";
     private static final String LOG_TAG = "ImsUceManager";
     private static final String UCE_SERVICE = "uce";
     public static final int UCE_SERVICE_STATUS_CLOSED = 2;
@@ -65,8 +66,7 @@ public class ImsUceManager {
     }
 
     private class UceServiceDeathRecipient implements IBinder.DeathRecipient {
-        private UceServiceDeathRecipient() {
-        }
+        private UceServiceDeathRecipient() {}
 
         @Override // android.os.IBinder.DeathRecipient
         public void binderDied() {

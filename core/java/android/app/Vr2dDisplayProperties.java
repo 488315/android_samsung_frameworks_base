@@ -3,6 +3,7 @@ package android.app;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -10,19 +11,21 @@ import java.lang.annotation.RetentionPolicy;
 @SystemApi
 /* loaded from: classes.dex */
 public final class Vr2dDisplayProperties implements Parcelable {
-    public static final Parcelable.Creator<Vr2dDisplayProperties> CREATOR = new Parcelable.Creator<Vr2dDisplayProperties>() { // from class: android.app.Vr2dDisplayProperties.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Vr2dDisplayProperties createFromParcel(Parcel source) {
-            return new Vr2dDisplayProperties(source);
-        }
+    public static final Parcelable.Creator<Vr2dDisplayProperties> CREATOR =
+            new Parcelable.Creator<
+                    Vr2dDisplayProperties>() { // from class: android.app.Vr2dDisplayProperties.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Vr2dDisplayProperties createFromParcel(Parcel source) {
+                    return new Vr2dDisplayProperties(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Vr2dDisplayProperties[] newArray(int size) {
-            return new Vr2dDisplayProperties[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Vr2dDisplayProperties[] newArray(int size) {
+                    return new Vr2dDisplayProperties[size];
+                }
+            };
     public static final int FLAG_VIRTUAL_DISPLAY_ENABLED = 1;
     private final int mAddedFlags;
     private final int mDpi;
@@ -31,8 +34,7 @@ public final class Vr2dDisplayProperties implements Parcelable {
     private final int mWidth;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Vr2dDisplayFlag {
-    }
+    public @interface Vr2dDisplayFlag {}
 
     public Vr2dDisplayProperties(int width, int height, int dpi) {
         this(width, height, dpi, 0, 0);
@@ -52,7 +54,17 @@ public final class Vr2dDisplayProperties implements Parcelable {
     }
 
     public String toString() {
-        return "Vr2dDisplayProperties{mWidth=" + this.mWidth + ", mHeight=" + this.mHeight + ", mDpi=" + this.mDpi + ", flags=" + toReadableFlags(this.mAddedFlags) + ", removed_flags=" + toReadableFlags(this.mRemovedFlags) + "}";
+        return "Vr2dDisplayProperties{mWidth="
+                + this.mWidth
+                + ", mHeight="
+                + this.mHeight
+                + ", mDpi="
+                + this.mDpi
+                + ", flags="
+                + toReadableFlags(this.mAddedFlags)
+                + ", removed_flags="
+                + toReadableFlags(this.mRemovedFlags)
+                + "}";
     }
 
     public boolean equals(Object o) {
@@ -63,7 +75,11 @@ public final class Vr2dDisplayProperties implements Parcelable {
             return false;
         }
         Vr2dDisplayProperties that = (Vr2dDisplayProperties) o;
-        if (getAddedFlags() == that.getAddedFlags() && getRemovedFlags() == that.getRemovedFlags() && getWidth() == that.getWidth() && getHeight() == that.getHeight() && getDpi() == that.getDpi()) {
+        if (getAddedFlags() == that.getAddedFlags()
+                && getRemovedFlags() == that.getRemovedFlags()
+                && getWidth() == that.getWidth()
+                && getHeight() == that.getHeight()
+                && getDpi() == that.getDpi()) {
             return true;
         }
         return false;
@@ -156,7 +172,8 @@ public final class Vr2dDisplayProperties implements Parcelable {
         }
 
         public Vr2dDisplayProperties build() {
-            return new Vr2dDisplayProperties(this.mWidth, this.mHeight, this.mDpi, this.mAddedFlags, this.mRemovedFlags);
+            return new Vr2dDisplayProperties(
+                    this.mWidth, this.mHeight, this.mDpi, this.mAddedFlags, this.mRemovedFlags);
         }
     }
 }

@@ -20,24 +20,22 @@ public interface IDockedStackListener extends IInterface {
 
     public static class Default implements IDockedStackListener {
         @Override // android.view.IDockedStackListener
-        public void onDividerVisibilityChanged(boolean visible) throws RemoteException {
-        }
+        public void onDividerVisibilityChanged(boolean visible) throws RemoteException {}
 
         @Override // android.view.IDockedStackListener
-        public void onDockedStackExistsChanged(boolean exists) throws RemoteException {
-        }
+        public void onDockedStackExistsChanged(boolean exists) throws RemoteException {}
 
         @Override // android.view.IDockedStackListener
-        public void onDockedStackMinimizedChanged(boolean minimized, long animDuration, boolean isHomeStackResizable) throws RemoteException {
-        }
+        public void onDockedStackMinimizedChanged(
+                boolean minimized, long animDuration, boolean isHomeStackResizable)
+                throws RemoteException {}
 
         @Override // android.view.IDockedStackListener
-        public void onAdjustedForImeChanged(boolean adjustedForIme, long animDuration) throws RemoteException {
-        }
+        public void onAdjustedForImeChanged(boolean adjustedForIme, long animDuration)
+                throws RemoteException {}
 
         @Override // android.view.IDockedStackListener
-        public void onDockSideChanged(int newDockSide) throws RemoteException {
-        }
+        public void onDockSideChanged(int newDockSide) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -45,7 +43,7 @@ public interface IDockedStackListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDockedStackListener {
+    public abstract static class Stub extends Binder implements IDockedStackListener {
         public static final String DESCRIPTOR = "android.view.IDockedStackListener";
         static final int TRANSACTION_onAdjustedForImeChanged = 4;
         static final int TRANSACTION_onDividerVisibilityChanged = 1;
@@ -96,7 +94,8 @@ public interface IDockedStackListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -179,7 +178,9 @@ public interface IDockedStackListener extends IInterface {
             }
 
             @Override // android.view.IDockedStackListener
-            public void onDockedStackMinimizedChanged(boolean minimized, long animDuration, boolean isHomeStackResizable) throws RemoteException {
+            public void onDockedStackMinimizedChanged(
+                    boolean minimized, long animDuration, boolean isHomeStackResizable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -193,7 +194,8 @@ public interface IDockedStackListener extends IInterface {
             }
 
             @Override // android.view.IDockedStackListener
-            public void onAdjustedForImeChanged(boolean adjustedForIme, long animDuration) throws RemoteException {
+            public void onAdjustedForImeChanged(boolean adjustedForIme, long animDuration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

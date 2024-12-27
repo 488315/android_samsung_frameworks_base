@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
 import android.util.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -16,19 +17,30 @@ public abstract class Utils {
 
     public static boolean backgroundWhitelist(Context context, String str, boolean z) {
         Log.i("com.android.server.spay.Utils", "backgroundWhitelist called, fromInit: " + z);
-        if (!"com.samsung.android.spay".equals(str) && !"com.samsung.android.spayfw".equals(str) && !"com.samsung.android.spaymini".equals(str) && !"com.samsung.android.samsungpay.gear".equals(str) && !"com.samsung.android.rajaampat".equals(str)) {
-            Log.e("com.android.server.spay.Utils", "backgroundWhitelist: bad packageName: ".concat(str));
+        if (!"com.samsung.android.spay".equals(str)
+                && !"com.samsung.android.spayfw".equals(str)
+                && !"com.samsung.android.spaymini".equals(str)
+                && !"com.samsung.android.samsungpay.gear".equals(str)
+                && !"com.samsung.android.rajaampat".equals(str)) {
+            Log.e(
+                    "com.android.server.spay.Utils",
+                    "backgroundWhitelist: bad packageName: ".concat(str));
             return false;
         }
         try {
             PackageManager packageManager = context.getPackageManager();
-            if (packageManager.getPackageInfo("android", 64).signatures[0].equals(packageManager.getPackageInfo(str, 64).signatures[0])) {
+            if (packageManager
+                    .getPackageInfo("android", 64)
+                    .signatures[0]
+                    .equals(packageManager.getPackageInfo(str, 64).signatures[0])) {
                 Log.d("com.android.server.spay.Utils", "hasValidSignature, VALID : ".concat(str));
                 try {
                     int i = context.getPackageManager().getApplicationInfo(str, 0).uid;
                     String num = Integer.toString(i);
                     if (i < 1000 || num == null) {
-                        Log.e("com.android.server.spay.Utils", "backgroundWhitelist: bad uid: " + i + ", uidString: " + num);
+                        Log.e(
+                                "com.android.server.spay.Utils",
+                                "backgroundWhitelist: bad uid: " + i + ", uidString: " + num);
                         return false;
                     }
                     StringBuilder sb = new StringBuilder("mRegisteredUid: ");
@@ -49,14 +61,18 @@ public abstract class Utils {
                     return true;
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e("com.android.server.spay.Utils", "backgroundWhitelistUid exception " + e.toString());
+                    Log.e(
+                            "com.android.server.spay.Utils",
+                            "backgroundWhitelistUid exception " + e.toString());
                     return false;
                 }
             }
         } catch (PackageManager.NameNotFoundException | NullPointerException e2) {
             Log.e("com.android.server.spay.Utils", "hasValidSignature, exception " + e2.toString());
         }
-        Log.e("com.android.server.spay.Utils", "backgroundWhitelist: bad signature or not found: ".concat(str));
+        Log.e(
+                "com.android.server.spay.Utils",
+                "backgroundWhitelist: bad signature or not found: ".concat(str));
         return false;
     }
 
@@ -156,7 +172,9 @@ public abstract class Utils {
         L6c:
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.spay.Utils.readFile(java.lang.String):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.spay.Utils.readFile(java.lang.String):byte[]");
     }
 
     public static void sendSecureUIAbortIntent(Context context) {

@@ -9,6 +9,5 @@ public abstract class WritableIdentityCredential {
 
     public abstract byte[] personalize(PersonalizationData personalizationData);
 
-    protected WritableIdentityCredential() {
-    }
+    protected WritableIdentityCredential() {}
 }

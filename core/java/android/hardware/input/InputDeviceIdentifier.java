@@ -3,23 +3,26 @@ package android.hardware.input;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class InputDeviceIdentifier implements Parcelable {
-    public static final Parcelable.Creator<InputDeviceIdentifier> CREATOR = new Parcelable.Creator<InputDeviceIdentifier>() { // from class: android.hardware.input.InputDeviceIdentifier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputDeviceIdentifier createFromParcel(Parcel source) {
-            return new InputDeviceIdentifier(source);
-        }
+    public static final Parcelable.Creator<InputDeviceIdentifier> CREATOR =
+            new Parcelable.Creator<InputDeviceIdentifier>() { // from class:
+                // android.hardware.input.InputDeviceIdentifier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputDeviceIdentifier createFromParcel(Parcel source) {
+                    return new InputDeviceIdentifier(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputDeviceIdentifier[] newArray(int size) {
-            return new InputDeviceIdentifier[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputDeviceIdentifier[] newArray(int size) {
+                    return new InputDeviceIdentifier[size];
+                }
+            };
     private final String mDescriptor;
     private final int mProductId;
     private final int mVendorId;
@@ -68,17 +71,27 @@ public final class InputDeviceIdentifier implements Parcelable {
             return false;
         }
         InputDeviceIdentifier that = (InputDeviceIdentifier) o;
-        if (this.mVendorId == that.mVendorId && this.mProductId == that.mProductId && TextUtils.equals(this.mDescriptor, that.mDescriptor)) {
+        if (this.mVendorId == that.mVendorId
+                && this.mProductId == that.mProductId
+                && TextUtils.equals(this.mDescriptor, that.mDescriptor)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mDescriptor, Integer.valueOf(this.mVendorId), Integer.valueOf(this.mProductId));
+        return Objects.hash(
+                this.mDescriptor,
+                Integer.valueOf(this.mVendorId),
+                Integer.valueOf(this.mProductId));
     }
 
     public String toString() {
-        return "InputDeviceIdentifier: vendorId: " + this.mVendorId + ", productId: " + this.mProductId + ", descriptor: " + this.mDescriptor;
+        return "InputDeviceIdentifier: vendorId: "
+                + this.mVendorId
+                + ", productId: "
+                + this.mProductId
+                + ", descriptor: "
+                + this.mDescriptor;
     }
 }

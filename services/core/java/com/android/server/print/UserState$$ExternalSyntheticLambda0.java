@@ -3,8 +3,9 @@ package com.android.server.print;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.util.function.pooled.PooledLambda;
-import com.android.server.print.UserState;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
@@ -23,11 +24,13 @@ public final /* synthetic */ class UserState$$ExternalSyntheticLambda0 implement
                         if (userState.mPrintServicesChangeListenerRecords == null) {
                             return;
                         }
-                        ArrayList arrayList = new ArrayList(userState.mPrintServicesChangeListenerRecords);
+                        ArrayList arrayList =
+                                new ArrayList(userState.mPrintServicesChangeListenerRecords);
                         int size = arrayList.size();
                         for (int i = 0; i < size; i++) {
                             try {
-                                ((UserState.AnonymousClass3) arrayList.get(i)).listener.onPrintServicesChanged();
+                                ((UserState.AnonymousClass3) arrayList.get(i))
+                                        .listener.onPrintServicesChanged();
                             } catch (RemoteException e) {
                                 Log.e("UserState", "Error notifying for print services change", e);
                             }
@@ -45,7 +48,11 @@ public final /* synthetic */ class UserState$$ExternalSyntheticLambda0 implement
             default:
                 RemotePrintService remotePrintService = (RemotePrintService) obj;
                 remotePrintService.getClass();
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda0(5), remotePrintService));
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new RemotePrintService$$ExternalSyntheticLambda0(5),
+                                        remotePrintService));
                 return;
         }
     }

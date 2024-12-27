@@ -13,7 +13,8 @@ public abstract class OneTimeUseBuilder<T> {
 
     protected void checkNotUsed() {
         if (this.used) {
-            throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+            throw new IllegalStateException(
+                    "This Builder should not be reused. Use a new Builder instance instead");
         }
     }
 }

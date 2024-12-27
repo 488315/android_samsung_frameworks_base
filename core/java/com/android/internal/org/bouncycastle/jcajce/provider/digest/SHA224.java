@@ -10,8 +10,7 @@ import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.Base
 
 /* loaded from: classes5.dex */
 public class SHA224 {
-    private SHA224() {
-    }
+    private SHA224() {}
 
     public static class Digest extends BCMessageDigest implements Cloneable {
         public Digest() {
@@ -43,7 +42,8 @@ public class SHA224 {
 
         @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider
         public void configure(ConfigurableProvider provider) {
-            provider.addPrivateAlgorithm("Mac", NISTObjectIdentifiers.id_sha224, PREFIX + "$HashMac");
+            provider.addPrivateAlgorithm(
+                    "Mac", NISTObjectIdentifiers.id_sha224, PREFIX + "$HashMac");
         }
     }
 }

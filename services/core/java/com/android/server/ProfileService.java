@@ -7,8 +7,10 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
 import android.util.jar.StrictJarFile;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.server.pm.SpegService;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -138,7 +140,10 @@ public abstract class ProfileService extends SystemService {
         String str2 = this.TAG;
         if (m45m) {
             try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(str), StandardCharsets.UTF_8));
+                BufferedReader bufferedReader =
+                        new BufferedReader(
+                                new InputStreamReader(
+                                        new FileInputStream(str), StandardCharsets.UTF_8));
                 while (true) {
                     try {
                         String readLine = bufferedReader.readLine();
@@ -156,7 +161,8 @@ public abstract class ProfileService extends SystemService {
                 Slog.w(str2, "Exception caught while reading ".concat(str));
             }
         } else {
-            PinnerService$$ExternalSyntheticOutline0.m("Blocklist file ", str, " does not exist", str2);
+            PinnerService$$ExternalSyntheticOutline0.m(
+                    "Blocklist file ", str, " does not exist", str2);
         }
         return hashSet;
     }
@@ -172,10 +178,11 @@ public abstract class ProfileService extends SystemService {
             for (String str2 : set) {
                 if (str2.contains("*")) {
                     try {
-                        if (str.matches(str2.replace("*", "\\S+").replace(".", "\\."))) {
-                        }
+                        if (str.matches(str2.replace("*", "\\S+").replace(".", "\\."))) {}
                     } catch (PatternSyntaxException unused) {
-                        Slog.e(this.TAG, "Invalid regular expression's syntax in pattern: ".concat(str2));
+                        Slog.e(
+                                this.TAG,
+                                "Invalid regular expression's syntax in pattern: ".concat(str2));
                     }
                 }
             }
@@ -195,14 +202,22 @@ public abstract class ProfileService extends SystemService {
         IBinder binderOfService = getBinderOfService();
         if (binderOfService != null) {
             try {
-                binderOfService.linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.server.ProfileService.1
-                    @Override // android.os.IBinder.DeathRecipient
-                    public final void binderDied() {
-                        ProfileService.this.initializeInterfaceOfService();
-                        ProfileService$1$$ExternalSyntheticOutline0.m(new StringBuilder(), ProfileService.this.SERVICE_NAME, " died; reconnecting", ProfileService.this.TAG);
-                        ProfileService.this.selectSuitableProfileService();
-                    }
-                }, 0);
+                binderOfService.linkToDeath(
+                        new IBinder
+                                .DeathRecipient() { // from class:
+                                                    // com.android.server.ProfileService.1
+                            @Override // android.os.IBinder.DeathRecipient
+                            public final void binderDied() {
+                                ProfileService.this.initializeInterfaceOfService();
+                                ProfileService$1$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder(),
+                                        ProfileService.this.SERVICE_NAME,
+                                        " died; reconnecting",
+                                        ProfileService.this.TAG);
+                                ProfileService.this.selectSuitableProfileService();
+                            }
+                        },
+                        0);
             } catch (RemoteException unused) {
                 binderOfService = null;
             }
@@ -215,12 +230,16 @@ public abstract class ProfileService extends SystemService {
             return;
         }
         Slog.w(str2, str + " not found; trying again");
-        BackgroundThread.getHandler().postDelayed(new Runnable() { // from class: com.android.server.ProfileService$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                ProfileService.this.selectSuitableProfileService();
-            }
-        }, 1000L);
+        BackgroundThread.getHandler()
+                .postDelayed(
+                        new Runnable() { // from class:
+                                         // com.android.server.ProfileService$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ProfileService.this.selectSuitableProfileService();
+                            }
+                        },
+                        1000L);
     }
 
     public abstract void setInterfaceOfService(IBinder iBinder);

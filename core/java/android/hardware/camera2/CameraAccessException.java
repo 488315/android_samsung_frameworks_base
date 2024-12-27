@@ -1,6 +1,7 @@
 package android.hardware.camera2;
 
 import android.util.AndroidException;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -16,8 +17,7 @@ public class CameraAccessException extends AndroidException {
     private final int mReason;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AccessError {
-    }
+    public @interface AccessError {}
 
     public final int getReason() {
         return this.mReason;
@@ -48,13 +48,18 @@ public class CameraAccessException extends AndroidException {
             case 1:
                 return "The camera is disabled due to a device policy, and cannot be opened.";
             case 2:
-                return "The camera device is removable and has been disconnected from the Android device, or the camera service has shut down the connection due to a higher-priority access request for the camera device.";
+                return "The camera device is removable and has been disconnected from the Android"
+                        + " device, or the camera service has shut down the connection due to a"
+                        + " higher-priority access request for the camera device.";
             case 3:
-                return "The camera device is currently in the error state; no further calls to it will succeed.";
+                return "The camera device is currently in the error state; no further calls to it"
+                        + " will succeed.";
             case 4:
                 return "The camera device is in use already";
             case 5:
-                return "The system-wide limit for number of open cameras has been reached, and more camera devices cannot be opened until previous instances are closed.";
+                return "The system-wide limit for number of open cameras has been reached, and more"
+                        + " camera devices cannot be opened until previous instances are"
+                        + " closed.";
             default:
                 return null;
         }

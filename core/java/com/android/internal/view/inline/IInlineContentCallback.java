@@ -9,26 +9,26 @@ import android.view.SurfaceControlViewHost;
 
 /* loaded from: classes5.dex */
 public interface IInlineContentCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.view.inline.IInlineContentCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.view.inline.IInlineContentCallback";
 
     void onClick() throws RemoteException;
 
-    void onContent(SurfaceControlViewHost.SurfacePackage surfacePackage, int i, int i2) throws RemoteException;
+    void onContent(SurfaceControlViewHost.SurfacePackage surfacePackage, int i, int i2)
+            throws RemoteException;
 
     void onLongClick() throws RemoteException;
 
     public static class Default implements IInlineContentCallback {
         @Override // com.android.internal.view.inline.IInlineContentCallback
-        public void onContent(SurfaceControlViewHost.SurfacePackage content, int width, int height) throws RemoteException {
-        }
+        public void onContent(SurfaceControlViewHost.SurfacePackage content, int width, int height)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.inline.IInlineContentCallback
-        public void onClick() throws RemoteException {
-        }
+        public void onClick() throws RemoteException {}
 
         @Override // com.android.internal.view.inline.IInlineContentCallback
-        public void onLongClick() throws RemoteException {
-        }
+        public void onLongClick() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +36,7 @@ public interface IInlineContentCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInlineContentCallback {
+    public abstract static class Stub extends Binder implements IInlineContentCallback {
         static final int TRANSACTION_onClick = 2;
         static final int TRANSACTION_onContent = 1;
         static final int TRANSACTION_onLongClick = 3;
@@ -80,7 +80,8 @@ public interface IInlineContentCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInlineContentCallback.DESCRIPTOR);
             }
@@ -90,7 +91,10 @@ public interface IInlineContentCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SurfaceControlViewHost.SurfacePackage _arg0 = (SurfaceControlViewHost.SurfacePackage) data.readTypedObject(SurfaceControlViewHost.SurfacePackage.CREATOR);
+                    SurfaceControlViewHost.SurfacePackage _arg0 =
+                            (SurfaceControlViewHost.SurfacePackage)
+                                    data.readTypedObject(
+                                            SurfaceControlViewHost.SurfacePackage.CREATOR);
                     int _arg1 = data.readInt();
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
@@ -124,7 +128,9 @@ public interface IInlineContentCallback extends IInterface {
             }
 
             @Override // com.android.internal.view.inline.IInlineContentCallback
-            public void onContent(SurfaceControlViewHost.SurfacePackage content, int width, int height) throws RemoteException {
+            public void onContent(
+                    SurfaceControlViewHost.SurfacePackage content, int width, int height)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInlineContentCallback.DESCRIPTOR);

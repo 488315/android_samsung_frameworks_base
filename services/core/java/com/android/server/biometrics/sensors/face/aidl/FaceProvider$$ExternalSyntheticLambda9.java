@@ -1,6 +1,7 @@
 package com.android.server.biometrics.sensors.face.aidl;
 
 import android.os.IBinder;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.log.BiometricLogger;
 import com.android.server.biometrics.sensors.ClientMonitorCallbackConverter;
@@ -16,7 +17,13 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda9 implem
     public final /* synthetic */ ClientMonitorCallbackConverter f$4;
     public final /* synthetic */ int f$5;
 
-    public /* synthetic */ FaceProvider$$ExternalSyntheticLambda9(FaceProvider faceProvider, int i, int i2, IBinder iBinder, ClientMonitorCallbackConverter clientMonitorCallbackConverter, int i3) {
+    public /* synthetic */ FaceProvider$$ExternalSyntheticLambda9(
+            FaceProvider faceProvider,
+            int i,
+            int i2,
+            IBinder iBinder,
+            ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+            int i3) {
         this.f$0 = faceProvider;
         this.f$1 = i;
         this.f$2 = i2;
@@ -34,10 +41,27 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda9 implem
         ClientMonitorCallbackConverter clientMonitorCallbackConverter = this.f$4;
         int i3 = this.f$5;
         ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).scheduleFaceUpdateActiveUserClient(i2);
-        if (FaceUtils.getInstance(i, null).getBiometricsForUser(faceProvider.mContext, i2).isEmpty()) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i2, "Ignoring getFeature, no templates enrolled for user: ", faceProvider.getTag());
+        if (FaceUtils.getInstance(i, null)
+                .getBiometricsForUser(faceProvider.mContext, i2)
+                .isEmpty()) {
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i2,
+                    "Ignoring getFeature, no templates enrolled for user: ",
+                    faceProvider.getTag());
         } else {
-            faceProvider.scheduleForSensor(i, new FaceGetFeatureClient(faceProvider.mContext, ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).mLazySession, iBinder, clientMonitorCallbackConverter, i2, faceProvider.mContext.getOpPackageName(), i, BiometricLogger.ofUnknown(faceProvider.mContext), faceProvider.mBiometricContext, i3));
+            faceProvider.scheduleForSensor(
+                    i,
+                    new FaceGetFeatureClient(
+                            faceProvider.mContext,
+                            ((Sensor) faceProvider.mFaceSensors.mSensors.get(i)).mLazySession,
+                            iBinder,
+                            clientMonitorCallbackConverter,
+                            i2,
+                            faceProvider.mContext.getOpPackageName(),
+                            i,
+                            BiometricLogger.ofUnknown(faceProvider.mContext),
+                            faceProvider.mBiometricContext,
+                            i3));
         }
     }
 }

@@ -3,6 +3,7 @@ package android.se.omapi;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.util.Log;
+
 import java.io.IOException;
 
 /* loaded from: classes3.dex */

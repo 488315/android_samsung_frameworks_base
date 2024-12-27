@@ -14,8 +14,8 @@ public interface ITaskFragmentOrganizer extends IInterface {
 
     public static class Default implements ITaskFragmentOrganizer {
         @Override // android.window.ITaskFragmentOrganizer
-        public void onTransactionReady(TaskFragmentTransaction transaction) throws RemoteException {
-        }
+        public void onTransactionReady(TaskFragmentTransaction transaction)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ITaskFragmentOrganizer extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITaskFragmentOrganizer {
+    public abstract static class Stub extends Binder implements ITaskFragmentOrganizer {
         static final int TRANSACTION_onTransactionReady = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ITaskFragmentOrganizer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITaskFragmentOrganizer.DESCRIPTOR);
             }
@@ -71,7 +72,9 @@ public interface ITaskFragmentOrganizer extends IInterface {
             }
             switch (code) {
                 case 1:
-                    TaskFragmentTransaction _arg0 = (TaskFragmentTransaction) data.readTypedObject(TaskFragmentTransaction.CREATOR);
+                    TaskFragmentTransaction _arg0 =
+                            (TaskFragmentTransaction)
+                                    data.readTypedObject(TaskFragmentTransaction.CREATOR);
                     data.enforceNoDataAvail();
                     onTransactionReady(_arg0);
                     return true;
@@ -97,7 +100,8 @@ public interface ITaskFragmentOrganizer extends IInterface {
             }
 
             @Override // android.window.ITaskFragmentOrganizer
-            public void onTransactionReady(TaskFragmentTransaction transaction) throws RemoteException {
+            public void onTransactionReady(TaskFragmentTransaction transaction)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITaskFragmentOrganizer.DESCRIPTOR);

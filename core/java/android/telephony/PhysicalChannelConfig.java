@@ -3,7 +3,9 @@ package android.telephony;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telephony.TelephonyFeatures;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -15,27 +17,27 @@ public final class PhysicalChannelConfig implements Parcelable {
     public static final int CELL_BANDWIDTH_UNKNOWN = 0;
     public static final int CHANNEL_NUMBER_UNKNOWN = Integer.MAX_VALUE;
 
-    @Deprecated
-    public static final int CONNECTION_PRIMARY_SERVING = 1;
+    @Deprecated public static final int CONNECTION_PRIMARY_SERVING = 1;
 
-    @Deprecated
-    public static final int CONNECTION_SECONDARY_SERVING = 2;
+    @Deprecated public static final int CONNECTION_SECONDARY_SERVING = 2;
 
-    @Deprecated
-    public static final int CONNECTION_UNKNOWN = -1;
-    public static final Parcelable.Creator<PhysicalChannelConfig> CREATOR = new Parcelable.Creator<PhysicalChannelConfig>() { // from class: android.telephony.PhysicalChannelConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhysicalChannelConfig createFromParcel(Parcel in) {
-            return new PhysicalChannelConfig(in);
-        }
+    @Deprecated public static final int CONNECTION_UNKNOWN = -1;
+    public static final Parcelable.Creator<PhysicalChannelConfig> CREATOR =
+            new Parcelable.Creator<
+                    PhysicalChannelConfig>() { // from class:
+                                               // android.telephony.PhysicalChannelConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhysicalChannelConfig createFromParcel(Parcel in) {
+                    return new PhysicalChannelConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhysicalChannelConfig[] newArray(int size) {
-            return new PhysicalChannelConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhysicalChannelConfig[] newArray(int size) {
+                    return new PhysicalChannelConfig[size];
+                }
+            };
     public static final int FREQUENCY_UNKNOWN = -1;
     public static final int PHYSICAL_CELL_ID_MAXIMUM_VALUE = 1007;
     public static final int PHYSICAL_CELL_ID_UNKNOWN = -1;
@@ -53,8 +55,7 @@ public final class PhysicalChannelConfig implements Parcelable {
     private int mUplinkFrequency;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConnectionStatus {
-    }
+    public @interface ConnectionStatus {}
 
     @Override // android.os.Parcelable
     public int describeContents() {
@@ -133,7 +134,9 @@ public final class PhysicalChannelConfig implements Parcelable {
                 return "Unknown";
             case 0:
             default:
-                return "Invalid(" + this.mCellConnectionStatus + NavigationBarInflaterView.KEY_CODE_END;
+                return "Invalid("
+                        + this.mCellConnectionStatus
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
                 return "PrimaryServing";
             case 2:
@@ -146,7 +149,9 @@ public final class PhysicalChannelConfig implements Parcelable {
             case 1:
             case 2:
             case 16:
-                this.mDownlinkFrequency = AccessNetworkUtils.getFrequencyFromArfcn(this.mBand, this.mDownlinkChannelNumber, false);
+                this.mDownlinkFrequency =
+                        AccessNetworkUtils.getFrequencyFromArfcn(
+                                this.mBand, this.mDownlinkChannelNumber, false);
                 break;
             case 3:
             case 8:
@@ -154,13 +159,18 @@ public final class PhysicalChannelConfig implements Parcelable {
             case 10:
             case 15:
             case 17:
-                this.mDownlinkFrequency = AccessNetworkUtils.getFrequencyFromUarfcn(this.mBand, this.mDownlinkChannelNumber, false);
+                this.mDownlinkFrequency =
+                        AccessNetworkUtils.getFrequencyFromUarfcn(
+                                this.mBand, this.mDownlinkChannelNumber, false);
                 break;
             case 13:
-                this.mDownlinkFrequency = AccessNetworkUtils.getFrequencyFromEarfcn(this.mBand, this.mDownlinkChannelNumber, false);
+                this.mDownlinkFrequency =
+                        AccessNetworkUtils.getFrequencyFromEarfcn(
+                                this.mBand, this.mDownlinkChannelNumber, false);
                 break;
             case 20:
-                this.mDownlinkFrequency = AccessNetworkUtils.getFrequencyFromNrArfcn(this.mDownlinkChannelNumber);
+                this.mDownlinkFrequency =
+                        AccessNetworkUtils.getFrequencyFromNrArfcn(this.mDownlinkChannelNumber);
                 break;
         }
     }
@@ -170,7 +180,9 @@ public final class PhysicalChannelConfig implements Parcelable {
             case 1:
             case 2:
             case 16:
-                this.mUplinkFrequency = AccessNetworkUtils.getFrequencyFromArfcn(this.mBand, this.mUplinkChannelNumber, true);
+                this.mUplinkFrequency =
+                        AccessNetworkUtils.getFrequencyFromArfcn(
+                                this.mBand, this.mUplinkChannelNumber, true);
                 break;
             case 3:
             case 8:
@@ -178,13 +190,18 @@ public final class PhysicalChannelConfig implements Parcelable {
             case 10:
             case 15:
             case 17:
-                this.mUplinkFrequency = AccessNetworkUtils.getFrequencyFromUarfcn(this.mBand, this.mUplinkChannelNumber, true);
+                this.mUplinkFrequency =
+                        AccessNetworkUtils.getFrequencyFromUarfcn(
+                                this.mBand, this.mUplinkChannelNumber, true);
                 break;
             case 13:
-                this.mUplinkFrequency = AccessNetworkUtils.getFrequencyFromEarfcn(this.mBand, this.mUplinkChannelNumber, true);
+                this.mUplinkFrequency =
+                        AccessNetworkUtils.getFrequencyFromEarfcn(
+                                this.mBand, this.mUplinkChannelNumber, true);
                 break;
             case 20:
-                this.mUplinkFrequency = AccessNetworkUtils.getFrequencyFromNrArfcn(this.mUplinkChannelNumber);
+                this.mUplinkFrequency =
+                        AccessNetworkUtils.getFrequencyFromNrArfcn(this.mUplinkChannelNumber);
                 break;
         }
     }
@@ -197,7 +214,8 @@ public final class PhysicalChannelConfig implements Parcelable {
             case 1:
             case 2:
             case 16:
-                this.mFrequencyRange = AccessNetworkUtils.getFrequencyRangeGroupFromGeranBand(this.mBand);
+                this.mFrequencyRange =
+                        AccessNetworkUtils.getFrequencyRangeGroupFromGeranBand(this.mBand);
                 break;
             case 3:
             case 8:
@@ -205,7 +223,8 @@ public final class PhysicalChannelConfig implements Parcelable {
             case 10:
             case 15:
             case 17:
-                this.mFrequencyRange = AccessNetworkUtils.getFrequencyRangeGroupFromUtranBand(this.mBand);
+                this.mFrequencyRange =
+                        AccessNetworkUtils.getFrequencyRangeGroupFromUtranBand(this.mBand);
                 break;
             case 4:
             case 5:
@@ -220,14 +239,17 @@ public final class PhysicalChannelConfig implements Parcelable {
                 this.mFrequencyRange = 0;
                 break;
             case 13:
-                this.mFrequencyRange = AccessNetworkUtils.getFrequencyRangeGroupFromEutranBand(this.mBand);
+                this.mFrequencyRange =
+                        AccessNetworkUtils.getFrequencyRangeGroupFromEutranBand(this.mBand);
                 break;
             case 20:
-                this.mFrequencyRange = AccessNetworkUtils.getFrequencyRangeGroupFromNrBand(this.mBand);
+                this.mFrequencyRange =
+                        AccessNetworkUtils.getFrequencyRangeGroupFromNrBand(this.mBand);
                 break;
         }
         if (this.mFrequencyRange == 0) {
-            this.mFrequencyRange = AccessNetworkUtils.getFrequencyRangeFromArfcn(this.mDownlinkFrequency);
+            this.mFrequencyRange =
+                    AccessNetworkUtils.getFrequencyRangeFromArfcn(this.mDownlinkFrequency);
         }
     }
 
@@ -239,15 +261,62 @@ public final class PhysicalChannelConfig implements Parcelable {
             return false;
         }
         PhysicalChannelConfig config = (PhysicalChannelConfig) o;
-        return this.mCellConnectionStatus == config.mCellConnectionStatus && this.mCellBandwidthDownlinkKhz == config.mCellBandwidthDownlinkKhz && this.mCellBandwidthUplinkKhz == config.mCellBandwidthUplinkKhz && this.mNetworkType == config.mNetworkType && this.mFrequencyRange == config.mFrequencyRange && this.mDownlinkChannelNumber == config.mDownlinkChannelNumber && this.mUplinkChannelNumber == config.mUplinkChannelNumber && this.mPhysicalCellId == config.mPhysicalCellId && Arrays.equals(this.mContextIds, config.mContextIds) && this.mBand == config.mBand && this.mDownlinkFrequency == config.mDownlinkFrequency && this.mUplinkFrequency == config.mUplinkFrequency;
+        return this.mCellConnectionStatus == config.mCellConnectionStatus
+                && this.mCellBandwidthDownlinkKhz == config.mCellBandwidthDownlinkKhz
+                && this.mCellBandwidthUplinkKhz == config.mCellBandwidthUplinkKhz
+                && this.mNetworkType == config.mNetworkType
+                && this.mFrequencyRange == config.mFrequencyRange
+                && this.mDownlinkChannelNumber == config.mDownlinkChannelNumber
+                && this.mUplinkChannelNumber == config.mUplinkChannelNumber
+                && this.mPhysicalCellId == config.mPhysicalCellId
+                && Arrays.equals(this.mContextIds, config.mContextIds)
+                && this.mBand == config.mBand
+                && this.mDownlinkFrequency == config.mDownlinkFrequency
+                && this.mUplinkFrequency == config.mUplinkFrequency;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mCellConnectionStatus), Integer.valueOf(this.mCellBandwidthDownlinkKhz), Integer.valueOf(this.mCellBandwidthUplinkKhz), Integer.valueOf(this.mNetworkType), Integer.valueOf(this.mFrequencyRange), Integer.valueOf(this.mDownlinkChannelNumber), Integer.valueOf(this.mUplinkChannelNumber), Integer.valueOf(Arrays.hashCode(this.mContextIds)), Integer.valueOf(this.mPhysicalCellId), Integer.valueOf(this.mBand), Integer.valueOf(this.mDownlinkFrequency), Integer.valueOf(this.mUplinkFrequency));
+        return Objects.hash(
+                Integer.valueOf(this.mCellConnectionStatus),
+                Integer.valueOf(this.mCellBandwidthDownlinkKhz),
+                Integer.valueOf(this.mCellBandwidthUplinkKhz),
+                Integer.valueOf(this.mNetworkType),
+                Integer.valueOf(this.mFrequencyRange),
+                Integer.valueOf(this.mDownlinkChannelNumber),
+                Integer.valueOf(this.mUplinkChannelNumber),
+                Integer.valueOf(Arrays.hashCode(this.mContextIds)),
+                Integer.valueOf(this.mPhysicalCellId),
+                Integer.valueOf(this.mBand),
+                Integer.valueOf(this.mDownlinkFrequency),
+                Integer.valueOf(this.mUplinkFrequency));
     }
 
     public String toString() {
-        return "{mConnectionStatus=" + getConnectionStatusString() + ",mCellBandwidthDownlinkKhz=" + this.mCellBandwidthDownlinkKhz + ",mCellBandwidthUplinkKhz=" + this.mCellBandwidthUplinkKhz + ",mNetworkType=" + TelephonyManager.getNetworkTypeName(this.mNetworkType) + ",mFrequencyRange=" + ServiceState.frequencyRangeToString(this.mFrequencyRange) + ",mDownlinkChannelNumber=" + this.mDownlinkChannelNumber + ",mUplinkChannelNumber=" + this.mUplinkChannelNumber + ",mContextIds=" + Arrays.toString(this.mContextIds) + ",mPhysicalCellId=" + this.mPhysicalCellId + ",mBand=" + this.mBand + ",mDownlinkFrequency=" + this.mDownlinkFrequency + ",mUplinkFrequency=" + this.mUplinkFrequency + "}";
+        return "{mConnectionStatus="
+                + getConnectionStatusString()
+                + ",mCellBandwidthDownlinkKhz="
+                + this.mCellBandwidthDownlinkKhz
+                + ",mCellBandwidthUplinkKhz="
+                + this.mCellBandwidthUplinkKhz
+                + ",mNetworkType="
+                + TelephonyManager.getNetworkTypeName(this.mNetworkType)
+                + ",mFrequencyRange="
+                + ServiceState.frequencyRangeToString(this.mFrequencyRange)
+                + ",mDownlinkChannelNumber="
+                + this.mDownlinkChannelNumber
+                + ",mUplinkChannelNumber="
+                + this.mUplinkChannelNumber
+                + ",mContextIds="
+                + Arrays.toString(this.mContextIds)
+                + ",mPhysicalCellId="
+                + this.mPhysicalCellId
+                + ",mBand="
+                + this.mBand
+                + ",mDownlinkFrequency="
+                + this.mDownlinkFrequency
+                + ",mUplinkFrequency="
+                + this.mUplinkFrequency
+                + "}";
     }
 
     private PhysicalChannelConfig(Parcel in) {
@@ -279,7 +348,10 @@ public final class PhysicalChannelConfig implements Parcelable {
         this.mContextIds = builder.mContextIds;
         this.mPhysicalCellId = builder.mPhysicalCellId;
         this.mBand = builder.mBand;
-        if (this.mCellConnectionStatus == 2 && TelephonyFeatures.IS_QCOM && this.mNetworkType == 20 && this.mFrequencyRange == 0) {
+        if (this.mCellConnectionStatus == 2
+                && TelephonyFeatures.IS_QCOM
+                && this.mNetworkType == 20
+                && this.mFrequencyRange == 0) {
             this.mFrequencyRange = this.mBand;
             this.mBand = 0;
         }
@@ -342,7 +414,8 @@ public final class PhysicalChannelConfig implements Parcelable {
 
         public Builder setFrequencyRange(int frequencyRange) {
             if (!ServiceState.isFrequencyRangeValid(frequencyRange) && frequencyRange != 0) {
-                throw new IllegalArgumentException("Frequency range " + frequencyRange + " is invalid.");
+                throw new IllegalArgumentException(
+                        "Frequency range " + frequencyRange + " is invalid.");
             }
             this.mFrequencyRange = frequencyRange;
             return this;
@@ -360,7 +433,10 @@ public final class PhysicalChannelConfig implements Parcelable {
 
         public Builder setCellBandwidthDownlinkKhz(int cellBandwidthDownlinkKhz) {
             if (cellBandwidthDownlinkKhz < 0) {
-                throw new IllegalArgumentException("Cell downlink bandwidth(kHz) " + cellBandwidthDownlinkKhz + " is invalid.");
+                throw new IllegalArgumentException(
+                        "Cell downlink bandwidth(kHz) "
+                                + cellBandwidthDownlinkKhz
+                                + " is invalid.");
             }
             this.mCellBandwidthDownlinkKhz = cellBandwidthDownlinkKhz;
             return this;
@@ -368,7 +444,8 @@ public final class PhysicalChannelConfig implements Parcelable {
 
         public Builder setCellBandwidthUplinkKhz(int cellBandwidthUplinkKhz) {
             if (cellBandwidthUplinkKhz < 0) {
-                throw new IllegalArgumentException("Cell uplink bandwidth(kHz) " + cellBandwidthUplinkKhz + " is invalid.");
+                throw new IllegalArgumentException(
+                        "Cell uplink bandwidth(kHz) " + cellBandwidthUplinkKhz + " is invalid.");
             }
             this.mCellBandwidthUplinkKhz = cellBandwidthUplinkKhz;
             return this;
@@ -389,7 +466,8 @@ public final class PhysicalChannelConfig implements Parcelable {
 
         public Builder setPhysicalCellId(int physicalCellId) {
             if (physicalCellId > 1007) {
-                throw new IllegalArgumentException("Physical cell ID " + physicalCellId + " is over limit.");
+                throw new IllegalArgumentException(
+                        "Physical cell ID " + physicalCellId + " is over limit.");
             }
             this.mPhysicalCellId = physicalCellId;
             return this;

@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class LightState implements Parcelable {
-    public static final Parcelable.Creator<LightState> CREATOR = new Parcelable.Creator<LightState>() { // from class: android.hardware.lights.LightState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LightState createFromParcel(Parcel in) {
-            return new LightState(in);
-        }
+    public static final Parcelable.Creator<LightState> CREATOR =
+            new Parcelable.Creator<
+                    LightState>() { // from class: android.hardware.lights.LightState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LightState createFromParcel(Parcel in) {
+                    return new LightState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LightState[] newArray(int size) {
-            return new LightState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LightState[] newArray(int size) {
+                    return new LightState[size];
+                }
+            };
     private final int mColor;
     private final int mPlayerId;
 
@@ -82,6 +84,10 @@ public final class LightState implements Parcelable {
     }
 
     public String toString() {
-        return "LightState{Color=0x" + Integer.toHexString(this.mColor) + ", PlayerId=" + this.mPlayerId + "}";
+        return "LightState{Color=0x"
+                + Integer.toHexString(this.mColor)
+                + ", PlayerId="
+                + this.mPlayerId
+                + "}";
     }
 }

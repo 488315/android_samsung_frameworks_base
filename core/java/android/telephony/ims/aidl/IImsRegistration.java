@@ -5,21 +5,24 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.telephony.ims.aidl.IImsRegistrationCallback;
 
 /* loaded from: classes4.dex */
 public interface IImsRegistration extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.IImsRegistration";
 
-    void addEmergencyRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException;
+    void addEmergencyRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback)
+            throws RemoteException;
 
-    void addRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException;
+    void addRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback)
+            throws RemoteException;
 
     int getRegistrationTechnology() throws RemoteException;
 
-    void removeEmergencyRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException;
+    void removeEmergencyRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback)
+            throws RemoteException;
 
-    void removeRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException;
+    void removeRegistrationCallback(IImsRegistrationCallback iImsRegistrationCallback)
+            throws RemoteException;
 
     void triggerDeregistration(int i) throws RemoteException;
 
@@ -36,36 +39,31 @@ public interface IImsRegistration extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsRegistration
-        public void addRegistrationCallback(IImsRegistrationCallback c) throws RemoteException {
-        }
+        public void addRegistrationCallback(IImsRegistrationCallback c) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistration
-        public void removeRegistrationCallback(IImsRegistrationCallback c) throws RemoteException {
-        }
+        public void removeRegistrationCallback(IImsRegistrationCallback c) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistration
-        public void addEmergencyRegistrationCallback(IImsRegistrationCallback c) throws RemoteException {
-        }
+        public void addEmergencyRegistrationCallback(IImsRegistrationCallback c)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistration
-        public void removeEmergencyRegistrationCallback(IImsRegistrationCallback c) throws RemoteException {
-        }
+        public void removeEmergencyRegistrationCallback(IImsRegistrationCallback c)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistration
-        public void triggerFullNetworkRegistration(int sipCode, String sipReason) throws RemoteException {
-        }
+        public void triggerFullNetworkRegistration(int sipCode, String sipReason)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistration
-        public void triggerUpdateSipDelegateRegistration() throws RemoteException {
-        }
+        public void triggerUpdateSipDelegateRegistration() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistration
-        public void triggerSipDelegateDeregistration() throws RemoteException {
-        }
+        public void triggerSipDelegateDeregistration() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistration
-        public void triggerDeregistration(int reason) throws RemoteException {
-        }
+        public void triggerDeregistration(int reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -73,7 +71,7 @@ public interface IImsRegistration extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsRegistration {
+    public abstract static class Stub extends Binder implements IImsRegistration {
         static final int TRANSACTION_addEmergencyRegistrationCallback = 4;
         static final int TRANSACTION_addRegistrationCallback = 2;
         static final int TRANSACTION_getRegistrationTechnology = 1;
@@ -135,7 +133,8 @@ public interface IImsRegistration extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsRegistration.DESCRIPTOR);
             }
@@ -150,22 +149,26 @@ public interface IImsRegistration extends IInterface {
                     reply.writeInt(_result);
                     return true;
                 case 2:
-                    IImsRegistrationCallback _arg0 = IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsRegistrationCallback _arg0 =
+                            IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addRegistrationCallback(_arg0);
                     return true;
                 case 3:
-                    IImsRegistrationCallback _arg02 = IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsRegistrationCallback _arg02 =
+                            IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeRegistrationCallback(_arg02);
                     return true;
                 case 4:
-                    IImsRegistrationCallback _arg03 = IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsRegistrationCallback _arg03 =
+                            IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addEmergencyRegistrationCallback(_arg03);
                     return true;
                 case 5:
-                    IImsRegistrationCallback _arg04 = IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsRegistrationCallback _arg04 =
+                            IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeEmergencyRegistrationCallback(_arg04);
                     return true;
@@ -236,7 +239,8 @@ public interface IImsRegistration extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
-            public void removeRegistrationCallback(IImsRegistrationCallback c) throws RemoteException {
+            public void removeRegistrationCallback(IImsRegistrationCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
@@ -248,7 +252,8 @@ public interface IImsRegistration extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
-            public void addEmergencyRegistrationCallback(IImsRegistrationCallback c) throws RemoteException {
+            public void addEmergencyRegistrationCallback(IImsRegistrationCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
@@ -260,7 +265,8 @@ public interface IImsRegistration extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
-            public void removeEmergencyRegistrationCallback(IImsRegistrationCallback c) throws RemoteException {
+            public void removeEmergencyRegistrationCallback(IImsRegistrationCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsRegistration.DESCRIPTOR);
@@ -272,7 +278,8 @@ public interface IImsRegistration extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistration
-            public void triggerFullNetworkRegistration(int sipCode, String sipReason) throws RemoteException {
+            public void triggerFullNetworkRegistration(int sipCode, String sipReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsRegistration.DESCRIPTOR);

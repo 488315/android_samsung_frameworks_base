@@ -7,13 +7,14 @@ import android.graphics.Outline;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+
 import com.android.internal.R;
 import com.android.internal.widget.CachingIconView;
 import com.android.internal.widget.NotificationExpandButton;
+
 import java.util.ArrayList;
 
 @RemoteViews.RemoteView
@@ -44,21 +45,29 @@ public class NotificationHeaderView extends RelativeLayout {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public NotificationHeaderView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public NotificationHeaderView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mTouchListener = new HeaderTouchListener();
-        this.mProvider = new ViewOutlineProvider() { // from class: android.view.NotificationHeaderView.1
-            @Override // android.view.ViewOutlineProvider
-            public void getOutline(View view, Outline outline) {
-                if (NotificationHeaderView.this.mBackground != null) {
-                    outline.setRect(0, 0, NotificationHeaderView.this.getWidth(), NotificationHeaderView.this.getHeight());
-                    outline.setAlpha(1.0f);
-                }
-            }
-        };
+        this.mProvider =
+                new ViewOutlineProvider() { // from class: android.view.NotificationHeaderView.1
+                    @Override // android.view.ViewOutlineProvider
+                    public void getOutline(View view, Outline outline) {
+                        if (NotificationHeaderView.this.mBackground != null) {
+                            outline.setRect(
+                                    0,
+                                    0,
+                                    NotificationHeaderView.this.getWidth(),
+                                    NotificationHeaderView.this.getHeight());
+                            outline.setAlpha(1.0f);
+                        }
+                    }
+                };
         Resources res = getResources();
-        this.mTouchableHeight = res.getDimensionPixelSize(R.dimen.notification_header_touchable_height);
-        this.mEntireHeaderClickable = res.getBoolean(R.bool.config_notificationHeaderClickableForExpand);
+        this.mTouchableHeight =
+                res.getDimensionPixelSize(R.dimen.notification_header_touchable_height);
+        this.mEntireHeaderClickable =
+                res.getBoolean(R.bool.config_notificationHeaderClickableForExpand);
     }
 
     @Override // android.view.View
@@ -128,7 +137,8 @@ public class NotificationHeaderView extends RelativeLayout {
 
     @RemotableViewMethod
     public void setTopLineExtraMarginEndDp(float extraMarginEndDp) {
-        setTopLineExtraMarginEnd((int) (getResources().getDisplayMetrics().density * extraMarginEndDp));
+        setTopLineExtraMarginEnd(
+                (int) (getResources().getDisplayMetrics().density * extraMarginEndDp));
     }
 
     @RemotableViewMethod
@@ -158,8 +168,7 @@ public class NotificationHeaderView extends RelativeLayout {
         private int mTouchSlop;
         private boolean mTrackGesture;
 
-        public HeaderTouchListener() {
-        }
+        public HeaderTouchListener() {}
 
         public void bindTouchRects() {
             this.mTouchRects.clear();
@@ -167,9 +176,12 @@ public class NotificationHeaderView extends RelativeLayout {
                 addRectAroundView(NotificationHeaderView.this.mIcon);
             }
             this.mExpandButtonRect = addRectAroundView(NotificationHeaderView.this.mExpandButton);
-            this.mAltExpandTargetRect = addRectAroundView(NotificationHeaderView.this.mAltExpandTarget);
+            this.mAltExpandTargetRect =
+                    addRectAroundView(NotificationHeaderView.this.mAltExpandTarget);
             addWidthRect();
-            this.mTouchSlop = ViewConfiguration.get(NotificationHeaderView.this.getContext()).getScaledTouchSlop();
+            this.mTouchSlop =
+                    ViewConfiguration.get(NotificationHeaderView.this.getContext())
+                            .getScaledTouchSlop();
         }
 
         private void addWidthRect() {
@@ -188,7 +200,8 @@ public class NotificationHeaderView extends RelativeLayout {
         }
 
         private Rect getRectAroundView(View view) {
-            float size = NotificationHeaderView.this.getResources().getDisplayMetrics().density * 48.0f;
+            float size =
+                    NotificationHeaderView.this.getResources().getDisplayMetrics().density * 48.0f;
             float width = Math.max(size, view.getWidth());
             float height = Math.max(size, view.getHeight());
             Rect r = new Rect();
@@ -222,14 +235,20 @@ public class NotificationHeaderView extends RelativeLayout {
                     if (this.mTrackGesture) {
                         float topLineX = NotificationHeaderView.this.mTopLineView.getX();
                         float topLineY = NotificationHeaderView.this.mTopLineView.getY();
-                        if (!NotificationHeaderView.this.mTopLineView.onTouchUp(x - topLineX, y - topLineY, this.mDownX - topLineX, this.mDownY - topLineY)) {
+                        if (!NotificationHeaderView.this.mTopLineView.onTouchUp(
+                                x - topLineX,
+                                y - topLineY,
+                                this.mDownX - topLineX,
+                                this.mDownY - topLineY)) {
                             NotificationHeaderView.this.mExpandButton.performClick();
                             break;
                         }
                     }
                     break;
                 case 2:
-                    if (this.mTrackGesture && (Math.abs(this.mDownX - x) > this.mTouchSlop || Math.abs(this.mDownY - y) > this.mTouchSlop)) {
+                    if (this.mTrackGesture
+                            && (Math.abs(this.mDownX - x) > this.mTouchSlop
+                                    || Math.abs(this.mDownY - y) > this.mTouchSlop)) {
                         this.mTrackGesture = false;
                         break;
                     }
@@ -244,7 +263,8 @@ public class NotificationHeaderView extends RelativeLayout {
                 return true;
             }
             if (NotificationHeaderView.this.mExpandOnlyOnButton) {
-                return this.mExpandButtonRect.contains((int) x, (int) y) || this.mAltExpandTargetRect.contains((int) x, (int) y);
+                return this.mExpandButtonRect.contains((int) x, (int) y)
+                        || this.mAltExpandTargetRect.contains((int) x, (int) y);
             }
             for (int i = 0; i < this.mTouchRects.size(); i++) {
                 Rect r = this.mTouchRects.get(i);

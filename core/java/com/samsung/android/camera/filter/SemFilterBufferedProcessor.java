@@ -2,7 +2,7 @@ package com.samsung.android.camera.filter;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import com.samsung.android.camera.filter.SemFilterManager;
+
 import java.io.File;
 import java.lang.ref.WeakReference;
 
@@ -22,9 +22,11 @@ public final class SemFilterBufferedProcessor {
 
     private native byte[] native_process_array(byte[] bArr, int i, int i2, int i3);
 
-    private native byte[] native_process_array_stride(byte[] bArr, int i, int i2, int i3, int i4, int i5);
+    private native byte[] native_process_array_stride(
+            byte[] bArr, int i, int i2, int i3, int i4, int i5);
 
-    private native byte[] native_process_array_stride_overwrite(byte[] bArr, int i, int i2, int i3, int i4, int i5, boolean z);
+    private native byte[] native_process_array_stride_overwrite(
+            byte[] bArr, int i, int i2, int i3, int i4, int i5, boolean z);
 
     private native Object native_process_bitmap(Object obj);
 
@@ -96,7 +98,9 @@ public final class SemFilterBufferedProcessor {
         if (this.mSemFilterImpl == null) {
             this.mSemFilterImpl = semFilterImpl;
             isEffectChanged = true;
-        } else if (!this.mSemFilterImpl.getFilterIdentifier().equals(semFilterImpl.getFilterIdentifier())) {
+        } else if (!this.mSemFilterImpl
+                .getFilterIdentifier()
+                .equals(semFilterImpl.getFilterIdentifier())) {
             this.mSemFilterImpl = semFilterImpl;
             isEffectChanged = true;
         }
@@ -123,10 +127,19 @@ public final class SemFilterBufferedProcessor {
             throw new IllegalArgumentException("data must not null");
         }
         if (data.getWidth() < 1 || data.getHeight() < 1) {
-            throw new IllegalArgumentException(String.format("Image with size (w=%d, h=%d) is not valid.", Integer.valueOf(data.getWidth()), Integer.valueOf(data.getHeight())));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image with size (w=%d, h=%d) is not valid.",
+                            Integer.valueOf(data.getWidth()), Integer.valueOf(data.getHeight())));
         }
         if (data.getWidth() > 8192 || data.getHeight() > 8192) {
-            throw new IllegalArgumentException(String.format("Image resolution(w=%d, h=%d) is is greater than the %dx%d", Integer.valueOf(data.getWidth()), Integer.valueOf(data.getHeight()), 8192, 8192));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image resolution(w=%d, h=%d) is is greater than the %dx%d",
+                            Integer.valueOf(data.getWidth()),
+                            Integer.valueOf(data.getHeight()),
+                            8192,
+                            8192));
         }
         if (data.getConfig() != Bitmap.Config.ARGB_8888) {
             Bitmap data_ARGB888 = data.copy(Bitmap.Config.ARGB_8888, true);
@@ -146,10 +159,19 @@ public final class SemFilterBufferedProcessor {
             throw new IllegalArgumentException("data must not null");
         }
         if (data.getWidth() < 1 || data.getHeight() < 1) {
-            throw new IllegalArgumentException(String.format("Image with size (w=%d, h=%d) is not valid.", Integer.valueOf(data.getWidth()), Integer.valueOf(data.getHeight())));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image with size (w=%d, h=%d) is not valid.",
+                            Integer.valueOf(data.getWidth()), Integer.valueOf(data.getHeight())));
         }
         if (data.getWidth() > 8192 || data.getHeight() > 8192) {
-            throw new IllegalArgumentException(String.format("Image resolution(w=%d, h=%d) is is greater than the %dx%d", Integer.valueOf(data.getWidth()), Integer.valueOf(data.getHeight()), 8192, 8192));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image resolution(w=%d, h=%d) is is greater than the %dx%d",
+                            Integer.valueOf(data.getWidth()),
+                            Integer.valueOf(data.getHeight()),
+                            8192,
+                            8192));
         }
         if (data.getConfig() != Bitmap.Config.ARGB_8888) {
             Bitmap data_ARGB888 = data.copy(Bitmap.Config.ARGB_8888, true);
@@ -174,10 +196,16 @@ public final class SemFilterBufferedProcessor {
             throw new IllegalArgumentException("data must not null");
         }
         if (width < 1 || height < 1) {
-            throw new IllegalArgumentException(String.format("Image with size (w=%d, h=%d) is not valid.", Integer.valueOf(width), Integer.valueOf(height)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image with size (w=%d, h=%d) is not valid.",
+                            Integer.valueOf(width), Integer.valueOf(height)));
         }
         if (width > 8192 || height > 8192) {
-            throw new IllegalArgumentException(String.format("Image resolution(w=%d, h=%d) is is greater than the %dx%d", Integer.valueOf(width), Integer.valueOf(height), 8192, 8192));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image resolution(w=%d, h=%d) is is greater than the %dx%d",
+                            Integer.valueOf(width), Integer.valueOf(height), 8192, 8192));
         }
         int expectedRGBABufferSize = width * height;
         if (data.length < expectedRGBABufferSize) {
@@ -205,10 +233,19 @@ public final class SemFilterBufferedProcessor {
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(inputFileName, options);
         if (options.outWidth < 1 || options.outHeight < 1) {
-            throw new IllegalArgumentException(String.format("Image with size (w=%d, h=%d) is not valid.", Integer.valueOf(options.outWidth), Integer.valueOf(options.outHeight)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image with size (w=%d, h=%d) is not valid.",
+                            Integer.valueOf(options.outWidth), Integer.valueOf(options.outHeight)));
         }
         if (options.outWidth > 8192 || options.outHeight > 8192) {
-            throw new IllegalArgumentException(String.format("Image resolution(w=%d, h=%d) is is greater than the %dx%d", Integer.valueOf(options.outWidth), Integer.valueOf(options.outHeight), 8192, 8192));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image resolution(w=%d, h=%d) is is greater than the %dx%d",
+                            Integer.valueOf(options.outWidth),
+                            Integer.valueOf(options.outHeight),
+                            8192,
+                            8192));
         }
         native_process_file(inputFileName, outputFileName);
     }
@@ -219,10 +256,16 @@ public final class SemFilterBufferedProcessor {
             throw new IllegalArgumentException("data must not null");
         }
         if (width < 1 || height < 1) {
-            throw new IllegalArgumentException(String.format("Image with size (w=%d, h=%d) is not valid.", Integer.valueOf(width), Integer.valueOf(height)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image with size (w=%d, h=%d) is not valid.",
+                            Integer.valueOf(width), Integer.valueOf(height)));
         }
         if (width > 8192 || height > 8192) {
-            throw new IllegalArgumentException(String.format("Image resolution(w=%d, h=%d) is is greater than the %dx%d", Integer.valueOf(width), Integer.valueOf(height), 8192, 8192));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image resolution(w=%d, h=%d) is is greater than the %dx%d",
+                            Integer.valueOf(width), Integer.valueOf(height), 8192, 8192));
         }
         switch (imageFormat) {
             case 0:
@@ -246,22 +289,37 @@ public final class SemFilterBufferedProcessor {
         return native_process_array(data, width, height, imageFormat);
     }
 
-    public byte[] processImage(byte[] data, int width, int height, int imageFormat, int stride, int sliceHeight) {
+    public byte[] processImage(
+            byte[] data, int width, int height, int imageFormat, int stride, int sliceHeight) {
         checkInitialized();
         if (data == null) {
             throw new IllegalArgumentException("data must not null");
         }
         if (width < 1 || height < 1) {
-            throw new IllegalArgumentException(String.format("Image with size (w=%d, h=%d) is not valid.", Integer.valueOf(width), Integer.valueOf(height)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image with size (w=%d, h=%d) is not valid.",
+                            Integer.valueOf(width), Integer.valueOf(height)));
         }
         if (width > 8192 || height > 8192) {
-            throw new IllegalArgumentException(String.format("Image resolution(w=%d, h=%d) is is greater than the %dx%d", Integer.valueOf(width), Integer.valueOf(height), 8192, 8192));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image resolution(w=%d, h=%d) is is greater than the %dx%d",
+                            Integer.valueOf(width), Integer.valueOf(height), 8192, 8192));
         }
         if (stride < width) {
-            throw new IllegalArgumentException(String.format("Image having stride (stride=%d) lesser than width (width=%d) is not valid.", Integer.valueOf(stride), Integer.valueOf(width)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image having stride (stride=%d) lesser than width (width=%d) is not"
+                                + " valid.",
+                            Integer.valueOf(stride), Integer.valueOf(width)));
         }
         if (sliceHeight < height) {
-            throw new IllegalArgumentException(String.format("Image having sliceHeight (sliceHeight=%d) lesser than height (height=%d) is not valid.", Integer.valueOf(sliceHeight), Integer.valueOf(height)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image having sliceHeight (sliceHeight=%d) lesser than height"
+                                + " (height=%d) is not valid.",
+                            Integer.valueOf(sliceHeight), Integer.valueOf(height)));
         }
         switch (imageFormat) {
             case 0:
@@ -287,22 +345,43 @@ public final class SemFilterBufferedProcessor {
         return native_process_array_stride(data, width, height, imageFormat, stride, sliceHeight);
     }
 
-    public byte[] processImage(byte[] data, int width, int height, int imageFormat, int stride, int sliceHeight, boolean overwrite) {
+    public byte[] processImage(
+            byte[] data,
+            int width,
+            int height,
+            int imageFormat,
+            int stride,
+            int sliceHeight,
+            boolean overwrite) {
         checkInitialized();
         if (data == null) {
             throw new IllegalArgumentException("data must not null");
         }
         if (width < 1 || height < 1) {
-            throw new IllegalArgumentException(String.format("Image with size (w=%d, h=%d) is not valid.", Integer.valueOf(width), Integer.valueOf(height)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image with size (w=%d, h=%d) is not valid.",
+                            Integer.valueOf(width), Integer.valueOf(height)));
         }
         if (width > 8192 || height > 8192) {
-            throw new IllegalArgumentException(String.format("Image resolution(w=%d, h=%d) is is greater than the %dx%d", Integer.valueOf(width), Integer.valueOf(height), 8192, 8192));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image resolution(w=%d, h=%d) is is greater than the %dx%d",
+                            Integer.valueOf(width), Integer.valueOf(height), 8192, 8192));
         }
         if (stride < width) {
-            throw new IllegalArgumentException(String.format("Image having stride (stride=%d) lesser than width (width=%d) is not valid.", Integer.valueOf(stride), Integer.valueOf(width)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image having stride (stride=%d) lesser than width (width=%d) is not"
+                                + " valid.",
+                            Integer.valueOf(stride), Integer.valueOf(width)));
         }
         if (sliceHeight < height) {
-            throw new IllegalArgumentException(String.format("Image having sliceHeight (sliceHeight=%d) lesser than height (height=%d) is not valid.", Integer.valueOf(sliceHeight), Integer.valueOf(height)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Image having sliceHeight (sliceHeight=%d) lesser than height"
+                                + " (height=%d) is not valid.",
+                            Integer.valueOf(sliceHeight), Integer.valueOf(height)));
         }
         switch (imageFormat) {
             case 0:
@@ -325,7 +404,8 @@ public final class SemFilterBufferedProcessor {
             default:
                 throw new IllegalArgumentException("Image Format is not valid.");
         }
-        return native_process_array_stride_overwrite(data, width, height, imageFormat, stride, sliceHeight, overwrite);
+        return native_process_array_stride_overwrite(
+                data, width, height, imageFormat, stride, sliceHeight, overwrite);
     }
 
     private boolean checkInputFilePermission(String filePath) {
@@ -338,7 +418,9 @@ public final class SemFilterBufferedProcessor {
 
     private boolean checkOutputFilePermission(String filePath) {
         int separatorPosition;
-        if (filePath == null || filePath.length() < 1 || (separatorPosition = filePath.lastIndexOf("/")) < 0) {
+        if (filePath == null
+                || filePath.length() < 1
+                || (separatorPosition = filePath.lastIndexOf("/")) < 0) {
             return false;
         }
         if (!filePath.toLowerCase().endsWith(".jpeg") && !filePath.toLowerCase().endsWith(".jpg")) {

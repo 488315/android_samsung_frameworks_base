@@ -12,16 +12,13 @@ public interface OnBackInvokedDispatcher {
     public static final String TAG = "OnBackInvokedDispatcher";
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Priority {
-    }
+    public @interface Priority {}
 
     void registerOnBackInvokedCallback(int i, OnBackInvokedCallback onBackInvokedCallback);
 
     void unregisterOnBackInvokedCallback(OnBackInvokedCallback onBackInvokedCallback);
 
-    default void registerSystemOnBackInvokedCallback(OnBackInvokedCallback callback) {
-    }
+    default void registerSystemOnBackInvokedCallback(OnBackInvokedCallback callback) {}
 
-    default void setImeOnBackInvokedDispatcher(ImeOnBackInvokedDispatcher imeDispatcher) {
-    }
+    default void setImeOnBackInvokedDispatcher(ImeOnBackInvokedDispatcher imeDispatcher) {}
 }

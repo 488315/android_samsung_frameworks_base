@@ -2,7 +2,9 @@ package com.android.server.webkit;
 
 import android.os.ShellCommand;
 import android.webkit.IWebViewUpdateService;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -90,7 +92,9 @@ public final class WebViewUpdateServiceShellCommand extends ShellCommand {
             com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0.m(r8, r7, r0)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.webkit.WebViewUpdateServiceShellCommand.onCommand(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.webkit.WebViewUpdateServiceShellCommand.onCommand(java.lang.String):int");
     }
 
     public final void onHelp() {
@@ -125,7 +129,13 @@ public final class WebViewUpdateServiceShellCommand extends ShellCommand {
             outPrintWriter.println("Success");
             return 0;
         }
-        outPrintWriter.println(XmlUtils$$ExternalSyntheticOutline0.m("Failed to switch to ", nextArg, ", the WebView implementation is now provided by ", changeProviderAndSetting, "."));
+        outPrintWriter.println(
+                XmlUtils$$ExternalSyntheticOutline0.m(
+                        "Failed to switch to ",
+                        nextArg,
+                        ", the WebView implementation is now provided by ",
+                        changeProviderAndSetting,
+                        "."));
         return 1;
     }
 }

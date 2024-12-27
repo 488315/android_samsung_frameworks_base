@@ -3,7 +3,9 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telephony.SemTelephonyUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -17,19 +19,22 @@ public final class ImsCallForwardInfo implements Parcelable {
     public static final int CDIV_CF_REASON_NOT_REACHABLE = 3;
     public static final int CDIV_CF_REASON_NO_REPLY = 2;
     public static final int CDIV_CF_REASON_UNCONDITIONAL = 0;
-    public static final Parcelable.Creator<ImsCallForwardInfo> CREATOR = new Parcelable.Creator<ImsCallForwardInfo>() { // from class: android.telephony.ims.ImsCallForwardInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsCallForwardInfo createFromParcel(Parcel in) {
-            return new ImsCallForwardInfo(in);
-        }
+    public static final Parcelable.Creator<ImsCallForwardInfo> CREATOR =
+            new Parcelable.Creator<
+                    ImsCallForwardInfo>() { // from class:
+                                            // android.telephony.ims.ImsCallForwardInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsCallForwardInfo createFromParcel(Parcel in) {
+                    return new ImsCallForwardInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsCallForwardInfo[] newArray(int size) {
-            return new ImsCallForwardInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsCallForwardInfo[] newArray(int size) {
+                    return new ImsCallForwardInfo[size];
+                }
+            };
     public static final int STATUS_ACTIVE = 1;
     public static final int STATUS_NOT_ACTIVE = 0;
     public static final int TYPE_OF_ADDRESS_INTERNATIONAL = 145;
@@ -42,21 +47,18 @@ public final class ImsCallForwardInfo implements Parcelable {
     public int mToA;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CallForwardReasons {
-    }
+    public @interface CallForwardReasons {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CallForwardStatus {
-    }
+    public @interface CallForwardStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TypeOfAddress {
-    }
+    public @interface TypeOfAddress {}
 
-    public ImsCallForwardInfo() {
-    }
+    public ImsCallForwardInfo() {}
 
-    public ImsCallForwardInfo(int reason, int status, int toA, int serviceClass, String number, int replyTimerSec) {
+    public ImsCallForwardInfo(
+            int reason, int status, int toA, int serviceClass, String number, int replyTimerSec) {
         this.mCondition = reason;
         this.mStatus = status;
         this.mToA = toA;
@@ -85,7 +87,19 @@ public final class ImsCallForwardInfo implements Parcelable {
     }
 
     public String toString() {
-        return super.toString() + ", Condition: " + this.mCondition + ", Status: " + (this.mStatus == 0 ? "disabled" : "enabled") + ", ToA: " + this.mToA + ", Service Class: " + this.mServiceClass + ", Number=" + SemTelephonyUtils.maskPii(this.mNumber) + ", Time (seconds): " + this.mTimeSeconds;
+        return super.toString()
+                + ", Condition: "
+                + this.mCondition
+                + ", Status: "
+                + (this.mStatus == 0 ? "disabled" : "enabled")
+                + ", ToA: "
+                + this.mToA
+                + ", Service Class: "
+                + this.mServiceClass
+                + ", Number="
+                + SemTelephonyUtils.maskPii(this.mNumber)
+                + ", Time (seconds): "
+                + this.mTimeSeconds;
     }
 
     private void readFromParcel(Parcel in) {

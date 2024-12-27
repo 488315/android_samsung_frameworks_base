@@ -3,6 +3,7 @@ package android.view;
 import android.hardware.input.InputManagerGlobal;
 import android.util.ArrayMap;
 import android.util.Pools;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
@@ -23,16 +24,15 @@ public final class VelocityTracker {
     public static final int VELOCITY_TRACKER_STRATEGY_WLSQ2_RECENT = 6;
     private long mPtr;
     private final int mStrategy;
-    private static final Pools.SynchronizedPool<VelocityTracker> sPool = new Pools.SynchronizedPool<>(2);
+    private static final Pools.SynchronizedPool<VelocityTracker> sPool =
+            new Pools.SynchronizedPool<>(2);
     private static final Map<String, Integer> STRATEGIES = new ArrayMap();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VelocityTrackableMotionEventAxis {
-    }
+    public @interface VelocityTrackableMotionEventAxis {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VelocityTrackerStrategy {
-    }
+    public @interface VelocityTrackerStrategy {}
 
     private static native void nativeAddMovement(long j, MotionEvent motionEvent);
 

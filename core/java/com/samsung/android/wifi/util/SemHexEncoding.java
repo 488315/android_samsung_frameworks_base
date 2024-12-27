@@ -4,11 +4,44 @@ import android.text.format.DateFormat;
 
 /* loaded from: classes6.dex */
 public class SemHexEncoding {
-    private static final char[] LOWER_CASE_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.AM_PM, 'b', 'c', DateFormat.DATE, 'e', 'f'};
-    private static final char[] UPPER_CASE_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.CAPITAL_AM_PM, 'B', 'C', 'D', DateFormat.DAY, 'F'};
+    private static final char[] LOWER_CASE_DIGITS = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.AM_PM,
+        'b',
+        'c',
+        DateFormat.DATE,
+        'e',
+        'f'
+    };
+    private static final char[] UPPER_CASE_DIGITS = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.CAPITAL_AM_PM,
+        'B',
+        'C',
+        'D',
+        DateFormat.DAY,
+        'F'
+    };
 
-    private SemHexEncoding() {
-    }
+    private SemHexEncoding() {}
 
     public static String encodeToString(byte b, boolean upperCase) {
         char[] digits = upperCase ? UPPER_CASE_DIGITS : LOWER_CASE_DIGITS;
@@ -52,7 +85,8 @@ public class SemHexEncoding {
         return decode(encoded.toCharArray());
     }
 
-    public static byte[] decode(String encoded, boolean allowSingleChar) throws IllegalArgumentException {
+    public static byte[] decode(String encoded, boolean allowSingleChar)
+            throws IllegalArgumentException {
         return decode(encoded.toCharArray(), allowSingleChar);
     }
 
@@ -60,7 +94,8 @@ public class SemHexEncoding {
         return decode(encoded, false);
     }
 
-    public static byte[] decode(char[] encoded, boolean allowSingleChar) throws IllegalArgumentException {
+    public static byte[] decode(char[] encoded, boolean allowSingleChar)
+            throws IllegalArgumentException {
         int encodedLength = encoded.length;
         int resultLengthBytes = (encodedLength + 1) / 2;
         byte[] result = new byte[resultLengthBytes];

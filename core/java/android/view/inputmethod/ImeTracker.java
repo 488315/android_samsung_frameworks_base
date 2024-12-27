@@ -13,10 +13,11 @@ import android.util.Log;
 import android.view.SurfaceControl;
 import android.view.View;
 import android.view.ViewRootImpl;
-import android.view.inputmethod.ImeTracker;
+
 import com.android.internal.inputmethod.InputMethodDebug;
 import com.android.internal.jank.InteractionJankMonitor;
 import com.android.internal.util.LatencyTracker;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
@@ -90,7 +91,8 @@ public interface ImeTracker {
     public static final int TYPE_HIDE = 2;
     public static final int TYPE_SHOW = 1;
     public static final int TYPE_USER = 3;
-    public static final boolean DEBUG_IME_VISIBILITY = SystemProperties.getBoolean("persist.debug.imf_event", false);
+    public static final boolean DEBUG_IME_VISIBILITY =
+            SystemProperties.getBoolean("persist.debug.imf_event", false);
     public static final ImeTracker LOGGER = new AnonymousClass1();
     public static final ImeJankTracker JANK_TRACKER = new ImeJankTracker();
     public static final ImeLatencyTracker LATENCY_TRACKER = new ImeLatencyTracker();
@@ -108,20 +110,16 @@ public interface ImeTracker {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Origin {
-    }
+    public @interface Origin {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Phase {
-    }
+    public @interface Phase {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+    public @interface Status {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     void onCancelled(Token token, int i);
 
@@ -148,7 +146,14 @@ public interface ImeTracker {
     static boolean isFromUser(View view) {
         Handler handler;
         ViewRootImpl viewRootImpl;
-        return (view == null || (handler = view.getHandler()) == null || handler.getLooper() == null || !handler.getLooper().isCurrentThread() || (viewRootImpl = view.getViewRootImpl()) == null || !viewRootImpl.isHandlingPointerEvent()) ? false : true;
+        return (view == null
+                        || (handler = view.getHandler()) == null
+                        || handler.getLooper() == null
+                        || !handler.getLooper().isCurrentThread()
+                        || (viewRootImpl = view.getViewRootImpl()) == null
+                        || !viewRootImpl.isHandlingPointerEvent())
+                ? false
+                : true;
     }
 
     static ImeTracker forLogging() {
@@ -170,19 +175,35 @@ public interface ImeTracker {
 
         AnonymousClass1() {
             reloadSystemProperties();
-            SystemProperties.addChangeCallback(new Runnable() { // from class: android.view.inputmethod.ImeTracker$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImeTracker.AnonymousClass1.this.reloadSystemProperties();
-                }
-            });
+            SystemProperties.addChangeCallback(
+                    new Runnable() { // from class:
+                                     // android.view.inputmethod.ImeTracker$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImeTracker.AnonymousClass1.this.reloadSystemProperties();
+                        }
+                    });
         }
 
         @Override // android.view.inputmethod.ImeTracker
-        public Token onStart(String component, int uid, int type, int origin, int reason, boolean fromUser) {
+        public Token onStart(
+                String component, int uid, int type, int origin, int reason, boolean fromUser) {
             String tag = Token.createTag(component);
-            Token token = IInputMethodManagerGlobalInvoker.onStart(tag, uid, type, origin, reason, fromUser);
-            Log.i(ImeTracker.TAG, token.mTag + ": " + getOnStartPrefix(type) + " at " + Debug.originToString(origin) + " reason " + InputMethodDebug.softInputDisplayReasonToString(reason) + " fromUser " + fromUser, this.mLogStackTrace ? new Throwable() : null);
+            Token token =
+                    IInputMethodManagerGlobalInvoker.onStart(
+                            tag, uid, type, origin, reason, fromUser);
+            Log.i(
+                    ImeTracker.TAG,
+                    token.mTag
+                            + ": "
+                            + getOnStartPrefix(type)
+                            + " at "
+                            + Debug.originToString(origin)
+                            + " reason "
+                            + InputMethodDebug.softInputDisplayReasonToString(reason)
+                            + " fromUser "
+                            + fromUser,
+                    this.mLogStackTrace ? new Throwable() : null);
             return token;
         }
 
@@ -274,24 +295,27 @@ public interface ImeTracker {
         /* JADX INFO: Access modifiers changed from: private */
         public void reloadSystemProperties() {
             this.mLogProgress = SystemProperties.getBoolean("persist.debug.imetracker", false);
-            this.mLogStackTrace = SystemProperties.getBoolean("persist.debug.imerequest.logstacktrace", false);
+            this.mLogStackTrace =
+                    SystemProperties.getBoolean("persist.debug.imerequest.logstacktrace", false);
         }
     }
 
     public static final class Token implements Parcelable {
-        public static final Parcelable.Creator<Token> CREATOR = new Parcelable.Creator<Token>() { // from class: android.view.inputmethod.ImeTracker.Token.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Token createFromParcel(Parcel in) {
-                return new Token(in);
-            }
+        public static final Parcelable.Creator<Token> CREATOR =
+                new Parcelable.Creator<
+                        Token>() { // from class: android.view.inputmethod.ImeTracker.Token.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Token createFromParcel(Parcel in) {
+                        return new Token(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Token[] newArray(int size) {
-                return new Token[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Token[] newArray(int size) {
+                        return new Token[size];
+                    }
+                };
         private static IBinder sEmptyBinder;
         private final IBinder mBinder;
         private final String mTag;
@@ -352,10 +376,14 @@ public interface ImeTracker {
     }
 
     public static final class Debug {
-        private static final Map<Integer, String> sTypes = getFieldMapping(ImeTracker.class, "TYPE_");
-        private static final Map<Integer, String> sStatus = getFieldMapping(ImeTracker.class, "STATUS_");
-        private static final Map<Integer, String> sOrigins = getFieldMapping(ImeTracker.class, "ORIGIN_");
-        private static final Map<Integer, String> sPhases = getFieldMapping(ImeTracker.class, "PHASE_");
+        private static final Map<Integer, String> sTypes =
+                getFieldMapping(ImeTracker.class, "TYPE_");
+        private static final Map<Integer, String> sStatus =
+                getFieldMapping(ImeTracker.class, "STATUS_");
+        private static final Map<Integer, String> sOrigins =
+                getFieldMapping(ImeTracker.class, "ORIGIN_");
+        private static final Map<Integer, String> sPhases =
+                getFieldMapping(ImeTracker.class, "PHASE_");
 
         public static String typeToString(int type) {
             return sTypes.getOrDefault(Integer.valueOf(type), "TYPE_" + type);
@@ -373,27 +401,41 @@ public interface ImeTracker {
             return sPhases.getOrDefault(Integer.valueOf(phase), "PHASE_" + phase);
         }
 
-        private static Map<Integer, String> getFieldMapping(Class<?> cls, final String fieldPrefix) {
-            return (Map) Arrays.stream(cls.getDeclaredFields()).filter(new Predicate() { // from class: android.view.inputmethod.ImeTracker$Debug$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    boolean startsWith;
-                    startsWith = ((Field) obj).getName().startsWith(fieldPrefix);
-                    return startsWith;
-                }
-            }).collect(Collectors.toMap(new Function() { // from class: android.view.inputmethod.ImeTracker$Debug$$ExternalSyntheticLambda1
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    int fieldValue;
-                    fieldValue = ImeTracker.Debug.getFieldValue((Field) obj);
-                    return Integer.valueOf(fieldValue);
-                }
-            }, new Function() { // from class: android.view.inputmethod.ImeTracker$Debug$$ExternalSyntheticLambda2
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return ((Field) obj).getName();
-                }
-            }));
+        private static Map<Integer, String> getFieldMapping(
+                Class<?> cls, final String fieldPrefix) {
+            return (Map)
+                    Arrays.stream(cls.getDeclaredFields())
+                            .filter(
+                                    new Predicate() { // from class:
+                                                      // android.view.inputmethod.ImeTracker$Debug$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            boolean startsWith;
+                                            startsWith =
+                                                    ((Field) obj).getName().startsWith(fieldPrefix);
+                                            return startsWith;
+                                        }
+                                    })
+                            .collect(
+                                    Collectors.toMap(
+                                            new Function() { // from class:
+                                                             // android.view.inputmethod.ImeTracker$Debug$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    int fieldValue;
+                                                    fieldValue =
+                                                            ImeTracker.Debug.getFieldValue(
+                                                                    (Field) obj);
+                                                    return Integer.valueOf(fieldValue);
+                                                }
+                                            },
+                                            new Function() { // from class:
+                                                             // android.view.inputmethod.ImeTracker$Debug$$ExternalSyntheticLambda2
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return ((Field) obj).getName();
+                                                }
+                                            }));
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -407,15 +449,29 @@ public interface ImeTracker {
     }
 
     public static final class ImeJankTracker {
-        private ImeJankTracker() {
-        }
+        private ImeJankTracker() {}
 
-        public void onRequestAnimation(InputMethodJankContext inputMethodJankContext, int i, boolean z) {
+        public void onRequestAnimation(
+                InputMethodJankContext inputMethodJankContext, int i, boolean z) {
             int imeInsetsCujFromAnimation = getImeInsetsCujFromAnimation(i);
-            if (inputMethodJankContext.getDisplayContext() == null || inputMethodJankContext.getTargetSurfaceControl() == null || imeInsetsCujFromAnimation == -1) {
+            if (inputMethodJankContext.getDisplayContext() == null
+                    || inputMethodJankContext.getTargetSurfaceControl() == null
+                    || imeInsetsCujFromAnimation == -1) {
                 return;
             }
-            InteractionJankMonitor.getInstance().begin(InteractionJankMonitor.Configuration.Builder.withSurface(imeInsetsCujFromAnimation, inputMethodJankContext.getDisplayContext(), inputMethodJankContext.getTargetSurfaceControl()).setTag(String.format(Locale.US, "%d@%d@%s", Integer.valueOf(i), Integer.valueOf(!z ? 1 : 0), inputMethodJankContext.getHostPackageName())));
+            InteractionJankMonitor.getInstance()
+                    .begin(
+                            InteractionJankMonitor.Configuration.Builder.withSurface(
+                                            imeInsetsCujFromAnimation,
+                                            inputMethodJankContext.getDisplayContext(),
+                                            inputMethodJankContext.getTargetSurfaceControl())
+                                    .setTag(
+                                            String.format(
+                                                    Locale.US,
+                                                    "%d@%d@%s",
+                                                    Integer.valueOf(i),
+                                                    Integer.valueOf(!z ? 1 : 0),
+                                                    inputMethodJankContext.getHostPackageName())));
         }
 
         public void onCancelAnimation(int animType) {
@@ -445,22 +501,31 @@ public interface ImeTracker {
     }
 
     public static final class ImeLatencyTracker {
-        private ImeLatencyTracker() {
-        }
+        private ImeLatencyTracker() {}
 
         private boolean shouldMonitorLatency(int reason) {
-            return reason == 1 || reason == 4 || reason == 39 || reason == 26 || reason == 28 || reason == 3 || reason == 5;
+            return reason == 1
+                    || reason == 4
+                    || reason == 39
+                    || reason == 26
+                    || reason == 28
+                    || reason == 3
+                    || reason == 5;
         }
 
-        public void onRequestShow(Token token, int origin, int reason, InputMethodLatencyContext latencyContext) {
+        public void onRequestShow(
+                Token token, int origin, int reason, InputMethodLatencyContext latencyContext) {
             if (shouldMonitorLatency(reason)) {
-                LatencyTracker.getInstance(latencyContext.getAppContext()).onActionStart(20, InputMethodDebug.softInputDisplayReasonToString(reason));
+                LatencyTracker.getInstance(latencyContext.getAppContext())
+                        .onActionStart(20, InputMethodDebug.softInputDisplayReasonToString(reason));
             }
         }
 
-        public void onRequestHide(Token token, int origin, int reason, InputMethodLatencyContext latencyContext) {
+        public void onRequestHide(
+                Token token, int origin, int reason, InputMethodLatencyContext latencyContext) {
             if (shouldMonitorLatency(reason)) {
-                LatencyTracker.getInstance(latencyContext.getAppContext()).onActionStart(21, InputMethodDebug.softInputDisplayReasonToString(reason));
+                LatencyTracker.getInstance(latencyContext.getAppContext())
+                        .onActionStart(21, InputMethodDebug.softInputDisplayReasonToString(reason));
             }
         }
 
@@ -472,11 +537,13 @@ public interface ImeTracker {
             onHideCancelled(token, phase, latencyContext);
         }
 
-        public void onShowCancelled(Token token, int phase, InputMethodLatencyContext latencyContext) {
+        public void onShowCancelled(
+                Token token, int phase, InputMethodLatencyContext latencyContext) {
             LatencyTracker.getInstance(latencyContext.getAppContext()).lambda$onActionStart$1(20);
         }
 
-        public void onHideCancelled(Token token, int phase, InputMethodLatencyContext latencyContext) {
+        public void onHideCancelled(
+                Token token, int phase, InputMethodLatencyContext latencyContext) {
             LatencyTracker.getInstance(latencyContext.getAppContext()).lambda$onActionStart$1(21);
         }
 

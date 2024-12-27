@@ -17,13 +17,15 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.Shader;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.PathParser;
+
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback {
@@ -79,7 +81,8 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
         ChildDrawable layer = new ChildDrawable(this.mLayerState.mDensity);
         layer.mDrawable = drawable;
         layer.mDrawable.setCallback(this);
-        this.mLayerState.mChildrenChangingConfigurations |= layer.mDrawable.getChangingConfigurations();
+        this.mLayerState.mChildrenChangingConfigurations |=
+                layer.mDrawable.getChangingConfigurations();
         return layer;
     }
 
@@ -92,7 +95,8 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
     }
 
     /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
-    public AdaptiveIconDrawable(Drawable backgroundDrawable, Drawable foregroundDrawable, Drawable monochromeDrawable) {
+    public AdaptiveIconDrawable(
+            Drawable backgroundDrawable, Drawable foregroundDrawable, Drawable monochromeDrawable) {
         this((LayerState) null, (Resources) null);
         if (backgroundDrawable != null) {
             addLayer(0, createChildDrawable(backgroundDrawable));
@@ -111,7 +115,9 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         super.inflate(r, parser, attrs, theme);
         LayerState state = this.mLayerState;
         if (state == null) {
@@ -194,8 +200,11 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
         sMask.transform(this.mMaskMatrix, this.mMaskScaleOnly);
         this.mMaskMatrix.postTranslate(b.left, b.top);
         sMask.transform(this.mMaskMatrix, this.mMask);
-        if (this.mLayersBitmap == null || this.mLayersBitmap.getWidth() != b.width() || this.mLayersBitmap.getHeight() != b.height()) {
-            this.mLayersBitmap = Bitmap.createBitmap(b.width(), b.height(), Bitmap.Config.ARGB_8888);
+        if (this.mLayersBitmap == null
+                || this.mLayersBitmap.getWidth() != b.width()
+                || this.mLayersBitmap.getHeight() != b.height()) {
+            this.mLayersBitmap =
+                    Bitmap.createBitmap(b.width(), b.height(), Bitmap.Config.ARGB_8888);
         }
         this.mPaint.setShader(null);
         this.mTransparentRegion.setEmpty();
@@ -219,7 +228,9 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
             if (this.mNightModeLayer) {
                 this.mCanvas.drawPaint(SemAppIconSolution.PAINT_FOR_NIGHT_LAYER);
             }
-            this.mLayersShader = new BitmapShader(this.mLayersBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            this.mLayersShader =
+                    new BitmapShader(
+                            this.mLayersBitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
             this.mPaint.setShader(this.mLayersShader);
         }
         if (this.mMaskScaleOnly != null) {
@@ -243,7 +254,8 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
 
     public Region getSafeZone() {
         Path mask = getIconMask();
-        this.mMaskMatrix.setScale(SAFEZONE_SCALE, SAFEZONE_SCALE, getBounds().centerX(), getBounds().centerY());
+        this.mMaskMatrix.setScale(
+                SAFEZONE_SCALE, SAFEZONE_SCALE, getBounds().centerX(), getBounds().centerY());
         Path p = new Path();
         mask.transform(this.mMaskMatrix, p);
         Region safezoneRegion = new Region(getBounds());
@@ -276,7 +288,9 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
             ChildDrawable layer = array[i];
             layer.setDensity(density);
             if (layer.mThemeAttrs != null) {
-                TypedArray a = t.resolveAttributes(layer.mThemeAttrs, R.styleable.AdaptiveIconDrawableLayer);
+                TypedArray a =
+                        t.resolveAttributes(
+                                layer.mThemeAttrs, R.styleable.AdaptiveIconDrawableLayer);
                 updateLayerFromTypedArray(layer, a);
                 a.recycle();
             }
@@ -297,7 +311,9 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    private void inflateLayers(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    private void inflateLayers(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         char c;
         int childIndex;
         int type;
@@ -350,7 +366,9 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
                                 continue;
                         }
                         ChildDrawable layer = new ChildDrawable(state.mDensity);
-                        TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.AdaptiveIconDrawableLayer);
+                        TypedArray a =
+                                obtainAttributes(
+                                        r, theme, attrs, R.styleable.AdaptiveIconDrawableLayer);
                         updateLayerFromTypedArray(layer, a);
                         a.recycle();
                         if (layer.mDrawable == null && layer.mThemeAttrs == null) {
@@ -358,11 +376,22 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
                                 type = parser.next();
                             } while (type == 4);
                             if (type != 2) {
-                                throw new XmlPullParserException(parser.getPositionDescription() + ": <foreground> or <background> tag requires a 'drawable'attribute or child tag defining a drawable");
+                                throw new XmlPullParserException(
+                                        parser.getPositionDescription()
+                                                + ": <foreground> or <background> tag requires a"
+                                                + " 'drawable'attribute or child tag defining a"
+                                                + " drawable");
                             }
-                            layer.mDrawable = Drawable.createFromXmlInnerForDensity(r, parser, attrs, this.mLayerState.mSrcDensityOverride, theme);
+                            layer.mDrawable =
+                                    Drawable.createFromXmlInnerForDensity(
+                                            r,
+                                            parser,
+                                            attrs,
+                                            this.mLayerState.mSrcDensityOverride,
+                                            theme);
                             layer.mDrawable.setCallback(this);
-                            state.mChildrenChangingConfigurations |= layer.mDrawable.getChangingConfigurations();
+                            state.mChildrenChangingConfigurations |=
+                                    layer.mDrawable.getChangingConfigurations();
                         }
                         addLayer(childIndex, layer);
                     }
@@ -392,7 +421,8 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
 
     @Override // android.graphics.drawable.Drawable
     public boolean canApplyTheme() {
-        return (this.mLayerState != null && this.mLayerState.canApplyTheme()) || super.canApplyTheme();
+        return (this.mLayerState != null && this.mLayerState.canApplyTheme())
+                || super.canApplyTheme();
     }
 
     @Override // android.graphics.drawable.Drawable
@@ -737,7 +767,8 @@ public class AdaptiveIconDrawable extends Drawable implements Drawable.Callback 
         }
 
         public boolean canApplyTheme() {
-            return this.mThemeAttrs != null || (this.mDrawable != null && this.mDrawable.canApplyTheme());
+            return this.mThemeAttrs != null
+                    || (this.mDrawable != null && this.mDrawable.canApplyTheme());
         }
 
         public final void setDensity(int targetDensity) {

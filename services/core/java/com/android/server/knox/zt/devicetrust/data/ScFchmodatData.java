@@ -2,14 +2,17 @@ package com.android.server.knox.zt.devicetrust.data;
 
 import android.hardware.audio.common.V2_0.AudioConfig$$ExternalSyntheticOutline0;
 import android.os.Bundle;
+
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -19,7 +22,8 @@ public final class ScFchmodatData extends TracepointData {
     public final int mode;
     public final long ret;
 
-    public ScFchmodatData(int i, int i2, String str, int i3, long j, long j2, long j3, long j4, String str2) {
+    public ScFchmodatData(
+            int i, int i2, String str, int i3, long j, long j2, long j3, long j4, String str2) {
         super(i, j2, j3, j4, str2);
         this.dfd = i2;
         this.filename = str;
@@ -77,8 +81,10 @@ public final class ScFchmodatData extends TracepointData {
         String octalString = Integer.toOctalString(this.mode);
         long j2 = this.ret;
         String readExtras = readExtras(true);
-        StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(pid, i2, " | pid : ", " | uid : ", m);
+        StringBuilder m =
+                SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                pid, i2, " | pid : ", " | uid : ", m);
         m.append(" | comm : ");
         m.append(str);
         m.append(" | dfd : ");
@@ -87,7 +93,8 @@ public final class ScFchmodatData extends TracepointData {
         m.append(str2);
         m.append(" | mode : ");
         m.append(i4);
-        RCPManagerService$$ExternalSyntheticOutline0.m$1(m, " | mode_t : ", octalString, " | ret : ");
+        RCPManagerService$$ExternalSyntheticOutline0.m$1(
+                m, " | mode_t : ", octalString, " | ret : ");
         return AudioConfig$$ExternalSyntheticOutline0.m(m, j2, readExtras);
     }
 

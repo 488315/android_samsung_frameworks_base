@@ -2,6 +2,7 @@ package android.renderscript;
 
 import android.content.res.Resources;
 import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -98,7 +99,9 @@ public class Program extends BaseObj {
         if (slot < 0 || slot >= this.mTextureCount) {
             throw new IllegalArgumentException("Slot ID out of range.");
         }
-        if (va != null && va.getType().hasFaces() && this.mTextures[slot] != TextureType.TEXTURE_CUBE) {
+        if (va != null
+                && va.getType().hasFaces()
+                && this.mTextures[slot] != TextureType.TEXTURE_CUBE) {
             throw new IllegalArgumentException("Cannot bind cubemap to 2d texture slot");
         }
         long id = va != null ? va.getID(this.mRS) : 0L;
@@ -196,7 +199,8 @@ public class Program extends BaseObj {
             return this;
         }
 
-        public BaseProgramBuilder addTexture(TextureType texType, String texName) throws IllegalArgumentException {
+        public BaseProgramBuilder addTexture(TextureType texType, String texName)
+                throws IllegalArgumentException {
             if (this.mTextureCount >= 8) {
                 throw new IllegalArgumentException("Max texture count exceeded.");
             }

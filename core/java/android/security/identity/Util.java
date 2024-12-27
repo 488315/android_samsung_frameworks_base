@@ -68,7 +68,8 @@ public class Util {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static byte[] computeHkdf(java.lang.String r8, byte[] r9, byte[] r10, byte[] r11, int r12) {
+    public static byte[] computeHkdf(
+            java.lang.String r8, byte[] r9, byte[] r10, byte[] r11, int r12) {
         /*
             r0 = 0
             javax.crypto.Mac r1 = javax.crypto.Mac.getInstance(r8)     // Catch: java.security.NoSuchAlgorithmException -> L74
@@ -144,9 +145,11 @@ public class Util {
             r2.<init>(r3, r1)
             throw r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.security.identity.Util.computeHkdf(java.lang.String, byte[], byte[], byte[], int):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.security.identity.Util.computeHkdf(java.lang.String, byte[],"
+                    + " byte[], byte[], int):byte[]");
     }
 
-    private Util() {
-    }
+    private Util() {}
 }

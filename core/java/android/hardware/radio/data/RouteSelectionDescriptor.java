@@ -3,26 +3,29 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class RouteSelectionDescriptor implements Parcelable {
-    public static final Parcelable.Creator<RouteSelectionDescriptor> CREATOR = new Parcelable.Creator<RouteSelectionDescriptor>() { // from class: android.hardware.radio.data.RouteSelectionDescriptor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RouteSelectionDescriptor createFromParcel(Parcel _aidl_source) {
-            RouteSelectionDescriptor _aidl_out = new RouteSelectionDescriptor();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RouteSelectionDescriptor> CREATOR =
+            new Parcelable.Creator<RouteSelectionDescriptor>() { // from class:
+                // android.hardware.radio.data.RouteSelectionDescriptor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RouteSelectionDescriptor createFromParcel(Parcel _aidl_source) {
+                    RouteSelectionDescriptor _aidl_out = new RouteSelectionDescriptor();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RouteSelectionDescriptor[] newArray(int _aidl_size) {
-            return new RouteSelectionDescriptor[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RouteSelectionDescriptor[] newArray(int _aidl_size) {
+                    return new RouteSelectionDescriptor[_aidl_size];
+                }
+            };
     public static final byte SSC_MODE_1 = 1;
     public static final byte SSC_MODE_2 = 2;
     public static final byte SSC_MODE_3 = 3;

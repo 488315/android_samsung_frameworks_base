@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISemInputDeviceRemoteServiceCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.hardware.secinputdev.ISemInputDeviceRemoteServiceCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.hardware.secinputdev.ISemInputDeviceRemoteServiceCallback";
 
     void deliveryLastData(int[] iArr, float f) throws RemoteException;
 
@@ -16,12 +17,10 @@ public interface ISemInputDeviceRemoteServiceCallback extends IInterface {
 
     public static class Default implements ISemInputDeviceRemoteServiceCallback {
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceRemoteServiceCallback
-        public void deliveryRawdata(int[] map) throws RemoteException {
-        }
+        public void deliveryRawdata(int[] map) throws RemoteException {}
 
         @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceRemoteServiceCallback
-        public void deliveryLastData(int[] croppedVideoClip, float result) throws RemoteException {
-        }
+        public void deliveryLastData(int[] croppedVideoClip, float result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,8 @@ public interface ISemInputDeviceRemoteServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemInputDeviceRemoteServiceCallback {
+    public abstract static class Stub extends Binder
+            implements ISemInputDeviceRemoteServiceCallback {
         static final int TRANSACTION_deliveryLastData = 2;
         static final int TRANSACTION_deliveryRawdata = 1;
 
@@ -41,7 +41,8 @@ public interface ISemInputDeviceRemoteServiceCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(ISemInputDeviceRemoteServiceCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(ISemInputDeviceRemoteServiceCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof ISemInputDeviceRemoteServiceCallback)) {
                 return (ISemInputDeviceRemoteServiceCallback) iin;
             }
@@ -70,7 +71,8 @@ public interface ISemInputDeviceRemoteServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemInputDeviceRemoteServiceCallback.DESCRIPTOR);
             }
@@ -124,7 +126,8 @@ public interface ISemInputDeviceRemoteServiceCallback extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.secinputdev.ISemInputDeviceRemoteServiceCallback
-            public void deliveryLastData(int[] croppedVideoClip, float result) throws RemoteException {
+            public void deliveryLastData(int[] croppedVideoClip, float result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemInputDeviceRemoteServiceCallback.DESCRIPTOR);

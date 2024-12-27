@@ -74,7 +74,11 @@ public class PersonalizationData {
     public static final class Builder {
         private PersonalizationData mData = new PersonalizationData();
 
-        public Builder putEntry(String namespace, String name, Collection<AccessControlProfileId> accessControlProfileIds, byte[] value) {
+        public Builder putEntry(
+                String namespace,
+                String name,
+                Collection<AccessControlProfileId> accessControlProfileIds,
+                byte[] value) {
             NamespaceData namespaceData = (NamespaceData) this.mData.mNamespaces.get(namespace);
             if (namespaceData == null) {
                 namespaceData = new NamespaceData(namespace);

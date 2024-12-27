@@ -8,6 +8,7 @@ public final /* synthetic */ class DimAnimator$$ExternalSyntheticLambda0 impleme
     @Override // java.util.function.Predicate
     public final boolean test(Object obj) {
         ActivityRecord activityRecord = (ActivityRecord) obj;
-        return activityRecord.mVisible && (!activityRecord.occludesParent(true) || activityRecord.showWallpaper());
+        return activityRecord.mVisible
+                && (!activityRecord.occludesParent(true) || activityRecord.showWallpaper());
     }
 }

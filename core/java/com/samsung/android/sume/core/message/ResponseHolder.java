@@ -1,7 +1,9 @@
 package com.samsung.android.sume.core.message;
 
 import android.os.ConditionVariable;
+
 import com.samsung.android.sume.core.functional.PlaceHolder;
+
 import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;
 
@@ -32,7 +34,9 @@ public class ResponseHolder implements PlaceHolder<Response> {
     @Override // com.samsung.android.sume.core.functional.PlaceHolder
     public void put(Response response) {
         this.response = response;
-        if (this.weakRequest != null && this.weakRequest.get() != null && response.replyTo == null) {
+        if (this.weakRequest != null
+                && this.weakRequest.get() != null
+                && response.replyTo == null) {
             response.replyTo = this.weakRequest.get().replyTo;
         }
     }

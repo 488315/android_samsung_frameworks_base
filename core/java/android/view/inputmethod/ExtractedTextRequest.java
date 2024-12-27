@@ -5,24 +5,27 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class ExtractedTextRequest implements Parcelable {
-    public static final Parcelable.Creator<ExtractedTextRequest> CREATOR = new Parcelable.Creator<ExtractedTextRequest>() { // from class: android.view.inputmethod.ExtractedTextRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExtractedTextRequest createFromParcel(Parcel source) {
-            ExtractedTextRequest res = new ExtractedTextRequest();
-            res.token = source.readInt();
-            res.flags = source.readInt();
-            res.hintMaxLines = source.readInt();
-            res.hintMaxChars = source.readInt();
-            return res;
-        }
+    public static final Parcelable.Creator<ExtractedTextRequest> CREATOR =
+            new Parcelable.Creator<
+                    ExtractedTextRequest>() { // from class:
+                                              // android.view.inputmethod.ExtractedTextRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExtractedTextRequest createFromParcel(Parcel source) {
+                    ExtractedTextRequest res = new ExtractedTextRequest();
+                    res.token = source.readInt();
+                    res.flags = source.readInt();
+                    res.hintMaxLines = source.readInt();
+                    res.hintMaxChars = source.readInt();
+                    return res;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExtractedTextRequest[] newArray(int size) {
-            return new ExtractedTextRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExtractedTextRequest[] newArray(int size) {
+                    return new ExtractedTextRequest[size];
+                }
+            };
     public int flags;
     public int hintMaxChars;
     public int hintMaxLines;

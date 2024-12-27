@@ -3,6 +3,7 @@ package android.media;
 import android.icu.util.ULocale;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
@@ -21,19 +22,21 @@ public final class AudioPresentation implements Parcelable {
     public static final int CONTENT_UNKNOWN = -1;
     public static final int CONTENT_VISUALLY_IMPAIRED = 2;
     public static final int CONTENT_VOICEOVER = 7;
-    public static final Parcelable.Creator<AudioPresentation> CREATOR = new Parcelable.Creator<AudioPresentation>() { // from class: android.media.AudioPresentation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPresentation createFromParcel(Parcel in) {
-            return new AudioPresentation(in);
-        }
+    public static final Parcelable.Creator<AudioPresentation> CREATOR =
+            new Parcelable.Creator<
+                    AudioPresentation>() { // from class: android.media.AudioPresentation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPresentation createFromParcel(Parcel in) {
+                    return new AudioPresentation(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPresentation[] newArray(int size) {
-            return new AudioPresentation[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPresentation[] newArray(int size) {
+                    return new AudioPresentation[size];
+                }
+            };
     public static final int MASTERED_FOR_3D = 3;
     public static final int MASTERED_FOR_HEADPHONE = 4;
     public static final int MASTERED_FOR_STEREO = 1;
@@ -51,14 +54,20 @@ public final class AudioPresentation implements Parcelable {
     private final boolean mSpokenSubtitlesAvailable;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ContentClassifier {
-    }
+    public @interface ContentClassifier {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MasteringIndicationType {
-    }
+    public @interface MasteringIndicationType {}
 
-    private AudioPresentation(int presentationId, int programId, ULocale language, int masteringIndication, boolean audioDescriptionAvailable, boolean spokenSubtitlesAvailable, boolean dialogueEnhancementAvailable, Map<ULocale, String> labels) {
+    private AudioPresentation(
+            int presentationId,
+            int programId,
+            ULocale language,
+            int masteringIndication,
+            boolean audioDescriptionAvailable,
+            boolean spokenSubtitlesAvailable,
+            boolean dialogueEnhancementAvailable,
+            Map<ULocale, String> labels) {
         this.mPresentationId = presentationId;
         this.mProgramId = programId;
         this.mLanguage = language;
@@ -72,7 +81,8 @@ public final class AudioPresentation implements Parcelable {
     private AudioPresentation(Parcel in) {
         this.mPresentationId = in.readInt();
         this.mProgramId = in.readInt();
-        this.mLanguage = (ULocale) in.readSerializable(ULocale.class.getClassLoader(), ULocale.class);
+        this.mLanguage =
+                (ULocale) in.readSerializable(ULocale.class.getClassLoader(), ULocale.class);
         this.mMasteringIndication = in.readInt();
         this.mAudioDescriptionAvailable = in.readBoolean();
         this.mSpokenSubtitlesAvailable = in.readBoolean();
@@ -132,11 +142,26 @@ public final class AudioPresentation implements Parcelable {
             return false;
         }
         AudioPresentation obj = (AudioPresentation) o;
-        return this.mPresentationId == obj.getPresentationId() && this.mProgramId == obj.getProgramId() && this.mLanguage.equals(obj.getULocale()) && this.mMasteringIndication == obj.getMasteringIndication() && this.mAudioDescriptionAvailable == obj.hasAudioDescription() && this.mSpokenSubtitlesAvailable == obj.hasSpokenSubtitles() && this.mDialogueEnhancementAvailable == obj.hasDialogueEnhancement() && this.mLabels.equals(obj.getULabels());
+        return this.mPresentationId == obj.getPresentationId()
+                && this.mProgramId == obj.getProgramId()
+                && this.mLanguage.equals(obj.getULocale())
+                && this.mMasteringIndication == obj.getMasteringIndication()
+                && this.mAudioDescriptionAvailable == obj.hasAudioDescription()
+                && this.mSpokenSubtitlesAvailable == obj.hasSpokenSubtitles()
+                && this.mDialogueEnhancementAvailable == obj.hasDialogueEnhancement()
+                && this.mLabels.equals(obj.getULabels());
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mPresentationId), Integer.valueOf(this.mProgramId), Integer.valueOf(this.mLanguage.hashCode()), Integer.valueOf(this.mMasteringIndication), Boolean.valueOf(this.mAudioDescriptionAvailable), Boolean.valueOf(this.mSpokenSubtitlesAvailable), Boolean.valueOf(this.mDialogueEnhancementAvailable), Integer.valueOf(this.mLabels.hashCode()));
+        return Objects.hash(
+                Integer.valueOf(this.mPresentationId),
+                Integer.valueOf(this.mProgramId),
+                Integer.valueOf(this.mLanguage.hashCode()),
+                Integer.valueOf(this.mMasteringIndication),
+                Boolean.valueOf(this.mAudioDescriptionAvailable),
+                Boolean.valueOf(this.mSpokenSubtitlesAvailable),
+                Boolean.valueOf(this.mDialogueEnhancementAvailable),
+                Integer.valueOf(this.mLabels.hashCode()));
     }
 
     public String toString() {
@@ -179,8 +204,13 @@ public final class AudioPresentation implements Parcelable {
         }
 
         public Builder setMasteringIndication(int masteringIndication) {
-            if (masteringIndication != 0 && masteringIndication != 1 && masteringIndication != 2 && masteringIndication != 3 && masteringIndication != 4) {
-                throw new IllegalArgumentException("Unknown mastering indication: " + masteringIndication);
+            if (masteringIndication != 0
+                    && masteringIndication != 1
+                    && masteringIndication != 2
+                    && masteringIndication != 3
+                    && masteringIndication != 4) {
+                throw new IllegalArgumentException(
+                        "Unknown mastering indication: " + masteringIndication);
             }
             this.mMasteringIndication = masteringIndication;
             return this;
@@ -210,7 +240,15 @@ public final class AudioPresentation implements Parcelable {
         }
 
         public AudioPresentation build() {
-            return new AudioPresentation(this.mPresentationId, this.mProgramId, this.mLanguage, this.mMasteringIndication, this.mAudioDescriptionAvailable, this.mSpokenSubtitlesAvailable, this.mDialogueEnhancementAvailable, this.mLabels);
+            return new AudioPresentation(
+                    this.mPresentationId,
+                    this.mProgramId,
+                    this.mLanguage,
+                    this.mMasteringIndication,
+                    this.mAudioDescriptionAvailable,
+                    this.mSpokenSubtitlesAvailable,
+                    this.mDialogueEnhancementAvailable,
+                    this.mLabels);
         }
     }
 

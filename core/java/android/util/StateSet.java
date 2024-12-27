@@ -12,7 +12,30 @@ public class StateSet {
     public static final int VIEW_STATE_ENABLED = 8;
     public static final int VIEW_STATE_FOCUSED = 4;
     public static final int VIEW_STATE_HOVERED = 128;
-    static final int[] VIEW_STATE_IDS = {16842909, 1, 16842913, 2, 16842908, 4, 16842910, 8, 16842919, 16, 16843518, 32, 16843547, 64, 16843623, 128, 16843624, 256, 16843625, 512, R.attr.zzz_state_spen_hovered, 1024};
+    static final int[] VIEW_STATE_IDS = {
+        16842909,
+        1,
+        16842913,
+        2,
+        16842908,
+        4,
+        16842910,
+        8,
+        16842919,
+        16,
+        16843518,
+        32,
+        16843547,
+        64,
+        16843623,
+        128,
+        16843624,
+        256,
+        16843625,
+        512,
+        R.attr.zzz_state_spen_hovered,
+        1024
+    };
     public static final int VIEW_STATE_PRESSED = 16;
     public static final int VIEW_STATE_SELECTED = 2;
     private static final int[][] VIEW_STATE_SETS;
@@ -22,7 +45,8 @@ public class StateSet {
 
     static {
         if (VIEW_STATE_IDS.length / 2 != R.styleable.ViewDrawableStates.length) {
-            throw new IllegalStateException("VIEW_STATE_IDs array length does not match ViewDrawableStates style array");
+            throw new IllegalStateException(
+                    "VIEW_STATE_IDs array length does not match ViewDrawableStates style array");
         }
         int[] orderedIds = new int[VIEW_STATE_IDS.length];
         for (int i = 0; i < R.styleable.ViewDrawableStates.length; i++) {
@@ -49,7 +73,7 @@ public class StateSet {
             VIEW_STATE_SETS[i2] = set;
         }
         WILD_CARD = new int[0];
-        NOTHING = new int[]{0};
+        NOTHING = new int[] {0};
     }
 
     public static int[] get(int mask) {

@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class NativeHandle implements Parcelable {
-    public static final Parcelable.Creator<NativeHandle> CREATOR = new Parcelable.Creator<NativeHandle>() { // from class: android.hardware.common.NativeHandle.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NativeHandle createFromParcel(Parcel _aidl_source) {
-            NativeHandle _aidl_out = new NativeHandle();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<NativeHandle> CREATOR =
+            new Parcelable.Creator<
+                    NativeHandle>() { // from class: android.hardware.common.NativeHandle.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NativeHandle createFromParcel(Parcel _aidl_source) {
+                    NativeHandle _aidl_out = new NativeHandle();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NativeHandle[] newArray(int _aidl_size) {
-            return new NativeHandle[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NativeHandle[] newArray(int _aidl_size) {
+                    return new NativeHandle[_aidl_size];
+                }
+            };
     public ParcelFileDescriptor[] fds;
     public int[] ints;
 
@@ -56,7 +58,9 @@ public class NativeHandle implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.fds = (ParcelFileDescriptor[]) _aidl_parcel.createTypedArray(ParcelFileDescriptor.CREATOR);
+            this.fds =
+                    (ParcelFileDescriptor[])
+                            _aidl_parcel.createTypedArray(ParcelFileDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

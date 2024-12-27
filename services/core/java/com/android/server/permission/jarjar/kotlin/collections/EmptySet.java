@@ -2,6 +2,7 @@ package com.android.server.permission.jarjar.kotlin.collections;
 
 import com.android.server.permission.jarjar.kotlin.jvm.internal.CollectionToArray;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
@@ -13,8 +14,7 @@ public final class EmptySet implements Set, Serializable {
     public static final EmptySet INSTANCE = new EmptySet();
     private static final long serialVersionUID = 3406603774387020532L;
 
-    private EmptySet() {
-    }
+    private EmptySet() {}
 
     private final Object readResolve() {
         return INSTANCE;
@@ -22,17 +22,20 @@ public final class EmptySet implements Set, Serializable {
 
     @Override // java.util.Set, java.util.Collection
     public final /* bridge */ /* synthetic */ boolean add(Object obj) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.Set, java.util.Collection
     public final boolean addAll(Collection collection) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.Set, java.util.Collection
     public final void clear() {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.Set, java.util.Collection
@@ -72,17 +75,20 @@ public final class EmptySet implements Set, Serializable {
 
     @Override // java.util.Set, java.util.Collection
     public final boolean remove(Object obj) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.Set, java.util.Collection
     public final boolean removeAll(Collection collection) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.Set, java.util.Collection
     public final boolean retainAll(Collection collection) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.Set, java.util.Collection

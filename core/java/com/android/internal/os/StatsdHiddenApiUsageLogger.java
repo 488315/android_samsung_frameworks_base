@@ -2,9 +2,11 @@ package com.android.internal.os;
 
 import android.metrics.LogMaker;
 import android.os.Process;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.FrameworkStatsLog;
+
 import dalvik.system.VMRuntime;
 
 /* loaded from: classes5.dex */
@@ -14,8 +16,7 @@ class StatsdHiddenApiUsageLogger implements VMRuntime.HiddenApiUsageLogger {
     private int mHiddenApiAccessLogSampleRate = 0;
     private int mHiddenApiAccessStatslogSampleRate = 0;
 
-    StatsdHiddenApiUsageLogger() {
-    }
+    StatsdHiddenApiUsageLogger() {}
 
     static void setHiddenApiAccessLogSampleRates(int sampleRate, int newSampleRate) {
         sInstance.mHiddenApiAccessLogSampleRate = sampleRate;
@@ -26,7 +27,12 @@ class StatsdHiddenApiUsageLogger implements VMRuntime.HiddenApiUsageLogger {
         return sInstance;
     }
 
-    public void hiddenApiUsed(int sampledValue, String packageName, String signature, int accessMethod, boolean accessDenied) {
+    public void hiddenApiUsed(
+            int sampledValue,
+            String packageName,
+            String signature,
+            int accessMethod,
+            boolean accessDenied) {
         if (sampledValue < this.mHiddenApiAccessLogSampleRate) {
             logUsage(packageName, signature, accessMethod, accessDenied);
         }
@@ -35,7 +41,8 @@ class StatsdHiddenApiUsageLogger implements VMRuntime.HiddenApiUsageLogger {
         }
     }
 
-    private void logUsage(String packageName, String signature, int accessMethod, boolean accessDenied) {
+    private void logUsage(
+            String packageName, String signature, int accessMethod, boolean accessDenied) {
         int accessMethodMetric = 0;
         switch (accessMethod) {
             case 0:
@@ -51,7 +58,14 @@ class StatsdHiddenApiUsageLogger implements VMRuntime.HiddenApiUsageLogger {
                 accessMethodMetric = 3;
                 break;
         }
-        LogMaker logMaker = new LogMaker(MetricsProto.MetricsEvent.ACTION_HIDDEN_API_ACCESSED).setPackageName(packageName).addTaggedData(MetricsProto.MetricsEvent.FIELD_HIDDEN_API_SIGNATURE, signature).addTaggedData(MetricsProto.MetricsEvent.FIELD_HIDDEN_API_ACCESS_METHOD, Integer.valueOf(accessMethodMetric));
+        LogMaker logMaker =
+                new LogMaker(MetricsProto.MetricsEvent.ACTION_HIDDEN_API_ACCESSED)
+                        .setPackageName(packageName)
+                        .addTaggedData(
+                                MetricsProto.MetricsEvent.FIELD_HIDDEN_API_SIGNATURE, signature)
+                        .addTaggedData(
+                                MetricsProto.MetricsEvent.FIELD_HIDDEN_API_ACCESS_METHOD,
+                                Integer.valueOf(accessMethodMetric));
         if (accessDenied) {
             logMaker.addTaggedData(MetricsProto.MetricsEvent.FIELD_HIDDEN_API_ACCESS_DENIED, 1);
         }

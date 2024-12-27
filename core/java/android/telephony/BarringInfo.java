@@ -6,6 +6,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
 import android.util.SparseArray;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -24,58 +25,66 @@ public final class BarringInfo implements Parcelable {
     public static final int BARRING_SERVICE_TYPE_SMS = 9;
     private SparseArray<BarringServiceInfo> mBarringServiceInfos;
     private CellIdentity mCellIdentity;
-    private static final BarringServiceInfo BARRING_SERVICE_INFO_UNKNOWN = new BarringServiceInfo(-1);
-    private static final BarringServiceInfo BARRING_SERVICE_INFO_UNBARRED = new BarringServiceInfo(0);
-    public static final Parcelable.Creator<BarringInfo> CREATOR = new Parcelable.Creator<BarringInfo>() { // from class: android.telephony.BarringInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BarringInfo createFromParcel(Parcel source) {
-            return new BarringInfo(source);
-        }
+    private static final BarringServiceInfo BARRING_SERVICE_INFO_UNKNOWN =
+            new BarringServiceInfo(-1);
+    private static final BarringServiceInfo BARRING_SERVICE_INFO_UNBARRED =
+            new BarringServiceInfo(0);
+    public static final Parcelable.Creator<BarringInfo> CREATOR =
+            new Parcelable.Creator<BarringInfo>() { // from class: android.telephony.BarringInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BarringInfo createFromParcel(Parcel source) {
+                    return new BarringInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BarringInfo[] newArray(int size) {
-            return new BarringInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BarringInfo[] newArray(int size) {
+                    return new BarringInfo[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BarringServiceType {
-    }
+    public @interface BarringServiceType {}
 
     public static final class BarringServiceInfo implements Parcelable {
         public static final int BARRING_TYPE_CONDITIONAL = 1;
         public static final int BARRING_TYPE_NONE = 0;
         public static final int BARRING_TYPE_UNCONDITIONAL = 2;
         public static final int BARRING_TYPE_UNKNOWN = -1;
-        public static final Parcelable.Creator<BarringServiceInfo> CREATOR = new Parcelable.Creator<BarringServiceInfo>() { // from class: android.telephony.BarringInfo.BarringServiceInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BarringServiceInfo createFromParcel(Parcel source) {
-                return new BarringServiceInfo(source);
-            }
+        public static final Parcelable.Creator<BarringServiceInfo> CREATOR =
+                new Parcelable.Creator<
+                        BarringServiceInfo>() { // from class:
+                                                // android.telephony.BarringInfo.BarringServiceInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BarringServiceInfo createFromParcel(Parcel source) {
+                        return new BarringServiceInfo(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BarringServiceInfo[] newArray(int size) {
-                return new BarringServiceInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BarringServiceInfo[] newArray(int size) {
+                        return new BarringServiceInfo[size];
+                    }
+                };
         private final int mBarringType;
         private final int mConditionalBarringFactor;
         private final int mConditionalBarringTimeSeconds;
         private final boolean mIsConditionallyBarred;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface BarringType {
-        }
+        public @interface BarringType {}
 
         public BarringServiceInfo(int type) {
             this(type, false, 0, 0);
         }
 
-        public BarringServiceInfo(int barringType, boolean isConditionallyBarred, int conditionalBarringFactor, int conditionalBarringTimeSeconds) {
+        public BarringServiceInfo(
+                int barringType,
+                boolean isConditionallyBarred,
+                int conditionalBarringFactor,
+                int conditionalBarringTimeSeconds) {
             this.mBarringType = barringType;
             this.mIsConditionallyBarred = isConditionallyBarred;
             this.mConditionalBarringFactor = conditionalBarringFactor;
@@ -106,7 +115,11 @@ public final class BarringInfo implements Parcelable {
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.mBarringType), Boolean.valueOf(this.mIsConditionallyBarred), Integer.valueOf(this.mConditionalBarringFactor), Integer.valueOf(this.mConditionalBarringTimeSeconds));
+            return Objects.hash(
+                    Integer.valueOf(this.mBarringType),
+                    Boolean.valueOf(this.mIsConditionallyBarred),
+                    Integer.valueOf(this.mConditionalBarringFactor),
+                    Integer.valueOf(this.mConditionalBarringTimeSeconds));
         }
 
         public boolean equals(Object rhs) {
@@ -114,7 +127,10 @@ public final class BarringInfo implements Parcelable {
                 return false;
             }
             BarringServiceInfo other = (BarringServiceInfo) rhs;
-            return this.mBarringType == other.mBarringType && this.mIsConditionallyBarred == other.mIsConditionallyBarred && this.mConditionalBarringFactor == other.mConditionalBarringFactor && this.mConditionalBarringTimeSeconds == other.mConditionalBarringTimeSeconds;
+            return this.mBarringType == other.mBarringType
+                    && this.mIsConditionallyBarred == other.mIsConditionallyBarred
+                    && this.mConditionalBarringFactor == other.mConditionalBarringFactor
+                    && this.mConditionalBarringTimeSeconds == other.mConditionalBarringTimeSeconds;
         }
 
         private static String barringTypeToString(int barringType) {
@@ -133,7 +149,15 @@ public final class BarringInfo implements Parcelable {
         }
 
         public String toString() {
-            return "BarringServiceInfo {mBarringType=" + barringTypeToString(this.mBarringType) + ", mIsConditionallyBarred=" + this.mIsConditionallyBarred + ", mConditionalBarringFactor=" + this.mConditionalBarringFactor + ", mConditionalBarringTimeSeconds=" + this.mConditionalBarringTimeSeconds + "}";
+            return "BarringServiceInfo {mBarringType="
+                    + barringTypeToString(this.mBarringType)
+                    + ", mIsConditionallyBarred="
+                    + this.mIsConditionallyBarred
+                    + ", mConditionalBarringFactor="
+                    + this.mConditionalBarringFactor
+                    + ", mConditionalBarringTimeSeconds="
+                    + this.mConditionalBarringTimeSeconds
+                    + "}";
         }
 
         public BarringServiceInfo(Parcel p) {
@@ -162,24 +186,36 @@ public final class BarringInfo implements Parcelable {
         this.mBarringServiceInfos = new SparseArray<>();
     }
 
-    public BarringInfo(CellIdentity barringCellId, SparseArray<BarringServiceInfo> barringServiceInfos) {
+    public BarringInfo(
+            CellIdentity barringCellId, SparseArray<BarringServiceInfo> barringServiceInfos) {
         this.mCellIdentity = barringCellId;
         this.mBarringServiceInfos = barringServiceInfos;
     }
 
     public BarringServiceInfo getBarringServiceInfo(int service) {
         BarringServiceInfo bsi = this.mBarringServiceInfos.get(service);
-        return bsi != null ? bsi : this.mBarringServiceInfos.size() > 0 ? BARRING_SERVICE_INFO_UNBARRED : BARRING_SERVICE_INFO_UNKNOWN;
+        return bsi != null
+                ? bsi
+                : this.mBarringServiceInfos.size() > 0
+                        ? BARRING_SERVICE_INFO_UNBARRED
+                        : BARRING_SERVICE_INFO_UNKNOWN;
     }
 
     @SystemApi
     public BarringInfo createLocationInfoSanitizedCopy() {
-        return this.mCellIdentity == null ? this : new BarringInfo(this.mCellIdentity.sanitizeLocationInfo(), this.mBarringServiceInfos);
+        return this.mCellIdentity == null
+                ? this
+                : new BarringInfo(
+                        this.mCellIdentity.sanitizeLocationInfo(), this.mBarringServiceInfos);
     }
 
     public BarringInfo(Parcel p) {
-        this.mCellIdentity = (CellIdentity) p.readParcelable(CellIdentity.class.getClassLoader(), CellIdentity.class);
-        this.mBarringServiceInfos = p.readSparseArray(BarringServiceInfo.class.getClassLoader(), BarringServiceInfo.class);
+        this.mCellIdentity =
+                (CellIdentity)
+                        p.readParcelable(CellIdentity.class.getClassLoader(), CellIdentity.class);
+        this.mBarringServiceInfos =
+                p.readSparseArray(
+                        BarringServiceInfo.class.getClassLoader(), BarringServiceInfo.class);
     }
 
     @Override // android.os.Parcelable
@@ -196,7 +232,10 @@ public final class BarringInfo implements Parcelable {
     public int hashCode() {
         int hash = this.mCellIdentity != null ? this.mCellIdentity.hashCode() : 7;
         for (int i = 0; i < this.mBarringServiceInfos.size(); i++) {
-            hash = hash + (this.mBarringServiceInfos.keyAt(i) * 15) + (this.mBarringServiceInfos.valueAt(i).hashCode() * 31);
+            hash =
+                    hash
+                            + (this.mBarringServiceInfos.keyAt(i) * 15)
+                            + (this.mBarringServiceInfos.valueAt(i).hashCode() * 31);
         }
         return hash;
     }
@@ -206,11 +245,15 @@ public final class BarringInfo implements Parcelable {
             return false;
         }
         BarringInfo bi = (BarringInfo) rhs;
-        if (hashCode() != bi.hashCode() || this.mBarringServiceInfos.size() != bi.mBarringServiceInfos.size()) {
+        if (hashCode() != bi.hashCode()
+                || this.mBarringServiceInfos.size() != bi.mBarringServiceInfos.size()) {
             return false;
         }
         for (int i = 0; i < this.mBarringServiceInfos.size(); i++) {
-            if (this.mBarringServiceInfos.keyAt(i) != bi.mBarringServiceInfos.keyAt(i) || !Objects.equals(this.mBarringServiceInfos.valueAt(i), bi.mBarringServiceInfos.valueAt(i))) {
+            if (this.mBarringServiceInfos.keyAt(i) != bi.mBarringServiceInfos.keyAt(i)
+                    || !Objects.equals(
+                            this.mBarringServiceInfos.valueAt(i),
+                            bi.mBarringServiceInfos.valueAt(i))) {
                 return false;
             }
         }
@@ -218,7 +261,11 @@ public final class BarringInfo implements Parcelable {
     }
 
     public String toString() {
-        return "BarringInfo {mCellIdentity=" + this.mCellIdentity + ", mBarringServiceInfos=" + this.mBarringServiceInfos + "}";
+        return "BarringInfo {mCellIdentity="
+                + this.mCellIdentity
+                + ", mBarringServiceInfos="
+                + this.mBarringServiceInfos
+                + "}";
     }
 
     public CellIdentity getCellIdentity() {

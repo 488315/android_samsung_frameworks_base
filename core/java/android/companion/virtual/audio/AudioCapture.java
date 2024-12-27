@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.util.Log;
+
 import java.nio.ByteBuffer;
 
 @SystemApi
@@ -89,7 +90,8 @@ public final class AudioCapture {
         int sizeRead;
         synchronized (this.mLock) {
             if (this.mAudioRecord != null) {
-                sizeRead = this.mAudioRecord.read(audioData, offsetInFloats, sizeInFloats, readMode);
+                sizeRead =
+                        this.mAudioRecord.read(audioData, offsetInFloats, sizeInFloats, readMode);
             } else {
                 sizeRead = 0;
             }
@@ -105,7 +107,8 @@ public final class AudioCapture {
         int sizeRead;
         synchronized (this.mLock) {
             if (this.mAudioRecord != null) {
-                sizeRead = this.mAudioRecord.read(audioData, offsetInShorts, sizeInShorts, readMode);
+                sizeRead =
+                        this.mAudioRecord.read(audioData, offsetInShorts, sizeInShorts, readMode);
             } else {
                 sizeRead = 0;
             }

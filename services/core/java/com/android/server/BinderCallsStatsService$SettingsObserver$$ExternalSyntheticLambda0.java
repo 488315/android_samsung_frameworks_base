@@ -1,11 +1,14 @@
 package com.android.server;
 
 import android.os.Binder;
+
 import com.android.internal.os.BinderInternal;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BinderCallsStatsService$SettingsObserver$$ExternalSyntheticLambda0 implements BinderInternal.WorkSourceProvider {
+public final /* synthetic */
+class BinderCallsStatsService$SettingsObserver$$ExternalSyntheticLambda0
+        implements BinderInternal.WorkSourceProvider {
     public final int resolveWorkSourceUid(int i) {
         return Binder.getCallingUid();
     }

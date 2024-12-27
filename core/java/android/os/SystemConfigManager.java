@@ -5,9 +5,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.SignedPackage;
 import android.content.pm.SignedPackageParcel;
-import android.os.ISystemConfig;
 import android.util.ArraySet;
 import android.util.Log;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,9 @@ import java.util.stream.Collectors;
 /* loaded from: classes3.dex */
 public class SystemConfigManager {
     private static final String TAG = SystemConfigManager.class.getSimpleName();
-    private final ISystemConfig mInterface = ISystemConfig.Stub.asInterface(ServiceManager.getService(Context.SYSTEM_CONFIG_SERVICE));
+    private final ISystemConfig mInterface =
+            ISystemConfig.Stub.asInterface(
+                    ServiceManager.getService(Context.SYSTEM_CONFIG_SERVICE));
 
     public Set<String> getDisabledUntilUsedPreinstalledCarrierApps() {
         try {
@@ -39,7 +41,8 @@ public class SystemConfigManager {
         }
     }
 
-    public Map<String, List<CarrierAssociatedAppEntry>> getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries() {
+    public Map<String, List<CarrierAssociatedAppEntry>>
+            getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries() {
         try {
             return this.mInterface.getDisabledUntilUsedPreinstalledCarrierAssociatedAppEntries();
         } catch (RemoteException e) {
@@ -85,8 +88,12 @@ public class SystemConfigManager {
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public Set<SignedPackage> getEnhancedConfirmationTrustedPackages() {
         try {
-            List<SignedPackageParcel> parcels = this.mInterface.getEnhancedConfirmationTrustedPackages();
-            return (Set) parcels.stream().map(new SystemConfigManager$$ExternalSyntheticLambda0()).collect(Collectors.toSet());
+            List<SignedPackageParcel> parcels =
+                    this.mInterface.getEnhancedConfirmationTrustedPackages();
+            return (Set)
+                    parcels.stream()
+                            .map(new SystemConfigManager$$ExternalSyntheticLambda0())
+                            .collect(Collectors.toSet());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -95,8 +102,12 @@ public class SystemConfigManager {
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public Set<SignedPackage> getEnhancedConfirmationTrustedInstallers() {
         try {
-            List<SignedPackageParcel> parcels = this.mInterface.getEnhancedConfirmationTrustedInstallers();
-            return (Set) parcels.stream().map(new SystemConfigManager$$ExternalSyntheticLambda0()).collect(Collectors.toSet());
+            List<SignedPackageParcel> parcels =
+                    this.mInterface.getEnhancedConfirmationTrustedInstallers();
+            return (Set)
+                    parcels.stream()
+                            .map(new SystemConfigManager$$ExternalSyntheticLambda0())
+                            .collect(Collectors.toSet());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

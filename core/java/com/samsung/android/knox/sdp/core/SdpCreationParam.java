@@ -2,24 +2,28 @@ package com.samsung.android.knox.sdp.core;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /* loaded from: classes6.dex */
 public class SdpCreationParam implements Parcelable {
-    public static final Parcelable.Creator<SdpCreationParam> CREATOR = new Parcelable.Creator<SdpCreationParam>() { // from class: com.samsung.android.knox.sdp.core.SdpCreationParam.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SdpCreationParam createFromParcel(Parcel source) {
-            return new SdpCreationParam(source);
-        }
+    public static final Parcelable.Creator<SdpCreationParam> CREATOR =
+            new Parcelable.Creator<
+                    SdpCreationParam>() { // from class:
+                                          // com.samsung.android.knox.sdp.core.SdpCreationParam.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SdpCreationParam createFromParcel(Parcel source) {
+                    return new SdpCreationParam(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SdpCreationParam[] newArray(int size) {
-            return new SdpCreationParam[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SdpCreationParam[] newArray(int size) {
+                    return new SdpCreationParam[size];
+                }
+            };
     private String mAlias;
     private int mFlags;
     private ArrayList<SdpDomain> mPrivilegedApps;

@@ -1,6 +1,7 @@
 package com.samsung.android.globalactions.util;
 
 import android.content.Context;
+
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 
@@ -19,7 +20,9 @@ public class DesktopModeManagerWrapper {
 
     public void registerModeChangedListener(final Runnable action) {
         try {
-            this.mDesktopModeManager = (SemDesktopModeManager) this.mContext.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
+            this.mDesktopModeManager =
+                    (SemDesktopModeManager)
+                            this.mContext.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
         } catch (Exception exception) {
             this.mLogWrapper.e(TAG, "mContext.getSystemService() : exception = " + exception);
         }
@@ -30,12 +33,16 @@ public class DesktopModeManagerWrapper {
         if (this.mListener != null) {
             dispose();
         }
-        this.mListener = new SemDesktopModeManager.DesktopModeListener() { // from class: com.samsung.android.globalactions.util.DesktopModeManagerWrapper$$ExternalSyntheticLambda0
-            @Override // com.samsung.android.desktopmode.SemDesktopModeManager.DesktopModeListener
-            public final void onDesktopModeStateChanged(SemDesktopModeState semDesktopModeState) {
-                action.run();
-            }
-        };
+        this.mListener =
+                new SemDesktopModeManager
+                        .DesktopModeListener() { // from class:
+                                                 // com.samsung.android.globalactions.util.DesktopModeManagerWrapper$$ExternalSyntheticLambda0
+                    @Override // com.samsung.android.desktopmode.SemDesktopModeManager.DesktopModeListener
+                    public final void onDesktopModeStateChanged(
+                            SemDesktopModeState semDesktopModeState) {
+                        action.run();
+                    }
+                };
         this.mDesktopModeManager.registerListener(this.mListener);
     }
 
@@ -54,7 +61,9 @@ public class DesktopModeManagerWrapper {
             return false;
         }
         SemDesktopModeState desktopModeState = this.mDesktopModeManager.getDesktopModeState();
-        return desktopModeState != null && desktopModeState.enabled == 4 && desktopModeState.getDisplayType() == 101;
+        return desktopModeState != null
+                && desktopModeState.enabled == 4
+                && desktopModeState.getDisplayType() == 101;
     }
 
     public boolean isDesktopModeDualView() {
@@ -63,6 +72,8 @@ public class DesktopModeManagerWrapper {
             return false;
         }
         SemDesktopModeState desktopModeState = this.mDesktopModeManager.getDesktopModeState();
-        return desktopModeState != null && desktopModeState.enabled == 4 && desktopModeState.getDisplayType() == 102;
+        return desktopModeState != null
+                && desktopModeState.enabled == 4
+                && desktopModeState.getDisplayType() == 102;
     }
 }

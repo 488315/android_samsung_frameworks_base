@@ -1,6 +1,7 @@
 package android.service.controls.templates;
 
 import android.os.Bundle;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes3.dex */
@@ -25,7 +26,11 @@ public final class ToggleRangeTemplate extends ControlTemplate {
         this.mRangeTemplate = range;
     }
 
-    public ToggleRangeTemplate(String templateId, boolean checked, CharSequence actionDescription, RangeTemplate range) {
+    public ToggleRangeTemplate(
+            String templateId,
+            boolean checked,
+            CharSequence actionDescription,
+            RangeTemplate range) {
         this(templateId, new ControlButton(checked, actionDescription), range);
     }
 

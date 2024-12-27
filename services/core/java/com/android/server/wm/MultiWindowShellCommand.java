@@ -5,15 +5,16 @@ import android.content.Intent;
 import android.os.ShellCommand;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.chimera.AggressivePolicyHandler$$ExternalSyntheticOutline0;
-import com.android.server.wm.DexSizeCompatController;
-import com.android.server.wm.SizeCompatPolicyManager;
+
 import com.samsung.android.multiwindow.MultiWindowManager;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.server.packagefeature.PackageFeature;
+
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -29,21 +30,28 @@ public class MultiWindowShellCommand extends ShellCommand {
     private static final String CMD_BLOCK_MULTIWINDOW = "block-multiwindow";
     private static final String CMD_DUMP_EMBED_ACTIVITY_INFO = "dump-embed-activity";
     private static final String CMD_DUMP_SPLIT_ACTIVITY_INFO = "dump-split-activity";
-    private static final String CMD_GET_EMBED_ACTIVITY_PACKAGE_ENABLED = "get-embed-activity-package-enabled";
-    private static final String CMD_GET_SPLIT_ACTIVITY_PACKAGE_ENABLED = "get-split-activity-package-enabled";
+    private static final String CMD_GET_EMBED_ACTIVITY_PACKAGE_ENABLED =
+            "get-embed-activity-package-enabled";
+    private static final String CMD_GET_SPLIT_ACTIVITY_PACKAGE_ENABLED =
+            "get-split-activity-package-enabled";
     private static final String CMD_GET_TASKID_FROM_PACKAGE_NAME = "getTaskIdFromPackageName";
     private static final String CMD_MINIMIZE_ALL = "minimize-all";
     private static final String CMD_MINIMIZE_ALL_INTENT = "minimize-all-intent";
     private static final String CMD_MW_DYNAMIC_ENABLED = "support";
     private static final String CMD_REMOVE_FOCUSED_TASK = "removeFocusedTask";
     private static final String CMD_REMOVE_SPLIT_ACTIVITY_INFO = "remove-split-activity";
-    private static final String CMD_SET_DEX_SIZE_COMPAT_MODE_ASPECT_RATIO_SCALE = "setDexSizeCompatModeAspectRatioScale";
-    private static final String CMD_SET_DEX_SIZE_COMPAT_MODE_DEFAULT_SCALE = "setDexSizeCompatModeDefaultScale";
-    private static final String CMD_SET_EMBED_ACTIVITY_PACKAGE_ENABLED = "set-embed-activity-package-enabled";
-    private static final String CMD_SET_MULTISTAR_ENSURE_LAUNCH_SPLIT = "setMultiStarEnsureLaunchSplit";
+    private static final String CMD_SET_DEX_SIZE_COMPAT_MODE_ASPECT_RATIO_SCALE =
+            "setDexSizeCompatModeAspectRatioScale";
+    private static final String CMD_SET_DEX_SIZE_COMPAT_MODE_DEFAULT_SCALE =
+            "setDexSizeCompatModeDefaultScale";
+    private static final String CMD_SET_EMBED_ACTIVITY_PACKAGE_ENABLED =
+            "set-embed-activity-package-enabled";
+    private static final String CMD_SET_MULTISTAR_ENSURE_LAUNCH_SPLIT =
+            "setMultiStarEnsureLaunchSplit";
     private static final String CMD_SET_NAVSTAR_IMMERSIVE_MODE = "setNavStarImmersiveMode";
     private static final String CMD_SET_SIZE_COMPAT_LAUNCH_POLICY = "setSizeCompatLaunchPolicy";
-    private static final String CMD_SET_SPLIT_ACTIVITY_PACKAGE_ENABLED = "set-split-activity-package-enabled";
+    private static final String CMD_SET_SPLIT_ACTIVITY_PACKAGE_ENABLED =
+            "set-split-activity-package-enabled";
     private static final String CMD_SHOW_ALL_COMMANDS = "showall";
     private static final String CMD_SPLIT_IMMERSIVE = "split-immersive";
     private static final String CMD_TOP_TASK_SUPPORTS_MULTIWINDOW = "top-task-supports-mw";
@@ -66,7 +74,8 @@ public class MultiWindowShellCommand extends ShellCommand {
         }
         for (Method method : MultiWindowShellCommand.class.getDeclaredMethods()) {
             if (method.isAnnotationPresent(MWCommandInfo.class)) {
-                MWCommandInfo mWCommandInfo = (MWCommandInfo) method.getAnnotation(MWCommandInfo.class);
+                MWCommandInfo mWCommandInfo =
+                        (MWCommandInfo) method.getAnnotation(MWCommandInfo.class);
                 if (mWCommandInfo.supportsReleaseBuild()) {
                     this.mCommandMethods.put(mWCommandInfo.cmd(), method);
                 }
@@ -90,7 +99,8 @@ public class MultiWindowShellCommand extends ShellCommand {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static /* synthetic */ void lambda$cmdShowAllCommands$0(PrintWriter printWriter, String str, Method method) {
+    public static /* synthetic */ void lambda$cmdShowAllCommands$0(
+            PrintWriter printWriter, String str, Method method) {
         StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("cmd=", str, "    method=");
         m.append(method.getName());
         printWriter.println(m.toString());
@@ -108,23 +118,36 @@ public class MultiWindowShellCommand extends ShellCommand {
 
     @MWCommandInfo(cmd = CMD_ALLOW_MULTIWINDOW)
     public boolean cmdAllowMultiWindow(String[] strArr, PrintWriter printWriter) {
-        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository;
+        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository;
         if (strArr == null || strArr.length < 2) {
-            printWriter.println("Error: allow-multiwindow  option requires [add/remove] [packageName]");
+            printWriter.println(
+                    "Error: allow-multiwindow  option requires [add/remove] [packageName]");
         } else {
             String str = strArr[0];
             String str2 = strArr[1];
             if ("add".equals(str)) {
-                MultiWindowSupportPolicyController multiWindowSupportPolicyController = this.mAtm.mMwSupportPolicyController;
+                MultiWindowSupportPolicyController multiWindowSupportPolicyController =
+                        this.mAtm.mMwSupportPolicyController;
                 if (multiWindowSupportPolicyController.mAllowListRepository == null) {
-                    multiWindowSupportPolicyController.mAllowListRepository = new MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository(0, multiWindowSupportPolicyController.mAtm, "AllowList");
+                    multiWindowSupportPolicyController.mAllowListRepository =
+                            new MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository(
+                                    0, multiWindowSupportPolicyController.mAtm, "AllowList");
                 }
-                MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2 = multiWindowSupportPolicyController.mAllowListRepository;
-                if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2 != null) {
-                    multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2.addPackage(str2);
+                MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                        multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2 =
+                                multiWindowSupportPolicyController.mAllowListRepository;
+                if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2
+                        != null) {
+                    multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2
+                            .addPackage(str2);
                 }
-            } else if ("remove".equals(str) && (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository = this.mAtm.mMwSupportPolicyController.mAllowListRepository) != null) {
-                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository.removePackage(str2);
+            } else if ("remove".equals(str)
+                    && (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository =
+                                    this.mAtm.mMwSupportPolicyController.mAllowListRepository)
+                            != null) {
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                        .removePackage(str2);
             }
         }
         return true;
@@ -132,25 +155,43 @@ public class MultiWindowShellCommand extends ShellCommand {
 
     @MWCommandInfo(cmd = CMD_BLOCK_MULTIWINDOW)
     public boolean cmdBlockMultiWindow(String[] strArr, PrintWriter printWriter) {
-        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository;
+        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository;
         if (strArr == null || strArr.length < 2) {
-            printWriter.println("Error: block-multiwindow  option requires [add/remove] [packageName]");
+            printWriter.println(
+                    "Error: block-multiwindow  option requires [add/remove] [packageName]");
         } else {
             String str = strArr[0];
             String str2 = strArr[1];
             if ("add".equals(str)) {
-                MultiWindowSupportPolicyController multiWindowSupportPolicyController = this.mAtm.mMwSupportPolicyController;
+                MultiWindowSupportPolicyController multiWindowSupportPolicyController =
+                        this.mAtm.mMwSupportPolicyController;
                 if (multiWindowSupportPolicyController.mBlockListRepository == null) {
-                    MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2 = new MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository(1, multiWindowSupportPolicyController.mAtm, "BlockList");
-                    PackageFeature.DISPLAY_COMPAT.registerCallback(multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2);
-                    multiWindowSupportPolicyController.mBlockListRepository = multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2;
+                    MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                            multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2 =
+                                    new MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository(
+                                            1,
+                                            multiWindowSupportPolicyController.mAtm,
+                                            "BlockList");
+                    PackageFeature.DISPLAY_COMPAT.registerCallback(
+                            multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2);
+                    multiWindowSupportPolicyController.mBlockListRepository =
+                            multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2;
                 }
-                MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository3 = multiWindowSupportPolicyController.mBlockListRepository;
-                if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository3 != null) {
-                    multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository3.addPackage(str2);
+                MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                        multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository3 =
+                                multiWindowSupportPolicyController.mBlockListRepository;
+                if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository3
+                        != null) {
+                    multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository3
+                            .addPackage(str2);
                 }
-            } else if ("remove".equals(str) && (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository = this.mAtm.mMwSupportPolicyController.mBlockListRepository) != null) {
-                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository.removePackage(str2);
+            } else if ("remove".equals(str)
+                    && (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository =
+                                    this.mAtm.mMwSupportPolicyController.mBlockListRepository)
+                            != null) {
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                        .removePackage(str2);
             }
         }
         return true;
@@ -161,7 +202,8 @@ public class MultiWindowShellCommand extends ShellCommand {
         if (!CoreRune.MW_EMBED_ACTIVITY_PACKAGE_ENABLED) {
             return false;
         }
-        ActivityEmbeddedPackageRepository activityEmbeddedPackageRepository = this.mAtm.mMultiTaskingController.mActivityEmbeddedPackageRepository;
+        ActivityEmbeddedPackageRepository activityEmbeddedPackageRepository =
+                this.mAtm.mMultiTaskingController.mActivityEmbeddedPackageRepository;
         synchronized (activityEmbeddedPackageRepository) {
             printWriter.print("    ");
             printWriter.print("ActivityEmbeddedPackageRepository : ");
@@ -194,10 +236,18 @@ public class MultiWindowShellCommand extends ShellCommand {
             return false;
         }
         if (strArr == null || strArr.length < 2) {
-            printWriter.println("Error: get-embed-activity-package-enabled  option requires [packageName, userId]");
+            printWriter.println(
+                    "Error: get-embed-activity-package-enabled  option requires [packageName,"
+                        + " userId]");
         } else {
             String str = strArr[0];
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(Preconditions$$ExternalSyntheticOutline0.m(str, " activity embedding "), this.mAtm.mMultiTaskingController.getEmbedActivityPackageEnabled(str, Integer.valueOf(strArr[1]).intValue()) ? "Enabled" : "Disabled", printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    Preconditions$$ExternalSyntheticOutline0.m(str, " activity embedding "),
+                    this.mAtm.mMultiTaskingController.getEmbedActivityPackageEnabled(
+                                    str, Integer.valueOf(strArr[1]).intValue())
+                            ? "Enabled"
+                            : "Disabled",
+                    printWriter);
         }
         return true;
     }
@@ -230,7 +280,9 @@ public class MultiWindowShellCommand extends ShellCommand {
 
     @MWCommandInfo(cmd = CMD_SPLIT_IMMERSIVE)
     public boolean cmdImmersiveSplitMode(String[] strArr, PrintWriter printWriter) {
-        if (strArr == null || strArr.length <= 0 || !("on".equals(strArr[0]) || "off".equals(strArr[0]))) {
+        if (strArr == null
+                || strArr.length <= 0
+                || !("on".equals(strArr[0]) || "off".equals(strArr[0]))) {
             printWriter.println("Invalid argument: split-immersive  option requires [on/off]");
             return true;
         }
@@ -252,20 +304,25 @@ public class MultiWindowShellCommand extends ShellCommand {
 
     @MWCommandInfo(cmd = CMD_MINIMIZE_ALL_INTENT)
     public boolean cmdMinimizeAllIntent(String[] strArr, PrintWriter printWriter) {
-        this.mAtm.mContext.sendBroadcast(new Intent("com.samsung.android.multiwindow.MINIMIZE_ALL_BY_SYSTEM"));
+        this.mAtm.mContext.sendBroadcast(
+                new Intent("com.samsung.android.multiwindow.MINIMIZE_ALL_BY_SYSTEM"));
         return true;
     }
 
     @MWCommandInfo(cmd = CMD_MW_DYNAMIC_ENABLED)
     public boolean cmdMultiWindowOnAndOff(String[] strArr, PrintWriter printWriter) {
         int currentUserId = this.mAtm.mAmInternal.getCurrentUserId();
-        if (strArr == null || strArr.length <= 0 || !("on".equals(strArr[0]) || "off".equals(strArr[0]))) {
+        if (strArr == null
+                || strArr.length <= 0
+                || !("on".equals(strArr[0]) || "off".equals(strArr[0]))) {
             printWriter.println("Error: support  option requires [on/off]");
             return false;
         }
         boolean equals = "on".equals(strArr[0]);
-        String str = (strArr.length <= 1 || TextUtils.isEmpty(strArr[1])) ? "shell_command" : strArr[1];
-        MultiWindowEnableController multiWindowEnableController = this.mAtm.mMultiWindowEnableController;
+        String str =
+                (strArr.length <= 1 || TextUtils.isEmpty(strArr[1])) ? "shell_command" : strArr[1];
+        MultiWindowEnableController multiWindowEnableController =
+                this.mAtm.mMultiWindowEnableController;
         WindowManagerGlobalLock windowManagerGlobalLock = multiWindowEnableController.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
@@ -285,7 +342,9 @@ public class MultiWindowShellCommand extends ShellCommand {
         if (strArr == null || strArr.length <= 0) {
             return true;
         }
-        printWriter.println("Result = " + this.mMultiWindowManager.removeFocusedTask(Integer.parseInt(strArr[0])));
+        printWriter.println(
+                "Result = "
+                        + this.mMultiWindowManager.removeFocusedTask(Integer.parseInt(strArr[0])));
         return true;
     }
 
@@ -295,11 +354,13 @@ public class MultiWindowShellCommand extends ShellCommand {
     }
 
     @MWCommandInfo(cmd = CMD_SET_DEX_SIZE_COMPAT_MODE_ASPECT_RATIO_SCALE)
-    public boolean cmdSetDexSizeCompatModeAspectRatioScale(String[] strArr, PrintWriter printWriter) {
+    public boolean cmdSetDexSizeCompatModeAspectRatioScale(
+            String[] strArr, PrintWriter printWriter) {
         if (!CoreRune.MT_DEX_SIZE_COMPAT_MODE || strArr.length <= 0) {
             return false;
         }
-        DexSizeCompatController dexSizeCompatController = DexSizeCompatController.LazyHolder.sInstance;
+        DexSizeCompatController dexSizeCompatController =
+                DexSizeCompatController.LazyHolder.sInstance;
         float floatValue = Float.valueOf(strArr[0]).floatValue();
         printWriter.println("Request: aspectRatioScale=" + floatValue);
         printWriter.println("Results:");
@@ -309,7 +370,10 @@ public class MultiWindowShellCommand extends ShellCommand {
             return true;
         }
         dexSizeCompatController.mAspectRatioScale = floatValue;
-        AggressivePolicyHandler$$ExternalSyntheticOutline0.m(new StringBuilder("  aspectRatioScale(new)="), dexSizeCompatController.mAspectRatioScale, printWriter);
+        AggressivePolicyHandler$$ExternalSyntheticOutline0.m(
+                new StringBuilder("  aspectRatioScale(new)="),
+                dexSizeCompatController.mAspectRatioScale,
+                printWriter);
         return true;
     }
 
@@ -318,7 +382,8 @@ public class MultiWindowShellCommand extends ShellCommand {
         if (!CoreRune.MT_DEX_SIZE_COMPAT_MODE || strArr.length == 0) {
             return false;
         }
-        DexSizeCompatController dexSizeCompatController = DexSizeCompatController.LazyHolder.sInstance;
+        DexSizeCompatController dexSizeCompatController =
+                DexSizeCompatController.LazyHolder.sInstance;
         float floatValue = Float.valueOf(strArr[0]).floatValue();
         printWriter.println("Request: defaultScale=" + floatValue);
         printWriter.println("Results:");
@@ -328,7 +393,10 @@ public class MultiWindowShellCommand extends ShellCommand {
             return true;
         }
         dexSizeCompatController.mDefaultScale = floatValue;
-        AggressivePolicyHandler$$ExternalSyntheticOutline0.m(new StringBuilder("  defaultScale(new)="), dexSizeCompatController.mDefaultScale, printWriter);
+        AggressivePolicyHandler$$ExternalSyntheticOutline0.m(
+                new StringBuilder("  defaultScale(new)="),
+                dexSizeCompatController.mDefaultScale,
+                printWriter);
         return true;
     }
 
@@ -338,9 +406,14 @@ public class MultiWindowShellCommand extends ShellCommand {
             return false;
         }
         if (strArr == null || strArr.length < 3) {
-            printWriter.println("Error: set-embed-activity-package-enabled  option requires [packageName, enabled, userId]");
+            printWriter.println(
+                    "Error: set-embed-activity-package-enabled  option requires [packageName,"
+                        + " enabled, userId]");
         } else {
-            this.mAtm.mMultiTaskingController.setEmbedActivityPackageEnabled(strArr[0], Boolean.valueOf(strArr[1]).booleanValue(), Integer.valueOf(strArr[2]).intValue());
+            this.mAtm.mMultiTaskingController.setEmbedActivityPackageEnabled(
+                    strArr[0],
+                    Boolean.valueOf(strArr[1]).booleanValue(),
+                    Integer.valueOf(strArr[2]).intValue());
         }
         return true;
     }
@@ -372,7 +445,8 @@ public class MultiWindowShellCommand extends ShellCommand {
         if (!CoreRune.MT_SIZE_COMPAT_POLICY || strArr.length == 0) {
             return false;
         }
-        SizeCompatPolicyManager sizeCompatPolicyManager = SizeCompatPolicyManager.LazyHolder.sManager;
+        SizeCompatPolicyManager sizeCompatPolicyManager =
+                SizeCompatPolicyManager.LazyHolder.sManager;
         int intValue = Integer.valueOf(strArr[0]).intValue();
         printWriter.println("Request: launchPolicy=" + Integer.toString(intValue));
         printWriter.println("Results:");
@@ -382,10 +456,16 @@ public class MultiWindowShellCommand extends ShellCommand {
             return true;
         }
         if (intValue != sizeCompatPolicyManager.mLaunchPolicy && intValue >= 0 && intValue <= 2) {
-            Slog.d("SizeCompatPolicy", "LaunchPolicy is changed from " + sizeCompatPolicyManager.mLaunchPolicy + " to " + intValue);
+            Slog.d(
+                    "SizeCompatPolicy",
+                    "LaunchPolicy is changed from "
+                            + sizeCompatPolicyManager.mLaunchPolicy
+                            + " to "
+                            + intValue);
             sizeCompatPolicyManager.mLaunchPolicy = intValue;
         }
-        printWriter.println("  launchPolicy(new)=" + Integer.toString(sizeCompatPolicyManager.mLaunchPolicy));
+        printWriter.println(
+                "  launchPolicy(new)=" + Integer.toString(sizeCompatPolicyManager.mLaunchPolicy));
         return true;
     }
 
@@ -397,12 +477,15 @@ public class MultiWindowShellCommand extends ShellCommand {
     @MWCommandInfo(cmd = CMD_SHOW_ALL_COMMANDS, supportsReleaseBuild = true)
     public boolean cmdShowAllCommands(String[] strArr, final PrintWriter printWriter) {
         printWriter.println("[Commands    SUPPORTS_ALL_COMMANDS=false]");
-        this.mCommandMethods.forEach(new BiConsumer() { // from class: com.android.server.wm.MultiWindowShellCommand$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                MultiWindowShellCommand.lambda$cmdShowAllCommands$0(printWriter, (String) obj, (Method) obj2);
-            }
-        });
+        this.mCommandMethods.forEach(
+                new BiConsumer() { // from class:
+                                   // com.android.server.wm.MultiWindowShellCommand$$ExternalSyntheticLambda0
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        MultiWindowShellCommand.lambda$cmdShowAllCommands$0(
+                                printWriter, (String) obj, (Method) obj2);
+                    }
+                });
         return true;
     }
 
@@ -413,7 +496,11 @@ public class MultiWindowShellCommand extends ShellCommand {
             printWriter.println("top activity is null");
             return true;
         }
-        printWriter.println(activityRecord.toString() + " supports multiwindow = " + MultiWindowManager.getInstance().supportsMultiWindow(activityRecord.token));
+        printWriter.println(
+                activityRecord.toString()
+                        + " supports multiwindow = "
+                        + MultiWindowManager.getInstance()
+                                .supportsMultiWindow(activityRecord.token));
         return true;
     }
 

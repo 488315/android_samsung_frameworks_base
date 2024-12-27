@@ -44,8 +44,10 @@ public class VEContext extends Element implements VEStateInterface {
 
     public void initialize() {
         this.nativeInterfaceWrapper.create(this.layerGroup);
-        this.frcSupportInfo[ViewMode.PREVIEW.ordinal()] = this.nativeInterfaceWrapper.getFrcSupportInfo(ViewMode.PREVIEW.ordinal());
-        this.frcSupportInfo[ViewMode.EXPORT.ordinal()] = this.nativeInterfaceWrapper.getFrcSupportInfo(ViewMode.EXPORT.ordinal());
+        this.frcSupportInfo[ViewMode.PREVIEW.ordinal()] =
+                this.nativeInterfaceWrapper.getFrcSupportInfo(ViewMode.PREVIEW.ordinal());
+        this.frcSupportInfo[ViewMode.EXPORT.ordinal()] =
+                this.nativeInterfaceWrapper.getFrcSupportInfo(ViewMode.EXPORT.ordinal());
     }
 
     public void release() {

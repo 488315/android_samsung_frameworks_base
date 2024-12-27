@@ -3,6 +3,7 @@ package android.hardware.input;
 import android.text.TextUtils;
 import android.util.SparseIntArray;
 import android.view.KeyCharacterMap;
+
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.runtime.ObjectMethods;
@@ -144,21 +145,252 @@ final class PhysicalKeyLayout {
     }
 
     private void createAnsiLayout(KeyCharacterMap kcm) {
-        this.mKeys = new LayoutKey[][]{new LayoutKey[]{getKey(kcm, 41), getKey(kcm, 2), getKey(kcm, 3), getKey(kcm, 4), getKey(kcm, 5), getKey(kcm, 6), getKey(kcm, 7), getKey(kcm, 8), getKey(kcm, 9), getKey(kcm, 10), getKey(kcm, 11), getKey(kcm, 12), getKey(kcm, 13), getKey(67, 1.5f)}, new LayoutKey[]{getKey(61, 1.5f), getKey(kcm, 16), getKey(kcm, 17), getKey(kcm, 18), getKey(kcm, 19), getKey(kcm, 20), getKey(kcm, 21), getKey(kcm, 22), getKey(kcm, 23), getKey(kcm, 24), getKey(kcm, 25), getKey(kcm, 26), getKey(kcm, 27), getKey(kcm, 43)}, new LayoutKey[]{getKey(115, 1.75f), getKey(kcm, 30), getKey(kcm, 31), getKey(kcm, 32), getKey(kcm, 33), getKey(kcm, 34), getKey(kcm, 35), getKey(kcm, 36), getKey(kcm, 37), getKey(kcm, 38), getKey(kcm, 39), getKey(kcm, 40), getKey(66, 1.75f)}, new LayoutKey[]{getKey(59, 2.5f), getKey(kcm, 44), getKey(kcm, 45), getKey(kcm, 46), getKey(kcm, 47), getKey(kcm, 48), getKey(kcm, 49), getKey(kcm, 50), getKey(kcm, 51), getKey(kcm, 52), getKey(kcm, 53), getKey(60, 2.5f)}, new LayoutKey[]{getKey(113, 1.0f), getKey(119, 1.0f), getKey(117, 1.0f), getKey(57, 1.0f), getKey(62, 6.5f), getKey(58, 1.0f), getKey(118, 1.0f), getKey(82, 1.0f), getKey(114, 1.0f)}};
+        this.mKeys =
+                new LayoutKey[][] {
+                    new LayoutKey[] {
+                        getKey(kcm, 41),
+                        getKey(kcm, 2),
+                        getKey(kcm, 3),
+                        getKey(kcm, 4),
+                        getKey(kcm, 5),
+                        getKey(kcm, 6),
+                        getKey(kcm, 7),
+                        getKey(kcm, 8),
+                        getKey(kcm, 9),
+                        getKey(kcm, 10),
+                        getKey(kcm, 11),
+                        getKey(kcm, 12),
+                        getKey(kcm, 13),
+                        getKey(67, 1.5f)
+                    },
+                    new LayoutKey[] {
+                        getKey(61, 1.5f),
+                        getKey(kcm, 16),
+                        getKey(kcm, 17),
+                        getKey(kcm, 18),
+                        getKey(kcm, 19),
+                        getKey(kcm, 20),
+                        getKey(kcm, 21),
+                        getKey(kcm, 22),
+                        getKey(kcm, 23),
+                        getKey(kcm, 24),
+                        getKey(kcm, 25),
+                        getKey(kcm, 26),
+                        getKey(kcm, 27),
+                        getKey(kcm, 43)
+                    },
+                    new LayoutKey[] {
+                        getKey(115, 1.75f),
+                        getKey(kcm, 30),
+                        getKey(kcm, 31),
+                        getKey(kcm, 32),
+                        getKey(kcm, 33),
+                        getKey(kcm, 34),
+                        getKey(kcm, 35),
+                        getKey(kcm, 36),
+                        getKey(kcm, 37),
+                        getKey(kcm, 38),
+                        getKey(kcm, 39),
+                        getKey(kcm, 40),
+                        getKey(66, 1.75f)
+                    },
+                    new LayoutKey[] {
+                        getKey(59, 2.5f),
+                        getKey(kcm, 44),
+                        getKey(kcm, 45),
+                        getKey(kcm, 46),
+                        getKey(kcm, 47),
+                        getKey(kcm, 48),
+                        getKey(kcm, 49),
+                        getKey(kcm, 50),
+                        getKey(kcm, 51),
+                        getKey(kcm, 52),
+                        getKey(kcm, 53),
+                        getKey(60, 2.5f)
+                    },
+                    new LayoutKey[] {
+                        getKey(113, 1.0f),
+                        getKey(119, 1.0f),
+                        getKey(117, 1.0f),
+                        getKey(57, 1.0f),
+                        getKey(62, 6.5f),
+                        getKey(58, 1.0f),
+                        getKey(118, 1.0f),
+                        getKey(82, 1.0f),
+                        getKey(114, 1.0f)
+                    }
+                };
     }
 
     private void createIsoLayout(KeyCharacterMap kcm) {
-        this.mKeys = new LayoutKey[][]{new LayoutKey[]{getKey(kcm, 41), getKey(kcm, 2), getKey(kcm, 3), getKey(kcm, 4), getKey(kcm, 5), getKey(kcm, 6), getKey(kcm, 7), getKey(kcm, 8), getKey(kcm, 9), getKey(kcm, 10), getKey(kcm, 11), getKey(kcm, 12), getKey(kcm, 13), getKey(67, 1.5f)}, new LayoutKey[]{getKey(61, 1.15f), getKey(kcm, 16), getKey(kcm, 17), getKey(kcm, 18), getKey(kcm, 19), getKey(kcm, 20), getKey(kcm, 21), getKey(kcm, 22), getKey(kcm, 23), getKey(kcm, 24), getKey(kcm, 25), getKey(kcm, 26), getKey(kcm, 27), getKey(66, 1.35f)}, new LayoutKey[]{getKey(61, 1.5f), getKey(kcm, 30), getKey(kcm, 31), getKey(kcm, 32), getKey(kcm, 33), getKey(kcm, 34), getKey(kcm, 35), getKey(kcm, 36), getKey(kcm, 37), getKey(kcm, 38), getKey(kcm, 39), getKey(kcm, 40), getKey(kcm, 43), getKey(66, 1.0f)}, new LayoutKey[]{getKey(59, 1.15f), getKey(kcm, 86), getKey(kcm, 44), getKey(kcm, 45), getKey(kcm, 46), getKey(kcm, 47), getKey(kcm, 48), getKey(kcm, 49), getKey(kcm, 50), getKey(kcm, 51), getKey(kcm, 52), getKey(kcm, 53), getKey(60, 2.35f)}, new LayoutKey[]{getKey(113, 1.0f), getKey(119, 1.0f), getKey(117, 1.0f), getKey(57, 1.0f), getKey(62, 6.5f), getKey(58, 1.0f), getKey(118, 1.0f), getKey(82, 1.0f), getKey(114, 1.0f)}};
+        this.mKeys =
+                new LayoutKey[][] {
+                    new LayoutKey[] {
+                        getKey(kcm, 41),
+                        getKey(kcm, 2),
+                        getKey(kcm, 3),
+                        getKey(kcm, 4),
+                        getKey(kcm, 5),
+                        getKey(kcm, 6),
+                        getKey(kcm, 7),
+                        getKey(kcm, 8),
+                        getKey(kcm, 9),
+                        getKey(kcm, 10),
+                        getKey(kcm, 11),
+                        getKey(kcm, 12),
+                        getKey(kcm, 13),
+                        getKey(67, 1.5f)
+                    },
+                    new LayoutKey[] {
+                        getKey(61, 1.15f),
+                        getKey(kcm, 16),
+                        getKey(kcm, 17),
+                        getKey(kcm, 18),
+                        getKey(kcm, 19),
+                        getKey(kcm, 20),
+                        getKey(kcm, 21),
+                        getKey(kcm, 22),
+                        getKey(kcm, 23),
+                        getKey(kcm, 24),
+                        getKey(kcm, 25),
+                        getKey(kcm, 26),
+                        getKey(kcm, 27),
+                        getKey(66, 1.35f)
+                    },
+                    new LayoutKey[] {
+                        getKey(61, 1.5f),
+                        getKey(kcm, 30),
+                        getKey(kcm, 31),
+                        getKey(kcm, 32),
+                        getKey(kcm, 33),
+                        getKey(kcm, 34),
+                        getKey(kcm, 35),
+                        getKey(kcm, 36),
+                        getKey(kcm, 37),
+                        getKey(kcm, 38),
+                        getKey(kcm, 39),
+                        getKey(kcm, 40),
+                        getKey(kcm, 43),
+                        getKey(66, 1.0f)
+                    },
+                    new LayoutKey[] {
+                        getKey(59, 1.15f),
+                        getKey(kcm, 86),
+                        getKey(kcm, 44),
+                        getKey(kcm, 45),
+                        getKey(kcm, 46),
+                        getKey(kcm, 47),
+                        getKey(kcm, 48),
+                        getKey(kcm, 49),
+                        getKey(kcm, 50),
+                        getKey(kcm, 51),
+                        getKey(kcm, 52),
+                        getKey(kcm, 53),
+                        getKey(60, 2.35f)
+                    },
+                    new LayoutKey[] {
+                        getKey(113, 1.0f),
+                        getKey(119, 1.0f),
+                        getKey(117, 1.0f),
+                        getKey(57, 1.0f),
+                        getKey(62, 6.5f),
+                        getKey(58, 1.0f),
+                        getKey(118, 1.0f),
+                        getKey(82, 1.0f),
+                        getKey(114, 1.0f)
+                    }
+                };
         this.mEnterKey = new EnterKey(1, 13, 1.35f, 1.0f);
     }
 
     private void createJisLayout(KeyCharacterMap kcm) {
-        this.mKeys = new LayoutKey[][]{new LayoutKey[]{getKey(kcm, 41), getKey(kcm, 2), getKey(kcm, 3), getKey(kcm, 4), getKey(kcm, 5), getKey(kcm, 6), getKey(kcm, 7), getKey(kcm, 8), getKey(kcm, 9), getKey(kcm, 10), getKey(kcm, 11), getKey(kcm, 12, 0.8f), getKey(kcm, 13, 0.8f), getKey(kcm, 124, 0.8f), getKey(67, 1.1f)}, new LayoutKey[]{getKey(61, 1.15f), getKey(kcm, 16), getKey(kcm, 17), getKey(kcm, 18), getKey(kcm, 19), getKey(kcm, 20), getKey(kcm, 21), getKey(kcm, 22), getKey(kcm, 23), getKey(kcm, 24), getKey(kcm, 25), getKey(kcm, 26), getKey(kcm, 27), getKey(66, 1.35f)}, new LayoutKey[]{getKey(61, 1.5f), getKey(kcm, 30), getKey(kcm, 31), getKey(kcm, 32), getKey(kcm, 33), getKey(kcm, 34), getKey(kcm, 35), getKey(kcm, 36), getKey(kcm, 37), getKey(kcm, 38), getKey(kcm, 39), getKey(kcm, 40), getKey(kcm, 86), getKey(66, 1.0f)}, new LayoutKey[]{getKey(59, 1.15f), getKey(kcm, 44), getKey(kcm, 45), getKey(kcm, 46), getKey(kcm, 47), getKey(kcm, 48), getKey(kcm, 49), getKey(kcm, 50), getKey(kcm, 51), getKey(kcm, 52), getKey(kcm, 53), getKey(kcm, 89), getKey(60, 2.35f)}, new LayoutKey[]{getKey(113, 1.0f), getKey(119, 1.0f), getKey(117, 1.0f), getKey(57, 1.0f), getKey(0, 1.0f), getKey(62, 3.5f), getKey(0, 1.0f), getKey(0, 1.0f), getKey(58, 1.0f), getKey(118, 1.0f), getKey(82, 1.0f), getKey(114, 1.0f)}};
+        this.mKeys =
+                new LayoutKey[][] {
+                    new LayoutKey[] {
+                        getKey(kcm, 41),
+                        getKey(kcm, 2),
+                        getKey(kcm, 3),
+                        getKey(kcm, 4),
+                        getKey(kcm, 5),
+                        getKey(kcm, 6),
+                        getKey(kcm, 7),
+                        getKey(kcm, 8),
+                        getKey(kcm, 9),
+                        getKey(kcm, 10),
+                        getKey(kcm, 11),
+                        getKey(kcm, 12, 0.8f),
+                        getKey(kcm, 13, 0.8f),
+                        getKey(kcm, 124, 0.8f),
+                        getKey(67, 1.1f)
+                    },
+                    new LayoutKey[] {
+                        getKey(61, 1.15f),
+                        getKey(kcm, 16),
+                        getKey(kcm, 17),
+                        getKey(kcm, 18),
+                        getKey(kcm, 19),
+                        getKey(kcm, 20),
+                        getKey(kcm, 21),
+                        getKey(kcm, 22),
+                        getKey(kcm, 23),
+                        getKey(kcm, 24),
+                        getKey(kcm, 25),
+                        getKey(kcm, 26),
+                        getKey(kcm, 27),
+                        getKey(66, 1.35f)
+                    },
+                    new LayoutKey[] {
+                        getKey(61, 1.5f),
+                        getKey(kcm, 30),
+                        getKey(kcm, 31),
+                        getKey(kcm, 32),
+                        getKey(kcm, 33),
+                        getKey(kcm, 34),
+                        getKey(kcm, 35),
+                        getKey(kcm, 36),
+                        getKey(kcm, 37),
+                        getKey(kcm, 38),
+                        getKey(kcm, 39),
+                        getKey(kcm, 40),
+                        getKey(kcm, 86),
+                        getKey(66, 1.0f)
+                    },
+                    new LayoutKey[] {
+                        getKey(59, 1.15f),
+                        getKey(kcm, 44),
+                        getKey(kcm, 45),
+                        getKey(kcm, 46),
+                        getKey(kcm, 47),
+                        getKey(kcm, 48),
+                        getKey(kcm, 49),
+                        getKey(kcm, 50),
+                        getKey(kcm, 51),
+                        getKey(kcm, 52),
+                        getKey(kcm, 53),
+                        getKey(kcm, 89),
+                        getKey(60, 2.35f)
+                    },
+                    new LayoutKey[] {
+                        getKey(113, 1.0f),
+                        getKey(119, 1.0f),
+                        getKey(117, 1.0f),
+                        getKey(57, 1.0f),
+                        getKey(0, 1.0f),
+                        getKey(62, 3.5f),
+                        getKey(0, 1.0f),
+                        getKey(0, 1.0f),
+                        getKey(58, 1.0f),
+                        getKey(118, 1.0f),
+                        getKey(82, 1.0f),
+                        getKey(114, 1.0f)
+                    }
+                };
         this.mEnterKey = new EnterKey(1, 13, 1.35f, 1.0f);
     }
 
     private static LayoutKey getKey(KeyCharacterMap kcm, int scanCode, float keyWeight) {
-        int keyCode = kcm.getMappedKeyOrDefault(scanCode, DEFAULT_KEYCODE_FOR_SCANCODE.get(scanCode, 0));
+        int keyCode =
+                kcm.getMappedKeyOrDefault(scanCode, DEFAULT_KEYCODE_FOR_SCANCODE.get(scanCode, 0));
         return new LayoutKey(keyCode, scanCode, keyWeight, new KeyGlyph(kcm, keyCode));
     }
 
@@ -169,7 +401,8 @@ final class PhysicalKeyLayout {
     /* JADX INFO: Access modifiers changed from: private */
     public static String getKeyText(KeyCharacterMap kcm, int keyCode, int modifierState) {
         int utf8Char;
-        if (isSpecialKey(keyCode) || (utf8Char = kcm.get(keyCode, modifierState) & Integer.MAX_VALUE) == 0) {
+        if (isSpecialKey(keyCode)
+                || (utf8Char = kcm.get(keyCode, modifierState) & Integer.MAX_VALUE) == 0) {
             return "";
         }
         if (Character.isValidCodePoint(utf8Char)) {
@@ -236,7 +469,20 @@ final class PhysicalKeyLayout {
 
         @Override // java.lang.Record
         public final boolean equals(Object o) {
-            return (boolean) ObjectMethods.bootstrap(MethodHandles.lookup(), "equals", MethodType.methodType(Boolean.TYPE, LayoutKey.class, Object.class), LayoutKey.class, "keyCode;scanCode;keyWeight;glyph", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyCode:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->scanCode:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyWeight:F", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->glyph:Landroid/hardware/input/PhysicalKeyLayout$KeyGlyph;").dynamicInvoker().invoke(this, o) /* invoke-custom */;
+            return (boolean)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "equals",
+                                    MethodType.methodType(
+                                            Boolean.TYPE, LayoutKey.class, Object.class),
+                                    LayoutKey.class,
+                                    "keyCode;scanCode;keyWeight;glyph",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyCode:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->scanCode:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyWeight:F",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->glyph:Landroid/hardware/input/PhysicalKeyLayout$KeyGlyph;")
+                            .dynamicInvoker()
+                            .invoke(this, o) /* invoke-custom */;
         }
 
         public KeyGlyph glyph() {
@@ -245,7 +491,19 @@ final class PhysicalKeyLayout {
 
         @Override // java.lang.Record
         public final int hashCode() {
-            return (int) ObjectMethods.bootstrap(MethodHandles.lookup(), "hashCode", MethodType.methodType(Integer.TYPE, LayoutKey.class), LayoutKey.class, "keyCode;scanCode;keyWeight;glyph", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyCode:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->scanCode:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyWeight:F", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->glyph:Landroid/hardware/input/PhysicalKeyLayout$KeyGlyph;").dynamicInvoker().invoke(this) /* invoke-custom */;
+            return (int)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "hashCode",
+                                    MethodType.methodType(Integer.TYPE, LayoutKey.class),
+                                    LayoutKey.class,
+                                    "keyCode;scanCode;keyWeight;glyph",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyCode:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->scanCode:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyWeight:F",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->glyph:Landroid/hardware/input/PhysicalKeyLayout$KeyGlyph;")
+                            .dynamicInvoker()
+                            .invoke(this) /* invoke-custom */;
         }
 
         public int keyCode() {
@@ -262,7 +520,19 @@ final class PhysicalKeyLayout {
 
         @Override // java.lang.Record
         public final String toString() {
-            return (String) ObjectMethods.bootstrap(MethodHandles.lookup(), "toString", MethodType.methodType(String.class, LayoutKey.class), LayoutKey.class, "keyCode;scanCode;keyWeight;glyph", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyCode:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->scanCode:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyWeight:F", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->glyph:Landroid/hardware/input/PhysicalKeyLayout$KeyGlyph;").dynamicInvoker().invoke(this) /* invoke-custom */;
+            return (String)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "toString",
+                                    MethodType.methodType(String.class, LayoutKey.class),
+                                    LayoutKey.class,
+                                    "keyCode;scanCode;keyWeight;glyph",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyCode:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->scanCode:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->keyWeight:F",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$LayoutKey;->glyph:Landroid/hardware/input/PhysicalKeyLayout$KeyGlyph;")
+                            .dynamicInvoker()
+                            .invoke(this) /* invoke-custom */;
         }
     }
 
@@ -289,12 +559,37 @@ final class PhysicalKeyLayout {
 
         @Override // java.lang.Record
         public final boolean equals(Object o) {
-            return (boolean) ObjectMethods.bootstrap(MethodHandles.lookup(), "equals", MethodType.methodType(Boolean.TYPE, EnterKey.class, Object.class), EnterKey.class, "row;column;topKeyWeight;bottomKeyWeight", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->row:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->column:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->topKeyWeight:F", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->bottomKeyWeight:F").dynamicInvoker().invoke(this, o) /* invoke-custom */;
+            return (boolean)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "equals",
+                                    MethodType.methodType(
+                                            Boolean.TYPE, EnterKey.class, Object.class),
+                                    EnterKey.class,
+                                    "row;column;topKeyWeight;bottomKeyWeight",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->row:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->column:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->topKeyWeight:F",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->bottomKeyWeight:F")
+                            .dynamicInvoker()
+                            .invoke(this, o) /* invoke-custom */;
         }
 
         @Override // java.lang.Record
         public final int hashCode() {
-            return (int) ObjectMethods.bootstrap(MethodHandles.lookup(), "hashCode", MethodType.methodType(Integer.TYPE, EnterKey.class), EnterKey.class, "row;column;topKeyWeight;bottomKeyWeight", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->row:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->column:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->topKeyWeight:F", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->bottomKeyWeight:F").dynamicInvoker().invoke(this) /* invoke-custom */;
+            return (int)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "hashCode",
+                                    MethodType.methodType(Integer.TYPE, EnterKey.class),
+                                    EnterKey.class,
+                                    "row;column;topKeyWeight;bottomKeyWeight",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->row:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->column:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->topKeyWeight:F",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->bottomKeyWeight:F")
+                            .dynamicInvoker()
+                            .invoke(this) /* invoke-custom */;
         }
 
         public int row() {
@@ -303,7 +598,19 @@ final class PhysicalKeyLayout {
 
         @Override // java.lang.Record
         public final String toString() {
-            return (String) ObjectMethods.bootstrap(MethodHandles.lookup(), "toString", MethodType.methodType(String.class, EnterKey.class), EnterKey.class, "row;column;topKeyWeight;bottomKeyWeight", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->row:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->column:I", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->topKeyWeight:F", "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->bottomKeyWeight:F").dynamicInvoker().invoke(this) /* invoke-custom */;
+            return (String)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "toString",
+                                    MethodType.methodType(String.class, EnterKey.class),
+                                    EnterKey.class,
+                                    "row;column;topKeyWeight;bottomKeyWeight",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->row:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->column:I",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->topKeyWeight:F",
+                                    "FIELD:Landroid/hardware/input/PhysicalKeyLayout$EnterKey;->bottomKeyWeight:F")
+                            .dynamicInvoker()
+                            .invoke(this) /* invoke-custom */;
         }
 
         public float topKeyWeight() {
@@ -345,15 +652,27 @@ final class PhysicalKeyLayout {
         }
 
         public boolean hasValidShiftText() {
-            return (TextUtils.isEmpty(this.mShiftText) || TextUtils.equals(this.mBaseText, this.mShiftText)) ? false : true;
+            return (TextUtils.isEmpty(this.mShiftText)
+                            || TextUtils.equals(this.mBaseText, this.mShiftText))
+                    ? false
+                    : true;
         }
 
         public boolean hasValidAltGrText() {
-            return (TextUtils.isEmpty(this.mAltGrText) || TextUtils.equals(this.mBaseText, this.mAltGrText) || TextUtils.equals(this.mShiftText, this.mAltGrText)) ? false : true;
+            return (TextUtils.isEmpty(this.mAltGrText)
+                            || TextUtils.equals(this.mBaseText, this.mAltGrText)
+                            || TextUtils.equals(this.mShiftText, this.mAltGrText))
+                    ? false
+                    : true;
         }
 
         public boolean hasValidAltGrShiftText() {
-            return (TextUtils.isEmpty(this.mAltGrShiftText) || TextUtils.equals(this.mBaseText, this.mAltGrShiftText) || TextUtils.equals(this.mAltGrText, this.mAltGrShiftText) || TextUtils.equals(this.mShiftText, this.mAltGrShiftText)) ? false : true;
+            return (TextUtils.isEmpty(this.mAltGrShiftText)
+                            || TextUtils.equals(this.mBaseText, this.mAltGrShiftText)
+                            || TextUtils.equals(this.mAltGrText, this.mAltGrShiftText)
+                            || TextUtils.equals(this.mShiftText, this.mAltGrShiftText))
+                    ? false
+                    : true;
         }
     }
 }

@@ -3,27 +3,29 @@ package android.media.soundtrigger;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class Phrase implements Parcelable {
-    public static final Parcelable.Creator<Phrase> CREATOR = new Parcelable.Creator<Phrase>() { // from class: android.media.soundtrigger.Phrase.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Phrase createFromParcel(Parcel _aidl_source) {
-            Phrase _aidl_out = new Phrase();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Phrase> CREATOR =
+            new Parcelable.Creator<Phrase>() { // from class: android.media.soundtrigger.Phrase.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Phrase createFromParcel(Parcel _aidl_source) {
+                    Phrase _aidl_out = new Phrase();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Phrase[] newArray(int _aidl_size) {
-            return new Phrase[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Phrase[] newArray(int _aidl_size) {
+                    return new Phrase[_aidl_size];
+                }
+            };
     public String locale;
     public String text;
     public int[] users;
@@ -128,7 +130,13 @@ public class Phrase implements Parcelable {
             return false;
         }
         Phrase that = (Phrase) other;
-        if (Objects.deepEquals(Integer.valueOf(this.id), Integer.valueOf(that.id)) && Objects.deepEquals(Integer.valueOf(this.recognitionModes), Integer.valueOf(that.recognitionModes)) && Objects.deepEquals(this.users, that.users) && Objects.deepEquals(this.locale, that.locale) && Objects.deepEquals(this.text, that.text)) {
+        if (Objects.deepEquals(Integer.valueOf(this.id), Integer.valueOf(that.id))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.recognitionModes),
+                        Integer.valueOf(that.recognitionModes))
+                && Objects.deepEquals(this.users, that.users)
+                && Objects.deepEquals(this.locale, that.locale)
+                && Objects.deepEquals(this.text, that.text)) {
             return true;
         }
         return false;
@@ -136,7 +144,14 @@ public class Phrase implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.id), Integer.valueOf(this.recognitionModes), this.users, this.locale, this.text).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.id),
+                                Integer.valueOf(this.recognitionModes),
+                                this.users,
+                                this.locale,
+                                this.text)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

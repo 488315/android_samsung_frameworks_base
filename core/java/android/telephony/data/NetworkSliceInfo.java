@@ -3,25 +3,28 @@ package android.telephony.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class NetworkSliceInfo implements Parcelable {
-    public static final Parcelable.Creator<NetworkSliceInfo> CREATOR = new Parcelable.Creator<NetworkSliceInfo>() { // from class: android.telephony.data.NetworkSliceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkSliceInfo createFromParcel(Parcel source) {
-            return new NetworkSliceInfo(source);
-        }
+    public static final Parcelable.Creator<NetworkSliceInfo> CREATOR =
+            new Parcelable.Creator<
+                    NetworkSliceInfo>() { // from class: android.telephony.data.NetworkSliceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkSliceInfo createFromParcel(Parcel source) {
+                    return new NetworkSliceInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkSliceInfo[] newArray(int size) {
-            return new NetworkSliceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkSliceInfo[] newArray(int size) {
+                    return new NetworkSliceInfo[size];
+                }
+            };
     public static final int MAX_SLICE_DIFFERENTIATOR = 16777214;
     public static final int MAX_SLICE_STATUS = 5;
     public static final int MIN_SLICE_DIFFERENTIATOR = -1;
@@ -44,14 +47,17 @@ public final class NetworkSliceInfo implements Parcelable {
     private final int mStatus;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SliceServiceType {
-    }
+    public @interface SliceServiceType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SliceStatus {
-    }
+    public @interface SliceStatus {}
 
-    private NetworkSliceInfo(int sliceServiceType, int sliceDifferentiator, int mappedHplmnSliceServiceType, int mappedHplmnSliceDifferentiator, int status) {
+    private NetworkSliceInfo(
+            int sliceServiceType,
+            int sliceDifferentiator,
+            int mappedHplmnSliceServiceType,
+            int mappedHplmnSliceDifferentiator,
+            int status) {
         this.mSliceServiceType = sliceServiceType;
         this.mSliceDifferentiator = sliceDifferentiator;
         this.mMappedHplmnSliceDifferentiator = mappedHplmnSliceDifferentiator;
@@ -102,7 +108,17 @@ public final class NetworkSliceInfo implements Parcelable {
     }
 
     public String toString() {
-        return "SliceInfo{mSliceServiceType=" + sliceServiceTypeToString(this.mSliceServiceType) + ", mSliceDifferentiator=" + this.mSliceDifferentiator + ", mMappedHplmnSliceServiceType=" + sliceServiceTypeToString(this.mMappedHplmnSliceServiceType) + ", mMappedHplmnSliceDifferentiator=" + this.mMappedHplmnSliceDifferentiator + ", mStatus=" + sliceStatusToString(this.mStatus) + '}';
+        return "SliceInfo{mSliceServiceType="
+                + sliceServiceTypeToString(this.mSliceServiceType)
+                + ", mSliceDifferentiator="
+                + this.mSliceDifferentiator
+                + ", mMappedHplmnSliceServiceType="
+                + sliceServiceTypeToString(this.mMappedHplmnSliceServiceType)
+                + ", mMappedHplmnSliceDifferentiator="
+                + this.mMappedHplmnSliceDifferentiator
+                + ", mStatus="
+                + sliceStatusToString(this.mStatus)
+                + '}';
     }
 
     private static String sliceServiceTypeToString(int sliceServiceType) {
@@ -147,14 +163,23 @@ public final class NetworkSliceInfo implements Parcelable {
             return false;
         }
         NetworkSliceInfo sliceInfo = (NetworkSliceInfo) o;
-        if (this.mSliceServiceType == sliceInfo.mSliceServiceType && this.mSliceDifferentiator == sliceInfo.mSliceDifferentiator && this.mMappedHplmnSliceServiceType == sliceInfo.mMappedHplmnSliceServiceType && this.mMappedHplmnSliceDifferentiator == sliceInfo.mMappedHplmnSliceDifferentiator && this.mStatus == sliceInfo.mStatus) {
+        if (this.mSliceServiceType == sliceInfo.mSliceServiceType
+                && this.mSliceDifferentiator == sliceInfo.mSliceDifferentiator
+                && this.mMappedHplmnSliceServiceType == sliceInfo.mMappedHplmnSliceServiceType
+                && this.mMappedHplmnSliceDifferentiator == sliceInfo.mMappedHplmnSliceDifferentiator
+                && this.mStatus == sliceInfo.mStatus) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mSliceServiceType), Integer.valueOf(this.mSliceDifferentiator), Integer.valueOf(this.mMappedHplmnSliceServiceType), Integer.valueOf(this.mMappedHplmnSliceDifferentiator), Integer.valueOf(this.mStatus));
+        return Objects.hash(
+                Integer.valueOf(this.mSliceServiceType),
+                Integer.valueOf(this.mSliceDifferentiator),
+                Integer.valueOf(this.mMappedHplmnSliceServiceType),
+                Integer.valueOf(this.mMappedHplmnSliceDifferentiator),
+                Integer.valueOf(this.mStatus));
     }
 
     public static final class Builder {
@@ -199,7 +224,12 @@ public final class NetworkSliceInfo implements Parcelable {
         }
 
         public NetworkSliceInfo build() {
-            return new NetworkSliceInfo(this.mSliceServiceType, this.mSliceDifferentiator, this.mMappedHplmnSliceServiceType, this.mMappedHplmnSliceDifferentiator, this.mStatus);
+            return new NetworkSliceInfo(
+                    this.mSliceServiceType,
+                    this.mSliceDifferentiator,
+                    this.mMappedHplmnSliceServiceType,
+                    this.mMappedHplmnSliceDifferentiator,
+                    this.mStatus);
         }
     }
 }

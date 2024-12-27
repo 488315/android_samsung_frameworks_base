@@ -1,7 +1,9 @@
 package android.credentials.selection;
 
 import android.annotation.SystemApi;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,12 @@ public final class GetCredentialProviderInfo {
     private final String mProviderName;
     private final Entry mRemoteEntry;
 
-    GetCredentialProviderInfo(String providerName, List<Entry> credentialEntries, List<Entry> actionChips, List<AuthenticationEntry> authenticationEntries, Entry remoteEntry) {
+    GetCredentialProviderInfo(
+            String providerName,
+            List<Entry> credentialEntries,
+            List<Entry> actionChips,
+            List<AuthenticationEntry> authenticationEntries,
+            Entry remoteEntry) {
         this.mProviderName = (String) Preconditions.checkStringNotEmpty(providerName);
         this.mCredentialEntries = new ArrayList(credentialEntries);
         this.mActionChips = new ArrayList(actionChips);
@@ -75,7 +82,12 @@ public final class GetCredentialProviderInfo {
         }
 
         public GetCredentialProviderInfo build() {
-            return new GetCredentialProviderInfo(this.mProviderName, this.mCredentialEntries, this.mActionChips, this.mAuthenticationEntries, this.mRemoteEntry);
+            return new GetCredentialProviderInfo(
+                    this.mProviderName,
+                    this.mCredentialEntries,
+                    this.mActionChips,
+                    this.mAuthenticationEntries,
+                    this.mRemoteEntry);
         }
     }
 }

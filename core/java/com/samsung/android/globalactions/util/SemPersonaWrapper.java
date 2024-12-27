@@ -3,6 +3,7 @@ package com.samsung.android.globalactions.util;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
+
 import com.samsung.android.knox.SemPersonaManager;
 
 /* loaded from: classes6.dex */

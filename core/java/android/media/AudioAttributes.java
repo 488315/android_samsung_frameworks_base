@@ -11,7 +11,9 @@ import android.util.IntArray;
 import android.util.Log;
 import android.util.SparseIntArray;
 import android.util.proto.ProtoOutputStream;
+
 import com.samsung.android.media.AudioTag;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -36,8 +38,7 @@ public final class AudioAttributes implements Parcelable {
     public static final int CONTENT_TYPE_SONIFICATION = 4;
     public static final int CONTENT_TYPE_SPEECH = 1;
 
-    @SystemApi
-    public static final int CONTENT_TYPE_ULTRASOUND = 1997;
+    @SystemApi public static final int CONTENT_TYPE_ULTRASOUND = 1997;
     public static final int CONTENT_TYPE_UNKNOWN = 0;
     public static final Parcelable.Creator<AudioAttributes> CREATOR;
     private static final int FLAG_ALL = 129023;
@@ -45,22 +46,18 @@ public final class AudioAttributes implements Parcelable {
     private static final int FLAG_ALL_PUBLIC = 273;
     public static final int FLAG_AUDIBILITY_ENFORCED = 1;
 
-    @SystemApi
-    public static final int FLAG_BEACON = 8;
+    @SystemApi public static final int FLAG_BEACON = 8;
 
-    @SystemApi
-    public static final int FLAG_BYPASS_INTERRUPTION_POLICY = 64;
+    @SystemApi public static final int FLAG_BYPASS_INTERRUPTION_POLICY = 64;
 
-    @SystemApi
-    public static final int FLAG_BYPASS_MUTE = 128;
+    @SystemApi public static final int FLAG_BYPASS_MUTE = 128;
     public static final int FLAG_CALL_REDIRECTION = 65536;
     public static final int FLAG_CAPTURE_PRIVATE = 8192;
     public static final int FLAG_CONTENT_SPATIALIZED = 16384;
     public static final int FLAG_DEEP_BUFFER = 512;
     public static final int FLAG_HW_AV_SYNC = 16;
 
-    @SystemApi
-    public static final int FLAG_HW_HOTWORD = 32;
+    @SystemApi public static final int FLAG_HW_HOTWORD = 32;
     public static final int FLAG_LOW_LATENCY = 256;
     public static final int FLAG_MUTE_HAPTIC = 2048;
     public static final int FLAG_NEVER_SPATIALIZE = 32768;
@@ -83,40 +80,32 @@ public final class AudioAttributes implements Parcelable {
     private static final String TAG = "AudioAttributes";
     public static final int USAGE_ALARM = 4;
 
-    @SystemApi
-    public static final int USAGE_ANNOUNCEMENT = 1003;
+    @SystemApi public static final int USAGE_ANNOUNCEMENT = 1003;
     public static final int USAGE_ASSISTANCE_ACCESSIBILITY = 11;
     public static final int USAGE_ASSISTANCE_NAVIGATION_GUIDANCE = 12;
     public static final int USAGE_ASSISTANCE_SONIFICATION = 13;
     public static final int USAGE_ASSISTANT = 16;
 
-    @SystemApi
-    public static final int USAGE_CALL_ASSISTANT = 17;
+    @SystemApi public static final int USAGE_CALL_ASSISTANT = 17;
 
-    @SystemApi
-    public static final int USAGE_EMERGENCY = 1000;
+    @SystemApi public static final int USAGE_EMERGENCY = 1000;
     public static final int USAGE_GAME = 14;
     private static final int USAGE_INVALID = -1;
     public static final int USAGE_MEDIA = 1;
     public static final int USAGE_NOTIFICATION = 5;
 
-    @Deprecated
-    public static final int USAGE_NOTIFICATION_COMMUNICATION_DELAYED = 9;
+    @Deprecated public static final int USAGE_NOTIFICATION_COMMUNICATION_DELAYED = 9;
 
-    @Deprecated
-    public static final int USAGE_NOTIFICATION_COMMUNICATION_INSTANT = 8;
+    @Deprecated public static final int USAGE_NOTIFICATION_COMMUNICATION_INSTANT = 8;
 
-    @Deprecated
-    public static final int USAGE_NOTIFICATION_COMMUNICATION_REQUEST = 7;
+    @Deprecated public static final int USAGE_NOTIFICATION_COMMUNICATION_REQUEST = 7;
     public static final int USAGE_NOTIFICATION_EVENT = 10;
     public static final int USAGE_NOTIFICATION_RINGTONE = 6;
 
-    @SystemApi
-    public static final int USAGE_SAFETY = 1001;
+    @SystemApi public static final int USAGE_SAFETY = 1001;
     public static final int USAGE_UNKNOWN = 0;
 
-    @SystemApi
-    public static final int USAGE_VEHICLE_STATUS = 1002;
+    @SystemApi public static final int USAGE_VEHICLE_STATUS = 1002;
     public static final int USAGE_VIRTUAL_SOURCE = 15;
     public static final int USAGE_VOICE_COMMUNICATION = 2;
     public static final int USAGE_VOICE_COMMUNICATION_SIGNALLING = 3;
@@ -130,32 +119,25 @@ public final class AudioAttributes implements Parcelable {
     private int mUsage;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AttrInternalContentType {
-    }
+    public @interface AttrInternalContentType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AttributeContentType {
-    }
+    public @interface AttributeContentType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AttributeSdkUsage {
-    }
+    public @interface AttributeSdkUsage {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AttributeSystemUsage {
-    }
+    public @interface AttributeSystemUsage {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AttributeUsage {
-    }
+    public @interface AttributeUsage {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CapturePolicy {
-    }
+    public @interface CapturePolicy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SpatializationBehavior {
-    }
+    public @interface SpatializationBehavior {}
 
     static {
         SUPPRESSIBLE_USAGES.put(5, 1);
@@ -175,21 +157,24 @@ public final class AudioAttributes implements Parcelable {
         SUPPRESSIBLE_USAGES.put(17, 3);
         SUPPRESSIBLE_USAGES.put(0, 5);
         SUPPRESSIBLE_USAGES.put(13, 6);
-        SDK_USAGES = IntArray.wrap(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16});
-        CONTENT_TYPES = IntArray.wrap(new int[]{0, 1, 2, 3, 4});
-        CREATOR = new Parcelable.Creator<AudioAttributes>() { // from class: android.media.AudioAttributes.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AudioAttributes createFromParcel(Parcel p) {
-                return new AudioAttributes(p);
-            }
+        SDK_USAGES =
+                IntArray.wrap(new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16});
+        CONTENT_TYPES = IntArray.wrap(new int[] {0, 1, 2, 3, 4});
+        CREATOR =
+                new Parcelable.Creator<
+                        AudioAttributes>() { // from class: android.media.AudioAttributes.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AudioAttributes createFromParcel(Parcel p) {
+                        return new AudioAttributes(p);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AudioAttributes[] newArray(int size) {
-                return new AudioAttributes[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AudioAttributes[] newArray(int size) {
+                        return new AudioAttributes[size];
+                    }
+                };
         sXsdStringToUsage = new HashMap();
         sXsdStringToUsage.put(AudioUsage.AUDIO_USAGE_UNKNOWN.toString(), 0);
         sXsdStringToUsage.put(AudioUsage.AUDIO_USAGE_UNKNOWN.toString(), 0);
@@ -356,7 +341,8 @@ public final class AudioAttributes implements Parcelable {
             } else if (this.mSystemUsage == -1) {
                 aa.mUsage = this.mUsage;
             } else {
-                throw new IllegalArgumentException("Cannot set both usage and system usage on same builder");
+                throw new IllegalArgumentException(
+                        "Cannot set both usage and system usage on same builder");
             }
             switch (aa.mUsage) {
                 case 7:
@@ -388,7 +374,8 @@ public final class AudioAttributes implements Parcelable {
                 aa.mFlags &= -8193;
             }
             aa.mTags = (HashSet) this.mTags.clone();
-            aa.mFormattedTags = TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, this.mTags);
+            aa.mFormattedTags =
+                    TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, this.mTags);
             if (this.mBundle != null) {
                 aa.mBundle = new Bundle(this.mBundle);
             }
@@ -525,7 +512,9 @@ public final class AudioAttributes implements Parcelable {
 
         public Builder setLegacyStreamType(int streamType) {
             if (streamType == 10) {
-                throw new IllegalArgumentException("STREAM_ACCESSIBILITY is not a legacy stream type that was used for audio playback");
+                throw new IllegalArgumentException(
+                        "STREAM_ACCESSIBILITY is not a legacy stream type that was used for audio"
+                                + " playback");
             }
             setInternalLegacyStreamType(streamType);
             return this;
@@ -536,7 +525,13 @@ public final class AudioAttributes implements Parcelable {
             AudioAttributes attributes;
             this.mContentType = 0;
             this.mUsage = 0;
-            if (android.media.audiopolicy.AudioProductStrategy.getAudioProductStrategies().size() > 0 && (attributes = android.media.audiopolicy.AudioProductStrategy.getAudioAttributesForStrategyWithLegacyStreamType(streamType)) != null) {
+            if (android.media.audiopolicy.AudioProductStrategy.getAudioProductStrategies().size()
+                            > 0
+                    && (attributes =
+                                    android.media.audiopolicy.AudioProductStrategy
+                                            .getAudioAttributesForStrategyWithLegacyStreamType(
+                                                    streamType))
+                            != null) {
                 this.mUsage = attributes.mUsage;
                 this.mFlags = attributes.getAllFlags();
                 this.mMuteHapticChannels = attributes.areHapticChannelsMuted();
@@ -586,7 +581,9 @@ public final class AudioAttributes implements Parcelable {
                     this.mContentType = 1;
                     break;
                 default:
-                    Log.e(AudioAttributes.TAG, "Invalid stream type " + streamType + " for AudioAttributes");
+                    Log.e(
+                            AudioAttributes.TAG,
+                            "Invalid stream type " + streamType + " for AudioAttributes");
                     break;
             }
             if (this.mUsage == 0) {
@@ -621,14 +618,24 @@ public final class AudioAttributes implements Parcelable {
                     return this;
                 case 8:
                 default:
-                    Log.e(AudioAttributes.TAG, "Invalid capture preset " + preset + " for AudioAttributes");
+                    Log.e(
+                            AudioAttributes.TAG,
+                            "Invalid capture preset " + preset + " for AudioAttributes");
                     return this;
             }
         }
 
         @SystemApi
         public Builder setInternalCapturePreset(int preset) {
-            if (preset == 1999 || preset == 8 || preset == 1998 || preset == 3 || preset == 2 || preset == 4 || preset == 1997 || preset == 2000 || preset == -1) {
+            if (preset == 1999
+                    || preset == 8
+                    || preset == 1998
+                    || preset == 3
+                    || preset == 2
+                    || preset == 4
+                    || preset == 1997
+                    || preset == 2000
+                    || preset == -1) {
                 this.mSource = preset;
             } else {
                 setCapturePreset(preset);
@@ -724,7 +731,8 @@ public final class AudioAttributes implements Parcelable {
             for (int i = tagsArray.length - 1; i >= 0; i--) {
                 this.mTags.add(tagsArray[i]);
             }
-            this.mFormattedTags = TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, this.mTags);
+            this.mFormattedTags =
+                    TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, this.mTags);
         }
         switch (in.readInt()) {
             case ATTR_PARCEL_IS_NULL_BUNDLE /* -1977 */:
@@ -747,18 +755,41 @@ public final class AudioAttributes implements Parcelable {
             return false;
         }
         AudioAttributes that = (AudioAttributes) o;
-        if (this.mContentType == that.mContentType && this.mFlags == that.mFlags && this.mSource == that.mSource && this.mUsage == that.mUsage && this.mFormattedTags.equals(that.mFormattedTags)) {
+        if (this.mContentType == that.mContentType
+                && this.mFlags == that.mFlags
+                && this.mSource == that.mSource
+                && this.mUsage == that.mUsage
+                && this.mFormattedTags.equals(that.mFormattedTags)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mContentType), Integer.valueOf(this.mFlags), Integer.valueOf(this.mSource), Integer.valueOf(this.mUsage), this.mFormattedTags, this.mBundle);
+        return Objects.hash(
+                Integer.valueOf(this.mContentType),
+                Integer.valueOf(this.mFlags),
+                Integer.valueOf(this.mSource),
+                Integer.valueOf(this.mUsage),
+                this.mFormattedTags,
+                this.mBundle);
     }
 
     public String toString() {
-        return new String("AudioAttributes: usage=" + usageToString() + " content=" + contentTypeToString() + (this.mSource != -1 ? " source=" + MediaRecorder.toLogFriendlyAudioSource(this.mSource) : "") + " flags=0x" + Integer.toHexString(this.mFlags).toUpperCase() + " tags=" + this.mFormattedTags + " bundle=" + (this.mBundle == null ? "null" : this.mBundle.toString()));
+        return new String(
+                "AudioAttributes: usage="
+                        + usageToString()
+                        + " content="
+                        + contentTypeToString()
+                        + (this.mSource != -1
+                                ? " source=" + MediaRecorder.toLogFriendlyAudioSource(this.mSource)
+                                : "")
+                        + " flags=0x"
+                        + Integer.toHexString(this.mFlags).toUpperCase()
+                        + " tags="
+                        + this.mFormattedTags
+                        + " bundle="
+                        + (this.mBundle == null ? "null" : this.mBundle.toString()));
     }
 
     public void dumpDebug(ProtoOutputStream proto, long fieldId) {
@@ -942,7 +973,8 @@ public final class AudioAttributes implements Parcelable {
             return fromGetVolumeControlStream ? 3 : 9;
         }
         if (android.media.audiopolicy.AudioProductStrategy.getAudioProductStrategies().size() > 0) {
-            return android.media.audiopolicy.AudioProductStrategy.getLegacyStreamTypeForStrategyWithAudioAttributes(aa);
+            return android.media.audiopolicy.AudioProductStrategy
+                    .getLegacyStreamTypeForStrategyWithAudioAttributes(aa);
         }
         switch (aa.getUsage()) {
             case 0:
@@ -977,7 +1009,8 @@ public final class AudioAttributes implements Parcelable {
                 return 1;
             default:
                 if (fromGetVolumeControlStream) {
-                    throw new IllegalArgumentException("Unknown usage value " + aa.getUsage() + " in audio attributes");
+                    throw new IllegalArgumentException(
+                            "Unknown usage value " + aa.getUsage() + " in audio attributes");
                 }
                 return 3;
         }

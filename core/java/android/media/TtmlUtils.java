@@ -3,6 +3,7 @@ package android.media;
 import android.app.backup.FullBackup;
 import android.app.blob.XmlTags;
 import android.hardware.scontext.SContextConstants;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,14 +34,19 @@ final class TtmlUtils {
     public static final String TAG_STYLE = "style";
     public static final String TAG_STYLING = "styling";
     public static final String TAG_TT = "tt";
-    private static final Pattern CLOCK_TIME = Pattern.compile("^([0-9][0-9]+):([0-9][0-9]):([0-9][0-9])(?:(\\.[0-9]+)|:([0-9][0-9])(?:\\.([0-9]+))?)?$");
-    private static final Pattern OFFSET_TIME = Pattern.compile("^([0-9]+(?:\\.[0-9]+)?)(h|m|s|ms|f|t)$");
-    private static final Pattern REGION_LENGTH = Pattern.compile("^([0-9][0-9]*.?[0-9]*)(%|px|c)(\\s*)([0-9][0-9]*.?[0-9]*)(%|px|c)$");
+    private static final Pattern CLOCK_TIME =
+            Pattern.compile(
+                    "^([0-9][0-9]+):([0-9][0-9]):([0-9][0-9])(?:(\\.[0-9]+)|:([0-9][0-9])(?:\\.([0-9]+))?)?$");
+    private static final Pattern OFFSET_TIME =
+            Pattern.compile("^([0-9]+(?:\\.[0-9]+)?)(h|m|s|ms|f|t)$");
+    private static final Pattern REGION_LENGTH =
+            Pattern.compile("^([0-9][0-9]*.?[0-9]*)(%|px|c)(\\s*)([0-9][0-9]*.?[0-9]*)(%|px|c)$");
 
-    private TtmlUtils() {
-    }
+    private TtmlUtils() {}
 
-    public static long parseTimeExpression(String time, int frameRate, int subframeRate, int tickRate) throws NumberFormatException {
+    public static long parseTimeExpression(
+            String time, int frameRate, int subframeRate, int tickRate)
+            throws NumberFormatException {
         Matcher matcher = CLOCK_TIME.matcher(time);
         if (!matcher.matches()) {
             Matcher matcher2 = OFFSET_TIME.matcher(time);
@@ -69,13 +75,27 @@ final class TtmlUtils {
         double durationSeconds = Long.parseLong(hours) * 3600;
         String minutes = matcher.group(2);
         String seconds = matcher.group(3);
-        double durationSeconds2 = durationSeconds + (Long.parseLong(minutes) * 60) + Long.parseLong(seconds);
+        double durationSeconds2 =
+                durationSeconds + (Long.parseLong(minutes) * 60) + Long.parseLong(seconds);
         String fraction = matcher.group(4);
-        double durationSeconds3 = durationSeconds2 + (fraction != null ? Double.parseDouble(fraction) : SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
+        double durationSeconds3 =
+                durationSeconds2
+                        + (fraction != null
+                                ? Double.parseDouble(fraction)
+                                : SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
         String frames = matcher.group(5);
-        double durationSeconds4 = durationSeconds3 + (frames != null ? Long.parseLong(frames) / frameRate : SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
+        double durationSeconds4 =
+                durationSeconds3
+                        + (frames != null
+                                ? Long.parseLong(frames) / frameRate
+                                : SContextConstants.ENVIRONMENT_VALUE_UNKNOWN);
         String subframes = matcher.group(6);
-        return (long) (1000.0d * (durationSeconds4 + (subframes != null ? (Long.parseLong(subframes) / subframeRate) / frameRate : SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)));
+        return (long)
+                (1000.0d
+                        * (durationSeconds4
+                                + (subframes != null
+                                        ? (Long.parseLong(subframes) / subframeRate) / frameRate
+                                        : SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)));
     }
 
     public static String applyDefaultSpacePolicy(String in) {
@@ -102,7 +122,8 @@ final class TtmlUtils {
         return text.toString().replaceAll("\n$", "");
     }
 
-    private static void extractText(TtmlNode node, long startUs, long endUs, StringBuilder out, boolean inPTag) {
+    private static void extractText(
+            TtmlNode node, long startUs, long endUs, StringBuilder out, boolean inPTag) {
         if (node.mName.equals(PCDATA) && inPTag) {
             out.append(node.mText);
             return;
@@ -129,7 +150,8 @@ final class TtmlUtils {
         return fragment.toString();
     }
 
-    private static void extractTtmlFragment(TtmlNode node, long startUs, long endUs, StringBuilder out) {
+    private static void extractTtmlFragment(
+            TtmlNode node, long startUs, long endUs, StringBuilder out) {
         if (node.mName.equals(PCDATA)) {
             out.append(node.mText);
             return;

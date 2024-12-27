@@ -3,6 +3,7 @@ package android.media.tv;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -14,20 +15,22 @@ public final class DsmccResponse extends BroadcastInfoResponse implements Parcel
     public static final String BIOP_MESSAGE_TYPE_FILE = "file";
     public static final String BIOP_MESSAGE_TYPE_SERVICE_GATEWAY = "service_gateway";
     public static final String BIOP_MESSAGE_TYPE_STREAM = "stream";
-    public static final Parcelable.Creator<DsmccResponse> CREATOR = new Parcelable.Creator<DsmccResponse>() { // from class: android.media.tv.DsmccResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DsmccResponse createFromParcel(Parcel source) {
-            source.readInt();
-            return DsmccResponse.createFromParcelBody(source);
-        }
+    public static final Parcelable.Creator<DsmccResponse> CREATOR =
+            new Parcelable.Creator<
+                    DsmccResponse>() { // from class: android.media.tv.DsmccResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DsmccResponse createFromParcel(Parcel source) {
+                    source.readInt();
+                    return DsmccResponse.createFromParcelBody(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DsmccResponse[] newArray(int size) {
-            return new DsmccResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DsmccResponse[] newArray(int size) {
+                    return new DsmccResponse[size];
+                }
+            };
     private static final int RESPONSE_TYPE = 6;
     private final String mBiopMessageType;
     private final List<String> mChildList;
@@ -36,14 +39,14 @@ public final class DsmccResponse extends BroadcastInfoResponse implements Parcel
     private final ParcelFileDescriptor mFileDescriptor;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BiopMessageType {
-    }
+    public @interface BiopMessageType {}
 
     static DsmccResponse createFromParcelBody(Parcel in) {
         return new DsmccResponse(in);
     }
 
-    public DsmccResponse(int requestId, int sequence, int responseResult, ParcelFileDescriptor file) {
+    public DsmccResponse(
+            int requestId, int sequence, int responseResult, ParcelFileDescriptor file) {
         super(6, requestId, sequence, responseResult);
         this.mBiopMessageType = "file";
         this.mFileDescriptor = file;
@@ -52,7 +55,12 @@ public final class DsmccResponse extends BroadcastInfoResponse implements Parcel
         this.mEventNames = null;
     }
 
-    public DsmccResponse(int requestId, int sequence, int responseResult, boolean isServiceGateway, List<String> childList) {
+    public DsmccResponse(
+            int requestId,
+            int sequence,
+            int responseResult,
+            boolean isServiceGateway,
+            List<String> childList) {
         super(6, requestId, sequence, responseResult);
         if (isServiceGateway) {
             this.mBiopMessageType = BIOP_MESSAGE_TYPE_SERVICE_GATEWAY;
@@ -65,12 +73,14 @@ public final class DsmccResponse extends BroadcastInfoResponse implements Parcel
         this.mEventNames = null;
     }
 
-    public DsmccResponse(int requestId, int sequence, int responseResult, int[] eventIds, String[] eventNames) {
+    public DsmccResponse(
+            int requestId, int sequence, int responseResult, int[] eventIds, String[] eventNames) {
         super(6, requestId, sequence, responseResult);
         this.mBiopMessageType = "stream";
         this.mFileDescriptor = null;
         this.mChildList = null;
-        if ((eventIds == null || eventNames == null || eventIds.length != eventNames.length) && (eventIds != null || eventNames != null)) {
+        if ((eventIds == null || eventNames == null || eventIds.length != eventNames.length)
+                && (eventIds != null || eventNames != null)) {
             throw new IllegalStateException("The size of eventIds and eventNames must be equal");
         }
         this.mEventIds = eventIds;
@@ -171,7 +181,8 @@ public final class DsmccResponse extends BroadcastInfoResponse implements Parcel
     }
 
     public List<String> getChildList() {
-        if (this.mBiopMessageType.equals("directory") || this.mBiopMessageType.equals(BIOP_MESSAGE_TYPE_SERVICE_GATEWAY)) {
+        if (this.mBiopMessageType.equals("directory")
+                || this.mBiopMessageType.equals(BIOP_MESSAGE_TYPE_SERVICE_GATEWAY)) {
             return this.mChildList != null ? new ArrayList(this.mChildList) : new ArrayList();
         }
         throw new IllegalStateException("Not directory object");

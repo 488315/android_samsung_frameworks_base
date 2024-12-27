@@ -2,7 +2,7 @@ package android.media;
 
 import android.app.slice.Slice;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.media.SubtitleTrack;
+
 import java.util.Arrays;
 
 /* compiled from: WebVttRenderer.java */
@@ -31,8 +31,7 @@ class TextTrackCue extends SubtitleTrack.Cue {
     TextTrackCueSpan[][] mLines = null;
     TextTrackRegion mRegion = null;
 
-    TextTrackCue() {
-    }
+    TextTrackCue() {}
 
     public boolean equals(Object o) {
         if (!(o instanceof TextTrackCue)) {
@@ -43,7 +42,22 @@ class TextTrackCue extends SubtitleTrack.Cue {
         }
         try {
             TextTrackCue cue = (TextTrackCue) o;
-            boolean res = this.mId.equals(cue.mId) && this.mPauseOnExit == cue.mPauseOnExit && this.mWritingDirection == cue.mWritingDirection && this.mRegionId.equals(cue.mRegionId) && this.mSnapToLines == cue.mSnapToLines && this.mAutoLinePosition == cue.mAutoLinePosition && (this.mAutoLinePosition || ((this.mLinePosition != null && this.mLinePosition.equals(cue.mLinePosition)) || (this.mLinePosition == null && cue.mLinePosition == null))) && this.mTextPosition == cue.mTextPosition && this.mSize == cue.mSize && this.mAlignment == cue.mAlignment && this.mLines.length == cue.mLines.length;
+            boolean res =
+                    this.mId.equals(cue.mId)
+                            && this.mPauseOnExit == cue.mPauseOnExit
+                            && this.mWritingDirection == cue.mWritingDirection
+                            && this.mRegionId.equals(cue.mRegionId)
+                            && this.mSnapToLines == cue.mSnapToLines
+                            && this.mAutoLinePosition == cue.mAutoLinePosition
+                            && (this.mAutoLinePosition
+                                    || ((this.mLinePosition != null
+                                                    && this.mLinePosition.equals(cue.mLinePosition))
+                                            || (this.mLinePosition == null
+                                                    && cue.mLinePosition == null)))
+                            && this.mTextPosition == cue.mTextPosition
+                            && this.mSize == cue.mSize
+                            && this.mAlignment == cue.mAlignment
+                            && this.mLines.length == cue.mLines.length;
             if (res) {
                 for (int line = 0; line < this.mLines.length; line++) {
                     if (!Arrays.equals(this.mLines[line], cue.mLines[line])) {
@@ -120,7 +134,9 @@ class TextTrackCue extends SubtitleTrack.Cue {
                             textTrackCueSpanArr2 = textTrackCueSpanArr3;
                         } else {
                             textTrackCueSpanArr2 = textTrackCueSpanArr3;
-                            builder.append("<").append(WebVttParser.timeToString(span.mTimestampMs)).append(">");
+                            builder.append("<")
+                                    .append(WebVttParser.timeToString(span.mTimestampMs))
+                                    .append(">");
                             lastTimestamp = span.mTimestampMs;
                         }
                         builder.append(span.mText);
@@ -147,7 +163,15 @@ class TextTrackCue extends SubtitleTrack.Cue {
     public String toString() {
         String str;
         StringBuilder res = new StringBuilder();
-        StringBuilder append = res.append(WebVttParser.timeToString(this.mStartTimeMs)).append(" --> ").append(WebVttParser.timeToString(this.mEndTimeMs)).append(" {id:\"").append(this.mId).append("\", pauseOnExit:").append(this.mPauseOnExit).append(", direction:");
+        StringBuilder append =
+                res.append(WebVttParser.timeToString(this.mStartTimeMs))
+                        .append(" --> ")
+                        .append(WebVttParser.timeToString(this.mEndTimeMs))
+                        .append(" {id:\"")
+                        .append(this.mId)
+                        .append("\", pauseOnExit:")
+                        .append(this.mPauseOnExit)
+                        .append(", direction:");
         String str2 = "INVALID";
         if (this.mWritingDirection == 100) {
             str = Slice.HINT_HORIZONTAL;
@@ -156,7 +180,19 @@ class TextTrackCue extends SubtitleTrack.Cue {
         } else {
             str = this.mWritingDirection == 101 ? "vertical_rl" : "INVALID";
         }
-        StringBuilder append2 = append.append(str).append(", regionId:\"").append(this.mRegionId).append("\", snapToLines:").append(this.mSnapToLines).append(", linePosition:").append(this.mAutoLinePosition ? "auto" : this.mLinePosition).append(", textPosition:").append(this.mTextPosition).append(", size:").append(this.mSize).append(", alignment:");
+        StringBuilder append2 =
+                append.append(str)
+                        .append(", regionId:\"")
+                        .append(this.mRegionId)
+                        .append("\", snapToLines:")
+                        .append(this.mSnapToLines)
+                        .append(", linePosition:")
+                        .append(this.mAutoLinePosition ? "auto" : this.mLinePosition)
+                        .append(", textPosition:")
+                        .append(this.mTextPosition)
+                        .append(", size:")
+                        .append(this.mSize)
+                        .append(", alignment:");
         if (this.mAlignment == 202) {
             str2 = "end";
         } else if (this.mAlignment == 203) {

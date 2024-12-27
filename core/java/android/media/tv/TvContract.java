@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -19,52 +20,56 @@ import java.util.Map;
 public final class TvContract {
 
     @SystemApi
-    public static final String ACTION_CHANNEL_BROWSABLE_REQUESTED = "android.media.tv.action.CHANNEL_BROWSABLE_REQUESTED";
-    public static final String ACTION_INITIALIZE_PROGRAMS = "android.media.tv.action.INITIALIZE_PROGRAMS";
-    public static final String ACTION_PREVIEW_PROGRAM_ADDED_TO_WATCH_NEXT = "android.media.tv.action.PREVIEW_PROGRAM_ADDED_TO_WATCH_NEXT";
-    public static final String ACTION_PREVIEW_PROGRAM_BROWSABLE_DISABLED = "android.media.tv.action.PREVIEW_PROGRAM_BROWSABLE_DISABLED";
-    public static final String ACTION_REQUEST_CHANNEL_BROWSABLE = "android.media.tv.action.REQUEST_CHANNEL_BROWSABLE";
-    public static final String ACTION_WATCH_NEXT_PROGRAM_BROWSABLE_DISABLED = "android.media.tv.action.WATCH_NEXT_PROGRAM_BROWSABLE_DISABLED";
+    public static final String ACTION_CHANNEL_BROWSABLE_REQUESTED =
+            "android.media.tv.action.CHANNEL_BROWSABLE_REQUESTED";
+
+    public static final String ACTION_INITIALIZE_PROGRAMS =
+            "android.media.tv.action.INITIALIZE_PROGRAMS";
+    public static final String ACTION_PREVIEW_PROGRAM_ADDED_TO_WATCH_NEXT =
+            "android.media.tv.action.PREVIEW_PROGRAM_ADDED_TO_WATCH_NEXT";
+    public static final String ACTION_PREVIEW_PROGRAM_BROWSABLE_DISABLED =
+            "android.media.tv.action.PREVIEW_PROGRAM_BROWSABLE_DISABLED";
+    public static final String ACTION_REQUEST_CHANNEL_BROWSABLE =
+            "android.media.tv.action.REQUEST_CHANNEL_BROWSABLE";
+    public static final String ACTION_WATCH_NEXT_PROGRAM_BROWSABLE_DISABLED =
+            "android.media.tv.action.WATCH_NEXT_PROGRAM_BROWSABLE_DISABLED";
     public static final String AUTHORITY = "android.media.tv";
 
     @SystemApi
     public static final String EXTRA_BLOCKED_PACKAGES = "android.media.tv.extra.BLOCKED_PACKAGES";
+
     public static final String EXTRA_CHANNEL_ID = "android.media.tv.extra.CHANNEL_ID";
 
-    @SystemApi
-    public static final String EXTRA_COLUMN_NAME = "android.media.tv.extra.COLUMN_NAME";
+    @SystemApi public static final String EXTRA_COLUMN_NAME = "android.media.tv.extra.COLUMN_NAME";
 
-    @SystemApi
-    public static final String EXTRA_DATA_TYPE = "android.media.tv.extra.DATA_TYPE";
+    @SystemApi public static final String EXTRA_DATA_TYPE = "android.media.tv.extra.DATA_TYPE";
 
     @SystemApi
     public static final String EXTRA_DEFAULT_VALUE = "android.media.tv.extra.DEFAULT_VALUE";
 
     @SystemApi
-    public static final String EXTRA_EXISTING_COLUMN_NAMES = "android.media.tv.extra.EXISTING_COLUMN_NAMES";
+    public static final String EXTRA_EXISTING_COLUMN_NAMES =
+            "android.media.tv.extra.EXISTING_COLUMN_NAMES";
 
     @SystemApi
     public static final String EXTRA_PACKAGE_NAME = "android.media.tv.extra.PACKAGE_NAME";
-    public static final String EXTRA_PREVIEW_PROGRAM_ID = "android.media.tv.extra.PREVIEW_PROGRAM_ID";
 
-    @SystemApi
-    public static final String EXTRA_RESULT_CODE = "android.media.tv.extra.RESULT_CODE";
-    public static final String EXTRA_WATCH_NEXT_PROGRAM_ID = "android.media.tv.extra.WATCH_NEXT_PROGRAM_ID";
+    public static final String EXTRA_PREVIEW_PROGRAM_ID =
+            "android.media.tv.extra.PREVIEW_PROGRAM_ID";
 
-    @SystemApi
-    public static final String METHOD_ADD_COLUMN = "add_column";
+    @SystemApi public static final String EXTRA_RESULT_CODE = "android.media.tv.extra.RESULT_CODE";
+    public static final String EXTRA_WATCH_NEXT_PROGRAM_ID =
+            "android.media.tv.extra.WATCH_NEXT_PROGRAM_ID";
 
-    @SystemApi
-    public static final String METHOD_BLOCK_PACKAGE = "block_package";
+    @SystemApi public static final String METHOD_ADD_COLUMN = "add_column";
 
-    @SystemApi
-    public static final String METHOD_GET_BLOCKED_PACKAGES = "get_blocked_packages";
+    @SystemApi public static final String METHOD_BLOCK_PACKAGE = "block_package";
 
-    @SystemApi
-    public static final String METHOD_GET_COLUMNS = "get_columns";
+    @SystemApi public static final String METHOD_GET_BLOCKED_PACKAGES = "get_blocked_packages";
 
-    @SystemApi
-    public static final String METHOD_UNBLOCK_PACKAGE = "unblock_package";
+    @SystemApi public static final String METHOD_GET_COLUMNS = "get_columns";
+
+    @SystemApi public static final String METHOD_UNBLOCK_PACKAGE = "unblock_package";
     public static final String PARAM_BROWSABLE_ONLY = "browsable_only";
     public static final String PARAM_CANONICAL_GENRE = "canonical_genre";
     public static final String PARAM_CHANNEL = "channel";
@@ -81,14 +86,11 @@ public final class TvContract {
     private static final String PATH_WATCH_NEXT_PROGRAM = "watch_next_program";
     public static final String PERMISSION_READ_TV_LISTINGS = "android.permission.READ_TV_LISTINGS";
 
-    @SystemApi
-    public static final int RESULT_ERROR_INVALID_ARGUMENT = 2;
+    @SystemApi public static final int RESULT_ERROR_INVALID_ARGUMENT = 2;
 
-    @SystemApi
-    public static final int RESULT_ERROR_IO = 1;
+    @SystemApi public static final int RESULT_ERROR_IO = 1;
 
-    @SystemApi
-    public static final int RESULT_OK = 0;
+    @SystemApi public static final int RESULT_OK = 0;
 
     public interface BaseTvColumns extends BaseColumns {
         public static final String COLUMN_PACKAGE_NAME = "package_name";
@@ -114,7 +116,8 @@ public final class TvContract {
         public static final String COLUMN_INTERACTION_TYPE = "interaction_type";
         public static final String COLUMN_INTERNAL_PROVIDER_ID = "internal_provider_id";
         public static final String COLUMN_ITEM_COUNT = "item_count";
-        public static final String COLUMN_LAST_PLAYBACK_POSITION_MILLIS = "last_playback_position_millis";
+        public static final String COLUMN_LAST_PLAYBACK_POSITION_MILLIS =
+                "last_playback_position_millis";
         public static final String COLUMN_LIVE = "live";
         public static final String COLUMN_LOGO_URI = "logo_uri";
         public static final String COLUMN_OFFER_PRICE = "offer_price";
@@ -147,20 +150,16 @@ public final class TvContract {
         public static final int TYPE_TV_SERIES = 1;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface AspectRatio {
-        }
+        public @interface AspectRatio {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Availability {
-        }
+        public @interface Availability {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface InteractionType {
-        }
+        public @interface InteractionType {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Type {
-        }
+        public @interface Type {}
     }
 
     interface ProgramColumns {
@@ -194,8 +193,7 @@ public final class TvContract {
         public static final int REVIEW_RATING_STYLE_THUMBS_UP_DOWN = 1;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface ReviewRatingStyle {
-        }
+        public @interface ReviewRatingStyle {}
     }
 
     public static String buildInputId(ComponentName name) {
@@ -207,7 +205,12 @@ public final class TvContract {
     }
 
     public static Uri buildChannelUriForPassthroughInput(String inputId) {
-        return new Uri.Builder().scheme("content").authority(AUTHORITY).appendPath(PATH_PASSTHROUGH).appendPath(inputId).build();
+        return new Uri.Builder()
+                .scheme("content")
+                .authority(AUTHORITY)
+                .appendPath(PATH_PASSTHROUGH)
+                .appendPath(inputId)
+                .build();
     }
 
     public static Uri buildChannelLogoUri(long channelId) {
@@ -231,18 +234,23 @@ public final class TvContract {
         if (inputId != null) {
             builder.appendQueryParameter("input", inputId);
         }
-        return builder.appendQueryParameter(PARAM_BROWSABLE_ONLY, String.valueOf(browsableOnly)).build();
+        return builder.appendQueryParameter(PARAM_BROWSABLE_ONLY, String.valueOf(browsableOnly))
+                .build();
     }
 
     @SystemApi
-    public static Uri buildChannelsUriForInput(String inputId, String genre, boolean browsableOnly) {
+    public static Uri buildChannelsUriForInput(
+            String inputId, String genre, boolean browsableOnly) {
         if (genre == null) {
             return buildChannelsUriForInput(inputId, browsableOnly);
         }
         if (!Programs.Genres.isCanonical(genre)) {
             throw new IllegalArgumentException("Not a canonical genre: '" + genre + "'");
         }
-        return buildChannelsUriForInput(inputId, browsableOnly).buildUpon().appendQueryParameter("canonical_genre", genre).build();
+        return buildChannelsUriForInput(inputId, browsableOnly)
+                .buildUpon()
+                .appendQueryParameter("canonical_genre", genre)
+                .build();
     }
 
     public static Uri buildProgramUri(long programId) {
@@ -250,7 +258,10 @@ public final class TvContract {
     }
 
     public static Uri buildProgramsUriForChannel(long channelId) {
-        return Programs.CONTENT_URI.buildUpon().appendQueryParameter("channel", String.valueOf(channelId)).build();
+        return Programs.CONTENT_URI
+                .buildUpon()
+                .appendQueryParameter("channel", String.valueOf(channelId))
+                .build();
     }
 
     public static Uri buildProgramsUriForChannel(Uri channelUri) {
@@ -262,7 +273,10 @@ public final class TvContract {
 
     public static Uri buildProgramsUriForChannel(long channelId, long startTime, long endTime) {
         Uri uri = buildProgramsUriForChannel(channelId);
-        return uri.buildUpon().appendQueryParameter(PARAM_START_TIME, String.valueOf(startTime)).appendQueryParameter(PARAM_END_TIME, String.valueOf(endTime)).build();
+        return uri.buildUpon()
+                .appendQueryParameter(PARAM_START_TIME, String.valueOf(startTime))
+                .appendQueryParameter(PARAM_END_TIME, String.valueOf(endTime))
+                .build();
     }
 
     public static Uri buildProgramsUriForChannel(Uri channelUri, long startTime, long endTime) {
@@ -281,7 +295,10 @@ public final class TvContract {
     }
 
     public static Uri buildPreviewProgramsUriForChannel(long channelId) {
-        return PreviewPrograms.CONTENT_URI.buildUpon().appendQueryParameter("channel", String.valueOf(channelId)).build();
+        return PreviewPrograms.CONTENT_URI
+                .buildUpon()
+                .appendQueryParameter("channel", String.valueOf(channelId))
+                .build();
     }
 
     public static Uri buildPreviewProgramsUriForChannel(Uri channelUri) {
@@ -300,7 +317,9 @@ public final class TvContract {
     }
 
     private static boolean isTvUri(Uri uri) {
-        return uri != null && "content".equals(uri.getScheme()) && AUTHORITY.equals(uri.getAuthority());
+        return uri != null
+                && "content".equals(uri.getScheme())
+                && AUTHORITY.equals(uri.getAuthority());
     }
 
     private static boolean isTwoSegmentUriStartingWith(Uri uri, String pathSegment) {
@@ -329,14 +348,14 @@ public final class TvContract {
     }
 
     public static void requestChannelBrowsable(Context context, long channelId) {
-        TvInputManager manager = (TvInputManager) context.getSystemService(Context.TV_INPUT_SERVICE);
+        TvInputManager manager =
+                (TvInputManager) context.getSystemService(Context.TV_INPUT_SERVICE);
         if (manager != null) {
             manager.requestChannelBrowsable(buildChannelUri(channelId));
         }
     }
 
-    private TvContract() {
-    }
+    private TvContract() {}
 
     public static final class Channels implements BaseTvColumns {
         public static final int BROADCAST_VISIBILITY_TYPE_INVISIBLE = 2;
@@ -365,7 +384,8 @@ public final class TvContract {
         public static final String COLUMN_LOCKED = "locked";
         public static final String COLUMN_NETWORK_AFFILIATION = "network_affiliation";
         public static final String COLUMN_ORIGINAL_NETWORK_ID = "original_network_id";
-        public static final String COLUMN_REMOTE_CONTROL_KEY_PRESET_NUMBER = "remote_control_key_preset_number";
+        public static final String COLUMN_REMOTE_CONTROL_KEY_PRESET_NUMBER =
+                "remote_control_key_preset_number";
         public static final String COLUMN_SCRAMBLED = "scrambled";
         public static final String COLUMN_SEARCHABLE = "searchable";
         public static final String COLUMN_SERVICE_ID = "service_id";
@@ -428,24 +448,19 @@ public final class TvContract {
         private static final Map<String, String> VIDEO_FORMAT_TO_RESOLUTION_MAP = new HashMap();
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface BroadcastVisibilityType {
-        }
+        public @interface BroadcastVisibilityType {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface ServiceType {
-        }
+        public @interface ServiceType {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Type {
-        }
+        public @interface Type {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface VideoFormat {
-        }
+        public @interface VideoFormat {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface VideoResolution {
-        }
+        public @interface VideoResolution {}
 
         static {
             VIDEO_FORMAT_TO_RESOLUTION_MAP.put(VIDEO_FORMAT_480I, VIDEO_RESOLUTION_SD);
@@ -463,14 +478,12 @@ public final class TvContract {
             return VIDEO_FORMAT_TO_RESOLUTION_MAP.get(videoFormat);
         }
 
-        private Channels() {
-        }
+        private Channels() {}
 
         public static final class Logo {
             public static final String CONTENT_DIRECTORY = "logo";
 
-            private Logo() {
-            }
+            private Logo() {}
         }
     }
 
@@ -479,8 +492,7 @@ public final class TvContract {
         public static final String COLUMN_CHANNEL_ID = "channel_id";
         public static final String COLUMN_END_TIME_UTC_MILLIS = "end_time_utc_millis";
 
-        @Deprecated
-        public static final String COLUMN_EPISODE_NUMBER = "episode_number";
+        @Deprecated public static final String COLUMN_EPISODE_NUMBER = "episode_number";
         public static final String COLUMN_EVENT_ID = "event_id";
         public static final String COLUMN_GLOBAL_CONTENT_ID = "global_content_id";
         public static final String COLUMN_INTERNAL_PROVIDER_ID = "internal_provider_id";
@@ -488,15 +500,13 @@ public final class TvContract {
         public static final String COLUMN_RECORDING_PROHIBITED = "recording_prohibited";
         public static final String COLUMN_SCRAMBLED = "scrambled";
 
-        @Deprecated
-        public static final String COLUMN_SEASON_NUMBER = "season_number";
+        @Deprecated public static final String COLUMN_SEASON_NUMBER = "season_number";
         public static final String COLUMN_START_TIME_UTC_MILLIS = "start_time_utc_millis";
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/program";
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/program";
         public static final Uri CONTENT_URI = Uri.parse("content://android.media.tv/program");
 
-        private Programs() {
-        }
+        private Programs() {}
 
         public static final class Genres {
             public static final String ANIMAL_WILDLIFE = "ANIMAL_WILDLIFE";
@@ -523,8 +533,7 @@ public final class TvContract {
             public static final String TRAVEL = "TRAVEL";
 
             @Retention(RetentionPolicy.SOURCE)
-            public @interface Genre {
-            }
+            public @interface Genre {}
 
             static {
                 CANONICAL_GENRES.add(FAMILY_KIDS);
@@ -547,8 +556,7 @@ public final class TvContract {
                 EMPTY_STRING_ARRAY = new String[0];
             }
 
-            private Genres() {
-            }
+            private Genres() {}
 
             public static String encode(String... genres) {
                 if (genres == null) {
@@ -586,7 +594,7 @@ public final class TvContract {
                     return EMPTY_STRING_ARRAY;
                 }
                 if (genres.indexOf(44) == -1 && genres.indexOf(34) == -1) {
-                    return new String[]{genres.trim()};
+                    return new String[] {genres.trim()};
                 }
                 StringBuilder sb = new StringBuilder();
                 List<String> results = new ArrayList<>();
@@ -638,44 +646,47 @@ public final class TvContract {
         public static final String COLUMN_RECORDING_DATA_BYTES = "recording_data_bytes";
         public static final String COLUMN_RECORDING_DATA_URI = "recording_data_uri";
         public static final String COLUMN_RECORDING_DURATION_MILLIS = "recording_duration_millis";
-        public static final String COLUMN_RECORDING_EXPIRE_TIME_UTC_MILLIS = "recording_expire_time_utc_millis";
+        public static final String COLUMN_RECORDING_EXPIRE_TIME_UTC_MILLIS =
+                "recording_expire_time_utc_millis";
         public static final String COLUMN_START_TIME_UTC_MILLIS = "start_time_utc_millis";
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/recorded_program";
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/recorded_program";
-        public static final Uri CONTENT_URI = Uri.parse("content://android.media.tv/recorded_program");
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://android.media.tv/recorded_program");
 
-        private RecordedPrograms() {
-        }
+        private RecordedPrograms() {}
     }
 
-    public static final class PreviewPrograms implements BaseTvColumns, ProgramColumns, PreviewProgramColumns {
+    public static final class PreviewPrograms
+            implements BaseTvColumns, ProgramColumns, PreviewProgramColumns {
         public static final String COLUMN_CHANNEL_ID = "channel_id";
         public static final String COLUMN_WEIGHT = "weight";
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/preview_program";
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/preview_program";
-        public static final Uri CONTENT_URI = Uri.parse("content://android.media.tv/preview_program");
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://android.media.tv/preview_program");
 
-        private PreviewPrograms() {
-        }
+        private PreviewPrograms() {}
     }
 
-    public static final class WatchNextPrograms implements BaseTvColumns, ProgramColumns, PreviewProgramColumns {
-        public static final String COLUMN_LAST_ENGAGEMENT_TIME_UTC_MILLIS = "last_engagement_time_utc_millis";
+    public static final class WatchNextPrograms
+            implements BaseTvColumns, ProgramColumns, PreviewProgramColumns {
+        public static final String COLUMN_LAST_ENGAGEMENT_TIME_UTC_MILLIS =
+                "last_engagement_time_utc_millis";
         public static final String COLUMN_WATCH_NEXT_TYPE = "watch_next_type";
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/watch_next_program";
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/watch_next_program";
-        public static final Uri CONTENT_URI = Uri.parse("content://android.media.tv/watch_next_program");
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://android.media.tv/watch_next_program");
         public static final int WATCH_NEXT_TYPE_CONTINUE = 0;
         public static final int WATCH_NEXT_TYPE_NEW = 2;
         public static final int WATCH_NEXT_TYPE_NEXT = 1;
         public static final int WATCH_NEXT_TYPE_WATCHLIST = 3;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface WatchNextType {
-        }
+        public @interface WatchNextType {}
 
-        private WatchNextPrograms() {
-        }
+        private WatchNextPrograms() {}
     }
 
     @SystemApi
@@ -688,12 +699,13 @@ public final class TvContract {
         public static final String COLUMN_START_TIME_UTC_MILLIS = "start_time_utc_millis";
         public static final String COLUMN_TITLE = "title";
         public static final String COLUMN_WATCH_END_TIME_UTC_MILLIS = "watch_end_time_utc_millis";
-        public static final String COLUMN_WATCH_START_TIME_UTC_MILLIS = "watch_start_time_utc_millis";
+        public static final String COLUMN_WATCH_START_TIME_UTC_MILLIS =
+                "watch_start_time_utc_millis";
         public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/watched_program";
         public static final String CONTENT_TYPE = "vnd.android.cursor.dir/watched_program";
-        public static final Uri CONTENT_URI = Uri.parse("content://android.media.tv/watched_program");
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://android.media.tv/watched_program");
 
-        private WatchedPrograms() {
-        }
+        private WatchedPrograms() {}
     }
 }

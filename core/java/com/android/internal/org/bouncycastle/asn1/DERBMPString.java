@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -15,10 +16,12 @@ public class DERBMPString extends ASN1Primitive implements ASN1String {
             try {
                 return (DERBMPString) fromByteArray((byte[]) obj);
             } catch (Exception e) {
-                throw new IllegalArgumentException("encoding error in getInstance: " + e.toString());
+                throw new IllegalArgumentException(
+                        "encoding error in getInstance: " + e.toString());
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public static DERBMPString getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -68,7 +71,8 @@ public class DERBMPString extends ASN1Primitive implements ASN1String {
         return getString();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         return Arrays.hashCode(this.string);
     }
@@ -89,7 +93,9 @@ public class DERBMPString extends ASN1Primitive implements ASN1String {
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     int encodedLength() {
-        return StreamUtil.calculateBodyLength(this.string.length * 2) + 1 + (this.string.length * 2);
+        return StreamUtil.calculateBodyLength(this.string.length * 2)
+                + 1
+                + (this.string.length * 2);
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive

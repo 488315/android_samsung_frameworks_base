@@ -22,8 +22,9 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
+
 import com.samsung.android.rune.CoreRune;
-import com.samsung.android.view.MultiResolutionChangeRequestInfo;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -89,9 +90,11 @@ public class SemWindowManager {
     public static final int SUPPORTS_MAX_ASPECT_RATIO = 1;
     private static final String TAG = "SemWindowManager";
     private static SemWindowManager sInstance;
-    private final IWindowManager mWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
+    private final IWindowManager mWindowManager =
+            IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
     private final WindowManagerGlobal mGlobal = WindowManagerGlobal.getInstance();
-    private final DeviceStateManagerGlobal mDeviceStateManagerGlobal = DeviceStateManagerGlobal.getInstance();
+    private final DeviceStateManagerGlobal mDeviceStateManagerGlobal =
+            DeviceStateManagerGlobal.getInstance();
 
     @Deprecated
     public interface FoldStateListener {
@@ -103,15 +106,12 @@ public class SemWindowManager {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface KeyPressType {
-    }
+    public @interface KeyPressType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SystemKeyCode {
-    }
+    public @interface SystemKeyCode {}
 
-    private SemWindowManager() {
-    }
+    private SemWindowManager() {}
 
     public static synchronized SemWindowManager getInstance() {
         SemWindowManager semWindowManager;
@@ -125,7 +125,8 @@ public class SemWindowManager {
     }
 
     @Deprecated(forRemoval = true, since = "16.0")
-    public boolean requestSystemKeyEvent(int keyCode, ComponentName componentName, boolean request) {
+    public boolean requestSystemKeyEvent(
+            int keyCode, ComponentName componentName, boolean request) {
         try {
             return this.mWindowManager.requestSystemKeyEvent(keyCode, componentName, request);
         } catch (RemoteException e) {
@@ -144,7 +145,8 @@ public class SemWindowManager {
         }
     }
 
-    public void registerSystemKeyEvent(int keyCode, ComponentName componentName, int press) throws IllegalArgumentException {
+    public void registerSystemKeyEvent(int keyCode, ComponentName componentName, int press)
+            throws IllegalArgumentException {
         try {
             this.mWindowManager.registerSystemKeyEvent(keyCode, componentName, press);
         } catch (RemoteException e) {
@@ -152,7 +154,8 @@ public class SemWindowManager {
         }
     }
 
-    public void unregisterSystemKeyEvent(int keyCode, ComponentName componentName) throws IllegalArgumentException {
+    public void unregisterSystemKeyEvent(int keyCode, ComponentName componentName)
+            throws IllegalArgumentException {
         try {
             this.mWindowManager.unregisterSystemKeyEvent(keyCode, componentName);
         } catch (RemoteException e) {
@@ -160,12 +163,10 @@ public class SemWindowManager {
         }
     }
 
-    public void requestMetaKeyEvent(ComponentName componentName, boolean request) {
-    }
+    public void requestMetaKeyEvent(ComponentName componentName, boolean request) {}
 
     @Deprecated
-    public void setStartingWindowContentView(ComponentName componentName, int resId) {
-    }
+    public void setStartingWindowContentView(ComponentName componentName, int resId) {}
 
     public void getInitialDisplaySize(Point size) {
         try {
@@ -205,7 +206,8 @@ public class SemWindowManager {
         setForcedDisplaySizeDensityInner(width, height, density, false, -1);
     }
 
-    public void setForcedDisplaySizeDensity(int width, int height, int density, boolean saveToSettings) {
+    public void setForcedDisplaySizeDensity(
+            int width, int height, int density, boolean saveToSettings) {
         setForcedDisplaySizeDensityInner(width, height, density, saveToSettings, -1);
     }
 
@@ -277,13 +279,27 @@ public class SemWindowManager {
             deviceStateRequest = DeviceStateRequest.newBuilder(1).setFlags(8).build();
         }
         if (deviceStateRequest != null) {
-            Log.d(TAG, "setForcedDefaultDisplayDevice " + displayDeviceType + ", callingPid=" + callingPid);
-            this.mDeviceStateManagerGlobal.requestState(deviceStateRequest, new PendingIntent$$ExternalSyntheticLambda0(), new DeviceStateRequest.Callback() { // from class: com.samsung.android.view.SemWindowManager.1
-                @Override // android.hardware.devicestate.DeviceStateRequest.Callback
-                public void onRequestCanceled(DeviceStateRequest request) {
-                    Log.d(SemWindowManager.TAG, "onRequestCanceled,  pid=" + callingPid + " Callers=" + Debug.getCallers(5));
-                }
-            });
+            Log.d(
+                    TAG,
+                    "setForcedDefaultDisplayDevice "
+                            + displayDeviceType
+                            + ", callingPid="
+                            + callingPid);
+            this.mDeviceStateManagerGlobal.requestState(
+                    deviceStateRequest,
+                    new PendingIntent$$ExternalSyntheticLambda0(),
+                    new DeviceStateRequest
+                            .Callback() { // from class: com.samsung.android.view.SemWindowManager.1
+                        @Override // android.hardware.devicestate.DeviceStateRequest.Callback
+                        public void onRequestCanceled(DeviceStateRequest request) {
+                            Log.d(
+                                    SemWindowManager.TAG,
+                                    "onRequestCanceled,  pid="
+                                            + callingPid
+                                            + " Callers="
+                                            + Debug.getCallers(5));
+                        }
+                    });
         }
     }
 
@@ -309,7 +325,8 @@ public class SemWindowManager {
         }
     }
 
-    public void setMaxAspectRatioPolicy(String packageName, int uid, boolean enable, int restartTaskId) {
+    public void setMaxAspectRatioPolicy(
+            String packageName, int uid, boolean enable, int restartTaskId) {
         try {
             this.mWindowManager.setMaxAspectRatioPolicy(packageName, uid, enable, restartTaskId);
         } catch (RemoteException e) {
@@ -335,27 +352,29 @@ public class SemWindowManager {
     }
 
     public static class VisibleWindowInfo implements Parcelable {
-        public static final Parcelable.Creator<VisibleWindowInfo> CREATOR = new Parcelable.Creator<VisibleWindowInfo>() { // from class: com.samsung.android.view.SemWindowManager.VisibleWindowInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public VisibleWindowInfo createFromParcel(Parcel source) {
-                return new VisibleWindowInfo(source);
-            }
+        public static final Parcelable.Creator<VisibleWindowInfo> CREATOR =
+                new Parcelable.Creator<
+                        VisibleWindowInfo>() { // from class:
+                                               // com.samsung.android.view.SemWindowManager.VisibleWindowInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public VisibleWindowInfo createFromParcel(Parcel source) {
+                        return new VisibleWindowInfo(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public VisibleWindowInfo[] newArray(int size) {
-                return new VisibleWindowInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public VisibleWindowInfo[] newArray(int size) {
+                        return new VisibleWindowInfo[size];
+                    }
+                };
         public boolean focused;
         public boolean lastFocused;
         public String name;
         public String packageName;
         public int type;
 
-        public VisibleWindowInfo() {
-        }
+        public VisibleWindowInfo() {}
 
         @Override // android.os.Parcelable
         public int describeContents() {
@@ -398,17 +417,67 @@ public class SemWindowManager {
         }
     }
 
-    public Bitmap screenshot(int displayId, int targetWindowType, boolean containsTargetSystemWindow, Rect sourceCrop, int width, int height, boolean useIdentityTransform) {
-        return screenshot(displayId, targetWindowType, containsTargetSystemWindow, sourceCrop, width, height, useIdentityTransform, 0);
+    public Bitmap screenshot(
+            int displayId,
+            int targetWindowType,
+            boolean containsTargetSystemWindow,
+            Rect sourceCrop,
+            int width,
+            int height,
+            boolean useIdentityTransform) {
+        return screenshot(
+                displayId,
+                targetWindowType,
+                containsTargetSystemWindow,
+                sourceCrop,
+                width,
+                height,
+                useIdentityTransform,
+                0);
     }
 
-    public Bitmap screenshot(int displayId, int targetWindowType, boolean containsTargetSystemWindow, Rect sourceCrop, int width, int height, boolean useIdentityTransform, int rotation) {
-        return screenshot(displayId, targetWindowType, containsTargetSystemWindow, sourceCrop, width, height, useIdentityTransform, rotation, false);
+    public Bitmap screenshot(
+            int displayId,
+            int targetWindowType,
+            boolean containsTargetSystemWindow,
+            Rect sourceCrop,
+            int width,
+            int height,
+            boolean useIdentityTransform,
+            int rotation) {
+        return screenshot(
+                displayId,
+                targetWindowType,
+                containsTargetSystemWindow,
+                sourceCrop,
+                width,
+                height,
+                useIdentityTransform,
+                rotation,
+                false);
     }
 
-    public Bitmap screenshot(int displayId, int targetWindowType, boolean containsTargetSystemWindow, Rect sourceCrop, int width, int height, boolean useIdentityTransform, int rotation, boolean ignorePolicy) {
+    public Bitmap screenshot(
+            int displayId,
+            int targetWindowType,
+            boolean containsTargetSystemWindow,
+            Rect sourceCrop,
+            int width,
+            int height,
+            boolean useIdentityTransform,
+            int rotation,
+            boolean ignorePolicy) {
         try {
-            ScreenshotResult result = this.mWindowManager.takeScreenshotToTargetWindow(displayId, targetWindowType, containsTargetSystemWindow, sourceCrop, width, height, useIdentityTransform, ignorePolicy);
+            ScreenshotResult result =
+                    this.mWindowManager.takeScreenshotToTargetWindow(
+                            displayId,
+                            targetWindowType,
+                            containsTargetSystemWindow,
+                            sourceCrop,
+                            width,
+                            height,
+                            useIdentityTransform,
+                            ignorePolicy);
             if (result != null) {
                 return result.getCapturedBitmap();
             }
@@ -437,19 +506,22 @@ public class SemWindowManager {
     }
 
     public static final class KeyCustomizationInfo implements Parcelable {
-        public static final Parcelable.Creator<KeyCustomizationInfo> CREATOR = new Parcelable.Creator<KeyCustomizationInfo>() { // from class: com.samsung.android.view.SemWindowManager.KeyCustomizationInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public KeyCustomizationInfo createFromParcel(Parcel source) {
-                return new KeyCustomizationInfo(source);
-            }
+        public static final Parcelable.Creator<KeyCustomizationInfo> CREATOR =
+                new Parcelable.Creator<
+                        KeyCustomizationInfo>() { // from class:
+                                                  // com.samsung.android.view.SemWindowManager.KeyCustomizationInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public KeyCustomizationInfo createFromParcel(Parcel source) {
+                        return new KeyCustomizationInfo(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public KeyCustomizationInfo[] newArray(int size) {
-                return new KeyCustomizationInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public KeyCustomizationInfo[] newArray(int size) {
+                        return new KeyCustomizationInfo[size];
+                    }
+                };
         public int action;
         public int dispatching;
         public int id;
@@ -479,19 +551,43 @@ public class SemWindowManager {
             this(press, id, keyCode, action, intent, -1);
         }
 
-        public KeyCustomizationInfo(int press, int id, int keyCode, int action, Intent intent, int dispatching) {
+        public KeyCustomizationInfo(
+                int press, int id, int keyCode, int action, Intent intent, int dispatching) {
             this(press, id, keyCode, action, intent, dispatching, -2, null);
         }
 
-        public KeyCustomizationInfo(int press, int id, int keyCode, int action, Intent intent, int dispatching, int userId) {
+        public KeyCustomizationInfo(
+                int press,
+                int id,
+                int keyCode,
+                int action,
+                Intent intent,
+                int dispatching,
+                int userId) {
             this(press, id, keyCode, action, intent, dispatching, userId, null);
         }
 
         private KeyCustomizationInfo(Builder builder) {
-            this(builder.press, builder.id, builder.keyCode, builder.action, builder.intent, builder.dispatching, builder.userId, builder.ownerPackage);
+            this(
+                    builder.press,
+                    builder.id,
+                    builder.keyCode,
+                    builder.action,
+                    builder.intent,
+                    builder.dispatching,
+                    builder.userId,
+                    builder.ownerPackage);
         }
 
-        private KeyCustomizationInfo(int press, int id, int keyCode, int action, Intent intent, int dispatching, int userId, String ownerPackage) {
+        private KeyCustomizationInfo(
+                int press,
+                int id,
+                int keyCode,
+                int action,
+                Intent intent,
+                int dispatching,
+                int userId,
+                String ownerPackage) {
             this.press = -1;
             this.id = 1000;
             this.keyCode = 0;
@@ -588,7 +684,9 @@ public class SemWindowManager {
                 this.intent = null;
                 this.ownerPackage = null;
                 if (action != 4 && intent == null) {
-                    throw new IllegalArgumentException("Intent is null. When the action is not ACTION_BLOCK_KEY_EVENT, you have to add intent parameter.");
+                    throw new IllegalArgumentException(
+                            "Intent is null. When the action is not ACTION_BLOCK_KEY_EVENT, you"
+                                + " have to add intent parameter.");
                 }
                 this.press = press;
                 this.keyCode = keyCode;
@@ -659,7 +757,8 @@ public class SemWindowManager {
         }
     }
 
-    public void putKeyCustomizationInfo(KeyCustomizationInfo keyCustomizationInfo) throws IllegalArgumentException {
+    public void putKeyCustomizationInfo(KeyCustomizationInfo keyCustomizationInfo)
+            throws IllegalArgumentException {
         try {
             this.mWindowManager.putKeyCustomizationInfo(keyCustomizationInfo);
         } catch (RemoteException e) {
@@ -667,9 +766,11 @@ public class SemWindowManager {
         }
     }
 
-    public KeyCustomizationInfo getKeyCustomizationInfo(String ownerPackage, int press, int keyCode) {
+    public KeyCustomizationInfo getKeyCustomizationInfo(
+            String ownerPackage, int press, int keyCode) {
         try {
-            return this.mWindowManager.getKeyCustomizationInfoByPackage(ownerPackage, press, keyCode);
+            return this.mWindowManager.getKeyCustomizationInfoByPackage(
+                    ownerPackage, press, keyCode);
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to getKeyCustomizationInfo", e);
             return null;
@@ -693,14 +794,22 @@ public class SemWindowManager {
         }
     }
 
-    private void setForcedDisplaySizeDensityInner(int width, int height, int density, boolean saveToSettings, int forceHideCutout) {
+    private void setForcedDisplaySizeDensityInner(
+            int width, int height, int density, boolean saveToSettings, int forceHideCutout) {
         int userId = UserHandle.myUserId();
         Log.d(TAG, "setForcedDisplaySizeDensityInner userId=" + userId);
         if (!validateForcedDisplaySizeDensityValues(width, height, density)) {
             return;
         }
         try {
-            MultiResolutionChangeRequestInfo info = new MultiResolutionChangeRequestInfo.Builder(0).setWidth(width).setHeight(height).setDensity(density).setSaveToSettings(saveToSettings).setForcedHideCutout(forceHideCutout).build();
+            MultiResolutionChangeRequestInfo info =
+                    new MultiResolutionChangeRequestInfo.Builder(0)
+                            .setWidth(width)
+                            .setHeight(height)
+                            .setDensity(density)
+                            .setSaveToSettings(saveToSettings)
+                            .setForcedHideCutout(forceHideCutout)
+                            .build();
             this.mWindowManager.setForcedDisplaySizeDensityWithInfo(info);
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to setForcedDisplaySizeDensity, ", e);

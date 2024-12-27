@@ -1,6 +1,7 @@
 package com.android.internal.vibrator.persistence;
 
 import com.android.modules.utils.TypedXmlSerializer;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */

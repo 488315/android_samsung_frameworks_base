@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -13,8 +14,8 @@ public interface IRecommendationServiceCallbacks extends IInterface {
 
     public static class Default implements IRecommendationServiceCallbacks {
         @Override // android.printservice.recommendation.IRecommendationServiceCallbacks
-        public void onRecommendationsUpdated(List<RecommendationInfo> recommendations) throws RemoteException {
-        }
+        public void onRecommendationsUpdated(List<RecommendationInfo> recommendations)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,8 +23,9 @@ public interface IRecommendationServiceCallbacks extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRecommendationServiceCallbacks {
-        public static final String DESCRIPTOR = "android.printservice.recommendation.IRecommendationServiceCallbacks";
+    public abstract static class Stub extends Binder implements IRecommendationServiceCallbacks {
+        public static final String DESCRIPTOR =
+                "android.printservice.recommendation.IRecommendationServiceCallbacks";
         static final int TRANSACTION_onRecommendationsUpdated = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface IRecommendationServiceCallbacks extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -71,7 +74,8 @@ public interface IRecommendationServiceCallbacks extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<RecommendationInfo> _arg0 = data.createTypedArrayList(RecommendationInfo.CREATOR);
+                    List<RecommendationInfo> _arg0 =
+                            data.createTypedArrayList(RecommendationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onRecommendationsUpdated(_arg0);
                     return true;
@@ -97,7 +101,8 @@ public interface IRecommendationServiceCallbacks extends IInterface {
             }
 
             @Override // android.printservice.recommendation.IRecommendationServiceCallbacks
-            public void onRecommendationsUpdated(List<RecommendationInfo> recommendations) throws RemoteException {
+            public void onRecommendationsUpdated(List<RecommendationInfo> recommendations)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

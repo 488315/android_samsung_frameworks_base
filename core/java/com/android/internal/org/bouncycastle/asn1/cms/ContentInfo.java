@@ -56,7 +56,8 @@ public class ContentInfo extends ASN1Object implements CMSObjectIdentifiers {
         return this.content;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         v.add(this.contentType);

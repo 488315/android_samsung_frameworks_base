@@ -1,6 +1,7 @@
 package com.android.server.notification;
 
 import android.app.NotificationChannel;
+
 import com.android.internal.logging.UiEventLogger;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,13 +35,26 @@ public interface NotificationChannelLogger {
     }
 
     static int getLoggingImportance(NotificationChannel notificationChannel, int i) {
-        if (notificationChannel.getConversationId() == null || i < 4 || !notificationChannel.isImportantConversation()) {
+        if (notificationChannel.getConversationId() == null
+                || i < 4
+                || !notificationChannel.isImportantConversation()) {
             return i;
         }
         return 5;
     }
 
-    default void logNotificationChannelModified(NotificationChannel notificationChannel, int i, String str, int i2, boolean z) {
-        ((NotificationChannelLoggerImpl) this).logNotificationChannel(z ? NotificationChannelEvent.NOTIFICATION_CHANNEL_UPDATED_BY_USER : NotificationChannelEvent.NOTIFICATION_CHANNEL_UPDATED, notificationChannel, i, str, i2, getLoggingImportance(notificationChannel, notificationChannel.getImportance()));
+    default void logNotificationChannelModified(
+            NotificationChannel notificationChannel, int i, String str, int i2, boolean z) {
+        ((NotificationChannelLoggerImpl) this)
+                .logNotificationChannel(
+                        z
+                                ? NotificationChannelEvent.NOTIFICATION_CHANNEL_UPDATED_BY_USER
+                                : NotificationChannelEvent.NOTIFICATION_CHANNEL_UPDATED,
+                        notificationChannel,
+                        i,
+                        str,
+                        i2,
+                        getLoggingImportance(
+                                notificationChannel, notificationChannel.getImportance()));
     }
 }

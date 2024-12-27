@@ -10,9 +10,7 @@ import android.os.Trace;
 import android.os.WorkSource;
 import android.text.TextUtils;
 import android.util.Slog;
-import com.android.server.vibrator.Vibration;
-import com.android.server.vibrator.VibrationStats;
-import com.android.server.vibrator.VibratorManagerService;
+
 import java.util.NoSuchElementException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -25,7 +23,9 @@ public final class VibrationThread extends Thread {
     public final Object mLock = new Object();
     public boolean mCalledVibrationCompleteCallback = false;
 
-    public VibrationThread(PowerManager.WakeLock wakeLock, VibratorManagerService.VibrationThreadCallbacks vibrationThreadCallbacks) {
+    public VibrationThread(
+            PowerManager.WakeLock wakeLock,
+            VibratorManagerService.VibrationThreadCallbacks vibrationThreadCallbacks) {
         this.mWakeLock = wakeLock;
         this.mVibratorManagerHooks = vibrationThreadCallbacks;
     }
@@ -35,16 +35,20 @@ public final class VibrationThread extends Thread {
             return;
         }
         this.mCalledVibrationCompleteCallback = true;
-        VibratorManagerService.VibrationThreadCallbacks vibrationThreadCallbacks = this.mVibratorManagerHooks;
+        VibratorManagerService.VibrationThreadCallbacks vibrationThreadCallbacks =
+                this.mVibratorManagerHooks;
         long j = this.mExecutingConductor.mVibration.id;
         vibrationThreadCallbacks.getClass();
         Slog.d("VibratorManagerService", "Vibration " + j + " finished with " + endInfo);
         synchronized (((VibratorManagerService) vibrationThreadCallbacks.this$0).mLock) {
             try {
-                VibratorManagerService vibratorManagerService = (VibratorManagerService) vibrationThreadCallbacks.this$0;
-                VibrationStepConductor vibrationStepConductor = vibratorManagerService.mCurrentVibration;
+                VibratorManagerService vibratorManagerService =
+                        (VibratorManagerService) vibrationThreadCallbacks.this$0;
+                VibrationStepConductor vibrationStepConductor =
+                        vibratorManagerService.mCurrentVibration;
                 if (vibrationStepConductor != null && vibrationStepConductor.mVibration.id == j) {
-                    VibratorManagerService.m1032$$Nest$mreportFinishedVibrationLocked(vibratorManagerService, endInfo);
+                    VibratorManagerService.m1032$$Nest$mreportFinishedVibrationLocked(
+                            vibratorManagerService, endInfo);
                 }
             } finally {
             }
@@ -79,8 +83,14 @@ public final class VibrationThread extends Thread {
                     }
                     Vibration.EndInfo endInfo = vibrationStepConductor.mCancelledVibrationEndInfo;
                     if (endInfo == null) {
-                        if (vibrationStepConductor.mPendingVibrateSteps <= 0 && vibrationStepConductor.mRemainingStartSequentialEffectSteps <= 0) {
-                            endInfo = vibrationStepConductor.mSuccessfulVibratorOnSteps > 0 ? new Vibration.EndInfo(Vibration.Status.FINISHED, null) : new Vibration.EndInfo(Vibration.Status.IGNORED_UNSUPPORTED, null);
+                        if (vibrationStepConductor.mPendingVibrateSteps <= 0
+                                && vibrationStepConductor.mRemainingStartSequentialEffectSteps
+                                        <= 0) {
+                            endInfo =
+                                    vibrationStepConductor.mSuccessfulVibratorOnSteps > 0
+                                            ? new Vibration.EndInfo(Vibration.Status.FINISHED, null)
+                                            : new Vibration.EndInfo(
+                                                    Vibration.Status.IGNORED_UNSUPPORTED, null);
                         }
                         endInfo = null;
                     }
@@ -107,58 +117,113 @@ public final class VibrationThread extends Thread {
                     this.mExecutingConductor = vibrationStepConductor2;
                     this.mCalledVibrationCompleteCallback = false;
                     Vibration.Status status = Vibration.Status.FINISHED_UNEXPECTED;
-                    this.mWakeLock.setWorkSource(new WorkSource(this.mExecutingConductor.mVibration.callerInfo.uid));
+                    this.mWakeLock.setWorkSource(
+                            new WorkSource(this.mExecutingConductor.mVibration.callerInfo.uid));
                     this.mWakeLock.acquire();
                     try {
                         try {
                             runCurrentVibrationWithWakeLockAndDeathLink();
-                            clientVibrationCompleteIfNotAlready(new Vibration.EndInfo(status, null));
+                            clientVibrationCompleteIfNotAlready(
+                                    new Vibration.EndInfo(status, null));
                             this.mWakeLock.release();
                             this.mWakeLock.setWorkSource(null);
                             if (!this.mExecutingConductor.isFinished()) {
-                                Slog.wtf("VibrationThread", "VibrationThread terminated with unfinished vibration");
+                                Slog.wtf(
+                                        "VibrationThread",
+                                        "VibrationThread terminated with unfinished vibration");
                             }
                             synchronized (this.mLock) {
                                 this.mRequestedActiveConductor = null;
                             }
-                            VibratorManagerService.VibrationThreadCallbacks vibrationThreadCallbacks = this.mVibratorManagerHooks;
+                            VibratorManagerService.VibrationThreadCallbacks
+                                    vibrationThreadCallbacks = this.mVibratorManagerHooks;
                             long j = this.mExecutingConductor.mVibration.id;
                             vibrationThreadCallbacks.getClass();
-                            Slog.d("VibratorManagerService", "VibrationThread released after finished vibration");
-                            synchronized (((VibratorManagerService) vibrationThreadCallbacks.this$0).mLock) {
+                            Slog.d(
+                                    "VibratorManagerService",
+                                    "VibrationThread released after finished vibration");
+                            synchronized (
+                                    ((VibratorManagerService) vibrationThreadCallbacks.this$0)
+                                            .mLock) {
                                 try {
-                                    Slog.d("VibratorManagerService", "Processing VibrationThread released callback");
-                                    if (Build.IS_DEBUGGABLE && (vibrationStepConductor = ((VibratorManagerService) vibrationThreadCallbacks.this$0).mCurrentVibration) != null) {
+                                    Slog.d(
+                                            "VibratorManagerService",
+                                            "Processing VibrationThread released callback");
+                                    if (Build.IS_DEBUGGABLE
+                                            && (vibrationStepConductor =
+                                                            ((VibratorManagerService)
+                                                                            vibrationThreadCallbacks
+                                                                                    .this$0)
+                                                                    .mCurrentVibration)
+                                                    != null) {
                                         long j2 = vibrationStepConductor.mVibration.id;
                                         if (j2 != j) {
-                                            Slog.wtf("VibratorManagerService", TextUtils.formatSimple("VibrationId mismatch on release. expected=%d, released=%d", new Object[]{Long.valueOf(j2), Long.valueOf(j)}));
+                                            Slog.wtf(
+                                                    "VibratorManagerService",
+                                                    TextUtils.formatSimple(
+                                                            "VibrationId mismatch on release."
+                                                                + " expected=%d, released=%d",
+                                                            new Object[] {
+                                                                Long.valueOf(j2), Long.valueOf(j)
+                                                            }));
                                         }
                                     }
-                                    VibratorManagerService vibratorManagerService = (VibratorManagerService) vibrationThreadCallbacks.this$0;
-                                    VibrationStepConductor vibrationStepConductor3 = vibratorManagerService.mCurrentVibration;
+                                    VibratorManagerService vibratorManagerService =
+                                            (VibratorManagerService)
+                                                    vibrationThreadCallbacks.this$0;
+                                    VibrationStepConductor vibrationStepConductor3 =
+                                            vibratorManagerService.mCurrentVibration;
                                     if (vibrationStepConductor3 != null) {
-                                        VibratorFrameworkStatsLogger vibratorFrameworkStatsLogger = vibratorManagerService.mFrameworkStatsLogger;
-                                        HalVibration halVibration = vibrationStepConductor3.mVibration;
+                                        VibratorFrameworkStatsLogger vibratorFrameworkStatsLogger =
+                                                vibratorManagerService.mFrameworkStatsLogger;
+                                        HalVibration halVibration =
+                                                vibrationStepConductor3.mVibration;
                                         long uptimeMillis = SystemClock.uptimeMillis();
                                         int i = halVibration.isRepeating() ? 2 : 1;
                                         Vibration.CallerInfo callerInfo = halVibration.callerInfo;
-                                        vibratorFrameworkStatsLogger.writeVibrationReportedAsync(new VibrationStats.StatsInfo(callerInfo.uid, i, callerInfo.attrs.getUsage(), halVibration.mStatus, halVibration.stats, uptimeMillis));
-                                        ((VibratorManagerService) vibrationThreadCallbacks.this$0).mCurrentVibration = null;
+                                        vibratorFrameworkStatsLogger.writeVibrationReportedAsync(
+                                                new VibrationStats.StatsInfo(
+                                                        callerInfo.uid,
+                                                        i,
+                                                        callerInfo.attrs.getUsage(),
+                                                        halVibration.mStatus,
+                                                        halVibration.stats,
+                                                        uptimeMillis));
+                                        ((VibratorManagerService) vibrationThreadCallbacks.this$0)
+                                                        .mCurrentVibration =
+                                                null;
                                     }
-                                    VibratorManagerService vibratorManagerService2 = (VibratorManagerService) vibrationThreadCallbacks.this$0;
-                                    VibrationStepConductor vibrationStepConductor4 = vibratorManagerService2.mNextVibration;
+                                    VibratorManagerService vibratorManagerService2 =
+                                            (VibratorManagerService)
+                                                    vibrationThreadCallbacks.this$0;
+                                    VibrationStepConductor vibrationStepConductor4 =
+                                            vibratorManagerService2.mNextVibration;
                                     if (vibrationStepConductor4 != null) {
                                         vibratorManagerService2.mNextVibration = null;
-                                        Vibration.EndInfo startVibrationOnThreadLocked = vibratorManagerService2.startVibrationOnThreadLocked(vibrationStepConductor4);
+                                        Vibration.EndInfo startVibrationOnThreadLocked =
+                                                vibratorManagerService2
+                                                        .startVibrationOnThreadLocked(
+                                                                vibrationStepConductor4);
                                         if (startVibrationOnThreadLocked != null) {
-                                            ((VibratorManagerService) vibrationThreadCallbacks.this$0).endVibrationLocked(vibrationStepConductor4.mVibration, startVibrationOnThreadLocked, true);
+                                            ((VibratorManagerService)
+                                                            vibrationThreadCallbacks.this$0)
+                                                    .endVibrationLocked(
+                                                            vibrationStepConductor4.mVibration,
+                                                            startVibrationOnThreadLocked,
+                                                            true);
                                         }
                                     }
-                                    VibratorManagerService vibratorManagerService3 = (VibratorManagerService) vibrationThreadCallbacks.this$0;
-                                    if (vibratorManagerService3.getDefaultVibratorController() != null) {
-                                        VibratorController defaultVibratorController = vibratorManagerService3.getDefaultVibratorController();
+                                    VibratorManagerService vibratorManagerService3 =
+                                            (VibratorManagerService)
+                                                    vibrationThreadCallbacks.this$0;
+                                    if (vibratorManagerService3.getDefaultVibratorController()
+                                            != null) {
+                                        VibratorController defaultVibratorController =
+                                                vibratorManagerService3
+                                                        .getDefaultVibratorController();
                                         synchronized (defaultVibratorController.mLock) {
-                                            defaultVibratorController.notifyListenerOnVibrating(false);
+                                            defaultVibratorController.notifyListenerOnVibrating(
+                                                    false);
                                         }
                                     }
                                 } finally {
@@ -179,7 +244,9 @@ public final class VibrationThread extends Thread {
                     try {
                         this.mLock.wait();
                     } catch (InterruptedException unused) {
-                        Slog.w("VibrationThread", "VibrationThread interrupted waiting to start, continuing");
+                        Slog.w(
+                                "VibrationThread",
+                                "VibrationThread interrupted waiting to start, continuing");
                     }
                 }
             }
@@ -208,7 +275,8 @@ public final class VibrationThread extends Thread {
             }
         } catch (RemoteException e3) {
             Slog.e("VibrationThread", "Error linking vibration to token death", e3);
-            clientVibrationCompleteIfNotAlready(new Vibration.EndInfo(Vibration.Status.IGNORED_ERROR_TOKEN, null));
+            clientVibrationCompleteIfNotAlready(
+                    new Vibration.EndInfo(Vibration.Status.IGNORED_ERROR_TOKEN, null));
         }
     }
 
@@ -224,7 +292,9 @@ public final class VibrationThread extends Thread {
                     try {
                         this.mLock.wait(j2 - elapsedRealtime);
                     } catch (InterruptedException unused) {
-                        Slog.w("VibrationThread", "VibrationThread interrupted waiting to stop, continuing");
+                        Slog.w(
+                                "VibrationThread",
+                                "VibrationThread interrupted waiting to stop, continuing");
                     }
                     elapsedRealtime = SystemClock.elapsedRealtime();
                 } catch (Throwable th) {

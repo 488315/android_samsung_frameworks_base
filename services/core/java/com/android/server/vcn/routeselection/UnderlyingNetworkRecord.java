@@ -3,6 +3,7 @@ package com.android.server.vcn.routeselection;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -27,17 +28,30 @@ public final class UnderlyingNetworkRecord {
 
         public final UnderlyingNetworkRecord build() {
             if (isValid()) {
-                return new UnderlyingNetworkRecord(this.mNetwork, this.mNetworkCapabilities, this.mLinkProperties, this.mIsBlocked);
+                return new UnderlyingNetworkRecord(
+                        this.mNetwork,
+                        this.mNetworkCapabilities,
+                        this.mLinkProperties,
+                        this.mIsBlocked);
             }
-            throw new IllegalArgumentException("Called build before UnderlyingNetworkRecord was valid");
+            throw new IllegalArgumentException(
+                    "Called build before UnderlyingNetworkRecord was valid");
         }
 
         public final boolean isValid() {
-            return (this.mNetworkCapabilities == null || this.mLinkProperties == null || !this.mWasIsBlockedSet) ? false : true;
+            return (this.mNetworkCapabilities == null
+                            || this.mLinkProperties == null
+                            || !this.mWasIsBlockedSet)
+                    ? false
+                    : true;
         }
     }
 
-    public UnderlyingNetworkRecord(Network network, NetworkCapabilities networkCapabilities, LinkProperties linkProperties, boolean z) {
+    public UnderlyingNetworkRecord(
+            Network network,
+            NetworkCapabilities networkCapabilities,
+            LinkProperties linkProperties,
+            boolean z) {
         this.network = network;
         this.networkCapabilities = networkCapabilities;
         this.linkProperties = linkProperties;
@@ -52,10 +66,17 @@ public final class UnderlyingNetworkRecord {
             return false;
         }
         UnderlyingNetworkRecord underlyingNetworkRecord = (UnderlyingNetworkRecord) obj;
-        return this.network.equals(underlyingNetworkRecord.network) && this.networkCapabilities.equals(underlyingNetworkRecord.networkCapabilities) && this.linkProperties.equals(underlyingNetworkRecord.linkProperties) && this.isBlocked == underlyingNetworkRecord.isBlocked;
+        return this.network.equals(underlyingNetworkRecord.network)
+                && this.networkCapabilities.equals(underlyingNetworkRecord.networkCapabilities)
+                && this.linkProperties.equals(underlyingNetworkRecord.linkProperties)
+                && this.isBlocked == underlyingNetworkRecord.isBlocked;
     }
 
     public final int hashCode() {
-        return Objects.hash(this.network, this.networkCapabilities, this.linkProperties, Boolean.valueOf(this.isBlocked));
+        return Objects.hash(
+                this.network,
+                this.networkCapabilities,
+                this.linkProperties,
+                Boolean.valueOf(this.isBlocked));
     }
 }

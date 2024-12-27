@@ -13,14 +13,17 @@ import android.system.Os;
 import android.system.OsConstants;
 import android.system.StructPollfd;
 import android.util.Log;
+
 import com.android.internal.midi.MidiEventScheduler;
 import com.android.internal.util.dump.DualDumpOutputStream;
+
+import libcore.io.IoUtils;
+
 import java.io.Closeable;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -43,46 +46,56 @@ public final class UsbAlsaMidiDevice implements Closeable {
     public boolean mServerAvailable;
     public final Object mLock = new Object();
     public int mPipeFD = -1;
-    public final MidiDeviceServer.Callback mCallback = new MidiDeviceServer.Callback() { // from class: com.android.server.usb.UsbAlsaMidiDevice.1
-        public final void onClose() {
-        }
+    public final MidiDeviceServer.Callback mCallback =
+            new MidiDeviceServer
+                    .Callback() { // from class: com.android.server.usb.UsbAlsaMidiDevice.1
+                public final void onClose() {}
 
-        public final void onDeviceStatusChanged(MidiDeviceServer midiDeviceServer, MidiDeviceStatus midiDeviceStatus) {
-            MidiDeviceInfo deviceInfo = midiDeviceStatus.getDeviceInfo();
-            int inputPortCount = deviceInfo.getInputPortCount();
-            int outputPortCount = deviceInfo.getOutputPortCount();
-            int i = 0;
-            for (int i2 = 0; i2 < inputPortCount; i2++) {
-                if (midiDeviceStatus.isInputPortOpen(i2)) {
-                    i++;
-                }
-            }
-            for (int i3 = 0; i3 < outputPortCount; i3++) {
-                if (midiDeviceStatus.getOutputPortOpenCount(i3) > 0) {
-                    i = midiDeviceStatus.getOutputPortOpenCount(i3) + i;
-                }
-            }
-            synchronized (UsbAlsaMidiDevice.this.mLock) {
-                try {
-                    Log.d(UsbAlsaMidiDevice.TAG, "numOpenPorts: " + i + " isOpen: " + UsbAlsaMidiDevice.this.mIsOpen + " mServerAvailable: " + UsbAlsaMidiDevice.this.mServerAvailable);
-                    if (i > 0) {
-                        UsbAlsaMidiDevice usbAlsaMidiDevice = UsbAlsaMidiDevice.this;
-                        if (!usbAlsaMidiDevice.mIsOpen && usbAlsaMidiDevice.mServerAvailable) {
-                            usbAlsaMidiDevice.openLocked();
+                public final void onDeviceStatusChanged(
+                        MidiDeviceServer midiDeviceServer, MidiDeviceStatus midiDeviceStatus) {
+                    MidiDeviceInfo deviceInfo = midiDeviceStatus.getDeviceInfo();
+                    int inputPortCount = deviceInfo.getInputPortCount();
+                    int outputPortCount = deviceInfo.getOutputPortCount();
+                    int i = 0;
+                    for (int i2 = 0; i2 < inputPortCount; i2++) {
+                        if (midiDeviceStatus.isInputPortOpen(i2)) {
+                            i++;
                         }
                     }
-                    if (i == 0) {
-                        UsbAlsaMidiDevice usbAlsaMidiDevice2 = UsbAlsaMidiDevice.this;
-                        if (usbAlsaMidiDevice2.mIsOpen) {
-                            usbAlsaMidiDevice2.closeLocked();
+                    for (int i3 = 0; i3 < outputPortCount; i3++) {
+                        if (midiDeviceStatus.getOutputPortOpenCount(i3) > 0) {
+                            i = midiDeviceStatus.getOutputPortOpenCount(i3) + i;
                         }
                     }
-                } catch (Throwable th) {
-                    throw th;
+                    synchronized (UsbAlsaMidiDevice.this.mLock) {
+                        try {
+                            Log.d(
+                                    UsbAlsaMidiDevice.TAG,
+                                    "numOpenPorts: "
+                                            + i
+                                            + " isOpen: "
+                                            + UsbAlsaMidiDevice.this.mIsOpen
+                                            + " mServerAvailable: "
+                                            + UsbAlsaMidiDevice.this.mServerAvailable);
+                            if (i > 0) {
+                                UsbAlsaMidiDevice usbAlsaMidiDevice = UsbAlsaMidiDevice.this;
+                                if (!usbAlsaMidiDevice.mIsOpen
+                                        && usbAlsaMidiDevice.mServerAvailable) {
+                                    usbAlsaMidiDevice.openLocked();
+                                }
+                            }
+                            if (i == 0) {
+                                UsbAlsaMidiDevice usbAlsaMidiDevice2 = UsbAlsaMidiDevice.this;
+                                if (usbAlsaMidiDevice2.mIsOpen) {
+                                    usbAlsaMidiDevice2.closeLocked();
+                                }
+                            }
+                        } catch (Throwable th) {
+                            throw th;
+                        }
+                    }
                 }
-            }
-        }
-    };
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InputReceiverProxy extends MidiReceiver {
@@ -118,7 +131,8 @@ public final class UsbAlsaMidiDevice implements Closeable {
         this.mPowerBoostSetter = new PowerBoostSetter();
     }
 
-    public static UsbAlsaMidiDevice create(Context context, Bundle bundle, int i, int i2, int i3, int i4) {
+    public static UsbAlsaMidiDevice create(
+            Context context, Bundle bundle, int i, int i2, int i3, int i4) {
         UsbAlsaMidiDevice usbAlsaMidiDevice = new UsbAlsaMidiDevice(i, i2, i3, i4);
         if (usbAlsaMidiDevice.register(context, bundle)) {
             return usbAlsaMidiDevice;
@@ -187,7 +201,8 @@ public final class UsbAlsaMidiDevice implements Closeable {
         }
     }
 
-    public final void dump(String str, DualDumpOutputStream dualDumpOutputStream, String str2, long j) {
+    public final void dump(
+            String str, DualDumpOutputStream dualDumpOutputStream, String str2, long j) {
         long start = dualDumpOutputStream.start(str2, j);
         dualDumpOutputStream.write("device_address", 1138166333443L, str);
         dualDumpOutputStream.write("card", 1120986464257L, this.mAlsaCard);
@@ -247,25 +262,29 @@ public final class UsbAlsaMidiDevice implements Closeable {
                                     }
                                     int i5 = 0;
                                     while (true) {
-                                        UsbAlsaMidiDevice usbAlsaMidiDevice = UsbAlsaMidiDevice.this;
+                                        UsbAlsaMidiDevice usbAlsaMidiDevice =
+                                                UsbAlsaMidiDevice.this;
                                         structPollfdArr = usbAlsaMidiDevice.mPollFDs;
                                         if (i5 >= structPollfdArr.length) {
                                             break;
                                         }
                                         StructPollfd structPollfd2 = structPollfdArr[i5];
                                         short s = structPollfd2.revents;
-                                        if (((OsConstants.POLLERR | OsConstants.POLLHUP) & s) != 0) {
+                                        if (((OsConstants.POLLERR | OsConstants.POLLHUP) & s)
+                                                != 0) {
                                             break;
                                         }
                                         if ((s & OsConstants.POLLIN) != 0) {
                                             structPollfd2.revents = (short) 0;
-                                            FileInputStream[] fileInputStreamArr = usbAlsaMidiDevice.mInputStreams;
+                                            FileInputStream[] fileInputStreamArr =
+                                                    usbAlsaMidiDevice.mInputStreams;
                                             if (i5 == fileInputStreamArr.length - 1) {
                                                 break;
                                             }
                                             int read = fileInputStreamArr[i5].read(bArr);
                                             outputPortReceivers[i5].send(bArr, 0, read, nanoTime);
-                                            PowerBoostSetter powerBoostSetter = UsbAlsaMidiDevice.this.mPowerBoostSetter;
+                                            PowerBoostSetter powerBoostSetter =
+                                                    UsbAlsaMidiDevice.this.mPowerBoostSetter;
                                             if (powerBoostSetter != null && read > 1) {
                                                 powerBoostSetter.boostPower();
                                             }
@@ -289,7 +308,11 @@ public final class UsbAlsaMidiDevice implements Closeable {
         for (final int i5 = 0; i5 < i2; i5++) {
             final MidiEventScheduler midiEventScheduler2 = this.mEventSchedulers[i5];
             final FileOutputStream fileOutputStream = this.mOutputStreams[i5];
-            new Thread(VibrationParam$1$$ExternalSyntheticOutline0.m(i5, "UsbAlsaMidiDevice output thread ")) { // from class: com.android.server.usb.UsbAlsaMidiDevice.3
+            new Thread(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(
+                            i5,
+                            "UsbAlsaMidiDevice output thread ")) { // from class:
+                                                                   // com.android.server.usb.UsbAlsaMidiDevice.3
                 @Override // java.lang.Thread, java.lang.Runnable
                 public final void run() {
                     MidiEventScheduler.MidiEvent waitNextEvent;
@@ -323,7 +346,16 @@ public final class UsbAlsaMidiDevice implements Closeable {
             return false;
         }
         this.mServerAvailable = true;
-        MidiDeviceServer createDeviceServer = midiManager.createDeviceServer(this.mMidiInputPortReceivers, this.mNumInputs, null, null, bundle, 1, -1, this.mCallback);
+        MidiDeviceServer createDeviceServer =
+                midiManager.createDeviceServer(
+                        this.mMidiInputPortReceivers,
+                        this.mNumInputs,
+                        null,
+                        null,
+                        bundle,
+                        1,
+                        -1,
+                        this.mCallback);
         this.mServer = createDeviceServer;
         return createDeviceServer != null;
     }

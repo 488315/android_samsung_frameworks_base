@@ -1,10 +1,10 @@
 package com.android.server.media;
 
-import com.android.server.media.BluetoothRouteController;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class SystemMediaRoute2Provider$$ExternalSyntheticLambda2 implements BluetoothRouteController.BluetoothRoutesUpdatedListener {
+public final /* synthetic */ class SystemMediaRoute2Provider$$ExternalSyntheticLambda2
+        implements BluetoothRouteController.BluetoothRoutesUpdatedListener {
     public final /* synthetic */ SystemMediaRoute2Provider f$0;
 
     @Override // com.android.server.media.BluetoothRouteController.BluetoothRoutesUpdatedListener

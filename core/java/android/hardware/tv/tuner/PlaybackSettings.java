@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class PlaybackSettings implements Parcelable {
-    public static final Parcelable.Creator<PlaybackSettings> CREATOR = new Parcelable.Creator<PlaybackSettings>() { // from class: android.hardware.tv.tuner.PlaybackSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackSettings createFromParcel(Parcel _aidl_source) {
-            PlaybackSettings _aidl_out = new PlaybackSettings();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<PlaybackSettings> CREATOR =
+            new Parcelable.Creator<PlaybackSettings>() { // from class:
+                // android.hardware.tv.tuner.PlaybackSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackSettings createFromParcel(Parcel _aidl_source) {
+                    PlaybackSettings _aidl_out = new PlaybackSettings();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackSettings[] newArray(int _aidl_size) {
-            return new PlaybackSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackSettings[] newArray(int _aidl_size) {
+                    return new PlaybackSettings[_aidl_size];
+                }
+            };
     public int statusMask = 0;
     public long lowThreshold = 0;
     public long highThreshold = 0;

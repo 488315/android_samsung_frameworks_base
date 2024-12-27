@@ -3,6 +3,7 @@ package com.samsung.android.feature;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -23,8 +24,7 @@ public class SemCarrierFeature {
     private static class SemCarrierFeatureHolder {
         private static SemCarrierFeature INSTANCE = new SemCarrierFeature();
 
-        private SemCarrierFeatureHolder() {
-        }
+        private SemCarrierFeatureHolder() {}
 
         /* JADX INFO: Access modifiers changed from: private */
         public static void createInstance() {
@@ -51,9 +51,13 @@ public class SemCarrierFeature {
         this.mSpecificFeatureList = new LinkedHashMap();
         this.mLastFeatureList = new LinkedHashMap();
         for (int phoneId = 0; phoneId < FeatureUtil.readSimCount(); phoneId++) {
-            this.mMatchedCode.put(Integer.valueOf(phoneId), FeatureUtil.getMatchedCode(phoneId, false));
-            this.mLastMatchedCode.put(Integer.valueOf(phoneId), FeatureUtil.getMatchedCode(phoneId, true));
-            this.mFeatureVersion.put(Integer.valueOf(phoneId), Integer.valueOf(FeatureUtil.getLastFeatureVersion(phoneId)));
+            this.mMatchedCode.put(
+                    Integer.valueOf(phoneId), FeatureUtil.getMatchedCode(phoneId, false));
+            this.mLastMatchedCode.put(
+                    Integer.valueOf(phoneId), FeatureUtil.getMatchedCode(phoneId, true));
+            this.mFeatureVersion.put(
+                    Integer.valueOf(phoneId),
+                    Integer.valueOf(FeatureUtil.getLastFeatureVersion(phoneId)));
             loadDefaultFeatures(phoneId);
             loadSpecificFeatures(phoneId);
             loadLastFeatures(phoneId);
@@ -72,7 +76,9 @@ public class SemCarrierFeature {
 
     private synchronized String get(int phoneId, String key, boolean checkLastSim) {
         if (DEBUG) {
-            Log.d(LOG_TAG, "[get] phoneId:" + phoneId + " key:" + key + " checkLastSim:" + checkLastSim);
+            Log.d(
+                    LOG_TAG,
+                    "[get] phoneId:" + phoneId + " key:" + key + " checkLastSim:" + checkLastSim);
         }
         if (phoneId != 0 && phoneId != 1) {
             Log.d(LOG_TAG, "[get] phoneId should be 0 or 1");
@@ -82,26 +88,52 @@ public class SemCarrierFeature {
             String currentMatchedCode = FeatureUtil.getMatchedCode(phoneId, false);
             String lastMatchedCode = FeatureUtil.getMatchedCode(phoneId, true);
             int currentFeatureVersion = FeatureUtil.getLastFeatureVersion(phoneId);
-            Log.d(LOG_TAG, "[get] CarrierFeature is changed : [" + phoneId + "] " + this.mMatchedCode.get(Integer.valueOf(phoneId)) + " / " + this.mLastMatchedCode.get(Integer.valueOf(phoneId)) + " / " + this.mFeatureVersion.get(Integer.valueOf(phoneId)) + " / " + this.mCanonicalId.get(Integer.valueOf(phoneId)) + " -> " + currentMatchedCode + " / " + lastMatchedCode + " / " + currentFeatureVersion + " / " + FeatureUtil.getLastCanonicalID(phoneId));
+            Log.d(
+                    LOG_TAG,
+                    "[get] CarrierFeature is changed : ["
+                            + phoneId
+                            + "] "
+                            + this.mMatchedCode.get(Integer.valueOf(phoneId))
+                            + " / "
+                            + this.mLastMatchedCode.get(Integer.valueOf(phoneId))
+                            + " / "
+                            + this.mFeatureVersion.get(Integer.valueOf(phoneId))
+                            + " / "
+                            + this.mCanonicalId.get(Integer.valueOf(phoneId))
+                            + " -> "
+                            + currentMatchedCode
+                            + " / "
+                            + lastMatchedCode
+                            + " / "
+                            + currentFeatureVersion
+                            + " / "
+                            + FeatureUtil.getLastCanonicalID(phoneId));
             this.mMatchedCode.put(Integer.valueOf(phoneId), currentMatchedCode);
             this.mLastMatchedCode.put(Integer.valueOf(phoneId), lastMatchedCode);
-            this.mFeatureVersion.put(Integer.valueOf(phoneId), Integer.valueOf(currentFeatureVersion));
+            this.mFeatureVersion.put(
+                    Integer.valueOf(phoneId), Integer.valueOf(currentFeatureVersion));
             loadDefaultFeatures(phoneId);
             loadSpecificFeatures(phoneId);
             loadLastFeatures(phoneId);
         }
         if (checkLastSim) {
-            if (this.mCanonicalId.get(Integer.valueOf(phoneId)).intValue() > FeatureUtil.getDefaultCanonicalID()) {
+            if (this.mCanonicalId.get(Integer.valueOf(phoneId)).intValue()
+                    > FeatureUtil.getDefaultCanonicalID()) {
                 return this.mLastFeatureList.get(Integer.valueOf(phoneId)).get(key);
             }
-        } else if (this.mCanonicalId.get(Integer.valueOf(phoneId)).intValue() != FeatureUtil.getDefaultCanonicalID() && this.mCanonicalId.get(Integer.valueOf(phoneId)).intValue() == FeatureUtil.getCurrentCanonicalID(phoneId)) {
+        } else if (this.mCanonicalId.get(Integer.valueOf(phoneId)).intValue()
+                        != FeatureUtil.getDefaultCanonicalID()
+                && this.mCanonicalId.get(Integer.valueOf(phoneId)).intValue()
+                        == FeatureUtil.getCurrentCanonicalID(phoneId)) {
             return this.mSpecificFeatureList.get(Integer.valueOf(phoneId)).get(key);
         }
         return this.mDefaultFeatureList.get(Integer.valueOf(phoneId)).get(key);
     }
 
     private boolean isFeatureChanged(int phoneId) {
-        return isCurrentFileChanged(phoneId) || isLastFileChanged(phoneId) || isCarrierIdChanged(phoneId);
+        return isCurrentFileChanged(phoneId)
+                || isLastFileChanged(phoneId)
+                || isCarrierIdChanged(phoneId);
     }
 
     private boolean isCurrentFileChanged(int phoneId) {
@@ -113,19 +145,25 @@ public class SemCarrierFeature {
     }
 
     private boolean isCarrierIdChanged(int phoneId) {
-        return this.mCanonicalId.get(Integer.valueOf(phoneId)).intValue() != FeatureUtil.getLastCanonicalID(phoneId);
+        return this.mCanonicalId.get(Integer.valueOf(phoneId)).intValue()
+                != FeatureUtil.getLastCanonicalID(phoneId);
     }
 
     private boolean isMatchedCodeChanged(int phoneId) {
-        return !TextUtils.equals(this.mMatchedCode.get(Integer.valueOf(phoneId)), FeatureUtil.getMatchedCode(phoneId, false));
+        return !TextUtils.equals(
+                this.mMatchedCode.get(Integer.valueOf(phoneId)),
+                FeatureUtil.getMatchedCode(phoneId, false));
     }
 
     private boolean isLastMatchedCodeChanged(int phoneId) {
-        return !TextUtils.equals(this.mLastMatchedCode.get(Integer.valueOf(phoneId)), FeatureUtil.getMatchedCode(phoneId, true));
+        return !TextUtils.equals(
+                this.mLastMatchedCode.get(Integer.valueOf(phoneId)),
+                FeatureUtil.getMatchedCode(phoneId, true));
     }
 
     private boolean isFeatureVersionChanged(int phoneId) {
-        return this.mFeatureVersion.get(Integer.valueOf(phoneId)).intValue() != FeatureUtil.getLastFeatureVersion(phoneId);
+        return this.mFeatureVersion.get(Integer.valueOf(phoneId)).intValue()
+                != FeatureUtil.getLastFeatureVersion(phoneId);
     }
 
     private void loadDefaultFeatures(int phoneId) {
@@ -141,7 +179,8 @@ public class SemCarrierFeature {
     }
 
     private void loadSpecificFeatures(int phoneId) {
-        this.mCanonicalId.put(Integer.valueOf(phoneId), Integer.valueOf(FeatureUtil.getDefaultCanonicalID()));
+        this.mCanonicalId.put(
+                Integer.valueOf(phoneId), Integer.valueOf(FeatureUtil.getDefaultCanonicalID()));
         int canonicalId = FeatureUtil.getLastCanonicalID(phoneId);
         Log.d(LOG_TAG, "update specific features : " + phoneId + "/" + canonicalId);
         SecCarrier last = FeatureUtil.getCarrierFeature(phoneId, canonicalId, false);

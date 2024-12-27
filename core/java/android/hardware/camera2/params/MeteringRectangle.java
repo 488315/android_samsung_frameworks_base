@@ -4,6 +4,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.util.Size;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes2.dex */
@@ -22,7 +23,8 @@ public final class MeteringRectangle {
         this.mY = Preconditions.checkArgumentNonnegative(y, "y must be nonnegative");
         this.mWidth = Preconditions.checkArgumentNonnegative(width, "width must be nonnegative");
         this.mHeight = Preconditions.checkArgumentNonnegative(height, "height must be nonnegative");
-        this.mWeight = Preconditions.checkArgumentInRange(meteringWeight, 0, 1000, "meteringWeight");
+        this.mWeight =
+                Preconditions.checkArgumentInRange(meteringWeight, 0, 1000, "meteringWeight");
     }
 
     public MeteringRectangle(Point xy, Size dimensions, int meteringWeight) {
@@ -30,18 +32,31 @@ public final class MeteringRectangle {
         Preconditions.checkNotNull(dimensions, "dimensions must not be null");
         this.mX = Preconditions.checkArgumentNonnegative(xy.x, "x must be nonnegative");
         this.mY = Preconditions.checkArgumentNonnegative(xy.y, "y must be nonnegative");
-        this.mWidth = Preconditions.checkArgumentNonnegative(dimensions.getWidth(), "width must be nonnegative");
-        this.mHeight = Preconditions.checkArgumentNonnegative(dimensions.getHeight(), "height must be nonnegative");
-        this.mWeight = Preconditions.checkArgumentNonnegative(meteringWeight, "meteringWeight must be nonnegative");
+        this.mWidth =
+                Preconditions.checkArgumentNonnegative(
+                        dimensions.getWidth(), "width must be nonnegative");
+        this.mHeight =
+                Preconditions.checkArgumentNonnegative(
+                        dimensions.getHeight(), "height must be nonnegative");
+        this.mWeight =
+                Preconditions.checkArgumentNonnegative(
+                        meteringWeight, "meteringWeight must be nonnegative");
     }
 
     public MeteringRectangle(Rect rect, int meteringWeight) {
         Preconditions.checkNotNull(rect, "rect must not be null");
-        this.mX = Preconditions.checkArgumentNonnegative(rect.left, "rect.left must be nonnegative");
+        this.mX =
+                Preconditions.checkArgumentNonnegative(rect.left, "rect.left must be nonnegative");
         this.mY = Preconditions.checkArgumentNonnegative(rect.top, "rect.top must be nonnegative");
-        this.mWidth = Preconditions.checkArgumentNonnegative(rect.width(), "rect.width must be nonnegative");
-        this.mHeight = Preconditions.checkArgumentNonnegative(rect.height(), "rect.height must be nonnegative");
-        this.mWeight = Preconditions.checkArgumentNonnegative(meteringWeight, "meteringWeight must be nonnegative");
+        this.mWidth =
+                Preconditions.checkArgumentNonnegative(
+                        rect.width(), "rect.width must be nonnegative");
+        this.mHeight =
+                Preconditions.checkArgumentNonnegative(
+                        rect.height(), "rect.height must be nonnegative");
+        this.mWeight =
+                Preconditions.checkArgumentNonnegative(
+                        meteringWeight, "meteringWeight must be nonnegative");
     }
 
     public int getX() {
@@ -81,7 +96,12 @@ public final class MeteringRectangle {
     }
 
     public boolean equals(MeteringRectangle other) {
-        return other != null && this.mX == other.mX && this.mY == other.mY && this.mWidth == other.mWidth && this.mHeight == other.mHeight && this.mWeight == other.mWeight;
+        return other != null
+                && this.mX == other.mX
+                && this.mY == other.mY
+                && this.mWidth == other.mWidth
+                && this.mHeight == other.mHeight
+                && this.mWeight == other.mWeight;
     }
 
     public int hashCode() {
@@ -89,6 +109,12 @@ public final class MeteringRectangle {
     }
 
     public String toString() {
-        return String.format("(x:%d, y:%d, w:%d, h:%d, wt:%d)", Integer.valueOf(this.mX), Integer.valueOf(this.mY), Integer.valueOf(this.mWidth), Integer.valueOf(this.mHeight), Integer.valueOf(this.mWeight));
+        return String.format(
+                "(x:%d, y:%d, w:%d, h:%d, wt:%d)",
+                Integer.valueOf(this.mX),
+                Integer.valueOf(this.mY),
+                Integer.valueOf(this.mWidth),
+                Integer.valueOf(this.mHeight),
+                Integer.valueOf(this.mWeight));
     }
 }

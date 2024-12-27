@@ -6,13 +6,14 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.media.codec.IVideoTranscodingServiceCallback;
 
 /* loaded from: classes6.dex */
 public interface IVideoTranscodingService extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.media.codec.IVideoTranscodingService";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.media.codec.IVideoTranscodingService";
 
-    String register(int i, IVideoTranscodingServiceCallback iVideoTranscodingServiceCallback) throws RemoteException;
+    String register(int i, IVideoTranscodingServiceCallback iVideoTranscodingServiceCallback)
+            throws RemoteException;
 
     void startTask(String str) throws RemoteException;
 
@@ -20,17 +21,16 @@ public interface IVideoTranscodingService extends IInterface {
 
     public static class Default implements IVideoTranscodingService {
         @Override // com.samsung.android.media.codec.IVideoTranscodingService
-        public String register(int mode, IVideoTranscodingServiceCallback callback) throws RemoteException {
+        public String register(int mode, IVideoTranscodingServiceCallback callback)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.media.codec.IVideoTranscodingService
-        public void startTask(String id) throws RemoteException {
-        }
+        public void startTask(String id) throws RemoteException {}
 
         @Override // com.samsung.android.media.codec.IVideoTranscodingService
-        public void stopTask(String id) throws RemoteException {
-        }
+        public void stopTask(String id) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -38,7 +38,7 @@ public interface IVideoTranscodingService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVideoTranscodingService {
+    public abstract static class Stub extends Binder implements IVideoTranscodingService {
         static final int TRANSACTION_register = 1;
         static final int TRANSACTION_startTask = 2;
         static final int TRANSACTION_stopTask = 3;
@@ -82,7 +82,8 @@ public interface IVideoTranscodingService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVideoTranscodingService.DESCRIPTOR);
             }
@@ -93,7 +94,9 @@ public interface IVideoTranscodingService extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    IVideoTranscodingServiceCallback _arg1 = IVideoTranscodingServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IVideoTranscodingServiceCallback _arg1 =
+                            IVideoTranscodingServiceCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     String _result = register(_arg0, _arg1);
                     reply.writeNoException();
@@ -133,7 +136,8 @@ public interface IVideoTranscodingService extends IInterface {
             }
 
             @Override // com.samsung.android.media.codec.IVideoTranscodingService
-            public String register(int mode, IVideoTranscodingServiceCallback callback) throws RemoteException {
+            public String register(int mode, IVideoTranscodingServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

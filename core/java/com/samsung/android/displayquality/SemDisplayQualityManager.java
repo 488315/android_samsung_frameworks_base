@@ -6,7 +6,8 @@ import android.util.Slog;
 public final class SemDisplayQualityManager {
     private static final String TAG = "SemDisplayQualityManager";
     private static final boolean mEnabled = SemDisplayQualityFeature.ENABLED;
-    private static final boolean mSupportOutdoor = SemDisplayQualityFeature.OUTDOOR_VISIBILITY_SUPPORT;
+    private static final boolean mSupportOutdoor =
+            SemDisplayQualityFeature.OUTDOOR_VISIBILITY_SUPPORT;
     private final ISemDisplayQualityManager mService;
 
     public SemDisplayQualityManager(ISemDisplayQualityManager service) {

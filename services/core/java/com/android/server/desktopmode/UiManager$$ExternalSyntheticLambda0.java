@@ -1,9 +1,11 @@
 package com.android.server.desktopmode;
 
 import android.os.RemoteException;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.DesktopModeUiConstants;
 import com.samsung.android.desktopmode.IDesktopModeUiService;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -39,7 +41,10 @@ public final /* synthetic */ class UiManager$$ExternalSyntheticLambda0 implement
                 int i = this.f$1;
                 uiManager.getClass();
                 if (DesktopModeFeature.DEBUG) {
-                    Log.d("[DMS]UiManager", "handleFinishActivity(), type=" + DesktopModeUiConstants.typeToString(i));
+                    Log.d(
+                            "[DMS]UiManager",
+                            "handleFinishActivity(), type="
+                                    + DesktopModeUiConstants.typeToString(i));
                 }
                 IDesktopModeUiService iDesktopModeUiService = uiManager.mService;
                 if (iDesktopModeUiService != null) {

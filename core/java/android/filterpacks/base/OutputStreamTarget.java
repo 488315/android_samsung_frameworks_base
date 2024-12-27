@@ -4,6 +4,7 @@ import android.filterfw.core.Filter;
 import android.filterfw.core.FilterContext;
 import android.filterfw.core.Frame;
 import android.filterfw.core.GenerateFieldPort;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
@@ -37,7 +38,10 @@ public class OutputStreamTarget extends Filter {
             this.mOutputStream.write(data.array(), 0, data.limit());
             this.mOutputStream.flush();
         } catch (IOException exception) {
-            throw new RuntimeException("OutputStreamTarget: Could not write to stream: " + exception.getMessage() + "!");
+            throw new RuntimeException(
+                    "OutputStreamTarget: Could not write to stream: "
+                            + exception.getMessage()
+                            + "!");
         }
     }
 }

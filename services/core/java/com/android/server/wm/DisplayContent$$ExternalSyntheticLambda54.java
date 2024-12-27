@@ -2,7 +2,9 @@ package com.android.server.wm;
 
 import android.graphics.Rect;
 import android.graphics.Region;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.function.Consumer;
 
@@ -14,13 +16,15 @@ public final /* synthetic */ class DisplayContent$$ExternalSyntheticLambda54 imp
     public final /* synthetic */ Object f$1;
     public final /* synthetic */ Object f$2;
 
-    public /* synthetic */ DisplayContent$$ExternalSyntheticLambda54(PrintWriter printWriter, String str, int[] iArr) {
+    public /* synthetic */ DisplayContent$$ExternalSyntheticLambda54(
+            PrintWriter printWriter, String str, int[] iArr) {
         this.f$1 = printWriter;
         this.f$2 = str;
         this.f$0 = iArr;
     }
 
-    public /* synthetic */ DisplayContent$$ExternalSyntheticLambda54(int[] iArr, int[] iArr2, Region region) {
+    public /* synthetic */ DisplayContent$$ExternalSyntheticLambda54(
+            int[] iArr, int[] iArr2, Region region) {
         this.f$0 = iArr;
         this.f$1 = iArr2;
         this.f$2 = region;

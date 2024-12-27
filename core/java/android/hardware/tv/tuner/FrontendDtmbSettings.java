@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class FrontendDtmbSettings implements Parcelable {
-    public static final Parcelable.Creator<FrontendDtmbSettings> CREATOR = new Parcelable.Creator<FrontendDtmbSettings>() { // from class: android.hardware.tv.tuner.FrontendDtmbSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendDtmbSettings createFromParcel(Parcel _aidl_source) {
-            FrontendDtmbSettings _aidl_out = new FrontendDtmbSettings();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FrontendDtmbSettings> CREATOR =
+            new Parcelable.Creator<FrontendDtmbSettings>() { // from class:
+                // android.hardware.tv.tuner.FrontendDtmbSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendDtmbSettings createFromParcel(Parcel _aidl_source) {
+                    FrontendDtmbSettings _aidl_out = new FrontendDtmbSettings();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendDtmbSettings[] newArray(int _aidl_size) {
-            return new FrontendDtmbSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendDtmbSettings[] newArray(int _aidl_size) {
+                    return new FrontendDtmbSettings[_aidl_size];
+                }
+            };
     public long frequency = 0;
     public long endFrequency = 0;
     public int inversion = 0;

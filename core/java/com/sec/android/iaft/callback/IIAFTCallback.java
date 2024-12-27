@@ -14,8 +14,8 @@ public interface IIAFTCallback extends IInterface {
 
     public static class Default implements IIAFTCallback {
         @Override // com.sec.android.iaft.callback.IIAFTCallback
-        public void traceResult(String packageName, int tid, int code, int freq, int policy) throws RemoteException {
-        }
+        public void traceResult(String packageName, int tid, int code, int freq, int policy)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IIAFTCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIAFTCallback {
+    public abstract static class Stub extends Binder implements IIAFTCallback {
         static final int TRANSACTION_traceResult = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IIAFTCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIAFTCallback.DESCRIPTOR);
             }
@@ -102,7 +103,8 @@ public interface IIAFTCallback extends IInterface {
             }
 
             @Override // com.sec.android.iaft.callback.IIAFTCallback
-            public void traceResult(String packageName, int tid, int code, int freq, int policy) throws RemoteException {
+            public void traceResult(String packageName, int tid, int code, int freq, int policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

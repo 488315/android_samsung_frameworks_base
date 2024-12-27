@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.IUpdateEngineStableCallback;
 
 /* loaded from: classes3.dex */
 public interface IUpdateEngineStable extends IInterface {
@@ -8,7 +7,8 @@ public interface IUpdateEngineStable extends IInterface {
     public static final String HASH = "ee2e6f0bd51391955f79f4d5eeeafc37c668cd40";
     public static final int VERSION = 2;
 
-    void applyPayloadFd(ParcelFileDescriptor parcelFileDescriptor, long j, long j2, String[] strArr) throws RemoteException;
+    void applyPayloadFd(ParcelFileDescriptor parcelFileDescriptor, long j, long j2, String[] strArr)
+            throws RemoteException;
 
     boolean bind(IUpdateEngineStableCallback iUpdateEngineStableCallback) throws RemoteException;
 
@@ -20,8 +20,12 @@ public interface IUpdateEngineStable extends IInterface {
 
     public static class Default implements IUpdateEngineStable {
         @Override // android.os.IUpdateEngineStable
-        public void applyPayloadFd(ParcelFileDescriptor pfd, long payload_offset, long payload_size, String[] headerKeyValuePairs) throws RemoteException {
-        }
+        public void applyPayloadFd(
+                ParcelFileDescriptor pfd,
+                long payload_offset,
+                long payload_size,
+                String[] headerKeyValuePairs)
+                throws RemoteException {}
 
         @Override // android.os.IUpdateEngineStable
         public boolean bind(IUpdateEngineStableCallback callback) throws RemoteException {
@@ -49,7 +53,7 @@ public interface IUpdateEngineStable extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUpdateEngineStable {
+    public abstract static class Stub extends Binder implements IUpdateEngineStable {
         static final int TRANSACTION_applyPayloadFd = 1;
         static final int TRANSACTION_bind = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -77,7 +81,8 @@ public interface IUpdateEngineStable extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -98,7 +103,9 @@ public interface IUpdateEngineStable extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg1 = data.readLong();
                     long _arg2 = data.readLong();
                     String[] _arg3 = data.createStringArray();
@@ -107,14 +114,16 @@ public interface IUpdateEngineStable extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IUpdateEngineStableCallback _arg02 = IUpdateEngineStableCallback.Stub.asInterface(data.readStrongBinder());
+                    IUpdateEngineStableCallback _arg02 =
+                            IUpdateEngineStableCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result = bind(_arg02);
                     reply.writeNoException();
                     reply.writeBoolean(_result);
                     return true;
                 case 3:
-                    IUpdateEngineStableCallback _arg03 = IUpdateEngineStableCallback.Stub.asInterface(data.readStrongBinder());
+                    IUpdateEngineStableCallback _arg03 =
+                            IUpdateEngineStableCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result2 = unbind(_arg03);
                     reply.writeNoException();
@@ -144,7 +153,12 @@ public interface IUpdateEngineStable extends IInterface {
             }
 
             @Override // android.os.IUpdateEngineStable
-            public void applyPayloadFd(ParcelFileDescriptor pfd, long payload_offset, long payload_size, String[] headerKeyValuePairs) throws RemoteException {
+            public void applyPayloadFd(
+                    ParcelFileDescriptor pfd,
+                    long payload_offset,
+                    long payload_size,
+                    String[] headerKeyValuePairs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

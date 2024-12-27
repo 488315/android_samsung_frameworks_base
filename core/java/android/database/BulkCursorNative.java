@@ -1,6 +1,5 @@
 package android.database;
 
-import android.database.IContentObserver;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -25,7 +24,8 @@ public abstract class BulkCursorNative extends Binder implements IBulkCursor {
     }
 
     @Override // android.os.Binder
-    public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+    public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+            throws RemoteException {
         try {
             switch (code) {
                 case 1:
@@ -48,7 +48,8 @@ public abstract class BulkCursorNative extends Binder implements IBulkCursor {
                     break;
                 case 3:
                     data.enforceInterface(IBulkCursor.descriptor);
-                    IContentObserver observer = IContentObserver.Stub.asInterface(data.readStrongBinder());
+                    IContentObserver observer =
+                            IContentObserver.Stub.asInterface(data.readStrongBinder());
                     int count = requery(observer);
                     reply.writeNoException();
                     reply.writeInt(count);

@@ -3,27 +3,29 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class Boolean implements Parcelable {
-    public static final Parcelable.Creator<Boolean> CREATOR = new Parcelable.Creator<Boolean>() { // from class: android.media.audio.common.Boolean.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Boolean createFromParcel(Parcel _aidl_source) {
-            Boolean _aidl_out = new Boolean();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Boolean> CREATOR =
+            new Parcelable.Creator<Boolean>() { // from class: android.media.audio.common.Boolean.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Boolean createFromParcel(Parcel _aidl_source) {
+                    Boolean _aidl_out = new Boolean();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Boolean[] newArray(int _aidl_size) {
-            return new Boolean[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Boolean[] newArray(int _aidl_size) {
+                    return new Boolean[_aidl_size];
+                }
+            };
     public boolean value = false;
 
     @Override // android.os.Parcelable
@@ -84,7 +86,8 @@ public class Boolean implements Parcelable {
             return false;
         }
         Boolean that = (Boolean) other;
-        if (Objects.deepEquals(java.lang.Boolean.valueOf(this.value), java.lang.Boolean.valueOf(that.value))) {
+        if (Objects.deepEquals(
+                java.lang.Boolean.valueOf(this.value), java.lang.Boolean.valueOf(that.value))) {
             return true;
         }
         return false;

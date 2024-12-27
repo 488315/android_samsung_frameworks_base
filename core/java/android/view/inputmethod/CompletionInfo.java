@@ -6,19 +6,21 @@ import android.text.TextUtils;
 
 /* loaded from: classes4.dex */
 public final class CompletionInfo implements Parcelable {
-    public static final Parcelable.Creator<CompletionInfo> CREATOR = new Parcelable.Creator<CompletionInfo>() { // from class: android.view.inputmethod.CompletionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompletionInfo createFromParcel(Parcel source) {
-            return new CompletionInfo(source);
-        }
+    public static final Parcelable.Creator<CompletionInfo> CREATOR =
+            new Parcelable.Creator<
+                    CompletionInfo>() { // from class: android.view.inputmethod.CompletionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompletionInfo createFromParcel(Parcel source) {
+                    return new CompletionInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompletionInfo[] newArray(int size) {
-            return new CompletionInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompletionInfo[] newArray(int size) {
+                    return new CompletionInfo[size];
+                }
+            };
     private final long mId;
     private final CharSequence mLabel;
     private final int mPosition;
@@ -62,7 +64,15 @@ public final class CompletionInfo implements Parcelable {
     }
 
     public String toString() {
-        return "CompletionInfo{#" + this.mPosition + " \"" + ((Object) this.mText) + "\" id=" + this.mId + " label=" + ((Object) this.mLabel) + "}";
+        return "CompletionInfo{#"
+                + this.mPosition
+                + " \""
+                + ((Object) this.mText)
+                + "\" id="
+                + this.mId
+                + " label="
+                + ((Object) this.mLabel)
+                + "}";
     }
 
     @Override // android.os.Parcelable

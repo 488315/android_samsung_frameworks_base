@@ -16,12 +16,10 @@ public interface IExecuteAppFunctionCallback extends IInterface {
 
     public static class Default implements IExecuteAppFunctionCallback {
         @Override // android.app.appfunctions.IExecuteAppFunctionCallback
-        public void onSuccess(ExecuteAppFunctionResponse result) throws RemoteException {
-        }
+        public void onSuccess(ExecuteAppFunctionResponse result) throws RemoteException {}
 
         @Override // android.app.appfunctions.IExecuteAppFunctionCallback
-        public void onError(AppFunctionException exception) throws RemoteException {
-        }
+        public void onError(AppFunctionException exception) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IExecuteAppFunctionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IExecuteAppFunctionCallback {
+    public abstract static class Stub extends Binder implements IExecuteAppFunctionCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -70,7 +68,8 @@ public interface IExecuteAppFunctionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IExecuteAppFunctionCallback.DESCRIPTOR);
             }
@@ -80,12 +79,16 @@ public interface IExecuteAppFunctionCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ExecuteAppFunctionResponse _arg0 = (ExecuteAppFunctionResponse) data.readTypedObject(ExecuteAppFunctionResponse.CREATOR);
+                    ExecuteAppFunctionResponse _arg0 =
+                            (ExecuteAppFunctionResponse)
+                                    data.readTypedObject(ExecuteAppFunctionResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onSuccess(_arg0);
                     return true;
                 case 2:
-                    AppFunctionException _arg02 = (AppFunctionException) data.readTypedObject(AppFunctionException.CREATOR);
+                    AppFunctionException _arg02 =
+                            (AppFunctionException)
+                                    data.readTypedObject(AppFunctionException.CREATOR);
                     data.enforceNoDataAvail();
                     onError(_arg02);
                     return true;

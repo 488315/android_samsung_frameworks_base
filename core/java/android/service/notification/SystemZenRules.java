@@ -2,10 +2,11 @@ package android.service.notification;
 
 import android.app.Flags;
 import android.content.Context;
-import android.service.notification.ZenModeConfig;
 import android.text.format.DateFormat;
 import android.util.Log;
+
 import com.android.internal.R;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -34,13 +35,15 @@ public final class SystemZenRules {
     }
 
     private static void upgradeSystemProviderRule(Context context, ZenModeConfig.ZenRule rule) {
-        ZenModeConfig.ScheduleInfo scheduleInfo = ZenModeConfig.tryParseScheduleConditionId(rule.conditionId);
+        ZenModeConfig.ScheduleInfo scheduleInfo =
+                ZenModeConfig.tryParseScheduleConditionId(rule.conditionId);
         if (scheduleInfo != null) {
             rule.type = 1;
             rule.triggerDescription = getTriggerDescriptionForScheduleTime(context, scheduleInfo);
             return;
         }
-        ZenModeConfig.EventInfo eventInfo = ZenModeConfig.tryParseEventConditionId(rule.conditionId);
+        ZenModeConfig.EventInfo eventInfo =
+                ZenModeConfig.tryParseEventConditionId(rule.conditionId);
         if (eventInfo != null) {
             rule.type = 2;
             rule.triggerDescription = getTriggerDescriptionForScheduleEvent(context, eventInfo);
@@ -50,19 +53,24 @@ public final class SystemZenRules {
     }
 
     public static boolean updateTriggerDescription(Context context, ZenModeConfig.ZenRule rule) {
-        ZenModeConfig.ScheduleInfo scheduleInfo = ZenModeConfig.tryParseScheduleConditionId(rule.conditionId);
+        ZenModeConfig.ScheduleInfo scheduleInfo =
+                ZenModeConfig.tryParseScheduleConditionId(rule.conditionId);
         if (scheduleInfo != null) {
-            return updateTriggerDescription(rule, getTriggerDescriptionForScheduleTime(context, scheduleInfo));
+            return updateTriggerDescription(
+                    rule, getTriggerDescriptionForScheduleTime(context, scheduleInfo));
         }
-        ZenModeConfig.EventInfo eventInfo = ZenModeConfig.tryParseEventConditionId(rule.conditionId);
+        ZenModeConfig.EventInfo eventInfo =
+                ZenModeConfig.tryParseEventConditionId(rule.conditionId);
         if (eventInfo != null) {
-            return updateTriggerDescription(rule, getTriggerDescriptionForScheduleEvent(context, eventInfo));
+            return updateTriggerDescription(
+                    rule, getTriggerDescriptionForScheduleEvent(context, eventInfo));
         }
         Log.wtf(TAG, "Couldn't determine type of system-owned ZenRule " + rule);
         return false;
     }
 
-    private static boolean updateTriggerDescription(ZenModeConfig.ZenRule rule, String triggerDescription) {
+    private static boolean updateTriggerDescription(
+            ZenModeConfig.ZenRule rule, String triggerDescription) {
         if (!Objects.equals(rule.triggerDescription, triggerDescription)) {
             rule.triggerDescription = triggerDescription;
             return true;
@@ -70,7 +78,8 @@ public final class SystemZenRules {
         return false;
     }
 
-    public static String getTriggerDescriptionForScheduleTime(Context context, ZenModeConfig.ScheduleInfo schedule) {
+    public static String getTriggerDescriptionForScheduleTime(
+            Context context, ZenModeConfig.ScheduleInfo schedule) {
         StringBuilder sb = new StringBuilder();
         String daysSummary = getShortDaysSummary(context, schedule);
         if (daysSummary == null) {
@@ -78,11 +87,16 @@ public final class SystemZenRules {
         }
         sb.append(daysSummary);
         sb.append(context.getString(R.string.zen_mode_trigger_summary_divider_text));
-        sb.append(context.getString(R.string.zen_mode_trigger_summary_range_symbol_combination, timeString(context, schedule.startHour, schedule.startMinute), timeString(context, schedule.endHour, schedule.endMinute)));
+        sb.append(
+                context.getString(
+                        R.string.zen_mode_trigger_summary_range_symbol_combination,
+                        timeString(context, schedule.startHour, schedule.startMinute),
+                        timeString(context, schedule.endHour, schedule.endMinute)));
         return sb.toString();
     }
 
-    private static String getShortDaysSummary(Context context, ZenModeConfig.ScheduleInfo schedule) {
+    private static String getShortDaysSummary(
+            Context context, ZenModeConfig.ScheduleInfo schedule) {
         int[] days = schedule.days;
         if (days != null && days.length > 0) {
             StringBuilder sb = new StringBuilder();
@@ -117,7 +131,8 @@ public final class SystemZenRules {
                 }
                 if (output) {
                     if (sb.length() > 0) {
-                        sb.append(context.getString(R.string.zen_mode_trigger_summary_divider_text));
+                        sb.append(
+                                context.getString(R.string.zen_mode_trigger_summary_divider_text));
                     }
                     SimpleDateFormat dayFormat = new SimpleDateFormat("EEE", getLocale(context));
                     if (startDay == lastSeenDay) {
@@ -126,7 +141,11 @@ public final class SystemZenRules {
                     } else {
                         cStart.set(7, daysOfWeek[startDay]);
                         cEnd.set(7, daysOfWeek[lastSeenDay]);
-                        sb.append(context.getString(R.string.zen_mode_trigger_summary_range_symbol_combination, dayFormat.format(cStart.getTime()), dayFormat.format(cEnd.getTime())));
+                        sb.append(
+                                context.getString(
+                                        R.string.zen_mode_trigger_summary_range_symbol_combination,
+                                        dayFormat.format(cStart.getTime()),
+                                        dayFormat.format(cEnd.getTime())));
                     }
                 }
                 i++;
@@ -164,13 +183,13 @@ public final class SystemZenRules {
         return context.getResources().getConfiguration().getLocales().get(0);
     }
 
-    public static String getTriggerDescriptionForScheduleEvent(Context context, ZenModeConfig.EventInfo event) {
+    public static String getTriggerDescriptionForScheduleEvent(
+            Context context, ZenModeConfig.EventInfo event) {
         if (event.calName != null) {
             return event.calName;
         }
         return context.getResources().getString(R.string.zen_mode_trigger_event_calendar_any);
     }
 
-    private SystemZenRules() {
-    }
+    private SystemZenRules() {}
 }

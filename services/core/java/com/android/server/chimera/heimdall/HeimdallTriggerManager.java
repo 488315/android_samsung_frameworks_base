@@ -77,17 +77,17 @@ public final class HeimdallTriggerManager {
         public final HashMap mSpecMap;
 
         /* JADX WARN: Code restructure failed: missing block: B:23:0x007b, code lost:
-        
-            com.android.server.chimera.heimdall.Heimdall.log("Failed to read spec, process name duplicated: " + r6.procName);
-         */
+
+           com.android.server.chimera.heimdall.Heimdall.log("Failed to read spec, process name duplicated: " + r6.procName);
+        */
         /* JADX WARN: Code restructure failed: missing block: B:24:0x0091, code lost:
-        
-            r4.close();
-         */
+
+           r4.close();
+        */
         /* JADX WARN: Code restructure failed: missing block: B:47:0x00ce, code lost:
-        
-            if (r3 != null) goto L24;
-         */
+
+           if (r3 != null) goto L24;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -97,13 +97,16 @@ public final class HeimdallTriggerManager {
                 Method dump skipped, instructions count: 227
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.heimdall.HeimdallTriggerManager.HeimdallSpecManager.<init>(com.android.server.chimera.heimdall.HeimdallTriggerManager):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.chimera.heimdall.HeimdallTriggerManager.HeimdallSpecManager.<init>(com.android.server.chimera.heimdall.HeimdallTriggerManager):void");
         }
 
         public final int getAlwaysRunningSpecKb(HeimdallProcessData heimdallProcessData) {
             int i = HeimdallTriggerManager.this.mAlwaysRunningGlobalQuotaSpec;
             try {
-                List<HeimdallProcSpec> list = (List) this.mSpecMap.get(heimdallProcessData.firstAppPackageName);
+                List<HeimdallProcSpec> list =
+                        (List) this.mSpecMap.get(heimdallProcessData.firstAppPackageName);
                 if (list == null) {
                     return i;
                 }
@@ -123,9 +126,15 @@ public final class HeimdallTriggerManager {
 
         public final int getSpecKb(HeimdallProcessData heimdallProcessData) {
             HeimdallTriggerManager.this.getClass();
-            int i = (heimdallProcessData.firstAppPackageName.startsWith("com.sec.android") || heimdallProcessData.firstAppPackageName.startsWith("com.samsung.android")) ? 262144 : Integer.MAX_VALUE;
+            int i =
+                    (heimdallProcessData.firstAppPackageName.startsWith("com.sec.android")
+                                    || heimdallProcessData.firstAppPackageName.startsWith(
+                                            "com.samsung.android"))
+                            ? 262144
+                            : Integer.MAX_VALUE;
             try {
-                List<HeimdallProcSpec> list = (List) this.mSpecMap.get(heimdallProcessData.firstAppPackageName);
+                List<HeimdallProcSpec> list =
+                        (List) this.mSpecMap.get(heimdallProcessData.firstAppPackageName);
                 if (list == null) {
                     return i;
                 }

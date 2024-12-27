@@ -5,6 +5,7 @@ import android.os.RemoteException;
 import android.print.PrintDocumentInfo;
 import android.print.PrintJobId;
 import android.util.Log;
+
 import java.io.IOException;
 
 /* loaded from: classes3.dex */
@@ -14,7 +15,8 @@ public final class PrintDocument {
     private final PrintJobId mPrintJobId;
     private final IPrintServiceClient mPrintServiceClient;
 
-    PrintDocument(PrintJobId printJobId, IPrintServiceClient printServiceClient, PrintDocumentInfo info) {
+    PrintDocument(
+            PrintJobId printJobId, IPrintServiceClient printServiceClient, PrintDocumentInfo info) {
         this.mPrintJobId = printJobId;
         this.mPrintServiceClient = printServiceClient;
         this.mInfo = info;

@@ -10,19 +10,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class AssistContent implements Parcelable {
-    public static final Parcelable.Creator<AssistContent> CREATOR = new Parcelable.Creator<AssistContent>() { // from class: android.app.assist.AssistContent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssistContent createFromParcel(Parcel in) {
-            return new AssistContent(in);
-        }
+    public static final Parcelable.Creator<AssistContent> CREATOR =
+            new Parcelable.Creator<
+                    AssistContent>() { // from class: android.app.assist.AssistContent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssistContent createFromParcel(Parcel in) {
+                    return new AssistContent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssistContent[] newArray(int size) {
-            return new AssistContent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssistContent[] newArray(int size) {
+                    return new AssistContent[size];
+                }
+            };
     private ClipData mClipData;
     private final Bundle mExtras;
     private Intent mIntent;
@@ -49,8 +51,11 @@ public class AssistContent implements Parcelable {
         this.mIsAppProvidedIntent = false;
         this.mIsAppProvidedWebUri = false;
         this.mUri = null;
-        if (intent != null && "android.intent.action.VIEW".equals(intent.getAction()) && (uri = intent.getData()) != null) {
-            if (IntentFilter.SCHEME_HTTP.equals(uri.getScheme()) || IntentFilter.SCHEME_HTTPS.equals(uri.getScheme())) {
+        if (intent != null
+                && "android.intent.action.VIEW".equals(intent.getAction())
+                && (uri = intent.getData()) != null) {
+            if (IntentFilter.SCHEME_HTTP.equals(uri.getScheme())
+                    || IntentFilter.SCHEME_HTTPS.equals(uri.getScheme())) {
                 this.mUri = uri;
             }
         }

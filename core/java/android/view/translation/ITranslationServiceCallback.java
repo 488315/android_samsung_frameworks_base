@@ -10,12 +10,13 @@ import android.os.RemoteException;
 public interface ITranslationServiceCallback extends IInterface {
     public static final String DESCRIPTOR = "android.view.translation.ITranslationServiceCallback";
 
-    void updateTranslationCapability(TranslationCapability translationCapability) throws RemoteException;
+    void updateTranslationCapability(TranslationCapability translationCapability)
+            throws RemoteException;
 
     public static class Default implements ITranslationServiceCallback {
         @Override // android.view.translation.ITranslationServiceCallback
-        public void updateTranslationCapability(TranslationCapability capability) throws RemoteException {
-        }
+        public void updateTranslationCapability(TranslationCapability capability)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface ITranslationServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITranslationServiceCallback {
+    public abstract static class Stub extends Binder implements ITranslationServiceCallback {
         static final int TRANSACTION_updateTranslationCapability = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface ITranslationServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITranslationServiceCallback.DESCRIPTOR);
             }
@@ -71,7 +73,9 @@ public interface ITranslationServiceCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    TranslationCapability _arg0 = (TranslationCapability) data.readTypedObject(TranslationCapability.CREATOR);
+                    TranslationCapability _arg0 =
+                            (TranslationCapability)
+                                    data.readTypedObject(TranslationCapability.CREATOR);
                     data.enforceNoDataAvail();
                     updateTranslationCapability(_arg0);
                     return true;
@@ -97,7 +101,8 @@ public interface ITranslationServiceCallback extends IInterface {
             }
 
             @Override // android.view.translation.ITranslationServiceCallback
-            public void updateTranslationCapability(TranslationCapability capability) throws RemoteException {
+            public void updateTranslationCapability(TranslationCapability capability)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITranslationServiceCallback.DESCRIPTOR);

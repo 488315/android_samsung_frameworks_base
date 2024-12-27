@@ -3,6 +3,9 @@ package android.util;
 import android.app.ActivityManager;
 import android.content.pm.Signature;
 import android.text.TextUtils;
+
+import libcore.util.HexEncoding;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,21 +14,20 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import libcore.util.HexEncoding;
 
 /* loaded from: classes4.dex */
 public final class PackageUtils {
     private static final int HIGH_RAM_BUFFER_SIZE_BYTES = 1000000;
     private static final int LOW_RAM_BUFFER_SIZE_BYTES = 1000;
 
-    private PackageUtils() {
-    }
+    private PackageUtils() {}
 
     public static String[] computeSignaturesSha256Digests(Signature[] signatures) {
         return computeSignaturesSha256Digests(signatures, null);
     }
 
-    public static String[] computeSignaturesSha256Digests(Signature[] signatures, String separator) {
+    public static String[] computeSignaturesSha256Digests(
+            Signature[] signatures, String separator) {
         int signatureCount = signatures.length;
         String[] digests = new String[signatureCount];
         for (int i = 0; i < signatureCount; i++) {
@@ -92,13 +94,15 @@ public final class PackageUtils {
         return new byte[bufferSize];
     }
 
-    public static byte[] computeSha256DigestForLargeFileAsBytes(String filePath, byte[] fileBuffer) {
+    public static byte[] computeSha256DigestForLargeFileAsBytes(
+            String filePath, byte[] fileBuffer) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA256");
             messageDigest.reset();
             File f = new File(filePath);
             try {
-                DigestInputStream digestInputStream = new DigestInputStream(new FileInputStream(f), messageDigest);
+                DigestInputStream digestInputStream =
+                        new DigestInputStream(new FileInputStream(f), messageDigest);
                 do {
                     try {
                     } finally {
@@ -119,7 +123,8 @@ public final class PackageUtils {
         return computeSha256DigestForLargeFile(filePath, fileBuffer, null);
     }
 
-    public static String computeSha256DigestForLargeFile(String filePath, byte[] fileBuffer, String separator) {
+    public static String computeSha256DigestForLargeFile(
+            String filePath, byte[] fileBuffer, String separator) {
         byte[] resultBytes = computeSha256DigestForLargeFileAsBytes(filePath, fileBuffer);
         if (separator == null) {
             return HexEncoding.encodeToString(resultBytes, false);

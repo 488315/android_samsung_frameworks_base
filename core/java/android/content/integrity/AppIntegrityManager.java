@@ -2,9 +2,9 @@ package android.content.integrity;
 
 import android.annotation.SystemApi;
 import android.content.IntentSender;
-import android.content.integrity.RuleSet;
 import android.content.pm.ParceledListSlice;
 import android.os.RemoteException;
+
 import java.util.List;
 
 @SystemApi
@@ -21,7 +21,10 @@ public class AppIntegrityManager {
 
     public void updateRuleSet(RuleSet updateRequest, IntentSender statusReceiver) {
         try {
-            this.mManager.updateRuleSet(updateRequest.getVersion(), new ParceledListSlice<>(updateRequest.getRules()), statusReceiver);
+            this.mManager.updateRuleSet(
+                    updateRequest.getVersion(),
+                    new ParceledListSlice<>(updateRequest.getRules()),
+                    statusReceiver);
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }

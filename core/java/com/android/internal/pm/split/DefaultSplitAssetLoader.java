@@ -5,9 +5,12 @@ import android.content.pm.parsing.PackageLite;
 import android.content.res.ApkAssets;
 import android.content.res.AssetManager;
 import android.os.Build;
+
 import com.android.internal.util.ArrayUtils;
-import java.io.IOException;
+
 import libcore.io.IoUtils;
+
+import java.io.IOException;
 
 /* loaded from: classes5.dex */
 public class DefaultSplitAssetLoader implements SplitAssetLoader {
@@ -39,7 +42,8 @@ public class DefaultSplitAssetLoader implements SplitAssetLoader {
         if (this.mCachedAssetManager != null) {
             return this.mCachedAssetManager;
         }
-        ApkAssets[] apkAssets = new ApkAssets[(this.mSplitApkPaths != null ? this.mSplitApkPaths.length : 0) + 1];
+        ApkAssets[] apkAssets =
+                new ApkAssets[(this.mSplitApkPaths != null ? this.mSplitApkPaths.length : 0) + 1];
         int splitIdx = 0 + 1;
         ApkAssets loadApkAssets = loadApkAssets(this.mBaseApkPath, this.mFlags);
         this.mBaseApkAssets = loadApkAssets;
@@ -56,7 +60,27 @@ public class DefaultSplitAssetLoader implements SplitAssetLoader {
             }
         }
         AssetManager assets = new AssetManager();
-        assets.setConfiguration(0, 0, null, new String[0], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Build.VERSION.RESOURCES_SDK_INT);
+        assets.setConfiguration(
+                0,
+                0,
+                null,
+                new String[0],
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                Build.VERSION.RESOURCES_SDK_INT);
         assets.setApkAssets(apkAssets, false);
         this.mCachedAssetManager = assets;
         return this.mCachedAssetManager;

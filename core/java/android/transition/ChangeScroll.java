@@ -13,8 +13,7 @@ public class ChangeScroll extends Transition {
     private static final String PROPNAME_SCROLL_Y = "android:changeScroll:y";
     private static final String[] PROPERTIES = {PROPNAME_SCROLL_X, PROPNAME_SCROLL_Y};
 
-    public ChangeScroll() {
-    }
+    public ChangeScroll() {}
 
     public ChangeScroll(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -36,12 +35,15 @@ public class ChangeScroll extends Transition {
     }
 
     private void captureValues(TransitionValues transitionValues) {
-        transitionValues.values.put(PROPNAME_SCROLL_X, Integer.valueOf(transitionValues.view.getScrollX()));
-        transitionValues.values.put(PROPNAME_SCROLL_Y, Integer.valueOf(transitionValues.view.getScrollY()));
+        transitionValues.values.put(
+                PROPNAME_SCROLL_X, Integer.valueOf(transitionValues.view.getScrollX()));
+        transitionValues.values.put(
+                PROPNAME_SCROLL_Y, Integer.valueOf(transitionValues.view.getScrollY()));
     }
 
     @Override // android.transition.Transition
-    public Animator createAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
+    public Animator createAnimator(
+            ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
         if (startValues == null || endValues == null) {
             return null;
         }

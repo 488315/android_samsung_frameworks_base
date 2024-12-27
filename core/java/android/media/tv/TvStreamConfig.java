@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.util.Objects;
 
 @SystemApi
@@ -17,27 +18,37 @@ public class TvStreamConfig implements Parcelable {
     private int mStreamId;
     private int mType;
     static final String TAG = TvStreamConfig.class.getSimpleName();
-    public static final Parcelable.Creator<TvStreamConfig> CREATOR = new Parcelable.Creator<TvStreamConfig>() { // from class: android.media.tv.TvStreamConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvStreamConfig createFromParcel(Parcel source) {
-            try {
-                return new Builder().streamId(source.readInt()).type(source.readInt()).maxWidth(source.readInt()).maxHeight(source.readInt()).generation(source.readInt()).build();
-            } catch (Exception e) {
-                Log.e(TvStreamConfig.TAG, "Exception creating TvStreamConfig from parcel", e);
-                return null;
-            }
-        }
+    public static final Parcelable.Creator<TvStreamConfig> CREATOR =
+            new Parcelable.Creator<
+                    TvStreamConfig>() { // from class: android.media.tv.TvStreamConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvStreamConfig createFromParcel(Parcel source) {
+                    try {
+                        return new Builder()
+                                .streamId(source.readInt())
+                                .type(source.readInt())
+                                .maxWidth(source.readInt())
+                                .maxHeight(source.readInt())
+                                .generation(source.readInt())
+                                .build();
+                    } catch (Exception e) {
+                        Log.e(
+                                TvStreamConfig.TAG,
+                                "Exception creating TvStreamConfig from parcel",
+                                e);
+                        return null;
+                    }
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvStreamConfig[] newArray(int size) {
-            return new TvStreamConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvStreamConfig[] newArray(int size) {
+                    return new TvStreamConfig[size];
+                }
+            };
 
-    private TvStreamConfig() {
-    }
+    private TvStreamConfig() {}
 
     public int getStreamId() {
         return this.mStreamId;
@@ -60,7 +71,13 @@ public class TvStreamConfig implements Parcelable {
     }
 
     public String toString() {
-        return "TvStreamConfig {mStreamId=" + this.mStreamId + ";mType=" + this.mType + ";mGeneration=" + this.mGeneration + "}";
+        return "TvStreamConfig {mStreamId="
+                + this.mStreamId
+                + ";mType="
+                + this.mType
+                + ";mGeneration="
+                + this.mGeneration
+                + "}";
     }
 
     @Override // android.os.Parcelable
@@ -110,7 +127,11 @@ public class TvStreamConfig implements Parcelable {
         }
 
         public TvStreamConfig build() {
-            if (this.mStreamId == null || this.mType == null || this.mMaxWidth == null || this.mMaxHeight == null || this.mGeneration == null) {
+            if (this.mStreamId == null
+                    || this.mType == null
+                    || this.mMaxWidth == null
+                    || this.mMaxHeight == null
+                    || this.mGeneration == null) {
                 throw new UnsupportedOperationException();
             }
             TvStreamConfig config = new TvStreamConfig();
@@ -128,10 +149,19 @@ public class TvStreamConfig implements Parcelable {
             return false;
         }
         TvStreamConfig config = (TvStreamConfig) obj;
-        return config.mGeneration == this.mGeneration && config.mStreamId == this.mStreamId && config.mType == this.mType && config.mMaxWidth == this.mMaxWidth && config.mMaxHeight == this.mMaxHeight;
+        return config.mGeneration == this.mGeneration
+                && config.mStreamId == this.mStreamId
+                && config.mType == this.mType
+                && config.mMaxWidth == this.mMaxWidth
+                && config.mMaxHeight == this.mMaxHeight;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mGeneration), Integer.valueOf(this.mStreamId), Integer.valueOf(this.mType), Integer.valueOf(this.mMaxWidth), Integer.valueOf(this.mMaxHeight));
+        return Objects.hash(
+                Integer.valueOf(this.mGeneration),
+                Integer.valueOf(this.mStreamId),
+                Integer.valueOf(this.mType),
+                Integer.valueOf(this.mMaxWidth),
+                Integer.valueOf(this.mMaxHeight));
     }
 }

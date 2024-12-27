@@ -1,8 +1,10 @@
 package com.samsung.accessory.manager.connectivity;
 
 import android.content.Context;
+
 import com.samsung.accessory.manager.authentication.AuthenticationResult;
 import com.samsung.accessory.manager.authentication.AuthenticationSession;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -44,7 +46,8 @@ public abstract class Connectivity {
 
     public abstract void sendStopUsbAuth();
 
-    public abstract byte[] sendSynchronously(byte[] bArr, AuthenticationResult authenticationResult);
+    public abstract byte[] sendSynchronously(
+            byte[] bArr, AuthenticationResult authenticationResult);
 
     public void setStateChangedCallback(AuthenticationSession.AnonymousClass1 anonymousClass1) {
         this.mStateChangedCallback = anonymousClass1;

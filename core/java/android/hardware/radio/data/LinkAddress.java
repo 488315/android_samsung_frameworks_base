@@ -3,6 +3,7 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -10,21 +11,23 @@ import java.util.StringJoiner;
 public class LinkAddress implements Parcelable {
     public static final int ADDRESS_PROPERTY_DEPRECATED = 32;
     public static final int ADDRESS_PROPERTY_NONE = 0;
-    public static final Parcelable.Creator<LinkAddress> CREATOR = new Parcelable.Creator<LinkAddress>() { // from class: android.hardware.radio.data.LinkAddress.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LinkAddress createFromParcel(Parcel _aidl_source) {
-            LinkAddress _aidl_out = new LinkAddress();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<LinkAddress> CREATOR =
+            new Parcelable.Creator<
+                    LinkAddress>() { // from class: android.hardware.radio.data.LinkAddress.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LinkAddress createFromParcel(Parcel _aidl_source) {
+                    LinkAddress _aidl_out = new LinkAddress();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LinkAddress[] newArray(int _aidl_size) {
-            return new LinkAddress[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LinkAddress[] newArray(int _aidl_size) {
+                    return new LinkAddress[_aidl_size];
+                }
+            };
     public String address;
     public int addressProperties = 0;
     public long deprecationTime = 0;

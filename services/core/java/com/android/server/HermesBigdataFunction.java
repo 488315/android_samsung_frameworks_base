@@ -1,6 +1,7 @@
 package com.android.server;
 
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -32,20 +33,22 @@ public abstract class HermesBigdataFunction {
         public final boolean accept(File file) {
             switch (this.$r8$classId) {
                 case 0:
-                    if (!file.isFile() || !file.getName().startsWith("dumpstate_skeymaster") || !file.getName().endsWith("zip")) {
-                    }
+                    if (!file.isFile()
+                            || !file.getName().startsWith("dumpstate_skeymaster")
+                            || !file.getName().endsWith("zip")) {}
                     break;
                 case 1:
-                    if (!file.isFile() || !file.getName().startsWith("dumpstate_skeymaster") || !file.getName().endsWith("txt")) {
-                    }
+                    if (!file.isFile()
+                            || !file.getName().startsWith("dumpstate_skeymaster")
+                            || !file.getName().endsWith("txt")) {}
                     break;
                 case 2:
-                    if (!file.isFile() || !file.getName().startsWith("dumpstate_skeymaster") || !file.getName().endsWith("zip")) {
-                    }
+                    if (!file.isFile()
+                            || !file.getName().startsWith("dumpstate_skeymaster")
+                            || !file.getName().endsWith("zip")) {}
                     break;
                 default:
-                    if (!file.isFile() || !file.getName().startsWith("dumpstate_skeymaster")) {
-                    }
+                    if (!file.isFile() || !file.getName().startsWith("dumpstate_skeymaster")) {}
                     break;
             }
             return false;
@@ -64,7 +67,8 @@ public abstract class HermesBigdataFunction {
         ERR_PERMISSION_DENIED("ERR_PERMISSION_DENIED", "File permission denied"),
         ERR_ZIP_EXCEPTION("ERR_ZIP_EXCEPTION", "Zip API is failed"),
         ERR_IO_EXCEPTION("ERR_IO_EXCEPTION", "Some I/O operation is failed"),
-        ERR_NULLPOINTER_EXCEPTION("ERR_NULLPOINTER_EXCEPTION", "Null pointer exception has occured"),
+        ERR_NULLPOINTER_EXCEPTION(
+                "ERR_NULLPOINTER_EXCEPTION", "Null pointer exception has occured"),
         ERR_INTERRUPTION_EXCEPTION("ERR_INTERRUPTION_EXCEPTION", "Some interrupt has occured");
 
         private final int errCode;
@@ -91,20 +95,27 @@ public abstract class HermesBigdataFunction {
             File file = new File("/data/log/sepunion/hermes/parsed_skeymast.txt");
             File file2 = new File(file.getParent(), file.getName().toUpperCase());
             if (file2.exists() && file2.length() > 1048576 && file2.delete()) {
-                Slog.d("HERMES#BigDataFunction", "[cleanBigdataLogFiles] exceed size of bigdata log file is deleted");
+                Slog.d(
+                        "HERMES#BigDataFunction",
+                        "[cleanBigdataLogFiles] exceed size of bigdata log file is deleted");
             }
             if (!file.exists()) {
-                Slog.d("HERMES#BigDataFunction", "[cleanBigdataLogFiles] There is no collected bigdata log");
+                Slog.d(
+                        "HERMES#BigDataFunction",
+                        "[cleanBigdataLogFiles] There is no collected bigdata log");
                 return;
             }
             try {
                 FileOutputStream fileOutputStream = new FileOutputStream(file2, true);
                 try {
-                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, "EUCKR"));
+                    BufferedWriter bufferedWriter =
+                            new BufferedWriter(new OutputStreamWriter(fileOutputStream, "EUCKR"));
                     try {
                         FileInputStream fileInputStream = new FileInputStream(file);
                         try {
-                            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream, "EUCKR"));
+                            BufferedReader bufferedReader =
+                                    new BufferedReader(
+                                            new InputStreamReader(fileInputStream, "EUCKR"));
                             while (true) {
                                 try {
                                     String readLine = bufferedReader.readLine();
@@ -121,7 +132,9 @@ public abstract class HermesBigdataFunction {
                             bufferedWriter.close();
                             fileOutputStream.close();
                             if (file.delete()) {
-                                Slog.d("HERMES#BigDataFunction", "[cleanBigdataLogFiles] Collected bigdata log is deleted");
+                                Slog.d(
+                                        "HERMES#BigDataFunction",
+                                        "[cleanBigdataLogFiles] Collected bigdata log is deleted");
                             }
                             Slog.d("HERMES#BigDataFunction", "[cleanBigdataLogFiles] done");
                         } finally {
@@ -157,13 +170,23 @@ public abstract class HermesBigdataFunction {
     public static void cleanDumpstateFiles() {
         try {
             for (File file : new File("/data/log/").listFiles(new AnonymousClass1(2))) {
-                if (file.renameTo(new File(file.getAbsolutePath().replace("dumpstate_skeymaster", "dumpstate_skeymaster".toUpperCase())))) {
-                    Slog.d("HERMES#BigDataFunction", "[cleanDumpstateFiles] zipfile rename is success");
+                if (file.renameTo(
+                        new File(
+                                file.getAbsolutePath()
+                                        .replace(
+                                                "dumpstate_skeymaster",
+                                                "dumpstate_skeymaster".toUpperCase())))) {
+                    Slog.d(
+                            "HERMES#BigDataFunction",
+                            "[cleanDumpstateFiles] zipfile rename is success");
                 }
             }
-            for (File file2 : new File("/data/log/sepunion/hermes/").listFiles(new AnonymousClass1(3))) {
+            for (File file2 :
+                    new File("/data/log/sepunion/hermes/").listFiles(new AnonymousClass1(3))) {
                 if (!file2.delete()) {
-                    Slog.d("HERMES#BigDataFunction", "[cleanDumpstateFiles] filtered txt file deletion failed");
+                    Slog.d(
+                            "HERMES#BigDataFunction",
+                            "[cleanDumpstateFiles] filtered txt file deletion failed");
                 }
             }
             Slog.d("HERMES#BigDataFunction", "[CleanDumpstate] done");
@@ -181,7 +204,8 @@ public abstract class HermesBigdataFunction {
         BigdataError bigdataError2 = BigdataError.ERR_UNKNOWN;
         Slog.d("HERMES#BigDataFunction", "[parseDumpstate] started");
         try {
-            File[] listFiles = new File("/data/log/sepunion/hermes/").listFiles(new AnonymousClass1(1));
+            File[] listFiles =
+                    new File("/data/log/sepunion/hermes/").listFiles(new AnonymousClass1(1));
             File file = new File("/data/log/sepunion/hermes/parsed_skeymast.txt");
             if (file.exists() && file.length() > 1048576 && file.delete()) {
                 Slog.d("HERMES#BigDataFunction", "[parseDumpstate] saved log is cleared");
@@ -194,13 +218,21 @@ public abstract class HermesBigdataFunction {
                 try {
                     FileOutputStream fileOutputStream = new FileOutputStream(file, true);
                     try {
-                        BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, "EUCKR"));
+                        BufferedWriter bufferedWriter =
+                                new BufferedWriter(
+                                        new OutputStreamWriter(fileOutputStream, "EUCKR"));
                         try {
                             FileInputStream fileInputStream = new FileInputStream(file2);
                             try {
-                                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream, "EUCKR"));
+                                BufferedReader bufferedReader =
+                                        new BufferedReader(
+                                                new InputStreamReader(fileInputStream, "EUCKR"));
                                 try {
-                                    Pattern compile = Pattern.compile("^\\s*\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\.\\d+\\s+(\\d+|root)\\s+\\d+\\s+\\d+\\s.\\s+" + (PARSING_TAG[c]) + ":.*");
+                                    Pattern compile =
+                                            Pattern.compile(
+                                                    "^\\s*\\d{2}-\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\.\\d+\\s+(\\d+|root)\\s+\\d+\\s+\\d+\\s.\\s+"
+                                                            + (PARSING_TAG[c])
+                                                            + ":.*");
                                     long length2 = file.length();
                                     while (true) {
                                         String readLine = bufferedReader.readLine();
@@ -263,50 +295,50 @@ public abstract class HermesBigdataFunction {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0059, code lost:
-    
-        r12 = new java.io.File("/data/log/sepunion/hermes/", r10.getName());
-     */
+
+       r12 = new java.io.File("/data/log/sepunion/hermes/", r10.getName());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x0062, code lost:
-    
-        r10 = new java.io.BufferedOutputStream(new java.io.FileOutputStream(r12));
-     */
+
+       r10 = new java.io.BufferedOutputStream(new java.io.FileOutputStream(r12));
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x006c, code lost:
-    
-        android.util.Slog.d("HERMES#BigDataFunction", "[unZipDumpstate] extract files : " + r12.getAbsolutePath());
-        r12 = new byte[4096];
-     */
+
+       android.util.Slog.d("HERMES#BigDataFunction", "[unZipDumpstate] extract files : " + r12.getAbsolutePath());
+       r12 = new byte[4096];
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x0088, code lost:
-    
-        r13 = r11.read(r12);
-     */
+
+       r13 = r11.read(r12);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x008d, code lost:
-    
-        if (r13 == (-1)) goto L89;
-     */
+
+       if (r13 == (-1)) goto L89;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:32:0x008f, code lost:
-    
-        r10.write(r12, 0, r13);
-     */
+
+       r10.write(r12, 0, r13);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x0095, code lost:
-    
-        r10.close();
-     */
+
+       r10.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0093, code lost:
-    
-        r2 = move-exception;
-     */
+
+       r2 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x00a3, code lost:
-    
-        throw r2;
-     */
+
+       throw r2;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:47:0x00af, code lost:
-    
-        throw new com.android.server.BigdataException(r0);
-     */
+
+       throw new com.android.server.BigdataException(r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:49:0x00a9, code lost:
-    
-        throw new com.android.server.BigdataException(r1);
-     */
+
+       throw new com.android.server.BigdataException(r1);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -316,6 +348,8 @@ public abstract class HermesBigdataFunction {
             Method dump skipped, instructions count: 267
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.HermesBigdataFunction.unZipDumpstate():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.HermesBigdataFunction.unZipDumpstate():void");
     }
 }

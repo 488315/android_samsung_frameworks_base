@@ -1,6 +1,7 @@
 package com.samsung.android.server.corestate;
 
 import android.os.Handler;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +18,8 @@ public final class CoreStateVolatileObserver {
     public final Map mVolatileStatesRepository = new HashMap();
     public final Map mVolatileStatesToTypeMapForUser;
 
-    public CoreStateVolatileObserver(Handler handler, CoreStateObserverController coreStateObserverController) {
+    public CoreStateVolatileObserver(
+            Handler handler, CoreStateObserverController coreStateObserverController) {
         HashMap hashMap = new HashMap();
         this.mVolatileStatesToTypeMapForUser = hashMap;
         this.mStringDefaultKeyMap = new HashMap();

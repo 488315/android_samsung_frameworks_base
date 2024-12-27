@@ -1,6 +1,7 @@
 package com.android.server.location.contexthub;
 
 import android.hardware.location.ContextHubTransaction;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -40,8 +41,7 @@ public abstract class ContextHubServiceTransaction {
         this.mMessageSequenceNumber = Integer.valueOf(i2);
     }
 
-    public void onQueryResponse(int i, List list) {
-    }
+    public void onQueryResponse(int i, List list) {}
 
     public abstract int onTransact();
 

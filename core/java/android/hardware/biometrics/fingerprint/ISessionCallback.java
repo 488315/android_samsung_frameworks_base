@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISessionCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$biometrics$fingerprint$ISessionCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$biometrics$fingerprint$ISessionCallback".replace('$', '.');
     public static final String HASH = "41a730a7a6b5aa9cebebce70ee5b5e509b0af6fb";
     public static final int VERSION = 4;
 
@@ -21,7 +22,8 @@ public interface ISessionCallback extends IInterface {
 
     void onAuthenticationFailed() throws RemoteException;
 
-    void onAuthenticationSucceeded(int i, HardwareAuthToken hardwareAuthToken) throws RemoteException;
+    void onAuthenticationSucceeded(int i, HardwareAuthToken hardwareAuthToken)
+            throws RemoteException;
 
     void onAuthenticatorIdInvalidated(long j) throws RemoteException;
 
@@ -51,68 +53,53 @@ public interface ISessionCallback extends IInterface {
 
     public static class Default implements ISessionCallback {
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onChallengeGenerated(long challenge) throws RemoteException {
-        }
+        public void onChallengeGenerated(long challenge) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onChallengeRevoked(long challenge) throws RemoteException {
-        }
+        public void onChallengeRevoked(long challenge) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onAcquired(byte info, int vendorCode) throws RemoteException {
-        }
+        public void onAcquired(byte info, int vendorCode) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onError(byte error, int vendorCode) throws RemoteException {
-        }
+        public void onError(byte error, int vendorCode) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onEnrollmentProgress(int enrollmentId, int remaining) throws RemoteException {
-        }
+        public void onEnrollmentProgress(int enrollmentId, int remaining) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onAuthenticationSucceeded(int enrollmentId, HardwareAuthToken hat) throws RemoteException {
-        }
+        public void onAuthenticationSucceeded(int enrollmentId, HardwareAuthToken hat)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onAuthenticationFailed() throws RemoteException {
-        }
+        public void onAuthenticationFailed() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onLockoutTimed(long durationMillis) throws RemoteException {
-        }
+        public void onLockoutTimed(long durationMillis) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onLockoutPermanent() throws RemoteException {
-        }
+        public void onLockoutPermanent() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onLockoutCleared() throws RemoteException {
-        }
+        public void onLockoutCleared() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onInteractionDetected() throws RemoteException {
-        }
+        public void onInteractionDetected() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onEnrollmentsEnumerated(int[] enrollmentIds) throws RemoteException {
-        }
+        public void onEnrollmentsEnumerated(int[] enrollmentIds) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onEnrollmentsRemoved(int[] enrollmentIds) throws RemoteException {
-        }
+        public void onEnrollmentsRemoved(int[] enrollmentIds) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onAuthenticatorIdRetrieved(long authenticatorId) throws RemoteException {
-        }
+        public void onAuthenticatorIdRetrieved(long authenticatorId) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onAuthenticatorIdInvalidated(long newAuthenticatorId) throws RemoteException {
-        }
+        public void onAuthenticatorIdInvalidated(long newAuthenticatorId) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-        public void onSessionClosed() throws RemoteException {
-        }
+        public void onSessionClosed() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISessionCallback
         public int getInterfaceVersion() {
@@ -130,7 +117,7 @@ public interface ISessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISessionCallback {
+    public abstract static class Stub extends Binder implements ISessionCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_onAcquired = 3;
@@ -220,7 +207,8 @@ public interface ISessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -275,7 +263,8 @@ public interface ISessionCallback extends IInterface {
                     return true;
                 case 6:
                     int _arg06 = data.readInt();
-                    HardwareAuthToken _arg14 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    HardwareAuthToken _arg14 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
                     data.enforceNoDataAvail();
                     onAuthenticationSucceeded(_arg06, _arg14);
                     reply.writeNoException();
@@ -428,7 +417,8 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-            public void onEnrollmentProgress(int enrollmentId, int remaining) throws RemoteException {
+            public void onEnrollmentProgress(int enrollmentId, int remaining)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -447,7 +437,8 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-            public void onAuthenticationSucceeded(int enrollmentId, HardwareAuthToken hat) throws RemoteException {
+            public void onAuthenticationSucceeded(int enrollmentId, HardwareAuthToken hat)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -456,7 +447,8 @@ public interface ISessionCallback extends IInterface {
                     _data.writeTypedObject(hat, 0);
                     boolean _status = this.mRemote.transact(6, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method onAuthenticationSucceeded is unimplemented.");
+                        throw new RemoteException(
+                                "Method onAuthenticationSucceeded is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -473,7 +465,8 @@ public interface ISessionCallback extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(7, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method onAuthenticationFailed is unimplemented.");
+                        throw new RemoteException(
+                                "Method onAuthenticationFailed is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -560,7 +553,8 @@ public interface ISessionCallback extends IInterface {
                     _data.writeIntArray(enrollmentIds);
                     boolean _status = this.mRemote.transact(12, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method onEnrollmentsEnumerated is unimplemented.");
+                        throw new RemoteException(
+                                "Method onEnrollmentsEnumerated is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -596,7 +590,8 @@ public interface ISessionCallback extends IInterface {
                     _data.writeLong(authenticatorId);
                     boolean _status = this.mRemote.transact(14, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method onAuthenticatorIdRetrieved is unimplemented.");
+                        throw new RemoteException(
+                                "Method onAuthenticatorIdRetrieved is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -606,7 +601,8 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.ISessionCallback
-            public void onAuthenticatorIdInvalidated(long newAuthenticatorId) throws RemoteException {
+            public void onAuthenticatorIdInvalidated(long newAuthenticatorId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -614,7 +610,8 @@ public interface ISessionCallback extends IInterface {
                     _data.writeLong(newAuthenticatorId);
                     boolean _status = this.mRemote.transact(15, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method onAuthenticatorIdInvalidated is unimplemented.");
+                        throw new RemoteException(
+                                "Method onAuthenticatorIdInvalidated is unimplemented.");
                     }
                     _reply.readException();
                 } finally {

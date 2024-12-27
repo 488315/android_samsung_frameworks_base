@@ -1,8 +1,10 @@
 package android.security.net.config;
 
 import android.util.ArrayMap;
+
 import com.android.org.conscrypt.CertPinManager;
 import com.android.org.conscrypt.TrustManagerImpl;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.security.GeneralSecurityException;
@@ -13,6 +15,7 @@ import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import javax.net.ssl.SSLEngine;
 import javax.net.ssl.X509ExtendedTrustManager;
 
@@ -39,46 +42,58 @@ public class NetworkSecurityTrustManager extends X509ExtendedTrustManager {
     }
 
     @Override // javax.net.ssl.X509TrustManager
-    public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+    public void checkClientTrusted(X509Certificate[] chain, String authType)
+            throws CertificateException {
         this.mDelegate.checkClientTrusted(chain, authType);
     }
 
     @Override // javax.net.ssl.X509ExtendedTrustManager
-    public void checkClientTrusted(X509Certificate[] certs, String authType, Socket socket) throws CertificateException {
+    public void checkClientTrusted(X509Certificate[] certs, String authType, Socket socket)
+            throws CertificateException {
         this.mDelegate.checkClientTrusted(certs, authType, socket);
     }
 
     @Override // javax.net.ssl.X509ExtendedTrustManager
-    public void checkClientTrusted(X509Certificate[] certs, String authType, SSLEngine engine) throws CertificateException {
+    public void checkClientTrusted(X509Certificate[] certs, String authType, SSLEngine engine)
+            throws CertificateException {
         this.mDelegate.checkClientTrusted(certs, authType, engine);
     }
 
     @Override // javax.net.ssl.X509TrustManager
-    public void checkServerTrusted(X509Certificate[] certs, String authType) throws CertificateException {
+    public void checkServerTrusted(X509Certificate[] certs, String authType)
+            throws CertificateException {
         checkServerTrusted(certs, authType, (String) null);
     }
 
     @Override // javax.net.ssl.X509ExtendedTrustManager
-    public void checkServerTrusted(X509Certificate[] certs, String authType, Socket socket) throws CertificateException {
-        List<X509Certificate> trustedChain = this.mDelegate.getTrustedChainForServer(certs, authType, socket);
+    public void checkServerTrusted(X509Certificate[] certs, String authType, Socket socket)
+            throws CertificateException {
+        List<X509Certificate> trustedChain =
+                this.mDelegate.getTrustedChainForServer(certs, authType, socket);
         checkPins(trustedChain);
     }
 
     @Override // javax.net.ssl.X509ExtendedTrustManager
-    public void checkServerTrusted(X509Certificate[] certs, String authType, SSLEngine engine) throws CertificateException {
-        List<X509Certificate> trustedChain = this.mDelegate.getTrustedChainForServer(certs, authType, engine);
+    public void checkServerTrusted(X509Certificate[] certs, String authType, SSLEngine engine)
+            throws CertificateException {
+        List<X509Certificate> trustedChain =
+                this.mDelegate.getTrustedChainForServer(certs, authType, engine);
         checkPins(trustedChain);
     }
 
-    public List<X509Certificate> checkServerTrusted(X509Certificate[] certs, String authType, String host) throws CertificateException {
-        List<X509Certificate> trustedChain = this.mDelegate.checkServerTrusted(certs, authType, host);
+    public List<X509Certificate> checkServerTrusted(
+            X509Certificate[] certs, String authType, String host) throws CertificateException {
+        List<X509Certificate> trustedChain =
+                this.mDelegate.checkServerTrusted(certs, authType, host);
         checkPins(trustedChain);
         return trustedChain;
     }
 
     private void checkPins(List<X509Certificate> chain) throws CertificateException {
         PinSet pinSet = this.mNetworkSecurityConfig.getPins();
-        if (pinSet.pins.isEmpty() || System.currentTimeMillis() > pinSet.expirationTime || !isPinningEnforced(chain)) {
+        if (pinSet.pins.isEmpty()
+                || System.currentTimeMillis() > pinSet.expirationTime
+                || !isPinningEnforced(chain)) {
             return;
         }
         Set<String> pinAlgorithms = pinSet.getPinAlgorithms();
@@ -109,7 +124,8 @@ public class NetworkSecurityTrustManager extends X509ExtendedTrustManager {
             return false;
         }
         X509Certificate anchorCert = chain.get(chain.size() - 1);
-        TrustAnchor chainAnchor = this.mNetworkSecurityConfig.findTrustAnchorBySubjectAndPublicKey(anchorCert);
+        TrustAnchor chainAnchor =
+                this.mNetworkSecurityConfig.findTrustAnchorBySubjectAndPublicKey(anchorCert);
         if (chainAnchor == null) {
             throw new CertificateException("Trusted chain does not end in a TrustAnchor");
         }

@@ -11,18 +11,18 @@ import android.os.RemoteException;
 public interface IProcessResultImpl extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.camera2.extension.IProcessResultImpl";
 
-    void onCaptureCompleted(long j, CameraMetadataNative cameraMetadataNative) throws RemoteException;
+    void onCaptureCompleted(long j, CameraMetadataNative cameraMetadataNative)
+            throws RemoteException;
 
     void onCaptureProcessProgressed(int i) throws RemoteException;
 
     public static class Default implements IProcessResultImpl {
         @Override // android.hardware.camera2.extension.IProcessResultImpl
-        public void onCaptureCompleted(long shutterTimestamp, CameraMetadataNative results) throws RemoteException {
-        }
+        public void onCaptureCompleted(long shutterTimestamp, CameraMetadataNative results)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IProcessResultImpl
-        public void onCaptureProcessProgressed(int progress) throws RemoteException {
-        }
+        public void onCaptureProcessProgressed(int progress) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface IProcessResultImpl extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProcessResultImpl {
+    public abstract static class Stub extends Binder implements IProcessResultImpl {
         static final int TRANSACTION_onCaptureCompleted = 1;
         static final int TRANSACTION_onCaptureProcessProgressed = 2;
 
@@ -71,7 +71,8 @@ public interface IProcessResultImpl extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IProcessResultImpl.DESCRIPTOR);
             }
@@ -82,7 +83,9 @@ public interface IProcessResultImpl extends IInterface {
             switch (code) {
                 case 1:
                     long _arg0 = data.readLong();
-                    CameraMetadataNative _arg1 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg1 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     data.enforceNoDataAvail();
                     onCaptureCompleted(_arg0, _arg1);
                     reply.writeNoException();
@@ -115,7 +118,8 @@ public interface IProcessResultImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IProcessResultImpl
-            public void onCaptureCompleted(long shutterTimestamp, CameraMetadataNative results) throws RemoteException {
+            public void onCaptureCompleted(long shutterTimestamp, CameraMetadataNative results)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

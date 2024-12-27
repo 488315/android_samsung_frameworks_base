@@ -12,9 +12,10 @@ import android.util.ArrayMap;
 import android.util.IntArray;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.FrameworkStatsLog;
-import com.android.server.notification.ManagedServices;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,21 +39,27 @@ public final class SnoozeHelper {
     public final ArrayMap mPersistedSnoozedNotificationsWithContext = new ArrayMap();
     public final Object mLock = new Object();
 
-    public SnoozeHelper(Context context, NotificationManagerService$$ExternalSyntheticLambda5 notificationManagerService$$ExternalSyntheticLambda5, ManagedServices.UserProfiles userProfiles) {
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.notification.SnoozeHelper.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                if (SnoozeHelper.DEBUG) {
-                    Slog.d("SnoozeHelper", "Reposting notification");
-                }
-                if (SnoozeHelper.REPOST_ACTION.equals(intent.getAction())) {
-                    SnoozeHelper snoozeHelper = SnoozeHelper.this;
-                    String stringExtra = intent.getStringExtra("key");
-                    intent.getIntExtra("userId", 0);
-                    snoozeHelper.repost(stringExtra, false);
-                }
-            }
-        };
+    public SnoozeHelper(
+            Context context,
+            NotificationManagerService$$ExternalSyntheticLambda5
+                    notificationManagerService$$ExternalSyntheticLambda5,
+            ManagedServices.UserProfiles userProfiles) {
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.notification.SnoozeHelper.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        if (SnoozeHelper.DEBUG) {
+                            Slog.d("SnoozeHelper", "Reposting notification");
+                        }
+                        if (SnoozeHelper.REPOST_ACTION.equals(intent.getAction())) {
+                            SnoozeHelper snoozeHelper = SnoozeHelper.this;
+                            String stringExtra = intent.getStringExtra("key");
+                            intent.getIntExtra("userId", 0);
+                            snoozeHelper.repost(stringExtra, false);
+                        }
+                    }
+                };
         this.mContext = context;
         IntentFilter intentFilter = new IntentFilter(REPOST_ACTION);
         intentFilter.addDataScheme("repost");
@@ -71,8 +78,10 @@ public final class SnoozeHelper {
             try {
                 int size = this.mSnoozedNotifications.size();
                 for (int i2 = 0; i2 < size; i2++) {
-                    NotificationRecord notificationRecord = (NotificationRecord) this.mSnoozedNotifications.valueAt(i2);
-                    if (notificationRecord.sbn.getPackageName().equals(str) && notificationRecord.sbn.getUserId() == i) {
+                    NotificationRecord notificationRecord =
+                            (NotificationRecord) this.mSnoozedNotifications.valueAt(i2);
+                    if (notificationRecord.sbn.getPackageName().equals(str)
+                            && notificationRecord.sbn.getUserId() == i) {
                         notificationRecord.isCanceled = true;
                     }
                 }
@@ -108,8 +117,12 @@ public final class SnoozeHelper {
         synchronized (this.mLock) {
             try {
                 for (Map.Entry entry : this.mSnoozedNotifications.entrySet()) {
-                    StatusBarNotification statusBarNotification = ((NotificationRecord) entry.getValue()).sbn;
-                    if (statusBarNotification.getPackageName().equals(str) && statusBarNotification.getUserId() == i && Objects.equals(statusBarNotification.getTag(), str2) && statusBarNotification.getId() == i2) {
+                    StatusBarNotification statusBarNotification =
+                            ((NotificationRecord) entry.getValue()).sbn;
+                    if (statusBarNotification.getPackageName().equals(str)
+                            && statusBarNotification.getUserId() == i
+                            && Objects.equals(statusBarNotification.getTag(), str2)
+                            && statusBarNotification.getId() == i2) {
                         ((NotificationRecord) entry.getValue()).isCanceled = true;
                         return true;
                     }
@@ -122,7 +135,15 @@ public final class SnoozeHelper {
     }
 
     public final PendingIntent createPendingIntent(String str) {
-        return PendingIntent.getBroadcast(this.mContext, 1, new Intent(REPOST_ACTION).setPackage("android").setData(new Uri.Builder().scheme("repost").appendPath(str).build()).addFlags(268435456).putExtra("key", str), 201326592);
+        return PendingIntent.getBroadcast(
+                this.mContext,
+                1,
+                new Intent(REPOST_ACTION)
+                        .setPackage("android")
+                        .setData(new Uri.Builder().scheme("repost").appendPath(str).build())
+                        .addFlags(268435456)
+                        .putExtra("key", str),
+                201326592);
     }
 
     public final void dump(PrintWriter printWriter) {
@@ -136,7 +157,11 @@ public final class SnoozeHelper {
                 printWriter.println("\n Pending snoozed notifications");
                 for (String str2 : this.mPersistedSnoozedNotifications.keySet()) {
                     printWriter.print("    ");
-                    printWriter.println("key: " + str2 + " until: " + this.mPersistedSnoozedNotifications.get(str2));
+                    printWriter.println(
+                            "key: "
+                                    + str2
+                                    + " until: "
+                                    + this.mPersistedSnoozedNotifications.get(str2));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -147,7 +172,10 @@ public final class SnoozeHelper {
     public final String getSnoozeContextForUnpostedNotification(String str) {
         String str2;
         synchronized (this.mLock) {
-            str2 = (String) this.mPersistedSnoozedNotificationsWithContext.get(getTrimmedString(str));
+            str2 =
+                    (String)
+                            this.mPersistedSnoozedNotificationsWithContext.get(
+                                    getTrimmedString(str));
         }
         return str2;
     }
@@ -169,7 +197,8 @@ public final class SnoozeHelper {
             try {
                 arrayList = new ArrayList();
                 for (NotificationRecord notificationRecord : this.mSnoozedNotifications.values()) {
-                    if (notificationRecord.sbn.getUserId() == i && notificationRecord.sbn.getPackageName().equals(str)) {
+                    if (notificationRecord.sbn.getUserId() == i
+                            && notificationRecord.sbn.getPackageName().equals(str)) {
                         arrayList.add(notificationRecord);
                     }
                 }
@@ -209,7 +238,12 @@ public final class SnoozeHelper {
             return;
         }
         this.mAm.cancel(createPendingIntent(notificationRecord.sbn.getKey()));
-        MetricsLogger.action(notificationRecord.getLogMaker().setCategory(FrameworkStatsLog.SENSITIVE_NOTIFICATION_APP_PROTECTION_SESSION).setType(1));
+        MetricsLogger.action(
+                notificationRecord
+                        .getLogMaker()
+                        .setCategory(
+                                FrameworkStatsLog.SENSITIVE_NOTIFICATION_APP_PROTECTION_SESSION)
+                        .setType(1));
         this.mCallback.repost(notificationRecord.sbn.getUserId(), notificationRecord, z);
     }
 
@@ -242,21 +276,34 @@ public final class SnoozeHelper {
                         str3 = null;
                         break;
                     }
-                    NotificationRecord notificationRecord = (NotificationRecord) this.mSnoozedNotifications.valueAt(i2);
-                    if (notificationRecord.sbn.getPackageName().equals(str) && notificationRecord.sbn.getUserId() == i && notificationRecord.sbn.isGroup() && notificationRecord.sbn.getNotification().isGroupSummary() && str2.equals(notificationRecord.sbn.getGroupKey())) {
+                    NotificationRecord notificationRecord =
+                            (NotificationRecord) this.mSnoozedNotifications.valueAt(i2);
+                    if (notificationRecord.sbn.getPackageName().equals(str)
+                            && notificationRecord.sbn.getUserId() == i
+                            && notificationRecord.sbn.isGroup()
+                            && notificationRecord.sbn.getNotification().isGroupSummary()
+                            && str2.equals(notificationRecord.sbn.getGroupKey())) {
                         str3 = notificationRecord.sbn.getKey();
                         break;
                     }
                     i2++;
                 }
                 if (str3 != null) {
-                    NotificationRecord notificationRecord2 = (NotificationRecord) this.mSnoozedNotifications.remove(str3);
+                    NotificationRecord notificationRecord2 =
+                            (NotificationRecord) this.mSnoozedNotifications.remove(str3);
                     String trimmedString = getTrimmedString(str3);
                     this.mPersistedSnoozedNotificationsWithContext.remove(trimmedString);
                     this.mPersistedSnoozedNotifications.remove(trimmedString);
                     if (notificationRecord2 != null && !notificationRecord2.isCanceled) {
-                        MetricsLogger.action(notificationRecord2.getLogMaker().setCategory(FrameworkStatsLog.SENSITIVE_NOTIFICATION_APP_PROTECTION_SESSION).setType(1));
-                        this.mCallback.repost(notificationRecord2.sbn.getUserId(), notificationRecord2, false);
+                        MetricsLogger.action(
+                                notificationRecord2
+                                        .getLogMaker()
+                                        .setCategory(
+                                                FrameworkStatsLog
+                                                        .SENSITIVE_NOTIFICATION_APP_PROTECTION_SESSION)
+                                        .setType(1));
+                        this.mCallback.repost(
+                                notificationRecord2.sbn.getUserId(), notificationRecord2, false);
                     }
                 }
             } catch (Throwable th) {
@@ -282,7 +329,8 @@ public final class SnoozeHelper {
         synchronized (this.mLock) {
             try {
                 if (this.mSnoozedNotifications.containsKey(notificationRecord.sbn.getKey())) {
-                    this.mSnoozedNotifications.put(notificationRecord.sbn.getKey(), notificationRecord);
+                    this.mSnoozedNotifications.put(
+                            notificationRecord.sbn.getKey(), notificationRecord);
                 }
             } catch (Throwable th) {
                 throw th;

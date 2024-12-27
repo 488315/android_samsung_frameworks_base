@@ -8,14 +8,16 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IResourceManagerObserverClient extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.media.IResourceManagerObserverClient";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.media.IResourceManagerObserverClient";
 
-    void notify(int i, int i2, int i3, MediaResourceNotifyInfoParcel mediaResourceNotifyInfoParcel) throws RemoteException;
+    void notify(int i, int i2, int i3, MediaResourceNotifyInfoParcel mediaResourceNotifyInfoParcel)
+            throws RemoteException;
 
     public static class Default implements IResourceManagerObserverClient {
         @Override // com.samsung.android.media.IResourceManagerObserverClient
-        public void notify(int msg, int ext1, int ext2, MediaResourceNotifyInfoParcel obj) throws RemoteException {
-        }
+        public void notify(int msg, int ext1, int ext2, MediaResourceNotifyInfoParcel obj)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,7 @@ public interface IResourceManagerObserverClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IResourceManagerObserverClient {
+    public abstract static class Stub extends Binder implements IResourceManagerObserverClient {
         static final int TRANSACTION_notify = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface IResourceManagerObserverClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IResourceManagerObserverClient.DESCRIPTOR);
             }
@@ -74,7 +77,9 @@ public interface IResourceManagerObserverClient extends IInterface {
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
                     int _arg2 = data.readInt();
-                    MediaResourceNotifyInfoParcel _arg3 = (MediaResourceNotifyInfoParcel) data.readTypedObject(MediaResourceNotifyInfoParcel.CREATOR);
+                    MediaResourceNotifyInfoParcel _arg3 =
+                            (MediaResourceNotifyInfoParcel)
+                                    data.readTypedObject(MediaResourceNotifyInfoParcel.CREATOR);
                     data.enforceNoDataAvail();
                     notify(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -100,7 +105,8 @@ public interface IResourceManagerObserverClient extends IInterface {
             }
 
             @Override // com.samsung.android.media.IResourceManagerObserverClient
-            public void notify(int msg, int ext1, int ext2, MediaResourceNotifyInfoParcel obj) throws RemoteException {
+            public void notify(int msg, int ext1, int ext2, MediaResourceNotifyInfoParcel obj)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IResourceManagerObserverClient.DESCRIPTOR);

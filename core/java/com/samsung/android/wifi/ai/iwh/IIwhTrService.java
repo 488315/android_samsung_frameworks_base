@@ -14,8 +14,9 @@ public interface IIwhTrService extends IInterface {
 
     public static class Default implements IIwhTrService {
         @Override // com.samsung.android.wifi.ai.iwh.IIwhTrService
-        public void initialize(String key, int desiredScore, int scoreMarginPercent, int mode, boolean testmode) throws RemoteException {
-        }
+        public void initialize(
+                String key, int desiredScore, int scoreMarginPercent, int mode, boolean testmode)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface IIwhTrService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIwhTrService {
+    public abstract static class Stub extends Binder implements IIwhTrService {
         static final int TRANSACTION_initialize = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface IIwhTrService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIwhTrService.DESCRIPTOR);
             }
@@ -101,7 +103,13 @@ public interface IIwhTrService extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ai.iwh.IIwhTrService
-            public void initialize(String key, int desiredScore, int scoreMarginPercent, int mode, boolean testmode) throws RemoteException {
+            public void initialize(
+                    String key,
+                    int desiredScore,
+                    int scoreMarginPercent,
+                    int mode,
+                    boolean testmode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IIwhTrService.DESCRIPTOR);

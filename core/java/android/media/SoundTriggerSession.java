@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class SoundTriggerSession implements Parcelable {
-    public static final Parcelable.Creator<SoundTriggerSession> CREATOR = new Parcelable.Creator<SoundTriggerSession>() { // from class: android.media.SoundTriggerSession.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SoundTriggerSession createFromParcel(Parcel _aidl_source) {
-            SoundTriggerSession _aidl_out = new SoundTriggerSession();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SoundTriggerSession> CREATOR =
+            new Parcelable.Creator<
+                    SoundTriggerSession>() { // from class: android.media.SoundTriggerSession.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SoundTriggerSession createFromParcel(Parcel _aidl_source) {
+                    SoundTriggerSession _aidl_out = new SoundTriggerSession();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SoundTriggerSession[] newArray(int _aidl_size) {
-            return new SoundTriggerSession[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SoundTriggerSession[] newArray(int _aidl_size) {
+                    return new SoundTriggerSession[_aidl_size];
+                }
+            };
     public AudioDeviceDescription device;
     public int session = 0;
     public int ioHandle = 0;
@@ -68,7 +70,9 @@ public class SoundTriggerSession implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.device = (AudioDeviceDescription) _aidl_parcel.readTypedObject(AudioDeviceDescription.CREATOR);
+                this.device =
+                        (AudioDeviceDescription)
+                                _aidl_parcel.readTypedObject(AudioDeviceDescription.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

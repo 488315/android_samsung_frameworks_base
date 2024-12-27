@@ -4,7 +4,9 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.system.OsConstants;
 import android.util.IntArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.util.TokenBucket;
+
 import java.util.BitSet;
 
 /* loaded from: classes3.dex */
@@ -51,7 +53,9 @@ public class ConnectStats {
     }
 
     private void countLatency(int errno, int ms) {
-        if (isNonBlocking(errno) || !this.mLatencyTb.get() || this.latencies.size() >= this.mMaxLatencyRecords) {
+        if (isNonBlocking(errno)
+                || !this.mLatencyTb.get()
+                || this.latencies.size() >= this.mMaxLatencyRecords) {
             return;
         }
         this.latencies.add(ms);
@@ -75,7 +79,13 @@ public class ConnectStats {
     }
 
     public String toString() {
-        StringBuilder builder = new StringBuilder("ConnectStats(").append("netId=").append(this.netId).append(", transports=").append(BitSet.valueOf(new long[]{this.transports})).append(", ");
+        StringBuilder builder =
+                new StringBuilder("ConnectStats(")
+                        .append("netId=")
+                        .append(this.netId)
+                        .append(", transports=")
+                        .append(BitSet.valueOf(new long[] {this.transports}))
+                        .append(", ");
         builder.append(String.format("%d events, ", Integer.valueOf(this.eventCount)));
         builder.append(String.format("%d success, ", Integer.valueOf(this.connectCount)));
         builder.append(String.format("%d blocking, ", Integer.valueOf(this.connectBlockingCount)));

@@ -7,10 +7,12 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.modules.expresslog.Counter;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.sensors.fingerprint.GestureAvailabilityDispatcher;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
@@ -43,12 +45,13 @@ public final class BiometricScheduler {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.sensors.BiometricScheduler$1, reason: invalid class name */
     public final class AnonymousClass1 implements ClientMonitorCallback {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
         public final void onClientFinished(BaseClientMonitor baseClientMonitor, boolean z) {
-            BiometricScheduler.this.mHandler.post(new BiometricScheduler$1$$ExternalSyntheticLambda0(this, baseClientMonitor, z, 0));
+            BiometricScheduler.this.mHandler.post(
+                    new BiometricScheduler$1$$ExternalSyntheticLambda0(
+                            this, baseClientMonitor, z, 0));
         }
 
         @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
@@ -100,11 +103,18 @@ public final class BiometricScheduler {
 
         @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
         public final void onClientFinished(BaseClientMonitor baseClientMonitor, boolean z) {
-            BiometricScheduler.this.mHandler.post(new BiometricScheduler$1$$ExternalSyntheticLambda0(this, baseClientMonitor, z, 1));
+            BiometricScheduler.this.mHandler.post(
+                    new BiometricScheduler$1$$ExternalSyntheticLambda0(
+                            this, baseClientMonitor, z, 1));
         }
     }
 
-    public BiometricScheduler(Handler handler, int i, GestureAvailabilityDispatcher gestureAvailabilityDispatcher, IBiometricService iBiometricService, int i2) {
+    public BiometricScheduler(
+            Handler handler,
+            int i,
+            GestureAvailabilityDispatcher gestureAvailabilityDispatcher,
+            IBiometricService iBiometricService,
+            int i2) {
         this.mInternalCallback = new AnonymousClass1();
         this.mHandler = handler;
         this.mSensorType = i;
@@ -116,7 +126,14 @@ public final class BiometricScheduler {
         this.mRecentOperations = new ArrayList();
     }
 
-    public BiometricScheduler(Handler handler, int i, GestureAvailabilityDispatcher gestureAvailabilityDispatcher, IBiometricService iBiometricService, int i2, Supplier supplier, UserSwitchProvider userSwitchProvider) {
+    public BiometricScheduler(
+            Handler handler,
+            int i,
+            GestureAvailabilityDispatcher gestureAvailabilityDispatcher,
+            IBiometricService iBiometricService,
+            int i2,
+            Supplier supplier,
+            UserSwitchProvider userSwitchProvider) {
         this.mInternalCallback = new AnonymousClass1();
         this.mHandler = handler;
         this.mSensorType = i;
@@ -130,8 +147,20 @@ public final class BiometricScheduler {
         this.mUserSwitchProvider = userSwitchProvider;
     }
 
-    public BiometricScheduler(Handler handler, int i, GestureAvailabilityDispatcher gestureAvailabilityDispatcher, Supplier supplier, UserSwitchProvider userSwitchProvider) {
-        this(handler, i, gestureAvailabilityDispatcher, IBiometricService.Stub.asInterface(ServiceManager.getService("biometric")), 50, supplier, userSwitchProvider);
+    public BiometricScheduler(
+            Handler handler,
+            int i,
+            GestureAvailabilityDispatcher gestureAvailabilityDispatcher,
+            Supplier supplier,
+            UserSwitchProvider userSwitchProvider) {
+        this(
+                handler,
+                i,
+                gestureAvailabilityDispatcher,
+                IBiometricService.Stub.asInterface(ServiceManager.getService("biometric")),
+                50,
+                supplier,
+                userSwitchProvider);
     }
 
     public final void cancelAuthenticationOrDetection(IBinder iBinder, long j) {
@@ -140,8 +169,12 @@ public final class BiometricScheduler {
         if (biometricSchedulerOperation != null) {
             BaseClientMonitor baseClientMonitor = biometricSchedulerOperation.mClientMonitor;
             boolean z = baseClientMonitor instanceof DetectionConsumer;
-            if (((baseClientMonitor instanceof AuthenticationConsumer) || z) && baseClientMonitor.mToken == iBinder && biometricSchedulerOperation.isMatchingRequestId(j)) {
-                Slog.d("BiometricScheduler", "Cancelling auth/detect op: " + this.mCurrentOperation);
+            if (((baseClientMonitor instanceof AuthenticationConsumer) || z)
+                    && baseClientMonitor.mToken == iBinder
+                    && biometricSchedulerOperation.isMatchingRequestId(j)) {
+                Slog.d(
+                        "BiometricScheduler",
+                        "Cancelling auth/detect op: " + this.mCurrentOperation);
                 this.mCurrentOperation.cancel(this.mHandler, this.mInternalCallback);
                 return;
             }
@@ -150,8 +183,11 @@ public final class BiometricScheduler {
             BaseClientMonitor baseClientMonitor2 = biometricSchedulerOperation2.mClientMonitor;
             boolean z2 = baseClientMonitor2 instanceof DetectionConsumer;
             if ((baseClientMonitor2 instanceof AuthenticationConsumer) || z2) {
-                if (baseClientMonitor2.mToken == iBinder && biometricSchedulerOperation2.isMatchingRequestId(j)) {
-                    Slog.d("BiometricScheduler", "Cancelling pending auth/detect op: " + biometricSchedulerOperation2);
+                if (baseClientMonitor2.mToken == iBinder
+                        && biometricSchedulerOperation2.isMatchingRequestId(j)) {
+                    Slog.d(
+                            "BiometricScheduler",
+                            "Cancelling pending auth/detect op: " + biometricSchedulerOperation2);
                     biometricSchedulerOperation2.markCanceling();
                 }
             }
@@ -163,7 +199,9 @@ public final class BiometricScheduler {
         BiometricSchedulerOperation biometricSchedulerOperation = this.mCurrentOperation;
         if (biometricSchedulerOperation != null) {
             BaseClientMonitor baseClientMonitor = biometricSchedulerOperation.mClientMonitor;
-            if ((baseClientMonitor instanceof EnrollClient) && baseClientMonitor.mToken == iBinder && biometricSchedulerOperation.isMatchingRequestId(j)) {
+            if ((baseClientMonitor instanceof EnrollClient)
+                    && baseClientMonitor.mToken == iBinder
+                    && biometricSchedulerOperation.isMatchingRequestId(j)) {
                 Slog.d("BiometricScheduler", "Cancelling enrollment op: " + this.mCurrentOperation);
                 this.mCurrentOperation.cancel(this.mHandler, this.mInternalCallback);
                 return;
@@ -171,8 +209,12 @@ public final class BiometricScheduler {
         }
         for (BiometricSchedulerOperation biometricSchedulerOperation2 : this.mPendingOperations) {
             BaseClientMonitor baseClientMonitor2 = biometricSchedulerOperation2.mClientMonitor;
-            if ((baseClientMonitor2 instanceof EnrollClient) && baseClientMonitor2.mToken == iBinder && biometricSchedulerOperation2.isMatchingRequestId(j)) {
-                Slog.d("BiometricScheduler", "Cancelling pending enrollment op: " + biometricSchedulerOperation2);
+            if ((baseClientMonitor2 instanceof EnrollClient)
+                    && baseClientMonitor2.mToken == iBinder
+                    && biometricSchedulerOperation2.isMatchingRequestId(j)) {
+                Slog.d(
+                        "BiometricScheduler",
+                        "Cancelling pending enrollment op: " + biometricSchedulerOperation2);
                 biometricSchedulerOperation2.markCanceling();
             }
         }
@@ -190,14 +232,23 @@ public final class BiometricScheduler {
             return;
         }
         int intValue = ((Integer) this.mCurrentUserRetriever.get()).intValue();
-        int i2 = ((BiometricSchedulerOperation) this.mPendingOperations.getFirst()).mClientMonitor.mTargetUserId;
-        if (i2 != intValue && !(((BiometricSchedulerOperation) this.mPendingOperations.getFirst()).mClientMonitor instanceof StartUserClient)) {
+        int i2 =
+                ((BiometricSchedulerOperation) this.mPendingOperations.getFirst())
+                        .mClientMonitor
+                        .mTargetUserId;
+        if (i2 != intValue
+                && !(((BiometricSchedulerOperation) this.mPendingOperations.getFirst())
+                                .mClientMonitor
+                        instanceof StartUserClient)) {
             UserSwitchProvider userSwitchProvider = this.mUserSwitchProvider;
             if (intValue == -10000 && userSwitchProvider != null) {
                 StartUserClient startUserClient = userSwitchProvider.getStartUserClient(i2);
-                UserSwitchClientCallback userSwitchClientCallback = new UserSwitchClientCallback(startUserClient);
+                UserSwitchClientCallback userSwitchClientCallback =
+                        new UserSwitchClientCallback(startUserClient);
                 Slog.d("BiometricScheduler", "[Starting User] " + startUserClient);
-                this.mCurrentOperation = new BiometricSchedulerOperation(2, startUserClient, userSwitchClientCallback);
+                this.mCurrentOperation =
+                        new BiometricSchedulerOperation(
+                                2, startUserClient, userSwitchClientCallback);
                 startUserClient.start(userSwitchClientCallback);
                 return;
             }
@@ -211,11 +262,16 @@ public final class BiometricScheduler {
             }
             StopUserClient stopUserClient = userSwitchProvider.getStopUserClient(intValue);
             this.mStopUserClient = stopUserClient;
-            UserSwitchClientCallback userSwitchClientCallback2 = new UserSwitchClientCallback(stopUserClient);
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(intValue, i2, "[Stopping User] current: ", ", next: ", ". ");
+            UserSwitchClientCallback userSwitchClientCallback2 =
+                    new UserSwitchClientCallback(stopUserClient);
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            intValue, i2, "[Stopping User] current: ", ", next: ", ". ");
             m.append(this.mStopUserClient);
             Slog.d("BiometricScheduler", m.toString());
-            this.mCurrentOperation = new BiometricSchedulerOperation(2, this.mStopUserClient, userSwitchClientCallback2);
+            this.mCurrentOperation =
+                    new BiometricSchedulerOperation(
+                            2, this.mStopUserClient, userSwitchClientCallback2);
             this.mStopUserClient.start(userSwitchClientCallback2);
             return;
         }
@@ -244,7 +300,8 @@ public final class BiometricScheduler {
             biometricSchedulerOperation.cancel(handler, anonymousClass1);
             return;
         }
-        GestureAvailabilityDispatcher gestureAvailabilityDispatcher = this.mGestureAvailabilityDispatcher;
+        GestureAvailabilityDispatcher gestureAvailabilityDispatcher =
+                this.mGestureAvailabilityDispatcher;
         if (gestureAvailabilityDispatcher != null && z) {
             gestureAvailabilityDispatcher.markSensorActive(baseClientMonitor.mSensorId, true);
         }
@@ -255,18 +312,25 @@ public final class BiometricScheduler {
             i = baseClientMonitor2.mCookie;
             if (i != 0) {
                 biometricSchedulerOperation2.mState = 4;
-                baseClientMonitor2.mCallback = biometricSchedulerOperation2.getWrappedCallback(anonymousClass1);
+                baseClientMonitor2.mCallback =
+                        biometricSchedulerOperation2.getWrappedCallback(anonymousClass1);
             }
         } else {
             i = 0;
         }
         if (i != 0) {
             try {
-                this.mBiometricService.onReadyForAuthentication(this.mCurrentOperation.mClientMonitor.mRequestId, i);
+                this.mBiometricService.onReadyForAuthentication(
+                        this.mCurrentOperation.mClientMonitor.mRequestId, i);
             } catch (RemoteException e) {
-                Slog.e("BiometricScheduler", "Remote exception when contacting BiometricService", e);
+                Slog.e(
+                        "BiometricScheduler",
+                        "Remote exception when contacting BiometricService",
+                        e);
             }
-            Slog.d("BiometricScheduler", "Waiting for cookie before starting: " + this.mCurrentOperation);
+            Slog.d(
+                    "BiometricScheduler",
+                    "Waiting for cookie before starting: " + this.mCurrentOperation);
             return;
         }
         BiometricSchedulerOperation biometricSchedulerOperation3 = this.mCurrentOperation;
@@ -285,21 +349,36 @@ public final class BiometricScheduler {
             return;
         }
         int size = this.mPendingOperations.size();
-        Slog.e("BiometricScheduler", "[Unable To Start] " + this.mCurrentOperation + ". Last pending operation: " + ((BiometricSchedulerOperation) this.mPendingOperations.peekLast()));
+        Slog.e(
+                "BiometricScheduler",
+                "[Unable To Start] "
+                        + this.mCurrentOperation
+                        + ". Last pending operation: "
+                        + ((BiometricSchedulerOperation) this.mPendingOperations.peekLast()));
         for (int i5 = 0; i5 < size; i5++) {
-            BiometricSchedulerOperation biometricSchedulerOperation4 = (BiometricSchedulerOperation) this.mPendingOperations.pollFirst();
+            BiometricSchedulerOperation biometricSchedulerOperation4 =
+                    (BiometricSchedulerOperation) this.mPendingOperations.pollFirst();
             if (biometricSchedulerOperation4 != null) {
-                Slog.w("BiometricScheduler", "[Aborting Operation] " + biometricSchedulerOperation4);
+                Slog.w(
+                        "BiometricScheduler",
+                        "[Aborting Operation] " + biometricSchedulerOperation4);
                 if (!biometricSchedulerOperation4.errorWhenNoneOf("abort", 0, 4, 1)) {
-                    BaseClientMonitor baseClientMonitor3 = biometricSchedulerOperation4.mClientMonitor;
+                    BaseClientMonitor baseClientMonitor3 =
+                            biometricSchedulerOperation4.mClientMonitor;
                     if (baseClientMonitor3 instanceof HalClientMonitor) {
                         ((HalClientMonitor) baseClientMonitor3).unableToStart();
                     }
-                    biometricSchedulerOperation4.getWrappedCallback(null).onClientFinished(baseClientMonitor3, false);
-                    Slog.v("BiometricSchedulerOperation", "Aborted: " + biometricSchedulerOperation4);
+                    biometricSchedulerOperation4
+                            .getWrappedCallback(null)
+                            .onClientFinished(baseClientMonitor3, false);
+                    Slog.v(
+                            "BiometricSchedulerOperation",
+                            "Aborted: " + biometricSchedulerOperation4);
                 }
             } else {
-                Slog.e("BiometricScheduler", "Null operation, index: " + i5 + ", expected length: " + size);
+                Slog.e(
+                        "BiometricScheduler",
+                        "Null operation, index: " + i5 + ", expected length: " + size);
             }
         }
         BaseClientMonitor baseClientMonitor4 = this.mCurrentOperation.mClientMonitor;
@@ -311,7 +390,15 @@ public final class BiometricScheduler {
     }
 
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "Dump of BiometricScheduler BiometricScheduler", "Type: "), this.mSensorType, printWriter, "Current operation: ");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                                printWriter,
+                                "Dump of BiometricScheduler BiometricScheduler",
+                                "Type: "),
+                        this.mSensorType,
+                        printWriter,
+                        "Current operation: ");
         m.append(this.mCurrentOperation);
         printWriter.println(m.toString());
         printWriter.println("Pending operations: " + this.mPendingOperations.size());
@@ -328,13 +415,19 @@ public final class BiometricScheduler {
     public final byte[] dumpProtoState(boolean z) {
         ProtoOutputStream protoOutputStream = new ProtoOutputStream();
         BiometricSchedulerOperation biometricSchedulerOperation = this.mCurrentOperation;
-        protoOutputStream.write(1159641169921L, biometricSchedulerOperation != null ? biometricSchedulerOperation.mClientMonitor.getProtoEnum() : 0);
+        protoOutputStream.write(
+                1159641169921L,
+                biometricSchedulerOperation != null
+                        ? biometricSchedulerOperation.mClientMonitor.getProtoEnum()
+                        : 0);
         protoOutputStream.write(1120986464258L, this.mTotalOperationsHandled);
         if (((ArrayList) this.mRecentOperations).isEmpty()) {
             protoOutputStream.write(2259152797699L, 0);
         } else {
             for (int i = 0; i < ((ArrayList) this.mRecentOperations).size(); i++) {
-                protoOutputStream.write(2259152797699L, ((Integer) ((ArrayList) this.mRecentOperations).get(i)).intValue());
+                protoOutputStream.write(
+                        2259152797699L,
+                        ((Integer) ((ArrayList) this.mRecentOperations).get(i)).intValue());
             }
         }
         protoOutputStream.flush();
@@ -360,14 +453,22 @@ public final class BiometricScheduler {
         if (this.mCrashStates.size() >= 10) {
             this.mCrashStates.removeFirst();
         }
-        String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US).format(new Date(System.currentTimeMillis()));
+        String format =
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", Locale.US)
+                        .format(new Date(System.currentTimeMillis()));
         ArrayList arrayList = new ArrayList();
         Iterator it = this.mPendingOperations.iterator();
         while (it.hasNext()) {
             arrayList.add(((BiometricSchedulerOperation) it.next()).toString());
         }
         BiometricSchedulerOperation biometricSchedulerOperation = this.mCurrentOperation;
-        CrashState crashState = new CrashState(format, biometricSchedulerOperation != null ? biometricSchedulerOperation.toString() : null, arrayList);
+        CrashState crashState =
+                new CrashState(
+                        format,
+                        biometricSchedulerOperation != null
+                                ? biometricSchedulerOperation.toString()
+                                : null,
+                        arrayList);
         this.mCrashStates.add(crashState);
         Slog.e("BiometricScheduler", "Recorded crash state: " + crashState.toString());
     }
@@ -378,19 +479,33 @@ public final class BiometricScheduler {
         this.mCurrentOperation = null;
     }
 
-    public final void scheduleClientMonitor(BaseClientMonitor baseClientMonitor, ClientMonitorCallback clientMonitorCallback) {
+    public final void scheduleClientMonitor(
+            BaseClientMonitor baseClientMonitor, ClientMonitorCallback clientMonitorCallback) {
         BiometricSchedulerOperation biometricSchedulerOperation;
         int i;
         if (baseClientMonitor.interruptsPrecedingClients()) {
-            for (BiometricSchedulerOperation biometricSchedulerOperation2 : this.mPendingOperations) {
+            for (BiometricSchedulerOperation biometricSchedulerOperation2 :
+                    this.mPendingOperations) {
                 if (biometricSchedulerOperation2.markCanceling()) {
-                    Slog.d("BiometricScheduler", "New client, marking pending op as canceling: " + biometricSchedulerOperation2);
+                    Slog.d(
+                            "BiometricScheduler",
+                            "New client, marking pending op as canceling: "
+                                    + biometricSchedulerOperation2);
                 }
             }
         }
-        this.mPendingOperations.add(new BiometricSchedulerOperation(0, baseClientMonitor, clientMonitorCallback));
-        Slog.d("BiometricScheduler", "[Added] " + baseClientMonitor + ", new queue size: " + this.mPendingOperations.size());
-        if (!baseClientMonitor.interruptsPrecedingClients() || (biometricSchedulerOperation = this.mCurrentOperation) == null || !biometricSchedulerOperation.mClientMonitor.isInterruptable() || ((i = this.mCurrentOperation.mState) != 2 && i != 4)) {
+        this.mPendingOperations.add(
+                new BiometricSchedulerOperation(0, baseClientMonitor, clientMonitorCallback));
+        Slog.d(
+                "BiometricScheduler",
+                "[Added] "
+                        + baseClientMonitor
+                        + ", new queue size: "
+                        + this.mPendingOperations.size());
+        if (!baseClientMonitor.interruptsPrecedingClients()
+                || (biometricSchedulerOperation = this.mCurrentOperation) == null
+                || !biometricSchedulerOperation.mClientMonitor.isInterruptable()
+                || ((i = this.mCurrentOperation.mState) != 2 && i != 4)) {
             checkCurrentUserAndStartNextOperation();
             return;
         }
@@ -406,7 +521,12 @@ public final class BiometricScheduler {
         }
         boolean z = false;
         if (biometricSchedulerOperation.mClientMonitor.mCookie != i) {
-            Slog.e("BiometricSchedulerOperation", "Mismatched cookie for operation: " + biometricSchedulerOperation + ", received: " + i);
+            Slog.e(
+                    "BiometricSchedulerOperation",
+                    "Mismatched cookie for operation: "
+                            + biometricSchedulerOperation
+                            + ", received: "
+                            + i);
         } else if (!biometricSchedulerOperation.errorWhenNoneOf("start", 0, 4, 1)) {
             z = biometricSchedulerOperation.doStart(this.mInternalCallback);
         }
@@ -414,7 +534,9 @@ public final class BiometricScheduler {
             Slog.d("BiometricScheduler", "[Started] Prepared client: " + this.mCurrentOperation);
             return;
         }
-        Slog.e("BiometricScheduler", "[Unable To Start] Prepared client: " + this.mCurrentOperation);
+        Slog.e(
+                "BiometricScheduler",
+                "[Unable To Start] Prepared client: " + this.mCurrentOperation);
         BaseClientMonitor baseClientMonitor = this.mCurrentOperation.mClientMonitor;
         if (baseClientMonitor != null) {
             baseClientMonitor.destroy();
@@ -428,25 +550,39 @@ public final class BiometricScheduler {
         if (biometricSchedulerOperation == null) {
             return;
         }
-        this.mHandler.postDelayed(new Runnable() { // from class: com.android.server.biometrics.sensors.BiometricScheduler$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                BiometricScheduler biometricScheduler = BiometricScheduler.this;
-                BiometricSchedulerOperation biometricSchedulerOperation2 = biometricSchedulerOperation;
-                if (biometricSchedulerOperation2 != biometricScheduler.mCurrentOperation || biometricSchedulerOperation2.mState == 5) {
-                    return;
-                }
-                Counter.logIncrement("biometric.value_scheduler_watchdog_triggered_count");
-                if (biometricScheduler.mCurrentOperation == null) {
-                    return;
-                }
-                for (BiometricSchedulerOperation biometricSchedulerOperation3 : biometricScheduler.mPendingOperations) {
-                    Slog.d("BiometricScheduler", "[Watchdog cancelling pending] " + biometricSchedulerOperation3.mClientMonitor);
-                    biometricSchedulerOperation3.markCancelingForWatchdog();
-                }
-                Slog.d("BiometricScheduler", "[Watchdog cancelling current] " + biometricScheduler.mCurrentOperation.mClientMonitor);
-                biometricScheduler.mCurrentOperation.cancel(biometricScheduler.mHandler, biometricScheduler.getInternalCallback());
-            }
-        }, 10000L);
+        this.mHandler.postDelayed(
+                new Runnable() { // from class:
+                                 // com.android.server.biometrics.sensors.BiometricScheduler$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        BiometricScheduler biometricScheduler = BiometricScheduler.this;
+                        BiometricSchedulerOperation biometricSchedulerOperation2 =
+                                biometricSchedulerOperation;
+                        if (biometricSchedulerOperation2 != biometricScheduler.mCurrentOperation
+                                || biometricSchedulerOperation2.mState == 5) {
+                            return;
+                        }
+                        Counter.logIncrement("biometric.value_scheduler_watchdog_triggered_count");
+                        if (biometricScheduler.mCurrentOperation == null) {
+                            return;
+                        }
+                        for (BiometricSchedulerOperation biometricSchedulerOperation3 :
+                                biometricScheduler.mPendingOperations) {
+                            Slog.d(
+                                    "BiometricScheduler",
+                                    "[Watchdog cancelling pending] "
+                                            + biometricSchedulerOperation3.mClientMonitor);
+                            biometricSchedulerOperation3.markCancelingForWatchdog();
+                        }
+                        Slog.d(
+                                "BiometricScheduler",
+                                "[Watchdog cancelling current] "
+                                        + biometricScheduler.mCurrentOperation.mClientMonitor);
+                        biometricScheduler.mCurrentOperation.cancel(
+                                biometricScheduler.mHandler,
+                                biometricScheduler.getInternalCallback());
+                    }
+                },
+                10000L);
     }
 }

@@ -1,6 +1,7 @@
 package com.android.server.permission.jarjar.kotlin;
 
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
+
 import java.io.Serializable;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,7 +31,8 @@ public final class Pair implements Serializable {
             return false;
         }
         Pair pair = (Pair) obj;
-        return Intrinsics.areEqual(this.first, pair.first) && Intrinsics.areEqual(this.second, pair.second);
+        return Intrinsics.areEqual(this.first, pair.first)
+                && Intrinsics.areEqual(this.second, pair.second);
     }
 
     public final int hashCode() {

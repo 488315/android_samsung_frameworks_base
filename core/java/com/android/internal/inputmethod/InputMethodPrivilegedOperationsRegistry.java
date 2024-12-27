@@ -1,6 +1,7 @@
 package com.android.internal.inputmethod;
 
 import android.os.IBinder;
+
 import java.lang.ref.WeakReference;
 import java.util.WeakHashMap;
 
@@ -10,8 +11,7 @@ public final class InputMethodPrivilegedOperationsRegistry {
     private static InputMethodPrivilegedOperations sNop;
     private static WeakHashMap<IBinder, WeakReference<InputMethodPrivilegedOperations>> sRegistry;
 
-    private InputMethodPrivilegedOperationsRegistry() {
-    }
+    private InputMethodPrivilegedOperationsRegistry() {}
 
     private static InputMethodPrivilegedOperations getNopOps() {
         if (sNop == null) {

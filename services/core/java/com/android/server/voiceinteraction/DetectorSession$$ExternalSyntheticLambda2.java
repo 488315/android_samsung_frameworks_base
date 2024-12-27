@@ -2,7 +2,9 @@ package com.android.server.voiceinteraction;
 
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.concurrent.TimeoutException;
 import java.util.function.BiConsumer;
 
@@ -11,7 +13,8 @@ import java.util.function.BiConsumer;
 public final /* synthetic */ class DetectorSession$$ExternalSyntheticLambda2 implements BiConsumer {
     public final /* synthetic */ DetectorSession f$0;
 
-    public /* synthetic */ DetectorSession$$ExternalSyntheticLambda2(DetectorSession detectorSession) {
+    public /* synthetic */ DetectorSession$$ExternalSyntheticLambda2(
+            DetectorSession detectorSession) {
         this.f$0 = detectorSession;
     }
 
@@ -42,7 +45,8 @@ public final /* synthetic */ class DetectorSession$$ExternalSyntheticLambda2 imp
                         i2 = 0;
                     }
                 }
-                FrameworkStatsLog.write(FrameworkStatsLog.HOTWORD_DETECTION_SERVICE_INIT_RESULT_REPORTED, i2, 4, i);
+                FrameworkStatsLog.write(
+                        FrameworkStatsLog.HOTWORD_DETECTION_SERVICE_INIT_RESULT_REPORTED, i2, 4, i);
             }
         } catch (RemoteException e) {
             Slog.w("DetectorSession", "Failed to report initialization status UNKNOWN", e);

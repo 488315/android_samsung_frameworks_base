@@ -4,10 +4,11 @@ import android.content.res.AssetManager;
 import android.drm.DrmInfo;
 import android.drm.DrmInfoRequest;
 import android.drm.DrmManagerClient;
-import android.graphics.BitmapFactory;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+
 import com.google.android.mms.ContentType;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -23,7 +24,8 @@ public final class BitmapRegionDecoder {
 
     private static native void nativeClean(long j);
 
-    private static native Bitmap nativeDecodeRegion(long j, int i, int i2, int i3, int i4, BitmapFactory.Options options, long j2, long j3);
+    private static native Bitmap nativeDecodeRegion(
+            long j, int i, int i2, int i3, int i4, BitmapFactory.Options options, long j2, long j3);
 
     private static native int nativeGetHeight(long j);
 
@@ -33,16 +35,19 @@ public final class BitmapRegionDecoder {
 
     private static native BitmapRegionDecoder nativeNewInstance(FileDescriptor fileDescriptor);
 
-    private static native BitmapRegionDecoder nativeNewInstance(InputStream inputStream, byte[] bArr);
+    private static native BitmapRegionDecoder nativeNewInstance(
+            InputStream inputStream, byte[] bArr);
 
     private static native BitmapRegionDecoder nativeNewInstance(byte[] bArr, int i, int i2);
 
     @Deprecated
-    public static BitmapRegionDecoder newInstance(byte[] data, int offset, int length, boolean isShareable) throws IOException {
+    public static BitmapRegionDecoder newInstance(
+            byte[] data, int offset, int length, boolean isShareable) throws IOException {
         return newInstance(data, offset, length);
     }
 
-    public static BitmapRegionDecoder newInstance(byte[] data, int offset, int length) throws IOException {
+    public static BitmapRegionDecoder newInstance(byte[] data, int offset, int length)
+            throws IOException {
         if ((offset | length) < 0 || data.length < offset + length) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -50,7 +55,8 @@ public final class BitmapRegionDecoder {
     }
 
     @Deprecated
-    public static BitmapRegionDecoder newInstance(FileDescriptor fd, boolean isShareable) throws IOException {
+    public static BitmapRegionDecoder newInstance(FileDescriptor fd, boolean isShareable)
+            throws IOException {
         return nativeNewInstance(fd);
     }
 
@@ -59,7 +65,8 @@ public final class BitmapRegionDecoder {
     }
 
     @Deprecated
-    public static BitmapRegionDecoder newInstance(InputStream is, boolean isShareable) throws IOException {
+    public static BitmapRegionDecoder newInstance(InputStream is, boolean isShareable)
+            throws IOException {
         return newInstance(is);
     }
 
@@ -72,14 +79,17 @@ public final class BitmapRegionDecoder {
     }
 
     @Deprecated
-    public static BitmapRegionDecoder newInstance(String pathName, boolean isShareable) throws IOException {
+    public static BitmapRegionDecoder newInstance(String pathName, boolean isShareable)
+            throws IOException {
         BitmapRegionDecoder decoder = null;
         InputStream stream = null;
         if (pathName.endsWith(".dcf")) {
             DrmManagerClient drmClient = new DrmManagerClient(null);
             int rightStatus = drmClient.checkRightsStatus(pathName, 7);
             if (rightStatus != 0) {
-                Log.i("BitmapRegionDecoder", "newInstance Rights not present. rightStatus = " + rightStatus);
+                Log.i(
+                        "BitmapRegionDecoder",
+                        "newInstance Rights not present. rightStatus = " + rightStatus);
             } else {
                 long fileLength = new File(pathName).length();
                 DrmInfoRequest drmInfoRequest = new DrmInfoRequest(10, ContentType.APP_DRM_CONTENT);
@@ -89,7 +99,9 @@ public final class BitmapRegionDecoder {
                 String status = resultInfo.get("status").toString();
                 Log.i("BitmapRegionDecoder", "newInstance acquireDrmInfo status is " + status);
                 if (!status.equals("success")) {
-                    Log.e("BitmapRegionDecoder", "newInstance FAIL status = " + resultInfo.get("INFO"));
+                    Log.e(
+                            "BitmapRegionDecoder",
+                            "newInstance FAIL status = " + resultInfo.get("INFO"));
                 } else if (resultInfo.getData() == null) {
                     Log.e("BitmapRegionDecoder", "newInstance acquireDrmInfo resultInfo is null");
                 } else {
@@ -119,7 +131,8 @@ public final class BitmapRegionDecoder {
         return decoder;
     }
 
-    public static BitmapRegionDecoder newInstance(String pathName, boolean isShareable, boolean isPreview) throws IOException {
+    public static BitmapRegionDecoder newInstance(
+            String pathName, boolean isShareable, boolean isPreview) throws IOException {
         return newInstance(pathName, isShareable);
     }
 
@@ -153,10 +166,22 @@ public final class BitmapRegionDecoder {
         BitmapFactory.Options.validate(options);
         synchronized (this.mNativeLock) {
             checkRecycled("decodeRegion called on recycled region decoder");
-            if (rect.right <= 0 || rect.bottom <= 0 || rect.left >= getWidth() || rect.top >= getHeight()) {
+            if (rect.right <= 0
+                    || rect.bottom <= 0
+                    || rect.left >= getWidth()
+                    || rect.top >= getHeight()) {
                 throw new IllegalArgumentException("rectangle is outside the image");
             }
-            nativeDecodeRegion = nativeDecodeRegion(this.mNativeBitmapRegionDecoder, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, options, BitmapFactory.Options.nativeInBitmap(options), BitmapFactory.Options.nativeColorSpace(options));
+            nativeDecodeRegion =
+                    nativeDecodeRegion(
+                            this.mNativeBitmapRegionDecoder,
+                            rect.left,
+                            rect.top,
+                            rect.right - rect.left,
+                            rect.bottom - rect.top,
+                            options,
+                            BitmapFactory.Options.nativeInBitmap(options),
+                            BitmapFactory.Options.nativeColorSpace(options));
         }
         return nativeDecodeRegion;
     }

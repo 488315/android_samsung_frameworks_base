@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class InstallationFileParcel implements Parcelable {
-    public static final Parcelable.Creator<InstallationFileParcel> CREATOR = new Parcelable.Creator<InstallationFileParcel>() { // from class: android.content.pm.InstallationFileParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstallationFileParcel createFromParcel(Parcel _aidl_source) {
-            InstallationFileParcel _aidl_out = new InstallationFileParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<InstallationFileParcel> CREATOR =
+            new Parcelable.Creator<InstallationFileParcel>() { // from class:
+                // android.content.pm.InstallationFileParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstallationFileParcel createFromParcel(Parcel _aidl_source) {
+                    InstallationFileParcel _aidl_out = new InstallationFileParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstallationFileParcel[] newArray(int _aidl_size) {
-            return new InstallationFileParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstallationFileParcel[] newArray(int _aidl_size) {
+                    return new InstallationFileParcel[_aidl_size];
+                }
+            };
     public byte[] metadata;
     public String name;
     public byte[] signature;

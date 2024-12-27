@@ -3,6 +3,7 @@ package android.hardware.contexthub.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -21,18 +22,33 @@ public final class HubAppInfo {
             return false;
         }
         HubAppInfo other = (HubAppInfo) otherObject;
-        if (this.appId == other.appId && this.version == other.version && HidlSupport.deepEquals(this.memUsage, other.memUsage) && this.enabled == other.enabled) {
+        if (this.appId == other.appId
+                && this.version == other.version
+                && HidlSupport.deepEquals(this.memUsage, other.memUsage)
+                && this.enabled == other.enabled) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.appId))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.version))), Integer.valueOf(HidlSupport.deepHashCode(this.memUsage)), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.enabled))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.appId))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.version))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.memUsage)),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.enabled))));
     }
 
     public final String toString() {
-        return "{.appId = " + this.appId + ", .version = " + this.version + ", .memUsage = " + this.memUsage + ", .enabled = " + this.enabled + "}";
+        return "{.appId = "
+                + this.appId
+                + ", .version = "
+                + this.version
+                + ", .memUsage = "
+                + this.memUsage
+                + ", .enabled = "
+                + this.enabled
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -44,7 +60,8 @@ public final class HubAppInfo {
         ArrayList<HubAppInfo> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             HubAppInfo _hidl_vec_element = new HubAppInfo();
@@ -54,11 +71,14 @@ public final class HubAppInfo {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.appId = _hidl_blob.getInt64(_hidl_offset + 0);
         this.version = _hidl_blob.getInt32(_hidl_offset + 8);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 16 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 16 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 16 + 0, true);
         this.memUsage.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             MemRange _hidl_vec_element = new MemRange();

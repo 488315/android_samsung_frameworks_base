@@ -79,61 +79,121 @@ public class ResolverParamsParcel implements Parcelable {
                                             this.servers = parcel.createStringArray();
                                             if (parcel.dataPosition() - dataPosition < readInt) {
                                                 this.domains = parcel.createStringArray();
-                                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                                if (parcel.dataPosition() - dataPosition
+                                                        < readInt) {
                                                     this.tlsName = parcel.readString();
-                                                    if (parcel.dataPosition() - dataPosition < readInt) {
-                                                        this.tlsServers = parcel.createStringArray();
-                                                        if (parcel.dataPosition() - dataPosition < readInt) {
-                                                            this.tlsFingerprints = parcel.createStringArray();
-                                                            if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                this.caCertificate = parcel.readString();
-                                                                if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                    this.tlsConnectTimeoutMs = parcel.readInt();
-                                                                    if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                        this.resolverOptions = (ResolverOptionsParcel) parcel.readTypedObject(ResolverOptionsParcel.CREATOR);
-                                                                        if (parcel.dataPosition() - dataPosition < readInt) {
-                                                                            this.transportTypes = parcel.createIntArray();
-                                                                            if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                    if (parcel.dataPosition() - dataPosition
+                                                            < readInt) {
+                                                        this.tlsServers =
+                                                                parcel.createStringArray();
+                                                        if (parcel.dataPosition() - dataPosition
+                                                                < readInt) {
+                                                            this.tlsFingerprints =
+                                                                    parcel.createStringArray();
+                                                            if (parcel.dataPosition() - dataPosition
+                                                                    < readInt) {
+                                                                this.caCertificate =
+                                                                        parcel.readString();
+                                                                if (parcel.dataPosition()
+                                                                                - dataPosition
+                                                                        < readInt) {
+                                                                    this.tlsConnectTimeoutMs =
+                                                                            parcel.readInt();
+                                                                    if (parcel.dataPosition()
+                                                                                    - dataPosition
+                                                                            < readInt) {
+                                                                        this.resolverOptions =
+                                                                                (ResolverOptionsParcel)
+                                                                                        parcel
+                                                                                                .readTypedObject(
+                                                                                                        ResolverOptionsParcel
+                                                                                                                .CREATOR);
+                                                                        if (parcel.dataPosition()
+                                                                                        - dataPosition
+                                                                                < readInt) {
+                                                                            this.transportTypes =
+                                                                                    parcel
+                                                                                            .createIntArray();
+                                                                            if (dataPosition
+                                                                                    > Integer
+                                                                                                    .MAX_VALUE
+                                                                                            - readInt) {
+                                                                                throw new BadParcelableException(
+                                                                                        "Overflow"
+                                                                                            + " in the"
+                                                                                            + " size"
+                                                                                            + " of parcelable");
                                                                             }
-                                                                            parcel.setDataPosition(dataPosition + readInt);
+                                                                            parcel.setDataPosition(
+                                                                                    dataPosition
+                                                                                            + readInt);
                                                                             return;
                                                                         }
-                                                                        if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                        if (dataPosition
+                                                                                > Integer.MAX_VALUE
+                                                                                        - readInt) {
+                                                                            throw new BadParcelableException(
+                                                                                    "Overflow in"
+                                                                                        + " the size"
+                                                                                        + " of parcelable");
                                                                         }
-                                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                    } else if (dataPosition
+                                                                            > Integer.MAX_VALUE
+                                                                                    - readInt) {
+                                                                        throw new BadParcelableException(
+                                                                                "Overflow in the"
+                                                                                    + " size of"
+                                                                                    + " parcelable");
                                                                     }
-                                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                                } else if (dataPosition
+                                                                        > Integer.MAX_VALUE
+                                                                                - readInt) {
+                                                                    throw new BadParcelableException(
+                                                                            "Overflow in the size"
+                                                                                + " of parcelable");
                                                                 }
-                                                            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                            } else if (dataPosition
+                                                                    > Integer.MAX_VALUE - readInt) {
+                                                                throw new BadParcelableException(
+                                                                        "Overflow in the size of"
+                                                                            + " parcelable");
                                                             }
-                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                        } else if (dataPosition
+                                                                > Integer.MAX_VALUE - readInt) {
+                                                            throw new BadParcelableException(
+                                                                    "Overflow in the size of"
+                                                                        + " parcelable");
                                                         }
-                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                    } else if (dataPosition
+                                                            > Integer.MAX_VALUE - readInt) {
+                                                        throw new BadParcelableException(
+                                                                "Overflow in the size of"
+                                                                    + " parcelable");
                                                     }
-                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                } else if (dataPosition
+                                                        > Integer.MAX_VALUE - readInt) {
+                                                    throw new BadParcelableException(
+                                                            "Overflow in the size of parcelable");
                                                 }
                                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                throw new BadParcelableException(
+                                                        "Overflow in the size of parcelable");
                                             }
                                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -179,6 +239,7 @@ public class ResolverParamsParcel implements Parcelable {
         parcel.writeIntArray(this.transportTypes);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

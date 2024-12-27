@@ -1,18 +1,13 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.hardware.hdmi.HdmiRecordListener;
-import android.hardware.hdmi.HdmiRecordSources;
-import android.hardware.hdmi.HdmiTimerRecordSources;
-import android.hardware.hdmi.IHdmiControlCallback;
-import android.hardware.hdmi.IHdmiInputChangeListener;
-import android.hardware.hdmi.IHdmiMhlVendorCommandListener;
-import android.hardware.hdmi.IHdmiRecordListener;
 import android.os.RemoteException;
 import android.util.Log;
+
+import libcore.util.EmptyArray;
+
 import java.util.Collections;
 import java.util.List;
-import libcore.util.EmptyArray;
 
 @SystemApi
 /* loaded from: classes2.dex */
@@ -89,7 +84,8 @@ public final class HdmiTvClient extends HdmiClient {
     }
 
     private static IHdmiInputChangeListener getListenerWrapper(final InputChangeListener listener) {
-        return new IHdmiInputChangeListener.Stub() { // from class: android.hardware.hdmi.HdmiTvClient.2
+        return new IHdmiInputChangeListener
+                .Stub() { // from class: android.hardware.hdmi.HdmiTvClient.2
             @Override // android.hardware.hdmi.IHdmiInputChangeListener
             public void onChanged(HdmiDeviceInfo info) {
                 InputChangeListener.this.onChanged(info);
@@ -154,7 +150,8 @@ public final class HdmiTvClient extends HdmiClient {
         return new IHdmiRecordListener.Stub() { // from class: android.hardware.hdmi.HdmiTvClient.3
             @Override // android.hardware.hdmi.IHdmiRecordListener
             public byte[] getOneTouchRecordSource(int recorderAddress) {
-                HdmiRecordSources.RecordSource source = HdmiRecordListener.this.onOneTouchRecordSourceRequested(recorderAddress);
+                HdmiRecordSources.RecordSource source =
+                        HdmiRecordListener.this.onOneTouchRecordSourceRequested(recorderAddress);
                 if (source == null) {
                     return EmptyArray.BYTE;
                 }
@@ -170,7 +167,8 @@ public final class HdmiTvClient extends HdmiClient {
 
             @Override // android.hardware.hdmi.IHdmiRecordListener
             public void onTimerRecordingResult(int recorderAddress, int result) {
-                HdmiRecordListener.this.onTimerRecordingResult(recorderAddress, HdmiRecordListener.TimerStatusData.parseFrom(result));
+                HdmiRecordListener.this.onTimerRecordingResult(
+                        recorderAddress, HdmiRecordListener.TimerStatusData.parseFrom(result));
             }
 
             @Override // android.hardware.hdmi.IHdmiRecordListener
@@ -201,7 +199,8 @@ public final class HdmiTvClient extends HdmiClient {
         }
     }
 
-    public void startTimerRecording(int recorderAddress, int sourceType, HdmiTimerRecordSources.TimerRecordSource source) {
+    public void startTimerRecording(
+            int recorderAddress, int sourceType, HdmiTimerRecordSources.TimerRecordSource source) {
         if (source == null) {
             throw new IllegalArgumentException("source must not be null.");
         }
@@ -226,7 +225,8 @@ public final class HdmiTvClient extends HdmiClient {
         }
     }
 
-    public void clearTimerRecording(int recorderAddress, int sourceType, HdmiTimerRecordSources.TimerRecordSource source) {
+    public void clearTimerRecording(
+            int recorderAddress, int sourceType, HdmiTimerRecordSources.TimerRecordSource source) {
         if (source == null) {
             throw new IllegalArgumentException("source must not be null.");
         }
@@ -251,8 +251,10 @@ public final class HdmiTvClient extends HdmiClient {
         }
     }
 
-    private IHdmiMhlVendorCommandListener getListenerWrapper(final HdmiMhlVendorCommandListener listener) {
-        return new IHdmiMhlVendorCommandListener.Stub() { // from class: android.hardware.hdmi.HdmiTvClient.4
+    private IHdmiMhlVendorCommandListener getListenerWrapper(
+            final HdmiMhlVendorCommandListener listener) {
+        return new IHdmiMhlVendorCommandListener
+                .Stub() { // from class: android.hardware.hdmi.HdmiTvClient.4
             @Override // android.hardware.hdmi.IHdmiMhlVendorCommandListener
             public void onReceived(int portId, int offset, int length, byte[] data) {
                 listener.onReceived(portId, offset, length, data);

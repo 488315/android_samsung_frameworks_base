@@ -19,20 +19,19 @@ public interface ISpellCheckerSession extends IInterface {
 
     public static class Default implements ISpellCheckerSession {
         @Override // com.android.internal.textservice.ISpellCheckerSession
-        public void onGetSuggestionsMultiple(TextInfo[] textInfos, int suggestionsLimit, boolean multipleWords) throws RemoteException {
-        }
+        public void onGetSuggestionsMultiple(
+                TextInfo[] textInfos, int suggestionsLimit, boolean multipleWords)
+                throws RemoteException {}
 
         @Override // com.android.internal.textservice.ISpellCheckerSession
-        public void onGetSentenceSuggestionsMultiple(TextInfo[] textInfos, int suggestionsLimit) throws RemoteException {
-        }
+        public void onGetSentenceSuggestionsMultiple(TextInfo[] textInfos, int suggestionsLimit)
+                throws RemoteException {}
 
         @Override // com.android.internal.textservice.ISpellCheckerSession
-        public void onCancel() throws RemoteException {
-        }
+        public void onCancel() throws RemoteException {}
 
         @Override // com.android.internal.textservice.ISpellCheckerSession
-        public void onClose() throws RemoteException {
-        }
+        public void onClose() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -40,8 +39,9 @@ public interface ISpellCheckerSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpellCheckerSession {
-        public static final String DESCRIPTOR = "com.android.internal.textservice.ISpellCheckerSession";
+    public abstract static class Stub extends Binder implements ISpellCheckerSession {
+        public static final String DESCRIPTOR =
+                "com.android.internal.textservice.ISpellCheckerSession";
         static final int TRANSACTION_onCancel = 3;
         static final int TRANSACTION_onClose = 4;
         static final int TRANSACTION_onGetSentenceSuggestionsMultiple = 2;
@@ -88,7 +88,8 @@ public interface ISpellCheckerSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -138,7 +139,9 @@ public interface ISpellCheckerSession extends IInterface {
             }
 
             @Override // com.android.internal.textservice.ISpellCheckerSession
-            public void onGetSuggestionsMultiple(TextInfo[] textInfos, int suggestionsLimit, boolean multipleWords) throws RemoteException {
+            public void onGetSuggestionsMultiple(
+                    TextInfo[] textInfos, int suggestionsLimit, boolean multipleWords)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -152,7 +155,8 @@ public interface ISpellCheckerSession extends IInterface {
             }
 
             @Override // com.android.internal.textservice.ISpellCheckerSession
-            public void onGetSentenceSuggestionsMultiple(TextInfo[] textInfos, int suggestionsLimit) throws RemoteException {
+            public void onGetSentenceSuggestionsMultiple(TextInfo[] textInfos, int suggestionsLimit)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

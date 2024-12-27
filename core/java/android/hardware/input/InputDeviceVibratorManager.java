@@ -1,6 +1,5 @@
 package android.hardware.input;
 
-import android.hardware.input.InputManager;
 import android.os.Binder;
 import android.os.CombinedVibration;
 import android.os.NullVibrator;
@@ -9,10 +8,12 @@ import android.os.Vibrator;
 import android.os.VibratorManager;
 import android.util.SparseArray;
 import android.view.InputDevice;
+
 import com.samsung.android.vibrator.VibrationDebugInfo;
 
 /* loaded from: classes2.dex */
-public class InputDeviceVibratorManager extends VibratorManager implements InputManager.InputDeviceListener {
+public class InputDeviceVibratorManager extends VibratorManager
+        implements InputManager.InputDeviceListener {
     private static final boolean DEBUG = false;
     private static final String TAG = "InputDeviceVibratorManager";
     private final int mDeviceId;
@@ -31,14 +32,14 @@ public class InputDeviceVibratorManager extends VibratorManager implements Input
             InputDevice.getDevice(this.mDeviceId);
             int[] vibratorIds = this.mGlobal.getVibratorIds(this.mDeviceId);
             for (int i = 0; i < vibratorIds.length; i++) {
-                this.mVibrators.put(vibratorIds[i], new InputDeviceVibrator(this.mDeviceId, vibratorIds[i]));
+                this.mVibrators.put(
+                        vibratorIds[i], new InputDeviceVibrator(this.mDeviceId, vibratorIds[i]));
             }
         }
     }
 
     @Override // android.hardware.input.InputManager.InputDeviceListener
-    public void onInputDeviceAdded(int deviceId) {
-    }
+    public void onInputDeviceAdded(int deviceId) {}
 
     @Override // android.hardware.input.InputManager.InputDeviceListener
     public void onInputDeviceRemoved(int deviceId) {
@@ -89,7 +90,12 @@ public class InputDeviceVibratorManager extends VibratorManager implements Input
     }
 
     @Override // android.os.VibratorManager
-    public void vibrate(int uid, String opPkg, CombinedVibration effect, String reason, VibrationAttributes attributes) {
+    public void vibrate(
+            int uid,
+            String opPkg,
+            CombinedVibration effect,
+            String reason,
+            VibrationAttributes attributes) {
         this.mGlobal.vibrate(this.mDeviceId, effect, this.mToken);
     }
 

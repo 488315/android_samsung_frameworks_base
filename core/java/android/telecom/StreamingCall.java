@@ -6,25 +6,27 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class StreamingCall implements Parcelable {
-    public static final Parcelable.Creator<StreamingCall> CREATOR = new Parcelable.Creator<StreamingCall>() { // from class: android.telecom.StreamingCall.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StreamingCall createFromParcel(Parcel in) {
-            return new StreamingCall(in);
-        }
+    public static final Parcelable.Creator<StreamingCall> CREATOR =
+            new Parcelable.Creator<StreamingCall>() { // from class: android.telecom.StreamingCall.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StreamingCall createFromParcel(Parcel in) {
+                    return new StreamingCall(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StreamingCall[] newArray(int size) {
-            return new StreamingCall[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StreamingCall[] newArray(int size) {
+                    return new StreamingCall[size];
+                }
+            };
     public static final String EXTRA_CALL_ID = "android.telecom.extra.CALL_ID";
     public static final int STATE_DISCONNECTED = 3;
     public static final int STATE_HOLDING = 2;
@@ -37,12 +39,12 @@ public final class StreamingCall implements Parcelable {
     private int mState;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StreamingCallState {
-    }
+    public @interface StreamingCallState {}
 
     private StreamingCall(Parcel in) {
         this.mAdapter = null;
-        this.mComponentName = (ComponentName) in.readParcelable(ComponentName.class.getClassLoader());
+        this.mComponentName =
+                (ComponentName) in.readParcelable(ComponentName.class.getClassLoader());
         this.mDisplayName = in.readCharSequence();
         this.mAddress = (Uri) in.readParcelable(Uri.class.getClassLoader());
         this.mExtras = in.readBundle();
@@ -63,7 +65,8 @@ public final class StreamingCall implements Parcelable {
         dest.writeInt(this.mState);
     }
 
-    public StreamingCall(ComponentName componentName, CharSequence displayName, Uri address, Bundle extras) {
+    public StreamingCall(
+            ComponentName componentName, CharSequence displayName, Uri address, Bundle extras) {
         this.mAdapter = null;
         this.mComponentName = componentName;
         this.mDisplayName = displayName;

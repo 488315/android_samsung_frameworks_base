@@ -3,10 +3,10 @@ package com.android.framework.protobuf;
 /* loaded from: classes3.dex */
 final class ExtensionRegistryFactory {
     static final Class<?> EXTENSION_REGISTRY_CLASS = reflectExtensionRegistry();
-    static final String FULL_REGISTRY_CLASS_NAME = "com.android.framework.protobuf.ExtensionRegistry";
+    static final String FULL_REGISTRY_CLASS_NAME =
+            "com.android.framework.protobuf.ExtensionRegistry";
 
-    ExtensionRegistryFactory() {
-    }
+    ExtensionRegistryFactory() {}
 
     static Class<?> reflectExtensionRegistry() {
         try {
@@ -27,7 +27,8 @@ final class ExtensionRegistryFactory {
     }
 
     static boolean isFullRegistry(ExtensionRegistryLite registry) {
-        return EXTENSION_REGISTRY_CLASS != null && EXTENSION_REGISTRY_CLASS.isAssignableFrom(registry.getClass());
+        return EXTENSION_REGISTRY_CLASS != null
+                && EXTENSION_REGISTRY_CLASS.isAssignableFrom(registry.getClass());
     }
 
     private static final ExtensionRegistryLite invokeSubclassFactory(String methodName) {
@@ -35,7 +36,10 @@ final class ExtensionRegistryFactory {
             return null;
         }
         try {
-            return (ExtensionRegistryLite) EXTENSION_REGISTRY_CLASS.getDeclaredMethod(methodName, new Class[0]).invoke(null, new Object[0]);
+            return (ExtensionRegistryLite)
+                    EXTENSION_REGISTRY_CLASS
+                            .getDeclaredMethod(methodName, new Class[0])
+                            .invoke(null, new Object[0]);
         } catch (Exception e) {
             return null;
         }

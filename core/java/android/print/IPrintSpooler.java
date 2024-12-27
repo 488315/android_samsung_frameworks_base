@@ -8,24 +8,36 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
-import android.print.IPrintSpoolerCallbacks;
-import android.print.IPrintSpoolerClient;
 import android.text.TextUtils;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface IPrintSpooler extends IInterface {
-    void clearCustomPrinterIconCache(IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i) throws RemoteException;
+    void clearCustomPrinterIconCache(IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i)
+            throws RemoteException;
 
     void createPrintJob(PrintJobInfo printJobInfo) throws RemoteException;
 
-    void getCustomPrinterIcon(PrinterId printerId, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i) throws RemoteException;
+    void getCustomPrinterIcon(
+            PrinterId printerId, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i)
+            throws RemoteException;
 
-    void getPrintJobInfo(PrintJobId printJobId, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i, int i2) throws RemoteException;
+    void getPrintJobInfo(
+            PrintJobId printJobId, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i, int i2)
+            throws RemoteException;
 
-    void getPrintJobInfos(IPrintSpoolerCallbacks iPrintSpoolerCallbacks, ComponentName componentName, int i, int i2, int i3) throws RemoteException;
+    void getPrintJobInfos(
+            IPrintSpoolerCallbacks iPrintSpoolerCallbacks,
+            ComponentName componentName,
+            int i,
+            int i2,
+            int i3)
+            throws RemoteException;
 
-    void onCustomPrinterIconLoaded(PrinterId printerId, Icon icon, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i) throws RemoteException;
+    void onCustomPrinterIconLoaded(
+            PrinterId printerId, Icon icon, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i)
+            throws RemoteException;
 
     void pruneApprovedPrintServices(List<ComponentName> list) throws RemoteException;
 
@@ -35,82 +47,101 @@ public interface IPrintSpooler extends IInterface {
 
     void setPrintJobCancelling(PrintJobId printJobId, boolean z) throws RemoteException;
 
-    void setPrintJobState(PrintJobId printJobId, int i, String str, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i2) throws RemoteException;
+    void setPrintJobState(
+            PrintJobId printJobId,
+            int i,
+            String str,
+            IPrintSpoolerCallbacks iPrintSpoolerCallbacks,
+            int i2)
+            throws RemoteException;
 
-    void setPrintJobTag(PrintJobId printJobId, String str, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i) throws RemoteException;
+    void setPrintJobTag(
+            PrintJobId printJobId, String str, IPrintSpoolerCallbacks iPrintSpoolerCallbacks, int i)
+            throws RemoteException;
 
     void setProgress(PrintJobId printJobId, float f) throws RemoteException;
 
     void setStatus(PrintJobId printJobId, CharSequence charSequence) throws RemoteException;
 
-    void setStatusRes(PrintJobId printJobId, int i, CharSequence charSequence) throws RemoteException;
+    void setStatusRes(PrintJobId printJobId, int i, CharSequence charSequence)
+            throws RemoteException;
 
-    void writePrintJobData(ParcelFileDescriptor parcelFileDescriptor, PrintJobId printJobId) throws RemoteException;
+    void writePrintJobData(ParcelFileDescriptor parcelFileDescriptor, PrintJobId printJobId)
+            throws RemoteException;
 
     public static class Default implements IPrintSpooler {
         @Override // android.print.IPrintSpooler
-        public void removeObsoletePrintJobs() throws RemoteException {
-        }
+        public void removeObsoletePrintJobs() throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void getPrintJobInfos(IPrintSpoolerCallbacks callback, ComponentName componentName, int state, int appId, int sequence) throws RemoteException {
-        }
+        public void getPrintJobInfos(
+                IPrintSpoolerCallbacks callback,
+                ComponentName componentName,
+                int state,
+                int appId,
+                int sequence)
+                throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void getPrintJobInfo(PrintJobId printJobId, IPrintSpoolerCallbacks callback, int appId, int sequence) throws RemoteException {
-        }
+        public void getPrintJobInfo(
+                PrintJobId printJobId, IPrintSpoolerCallbacks callback, int appId, int sequence)
+                throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void createPrintJob(PrintJobInfo printJob) throws RemoteException {
-        }
+        public void createPrintJob(PrintJobInfo printJob) throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void setPrintJobState(PrintJobId printJobId, int status, String stateReason, IPrintSpoolerCallbacks callback, int sequence) throws RemoteException {
-        }
+        public void setPrintJobState(
+                PrintJobId printJobId,
+                int status,
+                String stateReason,
+                IPrintSpoolerCallbacks callback,
+                int sequence)
+                throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void setProgress(PrintJobId printJobId, float progress) throws RemoteException {
-        }
+        public void setProgress(PrintJobId printJobId, float progress) throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void setStatus(PrintJobId printJobId, CharSequence status) throws RemoteException {
-        }
+        public void setStatus(PrintJobId printJobId, CharSequence status) throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void setStatusRes(PrintJobId printJobId, int status, CharSequence appPackageName) throws RemoteException {
-        }
+        public void setStatusRes(PrintJobId printJobId, int status, CharSequence appPackageName)
+                throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void onCustomPrinterIconLoaded(PrinterId printerId, Icon icon, IPrintSpoolerCallbacks callbacks, int sequence) throws RemoteException {
-        }
+        public void onCustomPrinterIconLoaded(
+                PrinterId printerId, Icon icon, IPrintSpoolerCallbacks callbacks, int sequence)
+                throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void getCustomPrinterIcon(PrinterId printerId, IPrintSpoolerCallbacks callbacks, int sequence) throws RemoteException {
-        }
+        public void getCustomPrinterIcon(
+                PrinterId printerId, IPrintSpoolerCallbacks callbacks, int sequence)
+                throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void clearCustomPrinterIconCache(IPrintSpoolerCallbacks callbacks, int sequence) throws RemoteException {
-        }
+        public void clearCustomPrinterIconCache(IPrintSpoolerCallbacks callbacks, int sequence)
+                throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void setPrintJobTag(PrintJobId printJobId, String tag, IPrintSpoolerCallbacks callback, int sequence) throws RemoteException {
-        }
+        public void setPrintJobTag(
+                PrintJobId printJobId, String tag, IPrintSpoolerCallbacks callback, int sequence)
+                throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void writePrintJobData(ParcelFileDescriptor fd, PrintJobId printJobId) throws RemoteException {
-        }
+        public void writePrintJobData(ParcelFileDescriptor fd, PrintJobId printJobId)
+                throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void setClient(IPrintSpoolerClient client) throws RemoteException {
-        }
+        public void setClient(IPrintSpoolerClient client) throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void setPrintJobCancelling(PrintJobId printJobId, boolean cancelling) throws RemoteException {
-        }
+        public void setPrintJobCancelling(PrintJobId printJobId, boolean cancelling)
+                throws RemoteException {}
 
         @Override // android.print.IPrintSpooler
-        public void pruneApprovedPrintServices(List<ComponentName> servicesToKeep) throws RemoteException {
-        }
+        public void pruneApprovedPrintServices(List<ComponentName> servicesToKeep)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -118,7 +149,7 @@ public interface IPrintSpooler extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPrintSpooler {
+    public abstract static class Stub extends Binder implements IPrintSpooler {
         public static final String DESCRIPTOR = "android.print.IPrintSpooler";
         static final int TRANSACTION_clearCustomPrinterIconCache = 11;
         static final int TRANSACTION_createPrintJob = 4;
@@ -202,7 +233,8 @@ public interface IPrintSpooler extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -215,8 +247,10 @@ public interface IPrintSpooler extends IInterface {
                     removeObsoletePrintJobs();
                     return true;
                 case 2:
-                    IPrintSpoolerCallbacks _arg0 = IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
-                    ComponentName _arg1 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    IPrintSpoolerCallbacks _arg0 =
+                            IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
+                    ComponentName _arg1 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
                     int _arg4 = data.readInt();
@@ -225,7 +259,8 @@ public interface IPrintSpooler extends IInterface {
                     return true;
                 case 3:
                     PrintJobId _arg02 = (PrintJobId) data.readTypedObject(PrintJobId.CREATOR);
-                    IPrintSpoolerCallbacks _arg12 = IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IPrintSpoolerCallbacks _arg12 =
+                            IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
                     int _arg22 = data.readInt();
                     int _arg32 = data.readInt();
                     data.enforceNoDataAvail();
@@ -240,7 +275,8 @@ public interface IPrintSpooler extends IInterface {
                     PrintJobId _arg04 = (PrintJobId) data.readTypedObject(PrintJobId.CREATOR);
                     int _arg13 = data.readInt();
                     String _arg23 = data.readString();
-                    IPrintSpoolerCallbacks _arg33 = IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IPrintSpoolerCallbacks _arg33 =
+                            IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
                     int _arg42 = data.readInt();
                     data.enforceNoDataAvail();
                     setPrintJobState(_arg04, _arg13, _arg23, _arg33, _arg42);
@@ -253,34 +289,39 @@ public interface IPrintSpooler extends IInterface {
                     return true;
                 case 7:
                     PrintJobId _arg06 = (PrintJobId) data.readTypedObject(PrintJobId.CREATOR);
-                    CharSequence _arg15 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg15 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     setStatus(_arg06, _arg15);
                     return true;
                 case 8:
                     PrintJobId _arg07 = (PrintJobId) data.readTypedObject(PrintJobId.CREATOR);
                     int _arg16 = data.readInt();
-                    CharSequence _arg24 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg24 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     setStatusRes(_arg07, _arg16, _arg24);
                     return true;
                 case 9:
                     PrinterId _arg08 = (PrinterId) data.readTypedObject(PrinterId.CREATOR);
                     Icon _arg17 = (Icon) data.readTypedObject(Icon.CREATOR);
-                    IPrintSpoolerCallbacks _arg25 = IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IPrintSpoolerCallbacks _arg25 =
+                            IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
                     int _arg34 = data.readInt();
                     data.enforceNoDataAvail();
                     onCustomPrinterIconLoaded(_arg08, _arg17, _arg25, _arg34);
                     return true;
                 case 10:
                     PrinterId _arg09 = (PrinterId) data.readTypedObject(PrinterId.CREATOR);
-                    IPrintSpoolerCallbacks _arg18 = IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IPrintSpoolerCallbacks _arg18 =
+                            IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
                     int _arg26 = data.readInt();
                     data.enforceNoDataAvail();
                     getCustomPrinterIcon(_arg09, _arg18, _arg26);
                     return true;
                 case 11:
-                    IPrintSpoolerCallbacks _arg010 = IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IPrintSpoolerCallbacks _arg010 =
+                            IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
                     int _arg19 = data.readInt();
                     data.enforceNoDataAvail();
                     clearCustomPrinterIconCache(_arg010, _arg19);
@@ -288,19 +329,23 @@ public interface IPrintSpooler extends IInterface {
                 case 12:
                     PrintJobId _arg011 = (PrintJobId) data.readTypedObject(PrintJobId.CREATOR);
                     String _arg110 = data.readString();
-                    IPrintSpoolerCallbacks _arg27 = IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IPrintSpoolerCallbacks _arg27 =
+                            IPrintSpoolerCallbacks.Stub.asInterface(data.readStrongBinder());
                     int _arg35 = data.readInt();
                     data.enforceNoDataAvail();
                     setPrintJobTag(_arg011, _arg110, _arg27, _arg35);
                     return true;
                 case 13:
-                    ParcelFileDescriptor _arg012 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg012 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     PrintJobId _arg111 = (PrintJobId) data.readTypedObject(PrintJobId.CREATOR);
                     data.enforceNoDataAvail();
                     writePrintJobData(_arg012, _arg111);
                     return true;
                 case 14:
-                    IPrintSpoolerClient _arg013 = IPrintSpoolerClient.Stub.asInterface(data.readStrongBinder());
+                    IPrintSpoolerClient _arg013 =
+                            IPrintSpoolerClient.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setClient(_arg013);
                     return true;
@@ -348,7 +393,13 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void getPrintJobInfos(IPrintSpoolerCallbacks callback, ComponentName componentName, int state, int appId, int sequence) throws RemoteException {
+            public void getPrintJobInfos(
+                    IPrintSpoolerCallbacks callback,
+                    ComponentName componentName,
+                    int state,
+                    int appId,
+                    int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -364,7 +415,9 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void getPrintJobInfo(PrintJobId printJobId, IPrintSpoolerCallbacks callback, int appId, int sequence) throws RemoteException {
+            public void getPrintJobInfo(
+                    PrintJobId printJobId, IPrintSpoolerCallbacks callback, int appId, int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -391,7 +444,13 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void setPrintJobState(PrintJobId printJobId, int status, String stateReason, IPrintSpoolerCallbacks callback, int sequence) throws RemoteException {
+            public void setPrintJobState(
+                    PrintJobId printJobId,
+                    int status,
+                    String stateReason,
+                    IPrintSpoolerCallbacks callback,
+                    int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -420,7 +479,8 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void setStatus(PrintJobId printJobId, CharSequence status) throws RemoteException {
+            public void setStatus(PrintJobId printJobId, CharSequence status)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -438,7 +498,8 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void setStatusRes(PrintJobId printJobId, int status, CharSequence appPackageName) throws RemoteException {
+            public void setStatusRes(PrintJobId printJobId, int status, CharSequence appPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -457,7 +518,9 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void onCustomPrinterIconLoaded(PrinterId printerId, Icon icon, IPrintSpoolerCallbacks callbacks, int sequence) throws RemoteException {
+            public void onCustomPrinterIconLoaded(
+                    PrinterId printerId, Icon icon, IPrintSpoolerCallbacks callbacks, int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -472,7 +535,9 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void getCustomPrinterIcon(PrinterId printerId, IPrintSpoolerCallbacks callbacks, int sequence) throws RemoteException {
+            public void getCustomPrinterIcon(
+                    PrinterId printerId, IPrintSpoolerCallbacks callbacks, int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -486,7 +551,8 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void clearCustomPrinterIconCache(IPrintSpoolerCallbacks callbacks, int sequence) throws RemoteException {
+            public void clearCustomPrinterIconCache(IPrintSpoolerCallbacks callbacks, int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -499,7 +565,12 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void setPrintJobTag(PrintJobId printJobId, String tag, IPrintSpoolerCallbacks callback, int sequence) throws RemoteException {
+            public void setPrintJobTag(
+                    PrintJobId printJobId,
+                    String tag,
+                    IPrintSpoolerCallbacks callback,
+                    int sequence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -514,7 +585,8 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void writePrintJobData(ParcelFileDescriptor fd, PrintJobId printJobId) throws RemoteException {
+            public void writePrintJobData(ParcelFileDescriptor fd, PrintJobId printJobId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -539,7 +611,8 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void setPrintJobCancelling(PrintJobId printJobId, boolean cancelling) throws RemoteException {
+            public void setPrintJobCancelling(PrintJobId printJobId, boolean cancelling)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -552,7 +625,8 @@ public interface IPrintSpooler extends IInterface {
             }
 
             @Override // android.print.IPrintSpooler
-            public void pruneApprovedPrintServices(List<ComponentName> servicesToKeep) throws RemoteException {
+            public void pruneApprovedPrintServices(List<ComponentName> servicesToKeep)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

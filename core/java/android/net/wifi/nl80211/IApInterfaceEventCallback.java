@@ -18,18 +18,18 @@ public interface IApInterfaceEventCallback extends IInterface {
     public static final int BANDWIDTH_INVALID = 0;
     public static final String DESCRIPTOR = "android.net.wifi.nl80211.IApInterfaceEventCallback";
 
-    void onConnectedClientsChanged(NativeWifiClient nativeWifiClient, boolean z) throws RemoteException;
+    void onConnectedClientsChanged(NativeWifiClient nativeWifiClient, boolean z)
+            throws RemoteException;
 
     void onSoftApChannelSwitched(int i, int i2) throws RemoteException;
 
     public static class Default implements IApInterfaceEventCallback {
         @Override // android.net.wifi.nl80211.IApInterfaceEventCallback
-        public void onConnectedClientsChanged(NativeWifiClient client, boolean isConnected) throws RemoteException {
-        }
+        public void onConnectedClientsChanged(NativeWifiClient client, boolean isConnected)
+                throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IApInterfaceEventCallback
-        public void onSoftApChannelSwitched(int frequency, int bandwidth) throws RemoteException {
-        }
+        public void onSoftApChannelSwitched(int frequency, int bandwidth) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,7 +37,7 @@ public interface IApInterfaceEventCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IApInterfaceEventCallback {
+    public abstract static class Stub extends Binder implements IApInterfaceEventCallback {
         static final int TRANSACTION_onConnectedClientsChanged = 1;
         static final int TRANSACTION_onSoftApChannelSwitched = 2;
 
@@ -78,7 +78,8 @@ public interface IApInterfaceEventCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IApInterfaceEventCallback.DESCRIPTOR);
             }
@@ -88,7 +89,8 @@ public interface IApInterfaceEventCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    NativeWifiClient _arg0 = (NativeWifiClient) data.readTypedObject(NativeWifiClient.CREATOR);
+                    NativeWifiClient _arg0 =
+                            (NativeWifiClient) data.readTypedObject(NativeWifiClient.CREATOR);
                     boolean _arg1 = data.readBoolean();
                     data.enforceNoDataAvail();
                     onConnectedClientsChanged(_arg0, _arg1);
@@ -121,7 +123,8 @@ public interface IApInterfaceEventCallback extends IInterface {
             }
 
             @Override // android.net.wifi.nl80211.IApInterfaceEventCallback
-            public void onConnectedClientsChanged(NativeWifiClient client, boolean isConnected) throws RemoteException {
+            public void onConnectedClientsChanged(NativeWifiClient client, boolean isConnected)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IApInterfaceEventCallback.DESCRIPTOR);
@@ -134,7 +137,8 @@ public interface IApInterfaceEventCallback extends IInterface {
             }
 
             @Override // android.net.wifi.nl80211.IApInterfaceEventCallback
-            public void onSoftApChannelSwitched(int frequency, int bandwidth) throws RemoteException {
+            public void onSoftApChannelSwitched(int frequency, int bandwidth)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IApInterfaceEventCallback.DESCRIPTOR);

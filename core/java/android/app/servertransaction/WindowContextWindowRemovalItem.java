@@ -4,23 +4,26 @@ import android.app.ClientTransactionHandler;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class WindowContextWindowRemovalItem extends ClientTransactionItem {
-    public static final Parcelable.Creator<WindowContextWindowRemovalItem> CREATOR = new Parcelable.Creator<WindowContextWindowRemovalItem>() { // from class: android.app.servertransaction.WindowContextWindowRemovalItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContextWindowRemovalItem createFromParcel(Parcel in) {
-            return new WindowContextWindowRemovalItem(in);
-        }
+    public static final Parcelable.Creator<WindowContextWindowRemovalItem> CREATOR =
+            new Parcelable.Creator<WindowContextWindowRemovalItem>() { // from class:
+                // android.app.servertransaction.WindowContextWindowRemovalItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContextWindowRemovalItem createFromParcel(Parcel in) {
+                    return new WindowContextWindowRemovalItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContextWindowRemovalItem[] newArray(int size) {
-            return new WindowContextWindowRemovalItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContextWindowRemovalItem[] newArray(int size) {
+                    return new WindowContextWindowRemovalItem[size];
+                }
+            };
     private IBinder mClientToken;
 
     @Override // android.app.servertransaction.BaseClientRequest
@@ -28,11 +31,12 @@ public class WindowContextWindowRemovalItem extends ClientTransactionItem {
         client.handleWindowContextWindowRemoval(this.mClientToken);
     }
 
-    private WindowContextWindowRemovalItem() {
-    }
+    private WindowContextWindowRemovalItem() {}
 
     public static WindowContextWindowRemovalItem obtain(IBinder clientToken) {
-        WindowContextWindowRemovalItem instance = (WindowContextWindowRemovalItem) ObjectPool.obtain(WindowContextWindowRemovalItem.class);
+        WindowContextWindowRemovalItem instance =
+                (WindowContextWindowRemovalItem)
+                        ObjectPool.obtain(WindowContextWindowRemovalItem.class);
         if (instance == null) {
             instance = new WindowContextWindowRemovalItem();
         }

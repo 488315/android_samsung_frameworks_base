@@ -4,13 +4,15 @@ import com.android.internal.org.bouncycastle.asn1.DERNull;
 import com.android.internal.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 /* loaded from: classes5.dex */
-public class DefaultCMSSignatureEncryptionAlgorithmFinder implements CMSSignatureEncryptionAlgorithmFinder {
+public class DefaultCMSSignatureEncryptionAlgorithmFinder
+        implements CMSSignatureEncryptionAlgorithmFinder {
     private static final Set RSA_PKCS1d5 = new HashSet();
     private static final Map GOST_ENC = new HashMap();
 

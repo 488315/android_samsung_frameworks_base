@@ -7,21 +7,24 @@ import android.telephony.satellite.AntennaPosition;
 
 /* loaded from: classes4.dex */
 public class SatelliteCapabilities implements Parcelable {
-    public static final Parcelable.Creator<SatelliteCapabilities> CREATOR = new Parcelable.Creator<SatelliteCapabilities>() { // from class: android.telephony.satellite.stub.SatelliteCapabilities.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteCapabilities createFromParcel(Parcel _aidl_source) {
-            SatelliteCapabilities _aidl_out = new SatelliteCapabilities();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SatelliteCapabilities> CREATOR =
+            new Parcelable.Creator<
+                    SatelliteCapabilities>() { // from class:
+                                               // android.telephony.satellite.stub.SatelliteCapabilities.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteCapabilities createFromParcel(Parcel _aidl_source) {
+                    SatelliteCapabilities _aidl_out = new SatelliteCapabilities();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteCapabilities[] newArray(int _aidl_size) {
-            return new SatelliteCapabilities[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteCapabilities[] newArray(int _aidl_size) {
+                    return new SatelliteCapabilities[_aidl_size];
+                }
+            };
     public int[] antennaPositionKeys;
     public AntennaPosition[] antennaPositionValues;
     public boolean isPointingRequired = false;
@@ -88,7 +91,8 @@ public class SatelliteCapabilities implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.antennaPositionValues = (AntennaPosition[]) _aidl_parcel.createTypedArray(AntennaPosition.CREATOR);
+                this.antennaPositionValues =
+                        (AntennaPosition[]) _aidl_parcel.createTypedArray(AntennaPosition.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

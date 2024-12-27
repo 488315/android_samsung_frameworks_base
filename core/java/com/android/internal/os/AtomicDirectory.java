@@ -6,7 +6,9 @@ import android.system.Os;
 import android.system.OsConstants;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
@@ -36,8 +38,7 @@ public final class AtomicDirectory {
         return this.mBaseDirectory;
     }
 
-    public void finishRead() {
-    }
+    public void finishRead() {}
 
     public File startWrite() throws IOException {
         backup();
@@ -98,7 +99,8 @@ public final class AtomicDirectory {
     }
 
     public void delete() {
-        boolean deleted = this.mBaseDirectory.exists() ? false | deleteDirectory(this.mBaseDirectory) : false;
+        boolean deleted =
+                this.mBaseDirectory.exists() ? false | deleteDirectory(this.mBaseDirectory) : false;
         if (this.mBackupDirectory.exists()) {
             deleted |= deleteDirectory(this.mBackupDirectory);
         }
@@ -119,7 +121,8 @@ public final class AtomicDirectory {
 
     private void throwIfSomeFilesOpen() {
         if (!this.mOpenFiles.isEmpty()) {
-            throw new IllegalStateException("Unclosed files: " + Arrays.toString(this.mOpenFiles.keySet().toArray()));
+            throw new IllegalStateException(
+                    "Unclosed files: " + Arrays.toString(this.mOpenFiles.keySet().toArray()));
         }
     }
 
@@ -131,7 +134,8 @@ public final class AtomicDirectory {
             deleteDirectory(this.mBackupDirectory);
         }
         if (!this.mBaseDirectory.renameTo(this.mBackupDirectory)) {
-            throw new IOException("Failed to backup " + this.mBaseDirectory + " to " + this.mBackupDirectory);
+            throw new IOException(
+                    "Failed to backup " + this.mBaseDirectory + " to " + this.mBackupDirectory);
         }
         syncParentDirectory();
     }
@@ -144,7 +148,8 @@ public final class AtomicDirectory {
             deleteDirectory(this.mBaseDirectory);
         }
         if (!this.mBackupDirectory.renameTo(this.mBaseDirectory)) {
-            throw new IOException("Failed to restore " + this.mBackupDirectory + " to " + this.mBaseDirectory);
+            throw new IOException(
+                    "Failed to restore " + this.mBackupDirectory + " to " + this.mBaseDirectory);
         }
         syncParentDirectory();
     }

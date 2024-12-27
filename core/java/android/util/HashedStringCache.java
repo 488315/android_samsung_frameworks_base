@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.security.keystore.KeyProperties;
 import android.text.TextUtils;
+
 import java.io.File;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -48,8 +49,12 @@ public class HashedStringCache {
         return sHashedStringCache;
     }
 
-    public HashResult hashString(Context context, String tag, String clearText, int saltExpirationDays) {
-        if (saltExpirationDays == -1 || context == null || TextUtils.isEmpty(clearText) || TextUtils.isEmpty(tag)) {
+    public HashResult hashString(
+            Context context, String tag, String clearText, int saltExpirationDays) {
+        if (saltExpirationDays == -1
+                || context == null
+                || TextUtils.isEmpty(clearText)
+                || TextUtils.isEmpty(tag)) {
             return null;
         }
         populateSaltValues(context, tag, saltExpirationDays);
@@ -96,7 +101,12 @@ public class HashedStringCache {
                     byte[] saltBytes = new byte[16];
                     this.mSecureRandom.nextBytes(saltBytes);
                     saltString = Base64.encodeToString(saltBytes, 3);
-                    this.mSharedPreferences.edit().putString(tag + HASH_SALT, saltString).putInt(tag + HASH_SALT_GEN, this.mSaltGen).putLong(tag + HASH_SALT_DATE, System.currentTimeMillis()).apply();
+                    this.mSharedPreferences
+                            .edit()
+                            .putString(tag + HASH_SALT, saltString)
+                            .putInt(tag + HASH_SALT_GEN, this.mSaltGen)
+                            .putLong(tag + HASH_SALT_DATE, System.currentTimeMillis())
+                            .apply();
                 }
                 this.mSalt = saltString.getBytes(UTF_8);
             }
@@ -104,7 +114,15 @@ public class HashedStringCache {
     }
 
     private SharedPreferences getHashSharedPreferences(Context context) {
-        File prefsFile = new File(new File(Environment.getDataUserCePackageDirectory(StorageManager.UUID_PRIVATE_INTERNAL, context.getUserId(), context.getPackageName()), "shared_prefs"), "hashed_cache.xml");
+        File prefsFile =
+                new File(
+                        new File(
+                                Environment.getDataUserCePackageDirectory(
+                                        StorageManager.UUID_PRIVATE_INTERNAL,
+                                        context.getUserId(),
+                                        context.getPackageName()),
+                                "shared_prefs"),
+                        "hashed_cache.xml");
         return context.getSharedPreferences(prefsFile, 0);
     }
 

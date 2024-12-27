@@ -10,14 +10,17 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.security.KeyChain;
 import android.telephony.TelephonyManager;
+
 import com.android.internal.logging.MetricsLogger;
+
 import com.samsung.android.emergencymode.SemEmergencyConstants;
 import com.samsung.android.emergencymode.SemEmergencyManager;
 
 /* loaded from: classes6.dex */
 public class SystemController {
     private static final String ACTION_CLEAR_COVER_STATE_CHANGE = "com.samsung.cover.STATE_CHANGE";
-    private static final String ACTION_NETWORK_MODE_CHANGED = "android.intent.action.NETWORK_MODE_CHANGED";
+    private static final String ACTION_NETWORK_MODE_CHANGED =
+            "android.intent.action.NETWORK_MODE_CHANGED";
     private static final int INTERVAL_SCOVER_TRANSITION = 200;
     private static final int MESSAGE_HIDE_QUICKPANEL = 4;
     private final Context mContext;
@@ -41,12 +44,15 @@ public class SystemController {
         if (ActivityManager.isUserAMonkey()) {
             return;
         }
-        this.mHandlerWrapper.postDelayed(new Runnable() { // from class: com.samsung.android.globalactions.util.SystemController$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                SystemController.this.lambda$doBugReport$0(fullBugReport);
-            }
-        }, 500L);
+        this.mHandlerWrapper.postDelayed(
+                new Runnable() { // from class:
+                                 // com.samsung.android.globalactions.util.SystemController$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SystemController.this.lambda$doBugReport$0(fullBugReport);
+                    }
+                },
+                500L);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -90,13 +96,13 @@ public class SystemController {
     }
 
     public void hideQuickPanel(String sender) {
-        ((StatusBarManager) this.mContext.getSystemService(Context.STATUS_BAR_SERVICE)).collapsePanels();
+        ((StatusBarManager) this.mContext.getSystemService(Context.STATUS_BAR_SERVICE))
+                .collapsePanels();
         Message msg = this.mHandlerWrapper.obtainMessage(4, sender);
         this.mHandlerWrapper.sendMessageDelayed(msg, 200L);
     }
 
-    public void restoreQuickPanelBackground() {
-    }
+    public void restoreQuickPanelBackground() {}
 
     public void clearCoverStateChange() {
         Intent intent = new Intent();

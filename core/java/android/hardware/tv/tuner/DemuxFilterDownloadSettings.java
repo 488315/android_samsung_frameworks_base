@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class DemuxFilterDownloadSettings implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterDownloadSettings> CREATOR = new Parcelable.Creator<DemuxFilterDownloadSettings>() { // from class: android.hardware.tv.tuner.DemuxFilterDownloadSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterDownloadSettings createFromParcel(Parcel _aidl_source) {
-            DemuxFilterDownloadSettings _aidl_out = new DemuxFilterDownloadSettings();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DemuxFilterDownloadSettings> CREATOR =
+            new Parcelable.Creator<DemuxFilterDownloadSettings>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterDownloadSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterDownloadSettings createFromParcel(Parcel _aidl_source) {
+                    DemuxFilterDownloadSettings _aidl_out = new DemuxFilterDownloadSettings();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterDownloadSettings[] newArray(int _aidl_size) {
-            return new DemuxFilterDownloadSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterDownloadSettings[] newArray(int _aidl_size) {
+                    return new DemuxFilterDownloadSettings[_aidl_size];
+                }
+            };
     public boolean useDownloadId = false;
     public int downloadId = 0;
 

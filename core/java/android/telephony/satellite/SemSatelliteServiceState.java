@@ -2,25 +2,29 @@ package android.telephony.satellite;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class SemSatelliteServiceState implements Parcelable {
-    public static final Parcelable.Creator<SemSatelliteServiceState> CREATOR = new Parcelable.Creator<SemSatelliteServiceState>() { // from class: android.telephony.satellite.SemSatelliteServiceState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSatelliteServiceState createFromParcel(Parcel source) {
-            return new SemSatelliteServiceState(source);
-        }
+    public static final Parcelable.Creator<SemSatelliteServiceState> CREATOR =
+            new Parcelable.Creator<
+                    SemSatelliteServiceState>() { // from class:
+                                                  // android.telephony.satellite.SemSatelliteServiceState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSatelliteServiceState createFromParcel(Parcel source) {
+                    return new SemSatelliteServiceState(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSatelliteServiceState[] newArray(int size) {
-            return new SemSatelliteServiceState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSatelliteServiceState[] newArray(int size) {
+                    return new SemSatelliteServiceState[size];
+                }
+            };
     static final boolean DBG = true;
     static final String LOG_TAG = "SemSatelliteServiceState";
     public static final int SATELLITE_RADIO_POWER_OFF = 0;
@@ -30,8 +34,7 @@ public final class SemSatelliteServiceState implements Parcelable {
     private SemSatelliteRegistrationStateResult mRegState;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SatelliteRadioState {
-    }
+    public @interface SatelliteRadioState {}
 
     public SemSatelliteServiceState() {
         this.mRadioState = 2;
@@ -49,7 +52,11 @@ public final class SemSatelliteServiceState implements Parcelable {
 
     private SemSatelliteServiceState(Parcel in) {
         this.mRadioState = in.readInt();
-        this.mRegState = (SemSatelliteRegistrationStateResult) in.readParcelable(SemSatelliteRegistrationStateResult.class.getClassLoader(), SemSatelliteRegistrationStateResult.class);
+        this.mRegState =
+                (SemSatelliteRegistrationStateResult)
+                        in.readParcelable(
+                                SemSatelliteRegistrationStateResult.class.getClassLoader(),
+                                SemSatelliteRegistrationStateResult.class);
     }
 
     public int getRadioState() {
@@ -99,7 +106,11 @@ public final class SemSatelliteServiceState implements Parcelable {
     }
 
     public String toString() {
-        return "SemSatelliteServiceState {radioState=" + radioStateToString(this.mRadioState) + " RegistrationStateResult=" + this.mRegState + "}";
+        return "SemSatelliteServiceState {radioState="
+                + radioStateToString(this.mRadioState)
+                + " RegistrationStateResult="
+                + this.mRegState
+                + "}";
     }
 
     public int hashCode() {
@@ -115,6 +126,7 @@ public final class SemSatelliteServiceState implements Parcelable {
             return false;
         }
         SemSatelliteServiceState other = (SemSatelliteServiceState) o;
-        return this.mRadioState == other.mRadioState && equalsHandlesNulls(this.mRegState, other.mRegState);
+        return this.mRadioState == other.mRadioState
+                && equalsHandlesNulls(this.mRegState, other.mRegState);
     }
 }

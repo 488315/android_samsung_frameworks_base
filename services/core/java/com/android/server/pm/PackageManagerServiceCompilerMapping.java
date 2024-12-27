@@ -2,8 +2,10 @@ package com.android.server.pm;
 
 import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOutline0;
 import android.os.SystemProperties;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import dalvik.system.DexFile;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -13,7 +15,23 @@ public abstract class PackageManagerServiceCompilerMapping {
     public static final String[] REASON_STRINGS;
 
     static {
-        String[] strArr = {"first-boot", "boot-after-ota", "post-boot", "install", "install-fast", "install-bulk", "install-bulk-secondary", "install-bulk-downgraded", "install-bulk-secondary-downgraded", "bg-dexopt", "ab-ota", "inactive", "cmdline", "boot-after-mainline-update", "shared"};
+        String[] strArr = {
+            "first-boot",
+            "boot-after-ota",
+            "post-boot",
+            "install",
+            "install-fast",
+            "install-bulk",
+            "install-bulk-secondary",
+            "install-bulk-downgraded",
+            "install-bulk-secondary-downgraded",
+            "bg-dexopt",
+            "ab-ota",
+            "inactive",
+            "cmdline",
+            "boot-after-mainline-update",
+            "shared"
+        };
         REASON_STRINGS = strArr;
         int length = strArr.length - 1;
         REASON_SHARED_INDEX = length;
@@ -28,11 +46,23 @@ public abstract class PackageManagerServiceCompilerMapping {
     public static String getAndCheckValidity(int i) {
         String str = SystemProperties.get(getSystemPropertyName(i));
         String[] strArr = REASON_STRINGS;
-        if (str == null || str.isEmpty() || !(str.equals("skip") || DexFile.isValidCompilerFilter(str))) {
-            throw new IllegalStateException(AudioOffloadInfo$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("Value \"", str, "\" not valid (reason "), strArr[i], ")"));
+        if (str == null
+                || str.isEmpty()
+                || !(str.equals("skip") || DexFile.isValidCompilerFilter(str))) {
+            throw new IllegalStateException(
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                            DumpUtils$$ExternalSyntheticOutline0.m(
+                                    "Value \"", str, "\" not valid (reason "),
+                            strArr[i],
+                            ")"));
         }
         if (i == REASON_SHARED_INDEX && DexFile.isProfileGuidedCompilerFilter(str)) {
-            throw new IllegalStateException(AudioOffloadInfo$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("Value \"", str, "\" not allowed (reason "), strArr[i], ")"));
+            throw new IllegalStateException(
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                            DumpUtils$$ExternalSyntheticOutline0.m(
+                                    "Value \"", str, "\" not allowed (reason "),
+                            strArr[i],
+                            ")"));
         }
         return str;
     }
@@ -55,7 +85,9 @@ public abstract class PackageManagerServiceCompilerMapping {
             return "pm.dexopt." + strArr[9];
         }
         if (i < 0 || i >= 15) {
-            throw new IllegalArgumentException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "reason ", " invalid"));
+            throw new IllegalArgumentException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "reason ", " invalid"));
         }
         return "pm.dexopt." + strArr[i];
     }

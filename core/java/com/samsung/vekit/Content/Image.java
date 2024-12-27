@@ -1,6 +1,7 @@
 package com.samsung.vekit.Content;
 
 import android.graphics.Bitmap;
+
 import com.samsung.vekit.Common.Object.ImageInfo;
 import com.samsung.vekit.Common.Type.ContentType;
 import com.samsung.vekit.Common.Util.ImageUtil;

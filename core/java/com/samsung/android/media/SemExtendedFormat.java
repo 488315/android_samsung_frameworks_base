@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -242,7 +243,8 @@ public class SemExtendedFormat {
         public static final String HIGHLIGHT_VIDEO_DATA = "HighlightVideo_Data";
         public static final String IMAGE_UTC_DATA = "Image_UTC_Data";
         public static final String INTELLIGENT_PHOTOEDITOR_DATA = "Intelligent_PhotoEditor_Data";
-        public static final String INTERACTIVE_PANORAMA_DEBUG_DATA = "Interactive_Panorama_Debug_Data";
+        public static final String INTERACTIVE_PANORAMA_DEBUG_DATA =
+                "Interactive_Panorama_Debug_Data";
         public static final String INTERACTIVE_PANORAMA_INFO = "Interactive_Panorama_Info";
         public static final String INTERACTIVE_PANORAMA_MP4_TEMPLATE = "Interactive_Panorama_%03d";
         public static final String INTERVAL_SHOT_INFO = "Interval_Shot_Info";
@@ -291,15 +293,18 @@ public class SemExtendedFormat {
         public static final String SCENEOPTIMIZER_SCENE_INFO = "SceneOptimizer_Scene_Info";
         public static final String SEQUENCE_SHOT_DATA = "SequenceShot_Data";
         public static final String SINGLE_RELIGHT_BOKEH_INFO = "Single_Relighting_Bokeh_Info";
-        public static final String SINGLE_RELIGHT_BOKEH_REAR_INFO = "Single_Relighting_Bokeh_Rear_Info";
+        public static final String SINGLE_RELIGHT_BOKEH_REAR_INFO =
+                "Single_Relighting_Bokeh_Rear_Info";
         public static final String SINGLE_SHOT_BOKEH_INFO = "SingleShot_Meta_Info";
         public static final String SINGLE_SHOT_BOKEH_REAR_INFO = "SingleShot_Meta_Rear_Info";
         public static final String SINGLE_SHOT_DEPTHMAP = "SingeShot_DepthMap_%d";
         public static final String SINGLE_SHOT_JPEG_TEMPLATE = "SingleShot";
         public static final String SINGLE_TAKE_CAMERA_DRAFT_INFO = "Single_Take_Camera_Draft_Info";
         public static final String SINGLE_TAKE_CAMERA_INFO = "Single_Take_Camera_Info";
-        public static final String SINGLE_TAKE_CAMERA_REPRESENTIVE_INFO = "Single_Take_Camera_Representive_Info";
-        public static final String SINGLE_TAKE_VIDEO_FIRSTFRAME_TIMESTAMP_INFO = "Single_Take_Video_Firstframe_Timestamp_Info";
+        public static final String SINGLE_TAKE_CAMERA_REPRESENTIVE_INFO =
+                "Single_Take_Camera_Representive_Info";
+        public static final String SINGLE_TAKE_VIDEO_FIRSTFRAME_TIMESTAMP_INFO =
+                "Single_Take_Video_Firstframe_Timestamp_Info";
         public static final String SINGLE_TAKE_VIDEO_TYPE_INFO = "Single_Take_Video_Type_Info";
         public static final String SLOW_MOTION_DATA = "SlowMotion_Data";
         public static final String SOUND_SHOT_INFO = "SoundShot_Meta_Info";
@@ -307,8 +312,10 @@ public class SemExtendedFormat {
         public static final String SPORTS_SHOT_INFO = "Sports_Shot_Info";
         public static final String SUPER_SLOW_MOTION_BGM = "Super_SlowMotion_BGM";
         public static final String SUPER_SLOW_MOTION_DATA = "Super_SlowMotion_Data";
-        public static final String SUPER_SLOW_MOTION_DEFLICKERING_INFO = "Super_SlowMotion_Deflickering_Info";
-        public static final String SUPER_SLOW_MOTION_DEFLICKERING_ON = "Super_SlowMotion_Deflickering_On";
+        public static final String SUPER_SLOW_MOTION_DEFLICKERING_INFO =
+                "Super_SlowMotion_Deflickering_Info";
+        public static final String SUPER_SLOW_MOTION_DEFLICKERING_ON =
+                "Super_SlowMotion_Deflickering_On";
         public static final String SUPER_SLOW_MOTION_EDIT_DATA = "Super_SlowMotion_Edit_Data";
         public static final String SURROUND_SHOT_INFO = "Surround_Shot_Info";
         public static final String TAG_SHOT_INFO = "Tag_Shot_Info";
@@ -335,6 +342,7 @@ public class SemExtendedFormat {
 
         @Deprecated(forRemoval = true, since = "15.5")
         public static final int SKIP_IF_EXISTS_MP4 = 256;
+
         public static final int SUBSTITUTE_IF_EXIST = 16;
         public static final int TYPE_MP4 = 4;
         public static final int TYPE_OVERWRITE_IF_EXISTS = 1;
@@ -348,12 +356,14 @@ public class SemExtendedFormat {
     }
 
     private static final class SEFViewerPackageName {
-        private static final String INTERACTIVESHOT_PACKAGE_NAME = "com.samsung.android.app.interactivepanoramaviewer";
-        private static final String MOTIONPANORAMA_PACKAGE_NAME = "com.samsung.android.app.motionpanoramaviewer";
-        private static final String SELFMOTIONPANORAMA_PACKAGE_NAME = "com.samsung.android.app.selfmotionpanoramaviewer";
+        private static final String INTERACTIVESHOT_PACKAGE_NAME =
+                "com.samsung.android.app.interactivepanoramaviewer";
+        private static final String MOTIONPANORAMA_PACKAGE_NAME =
+                "com.samsung.android.app.motionpanoramaviewer";
+        private static final String SELFMOTIONPANORAMA_PACKAGE_NAME =
+                "com.samsung.android.app.selfmotionpanoramaviewer";
 
-        private SEFViewerPackageName() {
-        }
+        private SEFViewerPackageName() {}
     }
 
     public static boolean isValidFile(File sefFile) throws IOException {
@@ -521,7 +531,8 @@ public class SemExtendedFormat {
         return false;
     }
 
-    public static int addData(File sefFile, String keyName, byte[] data, int dataType, int option) throws IOException {
+    public static int addData(File sefFile, String keyName, byte[] data, int dataType, int option)
+            throws IOException {
         String fileName = sefFile.getCanonicalPath();
         if (fileName == null || fileName.length() <= 0) {
             Log.e(TAG, "Invalid file name: " + fileName);
@@ -536,25 +547,39 @@ public class SemExtendedFormat {
             return 0;
         }
         if (option == 256 || option == 4) {
-            return SEFJNI.addSEFDataToMP4(fileName, keyName, keyName.length(), null, 0, data, data.length, dataType, 0);
+            return SEFJNI.addSEFDataToMP4(
+                    fileName, keyName, keyName.length(), null, 0, data, data.length, dataType, 0);
         }
         if (option == 4096 || option == 5) {
-            return SEFJNI.addSEFDataToMP4(fileName, keyName, keyName.length(), null, 0, data, data.length, dataType, 1);
+            return SEFJNI.addSEFDataToMP4(
+                    fileName, keyName, keyName.length(), null, 0, data, data.length, dataType, 1);
         }
         if (option == 2) {
-            return SEFJNI.addSEFDataAddTag(fileName, keyName, keyName.length(), null, 0, data, data.length, dataType, 0);
+            return SEFJNI.addSEFDataAddTag(
+                    fileName, keyName, keyName.length(), null, 0, data, data.length, dataType, 0);
         }
         if (option == 3) {
-            return SEFJNI.addSEFDataAddTag(fileName, keyName, keyName.length(), null, 0, data, data.length, dataType, 1);
+            return SEFJNI.addSEFDataAddTag(
+                    fileName, keyName, keyName.length(), null, 0, data, data.length, dataType, 1);
         }
         if (option == 0 || option == 1) {
-            return SEFJNI.addSEFData(fileName, keyName, keyName.length(), null, 0, data, data.length, dataType, option);
+            return SEFJNI.addSEFData(
+                    fileName,
+                    keyName,
+                    keyName.length(),
+                    null,
+                    0,
+                    data,
+                    data.length,
+                    dataType,
+                    option);
         }
         Log.e(TAG, "Unsupported Option Combination. Please check the option !!!!!");
         return 0;
     }
 
-    public static int addData(File sefFile, String keyName, File dataFile, int dataType, int option) throws IOException {
+    public static int addData(File sefFile, String keyName, File dataFile, int dataType, int option)
+            throws IOException {
         String fileName = sefFile.getCanonicalPath();
         String dataFileName = dataFile.getCanonicalPath();
         if (fileName == null || fileName.length() <= 0) {
@@ -570,25 +595,39 @@ public class SemExtendedFormat {
             return 0;
         }
         if (option == 256 || option == 4) {
-            return SEFJNI.addSEFDataFileToMP4(fileName, keyName, keyName.length(), null, 0, dataFileName, dataType, 0);
+            return SEFJNI.addSEFDataFileToMP4(
+                    fileName, keyName, keyName.length(), null, 0, dataFileName, dataType, 0);
         }
         if (option == 4096 || option == 5) {
-            return SEFJNI.addSEFDataFileToMP4(fileName, keyName, keyName.length(), null, 0, dataFileName, dataType, 1);
+            return SEFJNI.addSEFDataFileToMP4(
+                    fileName, keyName, keyName.length(), null, 0, dataFileName, dataType, 1);
         }
         if (option == 2) {
-            return SEFJNI.addSEFDataFileAddTag(fileName, keyName, keyName.length(), null, 0, dataFileName, dataType, 0);
+            return SEFJNI.addSEFDataFileAddTag(
+                    fileName, keyName, keyName.length(), null, 0, dataFileName, dataType, 0);
         }
         if (option == 3) {
-            return SEFJNI.addSEFDataFileAddTag(fileName, keyName, keyName.length(), null, 0, dataFileName, dataType, 1);
+            return SEFJNI.addSEFDataFileAddTag(
+                    fileName, keyName, keyName.length(), null, 0, dataFileName, dataType, 1);
         }
         if (option == 0 || option == 1) {
-            return SEFJNI.addSEFDataFile(fileName, keyName, keyName.length(), null, 0, dataFileName, dataType, option);
+            return SEFJNI.addSEFDataFile(
+                    fileName, keyName, keyName.length(), null, 0, dataFileName, dataType, option);
         }
         Log.e(TAG, "Unsupported Option Combination. Please check the option !!!!!");
         return 0;
     }
 
-    public static long addSEFDataByteBufferAddTag(ByteBuffer Buffer, String SEFname, int SEFname_len, byte[] data_sub_info, int data_sub_info_len, byte[] data, int data_len, int data_type, int option) {
+    public static long addSEFDataByteBufferAddTag(
+            ByteBuffer Buffer,
+            String SEFname,
+            int SEFname_len,
+            byte[] data_sub_info,
+            int data_sub_info_len,
+            byte[] data,
+            int data_len,
+            int data_type,
+            int option) {
         byte[] BufferArray = Buffer.array();
         long offset = Buffer.position();
         long AllocSize = Buffer.capacity();
@@ -596,12 +635,26 @@ public class SemExtendedFormat {
         if (AllocSize <= 0) {
             return 0L;
         }
-        long Ret = SEFJNI.addSEFDataBufferAddTag(BufferArray, AllocSize, offset, StartOffset, SEFname, SEFname_len, data_sub_info, data_sub_info_len, data, data_len, data_type, option);
+        long Ret =
+                SEFJNI.addSEFDataBufferAddTag(
+                        BufferArray,
+                        AllocSize,
+                        offset,
+                        StartOffset,
+                        SEFname,
+                        SEFname_len,
+                        data_sub_info,
+                        data_sub_info_len,
+                        data,
+                        data_len,
+                        data_type,
+                        option);
         Buffer.position((int) Ret);
         return Ret;
     }
 
-    public static long addData(ByteBuffer buffer, String keyName, byte[] data, int dataType, int option) {
+    public static long addData(
+            ByteBuffer buffer, String keyName, byte[] data, int dataType, int option) {
         if (buffer == null) {
             Log.e(TAG, "buffer is null");
             return 0L;
@@ -615,14 +668,24 @@ public class SemExtendedFormat {
             return 0L;
         }
         if (option == 0 || option == 1) {
-            return addSEFDataByteBufferAddTag(buffer, keyName, keyName.length(), null, 0, data, data.length, dataType, option);
+            return addSEFDataByteBufferAddTag(
+                    buffer,
+                    keyName,
+                    keyName.length(),
+                    null,
+                    0,
+                    data,
+                    data.length,
+                    dataType,
+                    option);
         }
         Log.e(TAG, "Unsupported Option Combination. Please check the option !!!!!");
         Log.e(TAG, "You can use only one of two - TYPE_SKIP_IF_EXISTS, TYPE_OVERWRITE_IF_EXISTS");
         return 0L;
     }
 
-    public static long getRequiredBufferSize(long orgDataSize, int dataCount, long totalDataSize, long totalkeyNameSize) {
+    public static long getRequiredBufferSize(
+            long orgDataSize, int dataCount, long totalDataSize, long totalkeyNameSize) {
         if (orgDataSize <= 0) {
             Log.e(TAG, "invalid orgDataSize : " + orgDataSize);
             return 0L;
@@ -639,10 +702,12 @@ public class SemExtendedFormat {
             Log.e(TAG, "invalid totalkeyNameSize : " + totalkeyNameSize);
             return 0L;
         }
-        return SEFJNI.getSEFBufferAllocSize(orgDataSize, dataCount, totalDataSize, 0L, totalkeyNameSize);
+        return SEFJNI.getSEFBufferAllocSize(
+                orgDataSize, dataCount, totalDataSize, 0L, totalkeyNameSize);
     }
 
-    public static long addData(ParcelFileDescriptor pfd, String keyName, byte[] data, int dataType, int option) {
+    public static long addData(
+            ParcelFileDescriptor pfd, String keyName, byte[] data, int dataType, int option) {
         if (pfd == null) {
             Log.e(TAG, "pfd is null");
             return 0L;
@@ -656,41 +721,104 @@ public class SemExtendedFormat {
             return 0L;
         }
         if (option == 256 || option == 4) {
-            return addSEFDataFileDescriptorToMP4(pfd, keyName, keyName.length(), null, 0, data, data.length, dataType, 0);
+            return addSEFDataFileDescriptorToMP4(
+                    pfd, keyName, keyName.length(), null, 0, data, data.length, dataType, 0);
         }
         if (option == 4096 || option == 5) {
-            return addSEFDataFileDescriptorToMP4(pfd, keyName, keyName.length(), null, 0, data, data.length, dataType, 1);
+            return addSEFDataFileDescriptorToMP4(
+                    pfd, keyName, keyName.length(), null, 0, data, data.length, dataType, 1);
         }
         if (option == 2) {
-            return addSEFDataFileDescriptorAddTag(pfd, keyName, keyName.length(), null, 0, data, data.length, dataType, 0);
+            return addSEFDataFileDescriptorAddTag(
+                    pfd, keyName, keyName.length(), null, 0, data, data.length, dataType, 0);
         }
         if (option == 3) {
-            return addSEFDataFileDescriptorAddTag(pfd, keyName, keyName.length(), null, 0, data, data.length, dataType, 1);
+            return addSEFDataFileDescriptorAddTag(
+                    pfd, keyName, keyName.length(), null, 0, data, data.length, dataType, 1);
         }
         if (option == 0 || option == 1) {
-            return addSEFDataFilSEFeDescriptor(pfd, keyName, keyName.length(), null, 0, data, data.length, dataType, option);
+            return addSEFDataFilSEFeDescriptor(
+                    pfd, keyName, keyName.length(), null, 0, data, data.length, dataType, option);
         }
         Log.e(TAG, "Unsupported Option Combination. Please check the option !!!!!");
         return 0L;
     }
 
-    public static long addSEFDataFilSEFeDescriptor(ParcelFileDescriptor Pfd, String SEFname, int SEFname_len, byte[] data_sub_info, int data_sub_info_len, byte[] data, int data_len, int data_type, int option) {
-        return SEFJNI.addSEFDataFd(Pfd.getFd(), SEFname, SEFname_len, data_sub_info, data_sub_info_len, data, data_len, data_type, option);
+    public static long addSEFDataFilSEFeDescriptor(
+            ParcelFileDescriptor Pfd,
+            String SEFname,
+            int SEFname_len,
+            byte[] data_sub_info,
+            int data_sub_info_len,
+            byte[] data,
+            int data_len,
+            int data_type,
+            int option) {
+        return SEFJNI.addSEFDataFd(
+                Pfd.getFd(),
+                SEFname,
+                SEFname_len,
+                data_sub_info,
+                data_sub_info_len,
+                data,
+                data_len,
+                data_type,
+                option);
     }
 
-    public static long addSEFDataFileDescriptorAddTag(ParcelFileDescriptor Pfd, String SEFname, int SEFname_len, byte[] data_sub_info, int data_sub_info_len, byte[] data, int data_len, int data_type, int option) {
-        return SEFJNI.addSEFDataFdAddTag(Pfd.getFd(), SEFname, SEFname_len, data_sub_info, data_sub_info_len, data, data_len, data_type, option);
+    public static long addSEFDataFileDescriptorAddTag(
+            ParcelFileDescriptor Pfd,
+            String SEFname,
+            int SEFname_len,
+            byte[] data_sub_info,
+            int data_sub_info_len,
+            byte[] data,
+            int data_len,
+            int data_type,
+            int option) {
+        return SEFJNI.addSEFDataFdAddTag(
+                Pfd.getFd(),
+                SEFname,
+                SEFname_len,
+                data_sub_info,
+                data_sub_info_len,
+                data,
+                data_len,
+                data_type,
+                option);
     }
 
-    public static long addSEFDataFileDescriptorToMP4(ParcelFileDescriptor Pfd, String SEFname, int SEFname_len, byte[] data_sub_info, int data_sub_info_len, byte[] data, int data_len, int data_type, int option) {
-        return SEFJNI.addSEFDataFdToMP4(Pfd.getFd(), SEFname, SEFname_len, data_sub_info, data_sub_info_len, data, data_len, data_type, option);
+    public static long addSEFDataFileDescriptorToMP4(
+            ParcelFileDescriptor Pfd,
+            String SEFname,
+            int SEFname_len,
+            byte[] data_sub_info,
+            int data_sub_info_len,
+            byte[] data,
+            int data_len,
+            int data_type,
+            int option) {
+        return SEFJNI.addSEFDataFdToMP4(
+                Pfd.getFd(),
+                SEFname,
+                SEFname_len,
+                data_sub_info,
+                data_sub_info_len,
+                data,
+                data_len,
+                data_type,
+                option);
     }
 
-    public static int addSEFData(File sefFile, String keyName, byte[] data, int dataType, int option) throws IOException {
+    public static int addSEFData(
+            File sefFile, String keyName, byte[] data, int dataType, int option)
+            throws IOException {
         return addSEFData(sefFile, keyName, data, (byte[]) null, dataType, option);
     }
 
-    public static int addSEFData(File sefFile, String keyName, byte[] data, byte[] subdataInfo, int dataType, int option) throws IOException {
+    public static int addSEFData(
+            File sefFile, String keyName, byte[] data, byte[] subdataInfo, int dataType, int option)
+            throws IOException {
         String fileName = sefFile.getCanonicalPath();
         if (fileName == null || fileName.length() <= 0) {
             Log.e(TAG, "Invalid file name: " + fileName);
@@ -705,22 +833,67 @@ public class SemExtendedFormat {
             return 0;
         }
         if (option == 16) {
-            return SEFJNI.addFastSEFData(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, data, data.length, dataType, option);
+            return SEFJNI.addFastSEFData(
+                    fileName,
+                    keyName,
+                    keyName.length(),
+                    subdataInfo,
+                    subdataInfo == null ? 0 : subdataInfo.length,
+                    data,
+                    data.length,
+                    dataType,
+                    option);
         }
         if (option == 256) {
-            return SEFJNI.addSEFDataToMP4(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, data, data.length, dataType, 0);
+            return SEFJNI.addSEFDataToMP4(
+                    fileName,
+                    keyName,
+                    keyName.length(),
+                    subdataInfo,
+                    subdataInfo == null ? 0 : subdataInfo.length,
+                    data,
+                    data.length,
+                    dataType,
+                    0);
         }
         if (option == 4096) {
-            return SEFJNI.addSEFDataToMP4(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, data, data.length, dataType, 1);
+            return SEFJNI.addSEFDataToMP4(
+                    fileName,
+                    keyName,
+                    keyName.length(),
+                    subdataInfo,
+                    subdataInfo == null ? 0 : subdataInfo.length,
+                    data,
+                    data.length,
+                    dataType,
+                    1);
         }
-        return SEFJNI.addSEFData(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, data, data.length, dataType, option);
+        return SEFJNI.addSEFData(
+                fileName,
+                keyName,
+                keyName.length(),
+                subdataInfo,
+                subdataInfo == null ? 0 : subdataInfo.length,
+                data,
+                data.length,
+                dataType,
+                option);
     }
 
-    public static int addSEFData(File sefFile, String keyName, File dataFile, int dataType, int option) throws IOException {
+    public static int addSEFData(
+            File sefFile, String keyName, File dataFile, int dataType, int option)
+            throws IOException {
         return addSEFData(sefFile, keyName, dataFile, (byte[]) null, dataType, option);
     }
 
-    public static int addSEFData(File sefFile, String keyName, File dataFile, byte[] subdataInfo, int dataType, int option) throws IOException {
+    public static int addSEFData(
+            File sefFile,
+            String keyName,
+            File dataFile,
+            byte[] subdataInfo,
+            int dataType,
+            int option)
+            throws IOException {
         String fileName = sefFile.getCanonicalPath();
         String dataFileName = dataFile.getCanonicalPath();
         if (fileName == null || fileName.length() <= 0) {
@@ -736,29 +909,86 @@ public class SemExtendedFormat {
             return 0;
         }
         if (option == 16) {
-            return SEFJNI.addFastSEFDataFile(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, dataFileName, dataType, option);
+            return SEFJNI.addFastSEFDataFile(
+                    fileName,
+                    keyName,
+                    keyName.length(),
+                    subdataInfo,
+                    subdataInfo == null ? 0 : subdataInfo.length,
+                    dataFileName,
+                    dataType,
+                    option);
         }
         if (option == 256) {
-            return SEFJNI.addSEFDataFileToMP4(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, dataFileName, dataType, 0);
+            return SEFJNI.addSEFDataFileToMP4(
+                    fileName,
+                    keyName,
+                    keyName.length(),
+                    subdataInfo,
+                    subdataInfo == null ? 0 : subdataInfo.length,
+                    dataFileName,
+                    dataType,
+                    0);
         }
         if (option == 4096) {
-            return SEFJNI.addSEFDataFileToMP4(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, dataFileName, dataType, 1);
+            return SEFJNI.addSEFDataFileToMP4(
+                    fileName,
+                    keyName,
+                    keyName.length(),
+                    subdataInfo,
+                    subdataInfo == null ? 0 : subdataInfo.length,
+                    dataFileName,
+                    dataType,
+                    1);
         }
-        return SEFJNI.addSEFDataFile(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, dataFileName, dataType, option);
+        return SEFJNI.addSEFDataFile(
+                fileName,
+                keyName,
+                keyName.length(),
+                subdataInfo,
+                subdataInfo == null ? 0 : subdataInfo.length,
+                dataFileName,
+                dataType,
+                option);
     }
 
-    public static int addSEFData(String fileName, String keyName, byte[] data, int dataType, int option) {
+    public static int addSEFData(
+            String fileName, String keyName, byte[] data, int dataType, int option) {
         return addSEFData(fileName, keyName, data, (byte[]) null, dataType, option);
     }
 
-    public static int addSEFData(String fileName, String keyName, byte[] data, byte[] subdataInfo, int dataType, int option) {
+    public static int addSEFData(
+            String fileName,
+            String keyName,
+            byte[] data,
+            byte[] subdataInfo,
+            int dataType,
+            int option) {
         if (fileName != null && fileName.length() > 0) {
             if (keyName != null && keyName.length() > 0) {
                 if (data != null && data.length > 0) {
                     if (option == 16) {
-                        return SEFJNI.addFastSEFData(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, data, data.length, dataType, option);
+                        return SEFJNI.addFastSEFData(
+                                fileName,
+                                keyName,
+                                keyName.length(),
+                                subdataInfo,
+                                subdataInfo == null ? 0 : subdataInfo.length,
+                                data,
+                                data.length,
+                                dataType,
+                                option);
                     }
-                    return SEFJNI.addSEFData(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, data, data.length, dataType, option);
+                    return SEFJNI.addSEFData(
+                            fileName,
+                            keyName,
+                            keyName.length(),
+                            subdataInfo,
+                            subdataInfo == null ? 0 : subdataInfo.length,
+                            data,
+                            data.length,
+                            dataType,
+                            option);
                 }
                 Log.e(TAG, "Invalid data");
                 return 0;
@@ -770,11 +1000,18 @@ public class SemExtendedFormat {
         return 0;
     }
 
-    public static int addSEFDataFile(String fileName, String keyName, String dataFileName, int dataType, int option) {
+    public static int addSEFDataFile(
+            String fileName, String keyName, String dataFileName, int dataType, int option) {
         return addSEFDataFile(fileName, keyName, dataFileName, null, dataType, option);
     }
 
-    public static int addSEFDataFile(String fileName, String keyName, String dataFileName, byte[] subdataInfo, int dataType, int option) {
+    public static int addSEFDataFile(
+            String fileName,
+            String keyName,
+            String dataFileName,
+            byte[] subdataInfo,
+            int dataType,
+            int option) {
         if (fileName == null || fileName.length() <= 0) {
             Log.e(TAG, "Invalid file name: " + fileName);
             return 0;
@@ -784,17 +1021,32 @@ public class SemExtendedFormat {
             return 0;
         }
         if (dataFileName != null && dataFileName.length() > 0) {
-            return SEFJNI.addSEFDataFile(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, dataFileName, dataType, option);
+            return SEFJNI.addSEFDataFile(
+                    fileName,
+                    keyName,
+                    keyName.length(),
+                    subdataInfo,
+                    subdataInfo == null ? 0 : subdataInfo.length,
+                    dataFileName,
+                    dataType,
+                    option);
         }
         Log.e(TAG, "Invalid SEF Data File name: " + dataFileName);
         return 0;
     }
 
-    public static int addFastSEFData(String fileName, String keyName, byte[] data, int dataType, int option) {
+    public static int addFastSEFData(
+            String fileName, String keyName, byte[] data, int dataType, int option) {
         return addFastSEFData(fileName, keyName, data, null, dataType, option);
     }
 
-    public static int addFastSEFData(String fileName, String keyName, byte[] data, byte[] subdataInfo, int dataType, int option) {
+    public static int addFastSEFData(
+            String fileName,
+            String keyName,
+            byte[] data,
+            byte[] subdataInfo,
+            int dataType,
+            int option) {
         if (fileName == null || fileName.length() <= 0) {
             Log.e(TAG, "Invalid file name: " + fileName);
             return 0;
@@ -804,17 +1056,33 @@ public class SemExtendedFormat {
             return 0;
         }
         if (data != null && data.length > 0) {
-            return SEFJNI.addFastSEFData(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, data, data.length, dataType, option);
+            return SEFJNI.addFastSEFData(
+                    fileName,
+                    keyName,
+                    keyName.length(),
+                    subdataInfo,
+                    subdataInfo == null ? 0 : subdataInfo.length,
+                    data,
+                    data.length,
+                    dataType,
+                    option);
         }
         Log.e(TAG, "Invalid data");
         return 0;
     }
 
-    public static int addFastSEFDataFile(String fileName, String keyName, String dataFileName, int dataType, int option) {
+    public static int addFastSEFDataFile(
+            String fileName, String keyName, String dataFileName, int dataType, int option) {
         return addFastSEFDataFile(fileName, keyName, dataFileName, null, dataType, option);
     }
 
-    public static int addFastSEFDataFile(String fileName, String keyName, String dataFileName, byte[] subdataInfo, int dataType, int option) {
+    public static int addFastSEFDataFile(
+            String fileName,
+            String keyName,
+            String dataFileName,
+            byte[] subdataInfo,
+            int dataType,
+            int option) {
         if (fileName == null || fileName.length() <= 0) {
             Log.e(TAG, "Invalid file name: " + fileName);
             return 0;
@@ -824,18 +1092,43 @@ public class SemExtendedFormat {
             return 0;
         }
         if (dataFileName != null && dataFileName.length() > 0) {
-            return SEFJNI.addFastSEFDataFile(fileName, keyName, keyName.length(), subdataInfo, subdataInfo == null ? 0 : subdataInfo.length, dataFileName, dataType, option);
+            return SEFJNI.addFastSEFDataFile(
+                    fileName,
+                    keyName,
+                    keyName.length(),
+                    subdataInfo,
+                    subdataInfo == null ? 0 : subdataInfo.length,
+                    dataFileName,
+                    dataType,
+                    option);
         }
         Log.e(TAG, "Invalid SEF Data File name: " + dataFileName);
         return 0;
     }
 
-    public static int addSEFDataFiles(String fileName, String[] keyNames, String[] dataFileNames, int[] dataTypes, int option) {
+    public static int addSEFDataFiles(
+            String fileName,
+            String[] keyNames,
+            String[] dataFileNames,
+            int[] dataTypes,
+            int option) {
         int dataCount = keyNames.length;
         if (dataCount != dataFileNames.length) {
-            Log.e(TAG, "Data Count is different. ( keyNames data count= " + dataCount + ", dataFileNames data count= " + dataFileNames.length + " )");
+            Log.e(
+                    TAG,
+                    "Data Count is different. ( keyNames data count= "
+                            + dataCount
+                            + ", dataFileNames data count= "
+                            + dataFileNames.length
+                            + " )");
         } else if (dataCount != dataTypes.length) {
-            Log.e(TAG, "Data Count is different. ( keyNames data count= " + dataCount + ", dataTypes data count= " + dataTypes.length + " )");
+            Log.e(
+                    TAG,
+                    "Data Count is different. ( keyNames data count= "
+                            + dataCount
+                            + ", dataTypes data count= "
+                            + dataTypes.length
+                            + " )");
         }
         if (fileName == null || fileName.length() <= 0) {
             Log.e(TAG, "Invalid file name: " + fileName);
@@ -845,7 +1138,8 @@ public class SemExtendedFormat {
         for (int i = 0; i < keyNames.length; i++) {
             keynamesLength[i] = keyNames[i].length();
         }
-        return SEFJNI.addSEFDataFiles(fileName, keyNames, keynamesLength, dataFileNames, dataTypes, option, dataCount);
+        return SEFJNI.addSEFDataFiles(
+                fileName, keyNames, keynamesLength, dataFileNames, dataTypes, option, dataCount);
     }
 
     public static boolean deleteData(File sefFile, String keyName) throws IOException {
@@ -886,14 +1180,17 @@ public class SemExtendedFormat {
         return deleteSEFData(sefFile, keyName, 1);
     }
 
-    public static boolean deleteSEFData(File sefFile, String keyName, int option) throws IOException {
+    public static boolean deleteSEFData(File sefFile, String keyName, int option)
+            throws IOException {
         String fileName = sefFile.getCanonicalPath();
         if (fileName == null || fileName.length() <= 0) {
             Log.e(TAG, "Invalid file name: " + fileName);
             return false;
         }
         if (keyName != null && keyName.length() > 0) {
-            return option == 16 ? SEFJNI.fastDeleteSEFData(fileName, keyName, keyName.length()) == 1 : SEFJNI.deleteSEFData(fileName, keyName, keyName.length()) == 1;
+            return option == 16
+                    ? SEFJNI.fastDeleteSEFData(fileName, keyName, keyName.length()) == 1
+                    : SEFJNI.deleteSEFData(fileName, keyName, keyName.length()) == 1;
         }
         Log.e(TAG, "Invalid key name: " + keyName);
         return false;
@@ -930,7 +1227,9 @@ public class SemExtendedFormat {
     public static boolean deleteAllSEFData(File sefFile, int option) throws IOException {
         String fileName = sefFile.getCanonicalPath();
         if (fileName != null && fileName.length() > 0) {
-            return option == 16 ? SEFJNI.fastClearSEFData(fileName) == 1 : SEFJNI.clearSEFData(fileName) == 1;
+            return option == 16
+                    ? SEFJNI.fastClearSEFData(fileName) == 1
+                    : SEFJNI.clearSEFData(fileName) == 1;
         }
         Log.e(TAG, "Invalid file name: " + fileName);
         return false;
@@ -983,14 +1282,15 @@ public class SemExtendedFormat {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:38:0x006a, code lost:
-    
-        if (0 == 0) goto L39;
-     */
+
+       if (0 == 0) goto L39;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static byte[] getData(java.io.File r11, java.lang.String r12) throws java.io.IOException {
+    public static byte[] getData(java.io.File r11, java.lang.String r12)
+            throws java.io.IOException {
         /*
             java.lang.String r0 = r11.getCanonicalPath()
             java.lang.String r1 = "SemExtendedFormat"
@@ -1078,18 +1378,22 @@ public class SemExtendedFormat {
             android.util.Log.e(r1, r3)
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.media.SemExtendedFormat.getData(java.io.File, java.lang.String):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.media.SemExtendedFormat.getData(java.io.File,"
+                    + " java.lang.String):byte[]");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:32:0x005e, code lost:
-    
-        if (0 == 0) goto L35;
-     */
+
+       if (0 == 0) goto L35;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static byte[] getData(android.os.ParcelFileDescriptor r10, java.lang.String r11) throws java.io.IOException {
+    public static byte[] getData(android.os.ParcelFileDescriptor r10, java.lang.String r11)
+            throws java.io.IOException {
         /*
             r0 = 0
             if (r11 == 0) goto L68
@@ -1163,7 +1467,10 @@ public class SemExtendedFormat {
             android.util.Log.e(r2, r1)
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.media.SemExtendedFormat.getData(android.os.ParcelFileDescriptor, java.lang.String):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.media.SemExtendedFormat.getData(android.os.ParcelFileDescriptor,"
+                    + " java.lang.String):byte[]");
     }
 
     public static int getDataCount(File sefFile) throws IOException {
@@ -1223,7 +1530,8 @@ public class SemExtendedFormat {
         return position;
     }
 
-    public static DataPosition getDataPosition(ParcelFileDescriptor pfd, String keyName) throws IOException {
+    public static DataPosition getDataPosition(ParcelFileDescriptor pfd, String keyName)
+            throws IOException {
         if (keyName == null || keyName.length() <= 0) {
             Log.e(TAG, "Invalid key name: " + keyName);
             return null;
@@ -1329,14 +1637,15 @@ public class SemExtendedFormat {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:38:0x006a, code lost:
-    
-        if (0 == 0) goto L39;
-     */
+
+       if (0 == 0) goto L39;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static byte[] getSEFData(java.io.File r11, java.lang.String r12) throws java.io.IOException {
+    public static byte[] getSEFData(java.io.File r11, java.lang.String r12)
+            throws java.io.IOException {
         /*
             java.lang.String r0 = r11.getCanonicalPath()
             java.lang.String r1 = "SemExtendedFormat"
@@ -1424,18 +1733,22 @@ public class SemExtendedFormat {
             android.util.Log.e(r1, r3)
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.media.SemExtendedFormat.getSEFData(java.io.File, java.lang.String):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.media.SemExtendedFormat.getSEFData(java.io.File,"
+                    + " java.lang.String):byte[]");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0066, code lost:
-    
-        if (0 == 0) goto L39;
-     */
+
+       if (0 == 0) goto L39;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static byte[] getSEFData(java.lang.String r10, java.lang.String r11) throws java.io.IOException {
+    public static byte[] getSEFData(java.lang.String r10, java.lang.String r11)
+            throws java.io.IOException {
         /*
             java.lang.String r0 = "SemExtendedFormat"
             r1 = 0
@@ -1522,7 +1835,10 @@ public class SemExtendedFormat {
             android.util.Log.e(r0, r2)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.media.SemExtendedFormat.getSEFData(java.lang.String, java.lang.String):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.media.SemExtendedFormat.getSEFData(java.lang.String,"
+                    + " java.lang.String):byte[]");
     }
 
     public static int getSEFDataCount(File sefFile) throws IOException {
@@ -1628,7 +1944,8 @@ public class SemExtendedFormat {
         return SEFJNI.copyAllSEFData(srcFileName, dstFileName);
     }
 
-    public static int copyAllData(ParcelFileDescriptor srcPfd, ParcelFileDescriptor dstPfd) throws IOException {
+    public static int copyAllData(ParcelFileDescriptor srcPfd, ParcelFileDescriptor dstPfd)
+            throws IOException {
         return SEFJNI.copyAllSEFDataFileDescriptor(srcPfd, dstPfd);
     }
 
@@ -1677,16 +1994,28 @@ public class SemExtendedFormat {
         int type = getMajorDataType(srcPath);
         switch (type) {
             case 2048:
-                Log.i(TAG, "SoundNShot is not supported from P OS. So, MP4 Conversion for SoundNShot is removed from Q OS");
+                Log.i(
+                        TAG,
+                        "SoundNShot is not supported from P OS. So, MP4 Conversion for SoundNShot"
+                            + " is removed from Q OS");
                 break;
             case 2256:
-                Log.i(TAG, "VirtualShot is not supported from R OS. So, MP4 Conversion for VirtualShot is removed from R OS");
+                Log.i(
+                        TAG,
+                        "VirtualShot is not supported from R OS. So, MP4 Conversion for VirtualShot"
+                            + " is removed from R OS");
                 break;
             case DataType.PANORAMA_SHOT_INFO /* 2272 */:
-                Log.i(TAG, "MotionPanoramaShot is not supported from R OS. So, MP4 Conversion for MotionPanoramaShot is removed from R OS");
+                Log.i(
+                        TAG,
+                        "MotionPanoramaShot is not supported from R OS. So, MP4 Conversion for"
+                            + " MotionPanoramaShot is removed from R OS");
                 break;
             case DataType.WIDE_SELFIE_INFO /* 2416 */:
-                Log.i(TAG, "MotionWideSelfie is not supported from R OS. So, MP4 Conversion for MotionWideSelfie is removed from R OS");
+                Log.i(
+                        TAG,
+                        "MotionWideSelfie is not supported from R OS. So, MP4 Conversion for"
+                            + " MotionWideSelfie is removed from R OS");
                 break;
             case 2608:
                 break;

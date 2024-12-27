@@ -5,97 +5,175 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class EnterpriseExchangeAccount implements Parcelable {
-    public static final String ACTION_CBA_INSTALL_STATUS_INTERNAL = "com.samsung.android.knox.intent.action.CBA_INSTALL_STATUS_INTERNAL";
-    public static final String ACTION_CBA_INSTALL_STATUS_OLD = "android.intent.action.sec.CBA_INSTALL_STATUS";
-    public static final String ACTION_CBA_INSTALL_STATUS_SEC_EDM = "com.samsung.edm.intent.action.EXCHANGE_CBA_INSTALL_STATUS";
-    public static final String ACTION_CREATE_EMAIL_ACCOUNT = "com.samsung.android.knox.intent.action.CREATE_EMAILACCOUNT_INTERNAL";
-    public static final String ACTION_DELETE_EMAIL_ACCOUNT = "com.samsung.android.knox.intent.action.DELETE_EMAILACCOUNT_INTERNAL";
-    public static final String ACTION_DELETE_NOT_VALIDATED_EMAIL_ACCOUNT = "com.samsung.android.knox.intent.action.DELETE_NOT_VALIDATED_EMAILACCOUNT_INTERNAL";
-    public static final String ACTION_EAS_INTENT = "com.samsung.android.knox.intent.action.EAS_INTENT_INTERNAL";
-    public static final String ACTION_EMAIL_ENABLE_MESSSAGE_COMPOSE = "com.samsung.android.knox.intent.action.EMAIL_ENABLE_MSG_COMPOSE_INTERNAL";
-    public static final String ACTION_EMAIL_INSTALL_CERTIFICATE = "com.samsung.android.knox.intent.action.EMAIL_INSTALL_CERT_INTERNAL";
-    public static final String ACTION_EMAIL_RENAME_CERTIFICATE = "com.samsung.android.knox.intent.action.EMAIL_RENAME_CERTIFICATE_INTERNAL";
-    public static final String ACTION_ENFORCE_SMIME_ALIAS_EMAIL_INTERNAL = "com.samsung.android.knox.intent.action.ENFORCE_SMIME_ALIAS_EMAIL_INTERNAL";
-    public static final String ACTION_ENFORCE_SMIME_ALIAS_INTERNAL = "com.samsung.android.knox.intent.action.ENFORCE_SMIME_ALIAS_INTERNAL";
-    public static final String ACTION_FORCE_SMIME_CERTIFICATE = "com.samsung.android.knox.intent.action.FORCE_SMIME_CERTIFICATE_INTERNAL";
-    public static final String ACTION_FORCE_SMIME_CERTIFICATE_FOR_ENCRYPTION = "com.samsung.android.knox.intent.action.FORCE_SMIME_CERTIFICATE_FOR_ENCRYPTION_INTERNAL";
-    public static final String ACTION_FORCE_SMIME_CERTIFICATE_FOR_SIGNING = "com.samsung.android.knox.intent.action.FORCE_SMIME_CERTIFICATE_FOR_SIGNING_INTERNAL";
-    public static final String ACTION_GET_EMAIL_DEVICE_ID_REQUEST = "com.samsung.android.knox.intent.action.GET_EMAIL_DEVICEID_REQUEST_INTERNAL";
-    public static final String ACTION_GET_EMAIL_DEVICE_ID_RESULT = "com.samsung.android.knox.intent.action.GET_EMAIL_DEVICEID_RESULT_INTERNAL";
-    public static final String ACTION_RELEASE_SMIME_CERTIFICATE = "com.samsung.android.knox.intent.action.RELEASE_SMIME_CERTIFICATE_INTERNAL";
-    public static final String ACTION_RELEASE_SMIME_CERTIFICATE_FOR_ENCRYPTION = "com.samsung.android.knox.intent.action.RELEASE_SMIME_CERTIFICATE_FOR_ENCRYPTION_INTERNAL";
-    public static final String ACTION_RELEASE_SMIME_CERTIFICATE_FOR_SIGNING = "com.samsung.android.knox.intent.action.RELEASE_SMIME_CERTIFICATE_FOR_SIGNING_INTERNAL";
-    public static final String ACTION_REQUEST_EMAIL_ACCOUNT_PASSWORD = "com.samsung.android.knox.intent.action.REQUEST_EMAILACCOUNT_PASSWORD_INTERNAL";
-    public static final String ACTION_RESULT_EMAIL_ACCOUNT_PASSWORD = "com.samsung.android.knox.intent.action.RESULT_EMAILACCOUNT_PASSWORD_INTERNAL";
-    public static final String ACTION_SET_EMAIL_ACCOUNT_PASSWORD = "com.samsung.android.knox.intent.action.SET_EMAILACCOUNT_PASSWORD_INTERNAL";
-    public static final String ACTION_SMIME_INSTALL_STATUS = "com.samsung.edm.intent.action.EXCHANGE_SMIME_INSTALL_STATUS";
-    public static final Parcelable.Creator<EnterpriseExchangeAccount> CREATOR = new Parcelable.Creator<EnterpriseExchangeAccount>() { // from class: android.sec.enterprise.email.EnterpriseExchangeAccount.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnterpriseExchangeAccount createFromParcel(Parcel in) {
-            return new EnterpriseExchangeAccount(in);
-        }
+    public static final String ACTION_CBA_INSTALL_STATUS_INTERNAL =
+            "com.samsung.android.knox.intent.action.CBA_INSTALL_STATUS_INTERNAL";
+    public static final String ACTION_CBA_INSTALL_STATUS_OLD =
+            "android.intent.action.sec.CBA_INSTALL_STATUS";
+    public static final String ACTION_CBA_INSTALL_STATUS_SEC_EDM =
+            "com.samsung.edm.intent.action.EXCHANGE_CBA_INSTALL_STATUS";
+    public static final String ACTION_CREATE_EMAIL_ACCOUNT =
+            "com.samsung.android.knox.intent.action.CREATE_EMAILACCOUNT_INTERNAL";
+    public static final String ACTION_DELETE_EMAIL_ACCOUNT =
+            "com.samsung.android.knox.intent.action.DELETE_EMAILACCOUNT_INTERNAL";
+    public static final String ACTION_DELETE_NOT_VALIDATED_EMAIL_ACCOUNT =
+            "com.samsung.android.knox.intent.action.DELETE_NOT_VALIDATED_EMAILACCOUNT_INTERNAL";
+    public static final String ACTION_EAS_INTENT =
+            "com.samsung.android.knox.intent.action.EAS_INTENT_INTERNAL";
+    public static final String ACTION_EMAIL_ENABLE_MESSSAGE_COMPOSE =
+            "com.samsung.android.knox.intent.action.EMAIL_ENABLE_MSG_COMPOSE_INTERNAL";
+    public static final String ACTION_EMAIL_INSTALL_CERTIFICATE =
+            "com.samsung.android.knox.intent.action.EMAIL_INSTALL_CERT_INTERNAL";
+    public static final String ACTION_EMAIL_RENAME_CERTIFICATE =
+            "com.samsung.android.knox.intent.action.EMAIL_RENAME_CERTIFICATE_INTERNAL";
+    public static final String ACTION_ENFORCE_SMIME_ALIAS_EMAIL_INTERNAL =
+            "com.samsung.android.knox.intent.action.ENFORCE_SMIME_ALIAS_EMAIL_INTERNAL";
+    public static final String ACTION_ENFORCE_SMIME_ALIAS_INTERNAL =
+            "com.samsung.android.knox.intent.action.ENFORCE_SMIME_ALIAS_INTERNAL";
+    public static final String ACTION_FORCE_SMIME_CERTIFICATE =
+            "com.samsung.android.knox.intent.action.FORCE_SMIME_CERTIFICATE_INTERNAL";
+    public static final String ACTION_FORCE_SMIME_CERTIFICATE_FOR_ENCRYPTION =
+            "com.samsung.android.knox.intent.action.FORCE_SMIME_CERTIFICATE_FOR_ENCRYPTION_INTERNAL";
+    public static final String ACTION_FORCE_SMIME_CERTIFICATE_FOR_SIGNING =
+            "com.samsung.android.knox.intent.action.FORCE_SMIME_CERTIFICATE_FOR_SIGNING_INTERNAL";
+    public static final String ACTION_GET_EMAIL_DEVICE_ID_REQUEST =
+            "com.samsung.android.knox.intent.action.GET_EMAIL_DEVICEID_REQUEST_INTERNAL";
+    public static final String ACTION_GET_EMAIL_DEVICE_ID_RESULT =
+            "com.samsung.android.knox.intent.action.GET_EMAIL_DEVICEID_RESULT_INTERNAL";
+    public static final String ACTION_RELEASE_SMIME_CERTIFICATE =
+            "com.samsung.android.knox.intent.action.RELEASE_SMIME_CERTIFICATE_INTERNAL";
+    public static final String ACTION_RELEASE_SMIME_CERTIFICATE_FOR_ENCRYPTION =
+            "com.samsung.android.knox.intent.action.RELEASE_SMIME_CERTIFICATE_FOR_ENCRYPTION_INTERNAL";
+    public static final String ACTION_RELEASE_SMIME_CERTIFICATE_FOR_SIGNING =
+            "com.samsung.android.knox.intent.action.RELEASE_SMIME_CERTIFICATE_FOR_SIGNING_INTERNAL";
+    public static final String ACTION_REQUEST_EMAIL_ACCOUNT_PASSWORD =
+            "com.samsung.android.knox.intent.action.REQUEST_EMAILACCOUNT_PASSWORD_INTERNAL";
+    public static final String ACTION_RESULT_EMAIL_ACCOUNT_PASSWORD =
+            "com.samsung.android.knox.intent.action.RESULT_EMAILACCOUNT_PASSWORD_INTERNAL";
+    public static final String ACTION_SET_EMAIL_ACCOUNT_PASSWORD =
+            "com.samsung.android.knox.intent.action.SET_EMAILACCOUNT_PASSWORD_INTERNAL";
+    public static final String ACTION_SMIME_INSTALL_STATUS =
+            "com.samsung.edm.intent.action.EXCHANGE_SMIME_INSTALL_STATUS";
+    public static final Parcelable.Creator<EnterpriseExchangeAccount> CREATOR =
+            new Parcelable.Creator<
+                    EnterpriseExchangeAccount>() { // from class:
+                                                   // android.sec.enterprise.email.EnterpriseExchangeAccount.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnterpriseExchangeAccount createFromParcel(Parcel in) {
+                    return new EnterpriseExchangeAccount(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnterpriseExchangeAccount[] newArray(int size) {
-            return new EnterpriseExchangeAccount[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnterpriseExchangeAccount[] newArray(int size) {
+                    return new EnterpriseExchangeAccount[size];
+                }
+            };
     public static final int ENFORCE_SMIME_ALIAS_TYPE_ENCRYPT = 0;
     public static final int ENFORCE_SMIME_ALIAS_TYPE_SIGN = 1;
-    public static final String EXTRA_ACCOUNT_EAS_INTERNAL = "com.samsung.android.knox.intent.extra.ACCOUNT_EAS_INTERNAL";
-    public static final String EXTRA_ACCOUNT_ID = "com.samsung.android.knox.intent.extra.ACCOUNT_ID";
-    public static final String EXTRA_ACCOUNT_ID_INTERNAL = "com.samsung.android.knox.intent.extra.ACCOUNT_ID_INTERNAL";
-    public static final String EXTRA_ACCOUNT_NAME_INTERNAL = "com.samsung.android.knox.intent.extra.ACCOUNT_NAME_INTERNAL";
-    public static final String EXTRA_ACCOUNT_SETUP_RESULT_STATUS_INTERNAL = "com.samsung.android.knox.intent.extra.ACCOUNT_SETUP_RESULT_STATUS_INTERNAL";
-    public static final String EXTRA_CERTIFICATE_ALIAS_INTERNAL = "com.samsung.android.knox.intent.extra.CERTIFICATE_ALIAS_INTERNAL";
-    public static final String EXTRA_CERTIFICATE_DATA_INTERNAL = "com.samsung.android.knox.intent.extra.CERTIFICATE_DATA_INTERNAL";
-    public static final String EXTRA_CERTIFICATE_PASSWORD_ID = "com.samsung.android.knox.intent.extra.CERT_PASSWORD_ID_INTERNAL";
-    public static final String EXTRA_CERTIFICATE_PASSWORD_ID_INTERNAL = "com.samsung.android.knox.intent.extra.CERTIFICATE_PASSWD_ID_INTERNAL";
-    public static final String EXTRA_CERTIFICATE_PASSWORD_INTERNAL = "com.samsung.android.knox.intent.extra.CERTIFICATE_PASSWD_INTERNAL";
-    public static final String EXTRA_CERTIFICATE_PATH = "com.samsung.android.knox.intent.extra.CERT_PATH_INTERNAL";
-    public static final String EXTRA_CERTIFICATE_RESULT_ID = "com.samsung.android.knox.intent.extra.CERT_RESULT_ID_INTERNAL";
-    public static final String EXTRA_CERTIFICATE_RESULT_ID_INTERNAL = "com.samsung.android.knox.intent.extra.CERTIFICATE_RESULT_ID_INTERNAL";
-    public static final String EXTRA_DEVICE_ID_INTERNAL = "com.samsung.android.knox.intent.extra.DEVICE_ID_INTERNAL";
-    public static final String EXTRA_DOMAIN_INTERNAL = "com.samsung.android.knox.intent.extra.DOMAIN_INTERNAL";
-    public static final String EXTRA_ENFORCE_SMIME_ALIAS_NAME = "com.samsung.android.knox.intent.extra.ENFORCE_SMIME_ALIAS_NAME_INTERNAL";
-    public static final String EXTRA_ENFORCE_SMIME_ALIAS_STORAGE = "com.samsung.android.knox.intent.extra.ENFORCE_SMIME_ALIAS_STORAGE_INTERNAL";
-    public static final String EXTRA_ENFORCE_SMIME_ALIAS_TYPE = "com.samsung.android.knox.intent.extra.ENFORCE_SMIME_ALIAS_TYPE";
-    public static final String EXTRA_IS_DEFAULT_INTERNAL = "com.samsung.android.knox.intent.extra.IS_DEFAULT_INTERNAL";
-    public static final String EXTRA_NOTIFY_INTERNAL = "com.samsung.android.knox.intent.extra.NOTIFY_INTERNAL";
-    public static final String EXTRA_OUTGOING_USER_PASSWORD_ID_INTERNAL = "com.samsung.android.knox.intent.extra.OUTGOING_USER_PASSWD_ID_INTERNAL";
-    public static final String EXTRA_OUTGOING_USER_PASSWORD_INTERNAL = "com.samsung.android.knox.intent.extra.OUTGOING_USER_PASSWD_INTERNAL";
-    public static final String EXTRA_PEAK_DAYS_INTERNAL = "com.samsung.android.knox.intent.extra.PEAK_DAYS_INTERNAL";
-    public static final String EXTRA_PEAK_END_TIME_INTERNAL = "com.samsung.android.knox.intent.extra.PEAK_END_TIME_INTERNAL";
-    public static final String EXTRA_PEAK_INTERNAL = "com.samsung.android.knox.intent.extra.PEAK_INTERNAL";
-    public static final String EXTRA_PEAK_OFF_INTERNAL = "com.samsung.android.knox.intent.extra.OFF_PEAK_INTERNAL";
-    public static final String EXTRA_PEAK_START_TIME_INTERNAL = "com.samsung.android.knox.intent.extra.PEAK_START_TIME_INTERNAL";
-    public static final String EXTRA_PERIOD_CALENDAR_INTERNAL = "com.samsung.android.knox.intent.extra.PERIOD_CALENDAR_INTERNAL";
-    public static final String EXTRA_PERIOD_EMAIL_INTERNAL = "com.samsung.android.knox.intent.extra.PERIOD_EMAIL_INTERNAL";
-    public static final String EXTRA_RECEIVE_HOST_INTERNAL = "com.samsung.android.knox.intent.extra.RECEIVE_HOST_INTERNAL";
-    public static final String EXTRA_RETRIVAL_SIZE2_INTERNAL = "com.samsung.android.knox.intent.extra.RETRIVAL_SIZE_INTERNAL";
-    public static final String EXTRA_RETRIVAL_SIZE_INTERNAL = "com.samsung.android.knox.intent.extra.";
-    public static final String EXTRA_ROAMING_SCHEDULE_INTERNAL = "com.samsung.android.knox.intent.extra.ROAMING_SCHEDULE_INTERNAL";
-    public static final String EXTRA_SERVER_NAME_INTERNAL = "com.samsung.android.knox.intent.extra.SERVICE_NAME_INTERNAL";
-    public static final String EXTRA_SERVER_PATH_PREFIX_INTERNAL = "com.samsung.android.knox.intent.extra.SERVER_PATH_PREFIX_INTERNAL";
-    public static final String EXTRA_SERVICE_INTERNAL = "com.samsung.android.knox.intent.extra.SERVICE_INTERNAL";
-    public static final String EXTRA_SIGNATURE_INTERNAL = "com.samsung.android.knox.intent.extra.SIGNATURE_INTERNAL";
-    public static final String EXTRA_SMIME_INSTALL_TYPE = "com.samsung.android.knox.intent.extra.SMIME_INSTALL_TYPE";
-    public static final String EXTRA_SMIME_RESULT = "com.samsung.android.knox.intent.extra.SMIME_RESULT";
+    public static final String EXTRA_ACCOUNT_EAS_INTERNAL =
+            "com.samsung.android.knox.intent.extra.ACCOUNT_EAS_INTERNAL";
+    public static final String EXTRA_ACCOUNT_ID =
+            "com.samsung.android.knox.intent.extra.ACCOUNT_ID";
+    public static final String EXTRA_ACCOUNT_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.ACCOUNT_ID_INTERNAL";
+    public static final String EXTRA_ACCOUNT_NAME_INTERNAL =
+            "com.samsung.android.knox.intent.extra.ACCOUNT_NAME_INTERNAL";
+    public static final String EXTRA_ACCOUNT_SETUP_RESULT_STATUS_INTERNAL =
+            "com.samsung.android.knox.intent.extra.ACCOUNT_SETUP_RESULT_STATUS_INTERNAL";
+    public static final String EXTRA_CERTIFICATE_ALIAS_INTERNAL =
+            "com.samsung.android.knox.intent.extra.CERTIFICATE_ALIAS_INTERNAL";
+    public static final String EXTRA_CERTIFICATE_DATA_INTERNAL =
+            "com.samsung.android.knox.intent.extra.CERTIFICATE_DATA_INTERNAL";
+    public static final String EXTRA_CERTIFICATE_PASSWORD_ID =
+            "com.samsung.android.knox.intent.extra.CERT_PASSWORD_ID_INTERNAL";
+    public static final String EXTRA_CERTIFICATE_PASSWORD_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.CERTIFICATE_PASSWD_ID_INTERNAL";
+    public static final String EXTRA_CERTIFICATE_PASSWORD_INTERNAL =
+            "com.samsung.android.knox.intent.extra.CERTIFICATE_PASSWD_INTERNAL";
+    public static final String EXTRA_CERTIFICATE_PATH =
+            "com.samsung.android.knox.intent.extra.CERT_PATH_INTERNAL";
+    public static final String EXTRA_CERTIFICATE_RESULT_ID =
+            "com.samsung.android.knox.intent.extra.CERT_RESULT_ID_INTERNAL";
+    public static final String EXTRA_CERTIFICATE_RESULT_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.CERTIFICATE_RESULT_ID_INTERNAL";
+    public static final String EXTRA_DEVICE_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.DEVICE_ID_INTERNAL";
+    public static final String EXTRA_DOMAIN_INTERNAL =
+            "com.samsung.android.knox.intent.extra.DOMAIN_INTERNAL";
+    public static final String EXTRA_ENFORCE_SMIME_ALIAS_NAME =
+            "com.samsung.android.knox.intent.extra.ENFORCE_SMIME_ALIAS_NAME_INTERNAL";
+    public static final String EXTRA_ENFORCE_SMIME_ALIAS_STORAGE =
+            "com.samsung.android.knox.intent.extra.ENFORCE_SMIME_ALIAS_STORAGE_INTERNAL";
+    public static final String EXTRA_ENFORCE_SMIME_ALIAS_TYPE =
+            "com.samsung.android.knox.intent.extra.ENFORCE_SMIME_ALIAS_TYPE";
+    public static final String EXTRA_IS_DEFAULT_INTERNAL =
+            "com.samsung.android.knox.intent.extra.IS_DEFAULT_INTERNAL";
+    public static final String EXTRA_NOTIFY_INTERNAL =
+            "com.samsung.android.knox.intent.extra.NOTIFY_INTERNAL";
+    public static final String EXTRA_OUTGOING_USER_PASSWORD_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.OUTGOING_USER_PASSWD_ID_INTERNAL";
+    public static final String EXTRA_OUTGOING_USER_PASSWORD_INTERNAL =
+            "com.samsung.android.knox.intent.extra.OUTGOING_USER_PASSWD_INTERNAL";
+    public static final String EXTRA_PEAK_DAYS_INTERNAL =
+            "com.samsung.android.knox.intent.extra.PEAK_DAYS_INTERNAL";
+    public static final String EXTRA_PEAK_END_TIME_INTERNAL =
+            "com.samsung.android.knox.intent.extra.PEAK_END_TIME_INTERNAL";
+    public static final String EXTRA_PEAK_INTERNAL =
+            "com.samsung.android.knox.intent.extra.PEAK_INTERNAL";
+    public static final String EXTRA_PEAK_OFF_INTERNAL =
+            "com.samsung.android.knox.intent.extra.OFF_PEAK_INTERNAL";
+    public static final String EXTRA_PEAK_START_TIME_INTERNAL =
+            "com.samsung.android.knox.intent.extra.PEAK_START_TIME_INTERNAL";
+    public static final String EXTRA_PERIOD_CALENDAR_INTERNAL =
+            "com.samsung.android.knox.intent.extra.PERIOD_CALENDAR_INTERNAL";
+    public static final String EXTRA_PERIOD_EMAIL_INTERNAL =
+            "com.samsung.android.knox.intent.extra.PERIOD_EMAIL_INTERNAL";
+    public static final String EXTRA_RECEIVE_HOST_INTERNAL =
+            "com.samsung.android.knox.intent.extra.RECEIVE_HOST_INTERNAL";
+    public static final String EXTRA_RETRIVAL_SIZE2_INTERNAL =
+            "com.samsung.android.knox.intent.extra.RETRIVAL_SIZE_INTERNAL";
+    public static final String EXTRA_RETRIVAL_SIZE_INTERNAL =
+            "com.samsung.android.knox.intent.extra.";
+    public static final String EXTRA_ROAMING_SCHEDULE_INTERNAL =
+            "com.samsung.android.knox.intent.extra.ROAMING_SCHEDULE_INTERNAL";
+    public static final String EXTRA_SERVER_NAME_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SERVICE_NAME_INTERNAL";
+    public static final String EXTRA_SERVER_PATH_PREFIX_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SERVER_PATH_PREFIX_INTERNAL";
+    public static final String EXTRA_SERVICE_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SERVICE_INTERNAL";
+    public static final String EXTRA_SIGNATURE_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SIGNATURE_INTERNAL";
+    public static final String EXTRA_SMIME_INSTALL_TYPE =
+            "com.samsung.android.knox.intent.extra.SMIME_INSTALL_TYPE";
+    public static final String EXTRA_SMIME_RESULT =
+            "com.samsung.android.knox.intent.extra.SMIME_RESULT";
     public static final String EXTRA_STATUS = "com.samsung.android.knox.intent.extra.STATUS";
-    public static final String EXTRA_SYNC_CALENDAR_INTERNAL = "com.samsung.android.knox.intent.extra.SYNC_CALENDAR_INTERNAL";
-    public static final String EXTRA_SYNC_CONTACTS_INTERNAL = "com.samsung.android.knox.intent.extra.SYNC_CONTACTS_INTERNAL";
-    public static final String EXTRA_TRUST_ALL_INTERNAL = "com.samsung.android.knox.intent.extra.TRUST_ALL_INTERNAL";
-    public static final String EXTRA_USER_HANDLE_ID_INTERNAL = "com.samsung.android.knox.intent.extra.USER_HANDLE_ID_INTERNAL";
-    public static final String EXTRA_USER_ID_INTERNAL = "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL";
-    public static final String EXTRA_USER_NAME_INTERNAL = "com.samsung.android.knox.intent.extra.EXTRA_USER_NAME_INTERNAL";
-    public static final String EXTRA_USER_PASSWORD_ID_INTERNAL = "com.samsung.android.knox.intent.extra.USER_PASSWD_ID_INTERNAL";
-    public static final String EXTRA_USER_PASSWORD_INTERNAL = "com.samsung.android.knox.intent.extra.USER_PASSWD_INTERNAL";
-    public static final String EXTRA_USE_SSL_INTERNAL = "com.samsung.android.knox.intent.extra.USE_SSL_INTERNAL";
-    public static final String EXTRA_USE_TLS_INTERNAL = "com.samsung.android.knox.intent.extra.USE_TLS_INTERNAL";
-    public static final String EXTRA_VIBRATE_INTERNAL = "com.samsung.android.knox.intent.extra.EXTRA_VIBRATE_INTERNAL";
-    public static final String EXTRA_VIBRATE_WHEN_SILENT_INTERNAL = "com.samsung.android.knox.intent.extra.VIBRATE_WHEN_SILENT_INTERNAL";
+    public static final String EXTRA_SYNC_CALENDAR_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SYNC_CALENDAR_INTERNAL";
+    public static final String EXTRA_SYNC_CONTACTS_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SYNC_CONTACTS_INTERNAL";
+    public static final String EXTRA_TRUST_ALL_INTERNAL =
+            "com.samsung.android.knox.intent.extra.TRUST_ALL_INTERNAL";
+    public static final String EXTRA_USER_HANDLE_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.USER_HANDLE_ID_INTERNAL";
+    public static final String EXTRA_USER_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL";
+    public static final String EXTRA_USER_NAME_INTERNAL =
+            "com.samsung.android.knox.intent.extra.EXTRA_USER_NAME_INTERNAL";
+    public static final String EXTRA_USER_PASSWORD_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.USER_PASSWD_ID_INTERNAL";
+    public static final String EXTRA_USER_PASSWORD_INTERNAL =
+            "com.samsung.android.knox.intent.extra.USER_PASSWD_INTERNAL";
+    public static final String EXTRA_USE_SSL_INTERNAL =
+            "com.samsung.android.knox.intent.extra.USE_SSL_INTERNAL";
+    public static final String EXTRA_USE_TLS_INTERNAL =
+            "com.samsung.android.knox.intent.extra.USE_TLS_INTERNAL";
+    public static final String EXTRA_VIBRATE_INTERNAL =
+            "com.samsung.android.knox.intent.extra.EXTRA_VIBRATE_INTERNAL";
+    public static final String EXTRA_VIBRATE_WHEN_SILENT_INTERNAL =
+            "com.samsung.android.knox.intent.extra.VIBRATE_WHEN_SILENT_INTERNAL";
     public static final int SET_SMIME_CERTIFICATE_ALL = 1;
     public static final int SET_SMIME_CERTIFICATE_BY_ENCRYPTION = 2;
     public static final int SET_SMIME_CERTIFICATE_BY_SIGNING = 3;
@@ -146,8 +224,7 @@ public class EnterpriseExchangeAccount implements Parcelable {
     public boolean mUseSSL;
     public boolean mUseTLS;
 
-    public EnterpriseExchangeAccount() {
-    }
+    public EnterpriseExchangeAccount() {}
 
     @Override // android.os.Parcelable
     public int describeContents() {
@@ -246,6 +323,55 @@ public class EnterpriseExchangeAccount implements Parcelable {
     }
 
     public String toString() {
-        return "mId = " + this.mId + ", mDisplayName=" + this.mDisplayName + ",mEmailAddress =" + this.mEmailAddress + ", mSenderName=" + this.mSenderName + ", mProtocol=" + this.mProtocol + ", mProtocolVersion = " + this.mProtocolVersion + ", mUseSSL=" + this.mUseSSL + ", mUseTLS=" + this.mUseTLS + ", mAcceptAllCertificates = " + this.mAcceptAllCertificates + ", mSyncLookback=" + this.mSyncLookback + ", mSyncInterval=" + this.mSyncInterval + ", mEmailNotificationVibrateAlways=" + this.mEmailNotificationVibrateAlways + ", mIsDefault =" + this.mIsDefault + ", mPeakDays =" + this.mPeakDays + ", mPeakStartMinute=" + this.mPeakStartMinute + ", mPeakEndMinute=" + this.mPeakEndMinute + ", mPeakSyncSchedule=" + this.mPeakSyncSchedule + ", mOffPeakSyncSchedule=" + this.mOffPeakSyncSchedule + ", mRoamingSyncSchedule=" + this.mRoamingSyncSchedule + ", mSyncCalendarAge=" + this.mSyncCalendarAge + ", mEmailBodyTruncationSize=" + this.mEmailBodyTruncationSize + ", mEmailRoamingBodyTruncationSize=" + this.mEmailRoamingBodyTruncationSize + ", mSyncCalendar=" + this.mSyncCalendar + ", mSyncContacts=" + this.mSyncContacts + ", mAllowHTMLEmail=" + this.mAllowHTMLEmail;
+        return "mId = "
+                + this.mId
+                + ", mDisplayName="
+                + this.mDisplayName
+                + ",mEmailAddress ="
+                + this.mEmailAddress
+                + ", mSenderName="
+                + this.mSenderName
+                + ", mProtocol="
+                + this.mProtocol
+                + ", mProtocolVersion = "
+                + this.mProtocolVersion
+                + ", mUseSSL="
+                + this.mUseSSL
+                + ", mUseTLS="
+                + this.mUseTLS
+                + ", mAcceptAllCertificates = "
+                + this.mAcceptAllCertificates
+                + ", mSyncLookback="
+                + this.mSyncLookback
+                + ", mSyncInterval="
+                + this.mSyncInterval
+                + ", mEmailNotificationVibrateAlways="
+                + this.mEmailNotificationVibrateAlways
+                + ", mIsDefault ="
+                + this.mIsDefault
+                + ", mPeakDays ="
+                + this.mPeakDays
+                + ", mPeakStartMinute="
+                + this.mPeakStartMinute
+                + ", mPeakEndMinute="
+                + this.mPeakEndMinute
+                + ", mPeakSyncSchedule="
+                + this.mPeakSyncSchedule
+                + ", mOffPeakSyncSchedule="
+                + this.mOffPeakSyncSchedule
+                + ", mRoamingSyncSchedule="
+                + this.mRoamingSyncSchedule
+                + ", mSyncCalendarAge="
+                + this.mSyncCalendarAge
+                + ", mEmailBodyTruncationSize="
+                + this.mEmailBodyTruncationSize
+                + ", mEmailRoamingBodyTruncationSize="
+                + this.mEmailRoamingBodyTruncationSize
+                + ", mSyncCalendar="
+                + this.mSyncCalendar
+                + ", mSyncContacts="
+                + this.mSyncContacts
+                + ", mAllowHTMLEmail="
+                + this.mAllowHTMLEmail;
     }
 }

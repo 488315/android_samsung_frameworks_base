@@ -1,7 +1,9 @@
 package com.android.server.am.mars.netlink;
 
 import android.os.Process;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -9,7 +11,8 @@ import java.nio.ByteOrder;
 /* loaded from: classes.dex */
 public abstract class FreecessNetlinkMessage {
     public static byte[] newFreecessRequest(int i, int i2, int i3, int i4, int i5) {
-        byte[] bArr = new byte[FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__RESOLVER_SWITCH_TABS];
+        byte[] bArr =
+                new byte[FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__RESOLVER_SWITCH_TABS];
         ByteBuffer wrap = ByteBuffer.wrap(bArr);
         wrap.order(ByteOrder.nativeOrder());
         wrap.putInt(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__RESOLVER_SWITCH_TABS);

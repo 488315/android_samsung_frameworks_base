@@ -14,9 +14,9 @@ import android.util.ArraySet;
 import android.util.Pair;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.server.LocalServices;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
-import com.android.server.devicepolicy.OwnersData;
 import com.android.server.devicepolicy.OwnersData.ProfileOwnerReadWriter;
 import com.android.server.pm.Computer;
 import com.android.server.pm.PackageManagerService;
@@ -27,6 +27,7 @@ import com.android.server.wm.ActivityTaskManagerInternal;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.WindowManagerGlobalLock;
 import com.android.server.wm.WindowManagerService;
+
 import java.io.File;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -44,7 +45,14 @@ public final class Owners {
     public final UserManager mUserManager;
     public final UserManagerInternal mUserManagerInternal;
 
-    public Owners(UserManager userManager, UserManagerInternal userManagerInternal, PackageManagerInternal packageManagerInternal, ActivityTaskManagerInternal activityTaskManagerInternal, ActivityManagerInternal activityManagerInternal, DeviceStateCacheImpl deviceStateCacheImpl, PolicyPathProvider policyPathProvider) {
+    public Owners(
+            UserManager userManager,
+            UserManagerInternal userManagerInternal,
+            PackageManagerInternal packageManagerInternal,
+            ActivityTaskManagerInternal activityTaskManagerInternal,
+            ActivityManagerInternal activityManagerInternal,
+            DeviceStateCacheImpl deviceStateCacheImpl,
+            PolicyPathProvider policyPathProvider) {
         this.mUserManager = userManager;
         this.mUserManagerInternal = userManagerInternal;
         this.mPackageManagerInternal = packageManagerInternal;
@@ -103,7 +111,8 @@ public final class Owners {
         if (ownerInfo == null) {
             return -1;
         }
-        return this.mPackageManagerInternal.getPackageUid(ownerInfo.packageName, 4333568L, ownersData.mDeviceOwnerUserId);
+        return this.mPackageManagerInternal.getPackageUid(
+                ownerInfo.packageName, 4333568L, ownersData.mDeviceOwnerUserId);
     }
 
     public final int getDeviceOwnerUserId() {
@@ -121,7 +130,9 @@ public final class Owners {
                 if (ownersData.mDeviceOwner == null) {
                     return null;
                 }
-                return Pair.create(Integer.valueOf(ownersData.mDeviceOwnerUserId), this.mData.mDeviceOwner.admin);
+                return Pair.create(
+                        Integer.valueOf(ownersData.mDeviceOwnerUserId),
+                        this.mData.mDeviceOwner.admin);
             } catch (Throwable th) {
                 throw th;
             }
@@ -132,7 +143,8 @@ public final class Owners {
         ComponentName componentName;
         synchronized (this.mData) {
             try {
-                OwnersData.OwnerInfo ownerInfo = (OwnersData.OwnerInfo) this.mData.mProfileOwners.get(Integer.valueOf(i));
+                OwnersData.OwnerInfo ownerInfo =
+                        (OwnersData.OwnerInfo) this.mData.mProfileOwners.get(Integer.valueOf(i));
                 componentName = ownerInfo != null ? ownerInfo.admin : null;
             } catch (Throwable th) {
                 throw th;
@@ -157,7 +169,8 @@ public final class Owners {
         String str;
         synchronized (this.mData) {
             try {
-                OwnersData.OwnerInfo ownerInfo = (OwnersData.OwnerInfo) this.mData.mProfileOwners.get(Integer.valueOf(i));
+                OwnersData.OwnerInfo ownerInfo =
+                        (OwnersData.OwnerInfo) this.mData.mProfileOwners.get(Integer.valueOf(i));
                 str = ownerInfo != null ? ownerInfo.packageName : null;
             } catch (Throwable th) {
                 throw th;
@@ -203,7 +216,9 @@ public final class Owners {
         boolean z;
         synchronized (this.mData) {
             try {
-                z = !this.mData.mDeviceOwnerTypes.isEmpty() && this.mData.mDeviceOwnerTypes.containsKey(str);
+                z =
+                        !this.mData.mDeviceOwnerTypes.isEmpty()
+                                && this.mData.mDeviceOwnerTypes.containsKey(str);
             } finally {
             }
         }
@@ -214,7 +229,8 @@ public final class Owners {
         boolean z;
         synchronized (this.mData) {
             try {
-                OwnersData.OwnerInfo ownerInfo = (OwnersData.OwnerInfo) this.mData.mProfileOwners.get(Integer.valueOf(i));
+                OwnersData.OwnerInfo ownerInfo =
+                        (OwnersData.OwnerInfo) this.mData.mProfileOwners.get(Integer.valueOf(i));
                 z = ownerInfo != null ? ownerInfo.isOrganizationOwnedDevice : false;
             } catch (Throwable th) {
                 throw th;
@@ -226,13 +242,23 @@ public final class Owners {
     public final void load() {
         synchronized (this.mData) {
             try {
-                int[] array = this.mUserManager.getAliveUsers().stream().mapToInt(new Owners$$ExternalSyntheticLambda0()).toArray();
+                int[] array =
+                        this.mUserManager.getAliveUsers().stream()
+                                .mapToInt(new Owners$$ExternalSyntheticLambda0())
+                                .toArray();
                 this.mData.load(array);
                 int i = 0;
-                if (DeviceConfig.getBoolean("device_policy_manager", "deprecate_usermanagerinternal_devicepolicy", true)) {
+                if (DeviceConfig.getBoolean(
+                        "device_policy_manager",
+                        "deprecate_usermanagerinternal_devicepolicy",
+                        true)) {
                     if (hasDeviceOwner()) {
                         OwnersData ownersData = this.mData;
-                        this.mDeviceStateCache.mDeviceOwnerType.set(((Integer) ownersData.mDeviceOwnerTypes.getOrDefault(ownersData.mDeviceOwner.packageName, 0)).intValue());
+                        this.mDeviceStateCache.mDeviceOwnerType.set(
+                                ((Integer)
+                                                ownersData.mDeviceOwnerTypes.getOrDefault(
+                                                        ownersData.mDeviceOwner.packageName, 0))
+                                        .intValue());
                     } else {
                         this.mDeviceStateCache.mDeviceOwnerType.set(-1);
                     }
@@ -265,7 +291,9 @@ public final class Owners {
         DevicePolicyManager.invalidateBinderCaches();
         SparseArray sparseArray = new SparseArray();
         for (int size = this.mData.mProfileOwners.size() - 1; size >= 0; size--) {
-            sparseArray.put(((Integer) this.mData.mProfileOwners.keyAt(size)).intValue(), ((OwnersData.OwnerInfo) this.mData.mProfileOwners.valueAt(size)).packageName);
+            sparseArray.put(
+                    ((Integer) this.mData.mProfileOwners.keyAt(size)).intValue(),
+                    ((OwnersData.OwnerInfo) this.mData.mProfileOwners.valueAt(size)).packageName);
         }
         OwnersData ownersData = this.mData;
         OwnersData.OwnerInfo ownerInfo = ownersData.mDeviceOwner;
@@ -273,7 +301,8 @@ public final class Owners {
         String str2 = ownerInfo != null ? ownerInfo.packageName : null;
         PackageManagerInternal packageManagerInternal = this.mPackageManagerInternal;
         int i = ownersData.mDeviceOwnerUserId;
-        PackageManagerService.PackageManagerInternalImpl packageManagerInternalImpl = (PackageManagerService.PackageManagerInternalImpl) packageManagerInternal;
+        PackageManagerService.PackageManagerInternalImpl packageManagerInternalImpl =
+                (PackageManagerService.PackageManagerInternalImpl) packageManagerInternal;
         ProtectedPackages protectedPackages = PackageManagerService.this.mProtectedPackages;
         synchronized (protectedPackages) {
             protectedPackages.mDeviceOwnerUserId = i;
@@ -293,7 +322,11 @@ public final class Owners {
                 int keyAt = sparseArray.keyAt(i2);
                 PackageManagerService packageManagerService = PackageManagerService.this;
                 Computer snapshotComputer = packageManagerService.snapshotComputer();
-                packageManagerService.mSuspendPackageHelper.removeSuspensionsBySuspendingPackage(snapshotComputer, snapshotComputer.getAllAvailablePackageNames(), new PackageManagerService$PackageManagerInternalImpl$$ExternalSyntheticLambda0(), keyAt);
+                packageManagerService.mSuspendPackageHelper.removeSuspensionsBySuspendingPackage(
+                        snapshotComputer,
+                        snapshotComputer.getAllAvailablePackageNames(),
+                        new PackageManagerService$PackageManagerInternalImpl$$ExternalSyntheticLambda0(),
+                        keyAt);
             }
         }
         pushToActivityManagerLocked();
@@ -303,8 +336,10 @@ public final class Owners {
     public final void pushDeviceOwnerUidToActivityTaskManagerLocked() {
         ActivityTaskManagerInternal activityTaskManagerInternal = this.mActivityTaskManagerInternal;
         int deviceOwnerUidLocked = getDeviceOwnerUidLocked();
-        ActivityTaskManagerService.LocalService localService = (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
-        WindowManagerGlobalLock windowManagerGlobalLock = ActivityTaskManagerService.this.mGlobalLock;
+        ActivityTaskManagerService.LocalService localService =
+                (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
+        WindowManagerGlobalLock windowManagerGlobalLock =
+                ActivityTaskManagerService.this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
@@ -324,8 +359,10 @@ public final class Owners {
         while (true) {
             OwnersData ownersData = this.mData;
             if (i >= ownersData.mProfileOwners.size()) {
-                ActivityTaskManagerService.LocalService localService = (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
-                WindowManagerGlobalLock windowManagerGlobalLock = ActivityTaskManagerService.this.mGlobalLock;
+                ActivityTaskManagerService.LocalService localService =
+                        (ActivityTaskManagerService.LocalService) activityTaskManagerInternal;
+                WindowManagerGlobalLock windowManagerGlobalLock =
+                        ActivityTaskManagerService.this.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock) {
                     try {
@@ -339,7 +376,13 @@ public final class Owners {
                 return;
             }
             int intValue = ((Integer) ownersData.mProfileOwners.keyAt(i)).intValue();
-            arraySet.add(Integer.valueOf(this.mPackageManagerInternal.getPackageUid(((OwnersData.OwnerInfo) ownersData.mProfileOwners.valueAt(i)).packageName, 4333568L, intValue)));
+            arraySet.add(
+                    Integer.valueOf(
+                            this.mPackageManagerInternal.getPackageUid(
+                                    ((OwnersData.OwnerInfo) ownersData.mProfileOwners.valueAt(i))
+                                            .packageName,
+                                    4333568L,
+                                    intValue)));
             i++;
         }
     }
@@ -349,7 +392,12 @@ public final class Owners {
         ArraySet arraySet = new ArraySet();
         OwnersData ownersData = this.mData;
         for (int size = ownersData.mProfileOwners.size() - 1; size >= 0; size--) {
-            int packageUid = this.mPackageManagerInternal.getPackageUid(((OwnersData.OwnerInfo) ownersData.mProfileOwners.valueAt(size)).packageName, 4333568L, ((Integer) ownersData.mProfileOwners.keyAt(size)).intValue());
+            int packageUid =
+                    this.mPackageManagerInternal.getPackageUid(
+                            ((OwnersData.OwnerInfo) ownersData.mProfileOwners.valueAt(size))
+                                    .packageName,
+                            4333568L,
+                            ((Integer) ownersData.mProfileOwners.keyAt(size)).intValue());
             if (packageUid >= 0) {
                 arraySet.add(Integer.valueOf(packageUid));
             }
@@ -364,19 +412,31 @@ public final class Owners {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 SparseIntArray sparseIntArray = new SparseIntArray();
-                if (ownersData.mDeviceOwner != null && (deviceOwnerUidLocked = getDeviceOwnerUidLocked()) >= 0) {
+                if (ownersData.mDeviceOwner != null
+                        && (deviceOwnerUidLocked = getDeviceOwnerUidLocked()) >= 0) {
                     sparseIntArray.put(ownersData.mDeviceOwnerUserId, deviceOwnerUidLocked);
                 }
                 ArrayMap arrayMap = ownersData.mProfileOwners;
                 if (arrayMap != null) {
                     for (int size = arrayMap.size() - 1; size >= 0; size--) {
-                        int packageUid = this.mPackageManagerInternal.getPackageUid(((OwnersData.OwnerInfo) ownersData.mProfileOwners.valueAt(size)).packageName, 4333568L, ((Integer) ownersData.mProfileOwners.keyAt(size)).intValue());
+                        int packageUid =
+                                this.mPackageManagerInternal.getPackageUid(
+                                        ((OwnersData.OwnerInfo)
+                                                        ownersData.mProfileOwners.valueAt(size))
+                                                .packageName,
+                                        4333568L,
+                                        ((Integer) ownersData.mProfileOwners.keyAt(size))
+                                                .intValue());
                         if (packageUid >= 0) {
-                            sparseIntArray.put(((Integer) ownersData.mProfileOwners.keyAt(size)).intValue(), packageUid);
+                            sparseIntArray.put(
+                                    ((Integer) ownersData.mProfileOwners.keyAt(size)).intValue(),
+                                    packageUid);
                         }
                     }
                 }
-                AppOpsManagerInternal appOpsManagerInternal = (AppOpsManagerInternal) LocalServices.getService(AppOpsManagerInternal.class);
+                AppOpsManagerInternal appOpsManagerInternal =
+                        (AppOpsManagerInternal)
+                                LocalServices.getService(AppOpsManagerInternal.class);
                 if (appOpsManagerInternal != null) {
                     if (sparseIntArray.size() <= 0) {
                         sparseIntArray = null;
@@ -395,7 +455,10 @@ public final class Owners {
         synchronized (this.mData) {
             try {
                 this.mData.mProfileOwners.remove(Integer.valueOf(i));
-                if (DeviceConfig.getBoolean("device_policy_manager", "deprecate_usermanagerinternal_devicepolicy", true)) {
+                if (DeviceConfig.getBoolean(
+                        "device_policy_manager",
+                        "deprecate_usermanagerinternal_devicepolicy",
+                        true)) {
                     this.mDeviceStateCache.setHasProfileOwner(i, false);
                 } else {
                     this.mUserManagerInternal.setUserManaged(i, false);
@@ -410,16 +473,24 @@ public final class Owners {
 
     public final void setDeviceOwner(int i, ComponentName componentName) {
         if (i < 0) {
-            NandswapManager$$ExternalSyntheticOutline0.m(i, "Invalid user id for device owner user: ", "DevicePolicyManagerService");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    i, "Invalid user id for device owner user: ", "DevicePolicyManagerService");
             return;
         }
         synchronized (this.mData) {
             try {
                 this.mData.mDeviceOwner = new OwnersData.OwnerInfo(componentName, null, null, true);
                 this.mData.mDeviceOwnerUserId = i;
-                if (DeviceConfig.getBoolean("device_policy_manager", "deprecate_usermanagerinternal_devicepolicy", true)) {
+                if (DeviceConfig.getBoolean(
+                        "device_policy_manager",
+                        "deprecate_usermanagerinternal_devicepolicy",
+                        true)) {
                     OwnersData ownersData = this.mData;
-                    this.mDeviceStateCache.mDeviceOwnerType.set(((Integer) ownersData.mDeviceOwnerTypes.getOrDefault(ownersData.mDeviceOwner.packageName, 0)).intValue());
+                    this.mDeviceStateCache.mDeviceOwnerType.set(
+                            ((Integer)
+                                            ownersData.mDeviceOwnerTypes.getOrDefault(
+                                                    ownersData.mDeviceOwner.packageName, 0))
+                                    .intValue());
                 } else {
                     this.mUserManagerInternal.setDeviceManaged(true);
                 }
@@ -434,8 +505,13 @@ public final class Owners {
     public final void setProfileOwner(int i, ComponentName componentName) {
         synchronized (this.mData) {
             try {
-                this.mData.mProfileOwners.put(Integer.valueOf(i), new OwnersData.OwnerInfo(componentName, null, null, false));
-                if (DeviceConfig.getBoolean("device_policy_manager", "deprecate_usermanagerinternal_devicepolicy", true)) {
+                this.mData.mProfileOwners.put(
+                        Integer.valueOf(i),
+                        new OwnersData.OwnerInfo(componentName, null, null, false));
+                if (DeviceConfig.getBoolean(
+                        "device_policy_manager",
+                        "deprecate_usermanagerinternal_devicepolicy",
+                        true)) {
                     this.mDeviceStateCache.setHasProfileOwner(i, true);
                 } else {
                     this.mUserManagerInternal.setUserManaged(i, true);
@@ -448,7 +524,8 @@ public final class Owners {
         }
     }
 
-    public final boolean setSystemUpdateFreezePeriodRecord(LocalDate localDate, LocalDate localDate2) {
+    public final boolean setSystemUpdateFreezePeriodRecord(
+            LocalDate localDate, LocalDate localDate2) {
         boolean z;
         boolean z2;
         synchronized (this.mData) {

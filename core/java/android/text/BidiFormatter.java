@@ -16,13 +16,16 @@ public final class BidiFormatter {
     private final TextDirectionHeuristic mDefaultTextDirectionHeuristic;
     private final int mFlags;
     private final boolean mIsRtlContext;
-    private static TextDirectionHeuristic DEFAULT_TEXT_DIRECTION_HEURISTIC = TextDirectionHeuristics.FIRSTSTRONG_LTR;
+    private static TextDirectionHeuristic DEFAULT_TEXT_DIRECTION_HEURISTIC =
+            TextDirectionHeuristics.FIRSTSTRONG_LTR;
     private static final char LRM = 8206;
     private static final String LRM_STRING = Character.toString(LRM);
     private static final char RLM = 8207;
     private static final String RLM_STRING = Character.toString(RLM);
-    private static final BidiFormatter DEFAULT_LTR_INSTANCE = new BidiFormatter(false, 2, DEFAULT_TEXT_DIRECTION_HEURISTIC);
-    private static final BidiFormatter DEFAULT_RTL_INSTANCE = new BidiFormatter(true, 2, DEFAULT_TEXT_DIRECTION_HEURISTIC);
+    private static final BidiFormatter DEFAULT_LTR_INSTANCE =
+            new BidiFormatter(false, 2, DEFAULT_TEXT_DIRECTION_HEURISTIC);
+    private static final BidiFormatter DEFAULT_RTL_INSTANCE =
+            new BidiFormatter(true, 2, DEFAULT_TEXT_DIRECTION_HEURISTIC);
 
     public static final class Builder {
         private int mFlags;
@@ -62,7 +65,9 @@ public final class BidiFormatter {
         }
 
         public BidiFormatter build() {
-            if (this.mFlags == 2 && this.mTextDirectionHeuristic == BidiFormatter.DEFAULT_TEXT_DIRECTION_HEURISTIC) {
+            if (this.mFlags == 2
+                    && this.mTextDirectionHeuristic
+                            == BidiFormatter.DEFAULT_TEXT_DIRECTION_HEURISTIC) {
                 return BidiFormatter.getDefaultInstanceFromContext(this.mIsRtlContext);
             }
             return new BidiFormatter(this.mIsRtlContext, this.mFlags, this.mTextDirectionHeuristic);
@@ -138,14 +143,21 @@ public final class BidiFormatter {
         return unicodeWrap((CharSequence) str, heuristic, isolate).toString();
     }
 
-    public CharSequence unicodeWrap(CharSequence str, TextDirectionHeuristic heuristic, boolean isolate) {
+    public CharSequence unicodeWrap(
+            CharSequence str, TextDirectionHeuristic heuristic, boolean isolate) {
         if (str == null) {
             return null;
         }
         boolean isRtl = heuristic.isRtl(str, 0, str.length());
         SpannableStringBuilder result = new SpannableStringBuilder();
         if (getStereoReset() && isolate) {
-            result.append((CharSequence) markBefore(str, isRtl ? TextDirectionHeuristics.RTL : TextDirectionHeuristics.LTR));
+            result.append(
+                    (CharSequence)
+                            markBefore(
+                                    str,
+                                    isRtl
+                                            ? TextDirectionHeuristics.RTL
+                                            : TextDirectionHeuristics.LTR));
         }
         if (isRtl != this.mIsRtlContext) {
             result.append(isRtl ? RLE : LRE);
@@ -155,7 +167,13 @@ public final class BidiFormatter {
             result.append(str);
         }
         if (isolate) {
-            result.append((CharSequence) markAfter(str, isRtl ? TextDirectionHeuristics.RTL : TextDirectionHeuristics.LTR));
+            result.append(
+                    (CharSequence)
+                            markAfter(
+                                    str,
+                                    isRtl
+                                            ? TextDirectionHeuristics.RTL
+                                            : TextDirectionHeuristics.LTR));
         }
         return result;
     }
@@ -428,8 +446,7 @@ public final class BidiFormatter {
                         this.charIndex = i2 + 1;
                         char charAt = charSequence2.charAt(i2);
                         this.lastChar = charAt;
-                        if (charAt != quote) {
-                        }
+                        if (charAt != quote) {}
                     }
                 }
             }
@@ -459,8 +476,7 @@ public final class BidiFormatter {
                         this.charIndex = i2;
                         char charAt = charSequence2.charAt(i2);
                         this.lastChar = charAt;
-                        if (charAt != quote) {
-                        }
+                        if (charAt != quote) {}
                     }
                 }
             }

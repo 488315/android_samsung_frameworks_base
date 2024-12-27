@@ -5,18 +5,19 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface IContentProtectionAllowlistCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.contentcapture.IContentProtectionAllowlistCallback";
+    public static final String DESCRIPTOR =
+            "android.service.contentcapture.IContentProtectionAllowlistCallback";
 
     void setAllowlist(List<String> list) throws RemoteException;
 
     public static class Default implements IContentProtectionAllowlistCallback {
         @Override // android.service.contentcapture.IContentProtectionAllowlistCallback
-        public void setAllowlist(List<String> packages) throws RemoteException {
-        }
+        public void setAllowlist(List<String> packages) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +25,8 @@ public interface IContentProtectionAllowlistCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContentProtectionAllowlistCallback {
+    public abstract static class Stub extends Binder
+            implements IContentProtectionAllowlistCallback {
         static final int TRANSACTION_setAllowlist = 1;
 
         public Stub() {
@@ -35,7 +37,8 @@ public interface IContentProtectionAllowlistCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IContentProtectionAllowlistCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IContentProtectionAllowlistCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof IContentProtectionAllowlistCallback)) {
                 return (IContentProtectionAllowlistCallback) iin;
             }
@@ -62,7 +65,8 @@ public interface IContentProtectionAllowlistCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContentProtectionAllowlistCallback.DESCRIPTOR);
             }

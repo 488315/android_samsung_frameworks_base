@@ -1,7 +1,7 @@
 package com.android.net.module.util;
 
 import android.util.Log;
-import com.android.net.module.util.DnsPacket;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;

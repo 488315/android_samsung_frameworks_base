@@ -3,6 +3,7 @@ package android.speech;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.util.CloseGuard;
+
 import java.lang.ref.Reference;
 import java.util.concurrent.Executor;
 
@@ -47,7 +48,10 @@ class SpeechRecognizerProxy extends SpeechRecognizer {
     }
 
     @Override // android.speech.SpeechRecognizer
-    public void checkRecognitionSupport(Intent recognizerIntent, Executor executor, RecognitionSupportCallback supportListener) {
+    public void checkRecognitionSupport(
+            Intent recognizerIntent,
+            Executor executor,
+            RecognitionSupportCallback supportListener) {
         this.mDelegate.checkRecognitionSupport(recognizerIntent, executor, supportListener);
     }
 
@@ -57,7 +61,8 @@ class SpeechRecognizerProxy extends SpeechRecognizer {
     }
 
     @Override // android.speech.SpeechRecognizer
-    public void triggerModelDownload(Intent recognizerIntent, Executor executor, ModelDownloadListener listener) {
+    public void triggerModelDownload(
+            Intent recognizerIntent, Executor executor, ModelDownloadListener listener) {
         this.mDelegate.triggerModelDownload(recognizerIntent, executor, listener);
     }
 

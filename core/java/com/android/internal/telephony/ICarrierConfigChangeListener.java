@@ -8,14 +8,16 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ICarrierConfigChangeListener extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.ICarrierConfigChangeListener";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.ICarrierConfigChangeListener";
 
     void onCarrierConfigChanged(int i, int i2, int i3, int i4) throws RemoteException;
 
     public static class Default implements ICarrierConfigChangeListener {
         @Override // com.android.internal.telephony.ICarrierConfigChangeListener
-        public void onCarrierConfigChanged(int slotIndex, int subId, int carrierId, int specificCarrierId) throws RemoteException {
-        }
+        public void onCarrierConfigChanged(
+                int slotIndex, int subId, int carrierId, int specificCarrierId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,7 @@ public interface ICarrierConfigChangeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICarrierConfigChangeListener {
+    public abstract static class Stub extends Binder implements ICarrierConfigChangeListener {
         static final int TRANSACTION_onCarrierConfigChanged = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface ICarrierConfigChangeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICarrierConfigChangeListener.DESCRIPTOR);
             }
@@ -100,7 +103,9 @@ public interface ICarrierConfigChangeListener extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ICarrierConfigChangeListener
-            public void onCarrierConfigChanged(int slotIndex, int subId, int carrierId, int specificCarrierId) throws RemoteException {
+            public void onCarrierConfigChanged(
+                    int slotIndex, int subId, int carrierId, int specificCarrierId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICarrierConfigChangeListener.DESCRIPTOR);

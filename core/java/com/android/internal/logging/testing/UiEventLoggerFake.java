@@ -2,6 +2,7 @@ package com.android.internal.logging.testing;
 
 import com.android.internal.logging.InstanceId;
 import com.android.internal.logging.UiEventLogger;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -76,7 +77,8 @@ public class UiEventLoggerFake implements UiEventLogger {
     }
 
     @Override // com.android.internal.logging.UiEventLogger
-    public void logWithInstanceId(UiEventLogger.UiEventEnum event, int uid, String packageName, InstanceId instance) {
+    public void logWithInstanceId(
+            UiEventLogger.UiEventEnum event, int uid, String packageName, InstanceId instance) {
         int eventId = event.getId();
         if (eventId > 0) {
             this.mLogs.add(new FakeUiEvent(eventId, uid, packageName, instance));
@@ -84,7 +86,8 @@ public class UiEventLoggerFake implements UiEventLogger {
     }
 
     @Override // com.android.internal.logging.UiEventLogger
-    public void logWithPosition(UiEventLogger.UiEventEnum event, int uid, String packageName, int position) {
+    public void logWithPosition(
+            UiEventLogger.UiEventEnum event, int uid, String packageName, int position) {
         int eventId = event.getId();
         if (eventId > 0) {
             this.mLogs.add(new FakeUiEvent(eventId, uid, packageName, null, position));
@@ -92,7 +95,12 @@ public class UiEventLoggerFake implements UiEventLogger {
     }
 
     @Override // com.android.internal.logging.UiEventLogger
-    public void logWithInstanceIdAndPosition(UiEventLogger.UiEventEnum event, int uid, String packageName, InstanceId instance, int position) {
+    public void logWithInstanceIdAndPosition(
+            UiEventLogger.UiEventEnum event,
+            int uid,
+            String packageName,
+            InstanceId instance,
+            int position) {
         int eventId = event.getId();
         if (eventId > 0) {
             this.mLogs.add(new FakeUiEvent(eventId, uid, packageName, instance, position));

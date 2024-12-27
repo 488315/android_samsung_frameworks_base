@@ -2,7 +2,7 @@ package com.android.server.people.data;
 
 import android.net.Uri;
 import android.util.ArrayMap;
-import com.android.server.people.data.EventHistoryImpl;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -52,7 +52,8 @@ public final class EventStore {
     }
 
     public final synchronized void deleteEventHistory(int i, String str) {
-        EventHistoryImpl eventHistoryImpl = (EventHistoryImpl) ((Map) ((ArrayList) this.mEventHistoryMaps).get(i)).remove(str);
+        EventHistoryImpl eventHistoryImpl =
+                (EventHistoryImpl) ((Map) ((ArrayList) this.mEventHistoryMaps).get(i)).remove(str);
         if (eventHistoryImpl != null) {
             eventHistoryImpl.onDestroy();
         }
@@ -62,17 +63,32 @@ public final class EventStore {
         return (EventHistory) ((Map) ((ArrayList) this.mEventHistoryMaps).get(i)).get(str);
     }
 
-    public final synchronized EventHistoryImpl getOrCreateEventHistory(final int i, final String str) {
-        return (EventHistoryImpl) ((Map) ((ArrayList) this.mEventHistoryMaps).get(i)).computeIfAbsent(str, new Function() { // from class: com.android.server.people.data.EventStore$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                EventStore eventStore = EventStore.this;
-                int i2 = i;
-                String str2 = str;
-                eventStore.getClass();
-                return new EventHistoryImpl(new EventHistoryImpl.Injector(), new File((File) ((ArrayList) eventStore.mEventsCategoryDirs).get(i2), Uri.encode(str2)), eventStore.mScheduledExecutorService);
-            }
-        });
+    public final synchronized EventHistoryImpl getOrCreateEventHistory(
+            final int i, final String str) {
+        return (EventHistoryImpl)
+                ((Map) ((ArrayList) this.mEventHistoryMaps).get(i))
+                        .computeIfAbsent(
+                                str,
+                                new Function() { // from class:
+                                                 // com.android.server.people.data.EventStore$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        EventStore eventStore = EventStore.this;
+                                        int i2 = i;
+                                        String str2 = str;
+                                        eventStore.getClass();
+                                        return new EventHistoryImpl(
+                                                new EventHistoryImpl.Injector(),
+                                                new File(
+                                                        (File)
+                                                                ((ArrayList)
+                                                                                eventStore
+                                                                                        .mEventsCategoryDirs)
+                                                                        .get(i2),
+                                                        Uri.encode(str2)),
+                                                eventStore.mScheduledExecutorService);
+                                    }
+                                });
     }
 
     public final synchronized void pruneOrphanEventHistories(int i, Predicate predicate) {
@@ -87,7 +103,8 @@ public final class EventStore {
             Map map = (Map) ((ArrayList) this.mEventHistoryMaps).get(i);
             Iterator it = arrayList.iterator();
             while (it.hasNext()) {
-                EventHistoryImpl eventHistoryImpl = (EventHistoryImpl) map.remove((String) it.next());
+                EventHistoryImpl eventHistoryImpl =
+                        (EventHistoryImpl) map.remove((String) it.next());
                 if (eventHistoryImpl != null) {
                     eventHistoryImpl.onDestroy();
                 }

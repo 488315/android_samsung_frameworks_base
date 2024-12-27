@@ -2,9 +2,11 @@ package com.android.server.biometrics.sensors.face;
 
 import android.R;
 import android.hardware.face.Face;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.biometrics.sensors.BiometricUserState;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -68,7 +70,11 @@ public final class FaceUserState extends BiometricUserState {
                 return;
             }
             if (next != 3 && next != 4 && typedXmlPullParser.getName().equals("face")) {
-                this.mBiometrics.add(new Face(typedXmlPullParser.getAttributeValue((String) null, "name"), typedXmlPullParser.getAttributeInt((String) null, "faceId"), typedXmlPullParser.getAttributeLong((String) null, "deviceId")));
+                this.mBiometrics.add(
+                        new Face(
+                                typedXmlPullParser.getAttributeValue((String) null, "name"),
+                                typedXmlPullParser.getAttributeInt((String) null, "faceId"),
+                                typedXmlPullParser.getAttributeLong((String) null, "deviceId")));
             }
         }
     }

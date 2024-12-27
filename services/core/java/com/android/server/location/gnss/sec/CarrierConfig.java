@@ -1,10 +1,13 @@
 package com.android.server.location.gnss.sec;
 
 import android.os.SystemProperties;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.analytics.activation.ActivationMonitor;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -172,7 +175,16 @@ public final class CarrierConfig {
             SWA_IND = carrier48;
             Carrier carrier49 = new Carrier("NO_OPERATOR", 48);
             NO_OPERATOR = carrier49;
-            $VALUES = new Carrier[]{carrier, carrier2, carrier3, carrier4, carrier5, carrier6, carrier7, carrier8, carrier9, carrier10, carrier11, carrier12, carrier13, carrier14, carrier15, carrier16, carrier17, carrier18, carrier19, carrier20, carrier21, carrier22, carrier23, carrier24, carrier25, carrier26, carrier27, carrier28, carrier29, carrier30, carrier31, carrier32, carrier33, carrier34, carrier35, carrier36, carrier37, carrier38, carrier39, carrier40, carrier41, carrier42, carrier43, carrier44, carrier45, carrier46, carrier47, carrier48, carrier49};
+            $VALUES =
+                    new Carrier[] {
+                        carrier, carrier2, carrier3, carrier4, carrier5, carrier6, carrier7,
+                        carrier8, carrier9, carrier10, carrier11, carrier12, carrier13, carrier14,
+                        carrier15, carrier16, carrier17, carrier18, carrier19, carrier20, carrier21,
+                        carrier22, carrier23, carrier24, carrier25, carrier26, carrier27, carrier28,
+                        carrier29, carrier30, carrier31, carrier32, carrier33, carrier34, carrier35,
+                        carrier36, carrier37, carrier38, carrier39, carrier40, carrier41, carrier42,
+                        carrier43, carrier44, carrier45, carrier46, carrier47, carrier48, carrier49
+                    };
         }
 
         public static Carrier valueOf(String str) {
@@ -288,11 +300,22 @@ public final class CarrierConfig {
     }
 
     public static boolean isCanadaConfigRequired(Carrier carrier) {
-        return carrier == Carrier.USA_TFA || carrier == Carrier.USA_TFC || carrier == Carrier.USA_AIO || carrier == Carrier.CAD_BMC || carrier == Carrier.CAD_RWC || carrier == Carrier.CAD_TLS || carrier == Carrier.CAD_XAC;
+        return carrier == Carrier.USA_TFA
+                || carrier == Carrier.USA_TFC
+                || carrier == Carrier.USA_AIO
+                || carrier == Carrier.CAD_BMC
+                || carrier == Carrier.CAD_RWC
+                || carrier == Carrier.CAD_TLS
+                || carrier == Carrier.CAD_XAC;
     }
 
     public static boolean isTmbConfigRequired(Carrier carrier) {
-        return carrier == Carrier.USA_TMO || carrier == Carrier.USA_TFO || carrier == Carrier.USA_DSH || carrier == Carrier.USA_TMK || carrier == Carrier.USA_XAU || carrier == Carrier.USA_XAG;
+        return carrier == Carrier.USA_TMO
+                || carrier == Carrier.USA_TFO
+                || carrier == Carrier.USA_DSH
+                || carrier == Carrier.USA_TMK
+                || carrier == Carrier.USA_XAU
+                || carrier == Carrier.USA_XAG;
     }
 
     public final Carrier getCarrier() {
@@ -312,7 +335,8 @@ public final class CarrierConfig {
                     return carrier;
             }
         }
-        return (Carrier) this.mSalesCodeToCarrierMap.getOrDefault(this.mSalesCode, Carrier.NO_OPERATOR);
+        return (Carrier)
+                this.mSalesCodeToCarrierMap.getOrDefault(this.mSalesCode, Carrier.NO_OPERATOR);
     }
 
     public final HashMap getConfigMap() {
@@ -320,7 +344,10 @@ public final class CarrierConfig {
         boolean z;
         this.mExtraConfigHashMap.clear();
         Carrier carrier = getCarrier();
-        if (carrier == Carrier.USA_ATT || carrier == Carrier.USA_XAR || carrier == Carrier.USA_DSA || carrier == Carrier.USA_DSG) {
+        if (carrier == Carrier.USA_ATT
+                || carrier == Carrier.USA_XAR
+                || carrier == Carrier.USA_DSA
+                || carrier == Carrier.USA_DSG) {
             this.mExtraConfigHashMap.put("CP_LPP_GUARD_TIME_SEC", "2");
             this.mExtraConfigHashMap.put("REAIDING_INTERVAL_SEC", "7200");
             this.mExtraConfigHashMap.put("AUTO_SUPL_VERSION_FOR_NI", "FALSE");
@@ -400,7 +427,10 @@ public final class CarrierConfig {
                 this.mExtraConfigHashMap.put("SUPL_MULTI_LOCID_CAPABLE", "TRUE");
                 this.mExtraConfigHashMap.put("SUPL_LPPE_CAPABLE", "TRUE");
             } else {
-                if (carrier == Carrier.USA_SPR || carrier == Carrier.USA_XAS || carrier == Carrier.USA_BST || carrier == Carrier.USA_VMU) {
+                if (carrier == Carrier.USA_SPR
+                        || carrier == Carrier.USA_XAS
+                        || carrier == Carrier.USA_BST
+                        || carrier == Carrier.USA_VMU) {
                     obj = "SUPL_UT2_SEC";
                     z = true;
                 } else {
@@ -426,12 +456,16 @@ public final class CarrierConfig {
                         this.mExtraConfigHashMap.put("SUPL_LPP_CAPABLE", "TRUE");
                         this.mExtraConfigHashMap.put("SUPL_USE_APN", "TRUE");
                     } else {
-                        if (carrier == Carrier.MEX_MNX || carrier == Carrier.MEX_IUS || carrier == Carrier.MEX_UNE) {
+                        if (carrier == Carrier.MEX_MNX
+                                || carrier == Carrier.MEX_IUS
+                                || carrier == Carrier.MEX_UNE) {
                             this.mExtraConfigHashMap.put("SUPL_ECID_CAPABLE", "TRUE");
                             this.mExtraConfigHashMap.put("SUPL_LPP_CAPABLE", "TRUE");
                             this.mExtraConfigHashMap.put("SUPL_USE_APN", "TRUE");
                             this.mExtraConfigHashMap.put("USE_NI_SLP_ADDRESS", "TRUE");
-                        } else if (carrier == Carrier.PER_PEO || carrier == Carrier.PER_PET || carrier == Carrier.PER_PNT) {
+                        } else if (carrier == Carrier.PER_PEO
+                                || carrier == Carrier.PER_PET
+                                || carrier == Carrier.PER_PNT) {
                             this.mExtraConfigHashMap.put("USE_NI_SLP_ADDRESS", "TRUE");
                         } else if (carrier == Carrier.SWA_IND) {
                             this.mExtraConfigHashMap.put("ENABLE_NAVIC", "TRUE");
@@ -445,8 +479,10 @@ public final class CarrierConfig {
                             this.mExtraConfigHashMap.put("SUPL_LPP_CAPABLE", "TRUE");
                             this.mExtraConfigHashMap.put("USE_NI_SLP_ADDRESS", "TRUE");
                             this.mExtraConfigHashMap.put("SUPL_VER_SKT_NI", "FALSE");
-                            this.mExtraConfigHashMap.put("ALLOW_SUPL_IGNORE_NFW_LOCATION_POLICY", "TRUE");
-                            this.mExtraConfigHashMap.put("ALLOW_CP_IGNORE_NFW_LOCATION_POLICY", "TRUE");
+                            this.mExtraConfigHashMap.put(
+                                    "ALLOW_SUPL_IGNORE_NFW_LOCATION_POLICY", "TRUE");
+                            this.mExtraConfigHashMap.put(
+                                    "ALLOW_CP_IGNORE_NFW_LOCATION_POLICY", "TRUE");
                         } else if (carrier == Carrier.KOR_KTT) {
                             this.mExtraConfigHashMap.put("SUPL_OTDOA_CAPABLE", "FALSE");
                             this.mExtraConfigHashMap.put("SUPL_ECID_CAPABLE", "TRUE");
@@ -454,23 +490,28 @@ public final class CarrierConfig {
                             this.mExtraConfigHashMap.put("SUPL_LPPE_CAPABLE", "TRUE");
                             this.mExtraConfigHashMap.put("USE_NI_SLP_ADDRESS", "TRUE");
                             this.mExtraConfigHashMap.put("SUPL_VER_SKT_NI", "FALSE");
-                            this.mExtraConfigHashMap.put("ALLOW_SUPL_IGNORE_NFW_LOCATION_POLICY", "TRUE");
-                            this.mExtraConfigHashMap.put("ALLOW_CP_IGNORE_NFW_LOCATION_POLICY", "TRUE");
+                            this.mExtraConfigHashMap.put(
+                                    "ALLOW_SUPL_IGNORE_NFW_LOCATION_POLICY", "TRUE");
+                            this.mExtraConfigHashMap.put(
+                                    "ALLOW_CP_IGNORE_NFW_LOCATION_POLICY", "TRUE");
                         } else if (carrier == Carrier.KOR_SKT) {
                             this.mExtraConfigHashMap.put("SUPL_OTDOA_CAPABLE", "FALSE");
                             this.mExtraConfigHashMap.put("SUPL_ECID_CAPABLE", "TRUE");
                             this.mExtraConfigHashMap.put("SUPL_LPP_CAPABLE", "TRUE");
                             this.mExtraConfigHashMap.put("USE_NI_SLP_ADDRESS", "FALSE");
                             this.mExtraConfigHashMap.put("SUPL_VER_SKT_NI", "TRUE");
-                            this.mExtraConfigHashMap.put("ALLOW_SUPL_IGNORE_NFW_LOCATION_POLICY", "TRUE");
-                            this.mExtraConfigHashMap.put("ALLOW_CP_IGNORE_NFW_LOCATION_POLICY", "TRUE");
+                            this.mExtraConfigHashMap.put(
+                                    "ALLOW_SUPL_IGNORE_NFW_LOCATION_POLICY", "TRUE");
+                            this.mExtraConfigHashMap.put(
+                                    "ALLOW_CP_IGNORE_NFW_LOCATION_POLICY", "TRUE");
                         } else if (carrier == Carrier.CHN_CMC) {
                             this.mExtraConfigHashMap.put("REAIDING_INTERVAL_SEC", "600");
                             this.mExtraConfigHashMap.put("SUPL_LOG_ENABLE", "TRUE");
                             this.mExtraConfigHashMap.put("SUPL_LOG_PATH", "/data/AGPSLog.txt");
                             this.mExtraConfigHashMap.put("SUPL_NI_GPS_ICON", "TRUE");
                             this.mExtraConfigHashMap.put("NO_DATA_STANDALONE", "TRUE");
-                            this.mExtraConfigHashMap.put("VENDOR_LBS_XTRA_SET_WITH_EE_IGNORE", "TRUE");
+                            this.mExtraConfigHashMap.put(
+                                    "VENDOR_LBS_XTRA_SET_WITH_EE_IGNORE", "TRUE");
                         } else if (carrier == Carrier.JPN_DCM) {
                             this.mExtraConfigHashMap.put("SUPL_UT1_SEC", "10");
                             this.mExtraConfigHashMap.put(obj, "10");
@@ -510,19 +551,42 @@ public final class CarrierConfig {
         StringBuilder sb = new StringBuilder("isCaMarket : code/country_Code/countryISO_Code = ");
         DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, this.mSalesCode, "/", str, "/");
         VpnManagerService$$ExternalSyntheticOutline0.m(sb, str2, "CarrierConfigForGnss");
-        boolean z = "BMC".equals(this.mSalesCode) || "RWC".equals(this.mSalesCode) || "TLS".equals(this.mSalesCode) || "SJR".equals(this.mSalesCode) || "XAC".equals(this.mSalesCode) || "Canada".equals(str) || "CA".equals(str2);
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isCaMarket : ", "CarrierConfigForGnss", z);
+        boolean z =
+                "BMC".equals(this.mSalesCode)
+                        || "RWC".equals(this.mSalesCode)
+                        || "TLS".equals(this.mSalesCode)
+                        || "SJR".equals(this.mSalesCode)
+                        || "XAC".equals(this.mSalesCode)
+                        || "Canada".equals(str)
+                        || "CA".equals(str2);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isCaMarket : ", "CarrierConfigForGnss", z);
         return z;
     }
 
     public final boolean isChinaCarrier() {
         Carrier carrier = this.mCarrier;
-        return carrier == Carrier.CHN_CHN || carrier == Carrier.CHN_CHU || carrier == Carrier.CHN_CHC || carrier == Carrier.CHN_CMC || carrier == Carrier.CHN_CTC;
+        return carrier == Carrier.CHN_CHN
+                || carrier == Carrier.CHN_CHU
+                || carrier == Carrier.CHN_CHC
+                || carrier == Carrier.CHN_CMC
+                || carrier == Carrier.CHN_CTC;
     }
 
     public final boolean isKoreaMarket() {
-        boolean z = "SKT".equals(this.mSalesCode) || "SKC".equals(this.mSalesCode) || "SKO".equals(this.mSalesCode) || "LGT".equals(this.mSalesCode) || "LUC".equals(this.mSalesCode) || "LUO".equals(this.mSalesCode) || "KTT".equals(this.mSalesCode) || "KTC".equals(this.mSalesCode) || "KTO".equals(this.mSalesCode) || "KOO".equals(this.mSalesCode);
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isKORMarket : ", "CarrierConfigForGnss", z);
+        boolean z =
+                "SKT".equals(this.mSalesCode)
+                        || "SKC".equals(this.mSalesCode)
+                        || "SKO".equals(this.mSalesCode)
+                        || "LGT".equals(this.mSalesCode)
+                        || "LUC".equals(this.mSalesCode)
+                        || "LUO".equals(this.mSalesCode)
+                        || "KTT".equals(this.mSalesCode)
+                        || "KTC".equals(this.mSalesCode)
+                        || "KTO".equals(this.mSalesCode)
+                        || "KOO".equals(this.mSalesCode);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isKORMarket : ", "CarrierConfigForGnss", z);
         return z;
     }
 
@@ -536,8 +600,33 @@ public final class CarrierConfig {
         StringBuilder sb = new StringBuilder("isUSAMarket : code/country_Code/countryISO_Code = ");
         DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, this.mSalesCode, "/", str, "/");
         VpnManagerService$$ExternalSyntheticOutline0.m(sb, str2, "CarrierConfigForGnss");
-        boolean z = "TMB".equals(this.mSalesCode) || "ATT".equals(this.mSalesCode) || "TFA".equals(this.mSalesCode) || "TFO".equals(this.mSalesCode) || "TFN".equals(this.mSalesCode) || "TFC".equals(this.mSalesCode) || "AIO".equals(this.mSalesCode) || "TMK".equals(this.mSalesCode) || "DSH".equals(this.mSalesCode) || "DSA".equals(this.mSalesCode) || "DSG".equals(this.mSalesCode) || "XAU".equals(this.mSalesCode) || "XAR".equals(this.mSalesCode) || "XAG".equals(this.mSalesCode) || "XAA".equals(this.mSalesCode) || "VZW".equals(this.mSalesCode) || "SPR".equals(this.mSalesCode) || "USC".equals(this.mSalesCode) || "ACG".equals(this.mSalesCode) || "BST".equals(this.mSalesCode) || "VMU".equals(this.mSalesCode) || "XAS".equals(this.mSalesCode) || "USA".equals(str) || "US".equals(str2);
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isUSAMarket : ", "CarrierConfigForGnss", z);
+        boolean z =
+                "TMB".equals(this.mSalesCode)
+                        || "ATT".equals(this.mSalesCode)
+                        || "TFA".equals(this.mSalesCode)
+                        || "TFO".equals(this.mSalesCode)
+                        || "TFN".equals(this.mSalesCode)
+                        || "TFC".equals(this.mSalesCode)
+                        || "AIO".equals(this.mSalesCode)
+                        || "TMK".equals(this.mSalesCode)
+                        || "DSH".equals(this.mSalesCode)
+                        || "DSA".equals(this.mSalesCode)
+                        || "DSG".equals(this.mSalesCode)
+                        || "XAU".equals(this.mSalesCode)
+                        || "XAR".equals(this.mSalesCode)
+                        || "XAG".equals(this.mSalesCode)
+                        || "XAA".equals(this.mSalesCode)
+                        || "VZW".equals(this.mSalesCode)
+                        || "SPR".equals(this.mSalesCode)
+                        || "USC".equals(this.mSalesCode)
+                        || "ACG".equals(this.mSalesCode)
+                        || "BST".equals(this.mSalesCode)
+                        || "VMU".equals(this.mSalesCode)
+                        || "XAS".equals(this.mSalesCode)
+                        || "USA".equals(str)
+                        || "US".equals(str2);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isUSAMarket : ", "CarrierConfigForGnss", z);
         return z;
     }
 

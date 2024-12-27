@@ -22,7 +22,8 @@ public class DisableImageView extends ImageView {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public DisableImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public DisableImageView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         ColorMatrix brightnessMatrix = new ColorMatrix();
         int brightnessI = (int) (255.0f * 0.5f);

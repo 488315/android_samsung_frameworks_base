@@ -1,7 +1,5 @@
 package android.media;
 
-import android.media.IRemoteDisplayCallback;
-import android.media.MediaMetrics;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -24,28 +22,22 @@ public interface IRemoteDisplayProvider extends IInterface {
 
     public static class Default implements IRemoteDisplayProvider {
         @Override // android.media.IRemoteDisplayProvider
-        public void setCallback(IRemoteDisplayCallback callback) throws RemoteException {
-        }
+        public void setCallback(IRemoteDisplayCallback callback) throws RemoteException {}
 
         @Override // android.media.IRemoteDisplayProvider
-        public void setDiscoveryMode(int mode) throws RemoteException {
-        }
+        public void setDiscoveryMode(int mode) throws RemoteException {}
 
         @Override // android.media.IRemoteDisplayProvider
-        public void connect(String id) throws RemoteException {
-        }
+        public void connect(String id) throws RemoteException {}
 
         @Override // android.media.IRemoteDisplayProvider
-        public void disconnect(String id) throws RemoteException {
-        }
+        public void disconnect(String id) throws RemoteException {}
 
         @Override // android.media.IRemoteDisplayProvider
-        public void setVolume(String id, int volume) throws RemoteException {
-        }
+        public void setVolume(String id, int volume) throws RemoteException {}
 
         @Override // android.media.IRemoteDisplayProvider
-        public void adjustVolume(String id, int delta) throws RemoteException {
-        }
+        public void adjustVolume(String id, int delta) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -53,7 +45,7 @@ public interface IRemoteDisplayProvider extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteDisplayProvider {
+    public abstract static class Stub extends Binder implements IRemoteDisplayProvider {
         public static final String DESCRIPTOR = "android.media.IRemoteDisplayProvider";
         static final int TRANSACTION_adjustVolume = 6;
         static final int TRANSACTION_connect = 3;
@@ -107,7 +99,8 @@ public interface IRemoteDisplayProvider extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -117,7 +110,8 @@ public interface IRemoteDisplayProvider extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IRemoteDisplayCallback _arg0 = IRemoteDisplayCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteDisplayCallback _arg0 =
+                            IRemoteDisplayCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg0);
                     return true;

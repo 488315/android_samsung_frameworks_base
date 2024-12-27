@@ -12,10 +12,12 @@ import android.util.SparseArray;
 import android.view.Display;
 import android.view.WindowManager;
 import android.view.WindowMetrics;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.wm.WindowManagerInternal;
 import com.android.window.flags.Flags;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -44,12 +46,17 @@ public final class WallpaperDisplayHelper {
         }
     }
 
-    public WallpaperDisplayHelper(DisplayManager displayManager, WindowManager windowManager, WindowManagerInternal windowManagerInternal, boolean z) {
+    public WallpaperDisplayHelper(
+            DisplayManager displayManager,
+            WindowManager windowManager,
+            WindowManagerInternal windowManagerInternal,
+            boolean z) {
         this.mDisplayManager = displayManager;
         this.mWindowManagerInternal = windowManagerInternal;
         this.mIsFoldable = z;
         if (Flags.multiCrop()) {
-            Set<WindowMetrics> possibleMaximumWindowMetrics = windowManager.getPossibleMaximumWindowMetrics(0);
+            Set<WindowMetrics> possibleMaximumWindowMetrics =
+                    windowManager.getPossibleMaximumWindowMetrics(0);
             boolean z2 = z && possibleMaximumWindowMetrics.size() == 2;
             int i = -1;
             float f = 0.0f;
@@ -66,13 +73,27 @@ public final class WallpaperDisplayHelper {
                 this.mIsLargeScreen |= ((float) point.x) / windowMetrics.getDensity() >= 600.0f;
                 if (z2) {
                     int orientation2 = WallpaperManager.getOrientation(point);
-                    float density = (point.x * point.y) / (windowMetrics.getDensity() * windowMetrics.getDensity());
+                    float density =
+                            (point.x * point.y)
+                                    / (windowMetrics.getDensity() * windowMetrics.getDensity());
                     if (f <= FullScreenMagnificationGestureHandler.MAX_SCALE) {
                         i = orientation2;
                         f = density;
                     } else {
-                        Pair pair = density > f ? new Pair(Integer.valueOf(i), Integer.valueOf(orientation2)) : new Pair(Integer.valueOf(orientation2), Integer.valueOf(i));
-                        Pair pair2 = new Pair(Integer.valueOf(WallpaperManager.getRotatedOrientation(((Integer) pair.first).intValue())), Integer.valueOf(WallpaperManager.getRotatedOrientation(((Integer) pair.second).intValue())));
+                        Pair pair =
+                                density > f
+                                        ? new Pair(
+                                                Integer.valueOf(i), Integer.valueOf(orientation2))
+                                        : new Pair(
+                                                Integer.valueOf(orientation2), Integer.valueOf(i));
+                        Pair pair2 =
+                                new Pair(
+                                        Integer.valueOf(
+                                                WallpaperManager.getRotatedOrientation(
+                                                        ((Integer) pair.first).intValue())),
+                                        Integer.valueOf(
+                                                WallpaperManager.getRotatedOrientation(
+                                                        ((Integer) pair.second).intValue())));
                         ((ArrayList) this.mFoldableOrientationPairs).add(pair);
                         ((ArrayList) this.mFoldableOrientationPairs).add(pair2);
                     }
@@ -116,7 +137,8 @@ public final class WallpaperDisplayHelper {
     public final int getMaximumSizeDimension(int i) {
         Display display = this.mDisplayManager.getDisplay(i);
         if (display == null) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Invalid displayId=", " ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(i, "Invalid displayId=", " ");
             m.append(Debug.getCallers(4));
             Slog.w("WallpaperDisplayHelper", m.toString());
             display = this.mDisplayManager.getDisplay(0);

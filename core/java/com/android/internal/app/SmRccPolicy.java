@@ -11,6 +11,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -44,8 +45,10 @@ public final class SmRccPolicy {
     private static volatile SmRccPolicy sInstance;
     private Context mContext;
     private Handler mHandler;
-    private static final Uri RCC_APP_CONTENT_URI = Uri.parse("content://com.samsung.android.sm.rcc/SmRccApps");
-    private static final Uri RCC_APP_AUTHORITY_URI = Uri.parse("content://com.samsung.android.sm.rcc");
+    private static final Uri RCC_APP_CONTENT_URI =
+            Uri.parse("content://com.samsung.android.sm.rcc/SmRccApps");
+    private static final Uri RCC_APP_AUTHORITY_URI =
+            Uri.parse("content://com.samsung.android.sm.rcc");
     private static Map<String, RccApp> mRccPkgMap = new ConcurrentHashMap();
 
     public static SmRccPolicy getInstance(Context context) {
@@ -65,12 +68,14 @@ public final class SmRccPolicy {
         HandlerThread thread = new HandlerThread("RccAppThread");
         thread.start();
         this.mHandler = new MyHandler(thread.getLooper());
-        this.mHandler.post(new Runnable() { // from class: com.android.internal.app.SmRccPolicy$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                SmRccPolicy.this.lambda$new$0();
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.internal.app.SmRccPolicy$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SmRccPolicy.this.lambda$new$0();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -78,7 +83,9 @@ public final class SmRccPolicy {
     public void lambda$new$0() {
         try {
             RccAppDBObserver rccDBObserver = new RccAppDBObserver(this.mHandler);
-            this.mContext.getContentResolver().registerContentObserver(RCC_APP_CONTENT_URI, true, rccDBObserver);
+            this.mContext
+                    .getContentResolver()
+                    .registerContentObserver(RCC_APP_CONTENT_URI, true, rccDBObserver);
             Slog.i(TAG, "registerRccDBObserver");
         } catch (Exception e) {
             Slog.e(TAG, "registerRccDBObserver error", e);
@@ -184,12 +191,16 @@ public final class SmRccPolicy {
         Slog.i(TAG, "loadRccAppFromSm: ");
         mRccPkgMap.clear();
         try {
-            Cursor cursor = this.mContext.getContentResolver().query(RCC_APP_CONTENT_URI, null, null, null, null);
+            Cursor cursor =
+                    this.mContext
+                            .getContentResolver()
+                            .query(RCC_APP_CONTENT_URI, null, null, null, null);
             if (cursor != null) {
                 try {
                     if (!cursor.isClosed()) {
                         while (cursor.moveToNext()) {
-                            String pkgName = cursor.getString(cursor.getColumnIndex("package_name"));
+                            String pkgName =
+                                    cursor.getString(cursor.getColumnIndex("package_name"));
                             String show = cursor.getString(cursor.getColumnIndex("show"));
                             String open = cursor.getString(cursor.getColumnIndex("open"));
                             String restrict = cursor.getString(cursor.getColumnIndex(RESTRICT));
@@ -287,7 +298,9 @@ public final class SmRccPolicy {
             Bundle bundle = new Bundle();
             bundle.putString("package_name", packageName);
             try {
-                this.mContext.getContentResolver().call(RCC_APP_AUTHORITY_URI, RESET_SM_RCC_OPEN, (String) null, bundle);
+                this.mContext
+                        .getContentResolver()
+                        .call(RCC_APP_AUTHORITY_URI, RESET_SM_RCC_OPEN, (String) null, bundle);
                 Slog.d(TAG, "call sm reset rcc open status");
             } catch (Exception e) {
                 Slog.e(TAG, "call sm reset rcc open status error", e);

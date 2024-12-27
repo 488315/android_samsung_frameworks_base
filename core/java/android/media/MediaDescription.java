@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.media.performance.flags.Flags;
 
 /* loaded from: classes2.dex */
@@ -17,19 +18,21 @@ public class MediaDescription implements Parcelable {
     public static final long BT_FOLDER_TYPE_PLAYLISTS = 5;
     public static final long BT_FOLDER_TYPE_TITLES = 1;
     public static final long BT_FOLDER_TYPE_YEARS = 6;
-    public static final Parcelable.Creator<MediaDescription> CREATOR = new Parcelable.Creator<MediaDescription>() { // from class: android.media.MediaDescription.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaDescription createFromParcel(Parcel in) {
-            return new MediaDescription(in);
-        }
+    public static final Parcelable.Creator<MediaDescription> CREATOR =
+            new Parcelable.Creator<
+                    MediaDescription>() { // from class: android.media.MediaDescription.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaDescription createFromParcel(Parcel in) {
+                    return new MediaDescription(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaDescription[] newArray(int size) {
-            return new MediaDescription[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaDescription[] newArray(int size) {
+                    return new MediaDescription[size];
+                }
+            };
     public static final String EXTRA_BT_FOLDER_TYPE = "android.media.extra.BT_FOLDER_TYPE";
     private final CharSequence mDescription;
     private final Bundle mExtras;
@@ -40,7 +43,15 @@ public class MediaDescription implements Parcelable {
     private final CharSequence mSubtitle;
     private final CharSequence mTitle;
 
-    private MediaDescription(String mediaId, CharSequence title, CharSequence subtitle, CharSequence description, Bitmap icon, Uri iconUri, Bundle extras, Uri mediaUri) {
+    private MediaDescription(
+            String mediaId,
+            CharSequence title,
+            CharSequence subtitle,
+            CharSequence description,
+            Bitmap icon,
+            Uri iconUri,
+            Bundle extras,
+            Uri mediaUri) {
         this.mMediaId = mediaId;
         this.mTitle = title;
         this.mSubtitle = subtitle;
@@ -116,14 +127,20 @@ public class MediaDescription implements Parcelable {
             return false;
         }
         MediaDescription d = (MediaDescription) o;
-        if (!String.valueOf(this.mTitle).equals(String.valueOf(d.mTitle)) || !String.valueOf(this.mSubtitle).equals(String.valueOf(d.mSubtitle)) || !String.valueOf(this.mDescription).equals(String.valueOf(d.mDescription))) {
+        if (!String.valueOf(this.mTitle).equals(String.valueOf(d.mTitle))
+                || !String.valueOf(this.mSubtitle).equals(String.valueOf(d.mSubtitle))
+                || !String.valueOf(this.mDescription).equals(String.valueOf(d.mDescription))) {
             return false;
         }
         return true;
     }
 
     public String toString() {
-        return ((Object) this.mTitle) + ", " + ((Object) this.mSubtitle) + ", " + ((Object) this.mDescription);
+        return ((Object) this.mTitle)
+                + ", "
+                + ((Object) this.mSubtitle)
+                + ", "
+                + ((Object) this.mDescription);
     }
 
     public static class Builder {
@@ -179,9 +196,25 @@ public class MediaDescription implements Parcelable {
         public MediaDescription build() {
             if (Flags.mediaDescriptionAshmemBitmap()) {
                 Bitmap icon = this.mIcon != null ? this.mIcon.asShared() : null;
-                return new MediaDescription(this.mMediaId, this.mTitle, this.mSubtitle, this.mDescription, icon, this.mIconUri, this.mExtras, this.mMediaUri);
+                return new MediaDescription(
+                        this.mMediaId,
+                        this.mTitle,
+                        this.mSubtitle,
+                        this.mDescription,
+                        icon,
+                        this.mIconUri,
+                        this.mExtras,
+                        this.mMediaUri);
             }
-            return new MediaDescription(this.mMediaId, this.mTitle, this.mSubtitle, this.mDescription, this.mIcon, this.mIconUri, this.mExtras, this.mMediaUri);
+            return new MediaDescription(
+                    this.mMediaId,
+                    this.mTitle,
+                    this.mSubtitle,
+                    this.mDescription,
+                    this.mIcon,
+                    this.mIconUri,
+                    this.mExtras,
+                    this.mMediaUri);
         }
     }
 }

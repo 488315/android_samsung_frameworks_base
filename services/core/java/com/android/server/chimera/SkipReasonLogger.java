@@ -50,7 +50,22 @@ public final class SkipReasonLogger {
             UID = reason10;
             Reason reason11 = new Reason("ADJ_OR_PROC_STATE", 10);
             ADJ_OR_PROC_STATE = reason11;
-            $VALUES = new Reason[]{reason, reason2, reason3, reason4, reason5, reason6, reason7, reason8, reason9, reason10, reason11, new Reason("KILL_ONLY_ONE_SVC_AT_A_TIME", 11), new Reason("HAS_CONNECTION_PROVIDER", 12)};
+            $VALUES =
+                    new Reason[] {
+                        reason,
+                        reason2,
+                        reason3,
+                        reason4,
+                        reason5,
+                        reason6,
+                        reason7,
+                        reason8,
+                        reason9,
+                        reason10,
+                        reason11,
+                        new Reason("KILL_ONLY_ONE_SVC_AT_A_TIME", 11),
+                        new Reason("HAS_CONNECTION_PROVIDER", 12)
+                    };
         }
 
         public static Reason valueOf(String str) {

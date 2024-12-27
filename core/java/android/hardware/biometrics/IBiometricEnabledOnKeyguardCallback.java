@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IBiometricEnabledOnKeyguardCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.biometrics.IBiometricEnabledOnKeyguardCallback";
+    public static final String DESCRIPTOR =
+            "android.hardware.biometrics.IBiometricEnabledOnKeyguardCallback";
 
     void onChanged(boolean z, int i) throws RemoteException;
 
     public static class Default implements IBiometricEnabledOnKeyguardCallback {
         @Override // android.hardware.biometrics.IBiometricEnabledOnKeyguardCallback
-        public void onChanged(boolean enabled, int userId) throws RemoteException {
-        }
+        public void onChanged(boolean enabled, int userId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,8 @@ public interface IBiometricEnabledOnKeyguardCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBiometricEnabledOnKeyguardCallback {
+    public abstract static class Stub extends Binder
+            implements IBiometricEnabledOnKeyguardCallback {
         static final int TRANSACTION_onChanged = 1;
 
         public Stub() {
@@ -34,7 +35,8 @@ public interface IBiometricEnabledOnKeyguardCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IBiometricEnabledOnKeyguardCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IBiometricEnabledOnKeyguardCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof IBiometricEnabledOnKeyguardCallback)) {
                 return (IBiometricEnabledOnKeyguardCallback) iin;
             }
@@ -61,7 +63,8 @@ public interface IBiometricEnabledOnKeyguardCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBiometricEnabledOnKeyguardCallback.DESCRIPTOR);
             }

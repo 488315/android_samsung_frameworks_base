@@ -2,24 +2,28 @@ package com.samsung.android.sdhms;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public class SemProcessUsageStats implements Parcelable {
-    public static final Parcelable.Creator<SemProcessUsageStats> CREATOR = new Parcelable.Creator<SemProcessUsageStats>() { // from class: com.samsung.android.sdhms.SemProcessUsageStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemProcessUsageStats createFromParcel(Parcel in) {
-            return new SemProcessUsageStats(in);
-        }
+    public static final Parcelable.Creator<SemProcessUsageStats> CREATOR =
+            new Parcelable.Creator<
+                    SemProcessUsageStats>() { // from class:
+                                              // com.samsung.android.sdhms.SemProcessUsageStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemProcessUsageStats createFromParcel(Parcel in) {
+                    return new SemProcessUsageStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemProcessUsageStats[] newArray(int size) {
-            return new SemProcessUsageStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemProcessUsageStats[] newArray(int size) {
+                    return new SemProcessUsageStats[size];
+                }
+            };
     private long cpuTime;
     private long endTime;
     private List<ProcessUsageHistoryItem> procUsageList;
@@ -84,7 +88,13 @@ public class SemProcessUsageStats implements Parcelable {
                 this.procUsageList = new ArrayList();
             }
             if (value == null) {
-                this.procUsageList.add(new ProcessUsageHistoryItem.Builder().processName("").uid(0).pid(0).usage(0L).build());
+                this.procUsageList.add(
+                        new ProcessUsageHistoryItem.Builder()
+                                .processName("")
+                                .uid(0)
+                                .pid(0)
+                                .usage(0L)
+                                .build());
                 return this;
             }
             this.procUsageList.addAll(value);
@@ -127,19 +137,22 @@ public class SemProcessUsageStats implements Parcelable {
     }
 
     public static class ProcessUsageHistoryItem implements Parcelable {
-        public static final Parcelable.Creator<ProcessUsageHistoryItem> CREATOR = new Parcelable.Creator<ProcessUsageHistoryItem>() { // from class: com.samsung.android.sdhms.SemProcessUsageStats.ProcessUsageHistoryItem.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ProcessUsageHistoryItem createFromParcel(Parcel in) {
-                return new ProcessUsageHistoryItem(in);
-            }
+        public static final Parcelable.Creator<ProcessUsageHistoryItem> CREATOR =
+                new Parcelable.Creator<
+                        ProcessUsageHistoryItem>() { // from class:
+                                                     // com.samsung.android.sdhms.SemProcessUsageStats.ProcessUsageHistoryItem.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ProcessUsageHistoryItem createFromParcel(Parcel in) {
+                        return new ProcessUsageHistoryItem(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ProcessUsageHistoryItem[] newArray(int size) {
-                return new ProcessUsageHistoryItem[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ProcessUsageHistoryItem[] newArray(int size) {
+                        return new ProcessUsageHistoryItem[size];
+                    }
+                };
         private int pid;
         private String processName;
         private int uid;

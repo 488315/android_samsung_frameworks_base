@@ -1,6 +1,5 @@
 package android.hardware.gnss;
 
-import android.hardware.gnss.IAGnssRilCallback;
 import android.os.BadParcelableException;
 import android.os.Binder;
 import android.os.IBinder;
@@ -44,20 +43,16 @@ public interface IAGnssRil extends IInterface {
 
     public static class Default implements IAGnssRil {
         @Override // android.hardware.gnss.IAGnssRil
-        public void setCallback(IAGnssRilCallback callback) throws RemoteException {
-        }
+        public void setCallback(IAGnssRilCallback callback) throws RemoteException {}
 
         @Override // android.hardware.gnss.IAGnssRil
-        public void setRefLocation(AGnssRefLocation agnssReflocation) throws RemoteException {
-        }
+        public void setRefLocation(AGnssRefLocation agnssReflocation) throws RemoteException {}
 
         @Override // android.hardware.gnss.IAGnssRil
-        public void setSetId(int type, String setid) throws RemoteException {
-        }
+        public void setSetId(int type, String setid) throws RemoteException {}
 
         @Override // android.hardware.gnss.IAGnssRil
-        public void updateNetworkState(NetworkAttributes attributes) throws RemoteException {
-        }
+        public void updateNetworkState(NetworkAttributes attributes) throws RemoteException {}
 
         @Override // android.hardware.gnss.IAGnssRil
         public int getInterfaceVersion() {
@@ -75,7 +70,7 @@ public interface IAGnssRil extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAGnssRil {
+    public abstract static class Stub extends Binder implements IAGnssRil {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_setCallback = 1;
@@ -129,7 +124,8 @@ public interface IAGnssRil extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -150,13 +146,15 @@ public interface IAGnssRil extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IAGnssRilCallback _arg0 = IAGnssRilCallback.Stub.asInterface(data.readStrongBinder());
+                    IAGnssRilCallback _arg0 =
+                            IAGnssRilCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    AGnssRefLocation _arg02 = (AGnssRefLocation) data.readTypedObject(AGnssRefLocation.CREATOR);
+                    AGnssRefLocation _arg02 =
+                            (AGnssRefLocation) data.readTypedObject(AGnssRefLocation.CREATOR);
                     data.enforceNoDataAvail();
                     setRefLocation(_arg02);
                     reply.writeNoException();
@@ -169,7 +167,8 @@ public interface IAGnssRil extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 4:
-                    NetworkAttributes _arg04 = (NetworkAttributes) data.readTypedObject(NetworkAttributes.CREATOR);
+                    NetworkAttributes _arg04 =
+                            (NetworkAttributes) data.readTypedObject(NetworkAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     updateNetworkState(_arg04);
                     reply.writeNoException();
@@ -317,21 +316,23 @@ public interface IAGnssRil extends IInterface {
     }
 
     public static class AGnssRefLocationCellID implements Parcelable {
-        public static final Parcelable.Creator<AGnssRefLocationCellID> CREATOR = new Parcelable.Creator<AGnssRefLocationCellID>() { // from class: android.hardware.gnss.IAGnssRil.AGnssRefLocationCellID.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AGnssRefLocationCellID createFromParcel(Parcel _aidl_source) {
-                AGnssRefLocationCellID _aidl_out = new AGnssRefLocationCellID();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<AGnssRefLocationCellID> CREATOR =
+                new Parcelable.Creator<AGnssRefLocationCellID>() { // from class:
+                    // android.hardware.gnss.IAGnssRil.AGnssRefLocationCellID.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AGnssRefLocationCellID createFromParcel(Parcel _aidl_source) {
+                        AGnssRefLocationCellID _aidl_out = new AGnssRefLocationCellID();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AGnssRefLocationCellID[] newArray(int _aidl_size) {
-                return new AGnssRefLocationCellID[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AGnssRefLocationCellID[] newArray(int _aidl_size) {
+                        return new AGnssRefLocationCellID[_aidl_size];
+                    }
+                };
         public int type;
         public int mcc = 0;
         public int mnc = 0;
@@ -455,21 +456,23 @@ public interface IAGnssRil extends IInterface {
     }
 
     public static class AGnssRefLocation implements Parcelable {
-        public static final Parcelable.Creator<AGnssRefLocation> CREATOR = new Parcelable.Creator<AGnssRefLocation>() { // from class: android.hardware.gnss.IAGnssRil.AGnssRefLocation.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AGnssRefLocation createFromParcel(Parcel _aidl_source) {
-                AGnssRefLocation _aidl_out = new AGnssRefLocation();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<AGnssRefLocation> CREATOR =
+                new Parcelable.Creator<AGnssRefLocation>() { // from class:
+                    // android.hardware.gnss.IAGnssRil.AGnssRefLocation.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AGnssRefLocation createFromParcel(Parcel _aidl_source) {
+                        AGnssRefLocation _aidl_out = new AGnssRefLocation();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AGnssRefLocation[] newArray(int _aidl_size) {
-                return new AGnssRefLocation[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AGnssRefLocation[] newArray(int _aidl_size) {
+                        return new AGnssRefLocation[_aidl_size];
+                    }
+                };
         public AGnssRefLocationCellID cellID;
         public int type;
 
@@ -511,7 +514,9 @@ public interface IAGnssRil extends IInterface {
                     }
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 } else {
-                    this.cellID = (AGnssRefLocationCellID) _aidl_parcel.readTypedObject(AGnssRefLocationCellID.CREATOR);
+                    this.cellID =
+                            (AGnssRefLocationCellID)
+                                    _aidl_parcel.readTypedObject(AGnssRefLocationCellID.CREATOR);
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
@@ -541,21 +546,23 @@ public interface IAGnssRil extends IInterface {
     }
 
     public static class NetworkAttributes implements Parcelable {
-        public static final Parcelable.Creator<NetworkAttributes> CREATOR = new Parcelable.Creator<NetworkAttributes>() { // from class: android.hardware.gnss.IAGnssRil.NetworkAttributes.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public NetworkAttributes createFromParcel(Parcel _aidl_source) {
-                NetworkAttributes _aidl_out = new NetworkAttributes();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<NetworkAttributes> CREATOR =
+                new Parcelable.Creator<NetworkAttributes>() { // from class:
+                    // android.hardware.gnss.IAGnssRil.NetworkAttributes.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public NetworkAttributes createFromParcel(Parcel _aidl_source) {
+                        NetworkAttributes _aidl_out = new NetworkAttributes();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public NetworkAttributes[] newArray(int _aidl_size) {
-                return new NetworkAttributes[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public NetworkAttributes[] newArray(int _aidl_size) {
+                        return new NetworkAttributes[_aidl_size];
+                    }
+                };
         public String apn;
         public long networkHandle = 0;
         public boolean isConnected = false;

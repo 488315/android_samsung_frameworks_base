@@ -12,7 +12,13 @@ public class DownloadEvent extends FilterEvent {
     private final int mLastItemFragmentIndex;
     private final int mMpuSequenceNumber;
 
-    private DownloadEvent(int itemId, int downloadId, int mpuSequenceNumber, int itemFragmentIndex, int lastItemFragmentIndex, int dataLength) {
+    private DownloadEvent(
+            int itemId,
+            int downloadId,
+            int mpuSequenceNumber,
+            int itemFragmentIndex,
+            int lastItemFragmentIndex,
+            int dataLength) {
         this.mItemId = itemId;
         this.mDownloadId = downloadId;
         this.mMpuSequenceNumber = mpuSequenceNumber;

@@ -4,7 +4,9 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.analytics.KnoxAnalyticsData;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -25,14 +27,21 @@ public final class SeparatedAppsAnalytics {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                j = iKnoxAnalyticsContainerImpl.getUserManager().getUserInfo(iKnoxAnalyticsContainerImpl.personaManagerService.getAppSeparationId()).creationTime;
+                j =
+                        iKnoxAnalyticsContainerImpl
+                                .getUserManager()
+                                .getUserInfo(
+                                        iKnoxAnalyticsContainerImpl.personaManagerService
+                                                .getAppSeparationId())
+                                .creationTime;
             } catch (Exception e) {
                 e.printStackTrace();
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 j = 0;
             }
             bundle.putLong("id", j);
-            KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_APP_SEPARATION", 1, str);
+            KnoxAnalyticsData knoxAnalyticsData =
+                    new KnoxAnalyticsData("KNOX_APP_SEPARATION", 1, str);
             for (String str2 : bundle.keySet()) {
                 Object obj = bundle.get(str2);
                 if (obj instanceof Integer) {

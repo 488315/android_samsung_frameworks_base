@@ -6,6 +6,7 @@ import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOut
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,11 +29,26 @@ public final class PortStatus {
             return false;
         }
         PortStatus portStatus = (PortStatus) obj;
-        return HidlSupport.deepEquals(this.portName, portStatus.portName) && this.currentDataRole == portStatus.currentDataRole && this.currentPowerRole == portStatus.currentPowerRole && this.currentMode == portStatus.currentMode && this.canChangeMode == portStatus.canChangeMode && this.canChangeDataRole == portStatus.canChangeDataRole && this.canChangePowerRole == portStatus.canChangePowerRole && this.supportedModes == portStatus.supportedModes;
+        return HidlSupport.deepEquals(this.portName, portStatus.portName)
+                && this.currentDataRole == portStatus.currentDataRole
+                && this.currentPowerRole == portStatus.currentPowerRole
+                && this.currentMode == portStatus.currentMode
+                && this.canChangeMode == portStatus.canChangeMode
+                && this.canChangeDataRole == portStatus.canChangeDataRole
+                && this.canChangePowerRole == portStatus.canChangePowerRole
+                && this.supportedModes == portStatus.supportedModes;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.portName)), AudioConfig$$ExternalSyntheticOutline0.m(this.currentDataRole), AudioConfig$$ExternalSyntheticOutline0.m(this.currentPowerRole), AudioConfig$$ExternalSyntheticOutline0.m(this.currentMode), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.canChangeMode), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.canChangeDataRole), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.canChangePowerRole), AudioConfig$$ExternalSyntheticOutline0.m(this.supportedModes));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.portName)),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.currentDataRole),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.currentPowerRole),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.currentMode),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.canChangeMode),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.canChangeDataRole),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.canChangePowerRole),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.supportedModes));
     }
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
@@ -52,10 +68,30 @@ public final class PortStatus {
         sb.append(this.portName);
         sb.append(", .currentDataRole = ");
         int i = this.currentDataRole;
-        sb.append(i == 0 ? "NONE" : i == 1 ? "HOST" : i == 2 ? "DEVICE" : i == 3 ? "NUM_DATA_ROLES" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i));
+        sb.append(
+                i == 0
+                        ? "NONE"
+                        : i == 1
+                                ? "HOST"
+                                : i == 2
+                                        ? "DEVICE"
+                                        : i == 3
+                                                ? "NUM_DATA_ROLES"
+                                                : AudioChannelMask$$ExternalSyntheticOutline0.m(
+                                                        new StringBuilder("0x"), i));
         sb.append(", .currentPowerRole = ");
         int i2 = this.currentPowerRole;
-        sb.append(i2 != 0 ? i2 == 1 ? "SOURCE" : i2 == 2 ? "SINK" : i2 == 3 ? "NUM_POWER_ROLES" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i2) : "NONE");
+        sb.append(
+                i2 != 0
+                        ? i2 == 1
+                                ? "SOURCE"
+                                : i2 == 2
+                                        ? "SINK"
+                                        : i2 == 3
+                                                ? "NUM_POWER_ROLES"
+                                                : AudioChannelMask$$ExternalSyntheticOutline0.m(
+                                                        new StringBuilder("0x"), i2)
+                        : "NONE");
         sb.append(", .currentMode = ");
         sb.append(PortMode.toString(this.currentMode));
         sb.append(", .canChangeMode = ");

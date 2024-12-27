@@ -2,7 +2,7 @@ package com.android.framework.protobuf;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.telecom.Logging.Session;
-import com.android.framework.protobuf.GeneratedMessageLite;
+
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
@@ -26,8 +26,7 @@ final class MessageLiteToString {
         Arrays.fill(INDENT_BUFFER, ' ');
     }
 
-    private MessageLiteToString() {
-    }
+    private MessageLiteToString() {}
 
     static String toString(MessageLite messageLite, String commentString) {
         StringBuilder buffer = new StringBuilder();
@@ -36,7 +35,8 @@ final class MessageLiteToString {
         return buffer.toString();
     }
 
-    private static void reflectivePrintWithIndent(MessageLite messageLite, StringBuilder buffer, int indent) {
+    private static void reflectivePrintWithIndent(
+            MessageLite messageLite, StringBuilder buffer, int indent) {
         int i;
         Set<String> setters;
         boolean hasValue;
@@ -57,7 +57,8 @@ final class MessageLiteToString {
             if (!Modifier.isStatic(method.getModifiers()) && method.getName().length() >= 3) {
                 if (method.getName().startsWith("set")) {
                     setters2.add(method.getName());
-                } else if (Modifier.isPublic(method.getModifiers()) && method.getParameterTypes().length == 0) {
+                } else if (Modifier.isPublic(method.getModifiers())
+                        && method.getParameterTypes().length == 0) {
                     if (method.getName().startsWith("has")) {
                         hazzers.put(method.getName(), method);
                     } else if (method.getName().startsWith("get")) {
@@ -69,21 +70,41 @@ final class MessageLiteToString {
         }
         for (Map.Entry<String, Method> getter : getters.entrySet()) {
             String suffix = getter.getKey().substring(i);
-            if (suffix.endsWith(LIST_SUFFIX) && !suffix.endsWith(BUILDER_LIST_SUFFIX) && !suffix.equals(LIST_SUFFIX) && (listMethod = getter.getValue()) != null && listMethod.getReturnType().equals(List.class)) {
-                printField(buffer, indent, suffix.substring(0, suffix.length() - LIST_SUFFIX.length()), GeneratedMessageLite.invokeOrDie(listMethod, messageLite, new Object[0]));
+            if (suffix.endsWith(LIST_SUFFIX)
+                    && !suffix.endsWith(BUILDER_LIST_SUFFIX)
+                    && !suffix.equals(LIST_SUFFIX)
+                    && (listMethod = getter.getValue()) != null
+                    && listMethod.getReturnType().equals(List.class)) {
+                printField(
+                        buffer,
+                        indent,
+                        suffix.substring(0, suffix.length() - LIST_SUFFIX.length()),
+                        GeneratedMessageLite.invokeOrDie(listMethod, messageLite, new Object[0]));
                 i = 3;
-            } else if (suffix.endsWith(MAP_SUFFIX) && !suffix.equals(MAP_SUFFIX) && (mapMethod = getter.getValue()) != null && mapMethod.getReturnType().equals(Map.class) && !mapMethod.isAnnotationPresent(Deprecated.class) && Modifier.isPublic(mapMethod.getModifiers())) {
-                printField(buffer, indent, suffix.substring(0, suffix.length() - MAP_SUFFIX.length()), GeneratedMessageLite.invokeOrDie(mapMethod, messageLite, new Object[0]));
+            } else if (suffix.endsWith(MAP_SUFFIX)
+                    && !suffix.equals(MAP_SUFFIX)
+                    && (mapMethod = getter.getValue()) != null
+                    && mapMethod.getReturnType().equals(Map.class)
+                    && !mapMethod.isAnnotationPresent(Deprecated.class)
+                    && Modifier.isPublic(mapMethod.getModifiers())) {
+                printField(
+                        buffer,
+                        indent,
+                        suffix.substring(0, suffix.length() - MAP_SUFFIX.length()),
+                        GeneratedMessageLite.invokeOrDie(mapMethod, messageLite, new Object[0]));
                 i = 3;
             } else if (!setters2.contains("set" + suffix)) {
                 i = 3;
-            } else if (suffix.endsWith(BYTES_SUFFIX) && getters.containsKey("get" + suffix.substring(0, suffix.length() - BYTES_SUFFIX.length()))) {
+            } else if (suffix.endsWith(BYTES_SUFFIX)
+                    && getters.containsKey(
+                            "get" + suffix.substring(0, suffix.length() - BYTES_SUFFIX.length()))) {
                 i = 3;
             } else {
                 Method getMethod = getter.getValue();
                 Method hasMethod = hazzers.get("has" + suffix);
                 if (getMethod != null) {
-                    Object value = GeneratedMessageLite.invokeOrDie(getMethod, messageLite, new Object[0]);
+                    Object value =
+                            GeneratedMessageLite.invokeOrDie(getMethod, messageLite, new Object[0]);
                     if (hasMethod == null) {
                         if (isDefaultValue(value)) {
                             setters = setters2;
@@ -94,7 +115,11 @@ final class MessageLiteToString {
                         }
                     } else {
                         setters = setters2;
-                        hasValue = ((Boolean) GeneratedMessageLite.invokeOrDie(hasMethod, messageLite, new Object[0])).booleanValue();
+                        hasValue =
+                                ((Boolean)
+                                                GeneratedMessageLite.invokeOrDie(
+                                                        hasMethod, messageLite, new Object[0]))
+                                        .booleanValue();
                     }
                     if (!hasValue) {
                         setters2 = setters;
@@ -110,10 +135,17 @@ final class MessageLiteToString {
             }
         }
         if (messageLite instanceof GeneratedMessageLite.ExtendableMessage) {
-            Iterator<Map.Entry<GeneratedMessageLite.ExtensionDescriptor, Object>> iter = ((GeneratedMessageLite.ExtendableMessage) messageLite).extensions.iterator();
+            Iterator<Map.Entry<GeneratedMessageLite.ExtensionDescriptor, Object>> iter =
+                    ((GeneratedMessageLite.ExtendableMessage) messageLite).extensions.iterator();
             while (iter.hasNext()) {
                 Map.Entry<GeneratedMessageLite.ExtensionDescriptor, Object> entry = iter.next();
-                printField(buffer, indent, NavigationBarInflaterView.SIZE_MOD_START + entry.getKey().getNumber() + NavigationBarInflaterView.SIZE_MOD_END, entry.getValue());
+                printField(
+                        buffer,
+                        indent,
+                        NavigationBarInflaterView.SIZE_MOD_START
+                                + entry.getKey().getNumber()
+                                + NavigationBarInflaterView.SIZE_MOD_END,
+                        entry.getValue());
             }
         }
         if (((GeneratedMessageLite) messageLite).unknownFields != null) {
@@ -140,7 +172,9 @@ final class MessageLiteToString {
         if (o instanceof ByteString) {
             return o.equals(ByteString.EMPTY);
         }
-        return o instanceof MessageLite ? o == ((MessageLite) o).getDefaultInstanceForType() : (o instanceof Enum) && ((Enum) o).ordinal() == 0;
+        return o instanceof MessageLite
+                ? o == ((MessageLite) o).getDefaultInstanceForType()
+                : (o instanceof Enum) && ((Enum) o).ordinal() == 0;
     }
 
     static void printField(StringBuilder buffer, int indent, String name, Object object) {
@@ -164,11 +198,15 @@ final class MessageLiteToString {
         indent(indent, buffer);
         buffer.append(pascalCaseToSnakeCase(name));
         if (object instanceof String) {
-            buffer.append(": \"").append(TextFormatEscaper.escapeText((String) object)).append('\"');
+            buffer.append(": \"")
+                    .append(TextFormatEscaper.escapeText((String) object))
+                    .append('\"');
             return;
         }
         if (object instanceof ByteString) {
-            buffer.append(": \"").append(TextFormatEscaper.escapeBytes((ByteString) object)).append('\"');
+            buffer.append(": \"")
+                    .append(TextFormatEscaper.escapeBytes((ByteString) object))
+                    .append('\"');
             return;
         }
         if (object instanceof GeneratedMessageLite) {

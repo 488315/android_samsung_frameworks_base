@@ -4,7 +4,8 @@ import java.util.List;
 
 /* loaded from: classes5.dex */
 public class SemAuthenticatorDataManager {
-    private static final String PERMISSION_REQUEST_AUTHNR_SERVICE = "com.samsung.android.permission.REQUEST_AUTHNR_SERVICE";
+    private static final String PERMISSION_REQUEST_AUTHNR_SERVICE =
+            "com.samsung.android.permission.REQUEST_AUTHNR_SERVICE";
 
     public boolean writeFile(String path, byte[] data) {
         AuthenticatorManager manager = AuthenticatorManager.getInstance();

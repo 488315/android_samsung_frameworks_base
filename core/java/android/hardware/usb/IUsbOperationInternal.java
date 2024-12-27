@@ -14,8 +14,7 @@ public interface IUsbOperationInternal extends IInterface {
 
     public static class Default implements IUsbOperationInternal {
         @Override // android.hardware.usb.IUsbOperationInternal
-        public void onOperationComplete(int status) throws RemoteException {
-        }
+        public void onOperationComplete(int status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IUsbOperationInternal extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUsbOperationInternal {
+    public abstract static class Stub extends Binder implements IUsbOperationInternal {
         static final int TRANSACTION_onOperationComplete = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IUsbOperationInternal extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUsbOperationInternal.DESCRIPTOR);
             }

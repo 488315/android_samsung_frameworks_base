@@ -2,6 +2,7 @@ package com.android.server.am.mars;
 
 import android.text.format.DateFormat;
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -32,7 +33,11 @@ public final class MARsHistoryLog {
 
     public static void readLogFromFile(File file, ArrayList arrayList) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file.getAbsolutePath()), StandardCharsets.UTF_8));
+            BufferedReader bufferedReader =
+                    new BufferedReader(
+                            new InputStreamReader(
+                                    new FileInputStream(file.getAbsolutePath()),
+                                    StandardCharsets.UTF_8));
             while (true) {
                 try {
                     String readLine = bufferedReader.readLine();
@@ -70,7 +75,8 @@ public final class MARsHistoryLog {
     public static boolean writeFileIndex(int i) {
         recreateLogFile("/data/log/mars/mars_log_count");
         try {
-            FileWriter fileWriter = new FileWriter("/data/log/mars/mars_log_count", StandardCharsets.UTF_8);
+            FileWriter fileWriter =
+                    new FileWriter("/data/log/mars/mars_log_count", StandardCharsets.UTF_8);
             try {
                 fileWriter.write(i + "");
                 fileWriter.close();
@@ -133,10 +139,17 @@ public final class MARsHistoryLog {
             }
         }
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getAbsolutePath()), StandardCharsets.UTF_8));
+            BufferedWriter bufferedWriter =
+                    new BufferedWriter(
+                            new OutputStreamWriter(
+                                    new FileOutputStream(file.getAbsolutePath()),
+                                    StandardCharsets.UTF_8));
             if (z2) {
                 try {
-                    String str2 = (String) DateFormat.format("yyyy-MM-dd kk:mm:ss", System.currentTimeMillis());
+                    String str2 =
+                            (String)
+                                    DateFormat.format(
+                                            "yyyy-MM-dd kk:mm:ss", System.currentTimeMillis());
                     this.mMARsHistoryBuffer.put(str2 + " SHUTDOWN\n");
                 } catch (Throwable th) {
                     try {

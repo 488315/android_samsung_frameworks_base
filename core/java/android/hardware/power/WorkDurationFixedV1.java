@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class WorkDurationFixedV1 implements Parcelable {
-    public static final Parcelable.Creator<WorkDurationFixedV1> CREATOR = new Parcelable.Creator<WorkDurationFixedV1>() { // from class: android.hardware.power.WorkDurationFixedV1.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WorkDurationFixedV1 createFromParcel(Parcel _aidl_source) {
-            WorkDurationFixedV1 _aidl_out = new WorkDurationFixedV1();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<WorkDurationFixedV1> CREATOR =
+            new Parcelable.Creator<WorkDurationFixedV1>() { // from class:
+                // android.hardware.power.WorkDurationFixedV1.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WorkDurationFixedV1 createFromParcel(Parcel _aidl_source) {
+                    WorkDurationFixedV1 _aidl_out = new WorkDurationFixedV1();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WorkDurationFixedV1[] newArray(int _aidl_size) {
-            return new WorkDurationFixedV1[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WorkDurationFixedV1[] newArray(int _aidl_size) {
+                    return new WorkDurationFixedV1[_aidl_size];
+                }
+            };
     public long durationNanos = 0;
     public long workPeriodStartTimestampNanos = 0;
     public long cpuDurationNanos = 0;

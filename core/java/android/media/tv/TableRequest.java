@@ -2,25 +2,27 @@ package android.media.tv;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public final class TableRequest extends BroadcastInfoRequest implements Parcelable {
-    public static final Parcelable.Creator<TableRequest> CREATOR = new Parcelable.Creator<TableRequest>() { // from class: android.media.tv.TableRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TableRequest createFromParcel(Parcel source) {
-            source.readInt();
-            return TableRequest.createFromParcelBody(source);
-        }
+    public static final Parcelable.Creator<TableRequest> CREATOR =
+            new Parcelable.Creator<TableRequest>() { // from class: android.media.tv.TableRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TableRequest createFromParcel(Parcel source) {
+                    source.readInt();
+                    return TableRequest.createFromParcelBody(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TableRequest[] newArray(int size) {
-            return new TableRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TableRequest[] newArray(int size) {
+                    return new TableRequest[size];
+                }
+            };
     private static final int REQUEST_TYPE = 2;
     public static final int TABLE_NAME_BAT = 4;
     public static final int TABLE_NAME_CAT = 2;
@@ -37,8 +39,7 @@ public final class TableRequest extends BroadcastInfoRequest implements Parcelab
     private final int mVersion;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TableName {
-    }
+    public @interface TableName {}
 
     static TableRequest createFromParcelBody(Parcel in) {
         return new TableRequest(in);

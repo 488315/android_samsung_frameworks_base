@@ -1,6 +1,7 @@
 package android.text;
 
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -111,7 +112,8 @@ public abstract class SegmentFinder {
 
         private static void checkSegmentsValid(int[] segments) {
             Objects.requireNonNull(segments);
-            Preconditions.checkArgument(segments.length % 2 == 0, "the length of segments must be even");
+            Preconditions.checkArgument(
+                    segments.length % 2 == 0, "the length of segments must be even");
             if (segments.length == 0) {
                 return;
             }

@@ -5,10 +5,11 @@ import android.os.StrictMode;
 import android.util.IntArray;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.content.NativeLibraryHelper;
-import com.android.internal.os.KernelCpuProcStringReader;
-import com.android.internal.os.KernelCpuUidBpfMapReader;
+
 import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.CharBuffer;
@@ -37,7 +38,11 @@ public abstract class KernelCpuUidTimeReader<T> {
 
     abstract void readDeltaImpl(Callback<T> callback, boolean z);
 
-    KernelCpuUidTimeReader(KernelCpuProcStringReader reader, KernelCpuUidBpfMapReader bpfReader, boolean throttle, Clock clock) {
+    KernelCpuUidTimeReader(
+            KernelCpuProcStringReader reader,
+            KernelCpuUidBpfMapReader bpfReader,
+            boolean throttle,
+            Clock clock) {
         this.mTag = getClass().getSimpleName();
         this.mLastTimes = new SparseArray<>();
         this.mMinTimeBetweenRead = 1000L;
@@ -126,27 +131,32 @@ public abstract class KernelCpuUidTimeReader<T> {
             this.mUsrSysTime = new long[2];
         }
 
-        public KernelCpuUidUserSysTimeReader(KernelCpuProcStringReader reader, boolean throttle, Clock clock) {
+        public KernelCpuUidUserSysTimeReader(
+                KernelCpuProcStringReader reader, boolean throttle, Clock clock) {
             super(reader, throttle, clock);
             this.mBuffer = new long[4];
             this.mUsrSysTime = new long[2];
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:37:0x00a6, code lost:
-        
-            r2.onUidCpuTime(r4, r1.mUsrSysTime);
-         */
+
+           r2.onUidCpuTime(r4, r1.mUsrSysTime);
+        */
         @Override // com.android.internal.os.KernelCpuUidTimeReader
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        void readDeltaImpl(com.android.internal.os.KernelCpuUidTimeReader.Callback<long[]> r19, boolean r20) {
+        void readDeltaImpl(
+                com.android.internal.os.KernelCpuUidTimeReader.Callback<long[]> r19, boolean r20) {
             /*
                 Method dump skipped, instructions count: 279
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.internal.os.KernelCpuUidTimeReader.KernelCpuUidUserSysTimeReader.readDeltaImpl(com.android.internal.os.KernelCpuUidTimeReader$Callback, boolean):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.internal.os.KernelCpuUidTimeReader.KernelCpuUidUserSysTimeReader.readDeltaImpl(com.android.internal.os.KernelCpuUidTimeReader$Callback,"
+                        + " boolean):void");
         }
 
         @Override // com.android.internal.os.KernelCpuUidTimeReader
@@ -201,7 +211,9 @@ public abstract class KernelCpuUidTimeReader<T> {
         }
 
         private void removeUidsFromKernelModule(int startUid, int endUid) {
-            Slog.d(this.mTag, "Removing uids " + startUid + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + endUid);
+            Slog.d(
+                    this.mTag,
+                    "Removing uids " + startUid + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + endUid);
             int oldMask = StrictMode.allowThreadDiskWritesMask();
             try {
                 try {
@@ -219,7 +231,14 @@ public abstract class KernelCpuUidTimeReader<T> {
                         throw th;
                     }
                 } catch (IOException e) {
-                    Slog.e(this.mTag, "failed to remove uids " + startUid + " - " + endUid + " from uid_cputime module", e);
+                    Slog.e(
+                            this.mTag,
+                            "failed to remove uids "
+                                    + startUid
+                                    + " - "
+                                    + endUid
+                                    + " from uid_cputime module",
+                            e);
                 }
             } finally {
                 StrictMode.setThreadPolicyMask(oldMask);
@@ -245,14 +264,28 @@ public abstract class KernelCpuUidTimeReader<T> {
         }
 
         public KernelCpuUidFreqTimeReader(boolean throttle, Clock clock) {
-            this(UID_TIMES_PROC_FILE, KernelCpuProcStringReader.getFreqTimeReaderInstance(), KernelCpuUidBpfMapReader.getFreqTimeReaderInstance(), throttle, clock);
+            this(
+                    UID_TIMES_PROC_FILE,
+                    KernelCpuProcStringReader.getFreqTimeReaderInstance(),
+                    KernelCpuUidBpfMapReader.getFreqTimeReaderInstance(),
+                    throttle,
+                    clock);
         }
 
-        public KernelCpuUidFreqTimeReader(String procFile, KernelCpuProcStringReader reader, KernelCpuUidBpfMapReader bpfReader, boolean throttle) {
+        public KernelCpuUidFreqTimeReader(
+                String procFile,
+                KernelCpuProcStringReader reader,
+                KernelCpuUidBpfMapReader bpfReader,
+                boolean throttle) {
             this(procFile, reader, bpfReader, throttle, Clock.SYSTEM_CLOCK);
         }
 
-        private KernelCpuUidFreqTimeReader(String procFile, KernelCpuProcStringReader reader, KernelCpuUidBpfMapReader bpfReader, boolean throttle, Clock clock) {
+        private KernelCpuUidFreqTimeReader(
+                String procFile,
+                KernelCpuProcStringReader reader,
+                KernelCpuUidBpfMapReader bpfReader,
+                boolean throttle,
+                Clock clock) {
             super(reader, bpfReader, throttle, clock);
             this.mFreqCount = 0;
             this.mErrors = 0;
@@ -327,7 +360,12 @@ public abstract class KernelCpuUidTimeReader<T> {
                 if (this.mDeltaTimes[i2] >= 0) {
                     z |= this.mDeltaTimes[i2] > 0;
                 } else {
-                    Slog.e(this.mTag, "Negative delta from freq time for uid: " + i + ", delta: " + this.mDeltaTimes[i2]);
+                    Slog.e(
+                            this.mTag,
+                            "Negative delta from freq time for uid: "
+                                    + i
+                                    + ", delta: "
+                                    + this.mDeltaTimes[i2]);
                     return;
                 }
             }
@@ -342,7 +380,8 @@ public abstract class KernelCpuUidTimeReader<T> {
         @Override // com.android.internal.os.KernelCpuUidTimeReader
         void readDeltaImpl(Callback<long[]> cb, boolean forceRead) {
             if (this.mBpfTimesAvailable) {
-                KernelCpuUidBpfMapReader.BpfMapIterator iter = this.mBpfReader.open(!this.mThrottle);
+                KernelCpuUidBpfMapReader.BpfMapIterator iter =
+                        this.mBpfReader.open(!this.mThrottle);
                 try {
                     if (checkPrecondition(iter)) {
                         while (iter.getNextUid(this.mBuffer)) {
@@ -381,7 +420,8 @@ public abstract class KernelCpuUidTimeReader<T> {
                     CharBuffer buf = iter2.nextLine();
                     if (buf == null) {
                         break;
-                    } else if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer) != this.mBuffer.length) {
+                    } else if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer)
+                            != this.mBuffer.length) {
                         Slog.wtf(this.mTag, "Invalid line: " + buf.toString());
                     } else {
                         processUidDelta(cb);
@@ -405,7 +445,8 @@ public abstract class KernelCpuUidTimeReader<T> {
         @Override // com.android.internal.os.KernelCpuUidTimeReader
         void readAbsoluteImpl(Callback<long[]> cb) {
             if (this.mBpfTimesAvailable) {
-                KernelCpuUidBpfMapReader.BpfMapIterator iter = this.mBpfReader.open(!this.mThrottle);
+                KernelCpuUidBpfMapReader.BpfMapIterator iter =
+                        this.mBpfReader.open(!this.mThrottle);
                 try {
                     if (checkPrecondition(iter)) {
                         while (iter.getNextUid(this.mBuffer)) {
@@ -446,7 +487,8 @@ public abstract class KernelCpuUidTimeReader<T> {
                     if (buf == null) {
                         break;
                     }
-                    if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer) != this.mBuffer.length) {
+                    if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer)
+                            != this.mBuffer.length) {
                         Slog.wtf(this.mTag, "Invalid line: " + buf.toString());
                     } else {
                         copyToCurTimes();
@@ -520,10 +562,18 @@ public abstract class KernelCpuUidTimeReader<T> {
         private int mNumClusters;
 
         public KernelCpuUidFullTimeReader(boolean throttle) {
-            this(null, KernelCpuUidBpfMapReader.getFullTimeReaderInstance(), throttle, Clock.SYSTEM_CLOCK);
+            this(
+                    null,
+                    KernelCpuUidBpfMapReader.getFullTimeReaderInstance(),
+                    throttle,
+                    Clock.SYSTEM_CLOCK);
         }
 
-        private KernelCpuUidFullTimeReader(KernelCpuProcStringReader reader, KernelCpuUidBpfMapReader bpfReader, boolean throttle, Clock clock) {
+        private KernelCpuUidFullTimeReader(
+                KernelCpuProcStringReader reader,
+                KernelCpuUidBpfMapReader bpfReader,
+                boolean throttle,
+                Clock clock) {
             super(reader, bpfReader, throttle, clock);
             this.mNumClusters = 0;
         }
@@ -542,7 +592,12 @@ public abstract class KernelCpuUidTimeReader<T> {
                 if (this.mDeltaTimes[i2] >= 0) {
                     z |= this.mDeltaTimes[i2] > 0;
                 } else {
-                    Slog.e(this.mTag, "Negative delta from freq time for uid: " + i + ", delta: " + this.mDeltaTimes[i2]);
+                    Slog.e(
+                            this.mTag,
+                            "Negative delta from freq time for uid: "
+                                    + i
+                                    + ", delta: "
+                                    + this.mDeltaTimes[i2]);
                     System.arraycopy(this.mCurTimes, 0, jArr, 0, this.mNumClusters);
                     return;
                 }
@@ -558,7 +613,8 @@ public abstract class KernelCpuUidTimeReader<T> {
         @Override // com.android.internal.os.KernelCpuUidTimeReader
         void readDeltaImpl(Callback<long[]> cb, boolean forceRead) {
             if (this.mBpfTimesAvailable) {
-                KernelCpuUidBpfMapReader.BpfMapIterator iter = this.mBpfReader.open(!this.mThrottle);
+                KernelCpuUidBpfMapReader.BpfMapIterator iter =
+                        this.mBpfReader.open(!this.mThrottle);
                 try {
                     if (checkPrecondition(iter)) {
                         while (iter.getNextUid(this.mBuffer)) {
@@ -589,7 +645,8 @@ public abstract class KernelCpuUidTimeReader<T> {
         @Override // com.android.internal.os.KernelCpuUidTimeReader
         void readAbsoluteImpl(Callback<long[]> cb) {
             if (this.mBpfTimesAvailable) {
-                KernelCpuUidBpfMapReader.BpfMapIterator iter = this.mBpfReader.open(!this.mThrottle);
+                KernelCpuUidBpfMapReader.BpfMapIterator iter =
+                        this.mBpfReader.open(!this.mThrottle);
                 try {
                     if (checkPrecondition(iter)) {
                         while (iter.getNextUid(this.mBuffer)) {
@@ -655,23 +712,36 @@ public abstract class KernelCpuUidTimeReader<T> {
         }
 
         public KernelCpuUidActiveTimeReader(boolean throttle, Clock clock) {
-            super(KernelCpuProcStringReader.getActiveTimeReaderInstance(), KernelCpuUidBpfMapReader.getActiveTimeReaderInstance(), throttle, clock);
+            super(
+                    KernelCpuProcStringReader.getActiveTimeReaderInstance(),
+                    KernelCpuUidBpfMapReader.getActiveTimeReaderInstance(),
+                    throttle,
+                    clock);
             this.mCores = 0;
         }
 
-        public KernelCpuUidActiveTimeReader(KernelCpuProcStringReader reader, KernelCpuUidBpfMapReader bpfReader, boolean throttle) {
+        public KernelCpuUidActiveTimeReader(
+                KernelCpuProcStringReader reader,
+                KernelCpuUidBpfMapReader bpfReader,
+                boolean throttle) {
             super(reader, bpfReader, throttle, Clock.SYSTEM_CLOCK);
             this.mCores = 0;
         }
 
         private void processUidDelta(Callback<Long> callback) {
             int i = (int) this.mBuffer[0];
-            long sumActiveTime = sumActiveTime(this.mBuffer, this.mBpfTimesAvailable ? 1.0d : 10.0d);
+            long sumActiveTime =
+                    sumActiveTime(this.mBuffer, this.mBpfTimesAvailable ? 1.0d : 10.0d);
             if (sumActiveTime > 0) {
                 long longValue = sumActiveTime - ((Long) this.mLastTimes.get(i, 0L)).longValue();
                 if (longValue <= 0) {
                     if (longValue < 0) {
-                        Slog.e(this.mTag, "Negative delta from active time for uid: " + i + ", delta: " + longValue);
+                        Slog.e(
+                                this.mTag,
+                                "Negative delta from active time for uid: "
+                                        + i
+                                        + ", delta: "
+                                        + longValue);
                     }
                 } else {
                     this.mLastTimes.put(i, Long.valueOf(sumActiveTime));
@@ -685,7 +755,8 @@ public abstract class KernelCpuUidTimeReader<T> {
         @Override // com.android.internal.os.KernelCpuUidTimeReader
         void readDeltaImpl(Callback<Long> cb, boolean forceRead) {
             if (this.mBpfTimesAvailable) {
-                KernelCpuUidBpfMapReader.BpfMapIterator iter = this.mBpfReader.open(!this.mThrottle);
+                KernelCpuUidBpfMapReader.BpfMapIterator iter =
+                        this.mBpfReader.open(!this.mThrottle);
                 try {
                     if (checkPrecondition(iter)) {
                         while (iter.getNextUid(this.mBuffer)) {
@@ -724,7 +795,8 @@ public abstract class KernelCpuUidTimeReader<T> {
                     CharBuffer buf = iter2.nextLine();
                     if (buf == null) {
                         break;
-                    } else if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer) != this.mBuffer.length) {
+                    } else if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer)
+                            != this.mBuffer.length) {
                         Slog.wtf(this.mTag, "Invalid line: " + buf.toString());
                     } else {
                         processUidDelta(cb);
@@ -746,7 +818,8 @@ public abstract class KernelCpuUidTimeReader<T> {
         }
 
         private void processUidAbsolute(Callback<Long> cb) {
-            long cpuActiveTime = sumActiveTime(this.mBuffer, this.mBpfTimesAvailable ? 1.0d : 10.0d);
+            long cpuActiveTime =
+                    sumActiveTime(this.mBuffer, this.mBpfTimesAvailable ? 1.0d : 10.0d);
             if (cpuActiveTime > 0) {
                 cb.onUidCpuTime((int) this.mBuffer[0], Long.valueOf(cpuActiveTime));
             }
@@ -755,7 +828,8 @@ public abstract class KernelCpuUidTimeReader<T> {
         @Override // com.android.internal.os.KernelCpuUidTimeReader
         void readAbsoluteImpl(Callback<Long> cb) {
             if (this.mBpfTimesAvailable) {
-                KernelCpuUidBpfMapReader.BpfMapIterator iter = this.mBpfReader.open(!this.mThrottle);
+                KernelCpuUidBpfMapReader.BpfMapIterator iter =
+                        this.mBpfReader.open(!this.mThrottle);
                 try {
                     if (checkPrecondition(iter)) {
                         while (iter.getNextUid(this.mBuffer)) {
@@ -794,7 +868,8 @@ public abstract class KernelCpuUidTimeReader<T> {
                     CharBuffer buf = iter2.nextLine();
                     if (buf == null) {
                         break;
-                    } else if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer) != this.mBuffer.length) {
+                    } else if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer)
+                            != this.mBuffer.length) {
                         Slog.wtf(this.mTag, "Invalid line: " + buf.toString());
                     } else {
                         processUidAbsolute(cb);
@@ -882,10 +957,17 @@ public abstract class KernelCpuUidTimeReader<T> {
         }
 
         public KernelCpuUidClusterTimeReader(boolean throttle, Clock clock) {
-            super(KernelCpuProcStringReader.getClusterTimeReaderInstance(), KernelCpuUidBpfMapReader.getClusterTimeReaderInstance(), throttle, clock);
+            super(
+                    KernelCpuProcStringReader.getClusterTimeReaderInstance(),
+                    KernelCpuUidBpfMapReader.getClusterTimeReaderInstance(),
+                    throttle,
+                    clock);
         }
 
-        public KernelCpuUidClusterTimeReader(KernelCpuProcStringReader reader, KernelCpuUidBpfMapReader bpfReader, boolean throttle) {
+        public KernelCpuUidClusterTimeReader(
+                KernelCpuProcStringReader reader,
+                KernelCpuUidBpfMapReader bpfReader,
+                boolean throttle) {
             super(reader, bpfReader, throttle, Clock.SYSTEM_CLOCK);
         }
 
@@ -903,7 +985,12 @@ public abstract class KernelCpuUidTimeReader<T> {
                 if (this.mDeltaTime[i2] >= 0) {
                     z |= this.mDeltaTime[i2] > 0;
                 } else {
-                    Slog.e(this.mTag, "Negative delta from cluster time for uid: " + i + ", delta: " + this.mDeltaTime[i2]);
+                    Slog.e(
+                            this.mTag,
+                            "Negative delta from cluster time for uid: "
+                                    + i
+                                    + ", delta: "
+                                    + this.mDeltaTime[i2]);
                     return;
                 }
             }
@@ -918,7 +1005,8 @@ public abstract class KernelCpuUidTimeReader<T> {
         @Override // com.android.internal.os.KernelCpuUidTimeReader
         void readDeltaImpl(Callback<long[]> cb, boolean forceRead) {
             if (this.mBpfTimesAvailable) {
-                KernelCpuUidBpfMapReader.BpfMapIterator iter = this.mBpfReader.open(!this.mThrottle);
+                KernelCpuUidBpfMapReader.BpfMapIterator iter =
+                        this.mBpfReader.open(!this.mThrottle);
                 try {
                     if (checkPrecondition(iter)) {
                         while (iter.getNextUid(this.mBuffer)) {
@@ -957,7 +1045,8 @@ public abstract class KernelCpuUidTimeReader<T> {
                     CharBuffer buf = iter2.nextLine();
                     if (buf == null) {
                         break;
-                    } else if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer) != this.mBuffer.length) {
+                    } else if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer)
+                            != this.mBuffer.length) {
                         Slog.wtf(this.mTag, "Invalid line: " + buf.toString());
                     } else {
                         processUidDelta(cb);
@@ -981,7 +1070,8 @@ public abstract class KernelCpuUidTimeReader<T> {
         @Override // com.android.internal.os.KernelCpuUidTimeReader
         void readAbsoluteImpl(Callback<long[]> cb) {
             if (this.mBpfTimesAvailable) {
-                KernelCpuUidBpfMapReader.BpfMapIterator iter = this.mBpfReader.open(!this.mThrottle);
+                KernelCpuUidBpfMapReader.BpfMapIterator iter =
+                        this.mBpfReader.open(!this.mThrottle);
                 try {
                     if (checkPrecondition(iter)) {
                         while (iter.getNextUid(this.mBuffer)) {
@@ -1022,7 +1112,8 @@ public abstract class KernelCpuUidTimeReader<T> {
                     if (buf == null) {
                         break;
                     }
-                    if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer) != this.mBuffer.length) {
+                    if (KernelCpuProcStringReader.asLongs(buf, this.mBuffer)
+                            != this.mBuffer.length) {
                         Slog.wtf(this.mTag, "Invalid line: " + buf.toString());
                     } else {
                         sumClusterTime();

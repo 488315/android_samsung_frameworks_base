@@ -1,11 +1,13 @@
 package android.util;
 
 import android.os.Parcel;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
 import com.android.internal.util.Parcelling;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.function.LongObjPredicate;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -276,7 +278,10 @@ public class LongSparseArray<E> implements Cloneable {
             int size = ((LongSparseArray) array).mSize;
             dest.writeInt(size);
             dest.writeLongArray(((LongSparseArray) array).mKeys);
-            dest.writeStringArray((String[]) Arrays.copyOfRange(((LongSparseArray) array).mValues, 0, size, String[].class));
+            dest.writeStringArray(
+                    (String[])
+                            Arrays.copyOfRange(
+                                    ((LongSparseArray) array).mValues, 0, size, String[].class));
         }
 
         /* JADX WARN: Can't rename method to resolve collision */

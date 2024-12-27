@@ -8,26 +8,32 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
 import com.android.internal.pm.parsing.pkg.PackageImpl;
+
 import java.util.Collections;
 import java.util.Locale;
 import java.util.Set;
 
 /* loaded from: classes5.dex */
-public class ParsedActivityImpl extends ParsedMainComponentImpl implements ParsedActivity, Parcelable {
-    public static final Parcelable.Creator<ParsedActivityImpl> CREATOR = new Parcelable.Creator<ParsedActivityImpl>() { // from class: com.android.internal.pm.pkg.component.ParsedActivityImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedActivityImpl createFromParcel(Parcel source) {
-            return new ParsedActivityImpl(source);
-        }
+public class ParsedActivityImpl extends ParsedMainComponentImpl
+        implements ParsedActivity, Parcelable {
+    public static final Parcelable.Creator<ParsedActivityImpl> CREATOR =
+            new Parcelable.Creator<
+                    ParsedActivityImpl>() { // from class:
+                                            // com.android.internal.pm.pkg.component.ParsedActivityImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedActivityImpl createFromParcel(Parcel source) {
+                    return new ParsedActivityImpl(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedActivityImpl[] newArray(int size) {
-            return new ParsedActivityImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedActivityImpl[] newArray(int size) {
+                    return new ParsedActivityImpl[size];
+                }
+            };
     private int colorMode;
     private int configChanges;
     private int documentLaunchMode;
@@ -90,7 +96,12 @@ public class ParsedActivityImpl extends ParsedMainComponentImpl implements Parse
         this.mRequireContentUriPermissionFromCaller = other.mRequireContentUriPermissionFromCaller;
     }
 
-    public static ParsedActivityImpl makeAppDetailsActivity(String packageName, String processName, int uiOptions, String taskAffinity, boolean hardwareAccelerated) {
+    public static ParsedActivityImpl makeAppDetailsActivity(
+            String packageName,
+            String processName,
+            int uiOptions,
+            String taskAffinity,
+            boolean hardwareAccelerated) {
         ParsedActivityImpl activity = new ParsedActivityImpl();
         activity.setPackageName(packageName);
         activity.theme = 16973909;
@@ -149,7 +160,8 @@ public class ParsedActivityImpl extends ParsedMainComponentImpl implements Parse
         alias.setDirectBootAware(target.isDirectBootAware());
         alias.setProcessName(target.getProcessName());
         alias.setRequiredDisplayCategory(target.getRequiredDisplayCategory());
-        alias.setRequireContentUriPermissionFromCaller(target.getRequireContentUriPermissionFromCaller());
+        alias.setRequireContentUriPermissionFromCaller(
+                target.getRequireContentUriPermissionFromCaller());
         return alias;
     }
 
@@ -187,7 +199,9 @@ public class ParsedActivityImpl extends ParsedMainComponentImpl implements Parse
 
     @Override // com.android.internal.pm.pkg.component.ParsedActivity
     public Set<String> getKnownActivityEmbeddingCerts() {
-        return this.mKnownActivityEmbeddingCerts == null ? Collections.emptySet() : this.mKnownActivityEmbeddingCerts;
+        return this.mKnownActivityEmbeddingCerts == null
+                ? Collections.emptySet()
+                : this.mKnownActivityEmbeddingCerts;
     }
 
     public void setKnownActivityEmbeddingCerts(Set<String> knownActivityEmbeddingCerts) {
@@ -207,12 +221,14 @@ public class ParsedActivityImpl extends ParsedMainComponentImpl implements Parse
         return sb.toString();
     }
 
-    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl, com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
+    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl,
+              // com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
     public int describeContents() {
         return 0;
     }
 
-    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl, com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
+    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl,
+              // com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeInt(this.theme);
@@ -295,7 +311,33 @@ public class ParsedActivityImpl extends ParsedMainComponentImpl implements Parse
         this.mRequireContentUriPermissionFromCaller = in.readInt();
     }
 
-    public ParsedActivityImpl(int theme, int uiOptions, String targetActivity, String parentActivityName, String taskAffinity, int privateFlags, String permission, Set<String> knownActivityEmbeddingCerts, int launchMode, int documentLaunchMode, int maxRecents, int configChanges, int softInputMode, int persistableMode, int lockTaskLaunchMode, int screenOrientation, int resizeMode, float maxAspectRatio, float minAspectRatio, boolean supportsSizeChanges, String requestedVrComponent, int rotationAnimation, int colorMode, ActivityInfo.WindowLayout windowLayout, String requiredDisplayCategory, int requireContentUriPermissionFromCaller) {
+    public ParsedActivityImpl(
+            int theme,
+            int uiOptions,
+            String targetActivity,
+            String parentActivityName,
+            String taskAffinity,
+            int privateFlags,
+            String permission,
+            Set<String> knownActivityEmbeddingCerts,
+            int launchMode,
+            int documentLaunchMode,
+            int maxRecents,
+            int configChanges,
+            int softInputMode,
+            int persistableMode,
+            int lockTaskLaunchMode,
+            int screenOrientation,
+            int resizeMode,
+            float maxAspectRatio,
+            float minAspectRatio,
+            boolean supportsSizeChanges,
+            String requestedVrComponent,
+            int rotationAnimation,
+            int colorMode,
+            ActivityInfo.WindowLayout windowLayout,
+            String requiredDisplayCategory,
+            int requireContentUriPermissionFromCaller) {
         this.screenOrientation = -1;
         this.resizeMode = 2;
         this.maxAspectRatio = -1.0f;
@@ -570,6 +612,5 @@ public class ParsedActivityImpl extends ParsedMainComponentImpl implements Parse
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

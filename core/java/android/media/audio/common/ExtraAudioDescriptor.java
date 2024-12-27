@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class ExtraAudioDescriptor implements Parcelable {
-    public static final Parcelable.Creator<ExtraAudioDescriptor> CREATOR = new Parcelable.Creator<ExtraAudioDescriptor>() { // from class: android.media.audio.common.ExtraAudioDescriptor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExtraAudioDescriptor createFromParcel(Parcel _aidl_source) {
-            ExtraAudioDescriptor _aidl_out = new ExtraAudioDescriptor();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ExtraAudioDescriptor> CREATOR =
+            new Parcelable.Creator<ExtraAudioDescriptor>() { // from class:
+                // android.media.audio.common.ExtraAudioDescriptor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExtraAudioDescriptor createFromParcel(Parcel _aidl_source) {
+                    ExtraAudioDescriptor _aidl_out = new ExtraAudioDescriptor();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExtraAudioDescriptor[] newArray(int _aidl_size) {
-            return new ExtraAudioDescriptor[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExtraAudioDescriptor[] newArray(int _aidl_size) {
+                    return new ExtraAudioDescriptor[_aidl_size];
+                }
+            };
     public byte[] audioDescriptor;
     public int standard = 0;
     public int encapsulationType = 0;
@@ -106,7 +109,11 @@ public class ExtraAudioDescriptor implements Parcelable {
             return false;
         }
         ExtraAudioDescriptor that = (ExtraAudioDescriptor) other;
-        if (Objects.deepEquals(Integer.valueOf(this.standard), Integer.valueOf(that.standard)) && Objects.deepEquals(this.audioDescriptor, that.audioDescriptor) && Objects.deepEquals(Integer.valueOf(this.encapsulationType), Integer.valueOf(that.encapsulationType))) {
+        if (Objects.deepEquals(Integer.valueOf(this.standard), Integer.valueOf(that.standard))
+                && Objects.deepEquals(this.audioDescriptor, that.audioDescriptor)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.encapsulationType),
+                        Integer.valueOf(that.encapsulationType))) {
             return true;
         }
         return false;
@@ -114,7 +121,12 @@ public class ExtraAudioDescriptor implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.standard), this.audioDescriptor, Integer.valueOf(this.encapsulationType)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.standard),
+                                this.audioDescriptor,
+                                Integer.valueOf(this.encapsulationType))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

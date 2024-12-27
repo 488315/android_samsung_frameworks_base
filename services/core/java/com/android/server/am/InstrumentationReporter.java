@@ -4,6 +4,7 @@ import android.app.IInstrumentationWatcher;
 import android.content.ComponentName;
 import android.os.Binder;
 import android.os.Bundle;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,37 +21,37 @@ public final class InstrumentationReporter {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:13:0x001b, code lost:
-        
-            r1 = 0;
-         */
+
+           r1 = 0;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:15:0x0020, code lost:
-        
-            if (r1 >= r4.size()) goto L42;
-         */
+
+           if (r1 >= r4.size()) goto L42;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:16:0x0022, code lost:
-        
-            r2 = (com.android.server.am.InstrumentationReporter.Report) r4.get(r1);
-         */
+
+           r2 = (com.android.server.am.InstrumentationReporter.Report) r4.get(r1);
+        */
         /* JADX WARN: Code restructure failed: missing block: B:19:0x002a, code lost:
-        
-            if (r2.mType != 0) goto L19;
-         */
+
+           if (r2.mType != 0) goto L19;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:20:0x002c, code lost:
-        
-            r2.mWatcher.instrumentationStatus(r2.mName, r2.mResultCode, r2.mResults);
-         */
+
+           r2.mWatcher.instrumentationStatus(r2.mName, r2.mResultCode, r2.mResults);
+        */
         /* JADX WARN: Code restructure failed: missing block: B:23:0x0038, code lost:
-        
-            r2.mWatcher.instrumentationFinished(r2.mName, r2.mResultCode, r2.mResults);
-         */
+
+           r2.mWatcher.instrumentationFinished(r2.mName, r2.mResultCode, r2.mResults);
+        */
         /* JADX WARN: Code restructure failed: missing block: B:26:0x0044, code lost:
-        
-            android.util.Slog.i("ActivityManager", "Failure reporting to instrumentation watcher: comp=" + r2.mName + " results=" + r2.mResults);
-         */
+
+           android.util.Slog.i("ActivityManager", "Failure reporting to instrumentation watcher: comp=" + r2.mName + " results=" + r2.mResults);
+        */
         /* JADX WARN: Code restructure failed: missing block: B:31:0x006a, code lost:
-        
-            r8.this$0.mLock.wait(10000);
-         */
+
+           r8.this$0.mLock.wait(10000);
+        */
         @Override // java.lang.Thread, java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -136,7 +137,9 @@ public final class InstrumentationReporter {
                 monitor-exit(r2)     // Catch: java.lang.Throwable -> L66
                 throw r8
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.InstrumentationReporter.MyThread.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.InstrumentationReporter.MyThread.run():void");
         }
     }
 
@@ -148,7 +151,12 @@ public final class InstrumentationReporter {
         public final int mType;
         public final IInstrumentationWatcher mWatcher;
 
-        public Report(int i, IInstrumentationWatcher iInstrumentationWatcher, ComponentName componentName, int i2, Bundle bundle) {
+        public Report(
+                int i,
+                IInstrumentationWatcher iInstrumentationWatcher,
+                ComponentName componentName,
+                int i2,
+                Bundle bundle) {
             this.mType = i;
             this.mWatcher = iInstrumentationWatcher;
             this.mName = componentName;

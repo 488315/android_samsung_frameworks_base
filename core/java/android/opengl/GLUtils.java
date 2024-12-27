@@ -8,12 +8,13 @@ public final class GLUtils {
 
     private static native int native_getType(Bitmap bitmap);
 
-    private static native int native_texImage2D(int i, int i2, int i3, Bitmap bitmap, int i4, int i5);
+    private static native int native_texImage2D(
+            int i, int i2, int i3, Bitmap bitmap, int i4, int i5);
 
-    private static native int native_texSubImage2D(int i, int i2, int i3, int i4, Bitmap bitmap, int i5, int i6);
+    private static native int native_texSubImage2D(
+            int i, int i2, int i3, int i4, Bitmap bitmap, int i5, int i6);
 
-    private GLUtils() {
-    }
+    private GLUtils() {}
 
     public static int getInternalFormat(Bitmap bitmap) {
         if (bitmap == null) {
@@ -43,7 +44,8 @@ public final class GLUtils {
         return result;
     }
 
-    public static void texImage2D(int target, int level, int internalformat, Bitmap bitmap, int border) {
+    public static void texImage2D(
+            int target, int level, int internalformat, Bitmap bitmap, int border) {
         if (bitmap == null) {
             throw new NullPointerException("texImage2D can't be used with a null Bitmap");
         }
@@ -55,7 +57,8 @@ public final class GLUtils {
         }
     }
 
-    public static void texImage2D(int target, int level, int internalformat, Bitmap bitmap, int type, int border) {
+    public static void texImage2D(
+            int target, int level, int internalformat, Bitmap bitmap, int type, int border) {
         if (bitmap == null) {
             throw new NullPointerException("texImage2D can't be used with a null Bitmap");
         }
@@ -79,7 +82,8 @@ public final class GLUtils {
         }
     }
 
-    public static void texSubImage2D(int target, int level, int xoffset, int yoffset, Bitmap bitmap) {
+    public static void texSubImage2D(
+            int target, int level, int xoffset, int yoffset, Bitmap bitmap) {
         if (bitmap == null) {
             throw new NullPointerException("texSubImage2D can't be used with a null Bitmap");
         }
@@ -92,7 +96,8 @@ public final class GLUtils {
         }
     }
 
-    public static void texSubImage2D(int target, int level, int xoffset, int yoffset, Bitmap bitmap, int format, int type) {
+    public static void texSubImage2D(
+            int target, int level, int xoffset, int yoffset, Bitmap bitmap, int format, int type) {
         if (bitmap == null) {
             throw new NullPointerException("texSubImage2D can't be used with a null Bitmap");
         }

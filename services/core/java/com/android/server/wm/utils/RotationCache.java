@@ -6,6 +6,7 @@ import android.view.DisplayCutout;
 import android.view.DisplayShape;
 import android.view.PrivacyIndicatorBounds;
 import android.view.RoundedCorners;
+
 import com.android.server.wm.DisplayContent;
 import com.android.server.wm.DisplayContent$$ExternalSyntheticLambda36;
 
@@ -16,7 +17,8 @@ public final class RotationCache {
     public Object mCachedFor;
     public final DisplayContent$$ExternalSyntheticLambda36 mComputation;
 
-    public RotationCache(DisplayContent$$ExternalSyntheticLambda36 displayContent$$ExternalSyntheticLambda36) {
+    public RotationCache(
+            DisplayContent$$ExternalSyntheticLambda36 displayContent$$ExternalSyntheticLambda36) {
         this.mComputation = displayContent$$ExternalSyntheticLambda36;
     }
 
@@ -30,19 +32,34 @@ public final class RotationCache {
         if (indexOfKey >= 0) {
             return this.mCache.valueAt(indexOfKey);
         }
-        DisplayContent$$ExternalSyntheticLambda36 displayContent$$ExternalSyntheticLambda36 = this.mComputation;
+        DisplayContent$$ExternalSyntheticLambda36 displayContent$$ExternalSyntheticLambda36 =
+                this.mComputation;
         switch (displayContent$$ExternalSyntheticLambda36.$r8$classId) {
             case 0:
-                $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE = DisplayContent.$r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE(displayContent$$ExternalSyntheticLambda36.f$0, (DisplayCutout) obj, i);
+                $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE =
+                        DisplayContent.$r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE(
+                                displayContent$$ExternalSyntheticLambda36.f$0,
+                                (DisplayCutout) obj,
+                                i);
                 break;
             case 1:
                 $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE = (RoundedCorners) obj;
                 DisplayContent displayContent = displayContent$$ExternalSyntheticLambda36.f$0;
                 displayContent.getClass();
-                if ($r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE != null && $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE != RoundedCorners.NO_ROUNDED_CORNERS) {
+                if ($r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE != null
+                        && $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE
+                                != RoundedCorners.NO_ROUNDED_CORNERS) {
                     if (i != 0) {
                         boolean z = displayContent.mIsSizeForced;
-                        $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE = $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE.rotate(i, z ? displayContent.mBaseDisplayWidth : displayContent.mInitialDisplayWidth, z ? displayContent.mBaseDisplayHeight : displayContent.mInitialDisplayHeight);
+                        $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE =
+                                $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE.rotate(
+                                        i,
+                                        z
+                                                ? displayContent.mBaseDisplayWidth
+                                                : displayContent.mInitialDisplayWidth,
+                                        z
+                                                ? displayContent.mBaseDisplayHeight
+                                                : displayContent.mInitialDisplayHeight);
                         break;
                     }
                 } else {
@@ -57,7 +74,8 @@ public final class RotationCache {
                     $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE = privacyIndicatorBounds.rotate(i);
                     break;
                 } else {
-                    $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE = new PrivacyIndicatorBounds(new Rect[4], i);
+                    $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE =
+                            new PrivacyIndicatorBounds(new Rect[4], i);
                     break;
                 }
             default:
@@ -65,7 +83,8 @@ public final class RotationCache {
                 displayContent$$ExternalSyntheticLambda36.f$0.getClass();
                 if ($r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE != null) {
                     if (i != 0) {
-                        $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE = $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE.setRotation(i);
+                        $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE =
+                                $r8$lambda$OlRwH3_Eqb403xPL7MPG5vhH0aE.setRotation(i);
                         break;
                     }
                 } else {

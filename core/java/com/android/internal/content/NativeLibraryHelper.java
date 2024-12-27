@@ -18,8 +18,10 @@ import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
 import android.util.Slog;
+
 import dalvik.system.CloseGuard;
 import dalvik.system.VMRuntime;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -41,7 +43,8 @@ public class NativeLibraryHelper {
     /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeClose(long j);
 
-    private static native int nativeCopyNativeBinaries(long j, String str, String str2, boolean z, boolean z2);
+    private static native int nativeCopyNativeBinaries(
+            long j, String str, String str2, boolean z, boolean z2);
 
     private static native int nativeFindSupportedAbi(long j, String[] strArr, boolean z);
 
@@ -64,18 +67,29 @@ public class NativeLibraryHelper {
 
         public static Handle create(File packageFile) throws IOException {
             ParseTypeImpl input = ParseTypeImpl.forDefaultParsing();
-            ParseResult<PackageLite> ret = ApkLiteParseUtils.parsePackageLite(input.reset(), packageFile, 0);
+            ParseResult<PackageLite> ret =
+                    ApkLiteParseUtils.parsePackageLite(input.reset(), packageFile, 0);
             if (ret.isError()) {
-                throw new IOException("Failed to parse package: " + packageFile, ret.getException());
+                throw new IOException(
+                        "Failed to parse package: " + packageFile, ret.getException());
             }
             return create(ret.getResult());
         }
 
         public static Handle create(PackageLite lite) throws IOException {
-            return create(lite.getAllApkPaths(), lite.isMultiArch(), lite.isExtractNativeLibs(), lite.isDebuggable());
+            return create(
+                    lite.getAllApkPaths(),
+                    lite.isMultiArch(),
+                    lite.isExtractNativeLibs(),
+                    lite.isDebuggable());
         }
 
-        public static Handle create(List<String> codePaths, boolean multiArch, boolean extractNativeLibs, boolean debuggable) throws IOException {
+        public static Handle create(
+                List<String> codePaths,
+                boolean multiArch,
+                boolean extractNativeLibs,
+                boolean debuggable)
+                throws IOException {
             int size = codePaths.size();
             String[] apkPaths = new String[size];
             long[] apkHandles = new long[size];
@@ -99,10 +113,20 @@ public class NativeLibraryHelper {
             if (apkHandles[0] == 0) {
                 throw new IOException("Unable to open APK " + path + " from fd " + fd);
             }
-            return new Handle(new String[]{path}, apkHandles, lite.isMultiArch(), lite.isExtractNativeLibs(), lite.isDebuggable());
+            return new Handle(
+                    new String[] {path},
+                    apkHandles,
+                    lite.isMultiArch(),
+                    lite.isExtractNativeLibs(),
+                    lite.isDebuggable());
         }
 
-        Handle(String[] apkPaths, long[] apkHandles, boolean multiArch, boolean extractNativeLibs, boolean debuggable) {
+        Handle(
+                String[] apkPaths,
+                long[] apkHandles,
+                boolean multiArch,
+                boolean extractNativeLibs,
+                boolean debuggable) {
             this.apkPaths = apkPaths;
             this.apkHandles = apkHandles;
             this.multiArch = multiArch;
@@ -144,7 +168,13 @@ public class NativeLibraryHelper {
 
     public static int copyNativeBinaries(Handle handle, File sharedLibraryDir, String abi) {
         for (long apkHandle : handle.apkHandles) {
-            int res = nativeCopyNativeBinaries(apkHandle, sharedLibraryDir.getPath(), abi, handle.extractNativeLibs, handle.debuggable);
+            int res =
+                    nativeCopyNativeBinaries(
+                            apkHandle,
+                            sharedLibraryDir.getPath(),
+                            abi,
+                            handle.extractNativeLibs,
+                            handle.debuggable);
             if (res != 1) {
                 return res;
             }
@@ -180,7 +210,8 @@ public class NativeLibraryHelper {
         removeNativeBinariesFromDirLI(new File(nativeLibraryPath), false);
     }
 
-    public static void removeNativeBinariesFromDirLI(File nativeLibraryRoot, boolean deleteRootDir) {
+    public static void removeNativeBinariesFromDirLI(
+            File nativeLibraryRoot, boolean deleteRootDir) {
         if (nativeLibraryRoot.exists()) {
             File[] files = nativeLibraryRoot.listFiles();
             if (files != null) {
@@ -193,7 +224,9 @@ public class NativeLibraryHelper {
                 }
             }
             if (deleteRootDir && !nativeLibraryRoot.delete()) {
-                Slog.w(TAG, "Could not delete native binary directory: " + nativeLibraryRoot.getPath());
+                Slog.w(
+                        TAG,
+                        "Could not delete native binary directory: " + nativeLibraryRoot.getPath());
             }
         }
     }
@@ -205,7 +238,13 @@ public class NativeLibraryHelper {
                 throw new IOException("Cannot create " + path.getPath());
             }
             try {
-                Os.chmod(path.getPath(), OsConstants.S_IRWXU | OsConstants.S_IRGRP | OsConstants.S_IXGRP | OsConstants.S_IROTH | OsConstants.S_IXOTH);
+                Os.chmod(
+                        path.getPath(),
+                        OsConstants.S_IRWXU
+                                | OsConstants.S_IRGRP
+                                | OsConstants.S_IXGRP
+                                | OsConstants.S_IROTH
+                                | OsConstants.S_IXOTH);
                 return;
             } catch (ErrnoException e) {
                 throw new IOException("Cannot chmod native library directory " + path.getPath(), e);
@@ -224,7 +263,13 @@ public class NativeLibraryHelper {
         return 0L;
     }
 
-    public static int copyNativeBinariesForSupportedAbi(Handle handle, File libraryRoot, String[] abiList, boolean useIsaSubdir, boolean isIncremental) throws IOException {
+    public static int copyNativeBinariesForSupportedAbi(
+            Handle handle,
+            File libraryRoot,
+            String[] abiList,
+            boolean useIsaSubdir,
+            boolean isIncremental)
+            throws IOException {
         File subDir;
         int abi = findSupportedAbi(handle, abiList);
         if (abi < 0) {
@@ -238,7 +283,8 @@ public class NativeLibraryHelper {
             subDir = libraryRoot;
         }
         if (isIncremental) {
-            int res = incrementalConfigureNativeBinariesForSupportedAbi(handle, subDir, supportedAbi);
+            int res =
+                    incrementalConfigureNativeBinariesForSupportedAbi(handle, subDir, supportedAbi);
             if (res != 1) {
                 return res;
             }
@@ -255,7 +301,8 @@ public class NativeLibraryHelper {
         return abi;
     }
 
-    public static int copyNativeBinariesWithOverride(Handle handle, File libraryRoot, String abiOverride, boolean isIncremental) {
+    public static int copyNativeBinariesWithOverride(
+            Handle handle, File libraryRoot, String abiOverride, boolean isIncremental) {
         int copyRet;
         int copyRet2;
         try {
@@ -263,11 +310,31 @@ public class NativeLibraryHelper {
                 if (abiOverride != null && !CLEAR_ABI_OVERRIDE.equals(abiOverride)) {
                     Slog.w(TAG, "Ignoring abiOverride for multi arch application.");
                 }
-                if (Build.SUPPORTED_32_BIT_ABIS.length > 0 && (copyRet2 = copyNativeBinariesForSupportedAbi(handle, libraryRoot, Build.SUPPORTED_32_BIT_ABIS, true, isIncremental)) < 0 && copyRet2 != -114 && copyRet2 != -113) {
+                if (Build.SUPPORTED_32_BIT_ABIS.length > 0
+                        && (copyRet2 =
+                                        copyNativeBinariesForSupportedAbi(
+                                                handle,
+                                                libraryRoot,
+                                                Build.SUPPORTED_32_BIT_ABIS,
+                                                true,
+                                                isIncremental))
+                                < 0
+                        && copyRet2 != -114
+                        && copyRet2 != -113) {
                     Slog.w(TAG, "Failure copying 32 bit native libraries; copyRet=" + copyRet2);
                     return copyRet2;
                 }
-                if (Build.SUPPORTED_64_BIT_ABIS.length > 0 && (copyRet = copyNativeBinariesForSupportedAbi(handle, libraryRoot, Build.SUPPORTED_64_BIT_ABIS, true, isIncremental)) < 0 && copyRet != -114 && copyRet != -113) {
+                if (Build.SUPPORTED_64_BIT_ABIS.length > 0
+                        && (copyRet =
+                                        copyNativeBinariesForSupportedAbi(
+                                                handle,
+                                                libraryRoot,
+                                                Build.SUPPORTED_64_BIT_ABIS,
+                                                true,
+                                                isIncremental))
+                                < 0
+                        && copyRet != -114
+                        && copyRet != -113) {
                     Slog.w(TAG, "Failure copying 64 bit native libraries; copyRet=" + copyRet);
                     return copyRet;
                 }
@@ -278,13 +345,24 @@ public class NativeLibraryHelper {
                 } else if (abiOverride != null) {
                     cpuAbiOverride = abiOverride;
                 }
-                String[] abiList = cpuAbiOverride != null ? new String[]{cpuAbiOverride} : Build.SUPPORTED_ABIS;
-                if (Build.SUPPORTED_64_BIT_ABIS.length > 0 && cpuAbiOverride == null && hasRenderscriptBitcode(handle)) {
+                String[] abiList =
+                        cpuAbiOverride != null
+                                ? new String[] {cpuAbiOverride}
+                                : Build.SUPPORTED_ABIS;
+                if (Build.SUPPORTED_64_BIT_ABIS.length > 0
+                        && cpuAbiOverride == null
+                        && hasRenderscriptBitcode(handle)) {
                     abiList = Build.SUPPORTED_32_BIT_ABIS;
                 }
-                int copyRet3 = copyNativeBinariesForSupportedAbi(handle, libraryRoot, abiList, true, isIncremental);
+                int copyRet3 =
+                        copyNativeBinariesForSupportedAbi(
+                                handle, libraryRoot, abiList, true, isIncremental);
                 if (copyRet3 < 0 && copyRet3 != -114) {
-                    Slog.w(TAG, "Failure copying native libraries [errorCode=" + copyRet3 + NavigationBarInflaterView.SIZE_MOD_END);
+                    Slog.w(
+                            TAG,
+                            "Failure copying native libraries [errorCode="
+                                    + copyRet3
+                                    + NavigationBarInflaterView.SIZE_MOD_END);
                     return copyRet3;
                 }
             }
@@ -295,12 +373,18 @@ public class NativeLibraryHelper {
         }
     }
 
-    public static long sumNativeBinariesWithOverride(Handle handle, String abiOverride) throws IOException {
+    public static long sumNativeBinariesWithOverride(Handle handle, String abiOverride)
+            throws IOException {
         if (handle.multiArch) {
             if (abiOverride != null && !CLEAR_ABI_OVERRIDE.equals(abiOverride)) {
                 Slog.w(TAG, "Ignoring abiOverride for multi arch application.");
             }
-            long sum = Build.SUPPORTED_32_BIT_ABIS.length > 0 ? 0 + sumNativeBinariesForSupportedAbi(handle, Build.SUPPORTED_32_BIT_ABIS) : 0L;
+            long sum =
+                    Build.SUPPORTED_32_BIT_ABIS.length > 0
+                            ? 0
+                                    + sumNativeBinariesForSupportedAbi(
+                                            handle, Build.SUPPORTED_32_BIT_ABIS)
+                            : 0L;
             if (Build.SUPPORTED_64_BIT_ABIS.length > 0) {
                 return sum + sumNativeBinariesForSupportedAbi(handle, Build.SUPPORTED_64_BIT_ABIS);
             }
@@ -312,14 +396,18 @@ public class NativeLibraryHelper {
         } else if (abiOverride != null) {
             cpuAbiOverride = abiOverride;
         }
-        String[] abiList = cpuAbiOverride != null ? new String[]{cpuAbiOverride} : Build.SUPPORTED_ABIS;
-        if (Build.SUPPORTED_64_BIT_ABIS.length > 0 && cpuAbiOverride == null && hasRenderscriptBitcode(handle)) {
+        String[] abiList =
+                cpuAbiOverride != null ? new String[] {cpuAbiOverride} : Build.SUPPORTED_ABIS;
+        if (Build.SUPPORTED_64_BIT_ABIS.length > 0
+                && cpuAbiOverride == null
+                && hasRenderscriptBitcode(handle)) {
             abiList = Build.SUPPORTED_32_BIT_ABIS;
         }
         return 0 + sumNativeBinariesForSupportedAbi(handle, abiList);
     }
 
-    private static int incrementalConfigureNativeBinariesForSupportedAbi(Handle handle, File libSubDir, String abi) {
+    private static int incrementalConfigureNativeBinariesForSupportedAbi(
+            Handle handle, File libSubDir, String abi) {
         String[] apkPaths = handle.apkPaths;
         if (apkPaths == null || apkPaths.length == 0) {
             Slog.e(TAG, "No apks to extract native libraries from.");
@@ -329,9 +417,11 @@ public class NativeLibraryHelper {
         if (incrementalService == null) {
             return -110;
         }
-        IncrementalManager incrementalManager = new IncrementalManager(IIncrementalService.Stub.asInterface(incrementalService));
+        IncrementalManager incrementalManager =
+                new IncrementalManager(IIncrementalService.Stub.asInterface(incrementalService));
         File apkParent = new File(apkPaths[0]).getParentFile();
-        IncrementalStorage incrementalStorage = incrementalManager.openStorage(apkParent.getAbsolutePath());
+        IncrementalStorage incrementalStorage =
+                incrementalManager.openStorage(apkParent.getAbsolutePath());
         if (incrementalStorage == null) {
             Slog.e(TAG, "Failed to find incremental storage");
             return -110;
@@ -341,7 +431,8 @@ public class NativeLibraryHelper {
             return -110;
         }
         for (String str : apkPaths) {
-            if (!incrementalStorage.configureNativeBinaries(str, libRelativeDir, abi, handle.extractNativeLibs)) {
+            if (!incrementalStorage.configureNativeBinaries(
+                    str, libRelativeDir, abi, handle.extractNativeLibs)) {
                 return -110;
             }
         }
@@ -358,7 +449,12 @@ public class NativeLibraryHelper {
             }
             return relativePath.toString();
         } catch (IllegalArgumentException e) {
-            Slog.e(TAG, "Failed to find relative path between: " + base.getAbsolutePath() + " and: " + target.getAbsolutePath());
+            Slog.e(
+                    TAG,
+                    "Failed to find relative path between: "
+                            + base.getAbsolutePath()
+                            + " and: "
+                            + target.getAbsolutePath());
             return null;
         }
     }

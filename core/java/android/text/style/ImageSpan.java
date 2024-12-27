@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.format.DateFormat;
 import android.util.Log;
+
 import java.io.InputStream;
 
 /* loaded from: classes4.dex */
@@ -95,10 +96,12 @@ public class ImageSpan extends DynamicDrawableSpan {
         }
         if (this.mContentUri != null) {
             try {
-                InputStream is = this.mContext.getContentResolver().openInputStream(this.mContentUri);
+                InputStream is =
+                        this.mContext.getContentResolver().openInputStream(this.mContentUri);
                 Bitmap bitmap = BitmapFactory.decodeStream(is);
                 drawable = new BitmapDrawable(this.mContext.getResources(), bitmap);
-                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                drawable.setBounds(
+                        0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
                 is.close();
                 return drawable;
             } catch (Exception e) {
@@ -122,6 +125,13 @@ public class ImageSpan extends DynamicDrawableSpan {
 
     @Override // android.text.style.DynamicDrawableSpan
     public String toString() {
-        return "ImageSpan{drawable=" + getDrawable() + ", source='" + getSource() + DateFormat.QUOTE + ", verticalAlignment=" + getVerticalAlignment() + '}';
+        return "ImageSpan{drawable="
+                + getDrawable()
+                + ", source='"
+                + getSource()
+                + DateFormat.QUOTE
+                + ", verticalAlignment="
+                + getVerticalAlignment()
+                + '}';
     }
 }

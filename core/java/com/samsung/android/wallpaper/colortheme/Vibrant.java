@@ -16,6 +16,5 @@ final class Vibrant {
     static final float NEUTRAL2_SAT_DELTA = 0.0f;
     static final float NEUTRAL2_SAT_MAX = 0.2f;
 
-    Vibrant() {
-    }
+    Vibrant() {}
 }

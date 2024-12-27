@@ -7,6 +7,7 @@ import android.graphics.drawable.Icon;
 import android.os.RemoteException;
 import android.provider.DeviceConfig;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
@@ -47,77 +48,122 @@ public class DevicePolicyResourcesManager {
         }
     }
 
-    public Drawable getDrawable(String drawableId, String drawableStyle, Supplier<Drawable> defaultDrawableLoader) {
-        return getDrawable(drawableId, drawableStyle, DevicePolicyResources.UNDEFINED, defaultDrawableLoader);
+    public Drawable getDrawable(
+            String drawableId, String drawableStyle, Supplier<Drawable> defaultDrawableLoader) {
+        return getDrawable(
+                drawableId, drawableStyle, DevicePolicyResources.UNDEFINED, defaultDrawableLoader);
     }
 
-    public Drawable getDrawable(String drawableId, String drawableStyle, String drawableSource, Supplier<Drawable> defaultDrawableLoader) {
+    public Drawable getDrawable(
+            String drawableId,
+            String drawableStyle,
+            String drawableSource,
+            Supplier<Drawable> defaultDrawableLoader) {
         Objects.requireNonNull(drawableId, "drawableId can't be null");
         Objects.requireNonNull(drawableStyle, "drawableStyle can't be null");
         Objects.requireNonNull(drawableSource, "drawableSource can't be null");
         Objects.requireNonNull(defaultDrawableLoader, "defaultDrawableLoader can't be null");
-        if (drawableId.equals(DevicePolicyResources.UNDEFINED) || DeviceConfig.getBoolean("device_policy_manager", DISABLE_RESOURCES_UPDATABILITY_FLAG, DEFAULT_DISABLE_RESOURCES_UPDATABILITY)) {
+        if (drawableId.equals(DevicePolicyResources.UNDEFINED)
+                || DeviceConfig.getBoolean(
+                        "device_policy_manager",
+                        DISABLE_RESOURCES_UPDATABILITY_FLAG,
+                        DEFAULT_DISABLE_RESOURCES_UPDATABILITY)) {
             return ParcelableResource.loadDefaultDrawable(defaultDrawableLoader);
         }
         if (this.mService != null) {
             try {
-                ParcelableResource resource = this.mService.getDrawable(drawableId, drawableStyle, drawableSource);
+                ParcelableResource resource =
+                        this.mService.getDrawable(drawableId, drawableStyle, drawableSource);
                 if (resource == null) {
                     return ParcelableResource.loadDefaultDrawable(defaultDrawableLoader);
                 }
                 return resource.getDrawable(this.mContext, 0, defaultDrawableLoader);
             } catch (RemoteException e) {
-                Log.e(TAG, "Error getting the updated drawable from DevicePolicyManagerService.", e);
+                Log.e(
+                        TAG,
+                        "Error getting the updated drawable from DevicePolicyManagerService.",
+                        e);
                 return ParcelableResource.loadDefaultDrawable(defaultDrawableLoader);
             }
         }
         return ParcelableResource.loadDefaultDrawable(defaultDrawableLoader);
     }
 
-    public Drawable getDrawableForDensity(String drawableId, String drawableStyle, int density, Supplier<Drawable> defaultDrawableLoader) {
-        return getDrawableForDensity(drawableId, drawableStyle, DevicePolicyResources.UNDEFINED, density, defaultDrawableLoader);
+    public Drawable getDrawableForDensity(
+            String drawableId,
+            String drawableStyle,
+            int density,
+            Supplier<Drawable> defaultDrawableLoader) {
+        return getDrawableForDensity(
+                drawableId,
+                drawableStyle,
+                DevicePolicyResources.UNDEFINED,
+                density,
+                defaultDrawableLoader);
     }
 
-    public Drawable getDrawableForDensity(String drawableId, String drawableStyle, String drawableSource, int density, Supplier<Drawable> defaultDrawableLoader) {
+    public Drawable getDrawableForDensity(
+            String drawableId,
+            String drawableStyle,
+            String drawableSource,
+            int density,
+            Supplier<Drawable> defaultDrawableLoader) {
         Objects.requireNonNull(drawableId, "drawableId can't be null");
         Objects.requireNonNull(drawableStyle, "drawableStyle can't be null");
         Objects.requireNonNull(drawableSource, "drawableSource can't be null");
         Objects.requireNonNull(defaultDrawableLoader, "defaultDrawableLoader can't be null");
-        if (drawableId.equals(DevicePolicyResources.UNDEFINED) || DeviceConfig.getBoolean("device_policy_manager", DISABLE_RESOURCES_UPDATABILITY_FLAG, DEFAULT_DISABLE_RESOURCES_UPDATABILITY)) {
+        if (drawableId.equals(DevicePolicyResources.UNDEFINED)
+                || DeviceConfig.getBoolean(
+                        "device_policy_manager",
+                        DISABLE_RESOURCES_UPDATABILITY_FLAG,
+                        DEFAULT_DISABLE_RESOURCES_UPDATABILITY)) {
             return ParcelableResource.loadDefaultDrawable(defaultDrawableLoader);
         }
         if (this.mService != null) {
             try {
-                ParcelableResource resource = this.mService.getDrawable(drawableId, drawableStyle, drawableSource);
+                ParcelableResource resource =
+                        this.mService.getDrawable(drawableId, drawableStyle, drawableSource);
                 if (resource == null) {
                     return ParcelableResource.loadDefaultDrawable(defaultDrawableLoader);
                 }
                 return resource.getDrawable(this.mContext, density, defaultDrawableLoader);
             } catch (RemoteException e) {
-                Log.e(TAG, "Error getting the updated drawable from DevicePolicyManagerService.", e);
+                Log.e(
+                        TAG,
+                        "Error getting the updated drawable from DevicePolicyManagerService.",
+                        e);
                 return ParcelableResource.loadDefaultDrawable(defaultDrawableLoader);
             }
         }
         return ParcelableResource.loadDefaultDrawable(defaultDrawableLoader);
     }
 
-    public Icon getDrawableAsIcon(String drawableId, String drawableStyle, String drawableSource, Icon defaultIcon) {
+    public Icon getDrawableAsIcon(
+            String drawableId, String drawableStyle, String drawableSource, Icon defaultIcon) {
         Objects.requireNonNull(drawableId, "drawableId can't be null");
         Objects.requireNonNull(drawableStyle, "drawableStyle can't be null");
         Objects.requireNonNull(drawableSource, "drawableSource can't be null");
         Objects.requireNonNull(defaultIcon, "defaultIcon can't be null");
-        if (drawableId.equals(DevicePolicyResources.UNDEFINED) || DeviceConfig.getBoolean("device_policy_manager", DISABLE_RESOURCES_UPDATABILITY_FLAG, DEFAULT_DISABLE_RESOURCES_UPDATABILITY)) {
+        if (drawableId.equals(DevicePolicyResources.UNDEFINED)
+                || DeviceConfig.getBoolean(
+                        "device_policy_manager",
+                        DISABLE_RESOURCES_UPDATABILITY_FLAG,
+                        DEFAULT_DISABLE_RESOURCES_UPDATABILITY)) {
             return defaultIcon;
         }
         if (this.mService != null) {
             try {
-                ParcelableResource resource = this.mService.getDrawable(drawableId, drawableStyle, drawableSource);
+                ParcelableResource resource =
+                        this.mService.getDrawable(drawableId, drawableStyle, drawableSource);
                 if (resource == null) {
                     return defaultIcon;
                 }
                 return Icon.createWithResource(resource.getPackageName(), resource.getResourceId());
             } catch (RemoteException e) {
-                Log.e(TAG, "Error getting the updated drawable from DevicePolicyManagerService.", e);
+                Log.e(
+                        TAG,
+                        "Error getting the updated drawable from DevicePolicyManagerService.",
+                        e);
                 return defaultIcon;
             }
         }
@@ -125,7 +171,8 @@ public class DevicePolicyResourcesManager {
     }
 
     public Icon getDrawableAsIcon(String drawableId, String drawableStyle, Icon defaultIcon) {
-        return getDrawableAsIcon(drawableId, drawableStyle, DevicePolicyResources.UNDEFINED, defaultIcon);
+        return getDrawableAsIcon(
+                drawableId, drawableStyle, DevicePolicyResources.UNDEFINED, defaultIcon);
     }
 
     @SystemApi
@@ -153,7 +200,11 @@ public class DevicePolicyResourcesManager {
     public String getString(String stringId, Supplier<String> defaultStringLoader) {
         Objects.requireNonNull(stringId, "stringId can't be null");
         Objects.requireNonNull(defaultStringLoader, "defaultStringLoader can't be null");
-        if (stringId.equals(DevicePolicyResources.UNDEFINED) || DeviceConfig.getBoolean("device_policy_manager", DISABLE_RESOURCES_UPDATABILITY_FLAG, DEFAULT_DISABLE_RESOURCES_UPDATABILITY)) {
+        if (stringId.equals(DevicePolicyResources.UNDEFINED)
+                || DeviceConfig.getBoolean(
+                        "device_policy_manager",
+                        DISABLE_RESOURCES_UPDATABILITY_FLAG,
+                        DEFAULT_DISABLE_RESOURCES_UPDATABILITY)) {
             return ParcelableResource.loadDefaultString(defaultStringLoader);
         }
         if (this.mService != null) {
@@ -171,10 +222,15 @@ public class DevicePolicyResourcesManager {
         return ParcelableResource.loadDefaultString(defaultStringLoader);
     }
 
-    public String getString(String stringId, Supplier<String> defaultStringLoader, Object... formatArgs) {
+    public String getString(
+            String stringId, Supplier<String> defaultStringLoader, Object... formatArgs) {
         Objects.requireNonNull(stringId, "stringId can't be null");
         Objects.requireNonNull(defaultStringLoader, "defaultStringLoader can't be null");
-        if (stringId.equals(DevicePolicyResources.UNDEFINED) || DeviceConfig.getBoolean("device_policy_manager", DISABLE_RESOURCES_UPDATABILITY_FLAG, DEFAULT_DISABLE_RESOURCES_UPDATABILITY)) {
+        if (stringId.equals(DevicePolicyResources.UNDEFINED)
+                || DeviceConfig.getBoolean(
+                        "device_policy_manager",
+                        DISABLE_RESOURCES_UPDATABILITY_FLAG,
+                        DEFAULT_DISABLE_RESOURCES_UPDATABILITY)) {
             return ParcelableResource.loadDefaultString(defaultStringLoader);
         }
         if (this.mService != null) {

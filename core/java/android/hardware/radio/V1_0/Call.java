@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -30,18 +31,69 @@ public final class Call {
             return false;
         }
         Call other = (Call) otherObject;
-        if (this.state == other.state && this.index == other.index && this.toa == other.toa && this.isMpty == other.isMpty && this.isMT == other.isMT && this.als == other.als && this.isVoice == other.isVoice && this.isVoicePrivacy == other.isVoicePrivacy && HidlSupport.deepEquals(this.number, other.number) && this.numberPresentation == other.numberPresentation && HidlSupport.deepEquals(this.name, other.name) && this.namePresentation == other.namePresentation && HidlSupport.deepEquals(this.uusInfo, other.uusInfo)) {
+        if (this.state == other.state
+                && this.index == other.index
+                && this.toa == other.toa
+                && this.isMpty == other.isMpty
+                && this.isMT == other.isMT
+                && this.als == other.als
+                && this.isVoice == other.isVoice
+                && this.isVoicePrivacy == other.isVoicePrivacy
+                && HidlSupport.deepEquals(this.number, other.number)
+                && this.numberPresentation == other.numberPresentation
+                && HidlSupport.deepEquals(this.name, other.name)
+                && this.namePresentation == other.namePresentation
+                && HidlSupport.deepEquals(this.uusInfo, other.uusInfo)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.state))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.index))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.toa))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isMpty))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isMT))), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.als))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isVoice))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isVoicePrivacy))), Integer.valueOf(HidlSupport.deepHashCode(this.number)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.numberPresentation))), Integer.valueOf(HidlSupport.deepHashCode(this.name)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.namePresentation))), Integer.valueOf(HidlSupport.deepHashCode(this.uusInfo)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.state))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.index))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.toa))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isMpty))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isMT))),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.als))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isVoice))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isVoicePrivacy))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.number)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.numberPresentation))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.name)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.namePresentation))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.uusInfo)));
     }
 
     public final String toString() {
-        return "{.state = " + CallState.toString(this.state) + ", .index = " + this.index + ", .toa = " + this.toa + ", .isMpty = " + this.isMpty + ", .isMT = " + this.isMT + ", .als = " + ((int) this.als) + ", .isVoice = " + this.isVoice + ", .isVoicePrivacy = " + this.isVoicePrivacy + ", .number = " + this.number + ", .numberPresentation = " + CallPresentation.toString(this.numberPresentation) + ", .name = " + this.name + ", .namePresentation = " + CallPresentation.toString(this.namePresentation) + ", .uusInfo = " + this.uusInfo + "}";
+        return "{.state = "
+                + CallState.toString(this.state)
+                + ", .index = "
+                + this.index
+                + ", .toa = "
+                + this.toa
+                + ", .isMpty = "
+                + this.isMpty
+                + ", .isMT = "
+                + this.isMT
+                + ", .als = "
+                + ((int) this.als)
+                + ", .isVoice = "
+                + this.isVoice
+                + ", .isVoicePrivacy = "
+                + this.isVoicePrivacy
+                + ", .number = "
+                + this.number
+                + ", .numberPresentation = "
+                + CallPresentation.toString(this.numberPresentation)
+                + ", .name = "
+                + this.name
+                + ", .namePresentation = "
+                + CallPresentation.toString(this.namePresentation)
+                + ", .uusInfo = "
+                + this.uusInfo
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -53,7 +105,8 @@ public final class Call {
         ArrayList<Call> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 88, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 88, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             Call _hidl_vec_element = new Call();
@@ -63,7 +116,8 @@ public final class Call {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.state = _hidl_blob.getInt32(_hidl_offset + 0);
         this.index = _hidl_blob.getInt32(_hidl_offset + 4);
         this.toa = _hidl_blob.getInt32(_hidl_offset + 8);
@@ -73,13 +127,20 @@ public final class Call {
         this.isVoice = _hidl_blob.getBool(_hidl_offset + 15);
         this.isVoicePrivacy = _hidl_blob.getBool(_hidl_offset + 16);
         this.number = _hidl_blob.getString(_hidl_offset + 24);
-        parcel.readEmbeddedBuffer(this.number.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 24 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.number.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 24 + 0,
+                false);
         this.numberPresentation = _hidl_blob.getInt32(_hidl_offset + 40);
         this.name = _hidl_blob.getString(_hidl_offset + 48);
-        parcel.readEmbeddedBuffer(this.name.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 48 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.name.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 48 + 0, false);
         this.namePresentation = _hidl_blob.getInt32(_hidl_offset + 64);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 72 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), _hidl_offset + 72 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 24, _hidl_blob.handle(), _hidl_offset + 72 + 0, true);
         this.uusInfo.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             UusInfo _hidl_vec_element = new UusInfo();

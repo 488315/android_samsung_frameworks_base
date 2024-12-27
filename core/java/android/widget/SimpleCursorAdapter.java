@@ -31,7 +31,8 @@ public class SimpleCursorAdapter extends ResourceCursorAdapter {
         findColumns(c, from);
     }
 
-    public SimpleCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
+    public SimpleCursorAdapter(
+            Context context, int layout, Cursor c, String[] from, int[] to, int flags) {
         super(context, layout, c, flags);
         this.mStringConversionColumn = -1;
         this.mTo = to;
@@ -64,7 +65,10 @@ public class SimpleCursorAdapter extends ResourceCursorAdapter {
                     } else if (v instanceof ImageView) {
                         setViewImage((ImageView) v, text);
                     } else {
-                        throw new IllegalStateException(v.getClass().getName() + " is not a  view that can be bounds by this SimpleCursorAdapter");
+                        throw new IllegalStateException(
+                                v.getClass().getName()
+                                        + " is not a  view that can be bounds by this"
+                                        + " SimpleCursorAdapter");
                     }
                 }
             }

@@ -32,11 +32,11 @@ public class TypefaceParser extends DefaultHandler {
     }
 
     @Override // org.xml.sax.helpers.DefaultHandler, org.xml.sax.ContentHandler
-    public void endDocument() throws SAXException {
-    }
+    public void endDocument() throws SAXException {}
 
     @Override // org.xml.sax.helpers.DefaultHandler, org.xml.sax.ContentHandler
-    public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
+    public void startElement(String namespaceURI, String localName, String qName, Attributes atts)
+            throws SAXException {
         if (localName.equals("font")) {
             String attrValue = atts.getValue(ATTR_NAME);
             this.mFont.setName(attrValue);
@@ -64,7 +64,8 @@ public class TypefaceParser extends DefaultHandler {
     }
 
     @Override // org.xml.sax.helpers.DefaultHandler, org.xml.sax.ContentHandler
-    public void endElement(String namespaceURI, String localName, String qName) throws SAXException {
+    public void endElement(String namespaceURI, String localName, String qName)
+            throws SAXException {
         if (!localName.equals("font")) {
             if (localName.equals(NODE_SANS)) {
                 this.in_sans = false;

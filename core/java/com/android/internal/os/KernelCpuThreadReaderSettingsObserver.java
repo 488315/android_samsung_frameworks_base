@@ -7,6 +7,7 @@ import android.provider.Settings;
 import android.util.KeyValueListParser;
 import android.util.Range;
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +20,8 @@ public class KernelCpuThreadReaderSettingsObserver extends ContentObserver {
     private static final String COLLECTED_UIDS_DEFAULT = "0-0;1000-1000";
     private static final String COLLECTED_UIDS_SETTINGS_KEY = "collected_uids";
     private static final int MINIMUM_TOTAL_CPU_USAGE_MILLIS_DEFAULT = 10000;
-    private static final String MINIMUM_TOTAL_CPU_USAGE_MILLIS_SETTINGS_KEY = "minimum_total_cpu_usage_millis";
+    private static final String MINIMUM_TOTAL_CPU_USAGE_MILLIS_SETTINGS_KEY =
+            "minimum_total_cpu_usage_millis";
     private static final int NUM_BUCKETS_DEFAULT = 8;
     private static final String NUM_BUCKETS_SETTINGS_KEY = "num_buckets";
     private static final String TAG = "KernelCpuThreadReaderSettingsObserver";
@@ -28,9 +30,11 @@ public class KernelCpuThreadReaderSettingsObserver extends ContentObserver {
     private final KernelCpuThreadReaderDiff mKernelCpuThreadReaderDiff;
 
     public static KernelCpuThreadReaderDiff getSettingsModifiedReader(Context context) {
-        KernelCpuThreadReaderSettingsObserver settingsObserver = new KernelCpuThreadReaderSettingsObserver(context);
+        KernelCpuThreadReaderSettingsObserver settingsObserver =
+                new KernelCpuThreadReaderSettingsObserver(context);
         Uri settingsUri = Settings.Global.getUriFor(Settings.Global.KERNEL_CPU_THREAD_READER);
-        context.getContentResolver().registerContentObserver(settingsUri, false, settingsObserver, 0);
+        context.getContentResolver()
+                .registerContentObserver(settingsUri, false, settingsObserver, 0);
         return settingsObserver.mKernelCpuThreadReaderDiff;
     }
 
@@ -38,11 +42,13 @@ public class KernelCpuThreadReaderSettingsObserver extends ContentObserver {
         super(BackgroundThread.getHandler());
         KernelCpuThreadReaderDiff kernelCpuThreadReaderDiff;
         this.mContext = context;
-        this.mKernelCpuThreadReader = KernelCpuThreadReader.create(8, UidPredicate.fromString(COLLECTED_UIDS_DEFAULT));
+        this.mKernelCpuThreadReader =
+                KernelCpuThreadReader.create(8, UidPredicate.fromString(COLLECTED_UIDS_DEFAULT));
         if (this.mKernelCpuThreadReader == null) {
             kernelCpuThreadReaderDiff = null;
         } else {
-            kernelCpuThreadReaderDiff = new KernelCpuThreadReaderDiff(this.mKernelCpuThreadReader, 10000);
+            kernelCpuThreadReaderDiff =
+                    new KernelCpuThreadReaderDiff(this.mKernelCpuThreadReader, 10000);
         }
         this.mKernelCpuThreadReaderDiff = kernelCpuThreadReaderDiff;
     }
@@ -58,12 +64,20 @@ public class KernelCpuThreadReaderSettingsObserver extends ContentObserver {
         }
         KeyValueListParser parser = new KeyValueListParser(',');
         try {
-            parser.setString(Settings.Global.getString(this.mContext.getContentResolver(), Settings.Global.KERNEL_CPU_THREAD_READER));
+            parser.setString(
+                    Settings.Global.getString(
+                            this.mContext.getContentResolver(),
+                            Settings.Global.KERNEL_CPU_THREAD_READER));
             try {
-                UidPredicate uidPredicate = UidPredicate.fromString(parser.getString(COLLECTED_UIDS_SETTINGS_KEY, COLLECTED_UIDS_DEFAULT));
-                this.mKernelCpuThreadReader.setNumBuckets(parser.getInt(NUM_BUCKETS_SETTINGS_KEY, 8));
+                UidPredicate uidPredicate =
+                        UidPredicate.fromString(
+                                parser.getString(
+                                        COLLECTED_UIDS_SETTINGS_KEY, COLLECTED_UIDS_DEFAULT));
+                this.mKernelCpuThreadReader.setNumBuckets(
+                        parser.getInt(NUM_BUCKETS_SETTINGS_KEY, 8));
                 this.mKernelCpuThreadReader.setUidPredicate(uidPredicate);
-                this.mKernelCpuThreadReaderDiff.setMinimumTotalCpuUsageMillis(parser.getInt(MINIMUM_TOTAL_CPU_USAGE_MILLIS_SETTINGS_KEY, 10000));
+                this.mKernelCpuThreadReaderDiff.setMinimumTotalCpuUsageMillis(
+                        parser.getInt(MINIMUM_TOTAL_CPU_USAGE_MILLIS_SETTINGS_KEY, 10000));
             } catch (NumberFormatException e) {
                 Slog.w(TAG, "Failed to get UID predicate", e);
             }
@@ -82,9 +96,13 @@ public class KernelCpuThreadReaderSettingsObserver extends ContentObserver {
             for (String uidSpecifier : predicateString.split(";")) {
                 Matcher uidRangeMatcher = UID_RANGE_PATTERN.matcher(uidSpecifier);
                 if (!uidRangeMatcher.matches()) {
-                    throw new NumberFormatException("Failed to recognize as number range: " + uidSpecifier);
+                    throw new NumberFormatException(
+                            "Failed to recognize as number range: " + uidSpecifier);
                 }
-                acceptedUidRanges.add(Range.create(Integer.valueOf(Integer.parseInt(uidRangeMatcher.group(1))), Integer.valueOf(Integer.parseInt(uidRangeMatcher.group(2)))));
+                acceptedUidRanges.add(
+                        Range.create(
+                                Integer.valueOf(Integer.parseInt(uidRangeMatcher.group(1))),
+                                Integer.valueOf(Integer.parseInt(uidRangeMatcher.group(2)))));
             }
             return new UidPredicate(acceptedUidRanges);
         }

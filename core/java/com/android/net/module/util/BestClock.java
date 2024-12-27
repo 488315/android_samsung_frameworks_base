@@ -1,6 +1,7 @@
 package com.android.net.module.util;
 
 import android.util.Log;
+
 import java.time.Clock;
 import java.time.DateTimeException;
 import java.time.Instant;
@@ -30,7 +31,8 @@ public final class BestClock extends Clock {
                 Log.w(TAG, e.toString());
             }
         }
-        throw new DateTimeException("No clocks in " + Arrays.toString(this.mClocks) + " were able to provide time");
+        throw new DateTimeException(
+                "No clocks in " + Arrays.toString(this.mClocks) + " were able to provide time");
     }
 
     @Override // java.time.Clock

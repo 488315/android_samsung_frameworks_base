@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.provider.SemDynamicFeature;
 
 /* loaded from: classes6.dex */
 public interface IDynamicFeatureManager extends IInterface {
@@ -17,12 +16,14 @@ public interface IDynamicFeatureManager extends IInterface {
 
     public static class Default implements IDynamicFeatureManager {
         @Override // com.samsung.android.provider.IDynamicFeatureManager
-        public SemDynamicFeature.Properties getProperties(String namespace, String[] names) throws RemoteException {
+        public SemDynamicFeature.Properties getProperties(String namespace, String[] names)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.provider.IDynamicFeatureManager
-        public boolean sendAbTestResult(String namespace, String name, String message) throws RemoteException {
+        public boolean sendAbTestResult(String namespace, String name, String message)
+                throws RemoteException {
             return false;
         }
 
@@ -32,7 +33,7 @@ public interface IDynamicFeatureManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDynamicFeatureManager {
+    public abstract static class Stub extends Binder implements IDynamicFeatureManager {
         static final int TRANSACTION_getProperties = 1;
         static final int TRANSACTION_sendAbTestResult = 2;
 
@@ -73,7 +74,8 @@ public interface IDynamicFeatureManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDynamicFeatureManager.DESCRIPTOR);
             }
@@ -121,7 +123,8 @@ public interface IDynamicFeatureManager extends IInterface {
             }
 
             @Override // com.samsung.android.provider.IDynamicFeatureManager
-            public SemDynamicFeature.Properties getProperties(String namespace, String[] names) throws RemoteException {
+            public SemDynamicFeature.Properties getProperties(String namespace, String[] names)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -130,7 +133,9 @@ public interface IDynamicFeatureManager extends IInterface {
                     _data.writeStringArray(names);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    SemDynamicFeature.Properties _result = (SemDynamicFeature.Properties) _reply.readTypedObject(SemDynamicFeature.Properties.CREATOR);
+                    SemDynamicFeature.Properties _result =
+                            (SemDynamicFeature.Properties)
+                                    _reply.readTypedObject(SemDynamicFeature.Properties.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -139,7 +144,8 @@ public interface IDynamicFeatureManager extends IInterface {
             }
 
             @Override // com.samsung.android.provider.IDynamicFeatureManager
-            public boolean sendAbTestResult(String namespace, String name, String message) throws RemoteException {
+            public boolean sendAbTestResult(String namespace, String name, String message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

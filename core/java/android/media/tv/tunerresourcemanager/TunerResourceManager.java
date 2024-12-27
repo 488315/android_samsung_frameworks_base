@@ -1,10 +1,9 @@
 package android.media.tv.tunerresourcemanager;
 
-import android.media.tv.tunerresourcemanager.IResourcesReclaimListener;
-import android.media.tv.tunerresourcemanager.TunerResourceManager;
 import android.os.Binder;
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -25,13 +24,12 @@ public class TunerResourceManager {
     private static final String TAG = "TunerResourceManager";
     private static final boolean DEBUG = Log.isLoggable(TAG, 3);
 
-    public static abstract class ResourcesReclaimListener {
+    public abstract static class ResourcesReclaimListener {
         public abstract void onReclaimResources();
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TunerResourceType {
-    }
+    public @interface TunerResourceType {}
 
     public TunerResourceManager(ITunerResourceManager service, int userId) {
         this.mService = service;
@@ -54,21 +52,29 @@ public class TunerResourceManager {
             try {
                 Executor executor = this.val$executor;
                 final ResourcesReclaimListener resourcesReclaimListener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.media.tv.tunerresourcemanager.TunerResourceManager$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        TunerResourceManager.ResourcesReclaimListener.this.onReclaimResources();
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.media.tv.tunerresourcemanager.TunerResourceManager$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                TunerResourceManager.ResourcesReclaimListener.this
+                                        .onReclaimResources();
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
         }
     }
 
-    public void registerClientProfile(ResourceClientProfile profile, Executor executor, ResourcesReclaimListener listener, int[] clientId) {
+    public void registerClientProfile(
+            ResourceClientProfile profile,
+            Executor executor,
+            ResourcesReclaimListener listener,
+            int[] clientId) {
         try {
-            this.mService.registerClientProfile(profile, new AnonymousClass1(executor, listener), clientId);
+            this.mService.registerClientProfile(
+                    profile, new AnonymousClass1(executor, listener), clientId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -317,7 +323,8 @@ public class TunerResourceManager {
         }
     }
 
-    public boolean isHigherPriority(ResourceClientProfile challengerProfile, ResourceClientProfile holderProfile) {
+    public boolean isHigherPriority(
+            ResourceClientProfile challengerProfile, ResourceClientProfile holderProfile) {
         try {
             return this.mService.isHigherPriority(challengerProfile, holderProfile);
         } catch (RemoteException e) {

@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
+
 import com.samsung.accessory.manager.authentication.AuthenticationResult;
 import com.samsung.accessory.manager.authentication.AuthenticationSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
@@ -15,7 +17,8 @@ import java.util.UUID;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class BTConnectivity extends Connectivity {
-    public static final UUID MY_UUID_INSECURE = UUID.fromString("0172c870-6e31-11e4-9803-0800200c9a66");
+    public static final UUID MY_UUID_INSECURE =
+            UUID.fromString("0172c870-6e31-11e4-9803-0800200c9a66");
     public static final String TAG = "SAccessoryManager_BTConnectivity";
     public final BluetoothAdapter mAdapter;
     public final AdapterStateChangedHandler mAdapterStateChangedHandler;
@@ -23,21 +26,22 @@ public final class BTConnectivity extends Connectivity {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AdapterStateChangedHandler {
-        public AdapterStateChangedHandler() {
-        }
+        public AdapterStateChangedHandler() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BTStateReceiver extends BroadcastReceiver {
-        public BTStateReceiver() {
-        }
+        public BTStateReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals("android.bluetooth.adapter.action.STATE_CHANGED")) {
-                AdapterStateChangedHandler adapterStateChangedHandler = BTConnectivity.this.mAdapterStateChangedHandler;
+                AdapterStateChangedHandler adapterStateChangedHandler =
+                        BTConnectivity.this.mAdapterStateChangedHandler;
                 adapterStateChangedHandler.getClass();
-                int intExtra = intent.getIntExtra("android.bluetooth.adapter.extra.STATE", Integer.MIN_VALUE);
+                int intExtra =
+                        intent.getIntExtra(
+                                "android.bluetooth.adapter.extra.STATE", Integer.MIN_VALUE);
                 BTConnectivity bTConnectivity = BTConnectivity.this;
                 if (intExtra == 10) {
                     bTConnectivity.mStateChangedCallback.onStateChanged(2);
@@ -56,7 +60,9 @@ public final class BTConnectivity extends Connectivity {
         this.mAdapter = BluetoothAdapter.getDefaultAdapter();
         this.mAdapterStateChangedHandler = new AdapterStateChangedHandler();
         this.mBTStateReceiver = new BTStateReceiver();
-        context.registerReceiver(this.mBTStateReceiver, new IntentFilter("android.bluetooth.adapter.action.STATE_CHANGED"));
+        context.registerReceiver(
+                this.mBTStateReceiver,
+                new IntentFilter("android.bluetooth.adapter.action.STATE_CHANGED"));
     }
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
@@ -72,7 +78,10 @@ public final class BTConnectivity extends Connectivity {
     public final void connect() {
         Log.d(TAG, "connect");
         try {
-            this.mAdapter.getRemoteDevice((String) null).createInsecureRfcommSocketToServiceRecord(MY_UUID_INSECURE).connect();
+            this.mAdapter
+                    .getRemoteDevice((String) null)
+                    .createInsecureRfcommSocketToServiceRecord(MY_UUID_INSECURE)
+                    .connect();
             AuthenticationSession.AnonymousClass1 anonymousClass1 = this.mStateChangedCallback;
             if (anonymousClass1 != null) {
                 anonymousClass1.onConnectionStateChanged();
@@ -88,8 +97,7 @@ public final class BTConnectivity extends Connectivity {
     }
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
-    public final void disconnect() {
-    }
+    public final void disconnect() {}
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
     public final void dump(PrintWriter printWriter) {
@@ -129,8 +137,7 @@ public final class BTConnectivity extends Connectivity {
     }
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
-    public final void sendStopUsbAuth() {
-    }
+    public final void sendStopUsbAuth() {}
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
     public final byte[] sendSynchronously(byte[] bArr, AuthenticationResult authenticationResult) {

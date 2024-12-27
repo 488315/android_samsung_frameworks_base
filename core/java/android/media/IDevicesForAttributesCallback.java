@@ -5,18 +5,22 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IDevicesForAttributesCallback extends IInterface {
     public static final String DESCRIPTOR = "android.media.IDevicesForAttributesCallback";
 
-    void onDevicesForAttributesChanged(AudioAttributes audioAttributes, boolean z, List<AudioDeviceAttributes> list) throws RemoteException;
+    void onDevicesForAttributesChanged(
+            AudioAttributes audioAttributes, boolean z, List<AudioDeviceAttributes> list)
+            throws RemoteException;
 
     public static class Default implements IDevicesForAttributesCallback {
         @Override // android.media.IDevicesForAttributesCallback
-        public void onDevicesForAttributesChanged(AudioAttributes attributes, boolean forVolume, List<AudioDeviceAttributes> devices) throws RemoteException {
-        }
+        public void onDevicesForAttributesChanged(
+                AudioAttributes attributes, boolean forVolume, List<AudioDeviceAttributes> devices)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +28,7 @@ public interface IDevicesForAttributesCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDevicesForAttributesCallback {
+    public abstract static class Stub extends Binder implements IDevicesForAttributesCallback {
         static final int TRANSACTION_onDevicesForAttributesChanged = 1;
 
         public Stub() {
@@ -62,7 +66,8 @@ public interface IDevicesForAttributesCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDevicesForAttributesCallback.DESCRIPTOR);
             }
@@ -72,9 +77,11 @@ public interface IDevicesForAttributesCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AudioAttributes _arg0 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg0 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     boolean _arg1 = data.readBoolean();
-                    List<AudioDeviceAttributes> _arg2 = data.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    List<AudioDeviceAttributes> _arg2 =
+                            data.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     onDevicesForAttributesChanged(_arg0, _arg1, _arg2);
                     return true;
@@ -100,7 +107,11 @@ public interface IDevicesForAttributesCallback extends IInterface {
             }
 
             @Override // android.media.IDevicesForAttributesCallback
-            public void onDevicesForAttributesChanged(AudioAttributes attributes, boolean forVolume, List<AudioDeviceAttributes> devices) throws RemoteException {
+            public void onDevicesForAttributesChanged(
+                    AudioAttributes attributes,
+                    boolean forVolume,
+                    List<AudioDeviceAttributes> devices)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDevicesForAttributesCallback.DESCRIPTOR);

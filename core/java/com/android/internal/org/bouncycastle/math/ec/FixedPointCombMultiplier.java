@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.math.ec;
 
 import com.android.internal.org.bouncycastle.math.raw.Nat;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -10,7 +11,8 @@ public class FixedPointCombMultiplier extends AbstractECMultiplier {
         ECCurve c = p.getCurve();
         int size = FixedPointUtil.getCombSize(c);
         if (k.bitLength() > size) {
-            throw new IllegalStateException("fixed-point comb doesn't support scalars larger than the curve order");
+            throw new IllegalStateException(
+                    "fixed-point comb doesn't support scalars larger than the curve order");
         }
         FixedPointPreCompInfo info = FixedPointUtil.precompute(p);
         ECLookupTable lookupTable = info.getLookupTable();

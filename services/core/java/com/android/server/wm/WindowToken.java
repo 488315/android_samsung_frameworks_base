@@ -9,11 +9,11 @@ import android.os.IBinder;
 import android.util.proto.ProtoOutputStream;
 import android.view.DisplayInfo;
 import android.view.SurfaceControl;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.server.policy.WindowManagerPolicy;
-import com.android.server.wm.DisplayContent;
-import com.android.server.wm.Transition;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -44,7 +44,8 @@ public class WindowToken extends WindowContainer {
         public final ArrayList mAssociatedTokens = new ArrayList(3);
         public boolean mIsTransforming = true;
 
-        public FixedRotationTransformState(DisplayInfo displayInfo, DisplayFrames displayFrames, Configuration configuration) {
+        public FixedRotationTransformState(
+                DisplayInfo displayInfo, DisplayFrames displayFrames, Configuration configuration) {
             this.mDisplayInfo = displayInfo;
             this.mDisplayFrames = displayFrames;
             this.mRotatedOverrideConfiguration = configuration;
@@ -61,7 +62,8 @@ public class WindowToken extends WindowContainer {
                     SurfaceControl.Transaction syncTransaction = windowToken.getSyncTransaction();
                     SurfaceControl surfaceControl = windowToken.mSurfaceControl;
                     if (surfaceControl != null) {
-                        syncTransaction.reparent(surfaceControl, windowToken.getParentSurfaceControl());
+                        syncTransaction.reparent(
+                                surfaceControl, windowToken.getParentSurfaceControl());
                     }
                     syncTransaction.remove(windowToken.mFixedRotationTransformLeash);
                     windowToken.mFixedRotationTransformLeash = null;
@@ -69,8 +71,7 @@ public class WindowToken extends WindowContainer {
             }
         }
 
-        public void transform(WindowContainer windowContainer) {
-        }
+        public void transform(WindowContainer windowContainer) {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -78,7 +79,11 @@ public class WindowToken extends WindowContainer {
         public final ArrayList mRotatedContainers;
         public final SeamlessRotator mRotator;
 
-        public FixedRotationTransformStateLegacy(DisplayInfo displayInfo, DisplayFrames displayFrames, Configuration configuration, int i) {
+        public FixedRotationTransformStateLegacy(
+                DisplayInfo displayInfo,
+                DisplayFrames displayFrames,
+                Configuration configuration,
+                int i) {
             super(displayInfo, displayFrames, configuration);
             this.mRotatedContainers = new ArrayList(3);
             this.mRotator = new SeamlessRotator(displayInfo.rotation, i, displayInfo, true);
@@ -93,7 +98,8 @@ public class WindowToken extends WindowContainer {
         @Override // com.android.server.wm.WindowToken.FixedRotationTransformState
         public final void resetTransform() {
             for (int size = this.mRotatedContainers.size() - 1; size >= 0; size--) {
-                WindowContainer windowContainer = (WindowContainer) this.mRotatedContainers.get(size);
+                WindowContainer windowContainer =
+                        (WindowContainer) this.mRotatedContainers.get(size);
                 if (windowContainer.getParent() != null) {
                     this.mRotator.finish(windowContainer.getPendingTransaction(), windowContainer);
                 }
@@ -111,25 +117,47 @@ public class WindowToken extends WindowContainer {
     }
 
     /* JADX WARN: Type inference failed for: r1v2, types: [com.android.server.wm.WindowToken$$ExternalSyntheticLambda0] */
-    public WindowToken(WindowManagerService windowManagerService, IBinder iBinder, int i, boolean z, DisplayContent displayContent, boolean z2, boolean z3, boolean z4, Bundle bundle) {
+    public WindowToken(
+            WindowManagerService windowManagerService,
+            IBinder iBinder,
+            int i,
+            boolean z,
+            DisplayContent displayContent,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            Bundle bundle) {
         super(windowManagerService);
         this.paused = false;
-        this.mWindowComparator = new Comparator() { // from class: com.android.server.wm.WindowToken$$ExternalSyntheticLambda0
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                WindowToken windowToken = WindowToken.this;
-                WindowState windowState = (WindowState) obj;
-                WindowState windowState2 = (WindowState) obj2;
-                windowToken.getClass();
-                if (windowState.mToken != windowToken) {
-                    throw new IllegalArgumentException("newWindow=" + windowState + " is not a child of token=" + windowToken);
-                }
-                if (windowState2.mToken == windowToken) {
-                    return windowToken.isFirstChildWindowGreaterThanSecond(windowState, windowState2) ? 1 : -1;
-                }
-                throw new IllegalArgumentException("existingWindow=" + windowState2 + " is not a child of token=" + windowToken);
-            }
-        };
+        this.mWindowComparator =
+                new Comparator() { // from class:
+                                   // com.android.server.wm.WindowToken$$ExternalSyntheticLambda0
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        WindowToken windowToken = WindowToken.this;
+                        WindowState windowState = (WindowState) obj;
+                        WindowState windowState2 = (WindowState) obj2;
+                        windowToken.getClass();
+                        if (windowState.mToken != windowToken) {
+                            throw new IllegalArgumentException(
+                                    "newWindow="
+                                            + windowState
+                                            + " is not a child of token="
+                                            + windowToken);
+                        }
+                        if (windowState2.mToken == windowToken) {
+                            return windowToken.isFirstChildWindowGreaterThanSecond(
+                                            windowState, windowState2)
+                                    ? 1
+                                    : -1;
+                        }
+                        throw new IllegalArgumentException(
+                                "existingWindow="
+                                        + windowState2
+                                        + " is not a child of token="
+                                        + windowToken);
+                    }
+                };
         this.token = iBinder;
         this.windowType = i;
         this.mOptions = bundle;
@@ -144,7 +172,13 @@ public class WindowToken extends WindowContainer {
 
     public void addWindow(WindowState windowState) {
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_FOCUS_enabled[0]) {
-            ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_FOCUS, 2740931087734487464L, 0, null, String.valueOf(windowState), String.valueOf(Debug.getCallers(5)));
+            ProtoLogImpl_54989576.d(
+                    ProtoLogGroup.WM_DEBUG_FOCUS,
+                    2740931087734487464L,
+                    0,
+                    null,
+                    String.valueOf(windowState),
+                    String.valueOf(Debug.getCallers(5)));
         }
         if (windowState.mIsChildWindow) {
             return;
@@ -157,19 +191,34 @@ public class WindowToken extends WindowContainer {
             return;
         }
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ADD_REMOVE_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ADD_REMOVE, 2382798629637143561L, 0, null, String.valueOf(windowState), String.valueOf(this));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_ADD_REMOVE,
+                    2382798629637143561L,
+                    0,
+                    null,
+                    String.valueOf(windowState),
+                    String.valueOf(this));
         }
         addChild(windowState, this.mWindowComparator);
         this.mWmService.mWindowsChanged = true;
     }
 
-    public void applyFixedRotationTransform(DisplayInfo displayInfo, DisplayFrames displayFrames, Configuration configuration) {
+    public void applyFixedRotationTransform(
+            DisplayInfo displayInfo, DisplayFrames displayFrames, Configuration configuration) {
         FixedRotationTransformState fixedRotationTransformState = this.mFixedRotationTransformState;
         if (fixedRotationTransformState != null) {
             fixedRotationTransformState.disassociate(this);
         }
         Configuration configuration2 = new Configuration(configuration);
-        FixedRotationTransformState fixedRotationTransformState2 = this.mTransitionController.isShellTransitionsEnabled() ? new FixedRotationTransformState(displayInfo, displayFrames, configuration2) : new FixedRotationTransformStateLegacy(displayInfo, displayFrames, configuration2, this.mDisplayContent.mDisplayRotation.mRotation);
+        FixedRotationTransformState fixedRotationTransformState2 =
+                this.mTransitionController.isShellTransitionsEnabled()
+                        ? new FixedRotationTransformState(
+                                displayInfo, displayFrames, configuration2)
+                        : new FixedRotationTransformStateLegacy(
+                                displayInfo,
+                                displayFrames,
+                                configuration2,
+                                this.mDisplayContent.mDisplayRotation.mRotation);
         this.mFixedRotationTransformState = fixedRotationTransformState2;
         fixedRotationTransformState2.mAssociatedTokens.add(this);
         this.mDisplayContent.mDisplayPolicy.simulateLayoutDisplay(displayFrames);
@@ -191,8 +240,11 @@ public class WindowToken extends WindowContainer {
         DexController dexController = this.mWmService.mAtmService.mDexController;
         dexController.getClass();
         DisplayContent displayContent = getDisplayContent();
-        if (displayContent != null && displayContent.isDefaultDisplay && dexController.shouldShowDexImeInDefaultDisplayLocked()) {
-            WindowState windowState = displayContent.mDisplayPolicy.mExt.mTaskbarController.mTaskbarWin;
+        if (displayContent != null
+                && displayContent.isDefaultDisplay
+                && dexController.shouldShowDexImeInDefaultDisplayLocked()) {
+            WindowState windowState =
+                    displayContent.mDisplayPolicy.mExt.mTaskbarController.mTaskbarWin;
             if ((windowState == null || windowState.mToken != this) && this.windowType != 2019) {
                 return;
             }
@@ -249,7 +301,8 @@ public class WindowToken extends WindowContainer {
         }
     }
 
-    public final void finishFixedRotationTransform(DisplayContent$$ExternalSyntheticLambda6 displayContent$$ExternalSyntheticLambda6) {
+    public final void finishFixedRotationTransform(
+            DisplayContent$$ExternalSyntheticLambda6 displayContent$$ExternalSyntheticLambda6) {
         WindowContainer parent;
         FixedRotationTransformState fixedRotationTransformState = this.mFixedRotationTransformState;
         if (fixedRotationTransformState == null) {
@@ -260,15 +313,26 @@ public class WindowToken extends WindowContainer {
         if (displayContent$$ExternalSyntheticLambda6 != null) {
             displayContent$$ExternalSyntheticLambda6.run();
         }
-        for (int size = fixedRotationTransformState.mAssociatedTokens.size() - 1; size >= 0; size--) {
-            WindowToken windowToken = (WindowToken) fixedRotationTransformState.mAssociatedTokens.get(size);
+        for (int size = fixedRotationTransformState.mAssociatedTokens.size() - 1;
+                size >= 0;
+                size--) {
+            WindowToken windowToken =
+                    (WindowToken) fixedRotationTransformState.mAssociatedTokens.get(size);
             windowToken.mFixedRotationTransformState = null;
-            if (displayContent$$ExternalSyntheticLambda6 == null && (parent = windowToken.getParent()) != null) {
-                if (windowToken.mTransitionController.isShellTransitionsEnabled() && windowToken.asActivityRecord() != null && windowToken.isVisible()) {
+            if (displayContent$$ExternalSyntheticLambda6 == null
+                    && (parent = windowToken.getParent()) != null) {
+                if (windowToken.mTransitionController.isShellTransitionsEnabled()
+                        && windowToken.asActivityRecord() != null
+                        && windowToken.isVisible()) {
                     TransitionController transitionController = windowToken.mTransitionController;
                     Transition transition = transitionController.mCollectingTransition;
                     if (transition == null) {
-                        transition = transitionController.requestStartTransition(transitionController.createTransition(6, 0), null, null, null);
+                        transition =
+                                transitionController.requestStartTransition(
+                                        transitionController.createTransition(6, 0),
+                                        null,
+                                        null,
+                                        null);
                     }
                     transition.collect(windowToken, false);
                     transition.collectVisibleChange(windowToken);
@@ -287,7 +351,8 @@ public class WindowToken extends WindowContainer {
 
     public final Rect getFixedRotationTransformDisplayBounds() {
         if (isFixedRotationTransforming()) {
-            return this.mFixedRotationTransformState.mRotatedOverrideConfiguration.windowConfiguration.getBounds();
+            return this.mFixedRotationTransformState.mRotatedOverrideConfiguration
+                    .windowConfiguration.getBounds();
         }
         return null;
     }
@@ -311,7 +376,8 @@ public class WindowToken extends WindowContainer {
         return toString();
     }
 
-    public final SurfaceControl getOrCreateFixedRotationLeash(SurfaceControl.Transaction transaction) {
+    public final SurfaceControl getOrCreateFixedRotationLeash(
+            SurfaceControl.Transaction transaction) {
         if (!this.mTransitionController.isShellTransitionsEnabled()) {
             return null;
         }
@@ -323,7 +389,14 @@ public class WindowToken extends WindowContainer {
         if (surfaceControl != null) {
             return surfaceControl;
         }
-        SurfaceControl build = makeSurface().setContainerLayer().setParent(getParentSurfaceControl()).setName(this.mSurfaceControl + " - rotation-leash").setHidden(false).setCallsite("WindowToken.getOrCreateFixedRotationLeash").build();
+        SurfaceControl build =
+                makeSurface()
+                        .setContainerLayer()
+                        .setParent(getParentSurfaceControl())
+                        .setName(this.mSurfaceControl + " - rotation-leash")
+                        .setHidden(false)
+                        .setCallsite("WindowToken.getOrCreateFixedRotationLeash")
+                        .build();
         if (this.mIsPortraitWindowToken) {
             transaction.reparent(this.mSurfaceControl, build);
             this.mFixedRotationTransformLeash = build;
@@ -332,7 +405,8 @@ public class WindowToken extends WindowContainer {
         Point point = this.mLastSurfacePosition;
         transaction.setPosition(build, point.x, point.y);
         transaction.reparent(this.mSurfaceControl, build);
-        getPendingTransaction().setFixedTransformHint(build, getWindowConfiguration().getDisplayRotation());
+        getPendingTransaction()
+                .setFixedTransformHint(build, getWindowConfiguration().getDisplayRotation());
         this.mFixedRotationTransformLeash = build;
         updateSurfaceRotation(transaction, relativeDisplayRotation, build);
         return this.mFixedRotationTransformLeash;
@@ -365,7 +439,8 @@ public class WindowToken extends WindowContainer {
         return false;
     }
 
-    public boolean isFirstChildWindowGreaterThanSecond(WindowState windowState, WindowState windowState2) {
+    public boolean isFirstChildWindowGreaterThanSecond(
+            WindowState windowState, WindowState windowState2) {
         return windowState.mBaseLayer >= windowState2.mBaseLayer;
     }
 
@@ -376,8 +451,11 @@ public class WindowToken extends WindowContainer {
 
     public void linkFixedRotationTransform(WindowToken windowToken) {
         FixedRotationTransformState fixedRotationTransformState;
-        FixedRotationTransformState fixedRotationTransformState2 = windowToken.mFixedRotationTransformState;
-        if (fixedRotationTransformState2 == null || (fixedRotationTransformState = this.mFixedRotationTransformState) == fixedRotationTransformState2) {
+        FixedRotationTransformState fixedRotationTransformState2 =
+                windowToken.mFixedRotationTransformState;
+        if (fixedRotationTransformState2 == null
+                || (fixedRotationTransformState = this.mFixedRotationTransformState)
+                        == fixedRotationTransformState2) {
             return;
         }
         if (fixedRotationTransformState != null) {
@@ -397,17 +475,18 @@ public class WindowToken extends WindowContainer {
         return makeSurface;
     }
 
-    public void onCancelFixedRotationTransform(int i) {
-    }
+    public void onCancelFixedRotationTransform(int i) {}
 
     @Override // com.android.server.wm.WindowContainer
     public void onDisplayChanged(DisplayContent displayContent) {
         FixedRotationTransformState fixedRotationTransformState;
         displayContent.reParentWindowToken(this);
-        if (this.mIsPortraitWindowToken && (fixedRotationTransformState = this.mFixedRotationTransformState) != null) {
+        if (this.mIsPortraitWindowToken
+                && (fixedRotationTransformState = this.mFixedRotationTransformState) != null) {
             DisplayInfo displayInfo = displayContent.mDisplayInfo;
             DisplayInfo displayInfo2 = fixedRotationTransformState.mDisplayInfo;
-            if (displayInfo.getNaturalWidth() != displayInfo2.getNaturalWidth() || displayInfo.getNaturalHeight() != displayInfo2.getNaturalHeight()) {
+            if (displayInfo.getNaturalWidth() != displayInfo2.getNaturalWidth()
+                    || displayInfo.getNaturalHeight() != displayInfo2.getNaturalHeight()) {
                 finishFixedRotationTransform(null);
                 displayContent.startFixedRotationTransform(this, 0);
             }
@@ -427,7 +506,9 @@ public class WindowToken extends WindowContainer {
     @Override // com.android.server.wm.WindowContainer
     public final boolean prepareSync() {
         DisplayContent displayContent = this.mDisplayContent;
-        if (displayContent != null && displayContent.isRotationChanging() && AsyncRotationController.canBeAsync(this)) {
+        if (displayContent != null
+                && displayContent.isRotationChanging()
+                && AsyncRotationController.canBeAsync(this)) {
             return false;
         }
         return super.prepareSync();
@@ -438,7 +519,12 @@ public class WindowToken extends WindowContainer {
         while (size >= 0) {
             WindowState windowState = (WindowState) this.mChildren.get(size);
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_MOVEMENT_enabled[3]) {
-                ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_WINDOW_MOVEMENT, 8174298531248485625L, 0, null, String.valueOf(windowState));
+                ProtoLogImpl_54989576.w(
+                        ProtoLogGroup.WM_DEBUG_WINDOW_MOVEMENT,
+                        8174298531248485625L,
+                        0,
+                        null,
+                        String.valueOf(windowState));
             }
             windowState.removeIfPossible();
             if (size > this.mChildren.size()) {
@@ -469,7 +555,8 @@ public class WindowToken extends WindowContainer {
     public void resolveOverrideConfiguration(Configuration configuration) {
         super.resolveOverrideConfiguration(configuration);
         if (isFixedRotationTransforming()) {
-            getResolvedOverrideConfiguration().updateFrom(this.mFixedRotationTransformState.mRotatedOverrideConfiguration);
+            getResolvedOverrideConfiguration()
+                    .updateFrom(this.mFixedRotationTransformState.mRotatedOverrideConfiguration);
         }
     }
 
@@ -478,7 +565,14 @@ public class WindowToken extends WindowContainer {
             return;
         }
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_APP_TRANSITIONS_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS, -7314975896738778749L, 12, null, String.valueOf(this), Boolean.valueOf(z), String.valueOf(Debug.getCallers(5)));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS,
+                    -7314975896738778749L,
+                    12,
+                    null,
+                    String.valueOf(this),
+                    Boolean.valueOf(z),
+                    String.valueOf(Debug.getCallers(5)));
         }
         this.mClientVisible = z;
         sendAppVisibilityToClients();
@@ -505,7 +599,14 @@ public class WindowToken extends WindowContainer {
 
     public String toString() {
         if (this.stringName == null) {
-            this.stringName = "WindowToken{" + Integer.toHexString(System.identityHashCode(this)) + " type=" + this.windowType + " " + this.token + "}";
+            this.stringName =
+                    "WindowToken{"
+                            + Integer.toHexString(System.identityHashCode(this))
+                            + " type="
+                            + this.windowType
+                            + " "
+                            + this.token
+                            + "}";
         }
         return this.stringName;
     }
@@ -515,7 +616,8 @@ public class WindowToken extends WindowContainer {
         ActivityRecord asActivityRecord = asActivityRecord();
         if (asActivityRecord == null || !asActivityRecord.isConfigurationDispatchPaused()) {
             super.updateSurfacePosition(transaction);
-            if (this.mTransitionController.isShellTransitionsEnabled() || !isFixedRotationTransforming()) {
+            if (this.mTransitionController.isShellTransitionsEnabled()
+                    || !isFixedRotationTransforming()) {
                 return;
             }
             Task rootTask = asActivityRecord != null ? asActivityRecord.getRootTask() : null;
@@ -526,7 +628,8 @@ public class WindowToken extends WindowContainer {
     }
 
     @Override // com.android.server.wm.WindowContainer
-    public final void updateSurfaceRotation(SurfaceControl.Transaction transaction, int i, SurfaceControl surfaceControl) {
+    public final void updateSurfaceRotation(
+            SurfaceControl.Transaction transaction, int i, SurfaceControl surfaceControl) {
         Task rootTask;
         int windowingMode;
         ActivityRecord asActivityRecord = asActivityRecord();
@@ -535,8 +638,12 @@ public class WindowToken extends WindowContainer {
             if (transition == null) {
                 windowingMode = rootTask.getWindowingMode();
             } else {
-                Transition.ChangeInfo changeInfo = (Transition.ChangeInfo) transition.mChanges.get(rootTask);
-                windowingMode = changeInfo == null ? rootTask.getWindowingMode() : changeInfo.mWindowingMode;
+                Transition.ChangeInfo changeInfo =
+                        (Transition.ChangeInfo) transition.mChanges.get(rootTask);
+                windowingMode =
+                        changeInfo == null
+                                ? rootTask.getWindowingMode()
+                                : changeInfo.mWindowingMode;
             }
             if (windowingMode == 2) {
                 return;

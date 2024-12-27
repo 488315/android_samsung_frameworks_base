@@ -5,6 +5,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Object;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.DERNull;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -62,7 +63,8 @@ public class SspRange extends ASN1Object {
                 throw new IllegalArgumentException("unable to parse encoded general name");
             }
         }
-        throw new IllegalArgumentException("unknown object in getInstance: " + src.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in getInstance: " + src.getClass().getName());
     }
 
     public boolean isAll() {
@@ -81,7 +83,8 @@ public class SspRange extends ASN1Object {
         return this.opaque;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         if (this.isAll) {
             return DERNull.INSTANCE;

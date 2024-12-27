@@ -13,7 +13,8 @@ public interface MediaBufferReader<T> {
 
     static <V> MediaBufferReader<V> of(final MediaBuffer mediaBuffer, Class<V> cls) {
         if (cls == Shape.class) {
-            return new MediaBufferReader() { // from class: com.samsung.android.sume.core.buffer.MediaBufferReader$$ExternalSyntheticLambda0
+            return new MediaBufferReader() { // from class:
+                                             // com.samsung.android.sume.core.buffer.MediaBufferReader$$ExternalSyntheticLambda0
                 @Override // com.samsung.android.sume.core.buffer.MediaBufferReader
                 public final Object get() {
                     Object shape;

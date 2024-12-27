@@ -4,27 +4,30 @@ import android.media.audio.common.AudioConfig;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class RecognitionEvent implements Parcelable {
-    public static final Parcelable.Creator<RecognitionEvent> CREATOR = new Parcelable.Creator<RecognitionEvent>() { // from class: android.media.soundtrigger.RecognitionEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionEvent createFromParcel(Parcel _aidl_source) {
-            RecognitionEvent _aidl_out = new RecognitionEvent();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RecognitionEvent> CREATOR =
+            new Parcelable.Creator<RecognitionEvent>() { // from class:
+                // android.media.soundtrigger.RecognitionEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionEvent createFromParcel(Parcel _aidl_source) {
+                    RecognitionEvent _aidl_out = new RecognitionEvent();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionEvent[] newArray(int _aidl_size) {
-            return new RecognitionEvent[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionEvent[] newArray(int _aidl_size) {
+                    return new RecognitionEvent[_aidl_size];
+                }
+            };
     public AudioConfig audioConfig;
     public byte[] data;
     public int status = -1;
@@ -173,14 +176,41 @@ public class RecognitionEvent implements Parcelable {
             return false;
         }
         RecognitionEvent that = (RecognitionEvent) other;
-        if (Objects.deepEquals(Integer.valueOf(this.status), Integer.valueOf(that.status)) && Objects.deepEquals(Integer.valueOf(this.type), Integer.valueOf(that.type)) && Objects.deepEquals(Boolean.valueOf(this.captureAvailable), Boolean.valueOf(that.captureAvailable)) && Objects.deepEquals(Integer.valueOf(this.captureDelayMs), Integer.valueOf(that.captureDelayMs)) && Objects.deepEquals(Integer.valueOf(this.capturePreambleMs), Integer.valueOf(that.capturePreambleMs)) && Objects.deepEquals(Boolean.valueOf(this.triggerInData), Boolean.valueOf(that.triggerInData)) && Objects.deepEquals(this.audioConfig, that.audioConfig) && Objects.deepEquals(this.data, that.data) && Objects.deepEquals(Boolean.valueOf(this.recognitionStillActive), Boolean.valueOf(that.recognitionStillActive))) {
+        if (Objects.deepEquals(Integer.valueOf(this.status), Integer.valueOf(that.status))
+                && Objects.deepEquals(Integer.valueOf(this.type), Integer.valueOf(that.type))
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.captureAvailable),
+                        Boolean.valueOf(that.captureAvailable))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.captureDelayMs), Integer.valueOf(that.captureDelayMs))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.capturePreambleMs),
+                        Integer.valueOf(that.capturePreambleMs))
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.triggerInData), Boolean.valueOf(that.triggerInData))
+                && Objects.deepEquals(this.audioConfig, that.audioConfig)
+                && Objects.deepEquals(this.data, that.data)
+                && Objects.deepEquals(
+                        Boolean.valueOf(this.recognitionStillActive),
+                        Boolean.valueOf(that.recognitionStillActive))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.status), Integer.valueOf(this.type), Boolean.valueOf(this.captureAvailable), Integer.valueOf(this.captureDelayMs), Integer.valueOf(this.capturePreambleMs), Boolean.valueOf(this.triggerInData), this.audioConfig, this.data, Boolean.valueOf(this.recognitionStillActive)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.status),
+                                Integer.valueOf(this.type),
+                                Boolean.valueOf(this.captureAvailable),
+                                Integer.valueOf(this.captureDelayMs),
+                                Integer.valueOf(this.capturePreambleMs),
+                                Boolean.valueOf(this.triggerInData),
+                                this.audioConfig,
+                                this.data,
+                                Boolean.valueOf(this.recognitionStillActive))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

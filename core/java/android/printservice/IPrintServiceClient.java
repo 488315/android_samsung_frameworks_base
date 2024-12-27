@@ -12,6 +12,7 @@ import android.print.PrintJobId;
 import android.print.PrintJobInfo;
 import android.print.PrinterId;
 import android.text.TextUtils;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -34,9 +35,11 @@ public interface IPrintServiceClient extends IInterface {
 
     void setStatus(PrintJobId printJobId, CharSequence charSequence) throws RemoteException;
 
-    void setStatusRes(PrintJobId printJobId, int i, CharSequence charSequence) throws RemoteException;
+    void setStatusRes(PrintJobId printJobId, int i, CharSequence charSequence)
+            throws RemoteException;
 
-    void writePrintJobData(ParcelFileDescriptor parcelFileDescriptor, PrintJobId printJobId) throws RemoteException;
+    void writePrintJobData(ParcelFileDescriptor parcelFileDescriptor, PrintJobId printJobId)
+            throws RemoteException;
 
     public static class Default implements IPrintServiceClient {
         @Override // android.printservice.IPrintServiceClient
@@ -50,7 +53,8 @@ public interface IPrintServiceClient extends IInterface {
         }
 
         @Override // android.printservice.IPrintServiceClient
-        public boolean setPrintJobState(PrintJobId printJobId, int state, String error) throws RemoteException {
+        public boolean setPrintJobState(PrintJobId printJobId, int state, String error)
+                throws RemoteException {
             return false;
         }
 
@@ -60,32 +64,28 @@ public interface IPrintServiceClient extends IInterface {
         }
 
         @Override // android.printservice.IPrintServiceClient
-        public void writePrintJobData(ParcelFileDescriptor fd, PrintJobId printJobId) throws RemoteException {
-        }
+        public void writePrintJobData(ParcelFileDescriptor fd, PrintJobId printJobId)
+                throws RemoteException {}
 
         @Override // android.printservice.IPrintServiceClient
-        public void setProgress(PrintJobId printJobId, float progress) throws RemoteException {
-        }
+        public void setProgress(PrintJobId printJobId, float progress) throws RemoteException {}
 
         @Override // android.printservice.IPrintServiceClient
-        public void setStatus(PrintJobId printJobId, CharSequence status) throws RemoteException {
-        }
+        public void setStatus(PrintJobId printJobId, CharSequence status) throws RemoteException {}
 
         @Override // android.printservice.IPrintServiceClient
-        public void setStatusRes(PrintJobId printJobId, int status, CharSequence appPackageName) throws RemoteException {
-        }
+        public void setStatusRes(PrintJobId printJobId, int status, CharSequence appPackageName)
+                throws RemoteException {}
 
         @Override // android.printservice.IPrintServiceClient
-        public void onPrintersAdded(ParceledListSlice printers) throws RemoteException {
-        }
+        public void onPrintersAdded(ParceledListSlice printers) throws RemoteException {}
 
         @Override // android.printservice.IPrintServiceClient
-        public void onPrintersRemoved(ParceledListSlice printerIds) throws RemoteException {
-        }
+        public void onPrintersRemoved(ParceledListSlice printerIds) throws RemoteException {}
 
         @Override // android.printservice.IPrintServiceClient
-        public void onCustomPrinterIconLoaded(PrinterId printerId, Icon icon) throws RemoteException {
-        }
+        public void onCustomPrinterIconLoaded(PrinterId printerId, Icon icon)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -93,7 +93,7 @@ public interface IPrintServiceClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPrintServiceClient {
+    public abstract static class Stub extends Binder implements IPrintServiceClient {
         public static final String DESCRIPTOR = "android.printservice.IPrintServiceClient";
         static final int TRANSACTION_getPrintJobInfo = 2;
         static final int TRANSACTION_getPrintJobInfos = 1;
@@ -162,7 +162,8 @@ public interface IPrintServiceClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -201,7 +202,9 @@ public interface IPrintServiceClient extends IInterface {
                     reply.writeBoolean(_result4);
                     return true;
                 case 5:
-                    ParcelFileDescriptor _arg04 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg04 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     PrintJobId _arg13 = (PrintJobId) data.readTypedObject(PrintJobId.CREATOR);
                     data.enforceNoDataAvail();
                     writePrintJobData(_arg04, _arg13);
@@ -215,7 +218,8 @@ public interface IPrintServiceClient extends IInterface {
                     return true;
                 case 7:
                     PrintJobId _arg06 = (PrintJobId) data.readTypedObject(PrintJobId.CREATOR);
-                    CharSequence _arg15 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg15 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     setStatus(_arg06, _arg15);
                     reply.writeNoException();
@@ -223,19 +227,22 @@ public interface IPrintServiceClient extends IInterface {
                 case 8:
                     PrintJobId _arg07 = (PrintJobId) data.readTypedObject(PrintJobId.CREATOR);
                     int _arg16 = data.readInt();
-                    CharSequence _arg22 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg22 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     setStatusRes(_arg07, _arg16, _arg22);
                     reply.writeNoException();
                     return true;
                 case 9:
-                    ParceledListSlice _arg08 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg08 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     onPrintersAdded(_arg08);
                     reply.writeNoException();
                     return true;
                 case 10:
-                    ParceledListSlice _arg09 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg09 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     onPrintersRemoved(_arg09);
                     reply.writeNoException();
@@ -293,7 +300,8 @@ public interface IPrintServiceClient extends IInterface {
                     _data.writeTypedObject(printJobId, 0);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    PrintJobInfo _result = (PrintJobInfo) _reply.readTypedObject(PrintJobInfo.CREATOR);
+                    PrintJobInfo _result =
+                            (PrintJobInfo) _reply.readTypedObject(PrintJobInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -302,7 +310,8 @@ public interface IPrintServiceClient extends IInterface {
             }
 
             @Override // android.printservice.IPrintServiceClient
-            public boolean setPrintJobState(PrintJobId printJobId, int state, String error) throws RemoteException {
+            public boolean setPrintJobState(PrintJobId printJobId, int state, String error)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -321,7 +330,8 @@ public interface IPrintServiceClient extends IInterface {
             }
 
             @Override // android.printservice.IPrintServiceClient
-            public boolean setPrintJobTag(PrintJobId printJobId, String tag) throws RemoteException {
+            public boolean setPrintJobTag(PrintJobId printJobId, String tag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -339,7 +349,8 @@ public interface IPrintServiceClient extends IInterface {
             }
 
             @Override // android.printservice.IPrintServiceClient
-            public void writePrintJobData(ParcelFileDescriptor fd, PrintJobId printJobId) throws RemoteException {
+            public void writePrintJobData(ParcelFileDescriptor fd, PrintJobId printJobId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -368,7 +379,8 @@ public interface IPrintServiceClient extends IInterface {
             }
 
             @Override // android.printservice.IPrintServiceClient
-            public void setStatus(PrintJobId printJobId, CharSequence status) throws RemoteException {
+            public void setStatus(PrintJobId printJobId, CharSequence status)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -389,7 +401,8 @@ public interface IPrintServiceClient extends IInterface {
             }
 
             @Override // android.printservice.IPrintServiceClient
-            public void setStatusRes(PrintJobId printJobId, int status, CharSequence appPackageName) throws RemoteException {
+            public void setStatusRes(PrintJobId printJobId, int status, CharSequence appPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -441,7 +454,8 @@ public interface IPrintServiceClient extends IInterface {
             }
 
             @Override // android.printservice.IPrintServiceClient
-            public void onCustomPrinterIconLoaded(PrinterId printerId, Icon icon) throws RemoteException {
+            public void onCustomPrinterIconLoaded(PrinterId printerId, Icon icon)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

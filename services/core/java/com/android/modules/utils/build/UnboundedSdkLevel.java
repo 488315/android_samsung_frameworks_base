@@ -3,7 +3,9 @@ package com.android.modules.utils.build;
 import android.os.Build;
 import android.util.ArraySet;
 import android.util.SparseArray;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
+
 import java.util.Set;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,7 +26,13 @@ public final class UnboundedSdkLevel {
         sparseArray.put(31, setOf("Q", "R", "S"));
         sparseArray.put(32, setOf("Q", "R", "S", "Sv2"));
         int i = Build.VERSION.SDK_INT;
-        sInstance = new UnboundedSdkLevel(i, Build.VERSION.CODENAME, SdkLevel.isAtLeastT() ? Build.VERSION.KNOWN_CODENAMES : (Set) sparseArray.get(i));
+        sInstance =
+                new UnboundedSdkLevel(
+                        i,
+                        Build.VERSION.CODENAME,
+                        SdkLevel.isAtLeastT()
+                                ? Build.VERSION.KNOWN_CODENAMES
+                                : (Set) sparseArray.get(i));
     }
 
     public UnboundedSdkLevel(int i, String str, Set set) {
@@ -63,13 +71,19 @@ public final class UnboundedSdkLevel {
     public boolean isAtLeastInternal(String str) {
         String removeFingerprint = removeFingerprint(str);
         if (!this.mIsReleaseBuild) {
-            return isCodename(removeFingerprint) ? this.mKnownCodenames.contains(removeFingerprint) : this.mSdkInt >= Integer.parseInt(removeFingerprint);
+            return isCodename(removeFingerprint)
+                    ? this.mKnownCodenames.contains(removeFingerprint)
+                    : this.mSdkInt >= Integer.parseInt(removeFingerprint);
         }
         if (!isCodename(removeFingerprint)) {
             return this.mSdkInt >= Integer.parseInt(removeFingerprint);
         }
         if (this.mKnownCodenames.contains(removeFingerprint)) {
-            throw new IllegalArgumentException(XmlUtils$$ExternalSyntheticOutline0.m("Artifact with a known codename ", removeFingerprint, " must be recompiled with a finalized integer version."));
+            throw new IllegalArgumentException(
+                    XmlUtils$$ExternalSyntheticOutline0.m(
+                            "Artifact with a known codename ",
+                            removeFingerprint,
+                            " must be recompiled with a finalized integer version."));
         }
         return false;
     }
@@ -77,19 +91,28 @@ public final class UnboundedSdkLevel {
     public boolean isAtMostInternal(String str) {
         String removeFingerprint = removeFingerprint(str);
         if (!this.mIsReleaseBuild) {
-            return isCodename(removeFingerprint) ? !this.mKnownCodenames.contains(removeFingerprint) || this.mCodename.equals(removeFingerprint) : this.mSdkInt < Integer.parseInt(removeFingerprint);
+            return isCodename(removeFingerprint)
+                    ? !this.mKnownCodenames.contains(removeFingerprint)
+                            || this.mCodename.equals(removeFingerprint)
+                    : this.mSdkInt < Integer.parseInt(removeFingerprint);
         }
         if (!isCodename(removeFingerprint)) {
             return this.mSdkInt <= Integer.parseInt(removeFingerprint);
         }
         if (this.mKnownCodenames.contains(removeFingerprint)) {
-            throw new IllegalArgumentException(XmlUtils$$ExternalSyntheticOutline0.m("Artifact with a known codename ", removeFingerprint, " must be recompiled with a finalized integer version."));
+            throw new IllegalArgumentException(
+                    XmlUtils$$ExternalSyntheticOutline0.m(
+                            "Artifact with a known codename ",
+                            removeFingerprint,
+                            " must be recompiled with a finalized integer version."));
         }
         return true;
     }
 
     public String removeFingerprint(String str) {
         int indexOf;
-        return (!isCodename(str) || (indexOf = str.indexOf(46)) == -1) ? str : str.substring(0, indexOf);
+        return (!isCodename(str) || (indexOf = str.indexOf(46)) == -1)
+                ? str
+                : str.substring(0, indexOf);
     }
 }

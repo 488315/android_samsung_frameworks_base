@@ -1,13 +1,11 @@
 package com.samsung.android.wallpaper.legibilitycolors.utils.interpolater;
 
-import com.samsung.android.wallpaper.legibilitycolors.utils.interpolater.IEasing;
 
 /* loaded from: classes6.dex */
 public class EasingQuintic implements IEasing {
     private static EasingQuintic mInstance = null;
 
-    private EasingQuintic() {
-    }
+    private EasingQuintic() {}
 
     public static EasingQuintic getInstance() {
         if (mInstance == null) {

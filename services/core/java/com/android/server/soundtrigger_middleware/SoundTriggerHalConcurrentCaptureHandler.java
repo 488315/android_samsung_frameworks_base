@@ -8,8 +8,7 @@ import android.media.soundtrigger.SoundModel;
 import android.media.soundtrigger_middleware.PhraseRecognitionEventSys;
 import android.media.soundtrigger_middleware.RecognitionEventSys;
 import android.os.IBinder;
-import com.android.server.soundtrigger_middleware.ICaptureStateNotifier;
-import com.android.server.soundtrigger_middleware.ISoundTriggerHal;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -21,7 +20,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class SoundTriggerHalConcurrentCaptureHandler implements ISoundTriggerHal, ICaptureStateNotifier.Listener {
+public final class SoundTriggerHalConcurrentCaptureHandler
+        implements ISoundTriggerHal, ICaptureStateNotifier.Listener {
     public boolean mCaptureState;
     public final ISoundTriggerHal mDelegate;
     public SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0 mGlobalCallback;
@@ -104,18 +104,27 @@ public final class SoundTriggerHalConcurrentCaptureHandler implements ISoundTrig
 
         @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal.ModelCallback
         public final void modelUnloaded(int i) {
-            SoundTriggerHalConcurrentCaptureHandler.this.mCallbackThread.push(new SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda1(this, i));
+            SoundTriggerHalConcurrentCaptureHandler.this.mCallbackThread.push(
+                    new SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda1(this, i));
         }
 
         @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal.ModelCallback
-        public final void phraseRecognitionCallback(int i, PhraseRecognitionEventSys phraseRecognitionEventSys) {
+        public final void phraseRecognitionCallback(
+                int i, PhraseRecognitionEventSys phraseRecognitionEventSys) {
             synchronized (SoundTriggerHalConcurrentCaptureHandler.this.mActiveModels) {
                 try {
-                    if (((HashSet) SoundTriggerHalConcurrentCaptureHandler.this.mActiveModels).contains(Integer.valueOf(i))) {
-                        if (!phraseRecognitionEventSys.phraseRecognitionEvent.common.recognitionStillActive) {
-                            ((HashSet) SoundTriggerHalConcurrentCaptureHandler.this.mActiveModels).remove(Integer.valueOf(i));
+                    if (((HashSet) SoundTriggerHalConcurrentCaptureHandler.this.mActiveModels)
+                            .contains(Integer.valueOf(i))) {
+                        if (!phraseRecognitionEventSys
+                                .phraseRecognitionEvent
+                                .common
+                                .recognitionStillActive) {
+                            ((HashSet) SoundTriggerHalConcurrentCaptureHandler.this.mActiveModels)
+                                    .remove(Integer.valueOf(i));
                         }
-                        SoundTriggerHalConcurrentCaptureHandler.this.mCallbackThread.push(new SoundTriggerHalConcurrentCaptureHandler$CallbackWrapper$$ExternalSyntheticLambda0(this, i, phraseRecognitionEventSys));
+                        SoundTriggerHalConcurrentCaptureHandler.this.mCallbackThread.push(
+                                new SoundTriggerHalConcurrentCaptureHandler$CallbackWrapper$$ExternalSyntheticLambda0(
+                                        this, i, phraseRecognitionEventSys));
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -127,11 +136,15 @@ public final class SoundTriggerHalConcurrentCaptureHandler implements ISoundTrig
         public final void recognitionCallback(int i, RecognitionEventSys recognitionEventSys) {
             synchronized (SoundTriggerHalConcurrentCaptureHandler.this.mActiveModels) {
                 try {
-                    if (((HashSet) SoundTriggerHalConcurrentCaptureHandler.this.mActiveModels).contains(Integer.valueOf(i))) {
+                    if (((HashSet) SoundTriggerHalConcurrentCaptureHandler.this.mActiveModels)
+                            .contains(Integer.valueOf(i))) {
                         if (!recognitionEventSys.recognitionEvent.recognitionStillActive) {
-                            ((HashSet) SoundTriggerHalConcurrentCaptureHandler.this.mActiveModels).remove(Integer.valueOf(i));
+                            ((HashSet) SoundTriggerHalConcurrentCaptureHandler.this.mActiveModels)
+                                    .remove(Integer.valueOf(i));
                         }
-                        SoundTriggerHalConcurrentCaptureHandler.this.mCallbackThread.push(new SoundTriggerHalConcurrentCaptureHandler$CallbackWrapper$$ExternalSyntheticLambda0(this, i, recognitionEventSys));
+                        SoundTriggerHalConcurrentCaptureHandler.this.mCallbackThread.push(
+                                new SoundTriggerHalConcurrentCaptureHandler$CallbackWrapper$$ExternalSyntheticLambda0(
+                                        this, i, recognitionEventSys));
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -151,10 +164,13 @@ public final class SoundTriggerHalConcurrentCaptureHandler implements ISoundTrig
         }
     }
 
-    public SoundTriggerHalConcurrentCaptureHandler(SoundTriggerHalMaxModelLimiter soundTriggerHalMaxModelLimiter, ICaptureStateNotifier iCaptureStateNotifier) {
+    public SoundTriggerHalConcurrentCaptureHandler(
+            SoundTriggerHalMaxModelLimiter soundTriggerHalMaxModelLimiter,
+            ICaptureStateNotifier iCaptureStateNotifier) {
         this.mDelegate = soundTriggerHalMaxModelLimiter;
         this.mNotifier = iCaptureStateNotifier;
-        this.mCaptureState = ((ExternalCaptureStateTracker) iCaptureStateNotifier).registerListener(this);
+        this.mCaptureState =
+                ((ExternalCaptureStateTracker) iCaptureStateNotifier).registerListener(this);
     }
 
     public final void abortAllActiveModels() {
@@ -175,7 +191,10 @@ public final class SoundTriggerHalConcurrentCaptureHandler implements ISoundTrig
                 }
             }
             this.mDelegate.stopRecognition(intValue);
-            this.mCallbackThread.push(new SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda1(intValue, (LoadedModel) ((ConcurrentHashMap) this.mLoadedModels).get(num)));
+            this.mCallbackThread.push(
+                    new SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda1(
+                            intValue,
+                            (LoadedModel) ((ConcurrentHashMap) this.mLoadedModels).get(num)));
         }
     }
 
@@ -217,31 +236,45 @@ public final class SoundTriggerHalConcurrentCaptureHandler implements ISoundTrig
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
     public final void linkToDeath(final IBinder.DeathRecipient deathRecipient) {
-        IBinder.DeathRecipient deathRecipient2 = new IBinder.DeathRecipient() { // from class: com.android.server.soundtrigger_middleware.SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda2
-            @Override // android.os.IBinder.DeathRecipient
-            public final void binderDied() {
-                SoundTriggerHalConcurrentCaptureHandler soundTriggerHalConcurrentCaptureHandler = SoundTriggerHalConcurrentCaptureHandler.this;
-                IBinder.DeathRecipient deathRecipient3 = deathRecipient;
-                soundTriggerHalConcurrentCaptureHandler.getClass();
-                Objects.requireNonNull(deathRecipient3);
-                soundTriggerHalConcurrentCaptureHandler.mCallbackThread.push(new SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda3(1, deathRecipient3));
-            }
-        };
+        IBinder.DeathRecipient deathRecipient2 =
+                new IBinder
+                        .DeathRecipient() { // from class:
+                                            // com.android.server.soundtrigger_middleware.SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda2
+                    @Override // android.os.IBinder.DeathRecipient
+                    public final void binderDied() {
+                        SoundTriggerHalConcurrentCaptureHandler
+                                soundTriggerHalConcurrentCaptureHandler =
+                                        SoundTriggerHalConcurrentCaptureHandler.this;
+                        IBinder.DeathRecipient deathRecipient3 = deathRecipient;
+                        soundTriggerHalConcurrentCaptureHandler.getClass();
+                        Objects.requireNonNull(deathRecipient3);
+                        soundTriggerHalConcurrentCaptureHandler.mCallbackThread.push(
+                                new SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda3(
+                                        1, deathRecipient3));
+                    }
+                };
         this.mDelegate.linkToDeath(deathRecipient2);
         ((ConcurrentHashMap) this.mDeathRecipientMap).put(deathRecipient, deathRecipient2);
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadPhraseSoundModel(PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
-        int loadPhraseSoundModel = this.mDelegate.loadPhraseSoundModel(phraseSoundModel, new CallbackWrapper(modelCallback));
-        ((ConcurrentHashMap) this.mLoadedModels).put(Integer.valueOf(loadPhraseSoundModel), new LoadedModel(0, modelCallback));
+    public final int loadPhraseSoundModel(
+            PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+        int loadPhraseSoundModel =
+                this.mDelegate.loadPhraseSoundModel(
+                        phraseSoundModel, new CallbackWrapper(modelCallback));
+        ((ConcurrentHashMap) this.mLoadedModels)
+                .put(Integer.valueOf(loadPhraseSoundModel), new LoadedModel(0, modelCallback));
         return loadPhraseSoundModel;
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadSoundModel(SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
-        int loadSoundModel = this.mDelegate.loadSoundModel(soundModel, new CallbackWrapper(modelCallback));
-        ((ConcurrentHashMap) this.mLoadedModels).put(Integer.valueOf(loadSoundModel), new LoadedModel(1, modelCallback));
+    public final int loadSoundModel(
+            SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+        int loadSoundModel =
+                this.mDelegate.loadSoundModel(soundModel, new CallbackWrapper(modelCallback));
+        ((ConcurrentHashMap) this.mLoadedModels)
+                .put(Integer.valueOf(loadSoundModel), new LoadedModel(1, modelCallback));
         return loadSoundModel;
     }
 
@@ -257,9 +290,13 @@ public final class SoundTriggerHalConcurrentCaptureHandler implements ISoundTrig
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
     public final void registerCallback(ISoundTriggerHal.GlobalCallback globalCallback) {
-        SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0 soundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0 = new SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0(this, globalCallback);
+        SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0
+                soundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0 =
+                        new SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0(
+                                this, globalCallback);
         this.mGlobalCallback = soundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0;
-        this.mDelegate.registerCallback(soundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0);
+        this.mDelegate.registerCallback(
+                soundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0);
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal

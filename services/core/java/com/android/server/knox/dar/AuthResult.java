@@ -1,6 +1,7 @@
 package com.android.server.knox.dar;
 
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
@@ -16,7 +17,10 @@ public final class AuthResult {
         StringBuilder sb = new StringBuilder("        Caller Auth Result : ");
         int i = this.mCallerAuthResult;
         String str = Constants.RLC_STATE_NORMAL;
-        sb.append(i != 0 ? i != 1 ? i != 2 ? Integer.toHexString(i) : "Not support" : "Abnormal" : Constants.RLC_STATE_NORMAL);
+        sb.append(
+                i != 0
+                        ? i != 1 ? i != 2 ? Integer.toHexString(i) : "Not support" : "Abnormal"
+                        : Constants.RLC_STATE_NORMAL);
         sb.append("\n        Calling Package : ");
         Charset charset = StandardCharsets.UTF_8;
         sb.append(new String(this.mCallingPackage, charset));

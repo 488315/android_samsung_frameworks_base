@@ -4,14 +4,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Base64;
 import android.util.IndentingPrintWriter;
+
 import com.android.internal.org.bouncycastle.cms.CMSAttributeTableGenerator;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlSerializer;
 
 /* loaded from: classes.dex */
 public final class BlobHandle implements Parcelable {
@@ -24,21 +27,27 @@ public final class BlobHandle implements Parcelable {
     public final CharSequence label;
     public final String tag;
     private static final String[] SUPPORTED_ALGOS = {"SHA-256"};
-    public static final Parcelable.Creator<BlobHandle> CREATOR = new Parcelable.Creator<BlobHandle>() { // from class: android.app.blob.BlobHandle.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BlobHandle createFromParcel(Parcel source) {
-            return new BlobHandle(source);
-        }
+    public static final Parcelable.Creator<BlobHandle> CREATOR =
+            new Parcelable.Creator<BlobHandle>() { // from class: android.app.blob.BlobHandle.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BlobHandle createFromParcel(Parcel source) {
+                    return new BlobHandle(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BlobHandle[] newArray(int size) {
-            return new BlobHandle[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BlobHandle[] newArray(int size) {
+                    return new BlobHandle[size];
+                }
+            };
 
-    private BlobHandle(String algorithm, byte[] digest, CharSequence label, long expiryTimeMillis, String tag) {
+    private BlobHandle(
+            String algorithm,
+            byte[] digest,
+            CharSequence label,
+            long expiryTimeMillis,
+            String tag) {
         this.algorithm = algorithm;
         this.digest = digest;
         this.label = label;
@@ -54,13 +63,19 @@ public final class BlobHandle implements Parcelable {
         this.tag = in.readString();
     }
 
-    public static BlobHandle create(String algorithm, byte[] digest, CharSequence label, long expiryTimeMillis, String tag) {
+    public static BlobHandle create(
+            String algorithm,
+            byte[] digest,
+            CharSequence label,
+            long expiryTimeMillis,
+            String tag) {
         BlobHandle handle = new BlobHandle(algorithm, digest, label, expiryTimeMillis, tag);
         handle.assertIsValid();
         return handle;
     }
 
-    public static BlobHandle createWithSha256(byte[] digest, CharSequence label, long expiryTimeMillis, String tag) {
+    public static BlobHandle createWithSha256(
+            byte[] digest, CharSequence label, long expiryTimeMillis, String tag) {
         return create("SHA-256", digest, label, expiryTimeMillis, tag);
     }
 
@@ -102,14 +117,23 @@ public final class BlobHandle implements Parcelable {
             return false;
         }
         BlobHandle other = (BlobHandle) obj;
-        if (this.algorithm.equals(other.algorithm) && Arrays.equals(this.digest, other.digest) && this.label.toString().equals(other.label.toString()) && this.expiryTimeMillis == other.expiryTimeMillis && this.tag.equals(other.tag)) {
+        if (this.algorithm.equals(other.algorithm)
+                && Arrays.equals(this.digest, other.digest)
+                && this.label.toString().equals(other.label.toString())
+                && this.expiryTimeMillis == other.expiryTimeMillis
+                && this.tag.equals(other.tag)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.algorithm, Integer.valueOf(Arrays.hashCode(this.digest)), this.label, Long.valueOf(this.expiryTimeMillis), this.tag);
+        return Objects.hash(
+                this.algorithm,
+                Integer.valueOf(Arrays.hashCode(this.digest)),
+                this.label,
+                Long.valueOf(this.expiryTimeMillis),
+                this.tag);
     }
 
     public void dump(IndentingPrintWriter fout, boolean dumpFull) {
@@ -117,7 +141,8 @@ public final class BlobHandle implements Parcelable {
             fout.println("algo: " + this.algorithm);
             StringBuilder append = new StringBuilder().append("digest: ");
             byte[] bArr = this.digest;
-            fout.println(append.append(dumpFull ? encodeDigest(bArr) : safeDigest(bArr)).toString());
+            fout.println(
+                    append.append(dumpFull ? encodeDigest(bArr) : safeDigest(bArr)).toString());
             fout.println("label: " + ((Object) this.label));
             fout.println("expiryMs: " + this.expiryTimeMillis);
             fout.println("tag: " + this.tag);
@@ -131,13 +156,24 @@ public final class BlobHandle implements Parcelable {
         Preconditions.checkByteArrayNotEmpty(this.digest, CMSAttributeTableGenerator.DIGEST);
         Preconditions.checkStringNotEmpty(this.label, "label must not be null");
         Preconditions.checkArgument(this.label.length() <= 100, "label too long");
-        Preconditions.checkArgumentNonnegative(this.expiryTimeMillis, "expiryTimeMillis must not be negative");
+        Preconditions.checkArgumentNonnegative(
+                this.expiryTimeMillis, "expiryTimeMillis must not be negative");
         Preconditions.checkStringNotEmpty(this.tag, "tag must not be null");
         Preconditions.checkArgument(this.tag.length() <= 128, "tag too long");
     }
 
     public String toString() {
-        return "BlobHandle {algo:" + this.algorithm + ",digest:" + safeDigest(this.digest) + ",label:" + ((Object) this.label) + ",expiryMs:" + this.expiryTimeMillis + ",tag:" + this.tag + "}";
+        return "BlobHandle {algo:"
+                + this.algorithm
+                + ",digest:"
+                + safeDigest(this.digest)
+                + ",label:"
+                + ((Object) this.label)
+                + ",expiryMs:"
+                + this.expiryTimeMillis
+                + ",tag:"
+                + this.tag
+                + "}";
     }
 
     public static String safeDigest(byte[] digest) {

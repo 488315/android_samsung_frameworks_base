@@ -1,9 +1,14 @@
 package com.samsung.vekit.Common.Object;
 
 import android.util.Log;
+
 import com.samsung.vekit.Common.Type.ElementType;
 import com.samsung.vekit.Common.Type.FilterType;
 import com.samsung.vekit.Common.VEContext;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,12 +16,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* loaded from: classes6.dex */
 public class Filter extends Element {
-    private static final String GRAIN_TEMPLATE_IMAGE = "/system/cameradata/myfilter/GrainTemplateImage";
+    private static final String GRAIN_TEMPLATE_IMAGE =
+            "/system/cameradata/myfilter/GrainTemplateImage";
     private static final int NOISE_TYPE_GRAY = 1;
     private static final int NOISE_TYPE_NONE = 0;
     private static final int NOISE_TYPE_RGB = 3;

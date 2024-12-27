@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.x509;
 
 import android.media.MediaMetrics;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Choice;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1Object;
@@ -14,6 +15,7 @@ import com.android.internal.org.bouncycastle.asn1.DEROctetString;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.util.IPAddress;
+
 import java.io.IOException;
 import java.util.StringTokenizer;
 
@@ -104,7 +106,8 @@ public class GeneralName extends ASN1Object implements ASN1Choice {
                 throw new IllegalArgumentException("unable to parse encoded general name");
             }
         }
-        throw new IllegalArgumentException("unknown object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in getInstance: " + obj.getClass().getName());
     }
 
     public static GeneralName getInstance(ASN1TaggedObject tagObj, boolean explicit) {
@@ -241,13 +244,18 @@ public class GeneralName extends ASN1Object implements ASN1Choice {
             } else {
                 StringTokenizer eTok = new StringTokenizer(e, MediaMetrics.SEPARATOR);
                 int index3 = index + 1;
-                val[index] = (Integer.parseInt(eTok.nextToken()) << 8) | Integer.parseInt(eTok.nextToken());
+                val[index] =
+                        (Integer.parseInt(eTok.nextToken()) << 8)
+                                | Integer.parseInt(eTok.nextToken());
                 index = index3 + 1;
-                val[index3] = (Integer.parseInt(eTok.nextToken()) << 8) | Integer.parseInt(eTok.nextToken());
+                val[index3] =
+                        (Integer.parseInt(eTok.nextToken()) << 8)
+                                | Integer.parseInt(eTok.nextToken());
             }
         }
         if (index != val.length) {
-            System.arraycopy(val, doubleColon, val, val.length - (index - doubleColon), index - doubleColon);
+            System.arraycopy(
+                    val, doubleColon, val, val.length - (index - doubleColon), index - doubleColon);
             for (int i = doubleColon; i != val.length - (index - doubleColon); i++) {
                 val[i] = 0;
             }
@@ -255,7 +263,8 @@ public class GeneralName extends ASN1Object implements ASN1Choice {
         return val;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         boolean explicit = this.tag == 4;
         return new DERTaggedObject(explicit, this.tag, this.obj);

@@ -3,6 +3,7 @@ package vendor.samsung.hardware.radio.V2_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -23,18 +24,41 @@ public final class SehApnProfile {
             return false;
         }
         SehApnProfile other = (SehApnProfile) otherObject;
-        if (HidlSupport.deepEquals(this.apn, other.apn) && HidlSupport.deepEquals(this.proto, other.proto) && HidlSupport.deepEquals(this.roamingProto, other.roamingProto) && HidlSupport.deepEquals(this.user, other.user) && HidlSupport.deepEquals(this.pw, other.pw) && HidlSupport.deepEquals(this.auth, other.auth)) {
+        if (HidlSupport.deepEquals(this.apn, other.apn)
+                && HidlSupport.deepEquals(this.proto, other.proto)
+                && HidlSupport.deepEquals(this.roamingProto, other.roamingProto)
+                && HidlSupport.deepEquals(this.user, other.user)
+                && HidlSupport.deepEquals(this.pw, other.pw)
+                && HidlSupport.deepEquals(this.auth, other.auth)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.apn)), Integer.valueOf(HidlSupport.deepHashCode(this.proto)), Integer.valueOf(HidlSupport.deepHashCode(this.roamingProto)), Integer.valueOf(HidlSupport.deepHashCode(this.user)), Integer.valueOf(HidlSupport.deepHashCode(this.pw)), Integer.valueOf(HidlSupport.deepHashCode(this.auth)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.apn)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.proto)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.roamingProto)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.user)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.pw)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.auth)));
     }
 
     public final String toString() {
-        return "{.apn = " + this.apn + ", .proto = " + this.proto + ", .roamingProto = " + this.roamingProto + ", .user = " + this.user + ", .pw = " + this.pw + ", .auth = " + this.auth + "}";
+        return "{.apn = "
+                + this.apn
+                + ", .proto = "
+                + this.proto
+                + ", .roamingProto = "
+                + this.roamingProto
+                + ", .user = "
+                + this.user
+                + ", .pw = "
+                + this.pw
+                + ", .auth = "
+                + this.auth
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -46,7 +70,8 @@ public final class SehApnProfile {
         ArrayList<SehApnProfile> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 96, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 96, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SehApnProfile _hidl_vec_element = new SehApnProfile();
@@ -56,19 +81,32 @@ public final class SehApnProfile {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.apn = _hidl_blob.getString(_hidl_offset + 0);
-        parcel.readEmbeddedBuffer(this.apn.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 0 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.apn.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 0 + 0, false);
         this.proto = _hidl_blob.getString(_hidl_offset + 16);
-        parcel.readEmbeddedBuffer(this.proto.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 16 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.proto.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 16 + 0,
+                false);
         this.roamingProto = _hidl_blob.getString(_hidl_offset + 32);
-        parcel.readEmbeddedBuffer(this.roamingProto.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 32 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.roamingProto.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 32 + 0,
+                false);
         this.user = _hidl_blob.getString(_hidl_offset + 48);
-        parcel.readEmbeddedBuffer(this.user.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 48 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.user.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 48 + 0, false);
         this.pw = _hidl_blob.getString(_hidl_offset + 64);
-        parcel.readEmbeddedBuffer(this.pw.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 64 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.pw.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 64 + 0, false);
         this.auth = _hidl_blob.getString(_hidl_offset + 80);
-        parcel.readEmbeddedBuffer(this.auth.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 80 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.auth.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 80 + 0, false);
     }
 
     public final void writeToParcel(HwParcel parcel) {
@@ -77,7 +115,8 @@ public final class SehApnProfile {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<SehApnProfile> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<SehApnProfile> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

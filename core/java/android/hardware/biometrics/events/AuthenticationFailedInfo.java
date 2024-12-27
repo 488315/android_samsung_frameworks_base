@@ -5,34 +5,43 @@ import android.hardware.biometrics.BiometricRequestConstants;
 import android.hardware.biometrics.BiometricSourceType;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class AuthenticationFailedInfo implements Parcelable {
-    public static final Parcelable.Creator<AuthenticationFailedInfo> CREATOR = new Parcelable.Creator<AuthenticationFailedInfo>() { // from class: android.hardware.biometrics.events.AuthenticationFailedInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationFailedInfo[] newArray(int size) {
-            return new AuthenticationFailedInfo[size];
-        }
+    public static final Parcelable.Creator<AuthenticationFailedInfo> CREATOR =
+            new Parcelable.Creator<AuthenticationFailedInfo>() { // from class:
+                // android.hardware.biometrics.events.AuthenticationFailedInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationFailedInfo[] newArray(int size) {
+                    return new AuthenticationFailedInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationFailedInfo createFromParcel(Parcel in) {
-            return new AuthenticationFailedInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationFailedInfo createFromParcel(Parcel in) {
+                    return new AuthenticationFailedInfo(in);
+                }
+            };
     private final BiometricSourceType mBiometricSourceType;
     private final int mRequestReason;
     private final int mUserId;
 
-    AuthenticationFailedInfo(BiometricSourceType biometricSourceType, int requestReason, int userId) {
+    AuthenticationFailedInfo(
+            BiometricSourceType biometricSourceType, int requestReason, int userId) {
         this.mBiometricSourceType = biometricSourceType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
         this.mRequestReason = requestReason;
-        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                (Annotation) null,
+                this.mRequestReason);
         this.mUserId = userId;
     }
 
@@ -56,7 +65,9 @@ public final class AuthenticationFailedInfo implements Parcelable {
             return false;
         }
         AuthenticationFailedInfo that = (AuthenticationFailedInfo) o;
-        if (Objects.equals(this.mBiometricSourceType, that.mBiometricSourceType) && this.mRequestReason == that.mRequestReason && this.mUserId == that.mUserId) {
+        if (Objects.equals(this.mBiometricSourceType, that.mBiometricSourceType)
+                && this.mRequestReason == that.mRequestReason
+                && this.mUserId == that.mUserId) {
             return true;
         }
         return false;
@@ -80,13 +91,18 @@ public final class AuthenticationFailedInfo implements Parcelable {
     }
 
     AuthenticationFailedInfo(Parcel in) {
-        BiometricSourceType biometricSourceType = (BiometricSourceType) in.readTypedObject(BiometricSourceType.CREATOR);
+        BiometricSourceType biometricSourceType =
+                (BiometricSourceType) in.readTypedObject(BiometricSourceType.CREATOR);
         int requestReason = in.readInt();
         int userId = in.readInt();
         this.mBiometricSourceType = biometricSourceType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
         this.mRequestReason = requestReason;
-        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                (Annotation) null,
+                this.mRequestReason);
         this.mUserId = userId;
     }
 
@@ -98,9 +114,15 @@ public final class AuthenticationFailedInfo implements Parcelable {
 
         public Builder(BiometricSourceType biometricSourceType, int requestReason, int userId) {
             this.mBiometricSourceType = biometricSourceType;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class,
+                    (NonNull) null,
+                    (Object) this.mBiometricSourceType);
             this.mRequestReason = requestReason;
-            AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+            AnnotationValidations.validate(
+                    (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                    (Annotation) null,
+                    this.mRequestReason);
             this.mUserId = userId;
         }
 
@@ -128,18 +150,20 @@ public final class AuthenticationFailedInfo implements Parcelable {
         public AuthenticationFailedInfo build() {
             checkNotUsed();
             this.mBuilderFieldsSet |= 8;
-            AuthenticationFailedInfo o = new AuthenticationFailedInfo(this.mBiometricSourceType, this.mRequestReason, this.mUserId);
+            AuthenticationFailedInfo o =
+                    new AuthenticationFailedInfo(
+                            this.mBiometricSourceType, this.mRequestReason, this.mUserId);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 8) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

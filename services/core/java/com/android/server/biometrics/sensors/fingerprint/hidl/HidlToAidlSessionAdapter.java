@@ -10,12 +10,15 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.server.biometrics.HardwareAuthTokenUtils;
 import com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintGetAuthenticatorIdClient;
 import com.android.server.biometrics.sensors.fingerprint.aidl.FingerprintInvalidationClient;
 import com.android.server.biometrics.sensors.fingerprint.aidl.SemFpAidlResponseHandler;
-import java.util.function.Supplier;
+
 import vendor.samsung.hardware.biometrics.fingerprint.V3_0.ISehBiometricsFingerprint;
+
+import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -27,8 +30,7 @@ public final class HidlToAidlSessionAdapter implements ISession {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Cancellation extends ICancellationSignal.Stub {
-        public Cancellation() {
-        }
+        public Cancellation() {}
 
         public final void cancel() {
             try {
@@ -47,19 +49,31 @@ public final class HidlToAidlSessionAdapter implements ISession {
         }
     }
 
-    public HidlToAidlSessionAdapter(HidlToAidlSensorAdapter$$ExternalSyntheticLambda3 hidlToAidlSensorAdapter$$ExternalSyntheticLambda3, int i, SemFpAidlResponseHandler semFpAidlResponseHandler) {
+    public HidlToAidlSessionAdapter(
+            HidlToAidlSensorAdapter$$ExternalSyntheticLambda3
+                    hidlToAidlSensorAdapter$$ExternalSyntheticLambda3,
+            int i,
+            SemFpAidlResponseHandler semFpAidlResponseHandler) {
         this.mSession = hidlToAidlSensorAdapter$$ExternalSyntheticLambda3;
         this.mUserId = i;
-        this.mHidlToAidlCallbackConverter = new HidlToAidlCallbackConverter(semFpAidlResponseHandler);
+        this.mHidlToAidlCallbackConverter =
+                new HidlToAidlCallbackConverter(semFpAidlResponseHandler);
         try {
-            if (hidlToAidlSensorAdapter$$ExternalSyntheticLambda3.f$0.getIBiometricsFingerprint() != null) {
-                long notify = hidlToAidlSensorAdapter$$ExternalSyntheticLambda3.f$0.getIBiometricsFingerprint().setNotify(this.mHidlToAidlCallbackConverter);
+            if (hidlToAidlSensorAdapter$$ExternalSyntheticLambda3.f$0.getIBiometricsFingerprint()
+                    != null) {
+                long notify =
+                        hidlToAidlSensorAdapter$$ExternalSyntheticLambda3
+                                .f$0
+                                .getIBiometricsFingerprint()
+                                .setNotify(this.mHidlToAidlCallbackConverter);
                 Slog.d("HidlToAidlSessionAdapter", "Fingerprint HAL ready, HAL ID: " + notify);
                 if (notify == 0) {
                     Slog.d("HidlToAidlSessionAdapter", "Unable to set HIDL callback.");
                 }
             } else {
-                Slog.e("HidlToAidlSessionAdapter", "Unable to set HIDL callback. HIDL daemon is null.");
+                Slog.e(
+                        "HidlToAidlSessionAdapter",
+                        "Unable to set HIDL callback. HIDL daemon is null.");
             }
         } catch (RemoteException unused) {
             Slog.d("HidlToAidlSessionAdapter", "Failed to set callback");
@@ -75,7 +89,8 @@ public final class HidlToAidlSessionAdapter implements ISession {
         return new Cancellation();
     }
 
-    public final ICancellationSignal authenticateWithContext(long j, OperationContext operationContext) {
+    public final ICancellationSignal authenticateWithContext(
+            long j, OperationContext operationContext) {
         Log.e("HidlToAidlSessionAdapter", "authenticateWithContext unsupported in HIDL");
         return authenticate(j);
     }
@@ -89,17 +104,20 @@ public final class HidlToAidlSessionAdapter implements ISession {
         return new Cancellation();
     }
 
-    public final ICancellationSignal detectInteractionWithContext(OperationContext operationContext) {
+    public final ICancellationSignal detectInteractionWithContext(
+            OperationContext operationContext) {
         Log.e("HidlToAidlSessionAdapter", "enrollWithContext unsupported in HIDL");
         return detectInteraction();
     }
 
     public final ICancellationSignal enroll(HardwareAuthToken hardwareAuthToken) {
-        ((IBiometricsFingerprint) this.mSession.get()).enroll(this.mUserId, 0, HardwareAuthTokenUtils.toByteArray(hardwareAuthToken));
+        ((IBiometricsFingerprint) this.mSession.get())
+                .enroll(this.mUserId, 0, HardwareAuthTokenUtils.toByteArray(hardwareAuthToken));
         return new Cancellation();
     }
 
-    public final ICancellationSignal enrollWithContext(HardwareAuthToken hardwareAuthToken, OperationContext operationContext) {
+    public final ICancellationSignal enrollWithContext(
+            HardwareAuthToken hardwareAuthToken, OperationContext operationContext) {
         Log.e("HidlToAidlSessionAdapter", "enrollWithContext unsupported in HIDL");
         return enroll(hardwareAuthToken);
     }
@@ -109,12 +127,14 @@ public final class HidlToAidlSessionAdapter implements ISession {
     }
 
     public final void generateChallenge() {
-        this.mHidlToAidlCallbackConverter.mAidlResponseHandler.onChallengeGenerated(((IBiometricsFingerprint) this.mSession.get()).preEnroll());
+        this.mHidlToAidlCallbackConverter.mAidlResponseHandler.onChallengeGenerated(
+                ((IBiometricsFingerprint) this.mSession.get()).preEnroll());
     }
 
     public final void getAuthenticatorId() {
         Log.e("HidlToAidlSessionAdapter", "getAuthenticatorId unsupported in HIDL");
-        this.mHidlToAidlCallbackConverter.unsupportedClientScheduled(FingerprintGetAuthenticatorIdClient.class);
+        this.mHidlToAidlCallbackConverter.unsupportedClientScheduled(
+                FingerprintGetAuthenticatorIdClient.class);
     }
 
     public final String getInterfaceHash() {
@@ -129,7 +149,8 @@ public final class HidlToAidlSessionAdapter implements ISession {
 
     public final void invalidateAuthenticatorId() {
         Log.e("HidlToAidlSessionAdapter", "invalidateAuthenticatorId unsupported in HIDL");
-        this.mHidlToAidlCallbackConverter.unsupportedClientScheduled(FingerprintInvalidationClient.class);
+        this.mHidlToAidlCallbackConverter.unsupportedClientScheduled(
+                FingerprintInvalidationClient.class);
     }
 
     public final void onContextChanged(OperationContext operationContext) {
@@ -141,11 +162,14 @@ public final class HidlToAidlSessionAdapter implements ISession {
     }
 
     public final void onPointerDown(int i, int i2, int i3, float f, float f2) {
-        IBiometricsFingerprint iBiometricsFingerprint = (IBiometricsFingerprint) this.mSession.get();
+        IBiometricsFingerprint iBiometricsFingerprint =
+                (IBiometricsFingerprint) this.mSession.get();
         if (iBiometricsFingerprint instanceof ISehBiometricsFingerprint) {
             return;
         }
-        android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint castFrom = android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint.castFrom(iBiometricsFingerprint);
+        android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint castFrom =
+                android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint.castFrom(
+                        iBiometricsFingerprint);
         if (castFrom == null) {
             Slog.v("UdfpsHelper", "onFingerDown | failed to cast the HIDL to V2_3");
             return;
@@ -159,15 +183,23 @@ public final class HidlToAidlSessionAdapter implements ISession {
 
     public final void onPointerDownWithContext(PointerContext pointerContext) {
         Log.e("HidlToAidlSessionAdapter", "onPointerDownWithContext unsupported in HIDL");
-        onPointerDown(pointerContext.pointerId, (int) pointerContext.x, (int) pointerContext.y, pointerContext.minor, pointerContext.major);
+        onPointerDown(
+                pointerContext.pointerId,
+                (int) pointerContext.x,
+                (int) pointerContext.y,
+                pointerContext.minor,
+                pointerContext.major);
     }
 
     public final void onPointerUp(int i) {
-        IBiometricsFingerprint iBiometricsFingerprint = (IBiometricsFingerprint) this.mSession.get();
+        IBiometricsFingerprint iBiometricsFingerprint =
+                (IBiometricsFingerprint) this.mSession.get();
         if (iBiometricsFingerprint instanceof ISehBiometricsFingerprint) {
             return;
         }
-        android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint castFrom = android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint.castFrom(iBiometricsFingerprint);
+        android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint castFrom =
+                android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint.castFrom(
+                        iBiometricsFingerprint);
         if (castFrom == null) {
             Slog.v("UdfpsHelper", "onFingerUp | failed to cast the HIDL to V2_3");
             return;

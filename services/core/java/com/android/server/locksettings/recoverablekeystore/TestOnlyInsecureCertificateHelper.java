@@ -3,6 +3,7 @@ package com.android.server.locksettings.recoverablekeystore;
 import android.os.ServiceSpecificException;
 import android.security.keystore.recovery.TrustedRootCertificates;
 import android.util.Log;
+
 import java.security.cert.X509Certificate;
 import java.util.Date;
 
@@ -22,7 +23,8 @@ public final class TestOnlyInsecureCertificateHelper {
         if ("TEST_ONLY_INSECURE_CERTIFICATE_ALIAS".equals(defaultCertificateAliasIfEmpty)) {
             return TrustedRootCertificates.getTestOnlyInsecureCertificate();
         }
-        X509Certificate rootCertificate = TrustedRootCertificates.getRootCertificate(defaultCertificateAliasIfEmpty);
+        X509Certificate rootCertificate =
+                TrustedRootCertificates.getRootCertificate(defaultCertificateAliasIfEmpty);
         if (rootCertificate != null) {
             return rootCertificate;
         }

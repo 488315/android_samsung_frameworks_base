@@ -11,12 +11,14 @@ import com.android.internal.org.bouncycastle.asn1.DEROctetString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.math.BigInteger;
 import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
 public class PBKDF2Params extends ASN1Object {
-    private static final AlgorithmIdentifier algid_hmacWithSHA1 = new AlgorithmIdentifier(PKCSObjectIdentifiers.id_hmacWithSHA1, DERNull.INSTANCE);
+    private static final AlgorithmIdentifier algid_hmacWithSHA1 =
+            new AlgorithmIdentifier(PKCSObjectIdentifiers.id_hmacWithSHA1, DERNull.INSTANCE);
     private final ASN1Integer iterationCount;
     private final ASN1Integer keyLength;
     private final ASN1OctetString octStr;
@@ -109,7 +111,8 @@ public class PBKDF2Params extends ASN1Object {
         return algid_hmacWithSHA1;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(4);
         v.add(this.octStr);

@@ -16,7 +16,9 @@ public interface IImsRegistrationCallback extends IInterface {
 
     void onDeregistered(ImsReasonInfo imsReasonInfo, int i, int i2) throws RemoteException;
 
-    void onDeregisteredWithDetails(ImsReasonInfo imsReasonInfo, int i, int i2, SipDetails sipDetails) throws RemoteException;
+    void onDeregisteredWithDetails(
+            ImsReasonInfo imsReasonInfo, int i, int i2, SipDetails sipDetails)
+            throws RemoteException;
 
     void onRegistered(ImsRegistrationAttributes imsRegistrationAttributes) throws RemoteException;
 
@@ -28,28 +30,26 @@ public interface IImsRegistrationCallback extends IInterface {
 
     public static class Default implements IImsRegistrationCallback {
         @Override // android.telephony.ims.aidl.IImsRegistrationCallback
-        public void onRegistered(ImsRegistrationAttributes attr) throws RemoteException {
-        }
+        public void onRegistered(ImsRegistrationAttributes attr) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistrationCallback
-        public void onRegistering(ImsRegistrationAttributes attr) throws RemoteException {
-        }
+        public void onRegistering(ImsRegistrationAttributes attr) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistrationCallback
-        public void onDeregistered(ImsReasonInfo info, int suggestedAction, int imsRadioTech) throws RemoteException {
-        }
+        public void onDeregistered(ImsReasonInfo info, int suggestedAction, int imsRadioTech)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistrationCallback
-        public void onDeregisteredWithDetails(ImsReasonInfo info, int suggestedAction, int imsRadioTech, SipDetails detail) throws RemoteException {
-        }
+        public void onDeregisteredWithDetails(
+                ImsReasonInfo info, int suggestedAction, int imsRadioTech, SipDetails detail)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistrationCallback
-        public void onTechnologyChangeFailed(int imsRadioTech, ImsReasonInfo info) throws RemoteException {
-        }
+        public void onTechnologyChangeFailed(int imsRadioTech, ImsReasonInfo info)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRegistrationCallback
-        public void onSubscriberAssociatedUriChanged(Uri[] uris) throws RemoteException {
-        }
+        public void onSubscriberAssociatedUriChanged(Uri[] uris) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -57,7 +57,7 @@ public interface IImsRegistrationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsRegistrationCallback {
+    public abstract static class Stub extends Binder implements IImsRegistrationCallback {
         static final int TRANSACTION_onDeregistered = 3;
         static final int TRANSACTION_onDeregisteredWithDetails = 4;
         static final int TRANSACTION_onRegistered = 1;
@@ -110,7 +110,8 @@ public interface IImsRegistrationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsRegistrationCallback.DESCRIPTOR);
             }
@@ -120,24 +121,30 @@ public interface IImsRegistrationCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ImsRegistrationAttributes _arg0 = (ImsRegistrationAttributes) data.readTypedObject(ImsRegistrationAttributes.CREATOR);
+                    ImsRegistrationAttributes _arg0 =
+                            (ImsRegistrationAttributes)
+                                    data.readTypedObject(ImsRegistrationAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     onRegistered(_arg0);
                     return true;
                 case 2:
-                    ImsRegistrationAttributes _arg02 = (ImsRegistrationAttributes) data.readTypedObject(ImsRegistrationAttributes.CREATOR);
+                    ImsRegistrationAttributes _arg02 =
+                            (ImsRegistrationAttributes)
+                                    data.readTypedObject(ImsRegistrationAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     onRegistering(_arg02);
                     return true;
                 case 3:
-                    ImsReasonInfo _arg03 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg03 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     int _arg1 = data.readInt();
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     onDeregistered(_arg03, _arg1, _arg2);
                     return true;
                 case 4:
-                    ImsReasonInfo _arg04 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg04 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     int _arg12 = data.readInt();
                     int _arg22 = data.readInt();
                     SipDetails _arg3 = (SipDetails) data.readTypedObject(SipDetails.CREATOR);
@@ -146,7 +153,8 @@ public interface IImsRegistrationCallback extends IInterface {
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    ImsReasonInfo _arg13 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg13 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onTechnologyChangeFailed(_arg05, _arg13);
                     return true;
@@ -201,7 +209,8 @@ public interface IImsRegistrationCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistrationCallback
-            public void onDeregistered(ImsReasonInfo info, int suggestedAction, int imsRadioTech) throws RemoteException {
+            public void onDeregistered(ImsReasonInfo info, int suggestedAction, int imsRadioTech)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
@@ -215,7 +224,9 @@ public interface IImsRegistrationCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistrationCallback
-            public void onDeregisteredWithDetails(ImsReasonInfo info, int suggestedAction, int imsRadioTech, SipDetails detail) throws RemoteException {
+            public void onDeregisteredWithDetails(
+                    ImsReasonInfo info, int suggestedAction, int imsRadioTech, SipDetails detail)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);
@@ -230,7 +241,8 @@ public interface IImsRegistrationCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRegistrationCallback
-            public void onTechnologyChangeFailed(int imsRadioTech, ImsReasonInfo info) throws RemoteException {
+            public void onTechnologyChangeFailed(int imsRadioTech, ImsReasonInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsRegistrationCallback.DESCRIPTOR);

@@ -8,10 +8,13 @@ import android.os.RemoteException;
 /* loaded from: classes.dex */
 public class AdbManager {
     private static final String TAG = "AdbManager";
-    public static final String WIRELESS_DEBUG_PAIRED_DEVICES_ACTION = "com.android.server.adb.WIRELESS_DEBUG_PAIRED_DEVICES";
-    public static final String WIRELESS_DEBUG_PAIRING_RESULT_ACTION = "com.android.server.adb.WIRELESS_DEBUG_PAIRING_RESULT";
+    public static final String WIRELESS_DEBUG_PAIRED_DEVICES_ACTION =
+            "com.android.server.adb.WIRELESS_DEBUG_PAIRED_DEVICES";
+    public static final String WIRELESS_DEBUG_PAIRING_RESULT_ACTION =
+            "com.android.server.adb.WIRELESS_DEBUG_PAIRING_RESULT";
     public static final String WIRELESS_DEBUG_PORT_EXTRA = "adb_port";
-    public static final String WIRELESS_DEBUG_STATE_CHANGED_ACTION = "com.android.server.adb.WIRELESS_DEBUG_STATUS";
+    public static final String WIRELESS_DEBUG_STATE_CHANGED_ACTION =
+            "com.android.server.adb.WIRELESS_DEBUG_STATUS";
     public static final String WIRELESS_DEVICES_EXTRA = "devices_map";
     public static final String WIRELESS_PAIRING_CODE_EXTRA = "pairing_code";
     public static final String WIRELESS_PAIR_DEVICE_EXTRA = "pair_device";

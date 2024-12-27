@@ -1,8 +1,5 @@
 package android.net;
 
-import android.net.IIpMemoryStoreCallbacks;
-import android.net.INetworkMonitorCallbacks;
-import android.net.INetworkStackStatusCallback;
 import android.net.dhcp.DhcpServingParamsParcel;
 import android.net.dhcp.IDhcpServerCallbacks;
 import android.net.ip.IIpClientCallbacks;
@@ -22,8 +19,8 @@ public interface INetworkStackConnector extends IInterface {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements INetworkStackConnector {
         @Override // android.net.INetworkStackConnector
-        public void allowTestUid(int i, INetworkStackStatusCallback iNetworkStackStatusCallback) throws RemoteException {
-        }
+        public void allowTestUid(int i, INetworkStackStatusCallback iNetworkStackStatusCallback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -31,8 +28,8 @@ public interface INetworkStackConnector extends IInterface {
         }
 
         @Override // android.net.INetworkStackConnector
-        public void fetchIpMemoryStore(IIpMemoryStoreCallbacks iIpMemoryStoreCallbacks) throws RemoteException {
-        }
+        public void fetchIpMemoryStore(IIpMemoryStoreCallbacks iIpMemoryStoreCallbacks)
+                throws RemoteException {}
 
         @Override // android.net.INetworkStackConnector
         public String getInterfaceHash() {
@@ -45,16 +42,20 @@ public interface INetworkStackConnector extends IInterface {
         }
 
         @Override // android.net.INetworkStackConnector
-        public void makeDhcpServer(String str, DhcpServingParamsParcel dhcpServingParamsParcel, IDhcpServerCallbacks iDhcpServerCallbacks) throws RemoteException {
-        }
+        public void makeDhcpServer(
+                String str,
+                DhcpServingParamsParcel dhcpServingParamsParcel,
+                IDhcpServerCallbacks iDhcpServerCallbacks)
+                throws RemoteException {}
 
         @Override // android.net.INetworkStackConnector
-        public void makeIpClient(String str, IIpClientCallbacks iIpClientCallbacks) throws RemoteException {
-        }
+        public void makeIpClient(String str, IIpClientCallbacks iIpClientCallbacks)
+                throws RemoteException {}
 
         @Override // android.net.INetworkStackConnector
-        public void makeNetworkMonitor(Network network, String str, INetworkMonitorCallbacks iNetworkMonitorCallbacks) throws RemoteException {
-        }
+        public void makeNetworkMonitor(
+                Network network, String str, INetworkMonitorCallbacks iNetworkMonitorCallbacks)
+                throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -74,7 +75,8 @@ public interface INetworkStackConnector extends IInterface {
             public IBinder mRemote;
 
             @Override // android.net.INetworkStackConnector
-            public final void allowTestUid(int i, INetworkStackStatusCallback iNetworkStackStatusCallback) {
+            public final void allowTestUid(
+                    int i, INetworkStackStatusCallback iNetworkStackStatusCallback) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(INetworkStackConnector.DESCRIPTOR);
@@ -117,7 +119,8 @@ public interface INetworkStackConnector extends IInterface {
                         Parcel obtain2 = Parcel.obtain();
                         try {
                             obtain.writeInterfaceToken(INetworkStackConnector.DESCRIPTOR);
-                            this.mRemote.transact(Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
+                            this.mRemote.transact(
+                                    Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
                             obtain2.readException();
                             this.mCachedHash = obtain2.readString();
                             obtain2.recycle();
@@ -141,7 +144,8 @@ public interface INetworkStackConnector extends IInterface {
                     Parcel obtain2 = Parcel.obtain();
                     try {
                         obtain.writeInterfaceToken(INetworkStackConnector.DESCRIPTOR);
-                        this.mRemote.transact(Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
+                        this.mRemote.transact(
+                                Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
                         obtain2.readException();
                         this.mCachedVersion = obtain2.readInt();
                     } finally {
@@ -153,7 +157,10 @@ public interface INetworkStackConnector extends IInterface {
             }
 
             @Override // android.net.INetworkStackConnector
-            public final void makeDhcpServer(String str, DhcpServingParamsParcel dhcpServingParamsParcel, IDhcpServerCallbacks iDhcpServerCallbacks) {
+            public final void makeDhcpServer(
+                    String str,
+                    DhcpServingParamsParcel dhcpServingParamsParcel,
+                    IDhcpServerCallbacks iDhcpServerCallbacks) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(INetworkStackConnector.DESCRIPTOR);
@@ -186,7 +193,10 @@ public interface INetworkStackConnector extends IInterface {
             }
 
             @Override // android.net.INetworkStackConnector
-            public final void makeNetworkMonitor(Network network, String str, INetworkMonitorCallbacks iNetworkMonitorCallbacks) {
+            public final void makeNetworkMonitor(
+                    Network network,
+                    String str,
+                    INetworkMonitorCallbacks iNetworkMonitorCallbacks) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(INetworkStackConnector.DESCRIPTOR);
@@ -211,8 +221,10 @@ public interface INetworkStackConnector extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(INetworkStackConnector.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof INetworkStackConnector)) {
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(INetworkStackConnector.DESCRIPTOR);
+            if (queryLocalInterface != null
+                    && (queryLocalInterface instanceof INetworkStackConnector)) {
                 return (INetworkStackConnector) queryLocalInterface;
             }
             Proxy proxy = new Proxy();
@@ -228,7 +240,8 @@ public interface INetworkStackConnector extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             String str = INetworkStackConnector.DESCRIPTOR;
             if (i >= 1 && i <= TRANSACTION_getInterfaceVersion) {
                 parcel.enforceInterface(str);
@@ -248,24 +261,37 @@ public interface INetworkStackConnector extends IInterface {
                 return true;
             }
             if (i == 1) {
-                makeDhcpServer(parcel.readString(), (DhcpServingParamsParcel) parcel.readTypedObject(DhcpServingParamsParcel.CREATOR), IDhcpServerCallbacks.Stub.asInterface(parcel.readStrongBinder()));
+                makeDhcpServer(
+                        parcel.readString(),
+                        (DhcpServingParamsParcel)
+                                parcel.readTypedObject(DhcpServingParamsParcel.CREATOR),
+                        IDhcpServerCallbacks.Stub.asInterface(parcel.readStrongBinder()));
             } else if (i == 2) {
-                makeNetworkMonitor((Network) parcel.readTypedObject(Network.CREATOR), parcel.readString(), INetworkMonitorCallbacks.Stub.asInterface(parcel.readStrongBinder()));
+                makeNetworkMonitor(
+                        (Network) parcel.readTypedObject(Network.CREATOR),
+                        parcel.readString(),
+                        INetworkMonitorCallbacks.Stub.asInterface(parcel.readStrongBinder()));
             } else if (i == 3) {
-                makeIpClient(parcel.readString(), IIpClientCallbacks.Stub.asInterface(parcel.readStrongBinder()));
+                makeIpClient(
+                        parcel.readString(),
+                        IIpClientCallbacks.Stub.asInterface(parcel.readStrongBinder()));
             } else if (i == 4) {
-                fetchIpMemoryStore(IIpMemoryStoreCallbacks.Stub.asInterface(parcel.readStrongBinder()));
+                fetchIpMemoryStore(
+                        IIpMemoryStoreCallbacks.Stub.asInterface(parcel.readStrongBinder()));
             } else {
                 if (i != 5) {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
-                allowTestUid(parcel.readInt(), INetworkStackStatusCallback.Stub.asInterface(parcel.readStrongBinder()));
+                allowTestUid(
+                        parcel.readInt(),
+                        INetworkStackStatusCallback.Stub.asInterface(parcel.readStrongBinder()));
             }
             return true;
         }
     }
 
-    void allowTestUid(int i, INetworkStackStatusCallback iNetworkStackStatusCallback) throws RemoteException;
+    void allowTestUid(int i, INetworkStackStatusCallback iNetworkStackStatusCallback)
+            throws RemoteException;
 
     void fetchIpMemoryStore(IIpMemoryStoreCallbacks iIpMemoryStoreCallbacks) throws RemoteException;
 
@@ -273,9 +299,15 @@ public interface INetworkStackConnector extends IInterface {
 
     int getInterfaceVersion() throws RemoteException;
 
-    void makeDhcpServer(String str, DhcpServingParamsParcel dhcpServingParamsParcel, IDhcpServerCallbacks iDhcpServerCallbacks) throws RemoteException;
+    void makeDhcpServer(
+            String str,
+            DhcpServingParamsParcel dhcpServingParamsParcel,
+            IDhcpServerCallbacks iDhcpServerCallbacks)
+            throws RemoteException;
 
     void makeIpClient(String str, IIpClientCallbacks iIpClientCallbacks) throws RemoteException;
 
-    void makeNetworkMonitor(Network network, String str, INetworkMonitorCallbacks iNetworkMonitorCallbacks) throws RemoteException;
+    void makeNetworkMonitor(
+            Network network, String str, INetworkMonitorCallbacks iNetworkMonitorCallbacks)
+            throws RemoteException;
 }

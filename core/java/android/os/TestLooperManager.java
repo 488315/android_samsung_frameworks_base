@@ -1,6 +1,7 @@
 package android.os;
 
 import android.util.ArraySet;
+
 import java.util.concurrent.LinkedBlockingQueue;
 
 /* loaded from: classes3.dex */
@@ -98,8 +99,7 @@ public class TestLooperManager {
     }
 
     private class LooperHolder implements Runnable {
-        private LooperHolder() {
-        }
+        private LooperHolder() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -109,7 +109,8 @@ public class TestLooperManager {
             }
             while (!TestLooperManager.this.mReleased) {
                 try {
-                    MessageExecution take = (MessageExecution) TestLooperManager.this.mExecuteQueue.take();
+                    MessageExecution take =
+                            (MessageExecution) TestLooperManager.this.mExecuteQueue.take();
                     if (take.m != null) {
                         processMessage(take);
                     }
@@ -138,7 +139,6 @@ public class TestLooperManager {
         private Message m;
         private Throwable response;
 
-        private MessageExecution() {
-        }
+        private MessageExecution() {}
     }
 }

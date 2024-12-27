@@ -15,8 +15,10 @@ import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
+
 import com.android.internal.R;
 import com.android.internal.statusbar.IStatusBarService;
+
 import com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter;
 import com.samsung.android.globalactions.presentation.features.FeatureFactory;
 import com.samsung.android.globalactions.presentation.strategies.WindowDecorationStrategy;
@@ -27,11 +29,13 @@ import com.samsung.android.globalactions.util.LogWrapper;
 import com.samsung.android.globalactions.util.SystemConditions;
 import com.samsung.android.globalactions.util.ToastController;
 import com.samsung.android.globalactions.util.WindowManagerUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes6.dex */
-public abstract class SamsungGlobalActionsDialogBase implements ExtendableGlobalActionsView, ViewStateController {
+public abstract class SamsungGlobalActionsDialogBase
+        implements ExtendableGlobalActionsView, ViewStateController {
     private static final String TAG = "SamsungGlobalActionsDialogBase";
     protected ConditionChecker mConditionChecker;
     private ContentView mContentView;
@@ -49,13 +53,16 @@ public abstract class SamsungGlobalActionsDialogBase implements ExtendableGlobal
     protected WindowManagerUtils mWindowManagerUtil;
     protected final float DEFAULT_DIM_AMOUNT = 1.0f;
     protected IBinder mToken = new Binder();
-    protected final IDreamManager mDreamManager = IDreamManager.Stub.asInterface(ServiceManager.getService(DreamService.DREAM_SERVICE));
+    protected final IDreamManager mDreamManager =
+            IDreamManager.Stub.asInterface(ServiceManager.getService(DreamService.DREAM_SERVICE));
     protected List<WindowDecorationStrategy> mWindowDecorationStrategies = new ArrayList();
     protected int mDialogStyle = 0;
     private ViewAnimationState mViewAnimationState = ViewAnimationState.IDLE;
     private ViewStateController mViewStateController = this;
     private boolean mCoverSecureConfirmState = false;
-    protected IStatusBarService mStatusBarService = IStatusBarService.Stub.asInterface(ServiceManager.getService(Context.STATUS_BAR_SERVICE));
+    protected IStatusBarService mStatusBarService =
+            IStatusBarService.Stub.asInterface(
+                    ServiceManager.getService(Context.STATUS_BAR_SERVICE));
 
     public SamsungGlobalActionsDialogBase(Context context, ResourceFactory resourceFactory) {
         this.mContext = new ContextThemeWrapper(context, 16974123);
@@ -84,19 +91,31 @@ public abstract class SamsungGlobalActionsDialogBase implements ExtendableGlobal
         }
     }
 
-    public void show(final boolean keyguardShowing, final boolean deviceProvisioned, final boolean fromSystemServer, final int sideKeyType) {
+    public void show(
+            final boolean keyguardShowing,
+            final boolean deviceProvisioned,
+            final boolean fromSystemServer,
+            final int sideKeyType) {
         this.mFromSystemServer = fromSystemServer;
-        this.mHandlerUtil.post(new Runnable() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsDialogBase$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                SamsungGlobalActionsDialogBase.this.lambda$show$0(keyguardShowing, deviceProvisioned, fromSystemServer, sideKeyType);
-            }
-        });
+        this.mHandlerUtil.post(
+                new Runnable() { // from class:
+                                 // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsDialogBase$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SamsungGlobalActionsDialogBase.this.lambda$show$0(
+                                keyguardShowing, deviceProvisioned, fromSystemServer, sideKeyType);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$show$0(boolean keyguardShowing, boolean deviceProvisioned, boolean fromSystemServer, int sideKeyType) {
-        if (this.mPresenter.onStart(keyguardShowing, deviceProvisioned, fromSystemServer, sideKeyType)) {
+    public /* synthetic */ void lambda$show$0(
+            boolean keyguardShowing,
+            boolean deviceProvisioned,
+            boolean fromSystemServer,
+            int sideKeyType) {
+        if (this.mPresenter.onStart(
+                keyguardShowing, deviceProvisioned, fromSystemServer, sideKeyType)) {
             showDialog();
         }
     }
@@ -124,18 +143,25 @@ public abstract class SamsungGlobalActionsDialogBase implements ExtendableGlobal
         this.mContentView.setInterceptor();
         this.mContentView.show();
         this.mPresenter.onShowDialog();
-        this.mDialog.setOnKeyListener(new DialogInterface.OnKeyListener() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsDialogBase$$ExternalSyntheticLambda0
-            @Override // android.content.DialogInterface.OnKeyListener
-            public final boolean onKey(DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
-                boolean lambda$showDialog$1;
-                lambda$showDialog$1 = SamsungGlobalActionsDialogBase.this.lambda$showDialog$1(dialogInterface, i, keyEvent);
-                return lambda$showDialog$1;
-            }
-        });
+        this.mDialog.setOnKeyListener(
+                new DialogInterface
+                        .OnKeyListener() { // from class:
+                                           // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsDialogBase$$ExternalSyntheticLambda0
+                    @Override // android.content.DialogInterface.OnKeyListener
+                    public final boolean onKey(
+                            DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
+                        boolean lambda$showDialog$1;
+                        lambda$showDialog$1 =
+                                SamsungGlobalActionsDialogBase.this.lambda$showDialog$1(
+                                        dialogInterface, i, keyEvent);
+                        return lambda$showDialog$1;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ boolean lambda$showDialog$1(DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
+    public /* synthetic */ boolean lambda$showDialog$1(
+            DialogInterface dialogInterface, int i, KeyEvent keyEvent) {
         return this.mPresenter.createOnKeyListenerActions(keyEvent, i);
     }
 
@@ -148,7 +174,11 @@ public abstract class SamsungGlobalActionsDialogBase implements ExtendableGlobal
         attrs.setTitle(this.mResources.getString(R.string.global_actions));
         attrs.hasManualSurfaceInsets = true;
         attrs.privateFlags |= 2;
-        if (this.mConditionChecker.isEnabled(SystemConditions.IS_SUPPORT_SF_EFFECT) && (this.mConditionChecker.isEnabled(SystemConditions.IS_CLEAR_SIDE_VIEW_COVER_CLOSED) || this.mConditionChecker.isEnabled(SystemConditions.IS_MINI_SVIEW_COVER_CLOSED))) {
+        if (this.mConditionChecker.isEnabled(SystemConditions.IS_SUPPORT_SF_EFFECT)
+                && (this.mConditionChecker.isEnabled(
+                                SystemConditions.IS_CLEAR_SIDE_VIEW_COVER_CLOSED)
+                        || this.mConditionChecker.isEnabled(
+                                SystemConditions.IS_MINI_SVIEW_COVER_CLOSED))) {
             attrs.flags |= 2;
             attrs.dimAmount = 1.0f;
         } else {
@@ -178,9 +208,11 @@ public abstract class SamsungGlobalActionsDialogBase implements ExtendableGlobal
         try {
             int userId = Binder.getCallingUserHandle().semGetIdentifier();
             int what = enabled ? 0 : 16;
-            this.mStatusBarService.disable2ForUser(what, this.mToken, this.mContext.getPackageName(), userId);
+            this.mStatusBarService.disable2ForUser(
+                    what, this.mToken, this.mContext.getPackageName(), userId);
         } catch (RemoteException re) {
-            this.mLogWrapper.e(TAG, "RemoteException occured while setRotationSuggestionsEnabled " + enabled);
+            this.mLogWrapper.e(
+                    TAG, "RemoteException occured while setRotationSuggestionsEnabled " + enabled);
             re.rethrowFromSystemServer();
         }
     }
@@ -211,19 +243,23 @@ public abstract class SamsungGlobalActionsDialogBase implements ExtendableGlobal
             this.mCoverSecureConfirmState = false;
             this.mDialog.hide();
         } else {
-            this.mHandlerUtil.post(new Runnable() { // from class: com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsDialogBase$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SamsungGlobalActionsDialogBase.this.lambda$dismiss$2();
-                }
-            });
+            this.mHandlerUtil.post(
+                    new Runnable() { // from class:
+                                     // com.samsung.android.globalactions.presentation.view.SamsungGlobalActionsDialogBase$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SamsungGlobalActionsDialogBase.this.lambda$dismiss$2();
+                        }
+                    });
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$dismiss$2() {
         setRotationSuggestionsEnabled(true);
-        if (this.mContentView != null && this.mDialog != null && this.mContentView.getAnimationState() == ViewAnimationState.IDLE) {
+        if (this.mContentView != null
+                && this.mDialog != null
+                && this.mContentView.getAnimationState() == ViewAnimationState.IDLE) {
             this.mLogWrapper.i(TAG, "dismiss()");
             this.mDialog.dismiss();
             this.mDialog = null;
@@ -278,7 +314,9 @@ public abstract class SamsungGlobalActionsDialogBase implements ExtendableGlobal
 
         @Override // android.app.Dialog, android.content.DialogInterface
         public void cancel() {
-            if (SamsungGlobalActionsDialogBase.this.mContentView != null && SamsungGlobalActionsDialogBase.this.mContentView.getAnimationState() == ViewAnimationState.IDLE) {
+            if (SamsungGlobalActionsDialogBase.this.mContentView != null
+                    && SamsungGlobalActionsDialogBase.this.mContentView.getAnimationState()
+                            == ViewAnimationState.IDLE) {
                 SamsungGlobalActionsDialogBase.this.mPresenter.onCancelDialog();
             }
         }

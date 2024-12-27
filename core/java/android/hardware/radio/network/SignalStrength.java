@@ -3,26 +3,29 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SignalStrength implements Parcelable {
-    public static final Parcelable.Creator<SignalStrength> CREATOR = new Parcelable.Creator<SignalStrength>() { // from class: android.hardware.radio.network.SignalStrength.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalStrength createFromParcel(Parcel _aidl_source) {
-            SignalStrength _aidl_out = new SignalStrength();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SignalStrength> CREATOR =
+            new Parcelable.Creator<SignalStrength>() { // from class:
+                // android.hardware.radio.network.SignalStrength.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalStrength createFromParcel(Parcel _aidl_source) {
+                    SignalStrength _aidl_out = new SignalStrength();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalStrength[] newArray(int _aidl_size) {
-            return new SignalStrength[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalStrength[] newArray(int _aidl_size) {
+                    return new SignalStrength[_aidl_size];
+                }
+            };
     public CdmaSignalStrength cdma;
     public EvdoSignalStrength evdo;
     public GsmSignalStrength gsm;
@@ -75,7 +78,8 @@ public class SignalStrength implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.cdma = (CdmaSignalStrength) _aidl_parcel.readTypedObject(CdmaSignalStrength.CREATOR);
+            this.cdma =
+                    (CdmaSignalStrength) _aidl_parcel.readTypedObject(CdmaSignalStrength.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -83,7 +87,8 @@ public class SignalStrength implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.evdo = (EvdoSignalStrength) _aidl_parcel.readTypedObject(EvdoSignalStrength.CREATOR);
+            this.evdo =
+                    (EvdoSignalStrength) _aidl_parcel.readTypedObject(EvdoSignalStrength.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -99,7 +104,9 @@ public class SignalStrength implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.tdscdma = (TdscdmaSignalStrength) _aidl_parcel.readTypedObject(TdscdmaSignalStrength.CREATOR);
+            this.tdscdma =
+                    (TdscdmaSignalStrength)
+                            _aidl_parcel.readTypedObject(TdscdmaSignalStrength.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -107,7 +114,8 @@ public class SignalStrength implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.wcdma = (WcdmaSignalStrength) _aidl_parcel.readTypedObject(WcdmaSignalStrength.CREATOR);
+            this.wcdma =
+                    (WcdmaSignalStrength) _aidl_parcel.readTypedObject(WcdmaSignalStrength.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -144,7 +152,13 @@ public class SignalStrength implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.gsm);
-        return _mask | describeContents(this.cdma) | describeContents(this.evdo) | describeContents(this.lte) | describeContents(this.tdscdma) | describeContents(this.wcdma) | describeContents(this.nr);
+        return _mask
+                | describeContents(this.cdma)
+                | describeContents(this.evdo)
+                | describeContents(this.lte)
+                | describeContents(this.tdscdma)
+                | describeContents(this.wcdma)
+                | describeContents(this.nr);
     }
 
     private int describeContents(Object _v) {

@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IGrdmIntegrityControlCheckCenter extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.icccgrdm.IGrdmIntegrityControlCheckCenter";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.icccgrdm.IGrdmIntegrityControlCheckCenter";
 
     byte[] grdmSetAttestationData(byte[] bArr) throws RemoteException;
 
@@ -24,7 +25,7 @@ public interface IGrdmIntegrityControlCheckCenter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGrdmIntegrityControlCheckCenter {
+    public abstract static class Stub extends Binder implements IGrdmIntegrityControlCheckCenter {
         static final int TRANSACTION_grdmSetAttestationData = 1;
 
         public Stub() {
@@ -62,7 +63,8 @@ public interface IGrdmIntegrityControlCheckCenter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGrdmIntegrityControlCheckCenter.DESCRIPTOR);
             }

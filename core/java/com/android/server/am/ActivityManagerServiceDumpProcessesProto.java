@@ -67,16 +67,14 @@ public final class ActivityManagerServiceDumpProcessesProto {
         public static final long NON_SVC_AT = 1120986464259L;
         public static final long SIZE = 1120986464257L;
 
-        public LruProcesses() {
-        }
+        public LruProcesses() {}
     }
 
     public final class ScreenCompatPackage {
         public static final long MODE = 1120986464258L;
         public static final long PACKAGE = 1138166333441L;
 
-        public ScreenCompatPackage() {
-        }
+        public ScreenCompatPackage() {}
     }
 
     public final class UidObserverRegistrationProto {
@@ -86,15 +84,13 @@ public final class ActivityManagerServiceDumpProcessesProto {
         public static final long PACKAGE = 1138166333442L;
         public static final long UID = 1120986464257L;
 
-        public UidObserverRegistrationProto() {
-        }
+        public UidObserverRegistrationProto() {}
 
         public final class ProcState {
             public static final long STATE = 1120986464258L;
             public static final long UID = 1120986464257L;
 
-            public ProcState() {
-            }
+            public ProcState() {}
         }
     }
 
@@ -106,8 +102,7 @@ public final class ActivityManagerServiceDumpProcessesProto {
         public static final long TARGET_UID = 1120986464257L;
         public static final long TYPE = 1120986464260L;
 
-        public PendingTempWhitelist() {
-        }
+        public PendingTempWhitelist() {}
     }
 
     public final class SleepStatus {
@@ -117,16 +112,14 @@ public final class ActivityManagerServiceDumpProcessesProto {
         public static final long TEST_PSS_MODE = 1133871366149L;
         public static final long WAKEFULNESS = 1159641169921L;
 
-        public SleepStatus() {
-        }
+        public SleepStatus() {}
     }
 
     public final class Voice {
         public static final long SESSION = 1138166333441L;
         public static final long WAKELOCK = 1146756268034L;
 
-        public Voice() {
-        }
+        public Voice() {}
     }
 
     public final class DebugApp {
@@ -135,31 +128,27 @@ public final class ActivityManagerServiceDumpProcessesProto {
         public static final long ORIG_DEBUG_APP = 1138166333442L;
         public static final long ORIG_WAIT_FOR_DEBUGGER = 1133871366148L;
 
-        public DebugApp() {
-        }
+        public DebugApp() {}
     }
 
     public final class MemWatchProcess {
         public static final long DUMP = 1146756268034L;
         public static final long PROCS = 2246267895809L;
 
-        public MemWatchProcess() {
-        }
+        public MemWatchProcess() {}
 
         public final class Process {
             public static final long MEM_STATS = 2246267895810L;
             public static final long NAME = 1138166333441L;
 
-            public Process() {
-            }
+            public Process() {}
 
             public final class MemStats {
                 public static final long REPORT_TO = 1138166333443L;
                 public static final long SIZE = 1138166333442L;
                 public static final long UID = 1120986464257L;
 
-                public MemStats() {
-                }
+                public MemStats() {}
             }
         }
 
@@ -170,8 +159,7 @@ public final class ActivityManagerServiceDumpProcessesProto {
             public static final long UID = 1120986464260L;
             public static final long URI = 1138166333446L;
 
-            public Dump() {
-            }
+            public Dump() {}
         }
     }
 
@@ -181,15 +169,13 @@ public final class ActivityManagerServiceDumpProcessesProto {
         public static final long PROC = 1146756268034L;
         public static final long TYPE = 1120986464260L;
 
-        public Profile() {
-        }
+        public Profile() {}
     }
 
     public final class Controller {
         public static final long CONTROLLER = 1138166333441L;
         public static final long IS_A_MONKEY = 1133871366146L;
 
-        public Controller() {
-        }
+        public Controller() {}
     }
 }

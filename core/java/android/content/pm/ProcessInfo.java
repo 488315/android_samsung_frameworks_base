@@ -1,12 +1,13 @@
 package android.content.pm;
 
 import android.annotation.NonNull;
-import android.content.pm.ApplicationInfo;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Parcelling;
+
 import java.lang.annotation.Annotation;
 
 /* loaded from: classes.dex */
@@ -30,37 +31,57 @@ public class ProcessInfo implements Parcelable {
         this.useEmbeddedDex = orig.useEmbeddedDex;
     }
 
-    public ProcessInfo(String name, ArraySet<String> deniedPermissions, int gwpAsanMode, int memtagMode, int nativeHeapZeroInitialized, boolean useEmbeddedDex) {
+    public ProcessInfo(
+            String name,
+            ArraySet<String> deniedPermissions,
+            int gwpAsanMode,
+            int memtagMode,
+            int nativeHeapZeroInitialized,
+            boolean useEmbeddedDex) {
         this.name = name;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) name);
         this.deniedPermissions = deniedPermissions;
         this.gwpAsanMode = gwpAsanMode;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class, (Annotation) null, gwpAsanMode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class,
+                (Annotation) null,
+                gwpAsanMode);
         this.memtagMode = memtagMode;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.MemtagMode.class, (Annotation) null, memtagMode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.MemtagMode.class,
+                (Annotation) null,
+                memtagMode);
         this.nativeHeapZeroInitialized = nativeHeapZeroInitialized;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class, (Annotation) null, nativeHeapZeroInitialized);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class,
+                (Annotation) null,
+                nativeHeapZeroInitialized);
         this.useEmbeddedDex = useEmbeddedDex;
     }
 
     static {
-        sParcellingForDeniedPermissions = Parcelling.Cache.get(Parcelling.BuiltIn.ForInternedStringArraySet.class);
+        sParcellingForDeniedPermissions =
+                Parcelling.Cache.get(Parcelling.BuiltIn.ForInternedStringArraySet.class);
         if (sParcellingForDeniedPermissions == null) {
-            sParcellingForDeniedPermissions = Parcelling.Cache.put(new Parcelling.BuiltIn.ForInternedStringArraySet());
+            sParcellingForDeniedPermissions =
+                    Parcelling.Cache.put(new Parcelling.BuiltIn.ForInternedStringArraySet());
         }
-        CREATOR = new Parcelable.Creator<ProcessInfo>() { // from class: android.content.pm.ProcessInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ProcessInfo[] newArray(int size) {
-                return new ProcessInfo[size];
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        ProcessInfo>() { // from class: android.content.pm.ProcessInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ProcessInfo[] newArray(int size) {
+                        return new ProcessInfo[size];
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ProcessInfo createFromParcel(Parcel in) {
-                return new ProcessInfo(in);
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ProcessInfo createFromParcel(Parcel in) {
+                        return new ProcessInfo(in);
+                    }
+                };
     }
 
     @Override // android.os.Parcelable
@@ -91,18 +112,27 @@ public class ProcessInfo implements Parcelable {
         int _memtagMode = in.readInt();
         int _nativeHeapZeroInitialized = in.readInt();
         this.name = _name;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
         this.deniedPermissions = _deniedPermissions;
         this.gwpAsanMode = _gwpAsanMode;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class, (Annotation) null, this.gwpAsanMode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.GwpAsanMode.class,
+                (Annotation) null,
+                this.gwpAsanMode);
         this.memtagMode = _memtagMode;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.MemtagMode.class, (Annotation) null, this.memtagMode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.MemtagMode.class,
+                (Annotation) null,
+                this.memtagMode);
         this.nativeHeapZeroInitialized = _nativeHeapZeroInitialized;
-        AnnotationValidations.validate((Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class, (Annotation) null, this.nativeHeapZeroInitialized);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) ApplicationInfo.NativeHeapZeroInitialized.class,
+                (Annotation) null,
+                this.nativeHeapZeroInitialized);
         this.useEmbeddedDex = _useEmbeddedDex;
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

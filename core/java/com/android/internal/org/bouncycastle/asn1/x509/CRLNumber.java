@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.asn1.x509;
 import com.android.internal.org.bouncycastle.asn1.ASN1Integer;
 import com.android.internal.org.bouncycastle.asn1.ASN1Object;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -21,7 +22,8 @@ public class CRLNumber extends ASN1Object {
         return "CRLNumber: " + getCRLNumber();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return new ASN1Integer(this.number);
     }

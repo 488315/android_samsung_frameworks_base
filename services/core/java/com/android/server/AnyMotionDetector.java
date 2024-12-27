@@ -11,6 +11,7 @@ import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
@@ -40,8 +41,7 @@ public final class AnyMotionDetector {
     public volatile boolean mWakelockTimeoutIsActive;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface DeviceIdleCallback {
-    }
+    public interface DeviceIdleCallback {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RunningSignalStats {
@@ -73,7 +73,16 @@ public final class AnyMotionDetector {
                 float f11 = (f10 * f10) + (f9 * f9) + (f8 * f8);
                 this.energy += f11;
                 if (AnyMotionDetector.DEBUG) {
-                    Slog.i("AnyMotionDetector", "Accumulated vector " + this.currentVector.toString() + ", runningSum = " + this.runningSum.toString() + ", incrementalEnergy = " + f11 + ", energy = " + this.energy);
+                    Slog.i(
+                            "AnyMotionDetector",
+                            "Accumulated vector "
+                                    + this.currentVector.toString()
+                                    + ", runningSum = "
+                                    + this.runningSum.toString()
+                                    + ", incrementalEnergy = "
+                                    + f11
+                                    + ", energy = "
+                                    + this.energy);
                 }
             }
         }
@@ -81,7 +90,12 @@ public final class AnyMotionDetector {
         public final void reset() {
             this.previousVector = null;
             this.currentVector = null;
-            this.runningSum = new Vector3(FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, 0L);
+            this.runningSum =
+                    new Vector3(
+                            FullScreenMagnificationGestureHandler.MAX_SCALE,
+                            FullScreenMagnificationGestureHandler.MAX_SCALE,
+                            FullScreenMagnificationGestureHandler.MAX_SCALE,
+                            0L);
             this.energy = FullScreenMagnificationGestureHandler.MAX_SCALE;
             this.sampleCount = 0;
         }
@@ -90,9 +104,18 @@ public final class AnyMotionDetector {
             Vector3 vector3 = this.currentVector;
             String vector32 = vector3 == null ? "null" : vector3.toString();
             Vector3 vector33 = this.previousVector;
-            StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m(AnyMotionDetector$$ExternalSyntheticOutline0.m(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("previousVector = ", vector33 != null ? vector33.toString() : "null"), ", currentVector = ", vector32), ", sampleCount = ");
+            StringBuilder m =
+                    Preconditions$$ExternalSyntheticOutline0.m(
+                            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                            "previousVector = ",
+                                            vector33 != null ? vector33.toString() : "null"),
+                                    ", currentVector = ",
+                                    vector32),
+                            ", sampleCount = ");
             m.append(this.sampleCount);
-            StringBuilder m2 = Preconditions$$ExternalSyntheticOutline0.m(m.toString(), ", energy = ");
+            StringBuilder m2 =
+                    Preconditions$$ExternalSyntheticOutline0.m(m.toString(), ", energy = ");
             m2.append(this.energy);
             return m2.toString();
         }
@@ -113,7 +136,9 @@ public final class AnyMotionDetector {
         }
 
         public final String toString() {
-            StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m("timeMillisSinceBoot=" + this.timeMillisSinceBoot, " | x=");
+            StringBuilder m =
+                    Preconditions$$ExternalSyntheticOutline0.m(
+                            "timeMillisSinceBoot=" + this.timeMillisSinceBoot, " | x=");
             m.append(this.x);
             StringBuilder m2 = Preconditions$$ExternalSyntheticOutline0.m(m.toString(), ", y=");
             m2.append(this.y);
@@ -131,234 +156,285 @@ public final class AnyMotionDetector {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int m38$$Nest$mstopOrientationMeasurementLocked(com.android.server.AnyMotionDetector r18) {
+    public static int m38$$Nest$mstopOrientationMeasurementLocked(
+            com.android.server.AnyMotionDetector r18) {
         /*
             Method dump skipped, instructions count: 544
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.AnyMotionDetector.m38$$Nest$mstopOrientationMeasurementLocked(com.android.server.AnyMotionDetector):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.AnyMotionDetector.m38$$Nest$mstopOrientationMeasurementLocked(com.android.server.AnyMotionDetector):int");
     }
 
     /* JADX WARN: Type inference failed for: r2v1, types: [com.android.server.AnyMotionDetector$1] */
     /* JADX WARN: Type inference failed for: r2v2, types: [com.android.server.AnyMotionDetector$2] */
     /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.AnyMotionDetector$2] */
     /* JADX WARN: Type inference failed for: r2v4, types: [com.android.server.AnyMotionDetector$2] */
-    public AnyMotionDetector(PowerManager powerManager, Handler handler, SensorManager sensorManager, DeviceIdleCallback deviceIdleCallback, float f) {
+    public AnyMotionDetector(
+            PowerManager powerManager,
+            Handler handler,
+            SensorManager sensorManager,
+            DeviceIdleCallback deviceIdleCallback,
+            float f) {
         Object obj = new Object();
         this.mLock = obj;
         this.mCurrentGravityVector = null;
         this.mPreviousGravityVector = null;
-        this.mListener = new SensorEventListener() { // from class: com.android.server.AnyMotionDetector.1
-            @Override // android.hardware.SensorEventListener
-            public final void onAccuracyChanged(Sensor sensor, int i) {
-            }
+        this.mListener =
+                new SensorEventListener() { // from class: com.android.server.AnyMotionDetector.1
+                    @Override // android.hardware.SensorEventListener
+                    public final void onAccuracyChanged(Sensor sensor, int i) {}
 
-            @Override // android.hardware.SensorEventListener
-            public final void onSensorChanged(SensorEvent sensorEvent) {
-                int m38$$Nest$mstopOrientationMeasurementLocked;
-                synchronized (AnyMotionDetector.this.mLock) {
-                    try {
-                        long elapsedRealtime = SystemClock.elapsedRealtime();
-                        float[] fArr = sensorEvent.values;
-                        AnyMotionDetector.this.mRunningStats.accumulate(new Vector3(fArr[0], fArr[1], fArr[2], elapsedRealtime));
-                        AnyMotionDetector anyMotionDetector = AnyMotionDetector.this;
-                        m38$$Nest$mstopOrientationMeasurementLocked = anyMotionDetector.mRunningStats.sampleCount >= anyMotionDetector.mNumSufficientSamples ? AnyMotionDetector.m38$$Nest$mstopOrientationMeasurementLocked(anyMotionDetector) : -1;
-                    } catch (Throwable th) {
-                        throw th;
+                    @Override // android.hardware.SensorEventListener
+                    public final void onSensorChanged(SensorEvent sensorEvent) {
+                        int m38$$Nest$mstopOrientationMeasurementLocked;
+                        synchronized (AnyMotionDetector.this.mLock) {
+                            try {
+                                long elapsedRealtime = SystemClock.elapsedRealtime();
+                                float[] fArr = sensorEvent.values;
+                                AnyMotionDetector.this.mRunningStats.accumulate(
+                                        new Vector3(fArr[0], fArr[1], fArr[2], elapsedRealtime));
+                                AnyMotionDetector anyMotionDetector = AnyMotionDetector.this;
+                                m38$$Nest$mstopOrientationMeasurementLocked =
+                                        anyMotionDetector.mRunningStats.sampleCount
+                                                        >= anyMotionDetector.mNumSufficientSamples
+                                                ? AnyMotionDetector
+                                                        .m38$$Nest$mstopOrientationMeasurementLocked(
+                                                                anyMotionDetector)
+                                                : -1;
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                        if (m38$$Nest$mstopOrientationMeasurementLocked != -1) {
+                            AnyMotionDetector anyMotionDetector2 = AnyMotionDetector.this;
+                            anyMotionDetector2.mHandler.removeCallbacks(
+                                    anyMotionDetector2.mWakelockTimeout);
+                            AnyMotionDetector.this.mWakelockTimeoutIsActive = false;
+                            ((DeviceIdleController) AnyMotionDetector.this.mCallback)
+                                    .onAnyMotionResult(m38$$Nest$mstopOrientationMeasurementLocked);
+                        }
                     }
-                }
-                if (m38$$Nest$mstopOrientationMeasurementLocked != -1) {
-                    AnyMotionDetector anyMotionDetector2 = AnyMotionDetector.this;
-                    anyMotionDetector2.mHandler.removeCallbacks(anyMotionDetector2.mWakelockTimeout);
-                    AnyMotionDetector.this.mWakelockTimeoutIsActive = false;
-                    ((DeviceIdleController) AnyMotionDetector.this.mCallback).onAnyMotionResult(m38$$Nest$mstopOrientationMeasurementLocked);
-                }
-            }
-        };
+                };
         final int i = 0;
-        this.mSensorRestart = new Runnable(this) { // from class: com.android.server.AnyMotionDetector.2
-            public final /* synthetic */ AnyMotionDetector this$0;
+        this.mSensorRestart =
+                new Runnable(this) { // from class: com.android.server.AnyMotionDetector.2
+                    public final /* synthetic */ AnyMotionDetector this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i2;
-                switch (i) {
-                    case 0:
-                        synchronized (this.this$0.mLock) {
-                            AnyMotionDetector anyMotionDetector = this.this$0;
-                            if (anyMotionDetector.mSensorRestartIsActive) {
-                                anyMotionDetector.mSensorRestartIsActive = false;
-                                anyMotionDetector.startOrientationMeasurementLocked();
-                            }
-                        }
-                        return;
-                    case 1:
-                        synchronized (this.this$0.mLock) {
-                            try {
-                                AnyMotionDetector anyMotionDetector2 = this.this$0;
-                                if (anyMotionDetector2.mMeasurementTimeoutIsActive) {
-                                    anyMotionDetector2.mMeasurementTimeoutIsActive = false;
-                                    if (AnyMotionDetector.DEBUG) {
-                                        Slog.i("AnyMotionDetector", "mMeasurementTimeout. Failed to collect sufficient accel data within 3000 ms. Stopping orientation measurement.");
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i2;
+                        switch (i) {
+                            case 0:
+                                synchronized (this.this$0.mLock) {
+                                    AnyMotionDetector anyMotionDetector = this.this$0;
+                                    if (anyMotionDetector.mSensorRestartIsActive) {
+                                        anyMotionDetector.mSensorRestartIsActive = false;
+                                        anyMotionDetector.startOrientationMeasurementLocked();
                                     }
-                                    i2 = AnyMotionDetector.m38$$Nest$mstopOrientationMeasurementLocked(this.this$0);
-                                } else {
-                                    i2 = -1;
                                 }
-                            } finally {
-                            }
-                        }
-                        if (i2 != -1) {
-                            AnyMotionDetector anyMotionDetector3 = this.this$0;
-                            anyMotionDetector3.mHandler.removeCallbacks(anyMotionDetector3.mWakelockTimeout);
-                            this.this$0.mWakelockTimeoutIsActive = false;
-                            ((DeviceIdleController) this.this$0.mCallback).onAnyMotionResult(i2);
-                            return;
-                        }
-                        return;
-                    default:
-                        synchronized (this.this$0.mLock) {
-                            try {
-                                if (this.this$0.mWakelockTimeoutIsActive) {
+                                return;
+                            case 1:
+                                synchronized (this.this$0.mLock) {
+                                    try {
+                                        AnyMotionDetector anyMotionDetector2 = this.this$0;
+                                        if (anyMotionDetector2.mMeasurementTimeoutIsActive) {
+                                            anyMotionDetector2.mMeasurementTimeoutIsActive = false;
+                                            if (AnyMotionDetector.DEBUG) {
+                                                Slog.i(
+                                                        "AnyMotionDetector",
+                                                        "mMeasurementTimeout. Failed to collect"
+                                                            + " sufficient accel data within 3000"
+                                                            + " ms. Stopping orientation"
+                                                            + " measurement.");
+                                            }
+                                            i2 =
+                                                    AnyMotionDetector
+                                                            .m38$$Nest$mstopOrientationMeasurementLocked(
+                                                                    this.this$0);
+                                        } else {
+                                            i2 = -1;
+                                        }
+                                    } finally {
+                                    }
+                                }
+                                if (i2 != -1) {
+                                    AnyMotionDetector anyMotionDetector3 = this.this$0;
+                                    anyMotionDetector3.mHandler.removeCallbacks(
+                                            anyMotionDetector3.mWakelockTimeout);
                                     this.this$0.mWakelockTimeoutIsActive = false;
-                                    this.this$0.stop();
+                                    ((DeviceIdleController) this.this$0.mCallback)
+                                            .onAnyMotionResult(i2);
+                                    return;
                                 }
-                            } finally {
-                            }
+                                return;
+                            default:
+                                synchronized (this.this$0.mLock) {
+                                    try {
+                                        if (this.this$0.mWakelockTimeoutIsActive) {
+                                            this.this$0.mWakelockTimeoutIsActive = false;
+                                            this.this$0.stop();
+                                        }
+                                    } finally {
+                                    }
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         final int i2 = 1;
-        this.mMeasurementTimeout = new Runnable(this) { // from class: com.android.server.AnyMotionDetector.2
-            public final /* synthetic */ AnyMotionDetector this$0;
+        this.mMeasurementTimeout =
+                new Runnable(this) { // from class: com.android.server.AnyMotionDetector.2
+                    public final /* synthetic */ AnyMotionDetector this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i22;
-                switch (i2) {
-                    case 0:
-                        synchronized (this.this$0.mLock) {
-                            AnyMotionDetector anyMotionDetector = this.this$0;
-                            if (anyMotionDetector.mSensorRestartIsActive) {
-                                anyMotionDetector.mSensorRestartIsActive = false;
-                                anyMotionDetector.startOrientationMeasurementLocked();
-                            }
-                        }
-                        return;
-                    case 1:
-                        synchronized (this.this$0.mLock) {
-                            try {
-                                AnyMotionDetector anyMotionDetector2 = this.this$0;
-                                if (anyMotionDetector2.mMeasurementTimeoutIsActive) {
-                                    anyMotionDetector2.mMeasurementTimeoutIsActive = false;
-                                    if (AnyMotionDetector.DEBUG) {
-                                        Slog.i("AnyMotionDetector", "mMeasurementTimeout. Failed to collect sufficient accel data within 3000 ms. Stopping orientation measurement.");
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i22;
+                        switch (i2) {
+                            case 0:
+                                synchronized (this.this$0.mLock) {
+                                    AnyMotionDetector anyMotionDetector = this.this$0;
+                                    if (anyMotionDetector.mSensorRestartIsActive) {
+                                        anyMotionDetector.mSensorRestartIsActive = false;
+                                        anyMotionDetector.startOrientationMeasurementLocked();
                                     }
-                                    i22 = AnyMotionDetector.m38$$Nest$mstopOrientationMeasurementLocked(this.this$0);
-                                } else {
-                                    i22 = -1;
                                 }
-                            } finally {
-                            }
-                        }
-                        if (i22 != -1) {
-                            AnyMotionDetector anyMotionDetector3 = this.this$0;
-                            anyMotionDetector3.mHandler.removeCallbacks(anyMotionDetector3.mWakelockTimeout);
-                            this.this$0.mWakelockTimeoutIsActive = false;
-                            ((DeviceIdleController) this.this$0.mCallback).onAnyMotionResult(i22);
-                            return;
-                        }
-                        return;
-                    default:
-                        synchronized (this.this$0.mLock) {
-                            try {
-                                if (this.this$0.mWakelockTimeoutIsActive) {
+                                return;
+                            case 1:
+                                synchronized (this.this$0.mLock) {
+                                    try {
+                                        AnyMotionDetector anyMotionDetector2 = this.this$0;
+                                        if (anyMotionDetector2.mMeasurementTimeoutIsActive) {
+                                            anyMotionDetector2.mMeasurementTimeoutIsActive = false;
+                                            if (AnyMotionDetector.DEBUG) {
+                                                Slog.i(
+                                                        "AnyMotionDetector",
+                                                        "mMeasurementTimeout. Failed to collect"
+                                                            + " sufficient accel data within 3000"
+                                                            + " ms. Stopping orientation"
+                                                            + " measurement.");
+                                            }
+                                            i22 =
+                                                    AnyMotionDetector
+                                                            .m38$$Nest$mstopOrientationMeasurementLocked(
+                                                                    this.this$0);
+                                        } else {
+                                            i22 = -1;
+                                        }
+                                    } finally {
+                                    }
+                                }
+                                if (i22 != -1) {
+                                    AnyMotionDetector anyMotionDetector3 = this.this$0;
+                                    anyMotionDetector3.mHandler.removeCallbacks(
+                                            anyMotionDetector3.mWakelockTimeout);
                                     this.this$0.mWakelockTimeoutIsActive = false;
-                                    this.this$0.stop();
+                                    ((DeviceIdleController) this.this$0.mCallback)
+                                            .onAnyMotionResult(i22);
+                                    return;
                                 }
-                            } finally {
-                            }
+                                return;
+                            default:
+                                synchronized (this.this$0.mLock) {
+                                    try {
+                                        if (this.this$0.mWakelockTimeoutIsActive) {
+                                            this.this$0.mWakelockTimeoutIsActive = false;
+                                            this.this$0.stop();
+                                        }
+                                    } finally {
+                                    }
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         final int i3 = 2;
-        this.mWakelockTimeout = new Runnable(this) { // from class: com.android.server.AnyMotionDetector.2
-            public final /* synthetic */ AnyMotionDetector this$0;
+        this.mWakelockTimeout =
+                new Runnable(this) { // from class: com.android.server.AnyMotionDetector.2
+                    public final /* synthetic */ AnyMotionDetector this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i22;
-                switch (i3) {
-                    case 0:
-                        synchronized (this.this$0.mLock) {
-                            AnyMotionDetector anyMotionDetector = this.this$0;
-                            if (anyMotionDetector.mSensorRestartIsActive) {
-                                anyMotionDetector.mSensorRestartIsActive = false;
-                                anyMotionDetector.startOrientationMeasurementLocked();
-                            }
-                        }
-                        return;
-                    case 1:
-                        synchronized (this.this$0.mLock) {
-                            try {
-                                AnyMotionDetector anyMotionDetector2 = this.this$0;
-                                if (anyMotionDetector2.mMeasurementTimeoutIsActive) {
-                                    anyMotionDetector2.mMeasurementTimeoutIsActive = false;
-                                    if (AnyMotionDetector.DEBUG) {
-                                        Slog.i("AnyMotionDetector", "mMeasurementTimeout. Failed to collect sufficient accel data within 3000 ms. Stopping orientation measurement.");
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i22;
+                        switch (i3) {
+                            case 0:
+                                synchronized (this.this$0.mLock) {
+                                    AnyMotionDetector anyMotionDetector = this.this$0;
+                                    if (anyMotionDetector.mSensorRestartIsActive) {
+                                        anyMotionDetector.mSensorRestartIsActive = false;
+                                        anyMotionDetector.startOrientationMeasurementLocked();
                                     }
-                                    i22 = AnyMotionDetector.m38$$Nest$mstopOrientationMeasurementLocked(this.this$0);
-                                } else {
-                                    i22 = -1;
                                 }
-                            } finally {
-                            }
-                        }
-                        if (i22 != -1) {
-                            AnyMotionDetector anyMotionDetector3 = this.this$0;
-                            anyMotionDetector3.mHandler.removeCallbacks(anyMotionDetector3.mWakelockTimeout);
-                            this.this$0.mWakelockTimeoutIsActive = false;
-                            ((DeviceIdleController) this.this$0.mCallback).onAnyMotionResult(i22);
-                            return;
-                        }
-                        return;
-                    default:
-                        synchronized (this.this$0.mLock) {
-                            try {
-                                if (this.this$0.mWakelockTimeoutIsActive) {
+                                return;
+                            case 1:
+                                synchronized (this.this$0.mLock) {
+                                    try {
+                                        AnyMotionDetector anyMotionDetector2 = this.this$0;
+                                        if (anyMotionDetector2.mMeasurementTimeoutIsActive) {
+                                            anyMotionDetector2.mMeasurementTimeoutIsActive = false;
+                                            if (AnyMotionDetector.DEBUG) {
+                                                Slog.i(
+                                                        "AnyMotionDetector",
+                                                        "mMeasurementTimeout. Failed to collect"
+                                                            + " sufficient accel data within 3000"
+                                                            + " ms. Stopping orientation"
+                                                            + " measurement.");
+                                            }
+                                            i22 =
+                                                    AnyMotionDetector
+                                                            .m38$$Nest$mstopOrientationMeasurementLocked(
+                                                                    this.this$0);
+                                        } else {
+                                            i22 = -1;
+                                        }
+                                    } finally {
+                                    }
+                                }
+                                if (i22 != -1) {
+                                    AnyMotionDetector anyMotionDetector3 = this.this$0;
+                                    anyMotionDetector3.mHandler.removeCallbacks(
+                                            anyMotionDetector3.mWakelockTimeout);
                                     this.this$0.mWakelockTimeoutIsActive = false;
-                                    this.this$0.stop();
+                                    ((DeviceIdleController) this.this$0.mCallback)
+                                            .onAnyMotionResult(i22);
+                                    return;
                                 }
-                            } finally {
-                            }
+                                return;
+                            default:
+                                synchronized (this.this$0.mLock) {
+                                    try {
+                                        if (this.this$0.mWakelockTimeoutIsActive) {
+                                            this.this$0.mWakelockTimeoutIsActive = false;
+                                            this.this$0.stop();
+                                        }
+                                    } finally {
+                                    }
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         boolean z = DEBUG;
         if (z) {
             Slog.d("AnyMotionDetector", "AnyMotionDetector instantiated.");
         }
         synchronized (obj) {
             try {
-                PowerManager.WakeLock newWakeLock = powerManager.newWakeLock(1, "AnyMotionDetector");
+                PowerManager.WakeLock newWakeLock =
+                        powerManager.newWakeLock(1, "AnyMotionDetector");
                 this.mWakeLock = newWakeLock;
                 newWakeLock.setReferenceCounted(false);
                 this.mHandler = handler;
@@ -388,10 +464,12 @@ public final class AnyMotionDetector {
     public final void startOrientationMeasurementLocked() {
         Sensor sensor;
         if (DEBUG) {
-            StringBuilder sb = new StringBuilder("startOrientationMeasurementLocked: mMeasurementInProgress=");
+            StringBuilder sb =
+                    new StringBuilder("startOrientationMeasurementLocked: mMeasurementInProgress=");
             sb.append(this.mMeasurementInProgress);
             sb.append(", (mAccelSensor != null)=");
-            AnyMotionDetector$$ExternalSyntheticOutline0.m("AnyMotionDetector", sb, this.mAccelSensor != null);
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    "AnyMotionDetector", sb, this.mAccelSensor != null);
         }
         if (this.mMeasurementInProgress || (sensor = this.mAccelSensor) == null) {
             return;

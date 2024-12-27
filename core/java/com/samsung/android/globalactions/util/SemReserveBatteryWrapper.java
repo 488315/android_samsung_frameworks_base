@@ -25,11 +25,27 @@ public class SemReserveBatteryWrapper {
         boolean mRBM;
         boolean mEnableRBM;
         if (this.mConfigYuvaDownloadable) {
-            mRBM = Settings.Secure.getInt(this.mContext.getContentResolver(), "reserve_battery_on", 0) != 0;
-            mEnableRBM = Settings.Secure.getInt(this.mContext.getContentResolver(), "enable_reserve_max_mode", 0) != 0;
+            mRBM =
+                    Settings.Secure.getInt(
+                                    this.mContext.getContentResolver(), "reserve_battery_on", 0)
+                            != 0;
+            mEnableRBM =
+                    Settings.Secure.getInt(
+                                    this.mContext.getContentResolver(),
+                                    "enable_reserve_max_mode",
+                                    0)
+                            != 0;
         } else {
-            mRBM = Settings.System.getInt(this.mContext.getContentResolver(), "reserve_battery_on", 0) != 0;
-            mEnableRBM = Settings.System.getInt(this.mContext.getContentResolver(), "enable_reserve_max_mode", 0) != 0;
+            mRBM =
+                    Settings.System.getInt(
+                                    this.mContext.getContentResolver(), "reserve_battery_on", 0)
+                            != 0;
+            mEnableRBM =
+                    Settings.System.getInt(
+                                    this.mContext.getContentResolver(),
+                                    "enable_reserve_max_mode",
+                                    0)
+                            != 0;
         }
         return this.mConfigYuvaFeature && mRBM && mEnableRBM;
     }

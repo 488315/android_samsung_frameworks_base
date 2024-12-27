@@ -2,8 +2,11 @@ package com.android.server.smartclip;
 
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
+
 import com.samsung.android.feature.SemFloatingFeature;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,13 +24,15 @@ public final class SpenGarageSpecManager {
         public static final SupportedExternalSpenFeature REMOTE;
 
         static {
-            SupportedExternalSpenFeature supportedExternalSpenFeature = new SupportedExternalSpenFeature("REMOTE", 0);
+            SupportedExternalSpenFeature supportedExternalSpenFeature =
+                    new SupportedExternalSpenFeature("REMOTE", 0);
             REMOTE = supportedExternalSpenFeature;
-            $VALUES = new SupportedExternalSpenFeature[]{supportedExternalSpenFeature};
+            $VALUES = new SupportedExternalSpenFeature[] {supportedExternalSpenFeature};
         }
 
         public static SupportedExternalSpenFeature valueOf(String str) {
-            return (SupportedExternalSpenFeature) Enum.valueOf(SupportedExternalSpenFeature.class, str);
+            return (SupportedExternalSpenFeature)
+                    Enum.valueOf(SupportedExternalSpenFeature.class, str);
         }
 
         public static SupportedExternalSpenFeature[] values() {
@@ -37,7 +42,9 @@ public final class SpenGarageSpecManager {
 
     public SpenGarageSpecManager() {
         this.mIsBundledSpenSupported = false;
-        String string = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_GARAGE_SPEC");
+        String string =
+                SemFloatingFeature.getInstance()
+                        .getString("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_GARAGE_SPEC");
         if (TextUtils.isEmpty(string)) {
             Log.i("SpenGarageSpecManager", "Spen Garage Spec is empty");
             return;
@@ -56,14 +63,16 @@ public final class SpenGarageSpecManager {
                     String[] split2 = str3.split("\\|");
                     Log.i("SpenGarageSpecManager", "unbundled_spec = ".concat(str3));
                     for (String str4 : split2) {
-                        SupportedExternalSpenFeature valueOf = SupportedExternalSpenFeature.valueOf(str4.toUpperCase());
+                        SupportedExternalSpenFeature valueOf =
+                                SupportedExternalSpenFeature.valueOf(str4.toUpperCase());
                         if (valueOf != null) {
                             this.mSupportedExternalSpenFeatures.add(valueOf);
                         }
                     }
                 } else if (str2.equals("bundled")) {
                     this.mIsBundledSpenSupported = Boolean.valueOf(str3).booleanValue();
-                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("bundle = ", str3, "SpenGarageSpecManager");
+                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                            "bundle = ", str3, "SpenGarageSpecManager");
                 }
             }
         }

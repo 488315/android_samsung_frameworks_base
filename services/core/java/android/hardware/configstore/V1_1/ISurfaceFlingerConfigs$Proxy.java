@@ -12,6 +12,7 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -21,20 +22,27 @@ public final class ISurfaceFlingerConfigs$Proxy implements IBase {
     public IHwBinder mRemote;
 
     public static ISurfaceFlingerConfigs$Proxy getService() {
-        IHwBinder service = HwBinder.getService("android.hardware.configstore@1.1::ISurfaceFlingerConfigs", "default");
+        IHwBinder service =
+                HwBinder.getService(
+                        "android.hardware.configstore@1.1::ISurfaceFlingerConfigs", "default");
         if (service == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = service.queryLocalInterface("android.hardware.configstore@1.1::ISurfaceFlingerConfigs");
-        if (queryLocalInterface != null && (queryLocalInterface instanceof ISurfaceFlingerConfigs$Proxy)) {
+        IHwInterface queryLocalInterface =
+                service.queryLocalInterface(
+                        "android.hardware.configstore@1.1::ISurfaceFlingerConfigs");
+        if (queryLocalInterface != null
+                && (queryLocalInterface instanceof ISurfaceFlingerConfigs$Proxy)) {
             return (ISurfaceFlingerConfigs$Proxy) queryLocalInterface;
         }
-        ISurfaceFlingerConfigs$Proxy iSurfaceFlingerConfigs$Proxy = new ISurfaceFlingerConfigs$Proxy();
+        ISurfaceFlingerConfigs$Proxy iSurfaceFlingerConfigs$Proxy =
+                new ISurfaceFlingerConfigs$Proxy();
         iSurfaceFlingerConfigs$Proxy.mRemote = service;
         try {
             Iterator it = iSurfaceFlingerConfigs$Proxy.interfaceChain().iterator();
             while (it.hasNext()) {
-                if (((String) it.next()).equals("android.hardware.configstore@1.1::ISurfaceFlingerConfigs")) {
+                if (((String) it.next())
+                        .equals("android.hardware.configstore@1.1::ISurfaceFlingerConfigs")) {
                     return iSurfaceFlingerConfigs$Proxy;
                 }
             }
@@ -51,7 +59,9 @@ public final class ISurfaceFlingerConfigs$Proxy implements IBase {
 
     @Override // android.hidl.base.V1_0.IBase
     public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        IBase.kInterfaceName, nativeHandle, arrayList);
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -93,7 +103,8 @@ public final class ISurfaceFlingerConfigs$Proxy implements IBase {
             ArrayList arrayList = new ArrayList();
             HwBlob readBuffer = hwParcel.readBuffer(16L);
             int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+            HwBlob readEmbeddedBuffer =
+                    hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 byte[] bArr = new byte[32];
@@ -107,7 +118,9 @@ public final class ISurfaceFlingerConfigs$Proxy implements IBase {
     }
 
     public final OptionalBool hasHDRDisplay() {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.configstore@1.0::ISurfaceFlingerConfigs");
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        "android.hardware.configstore@1.0::ISurfaceFlingerConfigs");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(5, m, hwParcel, 0);
@@ -124,7 +137,9 @@ public final class ISurfaceFlingerConfigs$Proxy implements IBase {
     }
 
     public final OptionalBool hasWideColorDisplay() {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.configstore@1.0::ISurfaceFlingerConfigs");
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        "android.hardware.configstore@1.0::ISurfaceFlingerConfigs");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(4, m, hwParcel, 0);
@@ -218,7 +233,8 @@ public final class ISurfaceFlingerConfigs$Proxy implements IBase {
         try {
             return interfaceDescriptor() + "@Proxy";
         } catch (RemoteException unused) {
-            return "[class or subclass of android.hardware.configstore@1.1::ISurfaceFlingerConfigs]@Proxy";
+            return "[class or subclass of"
+                       + " android.hardware.configstore@1.1::ISurfaceFlingerConfigs]@Proxy";
         }
     }
 

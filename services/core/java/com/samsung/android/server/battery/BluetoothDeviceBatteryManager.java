@@ -5,11 +5,13 @@ import android.content.Context;
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
 import android.os.Handler;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.HermesService$3$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.SystemService;
+
 import com.samsung.android.os.SemCompanionDeviceBatteryInfo;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -50,71 +52,104 @@ public final class BluetoothDeviceBatteryManager {
                 Method dump skipped, instructions count: 216
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.battery.BluetoothDeviceBatteryManager.ManufacturerData.<init>(byte[]):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.samsung.android.server.battery.BluetoothDeviceBatteryManager.ManufacturerData.<init>(byte[]):void");
         }
     }
 
     /* renamed from: -$$Nest$mhandleBatteryLevelChanged, reason: not valid java name */
-    public static void m1222$$Nest$mhandleBatteryLevelChanged(BluetoothDeviceBatteryManager bluetoothDeviceBatteryManager, BluetoothDevice bluetoothDevice) {
+    public static void m1222$$Nest$mhandleBatteryLevelChanged(
+            BluetoothDeviceBatteryManager bluetoothDeviceBatteryManager,
+            BluetoothDevice bluetoothDevice) {
         bluetoothDeviceBatteryManager.getClass();
         if (bluetoothDevice.getBatteryLevel() < 0) {
-            bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.removeBatteryInfo(bluetoothDevice.getAddress());
+            bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.removeBatteryInfo(
+                    bluetoothDevice.getAddress());
             return;
         }
-        if (!bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.containsBatteryInfo(bluetoothDevice.getAddress())) {
+        if (!bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.containsBatteryInfo(
+                bluetoothDevice.getAddress())) {
             int deviceType = getDeviceType(bluetoothDevice);
             if (deviceType != 1 && deviceType != 11) {
-                NandswapManager$$ExternalSyntheticOutline0.m(deviceType, "type : ", "BluetoothDeviceBatteryManager");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        deviceType, "type : ", "BluetoothDeviceBatteryManager");
                 return;
             } else {
-                SemCompanionDeviceBatteryInfo createBatteryInfo = createBatteryInfo(bluetoothDevice);
-                bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.addBatteryInfo(createBatteryInfo.getAddress(), createBatteryInfo);
+                SemCompanionDeviceBatteryInfo createBatteryInfo =
+                        createBatteryInfo(bluetoothDevice);
+                bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.addBatteryInfo(
+                        createBatteryInfo.getAddress(), createBatteryInfo);
                 return;
             }
         }
-        SemCompanionDeviceBatteryInfo deviceBatteryInfo = bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.getDeviceBatteryInfo(bluetoothDevice.getAddress());
+        SemCompanionDeviceBatteryInfo deviceBatteryInfo =
+                bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.getDeviceBatteryInfo(
+                        bluetoothDevice.getAddress());
         if (deviceBatteryInfo.getDeviceType() != 1 && deviceBatteryInfo.getDeviceType() != 11) {
             Slog.e("BluetoothDeviceBatteryManager", "type : " + deviceBatteryInfo.getDeviceType());
         } else if (deviceBatteryInfo.getBatteryLevel() != bluetoothDevice.getBatteryLevel()) {
             deviceBatteryInfo.setBatteryLevel(bluetoothDevice.getBatteryLevel());
-            bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.sendBroadcast("com.samsung.battery.ACTION_BATTERY_INFO_CHANGED", deviceBatteryInfo);
+            bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.sendBroadcast(
+                    "com.samsung.battery.ACTION_BATTERY_INFO_CHANGED", deviceBatteryInfo);
         }
     }
 
     /* renamed from: -$$Nest$mhandleDeviceNameChanged, reason: not valid java name */
-    public static void m1223$$Nest$mhandleDeviceNameChanged(BluetoothDeviceBatteryManager bluetoothDeviceBatteryManager, BluetoothDevice bluetoothDevice) {
-        if (bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.containsBatteryInfo(bluetoothDevice.getAddress())) {
+    public static void m1223$$Nest$mhandleDeviceNameChanged(
+            BluetoothDeviceBatteryManager bluetoothDeviceBatteryManager,
+            BluetoothDevice bluetoothDevice) {
+        if (bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.containsBatteryInfo(
+                bluetoothDevice.getAddress())) {
             String alias = bluetoothDevice.getAlias();
             String address = bluetoothDevice.getAddress();
-            SemCompanionDeviceBatteryInfo deviceBatteryInfo = bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.getDeviceBatteryInfo(address);
-            Slog.i("BluetoothDeviceBatteryManager", "address : " + DeviceBatteryInfoUtil.getAddressForLog(address) + " / alias : " + alias);
+            SemCompanionDeviceBatteryInfo deviceBatteryInfo =
+                    bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.getDeviceBatteryInfo(
+                            address);
+            Slog.i(
+                    "BluetoothDeviceBatteryManager",
+                    "address : "
+                            + DeviceBatteryInfoUtil.getAddressForLog(address)
+                            + " / alias : "
+                            + alias);
             deviceBatteryInfo.setDeviceName(alias);
-            bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.sendBroadcast("com.samsung.battery.ACTION_BATTERY_INFO_CHANGED", deviceBatteryInfo);
+            bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.sendBroadcast(
+                    "com.samsung.battery.ACTION_BATTERY_INFO_CHANGED", deviceBatteryInfo);
         }
     }
 
     /* renamed from: -$$Nest$mhandleMetaDataChanged, reason: not valid java name */
-    public static void m1224$$Nest$mhandleMetaDataChanged(BluetoothDeviceBatteryManager bluetoothDeviceBatteryManager, BluetoothDevice bluetoothDevice, int i) {
-        if (!bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.containsBatteryInfo(bluetoothDevice.getAddress())) {
+    public static void m1224$$Nest$mhandleMetaDataChanged(
+            BluetoothDeviceBatteryManager bluetoothDeviceBatteryManager,
+            BluetoothDevice bluetoothDevice,
+            int i) {
+        if (!bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.containsBatteryInfo(
+                bluetoothDevice.getAddress())) {
             int deviceType = getDeviceType(bluetoothDevice);
             if (deviceType != 3) {
-                NandswapManager$$ExternalSyntheticOutline0.m(deviceType, "type : ", "BluetoothDeviceBatteryManager");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        deviceType, "type : ", "BluetoothDeviceBatteryManager");
                 return;
             }
             SemCompanionDeviceBatteryInfo createBatteryInfo = createBatteryInfo(bluetoothDevice);
             setBudsBatteryLevel(createBatteryInfo, bluetoothDevice);
             setBudsBatteryStatus(createBatteryInfo, bluetoothDevice);
-            Slog.i("BluetoothDeviceBatteryManager", "level : " + createBatteryInfo.getBatteryLevel());
+            Slog.i(
+                    "BluetoothDeviceBatteryManager",
+                    "level : " + createBatteryInfo.getBatteryLevel());
             if (createBatteryInfo.getBatteryLevel() < 0 && bluetoothDevice.getBatteryLevel() >= 0) {
                 createBatteryInfo.setBatteryLevel(bluetoothDevice.getBatteryLevel());
             }
             if (createBatteryInfo.getBatteryLevel() >= 0) {
-                bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.addBatteryInfo(createBatteryInfo.getAddress(), createBatteryInfo);
+                bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.addBatteryInfo(
+                        createBatteryInfo.getAddress(), createBatteryInfo);
                 return;
             }
             return;
         }
-        SemCompanionDeviceBatteryInfo deviceBatteryInfo = bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.getDeviceBatteryInfo(bluetoothDevice.getAddress());
+        SemCompanionDeviceBatteryInfo deviceBatteryInfo =
+                bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.getDeviceBatteryInfo(
+                        bluetoothDevice.getAddress());
         if (deviceBatteryInfo.getDeviceType() != 3) {
             Slog.e("BluetoothDeviceBatteryManager", "type : " + deviceBatteryInfo.getDeviceType());
             return;
@@ -132,15 +167,23 @@ public final class BluetoothDeviceBatteryManager {
         Slog.i("BluetoothDeviceBatteryManager", "sendBroadcast : " + r2);
         Slog.i("BluetoothDeviceBatteryManager", "level : " + deviceBatteryInfo.getBatteryLevel());
         if (deviceBatteryInfo.getBatteryLevel() < 0) {
-            bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.removeBatteryInfo(bluetoothDevice.getAddress());
+            bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.removeBatteryInfo(
+                    bluetoothDevice.getAddress());
         } else if (r2) {
-            bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.sendBroadcast("com.samsung.battery.ACTION_BATTERY_INFO_CHANGED", deviceBatteryInfo);
+            bluetoothDeviceBatteryManager.mBatteryInfoServiceInternal.sendBroadcast(
+                    "com.samsung.battery.ACTION_BATTERY_INFO_CHANGED", deviceBatteryInfo);
         }
     }
 
     /* renamed from: -$$Nest$smprintDeviceInfo, reason: not valid java name */
     public static void m1225$$Nest$smprintDeviceInfo(BluetoothDevice bluetoothDevice) {
-        Slog.i("BluetoothDeviceBatteryManager", "# Alias(" + bluetoothDevice.getAlias() + ") / Address(" + DeviceBatteryInfoUtil.getAddressForLog(bluetoothDevice.getAddress()) + ")");
+        Slog.i(
+                "BluetoothDeviceBatteryManager",
+                "# Alias("
+                        + bluetoothDevice.getAlias()
+                        + ") / Address("
+                        + DeviceBatteryInfoUtil.getAddressForLog(bluetoothDevice.getAddress())
+                        + ")");
         StringBuilder sb = new StringBuilder("# BatteryLevel : ");
         sb.append(bluetoothDevice.getBatteryLevel());
         Slog.i("BluetoothDeviceBatteryManager", sb.toString());
@@ -150,11 +193,15 @@ public final class BluetoothDeviceBatteryManager {
         if (charge_state == CHARGE_STATE.CHARGE_STATE_DISCHARGE) {
             return 3;
         }
-        return (charge_state == CHARGE_STATE.CHARGE_STATE_WIRED_CHARGE || charge_state == CHARGE_STATE.CHARGE_STATE_WIRELESS_CHARGE) ? 2 : 1;
+        return (charge_state == CHARGE_STATE.CHARGE_STATE_WIRED_CHARGE
+                        || charge_state == CHARGE_STATE.CHARGE_STATE_WIRELESS_CHARGE)
+                ? 2
+                : 1;
     }
 
     public static SemCompanionDeviceBatteryInfo createBatteryInfo(BluetoothDevice bluetoothDevice) {
-        SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo = new SemCompanionDeviceBatteryInfo();
+        SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo =
+                new SemCompanionDeviceBatteryInfo();
         semCompanionDeviceBatteryInfo.setAddress(bluetoothDevice.getAddress());
         semCompanionDeviceBatteryInfo.setDeviceName(bluetoothDevice.getAlias());
         semCompanionDeviceBatteryInfo.setDeviceType(getDeviceType(bluetoothDevice));
@@ -178,7 +225,8 @@ public final class BluetoothDeviceBatteryManager {
     public static int getDeviceType(BluetoothDevice bluetoothDevice) {
         String sb;
         try {
-            ManufacturerData manufacturerData = new ManufacturerData(bluetoothDevice.semGetManufacturerData());
+            ManufacturerData manufacturerData =
+                    new ManufacturerData(bluetoothDevice.semGetManufacturerData());
             int i = manufacturerData.mManufacturerType;
             byte[] bArr = manufacturerData.mDeviceId;
             Slog.i("BluetoothDeviceBatteryManager", "ManufacturerType : " + i);
@@ -208,7 +256,8 @@ public final class BluetoothDeviceBatteryManager {
                 }
             }
         } catch (Exception e) {
-            BootReceiver$$ExternalSyntheticOutline0.m(e, "getDeviceType exception: ", "BluetoothDeviceBatteryManager");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    e, "getDeviceType exception: ", "BluetoothDeviceBatteryManager");
         }
         return 1;
     }
@@ -225,19 +274,24 @@ public final class BluetoothDeviceBatteryManager {
             return -1;
         }
         byte b = semGetMetadata[3];
-        HermesService$3$$ExternalSyntheticOutline0.m(b, "parsedData : ", "BluetoothDeviceBatteryManager");
+        HermesService$3$$ExternalSyntheticOutline0.m(
+                b, "parsedData : ", "BluetoothDeviceBatteryManager");
         return b;
     }
 
-    public static boolean setBudsBatteryLevel(SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo, BluetoothDevice bluetoothDevice) {
+    public static boolean setBudsBatteryLevel(
+            SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo,
+            BluetoothDevice bluetoothDevice) {
         int i;
         int i2;
-        int parseMetaData = parseMetaData(bluetoothDevice, SystemService.PHASE_DEVICE_SPECIFIC_SERVICES_READY);
+        int parseMetaData =
+                parseMetaData(bluetoothDevice, SystemService.PHASE_DEVICE_SPECIFIC_SERVICES_READY);
         Slog.i("BluetoothDeviceBatteryManager", "# Left Level: " + parseMetaData);
         int parseMetaData2 = parseMetaData(bluetoothDevice, 521);
         Slog.i("BluetoothDeviceBatteryManager", "# Right Level: " + parseMetaData2);
         int parseMetaData3 = parseMetaData(bluetoothDevice, 522);
-        HermesService$3$$ExternalSyntheticOutline0.m(parseMetaData3, "# Cradle Level: ", "BluetoothDeviceBatteryManager");
+        HermesService$3$$ExternalSyntheticOutline0.m(
+                parseMetaData3, "# Cradle Level: ", "BluetoothDeviceBatteryManager");
         if (parseMetaData < 0) {
             i = parseMetaData2;
             i2 = parseMetaData;
@@ -257,7 +311,10 @@ public final class BluetoothDeviceBatteryManager {
             }
             parseMetaData = i4;
         }
-        if (semCompanionDeviceBatteryInfo.getBatteryLevel() == parseMetaData && semCompanionDeviceBatteryInfo.getExtraBatteryLevelLeft() == i2 && semCompanionDeviceBatteryInfo.getExtraBatteryLevelRight() == i && semCompanionDeviceBatteryInfo.getExtraBatteryLevelCradle() == parseMetaData3) {
+        if (semCompanionDeviceBatteryInfo.getBatteryLevel() == parseMetaData
+                && semCompanionDeviceBatteryInfo.getExtraBatteryLevelLeft() == i2
+                && semCompanionDeviceBatteryInfo.getExtraBatteryLevelRight() == i
+                && semCompanionDeviceBatteryInfo.getExtraBatteryLevelCradle() == parseMetaData3) {
             return false;
         }
         semCompanionDeviceBatteryInfo.setBatteryLevel(parseMetaData);
@@ -267,12 +324,15 @@ public final class BluetoothDeviceBatteryManager {
         return true;
     }
 
-    public static boolean setBudsBatteryStatus(SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo, BluetoothDevice bluetoothDevice) {
+    public static boolean setBudsBatteryStatus(
+            SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo,
+            BluetoothDevice bluetoothDevice) {
         int i;
         int i2;
         int i3;
         int parseMetaData = parseMetaData(bluetoothDevice, FrameworkStatsLog.DISPLAY_WAKE_REPORTED);
-        HermesService$3$$ExternalSyntheticOutline0.m(parseMetaData, "# Charge Feature :", "BluetoothDeviceBatteryManager");
+        HermesService$3$$ExternalSyntheticOutline0.m(
+                parseMetaData, "# Charge Feature :", "BluetoothDeviceBatteryManager");
         if (parseMetaData != -1) {
             int parseMetaData2 = parseMetaData(bluetoothDevice, 552);
             if (parseMetaData2 >= 0) {
@@ -290,10 +350,14 @@ public final class BluetoothDeviceBatteryManager {
             } else {
                 i3 = 1;
             }
-            int parseMetaData4 = parseMetaData(bluetoothDevice, FrameworkStatsLog.PACKAGE_UNINSTALLATION_REPORTED);
+            int parseMetaData4 =
+                    parseMetaData(
+                            bluetoothDevice, FrameworkStatsLog.PACKAGE_UNINSTALLATION_REPORTED);
             if (parseMetaData4 >= 0) {
                 CHARGE_STATE decodeChargeState3 = decodeChargeState(parseMetaData4);
-                Slog.i("BluetoothDeviceBatteryManager", "# Cradle Charging : " + decodeChargeState3);
+                Slog.i(
+                        "BluetoothDeviceBatteryManager",
+                        "# Cradle Charging : " + decodeChargeState3);
                 i = convertChargeStateToStatus(decodeChargeState3);
             } else {
                 i = 1;
@@ -303,7 +367,10 @@ public final class BluetoothDeviceBatteryManager {
             i2 = 1;
             i3 = 1;
         }
-        if (semCompanionDeviceBatteryInfo.getBatteryStatus() == 1 && semCompanionDeviceBatteryInfo.getExtraBatteryStatusLeft() == i2 && semCompanionDeviceBatteryInfo.getExtraBatteryStatusRight() == i3 && semCompanionDeviceBatteryInfo.getExtraBatteryStatusCradle() == i) {
+        if (semCompanionDeviceBatteryInfo.getBatteryStatus() == 1
+                && semCompanionDeviceBatteryInfo.getExtraBatteryStatusLeft() == i2
+                && semCompanionDeviceBatteryInfo.getExtraBatteryStatusRight() == i3
+                && semCompanionDeviceBatteryInfo.getExtraBatteryStatusCradle() == i) {
             return false;
         }
         semCompanionDeviceBatteryInfo.setBatteryStatus(1);

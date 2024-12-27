@@ -5,18 +5,24 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.knox.tima.attestation.IEnhancedAttestationPolicyCallback;
 
 /* loaded from: classes6.dex */
 public interface IEnhancedAttestation extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.knox.tima.attestation.IEnhancedAttestation";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.knox.tima.attestation.IEnhancedAttestation";
 
-    void enhancedAttestation(String str, String str2, IEnhancedAttestationPolicyCallback iEnhancedAttestationPolicyCallback, boolean z) throws RemoteException;
+    void enhancedAttestation(
+            String str,
+            String str2,
+            IEnhancedAttestationPolicyCallback iEnhancedAttestationPolicyCallback,
+            boolean z)
+            throws RemoteException;
 
     public static class Default implements IEnhancedAttestation {
         @Override // com.samsung.android.knox.tima.attestation.IEnhancedAttestation
-        public void enhancedAttestation(String nonce, String auk, IEnhancedAttestationPolicyCallback cb, boolean onPrem) throws RemoteException {
-        }
+        public void enhancedAttestation(
+                String nonce, String auk, IEnhancedAttestationPolicyCallback cb, boolean onPrem)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +30,7 @@ public interface IEnhancedAttestation extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEnhancedAttestation {
+    public abstract static class Stub extends Binder implements IEnhancedAttestation {
         static final int TRANSACTION_enhancedAttestation = 1;
 
         public Stub() {
@@ -62,7 +68,8 @@ public interface IEnhancedAttestation extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IEnhancedAttestation.DESCRIPTOR);
             }
@@ -74,7 +81,9 @@ public interface IEnhancedAttestation extends IInterface {
                 case 1:
                     String _arg0 = data.readString();
                     String _arg1 = data.readString();
-                    IEnhancedAttestationPolicyCallback _arg2 = IEnhancedAttestationPolicyCallback.Stub.asInterface(data.readStrongBinder());
+                    IEnhancedAttestationPolicyCallback _arg2 =
+                            IEnhancedAttestationPolicyCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     boolean _arg3 = data.readBoolean();
                     data.enforceNoDataAvail();
                     enhancedAttestation(_arg0, _arg1, _arg2, _arg3);
@@ -102,7 +111,9 @@ public interface IEnhancedAttestation extends IInterface {
             }
 
             @Override // com.samsung.android.knox.tima.attestation.IEnhancedAttestation
-            public void enhancedAttestation(String nonce, String auk, IEnhancedAttestationPolicyCallback cb, boolean onPrem) throws RemoteException {
+            public void enhancedAttestation(
+                    String nonce, String auk, IEnhancedAttestationPolicyCallback cb, boolean onPrem)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

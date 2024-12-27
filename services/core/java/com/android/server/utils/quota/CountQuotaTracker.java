@@ -12,20 +12,20 @@ import android.util.LongArrayQueue;
 import android.util.Slog;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.FgThread;
 import com.android.server.LocalServices;
 import com.android.server.SystemServiceManager;
-import com.android.server.utils.quota.CountQuotaTracker;
-import com.android.server.utils.quota.QuotaTracker;
-import com.android.server.utils.quota.UptcMap;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class CountQuotaTracker extends QuotaTracker {
-    public static final String ALARM_TAG_CLEANUP = XmlUtils$$ExternalSyntheticOutline0.m("*", "CountQuotaTracker", ".cleanup*");
+    public static final String ALARM_TAG_CLEANUP =
+            XmlUtils$$ExternalSyntheticOutline0.m("*", "CountQuotaTracker", ".cleanup*");
     public final ArrayMap mCategoryCountWindowSizesMs;
     public final CountQuotaTracker$$ExternalSyntheticLambda2 mCreateExecutionStats;
     public final CountQuotaTracker$$ExternalSyntheticLambda2 mCreateLongArrayQueue;
@@ -60,8 +60,7 @@ public final class CountQuotaTracker extends QuotaTracker {
     public final class DeleteEventTimesFunctor implements Consumer {
         public long mMaxPeriodMs;
 
-        public DeleteEventTimesFunctor() {
-        }
+        public DeleteEventTimesFunctor() {}
 
         @Override // java.util.function.Consumer
         public final void accept(Object obj) {
@@ -107,15 +106,38 @@ public final class CountQuotaTracker extends QuotaTracker {
                 return false;
             }
             ExecutionStats executionStats = (ExecutionStats) obj;
-            return this.expirationTimeElapsed == executionStats.expirationTimeElapsed && this.windowSizeMs == executionStats.windowSizeMs && this.countLimit == executionStats.countLimit && this.countInWindow == executionStats.countInWindow && this.inQuotaTimeElapsed == executionStats.inQuotaTimeElapsed;
+            return this.expirationTimeElapsed == executionStats.expirationTimeElapsed
+                    && this.windowSizeMs == executionStats.windowSizeMs
+                    && this.countLimit == executionStats.countLimit
+                    && this.countInWindow == executionStats.countInWindow
+                    && this.inQuotaTimeElapsed == executionStats.inQuotaTimeElapsed;
         }
 
         public final int hashCode() {
-            return Long.hashCode(this.inQuotaTimeElapsed) + ((((((Long.hashCode(this.windowSizeMs) + (Long.hashCode(this.expirationTimeElapsed) * 31)) * 31) + this.countLimit) * 31) + this.countInWindow) * 31);
+            return Long.hashCode(this.inQuotaTimeElapsed)
+                    + ((((((Long.hashCode(this.windowSizeMs)
+                                                                    + (Long.hashCode(
+                                                                                    this
+                                                                                            .expirationTimeElapsed)
+                                                                            * 31))
+                                                            * 31)
+                                                    + this.countLimit)
+                                            * 31)
+                                    + this.countInWindow)
+                            * 31);
         }
 
         public final String toString() {
-            return "expirationTime=" + this.expirationTimeElapsed + ", windowSizeMs=" + this.windowSizeMs + ", countLimit=" + this.countLimit + ", countInWindow=" + this.countInWindow + ", inQuotaTime=" + this.inQuotaTimeElapsed;
+            return "expirationTime="
+                    + this.expirationTimeElapsed
+                    + ", windowSizeMs="
+                    + this.windowSizeMs
+                    + ", countLimit="
+                    + this.countLimit
+                    + ", countInWindow="
+                    + this.countInWindow
+                    + ", inQuotaTime="
+                    + this.inQuotaTimeElapsed;
         }
     }
 
@@ -124,17 +146,21 @@ public final class CountQuotaTracker extends QuotaTracker {
     }
 
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.utils.quota.CountQuotaTracker$$ExternalSyntheticLambda0] */
-    public CountQuotaTracker(Context context, Categorizer categorizer, QuotaTracker.Injector injector) {
+    public CountQuotaTracker(
+            Context context, Categorizer categorizer, QuotaTracker.Injector injector) {
         super(context, categorizer, injector);
         this.mEventTimes = new UptcMap();
         this.mExecutionStatsCache = new UptcMap();
         this.mNextCleanupTimeElapsed = 0L;
-        this.mEventCleanupAlarmListener = new AlarmManager.OnAlarmListener() { // from class: com.android.server.utils.quota.CountQuotaTracker$$ExternalSyntheticLambda0
-            @Override // android.app.AlarmManager.OnAlarmListener
-            public final void onAlarm() {
-                CountQuotaTracker.this.mHandler.obtainMessage(1).sendToTarget();
-            }
-        };
+        this.mEventCleanupAlarmListener =
+                new AlarmManager
+                        .OnAlarmListener() { // from class:
+                                             // com.android.server.utils.quota.CountQuotaTracker$$ExternalSyntheticLambda0
+                    @Override // android.app.AlarmManager.OnAlarmListener
+                    public final void onAlarm() {
+                        CountQuotaTracker.this.mHandler.obtainMessage(1).sendToTarget();
+                    }
+                };
         this.mCategoryCountWindowSizesMs = new ArrayMap();
         this.mMaxCategoryCounts = new ArrayMap();
         this.mMaxPeriodMs = 0L;
@@ -148,7 +174,8 @@ public final class CountQuotaTracker extends QuotaTracker {
     }
 
     public void deleteObsoleteEventsLocked() {
-        this.mEventTimes.mData.forEach(new UptcMap$$ExternalSyntheticLambda0(this.mDeleteOldEventTimesFunctor));
+        this.mEventTimes.mData.forEach(
+                new UptcMap$$ExternalSyntheticLambda0(this.mDeleteOldEventTimesFunctor));
     }
 
     @Override // com.android.server.utils.quota.QuotaTracker
@@ -163,83 +190,93 @@ public final class CountQuotaTracker extends QuotaTracker {
                 indentingPrintWriter.println("Instantaneous events:");
                 indentingPrintWriter.increaseIndent();
                 final int i = 1;
-                this.mEventTimes.forEach(new UptcMap.UptcDataConsumer() { // from class: com.android.server.utils.quota.CountQuotaTracker$$ExternalSyntheticLambda7
-                    @Override // com.android.server.utils.quota.UptcMap.UptcDataConsumer
-                    public final void accept(int i2, Object obj, String str, String str2) {
-                        int i3 = i;
-                        IndentingPrintWriter indentingPrintWriter2 = indentingPrintWriter;
-                        switch (i3) {
-                            case 0:
-                                CountQuotaTracker.ExecutionStats executionStats = (CountQuotaTracker.ExecutionStats) obj;
-                                if (executionStats != null) {
-                                    indentingPrintWriter2.print(Uptc.string(i2, str, str2));
-                                    indentingPrintWriter2.println(":");
-                                    indentingPrintWriter2.increaseIndent();
-                                    indentingPrintWriter2.println(executionStats);
-                                    indentingPrintWriter2.decreaseIndent();
-                                    break;
+                this.mEventTimes.forEach(
+                        new UptcMap
+                                .UptcDataConsumer() { // from class:
+                                                      // com.android.server.utils.quota.CountQuotaTracker$$ExternalSyntheticLambda7
+                            @Override // com.android.server.utils.quota.UptcMap.UptcDataConsumer
+                            public final void accept(int i2, Object obj, String str, String str2) {
+                                int i3 = i;
+                                IndentingPrintWriter indentingPrintWriter2 = indentingPrintWriter;
+                                switch (i3) {
+                                    case 0:
+                                        CountQuotaTracker.ExecutionStats executionStats =
+                                                (CountQuotaTracker.ExecutionStats) obj;
+                                        if (executionStats != null) {
+                                            indentingPrintWriter2.print(Uptc.string(i2, str, str2));
+                                            indentingPrintWriter2.println(":");
+                                            indentingPrintWriter2.increaseIndent();
+                                            indentingPrintWriter2.println(executionStats);
+                                            indentingPrintWriter2.decreaseIndent();
+                                            break;
+                                        }
+                                        break;
+                                    default:
+                                        LongArrayQueue longArrayQueue = (LongArrayQueue) obj;
+                                        if (longArrayQueue.size() > 0) {
+                                            indentingPrintWriter2.print(Uptc.string(i2, str, str2));
+                                            indentingPrintWriter2.println(":");
+                                            indentingPrintWriter2.increaseIndent();
+                                            indentingPrintWriter2.print(longArrayQueue.get(0));
+                                            for (int i4 = 1; i4 < longArrayQueue.size(); i4++) {
+                                                indentingPrintWriter2.print(", ");
+                                                indentingPrintWriter2.print(longArrayQueue.get(i4));
+                                            }
+                                            indentingPrintWriter2.decreaseIndent();
+                                            indentingPrintWriter2.println();
+                                            break;
+                                        }
+                                        break;
                                 }
-                                break;
-                            default:
-                                LongArrayQueue longArrayQueue = (LongArrayQueue) obj;
-                                if (longArrayQueue.size() > 0) {
-                                    indentingPrintWriter2.print(Uptc.string(i2, str, str2));
-                                    indentingPrintWriter2.println(":");
-                                    indentingPrintWriter2.increaseIndent();
-                                    indentingPrintWriter2.print(longArrayQueue.get(0));
-                                    for (int i4 = 1; i4 < longArrayQueue.size(); i4++) {
-                                        indentingPrintWriter2.print(", ");
-                                        indentingPrintWriter2.print(longArrayQueue.get(i4));
-                                    }
-                                    indentingPrintWriter2.decreaseIndent();
-                                    indentingPrintWriter2.println();
-                                    break;
-                                }
-                                break;
-                        }
-                    }
-                });
+                            }
+                        });
                 indentingPrintWriter.decreaseIndent();
                 indentingPrintWriter.println();
                 indentingPrintWriter.println("Cached execution stats:");
                 indentingPrintWriter.increaseIndent();
                 final int i2 = 0;
-                this.mExecutionStatsCache.forEach(new UptcMap.UptcDataConsumer() { // from class: com.android.server.utils.quota.CountQuotaTracker$$ExternalSyntheticLambda7
-                    @Override // com.android.server.utils.quota.UptcMap.UptcDataConsumer
-                    public final void accept(int i22, Object obj, String str, String str2) {
-                        int i3 = i2;
-                        IndentingPrintWriter indentingPrintWriter2 = indentingPrintWriter;
-                        switch (i3) {
-                            case 0:
-                                CountQuotaTracker.ExecutionStats executionStats = (CountQuotaTracker.ExecutionStats) obj;
-                                if (executionStats != null) {
-                                    indentingPrintWriter2.print(Uptc.string(i22, str, str2));
-                                    indentingPrintWriter2.println(":");
-                                    indentingPrintWriter2.increaseIndent();
-                                    indentingPrintWriter2.println(executionStats);
-                                    indentingPrintWriter2.decreaseIndent();
-                                    break;
+                this.mExecutionStatsCache.forEach(
+                        new UptcMap
+                                .UptcDataConsumer() { // from class:
+                                                      // com.android.server.utils.quota.CountQuotaTracker$$ExternalSyntheticLambda7
+                            @Override // com.android.server.utils.quota.UptcMap.UptcDataConsumer
+                            public final void accept(int i22, Object obj, String str, String str2) {
+                                int i3 = i2;
+                                IndentingPrintWriter indentingPrintWriter2 = indentingPrintWriter;
+                                switch (i3) {
+                                    case 0:
+                                        CountQuotaTracker.ExecutionStats executionStats =
+                                                (CountQuotaTracker.ExecutionStats) obj;
+                                        if (executionStats != null) {
+                                            indentingPrintWriter2.print(
+                                                    Uptc.string(i22, str, str2));
+                                            indentingPrintWriter2.println(":");
+                                            indentingPrintWriter2.increaseIndent();
+                                            indentingPrintWriter2.println(executionStats);
+                                            indentingPrintWriter2.decreaseIndent();
+                                            break;
+                                        }
+                                        break;
+                                    default:
+                                        LongArrayQueue longArrayQueue = (LongArrayQueue) obj;
+                                        if (longArrayQueue.size() > 0) {
+                                            indentingPrintWriter2.print(
+                                                    Uptc.string(i22, str, str2));
+                                            indentingPrintWriter2.println(":");
+                                            indentingPrintWriter2.increaseIndent();
+                                            indentingPrintWriter2.print(longArrayQueue.get(0));
+                                            for (int i4 = 1; i4 < longArrayQueue.size(); i4++) {
+                                                indentingPrintWriter2.print(", ");
+                                                indentingPrintWriter2.print(longArrayQueue.get(i4));
+                                            }
+                                            indentingPrintWriter2.decreaseIndent();
+                                            indentingPrintWriter2.println();
+                                            break;
+                                        }
+                                        break;
                                 }
-                                break;
-                            default:
-                                LongArrayQueue longArrayQueue = (LongArrayQueue) obj;
-                                if (longArrayQueue.size() > 0) {
-                                    indentingPrintWriter2.print(Uptc.string(i22, str, str2));
-                                    indentingPrintWriter2.println(":");
-                                    indentingPrintWriter2.increaseIndent();
-                                    indentingPrintWriter2.print(longArrayQueue.get(0));
-                                    for (int i4 = 1; i4 < longArrayQueue.size(); i4++) {
-                                        indentingPrintWriter2.print(", ");
-                                        indentingPrintWriter2.print(longArrayQueue.get(i4));
-                                    }
-                                    indentingPrintWriter2.decreaseIndent();
-                                    indentingPrintWriter2.println();
-                                    break;
-                                }
-                                break;
-                        }
-                    }
-                });
+                            }
+                        });
                 indentingPrintWriter.decreaseIndent();
                 indentingPrintWriter.println();
                 indentingPrintWriter.println("Limits:");
@@ -251,7 +288,10 @@ public final class CountQuotaTracker extends QuotaTracker {
                     indentingPrintWriter.print(": ");
                     indentingPrintWriter.print(this.mMaxCategoryCounts.get(category));
                     indentingPrintWriter.print(" events in ");
-                    indentingPrintWriter.println(TimeUtils.formatDuration(((Long) this.mCategoryCountWindowSizesMs.get(category)).longValue()));
+                    indentingPrintWriter.println(
+                            TimeUtils.formatDuration(
+                                    ((Long) this.mCategoryCountWindowSizesMs.get(category))
+                                            .longValue()));
                 }
                 indentingPrintWriter.decreaseIndent();
             } catch (Throwable th) {
@@ -283,13 +323,19 @@ public final class CountQuotaTracker extends QuotaTracker {
                     long start4 = protoOutputStream.start(j);
                     protoOutputStream.write(1138166333441L, category.mName);
                     protoOutputStream.end(start4);
-                    protoOutputStream.write(1120986464258L, ((Integer) this.mMaxCategoryCounts.get(category)).intValue());
-                    protoOutputStream.write(1112396529667L, ((Long) this.mCategoryCountWindowSizesMs.get(category)).longValue());
+                    protoOutputStream.write(
+                            1120986464258L,
+                            ((Integer) this.mMaxCategoryCounts.get(category)).intValue());
+                    protoOutputStream.write(
+                            1112396529667L,
+                            ((Long) this.mCategoryCountWindowSizesMs.get(category)).longValue());
                     protoOutputStream.end(start3);
                     i++;
                     j = 1146756268033L;
                 }
-                this.mExecutionStatsCache.forEach(new CountQuotaTracker$$ExternalSyntheticLambda5(this, protoOutputStream, 0));
+                this.mExecutionStatsCache.forEach(
+                        new CountQuotaTracker$$ExternalSyntheticLambda5(
+                                this, protoOutputStream, 0));
                 protoOutputStream.end(start);
             } catch (Throwable th) {
                 throw th;
@@ -307,7 +353,8 @@ public final class CountQuotaTracker extends QuotaTracker {
 
     public final ExecutionStats getExecutionStatsLocked(int i, String str, String str2, boolean z) {
         Object apply;
-        CountQuotaTracker$$ExternalSyntheticLambda2 countQuotaTracker$$ExternalSyntheticLambda2 = this.mCreateExecutionStats;
+        CountQuotaTracker$$ExternalSyntheticLambda2 countQuotaTracker$$ExternalSyntheticLambda2 =
+                this.mCreateExecutionStats;
         UptcMap uptcMap = this.mExecutionStatsCache;
         ArrayMap arrayMap = (ArrayMap) uptcMap.mData.get(i, str);
         if (arrayMap == null || !arrayMap.containsKey(str2)) {
@@ -324,11 +371,17 @@ public final class CountQuotaTracker extends QuotaTracker {
         ExecutionStats executionStats = (ExecutionStats) apply;
         if (z) {
             Category category = this.mCategorizer.getCategory(str2);
-            long longValue = ((Long) this.mCategoryCountWindowSizesMs.getOrDefault(category, Long.MAX_VALUE)).longValue();
-            int intValue = ((Integer) this.mMaxCategoryCounts.getOrDefault(category, Integer.MAX_VALUE)).intValue();
+            long longValue =
+                    ((Long) this.mCategoryCountWindowSizesMs.getOrDefault(category, Long.MAX_VALUE))
+                            .longValue();
+            int intValue =
+                    ((Integer) this.mMaxCategoryCounts.getOrDefault(category, Integer.MAX_VALUE))
+                            .intValue();
             long j = executionStats.expirationTimeElapsed;
             this.mInjector.getClass();
-            if (j <= SystemClock.elapsedRealtime() || executionStats.windowSizeMs != longValue || executionStats.countLimit != intValue) {
+            if (j <= SystemClock.elapsedRealtime()
+                    || executionStats.windowSizeMs != longValue
+                    || executionStats.countLimit != intValue) {
                 executionStats.windowSizeMs = longValue;
                 executionStats.countLimit = intValue;
                 updateExecutionStatsLocked(i, str, str2, executionStats);
@@ -345,7 +398,8 @@ public final class CountQuotaTracker extends QuotaTracker {
         }
         EarliestEventTimeFunctor earliestEventTimeFunctor = this.mEarliestEventTimeFunctor;
         earliestEventTimeFunctor.earliestTimeElapsed = Long.MAX_VALUE;
-        this.mEventTimes.mData.forEach(new UptcMap$$ExternalSyntheticLambda0(earliestEventTimeFunctor));
+        this.mEventTimes.mData.forEach(
+                new UptcMap$$ExternalSyntheticLambda0(earliestEventTimeFunctor));
         long j2 = earliestEventTimeFunctor.earliestTimeElapsed;
         if (j2 == Long.MAX_VALUE) {
             return;
@@ -356,39 +410,54 @@ public final class CountQuotaTracker extends QuotaTracker {
         }
         this.mNextCleanupTimeElapsed = j3;
         Handler handler = FgThread.getHandler();
-        final CountQuotaTracker$$ExternalSyntheticLambda0 countQuotaTracker$$ExternalSyntheticLambda0 = this.mEventCleanupAlarmListener;
-        handler.post(new Runnable() { // from class: com.android.server.utils.quota.QuotaTracker$$ExternalSyntheticLambda1
-            public final /* synthetic */ int f$1;
-            public final /* synthetic */ String f$3;
+        final CountQuotaTracker$$ExternalSyntheticLambda0
+                countQuotaTracker$$ExternalSyntheticLambda0 = this.mEventCleanupAlarmListener;
+        handler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.utils.quota.QuotaTracker$$ExternalSyntheticLambda1
+                    public final /* synthetic */ int f$1;
+                    public final /* synthetic */ String f$3;
 
-            {
-                String str = CountQuotaTracker.ALARM_TAG_CLEANUP;
-                this.f$1 = 3;
-                this.f$3 = str;
-            }
+                    {
+                        String str = CountQuotaTracker.ALARM_TAG_CLEANUP;
+                        this.f$1 = 3;
+                        this.f$3 = str;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                QuotaTracker quotaTracker = this;
-                int i = this.f$1;
-                long j4 = j3;
-                String str = this.f$3;
-                AlarmManager.OnAlarmListener onAlarmListener = countQuotaTracker$$ExternalSyntheticLambda0;
-                quotaTracker.mInjector.getClass();
-                if (((SystemServiceManager) LocalServices.getService(SystemServiceManager.class)).isBootCompleted()) {
-                    quotaTracker.mAlarmManager.set(i, j4, str, onAlarmListener, ((CountQuotaTracker) quotaTracker).mHandler);
-                } else {
-                    Slog.w("QuotaTracker", "Alarm not scheduled because boot isn't completed");
-                }
-            }
-        });
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        QuotaTracker quotaTracker = this;
+                        int i = this.f$1;
+                        long j4 = j3;
+                        String str = this.f$3;
+                        AlarmManager.OnAlarmListener onAlarmListener =
+                                countQuotaTracker$$ExternalSyntheticLambda0;
+                        quotaTracker.mInjector.getClass();
+                        if (((SystemServiceManager)
+                                        LocalServices.getService(SystemServiceManager.class))
+                                .isBootCompleted()) {
+                            quotaTracker.mAlarmManager.set(
+                                    i,
+                                    j4,
+                                    str,
+                                    onAlarmListener,
+                                    ((CountQuotaTracker) quotaTracker).mHandler);
+                        } else {
+                            Slog.w(
+                                    "QuotaTracker",
+                                    "Alarm not scheduled because boot isn't completed");
+                        }
+                    }
+                });
     }
 
     public final void maybeUpdateStatusForUptcLocked(int i, String str, String str2) {
         ExecutionStats executionStatsLocked = getExecutionStatsLocked(i, str, str2, false);
         boolean z = true;
         boolean z2 = executionStatsLocked.countInWindow < executionStatsLocked.countLimit;
-        if (this.mIsEnabled && !((Boolean) this.mFreeQuota.getOrDefault(i, str, Boolean.FALSE)).booleanValue()) {
+        if (this.mIsEnabled
+                && !((Boolean) this.mFreeQuota.getOrDefault(i, str, Boolean.FALSE))
+                        .booleanValue()) {
             ExecutionStats executionStatsLocked2 = getExecutionStatsLocked(i, str, str2, true);
             z = executionStatsLocked2.countInWindow < executionStatsLocked2.countLimit;
         }
@@ -398,7 +467,8 @@ public final class CountQuotaTracker extends QuotaTracker {
             maybeScheduleStartAlarmLocked(i, str, str2);
         }
         if (z2 != z) {
-            BackgroundThread.getHandler().post(new QuotaTracker$$ExternalSyntheticLambda0(this, i, str, str2));
+            BackgroundThread.getHandler()
+                    .post(new QuotaTracker$$ExternalSyntheticLambda0(this, i, str, str2));
         }
     }
 
@@ -528,7 +598,10 @@ public final class CountQuotaTracker extends QuotaTracker {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L8e
             throw r10
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.utils.quota.CountQuotaTracker.noteEvent(int, java.lang.String, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.utils.quota.CountQuotaTracker.noteEvent(int,"
+                    + " java.lang.String, java.lang.String):boolean");
     }
 
     public final void setCountLimit(Category category, int i, long j) {
@@ -537,29 +610,57 @@ public final class CountQuotaTracker extends QuotaTracker {
             if (j >= 0) {
                 synchronized (this.mLock) {
                     try {
-                        Integer num = (Integer) this.mMaxCategoryCounts.put(category, Integer.valueOf(i));
+                        Integer num =
+                                (Integer) this.mMaxCategoryCounts.put(category, Integer.valueOf(i));
                         long max = Math.max(20000L, Math.min(j, 2592000000L));
-                        Long l = (Long) this.mCategoryCountWindowSizesMs.put(category, Long.valueOf(max));
-                        if (num == null || l == null || num.intValue() != i || l.longValue() != max) {
-                            DeleteEventTimesFunctor deleteEventTimesFunctor = this.mDeleteOldEventTimesFunctor;
-                            for (int size = CountQuotaTracker.this.mCategoryCountWindowSizesMs.size() - 1; size >= 0; size--) {
-                                j2 = Long.max(j2, ((Long) CountQuotaTracker.this.mCategoryCountWindowSizesMs.valueAt(size)).longValue());
+                        Long l =
+                                (Long)
+                                        this.mCategoryCountWindowSizesMs.put(
+                                                category, Long.valueOf(max));
+                        if (num == null
+                                || l == null
+                                || num.intValue() != i
+                                || l.longValue() != max) {
+                            DeleteEventTimesFunctor deleteEventTimesFunctor =
+                                    this.mDeleteOldEventTimesFunctor;
+                            for (int size =
+                                            CountQuotaTracker.this.mCategoryCountWindowSizesMs
+                                                            .size()
+                                                    - 1;
+                                    size >= 0;
+                                    size--) {
+                                j2 =
+                                        Long.max(
+                                                j2,
+                                                ((Long)
+                                                                CountQuotaTracker.this
+                                                                        .mCategoryCountWindowSizesMs
+                                                                        .valueAt(size))
+                                                        .longValue());
                             }
                             deleteEventTimesFunctor.mMaxPeriodMs = j2;
                             this.mMaxPeriodMs = this.mDeleteOldEventTimesFunctor.mMaxPeriodMs;
                             this.mInjector.getClass();
                             final long elapsedRealtime = SystemClock.elapsedRealtime();
-                            this.mExecutionStatsCache.mData.forEach(new UptcMap$$ExternalSyntheticLambda0(new Consumer() { // from class: com.android.server.utils.quota.CountQuotaTracker$$ExternalSyntheticLambda3
-                                @Override // java.util.function.Consumer
-                                public final void accept(Object obj) {
-                                    long j3 = elapsedRealtime;
-                                    CountQuotaTracker.ExecutionStats executionStats = (CountQuotaTracker.ExecutionStats) obj;
-                                    if (executionStats != null) {
-                                        executionStats.expirationTimeElapsed = j3;
-                                    }
-                                }
-                            }));
-                            BackgroundThread.getHandler().post(new QuotaTracker$$ExternalSyntheticLambda0(this));
+                            this.mExecutionStatsCache.mData.forEach(
+                                    new UptcMap$$ExternalSyntheticLambda0(
+                                            new Consumer() { // from class:
+                                                             // com.android.server.utils.quota.CountQuotaTracker$$ExternalSyntheticLambda3
+                                                @Override // java.util.function.Consumer
+                                                public final void accept(Object obj) {
+                                                    long j3 = elapsedRealtime;
+                                                    CountQuotaTracker.ExecutionStats
+                                                            executionStats =
+                                                                    (CountQuotaTracker
+                                                                                    .ExecutionStats)
+                                                                            obj;
+                                                    if (executionStats != null) {
+                                                        executionStats.expirationTimeElapsed = j3;
+                                                    }
+                                                }
+                                            }));
+                            BackgroundThread.getHandler()
+                                    .post(new QuotaTracker$$ExternalSyntheticLambda0(this));
                             return;
                         }
                         return;
@@ -572,7 +673,8 @@ public final class CountQuotaTracker extends QuotaTracker {
         throw new IllegalArgumentException("Limit and window size must be nonnegative.");
     }
 
-    public void updateExecutionStatsLocked(int i, String str, String str2, ExecutionStats executionStats) {
+    public void updateExecutionStatsLocked(
+            int i, String str, String str2, ExecutionStats executionStats) {
         executionStats.countInWindow = 0;
         if (executionStats.countLimit == 0) {
             executionStats.inQuotaTimeElapsed = Long.MAX_VALUE;
@@ -596,7 +698,10 @@ public final class CountQuotaTracker extends QuotaTracker {
             executionStats.countInWindow++;
             j = Math.min(j, j3 - j2);
             if (executionStats.countInWindow >= executionStats.countLimit) {
-                executionStats.inQuotaTimeElapsed = Math.max(executionStats.inQuotaTimeElapsed, j3 + executionStats.windowSizeMs);
+                executionStats.inQuotaTimeElapsed =
+                        Math.max(
+                                executionStats.inQuotaTimeElapsed,
+                                j3 + executionStats.windowSizeMs);
             }
         }
         executionStats.expirationTimeElapsed = elapsedRealtime + j;

@@ -14,30 +14,41 @@ import android.view.displayhash.DisplayHash;
 public interface IDisplayHashingService extends IInterface {
     public static final String DESCRIPTOR = "android.service.displayhash.IDisplayHashingService";
 
-    void generateDisplayHash(byte[] bArr, HardwareBuffer hardwareBuffer, Rect rect, String str, RemoteCallback remoteCallback) throws RemoteException;
+    void generateDisplayHash(
+            byte[] bArr,
+            HardwareBuffer hardwareBuffer,
+            Rect rect,
+            String str,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
     void getDisplayHashAlgorithms(RemoteCallback remoteCallback) throws RemoteException;
 
     void getIntervalBetweenRequestsMillis(RemoteCallback remoteCallback) throws RemoteException;
 
-    void verifyDisplayHash(byte[] bArr, DisplayHash displayHash, RemoteCallback remoteCallback) throws RemoteException;
+    void verifyDisplayHash(byte[] bArr, DisplayHash displayHash, RemoteCallback remoteCallback)
+            throws RemoteException;
 
     public static class Default implements IDisplayHashingService {
         @Override // android.service.displayhash.IDisplayHashingService
-        public void generateDisplayHash(byte[] salt, HardwareBuffer buffer, Rect bounds, String hashAlgorithm, RemoteCallback callback) throws RemoteException {
-        }
+        public void generateDisplayHash(
+                byte[] salt,
+                HardwareBuffer buffer,
+                Rect bounds,
+                String hashAlgorithm,
+                RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.displayhash.IDisplayHashingService
-        public void verifyDisplayHash(byte[] salt, DisplayHash displayHash, RemoteCallback callback) throws RemoteException {
-        }
+        public void verifyDisplayHash(byte[] salt, DisplayHash displayHash, RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.displayhash.IDisplayHashingService
-        public void getDisplayHashAlgorithms(RemoteCallback callback) throws RemoteException {
-        }
+        public void getDisplayHashAlgorithms(RemoteCallback callback) throws RemoteException {}
 
         @Override // android.service.displayhash.IDisplayHashingService
-        public void getIntervalBetweenRequestsMillis(RemoteCallback callback) throws RemoteException {
-        }
+        public void getIntervalBetweenRequestsMillis(RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -45,7 +56,7 @@ public interface IDisplayHashingService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDisplayHashingService {
+    public abstract static class Stub extends Binder implements IDisplayHashingService {
         static final int TRANSACTION_generateDisplayHash = 1;
         static final int TRANSACTION_getDisplayHashAlgorithms = 3;
         static final int TRANSACTION_getIntervalBetweenRequestsMillis = 4;
@@ -92,7 +103,8 @@ public interface IDisplayHashingService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDisplayHashingService.DESCRIPTOR);
             }
@@ -103,27 +115,32 @@ public interface IDisplayHashingService extends IInterface {
             switch (code) {
                 case 1:
                     byte[] _arg0 = data.createByteArray();
-                    HardwareBuffer _arg1 = (HardwareBuffer) data.readTypedObject(HardwareBuffer.CREATOR);
+                    HardwareBuffer _arg1 =
+                            (HardwareBuffer) data.readTypedObject(HardwareBuffer.CREATOR);
                     Rect _arg2 = (Rect) data.readTypedObject(Rect.CREATOR);
                     String _arg3 = data.readString();
-                    RemoteCallback _arg4 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg4 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     generateDisplayHash(_arg0, _arg1, _arg2, _arg3, _arg4);
                     return true;
                 case 2:
                     byte[] _arg02 = data.createByteArray();
                     DisplayHash _arg12 = (DisplayHash) data.readTypedObject(DisplayHash.CREATOR);
-                    RemoteCallback _arg22 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg22 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     verifyDisplayHash(_arg02, _arg12, _arg22);
                     return true;
                 case 3:
-                    RemoteCallback _arg03 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg03 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     getDisplayHashAlgorithms(_arg03);
                     return true;
                 case 4:
-                    RemoteCallback _arg04 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg04 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     getIntervalBetweenRequestsMillis(_arg04);
                     return true;
@@ -149,7 +166,13 @@ public interface IDisplayHashingService extends IInterface {
             }
 
             @Override // android.service.displayhash.IDisplayHashingService
-            public void generateDisplayHash(byte[] salt, HardwareBuffer buffer, Rect bounds, String hashAlgorithm, RemoteCallback callback) throws RemoteException {
+            public void generateDisplayHash(
+                    byte[] salt,
+                    HardwareBuffer buffer,
+                    Rect bounds,
+                    String hashAlgorithm,
+                    RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayHashingService.DESCRIPTOR);
@@ -165,7 +188,9 @@ public interface IDisplayHashingService extends IInterface {
             }
 
             @Override // android.service.displayhash.IDisplayHashingService
-            public void verifyDisplayHash(byte[] salt, DisplayHash displayHash, RemoteCallback callback) throws RemoteException {
+            public void verifyDisplayHash(
+                    byte[] salt, DisplayHash displayHash, RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayHashingService.DESCRIPTOR);
@@ -191,7 +216,8 @@ public interface IDisplayHashingService extends IInterface {
             }
 
             @Override // android.service.displayhash.IDisplayHashingService
-            public void getIntervalBetweenRequestsMillis(RemoteCallback callback) throws RemoteException {
+            public void getIntervalBetweenRequestsMillis(RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayHashingService.DESCRIPTOR);

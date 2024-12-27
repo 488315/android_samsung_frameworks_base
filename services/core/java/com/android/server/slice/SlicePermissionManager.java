@@ -11,10 +11,14 @@ import android.util.ArraySet;
 import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.util.XmlUtils;
-import com.android.server.slice.DirtyTracker;
-import com.android.server.slice.SliceClientPermissions;
-import com.android.server.slice.SliceProviderPermissions;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,10 +27,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-import org.xmlpull.v1.XmlSerializer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -60,8 +60,10 @@ public final class SlicePermissionManager implements DirtyTracker {
                 slicePermissionManager.getClass();
                 slicePermissionManager.getFile("client_".concat(pkgUser.toString())).delete();
                 slicePermissionManager.getFile("provider_".concat(pkgUser.toString())).delete();
-                slicePermissionManager.mDirty.remove(slicePermissionManager.mCachedClients.remove(pkgUser));
-                slicePermissionManager.mDirty.remove(slicePermissionManager.mCachedProviders.remove(pkgUser));
+                slicePermissionManager.mDirty.remove(
+                        slicePermissionManager.mCachedClients.remove(pkgUser));
+                slicePermissionManager.mDirty.remove(
+                        slicePermissionManager.mCachedProviders.remove(pkgUser));
                 return;
             }
             if (i == 4) {
@@ -141,7 +143,8 @@ public final class SlicePermissionManager implements DirtyTracker {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.slice.SliceClientPermissions getClient(com.android.server.slice.SlicePermissionManager.PkgUser r7) {
+    public final com.android.server.slice.SliceClientPermissions getClient(
+            com.android.server.slice.SlicePermissionManager.PkgUser r7) {
         /*
             r6 = this;
             android.util.ArrayMap r0 = r6.mCachedClients
@@ -219,7 +222,9 @@ public final class SlicePermissionManager implements DirtyTracker {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L70
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.slice.SlicePermissionManager.getClient(com.android.server.slice.SlicePermissionManager$PkgUser):com.android.server.slice.SliceClientPermissions");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.slice.SlicePermissionManager.getClient(com.android.server.slice.SlicePermissionManager$PkgUser):com.android.server.slice.SliceClientPermissions");
     }
 
     public final AtomicFile getFile(String str) {
@@ -244,7 +249,8 @@ public final class SlicePermissionManager implements DirtyTracker {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.slice.SliceProviderPermissions getProvider(com.android.server.slice.SlicePermissionManager.PkgUser r7) {
+    public final com.android.server.slice.SliceProviderPermissions getProvider(
+            com.android.server.slice.SlicePermissionManager.PkgUser r7) {
         /*
             r6 = this;
             android.util.ArrayMap r0 = r6.mCachedProviders
@@ -322,14 +328,18 @@ public final class SlicePermissionManager implements DirtyTracker {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L71
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.slice.SlicePermissionManager.getProvider(com.android.server.slice.SlicePermissionManager$PkgUser):com.android.server.slice.SliceProviderPermissions");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.slice.SlicePermissionManager.getProvider(com.android.server.slice.SlicePermissionManager$PkgUser):com.android.server.slice.SliceProviderPermissions");
     }
 
     public final void grantSliceAccess(String str, int i, String str2, int i2, Uri uri) {
         SliceProviderPermissions.SliceAuthority sliceAuthority;
         PkgUser pkgUser = new PkgUser(str, i);
         PkgUser pkgUser2 = new PkgUser(str2, i2);
-        SliceClientPermissions.SliceAuthority orCreateAuthority = getClient(pkgUser).getOrCreateAuthority(new PkgUser(uri.getAuthority(), i2), pkgUser2);
+        SliceClientPermissions.SliceAuthority orCreateAuthority =
+                getClient(pkgUser)
+                        .getOrCreateAuthority(new PkgUser(uri.getAuthority(), i2), pkgUser2);
         List<String> pathSegments = uri.getPathSegments();
         String[] strArr = (String[]) pathSegments.toArray(new String[pathSegments.size()]);
         int size = orCreateAuthority.mPaths.size() - 1;
@@ -351,7 +361,8 @@ public final class SlicePermissionManager implements DirtyTracker {
         SliceProviderPermissions provider = getProvider(pkgUser2);
         String authority = ContentProvider.getUriWithoutUserId(uri).getAuthority();
         synchronized (provider) {
-            sliceAuthority = (SliceProviderPermissions.SliceAuthority) provider.mAuths.get(authority);
+            sliceAuthority =
+                    (SliceProviderPermissions.SliceAuthority) provider.mAuths.get(authority);
             if (sliceAuthority == null) {
                 sliceAuthority = new SliceProviderPermissions.SliceAuthority(authority, provider);
                 provider.mAuths.put(authority, sliceAuthority);
@@ -374,13 +385,17 @@ public final class SlicePermissionManager implements DirtyTracker {
                 try {
                     FileOutputStream startWrite = file.startWrite();
                     try {
-                        XmlSerializer newSerializer = XmlPullParserFactory.newInstance().newSerializer();
+                        XmlSerializer newSerializer =
+                                XmlPullParserFactory.newInstance().newSerializer();
                         newSerializer.setOutput(startWrite, Xml.Encoding.UTF_8.name());
                         persistable.writeTo(newSerializer);
                         newSerializer.flush();
                         file.finishWrite(startWrite);
                     } catch (IOException | RuntimeException | XmlPullParserException e) {
-                        Slog.w("SlicePermissionManager", "Failed to save access file, restoring backup", e);
+                        Slog.w(
+                                "SlicePermissionManager",
+                                "Failed to save access file, restoring backup",
+                                e);
                         file.failWrite(startWrite);
                     }
                 } catch (IOException e2) {
@@ -404,7 +419,8 @@ public final class SlicePermissionManager implements DirtyTracker {
         synchronized (this) {
             while (true) {
                 try {
-                    if (xmlPullParser.getEventType() == 2 && "slice-access-list".equals(xmlPullParser.getName())) {
+                    if (xmlPullParser.getEventType() == 2
+                            && "slice-access-list".equals(xmlPullParser.getName())) {
                         break;
                     }
                     if (xmlPullParser.getEventType() == 1) {
@@ -423,7 +439,8 @@ public final class SlicePermissionManager implements DirtyTracker {
                 if (xmlPullParser.getEventType() != 2) {
                     xmlPullParser.next();
                 } else if ("client".equals(xmlPullParser.getName())) {
-                    SliceClientPermissions createFrom = SliceClientPermissions.createFrom(xmlPullParser, this);
+                    SliceClientPermissions createFrom =
+                            SliceClientPermissions.createFrom(xmlPullParser, this);
                     synchronized (this.mCachedClients) {
                         this.mCachedClients.put(createFrom.mPkg, createFrom);
                     }
@@ -431,7 +448,8 @@ public final class SlicePermissionManager implements DirtyTracker {
                     H h = this.mHandler;
                     h.sendMessageDelayed(h.obtainMessage(4, createFrom.mPkg), 300000L);
                 } else if ("provider".equals(xmlPullParser.getName())) {
-                    SliceProviderPermissions createFrom2 = SliceProviderPermissions.createFrom(xmlPullParser, this);
+                    SliceProviderPermissions createFrom2 =
+                            SliceProviderPermissions.createFrom(xmlPullParser, this);
                     synchronized (this.mCachedProviders) {
                         this.mCachedProviders.put(createFrom2.mPkg, createFrom2);
                     }
@@ -455,7 +473,8 @@ public final class SlicePermissionManager implements DirtyTracker {
         }
         Iterator it = arrayList.iterator();
         while (it.hasNext()) {
-            SliceProviderPermissions.SliceAuthority sliceAuthority = (SliceProviderPermissions.SliceAuthority) it.next();
+            SliceProviderPermissions.SliceAuthority sliceAuthority =
+                    (SliceProviderPermissions.SliceAuthority) it.next();
             synchronized (sliceAuthority) {
                 arraySet = new ArraySet(sliceAuthority.mPkgs);
             }
@@ -482,7 +501,9 @@ public final class SlicePermissionManager implements DirtyTracker {
             try {
                 xmlSerializer.startTag(null, "slice-access-list");
                 xmlSerializer.attribute(null, "version", String.valueOf(2));
-                SlicePermissionManager$$ExternalSyntheticLambda0 slicePermissionManager$$ExternalSyntheticLambda0 = new SlicePermissionManager$$ExternalSyntheticLambda0();
+                SlicePermissionManager$$ExternalSyntheticLambda0
+                        slicePermissionManager$$ExternalSyntheticLambda0 =
+                                new SlicePermissionManager$$ExternalSyntheticLambda0();
                 if (this.mHandler.hasMessages(2)) {
                     this.mHandler.removeMessages(2);
                     handlePersist();
@@ -495,7 +516,14 @@ public final class SlicePermissionManager implements DirtyTracker {
                                 persistable = null;
                                 break;
                             } else if (parser.parser.getEventType() == 2) {
-                                persistable = "client".equals(parser.parser.getName()) ? SliceClientPermissions.createFrom(parser.parser, slicePermissionManager$$ExternalSyntheticLambda0) : SliceProviderPermissions.createFrom(parser.parser, slicePermissionManager$$ExternalSyntheticLambda0);
+                                persistable =
+                                        "client".equals(parser.parser.getName())
+                                                ? SliceClientPermissions.createFrom(
+                                                        parser.parser,
+                                                        slicePermissionManager$$ExternalSyntheticLambda0)
+                                                : SliceProviderPermissions.createFrom(
+                                                        parser.parser,
+                                                        slicePermissionManager$$ExternalSyntheticLambda0);
                             } else {
                                 parser.parser.next();
                             }
@@ -510,7 +538,9 @@ public final class SlicePermissionManager implements DirtyTracker {
                     if (persistable != null) {
                         persistable.writeTo(xmlSerializer);
                     } else {
-                        Slog.w("SlicePermissionManager", "Invalid or empty slice permissions file: " + str);
+                        Slog.w(
+                                "SlicePermissionManager",
+                                "Invalid or empty slice permissions file: " + str);
                     }
                     parser.close();
                 }

@@ -9,7 +9,8 @@ public final /* synthetic */ class SemTpaTestHal$$ExternalSyntheticLambda0 imple
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
-    public /* synthetic */ SemTpaTestHal$$ExternalSyntheticLambda0(ISessionCallback iSessionCallback, int i) {
+    public /* synthetic */ SemTpaTestHal$$ExternalSyntheticLambda0(
+            ISessionCallback iSessionCallback, int i) {
         this.$r8$classId = i;
         this.f$0 = iSessionCallback;
     }

@@ -7,11 +7,13 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.ImsiEncryptionInfo;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface IPhoneSubInfo extends IInterface {
-    ImsiEncryptionInfo getCarrierInfoForImsiEncryption(int i, int i2, String str) throws RemoteException;
+    ImsiEncryptionInfo getCarrierInfoForImsiEncryption(int i, int i2, String str)
+            throws RemoteException;
 
     @Deprecated
     String getDeviceId(String str) throws RemoteException;
@@ -32,7 +34,8 @@ public interface IPhoneSubInfo extends IInterface {
 
     String getIccSerialNumberWithFeature(String str, String str2) throws RemoteException;
 
-    String getIccSimChallengeResponse(int i, int i2, int i3, String str, String str2, String str3) throws RemoteException;
+    String getIccSimChallengeResponse(int i, int i2, int i3, String str, String str2, String str3)
+            throws RemoteException;
 
     String getImeiForSubscriber(int i, String str, String str2) throws RemoteException;
 
@@ -85,7 +88,8 @@ public interface IPhoneSubInfo extends IInterface {
 
     void resetCarrierKeysForImsiEncryption(int i, String str) throws RemoteException;
 
-    void setCarrierInfoForImsiEncryption(int i, String str, ImsiEncryptionInfo imsiEncryptionInfo) throws RemoteException;
+    void setCarrierInfoForImsiEncryption(int i, String str, ImsiEncryptionInfo imsiEncryptionInfo)
+            throws RemoteException;
 
     void setPcoValue(int i, int i2, String str) throws RemoteException;
 
@@ -96,32 +100,39 @@ public interface IPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getDeviceIdWithFeature(String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getDeviceIdWithFeature(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getNaiForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getNaiForSubscriber(int subId, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getDeviceIdForPhone(int phoneId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getDeviceIdForPhone(
+                int phoneId, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getImeiForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getImeiForSubscriber(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getDeviceSvn(String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getDeviceSvn(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getDeviceSvnUsingSubId(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getDeviceSvnUsingSubId(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
@@ -131,17 +142,20 @@ public interface IPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getSubscriberIdWithFeature(String callingPackage, String callingComponenId) throws RemoteException {
+        public String getSubscriberIdWithFeature(String callingPackage, String callingComponenId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getSubscriberIdForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getSubscriberIdForSubscriber(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getGroupIdLevel1ForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getGroupIdLevel1ForSubscriber(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
@@ -151,75 +165,89 @@ public interface IPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getIccSerialNumberWithFeature(String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getIccSerialNumberWithFeature(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getIccSerialNumberForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getIccSerialNumberForSubscriber(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getLine1Number(String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getLine1Number(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getLine1NumberForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getLine1NumberForSubscriber(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getLine1AlphaTag(String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getLine1AlphaTag(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getLine1AlphaTagForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getLine1AlphaTagForSubscriber(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getMsisdn(String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getMsisdn(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getMsisdnForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getMsisdnForSubscriber(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getVoiceMailNumber(String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getVoiceMailNumber(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getVoiceMailNumberForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getVoiceMailNumberForSubscriber(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public ImsiEncryptionInfo getCarrierInfoForImsiEncryption(int subId, int keyType, String callingPackage) throws RemoteException {
+        public ImsiEncryptionInfo getCarrierInfoForImsiEncryption(
+                int subId, int keyType, String callingPackage) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public void setCarrierInfoForImsiEncryption(int subId, String callingPackage, ImsiEncryptionInfo imsiEncryptionInfo) throws RemoteException {
-        }
+        public void setCarrierInfoForImsiEncryption(
+                int subId, String callingPackage, ImsiEncryptionInfo imsiEncryptionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public void resetCarrierKeysForImsiEncryption(int subId, String callingPackage) throws RemoteException {
-        }
+        public void resetCarrierKeysForImsiEncryption(int subId, String callingPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getVoiceMailAlphaTag(String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getVoiceMailAlphaTag(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getVoiceMailAlphaTagForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getVoiceMailAlphaTagForSubscriber(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
@@ -229,7 +257,8 @@ public interface IPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getImsPrivateUserIdentity(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getImsPrivateUserIdentity(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
@@ -244,7 +273,8 @@ public interface IPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public List<Uri> getImsPublicUserIdentities(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public List<Uri> getImsPublicUserIdentities(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
@@ -259,7 +289,14 @@ public interface IPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public String getIccSimChallengeResponse(int subId, int appType, int authType, String data, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getIccSimChallengeResponse(
+                int subId,
+                int appType,
+                int authType,
+                String data,
+                String callingPackage,
+                String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
@@ -274,8 +311,8 @@ public interface IPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.IPhoneSubInfo
-        public void setPcoValue(int subId, int newPco, String callingPackage) throws RemoteException {
-        }
+        public void setPcoValue(int subId, int newPco, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -283,7 +320,7 @@ public interface IPhoneSubInfo extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPhoneSubInfo {
+    public abstract static class Stub extends Binder implements IPhoneSubInfo {
         public static final String DESCRIPTOR = "com.android.internal.telephony.IPhoneSubInfo";
         static final int TRANSACTION_getCarrierInfoForImsiEncryption = 23;
         static final int TRANSACTION_getDeviceId = 1;
@@ -433,7 +470,8 @@ public interface IPhoneSubInfo extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -631,14 +669,16 @@ public interface IPhoneSubInfo extends IInterface {
                     int _arg120 = data.readInt();
                     String _arg212 = data.readString();
                     data.enforceNoDataAvail();
-                    ImsiEncryptionInfo _result23 = getCarrierInfoForImsiEncryption(_arg023, _arg120, _arg212);
+                    ImsiEncryptionInfo _result23 =
+                            getCarrierInfoForImsiEncryption(_arg023, _arg120, _arg212);
                     reply.writeNoException();
                     reply.writeTypedObject(_result23, 1);
                     return true;
                 case 24:
                     int _arg024 = data.readInt();
                     String _arg121 = data.readString();
-                    ImsiEncryptionInfo _arg213 = (ImsiEncryptionInfo) data.readTypedObject(ImsiEncryptionInfo.CREATOR);
+                    ImsiEncryptionInfo _arg213 =
+                            (ImsiEncryptionInfo) data.readTypedObject(ImsiEncryptionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setCarrierInfoForImsiEncryption(_arg024, _arg121, _arg213);
                     reply.writeNoException();
@@ -728,7 +768,9 @@ public interface IPhoneSubInfo extends IInterface {
                     String _arg4 = data.readString();
                     String _arg5 = data.readString();
                     data.enforceNoDataAvail();
-                    String _result33 = getIccSimChallengeResponse(_arg035, _arg127, _arg217, _arg3, _arg4, _arg5);
+                    String _result33 =
+                            getIccSimChallengeResponse(
+                                    _arg035, _arg127, _arg217, _arg3, _arg4, _arg5);
                     reply.writeNoException();
                     reply.writeString(_result33);
                     return true;
@@ -795,7 +837,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getDeviceIdWithFeature(String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getDeviceIdWithFeature(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -813,7 +856,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getNaiForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getNaiForSubscriber(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -832,7 +877,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getDeviceIdForPhone(int phoneId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getDeviceIdForPhone(
+                    int phoneId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -851,7 +898,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getImeiForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getImeiForSubscriber(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -870,7 +919,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getDeviceSvn(String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getDeviceSvn(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -888,7 +938,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getDeviceSvnUsingSubId(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getDeviceSvnUsingSubId(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -924,7 +976,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getSubscriberIdWithFeature(String callingPackage, String callingComponenId) throws RemoteException {
+            public String getSubscriberIdWithFeature(
+                    String callingPackage, String callingComponenId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -942,7 +995,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getSubscriberIdForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getSubscriberIdForSubscriber(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -961,7 +1016,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getGroupIdLevel1ForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getGroupIdLevel1ForSubscriber(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -997,7 +1054,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getIccSerialNumberWithFeature(String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getIccSerialNumberWithFeature(
+                    String callingPackage, String callingFeatureId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1015,7 +1073,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getIccSerialNumberForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getIccSerialNumberForSubscriber(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1034,7 +1094,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getLine1Number(String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getLine1Number(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1052,7 +1113,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getLine1NumberForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getLine1NumberForSubscriber(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1071,7 +1134,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getLine1AlphaTag(String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getLine1AlphaTag(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1089,7 +1153,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getLine1AlphaTagForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getLine1AlphaTagForSubscriber(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1108,7 +1174,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getMsisdn(String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getMsisdn(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1126,7 +1193,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getMsisdnForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getMsisdnForSubscriber(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1145,7 +1214,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getVoiceMailNumber(String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getVoiceMailNumber(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1163,7 +1233,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getVoiceMailNumberForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getVoiceMailNumberForSubscriber(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1182,7 +1254,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public ImsiEncryptionInfo getCarrierInfoForImsiEncryption(int subId, int keyType, String callingPackage) throws RemoteException {
+            public ImsiEncryptionInfo getCarrierInfoForImsiEncryption(
+                    int subId, int keyType, String callingPackage) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1192,7 +1265,8 @@ public interface IPhoneSubInfo extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(23, _data, _reply, 0);
                     _reply.readException();
-                    ImsiEncryptionInfo _result = (ImsiEncryptionInfo) _reply.readTypedObject(ImsiEncryptionInfo.CREATOR);
+                    ImsiEncryptionInfo _result =
+                            (ImsiEncryptionInfo) _reply.readTypedObject(ImsiEncryptionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1201,7 +1275,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public void setCarrierInfoForImsiEncryption(int subId, String callingPackage, ImsiEncryptionInfo imsiEncryptionInfo) throws RemoteException {
+            public void setCarrierInfoForImsiEncryption(
+                    int subId, String callingPackage, ImsiEncryptionInfo imsiEncryptionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1218,7 +1294,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public void resetCarrierKeysForImsiEncryption(int subId, String callingPackage) throws RemoteException {
+            public void resetCarrierKeysForImsiEncryption(int subId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1234,7 +1311,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getVoiceMailAlphaTag(String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getVoiceMailAlphaTag(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1252,7 +1330,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getVoiceMailAlphaTagForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getVoiceMailAlphaTagForSubscriber(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1288,7 +1368,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getImsPrivateUserIdentity(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getImsPrivateUserIdentity(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1341,7 +1423,9 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public List<Uri> getImsPublicUserIdentities(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public List<Uri> getImsPublicUserIdentities(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1394,7 +1478,14 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public String getIccSimChallengeResponse(int subId, int appType, int authType, String data, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getIccSimChallengeResponse(
+                    int subId,
+                    int appType,
+                    int authType,
+                    String data,
+                    String callingPackage,
+                    String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1452,7 +1543,8 @@ public interface IPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IPhoneSubInfo
-            public void setPcoValue(int subId, int newPco, String callingPackage) throws RemoteException {
+            public void setPcoValue(int subId, int newPco, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

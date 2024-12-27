@@ -1,7 +1,9 @@
 package android.graphics;
 
 import android.os.Handler;
+
 import com.android.internal.util.VirtualRefBasePtr;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes.dex */
@@ -15,11 +17,16 @@ public final class HardwareRendererObserver {
         void onFrameMetricsAvailable(int i);
     }
 
-    private static native long nCreateObserver(WeakReference<HardwareRendererObserver> weakReference, boolean z);
+    private static native long nCreateObserver(
+            WeakReference<HardwareRendererObserver> weakReference, boolean z);
 
     private static native int nGetNextBuffer(long j, long[] jArr);
 
-    public HardwareRendererObserver(OnFrameMetricsAvailableListener listener, long[] frameMetrics, Handler handler, boolean waitForPresentTime) {
+    public HardwareRendererObserver(
+            OnFrameMetricsAvailableListener listener,
+            long[] frameMetrics,
+            Handler handler,
+            boolean waitForPresentTime) {
         if (handler == null || handler.getLooper() == null) {
             throw new NullPointerException("handler and its looper cannot be null");
         }
@@ -29,7 +36,8 @@ public final class HardwareRendererObserver {
         this.mFrameMetrics = frameMetrics;
         this.mHandler = handler;
         this.mListener = listener;
-        this.mNativePtr = new VirtualRefBasePtr(nCreateObserver(new WeakReference(this), waitForPresentTime));
+        this.mNativePtr =
+                new VirtualRefBasePtr(nCreateObserver(new WeakReference(this), waitForPresentTime));
     }
 
     long getNativeInstance() {
@@ -37,12 +45,14 @@ public final class HardwareRendererObserver {
     }
 
     private void notifyDataAvailable() {
-        this.mHandler.post(new Runnable() { // from class: android.graphics.HardwareRendererObserver$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                HardwareRendererObserver.this.lambda$notifyDataAvailable$0();
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                    // android.graphics.HardwareRendererObserver$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        HardwareRendererObserver.this.lambda$notifyDataAvailable$0();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */

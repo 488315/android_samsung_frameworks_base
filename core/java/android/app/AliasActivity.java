@@ -7,10 +7,13 @@ import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Xml;
+
 import com.android.internal.util.XmlUtils;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 @Deprecated
 /* loaded from: classes.dex */
@@ -26,7 +29,8 @@ public class AliasActivity extends Activity {
                 ActivityInfo ai = getPackageManager().getActivityInfo(getComponentName(), 128);
                 parser = ai.loadXmlMetaData(getPackageManager(), "android.app.alias");
                 if (parser == null) {
-                    throw new RuntimeException("Alias requires a meta-data field android.app.alias");
+                    throw new RuntimeException(
+                            "Alias requires a meta-data field android.app.alias");
                 }
                 Intent intent = parseAlias(parser);
                 if (intent == null) {
@@ -34,7 +38,9 @@ public class AliasActivity extends Activity {
                 }
                 startActivity(intent);
                 finish();
-            } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
+            } catch (PackageManager.NameNotFoundException
+                    | IOException
+                    | XmlPullParserException e) {
                 throw new RuntimeException("Error parsing alias", e);
             }
         } finally {
@@ -56,7 +62,11 @@ public class AliasActivity extends Activity {
         } while (type != 2);
         String nodeName = parser.getName();
         if (!"alias".equals(nodeName)) {
-            throw new RuntimeException("Alias meta-data must start with <alias> tag; found" + nodeName + " at " + parser.getPositionDescription());
+            throw new RuntimeException(
+                    "Alias meta-data must start with <alias> tag; found"
+                            + nodeName
+                            + " at "
+                            + parser.getPositionDescription());
         }
         int outerDepth = parser.getDepth();
         while (true) {

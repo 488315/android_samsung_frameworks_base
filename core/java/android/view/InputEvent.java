@@ -2,6 +2,7 @@ package android.view;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /* loaded from: classes4.dex */
@@ -13,26 +14,27 @@ public abstract class InputEvent implements Parcelable {
     private RuntimeException mRecycledLocation;
     protected int mSeq = mNextSeq.getAndIncrement();
     private static final AtomicInteger mNextSeq = new AtomicInteger();
-    public static final Parcelable.Creator<InputEvent> CREATOR = new Parcelable.Creator<InputEvent>() { // from class: android.view.InputEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputEvent createFromParcel(Parcel in) {
-            int token = in.readInt();
-            if (token == 2) {
-                return KeyEvent.createFromParcelBody(in);
-            }
-            if (token == 1) {
-                return MotionEvent.createFromParcelBody(in);
-            }
-            throw new IllegalStateException("Unexpected input event type token in parcel.");
-        }
+    public static final Parcelable.Creator<InputEvent> CREATOR =
+            new Parcelable.Creator<InputEvent>() { // from class: android.view.InputEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputEvent createFromParcel(Parcel in) {
+                    int token = in.readInt();
+                    if (token == 2) {
+                        return KeyEvent.createFromParcelBody(in);
+                    }
+                    if (token == 1) {
+                        return MotionEvent.createFromParcelBody(in);
+                    }
+                    throw new IllegalStateException("Unexpected input event type token in parcel.");
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputEvent[] newArray(int size) {
-            return new InputEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputEvent[] newArray(int size) {
+                    return new InputEvent[size];
+                }
+            };
 
     public abstract void cancel();
 
@@ -58,8 +60,7 @@ public abstract class InputEvent implements Parcelable {
 
     public abstract void setTainted(boolean z);
 
-    InputEvent() {
-    }
+    InputEvent() {}
 
     public final InputDevice getDevice() {
         return InputDevice.getDevice(getDeviceId());

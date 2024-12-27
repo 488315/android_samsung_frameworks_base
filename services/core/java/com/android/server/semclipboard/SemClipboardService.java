@@ -25,9 +25,11 @@ import android.sec.clipboard.util.CompatabilityHelper;
 import android.sec.clipboard.util.FileHelper;
 import android.sec.clipboard.util.Log;
 import android.sec.clipboard.util.SemClipboardPolicy;
+
 import com.android.server.LocalServices;
 import com.android.server.uri.UriGrantsManagerInternal;
 import com.android.server.uri.UriGrantsManagerService;
+
 import com.samsung.android.content.clipboard.IOnClipboardEventListener;
 import com.samsung.android.content.clipboard.data.SemClipData;
 import com.samsung.android.content.clipboard.data.SemHtmlClipData;
@@ -37,6 +39,7 @@ import com.samsung.android.content.clipboard.data.SemTextClipData;
 import com.samsung.android.content.clipboard.data.SemUriClipData;
 import com.samsung.android.content.clipboard.data.SemUriListClipData;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -70,13 +73,41 @@ public final class SemClipboardService extends IClipboardService.Stub {
         this.mContext = context;
         CompatabilityHelper.migrationClipboard();
         this.mUgm = UriGrantsManager.getService();
-        this.mPermissionOwner = ((UriGrantsManagerService.LocalService) ((UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class))).newUriPermissionOwner("clipboard");
+        this.mPermissionOwner =
+                ((UriGrantsManagerService.LocalService)
+                                ((UriGrantsManagerInternal)
+                                        LocalServices.getService(UriGrantsManagerInternal.class)))
+                        .newUriPermissionOwner("clipboard");
         this.mAppOps = (AppOpsManager) context.getSystemService("appops");
-        context.getContentResolver().registerContentObserver(ClipboardConstants.CLIPBOARD_ALLOWED_URI, true, ClipboardPolicyObserver.getInstance(context), -1);
-        context.getContentResolver().registerContentObserver(ClipboardConstants.CLIPBOARD_SHARED_ALLOWED_URI, true, ClipboardPolicyObserver.getInstance(context), -1);
-        context.getContentResolver().registerContentObserver(ClipboardConstants.RCP_CONTENT_URI, true, ClipboardPolicyObserver.getInstance(context));
-        context.getContentResolver().registerContentObserver(ClipboardConstants.CLIPBOARD_ALLOWED_DENYLIST_APP_URI, true, ClipboardPolicyObserver.getInstance(context), -1);
-        context.getContentResolver().registerContentObserver(ClipboardConstants.CLIPBOARD_ALLOWED_ALLOWLIST_APP_URI, true, ClipboardPolicyObserver.getInstance(context), -1);
+        context.getContentResolver()
+                .registerContentObserver(
+                        ClipboardConstants.CLIPBOARD_ALLOWED_URI,
+                        true,
+                        ClipboardPolicyObserver.getInstance(context),
+                        -1);
+        context.getContentResolver()
+                .registerContentObserver(
+                        ClipboardConstants.CLIPBOARD_SHARED_ALLOWED_URI,
+                        true,
+                        ClipboardPolicyObserver.getInstance(context),
+                        -1);
+        context.getContentResolver()
+                .registerContentObserver(
+                        ClipboardConstants.RCP_CONTENT_URI,
+                        true,
+                        ClipboardPolicyObserver.getInstance(context));
+        context.getContentResolver()
+                .registerContentObserver(
+                        ClipboardConstants.CLIPBOARD_ALLOWED_DENYLIST_APP_URI,
+                        true,
+                        ClipboardPolicyObserver.getInstance(context),
+                        -1);
+        context.getContentResolver()
+                .registerContentObserver(
+                        ClipboardConstants.CLIPBOARD_ALLOWED_ALLOWLIST_APP_URI,
+                        true,
+                        ClipboardPolicyObserver.getInstance(context),
+                        -1);
     }
 
     public static SemClipData convertClipToSemClip(ClipData clipData) {
@@ -128,7 +159,8 @@ public final class SemClipboardService extends IClipboardService.Stub {
         if (iClipboard != null) {
             return iClipboard;
         }
-        IClipboard asInterface = IClipboard.Stub.asInterface(ServiceManager.getService("clipboard"));
+        IClipboard asInterface =
+                IClipboard.Stub.asInterface(ServiceManager.getService("clipboard"));
         sService = asInterface;
         if (asInterface == null) {
             Log.secE("SemClipboardService", "Original clipboard service is null!");
@@ -136,10 +168,13 @@ public final class SemClipboardService extends IClipboardService.Stub {
         return sService;
     }
 
-    public final void addClipboardEventListener(IOnClipboardEventListener iOnClipboardEventListener, String str) {
+    public final void addClipboardEventListener(
+            IOnClipboardEventListener iOnClipboardEventListener, String str) {
         try {
             synchronized (this.mClipboardEventListeners) {
-                this.mClipboardEventListeners.register(iOnClipboardEventListener, new ClipboardEventListenerInfo(Binder.getCallingUid(), str));
+                this.mClipboardEventListeners.register(
+                        iOnClipboardEventListener,
+                        new ClipboardEventListenerInfo(Binder.getCallingUid(), str));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,17 +195,25 @@ public final class SemClipboardService extends IClipboardService.Stub {
             String bitmapPath = semImageClipData.getBitmapPath();
             File file = new File("/data/semclipboard", "temp");
             ParcelFileDescriptor parcelFileDescriptor = semImageClipData.getParcelFileDescriptor();
-            if ((parcelFileDescriptor == null || !FileHelper.getInstance().fileCopy(parcelFileDescriptor, file)) && !FileHelper.getInstance().fileCopy(new File(bitmapPath), file)) {
+            if ((parcelFileDescriptor == null
+                            || !FileHelper.getInstance().fileCopy(parcelFileDescriptor, file))
+                    && !FileHelper.getInstance().fileCopy(new File(bitmapPath), file)) {
                 return null;
             }
             semImageClipData.setImagePath(file.getAbsolutePath());
             FileUtils.setPermissions(file.getAbsolutePath(), 509, -1, -1);
             semImageClipData.insertContentUri(this.mContext, semImageClipData.getBitmapPath());
-            return ClipData.newUri(this.mContext.getContentResolver(), "SemImageClipData", semImageClipData.getContentUri());
+            return ClipData.newUri(
+                    this.mContext.getContentResolver(),
+                    "SemImageClipData",
+                    semImageClipData.getContentUri());
         }
         if (clipType == 4) {
             SemHtmlClipData semHtmlClipData = (SemHtmlClipData) semClipData;
-            return ClipData.newHtmlText(semHtmlClipData.getLabel(), semHtmlClipData.getPlainText(), semHtmlClipData.getHtml());
+            return ClipData.newHtmlText(
+                    semHtmlClipData.getLabel(),
+                    semHtmlClipData.getPlainText(),
+                    semHtmlClipData.getHtml());
         }
         if (clipType == 8) {
             SemIntentClipData semIntentClipData = (SemIntentClipData) semClipData;
@@ -178,21 +221,28 @@ public final class SemClipboardService extends IClipboardService.Stub {
         }
         if (clipType == 16) {
             SemUriClipData semUriClipData = (SemUriClipData) semClipData;
-            return ClipData.newUri(this.mContext.getContentResolver(), semUriClipData.getLabel(), semUriClipData.getUri());
+            return ClipData.newUri(
+                    this.mContext.getContentResolver(),
+                    semUriClipData.getLabel(),
+                    semUriClipData.getUri());
         }
         if (clipType != 32) {
             return null;
         }
         ArrayList uriList = ((SemUriListClipData) semClipData).getUriList();
-        ClipData clipData = new ClipData("SemUriListClipData", new String[]{"text/uri-list"}, new ClipData.Item((Uri) uriList.get(0)));
+        ClipData clipData =
+                new ClipData(
+                        "SemUriListClipData",
+                        new String[] {"text/uri-list"},
+                        new ClipData.Item((Uri) uriList.get(0)));
         for (int i = 1; i < uriList.size(); i++) {
             clipData.addItem(new ClipData.Item((Uri) uriList.get(i)));
         }
         return clipData;
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-    }
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {}
 
     public final int getFilter() {
         return this.mEnableFormatId;
@@ -202,7 +252,12 @@ public final class SemClipboardService extends IClipboardService.Stub {
         try {
             IClipboard service = getService();
             if (service != null) {
-                return convertClipToSemClip(service.getPrimaryClip(str, this.mContext.getAttributionTag(), i, this.mContext.getDeviceId()));
+                return convertClipToSemClip(
+                        service.getPrimaryClip(
+                                str,
+                                this.mContext.getAttributionTag(),
+                                i,
+                                this.mContext.getDeviceId()));
             }
             return null;
         } catch (Exception e) {
@@ -217,7 +272,14 @@ public final class SemClipboardService extends IClipboardService.Stub {
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            this.mUgm.grantUriPermissionFromOwner(this.mPermissionOwner, i, KnoxCustomManagerService.SAMSUNG_HONEYBOARD_PKG_NAME, ContentProvider.getUriWithoutUserId(uri), 1, ContentProvider.getUserIdFromUri(uri, UserHandle.getUserId(i)), 0);
+            this.mUgm.grantUriPermissionFromOwner(
+                    this.mPermissionOwner,
+                    i,
+                    KnoxCustomManagerService.SAMSUNG_HONEYBOARD_PKG_NAME,
+                    ContentProvider.getUriWithoutUserId(uri),
+                    1,
+                    ContentProvider.getUserIdFromUri(uri, UserHandle.getUserId(i)),
+                    0);
         } catch (RemoteException unused) {
         } catch (Throwable th) {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -230,7 +292,8 @@ public final class SemClipboardService extends IClipboardService.Stub {
         try {
             IClipboard service = getService();
             if (service != null) {
-                return service.hasPrimaryClip(str, this.mContext.getAttributionTag(), i, this.mContext.getDeviceId());
+                return service.hasPrimaryClip(
+                        str, this.mContext.getAttributionTag(), i, this.mContext.getDeviceId());
             }
             return false;
         } catch (Exception e) {
@@ -261,7 +324,8 @@ public final class SemClipboardService extends IClipboardService.Stub {
         return false;
     }
 
-    public final void removeClipboardEventListener(IOnClipboardEventListener iOnClipboardEventListener) {
+    public final void removeClipboardEventListener(
+            IOnClipboardEventListener iOnClipboardEventListener) {
         try {
             synchronized (this.mClipboardEventListeners) {
                 this.mClipboardEventListeners.unregister(iOnClipboardEventListener);
@@ -281,7 +345,10 @@ public final class SemClipboardService extends IClipboardService.Stub {
             Method dump skipped, instructions count: 460
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.semclipboard.SemClipboardService.setPrimaryClip(android.content.ClipData, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.semclipboard.SemClipboardService.setPrimaryClip(android.content.ClipData,"
+                    + " int):void");
     }
 
     public final void setPrimarySemClip(SemClipData semClipData, String str, int i) {
@@ -295,7 +362,12 @@ public final class SemClipboardService extends IClipboardService.Stub {
             if (convertSemClipToClip == null || service == null) {
                 return;
             }
-            service.setPrimaryClip(convertSemClipToClip, str, this.mContext.getAttributionTag(), i, this.mContext.getDeviceId());
+            service.setPrimaryClip(
+                    convertSemClipToClip,
+                    str,
+                    this.mContext.getAttributionTag(),
+                    i,
+                    this.mContext.getDeviceId());
         } catch (Exception e) {
             Log.e("SemClipboardService", "setPrimarySemClip, Exception : " + e.getMessage());
         }
@@ -311,9 +383,17 @@ public final class SemClipboardService extends IClipboardService.Stub {
                     int beginBroadcast = this.mClipboardEventListeners.beginBroadcast();
                     for (int i2 = 0; i2 < beginBroadcast; i2++) {
                         try {
-                            ClipboardEventListenerInfo clipboardEventListenerInfo = (ClipboardEventListenerInfo) this.mClipboardEventListeners.getBroadcastCookie(i2);
-                            if (this.mAppOps.checkOpNoThrow(29, clipboardEventListenerInfo.mUid, clipboardEventListenerInfo.mPackageName) == 0) {
-                                this.mClipboardEventListeners.getBroadcastItem(i2).onUpdateFilter(i);
+                            ClipboardEventListenerInfo clipboardEventListenerInfo =
+                                    (ClipboardEventListenerInfo)
+                                            this.mClipboardEventListeners.getBroadcastCookie(i2);
+                            if (this.mAppOps.checkOpNoThrow(
+                                            29,
+                                            clipboardEventListenerInfo.mUid,
+                                            clipboardEventListenerInfo.mPackageName)
+                                    == 0) {
+                                this.mClipboardEventListeners
+                                        .getBroadcastItem(i2)
+                                        .onUpdateFilter(i);
                             }
                         } catch (RemoteException unused) {
                         } catch (Throwable th) {

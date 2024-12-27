@@ -6,6 +6,7 @@ import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -70,7 +71,8 @@ public final class FrameworkCapability extends MessageNano {
         }
     }
 
-    public static FrameworkCapability parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+    public static FrameworkCapability parseFrom(byte[] data)
+            throws InvalidProtocolBufferNanoException {
         return (FrameworkCapability) MessageNano.mergeFrom(new FrameworkCapability(), data);
     }
 

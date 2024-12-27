@@ -2,6 +2,7 @@ package android.net.metrics;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.security.keystore.KeyProperties;
+
 import java.util.BitSet;
 import java.util.StringJoiner;
 
@@ -27,9 +28,11 @@ public class DefaultNetworkEvent {
     }
 
     public String toString() {
-        StringJoiner j = new StringJoiner(", ", "DefaultNetworkEvent(", NavigationBarInflaterView.KEY_CODE_END);
+        StringJoiner j =
+                new StringJoiner(
+                        ", ", "DefaultNetworkEvent(", NavigationBarInflaterView.KEY_CODE_END);
         j.add("netId=" + this.netId);
-        j.add("transports=" + BitSet.valueOf(new long[]{this.transports}));
+        j.add("transports=" + BitSet.valueOf(new long[] {this.transports}));
         j.add("ip=" + ipSupport());
         if (this.initialScore > 0) {
             j.add("initial_score=" + this.initialScore);
@@ -38,7 +41,10 @@ public class DefaultNetworkEvent {
             j.add("final_score=" + this.finalScore);
         }
         j.add(String.format("duration=%.0fs", Double.valueOf(this.durationMs / 1000.0d)));
-        j.add(String.format("validation=%04.1f%%", Double.valueOf((this.validatedMs * 100.0d) / this.durationMs)));
+        j.add(
+                String.format(
+                        "validation=%04.1f%%",
+                        Double.valueOf((this.validatedMs * 100.0d) / this.durationMs)));
         return j.toString();
     }
 

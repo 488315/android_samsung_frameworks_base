@@ -1,6 +1,7 @@
 package com.samsung.android.scs.ai.sdkcommon.feature;
 
 import com.android.server.core.jarjar.kotlin.jvm.internal.Intrinsics;
+
 import java.util.Map;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -13,8 +14,7 @@ public final class FeatureConfig {
     private final Map features;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class Companion {
-    }
+    public final class Companion {}
 
     public FeatureConfig(String str, Map map) {
         Intrinsics.checkNotNullParameter("appVersion", str);
@@ -23,7 +23,8 @@ public final class FeatureConfig {
         this.features = map;
     }
 
-    public static /* synthetic */ FeatureConfig copy$default(FeatureConfig featureConfig, String str, Map map, int i, Object obj) {
+    public static /* synthetic */ FeatureConfig copy$default(
+            FeatureConfig featureConfig, String str, Map map, int i, Object obj) {
         if ((i & 1) != 0) {
             str = featureConfig.appVersion;
         }

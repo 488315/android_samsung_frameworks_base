@@ -11,7 +11,9 @@ import android.os.ParcelFileDescriptor;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArraySet;
+
 import com.google.android.collect.Sets;
+
 import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,19 +31,44 @@ public class SystemBackupAgent extends BackupAgentHelper {
 
     static {
         Environment.getUserSystemDirectory(0).getAbsolutePath();
-        WALLPAPER_IMAGE = new File(Environment.getUserSystemDirectory(0), "wallpaper").getAbsolutePath();
+        WALLPAPER_IMAGE =
+                new File(Environment.getUserSystemDirectory(0), "wallpaper").getAbsolutePath();
         Environment.getUserSystemDirectory(0).getAbsolutePath();
-        WALLPAPER_INFO = new File(Environment.getUserSystemDirectory(0), "wallpaper_info.xml").getAbsolutePath();
-        ArraySet newArraySet = Sets.newArraySet(new String[]{"permissions", "notifications", "account_sync_settings", "app_locales", "companion", "app_gender", "system_gender"});
+        WALLPAPER_INFO =
+                new File(Environment.getUserSystemDirectory(0), "wallpaper_info.xml")
+                        .getAbsolutePath();
+        ArraySet newArraySet =
+                Sets.newArraySet(
+                        new String[] {
+                            "permissions",
+                            "notifications",
+                            "account_sync_settings",
+                            "app_locales",
+                            "companion",
+                            "app_gender",
+                            "system_gender"
+                        });
         sEligibleHelpersForProfileUser = newArraySet;
-        ArraySet newArraySet2 = Sets.newArraySet(new String[]{"account_manager", "usage_stats", "preferred_activities", "shortcut_manager"});
+        ArraySet newArraySet2 =
+                Sets.newArraySet(
+                        new String[] {
+                            "account_manager",
+                            "usage_stats",
+                            "preferred_activities",
+                            "shortcut_manager"
+                        });
         HashSet hashSet = new HashSet(newArraySet);
         hashSet.addAll(newArraySet2);
         sEligibleHelpersForNonSystemUser = hashSet;
     }
 
-    public final void addHelperIfEligibleForUser(String str, BackupHelperWithLogger backupHelperWithLogger) {
-        if (this.mUserId == 0 ? true : this.mIsProfileUser ? ((ArraySet) sEligibleHelpersForProfileUser).contains(str) : ((HashSet) sEligibleHelpersForNonSystemUser).contains(str)) {
+    public final void addHelperIfEligibleForUser(
+            String str, BackupHelperWithLogger backupHelperWithLogger) {
+        if (this.mUserId == 0
+                ? true
+                : this.mIsProfileUser
+                        ? ((ArraySet) sEligibleHelpersForProfileUser).contains(str)
+                        : ((HashSet) sEligibleHelpersForNonSystemUser).contains(str)) {
             addHelper(str, backupHelperWithLogger);
             if (Flags.enableMetricsSystemBackupAgents()) {
                 backupHelperWithLogger.setLogger(this.mLogger);
@@ -55,10 +82,16 @@ public class SystemBackupAgent extends BackupAgentHelper {
         int identifier = userHandle.getIdentifier();
         this.mUserId = identifier;
         if (identifier != 0) {
-            this.mIsProfileUser = ((UserManager) createContextAsUser(userHandle, 0).getSystemService(UserManager.class)).isProfile();
+            this.mIsProfileUser =
+                    ((UserManager)
+                                    createContextAsUser(userHandle, 0)
+                                            .getSystemService(UserManager.class))
+                            .isProfile();
         }
-        addHelperIfEligibleForUser("account_sync_settings", new AccountSyncSettingsBackupHelper(this, this.mUserId));
-        addHelperIfEligibleForUser("preferred_activities", new PreferredActivityBackupHelper(this.mUserId));
+        addHelperIfEligibleForUser(
+                "account_sync_settings", new AccountSyncSettingsBackupHelper(this, this.mUserId));
+        addHelperIfEligibleForUser(
+                "preferred_activities", new PreferredActivityBackupHelper(this.mUserId));
         addHelperIfEligibleForUser("notifications", new NotificationBackupHelper(this.mUserId));
         addHelperIfEligibleForUser("permissions", new PermissionBackupHelper(this.mUserId));
         addHelperIfEligibleForUser("usage_stats", new UsageStatsBackupHelper(this.mUserId));
@@ -69,19 +102,27 @@ public class SystemBackupAgent extends BackupAgentHelper {
         }
         addHelperIfEligibleForUser("people", new PeopleBackupHelper(this.mUserId));
         addHelperIfEligibleForUser("app_locales", new AppSpecificLocalesBackupHelper(this.mUserId));
-        addHelperIfEligibleForUser("app_gender", new AppGrammaticalGenderBackupHelper(this.mUserId));
+        addHelperIfEligibleForUser(
+                "app_gender", new AppGrammaticalGenderBackupHelper(this.mUserId));
         addHelperIfEligibleForUser("companion", new CompanionBackupHelper(this.mUserId));
-        addHelperIfEligibleForUser("system_gender", new SystemGrammaticalGenderBackupHelper(this.mUserId));
+        addHelperIfEligibleForUser(
+                "system_gender", new SystemGrammaticalGenderBackupHelper(this.mUserId));
     }
 
     @Override // android.app.backup.BackupAgent
-    public final void onFullBackup(FullBackupDataOutput fullBackupDataOutput) {
-    }
+    public final void onFullBackup(FullBackupDataOutput fullBackupDataOutput) {}
 
     @Override // android.app.backup.BackupAgentHelper, android.app.backup.BackupAgent
-    public final void onRestore(BackupDataInput backupDataInput, int i, ParcelFileDescriptor parcelFileDescriptor) {
-        addHelper("wallpaper", new WallpaperBackupHelper(this, new String[]{"/data/data/com.android.settings/files/wallpaper"}));
-        addHelper("system_files", new WallpaperBackupHelper(this, new String[]{"/data/data/com.android.settings/files/wallpaper"}));
+    public final void onRestore(
+            BackupDataInput backupDataInput, int i, ParcelFileDescriptor parcelFileDescriptor) {
+        addHelper(
+                "wallpaper",
+                new WallpaperBackupHelper(
+                        this, new String[] {"/data/data/com.android.settings/files/wallpaper"}));
+        addHelper(
+                "system_files",
+                new WallpaperBackupHelper(
+                        this, new String[] {"/data/data/com.android.settings/files/wallpaper"}));
         super.onRestore(backupDataInput, i, parcelFileDescriptor);
     }
 
@@ -90,7 +131,14 @@ public class SystemBackupAgent extends BackupAgentHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onRestoreFile(android.os.ParcelFileDescriptor r18, long r19, int r21, java.lang.String r22, java.lang.String r23, long r24, long r26) {
+    public final void onRestoreFile(
+            android.os.ParcelFileDescriptor r18,
+            long r19,
+            int r21,
+            java.lang.String r22,
+            java.lang.String r23,
+            long r24,
+            long r26) {
         /*
             r17 = this;
             r0 = r22
@@ -179,6 +227,9 @@ public class SystemBackupAgent extends BackupAgentHelper {
         Lb5:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.SystemBackupAgent.onRestoreFile(android.os.ParcelFileDescriptor, long, int, java.lang.String, java.lang.String, long, long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.SystemBackupAgent.onRestoreFile(android.os.ParcelFileDescriptor,"
+                    + " long, int, java.lang.String, java.lang.String, long, long):void");
     }
 }

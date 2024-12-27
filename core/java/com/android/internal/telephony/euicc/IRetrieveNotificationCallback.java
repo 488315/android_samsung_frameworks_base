@@ -9,14 +9,15 @@ import android.telephony.euicc.EuiccNotification;
 
 /* loaded from: classes5.dex */
 public interface IRetrieveNotificationCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.euicc.IRetrieveNotificationCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.euicc.IRetrieveNotificationCallback";
 
     void onComplete(int i, EuiccNotification euiccNotification) throws RemoteException;
 
     public static class Default implements IRetrieveNotificationCallback {
         @Override // com.android.internal.telephony.euicc.IRetrieveNotificationCallback
-        public void onComplete(int resultCode, EuiccNotification notification) throws RemoteException {
-        }
+        public void onComplete(int resultCode, EuiccNotification notification)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +25,7 @@ public interface IRetrieveNotificationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRetrieveNotificationCallback {
+    public abstract static class Stub extends Binder implements IRetrieveNotificationCallback {
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -62,7 +63,8 @@ public interface IRetrieveNotificationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRetrieveNotificationCallback.DESCRIPTOR);
             }
@@ -73,7 +75,8 @@ public interface IRetrieveNotificationCallback extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    EuiccNotification _arg1 = (EuiccNotification) data.readTypedObject(EuiccNotification.CREATOR);
+                    EuiccNotification _arg1 =
+                            (EuiccNotification) data.readTypedObject(EuiccNotification.CREATOR);
                     data.enforceNoDataAvail();
                     onComplete(_arg0, _arg1);
                     return true;
@@ -99,7 +102,8 @@ public interface IRetrieveNotificationCallback extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IRetrieveNotificationCallback
-            public void onComplete(int resultCode, EuiccNotification notification) throws RemoteException {
+            public void onComplete(int resultCode, EuiccNotification notification)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRetrieveNotificationCallback.DESCRIPTOR);

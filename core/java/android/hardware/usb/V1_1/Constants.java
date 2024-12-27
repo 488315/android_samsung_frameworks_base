@@ -13,7 +13,6 @@ public class Constants {
         public static final int NUM_MODES_1_1 = 16;
         public static final int UFP = 1;
 
-        public PortMode_1_1() {
-        }
+        public PortMode_1_1() {}
     }
 }

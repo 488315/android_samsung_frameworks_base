@@ -4,9 +4,12 @@ import android.content.res.Resources;
 import android.util.Log;
 import android.util.Slog;
 import android.view.HapticFeedbackConstants;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.asks.ASKSManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.vibrator.VibRune;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -137,14 +140,19 @@ public final class VibratorHelper {
             System.arraycopy(intArray2, i5, iArr, 0, length2);
         }
         if (iArr == null) {
-            iArr = new int[]{-1, -1};
+            iArr = new int[] {-1, -1};
         }
         patternInfo.engine = iArr;
         patternInfo.duration = i4 + 100;
         patternInfo.scale = 100;
         patternInfo.hybrid = i >= 10000 ? resources.getIntArray(i2) : null;
         this.mVibePatternHash.put(Integer.valueOf(i), patternInfo);
-        Log.v("VibratorManagerService", "mVibePatternHash.put(" + i + ", pattern), mVibePatternHash.size() : " + this.mVibePatternHash.size());
+        Log.v(
+                "VibratorManagerService",
+                "mVibePatternHash.put("
+                        + i
+                        + ", pattern), mVibePatternHash.size() : "
+                        + this.mVibePatternHash.size());
     }
 
     public final int[] getEngineData(int i) {
@@ -154,8 +162,13 @@ public final class VibratorHelper {
         if (patternInfo != null && (iArr = patternInfo.engine) != null) {
             return iArr;
         }
-        ASKSManagerService$$ExternalSyntheticOutline0.m(i, sepIndex, "getEngineData(), IndexOutOfBoundsException occurred, type:", ", index:", "VibratorManagerService");
-        return new int[]{-1, -1};
+        ASKSManagerService$$ExternalSyntheticOutline0.m(
+                i,
+                sepIndex,
+                "getEngineData(), IndexOutOfBoundsException occurred, type:",
+                ", index:",
+                "VibratorManagerService");
+        return new int[] {-1, -1};
     }
 
     public final int getIndexDuration(int i) {
@@ -173,13 +186,14 @@ public final class VibratorHelper {
         if (patternInfo != null && (jArr = patternInfo.pattern) != null) {
             return jArr;
         }
-        StringBuilder sb = new StringBuilder("getPatternByIndex(), index out of bound, mVibePatternHash:");
+        StringBuilder sb =
+                new StringBuilder("getPatternByIndex(), index out of bound, mVibePatternHash:");
         sb.append(this.mVibePatternHash.size());
         sb.append(", type:");
         sb.append(i);
         sb.append(", index:");
         DeviceIdleController$$ExternalSyntheticOutline0.m(sb, sepIndex, "VibratorManagerService");
-        return new long[]{-1, -1};
+        return new long[] {-1, -1};
     }
 
     public final int getPatternFrequencyByIndex(int i) {
@@ -188,12 +202,15 @@ public final class VibratorHelper {
         int sepIndex = getSepIndex(i);
         PatternInfo patternInfo = getPatternInfo(sepIndex);
         if (patternInfo == null || (i2 = patternInfo.frequency) == -1) {
-            StringBuilder sb = new StringBuilder("getPatternFrequencyByIndex(), index out of bound, mVibePatternHash:");
+            StringBuilder sb =
+                    new StringBuilder(
+                            "getPatternFrequencyByIndex(), index out of bound, mVibePatternHash:");
             sb.append(this.mVibePatternHash.size());
             sb.append(", type:");
             sb.append(i);
             sb.append(", index:");
-            DeviceIdleController$$ExternalSyntheticOutline0.m(sb, sepIndex, "VibratorManagerService");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    sb, sepIndex, "VibratorManagerService");
             num = null;
         } else {
             num = Integer.valueOf(i2);
@@ -215,7 +232,9 @@ public final class VibratorHelper {
         CommonPatternInfo[] commonPatternInfoArr = new CommonPatternInfo[length];
         for (int i2 = 0; i2 < length; i2++) {
             int i3 = i2 * 4;
-            commonPatternInfoArr[i2] = new CommonPatternInfo(82, 0, engineData[i3 + 2], engineData[i3 + 1], engineData[i3 + 3]);
+            commonPatternInfoArr[i2] =
+                    new CommonPatternInfo(
+                            82, 0, engineData[i3 + 2], engineData[i3 + 1], engineData[i3 + 3]);
         }
         return commonPatternInfoArr;
     }

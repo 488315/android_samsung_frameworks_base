@@ -1,13 +1,12 @@
 package android.gsi;
 
-import android.gsi.IGsiServiceCallback;
-import android.gsi.IImageService;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -50,7 +49,8 @@ public interface IGsiService extends IInterface {
         }
 
         @Override // android.gsi.IGsiService
-        public boolean commitGsiChunkFromStream(ParcelFileDescriptor parcelFileDescriptor, long j) throws RemoteException {
+        public boolean commitGsiChunkFromStream(ParcelFileDescriptor parcelFileDescriptor, long j)
+                throws RemoteException {
             return false;
         }
 
@@ -75,8 +75,8 @@ public interface IGsiService extends IInterface {
         }
 
         @Override // android.gsi.IGsiService
-        public void enableGsiAsync(boolean z, String str, IGsiServiceCallback iGsiServiceCallback) throws RemoteException {
-        }
+        public void enableGsiAsync(boolean z, String str, IGsiServiceCallback iGsiServiceCallback)
+                throws RemoteException {}
 
         @Override // android.gsi.IGsiService
         public String getActiveDsuSlot() throws RemoteException {
@@ -139,11 +139,12 @@ public interface IGsiService extends IInterface {
         }
 
         @Override // android.gsi.IGsiService
-        public void removeGsiAsync(IGsiServiceCallback iGsiServiceCallback) throws RemoteException {
-        }
+        public void removeGsiAsync(IGsiServiceCallback iGsiServiceCallback)
+                throws RemoteException {}
 
         @Override // android.gsi.IGsiService
-        public boolean setGsiAshmem(ParcelFileDescriptor parcelFileDescriptor, long j) throws RemoteException {
+        public boolean setGsiAshmem(ParcelFileDescriptor parcelFileDescriptor, long j)
+                throws RemoteException {
             return false;
         }
 
@@ -258,7 +259,8 @@ public interface IGsiService extends IInterface {
             }
 
             @Override // android.gsi.IGsiService
-            public final boolean commitGsiChunkFromStream(ParcelFileDescriptor parcelFileDescriptor, long j) {
+            public final boolean commitGsiChunkFromStream(
+                    ParcelFileDescriptor parcelFileDescriptor, long j) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -340,7 +342,8 @@ public interface IGsiService extends IInterface {
             }
 
             @Override // android.gsi.IGsiService
-            public final void enableGsiAsync(boolean z, String str, IGsiServiceCallback iGsiServiceCallback) {
+            public final void enableGsiAsync(
+                    boolean z, String str, IGsiServiceCallback iGsiServiceCallback) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 try {
                     obtain.writeInterfaceToken(IGsiService.DESCRIPTOR);
@@ -623,7 +626,8 @@ public interface IGsiService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(IGsiService.DESCRIPTOR);
             }
@@ -633,10 +637,13 @@ public interface IGsiService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor parcelFileDescriptor =
+                            (ParcelFileDescriptor)
+                                    parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long readLong = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    boolean commitGsiChunkFromStream = commitGsiChunkFromStream(parcelFileDescriptor, readLong);
+                    boolean commitGsiChunkFromStream =
+                            commitGsiChunkFromStream(parcelFileDescriptor, readLong);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(commitGsiChunkFromStream);
                     return true;
@@ -646,7 +653,9 @@ public interface IGsiService extends IInterface {
                     parcel2.writeTypedObject(installProgress, 1);
                     return true;
                 case 3:
-                    ParcelFileDescriptor parcelFileDescriptor2 = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor parcelFileDescriptor2 =
+                            (ParcelFileDescriptor)
+                                    parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long readLong2 = parcel.readLong();
                     parcel.enforceNoDataAvail();
                     boolean gsiAshmem = setGsiAshmem(parcelFileDescriptor2, readLong2);
@@ -671,7 +680,8 @@ public interface IGsiService extends IInterface {
                 case 6:
                     boolean readBoolean2 = parcel.readBoolean();
                     String readString2 = parcel.readString();
-                    IGsiServiceCallback asInterface = IGsiServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IGsiServiceCallback asInterface =
+                            IGsiServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
                     enableGsiAsync(readBoolean2, readString2, asInterface);
                     return true;
@@ -696,7 +706,8 @@ public interface IGsiService extends IInterface {
                     parcel2.writeBoolean(removeGsi);
                     return true;
                 case 11:
-                    IGsiServiceCallback asInterface2 = IGsiServiceCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IGsiServiceCallback asInterface2 =
+                            IGsiServiceCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
                     removeGsiAsync(asInterface2);
                     return true;
@@ -802,7 +813,8 @@ public interface IGsiService extends IInterface {
 
     boolean commitGsiChunkFromAshmem(long j) throws RemoteException;
 
-    boolean commitGsiChunkFromStream(ParcelFileDescriptor parcelFileDescriptor, long j) throws RemoteException;
+    boolean commitGsiChunkFromStream(ParcelFileDescriptor parcelFileDescriptor, long j)
+            throws RemoteException;
 
     int createPartition(String str, long j, boolean z) throws RemoteException;
 
@@ -812,7 +824,8 @@ public interface IGsiService extends IInterface {
 
     int enableGsi(boolean z, String str) throws RemoteException;
 
-    void enableGsiAsync(boolean z, String str, IGsiServiceCallback iGsiServiceCallback) throws RemoteException;
+    void enableGsiAsync(boolean z, String str, IGsiServiceCallback iGsiServiceCallback)
+            throws RemoteException;
 
     String getActiveDsuSlot() throws RemoteException;
 

@@ -2,8 +2,11 @@ package com.android.server.sepunion.eventdelegator;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+
 import com.android.server.sepunion.SemDeviceInfoManagerService;
+
 import com.samsung.android.sepunion.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,9 +39,11 @@ public final class UnionEventListenerItem {
             if (!it.hasNext()) {
                 break;
             }
-            PendingIntentWithConditions pendingIntentWithConditions2 = (PendingIntentWithConditions) it.next();
+            PendingIntentWithConditions pendingIntentWithConditions2 =
+                    (PendingIntentWithConditions) it.next();
             if (pendingIntentWithConditions2.mPendingIntent.getIntent().filterEquals(intent)) {
-                if (pendingIntentWithConditions2.mPendingIntent.getTarget() == pendingIntentWithConditions.mPendingIntent.getTarget()) {
+                if (pendingIntentWithConditions2.mPendingIntent.getTarget()
+                        == pendingIntentWithConditions.mPendingIntent.getTarget()) {
                     Log.d(str2, "Same PendingIntent is in " + str);
                     return false;
                 }
@@ -54,7 +59,8 @@ public final class UnionEventListenerItem {
     }
 
     public final void remove(String str, PendingIntent pendingIntent) {
-        PendingIntentWithConditions pendingIntentWithConditions = new PendingIntentWithConditions(pendingIntent, 0, null);
+        PendingIntentWithConditions pendingIntentWithConditions =
+                new PendingIntentWithConditions(pendingIntent, 0, null);
         ArrayList arrayList = (ArrayList) this.mUnionEventComponentsWithConditions.get(str);
         if (arrayList == null) {
             Log.d(TAG, "No item for the calling package in the component list.");
@@ -81,7 +87,8 @@ public final class UnionEventListenerItem {
             sb.append(arrayList.size());
             Iterator it = arrayList.iterator();
             while (it.hasNext()) {
-                PendingIntentWithConditions pendingIntentWithConditions = (PendingIntentWithConditions) it.next();
+                PendingIntentWithConditions pendingIntentWithConditions =
+                        (PendingIntentWithConditions) it.next();
                 sb.append("\n     - ");
                 sb.append(pendingIntentWithConditions.mPendingIntent + ", ");
                 sb.append(pendingIntentWithConditions.mFlag + ", ");
@@ -101,7 +108,8 @@ public final class UnionEventListenerItem {
             sb.append(str + " (" + arrayList.size() + ")");
             Iterator it = arrayList.iterator();
             while (it.hasNext()) {
-                PendingIntentWithConditions pendingIntentWithConditions = (PendingIntentWithConditions) it.next();
+                PendingIntentWithConditions pendingIntentWithConditions =
+                        (PendingIntentWithConditions) it.next();
                 sb.append("\n            ");
                 sb.append(pendingIntentWithConditions.mPendingIntent + ", ");
                 sb.append(pendingIntentWithConditions.mFlag + ", ");

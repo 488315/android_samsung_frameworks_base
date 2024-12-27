@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.util.io.pem;
 
 import com.android.internal.org.bouncycastle.util.encoders.Base64;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -23,7 +24,10 @@ public class PemReader extends BufferedReader {
         while (line2 != null && !line2.startsWith(BEGIN)) {
             line2 = readLine();
         }
-        if (line2 != null && (index = (line = line2.substring(BEGIN.length())).indexOf(45)) > 0 && line.endsWith("-----") && line.length() - index == 5) {
+        if (line2 != null
+                && (index = (line = line2.substring(BEGIN.length())).indexOf(45)) > 0
+                && line.endsWith("-----")
+                && line.length() - index == 5) {
             String type = line.substring(0, index);
             return loadObject(type);
         }

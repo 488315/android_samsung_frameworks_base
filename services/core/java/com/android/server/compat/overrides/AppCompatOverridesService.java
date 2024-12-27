@@ -14,12 +14,14 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.KeyValueListParser;
 import android.util.Slog;
+
 import com.android.internal.compat.CompatibilityOverrideConfig;
 import com.android.internal.compat.CompatibilityOverridesByPackageConfig;
 import com.android.internal.compat.CompatibilityOverridesToRemoveByPackageConfig;
 import com.android.internal.compat.CompatibilityOverridesToRemoveConfig;
 import com.android.internal.compat.IPlatformCompat;
 import com.android.server.SystemService;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -55,24 +57,33 @@ public final class AppCompatOverridesService {
             boolean contains = properties.getKeyset().contains("remove_overrides");
             boolean contains2 = properties.getKeyset().contains("owned_change_ids");
             Set ownedChangeIds = AppCompatOverridesService.getOwnedChangeIds(this.mNamespace);
-            Map overridesToRemove = AppCompatOverridesService.this.getOverridesToRemove(this.mNamespace, ownedChangeIds);
+            Map overridesToRemove =
+                    AppCompatOverridesService.this.getOverridesToRemove(
+                            this.mNamespace, ownedChangeIds);
             if (contains || contains2) {
-                AppCompatOverridesService appCompatOverridesService = AppCompatOverridesService.this;
+                AppCompatOverridesService appCompatOverridesService =
+                        AppCompatOverridesService.this;
                 appCompatOverridesService.getClass();
                 ArrayMap arrayMap = new ArrayMap();
                 for (Map.Entry entry : overridesToRemove.entrySet()) {
-                    arrayMap.put((String) entry.getKey(), new CompatibilityOverridesToRemoveConfig((Set) entry.getValue()));
+                    arrayMap.put(
+                            (String) entry.getKey(),
+                            new CompatibilityOverridesToRemoveConfig((Set) entry.getValue()));
                 }
                 appCompatOverridesService.removeAllPackageOverrides(arrayMap);
             }
             if (!contains) {
-                AppCompatOverridesService.this.applyOverrides(properties, ownedChangeIds, overridesToRemove);
+                AppCompatOverridesService.this.applyOverrides(
+                        properties, ownedChangeIds, overridesToRemove);
                 return;
             }
             AppCompatOverridesService appCompatOverridesService2 = AppCompatOverridesService.this;
             String str = this.mNamespace;
             appCompatOverridesService2.getClass();
-            appCompatOverridesService2.applyOverrides(DeviceConfig.getProperties(str, new String[0]), ownedChangeIds, overridesToRemove);
+            appCompatOverridesService2.applyOverrides(
+                    DeviceConfig.getProperties(str, new String[0]),
+                    ownedChangeIds,
+                    overridesToRemove);
         }
     }
 
@@ -86,7 +97,12 @@ public final class AppCompatOverridesService {
 
         @Override // com.android.server.SystemService
         public final void onStart() {
-            AppCompatOverridesService appCompatOverridesService = new AppCompatOverridesService(getContext(), IPlatformCompat.Stub.asInterface(ServiceManager.getService("platform_compat")), AppCompatOverridesService.SUPPORTED_NAMESPACES);
+            AppCompatOverridesService appCompatOverridesService =
+                    new AppCompatOverridesService(
+                            getContext(),
+                            IPlatformCompat.Stub.asInterface(
+                                    ServiceManager.getService("platform_compat")),
+                            AppCompatOverridesService.SUPPORTED_NAMESPACES);
             this.mService = appCompatOverridesService;
             appCompatOverridesService.registerDeviceConfigListeners();
             this.mService.registerPackageReceiver();
@@ -112,7 +128,9 @@ public final class AppCompatOverridesService {
         public final void onReceive(Context context, Intent intent) {
             Uri data = intent.getData();
             if (data == null) {
-                Slog.w("AppCompatOverridesService", "Failed to get package name in package receiver");
+                Slog.w(
+                        "AppCompatOverridesService",
+                        "Failed to get package name in package receiver");
             }
             String schemeSpecificPart = data.getSchemeSpecificPart();
             String action = intent.getAction();
@@ -123,17 +141,41 @@ public final class AppCompatOverridesService {
             switch (action) {
                 case "android.intent.action.PACKAGE_CHANGED":
                 case "android.intent.action.PACKAGE_ADDED":
-                    AppCompatOverridesService appCompatOverridesService = AppCompatOverridesService.this;
-                    Long versionCodeOrNull = appCompatOverridesService.getVersionCodeOrNull(schemeSpecificPart);
+                    AppCompatOverridesService appCompatOverridesService =
+                            AppCompatOverridesService.this;
+                    Long versionCodeOrNull =
+                            appCompatOverridesService.getVersionCodeOrNull(schemeSpecificPart);
                     if (versionCodeOrNull != null) {
                         for (String str : appCompatOverridesService.mSupportedNamespaces) {
                             Set ownedChangeIds = AppCompatOverridesService.getOwnedChangeIds(str);
-                            Map parsePackageOverrides = appCompatOverridesService.mOverridesParser.parsePackageOverrides(DeviceConfig.getString(str, schemeSpecificPart, ""), schemeSpecificPart, versionCodeOrNull.longValue(), (Set) appCompatOverridesService.getOverridesToRemove(str, ownedChangeIds).getOrDefault(schemeSpecificPart, Collections.emptySet()));
+                            Map parsePackageOverrides =
+                                    appCompatOverridesService.mOverridesParser
+                                            .parsePackageOverrides(
+                                                    DeviceConfig.getString(
+                                                            str, schemeSpecificPart, ""),
+                                                    schemeSpecificPart,
+                                                    versionCodeOrNull.longValue(),
+                                                    (Set)
+                                                            appCompatOverridesService
+                                                                    .getOverridesToRemove(
+                                                                            str, ownedChangeIds)
+                                                                    .getOrDefault(
+                                                                            schemeSpecificPart,
+                                                                            Collections
+                                                                                    .emptySet()));
                             if (!parsePackageOverrides.isEmpty()) {
                                 try {
-                                    appCompatOverridesService.mPlatformCompat.putOverridesOnReleaseBuilds(new CompatibilityOverrideConfig(parsePackageOverrides), schemeSpecificPart);
+                                    appCompatOverridesService.mPlatformCompat
+                                            .putOverridesOnReleaseBuilds(
+                                                    new CompatibilityOverrideConfig(
+                                                            parsePackageOverrides),
+                                                    schemeSpecificPart);
                                 } catch (RemoteException e) {
-                                    Slog.e("AppCompatOverridesService", "Failed to call IPlatformCompat#putOverridesOnReleaseBuilds", e);
+                                    Slog.e(
+                                            "AppCompatOverridesService",
+                                            "Failed to call"
+                                                + " IPlatformCompat#putOverridesOnReleaseBuilds",
+                                            e);
                                 }
                             }
                         }
@@ -141,16 +183,27 @@ public final class AppCompatOverridesService {
                     }
                     break;
                 case "android.intent.action.PACKAGE_REMOVED":
-                    if (AppCompatOverridesService.this.getVersionCodeOrNull(schemeSpecificPart) == null) {
-                        AppCompatOverridesService appCompatOverridesService2 = AppCompatOverridesService.this;
+                    if (AppCompatOverridesService.this.getVersionCodeOrNull(schemeSpecificPart)
+                            == null) {
+                        AppCompatOverridesService appCompatOverridesService2 =
+                                AppCompatOverridesService.this;
                         for (String str2 : appCompatOverridesService2.mSupportedNamespaces) {
                             if (!DeviceConfig.getString(str2, schemeSpecificPart, "").isEmpty()) {
-                                Set ownedChangeIds2 = AppCompatOverridesService.getOwnedChangeIds(str2);
+                                Set ownedChangeIds2 =
+                                        AppCompatOverridesService.getOwnedChangeIds(str2);
                                 if (!ownedChangeIds2.isEmpty()) {
                                     try {
-                                        appCompatOverridesService2.mPlatformCompat.removeOverridesOnReleaseBuilds(new CompatibilityOverridesToRemoveConfig(ownedChangeIds2), schemeSpecificPart);
+                                        appCompatOverridesService2.mPlatformCompat
+                                                .removeOverridesOnReleaseBuilds(
+                                                        new CompatibilityOverridesToRemoveConfig(
+                                                                ownedChangeIds2),
+                                                        schemeSpecificPart);
                                     } catch (RemoteException e2) {
-                                        Slog.e("AppCompatOverridesService", "Failed to call IPlatformCompat#removeOverridesOnReleaseBuilds", e2);
+                                        Slog.e(
+                                                "AppCompatOverridesService",
+                                                "Failed to call"
+                                                    + " IPlatformCompat#removeOverridesOnReleaseBuilds",
+                                                e2);
                                     }
                                 }
                             }
@@ -159,7 +212,9 @@ public final class AppCompatOverridesService {
                     }
                     break;
                 default:
-                    Slog.w("AppCompatOverridesService", "Unsupported action in package receiver: ".concat(action));
+                    Slog.w(
+                            "AppCompatOverridesService",
+                            "Unsupported action in package receiver: ".concat(action));
                     break;
             }
         }
@@ -177,7 +232,8 @@ public final class AppCompatOverridesService {
         Iterator it = list.iterator();
         while (it.hasNext()) {
             String str = (String) it.next();
-            ((ArrayList) this.mDeviceConfigListeners).add(new DeviceConfigListener(this.mContext, str));
+            ((ArrayList) this.mDeviceConfigListeners)
+                    .add(new DeviceConfigListener(this.mContext, str));
         }
     }
 
@@ -192,7 +248,10 @@ public final class AppCompatOverridesService {
             try {
                 arraySet.add(Long.valueOf(Long.parseLong(str2)));
             } catch (NumberFormatException e) {
-                Slog.w("AppCompatOverridesParser", "Invalid change ID in 'owned_change_ids' flag: " + str2, e);
+                Slog.w(
+                        "AppCompatOverridesParser",
+                        "Invalid change ID in 'owned_change_ids' flag: " + str2,
+                        e);
             }
         }
         return arraySet;
@@ -211,7 +270,12 @@ public final class AppCompatOverridesService {
             Map emptyMap = Collections.emptyMap();
             Long versionCodeOrNull = getVersionCodeOrNull(str);
             if (versionCodeOrNull != null) {
-                emptyMap = this.mOverridesParser.parsePackageOverrides(properties.getString(str, ""), str, versionCodeOrNull.longValue(), set2);
+                emptyMap =
+                        this.mOverridesParser.parsePackageOverrides(
+                                properties.getString(str, ""),
+                                str,
+                                versionCodeOrNull.longValue(),
+                                set2);
             }
             if (!emptyMap.isEmpty()) {
                 arrayMap.put(str, new CompatibilityOverrideConfig(emptyMap));
@@ -230,9 +294,13 @@ public final class AppCompatOverridesService {
         }
         if (!arrayMap.isEmpty()) {
             try {
-                this.mPlatformCompat.putAllOverridesOnReleaseBuilds(new CompatibilityOverridesByPackageConfig(arrayMap));
+                this.mPlatformCompat.putAllOverridesOnReleaseBuilds(
+                        new CompatibilityOverridesByPackageConfig(arrayMap));
             } catch (RemoteException e) {
-                Slog.e("AppCompatOverridesService", "Failed to call IPlatformCompat#putAllOverridesOnReleaseBuilds", e);
+                Slog.e(
+                        "AppCompatOverridesService",
+                        "Failed to call IPlatformCompat#putAllOverridesOnReleaseBuilds",
+                        e);
             }
         }
         removeAllPackageOverrides(arrayMap2);
@@ -267,27 +335,47 @@ public final class AppCompatOverridesService {
                     if (!string2.equals("*")) {
                         for (String str2 : string2.split(":")) {
                             try {
-                                ((Set) arrayMap.computeIfAbsent(keyAt, new AppCompatOverridesParser$$ExternalSyntheticLambda0())).add(Long.valueOf(Long.parseLong(str2)));
+                                ((Set)
+                                                arrayMap.computeIfAbsent(
+                                                        keyAt,
+                                                        new AppCompatOverridesParser$$ExternalSyntheticLambda0()))
+                                        .add(Long.valueOf(Long.parseLong(str2)));
                             } catch (NumberFormatException e) {
-                                Slog.w("AppCompatOverridesParser", "Invalid change ID in 'remove_overrides' flag: " + str2, e);
+                                Slog.w(
+                                        "AppCompatOverridesParser",
+                                        "Invalid change ID in 'remove_overrides' flag: " + str2,
+                                        e);
                             }
                         }
                     } else if (set.isEmpty()) {
-                        Slog.w("AppCompatOverridesParser", "Wildcard can't be used in 'remove_overrides' flag with an empty owned_change_ids' flag");
+                        Slog.w(
+                                "AppCompatOverridesParser",
+                                "Wildcard can't be used in 'remove_overrides' flag with an empty"
+                                    + " owned_change_ids' flag");
                     } else {
                         arrayMap.put(keyAt, set);
                     }
                 }
             } catch (IllegalArgumentException e2) {
-                Slog.w("AppCompatOverridesParser", "Invalid format in 'remove_overrides' flag: ".concat(string), e2);
+                Slog.w(
+                        "AppCompatOverridesParser",
+                        "Invalid format in 'remove_overrides' flag: ".concat(string),
+                        e2);
                 return Collections.emptyMap();
             }
         } else {
             if (set.isEmpty()) {
-                Slog.w("AppCompatOverridesParser", "Wildcard can't be used in 'remove_overrides' flag with an empty owned_change_ids' flag");
+                Slog.w(
+                        "AppCompatOverridesParser",
+                        "Wildcard can't be used in 'remove_overrides' flag with an empty"
+                            + " owned_change_ids' flag");
                 return Collections.emptyMap();
             }
-            Iterator<ApplicationInfo> it = appCompatOverridesParser.mPackageManager.getInstalledApplications(4194304).iterator();
+            Iterator<ApplicationInfo> it =
+                    appCompatOverridesParser
+                            .mPackageManager
+                            .getInstalledApplications(4194304)
+                            .iterator();
             while (it.hasNext()) {
                 arrayMap.put(it.next().packageName, set);
             }
@@ -297,7 +385,8 @@ public final class AppCompatOverridesService {
 
     public final Long getVersionCodeOrNull(String str) {
         try {
-            return Long.valueOf(this.mPackageManager.getApplicationInfo(str, 4194304).longVersionCode);
+            return Long.valueOf(
+                    this.mPackageManager.getApplicationInfo(str, 4194304).longVersionCode);
         } catch (PackageManager.NameNotFoundException unused) {
             return null;
         }
@@ -307,13 +396,17 @@ public final class AppCompatOverridesService {
         Iterator it = ((ArrayList) this.mDeviceConfigListeners).iterator();
         while (it.hasNext()) {
             DeviceConfigListener deviceConfigListener = (DeviceConfigListener) it.next();
-            DeviceConfig.addOnPropertiesChangedListener(deviceConfigListener.mNamespace, deviceConfigListener.mContext.getMainExecutor(), deviceConfigListener);
+            DeviceConfig.addOnPropertiesChangedListener(
+                    deviceConfigListener.mNamespace,
+                    deviceConfigListener.mContext.getMainExecutor(),
+                    deviceConfigListener);
         }
     }
 
     public void registerPackageReceiver() {
         PackageReceiver packageReceiver = this.mPackageReceiver;
-        packageReceiver.mContext.registerReceiverForAllUsers(packageReceiver, packageReceiver.mIntentFilter, null, null);
+        packageReceiver.mContext.registerReceiverForAllUsers(
+                packageReceiver, packageReceiver.mIntentFilter, null, null);
     }
 
     public final void removeAllPackageOverrides(Map map) {
@@ -321,9 +414,13 @@ public final class AppCompatOverridesService {
             return;
         }
         try {
-            this.mPlatformCompat.removeAllOverridesOnReleaseBuilds(new CompatibilityOverridesToRemoveByPackageConfig(map));
+            this.mPlatformCompat.removeAllOverridesOnReleaseBuilds(
+                    new CompatibilityOverridesToRemoveByPackageConfig(map));
         } catch (RemoteException e) {
-            Slog.e("AppCompatOverridesService", "Failed to call IPlatformCompat#removeAllOverridesOnReleaseBuilds", e);
+            Slog.e(
+                    "AppCompatOverridesService",
+                    "Failed to call IPlatformCompat#removeAllOverridesOnReleaseBuilds",
+                    e);
         }
     }
 }

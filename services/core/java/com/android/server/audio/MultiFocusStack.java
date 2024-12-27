@@ -1,7 +1,9 @@
 package com.android.server.audio;
 
 import android.util.SparseArray;
+
 import com.android.server.appwidget.AppWidgetXmlUtil$$ExternalSyntheticLambda1;
+
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.function.Predicate;
@@ -19,13 +21,23 @@ public final class MultiFocusStack extends SparseArray {
                 break;
             }
             Stack stack = (Stack) valueAt(i2);
-            focusRequester = (FocusRequester) stack.stream().filter(new Predicate() { // from class: com.android.server.audio.MultiFocusStack$$ExternalSyntheticLambda1
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    FocusRequester focusRequester2 = (FocusRequester) obj;
-                    return focusRequester2.mCallingUid == i && focusRequester2.mClientId.equals(str);
-                }
-            }).findFirst().orElse(null);
+            focusRequester =
+                    (FocusRequester)
+                            stack.stream()
+                                    .filter(
+                                            new Predicate() { // from class:
+                                                              // com.android.server.audio.MultiFocusStack$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.Predicate
+                                                public final boolean test(Object obj) {
+                                                    FocusRequester focusRequester2 =
+                                                            (FocusRequester) obj;
+                                                    return focusRequester2.mCallingUid == i
+                                                            && focusRequester2.mClientId.equals(
+                                                                    str);
+                                                }
+                                            })
+                                    .findFirst()
+                                    .orElse(null);
             if (focusRequester == null) {
                 i2++;
             } else if (z) {
@@ -39,12 +51,20 @@ public final class MultiFocusStack extends SparseArray {
         ArrayList arrayList = new ArrayList();
         for (int i2 = 0; i2 < size(); i2++) {
             Stack stack = (Stack) valueAt(i2);
-            ArrayList arrayList2 = (ArrayList) stack.stream().filter(new Predicate() { // from class: com.android.server.audio.MultiFocusStack$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return ((FocusRequester) obj).mCallingUid == i;
-                }
-            }).collect(Collectors.toCollection(new AppWidgetXmlUtil$$ExternalSyntheticLambda1()));
+            ArrayList arrayList2 =
+                    (ArrayList)
+                            stack.stream()
+                                    .filter(
+                                            new Predicate() { // from class:
+                                                              // com.android.server.audio.MultiFocusStack$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Predicate
+                                                public final boolean test(Object obj) {
+                                                    return ((FocusRequester) obj).mCallingUid == i;
+                                                }
+                                            })
+                                    .collect(
+                                            Collectors.toCollection(
+                                                    new AppWidgetXmlUtil$$ExternalSyntheticLambda1()));
             arrayList.addAll(arrayList2);
             if (z) {
                 stack.removeAll(arrayList2);

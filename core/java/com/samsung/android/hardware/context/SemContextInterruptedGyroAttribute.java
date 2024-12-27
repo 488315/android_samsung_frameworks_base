@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextInterruptedGyroAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextInterruptedGyroAttribute> CREATOR = new Parcelable.Creator<SemContextInterruptedGyroAttribute>() { // from class: com.samsung.android.hardware.context.SemContextInterruptedGyroAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextInterruptedGyroAttribute createFromParcel(Parcel in) {
-            return new SemContextInterruptedGyroAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextInterruptedGyroAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextInterruptedGyroAttribute>() { // from class:
+                                                            // com.samsung.android.hardware.context.SemContextInterruptedGyroAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextInterruptedGyroAttribute createFromParcel(Parcel in) {
+                    return new SemContextInterruptedGyroAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextInterruptedGyroAttribute[] newArray(int size) {
-            return new SemContextInterruptedGyroAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextInterruptedGyroAttribute[] newArray(int size) {
+                    return new SemContextInterruptedGyroAttribute[size];
+                }
+            };
     public static final int INTERRUPTED_GYRO_DISABLE_SYSFS_NODE = 0;
     public static final int INTERRUPTED_GYRO_ENABLE_SYSFS_NODE = 1;
     private static final String TAG = "SemContextInterruptedGyroAttribute";

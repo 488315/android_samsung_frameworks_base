@@ -8,9 +8,10 @@ import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.storage.IStorageManager;
 import android.os.storage.StorageManager;
-import com.android.server.am.UserController;
+
 import com.android.server.utils.Slogf;
 import com.android.server.utils.TimingsTraceAndSlog;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,7 +22,8 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda2 impl
     public final /* synthetic */ int f$1;
     public final /* synthetic */ Object f$2;
 
-    public /* synthetic */ UserController$$ExternalSyntheticLambda2(UserController userController, int i, Object obj, int i2) {
+    public /* synthetic */ UserController$$ExternalSyntheticLambda2(
+            UserController userController, int i, Object obj, int i2) {
         this.$r8$classId = i2;
         this.f$0 = userController;
         this.f$1 = i;
@@ -40,7 +42,9 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda2 impl
                 intent.addFlags(1073741824);
                 intent.putExtra("android.intent.extra.user_handle", i);
                 intent.putExtra("android.intent.extra.SHUTDOWN_USERSPACE_ONLY", true);
-                IIntentReceiver anonymousClass5 = new UserController.AnonymousClass5(i, (UserController$$ExternalSyntheticLambda1) runnable);
+                IIntentReceiver anonymousClass5 =
+                        new UserController.AnonymousClass5(
+                                i, (UserController$$ExternalSyntheticLambda1) runnable);
                 TimingsTraceAndSlog timingsTraceAndSlog = new TimingsTraceAndSlog();
                 timingsTraceAndSlog.traceBegin("clearBroadcastQueueForUser-" + i + "-[stopUser]");
                 UserController.Injector injector = userController.mInjector;
@@ -48,7 +52,8 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda2 impl
                 ActivityManagerService.boostPriorityForLockedSection();
                 synchronized (activityManagerService) {
                     try {
-                        injector.mService.mBroadcastQueue.cleanupDisabledPackageReceiversLocked(i, null, null);
+                        injector.mService.mBroadcastQueue.cleanupDisabledPackageReceiversLocked(
+                                i, null, null);
                     } catch (Throwable th) {
                         ActivityManagerService.resetPriorityAfterLockedSection();
                         throw th;
@@ -56,8 +61,17 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda2 impl
                 }
                 ActivityManagerService.resetPriorityAfterLockedSection();
                 timingsTraceAndSlog.traceEnd();
-                UserController.asyncTraceBegin(i, "broadcast-ACTION_USER_STOPPING-" + i + "-[stopUser]");
-                userController.mInjector.broadcastIntent(intent, anonymousClass5, new String[]{"android.permission.INTERACT_ACROSS_USERS"}, null, ActivityManagerService.MY_PID, Binder.getCallingUid(), Binder.getCallingPid(), -1);
+                UserController.asyncTraceBegin(
+                        i, "broadcast-ACTION_USER_STOPPING-" + i + "-[stopUser]");
+                userController.mInjector.broadcastIntent(
+                        intent,
+                        anonymousClass5,
+                        new String[] {"android.permission.INTERACT_ACROSS_USERS"},
+                        null,
+                        ActivityManagerService.MY_PID,
+                        Binder.getCallingUid(),
+                        Binder.getCallingPid(),
+                        -1);
                 return;
             case 1:
                 UserController userController2 = this.f$0;
@@ -72,13 +86,20 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda2 impl
                         try {
                             Slogf.i("ActivityManager", "Locking CE storage for user #" + i2);
                             userController2.mInjector.getClass();
-                            IStorageManager.Stub.asInterface(ServiceManager.getService("mount")).lockCeStorage(i2);
+                            IStorageManager.Stub.asInterface(ServiceManager.getService("mount"))
+                                    .lockCeStorage(i2);
                             if (list == null) {
                                 return;
                             }
                             for (int i3 = 0; i3 < list.size(); i3++) {
-                                UserController.AnonymousClass4 anonymousClass4 = (UserController.AnonymousClass4) list.get(i3);
-                                UserController.this.mHandler.post(new UserController$$ExternalSyntheticLambda6(i2, anonymousClass4.val$userStartMode, 1, anonymousClass4));
+                                UserController.AnonymousClass4 anonymousClass4 =
+                                        (UserController.AnonymousClass4) list.get(i3);
+                                UserController.this.mHandler.post(
+                                        new UserController$$ExternalSyntheticLambda6(
+                                                i2,
+                                                anonymousClass4.val$userStartMode,
+                                                1,
+                                                anonymousClass4));
                             }
                             return;
                         } catch (RemoteException e) {
@@ -93,23 +114,46 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda2 impl
                 UserState userState = (UserState) this.f$2;
                 userController3.getClass();
                 if (!StorageManager.isCeStorageUnlocked(i4)) {
-                    Slogf.w("ActivityManager", "User's CE storage got locked unexpectedly, leaving user locked.");
+                    Slogf.w(
+                            "ActivityManager",
+                            "User's CE storage got locked unexpectedly, leaving user locked.");
                     return;
                 }
-                UserController.showEventLog(i4, userState.state, 1, "finishUserUnlocking", "Start getUserManager().onBeforeUnlockUser");
+                UserController.showEventLog(
+                        i4,
+                        userState.state,
+                        1,
+                        "finishUserUnlocking",
+                        "Start getUserManager().onBeforeUnlockUser");
                 TimingsTraceAndSlog timingsTraceAndSlog2 = new TimingsTraceAndSlog();
                 timingsTraceAndSlog2.traceBegin("UM.onBeforeUnlockUser-" + i4);
                 userController3.mInjector.getUserManager().onBeforeUnlockUser(i4);
                 timingsTraceAndSlog2.traceEnd();
-                UserController.showEventLog(i4, userState.state, 1, "finishUserUnlocking", "End getUserManager().onBeforeUnlockUser");
+                UserController.showEventLog(
+                        i4,
+                        userState.state,
+                        1,
+                        "finishUserUnlocking",
+                        "End getUserManager().onBeforeUnlockUser");
                 synchronized (userController3.mLock) {
                     try {
                         if (userState.setState(1, 2)) {
-                            userController3.mInjector.getUserManagerInternal().setUserState(i4, userState.state);
+                            userController3
+                                    .mInjector
+                                    .getUserManagerInternal()
+                                    .setUserState(i4, userState.state);
                             userState.mUnlockProgress.setProgress(20);
                             userController3.mLastUserUnlockingUptime = SystemClock.uptimeMillis();
-                            userController3.mHandler.obtainMessage(100, i4, 0, userState).sendToTarget();
-                            UserController.showEventLog(i4, userState.state, 1, "finishUserUnlocking", "sendToTarget USER_UNLOCK_MSG");
+                            userController3
+                                    .mHandler
+                                    .obtainMessage(100, i4, 0, userState)
+                                    .sendToTarget();
+                            UserController.showEventLog(
+                                    i4,
+                                    userState.state,
+                                    1,
+                                    "finishUserUnlocking",
+                                    "sendToTarget USER_UNLOCK_MSG");
                         }
                     } finally {
                     }

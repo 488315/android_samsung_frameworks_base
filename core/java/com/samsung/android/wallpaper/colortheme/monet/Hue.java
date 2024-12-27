@@ -1,7 +1,9 @@
 package com.samsung.android.wallpaper.colortheme.monet;
 
 import android.util.Pair;
+
 import com.android.internal.graphics.cam.Cam;
+
 import java.util.List;
 
 /* compiled from: ColorScheme.java */
@@ -23,7 +25,9 @@ interface Hue {
                 float thisHue = ((Number) hueAndRotations.get(i).first).intValue();
                 float nextHue = ((Number) hueAndRotations.get(i + 1).first).intValue();
                 if (thisHue <= sanitizedSourceHue && sanitizedSourceHue < nextHue) {
-                    return ColorScheme.wrapDegreesDouble(sanitizedSourceHue + ((Number) hueAndRotations.get(i).second).doubleValue());
+                    return ColorScheme.wrapDegreesDouble(
+                            sanitizedSourceHue
+                                    + ((Number) hueAndRotations.get(i).second).doubleValue());
                 }
                 if (i == var5) {
                     break;

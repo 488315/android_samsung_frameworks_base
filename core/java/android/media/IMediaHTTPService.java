@@ -1,6 +1,5 @@
 package android.media;
 
-import android.media.IMediaHTTPConnection;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -23,7 +22,7 @@ public interface IMediaHTTPService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaHTTPService {
+    public abstract static class Stub extends Binder implements IMediaHTTPService {
         public static final String DESCRIPTOR = "android.media.IMediaHTTPService";
         static final int TRANSACTION_makeHTTPConnection = 1;
 
@@ -62,7 +61,8 @@ public interface IMediaHTTPService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -105,7 +105,8 @@ public interface IMediaHTTPService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    IMediaHTTPConnection _result = IMediaHTTPConnection.Stub.asInterface(_reply.readStrongBinder());
+                    IMediaHTTPConnection _result =
+                            IMediaHTTPConnection.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

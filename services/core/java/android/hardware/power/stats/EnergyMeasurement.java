@@ -35,10 +35,12 @@ public final class EnergyMeasurement implements Parcelable {
                             if (parcel.dataPosition() - dataPosition < readInt) {
                                 energyMeasurement.energyUWs = parcel.readLong();
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -85,6 +87,7 @@ public final class EnergyMeasurement implements Parcelable {
         parcel.writeLong(this.energyUWs);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

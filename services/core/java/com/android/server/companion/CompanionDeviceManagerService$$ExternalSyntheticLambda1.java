@@ -1,15 +1,18 @@
 package com.android.server.companion;
 
 import android.content.pm.PackageInfo;
+
 import com.android.internal.util.FunctionalUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class CompanionDeviceManagerService$$ExternalSyntheticLambda1 implements FunctionalUtils.ThrowingRunnable {
+public final /* synthetic */ class CompanionDeviceManagerService$$ExternalSyntheticLambda1
+        implements FunctionalUtils.ThrowingRunnable {
     public final /* synthetic */ CompanionDeviceManagerService f$0;
     public final /* synthetic */ PackageInfo f$1;
 
-    public /* synthetic */ CompanionDeviceManagerService$$ExternalSyntheticLambda1(CompanionDeviceManagerService companionDeviceManagerService, PackageInfo packageInfo) {
+    public /* synthetic */ CompanionDeviceManagerService$$ExternalSyntheticLambda1(
+            CompanionDeviceManagerService companionDeviceManagerService, PackageInfo packageInfo) {
         this.f$0 = companionDeviceManagerService;
         this.f$1 = packageInfo;
     }
@@ -127,6 +130,8 @@ public final /* synthetic */ class CompanionDeviceManagerService$$ExternalSynthe
         Lbe:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.companion.CompanionDeviceManagerService$$ExternalSyntheticLambda1.runOrThrow():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.companion.CompanionDeviceManagerService$$ExternalSyntheticLambda1.runOrThrow():void");
     }
 }

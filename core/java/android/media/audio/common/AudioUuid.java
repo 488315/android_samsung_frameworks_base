@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioUuid implements Parcelable {
-    public static final Parcelable.Creator<AudioUuid> CREATOR = new Parcelable.Creator<AudioUuid>() { // from class: android.media.audio.common.AudioUuid.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioUuid createFromParcel(Parcel _aidl_source) {
-            AudioUuid _aidl_out = new AudioUuid();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioUuid> CREATOR =
+            new Parcelable.Creator<
+                    AudioUuid>() { // from class: android.media.audio.common.AudioUuid.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioUuid createFromParcel(Parcel _aidl_source) {
+                    AudioUuid _aidl_out = new AudioUuid();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioUuid[] newArray(int _aidl_size) {
-            return new AudioUuid[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioUuid[] newArray(int _aidl_size) {
+                    return new AudioUuid[_aidl_size];
+                }
+            };
     public byte[] node;
     public int timeLow = 0;
     public int timeMid = 0;
@@ -128,7 +131,14 @@ public class AudioUuid implements Parcelable {
             return false;
         }
         AudioUuid that = (AudioUuid) other;
-        if (Objects.deepEquals(Integer.valueOf(this.timeLow), Integer.valueOf(that.timeLow)) && Objects.deepEquals(Integer.valueOf(this.timeMid), Integer.valueOf(that.timeMid)) && Objects.deepEquals(Integer.valueOf(this.timeHiAndVersion), Integer.valueOf(that.timeHiAndVersion)) && Objects.deepEquals(Integer.valueOf(this.clockSeq), Integer.valueOf(that.clockSeq)) && Objects.deepEquals(this.node, that.node)) {
+        if (Objects.deepEquals(Integer.valueOf(this.timeLow), Integer.valueOf(that.timeLow))
+                && Objects.deepEquals(Integer.valueOf(this.timeMid), Integer.valueOf(that.timeMid))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.timeHiAndVersion),
+                        Integer.valueOf(that.timeHiAndVersion))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.clockSeq), Integer.valueOf(that.clockSeq))
+                && Objects.deepEquals(this.node, that.node)) {
             return true;
         }
         return false;
@@ -136,7 +146,14 @@ public class AudioUuid implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.timeLow), Integer.valueOf(this.timeMid), Integer.valueOf(this.timeHiAndVersion), Integer.valueOf(this.clockSeq), this.node).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.timeLow),
+                                Integer.valueOf(this.timeMid),
+                                Integer.valueOf(this.timeHiAndVersion),
+                                Integer.valueOf(this.clockSeq),
+                                this.node)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

@@ -22,12 +22,15 @@ public class DERTaggedObject extends ASN1TaggedObject {
         ASN1Primitive primitive = this.obj.toASN1Primitive().toDERObject();
         int length = primitive.encodedLength();
         if (this.explicit) {
-            return StreamUtil.calculateTagLength(this.tagNo) + StreamUtil.calculateBodyLength(length) + length;
+            return StreamUtil.calculateTagLength(this.tagNo)
+                    + StreamUtil.calculateBodyLength(length)
+                    + length;
         }
         return StreamUtil.calculateTagLength(this.tagNo) + (length - 1);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     void encode(ASN1OutputStream out, boolean withTag) throws IOException {
         ASN1Primitive primitive = this.obj.toASN1Primitive().toDERObject();
         int flags = 128;
@@ -41,12 +44,14 @@ public class DERTaggedObject extends ASN1TaggedObject {
         primitive.encode(out.getDERSubStream(), this.explicit);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDERObject() {
         return this;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDLObject() {
         return this;
     }

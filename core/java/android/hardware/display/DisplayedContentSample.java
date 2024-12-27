@@ -15,7 +15,12 @@ public final class DisplayedContentSample {
         CHANNEL3
     }
 
-    public DisplayedContentSample(long numFrames, long[] sampleComponent0, long[] sampleComponent1, long[] sampleComponent2, long[] sampleComponent3) {
+    public DisplayedContentSample(
+            long numFrames,
+            long[] sampleComponent0,
+            long[] sampleComponent1,
+            long[] sampleComponent2,
+            long[] sampleComponent3) {
         this.mNumFrames = numFrames;
         this.mSamplesComponent0 = sampleComponent0;
         this.mSamplesComponent1 = sampleComponent1;

@@ -1,6 +1,5 @@
 package com.android.server.wm;
 
-import com.android.server.wm.TaskPersister;
 import java.io.File;
 import java.util.function.Predicate;
 
@@ -28,7 +27,9 @@ public final /* synthetic */ class TaskPersister$$ExternalSyntheticLambda0 imple
             case 0:
                 return ((Task) obj2) == ((TaskPersister.TaskWriteQueueItem) obj).mTask;
             case 1:
-                return new File(((TaskPersister.ImageWriteQueueItem) obj).mFilePath).getName().startsWith(Integer.toString(((Task) obj2).mTaskId));
+                return new File(((TaskPersister.ImageWriteQueueItem) obj).mFilePath)
+                        .getName()
+                        .startsWith(Integer.toString(((Task) obj2).mTaskId));
             default:
                 return ((TaskPersister.ImageWriteQueueItem) obj).mFilePath.equals((String) obj2);
         }

@@ -1,7 +1,5 @@
 package android.os;
 
-import android.os.IThermalEventListener;
-import android.os.IThermalStatusListener;
 
 /* loaded from: classes3.dex */
 public interface IThermalService extends IInterface {
@@ -19,29 +17,37 @@ public interface IThermalService extends IInterface {
 
     float[] getThermalHeadroomThresholds() throws RemoteException;
 
-    boolean registerThermalEventListener(IThermalEventListener iThermalEventListener) throws RemoteException;
+    boolean registerThermalEventListener(IThermalEventListener iThermalEventListener)
+            throws RemoteException;
 
-    boolean registerThermalEventListenerWithType(IThermalEventListener iThermalEventListener, int i) throws RemoteException;
+    boolean registerThermalEventListenerWithType(IThermalEventListener iThermalEventListener, int i)
+            throws RemoteException;
 
-    boolean registerThermalStatusListener(IThermalStatusListener iThermalStatusListener) throws RemoteException;
+    boolean registerThermalStatusListener(IThermalStatusListener iThermalStatusListener)
+            throws RemoteException;
 
-    boolean unregisterThermalEventListener(IThermalEventListener iThermalEventListener) throws RemoteException;
+    boolean unregisterThermalEventListener(IThermalEventListener iThermalEventListener)
+            throws RemoteException;
 
-    boolean unregisterThermalStatusListener(IThermalStatusListener iThermalStatusListener) throws RemoteException;
+    boolean unregisterThermalStatusListener(IThermalStatusListener iThermalStatusListener)
+            throws RemoteException;
 
     public static class Default implements IThermalService {
         @Override // android.os.IThermalService
-        public boolean registerThermalEventListener(IThermalEventListener listener) throws RemoteException {
+        public boolean registerThermalEventListener(IThermalEventListener listener)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IThermalService
-        public boolean registerThermalEventListenerWithType(IThermalEventListener listener, int type) throws RemoteException {
+        public boolean registerThermalEventListenerWithType(
+                IThermalEventListener listener, int type) throws RemoteException {
             return false;
         }
 
         @Override // android.os.IThermalService
-        public boolean unregisterThermalEventListener(IThermalEventListener listener) throws RemoteException {
+        public boolean unregisterThermalEventListener(IThermalEventListener listener)
+                throws RemoteException {
             return false;
         }
 
@@ -56,12 +62,14 @@ public interface IThermalService extends IInterface {
         }
 
         @Override // android.os.IThermalService
-        public boolean registerThermalStatusListener(IThermalStatusListener listener) throws RemoteException {
+        public boolean registerThermalStatusListener(IThermalStatusListener listener)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IThermalService
-        public boolean unregisterThermalStatusListener(IThermalStatusListener listener) throws RemoteException {
+        public boolean unregisterThermalStatusListener(IThermalStatusListener listener)
+                throws RemoteException {
             return false;
         }
 
@@ -96,7 +104,7 @@ public interface IThermalService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IThermalService {
+    public abstract static class Stub extends Binder implements IThermalService {
         public static final String DESCRIPTOR = "android.os.IThermalService";
         static final int TRANSACTION_getCurrentCoolingDevices = 9;
         static final int TRANSACTION_getCurrentCoolingDevicesWithType = 10;
@@ -168,7 +176,8 @@ public interface IThermalService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -178,14 +187,16 @@ public interface IThermalService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IThermalEventListener _arg0 = IThermalEventListener.Stub.asInterface(data.readStrongBinder());
+                    IThermalEventListener _arg0 =
+                            IThermalEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result = registerThermalEventListener(_arg0);
                     reply.writeNoException();
                     reply.writeBoolean(_result);
                     return true;
                 case 2:
-                    IThermalEventListener _arg02 = IThermalEventListener.Stub.asInterface(data.readStrongBinder());
+                    IThermalEventListener _arg02 =
+                            IThermalEventListener.Stub.asInterface(data.readStrongBinder());
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result2 = registerThermalEventListenerWithType(_arg02, _arg1);
@@ -193,7 +204,8 @@ public interface IThermalService extends IInterface {
                     reply.writeBoolean(_result2);
                     return true;
                 case 3:
-                    IThermalEventListener _arg03 = IThermalEventListener.Stub.asInterface(data.readStrongBinder());
+                    IThermalEventListener _arg03 =
+                            IThermalEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result3 = unregisterThermalEventListener(_arg03);
                     reply.writeNoException();
@@ -212,14 +224,16 @@ public interface IThermalService extends IInterface {
                     reply.writeTypedArray(_result5, 1);
                     return true;
                 case 6:
-                    IThermalStatusListener _arg05 = IThermalStatusListener.Stub.asInterface(data.readStrongBinder());
+                    IThermalStatusListener _arg05 =
+                            IThermalStatusListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result6 = registerThermalStatusListener(_arg05);
                     reply.writeNoException();
                     reply.writeBoolean(_result6);
                     return true;
                 case 7:
-                    IThermalStatusListener _arg06 = IThermalStatusListener.Stub.asInterface(data.readStrongBinder());
+                    IThermalStatusListener _arg06 =
+                            IThermalStatusListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result7 = unregisterThermalStatusListener(_arg06);
                     reply.writeNoException();
@@ -276,7 +290,8 @@ public interface IThermalService extends IInterface {
             }
 
             @Override // android.os.IThermalService
-            public boolean registerThermalEventListener(IThermalEventListener listener) throws RemoteException {
+            public boolean registerThermalEventListener(IThermalEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -293,7 +308,8 @@ public interface IThermalService extends IInterface {
             }
 
             @Override // android.os.IThermalService
-            public boolean registerThermalEventListenerWithType(IThermalEventListener listener, int type) throws RemoteException {
+            public boolean registerThermalEventListenerWithType(
+                    IThermalEventListener listener, int type) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -311,7 +327,8 @@ public interface IThermalService extends IInterface {
             }
 
             @Override // android.os.IThermalService
-            public boolean unregisterThermalEventListener(IThermalEventListener listener) throws RemoteException {
+            public boolean unregisterThermalEventListener(IThermalEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -335,7 +352,8 @@ public interface IThermalService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    Temperature[] _result = (Temperature[]) _reply.createTypedArray(Temperature.CREATOR);
+                    Temperature[] _result =
+                            (Temperature[]) _reply.createTypedArray(Temperature.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -352,7 +370,8 @@ public interface IThermalService extends IInterface {
                     _data.writeInt(type);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    Temperature[] _result = (Temperature[]) _reply.createTypedArray(Temperature.CREATOR);
+                    Temperature[] _result =
+                            (Temperature[]) _reply.createTypedArray(Temperature.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -361,7 +380,8 @@ public interface IThermalService extends IInterface {
             }
 
             @Override // android.os.IThermalService
-            public boolean registerThermalStatusListener(IThermalStatusListener listener) throws RemoteException {
+            public boolean registerThermalStatusListener(IThermalStatusListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -378,7 +398,8 @@ public interface IThermalService extends IInterface {
             }
 
             @Override // android.os.IThermalService
-            public boolean unregisterThermalStatusListener(IThermalStatusListener listener) throws RemoteException {
+            public boolean unregisterThermalStatusListener(IThermalStatusListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -418,7 +439,8 @@ public interface IThermalService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    CoolingDevice[] _result = (CoolingDevice[]) _reply.createTypedArray(CoolingDevice.CREATOR);
+                    CoolingDevice[] _result =
+                            (CoolingDevice[]) _reply.createTypedArray(CoolingDevice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -427,7 +449,8 @@ public interface IThermalService extends IInterface {
             }
 
             @Override // android.os.IThermalService
-            public CoolingDevice[] getCurrentCoolingDevicesWithType(int type) throws RemoteException {
+            public CoolingDevice[] getCurrentCoolingDevicesWithType(int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -435,7 +458,8 @@ public interface IThermalService extends IInterface {
                     _data.writeInt(type);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    CoolingDevice[] _result = (CoolingDevice[]) _reply.createTypedArray(CoolingDevice.CREATOR);
+                    CoolingDevice[] _result =
+                            (CoolingDevice[]) _reply.createTypedArray(CoolingDevice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

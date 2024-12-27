@@ -1,8 +1,5 @@
 package android.hardware.cas;
 
-import android.hardware.cas.ICas;
-import android.hardware.cas.ICasListener;
-import android.hardware.cas.IDescrambler;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -11,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IMediaCasService extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$cas$IMediaCasService".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$cas$IMediaCasService".replace('$', '.');
     public static final String HASH = "bc51d8d70a55ec4723d3f73d0acf7003306bf69f";
     public static final int VERSION = 1;
 
@@ -71,7 +69,7 @@ public interface IMediaCasService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaCasService {
+    public abstract static class Stub extends Binder implements IMediaCasService {
         static final int TRANSACTION_createDescrambler = 1;
         static final int TRANSACTION_createPlugin = 2;
         static final int TRANSACTION_enumeratePlugins = 3;
@@ -102,7 +100,8 @@ public interface IMediaCasService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -200,7 +199,8 @@ public interface IMediaCasService extends IInterface {
             }
 
             @Override // android.hardware.cas.IMediaCasService
-            public ICas createPlugin(int CA_system_id, ICasListener listener) throws RemoteException {
+            public ICas createPlugin(int CA_system_id, ICasListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -231,7 +231,9 @@ public interface IMediaCasService extends IInterface {
                         throw new RemoteException("Method enumeratePlugins is unimplemented.");
                     }
                     _reply.readException();
-                    AidlCasPluginDescriptor[] _result = (AidlCasPluginDescriptor[]) _reply.createTypedArray(AidlCasPluginDescriptor.CREATOR);
+                    AidlCasPluginDescriptor[] _result =
+                            (AidlCasPluginDescriptor[])
+                                    _reply.createTypedArray(AidlCasPluginDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -248,7 +250,8 @@ public interface IMediaCasService extends IInterface {
                     _data.writeInt(CA_system_id);
                     boolean _status = this.mRemote.transact(4, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method isDescramblerSupported is unimplemented.");
+                        throw new RemoteException(
+                                "Method isDescramblerSupported is unimplemented.");
                     }
                     _reply.readException();
                     boolean _result = _reply.readBoolean();

@@ -8,8 +8,7 @@ public class Long4 {
     public long y;
     public long z;
 
-    public Long4() {
-    }
+    public Long4() {}
 
     public Long4(long i) {
         this.w = i;

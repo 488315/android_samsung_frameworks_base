@@ -1,6 +1,7 @@
 package com.android.server.recoverysystem;
 
 import android.os.ShellCommand;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -61,17 +62,31 @@ public final class RecoverySystemShellCommand extends ShellCommand {
             }
             if (c == 0) {
                 String nextArgRequired = getNextArgRequired();
-                getOutPrintWriter().printf("Request LSKF for packageName: %s, status: %s\n", nextArgRequired, this.mService.requestLskf(nextArgRequired, null) ? "success" : "failure");
+                getOutPrintWriter()
+                        .printf(
+                                "Request LSKF for packageName: %s, status: %s\n",
+                                nextArgRequired,
+                                this.mService.requestLskf(nextArgRequired, null)
+                                        ? "success"
+                                        : "failure");
                 return 0;
             }
             if (c == 1) {
                 String nextArgRequired2 = getNextArgRequired();
-                getOutPrintWriter().printf("Clear LSKF for packageName: %s, status: %s\n", nextArgRequired2, this.mService.clearLskf(nextArgRequired2) ? "success" : "failure");
+                getOutPrintWriter()
+                        .printf(
+                                "Clear LSKF for packageName: %s, status: %s\n",
+                                nextArgRequired2,
+                                this.mService.clearLskf(nextArgRequired2) ? "success" : "failure");
                 return 0;
             }
             if (c == 2) {
                 String nextArgRequired3 = getNextArgRequired();
-                getOutPrintWriter().printf("%s LSKF capture status: %s\n", nextArgRequired3, this.mService.isLskfCaptured(nextArgRequired3) ? "true" : "false");
+                getOutPrintWriter()
+                        .printf(
+                                "%s LSKF capture status: %s\n",
+                                nextArgRequired3,
+                                this.mService.isLskfCaptured(nextArgRequired3) ? "true" : "false");
                 return 0;
             }
             if (c != 3) {
@@ -85,7 +100,10 @@ public final class RecoverySystemShellCommand extends ShellCommand {
             if (this.mService.rebootWithLskf(nextArgRequired4, getNextArgRequired(), false) != 0) {
                 z = false;
             }
-            getOutPrintWriter().printf("%s Reboot and apply status: %s\n", nextArgRequired4, z ? "success" : "failure");
+            getOutPrintWriter()
+                    .printf(
+                            "%s Reboot and apply status: %s\n",
+                            nextArgRequired4, z ? "success" : "failure");
             return 0;
         } catch (Exception e) {
             getErrPrintWriter().println("Error while executing command: ".concat(str));
@@ -107,7 +125,10 @@ public final class RecoverySystemShellCommand extends ShellCommand {
     public final void wipe() {
         PrintWriter outPrintWriter = getOutPrintWriter();
         String nextArg = getNextArg();
-        String concat = (nextArg == null || nextArg.isEmpty()) ? "--wipe_data" : "--wipe_data\n--reformat_data=".concat(nextArg);
+        String concat =
+                (nextArg == null || nextArg.isEmpty())
+                        ? "--wipe_data"
+                        : "--wipe_data\n--reformat_data=".concat(nextArg);
         outPrintWriter.println("Rebooting into recovery with " + concat.replaceAll("\n", " "));
         this.mService.rebootRecoveryWithCommand(concat);
     }

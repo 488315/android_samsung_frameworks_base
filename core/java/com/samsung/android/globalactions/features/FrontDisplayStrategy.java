@@ -1,6 +1,7 @@
 package com.samsung.android.globalactions.features;
 
 import android.hardware.usb.UsbManager;
+
 import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.presentation.strategies.DisposingStrategy;
 import com.samsung.android.globalactions.presentation.strategies.SecureConfirmStrategy;
@@ -18,7 +19,10 @@ public class FrontDisplayStrategy implements SecureConfirmStrategy, DisposingStr
     private final KeyGuardManagerWrapper mKeyguardManagerWrapper;
     private final LogWrapper mLogWrapper;
 
-    public FrontDisplayStrategy(SamsungGlobalActions globalActions, LogWrapper logWrapper, KeyGuardManagerWrapper keyguardManagerWrapper) {
+    public FrontDisplayStrategy(
+            SamsungGlobalActions globalActions,
+            LogWrapper logWrapper,
+            KeyGuardManagerWrapper keyguardManagerWrapper) {
         this.mGlobalActions = globalActions;
         this.mLogWrapper = logWrapper;
         this.mKeyguardManagerWrapper = keyguardManagerWrapper;
@@ -26,7 +30,8 @@ public class FrontDisplayStrategy implements SecureConfirmStrategy, DisposingStr
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     @Override // com.samsung.android.globalactions.presentation.strategies.SecureConfirmStrategy
-    public boolean doActionBeforeSecureConfirm(final ActionViewModel viewModel, SamsungGlobalActions globalActions) {
+    public boolean doActionBeforeSecureConfirm(
+            final ActionViewModel viewModel, SamsungGlobalActions globalActions) {
         char c;
         String name = viewModel.getActionInfo().getName();
         switch (name.hashCode()) {
@@ -51,24 +56,35 @@ public class FrontDisplayStrategy implements SecureConfirmStrategy, DisposingStr
         switch (c) {
             case 0:
             case 1:
-                final String extraUnlockType = viewModel.getActionInfo().getName() == "power" ? UsbManager.USB_FUNCTION_SHUTDOWN : "reboot";
+                final String extraUnlockType =
+                        viewModel.getActionInfo().getName() == "power"
+                                ? UsbManager.USB_FUNCTION_SHUTDOWN
+                                : "reboot";
                 if (isFoldedState()) {
-                    sFoldStateListener = new SemWindowManager.FoldStateListener() { // from class: com.samsung.android.globalactions.features.FrontDisplayStrategy.1
-                        @Override // com.samsung.android.view.SemWindowManager.FoldStateListener
-                        public void onFoldStateChanged(boolean isFolded) {
-                            if (!isFolded) {
-                                FrontDisplayStrategy.this.mLogWrapper.i(FrontDisplayStrategy.TAG, "registerSecureConfirm by FoldStateChangedListener");
-                                FrontDisplayStrategy.this.mKeyguardManagerWrapper.setRegisterState(false);
-                                FrontDisplayStrategy.this.mGlobalActions.registerSecureConfirmAction(viewModel);
-                                FrontDisplayStrategy.this.mKeyguardManagerWrapper.setPendingIntentAfterUnlock(extraUnlockType);
-                            }
-                        }
+                    sFoldStateListener =
+                            new SemWindowManager.FoldStateListener() { // from class:
+                                // com.samsung.android.globalactions.features.FrontDisplayStrategy.1
+                                @Override // com.samsung.android.view.SemWindowManager.FoldStateListener
+                                public void onFoldStateChanged(boolean isFolded) {
+                                    if (!isFolded) {
+                                        FrontDisplayStrategy.this.mLogWrapper.i(
+                                                FrontDisplayStrategy.TAG,
+                                                "registerSecureConfirm by"
+                                                    + " FoldStateChangedListener");
+                                        FrontDisplayStrategy.this.mKeyguardManagerWrapper
+                                                .setRegisterState(false);
+                                        FrontDisplayStrategy.this.mGlobalActions
+                                                .registerSecureConfirmAction(viewModel);
+                                        FrontDisplayStrategy.this.mKeyguardManagerWrapper
+                                                .setPendingIntentAfterUnlock(extraUnlockType);
+                                    }
+                                }
 
-                        @Override // com.samsung.android.view.SemWindowManager.FoldStateListener
-                        public void onTableModeChanged(boolean b) {
-                        }
-                    };
-                    SemWindowManager.getInstance().registerFoldStateListener(sFoldStateListener, null);
+                                @Override // com.samsung.android.view.SemWindowManager.FoldStateListener
+                                public void onTableModeChanged(boolean b) {}
+                            };
+                    SemWindowManager.getInstance()
+                            .registerFoldStateListener(sFoldStateListener, null);
                     this.mKeyguardManagerWrapper.setRegisterState(true);
                 }
             default:

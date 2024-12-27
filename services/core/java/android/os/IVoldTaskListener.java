@@ -12,12 +12,10 @@ public interface IVoldTaskListener extends IInterface {
         }
 
         @Override // android.os.IVoldTaskListener
-        public void onFinished(int i, PersistableBundle persistableBundle) throws RemoteException {
-        }
+        public void onFinished(int i, PersistableBundle persistableBundle) throws RemoteException {}
 
         @Override // android.os.IVoldTaskListener
-        public void onStatus(int i, PersistableBundle persistableBundle) throws RemoteException {
-        }
+        public void onStatus(int i, PersistableBundle persistableBundle) throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -85,7 +83,8 @@ public interface IVoldTaskListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(DESCRIPTOR);
             }
@@ -95,7 +94,8 @@ public interface IVoldTaskListener extends IInterface {
             }
             if (i == 1) {
                 int readInt = parcel.readInt();
-                PersistableBundle persistableBundle = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
+                PersistableBundle persistableBundle =
+                        (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
                 parcel.enforceNoDataAvail();
                 onStatus(readInt, persistableBundle);
             } else {
@@ -103,7 +103,8 @@ public interface IVoldTaskListener extends IInterface {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
                 int readInt2 = parcel.readInt();
-                PersistableBundle persistableBundle2 = (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
+                PersistableBundle persistableBundle2 =
+                        (PersistableBundle) parcel.readTypedObject(PersistableBundle.CREATOR);
                 parcel.enforceNoDataAvail();
                 onFinished(readInt2, persistableBundle2);
             }

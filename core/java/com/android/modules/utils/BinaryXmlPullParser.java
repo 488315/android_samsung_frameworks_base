@@ -3,6 +3,9 @@ package com.android.modules.utils;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Base64;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,11 +13,27 @@ import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public class BinaryXmlPullParser implements TypedXmlPullParser {
-    private static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.AM_PM, 'b', 'c', DateFormat.DATE, 'e', 'f'};
+    private static final char[] HEX_DIGITS = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.AM_PM,
+        'b',
+        'c',
+        DateFormat.DATE,
+        'e',
+        'f'
+    };
     private Attribute[] mAttributes;
     private String mCurrentName;
     private String mCurrentText;
@@ -229,20 +248,21 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:5:0x0009, code lost:
-    
-        r4.mCurrentToken = 4;
-        r4.mCurrentName = null;
-        r4.mCurrentText = r0;
-     */
+
+       r4.mCurrentToken = 4;
+       r4.mCurrentName = null;
+       r4.mCurrentText = r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:6:0x0011, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void consumeAdditionalText() throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
+    private void consumeAdditionalText()
+            throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
         /*
             r4 = this;
             java.lang.String r0 = r4.mCurrentText
@@ -278,7 +298,9 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
         L2d:
             goto L2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.modules.utils.BinaryXmlPullParser.consumeAdditionalText():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.modules.utils.BinaryXmlPullParser.consumeAdditionalText():void");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -338,14 +360,15 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
             default:
                 if (entity.length() > 1 && entity.charAt(0) == '#') {
                     char c2 = (char) Integer.parseInt(entity.substring(1));
-                    return new String(new char[]{c2});
+                    return new String(new char[] {c2});
                 }
                 throw new XmlPullParserException("Unknown entity " + entity);
         }
     }
 
     @Override // org.xmlpull.v1.XmlPullParser
-    public void require(int type, String namespace, String name) throws XmlPullParserException, IOException {
+    public void require(int type, String namespace, String name)
+            throws XmlPullParserException, IOException {
         if (namespace != null && !namespace.isEmpty()) {
             throw illegalNamespace();
         }
@@ -622,7 +645,8 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
     }
 
     @Override // org.xmlpull.v1.XmlPullParser
-    public void defineEntityReplacementText(String entityName, String replacementText) throws XmlPullParserException {
+    public void defineEntityReplacementText(String entityName, String replacementText)
+            throws XmlPullParserException {
         throw new UnsupportedOperationException();
     }
 
@@ -660,8 +684,7 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
         public long valueLong;
         public String valueString;
 
-        private Attribute() {
-        }
+        private Attribute() {}
 
         public void reset() {
             this.name = null;
@@ -710,7 +733,8 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
                     try {
                         return BinaryXmlPullParser.hexStringToBytes(this.valueString);
                     } catch (Exception e) {
-                        throw new XmlPullParserException("Invalid attribute " + this.name + ": " + e);
+                        throw new XmlPullParserException(
+                                "Invalid attribute " + this.name + ": " + e);
                     }
                 case 64:
                 case 80:
@@ -729,7 +753,8 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
                     try {
                         return Base64.decode(this.valueString, 2);
                     } catch (Exception e) {
-                        throw new XmlPullParserException("Invalid attribute " + this.name + ": " + e);
+                        throw new XmlPullParserException(
+                                "Invalid attribute " + this.name + ": " + e);
                     }
                 case 64:
                 case 80:
@@ -746,7 +771,8 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
                     try {
                         return Integer.parseInt(this.valueString);
                     } catch (Exception e) {
-                        throw new XmlPullParserException("Invalid attribute " + this.name + ": " + e);
+                        throw new XmlPullParserException(
+                                "Invalid attribute " + this.name + ": " + e);
                     }
                 case 96:
                 case 112:
@@ -763,7 +789,8 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
                     try {
                         return Integer.parseInt(this.valueString, 16);
                     } catch (Exception e) {
-                        throw new XmlPullParserException("Invalid attribute " + this.name + ": " + e);
+                        throw new XmlPullParserException(
+                                "Invalid attribute " + this.name + ": " + e);
                     }
                 case 96:
                 case 112:
@@ -780,7 +807,8 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
                     try {
                         return Long.parseLong(this.valueString);
                     } catch (Exception e) {
-                        throw new XmlPullParserException("Invalid attribute " + this.name + ": " + e);
+                        throw new XmlPullParserException(
+                                "Invalid attribute " + this.name + ": " + e);
                     }
                 case 128:
                 case 144:
@@ -797,7 +825,8 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
                     try {
                         return Long.parseLong(this.valueString, 16);
                     } catch (Exception e) {
-                        throw new XmlPullParserException("Invalid attribute " + this.name + ": " + e);
+                        throw new XmlPullParserException(
+                                "Invalid attribute " + this.name + ": " + e);
                     }
                 case 128:
                 case 144:
@@ -814,7 +843,8 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
                     try {
                         return Float.parseFloat(this.valueString);
                     } catch (Exception e) {
-                        throw new XmlPullParserException("Invalid attribute " + this.name + ": " + e);
+                        throw new XmlPullParserException(
+                                "Invalid attribute " + this.name + ": " + e);
                     }
                 case 160:
                     return this.valueFloat;
@@ -830,7 +860,8 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
                     try {
                         return Double.parseDouble(this.valueString);
                     } catch (Exception e) {
-                        throw new XmlPullParserException("Invalid attribute " + this.name + ": " + e);
+                        throw new XmlPullParserException(
+                                "Invalid attribute " + this.name + ": " + e);
                     }
                 case 176:
                     return this.valueDouble;
@@ -849,7 +880,8 @@ public class BinaryXmlPullParser implements TypedXmlPullParser {
                     if ("false".equalsIgnoreCase(this.valueString)) {
                         return false;
                     }
-                    throw new XmlPullParserException("Invalid attribute " + this.name + ": " + this.valueString);
+                    throw new XmlPullParserException(
+                            "Invalid attribute " + this.name + ": " + this.valueString);
                 case 192:
                     return true;
                 case 208:

@@ -21,7 +21,8 @@ public interface IAppClipsService extends IInterface {
         }
 
         @Override // com.android.internal.statusbar.IAppClipsService
-        public int canLaunchCaptureContentActivityForNoteInternal(int taskId) throws RemoteException {
+        public int canLaunchCaptureContentActivityForNoteInternal(int taskId)
+                throws RemoteException {
             return 0;
         }
 
@@ -31,7 +32,7 @@ public interface IAppClipsService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppClipsService {
+    public abstract static class Stub extends Binder implements IAppClipsService {
         static final int TRANSACTION_canLaunchCaptureContentActivityForNote = 1;
         static final int TRANSACTION_canLaunchCaptureContentActivityForNoteInternal = 2;
 
@@ -72,7 +73,8 @@ public interface IAppClipsService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAppClipsService.DESCRIPTOR);
             }
@@ -117,7 +119,8 @@ public interface IAppClipsService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IAppClipsService
-            public boolean canLaunchCaptureContentActivityForNote(int taskId) throws RemoteException {
+            public boolean canLaunchCaptureContentActivityForNote(int taskId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -134,7 +137,8 @@ public interface IAppClipsService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IAppClipsService
-            public int canLaunchCaptureContentActivityForNoteInternal(int taskId) throws RemoteException {
+            public int canLaunchCaptureContentActivityForNoteInternal(int taskId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

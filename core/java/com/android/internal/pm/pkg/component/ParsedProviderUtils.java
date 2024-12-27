@@ -8,6 +8,7 @@ import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.os.PatternMatcher;
 import android.util.Slog;
+
 import com.android.internal.R;
 import com.android.internal.pm.pkg.parsing.ParsingPackage;
 
@@ -16,44 +17,83 @@ public class ParsedProviderUtils {
     private static final String TAG = "PackageParsing";
 
     /* JADX WARN: Code restructure failed: missing block: B:56:0x0162, code lost:
-    
-        return r34.error("<provider> does not include authorities attribute");
-     */
+
+       return r34.error("<provider> does not include authorities attribute");
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.component.ParsedProvider> parseProvider(java.lang.String[] r27, com.android.internal.pm.pkg.parsing.ParsingPackage r28, android.content.res.Resources r29, android.content.res.XmlResourceParser r30, int r31, boolean r32, java.lang.String r33, android.content.pm.parsing.result.ParseInput r34) throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
+    public static android.content.pm.parsing.result.ParseResult<
+                    com.android.internal.pm.pkg.component.ParsedProvider>
+            parseProvider(
+                    java.lang.String[] r27,
+                    com.android.internal.pm.pkg.parsing.ParsingPackage r28,
+                    android.content.res.Resources r29,
+                    android.content.res.XmlResourceParser r30,
+                    int r31,
+                    boolean r32,
+                    java.lang.String r33,
+                    android.content.pm.parsing.result.ParseInput r34)
+                    throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
         /*
             Method dump skipped, instructions count: 429
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.component.ParsedProviderUtils.parseProvider(java.lang.String[], com.android.internal.pm.pkg.parsing.ParsingPackage, android.content.res.Resources, android.content.res.XmlResourceParser, int, boolean, java.lang.String, android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.component.ParsedProviderUtils.parseProvider(java.lang.String[],"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackage,"
+                    + " android.content.res.Resources, android.content.res.XmlResourceParser, int,"
+                    + " boolean, java.lang.String,"
+                    + " android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:11:0x010f, code lost:
-    
-        return r24.success(r23);
-     */
+
+       return r24.success(r23);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:48:0x0069, code lost:
-    
-        if (r8.equals("meta-data") != false) goto L36;
-     */
+
+       if (r8.equals("meta-data") != false) goto L36;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.component.ParsedProvider> parseProviderTags(com.android.internal.pm.pkg.parsing.ParsingPackage r18, java.lang.String r19, android.content.res.Resources r20, android.content.res.XmlResourceParser r21, boolean r22, com.android.internal.pm.pkg.component.ParsedProviderImpl r23, android.content.pm.parsing.result.ParseInput r24) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    private static android.content.pm.parsing.result.ParseResult<
+                    com.android.internal.pm.pkg.component.ParsedProvider>
+            parseProviderTags(
+                    com.android.internal.pm.pkg.parsing.ParsingPackage r18,
+                    java.lang.String r19,
+                    android.content.res.Resources r20,
+                    android.content.res.XmlResourceParser r21,
+                    boolean r22,
+                    com.android.internal.pm.pkg.component.ParsedProviderImpl r23,
+                    android.content.pm.parsing.result.ParseInput r24)
+                    throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             Method dump skipped, instructions count: 308
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.component.ParsedProviderUtils.parseProviderTags(com.android.internal.pm.pkg.parsing.ParsingPackage, java.lang.String, android.content.res.Resources, android.content.res.XmlResourceParser, boolean, com.android.internal.pm.pkg.component.ParsedProviderImpl, android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.component.ParsedProviderUtils.parseProviderTags(com.android.internal.pm.pkg.parsing.ParsingPackage,"
+                    + " java.lang.String, android.content.res.Resources,"
+                    + " android.content.res.XmlResourceParser, boolean,"
+                    + " com.android.internal.pm.pkg.component.ParsedProviderImpl,"
+                    + " android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
     }
 
-    private static ParseResult<ParsedProvider> parseGrantUriPermission(ParsedProviderImpl provider, ParsingPackage pkg, Resources resources, XmlResourceParser parser, ParseInput input) {
-        TypedArray sa = resources.obtainAttributes(parser, R.styleable.AndroidManifestGrantUriPermission);
+    private static ParseResult<ParsedProvider> parseGrantUriPermission(
+            ParsedProviderImpl provider,
+            ParsingPackage pkg,
+            Resources resources,
+            XmlResourceParser parser,
+            ParseInput input) {
+        TypedArray sa =
+                resources.obtainAttributes(parser, R.styleable.AndroidManifestGrantUriPermission);
         try {
             String name = parser.getName();
             PatternMatcher pa = null;
@@ -85,7 +125,14 @@ public class ParsedProviderUtils {
                 provider.addUriPermissionPattern(pa);
                 provider.setGrantUriPermissions(true);
             } else {
-                Slog.w("PackageParsing", "Unknown element under <path-permission>: " + name + " at " + pkg.getBaseApkPath() + " " + parser.getPositionDescription());
+                Slog.w(
+                        "PackageParsing",
+                        "Unknown element under <path-permission>: "
+                                + name
+                                + " at "
+                                + pkg.getBaseApkPath()
+                                + " "
+                                + parser.getPositionDescription());
             }
             return input.success(provider);
         } finally {
@@ -93,9 +140,15 @@ public class ParsedProviderUtils {
         }
     }
 
-    private static ParseResult<ParsedProvider> parsePathPermission(ParsedProviderImpl provider, ParsingPackage pkg, Resources resources, XmlResourceParser parser, ParseInput input) {
+    private static ParseResult<ParsedProvider> parsePathPermission(
+            ParsedProviderImpl provider,
+            ParsingPackage pkg,
+            Resources resources,
+            XmlResourceParser parser,
+            ParseInput input) {
         PathPermission pa;
-        TypedArray sa = resources.obtainAttributes(parser, R.styleable.AndroidManifestPathPermission);
+        TypedArray sa =
+                resources.obtainAttributes(parser, R.styleable.AndroidManifestPathPermission);
         try {
             String name = parser.getName();
             String permission = sa.getNonConfigurationString(0, 0);
@@ -129,7 +182,9 @@ public class ParsedProviderUtils {
                                 if (path5 == null) {
                                     pa = null;
                                 } else {
-                                    PathPermission pa2 = new PathPermission(path5, 0, readPermission, writePermission);
+                                    PathPermission pa2 =
+                                            new PathPermission(
+                                                    path5, 0, readPermission, writePermission);
                                     pa = pa2;
                                 }
                             } else {
@@ -147,11 +202,25 @@ public class ParsedProviderUtils {
                 if (pa != null) {
                     provider.addPathPermission(pa);
                 } else {
-                    Slog.w("PackageParsing", "No path, pathPrefix, or pathPattern for <path-permission>: " + name + " at " + pkg.getBaseApkPath() + " " + parser.getPositionDescription());
+                    Slog.w(
+                            "PackageParsing",
+                            "No path, pathPrefix, or pathPattern for <path-permission>: "
+                                    + name
+                                    + " at "
+                                    + pkg.getBaseApkPath()
+                                    + " "
+                                    + parser.getPositionDescription());
                 }
                 return input.success(provider);
             }
-            Slog.w("PackageParsing", "No readPermission or writePermission for <path-permission>: " + name + " at " + pkg.getBaseApkPath() + " " + parser.getPositionDescription());
+            Slog.w(
+                    "PackageParsing",
+                    "No readPermission or writePermission for <path-permission>: "
+                            + name
+                            + " at "
+                            + pkg.getBaseApkPath()
+                            + " "
+                            + parser.getPositionDescription());
             return input.success(provider);
         } finally {
             sa.recycle();

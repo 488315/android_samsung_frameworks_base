@@ -3,6 +3,7 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -10,27 +11,28 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class SipDialogState implements Parcelable {
-    public static final Parcelable.Creator<SipDialogState> CREATOR = new Parcelable.Creator<SipDialogState>() { // from class: android.telephony.ims.SipDialogState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SipDialogState createFromParcel(Parcel in) {
-            return new SipDialogState(in);
-        }
+    public static final Parcelable.Creator<SipDialogState> CREATOR =
+            new Parcelable.Creator<
+                    SipDialogState>() { // from class: android.telephony.ims.SipDialogState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SipDialogState createFromParcel(Parcel in) {
+                    return new SipDialogState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SipDialogState[] newArray(int size) {
-            return new SipDialogState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SipDialogState[] newArray(int size) {
+                    return new SipDialogState[size];
+                }
+            };
     public static final int STATE_CLOSED = 2;
     public static final int STATE_CONFIRMED = 1;
     public static final int STATE_EARLY = 0;
     private final int mState;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SipDialogStateCode {
-    }
+    public @interface SipDialogStateCode {}
 
     public static final class Builder {
         private int mState;

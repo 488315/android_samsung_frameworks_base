@@ -9,6 +9,7 @@ import android.media.MediaFormat;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Surface;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
@@ -18,6 +19,7 @@ import com.samsung.android.sume.core.descriptor.CodecDescriptor;
 import com.samsung.android.sume.core.exception.StreamFilterExitException;
 import com.samsung.android.sume.core.message.Message;
 import com.samsung.android.sume.core.types.MediaType;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -50,18 +52,33 @@ public class EncoderFilter extends MediaCodecFilter {
         if (bitrate == 0) {
             bitrate = ((Integer) configData.get(MediaFormat.KEY_BIT_RATE)).intValue();
             if (descriptor.getScale() != 0.0f) {
-                bitrate = (int) (bitrate * Math.pow(10.0d, (int) Math.log10(Math.pow(descriptor.getScale(), 2.0d))));
+                bitrate =
+                        (int)
+                                (bitrate
+                                        * Math.pow(
+                                                10.0d,
+                                                (int)
+                                                        Math.log10(
+                                                                Math.pow(
+                                                                        descriptor.getScale(),
+                                                                        2.0d))));
             }
         }
         MediaType mediaType = descriptor.getMediaType();
         try {
             if (mediaType.isVideo()) {
-                Pair<Integer, Integer> dimension = (Pair) Optional.ofNullable(descriptor.getRectSize()).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.filter.EncoderFilter$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Supplier
-                    public final Object get() {
-                        return EncoderFilter.lambda$configCodec$0(Message.this);
-                    }
-                });
+                Pair<Integer, Integer> dimension =
+                        (Pair)
+                                Optional.ofNullable(descriptor.getRectSize())
+                                        .orElseGet(
+                                                new Supplier() { // from class:
+                                                                 // com.samsung.android.sume.core.filter.EncoderFilter$$ExternalSyntheticLambda0
+                                                    @Override // java.util.function.Supplier
+                                                    public final Object get() {
+                                                        return EncoderFilter.lambda$configCodec$0(
+                                                                Message.this);
+                                                    }
+                                                });
                 int width = dimension.first.intValue();
                 int height = dimension.second.intValue();
                 if (descriptor.getScale() != 0.0f) {
@@ -69,9 +86,15 @@ public class EncoderFilter extends MediaCodecFilter {
                     height = (int) (height * descriptor.getScale());
                 }
                 mediaFormat = MediaFormat.createVideoFormat(mimeType, width, height);
-                mediaFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface);
-                mediaFormat.setInteger(MediaFormat.KEY_FRAME_RATE, ((Integer) configData.get(MediaFormat.KEY_FRAME_RATE)).intValue());
-                mediaFormat.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, ((Integer) configData.get(MediaFormat.KEY_I_FRAME_INTERVAL)).intValue());
+                mediaFormat.setInteger(
+                        MediaFormat.KEY_COLOR_FORMAT,
+                        MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface);
+                mediaFormat.setInteger(
+                        MediaFormat.KEY_FRAME_RATE,
+                        ((Integer) configData.get(MediaFormat.KEY_FRAME_RATE)).intValue());
+                mediaFormat.setInteger(
+                        MediaFormat.KEY_I_FRAME_INTERVAL,
+                        ((Integer) configData.get(MediaFormat.KEY_I_FRAME_INTERVAL)).intValue());
                 mediaFormat.setInteger("vendor.qti-ext-enc-linear-color-format.value", 1);
                 if (configData.contains("rotation-degrees")) {
                     this.orientation = ((Integer) configData.get("rotation-degrees")).intValue();
@@ -79,7 +102,8 @@ public class EncoderFilter extends MediaCodecFilter {
                 }
             } else if (mediaType.isAudio()) {
                 int sampleRate = ((Integer) configData.get(MediaFormat.KEY_SAMPLE_RATE)).intValue();
-                int channelCount = ((Integer) configData.get(MediaFormat.KEY_CHANNEL_COUNT)).intValue();
+                int channelCount =
+                        ((Integer) configData.get(MediaFormat.KEY_CHANNEL_COUNT)).intValue();
                 mediaFormat = MediaFormat.createAudioFormat(mimeType, sampleRate, channelCount);
             } else {
                 throw new UnsupportedOperationException("not supported type" + mediaType);
@@ -122,7 +146,10 @@ public class EncoderFilter extends MediaCodecFilter {
         this.reachedInputEos = inputChannel instanceof SurfaceChannel;
         this.reachedOutputEos = false;
         this.processedFrames = 0;
-        String tag = "[enc: " + this.mediaCodec.getCodecInfo().getCanonicalName() + NavigationBarInflaterView.SIZE_MOD_END;
+        String tag =
+                "[enc: "
+                        + this.mediaCodec.getCodecInfo().getCanonicalName()
+                        + NavigationBarInflaterView.SIZE_MOD_END;
         MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
         boolean ready = false;
         while (true) {
@@ -148,17 +175,21 @@ public class EncoderFilter extends MediaCodecFilter {
                                 throw new CancellationException("input channel is already closed");
                             }
                             ByteBuffer inputBuffer = this.mediaCodec.getInputBuffer(bufferIdx);
-                            ByteBuffer data = (ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class);
+                            ByteBuffer data =
+                                    (ByteBuffer) mediaBuffer.getTypedData(ByteBuffer.class);
                             data.rewind();
                             inputBuffer.put(data);
-                            long timeUs = ((Long) mediaBuffer.getExtra("timestampUs", 0L)).longValue();
-                            this.mediaCodec.queueInputBuffer(bufferIdx, 0, inputBuffer.limit(), timeUs, 0);
+                            long timeUs =
+                                    ((Long) mediaBuffer.getExtra("timestampUs", 0L)).longValue();
+                            this.mediaCodec.queueInputBuffer(
+                                    bufferIdx, 0, inputBuffer.limit(), timeUs, 0);
                         }
                     }
                     mediaBuffer.release();
                 }
                 Log.d(TAG, tag + "dequeue output buffer");
-                int status = this.mediaCodec.dequeueOutputBuffer(bufferInfo, JobInfo.MIN_BACKOFF_MILLIS);
+                int status =
+                        this.mediaCodec.dequeueOutputBuffer(bufferInfo, JobInfo.MIN_BACKOFF_MILLIS);
                 Log.d(TAG, tag + "buffer st=" + status + ", info=" + bufferInfo);
                 if (status == -1) {
                     Log.d(TAG, tag + "retry dequeue output buffer");
@@ -199,9 +230,26 @@ public class EncoderFilter extends MediaCodecFilter {
                         this.processedFrames++;
                         descriptor = descriptor2;
                         mediaType = mediaType3;
-                        Log.d(TAG, tag + "# of encoded frames: " + this.processedFrames + NavigationBarInflaterView.SIZE_MOD_START + bufferInfo.presentationTimeUs + "](" + Integer.toHexString(bufferInfo.flags) + NavigationBarInflaterView.KEY_CODE_END);
-                        Log.d(TAG, tag + "total # :" + this.numWholeFrames.get() + ", last ts: " + this.lastTimestampUs.get());
-                        if ((inputChannel instanceof SurfaceChannel) && (isReachedLastFrame(this.processedFrames) || isReachedLastTimestamp(bufferInfo.presentationTimeUs))) {
+                        Log.d(
+                                TAG,
+                                tag
+                                        + "# of encoded frames: "
+                                        + this.processedFrames
+                                        + NavigationBarInflaterView.SIZE_MOD_START
+                                        + bufferInfo.presentationTimeUs
+                                        + "]("
+                                        + Integer.toHexString(bufferInfo.flags)
+                                        + NavigationBarInflaterView.KEY_CODE_END);
+                        Log.d(
+                                TAG,
+                                tag
+                                        + "total # :"
+                                        + this.numWholeFrames.get()
+                                        + ", last ts: "
+                                        + this.lastTimestampUs.get());
+                        if ((inputChannel instanceof SurfaceChannel)
+                                && (isReachedLastFrame(this.processedFrames)
+                                        || isReachedLastTimestamp(bufferInfo.presentationTimeUs))) {
                             bufferInfo.flags |= 4;
                             this.lastTimestampUs.set(Long.MAX_VALUE);
                         }

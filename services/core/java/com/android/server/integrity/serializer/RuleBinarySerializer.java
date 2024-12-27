@@ -6,11 +6,13 @@ import android.content.integrity.InstallerAllowedByManifestFormula;
 import android.content.integrity.IntegrityFormula;
 import android.content.integrity.IntegrityUtils;
 import android.content.integrity.Rule;
+
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.audio.AudioService$$ExternalSyntheticLambda1;
 import com.android.server.integrity.model.BitOutputStream;
 import com.android.server.integrity.model.ByteTrackedOutputStream;
+
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -24,14 +26,16 @@ import java.util.stream.Collectors;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class RuleBinarySerializer implements RuleSerializer {
-    public static void serializeFormula(IntegrityFormula integrityFormula, BitOutputStream bitOutputStream) {
+    public static void serializeFormula(
+            IntegrityFormula integrityFormula, BitOutputStream bitOutputStream) {
         if (!(integrityFormula instanceof AtomicFormula)) {
             if (!(integrityFormula instanceof CompoundFormula)) {
                 if (integrityFormula instanceof InstallerAllowedByManifestFormula) {
                     bitOutputStream.setNext(3, 3);
                     return;
                 }
-                throw new IllegalArgumentException("Invalid formula type: " + integrityFormula.getClass());
+                throw new IllegalArgumentException(
+                        "Invalid formula type: " + integrityFormula.getClass());
             }
             CompoundFormula compoundFormula = (CompoundFormula) integrityFormula;
             if (compoundFormula == null) {
@@ -55,10 +59,14 @@ public final class RuleBinarySerializer implements RuleSerializer {
         if (stringAtomicFormula.getTag() == 1) {
             AtomicFormula.StringAtomicFormula stringAtomicFormula2 = stringAtomicFormula;
             bitOutputStream.setNext(3, 0);
-            serializeStringValue(stringAtomicFormula2.getValue(), stringAtomicFormula2.getIsHashedValue().booleanValue(), bitOutputStream);
+            serializeStringValue(
+                    stringAtomicFormula2.getValue(),
+                    stringAtomicFormula2.getIsHashedValue().booleanValue(),
+                    bitOutputStream);
         } else {
             if (stringAtomicFormula.getTag() == 2) {
-                AtomicFormula.LongAtomicFormula longAtomicFormula = (AtomicFormula.LongAtomicFormula) stringAtomicFormula;
+                AtomicFormula.LongAtomicFormula longAtomicFormula =
+                        (AtomicFormula.LongAtomicFormula) stringAtomicFormula;
                 bitOutputStream.setNext(3, longAtomicFormula.getOperator().intValue());
                 long longValue = longAtomicFormula.getValue().longValue();
                 bitOutputStream.setNext(32, (int) (longValue >>> 32));
@@ -67,19 +75,25 @@ public final class RuleBinarySerializer implements RuleSerializer {
             }
             if (stringAtomicFormula.getTag() == 3) {
                 bitOutputStream.setNext(3, 0);
-                bitOutputStream.setNext(((AtomicFormula.BooleanAtomicFormula) stringAtomicFormula).getValue().booleanValue());
+                bitOutputStream.setNext(
+                        ((AtomicFormula.BooleanAtomicFormula) stringAtomicFormula)
+                                .getValue()
+                                .booleanValue());
             } else {
-                throw new IllegalArgumentException("Invalid atomic formula type: " + stringAtomicFormula.getClass());
+                throw new IllegalArgumentException(
+                        "Invalid atomic formula type: " + stringAtomicFormula.getClass());
             }
         }
     }
 
-    public static void serializeIndexGroup(LinkedHashMap linkedHashMap, BitOutputStream bitOutputStream, boolean z) {
+    public static void serializeIndexGroup(
+            LinkedHashMap linkedHashMap, BitOutputStream bitOutputStream, boolean z) {
         serializeStringValue("START_KEY", false, bitOutputStream);
         bitOutputStream.setNext(32, ((Integer) linkedHashMap.get("START_KEY")).intValue());
         if (z) {
             for (Map.Entry entry : linkedHashMap.entrySet()) {
-                if (!((String) entry.getKey()).equals("START_KEY") && !((String) entry.getKey()).equals("END_KEY")) {
+                if (!((String) entry.getKey()).equals("START_KEY")
+                        && !((String) entry.getKey()).equals("END_KEY")) {
                     serializeStringValue((String) entry.getKey(), false, bitOutputStream);
                     bitOutputStream.setNext(32, ((Integer) entry.getValue()).intValue());
                 }
@@ -89,8 +103,10 @@ public final class RuleBinarySerializer implements RuleSerializer {
         bitOutputStream.setNext(32, ((Integer) linkedHashMap.get("END_KEY")).intValue());
     }
 
-    public static LinkedHashMap serializeRuleList(Map map, ByteTrackedOutputStream byteTrackedOutputStream) {
-        Preconditions.checkArgument(map != null, "serializeRuleList should never be called with null rule list.");
+    public static LinkedHashMap serializeRuleList(
+            Map map, ByteTrackedOutputStream byteTrackedOutputStream) {
+        Preconditions.checkArgument(
+                map != null, "serializeRuleList should never be called with null rule list.");
         BitOutputStream bitOutputStream = new BitOutputStream(byteTrackedOutputStream);
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         linkedHashMap.put("START_KEY", Integer.valueOf(byteTrackedOutputStream.mWrittenBytesCount));
@@ -116,11 +132,15 @@ public final class RuleBinarySerializer implements RuleSerializer {
         return linkedHashMap;
     }
 
-    public static void serializeStringValue(String str, boolean z, BitOutputStream bitOutputStream) {
+    public static void serializeStringValue(
+            String str, boolean z, BitOutputStream bitOutputStream) {
         if (str == null) {
             throw new IllegalArgumentException("String value can not be null.");
         }
-        byte[] bytes = !z ? str.getBytes(StandardCharsets.UTF_8) : IntegrityUtils.getBytesFromHexDigest(str);
+        byte[] bytes =
+                !z
+                        ? str.getBytes(StandardCharsets.UTF_8)
+                        : IntegrityUtils.getBytesFromHexDigest(str);
         bitOutputStream.setNext(z);
         bitOutputStream.setNext(8, bytes.length);
         for (byte b : bytes) {
@@ -129,13 +149,27 @@ public final class RuleBinarySerializer implements RuleSerializer {
     }
 
     public static void verifySize(int i, Map map) {
-        int intValue = ((Integer) map.values().stream().map(new RuleBinarySerializer$$ExternalSyntheticLambda0()).collect(Collectors.summingInt(new AudioService$$ExternalSyntheticLambda1(2)))).intValue();
+        int intValue =
+                ((Integer)
+                                map.values().stream()
+                                        .map(new RuleBinarySerializer$$ExternalSyntheticLambda0())
+                                        .collect(
+                                                Collectors.summingInt(
+                                                        new AudioService$$ExternalSyntheticLambda1(
+                                                                2))))
+                        .intValue();
         if (intValue > i) {
-            throw new IllegalArgumentException(ArrayUtils$$ExternalSyntheticOutline0.m(intValue, i, "Too many rules provided in the indexing group. Provided ", " limit "));
+            throw new IllegalArgumentException(
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            intValue,
+                            i,
+                            "Too many rules provided in the indexing group. Provided ",
+                            " limit "));
         }
     }
 
-    public final void serialize(List list, Optional optional, OutputStream outputStream, OutputStream outputStream2) {
+    public final void serialize(
+            List list, Optional optional, OutputStream outputStream, OutputStream outputStream2) {
         try {
             if (list == null) {
                 throw new IllegalArgumentException("Null rules cannot be serialized.");
@@ -143,18 +177,23 @@ public final class RuleBinarySerializer implements RuleSerializer {
             if (list.size() > 200000) {
                 throw new IllegalArgumentException("Too many rules provided: " + list.size());
             }
-            HashMap hashMap = (HashMap) RuleIndexingDetailsIdentifier.splitRulesIntoIndexBuckets(list);
+            HashMap hashMap =
+                    (HashMap) RuleIndexingDetailsIdentifier.splitRulesIntoIndexBuckets(list);
             verifySize(100000, (Map) hashMap.get(1));
             verifySize(100000, (Map) hashMap.get(2));
             verifySize(1000, (Map) hashMap.get(0));
-            ByteTrackedOutputStream byteTrackedOutputStream = new ByteTrackedOutputStream(outputStream);
+            ByteTrackedOutputStream byteTrackedOutputStream =
+                    new ByteTrackedOutputStream(outputStream);
             int intValue = ((Integer) optional.orElse(1)).intValue();
             BitOutputStream bitOutputStream = new BitOutputStream(byteTrackedOutputStream);
             bitOutputStream.setNext(8, intValue);
             bitOutputStream.flush();
-            LinkedHashMap serializeRuleList = serializeRuleList((Map) hashMap.get(1), byteTrackedOutputStream);
-            LinkedHashMap serializeRuleList2 = serializeRuleList((Map) hashMap.get(2), byteTrackedOutputStream);
-            LinkedHashMap serializeRuleList3 = serializeRuleList((Map) hashMap.get(0), byteTrackedOutputStream);
+            LinkedHashMap serializeRuleList =
+                    serializeRuleList((Map) hashMap.get(1), byteTrackedOutputStream);
+            LinkedHashMap serializeRuleList2 =
+                    serializeRuleList((Map) hashMap.get(2), byteTrackedOutputStream);
+            LinkedHashMap serializeRuleList3 =
+                    serializeRuleList((Map) hashMap.get(0), byteTrackedOutputStream);
             BitOutputStream bitOutputStream2 = new BitOutputStream(outputStream2);
             serializeIndexGroup(serializeRuleList, bitOutputStream2, true);
             serializeIndexGroup(serializeRuleList2, bitOutputStream2, true);

@@ -1,12 +1,14 @@
 package com.android.internal.location.altitude.nano;
 
 import android.hardware.scontext.SContextConstants;
+
 import com.android.framework.protobuf.nano.CodedInputByteBufferNano;
 import com.android.framework.protobuf.nano.CodedOutputByteBufferNano;
 import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -56,13 +58,16 @@ public final class MapParamsProto extends MessageNano {
         if (this.diskTileS2Level != 0) {
             output.writeInt32(3, this.diskTileS2Level);
         }
-        if (Double.doubleToLongBits(this.modelAMeters) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+        if (Double.doubleToLongBits(this.modelAMeters)
+                != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
             output.writeDouble(4, this.modelAMeters);
         }
-        if (Double.doubleToLongBits(this.modelBMeters) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+        if (Double.doubleToLongBits(this.modelBMeters)
+                != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
             output.writeDouble(5, this.modelBMeters);
         }
-        if (Double.doubleToLongBits(this.modelRmseMeters) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+        if (Double.doubleToLongBits(this.modelRmseMeters)
+                != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
             output.writeDouble(6, this.modelRmseMeters);
         }
         super.writeTo(output);
@@ -80,13 +85,16 @@ public final class MapParamsProto extends MessageNano {
         if (this.diskTileS2Level != 0) {
             size += CodedOutputByteBufferNano.computeInt32Size(3, this.diskTileS2Level);
         }
-        if (Double.doubleToLongBits(this.modelAMeters) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+        if (Double.doubleToLongBits(this.modelAMeters)
+                != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
             size += CodedOutputByteBufferNano.computeDoubleSize(4, this.modelAMeters);
         }
-        if (Double.doubleToLongBits(this.modelBMeters) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+        if (Double.doubleToLongBits(this.modelBMeters)
+                != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
             size += CodedOutputByteBufferNano.computeDoubleSize(5, this.modelBMeters);
         }
-        if (Double.doubleToLongBits(this.modelRmseMeters) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+        if (Double.doubleToLongBits(this.modelRmseMeters)
+                != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
             return size + CodedOutputByteBufferNano.computeDoubleSize(6, this.modelRmseMeters);
         }
         return size;

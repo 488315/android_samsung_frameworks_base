@@ -4,6 +4,7 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import java.io.PrintWriter;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.BiConsumer;
@@ -20,7 +21,9 @@ public abstract class BroadcastLoopers {
             synchronized (arraySet) {
                 try {
                     if (arraySet.add(myLooper)) {
-                        Slog.w("BroadcastLoopers", "Found previously unknown looper " + myLooper.getThread());
+                        Slog.w(
+                                "BroadcastLoopers",
+                                "Found previously unknown looper " + myLooper.getThread());
                     }
                 } finally {
                 }
@@ -51,7 +54,8 @@ public abstract class BroadcastLoopers {
         while (countDownLatch.getCount() > 0) {
             long uptimeMillis = SystemClock.uptimeMillis();
             if (uptimeMillis >= 1000 + j) {
-                printWriter.println("Waiting for " + countDownLatch.getCount() + " loopers to drain...");
+                printWriter.println(
+                        "Waiting for " + countDownLatch.getCount() + " loopers to drain...");
                 printWriter.flush();
                 j = uptimeMillis;
             }

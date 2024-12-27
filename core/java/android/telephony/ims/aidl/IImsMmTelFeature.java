@@ -10,16 +10,14 @@ import android.telephony.ims.ImsCallProfile;
 import android.telephony.ims.MediaQualityStatus;
 import android.telephony.ims.MediaThreshold;
 import android.telephony.ims.RtpHeaderExtensionType;
-import android.telephony.ims.aidl.IImsCapabilityCallback;
-import android.telephony.ims.aidl.IImsMmTelListener;
-import android.telephony.ims.aidl.IImsSmsListener;
-import android.telephony.ims.aidl.ISrvccStartedCallback;
 import android.telephony.ims.feature.CapabilityChangeRequest;
+
 import com.android.ims.internal.IImsCallSession;
 import com.android.ims.internal.IImsEcbm;
 import com.android.ims.internal.IImsMultiEndpoint;
 import com.android.ims.internal.IImsUt;
 import com.android.internal.telephony.PublishDialog;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -32,13 +30,18 @@ public interface IImsMmTelFeature extends IInterface {
 
     void acknowledgeSmsWithPdu(int i, int i2, int i3, byte[] bArr) throws RemoteException;
 
-    void addCapabilityCallback(IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException;
+    void addCapabilityCallback(IImsCapabilityCallback iImsCapabilityCallback)
+            throws RemoteException;
 
     void changeAudioPath(int i, int i2) throws RemoteException;
 
-    void changeCapabilitiesConfiguration(CapabilityChangeRequest capabilityChangeRequest, IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException;
+    void changeCapabilitiesConfiguration(
+            CapabilityChangeRequest capabilityChangeRequest,
+            IImsCapabilityCallback iImsCapabilityCallback)
+            throws RemoteException;
 
-    void changeOfferedRtpHeaderExtensionTypes(List<RtpHeaderExtensionType> list) throws RemoteException;
+    void changeOfferedRtpHeaderExtensionTypes(List<RtpHeaderExtensionType> list)
+            throws RemoteException;
 
     ImsCallProfile createCallProfile(int i, int i2) throws RemoteException;
 
@@ -76,13 +79,15 @@ public interface IImsMmTelFeature extends IInterface {
 
     void onSmsReady() throws RemoteException;
 
-    void queryCapabilityConfiguration(int i, int i2, IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException;
+    void queryCapabilityConfiguration(int i, int i2, IImsCapabilityCallback iImsCapabilityCallback)
+            throws RemoteException;
 
     int queryCapabilityStatus() throws RemoteException;
 
     MediaQualityStatus queryMediaQualityStatus(int i) throws RemoteException;
 
-    void removeCapabilityCallback(IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException;
+    void removeCapabilityCallback(IImsCapabilityCallback iImsCapabilityCallback)
+            throws RemoteException;
 
     void sendDtmfEvent(int i, String str) throws RemoteException;
 
@@ -90,7 +95,8 @@ public interface IImsMmTelFeature extends IInterface {
 
     void sendPublishDialog(int i, PublishDialog publishDialog) throws RemoteException;
 
-    void sendSms(int i, int i2, String str, String str2, boolean z, byte[] bArr) throws RemoteException;
+    void sendSms(int i, int i2, String str, String str2, boolean z, byte[] bArr)
+            throws RemoteException;
 
     void setListener(IImsMmTelListener iImsMmTelListener) throws RemoteException;
 
@@ -120,8 +126,7 @@ public interface IImsMmTelFeature extends IInterface {
 
     public static class Default implements IImsMmTelFeature {
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void setListener(IImsMmTelListener l) throws RemoteException {
-        }
+        public void setListener(IImsMmTelListener l) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
         public int getFeatureState() throws RemoteException {
@@ -129,13 +134,14 @@ public interface IImsMmTelFeature extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public ImsCallProfile createCallProfile(int callSessionType, int callType) throws RemoteException {
+        public ImsCallProfile createCallProfile(int callSessionType, int callType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void changeOfferedRtpHeaderExtensionTypes(List<RtpHeaderExtensionType> types) throws RemoteException {
-        }
+        public void changeOfferedRtpHeaderExtensionTypes(List<RtpHeaderExtensionType> types)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
         public IImsCallSession createCallSession(ImsCallProfile profile) throws RemoteException {
@@ -158,8 +164,7 @@ public interface IImsMmTelFeature extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void setUiTtyMode(int uiTtyMode, Message onCompleteMessage) throws RemoteException {
-        }
+        public void setUiTtyMode(int uiTtyMode, Message onCompleteMessage) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
         public IImsMultiEndpoint getMultiEndpointInterface() throws RemoteException {
@@ -172,73 +177,65 @@ public interface IImsMmTelFeature extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void setTerminalBasedCallWaitingStatus(boolean enabled) throws RemoteException {
-        }
+        public void setTerminalBasedCallWaitingStatus(boolean enabled) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void addCapabilityCallback(IImsCapabilityCallback c) throws RemoteException {
-        }
+        public void addCapabilityCallback(IImsCapabilityCallback c) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void removeCapabilityCallback(IImsCapabilityCallback c) throws RemoteException {
-        }
+        public void removeCapabilityCallback(IImsCapabilityCallback c) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void changeCapabilitiesConfiguration(CapabilityChangeRequest request, IImsCapabilityCallback c) throws RemoteException {
-        }
+        public void changeCapabilitiesConfiguration(
+                CapabilityChangeRequest request, IImsCapabilityCallback c) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void queryCapabilityConfiguration(int capability, int radioTech, IImsCapabilityCallback c) throws RemoteException {
-        }
+        public void queryCapabilityConfiguration(
+                int capability, int radioTech, IImsCapabilityCallback c) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void notifySrvccStarted(ISrvccStartedCallback cb) throws RemoteException {
-        }
+        public void notifySrvccStarted(ISrvccStartedCallback cb) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void notifySrvccCompleted() throws RemoteException {
-        }
+        public void notifySrvccCompleted() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void notifySrvccFailed() throws RemoteException {
-        }
+        public void notifySrvccFailed() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void notifySrvccCanceled() throws RemoteException {
-        }
+        public void notifySrvccCanceled() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void setMediaQualityThreshold(int mediaSessionType, MediaThreshold threshold) throws RemoteException {
-        }
+        public void setMediaQualityThreshold(int mediaSessionType, MediaThreshold threshold)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public MediaQualityStatus queryMediaQualityStatus(int mediaSessionType) throws RemoteException {
+        public MediaQualityStatus queryMediaQualityStatus(int mediaSessionType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void setSmsListener(IImsSmsListener l) throws RemoteException {
-        }
+        public void setSmsListener(IImsSmsListener l) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void sendSms(int token, int messageRef, String format, String smsc, boolean retry, byte[] pdu) throws RemoteException {
-        }
+        public void sendSms(
+                int token, int messageRef, String format, String smsc, boolean retry, byte[] pdu)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void onMemoryAvailable(int token) throws RemoteException {
-        }
+        public void onMemoryAvailable(int token) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void acknowledgeSms(int token, int messageRef, int result) throws RemoteException {
-        }
+        public void acknowledgeSms(int token, int messageRef, int result) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void acknowledgeSmsWithPdu(int token, int messageRef, int result, byte[] pdu) throws RemoteException {
-        }
+        public void acknowledgeSmsWithPdu(int token, int messageRef, int result, byte[] pdu)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void acknowledgeSmsReport(int token, int messageRef, int result) throws RemoteException {
-        }
+        public void acknowledgeSmsReport(int token, int messageRef, int result)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
         public String getSmsFormat() throws RemoteException {
@@ -246,27 +243,23 @@ public interface IImsMmTelFeature extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void onSmsReady() throws RemoteException {
-        }
+        public void onSmsReady() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void setRetryCount(int token, int retryCount) throws RemoteException {
-        }
+        public void setRetryCount(int token, int retryCount) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void setSmsc(String smsc) throws RemoteException {
-        }
+        public void setSmsc(String smsc) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void initImsSmsImplAdapter() throws RemoteException {
-        }
+        public void initImsSmsImplAdapter() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void changeAudioPath(int phoneId, int direction) throws RemoteException {
-        }
+        public void changeAudioPath(int phoneId, int direction) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public int startLocalRingBackTone(int streamType, int volume, int toneType) throws RemoteException {
+        public int startLocalRingBackTone(int streamType, int volume, int toneType)
+                throws RemoteException {
             return 0;
         }
 
@@ -276,12 +269,10 @@ public interface IImsMmTelFeature extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void setVideoCrtAudio(int phoneId, boolean on) throws RemoteException {
-        }
+        public void setVideoCrtAudio(int phoneId, boolean on) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void sendDtmfEvent(int phoneId, String dtmfEvent) throws RemoteException {
-        }
+        public void sendDtmfEvent(int phoneId, String dtmfEvent) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
         public String getTrn(String srcMsisdn, String dstMsisdn) throws RemoteException {
@@ -289,8 +280,8 @@ public interface IImsMmTelFeature extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void sendPublishDialog(int phoneId, PublishDialog publishDialog) throws RemoteException {
-        }
+        public void sendPublishDialog(int phoneId, PublishDialog publishDialog)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
         public boolean isCmcEmergencyCallSupported(int phoneId) throws RemoteException {
@@ -298,8 +289,7 @@ public interface IImsMmTelFeature extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void setTtyMode(int ttyMode) throws RemoteException {
-        }
+        public void setTtyMode(int ttyMode) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
         public int getInitialCallNetworkType(int phoneId) throws RemoteException {
@@ -307,16 +297,13 @@ public interface IImsMmTelFeature extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void triggerAutoConfigurationForApp(int phoneId) throws RemoteException {
-        }
+        public void triggerAutoConfigurationForApp(int phoneId) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void notifyEpsFallbackResult(int phoneId, int result) throws RemoteException {
-        }
+        public void notifyEpsFallbackResult(int phoneId, int result) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelFeature
-        public void sendMmsProcType(int phoneId, boolean enable) throws RemoteException {
-        }
+        public void sendMmsProcType(int phoneId, boolean enable) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -324,7 +311,7 @@ public interface IImsMmTelFeature extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsMmTelFeature {
+    public abstract static class Stub extends Binder implements IImsMmTelFeature {
         static final int TRANSACTION_acknowledgeSms = 26;
         static final int TRANSACTION_acknowledgeSmsReport = 28;
         static final int TRANSACTION_acknowledgeSmsWithPdu = 27;
@@ -497,7 +484,8 @@ public interface IImsMmTelFeature extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsMmTelFeature.DESCRIPTOR);
             }
@@ -507,7 +495,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IImsMmTelListener _arg0 = IImsMmTelListener.Stub.asInterface(data.readStrongBinder());
+                    IImsMmTelListener _arg0 =
+                            IImsMmTelListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setListener(_arg0);
                     reply.writeNoException();
@@ -526,13 +515,15 @@ public interface IImsMmTelFeature extends IInterface {
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 4:
-                    List<RtpHeaderExtensionType> _arg03 = data.createTypedArrayList(RtpHeaderExtensionType.CREATOR);
+                    List<RtpHeaderExtensionType> _arg03 =
+                            data.createTypedArrayList(RtpHeaderExtensionType.CREATOR);
                     data.enforceNoDataAvail();
                     changeOfferedRtpHeaderExtensionTypes(_arg03);
                     reply.writeNoException();
                     return true;
                 case 5:
-                    ImsCallProfile _arg04 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _arg04 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
                     data.enforceNoDataAvail();
                     IImsCallSession _result3 = createCallSession(_arg04);
                     reply.writeNoException();
@@ -579,30 +570,37 @@ public interface IImsMmTelFeature extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 13:
-                    IImsCapabilityCallback _arg08 = IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsCapabilityCallback _arg08 =
+                            IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addCapabilityCallback(_arg08);
                     return true;
                 case 14:
-                    IImsCapabilityCallback _arg09 = IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsCapabilityCallback _arg09 =
+                            IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeCapabilityCallback(_arg09);
                     return true;
                 case 15:
-                    CapabilityChangeRequest _arg010 = (CapabilityChangeRequest) data.readTypedObject(CapabilityChangeRequest.CREATOR);
-                    IImsCapabilityCallback _arg13 = IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
+                    CapabilityChangeRequest _arg010 =
+                            (CapabilityChangeRequest)
+                                    data.readTypedObject(CapabilityChangeRequest.CREATOR);
+                    IImsCapabilityCallback _arg13 =
+                            IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     changeCapabilitiesConfiguration(_arg010, _arg13);
                     return true;
                 case 16:
                     int _arg011 = data.readInt();
                     int _arg14 = data.readInt();
-                    IImsCapabilityCallback _arg2 = IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsCapabilityCallback _arg2 =
+                            IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     queryCapabilityConfiguration(_arg011, _arg14, _arg2);
                     return true;
                 case 17:
-                    ISrvccStartedCallback _arg012 = ISrvccStartedCallback.Stub.asInterface(data.readStrongBinder());
+                    ISrvccStartedCallback _arg012 =
+                            ISrvccStartedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     notifySrvccStarted(_arg012);
                     return true;
@@ -617,7 +615,8 @@ public interface IImsMmTelFeature extends IInterface {
                     return true;
                 case 21:
                     int _arg013 = data.readInt();
-                    MediaThreshold _arg15 = (MediaThreshold) data.readTypedObject(MediaThreshold.CREATOR);
+                    MediaThreshold _arg15 =
+                            (MediaThreshold) data.readTypedObject(MediaThreshold.CREATOR);
                     data.enforceNoDataAvail();
                     setMediaQualityThreshold(_arg013, _arg15);
                     return true;
@@ -629,7 +628,8 @@ public interface IImsMmTelFeature extends IInterface {
                     reply.writeTypedObject(_result9, 1);
                     return true;
                 case 23:
-                    IImsSmsListener _arg015 = IImsSmsListener.Stub.asInterface(data.readStrongBinder());
+                    IImsSmsListener _arg015 =
+                            IImsSmsListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setSmsListener(_arg015);
                     reply.writeNoException();
@@ -740,7 +740,8 @@ public interface IImsMmTelFeature extends IInterface {
                     return true;
                 case 40:
                     int _arg028 = data.readInt();
-                    PublishDialog _arg116 = (PublishDialog) data.readTypedObject(PublishDialog.CREATOR);
+                    PublishDialog _arg116 =
+                            (PublishDialog) data.readTypedObject(PublishDialog.CREATOR);
                     data.enforceNoDataAvail();
                     sendPublishDialog(_arg028, _arg116);
                     reply.writeNoException();
@@ -838,7 +839,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public ImsCallProfile createCallProfile(int callSessionType, int callType) throws RemoteException {
+            public ImsCallProfile createCallProfile(int callSessionType, int callType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -847,7 +849,8 @@ public interface IImsMmTelFeature extends IInterface {
                     _data.writeInt(callType);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    ImsCallProfile _result = (ImsCallProfile) _reply.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsCallProfile _result =
+                            (ImsCallProfile) _reply.readTypedObject(ImsCallProfile.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -856,7 +859,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public void changeOfferedRtpHeaderExtensionTypes(List<RtpHeaderExtensionType> types) throws RemoteException {
+            public void changeOfferedRtpHeaderExtensionTypes(List<RtpHeaderExtensionType> types)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -871,7 +875,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public IImsCallSession createCallSession(ImsCallProfile profile) throws RemoteException {
+            public IImsCallSession createCallSession(ImsCallProfile profile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -879,7 +884,8 @@ public interface IImsMmTelFeature extends IInterface {
                     _data.writeTypedObject(profile, 0);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    IImsCallSession _result = IImsCallSession.Stub.asInterface(_reply.readStrongBinder());
+                    IImsCallSession _result =
+                            IImsCallSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -937,7 +943,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public void setUiTtyMode(int uiTtyMode, Message onCompleteMessage) throws RemoteException {
+            public void setUiTtyMode(int uiTtyMode, Message onCompleteMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -960,7 +967,8 @@ public interface IImsMmTelFeature extends IInterface {
                     _data.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    IImsMultiEndpoint _result = IImsMultiEndpoint.Stub.asInterface(_reply.readStrongBinder());
+                    IImsMultiEndpoint _result =
+                            IImsMultiEndpoint.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1024,7 +1032,9 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public void changeCapabilitiesConfiguration(CapabilityChangeRequest request, IImsCapabilityCallback c) throws RemoteException {
+            public void changeCapabilitiesConfiguration(
+                    CapabilityChangeRequest request, IImsCapabilityCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
@@ -1037,7 +1047,9 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public void queryCapabilityConfiguration(int capability, int radioTech, IImsCapabilityCallback c) throws RemoteException {
+            public void queryCapabilityConfiguration(
+                    int capability, int radioTech, IImsCapabilityCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
@@ -1096,7 +1108,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public void setMediaQualityThreshold(int mediaSessionType, MediaThreshold threshold) throws RemoteException {
+            public void setMediaQualityThreshold(int mediaSessionType, MediaThreshold threshold)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
@@ -1109,7 +1122,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public MediaQualityStatus queryMediaQualityStatus(int mediaSessionType) throws RemoteException {
+            public MediaQualityStatus queryMediaQualityStatus(int mediaSessionType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1117,7 +1131,8 @@ public interface IImsMmTelFeature extends IInterface {
                     _data.writeInt(mediaSessionType);
                     this.mRemote.transact(22, _data, _reply, 0);
                     _reply.readException();
-                    MediaQualityStatus _result = (MediaQualityStatus) _reply.readTypedObject(MediaQualityStatus.CREATOR);
+                    MediaQualityStatus _result =
+                            (MediaQualityStatus) _reply.readTypedObject(MediaQualityStatus.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1141,7 +1156,14 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public void sendSms(int token, int messageRef, String format, String smsc, boolean retry, byte[] pdu) throws RemoteException {
+            public void sendSms(
+                    int token,
+                    int messageRef,
+                    String format,
+                    String smsc,
+                    boolean retry,
+                    byte[] pdu)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
@@ -1170,7 +1192,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public void acknowledgeSms(int token, int messageRef, int result) throws RemoteException {
+            public void acknowledgeSms(int token, int messageRef, int result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
@@ -1184,7 +1207,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public void acknowledgeSmsWithPdu(int token, int messageRef, int result, byte[] pdu) throws RemoteException {
+            public void acknowledgeSmsWithPdu(int token, int messageRef, int result, byte[] pdu)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
@@ -1199,7 +1223,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public void acknowledgeSmsReport(int token, int messageRef, int result) throws RemoteException {
+            public void acknowledgeSmsReport(int token, int messageRef, int result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsMmTelFeature.DESCRIPTOR);
@@ -1298,7 +1323,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public int startLocalRingBackTone(int streamType, int volume, int toneType) throws RemoteException {
+            public int startLocalRingBackTone(int streamType, int volume, int toneType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1383,7 +1409,8 @@ public interface IImsMmTelFeature extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelFeature
-            public void sendPublishDialog(int phoneId, PublishDialog publishDialog) throws RemoteException {
+            public void sendPublishDialog(int phoneId, PublishDialog publishDialog)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

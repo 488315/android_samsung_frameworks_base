@@ -67,9 +67,12 @@ public final class VendorLockAidl extends OemLock {
         IOemLock iOemLock = this.mOemLock;
         try {
             if (bArr == null) {
-                oemUnlockAllowedByCarrier = ((IOemLock.Stub.Proxy) iOemLock).setOemUnlockAllowedByCarrier(z, new byte[0]);
+                oemUnlockAllowedByCarrier =
+                        ((IOemLock.Stub.Proxy) iOemLock)
+                                .setOemUnlockAllowedByCarrier(z, new byte[0]);
             } else {
-                oemUnlockAllowedByCarrier = ((IOemLock.Stub.Proxy) iOemLock).setOemUnlockAllowedByCarrier(z, bArr);
+                oemUnlockAllowedByCarrier =
+                        ((IOemLock.Stub.Proxy) iOemLock).setOemUnlockAllowedByCarrier(z, bArr);
             }
             if (oemUnlockAllowedByCarrier == 0) {
                 Slog.i("OemLock", "Updated carrier allows OEM lock state to: " + z);
@@ -77,11 +80,14 @@ public final class VendorLockAidl extends OemLock {
                 if (oemUnlockAllowedByCarrier != 1) {
                     if (oemUnlockAllowedByCarrier == 2) {
                         if (bArr != null) {
-                            throw new SecurityException("Invalid signature used in attempt to carrier unlock");
+                            throw new SecurityException(
+                                    "Invalid signature used in attempt to carrier unlock");
                         }
                         throw new IllegalArgumentException("Signature required for carrier unlock");
                     }
-                    Slog.e("OemLock", "Unknown return value indicates code is out of sync with HAL");
+                    Slog.e(
+                            "OemLock",
+                            "Unknown return value indicates code is out of sync with HAL");
                 }
                 throw new RuntimeException("Failed to set carrier OEM unlock state");
             }

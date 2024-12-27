@@ -37,6 +37,7 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
 import android.widget.Toast;
+
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.os.TransferPipe;
@@ -49,9 +50,9 @@ import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.ExplicitHealthCheckController$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.SystemService;
-import com.android.server.print.UserState;
 import com.android.server.print.UserState.AnonymousClass1;
 import com.android.server.print.UserState.AnonymousClass2;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -81,7 +82,8 @@ public final class PrintManagerService extends SystemService {
             public final /* synthetic */ PrintManagerImpl this$1;
             public final /* synthetic */ int val$userId;
 
-            public /* synthetic */ AnonymousClass3(PrintManagerImpl printManagerImpl, int i, int i2) {
+            public /* synthetic */ AnonymousClass3(
+                    PrintManagerImpl printManagerImpl, int i, int i2) {
                 this.$r8$classId = i2;
                 this.this$1 = printManagerImpl;
                 this.val$userId = i;
@@ -94,7 +96,9 @@ public final class PrintManagerService extends SystemService {
                     case 0:
                         if (this.this$1.mUserManager.isUserUnlockingOrUnlocked(this.val$userId)) {
                             synchronized (this.this$1.mLock) {
-                                orCreateUserStateLocked = this.this$1.getOrCreateUserStateLocked(this.val$userId, true, false, true);
+                                orCreateUserStateLocked =
+                                        this.this$1.getOrCreateUserStateLocked(
+                                                this.val$userId, true, false, true);
                             }
                             orCreateUserStateLocked.removeObsoletePrintJobs();
                             return;
@@ -103,7 +107,8 @@ public final class PrintManagerService extends SystemService {
                     default:
                         synchronized (this.this$1.mLock) {
                             try {
-                                UserState userState = (UserState) this.this$1.mUserStates.get(this.val$userId);
+                                UserState userState =
+                                        (UserState) this.this$1.mUserStates.get(this.val$userId);
                                 if (userState != null) {
                                     userState.destroyLocked();
                                     this.this$1.mUserStates.remove(this.val$userId);
@@ -121,25 +126,47 @@ public final class PrintManagerService extends SystemService {
             this.mContext = context;
             this.mUserManager = (UserManager) context.getSystemService("user");
             final Uri uriFor = Settings.Secure.getUriFor("disabled_print_services");
-            context.getContentResolver().registerContentObserver(uriFor, false, new ContentObserver(BackgroundThread.getHandler()) { // from class: com.android.server.print.PrintManagerService.PrintManagerImpl.1
-                @Override // android.database.ContentObserver
-                public final void onChange(boolean z, Uri uri, int i) {
-                    int i2;
-                    if (uriFor.equals(uri)) {
-                        synchronized (PrintManagerImpl.this.mLock) {
-                            try {
-                                int size = PrintManagerImpl.this.mUserStates.size();
-                                while (i2 < size) {
-                                    i2 = (i == -1 || i == PrintManagerImpl.this.mUserStates.keyAt(i2)) ? 0 : i2 + 1;
-                                    ((UserState) PrintManagerImpl.this.mUserStates.valueAt(i2)).updateIfNeededLocked();
+            context.getContentResolver()
+                    .registerContentObserver(
+                            uriFor,
+                            false,
+                            new ContentObserver(
+                                    BackgroundThread
+                                            .getHandler()) { // from class:
+                                                             // com.android.server.print.PrintManagerService.PrintManagerImpl.1
+                                @Override // android.database.ContentObserver
+                                public final void onChange(boolean z, Uri uri, int i) {
+                                    int i2;
+                                    if (uriFor.equals(uri)) {
+                                        synchronized (PrintManagerImpl.this.mLock) {
+                                            try {
+                                                int size = PrintManagerImpl.this.mUserStates.size();
+                                                while (i2 < size) {
+                                                    i2 =
+                                                            (i == -1
+                                                                            || i
+                                                                                    == PrintManagerImpl
+                                                                                            .this
+                                                                                            .mUserStates
+                                                                                            .keyAt(
+                                                                                                    i2))
+                                                                    ? 0
+                                                                    : i2 + 1;
+                                                    ((UserState)
+                                                                    PrintManagerImpl.this
+                                                                            .mUserStates.valueAt(
+                                                                            i2))
+                                                            .updateIfNeededLocked();
+                                                }
+                                            } finally {
+                                            }
+                                        }
+                                    }
                                 }
-                            } finally {
-                            }
-                        }
-                    }
-                }
-            }, -1);
-            new PackageMonitor() { // from class: com.android.server.print.PrintManagerService.PrintManagerImpl.2
+                            },
+                            -1);
+            new PackageMonitor() { // from class:
+                                   // com.android.server.print.PrintManagerService.PrintManagerImpl.2
                 public static boolean hadPrintService(UserState userState, String str) {
                     List printServices = userState.getPrintServices(3);
                     if (printServices == null) {
@@ -147,7 +174,11 @@ public final class PrintManagerService extends SystemService {
                     }
                     int size = printServices.size();
                     for (int i = 0; i < size; i++) {
-                        if (((PrintServiceInfo) printServices.get(i)).getResolveInfo().serviceInfo.packageName.equals(str)) {
+                        if (((PrintServiceInfo) printServices.get(i))
+                                .getResolveInfo()
+                                .serviceInfo
+                                .packageName
+                                .equals(str)) {
                             return true;
                         }
                     }
@@ -155,17 +186,32 @@ public final class PrintManagerService extends SystemService {
                 }
 
                 public final boolean hasPrintService(String str) {
-                    List queryIntentServicesAsUser = PrintManagerImpl.this.mContext.getPackageManager().queryIntentServicesAsUser(ExplicitHealthCheckController$$ExternalSyntheticOutline0.m("android.printservice.PrintService", str), 276824068, getChangingUserId());
-                    return (queryIntentServicesAsUser == null || queryIntentServicesAsUser.isEmpty()) ? false : true;
+                    List queryIntentServicesAsUser =
+                            PrintManagerImpl.this
+                                    .mContext
+                                    .getPackageManager()
+                                    .queryIntentServicesAsUser(
+                                            ExplicitHealthCheckController$$ExternalSyntheticOutline0
+                                                    .m("android.printservice.PrintService", str),
+                                            276824068,
+                                            getChangingUserId());
+                    return (queryIntentServicesAsUser == null
+                                    || queryIntentServicesAsUser.isEmpty())
+                            ? false
+                            : true;
                 }
 
-                public final boolean onHandleForceStop(Intent intent, String[] strArr, int i, boolean z) {
-                    if (!PrintManagerImpl.this.mUserManager.isUserUnlockingOrUnlocked(getChangingUserId())) {
+                public final boolean onHandleForceStop(
+                        Intent intent, String[] strArr, int i, boolean z) {
+                    if (!PrintManagerImpl.this.mUserManager.isUserUnlockingOrUnlocked(
+                            getChangingUserId())) {
                         return false;
                     }
                     synchronized (PrintManagerImpl.this.mLock) {
                         try {
-                            UserState orCreateUserStateLocked = PrintManagerImpl.this.getOrCreateUserStateLocked(getChangingUserId(), false, false, false);
+                            UserState orCreateUserStateLocked =
+                                    PrintManagerImpl.this.getOrCreateUserStateLocked(
+                                            getChangingUserId(), false, false, false);
                             List printServices = orCreateUserStateLocked.getPrintServices(1);
                             if (printServices == null) {
                                 return false;
@@ -173,7 +219,10 @@ public final class PrintManagerService extends SystemService {
                             Iterator it = printServices.iterator();
                             boolean z2 = false;
                             while (it.hasNext()) {
-                                String packageName = ((PrintServiceInfo) it.next()).getComponentName().getPackageName();
+                                String packageName =
+                                        ((PrintServiceInfo) it.next())
+                                                .getComponentName()
+                                                .getPackageName();
                                 int length = strArr.length;
                                 int i2 = 0;
                                 while (true) {
@@ -201,11 +250,15 @@ public final class PrintManagerService extends SystemService {
                 }
 
                 public final void onPackageAdded(String str, int i) {
-                    if (PrintManagerImpl.this.mUserManager.isUserUnlockingOrUnlocked(getChangingUserId())) {
+                    if (PrintManagerImpl.this.mUserManager.isUserUnlockingOrUnlocked(
+                            getChangingUserId())) {
                         synchronized (PrintManagerImpl.this.mLock) {
                             try {
                                 if (hasPrintService(str)) {
-                                    PrintManagerImpl.this.getOrCreateUserStateLocked(getChangingUserId(), false, false, false).updateIfNeededLocked();
+                                    PrintManagerImpl.this
+                                            .getOrCreateUserStateLocked(
+                                                    getChangingUserId(), false, false, false)
+                                            .updateIfNeededLocked();
                                 }
                             } catch (Throwable th) {
                                 throw th;
@@ -215,14 +268,16 @@ public final class PrintManagerService extends SystemService {
                 }
 
                 public final void onPackageModified(String str) {
-                    if (PrintManagerImpl.this.mUserManager.isUserUnlockingOrUnlocked(getChangingUserId())) {
+                    if (PrintManagerImpl.this.mUserManager.isUserUnlockingOrUnlocked(
+                            getChangingUserId())) {
                         boolean z = false;
-                        UserState orCreateUserStateLocked = PrintManagerImpl.this.getOrCreateUserStateLocked(getChangingUserId(), false, false, false);
+                        UserState orCreateUserStateLocked =
+                                PrintManagerImpl.this.getOrCreateUserStateLocked(
+                                        getChangingUserId(), false, false, false);
                         synchronized (PrintManagerImpl.this.mLock) {
                             try {
                                 if (!hadPrintService(orCreateUserStateLocked, str)) {
-                                    if (hasPrintService(str)) {
-                                    }
+                                    if (hasPrintService(str)) {}
                                 }
                                 orCreateUserStateLocked.updateIfNeededLocked();
                                 z = true;
@@ -237,9 +292,12 @@ public final class PrintManagerService extends SystemService {
                 }
 
                 public final void onPackageRemoved(String str, int i) {
-                    if (PrintManagerImpl.this.mUserManager.isUserUnlockingOrUnlocked(getChangingUserId())) {
+                    if (PrintManagerImpl.this.mUserManager.isUserUnlockingOrUnlocked(
+                            getChangingUserId())) {
                         boolean z = false;
-                        UserState orCreateUserStateLocked = PrintManagerImpl.this.getOrCreateUserStateLocked(getChangingUserId(), false, false, false);
+                        UserState orCreateUserStateLocked =
+                                PrintManagerImpl.this.getOrCreateUserStateLocked(
+                                        getChangingUserId(), false, false, false);
                         synchronized (PrintManagerImpl.this.mLock) {
                             try {
                                 if (hadPrintService(orCreateUserStateLocked, str)) {
@@ -273,13 +331,33 @@ public final class PrintManagerService extends SystemService {
                         int size2 = ((ArrayList) userState.mInstalledServices).size();
                         int i4 = 0;
                         while (i4 < size2) {
-                            long start2 = dualDumpOutputStream.start("installed_services", 2246267895810L);
-                            PrintServiceInfo printServiceInfo = (PrintServiceInfo) ((ArrayList) userState.mInstalledServices).get(i4);
+                            long start2 =
+                                    dualDumpOutputStream.start(
+                                            "installed_services", 2246267895810L);
+                            PrintServiceInfo printServiceInfo =
+                                    (PrintServiceInfo)
+                                            ((ArrayList) userState.mInstalledServices).get(i4);
                             ServiceInfo serviceInfo = printServiceInfo.getResolveInfo().serviceInfo;
-                            DumpUtils.writeComponentName(dualDumpOutputStream, "component_name", 1146756268033L, new ComponentName(serviceInfo.packageName, serviceInfo.name));
-                            DumpUtils.writeStringIfNotNull(dualDumpOutputStream, "settings_activity", 1138166333442L, printServiceInfo.getSettingsActivityName());
-                            DumpUtils.writeStringIfNotNull(dualDumpOutputStream, "add_printers_activity", 1138166333443L, printServiceInfo.getAddPrintersActivityName());
-                            DumpUtils.writeStringIfNotNull(dualDumpOutputStream, "advanced_options_activity", 1138166333444L, printServiceInfo.getAdvancedOptionsActivityName());
+                            DumpUtils.writeComponentName(
+                                    dualDumpOutputStream,
+                                    "component_name",
+                                    1146756268033L,
+                                    new ComponentName(serviceInfo.packageName, serviceInfo.name));
+                            DumpUtils.writeStringIfNotNull(
+                                    dualDumpOutputStream,
+                                    "settings_activity",
+                                    1138166333442L,
+                                    printServiceInfo.getSettingsActivityName());
+                            DumpUtils.writeStringIfNotNull(
+                                    dualDumpOutputStream,
+                                    "add_printers_activity",
+                                    1138166333443L,
+                                    printServiceInfo.getAddPrintersActivityName());
+                            DumpUtils.writeStringIfNotNull(
+                                    dualDumpOutputStream,
+                                    "advanced_options_activity",
+                                    1138166333444L,
+                                    printServiceInfo.getAdvancedOptionsActivityName());
                             dualDumpOutputStream.end(start2);
                             i4++;
                             i3 = i3;
@@ -291,17 +369,24 @@ public final class PrintManagerService extends SystemService {
                         j = start;
                         Iterator it = ((ArraySet) userState.mDisabledServices).iterator();
                         while (it.hasNext()) {
-                            DumpUtils.writeComponentName(dualDumpOutputStream, "disabled_services", 2246267895811L, (ComponentName) it.next());
+                            DumpUtils.writeComponentName(
+                                    dualDumpOutputStream,
+                                    "disabled_services",
+                                    2246267895811L,
+                                    (ComponentName) it.next());
                         }
                         int size3 = userState.mActiveServices.size();
                         for (int i5 = 0; i5 < size3; i5++) {
-                            long start3 = dualDumpOutputStream.start("actives_services", 2246267895812L);
-                            ((RemotePrintService) userState.mActiveServices.valueAt(i5)).dump(dualDumpOutputStream);
+                            long start3 =
+                                    dualDumpOutputStream.start("actives_services", 2246267895812L);
+                            ((RemotePrintService) userState.mActiveServices.valueAt(i5))
+                                    .dump(dualDumpOutputStream);
                             dualDumpOutputStream.end(start3);
                         }
                         userState.mPrintJobForAppCache.dumpLocked(dualDumpOutputStream);
                         if (userState.mPrinterDiscoverySession != null) {
-                            long start4 = dualDumpOutputStream.start("discovery_service", 2246267895814L);
+                            long start4 =
+                                    dualDumpOutputStream.start("discovery_service", 2246267895814L);
                             userState.mPrinterDiscoverySession.dumpLocked(dualDumpOutputStream);
                             dualDumpOutputStream.end(start4);
                         }
@@ -311,16 +396,30 @@ public final class PrintManagerService extends SystemService {
                 long start5 = dualDumpOutputStream.start("print_spooler_state", 1146756268039L);
                 RemotePrintSpooler remotePrintSpooler = userState.mSpooler;
                 synchronized (remotePrintSpooler.mLock) {
-                    dualDumpOutputStream.write("is_destroyed", 1133871366145L, remotePrintSpooler.mDestroyed);
-                    dualDumpOutputStream.write("is_bound", 1133871366146L, remotePrintSpooler.mRemoteInstance != null);
+                    dualDumpOutputStream.write(
+                            "is_destroyed", 1133871366145L, remotePrintSpooler.mDestroyed);
+                    dualDumpOutputStream.write(
+                            "is_bound", 1133871366146L, remotePrintSpooler.mRemoteInstance != null);
                 }
                 try {
                     if (dualDumpOutputStream.isProto()) {
-                        dualDumpOutputStream.write((String) null, 1146756268035L, TransferPipe.dumpAsync(remotePrintSpooler.getRemoteInstanceLazy().asBinder(), new String[]{"--proto"}));
+                        dualDumpOutputStream.write(
+                                (String) null,
+                                1146756268035L,
+                                TransferPipe.dumpAsync(
+                                        remotePrintSpooler.getRemoteInstanceLazy().asBinder(),
+                                        new String[] {"--proto"}));
                     } else {
                         try {
-                            dualDumpOutputStream.writeNested("internal_state", TransferPipe.dumpAsync(remotePrintSpooler.getRemoteInstanceLazy().asBinder(), new String[0]));
-                        } catch (RemoteException | IOException | InterruptedException | TimeoutException e) {
+                            dualDumpOutputStream.writeNested(
+                                    "internal_state",
+                                    TransferPipe.dumpAsync(
+                                            remotePrintSpooler.getRemoteInstanceLazy().asBinder(),
+                                            new String[0]));
+                        } catch (RemoteException
+                                | IOException
+                                | InterruptedException
+                                | TimeoutException e) {
                             e = e;
                             Slog.e("RemotePrintSpooler", "Failed to dump remote instance", e);
                             dualDumpOutputStream.end(start5);
@@ -329,7 +428,10 @@ public final class PrintManagerService extends SystemService {
                             size = i;
                         }
                     }
-                } catch (RemoteException | IOException | InterruptedException | TimeoutException e2) {
+                } catch (RemoteException
+                        | IOException
+                        | InterruptedException
+                        | TimeoutException e2) {
                     e = e2;
                 }
                 dualDumpOutputStream.end(start5);
@@ -351,31 +453,51 @@ public final class PrintManagerService extends SystemService {
 
         public static int resolveCallingUserEnforcingPermissions(int i) {
             try {
-                return ActivityManager.getService().handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i, true, true, "", (String) null);
+                return ActivityManager.getService()
+                        .handleIncomingUser(
+                                Binder.getCallingPid(),
+                                Binder.getCallingUid(),
+                                i,
+                                true,
+                                true,
+                                "",
+                                (String) null);
             } catch (RemoteException unused) {
                 return i;
             }
         }
 
-        public final void addPrintJobStateChangeListener(IPrintJobStateChangeListener iPrintJobStateChangeListener, int i, int i2) {
+        public final void addPrintJobStateChangeListener(
+                IPrintJobStateChangeListener iPrintJobStateChangeListener, int i, int i2) {
             Objects.requireNonNull(iPrintJobStateChangeListener);
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i2);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
                     resolveCallingAppEnforcingPermissions(i);
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         synchronized (orCreateUserStateLocked.mLock) {
                             try {
                                 orCreateUserStateLocked.throwIfDestroyedLocked();
-                                if (orCreateUserStateLocked.mPrintJobStateChangeListenerRecords == null) {
-                                    orCreateUserStateLocked.mPrintJobStateChangeListenerRecords = new ArrayList();
+                                if (orCreateUserStateLocked.mPrintJobStateChangeListenerRecords
+                                        == null) {
+                                    orCreateUserStateLocked.mPrintJobStateChangeListenerRecords =
+                                            new ArrayList();
                                 }
-                                ((ArrayList) orCreateUserStateLocked.mPrintJobStateChangeListenerRecords).add(orCreateUserStateLocked.new AnonymousClass2(iPrintJobStateChangeListener, i));
+                                ((ArrayList)
+                                                orCreateUserStateLocked
+                                                        .mPrintJobStateChangeListenerRecords)
+                                        .add(
+                                                orCreateUserStateLocked
+                                                .new AnonymousClass2(
+                                                        iPrintJobStateChangeListener, i));
                             } finally {
                             }
                         }
@@ -387,19 +509,25 @@ public final class PrintManagerService extends SystemService {
             }
         }
 
-        public final void addPrintServiceRecommendationsChangeListener(IRecommendationsChangeListener iRecommendationsChangeListener, int i) {
+        public final void addPrintServiceRecommendationsChangeListener(
+                IRecommendationsChangeListener iRecommendationsChangeListener, int i) {
             Objects.requireNonNull(iRecommendationsChangeListener);
-            this.mContext.enforceCallingOrSelfPermission("android.permission.READ_PRINT_SERVICE_RECOMMENDATIONS", null);
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.READ_PRINT_SERVICE_RECOMMENDATIONS", null);
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        orCreateUserStateLocked.addPrintServiceRecommendationsChangeListener(iRecommendationsChangeListener);
+                        orCreateUserStateLocked.addPrintServiceRecommendationsChangeListener(
+                                iRecommendationsChangeListener);
                     } finally {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     }
@@ -409,25 +537,38 @@ public final class PrintManagerService extends SystemService {
             }
         }
 
-        public final void addPrintServicesChangeListener(IPrintServicesChangeListener iPrintServicesChangeListener, int i) {
+        public final void addPrintServicesChangeListener(
+                IPrintServicesChangeListener iPrintServicesChangeListener, int i) {
             Objects.requireNonNull(iPrintServicesChangeListener);
-            this.mContext.enforceCallingOrSelfPermission("android.permission.READ_PRINT_SERVICES", null);
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.READ_PRINT_SERVICES", null);
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         synchronized (orCreateUserStateLocked.mLock) {
                             try {
                                 orCreateUserStateLocked.throwIfDestroyedLocked();
-                                if (orCreateUserStateLocked.mPrintServicesChangeListenerRecords == null) {
-                                    orCreateUserStateLocked.mPrintServicesChangeListenerRecords = new ArrayList();
+                                if (orCreateUserStateLocked.mPrintServicesChangeListenerRecords
+                                        == null) {
+                                    orCreateUserStateLocked.mPrintServicesChangeListenerRecords =
+                                            new ArrayList();
                                 }
-                                ((ArrayList) orCreateUserStateLocked.mPrintServicesChangeListenerRecords).add(new UserState.AnonymousClass3(orCreateUserStateLocked, iPrintServicesChangeListener));
+                                ((ArrayList)
+                                                orCreateUserStateLocked
+                                                        .mPrintServicesChangeListenerRecords)
+                                        .add(
+                                                new UserState.AnonymousClass3(
+                                                        orCreateUserStateLocked,
+                                                        iPrintServicesChangeListener));
                             } finally {
                             }
                         }
@@ -446,11 +587,14 @@ public final class PrintManagerService extends SystemService {
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i2);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
                     resolveCallingAppEnforcingPermissions(i);
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         orCreateUserStateLocked.cancelPrintJob(printJobId, i);
@@ -463,25 +607,32 @@ public final class PrintManagerService extends SystemService {
             }
         }
 
-        public final void createPrinterDiscoverySession(IPrinterDiscoveryObserver iPrinterDiscoveryObserver, int i) {
+        public final void createPrinterDiscoverySession(
+                IPrinterDiscoveryObserver iPrinterDiscoveryObserver, int i) {
             Objects.requireNonNull(iPrinterDiscoveryObserver);
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         orCreateUserStateLocked.mSpooler.clearCustomPrinterIconCache();
                         synchronized (orCreateUserStateLocked.mLock) {
                             try {
                                 orCreateUserStateLocked.throwIfDestroyedLocked();
-                                UserState.AnonymousClass1 anonymousClass1 = orCreateUserStateLocked.mPrinterDiscoverySession;
+                                UserState.AnonymousClass1 anonymousClass1 =
+                                        orCreateUserStateLocked.mPrinterDiscoverySession;
                                 if (anonymousClass1 == null) {
-                                    UserState.AnonymousClass1 anonymousClass12 = orCreateUserStateLocked.new AnonymousClass1();
-                                    orCreateUserStateLocked.mPrinterDiscoverySession = anonymousClass12;
+                                    UserState.AnonymousClass1 anonymousClass12 =
+                                            orCreateUserStateLocked.new AnonymousClass1();
+                                    orCreateUserStateLocked.mPrinterDiscoverySession =
+                                            anonymousClass12;
                                     anonymousClass12.addObserverLocked(iPrinterDiscoveryObserver);
                                 } else {
                                     anonymousClass1.addObserverLocked(iPrinterDiscoveryObserver);
@@ -497,24 +648,34 @@ public final class PrintManagerService extends SystemService {
             }
         }
 
-        public final void destroyPrinterDiscoverySession(IPrinterDiscoveryObserver iPrinterDiscoveryObserver, int i) {
+        public final void destroyPrinterDiscoverySession(
+                IPrinterDiscoveryObserver iPrinterDiscoveryObserver, int i) {
             Objects.requireNonNull(iPrinterDiscoveryObserver);
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         synchronized (orCreateUserStateLocked.mLock) {
                             try {
-                                UserState.AnonymousClass1 anonymousClass1 = orCreateUserStateLocked.mPrinterDiscoverySession;
+                                UserState.AnonymousClass1 anonymousClass1 =
+                                        orCreateUserStateLocked.mPrinterDiscoverySession;
                                 if (anonymousClass1 != null) {
-                                    UserState$PrinterDiscoverySessionMediator$1 userState$PrinterDiscoverySessionMediator$1 = anonymousClass1.mDiscoveryObservers;
-                                    userState$PrinterDiscoverySessionMediator$1.unregister(iPrinterDiscoveryObserver);
-                                    if (userState$PrinterDiscoverySessionMediator$1.getRegisteredCallbackCount() == 0) {
+                                    UserState$PrinterDiscoverySessionMediator$1
+                                            userState$PrinterDiscoverySessionMediator$1 =
+                                                    anonymousClass1.mDiscoveryObservers;
+                                    userState$PrinterDiscoverySessionMediator$1.unregister(
+                                            iPrinterDiscoveryObserver);
+                                    if (userState$PrinterDiscoverySessionMediator$1
+                                                    .getRegisteredCallbackCount()
+                                            == 0) {
                                         anonymousClass1.destroyLocked();
                                     }
                                 }
@@ -529,18 +690,24 @@ public final class PrintManagerService extends SystemService {
             }
         }
 
-        public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+        public final void dump(
+                FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
             String str;
             Objects.requireNonNull(fileDescriptor);
-            if (com.android.internal.util.DumpUtils.checkDumpPermission(this.mContext, "PrintManagerService", printWriter)) {
+            if (com.android.internal.util.DumpUtils.checkDumpPermission(
+                    this.mContext, "PrintManagerService", printWriter)) {
                 int i = 0;
                 boolean z = false;
-                while (i < strArr.length && (str = strArr[i]) != null && str.length() > 0 && str.charAt(0) == '-') {
+                while (i < strArr.length
+                        && (str = strArr[i]) != null
+                        && str.length() > 0
+                        && str.charAt(0) == '-') {
                     i++;
                     if ("--proto".equals(str)) {
                         z = true;
                     } else {
-                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Unknown argument: ", str, "; use -h for help");
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                printWriter, "Unknown argument: ", str, "; use -h for help");
                     }
                 }
                 ArrayList arrayList = new ArrayList();
@@ -556,10 +723,15 @@ public final class PrintManagerService extends SystemService {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     if (z) {
-                        dump(new DualDumpOutputStream(new ProtoOutputStream(fileDescriptor)), arrayList);
+                        dump(
+                                new DualDumpOutputStream(new ProtoOutputStream(fileDescriptor)),
+                                arrayList);
                     } else {
                         printWriter.println("PRINT MANAGER STATE (dumpsys print)");
-                        dump(new DualDumpOutputStream(new IndentingPrintWriter(printWriter, "  ")), arrayList);
+                        dump(
+                                new DualDumpOutputStream(
+                                        new IndentingPrintWriter(printWriter, "  ")),
+                                arrayList);
                     }
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 } finally {
@@ -592,19 +764,33 @@ public final class PrintManagerService extends SystemService {
             synchronized (this.mLock) {
                 try {
                     Icon icon = null;
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return null;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        Icon customPrinterIcon = orCreateUserStateLocked.getCustomPrinterIcon(printerId);
-                        if (customPrinterIcon != null && ((customPrinterIcon.getType() == 4 || customPrinterIcon.getType() == 6) && (encodedUserInfo = customPrinterIcon.getUri().getEncodedUserInfo()) != null)) {
-                            int resolveCallingUserEnforcingPermissions2 = resolveCallingUserEnforcingPermissions(Integer.parseInt(encodedUserInfo));
+                        Icon customPrinterIcon =
+                                orCreateUserStateLocked.getCustomPrinterIcon(printerId);
+                        if (customPrinterIcon != null
+                                && ((customPrinterIcon.getType() == 4
+                                                || customPrinterIcon.getType() == 6)
+                                        && (encodedUserInfo =
+                                                        customPrinterIcon
+                                                                .getUri()
+                                                                .getEncodedUserInfo())
+                                                != null)) {
+                            int resolveCallingUserEnforcingPermissions2 =
+                                    resolveCallingUserEnforcingPermissions(
+                                            Integer.parseInt(encodedUserInfo));
                             synchronized (this.mLock) {
                                 try {
-                                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions2) != getCurrentUserId()) {
-                                    }
+                                    if (resolveCallingProfileParentLocked(
+                                                    resolveCallingUserEnforcingPermissions2)
+                                            != getCurrentUserId()) {}
                                 } finally {
                                 }
                             }
@@ -620,9 +806,12 @@ public final class PrintManagerService extends SystemService {
             }
         }
 
-        public final UserState getOrCreateUserStateLocked(int i, boolean z, boolean z2, boolean z3) {
+        public final UserState getOrCreateUserStateLocked(
+                int i, boolean z, boolean z2, boolean z3) {
             if (z2 && !this.mUserManager.isUserUnlockingOrUnlocked(i)) {
-                throw new IllegalStateException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "User ", " must be unlocked for printing to be available"));
+                throw new IllegalStateException(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i, "User ", " must be unlocked for printing to be available"));
             }
             UserState userState = (UserState) this.mUserStates.get(i);
             if (userState == null) {
@@ -641,7 +830,9 @@ public final class PrintManagerService extends SystemService {
                             try {
                                 remotePrintSpooler.mLock.wait();
                             } catch (InterruptedException unused) {
-                                Slog.e("RemotePrintSpooler", "Interrupted while waiting for operation to complete");
+                                Slog.e(
+                                        "RemotePrintSpooler",
+                                        "Interrupted while waiting for operation to complete");
                             }
                         }
                         remotePrintSpooler.unbindLocked();
@@ -658,11 +849,14 @@ public final class PrintManagerService extends SystemService {
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i2);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return null;
                     }
                     resolveCallingAppEnforcingPermissions(i);
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         return orCreateUserStateLocked.getPrintJobInfo(printJobId, i);
@@ -679,11 +873,14 @@ public final class PrintManagerService extends SystemService {
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i2);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return null;
                     }
                     resolveCallingAppEnforcingPermissions(i);
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         return orCreateUserStateLocked.getPrintJobInfos(i);
@@ -697,14 +894,18 @@ public final class PrintManagerService extends SystemService {
         }
 
         public final List getPrintServiceRecommendations(int i) {
-            this.mContext.enforceCallingOrSelfPermission("android.permission.READ_PRINT_SERVICE_RECOMMENDATIONS", null);
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.READ_PRINT_SERVICE_RECOMMENDATIONS", null);
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return null;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         return orCreateUserStateLocked.mPrintServiceRecommendations;
@@ -719,14 +920,18 @@ public final class PrintManagerService extends SystemService {
 
         public final List getPrintServices(int i, int i2) {
             Preconditions.checkFlagsArgument(i, 3);
-            this.mContext.enforceCallingOrSelfPermission("android.permission.READ_PRINT_SERVICES", null);
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.READ_PRINT_SERVICES", null);
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i2);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return null;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         return orCreateUserStateLocked.getPrintServices(i);
@@ -740,18 +945,28 @@ public final class PrintManagerService extends SystemService {
         }
 
         public final boolean isPrintServiceEnabled(ComponentName componentName, int i) {
-            for (String str : this.mContext.getPackageManager().getPackagesForUid(Binder.getCallingUid())) {
+            for (String str :
+                    this.mContext.getPackageManager().getPackagesForUid(Binder.getCallingUid())) {
                 if (str.equals(componentName.getPackageName())) {
-                    int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
+                    int resolveCallingUserEnforcingPermissions =
+                            resolveCallingUserEnforcingPermissions(i);
                     synchronized (this.mLock) {
                         try {
-                            if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                            if (resolveCallingProfileParentLocked(
+                                            resolveCallingUserEnforcingPermissions)
+                                    != getCurrentUserId()) {
                                 return false;
                             }
-                            UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                            UserState orCreateUserStateLocked =
+                                    getOrCreateUserStateLocked(
+                                            resolveCallingUserEnforcingPermissions,
+                                            false,
+                                            true,
+                                            false);
                             synchronized (orCreateUserStateLocked.mLock) {
                                 try {
-                                    return !((ArraySet) orCreateUserStateLocked.mDisabledServices).contains(componentName);
+                                    return !((ArraySet) orCreateUserStateLocked.mDisabledServices)
+                                            .contains(componentName);
                                 } finally {
                                 }
                             }
@@ -764,21 +979,51 @@ public final class PrintManagerService extends SystemService {
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-            new PrintShellCommand(this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+        public final void onShellCommand(
+                FileDescriptor fileDescriptor,
+                FileDescriptor fileDescriptor2,
+                FileDescriptor fileDescriptor3,
+                String[] strArr,
+                ShellCallback shellCallback,
+                ResultReceiver resultReceiver) {
+            new PrintShellCommand(this)
+                    .exec(
+                            this,
+                            fileDescriptor,
+                            fileDescriptor2,
+                            fileDescriptor3,
+                            strArr,
+                            shellCallback,
+                            resultReceiver);
         }
 
-        public final Bundle print(String str, IPrintDocumentAdapter iPrintDocumentAdapter, PrintAttributes printAttributes, String str2, int i, int i2) {
+        public final Bundle print(
+                String str,
+                IPrintDocumentAdapter iPrintDocumentAdapter,
+                PrintAttributes printAttributes,
+                String str2,
+                int i,
+                int i2) {
             long clearCallingIdentity;
             Objects.requireNonNull(iPrintDocumentAdapter);
-            if (!(!this.mUserManager.hasUserRestriction("no_printing", Binder.getCallingUserHandle()))) {
-                DevicePolicyManagerInternal devicePolicyManagerInternal = (DevicePolicyManagerInternal) LocalServices.getService(DevicePolicyManagerInternal.class);
+            if (!(!this.mUserManager.hasUserRestriction(
+                    "no_printing", Binder.getCallingUserHandle()))) {
+                DevicePolicyManagerInternal devicePolicyManagerInternal =
+                        (DevicePolicyManagerInternal)
+                                LocalServices.getService(DevicePolicyManagerInternal.class);
                 int callingUserId = UserHandle.getCallingUserId();
                 clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    CharSequence printingDisabledReasonForUser = devicePolicyManagerInternal.getPrintingDisabledReasonForUser(callingUserId);
+                    CharSequence printingDisabledReasonForUser =
+                            devicePolicyManagerInternal.getPrintingDisabledReasonForUser(
+                                    callingUserId);
                     if (printingDisabledReasonForUser != null) {
-                        Toast.makeText(this.mContext, Looper.getMainLooper(), printingDisabledReasonForUser, 1).show();
+                        Toast.makeText(
+                                        this.mContext,
+                                        Looper.getMainLooper(),
+                                        printingDisabledReasonForUser,
+                                        1)
+                                .show();
                     }
                     try {
                         iPrintDocumentAdapter.start();
@@ -788,7 +1033,9 @@ public final class PrintManagerService extends SystemService {
                     try {
                         iPrintDocumentAdapter.finish();
                     } catch (RemoteException unused2) {
-                        Log.e("PrintManagerService", "Error calling IPrintDocumentAdapter.finish()");
+                        Log.e(
+                                "PrintManagerService",
+                                "Error calling IPrintDocumentAdapter.finish()");
                     }
                     return null;
                 } finally {
@@ -799,16 +1046,26 @@ public final class PrintManagerService extends SystemService {
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i2);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return null;
                     }
                     resolveCallingAppEnforcingPermissions(i);
-                    for (String str5 : this.mContext.getPackageManager().getPackagesForUid(Binder.getCallingUid())) {
+                    for (String str5 :
+                            this.mContext
+                                    .getPackageManager()
+                                    .getPackagesForUid(Binder.getCallingUid())) {
                         if (str4.equals(str5)) {
-                            UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                            UserState orCreateUserStateLocked =
+                                    getOrCreateUserStateLocked(
+                                            resolveCallingUserEnforcingPermissions,
+                                            false,
+                                            true,
+                                            false);
                             clearCallingIdentity = Binder.clearCallingIdentity();
                             try {
-                                return orCreateUserStateLocked.print(str3, iPrintDocumentAdapter, printAttributes, str4, i);
+                                return orCreateUserStateLocked.print(
+                                        str3, iPrintDocumentAdapter, printAttributes, str4, i);
                             } finally {
                             }
                         }
@@ -820,18 +1077,23 @@ public final class PrintManagerService extends SystemService {
             }
         }
 
-        public final void removePrintJobStateChangeListener(IPrintJobStateChangeListener iPrintJobStateChangeListener, int i) {
+        public final void removePrintJobStateChangeListener(
+                IPrintJobStateChangeListener iPrintJobStateChangeListener, int i) {
             Objects.requireNonNull(iPrintJobStateChangeListener);
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        orCreateUserStateLocked.removePrintJobStateChangeListener(iPrintJobStateChangeListener);
+                        orCreateUserStateLocked.removePrintJobStateChangeListener(
+                                iPrintJobStateChangeListener);
                     } finally {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     }
@@ -841,19 +1103,25 @@ public final class PrintManagerService extends SystemService {
             }
         }
 
-        public final void removePrintServiceRecommendationsChangeListener(IRecommendationsChangeListener iRecommendationsChangeListener, int i) {
+        public final void removePrintServiceRecommendationsChangeListener(
+                IRecommendationsChangeListener iRecommendationsChangeListener, int i) {
             Objects.requireNonNull(iRecommendationsChangeListener);
-            this.mContext.enforceCallingOrSelfPermission("android.permission.READ_PRINT_SERVICE_RECOMMENDATIONS", null);
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.READ_PRINT_SERVICE_RECOMMENDATIONS", null);
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        orCreateUserStateLocked.removePrintServiceRecommendationsChangeListener(iRecommendationsChangeListener);
+                        orCreateUserStateLocked.removePrintServiceRecommendationsChangeListener(
+                                iRecommendationsChangeListener);
                     } finally {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     }
@@ -863,19 +1131,25 @@ public final class PrintManagerService extends SystemService {
             }
         }
 
-        public final void removePrintServicesChangeListener(IPrintServicesChangeListener iPrintServicesChangeListener, int i) {
+        public final void removePrintServicesChangeListener(
+                IPrintServicesChangeListener iPrintServicesChangeListener, int i) {
             Objects.requireNonNull(iPrintServicesChangeListener);
-            this.mContext.enforceCallingOrSelfPermission("android.permission.READ_PRINT_SERVICES", null);
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.READ_PRINT_SERVICES", null);
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        orCreateUserStateLocked.removePrintServicesChangeListener(iPrintServicesChangeListener);
+                        orCreateUserStateLocked.removePrintServicesChangeListener(
+                                iPrintServicesChangeListener);
                     } finally {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     }
@@ -888,8 +1162,21 @@ public final class PrintManagerService extends SystemService {
         public final void resolveCallingAppEnforcingPermissions(int i) {
             int appId;
             int callingUid = Binder.getCallingUid();
-            if (callingUid != 0 && i != (appId = UserHandle.getAppId(callingUid)) && appId != 2000 && appId != 1000 && this.mContext.checkCallingPermission("com.android.printspooler.permission.ACCESS_ALL_PRINT_JOBS") != 0) {
-                throw new SecurityException(DualAppManagerService$$ExternalSyntheticOutline0.m(appId, i, "Call from app ", " as app ", " without com.android.printspooler.permission.ACCESS_ALL_PRINT_JOBS"));
+            if (callingUid != 0
+                    && i != (appId = UserHandle.getAppId(callingUid))
+                    && appId != 2000
+                    && appId != 1000
+                    && this.mContext.checkCallingPermission(
+                                    "com.android.printspooler.permission.ACCESS_ALL_PRINT_JOBS")
+                            != 0) {
+                throw new SecurityException(
+                        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                appId,
+                                i,
+                                "Call from app ",
+                                " as app ",
+                                " without"
+                                    + " com.android.printspooler.permission.ACCESS_ALL_PRINT_JOBS"));
             }
         }
 
@@ -911,20 +1198,26 @@ public final class PrintManagerService extends SystemService {
         }
 
         public final void restartPrintJob(PrintJobId printJobId, int i, int i2) {
-            if (printJobId == null || !(!this.mUserManager.hasUserRestriction("no_printing", Binder.getCallingUserHandle()))) {
+            if (printJobId == null
+                    || !(!this.mUserManager.hasUserRestriction(
+                            "no_printing", Binder.getCallingUserHandle()))) {
                 return;
             }
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i2);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
                     resolveCallingAppEnforcingPermissions(i);
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        PrintJobInfo printJobInfo = orCreateUserStateLocked.getPrintJobInfo(printJobId, i);
+                        PrintJobInfo printJobInfo =
+                                orCreateUserStateLocked.getPrintJobInfo(printJobId, i);
                         if (printJobInfo != null && printJobInfo.getState() == 6) {
                             orCreateUserStateLocked.mSpooler.setPrintJobState(printJobId, 2, null);
                         }
@@ -961,7 +1254,13 @@ public final class PrintManagerService extends SystemService {
             int appId = UserHandle.getAppId(Binder.getCallingUid());
             if (appId != 1000) {
                 try {
-                    if (appId != UserHandle.getAppId(this.mContext.getPackageManager().getPackageUidAsUser("com.android.printspooler", resolveCallingUserEnforcingPermissions))) {
+                    if (appId
+                            != UserHandle.getAppId(
+                                    this.mContext
+                                            .getPackageManager()
+                                            .getPackageUidAsUser(
+                                                    "com.android.printspooler",
+                                                    resolveCallingUserEnforcingPermissions))) {
                         throw new SecurityException("Only system and print spooler can call this");
                     }
                 } catch (PackageManager.NameNotFoundException e) {
@@ -972,10 +1271,13 @@ public final class PrintManagerService extends SystemService {
             Objects.requireNonNull(componentName);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         orCreateUserStateLocked.setPrintServiceEnabled(componentName, z);
@@ -988,7 +1290,8 @@ public final class PrintManagerService extends SystemService {
             }
         }
 
-        public final void startPrinterDiscovery(IPrinterDiscoveryObserver iPrinterDiscoveryObserver, List list, int i) {
+        public final void startPrinterDiscovery(
+                IPrinterDiscoveryObserver iPrinterDiscoveryObserver, List list, int i) {
             Objects.requireNonNull(iPrinterDiscoveryObserver);
             if (list != null) {
                 list = (List) Preconditions.checkCollectionElementsNotNull(list, "PrinterId");
@@ -996,18 +1299,23 @@ public final class PrintManagerService extends SystemService {
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         synchronized (orCreateUserStateLocked.mLock) {
                             try {
                                 orCreateUserStateLocked.throwIfDestroyedLocked();
-                                UserState.AnonymousClass1 anonymousClass1 = orCreateUserStateLocked.mPrinterDiscoverySession;
+                                UserState.AnonymousClass1 anonymousClass1 =
+                                        orCreateUserStateLocked.mPrinterDiscoverySession;
                                 if (anonymousClass1 != null) {
-                                    anonymousClass1.startPrinterDiscoveryLocked(iPrinterDiscoveryObserver, list);
+                                    anonymousClass1.startPrinterDiscoveryLocked(
+                                            iPrinterDiscoveryObserver, list);
                                 }
                             } finally {
                             }
@@ -1025,17 +1333,21 @@ public final class PrintManagerService extends SystemService {
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         synchronized (orCreateUserStateLocked.mLock) {
                             try {
                                 orCreateUserStateLocked.throwIfDestroyedLocked();
                                 if (!orCreateUserStateLocked.mActiveServices.isEmpty()) {
-                                    UserState.AnonymousClass1 anonymousClass1 = orCreateUserStateLocked.mPrinterDiscoverySession;
+                                    UserState.AnonymousClass1 anonymousClass1 =
+                                            orCreateUserStateLocked.mPrinterDiscoverySession;
                                     if (anonymousClass1 != null) {
                                         anonymousClass1.startPrinterStateTrackingLocked(printerId);
                                     }
@@ -1051,23 +1363,29 @@ public final class PrintManagerService extends SystemService {
             }
         }
 
-        public final void stopPrinterDiscovery(IPrinterDiscoveryObserver iPrinterDiscoveryObserver, int i) {
+        public final void stopPrinterDiscovery(
+                IPrinterDiscoveryObserver iPrinterDiscoveryObserver, int i) {
             Objects.requireNonNull(iPrinterDiscoveryObserver);
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         synchronized (orCreateUserStateLocked.mLock) {
                             try {
                                 orCreateUserStateLocked.throwIfDestroyedLocked();
-                                UserState.AnonymousClass1 anonymousClass1 = orCreateUserStateLocked.mPrinterDiscoverySession;
+                                UserState.AnonymousClass1 anonymousClass1 =
+                                        orCreateUserStateLocked.mPrinterDiscoverySession;
                                 if (anonymousClass1 != null) {
-                                    anonymousClass1.stopPrinterDiscoveryLocked(iPrinterDiscoveryObserver);
+                                    anonymousClass1.stopPrinterDiscoveryLocked(
+                                            iPrinterDiscoveryObserver);
                                 }
                             } finally {
                             }
@@ -1085,10 +1403,13 @@ public final class PrintManagerService extends SystemService {
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         orCreateUserStateLocked.stopPrinterStateTracking(printerId);
@@ -1106,10 +1427,13 @@ public final class PrintManagerService extends SystemService {
             int resolveCallingUserEnforcingPermissions = resolveCallingUserEnforcingPermissions(i);
             synchronized (this.mLock) {
                 try {
-                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions) != getCurrentUserId()) {
+                    if (resolveCallingProfileParentLocked(resolveCallingUserEnforcingPermissions)
+                            != getCurrentUserId()) {
                         return;
                     }
-                    UserState orCreateUserStateLocked = getOrCreateUserStateLocked(resolveCallingUserEnforcingPermissions, false, true, false);
+                    UserState orCreateUserStateLocked =
+                            getOrCreateUserStateLocked(
+                                    resolveCallingUserEnforcingPermissions, false, true, false);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         orCreateUserStateLocked.validatePrinters(list2);
@@ -1139,7 +1463,8 @@ public final class PrintManagerService extends SystemService {
         int i = PrintManagerImpl.$r8$clinit;
         PrintManagerImpl printManagerImpl = this.mPrintManagerImpl;
         printManagerImpl.getClass();
-        BackgroundThread.getHandler().post(new PrintManagerImpl.AnonymousClass3(printManagerImpl, userIdentifier, 1));
+        BackgroundThread.getHandler()
+                .post(new PrintManagerImpl.AnonymousClass3(printManagerImpl, userIdentifier, 1));
     }
 
     @Override // com.android.server.SystemService
@@ -1148,6 +1473,7 @@ public final class PrintManagerService extends SystemService {
         int i = PrintManagerImpl.$r8$clinit;
         PrintManagerImpl printManagerImpl = this.mPrintManagerImpl;
         printManagerImpl.getClass();
-        BackgroundThread.getHandler().post(new PrintManagerImpl.AnonymousClass3(printManagerImpl, userIdentifier, 0));
+        BackgroundThread.getHandler()
+                .post(new PrintManagerImpl.AnonymousClass3(printManagerImpl, userIdentifier, 0));
     }
 }

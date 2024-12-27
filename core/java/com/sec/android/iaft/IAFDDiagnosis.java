@@ -11,9 +11,12 @@ import android.os.SemSystemProperties;
 import android.os.StatFs;
 import android.telecom.Logging.Session;
 import android.util.Slog;
+
 import com.android.internal.content.NativeLibraryHelper;
+
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
+
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -50,8 +53,7 @@ public class IAFDDiagnosis {
     private static class IAFDDiagnosisHolder {
         private static final IAFDDiagnosis INSTANCE = new IAFDDiagnosis();
 
-        private IAFDDiagnosisHolder() {
-        }
+        private IAFDDiagnosisHolder() {}
     }
 
     private IAFDDiagnosis() {
@@ -72,7 +74,13 @@ public class IAFDDiagnosis {
     public void init(Context context) {
         this.mContext = context;
         this.mSalesCode = SemSystemProperties.getSalesCode();
-        this.isCHNModel = "com.samsung.android.sm_cn".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME", "com.samsung.android.lool"));
+        this.isCHNModel =
+                "com.samsung.android.sm_cn"
+                        .equals(
+                                SemFloatingFeature.getInstance()
+                                        .getString(
+                                                "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME",
+                                                "com.samsung.android.lool"));
         initData(false);
     }
 
@@ -191,7 +199,8 @@ public class IAFDDiagnosis {
         return strtmp.substring(istart2, iend3);
     }
 
-    private String getComponent(String reason, String callstack, int limitLen, boolean isNativeCrash) {
+    private String getComponent(
+            String reason, String callstack, int limitLen, boolean isNativeCrash) {
         int istart;
         int iend;
         int istart2;
@@ -278,13 +287,23 @@ public class IAFDDiagnosis {
     private boolean isContainPkgname(String srcStr, String startStr, String pkgname) {
         String tmpStr;
         int istart = srcStr.indexOf(startStr);
-        if (istart < 0 || (tmpStr = srcStr.substring(istart, srcStr.length())) == null || !tmpStr.contains(pkgname)) {
+        if (istart < 0
+                || (tmpStr = srcStr.substring(istart, srcStr.length())) == null
+                || !tmpStr.contains(pkgname)) {
             return false;
         }
         return true;
     }
 
-    private boolean parseExpTypeInternal(String packageName, String nativeLibraryDir, int puserId, int appuid, int flags, String exceptionClassName, String exceptionMessage, String stackTrace) {
+    private boolean parseExpTypeInternal(
+            String packageName,
+            String nativeLibraryDir,
+            int puserId,
+            int appuid,
+            int flags,
+            String exceptionClassName,
+            String exceptionMessage,
+            String stackTrace) {
         this.dualUserId = 0;
         this.isParseSuccess = false;
         if (stackTrace == null) {
@@ -292,7 +311,11 @@ public class IAFDDiagnosis {
         }
         try {
             this.curAppFlag = 1;
-            if (packageName != null && ((flags & 1) != 0 || (flags & 128) != 0 || packageName.contains("com.samsung.") || packageName.contains("com.sec."))) {
+            if (packageName != null
+                    && ((flags & 1) != 0
+                            || (flags & 128) != 0
+                            || packageName.contains("com.samsung.")
+                            || packageName.contains("com.sec."))) {
                 this.curAppFlag = 2;
             }
             initData(true);
@@ -302,7 +325,9 @@ public class IAFDDiagnosis {
             Slog.d(TAG, "parseExpType fail, skip, callstack as the following:");
             e.printStackTrace();
         }
-        if (this.mIFADData == null || !this.mIFADData.controlInfo.enable || this.mIFADData.controlInfo.isInWhiteList(packageName)) {
+        if (this.mIFADData == null
+                || !this.mIFADData.controlInfo.enable
+                || this.mIFADData.controlInfo.isInWhiteList(packageName)) {
             return false;
         }
         Slog.d(TAG, "parseExpType start");
@@ -314,7 +339,8 @@ public class IAFDDiagnosis {
             String backTraceStr = getSubStringForNE(stackTrace, max, false);
             String causeHeaderStr = getSubStringForNE(stackTrace, max, true);
             if (causeHeaderStr != null) {
-                this.reason = getCauseForNE(causeHeaderStr, this.mIFADData.controlInfo.reason_maxSize);
+                this.reason =
+                        getCauseForNE(causeHeaderStr, this.mIFADData.controlInfo.reason_maxSize);
             }
             if (backTraceStr != null) {
                 int curLen = backTraceStr.length();
@@ -323,14 +349,30 @@ public class IAFDDiagnosis {
                 }
                 this.callstack = backTraceStr.substring(0, curLen);
             }
-            this.component = getComponent(this.reason, backTraceStr, this.mIFADData.controlInfo.reason_maxSize, true);
-            if (this.mIFADData.controlInfo.enableDetectAll32bitApps && (this.curAppFlag & this.mIFADData.controlInfo.supportflagDetectAll32bitApps) == this.curAppFlag && is32BitApp(nativeLibraryDir, null)) {
+            this.component =
+                    getComponent(
+                            this.reason,
+                            backTraceStr,
+                            this.mIFADData.controlInfo.reason_maxSize,
+                            true);
+            if (this.mIFADData.controlInfo.enableDetectAll32bitApps
+                    && (this.curAppFlag & this.mIFADData.controlInfo.supportflagDetectAll32bitApps)
+                            == this.curAppFlag
+                    && is32BitApp(nativeLibraryDir, null)) {
                 this.expType = 30;
                 return true;
             }
             if (backTraceStr != null) {
-                if (!isContainExpInfo(backTraceStr, this.mIFADData.NE_CallStackTB, backTraceStr, this.curAppFlag)) {
-                    if (isContainExpInfo(backTraceStr, this.mIFADData.NE_HeaderInfoTB, backTraceStr, this.curAppFlag)) {
+                if (!isContainExpInfo(
+                        backTraceStr,
+                        this.mIFADData.NE_CallStackTB,
+                        backTraceStr,
+                        this.curAppFlag)) {
+                    if (isContainExpInfo(
+                            backTraceStr,
+                            this.mIFADData.NE_HeaderInfoTB,
+                            backTraceStr,
+                            this.curAppFlag)) {
                         this.isParseSuccess = true;
                         return true;
                     }
@@ -339,17 +381,27 @@ public class IAFDDiagnosis {
                     return true;
                 }
             }
-            if (causeHeaderStr != null && isContainExpInfo(causeHeaderStr, this.mIFADData.NE_HeaderInfoTB, backTraceStr, this.curAppFlag)) {
+            if (causeHeaderStr != null
+                    && isContainExpInfo(
+                            causeHeaderStr,
+                            this.mIFADData.NE_HeaderInfoTB,
+                            backTraceStr,
+                            this.curAppFlag)) {
                 this.isParseSuccess = true;
                 return true;
             }
             if (this.curExpEntity != null) {
                 if (this.curExpEntity.ruleType == 1 && this.curExpEntity.expID == this.expType) {
-                    if (isContainPkgname(backTraceStr, this.mIFADData.controlInfo.NE_cstack_start, packageName)) {
+                    if (isContainPkgname(
+                            backTraceStr,
+                            this.mIFADData.controlInfo.NE_cstack_start,
+                            packageName)) {
                         this.isParseSuccess = true;
                         return true;
                     }
-                } else if (this.curExpEntity.ruleType == 4 && this.curExpEntity.expID == this.expType && is32BitApp(nativeLibraryDir, null)) {
+                } else if (this.curExpEntity.ruleType == 4
+                        && this.curExpEntity.expID == this.expType
+                        && is32BitApp(nativeLibraryDir, null)) {
                     this.isParseSuccess = true;
                     return true;
                 }
@@ -364,28 +416,71 @@ public class IAFDDiagnosis {
                 this.reason = exceptionMessage.substring(0, curLen2);
             }
             if (stackTrace != null) {
-                subCsStr = getCallstackForJE(stackTrace, this.mIFADData.controlInfo.JE_cstack_start, this.mIFADData.controlInfo.JE_cstack_maxSize);
+                subCsStr =
+                        getCallstackForJE(
+                                stackTrace,
+                                this.mIFADData.controlInfo.JE_cstack_start,
+                                this.mIFADData.controlInfo.JE_cstack_maxSize);
                 int curLen3 = subCsStr.length();
-                this.callstack = subCsStr.substring(0, curLen3 > this.mIFADData.controlInfo.callstack_maxSize ? this.mIFADData.controlInfo.callstack_maxSize : curLen3);
+                this.callstack =
+                        subCsStr.substring(
+                                0,
+                                curLen3 > this.mIFADData.controlInfo.callstack_maxSize
+                                        ? this.mIFADData.controlInfo.callstack_maxSize
+                                        : curLen3);
             }
-            this.component = getComponent(this.reason, subCsStr, this.mIFADData.controlInfo.reason_maxSize, false);
-            if (!this.mIFADData.controlInfo.enableDetectAll32bitApps || (this.curAppFlag & this.mIFADData.controlInfo.supportflagDetectAll32bitApps) != this.curAppFlag || !is32BitApp(nativeLibraryDir, null)) {
+            this.component =
+                    getComponent(
+                            this.reason,
+                            subCsStr,
+                            this.mIFADData.controlInfo.reason_maxSize,
+                            false);
+            if (!this.mIFADData.controlInfo.enableDetectAll32bitApps
+                    || (this.curAppFlag & this.mIFADData.controlInfo.supportflagDetectAll32bitApps)
+                            != this.curAppFlag
+                    || !is32BitApp(nativeLibraryDir, null)) {
                 if (!isContainExpClassName(exceptionClassName, this.curAppFlag)) {
-                    if (!isContainExpInfo(exceptionMessage, this.mIFADData.JE_DetailMsgTB, subCsStr, this.curAppFlag)) {
-                        if (!isContainExpInfo(exceptionMessage, this.mIFADData.JE_ClassNameTB, subCsStr, this.curAppFlag)) {
-                            if (!isContainExpInfo(subCsStr, this.mIFADData.JE_ClassNameTB, subCsStr, this.curAppFlag)) {
-                                if (!isContainExpInfo(subCsStr, this.mIFADData.JE_DetailMsgTB, subCsStr, this.curAppFlag)) {
-                                    if (isContainExpInfo(subCsStr, this.mIFADData.JE_CallStackTB, subCsStr, this.curAppFlag)) {
+                    if (!isContainExpInfo(
+                            exceptionMessage,
+                            this.mIFADData.JE_DetailMsgTB,
+                            subCsStr,
+                            this.curAppFlag)) {
+                        if (!isContainExpInfo(
+                                exceptionMessage,
+                                this.mIFADData.JE_ClassNameTB,
+                                subCsStr,
+                                this.curAppFlag)) {
+                            if (!isContainExpInfo(
+                                    subCsStr,
+                                    this.mIFADData.JE_ClassNameTB,
+                                    subCsStr,
+                                    this.curAppFlag)) {
+                                if (!isContainExpInfo(
+                                        subCsStr,
+                                        this.mIFADData.JE_DetailMsgTB,
+                                        subCsStr,
+                                        this.curAppFlag)) {
+                                    if (isContainExpInfo(
+                                            subCsStr,
+                                            this.mIFADData.JE_CallStackTB,
+                                            subCsStr,
+                                            this.curAppFlag)) {
                                         this.isParseSuccess = true;
                                         return true;
                                     }
                                     if (this.curExpEntity != null) {
-                                        if (this.curExpEntity.ruleType == 1 && this.curExpEntity.expID == this.expType) {
-                                            if (isContainPkgname(subCsStr, this.mIFADData.controlInfo.JE_cstack_start, packageName)) {
+                                        if (this.curExpEntity.ruleType == 1
+                                                && this.curExpEntity.expID == this.expType) {
+                                            if (isContainPkgname(
+                                                    subCsStr,
+                                                    this.mIFADData.controlInfo.JE_cstack_start,
+                                                    packageName)) {
                                                 this.isParseSuccess = true;
                                                 return true;
                                             }
-                                        } else if (this.curExpEntity.ruleType == 4 && this.curExpEntity.expID == this.expType && is32BitApp(nativeLibraryDir, null)) {
+                                        } else if (this.curExpEntity.ruleType == 4
+                                                && this.curExpEntity.expID == this.expType
+                                                && is32BitApp(nativeLibraryDir, null)) {
                                             this.isParseSuccess = true;
                                             return true;
                                         }
@@ -480,7 +575,9 @@ public class IAFDDiagnosis {
     private boolean isAllFilesAccessOff(int appuid, String packageName) {
         try {
             AppOpsManager aps = (AppOpsManager) this.mContext.getSystemService(AppOpsManager.class);
-            int appOpMode = aps.unsafeCheckOpNoThrow(AppOpsManager.OPSTR_MANAGE_EXTERNAL_STORAGE, appuid, packageName);
+            int appOpMode =
+                    aps.unsafeCheckOpNoThrow(
+                            AppOpsManager.OPSTR_MANAGE_EXTERNAL_STORAGE, appuid, packageName);
             return appOpMode != 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -488,12 +585,29 @@ public class IAFDDiagnosis {
         }
     }
 
-    public boolean parseExpType(String packageName, String nativeLibraryDir, int puserId, int appuid, int flags, String exceptionClassName, String exceptionMessage, String stackTrace) {
+    public boolean parseExpType(
+            String packageName,
+            String nativeLibraryDir,
+            int puserId,
+            int appuid,
+            int flags,
+            String exceptionClassName,
+            String exceptionMessage,
+            String stackTrace) {
         try {
-            if (parseExpTypeInternal(packageName, nativeLibraryDir, puserId, appuid, flags, exceptionClassName, exceptionMessage, stackTrace)) {
+            if (parseExpTypeInternal(
+                    packageName,
+                    nativeLibraryDir,
+                    puserId,
+                    appuid,
+                    flags,
+                    exceptionClassName,
+                    exceptionMessage,
+                    stackTrace)) {
                 switch (this.expType) {
                     case 19:
-                        if (isRemovableApp(this.mIFADData.controlInfo.webView_pkgName, 1048576, 19)) {
+                        if (isRemovableApp(
+                                this.mIFADData.controlInfo.webView_pkgName, 1048576, 19)) {
                             return true;
                         }
                         break;
@@ -503,7 +617,8 @@ public class IAFDDiagnosis {
                         }
                         break;
                     case 34:
-                        if ((!this.isCHNModel || getRepairType(34, packageName) != 0) && isAvalilableSizeNoEnough()) {
+                        if ((!this.isCHNModel || getRepairType(34, packageName) != 0)
+                                && isAvalilableSizeNoEnough()) {
                             return true;
                         }
                         break;
@@ -527,7 +642,9 @@ public class IAFDDiagnosis {
 
     private boolean parseExpTypeInternalForRepairOnlyShow(String packageName) {
         String[] keyStr;
-        if (this.mIFADData.controlInfo.isSupportRepair && (keyStr = this.mIFADData.controlInfo.gethashMapOfRepairDBInfo(packageName)) != null) {
+        if (this.mIFADData.controlInfo.isSupportRepair
+                && (keyStr = this.mIFADData.controlInfo.gethashMapOfRepairDBInfo(packageName))
+                        != null) {
             return !keyStr[6].equals("Only32bit") || is32BitApp(null, packageName);
         }
         return false;
@@ -541,17 +658,21 @@ public class IAFDDiagnosis {
         PackageManager pm = this.mContext.getPackageManager();
         try {
             PackageInfo pmInfo = pm.getPackageInfo("com.samsung.android.voc", 16384);
-            if (pmInfo == null || pmInfo.getLongVersionCode() < this.mIFADData.controlInfo.minVocAppVersionCode) {
+            if (pmInfo == null
+                    || pmInfo.getLongVersionCode()
+                            < this.mIFADData.controlInfo.minVocAppVersionCode) {
                 return 0;
             }
             if (errtype == 39) {
-                if (pmInfo.getLongVersionCode() < this.mIFADData.controlInfo.minVocAppVersionCodeForOnlyShow) {
+                if (pmInfo.getLongVersionCode()
+                        < this.mIFADData.controlInfo.minVocAppVersionCodeForOnlyShow) {
                     return 0;
                 }
                 strkey = pkgName;
             }
             if (errtype == 39) {
-                if (pmInfo.getLongVersionCode() < this.mIFADData.controlInfo.minVocAppVersionCodeForOnlyShow) {
+                if (pmInfo.getLongVersionCode()
+                        < this.mIFADData.controlInfo.minVocAppVersionCodeForOnlyShow) {
                     return 0;
                 }
             }
@@ -575,7 +696,11 @@ public class IAFDDiagnosis {
             int repairType = getRepairType(getExpType(), packageName);
             if (repairType == 0) {
                 intent = new Intent("com.samsung.android.sm.ACTION_START_THIRD_APP_ERROR_DIALOG");
-                intent.setPackage(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME", "com.samsung.android.lool"));
+                intent.setPackage(
+                        SemFloatingFeature.getInstance()
+                                .getString(
+                                        "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME",
+                                        "com.samsung.android.lool"));
                 Slog.d(TAG, "Show3rdAppErrorUiExt() startService SM");
             } else {
                 String strkey = String.valueOf(getExpType());
@@ -603,9 +728,16 @@ public class IAFDDiagnosis {
                     lanIndex = 5;
                 }
                 if ("null".equals(this.mIFADData.controlInfo.domainRepair)) {
-                    targetUrlTmp = this.mIFADData.controlInfo.prefixRepair + values[lanIndex] + this.mIFADData.controlInfo.postfixRepair;
+                    targetUrlTmp =
+                            this.mIFADData.controlInfo.prefixRepair
+                                    + values[lanIndex]
+                                    + this.mIFADData.controlInfo.postfixRepair;
                 } else {
-                    targetUrlTmp = this.mIFADData.controlInfo.domainRepair + this.mIFADData.controlInfo.prefixRepair + values[lanIndex] + this.mIFADData.controlInfo.postfixRepair;
+                    targetUrlTmp =
+                            this.mIFADData.controlInfo.domainRepair
+                                    + this.mIFADData.controlInfo.prefixRepair
+                                    + values[lanIndex]
+                                    + this.mIFADData.controlInfo.postfixRepair;
                 }
                 intent.putExtra("targetUrl", targetUrlTmp);
                 intent.putExtra("repairTrigAPP", values[3]);
@@ -624,7 +756,8 @@ public class IAFDDiagnosis {
                 PackageManager pm = this.mContext.getPackageManager();
                 try {
                     PackageInfo pmInfo = pm.getPackageInfo(packageName, 0);
-                    intent.putExtra(SmLib_IafdConstant.KEY_VERSION_CODE, pmInfo.getLongVersionCode());
+                    intent.putExtra(
+                            SmLib_IafdConstant.KEY_VERSION_CODE, pmInfo.getLongVersionCode());
                     intent.putExtra("versionName", pmInfo.versionName);
                     intent.putExtra("appName", pmInfo.applicationInfo.loadLabel(pm).toString());
                     intent.putExtra("hasUpdate", false);
@@ -691,10 +824,17 @@ public class IAFDDiagnosis {
         private String webView_pkgName;
         private String[] whiteList;
 
-        IAFD_CONTROLINFO() {
-        }
+        IAFD_CONTROLINFO() {}
 
-        IAFD_CONTROLINFO(boolean enable, int jcsms, String jcss, int ncsms, int nchms, String ncss, int rsms, int csms) {
+        IAFD_CONTROLINFO(
+                boolean enable,
+                int jcsms,
+                String jcss,
+                int ncsms,
+                int nchms,
+                String ncss,
+                int rsms,
+                int csms) {
             this.enable = enable;
             this.JE_cstack_maxSize = jcsms;
             this.JE_cstack_start = jcss;
@@ -855,7 +995,12 @@ public class IAFDDiagnosis {
             this.isSupportRepair = isSupport;
         }
 
-        void inithashMapValues(HashMap<String, String[]> linkHMap, String orgStr, String a1, String a2, String splitStr) {
+        void inithashMapValues(
+                HashMap<String, String[]> linkHMap,
+                String orgStr,
+                String a1,
+                String a2,
+                String splitStr) {
             String[] strTmp = orgStr.split(splitStr);
             String[] values = {"0", "0", "0", "vocApp", a1, a2, "0"};
             for (String str : strTmp) {
@@ -889,7 +1034,12 @@ public class IAFDDiagnosis {
                     this.postfixRepair = strArray[4];
                     this.mainLanguage = strArray[5];
                     for (int i = 6; i < strArray.length; i += 3) {
-                        inithashMapValues(linkHMap, strArray[i], strArray[i + 1], strArray[i + 2], Session.SESSION_SEPARATION_CHAR_CHILD);
+                        inithashMapValues(
+                                linkHMap,
+                                strArray[i],
+                                strArray[i + 1],
+                                strArray[i + 2],
+                                Session.SESSION_SEPARATION_CHAR_CHILD);
                     }
                 }
                 this.hashMapOfRepairDBInfo = linkHMap;
@@ -902,7 +1052,12 @@ public class IAFDDiagnosis {
                 if (strArray[0].equals("OnlyShowList")) {
                     this.minVocAppVersionCodeForOnlyShow = Long.valueOf(strArray[1]).longValue();
                     for (int i = 2; i < strArray.length; i += 3) {
-                        inithashMapValues(this.hashMapOfRepairDBInfo, strArray[i], strArray[i + 1], strArray[i + 2], ":;");
+                        inithashMapValues(
+                                this.hashMapOfRepairDBInfo,
+                                strArray[i],
+                                strArray[i + 1],
+                                strArray[i + 2],
+                                ":;");
                     }
                 }
             }
@@ -926,7 +1081,13 @@ public class IAFDDiagnosis {
         private int supportFlag;
         private int tbID;
 
-        private void initENTITY(int tbID, int expID, boolean enable, String keyWord, String rule, String suggestion) {
+        private void initENTITY(
+                int tbID,
+                int expID,
+                boolean enable,
+                String keyWord,
+                String rule,
+                String suggestion) {
             this.tbID = tbID;
             this.expID = expID;
             this.enable = enable;
@@ -955,11 +1116,25 @@ public class IAFDDiagnosis {
             }
         }
 
-        IAFD_ENTITY(int tbID, int expID, Boolean enable, String keyWord, String rule, String suggestion) {
+        IAFD_ENTITY(
+                int tbID,
+                int expID,
+                Boolean enable,
+                String keyWord,
+                String rule,
+                String suggestion) {
             initENTITY(tbID, expID, enable.booleanValue(), keyWord, rule, suggestion);
         }
 
-        IAFD_ENTITY(int tbID, int expID, Boolean enable, String keyWord, String rule, String suggestion, int index, HashMap<String, Integer> hmap) {
+        IAFD_ENTITY(
+                int tbID,
+                int expID,
+                Boolean enable,
+                String keyWord,
+                String rule,
+                String suggestion,
+                int index,
+                HashMap<String, Integer> hmap) {
             initENTITY(tbID, expID, enable.booleanValue(), keyWord, rule, suggestion);
             if (enable.booleanValue()) {
                 hmap.putIfAbsent(keyWord, Integer.valueOf(index));
@@ -976,7 +1151,6 @@ public class IAFDDiagnosis {
         IAFD_CONTROLINFO controlInfo;
         HashMap<String, Integer> hashMapJE_ClassNameTB;
 
-        IAFD_DATA() {
-        }
+        IAFD_DATA() {}
     }
 }

@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.wifi.p2p.ISemWifiP2pCallback;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -43,7 +43,14 @@ public interface ISemWifiP2pManager extends IInterface {
 
     void setMsMiceInfo(int i, String str, String str2) throws RemoteException;
 
-    void setPreparedAccountPin(int i, String str, String str2, String str3, String str4, ISemWifiP2pCallback iSemWifiP2pCallback) throws RemoteException;
+    void setPreparedAccountPin(
+            int i,
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            ISemWifiP2pCallback iSemWifiP2pCallback)
+            throws RemoteException;
 
     void setScreenSharing(boolean z) throws RemoteException;
 
@@ -58,24 +65,28 @@ public interface ISemWifiP2pManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-        public void setMsMiceInfo(int capability, String name, String ipAddr) throws RemoteException {
-        }
+        public void setMsMiceInfo(int capability, String name, String ipAddr)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-        public void setScreenSharing(boolean set) throws RemoteException {
-        }
+        public void setScreenSharing(boolean set) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-        public void setPreparedAccountPin(int type, String pin, String hexEncData, String hexIv, String hashedAccount, ISemWifiP2pCallback callback) throws RemoteException {
-        }
+        public void setPreparedAccountPin(
+                int type,
+                String pin,
+                String hexEncData,
+                String hexIv,
+                String hashedAccount,
+                ISemWifiP2pCallback callback)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-        public void setListenOffloading(int channel, int period, int interval, int count) throws RemoteException {
-        }
+        public void setListenOffloading(int channel, int period, int interval, int count)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-        public void controlOpenWifiScanTimer(int control) throws RemoteException {
-        }
+        public void controlOpenWifiScanTimer(int control) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
         public List<String> getInUsePackageList(String type) throws RemoteException {
@@ -83,24 +94,23 @@ public interface ISemWifiP2pManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-        public void setInUsePackage(String type, String ctxPkg, String pkg, boolean reqNextAction) throws RemoteException {
-        }
+        public void setInUsePackage(String type, String ctxPkg, String pkg, boolean reqNextAction)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-        public void unsetInUsePackage(String type, String ctxPkg, String pkg, boolean reqNextAction) throws RemoteException {
-        }
+        public void unsetInUsePackage(String type, String ctxPkg, String pkg, boolean reqNextAction)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-        public void unsetAllInUsePackage(String type) throws RemoteException {
-        }
+        public void unsetAllInUsePackage(String type) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-        public void removeClient(String deviceAddress, ISemWifiP2pCallback callback) throws RemoteException {
-        }
+        public void removeClient(String deviceAddress, ISemWifiP2pCallback callback)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-        public void discoverPeers(int channelNum, ISemWifiP2pCallback callback) throws RemoteException {
-        }
+        public void discoverPeers(int channelNum, ISemWifiP2pCallback callback)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
         public MacAddress getP2pFactoryMacAddress() throws RemoteException {
@@ -133,8 +143,7 @@ public interface ISemWifiP2pManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-        public void factoryReset() throws RemoteException {
-        }
+        public void factoryReset() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -142,7 +151,7 @@ public interface ISemWifiP2pManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemWifiP2pManager {
+    public abstract static class Stub extends Binder implements ISemWifiP2pManager {
         static final int TRANSACTION_controlOpenWifiScanTimer = 6;
         static final int TRANSACTION_disconnectApBlockAutojoin = 17;
         static final int TRANSACTION_discoverPeers = 12;
@@ -234,7 +243,8 @@ public interface ISemWifiP2pManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemWifiP2pManager.DESCRIPTOR);
             }
@@ -268,7 +278,8 @@ public interface ISemWifiP2pManager extends IInterface {
                     String _arg22 = data.readString();
                     String _arg3 = data.readString();
                     String _arg4 = data.readString();
-                    ISemWifiP2pCallback _arg5 = ISemWifiP2pCallback.Stub.asInterface(data.readStrongBinder());
+                    ISemWifiP2pCallback _arg5 =
+                            ISemWifiP2pCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setPreparedAccountPin(_arg03, _arg12, _arg22, _arg3, _arg4, _arg5);
                     reply.writeNoException();
@@ -321,14 +332,16 @@ public interface ISemWifiP2pManager extends IInterface {
                     return true;
                 case 11:
                     String _arg010 = data.readString();
-                    ISemWifiP2pCallback _arg16 = ISemWifiP2pCallback.Stub.asInterface(data.readStrongBinder());
+                    ISemWifiP2pCallback _arg16 =
+                            ISemWifiP2pCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeClient(_arg010, _arg16);
                     reply.writeNoException();
                     return true;
                 case 12:
                     int _arg011 = data.readInt();
-                    ISemWifiP2pCallback _arg17 = ISemWifiP2pCallback.Stub.asInterface(data.readStrongBinder());
+                    ISemWifiP2pCallback _arg17 =
+                            ISemWifiP2pCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     discoverPeers(_arg011, _arg17);
                     reply.writeNoException();
@@ -411,7 +424,8 @@ public interface ISemWifiP2pManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-            public void setMsMiceInfo(int capability, String name, String ipAddr) throws RemoteException {
+            public void setMsMiceInfo(int capability, String name, String ipAddr)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -443,7 +457,14 @@ public interface ISemWifiP2pManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-            public void setPreparedAccountPin(int type, String pin, String hexEncData, String hexIv, String hashedAccount, ISemWifiP2pCallback callback) throws RemoteException {
+            public void setPreparedAccountPin(
+                    int type,
+                    String pin,
+                    String hexEncData,
+                    String hexIv,
+                    String hashedAccount,
+                    ISemWifiP2pCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -463,7 +484,8 @@ public interface ISemWifiP2pManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-            public void setListenOffloading(int channel, int period, int interval, int count) throws RemoteException {
+            public void setListenOffloading(int channel, int period, int interval, int count)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -513,7 +535,9 @@ public interface ISemWifiP2pManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-            public void setInUsePackage(String type, String ctxPkg, String pkg, boolean reqNextAction) throws RemoteException {
+            public void setInUsePackage(
+                    String type, String ctxPkg, String pkg, boolean reqNextAction)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -531,7 +555,9 @@ public interface ISemWifiP2pManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-            public void unsetInUsePackage(String type, String ctxPkg, String pkg, boolean reqNextAction) throws RemoteException {
+            public void unsetInUsePackage(
+                    String type, String ctxPkg, String pkg, boolean reqNextAction)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -564,7 +590,8 @@ public interface ISemWifiP2pManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-            public void removeClient(String deviceAddress, ISemWifiP2pCallback callback) throws RemoteException {
+            public void removeClient(String deviceAddress, ISemWifiP2pCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -580,7 +607,8 @@ public interface ISemWifiP2pManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-            public void discoverPeers(int channelNum, ISemWifiP2pCallback callback) throws RemoteException {
+            public void discoverPeers(int channelNum, ISemWifiP2pCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -612,7 +640,8 @@ public interface ISemWifiP2pManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.p2p.ISemWifiP2pManager
-            public SemWifiP2pDevice getSemWifiP2pDevice(String deviceAddress) throws RemoteException {
+            public SemWifiP2pDevice getSemWifiP2pDevice(String deviceAddress)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -620,7 +649,8 @@ public interface ISemWifiP2pManager extends IInterface {
                     _data.writeString(deviceAddress);
                     this.mRemote.transact(14, _data, _reply, 0);
                     _reply.readException();
-                    SemWifiP2pDevice _result = (SemWifiP2pDevice) _reply.readTypedObject(SemWifiP2pDevice.CREATOR);
+                    SemWifiP2pDevice _result =
+                            (SemWifiP2pDevice) _reply.readTypedObject(SemWifiP2pDevice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

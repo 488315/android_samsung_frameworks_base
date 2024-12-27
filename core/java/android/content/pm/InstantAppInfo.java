@@ -8,26 +8,29 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes.dex */
 public final class InstantAppInfo implements Parcelable {
-    public static final Parcelable.Creator<InstantAppInfo> CREATOR = new Parcelable.Creator<InstantAppInfo>() { // from class: android.content.pm.InstantAppInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstantAppInfo createFromParcel(Parcel parcel) {
-            return new InstantAppInfo(parcel);
-        }
+    public static final Parcelable.Creator<InstantAppInfo> CREATOR =
+            new Parcelable.Creator<
+                    InstantAppInfo>() { // from class: android.content.pm.InstantAppInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstantAppInfo createFromParcel(Parcel parcel) {
+                    return new InstantAppInfo(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstantAppInfo[] newArray(int size) {
-            return new InstantAppInfo[0];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstantAppInfo[] newArray(int size) {
+                    return new InstantAppInfo[0];
+                }
+            };
     private final ApplicationInfo mApplicationInfo;
     private final String[] mGrantedPermissions;
     private final CharSequence mLabelText;
     private final String mPackageName;
     private final String[] mRequestedPermissions;
 
-    public InstantAppInfo(ApplicationInfo appInfo, String[] requestedPermissions, String[] grantedPermissions) {
+    public InstantAppInfo(
+            ApplicationInfo appInfo, String[] requestedPermissions, String[] grantedPermissions) {
         this.mApplicationInfo = appInfo;
         this.mPackageName = null;
         this.mLabelText = null;
@@ -35,7 +38,11 @@ public final class InstantAppInfo implements Parcelable {
         this.mGrantedPermissions = grantedPermissions;
     }
 
-    public InstantAppInfo(String packageName, CharSequence label, String[] requestedPermissions, String[] grantedPermissions) {
+    public InstantAppInfo(
+            String packageName,
+            CharSequence label,
+            String[] requestedPermissions,
+            String[] grantedPermissions) {
         this.mApplicationInfo = null;
         this.mPackageName = packageName;
         this.mLabelText = label;
@@ -48,7 +55,8 @@ public final class InstantAppInfo implements Parcelable {
         this.mLabelText = parcel.readCharSequence();
         this.mRequestedPermissions = parcel.readStringArray();
         this.mGrantedPermissions = parcel.createStringArray();
-        this.mApplicationInfo = (ApplicationInfo) parcel.readParcelable(null, ApplicationInfo.class);
+        this.mApplicationInfo =
+                (ApplicationInfo) parcel.readParcelable(null, ApplicationInfo.class);
     }
 
     public ApplicationInfo getApplicationInfo() {

@@ -8,21 +8,24 @@ import android.database.MatrixCursor;
 import android.database.MergeCursor;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
-import com.samsung.android.knox.analytics.database.Contract;
+
 import com.samsung.android.knox.analytics.model.Event;
 import com.samsung.android.knox.analytics.model.EventList;
 import com.samsung.android.knox.analytics.util.Log;
 import com.samsung.android.knox.analytics.util.ZipHandler;
 import com.samsung.android.knox.analytics.util.ZipResult;
+
+import org.json.JSONException;
+
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.DataFormatException;
-import org.json.JSONException;
 
 /* loaded from: classes6.dex */
 class DatabaseCryptoAdapter {
-    private static final String TAG = "[KnoxAnalytics] " + DatabaseCryptoAdapter.class.getSimpleName();
+    private static final String TAG =
+            "[KnoxAnalytics] " + DatabaseCryptoAdapter.class.getSimpleName();
     private final CryptoHandler mCryptoHandler;
     private final DatabaseHelper mDbHelper;
     private int mVersioningIdCache = -1;
@@ -73,7 +76,8 @@ class DatabaseCryptoAdapter {
         cv.put("content", encriptedContent);
         boolean res = this.mDbHelper.performCompressedEventsTransaction(cv);
         Bundle result = new Bundle();
-        result.putBoolean(Contract.CompressedEvents.METHOD_PERFORM_COMPRESSED_EVENTS_TRANSACTION, res);
+        result.putBoolean(
+                Contract.CompressedEvents.METHOD_PERFORM_COMPRESSED_EVENTS_TRANSACTION, res);
         return result;
     }
 
@@ -143,8 +147,15 @@ class DatabaseCryptoAdapter {
         }
         int compressedChunkLimit = checkCompressedChunksLimit(requestedSize.intValue());
         int compressedEventsCount = getTotalCompressedEvents(compressedChunkLimit);
-        int numberOfPlainEvents = getTotalPlainEvents(requestedSize.intValue(), compressedEventsCount);
-        Log.d(TAG, "createCursorWith: " + compressedEventsCount + " compressed events and " + numberOfPlainEvents + " plain events");
+        int numberOfPlainEvents =
+                getTotalPlainEvents(requestedSize.intValue(), compressedEventsCount);
+        Log.d(
+                TAG,
+                "createCursorWith: "
+                        + compressedEventsCount
+                        + " compressed events and "
+                        + numberOfPlainEvents
+                        + " plain events");
         if (numberOfPlainEvents == 0) {
             return createCursorOnlyWithCompressedEvents(compressedChunkLimit);
         }
@@ -152,9 +163,9 @@ class DatabaseCryptoAdapter {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0014, code lost:
-    
-        r3 = r1.getInt(0);
-     */
+
+       r3 = r1.getInt(0);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -191,10 +202,14 @@ class DatabaseCryptoAdapter {
             r1.close()
             throw r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.knox.analytics.database.DatabaseCryptoAdapter.getTotalPlainEvents(int, int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.knox.analytics.database.DatabaseCryptoAdapter.getTotalPlainEvents(int,"
+                    + " int):int");
     }
 
-    private Cursor createCursorWithEventsSizeSpecified(int plainEventsSize, int compressedEventsSize) {
+    private Cursor createCursorWithEventsSizeSpecified(
+            int plainEventsSize, int compressedEventsSize) {
         Log.d(TAG, "createCursorWithEventsSizeSpecified(): query " + plainEventsSize + " events");
         Cursor compressedCursor = getCompressedEvents(Integer.valueOf(compressedEventsSize));
         if (compressedCursor == null || compressedCursor.getCount() <= 0) {
@@ -204,7 +219,12 @@ class DatabaseCryptoAdapter {
             }
             return null;
         }
-        return new MergeCursor(new Cursor[]{compressedCursor, new EncryptedCursor(this.mDbHelper, this.mCryptoHandler, Integer.valueOf(plainEventsSize))});
+        return new MergeCursor(
+                new Cursor[] {
+                    compressedCursor,
+                    new EncryptedCursor(
+                            this.mDbHelper, this.mCryptoHandler, Integer.valueOf(plainEventsSize))
+                });
     }
 
     private Cursor createCursorOnlyWithCompressedEvents(int compressedChunkLimit) {
@@ -217,7 +237,7 @@ class DatabaseCryptoAdapter {
             }
             return null;
         }
-        return new MergeCursor(new Cursor[]{cursor});
+        return new MergeCursor(new Cursor[] {cursor});
     }
 
     private Cursor createCursorWithAllEvents() {
@@ -229,7 +249,10 @@ class DatabaseCryptoAdapter {
             }
             return null;
         }
-        return new MergeCursor(new Cursor[]{cursor, new EncryptedCursor(this.mDbHelper, this.mCryptoHandler, null)});
+        return new MergeCursor(
+                new Cursor[] {
+                    cursor, new EncryptedCursor(this.mDbHelper, this.mCryptoHandler, null)
+                });
     }
 
     public long deleteEventChunk(long size, int type) {
@@ -249,7 +272,13 @@ class DatabaseCryptoAdapter {
     }
 
     private long deleteMergedChunk(long size, long numberOfEvents) {
-        Log.d(TAG, "deleteMergedChunk(" + size + ", " + numberOfEvents + NavigationBarInflaterView.KEY_CODE_END);
+        Log.d(
+                TAG,
+                "deleteMergedChunk("
+                        + size
+                        + ", "
+                        + numberOfEvents
+                        + NavigationBarInflaterView.KEY_CODE_END);
         long compressedChunkCountValue = this.mDbHelper.getCompressedEventCountValue();
         if (compressedChunkCountValue <= 0) {
             return this.mDbHelper.deleteEventChunk(size, 1);
@@ -258,7 +287,8 @@ class DatabaseCryptoAdapter {
         int compressedEventsCount = getTotalCompressedEvents(compressedChunkCount);
         long chunkAffected = this.mDbHelper.deleteCompressedEventChunk(compressedChunkCount);
         if (chunkAffected != 0) {
-            long remaining = calculateRemainingEventsForDelete((int) numberOfEvents, compressedEventsCount);
+            long remaining =
+                    calculateRemainingEventsForDelete((int) numberOfEvents, compressedEventsCount);
             if (remaining == 0) {
                 return size;
             }
@@ -275,7 +305,11 @@ class DatabaseCryptoAdapter {
     }
 
     private int checkCompressedChunksLimit(long numberOfEvents) {
-        Log.d(TAG, "checkCompressedChunksLimit(" + numberOfEvents + NavigationBarInflaterView.KEY_CODE_END);
+        Log.d(
+                TAG,
+                "checkCompressedChunksLimit("
+                        + numberOfEvents
+                        + NavigationBarInflaterView.KEY_CODE_END);
         int compressedEvents = 0;
         int compressedChunksToDelete = 0;
         if (numberOfEvents > 0) {
@@ -303,14 +337,23 @@ class DatabaseCryptoAdapter {
 
     private int calculateRemainingEventsForDelete(int numberOfEvents, int compressedDeleted) {
         int totalEventsToDelete = numberOfEvents - compressedDeleted;
-        Log.d(TAG, "calculateRemainingEventsForDelete(" + numberOfEvents + ", " + compressedDeleted + "): totalToDelete: " + totalEventsToDelete);
+        Log.d(
+                TAG,
+                "calculateRemainingEventsForDelete("
+                        + numberOfEvents
+                        + ", "
+                        + compressedDeleted
+                        + "): totalToDelete: "
+                        + totalEventsToDelete);
         Cursor cursor = this.mDbHelper.getEventCountCursor();
         int plainEvents = 0;
         int plainEventsToDelete = 0;
         if (cursor != null) {
             try {
                 if (cursor.getCount() > 0) {
-                    while (cursor.moveToNext() && (plainEvents = plainEvents + cursor.getInt(0)) <= totalEventsToDelete) {
+                    while (cursor.moveToNext()
+                            && (plainEvents = plainEvents + cursor.getInt(0))
+                                    <= totalEventsToDelete) {
                         plainEventsToDelete++;
                     }
                     return plainEventsToDelete;
@@ -328,7 +371,11 @@ class DatabaseCryptoAdapter {
     }
 
     public long deleteCompressedEventChunk(long size) {
-        Log.d(TAG, "deleteCompressedEventChunk(size: " + size + NavigationBarInflaterView.KEY_CODE_END);
+        Log.d(
+                TAG,
+                "deleteCompressedEventChunk(size: "
+                        + size
+                        + NavigationBarInflaterView.KEY_CODE_END);
         return this.mDbHelper.deleteCompressedEventChunk(size);
     }
 
@@ -342,7 +389,9 @@ class DatabaseCryptoAdapter {
     }
 
     public long deleteUntilTargetDbSize(long targetDbSize) {
-        Log.d(TAG, "deleteUntilTargetDbSize(" + targetDbSize + NavigationBarInflaterView.KEY_CODE_END);
+        Log.d(
+                TAG,
+                "deleteUntilTargetDbSize(" + targetDbSize + NavigationBarInflaterView.KEY_CODE_END);
         return -1L;
     }
 
@@ -379,7 +428,10 @@ class DatabaseCryptoAdapter {
     private void updateVersioningCache(Cursor getVersioningBlobCursor) {
         int index;
         Log.d(TAG, "updateVersioningCache()");
-        if (getVersioningBlobCursor != null && getVersioningBlobCursor.getCount() > 0 && getVersioningBlobCursor.moveToLast() && (index = getVersioningBlobCursor.getColumnIndex("id")) != -1) {
+        if (getVersioningBlobCursor != null
+                && getVersioningBlobCursor.getCount() > 0
+                && getVersioningBlobCursor.moveToLast()
+                && (index = getVersioningBlobCursor.getColumnIndex("id")) != -1) {
             this.mVersioningIdCache = getVersioningBlobCursor.getInt(index);
         }
     }
@@ -423,11 +475,22 @@ class DatabaseCryptoAdapter {
                 try {
                     if (cursor.getCount() > 0) {
                         while (cursor.moveToNext()) {
-                            byte[] encryptedBytes = cursor.getBlob(cursor.getColumnIndex("content"));
-                            byte[] compressedContent = this.mCryptoHandler.decryptBlob(encryptedBytes);
-                            int length = cursor.getInt(cursor.getColumnIndex(Contract.CompressedEvents.Field.LENGTH));
-                            int originalLength = cursor.getInt(cursor.getColumnIndex(Contract.CompressedEvents.Field.ORIGINAL_LENGTH));
-                            if (length != -1 || originalLength != -1 || compressedContent.length > 0) {
+                            byte[] encryptedBytes =
+                                    cursor.getBlob(cursor.getColumnIndex("content"));
+                            byte[] compressedContent =
+                                    this.mCryptoHandler.decryptBlob(encryptedBytes);
+                            int length =
+                                    cursor.getInt(
+                                            cursor.getColumnIndex(
+                                                    Contract.CompressedEvents.Field.LENGTH));
+                            int originalLength =
+                                    cursor.getInt(
+                                            cursor.getColumnIndex(
+                                                    Contract.CompressedEvents.Field
+                                                            .ORIGINAL_LENGTH));
+                            if (length != -1
+                                    || originalLength != -1
+                                    || compressedContent.length > 0) {
                                 zips.add(new ZipResult(compressedContent, length, originalLength));
                             }
                         }
@@ -451,7 +514,10 @@ class DatabaseCryptoAdapter {
     }
 
     private Cursor createCursor(List<ZipResult> zips) {
-        MatrixCursor cursor = new MatrixCursor(new String[]{"id", Contract.Events.Field.VERSIONING_ID, "bulk", "data"}, 1);
+        MatrixCursor cursor =
+                new MatrixCursor(
+                        new String[] {"id", Contract.Events.Field.VERSIONING_ID, "bulk", "data"},
+                        1);
         for (ZipResult zip : zips) {
             EventList events = getEventsList(zip);
             if (events == null || events.length() <= 0) {
@@ -461,7 +527,14 @@ class DatabaseCryptoAdapter {
                     try {
                         String json = events.getString(i);
                         Event event = new Event(json);
-                        cursor.addRow(new Object[]{Integer.valueOf(event.getInt("id")), Integer.valueOf(event.getInt(Contract.Events.Field.VERSIONING_ID)), Integer.valueOf(event.getInt("bulk")), event.getString("data")});
+                        cursor.addRow(
+                                new Object[] {
+                                    Integer.valueOf(event.getInt("id")),
+                                    Integer.valueOf(
+                                            event.getInt(Contract.Events.Field.VERSIONING_ID)),
+                                    Integer.valueOf(event.getInt("bulk")),
+                                    event.getString("data")
+                                });
                     } catch (JSONException e) {
                         Log.e(TAG, "createCursor(): Parsing error object.", e);
                     }

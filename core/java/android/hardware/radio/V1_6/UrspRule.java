@@ -3,6 +3,7 @@ package android.hardware.radio.V1_6;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -20,18 +21,30 @@ public final class UrspRule {
             return false;
         }
         UrspRule other = (UrspRule) otherObject;
-        if (this.precedence == other.precedence && HidlSupport.deepEquals(this.trafficDescriptors, other.trafficDescriptors) && HidlSupport.deepEquals(this.routeSelectionDescriptor, other.routeSelectionDescriptor)) {
+        if (this.precedence == other.precedence
+                && HidlSupport.deepEquals(this.trafficDescriptors, other.trafficDescriptors)
+                && HidlSupport.deepEquals(
+                        this.routeSelectionDescriptor, other.routeSelectionDescriptor)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.precedence))), Integer.valueOf(HidlSupport.deepHashCode(this.trafficDescriptors)), Integer.valueOf(HidlSupport.deepHashCode(this.routeSelectionDescriptor)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.precedence))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.trafficDescriptors)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.routeSelectionDescriptor)));
     }
 
     public final String toString() {
-        return "{.precedence = " + ((int) this.precedence) + ", .trafficDescriptors = " + this.trafficDescriptors + ", .routeSelectionDescriptor = " + this.routeSelectionDescriptor + "}";
+        return "{.precedence = "
+                + ((int) this.precedence)
+                + ", .trafficDescriptors = "
+                + this.trafficDescriptors
+                + ", .routeSelectionDescriptor = "
+                + this.routeSelectionDescriptor
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -43,7 +56,8 @@ public final class UrspRule {
         ArrayList<UrspRule> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             UrspRule _hidl_vec_element = new UrspRule();
@@ -53,10 +67,13 @@ public final class UrspRule {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.precedence = _hidl_blob.getInt8(_hidl_offset + 0);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 8 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 48, _hidl_blob.handle(), _hidl_offset + 8 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 48, _hidl_blob.handle(), _hidl_offset + 8 + 0, true);
         this.trafficDescriptors.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             TrafficDescriptor _hidl_vec_element = new TrafficDescriptor();
@@ -64,7 +81,9 @@ public final class UrspRule {
             this.trafficDescriptors.add(_hidl_vec_element);
         }
         int _hidl_vec_size2 = _hidl_blob.getInt32(_hidl_offset + 24 + 8);
-        HwBlob childBlob2 = parcel.readEmbeddedBuffer(_hidl_vec_size2 * 48, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
+        HwBlob childBlob2 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size2 * 48, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
         this.routeSelectionDescriptor.clear();
         for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
             RouteSelectionDescriptor _hidl_vec_element2 = new RouteSelectionDescriptor();
@@ -99,7 +118,9 @@ public final class UrspRule {
         _hidl_blob.putBool(_hidl_offset + 8 + 12, false);
         HwBlob childBlob = new HwBlob(_hidl_vec_size * 48);
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
-            this.trafficDescriptors.get(_hidl_index_0).writeEmbeddedToBlob(childBlob, _hidl_index_0 * 48);
+            this.trafficDescriptors
+                    .get(_hidl_index_0)
+                    .writeEmbeddedToBlob(childBlob, _hidl_index_0 * 48);
         }
         _hidl_blob.putBlob(_hidl_offset + 8 + 0, childBlob);
         int _hidl_vec_size2 = this.routeSelectionDescriptor.size();
@@ -107,7 +128,9 @@ public final class UrspRule {
         _hidl_blob.putBool(_hidl_offset + 24 + 12, false);
         HwBlob childBlob2 = new HwBlob(_hidl_vec_size2 * 48);
         for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
-            this.routeSelectionDescriptor.get(_hidl_index_02).writeEmbeddedToBlob(childBlob2, _hidl_index_02 * 48);
+            this.routeSelectionDescriptor
+                    .get(_hidl_index_02)
+                    .writeEmbeddedToBlob(childBlob2, _hidl_index_02 * 48);
         }
         _hidl_blob.putBlob(_hidl_offset + 24 + 0, childBlob2);
     }

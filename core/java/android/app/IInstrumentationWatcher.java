@@ -10,18 +10,20 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IInstrumentationWatcher extends IInterface {
-    void instrumentationFinished(ComponentName componentName, int i, Bundle bundle) throws RemoteException;
+    void instrumentationFinished(ComponentName componentName, int i, Bundle bundle)
+            throws RemoteException;
 
-    void instrumentationStatus(ComponentName componentName, int i, Bundle bundle) throws RemoteException;
+    void instrumentationStatus(ComponentName componentName, int i, Bundle bundle)
+            throws RemoteException;
 
     public static class Default implements IInstrumentationWatcher {
         @Override // android.app.IInstrumentationWatcher
-        public void instrumentationStatus(ComponentName name, int resultCode, Bundle results) throws RemoteException {
-        }
+        public void instrumentationStatus(ComponentName name, int resultCode, Bundle results)
+                throws RemoteException {}
 
         @Override // android.app.IInstrumentationWatcher
-        public void instrumentationFinished(ComponentName name, int resultCode, Bundle results) throws RemoteException {
-        }
+        public void instrumentationFinished(ComponentName name, int resultCode, Bundle results)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +31,7 @@ public interface IInstrumentationWatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInstrumentationWatcher {
+    public abstract static class Stub extends Binder implements IInstrumentationWatcher {
         public static final String DESCRIPTOR = "android.app.IInstrumentationWatcher";
         static final int TRANSACTION_instrumentationFinished = 2;
         static final int TRANSACTION_instrumentationStatus = 1;
@@ -71,7 +73,8 @@ public interface IInstrumentationWatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -81,7 +84,8 @@ public interface IInstrumentationWatcher extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg1 = data.readInt();
                     Bundle _arg2 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
@@ -89,7 +93,8 @@ public interface IInstrumentationWatcher extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 2:
-                    ComponentName _arg02 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg02 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg12 = data.readInt();
                     Bundle _arg22 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
@@ -118,7 +123,8 @@ public interface IInstrumentationWatcher extends IInterface {
             }
 
             @Override // android.app.IInstrumentationWatcher
-            public void instrumentationStatus(ComponentName name, int resultCode, Bundle results) throws RemoteException {
+            public void instrumentationStatus(ComponentName name, int resultCode, Bundle results)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -135,7 +141,8 @@ public interface IInstrumentationWatcher extends IInterface {
             }
 
             @Override // android.app.IInstrumentationWatcher
-            public void instrumentationFinished(ComponentName name, int resultCode, Bundle results) throws RemoteException {
+            public void instrumentationFinished(ComponentName name, int resultCode, Bundle results)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

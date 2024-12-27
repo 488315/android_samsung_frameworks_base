@@ -10,6 +10,7 @@ import android.util.Printer;
 import android.util.Slog;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -28,7 +29,8 @@ public final class InputMethodSubtypeSwitchingController {
         public final DynamicRotationList mSwitchingAwareRotationList;
         public final StaticRotationList mSwitchingUnawareRotationList;
 
-        public ControllerImpl(DynamicRotationList dynamicRotationList, StaticRotationList staticRotationList) {
+        public ControllerImpl(
+                DynamicRotationList dynamicRotationList, StaticRotationList staticRotationList) {
             this.mSwitchingAwareRotationList = dynamicRotationList;
             this.mSwitchingUnawareRotationList = staticRotationList;
         }
@@ -38,14 +40,18 @@ public final class InputMethodSubtypeSwitchingController {
             StaticRotationList staticRotationList;
             List filterImeSubtypeList = filterImeSubtypeList(list, true);
             StaticRotationList staticRotationList2 = null;
-            if (controllerImpl == null || (dynamicRotationList = controllerImpl.mSwitchingAwareRotationList) == null || !Objects.equals(dynamicRotationList.mImeSubtypeList, filterImeSubtypeList)) {
+            if (controllerImpl == null
+                    || (dynamicRotationList = controllerImpl.mSwitchingAwareRotationList) == null
+                    || !Objects.equals(dynamicRotationList.mImeSubtypeList, filterImeSubtypeList)) {
                 dynamicRotationList = null;
             }
             if (dynamicRotationList == null) {
                 dynamicRotationList = new DynamicRotationList(filterImeSubtypeList);
             }
             List filterImeSubtypeList2 = filterImeSubtypeList(list, false);
-            if (controllerImpl != null && (staticRotationList = controllerImpl.mSwitchingUnawareRotationList) != null && Objects.equals(staticRotationList.mImeSubtypeList, filterImeSubtypeList2)) {
+            if (controllerImpl != null
+                    && (staticRotationList = controllerImpl.mSwitchingUnawareRotationList) != null
+                    && Objects.equals(staticRotationList.mImeSubtypeList, filterImeSubtypeList2)) {
                 staticRotationList2 = staticRotationList;
             }
             if (staticRotationList2 == null) {
@@ -83,13 +89,20 @@ public final class InputMethodSubtypeSwitchingController {
             }
         }
 
-        public final int getUsageRank(InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype) {
-            int subtypeIdFromHashCode = inputMethodSubtype != null ? SubtypeUtils.getSubtypeIdFromHashCode(inputMethodInfo, inputMethodSubtype.hashCode()) : -1;
+        public final int getUsageRank(
+                InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype) {
+            int subtypeIdFromHashCode =
+                    inputMethodSubtype != null
+                            ? SubtypeUtils.getSubtypeIdFromHashCode(
+                                    inputMethodInfo, inputMethodSubtype.hashCode())
+                            : -1;
             int[] iArr = this.mUsageHistoryOfSubtypeListItemIndex;
             int length = iArr.length;
             for (int i = 0; i < length; i++) {
-                ImeSubtypeListItem imeSubtypeListItem = (ImeSubtypeListItem) this.mImeSubtypeList.get(iArr[i]);
-                if (imeSubtypeListItem.mImi.equals(inputMethodInfo) && imeSubtypeListItem.mSubtypeId == subtypeIdFromHashCode) {
+                ImeSubtypeListItem imeSubtypeListItem =
+                        (ImeSubtypeListItem) this.mImeSubtypeList.get(iArr[i]);
+                if (imeSubtypeListItem.mImi.equals(inputMethodInfo)
+                        && imeSubtypeListItem.mSubtypeId == subtypeIdFromHashCode) {
                     return i;
                 }
             }
@@ -106,7 +119,13 @@ public final class InputMethodSubtypeSwitchingController {
         public final int mSubtypeId;
         public final CharSequence mSubtypeName;
 
-        public ImeSubtypeListItem(CharSequence charSequence, CharSequence charSequence2, InputMethodInfo inputMethodInfo, int i, String str, String str2) {
+        public ImeSubtypeListItem(
+                CharSequence charSequence,
+                CharSequence charSequence2,
+                InputMethodInfo inputMethodInfo,
+                int i,
+                String str,
+                String str2) {
             this.mImeName = charSequence;
             this.mSubtypeName = charSequence2;
             this.mImi = inputMethodInfo;
@@ -125,7 +144,8 @@ public final class InputMethodSubtypeSwitchingController {
             }
             String languageFromLocaleString = LocaleUtils.getLanguageFromLocaleString(str2);
             String languageFromLocaleString2 = LocaleUtils.getLanguageFromLocaleString(str);
-            if (languageFromLocaleString.length() >= 2 && languageFromLocaleString.equals(languageFromLocaleString2)) {
+            if (languageFromLocaleString.length() >= 2
+                    && languageFromLocaleString.equals(languageFromLocaleString2)) {
                 z = true;
             }
             this.mIsSystemLanguage = z;
@@ -138,7 +158,10 @@ public final class InputMethodSubtypeSwitchingController {
             CharSequence charSequence2 = imeSubtypeListItem.mImeName;
             boolean isEmpty = TextUtils.isEmpty(charSequence);
             boolean isEmpty2 = TextUtils.isEmpty(charSequence2);
-            int compareTo = (isEmpty || isEmpty2) ? (isEmpty ? 1 : 0) - (isEmpty2 ? 1 : 0) : charSequence.toString().compareTo(charSequence2.toString());
+            int compareTo =
+                    (isEmpty || isEmpty2)
+                            ? (isEmpty ? 1 : 0) - (isEmpty2 ? 1 : 0)
+                            : charSequence.toString().compareTo(charSequence2.toString());
             if (compareTo != 0) {
                 return compareTo;
             }
@@ -146,7 +169,9 @@ public final class InputMethodSubtypeSwitchingController {
             if (i != 0) {
                 return i;
             }
-            int i2 = (this.mIsSystemLanguage ? -1 : 0) - (imeSubtypeListItem.mIsSystemLanguage ? -1 : 0);
+            int i2 =
+                    (this.mIsSystemLanguage ? -1 : 0)
+                            - (imeSubtypeListItem.mIsSystemLanguage ? -1 : 0);
             if (i2 != 0) {
                 return i2;
             }
@@ -154,8 +179,13 @@ public final class InputMethodSubtypeSwitchingController {
             CharSequence charSequence4 = imeSubtypeListItem.mSubtypeName;
             boolean isEmpty3 = TextUtils.isEmpty(charSequence3);
             boolean isEmpty4 = TextUtils.isEmpty(charSequence4);
-            int compareTo2 = (isEmpty3 || isEmpty4) ? (isEmpty3 ? 1 : 0) - (isEmpty4 ? 1 : 0) : charSequence3.toString().compareTo(charSequence4.toString());
-            return compareTo2 != 0 ? compareTo2 : this.mImi.getId().compareTo(imeSubtypeListItem.mImi.getId());
+            int compareTo2 =
+                    (isEmpty3 || isEmpty4)
+                            ? (isEmpty3 ? 1 : 0) - (isEmpty4 ? 1 : 0)
+                            : charSequence3.toString().compareTo(charSequence4.toString());
+            return compareTo2 != 0
+                    ? compareTo2
+                    : this.mImi.getId().compareTo(imeSubtypeListItem.mImi.getId());
         }
 
         public final boolean equals(Object obj) {
@@ -166,7 +196,8 @@ public final class InputMethodSubtypeSwitchingController {
                 return false;
             }
             ImeSubtypeListItem imeSubtypeListItem = (ImeSubtypeListItem) obj;
-            return Objects.equals(this.mImi, imeSubtypeListItem.mImi) && this.mSubtypeId == imeSubtypeListItem.mSubtypeId;
+            return Objects.equals(this.mImi, imeSubtypeListItem.mImi)
+                    && this.mSubtypeId == imeSubtypeListItem.mSubtypeId;
         }
 
         public final String toString() {
@@ -192,13 +223,24 @@ public final class InputMethodSubtypeSwitchingController {
         }
     }
 
-    public InputMethodSubtypeSwitchingController(Context context, InputMethodMap inputMethodMap, int i) {
+    public InputMethodSubtypeSwitchingController(
+            Context context, InputMethodMap inputMethodMap, int i) {
         this.mContext = context;
         this.mUserId = i;
-        this.mController = ControllerImpl.createFrom(null, getSortedInputMethodAndSubtypeList(false, false, false, context, inputMethodMap, i));
+        this.mController =
+                ControllerImpl.createFrom(
+                        null,
+                        getSortedInputMethodAndSubtypeList(
+                                false, false, false, context, inputMethodMap, i));
     }
 
-    public static List getSortedInputMethodAndSubtypeList(boolean z, boolean z2, boolean z3, Context context, InputMethodMap inputMethodMap, int i) {
+    public static List getSortedInputMethodAndSubtypeList(
+            boolean z,
+            boolean z2,
+            boolean z3,
+            Context context,
+            InputMethodMap inputMethodMap,
+            int i) {
         Context context2;
         int i2;
         Context context3;
@@ -208,11 +250,15 @@ public final class InputMethodSubtypeSwitchingController {
         InputMethodInfo inputMethodInfo;
         int i5;
         int i6 = 0;
-        Context createContextAsUser = context.getUserId() == i ? context : context.createContextAsUser(UserHandle.of(i), 0);
+        Context createContextAsUser =
+                context.getUserId() == i
+                        ? context
+                        : context.createContextAsUser(UserHandle.of(i), 0);
         String languageTag = SystemLocaleWrapper.get().get(0).toLanguageTag();
         InputMethodSettings inputMethodSettings = new InputMethodSettings(inputMethodMap, i);
         CharSequence charSequence = null;
-        ArrayList enabledInputMethodListWithFilter = inputMethodSettings.getEnabledInputMethodListWithFilter(null);
+        ArrayList enabledInputMethodListWithFilter =
+                inputMethodSettings.getEnabledInputMethodListWithFilter(null);
         if (enabledInputMethodListWithFilter.isEmpty()) {
             Slog.w("InputMethodSubtypeSwitchingController", "Enabled input method list is empty.");
             return new ArrayList();
@@ -222,15 +268,19 @@ public final class InputMethodSubtypeSwitchingController {
         int size = enabledInputMethodListWithFilter.size();
         int i7 = 0;
         while (i7 < size) {
-            InputMethodInfo inputMethodInfo2 = (InputMethodInfo) enabledInputMethodListWithFilter.get(i7);
+            InputMethodInfo inputMethodInfo2 =
+                    (InputMethodInfo) enabledInputMethodListWithFilter.get(i7);
             if (!z3 || inputMethodInfo2.shouldShowInInputMethodPicker()) {
-                List enabledInputMethodSubtypeList = inputMethodSettings.getEnabledInputMethodSubtypeList(inputMethodInfo2, true);
+                List enabledInputMethodSubtypeList =
+                        inputMethodSettings.getEnabledInputMethodSubtypeList(
+                                inputMethodInfo2, true);
                 ArraySet arraySet2 = new ArraySet();
                 Iterator it = enabledInputMethodSubtypeList.iterator();
                 while (it.hasNext()) {
                     arraySet2.add(String.valueOf(((InputMethodSubtype) it.next()).hashCode()));
                 }
-                CharSequence loadLabel = inputMethodInfo2.loadLabel(createContextAsUser.getPackageManager());
+                CharSequence loadLabel =
+                        inputMethodInfo2.loadLabel(createContextAsUser.getPackageManager());
                 if (arraySet2.size() > 0) {
                     int subtypeCount = inputMethodInfo2.getSubtypeCount();
                     int i8 = i6;
@@ -246,7 +296,11 @@ public final class InputMethodSubtypeSwitchingController {
                             i5 = i7;
                         } else {
                             if (!subtypeAt.overridesImplicitlyEnabledSubtype()) {
-                                charSequence = subtypeAt.getDisplayName(createContextAsUser, inputMethodInfo2.getPackageName(), inputMethodInfo2.getServiceInfo().applicationInfo);
+                                charSequence =
+                                        subtypeAt.getDisplayName(
+                                                createContextAsUser,
+                                                inputMethodInfo2.getPackageName(),
+                                                inputMethodInfo2.getServiceInfo().applicationInfo);
                             }
                             context3 = createContextAsUser;
                             i3 = i8;
@@ -255,7 +309,14 @@ public final class InputMethodSubtypeSwitchingController {
                             arraySet = arraySet2;
                             inputMethodInfo = inputMethodInfo2;
                             i5 = i7;
-                            arrayList.add(new ImeSubtypeListItem(loadLabel, charSequence2, inputMethodInfo2, i3, subtypeAt.getLocale(), languageTag));
+                            arrayList.add(
+                                    new ImeSubtypeListItem(
+                                            loadLabel,
+                                            charSequence2,
+                                            inputMethodInfo2,
+                                            i3,
+                                            subtypeAt.getLocale(),
+                                            languageTag));
                             arraySet.remove(valueOf);
                         }
                         i8 = i3 + 1;
@@ -269,7 +330,9 @@ public final class InputMethodSubtypeSwitchingController {
                 } else {
                     context2 = createContextAsUser;
                     i2 = i7;
-                    arrayList.add(new ImeSubtypeListItem(loadLabel, null, inputMethodInfo2, -1, null, languageTag));
+                    arrayList.add(
+                            new ImeSubtypeListItem(
+                                    loadLabel, null, inputMethodInfo2, -1, null, languageTag));
                     i7 = i2 + 1;
                     createContextAsUser = context2;
                     charSequence = null;
@@ -302,18 +365,28 @@ public final class InputMethodSubtypeSwitchingController {
             if (i >= iArr.length) {
                 break;
             }
-            printWriterPrinter.println("      rank=" + i + " item=" + ((ImeSubtypeListItem) dynamicRotationList.mImeSubtypeList.get(iArr[i])));
+            printWriterPrinter.println(
+                    "      rank="
+                            + i
+                            + " item="
+                            + ((ImeSubtypeListItem)
+                                    dynamicRotationList.mImeSubtypeList.get(iArr[i])));
             i++;
         }
         printWriterPrinter.println("    mSwitchingUnawareRotationList:");
         StaticRotationList staticRotationList = controllerImpl.mSwitchingUnawareRotationList;
         int size = staticRotationList.mImeSubtypeList.size();
         for (int i2 = 0; i2 < size; i2++) {
-            printWriterPrinter.println("      rank=" + i2 + " item=" + ((ImeSubtypeListItem) staticRotationList.mImeSubtypeList.get(i2)));
+            printWriterPrinter.println(
+                    "      rank="
+                            + i2
+                            + " item="
+                            + ((ImeSubtypeListItem) staticRotationList.mImeSubtypeList.get(i2)));
         }
     }
 
-    public final ImeSubtypeListItem getNextInputMethodLocked(boolean z, InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype) {
+    public final ImeSubtypeListItem getNextInputMethodLocked(
+            boolean z, InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype) {
         ControllerImpl controllerImpl = this.mController;
         if (controllerImpl == null || inputMethodInfo == null) {
             return null;
@@ -328,7 +401,10 @@ public final class InputMethodSubtypeSwitchingController {
             int[] iArr = dynamicRotationList.mUsageHistoryOfSubtypeListItemIndex;
             int length = iArr.length;
             while (i < length) {
-                ImeSubtypeListItem imeSubtypeListItem = (ImeSubtypeListItem) dynamicRotationList.mImeSubtypeList.get(iArr[(usageRank + i) % length]);
+                ImeSubtypeListItem imeSubtypeListItem =
+                        (ImeSubtypeListItem)
+                                dynamicRotationList.mImeSubtypeList.get(
+                                        iArr[(usageRank + i) % length]);
                 if (!z || inputMethodInfo.equals(imeSubtypeListItem.mImi)) {
                     return imeSubtypeListItem;
                 }
@@ -341,15 +417,21 @@ public final class InputMethodSubtypeSwitchingController {
             return null;
         }
         int i2 = -1;
-        int subtypeIdFromHashCode = inputMethodSubtype != null ? SubtypeUtils.getSubtypeIdFromHashCode(inputMethodInfo, inputMethodSubtype.hashCode()) : -1;
+        int subtypeIdFromHashCode =
+                inputMethodSubtype != null
+                        ? SubtypeUtils.getSubtypeIdFromHashCode(
+                                inputMethodInfo, inputMethodSubtype.hashCode())
+                        : -1;
         int size = staticRotationList.mImeSubtypeList.size();
         int i3 = 0;
         while (true) {
             if (i3 >= size) {
                 break;
             }
-            ImeSubtypeListItem imeSubtypeListItem2 = (ImeSubtypeListItem) staticRotationList.mImeSubtypeList.get(i3);
-            if (inputMethodInfo.equals(imeSubtypeListItem2.mImi) && imeSubtypeListItem2.mSubtypeId == subtypeIdFromHashCode) {
+            ImeSubtypeListItem imeSubtypeListItem2 =
+                    (ImeSubtypeListItem) staticRotationList.mImeSubtypeList.get(i3);
+            if (inputMethodInfo.equals(imeSubtypeListItem2.mImi)
+                    && imeSubtypeListItem2.mSubtypeId == subtypeIdFromHashCode) {
                 i2 = i3;
                 break;
             }
@@ -360,7 +442,8 @@ public final class InputMethodSubtypeSwitchingController {
         }
         int size2 = staticRotationList.mImeSubtypeList.size();
         while (i < size2) {
-            ImeSubtypeListItem imeSubtypeListItem3 = (ImeSubtypeListItem) staticRotationList.mImeSubtypeList.get((i2 + i) % size2);
+            ImeSubtypeListItem imeSubtypeListItem3 =
+                    (ImeSubtypeListItem) staticRotationList.mImeSubtypeList.get((i2 + i) % size2);
             if (!z || inputMethodInfo.equals(imeSubtypeListItem3.mImi)) {
                 return imeSubtypeListItem3;
             }

@@ -2,24 +2,28 @@ package android.view.textclassifier;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Locale;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TextClassificationContext implements Parcelable {
-    public static final Parcelable.Creator<TextClassificationContext> CREATOR = new Parcelable.Creator<TextClassificationContext>() { // from class: android.view.textclassifier.TextClassificationContext.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextClassificationContext createFromParcel(Parcel parcel) {
-            return new TextClassificationContext(parcel);
-        }
+    public static final Parcelable.Creator<TextClassificationContext> CREATOR =
+            new Parcelable.Creator<
+                    TextClassificationContext>() { // from class:
+                                                   // android.view.textclassifier.TextClassificationContext.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextClassificationContext createFromParcel(Parcel parcel) {
+                    return new TextClassificationContext(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextClassificationContext[] newArray(int size) {
-            return new TextClassificationContext[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextClassificationContext[] newArray(int size) {
+                    return new TextClassificationContext[size];
+                }
+            };
     private String mPackageName;
     private SystemTextClassifierMetadata mSystemTcMetadata;
     private final String mWidgetType;
@@ -52,7 +56,14 @@ public final class TextClassificationContext implements Parcelable {
     }
 
     public String toString() {
-        return String.format(Locale.US, "TextClassificationContext{packageName=%s, widgetType=%s, widgetVersion=%s, systemTcMetadata=%s}", this.mPackageName, this.mWidgetType, this.mWidgetVersion, this.mSystemTcMetadata);
+        return String.format(
+                Locale.US,
+                "TextClassificationContext{packageName=%s, widgetType=%s, widgetVersion=%s,"
+                    + " systemTcMetadata=%s}",
+                this.mPackageName,
+                this.mWidgetType,
+                this.mWidgetVersion,
+                this.mSystemTcMetadata);
     }
 
     public static final class Builder {
@@ -71,7 +82,8 @@ public final class TextClassificationContext implements Parcelable {
         }
 
         public TextClassificationContext build() {
-            return new TextClassificationContext(this.mPackageName, this.mWidgetType, this.mWidgetVersion);
+            return new TextClassificationContext(
+                    this.mPackageName, this.mWidgetType, this.mWidgetVersion);
         }
     }
 
@@ -92,6 +104,8 @@ public final class TextClassificationContext implements Parcelable {
         this.mPackageName = in.readString();
         this.mWidgetType = in.readString();
         this.mWidgetVersion = in.readString();
-        this.mSystemTcMetadata = (SystemTextClassifierMetadata) in.readParcelable(null, SystemTextClassifierMetadata.class);
+        this.mSystemTcMetadata =
+                (SystemTextClassifierMetadata)
+                        in.readParcelable(null, SystemTextClassifierMetadata.class);
     }
 }

@@ -11,8 +11,7 @@ class AudioPlaybackHandler {
     private volatile PlaybackQueueItem mCurrentWorkItem = null;
     private final Thread mHandlerThread = new Thread(new MessageLoop(), "TTS.AudioPlaybackThread");
 
-    AudioPlaybackHandler() {
-    }
+    AudioPlaybackHandler() {}
 
     public void start() {
         this.mHandlerThread.start();
@@ -71,14 +70,14 @@ class AudioPlaybackHandler {
     }
 
     private final class MessageLoop implements Runnable {
-        private MessageLoop() {
-        }
+        private MessageLoop() {}
 
         @Override // java.lang.Runnable
         public void run() {
             while (true) {
                 try {
-                    PlaybackQueueItem item = (PlaybackQueueItem) AudioPlaybackHandler.this.mQueue.take();
+                    PlaybackQueueItem item =
+                            (PlaybackQueueItem) AudioPlaybackHandler.this.mQueue.take();
                     AudioPlaybackHandler.this.mCurrentWorkItem = item;
                     item.run();
                     AudioPlaybackHandler.this.mCurrentWorkItem = null;

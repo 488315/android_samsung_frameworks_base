@@ -3,8 +3,10 @@ package com.samsung.android.server.pm.rescueparty;
 import android.content.Context;
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.util.Slog;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.pm.PackageManagerTracedLock;
+
 import java.io.File;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,7 +19,8 @@ public final class PackageManagerBackupController extends AbstractBackupControll
     public int mRebootCntByPackages;
     public int mRebootCntByPkgsState;
 
-    public PackageManagerBackupController(PackageManagerTracedLock packageManagerTracedLock, Context context) {
+    public PackageManagerBackupController(
+            PackageManagerTracedLock packageManagerTracedLock, Context context) {
         super(context);
         this.mPackagesFile = new File(injectSystemDataDir(), "packages.xml");
         this.mPackagesBackupFile = new File(injectSystemDataDir(), "packages-backup.xml");
@@ -125,14 +128,25 @@ public final class PackageManagerBackupController extends AbstractBackupControll
             boolean r8 = com.android.server.pm.PackageManagerService.DEBUG_COMPRESSION
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.pm.rescueparty.PackageManagerBackupController.onSaveFiles(java.io.File):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.pm.rescueparty.PackageManagerBackupController.onSaveFiles(java.io.File):boolean");
     }
 
     public final void savePackagesStateForUser(File file, int i) {
-        File file2 = new File(new File(new File(injectSystemDataDir(), "users"), Integer.toString(i)), "package-restrictions.xml");
-        File file3 = new File(new File(new File(injectSystemDataDir(), "users"), Integer.toString(i)), "package-restrictions-backup.xml");
+        File file2 =
+                new File(
+                        new File(new File(injectSystemDataDir(), "users"), Integer.toString(i)),
+                        "package-restrictions.xml");
+        File file3 =
+                new File(
+                        new File(new File(injectSystemDataDir(), "users"), Integer.toString(i)),
+                        "package-restrictions-backup.xml");
         if (!file2.exists() || file3.exists()) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "There's something wrong, skip copying of the packages state file for user ", "PmBackupController");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i,
+                    "There's something wrong, skip copying of the packages state file for user ",
+                    "PmBackupController");
             return;
         }
         File file4 = new File(file, VibrationParam$1$$ExternalSyntheticOutline0.m(i, "users/"));

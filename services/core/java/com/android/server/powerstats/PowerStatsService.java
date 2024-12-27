@@ -24,13 +24,15 @@ import android.provider.DeviceConfigInterface;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.os.Clock;
 import com.android.internal.util.ConcurrentUtils;
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.SystemService;
-import com.android.server.powerstats.PowerStatsLogger;
-import com.android.server.powerstats.PowerStatsService;
+
+import org.apache.commons.math.MathException;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -40,7 +42,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
-import org.apache.commons.math.MathException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -65,51 +66,77 @@ public final class PowerStatsService extends SystemService {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.powerstats.PowerStatsService$1, reason: invalid class name */
     public final class AnonymousClass1 extends IPowerStatsService.Stub {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
-        public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-            if (DumpUtils.checkDumpPermission(PowerStatsService.this.mContext, "PowerStatsService", printWriter)) {
+        public final void dump(
+                FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+            if (DumpUtils.checkDumpPermission(
+                    PowerStatsService.this.mContext, "PowerStatsService", printWriter)) {
                 if (PowerStatsService.this.mPowerStatsLogger == null) {
-                    Slog.e("PowerStatsService", "PowerStats HAL is not initialized.  No data available.");
+                    Slog.e(
+                            "PowerStatsService",
+                            "PowerStats HAL is not initialized.  No data available.");
                     return;
                 }
                 if (strArr.length > 0 && "--proto".equals(strArr[0])) {
                     if ("model".equals(strArr[1])) {
-                        PowerStatsLogger powerStatsLogger = PowerStatsService.this.mPowerStatsLogger;
+                        PowerStatsLogger powerStatsLogger =
+                                PowerStatsService.this.mPowerStatsLogger;
                         powerStatsLogger.getClass();
                         ProtoOutputStream protoOutputStream = new ProtoOutputStream(fileDescriptor);
                         try {
-                            ProtoStreamUtils$ChannelUtils.packProtoMessage(powerStatsLogger.mPowerStatsHALWrapper.getEnergyConsumerInfo(), protoOutputStream);
-                            powerStatsLogger.mPowerStatsModelStorage.read(new PowerStatsLogger.AnonymousClass1(1, protoOutputStream));
+                            ProtoStreamUtils$ChannelUtils.packProtoMessage(
+                                    powerStatsLogger.mPowerStatsHALWrapper.getEnergyConsumerInfo(),
+                                    protoOutputStream);
+                            powerStatsLogger.mPowerStatsModelStorage.read(
+                                    new PowerStatsLogger.AnonymousClass1(1, protoOutputStream));
                         } catch (IOException e) {
-                            Slog.e("PowerStatsLogger", "Failed to write energy model info to incident report.", e);
+                            Slog.e(
+                                    "PowerStatsLogger",
+                                    "Failed to write energy model info to incident report.",
+                                    e);
                         }
                         protoOutputStream.flush();
                         return;
                     }
                     if ("meter".equals(strArr[1])) {
-                        PowerStatsLogger powerStatsLogger2 = PowerStatsService.this.mPowerStatsLogger;
+                        PowerStatsLogger powerStatsLogger2 =
+                                PowerStatsService.this.mPowerStatsLogger;
                         powerStatsLogger2.getClass();
-                        ProtoOutputStream protoOutputStream2 = new ProtoOutputStream(fileDescriptor);
+                        ProtoOutputStream protoOutputStream2 =
+                                new ProtoOutputStream(fileDescriptor);
                         try {
-                            ProtoStreamUtils$ChannelUtils.packProtoMessage(powerStatsLogger2.mPowerStatsHALWrapper.getEnergyMeterInfo(), protoOutputStream2);
-                            powerStatsLogger2.mPowerStatsMeterStorage.read(new PowerStatsLogger.AnonymousClass1(0, protoOutputStream2));
+                            ProtoStreamUtils$ChannelUtils.packProtoMessage(
+                                    powerStatsLogger2.mPowerStatsHALWrapper.getEnergyMeterInfo(),
+                                    protoOutputStream2);
+                            powerStatsLogger2.mPowerStatsMeterStorage.read(
+                                    new PowerStatsLogger.AnonymousClass1(0, protoOutputStream2));
                         } catch (IOException e2) {
-                            Slog.e("PowerStatsLogger", "Failed to write energy meter info to incident report.", e2);
+                            Slog.e(
+                                    "PowerStatsLogger",
+                                    "Failed to write energy meter info to incident report.",
+                                    e2);
                         }
                         protoOutputStream2.flush();
                         return;
                     }
                     if ("residency".equals(strArr[1])) {
-                        PowerStatsLogger powerStatsLogger3 = PowerStatsService.this.mPowerStatsLogger;
+                        PowerStatsLogger powerStatsLogger3 =
+                                PowerStatsService.this.mPowerStatsLogger;
                         powerStatsLogger3.getClass();
-                        ProtoOutputStream protoOutputStream3 = new ProtoOutputStream(fileDescriptor);
+                        ProtoOutputStream protoOutputStream3 =
+                                new ProtoOutputStream(fileDescriptor);
                         try {
-                            ProtoStreamUtils$ChannelUtils.packProtoMessage(powerStatsLogger3.mPowerStatsHALWrapper.getPowerEntityInfo(), protoOutputStream3);
-                            powerStatsLogger3.mPowerStatsResidencyStorage.read(new PowerStatsLogger.AnonymousClass1(2, protoOutputStream3));
+                            ProtoStreamUtils$ChannelUtils.packProtoMessage(
+                                    powerStatsLogger3.mPowerStatsHALWrapper.getPowerEntityInfo(),
+                                    protoOutputStream3);
+                            powerStatsLogger3.mPowerStatsResidencyStorage.read(
+                                    new PowerStatsLogger.AnonymousClass1(2, protoOutputStream3));
                         } catch (IOException e3) {
-                            Slog.e("PowerStatsLogger", "Failed to write residency data to incident report.", e3);
+                            Slog.e(
+                                    "PowerStatsLogger",
+                                    "Failed to write residency data to incident report.",
+                                    e3);
                         }
                         protoOutputStream3.flush();
                         return;
@@ -118,34 +145,60 @@ public final class PowerStatsService extends SystemService {
                 }
                 IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter);
                 indentingPrintWriter.println("PowerStatsService dumpsys: available PowerEntities");
-                PowerEntity[] powerEntityInfo = PowerStatsService.this.getPowerStatsHal().getPowerEntityInfo();
+                PowerEntity[] powerEntityInfo =
+                        PowerStatsService.this.getPowerStatsHal().getPowerEntityInfo();
                 indentingPrintWriter.increaseIndent();
                 if (powerEntityInfo != null) {
                     for (int i = 0; i < powerEntityInfo.length; i++) {
-                        indentingPrintWriter.println("PowerEntityId: " + powerEntityInfo[i].id + ", PowerEntityName: " + powerEntityInfo[i].name);
+                        indentingPrintWriter.println(
+                                "PowerEntityId: "
+                                        + powerEntityInfo[i].id
+                                        + ", PowerEntityName: "
+                                        + powerEntityInfo[i].name);
                         if (powerEntityInfo[i].states != null) {
                             for (int i2 = 0; i2 < powerEntityInfo[i].states.length; i2++) {
-                                indentingPrintWriter.println("  StateId: " + powerEntityInfo[i].states[i2].id + ", StateName: " + powerEntityInfo[i].states[i2].name);
+                                indentingPrintWriter.println(
+                                        "  StateId: "
+                                                + powerEntityInfo[i].states[i2].id
+                                                + ", StateName: "
+                                                + powerEntityInfo[i].states[i2].name);
                             }
                         }
                     }
                 }
                 indentingPrintWriter.decreaseIndent();
                 indentingPrintWriter.println("PowerStatsService dumpsys: available Channels");
-                Channel[] energyMeterInfo = PowerStatsService.this.getPowerStatsHal().getEnergyMeterInfo();
+                Channel[] energyMeterInfo =
+                        PowerStatsService.this.getPowerStatsHal().getEnergyMeterInfo();
                 indentingPrintWriter.increaseIndent();
                 if (energyMeterInfo != null) {
                     for (int i3 = 0; i3 < energyMeterInfo.length; i3++) {
-                        indentingPrintWriter.println("ChannelId: " + energyMeterInfo[i3].id + ", ChannelName: " + energyMeterInfo[i3].name + ", ChannelSubsystem: " + energyMeterInfo[i3].subsystem);
+                        indentingPrintWriter.println(
+                                "ChannelId: "
+                                        + energyMeterInfo[i3].id
+                                        + ", ChannelName: "
+                                        + energyMeterInfo[i3].name
+                                        + ", ChannelSubsystem: "
+                                        + energyMeterInfo[i3].subsystem);
                     }
                 }
                 indentingPrintWriter.decreaseIndent();
-                indentingPrintWriter.println("PowerStatsService dumpsys: available EnergyConsumers");
-                EnergyConsumer[] energyConsumerInfo = PowerStatsService.this.getPowerStatsHal().getEnergyConsumerInfo();
+                indentingPrintWriter.println(
+                        "PowerStatsService dumpsys: available EnergyConsumers");
+                EnergyConsumer[] energyConsumerInfo =
+                        PowerStatsService.this.getPowerStatsHal().getEnergyConsumerInfo();
                 indentingPrintWriter.increaseIndent();
                 if (energyConsumerInfo != null) {
                     for (int i4 = 0; i4 < energyConsumerInfo.length; i4++) {
-                        indentingPrintWriter.println("EnergyConsumerId: " + energyConsumerInfo[i4].id + ", Ordinal: " + energyConsumerInfo[i4].ordinal + ", Type: " + ((int) energyConsumerInfo[i4].type) + ", Name: " + energyConsumerInfo[i4].name);
+                        indentingPrintWriter.println(
+                                "EnergyConsumerId: "
+                                        + energyConsumerInfo[i4].id
+                                        + ", Ordinal: "
+                                        + energyConsumerInfo[i4].ordinal
+                                        + ", Type: "
+                                        + ((int) energyConsumerInfo[i4].type)
+                                        + ", Name: "
+                                        + energyConsumerInfo[i4].name);
                     }
                 }
                 indentingPrintWriter.decreaseIndent();
@@ -169,25 +222,36 @@ public final class PowerStatsService extends SystemService {
             }
         }
 
-        public final void getPowerMonitorReadings(final int[] iArr, final ResultReceiver resultReceiver) {
+        public final void getPowerMonitorReadings(
+                final int[] iArr, final ResultReceiver resultReceiver) {
             final int callingUid = Binder.getCallingUid();
-            PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this).post(new Runnable() { // from class: com.android.server.powerstats.PowerStatsService$1$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    PowerStatsService.AnonymousClass1 anonymousClass1 = PowerStatsService.AnonymousClass1.this;
-                    PowerStatsService.this.getPowerMonitorReadingsImpl(iArr, resultReceiver, callingUid);
-                }
-            });
+            PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this)
+                    .post(
+                            new Runnable() { // from class:
+                                             // com.android.server.powerstats.PowerStatsService$1$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    PowerStatsService.AnonymousClass1 anonymousClass1 =
+                                            PowerStatsService.AnonymousClass1.this;
+                                    PowerStatsService.this.getPowerMonitorReadingsImpl(
+                                            iArr, resultReceiver, callingUid);
+                                }
+                            });
         }
 
         public final void getSupportedPowerMonitors(final ResultReceiver resultReceiver) {
-            PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this).post(new Runnable() { // from class: com.android.server.powerstats.PowerStatsService$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    PowerStatsService.AnonymousClass1 anonymousClass1 = PowerStatsService.AnonymousClass1.this;
-                    PowerStatsService.this.getSupportedPowerMonitorsImpl(resultReceiver);
-                }
-            });
+            PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this)
+                    .post(
+                            new Runnable() { // from class:
+                                             // com.android.server.powerstats.PowerStatsService$1$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    PowerStatsService.AnonymousClass1 anonymousClass1 =
+                                            PowerStatsService.AnonymousClass1.this;
+                                    PowerStatsService.this.getSupportedPowerMonitorsImpl(
+                                            resultReceiver);
+                                }
+                            });
         }
     }
 
@@ -196,12 +260,16 @@ public final class PowerStatsService extends SystemService {
         public final Executor mExecutor;
 
         public DeviceConfigListener() {
-            this.mExecutor = new HandlerExecutor(PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this));
+            this.mExecutor =
+                    new HandlerExecutor(
+                            PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this));
         }
 
         public final void onPropertiesChanged(DeviceConfig.Properties properties) {
             PowerStatsService powerStatsService = PowerStatsService.this;
-            boolean z = powerStatsService.mDeviceConfig.getBoolean("battery_stats", "power_monitor_api_enabled", true);
+            boolean z =
+                    powerStatsService.mDeviceConfig.getBoolean(
+                            "battery_stats", "power_monitor_api_enabled", true);
             if (z != powerStatsService.mPowerMonitorApiEnabled) {
                 powerStatsService.mPowerMonitorApiEnabled = z;
                 powerStatsService.mPowerMonitors = null;
@@ -217,18 +285,23 @@ public final class PowerStatsService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
-        public LocalService() {
-        }
+        public LocalService() {}
 
         public final CompletableFuture getEnergyConsumedAsync(int[] iArr) {
             CompletableFuture completableFuture = new CompletableFuture();
-            PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this).post(new PowerStatsService$LocalService$$ExternalSyntheticLambda0(this, completableFuture, iArr, 0));
+            PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this)
+                    .post(
+                            new PowerStatsService$LocalService$$ExternalSyntheticLambda0(
+                                    this, completableFuture, iArr, 0));
             return completableFuture;
         }
 
         public final CompletableFuture getStateResidencyAsync(int[] iArr) {
             CompletableFuture completableFuture = new CompletableFuture();
-            PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this).post(new PowerStatsService$LocalService$$ExternalSyntheticLambda0(this, completableFuture, iArr, 2));
+            PowerStatsService.m850$$Nest$mgetHandler(PowerStatsService.this)
+                    .post(
+                            new PowerStatsService$LocalService$$ExternalSyntheticLambda0(
+                                    this, completableFuture, iArr, 2));
             return completableFuture;
         }
     }
@@ -307,7 +380,9 @@ public final class PowerStatsService extends SystemService {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String getEnergyConsumerName(android.hardware.power.stats.EnergyConsumer r8, android.hardware.power.stats.EnergyConsumer[] r9) {
+    public static java.lang.String getEnergyConsumerName(
+            android.hardware.power.stats.EnergyConsumer r8,
+            android.hardware.power.stats.EnergyConsumer[] r9) {
         /*
             java.lang.StringBuilder r0 = new java.lang.StringBuilder
             r0.<init>()
@@ -401,7 +476,10 @@ public final class PowerStatsService extends SystemService {
             java.lang.String r8 = r0.toString()
             return r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.powerstats.PowerStatsService.getEnergyConsumerName(android.hardware.power.stats.EnergyConsumer, android.hardware.power.stats.EnergyConsumer[]):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.powerstats.PowerStatsService.getEnergyConsumerName(android.hardware.power.stats.EnergyConsumer,"
+                    + " android.hardware.power.stats.EnergyConsumer[]):java.lang.String");
     }
 
     public final void ensurePowerMonitors() {
@@ -460,15 +538,25 @@ public final class PowerStatsService extends SystemService {
                             int i4 = 0;
                             while (i4 < length2) {
                                 EnergyConsumer energyConsumer = energyConsumerInfo[i4];
-                                PowerMonitor powerMonitor2 = new PowerMonitor(i, 0, getEnergyConsumerName(energyConsumer, energyConsumerInfo));
+                                PowerMonitor powerMonitor2 =
+                                        new PowerMonitor(
+                                                i,
+                                                0,
+                                                getEnergyConsumerName(
+                                                        energyConsumer, energyConsumerInfo));
                                 arrayList.add(powerMonitor2);
-                                arrayList2.add(new PowerMonitorState(powerMonitor2, energyConsumer.id));
+                                arrayList2.add(
+                                        new PowerMonitorState(powerMonitor2, energyConsumer.id));
                                 i4++;
                                 i++;
                             }
                         }
-                        this.mPowerMonitors = (PowerMonitor[]) arrayList.toArray(new PowerMonitor[arrayList.size()]);
-                        this.mPowerMonitorStates = (PowerMonitorState[]) arrayList2.toArray(new PowerMonitorState[arrayList.size()]);
+                        this.mPowerMonitors =
+                                (PowerMonitor[])
+                                        arrayList.toArray(new PowerMonitor[arrayList.size()]);
+                        this.mPowerMonitorStates =
+                                (PowerMonitorState[])
+                                        arrayList2.toArray(new PowerMonitorState[arrayList.size()]);
                     } finally {
                     }
                 }
@@ -542,7 +630,9 @@ public final class PowerStatsService extends SystemService {
         }
         if (j == 0 || this.mClock.elapsedRealtime() - j > 30000) {
             int[] collectIds = collectIds(powerMonitorStateArr, 0);
-            if (collectIds != null && (energyConsumed = getPowerStatsHal().getEnergyConsumed(collectIds)) != null) {
+            if (collectIds != null
+                    && (energyConsumed = getPowerStatsHal().getEnergyConsumed(collectIds))
+                            != null) {
                 for (int i4 = 0; i4 < length; i4++) {
                     PowerMonitorState powerMonitorState2 = powerMonitorStateArr[i4];
                     if (powerMonitorState2.powerMonitor.getType() == 0) {
@@ -554,7 +644,8 @@ public final class PowerStatsService extends SystemService {
                                 if (energyConsumerResult.id == powerMonitorState2.id) {
                                     powerMonitorState2.prevEnergyUws = powerMonitorState2.energyUws;
                                     powerMonitorState2.energyUws = energyConsumerResult.energyUWs;
-                                    powerMonitorState2.timestampMs = energyConsumerResult.timestampMs;
+                                    powerMonitorState2.timestampMs =
+                                            energyConsumerResult.timestampMs;
                                     break;
                                 }
                                 i5++;
@@ -564,7 +655,9 @@ public final class PowerStatsService extends SystemService {
                 }
             }
             int[] collectIds2 = collectIds(powerMonitorStateArr, 1);
-            if (collectIds2 != null && (readEnergyMeter = getPowerStatsHal().readEnergyMeter(collectIds2)) != null) {
+            if (collectIds2 != null
+                    && (readEnergyMeter = getPowerStatsHal().readEnergyMeter(collectIds2))
+                            != null) {
                 for (int i6 = 0; i6 < length; i6++) {
                     PowerMonitorState powerMonitorState3 = powerMonitorStateArr[i6];
                     if (powerMonitorState3.powerMonitor.getType() == 1) {
@@ -595,7 +688,8 @@ public final class PowerStatsService extends SystemService {
             if (j3 != -1) {
                 long j4 = powerMonitorState4.prevEnergyUws;
                 if (j4 != -1) {
-                    IntervalRandomNoiseGenerator intervalRandomNoiseGenerator = this.mIntervalRandomNoiseGenerator;
+                    IntervalRandomNoiseGenerator intervalRandomNoiseGenerator =
+                            this.mIntervalRandomNoiseGenerator;
                     long max = Math.max(j4, j3 - 10000000);
                     long j5 = powerMonitorState4.energyUws;
                     int i9 = i % 17;
@@ -628,74 +722,85 @@ public final class PowerStatsService extends SystemService {
         synchronized (injector) {
             try {
                 if (injector.mPowerStatsHALWrapper == null) {
-                    PowerStatsHALWrapper$IPowerStatsHALWrapper powerStatsHALWrapper$PowerStatsHAL20WrapperImpl = new PowerStatsHALWrapper$PowerStatsHAL20WrapperImpl();
-                    PowerStatsHALWrapper$VintfHalCache powerStatsHALWrapper$VintfHalCache = new PowerStatsHALWrapper$VintfHalCache();
+                    PowerStatsHALWrapper$IPowerStatsHALWrapper
+                            powerStatsHALWrapper$PowerStatsHAL20WrapperImpl =
+                                    new PowerStatsHALWrapper$PowerStatsHAL20WrapperImpl();
+                    PowerStatsHALWrapper$VintfHalCache powerStatsHALWrapper$VintfHalCache =
+                            new PowerStatsHALWrapper$VintfHalCache();
                     powerStatsHALWrapper$VintfHalCache.mInstance = null;
                     PowerStatsHALWrapper$PowerStatsHAL20WrapperImpl.sVintfPowerStats = null;
                     if (powerStatsHALWrapper$VintfHalCache.get() == null) {
                         PowerStatsHALWrapper$PowerStatsHAL20WrapperImpl.sVintfPowerStats = null;
                     } else {
-                        PowerStatsHALWrapper$PowerStatsHAL20WrapperImpl.sVintfPowerStats = powerStatsHALWrapper$VintfHalCache;
+                        PowerStatsHALWrapper$PowerStatsHAL20WrapperImpl.sVintfPowerStats =
+                                powerStatsHALWrapper$VintfHalCache;
                     }
                     if (!powerStatsHALWrapper$PowerStatsHAL20WrapperImpl.isInitialized()) {
-                        powerStatsHALWrapper$PowerStatsHAL20WrapperImpl = new PowerStatsHALWrapper$IPowerStatsHALWrapper() { // from class: com.android.server.powerstats.PowerStatsHALWrapper$PowerStatsHAL10WrapperImpl
-                            public final boolean mIsInitialized;
+                        powerStatsHALWrapper$PowerStatsHAL20WrapperImpl =
+                                new PowerStatsHALWrapper$IPowerStatsHALWrapper() { // from class:
+                                                                                   // com.android.server.powerstats.PowerStatsHALWrapper$PowerStatsHAL10WrapperImpl
+                                    public final boolean mIsInitialized;
 
-                            {
-                                if (nativeInit()) {
-                                    this.mIsInitialized = true;
-                                } else {
-                                    this.mIsInitialized = false;
-                                }
-                            }
+                                    {
+                                        if (nativeInit()) {
+                                            this.mIsInitialized = true;
+                                        } else {
+                                            this.mIsInitialized = false;
+                                        }
+                                    }
 
-                            private static native Channel[] nativeGetEnergyMeterInfo();
+                                    private static native Channel[] nativeGetEnergyMeterInfo();
 
-                            private static native PowerEntity[] nativeGetPowerEntityInfo();
+                                    private static native PowerEntity[] nativeGetPowerEntityInfo();
 
-                            private static native StateResidencyResult[] nativeGetStateResidency(int[] iArr);
+                                    private static native StateResidencyResult[]
+                                            nativeGetStateResidency(int[] iArr);
 
-                            private static native boolean nativeInit();
+                                    private static native boolean nativeInit();
 
-                            private static native EnergyMeasurement[] nativeReadEnergyMeters(int[] iArr);
+                                    private static native EnergyMeasurement[]
+                                            nativeReadEnergyMeters(int[] iArr);
 
-                            @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
-                            public final EnergyConsumerResult[] getEnergyConsumed(int[] iArr) {
-                                return new EnergyConsumerResult[0];
-                            }
+                                    @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
+                                    public final EnergyConsumerResult[] getEnergyConsumed(
+                                            int[] iArr) {
+                                        return new EnergyConsumerResult[0];
+                                    }
 
-                            @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
-                            public final EnergyConsumer[] getEnergyConsumerInfo() {
-                                return new EnergyConsumer[0];
-                            }
+                                    @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
+                                    public final EnergyConsumer[] getEnergyConsumerInfo() {
+                                        return new EnergyConsumer[0];
+                                    }
 
-                            @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
-                            public final Channel[] getEnergyMeterInfo() {
-                                return nativeGetEnergyMeterInfo();
-                            }
+                                    @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
+                                    public final Channel[] getEnergyMeterInfo() {
+                                        return nativeGetEnergyMeterInfo();
+                                    }
 
-                            @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
-                            public final PowerEntity[] getPowerEntityInfo() {
-                                return nativeGetPowerEntityInfo();
-                            }
+                                    @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
+                                    public final PowerEntity[] getPowerEntityInfo() {
+                                        return nativeGetPowerEntityInfo();
+                                    }
 
-                            @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
-                            public final StateResidencyResult[] getStateResidency(int[] iArr) {
-                                return nativeGetStateResidency(iArr);
-                            }
+                                    @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
+                                    public final StateResidencyResult[] getStateResidency(
+                                            int[] iArr) {
+                                        return nativeGetStateResidency(iArr);
+                                    }
 
-                            @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
-                            public final boolean isInitialized() {
-                                return this.mIsInitialized;
-                            }
+                                    @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
+                                    public final boolean isInitialized() {
+                                        return this.mIsInitialized;
+                                    }
 
-                            @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
-                            public final EnergyMeasurement[] readEnergyMeter(int[] iArr) {
-                                return nativeReadEnergyMeters(iArr);
-                            }
-                        };
+                                    @Override // com.android.server.powerstats.PowerStatsHALWrapper$IPowerStatsHALWrapper
+                                    public final EnergyMeasurement[] readEnergyMeter(int[] iArr) {
+                                        return nativeReadEnergyMeters(iArr);
+                                    }
+                                };
                     }
-                    injector.mPowerStatsHALWrapper = powerStatsHALWrapper$PowerStatsHAL20WrapperImpl;
+                    injector.mPowerStatsHALWrapper =
+                            powerStatsHALWrapper$PowerStatsHAL20WrapperImpl;
                 }
                 powerStatsHALWrapper$IPowerStatsHALWrapper = injector.mPowerStatsHALWrapper;
             } catch (Throwable th) {
@@ -722,8 +827,11 @@ public final class PowerStatsService extends SystemService {
                     return;
                 }
                 injector.getClass();
-                this.mDataStoragePath = new File(Environment.getDataSystemDeDirectory(0), "powerstats");
-                PowerStatsLogger powerStatsLogger = new PowerStatsLogger(getLooper(), this.mDataStoragePath, getPowerStatsHal());
+                this.mDataStoragePath =
+                        new File(Environment.getDataSystemDeDirectory(0), "powerstats");
+                PowerStatsLogger powerStatsLogger =
+                        new PowerStatsLogger(
+                                getLooper(), this.mDataStoragePath, getPowerStatsHal());
                 this.mPowerStatsLogger = powerStatsLogger;
                 new BatteryTrigger(this.mContext, powerStatsLogger);
                 new TimerTrigger(this.mContext, this.mPowerStatsLogger);
@@ -743,16 +851,25 @@ public final class PowerStatsService extends SystemService {
             Slog.e("StatsPullAtomCallbackImpl", "Failed to start PowerStatsService statsd pullers");
         } else {
             StatsManager statsManager = (StatsManager) context.getSystemService(StatsManager.class);
-            Channel[] energyMeterInfo = PowerStatsService.this.getPowerStatsHal().getEnergyMeterInfo();
+            Channel[] energyMeterInfo =
+                    PowerStatsService.this.getPowerStatsHal().getEnergyMeterInfo();
             if (energyMeterInfo == null || energyMeterInfo.length == 0) {
-                Slog.e("StatsPullAtomCallbackImpl", "Failed to init OnDevicePowerMeasurement puller");
+                Slog.e(
+                        "StatsPullAtomCallbackImpl",
+                        "Failed to init OnDevicePowerMeasurement puller");
             } else {
                 for (Channel channel : energyMeterInfo) {
-                    ((HashMap) statsPullAtomCallbackImpl.mChannels).put(Integer.valueOf(channel.id), channel);
+                    ((HashMap) statsPullAtomCallbackImpl.mChannels)
+                            .put(Integer.valueOf(channel.id), channel);
                 }
-                statsManager.setPullAtomCallback(FrameworkStatsLog.ON_DEVICE_POWER_MEASUREMENT, (StatsManager.PullAtomMetadata) null, ConcurrentUtils.DIRECT_EXECUTOR, statsPullAtomCallbackImpl);
+                statsManager.setPullAtomCallback(
+                        FrameworkStatsLog.ON_DEVICE_POWER_MEASUREMENT,
+                        (StatsManager.PullAtomMetadata) null,
+                        ConcurrentUtils.DIRECT_EXECUTOR,
+                        statsPullAtomCallbackImpl);
             }
-            PowerEntity[] powerEntityInfo = PowerStatsService.this.getPowerStatsHal().getPowerEntityInfo();
+            PowerEntity[] powerEntityInfo =
+                    PowerStatsService.this.getPowerStatsHal().getPowerEntityInfo();
             if (powerEntityInfo == null || powerEntityInfo.length == 0) {
                 Slog.e("StatsPullAtomCallbackImpl", "Failed to init SubsystemSleepState puller");
             } else {
@@ -767,15 +884,23 @@ public final class PowerStatsService extends SystemService {
                             i2++;
                         }
                     }
-                    ((HashMap) statsPullAtomCallbackImpl.mEntityNames).put(Integer.valueOf(powerEntity.id), powerEntity.name);
-                    ((HashMap) statsPullAtomCallbackImpl.mStateNames).put(Integer.valueOf(powerEntity.id), hashMap);
+                    ((HashMap) statsPullAtomCallbackImpl.mEntityNames)
+                            .put(Integer.valueOf(powerEntity.id), powerEntity.name);
+                    ((HashMap) statsPullAtomCallbackImpl.mStateNames)
+                            .put(Integer.valueOf(powerEntity.id), hashMap);
                 }
-                statsManager.setPullAtomCallback(FrameworkStatsLog.SUBSYSTEM_SLEEP_STATE, (StatsManager.PullAtomMetadata) null, ConcurrentUtils.DIRECT_EXECUTOR, statsPullAtomCallbackImpl);
+                statsManager.setPullAtomCallback(
+                        FrameworkStatsLog.SUBSYSTEM_SLEEP_STATE,
+                        (StatsManager.PullAtomMetadata) null,
+                        ConcurrentUtils.DIRECT_EXECUTOR,
+                        statsPullAtomCallbackImpl);
             }
         }
         DeviceConfigListener deviceConfigListener = this.mDeviceConfigListener;
-        PowerStatsService.this.mDeviceConfig.addOnPropertiesChangedListener("battery_stats", deviceConfigListener.mExecutor, deviceConfigListener);
-        boolean z = this.mDeviceConfig.getBoolean("battery_stats", "power_monitor_api_enabled", true);
+        PowerStatsService.this.mDeviceConfig.addOnPropertiesChangedListener(
+                "battery_stats", deviceConfigListener.mExecutor, deviceConfigListener);
+        boolean z =
+                this.mDeviceConfig.getBoolean("battery_stats", "power_monitor_api_enabled", true);
         if (z != this.mPowerMonitorApiEnabled) {
             this.mPowerMonitorApiEnabled = z;
             this.mPowerMonitors = null;

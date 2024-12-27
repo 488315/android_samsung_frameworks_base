@@ -3,26 +3,29 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CdmaCallWaiting implements Parcelable {
-    public static final Parcelable.Creator<CdmaCallWaiting> CREATOR = new Parcelable.Creator<CdmaCallWaiting>() { // from class: android.hardware.radio.voice.CdmaCallWaiting.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaCallWaiting createFromParcel(Parcel _aidl_source) {
-            CdmaCallWaiting _aidl_out = new CdmaCallWaiting();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CdmaCallWaiting> CREATOR =
+            new Parcelable.Creator<CdmaCallWaiting>() { // from class:
+                // android.hardware.radio.voice.CdmaCallWaiting.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaCallWaiting createFromParcel(Parcel _aidl_source) {
+                    CdmaCallWaiting _aidl_out = new CdmaCallWaiting();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaCallWaiting[] newArray(int _aidl_size) {
-            return new CdmaCallWaiting[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaCallWaiting[] newArray(int _aidl_size) {
+                    return new CdmaCallWaiting[_aidl_size];
+                }
+            };
     public static final int NUMBER_PLAN_DATA = 3;
     public static final int NUMBER_PLAN_ISDN = 1;
     public static final int NUMBER_PLAN_NATIONAL = 8;
@@ -103,7 +106,9 @@ public class CdmaCallWaiting implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.signalInfoRecord = (CdmaSignalInfoRecord) _aidl_parcel.readTypedObject(CdmaSignalInfoRecord.CREATOR);
+            this.signalInfoRecord =
+                    (CdmaSignalInfoRecord)
+                            _aidl_parcel.readTypedObject(CdmaSignalInfoRecord.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

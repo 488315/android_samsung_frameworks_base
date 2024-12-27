@@ -1,8 +1,6 @@
 package android.media.musicrecognition;
 
 import android.media.AudioFormat;
-import android.media.musicrecognition.IMusicRecognitionAttributionTagCallback;
-import android.media.musicrecognition.IMusicRecognitionServiceCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -12,20 +10,30 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IMusicRecognitionService extends IInterface {
-    public static final String DESCRIPTOR = "android.media.musicrecognition.IMusicRecognitionService";
+    public static final String DESCRIPTOR =
+            "android.media.musicrecognition.IMusicRecognitionService";
 
-    void getAttributionTag(IMusicRecognitionAttributionTagCallback iMusicRecognitionAttributionTagCallback) throws RemoteException;
+    void getAttributionTag(
+            IMusicRecognitionAttributionTagCallback iMusicRecognitionAttributionTagCallback)
+            throws RemoteException;
 
-    void onAudioStreamStarted(ParcelFileDescriptor parcelFileDescriptor, AudioFormat audioFormat, IMusicRecognitionServiceCallback iMusicRecognitionServiceCallback) throws RemoteException;
+    void onAudioStreamStarted(
+            ParcelFileDescriptor parcelFileDescriptor,
+            AudioFormat audioFormat,
+            IMusicRecognitionServiceCallback iMusicRecognitionServiceCallback)
+            throws RemoteException;
 
     public static class Default implements IMusicRecognitionService {
         @Override // android.media.musicrecognition.IMusicRecognitionService
-        public void onAudioStreamStarted(ParcelFileDescriptor fd, AudioFormat audioFormat, IMusicRecognitionServiceCallback callback) throws RemoteException {
-        }
+        public void onAudioStreamStarted(
+                ParcelFileDescriptor fd,
+                AudioFormat audioFormat,
+                IMusicRecognitionServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.media.musicrecognition.IMusicRecognitionService
-        public void getAttributionTag(IMusicRecognitionAttributionTagCallback callback) throws RemoteException {
-        }
+        public void getAttributionTag(IMusicRecognitionAttributionTagCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +41,7 @@ public interface IMusicRecognitionService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMusicRecognitionService {
+    public abstract static class Stub extends Binder implements IMusicRecognitionService {
         static final int TRANSACTION_getAttributionTag = 2;
         static final int TRANSACTION_onAudioStreamStarted = 1;
 
@@ -74,7 +82,8 @@ public interface IMusicRecognitionService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMusicRecognitionService.DESCRIPTOR);
             }
@@ -84,14 +93,20 @@ public interface IMusicRecognitionService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     AudioFormat _arg1 = (AudioFormat) data.readTypedObject(AudioFormat.CREATOR);
-                    IMusicRecognitionServiceCallback _arg2 = IMusicRecognitionServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IMusicRecognitionServiceCallback _arg2 =
+                            IMusicRecognitionServiceCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onAudioStreamStarted(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    IMusicRecognitionAttributionTagCallback _arg02 = IMusicRecognitionAttributionTagCallback.Stub.asInterface(data.readStrongBinder());
+                    IMusicRecognitionAttributionTagCallback _arg02 =
+                            IMusicRecognitionAttributionTagCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getAttributionTag(_arg02);
                     return true;
@@ -117,7 +132,11 @@ public interface IMusicRecognitionService extends IInterface {
             }
 
             @Override // android.media.musicrecognition.IMusicRecognitionService
-            public void onAudioStreamStarted(ParcelFileDescriptor fd, AudioFormat audioFormat, IMusicRecognitionServiceCallback callback) throws RemoteException {
+            public void onAudioStreamStarted(
+                    ParcelFileDescriptor fd,
+                    AudioFormat audioFormat,
+                    IMusicRecognitionServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMusicRecognitionService.DESCRIPTOR);
@@ -131,7 +150,8 @@ public interface IMusicRecognitionService extends IInterface {
             }
 
             @Override // android.media.musicrecognition.IMusicRecognitionService
-            public void getAttributionTag(IMusicRecognitionAttributionTagCallback callback) throws RemoteException {
+            public void getAttributionTag(IMusicRecognitionAttributionTagCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMusicRecognitionService.DESCRIPTOR);

@@ -4,6 +4,7 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.util.Base64;
 import android.util.Log;
+
 import com.android.server.DirEncryptService$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
@@ -11,10 +12,14 @@ import com.android.server.accessibility.FlashNotificationsController$$ExternalSy
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.EnterpriseDeviceManagerService;
 import com.android.server.enterprise.EnterpriseService;
+
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.hdm.HdmManager;
 import com.samsung.android.knox.nfc.NfcPolicy;
 import com.samsung.android.knox.restriction.RestrictionPolicy;
+
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,7 +30,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Function;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -41,7 +45,14 @@ public final class HdmSoftwareBlock {
         try {
             int subSystem = getSubSystem("ro.vendor.hdm.btonly.subsystem");
             int i2 = (~subSystem) & i;
-            Log.i("HDM - HdmSoftwareBlock", "bt: " + Integer.toString(subSystem, 16) + ", targetForRunTime: " + Integer.toString(i2, 16) + ", origin: " + Integer.toString(i, 16));
+            Log.i(
+                    "HDM - HdmSoftwareBlock",
+                    "bt: "
+                            + Integer.toString(subSystem, 16)
+                            + ", targetForRunTime: "
+                            + Integer.toString(i2, 16)
+                            + ", origin: "
+                            + Integer.toString(i, 16));
             return i2;
         } catch (Exception e) {
             Log.i("HDM - HdmSoftwareBlock", "filterRunTimeOnly failed: " + e);
@@ -53,7 +64,8 @@ public final class HdmSoftwareBlock {
         try {
             return Integer.parseInt(SystemProperties.get(str, "0x0").replace("0x", ""), 16);
         } catch (Exception e) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "getSubSystem failed: ", "HDM - HdmSoftwareBlock");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e, "getSubSystem failed: ", "HDM - HdmSoftwareBlock");
             return 0;
         }
     }
@@ -61,7 +73,8 @@ public final class HdmSoftwareBlock {
     public final int applySwBlock(int i, boolean z) {
         int i2 = -1;
         if (i < 0) {
-            DirEncryptService$$ExternalSyntheticOutline0.m(i, "applySwBlock failed for ", "HDM - HdmSoftwareBlock");
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    i, "applySwBlock failed for ", "HDM - HdmSoftwareBlock");
             return -1;
         }
         try {
@@ -83,9 +96,12 @@ public final class HdmSoftwareBlock {
         }
         boolean z2 = true;
         if (!this.deferredServiceStarted) {
-            if (ServiceManager.getService("wifi_policy") == null || ServiceManager.getService("bluetooth_policy") == null || ServiceManager.getService("misc_policy") == null) {
+            if (ServiceManager.getService("wifi_policy") == null
+                    || ServiceManager.getService("bluetooth_policy") == null
+                    || ServiceManager.getService("misc_policy") == null) {
                 int i3 = EnterpriseDeviceManagerService.$r8$clinit;
-                ((EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance).startDeferredServicesIfNeeded();
+                ((EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance)
+                        .startDeferredServicesIfNeeded();
                 Thread.sleep(1000L);
             }
             this.deferredServiceStarted = true;
@@ -115,10 +131,13 @@ public final class HdmSoftwareBlock {
                             Log.i("HDM - HdmSoftwareBlock", sb2.toString());
                         }
                     }
-                    boolean booleanValue = ((Boolean) function.apply(Boolean.valueOf(z3))).booleanValue();
+                    boolean booleanValue =
+                            ((Boolean) function.apply(Boolean.valueOf(z3))).booleanValue();
                     StringBuilder sb3 = new StringBuilder("apply ");
-                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(intValue, z3 ? "unblock" : "block", " for ", ": ", sb3);
-                    FlashNotificationsController$$ExternalSyntheticOutline0.m("HDM - HdmSoftwareBlock", sb3, booleanValue);
+                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                            intValue, z3 ? "unblock" : "block", " for ", ": ", sb3);
+                    FlashNotificationsController$$ExternalSyntheticOutline0.m(
+                            "HDM - HdmSoftwareBlock", sb3, booleanValue);
                 }
             } else {
                 Log.i("HDM - HdmSoftwareBlock", intValue + " doesn't supported");
@@ -156,7 +175,11 @@ public final class HdmSoftwareBlock {
         }
         if (!nfcPolicy.isNFCStateChangeAllowed()) {
             z3 = false;
-            FlashNotificationsController$$ExternalSyntheticOutline0.m("HDM - HdmSoftwareBlock", FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("controlNfc: ", z4, ", ", z3, ", "), z);
+            FlashNotificationsController$$ExternalSyntheticOutline0.m(
+                    "HDM - HdmSoftwareBlock",
+                    FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                            "controlNfc: ", z4, ", ", z3, ", "),
+                    z);
             return z4;
         }
         z2 = nfcPolicy.startNFC(z);
@@ -167,12 +190,20 @@ public final class HdmSoftwareBlock {
             Log.e("HDM - HdmSoftwareBlock", "handleNfc failed: " + e, e);
             z3 = z4;
             z4 = z2;
-            FlashNotificationsController$$ExternalSyntheticOutline0.m("HDM - HdmSoftwareBlock", FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("controlNfc: ", z4, ", ", z3, ", "), z);
+            FlashNotificationsController$$ExternalSyntheticOutline0.m(
+                    "HDM - HdmSoftwareBlock",
+                    FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                            "controlNfc: ", z4, ", ", z3, ", "),
+                    z);
             return z4;
         }
         z3 = z4;
         z4 = z2;
-        FlashNotificationsController$$ExternalSyntheticOutline0.m("HDM - HdmSoftwareBlock", FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("controlNfc: ", z4, ", ", z3, ", "), z);
+        FlashNotificationsController$$ExternalSyntheticOutline0.m(
+                "HDM - HdmSoftwareBlock",
+                FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                        "controlNfc: ", z4, ", ", z3, ", "),
+                z);
         return z4;
     }
 
@@ -198,10 +229,21 @@ public final class HdmSoftwareBlock {
 
     public final int getTargetHdmPolicy(byte[] bArr) {
         JSONObject payload = getPayload(bArr);
-        int parseInt = Integer.parseInt(payload.getString("deviceBlock").replaceAll("[^a-fA-F0-9]", ""), 16);
-        int parseInt2 = Integer.parseInt(payload.getString("compromiseBlock").replaceAll("[^a-fA-F0-9]", ""), 16);
+        int parseInt =
+                Integer.parseInt(
+                        payload.getString("deviceBlock").replaceAll("[^a-fA-F0-9]", ""), 16);
+        int parseInt2 =
+                Integer.parseInt(
+                        payload.getString("compromiseBlock").replaceAll("[^a-fA-F0-9]", ""), 16);
         int i = parseInt | parseInt2;
-        Log.i("HDM - HdmSoftwareBlock", "deviceBlock: " + Integer.toHexString(parseInt) + ", compromiseBlock: " + Integer.toHexString(parseInt2) + ", mergedBlock: " + Integer.toHexString(i));
+        Log.i(
+                "HDM - HdmSoftwareBlock",
+                "deviceBlock: "
+                        + Integer.toHexString(parseInt)
+                        + ", compromiseBlock: "
+                        + Integer.toHexString(parseInt2)
+                        + ", mergedBlock: "
+                        + Integer.toHexString(i));
         return i;
     }
 
@@ -221,7 +263,8 @@ public final class HdmSoftwareBlock {
             Log.i("HDM - HdmSoftwareBlock", "nfc state change: " + controlNfc);
             return !controlNfc ? 1 : 0;
         } catch (Exception e) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "handleSoftwareBlockBefore failed: ", "HDM - HdmSoftwareBlock");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e, "handleSoftwareBlockBefore failed: ", "HDM - HdmSoftwareBlock");
             return -1;
         }
     }
@@ -229,300 +272,370 @@ public final class HdmSoftwareBlock {
     public final Map initControlMap() {
         HashMap hashMap = new HashMap();
         final int i = 0;
-        hashMap.put(1, new Function(this) { // from class: com.android.server.enterprise.hdm.HdmSoftwareBlock$$ExternalSyntheticLambda0
-            public final /* synthetic */ HdmSoftwareBlock f$0;
+        hashMap.put(
+                1,
+                new Function(
+                        this) { // from class:
+                                // com.android.server.enterprise.hdm.HdmSoftwareBlock$$ExternalSyntheticLambda0
+                    public final /* synthetic */ HdmSoftwareBlock f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                boolean z;
-                boolean z2;
-                boolean z3;
-                boolean z4;
-                int i2 = i;
-                HdmSoftwareBlock hdmSoftwareBlock = this.f$0;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
-                switch (i2) {
-                    case 0:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z = hdmSoftwareBlock.restrictionPolicy.setCameraState(booleanValue);
-                        } catch (Exception e) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "controlCamera failed: ", "HDM - HdmSoftwareBlock");
-                            z = false;
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        boolean z;
+                        boolean z2;
+                        boolean z3;
+                        boolean z4;
+                        int i2 = i;
+                        HdmSoftwareBlock hdmSoftwareBlock = this.f$0;
+                        boolean booleanValue = ((Boolean) obj).booleanValue();
+                        switch (i2) {
+                            case 0:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z =
+                                            hdmSoftwareBlock.restrictionPolicy.setCameraState(
+                                                    booleanValue);
+                                } catch (Exception e) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e, "controlCamera failed: ", "HDM - HdmSoftwareBlock");
+                                    z = false;
+                                }
+                                return Boolean.valueOf(z);
+                            case 1:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z2 = hdmSoftwareBlock.restrictionPolicy.allowWiFi(booleanValue);
+                                } catch (Exception e2) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e2, "controlWiFi failed: ", "HDM - HdmSoftwareBlock");
+                                    z2 = false;
+                                }
+                                return Boolean.valueOf(z2);
+                            case 2:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z3 =
+                                            hdmSoftwareBlock.restrictionPolicy.allowBluetooth(
+                                                    booleanValue);
+                                } catch (Exception e3) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e3, "controlBt failed: ", "HDM - HdmSoftwareBlock");
+                                    z3 = false;
+                                }
+                                return Boolean.valueOf(z3);
+                            case 3:
+                                return Boolean.valueOf(hdmSoftwareBlock.controlNfc(booleanValue));
+                            default:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z4 =
+                                            hdmSoftwareBlock.restrictionPolicy.setMicrophoneState(
+                                                    booleanValue);
+                                } catch (Exception e4) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e4, "controlMic failed: ", "HDM - HdmSoftwareBlock");
+                                    z4 = false;
+                                }
+                                return Boolean.valueOf(z4);
                         }
-                        return Boolean.valueOf(z);
-                    case 1:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z2 = hdmSoftwareBlock.restrictionPolicy.allowWiFi(booleanValue);
-                        } catch (Exception e2) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e2, "controlWiFi failed: ", "HDM - HdmSoftwareBlock");
-                            z2 = false;
-                        }
-                        return Boolean.valueOf(z2);
-                    case 2:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z3 = hdmSoftwareBlock.restrictionPolicy.allowBluetooth(booleanValue);
-                        } catch (Exception e3) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e3, "controlBt failed: ", "HDM - HdmSoftwareBlock");
-                            z3 = false;
-                        }
-                        return Boolean.valueOf(z3);
-                    case 3:
-                        return Boolean.valueOf(hdmSoftwareBlock.controlNfc(booleanValue));
-                    default:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z4 = hdmSoftwareBlock.restrictionPolicy.setMicrophoneState(booleanValue);
-                        } catch (Exception e4) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e4, "controlMic failed: ", "HDM - HdmSoftwareBlock");
-                            z4 = false;
-                        }
-                        return Boolean.valueOf(z4);
-                }
-            }
-        });
+                    }
+                });
         final int i2 = 1;
-        hashMap.put(8, new Function(this) { // from class: com.android.server.enterprise.hdm.HdmSoftwareBlock$$ExternalSyntheticLambda0
-            public final /* synthetic */ HdmSoftwareBlock f$0;
+        hashMap.put(
+                8,
+                new Function(
+                        this) { // from class:
+                                // com.android.server.enterprise.hdm.HdmSoftwareBlock$$ExternalSyntheticLambda0
+                    public final /* synthetic */ HdmSoftwareBlock f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                boolean z;
-                boolean z2;
-                boolean z3;
-                boolean z4;
-                int i22 = i2;
-                HdmSoftwareBlock hdmSoftwareBlock = this.f$0;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
-                switch (i22) {
-                    case 0:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z = hdmSoftwareBlock.restrictionPolicy.setCameraState(booleanValue);
-                        } catch (Exception e) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "controlCamera failed: ", "HDM - HdmSoftwareBlock");
-                            z = false;
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        boolean z;
+                        boolean z2;
+                        boolean z3;
+                        boolean z4;
+                        int i22 = i2;
+                        HdmSoftwareBlock hdmSoftwareBlock = this.f$0;
+                        boolean booleanValue = ((Boolean) obj).booleanValue();
+                        switch (i22) {
+                            case 0:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z =
+                                            hdmSoftwareBlock.restrictionPolicy.setCameraState(
+                                                    booleanValue);
+                                } catch (Exception e) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e, "controlCamera failed: ", "HDM - HdmSoftwareBlock");
+                                    z = false;
+                                }
+                                return Boolean.valueOf(z);
+                            case 1:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z2 = hdmSoftwareBlock.restrictionPolicy.allowWiFi(booleanValue);
+                                } catch (Exception e2) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e2, "controlWiFi failed: ", "HDM - HdmSoftwareBlock");
+                                    z2 = false;
+                                }
+                                return Boolean.valueOf(z2);
+                            case 2:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z3 =
+                                            hdmSoftwareBlock.restrictionPolicy.allowBluetooth(
+                                                    booleanValue);
+                                } catch (Exception e3) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e3, "controlBt failed: ", "HDM - HdmSoftwareBlock");
+                                    z3 = false;
+                                }
+                                return Boolean.valueOf(z3);
+                            case 3:
+                                return Boolean.valueOf(hdmSoftwareBlock.controlNfc(booleanValue));
+                            default:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z4 =
+                                            hdmSoftwareBlock.restrictionPolicy.setMicrophoneState(
+                                                    booleanValue);
+                                } catch (Exception e4) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e4, "controlMic failed: ", "HDM - HdmSoftwareBlock");
+                                    z4 = false;
+                                }
+                                return Boolean.valueOf(z4);
                         }
-                        return Boolean.valueOf(z);
-                    case 1:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z2 = hdmSoftwareBlock.restrictionPolicy.allowWiFi(booleanValue);
-                        } catch (Exception e2) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e2, "controlWiFi failed: ", "HDM - HdmSoftwareBlock");
-                            z2 = false;
-                        }
-                        return Boolean.valueOf(z2);
-                    case 2:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z3 = hdmSoftwareBlock.restrictionPolicy.allowBluetooth(booleanValue);
-                        } catch (Exception e3) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e3, "controlBt failed: ", "HDM - HdmSoftwareBlock");
-                            z3 = false;
-                        }
-                        return Boolean.valueOf(z3);
-                    case 3:
-                        return Boolean.valueOf(hdmSoftwareBlock.controlNfc(booleanValue));
-                    default:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z4 = hdmSoftwareBlock.restrictionPolicy.setMicrophoneState(booleanValue);
-                        } catch (Exception e4) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e4, "controlMic failed: ", "HDM - HdmSoftwareBlock");
-                            z4 = false;
-                        }
-                        return Boolean.valueOf(z4);
-                }
-            }
-        });
+                    }
+                });
         final int i3 = 2;
-        hashMap.put(16, new Function(this) { // from class: com.android.server.enterprise.hdm.HdmSoftwareBlock$$ExternalSyntheticLambda0
-            public final /* synthetic */ HdmSoftwareBlock f$0;
+        hashMap.put(
+                16,
+                new Function(
+                        this) { // from class:
+                                // com.android.server.enterprise.hdm.HdmSoftwareBlock$$ExternalSyntheticLambda0
+                    public final /* synthetic */ HdmSoftwareBlock f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                boolean z;
-                boolean z2;
-                boolean z3;
-                boolean z4;
-                int i22 = i3;
-                HdmSoftwareBlock hdmSoftwareBlock = this.f$0;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
-                switch (i22) {
-                    case 0:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z = hdmSoftwareBlock.restrictionPolicy.setCameraState(booleanValue);
-                        } catch (Exception e) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "controlCamera failed: ", "HDM - HdmSoftwareBlock");
-                            z = false;
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        boolean z;
+                        boolean z2;
+                        boolean z3;
+                        boolean z4;
+                        int i22 = i3;
+                        HdmSoftwareBlock hdmSoftwareBlock = this.f$0;
+                        boolean booleanValue = ((Boolean) obj).booleanValue();
+                        switch (i22) {
+                            case 0:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z =
+                                            hdmSoftwareBlock.restrictionPolicy.setCameraState(
+                                                    booleanValue);
+                                } catch (Exception e) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e, "controlCamera failed: ", "HDM - HdmSoftwareBlock");
+                                    z = false;
+                                }
+                                return Boolean.valueOf(z);
+                            case 1:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z2 = hdmSoftwareBlock.restrictionPolicy.allowWiFi(booleanValue);
+                                } catch (Exception e2) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e2, "controlWiFi failed: ", "HDM - HdmSoftwareBlock");
+                                    z2 = false;
+                                }
+                                return Boolean.valueOf(z2);
+                            case 2:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z3 =
+                                            hdmSoftwareBlock.restrictionPolicy.allowBluetooth(
+                                                    booleanValue);
+                                } catch (Exception e3) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e3, "controlBt failed: ", "HDM - HdmSoftwareBlock");
+                                    z3 = false;
+                                }
+                                return Boolean.valueOf(z3);
+                            case 3:
+                                return Boolean.valueOf(hdmSoftwareBlock.controlNfc(booleanValue));
+                            default:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z4 =
+                                            hdmSoftwareBlock.restrictionPolicy.setMicrophoneState(
+                                                    booleanValue);
+                                } catch (Exception e4) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e4, "controlMic failed: ", "HDM - HdmSoftwareBlock");
+                                    z4 = false;
+                                }
+                                return Boolean.valueOf(z4);
                         }
-                        return Boolean.valueOf(z);
-                    case 1:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z2 = hdmSoftwareBlock.restrictionPolicy.allowWiFi(booleanValue);
-                        } catch (Exception e2) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e2, "controlWiFi failed: ", "HDM - HdmSoftwareBlock");
-                            z2 = false;
-                        }
-                        return Boolean.valueOf(z2);
-                    case 2:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z3 = hdmSoftwareBlock.restrictionPolicy.allowBluetooth(booleanValue);
-                        } catch (Exception e3) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e3, "controlBt failed: ", "HDM - HdmSoftwareBlock");
-                            z3 = false;
-                        }
-                        return Boolean.valueOf(z3);
-                    case 3:
-                        return Boolean.valueOf(hdmSoftwareBlock.controlNfc(booleanValue));
-                    default:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z4 = hdmSoftwareBlock.restrictionPolicy.setMicrophoneState(booleanValue);
-                        } catch (Exception e4) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e4, "controlMic failed: ", "HDM - HdmSoftwareBlock");
-                            z4 = false;
-                        }
-                        return Boolean.valueOf(z4);
-                }
-            }
-        });
+                    }
+                });
         final int i4 = 3;
-        hashMap.put(64, new Function(this) { // from class: com.android.server.enterprise.hdm.HdmSoftwareBlock$$ExternalSyntheticLambda0
-            public final /* synthetic */ HdmSoftwareBlock f$0;
+        hashMap.put(
+                64,
+                new Function(
+                        this) { // from class:
+                                // com.android.server.enterprise.hdm.HdmSoftwareBlock$$ExternalSyntheticLambda0
+                    public final /* synthetic */ HdmSoftwareBlock f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                boolean z;
-                boolean z2;
-                boolean z3;
-                boolean z4;
-                int i22 = i4;
-                HdmSoftwareBlock hdmSoftwareBlock = this.f$0;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
-                switch (i22) {
-                    case 0:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z = hdmSoftwareBlock.restrictionPolicy.setCameraState(booleanValue);
-                        } catch (Exception e) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "controlCamera failed: ", "HDM - HdmSoftwareBlock");
-                            z = false;
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        boolean z;
+                        boolean z2;
+                        boolean z3;
+                        boolean z4;
+                        int i22 = i4;
+                        HdmSoftwareBlock hdmSoftwareBlock = this.f$0;
+                        boolean booleanValue = ((Boolean) obj).booleanValue();
+                        switch (i22) {
+                            case 0:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z =
+                                            hdmSoftwareBlock.restrictionPolicy.setCameraState(
+                                                    booleanValue);
+                                } catch (Exception e) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e, "controlCamera failed: ", "HDM - HdmSoftwareBlock");
+                                    z = false;
+                                }
+                                return Boolean.valueOf(z);
+                            case 1:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z2 = hdmSoftwareBlock.restrictionPolicy.allowWiFi(booleanValue);
+                                } catch (Exception e2) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e2, "controlWiFi failed: ", "HDM - HdmSoftwareBlock");
+                                    z2 = false;
+                                }
+                                return Boolean.valueOf(z2);
+                            case 2:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z3 =
+                                            hdmSoftwareBlock.restrictionPolicy.allowBluetooth(
+                                                    booleanValue);
+                                } catch (Exception e3) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e3, "controlBt failed: ", "HDM - HdmSoftwareBlock");
+                                    z3 = false;
+                                }
+                                return Boolean.valueOf(z3);
+                            case 3:
+                                return Boolean.valueOf(hdmSoftwareBlock.controlNfc(booleanValue));
+                            default:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z4 =
+                                            hdmSoftwareBlock.restrictionPolicy.setMicrophoneState(
+                                                    booleanValue);
+                                } catch (Exception e4) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e4, "controlMic failed: ", "HDM - HdmSoftwareBlock");
+                                    z4 = false;
+                                }
+                                return Boolean.valueOf(z4);
                         }
-                        return Boolean.valueOf(z);
-                    case 1:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z2 = hdmSoftwareBlock.restrictionPolicy.allowWiFi(booleanValue);
-                        } catch (Exception e2) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e2, "controlWiFi failed: ", "HDM - HdmSoftwareBlock");
-                            z2 = false;
-                        }
-                        return Boolean.valueOf(z2);
-                    case 2:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z3 = hdmSoftwareBlock.restrictionPolicy.allowBluetooth(booleanValue);
-                        } catch (Exception e3) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e3, "controlBt failed: ", "HDM - HdmSoftwareBlock");
-                            z3 = false;
-                        }
-                        return Boolean.valueOf(z3);
-                    case 3:
-                        return Boolean.valueOf(hdmSoftwareBlock.controlNfc(booleanValue));
-                    default:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z4 = hdmSoftwareBlock.restrictionPolicy.setMicrophoneState(booleanValue);
-                        } catch (Exception e4) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e4, "controlMic failed: ", "HDM - HdmSoftwareBlock");
-                            z4 = false;
-                        }
-                        return Boolean.valueOf(z4);
-                }
-            }
-        });
+                    }
+                });
         final int i5 = 4;
-        hashMap.put(128, new Function(this) { // from class: com.android.server.enterprise.hdm.HdmSoftwareBlock$$ExternalSyntheticLambda0
-            public final /* synthetic */ HdmSoftwareBlock f$0;
+        hashMap.put(
+                128,
+                new Function(
+                        this) { // from class:
+                                // com.android.server.enterprise.hdm.HdmSoftwareBlock$$ExternalSyntheticLambda0
+                    public final /* synthetic */ HdmSoftwareBlock f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                boolean z;
-                boolean z2;
-                boolean z3;
-                boolean z4;
-                int i22 = i5;
-                HdmSoftwareBlock hdmSoftwareBlock = this.f$0;
-                boolean booleanValue = ((Boolean) obj).booleanValue();
-                switch (i22) {
-                    case 0:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z = hdmSoftwareBlock.restrictionPolicy.setCameraState(booleanValue);
-                        } catch (Exception e) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "controlCamera failed: ", "HDM - HdmSoftwareBlock");
-                            z = false;
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        boolean z;
+                        boolean z2;
+                        boolean z3;
+                        boolean z4;
+                        int i22 = i5;
+                        HdmSoftwareBlock hdmSoftwareBlock = this.f$0;
+                        boolean booleanValue = ((Boolean) obj).booleanValue();
+                        switch (i22) {
+                            case 0:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z =
+                                            hdmSoftwareBlock.restrictionPolicy.setCameraState(
+                                                    booleanValue);
+                                } catch (Exception e) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e, "controlCamera failed: ", "HDM - HdmSoftwareBlock");
+                                    z = false;
+                                }
+                                return Boolean.valueOf(z);
+                            case 1:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z2 = hdmSoftwareBlock.restrictionPolicy.allowWiFi(booleanValue);
+                                } catch (Exception e2) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e2, "controlWiFi failed: ", "HDM - HdmSoftwareBlock");
+                                    z2 = false;
+                                }
+                                return Boolean.valueOf(z2);
+                            case 2:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z3 =
+                                            hdmSoftwareBlock.restrictionPolicy.allowBluetooth(
+                                                    booleanValue);
+                                } catch (Exception e3) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e3, "controlBt failed: ", "HDM - HdmSoftwareBlock");
+                                    z3 = false;
+                                }
+                                return Boolean.valueOf(z3);
+                            case 3:
+                                return Boolean.valueOf(hdmSoftwareBlock.controlNfc(booleanValue));
+                            default:
+                                hdmSoftwareBlock.getClass();
+                                try {
+                                    z4 =
+                                            hdmSoftwareBlock.restrictionPolicy.setMicrophoneState(
+                                                    booleanValue);
+                                } catch (Exception e4) {
+                                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                            e4, "controlMic failed: ", "HDM - HdmSoftwareBlock");
+                                    z4 = false;
+                                }
+                                return Boolean.valueOf(z4);
                         }
-                        return Boolean.valueOf(z);
-                    case 1:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z2 = hdmSoftwareBlock.restrictionPolicy.allowWiFi(booleanValue);
-                        } catch (Exception e2) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e2, "controlWiFi failed: ", "HDM - HdmSoftwareBlock");
-                            z2 = false;
-                        }
-                        return Boolean.valueOf(z2);
-                    case 2:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z3 = hdmSoftwareBlock.restrictionPolicy.allowBluetooth(booleanValue);
-                        } catch (Exception e3) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e3, "controlBt failed: ", "HDM - HdmSoftwareBlock");
-                            z3 = false;
-                        }
-                        return Boolean.valueOf(z3);
-                    case 3:
-                        return Boolean.valueOf(hdmSoftwareBlock.controlNfc(booleanValue));
-                    default:
-                        hdmSoftwareBlock.getClass();
-                        try {
-                            z4 = hdmSoftwareBlock.restrictionPolicy.setMicrophoneState(booleanValue);
-                        } catch (Exception e4) {
-                            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e4, "controlMic failed: ", "HDM - HdmSoftwareBlock");
-                            z4 = false;
-                        }
-                        return Boolean.valueOf(z4);
-                }
-            }
-        });
+                    }
+                });
         return hashMap;
     }
 
@@ -538,7 +651,12 @@ public final class HdmSoftwareBlock {
                 i += intValue;
             }
         }
-        Log.i("HDM - HdmSoftwareBlock", "hdmSubSystems: " + Integer.toHexString(parseInt) + ": targetSubSystems: " + Integer.toHexString(i));
+        Log.i(
+                "HDM - HdmSoftwareBlock",
+                "hdmSubSystems: "
+                        + Integer.toHexString(parseInt)
+                        + ": targetSubSystems: "
+                        + Integer.toHexString(i));
         return i;
     }
 

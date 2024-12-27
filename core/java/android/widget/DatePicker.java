@@ -20,7 +20,9 @@ import android.view.autofill.AutofillValue;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
+
 import com.android.internal.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
@@ -93,8 +95,7 @@ public class DatePicker extends FrameLayout {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DatePickerMode {
-    }
+    public @interface DatePickerMode {}
 
     public interface OnDateChangedListener {
         void onDateChanged(DatePicker datePicker, int i, int i2, int i3);
@@ -104,7 +105,8 @@ public class DatePicker extends FrameLayout {
         void onValidationChanged(boolean z);
     }
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<DatePicker> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<DatePicker> {
         private int mCalendarViewShownId;
         private int mDatePickerModeId;
         private int mDayOfMonthId;
@@ -123,7 +125,12 @@ public class DatePicker extends FrameLayout {
             datePickerModeEnumMapping.put(1, "spinner");
             datePickerModeEnumMapping.put(2, "calendar");
             Objects.requireNonNull(datePickerModeEnumMapping);
-            this.mDatePickerModeId = propertyMapper.mapIntEnum("datePickerMode", 16843955, new View$InspectionCompanion$$ExternalSyntheticLambda0(datePickerModeEnumMapping));
+            this.mDatePickerModeId =
+                    propertyMapper.mapIntEnum(
+                            "datePickerMode",
+                            16843955,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    datePickerModeEnumMapping));
             this.mDayOfMonthId = propertyMapper.mapInt("dayOfMonth", 0);
             this.mFirstDayOfWeekId = propertyMapper.mapInt("firstDayOfWeek", 16843581);
             this.mMaxDateId = propertyMapper.mapLong("maxDate", 16843584);
@@ -163,13 +170,17 @@ public class DatePicker extends FrameLayout {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public DatePicker(final Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public DatePicker(
+            final Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         if (getImportantForAutofill() == 0) {
             setImportantForAutofill(1);
         }
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.DatePicker, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.DatePicker, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.DatePicker, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.DatePicker, attrs, a, defStyleAttr, defStyleRes);
         boolean isDialogMode = a.getBoolean(17, false);
         int requestedMode = a.getInt(16, 1);
         int firstDayOfWeek = a.getInt(3, 0);
@@ -181,7 +192,8 @@ public class DatePicker extends FrameLayout {
         }
         switch (this.mMode) {
             case 2:
-                this.mDelegate = createCalendarUIDelegate(context, attrs, defStyleAttr, defStyleRes);
+                this.mDelegate =
+                        createCalendarUIDelegate(context, attrs, defStyleAttr, defStyleRes);
                 break;
             default:
                 this.mDelegate = createSpinnerUIDelegate(context, attrs, defStyleAttr, defStyleRes);
@@ -190,12 +202,14 @@ public class DatePicker extends FrameLayout {
         if (firstDayOfWeek != 0) {
             setFirstDayOfWeek(firstDayOfWeek);
         }
-        this.mDelegate.setAutoFillChangeListener(new OnDateChangedListener() { // from class: android.widget.DatePicker$$ExternalSyntheticLambda0
-            @Override // android.widget.DatePicker.OnDateChangedListener
-            public final void onDateChanged(DatePicker datePicker, int i, int i2, int i3) {
-                DatePicker.this.lambda$new$0(context, datePicker, i, i2, i3);
-            }
-        });
+        this.mDelegate.setAutoFillChangeListener(
+                new OnDateChangedListener() { // from class:
+                                              // android.widget.DatePicker$$ExternalSyntheticLambda0
+                    @Override // android.widget.DatePicker.OnDateChangedListener
+                    public final void onDateChanged(DatePicker datePicker, int i, int i2, int i3) {
+                        DatePicker.this.lambda$new$0(context, datePicker, i, i2, i3);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -206,11 +220,13 @@ public class DatePicker extends FrameLayout {
         }
     }
 
-    private DatePickerDelegate createSpinnerUIDelegate(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    private DatePickerDelegate createSpinnerUIDelegate(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         return new DatePickerSpinnerDelegate(this, context, attrs, defStyleAttr, defStyleRes);
     }
 
-    private DatePickerDelegate createCalendarUIDelegate(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    private DatePickerDelegate createCalendarUIDelegate(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         return new DatePickerCalendarDelegate(this, context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -218,7 +234,11 @@ public class DatePicker extends FrameLayout {
         return this.mMode;
     }
 
-    public void init(int year, int monthOfYear, int dayOfMonth, OnDateChangedListener onDateChangedListener) {
+    public void init(
+            int year,
+            int monthOfYear,
+            int dayOfMonth,
+            OnDateChangedListener onDateChangedListener) {
         this.mDelegate.init(year, monthOfYear, dayOfMonth, onDateChangedListener);
     }
 
@@ -354,7 +374,7 @@ public class DatePicker extends FrameLayout {
         this.mDelegate.onRestoreInstanceState(ss);
     }
 
-    static abstract class AbstractDatePickerDelegate implements DatePickerDelegate {
+    abstract static class AbstractDatePickerDelegate implements DatePickerDelegate {
         protected OnDateChangedListener mAutoFillChangeListener;
         private long mAutofilledValue;
         protected Context mContext;
@@ -426,8 +446,7 @@ public class DatePicker extends FrameLayout {
             }
         }
 
-        protected void onLocaleChanged(Locale locale) {
-        }
+        protected void onLocaleChanged(Locale locale) {}
 
         @Override // android.widget.DatePicker.DatePickerDelegate
         public void onPopulateAccessibilityEvent(AccessibilityEvent event) {
@@ -439,19 +458,22 @@ public class DatePicker extends FrameLayout {
         }
 
         static class SavedState extends View.BaseSavedState {
-            public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: android.widget.DatePicker.AbstractDatePickerDelegate.SavedState.1
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public SavedState createFromParcel(Parcel in) {
-                    return new SavedState(in);
-                }
+            public static final Parcelable.Creator<SavedState> CREATOR =
+                    new Parcelable.Creator<
+                            SavedState>() { // from class:
+                                            // android.widget.DatePicker.AbstractDatePickerDelegate.SavedState.1
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public SavedState createFromParcel(Parcel in) {
+                            return new SavedState(in);
+                        }
 
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public SavedState[] newArray(int size) {
-                    return new SavedState[size];
-                }
-            };
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public SavedState[] newArray(int size) {
+                            return new SavedState[size];
+                        }
+                    };
             private final int mCurrentView;
             private final int mListPosition;
             private final int mListPositionOffset;
@@ -461,11 +483,26 @@ public class DatePicker extends FrameLayout {
             private final int mSelectedMonth;
             private final int mSelectedYear;
 
-            public SavedState(Parcelable superState, int year, int month, int day, long minDate, long maxDate) {
+            public SavedState(
+                    Parcelable superState,
+                    int year,
+                    int month,
+                    int day,
+                    long minDate,
+                    long maxDate) {
                 this(superState, year, month, day, minDate, maxDate, 0, 0, 0);
             }
 
-            public SavedState(Parcelable superState, int year, int month, int day, long minDate, long maxDate, int currentView, int listPosition, int listPositionOffset) {
+            public SavedState(
+                    Parcelable superState,
+                    int year,
+                    int month,
+                    int day,
+                    long minDate,
+                    long maxDate,
+                    int currentView,
+                    int listPosition,
+                    int listPositionOffset) {
                 super(superState);
                 this.mSelectedYear = year;
                 this.mSelectedMonth = month;
@@ -489,7 +526,8 @@ public class DatePicker extends FrameLayout {
                 this.mListPositionOffset = in.readInt();
             }
 
-            @Override // android.view.View.BaseSavedState, android.view.AbsSavedState, android.os.Parcelable
+            @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
+                      // android.os.Parcelable
             public void writeToParcel(Parcel dest, int flags) {
                 super.writeToParcel(dest, flags);
                 dest.writeInt(this.mSelectedYear);

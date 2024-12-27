@@ -1,6 +1,5 @@
 package android.hardware.gnss.measurement_corrections;
 
-import android.hardware.gnss.measurement_corrections.IMeasurementCorrectionsCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,7 +8,9 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IMeasurementCorrectionsInterface extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$gnss$measurement_corrections$IMeasurementCorrectionsInterface".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$measurement_corrections$IMeasurementCorrectionsInterface"
+                    .replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";
     public static final int VERSION = 2;
 
@@ -17,18 +18,17 @@ public interface IMeasurementCorrectionsInterface extends IInterface {
 
     int getInterfaceVersion() throws RemoteException;
 
-    void setCallback(IMeasurementCorrectionsCallback iMeasurementCorrectionsCallback) throws RemoteException;
+    void setCallback(IMeasurementCorrectionsCallback iMeasurementCorrectionsCallback)
+            throws RemoteException;
 
     void setCorrections(MeasurementCorrections measurementCorrections) throws RemoteException;
 
     public static class Default implements IMeasurementCorrectionsInterface {
         @Override // android.hardware.gnss.measurement_corrections.IMeasurementCorrectionsInterface
-        public void setCorrections(MeasurementCorrections corrections) throws RemoteException {
-        }
+        public void setCorrections(MeasurementCorrections corrections) throws RemoteException {}
 
         @Override // android.hardware.gnss.measurement_corrections.IMeasurementCorrectionsInterface
-        public void setCallback(IMeasurementCorrectionsCallback callback) throws RemoteException {
-        }
+        public void setCallback(IMeasurementCorrectionsCallback callback) throws RemoteException {}
 
         @Override // android.hardware.gnss.measurement_corrections.IMeasurementCorrectionsInterface
         public int getInterfaceVersion() {
@@ -46,7 +46,7 @@ public interface IMeasurementCorrectionsInterface extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMeasurementCorrectionsInterface {
+    public abstract static class Stub extends Binder implements IMeasurementCorrectionsInterface {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_setCallback = 2;
@@ -94,7 +94,8 @@ public interface IMeasurementCorrectionsInterface extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -115,13 +116,17 @@ public interface IMeasurementCorrectionsInterface extends IInterface {
             }
             switch (code) {
                 case 1:
-                    MeasurementCorrections _arg0 = (MeasurementCorrections) data.readTypedObject(MeasurementCorrections.CREATOR);
+                    MeasurementCorrections _arg0 =
+                            (MeasurementCorrections)
+                                    data.readTypedObject(MeasurementCorrections.CREATOR);
                     data.enforceNoDataAvail();
                     setCorrections(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IMeasurementCorrectionsCallback _arg02 = IMeasurementCorrectionsCallback.Stub.asInterface(data.readStrongBinder());
+                    IMeasurementCorrectionsCallback _arg02 =
+                            IMeasurementCorrectionsCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg02);
                     reply.writeNoException();
@@ -168,7 +173,8 @@ public interface IMeasurementCorrectionsInterface extends IInterface {
             }
 
             @Override // android.hardware.gnss.measurement_corrections.IMeasurementCorrectionsInterface
-            public void setCallback(IMeasurementCorrectionsCallback callback) throws RemoteException {
+            public void setCallback(IMeasurementCorrectionsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

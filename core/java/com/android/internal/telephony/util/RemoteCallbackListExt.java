@@ -2,6 +2,7 @@ package com.android.internal.telephony.util;
 
 import android.os.IInterface;
 import android.os.RemoteCallbackList;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes5.dex */

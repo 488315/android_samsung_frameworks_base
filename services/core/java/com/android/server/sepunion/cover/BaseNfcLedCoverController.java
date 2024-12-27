@@ -7,8 +7,10 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.PowerManager;
+
 import com.samsung.android.nfc.adapter.SamsungNfcAdapter;
 import com.samsung.android.sepunion.Log;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -63,8 +65,7 @@ public class BaseNfcLedCoverController {
         Binder.restoreCallingIdentity(clearCallingIdentity);
     }
 
-    public void addLedNotification(Bundle bundle) {
-    }
+    public void addLedNotification(Bundle bundle) {}
 
     public void dump(PrintWriter printWriter) {
         printWriter.println(" Current NfcLedCoverController state:");
@@ -83,27 +84,23 @@ public class BaseNfcLedCoverController {
         return this.mSamsungNfcAdapter;
     }
 
-    public void notifyAuthenticationResponse() {
-    }
+    public void notifyAuthenticationResponse() {}
 
-    public void registerNfcTouchListenerCallback(int i, IBinder iBinder, ComponentName componentName) {
-    }
+    public void registerNfcTouchListenerCallback(
+            int i, IBinder iBinder, ComponentName componentName) {}
 
-    public void removeLedNotification(Bundle bundle) {
-    }
+    public void removeLedNotification(Bundle bundle) {}
 
-    public boolean requestCoverAuthentication(long j, IBinder iBinder, ComponentName componentName) {
+    public boolean requestCoverAuthentication(
+            long j, IBinder iBinder, ComponentName componentName) {
         return false;
     }
 
-    public void sendDataToNfcLedCover(int i, byte[] bArr) {
-    }
+    public void sendDataToNfcLedCover(int i, byte[] bArr) {}
 
-    public void sendPowerKeyToCover() {
-    }
+    public void sendPowerKeyToCover() {}
 
-    public void sendSystemEvent(Bundle bundle) {
-    }
+    public void sendSystemEvent(Bundle bundle) {}
 
     public boolean setFotaInProgress(boolean z, IBinder iBinder, ComponentName componentName) {
         return false;
@@ -113,6 +110,5 @@ public class BaseNfcLedCoverController {
         return false;
     }
 
-    public void updateNfcLedCoverAttachStateLocked(int i, boolean z) {
-    }
+    public void updateNfcLedCoverAttachStateLocked(int i, boolean z) {}
 }

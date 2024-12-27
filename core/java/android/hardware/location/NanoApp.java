@@ -4,25 +4,27 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.util.Objects;
 
 @SystemApi
 @Deprecated
 /* loaded from: classes2.dex */
 public class NanoApp implements Parcelable {
-    public static final Parcelable.Creator<NanoApp> CREATOR = new Parcelable.Creator<NanoApp>() { // from class: android.hardware.location.NanoApp.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoApp createFromParcel(Parcel in) {
-            return new NanoApp(in);
-        }
+    public static final Parcelable.Creator<NanoApp> CREATOR =
+            new Parcelable.Creator<NanoApp>() { // from class: android.hardware.location.NanoApp.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoApp createFromParcel(Parcel in) {
+                    return new NanoApp(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoApp[] newArray(int size) {
-            return new NanoApp[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoApp[] newArray(int size) {
+                    return new NanoApp[size];
+                }
+            };
     private final String TAG;
     private final String UNKNOWN;
     private byte[] mAppBinary;
@@ -46,7 +48,9 @@ public class NanoApp implements Parcelable {
     public NanoApp(int appId, byte[] appBinary) {
         this.TAG = "NanoApp";
         this.UNKNOWN = "Unknown";
-        Log.w("NanoApp", "NanoApp(int, byte[]) is deprecated, please use NanoApp(long, byte[]) instead.");
+        Log.w(
+                "NanoApp",
+                "NanoApp(int, byte[]) is deprecated, please use NanoApp(long, byte[]) instead.");
     }
 
     public NanoApp(long appId, byte[] appBinary) {
@@ -178,7 +182,8 @@ public class NanoApp implements Parcelable {
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
         if (this.mAppBinary == null) {
-            throw new IllegalStateException("Must set non-null AppBinary for nanoapp " + this.mName);
+            throw new IllegalStateException(
+                    "Must set non-null AppBinary for nanoapp " + this.mName);
         }
         if (!this.mAppIdSet) {
             throw new IllegalStateException("Must set AppId for nanoapp " + this.mName);
@@ -200,6 +205,8 @@ public class NanoApp implements Parcelable {
 
     public String toString() {
         String retVal = "Id : " + this.mAppId;
-        return ((retVal + ", Version : " + this.mAppVersion) + ", Name : " + this.mName) + ", Publisher : " + this.mPublisher;
+        return ((retVal + ", Version : " + this.mAppVersion) + ", Name : " + this.mName)
+                + ", Publisher : "
+                + this.mPublisher;
     }
 }

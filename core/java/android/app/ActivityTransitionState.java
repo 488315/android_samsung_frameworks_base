@@ -1,8 +1,5 @@
 package android.app;
 
-import android.app.ActivityOptions;
-import android.app.ActivityTransitionState;
-import android.app.ExitTransitionCoordinator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ResultReceiver;
@@ -11,7 +8,9 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+
 import com.android.internal.view.OneShotPreDrawListener;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -38,9 +37,11 @@ class ActivityTransitionState {
         if (this.mExitTransitionCoordinators == null) {
             this.mExitTransitionCoordinators = new SparseArray<>();
         }
-        WeakReference<ExitTransitionCoordinator> ref = new WeakReference<>(exitTransitionCoordinator);
+        WeakReference<ExitTransitionCoordinator> ref =
+                new WeakReference<>(exitTransitionCoordinator);
         for (int i = this.mExitTransitionCoordinators.size() - 1; i >= 0; i--) {
-            WeakReference<ExitTransitionCoordinator> oldRef = this.mExitTransitionCoordinators.valueAt(i);
+            WeakReference<ExitTransitionCoordinator> oldRef =
+                    this.mExitTransitionCoordinators.valueAt(i);
             if (oldRef.refersTo(null)) {
                 this.mExitTransitionCoordinators.removeAt(i);
             }
@@ -53,7 +54,8 @@ class ActivityTransitionState {
 
     public void readState(Bundle bundle) {
         if (bundle != null) {
-            if (this.mEnterTransitionCoordinator == null || this.mEnterTransitionCoordinator.isReturning()) {
+            if (this.mEnterTransitionCoordinator == null
+                    || this.mEnterTransitionCoordinator.isReturning()) {
                 this.mPendingExitNames = bundle.getStringArrayList(PENDING_EXIT_SHARED_ELEMENTS);
             }
             if (this.mEnterTransitionCoordinator == null) {
@@ -65,8 +67,11 @@ class ActivityTransitionState {
 
     /* JADX INFO: Access modifiers changed from: private */
     public ArrayList<String> getPendingExitNames() {
-        if (this.mPendingExitNames == null && this.mEnterTransitionCoordinator != null && !this.mEnterTransitionCoordinator.isReturning()) {
-            this.mPendingExitNames = this.mEnterTransitionCoordinator.getPendingExitSharedElementNames();
+        if (this.mPendingExitNames == null
+                && this.mEnterTransitionCoordinator != null
+                && !this.mEnterTransitionCoordinator.isReturning()) {
+            this.mPendingExitNames =
+                    this.mEnterTransitionCoordinator.getPendingExitSharedElementNames();
         }
         return this.mPendingExitNames;
     }
@@ -82,13 +87,17 @@ class ActivityTransitionState {
         }
     }
 
-    public void setEnterSceneTransitionInfo(Activity activity, ActivityOptions.SceneTransitionInfo info) {
+    public void setEnterSceneTransitionInfo(
+            Activity activity, ActivityOptions.SceneTransitionInfo info) {
         Window window = activity.getWindow();
         if (window == null) {
             return;
         }
         window.getDecorView();
-        if (window.hasFeature(13) && info != null && this.mEnterSceneTransitionInfo == null && this.mEnterTransitionCoordinator == null) {
+        if (window.hasFeature(13)
+                && info != null
+                && this.mEnterSceneTransitionInfo == null
+                && this.mEnterTransitionCoordinator == null) {
             this.mEnterSceneTransitionInfo = info;
             this.mIsEnterTriggered = false;
             if (this.mEnterSceneTransitionInfo.isReturning()) {
@@ -111,7 +120,8 @@ class ActivityTransitionState {
         }
         this.mIsEnterTriggered = true;
         this.mHasExited = false;
-        ArrayList<String> sharedElementNames = this.mEnterSceneTransitionInfo.getSharedElementNames();
+        ArrayList<String> sharedElementNames =
+                this.mEnterSceneTransitionInfo.getSharedElementNames();
         ResultReceiver resultReceiver = this.mEnterSceneTransitionInfo.getResultReceiver();
         boolean isReturning = this.mEnterSceneTransitionInfo.isReturning();
         if (isReturning) {
@@ -119,7 +129,13 @@ class ActivityTransitionState {
             activity.getWindow().getDecorView().setVisibility(0);
         }
         getPendingExitNames();
-        this.mEnterTransitionCoordinator = new EnterTransitionCoordinator(activity, resultReceiver, sharedElementNames, this.mEnterSceneTransitionInfo.isReturning(), this.mEnterSceneTransitionInfo.isCrossTask());
+        this.mEnterTransitionCoordinator =
+                new EnterTransitionCoordinator(
+                        activity,
+                        resultReceiver,
+                        sharedElementNames,
+                        this.mEnterSceneTransitionInfo.isReturning(),
+                        this.mEnterSceneTransitionInfo.isCrossTask());
         if (this.mEnterSceneTransitionInfo.isCrossTask() && sharedElementNames != null) {
             this.mExitingFrom = new ArrayList<>(sharedElementNames);
             this.mExitingTo = new ArrayList<>(sharedElementNames);
@@ -145,9 +161,11 @@ class ActivityTransitionState {
     private void startEnter() {
         if (this.mEnterTransitionCoordinator.isReturning()) {
             if (this.mExitingToView != null) {
-                this.mEnterTransitionCoordinator.viewInstancesReady(this.mExitingFrom, this.mExitingTo, this.mExitingToView);
+                this.mEnterTransitionCoordinator.viewInstancesReady(
+                        this.mExitingFrom, this.mExitingTo, this.mExitingToView);
             } else {
-                this.mEnterTransitionCoordinator.namedViewsReady(this.mExitingFrom, this.mExitingTo);
+                this.mEnterTransitionCoordinator.namedViewsReady(
+                        this.mExitingFrom, this.mExitingTo);
             }
         } else {
             this.mEnterTransitionCoordinator.namedViewsReady(null, null);
@@ -183,21 +201,25 @@ class ActivityTransitionState {
 
     /* renamed from: android.app.ActivityTransitionState$1, reason: invalid class name */
     class AnonymousClass1 implements Runnable {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // java.lang.Runnable
         public void run() {
-            if (ActivityTransitionState.this.mEnterTransitionCoordinator == null || ActivityTransitionState.this.mEnterTransitionCoordinator.isWaitingForRemoteExit()) {
+            if (ActivityTransitionState.this.mEnterTransitionCoordinator == null
+                    || ActivityTransitionState.this.mEnterTransitionCoordinator
+                            .isWaitingForRemoteExit()) {
                 ActivityTransitionState.this.restoreExitedViews();
                 ActivityTransitionState.this.restoreReenteringViews();
             } else if (ActivityTransitionState.this.mEnterTransitionCoordinator.isReturning()) {
-                ActivityTransitionState.this.mEnterTransitionCoordinator.runAfterTransitionsComplete(new Runnable() { // from class: android.app.ActivityTransitionState$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ActivityTransitionState.AnonymousClass1.this.lambda$run$0();
-                    }
-                });
+                ActivityTransitionState.this.mEnterTransitionCoordinator
+                        .runAfterTransitionsComplete(
+                                new Runnable() { // from class:
+                                    // android.app.ActivityTransitionState$1$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        ActivityTransitionState.AnonymousClass1.this.lambda$run$0();
+                                    }
+                                });
             }
         }
 
@@ -229,7 +251,9 @@ class ActivityTransitionState {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void restoreReenteringViews() {
-        if (this.mEnterTransitionCoordinator != null && this.mEnterTransitionCoordinator.isReturning() && !this.mEnterTransitionCoordinator.isCrossTask()) {
+        if (this.mEnterTransitionCoordinator != null
+                && this.mEnterTransitionCoordinator.isReturning()
+                && !this.mEnterTransitionCoordinator.isCrossTask()) {
             this.mEnterTransitionCoordinator.forceViewsToAppear();
             this.mExitingFrom = null;
             this.mExitingTo = null;
@@ -252,7 +276,8 @@ class ActivityTransitionState {
                 decor = null;
                 delayExitBack = false;
             } else {
-                Transition enterViewsTransition2 = this.mEnterTransitionCoordinator.getEnterViewsTransition();
+                Transition enterViewsTransition2 =
+                        this.mEnterTransitionCoordinator.getEnterViewsTransition();
                 ViewGroup decor2 = this.mEnterTransitionCoordinator.getDecor();
                 boolean delayExitBack2 = this.mEnterTransitionCoordinator.cancelEnter();
                 this.mEnterTransitionCoordinator = null;
@@ -263,17 +288,29 @@ class ActivityTransitionState {
                 decor = decor2;
                 delayExitBack = delayExitBack2;
             }
-            this.mReturnExitCoordinator = new ExitTransitionCoordinator(new ExitTransitionCoordinator.ActivityExitTransitionCallbacks(activity), activity.getWindow(), activity.mEnterTransitionListener, pendingExitNames, null, null, true);
+            this.mReturnExitCoordinator =
+                    new ExitTransitionCoordinator(
+                            new ExitTransitionCoordinator.ActivityExitTransitionCallbacks(activity),
+                            activity.getWindow(),
+                            activity.mEnterTransitionListener,
+                            pendingExitNames,
+                            null,
+                            null,
+                            true);
             if (enterViewsTransition != null && decor != null) {
                 enterViewsTransition.resume(decor);
             }
             if (delayExitBack && decor != null) {
-                OneShotPreDrawListener.add(decor, new Runnable() { // from class: android.app.ActivityTransitionState$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ActivityTransitionState.this.lambda$startExitBackTransition$0(activity);
-                    }
-                });
+                OneShotPreDrawListener.add(
+                        decor,
+                        new Runnable() { // from class:
+                            // android.app.ActivityTransitionState$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ActivityTransitionState.this.lambda$startExitBackTransition$0(
+                                        activity);
+                            }
+                        });
             } else {
                 this.mReturnExitCoordinator.startExit(activity);
             }
@@ -289,11 +326,14 @@ class ActivityTransitionState {
     }
 
     public boolean isTransitionRunning() {
-        if (this.mEnterTransitionCoordinator != null && this.mEnterTransitionCoordinator.isTransitionRunning()) {
+        if (this.mEnterTransitionCoordinator != null
+                && this.mEnterTransitionCoordinator.isTransitionRunning()) {
             return true;
         }
-        if (this.mCalledExitCoordinator == null || !this.mCalledExitCoordinator.isTransitionRunning()) {
-            return this.mReturnExitCoordinator != null && this.mReturnExitCoordinator.isTransitionRunning();
+        if (this.mCalledExitCoordinator == null
+                || !this.mCalledExitCoordinator.isTransitionRunning()) {
+            return this.mReturnExitCoordinator != null
+                    && this.mReturnExitCoordinator.isTransitionRunning();
         }
         return true;
     }

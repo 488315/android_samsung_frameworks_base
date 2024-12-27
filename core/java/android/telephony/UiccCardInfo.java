@@ -3,7 +3,9 @@ package android.telephony;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -12,19 +14,20 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class UiccCardInfo implements Parcelable {
-    public static final Parcelable.Creator<UiccCardInfo> CREATOR = new Parcelable.Creator<UiccCardInfo>() { // from class: android.telephony.UiccCardInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiccCardInfo createFromParcel(Parcel in) {
-            return new UiccCardInfo(in);
-        }
+    public static final Parcelable.Creator<UiccCardInfo> CREATOR =
+            new Parcelable.Creator<UiccCardInfo>() { // from class: android.telephony.UiccCardInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiccCardInfo createFromParcel(Parcel in) {
+                    return new UiccCardInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiccCardInfo[] newArray(int size) {
-            return new UiccCardInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiccCardInfo[] newArray(int size) {
+                    return new UiccCardInfo[size];
+                }
+            };
     private final int mCardId;
     private final String mEid;
     private final String mIccId;
@@ -67,7 +70,14 @@ public final class UiccCardInfo implements Parcelable {
         return 0;
     }
 
-    public UiccCardInfo(boolean isEuicc, int cardId, String eid, int physicalSlotIndex, boolean isRemovable, boolean isMultipleEnabledProfilesSupported, List<UiccPortInfo> portList) {
+    public UiccCardInfo(
+            boolean isEuicc,
+            int cardId,
+            String eid,
+            int physicalSlotIndex,
+            boolean isRemovable,
+            boolean isMultipleEnabledProfilesSupported,
+            List<UiccPortInfo> portList) {
         this.mIccIdAccessRestricted = false;
         this.mIsEuicc = isEuicc;
         this.mCardId = cardId;
@@ -97,7 +107,9 @@ public final class UiccCardInfo implements Parcelable {
     @Deprecated
     public String getIccId() {
         if (this.mIccIdAccessRestricted) {
-            throw new UnsupportedOperationException("getIccId() is not supported by UiccCardInfo. Please Use UiccPortInfo API instead");
+            throw new UnsupportedOperationException(
+                    "getIccId() is not supported by UiccCardInfo. Please Use UiccPortInfo API"
+                        + " instead");
         }
         if (this.mPortList.isEmpty()) {
             return null;
@@ -138,17 +150,49 @@ public final class UiccCardInfo implements Parcelable {
             return false;
         }
         UiccCardInfo that = (UiccCardInfo) obj;
-        if (this.mIsEuicc == that.mIsEuicc && this.mCardId == that.mCardId && Objects.equals(this.mEid, that.mEid) && Objects.equals(this.mIccId, that.mIccId) && this.mPhysicalSlotIndex == that.mPhysicalSlotIndex && this.mIsRemovable == that.mIsRemovable && this.mIsMultipleEnabledProfilesSupported == that.mIsMultipleEnabledProfilesSupported && Objects.equals(this.mPortList, that.mPortList)) {
+        if (this.mIsEuicc == that.mIsEuicc
+                && this.mCardId == that.mCardId
+                && Objects.equals(this.mEid, that.mEid)
+                && Objects.equals(this.mIccId, that.mIccId)
+                && this.mPhysicalSlotIndex == that.mPhysicalSlotIndex
+                && this.mIsRemovable == that.mIsRemovable
+                && this.mIsMultipleEnabledProfilesSupported
+                        == that.mIsMultipleEnabledProfilesSupported
+                && Objects.equals(this.mPortList, that.mPortList)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mIsEuicc), Integer.valueOf(this.mCardId), this.mEid, this.mIccId, Integer.valueOf(this.mPhysicalSlotIndex), Boolean.valueOf(this.mIsRemovable), Boolean.valueOf(this.mIsMultipleEnabledProfilesSupported), this.mPortList);
+        return Objects.hash(
+                Boolean.valueOf(this.mIsEuicc),
+                Integer.valueOf(this.mCardId),
+                this.mEid,
+                this.mIccId,
+                Integer.valueOf(this.mPhysicalSlotIndex),
+                Boolean.valueOf(this.mIsRemovable),
+                Boolean.valueOf(this.mIsMultipleEnabledProfilesSupported),
+                this.mPortList);
     }
 
     public String toString() {
-        return "UiccCardInfo (mIsEuicc=" + this.mIsEuicc + ", mCardId=" + this.mCardId + ", mEid=" + com.android.telephony.Rlog.pii(TelephonyUtils.IS_DEBUGGABLE, this.mEid) + ", mPhysicalSlotIndex=" + this.mPhysicalSlotIndex + ", mIsRemovable=" + this.mIsRemovable + ", mIsMultipleEnabledProfilesSupported=" + this.mIsMultipleEnabledProfilesSupported + ", mPortList=" + this.mPortList + ", mIccIdAccessRestricted=" + this.mIccIdAccessRestricted + NavigationBarInflaterView.KEY_CODE_END;
+        return "UiccCardInfo (mIsEuicc="
+                + this.mIsEuicc
+                + ", mCardId="
+                + this.mCardId
+                + ", mEid="
+                + com.android.telephony.Rlog.pii(TelephonyUtils.IS_DEBUGGABLE, this.mEid)
+                + ", mPhysicalSlotIndex="
+                + this.mPhysicalSlotIndex
+                + ", mIsRemovable="
+                + this.mIsRemovable
+                + ", mIsMultipleEnabledProfilesSupported="
+                + this.mIsMultipleEnabledProfilesSupported
+                + ", mPortList="
+                + this.mPortList
+                + ", mIccIdAccessRestricted="
+                + this.mIccIdAccessRestricted
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

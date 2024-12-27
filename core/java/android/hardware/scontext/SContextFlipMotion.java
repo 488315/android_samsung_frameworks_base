@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextFlipMotion extends SContextEventContext {
-    public static final Parcelable.Creator<SContextFlipMotion> CREATOR = new Parcelable.Creator<SContextFlipMotion>() { // from class: android.hardware.scontext.SContextFlipMotion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextFlipMotion createFromParcel(Parcel in) {
-            return new SContextFlipMotion(in);
-        }
+    public static final Parcelable.Creator<SContextFlipMotion> CREATOR =
+            new Parcelable.Creator<SContextFlipMotion>() { // from class:
+                // android.hardware.scontext.SContextFlipMotion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextFlipMotion createFromParcel(Parcel in) {
+                    return new SContextFlipMotion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextFlipMotion[] newArray(int size) {
-            return new SContextFlipMotion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextFlipMotion[] newArray(int size) {
+                    return new SContextFlipMotion[size];
+                }
+            };
     private Bundle mContext;
 
     SContextFlipMotion() {
@@ -34,7 +36,8 @@ public class SContextFlipMotion extends SContextEventContext {
         return this.mContext.getInt("Action");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

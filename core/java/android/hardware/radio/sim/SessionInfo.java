@@ -3,25 +3,28 @@ package android.hardware.radio.sim;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SessionInfo implements Parcelable {
-    public static final Parcelable.Creator<SessionInfo> CREATOR = new Parcelable.Creator<SessionInfo>() { // from class: android.hardware.radio.sim.SessionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SessionInfo createFromParcel(Parcel _aidl_source) {
-            SessionInfo _aidl_out = new SessionInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SessionInfo> CREATOR =
+            new Parcelable.Creator<
+                    SessionInfo>() { // from class: android.hardware.radio.sim.SessionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SessionInfo createFromParcel(Parcel _aidl_source) {
+                    SessionInfo _aidl_out = new SessionInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SessionInfo[] newArray(int _aidl_size) {
-            return new SessionInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SessionInfo[] newArray(int _aidl_size) {
+                    return new SessionInfo[_aidl_size];
+                }
+            };
     public int sessionId = 0;
     public boolean isEs10 = false;
 

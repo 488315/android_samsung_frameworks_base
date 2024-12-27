@@ -2,8 +2,7 @@ package com.android.modules.expresslog;
 
 /* loaded from: classes5.dex */
 public final class Counter {
-    private Counter() {
-    }
+    private Counter() {}
 
     public static void logIncrement(String metricId) {
         logIncrement(metricId, 1L);

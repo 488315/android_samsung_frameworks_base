@@ -8,23 +8,25 @@ import android.telephony.euicc.DownloadableSubscription;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class GetDownloadableSubscriptionMetadataResult implements Parcelable {
-    public static final Parcelable.Creator<GetDownloadableSubscriptionMetadataResult> CREATOR = new Parcelable.Creator<GetDownloadableSubscriptionMetadataResult>() { // from class: android.service.euicc.GetDownloadableSubscriptionMetadataResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetDownloadableSubscriptionMetadataResult createFromParcel(Parcel in) {
-            return new GetDownloadableSubscriptionMetadataResult(in);
-        }
+    public static final Parcelable.Creator<GetDownloadableSubscriptionMetadataResult> CREATOR =
+            new Parcelable.Creator<
+                    GetDownloadableSubscriptionMetadataResult>() { // from class:
+                                                                   // android.service.euicc.GetDownloadableSubscriptionMetadataResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetDownloadableSubscriptionMetadataResult createFromParcel(Parcel in) {
+                    return new GetDownloadableSubscriptionMetadataResult(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetDownloadableSubscriptionMetadataResult[] newArray(int size) {
-            return new GetDownloadableSubscriptionMetadataResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetDownloadableSubscriptionMetadataResult[] newArray(int size) {
+                    return new GetDownloadableSubscriptionMetadataResult[size];
+                }
+            };
     private final DownloadableSubscription mSubscription;
 
-    @Deprecated
-    public final int result;
+    @Deprecated public final int result;
 
     public int getResult() {
         return this.result;
@@ -34,13 +36,15 @@ public final class GetDownloadableSubscriptionMetadataResult implements Parcelab
         return this.mSubscription;
     }
 
-    public GetDownloadableSubscriptionMetadataResult(int result, DownloadableSubscription subscription) {
+    public GetDownloadableSubscriptionMetadataResult(
+            int result, DownloadableSubscription subscription) {
         this.result = result;
         if (this.result == 0) {
             this.mSubscription = subscription;
         } else {
             if (subscription != null) {
-                throw new IllegalArgumentException("Error result with non-null subscription: " + result);
+                throw new IllegalArgumentException(
+                        "Error result with non-null subscription: " + result);
             }
             this.mSubscription = null;
         }
@@ -48,7 +52,8 @@ public final class GetDownloadableSubscriptionMetadataResult implements Parcelab
 
     private GetDownloadableSubscriptionMetadataResult(Parcel in) {
         this.result = in.readInt();
-        this.mSubscription = (DownloadableSubscription) in.readTypedObject(DownloadableSubscription.CREATOR);
+        this.mSubscription =
+                (DownloadableSubscription) in.readTypedObject(DownloadableSubscription.CREATOR);
     }
 
     @Override // android.os.Parcelable

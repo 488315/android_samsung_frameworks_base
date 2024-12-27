@@ -2,6 +2,7 @@ package android.internal.framework.protobuf.nano;
 
 import android.content.IntentFilter;
 import android.telecom.Logging.Session;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -13,8 +14,7 @@ public final class MessageNanoPrinter {
     private static final String INDENT = "  ";
     private static final int MAX_STRING_LEN = 200;
 
-    private MessageNanoPrinter() {
-    }
+    private MessageNanoPrinter() {}
 
     public static <T extends MessageNano> String print(T message) {
         if (message == null) {
@@ -31,7 +31,9 @@ public final class MessageNanoPrinter {
         }
     }
 
-    private static void print(String identifier, Object object, StringBuffer indentBuf, StringBuffer buf) throws IllegalAccessException, InvocationTargetException {
+    private static void print(
+            String identifier, Object object, StringBuffer indentBuf, StringBuffer buf)
+            throws IllegalAccessException, InvocationTargetException {
         Method[] methodArr;
         Field[] fieldArr;
         int i;
@@ -107,14 +109,21 @@ public final class MessageNanoPrinter {
                         try {
                             try {
                                 Method hazzer = clazz.getMethod("has" + subfieldName, new Class[0]);
-                                if (!((Boolean) hazzer.invoke(object, new Object[0])).booleanValue()) {
+                                if (!((Boolean) hazzer.invoke(object, new Object[0]))
+                                        .booleanValue()) {
                                     methodArr = methods;
                                 } else {
                                     try {
                                         methodArr = methods;
                                         try {
-                                            Method getter = clazz.getMethod("get" + subfieldName, new Class[0]);
-                                            print(subfieldName, getter.invoke(object, new Object[0]), indentBuf, buf);
+                                            Method getter =
+                                                    clazz.getMethod(
+                                                            "get" + subfieldName, new Class[0]);
+                                            print(
+                                                    subfieldName,
+                                                    getter.invoke(object, new Object[0]),
+                                                    indentBuf,
+                                                    buf);
                                         } catch (NoSuchMethodException e) {
                                         }
                                     } catch (NoSuchMethodException e2) {

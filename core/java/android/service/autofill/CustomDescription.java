@@ -7,54 +7,70 @@ import android.util.Pair;
 import android.util.SparseArray;
 import android.view.autofill.Helper;
 import android.widget.RemoteViews;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class CustomDescription implements Parcelable {
-    public static final Parcelable.Creator<CustomDescription> CREATOR = new Parcelable.Creator<CustomDescription>() { // from class: android.service.autofill.CustomDescription.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CustomDescription createFromParcel(Parcel parcel) {
-            RemoteViews parentPresentation = (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
-            if (parentPresentation == null) {
-                return null;
-            }
-            Builder builder = new Builder(parentPresentation);
-            int[] transformationIds = parcel.createIntArray();
-            if (transformationIds != null) {
-                InternalTransformation[] values = (InternalTransformation[]) parcel.readParcelableArray(null, InternalTransformation.class);
-                int size = transformationIds.length;
-                for (int i = 0; i < size; i++) {
-                    builder.addChild(transformationIds[i], values[i]);
+    public static final Parcelable.Creator<CustomDescription> CREATOR =
+            new Parcelable.Creator<
+                    CustomDescription>() { // from class:
+                                           // android.service.autofill.CustomDescription.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CustomDescription createFromParcel(Parcel parcel) {
+                    RemoteViews parentPresentation =
+                            (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
+                    if (parentPresentation == null) {
+                        return null;
+                    }
+                    Builder builder = new Builder(parentPresentation);
+                    int[] transformationIds = parcel.createIntArray();
+                    if (transformationIds != null) {
+                        InternalTransformation[] values =
+                                (InternalTransformation[])
+                                        parcel.readParcelableArray(
+                                                null, InternalTransformation.class);
+                        int size = transformationIds.length;
+                        for (int i = 0; i < size; i++) {
+                            builder.addChild(transformationIds[i], values[i]);
+                        }
+                    }
+                    InternalValidator[] conditions =
+                            (InternalValidator[])
+                                    parcel.readParcelableArray(null, InternalValidator.class);
+                    if (conditions != null) {
+                        BatchUpdates[] updates =
+                                (BatchUpdates[])
+                                        parcel.readParcelableArray(null, BatchUpdates.class);
+                        int size2 = conditions.length;
+                        for (int i2 = 0; i2 < size2; i2++) {
+                            builder.batchUpdate(conditions[i2], updates[i2]);
+                        }
+                    }
+                    int[] actionIds = parcel.createIntArray();
+                    if (actionIds != null) {
+                        InternalOnClickAction[] values2 =
+                                (InternalOnClickAction[])
+                                        parcel.readParcelableArray(
+                                                null, InternalOnClickAction.class);
+                        int size3 = actionIds.length;
+                        for (int i3 = 0; i3 < size3; i3++) {
+                            builder.addOnClickAction(actionIds[i3], values2[i3]);
+                        }
+                    }
+                    return builder.build();
                 }
-            }
-            InternalValidator[] conditions = (InternalValidator[]) parcel.readParcelableArray(null, InternalValidator.class);
-            if (conditions != null) {
-                BatchUpdates[] updates = (BatchUpdates[]) parcel.readParcelableArray(null, BatchUpdates.class);
-                int size2 = conditions.length;
-                for (int i2 = 0; i2 < size2; i2++) {
-                    builder.batchUpdate(conditions[i2], updates[i2]);
-                }
-            }
-            int[] actionIds = parcel.createIntArray();
-            if (actionIds != null) {
-                InternalOnClickAction[] values2 = (InternalOnClickAction[]) parcel.readParcelableArray(null, InternalOnClickAction.class);
-                int size3 = actionIds.length;
-                for (int i3 = 0; i3 < size3; i3++) {
-                    builder.addOnClickAction(actionIds[i3], values2[i3]);
-                }
-            }
-            return builder.build();
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CustomDescription[] newArray(int size) {
-            return new CustomDescription[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CustomDescription[] newArray(int size) {
+                    return new CustomDescription[size];
+                }
+            };
     private final SparseArray<InternalOnClickAction> mActions;
     private final RemoteViews mPresentation;
     private final ArrayList<Pair<Integer, InternalTransformation>> mTransformations;
@@ -96,17 +112,24 @@ public final class CustomDescription implements Parcelable {
 
         public Builder addChild(int id, Transformation transformation) {
             throwIfDestroyed();
-            Preconditions.checkArgument(transformation instanceof InternalTransformation, "not provided by Android System: %s", transformation);
+            Preconditions.checkArgument(
+                    transformation instanceof InternalTransformation,
+                    "not provided by Android System: %s",
+                    transformation);
             if (this.mTransformations == null) {
                 this.mTransformations = new ArrayList<>();
             }
-            this.mTransformations.add(new Pair<>(Integer.valueOf(id), (InternalTransformation) transformation));
+            this.mTransformations.add(
+                    new Pair<>(Integer.valueOf(id), (InternalTransformation) transformation));
             return this;
         }
 
         public Builder batchUpdate(Validator condition, BatchUpdates updates) {
             throwIfDestroyed();
-            Preconditions.checkArgument(condition instanceof InternalValidator, "not provided by Android System: %s", condition);
+            Preconditions.checkArgument(
+                    condition instanceof InternalValidator,
+                    "not provided by Android System: %s",
+                    condition);
             Objects.requireNonNull(updates);
             if (this.mUpdates == null) {
                 this.mUpdates = new ArrayList<>();
@@ -117,7 +140,10 @@ public final class CustomDescription implements Parcelable {
 
         public Builder addOnClickAction(int id, OnClickAction action) {
             throwIfDestroyed();
-            Preconditions.checkArgument(action instanceof InternalOnClickAction, "not provided by Android System: %s", action);
+            Preconditions.checkArgument(
+                    action instanceof InternalOnClickAction,
+                    "not provided by Android System: %s",
+                    action);
             if (this.mActions == null) {
                 this.mActions = new SparseArray<>();
             }
@@ -140,7 +166,17 @@ public final class CustomDescription implements Parcelable {
 
     public String toString() {
         if (Helper.sDebug) {
-            return "CustomDescription: [presentation=" + this.mPresentation + ", transformations=" + (this.mTransformations == null ? "N/A" : Integer.valueOf(this.mTransformations.size())) + ", updates=" + (this.mUpdates == null ? "N/A" : Integer.valueOf(this.mUpdates.size())) + ", actions=" + (this.mActions != null ? Integer.valueOf(this.mActions.size()) : "N/A") + NavigationBarInflaterView.SIZE_MOD_END;
+            return "CustomDescription: [presentation="
+                    + this.mPresentation
+                    + ", transformations="
+                    + (this.mTransformations == null
+                            ? "N/A"
+                            : Integer.valueOf(this.mTransformations.size()))
+                    + ", updates="
+                    + (this.mUpdates == null ? "N/A" : Integer.valueOf(this.mUpdates.size()))
+                    + ", actions="
+                    + (this.mActions != null ? Integer.valueOf(this.mActions.size()) : "N/A")
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
         return super.toString();
     }

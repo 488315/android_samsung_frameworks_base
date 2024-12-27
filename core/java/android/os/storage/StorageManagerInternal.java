@@ -4,6 +4,7 @@ import android.content.pm.UserInfo;
 import android.os.IInstalld;
 import android.os.IVold;
 import android.os.ParcelFileDescriptor;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
@@ -21,9 +22,12 @@ public abstract class StorageManagerInternal {
 
     public abstract void addResetListener(ResetListener resetListener);
 
-    public abstract IInstalld.IFsveritySetupAuthToken createFsveritySetupAuthToken(ParcelFileDescriptor parcelFileDescriptor, int i) throws IOException;
+    public abstract IInstalld.IFsveritySetupAuthToken createFsveritySetupAuthToken(
+            ParcelFileDescriptor parcelFileDescriptor, int i) throws IOException;
 
-    public abstract int enableFsverity(IInstalld.IFsveritySetupAuthToken iFsveritySetupAuthToken, String str, String str2) throws IOException;
+    public abstract int enableFsverity(
+            IInstalld.IFsveritySetupAuthToken iFsveritySetupAuthToken, String str, String str2)
+            throws IOException;
 
     public abstract void freeCache(String str, long j);
 
@@ -51,11 +55,14 @@ public abstract class StorageManagerInternal {
 
     public abstract void prepareUserStorageForMove(String str, String str2, List<UserInfo> list);
 
-    public abstract void registerCloudProviderChangeListener(CloudProviderChangeListener cloudProviderChangeListener);
+    public abstract void registerCloudProviderChangeListener(
+            CloudProviderChangeListener cloudProviderChangeListener);
 
-    public abstract void registerStorageLockEventListener(ICeStorageLockEventListener iCeStorageLockEventListener);
+    public abstract void registerStorageLockEventListener(
+            ICeStorageLockEventListener iCeStorageLockEventListener);
 
     public abstract void resetUser(int i);
 
-    public abstract void unregisterStorageLockEventListener(ICeStorageLockEventListener iCeStorageLockEventListener);
+    public abstract void unregisterStorageLockEventListener(
+            ICeStorageLockEventListener iCeStorageLockEventListener);
 }

@@ -2,6 +2,7 @@ package com.android.server.wm;
 
 import android.os.Build;
 import android.provider.DeviceConfig;
+
 import java.util.HashSet;
 import java.util.concurrent.Executor;
 
@@ -14,16 +15,23 @@ public final class SplashScreenExceptionList {
     final DeviceConfig.OnPropertiesChangedListener mOnPropertiesChangedListener;
 
     public SplashScreenExceptionList(Executor executor) {
-        updateDeviceConfig(DeviceConfig.getString("window_manager", "splash_screen_exception_list", ""));
-        DeviceConfig.OnPropertiesChangedListener onPropertiesChangedListener = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.server.wm.SplashScreenExceptionList$$ExternalSyntheticLambda0
-            public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                SplashScreenExceptionList splashScreenExceptionList = SplashScreenExceptionList.this;
-                splashScreenExceptionList.getClass();
-                splashScreenExceptionList.updateDeviceConfig(properties.getString("splash_screen_exception_list", ""));
-            }
-        };
+        updateDeviceConfig(
+                DeviceConfig.getString("window_manager", "splash_screen_exception_list", ""));
+        DeviceConfig.OnPropertiesChangedListener onPropertiesChangedListener =
+                new DeviceConfig
+                        .OnPropertiesChangedListener() { // from class:
+                                                         // com.android.server.wm.SplashScreenExceptionList$$ExternalSyntheticLambda0
+                    public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                        SplashScreenExceptionList splashScreenExceptionList =
+                                SplashScreenExceptionList.this;
+                        splashScreenExceptionList.getClass();
+                        splashScreenExceptionList.updateDeviceConfig(
+                                properties.getString("splash_screen_exception_list", ""));
+                    }
+                };
         this.mOnPropertiesChangedListener = onPropertiesChangedListener;
-        DeviceConfig.addOnPropertiesChangedListener("window_manager", executor, onPropertiesChangedListener);
+        DeviceConfig.addOnPropertiesChangedListener(
+                "window_manager", executor, onPropertiesChangedListener);
     }
 
     public void updateDeviceConfig(String str) {

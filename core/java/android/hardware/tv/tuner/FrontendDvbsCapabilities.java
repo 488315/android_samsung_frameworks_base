@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class FrontendDvbsCapabilities implements Parcelable {
-    public static final Parcelable.Creator<FrontendDvbsCapabilities> CREATOR = new Parcelable.Creator<FrontendDvbsCapabilities>() { // from class: android.hardware.tv.tuner.FrontendDvbsCapabilities.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendDvbsCapabilities createFromParcel(Parcel _aidl_source) {
-            FrontendDvbsCapabilities _aidl_out = new FrontendDvbsCapabilities();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FrontendDvbsCapabilities> CREATOR =
+            new Parcelable.Creator<FrontendDvbsCapabilities>() { // from class:
+                // android.hardware.tv.tuner.FrontendDvbsCapabilities.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendDvbsCapabilities createFromParcel(Parcel _aidl_source) {
+                    FrontendDvbsCapabilities _aidl_out = new FrontendDvbsCapabilities();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendDvbsCapabilities[] newArray(int _aidl_size) {
-            return new FrontendDvbsCapabilities[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendDvbsCapabilities[] newArray(int _aidl_size) {
+                    return new FrontendDvbsCapabilities[_aidl_size];
+                }
+            };
     public int modulationCap = 0;
     public long innerfecCap = 0;
     public byte standard = 0;

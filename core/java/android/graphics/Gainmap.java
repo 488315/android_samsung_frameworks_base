@@ -2,25 +2,27 @@ package android.graphics;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public final class Gainmap implements Parcelable {
-    public static final Parcelable.Creator<Gainmap> CREATOR = new Parcelable.Creator<Gainmap>() { // from class: android.graphics.Gainmap.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Gainmap createFromParcel(Parcel in) {
-            Gainmap gm = new Gainmap((Bitmap) in.readTypedObject(Bitmap.CREATOR));
-            Gainmap.nReadGainmapFromParcel(gm.mNativePtr, in);
-            return gm;
-        }
+    public static final Parcelable.Creator<Gainmap> CREATOR =
+            new Parcelable.Creator<Gainmap>() { // from class: android.graphics.Gainmap.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Gainmap createFromParcel(Parcel in) {
+                    Gainmap gm = new Gainmap((Bitmap) in.readTypedObject(Bitmap.CREATOR));
+                    Gainmap.nReadGainmapFromParcel(gm.mNativePtr, in);
+                    return gm;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Gainmap[] newArray(int size) {
-            return new Gainmap[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Gainmap[] newArray(int size) {
+                    return new Gainmap[size];
+                }
+            };
     private Bitmap mGainmapContents;
     final long mNativePtr;
 
@@ -67,10 +69,11 @@ public final class Gainmap implements Parcelable {
     private static native void nWriteGainmapToParcel(long j, Parcel parcel);
 
     private static class NoImagePreloadHolder {
-        public static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(Gainmap.class.getClassLoader(), Gainmap.nGetFinalizer());
+        public static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        Gainmap.class.getClassLoader(), Gainmap.nGetFinalizer());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     private Gainmap(Bitmap gainmapContents, long nativeGainmap) {
@@ -154,7 +157,8 @@ public final class Gainmap implements Parcelable {
 
     public void setDisplayRatioForFullHdr(float max) {
         if (!Float.isFinite(max) || max < 1.0f) {
-            throw new IllegalArgumentException("setDisplayRatioForFullHdr must be >= 1.0f, got = " + max);
+            throw new IllegalArgumentException(
+                    "setDisplayRatioForFullHdr must be >= 1.0f, got = " + max);
         }
         nSetDisplayRatioHdr(this.mNativePtr, max);
     }
@@ -165,7 +169,8 @@ public final class Gainmap implements Parcelable {
 
     public void setMinDisplayRatioForHdrTransition(float min) {
         if (!Float.isFinite(min) || min < 1.0f) {
-            throw new IllegalArgumentException("setMinDisplayRatioForHdrTransition must be >= 1.0f, got = " + min);
+            throw new IllegalArgumentException(
+                    "setMinDisplayRatioForHdrTransition must be >= 1.0f, got = " + min);
         }
         nSetDisplayRatioSdr(this.mNativePtr, min);
     }

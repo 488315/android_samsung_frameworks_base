@@ -1,9 +1,9 @@
 package android.media;
 
 import android.annotation.SystemApi;
-import android.media.AudioAttributes;
-import android.media.VolumeShaper;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 
 @SystemApi
@@ -25,11 +25,11 @@ public class HwAudioSource extends PlayerBase {
     }
 
     @Override // android.media.PlayerBase
-    void playerSetVolume(boolean muting, float leftVolume, float rightVolume) {
-    }
+    void playerSetVolume(boolean muting, float leftVolume, float rightVolume) {}
 
     @Override // android.media.PlayerBase
-    int playerApplyVolumeShaper(VolumeShaper.Configuration configuration, VolumeShaper.Operation operation) {
+    int playerApplyVolumeShaper(
+            VolumeShaper.Configuration configuration, VolumeShaper.Operation operation) {
         return 0;
     }
 
@@ -60,7 +60,9 @@ public class HwAudioSource extends PlayerBase {
 
     public void start() {
         Preconditions.checkState(!isPlaying(), "HwAudioSource is currently playing");
-        this.mNativeHandle = AudioSystem.startAudioSource(this.mAudioDeviceInfo.getPort().activeConfig(), this.mAudioAttributes);
+        this.mNativeHandle =
+                AudioSystem.startAudioSource(
+                        this.mAudioDeviceInfo.getPort().activeConfig(), this.mAudioAttributes);
         if (isPlaying()) {
             baseStart(getDeviceId());
         }

@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class SatelliteSubscriptionInfo implements Parcelable {
-    public static final Parcelable.Creator<SatelliteSubscriptionInfo> CREATOR = new Parcelable.Creator<SatelliteSubscriptionInfo>() { // from class: android.telephony.satellite.stub.SatelliteSubscriptionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteSubscriptionInfo createFromParcel(Parcel _aidl_source) {
-            SatelliteSubscriptionInfo _aidl_out = new SatelliteSubscriptionInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SatelliteSubscriptionInfo> CREATOR =
+            new Parcelable.Creator<
+                    SatelliteSubscriptionInfo>() { // from class:
+                                                   // android.telephony.satellite.stub.SatelliteSubscriptionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteSubscriptionInfo createFromParcel(Parcel _aidl_source) {
+                    SatelliteSubscriptionInfo _aidl_out = new SatelliteSubscriptionInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteSubscriptionInfo[] newArray(int _aidl_size) {
-            return new SatelliteSubscriptionInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteSubscriptionInfo[] newArray(int _aidl_size) {
+                    return new SatelliteSubscriptionInfo[_aidl_size];
+                }
+            };
     public String iccId;
     public String niddApn;
 

@@ -9,6 +9,7 @@ import com.android.internal.org.bouncycastle.asn1.x500.AttributeTypeAndValue;
 import com.android.internal.org.bouncycastle.asn1.x500.RDN;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.asn1.x500.X500NameStyle;
+
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -38,10 +39,14 @@ public abstract class AbstractX500NameStyle implements X500NameStyle {
             if (rdns[i].isMultiValued()) {
                 AttributeTypeAndValue[] atv = rdns[i].getTypesAndValues();
                 for (int j = 0; j != atv.length; j++) {
-                    hashCodeValue = (hashCodeValue ^ atv[j].getType().hashCode()) ^ calcHashCode(atv[j].getValue());
+                    hashCodeValue =
+                            (hashCodeValue ^ atv[j].getType().hashCode())
+                                    ^ calcHashCode(atv[j].getValue());
                 }
             } else {
-                hashCodeValue = (hashCodeValue ^ rdns[i].getFirst().getType().hashCode()) ^ calcHashCode(rdns[i].getFirst().getValue());
+                hashCodeValue =
+                        (hashCodeValue ^ rdns[i].getFirst().getType().hashCode())
+                                ^ calcHashCode(rdns[i].getFirst().getValue());
             }
         }
         return hashCodeValue;
@@ -75,7 +80,10 @@ public abstract class AbstractX500NameStyle implements X500NameStyle {
         }
         boolean reverse = false;
         if (rdns1[0].getFirst() != null && rdns2[0].getFirst() != null) {
-            reverse = !rdns1[0].getFirst().getType().equals((ASN1Primitive) rdns2[0].getFirst().getType());
+            reverse =
+                    !rdns1[0].getFirst()
+                            .getType()
+                            .equals((ASN1Primitive) rdns2[0].getFirst().getType());
         }
         for (int i = 0; i != rdns1.length; i++) {
             if (!foundMatch(reverse, rdns1[i], rdns2)) {

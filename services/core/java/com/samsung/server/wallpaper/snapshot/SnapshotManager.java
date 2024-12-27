@@ -8,13 +8,18 @@ import android.os.FileUtils;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.util.Xml;
+
 import com.android.internal.util.JournaledFile;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.wallpaper.WallpaperData;
 import com.android.server.wallpaper.WallpaperManagerService;
+
+import libcore.io.IoUtils;
+
 import com.samsung.android.wallpaper.Rune;
 import com.samsung.android.wallpaper.utils.WhichChecker;
 import com.samsung.server.wallpaper.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,7 +30,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -50,7 +54,8 @@ public final class SnapshotManager {
                 num.intValue();
                 perWhichSnapshot.settings.put(str, num);
             }
-            perWhichSnapshot.connectedSnapshotForLiveWallpaper = this.connectedSnapshotForLiveWallpaper;
+            perWhichSnapshot.connectedSnapshotForLiveWallpaper =
+                    this.connectedSnapshotForLiveWallpaper;
             return perWhichSnapshot;
         }
     }
@@ -69,7 +74,8 @@ public final class SnapshotManager {
         }
 
         public final int getConnectedSnapshotForLiveWallpaper(int i) {
-            PerWhichSnapshot perWhichSnapshot = (PerWhichSnapshot) ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(i));
+            PerWhichSnapshot perWhichSnapshot =
+                    (PerWhichSnapshot) ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(i));
             if (perWhichSnapshot != null) {
                 return perWhichSnapshot.connectedSnapshotForLiveWallpaper;
             }
@@ -78,7 +84,9 @@ public final class SnapshotManager {
 
         public final WallpaperData getWallpaperData(int i) {
             int checkWhich = SnapshotHelper.checkWhich(i);
-            PerWhichSnapshot perWhichSnapshot = (PerWhichSnapshot) ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(checkWhich));
+            PerWhichSnapshot perWhichSnapshot =
+                    (PerWhichSnapshot)
+                            ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(checkWhich));
             if (perWhichSnapshot != null) {
                 return perWhichSnapshot.wallpaper;
             }
@@ -107,7 +115,9 @@ public final class SnapshotManager {
         public final boolean hasWallpaperData(int i) {
             int checkWhich = SnapshotHelper.checkWhich(i);
             Log.d("SnapshotManager", "hasWallpaperData: which = " + checkWhich);
-            PerWhichSnapshot perWhichSnapshot = (PerWhichSnapshot) ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(checkWhich));
+            PerWhichSnapshot perWhichSnapshot =
+                    (PerWhichSnapshot)
+                            ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(checkWhich));
             if (perWhichSnapshot != null && perWhichSnapshot.wallpaper != null) {
                 return true;
             }
@@ -116,14 +126,16 @@ public final class SnapshotManager {
         }
 
         public final void setConnectedSnapshotForLiveWallpaper(int i, int i2) {
-            PerWhichSnapshot perWhichSnapshot = (PerWhichSnapshot) ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(i));
+            PerWhichSnapshot perWhichSnapshot =
+                    (PerWhichSnapshot) ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(i));
             if (perWhichSnapshot != null) {
                 perWhichSnapshot.connectedSnapshotForLiveWallpaper = i2;
             }
         }
 
         public final void setLockscreenVisibility(int i, int i2) {
-            PerWhichSnapshot perWhichSnapshot = (PerWhichSnapshot) ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(i));
+            PerWhichSnapshot perWhichSnapshot =
+                    (PerWhichSnapshot) ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(i));
             if (perWhichSnapshot != null) {
                 if (WhichChecker.isSubDisplay(i)) {
                     perWhichSnapshot.settings.put("lockscreen_wallpaper_sub", Integer.valueOf(i2));
@@ -135,20 +147,26 @@ public final class SnapshotManager {
 
         public final void setSettingsData(int i, HashMap hashMap) {
             int checkWhich = SnapshotHelper.checkWhich(i);
-            PerWhichSnapshot perWhichSnapshot = (PerWhichSnapshot) ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(checkWhich));
+            PerWhichSnapshot perWhichSnapshot =
+                    (PerWhichSnapshot)
+                            ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(checkWhich));
             if (perWhichSnapshot == null) {
                 perWhichSnapshot = new PerWhichSnapshot();
-                ((HashMap) this.perWhichSnapshots).put(Integer.valueOf(checkWhich), perWhichSnapshot);
+                ((HashMap) this.perWhichSnapshots)
+                        .put(Integer.valueOf(checkWhich), perWhichSnapshot);
             }
             perWhichSnapshot.settings = hashMap;
         }
 
         public final void setWallpaperData(int i, WallpaperData wallpaperData) {
             int checkWhich = SnapshotHelper.checkWhich(i);
-            PerWhichSnapshot perWhichSnapshot = (PerWhichSnapshot) ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(checkWhich));
+            PerWhichSnapshot perWhichSnapshot =
+                    (PerWhichSnapshot)
+                            ((HashMap) this.perWhichSnapshots).get(Integer.valueOf(checkWhich));
             if (perWhichSnapshot == null) {
                 perWhichSnapshot = new PerWhichSnapshot();
-                ((HashMap) this.perWhichSnapshots).put(Integer.valueOf(checkWhich), perWhichSnapshot);
+                ((HashMap) this.perWhichSnapshots)
+                        .put(Integer.valueOf(checkWhich), perWhichSnapshot);
             }
             perWhichSnapshot.wallpaper = wallpaperData;
         }
@@ -253,7 +271,9 @@ public final class SnapshotManager {
                 this.mSnapshots.addFirst(snapshotData);
                 return;
             }
-            Log.e("SnapshotManager", "add: Backup wallpaper for key [" + i + "] is already exist. Drop this one.");
+            Log.e(
+                    "SnapshotManager",
+                    "add: Backup wallpaper for key [" + i + "] is already exist. Drop this one.");
         }
 
         public final void addHistory(SnapshotHistory snapshotHistory) {
@@ -350,7 +370,8 @@ public final class SnapshotManager {
         SnapshotHistory snapshotHistory = new SnapshotHistory();
         snapshotHistory.type = 2;
         snapshotHistory.key = i2;
-        snapshotHistory.time = SimpleDateFormat.getDateTimeInstance().format(new Date(System.currentTimeMillis()));
+        snapshotHistory.time =
+                SimpleDateFormat.getDateTimeInstance().format(new Date(System.currentTimeMillis()));
         snapshotHistory.desc = "No snapshot";
         repositroy.addHistory(snapshotHistory);
     }
@@ -360,27 +381,36 @@ public final class SnapshotManager {
         SnapshotHistory snapshotHistory = new SnapshotHistory();
         snapshotHistory.type = i2;
         snapshotHistory.key = i3;
-        snapshotHistory.time = SimpleDateFormat.getDateTimeInstance().format(new Date(System.currentTimeMillis()));
+        snapshotHistory.time =
+                SimpleDateFormat.getDateTimeInstance().format(new Date(System.currentTimeMillis()));
         snapshotHistory.results = map;
         repositroy.addHistory(snapshotHistory);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0127, code lost:
-    
-        if (r5 != 8) goto L65;
-     */
+
+       if (r5 != 8) goto L65;
+    */
     /* JADX WARN: Removed duplicated region for block: B:12:0x010b  */
     /* JADX WARN: Removed duplicated region for block: B:7:0x0104  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int addSnapshot(android.content.Context r20, int r21, int r22, int r23, com.android.server.wallpaper.WallpaperData r24) {
+    public final int addSnapshot(
+            android.content.Context r20,
+            int r21,
+            int r22,
+            int r23,
+            com.android.server.wallpaper.WallpaperData r24) {
         /*
             Method dump skipped, instructions count: 549
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.server.wallpaper.snapshot.SnapshotManager.addSnapshot(android.content.Context, int, int, int, com.android.server.wallpaper.WallpaperData):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.server.wallpaper.snapshot.SnapshotManager.addSnapshot(android.content.Context,"
+                    + " int, int, int, com.android.server.wallpaper.WallpaperData):int");
     }
 
     public final int getPairedDlsSnapshotKey(int i, int i2) {
@@ -401,7 +431,9 @@ public final class SnapshotManager {
         Iterator it = getRepositroy(i).getAll().iterator();
         while (it.hasNext()) {
             SnapshotData snapshotData = (SnapshotData) it.next();
-            if ("com.samsung.android.dynamiclock".equals(snapshotData.source) && snapshotData.hasWallpaperData(i3) && snapshotData.isFromPairedService) {
+            if ("com.samsung.android.dynamiclock".equals(snapshotData.source)
+                    && snapshotData.hasWallpaperData(i3)
+                    && snapshotData.isFromPairedService) {
                 StringBuilder sb = new StringBuilder("getPairedDlsSnapshotKey: key = ");
                 int i4 = snapshotData.key;
                 sb.append(i4);
@@ -413,7 +445,8 @@ public final class SnapshotManager {
     }
 
     public final SnapshotRepository getRepositroy(int i) {
-        SnapshotRepository snapshotRepository = (SnapshotRepository) this.mSnapshotRepositories.get(i);
+        SnapshotRepository snapshotRepository =
+                (SnapshotRepository) this.mSnapshotRepositories.get(i);
         if (snapshotRepository != null) {
             return snapshotRepository;
         }
@@ -440,7 +473,9 @@ public final class SnapshotManager {
             Method dump skipped, instructions count: 1228
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.server.wallpaper.snapshot.SnapshotManager.loadSettingsLockedForSnapshot(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.server.wallpaper.snapshot.SnapshotManager.loadSettingsLockedForSnapshot(int):void");
     }
 
     public final void migrateToPriorSnapshot(int i, int i2, int i3) {
@@ -460,11 +495,19 @@ public final class SnapshotManager {
                 Log.e("SnapshotManager", "migrateToPriorSnapshot: Something wrong!");
             } else if (byIndex2.hasWallpaperData(i3)) {
                 WallpaperData wallpaperData2 = byIndex2.getWallpaperData(i3);
-                File wallpaperFile = wallpaperData2.getWallpaperFile(wallpaperData2.mSemWallpaperData.mWpType);
+                File wallpaperFile =
+                        wallpaperData2.getWallpaperFile(wallpaperData2.mSemWallpaperData.mWpType);
                 if (byIndex != null) {
-                    ((HashMap) byIndex2.perWhichSnapshots).put(Integer.valueOf(i3), ((PerWhichSnapshot) ((HashMap) byIndex.perWhichSnapshots).get(Integer.valueOf(i3))).m1239clone());
+                    ((HashMap) byIndex2.perWhichSnapshots)
+                            .put(
+                                    Integer.valueOf(i3),
+                                    ((PerWhichSnapshot)
+                                                    ((HashMap) byIndex.perWhichSnapshots)
+                                                            .get(Integer.valueOf(i3)))
+                                            .m1239clone());
                 }
-                int connectedSnapshotForLiveWallpaper = byIndex2.getConnectedSnapshotForLiveWallpaper(i3);
+                int connectedSnapshotForLiveWallpaper =
+                        byIndex2.getConnectedSnapshotForLiveWallpaper(i3);
                 int i5 = byIndex2.key;
                 if (connectedSnapshotForLiveWallpaper != -1) {
                     SnapshotData snapshot = getSnapshot(i, connectedSnapshotForLiveWallpaper);
@@ -475,12 +518,17 @@ public final class SnapshotManager {
                         snapshot.setConnectedSnapshotForLiveWallpaper(correspondingWhich, i5);
                     }
                 }
-                Log.d("SnapshotManager", "migrateToPriorSnapshot: source = " + file + ", target = " + wallpaperFile);
+                Log.d(
+                        "SnapshotManager",
+                        "migrateToPriorSnapshot: source = " + file + ", target = " + wallpaperFile);
                 if (Rune.SUPPORT_LAYERED_WALLPAPER_SNAPSHOT) {
                     if (byIndex != null) {
-                        SnapshotHelper.renameDirectory(SnapshotHelper.getBackupWallpaperDir(i, byIndex.key, i3), SnapshotHelper.getBackupWallpaperDir(i, i5, i3));
+                        SnapshotHelper.renameDirectory(
+                                SnapshotHelper.getBackupWallpaperDir(i, byIndex.key, i3),
+                                SnapshotHelper.getBackupWallpaperDir(i, i5, i3));
                     }
-                    byIndex2.getWallpaperData(i3).setWallpaperFile(SnapshotHelper.getBackupWallpaperFile(i, i5, i3));
+                    byIndex2.getWallpaperData(i3)
+                            .setWallpaperFile(SnapshotHelper.getBackupWallpaperFile(i, i5, i3));
                     return;
                 } else if (file == null || !file.exists()) {
                     Log.d("SnapshotManager", "migrateToPriorSnapshot: source does not exist.");
@@ -502,15 +550,27 @@ public final class SnapshotManager {
         SnapshotData removeByKey = getRepositroy(i).removeByKey(i2);
         if (Rune.SUPPORT_LAYERED_WALLPAPER_SNAPSHOT) {
             if (removeByKey != null) {
-                SnapshotHelper.deleteDirectory(new File(Environment.getUserSystemDirectory(removeByKey.userId), VibrationParam$1$$ExternalSyntheticOutline0.m(removeByKey.key, "wallpaper_backup/")));
+                SnapshotHelper.deleteDirectory(
+                        new File(
+                                Environment.getUserSystemDirectory(removeByKey.userId),
+                                VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                        removeByKey.key, "wallpaper_backup/")));
             }
         } else if (removeByKey != null) {
             Iterator it = removeByKey.getWhiches().iterator();
             while (it.hasNext()) {
                 int intValue = ((Integer) it.next()).intValue();
                 WallpaperData wallpaperData = removeByKey.getWallpaperData(intValue);
-                File wallpaperFile = wallpaperData.getWallpaperFile(wallpaperData.mSemWallpaperData.mWpType);
-                Log.d("SnapshotManager", "removeBackupFiles: which = " + intValue + ",wallpaperFile  = " + wallpaperFile + ", cropFile = " + wallpaperData.getCropFile());
+                File wallpaperFile =
+                        wallpaperData.getWallpaperFile(wallpaperData.mSemWallpaperData.mWpType);
+                Log.d(
+                        "SnapshotManager",
+                        "removeBackupFiles: which = "
+                                + intValue
+                                + ",wallpaperFile  = "
+                                + wallpaperFile
+                                + ", cropFile = "
+                                + wallpaperData.getCropFile());
                 SnapshotHelper.deleteFile(wallpaperFile);
             }
         }
@@ -525,7 +585,11 @@ public final class SnapshotManager {
         }
         if (Rune.SUPPORT_LAYERED_WALLPAPER_SNAPSHOT) {
             if (i2 > 0) {
-                SnapshotHelper.deleteDirectory(new File(Environment.getUserSystemDirectory(i), VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "wallpaper_backup/")));
+                SnapshotHelper.deleteDirectory(
+                        new File(
+                                Environment.getUserSystemDirectory(i),
+                                VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                        i2, "wallpaper_backup/")));
             }
         } else if (i2 > 0) {
             int i3 = 2;
@@ -541,8 +605,11 @@ public final class SnapshotManager {
                         File[] listBackupFiles = SnapshotHelper.listBackupFiles(i, iArr2[i7] | i6);
                         if (listBackupFiles != null) {
                             for (File file : listBackupFiles) {
-                                if (Integer.parseInt(file.getName().split("_")[0]) == i2 && !file.delete()) {
-                                    Log.w("SnapshotHelper", "deleteFilesByKeyLegacy: failed to delete " + file);
+                                if (Integer.parseInt(file.getName().split("_")[0]) == i2
+                                        && !file.delete()) {
+                                    Log.w(
+                                            "SnapshotHelper",
+                                            "deleteFilesByKeyLegacy: failed to delete " + file);
                                 }
                             }
                         }
@@ -568,10 +635,12 @@ public final class SnapshotManager {
         while (it.hasNext()) {
             SnapshotData snapshotData = (SnapshotData) it.next();
             snapshotData.getClass();
-            ((HashMap) snapshotData.perWhichSnapshots).remove(Integer.valueOf(SnapshotHelper.checkWhich(i2)));
+            ((HashMap) snapshotData.perWhichSnapshots)
+                    .remove(Integer.valueOf(SnapshotHelper.checkWhich(i2)));
             WallpaperData wallpaperData = snapshotData.getWallpaperData(i2);
             if (wallpaperData != null) {
-                SnapshotHelper.deleteFile(wallpaperData.getWallpaperFile(wallpaperData.mSemWallpaperData.mWpType));
+                SnapshotHelper.deleteFile(
+                        wallpaperData.getWallpaperFile(wallpaperData.mSemWallpaperData.mWpType));
                 SnapshotHelper.deleteFile(wallpaperData.getCropFile());
             }
             if (!snapshotData.hasWallpaperData()) {
@@ -582,7 +651,9 @@ public final class SnapshotManager {
         if (Rune.SUPPORT_LAYERED_WALLPAPER_SNAPSHOT) {
             if (i2 > 0) {
                 try {
-                    File[] listFiles = new File(Environment.getUserSystemDirectory(i), "wallpaper_backup").listFiles();
+                    File[] listFiles =
+                            new File(Environment.getUserSystemDirectory(i), "wallpaper_backup")
+                                    .listFiles();
                     if (listFiles != null && listFiles.length > 0) {
                         for (int i3 = 0; i3 < listFiles.length; i3++) {
                             if (listFiles[i3].isDirectory()) {
@@ -590,7 +661,10 @@ public final class SnapshotManager {
                                 if (listFiles2 != null && listFiles2.length > 0) {
                                     for (int i4 = 0; i4 < listFiles2.length; i4++) {
                                         if (Integer.parseInt(listFiles2[i4].getName()) == i2) {
-                                            Log.d("SnapshotHelper", "deleteFilesByWhich: " + listFiles2[i4].getPath());
+                                            Log.d(
+                                                    "SnapshotHelper",
+                                                    "deleteFilesByWhich: "
+                                                            + listFiles2[i4].getPath());
                                             SnapshotHelper.deleteDirectory(listFiles2[i4]);
                                         }
                                     }
@@ -611,8 +685,11 @@ public final class SnapshotManager {
                 File[] listBackupFiles = SnapshotHelper.listBackupFiles(i, i2);
                 if (listBackupFiles != null) {
                     for (File file : listBackupFiles) {
-                        if (Integer.parseInt(file.getName().split("_")[1]) == i2 && !file.delete()) {
-                            Log.w("SnapshotHelper", "deleteFilesByWhichLegacy: failed to delete " + file);
+                        if (Integer.parseInt(file.getName().split("_")[1]) == i2
+                                && !file.delete()) {
+                            Log.w(
+                                    "SnapshotHelper",
+                                    "deleteFilesByWhichLegacy: failed to delete " + file);
                         }
                     }
                 }
@@ -626,21 +703,33 @@ public final class SnapshotManager {
     public final void saveSettingsLockedForSnapshot(int i) {
         SnapshotRepository repositroy = getRepositroy(i);
         SnapshotCallback snapshotCallback = this.mCallback;
-        String absolutePath = new File(Environment.getUserSystemDirectory(i), "wallpaper_backup_info.xml").getAbsolutePath();
-        JournaledFile journaledFile = new JournaledFile(new File(absolutePath), new File(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(absolutePath, ".tmp")));
+        String absolutePath =
+                new File(Environment.getUserSystemDirectory(i), "wallpaper_backup_info.xml")
+                        .getAbsolutePath();
+        JournaledFile journaledFile =
+                new JournaledFile(
+                        new File(absolutePath),
+                        new File(
+                                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                                        absolutePath, ".tmp")));
         FileOutputStream fileOutputStream = null;
         try {
-            FileOutputStream fileOutputStream2 = new FileOutputStream(journaledFile.chooseForWrite(), false);
+            FileOutputStream fileOutputStream2 =
+                    new FileOutputStream(journaledFile.chooseForWrite(), false);
             try {
                 TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(fileOutputStream2);
                 resolveSerializer.startDocument((String) null, Boolean.TRUE);
                 if (repositroy.size() > 0) {
-                    Log.d("SnapshotHelper", "saveSettingsLockedForSnapshot: Backup data size = " + repositroy.size());
+                    Log.d(
+                            "SnapshotHelper",
+                            "saveSettingsLockedForSnapshot: Backup data size = "
+                                    + repositroy.size());
                     for (int size = repositroy.size() + (-1); size >= 0; size--) {
                         SnapshotData byIndex = repositroy.getByIndex(size);
                         if (byIndex != null) {
                             resolveSerializer.startTag((String) null, "Backup");
-                            resolveSerializer.attribute((String) null, "key", Integer.toString(byIndex.key));
+                            resolveSerializer.attribute(
+                                    (String) null, "key", Integer.toString(byIndex.key));
                             resolveSerializer.attribute((String) null, "source", byIndex.source);
                             Iterator it = byIndex.getWhiches().iterator();
                             while (it.hasNext()) {
@@ -648,10 +737,27 @@ public final class SnapshotManager {
                                 WallpaperData wallpaperData = byIndex.getWallpaperData(intValue);
                                 if (wallpaperData != null) {
                                     String str = WhichChecker.isSystem(intValue) ? "wp" : "kwp";
-                                    if (WhichChecker.isSystem(intValue) || WhichChecker.isSupportLock(intValue)) {
-                                        ((WallpaperManagerService) snapshotCallback).requestWriteWallpaperAttributes(resolveSerializer, str, wallpaperData);
-                                        PerWhichSnapshot perWhichSnapshot = (PerWhichSnapshot) ((HashMap) byIndex.perWhichSnapshots).get(Integer.valueOf(SnapshotHelper.checkWhich(intValue)));
-                                        SnapshotHelper.writeSnapshotSettingsData(resolveSerializer, str + "Settings", (HashMap) (perWhichSnapshot != null ? perWhichSnapshot.settings : null), intValue);
+                                    if (WhichChecker.isSystem(intValue)
+                                            || WhichChecker.isSupportLock(intValue)) {
+                                        ((WallpaperManagerService) snapshotCallback)
+                                                .requestWriteWallpaperAttributes(
+                                                        resolveSerializer, str, wallpaperData);
+                                        PerWhichSnapshot perWhichSnapshot =
+                                                (PerWhichSnapshot)
+                                                        ((HashMap) byIndex.perWhichSnapshots)
+                                                                .get(
+                                                                        Integer.valueOf(
+                                                                                SnapshotHelper
+                                                                                        .checkWhich(
+                                                                                                intValue)));
+                                        SnapshotHelper.writeSnapshotSettingsData(
+                                                resolveSerializer,
+                                                str + "Settings",
+                                                (HashMap)
+                                                        (perWhichSnapshot != null
+                                                                ? perWhichSnapshot.settings
+                                                                : null),
+                                                intValue);
                                     }
                                 }
                             }
@@ -670,12 +776,18 @@ public final class SnapshotManager {
                 FileUtils.sync(fileOutputStream2);
                 fileOutputStream2.close();
                 journaledFile.commit();
-            } catch (IOException | IllegalArgumentException | IllegalStateException | IndexOutOfBoundsException unused) {
+            } catch (IOException
+                    | IllegalArgumentException
+                    | IllegalStateException
+                    | IndexOutOfBoundsException unused) {
                 fileOutputStream = fileOutputStream2;
                 IoUtils.closeQuietly(fileOutputStream);
                 journaledFile.rollback();
             }
-        } catch (IOException | IllegalArgumentException | IllegalStateException | IndexOutOfBoundsException unused2) {
+        } catch (IOException
+                | IllegalArgumentException
+                | IllegalStateException
+                | IndexOutOfBoundsException unused2) {
         }
     }
 }

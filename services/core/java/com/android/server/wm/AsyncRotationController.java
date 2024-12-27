@@ -9,10 +9,11 @@ import android.view.WindowInsets;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.wm.AsyncRotationController;
-import com.android.server.wm.SurfaceAnimator;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -57,10 +58,14 @@ public final class AsyncRotationController extends FadeAnimationController imple
         if (displayContent.mTransitionController.getCollectingTransitionType() == 6) {
             DisplayRotation displayRotation = displayContent.mDisplayRotation;
             WindowState windowState = displayContent.mDisplayPolicy.mTopFullscreenOpaqueWindowState;
-            if (windowState != null && windowState.mAttrs.rotationAnimation == 3 && windowState.getTask() != null) {
+            if (windowState != null
+                    && windowState.mAttrs.rotationAnimation == 3
+                    && windowState.getTask() != null) {
                 int i = this.mOriginalRotation;
                 int i2 = displayRotation.mRotation;
-                if (displayRotation.mAllowSeamlessRotationDespiteNavBarMoving || displayRotation.mDisplayPolicy.mNavigationBarCanMove || (i != 2 && i2 != 2)) {
+                if (displayRotation.mAllowSeamlessRotationDespiteNavBarMoving
+                        || displayRotation.mDisplayPolicy.mNavigationBarCanMove
+                        || (i != 2 && i2 != 2)) {
                     this.mTransitionOp = 3;
                 }
             }
@@ -86,10 +91,24 @@ public final class AsyncRotationController extends FadeAnimationController imple
     public static boolean canBeAsync(WindowToken windowToken) {
         DisplayContent displayContent;
         int i = windowToken.windowType;
-        if ((CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY && i == 2632) || windowToken.mIsPortraitWindowToken || i == 2415 || i == 2009 || i == 2411) {
+        if ((CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY && i == 2632)
+                || windowToken.mIsPortraitWindowToken
+                || i == 2415
+                || i == 2009
+                || i == 2411) {
             return false;
         }
-        return ((CoreRune.FW_FLEXIBLE_DUAL_MODE && i == 2037 && (displayContent = windowToken.mDisplayContent) != null && displayContent.mDisplayId == 1 && (displayContent.mDisplayInfo.flags & 8192) != 0) || i <= 99 || i == 2011 || i == 2013 || i == 2040) ? false : true;
+        return ((CoreRune.FW_FLEXIBLE_DUAL_MODE
+                                && i == 2037
+                                && (displayContent = windowToken.mDisplayContent) != null
+                                && displayContent.mDisplayId == 1
+                                && (displayContent.mDisplayInfo.flags & 8192) != 0)
+                        || i <= 99
+                        || i == 2011
+                        || i == 2013
+                        || i == 2040)
+                ? false
+                : true;
     }
 
     @Override // java.util.function.Consumer
@@ -98,13 +117,19 @@ public final class AsyncRotationController extends FadeAnimationController imple
         ActivityRecord activityRecord;
         WindowState findMainWindow;
         WindowState windowState = (WindowState) obj;
-        if ((windowState.mHasSurface && canBeAsync(windowState.mToken)) || (CoreRune.MW_FREEFORM_MINIMIZE_CONTAINER && windowState.mAttrs.type == 2604 && (surfaceControl = windowState.mToken.mSurfaceControl) != null && surfaceControl.isValid())) {
+        if ((windowState.mHasSurface && canBeAsync(windowState.mToken))
+                || (CoreRune.MW_FREEFORM_MINIMIZE_CONTAINER
+                        && windowState.mAttrs.type == 2604
+                        && (surfaceControl = windowState.mToken.mSurfaceControl) != null
+                        && surfaceControl.isValid())) {
             int i = this.mTransitionOp;
             if (i == 0 && windowState.mForceSeamlesslyRotate) {
                 return;
             }
             if (windowState.mAttrs.type != 2019) {
-                this.mTargetWindowTokens.put(windowState.mToken, new Operation((i == 3 || windowState.mForceSeamlesslyRotate) ? 1 : 2));
+                this.mTargetWindowTokens.put(
+                        windowState.mToken,
+                        new Operation((i == 3 || windowState.mForceSeamlesslyRotate) ? 1 : 2));
                 return;
             }
             boolean z = this.mDisplayContent.mDisplayPolicy.mNavigationBarCanMove;
@@ -114,11 +139,24 @@ public final class AsyncRotationController extends FadeAnimationController imple
                 if (z) {
                     return;
                 }
-                RecentsAnimationController recentsAnimationController = this.mService.mRecentsAnimationController;
-                if (recentsAnimationController != null && recentsAnimationController.mNavigationBarAttachedToApp) {
+                RecentsAnimationController recentsAnimationController =
+                        this.mService.mRecentsAnimationController;
+                if (recentsAnimationController != null
+                        && recentsAnimationController.mNavigationBarAttachedToApp) {
                     return;
                 }
-            } else if (i2 == 3 || this.mDisplayContent.mTransitionController.mNavigationBarAttachedToApp || (z && (!windowState.isVisible() || (activityRecord = this.mDisplayContent.topRunningActivity(false)) == null || (findMainWindow = activityRecord.findMainWindow(true)) == null || (findMainWindow.mRequestedVisibleTypes & WindowInsets.Type.navigationBars()) != 0))) {
+            } else if (i2 == 3
+                    || this.mDisplayContent.mTransitionController.mNavigationBarAttachedToApp
+                    || (z
+                            && (!windowState.isVisible()
+                                    || (activityRecord =
+                                                    this.mDisplayContent.topRunningActivity(false))
+                                            == null
+                                    || (findMainWindow = activityRecord.findMainWindow(true))
+                                            == null
+                                    || (findMainWindow.mRequestedVisibleTypes
+                                                    & WindowInsets.Type.navigationBars())
+                                            != 0))) {
                 r4 = 1;
             }
             this.mTargetWindowTokens.put(windowState.mToken, new Operation(r4));
@@ -136,36 +174,62 @@ public final class AsyncRotationController extends FadeAnimationController imple
         if (operation.mDrawTransaction != null) {
             windowToken.getSyncTransaction().merge(operation.mDrawTransaction);
             operation.mDrawTransaction = null;
-            Slog.d("AsyncRotation_WindowManager", "finishOp merge transaction " + windowToken.getTopChild());
+            Slog.d(
+                    "AsyncRotation_WindowManager",
+                    "finishOp merge transaction " + windowToken.getTopChild());
         }
         int i = operation.mAction;
         if (i == 3) {
-            Slog.d("AsyncRotation_WindowManager", "finishOp fade-in IME " + windowToken.getTopChild());
-            fadeWindowToken(true, windowToken, new SurfaceAnimator.OnAnimationFinishedCallback() { // from class: com.android.server.wm.AsyncRotationController$$ExternalSyntheticLambda0
-                @Override // com.android.server.wm.SurfaceAnimator.OnAnimationFinishedCallback
-                public final void onAnimationFinished(int i2, AnimationAdapter animationAdapter) {
-                    ImeInsetsSourceProvider imeSourceProvider = AsyncRotationController.this.mDisplayContent.mInsetsStateController.getImeSourceProvider();
-                    InsetsControlTarget insetsControlTarget = imeSourceProvider.mControlTarget;
-                    if (insetsControlTarget != null) {
-                        imeSourceProvider.reportImeDrawnForOrganizer(insetsControlTarget);
-                    }
-                }
-            });
+            Slog.d(
+                    "AsyncRotation_WindowManager",
+                    "finishOp fade-in IME " + windowToken.getTopChild());
+            fadeWindowToken(
+                    true,
+                    windowToken,
+                    new SurfaceAnimator
+                            .OnAnimationFinishedCallback() { // from class:
+                                                             // com.android.server.wm.AsyncRotationController$$ExternalSyntheticLambda0
+                        @Override // com.android.server.wm.SurfaceAnimator.OnAnimationFinishedCallback
+                        public final void onAnimationFinished(
+                                int i2, AnimationAdapter animationAdapter) {
+                            ImeInsetsSourceProvider imeSourceProvider =
+                                    AsyncRotationController.this.mDisplayContent
+                                            .mInsetsStateController.getImeSourceProvider();
+                            InsetsControlTarget insetsControlTarget =
+                                    imeSourceProvider.mControlTarget;
+                            if (insetsControlTarget != null) {
+                                imeSourceProvider.reportImeDrawnForOrganizer(insetsControlTarget);
+                            }
+                        }
+                    });
         } else if (i == 2) {
             Slog.d("AsyncRotation_WindowManager", "finishOp fade-in " + windowToken.getTopChild());
             fadeWindowToken(true, windowToken, null);
-        } else if (i == 1 && (surfaceControl = operation.mLeash) != null && surfaceControl.isValid()) {
-            Slog.d("AsyncRotation_WindowManager", "finishOp undo seamless " + windowToken.getTopChild());
+        } else if (i == 1
+                && (surfaceControl = operation.mLeash) != null
+                && surfaceControl.isValid()) {
+            Slog.d(
+                    "AsyncRotation_WindowManager",
+                    "finishOp undo seamless " + windowToken.getTopChild());
             SurfaceControl.Transaction syncTransaction = windowToken.getSyncTransaction();
             SurfaceControl surfaceControl2 = operation.mLeash;
-            syncTransaction.setMatrix(surfaceControl2, 1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f);
-            syncTransaction.setPosition(surfaceControl2, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE);
+            syncTransaction.setMatrix(
+                    surfaceControl2,
+                    1.0f,
+                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                    1.0f);
+            syncTransaction.setPosition(
+                    surfaceControl2,
+                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                    FullScreenMagnificationGestureHandler.MAX_SCALE);
         }
         int i2 = this.mTransitionOp;
         if (i2 == 1 || i2 == 3) {
             for (int childCount = windowToken.getChildCount() - 1; childCount >= 0; childCount--) {
                 WindowState windowState = (WindowState) windowToken.getChildAt(childCount);
-                InsetsSourceProvider controllableInsetProvider = windowState.getControllableInsetProvider();
+                InsetsSourceProvider controllableInsetProvider =
+                        windowState.getControllableInsetProvider();
                 if (controllableInsetProvider != null) {
                     controllableInsetProvider.updateInsetsControlPosition(windowState, false);
                 }
@@ -179,21 +243,27 @@ public final class AsyncRotationController extends FadeAnimationController imple
             return AnimationUtils.loadAnimation(this.mContext, R.anim.wallpaper_close_enter);
         }
         Animation loadAnimation = AnimationUtils.loadAnimation(this.mContext, R.anim.fade_in);
-        loadAnimation.scaleCurrentDuration(this.mDisplayContent.mWmService.getWindowAnimationScaleLocked());
+        loadAnimation.scaleCurrentDuration(
+                this.mDisplayContent.mWmService.getWindowAnimationScaleLocked());
         return loadAnimation;
     }
 
     @Override // com.android.server.wm.FadeAnimationController
     public final Animation getFadeOutAnimation() {
         if (this.mHideImmediately) {
-            float f = this.mTransitionOp == 2 ? 1.0f : FullScreenMagnificationGestureHandler.MAX_SCALE;
+            float f =
+                    this.mTransitionOp == 2
+                            ? 1.0f
+                            : FullScreenMagnificationGestureHandler.MAX_SCALE;
             return new AlphaAnimation(f, f);
         }
         if (CoreRune.FW_SHELL_TRANSITION) {
-            return AnimationUtils.loadAnimation(this.mContext, R.anim.ft_avd_toarrow_rectangle_5_animation);
+            return AnimationUtils.loadAnimation(
+                    this.mContext, R.anim.ft_avd_toarrow_rectangle_5_animation);
         }
         Animation loadAnimation = AnimationUtils.loadAnimation(this.mContext, R.anim.fade_out);
-        loadAnimation.scaleCurrentDuration(this.mDisplayContent.mWmService.getWindowAnimationScaleLocked());
+        loadAnimation.scaleCurrentDuration(
+                this.mDisplayContent.mWmService.getWindowAnimationScaleLocked());
         return loadAnimation;
     }
 
@@ -214,9 +284,15 @@ public final class AsyncRotationController extends FadeAnimationController imple
         for (int size = this.mTargetWindowTokens.size() - 1; size >= 0; size--) {
             if (((Operation) this.mTargetWindowTokens.valueAt(size)).mAction == 1) {
                 WindowToken windowToken = (WindowToken) this.mTargetWindowTokens.keyAt(size);
-                for (int childCount = windowToken.getChildCount() - 1; childCount >= 0; childCount += -1) {
-                    ((WindowState) windowToken.getChildAt(childCount)).applyWithNextDraw(0, new AsyncRotationController$$ExternalSyntheticLambda3());
-                    Slog.d("AsyncRotation_WindowManager", "Sync draw for " + windowToken.getChildAt(childCount));
+                for (int childCount = windowToken.getChildCount() - 1;
+                        childCount >= 0;
+                        childCount += -1) {
+                    ((WindowState) windowToken.getChildAt(childCount))
+                            .applyWithNextDraw(
+                                    0, new AsyncRotationController$$ExternalSyntheticLambda3());
+                    Slog.d(
+                            "AsyncRotation_WindowManager",
+                            "Sync draw for " + windowToken.getChildAt(childCount));
                 }
             }
         }
@@ -226,7 +302,8 @@ public final class AsyncRotationController extends FadeAnimationController imple
 
     public final void onAllCompleted() {
         Slog.d("AsyncRotation_WindowManager", "onAllCompleted");
-        AsyncRotationController$$ExternalSyntheticLambda1 asyncRotationController$$ExternalSyntheticLambda1 = this.mTimeoutRunnable;
+        AsyncRotationController$$ExternalSyntheticLambda1
+                asyncRotationController$$ExternalSyntheticLambda1 = this.mTimeoutRunnable;
         if (asyncRotationController$$ExternalSyntheticLambda1 != null) {
             this.mService.mH.removeCallbacks(asyncRotationController$$ExternalSyntheticLambda1);
         }
@@ -252,9 +329,15 @@ public final class AsyncRotationController extends FadeAnimationController imple
         for (int size = this.mTargetWindowTokens.size() + (-1); size >= 0; size--) {
             WindowToken windowToken = (WindowToken) this.mTargetWindowTokens.keyAt(size);
             if (windowToken.isVisible()) {
-                for (int childCount = windowToken.getChildCount() - 1; childCount >= 0; childCount--) {
+                for (int childCount = windowToken.getChildCount() - 1;
+                        childCount >= 0;
+                        childCount--) {
                     WindowState windowState = (WindowState) windowToken.getChildAt(childCount);
-                    if (windowState.mHasSurface && !windowState.mDestroying && ((i = windowState.mWinAnimator.mDrawState) == 2 || i == 3 || i == 4)) {
+                    if (windowState.mHasSurface
+                            && !windowState.mDestroying
+                            && ((i = windowState.mWinAnimator.mDrawState) == 2
+                                    || i == 3
+                                    || i == 4)) {
                         displayContent.finishAsyncRotation(windowToken);
                         break;
                     }
@@ -281,44 +364,84 @@ public final class AsyncRotationController extends FadeAnimationController imple
             SurfaceControl surfaceControl = operation.mLeash;
             if (surfaceControl != null && surfaceControl.isValid()) {
                 if (this.mHasScreenRotationAnimation && operation.mAction == 2) {
-                    transaction.setAlpha(surfaceControl, FullScreenMagnificationGestureHandler.MAX_SCALE);
-                    Slog.d("AsyncRotation_WindowManager", "Setup alpha0 " + ((WindowToken) this.mTargetWindowTokens.keyAt(size)).getTopChild());
+                    transaction.setAlpha(
+                            surfaceControl, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                    Slog.d(
+                            "AsyncRotation_WindowManager",
+                            "Setup alpha0 "
+                                    + ((WindowToken) this.mTargetWindowTokens.keyAt(size))
+                                            .getTopChild());
                 } else {
                     if (this.mRotator == null) {
                         int i = this.mOriginalRotation;
                         DisplayContent displayContent = this.mDisplayContent;
-                        this.mRotator = new SeamlessRotator(i, displayContent.getWindowConfiguration().getRotation(), displayContent.mDisplayInfo, false);
+                        this.mRotator =
+                                new SeamlessRotator(
+                                        i,
+                                        displayContent.getWindowConfiguration().getRotation(),
+                                        displayContent.mDisplayInfo,
+                                        false);
                     }
                     SeamlessRotator seamlessRotator = this.mRotator;
-                    transaction.setMatrix(surfaceControl, seamlessRotator.mTransform, seamlessRotator.mFloat9);
-                    Slog.d("AsyncRotation_WindowManager", "Setup unrotate " + ((WindowToken) this.mTargetWindowTokens.keyAt(size)).getTopChild());
+                    transaction.setMatrix(
+                            surfaceControl, seamlessRotator.mTransform, seamlessRotator.mFloat9);
+                    Slog.d(
+                            "AsyncRotation_WindowManager",
+                            "Setup unrotate "
+                                    + ((WindowToken) this.mTargetWindowTokens.keyAt(size))
+                                            .getTopChild());
                 }
             }
         }
-        transaction.addTransactionCommittedListener(new HandlerExecutor(this.mService.mH), new SurfaceControl.TransactionCommittedListener() { // from class: com.android.server.wm.AsyncRotationController$$ExternalSyntheticLambda4
-            @Override // android.view.SurfaceControl.TransactionCommittedListener
-            public final void onTransactionCommitted() {
-                AsyncRotationController asyncRotationController = AsyncRotationController.this;
-                WindowManagerGlobalLock windowManagerGlobalLock = asyncRotationController.mService.mGlobalLock;
-                WindowManagerService.boostPriorityForLockedSection();
-                synchronized (windowManagerGlobalLock) {
-                    try {
-                        Slog.d("AsyncRotation_WindowManager", "Start transaction is committed");
-                        asyncRotationController.mIsStartTransactionCommitted = true;
-                        for (int size2 = asyncRotationController.mTargetWindowTokens.size() - 1; size2 >= 0; size2--) {
-                            if (((AsyncRotationController.Operation) asyncRotationController.mTargetWindowTokens.valueAt(size2)).mIsCompletionPending) {
-                                Slog.d("AsyncRotation_WindowManager", "Continue pending completion " + ((WindowToken) asyncRotationController.mTargetWindowTokens.keyAt(size2)).getTopChild());
-                                asyncRotationController.mDisplayContent.finishAsyncRotation((WindowToken) asyncRotationController.mTargetWindowTokens.keyAt(size2));
+        transaction.addTransactionCommittedListener(
+                new HandlerExecutor(this.mService.mH),
+                new SurfaceControl
+                        .TransactionCommittedListener() { // from class:
+                                                          // com.android.server.wm.AsyncRotationController$$ExternalSyntheticLambda4
+                    @Override // android.view.SurfaceControl.TransactionCommittedListener
+                    public final void onTransactionCommitted() {
+                        AsyncRotationController asyncRotationController =
+                                AsyncRotationController.this;
+                        WindowManagerGlobalLock windowManagerGlobalLock =
+                                asyncRotationController.mService.mGlobalLock;
+                        WindowManagerService.boostPriorityForLockedSection();
+                        synchronized (windowManagerGlobalLock) {
+                            try {
+                                Slog.d(
+                                        "AsyncRotation_WindowManager",
+                                        "Start transaction is committed");
+                                asyncRotationController.mIsStartTransactionCommitted = true;
+                                for (int size2 =
+                                                asyncRotationController.mTargetWindowTokens.size()
+                                                        - 1;
+                                        size2 >= 0;
+                                        size2--) {
+                                    if (((AsyncRotationController.Operation)
+                                                    asyncRotationController.mTargetWindowTokens
+                                                            .valueAt(size2))
+                                            .mIsCompletionPending) {
+                                        Slog.d(
+                                                "AsyncRotation_WindowManager",
+                                                "Continue pending completion "
+                                                        + ((WindowToken)
+                                                                        asyncRotationController
+                                                                                .mTargetWindowTokens
+                                                                                .keyAt(size2))
+                                                                .getTopChild());
+                                        asyncRotationController.mDisplayContent.finishAsyncRotation(
+                                                (WindowToken)
+                                                        asyncRotationController.mTargetWindowTokens
+                                                                .keyAt(size2));
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                WindowManagerService.resetPriorityAfterLockedSection();
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
                         WindowManagerService.resetPriorityAfterLockedSection();
-                        throw th;
                     }
-                }
-                WindowManagerService.resetPriorityAfterLockedSection();
-            }
-        });
+                });
         this.mIsStartTransactionPrepared = true;
     }
 }

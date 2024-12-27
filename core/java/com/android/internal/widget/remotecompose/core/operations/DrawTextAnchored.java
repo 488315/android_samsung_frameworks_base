@@ -1,6 +1,7 @@
 package com.android.internal.widget.remotecompose.core.operations;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.widget.remotecompose.core.CompanionOperation;
 import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.PaintContext;
@@ -8,6 +9,7 @@ import com.android.internal.widget.remotecompose.core.PaintOperation;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.VariableSupport;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -44,8 +46,14 @@ public class DrawTextAnchored extends PaintOperation implements VariableSupport 
     public void updateVariables(RemoteContext context) {
         this.mOutX = Float.isNaN(this.mX) ? context.getFloat(Utils.idFromNan(this.mX)) : this.mX;
         this.mOutY = Float.isNaN(this.mY) ? context.getFloat(Utils.idFromNan(this.mY)) : this.mY;
-        this.mOutPanX = Float.isNaN(this.mPanX) ? context.getFloat(Utils.idFromNan(this.mPanX)) : this.mPanX;
-        this.mOutPanY = Float.isNaN(this.mPanY) ? context.getFloat(Utils.idFromNan(this.mPanY)) : this.mPanY;
+        this.mOutPanX =
+                Float.isNaN(this.mPanX)
+                        ? context.getFloat(Utils.idFromNan(this.mPanX))
+                        : this.mPanX;
+        this.mOutPanY =
+                Float.isNaN(this.mPanY)
+                        ? context.getFloat(Utils.idFromNan(this.mPanY))
+                        : this.mPanY;
     }
 
     @Override // com.android.internal.widget.remotecompose.core.VariableSupport
@@ -66,23 +74,36 @@ public class DrawTextAnchored extends PaintOperation implements VariableSupport 
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
     public void write(WireBuffer buffer) {
-        COMPANION.apply(buffer, this.mTextID, this.mX, this.mY, this.mPanX, this.mPanY, this.mFlags);
+        COMPANION.apply(
+                buffer, this.mTextID, this.mX, this.mY, this.mPanX, this.mPanY, this.mFlags);
     }
 
     public String toString() {
-        return "DrawTextAnchored [" + this.mTextID + "] " + floatToStr(this.mX) + ", " + floatToStr(this.mY) + ", " + floatToStr(this.mPanX) + ", " + floatToStr(this.mPanY) + ", " + Integer.toBinaryString(this.mFlags);
+        return "DrawTextAnchored ["
+                + this.mTextID
+                + "] "
+                + floatToStr(this.mX)
+                + ", "
+                + floatToStr(this.mY)
+                + ", "
+                + floatToStr(this.mPanX)
+                + ", "
+                + floatToStr(this.mPanY)
+                + ", "
+                + Integer.toBinaryString(this.mFlags);
     }
 
     private static String floatToStr(float v) {
         if (Float.isNaN(v)) {
-            return NavigationBarInflaterView.SIZE_MOD_START + Utils.idFromNan(v) + NavigationBarInflaterView.SIZE_MOD_END;
+            return NavigationBarInflaterView.SIZE_MOD_START
+                    + Utils.idFromNan(v)
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
         return Float.toString(v);
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public void read(WireBuffer buffer, List<Operation> operations) {
@@ -106,7 +127,14 @@ public class DrawTextAnchored extends PaintOperation implements VariableSupport 
             return 0;
         }
 
-        public void apply(WireBuffer buffer, int textID, float x, float y, float panX, float panY, int flags) {
+        public void apply(
+                WireBuffer buffer,
+                int textID,
+                float x,
+                float y,
+                float panX,
+                float panY,
+                int flags) {
             buffer.start(133);
             buffer.writeInt(textID);
             buffer.writeFloat(x);

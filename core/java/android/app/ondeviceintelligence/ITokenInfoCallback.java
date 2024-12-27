@@ -17,12 +17,11 @@ public interface ITokenInfoCallback extends IInterface {
 
     public static class Default implements ITokenInfoCallback {
         @Override // android.app.ondeviceintelligence.ITokenInfoCallback
-        public void onSuccess(TokenInfo tokenInfo) throws RemoteException {
-        }
+        public void onSuccess(TokenInfo tokenInfo) throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.ITokenInfoCallback
-        public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams) throws RemoteException {
-        }
+        public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface ITokenInfoCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITokenInfoCallback {
+    public abstract static class Stub extends Binder implements ITokenInfoCallback {
         static final int TRANSACTION_onFailure = 3;
         static final int TRANSACTION_onSuccess = 2;
 
@@ -71,7 +70,8 @@ public interface ITokenInfoCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITokenInfoCallback.DESCRIPTOR);
             }
@@ -88,7 +88,8 @@ public interface ITokenInfoCallback extends IInterface {
                 case 3:
                     int _arg02 = data.readInt();
                     String _arg1 = data.readString();
-                    PersistableBundle _arg2 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg2 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg02, _arg1, _arg2);
                     return true;
@@ -126,7 +127,8 @@ public interface ITokenInfoCallback extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.ITokenInfoCallback
-            public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams) throws RemoteException {
+            public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITokenInfoCallback.DESCRIPTOR);

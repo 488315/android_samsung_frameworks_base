@@ -5,7 +5,9 @@ import android.media.AudioAttributes;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,34 +24,37 @@ public final class AudioVolumeGroup implements Parcelable {
     private int[] mLegacyStreamTypes;
     private final String mName;
     private static final Object sLock = new Object();
-    public static final Parcelable.Creator<AudioVolumeGroup> CREATOR = new Parcelable.Creator<AudioVolumeGroup>() { // from class: android.media.audiopolicy.AudioVolumeGroup.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioVolumeGroup createFromParcel(Parcel in) {
-            Preconditions.checkNotNull(in, "in Parcel must not be null");
-            String name = in.readString();
-            int id = in.readInt();
-            int nbAttributes = in.readInt();
-            AudioAttributes[] audioAttributes = new AudioAttributes[nbAttributes];
-            for (int index = 0; index < nbAttributes; index++) {
-                audioAttributes[index] = AudioAttributes.CREATOR.createFromParcel(in);
-            }
-            int nbStreamTypes = in.readInt();
-            int[] streamTypes = new int[nbStreamTypes];
-            for (int index2 = 0; index2 < nbStreamTypes; index2++) {
-                streamTypes[index2] = in.readInt();
-            }
-            return new AudioVolumeGroup(name, id, audioAttributes, streamTypes);
-        }
+    public static final Parcelable.Creator<AudioVolumeGroup> CREATOR =
+            new Parcelable.Creator<AudioVolumeGroup>() { // from class:
+                // android.media.audiopolicy.AudioVolumeGroup.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioVolumeGroup createFromParcel(Parcel in) {
+                    Preconditions.checkNotNull(in, "in Parcel must not be null");
+                    String name = in.readString();
+                    int id = in.readInt();
+                    int nbAttributes = in.readInt();
+                    AudioAttributes[] audioAttributes = new AudioAttributes[nbAttributes];
+                    for (int index = 0; index < nbAttributes; index++) {
+                        audioAttributes[index] = AudioAttributes.CREATOR.createFromParcel(in);
+                    }
+                    int nbStreamTypes = in.readInt();
+                    int[] streamTypes = new int[nbStreamTypes];
+                    for (int index2 = 0; index2 < nbStreamTypes; index2++) {
+                        streamTypes[index2] = in.readInt();
+                    }
+                    return new AudioVolumeGroup(name, id, audioAttributes, streamTypes);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioVolumeGroup[] newArray(int size) {
-            return new AudioVolumeGroup[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioVolumeGroup[] newArray(int size) {
+                    return new AudioVolumeGroup[size];
+                }
+            };
 
-    private static native int native_list_audio_volume_groups(ArrayList<AudioVolumeGroup> arrayList);
+    private static native int native_list_audio_volume_groups(
+            ArrayList<AudioVolumeGroup> arrayList);
 
     public static List<AudioVolumeGroup> getAudioVolumeGroups() {
         if (sAudioVolumeGroups == null) {
@@ -71,7 +76,8 @@ public final class AudioVolumeGroup implements Parcelable {
         return avgList;
     }
 
-    AudioVolumeGroup(String name, int id, AudioAttributes[] audioAttributes, int[] legacyStreamTypes) {
+    AudioVolumeGroup(
+            String name, int id, AudioAttributes[] audioAttributes, int[] legacyStreamTypes) {
         Preconditions.checkNotNull(name, "name must not be null");
         Preconditions.checkNotNull(audioAttributes, "audioAttributes must not be null");
         Preconditions.checkNotNull(legacyStreamTypes, "legacyStreamTypes must not be null");
@@ -89,14 +95,20 @@ public final class AudioVolumeGroup implements Parcelable {
             return false;
         }
         AudioVolumeGroup thatAvg = (AudioVolumeGroup) o;
-        if (this.mName.equals(thatAvg.mName) && this.mId == thatAvg.mId && Arrays.equals(this.mAudioAttributes, thatAvg.mAudioAttributes)) {
+        if (this.mName.equals(thatAvg.mName)
+                && this.mId == thatAvg.mId
+                && Arrays.equals(this.mAudioAttributes, thatAvg.mAudioAttributes)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mName, Integer.valueOf(this.mId), Integer.valueOf(Arrays.hashCode(this.mAudioAttributes)), Integer.valueOf(Arrays.hashCode(this.mLegacyStreamTypes)));
+        return Objects.hash(
+                this.mName,
+                Integer.valueOf(this.mId),
+                Integer.valueOf(Arrays.hashCode(this.mAudioAttributes)),
+                Integer.valueOf(Arrays.hashCode(this.mLegacyStreamTypes)));
     }
 
     public List<AudioAttributes> getAudioAttributes() {

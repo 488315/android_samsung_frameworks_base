@@ -3,6 +3,7 @@ package android.net.wifi.nl80211;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,28 +11,30 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class PnoSettings implements Parcelable {
-    public static final Parcelable.Creator<PnoSettings> CREATOR = new Parcelable.Creator<PnoSettings>() { // from class: android.net.wifi.nl80211.PnoSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PnoSettings createFromParcel(Parcel in) {
-            PnoSettings result = new PnoSettings();
-            result.mIntervalMs = in.readLong();
-            result.mMin2gRssi = in.readInt();
-            result.mMin5gRssi = in.readInt();
-            result.mMin6gRssi = in.readInt();
-            result.mScanIterations = in.readInt();
-            result.mScanIntervalMultiplier = in.readInt();
-            result.mPnoNetworks = new ArrayList();
-            in.readTypedList(result.mPnoNetworks, PnoNetwork.CREATOR);
-            return result;
-        }
+    public static final Parcelable.Creator<PnoSettings> CREATOR =
+            new Parcelable.Creator<
+                    PnoSettings>() { // from class: android.net.wifi.nl80211.PnoSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PnoSettings createFromParcel(Parcel in) {
+                    PnoSettings result = new PnoSettings();
+                    result.mIntervalMs = in.readLong();
+                    result.mMin2gRssi = in.readInt();
+                    result.mMin5gRssi = in.readInt();
+                    result.mMin6gRssi = in.readInt();
+                    result.mScanIterations = in.readInt();
+                    result.mScanIntervalMultiplier = in.readInt();
+                    result.mPnoNetworks = new ArrayList();
+                    in.readTypedList(result.mPnoNetworks, PnoNetwork.CREATOR);
+                    return result;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PnoSettings[] newArray(int size) {
-            return new PnoSettings[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PnoSettings[] newArray(int size) {
+                    return new PnoSettings[size];
+                }
+            };
     private long mIntervalMs;
     private int mMin2gRssi;
     private int mMin5gRssi;
@@ -102,13 +105,26 @@ public final class PnoSettings implements Parcelable {
             return true;
         }
         if ((rhs instanceof PnoSettings) && (settings = (PnoSettings) rhs) != null) {
-            return this.mIntervalMs == settings.mIntervalMs && this.mMin2gRssi == settings.mMin2gRssi && this.mMin5gRssi == settings.mMin5gRssi && this.mMin6gRssi == settings.mMin6gRssi && this.mScanIterations == settings.mScanIterations && this.mScanIntervalMultiplier == settings.mScanIntervalMultiplier && this.mPnoNetworks.equals(settings.mPnoNetworks);
+            return this.mIntervalMs == settings.mIntervalMs
+                    && this.mMin2gRssi == settings.mMin2gRssi
+                    && this.mMin5gRssi == settings.mMin5gRssi
+                    && this.mMin6gRssi == settings.mMin6gRssi
+                    && this.mScanIterations == settings.mScanIterations
+                    && this.mScanIntervalMultiplier == settings.mScanIntervalMultiplier
+                    && this.mPnoNetworks.equals(settings.mPnoNetworks);
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Long.valueOf(this.mIntervalMs), Integer.valueOf(this.mMin2gRssi), Integer.valueOf(this.mMin5gRssi), Integer.valueOf(this.mMin6gRssi), Integer.valueOf(this.mScanIterations), Integer.valueOf(this.mScanIntervalMultiplier), this.mPnoNetworks);
+        return Objects.hash(
+                Long.valueOf(this.mIntervalMs),
+                Integer.valueOf(this.mMin2gRssi),
+                Integer.valueOf(this.mMin5gRssi),
+                Integer.valueOf(this.mMin6gRssi),
+                Integer.valueOf(this.mScanIterations),
+                Integer.valueOf(this.mScanIntervalMultiplier),
+                this.mPnoNetworks);
     }
 
     @Override // android.os.Parcelable

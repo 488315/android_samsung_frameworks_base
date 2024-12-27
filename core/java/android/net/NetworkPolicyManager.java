@@ -4,8 +4,6 @@ import android.annotation.SystemApi;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.net.INetworkPolicyListener;
-import android.net.NetworkPolicyManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.os.Process;
@@ -15,8 +13,10 @@ import android.telephony.SubscriptionPlan;
 import android.util.DebugUtils;
 import android.util.Pair;
 import android.util.Range;
+
 import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.ZonedDateTime;
@@ -79,12 +79,13 @@ public class NetworkPolicyManager {
     public static final int TOP_THRESHOLD_STATE = 3;
     private final Context mContext;
     private INetworkPolicyManager mService;
-    private final Map<SubscriptionCallback, SubscriptionCallbackProxy> mSubscriptionCallbackMap = new ConcurrentHashMap();
-    private final Map<NetworkPolicyCallback, NetworkPolicyCallbackProxy> mNetworkPolicyCallbackMap = new ConcurrentHashMap();
+    private final Map<SubscriptionCallback, SubscriptionCallbackProxy> mSubscriptionCallbackMap =
+            new ConcurrentHashMap();
+    private final Map<NetworkPolicyCallback, NetworkPolicyCallbackProxy> mNetworkPolicyCallbackMap =
+            new ConcurrentHashMap();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SubscriptionOverrideMask {
-    }
+    public @interface SubscriptionOverrideMask {}
 
     public NetworkPolicyManager(Context context, INetworkPolicyManager service) {
         if (service == null) {
@@ -217,17 +218,34 @@ public class NetworkPolicyManager {
         }
     }
 
-    public void setSubscriptionOverride(int subId, int overrideMask, int overrideValue, int[] networkTypes, long expirationDurationMillis, String callingPackage) {
+    public void setSubscriptionOverride(
+            int subId,
+            int overrideMask,
+            int overrideValue,
+            int[] networkTypes,
+            long expirationDurationMillis,
+            String callingPackage) {
         try {
-            this.mService.setSubscriptionOverride(subId, overrideMask, overrideValue, networkTypes, expirationDurationMillis, callingPackage);
+            this.mService.setSubscriptionOverride(
+                    subId,
+                    overrideMask,
+                    overrideValue,
+                    networkTypes,
+                    expirationDurationMillis,
+                    callingPackage);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void setSubscriptionPlans(int subId, SubscriptionPlan[] plans, long expirationDurationMillis, String callingPackage) {
+    public void setSubscriptionPlans(
+            int subId,
+            SubscriptionPlan[] plans,
+            long expirationDurationMillis,
+            String callingPackage) {
         try {
-            this.mService.setSubscriptionPlans(subId, plans, expirationDurationMillis, callingPackage);
+            this.mService.setSubscriptionPlans(
+                    subId, plans, expirationDurationMillis, callingPackage);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -304,7 +322,10 @@ public class NetworkPolicyManager {
     @Deprecated
     public static Iterator<Pair<ZonedDateTime, ZonedDateTime>> cycleIterator(NetworkPolicy policy) {
         final Iterator<Range<ZonedDateTime>> it = policy.cycleIterator();
-        return new Iterator<Pair<ZonedDateTime, ZonedDateTime>>() { // from class: android.net.NetworkPolicyManager.1
+        return new Iterator<
+                Pair<
+                        ZonedDateTime,
+                        ZonedDateTime>>() { // from class: android.net.NetworkPolicyManager.1
             @Override // java.util.Iterator
             public boolean hasNext() {
                 return it.hasNext();
@@ -346,7 +367,8 @@ public class NetworkPolicyManager {
         if (uidPolicies == 0) {
             string.append(KeyProperties.DIGEST_NONE);
         } else {
-            string.append(DebugUtils.flagsToString(NetworkPolicyManager.class, "POLICY_", uidPolicies));
+            string.append(
+                    DebugUtils.flagsToString(NetworkPolicyManager.class, "POLICY_", uidPolicies));
         }
         string.append(NavigationBarInflaterView.KEY_CODE_END);
         return string.toString();
@@ -373,7 +395,8 @@ public class NetworkPolicyManager {
         return isProcStateAllowedWhileIdleOrPowerSaveMode(uidState.procState, uidState.capability);
     }
 
-    public static boolean isProcStateAllowedWhileIdleOrPowerSaveMode(int procState, int capability) {
+    public static boolean isProcStateAllowedWhileIdleOrPowerSaveMode(
+            int procState, int capability) {
         if (procState == -1) {
             return false;
         }
@@ -398,7 +421,8 @@ public class NetworkPolicyManager {
         return isProcStateAllowedWhileOnRestrictBackground(uidState.procState, uidState.capability);
     }
 
-    public static boolean isProcStateAllowedWhileOnRestrictBackground(int procState, int capabilities) {
+    public static boolean isProcStateAllowedWhileOnRestrictBackground(
+            int procState, int capabilities) {
         if (procState == -1) {
             return false;
         }
@@ -432,7 +456,8 @@ public class NetworkPolicyManager {
     }
 
     public static String resolveNetworkId(WifiConfiguration config) {
-        return WifiInfo.sanitizeSsid(config.isPasspoint() ? config.providerFriendlyName : config.SSID);
+        return WifiInfo.sanitizeSsid(
+                config.isPasspoint() ? config.providerFriendlyName : config.SSID);
     }
 
     public static String resolveNetworkId(String ssid) {
@@ -452,7 +477,8 @@ public class NetworkPolicyManager {
         if (callback == null) {
             throw new NullPointerException("Callback cannot be null.");
         }
-        NetworkPolicyCallbackProxy callbackProxy = new NetworkPolicyCallbackProxy(executor, callback);
+        NetworkPolicyCallbackProxy callbackProxy =
+                new NetworkPolicyCallbackProxy(executor, callback);
         registerListener(callbackProxy);
         this.mNetworkPolicyCallbackMap.put(callback, callbackProxy);
     }
@@ -472,8 +498,7 @@ public class NetworkPolicyManager {
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public interface NetworkPolicyCallback {
         @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-        default void onUidBlockedReasonChanged(int uid, int blockedReasons) {
-        }
+        default void onUidBlockedReasonChanged(int uid, int blockedReasons) {}
     }
 
     public static class NetworkPolicyCallbackProxy extends Listener {
@@ -488,31 +513,43 @@ public class NetworkPolicyManager {
         @Override // android.net.NetworkPolicyManager.Listener, android.net.INetworkPolicyListener
         public void onBlockedReasonChanged(int uid, int oldBlockedReasons, int newBlockedReasons) {
             if (oldBlockedReasons != newBlockedReasons) {
-                NetworkPolicyManager.dispatchOnUidBlockedReasonChanged(this.mExecutor, this.mCallback, uid, newBlockedReasons);
+                NetworkPolicyManager.dispatchOnUidBlockedReasonChanged(
+                        this.mExecutor, this.mCallback, uid, newBlockedReasons);
             }
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static void dispatchOnUidBlockedReasonChanged(Executor executor, NetworkPolicyCallback callback, int uid, int blockedReasons) {
+    public static void dispatchOnUidBlockedReasonChanged(
+            Executor executor, NetworkPolicyCallback callback, int uid, int blockedReasons) {
         if (executor == null) {
             callback.onUidBlockedReasonChanged(uid, blockedReasons);
         } else {
-            executor.execute(PooledLambda.obtainRunnable(new TriConsumer() { // from class: android.net.NetworkPolicyManager$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((NetworkPolicyManager.NetworkPolicyCallback) obj).onUidBlockedReasonChanged(((Integer) obj2).intValue(), ((Integer) obj3).intValue());
-                }
-            }, callback, Integer.valueOf(uid), Integer.valueOf(blockedReasons)).recycleOnUse());
+            executor.execute(
+                    PooledLambda.obtainRunnable(
+                                    new TriConsumer() { // from class:
+                                                        // android.net.NetworkPolicyManager$$ExternalSyntheticLambda0
+                                        @Override // com.android.internal.util.function.TriConsumer
+                                        public final void accept(
+                                                Object obj, Object obj2, Object obj3) {
+                                            ((NetworkPolicyManager.NetworkPolicyCallback) obj)
+                                                    .onUidBlockedReasonChanged(
+                                                            ((Integer) obj2).intValue(),
+                                                            ((Integer) obj3).intValue());
+                                        }
+                                    },
+                                    callback,
+                                    Integer.valueOf(uid),
+                                    Integer.valueOf(blockedReasons))
+                            .recycleOnUse());
         }
     }
 
     public static class SubscriptionCallback {
-        public void onSubscriptionOverride(int subId, int overrideMask, int overrideValue, int[] networkTypes) {
-        }
+        public void onSubscriptionOverride(
+                int subId, int overrideMask, int overrideValue, int[] networkTypes) {}
 
-        public void onSubscriptionPlansChanged(int subId, SubscriptionPlan[] plans) {
-        }
+        public void onSubscriptionPlansChanged(int subId, SubscriptionPlan[] plans) {}
     }
 
     public class SubscriptionCallbackProxy extends Listener {
@@ -523,7 +560,8 @@ public class NetworkPolicyManager {
         }
 
         @Override // android.net.NetworkPolicyManager.Listener, android.net.INetworkPolicyListener
-        public void onSubscriptionOverride(int subId, int overrideMask, int overrideValue, int[] networkTypes) {
+        public void onSubscriptionOverride(
+                int subId, int overrideMask, int overrideValue, int[] networkTypes) {
             this.mCallback.onSubscriptionOverride(subId, overrideMask, overrideValue, networkTypes);
         }
 
@@ -535,32 +573,26 @@ public class NetworkPolicyManager {
 
     public static class Listener extends INetworkPolicyListener.Stub {
         @Override // android.net.INetworkPolicyListener
-        public void onUidRulesChanged(int uid, int uidRules) {
-        }
+        public void onUidRulesChanged(int uid, int uidRules) {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onMeteredIfacesChanged(String[] meteredIfaces) {
-        }
+        public void onMeteredIfacesChanged(String[] meteredIfaces) {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onRestrictBackgroundChanged(boolean restrictBackground) {
-        }
+        public void onRestrictBackgroundChanged(boolean restrictBackground) {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onUidPoliciesChanged(int uid, int uidPolicies) {
-        }
+        public void onUidPoliciesChanged(int uid, int uidPolicies) {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onSubscriptionOverride(int subId, int overrideMask, int overrideValue, int[] networkTypes) {
-        }
+        public void onSubscriptionOverride(
+                int subId, int overrideMask, int overrideValue, int[] networkTypes) {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onSubscriptionPlansChanged(int subId, SubscriptionPlan[] plans) {
-        }
+        public void onSubscriptionPlansChanged(int subId, SubscriptionPlan[] plans) {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onBlockedReasonChanged(int uid, int oldBlockedReasons, int newBlockedReasons) {
-        }
+        public void onBlockedReasonChanged(int uid, int oldBlockedReasons, int newBlockedReasons) {}
     }
 
     public int[] getAllFirewallRuleMobileData() {

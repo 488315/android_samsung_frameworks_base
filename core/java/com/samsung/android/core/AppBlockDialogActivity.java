@@ -12,9 +12,10 @@ import android.util.TypedValue;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import com.android.internal.R;
 import com.android.internal.app.AlertActivity;
-import com.samsung.android.core.AppJumpBlockTool;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,11 +48,16 @@ public class AppBlockDialogActivity extends AlertActivity implements AutoCloseab
         }
         this.mCallingPid = data.getInt("callingPid");
         this.mCallingUid = data.getInt("callingUid");
-        this.targetIntents = Arrays.asList((Intent[]) data.getParcelableArray("targetIntents", Intent.class));
+        this.targetIntents =
+                Arrays.asList((Intent[]) data.getParcelableArray("targetIntents", Intent.class));
         this.requestCode = data.getInt("requestCode", -1);
         this.options = (Bundle) data.getParcelable("options");
         this.sourceAppInfo = (AppJumpBlockTool.AppInfo) data.getParcelable("sourceAppInfo");
-        this.blockedAppList = Arrays.asList((AppJumpBlockTool.AppInfo[]) data.getParcelableArray("blockedAppList", AppJumpBlockTool.AppInfo.class));
+        this.blockedAppList =
+                Arrays.asList(
+                        (AppJumpBlockTool.AppInfo[])
+                                data.getParcelableArray(
+                                        "blockedAppList", AppJumpBlockTool.AppInfo.class));
         if (this.blockedAppList.isEmpty()) {
             Log.i("AppJumpBlockTool", "blockedAppList:isEmpty");
             this.isClickAllow = true;
@@ -73,31 +79,53 @@ public class AppBlockDialogActivity extends AlertActivity implements AutoCloseab
                 targetAppNames.append("、");
             }
         }
-        String message = getString(R.string.app_block_content, this.sourceAppInfo.appName, targetAppNames.toString());
-        AlertDialog alertDialog = new AlertDialog.Builder(this).setPositiveButton(R.string.app_block_button_open, new DialogInterface.OnClickListener() { // from class: com.samsung.android.core.AppBlockDialogActivity.2
-            @Override // android.content.DialogInterface.OnClickListener
-            public void onClick(DialogInterface dialog, int which) {
-                Log.i("AppJumpBlockTool", "onClickAllow");
-                AppBlockDialogActivity.this.isClickAllow = true;
-                if (checkBox.isChecked()) {
-                    for (AppJumpBlockTool.AppInfo appInfo2 : AppBlockDialogActivity.this.blockedAppList) {
-                        AppBlockDialogActivity.this.alwaysAllowPackageNameList.add(appInfo2.packageName);
-                    }
-                }
-                AppBlockDialogActivity.this.sendAllowResult();
-            }
-        }).setOnDismissListener(new DialogInterface.OnDismissListener() { // from class: com.samsung.android.core.AppBlockDialogActivity.1
-            @Override // android.content.DialogInterface.OnDismissListener
-            public void onDismiss(DialogInterface dialog) {
-                Log.i("AppJumpBlockTool", "onDismiss");
-                if (!AppBlockDialogActivity.this.isClickAllow) {
-                    AppBlockDialogActivity.this.finish();
-                }
-            }
-        }).setNegativeButton(17039360, (DialogInterface.OnClickListener) null).setMessage(message).setView(checkBox).show();
+        String message =
+                getString(
+                        R.string.app_block_content,
+                        this.sourceAppInfo.appName,
+                        targetAppNames.toString());
+        AlertDialog alertDialog =
+                new AlertDialog.Builder(this)
+                        .setPositiveButton(
+                                R.string.app_block_button_open,
+                                new DialogInterface
+                                        .OnClickListener() { // from class:
+                                                             // com.samsung.android.core.AppBlockDialogActivity.2
+                                    @Override // android.content.DialogInterface.OnClickListener
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Log.i("AppJumpBlockTool", "onClickAllow");
+                                        AppBlockDialogActivity.this.isClickAllow = true;
+                                        if (checkBox.isChecked()) {
+                                            for (AppJumpBlockTool.AppInfo appInfo2 :
+                                                    AppBlockDialogActivity.this.blockedAppList) {
+                                                AppBlockDialogActivity.this
+                                                        .alwaysAllowPackageNameList.add(
+                                                        appInfo2.packageName);
+                                            }
+                                        }
+                                        AppBlockDialogActivity.this.sendAllowResult();
+                                    }
+                                })
+                        .setOnDismissListener(
+                                new DialogInterface
+                                        .OnDismissListener() { // from class:
+                                                               // com.samsung.android.core.AppBlockDialogActivity.1
+                                    @Override // android.content.DialogInterface.OnDismissListener
+                                    public void onDismiss(DialogInterface dialog) {
+                                        Log.i("AppJumpBlockTool", "onDismiss");
+                                        if (!AppBlockDialogActivity.this.isClickAllow) {
+                                            AppBlockDialogActivity.this.finish();
+                                        }
+                                    }
+                                })
+                        .setNegativeButton(17039360, (DialogInterface.OnClickListener) null)
+                        .setMessage(message)
+                        .setView(checkBox)
+                        .show();
         TextView messageView = (TextView) alertDialog.getWindow().findViewById(16908299);
         checkBox.setTextColor(messageView.getCurrentTextColor());
-        int paddingLeft = (int) TypedValue.applyDimension(1, 17.0f, getResources().getDisplayMetrics());
+        int paddingLeft =
+                (int) TypedValue.applyDimension(1, 17.0f, getResources().getDisplayMetrics());
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) checkBox.getLayoutParams();
         params.setMargins(paddingLeft, 0, 0, 0);
         checkBox.setLayoutParams(params);
@@ -109,7 +137,8 @@ public class AppBlockDialogActivity extends AlertActivity implements AutoCloseab
 
     /* JADX INFO: Access modifiers changed from: private */
     public final void sendAllowResult() {
-        AppJumpBlockTool.addAlwaysAllowList(this, this.sourceAppInfo.packageName, this.alwaysAllowPackageNameList);
+        AppJumpBlockTool.addAlwaysAllowList(
+                this, this.sourceAppInfo.packageName, this.alwaysAllowPackageNameList);
         sendResult(AppJumpBlockTool.BlockDialogReceiver.RESULT_ALLOW);
     }
 
@@ -132,12 +161,17 @@ public class AppBlockDialogActivity extends AlertActivity implements AutoCloseab
     }
 
     private void delayFinish() {
-        getWindow().getDecorView().postDelayed(new Runnable() { // from class: com.samsung.android.core.AppBlockDialogActivity.3
-            @Override // java.lang.Runnable
-            public void run() {
-                AppBlockDialogActivity.this.finish();
-            }
-        }, 200L);
+        getWindow()
+                .getDecorView()
+                .postDelayed(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.core.AppBlockDialogActivity.3
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                AppBlockDialogActivity.this.finish();
+                            }
+                        },
+                        200L);
     }
 
     @Override // android.app.Activity
@@ -154,6 +188,5 @@ public class AppBlockDialogActivity extends AlertActivity implements AutoCloseab
     }
 
     @Override // java.lang.AutoCloseable
-    public void close() throws Exception {
-    }
+    public void close() throws Exception {}
 }

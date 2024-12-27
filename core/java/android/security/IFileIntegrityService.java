@@ -15,13 +15,16 @@ import android.os.RemoteException;
 public interface IFileIntegrityService extends IInterface {
     public static final String DESCRIPTOR = "android.security.IFileIntegrityService";
 
-    IInstalld.IFsveritySetupAuthToken createAuthToken(ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
+    IInstalld.IFsveritySetupAuthToken createAuthToken(ParcelFileDescriptor parcelFileDescriptor)
+            throws RemoteException;
 
     boolean isApkVeritySupported() throws RemoteException;
 
     boolean isAppSourceCertificateTrusted(byte[] bArr, String str) throws RemoteException;
 
-    int setupFsverity(IInstalld.IFsveritySetupAuthToken iFsveritySetupAuthToken, String str, String str2) throws RemoteException;
+    int setupFsverity(
+            IInstalld.IFsveritySetupAuthToken iFsveritySetupAuthToken, String str, String str2)
+            throws RemoteException;
 
     public static class Default implements IFileIntegrityService {
         @Override // android.security.IFileIntegrityService
@@ -30,17 +33,21 @@ public interface IFileIntegrityService extends IInterface {
         }
 
         @Override // android.security.IFileIntegrityService
-        public boolean isAppSourceCertificateTrusted(byte[] certificateBytes, String packageName) throws RemoteException {
+        public boolean isAppSourceCertificateTrusted(byte[] certificateBytes, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.security.IFileIntegrityService
-        public IInstalld.IFsveritySetupAuthToken createAuthToken(ParcelFileDescriptor authFd) throws RemoteException {
+        public IInstalld.IFsveritySetupAuthToken createAuthToken(ParcelFileDescriptor authFd)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.security.IFileIntegrityService
-        public int setupFsverity(IInstalld.IFsveritySetupAuthToken authToken, String filePath, String packageName) throws RemoteException {
+        public int setupFsverity(
+                IInstalld.IFsveritySetupAuthToken authToken, String filePath, String packageName)
+                throws RemoteException {
             return 0;
         }
 
@@ -50,7 +57,7 @@ public interface IFileIntegrityService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFileIntegrityService {
+    public abstract static class Stub extends Binder implements IFileIntegrityService {
         static final int TRANSACTION_createAuthToken = 3;
         static final int TRANSACTION_isApkVeritySupported = 1;
         static final int TRANSACTION_isAppSourceCertificateTrusted = 2;
@@ -67,7 +74,9 @@ public interface IFileIntegrityService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IFileIntegrityService asInterface(IBinder obj) {
@@ -107,7 +116,8 @@ public interface IFileIntegrityService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFileIntegrityService.DESCRIPTOR);
             }
@@ -130,14 +140,18 @@ public interface IFileIntegrityService extends IInterface {
                     reply.writeBoolean(_result2);
                     return true;
                 case 3:
-                    ParcelFileDescriptor _arg02 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg02 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     IInstalld.IFsveritySetupAuthToken _result3 = createAuthToken(_arg02);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result3);
                     return true;
                 case 4:
-                    IInstalld.IFsveritySetupAuthToken _arg03 = IInstalld.IFsveritySetupAuthToken.Stub.asInterface(data.readStrongBinder());
+                    IInstalld.IFsveritySetupAuthToken _arg03 =
+                            IInstalld.IFsveritySetupAuthToken.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg12 = data.readString();
                     String _arg2 = data.readString();
                     data.enforceNoDataAvail();
@@ -183,7 +197,8 @@ public interface IFileIntegrityService extends IInterface {
             }
 
             @Override // android.security.IFileIntegrityService
-            public boolean isAppSourceCertificateTrusted(byte[] certificateBytes, String packageName) throws RemoteException {
+            public boolean isAppSourceCertificateTrusted(
+                    byte[] certificateBytes, String packageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -201,7 +216,8 @@ public interface IFileIntegrityService extends IInterface {
             }
 
             @Override // android.security.IFileIntegrityService
-            public IInstalld.IFsveritySetupAuthToken createAuthToken(ParcelFileDescriptor authFd) throws RemoteException {
+            public IInstalld.IFsveritySetupAuthToken createAuthToken(ParcelFileDescriptor authFd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -209,7 +225,9 @@ public interface IFileIntegrityService extends IInterface {
                     _data.writeTypedObject(authFd, 0);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    IInstalld.IFsveritySetupAuthToken _result = IInstalld.IFsveritySetupAuthToken.Stub.asInterface(_reply.readStrongBinder());
+                    IInstalld.IFsveritySetupAuthToken _result =
+                            IInstalld.IFsveritySetupAuthToken.Stub.asInterface(
+                                    _reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -218,7 +236,11 @@ public interface IFileIntegrityService extends IInterface {
             }
 
             @Override // android.security.IFileIntegrityService
-            public int setupFsverity(IInstalld.IFsveritySetupAuthToken authToken, String filePath, String packageName) throws RemoteException {
+            public int setupFsverity(
+                    IInstalld.IFsveritySetupAuthToken authToken,
+                    String filePath,
+                    String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -238,7 +260,8 @@ public interface IFileIntegrityService extends IInterface {
         }
 
         protected void setupFsverity_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SETUP_FSVERITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SETUP_FSVERITY, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

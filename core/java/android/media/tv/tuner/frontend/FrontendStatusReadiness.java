@@ -1,6 +1,7 @@
 package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -16,8 +17,7 @@ public final class FrontendStatusReadiness {
     private int mStatusReadiness;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Readiness {
-    }
+    public @interface Readiness {}
 
     private FrontendStatusReadiness(int type, int readiness) {
         this.mFrontendStatusType = type;

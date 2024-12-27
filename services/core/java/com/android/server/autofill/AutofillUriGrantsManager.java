@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.server.LocalServices;
 import com.android.server.alarm.AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0;
 import com.android.server.uri.UriPermissionOwner;
@@ -26,7 +27,9 @@ import com.android.server.wm.WindowManagerService;
 public final class AutofillUriGrantsManager {
     public final int mSourceUid;
     public final int mSourceUserId;
-    public final ActivityTaskManagerInternal mActivityTaskMgrInternal = (ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class);
+    public final ActivityTaskManagerInternal mActivityTaskMgrInternal =
+            (ActivityTaskManagerInternal)
+                    LocalServices.getService(ActivityTaskManagerInternal.class);
     public final IUriGrantsManager mUgm = UriGrantsManager.getService();
 
     public AutofillUriGrantsManager(int i) {
@@ -34,7 +37,8 @@ public final class AutofillUriGrantsManager {
         this.mSourceUserId = UserHandle.getUserId(i);
     }
 
-    public final void grantUriPermissions(ComponentName componentName, IBinder iBinder, int i, ClipData clipData) {
+    public final void grantUriPermissions(
+            ComponentName componentName, IBinder iBinder, int i, ClipData clipData) {
         UriPermissionOwner.ExternalToken externalToken;
         UriPermissionOwner.ExternalToken externalToken2;
         UriPermissionOwner.ExternalToken externalToken3;
@@ -53,10 +57,13 @@ public final class AutofillUriGrantsManager {
         AutofillUriGrantsManager autofillUriGrantsManager = this;
         ClipData clipData2 = clipData;
         String packageName = componentName.getPackageName();
-        ActivityTaskManagerService.LocalService localService = (ActivityTaskManagerService.LocalService) autofillUriGrantsManager.mActivityTaskMgrInternal;
+        ActivityTaskManagerService.LocalService localService =
+                (ActivityTaskManagerService.LocalService)
+                        autofillUriGrantsManager.mActivityTaskMgrInternal;
         localService.getClass();
         ActivityTaskManagerService.enforceNotIsolatedCaller("getUriPermissionOwnerForActivity");
-        WindowManagerGlobalLock windowManagerGlobalLock = ActivityTaskManagerService.this.mGlobalLock;
+        WindowManagerGlobalLock windowManagerGlobalLock =
+                ActivityTaskManagerService.this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
@@ -64,9 +71,11 @@ public final class AutofillUriGrantsManager {
                 if (isInRootTaskLocked == null) {
                     externalToken = null;
                 } else {
-                    UriPermissionOwner uriPermissionsLocked = isInRootTaskLocked.getUriPermissionsLocked();
+                    UriPermissionOwner uriPermissionsLocked =
+                            isInRootTaskLocked.getUriPermissionsLocked();
                     if (uriPermissionsLocked.externalToken == null) {
-                        uriPermissionsLocked.externalToken = uriPermissionsLocked.new ExternalToken();
+                        uriPermissionsLocked.externalToken =
+                                uriPermissionsLocked.new ExternalToken();
                     }
                     externalToken = uriPermissionsLocked.externalToken;
                 }
@@ -78,7 +87,17 @@ public final class AutofillUriGrantsManager {
         }
         WindowManagerService.resetPriorityAfterLockedSection();
         if (externalToken2 == null) {
-            Slog.w("AutofillUriGrantsManager", "Can't grant URI permissions, because the target activity token is invalid: clip=" + clipData2 + ", targetActivity=" + componentName + ", targetUserId=" + i + ", targetActivityToken=" + Integer.toHexString(iBinder.hashCode()));
+            Slog.w(
+                    "AutofillUriGrantsManager",
+                    "Can't grant URI permissions, because the target activity token is invalid:"
+                        + " clip="
+                            + clipData2
+                            + ", targetActivity="
+                            + componentName
+                            + ", targetUserId="
+                            + i
+                            + ", targetActivityToken="
+                            + Integer.toHexString(iBinder.hashCode()));
             return;
         }
         int i5 = 0;
@@ -88,7 +107,9 @@ public final class AutofillUriGrantsManager {
                 externalToken3 = externalToken2;
                 i2 = i5;
             } else {
-                int userIdFromUri = ContentProvider.getUserIdFromUri(uri, autofillUriGrantsManager.mSourceUserId);
+                int userIdFromUri =
+                        ContentProvider.getUserIdFromUri(
+                                uri, autofillUriGrantsManager.mSourceUserId);
                 boolean z = Helper.sVerbose;
                 int i6 = autofillUriGrantsManager.mSourceUid;
                 if (z) {
@@ -98,7 +119,8 @@ public final class AutofillUriGrantsManager {
                     sb.append(", sourceUid=");
                     sb.append(i6);
                     sb.append(", sourceUserId=");
-                    AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0.m(userIdFromUri, ", targetPkg=", packageName, ", targetUserId=", sb);
+                    AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0.m(
+                            userIdFromUri, ", targetPkg=", packageName, ", targetUserId=", sb);
                     sb.append(i);
                     sb.append(", permissionOwner=");
                     sb.append(Integer.toHexString(externalToken2.hashCode()));
@@ -134,10 +156,31 @@ public final class AutofillUriGrantsManager {
                     str7 = str;
                     i4 = i6;
                     try {
-                        iUriGrantsManager.grantUriPermissionFromOwner(externalToken4, i7, packageName, uriWithoutUserId, 1, userIdFromUri, i);
+                        iUriGrantsManager.grantUriPermissionFromOwner(
+                                externalToken4,
+                                i7,
+                                packageName,
+                                uriWithoutUserId,
+                                1,
+                                userIdFromUri,
+                                i);
                     } catch (RemoteException e2) {
                         e = e2;
-                        Slog.e(str6, str7 + uri + str2 + i4 + str3 + i3 + str4 + packageName + str5 + i + str8 + Integer.toHexString(externalToken3.hashCode()), e);
+                        Slog.e(
+                                str6,
+                                str7
+                                        + uri
+                                        + str2
+                                        + i4
+                                        + str3
+                                        + i3
+                                        + str4
+                                        + packageName
+                                        + str5
+                                        + i
+                                        + str8
+                                        + Integer.toHexString(externalToken3.hashCode()),
+                                e);
                         i5 = i2 + 1;
                         autofillUriGrantsManager = this;
                         clipData2 = clipData;
@@ -156,7 +199,21 @@ public final class AutofillUriGrantsManager {
                     str7 = str;
                     i4 = i6;
                     str8 = ", permissionOwner=";
-                    Slog.e(str6, str7 + uri + str2 + i4 + str3 + i3 + str4 + packageName + str5 + i + str8 + Integer.toHexString(externalToken3.hashCode()), e);
+                    Slog.e(
+                            str6,
+                            str7
+                                    + uri
+                                    + str2
+                                    + i4
+                                    + str3
+                                    + i3
+                                    + str4
+                                    + packageName
+                                    + str5
+                                    + i
+                                    + str8
+                                    + Integer.toHexString(externalToken3.hashCode()),
+                            e);
                     i5 = i2 + 1;
                     autofillUriGrantsManager = this;
                     clipData2 = clipData;

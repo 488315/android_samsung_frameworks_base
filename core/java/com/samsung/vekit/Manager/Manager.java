@@ -2,10 +2,12 @@ package com.samsung.vekit.Manager;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
+
 import com.samsung.vekit.Common.Object.Element;
 import com.samsung.vekit.Common.Type.ElementType;
 import com.samsung.vekit.Common.Type.ManagerType;
 import com.samsung.vekit.Common.VEContext;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +58,13 @@ public class Manager<T> extends Element {
     public void remove(int id) {
         ElementType targetElementType = getTargetElementType(this.managerType);
         if (targetElementType == null) {
-            Log.e(this.TAG, "Fail to remove item[" + id + "] with managerType[" + this.managerType + NavigationBarInflaterView.SIZE_MOD_END);
+            Log.e(
+                    this.TAG,
+                    "Fail to remove item["
+                            + id
+                            + "] with managerType["
+                            + this.managerType
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         } else {
             this.map.remove(Integer.valueOf(id));
             this.context.getNativeInterface().remove(targetElementType, id);

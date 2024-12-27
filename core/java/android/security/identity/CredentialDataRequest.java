@@ -14,8 +14,7 @@ public class CredentialDataRequest {
     byte[] mRequestMessage = null;
     byte[] mReaderSignature = null;
 
-    CredentialDataRequest() {
-    }
+    CredentialDataRequest() {}
 
     public Map<String, Collection<String>> getDeviceSignedEntriesToRequest() {
         return this.mDeviceSignedEntriesToRequest;
@@ -48,12 +47,14 @@ public class CredentialDataRequest {
     public static final class Builder {
         private CredentialDataRequest mData = new CredentialDataRequest();
 
-        public Builder setDeviceSignedEntriesToRequest(Map<String, Collection<String>> entriesToRequest) {
+        public Builder setDeviceSignedEntriesToRequest(
+                Map<String, Collection<String>> entriesToRequest) {
             this.mData.mDeviceSignedEntriesToRequest = entriesToRequest;
             return this;
         }
 
-        public Builder setIssuerSignedEntriesToRequest(Map<String, Collection<String>> entriesToRequest) {
+        public Builder setIssuerSignedEntriesToRequest(
+                Map<String, Collection<String>> entriesToRequest) {
             this.mData.mIssuerSignedEntriesToRequest = entriesToRequest;
             return this;
         }

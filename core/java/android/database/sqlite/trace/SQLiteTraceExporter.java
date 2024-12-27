@@ -1,6 +1,5 @@
 package android.database.sqlite.trace;
 
-import android.database.sqlite.trace.SQLiteTrace;
 import java.io.IOException;
 import java.util.List;
 

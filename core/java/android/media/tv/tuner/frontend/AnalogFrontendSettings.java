@@ -2,6 +2,7 @@ package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerVersionChecker;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -44,16 +45,13 @@ public class AnalogFrontendSettings extends FrontendSettings {
     private final int mSignalType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AftFlag {
-    }
+    public @interface AftFlag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SifStandard {
-    }
+    public @interface SifStandard {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SignalType {
-    }
+    public @interface SignalType {}
 
     @Override // android.media.tv.tuner.frontend.FrontendSettings
     public int getType() {
@@ -124,7 +122,8 @@ public class AnalogFrontendSettings extends FrontendSettings {
         }
 
         public AnalogFrontendSettings build() {
-            return new AnalogFrontendSettings(this.mFrequency, this.mSignalType, this.mSifStandard, this.mAftFlag);
+            return new AnalogFrontendSettings(
+                    this.mFrequency, this.mSignalType, this.mSifStandard, this.mAftFlag);
         }
     }
 }

@@ -53,12 +53,12 @@ import android.util.SparseArray;
 import android.util.TimeUtils;
 import android.view.ContextThemeWrapper;
 import android.widget.Toast;
+
 import com.android.internal.app.DisableCarModeActivity;
 import com.android.internal.notification.SystemNotificationChannels;
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.FunctionalUtils;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
-import com.android.server.SystemService;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.pm.UserManagerService;
 import com.android.server.twilight.TwilightListener;
@@ -69,10 +69,12 @@ import com.android.server.wm.ActivityTaskManagerInternal;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.PackageConfigurationUpdaterImpl;
 import com.android.server.wm.WindowManagerInternal;
+
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.server.packagefeature.PackageFeatureUserChange;
 import com.samsung.android.server.packagefeature.PackageFeatureUserChangePersister;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -104,8 +106,9 @@ import java.util.logging.Logger;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class UiModeManagerService extends SystemService {
-    public static final Set SUPPORTED_NIGHT_MODE_CUSTOM_TYPES = new ArraySet(new Integer[]{0, 1});
-    public static final DateTimeFormatter sFormatter = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
+    public static final Set SUPPORTED_NIGHT_MODE_CUSTOM_TYPES = new ArraySet(new Integer[] {0, 1});
+    public static final DateTimeFormatter sFormatter =
+            DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
     public final LocalTime DEFAULT_CUSTOM_NIGHT_END_TIME;
     public final LocalTime DEFAULT_CUSTOM_NIGHT_START_TIME;
     public ActivityTaskManagerInternal mActivityTaskManager;
@@ -218,7 +221,13 @@ public final class UiModeManagerService extends SystemService {
                     this.this$0.mAutoModeChangeImmediately = false;
                     break;
                 default:
-                    Toast.makeText(new ContextThemeWrapper(this.this$0.getContext(), R.style.Theme.DeviceDefault.Light), this.this$0.getContext().getString(17042866), 1).show();
+                    Toast.makeText(
+                                    new ContextThemeWrapper(
+                                            this.this$0.getContext(),
+                                            R.style.Theme.DeviceDefault.Light),
+                                    this.this$0.getContext().getString(17042866),
+                                    1)
+                            .show();
                     break;
             }
         }
@@ -231,7 +240,8 @@ public final class UiModeManagerService extends SystemService {
         public final /* synthetic */ UiModeManagerService this$0;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public /* synthetic */ AnonymousClass9(UiModeManagerService uiModeManagerService, Handler handler, int i) {
+        public /* synthetic */ AnonymousClass9(
+                UiModeManagerService uiModeManagerService, Handler handler, int i) {
             super(handler);
             this.$r8$classId = i;
             this.this$0 = uiModeManagerService;
@@ -243,12 +253,25 @@ public final class UiModeManagerService extends SystemService {
                 case 0:
                     synchronized (this.this$0.mLock) {
                         try {
-                            if (Settings.Secure.getIntForUser(this.this$0.getContext().getContentResolver(), "user_setup_complete", 0, UserHandle.getCallingUserId()) == 1 && !z) {
+                            if (Settings.Secure.getIntForUser(
+                                                    this.this$0.getContext().getContentResolver(),
+                                                    "user_setup_complete",
+                                                    0,
+                                                    UserHandle.getCallingUserId())
+                                            == 1
+                                    && !z) {
                                 UiModeManagerService uiModeManagerService = this.this$0;
                                 uiModeManagerService.getClass();
-                                uiModeManagerService.getContext().getContentResolver().unregisterContentObserver(this.this$0.mSetupWizardObserver);
+                                uiModeManagerService
+                                        .getContext()
+                                        .getContentResolver()
+                                        .unregisterContentObserver(
+                                                this.this$0.mSetupWizardObserver);
                                 Context context = this.this$0.getContext();
-                                this.this$0.updateNightModeFromSettingsLocked(context, context.getResources(), UserHandle.getCallingUserId());
+                                this.this$0.updateNightModeFromSettingsLocked(
+                                        context,
+                                        context.getResources(),
+                                        UserHandle.getCallingUserId());
                                 this.this$0.updateLocked(0, 0);
                             }
                         } finally {
@@ -263,16 +286,31 @@ public final class UiModeManagerService extends SystemService {
                         try {
                             if (this.this$0.updateContrastLocked()) {
                                 UiModeManagerService uiModeManagerService2 = this.this$0;
-                                if (!uiModeManagerService2.mContrasts.contains(uiModeManagerService2.mCurrentUser)) {
+                                if (!uiModeManagerService2.mContrasts.contains(
+                                        uiModeManagerService2.mCurrentUser)) {
                                     uiModeManagerService2.updateContrastLocked();
                                 }
-                                final float floatValue = ((Float) uiModeManagerService2.mContrasts.get(uiModeManagerService2.mCurrentUser)).floatValue();
+                                final float floatValue =
+                                        ((Float)
+                                                        uiModeManagerService2.mContrasts.get(
+                                                                uiModeManagerService2.mCurrentUser))
+                                                .floatValue();
                                 UiModeManagerService uiModeManagerService3 = this.this$0;
-                                ((RemoteCallbackList) uiModeManagerService3.mUiModeManagerCallbacks.get(uiModeManagerService3.mCurrentUser, new RemoteCallbackList())).broadcast(FunctionalUtils.ignoreRemoteException(new FunctionalUtils.RemoteExceptionIgnoringConsumer() { // from class: com.android.server.UiModeManagerService$11$$ExternalSyntheticLambda0
-                                    public final void acceptOrThrow(Object obj) {
-                                        ((IUiModeManagerCallback) obj).notifyContrastChanged(floatValue);
-                                    }
-                                }));
+                                ((RemoteCallbackList)
+                                                uiModeManagerService3.mUiModeManagerCallbacks.get(
+                                                        uiModeManagerService3.mCurrentUser,
+                                                        new RemoteCallbackList()))
+                                        .broadcast(
+                                                FunctionalUtils.ignoreRemoteException(
+                                                        new FunctionalUtils
+                                                                .RemoteExceptionIgnoringConsumer() { // from class: com.android.server.UiModeManagerService$11$$ExternalSyntheticLambda0
+                                                            public final void acceptOrThrow(
+                                                                    Object obj) {
+                                                                ((IUiModeManagerCallback) obj)
+                                                                        .notifyContrastChanged(
+                                                                                floatValue);
+                                                            }
+                                                        }));
                             }
                         } finally {
                         }
@@ -280,20 +318,23 @@ public final class UiModeManagerService extends SystemService {
                     return;
                 default:
                     UiModeManagerService uiModeManagerService4 = this.this$0;
-                    uiModeManagerService4.mShopDemo = Settings.Secure.getInt(uiModeManagerService4.getContext().getContentResolver(), "shopdemo", 0) == 1;
+                    uiModeManagerService4.mShopDemo =
+                            Settings.Secure.getInt(
+                                            uiModeManagerService4.getContext().getContentResolver(),
+                                            "shopdemo",
+                                            0)
+                                    == 1;
                     return;
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public class Injector {
-    }
+    public class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
-        public LocalService() {
-        }
+        public LocalService() {}
 
         public final boolean isNightMode() {
             boolean z;
@@ -325,23 +366,27 @@ public final class UiModeManagerService extends SystemService {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class LogWrapper {
         public static final Logger logger;
-        public static final SimpleDateFormat formatter = new SimpleDateFormat("MM-dd HH:mm:ss.SSS: ", Locale.getDefault());
+        public static final SimpleDateFormat formatter =
+                new SimpleDateFormat("MM-dd HH:mm:ss.SSS: ", Locale.getDefault());
         public static final Date date = new Date();
 
         static {
             try {
-                FileHandler fileHandler = new FileHandler("/data/log/dark_mode_log%g.txt", 5120, 2, true);
-                fileHandler.setFormatter(new Formatter() { // from class: com.android.server.UiModeManagerService.LogWrapper.1
-                    @Override // java.util.logging.Formatter
-                    public final String format(LogRecord logRecord) {
-                        Date date2 = LogWrapper.date;
-                        date2.setTime(System.currentTimeMillis());
-                        StringBuilder sb = new StringBuilder(80);
-                        sb.append(LogWrapper.formatter.format(date2));
-                        sb.append(logRecord.getMessage());
-                        return sb.toString();
-                    }
-                });
+                FileHandler fileHandler =
+                        new FileHandler("/data/log/dark_mode_log%g.txt", 5120, 2, true);
+                fileHandler.setFormatter(
+                        new Formatter() { // from class:
+                                          // com.android.server.UiModeManagerService.LogWrapper.1
+                            @Override // java.util.logging.Formatter
+                            public final String format(LogRecord logRecord) {
+                                Date date2 = LogWrapper.date;
+                                date2.setTime(System.currentTimeMillis());
+                                StringBuilder sb = new StringBuilder(80);
+                                sb.append(LogWrapper.formatter.format(date2));
+                                sb.append(logRecord.getMessage());
+                                return sb.toString();
+                            }
+                        });
                 Logger logger2 = Logger.getLogger(LogWrapper.class.getName());
                 logger = logger2;
                 logger2.addHandler(fileHandler);
@@ -353,7 +398,9 @@ public final class UiModeManagerService extends SystemService {
         }
 
         public static StringBuilder getLogText() {
-            File[] fileArr = {new File("/data/log/dark_mode_log0.txt"), new File("/data/log/dark_mode_log1.txt")};
+            File[] fileArr = {
+                new File("/data/log/dark_mode_log0.txt"), new File("/data/log/dark_mode_log1.txt")
+            };
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < 2; i++) {
                 File file = fileArr[i];
@@ -385,7 +432,11 @@ public final class UiModeManagerService extends SystemService {
         public static void i(String str) {
             Logger logger2 = logger;
             if (logger2 != null) {
-                logger2.log(Level.INFO, String.format("V %s(%d): %s\n", "UiModeManager", Integer.valueOf(Binder.getCallingPid()), str));
+                logger2.log(
+                        Level.INFO,
+                        String.format(
+                                "V %s(%d): %s\n",
+                                "UiModeManager", Integer.valueOf(Binder.getCallingPid()), str));
             }
             Log.i("UiModeManager", str);
         }
@@ -398,7 +449,12 @@ public final class UiModeManagerService extends SystemService {
         public final UiModeManagerService$Stub$$ExternalSyntheticLambda1 mProjectionReleaser;
         public final int mProjectionType;
 
-        public ProjectionHolder(String str, int i, IBinder iBinder, UiModeManagerService$Stub$$ExternalSyntheticLambda1 uiModeManagerService$Stub$$ExternalSyntheticLambda1) {
+        public ProjectionHolder(
+                String str,
+                int i,
+                IBinder iBinder,
+                UiModeManagerService$Stub$$ExternalSyntheticLambda1
+                        uiModeManagerService$Stub$$ExternalSyntheticLambda1) {
             this.mPackageName = str;
             this.mProjectionType = i;
             this.mBinder = iBinder;
@@ -411,9 +467,14 @@ public final class UiModeManagerService extends SystemService {
             StringBuilder sb = new StringBuilder("Projection holder ");
             sb.append(this.mPackageName);
             sb.append(" died. Releasing projection type ");
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m(sb, this.mProjectionType, ".", "UiModeManager");
-            UiModeManagerService$Stub$$ExternalSyntheticLambda1 uiModeManagerService$Stub$$ExternalSyntheticLambda1 = this.mProjectionReleaser;
-            UiModeManagerService.m102$$Nest$mreleaseProjectionUnchecked(uiModeManagerService$Stub$$ExternalSyntheticLambda1.f$0, this.mProjectionType, this.mPackageName);
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    sb, this.mProjectionType, ".", "UiModeManager");
+            UiModeManagerService$Stub$$ExternalSyntheticLambda1
+                    uiModeManagerService$Stub$$ExternalSyntheticLambda1 = this.mProjectionReleaser;
+            UiModeManagerService.m102$$Nest$mreleaseProjectionUnchecked(
+                    uiModeManagerService$Stub$$ExternalSyntheticLambda1.f$0,
+                    this.mProjectionType,
+                    this.mPackageName);
         }
     }
 
@@ -426,7 +487,17 @@ public final class UiModeManagerService extends SystemService {
         }
 
         public static String nightModeToStr(int i, int i2) {
-            return i != 0 ? i != 1 ? i != 2 ? i != 3 ? "unknown" : i2 == 0 ? "custom_schedule" : i2 == 1 ? "custom_bedtime" : "unknown" : "yes" : "no" : "auto";
+            return i != 0
+                    ? i != 1
+                            ? i != 2
+                                    ? i != 3
+                                            ? "unknown"
+                                            : i2 == 0
+                                                    ? "custom_schedule"
+                                                    : i2 == 1 ? "custom_bedtime" : "unknown"
+                                    : "yes"
+                            : "no"
+                    : "auto";
         }
 
         public final int handleCarMode() {
@@ -459,7 +530,13 @@ public final class UiModeManagerService extends SystemService {
                 Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
                 sb.append(LocalTime.ofNanoOfDay(customNightModeStart * 1000).toString());
                 outPrintWriter.println(sb.toString());
-                getOutPrintWriter().println("end " + LocalTime.ofNanoOfDay(this.mInterface.getCustomNightModeEnd() * 1000).toString());
+                getOutPrintWriter()
+                        .println(
+                                "end "
+                                        + LocalTime.ofNanoOfDay(
+                                                        this.mInterface.getCustomNightModeEnd()
+                                                                * 1000)
+                                                .toString());
                 return 0;
             }
             if (nextArg.equals("end")) {
@@ -494,7 +571,9 @@ public final class UiModeManagerService extends SystemService {
                 Method dump skipped, instructions count: 322
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.UiModeManagerService.Shell.onCommand(java.lang.String):int");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.UiModeManagerService.Shell.onCommand(java.lang.String):int");
         }
 
         public final void onHelp() {
@@ -503,12 +582,25 @@ public final class UiModeManagerService extends SystemService {
             outPrintWriter.println("  help");
             outPrintWriter.println("    Print this help text.");
             outPrintWriter.println("  night [yes|no|auto|custom_schedule|custom_bedtime]");
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Set or read night mode.", "  car [yes|no]", "    Set or read car mode.", "  time [start|end] <ISO time>");
-            outPrintWriter.println("    Set custom start/end schedule time (night mode must be set to custom to apply).");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "    Set or read night mode.",
+                    "  car [yes|no]",
+                    "    Set or read car mode.",
+                    "  time [start|end] <ISO time>");
+            outPrintWriter.println(
+                    "    Set custom start/end schedule time (night mode must be set to custom to"
+                        + " apply).");
         }
 
         public final void printCurrentCarMode() {
-            getOutPrintWriter().println("Car mode: ".concat(this.mInterface.getCurrentModeType() == 3 ? "yes" : "no"));
+            getOutPrintWriter()
+                    .println(
+                            "Car mode: "
+                                    .concat(
+                                            this.mInterface.getCurrentModeType() == 3
+                                                    ? "yes"
+                                                    : "no"));
         }
     }
 
@@ -522,25 +614,31 @@ public final class UiModeManagerService extends SystemService {
             int callingUserId = UserHandle.getCallingUserId();
             synchronized (UiModeManagerService.this.mLock) {
                 try {
-                    if (!UiModeManagerService.this.mUiModeManagerCallbacks.contains(callingUserId)) {
-                        UiModeManagerService.this.mUiModeManagerCallbacks.put(callingUserId, new RemoteCallbackList());
+                    if (!UiModeManagerService.this.mUiModeManagerCallbacks.contains(
+                            callingUserId)) {
+                        UiModeManagerService.this.mUiModeManagerCallbacks.put(
+                                callingUserId, new RemoteCallbackList());
                     }
-                    ((RemoteCallbackList) UiModeManagerService.this.mUiModeManagerCallbacks.get(callingUserId)).register(iUiModeManagerCallback);
+                    ((RemoteCallbackList)
+                                    UiModeManagerService.this.mUiModeManagerCallbacks.get(
+                                            callingUserId))
+                            .register(iUiModeManagerCallback);
                 } catch (Throwable th) {
                     throw th;
                 }
             }
         }
 
-        public final void addNightPriorityAllowedPackageFromShell(String str) {
-        }
+        public final void addNightPriorityAllowedPackageFromShell(String str) {}
 
-        public final void addOnProjectionStateChangedListener(IOnProjectionStateChangedListener iOnProjectionStateChangedListener, int i) {
+        public final void addOnProjectionStateChangedListener(
+                IOnProjectionStateChangedListener iOnProjectionStateChangedListener, int i) {
             addOnProjectionStateChangedListener_enforcePermission();
             if (i == 0) {
                 return;
             }
-            UiModeManagerService.m99$$Nest$menforceValidCallingUser(UiModeManagerService.this, UserHandle.getCallingUserId());
+            UiModeManagerService.m99$$Nest$menforceValidCallingUser(
+                    UiModeManagerService.this, UserHandle.getCallingUserId());
             synchronized (UiModeManagerService.this.mLock) {
                 try {
                     UiModeManagerService uiModeManagerService = UiModeManagerService.this;
@@ -548,17 +646,25 @@ public final class UiModeManagerService extends SystemService {
                         uiModeManagerService.mProjectionListeners = new SparseArray(1);
                     }
                     if (!UiModeManagerService.this.mProjectionListeners.contains(i)) {
-                        UiModeManagerService.this.mProjectionListeners.put(i, new RemoteCallbackList());
+                        UiModeManagerService.this.mProjectionListeners.put(
+                                i, new RemoteCallbackList());
                     }
-                    if (((RemoteCallbackList) UiModeManagerService.this.mProjectionListeners.get(i)).register(iOnProjectionStateChangedListener)) {
+                    if (((RemoteCallbackList) UiModeManagerService.this.mProjectionListeners.get(i))
+                            .register(iOnProjectionStateChangedListener)) {
                         ArrayList arrayList = new ArrayList();
-                        int populateWithRelevantActivePackageNames = UiModeManagerService.this.populateWithRelevantActivePackageNames(i, arrayList);
+                        int populateWithRelevantActivePackageNames =
+                                UiModeManagerService.this.populateWithRelevantActivePackageNames(
+                                        i, arrayList);
                         if (!arrayList.isEmpty()) {
                             try {
-                                iOnProjectionStateChangedListener.onProjectionStateChanged(populateWithRelevantActivePackageNames, arrayList);
+                                iOnProjectionStateChangedListener.onProjectionStateChanged(
+                                        populateWithRelevantActivePackageNames, arrayList);
                             } catch (RemoteException unused) {
                                 Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                                Slog.w("UiModeManager", "Failed a call to onProjectionStateChanged() during listener registration.");
+                                Slog.w(
+                                        "UiModeManager",
+                                        "Failed a call to onProjectionStateChanged() during"
+                                            + " listener registration.");
                             }
                         }
                     }
@@ -590,12 +696,38 @@ public final class UiModeManagerService extends SystemService {
             try {
                 synchronized (UiModeManagerService.this.mLock) {
                     try {
-                        UiModeManagerService.this.setCarModeLocked(i2, ((Integer) ((HashMap) UiModeManagerService.this.mCarModePackagePriority).entrySet().stream().filter(new Predicate() { // from class: com.android.server.UiModeManagerService$Stub$$ExternalSyntheticLambda2
-                            @Override // java.util.function.Predicate
-                            public final boolean test(Object obj) {
-                                return ((String) ((Map.Entry) obj).getValue()).equals(str);
-                            }
-                        }).findFirst().map(new UiModeManagerService$Stub$$ExternalSyntheticLambda3()).orElse(0)).intValue(), str, false);
+                        UiModeManagerService.this.setCarModeLocked(
+                                i2,
+                                ((Integer)
+                                                ((HashMap)
+                                                                UiModeManagerService.this
+                                                                        .mCarModePackagePriority)
+                                                        .entrySet().stream()
+                                                                .filter(
+                                                                        new Predicate() { // from
+                                                                                          // class:
+                                                                                          // com.android.server.UiModeManagerService$Stub$$ExternalSyntheticLambda2
+                                                                            @Override // java.util.function.Predicate
+                                                                            public final boolean
+                                                                                    test(
+                                                                                            Object
+                                                                                                    obj) {
+                                                                                return ((String)
+                                                                                                ((Map
+                                                                                                                        .Entry)
+                                                                                                                obj)
+                                                                                                        .getValue())
+                                                                                        .equals(
+                                                                                                str);
+                                                                            }
+                                                                        })
+                                                                .findFirst()
+                                                                .map(
+                                                                        new UiModeManagerService$Stub$$ExternalSyntheticLambda3())
+                                                                .orElse(0))
+                                        .intValue(),
+                                str,
+                                false);
                         UiModeManagerService uiModeManagerService = UiModeManagerService.this;
                         if (uiModeManagerService.mSystemReady) {
                             uiModeManagerService.updateLocked(0, i);
@@ -608,7 +740,8 @@ public final class UiModeManagerService extends SystemService {
             }
         }
 
-        public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+        public final void dump(
+                FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
             Context context = UiModeManagerService.this.getContext();
             Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
             if (DumpUtils.checkDumpPermission(context, "UiModeManager", printWriter)) {
@@ -625,7 +758,10 @@ public final class UiModeManagerService extends SystemService {
                         printWriter.print("  mNightMode=");
                         printWriter.print(uiModeManagerService.mNightMode.mNightModeValue);
                         printWriter.print(" (");
-                        printWriter.print(Shell.nightModeToStr(uiModeManagerService.mNightMode.mNightModeValue, uiModeManagerService.mNightModeCustomType));
+                        printWriter.print(
+                                Shell.nightModeToStr(
+                                        uiModeManagerService.mNightMode.mNightModeValue,
+                                        uiModeManagerService.mNightModeCustomType));
                         printWriter.print(") ");
                         printWriter.print(" mOverrideOn/Off=");
                         printWriter.print(uiModeManagerService.mOverrideNightModeOn);
@@ -638,7 +774,9 @@ public final class UiModeManagerService extends SystemService {
                         printWriter.print("  mCarModeEnabled=");
                         printWriter.print(uiModeManagerService.mCarModeEnabled);
                         printWriter.print(" (carModeApps=");
-                        for (Map.Entry entry : ((HashMap) uiModeManagerService.mCarModePackagePriority).entrySet()) {
+                        for (Map.Entry entry :
+                                ((HashMap) uiModeManagerService.mCarModePackagePriority)
+                                        .entrySet()) {
                             printWriter.print(entry.getKey());
                             printWriter.print(":");
                             printWriter.print((String) entry.getValue());
@@ -650,7 +788,8 @@ public final class UiModeManagerService extends SystemService {
                         printWriter.print(" mComputedNightMode=");
                         printWriter.print(uiModeManagerService.mComputedNightMode);
                         printWriter.print(" customStart=");
-                        printWriter.print(uiModeManagerService.mCustomAutoNightModeStartMilliseconds);
+                        printWriter.print(
+                                uiModeManagerService.mCustomAutoNightModeStartMilliseconds);
                         printWriter.print(" customEnd");
                         printWriter.print(uiModeManagerService.mCustomAutoNightModeEndMilliseconds);
                         printWriter.print(" mCarModeEnableFlags=");
@@ -669,14 +808,20 @@ public final class UiModeManagerService extends SystemService {
                         printWriter.println(uiModeManagerService.mSystemReady);
                         if (uiModeManagerService.mTwilightManager != null) {
                             printWriter.print("  mTwilightService.getLastTwilightState()=");
-                            printWriter.println(((TwilightService.AnonymousClass1) uiModeManagerService.mTwilightManager).getLastTwilightState());
+                            printWriter.println(
+                                    ((TwilightService.AnonymousClass1)
+                                                    uiModeManagerService.mTwilightManager)
+                                            .getLastTwilightState());
                         }
                         printWriter.println(UiModeManagerService.buildLogString());
                         printWriter.println(LogWrapper.getLogText());
                         printWriter.print("  mNightPriorityAllowedPackagesFromScpm=");
-                        printWriter.println(uiModeManagerService.mNightPriorityAllowedPackagesFromScpm);
-                        uiModeManagerService.mNightPriorityAppliedPackages.dump(printWriter, "Applied packages", "    ");
-                        uiModeManagerService.mPackagesNeedToShowDialog.dump(printWriter, "Show dialog packages", "    ");
+                        printWriter.println(
+                                uiModeManagerService.mNightPriorityAllowedPackagesFromScpm);
+                        uiModeManagerService.mNightPriorityAppliedPackages.dump(
+                                printWriter, "Applied packages", "    ");
+                        uiModeManagerService.mPackagesNeedToShowDialog.dump(
+                                printWriter, "Show dialog packages", "    ");
                         printWriter.print("  mDesktopModeEnabled=");
                         printWriter.println(uiModeManagerService.mDesktopModeEnabled);
                     } catch (Throwable th) {
@@ -692,8 +837,15 @@ public final class UiModeManagerService extends SystemService {
                 Slog.e("UiModeManager", "enableCarMode while UI mode is locked");
                 return;
             }
-            if (i2 != 0 && UiModeManagerService.this.getContext().checkCallingOrSelfPermission("android.permission.ENTER_CAR_MODE_PRIORITIZED") != 0) {
-                throw new SecurityException("Enabling car mode with a priority requires permission ENTER_CAR_MODE_PRIORITIZED");
+            if (i2 != 0
+                    && UiModeManagerService.this
+                                    .getContext()
+                                    .checkCallingOrSelfPermission(
+                                            "android.permission.ENTER_CAR_MODE_PRIORITIZED")
+                            != 0) {
+                throw new SecurityException(
+                        "Enabling car mode with a priority requires permission"
+                            + " ENTER_CAR_MODE_PRIORITIZED");
             }
             UiModeManagerService.this.mInjector.getClass();
             if (Binder.getCallingUid() != 2000) {
@@ -726,7 +878,8 @@ public final class UiModeManagerService extends SystemService {
                     if (UiModeManagerService.this.mProjectionHolders != null) {
                         int i2 = 0;
                         while (i < UiModeManagerService.this.mProjectionHolders.size()) {
-                            if (!((List) UiModeManagerService.this.mProjectionHolders.valueAt(i)).isEmpty()) {
+                            if (!((List) UiModeManagerService.this.mProjectionHolders.valueAt(i))
+                                    .isEmpty()) {
                                 i2 |= UiModeManagerService.this.mProjectionHolders.keyAt(i);
                             }
                             i++;
@@ -756,7 +909,11 @@ public final class UiModeManagerService extends SystemService {
                 if (!uiModeManagerService.mContrasts.contains(uiModeManagerService.mCurrentUser)) {
                     uiModeManagerService.updateContrastLocked();
                 }
-                floatValue = ((Float) uiModeManagerService.mContrasts.get(uiModeManagerService.mCurrentUser)).floatValue();
+                floatValue =
+                        ((Float)
+                                        uiModeManagerService.mContrasts.get(
+                                                uiModeManagerService.mCurrentUser))
+                                .floatValue();
             }
             return floatValue;
         }
@@ -775,11 +932,13 @@ public final class UiModeManagerService extends SystemService {
         }
 
         public final long getCustomNightModeEnd() {
-            return UiModeManagerService.this.mCustomAutoNightModeEndMilliseconds.toNanoOfDay() / 1000;
+            return UiModeManagerService.this.mCustomAutoNightModeEndMilliseconds.toNanoOfDay()
+                    / 1000;
         }
 
         public final long getCustomNightModeStart() {
-            return UiModeManagerService.this.mCustomAutoNightModeStartMilliseconds.toNanoOfDay() / 1000;
+            return UiModeManagerService.this.mCustomAutoNightModeStartMilliseconds.toNanoOfDay()
+                    / 1000;
         }
 
         public final int getNightMode() {
@@ -811,7 +970,8 @@ public final class UiModeManagerService extends SystemService {
             boolean z;
             if (!UiModeManagerService.this.isNightPriorityAllowedLocked(str)) {
                 Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                BootReceiver$$ExternalSyntheticOutline0.m("getPackageNightMode is not allowed for ", str, "UiModeManager");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        "getPackageNightMode is not allowed for ", str, "UiModeManager");
                 return -1;
             }
             UiModeManagerService uiModeManagerService = UiModeManagerService.this;
@@ -821,11 +981,14 @@ public final class UiModeManagerService extends SystemService {
             if (!z) {
                 return 2;
             }
-            ActivityTaskManagerInternal.PackageConfig findPackageConfiguration = ActivityTaskManagerService.this.mPackageConfigPersister.findPackageConfiguration(i, str);
+            ActivityTaskManagerInternal.PackageConfig findPackageConfiguration =
+                    ActivityTaskManagerService.this.mPackageConfigPersister
+                            .findPackageConfiguration(i, str);
             if (findPackageConfiguration != null) {
                 return findPackageConfiguration.mNightMode.intValue();
             }
-            BootReceiver$$ExternalSyntheticOutline0.m("getPackageNightMode cannot get config for ", str, "UiModeManager");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    "getPackageNightMode cannot get config for ", str, "UiModeManager");
             return -1;
         }
 
@@ -855,8 +1018,22 @@ public final class UiModeManagerService extends SystemService {
             return z;
         }
 
-        public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-            new Shell(UiModeManagerService.this.mService).exec(UiModeManagerService.this.mService, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+        public final void onShellCommand(
+                FileDescriptor fileDescriptor,
+                FileDescriptor fileDescriptor2,
+                FileDescriptor fileDescriptor3,
+                String[] strArr,
+                ShellCallback shellCallback,
+                ResultReceiver resultReceiver) {
+            new Shell(UiModeManagerService.this.mService)
+                    .exec(
+                            UiModeManagerService.this.mService,
+                            fileDescriptor,
+                            fileDescriptor2,
+                            fileDescriptor3,
+                            strArr,
+                            shellCallback,
+                            resultReceiver);
         }
 
         public final boolean releaseProjection(int i, String str) {
@@ -867,21 +1044,33 @@ public final class UiModeManagerService extends SystemService {
             }
             UiModeManagerService uiModeManagerService = UiModeManagerService.this;
             if ((i & 1) != 0) {
-                uiModeManagerService.getContext().enforceCallingPermission("android.permission.TOGGLE_AUTOMOTIVE_PROJECTION", "toggleProjection");
+                uiModeManagerService
+                        .getContext()
+                        .enforceCallingPermission(
+                                "android.permission.TOGGLE_AUTOMOTIVE_PROJECTION",
+                                "toggleProjection");
             } else {
                 uiModeManagerService.getClass();
             }
-            UiModeManagerService.m99$$Nest$menforceValidCallingUser(UiModeManagerService.this, UserHandle.getCallingUserId());
-            return UiModeManagerService.m102$$Nest$mreleaseProjectionUnchecked(UiModeManagerService.this, i, str);
+            UiModeManagerService.m99$$Nest$menforceValidCallingUser(
+                    UiModeManagerService.this, UserHandle.getCallingUserId());
+            return UiModeManagerService.m102$$Nest$mreleaseProjectionUnchecked(
+                    UiModeManagerService.this, i, str);
         }
 
-        public final void removeOnProjectionStateChangedListener(IOnProjectionStateChangedListener iOnProjectionStateChangedListener) {
+        public final void removeOnProjectionStateChangedListener(
+                IOnProjectionStateChangedListener iOnProjectionStateChangedListener) {
             removeOnProjectionStateChangedListener_enforcePermission();
             synchronized (UiModeManagerService.this.mLock) {
                 try {
                     if (UiModeManagerService.this.mProjectionListeners != null) {
-                        for (int i = 0; i < UiModeManagerService.this.mProjectionListeners.size(); i++) {
-                            ((RemoteCallbackList) UiModeManagerService.this.mProjectionListeners.valueAt(i)).unregister(iOnProjectionStateChangedListener);
+                        for (int i = 0;
+                                i < UiModeManagerService.this.mProjectionListeners.size();
+                                i++) {
+                            ((RemoteCallbackList)
+                                            UiModeManagerService.this.mProjectionListeners.valueAt(
+                                                    i))
+                                    .unregister(iOnProjectionStateChangedListener);
                         }
                     }
                 } catch (Throwable th) {
@@ -898,11 +1087,16 @@ public final class UiModeManagerService extends SystemService {
             }
             UiModeManagerService uiModeManagerService = UiModeManagerService.this;
             if ((i & 1) != 0) {
-                uiModeManagerService.getContext().enforceCallingPermission("android.permission.TOGGLE_AUTOMOTIVE_PROJECTION", "toggleProjection");
+                uiModeManagerService
+                        .getContext()
+                        .enforceCallingPermission(
+                                "android.permission.TOGGLE_AUTOMOTIVE_PROJECTION",
+                                "toggleProjection");
             } else {
                 uiModeManagerService.getClass();
             }
-            UiModeManagerService.m99$$Nest$menforceValidCallingUser(UiModeManagerService.this, UserHandle.getCallingUserId());
+            UiModeManagerService.m99$$Nest$menforceValidCallingUser(
+                    UiModeManagerService.this, UserHandle.getCallingUserId());
             synchronized (UiModeManagerService.this.mLock) {
                 try {
                     UiModeManagerService uiModeManagerService2 = UiModeManagerService.this;
@@ -921,17 +1115,30 @@ public final class UiModeManagerService extends SystemService {
                     if (i == 1 && !list.isEmpty()) {
                         return false;
                     }
-                    ProjectionHolder projectionHolder = new ProjectionHolder(str, i, iBinder, new UiModeManagerService$Stub$$ExternalSyntheticLambda1(UiModeManagerService.this));
+                    ProjectionHolder projectionHolder =
+                            new ProjectionHolder(
+                                    str,
+                                    i,
+                                    iBinder,
+                                    new UiModeManagerService$Stub$$ExternalSyntheticLambda1(
+                                            UiModeManagerService.this));
                     try {
                         iBinder.linkToDeath(projectionHolder, 0);
                         list.add(projectionHolder);
                         Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                        Slog.d("UiModeManager", "Package " + str + " set projection type " + i + ".");
+                        Slog.d(
+                                "UiModeManager",
+                                "Package " + str + " set projection type " + i + ".");
                         UiModeManagerService.this.onProjectionStateChangedLocked(i);
                         return true;
                     } catch (RemoteException e) {
                         Set set2 = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                        Slog.e("UiModeManager", "linkToDeath failed for projection requester: " + projectionHolder.mPackageName + ".", e);
+                        Slog.e(
+                                "UiModeManager",
+                                "linkToDeath failed for projection requester: "
+                                        + projectionHolder.mPackageName
+                                        + ".",
+                                e);
                         return false;
                     }
                 } catch (Throwable th) {
@@ -940,34 +1147,42 @@ public final class UiModeManagerService extends SystemService {
             }
         }
 
-        public final void resetNightPriorityAppliedPackages(int i) {
-        }
+        public final void resetNightPriorityAppliedPackages(int i) {}
 
         public final void setApplicationNightMode(int i) {
             if (i != 0 && i != 1 && i != 2 && i != 3) {
-                throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown mode: "));
+                throw new IllegalArgumentException(
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown mode: "));
             }
             int i2 = i != 1 ? i != 2 ? 0 : 32 : 16;
-            ActivityTaskManagerService.LocalService localService = (ActivityTaskManagerService.LocalService) UiModeManagerService.this.mActivityTaskManager;
+            ActivityTaskManagerService.LocalService localService =
+                    (ActivityTaskManagerService.LocalService)
+                            UiModeManagerService.this.mActivityTaskManager;
             localService.getClass();
-            PackageConfigurationUpdaterImpl packageConfigurationUpdaterImpl = new PackageConfigurationUpdaterImpl(Binder.getCallingPid(), ActivityTaskManagerService.this);
+            PackageConfigurationUpdaterImpl packageConfigurationUpdaterImpl =
+                    new PackageConfigurationUpdaterImpl(
+                            Binder.getCallingPid(), ActivityTaskManagerService.this);
             packageConfigurationUpdaterImpl.setNightMode(i2);
             packageConfigurationUpdaterImpl.commit();
         }
 
         public final void setAttentionModeThemeOverlay(int i) {
             setAttentionModeThemeOverlay_enforcePermission();
-            UiModeManagerService.m99$$Nest$menforceValidCallingUser(UiModeManagerService.this, UserHandle.getCallingUserId());
+            UiModeManagerService.m99$$Nest$menforceValidCallingUser(
+                    UiModeManagerService.this, UserHandle.getCallingUserId());
             synchronized (UiModeManagerService.this.mLock) {
                 try {
                     UiModeManagerService uiModeManagerService = UiModeManagerService.this;
                     if (uiModeManagerService.mAttentionModeThemeOverlay != i) {
                         uiModeManagerService.mAttentionModeThemeOverlay = i;
-                        Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: com.android.server.UiModeManagerService$Stub$$ExternalSyntheticLambda0
-                            public final void runOrThrow() {
-                                UiModeManagerService.this.updateLocked(0, 0);
-                            }
-                        });
+                        Binder.withCleanCallingIdentity(
+                                new FunctionalUtils
+                                        .ThrowingRunnable() { // from class:
+                                                              // com.android.server.UiModeManagerService$Stub$$ExternalSyntheticLambda0
+                                    public final void runOrThrow() {
+                                        UiModeManagerService.this.updateLocked(0, 0);
+                                    }
+                                });
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -977,13 +1192,21 @@ public final class UiModeManagerService extends SystemService {
 
         public final void setCustomNightModeEnd(long j) {
             LocalTime ofNanoOfDay;
-            if (isNightModeLocked() && UiModeManagerService.this.getContext().checkCallingOrSelfPermission("android.permission.MODIFY_DAY_NIGHT_MODE") != 0) {
+            if (isNightModeLocked()
+                    && UiModeManagerService.this
+                                    .getContext()
+                                    .checkCallingOrSelfPermission(
+                                            "android.permission.MODIFY_DAY_NIGHT_MODE")
+                            != 0) {
                 Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                Slog.e("UiModeManager", "Set custom time end, requires MODIFY_DAY_NIGHT_MODE permission");
+                Slog.e(
+                        "UiModeManager",
+                        "Set custom time end, requires MODIFY_DAY_NIGHT_MODE permission");
                 return;
             }
             int callingUserId = UserHandle.getCallingUserId();
-            UiModeManagerService.m99$$Nest$menforceValidCallingUser(UiModeManagerService.this, callingUserId);
+            UiModeManagerService.m99$$Nest$menforceValidCallingUser(
+                    UiModeManagerService.this, callingUserId);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
@@ -996,7 +1219,8 @@ public final class UiModeManagerService extends SystemService {
                 }
                 UiModeManagerService uiModeManagerService = UiModeManagerService.this;
                 uiModeManagerService.mCustomAutoNightModeEndMilliseconds = ofNanoOfDay;
-                UiModeManagerService.m101$$Nest$monCustomTimeUpdated(uiModeManagerService, callingUserId);
+                UiModeManagerService.m101$$Nest$monCustomTimeUpdated(
+                        uiModeManagerService, callingUserId);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -1004,13 +1228,21 @@ public final class UiModeManagerService extends SystemService {
 
         public final void setCustomNightModeStart(long j) {
             LocalTime ofNanoOfDay;
-            if (isNightModeLocked() && UiModeManagerService.this.getContext().checkCallingOrSelfPermission("android.permission.MODIFY_DAY_NIGHT_MODE") != 0) {
+            if (isNightModeLocked()
+                    && UiModeManagerService.this
+                                    .getContext()
+                                    .checkCallingOrSelfPermission(
+                                            "android.permission.MODIFY_DAY_NIGHT_MODE")
+                            != 0) {
                 Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                Slog.e("UiModeManager", "Set custom time start, requires MODIFY_DAY_NIGHT_MODE permission");
+                Slog.e(
+                        "UiModeManager",
+                        "Set custom time start, requires MODIFY_DAY_NIGHT_MODE permission");
                 return;
             }
             int callingUserId = UserHandle.getCallingUserId();
-            UiModeManagerService.m99$$Nest$menforceValidCallingUser(UiModeManagerService.this, callingUserId);
+            UiModeManagerService.m99$$Nest$menforceValidCallingUser(
+                    UiModeManagerService.this, callingUserId);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
@@ -1024,7 +1256,8 @@ public final class UiModeManagerService extends SystemService {
                 UiModeManagerService uiModeManagerService = UiModeManagerService.this;
                 uiModeManagerService.mCustomAutoNightModeStartMilliseconds = ofNanoOfDay;
                 uiModeManagerService.persistNightMode(callingUserId);
-                UiModeManagerService.m101$$Nest$monCustomTimeUpdated(UiModeManagerService.this, callingUserId);
+                UiModeManagerService.m101$$Nest$monCustomTimeUpdated(
+                        UiModeManagerService.this, callingUserId);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -1043,7 +1276,8 @@ public final class UiModeManagerService extends SystemService {
         }
 
         public final boolean setNightModeActivated(boolean z) {
-            return setNightModeActivatedForModeInternal(UiModeManagerService.this.mNightModeCustomType, z);
+            return setNightModeActivatedForModeInternal(
+                    UiModeManagerService.this.mNightModeCustomType, z);
         }
 
         public final boolean setNightModeActivatedForCustomMode(int i, boolean z) {
@@ -1051,16 +1285,31 @@ public final class UiModeManagerService extends SystemService {
         }
 
         public final boolean setNightModeActivatedForModeInternal(int i, boolean z) {
-            if (UiModeManagerService.this.getContext().checkCallingOrSelfPermission("android.permission.MODIFY_DAY_NIGHT_MODE") != 0) {
+            if (UiModeManagerService.this
+                            .getContext()
+                            .checkCallingOrSelfPermission(
+                                    "android.permission.MODIFY_DAY_NIGHT_MODE")
+                    != 0) {
                 Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                Slog.e("UiModeManager", "Night mode locked, requires MODIFY_DAY_NIGHT_MODE permission");
+                Slog.e(
+                        "UiModeManager",
+                        "Night mode locked, requires MODIFY_DAY_NIGHT_MODE permission");
                 return false;
             }
             int identifier = Binder.getCallingUserHandle().getIdentifier();
-            UiModeManagerService.m99$$Nest$menforceValidCallingUser(UiModeManagerService.this, identifier);
+            UiModeManagerService.m99$$Nest$menforceValidCallingUser(
+                    UiModeManagerService.this, identifier);
             UiModeManagerService uiModeManagerService = UiModeManagerService.this;
-            if (identifier != uiModeManagerService.mCurrentUser && uiModeManagerService.getContext().checkCallingOrSelfPermission("android.permission.INTERACT_ACROSS_USERS") != 0) {
-                Slog.e("UiModeManager", "Target user is not current user, INTERACT_ACROSS_USERS permission is required");
+            if (identifier != uiModeManagerService.mCurrentUser
+                    && uiModeManagerService
+                                    .getContext()
+                                    .checkCallingOrSelfPermission(
+                                            "android.permission.INTERACT_ACROSS_USERS")
+                            != 0) {
+                Slog.e(
+                        "UiModeManager",
+                        "Target user is not current user, INTERACT_ACROSS_USERS permission is"
+                            + " required");
                 return false;
             }
             if (i == 1) {
@@ -1071,14 +1320,21 @@ public final class UiModeManagerService extends SystemService {
                 return false;
             }
             if (!UiModeManagerService.m98$$Nest$mcanSetNightMode(uiModeManagerService2)) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("Ignore setNightModeActivated : ", ", mNightMode ", z);
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                "Ignore setNightModeActivated : ", ", mNightMode ", z);
                 m.append(UiModeManagerService.this.mNightMode);
                 Log.i("UiModeManager", m.toString());
                 return false;
             }
-            String nameForUid = UiModeManagerService.this.getContext().getPackageManager().getNameForUid(Binder.getCallingUid());
+            String nameForUid =
+                    UiModeManagerService.this
+                            .getContext()
+                            .getPackageManager()
+                            .getNameForUid(Binder.getCallingUid());
             int callingPid = Binder.getCallingPid();
-            String m100$$Nest$mgetPackageName = UiModeManagerService.m100$$Nest$mgetPackageName(UiModeManagerService.this);
+            String m100$$Nest$mgetPackageName =
+                    UiModeManagerService.m100$$Nest$mgetPackageName(UiModeManagerService.this);
             synchronized (UiModeManagerService.this.mLock) {
                 try {
                     long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -1092,12 +1348,29 @@ public final class UiModeManagerService extends SystemService {
                             } else if (i2 == 2 && !z) {
                                 anonymousClass1.set(1);
                             }
-                            Settings.System.putIntForUser(UiModeManagerService.this.getContext().getContentResolver(), "display_night_theme", z ? 1 : 0, UiModeManagerService.this.mCurrentUser);
-                            LogWrapper.i("setNightModeActivated : " + z + " by " + callingPid + ", " + nameForUid + ", " + m100$$Nest$mgetPackageName + ", mNightMode " + UiModeManagerService.this.mNightMode + ", mNightModeCustomType " + UiModeManagerService.this.mNightModeCustomType);
+                            Settings.System.putIntForUser(
+                                    UiModeManagerService.this.getContext().getContentResolver(),
+                                    "display_night_theme",
+                                    z ? 1 : 0,
+                                    UiModeManagerService.this.mCurrentUser);
+                            LogWrapper.i(
+                                    "setNightModeActivated : "
+                                            + z
+                                            + " by "
+                                            + callingPid
+                                            + ", "
+                                            + nameForUid
+                                            + ", "
+                                            + m100$$Nest$mgetPackageName
+                                            + ", mNightMode "
+                                            + UiModeManagerService.this.mNightMode
+                                            + ", mNightModeCustomType "
+                                            + UiModeManagerService.this.mNightModeCustomType);
                             UiModeManagerService.this.updateConfigurationLocked();
                             UiModeManagerService.this.applyConfigurationExternallyLocked();
                             UiModeManagerService uiModeManagerService4 = UiModeManagerService.this;
-                            uiModeManagerService4.persistNightMode(uiModeManagerService4.mCurrentUser);
+                            uiModeManagerService4.persistNightMode(
+                                    uiModeManagerService4.mCurrentUser);
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         }
                         uiModeManagerService3.unregisterDeviceInactiveListenerLocked();
@@ -1112,12 +1385,29 @@ public final class UiModeManagerService extends SystemService {
                             uiModeManagerService6.mWaitForDeviceInactive = false;
                         }
                         uiModeManagerService6.mComputedNightMode = z;
-                        Settings.System.putIntForUser(UiModeManagerService.this.getContext().getContentResolver(), "display_night_theme", z ? 1 : 0, UiModeManagerService.this.mCurrentUser);
-                        LogWrapper.i("setNightModeActivated : " + z + " by " + callingPid + ", " + nameForUid + ", " + m100$$Nest$mgetPackageName + ", mNightMode " + UiModeManagerService.this.mNightMode + ", mNightModeCustomType " + UiModeManagerService.this.mNightModeCustomType);
+                        Settings.System.putIntForUser(
+                                UiModeManagerService.this.getContext().getContentResolver(),
+                                "display_night_theme",
+                                z ? 1 : 0,
+                                UiModeManagerService.this.mCurrentUser);
+                        LogWrapper.i(
+                                "setNightModeActivated : "
+                                        + z
+                                        + " by "
+                                        + callingPid
+                                        + ", "
+                                        + nameForUid
+                                        + ", "
+                                        + m100$$Nest$mgetPackageName
+                                        + ", mNightMode "
+                                        + UiModeManagerService.this.mNightMode
+                                        + ", mNightModeCustomType "
+                                        + UiModeManagerService.this.mNightModeCustomType);
                         UiModeManagerService.this.updateConfigurationLocked();
                         UiModeManagerService.this.applyConfigurationExternallyLocked();
                         UiModeManagerService uiModeManagerService42 = UiModeManagerService.this;
-                        uiModeManagerService42.persistNightMode(uiModeManagerService42.mCurrentUser);
+                        uiModeManagerService42.persistNightMode(
+                                uiModeManagerService42.mCurrentUser);
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     } catch (Throwable th) {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1136,21 +1426,35 @@ public final class UiModeManagerService extends SystemService {
         }
 
         public final void setNightModeInternal(int i, int i2) {
-            if (isNightModeLocked() && UiModeManagerService.this.getContext().checkCallingOrSelfPermission("android.permission.MODIFY_DAY_NIGHT_MODE") != 0) {
+            if (isNightModeLocked()
+                    && UiModeManagerService.this
+                                    .getContext()
+                                    .checkCallingOrSelfPermission(
+                                            "android.permission.MODIFY_DAY_NIGHT_MODE")
+                            != 0) {
                 Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                Slog.e("UiModeManager", "Night mode locked, requires MODIFY_DAY_NIGHT_MODE permission");
+                Slog.e(
+                        "UiModeManager",
+                        "Night mode locked, requires MODIFY_DAY_NIGHT_MODE permission");
                 return;
             }
             if (i != 0 && i != 1 && i != 2) {
                 if (i != 3) {
-                    throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown mode: "));
+                    throw new IllegalArgumentException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown mode: "));
                 }
-                if (!UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES.contains(Integer.valueOf(i2))) {
-                    throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "Can't set the custom type to "));
+                if (!UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES.contains(
+                        Integer.valueOf(i2))) {
+                    throw new IllegalArgumentException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                    i2, "Can't set the custom type to "));
                 }
             }
-            if (i != 1 && !UiModeManagerService.m98$$Nest$mcanSetNightMode(UiModeManagerService.this)) {
-                DirEncryptService$$ExternalSyntheticOutline0.m(i, "Ignore setNightMode : ", "UiModeManager");
+            if (i != 1
+                    && !UiModeManagerService.m98$$Nest$mcanSetNightMode(
+                            UiModeManagerService.this)) {
+                DirEncryptService$$ExternalSyntheticOutline0.m(
+                        i, "Ignore setNightMode : ", "UiModeManager");
                 return;
             }
             UiModeManagerService.m99$$Nest$menforceValidCallingUser(UiModeManagerService.this, -2);
@@ -1163,8 +1467,10 @@ public final class UiModeManagerService extends SystemService {
                         if (i3 != i || uiModeManagerService.mNightModeCustomType != i2) {
                             if (i3 == 0 || i3 == 3) {
                                 uiModeManagerService.unregisterDeviceInactiveListenerLocked();
-                                UiModeManagerService uiModeManagerService2 = UiModeManagerService.this;
-                                uiModeManagerService2.mAlarmManager.cancel(uiModeManagerService2.mCustomTimeListener);
+                                UiModeManagerService uiModeManagerService2 =
+                                        UiModeManagerService.this;
+                                uiModeManagerService2.mAlarmManager.cancel(
+                                        uiModeManagerService2.mCustomTimeListener);
                             }
                             UiModeManagerService uiModeManagerService3 = UiModeManagerService.this;
                             uiModeManagerService3.mNightModeCustomType = i == 3 ? i2 : -1;
@@ -1173,17 +1479,40 @@ public final class UiModeManagerService extends SystemService {
                             uiModeManagerService4.mAttentionModeThemeOverlay = 1000;
                             uiModeManagerService4.resetNightModeOverrideLocked();
                             UiModeManagerService.this.persistNightMode(-2);
-                            LogWrapper.i("setNightMode : " + i + ", customModeType : " + i2 + ", by " + Binder.getCallingPid() + ", " + UiModeManagerService.this.getContext().getPackageManager().getNameForUid(Binder.getCallingUid()) + ", " + UiModeManagerService.m100$$Nest$mgetPackageName(UiModeManagerService.this));
+                            LogWrapper.i(
+                                    "setNightMode : "
+                                            + i
+                                            + ", customModeType : "
+                                            + i2
+                                            + ", by "
+                                            + Binder.getCallingPid()
+                                            + ", "
+                                            + UiModeManagerService.this
+                                                    .getContext()
+                                                    .getPackageManager()
+                                                    .getNameForUid(Binder.getCallingUid())
+                                            + ", "
+                                            + UiModeManagerService.m100$$Nest$mgetPackageName(
+                                                    UiModeManagerService.this));
                             UiModeManagerService.this.persistNightModeSettingDB(-2);
                             UiModeManagerService uiModeManagerService5 = UiModeManagerService.this;
                             int i4 = uiModeManagerService5.mNightMode.mNightModeValue;
-                            if ((i4 == 0 || i4 == 3) && !uiModeManagerService5.shouldApplyAutomaticChangesImmediately()) {
-                                UiModeManagerService uiModeManagerService6 = UiModeManagerService.this;
+                            if ((i4 == 0 || i4 == 3)
+                                    && !uiModeManagerService5
+                                            .shouldApplyAutomaticChangesImmediately()) {
+                                UiModeManagerService uiModeManagerService6 =
+                                        UiModeManagerService.this;
                                 if (uiModeManagerService6.mNightMode.mNightModeValue == 3) {
-                                    if (uiModeManagerService6.mComputedNightMode ^ TimeUtils.isTimeBetween(LocalTime.now(), uiModeManagerService6.mCustomAutoNightModeStartMilliseconds, uiModeManagerService6.mCustomAutoNightModeEndMilliseconds)) {
-                                    }
+                                    if (uiModeManagerService6.mComputedNightMode
+                                            ^ TimeUtils.isTimeBetween(
+                                                    LocalTime.now(),
+                                                    uiModeManagerService6
+                                                            .mCustomAutoNightModeStartMilliseconds,
+                                                    uiModeManagerService6
+                                                            .mCustomAutoNightModeEndMilliseconds)) {}
                                 }
-                                UiModeManagerService uiModeManagerService7 = UiModeManagerService.this;
+                                UiModeManagerService uiModeManagerService7 =
+                                        UiModeManagerService.this;
                                 if (!uiModeManagerService7.mAutoModeChangeImmediately) {
                                     uiModeManagerService7.registerDeviceInactiveListenerLocked();
                                 }
@@ -1201,43 +1530,66 @@ public final class UiModeManagerService extends SystemService {
         }
 
         public final void setNightPriorityAllowedPackagesFromScpm(List list) {
-            if (UiModeManagerService.this.getContext().checkCallingOrSelfPermission("android.permission.INTERACT_ACROSS_USERS_FULL") != 0) {
+            if (UiModeManagerService.this
+                            .getContext()
+                            .checkCallingOrSelfPermission(
+                                    "android.permission.INTERACT_ACROSS_USERS_FULL")
+                    != 0) {
                 Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                Slog.e("UiModeManager", "setNightPriorityAllowedPackagesFromScpm requires INTERACT_ACROSS_USERS_FULL permission");
+                Slog.e(
+                        "UiModeManager",
+                        "setNightPriorityAllowedPackagesFromScpm requires"
+                            + " INTERACT_ACROSS_USERS_FULL permission");
                 return;
             }
             if (list == null) {
                 Set set2 = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                Slog.e("UiModeManager", "setNightPriorityAllowedPackagesFromScpm received invalid list");
+                Slog.e(
+                        "UiModeManager",
+                        "setNightPriorityAllowedPackagesFromScpm received invalid list");
                 return;
             }
             synchronized (UiModeManagerService.this.mNightPriorityAllowedPackagesFromScpm) {
                 Set set3 = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
                 Slog.d("UiModeManager", "setNightPriorityAllowedPackagesFromScpm " + list.size());
-                ((ArrayList) UiModeManagerService.this.mNightPriorityAllowedPackagesFromScpm).clear();
-                ((ArrayList) UiModeManagerService.this.mNightPriorityAllowedPackagesFromScpm).addAll(list);
+                ((ArrayList) UiModeManagerService.this.mNightPriorityAllowedPackagesFromScpm)
+                        .clear();
+                ((ArrayList) UiModeManagerService.this.mNightPriorityAllowedPackagesFromScpm)
+                        .addAll(list);
             }
         }
 
         public final void setPackageNightMode(String str, int i, int i2) {
-            if (UiModeManagerService.this.getContext().checkCallingOrSelfPermission("android.permission.MODIFY_DAY_NIGHT_MODE") == 0) {
-                UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(UiModeManagerService.this, str, i, i2);
+            if (UiModeManagerService.this
+                            .getContext()
+                            .checkCallingOrSelfPermission(
+                                    "android.permission.MODIFY_DAY_NIGHT_MODE")
+                    == 0) {
+                UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(
+                        UiModeManagerService.this, str, i, i2);
             } else {
                 Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                Slog.e("UiModeManager", "setPackageNightMode requires MODIFY_DAY_NIGHT_MODE permission");
+                Slog.e(
+                        "UiModeManager",
+                        "setPackageNightMode requires MODIFY_DAY_NIGHT_MODE permission");
             }
         }
     }
 
     /* renamed from: -$$Nest$massertLegit, reason: not valid java name */
-    public static void m97$$Nest$massertLegit(UiModeManagerService uiModeManagerService, String str) {
+    public static void m97$$Nest$massertLegit(
+            UiModeManagerService uiModeManagerService, String str) {
         uiModeManagerService.mInjector.getClass();
         int callingUid = Binder.getCallingUid();
         int userId = UserHandle.getUserId(callingUid);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         boolean z = false;
         try {
-            if (uiModeManagerService.getContext().getPackageManager().getPackageUidAsUser(str, userId) == callingUid) {
+            if (uiModeManagerService
+                            .getContext()
+                            .getPackageManager()
+                            .getPackageUidAsUser(str, userId)
+                    == callingUid) {
                 z = true;
             }
         } catch (PackageManager.NameNotFoundException unused) {
@@ -1247,31 +1599,51 @@ public final class UiModeManagerService extends SystemService {
         }
         Binder.restoreCallingIdentity(clearCallingIdentity);
         if (!z) {
-            throw new SecurityException(XmlUtils$$ExternalSyntheticOutline0.m("Caller claimed bogus packageName: ", str, "."));
+            throw new SecurityException(
+                    XmlUtils$$ExternalSyntheticOutline0.m(
+                            "Caller claimed bogus packageName: ", str, "."));
         }
     }
 
     /* renamed from: -$$Nest$mcanSetNightMode, reason: not valid java name */
     public static boolean m98$$Nest$mcanSetNightMode(UiModeManagerService uiModeManagerService) {
-        String string = Settings.System.getString(uiModeManagerService.getContext().getContentResolver(), "current_sec_active_themepackage");
+        String string =
+                Settings.System.getString(
+                        uiModeManagerService.getContext().getContentResolver(),
+                        "current_sec_active_themepackage");
         if (string != null && !string.isEmpty()) {
-            r1 = Settings.System.getInt(uiModeManagerService.getContext().getContentResolver(), "current_theme_support_night_mode", 0) == 1;
+            r1 =
+                    Settings.System.getInt(
+                                    uiModeManagerService.getContext().getContentResolver(),
+                                    "current_theme_support_night_mode",
+                                    0)
+                            == 1;
             if (!r1) {
-                Log.i("UiModeManager", "Cannot set night mode because current theme does not support night mode");
+                Log.i(
+                        "UiModeManager",
+                        "Cannot set night mode because current theme does not support night mode");
             }
         }
         return r1;
     }
 
     /* renamed from: -$$Nest$menforceValidCallingUser, reason: not valid java name */
-    public static void m99$$Nest$menforceValidCallingUser(UiModeManagerService uiModeManagerService, int i) {
+    public static void m99$$Nest$menforceValidCallingUser(
+            UiModeManagerService uiModeManagerService, int i) {
         uiModeManagerService.getClass();
         if (UserManager.isVisibleBackgroundUsersEnabled()) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             if (i != 0) {
                 try {
-                    if (i != uiModeManagerService.mCurrentUser && !UserManagerService.getInstance().isSameProfileGroup(i, uiModeManagerService.mCurrentUser)) {
-                        throw new SecurityException("Calling user is not valid for level-1 compatibility in MUMD. callingUserId=" + i + " currentUserId=" + uiModeManagerService.mCurrentUser);
+                    if (i != uiModeManagerService.mCurrentUser
+                            && !UserManagerService.getInstance()
+                                    .isSameProfileGroup(i, uiModeManagerService.mCurrentUser)) {
+                        throw new SecurityException(
+                                "Calling user is not valid for level-1 compatibility in MUMD."
+                                    + " callingUserId="
+                                        + i
+                                        + " currentUserId="
+                                        + uiModeManagerService.mCurrentUser);
                     }
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1286,19 +1658,27 @@ public final class UiModeManagerService extends SystemService {
         try {
             return ActivityManager.getService().getPackageFromAppProcesses(Binder.getCallingPid());
         } catch (Exception e) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "Exception in getPackageNameFromAppProcesses : ", "UiModeManager");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e, "Exception in getPackageNameFromAppProcesses : ", "UiModeManager");
             return "none";
         }
     }
 
     /* renamed from: -$$Nest$monCustomTimeUpdated, reason: not valid java name */
-    public static void m101$$Nest$monCustomTimeUpdated(UiModeManagerService uiModeManagerService, int i) {
+    public static void m101$$Nest$monCustomTimeUpdated(
+            UiModeManagerService uiModeManagerService, int i) {
         uiModeManagerService.persistNightMode(i);
         AnonymousClass1 anonymousClass1 = uiModeManagerService.mNightMode;
         if (anonymousClass1.mNightModeValue != 3) {
             return;
         }
-        if (!uiModeManagerService.shouldApplyAutomaticChangesImmediately() && (anonymousClass1.mNightModeValue != 3 || !(TimeUtils.isTimeBetween(LocalTime.now(), uiModeManagerService.mCustomAutoNightModeStartMilliseconds, uiModeManagerService.mCustomAutoNightModeEndMilliseconds) ^ uiModeManagerService.mComputedNightMode))) {
+        if (!uiModeManagerService.shouldApplyAutomaticChangesImmediately()
+                && (anonymousClass1.mNightModeValue != 3
+                        || !(TimeUtils.isTimeBetween(
+                                        LocalTime.now(),
+                                        uiModeManagerService.mCustomAutoNightModeStartMilliseconds,
+                                        uiModeManagerService.mCustomAutoNightModeEndMilliseconds)
+                                ^ uiModeManagerService.mComputedNightMode))) {
             uiModeManagerService.registerDeviceInactiveListenerLocked();
         } else {
             uiModeManagerService.unregisterDeviceInactiveListenerLocked();
@@ -1307,7 +1687,8 @@ public final class UiModeManagerService extends SystemService {
     }
 
     /* renamed from: -$$Nest$mreleaseProjectionUnchecked, reason: not valid java name */
-    public static boolean m102$$Nest$mreleaseProjectionUnchecked(UiModeManagerService uiModeManagerService, int i, String str) {
+    public static boolean m102$$Nest$mreleaseProjectionUnchecked(
+            UiModeManagerService uiModeManagerService, int i, String str) {
         boolean z;
         List list;
         synchronized (uiModeManagerService.mLock) {
@@ -1320,7 +1701,9 @@ public final class UiModeManagerService extends SystemService {
                         ProjectionHolder projectionHolder = (ProjectionHolder) list.get(size);
                         if (str.equals(projectionHolder.mPackageName)) {
                             projectionHolder.mBinder.unlinkToDeath(projectionHolder, 0);
-                            Slog.d("UiModeManager", "Projection type " + i + " released by " + str + ".");
+                            Slog.d(
+                                    "UiModeManager",
+                                    "Projection type " + i + " released by " + str + ".");
                             list.remove(size);
                             z2 = true;
                         }
@@ -1330,7 +1713,12 @@ public final class UiModeManagerService extends SystemService {
                 if (z) {
                     uiModeManagerService.onProjectionStateChangedLocked(i);
                 } else {
-                    Slog.w("UiModeManager", str + " tried to release projection type " + i + " but was not set by that package.");
+                    Slog.w(
+                            "UiModeManager",
+                            str
+                                    + " tried to release projection type "
+                                    + i
+                                    + " but was not set by that package.");
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1340,31 +1728,49 @@ public final class UiModeManagerService extends SystemService {
     }
 
     /* renamed from: -$$Nest$msetPackageNightModeInnerLocked, reason: not valid java name */
-    public static boolean m103$$Nest$msetPackageNightModeInnerLocked(UiModeManagerService uiModeManagerService, String str, int i, int i2) {
+    public static boolean m103$$Nest$msetPackageNightModeInnerLocked(
+            UiModeManagerService uiModeManagerService, String str, int i, int i2) {
         uiModeManagerService.getClass();
         if (i2 != 0 && i2 != 2) {
-            NandswapManager$$ExternalSyntheticOutline0.m(i2, "setPackageNightModeInnerLocked received unsupported mode: ", "UiModeManager");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    i2,
+                    "setPackageNightModeInnerLocked received unsupported mode: ",
+                    "UiModeManager");
             return false;
         }
         if (!uiModeManagerService.isNightPriorityAllowedLocked(str)) {
-            BootReceiver$$ExternalSyntheticOutline0.m("setPackageNightModeInnerLocked is not allowed for ", str, "UiModeManager");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    "setPackageNightModeInnerLocked is not allowed for ", str, "UiModeManager");
             return false;
         }
         synchronized (uiModeManagerService.mNightPriorityAppliedPackages) {
-            Slog.d("UiModeManager", "setPackageNightModeInnerLocked m=" + i2 + " p=" + str + " u=" + i + " by " + Binder.getCallingUid());
-            PackageFeatureUserChange packageFeatureUserChange = uiModeManagerService.mNightPriorityAppliedPackages;
+            Slog.d(
+                    "UiModeManager",
+                    "setPackageNightModeInnerLocked m="
+                            + i2
+                            + " p="
+                            + str
+                            + " u="
+                            + i
+                            + " by "
+                            + Binder.getCallingUid());
+            PackageFeatureUserChange packageFeatureUserChange =
+                    uiModeManagerService.mNightPriorityAppliedPackages;
             StringBuilder sb = new StringBuilder();
             sb.append(i2);
             sb.append("/");
             sb.append(Binder.getCallingUid());
             packageFeatureUserChange.putValue(str, i, sb.toString());
         }
-        PackageConfigurationUpdaterImpl packageConfigurationUpdaterImpl = new PackageConfigurationUpdaterImpl(i, ActivityTaskManagerService.this, str);
+        PackageConfigurationUpdaterImpl packageConfigurationUpdaterImpl =
+                new PackageConfigurationUpdaterImpl(i, ActivityTaskManagerService.this, str);
         packageConfigurationUpdaterImpl.setNightMode(i2 == 2 ? 32 : 0);
         packageConfigurationUpdaterImpl.commit();
         int secureFolderId = SemPersonaManager.getSecureFolderId(uiModeManagerService.getContext());
         if (secureFolderId > 0 && i != secureFolderId && i == 0) {
-            PackageConfigurationUpdaterImpl packageConfigurationUpdaterImpl2 = new PackageConfigurationUpdaterImpl(secureFolderId, ActivityTaskManagerService.this, str);
+            PackageConfigurationUpdaterImpl packageConfigurationUpdaterImpl2 =
+                    new PackageConfigurationUpdaterImpl(
+                            secureFolderId, ActivityTaskManagerService.this, str);
             packageConfigurationUpdaterImpl2.setNightMode(i2 == 2 ? 32 : 0);
             packageConfigurationUpdaterImpl2.commit();
         }
@@ -1386,7 +1792,8 @@ public final class UiModeManagerService extends SystemService {
     /* JADX WARN: Type inference failed for: r6v7, types: [com.android.server.UiModeManagerService$2] */
     /* JADX WARN: Type inference failed for: r6v8, types: [com.android.server.UiModeManagerService$2] */
     /* JADX WARN: Type inference failed for: r6v9, types: [com.android.server.UiModeManagerService$$ExternalSyntheticLambda2] */
-    public UiModeManagerService(Context context, boolean z, TwilightManager twilightManager, Injector injector) {
+    public UiModeManagerService(
+            Context context, boolean z, TwilightManager twilightManager, Injector injector) {
         super(context);
         this.mLock = new Object();
         this.mDockState = 0;
@@ -1430,1172 +1837,1574 @@ public final class UiModeManagerService extends SystemService {
         this.mNewDexModeEnabled = false;
         this.mToggleNewDexMode = false;
         final int i = 0;
-        this.mResultReceiver = new BroadcastReceiver(this) { // from class: com.android.server.UiModeManagerService.2
-            public final /* synthetic */ UiModeManagerService this$0;
+        this.mResultReceiver =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.UiModeManagerService.2
+                    public final /* synthetic */ UiModeManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            private final void onReceive$com$android$server$UiModeManagerService$3(Context context2, Intent intent) {
-                int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
-                UiModeManagerService uiModeManagerService = this.this$0;
-                synchronized (uiModeManagerService.mLock) {
-                    try {
-                        if (intExtra != uiModeManagerService.mDockState) {
-                            uiModeManagerService.mDockState = intExtra;
-                            uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
-                            if (uiModeManagerService.mSystemReady) {
-                                uiModeManagerService.updateLocked(1, 0);
+                    private final void onReceive$com$android$server$UiModeManagerService$3(
+                            Context context2, Intent intent) {
+                        int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
+                        UiModeManagerService uiModeManagerService = this.this$0;
+                        synchronized (uiModeManagerService.mLock) {
+                            try {
+                                if (intExtra != uiModeManagerService.mDockState) {
+                                    uiModeManagerService.mDockState = intExtra;
+                                    uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
+                                    if (uiModeManagerService.mSystemReady) {
+                                        uiModeManagerService.updateLocked(1, 0);
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$4(Context context2, Intent intent) {
-                String action = intent.getAction();
-                action.getClass();
-                if (action.equals("android.intent.action.BATTERY_CHANGED")) {
-                    this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
-                }
-                synchronized (this.this$0.mLock) {
-                    try {
-                        UiModeManagerService uiModeManagerService = this.this$0;
-                        if (uiModeManagerService.mSystemReady && (uiModeManagerService.mCarModeEnabled || UiModeManagerService.isDeskDockState(uiModeManagerService.mDockState))) {
+                    private final void onReceive$com$android$server$UiModeManagerService$4(
+                            Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        action.getClass();
+                        if (action.equals("android.intent.action.BATTERY_CHANGED")) {
+                            this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
+                        }
+                        synchronized (this.this$0.mLock) {
+                            try {
+                                UiModeManagerService uiModeManagerService = this.this$0;
+                                if (uiModeManagerService.mSystemReady
+                                        && (uiModeManagerService.mCarModeEnabled
+                                                || UiModeManagerService.isDeskDockState(
+                                                        uiModeManagerService.mDockState))) {
+                                    this.this$0.updateLocked(0, 0);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+
+                    private final void onReceive$com$android$server$UiModeManagerService$6(
+                            Context context2, Intent intent) {
+                        synchronized (this.this$0.mLock) {
+                            this.this$0.unregisterDeviceInactiveListenerLocked();
                             this.this$0.updateLocked(0, 0);
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$6(Context context2, Intent intent) {
-                synchronized (this.this$0.mLock) {
-                    this.this$0.unregisterDeviceInactiveListenerLocked();
-                    this.this$0.updateLocked(0, 0);
-                }
-            }
-
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                int intExtra;
-                switch (i) {
-                    case 0:
-                        if (getResultCode() != -1) {
-                            return;
-                        }
-                        int intExtra2 = intent.getIntExtra("enableFlags", 0);
-                        int intExtra3 = intent.getIntExtra("disableFlags", 0);
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService = this.this$0;
-                            String action = intent.getAction();
-                            uiModeManagerService.getClass();
-                            if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
-                                if (uiModeManagerService.mEnableCarDockLaunch && (intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.CAR_DOCK";
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        int intExtra;
+                        switch (i) {
+                            case 0:
+                                if (getResultCode() != -1) {
+                                    return;
                                 }
-                            } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(action)) {
-                                if ((intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.DESK_DOCK";
+                                int intExtra2 = intent.getIntExtra("enableFlags", 0);
+                                int intExtra3 = intent.getIntExtra("disableFlags", 0);
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService = this.this$0;
+                                    String action = intent.getAction();
+                                    uiModeManagerService.getClass();
+                                    if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
+                                        if (uiModeManagerService.mEnableCarDockLaunch
+                                                && (intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.CAR_DOCK";
+                                        }
+                                    } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(
+                                            action)) {
+                                        if ((intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.DESK_DOCK";
+                                        }
+                                    } else if ((intExtra3 & 1) != 0) {
+                                        r0 = "android.intent.category.HOME";
+                                    }
+                                    uiModeManagerService
+                                            .sendConfigurationAndStartDreamOrDockAppLocked(r0);
                                 }
-                            } else if ((intExtra3 & 1) != 0) {
-                                r0 = "android.intent.category.HOME";
-                            }
-                            uiModeManagerService.sendConfigurationAndStartDreamOrDockAppLocked(r0);
-                        }
-                        return;
-                    case 1:
-                        Uri data = intent.getData();
-                        r0 = data != null ? data.getSchemeSpecificPart() : null;
-                        if (r0 == null || (intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000)) == -10000) {
-                            return;
-                        }
-                        String action2 = intent.getAction();
-                        if (!("android.intent.action.PACKAGE_ADDED".equals(action2) && intent.getBooleanExtra("android.intent.extra.REPLACING", false)) && this.this$0.isNightPriorityAllowedLocked(r0)) {
-                            Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("onReceive : ", action2, ", package : ", r0, ", "), intExtra, "UiModeManager");
-                            UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(this.this$0, r0, intExtra, 2);
-                            synchronized (this.this$0.mPackagesNeedToShowDialog) {
-                                this.this$0.mPackagesNeedToShowDialog.putValue(r0, intExtra, Boolean.TRUE);
-                            }
-                            return;
-                        }
-                        return;
-                    case 2:
-                        UiModeManagerService uiModeManagerService2 = this.this$0;
-                        if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
-                            Settings.Secure.putIntForUser(uiModeManagerService2.getContext().getContentResolver(), "ui_night_mode_last_computed", uiModeManagerService2.mComputedNightMode ? 1 : 0, uiModeManagerService2.mCurrentUser);
-                            return;
-                        }
-                        return;
-                    case 3:
-                        if (Arrays.asList("ui_night_mode", "dark_theme_custom_start_time", "dark_theme_custom_end_time").contains(intent.getExtras().getCharSequence("setting_name"))) {
-                            synchronized (this.this$0.mLock) {
-                                this.this$0.updateNightModeFromSettingsLocked(context2, context2.getResources(), UserHandle.getCallingUserId());
-                                this.this$0.updateConfigurationLocked();
-                                this.this$0.applyConfigurationExternallyLocked();
-                            }
-                            return;
-                        }
-                        return;
-                    case 4:
-                        onReceive$com$android$server$UiModeManagerService$3(context2, intent);
-                        return;
-                    case 5:
-                        onReceive$com$android$server$UiModeManagerService$4(context2, intent);
-                        return;
-                    case 6:
-                        onReceive$com$android$server$UiModeManagerService$6(context2, intent);
-                        return;
-                    default:
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService3 = this.this$0;
-                            if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
-                                if (uiModeManagerService3.shouldApplyAutomaticChangesImmediately()) {
-                                    uiModeManagerService3.updateLocked(0, 0);
-                                } else {
-                                    uiModeManagerService3.registerDeviceInactiveListenerLocked();
+                                return;
+                            case 1:
+                                Uri data = intent.getData();
+                                r0 = data != null ? data.getSchemeSpecificPart() : null;
+                                if (r0 == null
+                                        || (intExtra =
+                                                        intent.getIntExtra(
+                                                                "android.intent.extra.user_handle",
+                                                                -10000))
+                                                == -10000) {
+                                    return;
                                 }
-                                uiModeManagerService3.scheduleNextCustomTimeListener();
-                            }
+                                String action2 = intent.getAction();
+                                if (!("android.intent.action.PACKAGE_ADDED".equals(action2)
+                                                && intent.getBooleanExtra(
+                                                        "android.intent.extra.REPLACING", false))
+                                        && this.this$0.isNightPriorityAllowedLocked(r0)) {
+                                    Set set =
+                                            UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
+                                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                            InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                                    "onReceive : ",
+                                                    action2,
+                                                    ", package : ",
+                                                    r0,
+                                                    ", "),
+                                            intExtra,
+                                            "UiModeManager");
+                                    UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(
+                                            this.this$0, r0, intExtra, 2);
+                                    synchronized (this.this$0.mPackagesNeedToShowDialog) {
+                                        this.this$0.mPackagesNeedToShowDialog.putValue(
+                                                r0, intExtra, Boolean.TRUE);
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 2:
+                                UiModeManagerService uiModeManagerService2 = this.this$0;
+                                if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
+                                    Settings.Secure.putIntForUser(
+                                            uiModeManagerService2.getContext().getContentResolver(),
+                                            "ui_night_mode_last_computed",
+                                            uiModeManagerService2.mComputedNightMode ? 1 : 0,
+                                            uiModeManagerService2.mCurrentUser);
+                                    return;
+                                }
+                                return;
+                            case 3:
+                                if (Arrays.asList(
+                                                "ui_night_mode",
+                                                "dark_theme_custom_start_time",
+                                                "dark_theme_custom_end_time")
+                                        .contains(
+                                                intent.getExtras()
+                                                        .getCharSequence("setting_name"))) {
+                                    synchronized (this.this$0.mLock) {
+                                        this.this$0.updateNightModeFromSettingsLocked(
+                                                context2,
+                                                context2.getResources(),
+                                                UserHandle.getCallingUserId());
+                                        this.this$0.updateConfigurationLocked();
+                                        this.this$0.applyConfigurationExternallyLocked();
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 4:
+                                onReceive$com$android$server$UiModeManagerService$3(
+                                        context2, intent);
+                                return;
+                            case 5:
+                                onReceive$com$android$server$UiModeManagerService$4(
+                                        context2, intent);
+                                return;
+                            case 6:
+                                onReceive$com$android$server$UiModeManagerService$6(
+                                        context2, intent);
+                                return;
+                            default:
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService3 = this.this$0;
+                                    if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
+                                        if (uiModeManagerService3
+                                                .shouldApplyAutomaticChangesImmediately()) {
+                                            uiModeManagerService3.updateLocked(0, 0);
+                                        } else {
+                                            uiModeManagerService3
+                                                    .registerDeviceInactiveListenerLocked();
+                                        }
+                                        uiModeManagerService3.scheduleNextCustomTimeListener();
+                                    }
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         final int i2 = 4;
-        this.mDockModeReceiver = new BroadcastReceiver(this) { // from class: com.android.server.UiModeManagerService.2
-            public final /* synthetic */ UiModeManagerService this$0;
+        this.mDockModeReceiver =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.UiModeManagerService.2
+                    public final /* synthetic */ UiModeManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            private final void onReceive$com$android$server$UiModeManagerService$3(Context context2, Intent intent) {
-                int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
-                UiModeManagerService uiModeManagerService = this.this$0;
-                synchronized (uiModeManagerService.mLock) {
-                    try {
-                        if (intExtra != uiModeManagerService.mDockState) {
-                            uiModeManagerService.mDockState = intExtra;
-                            uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
-                            if (uiModeManagerService.mSystemReady) {
-                                uiModeManagerService.updateLocked(1, 0);
+                    private final void onReceive$com$android$server$UiModeManagerService$3(
+                            Context context2, Intent intent) {
+                        int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
+                        UiModeManagerService uiModeManagerService = this.this$0;
+                        synchronized (uiModeManagerService.mLock) {
+                            try {
+                                if (intExtra != uiModeManagerService.mDockState) {
+                                    uiModeManagerService.mDockState = intExtra;
+                                    uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
+                                    if (uiModeManagerService.mSystemReady) {
+                                        uiModeManagerService.updateLocked(1, 0);
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$4(Context context2, Intent intent) {
-                String action = intent.getAction();
-                action.getClass();
-                if (action.equals("android.intent.action.BATTERY_CHANGED")) {
-                    this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
-                }
-                synchronized (this.this$0.mLock) {
-                    try {
-                        UiModeManagerService uiModeManagerService = this.this$0;
-                        if (uiModeManagerService.mSystemReady && (uiModeManagerService.mCarModeEnabled || UiModeManagerService.isDeskDockState(uiModeManagerService.mDockState))) {
+                    private final void onReceive$com$android$server$UiModeManagerService$4(
+                            Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        action.getClass();
+                        if (action.equals("android.intent.action.BATTERY_CHANGED")) {
+                            this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
+                        }
+                        synchronized (this.this$0.mLock) {
+                            try {
+                                UiModeManagerService uiModeManagerService = this.this$0;
+                                if (uiModeManagerService.mSystemReady
+                                        && (uiModeManagerService.mCarModeEnabled
+                                                || UiModeManagerService.isDeskDockState(
+                                                        uiModeManagerService.mDockState))) {
+                                    this.this$0.updateLocked(0, 0);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+
+                    private final void onReceive$com$android$server$UiModeManagerService$6(
+                            Context context2, Intent intent) {
+                        synchronized (this.this$0.mLock) {
+                            this.this$0.unregisterDeviceInactiveListenerLocked();
                             this.this$0.updateLocked(0, 0);
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$6(Context context2, Intent intent) {
-                synchronized (this.this$0.mLock) {
-                    this.this$0.unregisterDeviceInactiveListenerLocked();
-                    this.this$0.updateLocked(0, 0);
-                }
-            }
-
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                int intExtra;
-                switch (i2) {
-                    case 0:
-                        if (getResultCode() != -1) {
-                            return;
-                        }
-                        int intExtra2 = intent.getIntExtra("enableFlags", 0);
-                        int intExtra3 = intent.getIntExtra("disableFlags", 0);
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService = this.this$0;
-                            String action = intent.getAction();
-                            uiModeManagerService.getClass();
-                            if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
-                                if (uiModeManagerService.mEnableCarDockLaunch && (intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.CAR_DOCK";
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        int intExtra;
+                        switch (i2) {
+                            case 0:
+                                if (getResultCode() != -1) {
+                                    return;
                                 }
-                            } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(action)) {
-                                if ((intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.DESK_DOCK";
+                                int intExtra2 = intent.getIntExtra("enableFlags", 0);
+                                int intExtra3 = intent.getIntExtra("disableFlags", 0);
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService = this.this$0;
+                                    String action = intent.getAction();
+                                    uiModeManagerService.getClass();
+                                    if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
+                                        if (uiModeManagerService.mEnableCarDockLaunch
+                                                && (intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.CAR_DOCK";
+                                        }
+                                    } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(
+                                            action)) {
+                                        if ((intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.DESK_DOCK";
+                                        }
+                                    } else if ((intExtra3 & 1) != 0) {
+                                        r0 = "android.intent.category.HOME";
+                                    }
+                                    uiModeManagerService
+                                            .sendConfigurationAndStartDreamOrDockAppLocked(r0);
                                 }
-                            } else if ((intExtra3 & 1) != 0) {
-                                r0 = "android.intent.category.HOME";
-                            }
-                            uiModeManagerService.sendConfigurationAndStartDreamOrDockAppLocked(r0);
-                        }
-                        return;
-                    case 1:
-                        Uri data = intent.getData();
-                        r0 = data != null ? data.getSchemeSpecificPart() : null;
-                        if (r0 == null || (intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000)) == -10000) {
-                            return;
-                        }
-                        String action2 = intent.getAction();
-                        if (!("android.intent.action.PACKAGE_ADDED".equals(action2) && intent.getBooleanExtra("android.intent.extra.REPLACING", false)) && this.this$0.isNightPriorityAllowedLocked(r0)) {
-                            Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("onReceive : ", action2, ", package : ", r0, ", "), intExtra, "UiModeManager");
-                            UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(this.this$0, r0, intExtra, 2);
-                            synchronized (this.this$0.mPackagesNeedToShowDialog) {
-                                this.this$0.mPackagesNeedToShowDialog.putValue(r0, intExtra, Boolean.TRUE);
-                            }
-                            return;
-                        }
-                        return;
-                    case 2:
-                        UiModeManagerService uiModeManagerService2 = this.this$0;
-                        if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
-                            Settings.Secure.putIntForUser(uiModeManagerService2.getContext().getContentResolver(), "ui_night_mode_last_computed", uiModeManagerService2.mComputedNightMode ? 1 : 0, uiModeManagerService2.mCurrentUser);
-                            return;
-                        }
-                        return;
-                    case 3:
-                        if (Arrays.asList("ui_night_mode", "dark_theme_custom_start_time", "dark_theme_custom_end_time").contains(intent.getExtras().getCharSequence("setting_name"))) {
-                            synchronized (this.this$0.mLock) {
-                                this.this$0.updateNightModeFromSettingsLocked(context2, context2.getResources(), UserHandle.getCallingUserId());
-                                this.this$0.updateConfigurationLocked();
-                                this.this$0.applyConfigurationExternallyLocked();
-                            }
-                            return;
-                        }
-                        return;
-                    case 4:
-                        onReceive$com$android$server$UiModeManagerService$3(context2, intent);
-                        return;
-                    case 5:
-                        onReceive$com$android$server$UiModeManagerService$4(context2, intent);
-                        return;
-                    case 6:
-                        onReceive$com$android$server$UiModeManagerService$6(context2, intent);
-                        return;
-                    default:
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService3 = this.this$0;
-                            if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
-                                if (uiModeManagerService3.shouldApplyAutomaticChangesImmediately()) {
-                                    uiModeManagerService3.updateLocked(0, 0);
-                                } else {
-                                    uiModeManagerService3.registerDeviceInactiveListenerLocked();
+                                return;
+                            case 1:
+                                Uri data = intent.getData();
+                                r0 = data != null ? data.getSchemeSpecificPart() : null;
+                                if (r0 == null
+                                        || (intExtra =
+                                                        intent.getIntExtra(
+                                                                "android.intent.extra.user_handle",
+                                                                -10000))
+                                                == -10000) {
+                                    return;
                                 }
-                                uiModeManagerService3.scheduleNextCustomTimeListener();
-                            }
+                                String action2 = intent.getAction();
+                                if (!("android.intent.action.PACKAGE_ADDED".equals(action2)
+                                                && intent.getBooleanExtra(
+                                                        "android.intent.extra.REPLACING", false))
+                                        && this.this$0.isNightPriorityAllowedLocked(r0)) {
+                                    Set set =
+                                            UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
+                                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                            InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                                    "onReceive : ",
+                                                    action2,
+                                                    ", package : ",
+                                                    r0,
+                                                    ", "),
+                                            intExtra,
+                                            "UiModeManager");
+                                    UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(
+                                            this.this$0, r0, intExtra, 2);
+                                    synchronized (this.this$0.mPackagesNeedToShowDialog) {
+                                        this.this$0.mPackagesNeedToShowDialog.putValue(
+                                                r0, intExtra, Boolean.TRUE);
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 2:
+                                UiModeManagerService uiModeManagerService2 = this.this$0;
+                                if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
+                                    Settings.Secure.putIntForUser(
+                                            uiModeManagerService2.getContext().getContentResolver(),
+                                            "ui_night_mode_last_computed",
+                                            uiModeManagerService2.mComputedNightMode ? 1 : 0,
+                                            uiModeManagerService2.mCurrentUser);
+                                    return;
+                                }
+                                return;
+                            case 3:
+                                if (Arrays.asList(
+                                                "ui_night_mode",
+                                                "dark_theme_custom_start_time",
+                                                "dark_theme_custom_end_time")
+                                        .contains(
+                                                intent.getExtras()
+                                                        .getCharSequence("setting_name"))) {
+                                    synchronized (this.this$0.mLock) {
+                                        this.this$0.updateNightModeFromSettingsLocked(
+                                                context2,
+                                                context2.getResources(),
+                                                UserHandle.getCallingUserId());
+                                        this.this$0.updateConfigurationLocked();
+                                        this.this$0.applyConfigurationExternallyLocked();
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 4:
+                                onReceive$com$android$server$UiModeManagerService$3(
+                                        context2, intent);
+                                return;
+                            case 5:
+                                onReceive$com$android$server$UiModeManagerService$4(
+                                        context2, intent);
+                                return;
+                            case 6:
+                                onReceive$com$android$server$UiModeManagerService$6(
+                                        context2, intent);
+                                return;
+                            default:
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService3 = this.this$0;
+                                    if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
+                                        if (uiModeManagerService3
+                                                .shouldApplyAutomaticChangesImmediately()) {
+                                            uiModeManagerService3.updateLocked(0, 0);
+                                        } else {
+                                            uiModeManagerService3
+                                                    .registerDeviceInactiveListenerLocked();
+                                        }
+                                        uiModeManagerService3.scheduleNextCustomTimeListener();
+                                    }
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         final int i3 = 5;
-        this.mBatteryReceiver = new BroadcastReceiver(this) { // from class: com.android.server.UiModeManagerService.2
-            public final /* synthetic */ UiModeManagerService this$0;
+        this.mBatteryReceiver =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.UiModeManagerService.2
+                    public final /* synthetic */ UiModeManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            private final void onReceive$com$android$server$UiModeManagerService$3(Context context2, Intent intent) {
-                int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
-                UiModeManagerService uiModeManagerService = this.this$0;
-                synchronized (uiModeManagerService.mLock) {
-                    try {
-                        if (intExtra != uiModeManagerService.mDockState) {
-                            uiModeManagerService.mDockState = intExtra;
-                            uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
-                            if (uiModeManagerService.mSystemReady) {
-                                uiModeManagerService.updateLocked(1, 0);
+                    private final void onReceive$com$android$server$UiModeManagerService$3(
+                            Context context2, Intent intent) {
+                        int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
+                        UiModeManagerService uiModeManagerService = this.this$0;
+                        synchronized (uiModeManagerService.mLock) {
+                            try {
+                                if (intExtra != uiModeManagerService.mDockState) {
+                                    uiModeManagerService.mDockState = intExtra;
+                                    uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
+                                    if (uiModeManagerService.mSystemReady) {
+                                        uiModeManagerService.updateLocked(1, 0);
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$4(Context context2, Intent intent) {
-                String action = intent.getAction();
-                action.getClass();
-                if (action.equals("android.intent.action.BATTERY_CHANGED")) {
-                    this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
-                }
-                synchronized (this.this$0.mLock) {
-                    try {
-                        UiModeManagerService uiModeManagerService = this.this$0;
-                        if (uiModeManagerService.mSystemReady && (uiModeManagerService.mCarModeEnabled || UiModeManagerService.isDeskDockState(uiModeManagerService.mDockState))) {
+                    private final void onReceive$com$android$server$UiModeManagerService$4(
+                            Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        action.getClass();
+                        if (action.equals("android.intent.action.BATTERY_CHANGED")) {
+                            this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
+                        }
+                        synchronized (this.this$0.mLock) {
+                            try {
+                                UiModeManagerService uiModeManagerService = this.this$0;
+                                if (uiModeManagerService.mSystemReady
+                                        && (uiModeManagerService.mCarModeEnabled
+                                                || UiModeManagerService.isDeskDockState(
+                                                        uiModeManagerService.mDockState))) {
+                                    this.this$0.updateLocked(0, 0);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+
+                    private final void onReceive$com$android$server$UiModeManagerService$6(
+                            Context context2, Intent intent) {
+                        synchronized (this.this$0.mLock) {
+                            this.this$0.unregisterDeviceInactiveListenerLocked();
                             this.this$0.updateLocked(0, 0);
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$6(Context context2, Intent intent) {
-                synchronized (this.this$0.mLock) {
-                    this.this$0.unregisterDeviceInactiveListenerLocked();
-                    this.this$0.updateLocked(0, 0);
-                }
-            }
-
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                int intExtra;
-                switch (i3) {
-                    case 0:
-                        if (getResultCode() != -1) {
-                            return;
-                        }
-                        int intExtra2 = intent.getIntExtra("enableFlags", 0);
-                        int intExtra3 = intent.getIntExtra("disableFlags", 0);
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService = this.this$0;
-                            String action = intent.getAction();
-                            uiModeManagerService.getClass();
-                            if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
-                                if (uiModeManagerService.mEnableCarDockLaunch && (intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.CAR_DOCK";
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        int intExtra;
+                        switch (i3) {
+                            case 0:
+                                if (getResultCode() != -1) {
+                                    return;
                                 }
-                            } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(action)) {
-                                if ((intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.DESK_DOCK";
+                                int intExtra2 = intent.getIntExtra("enableFlags", 0);
+                                int intExtra3 = intent.getIntExtra("disableFlags", 0);
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService = this.this$0;
+                                    String action = intent.getAction();
+                                    uiModeManagerService.getClass();
+                                    if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
+                                        if (uiModeManagerService.mEnableCarDockLaunch
+                                                && (intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.CAR_DOCK";
+                                        }
+                                    } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(
+                                            action)) {
+                                        if ((intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.DESK_DOCK";
+                                        }
+                                    } else if ((intExtra3 & 1) != 0) {
+                                        r0 = "android.intent.category.HOME";
+                                    }
+                                    uiModeManagerService
+                                            .sendConfigurationAndStartDreamOrDockAppLocked(r0);
                                 }
-                            } else if ((intExtra3 & 1) != 0) {
-                                r0 = "android.intent.category.HOME";
-                            }
-                            uiModeManagerService.sendConfigurationAndStartDreamOrDockAppLocked(r0);
-                        }
-                        return;
-                    case 1:
-                        Uri data = intent.getData();
-                        r0 = data != null ? data.getSchemeSpecificPart() : null;
-                        if (r0 == null || (intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000)) == -10000) {
-                            return;
-                        }
-                        String action2 = intent.getAction();
-                        if (!("android.intent.action.PACKAGE_ADDED".equals(action2) && intent.getBooleanExtra("android.intent.extra.REPLACING", false)) && this.this$0.isNightPriorityAllowedLocked(r0)) {
-                            Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("onReceive : ", action2, ", package : ", r0, ", "), intExtra, "UiModeManager");
-                            UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(this.this$0, r0, intExtra, 2);
-                            synchronized (this.this$0.mPackagesNeedToShowDialog) {
-                                this.this$0.mPackagesNeedToShowDialog.putValue(r0, intExtra, Boolean.TRUE);
-                            }
-                            return;
-                        }
-                        return;
-                    case 2:
-                        UiModeManagerService uiModeManagerService2 = this.this$0;
-                        if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
-                            Settings.Secure.putIntForUser(uiModeManagerService2.getContext().getContentResolver(), "ui_night_mode_last_computed", uiModeManagerService2.mComputedNightMode ? 1 : 0, uiModeManagerService2.mCurrentUser);
-                            return;
-                        }
-                        return;
-                    case 3:
-                        if (Arrays.asList("ui_night_mode", "dark_theme_custom_start_time", "dark_theme_custom_end_time").contains(intent.getExtras().getCharSequence("setting_name"))) {
-                            synchronized (this.this$0.mLock) {
-                                this.this$0.updateNightModeFromSettingsLocked(context2, context2.getResources(), UserHandle.getCallingUserId());
-                                this.this$0.updateConfigurationLocked();
-                                this.this$0.applyConfigurationExternallyLocked();
-                            }
-                            return;
-                        }
-                        return;
-                    case 4:
-                        onReceive$com$android$server$UiModeManagerService$3(context2, intent);
-                        return;
-                    case 5:
-                        onReceive$com$android$server$UiModeManagerService$4(context2, intent);
-                        return;
-                    case 6:
-                        onReceive$com$android$server$UiModeManagerService$6(context2, intent);
-                        return;
-                    default:
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService3 = this.this$0;
-                            if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
-                                if (uiModeManagerService3.shouldApplyAutomaticChangesImmediately()) {
-                                    uiModeManagerService3.updateLocked(0, 0);
-                                } else {
-                                    uiModeManagerService3.registerDeviceInactiveListenerLocked();
+                                return;
+                            case 1:
+                                Uri data = intent.getData();
+                                r0 = data != null ? data.getSchemeSpecificPart() : null;
+                                if (r0 == null
+                                        || (intExtra =
+                                                        intent.getIntExtra(
+                                                                "android.intent.extra.user_handle",
+                                                                -10000))
+                                                == -10000) {
+                                    return;
                                 }
-                                uiModeManagerService3.scheduleNextCustomTimeListener();
-                            }
-                        }
-                        return;
-                }
-            }
-        };
-        this.mTwilightListener = new TwilightListener() { // from class: com.android.server.UiModeManagerService.5
-            @Override // com.android.server.twilight.TwilightListener
-            public final void onTwilightStateChanged(TwilightState twilightState) {
-                synchronized (UiModeManagerService.this.mLock) {
-                    try {
-                        UiModeManagerService uiModeManagerService = UiModeManagerService.this;
-                        if (uiModeManagerService.mNightMode.mNightModeValue == 0 && uiModeManagerService.mSystemReady) {
-                            if (!uiModeManagerService.shouldApplyAutomaticChangesImmediately()) {
-                                UiModeManagerService uiModeManagerService2 = UiModeManagerService.this;
-                                if (!uiModeManagerService2.mAutoModeChangeImmediately) {
-                                    uiModeManagerService2.registerDeviceInactiveListenerLocked();
+                                String action2 = intent.getAction();
+                                if (!("android.intent.action.PACKAGE_ADDED".equals(action2)
+                                                && intent.getBooleanExtra(
+                                                        "android.intent.extra.REPLACING", false))
+                                        && this.this$0.isNightPriorityAllowedLocked(r0)) {
+                                    Set set =
+                                            UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
+                                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                            InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                                    "onReceive : ",
+                                                    action2,
+                                                    ", package : ",
+                                                    r0,
+                                                    ", "),
+                                            intExtra,
+                                            "UiModeManager");
+                                    UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(
+                                            this.this$0, r0, intExtra, 2);
+                                    synchronized (this.this$0.mPackagesNeedToShowDialog) {
+                                        this.this$0.mPackagesNeedToShowDialog.putValue(
+                                                r0, intExtra, Boolean.TRUE);
+                                    }
+                                    return;
                                 }
-                            }
-                            if (UiModeManagerService.this.mAutoModeChangeImmediately) {
-                                Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                                LogWrapper.i("Twilight state is changed immediately after MODE_NIGHT_AUTO setting");
-                            }
-                            UiModeManagerService.this.updateLocked(0, 0);
+                                return;
+                            case 2:
+                                UiModeManagerService uiModeManagerService2 = this.this$0;
+                                if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
+                                    Settings.Secure.putIntForUser(
+                                            uiModeManagerService2.getContext().getContentResolver(),
+                                            "ui_night_mode_last_computed",
+                                            uiModeManagerService2.mComputedNightMode ? 1 : 0,
+                                            uiModeManagerService2.mCurrentUser);
+                                    return;
+                                }
+                                return;
+                            case 3:
+                                if (Arrays.asList(
+                                                "ui_night_mode",
+                                                "dark_theme_custom_start_time",
+                                                "dark_theme_custom_end_time")
+                                        .contains(
+                                                intent.getExtras()
+                                                        .getCharSequence("setting_name"))) {
+                                    synchronized (this.this$0.mLock) {
+                                        this.this$0.updateNightModeFromSettingsLocked(
+                                                context2,
+                                                context2.getResources(),
+                                                UserHandle.getCallingUserId());
+                                        this.this$0.updateConfigurationLocked();
+                                        this.this$0.applyConfigurationExternallyLocked();
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 4:
+                                onReceive$com$android$server$UiModeManagerService$3(
+                                        context2, intent);
+                                return;
+                            case 5:
+                                onReceive$com$android$server$UiModeManagerService$4(
+                                        context2, intent);
+                                return;
+                            case 6:
+                                onReceive$com$android$server$UiModeManagerService$6(
+                                        context2, intent);
+                                return;
+                            default:
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService3 = this.this$0;
+                                    if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
+                                        if (uiModeManagerService3
+                                                .shouldApplyAutomaticChangesImmediately()) {
+                                            uiModeManagerService3.updateLocked(0, 0);
+                                        } else {
+                                            uiModeManagerService3
+                                                    .registerDeviceInactiveListenerLocked();
+                                        }
+                                        uiModeManagerService3.scheduleNextCustomTimeListener();
+                                    }
+                                }
+                                return;
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
-        };
+                };
+        this.mTwilightListener =
+                new TwilightListener() { // from class: com.android.server.UiModeManagerService.5
+                    @Override // com.android.server.twilight.TwilightListener
+                    public final void onTwilightStateChanged(TwilightState twilightState) {
+                        synchronized (UiModeManagerService.this.mLock) {
+                            try {
+                                UiModeManagerService uiModeManagerService =
+                                        UiModeManagerService.this;
+                                if (uiModeManagerService.mNightMode.mNightModeValue == 0
+                                        && uiModeManagerService.mSystemReady) {
+                                    if (!uiModeManagerService
+                                            .shouldApplyAutomaticChangesImmediately()) {
+                                        UiModeManagerService uiModeManagerService2 =
+                                                UiModeManagerService.this;
+                                        if (!uiModeManagerService2.mAutoModeChangeImmediately) {
+                                            uiModeManagerService2
+                                                    .registerDeviceInactiveListenerLocked();
+                                        }
+                                    }
+                                    if (UiModeManagerService.this.mAutoModeChangeImmediately) {
+                                        Set set =
+                                                UiModeManagerService
+                                                        .SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
+                                        LogWrapper.i(
+                                                "Twilight state is changed immediately after"
+                                                    + " MODE_NIGHT_AUTO setting");
+                                    }
+                                    UiModeManagerService.this.updateLocked(0, 0);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+                };
         final int i4 = 6;
-        this.mDeviceInactiveListener = new BroadcastReceiver(this) { // from class: com.android.server.UiModeManagerService.2
-            public final /* synthetic */ UiModeManagerService this$0;
+        this.mDeviceInactiveListener =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.UiModeManagerService.2
+                    public final /* synthetic */ UiModeManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            private final void onReceive$com$android$server$UiModeManagerService$3(Context context2, Intent intent) {
-                int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
-                UiModeManagerService uiModeManagerService = this.this$0;
-                synchronized (uiModeManagerService.mLock) {
-                    try {
-                        if (intExtra != uiModeManagerService.mDockState) {
-                            uiModeManagerService.mDockState = intExtra;
-                            uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
-                            if (uiModeManagerService.mSystemReady) {
-                                uiModeManagerService.updateLocked(1, 0);
+                    private final void onReceive$com$android$server$UiModeManagerService$3(
+                            Context context2, Intent intent) {
+                        int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
+                        UiModeManagerService uiModeManagerService = this.this$0;
+                        synchronized (uiModeManagerService.mLock) {
+                            try {
+                                if (intExtra != uiModeManagerService.mDockState) {
+                                    uiModeManagerService.mDockState = intExtra;
+                                    uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
+                                    if (uiModeManagerService.mSystemReady) {
+                                        uiModeManagerService.updateLocked(1, 0);
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$4(Context context2, Intent intent) {
-                String action = intent.getAction();
-                action.getClass();
-                if (action.equals("android.intent.action.BATTERY_CHANGED")) {
-                    this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
-                }
-                synchronized (this.this$0.mLock) {
-                    try {
-                        UiModeManagerService uiModeManagerService = this.this$0;
-                        if (uiModeManagerService.mSystemReady && (uiModeManagerService.mCarModeEnabled || UiModeManagerService.isDeskDockState(uiModeManagerService.mDockState))) {
+                    private final void onReceive$com$android$server$UiModeManagerService$4(
+                            Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        action.getClass();
+                        if (action.equals("android.intent.action.BATTERY_CHANGED")) {
+                            this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
+                        }
+                        synchronized (this.this$0.mLock) {
+                            try {
+                                UiModeManagerService uiModeManagerService = this.this$0;
+                                if (uiModeManagerService.mSystemReady
+                                        && (uiModeManagerService.mCarModeEnabled
+                                                || UiModeManagerService.isDeskDockState(
+                                                        uiModeManagerService.mDockState))) {
+                                    this.this$0.updateLocked(0, 0);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+
+                    private final void onReceive$com$android$server$UiModeManagerService$6(
+                            Context context2, Intent intent) {
+                        synchronized (this.this$0.mLock) {
+                            this.this$0.unregisterDeviceInactiveListenerLocked();
                             this.this$0.updateLocked(0, 0);
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$6(Context context2, Intent intent) {
-                synchronized (this.this$0.mLock) {
-                    this.this$0.unregisterDeviceInactiveListenerLocked();
-                    this.this$0.updateLocked(0, 0);
-                }
-            }
-
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                int intExtra;
-                switch (i4) {
-                    case 0:
-                        if (getResultCode() != -1) {
-                            return;
-                        }
-                        int intExtra2 = intent.getIntExtra("enableFlags", 0);
-                        int intExtra3 = intent.getIntExtra("disableFlags", 0);
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService = this.this$0;
-                            String action = intent.getAction();
-                            uiModeManagerService.getClass();
-                            if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
-                                if (uiModeManagerService.mEnableCarDockLaunch && (intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.CAR_DOCK";
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        int intExtra;
+                        switch (i4) {
+                            case 0:
+                                if (getResultCode() != -1) {
+                                    return;
                                 }
-                            } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(action)) {
-                                if ((intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.DESK_DOCK";
+                                int intExtra2 = intent.getIntExtra("enableFlags", 0);
+                                int intExtra3 = intent.getIntExtra("disableFlags", 0);
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService = this.this$0;
+                                    String action = intent.getAction();
+                                    uiModeManagerService.getClass();
+                                    if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
+                                        if (uiModeManagerService.mEnableCarDockLaunch
+                                                && (intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.CAR_DOCK";
+                                        }
+                                    } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(
+                                            action)) {
+                                        if ((intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.DESK_DOCK";
+                                        }
+                                    } else if ((intExtra3 & 1) != 0) {
+                                        r0 = "android.intent.category.HOME";
+                                    }
+                                    uiModeManagerService
+                                            .sendConfigurationAndStartDreamOrDockAppLocked(r0);
                                 }
-                            } else if ((intExtra3 & 1) != 0) {
-                                r0 = "android.intent.category.HOME";
-                            }
-                            uiModeManagerService.sendConfigurationAndStartDreamOrDockAppLocked(r0);
-                        }
-                        return;
-                    case 1:
-                        Uri data = intent.getData();
-                        r0 = data != null ? data.getSchemeSpecificPart() : null;
-                        if (r0 == null || (intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000)) == -10000) {
-                            return;
-                        }
-                        String action2 = intent.getAction();
-                        if (!("android.intent.action.PACKAGE_ADDED".equals(action2) && intent.getBooleanExtra("android.intent.extra.REPLACING", false)) && this.this$0.isNightPriorityAllowedLocked(r0)) {
-                            Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("onReceive : ", action2, ", package : ", r0, ", "), intExtra, "UiModeManager");
-                            UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(this.this$0, r0, intExtra, 2);
-                            synchronized (this.this$0.mPackagesNeedToShowDialog) {
-                                this.this$0.mPackagesNeedToShowDialog.putValue(r0, intExtra, Boolean.TRUE);
-                            }
-                            return;
-                        }
-                        return;
-                    case 2:
-                        UiModeManagerService uiModeManagerService2 = this.this$0;
-                        if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
-                            Settings.Secure.putIntForUser(uiModeManagerService2.getContext().getContentResolver(), "ui_night_mode_last_computed", uiModeManagerService2.mComputedNightMode ? 1 : 0, uiModeManagerService2.mCurrentUser);
-                            return;
-                        }
-                        return;
-                    case 3:
-                        if (Arrays.asList("ui_night_mode", "dark_theme_custom_start_time", "dark_theme_custom_end_time").contains(intent.getExtras().getCharSequence("setting_name"))) {
-                            synchronized (this.this$0.mLock) {
-                                this.this$0.updateNightModeFromSettingsLocked(context2, context2.getResources(), UserHandle.getCallingUserId());
-                                this.this$0.updateConfigurationLocked();
-                                this.this$0.applyConfigurationExternallyLocked();
-                            }
-                            return;
-                        }
-                        return;
-                    case 4:
-                        onReceive$com$android$server$UiModeManagerService$3(context2, intent);
-                        return;
-                    case 5:
-                        onReceive$com$android$server$UiModeManagerService$4(context2, intent);
-                        return;
-                    case 6:
-                        onReceive$com$android$server$UiModeManagerService$6(context2, intent);
-                        return;
-                    default:
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService3 = this.this$0;
-                            if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
-                                if (uiModeManagerService3.shouldApplyAutomaticChangesImmediately()) {
-                                    uiModeManagerService3.updateLocked(0, 0);
-                                } else {
-                                    uiModeManagerService3.registerDeviceInactiveListenerLocked();
+                                return;
+                            case 1:
+                                Uri data = intent.getData();
+                                r0 = data != null ? data.getSchemeSpecificPart() : null;
+                                if (r0 == null
+                                        || (intExtra =
+                                                        intent.getIntExtra(
+                                                                "android.intent.extra.user_handle",
+                                                                -10000))
+                                                == -10000) {
+                                    return;
                                 }
-                                uiModeManagerService3.scheduleNextCustomTimeListener();
-                            }
+                                String action2 = intent.getAction();
+                                if (!("android.intent.action.PACKAGE_ADDED".equals(action2)
+                                                && intent.getBooleanExtra(
+                                                        "android.intent.extra.REPLACING", false))
+                                        && this.this$0.isNightPriorityAllowedLocked(r0)) {
+                                    Set set =
+                                            UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
+                                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                            InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                                    "onReceive : ",
+                                                    action2,
+                                                    ", package : ",
+                                                    r0,
+                                                    ", "),
+                                            intExtra,
+                                            "UiModeManager");
+                                    UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(
+                                            this.this$0, r0, intExtra, 2);
+                                    synchronized (this.this$0.mPackagesNeedToShowDialog) {
+                                        this.this$0.mPackagesNeedToShowDialog.putValue(
+                                                r0, intExtra, Boolean.TRUE);
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 2:
+                                UiModeManagerService uiModeManagerService2 = this.this$0;
+                                if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
+                                    Settings.Secure.putIntForUser(
+                                            uiModeManagerService2.getContext().getContentResolver(),
+                                            "ui_night_mode_last_computed",
+                                            uiModeManagerService2.mComputedNightMode ? 1 : 0,
+                                            uiModeManagerService2.mCurrentUser);
+                                    return;
+                                }
+                                return;
+                            case 3:
+                                if (Arrays.asList(
+                                                "ui_night_mode",
+                                                "dark_theme_custom_start_time",
+                                                "dark_theme_custom_end_time")
+                                        .contains(
+                                                intent.getExtras()
+                                                        .getCharSequence("setting_name"))) {
+                                    synchronized (this.this$0.mLock) {
+                                        this.this$0.updateNightModeFromSettingsLocked(
+                                                context2,
+                                                context2.getResources(),
+                                                UserHandle.getCallingUserId());
+                                        this.this$0.updateConfigurationLocked();
+                                        this.this$0.applyConfigurationExternallyLocked();
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 4:
+                                onReceive$com$android$server$UiModeManagerService$3(
+                                        context2, intent);
+                                return;
+                            case 5:
+                                onReceive$com$android$server$UiModeManagerService$4(
+                                        context2, intent);
+                                return;
+                            case 6:
+                                onReceive$com$android$server$UiModeManagerService$6(
+                                        context2, intent);
+                                return;
+                            default:
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService3 = this.this$0;
+                                    if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
+                                        if (uiModeManagerService3
+                                                .shouldApplyAutomaticChangesImmediately()) {
+                                            uiModeManagerService3.updateLocked(0, 0);
+                                        } else {
+                                            uiModeManagerService3
+                                                    .registerDeviceInactiveListenerLocked();
+                                        }
+                                        uiModeManagerService3.scheduleNextCustomTimeListener();
+                                    }
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         final int i5 = 7;
-        this.mOnTimeChangedHandler = new BroadcastReceiver(this) { // from class: com.android.server.UiModeManagerService.2
-            public final /* synthetic */ UiModeManagerService this$0;
+        this.mOnTimeChangedHandler =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.UiModeManagerService.2
+                    public final /* synthetic */ UiModeManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            private final void onReceive$com$android$server$UiModeManagerService$3(Context context2, Intent intent) {
-                int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
-                UiModeManagerService uiModeManagerService = this.this$0;
-                synchronized (uiModeManagerService.mLock) {
-                    try {
-                        if (intExtra != uiModeManagerService.mDockState) {
-                            uiModeManagerService.mDockState = intExtra;
-                            uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
-                            if (uiModeManagerService.mSystemReady) {
-                                uiModeManagerService.updateLocked(1, 0);
+                    private final void onReceive$com$android$server$UiModeManagerService$3(
+                            Context context2, Intent intent) {
+                        int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
+                        UiModeManagerService uiModeManagerService = this.this$0;
+                        synchronized (uiModeManagerService.mLock) {
+                            try {
+                                if (intExtra != uiModeManagerService.mDockState) {
+                                    uiModeManagerService.mDockState = intExtra;
+                                    uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
+                                    if (uiModeManagerService.mSystemReady) {
+                                        uiModeManagerService.updateLocked(1, 0);
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$4(Context context2, Intent intent) {
-                String action = intent.getAction();
-                action.getClass();
-                if (action.equals("android.intent.action.BATTERY_CHANGED")) {
-                    this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
-                }
-                synchronized (this.this$0.mLock) {
-                    try {
-                        UiModeManagerService uiModeManagerService = this.this$0;
-                        if (uiModeManagerService.mSystemReady && (uiModeManagerService.mCarModeEnabled || UiModeManagerService.isDeskDockState(uiModeManagerService.mDockState))) {
+                    private final void onReceive$com$android$server$UiModeManagerService$4(
+                            Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        action.getClass();
+                        if (action.equals("android.intent.action.BATTERY_CHANGED")) {
+                            this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
+                        }
+                        synchronized (this.this$0.mLock) {
+                            try {
+                                UiModeManagerService uiModeManagerService = this.this$0;
+                                if (uiModeManagerService.mSystemReady
+                                        && (uiModeManagerService.mCarModeEnabled
+                                                || UiModeManagerService.isDeskDockState(
+                                                        uiModeManagerService.mDockState))) {
+                                    this.this$0.updateLocked(0, 0);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+
+                    private final void onReceive$com$android$server$UiModeManagerService$6(
+                            Context context2, Intent intent) {
+                        synchronized (this.this$0.mLock) {
+                            this.this$0.unregisterDeviceInactiveListenerLocked();
                             this.this$0.updateLocked(0, 0);
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$6(Context context2, Intent intent) {
-                synchronized (this.this$0.mLock) {
-                    this.this$0.unregisterDeviceInactiveListenerLocked();
-                    this.this$0.updateLocked(0, 0);
-                }
-            }
-
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                int intExtra;
-                switch (i5) {
-                    case 0:
-                        if (getResultCode() != -1) {
-                            return;
-                        }
-                        int intExtra2 = intent.getIntExtra("enableFlags", 0);
-                        int intExtra3 = intent.getIntExtra("disableFlags", 0);
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService = this.this$0;
-                            String action = intent.getAction();
-                            uiModeManagerService.getClass();
-                            if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
-                                if (uiModeManagerService.mEnableCarDockLaunch && (intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.CAR_DOCK";
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        int intExtra;
+                        switch (i5) {
+                            case 0:
+                                if (getResultCode() != -1) {
+                                    return;
                                 }
-                            } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(action)) {
-                                if ((intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.DESK_DOCK";
+                                int intExtra2 = intent.getIntExtra("enableFlags", 0);
+                                int intExtra3 = intent.getIntExtra("disableFlags", 0);
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService = this.this$0;
+                                    String action = intent.getAction();
+                                    uiModeManagerService.getClass();
+                                    if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
+                                        if (uiModeManagerService.mEnableCarDockLaunch
+                                                && (intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.CAR_DOCK";
+                                        }
+                                    } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(
+                                            action)) {
+                                        if ((intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.DESK_DOCK";
+                                        }
+                                    } else if ((intExtra3 & 1) != 0) {
+                                        r0 = "android.intent.category.HOME";
+                                    }
+                                    uiModeManagerService
+                                            .sendConfigurationAndStartDreamOrDockAppLocked(r0);
                                 }
-                            } else if ((intExtra3 & 1) != 0) {
-                                r0 = "android.intent.category.HOME";
-                            }
-                            uiModeManagerService.sendConfigurationAndStartDreamOrDockAppLocked(r0);
-                        }
-                        return;
-                    case 1:
-                        Uri data = intent.getData();
-                        r0 = data != null ? data.getSchemeSpecificPart() : null;
-                        if (r0 == null || (intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000)) == -10000) {
-                            return;
-                        }
-                        String action2 = intent.getAction();
-                        if (!("android.intent.action.PACKAGE_ADDED".equals(action2) && intent.getBooleanExtra("android.intent.extra.REPLACING", false)) && this.this$0.isNightPriorityAllowedLocked(r0)) {
-                            Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("onReceive : ", action2, ", package : ", r0, ", "), intExtra, "UiModeManager");
-                            UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(this.this$0, r0, intExtra, 2);
-                            synchronized (this.this$0.mPackagesNeedToShowDialog) {
-                                this.this$0.mPackagesNeedToShowDialog.putValue(r0, intExtra, Boolean.TRUE);
-                            }
-                            return;
-                        }
-                        return;
-                    case 2:
-                        UiModeManagerService uiModeManagerService2 = this.this$0;
-                        if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
-                            Settings.Secure.putIntForUser(uiModeManagerService2.getContext().getContentResolver(), "ui_night_mode_last_computed", uiModeManagerService2.mComputedNightMode ? 1 : 0, uiModeManagerService2.mCurrentUser);
-                            return;
-                        }
-                        return;
-                    case 3:
-                        if (Arrays.asList("ui_night_mode", "dark_theme_custom_start_time", "dark_theme_custom_end_time").contains(intent.getExtras().getCharSequence("setting_name"))) {
-                            synchronized (this.this$0.mLock) {
-                                this.this$0.updateNightModeFromSettingsLocked(context2, context2.getResources(), UserHandle.getCallingUserId());
-                                this.this$0.updateConfigurationLocked();
-                                this.this$0.applyConfigurationExternallyLocked();
-                            }
-                            return;
-                        }
-                        return;
-                    case 4:
-                        onReceive$com$android$server$UiModeManagerService$3(context2, intent);
-                        return;
-                    case 5:
-                        onReceive$com$android$server$UiModeManagerService$4(context2, intent);
-                        return;
-                    case 6:
-                        onReceive$com$android$server$UiModeManagerService$6(context2, intent);
-                        return;
-                    default:
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService3 = this.this$0;
-                            if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
-                                if (uiModeManagerService3.shouldApplyAutomaticChangesImmediately()) {
-                                    uiModeManagerService3.updateLocked(0, 0);
-                                } else {
-                                    uiModeManagerService3.registerDeviceInactiveListenerLocked();
+                                return;
+                            case 1:
+                                Uri data = intent.getData();
+                                r0 = data != null ? data.getSchemeSpecificPart() : null;
+                                if (r0 == null
+                                        || (intExtra =
+                                                        intent.getIntExtra(
+                                                                "android.intent.extra.user_handle",
+                                                                -10000))
+                                                == -10000) {
+                                    return;
                                 }
-                                uiModeManagerService3.scheduleNextCustomTimeListener();
-                            }
+                                String action2 = intent.getAction();
+                                if (!("android.intent.action.PACKAGE_ADDED".equals(action2)
+                                                && intent.getBooleanExtra(
+                                                        "android.intent.extra.REPLACING", false))
+                                        && this.this$0.isNightPriorityAllowedLocked(r0)) {
+                                    Set set =
+                                            UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
+                                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                            InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                                    "onReceive : ",
+                                                    action2,
+                                                    ", package : ",
+                                                    r0,
+                                                    ", "),
+                                            intExtra,
+                                            "UiModeManager");
+                                    UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(
+                                            this.this$0, r0, intExtra, 2);
+                                    synchronized (this.this$0.mPackagesNeedToShowDialog) {
+                                        this.this$0.mPackagesNeedToShowDialog.putValue(
+                                                r0, intExtra, Boolean.TRUE);
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 2:
+                                UiModeManagerService uiModeManagerService2 = this.this$0;
+                                if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
+                                    Settings.Secure.putIntForUser(
+                                            uiModeManagerService2.getContext().getContentResolver(),
+                                            "ui_night_mode_last_computed",
+                                            uiModeManagerService2.mComputedNightMode ? 1 : 0,
+                                            uiModeManagerService2.mCurrentUser);
+                                    return;
+                                }
+                                return;
+                            case 3:
+                                if (Arrays.asList(
+                                                "ui_night_mode",
+                                                "dark_theme_custom_start_time",
+                                                "dark_theme_custom_end_time")
+                                        .contains(
+                                                intent.getExtras()
+                                                        .getCharSequence("setting_name"))) {
+                                    synchronized (this.this$0.mLock) {
+                                        this.this$0.updateNightModeFromSettingsLocked(
+                                                context2,
+                                                context2.getResources(),
+                                                UserHandle.getCallingUserId());
+                                        this.this$0.updateConfigurationLocked();
+                                        this.this$0.applyConfigurationExternallyLocked();
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 4:
+                                onReceive$com$android$server$UiModeManagerService$3(
+                                        context2, intent);
+                                return;
+                            case 5:
+                                onReceive$com$android$server$UiModeManagerService$4(
+                                        context2, intent);
+                                return;
+                            case 6:
+                                onReceive$com$android$server$UiModeManagerService$6(
+                                        context2, intent);
+                                return;
+                            default:
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService3 = this.this$0;
+                                    if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
+                                        if (uiModeManagerService3
+                                                .shouldApplyAutomaticChangesImmediately()) {
+                                            uiModeManagerService3.updateLocked(0, 0);
+                                        } else {
+                                            uiModeManagerService3
+                                                    .registerDeviceInactiveListenerLocked();
+                                        }
+                                        uiModeManagerService3.scheduleNextCustomTimeListener();
+                                    }
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
-        this.mCustomTimeListener = new AlarmManager.OnAlarmListener() { // from class: com.android.server.UiModeManagerService$$ExternalSyntheticLambda2
-            @Override // android.app.AlarmManager.OnAlarmListener
-            public final void onAlarm() {
-                UiModeManagerService uiModeManagerService = UiModeManagerService.this;
-                synchronized (uiModeManagerService.mLock) {
-                    if (uiModeManagerService.mNightMode.mNightModeValue == 3) {
-                        if (uiModeManagerService.shouldApplyAutomaticChangesImmediately()) {
-                            uiModeManagerService.updateLocked(0, 0);
-                        } else {
-                            uiModeManagerService.registerDeviceInactiveListenerLocked();
-                        }
-                        uiModeManagerService.scheduleNextCustomTimeListener();
                     }
-                }
-            }
-        };
-        this.mVrStateCallbacks = new IVrStateCallbacks.Stub() { // from class: com.android.server.UiModeManagerService.8
-            public final void onVrStateChanged(boolean z2) {
-                synchronized (UiModeManagerService.this.mLock) {
-                    try {
+                };
+        this.mCustomTimeListener =
+                new AlarmManager
+                        .OnAlarmListener() { // from class:
+                                             // com.android.server.UiModeManagerService$$ExternalSyntheticLambda2
+                    @Override // android.app.AlarmManager.OnAlarmListener
+                    public final void onAlarm() {
                         UiModeManagerService uiModeManagerService = UiModeManagerService.this;
-                        uiModeManagerService.mVrHeadset = z2;
-                        if (uiModeManagerService.mSystemReady) {
-                            uiModeManagerService.updateLocked(0, 0);
+                        synchronized (uiModeManagerService.mLock) {
+                            if (uiModeManagerService.mNightMode.mNightModeValue == 3) {
+                                if (uiModeManagerService.shouldApplyAutomaticChangesImmediately()) {
+                                    uiModeManagerService.updateLocked(0, 0);
+                                } else {
+                                    uiModeManagerService.registerDeviceInactiveListenerLocked();
+                                }
+                                uiModeManagerService.scheduleNextCustomTimeListener();
+                            }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
-        };
+                };
+        this.mVrStateCallbacks =
+                new IVrStateCallbacks
+                        .Stub() { // from class: com.android.server.UiModeManagerService.8
+                    public final void onVrStateChanged(boolean z2) {
+                        synchronized (UiModeManagerService.this.mLock) {
+                            try {
+                                UiModeManagerService uiModeManagerService =
+                                        UiModeManagerService.this;
+                                uiModeManagerService.mVrHeadset = z2;
+                                if (uiModeManagerService.mSystemReady) {
+                                    uiModeManagerService.updateLocked(0, 0);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+                };
         this.mSetupWizardObserver = new AnonymousClass9(this, handler, 0);
         this.mDarkThemeObserver = new AnonymousClass9(this, handler, 1);
         this.mContrastObserver = new AnonymousClass9(this, handler, 2);
         final int i6 = 1;
-        this.mOnPackageAdded = new BroadcastReceiver(this) { // from class: com.android.server.UiModeManagerService.2
-            public final /* synthetic */ UiModeManagerService this$0;
+        this.mOnPackageAdded =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.UiModeManagerService.2
+                    public final /* synthetic */ UiModeManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            private final void onReceive$com$android$server$UiModeManagerService$3(Context context2, Intent intent) {
-                int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
-                UiModeManagerService uiModeManagerService = this.this$0;
-                synchronized (uiModeManagerService.mLock) {
-                    try {
-                        if (intExtra != uiModeManagerService.mDockState) {
-                            uiModeManagerService.mDockState = intExtra;
-                            uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
-                            if (uiModeManagerService.mSystemReady) {
-                                uiModeManagerService.updateLocked(1, 0);
+                    private final void onReceive$com$android$server$UiModeManagerService$3(
+                            Context context2, Intent intent) {
+                        int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
+                        UiModeManagerService uiModeManagerService = this.this$0;
+                        synchronized (uiModeManagerService.mLock) {
+                            try {
+                                if (intExtra != uiModeManagerService.mDockState) {
+                                    uiModeManagerService.mDockState = intExtra;
+                                    uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
+                                    if (uiModeManagerService.mSystemReady) {
+                                        uiModeManagerService.updateLocked(1, 0);
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$4(Context context2, Intent intent) {
-                String action = intent.getAction();
-                action.getClass();
-                if (action.equals("android.intent.action.BATTERY_CHANGED")) {
-                    this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
-                }
-                synchronized (this.this$0.mLock) {
-                    try {
-                        UiModeManagerService uiModeManagerService = this.this$0;
-                        if (uiModeManagerService.mSystemReady && (uiModeManagerService.mCarModeEnabled || UiModeManagerService.isDeskDockState(uiModeManagerService.mDockState))) {
+                    private final void onReceive$com$android$server$UiModeManagerService$4(
+                            Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        action.getClass();
+                        if (action.equals("android.intent.action.BATTERY_CHANGED")) {
+                            this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
+                        }
+                        synchronized (this.this$0.mLock) {
+                            try {
+                                UiModeManagerService uiModeManagerService = this.this$0;
+                                if (uiModeManagerService.mSystemReady
+                                        && (uiModeManagerService.mCarModeEnabled
+                                                || UiModeManagerService.isDeskDockState(
+                                                        uiModeManagerService.mDockState))) {
+                                    this.this$0.updateLocked(0, 0);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+
+                    private final void onReceive$com$android$server$UiModeManagerService$6(
+                            Context context2, Intent intent) {
+                        synchronized (this.this$0.mLock) {
+                            this.this$0.unregisterDeviceInactiveListenerLocked();
                             this.this$0.updateLocked(0, 0);
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$6(Context context2, Intent intent) {
-                synchronized (this.this$0.mLock) {
-                    this.this$0.unregisterDeviceInactiveListenerLocked();
-                    this.this$0.updateLocked(0, 0);
-                }
-            }
-
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                int intExtra;
-                switch (i6) {
-                    case 0:
-                        if (getResultCode() != -1) {
-                            return;
-                        }
-                        int intExtra2 = intent.getIntExtra("enableFlags", 0);
-                        int intExtra3 = intent.getIntExtra("disableFlags", 0);
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService = this.this$0;
-                            String action = intent.getAction();
-                            uiModeManagerService.getClass();
-                            if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
-                                if (uiModeManagerService.mEnableCarDockLaunch && (intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.CAR_DOCK";
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        int intExtra;
+                        switch (i6) {
+                            case 0:
+                                if (getResultCode() != -1) {
+                                    return;
                                 }
-                            } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(action)) {
-                                if ((intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.DESK_DOCK";
+                                int intExtra2 = intent.getIntExtra("enableFlags", 0);
+                                int intExtra3 = intent.getIntExtra("disableFlags", 0);
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService = this.this$0;
+                                    String action = intent.getAction();
+                                    uiModeManagerService.getClass();
+                                    if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
+                                        if (uiModeManagerService.mEnableCarDockLaunch
+                                                && (intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.CAR_DOCK";
+                                        }
+                                    } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(
+                                            action)) {
+                                        if ((intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.DESK_DOCK";
+                                        }
+                                    } else if ((intExtra3 & 1) != 0) {
+                                        r0 = "android.intent.category.HOME";
+                                    }
+                                    uiModeManagerService
+                                            .sendConfigurationAndStartDreamOrDockAppLocked(r0);
                                 }
-                            } else if ((intExtra3 & 1) != 0) {
-                                r0 = "android.intent.category.HOME";
-                            }
-                            uiModeManagerService.sendConfigurationAndStartDreamOrDockAppLocked(r0);
-                        }
-                        return;
-                    case 1:
-                        Uri data = intent.getData();
-                        r0 = data != null ? data.getSchemeSpecificPart() : null;
-                        if (r0 == null || (intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000)) == -10000) {
-                            return;
-                        }
-                        String action2 = intent.getAction();
-                        if (!("android.intent.action.PACKAGE_ADDED".equals(action2) && intent.getBooleanExtra("android.intent.extra.REPLACING", false)) && this.this$0.isNightPriorityAllowedLocked(r0)) {
-                            Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("onReceive : ", action2, ", package : ", r0, ", "), intExtra, "UiModeManager");
-                            UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(this.this$0, r0, intExtra, 2);
-                            synchronized (this.this$0.mPackagesNeedToShowDialog) {
-                                this.this$0.mPackagesNeedToShowDialog.putValue(r0, intExtra, Boolean.TRUE);
-                            }
-                            return;
-                        }
-                        return;
-                    case 2:
-                        UiModeManagerService uiModeManagerService2 = this.this$0;
-                        if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
-                            Settings.Secure.putIntForUser(uiModeManagerService2.getContext().getContentResolver(), "ui_night_mode_last_computed", uiModeManagerService2.mComputedNightMode ? 1 : 0, uiModeManagerService2.mCurrentUser);
-                            return;
-                        }
-                        return;
-                    case 3:
-                        if (Arrays.asList("ui_night_mode", "dark_theme_custom_start_time", "dark_theme_custom_end_time").contains(intent.getExtras().getCharSequence("setting_name"))) {
-                            synchronized (this.this$0.mLock) {
-                                this.this$0.updateNightModeFromSettingsLocked(context2, context2.getResources(), UserHandle.getCallingUserId());
-                                this.this$0.updateConfigurationLocked();
-                                this.this$0.applyConfigurationExternallyLocked();
-                            }
-                            return;
-                        }
-                        return;
-                    case 4:
-                        onReceive$com$android$server$UiModeManagerService$3(context2, intent);
-                        return;
-                    case 5:
-                        onReceive$com$android$server$UiModeManagerService$4(context2, intent);
-                        return;
-                    case 6:
-                        onReceive$com$android$server$UiModeManagerService$6(context2, intent);
-                        return;
-                    default:
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService3 = this.this$0;
-                            if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
-                                if (uiModeManagerService3.shouldApplyAutomaticChangesImmediately()) {
-                                    uiModeManagerService3.updateLocked(0, 0);
-                                } else {
-                                    uiModeManagerService3.registerDeviceInactiveListenerLocked();
+                                return;
+                            case 1:
+                                Uri data = intent.getData();
+                                r0 = data != null ? data.getSchemeSpecificPart() : null;
+                                if (r0 == null
+                                        || (intExtra =
+                                                        intent.getIntExtra(
+                                                                "android.intent.extra.user_handle",
+                                                                -10000))
+                                                == -10000) {
+                                    return;
                                 }
-                                uiModeManagerService3.scheduleNextCustomTimeListener();
-                            }
+                                String action2 = intent.getAction();
+                                if (!("android.intent.action.PACKAGE_ADDED".equals(action2)
+                                                && intent.getBooleanExtra(
+                                                        "android.intent.extra.REPLACING", false))
+                                        && this.this$0.isNightPriorityAllowedLocked(r0)) {
+                                    Set set =
+                                            UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
+                                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                            InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                                    "onReceive : ",
+                                                    action2,
+                                                    ", package : ",
+                                                    r0,
+                                                    ", "),
+                                            intExtra,
+                                            "UiModeManager");
+                                    UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(
+                                            this.this$0, r0, intExtra, 2);
+                                    synchronized (this.this$0.mPackagesNeedToShowDialog) {
+                                        this.this$0.mPackagesNeedToShowDialog.putValue(
+                                                r0, intExtra, Boolean.TRUE);
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 2:
+                                UiModeManagerService uiModeManagerService2 = this.this$0;
+                                if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
+                                    Settings.Secure.putIntForUser(
+                                            uiModeManagerService2.getContext().getContentResolver(),
+                                            "ui_night_mode_last_computed",
+                                            uiModeManagerService2.mComputedNightMode ? 1 : 0,
+                                            uiModeManagerService2.mCurrentUser);
+                                    return;
+                                }
+                                return;
+                            case 3:
+                                if (Arrays.asList(
+                                                "ui_night_mode",
+                                                "dark_theme_custom_start_time",
+                                                "dark_theme_custom_end_time")
+                                        .contains(
+                                                intent.getExtras()
+                                                        .getCharSequence("setting_name"))) {
+                                    synchronized (this.this$0.mLock) {
+                                        this.this$0.updateNightModeFromSettingsLocked(
+                                                context2,
+                                                context2.getResources(),
+                                                UserHandle.getCallingUserId());
+                                        this.this$0.updateConfigurationLocked();
+                                        this.this$0.applyConfigurationExternallyLocked();
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 4:
+                                onReceive$com$android$server$UiModeManagerService$3(
+                                        context2, intent);
+                                return;
+                            case 5:
+                                onReceive$com$android$server$UiModeManagerService$4(
+                                        context2, intent);
+                                return;
+                            case 6:
+                                onReceive$com$android$server$UiModeManagerService$6(
+                                        context2, intent);
+                                return;
+                            default:
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService3 = this.this$0;
+                                    if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
+                                        if (uiModeManagerService3
+                                                .shouldApplyAutomaticChangesImmediately()) {
+                                            uiModeManagerService3.updateLocked(0, 0);
+                                        } else {
+                                            uiModeManagerService3
+                                                    .registerDeviceInactiveListenerLocked();
+                                        }
+                                        uiModeManagerService3.scheduleNextCustomTimeListener();
+                                    }
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         final int i7 = 2;
-        this.mOnShutdown = new BroadcastReceiver(this) { // from class: com.android.server.UiModeManagerService.2
-            public final /* synthetic */ UiModeManagerService this$0;
+        this.mOnShutdown =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.UiModeManagerService.2
+                    public final /* synthetic */ UiModeManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            private final void onReceive$com$android$server$UiModeManagerService$3(Context context2, Intent intent) {
-                int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
-                UiModeManagerService uiModeManagerService = this.this$0;
-                synchronized (uiModeManagerService.mLock) {
-                    try {
-                        if (intExtra != uiModeManagerService.mDockState) {
-                            uiModeManagerService.mDockState = intExtra;
-                            uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
-                            if (uiModeManagerService.mSystemReady) {
-                                uiModeManagerService.updateLocked(1, 0);
+                    private final void onReceive$com$android$server$UiModeManagerService$3(
+                            Context context2, Intent intent) {
+                        int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
+                        UiModeManagerService uiModeManagerService = this.this$0;
+                        synchronized (uiModeManagerService.mLock) {
+                            try {
+                                if (intExtra != uiModeManagerService.mDockState) {
+                                    uiModeManagerService.mDockState = intExtra;
+                                    uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
+                                    if (uiModeManagerService.mSystemReady) {
+                                        uiModeManagerService.updateLocked(1, 0);
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$4(Context context2, Intent intent) {
-                String action = intent.getAction();
-                action.getClass();
-                if (action.equals("android.intent.action.BATTERY_CHANGED")) {
-                    this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
-                }
-                synchronized (this.this$0.mLock) {
-                    try {
-                        UiModeManagerService uiModeManagerService = this.this$0;
-                        if (uiModeManagerService.mSystemReady && (uiModeManagerService.mCarModeEnabled || UiModeManagerService.isDeskDockState(uiModeManagerService.mDockState))) {
+                    private final void onReceive$com$android$server$UiModeManagerService$4(
+                            Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        action.getClass();
+                        if (action.equals("android.intent.action.BATTERY_CHANGED")) {
+                            this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
+                        }
+                        synchronized (this.this$0.mLock) {
+                            try {
+                                UiModeManagerService uiModeManagerService = this.this$0;
+                                if (uiModeManagerService.mSystemReady
+                                        && (uiModeManagerService.mCarModeEnabled
+                                                || UiModeManagerService.isDeskDockState(
+                                                        uiModeManagerService.mDockState))) {
+                                    this.this$0.updateLocked(0, 0);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+
+                    private final void onReceive$com$android$server$UiModeManagerService$6(
+                            Context context2, Intent intent) {
+                        synchronized (this.this$0.mLock) {
+                            this.this$0.unregisterDeviceInactiveListenerLocked();
                             this.this$0.updateLocked(0, 0);
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$6(Context context2, Intent intent) {
-                synchronized (this.this$0.mLock) {
-                    this.this$0.unregisterDeviceInactiveListenerLocked();
-                    this.this$0.updateLocked(0, 0);
-                }
-            }
-
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                int intExtra;
-                switch (i7) {
-                    case 0:
-                        if (getResultCode() != -1) {
-                            return;
-                        }
-                        int intExtra2 = intent.getIntExtra("enableFlags", 0);
-                        int intExtra3 = intent.getIntExtra("disableFlags", 0);
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService = this.this$0;
-                            String action = intent.getAction();
-                            uiModeManagerService.getClass();
-                            if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
-                                if (uiModeManagerService.mEnableCarDockLaunch && (intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.CAR_DOCK";
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        int intExtra;
+                        switch (i7) {
+                            case 0:
+                                if (getResultCode() != -1) {
+                                    return;
                                 }
-                            } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(action)) {
-                                if ((intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.DESK_DOCK";
+                                int intExtra2 = intent.getIntExtra("enableFlags", 0);
+                                int intExtra3 = intent.getIntExtra("disableFlags", 0);
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService = this.this$0;
+                                    String action = intent.getAction();
+                                    uiModeManagerService.getClass();
+                                    if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
+                                        if (uiModeManagerService.mEnableCarDockLaunch
+                                                && (intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.CAR_DOCK";
+                                        }
+                                    } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(
+                                            action)) {
+                                        if ((intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.DESK_DOCK";
+                                        }
+                                    } else if ((intExtra3 & 1) != 0) {
+                                        r0 = "android.intent.category.HOME";
+                                    }
+                                    uiModeManagerService
+                                            .sendConfigurationAndStartDreamOrDockAppLocked(r0);
                                 }
-                            } else if ((intExtra3 & 1) != 0) {
-                                r0 = "android.intent.category.HOME";
-                            }
-                            uiModeManagerService.sendConfigurationAndStartDreamOrDockAppLocked(r0);
-                        }
-                        return;
-                    case 1:
-                        Uri data = intent.getData();
-                        r0 = data != null ? data.getSchemeSpecificPart() : null;
-                        if (r0 == null || (intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000)) == -10000) {
-                            return;
-                        }
-                        String action2 = intent.getAction();
-                        if (!("android.intent.action.PACKAGE_ADDED".equals(action2) && intent.getBooleanExtra("android.intent.extra.REPLACING", false)) && this.this$0.isNightPriorityAllowedLocked(r0)) {
-                            Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("onReceive : ", action2, ", package : ", r0, ", "), intExtra, "UiModeManager");
-                            UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(this.this$0, r0, intExtra, 2);
-                            synchronized (this.this$0.mPackagesNeedToShowDialog) {
-                                this.this$0.mPackagesNeedToShowDialog.putValue(r0, intExtra, Boolean.TRUE);
-                            }
-                            return;
-                        }
-                        return;
-                    case 2:
-                        UiModeManagerService uiModeManagerService2 = this.this$0;
-                        if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
-                            Settings.Secure.putIntForUser(uiModeManagerService2.getContext().getContentResolver(), "ui_night_mode_last_computed", uiModeManagerService2.mComputedNightMode ? 1 : 0, uiModeManagerService2.mCurrentUser);
-                            return;
-                        }
-                        return;
-                    case 3:
-                        if (Arrays.asList("ui_night_mode", "dark_theme_custom_start_time", "dark_theme_custom_end_time").contains(intent.getExtras().getCharSequence("setting_name"))) {
-                            synchronized (this.this$0.mLock) {
-                                this.this$0.updateNightModeFromSettingsLocked(context2, context2.getResources(), UserHandle.getCallingUserId());
-                                this.this$0.updateConfigurationLocked();
-                                this.this$0.applyConfigurationExternallyLocked();
-                            }
-                            return;
-                        }
-                        return;
-                    case 4:
-                        onReceive$com$android$server$UiModeManagerService$3(context2, intent);
-                        return;
-                    case 5:
-                        onReceive$com$android$server$UiModeManagerService$4(context2, intent);
-                        return;
-                    case 6:
-                        onReceive$com$android$server$UiModeManagerService$6(context2, intent);
-                        return;
-                    default:
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService3 = this.this$0;
-                            if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
-                                if (uiModeManagerService3.shouldApplyAutomaticChangesImmediately()) {
-                                    uiModeManagerService3.updateLocked(0, 0);
-                                } else {
-                                    uiModeManagerService3.registerDeviceInactiveListenerLocked();
+                                return;
+                            case 1:
+                                Uri data = intent.getData();
+                                r0 = data != null ? data.getSchemeSpecificPart() : null;
+                                if (r0 == null
+                                        || (intExtra =
+                                                        intent.getIntExtra(
+                                                                "android.intent.extra.user_handle",
+                                                                -10000))
+                                                == -10000) {
+                                    return;
                                 }
-                                uiModeManagerService3.scheduleNextCustomTimeListener();
-                            }
+                                String action2 = intent.getAction();
+                                if (!("android.intent.action.PACKAGE_ADDED".equals(action2)
+                                                && intent.getBooleanExtra(
+                                                        "android.intent.extra.REPLACING", false))
+                                        && this.this$0.isNightPriorityAllowedLocked(r0)) {
+                                    Set set =
+                                            UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
+                                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                            InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                                    "onReceive : ",
+                                                    action2,
+                                                    ", package : ",
+                                                    r0,
+                                                    ", "),
+                                            intExtra,
+                                            "UiModeManager");
+                                    UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(
+                                            this.this$0, r0, intExtra, 2);
+                                    synchronized (this.this$0.mPackagesNeedToShowDialog) {
+                                        this.this$0.mPackagesNeedToShowDialog.putValue(
+                                                r0, intExtra, Boolean.TRUE);
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 2:
+                                UiModeManagerService uiModeManagerService2 = this.this$0;
+                                if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
+                                    Settings.Secure.putIntForUser(
+                                            uiModeManagerService2.getContext().getContentResolver(),
+                                            "ui_night_mode_last_computed",
+                                            uiModeManagerService2.mComputedNightMode ? 1 : 0,
+                                            uiModeManagerService2.mCurrentUser);
+                                    return;
+                                }
+                                return;
+                            case 3:
+                                if (Arrays.asList(
+                                                "ui_night_mode",
+                                                "dark_theme_custom_start_time",
+                                                "dark_theme_custom_end_time")
+                                        .contains(
+                                                intent.getExtras()
+                                                        .getCharSequence("setting_name"))) {
+                                    synchronized (this.this$0.mLock) {
+                                        this.this$0.updateNightModeFromSettingsLocked(
+                                                context2,
+                                                context2.getResources(),
+                                                UserHandle.getCallingUserId());
+                                        this.this$0.updateConfigurationLocked();
+                                        this.this$0.applyConfigurationExternallyLocked();
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 4:
+                                onReceive$com$android$server$UiModeManagerService$3(
+                                        context2, intent);
+                                return;
+                            case 5:
+                                onReceive$com$android$server$UiModeManagerService$4(
+                                        context2, intent);
+                                return;
+                            case 6:
+                                onReceive$com$android$server$UiModeManagerService$6(
+                                        context2, intent);
+                                return;
+                            default:
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService3 = this.this$0;
+                                    if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
+                                        if (uiModeManagerService3
+                                                .shouldApplyAutomaticChangesImmediately()) {
+                                            uiModeManagerService3.updateLocked(0, 0);
+                                        } else {
+                                            uiModeManagerService3
+                                                    .registerDeviceInactiveListenerLocked();
+                                        }
+                                        uiModeManagerService3.scheduleNextCustomTimeListener();
+                                    }
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         final int i8 = 3;
-        this.mSettingsRestored = new BroadcastReceiver(this) { // from class: com.android.server.UiModeManagerService.2
-            public final /* synthetic */ UiModeManagerService this$0;
+        this.mSettingsRestored =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.UiModeManagerService.2
+                    public final /* synthetic */ UiModeManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            private final void onReceive$com$android$server$UiModeManagerService$3(Context context2, Intent intent) {
-                int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
-                UiModeManagerService uiModeManagerService = this.this$0;
-                synchronized (uiModeManagerService.mLock) {
-                    try {
-                        if (intExtra != uiModeManagerService.mDockState) {
-                            uiModeManagerService.mDockState = intExtra;
-                            uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
-                            if (uiModeManagerService.mSystemReady) {
-                                uiModeManagerService.updateLocked(1, 0);
+                    private final void onReceive$com$android$server$UiModeManagerService$3(
+                            Context context2, Intent intent) {
+                        int intExtra = intent.getIntExtra("android.intent.extra.DOCK_STATE", 0);
+                        UiModeManagerService uiModeManagerService = this.this$0;
+                        synchronized (uiModeManagerService.mLock) {
+                            try {
+                                if (intExtra != uiModeManagerService.mDockState) {
+                                    uiModeManagerService.mDockState = intExtra;
+                                    uiModeManagerService.setCarModeLocked(0, 0, "", intExtra == 2);
+                                    if (uiModeManagerService.mSystemReady) {
+                                        uiModeManagerService.updateLocked(1, 0);
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$4(Context context2, Intent intent) {
-                String action = intent.getAction();
-                action.getClass();
-                if (action.equals("android.intent.action.BATTERY_CHANGED")) {
-                    this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
-                }
-                synchronized (this.this$0.mLock) {
-                    try {
-                        UiModeManagerService uiModeManagerService = this.this$0;
-                        if (uiModeManagerService.mSystemReady && (uiModeManagerService.mCarModeEnabled || UiModeManagerService.isDeskDockState(uiModeManagerService.mDockState))) {
+                    private final void onReceive$com$android$server$UiModeManagerService$4(
+                            Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        action.getClass();
+                        if (action.equals("android.intent.action.BATTERY_CHANGED")) {
+                            this.this$0.mCharging = intent.getIntExtra("plugged", 0) != 0;
+                        }
+                        synchronized (this.this$0.mLock) {
+                            try {
+                                UiModeManagerService uiModeManagerService = this.this$0;
+                                if (uiModeManagerService.mSystemReady
+                                        && (uiModeManagerService.mCarModeEnabled
+                                                || UiModeManagerService.isDeskDockState(
+                                                        uiModeManagerService.mDockState))) {
+                                    this.this$0.updateLocked(0, 0);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+
+                    private final void onReceive$com$android$server$UiModeManagerService$6(
+                            Context context2, Intent intent) {
+                        synchronized (this.this$0.mLock) {
+                            this.this$0.unregisterDeviceInactiveListenerLocked();
                             this.this$0.updateLocked(0, 0);
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            private final void onReceive$com$android$server$UiModeManagerService$6(Context context2, Intent intent) {
-                synchronized (this.this$0.mLock) {
-                    this.this$0.unregisterDeviceInactiveListenerLocked();
-                    this.this$0.updateLocked(0, 0);
-                }
-            }
-
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                int intExtra;
-                switch (i8) {
-                    case 0:
-                        if (getResultCode() != -1) {
-                            return;
-                        }
-                        int intExtra2 = intent.getIntExtra("enableFlags", 0);
-                        int intExtra3 = intent.getIntExtra("disableFlags", 0);
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService = this.this$0;
-                            String action = intent.getAction();
-                            uiModeManagerService.getClass();
-                            if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
-                                if (uiModeManagerService.mEnableCarDockLaunch && (intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.CAR_DOCK";
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        int intExtra;
+                        switch (i8) {
+                            case 0:
+                                if (getResultCode() != -1) {
+                                    return;
                                 }
-                            } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(action)) {
-                                if ((intExtra2 & 1) != 0) {
-                                    r0 = "android.intent.category.DESK_DOCK";
+                                int intExtra2 = intent.getIntExtra("enableFlags", 0);
+                                int intExtra3 = intent.getIntExtra("disableFlags", 0);
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService = this.this$0;
+                                    String action = intent.getAction();
+                                    uiModeManagerService.getClass();
+                                    if (UiModeManager.ACTION_ENTER_CAR_MODE.equals(action)) {
+                                        if (uiModeManagerService.mEnableCarDockLaunch
+                                                && (intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.CAR_DOCK";
+                                        }
+                                    } else if (UiModeManager.ACTION_ENTER_DESK_MODE.equals(
+                                            action)) {
+                                        if ((intExtra2 & 1) != 0) {
+                                            r0 = "android.intent.category.DESK_DOCK";
+                                        }
+                                    } else if ((intExtra3 & 1) != 0) {
+                                        r0 = "android.intent.category.HOME";
+                                    }
+                                    uiModeManagerService
+                                            .sendConfigurationAndStartDreamOrDockAppLocked(r0);
                                 }
-                            } else if ((intExtra3 & 1) != 0) {
-                                r0 = "android.intent.category.HOME";
-                            }
-                            uiModeManagerService.sendConfigurationAndStartDreamOrDockAppLocked(r0);
-                        }
-                        return;
-                    case 1:
-                        Uri data = intent.getData();
-                        r0 = data != null ? data.getSchemeSpecificPart() : null;
-                        if (r0 == null || (intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000)) == -10000) {
-                            return;
-                        }
-                        String action2 = intent.getAction();
-                        if (!("android.intent.action.PACKAGE_ADDED".equals(action2) && intent.getBooleanExtra("android.intent.extra.REPLACING", false)) && this.this$0.isNightPriorityAllowedLocked(r0)) {
-                            Set set = UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
-                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("onReceive : ", action2, ", package : ", r0, ", "), intExtra, "UiModeManager");
-                            UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(this.this$0, r0, intExtra, 2);
-                            synchronized (this.this$0.mPackagesNeedToShowDialog) {
-                                this.this$0.mPackagesNeedToShowDialog.putValue(r0, intExtra, Boolean.TRUE);
-                            }
-                            return;
-                        }
-                        return;
-                    case 2:
-                        UiModeManagerService uiModeManagerService2 = this.this$0;
-                        if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
-                            Settings.Secure.putIntForUser(uiModeManagerService2.getContext().getContentResolver(), "ui_night_mode_last_computed", uiModeManagerService2.mComputedNightMode ? 1 : 0, uiModeManagerService2.mCurrentUser);
-                            return;
-                        }
-                        return;
-                    case 3:
-                        if (Arrays.asList("ui_night_mode", "dark_theme_custom_start_time", "dark_theme_custom_end_time").contains(intent.getExtras().getCharSequence("setting_name"))) {
-                            synchronized (this.this$0.mLock) {
-                                this.this$0.updateNightModeFromSettingsLocked(context2, context2.getResources(), UserHandle.getCallingUserId());
-                                this.this$0.updateConfigurationLocked();
-                                this.this$0.applyConfigurationExternallyLocked();
-                            }
-                            return;
-                        }
-                        return;
-                    case 4:
-                        onReceive$com$android$server$UiModeManagerService$3(context2, intent);
-                        return;
-                    case 5:
-                        onReceive$com$android$server$UiModeManagerService$4(context2, intent);
-                        return;
-                    case 6:
-                        onReceive$com$android$server$UiModeManagerService$6(context2, intent);
-                        return;
-                    default:
-                        synchronized (this.this$0.mLock) {
-                            UiModeManagerService uiModeManagerService3 = this.this$0;
-                            if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
-                                if (uiModeManagerService3.shouldApplyAutomaticChangesImmediately()) {
-                                    uiModeManagerService3.updateLocked(0, 0);
-                                } else {
-                                    uiModeManagerService3.registerDeviceInactiveListenerLocked();
+                                return;
+                            case 1:
+                                Uri data = intent.getData();
+                                r0 = data != null ? data.getSchemeSpecificPart() : null;
+                                if (r0 == null
+                                        || (intExtra =
+                                                        intent.getIntExtra(
+                                                                "android.intent.extra.user_handle",
+                                                                -10000))
+                                                == -10000) {
+                                    return;
                                 }
-                                uiModeManagerService3.scheduleNextCustomTimeListener();
-                            }
+                                String action2 = intent.getAction();
+                                if (!("android.intent.action.PACKAGE_ADDED".equals(action2)
+                                                && intent.getBooleanExtra(
+                                                        "android.intent.extra.REPLACING", false))
+                                        && this.this$0.isNightPriorityAllowedLocked(r0)) {
+                                    Set set =
+                                            UiModeManagerService.SUPPORTED_NIGHT_MODE_CUSTOM_TYPES;
+                                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                            InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                                    "onReceive : ",
+                                                    action2,
+                                                    ", package : ",
+                                                    r0,
+                                                    ", "),
+                                            intExtra,
+                                            "UiModeManager");
+                                    UiModeManagerService.m103$$Nest$msetPackageNightModeInnerLocked(
+                                            this.this$0, r0, intExtra, 2);
+                                    synchronized (this.this$0.mPackagesNeedToShowDialog) {
+                                        this.this$0.mPackagesNeedToShowDialog.putValue(
+                                                r0, intExtra, Boolean.TRUE);
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 2:
+                                UiModeManagerService uiModeManagerService2 = this.this$0;
+                                if (uiModeManagerService2.mNightMode.mNightModeValue == 0) {
+                                    Settings.Secure.putIntForUser(
+                                            uiModeManagerService2.getContext().getContentResolver(),
+                                            "ui_night_mode_last_computed",
+                                            uiModeManagerService2.mComputedNightMode ? 1 : 0,
+                                            uiModeManagerService2.mCurrentUser);
+                                    return;
+                                }
+                                return;
+                            case 3:
+                                if (Arrays.asList(
+                                                "ui_night_mode",
+                                                "dark_theme_custom_start_time",
+                                                "dark_theme_custom_end_time")
+                                        .contains(
+                                                intent.getExtras()
+                                                        .getCharSequence("setting_name"))) {
+                                    synchronized (this.this$0.mLock) {
+                                        this.this$0.updateNightModeFromSettingsLocked(
+                                                context2,
+                                                context2.getResources(),
+                                                UserHandle.getCallingUserId());
+                                        this.this$0.updateConfigurationLocked();
+                                        this.this$0.applyConfigurationExternallyLocked();
+                                    }
+                                    return;
+                                }
+                                return;
+                            case 4:
+                                onReceive$com$android$server$UiModeManagerService$3(
+                                        context2, intent);
+                                return;
+                            case 5:
+                                onReceive$com$android$server$UiModeManagerService$4(
+                                        context2, intent);
+                                return;
+                            case 6:
+                                onReceive$com$android$server$UiModeManagerService$6(
+                                        context2, intent);
+                                return;
+                            default:
+                                synchronized (this.this$0.mLock) {
+                                    UiModeManagerService uiModeManagerService3 = this.this$0;
+                                    if (uiModeManagerService3.mNightMode.mNightModeValue == 3) {
+                                        if (uiModeManagerService3
+                                                .shouldApplyAutomaticChangesImmediately()) {
+                                            uiModeManagerService3.updateLocked(0, 0);
+                                        } else {
+                                            uiModeManagerService3
+                                                    .registerDeviceInactiveListenerLocked();
+                                        }
+                                        uiModeManagerService3.scheduleNextCustomTimeListener();
+                                    }
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         this.mNightPriorityAllowedPackagesFromScpm = new ArrayList();
         String str = PackageFeatureUserChangePersister.PACKAGE_SETTINGS_DIRECTORY;
-        this.mNightPriorityAppliedPackages = new PackageFeatureUserChange(4096, str, "NightModePriorityAppliedPackages");
-        this.mPackagesNeedToShowDialog = new PackageFeatureUserChange(8192, str, "NightModeShowDialogPackages");
+        this.mNightPriorityAppliedPackages =
+                new PackageFeatureUserChange(4096, str, "NightModePriorityAppliedPackages");
+        this.mPackagesNeedToShowDialog =
+                new PackageFeatureUserChange(8192, str, "NightModeShowDialogPackages");
         this.mService = new Stub(context);
         configuration.setToDefaults();
         this.mTwilightManager = twilightManager;
@@ -2608,7 +3417,14 @@ public final class UiModeManagerService extends SystemService {
     }
 
     public static String buildLogString() {
-        return LocalDateTime.now().format(sFormatter) + " " + adjustTab(Process.myUid()) + " " + adjustTab(Process.myPid()) + " " + adjustTab(Process.myTid()) + " V UiModeManager: SavedLogsStart";
+        return LocalDateTime.now().format(sFormatter)
+                + " "
+                + adjustTab(Process.myUid())
+                + " "
+                + adjustTab(Process.myPid())
+                + " "
+                + adjustTab(Process.myTid())
+                + " V UiModeManager: SavedLogsStart";
     }
 
     public static long getCustomTimeToMinute(LocalTime localTime) {
@@ -2629,12 +3445,39 @@ public final class UiModeManagerService extends SystemService {
             statusBarManager.disable(this.mCarModeEnabled ? 524288 : 0);
         }
         if (this.mNotificationManager == null) {
-            this.mNotificationManager = (NotificationManager) context.getSystemService("notification");
+            this.mNotificationManager =
+                    (NotificationManager) context.getSystemService("notification");
         }
         NotificationManager notificationManager = this.mNotificationManager;
         if (notificationManager != null) {
             if (this.mCarModeEnabled) {
-                this.mNotificationManager.notifyAsUser(null, 10, new Notification.Builder(context, SystemNotificationChannels.CAR_MODE).setSmallIcon(17304430).setDefaults(4).setOngoing(true).setWhen(0L).setColor(context.getColor(R.color.system_notification_accent_color)).setContentTitle(context.getString(R.string.config_packagedKeyboardName)).setContentText(context.getString(R.string.config_overrideComponentUiPackage)).setContentIntent(PendingIntent.getActivityAsUser(context, 0, new Intent(context, (Class<?>) DisableCarModeActivity.class), 33554432, null, UserHandle.CURRENT)).build(), UserHandle.ALL);
+                this.mNotificationManager.notifyAsUser(
+                        null,
+                        10,
+                        new Notification.Builder(context, SystemNotificationChannels.CAR_MODE)
+                                .setSmallIcon(17304430)
+                                .setDefaults(4)
+                                .setOngoing(true)
+                                .setWhen(0L)
+                                .setColor(
+                                        context.getColor(R.color.system_notification_accent_color))
+                                .setContentTitle(
+                                        context.getString(R.string.config_packagedKeyboardName))
+                                .setContentText(
+                                        context.getString(
+                                                R.string.config_overrideComponentUiPackage))
+                                .setContentIntent(
+                                        PendingIntent.getActivityAsUser(
+                                                context,
+                                                0,
+                                                new Intent(
+                                                        context,
+                                                        (Class<?>) DisableCarModeActivity.class),
+                                                33554432,
+                                                null,
+                                                UserHandle.CURRENT))
+                                .build(),
+                        UserHandle.ALL);
             } else {
                 notificationManager.cancelAsUser(null, 10, UserHandle.ALL);
             }
@@ -2680,58 +3523,100 @@ public final class UiModeManagerService extends SystemService {
                     PowerManager powerManager = (PowerManager) context.getSystemService("power");
                     this.mPowerManager = powerManager;
                     this.mWakeLock = powerManager.newWakeLock(26, "UiModeManager");
-                    this.mWindowManager = (WindowManagerInternal) LocalServices.getService(WindowManagerInternal.class);
-                    this.mActivityTaskManager = (ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class);
+                    this.mWindowManager =
+                            (WindowManagerInternal)
+                                    LocalServices.getService(WindowManagerInternal.class);
+                    this.mActivityTaskManager =
+                            (ActivityTaskManagerInternal)
+                                    LocalServices.getService(ActivityTaskManagerInternal.class);
                     this.mAlarmManager = (AlarmManager) getContext().getSystemService("alarm");
-                    TwilightManager twilightManager = (TwilightManager) getLocalService(TwilightManager.class);
+                    TwilightManager twilightManager =
+                            (TwilightManager) getLocalService(TwilightManager.class);
                     if (twilightManager != null) {
                         this.mTwilightManager = twilightManager;
                     }
-                    this.mLocalPowerManager = (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
-                    this.mDreamManagerInternal = (DreamManagerInternal) LocalServices.getService(DreamManagerInternal.class);
-                    this.mPowerSave = this.mLocalPowerManager.getLowPowerState(16).batterySaverEnabled;
-                    this.mLocalPowerManager.registerLowPowerModeObserver(16, new Consumer() { // from class: com.android.server.UiModeManagerService$$ExternalSyntheticLambda1
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            UiModeManagerService uiModeManagerService = UiModeManagerService.this;
-                            PowerSaveState powerSaveState = (PowerSaveState) obj;
-                            synchronized (uiModeManagerService.mLock) {
-                                try {
-                                    boolean z2 = uiModeManagerService.mPowerSave;
-                                    boolean z3 = powerSaveState.batterySaverEnabled;
-                                    if (z2 == z3) {
-                                        return;
+                    this.mLocalPowerManager =
+                            (PowerManagerInternal)
+                                    LocalServices.getService(PowerManagerInternal.class);
+                    this.mDreamManagerInternal =
+                            (DreamManagerInternal)
+                                    LocalServices.getService(DreamManagerInternal.class);
+                    this.mPowerSave =
+                            this.mLocalPowerManager.getLowPowerState(16).batterySaverEnabled;
+                    this.mLocalPowerManager.registerLowPowerModeObserver(
+                            16,
+                            new Consumer() { // from class:
+                                             // com.android.server.UiModeManagerService$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    UiModeManagerService uiModeManagerService =
+                                            UiModeManagerService.this;
+                                    PowerSaveState powerSaveState = (PowerSaveState) obj;
+                                    synchronized (uiModeManagerService.mLock) {
+                                        try {
+                                            boolean z2 = uiModeManagerService.mPowerSave;
+                                            boolean z3 = powerSaveState.batterySaverEnabled;
+                                            if (z2 == z3) {
+                                                return;
+                                            }
+                                            uiModeManagerService.mPowerSave = z3;
+                                            if (uiModeManagerService.mSystemReady) {
+                                                uiModeManagerService.updateLocked(0, 0);
+                                            }
+                                        } finally {
+                                        }
                                     }
-                                    uiModeManagerService.mPowerSave = z3;
-                                    if (uiModeManagerService.mSystemReady) {
-                                        uiModeManagerService.updateLocked(0, 0);
-                                    }
-                                } finally {
                                 }
-                            }
-                        }
-                    });
+                            });
                     this.mCarModeEnabled = this.mDockState == 2;
-                    IVrManager asInterface = IVrManager.Stub.asInterface(ServiceManager.getService("vrmanager"));
+                    IVrManager asInterface =
+                            IVrManager.Stub.asInterface(ServiceManager.getService("vrmanager"));
                     if (asInterface != null) {
                         try {
                             asInterface.registerListener(this.mVrStateCallbacks);
                         } catch (RemoteException e) {
-                            Slog.e("UiModeManager", "Failed to register VR mode state listener: " + e);
+                            Slog.e(
+                                    "UiModeManager",
+                                    "Failed to register VR mode state listener: " + e);
                         }
                     }
-                    context.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("ui_night_mode"), false, this.mDarkThemeObserver, 0);
-                    context.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("contrast_level"), false, this.mContrastObserver, -1);
-                    context.registerReceiver(this.mDockModeReceiver, new IntentFilter("android.intent.action.DOCK_EVENT"));
-                    context.registerReceiver(this.mBatteryReceiver, new IntentFilter("android.intent.action.BATTERY_CHANGED"));
-                    context.registerReceiver(this.mSettingsRestored, new IntentFilter("android.os.action.SETTING_RESTORED"));
-                    context.registerReceiver(this.mOnShutdown, new IntentFilter("android.intent.action.ACTION_SHUTDOWN"));
-                    IntentFilter intentFilter = new IntentFilter("android.intent.action.PACKAGE_ADDED");
+                    context.getContentResolver()
+                            .registerContentObserver(
+                                    Settings.Secure.getUriFor("ui_night_mode"),
+                                    false,
+                                    this.mDarkThemeObserver,
+                                    0);
+                    context.getContentResolver()
+                            .registerContentObserver(
+                                    Settings.Secure.getUriFor("contrast_level"),
+                                    false,
+                                    this.mContrastObserver,
+                                    -1);
+                    context.registerReceiver(
+                            this.mDockModeReceiver,
+                            new IntentFilter("android.intent.action.DOCK_EVENT"));
+                    context.registerReceiver(
+                            this.mBatteryReceiver,
+                            new IntentFilter("android.intent.action.BATTERY_CHANGED"));
+                    context.registerReceiver(
+                            this.mSettingsRestored,
+                            new IntentFilter("android.os.action.SETTING_RESTORED"));
+                    context.registerReceiver(
+                            this.mOnShutdown,
+                            new IntentFilter("android.intent.action.ACTION_SHUTDOWN"));
+                    IntentFilter intentFilter =
+                            new IntentFilter("android.intent.action.PACKAGE_ADDED");
                     intentFilter.addAction("android.intent.action.PACKAGE_DATA_CLEARED");
                     intentFilter.addDataScheme("package");
                     context.registerReceiver(this.mOnPackageAdded, intentFilter);
-                    context.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("shopdemo"), false, new AnonymousClass9(this, this.mHandler, 3), 0);
-                    if (Settings.Secure.getInt(getContext().getContentResolver(), "shopdemo", 0) != 1) {
+                    context.getContentResolver()
+                            .registerContentObserver(
+                                    Settings.Secure.getUriFor("shopdemo"),
+                                    false,
+                                    new AnonymousClass9(this, this.mHandler, 3),
+                                    0);
+                    if (Settings.Secure.getInt(getContext().getContentResolver(), "shopdemo", 0)
+                            != 1) {
                         z = false;
                     }
                     this.mShopDemo = z;
@@ -2750,13 +3635,18 @@ public final class UiModeManagerService extends SystemService {
         for (int i2 = 0; i2 < this.mProjectionListeners.size(); i2++) {
             int keyAt = this.mProjectionListeners.keyAt(i2);
             if ((i & keyAt) != 0) {
-                RemoteCallbackList remoteCallbackList = (RemoteCallbackList) this.mProjectionListeners.valueAt(i2);
+                RemoteCallbackList remoteCallbackList =
+                        (RemoteCallbackList) this.mProjectionListeners.valueAt(i2);
                 ArrayList arrayList = new ArrayList();
-                int populateWithRelevantActivePackageNames = populateWithRelevantActivePackageNames(keyAt, arrayList);
+                int populateWithRelevantActivePackageNames =
+                        populateWithRelevantActivePackageNames(keyAt, arrayList);
                 int beginBroadcast = remoteCallbackList.beginBroadcast();
                 for (int i3 = 0; i3 < beginBroadcast; i3++) {
                     try {
-                        remoteCallbackList.getBroadcastItem(i3).onProjectionStateChanged(populateWithRelevantActivePackageNames, arrayList);
+                        remoteCallbackList
+                                .getBroadcastItem(i3)
+                                .onProjectionStateChanged(
+                                        populateWithRelevantActivePackageNames, arrayList);
                     } catch (RemoteException unused) {
                         Slog.w("UiModeManager", "Failed a call to onProjectionStateChanged().");
                     }
@@ -2771,48 +3661,67 @@ public final class UiModeManagerService extends SystemService {
         final Context context = getContext();
         verifySetupWizardCompleted();
         final Resources resources = context.getResources();
-        this.mNightMode.set(resources.getInteger(R.integer.config_displayWhiteBalanceTransitionTimeDecrease));
+        this.mNightMode.set(
+                resources.getInteger(R.integer.config_displayWhiteBalanceTransitionTimeDecrease));
         this.mStartDreamImmediatelyOnDock = resources.getBoolean(R.bool.config_supportsCamToggle);
-        this.mDreamsDisabledByAmbientModeSuppression = resources.getBoolean(R.bool.config_duplicate_port_omadm_wappush);
-        this.mDefaultUiModeType = resources.getInteger(R.integer.config_dreamCloseAnimationDuration);
-        this.mCarModeKeepsScreenOn = resources.getInteger(R.integer.config_defaultPeakRefreshRate) == 1;
-        this.mDeskModeKeepsScreenOn = resources.getInteger(R.integer.config_dreamsBatteryLevelMinimumWhenPowered) == 1;
+        this.mDreamsDisabledByAmbientModeSuppression =
+                resources.getBoolean(R.bool.config_duplicate_port_omadm_wappush);
+        this.mDefaultUiModeType =
+                resources.getInteger(R.integer.config_dreamCloseAnimationDuration);
+        this.mCarModeKeepsScreenOn =
+                resources.getInteger(R.integer.config_defaultPeakRefreshRate) == 1;
+        this.mDeskModeKeepsScreenOn =
+                resources.getInteger(R.integer.config_dreamsBatteryLevelMinimumWhenPowered) == 1;
         this.mEnableCarDockLaunch = resources.getBoolean(R.bool.config_enableGeofenceOverlay);
         this.mUiModeLocked = resources.getBoolean(R.bool.config_multiuserDelayUserDataLocking);
         this.mNightModeLocked = resources.getBoolean(R.bool.config_mobile_data_capable);
         PackageManager packageManager = context.getPackageManager();
-        this.mTelevision = packageManager.hasSystemFeature("android.hardware.type.television") || packageManager.hasSystemFeature("android.software.leanback");
+        this.mTelevision =
+                packageManager.hasSystemFeature("android.hardware.type.television")
+                        || packageManager.hasSystemFeature("android.software.leanback");
         this.mCar = packageManager.hasSystemFeature("android.hardware.type.automotive");
         this.mWatch = packageManager.hasSystemFeature("android.hardware.type.watch");
-        SystemServerInitThreadPool.submit("UiModeManager.onStart", new Runnable() { // from class: com.android.server.UiModeManagerService$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                UiModeManagerService uiModeManagerService = UiModeManagerService.this;
-                Context context2 = context;
-                Resources resources2 = resources;
-                synchronized (uiModeManagerService.mLock) {
-                    try {
-                        TwilightManager twilightManager = (TwilightManager) uiModeManagerService.getLocalService(TwilightManager.class);
-                        if (twilightManager != null) {
-                            uiModeManagerService.mTwilightManager = twilightManager;
+        SystemServerInitThreadPool.submit(
+                "UiModeManager.onStart",
+                new Runnable() { // from class:
+                                 // com.android.server.UiModeManagerService$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        UiModeManagerService uiModeManagerService = UiModeManagerService.this;
+                        Context context2 = context;
+                        Resources resources2 = resources;
+                        synchronized (uiModeManagerService.mLock) {
+                            try {
+                                TwilightManager twilightManager =
+                                        (TwilightManager)
+                                                uiModeManagerService.getLocalService(
+                                                        TwilightManager.class);
+                                if (twilightManager != null) {
+                                    uiModeManagerService.mTwilightManager = twilightManager;
+                                }
+                                uiModeManagerService.updateNightModeFromSettingsLocked(
+                                        context2, resources2, UserHandle.getCallingUserId());
+                                uiModeManagerService.updateSystemProperties();
+                            } catch (Throwable th) {
+                                throw th;
+                            }
                         }
-                        uiModeManagerService.updateNightModeFromSettingsLocked(context2, resources2, UserHandle.getCallingUserId());
-                        uiModeManagerService.updateSystemProperties();
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
-        });
+                });
         publishBinderService("uimode", this.mService);
         publishLocalService(LocalService.class, this.mLocalService);
     }
 
     @Override // com.android.server.SystemService
-    public final void onUserSwitching(SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
+    public final void onUserSwitching(
+            SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
         this.mCurrentUser = targetUser2.getUserIdentifier();
         if (this.mNightMode.mNightModeValue == 0) {
-            Settings.Secure.putIntForUser(getContext().getContentResolver(), "ui_night_mode_last_computed", this.mComputedNightMode ? 1 : 0, targetUser.getUserIdentifier());
+            Settings.Secure.putIntForUser(
+                    getContext().getContentResolver(),
+                    "ui_night_mode_last_computed",
+                    this.mComputedNightMode ? 1 : 0,
+                    targetUser.getUserIdentifier());
         }
     }
 
@@ -2820,40 +3729,81 @@ public final class UiModeManagerService extends SystemService {
         if (this.mCarModeEnabled || this.mCar) {
             return;
         }
-        Settings.Secure.putIntForUser(getContext().getContentResolver(), "ui_night_mode", this.mNightMode.mNightModeValue, i);
-        Settings.Secure.putLongForUser(getContext().getContentResolver(), "ui_night_mode_custom_type", this.mNightModeCustomType, i);
-        Settings.System.putLongForUser(getContext().getContentResolver(), "display_night_theme_on_time", getCustomTimeToMinute(this.mCustomAutoNightModeStartMilliseconds), i);
-        Settings.System.putLongForUser(getContext().getContentResolver(), "display_night_theme_off_time", getCustomTimeToMinute(this.mCustomAutoNightModeEndMilliseconds), i);
+        Settings.Secure.putIntForUser(
+                getContext().getContentResolver(),
+                "ui_night_mode",
+                this.mNightMode.mNightModeValue,
+                i);
+        Settings.Secure.putLongForUser(
+                getContext().getContentResolver(),
+                "ui_night_mode_custom_type",
+                this.mNightModeCustomType,
+                i);
+        Settings.System.putLongForUser(
+                getContext().getContentResolver(),
+                "display_night_theme_on_time",
+                getCustomTimeToMinute(this.mCustomAutoNightModeStartMilliseconds),
+                i);
+        Settings.System.putLongForUser(
+                getContext().getContentResolver(),
+                "display_night_theme_off_time",
+                getCustomTimeToMinute(this.mCustomAutoNightModeEndMilliseconds),
+                i);
     }
 
     public final void persistNightModeOverrides(int i) {
         if (this.mCarModeEnabled || this.mCar) {
             return;
         }
-        Settings.Secure.putIntForUser(getContext().getContentResolver(), "ui_night_mode_override_on", this.mOverrideNightModeOn ? 1 : 0, i);
-        Settings.Secure.putIntForUser(getContext().getContentResolver(), "ui_night_mode_override_off", this.mOverrideNightModeOff ? 1 : 0, i);
+        Settings.Secure.putIntForUser(
+                getContext().getContentResolver(),
+                "ui_night_mode_override_on",
+                this.mOverrideNightModeOn ? 1 : 0,
+                i);
+        Settings.Secure.putIntForUser(
+                getContext().getContentResolver(),
+                "ui_night_mode_override_off",
+                this.mOverrideNightModeOff ? 1 : 0,
+                i);
     }
 
     public final void persistNightModeSettingDB(int i) {
         int i2 = this.mNightMode.mNightModeValue;
         if (i2 == 0) {
-            if (Settings.System.getIntForUser(getContext().getContentResolver(), "display_night_theme_scheduled", 0, i) != 1) {
-                Settings.System.putIntForUser(getContext().getContentResolver(), "display_night_theme_scheduled", 1, i);
+            if (Settings.System.getIntForUser(
+                            getContext().getContentResolver(),
+                            "display_night_theme_scheduled",
+                            0,
+                            i)
+                    != 1) {
+                Settings.System.putIntForUser(
+                        getContext().getContentResolver(), "display_night_theme_scheduled", 1, i);
             }
             this.mHandler.postDelayed(new AnonymousClass16(this, 0), 500L);
             this.mAutoModeChangeImmediately = true;
             return;
         }
         if (i2 == 1) {
-            Settings.System.putIntForUser(getContext().getContentResolver(), "display_night_theme", 0, i);
-            Settings.System.putIntForUser(getContext().getContentResolver(), "display_night_theme_scheduled", 0, i);
+            Settings.System.putIntForUser(
+                    getContext().getContentResolver(), "display_night_theme", 0, i);
+            Settings.System.putIntForUser(
+                    getContext().getContentResolver(), "display_night_theme_scheduled", 0, i);
             this.mComputedNightMode = false;
         } else if (i2 == 2) {
-            Settings.System.putIntForUser(getContext().getContentResolver(), "display_night_theme", 1, i);
-            Settings.System.putIntForUser(getContext().getContentResolver(), "display_night_theme_scheduled", 0, i);
+            Settings.System.putIntForUser(
+                    getContext().getContentResolver(), "display_night_theme", 1, i);
+            Settings.System.putIntForUser(
+                    getContext().getContentResolver(), "display_night_theme_scheduled", 0, i);
             this.mComputedNightMode = false;
-        } else if (i2 == 3 && Settings.System.getIntForUser(getContext().getContentResolver(), "display_night_theme_scheduled", 0, i) != 1) {
-            Settings.System.putIntForUser(getContext().getContentResolver(), "display_night_theme_scheduled", 1, i);
+        } else if (i2 == 3
+                && Settings.System.getIntForUser(
+                                getContext().getContentResolver(),
+                                "display_night_theme_scheduled",
+                                0,
+                                i)
+                        != 1) {
+            Settings.System.putIntForUser(
+                    getContext().getContentResolver(), "display_night_theme_scheduled", 1, i);
         }
     }
 
@@ -2907,7 +3857,10 @@ public final class UiModeManagerService extends SystemService {
         LocalDateTime of;
         this.mAlarmManager.cancel(this.mCustomTimeListener);
         LocalDateTime now = LocalDateTime.now();
-        if (TimeUtils.isTimeBetween(LocalTime.now(), this.mCustomAutoNightModeStartMilliseconds, this.mCustomAutoNightModeEndMilliseconds)) {
+        if (TimeUtils.isTimeBetween(
+                LocalTime.now(),
+                this.mCustomAutoNightModeStartMilliseconds,
+                this.mCustomAutoNightModeEndMilliseconds)) {
             of = LocalDateTime.of(now.toLocalDate(), this.mCustomAutoNightModeEndMilliseconds);
             if (of.isBefore(now)) {
                 of = of.plusDays(1L);
@@ -2918,7 +3871,12 @@ public final class UiModeManagerService extends SystemService {
                 of = of.plusDays(1L);
             }
         }
-        this.mAlarmManager.setExact(1, of.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(), "UiModeManager", this.mCustomTimeListener, null);
+        this.mAlarmManager.setExact(
+                1,
+                of.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(),
+                "UiModeManager",
+                this.mCustomTimeListener,
+                null);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:14:0x0097  */
@@ -3030,17 +3988,19 @@ public final class UiModeManagerService extends SystemService {
         Lc8:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.UiModeManagerService.sendConfigurationAndStartDreamOrDockAppLocked(java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.UiModeManagerService.sendConfigurationAndStartDreamOrDockAppLocked(java.lang.String):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:26:0x0099, code lost:
-    
-        if (((java.lang.String) ((java.util.HashMap) r9.mCarModePackagePriority).get(java.lang.Integer.valueOf(r11))).equals(r12) == false) goto L19;
-     */
+
+       if (((java.lang.String) ((java.util.HashMap) r9.mCarModePackagePriority).get(java.lang.Integer.valueOf(r11))).equals(r12) == false) goto L19;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x009b, code lost:
-    
-        if (r13 != false) goto L20;
-     */
+
+       if (r13 != false) goto L20;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -3050,7 +4010,10 @@ public final class UiModeManagerService extends SystemService {
             Method dump skipped, instructions count: 326
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.UiModeManagerService.setCarModeLocked(int, int, java.lang.String, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.UiModeManagerService.setCarModeLocked(int, int,"
+                    + " java.lang.String, boolean):void");
     }
 
     public void setDreamsDisabledByAmbientModeSuppression(boolean z) {
@@ -3062,7 +4025,10 @@ public final class UiModeManagerService extends SystemService {
     }
 
     public final boolean shouldApplyAutomaticChangesImmediately() {
-        return this.mCar || !this.mPowerManager.isInteractive() || this.mNightModeCustomType == 1 || this.mDreamManagerInternal.isDreaming();
+        return this.mCar
+                || !this.mPowerManager.isInteractive()
+                || this.mNightModeCustomType == 1
+                || this.mDreamManagerInternal.isDreaming();
     }
 
     public final void unregisterDeviceInactiveListenerLocked() {
@@ -3096,7 +4062,11 @@ public final class UiModeManagerService extends SystemService {
         } else {
             this.mComputedNightMode = z;
         }
-        if (anonymousClass1.mNightModeValue == 0 && ((twilightManager = this.mTwilightManager) == null || ((TwilightService.AnonymousClass1) twilightManager).getLastTwilightState() == null)) {
+        if (anonymousClass1.mNightModeValue == 0
+                && ((twilightManager = this.mTwilightManager) == null
+                        || ((TwilightService.AnonymousClass1) twilightManager)
+                                        .getLastTwilightState()
+                                == null)) {
             return;
         }
         resetNightModeOverrideLocked();
@@ -3132,9 +4102,15 @@ public final class UiModeManagerService extends SystemService {
             boolean z = this.mComputedNightMode;
             TwilightManager twilightManager = this.mTwilightManager;
             if (twilightManager != null) {
-                ((TwilightService.AnonymousClass1) twilightManager).registerListener(anonymousClass5, this.mHandler);
-                TwilightState lastTwilightState = ((TwilightService.AnonymousClass1) this.mTwilightManager).getLastTwilightState();
-                z = lastTwilightState == null ? this.mComputedNightMode : lastTwilightState.isNight();
+                ((TwilightService.AnonymousClass1) twilightManager)
+                        .registerListener(anonymousClass5, this.mHandler);
+                TwilightState lastTwilightState =
+                        ((TwilightService.AnonymousClass1) this.mTwilightManager)
+                                .getLastTwilightState();
+                z =
+                        lastTwilightState == null
+                                ? this.mComputedNightMode
+                                : lastTwilightState.isNight();
             }
             updateComputedNightModeLocked(z);
             if (z != this.mComputedNightMode) {
@@ -3145,7 +4121,8 @@ public final class UiModeManagerService extends SystemService {
         } else {
             TwilightManager twilightManager2 = this.mTwilightManager;
             if (twilightManager2 != null) {
-                ((TwilightService.AnonymousClass1) twilightManager2).unregisterListener(anonymousClass5);
+                ((TwilightService.AnonymousClass1) twilightManager2)
+                        .unregisterListener(anonymousClass5);
             }
         }
         int i5 = anonymousClass1.mNightModeValue;
@@ -3161,7 +4138,11 @@ public final class UiModeManagerService extends SystemService {
             IntentFilter intentFilter = new IntentFilter("android.intent.action.TIME_SET");
             intentFilter.addAction("android.intent.action.TIMEZONE_CHANGED");
             getContext().registerReceiver(anonymousClass2, intentFilter);
-            updateComputedNightModeLocked(TimeUtils.isTimeBetween(LocalTime.now(), this.mCustomAutoNightModeStartMilliseconds, this.mCustomAutoNightModeEndMilliseconds));
+            updateComputedNightModeLocked(
+                    TimeUtils.isTimeBetween(
+                            LocalTime.now(),
+                            this.mCustomAutoNightModeStartMilliseconds,
+                            this.mCustomAutoNightModeEndMilliseconds));
             scheduleNextCustomTimeListener();
             updateThemeImmediately();
         }
@@ -3182,8 +4163,20 @@ public final class UiModeManagerService extends SystemService {
     }
 
     public final boolean updateContrastLocked() {
-        float floatForUser = Settings.Secure.getFloatForUser(getContext().getContentResolver(), "contrast_level", FullScreenMagnificationGestureHandler.MAX_SCALE, this.mCurrentUser);
-        if (Math.abs(((Float) this.mContrasts.get(this.mCurrentUser, Float.valueOf(Float.MAX_VALUE))).floatValue() - floatForUser) < 1.0E-10d) {
+        float floatForUser =
+                Settings.Secure.getFloatForUser(
+                        getContext().getContentResolver(),
+                        "contrast_level",
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        this.mCurrentUser);
+        if (Math.abs(
+                        ((Float)
+                                                this.mContrasts.get(
+                                                        this.mCurrentUser,
+                                                        Float.valueOf(Float.MAX_VALUE)))
+                                        .floatValue()
+                                - floatForUser)
+                < 1.0E-10d) {
             return false;
         }
         this.mContrasts.put(this.mCurrentUser, Float.valueOf(floatForUser));
@@ -3205,7 +4198,9 @@ public final class UiModeManagerService extends SystemService {
             if (this.mLastBroadcastState != 2) {
                 adjustStatusBarCarModeLocked();
                 if (str != null) {
-                    getContext().sendBroadcastAsUser(new Intent(str).addFlags(268435456), UserHandle.ALL);
+                    getContext()
+                            .sendBroadcastAsUser(
+                                    new Intent(str).addFlags(268435456), UserHandle.ALL);
                 }
                 this.mLastBroadcastState = 2;
                 str = UiModeManager.ACTION_ENTER_CAR_MODE;
@@ -3214,7 +4209,9 @@ public final class UiModeManagerService extends SystemService {
         } else if (isDeskDockState(this.mDockState)) {
             if (!isDeskDockState(this.mLastBroadcastState)) {
                 if (str != null) {
-                    getContext().sendBroadcastAsUser(new Intent(str).addFlags(268435456), UserHandle.ALL);
+                    getContext()
+                            .sendBroadcastAsUser(
+                                    new Intent(str).addFlags(268435456), UserHandle.ALL);
                 }
                 this.mLastBroadcastState = this.mDockState;
                 str = UiModeManager.ACTION_ENTER_DESK_MODE;
@@ -3228,7 +4225,16 @@ public final class UiModeManagerService extends SystemService {
             intent.putExtra("enableFlags", i);
             intent.putExtra("disableFlags", i2);
             intent.addFlags(268435456);
-            getContext().sendOrderedBroadcastAsUser(intent, UserHandle.CURRENT, null, this.mResultReceiver, null, -1, null, null);
+            getContext()
+                    .sendOrderedBroadcastAsUser(
+                            intent,
+                            UserHandle.CURRENT,
+                            null,
+                            this.mResultReceiver,
+                            null,
+                            -1,
+                            null,
+                            null);
             this.mHoldingConfiguration = true;
             updateConfigurationLocked();
         } else {
@@ -3245,7 +4251,11 @@ public final class UiModeManagerService extends SystemService {
             }
             sendConfigurationAndStartDreamOrDockAppLocked(str2);
         }
-        if (this.mCharging && ((this.mCarModeEnabled && this.mCarModeKeepsScreenOn && (this.mCarModeEnableFlags & 2) == 0) || (this.mCurUiMode == 2 && this.mDeskModeKeepsScreenOn))) {
+        if (this.mCharging
+                && ((this.mCarModeEnabled
+                                && this.mCarModeKeepsScreenOn
+                                && (this.mCarModeEnableFlags & 2) == 0)
+                        || (this.mCurUiMode == 2 && this.mDeskModeKeepsScreenOn))) {
             z = true;
         }
         if (z != this.mWakeLock.isHeld()) {
@@ -3257,39 +4267,91 @@ public final class UiModeManagerService extends SystemService {
         }
     }
 
-    public final void updateNightModeFromSettingsLocked(Context context, Resources resources, int i) {
+    public final void updateNightModeFromSettingsLocked(
+            Context context, Resources resources, int i) {
         if (this.mCarModeEnabled || this.mCar) {
             return;
         }
         int i2 = Settings.Global.getInt(getContext().getContentResolver(), "low_power", -1);
         AnonymousClass1 anonymousClass1 = this.mNightMode;
-        if (i2 == 1 && Settings.Global.getInt(getContext().getContentResolver(), "pms_settings_dark_mode_enabled", -1) == 1) {
+        if (i2 == 1
+                && Settings.Global.getInt(
+                                getContext().getContentResolver(),
+                                "pms_settings_dark_mode_enabled",
+                                -1)
+                        == 1) {
             anonymousClass1.set(2);
         } else {
-            int intForUser = Settings.Secure.getIntForUser(context.getContentResolver(), "last_secure_ui_night_mode_power_mode", -1, i);
+            int intForUser =
+                    Settings.Secure.getIntForUser(
+                            context.getContentResolver(),
+                            "last_secure_ui_night_mode_power_mode",
+                            -1,
+                            i);
             if (intForUser != -1) {
                 anonymousClass1.set(intForUser);
-                Settings.Secure.putIntForUser(context.getContentResolver(), "last_secure_ui_night_mode_power_mode", -1, i);
+                Settings.Secure.putIntForUser(
+                        context.getContentResolver(),
+                        "last_secure_ui_night_mode_power_mode",
+                        -1,
+                        i);
             } else {
-                anonymousClass1.set(Settings.Secure.getIntForUser(context.getContentResolver(), "ui_night_mode", resources.getInteger(R.integer.config_displayWhiteBalanceTransitionTimeDecrease), i));
+                anonymousClass1.set(
+                        Settings.Secure.getIntForUser(
+                                context.getContentResolver(),
+                                "ui_night_mode",
+                                resources.getInteger(
+                                        R.integer.config_displayWhiteBalanceTransitionTimeDecrease),
+                                i));
             }
         }
-        this.mNightModeCustomType = Settings.Secure.getIntForUser(context.getContentResolver(), "ui_night_mode_custom_type", -1, i);
-        this.mOverrideNightModeOn = Settings.Secure.getIntForUser(context.getContentResolver(), "ui_night_mode_override_on", 0, i) != 0;
-        this.mOverrideNightModeOff = Settings.Secure.getIntForUser(context.getContentResolver(), "ui_night_mode_override_off", 0, i) != 0;
-        long longForUser = Settings.System.getLongForUser(context.getContentResolver(), "display_night_theme_on_time", getCustomTimeToMinute(this.DEFAULT_CUSTOM_NIGHT_START_TIME), i);
-        long longForUser2 = Settings.System.getLongForUser(context.getContentResolver(), "display_night_theme_off_time", getCustomTimeToMinute(this.DEFAULT_CUSTOM_NIGHT_END_TIME), i);
-        this.mCustomAutoNightModeStartMilliseconds = LocalTime.ofNanoOfDay(longForUser * 60000000000L);
-        this.mCustomAutoNightModeEndMilliseconds = LocalTime.ofNanoOfDay(longForUser2 * 60000000000L);
+        this.mNightModeCustomType =
+                Settings.Secure.getIntForUser(
+                        context.getContentResolver(), "ui_night_mode_custom_type", -1, i);
+        this.mOverrideNightModeOn =
+                Settings.Secure.getIntForUser(
+                                context.getContentResolver(), "ui_night_mode_override_on", 0, i)
+                        != 0;
+        this.mOverrideNightModeOff =
+                Settings.Secure.getIntForUser(
+                                context.getContentResolver(), "ui_night_mode_override_off", 0, i)
+                        != 0;
+        long longForUser =
+                Settings.System.getLongForUser(
+                        context.getContentResolver(),
+                        "display_night_theme_on_time",
+                        getCustomTimeToMinute(this.DEFAULT_CUSTOM_NIGHT_START_TIME),
+                        i);
+        long longForUser2 =
+                Settings.System.getLongForUser(
+                        context.getContentResolver(),
+                        "display_night_theme_off_time",
+                        getCustomTimeToMinute(this.DEFAULT_CUSTOM_NIGHT_END_TIME),
+                        i);
+        this.mCustomAutoNightModeStartMilliseconds =
+                LocalTime.ofNanoOfDay(longForUser * 60000000000L);
+        this.mCustomAutoNightModeEndMilliseconds =
+                LocalTime.ofNanoOfDay(longForUser2 * 60000000000L);
         if (anonymousClass1.mNightModeValue == 0) {
-            this.mComputedNightMode = Settings.Secure.getIntForUser(context.getContentResolver(), "ui_night_mode_last_computed", 0, i) != 0;
+            this.mComputedNightMode =
+                    Settings.Secure.getIntForUser(
+                                    context.getContentResolver(),
+                                    "ui_night_mode_last_computed",
+                                    0,
+                                    i)
+                            != 0;
         }
         LogWrapper.i("updateNightModeFromSettings : " + anonymousClass1 + " userID : " + i);
         persistNightModeSettingDB(i);
     }
 
     public final void updateSystemProperties() {
-        int intForUser = Settings.Secure.getIntForUser(getContext().getContentResolver(), "ui_night_mode", this.mNightMode.mNightModeValue, 0);
+        int intForUser =
+                Settings.Secure.getIntForUser(
+                        getContext().getContentResolver(),
+                        "ui_night_mode",
+                        this.mNightMode.mNightModeValue,
+                        0);
         if (intForUser == 0 || intForUser == 3) {
             intForUser = 2;
         }
@@ -3297,23 +4359,43 @@ public final class UiModeManagerService extends SystemService {
     }
 
     public final void updateThemeImmediately() {
-        boolean z = Settings.System.getIntForUser(getContext().getContentResolver(), "display_night_theme", 0, -2) == 1;
+        boolean z =
+                Settings.System.getIntForUser(
+                                getContext().getContentResolver(), "display_night_theme", 0, -2)
+                        == 1;
         boolean z2 = this.mComputedNightMode;
         if (z == z2) {
             return;
         }
-        if (!z2 && Settings.System.getInt(getContext().getContentResolver(), "minimal_battery_use", 0) != 1) {
+        if (!z2
+                && Settings.System.getInt(
+                                getContext().getContentResolver(), "minimal_battery_use", 0)
+                        != 1) {
             this.mHandler.postDelayed(new AnonymousClass16(this, 1), 500L);
         }
-        Settings.System.putIntForUser(getContext().getContentResolver(), "display_night_theme", this.mComputedNightMode ? 1 : 0, -2);
+        Settings.System.putIntForUser(
+                getContext().getContentResolver(),
+                "display_night_theme",
+                this.mComputedNightMode ? 1 : 0,
+                -2);
     }
 
     public final void verifySetupWizardCompleted() {
         Context context = getContext();
         int callingUserId = UserHandle.getCallingUserId();
-        if (Settings.Secure.getIntForUser(getContext().getContentResolver(), "user_setup_complete", 0, UserHandle.getCallingUserId()) == 1) {
+        if (Settings.Secure.getIntForUser(
+                        getContext().getContentResolver(),
+                        "user_setup_complete",
+                        0,
+                        UserHandle.getCallingUserId())
+                == 1) {
             return;
         }
-        context.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("user_setup_complete"), false, this.mSetupWizardObserver, callingUserId);
+        context.getContentResolver()
+                .registerContentObserver(
+                        Settings.Secure.getUriFor("user_setup_complete"),
+                        false,
+                        this.mSetupWizardObserver,
+                        callingUserId);
     }
 }

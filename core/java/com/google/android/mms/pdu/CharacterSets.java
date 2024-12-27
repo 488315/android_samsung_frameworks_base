@@ -65,7 +65,63 @@ public class CharacterSets {
     public static final int TIS_620 = 2259;
     public static final int WINDOWS_1255 = 2255;
     public static final int WINDOWS_1258 = 2258;
-    private static final int[] MIBENUM_NUMBERS = {0, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 17, 106, 2026, 1000, 1015, 2101, 1020, 1016, 2051, 18, 38, 114, 113, 2085, 2025, 104, 105, 39, 37, 13, 109, 110, 111, 112, 2084, 2088, 2027, 1011, TIS_620, 1013, 1014, 1017, 1018, 1019, 1012, 2250, 2251, 2252, 2253, 2254, WINDOWS_1255, 2256, 2257, WINDOWS_1258};
+    private static final int[] MIBENUM_NUMBERS = {
+        0,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        17,
+        106,
+        2026,
+        1000,
+        1015,
+        2101,
+        1020,
+        1016,
+        2051,
+        18,
+        38,
+        114,
+        113,
+        2085,
+        2025,
+        104,
+        105,
+        39,
+        37,
+        13,
+        109,
+        110,
+        111,
+        112,
+        2084,
+        2088,
+        2027,
+        1011,
+        TIS_620,
+        1013,
+        1014,
+        1017,
+        1018,
+        1019,
+        1012,
+        2250,
+        2251,
+        2252,
+        2253,
+        2254,
+        WINDOWS_1255,
+        2256,
+        2257,
+        WINDOWS_1258
+    };
     public static final String MIMENAME_US_ASCII = "us-ascii";
     public static final String MIMENAME_ISO_8859_1 = "iso-8859-1";
     public static final String MIMENAME_ISO_8859_2 = "iso-8859-2";
@@ -119,7 +175,63 @@ public class CharacterSets {
     public static final String MIMENAME_WINDOWS_1256 = "windows-1256";
     public static final String MIMENAME_WINDOWS_1257 = "windows-1257";
     public static final String MIMENAME_WINDOWS_1258 = "windows-1258";
-    private static final String[] MIME_NAMES = {"*", MIMENAME_US_ASCII, MIMENAME_ISO_8859_1, MIMENAME_ISO_8859_2, MIMENAME_ISO_8859_3, MIMENAME_ISO_8859_4, MIMENAME_ISO_8859_5, MIMENAME_ISO_8859_6, MIMENAME_ISO_8859_7, MIMENAME_ISO_8859_8, MIMENAME_ISO_8859_9, MIMENAME_SHIFT_JIS, "utf-8", MIMENAME_BIG5, MIMENAME_UCS2, MIMENAME_UTF_16, MIMENAME_BIG5_HKSCS, MIMENAME_BOCU_1, MIMENAME_CESU_8, MIMENAME_CP864, MIMENAME_EUC_JP, MIMENAME_EUC_KR, MIMENAME_GB18030, MIMENAME_GBK, MIMENAME_HZ_GB_2312, MIMENAME_GB_2312, MIMENAME_ISO_2022_CN, MIMENAME_ISO_2022_CN_EXT, MIMENAME_ISO_2022_JP, MIMENAME_ISO_2022_KR, MIMENAME_ISO_8859_10, MIMENAME_ISO_8859_13, MIMENAME_ISO_8859_14, MIMENAME_ISO_8859_15, MIMENAME_ISO_8859_16, MIMENAME_KOI8_R, MIMENAME_KOI8_U, MIMENAME_MACINTOSH, MIMENAME_SCSU, MIMENAME_TIS_620, MIMENAME_UTF_16BE, MIMENAME_UTF_16LE, MIMENAME_UTF_32, MIMENAME_UTF_32BE, MIMENAME_UTF_32LE, MIMENAME_UTF_7, MIMENAME_WINDOWS_1250, MIMENAME_WINDOWS_1251, MIMENAME_WINDOWS_1252, MIMENAME_WINDOWS_1253, MIMENAME_WINDOWS_1254, MIMENAME_WINDOWS_1255, MIMENAME_WINDOWS_1256, MIMENAME_WINDOWS_1257, MIMENAME_WINDOWS_1258};
+    private static final String[] MIME_NAMES = {
+        "*",
+        MIMENAME_US_ASCII,
+        MIMENAME_ISO_8859_1,
+        MIMENAME_ISO_8859_2,
+        MIMENAME_ISO_8859_3,
+        MIMENAME_ISO_8859_4,
+        MIMENAME_ISO_8859_5,
+        MIMENAME_ISO_8859_6,
+        MIMENAME_ISO_8859_7,
+        MIMENAME_ISO_8859_8,
+        MIMENAME_ISO_8859_9,
+        MIMENAME_SHIFT_JIS,
+        "utf-8",
+        MIMENAME_BIG5,
+        MIMENAME_UCS2,
+        MIMENAME_UTF_16,
+        MIMENAME_BIG5_HKSCS,
+        MIMENAME_BOCU_1,
+        MIMENAME_CESU_8,
+        MIMENAME_CP864,
+        MIMENAME_EUC_JP,
+        MIMENAME_EUC_KR,
+        MIMENAME_GB18030,
+        MIMENAME_GBK,
+        MIMENAME_HZ_GB_2312,
+        MIMENAME_GB_2312,
+        MIMENAME_ISO_2022_CN,
+        MIMENAME_ISO_2022_CN_EXT,
+        MIMENAME_ISO_2022_JP,
+        MIMENAME_ISO_2022_KR,
+        MIMENAME_ISO_8859_10,
+        MIMENAME_ISO_8859_13,
+        MIMENAME_ISO_8859_14,
+        MIMENAME_ISO_8859_15,
+        MIMENAME_ISO_8859_16,
+        MIMENAME_KOI8_R,
+        MIMENAME_KOI8_U,
+        MIMENAME_MACINTOSH,
+        MIMENAME_SCSU,
+        MIMENAME_TIS_620,
+        MIMENAME_UTF_16BE,
+        MIMENAME_UTF_16LE,
+        MIMENAME_UTF_32,
+        MIMENAME_UTF_32BE,
+        MIMENAME_UTF_32LE,
+        MIMENAME_UTF_7,
+        MIMENAME_WINDOWS_1250,
+        MIMENAME_WINDOWS_1251,
+        MIMENAME_WINDOWS_1252,
+        MIMENAME_WINDOWS_1253,
+        MIMENAME_WINDOWS_1254,
+        MIMENAME_WINDOWS_1255,
+        MIMENAME_WINDOWS_1256,
+        MIMENAME_WINDOWS_1257,
+        MIMENAME_WINDOWS_1258
+    };
     private static final HashMap<Integer, String> MIBENUM_TO_NAME_MAP = new HashMap<>();
     private static final HashMap<String, Integer> NAME_TO_MIBENUM_MAP = new HashMap<>();
 
@@ -131,8 +243,7 @@ public class CharacterSets {
         }
     }
 
-    private CharacterSets() {
-    }
+    private CharacterSets() {}
 
     public static String getMimeName(int mibEnumValue) throws UnsupportedEncodingException {
         String name = MIBENUM_TO_NAME_MAP.get(Integer.valueOf(mibEnumValue));

@@ -3,33 +3,35 @@ package android.graphics;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.FastMath;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes.dex */
 public class RectF implements Parcelable {
-    public static final Parcelable.Creator<RectF> CREATOR = new Parcelable.Creator<RectF>() { // from class: android.graphics.RectF.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RectF createFromParcel(Parcel in) {
-            RectF r = new RectF();
-            r.readFromParcel(in);
-            return r;
-        }
+    public static final Parcelable.Creator<RectF> CREATOR =
+            new Parcelable.Creator<RectF>() { // from class: android.graphics.RectF.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RectF createFromParcel(Parcel in) {
+                    RectF r = new RectF();
+                    r.readFromParcel(in);
+                    return r;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RectF[] newArray(int size) {
-            return new RectF[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RectF[] newArray(int size) {
+                    return new RectF[size];
+                }
+            };
     public float bottom;
     public float left;
     public float right;
     public float top;
 
-    public RectF() {
-    }
+    public RectF() {}
 
     public RectF(float left, float top, float right, float bottom) {
         this.left = left;
@@ -74,7 +76,10 @@ public class RectF implements Parcelable {
             return false;
         }
         RectF r = (RectF) o;
-        if (this.left == r.left && this.top == r.top && this.right == r.right && this.bottom == r.bottom) {
+        if (this.left == r.left
+                && this.top == r.top
+                && this.right == r.right
+                && this.bottom == r.bottom) {
             return true;
         }
         return false;
@@ -82,11 +87,22 @@ public class RectF implements Parcelable {
 
     public int hashCode() {
         int result = this.left != 0.0f ? Float.floatToIntBits(this.left) : 0;
-        return (((((result * 31) + (this.top != 0.0f ? Float.floatToIntBits(this.top) : 0)) * 31) + (this.right != 0.0f ? Float.floatToIntBits(this.right) : 0)) * 31) + (this.bottom != 0.0f ? Float.floatToIntBits(this.bottom) : 0);
+        return (((((result * 31) + (this.top != 0.0f ? Float.floatToIntBits(this.top) : 0)) * 31)
+                                + (this.right != 0.0f ? Float.floatToIntBits(this.right) : 0))
+                        * 31)
+                + (this.bottom != 0.0f ? Float.floatToIntBits(this.bottom) : 0);
     }
 
     public String toString() {
-        return "RectF(" + this.left + ", " + this.top + ", " + this.right + ", " + this.bottom + NavigationBarInflaterView.KEY_CODE_END;
+        return "RectF("
+                + this.left
+                + ", "
+                + this.top
+                + ", "
+                + this.right
+                + ", "
+                + this.bottom
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public String toShortString() {
@@ -189,15 +205,30 @@ public class RectF implements Parcelable {
     }
 
     public boolean contains(float x, float y) {
-        return this.left < this.right && this.top < this.bottom && x >= this.left && x < this.right && y >= this.top && y < this.bottom;
+        return this.left < this.right
+                && this.top < this.bottom
+                && x >= this.left
+                && x < this.right
+                && y >= this.top
+                && y < this.bottom;
     }
 
     public boolean contains(float left, float top, float right, float bottom) {
-        return this.left < this.right && this.top < this.bottom && this.left <= left && this.top <= top && this.right >= right && this.bottom >= bottom;
+        return this.left < this.right
+                && this.top < this.bottom
+                && this.left <= left
+                && this.top <= top
+                && this.right >= right
+                && this.bottom >= bottom;
     }
 
     public boolean contains(RectF r) {
-        return this.left < this.right && this.top < this.bottom && this.left <= r.left && this.top <= r.top && this.right >= r.right && this.bottom >= r.bottom;
+        return this.left < this.right
+                && this.top < this.bottom
+                && this.left <= r.left
+                && this.top <= r.top
+                && this.right >= r.right
+                && this.bottom >= r.bottom;
     }
 
     public boolean intersect(float left, float top, float right, float bottom) {
@@ -244,11 +275,19 @@ public class RectF implements Parcelable {
     }
 
     public void round(Rect dst) {
-        dst.set(FastMath.round(this.left), FastMath.round(this.top), FastMath.round(this.right), FastMath.round(this.bottom));
+        dst.set(
+                FastMath.round(this.left),
+                FastMath.round(this.top),
+                FastMath.round(this.right),
+                FastMath.round(this.bottom));
     }
 
     public void roundOut(Rect dst) {
-        dst.set((int) Math.floor(this.left), (int) Math.floor(this.top), (int) Math.ceil(this.right), (int) Math.ceil(this.bottom));
+        dst.set(
+                (int) Math.floor(this.left),
+                (int) Math.floor(this.top),
+                (int) Math.ceil(this.right),
+                (int) Math.ceil(this.bottom));
     }
 
     public void union(float left, float top, float right, float bottom) {

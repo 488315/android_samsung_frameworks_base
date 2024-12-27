@@ -13,15 +13,18 @@ import android.security.Credentials;
 import android.security.IKeyChainService;
 import android.security.KeyChain;
 import android.util.Log;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.internal.org.bouncycastle.asn1.x509.BasicConstraints;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.adapter.AdapterRegistry;
 import com.android.server.enterprise.adapter.IPersonaManagerAdapter;
 import com.android.server.enterprise.adapterlayer.PersonaManagerAdapter;
+
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.keystore.CertificateInfo;
 import com.samsung.android.knox.keystore.ICertificatePolicy;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.KeyStore;
@@ -68,17 +71,28 @@ public final class CertificateUtil {
                 return true;
             }
             try {
-                KeyChain.KeyChainConnection bindAsUser = KeyChain.bindAsUser(this.mContext, this.mUser);
+                KeyChain.KeyChainConnection bindAsUser =
+                        KeyChain.bindAsUser(this.mContext, this.mUser);
                 this.mConnection = bindAsUser;
                 this.mService = bindAsUser.getService();
-                this.mDpmsService = IDevicePolicyManager.Stub.asInterface(ServiceManager.getService("device_policy"));
+                this.mDpmsService =
+                        IDevicePolicyManager.Stub.asInterface(
+                                ServiceManager.getService("device_policy"));
                 return true;
             } catch (AssertionError unused) {
-                Log.d("CertificateUtil", "Unable to connect to KeyChainService for user " + this.mUser.getIdentifier());
+                Log.d(
+                        "CertificateUtil",
+                        "Unable to connect to KeyChainService for user "
+                                + this.mUser.getIdentifier());
                 disconnect();
                 return false;
             } catch (Exception e) {
-                Log.e("CertificateUtil", "Error binding KeyChain. Is KeyChainService running for user " + this.mUser.getIdentifier() + "?", e);
+                Log.e(
+                        "CertificateUtil",
+                        "Error binding KeyChain. Is KeyChainService running for user "
+                                + this.mUser.getIdentifier()
+                                + "?",
+                        e);
                 disconnect();
                 return false;
             }
@@ -105,7 +119,10 @@ public final class CertificateUtil {
             try {
                 return this.mService.deleteEntry(str, i);
             } catch (Exception e) {
-                Log.e("CertificateUtil", "Error in KeyChainService.deleteEntry for alias " + str, e);
+                Log.e(
+                        "CertificateUtil",
+                        "Error in KeyChainService.deleteEntry for alias " + str,
+                        e);
                 return false;
             }
         }
@@ -131,7 +148,10 @@ public final class CertificateUtil {
             try {
                 return this.mService.getCertificateSystem(str, str2, i);
             } catch (Exception e) {
-                Log.e("CertificateUtil", "Error in KeyChainService.getCertificateSystem for alias " + str, e);
+                Log.e(
+                        "CertificateUtil",
+                        "Error in KeyChainService.getCertificateSystem for alias " + str,
+                        e);
                 return null;
             }
         }
@@ -143,7 +163,8 @@ public final class CertificateUtil {
             }
             try {
                 String installCaCertificate = this.mService.installCaCertificate(bArr);
-                this.mDpmsService.approveCaCert(installCaCertificate, this.mUser.getIdentifier(), true);
+                this.mDpmsService.approveCaCert(
+                        installCaCertificate, this.mUser.getIdentifier(), true);
                 return installCaCertificate;
             } catch (Exception e) {
                 Log.e("CertificateUtil", "Error in KeyChainService.installCaCertificate", e);
@@ -159,7 +180,10 @@ public final class CertificateUtil {
             try {
                 return this.mService.isCertificateEntry(str, i);
             } catch (Exception e) {
-                Log.e("CertificateUtil", "Error in KeyChainService.isCertificateEntry for alias " + str, e);
+                Log.e(
+                        "CertificateUtil",
+                        "Error in KeyChainService.isCertificateEntry for alias " + str,
+                        e);
                 return false;
             }
         }
@@ -172,7 +196,10 @@ public final class CertificateUtil {
             try {
                 return this.mService.listAliases(str, i);
             } catch (Exception e) {
-                Log.e("CertificateUtil", "Error in KeyChainService.listAliases for keystore " + i, e);
+                Log.e(
+                        "CertificateUtil",
+                        "Error in KeyChainService.listAliases for keystore " + i,
+                        e);
                 return null;
             }
         }
@@ -189,7 +216,10 @@ public final class CertificateUtil {
                 }
                 return installKeyPair;
             } catch (Exception e) {
-                Log.e("CertificateUtil", "Error in KeyChainService.installKeyPair for alias " + str, e);
+                Log.e(
+                        "CertificateUtil",
+                        "Error in KeyChainService.installKeyPair for alias " + str,
+                        e);
                 return false;
             }
         }
@@ -202,7 +232,10 @@ public final class CertificateUtil {
             try {
                 return this.mService.updateKeyPair(str, bArr, bArr2, i);
             } catch (Exception e) {
-                Log.e("CertificateUtil", "Error in KeyChainService.updateKeyPair for alias " + str, e);
+                Log.e(
+                        "CertificateUtil",
+                        "Error in KeyChainService.updateKeyPair for alias " + str,
+                        e);
                 return false;
             }
         }
@@ -219,7 +252,10 @@ public final class CertificateUtil {
             return null;
         }
         try {
-            return convertX509ListToPem((List) CertificateFactory.getInstance("X.509").generateCertificates(new ByteArrayInputStream(bArr)));
+            return convertX509ListToPem(
+                    (List)
+                            CertificateFactory.getInstance("X.509")
+                                    .generateCertificates(new ByteArrayInputStream(bArr)));
         } catch (CertificateException e) {
             Log.e("CertificateUtil", "Couldn't convert DER to PEM", e);
             return null;
@@ -231,7 +267,8 @@ public final class CertificateUtil {
             return null;
         }
         try {
-            return Credentials.convertToPem((X509Certificate[]) list.toArray(new X509Certificate[list.size()]));
+            return Credentials.convertToPem(
+                    (X509Certificate[]) list.toArray(new X509Certificate[list.size()]));
         } catch (IOException unused) {
             Log.e("CertificateUtil", "Could not convert certificate.");
             return null;
@@ -250,7 +287,13 @@ public final class CertificateUtil {
             if (extensionValue == null) {
                 return false;
             }
-            return BasicConstraints.getInstance(new ASN1InputStream(new ASN1InputStream(extensionValue).readObject().getOctets()).readObject()).isCA();
+            return BasicConstraints.getInstance(
+                            new ASN1InputStream(
+                                            new ASN1InputStream(extensionValue)
+                                                    .readObject()
+                                                    .getOctets())
+                                    .readObject())
+                    .isCA();
         } catch (IOException unused) {
             return false;
         }
@@ -305,7 +348,8 @@ public final class CertificateUtil {
             Binder.restoreCallingIdentity(clearCallingIdentity);
             Iterator it = users.iterator();
             while (it.hasNext()) {
-                arrayList.add(Integer.valueOf(((UserInfo) it.next()).getUserHandle().getIdentifier()));
+                arrayList.add(
+                        Integer.valueOf(((UserInfo) it.next()).getUserHandle().getIdentifier()));
             }
             return arrayList;
         } catch (Throwable th) {
@@ -315,27 +359,36 @@ public final class CertificateUtil {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:111:0x0062, code lost:
-    
-        if (parseCert(r25, r21) == false) goto L33;
-     */
+
+       if (parseCert(r25, r21) == false) goto L33;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:52:0x0158, code lost:
-    
-        if (r1.equalsIgnoreCase("CERT") != false) goto L103;
-     */
+
+       if (r1.equalsIgnoreCase("CERT") != false) goto L103;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:7:0x0027, code lost:
-    
-        if (extractPkcs12(r25, "", r21) != false) goto L9;
-     */
+
+       if (extractPkcs12(r25, "", r21) != false) goto L9;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int installAsUser(java.lang.String r20, byte[] r21, java.lang.String r22, java.lang.String r23, int r24, int r25) {
+    public final int installAsUser(
+            java.lang.String r20,
+            byte[] r21,
+            java.lang.String r22,
+            java.lang.String r23,
+            int r24,
+            int r25) {
         /*
             Method dump skipped, instructions count: 412
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.utils.CertificateUtil.installAsUser(java.lang.String, byte[], java.lang.String, java.lang.String, int, int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.utils.CertificateUtil.installAsUser(java.lang.String,"
+                    + " byte[], java.lang.String, java.lang.String, int, int):int");
     }
 
     public final boolean installCaCertsToDefaultKeystore(KeyChainCRUD keyChainCRUD) {
@@ -351,9 +404,11 @@ public final class CertificateUtil {
                 break;
             }
             X509Certificate x509Certificate = (X509Certificate) it.next();
-            if (x509Certificate.getSubjectX500Principal().equals(x509Certificate.getIssuerX500Principal())) {
+            if (x509Certificate
+                    .getSubjectX500Principal()
+                    .equals(x509Certificate.getIssuerX500Principal())) {
                 try {
-                    bArr2 = Credentials.convertToPem(new Certificate[]{x509Certificate});
+                    bArr2 = Credentials.convertToPem(new Certificate[] {x509Certificate});
                 } catch (Exception e) {
                     Log.e("CertificateUtil", "Error converting certificate to PEM: ", e);
                     z = false;
@@ -366,9 +421,11 @@ public final class CertificateUtil {
         Iterator it2 = ((ArrayList) this.mCaCerts).iterator();
         while (it2.hasNext()) {
             X509Certificate x509Certificate2 = (X509Certificate) it2.next();
-            if (!x509Certificate2.getSubjectX500Principal().equals(x509Certificate2.getIssuerX500Principal())) {
+            if (!x509Certificate2
+                    .getSubjectX500Principal()
+                    .equals(x509Certificate2.getIssuerX500Principal())) {
                 try {
-                    bArr = Credentials.convertToPem(new Certificate[]{x509Certificate2});
+                    bArr = Credentials.convertToPem(new Certificate[] {x509Certificate2});
                 } catch (Exception e2) {
                     Log.e("CertificateUtil", "Error converting certificate to PEM: ", e2);
                     bArr = null;
@@ -379,13 +436,16 @@ public final class CertificateUtil {
                 }
             }
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("CaCerts put state for default keystore: ", "CertificateUtil", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "CaCerts put state for default keystore: ", "CertificateUtil", z);
         return z;
     }
 
     public final synchronized boolean installFrom(KeyStore.PrivateKeyEntry privateKeyEntry, int i) {
         try {
-            ICertificatePolicy asInterface = ICertificatePolicy.Stub.asInterface(ServiceManager.getService("certificate_policy"));
+            ICertificatePolicy asInterface =
+                    ICertificatePolicy.Stub.asInterface(
+                            ServiceManager.getService("certificate_policy"));
             if (asInterface != null) {
                 try {
                     try {
@@ -395,10 +455,15 @@ public final class CertificateUtil {
                             for (Certificate certificate : certificateChain) {
                                 arrayList.add(new CertificateInfo((X509Certificate) certificate));
                             }
-                            int validateChainAtInstallAsUser = asInterface.validateChainAtInstallAsUser(arrayList, i);
+                            int validateChainAtInstallAsUser =
+                                    asInterface.validateChainAtInstallAsUser(arrayList, i);
                             if (validateChainAtInstallAsUser != -1) {
                                 Log.d("CertificateUtil", "certificate failed during validation");
-                                asInterface.notifyCertificateFailureAsUser("installer_module", String.valueOf(validateChainAtInstallAsUser), false, i);
+                                asInterface.notifyCertificateFailureAsUser(
+                                        "installer_module",
+                                        String.valueOf(validateChainAtInstallAsUser),
+                                        false,
+                                        i);
                                 return false;
                             }
                         }
@@ -421,7 +486,9 @@ public final class CertificateUtil {
                     arrayList2.add(x509Certificate);
                 }
             }
-            Log.d("CertificateUtil", "# ca certs extracted = " + ((ArrayList) this.mCaCerts).size());
+            Log.d(
+                    "CertificateUtil",
+                    "# ca certs extracted = " + ((ArrayList) this.mCaCerts).size());
             return true;
         } catch (Throwable th) {
             throw th;
@@ -431,13 +498,26 @@ public final class CertificateUtil {
     public final boolean parseCert(int i, byte[] bArr) {
         int validateCertificateAtInstallAsUser;
         try {
-            X509Certificate x509Certificate = (X509Certificate) CertificateFactory.getInstance("X.509").generateCertificate(new ByteArrayInputStream(bArr));
-            ICertificatePolicy asInterface = ICertificatePolicy.Stub.asInterface(ServiceManager.getService("certificate_policy"));
+            X509Certificate x509Certificate =
+                    (X509Certificate)
+                            CertificateFactory.getInstance("X.509")
+                                    .generateCertificate(new ByteArrayInputStream(bArr));
+            ICertificatePolicy asInterface =
+                    ICertificatePolicy.Stub.asInterface(
+                            ServiceManager.getService("certificate_policy"));
             if (asInterface != null) {
                 try {
-                    if (asInterface.isCertificateValidationAtInstallEnabledAsUser(i) && (validateCertificateAtInstallAsUser = asInterface.validateCertificateAtInstallAsUser(new CertificateInfo(x509Certificate), i)) != -1) {
+                    if (asInterface.isCertificateValidationAtInstallEnabledAsUser(i)
+                            && (validateCertificateAtInstallAsUser =
+                                            asInterface.validateCertificateAtInstallAsUser(
+                                                    new CertificateInfo(x509Certificate), i))
+                                    != -1) {
                         Log.d("CertificateUtil", "certificate failed during validation");
-                        asInterface.notifyCertificateFailureAsUser("installer_module", String.valueOf(validateCertificateAtInstallAsUser), false, i);
+                        asInterface.notifyCertificateFailureAsUser(
+                                "installer_module",
+                                String.valueOf(validateCertificateAtInstallAsUser),
+                                false,
+                                i);
                         return false;
                     }
                 } catch (RemoteException unused) {
@@ -466,17 +546,29 @@ public final class CertificateUtil {
         if (z) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             Intent intent = new Intent();
-            intent.setAction("com.samsung.android.knox.intent.action.REFRESH_CREDENTIALS_UI_INTERNAL");
-            ((PersonaManagerAdapter) ((IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class))).getClass();
+            intent.setAction(
+                    "com.samsung.android.knox.intent.action.REFRESH_CREDENTIALS_UI_INTERNAL");
+            ((PersonaManagerAdapter)
+                            ((IPersonaManagerAdapter)
+                                    AdapterRegistry.mAdapterHandles.get(
+                                            IPersonaManagerAdapter.class)))
+                    .getClass();
             if (SemPersonaManager.isKnoxId(i) && (userManager = this.mUserManager) != null) {
                 i = userManager.getUserInfo(i).profileGroupId;
             }
-            this.mContext.sendBroadcastAsUser(intent, new UserHandle(i), "com.samsung.android.knox.permission.KNOX_REFRESH_CREDENTIAL_UI_INTERNAL");
+            this.mContext.sendBroadcastAsUser(
+                    intent,
+                    new UserHandle(i),
+                    "com.samsung.android.knox.permission.KNOX_REFRESH_CREDENTIAL_UI_INTERNAL");
             UserManager userManager2 = this.mUserManager;
-            if (userManager2 != null && (enabledProfiles = userManager2.getEnabledProfiles(i)) != null) {
+            if (userManager2 != null
+                    && (enabledProfiles = userManager2.getEnabledProfiles(i)) != null) {
                 for (UserInfo userInfo : enabledProfiles) {
                     if (userInfo.isManagedProfile()) {
-                        this.mContext.sendBroadcastAsUser(intent, new UserHandle(userInfo.id), "com.samsung.android.knox.permission.KNOX_REFRESH_CREDENTIAL_UI_INTERNAL");
+                        this.mContext.sendBroadcastAsUser(
+                                intent,
+                                new UserHandle(userInfo.id),
+                                "com.samsung.android.knox.permission.KNOX_REFRESH_CREDENTIAL_UI_INTERNAL");
                     }
                 }
             }

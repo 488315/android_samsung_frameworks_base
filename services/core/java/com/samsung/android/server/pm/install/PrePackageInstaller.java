@@ -6,7 +6,7 @@ import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.text.TextUtils;
-import com.samsung.android.server.pm.install.PrePackageInstallerBase;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,7 +29,8 @@ public final class PrePackageInstaller extends PrePackageInstallerBase {
                 boolean contains = readEnforceSkippingPackageList.contains(apkFileName);
                 PrePackageInstallerBase.LocalIntentReceiver localIntentReceiver = this.mLogMsg;
                 if (contains) {
-                    localIntentReceiver.out(file.getName() + " is skipped by EnforceSkippingPackage");
+                    localIntentReceiver.out(
+                            file.getName() + " is skipped by EnforceSkippingPackage");
                 } else {
                     localIntentReceiver.out(file.getName() + " is Added on mInstallPackageList");
                     this.mInstallPackageList.add(apkFile);
@@ -56,12 +57,16 @@ public final class PrePackageInstaller extends PrePackageInstallerBase {
         }
         String[] strArr = {"/enforceskippingpackages.txt", "/enforcedeletepackage.txt"};
         for (int i = 0; i < 2; i++) {
-            File file = new File(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, strArr[i]));
+            File file =
+                    new File(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                                    str, strArr[i]));
             if (file.exists()) {
                 try {
                     FileInputStream fileInputStream = new FileInputStream(file);
                     try {
-                        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
+                        InputStreamReader inputStreamReader =
+                                new InputStreamReader(fileInputStream, "UTF-8");
                         try {
                             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                             while (true) {
@@ -105,14 +110,17 @@ public final class PrePackageInstaller extends PrePackageInstallerBase {
         if (this.mIsUpgrade) {
             Iterator it = arrayList.iterator();
             while (it.hasNext()) {
-                PrePackageInstallerBase.ApkFile apkFile = (PrePackageInstallerBase.ApkFile) it.next();
+                PrePackageInstallerBase.ApkFile apkFile =
+                        (PrePackageInstallerBase.ApkFile) it.next();
                 File file = apkFile.getFile();
                 if (PrePackageInstallerBase.isValidApkFile(file)) {
                     PackageInfo cachedPackageArchiveInfo = getCachedPackageArchiveInfo(file);
                     try {
-                        this.mPackageManager.getPackageInfo(cachedPackageArchiveInfo.packageName, 0);
+                        this.mPackageManager.getPackageInfo(
+                                cachedPackageArchiveInfo.packageName, 0);
                     } catch (PackageManager.NameNotFoundException unused) {
-                        if (((HashSet) this.mInstallHistory).contains(cachedPackageArchiveInfo.packageName)) {
+                        if (((HashSet) this.mInstallHistory)
+                                .contains(cachedPackageArchiveInfo.packageName)) {
                             this.mLogMsg.out("removed by user : " + file.getAbsolutePath());
                             removeApkFileFromInstallList(apkFile);
                         }

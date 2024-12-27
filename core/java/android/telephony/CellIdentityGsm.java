@@ -5,7 +5,9 @@ import android.os.Parcelable;
 import android.telephony.gsm.GsmCellLocation;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
 import com.android.internal.telephony.SemTelephonyUtils;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
@@ -24,20 +26,22 @@ public final class CellIdentityGsm extends CellIdentity {
     private final int mCid;
     private final int mLac;
     private static final String TAG = CellIdentityGsm.class.getSimpleName();
-    public static final Parcelable.Creator<CellIdentityGsm> CREATOR = new Parcelable.Creator<CellIdentityGsm>() { // from class: android.telephony.CellIdentityGsm.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentityGsm createFromParcel(Parcel in) {
-            in.readInt();
-            return CellIdentityGsm.createFromParcelBody(in);
-        }
+    public static final Parcelable.Creator<CellIdentityGsm> CREATOR =
+            new Parcelable.Creator<
+                    CellIdentityGsm>() { // from class: android.telephony.CellIdentityGsm.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentityGsm createFromParcel(Parcel in) {
+                    in.readInt();
+                    return CellIdentityGsm.createFromParcelBody(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentityGsm[] newArray(int size) {
-            return new CellIdentityGsm[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentityGsm[] newArray(int size) {
+                    return new CellIdentityGsm[size];
+                }
+            };
 
     public CellIdentityGsm() {
         super(TAG, 1, null, null, null, null);
@@ -49,7 +53,16 @@ public final class CellIdentityGsm extends CellIdentity {
         this.mGlobalCellId = null;
     }
 
-    public CellIdentityGsm(int lac, int cid, int arfcn, int bsic, String mccStr, String mncStr, String alphal, String alphas, Collection<String> additionalPlmns) {
+    public CellIdentityGsm(
+            int lac,
+            int cid,
+            int arfcn,
+            int bsic,
+            String mccStr,
+            String mncStr,
+            String alphal,
+            String alphas,
+            Collection<String> additionalPlmns) {
         super(TAG, 1, mccStr, mncStr, alphal, alphas);
         this.mLac = inRangeOrUnavailable(lac, 0, 65535);
         this.mCid = inRangeOrUnavailable(cid, 0, 65535);
@@ -65,7 +78,16 @@ public final class CellIdentityGsm extends CellIdentity {
     }
 
     private CellIdentityGsm(CellIdentityGsm cid) {
-        this(cid.mLac, cid.mCid, cid.mArfcn, cid.mBsic, cid.mMccStr, cid.mMncStr, cid.mAlphaLong, cid.mAlphaShort, cid.mAdditionalPlmns);
+        this(
+                cid.mLac,
+                cid.mCid,
+                cid.mArfcn,
+                cid.mBsic,
+                cid.mMccStr,
+                cid.mMncStr,
+                cid.mAlphaLong,
+                cid.mAlphaShort,
+                cid.mAdditionalPlmns);
     }
 
     CellIdentityGsm copy() {
@@ -74,7 +96,16 @@ public final class CellIdentityGsm extends CellIdentity {
 
     @Override // android.telephony.CellIdentity
     public CellIdentityGsm sanitizeLocationInfo() {
-        return new CellIdentityGsm(Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, this.mMccStr, this.mMncStr, this.mAlphaLong, this.mAlphaShort, this.mAdditionalPlmns);
+        return new CellIdentityGsm(
+                Integer.MAX_VALUE,
+                Integer.MAX_VALUE,
+                Integer.MAX_VALUE,
+                Integer.MAX_VALUE,
+                this.mMccStr,
+                this.mMncStr,
+                this.mAlphaLong,
+                this.mAlphaShort,
+                this.mAdditionalPlmns);
     }
 
     @Override // android.telephony.CellIdentity
@@ -84,7 +115,10 @@ public final class CellIdentityGsm extends CellIdentity {
         if (plmn == null || this.mLac == Integer.MAX_VALUE || this.mCid == Integer.MAX_VALUE) {
             return;
         }
-        this.mGlobalCellId = plmn + TextUtils.formatSimple("%04x%04x", Integer.valueOf(this.mLac), Integer.valueOf(this.mCid));
+        this.mGlobalCellId =
+                plmn
+                        + TextUtils.formatSimple(
+                                "%04x%04x", Integer.valueOf(this.mLac), Integer.valueOf(this.mCid));
     }
 
     @Deprecated
@@ -162,7 +196,11 @@ public final class CellIdentityGsm extends CellIdentity {
 
     @Override // android.telephony.CellIdentity
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mLac), Integer.valueOf(this.mCid), Integer.valueOf(this.mAdditionalPlmns.hashCode()), Integer.valueOf(super.hashCode()));
+        return Objects.hash(
+                Integer.valueOf(this.mLac),
+                Integer.valueOf(this.mCid),
+                Integer.valueOf(this.mAdditionalPlmns.hashCode()),
+                Integer.valueOf(super.hashCode()));
     }
 
     @Override // android.telephony.CellIdentity
@@ -174,11 +212,37 @@ public final class CellIdentityGsm extends CellIdentity {
             return false;
         }
         CellIdentityGsm o = (CellIdentityGsm) other;
-        return this.mLac == o.mLac && this.mCid == o.mCid && this.mArfcn == o.mArfcn && this.mBsic == o.mBsic && TextUtils.equals(this.mMccStr, o.mMccStr) && TextUtils.equals(this.mMncStr, o.mMncStr) && this.mAdditionalPlmns.equals(o.mAdditionalPlmns) && super.equals(other);
+        return this.mLac == o.mLac
+                && this.mCid == o.mCid
+                && this.mArfcn == o.mArfcn
+                && this.mBsic == o.mBsic
+                && TextUtils.equals(this.mMccStr, o.mMccStr)
+                && TextUtils.equals(this.mMncStr, o.mMncStr)
+                && this.mAdditionalPlmns.equals(o.mAdditionalPlmns)
+                && super.equals(other);
     }
 
     public String toString() {
-        return TAG + ":{ mLac=" + SemTelephonyUtils.maskPiiFromCellIdentity(this.mLac) + " mCid=" + SemTelephonyUtils.maskPiiFromCellIdentity(this.mCid) + " mArfcn=" + this.mArfcn + " mBsic=0x" + Integer.toHexString(this.mBsic) + " mMcc=" + this.mMccStr + " mMnc=" + this.mMncStr + " mAlphaLong=" + this.mAlphaLong + " mAlphaShort=" + this.mAlphaShort + " mAdditionalPlmns=" + this.mAdditionalPlmns + "}";
+        return TAG
+                + ":{ mLac="
+                + SemTelephonyUtils.maskPiiFromCellIdentity(this.mLac)
+                + " mCid="
+                + SemTelephonyUtils.maskPiiFromCellIdentity(this.mCid)
+                + " mArfcn="
+                + this.mArfcn
+                + " mBsic=0x"
+                + Integer.toHexString(this.mBsic)
+                + " mMcc="
+                + this.mMccStr
+                + " mMnc="
+                + this.mMncStr
+                + " mAlphaLong="
+                + this.mAlphaLong
+                + " mAlphaShort="
+                + this.mAlphaShort
+                + " mAdditionalPlmns="
+                + this.mAdditionalPlmns
+                + "}";
     }
 
     @Override // android.telephony.CellIdentity, android.os.Parcelable

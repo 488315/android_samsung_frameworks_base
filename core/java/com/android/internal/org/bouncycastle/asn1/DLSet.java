@@ -50,7 +50,8 @@ public class DLSet extends ASN1Set {
         return StreamUtil.calculateBodyLength(length) + 1 + length;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Set, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Set,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     void encode(ASN1OutputStream out, boolean withTag) throws IOException {
         if (withTag) {
             out.write(49);
@@ -79,7 +80,8 @@ public class DLSet extends ASN1Set {
         }
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Set, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Set,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDLObject() {
         return this;
     }

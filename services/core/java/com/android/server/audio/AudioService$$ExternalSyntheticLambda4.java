@@ -8,7 +8,9 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.android.server.LocalServices;
+
 import com.samsung.android.media.SemAudioSystem;
 import com.samsung.android.server.audio.SamsungRingerModeDelegate;
 
@@ -36,17 +38,25 @@ public final /* synthetic */ class AudioService$$ExternalSyntheticLambda4 implem
                 AudioService audioService = (AudioService) obj;
                 int i3 = AudioService.BECOMING_NOISY_DELAY_MS;
                 audioService.getClass();
-                AudioManagerInternal audioManagerInternal = (AudioManagerInternal) LocalServices.getService(AudioManagerInternal.class);
+                AudioManagerInternal audioManagerInternal =
+                        (AudioManagerInternal) LocalServices.getService(AudioManagerInternal.class);
                 if (audioManagerInternal != null) {
                     Context context = audioService.mContext;
-                    SamsungRingerModeDelegate samsungRingerModeDelegate = new SamsungRingerModeDelegate(new Handler());
-                    NotificationManager notificationManager = (NotificationManager) context.getSystemService("notification");
+                    SamsungRingerModeDelegate samsungRingerModeDelegate =
+                            new SamsungRingerModeDelegate(new Handler());
+                    NotificationManager notificationManager =
+                            (NotificationManager) context.getSystemService("notification");
                     samsungRingerModeDelegate.mNm = notificationManager;
                     samsungRingerModeDelegate.mZenMode = notificationManager.getZenMode();
-                    samsungRingerModeDelegate.mAudioManager = (AudioManagerInternal) LocalServices.getService(AudioManagerInternal.class);
+                    samsungRingerModeDelegate.mAudioManager =
+                            (AudioManagerInternal)
+                                    LocalServices.getService(AudioManagerInternal.class);
                     ContentResolver contentResolver = context.getContentResolver();
                     samsungRingerModeDelegate.mContentResolver = contentResolver;
-                    contentResolver.registerContentObserver(Settings.Global.getUriFor("zen_mode"), false, samsungRingerModeDelegate);
+                    contentResolver.registerContentObserver(
+                            Settings.Global.getUriFor("zen_mode"),
+                            false,
+                            samsungRingerModeDelegate);
                     audioManagerInternal.setRingerModeDelegate(samsungRingerModeDelegate);
                     break;
                 }

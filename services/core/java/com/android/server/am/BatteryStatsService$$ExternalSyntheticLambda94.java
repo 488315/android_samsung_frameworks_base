@@ -2,7 +2,8 @@ package com.android.server.am;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda94 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda94
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ int f$1;
@@ -20,7 +21,23 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda9
     public final /* synthetic */ int f$8;
     public final /* synthetic */ long f$9;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda94(BatteryStatsService batteryStatsService, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, long j, int i9, int i10, int i11, int i12, boolean z, int i13) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda94(
+            BatteryStatsService batteryStatsService,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            long j,
+            int i9,
+            int i10,
+            int i11,
+            int i12,
+            boolean z,
+            int i13) {
         this.$r8$classId = i13;
         this.f$0 = batteryStatsService;
         this.f$1 = i;
@@ -40,9 +57,9 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda9
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0077, code lost:
-    
-        if (r5 != 1) goto L23;
-     */
+
+       if (r5 != 1) goto L23;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r15v4, types: [com.android.server.power.stats.BatteryStatsImpl] */
     @Override // java.lang.Runnable
@@ -55,6 +72,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda9
             Method dump skipped, instructions count: 286
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.BatteryStatsService$$ExternalSyntheticLambda94.run():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.BatteryStatsService$$ExternalSyntheticLambda94.run():void");
     }
 }

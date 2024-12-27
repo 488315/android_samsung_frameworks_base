@@ -1,27 +1,28 @@
 package android.os;
 
-import android.os.Parcelable;
 import android.util.MathUtils;
 
 /* loaded from: classes3.dex */
 public class ParcelableParcel implements Parcelable {
-    public static final Parcelable.ClassLoaderCreator<ParcelableParcel> CREATOR = new Parcelable.ClassLoaderCreator<ParcelableParcel>() { // from class: android.os.ParcelableParcel.1
-        @Override // android.os.Parcelable.Creator
-        public ParcelableParcel createFromParcel(Parcel in) {
-            return new ParcelableParcel(in, null);
-        }
+    public static final Parcelable.ClassLoaderCreator<ParcelableParcel> CREATOR =
+            new Parcelable.ClassLoaderCreator<
+                    ParcelableParcel>() { // from class: android.os.ParcelableParcel.1
+                @Override // android.os.Parcelable.Creator
+                public ParcelableParcel createFromParcel(Parcel in) {
+                    return new ParcelableParcel(in, null);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.ClassLoaderCreator
-        public ParcelableParcel createFromParcel(Parcel in, ClassLoader loader) {
-            return new ParcelableParcel(in, loader);
-        }
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.ClassLoaderCreator
+                public ParcelableParcel createFromParcel(Parcel in, ClassLoader loader) {
+                    return new ParcelableParcel(in, loader);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public ParcelableParcel[] newArray(int size) {
-            return new ParcelableParcel[size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public ParcelableParcel[] newArray(int size) {
+                    return new ParcelableParcel[size];
+                }
+            };
     final ClassLoader mClassLoader;
     final Parcel mParcel = Parcel.obtain();
 

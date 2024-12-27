@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import android.util.Slog;
 import android.view.IPinnedTaskListener;
 import android.window.PictureInPictureSurfaceTransaction;
-import com.android.server.wm.WindowManagerService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -24,17 +23,19 @@ public final class PinnedTaskController {
     public IPinnedTaskListener mPinnedTaskListener;
     public PictureInPictureSurfaceTransaction mPipTransaction;
     public final WindowManagerService mService;
-    public final PinnedTaskListenerDeathHandler mPinnedTaskListenerDeathHandler = new PinnedTaskListenerDeathHandler();
-    public final PinnedTaskController$$ExternalSyntheticLambda0 mDeferOrientationTimeoutRunnable = new PinnedTaskController$$ExternalSyntheticLambda0(this);
+    public final PinnedTaskListenerDeathHandler mPinnedTaskListenerDeathHandler =
+            new PinnedTaskListenerDeathHandler();
+    public final PinnedTaskController$$ExternalSyntheticLambda0 mDeferOrientationTimeoutRunnable =
+            new PinnedTaskController$$ExternalSyntheticLambda0(this);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinnedTaskListenerDeathHandler implements IBinder.DeathRecipient {
-        public PinnedTaskListenerDeathHandler() {
-        }
+        public PinnedTaskListenerDeathHandler() {}
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
-            WindowManagerGlobalLock windowManagerGlobalLock = PinnedTaskController.this.mService.mGlobalLock;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    PinnedTaskController.this.mService.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
@@ -51,7 +52,8 @@ public final class PinnedTaskController {
         }
     }
 
-    public PinnedTaskController(WindowManagerService windowManagerService, DisplayContent displayContent) {
+    public PinnedTaskController(
+            WindowManagerService windowManagerService, DisplayContent displayContent) {
         this.mService = windowManagerService;
         this.mDisplayContent = displayContent;
         Resources resources = windowManagerService.mContext.getResources();
@@ -72,19 +74,31 @@ public final class PinnedTaskController {
 
     public final void deferOrientationChangeForEnteringPipFromFullScreenIfNeeded() {
         int rotationForActivityInDifferentOrientation;
-        PinnedTaskController$$ExternalSyntheticLambda1 pinnedTaskController$$ExternalSyntheticLambda1 = new PinnedTaskController$$ExternalSyntheticLambda1();
+        PinnedTaskController$$ExternalSyntheticLambda1
+                pinnedTaskController$$ExternalSyntheticLambda1 =
+                        new PinnedTaskController$$ExternalSyntheticLambda1();
         DisplayContent displayContent = this.mDisplayContent;
-        ActivityRecord activity = displayContent.getActivity(pinnedTaskController$$ExternalSyntheticLambda1);
-        if (activity == null || activity.hasFixedRotationTransform() || (rotationForActivityInDifferentOrientation = displayContent.rotationForActivityInDifferentOrientation(activity)) == -1) {
+        ActivityRecord activity =
+                displayContent.getActivity(pinnedTaskController$$ExternalSyntheticLambda1);
+        if (activity == null
+                || activity.hasFixedRotationTransform()
+                || (rotationForActivityInDifferentOrientation =
+                                displayContent.rotationForActivityInDifferentOrientation(activity))
+                        == -1) {
             return;
         }
-        displayContent.setFixedRotationLaunchingApp(rotationForActivityInDifferentOrientation, activity);
+        displayContent.setFixedRotationLaunchingApp(
+                rotationForActivityInDifferentOrientation, activity);
         this.mDeferOrientationChanging = true;
         WindowManagerService windowManagerService = this.mService;
         WindowManagerService.H h = windowManagerService.mH;
-        PinnedTaskController$$ExternalSyntheticLambda0 pinnedTaskController$$ExternalSyntheticLambda0 = this.mDeferOrientationTimeoutRunnable;
+        PinnedTaskController$$ExternalSyntheticLambda0
+                pinnedTaskController$$ExternalSyntheticLambda0 =
+                        this.mDeferOrientationTimeoutRunnable;
         h.removeCallbacks(pinnedTaskController$$ExternalSyntheticLambda0);
-        windowManagerService.mH.postDelayed(pinnedTaskController$$ExternalSyntheticLambda0, (int) (Math.max(1.0f, windowManagerService.getCurrentAnimatorScale()) * 1000.0f));
+        windowManagerService.mH.postDelayed(
+                pinnedTaskController$$ExternalSyntheticLambda0,
+                (int) (Math.max(1.0f, windowManagerService.getCurrentAnimatorScale()) * 1000.0f));
     }
 
     public final void notifyMovementBoundsChanged(boolean z) {

@@ -14,7 +14,6 @@ public final class BatteryStatsServiceDumpHistoryProto {
         public static final long TAG = 1138166333443L;
         public static final long UID = 1120986464258L;
 
-        public Key() {
-        }
+        public Key() {}
     }
 }

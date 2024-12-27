@@ -2,23 +2,26 @@ package android.media;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /* loaded from: classes2.dex */
 public final class MediaRouterClientState implements Parcelable {
-    public static final Parcelable.Creator<MediaRouterClientState> CREATOR = new Parcelable.Creator<MediaRouterClientState>() { // from class: android.media.MediaRouterClientState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaRouterClientState createFromParcel(Parcel in) {
-            return new MediaRouterClientState(in);
-        }
+    public static final Parcelable.Creator<MediaRouterClientState> CREATOR =
+            new Parcelable.Creator<MediaRouterClientState>() { // from class:
+                // android.media.MediaRouterClientState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaRouterClientState createFromParcel(Parcel in) {
+                    return new MediaRouterClientState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaRouterClientState[] newArray(int size) {
-            return new MediaRouterClientState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaRouterClientState[] newArray(int size) {
+                    return new MediaRouterClientState[size];
+                }
+            };
     public final ArrayList<RouteInfo> routes;
 
     public MediaRouterClientState() {
@@ -55,19 +58,21 @@ public final class MediaRouterClientState implements Parcelable {
     }
 
     public static final class RouteInfo implements Parcelable {
-        public static final Parcelable.Creator<RouteInfo> CREATOR = new Parcelable.Creator<RouteInfo>() { // from class: android.media.MediaRouterClientState.RouteInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public RouteInfo createFromParcel(Parcel in) {
-                return new RouteInfo(in);
-            }
+        public static final Parcelable.Creator<RouteInfo> CREATOR =
+                new Parcelable.Creator<RouteInfo>() { // from class:
+                    // android.media.MediaRouterClientState.RouteInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public RouteInfo createFromParcel(Parcel in) {
+                        return new RouteInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public RouteInfo[] newArray(int size) {
-                return new RouteInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public RouteInfo[] newArray(int size) {
+                        return new RouteInfo[size];
+                    }
+                };
         public String description;
         public int deviceType;
         public boolean enabled;
@@ -148,7 +153,33 @@ public final class MediaRouterClientState implements Parcelable {
         }
 
         public String toString() {
-            return "RouteInfo{ id=" + this.id + ", name=" + this.name + ", description=" + this.description + ", supportedTypes=0x" + Integer.toHexString(this.supportedTypes) + ", enabled=" + this.enabled + ", statusCode=" + this.statusCode + ", playbackType=" + this.playbackType + ", playbackStream=" + this.playbackStream + ", volume=" + this.volume + ", volumeMax=" + this.volumeMax + ", volumeHandling=" + this.volumeHandling + ", presentationDisplayId=" + this.presentationDisplayId + ", deviceType=" + this.deviceType + " }";
+            return "RouteInfo{ id="
+                    + this.id
+                    + ", name="
+                    + this.name
+                    + ", description="
+                    + this.description
+                    + ", supportedTypes=0x"
+                    + Integer.toHexString(this.supportedTypes)
+                    + ", enabled="
+                    + this.enabled
+                    + ", statusCode="
+                    + this.statusCode
+                    + ", playbackType="
+                    + this.playbackType
+                    + ", playbackStream="
+                    + this.playbackStream
+                    + ", volume="
+                    + this.volume
+                    + ", volumeMax="
+                    + this.volumeMax
+                    + ", volumeHandling="
+                    + this.volumeHandling
+                    + ", presentationDisplayId="
+                    + this.presentationDisplayId
+                    + ", deviceType="
+                    + this.deviceType
+                    + " }";
         }
     }
 }

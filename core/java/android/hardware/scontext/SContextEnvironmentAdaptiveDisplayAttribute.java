@@ -24,7 +24,8 @@ public class SContextEnvironmentAdaptiveDisplayAttribute extends SContextAttribu
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mColorThreshold < 0.0f) {
             Log.e(TAG, "The color threshold value is wrong.");

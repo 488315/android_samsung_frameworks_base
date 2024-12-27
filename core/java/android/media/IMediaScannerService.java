@@ -1,6 +1,5 @@
 package android.media;
 
-import android.media.IMediaScannerListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,18 +8,18 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IMediaScannerService extends IInterface {
-    void requestScanFile(String str, String str2, IMediaScannerListener iMediaScannerListener) throws RemoteException;
+    void requestScanFile(String str, String str2, IMediaScannerListener iMediaScannerListener)
+            throws RemoteException;
 
     void scanFile(String str, String str2) throws RemoteException;
 
     public static class Default implements IMediaScannerService {
         @Override // android.media.IMediaScannerService
-        public void requestScanFile(String path, String mimeType, IMediaScannerListener listener) throws RemoteException {
-        }
+        public void requestScanFile(String path, String mimeType, IMediaScannerListener listener)
+                throws RemoteException {}
 
         @Override // android.media.IMediaScannerService
-        public void scanFile(String path, String mimeType) throws RemoteException {
-        }
+        public void scanFile(String path, String mimeType) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +27,7 @@ public interface IMediaScannerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaScannerService {
+    public abstract static class Stub extends Binder implements IMediaScannerService {
         public static final String DESCRIPTOR = "android.media.IMediaScannerService";
         static final int TRANSACTION_requestScanFile = 1;
         static final int TRANSACTION_scanFile = 2;
@@ -70,7 +69,8 @@ public interface IMediaScannerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -82,7 +82,8 @@ public interface IMediaScannerService extends IInterface {
                 case 1:
                     String _arg0 = data.readString();
                     String _arg1 = data.readString();
-                    IMediaScannerListener _arg2 = IMediaScannerListener.Stub.asInterface(data.readStrongBinder());
+                    IMediaScannerListener _arg2 =
+                            IMediaScannerListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestScanFile(_arg0, _arg1, _arg2);
                     reply.writeNoException();
@@ -116,7 +117,9 @@ public interface IMediaScannerService extends IInterface {
             }
 
             @Override // android.media.IMediaScannerService
-            public void requestScanFile(String path, String mimeType, IMediaScannerListener listener) throws RemoteException {
+            public void requestScanFile(
+                    String path, String mimeType, IMediaScannerListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

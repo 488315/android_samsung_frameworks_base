@@ -2,6 +2,7 @@ package com.android.server.knox.dar.ddar.fsm;
 
 import com.samsung.android.knox.dar.ddar.fsm.Event;
 import com.samsung.android.knox.dar.ddar.fsm.State;
+
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +19,7 @@ public final class StateMachineImpl {
     public Object stateLock;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface StateChangeListener {
-    }
+    public interface StateChangeListener {}
 
     static {
         HashMap hashMap = new HashMap();
@@ -61,12 +61,12 @@ public final class StateMachineImpl {
     }
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:23:0x0017
-        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
-        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
-        */
+    jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:23:0x0017
+    	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
+    	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
+    */
     public final com.samsung.android.knox.dar.ddar.fsm.State getCurrentState(int r3) {
         /*
             r2 = this;
@@ -101,6 +101,8 @@ public final class StateMachineImpl {
         L22:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.dar.ddar.fsm.StateMachineImpl.getCurrentState(int):com.samsung.android.knox.dar.ddar.fsm.State");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.knox.dar.ddar.fsm.StateMachineImpl.getCurrentState(int):com.samsung.android.knox.dar.ddar.fsm.State");
     }
 }

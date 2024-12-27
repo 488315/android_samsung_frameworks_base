@@ -11,8 +11,7 @@ public abstract class GestureLibrary {
 
     public abstract boolean save();
 
-    protected GestureLibrary() {
-    }
+    protected GestureLibrary() {}
 
     public boolean isReadOnly() {
         return false;

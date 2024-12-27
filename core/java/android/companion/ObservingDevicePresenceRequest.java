@@ -4,23 +4,26 @@ import android.os.Parcel;
 import android.os.ParcelUuid;
 import android.os.Parcelable;
 import android.provider.OneTimeUseBuilder;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class ObservingDevicePresenceRequest implements Parcelable {
-    public static final Parcelable.Creator<ObservingDevicePresenceRequest> CREATOR = new Parcelable.Creator<ObservingDevicePresenceRequest>() { // from class: android.companion.ObservingDevicePresenceRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ObservingDevicePresenceRequest[] newArray(int size) {
-            return new ObservingDevicePresenceRequest[size];
-        }
+    public static final Parcelable.Creator<ObservingDevicePresenceRequest> CREATOR =
+            new Parcelable.Creator<ObservingDevicePresenceRequest>() { // from class:
+                // android.companion.ObservingDevicePresenceRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ObservingDevicePresenceRequest[] newArray(int size) {
+                    return new ObservingDevicePresenceRequest[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ObservingDevicePresenceRequest createFromParcel(Parcel in) {
-            return new ObservingDevicePresenceRequest(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ObservingDevicePresenceRequest createFromParcel(Parcel in) {
+                    return new ObservingDevicePresenceRequest(in);
+                }
+            };
     private static final int PARCEL_UUID_NOT_NULL = 1;
     private static final int PARCEL_UUID_NULL = 0;
     private final int mAssociationId;
@@ -65,7 +68,11 @@ public final class ObservingDevicePresenceRequest implements Parcelable {
     }
 
     public String toString() {
-        return "ObservingDevicePresenceRequest { Association Id= " + this.mAssociationId + ",ParcelUuid= " + this.mUuid + "}";
+        return "ObservingDevicePresenceRequest { Association Id= "
+                + this.mAssociationId
+                + ",ParcelUuid= "
+                + this.mUuid
+                + "}";
     }
 
     public boolean equals(Object o) {
@@ -104,10 +111,14 @@ public final class ObservingDevicePresenceRequest implements Parcelable {
         public ObservingDevicePresenceRequest build() {
             markUsed();
             if (this.mUuid != null && this.mAssociationId != -1) {
-                throw new IllegalStateException("Cannot observe device presence based on both ParcelUuid and association ID. Choose one or the other.");
+                throw new IllegalStateException(
+                        "Cannot observe device presence based on both ParcelUuid and association"
+                                + " ID. Choose one or the other.");
             }
             if (this.mUuid == null && this.mAssociationId <= 0) {
-                throw new IllegalStateException("Must provide either a ParcelUuid or a valid association ID to observe device presence.");
+                throw new IllegalStateException(
+                        "Must provide either a ParcelUuid or a valid association ID to observe"
+                                + " device presence.");
             }
             return new ObservingDevicePresenceRequest(this.mAssociationId, this.mUuid);
         }

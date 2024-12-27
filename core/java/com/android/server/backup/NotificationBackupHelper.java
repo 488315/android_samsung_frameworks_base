@@ -25,7 +25,9 @@ public class NotificationBackupHelper extends BlobBackupHelper {
             return null;
         }
         try {
-            INotificationManager nm = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
+            INotificationManager nm =
+                    INotificationManager.Stub.asInterface(
+                            ServiceManager.getService("notification"));
             byte[] newPayload = nm.getBackupPayload(this.mUserId);
             return newPayload;
         } catch (Exception e) {
@@ -41,7 +43,9 @@ public class NotificationBackupHelper extends BlobBackupHelper {
         }
         if (KEY_NOTIFICATIONS.equals(key)) {
             try {
-                INotificationManager nm = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
+                INotificationManager nm =
+                        INotificationManager.Stub.asInterface(
+                                ServiceManager.getService("notification"));
                 nm.applyRestore(payload, this.mUserId);
             } catch (Exception e) {
                 Slog.e(TAG, "Couldn't communicate with notification manager", e);

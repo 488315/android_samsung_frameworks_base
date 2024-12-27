@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.games.IGameServiceController;
 
 /* loaded from: classes3.dex */
 public interface IGameService extends IInterface {
@@ -19,16 +18,14 @@ public interface IGameService extends IInterface {
 
     public static class Default implements IGameService {
         @Override // android.service.games.IGameService
-        public void connected(IGameServiceController gameServiceController) throws RemoteException {
-        }
+        public void connected(IGameServiceController gameServiceController)
+                throws RemoteException {}
 
         @Override // android.service.games.IGameService
-        public void disconnected() throws RemoteException {
-        }
+        public void disconnected() throws RemoteException {}
 
         @Override // android.service.games.IGameService
-        public void gameStarted(GameStartedEvent gameStartedEvent) throws RemoteException {
-        }
+        public void gameStarted(GameStartedEvent gameStartedEvent) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +33,7 @@ public interface IGameService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGameService {
+    public abstract static class Stub extends Binder implements IGameService {
         static final int TRANSACTION_connected = 1;
         static final int TRANSACTION_disconnected = 2;
         static final int TRANSACTION_gameStarted = 3;
@@ -80,7 +77,8 @@ public interface IGameService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGameService.DESCRIPTOR);
             }
@@ -90,7 +88,8 @@ public interface IGameService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IGameServiceController _arg0 = IGameServiceController.Stub.asInterface(data.readStrongBinder());
+                    IGameServiceController _arg0 =
+                            IGameServiceController.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     connected(_arg0);
                     return true;
@@ -98,7 +97,8 @@ public interface IGameService extends IInterface {
                     disconnected();
                     return true;
                 case 3:
-                    GameStartedEvent _arg02 = (GameStartedEvent) data.readTypedObject(GameStartedEvent.CREATOR);
+                    GameStartedEvent _arg02 =
+                            (GameStartedEvent) data.readTypedObject(GameStartedEvent.CREATOR);
                     data.enforceNoDataAvail();
                     gameStarted(_arg02);
                     return true;
@@ -124,7 +124,8 @@ public interface IGameService extends IInterface {
             }
 
             @Override // android.service.games.IGameService
-            public void connected(IGameServiceController gameServiceController) throws RemoteException {
+            public void connected(IGameServiceController gameServiceController)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IGameService.DESCRIPTOR);

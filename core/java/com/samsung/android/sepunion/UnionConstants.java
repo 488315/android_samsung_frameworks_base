@@ -1,6 +1,7 @@
 package com.samsung.android.sepunion;
 
 import android.util.ArrayMap;
+
 import com.samsung.android.feature.SemFloatingFeature;
 
 /* loaded from: classes6.dex */
@@ -64,57 +65,90 @@ public final class UnionConstants {
         String str;
         String str2;
         String str3;
-        sClassPathForManager.put("semeventdelegator", "com.samsung.android.sepunion.SemEventDelegationManager");
+        sClassPathForManager.put(
+                "semeventdelegator", "com.samsung.android.sepunion.SemEventDelegationManager");
         sClassPathForManager.put(SERVICE_PLUGIN, "com.samsung.android.sepunion.SemPluginManager");
         sClassPathForManager.put("execute", "com.samsung.android.app.SemExecutableManager");
-        if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_ACCESSIBILITY_SUPPORT_MANAGE_EXCLUSIVE_TASK")) {
-            sClassPathForManager.put(SERVICE_EXCLUSIVE_TASK, "com.samsung.android.sepunion.SemExclusiveTaskManager");
+        if (SemFloatingFeature.getInstance()
+                .getBoolean("SEC_FLOATING_FEATURE_ACCESSIBILITY_SUPPORT_MANAGE_EXCLUSIVE_TASK")) {
+            sClassPathForManager.put(
+                    SERVICE_EXCLUSIVE_TASK, "com.samsung.android.sepunion.SemExclusiveTaskManager");
         }
-        sClassPathForManager.put(SERVICE_ONE_HAND, "com.samsung.android.sepunion.OneHandServiceManager");
-        sClassPathForManager.put(SERVICE_GALAXY_REGISTRY, "com.samsung.android.sepunion.GalaxyRegistryServiceManager");
-        sClassPathForManager.put(SERVICE_FW_BR_RECEIVER_AGENT, "com.samsung.android.sepunion.BRReceiverAgentServiceManager");
-        sClassPathForManager.put("semcustomdump", "com.samsung.android.sepunion.SemCustomDumpManager");
-        sClassPathForManager.put(SERVICE_HERMES, "com.samsung.android.service.HermesService.HermesServiceManager");
-        sClassPathForManager.put(SERVICE_GOOD_CATCH, "com.samsung.android.sepunion.SemGoodCatchManager");
+        sClassPathForManager.put(
+                SERVICE_ONE_HAND, "com.samsung.android.sepunion.OneHandServiceManager");
+        sClassPathForManager.put(
+                SERVICE_GALAXY_REGISTRY,
+                "com.samsung.android.sepunion.GalaxyRegistryServiceManager");
+        sClassPathForManager.put(
+                SERVICE_FW_BR_RECEIVER_AGENT,
+                "com.samsung.android.sepunion.BRReceiverAgentServiceManager");
+        sClassPathForManager.put(
+                "semcustomdump", "com.samsung.android.sepunion.SemCustomDumpManager");
+        sClassPathForManager.put(
+                SERVICE_HERMES, "com.samsung.android.service.HermesService.HermesServiceManager");
+        sClassPathForManager.put(
+                SERVICE_GOOD_CATCH, "com.samsung.android.sepunion.SemGoodCatchManager");
         sClassPathForManager.put(SERVICE_TIPS, "com.samsung.android.sepunion.TipsManager");
         sClassPathForService = new ArrayMap<>();
-        sClassPathForService.put("semeventdelegator", "com.android.server.sepunion.SemDeviceInfoManagerService");
-        sClassPathForService.put(SERVICE_PLUGIN, "com.android.server.sepunion.SemPluginManagerService");
-        sClassPathForService.put("execute", "com.android.server.sepunion.SemShortcutManagerService");
-        if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_ACCESSIBILITY_SUPPORT_MANAGE_EXCLUSIVE_TASK")) {
-            sClassPathForService.put(SERVICE_EXCLUSIVE_TASK, "com.android.server.sepunion.SemExclusiveTaskManagerService");
+        sClassPathForService.put(
+                "semeventdelegator", "com.android.server.sepunion.SemDeviceInfoManagerService");
+        sClassPathForService.put(
+                SERVICE_PLUGIN, "com.android.server.sepunion.SemPluginManagerService");
+        sClassPathForService.put(
+                "execute", "com.android.server.sepunion.SemShortcutManagerService");
+        if (SemFloatingFeature.getInstance()
+                .getBoolean("SEC_FLOATING_FEATURE_ACCESSIBILITY_SUPPORT_MANAGE_EXCLUSIVE_TASK")) {
+            sClassPathForService.put(
+                    SERVICE_EXCLUSIVE_TASK,
+                    "com.android.server.sepunion.SemExclusiveTaskManagerService");
         }
         sClassPathForService.put(SERVICE_ONE_HAND, "com.android.server.sepunion.OneHandService");
-        sClassPathForService.put(SERVICE_GALAXY_REGISTRY, "com.android.server.sepunion.GalaxyRegistryService");
-        sClassPathForService.put(SERVICE_FW_BR_RECEIVER_AGENT, "com.android.server.sepunion.BRReceiverAgentService");
+        sClassPathForService.put(
+                SERVICE_GALAXY_REGISTRY, "com.android.server.sepunion.GalaxyRegistryService");
+        sClassPathForService.put(
+                SERVICE_FW_BR_RECEIVER_AGENT, "com.android.server.sepunion.BRReceiverAgentService");
         sClassPathForService.put(SERVICE_HERMES, "com.android.server.HermesService");
         sClassPathForService.put(SERVICE_ENGMODE, "com.android.server.sepunion.EngmodeService");
-        sClassPathForService.put(SERVICE_GOOD_CATCH, "com.android.server.sepunion.SemGoodCatchService");
-        if ("com.samsung.android.sm_cn".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME"))) {
+        sClassPathForService.put(
+                SERVICE_GOOD_CATCH, "com.android.server.sepunion.SemGoodCatchService");
+        if ("com.samsung.android.sm_cn"
+                .equals(
+                        SemFloatingFeature.getInstance()
+                                .getString(
+                                        "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME"))) {
             str = "com.samsung.android.sm_cn";
-            sClassPathForService.put(SERVICE_SMART_MANAGER, "com.android.server.sepunion.SmartManagerService");
+            sClassPathForService.put(
+                    SERVICE_SMART_MANAGER, "com.android.server.sepunion.SmartManagerService");
         } else {
             str = "com.samsung.android.sm_cn";
         }
-        if (SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_VDC").contains("VDCOBSERVER")) {
+        if (SemFloatingFeature.getInstance()
+                .getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_VDC")
+                .contains("VDCOBSERVER")) {
             str2 = "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME";
-            sClassPathForService.put(SERVICE_VDC_OBSERVER, "com.android.server.sepunion.VDCObserverService");
+            sClassPathForService.put(
+                    SERVICE_VDC_OBSERVER, "com.android.server.sepunion.VDCObserverService");
         } else {
             str2 = "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME";
         }
-        if (!SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_VDC").contains("SMMTOBSERVER")) {
+        if (!SemFloatingFeature.getInstance()
+                .getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_VDC")
+                .contains("SMMTOBSERVER")) {
             str3 = SERVICE_VDC_OBSERVER;
         } else {
             ArrayMap<String, String> arrayMap = sClassPathForService;
             str3 = SERVICE_VDC_OBSERVER;
-            arrayMap.put(SERVICE_SMMT_OBSERVER, "com.android.server.sepunion.SmartMeetingObserverService");
+            arrayMap.put(
+                    SERVICE_SMMT_OBSERVER,
+                    "com.android.server.sepunion.SmartMeetingObserverService");
         }
         sClassPathForService.put(SERVICE_TIPS, "com.android.server.sepunion.TipsManagerService");
         sServiceStartType = new ArrayMap<>();
         sServiceStartType.put("semeventdelegator", 0);
         sServiceStartType.put(SERVICE_PLUGIN, 0);
         sServiceStartType.put("execute", 1);
-        if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_ACCESSIBILITY_SUPPORT_MANAGE_EXCLUSIVE_TASK")) {
+        if (SemFloatingFeature.getInstance()
+                .getBoolean("SEC_FLOATING_FEATURE_ACCESSIBILITY_SUPPORT_MANAGE_EXCLUSIVE_TASK")) {
             sServiceStartType.put(SERVICE_EXCLUSIVE_TASK, 0);
         }
         sServiceStartType.put(SERVICE_ONE_HAND, 0);
@@ -126,10 +160,14 @@ public final class UnionConstants {
         if (str.equals(SemFloatingFeature.getInstance().getString(str2))) {
             sServiceStartType.put(SERVICE_SMART_MANAGER, 0);
         }
-        if (SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_VDC").contains("VDCOBSERVER")) {
+        if (SemFloatingFeature.getInstance()
+                .getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_VDC")
+                .contains("VDCOBSERVER")) {
             sServiceStartType.put(str3, 0);
         }
-        if (SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_VDC").contains("SMMTOBSERVER")) {
+        if (SemFloatingFeature.getInstance()
+                .getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_VDC")
+                .contains("SMMTOBSERVER")) {
             sServiceStartType.put(SERVICE_SMMT_OBSERVER, 0);
         }
         sServiceStartType.put(SERVICE_TIPS, 0);

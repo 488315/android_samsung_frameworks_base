@@ -2,6 +2,7 @@ package com.android.server.media;
 
 import android.app.ForegroundServiceDelegationOptions;
 import android.app.Notification;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,7 +23,9 @@ public abstract class MediaSessionRecordImpl {
         if (this == obj) {
             return true;
         }
-        return obj != null && (obj instanceof MediaSessionRecordImpl) && this.mUniqueId == ((MediaSessionRecordImpl) obj).mUniqueId;
+        return obj != null
+                && (obj instanceof MediaSessionRecordImpl)
+                && this.mUniqueId == ((MediaSessionRecordImpl) obj).mUniqueId;
     }
 
     public abstract void expireTempEngaged();

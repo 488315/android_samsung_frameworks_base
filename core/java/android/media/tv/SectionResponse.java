@@ -6,20 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class SectionResponse extends BroadcastInfoResponse implements Parcelable {
-    public static final Parcelable.Creator<SectionResponse> CREATOR = new Parcelable.Creator<SectionResponse>() { // from class: android.media.tv.SectionResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SectionResponse createFromParcel(Parcel source) {
-            source.readInt();
-            return SectionResponse.createFromParcelBody(source);
-        }
+    public static final Parcelable.Creator<SectionResponse> CREATOR =
+            new Parcelable.Creator<
+                    SectionResponse>() { // from class: android.media.tv.SectionResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SectionResponse createFromParcel(Parcel source) {
+                    source.readInt();
+                    return SectionResponse.createFromParcelBody(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SectionResponse[] newArray(int size) {
-            return new SectionResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SectionResponse[] newArray(int size) {
+                    return new SectionResponse[size];
+                }
+            };
     private static final int RESPONSE_TYPE = 3;
     private final Bundle mSessionData;
     private final int mSessionId;
@@ -29,7 +31,13 @@ public final class SectionResponse extends BroadcastInfoResponse implements Parc
         return new SectionResponse(in);
     }
 
-    public SectionResponse(int requestId, int sequence, int responseResult, int sessionId, int version, Bundle sessionData) {
+    public SectionResponse(
+            int requestId,
+            int sequence,
+            int responseResult,
+            int sessionId,
+            int version,
+            Bundle sessionData) {
         super(3, requestId, sequence, responseResult);
         this.mSessionId = sessionId;
         this.mVersion = version;

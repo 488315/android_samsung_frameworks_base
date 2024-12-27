@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.Parcelable;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
 
@@ -26,21 +25,22 @@ public final class Message implements Parcelable {
     public static final Object sPoolSync = new Object();
     private static int sPoolSize = 0;
     private static boolean gCheckRecycle = true;
-    public static final Parcelable.Creator<Message> CREATOR = new Parcelable.Creator<Message>() { // from class: android.os.Message.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Message createFromParcel(Parcel source) {
-            Message msg = Message.obtain();
-            msg.readFromParcel(source);
-            return msg;
-        }
+    public static final Parcelable.Creator<Message> CREATOR =
+            new Parcelable.Creator<Message>() { // from class: android.os.Message.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Message createFromParcel(Parcel source) {
+                    Message msg = Message.obtain();
+                    msg.readFromParcel(source);
+                    return msg;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Message[] newArray(int size) {
-            return new Message[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Message[] newArray(int size) {
+                    return new Message[size];
+                }
+            };
     public int sendingUid = -1;
     public int workSourceUid = -1;
 
@@ -131,7 +131,8 @@ public final class Message implements Parcelable {
     public void recycle() {
         if (isInUse()) {
             if (gCheckRecycle) {
-                throw new IllegalStateException("This message cannot be recycled because it is still in use.");
+                throw new IllegalStateException(
+                        "This message cannot be recycled because it is still in use.");
             }
         } else {
             recycleUnchecked();
@@ -323,7 +324,8 @@ public final class Message implements Parcelable {
                 dest.writeInt(1);
                 dest.writeParcelable(p, flags);
             } catch (ClassCastException e) {
-                throw new RuntimeException("Can't marshal non-Parcelable objects across processes.");
+                throw new RuntimeException(
+                        "Can't marshal non-Parcelable objects across processes.");
             }
         } else {
             dest.writeInt(0);

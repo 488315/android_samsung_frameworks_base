@@ -26,7 +26,12 @@ public final class HeimdallAlwaysRunningProcInfo {
         this.processName = heimdallProcessData.processName;
         this.uid = heimdallProcessData.uid;
         this.pid = heimdallProcessData.pid;
-        this.abnormalType = heimdallProcessData.isGlobalKill() ? 3020 : heimdallProcessData.isSpecKill() ? 3021 : heimdallProcessData.isAlwaysRunningSpecKill() ? 3023 : 3022;
+        this.abnormalType =
+                heimdallProcessData.isGlobalKill()
+                        ? 3020
+                        : heimdallProcessData.isSpecKill()
+                                ? 3021
+                                : heimdallProcessData.isAlwaysRunningSpecKill() ? 3023 : 3022;
     }
 
     public final String toDumpString() {

@@ -12,9 +12,9 @@ public final class FileDescriptorWatcher {
     public final class FileDescriptorLeakWatcher implements Runnable {
         /* JADX WARN: Can't wrap try/catch for region: R(3:(13:48|49|51|52|53|54|55|56|57|58|59|60|61)|62|63) */
         /* JADX WARN: Code restructure failed: missing block: B:122:0x0144, code lost:
-        
-            if (r5 != null) goto L35;
-         */
+
+           if (r5 != null) goto L35;
+        */
         /* JADX WARN: Multi-variable type inference failed */
         /* JADX WARN: Removed duplicated region for block: B:100:0x01ec A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /* JADX WARN: Type inference failed for: r0v10, types: [java.util.zip.GZIPOutputStream] */
@@ -49,7 +49,9 @@ public final class FileDescriptorWatcher {
                 Method dump skipped, instructions count: 596
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.FileDescriptorWatcher.FileDescriptorLeakWatcher.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.FileDescriptorWatcher.FileDescriptorLeakWatcher.run():void");
         }
     }
 }

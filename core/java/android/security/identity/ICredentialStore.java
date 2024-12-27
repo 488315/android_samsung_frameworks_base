@@ -5,9 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.security.identity.ICredential;
-import android.security.identity.ISession;
-import android.security.identity.IWritableCredential;
 
 /* loaded from: classes3.dex */
 public interface ICredentialStore extends IInterface {
@@ -41,12 +38,14 @@ public interface ICredentialStore extends IInterface {
         }
 
         @Override // android.security.identity.ICredentialStore
-        public IWritableCredential createCredential(String credentialName, String docType) throws RemoteException {
+        public IWritableCredential createCredential(String credentialName, String docType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.security.identity.ICredentialStore
-        public ICredential getCredentialByName(String credentialName, int cipherSuite) throws RemoteException {
+        public ICredential getCredentialByName(String credentialName, int cipherSuite)
+                throws RemoteException {
             return null;
         }
 
@@ -61,7 +60,7 @@ public interface ICredentialStore extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICredentialStore {
+    public abstract static class Stub extends Binder implements ICredentialStore {
         static final int TRANSACTION_createCredential = 2;
         static final int TRANSACTION_createPresentationSession = 4;
         static final int TRANSACTION_getCredentialByName = 3;
@@ -108,7 +107,8 @@ public interface ICredentialStore extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICredentialStore.DESCRIPTOR);
             }
@@ -174,7 +174,9 @@ public interface ICredentialStore extends IInterface {
                     _data.writeInterfaceToken(ICredentialStore.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    SecurityHardwareInfoParcel _result = (SecurityHardwareInfoParcel) _reply.readTypedObject(SecurityHardwareInfoParcel.CREATOR);
+                    SecurityHardwareInfoParcel _result =
+                            (SecurityHardwareInfoParcel)
+                                    _reply.readTypedObject(SecurityHardwareInfoParcel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -183,7 +185,8 @@ public interface ICredentialStore extends IInterface {
             }
 
             @Override // android.security.identity.ICredentialStore
-            public IWritableCredential createCredential(String credentialName, String docType) throws RemoteException {
+            public IWritableCredential createCredential(String credentialName, String docType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -192,7 +195,8 @@ public interface ICredentialStore extends IInterface {
                     _data.writeString(docType);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    IWritableCredential _result = IWritableCredential.Stub.asInterface(_reply.readStrongBinder());
+                    IWritableCredential _result =
+                            IWritableCredential.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -201,7 +205,8 @@ public interface ICredentialStore extends IInterface {
             }
 
             @Override // android.security.identity.ICredentialStore
-            public ICredential getCredentialByName(String credentialName, int cipherSuite) throws RemoteException {
+            public ICredential getCredentialByName(String credentialName, int cipherSuite)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

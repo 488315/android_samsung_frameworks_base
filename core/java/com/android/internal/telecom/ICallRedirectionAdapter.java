@@ -16,20 +16,20 @@ public interface ICallRedirectionAdapter extends IInterface {
 
     void placeCallUnmodified() throws RemoteException;
 
-    void redirectCall(Uri uri, PhoneAccountHandle phoneAccountHandle, boolean z) throws RemoteException;
+    void redirectCall(Uri uri, PhoneAccountHandle phoneAccountHandle, boolean z)
+            throws RemoteException;
 
     public static class Default implements ICallRedirectionAdapter {
         @Override // com.android.internal.telecom.ICallRedirectionAdapter
-        public void cancelCall() throws RemoteException {
-        }
+        public void cancelCall() throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallRedirectionAdapter
-        public void placeCallUnmodified() throws RemoteException {
-        }
+        public void placeCallUnmodified() throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallRedirectionAdapter
-        public void redirectCall(Uri handle, PhoneAccountHandle targetPhoneAccount, boolean confirmFirst) throws RemoteException {
-        }
+        public void redirectCall(
+                Uri handle, PhoneAccountHandle targetPhoneAccount, boolean confirmFirst)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,7 +37,7 @@ public interface ICallRedirectionAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICallRedirectionAdapter {
+    public abstract static class Stub extends Binder implements ICallRedirectionAdapter {
         static final int TRANSACTION_cancelCall = 1;
         static final int TRANSACTION_placeCallUnmodified = 2;
         static final int TRANSACTION_redirectCall = 3;
@@ -81,7 +81,8 @@ public interface ICallRedirectionAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICallRedirectionAdapter.DESCRIPTOR);
             }
@@ -98,7 +99,8 @@ public interface ICallRedirectionAdapter extends IInterface {
                     return true;
                 case 3:
                     Uri _arg0 = (Uri) data.readTypedObject(Uri.CREATOR);
-                    PhoneAccountHandle _arg1 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg1 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     boolean _arg2 = data.readBoolean();
                     data.enforceNoDataAvail();
                     redirectCall(_arg0, _arg1, _arg2);
@@ -147,7 +149,9 @@ public interface ICallRedirectionAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallRedirectionAdapter
-            public void redirectCall(Uri handle, PhoneAccountHandle targetPhoneAccount, boolean confirmFirst) throws RemoteException {
+            public void redirectCall(
+                    Uri handle, PhoneAccountHandle targetPhoneAccount, boolean confirmFirst)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallRedirectionAdapter.DESCRIPTOR);

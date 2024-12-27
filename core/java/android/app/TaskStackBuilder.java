@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.util.Log;
+
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
@@ -97,7 +98,8 @@ public class TaskStackBuilder {
 
     public int startActivities(Bundle options, UserHandle userHandle) {
         if (this.mIntents.isEmpty()) {
-            throw new IllegalStateException("No intents added to TaskStackBuilder; cannot startActivities");
+            throw new IllegalStateException(
+                    "No intents added to TaskStackBuilder; cannot startActivities");
         }
         return this.mSourceContext.startActivitiesAsUser(getIntents(), options, userHandle);
     }
@@ -112,16 +114,21 @@ public class TaskStackBuilder {
 
     public PendingIntent getPendingIntent(int requestCode, int flags, Bundle options) {
         if (this.mIntents.isEmpty()) {
-            throw new IllegalStateException("No intents added to TaskStackBuilder; cannot getPendingIntent");
+            throw new IllegalStateException(
+                    "No intents added to TaskStackBuilder; cannot getPendingIntent");
         }
-        return PendingIntent.getActivities(this.mSourceContext, requestCode, getIntents(), flags, options);
+        return PendingIntent.getActivities(
+                this.mSourceContext, requestCode, getIntents(), flags, options);
     }
 
-    public PendingIntent getPendingIntent(int requestCode, int flags, Bundle options, UserHandle user) {
+    public PendingIntent getPendingIntent(
+            int requestCode, int flags, Bundle options, UserHandle user) {
         if (this.mIntents.isEmpty()) {
-            throw new IllegalStateException("No intents added to TaskStackBuilder; cannot getPendingIntent");
+            throw new IllegalStateException(
+                    "No intents added to TaskStackBuilder; cannot getPendingIntent");
         }
-        return PendingIntent.getActivitiesAsUser(this.mSourceContext, requestCode, getIntents(), flags, options, user);
+        return PendingIntent.getActivitiesAsUser(
+                this.mSourceContext, requestCode, getIntents(), flags, options, user);
     }
 
     public Intent[] getIntents() {

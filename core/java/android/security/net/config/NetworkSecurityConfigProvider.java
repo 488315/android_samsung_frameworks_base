@@ -3,14 +3,17 @@ package android.security.net.config;
 import android.content.Context;
 import android.media.MediaMetrics;
 import android.util.Log;
+
+import libcore.net.NetworkSecurityPolicy;
+
 import java.security.Provider;
 import java.security.Security;
-import libcore.net.NetworkSecurityPolicy;
 
 /* loaded from: classes3.dex */
 public final class NetworkSecurityConfigProvider extends Provider {
     private static final String LOG_TAG = "nsconfig";
-    private static final String PREFIX = NetworkSecurityConfigProvider.class.getPackage().getName() + MediaMetrics.SEPARATOR;
+    private static final String PREFIX =
+            NetworkSecurityConfigProvider.class.getPackage().getName() + MediaMetrics.SEPARATOR;
 
     public NetworkSecurityConfigProvider() {
         super("AndroidNSSP", 1.0d, "Android Network Security Policy Provider");
@@ -23,7 +26,10 @@ public final class NetworkSecurityConfigProvider extends Provider {
         ApplicationConfig.setDefaultInstance(config);
         int pos = Security.insertProviderAt(new NetworkSecurityConfigProvider(), 1);
         if (pos != 1) {
-            throw new RuntimeException("Failed to install provider as highest priority provider. Provider was installed at position " + pos);
+            throw new RuntimeException(
+                    "Failed to install provider as highest priority provider. Provider was"
+                        + " installed at position "
+                            + pos);
         }
         NetworkSecurityPolicy.setInstance(new ConfigNetworkSecurityPolicy(config));
     }
@@ -32,7 +38,9 @@ public final class NetworkSecurityConfigProvider extends Provider {
         ApplicationConfig config = new ApplicationConfig(new ManifestConfigSource(context));
         ApplicationConfig defaultConfig = ApplicationConfig.getDefaultInstance();
         String mProcessName = context.getApplicationInfo().processName;
-        if (defaultConfig != null && defaultConfig.isCleartextTrafficPermitted() != config.isCleartextTrafficPermitted()) {
+        if (defaultConfig != null
+                && defaultConfig.isCleartextTrafficPermitted()
+                        != config.isCleartextTrafficPermitted()) {
             Log.w(LOG_TAG, mProcessName + ": New config does not match the previously set config.");
             if (defaultConfig.hasPerDomainConfigs() || config.hasPerDomainConfigs()) {
                 throw new RuntimeException("Found multiple conflicting per-domain rules");

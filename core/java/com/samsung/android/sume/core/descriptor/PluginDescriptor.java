@@ -3,6 +3,7 @@ package com.samsung.android.sume.core.descriptor;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.filter.PluginFilter;
 import com.samsung.android.sume.core.types.Version;
+
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -23,41 +24,69 @@ public abstract class PluginDescriptor extends MFDescriptorBase {
     }
 
     public String getPluginClassName() {
-        return (String) Optional.ofNullable(getAll().get(Integer.valueOf(PLUGIN_CLASS_NAME))).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.descriptor.PluginDescriptor$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return PluginDescriptor.this.m9131x62801927();
-            }
-        });
+        return (String)
+                Optional.ofNullable(getAll().get(Integer.valueOf(PLUGIN_CLASS_NAME)))
+                        .orElseGet(
+                                new Supplier() { // from class:
+                                                 // com.samsung.android.sume.core.descriptor.PluginDescriptor$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Supplier
+                                    public final Object get() {
+                                        return PluginDescriptor.this.m9131x62801927();
+                                    }
+                                });
     }
 
     /* renamed from: lambda$getPluginClassName$0$com-samsung-android-sume-core-descriptor-PluginDescriptor, reason: not valid java name */
     /* synthetic */ Object m9131x62801927() {
-        return Optional.ofNullable(getPluginClass()).map(new Function() { // from class: com.samsung.android.sume.core.descriptor.PluginDescriptor$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((Class) obj).getName();
-            }
-        }).orElse(null);
+        return Optional.ofNullable(getPluginClass())
+                .map(
+                        new Function() { // from class:
+                                         // com.samsung.android.sume.core.descriptor.PluginDescriptor$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Function
+                            public final Object apply(Object obj) {
+                                return ((Class) obj).getName();
+                            }
+                        })
+                .orElse(null);
     }
 
     public void setPluginClassName(String pluginClassName) {
         getAll().put(Integer.valueOf(PLUGIN_CLASS_NAME), pluginClassName);
     }
 
-    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase, com.samsung.android.sume.core.descriptor.MFDescriptor
+    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase,
+              // com.samsung.android.sume.core.descriptor.MFDescriptor
     public String getFilterId() {
-        return (String) Stream.of((Object[]) new String[]{(String) Optional.ofNullable(getPluginId()).map(new Function() { // from class: com.samsung.android.sume.core.descriptor.PluginDescriptor$$ExternalSyntheticLambda2
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((Enum) obj).name();
-            }
-        }).orElse(""), (String) Optional.ofNullable(getPluginClassName()).orElse("")}).filter(new Predicate() { // from class: com.samsung.android.sume.core.descriptor.PluginDescriptor$$ExternalSyntheticLambda3
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return PluginDescriptor.lambda$getFilterId$1((String) obj);
-            }
-        }).collect(Collectors.joining("#"));
+        return (String)
+                Stream.of(
+                                (Object[])
+                                        new String[] {
+                                            (String)
+                                                    Optional.ofNullable(getPluginId())
+                                                            .map(
+                                                                    new Function() { // from class:
+                                                                                     // com.samsung.android.sume.core.descriptor.PluginDescriptor$$ExternalSyntheticLambda2
+                                                                        @Override // java.util.function.Function
+                                                                        public final Object apply(
+                                                                                Object obj) {
+                                                                            return ((Enum) obj)
+                                                                                    .name();
+                                                                        }
+                                                                    })
+                                                            .orElse(""),
+                                            (String)
+                                                    Optional.ofNullable(getPluginClassName())
+                                                            .orElse("")
+                                        })
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.descriptor.PluginDescriptor$$ExternalSyntheticLambda3
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return PluginDescriptor.lambda$getFilterId$1((String) obj);
+                                    }
+                                })
+                        .collect(Collectors.joining("#"));
     }
 
     static /* synthetic */ boolean lambda$getFilterId$1(String it) {
@@ -80,7 +109,8 @@ public abstract class PluginDescriptor extends MFDescriptorBase {
         getAll().put(Integer.valueOf(PLUGIN_VERSION), new Version(version));
     }
 
-    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase, com.samsung.android.sume.core.descriptor.MFDescriptor
+    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase,
+              // com.samsung.android.sume.core.descriptor.MFDescriptor
     public Class<?> getFilterType() {
         return PluginFilter.class;
     }

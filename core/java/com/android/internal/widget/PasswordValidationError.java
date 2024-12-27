@@ -38,7 +38,8 @@ public class PasswordValidationError {
     }
 
     public String toString() {
-        return errorCodeToString(this.errorCode) + (this.requirement > 0 ? "; required: " + this.requirement : "");
+        return errorCodeToString(this.errorCode)
+                + (this.requirement > 0 ? "; required: " + this.requirement : "");
     }
 
     private static String errorCodeToString(int error) {

@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.textclassifier.ITextClassifierCallback;
 import android.view.textclassifier.ConversationActions;
 import android.view.textclassifier.SelectionEvent;
 import android.view.textclassifier.TextClassification;
@@ -18,66 +17,111 @@ import android.view.textclassifier.TextSelection;
 
 /* loaded from: classes3.dex */
 public interface ITextClassifierService extends IInterface {
-    void onClassifyText(TextClassificationSessionId textClassificationSessionId, TextClassification.Request request, ITextClassifierCallback iTextClassifierCallback) throws RemoteException;
+    void onClassifyText(
+            TextClassificationSessionId textClassificationSessionId,
+            TextClassification.Request request,
+            ITextClassifierCallback iTextClassifierCallback)
+            throws RemoteException;
 
     void onConnectedStateChanged(int i) throws RemoteException;
 
-    void onCreateTextClassificationSession(TextClassificationContext textClassificationContext, TextClassificationSessionId textClassificationSessionId) throws RemoteException;
+    void onCreateTextClassificationSession(
+            TextClassificationContext textClassificationContext,
+            TextClassificationSessionId textClassificationSessionId)
+            throws RemoteException;
 
-    void onDestroyTextClassificationSession(TextClassificationSessionId textClassificationSessionId) throws RemoteException;
+    void onDestroyTextClassificationSession(TextClassificationSessionId textClassificationSessionId)
+            throws RemoteException;
 
-    void onDetectLanguage(TextClassificationSessionId textClassificationSessionId, TextLanguage.Request request, ITextClassifierCallback iTextClassifierCallback) throws RemoteException;
+    void onDetectLanguage(
+            TextClassificationSessionId textClassificationSessionId,
+            TextLanguage.Request request,
+            ITextClassifierCallback iTextClassifierCallback)
+            throws RemoteException;
 
-    void onGenerateLinks(TextClassificationSessionId textClassificationSessionId, TextLinks.Request request, ITextClassifierCallback iTextClassifierCallback) throws RemoteException;
+    void onGenerateLinks(
+            TextClassificationSessionId textClassificationSessionId,
+            TextLinks.Request request,
+            ITextClassifierCallback iTextClassifierCallback)
+            throws RemoteException;
 
-    void onSelectionEvent(TextClassificationSessionId textClassificationSessionId, SelectionEvent selectionEvent) throws RemoteException;
+    void onSelectionEvent(
+            TextClassificationSessionId textClassificationSessionId, SelectionEvent selectionEvent)
+            throws RemoteException;
 
-    void onSuggestConversationActions(TextClassificationSessionId textClassificationSessionId, ConversationActions.Request request, ITextClassifierCallback iTextClassifierCallback) throws RemoteException;
+    void onSuggestConversationActions(
+            TextClassificationSessionId textClassificationSessionId,
+            ConversationActions.Request request,
+            ITextClassifierCallback iTextClassifierCallback)
+            throws RemoteException;
 
-    void onSuggestSelection(TextClassificationSessionId textClassificationSessionId, TextSelection.Request request, ITextClassifierCallback iTextClassifierCallback) throws RemoteException;
+    void onSuggestSelection(
+            TextClassificationSessionId textClassificationSessionId,
+            TextSelection.Request request,
+            ITextClassifierCallback iTextClassifierCallback)
+            throws RemoteException;
 
-    void onTextClassifierEvent(TextClassificationSessionId textClassificationSessionId, TextClassifierEvent textClassifierEvent) throws RemoteException;
+    void onTextClassifierEvent(
+            TextClassificationSessionId textClassificationSessionId,
+            TextClassifierEvent textClassifierEvent)
+            throws RemoteException;
 
     public static class Default implements ITextClassifierService {
         @Override // android.service.textclassifier.ITextClassifierService
-        public void onSuggestSelection(TextClassificationSessionId sessionId, TextSelection.Request request, ITextClassifierCallback callback) throws RemoteException {
-        }
+        public void onSuggestSelection(
+                TextClassificationSessionId sessionId,
+                TextSelection.Request request,
+                ITextClassifierCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.textclassifier.ITextClassifierService
-        public void onClassifyText(TextClassificationSessionId sessionId, TextClassification.Request request, ITextClassifierCallback callback) throws RemoteException {
-        }
+        public void onClassifyText(
+                TextClassificationSessionId sessionId,
+                TextClassification.Request request,
+                ITextClassifierCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.textclassifier.ITextClassifierService
-        public void onGenerateLinks(TextClassificationSessionId sessionId, TextLinks.Request request, ITextClassifierCallback callback) throws RemoteException {
-        }
+        public void onGenerateLinks(
+                TextClassificationSessionId sessionId,
+                TextLinks.Request request,
+                ITextClassifierCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.textclassifier.ITextClassifierService
-        public void onSelectionEvent(TextClassificationSessionId sessionId, SelectionEvent event) throws RemoteException {
-        }
+        public void onSelectionEvent(TextClassificationSessionId sessionId, SelectionEvent event)
+                throws RemoteException {}
 
         @Override // android.service.textclassifier.ITextClassifierService
-        public void onTextClassifierEvent(TextClassificationSessionId sessionId, TextClassifierEvent event) throws RemoteException {
-        }
+        public void onTextClassifierEvent(
+                TextClassificationSessionId sessionId, TextClassifierEvent event)
+                throws RemoteException {}
 
         @Override // android.service.textclassifier.ITextClassifierService
-        public void onCreateTextClassificationSession(TextClassificationContext context, TextClassificationSessionId sessionId) throws RemoteException {
-        }
+        public void onCreateTextClassificationSession(
+                TextClassificationContext context, TextClassificationSessionId sessionId)
+                throws RemoteException {}
 
         @Override // android.service.textclassifier.ITextClassifierService
-        public void onDestroyTextClassificationSession(TextClassificationSessionId sessionId) throws RemoteException {
-        }
+        public void onDestroyTextClassificationSession(TextClassificationSessionId sessionId)
+                throws RemoteException {}
 
         @Override // android.service.textclassifier.ITextClassifierService
-        public void onDetectLanguage(TextClassificationSessionId sessionId, TextLanguage.Request request, ITextClassifierCallback callback) throws RemoteException {
-        }
+        public void onDetectLanguage(
+                TextClassificationSessionId sessionId,
+                TextLanguage.Request request,
+                ITextClassifierCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.textclassifier.ITextClassifierService
-        public void onSuggestConversationActions(TextClassificationSessionId sessionId, ConversationActions.Request request, ITextClassifierCallback callback) throws RemoteException {
-        }
+        public void onSuggestConversationActions(
+                TextClassificationSessionId sessionId,
+                ConversationActions.Request request,
+                ITextClassifierCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.textclassifier.ITextClassifierService
-        public void onConnectedStateChanged(int connected) throws RemoteException {
-        }
+        public void onConnectedStateChanged(int connected) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -85,8 +129,9 @@ public interface ITextClassifierService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITextClassifierService {
-        public static final String DESCRIPTOR = "android.service.textclassifier.ITextClassifierService";
+    public abstract static class Stub extends Binder implements ITextClassifierService {
+        public static final String DESCRIPTOR =
+                "android.service.textclassifier.ITextClassifierService";
         static final int TRANSACTION_onClassifyText = 2;
         static final int TRANSACTION_onConnectedStateChanged = 10;
         static final int TRANSACTION_onCreateTextClassificationSession = 6;
@@ -151,7 +196,8 @@ public interface ITextClassifierService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -161,60 +207,96 @@ public interface ITextClassifierService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    TextClassificationSessionId _arg0 = (TextClassificationSessionId) data.readTypedObject(TextClassificationSessionId.CREATOR);
-                    TextSelection.Request _arg1 = (TextSelection.Request) data.readTypedObject(TextSelection.Request.CREATOR);
-                    ITextClassifierCallback _arg2 = ITextClassifierCallback.Stub.asInterface(data.readStrongBinder());
+                    TextClassificationSessionId _arg0 =
+                            (TextClassificationSessionId)
+                                    data.readTypedObject(TextClassificationSessionId.CREATOR);
+                    TextSelection.Request _arg1 =
+                            (TextSelection.Request)
+                                    data.readTypedObject(TextSelection.Request.CREATOR);
+                    ITextClassifierCallback _arg2 =
+                            ITextClassifierCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onSuggestSelection(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    TextClassificationSessionId _arg02 = (TextClassificationSessionId) data.readTypedObject(TextClassificationSessionId.CREATOR);
-                    TextClassification.Request _arg12 = (TextClassification.Request) data.readTypedObject(TextClassification.Request.CREATOR);
-                    ITextClassifierCallback _arg22 = ITextClassifierCallback.Stub.asInterface(data.readStrongBinder());
+                    TextClassificationSessionId _arg02 =
+                            (TextClassificationSessionId)
+                                    data.readTypedObject(TextClassificationSessionId.CREATOR);
+                    TextClassification.Request _arg12 =
+                            (TextClassification.Request)
+                                    data.readTypedObject(TextClassification.Request.CREATOR);
+                    ITextClassifierCallback _arg22 =
+                            ITextClassifierCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onClassifyText(_arg02, _arg12, _arg22);
                     return true;
                 case 3:
-                    TextClassificationSessionId _arg03 = (TextClassificationSessionId) data.readTypedObject(TextClassificationSessionId.CREATOR);
-                    TextLinks.Request _arg13 = (TextLinks.Request) data.readTypedObject(TextLinks.Request.CREATOR);
-                    ITextClassifierCallback _arg23 = ITextClassifierCallback.Stub.asInterface(data.readStrongBinder());
+                    TextClassificationSessionId _arg03 =
+                            (TextClassificationSessionId)
+                                    data.readTypedObject(TextClassificationSessionId.CREATOR);
+                    TextLinks.Request _arg13 =
+                            (TextLinks.Request) data.readTypedObject(TextLinks.Request.CREATOR);
+                    ITextClassifierCallback _arg23 =
+                            ITextClassifierCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onGenerateLinks(_arg03, _arg13, _arg23);
                     return true;
                 case 4:
-                    TextClassificationSessionId _arg04 = (TextClassificationSessionId) data.readTypedObject(TextClassificationSessionId.CREATOR);
-                    SelectionEvent _arg14 = (SelectionEvent) data.readTypedObject(SelectionEvent.CREATOR);
+                    TextClassificationSessionId _arg04 =
+                            (TextClassificationSessionId)
+                                    data.readTypedObject(TextClassificationSessionId.CREATOR);
+                    SelectionEvent _arg14 =
+                            (SelectionEvent) data.readTypedObject(SelectionEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onSelectionEvent(_arg04, _arg14);
                     return true;
                 case 5:
-                    TextClassificationSessionId _arg05 = (TextClassificationSessionId) data.readTypedObject(TextClassificationSessionId.CREATOR);
-                    TextClassifierEvent _arg15 = (TextClassifierEvent) data.readTypedObject(TextClassifierEvent.CREATOR);
+                    TextClassificationSessionId _arg05 =
+                            (TextClassificationSessionId)
+                                    data.readTypedObject(TextClassificationSessionId.CREATOR);
+                    TextClassifierEvent _arg15 =
+                            (TextClassifierEvent) data.readTypedObject(TextClassifierEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onTextClassifierEvent(_arg05, _arg15);
                     return true;
                 case 6:
-                    TextClassificationContext _arg06 = (TextClassificationContext) data.readTypedObject(TextClassificationContext.CREATOR);
-                    TextClassificationSessionId _arg16 = (TextClassificationSessionId) data.readTypedObject(TextClassificationSessionId.CREATOR);
+                    TextClassificationContext _arg06 =
+                            (TextClassificationContext)
+                                    data.readTypedObject(TextClassificationContext.CREATOR);
+                    TextClassificationSessionId _arg16 =
+                            (TextClassificationSessionId)
+                                    data.readTypedObject(TextClassificationSessionId.CREATOR);
                     data.enforceNoDataAvail();
                     onCreateTextClassificationSession(_arg06, _arg16);
                     return true;
                 case 7:
-                    TextClassificationSessionId _arg07 = (TextClassificationSessionId) data.readTypedObject(TextClassificationSessionId.CREATOR);
+                    TextClassificationSessionId _arg07 =
+                            (TextClassificationSessionId)
+                                    data.readTypedObject(TextClassificationSessionId.CREATOR);
                     data.enforceNoDataAvail();
                     onDestroyTextClassificationSession(_arg07);
                     return true;
                 case 8:
-                    TextClassificationSessionId _arg08 = (TextClassificationSessionId) data.readTypedObject(TextClassificationSessionId.CREATOR);
-                    TextLanguage.Request _arg17 = (TextLanguage.Request) data.readTypedObject(TextLanguage.Request.CREATOR);
-                    ITextClassifierCallback _arg24 = ITextClassifierCallback.Stub.asInterface(data.readStrongBinder());
+                    TextClassificationSessionId _arg08 =
+                            (TextClassificationSessionId)
+                                    data.readTypedObject(TextClassificationSessionId.CREATOR);
+                    TextLanguage.Request _arg17 =
+                            (TextLanguage.Request)
+                                    data.readTypedObject(TextLanguage.Request.CREATOR);
+                    ITextClassifierCallback _arg24 =
+                            ITextClassifierCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onDetectLanguage(_arg08, _arg17, _arg24);
                     return true;
                 case 9:
-                    TextClassificationSessionId _arg09 = (TextClassificationSessionId) data.readTypedObject(TextClassificationSessionId.CREATOR);
-                    ConversationActions.Request _arg18 = (ConversationActions.Request) data.readTypedObject(ConversationActions.Request.CREATOR);
-                    ITextClassifierCallback _arg25 = ITextClassifierCallback.Stub.asInterface(data.readStrongBinder());
+                    TextClassificationSessionId _arg09 =
+                            (TextClassificationSessionId)
+                                    data.readTypedObject(TextClassificationSessionId.CREATOR);
+                    ConversationActions.Request _arg18 =
+                            (ConversationActions.Request)
+                                    data.readTypedObject(ConversationActions.Request.CREATOR);
+                    ITextClassifierCallback _arg25 =
+                            ITextClassifierCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onSuggestConversationActions(_arg09, _arg18, _arg25);
                     return true;
@@ -245,7 +327,11 @@ public interface ITextClassifierService extends IInterface {
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
-            public void onSuggestSelection(TextClassificationSessionId sessionId, TextSelection.Request request, ITextClassifierCallback callback) throws RemoteException {
+            public void onSuggestSelection(
+                    TextClassificationSessionId sessionId,
+                    TextSelection.Request request,
+                    ITextClassifierCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -259,7 +345,11 @@ public interface ITextClassifierService extends IInterface {
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
-            public void onClassifyText(TextClassificationSessionId sessionId, TextClassification.Request request, ITextClassifierCallback callback) throws RemoteException {
+            public void onClassifyText(
+                    TextClassificationSessionId sessionId,
+                    TextClassification.Request request,
+                    ITextClassifierCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -273,7 +363,11 @@ public interface ITextClassifierService extends IInterface {
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
-            public void onGenerateLinks(TextClassificationSessionId sessionId, TextLinks.Request request, ITextClassifierCallback callback) throws RemoteException {
+            public void onGenerateLinks(
+                    TextClassificationSessionId sessionId,
+                    TextLinks.Request request,
+                    ITextClassifierCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -287,7 +381,9 @@ public interface ITextClassifierService extends IInterface {
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
-            public void onSelectionEvent(TextClassificationSessionId sessionId, SelectionEvent event) throws RemoteException {
+            public void onSelectionEvent(
+                    TextClassificationSessionId sessionId, SelectionEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -300,7 +396,9 @@ public interface ITextClassifierService extends IInterface {
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
-            public void onTextClassifierEvent(TextClassificationSessionId sessionId, TextClassifierEvent event) throws RemoteException {
+            public void onTextClassifierEvent(
+                    TextClassificationSessionId sessionId, TextClassifierEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -313,7 +411,9 @@ public interface ITextClassifierService extends IInterface {
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
-            public void onCreateTextClassificationSession(TextClassificationContext context, TextClassificationSessionId sessionId) throws RemoteException {
+            public void onCreateTextClassificationSession(
+                    TextClassificationContext context, TextClassificationSessionId sessionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -326,7 +426,8 @@ public interface ITextClassifierService extends IInterface {
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
-            public void onDestroyTextClassificationSession(TextClassificationSessionId sessionId) throws RemoteException {
+            public void onDestroyTextClassificationSession(TextClassificationSessionId sessionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -338,7 +439,11 @@ public interface ITextClassifierService extends IInterface {
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
-            public void onDetectLanguage(TextClassificationSessionId sessionId, TextLanguage.Request request, ITextClassifierCallback callback) throws RemoteException {
+            public void onDetectLanguage(
+                    TextClassificationSessionId sessionId,
+                    TextLanguage.Request request,
+                    ITextClassifierCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -352,7 +457,11 @@ public interface ITextClassifierService extends IInterface {
             }
 
             @Override // android.service.textclassifier.ITextClassifierService
-            public void onSuggestConversationActions(TextClassificationSessionId sessionId, ConversationActions.Request request, ITextClassifierCallback callback) throws RemoteException {
+            public void onSuggestConversationActions(
+                    TextClassificationSessionId sessionId,
+                    ConversationActions.Request request,
+                    ITextClassifierCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

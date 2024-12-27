@@ -6,13 +6,16 @@ import android.os.Build;
 import android.os.PowerSaveState;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.os.ProcessCpuTracker;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class ActivityManagerService$$ExternalSyntheticLambda14 implements Consumer {
+public final /* synthetic */ class ActivityManagerService$$ExternalSyntheticLambda14
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -31,7 +34,9 @@ public final /* synthetic */ class ActivityManagerService$$ExternalSyntheticLamb
                 ((ActivityManagerService) obj2).getClass();
                 IApplicationThread iApplicationThread = processRecord.mThread;
                 if (iApplicationThread != null) {
-                    if (Binder.isSystemServerBinderTrackerEnabled || Build.IS_DEBUGGABLE || processRecord.isDebuggable()) {
+                    if (Binder.isSystemServerBinderTrackerEnabled
+                            || Build.IS_DEBUGGABLE
+                            || processRecord.isDebuggable()) {
                         try {
                             iApplicationThread.startBinderTracking();
                             break;
@@ -45,7 +50,8 @@ public final /* synthetic */ class ActivityManagerService$$ExternalSyntheticLamb
             case 1:
                 ActivityManagerService activityManagerService = (ActivityManagerService) obj2;
                 activityManagerService.getClass();
-                activityManagerService.updateForceBackgroundCheck(((PowerSaveState) obj).batterySaverEnabled);
+                activityManagerService.updateForceBackgroundCheck(
+                        ((PowerSaveState) obj).batterySaverEnabled);
                 break;
             default:
                 ((ArrayList) obj2).add((ProcessCpuTracker.Stats) obj);

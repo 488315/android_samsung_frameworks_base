@@ -23,7 +23,8 @@ final class Protobuf {
         mergeFrom(message, reader, ExtensionRegistryLite.getEmptyRegistry());
     }
 
-    public <T> void mergeFrom(T message, Reader reader, ExtensionRegistryLite extensionRegistry) throws IOException {
+    public <T> void mergeFrom(T message, Reader reader, ExtensionRegistryLite extensionRegistry)
+            throws IOException {
         schemaFor((Protobuf) message).mergeFrom(message, reader, extensionRegistry);
     }
 
@@ -65,8 +66,7 @@ final class Protobuf {
         return this.schemaCache.put(messageType, schema);
     }
 
-    private Protobuf() {
-    }
+    private Protobuf() {}
 
     int getTotalSchemaSize() {
         int result = 0;

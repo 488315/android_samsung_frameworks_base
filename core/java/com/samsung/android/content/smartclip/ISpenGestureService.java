@@ -10,16 +10,15 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.InputEvent;
 import android.view.inputmethod.EditorInfo;
+
 import com.android.internal.inputmethod.IRemoteInputConnection;
-import com.samsung.android.content.smartclip.IAirGestureListener;
-import com.samsung.android.content.smartclip.IBleSpenChargeLockStateChangedListener;
-import com.samsung.android.content.smartclip.IInputMethodInfoChangeListener;
-import com.samsung.android.content.smartclip.ISpenGestureHoverListener;
+
 import java.io.FileDescriptor;
 
 /* loaded from: classes5.dex */
 public interface ISpenGestureService extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.content.smartclip.ISpenGestureService";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.content.smartclip.ISpenGestureService";
 
     String getBleSpenAddress() throws RemoteException;
 
@@ -39,9 +38,11 @@ public interface ISpenGestureService extends IInterface {
 
     Bundle getScrollableViewInfo(Rect rect, int i, IBinder iBinder) throws RemoteException;
 
-    SemSmartClipDataRepository getSmartClipDataByScreenRect(Rect rect, IBinder iBinder, int i, int i2) throws RemoteException;
+    SemSmartClipDataRepository getSmartClipDataByScreenRect(
+            Rect rect, IBinder iBinder, int i, int i2) throws RemoteException;
 
-    void injectInputEvent(int i, int i2, InputEvent[] inputEventArr, boolean z, IBinder iBinder) throws RemoteException;
+    void injectInputEvent(int i, int i2, InputEvent[] inputEventArr, boolean z, IBinder iBinder)
+            throws RemoteException;
 
     boolean isSpenInserted() throws RemoteException;
 
@@ -57,11 +58,15 @@ public interface ISpenGestureService extends IInterface {
 
     void registerAirGestureListener(IAirGestureListener iAirGestureListener) throws RemoteException;
 
-    void registerBleSpenChargeLockStateChangedListener(IBleSpenChargeLockStateChangedListener iBleSpenChargeLockStateChangedListener) throws RemoteException;
+    void registerBleSpenChargeLockStateChangedListener(
+            IBleSpenChargeLockStateChangedListener iBleSpenChargeLockStateChangedListener)
+            throws RemoteException;
 
-    void registerHoverListener(ISpenGestureHoverListener iSpenGestureHoverListener) throws RemoteException;
+    void registerHoverListener(ISpenGestureHoverListener iSpenGestureHoverListener)
+            throws RemoteException;
 
-    void registerInputMethodInfoChangeListener(IInputMethodInfoChangeListener iInputMethodInfoChangeListener) throws RemoteException;
+    void registerInputMethodInfoChangeListener(
+            IInputMethodInfoChangeListener iInputMethodInfoChangeListener) throws RemoteException;
 
     void resetPenAttachSound(String str) throws RemoteException;
 
@@ -71,15 +76,19 @@ public interface ISpenGestureService extends IInterface {
 
     void saveBleSpenLogFile(byte[] bArr) throws RemoteException;
 
-    Bitmap screenshot(int i, int i2, boolean z, Rect rect, int i3, int i4, boolean z2) throws RemoteException;
+    Bitmap screenshot(int i, int i2, boolean z, Rect rect, int i3, int i4, boolean z2)
+            throws RemoteException;
 
-    void sendSmartClipRemoteRequestResult(SmartClipRemoteRequestResult smartClipRemoteRequestResult) throws RemoteException;
+    void sendSmartClipRemoteRequestResult(SmartClipRemoteRequestResult smartClipRemoteRequestResult)
+            throws RemoteException;
 
     void setBleSpenAddress(String str) throws RemoteException;
 
     void setBleSpenCmfCode(String str) throws RemoteException;
 
-    void setCurrentInputInfo(IRemoteInputConnection iRemoteInputConnection, EditorInfo editorInfo, int i) throws RemoteException;
+    void setCurrentInputInfo(
+            IRemoteInputConnection iRemoteInputConnection, EditorInfo editorInfo, int i)
+            throws RemoteException;
 
     void setHoverStayDetectEnabled(boolean z) throws RemoteException;
 
@@ -89,7 +98,8 @@ public interface ISpenGestureService extends IInterface {
 
     void setPenDetachSound(String str, FileDescriptor fileDescriptor) throws RemoteException;
 
-    void setPenHoverIcon(String str, FileDescriptor fileDescriptor, float f, float f2) throws RemoteException;
+    void setPenHoverIcon(String str, FileDescriptor fileDescriptor, float f, float f2)
+            throws RemoteException;
 
     void setScreenOffDoubleTabTime() throws RemoteException;
 
@@ -103,67 +113,76 @@ public interface ISpenGestureService extends IInterface {
 
     void showTouchPointer(boolean z) throws RemoteException;
 
-    void unregisterAirGestureListener(IAirGestureListener iAirGestureListener) throws RemoteException;
+    void unregisterAirGestureListener(IAirGestureListener iAirGestureListener)
+            throws RemoteException;
 
-    void unregisterBleSpenChargeLockStateChangedListener(IBleSpenChargeLockStateChangedListener iBleSpenChargeLockStateChangedListener) throws RemoteException;
+    void unregisterBleSpenChargeLockStateChangedListener(
+            IBleSpenChargeLockStateChangedListener iBleSpenChargeLockStateChangedListener)
+            throws RemoteException;
 
-    void unregisterHoverListener(ISpenGestureHoverListener iSpenGestureHoverListener) throws RemoteException;
+    void unregisterHoverListener(ISpenGestureHoverListener iSpenGestureHoverListener)
+            throws RemoteException;
 
-    void unregisterInputMethodInfoChangeListener(IInputMethodInfoChangeListener iInputMethodInfoChangeListener) throws RemoteException;
+    void unregisterInputMethodInfoChangeListener(
+            IInputMethodInfoChangeListener iInputMethodInfoChangeListener) throws RemoteException;
 
     void writeBleSpenCommand(String str) throws RemoteException;
 
     public static class Default implements ISpenGestureService {
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public SemSmartClipDataRepository getSmartClipDataByScreenRect(Rect rect, IBinder skipWindowToken, int extractionMode, int windowTargetingType) throws RemoteException {
+        public SemSmartClipDataRepository getSmartClipDataByScreenRect(
+                Rect rect, IBinder skipWindowToken, int extractionMode, int windowTargetingType)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void sendSmartClipRemoteRequestResult(SmartClipRemoteRequestResult result) throws RemoteException {
-        }
+        public void sendSmartClipRemoteRequestResult(SmartClipRemoteRequestResult result)
+                throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void injectInputEvent(int targetX, int targetY, InputEvent[] inputEvents, boolean waitUntilConsume, IBinder skipWindowToken) throws RemoteException {
-        }
+        public void injectInputEvent(
+                int targetX,
+                int targetY,
+                InputEvent[] inputEvents,
+                boolean waitUntilConsume,
+                IBinder skipWindowToken)
+                throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public Bundle getScrollableAreaInfo(Rect rect, IBinder skipWindowToken) throws RemoteException {
+        public Bundle getScrollableAreaInfo(Rect rect, IBinder skipWindowToken)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public Bundle getScrollableViewInfo(Rect rect, int viewHash, IBinder skipWindowToken) throws RemoteException {
+        public Bundle getScrollableViewInfo(Rect rect, int viewHash, IBinder skipWindowToken)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setHoverStayDetectEnabled(boolean enable) throws RemoteException {
-        }
+        public void setHoverStayDetectEnabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setHoverStayValues(int x, int y, int hoverTime) throws RemoteException {
-        }
+        public void setHoverStayValues(int x, int y, int hoverTime) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void registerHoverListener(ISpenGestureHoverListener listener) throws RemoteException {
-        }
+        public void registerHoverListener(ISpenGestureHoverListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void unregisterHoverListener(ISpenGestureHoverListener listener) throws RemoteException {
-        }
+        public void unregisterHoverListener(ISpenGestureHoverListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setSpenPowerSavingModeEnabled(boolean enable) throws RemoteException {
-        }
+        public void setSpenPowerSavingModeEnabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void showTouchPointer(boolean isShow) throws RemoteException {
-        }
+        public void showTouchPointer(boolean isShow) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setSpenInsertionState(boolean isInserted) throws RemoteException {
-        }
+        public void setSpenInsertionState(boolean isInserted) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
         public boolean isSpenInserted() throws RemoteException {
@@ -186,8 +205,7 @@ public interface ISpenGestureService extends IInterface {
         }
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setBleSpenAddress(String address) throws RemoteException {
-        }
+        public void setBleSpenAddress(String address) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
         public String getBleSpenCmfCode() throws RemoteException {
@@ -195,44 +213,38 @@ public interface ISpenGestureService extends IInterface {
         }
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setBleSpenCmfCode(String cmfCode) throws RemoteException {
-        }
+        public void setBleSpenCmfCode(String cmfCode) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void writeBleSpenCommand(String command) throws RemoteException {
-        }
+        public void writeBleSpenCommand(String command) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setSpenPdctLowSensitivityEnable() throws RemoteException {
-        }
+        public void setSpenPdctLowSensitivityEnable() throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void saveBleSpenLogFile(byte[] buffer) throws RemoteException {
-        }
+        public void saveBleSpenLogFile(byte[] buffer) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void notifyBleSpenChargeLockState(boolean isLocked) throws RemoteException {
-        }
+        public void notifyBleSpenChargeLockState(boolean isLocked) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void registerBleSpenChargeLockStateChangedListener(IBleSpenChargeLockStateChangedListener listner) throws RemoteException {
-        }
+        public void registerBleSpenChargeLockStateChangedListener(
+                IBleSpenChargeLockStateChangedListener listner) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void unregisterBleSpenChargeLockStateChangedListener(IBleSpenChargeLockStateChangedListener listner) throws RemoteException {
-        }
+        public void unregisterBleSpenChargeLockStateChangedListener(
+                IBleSpenChargeLockStateChangedListener listner) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void registerAirGestureListener(IAirGestureListener listener) throws RemoteException {
-        }
+        public void registerAirGestureListener(IAirGestureListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void unregisterAirGestureListener(IAirGestureListener listener) throws RemoteException {
-        }
+        public void unregisterAirGestureListener(IAirGestureListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void notifyAirGesture(String gesture) throws RemoteException {
-        }
+        public void notifyAirGesture(String gesture) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
         public int getScreenOffReason() throws RemoteException {
@@ -240,20 +252,22 @@ public interface ISpenGestureService extends IInterface {
         }
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setScreenOffReason(int reason) throws RemoteException {
-        }
+        public void setScreenOffReason(int reason) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void registerInputMethodInfoChangeListener(IInputMethodInfoChangeListener listener) throws RemoteException {
-        }
+        public void registerInputMethodInfoChangeListener(IInputMethodInfoChangeListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void unregisterInputMethodInfoChangeListener(IInputMethodInfoChangeListener listener) throws RemoteException {
-        }
+        public void unregisterInputMethodInfoChangeListener(IInputMethodInfoChangeListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setCurrentInputInfo(IRemoteInputConnection inputConnection, EditorInfo editorInfo, int missingMethodFlags) throws RemoteException {
-        }
+        public void setCurrentInputInfo(
+                IRemoteInputConnection inputConnection,
+                EditorInfo editorInfo,
+                int missingMethodFlags)
+                throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
         public EditorInfo getCurrentEditorInfo() throws RemoteException {
@@ -271,41 +285,43 @@ public interface ISpenGestureService extends IInterface {
         }
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void notifyKeyboardClosed() throws RemoteException {
-        }
+        public void notifyKeyboardClosed() throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public Bitmap screenshot(int displayId, int targetWindowType, boolean containsTargetSystemWindow, Rect sourceCrop, int width, int height, boolean useIdentityTransform) throws RemoteException {
+        public Bitmap screenshot(
+                int displayId,
+                int targetWindowType,
+                boolean containsTargetSystemWindow,
+                Rect sourceCrop,
+                int width,
+                int height,
+                boolean useIdentityTransform)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setPenHoverIcon(String pkgName, FileDescriptor fd, float hotspotX, float hotspotY) throws RemoteException {
-        }
+        public void setPenHoverIcon(
+                String pkgName, FileDescriptor fd, float hotspotX, float hotspotY)
+                throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void resetPenHoverIcon(String pkgName) throws RemoteException {
-        }
+        public void resetPenHoverIcon(String pkgName) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setPenAttachSound(String pkgName, FileDescriptor fd) throws RemoteException {
-        }
+        public void setPenAttachSound(String pkgName, FileDescriptor fd) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void resetPenAttachSound(String pkgName) throws RemoteException {
-        }
+        public void resetPenAttachSound(String pkgName) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setPenDetachSound(String pkgName, FileDescriptor fd) throws RemoteException {
-        }
+        public void setPenDetachSound(String pkgName, FileDescriptor fd) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void resetPenDetachSound(String pkgName) throws RemoteException {
-        }
+        public void resetPenDetachSound(String pkgName) throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
-        public void setScreenOffDoubleTabTime() throws RemoteException {
-        }
+        public void setScreenOffDoubleTabTime() throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureService
         public long getScreenOffDoubleTabTime() throws RemoteException {
@@ -318,7 +334,7 @@ public interface ISpenGestureService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpenGestureService {
+    public abstract static class Stub extends Binder implements ISpenGestureService {
         static final int TRANSACTION_getBleSpenAddress = 16;
         static final int TRANSACTION_getBleSpenCmfCode = 18;
         static final int TRANSACTION_getCurrentEditorInfo = 34;
@@ -491,7 +507,8 @@ public interface ISpenGestureService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISpenGestureService.DESCRIPTOR);
             }
@@ -506,12 +523,15 @@ public interface ISpenGestureService extends IInterface {
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
                     data.enforceNoDataAvail();
-                    SemSmartClipDataRepository _result = getSmartClipDataByScreenRect(_arg0, _arg1, _arg2, _arg3);
+                    SemSmartClipDataRepository _result =
+                            getSmartClipDataByScreenRect(_arg0, _arg1, _arg2, _arg3);
                     reply.writeNoException();
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 2:
-                    SmartClipRemoteRequestResult _arg02 = (SmartClipRemoteRequestResult) data.readTypedObject(SmartClipRemoteRequestResult.CREATOR);
+                    SmartClipRemoteRequestResult _arg02 =
+                            (SmartClipRemoteRequestResult)
+                                    data.readTypedObject(SmartClipRemoteRequestResult.CREATOR);
                     data.enforceNoDataAvail();
                     sendSmartClipRemoteRequestResult(_arg02);
                     reply.writeNoException();
@@ -558,13 +578,15 @@ public interface ISpenGestureService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 8:
-                    ISpenGestureHoverListener _arg08 = ISpenGestureHoverListener.Stub.asInterface(data.readStrongBinder());
+                    ISpenGestureHoverListener _arg08 =
+                            ISpenGestureHoverListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerHoverListener(_arg08);
                     reply.writeNoException();
                     return true;
                 case 9:
-                    ISpenGestureHoverListener _arg09 = ISpenGestureHoverListener.Stub.asInterface(data.readStrongBinder());
+                    ISpenGestureHoverListener _arg09 =
+                            ISpenGestureHoverListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterHoverListener(_arg09);
                     reply.writeNoException();
@@ -647,25 +669,31 @@ public interface ISpenGestureService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 24:
-                    IBleSpenChargeLockStateChangedListener _arg018 = IBleSpenChargeLockStateChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IBleSpenChargeLockStateChangedListener _arg018 =
+                            IBleSpenChargeLockStateChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerBleSpenChargeLockStateChangedListener(_arg018);
                     reply.writeNoException();
                     return true;
                 case 25:
-                    IBleSpenChargeLockStateChangedListener _arg019 = IBleSpenChargeLockStateChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IBleSpenChargeLockStateChangedListener _arg019 =
+                            IBleSpenChargeLockStateChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterBleSpenChargeLockStateChangedListener(_arg019);
                     reply.writeNoException();
                     return true;
                 case 26:
-                    IAirGestureListener _arg020 = IAirGestureListener.Stub.asInterface(data.readStrongBinder());
+                    IAirGestureListener _arg020 =
+                            IAirGestureListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerAirGestureListener(_arg020);
                     reply.writeNoException();
                     return true;
                 case 27:
-                    IAirGestureListener _arg021 = IAirGestureListener.Stub.asInterface(data.readStrongBinder());
+                    IAirGestureListener _arg021 =
+                            IAirGestureListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterAirGestureListener(_arg021);
                     reply.writeNoException();
@@ -688,19 +716,24 @@ public interface ISpenGestureService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 31:
-                    IInputMethodInfoChangeListener _arg024 = IInputMethodInfoChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodInfoChangeListener _arg024 =
+                            IInputMethodInfoChangeListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerInputMethodInfoChangeListener(_arg024);
                     reply.writeNoException();
                     return true;
                 case 32:
-                    IInputMethodInfoChangeListener _arg025 = IInputMethodInfoChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodInfoChangeListener _arg025 =
+                            IInputMethodInfoChangeListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterInputMethodInfoChangeListener(_arg025);
                     reply.writeNoException();
                     return true;
                 case 33:
-                    IRemoteInputConnection _arg026 = IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
+                    IRemoteInputConnection _arg026 =
+                            IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
                     EditorInfo _arg16 = (EditorInfo) data.readTypedObject(EditorInfo.CREATOR);
                     int _arg25 = data.readInt();
                     data.enforceNoDataAvail();
@@ -735,7 +768,8 @@ public interface ISpenGestureService extends IInterface {
                     int _arg5 = data.readInt();
                     boolean _arg6 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    Bitmap _result13 = screenshot(_arg027, _arg17, _arg26, _arg33, _arg42, _arg5, _arg6);
+                    Bitmap _result13 =
+                            screenshot(_arg027, _arg17, _arg26, _arg33, _arg42, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeTypedObject(_result13, 1);
                     return true;
@@ -811,7 +845,9 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public SemSmartClipDataRepository getSmartClipDataByScreenRect(Rect rect, IBinder skipWindowToken, int extractionMode, int windowTargetingType) throws RemoteException {
+            public SemSmartClipDataRepository getSmartClipDataByScreenRect(
+                    Rect rect, IBinder skipWindowToken, int extractionMode, int windowTargetingType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -822,7 +858,9 @@ public interface ISpenGestureService extends IInterface {
                     _data.writeInt(windowTargetingType);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    SemSmartClipDataRepository _result = (SemSmartClipDataRepository) _reply.readTypedObject(SemSmartClipDataRepository.CREATOR);
+                    SemSmartClipDataRepository _result =
+                            (SemSmartClipDataRepository)
+                                    _reply.readTypedObject(SemSmartClipDataRepository.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -831,7 +869,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void sendSmartClipRemoteRequestResult(SmartClipRemoteRequestResult result) throws RemoteException {
+            public void sendSmartClipRemoteRequestResult(SmartClipRemoteRequestResult result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -846,7 +885,13 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void injectInputEvent(int targetX, int targetY, InputEvent[] inputEvents, boolean waitUntilConsume, IBinder skipWindowToken) throws RemoteException {
+            public void injectInputEvent(
+                    int targetX,
+                    int targetY,
+                    InputEvent[] inputEvents,
+                    boolean waitUntilConsume,
+                    IBinder skipWindowToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -865,7 +910,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public Bundle getScrollableAreaInfo(Rect rect, IBinder skipWindowToken) throws RemoteException {
+            public Bundle getScrollableAreaInfo(Rect rect, IBinder skipWindowToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -883,7 +929,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public Bundle getScrollableViewInfo(Rect rect, int viewHash, IBinder skipWindowToken) throws RemoteException {
+            public Bundle getScrollableViewInfo(Rect rect, int viewHash, IBinder skipWindowToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -934,7 +981,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void registerHoverListener(ISpenGestureHoverListener listener) throws RemoteException {
+            public void registerHoverListener(ISpenGestureHoverListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -949,7 +997,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void unregisterHoverListener(ISpenGestureHoverListener listener) throws RemoteException {
+            public void unregisterHoverListener(ISpenGestureHoverListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1178,7 +1227,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void registerBleSpenChargeLockStateChangedListener(IBleSpenChargeLockStateChangedListener listner) throws RemoteException {
+            public void registerBleSpenChargeLockStateChangedListener(
+                    IBleSpenChargeLockStateChangedListener listner) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1193,7 +1243,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void unregisterBleSpenChargeLockStateChangedListener(IBleSpenChargeLockStateChangedListener listner) throws RemoteException {
+            public void unregisterBleSpenChargeLockStateChangedListener(
+                    IBleSpenChargeLockStateChangedListener listner) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1208,7 +1259,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void registerAirGestureListener(IAirGestureListener listener) throws RemoteException {
+            public void registerAirGestureListener(IAirGestureListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1223,7 +1275,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void unregisterAirGestureListener(IAirGestureListener listener) throws RemoteException {
+            public void unregisterAirGestureListener(IAirGestureListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1284,7 +1337,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void registerInputMethodInfoChangeListener(IInputMethodInfoChangeListener listener) throws RemoteException {
+            public void registerInputMethodInfoChangeListener(
+                    IInputMethodInfoChangeListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1299,7 +1353,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void unregisterInputMethodInfoChangeListener(IInputMethodInfoChangeListener listener) throws RemoteException {
+            public void unregisterInputMethodInfoChangeListener(
+                    IInputMethodInfoChangeListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1314,7 +1369,11 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void setCurrentInputInfo(IRemoteInputConnection inputConnection, EditorInfo editorInfo, int missingMethodFlags) throws RemoteException {
+            public void setCurrentInputInfo(
+                    IRemoteInputConnection inputConnection,
+                    EditorInfo editorInfo,
+                    int missingMethodFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1354,7 +1413,8 @@ public interface ISpenGestureService extends IInterface {
                     _data.writeInterfaceToken(ISpenGestureService.DESCRIPTOR);
                     this.mRemote.transact(35, _data, _reply, 0);
                     _reply.readException();
-                    IRemoteInputConnection _result = IRemoteInputConnection.Stub.asInterface(_reply.readStrongBinder());
+                    IRemoteInputConnection _result =
+                            IRemoteInputConnection.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1393,7 +1453,15 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public Bitmap screenshot(int displayId, int targetWindowType, boolean containsTargetSystemWindow, Rect sourceCrop, int width, int height, boolean useIdentityTransform) throws RemoteException {
+            public Bitmap screenshot(
+                    int displayId,
+                    int targetWindowType,
+                    boolean containsTargetSystemWindow,
+                    Rect sourceCrop,
+                    int width,
+                    int height,
+                    boolean useIdentityTransform)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1416,7 +1484,9 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void setPenHoverIcon(String pkgName, FileDescriptor fd, float hotspotX, float hotspotY) throws RemoteException {
+            public void setPenHoverIcon(
+                    String pkgName, FileDescriptor fd, float hotspotX, float hotspotY)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1449,7 +1519,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void setPenAttachSound(String pkgName, FileDescriptor fd) throws RemoteException {
+            public void setPenAttachSound(String pkgName, FileDescriptor fd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1480,7 +1551,8 @@ public interface ISpenGestureService extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.ISpenGestureService
-            public void setPenDetachSound(String pkgName, FileDescriptor fd) throws RemoteException {
+            public void setPenDetachSound(String pkgName, FileDescriptor fd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

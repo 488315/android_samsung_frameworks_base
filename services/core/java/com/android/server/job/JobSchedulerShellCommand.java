@@ -7,11 +7,12 @@ import android.net.util.NetworkConstants;
 import android.os.Binder;
 import android.os.UserHandle;
 import android.provider.DeviceConfig;
+
 import com.android.modules.utils.BasicShellCommandHandler;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
-import com.android.server.job.JobSchedulerService;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,7 +27,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         boolean z = true;
         if (!"on".equals(nextArgRequired)) {
             if (!"off".equals(nextArgRequired)) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(getErrPrintWriter(), "Error: unknown option ", nextArgRequired);
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(
+                        getErrPrintWriter(), "Error: unknown option ", nextArgRequired);
                 return 1;
             }
             z = false;
@@ -35,11 +37,13 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         try {
             JobSchedulerService jobSchedulerService = this.mInternal;
             synchronized (jobSchedulerService.mLock) {
-                JobSchedulerService.ConstantsObserver constantsObserver = jobSchedulerService.mConstantsObserver;
+                JobSchedulerService.ConstantsObserver constantsObserver =
+                        jobSchedulerService.mConstantsObserver;
                 if (!z || constantsObserver.mCacheConfigChanges) {
                     constantsObserver.mLastPropertiesPulled = null;
                 } else {
-                    constantsObserver.mLastPropertiesPulled = DeviceConfig.getProperties("jobscheduler", new String[0]);
+                    constantsObserver.mLastPropertiesPulled =
+                            DeviceConfig.getProperties("jobscheduler", new String[0]);
                 }
                 constantsObserver.mCacheConfigChanges = z;
             }
@@ -53,25 +57,25 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
     }
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Failed to find switch 'out' block (already processed)
-        	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.calcSwitchOut(SwitchRegionMaker.java:202)
-        	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.process(SwitchRegionMaker.java:61)
-        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:115)
-        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
-        	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:94)
-        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:109)
-        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
-        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.makeEndlessLoop(LoopRegionMaker.java:281)
-        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:64)
-        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:92)
-        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
-        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.makeEndlessLoop(LoopRegionMaker.java:281)
-        	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:64)
-        	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:92)
-        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
-        	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:49)
-        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
-        */
+    jadx.core.utils.exceptions.JadxRuntimeException: Failed to find switch 'out' block (already processed)
+    	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.calcSwitchOut(SwitchRegionMaker.java:202)
+    	at jadx.core.dex.visitors.regions.maker.SwitchRegionMaker.process(SwitchRegionMaker.java:61)
+    	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:115)
+    	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
+    	at jadx.core.dex.visitors.regions.maker.IfRegionMaker.process(IfRegionMaker.java:94)
+    	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:109)
+    	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
+    	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.makeEndlessLoop(LoopRegionMaker.java:281)
+    	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:64)
+    	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:92)
+    	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
+    	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.makeEndlessLoop(LoopRegionMaker.java:281)
+    	at jadx.core.dex.visitors.regions.maker.LoopRegionMaker.process(LoopRegionMaker.java:64)
+    	at jadx.core.dex.visitors.regions.maker.RegionMaker.traverse(RegionMaker.java:92)
+    	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeRegion(RegionMaker.java:69)
+    	at jadx.core.dex.visitors.regions.maker.RegionMaker.makeMthRegion(RegionMaker.java:49)
+    	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:25)
+    */
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public final int cancelJob(java.io.PrintWriter r14) {
         /*
@@ -179,7 +183,9 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
             android.os.Binder.restoreCallingIdentity(r11)
             throw r13
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.JobSchedulerShellCommand.cancelJob(java.io.PrintWriter):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.job.JobSchedulerShellCommand.cancelJob(java.io.PrintWriter):int");
     }
 
     public final void checkPermission(String str) {
@@ -189,7 +195,9 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
     public final void checkPermission(String str, String str2) {
         int callingUid = Binder.getCallingUid();
         if (callingUid != 0 && this.mPM.checkUidPermission(str2, callingUid) != 0) {
-            throw new SecurityException(AccessibilityManagerService$$ExternalSyntheticOutline0.m(callingUid, "Uid ", " not permitted to ", str));
+            throw new SecurityException(
+                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                            callingUid, "Uid ", " not permitted to ", str));
         }
     }
 
@@ -211,7 +219,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                 }
             }
             if (!nextOption.equals("-o") && !nextOption.equals("--option")) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Error: unknown option '", nextOption, "'");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        printWriter, "Error: unknown option '", nextOption, "'");
                 return -1;
             }
             String nextArgRequired = getNextArgRequired();
@@ -276,10 +285,14 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         nextArgRequired.getClass();
         switch (nextArgRequired) {
             case "android.app.job.enforce_minimum_time_windows":
-                printWriter.println(com.android.internal.hidden_from_bootclasspath.android.app.job.Flags.enforceMinimumTimeWindows());
+                printWriter.println(
+                        com.android.internal.hidden_from_bootclasspath.android.app.job.Flags
+                                .enforceMinimumTimeWindows());
                 break;
             case "android.app.job.job_debug_info_apis":
-                printWriter.println(com.android.internal.hidden_from_bootclasspath.android.app.job.Flags.jobDebugInfoApis());
+                printWriter.println(
+                        com.android.internal.hidden_from_bootclasspath.android.app.job.Flags
+                                .jobDebugInfoApis());
                 break;
             case "com.android.server.job.batch_connectivity_jobs_per_network":
                 Flags.batchConnectivityJobsPerNetwork();
@@ -290,7 +303,9 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                 printWriter.println(false);
                 break;
             case "android.app.job.backup_jobs_exemption":
-                printWriter.println(com.android.internal.hidden_from_bootclasspath.android.app.job.Flags.backupJobsExemption());
+                printWriter.println(
+                        com.android.internal.hidden_from_bootclasspath.android.app.job.Flags
+                                .backupJobsExemption());
                 break;
             case "com.android.server.job.batch_active_bucket_jobs":
                 Flags.batchActiveBucketJobs();
@@ -310,7 +325,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         try {
             JobSchedulerService jobSchedulerService = this.mInternal;
             synchronized (jobSchedulerService.mLock) {
-                DeviceConfig.Properties properties = jobSchedulerService.mConstantsObserver.mLastPropertiesPulled;
+                DeviceConfig.Properties properties =
+                        jobSchedulerService.mConstantsObserver.mLastPropertiesPulled;
                 str = null;
                 if (properties != null) {
                     str = properties.getString(nextArgRequired, (String) null);
@@ -336,7 +352,9 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                 int parseInt = Integer.parseInt(getNextArgRequired());
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    int estimatedNetworkBytes = this.mInternal.getEstimatedNetworkBytes(currentUser, parseInt, i, printWriter, nextArgRequired, str);
+                    int estimatedNetworkBytes =
+                            this.mInternal.getEstimatedNetworkBytes(
+                                    currentUser, parseInt, i, printWriter, nextArgRequired, str);
                     printError(estimatedNetworkBytes, currentUser, parseInt, nextArgRequired, str);
                     return estimatedNetworkBytes;
                 } finally {
@@ -386,7 +404,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                     i2 = UserHandle.parseUserArg(getNextArgRequired());
                     break;
                 default:
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Error: unknown option '", nextOption, "'");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter, "Error: unknown option '", nextOption, "'");
                     return -1;
             }
         }
@@ -406,7 +425,9 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                 int parseInt = Integer.parseInt(getNextArgRequired());
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    int jobState = this.mInternal.getJobState(printWriter, nextArgRequired, currentUser, str, parseInt);
+                    int jobState =
+                            this.mInternal.getJobState(
+                                    printWriter, nextArgRequired, currentUser, str, parseInt);
                     printError(jobState, currentUser, parseInt, nextArgRequired, str);
                     return jobState;
                 } finally {
@@ -456,7 +477,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                     i = UserHandle.parseUserArg(getNextArgRequired());
                     break;
                 default:
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Error: unknown option '", nextOption, "'");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter, "Error: unknown option '", nextOption, "'");
                     return -1;
             }
         }
@@ -476,8 +498,11 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                 int parseInt = Integer.parseInt(getNextArgRequired());
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    int transferredNetworkBytes = this.mInternal.getTransferredNetworkBytes(currentUser, parseInt, i, printWriter, nextArgRequired, str);
-                    printError(transferredNetworkBytes, currentUser, parseInt, nextArgRequired, str);
+                    int transferredNetworkBytes =
+                            this.mInternal.getTransferredNetworkBytes(
+                                    currentUser, parseInt, i, printWriter, nextArgRequired, str);
+                    printError(
+                            transferredNetworkBytes, currentUser, parseInt, nextArgRequired, str);
                     return transferredNetworkBytes;
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -526,7 +551,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                     i2 = UserHandle.parseUserArg(getNextArgRequired());
                     break;
                 default:
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Error: unknown option '", nextOption, "'");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter, "Error: unknown option '", nextOption, "'");
                     return -1;
             }
         }
@@ -538,7 +564,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         boolean z = true;
         if (!"on".equals(nextArgRequired)) {
             if (!"off".equals(nextArgRequired)) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(getErrPrintWriter(), "Error: unknown option ", nextArgRequired);
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(
+                        getErrPrintWriter(), "Error: unknown option ", nextArgRequired);
                 return 1;
             }
             z = false;
@@ -859,36 +886,188 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         outPrintWriter.println("Job scheduler (jobscheduler) commands:");
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
-        outPrintWriter.println("  run [-f | --force] [-s | --satisfied] [-u | --user USER_ID] [-n | --namespace NAMESPACE] PACKAGE JOB_ID");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Trigger immediate execution of a specific scheduled job. For historical", "    reasons, some constraints, such as battery, are ignored when this", "    command is called. If you don't want any constraints to be ignored,", "    include the -s flag.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Options:", "      -f or --force: run the job even if technical constraints such as", "         connectivity are not currently met. This is incompatible with -f ", "         and so an error will be reported if both are given.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      -n or --namespace: specify the namespace this job sits in; the default", "         is null (no namespace).", "      -s or --satisfied: run the job only if all constraints are met.", "         This is incompatible with -f and so an error will be reported");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "         if both are given.", "      -u or --user: specify which user's job is to be run; the default is", "         the primary or system user", "  stop [-u | --user USER_ID] [-n | --namespace NAMESPACE] [-s | --stop-reason STOP_REASON] [-i | --internal-stop-reason STOP_REASON] [PACKAGE] [JOB_ID]");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Trigger immediate stop of currently executing jobs using the specified", "    stop reasons.", "    Options:", "      -u or --user: specify which user's job is to be run; the default is");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "         all users", "      -n or --namespace: specify the namespace this job sits in; the default", "         is null (no namespace).", "      -s or --stop-reason: specify the stop reason given to the job.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "         Valid values are those that can be returned from", "         JobParameters.getStopReason().", "          The default value is STOP_REASON_USER.", "      -i or --internal-stop-reason: specify the internal stop reason.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "         JobScheduler will use for internal processing.", "         Valid values are those that can be returned from", "         JobParameters.getInternalStopReason().", "          The default value is INTERNAL_STOP_REASON_UNDEFINED.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  timeout [-u | --user USER_ID] [-n | --namespace NAMESPACE] [PACKAGE] [JOB_ID]", "    Trigger immediate timeout of currently executing jobs, as if their", "    execution timeout had expired.", "    This is the equivalent of calling `stop -s 3 -i 3`.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Options:", "      -u or --user: specify which user's job is to be run; the default is", "         all users", "      -n or --namespace: specify the namespace this job sits in; the default");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "         is null (no namespace).", "  cancel [-u | --user USER_ID] [-n | --namespace NAMESPACE] PACKAGE [JOB_ID]", "    Cancel a scheduled job.  If a job ID is not supplied, all jobs scheduled", "    by that package will be canceled.  USE WITH CAUTION.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Options:", "      -u or --user: specify which user's job is to be run; the default is", "         the primary or system user", "      -n or --namespace: specify the namespace this job sits in; the default");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "         is null (no namespace).", "  heartbeat [num]", "    No longer used.", "  cache-config-changes [on|off]");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Control caching the set of most recently processed config flags.", "    Off by default.  Turning on makes get-config-value useful.", "  monitor-battery [on|off]", "    Control monitoring of all battery changes.  Off by default.  Turning");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    on makes get-battery-seq useful.", "  enable-flex-policy --option <option>", "    Enable flex policy with the specified options. Supported options are", "    battery-not-low, charging, connectivity, idle.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Multiple enable options can be specified (e.g.", "    enable-flex-policy --option battery-not-low --option charging", "  disable-flex-policy", "    Turn off flex policy so that it does not affect job execution.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  reset-flex-policy", "    Resets the flex policy to its default state.", "  get-aconfig-flag-state FULL_FLAG_NAME", "    Return the state of the specified aconfig flag, if known. The flag name");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "         must be fully qualified.", "  get-battery-seq", "    Return the last battery update sequence number that was received.", "  get-battery-charging");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Return whether the battery is currently considered to be charging.", "  get-battery-not-low", "    Return whether the battery is currently considered to not be low.", "  get-config-value KEY");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Return the most recently processed and cached config value for the KEY.", "    Only useful if caching is turned on with cache-config-changes.", "  get-estimated-download-bytes [-u | --user USER_ID] [-n | --namespace NAMESPACE] PACKAGE JOB_ID", "    Return the most recent estimated download bytes for the job.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Options:", "      -u or --user: specify which user's job is to be run; the default is", "         the primary or system user", "  get-estimated-upload-bytes [-u | --user USER_ID] [-n | --namespace NAMESPACE] PACKAGE JOB_ID");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Return the most recent estimated upload bytes for the job.", "    Options:", "      -u or --user: specify which user's job is to be run; the default is", "         the primary or system user");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  get-storage-seq", "    Return the last storage update sequence number that was received.", "  get-storage-not-low", "    Return whether storage is currently considered to not be low.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  get-transferred-download-bytes [-u | --user USER_ID] [-n | --namespace NAMESPACE] PACKAGE JOB_ID", "    Return the most recent transferred download bytes for the job.", "    Options:", "      -u or --user: specify which user's job is to be run; the default is");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "         the primary or system user", "  get-transferred-upload-bytes [-u | --user USER_ID] [-n | --namespace NAMESPACE] PACKAGE JOB_ID", "    Return the most recent transferred upload bytes for the job.", "    Options:");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      -u or --user: specify which user's job is to be run; the default is", "         the primary or system user", "  get-job-state [-u | --user USER_ID] [-n | --namespace NAMESPACE] PACKAGE JOB_ID", "    Return the current state of a job, may be any combination of:");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      pending: currently on the pending list, waiting to be active", "      active: job is actively running", "      user-stopped: job can't run because its user is stopped", "      backing-up: job can't run because app is currently backing up its data");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      no-component: job can't run because its component is not available", "      ready: job is ready to run (all constraints satisfied or bypassed)", "      waiting: if nothing else above is printed, job not ready to run", "    Options:");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      -u or --user: specify which user's job is to be run; the default is", "         the primary or system user", "      -n or --namespace: specify the namespace this job sits in; the default", "         is null (no namespace).");
+        outPrintWriter.println(
+                "  run [-f | --force] [-s | --satisfied] [-u | --user USER_ID] [-n | --namespace"
+                    + " NAMESPACE] PACKAGE JOB_ID");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Trigger immediate execution of a specific scheduled job. For historical",
+                "    reasons, some constraints, such as battery, are ignored when this",
+                "    command is called. If you don't want any constraints to be ignored,",
+                "    include the -s flag.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Options:",
+                "      -f or --force: run the job even if technical constraints such as",
+                "         connectivity are not currently met. This is incompatible with -f ",
+                "         and so an error will be reported if both are given.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      -n or --namespace: specify the namespace this job sits in; the default",
+                "         is null (no namespace).",
+                "      -s or --satisfied: run the job only if all constraints are met.",
+                "         This is incompatible with -f and so an error will be reported");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "         if both are given.",
+                "      -u or --user: specify which user's job is to be run; the default is",
+                "         the primary or system user",
+                "  stop [-u | --user USER_ID] [-n | --namespace NAMESPACE] [-s | --stop-reason"
+                    + " STOP_REASON] [-i | --internal-stop-reason STOP_REASON] [PACKAGE] [JOB_ID]");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Trigger immediate stop of currently executing jobs using the specified",
+                "    stop reasons.",
+                "    Options:",
+                "      -u or --user: specify which user's job is to be run; the default is");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "         all users",
+                "      -n or --namespace: specify the namespace this job sits in; the default",
+                "         is null (no namespace).",
+                "      -s or --stop-reason: specify the stop reason given to the job.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "         Valid values are those that can be returned from",
+                "         JobParameters.getStopReason().",
+                "          The default value is STOP_REASON_USER.",
+                "      -i or --internal-stop-reason: specify the internal stop reason.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "         JobScheduler will use for internal processing.",
+                "         Valid values are those that can be returned from",
+                "         JobParameters.getInternalStopReason().",
+                "          The default value is INTERNAL_STOP_REASON_UNDEFINED.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  timeout [-u | --user USER_ID] [-n | --namespace NAMESPACE] [PACKAGE] [JOB_ID]",
+                "    Trigger immediate timeout of currently executing jobs, as if their",
+                "    execution timeout had expired.",
+                "    This is the equivalent of calling `stop -s 3 -i 3`.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Options:",
+                "      -u or --user: specify which user's job is to be run; the default is",
+                "         all users",
+                "      -n or --namespace: specify the namespace this job sits in; the default");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "         is null (no namespace).",
+                "  cancel [-u | --user USER_ID] [-n | --namespace NAMESPACE] PACKAGE [JOB_ID]",
+                "    Cancel a scheduled job.  If a job ID is not supplied, all jobs scheduled",
+                "    by that package will be canceled.  USE WITH CAUTION.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Options:",
+                "      -u or --user: specify which user's job is to be run; the default is",
+                "         the primary or system user",
+                "      -n or --namespace: specify the namespace this job sits in; the default");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "         is null (no namespace).",
+                "  heartbeat [num]",
+                "    No longer used.",
+                "  cache-config-changes [on|off]");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Control caching the set of most recently processed config flags.",
+                "    Off by default.  Turning on makes get-config-value useful.",
+                "  monitor-battery [on|off]",
+                "    Control monitoring of all battery changes.  Off by default.  Turning");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    on makes get-battery-seq useful.",
+                "  enable-flex-policy --option <option>",
+                "    Enable flex policy with the specified options. Supported options are",
+                "    battery-not-low, charging, connectivity, idle.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Multiple enable options can be specified (e.g.",
+                "    enable-flex-policy --option battery-not-low --option charging",
+                "  disable-flex-policy",
+                "    Turn off flex policy so that it does not affect job execution.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  reset-flex-policy",
+                "    Resets the flex policy to its default state.",
+                "  get-aconfig-flag-state FULL_FLAG_NAME",
+                "    Return the state of the specified aconfig flag, if known. The flag name");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "         must be fully qualified.",
+                "  get-battery-seq",
+                "    Return the last battery update sequence number that was received.",
+                "  get-battery-charging");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Return whether the battery is currently considered to be charging.",
+                "  get-battery-not-low",
+                "    Return whether the battery is currently considered to not be low.",
+                "  get-config-value KEY");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Return the most recently processed and cached config value for the KEY.",
+                "    Only useful if caching is turned on with cache-config-changes.",
+                "  get-estimated-download-bytes [-u | --user USER_ID] [-n | --namespace NAMESPACE]"
+                    + " PACKAGE JOB_ID",
+                "    Return the most recent estimated download bytes for the job.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Options:",
+                "      -u or --user: specify which user's job is to be run; the default is",
+                "         the primary or system user",
+                "  get-estimated-upload-bytes [-u | --user USER_ID] [-n | --namespace NAMESPACE]"
+                    + " PACKAGE JOB_ID");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Return the most recent estimated upload bytes for the job.",
+                "    Options:",
+                "      -u or --user: specify which user's job is to be run; the default is",
+                "         the primary or system user");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  get-storage-seq",
+                "    Return the last storage update sequence number that was received.",
+                "  get-storage-not-low",
+                "    Return whether storage is currently considered to not be low.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  get-transferred-download-bytes [-u | --user USER_ID] [-n | --namespace"
+                    + " NAMESPACE] PACKAGE JOB_ID",
+                "    Return the most recent transferred download bytes for the job.",
+                "    Options:",
+                "      -u or --user: specify which user's job is to be run; the default is");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "         the primary or system user",
+                "  get-transferred-upload-bytes [-u | --user USER_ID] [-n | --namespace NAMESPACE]"
+                    + " PACKAGE JOB_ID",
+                "    Return the most recent transferred upload bytes for the job.",
+                "    Options:");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      -u or --user: specify which user's job is to be run; the default is",
+                "         the primary or system user",
+                "  get-job-state [-u | --user USER_ID] [-n | --namespace NAMESPACE] PACKAGE JOB_ID",
+                "    Return the current state of a job, may be any combination of:");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      pending: currently on the pending list, waiting to be active",
+                "      active: job is actively running",
+                "      user-stopped: job can't run because its user is stopped",
+                "      backing-up: job can't run because app is currently backing up its data");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      no-component: job can't run because its component is not available",
+                "      ready: job is ready to run (all constraints satisfied or bypassed)",
+                "      waiting: if nothing else above is printed, job not ready to run",
+                "    Options:");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      -u or --user: specify which user's job is to be run; the default is",
+                "         the primary or system user",
+                "      -n or --namespace: specify the namespace this job sits in; the default",
+                "         is null (no namespace).");
         outPrintWriter.println("  trigger-dock-state [idle|active]");
         outPrintWriter.println("    Trigger wireless charging dock state.  Active by default.");
         outPrintWriter.println();
@@ -948,7 +1127,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                 try {
                     JobSchedulerService jobSchedulerService = this.mInternal;
                     synchronized (jobSchedulerService.mLock) {
-                        jobSchedulerService.mQuotaController.clearAppStatsLocked(i, nextArgRequired);
+                        jobSchedulerService.mQuotaController.clearAppStatsLocked(
+                                i, nextArgRequired);
                     }
                     return 0;
                 } finally {
@@ -956,7 +1136,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                 }
             }
             if (!nextOption.equals("-u") && !nextOption.equals("--user")) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Error: unknown option '", nextOption, "'");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        printWriter, "Error: unknown option '", nextOption, "'");
                 return -1;
             }
             i = UserHandle.parseUserArg(getNextArgRequired());
@@ -983,8 +1164,11 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                 int parseInt = Integer.parseInt(getNextArgRequired());
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    int executeRunCommand = this.mInternal.executeRunCommand(currentUser, parseInt, nextArgRequired, str, z, z2);
-                    if (printError(executeRunCommand, currentUser, parseInt, nextArgRequired, str)) {
+                    int executeRunCommand =
+                            this.mInternal.executeRunCommand(
+                                    currentUser, parseInt, nextArgRequired, str, z, z2);
+                    if (printError(
+                            executeRunCommand, currentUser, parseInt, nextArgRequired, str)) {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         return executeRunCommand;
                     }
@@ -1079,7 +1263,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                     i = UserHandle.parseUserArg(getNextArgRequired());
                     break;
                 default:
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Error: unknown option '", nextOption, "'");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter, "Error: unknown option '", nextOption, "'");
                     return -1;
             }
         }
@@ -1105,7 +1290,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                 int parseInt = nextArg2 != null ? Integer.parseInt(nextArg2) : -1;
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    this.mInternal.executeStopCommand(printWriter, nextArg, i4, str, nextArg2 != null, parseInt, i2, i);
+                    this.mInternal.executeStopCommand(
+                            printWriter, nextArg, i4, str, nextArg2 != null, parseInt, i2, i);
                     return 0;
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1190,7 +1376,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                     i3 = UserHandle.parseUserArg(getNextArgRequired());
                     break;
                 default:
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Error: unknown option '", nextOption, "'");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter, "Error: unknown option '", nextOption, "'");
                     return -1;
             }
         }
@@ -1214,7 +1401,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                 int parseInt = nextArg2 != null ? Integer.parseInt(nextArg2) : -1;
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    this.mInternal.executeStopCommand(printWriter, nextArg, i2, str, nextArg2 != null, parseInt, 3, 3);
+                    this.mInternal.executeStopCommand(
+                            printWriter, nextArg, i2, str, nextArg2 != null, parseInt, 3, 3);
                     return 0;
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1263,7 +1451,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
                     i = UserHandle.parseUserArg(getNextArgRequired());
                     break;
                 default:
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Error: unknown option '", nextOption, "'");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter, "Error: unknown option '", nextOption, "'");
                     return -1;
             }
         }
@@ -1275,7 +1464,8 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         boolean z = true;
         if (!"idle".equals(nextArgRequired)) {
             if (!"active".equals(nextArgRequired)) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(getErrPrintWriter(), "Error: unknown option ", nextArgRequired);
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(
+                        getErrPrintWriter(), "Error: unknown option ", nextArgRequired);
                 return 1;
             }
             z = false;
@@ -1284,7 +1474,10 @@ public final class JobSchedulerShellCommand extends BasicShellCommandHandler {
         try {
             JobSchedulerService jobSchedulerService = this.mInternal;
             jobSchedulerService.getClass();
-            Intent intent = z ? new Intent("android.intent.action.DOCK_IDLE") : new Intent("android.intent.action.DOCK_ACTIVE");
+            Intent intent =
+                    z
+                            ? new Intent("android.intent.action.DOCK_IDLE")
+                            : new Intent("android.intent.action.DOCK_ACTIVE");
             intent.setPackage("android");
             intent.addFlags(1342177280);
             jobSchedulerService.getContext().sendBroadcastAsUser(intent, UserHandle.ALL);

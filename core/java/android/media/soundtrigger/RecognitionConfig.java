@@ -3,27 +3,30 @@ package android.media.soundtrigger;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class RecognitionConfig implements Parcelable {
-    public static final Parcelable.Creator<RecognitionConfig> CREATOR = new Parcelable.Creator<RecognitionConfig>() { // from class: android.media.soundtrigger.RecognitionConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionConfig createFromParcel(Parcel _aidl_source) {
-            RecognitionConfig _aidl_out = new RecognitionConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RecognitionConfig> CREATOR =
+            new Parcelable.Creator<RecognitionConfig>() { // from class:
+                // android.media.soundtrigger.RecognitionConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionConfig createFromParcel(Parcel _aidl_source) {
+                    RecognitionConfig _aidl_out = new RecognitionConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionConfig[] newArray(int _aidl_size) {
-            return new RecognitionConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionConfig[] newArray(int _aidl_size) {
+                    return new RecognitionConfig[_aidl_size];
+                }
+            };
     public byte[] data;
     public PhraseRecognitionExtra[] phraseRecognitionExtras;
     public boolean captureRequested = false;
@@ -70,7 +73,9 @@ public class RecognitionConfig implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.phraseRecognitionExtras = (PhraseRecognitionExtra[]) _aidl_parcel.createTypedArray(PhraseRecognitionExtra.CREATOR);
+            this.phraseRecognitionExtras =
+                    (PhraseRecognitionExtra[])
+                            _aidl_parcel.createTypedArray(PhraseRecognitionExtra.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -117,7 +122,14 @@ public class RecognitionConfig implements Parcelable {
             return false;
         }
         RecognitionConfig that = (RecognitionConfig) other;
-        if (Objects.deepEquals(Boolean.valueOf(this.captureRequested), Boolean.valueOf(that.captureRequested)) && Objects.deepEquals(this.phraseRecognitionExtras, that.phraseRecognitionExtras) && Objects.deepEquals(Integer.valueOf(this.audioCapabilities), Integer.valueOf(that.audioCapabilities)) && Objects.deepEquals(this.data, that.data)) {
+        if (Objects.deepEquals(
+                        Boolean.valueOf(this.captureRequested),
+                        Boolean.valueOf(that.captureRequested))
+                && Objects.deepEquals(this.phraseRecognitionExtras, that.phraseRecognitionExtras)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.audioCapabilities),
+                        Integer.valueOf(that.audioCapabilities))
+                && Objects.deepEquals(this.data, that.data)) {
             return true;
         }
         return false;
@@ -125,7 +137,13 @@ public class RecognitionConfig implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Boolean.valueOf(this.captureRequested), this.phraseRecognitionExtras, Integer.valueOf(this.audioCapabilities), this.data).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Boolean.valueOf(this.captureRequested),
+                                this.phraseRecognitionExtras,
+                                Integer.valueOf(this.audioCapabilities),
+                                this.data)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

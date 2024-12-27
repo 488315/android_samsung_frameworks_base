@@ -93,14 +93,16 @@ public class SemWifiApRestoreHelper {
 
     public static void setCurrentApConfiguration(Context context) {
         Log.i(TAG, "setCurrentApConfiguration() - Start");
-        SemWifiManager mSemWifiManager = (SemWifiManager) context.getSystemService(Context.SEM_WIFI_SERVICE);
+        SemWifiManager mSemWifiManager =
+                (SemWifiManager) context.getSystemService(Context.SEM_WIFI_SERVICE);
         SoftApConfiguration softApConfiguration = mSemWifiManager.getSoftApConfiguration();
         setSSID(context, softApConfiguration.getSsid());
         setPassword(context, softApConfiguration.getPassphrase());
         setSecurityTypeIndex(context, softApConfiguration.getSecurityType());
     }
 
-    public static void setApConfiguration(Context context, SoftApConfiguration softApConfiguration) {
+    public static void setApConfiguration(
+            Context context, SoftApConfiguration softApConfiguration) {
         Log.i(TAG, "setApConfiguration(softApConfiguration) - Start");
         setSSID(context, softApConfiguration.getSsid());
         setPassword(context, softApConfiguration.getPassphrase());

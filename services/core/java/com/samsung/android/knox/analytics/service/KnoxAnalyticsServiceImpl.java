@@ -2,6 +2,7 @@ package com.samsung.android.knox.analytics.service;
 
 import android.content.Context;
 import android.os.Binder;
+
 import com.samsung.android.knox.analytics.IKnoxAnalyticsService;
 import com.samsung.android.knox.analytics.KnoxAnalyticsData;
 import com.samsung.android.knox.analytics.activation.ActivationMonitor;
@@ -18,28 +19,29 @@ public final class KnoxAnalyticsServiceImpl extends IKnoxAnalyticsService.Stub {
     public EventQueue mEventQueue;
     public boolean mIsKnoxAnalyticsActivated = true;
 
-    public KnoxAnalyticsServiceImpl(Context context, ActivationMonitor activationMonitor, EventQueue eventQueue) {
-        IActivationObserver iActivationObserver = new IActivationObserver() { // from class: com.samsung.android.knox.analytics.service.KnoxAnalyticsServiceImpl.1
-            @Override // com.samsung.android.knox.analytics.activation.model.IActivationObserver
-            public final void onKnoxAnalyticsActivation(boolean z) {
-                Log.d(KnoxAnalyticsServiceImpl.TAG, "onKnoxAnalyticsActivation()");
-                KnoxAnalyticsServiceImpl.this.mIsKnoxAnalyticsActivated = true;
-            }
+    public KnoxAnalyticsServiceImpl(
+            Context context, ActivationMonitor activationMonitor, EventQueue eventQueue) {
+        IActivationObserver iActivationObserver =
+                new IActivationObserver() { // from class:
+                                            // com.samsung.android.knox.analytics.service.KnoxAnalyticsServiceImpl.1
+                    @Override // com.samsung.android.knox.analytics.activation.model.IActivationObserver
+                    public final void onKnoxAnalyticsActivation(boolean z) {
+                        Log.d(KnoxAnalyticsServiceImpl.TAG, "onKnoxAnalyticsActivation()");
+                        KnoxAnalyticsServiceImpl.this.mIsKnoxAnalyticsActivated = true;
+                    }
 
-            @Override // com.samsung.android.knox.analytics.activation.model.IActivationObserver
-            public final void onKnoxAnalyticsDeactivation(boolean z) {
-                Log.d(KnoxAnalyticsServiceImpl.TAG, "onKnoxAnalyticsDeactivation()");
-                KnoxAnalyticsServiceImpl.this.mIsKnoxAnalyticsActivated = false;
-            }
+                    @Override // com.samsung.android.knox.analytics.activation.model.IActivationObserver
+                    public final void onKnoxAnalyticsDeactivation(boolean z) {
+                        Log.d(KnoxAnalyticsServiceImpl.TAG, "onKnoxAnalyticsDeactivation()");
+                        KnoxAnalyticsServiceImpl.this.mIsKnoxAnalyticsActivated = false;
+                    }
 
-            @Override // com.samsung.android.knox.analytics.activation.model.IActivationObserver
-            public final void onStatusChanged(int i, boolean z, String str) {
-            }
+                    @Override // com.samsung.android.knox.analytics.activation.model.IActivationObserver
+                    public final void onStatusChanged(int i, boolean z, String str) {}
 
-            @Override // com.samsung.android.knox.analytics.activation.model.IActivationObserver
-            public final void onTriggerChanged(int i, boolean z, String str) {
-            }
-        };
+                    @Override // com.samsung.android.knox.analytics.activation.model.IActivationObserver
+                    public final void onTriggerChanged(int i, boolean z, String str) {}
+                };
         this.mActivationObserver = iActivationObserver;
         this.mContext = context;
         this.mEventQueue = eventQueue;
@@ -55,7 +57,8 @@ public final class KnoxAnalyticsServiceImpl extends IKnoxAnalyticsService.Stub {
             Log.d(TAG, "KnoxAnalytics has been shutdown, can't log.");
             return;
         }
-        SecurityUtils.enforceCallingPermissionForLog(this.mContext, Binder.getCallingPid(), Binder.getCallingUid());
+        SecurityUtils.enforceCallingPermissionForLog(
+                this.mContext, Binder.getCallingPid(), Binder.getCallingUid());
         EventQueue eventQueue = this.mEventQueue;
         if (eventQueue != null) {
             eventQueue.postMessage(1, knoxAnalyticsData);
@@ -64,7 +67,8 @@ public final class KnoxAnalyticsServiceImpl extends IKnoxAnalyticsService.Stub {
         }
     }
 
-    public final void log(com.samsung.android.knox.knoxanalyticsproxy.KnoxAnalyticsData knoxAnalyticsData) {
+    public final void log(
+            com.samsung.android.knox.knoxanalyticsproxy.KnoxAnalyticsData knoxAnalyticsData) {
         log(KnoxAnalyticsData.convertToKnoxAnalyticsSDK(knoxAnalyticsData));
     }
 }

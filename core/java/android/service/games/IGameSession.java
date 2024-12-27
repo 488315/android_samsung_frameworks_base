@@ -18,16 +18,14 @@ public interface IGameSession extends IInterface {
 
     public static class Default implements IGameSession {
         @Override // android.service.games.IGameSession
-        public void onDestroyed() throws RemoteException {
-        }
+        public void onDestroyed() throws RemoteException {}
 
         @Override // android.service.games.IGameSession
-        public void onTransientSystemBarVisibilityFromRevealGestureChanged(boolean visibleDueToGesture) throws RemoteException {
-        }
+        public void onTransientSystemBarVisibilityFromRevealGestureChanged(
+                boolean visibleDueToGesture) throws RemoteException {}
 
         @Override // android.service.games.IGameSession
-        public void onTaskFocusChanged(boolean focused) throws RemoteException {
-        }
+        public void onTaskFocusChanged(boolean focused) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +33,7 @@ public interface IGameSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGameSession {
+    public abstract static class Stub extends Binder implements IGameSession {
         static final int TRANSACTION_onDestroyed = 1;
         static final int TRANSACTION_onTaskFocusChanged = 3;
         static final int TRANSACTION_onTransientSystemBarVisibilityFromRevealGestureChanged = 2;
@@ -79,7 +77,8 @@ public interface IGameSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGameSession.DESCRIPTOR);
             }
@@ -134,7 +133,8 @@ public interface IGameSession extends IInterface {
             }
 
             @Override // android.service.games.IGameSession
-            public void onTransientSystemBarVisibilityFromRevealGestureChanged(boolean visibleDueToGesture) throws RemoteException {
+            public void onTransientSystemBarVisibilityFromRevealGestureChanged(
+                    boolean visibleDueToGesture) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IGameSession.DESCRIPTOR);

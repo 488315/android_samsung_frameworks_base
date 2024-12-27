@@ -3,26 +3,29 @@ package android.hardware.radio.modem;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class RadioCapability implements Parcelable {
-    public static final Parcelable.Creator<RadioCapability> CREATOR = new Parcelable.Creator<RadioCapability>() { // from class: android.hardware.radio.modem.RadioCapability.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioCapability createFromParcel(Parcel _aidl_source) {
-            RadioCapability _aidl_out = new RadioCapability();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RadioCapability> CREATOR =
+            new Parcelable.Creator<RadioCapability>() { // from class:
+                // android.hardware.radio.modem.RadioCapability.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioCapability createFromParcel(Parcel _aidl_source) {
+                    RadioCapability _aidl_out = new RadioCapability();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioCapability[] newArray(int _aidl_size) {
-            return new RadioCapability[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioCapability[] newArray(int _aidl_size) {
+                    return new RadioCapability[_aidl_size];
+                }
+            };
     public static final int PHASE_APPLY = 2;
     public static final int PHASE_CONFIGURED = 0;
     public static final int PHASE_FINISH = 4;

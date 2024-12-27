@@ -57,6 +57,11 @@ public final class BlackLevelPattern {
     }
 
     public String toString() {
-        return String.format("BlackLevelPattern([%d, %d], [%d, %d])", Integer.valueOf(this.mCfaOffsets[0]), Integer.valueOf(this.mCfaOffsets[1]), Integer.valueOf(this.mCfaOffsets[2]), Integer.valueOf(this.mCfaOffsets[3]));
+        return String.format(
+                "BlackLevelPattern([%d, %d], [%d, %d])",
+                Integer.valueOf(this.mCfaOffsets[0]),
+                Integer.valueOf(this.mCfaOffsets[1]),
+                Integer.valueOf(this.mCfaOffsets[2]),
+                Integer.valueOf(this.mCfaOffsets[3]));
     }
 }

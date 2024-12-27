@@ -23,11 +23,11 @@ import android.telecom.Logging.Session;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
+
 import com.samsung.android.wallpaper.Rune;
 import com.samsung.android.wallpaper.utils.WallpaperExtraBundleHelper;
 import com.samsung.android.wallpaper.utils.WhichChecker;
-import com.samsung.android.wallpaperbackup.BnRFileHelper;
-import com.samsung.android.wallpaperbackup.WallpaperUser;
+
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -65,14 +65,39 @@ public class WallpaperBackupRestoreManager {
         startBackupWallpaper(context, 1, basePath, source, 0, "", "");
     }
 
-    public void startBackupWallpaper(Context context, int which, String basePath, String source, int securityLevel, String sessionTime, String saveKey) {
-        startBackupWallpaper(context, "", which, basePath, source, securityLevel, sessionTime, saveKey);
+    public void startBackupWallpaper(
+            Context context,
+            int which,
+            String basePath,
+            String source,
+            int securityLevel,
+            String sessionTime,
+            String saveKey) {
+        startBackupWallpaper(
+                context, "", which, basePath, source, securityLevel, sessionTime, saveKey);
     }
 
-    public void startBackupWallpaper(Context context, String action, int which, String basePath, String source, int securityLevel, String sessionTime, String saveKey) {
+    public void startBackupWallpaper(
+            Context context,
+            String action,
+            int which,
+            String basePath,
+            String source,
+            int securityLevel,
+            String sessionTime,
+            String saveKey) {
         String action2;
         String basePath2 = basePath;
-        Slog.d(TAG, "startBackupWallpaper which = " + Integer.toHexString(which) + " action= " + action + " basePath=" + basePath2 + " source=" + source);
+        Slog.d(
+                TAG,
+                "startBackupWallpaper which = "
+                        + Integer.toHexString(which)
+                        + " action= "
+                        + action
+                        + " basePath="
+                        + basePath2
+                        + " source="
+                        + source);
         if (!TextUtils.isEmpty(action)) {
             action2 = action;
         } else if ((which & 1) != 0) {
@@ -89,25 +114,72 @@ public class WallpaperBackupRestoreManager {
             ResultCode err = ResultCode.INVALID_VALUE;
             extraResults.put(Integer.valueOf(which), err);
             Slog.d(TAG, "startBackupWallpaper is return because precondition fail");
-            sendResponse(context, which, action2, ResultCode.RESULT_FAIL, errorCode, BnRFileHelper.REQ_MINIMUM_SIZE, source, sessionTime, extraResults, null);
+            sendResponse(
+                    context,
+                    which,
+                    action2,
+                    ResultCode.RESULT_FAIL,
+                    errorCode,
+                    BnRFileHelper.REQ_MINIMUM_SIZE,
+                    source,
+                    sessionTime,
+                    extraResults,
+                    null);
             return;
         }
-        pushBackupFile(context, action2, which, basePath2, securityLevel, saveKey, sessionTime, source);
+        pushBackupFile(
+                context, action2, which, basePath2, securityLevel, saveKey, sessionTime, source);
     }
 
-    private void pushBackupFile(Context context, String action, int which, String basePath, int securityLevel, String saveKey, String sessionTime, String source) {
+    private void pushBackupFile(
+            Context context,
+            String action,
+            int which,
+            String basePath,
+            int securityLevel,
+            String saveKey,
+            String sessionTime,
+            String source) {
         ArrayList<WallpaperBNRHelper> helpers = new ArrayList<>();
-        WallpaperManager wallpaperManager = (WallpaperManager) context.getSystemService("wallpaper");
+        WallpaperManager wallpaperManager =
+                (WallpaperManager) context.getSystemService("wallpaper");
         for (int i = 0; i < this.mModeFlagSet.length; i++) {
             if (isSupportedScreen(this.mModeFlagSet[i], which)) {
-                if (BnRConstants.BNR_SOURCE_SCLOUD.equals(source) && wallpaperManager.isSystemAndLockPaired(this.mModeFlagSet[i]) && which == 2 && wallpaperManager.semGetWallpaperType(which) == 7) {
-                    Log.i(TAG, "pushBackupFile() : home and lock layered wallpaper is paired for mode " + this.mModeFlagSet[i] + ", backup home wallpaper");
+                if (BnRConstants.BNR_SOURCE_SCLOUD.equals(source)
+                        && wallpaperManager.isSystemAndLockPaired(this.mModeFlagSet[i])
+                        && which == 2
+                        && wallpaperManager.semGetWallpaperType(which) == 7) {
+                    Log.i(
+                            TAG,
+                            "pushBackupFile() : home and lock layered wallpaper is paired for mode "
+                                    + this.mModeFlagSet[i]
+                                    + ", backup home wallpaper");
                     int homeWhich = this.mModeFlagSet[i] | 1;
-                    WallpaperBNRHelper helper = new WallpaperBNRHelper(context, wallpaperManager, action, homeWhich, basePath, securityLevel, saveKey, sessionTime, source);
+                    WallpaperBNRHelper helper =
+                            new WallpaperBNRHelper(
+                                    context,
+                                    wallpaperManager,
+                                    action,
+                                    homeWhich,
+                                    basePath,
+                                    securityLevel,
+                                    saveKey,
+                                    sessionTime,
+                                    source);
                     helper.setWhich(this.mModeFlagSet[i] | which);
                     helpers.add(helper);
                 } else {
-                    helpers.add(new WallpaperBNRHelper(context, wallpaperManager, action, which | this.mModeFlagSet[i], basePath, securityLevel, saveKey, sessionTime, source));
+                    helpers.add(
+                            new WallpaperBNRHelper(
+                                    context,
+                                    wallpaperManager,
+                                    action,
+                                    which | this.mModeFlagSet[i],
+                                    basePath,
+                                    securityLevel,
+                                    saveKey,
+                                    sessionTime,
+                                    source));
                 }
             }
         }
@@ -119,14 +191,43 @@ public class WallpaperBackupRestoreManager {
         startRestoreWallpaper(context, 1, basePath, source, 0, "", null);
     }
 
-    public void startRestoreWallpaper(Context context, int which, String basePath, String source, int securityLevel, String saveKey, String restoreScreen) {
-        startRestoreWallpaper(context, "", which, basePath, source, securityLevel, saveKey, restoreScreen);
+    public void startRestoreWallpaper(
+            Context context,
+            int which,
+            String basePath,
+            String source,
+            int securityLevel,
+            String saveKey,
+            String restoreScreen) {
+        startRestoreWallpaper(
+                context, "", which, basePath, source, securityLevel, saveKey, restoreScreen);
     }
 
-    public void startRestoreWallpaper(Context context, String action, int which, String basePath, String source, int securityLevel, String saveKey, String restoreScreen) {
+    public void startRestoreWallpaper(
+            Context context,
+            String action,
+            int which,
+            String basePath,
+            String source,
+            int securityLevel,
+            String saveKey,
+            String restoreScreen) {
         String action2;
         String basePath2 = basePath;
-        Slog.d(TAG, "startRestoreWallpaper: which = " + Integer.toHexString(which) + " action = " + action + " basePath = " + basePath2 + " source = " + source + " securityLevel = " + securityLevel + " restoreScreen = " + restoreScreen);
+        Slog.d(
+                TAG,
+                "startRestoreWallpaper: which = "
+                        + Integer.toHexString(which)
+                        + " action = "
+                        + action
+                        + " basePath = "
+                        + basePath2
+                        + " source = "
+                        + source
+                        + " securityLevel = "
+                        + securityLevel
+                        + " restoreScreen = "
+                        + restoreScreen);
         if (!TextUtils.isEmpty(action)) {
             action2 = action;
         } else if ((which & 1) != 0) {
@@ -143,19 +244,50 @@ public class WallpaperBackupRestoreManager {
             HashMap<Integer, ResultCode> extraResults = new HashMap<>();
             extraResults.put(Integer.valueOf(which), err);
             Slog.d(TAG, "startRestoreWallpaper is return because precondition fail");
-            sendResponse(context, which, action2, ResultCode.RESULT_FAIL, errorCode, BnRFileHelper.REQ_MINIMUM_SIZE, source, null, extraResults, null);
+            sendResponse(
+                    context,
+                    which,
+                    action2,
+                    ResultCode.RESULT_FAIL,
+                    errorCode,
+                    BnRFileHelper.REQ_MINIMUM_SIZE,
+                    source,
+                    null,
+                    extraResults,
+                    null);
             return;
         }
-        pushRestoreFile(context, action2, which, basePath2, securityLevel, saveKey, source, restoreScreen);
+        pushRestoreFile(
+                context, action2, which, basePath2, securityLevel, saveKey, source, restoreScreen);
     }
 
-    private void pushRestoreFile(Context context, String action, int which, String basePath, int securityLevel, String saveKey, String source, String restoreScreen) {
+    private void pushRestoreFile(
+            Context context,
+            String action,
+            int which,
+            String basePath,
+            int securityLevel,
+            String saveKey,
+            String source,
+            String restoreScreen) {
         ArrayList<WallpaperBNRHelper> helpers = new ArrayList<>();
-        WallpaperManager wallpaperManager = (WallpaperManager) context.getSystemService("wallpaper");
+        WallpaperManager wallpaperManager =
+                (WallpaperManager) context.getSystemService("wallpaper");
         for (int i = 0; i < this.mModeFlagSet.length; i++) {
             if (isSupportedScreen(this.mModeFlagSet[i], which)) {
-                WallpaperBNRHelper helper = new WallpaperBNRHelper(context, wallpaperManager, action, which | this.mModeFlagSet[i], basePath, securityLevel, saveKey, "", source);
-                if (handleDifferentTypeRestore(helper, this.mModeFlagSet[i], which, restoreScreen)) {
+                WallpaperBNRHelper helper =
+                        new WallpaperBNRHelper(
+                                context,
+                                wallpaperManager,
+                                action,
+                                which | this.mModeFlagSet[i],
+                                basePath,
+                                securityLevel,
+                                saveKey,
+                                "",
+                                source);
+                if (handleDifferentTypeRestore(
+                        helper, this.mModeFlagSet[i], which, restoreScreen)) {
                     helpers.add(helper);
                 }
             }
@@ -163,7 +295,17 @@ public class WallpaperBackupRestoreManager {
         int i2 = helpers.size();
         if (i2 == 0) {
             Log.d(TAG, "pushRestoreFile: Nothing to restore.");
-            WallpaperBNRHelper helper2 = new WallpaperBNRHelper(context, wallpaperManager, action, which, basePath, securityLevel, saveKey, "", source);
+            WallpaperBNRHelper helper2 =
+                    new WallpaperBNRHelper(
+                            context,
+                            wallpaperManager,
+                            action,
+                            which,
+                            basePath,
+                            securityLevel,
+                            saveKey,
+                            "",
+                            source);
             helper2.setResultCode(ResultCode.RESULT_FAIL);
             ArrayList<WallpaperBNRHelper> responseList = new ArrayList<>();
             responseList.add(helper2);
@@ -180,7 +322,8 @@ public class WallpaperBackupRestoreManager {
         }
     }
 
-    private boolean handleDifferentTypeRestore(WallpaperBNRHelper helper, int mode, int which, String restoreScreen) {
+    private boolean handleDifferentTypeRestore(
+            WallpaperBNRHelper helper, int mode, int which, String restoreScreen) {
         if (Rune.isFolder() && !"folder".equals(helper.getDeviceType())) {
             if (mode == 16) {
                 Log.i(TAG, "skip restoring sub display of phone models");
@@ -207,7 +350,10 @@ public class WallpaperBackupRestoreManager {
                     return false;
                 }
             } else if (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE) {
-                if (mode == 16 && (Rune.SUPPORT_LARGE_FRONT_SUB_DISPLAY ^ BnRConstants.COVER_TYPE_LARGE_SCREEN.equals(helper.getCoverType()))) {
+                if (mode == 16
+                        && (Rune.SUPPORT_LARGE_FRONT_SUB_DISPLAY
+                                ^ BnRConstants.COVER_TYPE_LARGE_SCREEN.equals(
+                                        helper.getCoverType()))) {
                     Log.i(TAG, "skip different size cover screen");
                     return false;
                 }
@@ -264,7 +410,10 @@ public class WallpaperBackupRestoreManager {
         L24:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.wallpaperbackup.WallpaperBackupRestoreManager.isSupportedScreen(int, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.wallpaperbackup.WallpaperBackupRestoreManager.isSupportedScreen(int,"
+                    + " int):boolean");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -358,12 +507,39 @@ public class WallpaperBackupRestoreManager {
             errorCode = BnRFileHelper.ErrorCode.PARTIAL_SUCCESS;
         }
         WallpaperBNRHelper helper2 = helpers.get(0);
-        sendResponse(helper2.getContext(), helper2.getType(), helper2.getResponseAction(), successCount == 0 ? ResultCode.RESULT_FAIL : ResultCode.RESULT_SUCCESS, errorCode, BnRFileHelper.REQ_MINIMUM_SIZE, helper2.getSource(), helper2.getSessionTime(), extraResults, packageList);
+        sendResponse(
+                helper2.getContext(),
+                helper2.getType(),
+                helper2.getResponseAction(),
+                successCount == 0 ? ResultCode.RESULT_FAIL : ResultCode.RESULT_SUCCESS,
+                errorCode,
+                BnRFileHelper.REQ_MINIMUM_SIZE,
+                helper2.getSource(),
+                helper2.getSessionTime(),
+                extraResults,
+                packageList);
     }
 
-    private static void sendResponse(Context context, int which, String action, ResultCode resultCode, BnRFileHelper.ErrorCode errorCode, int requiredSize, String source, String sessionTime, HashMap extraResultCodes, List<String> packageList) {
+    private static void sendResponse(
+            Context context,
+            int which,
+            String action,
+            ResultCode resultCode,
+            BnRFileHelper.ErrorCode errorCode,
+            int requiredSize,
+            String source,
+            String sessionTime,
+            HashMap extraResultCodes,
+            List<String> packageList) {
         StringBuffer logBuffer = new StringBuffer();
-        logBuffer.append("sendResponse:\n\t\twhich \t\t\t\t= " + which).append("\n\t\taction \t\t\t\t= " + action).append("\n\t\tresultCode \t\t\t= " + resultCode).append("\n\t\terrorCode \t\t\t= " + errorCode).append("\n\t\trequiredSize \t\t= " + requiredSize).append("\n\t\tsesstionTime \t\t= " + sessionTime).append("\n\t\tsource \t\t\t\t= " + source);
+        logBuffer
+                .append("sendResponse:\n\t\twhich \t\t\t\t= " + which)
+                .append("\n\t\taction \t\t\t\t= " + action)
+                .append("\n\t\tresultCode \t\t\t= " + resultCode)
+                .append("\n\t\terrorCode \t\t\t= " + errorCode)
+                .append("\n\t\trequiredSize \t\t= " + requiredSize)
+                .append("\n\t\tsesstionTime \t\t= " + sessionTime)
+                .append("\n\t\tsource \t\t\t\t= " + source);
         if (extraResultCodes != null) {
             Set<Integer> keys = extraResultCodes.keySet();
             for (Integer key : keys) {
@@ -434,7 +610,16 @@ public class WallpaperBackupRestoreManager {
         int mWhich;
         String mXmlPath;
 
-        WallpaperBNRHelper(Context context, WallpaperManager wallpaperManager, String action, int which, String basePath, int securityLevel, String saveKey, String sessionTime, String source) {
+        WallpaperBNRHelper(
+                Context context,
+                WallpaperManager wallpaperManager,
+                String action,
+                int which,
+                String basePath,
+                int securityLevel,
+                String saveKey,
+                String sessionTime,
+                String source) {
             this.mContext = context;
             if (!TextUtils.isEmpty(action) && action.contains("BACKUP")) {
                 this.mIsBackupCase = true;
@@ -493,7 +678,8 @@ public class WallpaperBackupRestoreManager {
                     this.mPackageName = extractPackageName(this.mUri);
                     break;
                 case 1:
-                    this.mPackageName = this.mWallpaperManager.getMotionWallpaperPkgName(this.mWhich);
+                    this.mPackageName =
+                            this.mWallpaperManager.getMotionWallpaperPkgName(this.mWhich);
                     break;
                 case 3:
                     this.mUri = this.mWallpaperManager.semGetUri(this.mWhich);
@@ -513,17 +699,33 @@ public class WallpaperBackupRestoreManager {
 
         private void createBackupInfo() {
             if (!this.mWallpaperManager.isWallpaperDataExists(this.mWhich)) {
-                Log.d(TAG, "createBackupInfo: WallpaperData for [" + this.mWhich + "] does not exist.");
+                Log.d(
+                        TAG,
+                        "createBackupInfo: WallpaperData for ["
+                                + this.mWhich
+                                + "] does not exist.");
                 addErrorDescription("WallpaperData for [" + this.mWhich + "] does not exist.");
             }
             this.mWallpaperType = this.mWallpaperManager.semGetWallpaperType(this.mWhich);
-            if ((Rune.VIRTUAL_DISPLAY_WALLPAPER && this.mMode == 32) || (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && this.mMode == 16 && this.mWallpaperType == 8)) {
+            if ((Rune.VIRTUAL_DISPLAY_WALLPAPER && this.mMode == 32)
+                    || (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                            && this.mMode == 16
+                            && this.mWallpaperType == 8)) {
                 this.mIsCustomWallpaper = true;
             } else {
-                this.mIsCustomWallpaper = Settings.System.getIntForUser(this.mContext.getContentResolver(), this.mSettingsName, 1, -2) == 0;
+                this.mIsCustomWallpaper =
+                        Settings.System.getIntForUser(
+                                        this.mContext.getContentResolver(),
+                                        this.mSettingsName,
+                                        1,
+                                        -2)
+                                == 0;
             }
             this.mIsBackupAllowed = this.mWallpaperManager.isWallpaperBackupAllowed(this.mWhich);
-            this.mIsDownloadedThemeWallpaper = Settings.System.getIntForUser(this.mContext.getContentResolver(), this.mSettingsName, 1, -2) == 3;
+            this.mIsDownloadedThemeWallpaper =
+                    Settings.System.getIntForUser(
+                                    this.mContext.getContentResolver(), this.mSettingsName, 1, -2)
+                            == 3;
             if (Rune.isFolder()) {
                 this.mDeviceType = "folder";
             } else if (Rune.isTablet()) {
@@ -543,22 +745,32 @@ public class WallpaperBackupRestoreManager {
             }
             this.mFilePath = getFilePath(null);
             this.mTargetFilePath = this.mBasePath + this.mFilePath;
-            Bundle extrasBundle = this.mWallpaperManager.getWallpaperExtras(this.mWhich, this.mContext.getUserId());
+            Bundle extrasBundle =
+                    this.mWallpaperManager.getWallpaperExtras(
+                            this.mWhich, this.mContext.getUserId());
             if (extrasBundle != null) {
                 this.mExternalParams = WallpaperExtraBundleHelper.toJson(extrasBundle);
             }
             switch (this.mWallpaperType) {
                 case 0:
-                    if (this.mType == 2 && this.mWallpaperManager.isSystemAndLockPaired(this.mMode)) {
-                        this.mDescriptor = this.mWallpaperManager.getWallpaperFile(1 | this.mMode, false);
+                    if (this.mType == 2
+                            && this.mWallpaperManager.isSystemAndLockPaired(this.mMode)) {
+                        this.mDescriptor =
+                                this.mWallpaperManager.getWallpaperFile(1 | this.mMode, false);
                     } else {
-                        this.mDescriptor = this.mWallpaperManager.getWallpaperFile(this.mWhich, false);
+                        this.mDescriptor =
+                                this.mWallpaperManager.getWallpaperFile(this.mWhich, false);
                     }
                     this.mCropHint = this.mWallpaperManager.semGetWallpaperCropHint(this.mWhich);
-                    this.mIsHomeAndLockPaired = this.mWallpaperManager.isSystemAndLockPaired(WhichChecker.getMode(this.mWhich));
+                    this.mIsHomeAndLockPaired =
+                            this.mWallpaperManager.isSystemAndLockPaired(
+                                    WhichChecker.getMode(this.mWhich));
                     if (getMode() == 4 && !TextUtils.isEmpty(this.mDeviceType)) {
-                        if (this.mDeviceType.equals("folder") || this.mDeviceType.equals(BnRConstants.DEVICETYPE_TABLET)) {
-                            this.mOrientation = this.mWallpaperManager.getWallpaperOrientation(this.mWhich, this.mContext.getUserId());
+                        if (this.mDeviceType.equals("folder")
+                                || this.mDeviceType.equals(BnRConstants.DEVICETYPE_TABLET)) {
+                            this.mOrientation =
+                                    this.mWallpaperManager.getWallpaperOrientation(
+                                            this.mWhich, this.mContext.getUserId());
                             break;
                         }
                     }
@@ -568,13 +780,19 @@ public class WallpaperBackupRestoreManager {
                 case 4:
                 case 6:
                 default:
-                    Log.e(TAG, "createBackupInfo: Unhandled wallpaper type, mWallpaperType = " + this.mWallpaperType);
+                    Log.e(
+                            TAG,
+                            "createBackupInfo: Unhandled wallpaper type, mWallpaperType = "
+                                    + this.mWallpaperType);
                     break;
                 case 3:
                     Uri customPackUri = this.mWallpaperManager.semGetUri(this.mWhich);
                     if (customPackUri != null) {
                         this.mUri = customPackUri;
-                        this.mSourceFilePath = BnRConstants.CUSTOM_MULTIPACK_SOURCE_PATH + customPackUri.getHost() + customPackUri.getPath();
+                        this.mSourceFilePath =
+                                BnRConstants.CUSTOM_MULTIPACK_SOURCE_PATH
+                                        + customPackUri.getHost()
+                                        + customPackUri.getPath();
                         break;
                     }
                     break;
@@ -587,8 +805,12 @@ public class WallpaperBackupRestoreManager {
                     }
                     break;
                 case 7:
-                    this.mIsHomeAndLockPaired = this.mWallpaperManager.isSystemAndLockPaired(WhichChecker.getMode(this.mWhich));
-                    ComponentName cn = this.mWallpaperManager.semGetWallpaperComponent(this.mWhich, this.mContext.getUserId());
+                    this.mIsHomeAndLockPaired =
+                            this.mWallpaperManager.isSystemAndLockPaired(
+                                    WhichChecker.getMode(this.mWhich));
+                    ComponentName cn =
+                            this.mWallpaperManager.semGetWallpaperComponent(
+                                    this.mWhich, this.mContext.getUserId());
                     if (cn != null) {
                         this.mComponentName = cn.flattenToString();
                         break;
@@ -597,8 +819,11 @@ public class WallpaperBackupRestoreManager {
                 case 8:
                     this.mSourceFilePath = this.mWallpaperManager.getVideoFilePath(this.mWhich);
                     if (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && this.mMode == 16) {
-                        this.mDescriptor = this.mWallpaperManager.getWallpaperFile(this.mWhich, this.mContext.getUserId(), -1);
-                        this.mCropHint = this.mWallpaperManager.semGetWallpaperCropHint(this.mWhich);
+                        this.mDescriptor =
+                                this.mWallpaperManager.getWallpaperFile(
+                                        this.mWhich, this.mContext.getUserId(), -1);
+                        this.mCropHint =
+                                this.mWallpaperManager.semGetWallpaperCropHint(this.mWhich);
                         break;
                     }
                     break;
@@ -607,22 +832,40 @@ public class WallpaperBackupRestoreManager {
 
         /* JADX INFO: Access modifiers changed from: private */
         public void convertToImageWallpaperForSCloud() {
-            addErrorDescription("convertImageWallpaperForSCloud: Backup with Samsung cloud, change layered type to image");
+            addErrorDescription(
+                    "convertImageWallpaperForSCloud: Backup with Samsung cloud, change layered type"
+                        + " to image");
             this.mWallpaperType = 0;
             this.mFilePath = getFilePath(null);
             this.mTargetFilePath = this.mBasePath + this.mFilePath;
             int whichForAssets = isHomeAndLockPaired() ? this.mMode | 1 : this.mWhich;
             try {
-                String fileName = this.mWallpaperManager.getWallpaperExtras(whichForAssets, this.mContext.getUserId()).getString(BnRConstants.KEY_REPRESENTATIVE_IMAGE_FILE);
+                String fileName =
+                        this.mWallpaperManager
+                                .getWallpaperExtras(whichForAssets, this.mContext.getUserId())
+                                .getString(BnRConstants.KEY_REPRESENTATIVE_IMAGE_FILE);
                 if (TextUtils.isEmpty(fileName)) {
-                    Log.i(TAG, "representative file name is empty, try thumbnail file name and remove crop hints");
+                    Log.i(
+                            TAG,
+                            "representative file name is empty, try thumbnail file name and remove"
+                                + " crop hints");
                     this.mExternalParams = null;
-                    fileName = this.mWallpaperManager.getWallpaperExtras(whichForAssets, this.mContext.getUserId()).getString(BnRConstants.KEY_THUNBNAIL_FILENAME);
+                    fileName =
+                            this.mWallpaperManager
+                                    .getWallpaperExtras(whichForAssets, this.mContext.getUserId())
+                                    .getString(BnRConstants.KEY_THUNBNAIL_FILENAME);
                 }
-                this.mDescriptor = this.mWallpaperManager.getWallpaperAssetFile(whichForAssets, this.mContext.getUserId(), fileName);
+                this.mDescriptor =
+                        this.mWallpaperManager.getWallpaperAssetFile(
+                                whichForAssets, this.mContext.getUserId(), fileName);
             } catch (Exception e) {
-                addErrorDescription("Error occured getting representative file : " + e.toString() + ", try hard-coding way..");
-                this.mDescriptor = this.mWallpaperManager.getWallpaperAssetFile(whichForAssets, this.mContext.getUserId(), "thumbnail.jpg");
+                addErrorDescription(
+                        "Error occured getting representative file : "
+                                + e.toString()
+                                + ", try hard-coding way..");
+                this.mDescriptor =
+                        this.mWallpaperManager.getWallpaperAssetFile(
+                                whichForAssets, this.mContext.getUserId(), "thumbnail.jpg");
             }
         }
 
@@ -633,7 +876,8 @@ public class WallpaperBackupRestoreManager {
             }
             WallpaperUser wallpaperUser = xmlParser.getObject();
             if (wallpaperUser == null) {
-                addErrorDescription("createRestoreInfo: Cannot create WallpaperUser for restoring.");
+                addErrorDescription(
+                        "createRestoreInfo: Cannot create WallpaperUser for restoring.");
                 return;
             }
             this.mWallpaperUser = wallpaperUser;
@@ -643,10 +887,17 @@ public class WallpaperBackupRestoreManager {
             this.mUri = wallpaperUser.getUri();
             this.mExternalParams = wallpaperUser.getExternalParams();
             this.mIsHomeAndLockPaired = wallpaperUser.getIsHomeAndLockPaired();
-            this.mCropHint = new Rect(wallpaperUser.getLeftValue(), wallpaperUser.getTopValue(), wallpaperUser.getRightValue(), wallpaperUser.getBottomValue());
+            this.mCropHint =
+                    new Rect(
+                            wallpaperUser.getLeftValue(),
+                            wallpaperUser.getTopValue(),
+                            wallpaperUser.getRightValue(),
+                            wallpaperUser.getBottomValue());
             this.mDeviceType = wallpaperUser.getDeviceType();
             this.mCoverType = wallpaperUser.getCoverType();
-            if (Rune.isFolder() && TextUtils.isEmpty(wallpaperUser.getDeviceType()) && getMode() == 4) {
+            if (Rune.isFolder()
+                    && TextUtils.isEmpty(wallpaperUser.getDeviceType())
+                    && getMode() == 4) {
                 if (this.mCropHint.isEmpty()) {
                     addErrorDescription("createRestoreInfo: Cannot identify device type.");
                 } else {
@@ -654,14 +905,20 @@ public class WallpaperBackupRestoreManager {
                     int max = Math.max(this.mCropHint.width(), this.mCropHint.height());
                     float ratio = min / max;
                     if (ratio > 0.74f) {
-                        addErrorDescription("createRestoreInfo: Consider backup device is table. ratio = " + ratio);
+                        addErrorDescription(
+                                "createRestoreInfo: Consider backup device is table. ratio = "
+                                        + ratio);
                         this.mDeviceType = "folder";
                         wallpaperUser.setDeviceType("folder");
                     }
                 }
             }
             int min2 = this.mWallpaperType;
-            if (min2 == 0 && getMode() == 4 && !TextUtils.isEmpty(this.mDeviceType) && (this.mDeviceType.equals("folder") || this.mDeviceType.equals(BnRConstants.DEVICETYPE_TABLET))) {
+            if (min2 == 0
+                    && getMode() == 4
+                    && !TextUtils.isEmpty(this.mDeviceType)
+                    && (this.mDeviceType.equals("folder")
+                            || this.mDeviceType.equals(BnRConstants.DEVICETYPE_TABLET))) {
                 this.mOrientation = wallpaperUser.getOrientation();
             }
             this.mIsDownloadedThemeWallpaper = wallpaperUser.getTransparency() == 3;
@@ -683,10 +940,14 @@ public class WallpaperBackupRestoreManager {
                     String fileName = getFileNameFromPath(this.mSourceFilePath);
                     if (TextUtils.isEmpty(fileName)) {
                         fileName = createVideoFileName();
-                    } else if (Rune.SUPPORT_SUB_DISPLAY_MODE && getMode() == 4 && getType() == 2 && fileName.endsWith("_6.mp4")) {
+                    } else if (Rune.SUPPORT_SUB_DISPLAY_MODE
+                            && getMode() == 4
+                            && getType() == 2
+                            && fileName.endsWith("_6.mp4")) {
                         fileName = fileName.replace("_6.mp4", "_2.mp4");
                     }
-                    this.mTargetFilePath = BnRConstants.WALLPAPER_VIDEO_RESTORE_PATH + File.separator + fileName;
+                    this.mTargetFilePath =
+                            BnRConstants.WALLPAPER_VIDEO_RESTORE_PATH + File.separator + fileName;
                     break;
             }
         }
@@ -712,7 +973,8 @@ public class WallpaperBackupRestoreManager {
                     }
                 case 16:
                     if (this.mType == 2) {
-                        this.mSettingsName = BnRConstants.SETTINGS_KEYGUARD_TRANSPARENCY_SUB_DISPLAY;
+                        this.mSettingsName =
+                                BnRConstants.SETTINGS_KEYGUARD_TRANSPARENCY_SUB_DISPLAY;
                         break;
                     } else {
                         this.mSettingsName = BnRConstants.SETTINGS_SYSTEM_TRANSPARENCY_SUB_DISPLAY;
@@ -730,13 +992,19 @@ public class WallpaperBackupRestoreManager {
             if (Build.VERSION.SEM_PLATFORM_INT > 150000 && this.mWallpaperType == 7) {
                 try {
                     if (isHomeAndLockPaired()) {
-                        assetFiles = this.mWallpaperManager.getWallpaperAssets(this.mMode | 1, this.mContext.getUserId());
+                        assetFiles =
+                                this.mWallpaperManager.getWallpaperAssets(
+                                        this.mMode | 1, this.mContext.getUserId());
                     } else {
-                        assetFiles = this.mWallpaperManager.getWallpaperAssets(this.mWhich, this.mContext.getUserId());
+                        assetFiles =
+                                this.mWallpaperManager.getWallpaperAssets(
+                                        this.mWhich, this.mContext.getUserId());
                     }
                     if (assetFiles != null && assetFiles.keySet().size() > 0) {
                         if (!this.mIsBackupAllowed) {
-                            addErrorDescription("Ignore mIsBackupAllowed = false in case custom live wallpaper.");
+                            addErrorDescription(
+                                    "Ignore mIsBackupAllowed = false in case custom live"
+                                        + " wallpaper.");
                             this.mIsBackupAllowed = true;
                         }
                     }
@@ -749,12 +1017,14 @@ public class WallpaperBackupRestoreManager {
                 addErrorDescription("Live wallpaper is applied.");
                 return false;
             }
-            if (!this.mIsCustomWallpaper || !this.mIsBackupAllowed) {
-            }
-            boolean canBackup = (this.mIsCustomWallpaper || this.mIsDownloadedThemeWallpaper) && this.mIsBackupAllowed;
+            if (!this.mIsCustomWallpaper || !this.mIsBackupAllowed) {}
+            boolean canBackup =
+                    (this.mIsCustomWallpaper || this.mIsDownloadedThemeWallpaper)
+                            && this.mIsBackupAllowed;
             if (this.mWallpaperType == 3 && !canBackup && this.mUri != null) {
                 String stringUri = this.mUri.toString();
-                if (!TextUtils.isEmpty(stringUri) && stringUri.startsWith(BnRConstants.CUSTOM_PACK_PREFIX)) {
+                if (!TextUtils.isEmpty(stringUri)
+                        && stringUri.startsWith(BnRConstants.CUSTOM_PACK_PREFIX)) {
                     canBackup = true;
                 }
             }
@@ -965,7 +1235,8 @@ public class WallpaperBackupRestoreManager {
                     }
                     return append.append(str).toString();
                 case 16:
-                    StringBuilder append2 = new StringBuilder().append("wallpaper_sub_display_original/");
+                    StringBuilder append2 =
+                            new StringBuilder().append("wallpaper_sub_display_original/");
                     if (this.mType != 2) {
                         str = BnRConstants.WALLPAPER_IMAGE_FILE_NAME;
                     }
@@ -981,9 +1252,13 @@ public class WallpaperBackupRestoreManager {
             switch (this.mMode) {
                 case 4:
                 case 8:
-                    return this.mType == 2 ? BnRConstants.ORIGINAL_LOCK_XML_NAME : BnRConstants.ORIGINAL_XML_NAME;
+                    return this.mType == 2
+                            ? BnRConstants.ORIGINAL_LOCK_XML_NAME
+                            : BnRConstants.ORIGINAL_XML_NAME;
                 case 16:
-                    return this.mType == 2 ? BnRConstants.SUB_DISPLAY_LOCK_XML_ORIGINAL_NAME : BnRConstants.SUB_DISPLAY_XML_ORIGINAL_NAME;
+                    return this.mType == 2
+                            ? BnRConstants.SUB_DISPLAY_LOCK_XML_ORIGINAL_NAME
+                            : BnRConstants.SUB_DISPLAY_XML_ORIGINAL_NAME;
                 case 32:
                     return this.mType == 2 ? "" : BnRConstants.VIRTUAL_DISPLAY_XML_NAME;
                 default:
@@ -995,10 +1270,17 @@ public class WallpaperBackupRestoreManager {
         public String getXmlFilePath() {
             switch (this.mMode) {
                 case 4:
-                    return this.mType == 2 ? BnRConstants.DEFAULT_LOCK_XML_NAME : BnRConstants.DEFAULT_XML_NAME;
+                    return this.mType == 2
+                            ? BnRConstants.DEFAULT_LOCK_XML_NAME
+                            : BnRConstants.DEFAULT_XML_NAME;
                 case 8:
-                    String path = this.mType == 2 ? BnRConstants.DEX_LOCK_XML_NAME : BnRConstants.DEX_XML_NAME;
-                    if (!this.mIsBackupCase && !new File(this.mBasePath + path).exists() && this.mType == 2) {
+                    String path =
+                            this.mType == 2
+                                    ? BnRConstants.DEX_LOCK_XML_NAME
+                                    : BnRConstants.DEX_XML_NAME;
+                    if (!this.mIsBackupCase
+                            && !new File(this.mBasePath + path).exists()
+                            && this.mType == 2) {
                         File checkFile = new File(this.mBasePath + BnRConstants.DEX_XML_NAME);
                         if (checkFile.exists() && checkFile.canRead()) {
                             return BnRConstants.DEX_XML_NAME;
@@ -1007,7 +1289,9 @@ public class WallpaperBackupRestoreManager {
                     }
                     return path;
                 case 16:
-                    return this.mType == 2 ? BnRConstants.SUB_DISPLAY_LOCK_XML_NAME : BnRConstants.SUB_DISPLAY_XML_NAME;
+                    return this.mType == 2
+                            ? BnRConstants.SUB_DISPLAY_LOCK_XML_NAME
+                            : BnRConstants.SUB_DISPLAY_XML_NAME;
                 case 32:
                     return this.mType == 2 ? "" : BnRConstants.VIRTUAL_DISPLAY_XML_NAME;
                 default:
@@ -1047,14 +1331,18 @@ public class WallpaperBackupRestoreManager {
         private String getGifPath() {
             if (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE) {
                 if (this.mMode == 16 && this.mType == 1) {
-                    return BnRConstants.SUB_DISPLAY_FOLDER_NAME + File.separator + BnRConstants.CUSTOM_GIF_FILE_NAME;
+                    return BnRConstants.SUB_DISPLAY_FOLDER_NAME
+                            + File.separator
+                            + BnRConstants.CUSTOM_GIF_FILE_NAME;
                 }
                 Log.d(TAG, "getGifPath: Invalid which for gif wallpaper. mWhich = " + this.mWhich);
                 return null;
             }
             if (Rune.VIRTUAL_DISPLAY_WALLPAPER) {
                 if (this.mMode == 32 && this.mType == 1) {
-                    return BnRConstants.VIRTUAL_DISPLAY_FOLDER_NAME + File.separator + BnRConstants.CUSTOM_GIF_FILE_NAME;
+                    return BnRConstants.VIRTUAL_DISPLAY_FOLDER_NAME
+                            + File.separator
+                            + BnRConstants.CUSTOM_GIF_FILE_NAME;
                 }
                 Log.d(TAG, "getGifPath: Invalid which for gif wallpaper. mWhich = " + this.mWhich);
                 return null;
@@ -1064,7 +1352,10 @@ public class WallpaperBackupRestoreManager {
         }
 
         private String getImagePath() {
-            String imageFileName = this.mType == 2 ? BnRConstants.LOCK_WALLPAPER_FILE_NAME : BnRConstants.WALLPAPER_IMAGE_FILE_NAME;
+            String imageFileName =
+                    this.mType == 2
+                            ? BnRConstants.LOCK_WALLPAPER_FILE_NAME
+                            : BnRConstants.WALLPAPER_IMAGE_FILE_NAME;
             switch (this.mMode) {
                 case 4:
                     return "wallpaper" + File.separator + imageFileName;
@@ -1073,7 +1364,9 @@ public class WallpaperBackupRestoreManager {
                 case 16:
                     return BnRConstants.SUB_DISPLAY_FOLDER_NAME + File.separator + imageFileName;
                 case 32:
-                    return BnRConstants.VIRTUAL_DISPLAY_FOLDER_NAME + File.separator + imageFileName;
+                    return BnRConstants.VIRTUAL_DISPLAY_FOLDER_NAME
+                            + File.separator
+                            + imageFileName;
                 default:
                     return null;
             }
@@ -1084,11 +1377,17 @@ public class WallpaperBackupRestoreManager {
                 case 4:
                     return "wallpaper" + File.separator + BnRConstants.CUSTOM_MULTIPACK_PATH;
                 case 8:
-                    return BnRConstants.DEX_FOLDER_NAME + File.separator + BnRConstants.CUSTOM_MULTIPACK_PATH;
+                    return BnRConstants.DEX_FOLDER_NAME
+                            + File.separator
+                            + BnRConstants.CUSTOM_MULTIPACK_PATH;
                 case 16:
-                    return BnRConstants.SUB_DISPLAY_FOLDER_NAME + File.separator + BnRConstants.CUSTOM_MULTIPACK_PATH;
+                    return BnRConstants.SUB_DISPLAY_FOLDER_NAME
+                            + File.separator
+                            + BnRConstants.CUSTOM_MULTIPACK_PATH;
                 case 32:
-                    return BnRConstants.VIRTUAL_DISPLAY_FOLDER_NAME + File.separator + BnRConstants.CUSTOM_MULTIPACK_PATH;
+                    return BnRConstants.VIRTUAL_DISPLAY_FOLDER_NAME
+                            + File.separator
+                            + BnRConstants.CUSTOM_MULTIPACK_PATH;
                 default:
                     return null;
             }
@@ -1101,9 +1400,14 @@ public class WallpaperBackupRestoreManager {
                 case 8:
                     return BnRConstants.DEX_FOLDER_NAME + File.separator + getVideoFileName();
                 case 16:
-                    return BnRConstants.SUB_DISPLAY_FOLDER_NAME + File.separator + BnRConstants.VIDEO_DIR_PATH + getVideoFileName();
+                    return BnRConstants.SUB_DISPLAY_FOLDER_NAME
+                            + File.separator
+                            + BnRConstants.VIDEO_DIR_PATH
+                            + getVideoFileName();
                 case 32:
-                    return BnRConstants.VIRTUAL_DISPLAY_FOLDER_NAME + File.separator + getVideoFileName();
+                    return BnRConstants.VIRTUAL_DISPLAY_FOLDER_NAME
+                            + File.separator
+                            + getVideoFileName();
                 default:
                     return null;
             }
@@ -1114,11 +1418,17 @@ public class WallpaperBackupRestoreManager {
                 case 4:
                     return "wallpaper" + File.separator + BnRConstants.LIVE_WALLPAPER_ASSETS_PATH;
                 case 8:
-                    return BnRConstants.DEX_FOLDER_NAME + File.separator + BnRConstants.LIVE_WALLPAPER_ASSETS_PATH;
+                    return BnRConstants.DEX_FOLDER_NAME
+                            + File.separator
+                            + BnRConstants.LIVE_WALLPAPER_ASSETS_PATH;
                 case 16:
-                    return BnRConstants.SUB_DISPLAY_FOLDER_NAME + File.separator + BnRConstants.LIVE_WALLPAPER_ASSETS_PATH;
+                    return BnRConstants.SUB_DISPLAY_FOLDER_NAME
+                            + File.separator
+                            + BnRConstants.LIVE_WALLPAPER_ASSETS_PATH;
                 case 32:
-                    return BnRConstants.VIRTUAL_DISPLAY_FOLDER_NAME + File.separator + BnRConstants.LIVE_WALLPAPER_ASSETS_PATH;
+                    return BnRConstants.VIRTUAL_DISPLAY_FOLDER_NAME
+                            + File.separator
+                            + BnRConstants.LIVE_WALLPAPER_ASSETS_PATH;
                 default:
                     return null;
             }
@@ -1145,10 +1455,18 @@ public class WallpaperBackupRestoreManager {
                 which = 2;
             }
             if (this.mContext != null) {
-                return "video_wallpaper_" + this.mContext.getUserId() + Session.SESSION_SEPARATION_CHAR_CHILD + which + MediaMetrics.SEPARATOR + BnRConstants.VIDEO_FILE_EXTENSION;
+                return "video_wallpaper_"
+                        + this.mContext.getUserId()
+                        + Session.SESSION_SEPARATION_CHAR_CHILD
+                        + which
+                        + MediaMetrics.SEPARATOR
+                        + BnRConstants.VIDEO_FILE_EXTENSION;
             }
             Log.d(TAG, "createVideoFileName: context is null!");
-            return "video_wallpaper_0_" + which + MediaMetrics.SEPARATOR + BnRConstants.VIDEO_FILE_EXTENSION;
+            return "video_wallpaper_0_"
+                    + which
+                    + MediaMetrics.SEPARATOR
+                    + BnRConstants.VIDEO_FILE_EXTENSION;
         }
 
         private String getFileNameFromPath(String fullPath) {
@@ -1207,10 +1525,15 @@ public class WallpaperBackupRestoreManager {
 
         public String toString() {
             StringBuffer buffer = new StringBuffer();
-            buffer.append("\n\tWallpaperBnRHelper:").append("\n\t\tmWhich = " + this.mWhich + ": " + getStringWhich()).append("\n\t\tmWallpaperType = " + this.mWallpaperType).append("\n\t\tmIsBackupCase = " + this.mIsBackupCase);
+            buffer.append("\n\tWallpaperBnRHelper:")
+                    .append("\n\t\tmWhich = " + this.mWhich + ": " + getStringWhich())
+                    .append("\n\t\tmWallpaperType = " + this.mWallpaperType)
+                    .append("\n\t\tmIsBackupCase = " + this.mIsBackupCase);
             if (this.mIsBackupCase) {
-                buffer.append("\n\t\tmIsCustomWallpaper = " + this.mIsCustomWallpaper).append("\n\t\tmIsBackupAllowed = " + this.mIsBackupAllowed);
-                buffer.append("\n\t\tmIsDownloadedThemeWallpaper = " + this.mIsDownloadedThemeWallpaper);
+                buffer.append("\n\t\tmIsCustomWallpaper = " + this.mIsCustomWallpaper)
+                        .append("\n\t\tmIsBackupAllowed = " + this.mIsBackupAllowed);
+                buffer.append(
+                        "\n\t\tmIsDownloadedThemeWallpaper = " + this.mIsDownloadedThemeWallpaper);
             }
             if (!TextUtils.isEmpty(this.mPackageName)) {
                 buffer.append("\n\t\tmPackageName = " + this.mPackageName);
@@ -1218,7 +1541,27 @@ public class WallpaperBackupRestoreManager {
             if (!TextUtils.isEmpty(this.mDeviceType)) {
                 buffer.append("\n\t\tmDeviceType = " + this.mDeviceType);
             }
-            buffer.append("\n\t\tmUri = " + this.mUri).append("\n\t\tmSaveType = " + this.mSaveType).append("\n\t\tmSecurityLevel = " + this.mSecurityLevel).append("\n\t\tmSaveKey = " + this.mSaveKey).append("\n\t\tmSessionTime = " + this.mSessionTime).append("\n\t\tmTiltValue = " + this.mTiltValue).append("\n\t\tmCropHint = " + this.mCropHint).append("\n\t\tmRotation = " + this.mRotation).append("\n\t\tmAction = " + this.mAction).append("\n\t\tmBasePath = " + this.mBasePath).append("\n\t\tmSource = " + this.mSource).append("\n\t\tmDescriptor = " + this.mDescriptor).append("\n\t\tmSourceFilePath = " + this.mSourceFilePath).append("\n\t\tmTargetFilePath = " + this.mTargetFilePath).append("\n\t\tmFilePath = " + this.mFilePath).append("\n\t\tmXmlPath = " + this.mXmlPath).append("\n\t\tmSettingsName = " + this.mSettingsName).append("\n\t\tmExternalParams = " + this.mExternalParams).append("\n\t\tmIsHomeAndLockPaired = " + this.mIsHomeAndLockPaired).append("\n\t\tmComponentName = " + this.mComponentName).append("\n\t\tmResultCode = " + this.mResultCode);
+            buffer.append("\n\t\tmUri = " + this.mUri)
+                    .append("\n\t\tmSaveType = " + this.mSaveType)
+                    .append("\n\t\tmSecurityLevel = " + this.mSecurityLevel)
+                    .append("\n\t\tmSaveKey = " + this.mSaveKey)
+                    .append("\n\t\tmSessionTime = " + this.mSessionTime)
+                    .append("\n\t\tmTiltValue = " + this.mTiltValue)
+                    .append("\n\t\tmCropHint = " + this.mCropHint)
+                    .append("\n\t\tmRotation = " + this.mRotation)
+                    .append("\n\t\tmAction = " + this.mAction)
+                    .append("\n\t\tmBasePath = " + this.mBasePath)
+                    .append("\n\t\tmSource = " + this.mSource)
+                    .append("\n\t\tmDescriptor = " + this.mDescriptor)
+                    .append("\n\t\tmSourceFilePath = " + this.mSourceFilePath)
+                    .append("\n\t\tmTargetFilePath = " + this.mTargetFilePath)
+                    .append("\n\t\tmFilePath = " + this.mFilePath)
+                    .append("\n\t\tmXmlPath = " + this.mXmlPath)
+                    .append("\n\t\tmSettingsName = " + this.mSettingsName)
+                    .append("\n\t\tmExternalParams = " + this.mExternalParams)
+                    .append("\n\t\tmIsHomeAndLockPaired = " + this.mIsHomeAndLockPaired)
+                    .append("\n\t\tmComponentName = " + this.mComponentName)
+                    .append("\n\t\tmResultCode = " + this.mResultCode);
             if (this.mWallpaperUser != null) {
                 buffer.append("\n\t\tmWallpaperUser = " + this.mWallpaperUser.toString());
             }
@@ -1234,9 +1577,9 @@ public class WallpaperBackupRestoreManager {
         }
     }
 
-    static class WallpaperBackupAsyncTask extends AsyncTask<ArrayList, WallpaperBNRHelper, ArrayList<WallpaperBNRHelper>> {
-        WallpaperBackupAsyncTask() {
-        }
+    static class WallpaperBackupAsyncTask
+            extends AsyncTask<ArrayList, WallpaperBNRHelper, ArrayList<WallpaperBNRHelper>> {
+        WallpaperBackupAsyncTask() {}
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
@@ -1289,7 +1632,10 @@ public class WallpaperBackupRestoreManager {
                     if (helper.getDescriptor() == null) {
                         return false;
                     }
-                    return BnRFileHelper.copyFile(helper.getTargetFilePath(), helper.getDescriptor(), helper.getFileSaveKey());
+                    return BnRFileHelper.copyFile(
+                            helper.getTargetFilePath(),
+                            helper.getDescriptor(),
+                            helper.getFileSaveKey());
                 case 1:
                 case 2:
                 case 4:
@@ -1297,36 +1643,67 @@ public class WallpaperBackupRestoreManager {
                 default:
                     return false;
                 case 3:
-                    return BnRFileHelper.copyDir(helper.getTargetFilePath(), helper.getSourceFilePath(), helper.getFileSaveKey());
+                    return BnRFileHelper.copyDir(
+                            helper.getTargetFilePath(),
+                            helper.getSourceFilePath(),
+                            helper.getFileSaveKey());
                 case 5:
-                    return BnRFileHelper.copyFile(helper.getTargetFilePath(), helper.getSourceFilePath(), helper.getFileSaveKey());
+                    return BnRFileHelper.copyFile(
+                            helper.getTargetFilePath(),
+                            helper.getSourceFilePath(),
+                            helper.getFileSaveKey());
                 case 7:
                     if (BnRConstants.BNR_SOURCE_SCLOUD.equals(helper.getSource())) {
                         helper.convertToImageWallpaperForSCloud();
                         if (helper.getDescriptor() == null) {
                             return false;
                         }
-                        return BnRFileHelper.copyFile(helper.getTargetFilePath(), helper.getDescriptor(), helper.getFileSaveKey());
+                        return BnRFileHelper.copyFile(
+                                helper.getTargetFilePath(),
+                                helper.getDescriptor(),
+                                helper.getFileSaveKey());
                     }
-                    return BnRFileHelper.copyAssets(helper.getTargetFilePath(), helper.getWallpaperManager().getWallpaperAssets(helper.getWhich(), helper.getContext().getUserId()), helper.getFileSaveKey());
+                    return BnRFileHelper.copyAssets(
+                            helper.getTargetFilePath(),
+                            helper.getWallpaperManager()
+                                    .getWallpaperAssets(
+                                            helper.getWhich(), helper.getContext().getUserId()),
+                            helper.getFileSaveKey());
                 case 8:
                     if (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && helper.getMode() == 16) {
-                        BnRFileHelper.copyFile(helper.getBasePath() + BnRConstants.SUB_DISPLAY_FOLDER_NAME + File.separator + BnRConstants.VIDEO_DIR_PATH + BnRConstants.VIDEO_THUMBNAIL_FILE_NAME, helper.getDescriptor(), helper.getFileSaveKey());
+                        BnRFileHelper.copyFile(
+                                helper.getBasePath()
+                                        + BnRConstants.SUB_DISPLAY_FOLDER_NAME
+                                        + File.separator
+                                        + BnRConstants.VIDEO_DIR_PATH
+                                        + BnRConstants.VIDEO_THUMBNAIL_FILE_NAME,
+                                helper.getDescriptor(),
+                                helper.getFileSaveKey());
                     }
-                    return BnRFileHelper.copyFile(helper.getTargetFilePath(), helper.getSourceFilePath(), helper.getFileSaveKey());
+                    return BnRFileHelper.copyFile(
+                            helper.getTargetFilePath(),
+                            helper.getSourceFilePath(),
+                            helper.getFileSaveKey());
             }
         }
 
         private void backupXml(WallpaperBNRHelper helper) {
             if (helper == null) {
-                Log.d(WallpaperBackupRestoreManager.TAG, "backupXml: Cannot create backup xml file.");
+                Log.d(
+                        WallpaperBackupRestoreManager.TAG,
+                        "backupXml: Cannot create backup xml file.");
                 return;
             }
             WallpaperUser wallpaperUser = new WallpaperUser();
             int wallpaperType = helper.getWallpaperType();
             wallpaperUser.setWpType(wallpaperType);
-            if (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && helper.getMode() == 16 && wallpaperType == 8) {
-                wallpaperUser.setPath(BnRConstants.SUB_DISPLAY_FOLDER_NAME + File.separator + BnRConstants.VIDEO_DIR_PATH);
+            if (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                    && helper.getMode() == 16
+                    && wallpaperType == 8) {
+                wallpaperUser.setPath(
+                        BnRConstants.SUB_DISPLAY_FOLDER_NAME
+                                + File.separator
+                                + BnRConstants.VIDEO_DIR_PATH);
             } else {
                 wallpaperUser.setPath(helper.getFilePath());
             }
@@ -1338,7 +1715,9 @@ public class WallpaperBackupRestoreManager {
             wallpaperUser.setCoverType(helper.getCoverType());
             if (wallpaperType == 0 && helper.getMode() == 4) {
                 String deviceType = helper.getDeviceType();
-                if (!TextUtils.isEmpty(deviceType) && (deviceType.equals("folder") || deviceType.equals(BnRConstants.DEVICETYPE_TABLET))) {
+                if (!TextUtils.isEmpty(deviceType)
+                        && (deviceType.equals("folder")
+                                || deviceType.equals(BnRConstants.DEVICETYPE_TABLET))) {
                     wallpaperUser.setOrientation(helper.getOrientation());
                 }
             }
@@ -1380,9 +1759,9 @@ public class WallpaperBackupRestoreManager {
         }
     }
 
-    static class WallpaperRestoreAsyncTask extends AsyncTask<ArrayList, WallpaperBNRHelper, ArrayList<WallpaperBNRHelper>> {
-        WallpaperRestoreAsyncTask() {
-        }
+    static class WallpaperRestoreAsyncTask
+            extends AsyncTask<ArrayList, WallpaperBNRHelper, ArrayList<WallpaperBNRHelper>> {
+        WallpaperRestoreAsyncTask() {}
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
@@ -1397,7 +1776,12 @@ public class WallpaperBackupRestoreManager {
                 boolean retoreSuccess = restoreWallpaper(helper);
                 if (retoreSuccess) {
                     int wallpaperType = helper.getWallpaperType();
-                    if (wallpaperType != 3 && wallpaperType != 5 && (wallpaperType != 8 || !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE || helper.getType() != 1 || helper.getMode() != 16)) {
+                    if (wallpaperType != 3
+                            && wallpaperType != 5
+                            && (wallpaperType != 8
+                                    || !Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                                    || helper.getType() != 1
+                                    || helper.getMode() != 16)) {
                         requestResetEditInfo(helper.getContext(), helper.getWhich());
                     }
                     helper.setResultCode(ResultCode.RESULT_SUCCESS);
@@ -1405,7 +1789,8 @@ public class WallpaperBackupRestoreManager {
                         writeSettingValue(helper);
                     }
                     if (Build.VERSION.SEM_PLATFORM_INT >= 140100) {
-                        WallpaperManager.getInstance(helper.getContext()).semClearBackupWallpapers(helper.getWhich());
+                        WallpaperManager.getInstance(helper.getContext())
+                                .semClearBackupWallpapers(helper.getWhich());
                     }
                 } else {
                     if (oldTransparencyValue >= 0) {
@@ -1461,10 +1846,18 @@ public class WallpaperBackupRestoreManager {
             if (helper != null && helper.getType() == 2) {
                 switch (helper.getMode()) {
                     case 4:
-                        Settings.System.putIntForUser(helper.getContext().getContentResolver(), WallpaperManager.SETTINGS_LOCKSCREEN_WALLPAPER, 1, -2);
+                        Settings.System.putIntForUser(
+                                helper.getContext().getContentResolver(),
+                                WallpaperManager.SETTINGS_LOCKSCREEN_WALLPAPER,
+                                1,
+                                -2);
                         break;
                     case 16:
-                        Settings.System.putIntForUser(helper.getContext().getContentResolver(), WallpaperManager.SETTINGS_LOCKSCREEN_WALLPAPER_SUB, 1, -2);
+                        Settings.System.putIntForUser(
+                                helper.getContext().getContentResolver(),
+                                WallpaperManager.SETTINGS_LOCKSCREEN_WALLPAPER_SUB,
+                                1,
+                                -2);
                         break;
                 }
             }
@@ -1485,7 +1878,9 @@ public class WallpaperBackupRestoreManager {
             switch (helper.getWallpaperType()) {
                 case -1:
                 case 0:
-                    if (Build.VERSION.SEM_PLATFORM_INT >= 140100 && (WhichChecker.isWatchFaceDisplay(helper.getWhich()) || WhichChecker.isVirtualDisplay(helper.getWhich()))) {
+                    if (Build.VERSION.SEM_PLATFORM_INT >= 140100
+                            && (WhichChecker.isWatchFaceDisplay(helper.getWhich())
+                                    || WhichChecker.isVirtualDisplay(helper.getWhich()))) {
                         break;
                     } else if (helper.getRotationValue() != 0 || helper.getSecurityLevel() != 0) {
                         break;
@@ -1498,7 +1893,10 @@ public class WallpaperBackupRestoreManager {
                 case 2:
                 case 6:
                 default:
-                    helper.addErrorDescription("restoreWallpaper: Unhandled wallpaper type [" + helper.getWallpaperType() + "].");
+                    helper.addErrorDescription(
+                            "restoreWallpaper: Unhandled wallpaper type ["
+                                    + helper.getWallpaperType()
+                                    + "].");
                     break;
                 case 3:
                     if (helper.getMode() != 8) {
@@ -1545,21 +1943,32 @@ public class WallpaperBackupRestoreManager {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        private boolean setBitmap(com.samsung.android.wallpaperbackup.WallpaperBackupRestoreManager.WallpaperBNRHelper r17) {
+        private boolean setBitmap(
+                com.samsung.android.wallpaperbackup.WallpaperBackupRestoreManager.WallpaperBNRHelper
+                        r17) {
             /*
                 Method dump skipped, instructions count: 279
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.wallpaperbackup.WallpaperBackupRestoreManager.WallpaperRestoreAsyncTask.setBitmap(com.samsung.android.wallpaperbackup.WallpaperBackupRestoreManager$WallpaperBNRHelper):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.samsung.android.wallpaperbackup.WallpaperBackupRestoreManager.WallpaperRestoreAsyncTask.setBitmap(com.samsung.android.wallpaperbackup.WallpaperBackupRestoreManager$WallpaperBNRHelper):boolean");
         }
 
         private boolean setStream(WallpaperBNRHelper helper) {
             Bundle extrasBundle;
             long startTime = SystemClock.elapsedRealtime();
-            InputStream inputStream = BnRFileHelper.getInputStreamFromPath(helper.getSourceFilePath(), helper.getSecurityLevel(), helper.getFileSaveKey());
+            InputStream inputStream =
+                    BnRFileHelper.getInputStreamFromPath(
+                            helper.getSourceFilePath(),
+                            helper.getSecurityLevel(),
+                            helper.getFileSaveKey());
             try {
                 if (inputStream == null) {
-                    helper.addErrorDescription("setStream: inputStream is null. path = <" + helper.getSourceFilePath() + ">");
+                    helper.addErrorDescription(
+                            "setStream: inputStream is null. path = <"
+                                    + helper.getSourceFilePath()
+                                    + ">");
                     return false;
                 }
                 Rect visibleRect = helper.getCropHint();
@@ -1576,15 +1985,29 @@ public class WallpaperBackupRestoreManager {
                 if (helper.isHomeAndLockPaired()) {
                     helper.setWhich(helper.getWhich() | 2);
                 }
-                int result = WallpaperManager.getInstance(helper.getContext()).setStream(inputStream, visibleRect, true, helper.getWhich(), 0, false, extrasBundle);
+                int result =
+                        WallpaperManager.getInstance(helper.getContext())
+                                .setStream(
+                                        inputStream,
+                                        visibleRect,
+                                        true,
+                                        helper.getWhich(),
+                                        0,
+                                        false,
+                                        extrasBundle);
                 if (WallpaperBackupRestoreManager.DEBUG) {
-                    Log.d(WallpaperBackupRestoreManager.TAG, "setStream: Elapsed Time\t\t [" + (SystemClock.elapsedRealtime() - startTime) + NavigationBarInflaterView.SIZE_MOD_END);
+                    Log.d(
+                            WallpaperBackupRestoreManager.TAG,
+                            "setStream: Elapsed Time\t\t ["
+                                    + (SystemClock.elapsedRealtime() - startTime)
+                                    + NavigationBarInflaterView.SIZE_MOD_END);
                 }
                 if (result > 0) {
                     BnRFileHelper.closeSilently(inputStream);
                     return true;
                 }
-                helper.addErrorDescription("setStream: WallpaperManager.setStream returns " + result);
+                helper.addErrorDescription(
+                        "setStream: WallpaperManager.setStream returns " + result);
                 return false;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1600,17 +2023,35 @@ public class WallpaperBackupRestoreManager {
                 if (TextUtils.isEmpty(helper.getPackageName())) {
                     return false;
                 }
-                WallpaperManager.getInstance(helper.getContext()).setVideoLockscreenWallpaper((String) null, helper.getPackageName(), (String) null, helper.getWhich(), true);
+                WallpaperManager.getInstance(helper.getContext())
+                        .setVideoLockscreenWallpaper(
+                                (String) null,
+                                helper.getPackageName(),
+                                (String) null,
+                                helper.getWhich(),
+                                true);
                 return true;
             }
-            if (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && helper.getType() == 1 && helper.getMode() == 16) {
+            if (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                    && helper.getType() == 1
+                    && helper.getMode() == 16) {
                 return setCoverVideoWallpaper(helper);
             }
-            boolean result = BnRFileHelper.copyEncryptFile(helper.getSourceFilePath(), helper.getTargetFilePath(), helper.getFileSaveKey());
+            boolean result =
+                    BnRFileHelper.copyEncryptFile(
+                            helper.getSourceFilePath(),
+                            helper.getTargetFilePath(),
+                            helper.getFileSaveKey());
             if (!result) {
                 return false;
             }
-            WallpaperManager.getInstance(helper.getContext()).setVideoLockscreenWallpaper(helper.getTargetFilePath(), (String) null, (String) null, helper.getWhich(), true);
+            WallpaperManager.getInstance(helper.getContext())
+                    .setVideoLockscreenWallpaper(
+                            helper.getTargetFilePath(),
+                            (String) null,
+                            (String) null,
+                            helper.getWhich(),
+                            true);
             return true;
         }
 
@@ -1622,20 +2063,25 @@ public class WallpaperBackupRestoreManager {
                 param.putString("source_path", helper.getSourceFilePath());
                 param.putParcelable("crop_rect", helper.getCropHint());
                 param.putString("key", helper.getFileSaveKey());
-                Bundle resultBundle = sendEventToDressRoom(helper.getContext(), "custom_pack", param);
+                Bundle resultBundle =
+                        sendEventToDressRoom(helper.getContext(), "custom_pack", param);
                 if (resultBundle != null) {
                     if (resultBundle.getBoolean("result", false)) {
                         return true;
                     }
                 }
             } catch (Exception e) {
-                Log.e(WallpaperBackupRestoreManager.TAG, "restoreWallpaper: Exception " + e.getMessage());
+                Log.e(
+                        WallpaperBackupRestoreManager.TAG,
+                        "restoreWallpaper: Exception " + e.getMessage());
             }
             return false;
         }
 
         private boolean setGifWallpaper(WallpaperBNRHelper helper) {
-            if (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && helper.getType() == 1 && helper.getMode() == 16) {
+            if (Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                    && helper.getType() == 1
+                    && helper.getMode() == 16) {
                 try {
                     Bundle param = new Bundle();
                     param.putInt("which", helper.getWhich());
@@ -1643,14 +2089,17 @@ public class WallpaperBackupRestoreManager {
                     param.putString("source_path", helper.getSourceFilePath());
                     param.putString("key", helper.getFileSaveKey());
                     param.putBoolean("is_single_gif", true);
-                    Bundle resultBundle = sendEventToDressRoom(helper.getContext(), "custom_pack", param);
+                    Bundle resultBundle =
+                            sendEventToDressRoom(helper.getContext(), "custom_pack", param);
                     if (resultBundle != null) {
                         if (resultBundle.getBoolean("result", false)) {
                             return true;
                         }
                     }
                 } catch (Exception e) {
-                    Log.e(WallpaperBackupRestoreManager.TAG, "setGifWallpaper: Exception " + e.getMessage());
+                    Log.e(
+                            WallpaperBackupRestoreManager.TAG,
+                            "setGifWallpaper: Exception " + e.getMessage());
                 }
             }
             return false;
@@ -1675,7 +2124,8 @@ public class WallpaperBackupRestoreManager {
                 helper.addErrorDescription("setMultipackWallpaper: " + e.getMessage());
             }
             if (helper.isDownloadedThemeWallpaper()) {
-                WallpaperManager.getInstance(helper.getContext()).semSetUri(uri, true, helper.getWhich(), 3);
+                WallpaperManager.getInstance(helper.getContext())
+                        .semSetUri(uri, true, helper.getWhich(), 3);
                 return true;
             }
             if (helper.getUri() != null) {
@@ -1685,7 +2135,8 @@ public class WallpaperBackupRestoreManager {
                 param.putInt("type", helper.getWallpaperType());
                 param.putString("source_path", helper.getSourceFilePath());
                 param.putString("key", helper.getFileSaveKey());
-                Bundle resultBundle = sendEventToDressRoom(helper.getContext(), "custom_pack", param);
+                Bundle resultBundle =
+                        sendEventToDressRoom(helper.getContext(), "custom_pack", param);
                 if (resultBundle.getBoolean("result", false)) {
                     return true;
                 }
@@ -1701,7 +2152,8 @@ public class WallpaperBackupRestoreManager {
             if (TextUtils.isEmpty(packageName)) {
                 return false;
             }
-            WallpaperManager.getInstance(helper.getContext()).setMotionWallpaper(helper.getPackageName(), helper.getWhich(), true);
+            WallpaperManager.getInstance(helper.getContext())
+                    .setMotionWallpaper(helper.getPackageName(), helper.getWhich(), true);
             return true;
         }
 
@@ -1712,7 +2164,9 @@ public class WallpaperBackupRestoreManager {
                     return false;
                 }
                 try {
-                    WallpaperManager.getInstance(helper.getContext()).setAnimatedLockscreenWallpaper(helper.getPackageName(), helper.getWhich(), true);
+                    WallpaperManager.getInstance(helper.getContext())
+                            .setAnimatedLockscreenWallpaper(
+                                    helper.getPackageName(), helper.getWhich(), true);
                     return true;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1725,7 +2179,8 @@ public class WallpaperBackupRestoreManager {
         private boolean setLiveWallpaper(WallpaperBNRHelper helper) {
             try {
                 Bundle param = new Bundle();
-                Bundle extrasBundle = WallpaperExtraBundleHelper.fromJson(helper.getExternalParams());
+                Bundle extrasBundle =
+                        WallpaperExtraBundleHelper.fromJson(helper.getExternalParams());
                 if (extrasBundle != null) {
                     param.putString("contentType", extrasBundle.getString("contentType"));
                     param.putBundle(SliceItem.FORMAT_BUNDLE, extrasBundle);
@@ -1736,7 +2191,8 @@ public class WallpaperBackupRestoreManager {
                 param.putBoolean("is_paired", helper.isHomeAndLockPaired());
                 param.putString("key", helper.getFileSaveKey());
                 Log.d(WallpaperBackupRestoreManager.TAG, "setLiveWallpaper: param = " + param);
-                Bundle resultBundle = sendEventToDressRoom(helper.getContext(), "layered_image", param);
+                Bundle resultBundle =
+                        sendEventToDressRoom(helper.getContext(), "layered_image", param);
                 if (resultBundle != null) {
                     if (resultBundle.getBoolean("result", false)) {
                         return true;
@@ -1756,7 +2212,12 @@ public class WallpaperBackupRestoreManager {
         }
 
         private Bundle sendEventToDressRoom(Context context, String method, Bundle param) {
-            return context.getContentResolver().call(Uri.parse("content://com.samsung.android.app.dressroom.provider"), method, (String) null, param);
+            return context.getContentResolver()
+                    .call(
+                            Uri.parse("content://com.samsung.android.app.dressroom.provider"),
+                            method,
+                            (String) null,
+                            param);
         }
 
         private boolean isSourceFileValid(WallpaperBNRHelper helper) {
@@ -1765,7 +2226,10 @@ public class WallpaperBackupRestoreManager {
                 return false;
             }
             if (!BnRFileHelper.isExist(helper.getSourceFilePath())) {
-                helper.addErrorDescription("isSourceFileValid: Source file not exist. path = <" + helper.getSourceFilePath() + ">");
+                helper.addErrorDescription(
+                        "isSourceFileValid: Source file not exist. path = <"
+                                + helper.getSourceFilePath()
+                                + ">");
                 return false;
             }
             return true;

@@ -12,8 +12,7 @@ public interface IInputFilterHost extends IInterface {
 
     public static class Default implements IInputFilterHost {
         @Override // android.view.IInputFilterHost
-        public void sendInputEvent(InputEvent event, int policyFlags) throws RemoteException {
-        }
+        public void sendInputEvent(InputEvent event, int policyFlags) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IInputFilterHost extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputFilterHost {
+    public abstract static class Stub extends Binder implements IInputFilterHost {
         public static final String DESCRIPTOR = "android.view.IInputFilterHost";
         static final int TRANSACTION_sendInputEvent = 1;
 
@@ -60,7 +59,8 @@ public interface IInputFilterHost extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

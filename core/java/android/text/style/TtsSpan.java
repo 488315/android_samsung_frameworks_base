@@ -3,6 +3,7 @@ package android.text.style;
 import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.text.ParcelableSpan;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -270,7 +271,8 @@ public class TtsSpan implements ParcelableSpan {
             setFractionalPart(fractionalPart);
         }
 
-        public DecimalBuilder setArgumentsFromDouble(double number, int minimumFractionDigits, int maximumFractionDigits) {
+        public DecimalBuilder setArgumentsFromDouble(
+                double number, int minimumFractionDigits, int maximumFractionDigits) {
             NumberFormat formatter = NumberFormat.getInstance(Locale.US);
             formatter.setMinimumFractionDigits(maximumFractionDigits);
             formatter.setMaximumFractionDigits(maximumFractionDigits);

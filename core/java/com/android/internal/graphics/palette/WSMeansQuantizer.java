@@ -1,7 +1,5 @@
 package com.android.internal.graphics.palette;
 
-import com.android.internal.graphics.palette.Palette;
-import com.android.internal.graphics.palette.WSMeansQuantizer;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +29,10 @@ public final class WSMeansQuantizer implements Quantizer {
     private int[][] mIndexMatrix = new int[0][];
     private float[][] mDistanceMatrix = new float[0][];
 
-    public WSMeansQuantizer(int[] inClusters, PointProvider pointProvider, Map<Integer, Integer> inputPixelToCount) {
+    public WSMeansQuantizer(
+            int[] inClusters,
+            PointProvider pointProvider,
+            Map<Integer, Integer> inputPixelToCount) {
         int i = 0;
         this.mPointProvider = pointProvider;
         this.mClusters = (float[][]) Array.newInstance((Class<?>) Float.TYPE, inClusters.length, 3);
@@ -59,7 +60,9 @@ public final class WSMeansQuantizer implements Quantizer {
             mapQuantizer.quantize(pixels, maxColors);
             this.mInputPixelToCount = mapQuantizer.getColorToCount();
         }
-        this.mPoints = (float[][]) Array.newInstance((Class<?>) Float.TYPE, this.mInputPixelToCount.size(), 3);
+        this.mPoints =
+                (float[][])
+                        Array.newInstance((Class<?>) Float.TYPE, this.mInputPixelToCount.size(), 3);
         this.mPixels = new int[this.mInputPixelToCount.size()];
         int index = 0;
         Iterator<Integer> it = this.mInputPixelToCount.keySet().iterator();
@@ -99,7 +102,8 @@ public final class WSMeansQuantizer implements Quantizer {
             Set<Integer> clusterIndicesUsed = new HashSet<>();
             for (int i = 0; i < additionalClustersNeeded; i++) {
                 int index = random.nextInt(this.mPoints.length);
-                while (clusterIndicesUsed.contains(Integer.valueOf(index)) && clusterIndicesUsed.size() < this.mPoints.length) {
+                while (clusterIndicesUsed.contains(Integer.valueOf(index))
+                        && clusterIndicesUsed.size() < this.mPoints.length) {
                     index = random.nextInt(this.mPoints.length);
                 }
                 clusterIndicesUsed.add(Integer.valueOf(index));
@@ -116,13 +120,15 @@ public final class WSMeansQuantizer implements Quantizer {
         for (int i2 = 0; i2 < this.mPixels.length; i2++) {
             int clusterIndex = random2.nextInt(maxColors);
             this.mClusterIndices[i2] = clusterIndex;
-            this.mClusterPopulations[i2] = this.mInputPixelToCount.get(Integer.valueOf(this.mPixels[i2])).intValue();
+            this.mClusterPopulations[i2] =
+                    this.mInputPixelToCount.get(Integer.valueOf(this.mPixels[i2])).intValue();
         }
     }
 
     void calculateClusterDistances(int maxColors) {
         if (this.mDistanceMatrix.length != maxColors) {
-            this.mDistanceMatrix = (float[][]) Array.newInstance((Class<?>) Float.TYPE, maxColors, maxColors);
+            this.mDistanceMatrix =
+                    (float[][]) Array.newInstance((Class<?>) Float.TYPE, maxColors, maxColors);
         }
         for (int i = 0; i <= maxColors; i++) {
             for (int j = i + 1; j < maxColors; j++) {
@@ -132,21 +138,27 @@ public final class WSMeansQuantizer implements Quantizer {
             }
         }
         if (this.mIndexMatrix.length != maxColors) {
-            this.mIndexMatrix = (int[][]) Array.newInstance((Class<?>) Integer.TYPE, maxColors, maxColors);
+            this.mIndexMatrix =
+                    (int[][]) Array.newInstance((Class<?>) Integer.TYPE, maxColors, maxColors);
         }
         for (int i2 = 0; i2 < maxColors; i2++) {
             ArrayList<Distance> distances = new ArrayList<>(maxColors);
             for (int index = 0; index < maxColors; index++) {
                 distances.add(new Distance(index, this.mDistanceMatrix[i2][index]));
             }
-            distances.sort(new Comparator() { // from class: com.android.internal.graphics.palette.WSMeansQuantizer$$ExternalSyntheticLambda0
-                @Override // java.util.Comparator
-                public final int compare(Object obj, Object obj2) {
-                    int compare;
-                    compare = Float.compare(((WSMeansQuantizer.Distance) obj).getDistance(), ((WSMeansQuantizer.Distance) obj2).getDistance());
-                    return compare;
-                }
-            });
+            distances.sort(
+                    new Comparator() { // from class:
+                                       // com.android.internal.graphics.palette.WSMeansQuantizer$$ExternalSyntheticLambda0
+                        @Override // java.util.Comparator
+                        public final int compare(Object obj, Object obj2) {
+                            int compare;
+                            compare =
+                                    Float.compare(
+                                            ((WSMeansQuantizer.Distance) obj).getDistance(),
+                                            ((WSMeansQuantizer.Distance) obj2).getDistance());
+                            return compare;
+                        }
+                    });
             for (int j2 = 0; j2 < maxColors; j2++) {
                 this.mIndexMatrix[i2][j2] = distances.get(j2).getIndex();
             }
@@ -174,7 +186,8 @@ public final class WSMeansQuantizer implements Quantizer {
                 }
             }
             if (newClusterIndex != -1) {
-                float distanceChange = (float) Math.abs(Math.sqrt(minimumDistance) - Math.sqrt(previousDistance));
+                float distanceChange =
+                        (float) Math.abs(Math.sqrt(minimumDistance) - Math.sqrt(previousDistance));
                 if (distanceChange > 3.0f) {
                     colorMoved = true;
                     this.mClusterIndices[i] = newClusterIndex;

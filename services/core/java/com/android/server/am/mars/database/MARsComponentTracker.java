@@ -1,6 +1,7 @@
 package com.android.server.am.mars.database;
 
 import android.net.INetd;
+
 import com.android.internal.util.FrameworkStatsLog;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,7 +21,8 @@ public final class MARsComponentTracker {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    public static void sendCTInfo(String str, String str2, String str3, int i, String str4, int i2, String str5) {
+    public static void sendCTInfo(
+            String str, String str2, String str3, int i, String str4, int i2, String str5) {
         boolean z;
         int i3;
         String str6 = str2 == null || "android".equals(str2) ? "system" : str2;
@@ -116,6 +118,7 @@ public final class MARsComponentTracker {
                 i3 = -1;
                 break;
         }
-        FrameworkStatsLog.write(FrameworkStatsLog.COMPONENT_TRACKER_REPORTED, i, str7, i2, str6, i3, str4, str5);
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.COMPONENT_TRACKER_REPORTED, i, str7, i2, str6, i3, str4, str5);
     }
 }

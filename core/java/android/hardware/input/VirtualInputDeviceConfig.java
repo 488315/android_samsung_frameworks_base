@@ -3,6 +3,7 @@ package android.hardware.input;
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
@@ -19,12 +20,16 @@ public abstract class VirtualInputDeviceConfig {
         this.mVendorId = ((Builder) builder).mVendorId;
         this.mProductId = ((Builder) builder).mProductId;
         this.mAssociatedDisplayId = ((Builder) builder).mAssociatedDisplayId;
-        this.mInputDeviceName = (String) Objects.requireNonNull(((Builder) builder).mInputDeviceName);
+        this.mInputDeviceName =
+                (String) Objects.requireNonNull(((Builder) builder).mInputDeviceName);
         if (this.mAssociatedDisplayId == -1) {
-            throw new IllegalArgumentException("Display association is required for virtual input devices.");
+            throw new IllegalArgumentException(
+                    "Display association is required for virtual input devices.");
         }
         if (this.mInputDeviceName.getBytes(StandardCharsets.UTF_8).length >= 80) {
-            throw new IllegalArgumentException("Input device name exceeds maximum length of 80bytes: " + this.mInputDeviceName);
+            throw new IllegalArgumentException(
+                    "Input device name exceeds maximum length of 80bytes: "
+                            + this.mInputDeviceName);
         }
     }
 
@@ -60,14 +65,24 @@ public abstract class VirtualInputDeviceConfig {
     }
 
     public String toString() {
-        return getClass().getName() + "(  name=" + this.mInputDeviceName + " vendorId=" + this.mVendorId + " productId=" + this.mProductId + " associatedDisplayId=" + this.mAssociatedDisplayId + additionalFieldsToString() + NavigationBarInflaterView.KEY_CODE_END;
+        return getClass().getName()
+                + "(  name="
+                + this.mInputDeviceName
+                + " vendorId="
+                + this.mVendorId
+                + " productId="
+                + this.mProductId
+                + " associatedDisplayId="
+                + this.mAssociatedDisplayId
+                + additionalFieldsToString()
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     String additionalFieldsToString() {
         return "";
     }
 
-    public static abstract class Builder<T extends Builder<T>> {
+    public abstract static class Builder<T extends Builder<T>> {
         private int mAssociatedDisplayId = -1;
         private String mInputDeviceName;
         private int mProductId;

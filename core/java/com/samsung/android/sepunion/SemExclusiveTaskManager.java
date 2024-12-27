@@ -6,7 +6,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import com.samsung.android.sepunion.ISemExclusiveTaskManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +33,13 @@ public class SemExclusiveTaskManager {
         int userId;
         synchronized (sInstanceSync) {
             if (sInstance == null) {
-                if (Binder.getCallingUid() != 1000 && context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS) != 0 && context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL) != 0) {
+                if (Binder.getCallingUid() != 1000
+                        && context.checkCallingOrSelfPermission(
+                                        Manifest.permission.INTERACT_ACROSS_USERS)
+                                != 0
+                        && context.checkCallingOrSelfPermission(
+                                        Manifest.permission.INTERACT_ACROSS_USERS_FULL)
+                                != 0) {
                     userId = UserHandle.myUserId();
                     sInstance = new SemExclusiveTaskManager(context, null, userId);
                 }
@@ -46,7 +52,8 @@ public class SemExclusiveTaskManager {
 
     private ISemExclusiveTaskManager getService() {
         if (mService == null) {
-            SemUnionManager um = (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
+            SemUnionManager um =
+                    (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
             IBinder b = um.getSemSystemService(UnionConstants.SERVICE_EXCLUSIVE_TASK);
             mService = ISemExclusiveTaskManager.Stub.asInterface(b);
         }

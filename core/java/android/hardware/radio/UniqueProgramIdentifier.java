@@ -1,9 +1,9 @@
 package android.hardware.radio;
 
-import android.hardware.radio.ProgramSelector;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -12,19 +12,21 @@ import java.util.stream.Stream;
 
 /* loaded from: classes2.dex */
 public final class UniqueProgramIdentifier implements Parcelable {
-    public static final Parcelable.Creator<UniqueProgramIdentifier> CREATOR = new Parcelable.Creator<UniqueProgramIdentifier>() { // from class: android.hardware.radio.UniqueProgramIdentifier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UniqueProgramIdentifier createFromParcel(Parcel in) {
-            return new UniqueProgramIdentifier(in);
-        }
+    public static final Parcelable.Creator<UniqueProgramIdentifier> CREATOR =
+            new Parcelable.Creator<UniqueProgramIdentifier>() { // from class:
+                // android.hardware.radio.UniqueProgramIdentifier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UniqueProgramIdentifier createFromParcel(Parcel in) {
+                    return new UniqueProgramIdentifier(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UniqueProgramIdentifier[] newArray(int size) {
-            return new UniqueProgramIdentifier[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UniqueProgramIdentifier[] newArray(int size) {
+                    return new UniqueProgramIdentifier[size];
+                }
+            };
     private final ProgramSelector.Identifier[] mCriticalSecondaryIds;
     private final ProgramSelector.Identifier mPrimaryId;
 
@@ -115,7 +117,9 @@ public final class UniqueProgramIdentifier implements Parcelable {
         L73:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.radio.UniqueProgramIdentifier.<init>(android.hardware.radio.ProgramSelector):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.hardware.radio.UniqueProgramIdentifier.<init>(android.hardware.radio.ProgramSelector):void");
     }
 
     public UniqueProgramIdentifier(ProgramSelector.Identifier primaryId) {
@@ -132,11 +136,16 @@ public final class UniqueProgramIdentifier implements Parcelable {
     }
 
     public String toString() {
-        return "UniqueProgramIdentifier(primary=" + this.mPrimaryId + ", criticalSecondary=" + Arrays.toString(this.mCriticalSecondaryIds) + NavigationBarInflaterView.KEY_CODE_END;
+        return "UniqueProgramIdentifier(primary="
+                + this.mPrimaryId
+                + ", criticalSecondary="
+                + Arrays.toString(this.mCriticalSecondaryIds)
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mPrimaryId, Integer.valueOf(Arrays.hashCode(this.mCriticalSecondaryIds)));
+        return Objects.hash(
+                this.mPrimaryId, Integer.valueOf(Arrays.hashCode(this.mCriticalSecondaryIds)));
     }
 
     public boolean equals(Object obj) {
@@ -147,7 +156,8 @@ public final class UniqueProgramIdentifier implements Parcelable {
             return false;
         }
         UniqueProgramIdentifier other = (UniqueProgramIdentifier) obj;
-        return other.mPrimaryId.equals(this.mPrimaryId) && Arrays.equals(other.mCriticalSecondaryIds, this.mCriticalSecondaryIds);
+        return other.mPrimaryId.equals(this.mPrimaryId)
+                && Arrays.equals(other.mCriticalSecondaryIds, this.mCriticalSecondaryIds);
     }
 
     @Override // android.os.Parcelable
@@ -156,20 +166,26 @@ public final class UniqueProgramIdentifier implements Parcelable {
     }
 
     private UniqueProgramIdentifier(Parcel in) {
-        this.mPrimaryId = (ProgramSelector.Identifier) in.readTypedObject(ProgramSelector.Identifier.CREATOR);
-        this.mCriticalSecondaryIds = (ProgramSelector.Identifier[]) in.createTypedArray(ProgramSelector.Identifier.CREATOR);
+        this.mPrimaryId =
+                (ProgramSelector.Identifier) in.readTypedObject(ProgramSelector.Identifier.CREATOR);
+        this.mCriticalSecondaryIds =
+                (ProgramSelector.Identifier[])
+                        in.createTypedArray(ProgramSelector.Identifier.CREATOR);
     }
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedObject(this.mPrimaryId, 0);
         dest.writeTypedArray(this.mCriticalSecondaryIds, 0);
-        if (Stream.of((Object[]) this.mCriticalSecondaryIds).anyMatch(new Predicate() { // from class: android.hardware.radio.UniqueProgramIdentifier$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return Objects.isNull((ProgramSelector.Identifier) obj);
-            }
-        })) {
+        if (Stream.of((Object[]) this.mCriticalSecondaryIds)
+                .anyMatch(
+                        new Predicate() { // from class:
+                            // android.hardware.radio.UniqueProgramIdentifier$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return Objects.isNull((ProgramSelector.Identifier) obj);
+                            }
+                        })) {
             throw new IllegalArgumentException("criticalSecondaryIds list must not contain nulls");
         }
     }

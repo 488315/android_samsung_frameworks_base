@@ -10,14 +10,17 @@ import android.view.inputmethod.InlineSuggestionsResponse;
 
 /* loaded from: classes5.dex */
 public interface IInlineSuggestionsResponseCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.inputmethod.IInlineSuggestionsResponseCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.inputmethod.IInlineSuggestionsResponseCallback";
 
-    void onInlineSuggestionsResponse(AutofillId autofillId, InlineSuggestionsResponse inlineSuggestionsResponse) throws RemoteException;
+    void onInlineSuggestionsResponse(
+            AutofillId autofillId, InlineSuggestionsResponse inlineSuggestionsResponse)
+            throws RemoteException;
 
     public static class Default implements IInlineSuggestionsResponseCallback {
         @Override // com.android.internal.inputmethod.IInlineSuggestionsResponseCallback
-        public void onInlineSuggestionsResponse(AutofillId fieldId, InlineSuggestionsResponse response) throws RemoteException {
-        }
+        public void onInlineSuggestionsResponse(
+                AutofillId fieldId, InlineSuggestionsResponse response) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +28,7 @@ public interface IInlineSuggestionsResponseCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInlineSuggestionsResponseCallback {
+    public abstract static class Stub extends Binder implements IInlineSuggestionsResponseCallback {
         static final int TRANSACTION_onInlineSuggestionsResponse = 1;
 
         public Stub() {
@@ -63,7 +66,8 @@ public interface IInlineSuggestionsResponseCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInlineSuggestionsResponseCallback.DESCRIPTOR);
             }
@@ -74,7 +78,9 @@ public interface IInlineSuggestionsResponseCallback extends IInterface {
             switch (code) {
                 case 1:
                     AutofillId _arg0 = (AutofillId) data.readTypedObject(AutofillId.CREATOR);
-                    InlineSuggestionsResponse _arg1 = (InlineSuggestionsResponse) data.readTypedObject(InlineSuggestionsResponse.CREATOR);
+                    InlineSuggestionsResponse _arg1 =
+                            (InlineSuggestionsResponse)
+                                    data.readTypedObject(InlineSuggestionsResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onInlineSuggestionsResponse(_arg0, _arg1);
                     return true;
@@ -100,7 +106,8 @@ public interface IInlineSuggestionsResponseCallback extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInlineSuggestionsResponseCallback
-            public void onInlineSuggestionsResponse(AutofillId fieldId, InlineSuggestionsResponse response) throws RemoteException {
+            public void onInlineSuggestionsResponse(
+                    AutofillId fieldId, InlineSuggestionsResponse response) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInlineSuggestionsResponseCallback.DESCRIPTOR);

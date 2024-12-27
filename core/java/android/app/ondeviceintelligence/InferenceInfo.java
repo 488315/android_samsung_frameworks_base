@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class InferenceInfo implements Parcelable {
-    public static final Parcelable.Creator<InferenceInfo> CREATOR = new Parcelable.Creator<InferenceInfo>() { // from class: android.app.ondeviceintelligence.InferenceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InferenceInfo[] newArray(int size) {
-            return new InferenceInfo[size];
-        }
+    public static final Parcelable.Creator<InferenceInfo> CREATOR =
+            new Parcelable.Creator<InferenceInfo>() { // from class:
+                // android.app.ondeviceintelligence.InferenceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InferenceInfo[] newArray(int size) {
+                    return new InferenceInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InferenceInfo createFromParcel(Parcel in) {
-            return new InferenceInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InferenceInfo createFromParcel(Parcel in) {
+                    return new InferenceInfo(in);
+                }
+            };
     private final long endTimeMs;
     private final long startTimeMs;
     private final long suspendedTimeMs;
@@ -93,7 +95,8 @@ public class InferenceInfo implements Parcelable {
         }
 
         public InferenceInfo build() {
-            return new InferenceInfo(this.uid, this.startTimeMs, this.endTimeMs, this.suspendedTimeMs);
+            return new InferenceInfo(
+                    this.uid, this.startTimeMs, this.endTimeMs, this.suspendedTimeMs);
         }
     }
 }

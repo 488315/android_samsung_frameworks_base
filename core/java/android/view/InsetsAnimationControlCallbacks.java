@@ -1,7 +1,5 @@
 package android.view;
 
-import android.view.SyncRtSurfaceTransactionApplier;
-import android.view.WindowInsetsAnimation;
 
 /* loaded from: classes4.dex */
 public interface InsetsAnimationControlCallbacks {
@@ -15,5 +13,11 @@ public interface InsetsAnimationControlCallbacks {
 
     void scheduleApplyChangeInsets(InsetsAnimationControlRunner insetsAnimationControlRunner);
 
-    <T extends InsetsAnimationControlRunner & InternalInsetsAnimationController> void startAnimation(T t, WindowInsetsAnimationControlListener windowInsetsAnimationControlListener, int i, WindowInsetsAnimation windowInsetsAnimation, WindowInsetsAnimation.Bounds bounds);
+    <T extends InsetsAnimationControlRunner & InternalInsetsAnimationController>
+            void startAnimation(
+                    T t,
+                    WindowInsetsAnimationControlListener windowInsetsAnimationControlListener,
+                    int i,
+                    WindowInsetsAnimation windowInsetsAnimation,
+                    WindowInsetsAnimation.Bounds bounds);
 }

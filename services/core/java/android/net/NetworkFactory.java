@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+
 import com.android.modules.utils.build.SdkLevel;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
@@ -19,7 +21,8 @@ public class NetworkFactory {
     final NetworkFactoryShim mImpl;
     private int mRefCount = 0;
 
-    public NetworkFactory(Looper looper, Context context, String str, NetworkCapabilities networkCapabilities) {
+    public NetworkFactory(
+            Looper looper, Context context, String str, NetworkCapabilities networkCapabilities) {
         this.LOG_TAG = str;
         if (SdkLevel.isAtLeastS()) {
             this.mImpl = new NetworkFactoryImpl(this, looper, context, networkCapabilities);
@@ -89,24 +92,31 @@ public class NetworkFactory {
     }
 
     public void releaseRequestAsUnfulfillableByAnyFactory(final NetworkRequest networkRequest) {
-        final NetworkFactoryLegacyImpl networkFactoryLegacyImpl = (NetworkFactoryLegacyImpl) this.mImpl;
+        final NetworkFactoryLegacyImpl networkFactoryLegacyImpl =
+                (NetworkFactoryLegacyImpl) this.mImpl;
         networkFactoryLegacyImpl.getClass();
-        networkFactoryLegacyImpl.post(new Runnable() { // from class: android.net.NetworkFactoryLegacyImpl$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                NetworkFactoryLegacyImpl networkFactoryLegacyImpl2 = NetworkFactoryLegacyImpl.this;
-                NetworkRequest networkRequest2 = networkRequest;
-                networkFactoryLegacyImpl2.getClass();
-                NetworkFactory networkFactory = networkFactoryLegacyImpl2.mParent;
-                networkFactory.log("releaseRequestAsUnfulfillableByAnyFactory: " + networkRequest2);
-                NetworkProvider networkProvider = networkFactoryLegacyImpl2.mProvider;
-                if (networkProvider == null) {
-                    networkFactory.log("Ignoring attempt to release unregistered request as unfulfillable");
-                } else {
-                    networkProvider.declareNetworkRequestUnfulfillable(networkRequest2);
-                }
-            }
-        });
+        networkFactoryLegacyImpl.post(
+                new Runnable() { // from class:
+                    // android.net.NetworkFactoryLegacyImpl$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        NetworkFactoryLegacyImpl networkFactoryLegacyImpl2 =
+                                NetworkFactoryLegacyImpl.this;
+                        NetworkRequest networkRequest2 = networkRequest;
+                        networkFactoryLegacyImpl2.getClass();
+                        NetworkFactory networkFactory = networkFactoryLegacyImpl2.mParent;
+                        networkFactory.log(
+                                "releaseRequestAsUnfulfillableByAnyFactory: " + networkRequest2);
+                        NetworkProvider networkProvider = networkFactoryLegacyImpl2.mProvider;
+                        if (networkProvider == null) {
+                            networkFactory.log(
+                                    "Ignoring attempt to release unregistered request as"
+                                        + " unfulfillable");
+                        } else {
+                            networkProvider.declareNetworkRequestUnfulfillable(networkRequest2);
+                        }
+                    }
+                });
     }
 
     public void setCapabilityFilter(NetworkCapabilities networkCapabilities) {
@@ -122,11 +132,9 @@ public class NetworkFactory {
         this.mImpl.setScoreFilter(networkScore);
     }
 
-    public void startNetwork() {
-    }
+    public void startNetwork() {}
 
-    public void stopNetwork() {
-    }
+    public void stopNetwork() {}
 
     public void terminate() {
         NetworkFactoryLegacyImpl networkFactoryLegacyImpl = (NetworkFactoryLegacyImpl) this.mImpl;
@@ -134,7 +142,8 @@ public class NetworkFactory {
             throw new IllegalStateException("This NetworkFactory was never registered");
         }
         networkFactoryLegacyImpl.mParent.log("Unregistering NetworkFactory");
-        ((ConnectivityManager) networkFactoryLegacyImpl.mContext.getSystemService("connectivity")).unregisterNetworkProvider(networkFactoryLegacyImpl.mProvider);
+        ((ConnectivityManager) networkFactoryLegacyImpl.mContext.getSystemService("connectivity"))
+                .unregisterNetworkProvider(networkFactoryLegacyImpl.mProvider);
         networkFactoryLegacyImpl.removeCallbacksAndMessages(null);
     }
 

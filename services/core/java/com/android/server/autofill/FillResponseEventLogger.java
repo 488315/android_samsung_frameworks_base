@@ -1,8 +1,10 @@
 package com.android.server.autofill;
 
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
+
 import java.util.Optional;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -33,10 +35,13 @@ public final class FillResponseEventLogger {
 
     public final void logAndEndEvent() {
         if (!this.mEventInternal.isPresent()) {
-            Slog.w("FillResponseEventLogger", "Shouldn't be logging AutofillFillRequestReported again for same event");
+            Slog.w(
+                    "FillResponseEventLogger",
+                    "Shouldn't be logging AutofillFillRequestReported again for same event");
             return;
         }
-        FillResponseEventInternal fillResponseEventInternal = (FillResponseEventInternal) this.mEventInternal.get();
+        FillResponseEventInternal fillResponseEventInternal =
+                (FillResponseEventInternal) this.mEventInternal.get();
         if (Helper.sVerbose) {
             StringBuilder sb = new StringBuilder("Log AutofillFillResponseReported: requestId=");
             sb.append(fillResponseEventInternal.mRequestId);
@@ -50,7 +55,10 @@ public final class FillResponseEventLogger {
             sb.append(fillResponseEventInternal.mSaveUiTriggerIds);
             sb.append(" mLatencyFillResponseReceivedMillis=");
             sb.append(fillResponseEventInternal.mLatencyFillResponseReceivedMillis);
-            sb.append(" mAuthenticationType=0 mAuthenticationResult=0 mAuthenticationFailureReason=-1 mLatencyAuthenticationUiDisplayMillis=-1 mLatencyDatasetDisplayMillis=-1 mResponseStatus=");
+            sb.append(
+                    " mAuthenticationType=0 mAuthenticationResult=0 mAuthenticationFailureReason=-1"
+                        + " mLatencyAuthenticationUiDisplayMillis=-1"
+                        + " mLatencyDatasetDisplayMillis=-1 mResponseStatus=");
             sb.append(fillResponseEventInternal.mResponseStatus);
             sb.append(" mLatencyResponseProcessingMillis=");
             sb.append(fillResponseEventInternal.mLatencyResponseProcessingMillis);
@@ -61,10 +69,30 @@ public final class FillResponseEventLogger {
             sb.append(" mTotalDatasetsProvided=");
             sb.append(fillResponseEventInternal.mTotalDatasetsProvided);
             sb.append(" mDetectionPref=");
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb, fillResponseEventInternal.mDetectionPref, "FillResponseEventLogger");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    sb, fillResponseEventInternal.mDetectionPref, "FillResponseEventLogger");
         }
         long j = -1;
-        FrameworkStatsLog.write(FrameworkStatsLog.AUTOFILL_FILL_RESPONSE_REPORTED, fillResponseEventInternal.mRequestId, this.mSessionId, fillResponseEventInternal.mAppPackageUid, 0, fillResponseEventInternal.mAvailableCount, fillResponseEventInternal.mSaveUiTriggerIds, fillResponseEventInternal.mLatencyFillResponseReceivedMillis, 0, 0, j, j, j, fillResponseEventInternal.mResponseStatus, fillResponseEventInternal.mLatencyResponseProcessingMillis, fillResponseEventInternal.mAvailablePccCount, fillResponseEventInternal.mAvailablePccOnlyCount, fillResponseEventInternal.mTotalDatasetsProvided, fillResponseEventInternal.mDetectionPref);
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.AUTOFILL_FILL_RESPONSE_REPORTED,
+                fillResponseEventInternal.mRequestId,
+                this.mSessionId,
+                fillResponseEventInternal.mAppPackageUid,
+                0,
+                fillResponseEventInternal.mAvailableCount,
+                fillResponseEventInternal.mSaveUiTriggerIds,
+                fillResponseEventInternal.mLatencyFillResponseReceivedMillis,
+                0,
+                0,
+                j,
+                j,
+                j,
+                fillResponseEventInternal.mResponseStatus,
+                fillResponseEventInternal.mLatencyResponseProcessingMillis,
+                fillResponseEventInternal.mAvailablePccCount,
+                fillResponseEventInternal.mAvailablePccOnlyCount,
+                fillResponseEventInternal.mTotalDatasetsProvided,
+                fillResponseEventInternal.mDetectionPref);
         this.mEventInternal = Optional.empty();
     }
 
@@ -74,7 +102,9 @@ public final class FillResponseEventLogger {
 
     public final void startLogForNewResponse() {
         if (!this.mEventInternal.isEmpty()) {
-            Slog.w("FillResponseEventLogger", "FillResponseEventLogger is not empty before starting for a new request");
+            Slog.w(
+                    "FillResponseEventLogger",
+                    "FillResponseEventLogger is not empty before starting for a new request");
         }
         FillResponseEventInternal fillResponseEventInternal = new FillResponseEventInternal();
         fillResponseEventInternal.mRequestId = -1;

@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.InputChannel;
 import android.view.InputMonitor;
+
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 
@@ -22,27 +23,32 @@ public class MCTriggerManager {
     Looper mLooper;
     SemDesktopModeManager semDesktopModeManager;
     public final String TAG_PREFIX = SemMultiControlManager.TAG_PREFIX;
-    private final String TAG = SemMultiControlManager.TAG_PREFIX + MCTriggerManager.class.getSimpleName();
+    private final String TAG =
+            SemMultiControlManager.TAG_PREFIX + MCTriggerManager.class.getSimpleName();
     boolean isEnabled = false;
     int DEX_DISPLAY = 2;
     private boolean isDexEnabled = false;
-    private SemDesktopModeManager.DesktopModeListener desktopModeListener = new SemDesktopModeManager.DesktopModeListener() { // from class: com.samsung.android.multicontrol.MCTriggerManager.1
-        @Override // com.samsung.android.desktopmode.SemDesktopModeManager.DesktopModeListener
-        public void onDesktopModeStateChanged(SemDesktopModeState semDesktopModeState) {
-            if (semDesktopModeState.state == 4 && semDesktopModeState.getDisplayType() == 102) {
-                if (!MCTriggerManager.this.isDexEnabled) {
-                    MCTriggerManager.this.enable(false);
-                    MCTriggerManager.this.enable(true);
+    private SemDesktopModeManager.DesktopModeListener desktopModeListener =
+            new SemDesktopModeManager
+                    .DesktopModeListener() { // from class:
+                                             // com.samsung.android.multicontrol.MCTriggerManager.1
+                @Override // com.samsung.android.desktopmode.SemDesktopModeManager.DesktopModeListener
+                public void onDesktopModeStateChanged(SemDesktopModeState semDesktopModeState) {
+                    if (semDesktopModeState.state == 4
+                            && semDesktopModeState.getDisplayType() == 102) {
+                        if (!MCTriggerManager.this.isDexEnabled) {
+                            MCTriggerManager.this.enable(false);
+                            MCTriggerManager.this.enable(true);
+                        }
+                        MCTriggerManager.this.isDexEnabled = true;
+                        return;
+                    }
+                    if (MCTriggerManager.this.isDexEnabled) {
+                        MCTriggerManager.this.enable(false);
+                    }
+                    MCTriggerManager.this.isDexEnabled = false;
                 }
-                MCTriggerManager.this.isDexEnabled = true;
-                return;
-            }
-            if (MCTriggerManager.this.isDexEnabled) {
-                MCTriggerManager.this.enable(false);
-            }
-            MCTriggerManager.this.isDexEnabled = false;
-        }
-    };
+            };
 
     public MCTriggerManager(Context context, Looper looper) {
         this.mContext = context;
@@ -50,7 +56,9 @@ public class MCTriggerManager {
     }
 
     private void registerDesktopModeListener() {
-        this.semDesktopModeManager = (SemDesktopModeManager) this.mContext.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
+        this.semDesktopModeManager =
+                (SemDesktopModeManager)
+                        this.mContext.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
         if (this.semDesktopModeManager == null) {
             return;
         }
@@ -82,14 +90,31 @@ public class MCTriggerManager {
                 InputManager inputManager = (InputManager) this.mContext.getSystemService("input");
                 this.mInputMonitor = inputManager.monitorGestureInput("MultiControl_0", 0);
                 this.mInputChannel = this.mInputMonitor.getInputChannel();
-                this.mInputReceiver = new MCInputEventReceiver(this.mContext, 0, this.mInputMonitor, this.mInputChannel, this.mLooper);
+                this.mInputReceiver =
+                        new MCInputEventReceiver(
+                                this.mContext,
+                                0,
+                                this.mInputMonitor,
+                                this.mInputChannel,
+                                this.mLooper);
                 if (isDesktopModeEnabled()) {
-                    DisplayManager dm = (DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE);
-                    Context displayContext = this.mContext.createDisplayContext(dm.getDisplay(this.DEX_DISPLAY));
-                    InputManager inputManager2 = (InputManager) displayContext.getSystemService("input");
-                    this.mDexInputMonitor = inputManager2.monitorGestureInput("MultiControl_2", this.DEX_DISPLAY);
+                    DisplayManager dm =
+                            (DisplayManager)
+                                    this.mContext.getSystemService(Context.DISPLAY_SERVICE);
+                    Context displayContext =
+                            this.mContext.createDisplayContext(dm.getDisplay(this.DEX_DISPLAY));
+                    InputManager inputManager2 =
+                            (InputManager) displayContext.getSystemService("input");
+                    this.mDexInputMonitor =
+                            inputManager2.monitorGestureInput("MultiControl_2", this.DEX_DISPLAY);
                     this.mDexInputChannel = this.mDexInputMonitor.getInputChannel();
-                    this.mDexInputReceiver = new MCInputEventReceiver(this.mContext, this.DEX_DISPLAY, this.mDexInputMonitor, this.mDexInputChannel, this.mLooper);
+                    this.mDexInputReceiver =
+                            new MCInputEventReceiver(
+                                    this.mContext,
+                                    this.DEX_DISPLAY,
+                                    this.mDexInputMonitor,
+                                    this.mDexInputChannel,
+                                    this.mLooper);
                 }
                 registerDesktopModeListener();
                 return;

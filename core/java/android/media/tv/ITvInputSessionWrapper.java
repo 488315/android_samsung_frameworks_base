@@ -3,8 +3,6 @@ package android.media.tv;
 import android.content.Context;
 import android.graphics.Rect;
 import android.media.PlaybackParams;
-import android.media.tv.ITvInputSession;
-import android.media.tv.TvInputService;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -15,6 +13,7 @@ import android.view.InputChannel;
 import android.view.InputEvent;
 import android.view.InputEventReceiver;
 import android.view.Surface;
+
 import com.android.internal.os.HandlerCaller;
 import com.android.internal.os.SomeArgs;
 
@@ -67,7 +66,8 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
     private TvInputService.RecordingSession mTvInputRecordingSessionImpl;
     private TvInputService.Session mTvInputSessionImpl;
 
-    public ITvInputSessionWrapper(Context context, TvInputService.Session sessionImpl, InputChannel channel) {
+    public ITvInputSessionWrapper(
+            Context context, TvInputService.Session sessionImpl, InputChannel channel) {
         this.mCaller = new HandlerCaller(context, null, this, true);
         this.mTvInputSessionImpl = sessionImpl;
         this.mChannel = channel;
@@ -76,7 +76,8 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
         }
     }
 
-    public ITvInputSessionWrapper(Context context, TvInputService.RecordingSession recordingSessionImpl) {
+    public ITvInputSessionWrapper(
+            Context context, TvInputService.RecordingSession recordingSessionImpl) {
         this.mCaller = new HandlerCaller(context, null, this, true);
         this.mTvInputRecordingSessionImpl = recordingSessionImpl;
     }
@@ -138,15 +139,18 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
                 break;
             case 8:
                 SomeArgs args3 = (SomeArgs) msg.obj;
-                this.mTvInputSessionImpl.selectTrack(((Integer) args3.arg1).intValue(), (String) args3.arg2);
+                this.mTvInputSessionImpl.selectTrack(
+                        ((Integer) args3.arg1).intValue(), (String) args3.arg2);
                 args3.recycle();
                 break;
             case 9:
                 SomeArgs args4 = (SomeArgs) msg.obj;
                 if (this.mIsRecordingSession) {
-                    this.mTvInputRecordingSessionImpl.appPrivateCommand((String) args4.arg1, (Bundle) args4.arg2);
+                    this.mTvInputRecordingSessionImpl.appPrivateCommand(
+                            (String) args4.arg1, (Bundle) args4.arg2);
                 } else {
-                    this.mTvInputSessionImpl.appPrivateCommand((String) args4.arg1, (Bundle) args4.arg2);
+                    this.mTvInputSessionImpl.appPrivateCommand(
+                            (String) args4.arg1, (Bundle) args4.arg2);
                 }
                 args4.recycle();
                 break;
@@ -180,11 +184,13 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
                 this.mTvInputSessionImpl.timeShiftSetPlaybackParams((PlaybackParams) msg.obj);
                 break;
             case 19:
-                this.mTvInputSessionImpl.timeShiftEnablePositionTracking(((Boolean) msg.obj).booleanValue());
+                this.mTvInputSessionImpl.timeShiftEnablePositionTracking(
+                        ((Boolean) msg.obj).booleanValue());
                 break;
             case 20:
                 SomeArgs args6 = (SomeArgs) msg.obj;
-                this.mTvInputRecordingSessionImpl.startRecording((Uri) args6.arg1, (Bundle) args6.arg2);
+                this.mTvInputRecordingSessionImpl.startRecording(
+                        (Uri) args6.arg1, (Bundle) args6.arg2);
                 args6.recycle();
                 break;
             case 21:
@@ -203,7 +209,8 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
                 this.mTvInputSessionImpl.removeBroadcastInfo(msg.arg1);
                 break;
             case 26:
-                this.mTvInputSessionImpl.setInteractiveAppNotificationEnabled(((Boolean) msg.obj).booleanValue());
+                this.mTvInputSessionImpl.setInteractiveAppNotificationEnabled(
+                        ((Boolean) msg.obj).booleanValue());
                 break;
             case 27:
                 this.mTvInputSessionImpl.requestAd((AdRequest) msg.obj);
@@ -213,7 +220,8 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
                 break;
             case 29:
                 SomeArgs args7 = (SomeArgs) msg.obj;
-                this.mTvInputSessionImpl.selectAudioPresentation(((Integer) args7.arg1).intValue(), ((Integer) args7.arg2).intValue());
+                this.mTvInputSessionImpl.selectAudioPresentation(
+                        ((Integer) args7.arg1).intValue(), ((Integer) args7.arg2).intValue());
                 args7.recycle();
                 break;
             case 30:
@@ -221,12 +229,14 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
                 break;
             case 31:
                 SomeArgs args8 = (SomeArgs) msg.obj;
-                this.mTvInputSessionImpl.setTvMessageEnabled(((Integer) args8.arg1).intValue(), ((Boolean) args8.arg2).booleanValue());
+                this.mTvInputSessionImpl.setTvMessageEnabled(
+                        ((Integer) args8.arg1).intValue(), ((Boolean) args8.arg2).booleanValue());
                 args8.recycle();
                 break;
             case 32:
                 SomeArgs args9 = (SomeArgs) msg.obj;
-                this.mTvInputSessionImpl.onTvMessageReceived(((Integer) args9.arg1).intValue(), (Bundle) args9.arg2);
+                this.mTvInputSessionImpl.onTvMessageReceived(
+                        ((Integer) args9.arg1).intValue(), (Bundle) args9.arg2);
                 args9.recycle();
                 break;
             case 33:
@@ -240,7 +250,8 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
                 break;
             case 36:
                 SomeArgs args10 = (SomeArgs) msg.obj;
-                this.mTvInputSessionImpl.notifyTvAdSessionData((String) args10.arg1, (Bundle) args10.arg2);
+                this.mTvInputSessionImpl.notifyTvAdSessionData(
+                        (String) args10.arg1, (Bundle) args10.arg2);
                 args10.recycle();
                 break;
             default:
@@ -249,12 +260,27 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
         }
         long durationMs = (System.nanoTime() - startTime) / 1000000;
         if (durationMs > 50) {
-            Log.w(TAG, "Handling message (" + msg.what + ") took too long time (duration=" + durationMs + "ms)");
+            Log.w(
+                    TAG,
+                    "Handling message ("
+                            + msg.what
+                            + ") took too long time (duration="
+                            + durationMs
+                            + "ms)");
             if (msg.what == 6 && durationMs > 2000) {
-                throw new RuntimeException("Too much time to handle tune request. (" + durationMs + "ms > 2000ms) Consider handling the tune request in a separate thread.");
+                throw new RuntimeException(
+                        "Too much time to handle tune request. ("
+                                + durationMs
+                                + "ms > 2000ms) Consider handling the tune request in a separate"
+                                + " thread.");
             }
             if (durationMs > 5000) {
-                throw new RuntimeException("Too much time to handle a request. (type=" + msg.what + ", " + durationMs + "ms > 5000ms).");
+                throw new RuntimeException(
+                        "Too much time to handle a request. (type="
+                                + msg.what
+                                + ", "
+                                + durationMs
+                                + "ms > 5000ms).");
             }
         }
     }
@@ -279,7 +305,8 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
 
     @Override // android.media.tv.ITvInputSession
     public void dispatchSurfaceChanged(int format, int width, int height) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageIIII(4, format, width, height, 0));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageIIII(4, format, width, height, 0));
     }
 
     @Override // android.media.tv.ITvInputSession
@@ -300,17 +327,21 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
 
     @Override // android.media.tv.ITvInputSession
     public void selectAudioPresentation(int presentationId, int programId) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(29, Integer.valueOf(presentationId), Integer.valueOf(programId)));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(
+                        29, Integer.valueOf(presentationId), Integer.valueOf(programId)));
     }
 
     @Override // android.media.tv.ITvInputSession
     public void selectTrack(int type, String trackId) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(8, Integer.valueOf(type), trackId));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(8, Integer.valueOf(type), trackId));
     }
 
     @Override // android.media.tv.ITvInputSession
     public void setInteractiveAppNotificationEnabled(boolean enabled) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageO(26, Boolean.valueOf(enabled)));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageO(26, Boolean.valueOf(enabled)));
     }
 
     @Override // android.media.tv.ITvInputSession
@@ -420,17 +451,20 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
 
     @Override // android.media.tv.ITvInputSession
     public void setVideoFrozen(boolean isFrozen) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageO(35, Boolean.valueOf(isFrozen)));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageO(35, Boolean.valueOf(isFrozen)));
     }
 
     @Override // android.media.tv.ITvInputSession
     public void notifyTvMessage(int type, Bundle data) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(32, Integer.valueOf(type), data));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(32, Integer.valueOf(type), data));
     }
 
     @Override // android.media.tv.ITvInputSession
     public void setTvMessageEnabled(int type, boolean enabled) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(31, Integer.valueOf(type), Boolean.valueOf(enabled)));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(31, Integer.valueOf(type), Boolean.valueOf(enabled)));
     }
 
     @Override // android.media.tv.ITvInputSession
@@ -454,7 +488,8 @@ public class ITvInputSessionWrapper extends ITvInputSession.Stub implements Hand
                 finishInputEvent(event, false);
                 return;
             }
-            int handled = ITvInputSessionWrapper.this.mTvInputSessionImpl.dispatchInputEvent(event, this);
+            int handled =
+                    ITvInputSessionWrapper.this.mTvInputSessionImpl.dispatchInputEvent(event, this);
             if (handled != -1) {
                 finishInputEvent(event, handled == 1);
             }

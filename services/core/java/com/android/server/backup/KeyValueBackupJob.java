@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.util.SparseBooleanArray;
 import android.util.SparseLongArray;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -15,7 +16,8 @@ import java.util.Objects;
 public class KeyValueBackupJob extends JobService {
     public static final int MAX_JOB_ID = 52418896;
     public static final int MIN_JOB_ID = 52417896;
-    public static final ComponentName sKeyValueJobService = new ComponentName("android", KeyValueBackupJob.class.getName());
+    public static final ComponentName sKeyValueJobService =
+            new ComponentName("android", KeyValueBackupJob.class.getName());
     public static final SparseBooleanArray sScheduledForUserId = new SparseBooleanArray();
     public static final SparseLongArray sNextScheduledForUserId = new SparseLongArray();
 
@@ -49,15 +51,23 @@ public class KeyValueBackupJob extends JobService {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void schedule(int r11, android.content.Context r12, long r13, com.android.server.backup.UserBackupManagerService r15) {
+    public static void schedule(
+            int r11,
+            android.content.Context r12,
+            long r13,
+            com.android.server.backup.UserBackupManagerService r15) {
         /*
             Method dump skipped, instructions count: 250
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.KeyValueBackupJob.schedule(int, android.content.Context, long, com.android.server.backup.UserBackupManagerService):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.backup.KeyValueBackupJob.schedule(int,"
+                    + " android.content.Context, long,"
+                    + " com.android.server.backup.UserBackupManagerService):void");
     }
 
-    public static void schedule(int i, Context context, UserBackupManagerService userBackupManagerService) {
+    public static void schedule(
+            int i, Context context, UserBackupManagerService userBackupManagerService) {
         schedule(i, context, 0L, userBackupManagerService);
     }
 

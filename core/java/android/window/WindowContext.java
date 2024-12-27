@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.view.WindowManagerImpl;
+
 import java.lang.ref.Reference;
 
 /* loaded from: classes4.dex */

@@ -23,24 +23,19 @@ public interface IExplicitHealthCheckService extends IInterface {
 
     public static class Default implements IExplicitHealthCheckService {
         @Override // android.service.watchdog.IExplicitHealthCheckService
-        public void setCallback(RemoteCallback callback) throws RemoteException {
-        }
+        public void setCallback(RemoteCallback callback) throws RemoteException {}
 
         @Override // android.service.watchdog.IExplicitHealthCheckService
-        public void request(String packageName) throws RemoteException {
-        }
+        public void request(String packageName) throws RemoteException {}
 
         @Override // android.service.watchdog.IExplicitHealthCheckService
-        public void cancel(String packageName) throws RemoteException {
-        }
+        public void cancel(String packageName) throws RemoteException {}
 
         @Override // android.service.watchdog.IExplicitHealthCheckService
-        public void getSupportedPackages(RemoteCallback callback) throws RemoteException {
-        }
+        public void getSupportedPackages(RemoteCallback callback) throws RemoteException {}
 
         @Override // android.service.watchdog.IExplicitHealthCheckService
-        public void getRequestedPackages(RemoteCallback callback) throws RemoteException {
-        }
+        public void getRequestedPackages(RemoteCallback callback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -48,7 +43,7 @@ public interface IExplicitHealthCheckService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IExplicitHealthCheckService {
+    public abstract static class Stub extends Binder implements IExplicitHealthCheckService {
         static final int TRANSACTION_cancel = 3;
         static final int TRANSACTION_getRequestedPackages = 5;
         static final int TRANSACTION_getSupportedPackages = 4;
@@ -98,7 +93,8 @@ public interface IExplicitHealthCheckService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IExplicitHealthCheckService.DESCRIPTOR);
             }
@@ -108,7 +104,8 @@ public interface IExplicitHealthCheckService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RemoteCallback _arg0 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg0 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     setCallback(_arg0);
                     return true;
@@ -123,12 +120,14 @@ public interface IExplicitHealthCheckService extends IInterface {
                     cancel(_arg03);
                     return true;
                 case 4:
-                    RemoteCallback _arg04 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg04 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     getSupportedPackages(_arg04);
                     return true;
                 case 5:
-                    RemoteCallback _arg05 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg05 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     getRequestedPackages(_arg05);
                     return true;

@@ -8,7 +8,11 @@ import android.net.NetworkStatsCollection;
 import android.net.NetworkStatsHistory;
 import android.os.Environment;
 import android.util.AtomicFile;
+
 import com.android.internal.util.ArtFastDataInput;
+
+import libcore.io.IoUtils;
+
 import java.io.BufferedInputStream;
 import java.io.DataInput;
 import java.io.DataInputStream;
@@ -25,7 +29,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import libcore.io.IoUtils;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
 /* loaded from: classes3.dex */
@@ -35,11 +38,17 @@ public class NetworkStatsDataMigrationUtils {
     public static final String PREFIX_UID = "uid";
     public static final String PREFIX_XT = "xt";
     public static final String PREFIX_UID_TAG = "uid_tag";
-    private static final Map<String, String> sPrefixLegacyFileNameMap = Map.of(PREFIX_XT, "netstats_xt.bin", "uid", "netstats_uid.bin", PREFIX_UID_TAG, "netstats_uid.bin");
+    private static final Map<String, String> sPrefixLegacyFileNameMap =
+            Map.of(
+                    PREFIX_XT,
+                    "netstats_xt.bin",
+                    "uid",
+                    "netstats_uid.bin",
+                    PREFIX_UID_TAG,
+                    "netstats_uid.bin");
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Prefix {
-    }
+    public @interface Prefix {}
 
     private static class CollectionVersion {
         static final int VERSION_NETWORK_INIT = 1;
@@ -49,8 +58,7 @@ public class NetworkStatsDataMigrationUtils {
         static final int VERSION_UID_WITH_TAG = 3;
         static final int VERSION_UNIFIED_INIT = 16;
 
-        private CollectionVersion() {
-        }
+        private CollectionVersion() {}
     }
 
     private static class HistoryVersion {
@@ -58,8 +66,7 @@ public class NetworkStatsDataMigrationUtils {
         static final int VERSION_ADD_PACKETS = 2;
         static final int VERSION_INIT = 1;
 
-        private HistoryVersion() {
-        }
+        private HistoryVersion() {}
     }
 
     private static class IdentitySetVersion {
@@ -71,12 +78,10 @@ public class NetworkStatsDataMigrationUtils {
         static final int VERSION_ADD_SUB_ID = 7;
         static final int VERSION_INIT = 1;
 
-        private IdentitySetVersion() {
-        }
+        private IdentitySetVersion() {}
     }
 
-    private NetworkStatsDataMigrationUtils() {
-    }
+    private NetworkStatsDataMigrationUtils() {}
 
     private static File getPlatformSystemDir() {
         return new File(Environment.getDataDirectory(), "system");
@@ -111,7 +116,8 @@ public class NetworkStatsDataMigrationUtils {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    public static NetworkStatsCollection readPlatformCollection(String prefix, long bucketDuration) throws IOException {
+    public static NetworkStatsCollection readPlatformCollection(String prefix, long bucketDuration)
+            throws IOException {
         char c;
         NetworkStatsCollection.Builder builder = new NetworkStatsCollection.Builder(bucketDuration);
         switch (prefix.hashCode()) {
@@ -154,7 +160,8 @@ public class NetworkStatsDataMigrationUtils {
         return builder.build();
     }
 
-    private static void readPlatformCollection(NetworkStatsCollection.Builder builder, File file) throws IOException {
+    private static void readPlatformCollection(NetworkStatsCollection.Builder builder, File file)
+            throws IOException {
         FileInputStream is = new FileInputStream(file);
         ArtFastDataInput dataIn = new ArtFastDataInput(is, 8192);
         try {
@@ -164,7 +171,8 @@ public class NetworkStatsDataMigrationUtils {
         }
     }
 
-    public static void readPlatformCollection(NetworkStatsCollection.Builder builder, DataInput in) throws IOException {
+    public static void readPlatformCollection(NetworkStatsCollection.Builder builder, DataInput in)
+            throws IOException {
         int magic = in.readInt();
         if (magic != FILE_MAGIC) {
             throw new ProtocolException("unexpected magic: " + magic);
@@ -180,7 +188,8 @@ public class NetworkStatsDataMigrationUtils {
                         int uid = in.readInt();
                         int set = in.readInt();
                         int tag = in.readInt();
-                        NetworkStatsCollection.Key key = new NetworkStatsCollection.Key(ident, uid, set, tag);
+                        NetworkStatsCollection.Key key =
+                                new NetworkStatsCollection.Key(ident, uid, set, tag);
                         NetworkStatsHistory history = readPlatformHistory(in);
                         builder.addEntry(key, history);
                     }
@@ -280,15 +289,25 @@ public class NetworkStatsDataMigrationUtils {
             default:
                 throw new ProtocolException("unexpected version: " + version);
         }
-        NetworkStatsHistory.Builder historyBuilder = new NetworkStatsHistory.Builder(bucketDuration, bucketCount);
+        NetworkStatsHistory.Builder historyBuilder =
+                new NetworkStatsHistory.Builder(bucketDuration, bucketCount);
         for (int i = 0; i < bucketCount; i++) {
-            NetworkStatsHistory.Entry entry = new NetworkStatsHistory.Entry(bucketStart[i], activeTime[i], rxBytes[i], rxPackets[i], txBytes[i], txPackets[i], operations[i]);
+            NetworkStatsHistory.Entry entry =
+                    new NetworkStatsHistory.Entry(
+                            bucketStart[i],
+                            activeTime[i],
+                            rxBytes[i],
+                            rxPackets[i],
+                            txBytes[i],
+                            txPackets[i],
+                            operations[i]);
             historyBuilder.addEntry(entry);
         }
         return historyBuilder.build();
     }
 
-    private static Set<NetworkIdentity> readPlatformNetworkIdentitySet(DataInput in) throws IOException {
+    private static Set<NetworkIdentity> readPlatformNetworkIdentitySet(DataInput in)
+            throws IOException {
         String networkId;
         boolean roaming;
         boolean defaultNetwork;
@@ -336,7 +355,16 @@ public class NetworkStatsDataMigrationUtils {
                 subId = -1;
             }
             int collapsedLegacyType = getCollapsedLegacyType(type);
-            NetworkIdentity.Builder builder = new NetworkIdentity.Builder().setType(collapsedLegacyType).setSubscriberId(subscriberId).setWifiNetworkKey(networkId).setRoaming(roaming).setMetered(metered).setDefaultNetwork(defaultNetwork).setOemManaged(oemNetCapabilities).setSubId(subId);
+            NetworkIdentity.Builder builder =
+                    new NetworkIdentity.Builder()
+                            .setType(collapsedLegacyType)
+                            .setSubscriberId(subscriberId)
+                            .setWifiNetworkKey(networkId)
+                            .setRoaming(roaming)
+                            .setMetered(metered)
+                            .setDefaultNetwork(defaultNetwork)
+                            .setOemManaged(oemNetCapabilities)
+                            .setSubId(subId);
             if (type == 0 && ratType != -1) {
                 builder.setRatType(ratType);
             }
@@ -369,7 +397,9 @@ public class NetworkStatsDataMigrationUtils {
         }
     }
 
-    private static void readLegacyUid(NetworkStatsCollection.Builder builder, File uidFile, boolean onlyTaggedData) throws IOException {
+    private static void readLegacyUid(
+            NetworkStatsCollection.Builder builder, File uidFile, boolean onlyTaggedData)
+            throws IOException {
         AtomicFile inputFile = new AtomicFile(uidFile);
         DataInputStream in = new DataInputStream(new BufferedInputStream(inputFile.openRead()));
         try {
@@ -379,7 +409,9 @@ public class NetworkStatsDataMigrationUtils {
         }
     }
 
-    public static void readLegacyUid(NetworkStatsCollection.Builder builder, DataInput in, boolean taggedData) throws IOException {
+    public static void readLegacyUid(
+            NetworkStatsCollection.Builder builder, DataInput in, boolean taggedData)
+            throws IOException {
         int set;
         try {
             int magic = in.readInt();
@@ -406,7 +438,8 @@ public class NetworkStatsDataMigrationUtils {
                                 set = 0;
                             }
                             int tag = in.readInt();
-                            NetworkStatsCollection.Key key = new NetworkStatsCollection.Key(ident, uid, set, tag);
+                            NetworkStatsCollection.Key key =
+                                    new NetworkStatsCollection.Key(ident, uid, set, tag);
                             NetworkStatsHistory history = readPlatformHistory(in);
                             if ((tag == 0) != taggedData) {
                                 builder.addEntry(key, history);

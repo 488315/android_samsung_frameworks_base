@@ -40,6 +40,7 @@ import android.view.SurfaceControl;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.view.animation.DecelerateInterpolator;
+
 import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.os.SomeArgs;
 import com.android.internal.util.TraceBuffer;
@@ -56,10 +57,8 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationCon
 import com.android.server.accessibility.magnification.FullScreenMagnificationController$DisplayMagnification$$ExternalSyntheticLambda2;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.policy.WindowManagerPolicy;
-import com.android.server.wm.AccessibilityController;
-import com.android.server.wm.AccessibilityWindowsPopulator;
-import com.android.server.wm.WindowManagerInternal;
 import com.android.window.flags.Flags;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -91,7 +90,8 @@ public final class AccessibilityController {
     public boolean mAllObserversInitialized = true;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class AccessibilityControllerInternalImpl implements WindowManagerInternal.AccessibilityControllerInternal {
+    public final class AccessibilityControllerInternalImpl
+            implements WindowManagerInternal.AccessibilityControllerInternal {
         public static AccessibilityControllerInternalImpl sInstance;
         public UiChangesForAccessibilityCallbacksDispatcher mCallbacksDispatcher;
         public volatile long mEnabledTracingFlags;
@@ -101,10 +101,17 @@ public final class AccessibilityController {
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class UiChangesForAccessibilityCallbacksDispatcher {
             public final AccessibilityControllerInternalImpl mAccessibilityTracing;
-            public final WindowManagerInternal.AccessibilityControllerInternal.UiChangesForAccessibilityCallbacks mCallbacks;
+            public final WindowManagerInternal.AccessibilityControllerInternal
+                            .UiChangesForAccessibilityCallbacks
+                    mCallbacks;
             public final Handler mHandler;
 
-            public UiChangesForAccessibilityCallbacksDispatcher(AccessibilityControllerInternalImpl accessibilityControllerInternalImpl, Looper looper, WindowManagerInternal.AccessibilityControllerInternal.UiChangesForAccessibilityCallbacks uiChangesForAccessibilityCallbacks) {
+            public UiChangesForAccessibilityCallbacksDispatcher(
+                    AccessibilityControllerInternalImpl accessibilityControllerInternalImpl,
+                    Looper looper,
+                    WindowManagerInternal.AccessibilityControllerInternal
+                                    .UiChangesForAccessibilityCallbacks
+                            uiChangesForAccessibilityCallbacks) {
                 this.mAccessibilityTracing = accessibilityControllerInternalImpl;
                 this.mCallbacks = uiChangesForAccessibilityCallbacks;
                 this.mHandler = new Handler(looper);
@@ -117,7 +124,8 @@ public final class AccessibilityController {
             synchronized (AccessibilityController.STATIC_LOCK) {
                 try {
                     if (AccessibilityTracing.sInstance == null) {
-                        AccessibilityTracing.sInstance = new AccessibilityTracing(windowManagerService);
+                        AccessibilityTracing.sInstance =
+                                new AccessibilityTracing(windowManagerService);
                     }
                     accessibilityTracing = AccessibilityTracing.sInstance;
                 } catch (Throwable th) {
@@ -153,21 +161,52 @@ public final class AccessibilityController {
         public final void onRectangleOnScreenRequested(int i, Rect rect) {
             if (isTracingEnabled(2048L)) {
                 Object obj = AccessibilityController.STATIC_LOCK;
-                logTrace("AccessibilityController.onRectangleOnScreenRequested", 2048L, "rectangle={" + rect + "}");
+                logTrace(
+                        "AccessibilityController.onRectangleOnScreenRequested",
+                        2048L,
+                        "rectangle={" + rect + "}");
             }
-            UiChangesForAccessibilityCallbacksDispatcher uiChangesForAccessibilityCallbacksDispatcher = this.mCallbacksDispatcher;
+            UiChangesForAccessibilityCallbacksDispatcher
+                    uiChangesForAccessibilityCallbacksDispatcher = this.mCallbacksDispatcher;
             if (uiChangesForAccessibilityCallbacksDispatcher != null) {
-                AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = uiChangesForAccessibilityCallbacksDispatcher.mAccessibilityTracing;
+                AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                        uiChangesForAccessibilityCallbacksDispatcher.mAccessibilityTracing;
                 if (accessibilityControllerInternalImpl.isTracingEnabled(2048L)) {
-                    accessibilityControllerInternalImpl.logTrace("WindowManager.onRectangleOnScreenRequested", 2048L, "rectangle={" + rect + "}");
+                    accessibilityControllerInternalImpl.logTrace(
+                            "WindowManager.onRectangleOnScreenRequested",
+                            2048L,
+                            "rectangle={" + rect + "}");
                 }
-                final WindowManagerInternal.AccessibilityControllerInternal.UiChangesForAccessibilityCallbacks uiChangesForAccessibilityCallbacks = uiChangesForAccessibilityCallbacksDispatcher.mCallbacks;
+                final WindowManagerInternal.AccessibilityControllerInternal
+                                .UiChangesForAccessibilityCallbacks
+                        uiChangesForAccessibilityCallbacks =
+                                uiChangesForAccessibilityCallbacksDispatcher.mCallbacks;
                 Objects.requireNonNull(uiChangesForAccessibilityCallbacks);
-                uiChangesForAccessibilityCallbacksDispatcher.mHandler.sendMessage(PooledLambda.obtainMessage(new QuintConsumer() { // from class: com.android.server.wm.AccessibilityController$AccessibilityControllerInternalImpl$UiChangesForAccessibilityCallbacksDispatcher$$ExternalSyntheticLambda0
-                    public final void accept(Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
-                        WindowManagerInternal.AccessibilityControllerInternal.UiChangesForAccessibilityCallbacks.this.onRectangleOnScreenRequested(((Integer) obj2).intValue(), ((Integer) obj3).intValue(), ((Integer) obj4).intValue(), ((Integer) obj5).intValue(), ((Integer) obj6).intValue());
-                    }
-                }, Integer.valueOf(i), Integer.valueOf(rect.left), Integer.valueOf(rect.top), Integer.valueOf(rect.right), Integer.valueOf(rect.bottom)));
+                uiChangesForAccessibilityCallbacksDispatcher.mHandler.sendMessage(
+                        PooledLambda.obtainMessage(
+                                new QuintConsumer() { // from class:
+                                                      // com.android.server.wm.AccessibilityController$AccessibilityControllerInternalImpl$UiChangesForAccessibilityCallbacksDispatcher$$ExternalSyntheticLambda0
+                                    public final void accept(
+                                            Object obj2,
+                                            Object obj3,
+                                            Object obj4,
+                                            Object obj5,
+                                            Object obj6) {
+                                        WindowManagerInternal.AccessibilityControllerInternal
+                                                .UiChangesForAccessibilityCallbacks.this
+                                                .onRectangleOnScreenRequested(
+                                                        ((Integer) obj2).intValue(),
+                                                        ((Integer) obj3).intValue(),
+                                                        ((Integer) obj4).intValue(),
+                                                        ((Integer) obj5).intValue(),
+                                                        ((Integer) obj6).intValue());
+                                    }
+                                },
+                                Integer.valueOf(i),
+                                Integer.valueOf(rect.left),
+                                Integer.valueOf(rect.top),
+                                Integer.valueOf(rect.right),
+                                Integer.valueOf(rect.bottom)));
             }
         }
     }
@@ -180,10 +219,18 @@ public final class AccessibilityController {
         public final Object mLock = new Object();
         public final File mTraceFile = new File("/data/misc/a11ytrace/a11y_trace.winscope");
         public final TraceBuffer mBuffer = new TraceBuffer(12582912);
-        public final DisplayMagnifier.MyHandler mHandler = new DisplayMagnifier.MyHandler(this, KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("AccessibilityTracing").getLooper(), 1);
+        public final DisplayMagnifier.MyHandler mHandler =
+                new DisplayMagnifier.MyHandler(
+                        this,
+                        KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("AccessibilityTracing")
+                                .getLooper(),
+                        1);
 
         /* renamed from: -$$Nest$mtoStackTraceString, reason: not valid java name */
-        public static String m1046$$Nest$mtoStackTraceString(AccessibilityTracing accessibilityTracing, StackTraceElement[] stackTraceElementArr, Set set) {
+        public static String m1046$$Nest$mtoStackTraceString(
+                AccessibilityTracing accessibilityTracing,
+                StackTraceElement[] stackTraceElementArr,
+                Set set) {
             accessibilityTracing.getClass();
             if (stackTraceElementArr == null) {
                 return "";
@@ -236,13 +283,18 @@ public final class AccessibilityController {
         }
 
         /* renamed from: -$$Nest$mwriteTraceToFileInternal, reason: not valid java name */
-        public static void m1047$$Nest$mwriteTraceToFileInternal(AccessibilityTracing accessibilityTracing) {
+        public static void m1047$$Nest$mwriteTraceToFileInternal(
+                AccessibilityTracing accessibilityTracing) {
             accessibilityTracing.getClass();
             try {
                 ProtoOutputStream protoOutputStream = new ProtoOutputStream();
                 protoOutputStream.write(1125281431553L, 4846245196254490945L);
-                protoOutputStream.write(1125281431555L, TimeUnit.MILLISECONDS.toNanos(System.currentTimeMillis()) - SystemClock.elapsedRealtimeNanos());
-                accessibilityTracing.mBuffer.writeTraceToFile(accessibilityTracing.mTraceFile, protoOutputStream);
+                protoOutputStream.write(
+                        1125281431555L,
+                        TimeUnit.MILLISECONDS.toNanos(System.currentTimeMillis())
+                                - SystemClock.elapsedRealtimeNanos());
+                accessibilityTracing.mBuffer.writeTraceToFile(
+                        accessibilityTracing.mTraceFile, protoOutputStream);
             } catch (IOException e) {
                 Slog.e("AccessibilityTracing", "Unable to write buffer to file", e);
             }
@@ -252,7 +304,17 @@ public final class AccessibilityController {
             this.mService = windowManagerService;
         }
 
-        public final void log(String str, long j, String str2, byte[] bArr, int i, StackTraceElement[] stackTraceElementArr, long j2, String str3, String str4, Set set) {
+        public final void log(
+                String str,
+                long j,
+                String str2,
+                byte[] bArr,
+                int i,
+                StackTraceElement[] stackTraceElementArr,
+                long j2,
+                String str3,
+                String str4,
+                Set set) {
             SomeArgs obtain = SomeArgs.obtain();
             obtain.argl1 = j2;
             obtain.argl2 = j;
@@ -266,9 +328,26 @@ public final class AccessibilityController {
             this.mHandler.obtainMessage(1, i, 0, obtain).sendToTarget();
         }
 
-        public final void logState(String str, long j, String str2, byte[] bArr, int i, StackTraceElement[] stackTraceElementArr, Set set) {
+        public final void logState(
+                String str,
+                long j,
+                String str2,
+                byte[] bArr,
+                int i,
+                StackTraceElement[] stackTraceElementArr,
+                Set set) {
             if (this.mEnabled) {
-                log(str, j, str2, bArr, i, stackTraceElementArr, SystemClock.elapsedRealtimeNanos(), Process.myPid() + ":" + Application.getProcessName(), Thread.currentThread().getId() + ":" + Thread.currentThread().getName(), set);
+                log(
+                        str,
+                        j,
+                        str2,
+                        bArr,
+                        i,
+                        stackTraceElementArr,
+                        SystemClock.elapsedRealtimeNanos(),
+                        Process.myPid() + ":" + Application.getProcessName(),
+                        Thread.currentThread().getId() + ":" + Thread.currentThread().getName(),
+                        set);
             }
         }
     }
@@ -331,10 +410,18 @@ public final class AccessibilityController {
 
                     public AnimationController(Context context, Looper looper) {
                         super(looper);
-                        ObjectAnimator ofInt = ObjectAnimator.ofInt(ViewportWindow.this, "alpha", 0, IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                        ObjectAnimator ofInt =
+                                ObjectAnimator.ofInt(
+                                        ViewportWindow.this,
+                                        "alpha",
+                                        0,
+                                        IDnsResolverUnsolicitedEventListener
+                                                .DNS_HEALTH_RESULT_TIMEOUT);
                         this.mShowHideFrameAnimator = ofInt;
-                        DecelerateInterpolator decelerateInterpolator = new DecelerateInterpolator(2.5f);
-                        long integer = context.getResources().getInteger(R.integer.config_longAnimTime);
+                        DecelerateInterpolator decelerateInterpolator =
+                                new DecelerateInterpolator(2.5f);
+                        long integer =
+                                context.getResources().getInteger(R.integer.config_longAnimTime);
                         ofInt.setInterpolator(decelerateInterpolator);
                         ofInt.setDuration(integer);
                     }
@@ -349,7 +436,9 @@ public final class AccessibilityController {
                             this.mShowHideFrameAnimator.cancel();
                             ViewportWindow viewportWindow = ViewportWindow.this;
                             if (z) {
-                                viewportWindow.setAlpha(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                                viewportWindow.setAlpha(
+                                        IDnsResolverUnsolicitedEventListener
+                                                .DNS_HEALTH_RESULT_TIMEOUT);
                                 return;
                             } else {
                                 viewportWindow.setAlpha(0);
@@ -369,7 +458,15 @@ public final class AccessibilityController {
                 public ViewportWindow(Context context) {
                     SurfaceControl surfaceControl;
                     try {
-                        surfaceControl = DisplayMagnifier.this.mDisplayContent.makeOverlay().setName("Magnification Overlay").setBLASTLayer().setFormat(-3).setCallsite("ViewportWindow").build();
+                        surfaceControl =
+                                DisplayMagnifier.this
+                                        .mDisplayContent
+                                        .makeOverlay()
+                                        .setName("Magnification Overlay")
+                                        .setBLASTLayer()
+                                        .setFormat(-3)
+                                        .setCallsite("ViewportWindow")
+                                        .build();
                     } catch (Surface.OutOfResourcesException unused) {
                         surfaceControl = null;
                     }
@@ -377,18 +474,36 @@ public final class AccessibilityController {
                     DisplayMagnifier displayMagnifier = DisplayMagnifier.this;
                     displayMagnifier.mDisplay.getRealSize(displayMagnifier.mScreenSize);
                     Point point = DisplayMagnifier.this.mScreenSize;
-                    BLASTBufferQueue bLASTBufferQueue = new BLASTBufferQueue("Magnification Overlay", surfaceControl, point.x, point.y, 1);
+                    BLASTBufferQueue bLASTBufferQueue =
+                            new BLASTBufferQueue(
+                                    "Magnification Overlay", surfaceControl, point.x, point.y, 1);
                     this.mBlastBufferQueue = bLASTBufferQueue;
-                    SurfaceControl.Transaction transaction = (SurfaceControl.Transaction) DisplayMagnifier.this.mService.mTransactionFactory.get();
+                    SurfaceControl.Transaction transaction =
+                            (SurfaceControl.Transaction)
+                                    DisplayMagnifier.this.mService.mTransactionFactory.get();
                     DisplayMagnifier.this.mService.mPolicy.getClass();
-                    transaction.setLayer(surfaceControl, WindowManagerPolicy.getWindowLayerFromTypeLw(2027) * 10000).setPosition(surfaceControl, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE);
-                    InputMonitor.setTrustedOverlayInputInfo(surfaceControl, transaction, DisplayMagnifier.this.mDisplayContent.mDisplayId, "Magnification Overlay");
+                    transaction
+                            .setLayer(
+                                    surfaceControl,
+                                    WindowManagerPolicy.getWindowLayerFromTypeLw(2027) * 10000)
+                            .setPosition(
+                                    surfaceControl,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE);
+                    InputMonitor.setTrustedOverlayInputInfo(
+                            surfaceControl,
+                            transaction,
+                            DisplayMagnifier.this.mDisplayContent.mDisplayId,
+                            "Magnification Overlay");
                     transaction.apply();
                     this.mTransaction = transaction;
                     this.mSurface = bLASTBufferQueue.createSurface();
-                    this.mAnimationController = new AnimationController(context, DisplayMagnifier.this.mService.mH.getLooper());
+                    this.mAnimationController =
+                            new AnimationController(
+                                    context, DisplayMagnifier.this.mService.mH.getLooper());
                     TypedValue typedValue = new TypedValue();
-                    context.getTheme().resolveAttribute(R.attr.colorActivatedHighlight, typedValue, true);
+                    context.getTheme()
+                            .resolveAttribute(R.attr.colorActivatedHighlight, typedValue, true);
                     context.getColor(typedValue.resourceId);
                     int color = context.getColor(R.color.tertiary_text_holo_light);
                     this.mPaint.setStyle(Paint.Style.STROKE);
@@ -422,11 +537,14 @@ public final class AccessibilityController {
                         Method dump skipped, instructions count: 218
                         To view this dump change 'Code comments level' option to 'DEBUG'
                     */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.AccessibilityController.DisplayMagnifier.MagnifiedViewport.ViewportWindow.run():void");
+                    throw new UnsupportedOperationException(
+                            "Method not decompiled:"
+                                + " com.android.server.wm.AccessibilityController.DisplayMagnifier.MagnifiedViewport.ViewportWindow.run():void");
                 }
 
                 public final void setAlpha(int i) {
-                    WindowManagerGlobalLock windowManagerGlobalLock = DisplayMagnifier.this.mService.mGlobalLock;
+                    WindowManagerGlobalLock windowManagerGlobalLock =
+                            DisplayMagnifier.this.mService.mGlobalLock;
                     WindowManagerService.boostPriorityForLockedSection();
                     synchronized (windowManagerGlobalLock) {
                         try {
@@ -446,7 +564,13 @@ public final class AccessibilityController {
             }
 
             public MagnifiedViewport() {
-                float dimension = DisplayMagnifier.this.mDisplayContext.getResources().getDimension(R.dimen.accessibility_magnification_thumbnail_container_stroke_width);
+                float dimension =
+                        DisplayMagnifier.this
+                                .mDisplayContext
+                                .getResources()
+                                .getDimension(
+                                        R.dimen
+                                                .accessibility_magnification_thumbnail_container_stroke_width);
                 this.mBorderWidth = dimension;
                 this.mHalfBorderWidth = (int) Math.ceil(dimension / 2.0f);
                 this.mDrawBorderInset = ((int) dimension) / 2;
@@ -455,7 +579,8 @@ public final class AccessibilityController {
 
             public final void setMagnifiedRegionBorderShown(boolean z, boolean z2) {
                 ViewportWindow viewportWindow = this.mWindow;
-                WindowManagerGlobalLock windowManagerGlobalLock = DisplayMagnifier.this.mService.mGlobalLock;
+                WindowManagerGlobalLock windowManagerGlobalLock =
+                        DisplayMagnifier.this.mService.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock) {
                     try {
@@ -464,7 +589,10 @@ public final class AccessibilityController {
                             z = false;
                         } else {
                             viewportWindow.mShown = z;
-                            viewportWindow.mAnimationController.obtainMessage(1, z ? 1 : 0, z2 ? 1 : 0).sendToTarget();
+                            viewportWindow
+                                    .mAnimationController
+                                    .obtainMessage(1, z ? 1 : 0, z2 ? 1 : 0)
+                                    .sendToTarget();
                             WindowManagerService.resetPriorityAfterLockedSection();
                         }
                     } catch (Throwable th) {
@@ -485,7 +613,9 @@ public final class AccessibilityController {
             public final /* synthetic */ Object this$0;
 
             /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            public MyHandler(WindowsForAccessibilityObserver windowsForAccessibilityObserver, Looper looper) {
+            public MyHandler(
+                    WindowsForAccessibilityObserver windowsForAccessibilityObserver,
+                    Looper looper) {
                 super(looper, null, false);
                 this.$r8$classId = 2;
                 this.this$0 = windowsForAccessibilityObserver;
@@ -505,30 +635,49 @@ public final class AccessibilityController {
                         int i = message.what;
                         if (i == 1) {
                             Region region = (Region) ((SomeArgs) message.obj).arg1;
-                            FullScreenMagnificationController.DisplayMagnification displayMagnification = (FullScreenMagnificationController.DisplayMagnification) ((DisplayMagnifier) this.this$0).mCallbacks;
+                            FullScreenMagnificationController.DisplayMagnification
+                                    displayMagnification =
+                                            (FullScreenMagnificationController.DisplayMagnification)
+                                                    ((DisplayMagnifier) this.this$0).mCallbacks;
                             displayMagnification.getClass();
-                            FullScreenMagnificationController.this.mControllerCtx.mHandler.sendMessage(PooledLambda.obtainMessage(new FullScreenMagnificationController$$ExternalSyntheticLambda4(2), displayMagnification, Region.obtain(region)));
+                            FullScreenMagnificationController.this.mControllerCtx.mHandler
+                                    .sendMessage(
+                                            PooledLambda.obtainMessage(
+                                                    new FullScreenMagnificationController$$ExternalSyntheticLambda4(
+                                                            2),
+                                                    displayMagnification,
+                                                    Region.obtain(region)));
                             region.recycle();
                             return;
                         }
                         if (i == 3) {
-                            ((FullScreenMagnificationController.DisplayMagnification) ((DisplayMagnifier) this.this$0).mCallbacks).onUserContextChanged();
+                            ((FullScreenMagnificationController.DisplayMagnification)
+                                            ((DisplayMagnifier) this.this$0).mCallbacks)
+                                    .onUserContextChanged();
                             return;
                         }
                         if (i == 4) {
-                            ((FullScreenMagnificationController.DisplayMagnification) ((DisplayMagnifier) this.this$0).mCallbacks).onUserContextChanged();
+                            ((FullScreenMagnificationController.DisplayMagnification)
+                                            ((DisplayMagnifier) this.this$0).mCallbacks)
+                                    .onUserContextChanged();
                             return;
                         }
                         if (i == 5) {
-                            WindowManagerGlobalLock windowManagerGlobalLock = ((DisplayMagnifier) this.this$0).mService.mGlobalLock;
+                            WindowManagerGlobalLock windowManagerGlobalLock =
+                                    ((DisplayMagnifier) this.this$0).mService.mGlobalLock;
                             WindowManagerService.boostPriorityForLockedSection();
                             synchronized (windowManagerGlobalLock) {
                                 try {
-                                    if (((DisplayMagnifier) this.this$0).isFullscreenMagnificationActivated()) {
+                                    if (((DisplayMagnifier) this.this$0)
+                                            .isFullscreenMagnificationActivated()) {
                                         if (!Flags.alwaysDrawMagnificationFullscreenBorder()) {
-                                            ((DisplayMagnifier) this.this$0).mMagnifiedViewport.setMagnifiedRegionBorderShown(true, true);
+                                            ((DisplayMagnifier) this.this$0)
+                                                    .mMagnifiedViewport
+                                                            .setMagnifiedRegionBorderShown(
+                                                                    true, true);
                                         }
-                                        ((DisplayMagnifier) this.this$0).mService.scheduleAnimationLocked();
+                                        ((DisplayMagnifier) this.this$0)
+                                                .mService.scheduleAnimationLocked();
                                     }
                                 } finally {
                                 }
@@ -540,13 +689,25 @@ public final class AccessibilityController {
                             return;
                         }
                         boolean z = message.arg1 == 1;
-                        FullScreenMagnificationController.DisplayMagnification displayMagnification2 = (FullScreenMagnificationController.DisplayMagnification) ((DisplayMagnifier) this.this$0).mCallbacks;
+                        FullScreenMagnificationController.DisplayMagnification
+                                displayMagnification2 =
+                                        (FullScreenMagnificationController.DisplayMagnification)
+                                                ((DisplayMagnifier) this.this$0).mCallbacks;
                         displayMagnification2.getClass();
-                        FullScreenMagnificationController$DisplayMagnification$$ExternalSyntheticLambda2 fullScreenMagnificationController$DisplayMagnification$$ExternalSyntheticLambda2 = new FullScreenMagnificationController$DisplayMagnification$$ExternalSyntheticLambda2(1);
+                        FullScreenMagnificationController$DisplayMagnification$$ExternalSyntheticLambda2
+                                fullScreenMagnificationController$DisplayMagnification$$ExternalSyntheticLambda2 =
+                                        new FullScreenMagnificationController$DisplayMagnification$$ExternalSyntheticLambda2(
+                                                1);
                         Integer valueOf = Integer.valueOf(displayMagnification2.mDisplayId);
                         Boolean valueOf2 = Boolean.valueOf(z);
-                        FullScreenMagnificationController fullScreenMagnificationController = FullScreenMagnificationController.this;
-                        fullScreenMagnificationController.mControllerCtx.mHandler.sendMessage(PooledLambda.obtainMessage(fullScreenMagnificationController$DisplayMagnification$$ExternalSyntheticLambda2, fullScreenMagnificationController, valueOf, valueOf2));
+                        FullScreenMagnificationController fullScreenMagnificationController =
+                                FullScreenMagnificationController.this;
+                        fullScreenMagnificationController.mControllerCtx.mHandler.sendMessage(
+                                PooledLambda.obtainMessage(
+                                        fullScreenMagnificationController$DisplayMagnification$$ExternalSyntheticLambda2,
+                                        fullScreenMagnificationController,
+                                        valueOf,
+                                        valueOf2));
                         return;
                     case 1:
                         int i2 = message.what;
@@ -555,45 +716,70 @@ public final class AccessibilityController {
                                 return;
                             }
                             synchronized (((AccessibilityTracing) this.this$0).mLock) {
-                                AccessibilityTracing.m1047$$Nest$mwriteTraceToFileInternal((AccessibilityTracing) this.this$0);
+                                AccessibilityTracing.m1047$$Nest$mwriteTraceToFileInternal(
+                                        (AccessibilityTracing) this.this$0);
                             }
                             return;
                         }
                         SomeArgs someArgs = (SomeArgs) message.obj;
                         try {
                             ProtoOutputStream protoOutputStream = new ProtoOutputStream();
-                            PackageManagerInternal packageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+                            PackageManagerInternal packageManagerInternal =
+                                    (PackageManagerInternal)
+                                            LocalServices.getService(PackageManagerInternal.class);
                             long start = protoOutputStream.start(2246267895810L);
                             long j = someArgs.argl1;
-                            long time = new Date().getTime() - ((SystemClock.elapsedRealtimeNanos() - j) / 1000000);
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
+                            long time =
+                                    new Date().getTime()
+                                            - ((SystemClock.elapsedRealtimeNanos() - j) / 1000000);
+                            SimpleDateFormat simpleDateFormat =
+                                    new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
                             protoOutputStream.write(1125281431553L, j);
-                            protoOutputStream.write(1138166333442L, simpleDateFormat.format(Long.valueOf(time)).toString());
-                            Iterator it = AccessibilityTrace.getNamesOfLoggingTypes(someArgs.argl2).iterator();
+                            protoOutputStream.write(
+                                    1138166333442L,
+                                    simpleDateFormat.format(Long.valueOf(time)).toString());
+                            Iterator it =
+                                    AccessibilityTrace.getNamesOfLoggingTypes(someArgs.argl2)
+                                            .iterator();
                             while (it.hasNext()) {
                                 protoOutputStream.write(2237677961219L, (String) it.next());
                             }
                             protoOutputStream.write(1138166333446L, (String) someArgs.arg1);
                             protoOutputStream.write(1138166333444L, (String) someArgs.arg2);
                             protoOutputStream.write(1138166333445L, (String) someArgs.arg3);
-                            protoOutputStream.write(1138166333447L, packageManagerInternal.getNameForUid(message.arg1));
+                            protoOutputStream.write(
+                                    1138166333447L,
+                                    packageManagerInternal.getNameForUid(message.arg1));
                             protoOutputStream.write(1138166333448L, (String) someArgs.arg5);
-                            protoOutputStream.write(1138166333449L, AccessibilityTracing.m1046$$Nest$mtoStackTraceString((AccessibilityTracing) this.this$0, (StackTraceElement[]) someArgs.arg6, (Set) someArgs.arg4));
+                            protoOutputStream.write(
+                                    1138166333449L,
+                                    AccessibilityTracing.m1046$$Nest$mtoStackTraceString(
+                                            (AccessibilityTracing) this.this$0,
+                                            (StackTraceElement[]) someArgs.arg6,
+                                            (Set) someArgs.arg4));
                             protoOutputStream.write(1146756268042L, (byte[]) someArgs.arg7);
                             long start2 = protoOutputStream.start(1146756268043L);
-                            WindowManagerGlobalLock windowManagerGlobalLock2 = ((AccessibilityTracing) this.this$0).mService.mGlobalLock;
+                            WindowManagerGlobalLock windowManagerGlobalLock2 =
+                                    ((AccessibilityTracing) this.this$0).mService.mGlobalLock;
                             WindowManagerService.boostPriorityForLockedSection();
                             synchronized (windowManagerGlobalLock2) {
                                 try {
-                                    ((AccessibilityTracing) this.this$0).mService.dumpDebugLocked(0, protoOutputStream);
+                                    ((AccessibilityTracing) this.this$0)
+                                            .mService.dumpDebugLocked(0, protoOutputStream);
                                 } finally {
                                     WindowManagerService.resetPriorityAfterLockedSection();
                                 }
                             }
                             WindowManagerService.resetPriorityAfterLockedSection();
                             protoOutputStream.end(start2);
-                            Pair appProfileStatsForDebugging = ((AccessibilityTracing) this.this$0).mService.mAmInternal.getAppProfileStatsForDebugging(j, 5);
-                            protoOutputStream.write(1138166333452L, ((String) appProfileStatsForDebugging.first) + ((String) appProfileStatsForDebugging.second));
+                            Pair appProfileStatsForDebugging =
+                                    ((AccessibilityTracing) this.this$0)
+                                            .mService.mAmInternal.getAppProfileStatsForDebugging(
+                                                    j, 5);
+                            protoOutputStream.write(
+                                    1138166333452L,
+                                    ((String) appProfileStatsForDebugging.first)
+                                            + ((String) appProfileStatsForDebugging.second));
                             protoOutputStream.end(start);
                             synchronized (((AccessibilityTracing) this.this$0).mLock) {
                                 ((AccessibilityTracing) this.this$0).mBuffer.add(protoOutputStream);
@@ -607,7 +793,8 @@ public final class AccessibilityController {
                         if (message.what != 1) {
                             return;
                         }
-                        ((WindowsForAccessibilityObserver) this.this$0).computeChangedWindows(false);
+                        ((WindowsForAccessibilityObserver) this.this$0)
+                                .computeChangedWindows(false);
                         return;
                 }
             }
@@ -623,7 +810,8 @@ public final class AccessibilityController {
             }
 
             public final void sendUserContextChangedNotification() {
-                if (DisplayMagnifier.this.isFullscreenMagnificationActivated() && AccessibilityUtils.getVisiblityShortcutDialog()) {
+                if (DisplayMagnifier.this.isFullscreenMagnificationActivated()
+                        && AccessibilityUtils.getVisiblityShortcutDialog()) {
                     AccessibilityUtils.setVisibilityShortcutDialog(false);
                 } else {
                     this.mHasDelayedNotificationForRecentsToFrontTransition = false;
@@ -632,13 +820,18 @@ public final class AccessibilityController {
             }
         }
 
-        public DisplayMagnifier(WindowManagerService windowManagerService, DisplayContent displayContent, Display display, WindowManagerInternal.MagnificationCallbacks magnificationCallbacks) {
+        public DisplayMagnifier(
+                WindowManagerService windowManagerService,
+                DisplayContent displayContent,
+                Display display,
+                WindowManagerInternal.MagnificationCallbacks magnificationCallbacks) {
             Point point = new Point();
             this.mScreenSize = point;
             this.mTempWindowStates = new SparseArray();
             new RectF();
             this.mTempMatrix = new Matrix();
-            Context createDisplayContext = windowManagerService.mContext.createDisplayContext(display);
+            Context createDisplayContext =
+                    windowManagerService.mContext.createDisplayContext(display);
             this.mDisplayContext = createDisplayContext;
             this.mService = windowManagerService;
             this.mCallbacks = magnificationCallbacks;
@@ -647,10 +840,16 @@ public final class AccessibilityController {
             MyHandler myHandler = new MyHandler(this, windowManagerService.mH.getLooper(), 0);
             this.mHandler = myHandler;
             this.mUserContextChangedNotifier = new UserContextChangedNotifier(myHandler);
-            this.mMagnifiedViewport = Flags.alwaysDrawMagnificationFullscreenBorder() ? null : new MagnifiedViewport();
-            AccessibilityControllerInternalImpl accessibilityControllerInternal = AccessibilityController.getAccessibilityControllerInternal(windowManagerService);
+            this.mMagnifiedViewport =
+                    Flags.alwaysDrawMagnificationFullscreenBorder()
+                            ? null
+                            : new MagnifiedViewport();
+            AccessibilityControllerInternalImpl accessibilityControllerInternal =
+                    AccessibilityController.getAccessibilityControllerInternal(
+                            windowManagerService);
             this.mAccessibilityTracing = accessibilityControllerInternal;
-            this.mLongAnimationDuration = createDisplayContext.getResources().getInteger(R.integer.config_longAnimTime);
+            this.mLongAnimationDuration =
+                    createDisplayContext.getResources().getInteger(R.integer.config_longAnimTime);
             if (createDisplayContext.getResources().getConfiguration().isScreenRound()) {
                 Path path = new Path();
                 this.mCircularPath = path;
@@ -661,7 +860,18 @@ public final class AccessibilityController {
                 this.mCircularPath = null;
             }
             if (accessibilityControllerInternal.isTracingEnabled(2048L)) {
-                accessibilityControllerInternal.logTrace("WindowManager.DisplayMagnifier.constructor", 2048L, "windowManagerService={" + windowManagerService + "}; displayContent={" + displayContent + "}; display={" + display + "}; callbacks={" + magnificationCallbacks + "}");
+                accessibilityControllerInternal.logTrace(
+                        "WindowManager.DisplayMagnifier.constructor",
+                        2048L,
+                        "windowManagerService={"
+                                + windowManagerService
+                                + "}; displayContent={"
+                                + displayContent
+                                + "}; display={"
+                                + display
+                                + "}; callbacks={"
+                                + magnificationCallbacks
+                                + "}");
             }
             recomputeBounds();
         }
@@ -672,17 +882,21 @@ public final class AccessibilityController {
         }
 
         public final boolean isFullscreenMagnificationActivated() {
-            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                    this.mAccessibilityTracing;
             if (accessibilityControllerInternalImpl.isTracingEnabled(2048L)) {
-                accessibilityControllerInternalImpl.logTrace("WindowManager.isFullscreenMagnificationActivated", 2048L);
+                accessibilityControllerInternalImpl.logTrace(
+                        "WindowManager.isFullscreenMagnificationActivated", 2048L);
             }
             return this.mIsFullscreenMagnificationActivated;
         }
 
         public final void notifyImeWindowVisibilityChanged(boolean z) {
-            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                    this.mAccessibilityTracing;
             if (accessibilityControllerInternalImpl.isTracingEnabled(2048L)) {
-                accessibilityControllerInternalImpl.logTrace("WindowManager.notifyImeWindowVisibilityChanged", 2048L, "shown=" + z);
+                accessibilityControllerInternalImpl.logTrace(
+                        "WindowManager.notifyImeWindowVisibilityChanged", 2048L, "shown=" + z);
             }
             this.mHandler.obtainMessage(6, z ? 1 : 0, 0).sendToTarget();
         }
@@ -707,22 +921,30 @@ public final class AccessibilityController {
             final SparseArray sparseArray = this.mTempWindowStates;
             sparseArray.clear();
             this.mTempLayer = 0;
-            this.mDisplayContent.forAllWindows(new Consumer() { // from class: com.android.server.wm.AccessibilityController$DisplayMagnifier$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    AccessibilityController.DisplayMagnifier displayMagnifier = AccessibilityController.DisplayMagnifier.this;
-                    SparseArray sparseArray2 = sparseArray;
-                    WindowState windowState = (WindowState) obj;
-                    displayMagnifier.getClass();
-                    if (windowState.isOnScreen() && windowState.isVisible() && windowState.mAttrs.alpha != FullScreenMagnificationGestureHandler.MAX_SCALE) {
-                        int i3 = displayMagnifier.mTempLayer + 1;
-                        displayMagnifier.mTempLayer = i3;
-                        sparseArray2.put(i3, windowState);
-                    }
-                }
-            }, false);
+            this.mDisplayContent.forAllWindows(
+                    new Consumer() { // from class:
+                                     // com.android.server.wm.AccessibilityController$DisplayMagnifier$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            AccessibilityController.DisplayMagnifier displayMagnifier =
+                                    AccessibilityController.DisplayMagnifier.this;
+                            SparseArray sparseArray2 = sparseArray;
+                            WindowState windowState = (WindowState) obj;
+                            displayMagnifier.getClass();
+                            if (windowState.isOnScreen()
+                                    && windowState.isVisible()
+                                    && windowState.mAttrs.alpha
+                                            != FullScreenMagnificationGestureHandler.MAX_SCALE) {
+                                int i3 = displayMagnifier.mTempLayer + 1;
+                                displayMagnifier.mTempLayer = i3;
+                                sparseArray2.put(i3, windowState);
+                            }
+                        }
+                    },
+                    false);
             DisplayContent displayContent = this.mDisplayContent;
-            if (displayContent.isDefaultDisplay && displayContent.getDefaultTaskDisplayArea().isSplitScreenModeActivated()) {
+            if (displayContent.isDefaultDisplay
+                    && displayContent.getDefaultTaskDisplayArea().isSplitScreenModeActivated()) {
                 region = new Region();
                 this.mDisplayContent.getStableRect(this.mTempRect1);
                 region.set(this.mTempRect1);
@@ -773,8 +995,12 @@ public final class AccessibilityController {
                             isEmpty = region9.isEmpty();
                         }
                         if (isEmpty) {
-                            InsetsSourceProvider controllableInsetProvider = windowState.getControllableInsetProvider();
-                            Rect frame = controllableInsetProvider != null ? controllableInsetProvider.mSource.getFrame() : AccessibilityController.EMPTY_RECT;
+                            InsetsSourceProvider controllableInsetProvider =
+                                    windowState.getControllableInsetProvider();
+                            Rect frame =
+                                    controllableInsetProvider != null
+                                            ? controllableInsetProvider.mSource.getFrame()
+                                            : AccessibilityController.EMPTY_RECT;
                             region4.op(frame, op);
                             region3.op(frame, op2);
                         }
@@ -786,7 +1012,8 @@ public final class AccessibilityController {
                                 Rect bounds = windowState.getBounds();
                                 Rect letterboxInsets = activityRecord.getLetterboxInsets();
                                 Rect copyOrNull = Rect.copyOrNull(bounds);
-                                copyOrNull.inset(Insets.subtract(Insets.NONE, Insets.of(letterboxInsets)));
+                                copyOrNull.inset(
+                                        Insets.subtract(Insets.NONE, Insets.of(letterboxInsets)));
                                 Region region10 = new Region();
                                 region10.set(copyOrNull);
                                 region10.op(bounds, op2);
@@ -827,7 +1054,8 @@ public final class AccessibilityController {
                     MagnifiedViewport magnifiedViewport2 = this.mMagnifiedViewport;
                     MagnifiedViewport.ViewportWindow viewportWindow = magnifiedViewport2.mWindow;
                     Region region13 = DisplayMagnifier.this.mMagnificationRegion;
-                    WindowManagerGlobalLock windowManagerGlobalLock = DisplayMagnifier.this.mService.mGlobalLock;
+                    WindowManagerGlobalLock windowManagerGlobalLock =
+                            DisplayMagnifier.this.mService.mGlobalLock;
                     WindowManagerService.boostPriorityForLockedSection();
                     synchronized (windowManagerGlobalLock) {
                         try {
@@ -877,16 +1105,25 @@ public final class AccessibilityController {
         public final long mRecurringAccessibilityEventsIntervalMillis;
         public final WindowManagerService mService;
 
-        public WindowsForAccessibilityObserver(WindowManagerService windowManagerService, int i, WindowManagerInternal.WindowsForAccessibilityCallback windowsForAccessibilityCallback, AccessibilityWindowsPopulator accessibilityWindowsPopulator) {
+        public WindowsForAccessibilityObserver(
+                WindowManagerService windowManagerService,
+                int i,
+                WindowManagerInternal.WindowsForAccessibilityCallback
+                        windowsForAccessibilityCallback,
+                AccessibilityWindowsPopulator accessibilityWindowsPopulator) {
             new ArraySet();
             new Region();
             new Region();
             this.mService = windowManagerService;
             this.mCallback = windowsForAccessibilityCallback;
             this.mDisplayId = i;
-            this.mHandler = new DisplayMagnifier.MyHandler(this, windowManagerService.mH.getLooper());
-            this.mAccessibilityTracing = AccessibilityController.getAccessibilityControllerInternal(windowManagerService);
-            this.mRecurringAccessibilityEventsIntervalMillis = ViewConfiguration.getSendRecurringAccessibilityEventsInterval();
+            this.mHandler =
+                    new DisplayMagnifier.MyHandler(this, windowManagerService.mH.getLooper());
+            this.mAccessibilityTracing =
+                    AccessibilityController.getAccessibilityControllerInternal(
+                            windowManagerService);
+            this.mRecurringAccessibilityEventsIntervalMillis =
+                    ViewConfiguration.getSendRecurringAccessibilityEventsInterval();
             this.mA11yWindowsPopulator = accessibilityWindowsPopulator;
             computeChangedWindows(true);
         }
@@ -894,7 +1131,8 @@ public final class AccessibilityController {
         public final void computeChangedWindows(boolean z) {
             WindowState windowState;
             if (this.mAccessibilityTracing.isTracingEnabled(1024L)) {
-                this.mAccessibilityTracing.logTrace("WindowManager.computeChangedWindows", 1024L, "forceSend=" + z);
+                this.mAccessibilityTracing.logTrace(
+                        "WindowManager.computeChangedWindows", 1024L, "forceSend=" + z);
             }
             ArrayList arrayList = new ArrayList();
             Point point = new Point();
@@ -903,46 +1141,73 @@ public final class AccessibilityController {
             synchronized (windowManagerGlobalLock) {
                 try {
                     WindowManagerService windowManagerService = this.mService;
-                    RecentsAnimationController recentsAnimationController = windowManagerService.mRecentsAnimationController;
+                    RecentsAnimationController recentsAnimationController =
+                            windowManagerService.mRecentsAnimationController;
                     if (recentsAnimationController != null) {
-                        ActivityRecord activityRecord = recentsAnimationController.mTargetActivityRecord;
-                        windowState = activityRecord == null ? null : activityRecord.findMainWindow(true);
+                        ActivityRecord activityRecord =
+                                recentsAnimationController.mTargetActivityRecord;
+                        windowState =
+                                activityRecord == null ? null : activityRecord.findMainWindow(true);
                     } else {
-                        windowState = windowManagerService.mRoot.getTopFocusedDisplayContent().mCurrentFocus;
+                        windowState =
+                                windowManagerService.mRoot.getTopFocusedDisplayContent()
+                                        .mCurrentFocus;
                     }
                     if (windowState == null) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return;
                     }
-                    DisplayContent displayContent = this.mService.mRoot.getDisplayContent(this.mDisplayId);
+                    DisplayContent displayContent =
+                            this.mService.mRoot.getDisplayContent(this.mDisplayId);
                     if (displayContent == null) {
                         Slog.w("WindowManager", "display content is null, should be created later");
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return;
                     }
                     displayContent.mDisplay.getRealSize(point);
-                    this.mA11yWindowsPopulator.populateVisibleWindowsOnScreenLocked(this.mDisplayId, arrayList);
+                    this.mA11yWindowsPopulator.populateVisibleWindowsOnScreenLocked(
+                            this.mDisplayId, arrayList);
                     com.android.server.accessibility.Flags.computeWindowChangesOnA11yV2();
                     int i = this.mService.mRoot.getTopFocusedDisplayContent().mDisplayId;
                     IBinder asBinder = windowState.mClient.asBinder();
                     WindowManagerService.resetPriorityAfterLockedSection();
                     com.android.server.accessibility.Flags.computeWindowChangesOnA11yV2();
-                    AccessibilityWindowManager.DisplayWindowsObserver displayWindowsObserver = (AccessibilityWindowManager.DisplayWindowsObserver) this.mCallback;
+                    AccessibilityWindowManager.DisplayWindowsObserver displayWindowsObserver =
+                            (AccessibilityWindowManager.DisplayWindowsObserver) this.mCallback;
                     synchronized (AccessibilityWindowManager.this.mLock) {
-                        List createWindowInfoListLocked = displayWindowsObserver.createWindowInfoListLocked(point, arrayList);
+                        List createWindowInfoListLocked =
+                                displayWindowsObserver.createWindowInfoListLocked(point, arrayList);
                         synchronized (AccessibilityWindowManager.this.mLock) {
                             try {
-                                com.android.server.accessibility.Flags.computeWindowChangesOnA11yV2();
-                                if (displayWindowsObserver.shouldUpdateWindowsLocked(createWindowInfoListLocked, z)) {
-                                    AccessibilityWindowManager accessibilityWindowManager = AccessibilityWindowManager.this;
+                                com.android.server.accessibility.Flags
+                                        .computeWindowChangesOnA11yV2();
+                                if (displayWindowsObserver.shouldUpdateWindowsLocked(
+                                        createWindowInfoListLocked, z)) {
+                                    AccessibilityWindowManager accessibilityWindowManager =
+                                            AccessibilityWindowManager.this;
                                     accessibilityWindowManager.mTopFocusedDisplayId = i;
-                                    AccessibilityWindowManager.DisplayWindowsObserver displayWindowsObserver2 = (AccessibilityWindowManager.DisplayWindowsObserver) accessibilityWindowManager.mDisplayWindowsObservers.get(i);
-                                    if (displayWindowsObserver2 == null || !displayWindowsObserver2.mIsProxy) {
-                                        AccessibilityWindowManager.this.mLastNonProxyTopFocusedDisplayId = i;
+                                    AccessibilityWindowManager.DisplayWindowsObserver
+                                            displayWindowsObserver2 =
+                                                    (AccessibilityWindowManager
+                                                                    .DisplayWindowsObserver)
+                                                            accessibilityWindowManager
+                                                                    .mDisplayWindowsObservers.get(
+                                                                    i);
+                                    if (displayWindowsObserver2 == null
+                                            || !displayWindowsObserver2.mIsProxy) {
+                                        AccessibilityWindowManager.this
+                                                        .mLastNonProxyTopFocusedDisplayId =
+                                                i;
                                     }
-                                    AccessibilityWindowManager.this.mTopFocusedWindowToken = asBinder;
+                                    AccessibilityWindowManager.this.mTopFocusedWindowToken =
+                                            asBinder;
                                     displayWindowsObserver.cacheWindows(createWindowInfoListLocked);
-                                    displayWindowsObserver.updateWindowsLocked(((AccessibilityManagerService) AccessibilityWindowManager.this.mAccessibilityUserManager).mCurrentUserId, createWindowInfoListLocked);
+                                    displayWindowsObserver.updateWindowsLocked(
+                                            ((AccessibilityManagerService)
+                                                            AccessibilityWindowManager.this
+                                                                    .mAccessibilityUserManager)
+                                                    .mCurrentUserId,
+                                            createWindowInfoListLocked);
                                     AccessibilityWindowManager.this.mLock.notifyAll();
                                 }
                             } finally {
@@ -951,7 +1216,8 @@ public final class AccessibilityController {
                     }
                     Iterator it = arrayList.iterator();
                     while (it.hasNext()) {
-                        ((AccessibilityWindowsPopulator.AccessibilityWindow) it.next()).mWindowInfo.recycle();
+                        ((AccessibilityWindowsPopulator.AccessibilityWindow) it.next())
+                                .mWindowInfo.recycle();
                     }
                     this.mInitialized = true;
                 } catch (Throwable th) {
@@ -962,18 +1228,22 @@ public final class AccessibilityController {
         }
 
         public final void performComputeChangedWindows(boolean z) {
-            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                    this.mAccessibilityTracing;
             if (accessibilityControllerInternalImpl.isTracingEnabled(1024L)) {
-                accessibilityControllerInternalImpl.logTrace("WindowManager.performComputeChangedWindows", 1024L, "forceSend=" + z);
+                accessibilityControllerInternalImpl.logTrace(
+                        "WindowManager.performComputeChangedWindows", 1024L, "forceSend=" + z);
             }
             this.mHandler.removeMessages(1);
             computeChangedWindows(z);
         }
 
         public final void scheduleComputeChangedWindows() {
-            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                    this.mAccessibilityTracing;
             if (accessibilityControllerInternalImpl.isTracingEnabled(1024L)) {
-                accessibilityControllerInternalImpl.logTrace("WindowManager.scheduleComputeChangedWindows", 1024L);
+                accessibilityControllerInternalImpl.logTrace(
+                        "WindowManager.scheduleComputeChangedWindows", 1024L);
             }
             DisplayMagnifier.MyHandler myHandler = this.mHandler;
             if (myHandler.hasMessages(1)) {
@@ -983,22 +1253,29 @@ public final class AccessibilityController {
         }
 
         public final String toString() {
-            return "WindowsForAccessibilityObserver{mDisplayId=" + this.mDisplayId + ", mInitialized=" + this.mInitialized + '}';
+            return "WindowsForAccessibilityObserver{mDisplayId="
+                    + this.mDisplayId
+                    + ", mInitialized="
+                    + this.mInitialized
+                    + '}';
         }
     }
 
     public AccessibilityController(WindowManagerService windowManagerService) {
         this.mService = windowManagerService;
         this.mAccessibilityTracing = getAccessibilityControllerInternal(windowManagerService);
-        this.mAccessibilityWindowsPopulator = new AccessibilityWindowsPopulator(windowManagerService, this);
+        this.mAccessibilityWindowsPopulator =
+                new AccessibilityWindowsPopulator(windowManagerService, this);
     }
 
-    public static AccessibilityControllerInternalImpl getAccessibilityControllerInternal(WindowManagerService windowManagerService) {
+    public static AccessibilityControllerInternalImpl getAccessibilityControllerInternal(
+            WindowManagerService windowManagerService) {
         AccessibilityControllerInternalImpl accessibilityControllerInternalImpl;
         synchronized (STATIC_LOCK) {
             try {
                 if (AccessibilityControllerInternalImpl.sInstance == null) {
-                    AccessibilityControllerInternalImpl.sInstance = new AccessibilityControllerInternalImpl(windowManagerService);
+                    AccessibilityControllerInternalImpl.sInstance =
+                            new AccessibilityControllerInternalImpl(windowManagerService);
                 }
                 accessibilityControllerInternalImpl = AccessibilityControllerInternalImpl.sInstance;
             } catch (Throwable th) {
@@ -1014,20 +1291,29 @@ public final class AccessibilityController {
             return null;
         }
         DisplayMagnifier.MagnifiedViewport magnifiedViewport = displayMagnifier.mMagnifiedViewport;
-        magnifiedViewport.mWindow.setAlpha(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+        magnifiedViewport.mWindow.setAlpha(
+                IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
         return magnifiedViewport.mWindow.mSurface;
     }
 
     public final void getMagnificationRegion(int i, Region region) {
-        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                this.mAccessibilityTracing;
         if (accessibilityControllerInternalImpl.isTracingEnabled(2048L)) {
-            accessibilityControllerInternalImpl.logTrace("AccessibilityController.getMagnificationRegion", 2048L, "displayId=" + i + "; outMagnificationRegion={" + region + "}");
+            accessibilityControllerInternalImpl.logTrace(
+                    "AccessibilityController.getMagnificationRegion",
+                    2048L,
+                    "displayId=" + i + "; outMagnificationRegion={" + region + "}");
         }
         DisplayMagnifier displayMagnifier = (DisplayMagnifier) this.mDisplayMagnifiers.get(i);
         if (displayMagnifier != null) {
-            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 = displayMagnifier.mAccessibilityTracing;
+            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 =
+                    displayMagnifier.mAccessibilityTracing;
             if (accessibilityControllerInternalImpl2.isTracingEnabled(2048L)) {
-                accessibilityControllerInternalImpl2.logTrace("WindowManager.getMagnificationRegion", 2048L, "outMagnificationRegion={" + region + "}");
+                accessibilityControllerInternalImpl2.logTrace(
+                        "WindowManager.getMagnificationRegion",
+                        2048L,
+                        "outMagnificationRegion={" + region + "}");
             }
             displayMagnifier.recomputeBounds();
             region.set(displayMagnifier.mMagnificationRegion);
@@ -1035,17 +1321,26 @@ public final class AccessibilityController {
     }
 
     public final MagnificationSpec getMagnificationSpecForWindow(WindowState windowState) {
-        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                this.mAccessibilityTracing;
         if (accessibilityControllerInternalImpl.isTracingEnabled(2048L)) {
-            accessibilityControllerInternalImpl.logTrace("AccessibilityController.getMagnificationSpecForWindow", 2048L, "windowState={" + windowState + "}");
+            accessibilityControllerInternalImpl.logTrace(
+                    "AccessibilityController.getMagnificationSpecForWindow",
+                    2048L,
+                    "windowState={" + windowState + "}");
         }
-        DisplayMagnifier displayMagnifier = (DisplayMagnifier) this.mDisplayMagnifiers.get(windowState.getDisplayId());
+        DisplayMagnifier displayMagnifier =
+                (DisplayMagnifier) this.mDisplayMagnifiers.get(windowState.getDisplayId());
         if (displayMagnifier == null) {
             return null;
         }
-        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 = displayMagnifier.mAccessibilityTracing;
+        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 =
+                displayMagnifier.mAccessibilityTracing;
         if (accessibilityControllerInternalImpl2.isTracingEnabled(2048L)) {
-            accessibilityControllerInternalImpl2.logTrace("WindowManager.getMagnificationSpecForWindow", 2048L, "windowState={" + windowState + "}");
+            accessibilityControllerInternalImpl2.logTrace(
+                    "WindowManager.getMagnificationSpecForWindow",
+                    2048L,
+                    "windowState={" + windowState + "}");
         }
         MagnificationSpec magnificationSpec = displayMagnifier.mMagnificationSpec;
         if (magnificationSpec == null || magnificationSpec.isNop() || windowState.shouldMagnify()) {
@@ -1055,19 +1350,24 @@ public final class AccessibilityController {
     }
 
     public final boolean hasCallbacks() {
-        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                this.mAccessibilityTracing;
         if (accessibilityControllerInternalImpl.isTracingEnabled(3072L)) {
-            accessibilityControllerInternalImpl.logTrace("AccessibilityController.hasCallbacks", 3072L);
+            accessibilityControllerInternalImpl.logTrace(
+                    "AccessibilityController.hasCallbacks", 3072L);
         }
-        return this.mDisplayMagnifiers.size() > 0 || this.mWindowsForAccessibilityObserver.size() > 0;
+        return this.mDisplayMagnifiers.size() > 0
+                || this.mWindowsForAccessibilityObserver.size() > 0;
     }
 
     public final void onFocusChanged(InputTarget inputTarget, InputTarget inputTarget2) {
         if (inputTarget != null) {
             this.mFocusedWindow.remove(inputTarget.getDisplayId());
-            DisplayMagnifier displayMagnifier = (DisplayMagnifier) this.mDisplayMagnifiers.get(inputTarget.getDisplayId());
+            DisplayMagnifier displayMagnifier =
+                    (DisplayMagnifier) this.mDisplayMagnifiers.get(inputTarget.getDisplayId());
             if (displayMagnifier != null && displayMagnifier.isFullscreenMagnificationActivated()) {
-                DisplayMagnifier.UserContextChangedNotifier userContextChangedNotifier = displayMagnifier.mUserContextChangedNotifier;
+                DisplayMagnifier.UserContextChangedNotifier userContextChangedNotifier =
+                        displayMagnifier.mUserContextChangedNotifier;
                 if (userContextChangedNotifier.mHasDelayedNotificationForRecentsToFrontTransition) {
                     userContextChangedNotifier.sendUserContextChangedNotification();
                 }
@@ -1080,10 +1380,16 @@ public final class AccessibilityController {
 
     public final void onSomeWindowResizedOrMovedWithCallingUid(int i, int... iArr) {
         if (this.mAccessibilityTracing.isTracingEnabled(1024L)) {
-            this.mAccessibilityTracing.logTrace("AccessibilityController.onSomeWindowResizedOrMoved", 1024L, "displayIds={" + Arrays.toString(iArr) + "}", "".getBytes(), i);
+            this.mAccessibilityTracing.logTrace(
+                    "AccessibilityController.onSomeWindowResizedOrMoved",
+                    1024L,
+                    "displayIds={" + Arrays.toString(iArr) + "}",
+                    "".getBytes(),
+                    i);
         }
         for (int i2 : iArr) {
-            WindowsForAccessibilityObserver windowsForAccessibilityObserver = (WindowsForAccessibilityObserver) this.mWindowsForAccessibilityObserver.get(i2);
+            WindowsForAccessibilityObserver windowsForAccessibilityObserver =
+                    (WindowsForAccessibilityObserver) this.mWindowsForAccessibilityObserver.get(i2);
             if (windowsForAccessibilityObserver != null) {
                 windowsForAccessibilityObserver.scheduleComputeChangedWindows();
             }
@@ -1091,26 +1397,39 @@ public final class AccessibilityController {
     }
 
     public final void onWMTransition(int i, int i2, int i3) {
-        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                this.mAccessibilityTracing;
         if (accessibilityControllerInternalImpl.isTracingEnabled(2048L)) {
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "displayId=", "; type=", "; flags=");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "displayId=", "; type=", "; flags=");
             m.append(i3);
-            accessibilityControllerInternalImpl.logTrace("AccessibilityController.onWMTransition", 2048L, m.toString());
+            accessibilityControllerInternalImpl.logTrace(
+                    "AccessibilityController.onWMTransition", 2048L, m.toString());
         }
         DisplayMagnifier displayMagnifier = (DisplayMagnifier) this.mDisplayMagnifiers.get(i);
         if (displayMagnifier != null) {
-            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 = displayMagnifier.mAccessibilityTracing;
+            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 =
+                    displayMagnifier.mAccessibilityTracing;
             if (accessibilityControllerInternalImpl2.isTracingEnabled(2048L)) {
-                StringBuilder m2 = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "displayId=", "; type=", "; flags=");
+                StringBuilder m2 =
+                        ArrayUtils$$ExternalSyntheticOutline0.m(
+                                i, i2, "displayId=", "; type=", "; flags=");
                 m2.append(i3);
-                accessibilityControllerInternalImpl2.logTrace("WindowManager.onWMTransition", 2048L, m2.toString());
+                accessibilityControllerInternalImpl2.logTrace(
+                        "WindowManager.onWMTransition", 2048L, m2.toString());
             }
             if (displayMagnifier.isFullscreenMagnificationActivated()) {
                 if (i2 == 1 || i2 == 2 || i2 == 3 || i2 == 4) {
-                    DisplayMagnifier.UserContextChangedNotifier userContextChangedNotifier = displayMagnifier.mUserContextChangedNotifier;
+                    DisplayMagnifier.UserContextChangedNotifier userContextChangedNotifier =
+                            displayMagnifier.mUserContextChangedNotifier;
                     userContextChangedNotifier.getClass();
-                    if (Flags.delayNotificationToMagnificationWhenRecentsWindowToFrontTransition() && i2 == 3 && (i3 & 128) != 0) {
-                        userContextChangedNotifier.mHasDelayedNotificationForRecentsToFrontTransition = true;
+                    if (Flags.delayNotificationToMagnificationWhenRecentsWindowToFrontTransition()
+                            && i2 == 3
+                            && (i3 & 128) != 0) {
+                        userContextChangedNotifier
+                                        .mHasDelayedNotificationForRecentsToFrontTransition =
+                                true;
                     } else {
                         userContextChangedNotifier.sendUserContextChangedNotification();
                     }
@@ -1120,25 +1439,46 @@ public final class AccessibilityController {
     }
 
     public final void onWindowTransition(WindowState windowState, int i) {
-        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                this.mAccessibilityTracing;
         if (accessibilityControllerInternalImpl.isTracingEnabled(3072L)) {
-            accessibilityControllerInternalImpl.logTrace("AccessibilityController.onWindowTransition", 3072L, "windowState={" + windowState + "}; transition=" + i);
+            accessibilityControllerInternalImpl.logTrace(
+                    "AccessibilityController.onWindowTransition",
+                    3072L,
+                    "windowState={" + windowState + "}; transition=" + i);
         }
-        DisplayMagnifier displayMagnifier = (DisplayMagnifier) this.mDisplayMagnifiers.get(windowState.getDisplayId());
+        DisplayMagnifier displayMagnifier =
+                (DisplayMagnifier) this.mDisplayMagnifiers.get(windowState.getDisplayId());
         if (displayMagnifier != null) {
-            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 = displayMagnifier.mAccessibilityTracing;
+            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 =
+                    displayMagnifier.mAccessibilityTracing;
             if (accessibilityControllerInternalImpl2.isTracingEnabled(2048L)) {
-                accessibilityControllerInternalImpl2.logTrace("WindowManager.onWindowTransition", 2048L, "windowState={" + windowState + "}; transition=" + i);
+                accessibilityControllerInternalImpl2.logTrace(
+                        "WindowManager.onWindowTransition",
+                        2048L,
+                        "windowState={" + windowState + "}; transition=" + i);
             }
-            if (displayMagnifier.isFullscreenMagnificationActivated() && windowState.shouldMagnify()) {
-                DisplayMagnifier.UserContextChangedNotifier userContextChangedNotifier = displayMagnifier.mUserContextChangedNotifier;
+            if (displayMagnifier.isFullscreenMagnificationActivated()
+                    && windowState.shouldMagnify()) {
+                DisplayMagnifier.UserContextChangedNotifier userContextChangedNotifier =
+                        displayMagnifier.mUserContextChangedNotifier;
                 userContextChangedNotifier.getClass();
-                if (i == 2 && windowState.isActivityTypeHomeOrRecents() && userContextChangedNotifier.mHasDelayedNotificationForRecentsToFrontTransition) {
-                    userContextChangedNotifier.mHasDelayedNotificationForRecentsToFrontTransition = false;
+                if (i == 2
+                        && windowState.isActivityTypeHomeOrRecents()
+                        && userContextChangedNotifier
+                                .mHasDelayedNotificationForRecentsToFrontTransition) {
+                    userContextChangedNotifier.mHasDelayedNotificationForRecentsToFrontTransition =
+                            false;
                 }
                 int i2 = windowState.mAttrs.type;
                 if (i == 1 || i == 3) {
-                    if (i2 != 2 && i2 != 4 && i2 != 1005 && i2 != 2020 && i2 != 2024 && i2 != 2035 && i2 != 2038) {
+                    if (i2 != 2
+                            && i2 != 4
+                            && i2 != 1005
+                            && i2 != 2020
+                            && i2 != 2024
+                            && i2 != 2035
+                            && i2 != 2038) {
                         switch (i2) {
                             case 1000:
                             case 1001:
@@ -1160,7 +1500,8 @@ public final class AccessibilityController {
                     Rect rect = displayMagnifier.mTempRect2;
                     displayMagnifier.mMagnificationRegion.getBounds(rect);
                     MagnificationSpec magnificationSpec = displayMagnifier.mMagnificationSpec;
-                    rect.offset((int) (-magnificationSpec.offsetX), (int) (-magnificationSpec.offsetY));
+                    rect.offset(
+                            (int) (-magnificationSpec.offsetX), (int) (-magnificationSpec.offsetY));
                     rect.scale(1.0f / displayMagnifier.mMagnificationSpec.scale);
                     Rect rect2 = displayMagnifier.mTempRect1;
                     windowState.getTouchableRegion(displayMagnifier.mTempRegion1);
@@ -1168,7 +1509,10 @@ public final class AccessibilityController {
                     if (rect.intersect(rect2)) {
                         return;
                     }
-                    ((FullScreenMagnificationController.DisplayMagnification) displayMagnifier.mCallbacks).onRectangleOnScreenRequested(rect2.left, rect2.top, rect2.right, rect2.bottom);
+                    ((FullScreenMagnificationController.DisplayMagnification)
+                                    displayMagnifier.mCallbacks)
+                            .onRectangleOnScreenRequested(
+                                    rect2.left, rect2.top, rect2.right, rect2.bottom);
                 }
             }
         }
@@ -1177,13 +1521,19 @@ public final class AccessibilityController {
     public final void performComputeChangedWindowsNot(int i, boolean z) {
         WindowsForAccessibilityObserver windowsForAccessibilityObserver;
         if (this.mAccessibilityTracing.isTracingEnabled(1024L)) {
-            this.mAccessibilityTracing.logTrace("AccessibilityController.performComputeChangedWindowsNot", 1024L, AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i, "displayId=", "; forceSend=", z));
+            this.mAccessibilityTracing.logTrace(
+                    "AccessibilityController.performComputeChangedWindowsNot",
+                    1024L,
+                    AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                            i, "displayId=", "; forceSend=", z));
         }
         WindowManagerGlobalLock windowManagerGlobalLock = this.mService.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                windowsForAccessibilityObserver = (WindowsForAccessibilityObserver) this.mWindowsForAccessibilityObserver.get(i);
+                windowsForAccessibilityObserver =
+                        (WindowsForAccessibilityObserver)
+                                this.mWindowsForAccessibilityObserver.get(i);
                 if (windowsForAccessibilityObserver == null) {
                     windowsForAccessibilityObserver = null;
                 }
@@ -1200,18 +1550,24 @@ public final class AccessibilityController {
 
     public final void recomputeMagnifiedRegionAndDrawMagnifiedRegionBorderIfNeeded(int i) {
         if (this.mAccessibilityTracing.isTracingEnabled(2048L)) {
-            this.mAccessibilityTracing.logTrace("AccessibilityController.recomputeMagnifiedRegionAndDrawMagnifiedRegionBorderIfNeeded", 2048L, VibrationParam$1$$ExternalSyntheticOutline0.m(i, "displayId="));
+            this.mAccessibilityTracing.logTrace(
+                    "AccessibilityController.recomputeMagnifiedRegionAndDrawMagnifiedRegionBorderIfNeeded",
+                    2048L,
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "displayId="));
         }
         DisplayMagnifier displayMagnifier = (DisplayMagnifier) this.mDisplayMagnifiers.get(i);
         if (displayMagnifier != null) {
             if (displayMagnifier.mAccessibilityTracing.isTracingEnabled(2048L)) {
-                displayMagnifier.mAccessibilityTracing.logTrace("WindowManager.recomputeMagnifiedRegionAndDrawMagnifiedRegionBorderIfNeeded", 2048L);
+                displayMagnifier.mAccessibilityTracing.logTrace(
+                        "WindowManager.recomputeMagnifiedRegionAndDrawMagnifiedRegionBorderIfNeeded",
+                        2048L);
             }
             displayMagnifier.recomputeBounds();
             if (Flags.alwaysDrawMagnificationFullscreenBorder()) {
                 return;
             }
-            DisplayMagnifier.MagnifiedViewport.ViewportWindow viewportWindow = displayMagnifier.mMagnifiedViewport.mWindow;
+            DisplayMagnifier.MagnifiedViewport.ViewportWindow viewportWindow =
+                    displayMagnifier.mMagnifiedViewport.mWindow;
             if (viewportWindow.mInvalidated) {
                 DisplayMagnifier.this.mService.mAnimationHandler.post(viewportWindow);
             }
@@ -1219,35 +1575,51 @@ public final class AccessibilityController {
     }
 
     public final void setFullscreenMagnificationActivated(int i, boolean z) {
-        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                this.mAccessibilityTracing;
         if (accessibilityControllerInternalImpl.isTracingEnabled(2048L)) {
-            accessibilityControllerInternalImpl.logTrace("AccessibilityController.setFullscreenMagnificationActivated", 2048L, AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i, "displayId=", "; activated=", z));
+            accessibilityControllerInternalImpl.logTrace(
+                    "AccessibilityController.setFullscreenMagnificationActivated",
+                    2048L,
+                    AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                            i, "displayId=", "; activated=", z));
         }
         DisplayMagnifier displayMagnifier = (DisplayMagnifier) this.mDisplayMagnifiers.get(i);
         if (displayMagnifier != null) {
-            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 = displayMagnifier.mAccessibilityTracing;
+            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 =
+                    displayMagnifier.mAccessibilityTracing;
             if (accessibilityControllerInternalImpl2.isTracingEnabled(2048L)) {
-                accessibilityControllerInternalImpl2.logTrace("WindowManager.setFullscreenMagnificationActivated", 2048L, "activated=" + z);
+                accessibilityControllerInternalImpl2.logTrace(
+                        "WindowManager.setFullscreenMagnificationActivated",
+                        2048L,
+                        "activated=" + z);
             }
             displayMagnifier.mIsFullscreenMagnificationActivated = z;
             if (Flags.alwaysDrawMagnificationFullscreenBorder()) {
                 return;
             }
-            DisplayMagnifier.MagnifiedViewport magnifiedViewport = displayMagnifier.mMagnifiedViewport;
+            DisplayMagnifier.MagnifiedViewport magnifiedViewport =
+                    displayMagnifier.mMagnifiedViewport;
             magnifiedViewport.setMagnifiedRegionBorderShown(z, true);
             DisplayMagnifier displayMagnifier2 = DisplayMagnifier.this;
             if (displayMagnifier2.mAccessibilityTracing.isTracingEnabled(2048L)) {
-                displayMagnifier2.mAccessibilityTracing.logTrace("WindowManager.showMagnificationBoundsIfNeeded", 2048L);
+                displayMagnifier2.mAccessibilityTracing.logTrace(
+                        "WindowManager.showMagnificationBoundsIfNeeded", 2048L);
             }
             displayMagnifier2.mHandler.obtainMessage(5).sendToTarget();
         }
     }
 
-    public final boolean setMagnificationCallbacks(int i, WindowManagerInternal.MagnificationCallbacks magnificationCallbacks) {
+    public final boolean setMagnificationCallbacks(
+            int i, WindowManagerInternal.MagnificationCallbacks magnificationCallbacks) {
         Display display;
-        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                this.mAccessibilityTracing;
         if (accessibilityControllerInternalImpl.isTracingEnabled(2048L)) {
-            accessibilityControllerInternalImpl.logTrace("AccessibilityController.setMagnificationCallbacks", 2048L, "displayId=" + i + "; callbacks={" + magnificationCallbacks + "}");
+            accessibilityControllerInternalImpl.logTrace(
+                    "AccessibilityController.setMagnificationCallbacks",
+                    2048L,
+                    "displayId=" + i + "; callbacks={" + magnificationCallbacks + "}");
         }
         if (magnificationCallbacks != null) {
             if (this.mDisplayMagnifiers.get(i) != null) {
@@ -1255,11 +1627,16 @@ public final class AccessibilityController {
             }
             WindowManagerService windowManagerService = this.mService;
             DisplayContent displayContent = windowManagerService.mRoot.getDisplayContent(i);
-            if (displayContent == null || (display = displayContent.mDisplay) == null || display.getType() == 4) {
+            if (displayContent == null
+                    || (display = displayContent.mDisplay) == null
+                    || display.getType() == 4) {
                 return false;
             }
-            DisplayMagnifier displayMagnifier = new DisplayMagnifier(windowManagerService, displayContent, display, magnificationCallbacks);
-            displayMagnifier.notifyImeWindowVisibilityChanged(this.mIsImeVisibleArray.get(i, false));
+            DisplayMagnifier displayMagnifier =
+                    new DisplayMagnifier(
+                            windowManagerService, displayContent, display, magnificationCallbacks);
+            displayMagnifier.notifyImeWindowVisibilityChanged(
+                    this.mIsImeVisibleArray.get(i, false));
             this.mDisplayMagnifiers.put(i, displayMagnifier);
             return true;
         }
@@ -1267,12 +1644,14 @@ public final class AccessibilityController {
         if (displayMagnifier2 == null) {
             throw new IllegalStateException("Magnification callbacks already cleared!");
         }
-        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 = displayMagnifier2.mAccessibilityTracing;
+        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 =
+                displayMagnifier2.mAccessibilityTracing;
         if (accessibilityControllerInternalImpl2.isTracingEnabled(2048L)) {
             accessibilityControllerInternalImpl2.logTrace("WindowManager.destroy", 2048L);
         }
         if (!Flags.alwaysDrawMagnificationFullscreenBorder()) {
-            DisplayMagnifier.MagnifiedViewport.ViewportWindow viewportWindow = displayMagnifier2.mMagnifiedViewport.mWindow;
+            DisplayMagnifier.MagnifiedViewport.ViewportWindow viewportWindow =
+                    displayMagnifier2.mMagnifiedViewport.mWindow;
             viewportWindow.mBlastBufferQueue.destroy();
             DisplayMagnifier.this.mService.mAnimationHandler.post(viewportWindow);
         }
@@ -1282,21 +1661,31 @@ public final class AccessibilityController {
 
     public final void setMagnificationSpec(int i, MagnificationSpec magnificationSpec) {
         if (this.mAccessibilityTracing.isTracingEnabled(3072L)) {
-            this.mAccessibilityTracing.logTrace("AccessibilityController.setMagnificationSpec", 3072L, "displayId=" + i + "; spec={" + magnificationSpec + "}");
+            this.mAccessibilityTracing.logTrace(
+                    "AccessibilityController.setMagnificationSpec",
+                    3072L,
+                    "displayId=" + i + "; spec={" + magnificationSpec + "}");
         }
-        AccessibilityWindowsPopulator accessibilityWindowsPopulator = this.mAccessibilityWindowsPopulator;
+        AccessibilityWindowsPopulator accessibilityWindowsPopulator =
+                this.mAccessibilityWindowsPopulator;
         synchronized (accessibilityWindowsPopulator.mLock) {
             try {
-                MagnificationSpec magnificationSpec2 = (MagnificationSpec) accessibilityWindowsPopulator.mCurrentMagnificationSpec.get(i);
+                MagnificationSpec magnificationSpec2 =
+                        (MagnificationSpec)
+                                accessibilityWindowsPopulator.mCurrentMagnificationSpec.get(i);
                 if (magnificationSpec2 == null) {
                     MagnificationSpec magnificationSpec3 = new MagnificationSpec();
                     magnificationSpec3.setTo(magnificationSpec);
-                    accessibilityWindowsPopulator.mCurrentMagnificationSpec.put(i, magnificationSpec3);
+                    accessibilityWindowsPopulator.mCurrentMagnificationSpec.put(
+                            i, magnificationSpec3);
                 } else {
-                    MagnificationSpec magnificationSpec4 = (MagnificationSpec) accessibilityWindowsPopulator.mPreviousMagnificationSpec.get(i);
+                    MagnificationSpec magnificationSpec4 =
+                            (MagnificationSpec)
+                                    accessibilityWindowsPopulator.mPreviousMagnificationSpec.get(i);
                     if (magnificationSpec4 == null) {
                         magnificationSpec4 = new MagnificationSpec();
-                        accessibilityWindowsPopulator.mPreviousMagnificationSpec.put(i, magnificationSpec4);
+                        accessibilityWindowsPopulator.mPreviousMagnificationSpec.put(
+                                i, magnificationSpec4);
                     }
                     magnificationSpec4.setTo(magnificationSpec2);
                     magnificationSpec2.setTo(magnificationSpec);
@@ -1306,20 +1695,29 @@ public final class AccessibilityController {
         }
         DisplayMagnifier displayMagnifier = (DisplayMagnifier) this.mDisplayMagnifiers.get(i);
         if (displayMagnifier != null) {
-            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = displayMagnifier.mAccessibilityTracing;
+            AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                    displayMagnifier.mAccessibilityTracing;
             if (accessibilityControllerInternalImpl.isTracingEnabled(2048L)) {
-                accessibilityControllerInternalImpl.logTrace("WindowManager.setMagnificationSpec", 2048L, "spec={" + magnificationSpec + "}");
+                accessibilityControllerInternalImpl.logTrace(
+                        "WindowManager.setMagnificationSpec",
+                        2048L,
+                        "spec={" + magnificationSpec + "}");
             }
             if (magnificationSpec != null) {
-                displayMagnifier.mMagnificationSpec.initialize(magnificationSpec.scale, magnificationSpec.offsetX, magnificationSpec.offsetY);
+                displayMagnifier.mMagnificationSpec.initialize(
+                        magnificationSpec.scale,
+                        magnificationSpec.offsetX,
+                        magnificationSpec.offsetY);
             } else {
                 displayMagnifier.mMagnificationSpec.clear();
             }
             if (!Flags.alwaysDrawMagnificationFullscreenBorder()) {
-                DisplayMagnifier.MagnifiedViewport magnifiedViewport = displayMagnifier.mMagnifiedViewport;
+                DisplayMagnifier.MagnifiedViewport magnifiedViewport =
+                        displayMagnifier.mMagnifiedViewport;
                 DisplayMagnifier displayMagnifier2 = DisplayMagnifier.this;
                 if (!displayMagnifier2.mHandler.hasMessages(5)) {
-                    magnifiedViewport.setMagnifiedRegionBorderShown(displayMagnifier2.isFullscreenMagnificationActivated(), true);
+                    magnifiedViewport.setMagnifiedRegionBorderShown(
+                            displayMagnifier2.isFullscreenMagnificationActivated(), true);
                 }
             }
             displayMagnifier.recomputeBounds();
@@ -1328,21 +1726,31 @@ public final class AccessibilityController {
             windowManagerService.applyMagnificationSpecLocked(displayId, magnificationSpec);
             windowManagerService.scheduleAnimationLocked();
         }
-        WindowsForAccessibilityObserver windowsForAccessibilityObserver = (WindowsForAccessibilityObserver) this.mWindowsForAccessibilityObserver.get(i);
+        WindowsForAccessibilityObserver windowsForAccessibilityObserver =
+                (WindowsForAccessibilityObserver) this.mWindowsForAccessibilityObserver.get(i);
         if (windowsForAccessibilityObserver != null) {
             windowsForAccessibilityObserver.scheduleComputeChangedWindows();
         }
     }
 
-    public final void setWindowsForAccessibilityCallback(int i, WindowManagerInternal.WindowsForAccessibilityCallback windowsForAccessibilityCallback) {
-        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = this.mAccessibilityTracing;
+    public final void setWindowsForAccessibilityCallback(
+            int i,
+            WindowManagerInternal.WindowsForAccessibilityCallback windowsForAccessibilityCallback) {
+        AccessibilityControllerInternalImpl accessibilityControllerInternalImpl =
+                this.mAccessibilityTracing;
         if (accessibilityControllerInternalImpl.isTracingEnabled(1024L)) {
-            accessibilityControllerInternalImpl.logTrace("AccessibilityController.setWindowsForAccessibilityCallback", 1024L, "displayId=" + i + "; callback={" + windowsForAccessibilityCallback + "}");
+            accessibilityControllerInternalImpl.logTrace(
+                    "AccessibilityController.setWindowsForAccessibilityCallback",
+                    1024L,
+                    "displayId=" + i + "; callback={" + windowsForAccessibilityCallback + "}");
         }
-        AccessibilityWindowsPopulator accessibilityWindowsPopulator = this.mAccessibilityWindowsPopulator;
+        AccessibilityWindowsPopulator accessibilityWindowsPopulator =
+                this.mAccessibilityWindowsPopulator;
         if (windowsForAccessibilityCallback == null) {
-            if (((WindowsForAccessibilityObserver) this.mWindowsForAccessibilityObserver.get(i)) == null) {
-                String str = "Windows for accessibility callback of display " + i + " already cleared!";
+            if (((WindowsForAccessibilityObserver) this.mWindowsForAccessibilityObserver.get(i))
+                    == null) {
+                String str =
+                        "Windows for accessibility callback of display " + i + " already cleared!";
                 Slog.e("AccessibilityController", str);
                 if (Build.IS_DEBUGGABLE) {
                     throw new IllegalStateException(str);
@@ -1355,7 +1763,8 @@ public final class AccessibilityController {
             }
             return;
         }
-        if (((WindowsForAccessibilityObserver) this.mWindowsForAccessibilityObserver.get(i)) != null) {
+        if (((WindowsForAccessibilityObserver) this.mWindowsForAccessibilityObserver.get(i))
+                != null) {
             String str2 = "Windows for accessibility callback of display " + i + " already set!";
             Slog.e("AccessibilityController", str2);
             if (Build.IS_DEBUGGABLE) {
@@ -1364,7 +1773,12 @@ public final class AccessibilityController {
             this.mWindowsForAccessibilityObserver.remove(i);
         }
         accessibilityWindowsPopulator.setWindowsNotification(true);
-        WindowsForAccessibilityObserver windowsForAccessibilityObserver = new WindowsForAccessibilityObserver(this.mService, i, windowsForAccessibilityCallback, accessibilityWindowsPopulator);
+        WindowsForAccessibilityObserver windowsForAccessibilityObserver =
+                new WindowsForAccessibilityObserver(
+                        this.mService,
+                        i,
+                        windowsForAccessibilityCallback,
+                        accessibilityWindowsPopulator);
         this.mWindowsForAccessibilityObserver.put(i, windowsForAccessibilityObserver);
         this.mAllObserversInitialized &= windowsForAccessibilityObserver.mInitialized;
     }

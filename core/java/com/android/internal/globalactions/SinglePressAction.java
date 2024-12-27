@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -52,7 +53,8 @@ public abstract class SinglePressAction implements Action {
     }
 
     @Override // com.android.internal.globalactions.Action
-    public View create(Context context, View convertView, ViewGroup parent, LayoutInflater inflater) {
+    public View create(
+            Context context, View convertView, ViewGroup parent, LayoutInflater inflater) {
         View v = inflater.inflate(R.layout.global_actions_item, parent, false);
         ImageView icon = (ImageView) v.findViewById(16908294);
         TextView messageView = (TextView) v.findViewById(16908299);

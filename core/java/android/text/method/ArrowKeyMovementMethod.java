@@ -15,7 +15,8 @@ public class ArrowKeyMovementMethod extends BaseMovementMethod implements Moveme
     private boolean mIsSpanSet = false;
 
     private static boolean isSelecting(Spannable buffer) {
-        return MetaKeyKeyListener.getMetaState(buffer, 1) == 1 || MetaKeyKeyListener.getMetaState(buffer, 2048) != 0;
+        return MetaKeyKeyListener.getMetaState(buffer, 1) == 1
+                || MetaKeyKeyListener.getMetaState(buffer, 2048) != 0;
     }
 
     private static int getCurrentLineTop(Spannable buffer, Layout layout) {
@@ -31,10 +32,14 @@ public class ArrowKeyMovementMethod extends BaseMovementMethod implements Moveme
     }
 
     @Override // android.text.method.BaseMovementMethod
-    protected boolean handleMovementKey(TextView widget, Spannable buffer, int keyCode, int movementMetaState, KeyEvent event) {
+    protected boolean handleMovementKey(
+            TextView widget, Spannable buffer, int keyCode, int movementMetaState, KeyEvent event) {
         switch (keyCode) {
             case 23:
-                if (KeyEvent.metaStateHasNoModifiers(movementMetaState) && event.getAction() == 0 && event.getRepeatCount() == 0 && MetaKeyKeyListener.getMetaState(buffer, 2048, event) != 0) {
+                if (KeyEvent.metaStateHasNoModifiers(movementMetaState)
+                        && event.getAction() == 0
+                        && event.getRepeatCount() == 0
+                        && MetaKeyKeyListener.getMetaState(buffer, 2048, event) != 0) {
                     return widget.showContextMenu();
                 }
                 break;
@@ -262,18 +267,23 @@ public class ArrowKeyMovementMethod extends BaseMovementMethod implements Moveme
                     int startOffset = buffer.getSpanStart(LAST_TAP_DOWN);
                     widget.cancelLongPress();
                     int offset2 = widget.getOffsetForPosition(event.getX(), event.getY());
-                    Selection.setSelection(buffer, Math.min(startOffset, offset2), Math.max(startOffset, offset2));
+                    Selection.setSelection(
+                            buffer, Math.min(startOffset, offset2), Math.max(startOffset, offset2));
                     return true;
                 }
             } else if (action == 1) {
-                if ((initialScrollY >= 0 && initialScrollY != widget.getScrollY()) || (initialScrollX >= 0 && initialScrollX != widget.getScrollX())) {
+                if ((initialScrollY >= 0 && initialScrollY != widget.getScrollY())
+                        || (initialScrollX >= 0 && initialScrollX != widget.getScrollX())) {
                     widget.moveCursorToVisibleOffset();
                     return true;
                 }
                 if (wasTouchSelecting && this.mIsSpanSet) {
                     int startOffset2 = buffer.getSpanStart(LAST_TAP_DOWN);
                     int endOffset = widget.getOffsetForPosition(event.getX(), event.getY());
-                    Selection.setSelection(buffer, Math.min(startOffset2, endOffset), Math.max(startOffset2, endOffset));
+                    Selection.setSelection(
+                            buffer,
+                            Math.min(startOffset2, endOffset),
+                            Math.max(startOffset2, endOffset));
                     buffer.removeSpan(LAST_TAP_DOWN);
                     this.mIsSpanSet = false;
                 }

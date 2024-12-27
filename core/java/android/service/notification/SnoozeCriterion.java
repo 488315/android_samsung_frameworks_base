@@ -7,19 +7,22 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class SnoozeCriterion implements Parcelable {
-    public static final Parcelable.Creator<SnoozeCriterion> CREATOR = new Parcelable.Creator<SnoozeCriterion>() { // from class: android.service.notification.SnoozeCriterion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SnoozeCriterion createFromParcel(Parcel in) {
-            return new SnoozeCriterion(in);
-        }
+    public static final Parcelable.Creator<SnoozeCriterion> CREATOR =
+            new Parcelable.Creator<
+                    SnoozeCriterion>() { // from class:
+                                         // android.service.notification.SnoozeCriterion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SnoozeCriterion createFromParcel(Parcel in) {
+                    return new SnoozeCriterion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SnoozeCriterion[] newArray(int size) {
-            return new SnoozeCriterion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SnoozeCriterion[] newArray(int size) {
+                    return new SnoozeCriterion[size];
+                }
+            };
     private final CharSequence mConfirmation;
     private final CharSequence mExplanation;
     private final String mId;
@@ -98,7 +101,9 @@ public final class SnoozeCriterion implements Parcelable {
         if (this.mId == null ? that.mId != null : !this.mId.equals(that.mId)) {
             return false;
         }
-        if (this.mExplanation == null ? that.mExplanation != null : !this.mExplanation.equals(that.mExplanation)) {
+        if (this.mExplanation == null
+                ? that.mExplanation != null
+                : !this.mExplanation.equals(that.mExplanation)) {
             return false;
         }
         if (this.mConfirmation != null) {
@@ -112,6 +117,8 @@ public final class SnoozeCriterion implements Parcelable {
 
     public int hashCode() {
         int result = this.mId != null ? this.mId.hashCode() : 0;
-        return (((result * 31) + (this.mExplanation != null ? this.mExplanation.hashCode() : 0)) * 31) + (this.mConfirmation != null ? this.mConfirmation.hashCode() : 0);
+        return (((result * 31) + (this.mExplanation != null ? this.mExplanation.hashCode() : 0))
+                        * 31)
+                + (this.mConfirmation != null ? this.mConfirmation.hashCode() : 0);
     }
 }

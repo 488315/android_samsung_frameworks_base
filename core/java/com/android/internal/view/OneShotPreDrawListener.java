@@ -4,7 +4,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 
 /* loaded from: classes5.dex */
-public class OneShotPreDrawListener implements ViewTreeObserver.OnPreDrawListener, View.OnAttachStateChangeListener {
+public class OneShotPreDrawListener
+        implements ViewTreeObserver.OnPreDrawListener, View.OnAttachStateChangeListener {
     private final boolean mReturnValue;
     private final Runnable mRunnable;
     private final View mView;

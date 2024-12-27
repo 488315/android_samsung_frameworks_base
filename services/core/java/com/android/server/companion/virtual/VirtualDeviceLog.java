@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.util.SparseArray;
+
 import java.io.PrintWriter;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -13,7 +14,8 @@ import java.util.ArrayDeque;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class VirtualDeviceLog {
-    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS").withZone(ZoneId.systemDefault());
+    public static final DateTimeFormatter DATE_FORMAT =
+            DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS").withZone(ZoneId.systemDefault());
     public final Context mContext;
     public final ArrayDeque mLogEntries = new ArrayDeque();
 
@@ -31,7 +33,8 @@ public final class VirtualDeviceLog {
             this.mOwnerUid = i3;
         }
 
-        public final void dump(PrintWriter printWriter, UidToPackageNameCache uidToPackageNameCache) {
+        public final void dump(
+                PrintWriter printWriter, UidToPackageNameCache uidToPackageNameCache) {
             String str;
             String str2;
             StringBuilder sb = new StringBuilder("  ");
@@ -47,12 +50,17 @@ public final class VirtualDeviceLog {
             if (uidToPackageNameCache.mUidToPackagesCache.contains(i)) {
                 str2 = (String) uidToPackageNameCache.mUidToPackagesCache.get(i);
             } else {
-                String[] packagesForUid = uidToPackageNameCache.mPackageManager.getPackagesForUid(i);
+                String[] packagesForUid =
+                        uidToPackageNameCache.mPackageManager.getPackagesForUid(i);
                 if (packagesForUid == null || packagesForUid.length <= 0) {
                     str = "";
                 } else {
                     String str3 = packagesForUid[0];
-                    str = packagesForUid.length > 1 ? ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str3, ",...") : str3;
+                    str =
+                            packagesForUid.length > 1
+                                    ? ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                                            str3, ",...")
+                                    : str3;
                 }
                 uidToPackageNameCache.mUidToPackagesCache.put(i, str);
                 str2 = str;

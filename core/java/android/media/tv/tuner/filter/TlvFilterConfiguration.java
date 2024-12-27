@@ -14,7 +14,8 @@ public final class TlvFilterConfiguration extends FilterConfiguration {
     private final int mPacketType;
     private final boolean mPassthrough;
 
-    private TlvFilterConfiguration(Settings settings, int packetType, boolean isCompressed, boolean passthrough) {
+    private TlvFilterConfiguration(
+            Settings settings, int packetType, boolean isCompressed, boolean passthrough) {
         super(settings);
         this.mPacketType = packetType;
         this.mIsCompressedIpPacket = isCompressed;
@@ -75,7 +76,11 @@ public final class TlvFilterConfiguration extends FilterConfiguration {
         }
 
         public TlvFilterConfiguration build() {
-            return new TlvFilterConfiguration(this.mSettings, this.mPacketType, this.mIsCompressedIpPacket, this.mPassthrough);
+            return new TlvFilterConfiguration(
+                    this.mSettings,
+                    this.mPacketType,
+                    this.mIsCompressedIpPacket,
+                    this.mPassthrough);
         }
     }
 }

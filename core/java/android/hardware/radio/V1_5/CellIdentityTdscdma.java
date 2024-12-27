@@ -3,12 +3,14 @@ package android.hardware.radio.V1_5;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class CellIdentityTdscdma {
-    public android.hardware.radio.V1_2.CellIdentityTdscdma base = new android.hardware.radio.V1_2.CellIdentityTdscdma();
+    public android.hardware.radio.V1_2.CellIdentityTdscdma base =
+            new android.hardware.radio.V1_2.CellIdentityTdscdma();
     public ArrayList<String> additionalPlmns = new ArrayList<>();
     public OptionalCsgInfo optionalCsgInfo = new OptionalCsgInfo();
 
@@ -20,18 +22,29 @@ public final class CellIdentityTdscdma {
             return false;
         }
         CellIdentityTdscdma other = (CellIdentityTdscdma) otherObject;
-        if (HidlSupport.deepEquals(this.base, other.base) && HidlSupport.deepEquals(this.additionalPlmns, other.additionalPlmns) && HidlSupport.deepEquals(this.optionalCsgInfo, other.optionalCsgInfo)) {
+        if (HidlSupport.deepEquals(this.base, other.base)
+                && HidlSupport.deepEquals(this.additionalPlmns, other.additionalPlmns)
+                && HidlSupport.deepEquals(this.optionalCsgInfo, other.optionalCsgInfo)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.base)), Integer.valueOf(HidlSupport.deepHashCode(this.additionalPlmns)), Integer.valueOf(HidlSupport.deepHashCode(this.optionalCsgInfo)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.base)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.additionalPlmns)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.optionalCsgInfo)));
     }
 
     public final String toString() {
-        return "{.base = " + this.base + ", .additionalPlmns = " + this.additionalPlmns + ", .optionalCsgInfo = " + this.optionalCsgInfo + "}";
+        return "{.base = "
+                + this.base
+                + ", .additionalPlmns = "
+                + this.additionalPlmns
+                + ", .optionalCsgInfo = "
+                + this.optionalCsgInfo
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -43,7 +56,8 @@ public final class CellIdentityTdscdma {
         ArrayList<CellIdentityTdscdma> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 144, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 144, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CellIdentityTdscdma _hidl_vec_element = new CellIdentityTdscdma();
@@ -53,15 +67,22 @@ public final class CellIdentityTdscdma {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.base.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 0);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 88 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 88 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 88 + 0, true);
         this.additionalPlmns.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             new String();
             String _hidl_vec_element = childBlob.getString(_hidl_index_0 * 16);
-            parcel.readEmbeddedBuffer(_hidl_vec_element.getBytes().length + 1, childBlob.handle(), (_hidl_index_0 * 16) + 0, false);
+            parcel.readEmbeddedBuffer(
+                    _hidl_vec_element.getBytes().length + 1,
+                    childBlob.handle(),
+                    (_hidl_index_0 * 16) + 0,
+                    false);
             this.additionalPlmns.add(_hidl_vec_element);
         }
         this.optionalCsgInfo.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 104);
@@ -73,7 +94,8 @@ public final class CellIdentityTdscdma {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<CellIdentityTdscdma> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<CellIdentityTdscdma> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

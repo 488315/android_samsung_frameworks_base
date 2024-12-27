@@ -6,6 +6,44 @@ import android.hardware.audio.common.V2_0.AudioChannelMask$$ExternalSyntheticOut
 /* loaded from: classes.dex */
 public abstract class CecLogicalAddress {
     public static final String toString(int i) {
-        return i == 0 ? "TV" : i == 1 ? "RECORDER_1" : i == 2 ? "RECORDER_2" : i == 3 ? "TUNER_1" : i == 4 ? "PLAYBACK_1" : i == 5 ? "AUDIO_SYSTEM" : i == 6 ? "TUNER_2" : i == 7 ? "TUNER_3" : i == 8 ? "PLAYBACK_2" : i == 9 ? "RECORDER_3" : i == 10 ? "TUNER_4" : i == 11 ? "PLAYBACK_3" : i == 14 ? "FREE_USE" : i == 15 ? "UNREGISTERED" : i == 15 ? "BROADCAST" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i);
+        return i == 0
+                ? "TV"
+                : i == 1
+                        ? "RECORDER_1"
+                        : i == 2
+                                ? "RECORDER_2"
+                                : i == 3
+                                        ? "TUNER_1"
+                                        : i == 4
+                                                ? "PLAYBACK_1"
+                                                : i == 5
+                                                        ? "AUDIO_SYSTEM"
+                                                        : i == 6
+                                                                ? "TUNER_2"
+                                                                : i == 7
+                                                                        ? "TUNER_3"
+                                                                        : i == 8
+                                                                                ? "PLAYBACK_2"
+                                                                                : i == 9
+                                                                                        ? "RECORDER_3"
+                                                                                        : i == 10
+                                                                                                ? "TUNER_4"
+                                                                                                : i
+                                                                                                                == 11
+                                                                                                        ? "PLAYBACK_3"
+                                                                                                        : i
+                                                                                                                        == 14
+                                                                                                                ? "FREE_USE"
+                                                                                                                : i
+                                                                                                                                == 15
+                                                                                                                        ? "UNREGISTERED"
+                                                                                                                        : i
+                                                                                                                                        == 15
+                                                                                                                                ? "BROADCAST"
+                                                                                                                                : AudioChannelMask$$ExternalSyntheticOutline0
+                                                                                                                                        .m(
+                                                                                                                                                new StringBuilder(
+                                                                                                                                                        "0x"),
+                                                                                                                                                i);
     }
 }

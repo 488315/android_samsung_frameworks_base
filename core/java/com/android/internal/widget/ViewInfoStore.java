@@ -3,7 +3,6 @@ package com.android.internal.widget;
 import android.util.ArrayMap;
 import android.util.LongSparseArray;
 import android.util.Pools;
-import com.android.internal.widget.RecyclerView;
 
 /* loaded from: classes5.dex */
 class ViewInfoStore {
@@ -12,24 +11,33 @@ class ViewInfoStore {
     final LongSparseArray<RecyclerView.ViewHolder> mOldChangedHolders = new LongSparseArray<>();
 
     interface ProcessCallback {
-        void processAppeared(RecyclerView.ViewHolder viewHolder, RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo, RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo2);
+        void processAppeared(
+                RecyclerView.ViewHolder viewHolder,
+                RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo,
+                RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo2);
 
-        void processDisappeared(RecyclerView.ViewHolder viewHolder, RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo, RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo2);
+        void processDisappeared(
+                RecyclerView.ViewHolder viewHolder,
+                RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo,
+                RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo2);
 
-        void processPersistent(RecyclerView.ViewHolder viewHolder, RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo, RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo2);
+        void processPersistent(
+                RecyclerView.ViewHolder viewHolder,
+                RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo,
+                RecyclerView.ItemAnimator.ItemHolderInfo itemHolderInfo2);
 
         void unused(RecyclerView.ViewHolder viewHolder);
     }
 
-    ViewInfoStore() {
-    }
+    ViewInfoStore() {}
 
     void clear() {
         this.mLayoutHolderMap.clear();
         this.mOldChangedHolders.clear();
     }
 
-    void addToPreLayout(RecyclerView.ViewHolder holder, RecyclerView.ItemAnimator.ItemHolderInfo info) {
+    void addToPreLayout(
+            RecyclerView.ViewHolder holder, RecyclerView.ItemAnimator.ItemHolderInfo info) {
         InfoRecord record = this.mLayoutHolderMap.get(holder);
         if (record == null) {
             record = InfoRecord.obtain();
@@ -52,11 +60,14 @@ class ViewInfoStore {
         return popFromLayoutStep(vh, 8);
     }
 
-    private RecyclerView.ItemAnimator.ItemHolderInfo popFromLayoutStep(RecyclerView.ViewHolder vh, int flag) {
+    private RecyclerView.ItemAnimator.ItemHolderInfo popFromLayoutStep(
+            RecyclerView.ViewHolder vh, int flag) {
         InfoRecord record;
         RecyclerView.ItemAnimator.ItemHolderInfo info;
         int index = this.mLayoutHolderMap.indexOfKey(vh);
-        if (index < 0 || (record = this.mLayoutHolderMap.valueAt(index)) == null || (record.flags & flag) == 0) {
+        if (index < 0
+                || (record = this.mLayoutHolderMap.valueAt(index)) == null
+                || (record.flags & flag) == 0) {
             return null;
         }
         record.flags &= ~flag;
@@ -78,7 +89,8 @@ class ViewInfoStore {
         this.mOldChangedHolders.put(key, holder);
     }
 
-    void addToAppearedInPreLayoutHolders(RecyclerView.ViewHolder holder, RecyclerView.ItemAnimator.ItemHolderInfo info) {
+    void addToAppearedInPreLayoutHolders(
+            RecyclerView.ViewHolder holder, RecyclerView.ItemAnimator.ItemHolderInfo info) {
         InfoRecord record = this.mLayoutHolderMap.get(holder);
         if (record == null) {
             record = InfoRecord.obtain();
@@ -97,7 +109,8 @@ class ViewInfoStore {
         return this.mOldChangedHolders.get(key);
     }
 
-    void addToPostLayout(RecyclerView.ViewHolder holder, RecyclerView.ItemAnimator.ItemHolderInfo info) {
+    void addToPostLayout(
+            RecyclerView.ViewHolder holder, RecyclerView.ItemAnimator.ItemHolderInfo info) {
         InfoRecord record = this.mLayoutHolderMap.get(holder);
         if (record == null) {
             record = InfoRecord.obtain();
@@ -191,8 +204,7 @@ class ViewInfoStore {
         RecyclerView.ItemAnimator.ItemHolderInfo postInfo;
         RecyclerView.ItemAnimator.ItemHolderInfo preInfo;
 
-        private InfoRecord() {
-        }
+        private InfoRecord() {}
 
         static InfoRecord obtain() {
             InfoRecord record = sPool.acquire();
@@ -207,8 +219,7 @@ class ViewInfoStore {
         }
 
         static void drainCache() {
-            while (sPool.acquire() != null) {
-            }
+            while (sPool.acquire() != null) {}
         }
     }
 }

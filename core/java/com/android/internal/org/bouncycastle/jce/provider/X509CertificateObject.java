@@ -32,6 +32,7 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Integers;
 import com.android.internal.org.bouncycastle.util.Strings;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.InetAddress;
@@ -59,6 +60,7 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes5.dex */
@@ -76,12 +78,14 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
         try {
             byte[] bytes = getExtensionBytes("2.5.29.19");
             if (bytes != null) {
-                this.basicConstraints = BasicConstraints.getInstance(ASN1Primitive.fromByteArray(bytes));
+                this.basicConstraints =
+                        BasicConstraints.getInstance(ASN1Primitive.fromByteArray(bytes));
             }
             try {
                 byte[] bytes2 = getExtensionBytes("2.5.29.15");
                 if (bytes2 != null) {
-                    ASN1BitString bits = DERBitString.getInstance(ASN1Primitive.fromByteArray(bytes2));
+                    ASN1BitString bits =
+                            DERBitString.getInstance(ASN1Primitive.fromByteArray(bytes2));
                     byte[] bytes3 = bits.getBytes();
                     int length = (bytes3.length * 8) - bits.getPadBits();
                     int i = 9;
@@ -104,17 +108,21 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity()
+            throws CertificateExpiredException, CertificateNotYetValidException {
         checkValidity(new Date());
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity(Date date)
+            throws CertificateExpiredException, CertificateNotYetValidException {
         if (date.getTime() > getNotAfter().getTime()) {
-            throw new CertificateExpiredException("certificate expired on " + this.c.getEndDate().getTime());
+            throw new CertificateExpiredException(
+                    "certificate expired on " + this.c.getEndDate().getTime());
         }
         if (date.getTime() < getNotBefore().getTime()) {
-            throw new CertificateNotYetValidException("certificate not valid till " + this.c.getStartDate().getTime());
+            throw new CertificateNotYetValidException(
+                    "certificate not valid till " + this.c.getStartDate().getTime());
         }
     }
 
@@ -184,7 +192,8 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
     public String getSigAlgName() {
         String algName;
         Provider prov = Security.getProvider(BouncyCastleProvider.PROVIDER_NAME);
-        if (prov != null && (algName = prov.getProperty("Alg.Alias.Signature." + getSigAlgOID())) != null) {
+        if (prov != null
+                && (algName = prov.getProperty("Alg.Alias.Signature." + getSigAlgOID())) != null) {
             return algName;
         }
         Provider[] provs = Security.getProviders();
@@ -208,7 +217,11 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
             return null;
         }
         try {
-            return this.c.getSignatureAlgorithm().getParameters().toASN1Primitive().getEncoded(ASN1Encoding.DER);
+            return this.c
+                    .getSignatureAlgorithm()
+                    .getParameters()
+                    .toASN1Primitive()
+                    .getEncoded(ASN1Encoding.DER);
         } catch (IOException e) {
             return null;
         }
@@ -260,7 +273,8 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
                 }
                 return Collections.unmodifiableList(list);
             } catch (Exception e) {
-                throw new CertificateParsingException("error processing extended key usage extension");
+                throw new CertificateParsingException(
+                        "error processing extended key usage extension");
             }
         }
         return null;
@@ -355,12 +369,23 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
     @Override // java.security.cert.X509Extension
     public boolean hasUnsupportedCriticalExtension() {
         Extensions extensions;
-        if (getVersion() == 3 && (extensions = this.c.getTBSCertificate().getExtensions()) != null) {
+        if (getVersion() == 3
+                && (extensions = this.c.getTBSCertificate().getExtensions()) != null) {
             Enumeration e = extensions.oids();
             while (e.hasMoreElements()) {
                 ASN1ObjectIdentifier oid = (ASN1ObjectIdentifier) e.nextElement();
                 String oidId = oid.getId();
-                if (!oidId.equals(RFC3280CertPathUtilities.KEY_USAGE) && !oidId.equals(RFC3280CertPathUtilities.CERTIFICATE_POLICIES) && !oidId.equals(RFC3280CertPathUtilities.POLICY_MAPPINGS) && !oidId.equals(RFC3280CertPathUtilities.INHIBIT_ANY_POLICY) && !oidId.equals(RFC3280CertPathUtilities.CRL_DISTRIBUTION_POINTS) && !oidId.equals(RFC3280CertPathUtilities.ISSUING_DISTRIBUTION_POINT) && !oidId.equals(RFC3280CertPathUtilities.DELTA_CRL_INDICATOR) && !oidId.equals(RFC3280CertPathUtilities.POLICY_CONSTRAINTS) && !oidId.equals(RFC3280CertPathUtilities.BASIC_CONSTRAINTS) && !oidId.equals(RFC3280CertPathUtilities.SUBJECT_ALTERNATIVE_NAME) && !oidId.equals(RFC3280CertPathUtilities.NAME_CONSTRAINTS)) {
+                if (!oidId.equals(RFC3280CertPathUtilities.KEY_USAGE)
+                        && !oidId.equals(RFC3280CertPathUtilities.CERTIFICATE_POLICIES)
+                        && !oidId.equals(RFC3280CertPathUtilities.POLICY_MAPPINGS)
+                        && !oidId.equals(RFC3280CertPathUtilities.INHIBIT_ANY_POLICY)
+                        && !oidId.equals(RFC3280CertPathUtilities.CRL_DISTRIBUTION_POINTS)
+                        && !oidId.equals(RFC3280CertPathUtilities.ISSUING_DISTRIBUTION_POINT)
+                        && !oidId.equals(RFC3280CertPathUtilities.DELTA_CRL_INDICATOR)
+                        && !oidId.equals(RFC3280CertPathUtilities.POLICY_CONSTRAINTS)
+                        && !oidId.equals(RFC3280CertPathUtilities.BASIC_CONSTRAINTS)
+                        && !oidId.equals(RFC3280CertPathUtilities.SUBJECT_ALTERNATIVE_NAME)
+                        && !oidId.equals(RFC3280CertPathUtilities.NAME_CONSTRAINTS)) {
                     Extension ext = extensions.getExtension(oid);
                     if (ext.isCritical()) {
                         return true;
@@ -464,9 +489,13 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
         buf.append("            Signature: ").append(new String(Hex.encode(sig, 0, 20))).append(nl);
         for (int i = 20; i < sig.length; i += 20) {
             if (i < sig.length - 20) {
-                buf.append("                       ").append(new String(Hex.encode(sig, i, 20))).append(nl);
+                buf.append("                       ")
+                        .append(new String(Hex.encode(sig, i, 20)))
+                        .append(nl);
             } else {
-                buf.append("                       ").append(new String(Hex.encode(sig, i, sig.length - i))).append(nl);
+                buf.append("                       ")
+                        .append(new String(Hex.encode(sig, i, sig.length - i)))
+                        .append(nl);
             }
         }
         Extensions extensions = this.c.getTBSCertificate().getExtensions();
@@ -481,21 +510,31 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
                 if (ext.getExtnValue() != null) {
                     byte[] octs = ext.getExtnValue().getOctets();
                     ASN1InputStream dIn = new ASN1InputStream(octs);
-                    buf.append("                       critical(").append(ext.isCritical()).append(") ");
+                    buf.append("                       critical(")
+                            .append(ext.isCritical())
+                            .append(") ");
                     try {
                         if (oid.equals((ASN1Primitive) Extension.basicConstraints)) {
                             buf.append(BasicConstraints.getInstance(dIn.readObject())).append(nl);
                         } else if (oid.equals((ASN1Primitive) Extension.keyUsage)) {
                             buf.append(KeyUsage.getInstance(dIn.readObject())).append(nl);
-                        } else if (oid.equals((ASN1Primitive) MiscObjectIdentifiers.netscapeCertType)) {
-                            buf.append(new NetscapeCertType((DERBitString) dIn.readObject())).append(nl);
-                        } else if (oid.equals((ASN1Primitive) MiscObjectIdentifiers.netscapeRevocationURL)) {
-                            buf.append(new NetscapeRevocationURL((DERIA5String) dIn.readObject())).append(nl);
-                        } else if (oid.equals((ASN1Primitive) MiscObjectIdentifiers.verisignCzagExtension)) {
-                            buf.append(new VerisignCzagExtension((DERIA5String) dIn.readObject())).append(nl);
+                        } else if (oid.equals(
+                                (ASN1Primitive) MiscObjectIdentifiers.netscapeCertType)) {
+                            buf.append(new NetscapeCertType((DERBitString) dIn.readObject()))
+                                    .append(nl);
+                        } else if (oid.equals(
+                                (ASN1Primitive) MiscObjectIdentifiers.netscapeRevocationURL)) {
+                            buf.append(new NetscapeRevocationURL((DERIA5String) dIn.readObject()))
+                                    .append(nl);
+                        } else if (oid.equals(
+                                (ASN1Primitive) MiscObjectIdentifiers.verisignCzagExtension)) {
+                            buf.append(new VerisignCzagExtension((DERIA5String) dIn.readObject()))
+                                    .append(nl);
                         } else {
                             buf.append(oid.getId());
-                            buf.append(" value = ").append(ASN1Dump.dumpAsString(dIn.readObject())).append(nl);
+                            buf.append(" value = ")
+                                    .append(ASN1Dump.dumpAsString(dIn.readObject()))
+                                    .append(nl);
                         }
                     } catch (Exception e2) {
                         buf.append(oid.getId());
@@ -510,7 +549,12 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
     }
 
     @Override // java.security.cert.Certificate
-    public final void verify(PublicKey key) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public final void verify(PublicKey key)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    NoSuchProviderException,
+                    SignatureException {
         Signature signature;
         String sigName = X509SignatureUtil.getSignatureName(this.c.getSignatureAlgorithm());
         try {
@@ -522,7 +566,12 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
     }
 
     @Override // java.security.cert.Certificate
-    public final void verify(PublicKey key, String sigProvider) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public final void verify(PublicKey key, String sigProvider)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    NoSuchProviderException,
+                    SignatureException {
         Signature signature;
         String sigName = X509SignatureUtil.getSignatureName(this.c.getSignatureAlgorithm());
         if (sigProvider != null) {
@@ -534,7 +583,11 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
     }
 
     @Override // java.security.cert.X509Certificate, java.security.cert.Certificate
-    public final void verify(PublicKey key, Provider sigProvider) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, SignatureException {
+    public final void verify(PublicKey key, Provider sigProvider)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    SignatureException {
         Signature signature;
         String sigName = X509SignatureUtil.getSignatureName(this.c.getSignatureAlgorithm());
         if (sigProvider != null) {
@@ -545,9 +598,15 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
         checkSignature(key, signature);
     }
 
-    private void checkSignature(PublicKey key, Signature signature) throws CertificateException, NoSuchAlgorithmException, SignatureException, InvalidKeyException {
-        if (!isAlgIdEqual(this.c.getSignatureAlgorithm(), this.c.getTBSCertificate().getSignature())) {
-            throw new CertificateException("signature algorithm in TBS cert not same as outer cert");
+    private void checkSignature(PublicKey key, Signature signature)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    SignatureException,
+                    InvalidKeyException {
+        if (!isAlgIdEqual(
+                this.c.getSignatureAlgorithm(), this.c.getTBSCertificate().getSignature())) {
+            throw new CertificateException(
+                    "signature algorithm in TBS cert not same as outer cert");
         }
         ASN1Encodable params = this.c.getSignatureAlgorithm().getParameters();
         X509SignatureUtil.setSignatureParameters(signature, params);
@@ -571,7 +630,8 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
         return id1.getParameters().equals(id2.getParameters());
     }
 
-    private static Collection getAlternativeNames(byte[] extVal) throws CertificateParsingException {
+    private static Collection getAlternativeNames(byte[] extVal)
+            throws CertificateParsingException {
         if (extVal == null) {
             return null;
         }
@@ -594,10 +654,13 @@ public class X509CertificateObject extends X509Certificate implements PKCS12BagA
                         list.add(((ASN1String) genName.getName()).getString());
                         temp.add(Collections.unmodifiableList(list));
                     case 4:
-                        list.add(X509Name.getInstance(genName.getName()).toString(true, X509Name.DefaultSymbols));
+                        list.add(
+                                X509Name.getInstance(genName.getName())
+                                        .toString(true, X509Name.DefaultSymbols));
                         temp.add(Collections.unmodifiableList(list));
                     case 7:
-                        byte[] addrBytes = DEROctetString.getInstance(genName.getName()).getOctets();
+                        byte[] addrBytes =
+                                DEROctetString.getInstance(genName.getName()).getOctets();
                         try {
                             String addr = InetAddress.getByAddress(addrBytes).getHostAddress();
                             list.add(addr);

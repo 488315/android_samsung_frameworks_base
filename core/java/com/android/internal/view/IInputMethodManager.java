@@ -15,6 +15,7 @@ import android.view.inputmethod.ImeTracker;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
 import android.window.ImeOnBackInvokedDispatcher;
+
 import com.android.internal.inputmethod.IBooleanListener;
 import com.android.internal.inputmethod.IConnectionlessHandwritingCallback;
 import com.android.internal.inputmethod.IImeTracker;
@@ -23,17 +24,32 @@ import com.android.internal.inputmethod.IRemoteAccessibilityInputConnection;
 import com.android.internal.inputmethod.IRemoteInputConnection;
 import com.android.internal.inputmethod.InputBindResult;
 import com.android.internal.inputmethod.InputMethodInfoSafeList;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface IInputMethodManager extends IInterface {
-    boolean acceptStylusHandwritingDelegation(IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2) throws RemoteException;
+    boolean acceptStylusHandwritingDelegation(
+            IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2)
+            throws RemoteException;
 
-    void acceptStylusHandwritingDelegationAsync(IInputMethodClient iInputMethodClient, int i, String str, String str2, int i2, IBooleanListener iBooleanListener) throws RemoteException;
+    void acceptStylusHandwritingDelegationAsync(
+            IInputMethodClient iInputMethodClient,
+            int i,
+            String str,
+            String str2,
+            int i2,
+            IBooleanListener iBooleanListener)
+            throws RemoteException;
 
-    void addClient(IInputMethodClient iInputMethodClient, IRemoteInputConnection iRemoteInputConnection, int i) throws RemoteException;
+    void addClient(
+            IInputMethodClient iInputMethodClient,
+            IRemoteInputConnection iRemoteInputConnection,
+            int i)
+            throws RemoteException;
 
-    void addVirtualStylusIdForTestSession(IInputMethodClient iInputMethodClient) throws RemoteException;
+    void addVirtualStylusIdForTestSession(IInputMethodClient iInputMethodClient)
+            throws RemoteException;
 
     void dismissAndShowAgainInputMethodPicker() throws RemoteException;
 
@@ -51,7 +67,8 @@ public interface IInputMethodManager extends IInterface {
 
     List<InputMethodInfo> getEnabledInputMethodListLegacy(int i) throws RemoteException;
 
-    List<InputMethodSubtype> getEnabledInputMethodSubtypeList(String str, boolean z, int i) throws RemoteException;
+    List<InputMethodSubtype> getEnabledInputMethodSubtypeList(String str, boolean z, int i)
+            throws RemoteException;
 
     IImeTracker getImeTrackerService() throws RemoteException;
 
@@ -59,7 +76,8 @@ public interface IInputMethodManager extends IInterface {
 
     List<InputMethodInfo> getInputMethodListLegacy(int i, int i2) throws RemoteException;
 
-    int getInputMethodWindowVisibleHeight(IInputMethodClient iInputMethodClient) throws RemoteException;
+    int getInputMethodWindowVisibleHeight(IInputMethodClient iInputMethodClient)
+            throws RemoteException;
 
     InputMethodSubtype getLastInputMethodSubtype(int i) throws RemoteException;
 
@@ -67,7 +85,14 @@ public interface IInputMethodManager extends IInterface {
 
     void handleVoiceHWKey() throws RemoteException;
 
-    boolean hideSoftInput(IInputMethodClient iInputMethodClient, IBinder iBinder, ImeTracker.Token token, int i, ResultReceiver resultReceiver, int i2) throws RemoteException;
+    boolean hideSoftInput(
+            IInputMethodClient iInputMethodClient,
+            IBinder iBinder,
+            ImeTracker.Token token,
+            int i,
+            ResultReceiver resultReceiver,
+            int i2)
+            throws RemoteException;
 
     void hideSoftInputFromServerForTest() throws RemoteException;
 
@@ -85,7 +110,9 @@ public interface IInputMethodManager extends IInterface {
 
     boolean minimizeSoftInput(IInputMethodClient iInputMethodClient, int i) throws RemoteException;
 
-    void prepareStylusHandwritingDelegation(IInputMethodClient iInputMethodClient, int i, String str, String str2) throws RemoteException;
+    void prepareStylusHandwritingDelegation(
+            IInputMethodClient iInputMethodClient, int i, String str, String str2)
+            throws RemoteException;
 
     void removeImeSurface() throws RemoteException;
 
@@ -93,27 +120,74 @@ public interface IInputMethodManager extends IInterface {
 
     void reportPerceptibleAsync(IBinder iBinder, boolean z) throws RemoteException;
 
-    void setAdditionalInputMethodSubtypes(String str, InputMethodSubtype[] inputMethodSubtypeArr, int i) throws RemoteException;
+    void setAdditionalInputMethodSubtypes(
+            String str, InputMethodSubtype[] inputMethodSubtypeArr, int i) throws RemoteException;
 
-    void setExplicitlyEnabledInputMethodSubtypes(String str, int[] iArr, int i) throws RemoteException;
+    void setExplicitlyEnabledInputMethodSubtypes(String str, int[] iArr, int i)
+            throws RemoteException;
 
-    void setInputMethodSwitchDisable(IInputMethodClient iInputMethodClient, boolean z) throws RemoteException;
+    void setInputMethodSwitchDisable(IInputMethodClient iInputMethodClient, boolean z)
+            throws RemoteException;
 
-    void setStylusWindowIdleTimeoutForTest(IInputMethodClient iInputMethodClient, long j) throws RemoteException;
+    void setStylusWindowIdleTimeoutForTest(IInputMethodClient iInputMethodClient, long j)
+            throws RemoteException;
 
-    void showInputMethodPickerFromClient(IInputMethodClient iInputMethodClient, int i) throws RemoteException;
+    void showInputMethodPickerFromClient(IInputMethodClient iInputMethodClient, int i)
+            throws RemoteException;
 
     void showInputMethodPickerFromSystem(int i, int i2) throws RemoteException;
 
-    boolean showSoftInput(IInputMethodClient iInputMethodClient, IBinder iBinder, ImeTracker.Token token, int i, int i2, ResultReceiver resultReceiver, int i3) throws RemoteException;
+    boolean showSoftInput(
+            IInputMethodClient iInputMethodClient,
+            IBinder iBinder,
+            ImeTracker.Token token,
+            int i,
+            int i2,
+            ResultReceiver resultReceiver,
+            int i3)
+            throws RemoteException;
 
-    void startConnectionlessStylusHandwriting(IInputMethodClient iInputMethodClient, int i, CursorAnchorInfo cursorAnchorInfo, String str, String str2, IConnectionlessHandwritingCallback iConnectionlessHandwritingCallback) throws RemoteException;
+    void startConnectionlessStylusHandwriting(
+            IInputMethodClient iInputMethodClient,
+            int i,
+            CursorAnchorInfo cursorAnchorInfo,
+            String str,
+            String str2,
+            IConnectionlessHandwritingCallback iConnectionlessHandwritingCallback)
+            throws RemoteException;
 
     void startImeTrace() throws RemoteException;
 
-    InputBindResult startInputOrWindowGainedFocus(int i, IInputMethodClient iInputMethodClient, IBinder iBinder, int i2, int i3, int i4, EditorInfo editorInfo, IRemoteInputConnection iRemoteInputConnection, IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, int i5, int i6, ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher) throws RemoteException;
+    InputBindResult startInputOrWindowGainedFocus(
+            int i,
+            IInputMethodClient iInputMethodClient,
+            IBinder iBinder,
+            int i2,
+            int i3,
+            int i4,
+            EditorInfo editorInfo,
+            IRemoteInputConnection iRemoteInputConnection,
+            IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection,
+            int i5,
+            int i6,
+            ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher)
+            throws RemoteException;
 
-    void startInputOrWindowGainedFocusAsync(int i, IInputMethodClient iInputMethodClient, IBinder iBinder, int i2, int i3, int i4, EditorInfo editorInfo, IRemoteInputConnection iRemoteInputConnection, IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, int i5, int i6, ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher, int i7) throws RemoteException;
+    void startInputOrWindowGainedFocusAsync(
+            int i,
+            IInputMethodClient iInputMethodClient,
+            IBinder iBinder,
+            int i2,
+            int i3,
+            int i4,
+            EditorInfo editorInfo,
+            IRemoteInputConnection iRemoteInputConnection,
+            IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection,
+            int i5,
+            int i6,
+            ImeOnBackInvokedDispatcher imeOnBackInvokedDispatcher,
+            int i7)
+            throws RemoteException;
 
     void startProtoDump(byte[] bArr, int i, String str) throws RemoteException;
 
@@ -125,8 +199,11 @@ public interface IInputMethodManager extends IInterface {
 
     public static class Default implements IInputMethodManager {
         @Override // com.android.internal.view.IInputMethodManager
-        public void addClient(IInputMethodClient client, IRemoteInputConnection inputmethod, int untrustedDisplayId) throws RemoteException {
-        }
+        public void addClient(
+                IInputMethodClient client,
+                IRemoteInputConnection inputmethod,
+                int untrustedDisplayId)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
         public InputMethodInfo getCurrentInputMethodInfoAsUser(int userId) throws RemoteException {
@@ -134,27 +211,33 @@ public interface IInputMethodManager extends IInterface {
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public InputMethodInfoSafeList getInputMethodList(int userId, int directBootAwareness) throws RemoteException {
+        public InputMethodInfoSafeList getInputMethodList(int userId, int directBootAwareness)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public InputMethodInfoSafeList getEnabledInputMethodList(int userId) throws RemoteException {
+        public InputMethodInfoSafeList getEnabledInputMethodList(int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public List<InputMethodInfo> getInputMethodListLegacy(int userId, int directBootAwareness) throws RemoteException {
+        public List<InputMethodInfo> getInputMethodListLegacy(int userId, int directBootAwareness)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public List<InputMethodInfo> getEnabledInputMethodListLegacy(int userId) throws RemoteException {
+        public List<InputMethodInfo> getEnabledInputMethodListLegacy(int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public List<InputMethodSubtype> getEnabledInputMethodSubtypeList(String imiId, boolean allowsImplicitlyEnabledSubtypes, int userId) throws RemoteException {
+        public List<InputMethodSubtype> getEnabledInputMethodSubtypeList(
+                String imiId, boolean allowsImplicitlyEnabledSubtypes, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -164,35 +247,75 @@ public interface IInputMethodManager extends IInterface {
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public boolean showSoftInput(IInputMethodClient client, IBinder windowToken, ImeTracker.Token statsToken, int flags, int lastClickToolType, ResultReceiver resultReceiver, int reason) throws RemoteException {
+        public boolean showSoftInput(
+                IInputMethodClient client,
+                IBinder windowToken,
+                ImeTracker.Token statsToken,
+                int flags,
+                int lastClickToolType,
+                ResultReceiver resultReceiver,
+                int reason)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public boolean hideSoftInput(IInputMethodClient client, IBinder windowToken, ImeTracker.Token statsToken, int flags, ResultReceiver resultReceiver, int reason) throws RemoteException {
+        public boolean hideSoftInput(
+                IInputMethodClient client,
+                IBinder windowToken,
+                ImeTracker.Token statsToken,
+                int flags,
+                ResultReceiver resultReceiver,
+                int reason)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void hideSoftInputFromServerForTest() throws RemoteException {
-        }
+        public void hideSoftInputFromServerForTest() throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public InputBindResult startInputOrWindowGainedFocus(int startInputReason, IInputMethodClient client, IBinder windowToken, int startInputFlags, int softInputMode, int windowFlags, EditorInfo editorInfo, IRemoteInputConnection inputConnection, IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection, int unverifiedTargetSdkVersion, int userId, ImeOnBackInvokedDispatcher imeDispatcher) throws RemoteException {
+        public InputBindResult startInputOrWindowGainedFocus(
+                int startInputReason,
+                IInputMethodClient client,
+                IBinder windowToken,
+                int startInputFlags,
+                int softInputMode,
+                int windowFlags,
+                EditorInfo editorInfo,
+                IRemoteInputConnection inputConnection,
+                IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection,
+                int unverifiedTargetSdkVersion,
+                int userId,
+                ImeOnBackInvokedDispatcher imeDispatcher)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void startInputOrWindowGainedFocusAsync(int startInputReason, IInputMethodClient client, IBinder windowToken, int startInputFlags, int softInputMode, int windowFlags, EditorInfo editorInfo, IRemoteInputConnection inputConnection, IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection, int unverifiedTargetSdkVersion, int userId, ImeOnBackInvokedDispatcher imeDispatcher, int startInputSeq) throws RemoteException {
-        }
+        public void startInputOrWindowGainedFocusAsync(
+                int startInputReason,
+                IInputMethodClient client,
+                IBinder windowToken,
+                int startInputFlags,
+                int softInputMode,
+                int windowFlags,
+                EditorInfo editorInfo,
+                IRemoteInputConnection inputConnection,
+                IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection,
+                int unverifiedTargetSdkVersion,
+                int userId,
+                ImeOnBackInvokedDispatcher imeDispatcher,
+                int startInputSeq)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void showInputMethodPickerFromClient(IInputMethodClient client, int auxiliarySubtypeMode) throws RemoteException {
-        }
+        public void showInputMethodPickerFromClient(
+                IInputMethodClient client, int auxiliarySubtypeMode) throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void showInputMethodPickerFromSystem(int auxiliarySubtypeMode, int displayId) throws RemoteException {
-        }
+        public void showInputMethodPickerFromSystem(int auxiliarySubtypeMode, int displayId)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
         public boolean isInputMethodPickerShownForTest() throws RemoteException {
@@ -205,33 +328,32 @@ public interface IInputMethodManager extends IInterface {
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void setAdditionalInputMethodSubtypes(String id, InputMethodSubtype[] subtypes, int userId) throws RemoteException {
-        }
+        public void setAdditionalInputMethodSubtypes(
+                String id, InputMethodSubtype[] subtypes, int userId) throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void setExplicitlyEnabledInputMethodSubtypes(String imeId, int[] subtypeHashCodes, int userId) throws RemoteException {
-        }
+        public void setExplicitlyEnabledInputMethodSubtypes(
+                String imeId, int[] subtypeHashCodes, int userId) throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public int getInputMethodWindowVisibleHeight(IInputMethodClient client) throws RemoteException {
+        public int getInputMethodWindowVisibleHeight(IInputMethodClient client)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void reportPerceptibleAsync(IBinder windowToken, boolean perceptible) throws RemoteException {
-        }
+        public void reportPerceptibleAsync(IBinder windowToken, boolean perceptible)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void removeImeSurface() throws RemoteException {
-        }
+        public void removeImeSurface() throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void removeImeSurfaceFromWindowAsync(IBinder windowToken) throws RemoteException {
-        }
+        public void removeImeSurfaceFromWindowAsync(IBinder windowToken) throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void startProtoDump(byte[] protoDump, int source, String where) throws RemoteException {
-        }
+        public void startProtoDump(byte[] protoDump, int source, String where)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
         public boolean isImeTraceEnabled() throws RemoteException {
@@ -239,46 +361,66 @@ public interface IInputMethodManager extends IInterface {
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void startImeTrace() throws RemoteException {
-        }
+        public void startImeTrace() throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void stopImeTrace() throws RemoteException {
-        }
+        public void stopImeTrace() throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void startStylusHandwriting(IInputMethodClient client) throws RemoteException {
-        }
+        public void startStylusHandwriting(IInputMethodClient client) throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void startConnectionlessStylusHandwriting(IInputMethodClient client, int userId, CursorAnchorInfo cursorAnchorInfo, String delegatePackageName, String delegatorPackageName, IConnectionlessHandwritingCallback callback) throws RemoteException {
-        }
+        public void startConnectionlessStylusHandwriting(
+                IInputMethodClient client,
+                int userId,
+                CursorAnchorInfo cursorAnchorInfo,
+                String delegatePackageName,
+                String delegatorPackageName,
+                IConnectionlessHandwritingCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void prepareStylusHandwritingDelegation(IInputMethodClient client, int userId, String delegatePackageName, String delegatorPackageName) throws RemoteException {
-        }
+        public void prepareStylusHandwritingDelegation(
+                IInputMethodClient client,
+                int userId,
+                String delegatePackageName,
+                String delegatorPackageName)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public boolean acceptStylusHandwritingDelegation(IInputMethodClient client, int userId, String delegatePackageName, String delegatorPackageName, int flags) throws RemoteException {
+        public boolean acceptStylusHandwritingDelegation(
+                IInputMethodClient client,
+                int userId,
+                String delegatePackageName,
+                String delegatorPackageName,
+                int flags)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void acceptStylusHandwritingDelegationAsync(IInputMethodClient client, int userId, String delegatePackageName, String delegatorPackageName, int flags, IBooleanListener callback) throws RemoteException {
-        }
+        public void acceptStylusHandwritingDelegationAsync(
+                IInputMethodClient client,
+                int userId,
+                String delegatePackageName,
+                String delegatorPackageName,
+                int flags,
+                IBooleanListener callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public boolean isStylusHandwritingAvailableAsUser(int userId, boolean connectionless) throws RemoteException {
+        public boolean isStylusHandwritingAvailableAsUser(int userId, boolean connectionless)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void addVirtualStylusIdForTestSession(IInputMethodClient client) throws RemoteException {
-        }
+        public void addVirtualStylusIdForTestSession(IInputMethodClient client)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void setStylusWindowIdleTimeoutForTest(IInputMethodClient client, long timeout) throws RemoteException {
-        }
+        public void setStylusWindowIdleTimeoutForTest(IInputMethodClient client, long timeout)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
         public IImeTracker getImeTrackerService() throws RemoteException {
@@ -286,13 +428,13 @@ public interface IInputMethodManager extends IInterface {
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public boolean minimizeSoftInput(IInputMethodClient client, int minimize) throws RemoteException {
+        public boolean minimizeSoftInput(IInputMethodClient client, int minimize)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void undoMinimizeSoftInput() throws RemoteException {
-        }
+        public void undoMinimizeSoftInput() throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
         public int isAccessoryKeyboard() throws RemoteException {
@@ -320,12 +462,11 @@ public interface IInputMethodManager extends IInterface {
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void setInputMethodSwitchDisable(IInputMethodClient client, boolean disable) throws RemoteException {
-        }
+        public void setInputMethodSwitchDisable(IInputMethodClient client, boolean disable)
+                throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void dismissAndShowAgainInputMethodPicker() throws RemoteException {
-        }
+        public void dismissAndShowAgainInputMethodPicker() throws RemoteException {}
 
         @Override // com.android.internal.view.IInputMethodManager
         public int getCurrentFocusDisplayID() throws RemoteException {
@@ -338,8 +479,7 @@ public interface IInputMethodManager extends IInterface {
         }
 
         @Override // com.android.internal.view.IInputMethodManager
-        public void handleVoiceHWKey() throws RemoteException {
-        }
+        public void handleVoiceHWKey() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -347,7 +487,7 @@ public interface IInputMethodManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputMethodManager {
+    public abstract static class Stub extends Binder implements IInputMethodManager {
         public static final String DESCRIPTOR = "com.android.internal.view.IInputMethodManager";
         static final int TRANSACTION_acceptStylusHandwritingDelegation = 31;
         static final int TRANSACTION_acceptStylusHandwritingDelegationAsync = 32;
@@ -409,7 +549,9 @@ public interface IInputMethodManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IInputMethodManager asInterface(IBinder obj) {
@@ -537,7 +679,8 @@ public interface IInputMethodManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -547,8 +690,10 @@ public interface IInputMethodManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IInputMethodClient _arg0 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
-                    IRemoteInputConnection _arg1 = IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg0 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IRemoteInputConnection _arg1 =
+                            IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     addClient(_arg0, _arg1, _arg2);
@@ -596,7 +741,8 @@ public interface IInputMethodManager extends IInterface {
                     boolean _arg14 = data.readBoolean();
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<InputMethodSubtype> _result6 = getEnabledInputMethodSubtypeList(_arg07, _arg14, _arg22);
+                    List<InputMethodSubtype> _result6 =
+                            getEnabledInputMethodSubtypeList(_arg07, _arg14, _arg22);
                     reply.writeNoException();
                     reply.writeTypedList(_result6, 1);
                     return true;
@@ -608,27 +754,35 @@ public interface IInputMethodManager extends IInterface {
                     reply.writeTypedObject(_result7, 1);
                     return true;
                 case 9:
-                    IInputMethodClient _arg09 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg09 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg15 = data.readStrongBinder();
-                    ImeTracker.Token _arg23 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg23 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     int _arg3 = data.readInt();
                     int _arg4 = data.readInt();
-                    ResultReceiver _arg5 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg5 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     int _arg6 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result8 = showSoftInput(_arg09, _arg15, _arg23, _arg3, _arg4, _arg5, _arg6);
+                    boolean _result8 =
+                            showSoftInput(_arg09, _arg15, _arg23, _arg3, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeBoolean(_result8);
                     return true;
                 case 10:
-                    IInputMethodClient _arg010 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg010 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg16 = data.readStrongBinder();
-                    ImeTracker.Token _arg24 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg24 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     int _arg32 = data.readInt();
-                    ResultReceiver _arg42 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg42 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     int _arg52 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result9 = hideSoftInput(_arg010, _arg16, _arg24, _arg32, _arg42, _arg52);
+                    boolean _result9 =
+                            hideSoftInput(_arg010, _arg16, _arg24, _arg32, _arg42, _arg52);
                     reply.writeNoException();
                     reply.writeBoolean(_result9);
                     return true;
@@ -638,42 +792,60 @@ public interface IInputMethodManager extends IInterface {
                     return true;
                 case 12:
                     int _arg011 = data.readInt();
-                    IInputMethodClient _arg17 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg17 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg25 = data.readStrongBinder();
                     int _arg33 = data.readInt();
                     int _arg43 = data.readInt();
                     int _arg53 = data.readInt();
                     EditorInfo _arg62 = (EditorInfo) data.readTypedObject(EditorInfo.CREATOR);
-                    IRemoteInputConnection _arg7 = IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
-                    IRemoteAccessibilityInputConnection _arg8 = IRemoteAccessibilityInputConnection.Stub.asInterface(data.readStrongBinder());
+                    IRemoteInputConnection _arg7 =
+                            IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
+                    IRemoteAccessibilityInputConnection _arg8 =
+                            IRemoteAccessibilityInputConnection.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg9 = data.readInt();
                     int _arg10 = data.readInt();
-                    ImeOnBackInvokedDispatcher _arg11 = (ImeOnBackInvokedDispatcher) data.readTypedObject(ImeOnBackInvokedDispatcher.CREATOR);
+                    ImeOnBackInvokedDispatcher _arg11 =
+                            (ImeOnBackInvokedDispatcher)
+                                    data.readTypedObject(ImeOnBackInvokedDispatcher.CREATOR);
                     data.enforceNoDataAvail();
-                    InputBindResult _result10 = startInputOrWindowGainedFocus(_arg011, _arg17, _arg25, _arg33, _arg43, _arg53, _arg62, _arg7, _arg8, _arg9, _arg10, _arg11);
+                    InputBindResult _result10 =
+                            startInputOrWindowGainedFocus(
+                                    _arg011, _arg17, _arg25, _arg33, _arg43, _arg53, _arg62, _arg7,
+                                    _arg8, _arg9, _arg10, _arg11);
                     reply.writeNoException();
                     reply.writeTypedObject(_result10, 1);
                     return true;
                 case 13:
                     int _arg012 = data.readInt();
-                    IInputMethodClient _arg18 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg18 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg26 = data.readStrongBinder();
                     int _arg34 = data.readInt();
                     int _arg44 = data.readInt();
                     int _arg54 = data.readInt();
                     EditorInfo _arg63 = (EditorInfo) data.readTypedObject(EditorInfo.CREATOR);
-                    IRemoteInputConnection _arg72 = IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
-                    IRemoteAccessibilityInputConnection _arg82 = IRemoteAccessibilityInputConnection.Stub.asInterface(data.readStrongBinder());
+                    IRemoteInputConnection _arg72 =
+                            IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
+                    IRemoteAccessibilityInputConnection _arg82 =
+                            IRemoteAccessibilityInputConnection.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg92 = data.readInt();
                     int _arg102 = data.readInt();
-                    ImeOnBackInvokedDispatcher _arg112 = (ImeOnBackInvokedDispatcher) data.readTypedObject(ImeOnBackInvokedDispatcher.CREATOR);
+                    ImeOnBackInvokedDispatcher _arg112 =
+                            (ImeOnBackInvokedDispatcher)
+                                    data.readTypedObject(ImeOnBackInvokedDispatcher.CREATOR);
                     int _arg122 = data.readInt();
                     data.enforceNoDataAvail();
-                    startInputOrWindowGainedFocusAsync(_arg012, _arg18, _arg26, _arg34, _arg44, _arg54, _arg63, _arg72, _arg82, _arg92, _arg102, _arg112, _arg122);
+                    startInputOrWindowGainedFocusAsync(
+                            _arg012, _arg18, _arg26, _arg34, _arg44, _arg54, _arg63, _arg72, _arg82,
+                            _arg92, _arg102, _arg112, _arg122);
                     reply.writeNoException();
                     return true;
                 case 14:
-                    IInputMethodClient _arg013 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg013 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     int _arg19 = data.readInt();
                     data.enforceNoDataAvail();
                     showInputMethodPickerFromClient(_arg013, _arg19);
@@ -700,7 +872,9 @@ public interface IInputMethodManager extends IInterface {
                     return true;
                 case 18:
                     String _arg016 = data.readString();
-                    InputMethodSubtype[] _arg111 = (InputMethodSubtype[]) data.createTypedArray(InputMethodSubtype.CREATOR);
+                    InputMethodSubtype[] _arg111 =
+                            (InputMethodSubtype[])
+                                    data.createTypedArray(InputMethodSubtype.CREATOR);
                     int _arg27 = data.readInt();
                     data.enforceNoDataAvail();
                     setAdditionalInputMethodSubtypes(_arg016, _arg111, _arg27);
@@ -759,23 +933,30 @@ public interface IInputMethodManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 28:
-                    IInputMethodClient _arg023 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg023 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startStylusHandwriting(_arg023);
                     reply.writeNoException();
                     return true;
                 case 29:
-                    IInputMethodClient _arg024 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg024 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     int _arg116 = data.readInt();
-                    CursorAnchorInfo _arg210 = (CursorAnchorInfo) data.readTypedObject(CursorAnchorInfo.CREATOR);
+                    CursorAnchorInfo _arg210 =
+                            (CursorAnchorInfo) data.readTypedObject(CursorAnchorInfo.CREATOR);
                     String _arg35 = data.readString();
                     String _arg45 = data.readString();
-                    IConnectionlessHandwritingCallback _arg55 = IConnectionlessHandwritingCallback.Stub.asInterface(data.readStrongBinder());
+                    IConnectionlessHandwritingCallback _arg55 =
+                            IConnectionlessHandwritingCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    startConnectionlessStylusHandwriting(_arg024, _arg116, _arg210, _arg35, _arg45, _arg55);
+                    startConnectionlessStylusHandwriting(
+                            _arg024, _arg116, _arg210, _arg35, _arg45, _arg55);
                     return true;
                 case 30:
-                    IInputMethodClient _arg025 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg025 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     int _arg117 = data.readInt();
                     String _arg211 = data.readString();
                     String _arg36 = data.readString();
@@ -784,25 +965,31 @@ public interface IInputMethodManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 31:
-                    IInputMethodClient _arg026 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg026 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     int _arg118 = data.readInt();
                     String _arg212 = data.readString();
                     String _arg37 = data.readString();
                     int _arg46 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result15 = acceptStylusHandwritingDelegation(_arg026, _arg118, _arg212, _arg37, _arg46);
+                    boolean _result15 =
+                            acceptStylusHandwritingDelegation(
+                                    _arg026, _arg118, _arg212, _arg37, _arg46);
                     reply.writeNoException();
                     reply.writeBoolean(_result15);
                     return true;
                 case 32:
-                    IInputMethodClient _arg027 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg027 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     int _arg119 = data.readInt();
                     String _arg213 = data.readString();
                     String _arg38 = data.readString();
                     int _arg47 = data.readInt();
-                    IBooleanListener _arg56 = IBooleanListener.Stub.asInterface(data.readStrongBinder());
+                    IBooleanListener _arg56 =
+                            IBooleanListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    acceptStylusHandwritingDelegationAsync(_arg027, _arg119, _arg213, _arg38, _arg47, _arg56);
+                    acceptStylusHandwritingDelegationAsync(
+                            _arg027, _arg119, _arg213, _arg38, _arg47, _arg56);
                     return true;
                 case 33:
                     int _arg028 = data.readInt();
@@ -813,13 +1000,15 @@ public interface IInputMethodManager extends IInterface {
                     reply.writeBoolean(_result16);
                     return true;
                 case 34:
-                    IInputMethodClient _arg029 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg029 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addVirtualStylusIdForTestSession(_arg029);
                     reply.writeNoException();
                     return true;
                 case 35:
-                    IInputMethodClient _arg030 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg030 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     long _arg121 = data.readLong();
                     data.enforceNoDataAvail();
                     setStylusWindowIdleTimeoutForTest(_arg030, _arg121);
@@ -831,7 +1020,8 @@ public interface IInputMethodManager extends IInterface {
                     reply.writeStrongInterface(_result17);
                     return true;
                 case 37:
-                    IInputMethodClient _arg031 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg031 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     int _arg123 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result18 = minimizeSoftInput(_arg031, _arg123);
@@ -871,7 +1061,8 @@ public interface IInputMethodManager extends IInterface {
                     reply.writeBoolean(_result23);
                     return true;
                 case 44:
-                    IInputMethodClient _arg033 = IInputMethodClient.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodClient _arg033 =
+                            IInputMethodClient.Stub.asInterface(data.readStrongBinder());
                     boolean _arg125 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setInputMethodSwitchDisable(_arg033, _arg125);
@@ -917,7 +1108,11 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void addClient(IInputMethodClient client, IRemoteInputConnection inputmethod, int untrustedDisplayId) throws RemoteException {
+            public void addClient(
+                    IInputMethodClient client,
+                    IRemoteInputConnection inputmethod,
+                    int untrustedDisplayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -934,7 +1129,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public InputMethodInfo getCurrentInputMethodInfoAsUser(int userId) throws RemoteException {
+            public InputMethodInfo getCurrentInputMethodInfoAsUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -942,7 +1138,8 @@ public interface IInputMethodManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    InputMethodInfo _result = (InputMethodInfo) _reply.readTypedObject(InputMethodInfo.CREATOR);
+                    InputMethodInfo _result =
+                            (InputMethodInfo) _reply.readTypedObject(InputMethodInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -951,7 +1148,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public InputMethodInfoSafeList getInputMethodList(int userId, int directBootAwareness) throws RemoteException {
+            public InputMethodInfoSafeList getInputMethodList(int userId, int directBootAwareness)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -960,7 +1158,9 @@ public interface IInputMethodManager extends IInterface {
                     _data.writeInt(directBootAwareness);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    InputMethodInfoSafeList _result = (InputMethodInfoSafeList) _reply.readTypedObject(InputMethodInfoSafeList.CREATOR);
+                    InputMethodInfoSafeList _result =
+                            (InputMethodInfoSafeList)
+                                    _reply.readTypedObject(InputMethodInfoSafeList.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -969,7 +1169,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public InputMethodInfoSafeList getEnabledInputMethodList(int userId) throws RemoteException {
+            public InputMethodInfoSafeList getEnabledInputMethodList(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -977,7 +1178,9 @@ public interface IInputMethodManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    InputMethodInfoSafeList _result = (InputMethodInfoSafeList) _reply.readTypedObject(InputMethodInfoSafeList.CREATOR);
+                    InputMethodInfoSafeList _result =
+                            (InputMethodInfoSafeList)
+                                    _reply.readTypedObject(InputMethodInfoSafeList.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -986,7 +1189,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public List<InputMethodInfo> getInputMethodListLegacy(int userId, int directBootAwareness) throws RemoteException {
+            public List<InputMethodInfo> getInputMethodListLegacy(
+                    int userId, int directBootAwareness) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -995,7 +1199,8 @@ public interface IInputMethodManager extends IInterface {
                     _data.writeInt(directBootAwareness);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    List<InputMethodInfo> _result = _reply.createTypedArrayList(InputMethodInfo.CREATOR);
+                    List<InputMethodInfo> _result =
+                            _reply.createTypedArrayList(InputMethodInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1004,7 +1209,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public List<InputMethodInfo> getEnabledInputMethodListLegacy(int userId) throws RemoteException {
+            public List<InputMethodInfo> getEnabledInputMethodListLegacy(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1012,7 +1218,8 @@ public interface IInputMethodManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    List<InputMethodInfo> _result = _reply.createTypedArrayList(InputMethodInfo.CREATOR);
+                    List<InputMethodInfo> _result =
+                            _reply.createTypedArrayList(InputMethodInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1021,7 +1228,9 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public List<InputMethodSubtype> getEnabledInputMethodSubtypeList(String imiId, boolean allowsImplicitlyEnabledSubtypes, int userId) throws RemoteException {
+            public List<InputMethodSubtype> getEnabledInputMethodSubtypeList(
+                    String imiId, boolean allowsImplicitlyEnabledSubtypes, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1031,7 +1240,8 @@ public interface IInputMethodManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    List<InputMethodSubtype> _result = _reply.createTypedArrayList(InputMethodSubtype.CREATOR);
+                    List<InputMethodSubtype> _result =
+                            _reply.createTypedArrayList(InputMethodSubtype.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1048,7 +1258,8 @@ public interface IInputMethodManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    InputMethodSubtype _result = (InputMethodSubtype) _reply.readTypedObject(InputMethodSubtype.CREATOR);
+                    InputMethodSubtype _result =
+                            (InputMethodSubtype) _reply.readTypedObject(InputMethodSubtype.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1057,7 +1268,15 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public boolean showSoftInput(IInputMethodClient client, IBinder windowToken, ImeTracker.Token statsToken, int flags, int lastClickToolType, ResultReceiver resultReceiver, int reason) throws RemoteException {
+            public boolean showSoftInput(
+                    IInputMethodClient client,
+                    IBinder windowToken,
+                    ImeTracker.Token statsToken,
+                    int flags,
+                    int lastClickToolType,
+                    ResultReceiver resultReceiver,
+                    int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1080,7 +1299,14 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public boolean hideSoftInput(IInputMethodClient client, IBinder windowToken, ImeTracker.Token statsToken, int flags, ResultReceiver resultReceiver, int reason) throws RemoteException {
+            public boolean hideSoftInput(
+                    IInputMethodClient client,
+                    IBinder windowToken,
+                    ImeTracker.Token statsToken,
+                    int flags,
+                    ResultReceiver resultReceiver,
+                    int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1116,7 +1342,20 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public InputBindResult startInputOrWindowGainedFocus(int startInputReason, IInputMethodClient client, IBinder windowToken, int startInputFlags, int softInputMode, int windowFlags, EditorInfo editorInfo, IRemoteInputConnection inputConnection, IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection, int unverifiedTargetSdkVersion, int userId, ImeOnBackInvokedDispatcher imeDispatcher) throws RemoteException {
+            public InputBindResult startInputOrWindowGainedFocus(
+                    int startInputReason,
+                    IInputMethodClient client,
+                    IBinder windowToken,
+                    int startInputFlags,
+                    int softInputMode,
+                    int windowFlags,
+                    EditorInfo editorInfo,
+                    IRemoteInputConnection inputConnection,
+                    IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection,
+                    int unverifiedTargetSdkVersion,
+                    int userId,
+                    ImeOnBackInvokedDispatcher imeDispatcher)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1200,7 +1439,8 @@ public interface IInputMethodManager extends IInterface {
                     try {
                         this.mRemote.transact(12, _data, _reply, 0);
                         _reply.readException();
-                        InputBindResult _result = (InputBindResult) _reply.readTypedObject(InputBindResult.CREATOR);
+                        InputBindResult _result =
+                                (InputBindResult) _reply.readTypedObject(InputBindResult.CREATOR);
                         _reply.recycle();
                         _data.recycle();
                         return _result;
@@ -1219,7 +1459,21 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void startInputOrWindowGainedFocusAsync(int startInputReason, IInputMethodClient client, IBinder windowToken, int startInputFlags, int softInputMode, int windowFlags, EditorInfo editorInfo, IRemoteInputConnection inputConnection, IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection, int unverifiedTargetSdkVersion, int userId, ImeOnBackInvokedDispatcher imeDispatcher, int startInputSeq) throws RemoteException {
+            public void startInputOrWindowGainedFocusAsync(
+                    int startInputReason,
+                    IInputMethodClient client,
+                    IBinder windowToken,
+                    int startInputFlags,
+                    int softInputMode,
+                    int windowFlags,
+                    EditorInfo editorInfo,
+                    IRemoteInputConnection inputConnection,
+                    IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection,
+                    int unverifiedTargetSdkVersion,
+                    int userId,
+                    ImeOnBackInvokedDispatcher imeDispatcher,
+                    int startInputSeq)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1324,7 +1578,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void showInputMethodPickerFromClient(IInputMethodClient client, int auxiliarySubtypeMode) throws RemoteException {
+            public void showInputMethodPickerFromClient(
+                    IInputMethodClient client, int auxiliarySubtypeMode) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1340,7 +1595,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void showInputMethodPickerFromSystem(int auxiliarySubtypeMode, int displayId) throws RemoteException {
+            public void showInputMethodPickerFromSystem(int auxiliarySubtypeMode, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1372,7 +1628,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public InputMethodSubtype getCurrentInputMethodSubtype(int userId) throws RemoteException {
+            public InputMethodSubtype getCurrentInputMethodSubtype(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1380,7 +1637,8 @@ public interface IInputMethodManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(17, _data, _reply, 0);
                     _reply.readException();
-                    InputMethodSubtype _result = (InputMethodSubtype) _reply.readTypedObject(InputMethodSubtype.CREATOR);
+                    InputMethodSubtype _result =
+                            (InputMethodSubtype) _reply.readTypedObject(InputMethodSubtype.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1389,7 +1647,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void setAdditionalInputMethodSubtypes(String id, InputMethodSubtype[] subtypes, int userId) throws RemoteException {
+            public void setAdditionalInputMethodSubtypes(
+                    String id, InputMethodSubtype[] subtypes, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1406,7 +1665,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void setExplicitlyEnabledInputMethodSubtypes(String imeId, int[] subtypeHashCodes, int userId) throws RemoteException {
+            public void setExplicitlyEnabledInputMethodSubtypes(
+                    String imeId, int[] subtypeHashCodes, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1423,7 +1683,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public int getInputMethodWindowVisibleHeight(IInputMethodClient client) throws RemoteException {
+            public int getInputMethodWindowVisibleHeight(IInputMethodClient client)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1440,7 +1701,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void reportPerceptibleAsync(IBinder windowToken, boolean perceptible) throws RemoteException {
+            public void reportPerceptibleAsync(IBinder windowToken, boolean perceptible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1467,7 +1729,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void removeImeSurfaceFromWindowAsync(IBinder windowToken) throws RemoteException {
+            public void removeImeSurfaceFromWindowAsync(IBinder windowToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1479,7 +1742,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void startProtoDump(byte[] protoDump, int source, String where) throws RemoteException {
+            public void startProtoDump(byte[] protoDump, int source, String where)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1555,7 +1819,14 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void startConnectionlessStylusHandwriting(IInputMethodClient client, int userId, CursorAnchorInfo cursorAnchorInfo, String delegatePackageName, String delegatorPackageName, IConnectionlessHandwritingCallback callback) throws RemoteException {
+            public void startConnectionlessStylusHandwriting(
+                    IInputMethodClient client,
+                    int userId,
+                    CursorAnchorInfo cursorAnchorInfo,
+                    String delegatePackageName,
+                    String delegatorPackageName,
+                    IConnectionlessHandwritingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1572,7 +1843,12 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void prepareStylusHandwritingDelegation(IInputMethodClient client, int userId, String delegatePackageName, String delegatorPackageName) throws RemoteException {
+            public void prepareStylusHandwritingDelegation(
+                    IInputMethodClient client,
+                    int userId,
+                    String delegatePackageName,
+                    String delegatorPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1590,7 +1866,13 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public boolean acceptStylusHandwritingDelegation(IInputMethodClient client, int userId, String delegatePackageName, String delegatorPackageName, int flags) throws RemoteException {
+            public boolean acceptStylusHandwritingDelegation(
+                    IInputMethodClient client,
+                    int userId,
+                    String delegatePackageName,
+                    String delegatorPackageName,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1611,7 +1893,14 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void acceptStylusHandwritingDelegationAsync(IInputMethodClient client, int userId, String delegatePackageName, String delegatorPackageName, int flags, IBooleanListener callback) throws RemoteException {
+            public void acceptStylusHandwritingDelegationAsync(
+                    IInputMethodClient client,
+                    int userId,
+                    String delegatePackageName,
+                    String delegatorPackageName,
+                    int flags,
+                    IBooleanListener callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1628,7 +1917,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public boolean isStylusHandwritingAvailableAsUser(int userId, boolean connectionless) throws RemoteException {
+            public boolean isStylusHandwritingAvailableAsUser(int userId, boolean connectionless)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1646,7 +1936,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void addVirtualStylusIdForTestSession(IInputMethodClient client) throws RemoteException {
+            public void addVirtualStylusIdForTestSession(IInputMethodClient client)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1661,7 +1952,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void setStylusWindowIdleTimeoutForTest(IInputMethodClient client, long timeout) throws RemoteException {
+            public void setStylusWindowIdleTimeoutForTest(IInputMethodClient client, long timeout)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1693,7 +1985,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public boolean minimizeSoftInput(IInputMethodClient client, int minimize) throws RemoteException {
+            public boolean minimizeSoftInput(IInputMethodClient client, int minimize)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1789,7 +2082,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public boolean getDexSettingsValue(String key, String defaultKey) throws RemoteException {
+            public boolean getDexSettingsValue(String key, String defaultKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1807,7 +2101,8 @@ public interface IInputMethodManager extends IInterface {
             }
 
             @Override // com.android.internal.view.IInputMethodManager
-            public void setInputMethodSwitchDisable(IInputMethodClient client, boolean disable) throws RemoteException {
+            public void setInputMethodSwitchDisable(IInputMethodClient client, boolean disable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1884,35 +2179,47 @@ public interface IInputMethodManager extends IInterface {
         }
 
         protected void hideSoftInputFromServerForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
         }
 
-        protected void showInputMethodPickerFromSystem_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+        protected void showInputMethodPickerFromSystem_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
-        protected void isInputMethodPickerShownForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
+        protected void isInputMethodPickerShownForTest_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
         }
 
         protected void removeImeSurface_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.INTERNAL_SYSTEM_WINDOW, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.INTERNAL_SYSTEM_WINDOW, getCallingPid(), getCallingUid());
         }
 
         protected void startImeTrace_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_UI_TRACING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_UI_TRACING, getCallingPid(), getCallingUid());
         }
 
         protected void stopImeTrace_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_UI_TRACING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_UI_TRACING, getCallingPid(), getCallingUid());
         }
 
-        protected void addVirtualStylusIdForTestSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
+        protected void addVirtualStylusIdForTestSession_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
         }
 
-        protected void setStylusWindowIdleTimeoutForTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
+        protected void setStylusWindowIdleTimeoutForTest_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_INPUT_METHOD, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

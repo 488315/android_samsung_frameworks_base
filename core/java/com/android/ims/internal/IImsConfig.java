@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.ims.ImsConfigListener;
 
 /* loaded from: classes5.dex */
@@ -19,7 +20,8 @@ public interface IImsConfig extends IInterface {
 
     boolean getVolteProvisioned() throws RemoteException;
 
-    void setFeatureValue(int i, int i2, int i3, ImsConfigListener imsConfigListener) throws RemoteException;
+    void setFeatureValue(int i, int i2, int i3, ImsConfigListener imsConfigListener)
+            throws RemoteException;
 
     int setProvisionedStringValue(int i, String str) throws RemoteException;
 
@@ -49,12 +51,12 @@ public interface IImsConfig extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsConfig
-        public void getFeatureValue(int feature, int network, ImsConfigListener listener) throws RemoteException {
-        }
+        public void getFeatureValue(int feature, int network, ImsConfigListener listener)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsConfig
-        public void setFeatureValue(int feature, int network, int value, ImsConfigListener listener) throws RemoteException {
-        }
+        public void setFeatureValue(int feature, int network, int value, ImsConfigListener listener)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsConfig
         public boolean getVolteProvisioned() throws RemoteException {
@@ -62,12 +64,11 @@ public interface IImsConfig extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsConfig
-        public void getVideoQuality(ImsConfigListener listener) throws RemoteException {
-        }
+        public void getVideoQuality(ImsConfigListener listener) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsConfig
-        public void setVideoQuality(int quality, ImsConfigListener listener) throws RemoteException {
-        }
+        public void setVideoQuality(int quality, ImsConfigListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -75,7 +76,7 @@ public interface IImsConfig extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsConfig {
+    public abstract static class Stub extends Binder implements IImsConfig {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsConfig";
         static final int TRANSACTION_getFeatureValue = 5;
         static final int TRANSACTION_getProvisionedStringValue = 2;
@@ -138,7 +139,8 @@ public interface IImsConfig extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -180,7 +182,8 @@ public interface IImsConfig extends IInterface {
                 case 5:
                     int _arg05 = data.readInt();
                     int _arg13 = data.readInt();
-                    ImsConfigListener _arg2 = ImsConfigListener.Stub.asInterface(data.readStrongBinder());
+                    ImsConfigListener _arg2 =
+                            ImsConfigListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getFeatureValue(_arg05, _arg13, _arg2);
                     return true;
@@ -188,7 +191,8 @@ public interface IImsConfig extends IInterface {
                     int _arg06 = data.readInt();
                     int _arg14 = data.readInt();
                     int _arg22 = data.readInt();
-                    ImsConfigListener _arg3 = ImsConfigListener.Stub.asInterface(data.readStrongBinder());
+                    ImsConfigListener _arg3 =
+                            ImsConfigListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setFeatureValue(_arg06, _arg14, _arg22, _arg3);
                     return true;
@@ -198,13 +202,15 @@ public interface IImsConfig extends IInterface {
                     reply.writeBoolean(_result5);
                     return true;
                 case 8:
-                    ImsConfigListener _arg07 = ImsConfigListener.Stub.asInterface(data.readStrongBinder());
+                    ImsConfigListener _arg07 =
+                            ImsConfigListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getVideoQuality(_arg07);
                     return true;
                 case 9:
                     int _arg08 = data.readInt();
-                    ImsConfigListener _arg15 = ImsConfigListener.Stub.asInterface(data.readStrongBinder());
+                    ImsConfigListener _arg15 =
+                            ImsConfigListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setVideoQuality(_arg08, _arg15);
                     return true;
@@ -300,7 +306,8 @@ public interface IImsConfig extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsConfig
-            public void getFeatureValue(int feature, int network, ImsConfigListener listener) throws RemoteException {
+            public void getFeatureValue(int feature, int network, ImsConfigListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -314,7 +321,9 @@ public interface IImsConfig extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsConfig
-            public void setFeatureValue(int feature, int network, int value, ImsConfigListener listener) throws RemoteException {
+            public void setFeatureValue(
+                    int feature, int network, int value, ImsConfigListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -357,7 +366,8 @@ public interface IImsConfig extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsConfig
-            public void setVideoQuality(int quality, ImsConfigListener listener) throws RemoteException {
+            public void setVideoQuality(int quality, ImsConfigListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -1,10 +1,9 @@
 package android.hardware.location;
 
 import android.annotation.SystemApi;
-import android.hardware.location.IGeofenceHardwareCallback;
-import android.hardware.location.IGeofenceHardwareMonitorCallback;
 import android.location.Location;
 import android.os.RemoteException;
+
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
@@ -32,8 +31,10 @@ public final class GeofenceHardware {
     public static final int SOURCE_TECHNOLOGY_GNSS = 1;
     public static final int SOURCE_TECHNOLOGY_SENSORS = 4;
     public static final int SOURCE_TECHNOLOGY_WIFI = 2;
-    private HashMap<GeofenceHardwareCallback, GeofenceHardwareCallbackWrapper> mCallbacks = new HashMap<>();
-    private HashMap<GeofenceHardwareMonitorCallback, GeofenceHardwareMonitorCallbackWrapper> mMonitorCallbacks = new HashMap<>();
+    private HashMap<GeofenceHardwareCallback, GeofenceHardwareCallbackWrapper> mCallbacks =
+            new HashMap<>();
+    private HashMap<GeofenceHardwareMonitorCallback, GeofenceHardwareMonitorCallbackWrapper>
+            mMonitorCallbacks = new HashMap<>();
     private IGeofenceHardware mService;
 
     public GeofenceHardware(IGeofenceHardware service) {
@@ -56,10 +57,17 @@ public final class GeofenceHardware {
         }
     }
 
-    public boolean addGeofence(int geofenceId, int monitoringType, GeofenceHardwareRequest geofenceRequest, GeofenceHardwareCallback callback) {
+    public boolean addGeofence(
+            int geofenceId,
+            int monitoringType,
+            GeofenceHardwareRequest geofenceRequest,
+            GeofenceHardwareCallback callback) {
         try {
             if (geofenceRequest.getType() == 0) {
-                return this.mService.addCircularFence(monitoringType, new GeofenceHardwareRequestParcelable(geofenceId, geofenceRequest), getCallbackWrapper(callback));
+                return this.mService.addCircularFence(
+                        monitoringType,
+                        new GeofenceHardwareRequestParcelable(geofenceId, geofenceRequest),
+                        getCallbackWrapper(callback));
             }
             throw new IllegalArgumentException("Geofence Request type not supported");
         } catch (RemoteException e) {
@@ -91,18 +99,23 @@ public final class GeofenceHardware {
         }
     }
 
-    public boolean registerForMonitorStateChangeCallback(int monitoringType, GeofenceHardwareMonitorCallback callback) {
+    public boolean registerForMonitorStateChangeCallback(
+            int monitoringType, GeofenceHardwareMonitorCallback callback) {
         try {
-            return this.mService.registerForMonitorStateChangeCallback(monitoringType, getMonitorCallbackWrapper(callback));
+            return this.mService.registerForMonitorStateChangeCallback(
+                    monitoringType, getMonitorCallbackWrapper(callback));
         } catch (RemoteException e) {
             return false;
         }
     }
 
-    public boolean unregisterForMonitorStateChangeCallback(int monitoringType, GeofenceHardwareMonitorCallback callback) {
+    public boolean unregisterForMonitorStateChangeCallback(
+            int monitoringType, GeofenceHardwareMonitorCallback callback) {
         boolean result = false;
         try {
-            result = this.mService.unregisterForMonitorStateChangeCallback(monitoringType, getMonitorCallbackWrapper(callback));
+            result =
+                    this.mService.unregisterForMonitorStateChangeCallback(
+                            monitoringType, getMonitorCallbackWrapper(callback));
             if (result) {
                 removeMonitorCallback(callback);
             }
@@ -136,7 +149,8 @@ public final class GeofenceHardware {
         }
     }
 
-    private GeofenceHardwareMonitorCallbackWrapper getMonitorCallbackWrapper(GeofenceHardwareMonitorCallback callback) {
+    private GeofenceHardwareMonitorCallbackWrapper getMonitorCallbackWrapper(
+            GeofenceHardwareMonitorCallback callback) {
         GeofenceHardwareMonitorCallbackWrapper wrapper;
         synchronized (this.mMonitorCallbacks) {
             wrapper = this.mMonitorCallbacks.get(callback);
@@ -161,7 +175,10 @@ public final class GeofenceHardware {
             if (c == null) {
                 return;
             }
-            c.onMonitoringSystemChange(event.getMonitoringType(), event.getMonitoringStatus() == 0, event.getLocation());
+            c.onMonitoringSystemChange(
+                    event.getMonitoringType(),
+                    event.getMonitoringStatus() == 0,
+                    event.getLocation());
             c.onMonitoringSystemChange(event);
         }
     }
@@ -174,7 +191,12 @@ public final class GeofenceHardware {
         }
 
         @Override // android.hardware.location.IGeofenceHardwareCallback
-        public void onGeofenceTransition(int geofenceId, int transition, Location location, long timestamp, int monitoringType) {
+        public void onGeofenceTransition(
+                int geofenceId,
+                int transition,
+                Location location,
+                long timestamp,
+                int monitoringType) {
             GeofenceHardwareCallback c = this.mCallback.get();
             if (c != null) {
                 c.onGeofenceTransition(geofenceId, transition, location, timestamp, monitoringType);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.util.Log;
+
 import com.samsung.android.cover.CoverState;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -15,11 +16,11 @@ public final class RestrictionPolicyOberver {
     public final Context mContext;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface NfcRestrictionPolicyListener {
-    }
+    public interface NfcRestrictionPolicyListener {}
 
     public RestrictionPolicyOberver(Context context) {
-        new BroadcastReceiver() { // from class: com.samsung.accessory.manager.authentication.cover.RestrictionPolicyOberver.1
+        new BroadcastReceiver() { // from class:
+                                  // com.samsung.accessory.manager.authentication.cover.RestrictionPolicyOberver.1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 String action = intent.getAction();
@@ -29,10 +30,15 @@ public final class RestrictionPolicyOberver {
                 try {
                     nfcAdapter = NfcAdapter.getDefaultAdapter(restrictionPolicyOberver.mContext);
                     if (nfcAdapter == null) {
-                        Log.e("SAccessoryManager_RestrictionPolicyOberver", "NfcAdapter.getDefaultAdapter returns null");
-                        nfcAdapter = NfcAdapter.getDefaultAdapter(restrictionPolicyOberver.mContext);
+                        Log.e(
+                                "SAccessoryManager_RestrictionPolicyOberver",
+                                "NfcAdapter.getDefaultAdapter returns null");
+                        nfcAdapter =
+                                NfcAdapter.getDefaultAdapter(restrictionPolicyOberver.mContext);
                         if (nfcAdapter == null) {
-                            Log.e("SAccessoryManager_RestrictionPolicyOberver", "retry, NfcAdapter.getDefaultAdapter returns null");
+                            Log.e(
+                                    "SAccessoryManager_RestrictionPolicyOberver",
+                                    "retry, NfcAdapter.getDefaultAdapter returns null");
                         }
                     }
                 } catch (Exception e) {
@@ -57,35 +63,50 @@ public final class RestrictionPolicyOberver {
                     return;
                 }
                 RestrictionPolicyOberver.sIsFelicaAllowed = true;
-                NfcRestrictionPolicyListener nfcRestrictionPolicyListener = RestrictionPolicyOberver.sNfcRestrictionPolicyListener;
+                NfcRestrictionPolicyListener nfcRestrictionPolicyListener =
+                        RestrictionPolicyOberver.sNfcRestrictionPolicyListener;
                 if (nfcRestrictionPolicyListener != null) {
-                    final CoverAuthenticator coverAuthenticator = (CoverAuthenticator) nfcRestrictionPolicyListener;
-                    Log.d("SAccessoryManager_CoverAuthenticator", "onNfcRestrictionPolicyChanged = true");
-                    coverAuthenticator.mCoverAuthHandler.post(new Runnable() { // from class: com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.10
-                        public final /* synthetic */ boolean val$allowed = true;
+                    final CoverAuthenticator coverAuthenticator =
+                            (CoverAuthenticator) nfcRestrictionPolicyListener;
+                    Log.d(
+                            "SAccessoryManager_CoverAuthenticator",
+                            "onNfcRestrictionPolicyChanged = true");
+                    coverAuthenticator.mCoverAuthHandler.post(
+                            new Runnable() { // from class:
+                                             // com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.10
+                                public final /* synthetic */ boolean val$allowed = true;
 
-                        public AnonymousClass10() {
-                        }
+                                public AnonymousClass10() {}
 
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            CoverState coverState;
-                            char c = !RestrictionPolicyOberver.sIsFelicaAllowed ? (char) 2 : (char) 0;
-                            if (!this.val$allowed || CoverAuthenticator.this.getCoverSwitchState() < 1) {
-                                return;
-                            }
-                            if (c == 0 && (coverState = CoverAuthenticator.this.mLastCoverState) != null && coverState.getAttachState()) {
-                                CoverAuthenticator coverAuthenticator2 = CoverAuthenticator.this;
-                                coverAuthenticator2.mAuthType = 4;
-                                if (coverAuthenticator2.currentHall == 0) {
-                                    coverAuthenticator2.setCoverVerified(false, null, null);
-                                } else {
-                                    coverAuthenticator2.setFriendsVerified(false, null, null);
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    CoverState coverState;
+                                    char c =
+                                            !RestrictionPolicyOberver.sIsFelicaAllowed
+                                                    ? (char) 2
+                                                    : (char) 0;
+                                    if (!this.val$allowed
+                                            || CoverAuthenticator.this.getCoverSwitchState() < 1) {
+                                        return;
+                                    }
+                                    if (c == 0
+                                            && (coverState =
+                                                            CoverAuthenticator.this.mLastCoverState)
+                                                    != null
+                                            && coverState.getAttachState()) {
+                                        CoverAuthenticator coverAuthenticator2 =
+                                                CoverAuthenticator.this;
+                                        coverAuthenticator2.mAuthType = 4;
+                                        if (coverAuthenticator2.currentHall == 0) {
+                                            coverAuthenticator2.setCoverVerified(false, null, null);
+                                        } else {
+                                            coverAuthenticator2.setFriendsVerified(
+                                                    false, null, null);
+                                        }
+                                    }
+                                    CoverAuthenticator.this.startAuthentication(0L, true);
                                 }
-                            }
-                            CoverAuthenticator.this.startAuthentication(0L, true);
-                        }
-                    });
+                            });
                 }
             }
         };

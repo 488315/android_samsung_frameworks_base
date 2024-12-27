@@ -3,24 +3,28 @@ package android.telephony.satellite;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class AntennaDirection implements Parcelable {
-    public static final Parcelable.Creator<AntennaDirection> CREATOR = new Parcelable.Creator<AntennaDirection>() { // from class: android.telephony.satellite.AntennaDirection.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AntennaDirection createFromParcel(Parcel in) {
-            return new AntennaDirection(in);
-        }
+    public static final Parcelable.Creator<AntennaDirection> CREATOR =
+            new Parcelable.Creator<
+                    AntennaDirection>() { // from class:
+                                          // android.telephony.satellite.AntennaDirection.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AntennaDirection createFromParcel(Parcel in) {
+                    return new AntennaDirection(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AntennaDirection[] newArray(int size) {
-            return new AntennaDirection[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AntennaDirection[] newArray(int size) {
+                    return new AntennaDirection[size];
+                }
+            };
     private float mX;
     private float mY;
     private float mZ;

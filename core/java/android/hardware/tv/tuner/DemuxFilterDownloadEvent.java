@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class DemuxFilterDownloadEvent implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterDownloadEvent> CREATOR = new Parcelable.Creator<DemuxFilterDownloadEvent>() { // from class: android.hardware.tv.tuner.DemuxFilterDownloadEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterDownloadEvent createFromParcel(Parcel _aidl_source) {
-            DemuxFilterDownloadEvent _aidl_out = new DemuxFilterDownloadEvent();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DemuxFilterDownloadEvent> CREATOR =
+            new Parcelable.Creator<DemuxFilterDownloadEvent>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterDownloadEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterDownloadEvent createFromParcel(Parcel _aidl_source) {
+                    DemuxFilterDownloadEvent _aidl_out = new DemuxFilterDownloadEvent();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterDownloadEvent[] newArray(int _aidl_size) {
-            return new DemuxFilterDownloadEvent[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterDownloadEvent[] newArray(int _aidl_size) {
+                    return new DemuxFilterDownloadEvent[_aidl_size];
+                }
+            };
     public int itemId = 0;
     public int downloadId = 0;
     public int mpuSequenceNumber = 0;

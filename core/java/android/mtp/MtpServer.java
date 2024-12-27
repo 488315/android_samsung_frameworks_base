@@ -2,10 +2,13 @@ package android.mtp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import com.android.internal.util.Preconditions;
+
+import libcore.util.HexEncoding;
+
 import java.io.FileDescriptor;
 import java.util.Random;
-import libcore.util.HexEncoding;
 
 /* loaded from: classes3.dex */
 public class MtpServer implements Runnable {
@@ -32,20 +35,35 @@ public class MtpServer implements Runnable {
 
     private final native void native_send_object_removed(int i);
 
-    private final native void native_setup(MtpDatabase mtpDatabase, FileDescriptor fileDescriptor, boolean z, String str, String str2, String str3, String str4);
+    private final native void native_setup(
+            MtpDatabase mtpDatabase,
+            FileDescriptor fileDescriptor,
+            boolean z,
+            String str,
+            String str2,
+            String str3,
+            String str4);
 
     static {
         System.loadLibrary("media_jni");
     }
 
-    public MtpServer(MtpDatabase database, FileDescriptor controlFd, boolean usePtp, Runnable onTerminate, String deviceInfoManufacturer, String deviceInfoModel, String deviceInfoDeviceVersion) {
+    public MtpServer(
+            MtpDatabase database,
+            FileDescriptor controlFd,
+            boolean usePtp,
+            Runnable onTerminate,
+            String deviceInfoManufacturer,
+            String deviceInfoModel,
+            String deviceInfoDeviceVersion) {
         String strRandomId;
         this.mDatabase = (MtpDatabase) Preconditions.checkNotNull(database);
         this.mOnTerminate = (Runnable) Preconditions.checkNotNull(onTerminate);
         this.mContext = this.mDatabase.getContext();
         String strRandomId2 = null;
         SharedPreferences sharedPref = this.mContext.getSharedPreferences("mtp-cfg", 0);
-        if (sharedPref.contains("mtp-id") && (strRandomId2 = sharedPref.getString("mtp-id", null)) != null) {
+        if (sharedPref.contains("mtp-id")
+                && (strRandomId2 = sharedPref.getString("mtp-id", null)) != null) {
             if (strRandomId2.length() != 32) {
                 strRandomId2 = null;
             } else {
@@ -71,7 +89,14 @@ public class MtpServer implements Runnable {
             strRandomId = strRandomId3;
         }
         String deviceInfoSerialNumber = strRandomId;
-        native_setup(database, controlFd, usePtp, deviceInfoManufacturer, deviceInfoModel, deviceInfoDeviceVersion, deviceInfoSerialNumber);
+        native_setup(
+                database,
+                controlFd,
+                usePtp,
+                deviceInfoManufacturer,
+                deviceInfoModel,
+                deviceInfoDeviceVersion,
+                deviceInfoSerialNumber);
         database.setServer(this);
     }
 

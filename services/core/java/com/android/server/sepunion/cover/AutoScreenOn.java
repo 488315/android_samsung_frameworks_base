@@ -6,7 +6,9 @@ import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+
 import com.samsung.android.sepunion.Log;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -29,7 +31,9 @@ public final class AutoScreenOn {
         @Override // android.database.ContentObserver
         public final void onChange(boolean z) {
             super.onChange(z);
-            Log.v("CoverManager_AutoScreenOn", "AutoScreenOnObserver.onChange(boolean selfChange : " + z + ")");
+            Log.v(
+                    "CoverManager_AutoScreenOn",
+                    "AutoScreenOnObserver.onChange(boolean selfChange : " + z + ")");
             AutoScreenOn.this.update();
         }
     }
@@ -37,11 +41,13 @@ public final class AutoScreenOn {
     public AutoScreenOn(Looper looper, Context context) {
         Feature.getInstance(context).getClass();
         this.mNfcAuthEnabled = Feature.sIsNfcAuthSystemFeatureEnabled;
-        this.mAutoScreenOnFeature = context.getPackageManager().hasSystemFeature("com.sec.feature.cover.autoscreenon");
+        this.mAutoScreenOnFeature =
+                context.getPackageManager().hasSystemFeature("com.sec.feature.cover.autoscreenon");
         if (support()) {
             this.mContentResolver = context.getContentResolver();
             this.mObserver = new AutoScreenOnObserver(new Handler(looper));
-            this.mContentResolver.registerContentObserver(Settings.System.getUriFor("auto_screen_on"), false, this.mObserver, -1);
+            this.mContentResolver.registerContentObserver(
+                    Settings.System.getUriFor("auto_screen_on"), false, this.mObserver, -1);
             update();
         }
     }
@@ -72,7 +78,8 @@ public final class AutoScreenOn {
     public final void update() {
         synchronized (this.mLock) {
             boolean z = true;
-            if (Settings.System.getIntForUser(this.mContentResolver, "auto_screen_on", 1, -2) != 1) {
+            if (Settings.System.getIntForUser(this.mContentResolver, "auto_screen_on", 1, -2)
+                    != 1) {
                 z = false;
             }
             this.mIsAutoScreenOn = z;

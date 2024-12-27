@@ -12,8 +12,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.util.Log;
-import com.samsung.android.smartface.ISmartFaceClient;
-import com.samsung.android.smartface.ISmartFaceService;
+
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -78,7 +77,9 @@ public class SmartFaceManager {
 
     private void waitForService() {
         for (int count = 1; count <= 3; count++) {
-            this.mService = ISmartFaceService.Stub.asInterface(ServiceManager.getService(SMARTFACE_SERVICE));
+            this.mService =
+                    ISmartFaceService.Stub.asInterface(
+                            ServiceManager.getService(SMARTFACE_SERVICE));
             if (this.mService != null) {
                 Log.v(TAG, "Service connected!");
                 return;
@@ -95,7 +96,10 @@ public class SmartFaceManager {
     private void startSmartFaceService() {
         try {
             Intent intent = new Intent();
-            intent.setComponent(new ComponentName("com.samsung.android.smartface", "com.samsung.android.smartface.SmartFaceServiceStarter"));
+            intent.setComponent(
+                    new ComponentName(
+                            "com.samsung.android.smartface",
+                            "com.samsung.android.smartface.SmartFaceServiceStarter"));
             this.mContext.startServiceAsUser(intent, UserHandle.CURRENT_OR_SELF);
         } catch (SecurityException e) {
             Log.e(TAG, "Service is being installed. Ignore smart stay request.");
@@ -205,12 +209,14 @@ public class SmartFaceManager {
         synchronized (this.mListenerLock) {
             listener = this.mListener;
         }
-        setListener(new SmartFaceInfoListener() { // from class: com.samsung.android.smartface.SmartFaceManager$$ExternalSyntheticLambda0
-            @Override // com.samsung.android.smartface.SmartFaceManager.SmartFaceInfoListener
-            public final void onInfo(FaceInfo faceInfo, int i) {
-                SmartFaceManager.this.lambda$checkForSmartStay$0(faceInfo, i);
-            }
-        });
+        setListener(
+                new SmartFaceInfoListener() { // from class:
+                                              // com.samsung.android.smartface.SmartFaceManager$$ExternalSyntheticLambda0
+                    @Override // com.samsung.android.smartface.SmartFaceManager.SmartFaceInfoListener
+                    public final void onInfo(FaceInfo faceInfo, int i) {
+                        SmartFaceManager.this.lambda$checkForSmartStay$0(faceInfo, i);
+                    }
+                });
         this.lock.lock();
         try {
             setValue(SMART_STAY_FRAMECOUNT_RESET, "");
@@ -246,7 +252,12 @@ public class SmartFaceManager {
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$checkForSmartStay$0(FaceInfo data, int service_type) {
-        Log.e(TAG, "checkForSmartStay onInfo: " + Integer.toBinaryString(service_type) + ": " + data.needToStay);
+        Log.e(
+                TAG,
+                "checkForSmartStay onInfo: "
+                        + Integer.toBinaryString(service_type)
+                        + ": "
+                        + data.needToStay);
         if ((service_type & 4) != 0) {
             this.lock.lock();
             try {
@@ -286,10 +297,14 @@ public class SmartFaceManager {
         public void onInfo(int msgType, FaceInfo data, int serviceType) {
             synchronized (SmartFaceManager.this.mEventHandlerLock) {
                 if (SmartFaceManager.this.mInternalEventHandler != null) {
-                    Message m = SmartFaceManager.this.mInternalEventHandler.obtainMessage(msgType, serviceType, 0, data);
+                    Message m =
+                            SmartFaceManager.this.mInternalEventHandler.obtainMessage(
+                                    msgType, serviceType, 0, data);
                     SmartFaceManager.this.mInternalEventHandler.sendMessage(m);
                 } else if (SmartFaceManager.this.mEventHandler != null) {
-                    Message m2 = SmartFaceManager.this.mEventHandler.obtainMessage(msgType, serviceType, 0, data);
+                    Message m2 =
+                            SmartFaceManager.this.mEventHandler.obtainMessage(
+                                    msgType, serviceType, 0, data);
                     SmartFaceManager.this.mEventHandler.sendMessage(m2);
                 } else {
                     Log.e(SmartFaceManager.TAG, "EventHandler is null");
@@ -329,18 +344,24 @@ public class SmartFaceManager {
                             break;
                         case 1:
                             if (SmartFaceManager.this.mListener instanceof SmartFaceInfoListener2) {
-                                ((SmartFaceInfoListener2) SmartFaceManager.this.mListener).onRegistered(this.mManager, msg.arg1);
+                                ((SmartFaceInfoListener2) SmartFaceManager.this.mListener)
+                                        .onRegistered(this.mManager, msg.arg1);
                                 break;
                             } else {
-                                Log.e(SmartFaceManager.TAG, "Listener does not implements SmartFaceInfoListener2");
+                                Log.e(
+                                        SmartFaceManager.TAG,
+                                        "Listener does not implements SmartFaceInfoListener2");
                                 break;
                             }
                         case 2:
                             if (SmartFaceManager.this.mListener instanceof SmartFaceInfoListener2) {
-                                ((SmartFaceInfoListener2) SmartFaceManager.this.mListener).onUnregistered(this.mManager, msg.arg1);
+                                ((SmartFaceInfoListener2) SmartFaceManager.this.mListener)
+                                        .onUnregistered(this.mManager, msg.arg1);
                                 break;
                             } else {
-                                Log.e(SmartFaceManager.TAG, "Listener does not implements SmartFaceInfoListener2");
+                                Log.e(
+                                        SmartFaceManager.TAG,
+                                        "Listener does not implements SmartFaceInfoListener2");
                                 break;
                             }
                     }

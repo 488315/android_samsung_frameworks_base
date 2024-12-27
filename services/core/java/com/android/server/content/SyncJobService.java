@@ -9,7 +9,6 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.SparseLongArray;
-import com.android.server.content.SyncManager;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -39,7 +38,16 @@ public class SyncJobService extends JobService {
                     SparseArray sparseArray = sJobParamsMap;
                     JobParameters jobParameters = (JobParameters) sparseArray.get(i);
                     SyncLogger syncLogger = sLogger;
-                    syncLogger.log("callJobFinished()", " jobid=", Integer.valueOf(i), " needsReschedule=", Boolean.FALSE, " ", syncLogger.jobParametersToString(jobParameters), " why=", str);
+                    syncLogger.log(
+                            "callJobFinished()",
+                            " jobid=",
+                            Integer.valueOf(i),
+                            " needsReschedule=",
+                            Boolean.FALSE,
+                            " ",
+                            syncLogger.jobParametersToString(jobParameters),
+                            " why=",
+                            str);
                     if (jobParameters != null) {
                         syncJobService.jobFinished(jobParameters, false);
                         sparseArray.remove(i);
@@ -56,7 +64,14 @@ public class SyncJobService extends JobService {
         if (jobParameters == null) {
             return "job:null";
         }
-        return "job:#" + jobParameters.getJobId() + ":sr=[" + jobParameters.getInternalStopReasonCode() + "/" + jobParameters.getDebugStopReason() + "]:" + SyncOperation.maybeCreateFromJobExtras(jobParameters.getExtras());
+        return "job:#"
+                + jobParameters.getJobId()
+                + ":sr=["
+                + jobParameters.getInternalStopReasonCode()
+                + "/"
+                + jobParameters.getDebugStopReason()
+                + "]:"
+                + SyncOperation.maybeCreateFromJobExtras(jobParameters.getExtras());
     }
 
     @Override // android.app.job.JobService
@@ -67,13 +82,20 @@ public class SyncJobService extends JobService {
         }
         SyncLogger syncLogger = sLogger;
         syncLogger.purgeOldLogs();
-        SyncOperation maybeCreateFromJobExtras = SyncOperation.maybeCreateFromJobExtras(jobParameters.getExtras());
+        SyncOperation maybeCreateFromJobExtras =
+                SyncOperation.maybeCreateFromJobExtras(jobParameters.getExtras());
         if (maybeCreateFromJobExtras == null) {
             Slog.wtf("SyncManager", "Got invalid job " + jobParameters.getJobId());
             return false;
         }
         boolean readyToSync = SyncManager.readyToSync(maybeCreateFromJobExtras.target.userId);
-        syncLogger.log("onStartJob() jobid=", Integer.valueOf(jobParameters.getJobId()), " op=", maybeCreateFromJobExtras, " readyToSync", Boolean.valueOf(readyToSync));
+        syncLogger.log(
+                "onStartJob() jobid=",
+                Integer.valueOf(jobParameters.getJobId()),
+                " op=",
+                maybeCreateFromJobExtras,
+                " readyToSync",
+                Boolean.valueOf(readyToSync));
         if (!readyToSync) {
             jobFinished(jobParameters, !maybeCreateFromJobExtras.isPeriodic);
             return true;
@@ -102,16 +124,26 @@ public class SyncJobService extends JobService {
     public final boolean onStopJob(JobParameters jobParameters) {
         SyncManager.SyncHandler syncHandler;
         if (Log.isLoggable("SyncManager", 2)) {
-            Slog.v("SyncManager", "onStopJob called " + jobParameters.getJobId() + ", reason: " + jobParameters.getInternalStopReasonCode());
+            Slog.v(
+                    "SyncManager",
+                    "onStopJob called "
+                            + jobParameters.getJobId()
+                            + ", reason: "
+                            + jobParameters.getInternalStopReasonCode());
         }
-        SyncOperation maybeCreateFromJobExtras = SyncOperation.maybeCreateFromJobExtras(jobParameters.getExtras());
+        SyncOperation maybeCreateFromJobExtras =
+                SyncOperation.maybeCreateFromJobExtras(jobParameters.getExtras());
         if (maybeCreateFromJobExtras == null) {
             Slog.wtf("SyncManager", "Got invalid job " + jobParameters.getJobId());
             return false;
         }
         boolean readyToSync = SyncManager.readyToSync(maybeCreateFromJobExtras.target.userId);
         SyncLogger syncLogger = sLogger;
-        syncLogger.log("onStopJob() ", syncLogger.jobParametersToString(jobParameters), " readyToSync=", Boolean.valueOf(readyToSync));
+        syncLogger.log(
+                "onStopJob() ",
+                syncLogger.jobParametersToString(jobParameters),
+                " readyToSync=",
+                Boolean.valueOf(readyToSync));
         synchronized (sLock) {
             try {
                 int jobId = jobParameters.getJobId();
@@ -120,7 +152,15 @@ public class SyncJobService extends JobService {
                 long j = sparseLongArray.get(jobId);
                 long uptimeMillis = SystemClock.uptimeMillis();
                 if (uptimeMillis - j > 60000 && readyToSync && !sStartedSyncs.get(jobId)) {
-                    String str = "Job " + jobId + " didn't start:  startUptime=" + j + " nowUptime=" + uptimeMillis + " params=" + jobParametersToString(jobParameters);
+                    String str =
+                            "Job "
+                                    + jobId
+                                    + " didn't start:  startUptime="
+                                    + j
+                                    + " nowUptime="
+                                    + uptimeMillis
+                                    + " params="
+                                    + jobParametersToString(jobParameters);
                     syncLogger.log(str);
                     Slog.wtf("SyncManager", str);
                 }

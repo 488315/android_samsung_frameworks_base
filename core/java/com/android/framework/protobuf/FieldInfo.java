@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.Internal;
 import java.lang.reflect.Field;
 
 @CheckReturnValue
@@ -20,66 +19,184 @@ final class FieldInfo implements Comparable<FieldInfo> {
     private final boolean required;
     private final FieldType type;
 
-    public static FieldInfo forField(Field field, int fieldNumber, FieldType fieldType, boolean enforceUtf8) {
+    public static FieldInfo forField(
+            Field field, int fieldNumber, FieldType fieldType, boolean enforceUtf8) {
         checkFieldNumber(fieldNumber);
         Internal.checkNotNull(field, "field");
         Internal.checkNotNull(fieldType, "fieldType");
         if (fieldType == FieldType.MESSAGE_LIST || fieldType == FieldType.GROUP_LIST) {
             throw new IllegalStateException("Shouldn't be called for repeated message fields.");
         }
-        return new FieldInfo(field, fieldNumber, fieldType, null, null, 0, false, enforceUtf8, null, null, null, null, null);
+        return new FieldInfo(
+                field,
+                fieldNumber,
+                fieldType,
+                null,
+                null,
+                0,
+                false,
+                enforceUtf8,
+                null,
+                null,
+                null,
+                null,
+                null);
     }
 
-    public static FieldInfo forPackedField(Field field, int fieldNumber, FieldType fieldType, Field cachedSizeField) {
+    public static FieldInfo forPackedField(
+            Field field, int fieldNumber, FieldType fieldType, Field cachedSizeField) {
         checkFieldNumber(fieldNumber);
         Internal.checkNotNull(field, "field");
         Internal.checkNotNull(fieldType, "fieldType");
         if (fieldType == FieldType.MESSAGE_LIST || fieldType == FieldType.GROUP_LIST) {
             throw new IllegalStateException("Shouldn't be called for repeated message fields.");
         }
-        return new FieldInfo(field, fieldNumber, fieldType, null, null, 0, false, false, null, null, null, null, cachedSizeField);
+        return new FieldInfo(
+                field,
+                fieldNumber,
+                fieldType,
+                null,
+                null,
+                0,
+                false,
+                false,
+                null,
+                null,
+                null,
+                null,
+                cachedSizeField);
     }
 
-    public static FieldInfo forRepeatedMessageField(Field field, int fieldNumber, FieldType fieldType, Class<?> messageClass) {
+    public static FieldInfo forRepeatedMessageField(
+            Field field, int fieldNumber, FieldType fieldType, Class<?> messageClass) {
         checkFieldNumber(fieldNumber);
         Internal.checkNotNull(field, "field");
         Internal.checkNotNull(fieldType, "fieldType");
         Internal.checkNotNull(messageClass, "messageClass");
-        return new FieldInfo(field, fieldNumber, fieldType, messageClass, null, 0, false, false, null, null, null, null, null);
+        return new FieldInfo(
+                field,
+                fieldNumber,
+                fieldType,
+                messageClass,
+                null,
+                0,
+                false,
+                false,
+                null,
+                null,
+                null,
+                null,
+                null);
     }
 
-    public static FieldInfo forFieldWithEnumVerifier(Field field, int fieldNumber, FieldType fieldType, Internal.EnumVerifier enumVerifier) {
+    public static FieldInfo forFieldWithEnumVerifier(
+            Field field, int fieldNumber, FieldType fieldType, Internal.EnumVerifier enumVerifier) {
         checkFieldNumber(fieldNumber);
         Internal.checkNotNull(field, "field");
-        return new FieldInfo(field, fieldNumber, fieldType, null, null, 0, false, false, null, null, null, enumVerifier, null);
+        return new FieldInfo(
+                field,
+                fieldNumber,
+                fieldType,
+                null,
+                null,
+                0,
+                false,
+                false,
+                null,
+                null,
+                null,
+                enumVerifier,
+                null);
     }
 
-    public static FieldInfo forPackedFieldWithEnumVerifier(Field field, int fieldNumber, FieldType fieldType, Internal.EnumVerifier enumVerifier, Field cachedSizeField) {
+    public static FieldInfo forPackedFieldWithEnumVerifier(
+            Field field,
+            int fieldNumber,
+            FieldType fieldType,
+            Internal.EnumVerifier enumVerifier,
+            Field cachedSizeField) {
         checkFieldNumber(fieldNumber);
         Internal.checkNotNull(field, "field");
-        return new FieldInfo(field, fieldNumber, fieldType, null, null, 0, false, false, null, null, null, enumVerifier, cachedSizeField);
+        return new FieldInfo(
+                field,
+                fieldNumber,
+                fieldType,
+                null,
+                null,
+                0,
+                false,
+                false,
+                null,
+                null,
+                null,
+                enumVerifier,
+                cachedSizeField);
     }
 
-    public static FieldInfo forProto2OptionalField(Field field, int fieldNumber, FieldType fieldType, Field presenceField, int presenceMask, boolean enforceUtf8, Internal.EnumVerifier enumVerifier) {
+    public static FieldInfo forProto2OptionalField(
+            Field field,
+            int fieldNumber,
+            FieldType fieldType,
+            Field presenceField,
+            int presenceMask,
+            boolean enforceUtf8,
+            Internal.EnumVerifier enumVerifier) {
         checkFieldNumber(fieldNumber);
         Internal.checkNotNull(field, "field");
         Internal.checkNotNull(fieldType, "fieldType");
         Internal.checkNotNull(presenceField, "presenceField");
         if (presenceField != null && !isExactlyOneBitSet(presenceMask)) {
-            throw new IllegalArgumentException("presenceMask must have exactly one bit set: " + presenceMask);
+            throw new IllegalArgumentException(
+                    "presenceMask must have exactly one bit set: " + presenceMask);
         }
-        return new FieldInfo(field, fieldNumber, fieldType, null, presenceField, presenceMask, false, enforceUtf8, null, null, null, enumVerifier, null);
+        return new FieldInfo(
+                field,
+                fieldNumber,
+                fieldType,
+                null,
+                presenceField,
+                presenceMask,
+                false,
+                enforceUtf8,
+                null,
+                null,
+                null,
+                enumVerifier,
+                null);
     }
 
-    public static FieldInfo forOneofMemberField(int fieldNumber, FieldType fieldType, OneofInfo oneof, Class<?> oneofStoredType, boolean enforceUtf8, Internal.EnumVerifier enumVerifier) {
+    public static FieldInfo forOneofMemberField(
+            int fieldNumber,
+            FieldType fieldType,
+            OneofInfo oneof,
+            Class<?> oneofStoredType,
+            boolean enforceUtf8,
+            Internal.EnumVerifier enumVerifier) {
         checkFieldNumber(fieldNumber);
         Internal.checkNotNull(fieldType, "fieldType");
         Internal.checkNotNull(oneof, "oneof");
         Internal.checkNotNull(oneofStoredType, "oneofStoredType");
         if (!fieldType.isScalar()) {
-            throw new IllegalArgumentException("Oneof is only supported for scalar fields. Field " + fieldNumber + " is of type " + fieldType);
+            throw new IllegalArgumentException(
+                    "Oneof is only supported for scalar fields. Field "
+                            + fieldNumber
+                            + " is of type "
+                            + fieldType);
         }
-        return new FieldInfo(null, fieldNumber, fieldType, null, null, 0, false, enforceUtf8, oneof, oneofStoredType, null, enumVerifier, null);
+        return new FieldInfo(
+                null,
+                fieldNumber,
+                fieldType,
+                null,
+                null,
+                0,
+                false,
+                enforceUtf8,
+                oneof,
+                oneofStoredType,
+                null,
+                enumVerifier,
+                null);
     }
 
     private static void checkFieldNumber(int fieldNumber) {
@@ -88,25 +205,76 @@ final class FieldInfo implements Comparable<FieldInfo> {
         }
     }
 
-    public static FieldInfo forProto2RequiredField(Field field, int fieldNumber, FieldType fieldType, Field presenceField, int presenceMask, boolean enforceUtf8, Internal.EnumVerifier enumVerifier) {
+    public static FieldInfo forProto2RequiredField(
+            Field field,
+            int fieldNumber,
+            FieldType fieldType,
+            Field presenceField,
+            int presenceMask,
+            boolean enforceUtf8,
+            Internal.EnumVerifier enumVerifier) {
         checkFieldNumber(fieldNumber);
         Internal.checkNotNull(field, "field");
         Internal.checkNotNull(fieldType, "fieldType");
         Internal.checkNotNull(presenceField, "presenceField");
         if (presenceField != null && !isExactlyOneBitSet(presenceMask)) {
-            throw new IllegalArgumentException("presenceMask must have exactly one bit set: " + presenceMask);
+            throw new IllegalArgumentException(
+                    "presenceMask must have exactly one bit set: " + presenceMask);
         }
-        return new FieldInfo(field, fieldNumber, fieldType, null, presenceField, presenceMask, true, enforceUtf8, null, null, null, enumVerifier, null);
+        return new FieldInfo(
+                field,
+                fieldNumber,
+                fieldType,
+                null,
+                presenceField,
+                presenceMask,
+                true,
+                enforceUtf8,
+                null,
+                null,
+                null,
+                enumVerifier,
+                null);
     }
 
-    public static FieldInfo forMapField(Field field, int fieldNumber, Object mapDefaultEntry, Internal.EnumVerifier enumVerifier) {
+    public static FieldInfo forMapField(
+            Field field,
+            int fieldNumber,
+            Object mapDefaultEntry,
+            Internal.EnumVerifier enumVerifier) {
         Internal.checkNotNull(mapDefaultEntry, "mapDefaultEntry");
         checkFieldNumber(fieldNumber);
         Internal.checkNotNull(field, "field");
-        return new FieldInfo(field, fieldNumber, FieldType.MAP, null, null, 0, false, true, null, null, mapDefaultEntry, enumVerifier, null);
+        return new FieldInfo(
+                field,
+                fieldNumber,
+                FieldType.MAP,
+                null,
+                null,
+                0,
+                false,
+                true,
+                null,
+                null,
+                mapDefaultEntry,
+                enumVerifier,
+                null);
     }
 
-    private FieldInfo(Field field, int fieldNumber, FieldType type, Class<?> messageClass, Field presenceField, int presenceMask, boolean required, boolean enforceUtf8, OneofInfo oneof, Class<?> oneofStoredType, Object mapDefaultEntry, Internal.EnumVerifier enumVerifier, Field cachedSizeField) {
+    private FieldInfo(
+            Field field,
+            int fieldNumber,
+            FieldType type,
+            Class<?> messageClass,
+            Field presenceField,
+            int presenceMask,
+            boolean required,
+            boolean enforceUtf8,
+            OneofInfo oneof,
+            Class<?> oneofStoredType,
+            Object mapDefaultEntry,
+            Internal.EnumVerifier enumVerifier,
+            Field cachedSizeField) {
         this.field = field;
         this.type = type;
         this.messageClass = messageClass;
@@ -210,8 +378,7 @@ final class FieldInfo implements Comparable<FieldInfo> {
         private boolean required;
         private FieldType type;
 
-        private Builder() {
-        }
+        private Builder() {}
 
         public Builder withField(Field field) {
             if (this.oneof != null) {
@@ -239,7 +406,8 @@ final class FieldInfo implements Comparable<FieldInfo> {
 
         public Builder withOneof(OneofInfo oneof, Class<?> oneofStoredType) {
             if (this.field != null || this.presenceField != null) {
-                throw new IllegalStateException("Cannot set oneof when field or presenceField have been provided");
+                throw new IllegalStateException(
+                        "Cannot set oneof when field or presenceField have been provided");
             }
             this.oneof = oneof;
             this.oneofStoredType = oneofStoredType;
@@ -273,27 +441,56 @@ final class FieldInfo implements Comparable<FieldInfo> {
 
         public FieldInfo build() {
             if (this.oneof != null) {
-                return FieldInfo.forOneofMemberField(this.fieldNumber, this.type, this.oneof, this.oneofStoredType, this.enforceUtf8, this.enumVerifier);
+                return FieldInfo.forOneofMemberField(
+                        this.fieldNumber,
+                        this.type,
+                        this.oneof,
+                        this.oneofStoredType,
+                        this.enforceUtf8,
+                        this.enumVerifier);
             }
             if (this.mapDefaultEntry != null) {
-                return FieldInfo.forMapField(this.field, this.fieldNumber, this.mapDefaultEntry, this.enumVerifier);
+                return FieldInfo.forMapField(
+                        this.field, this.fieldNumber, this.mapDefaultEntry, this.enumVerifier);
             }
             if (this.presenceField != null) {
                 if (this.required) {
-                    return FieldInfo.forProto2RequiredField(this.field, this.fieldNumber, this.type, this.presenceField, this.presenceMask, this.enforceUtf8, this.enumVerifier);
+                    return FieldInfo.forProto2RequiredField(
+                            this.field,
+                            this.fieldNumber,
+                            this.type,
+                            this.presenceField,
+                            this.presenceMask,
+                            this.enforceUtf8,
+                            this.enumVerifier);
                 }
-                return FieldInfo.forProto2OptionalField(this.field, this.fieldNumber, this.type, this.presenceField, this.presenceMask, this.enforceUtf8, this.enumVerifier);
+                return FieldInfo.forProto2OptionalField(
+                        this.field,
+                        this.fieldNumber,
+                        this.type,
+                        this.presenceField,
+                        this.presenceMask,
+                        this.enforceUtf8,
+                        this.enumVerifier);
             }
             if (this.enumVerifier != null) {
                 if (this.cachedSizeField == null) {
-                    return FieldInfo.forFieldWithEnumVerifier(this.field, this.fieldNumber, this.type, this.enumVerifier);
+                    return FieldInfo.forFieldWithEnumVerifier(
+                            this.field, this.fieldNumber, this.type, this.enumVerifier);
                 }
-                return FieldInfo.forPackedFieldWithEnumVerifier(this.field, this.fieldNumber, this.type, this.enumVerifier, this.cachedSizeField);
+                return FieldInfo.forPackedFieldWithEnumVerifier(
+                        this.field,
+                        this.fieldNumber,
+                        this.type,
+                        this.enumVerifier,
+                        this.cachedSizeField);
             }
             if (this.cachedSizeField == null) {
-                return FieldInfo.forField(this.field, this.fieldNumber, this.type, this.enforceUtf8);
+                return FieldInfo.forField(
+                        this.field, this.fieldNumber, this.type, this.enforceUtf8);
             }
-            return FieldInfo.forPackedField(this.field, this.fieldNumber, this.type, this.cachedSizeField);
+            return FieldInfo.forPackedField(
+                    this.field, this.fieldNumber, this.type, this.cachedSizeField);
         }
     }
 

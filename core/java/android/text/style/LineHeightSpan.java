@@ -4,22 +4,37 @@ import android.graphics.Paint;
 import android.os.Parcel;
 import android.text.ParcelableSpan;
 import android.text.TextPaint;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes4.dex */
 public interface LineHeightSpan extends ParagraphStyle, WrapTogetherSpan {
 
     public interface WithDensity extends LineHeightSpan {
-        void chooseHeight(CharSequence charSequence, int i, int i2, int i3, int i4, Paint.FontMetricsInt fontMetricsInt, TextPaint textPaint);
+        void chooseHeight(
+                CharSequence charSequence,
+                int i,
+                int i2,
+                int i3,
+                int i4,
+                Paint.FontMetricsInt fontMetricsInt,
+                TextPaint textPaint);
     }
 
-    void chooseHeight(CharSequence charSequence, int i, int i2, int i3, int i4, Paint.FontMetricsInt fontMetricsInt);
+    void chooseHeight(
+            CharSequence charSequence,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            Paint.FontMetricsInt fontMetricsInt);
 
     public static class Standard implements LineHeightSpan, ParcelableSpan {
         private final int mHeight;
 
         public Standard(int height) {
-            Preconditions.checkArgument(height > 0, "Height: %d must be positive", Integer.valueOf(height));
+            Preconditions.checkArgument(
+                    height > 0, "Height: %d must be positive", Integer.valueOf(height));
             this.mHeight = height;
         }
 
@@ -57,7 +72,13 @@ public interface LineHeightSpan extends ParagraphStyle, WrapTogetherSpan {
         }
 
         @Override // android.text.style.LineHeightSpan
-        public void chooseHeight(CharSequence text, int start, int end, int spanstartv, int lineHeight, Paint.FontMetricsInt fm) {
+        public void chooseHeight(
+                CharSequence text,
+                int start,
+                int end,
+                int spanstartv,
+                int lineHeight,
+                Paint.FontMetricsInt fm) {
             int originHeight = fm.descent - fm.ascent;
             if (originHeight <= 0) {
                 return;

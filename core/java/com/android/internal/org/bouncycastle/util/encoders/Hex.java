@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.util.encoders;
 
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -36,7 +37,8 @@ public class Hex {
         return encoder.encode(data, 0, data.length, out);
     }
 
-    public static int encode(byte[] data, int off, int length, OutputStream out) throws IOException {
+    public static int encode(byte[] data, int off, int length, OutputStream out)
+            throws IOException {
         return encoder.encode(data, off, length, out);
     }
 

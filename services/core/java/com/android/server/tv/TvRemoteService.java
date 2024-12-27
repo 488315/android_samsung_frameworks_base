@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.server.SystemService;
 import com.android.server.VcnManagementService$$ExternalSyntheticOutline0;
 import com.android.server.Watchdog;
@@ -41,14 +42,24 @@ public final class TvRemoteService extends SystemService implements Watchdog.Mon
                 return;
             }
             tvRemoteProviderWatcher.mRunning = true;
-            IntentFilter m = VcnManagementService$$ExternalSyntheticOutline0.m("android.intent.action.PACKAGE_ADDED", "android.intent.action.PACKAGE_REMOVED", "android.intent.action.PACKAGE_CHANGED", "android.intent.action.PACKAGE_REPLACED", "android.intent.action.PACKAGE_RESTARTED");
+            IntentFilter m =
+                    VcnManagementService$$ExternalSyntheticOutline0.m(
+                            "android.intent.action.PACKAGE_ADDED",
+                            "android.intent.action.PACKAGE_REMOVED",
+                            "android.intent.action.PACKAGE_CHANGED",
+                            "android.intent.action.PACKAGE_REPLACED",
+                            "android.intent.action.PACKAGE_RESTARTED");
             m.addDataScheme("package");
-            tvRemoteProviderWatcher.mContext.registerReceiverAsUser(tvRemoteProviderWatcher.mScanPackagesReceiver, new UserHandle(tvRemoteProviderWatcher.mUserId), m, null, tvRemoteProviderWatcher.mHandler);
+            tvRemoteProviderWatcher.mContext.registerReceiverAsUser(
+                    tvRemoteProviderWatcher.mScanPackagesReceiver,
+                    new UserHandle(tvRemoteProviderWatcher.mUserId),
+                    m,
+                    null,
+                    tvRemoteProviderWatcher.mHandler);
             tvRemoteProviderWatcher.mHandler.post(tvRemoteProviderWatcher.mScanPackagesRunnable);
         }
     }
 
     @Override // com.android.server.SystemService
-    public final void onStart() {
-    }
+    public final void onStart() {}
 }

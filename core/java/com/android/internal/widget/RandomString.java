@@ -5,8 +5,7 @@ import java.util.Random;
 /* compiled from: LockPatternUtils.java */
 /* loaded from: classes5.dex */
 class RandomString {
-    RandomString() {
-    }
+    RandomString() {}
 
     public static String randomstring(int lo, int hi) {
         int n = rand(lo, hi);

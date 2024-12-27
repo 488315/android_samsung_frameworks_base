@@ -6,11 +6,9 @@ import android.text.TextPaint;
 
 /* loaded from: classes4.dex */
 public class UnderlineSpan extends CharacterStyle implements UpdateAppearance, ParcelableSpan {
-    public UnderlineSpan() {
-    }
+    public UnderlineSpan() {}
 
-    public UnderlineSpan(Parcel src) {
-    }
+    public UnderlineSpan(Parcel src) {}
 
     @Override // android.text.ParcelableSpan
     public int getSpanTypeId() {
@@ -33,8 +31,7 @@ public class UnderlineSpan extends CharacterStyle implements UpdateAppearance, P
     }
 
     @Override // android.text.ParcelableSpan
-    public void writeToParcelInternal(Parcel dest, int flags) {
-    }
+    public void writeToParcelInternal(Parcel dest, int flags) {}
 
     @Override // android.text.style.CharacterStyle
     public void updateDrawState(TextPaint ds) {

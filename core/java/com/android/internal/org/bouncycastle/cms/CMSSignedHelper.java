@@ -23,6 +23,7 @@ import com.android.internal.org.bouncycastle.cert.X509CRLHolder;
 import com.android.internal.org.bouncycastle.cert.X509CertificateHolder;
 import com.android.internal.org.bouncycastle.util.CollectionStore;
 import com.android.internal.org.bouncycastle.util.Store;
+
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -34,8 +35,7 @@ class CMSSignedHelper {
     static final CMSSignedHelper INSTANCE = new CMSSignedHelper();
     private static final Map encryptionAlgs = new HashMap();
 
-    CMSSignedHelper() {
-    }
+    CMSSignedHelper() {}
 
     static {
         addEntries(NISTObjectIdentifiers.dsa_with_sha224, "DSA");
@@ -117,7 +117,10 @@ class CMSSignedHelper {
             while (en.hasMoreElements()) {
                 ASN1Primitive obj = ((ASN1Encodable) en.nextElement()).toASN1Primitive();
                 if (obj instanceof ASN1TaggedObject) {
-                    certList.add(new X509AttributeCertificateHolder(AttributeCertificate.getInstance(((ASN1TaggedObject) obj).getObject())));
+                    certList.add(
+                            new X509AttributeCertificateHolder(
+                                    AttributeCertificate.getInstance(
+                                            ((ASN1TaggedObject) obj).getObject())));
                 }
             }
             return new CollectionStore(certList);

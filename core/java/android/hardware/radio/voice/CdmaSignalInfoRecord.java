@@ -3,25 +3,28 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CdmaSignalInfoRecord implements Parcelable {
-    public static final Parcelable.Creator<CdmaSignalInfoRecord> CREATOR = new Parcelable.Creator<CdmaSignalInfoRecord>() { // from class: android.hardware.radio.voice.CdmaSignalInfoRecord.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSignalInfoRecord createFromParcel(Parcel _aidl_source) {
-            CdmaSignalInfoRecord _aidl_out = new CdmaSignalInfoRecord();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CdmaSignalInfoRecord> CREATOR =
+            new Parcelable.Creator<CdmaSignalInfoRecord>() { // from class:
+                // android.hardware.radio.voice.CdmaSignalInfoRecord.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSignalInfoRecord createFromParcel(Parcel _aidl_source) {
+                    CdmaSignalInfoRecord _aidl_out = new CdmaSignalInfoRecord();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSignalInfoRecord[] newArray(int _aidl_size) {
-            return new CdmaSignalInfoRecord[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSignalInfoRecord[] newArray(int _aidl_size) {
+                    return new CdmaSignalInfoRecord[_aidl_size];
+                }
+            };
     public boolean isPresent = false;
     public byte signalType = 0;
     public byte alertPitch = 0;

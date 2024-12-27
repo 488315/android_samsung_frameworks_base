@@ -12,6 +12,14 @@ public final class GlobalLevelState {
     public long savedByte;
 
     public final String toString() {
-        return "GlobalLevelState{packageName='" + this.packageName + "', hibernated=" + this.hibernated + "', savedByte=" + this.savedByte + "', lastUnhibernated=" + DATE_FORMAT.format(Long.valueOf(this.lastUnhibernatedMs)) + '}';
+        return "GlobalLevelState{packageName='"
+                + this.packageName
+                + "', hibernated="
+                + this.hibernated
+                + "', savedByte="
+                + this.savedByte
+                + "', lastUnhibernated="
+                + DATE_FORMAT.format(Long.valueOf(this.lastUnhibernatedMs))
+                + '}';
     }
 }

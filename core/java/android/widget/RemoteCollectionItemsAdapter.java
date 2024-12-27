@@ -4,7 +4,7 @@ import android.appwidget.AppWidgetHostView;
 import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RemoteViews;
+
 import java.util.function.IntPredicate;
 import java.util.function.IntUnaryOperator;
 import java.util.function.Supplier;
@@ -18,7 +18,10 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
     private SparseIntArray mLayoutIdToViewType;
     private final int mViewTypeCount;
 
-    RemoteCollectionItemsAdapter(RemoteViews.RemoteCollectionItems items, RemoteViews.InteractionHandler interactionHandler, RemoteViews.ColorResources colorResources) {
+    RemoteCollectionItemsAdapter(
+            RemoteViews.RemoteCollectionItems items,
+            RemoteViews.InteractionHandler interactionHandler,
+            RemoteViews.ColorResources colorResources) {
         this.mViewTypeCount = items.getViewTypeCount();
         this.mItems = items;
         this.mInteractionHandler = interactionHandler;
@@ -26,9 +29,13 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
         initLayoutIdToViewType();
     }
 
-    void setData(RemoteViews.RemoteCollectionItems items, RemoteViews.InteractionHandler interactionHandler, RemoteViews.ColorResources colorResources) {
+    void setData(
+            RemoteViews.RemoteCollectionItems items,
+            RemoteViews.InteractionHandler interactionHandler,
+            RemoteViews.ColorResources colorResources) {
         if (this.mViewTypeCount < items.getViewTypeCount()) {
-            throw new IllegalArgumentException("RemoteCollectionItemsAdapter cannot increase view type count after creation");
+            throw new IllegalArgumentException(
+                    "RemoteCollectionItemsAdapter cannot increase view type count after creation");
         }
         this.mItems = items;
         this.mInteractionHandler = interactionHandler;
@@ -40,16 +47,28 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
     private void initLayoutIdToViewType() {
         SparseIntArray previousLayoutIdToViewType = this.mLayoutIdToViewType;
         this.mLayoutIdToViewType = new SparseIntArray(this.mViewTypeCount);
-        int[] layoutIds = IntStream.range(0, this.mItems.getItemCount()).map(new IntUnaryOperator() { // from class: android.widget.RemoteCollectionItemsAdapter$$ExternalSyntheticLambda0
-            @Override // java.util.function.IntUnaryOperator
-            public final int applyAsInt(int i) {
-                int lambda$initLayoutIdToViewType$0;
-                lambda$initLayoutIdToViewType$0 = RemoteCollectionItemsAdapter.this.lambda$initLayoutIdToViewType$0(i);
-                return lambda$initLayoutIdToViewType$0;
-            }
-        }).distinct().toArray();
+        int[] layoutIds =
+                IntStream.range(0, this.mItems.getItemCount())
+                        .map(
+                                new IntUnaryOperator() { // from class:
+                                                         // android.widget.RemoteCollectionItemsAdapter$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.IntUnaryOperator
+                                    public final int applyAsInt(int i) {
+                                        int lambda$initLayoutIdToViewType$0;
+                                        lambda$initLayoutIdToViewType$0 =
+                                                RemoteCollectionItemsAdapter.this
+                                                        .lambda$initLayoutIdToViewType$0(i);
+                                        return lambda$initLayoutIdToViewType$0;
+                                    }
+                                })
+                        .distinct()
+                        .toArray();
         if (layoutIds.length > this.mViewTypeCount) {
-            throw new IllegalArgumentException("Collection items uses " + layoutIds.length + " distinct layouts, which is more than view type count of " + this.mViewTypeCount);
+            throw new IllegalArgumentException(
+                    "Collection items uses "
+                            + layoutIds.length
+                            + " distinct layouts, which is more than view type count of "
+                            + this.mViewTypeCount);
         }
         boolean[] processedLayoutIdIndices = new boolean[layoutIds.length];
         final boolean[] assignedViewTypes = new boolean[this.mViewTypeCount];
@@ -68,17 +87,28 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
         for (int i2 = 0; i2 < layoutIds.length; i2++) {
             if (!processedLayoutIdIndices[i2]) {
                 int layoutId2 = layoutIds[i2];
-                int viewType = IntStream.range(lastViewType + 1, layoutIds.length).filter(new IntPredicate() { // from class: android.widget.RemoteCollectionItemsAdapter$$ExternalSyntheticLambda1
-                    @Override // java.util.function.IntPredicate
-                    public final boolean test(int i3) {
-                        return RemoteCollectionItemsAdapter.lambda$initLayoutIdToViewType$1(assignedViewTypes, i3);
-                    }
-                }).findFirst().orElseThrow(new Supplier() { // from class: android.widget.RemoteCollectionItemsAdapter$$ExternalSyntheticLambda2
-                    @Override // java.util.function.Supplier
-                    public final Object get() {
-                        return RemoteCollectionItemsAdapter.lambda$initLayoutIdToViewType$2();
-                    }
-                });
+                int viewType =
+                        IntStream.range(lastViewType + 1, layoutIds.length)
+                                .filter(
+                                        new IntPredicate() { // from class:
+                                                             // android.widget.RemoteCollectionItemsAdapter$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.IntPredicate
+                                            public final boolean test(int i3) {
+                                                return RemoteCollectionItemsAdapter
+                                                        .lambda$initLayoutIdToViewType$1(
+                                                                assignedViewTypes, i3);
+                                            }
+                                        })
+                                .findFirst()
+                                .orElseThrow(
+                                        new Supplier() { // from class:
+                                                         // android.widget.RemoteCollectionItemsAdapter$$ExternalSyntheticLambda2
+                                            @Override // java.util.function.Supplier
+                                            public final Object get() {
+                                                return RemoteCollectionItemsAdapter
+                                                        .lambda$initLayoutIdToViewType$2();
+                                            }
+                                        });
                 this.mLayoutIdToViewType.put(layoutId2, viewType);
                 processedLayoutIdIndices[i2] = true;
                 assignedViewTypes[viewType] = true;
@@ -92,12 +122,14 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
         return this.mItems.getItemView(position).getLayoutId();
     }
 
-    static /* synthetic */ boolean lambda$initLayoutIdToViewType$1(boolean[] assignedViewTypes, int type) {
+    static /* synthetic */ boolean lambda$initLayoutIdToViewType$1(
+            boolean[] assignedViewTypes, int type) {
         return !assignedViewTypes[type];
     }
 
     static /* synthetic */ IllegalStateException lambda$initLayoutIdToViewType$2() {
-        return new IllegalStateException("RemoteCollectionItems has more distinct layout ids than its view type count");
+        return new IllegalStateException(
+                "RemoteCollectionItems has more distinct layout ids than its view type count");
     }
 
     @Override // android.widget.Adapter
@@ -137,7 +169,10 @@ class RemoteCollectionItemsAdapter extends BaseAdapter {
         }
         RemoteViews item = this.mItems.getItemView(position);
         item.addFlags(2);
-        AppWidgetHostView newView = convertView instanceof AppWidgetHostView.AdapterChildHostView ? (AppWidgetHostView.AdapterChildHostView) convertView : new AppWidgetHostView.AdapterChildHostView(parent.getContext());
+        AppWidgetHostView newView =
+                convertView instanceof AppWidgetHostView.AdapterChildHostView
+                        ? (AppWidgetHostView.AdapterChildHostView) convertView
+                        : new AppWidgetHostView.AdapterChildHostView(parent.getContext());
         newView.setInteractionHandler(this.mInteractionHandler);
         newView.setColorResourcesNoReapply(this.mColorResources);
         newView.updateAppWidget(item);

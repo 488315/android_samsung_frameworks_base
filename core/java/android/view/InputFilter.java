@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import android.view.IInputFilter;
 
 /* loaded from: classes4.dex */
 public abstract class InputFilter extends IInputFilter.Stub {
@@ -19,12 +18,18 @@ public abstract class InputFilter extends IInputFilter.Stub {
     public InputFilter(Looper looper) {
         InputEventConsistencyVerifier inputEventConsistencyVerifier;
         if (InputEventConsistencyVerifier.isInstrumentationEnabled()) {
-            inputEventConsistencyVerifier = new InputEventConsistencyVerifier(this, 1, "InputFilter#InboundInputEventConsistencyVerifier");
+            inputEventConsistencyVerifier =
+                    new InputEventConsistencyVerifier(
+                            this, 1, "InputFilter#InboundInputEventConsistencyVerifier");
         } else {
             inputEventConsistencyVerifier = null;
         }
         this.mInboundInputEventConsistencyVerifier = inputEventConsistencyVerifier;
-        this.mOutboundInputEventConsistencyVerifier = InputEventConsistencyVerifier.isInstrumentationEnabled() ? new InputEventConsistencyVerifier(this, 1, "InputFilter#OutboundInputEventConsistencyVerifier") : null;
+        this.mOutboundInputEventConsistencyVerifier =
+                InputEventConsistencyVerifier.isInstrumentationEnabled()
+                        ? new InputEventConsistencyVerifier(
+                                this, 1, "InputFilter#OutboundInputEventConsistencyVerifier")
+                        : null;
         this.mH = new H(looper);
     }
 
@@ -48,7 +53,8 @@ public abstract class InputFilter extends IInputFilter.Stub {
             throw new IllegalArgumentException("event must not be null");
         }
         if (this.mHost == null) {
-            throw new IllegalStateException("Cannot send input event because the input filter is not installed.");
+            throw new IllegalStateException(
+                    "Cannot send input event because the input filter is not installed.");
         }
         if (this.mOutboundInputEventConsistencyVerifier != null) {
             this.mOutboundInputEventConsistencyVerifier.onInputEvent(event, 0);
@@ -63,11 +69,9 @@ public abstract class InputFilter extends IInputFilter.Stub {
         sendInputEvent(event, policyFlags);
     }
 
-    public void onInstalled() {
-    }
+    public void onInstalled() {}
 
-    public void onUninstalled() {
-    }
+    public void onUninstalled() {}
 
     private final class H extends Handler {
         public H(Looper looper) {
@@ -98,7 +102,8 @@ public abstract class InputFilter extends IInputFilter.Stub {
                     InputEvent event = (InputEvent) msg.obj;
                     try {
                         if (InputFilter.this.mInboundInputEventConsistencyVerifier != null) {
-                            InputFilter.this.mInboundInputEventConsistencyVerifier.onInputEvent(event, 0);
+                            InputFilter.this.mInboundInputEventConsistencyVerifier.onInputEvent(
+                                    event, 0);
                         }
                         InputFilter.this.onInputEvent(event, msg.arg1);
                         return;

@@ -4,10 +4,7 @@ import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.Pair;
 import android.util.SparseArray;
-import com.android.server.am.AppBatteryExemptionTracker;
-import com.android.server.am.AppBatteryTracker;
-import com.android.server.am.AppRestrictionController;
-import com.android.server.am.BaseAppStateEventsTracker;
+
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -19,8 +16,10 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
     public UidProcessMap mUidPackageStates;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class AppBatteryExemptionPolicy extends BaseAppStateEventsTracker.BaseAppStateEventsPolicy {
-        @Override // com.android.server.am.BaseAppStateEventsTracker.BaseAppStateEventsPolicy, com.android.server.am.BaseAppStatePolicy
+    public final class AppBatteryExemptionPolicy
+            extends BaseAppStateEventsTracker.BaseAppStateEventsPolicy {
+        @Override // com.android.server.am.BaseAppStateEventsTracker.BaseAppStateEventsPolicy,
+                  // com.android.server.am.BaseAppStatePolicy
         public final void dump(PrintWriter printWriter, String str) {
             printWriter.print(str);
             printWriter.println("APP BATTERY EXEMPTION TRACKER POLICY SETTINGS:");
@@ -29,22 +28,36 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
 
         @Override // com.android.server.am.BaseAppStateEventsTracker.BaseAppStateEventsPolicy
         public final void onMaxTrackingDurationChanged() {
-            final AppBatteryExemptionTracker appBatteryExemptionTracker = (AppBatteryExemptionTracker) this.mTracker;
+            final AppBatteryExemptionTracker appBatteryExemptionTracker =
+                    (AppBatteryExemptionTracker) this.mTracker;
             AppRestrictionController.BgHandler bgHandler = appBatteryExemptionTracker.mBgHandler;
             Objects.requireNonNull(appBatteryExemptionTracker);
-            bgHandler.post(new Runnable() { // from class: com.android.server.am.AppBatteryExemptionTracker$AppBatteryExemptionPolicy$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AppBatteryExemptionTracker appBatteryExemptionTracker2 = AppBatteryExemptionTracker.this;
-                    appBatteryExemptionTracker2.getClass();
-                    appBatteryExemptionTracker2.trim(Math.max(0L, SystemClock.elapsedRealtime() - ((AppBatteryExemptionTracker.AppBatteryExemptionPolicy) appBatteryExemptionTracker2.mInjector.mAppStatePolicy).mMaxTrackingDuration));
-                }
-            });
+            bgHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.am.AppBatteryExemptionTracker$AppBatteryExemptionPolicy$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AppBatteryExemptionTracker appBatteryExemptionTracker2 =
+                                    AppBatteryExemptionTracker.this;
+                            appBatteryExemptionTracker2.getClass();
+                            appBatteryExemptionTracker2.trim(
+                                    Math.max(
+                                            0L,
+                                            SystemClock.elapsedRealtime()
+                                                    - ((AppBatteryExemptionTracker
+                                                                            .AppBatteryExemptionPolicy)
+                                                                    appBatteryExemptionTracker2
+                                                                            .mInjector
+                                                                            .mAppStatePolicy)
+                                                            .mMaxTrackingDuration));
+                        }
+                    });
         }
 
         @Override // com.android.server.am.BaseAppStatePolicy
         public final void onTrackerEnabled(boolean z) {
-            AppBatteryExemptionTracker appBatteryExemptionTracker = (AppBatteryExemptionTracker) this.mTracker;
+            AppBatteryExemptionTracker appBatteryExemptionTracker =
+                    (AppBatteryExemptionTracker) this.mTracker;
             if (z) {
                 appBatteryExemptionTracker.getClass();
                 return;
@@ -60,7 +73,8 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
     public final class UidBatteryStates extends BaseAppStateDurations {
         /* JADX WARN: Removed duplicated region for block: B:46:0x0113  */
         /* JADX WARN: Removed duplicated region for block: B:61:0x017a  */
-        @Override // com.android.server.am.BaseAppStateDurations, com.android.server.am.BaseAppStateEvents
+        @Override // com.android.server.am.BaseAppStateDurations,
+                  // com.android.server.am.BaseAppStateEvents
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -70,23 +84,39 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
                 Method dump skipped, instructions count: 400
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppBatteryExemptionTracker.UidBatteryStates.add(java.util.LinkedList, java.util.LinkedList):java.util.LinkedList");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.AppBatteryExemptionTracker.UidBatteryStates.add(java.util.LinkedList,"
+                        + " java.util.LinkedList):java.util.LinkedList");
         }
 
-        public final void addEvent(boolean z, long j, AppBatteryTracker.ImmutableBatteryUsage immutableBatteryUsage, int i) {
+        public final void addEvent(
+                boolean z,
+                long j,
+                AppBatteryTracker.ImmutableBatteryUsage immutableBatteryUsage,
+                int i) {
             if (z) {
                 addEvent(z, new UidStateEventWithBattery(z, j, immutableBatteryUsage, null), i);
                 return;
             }
             LinkedList linkedList = this.mEvents[i];
-            UidStateEventWithBattery uidStateEventWithBattery = linkedList != null ? (UidStateEventWithBattery) linkedList.peekLast() : null;
+            UidStateEventWithBattery uidStateEventWithBattery =
+                    linkedList != null ? (UidStateEventWithBattery) linkedList.peekLast() : null;
             if (uidStateEventWithBattery == null || !uidStateEventWithBattery.mIsStart) {
                 return;
             }
             immutableBatteryUsage.getClass();
-            AppBatteryTracker.BatteryUsage batteryUsage = new AppBatteryTracker.BatteryUsage(immutableBatteryUsage);
+            AppBatteryTracker.BatteryUsage batteryUsage =
+                    new AppBatteryTracker.BatteryUsage(immutableBatteryUsage);
             batteryUsage.subtract(uidStateEventWithBattery.mBatteryUsage);
-            addEvent(z, new UidStateEventWithBattery(z, j, new AppBatteryTracker.ImmutableBatteryUsage(batteryUsage), uidStateEventWithBattery), i);
+            addEvent(
+                    z,
+                    new UidStateEventWithBattery(
+                            z,
+                            j,
+                            new AppBatteryTracker.ImmutableBatteryUsage(batteryUsage),
+                            uidStateEventWithBattery),
+                    i);
         }
 
         public final Pair getBatteryUsageSince(int i, long j, long j2) {
@@ -103,7 +133,8 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
                 i2++;
             }
             if (linkedList == null || linkedList.size() == 0) {
-                AppBatteryTracker.ImmutableBatteryUsage immutableBatteryUsage = AppBatteryTracker.BATTERY_USAGE_NONE;
+                AppBatteryTracker.ImmutableBatteryUsage immutableBatteryUsage =
+                        AppBatteryTracker.BATTERY_USAGE_NONE;
                 return Pair.create(immutableBatteryUsage, immutableBatteryUsage);
             }
             AppBatteryTracker.BatteryUsage batteryUsage = new AppBatteryTracker.BatteryUsage();
@@ -119,7 +150,11 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
                     }
                 }
             }
-            return Pair.create(new AppBatteryTracker.ImmutableBatteryUsage(batteryUsage), uidStateEventWithBattery.mIsStart ? uidStateEventWithBattery.mBatteryUsage : AppBatteryTracker.BATTERY_USAGE_NONE);
+            return Pair.create(
+                    new AppBatteryTracker.ImmutableBatteryUsage(batteryUsage),
+                    uidStateEventWithBattery.mIsStart
+                            ? uidStateEventWithBattery.mBatteryUsage
+                            : AppBatteryTracker.BATTERY_USAGE_NONE);
         }
     }
 
@@ -129,7 +164,11 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
         public boolean mIsStart;
         public UidStateEventWithBattery mPeer;
 
-        public UidStateEventWithBattery(boolean z, long j, AppBatteryTracker.ImmutableBatteryUsage immutableBatteryUsage, UidStateEventWithBattery uidStateEventWithBattery) {
+        public UidStateEventWithBattery(
+                boolean z,
+                long j,
+                AppBatteryTracker.ImmutableBatteryUsage immutableBatteryUsage,
+                UidStateEventWithBattery uidStateEventWithBattery) {
             super(j);
             this.mIsStart = z;
             this.mBatteryUsage = immutableBatteryUsage;
@@ -154,7 +193,9 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
                 return false;
             }
             UidStateEventWithBattery uidStateEventWithBattery = (UidStateEventWithBattery) obj;
-            return uidStateEventWithBattery.mIsStart == this.mIsStart && uidStateEventWithBattery.mTimestamp == this.mTimestamp && this.mBatteryUsage.equals(uidStateEventWithBattery.mBatteryUsage);
+            return uidStateEventWithBattery.mIsStart == this.mIsStart
+                    && uidStateEventWithBattery.mTimestamp == this.mTimestamp
+                    && this.mBatteryUsage.equals(uidStateEventWithBattery.mBatteryUsage);
         }
 
         public final AppBatteryTracker.ImmutableBatteryUsage getBatteryUsage(long j, long j2) {
@@ -173,18 +214,27 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
             }
             AppBatteryTracker.ImmutableBatteryUsage immutableBatteryUsage = this.mBatteryUsage;
             immutableBatteryUsage.getClass();
-            AppBatteryTracker.BatteryUsage batteryUsage = new AppBatteryTracker.BatteryUsage(immutableBatteryUsage);
+            AppBatteryTracker.BatteryUsage batteryUsage =
+                    new AppBatteryTracker.BatteryUsage(immutableBatteryUsage);
             batteryUsage.scaleInternal((j4 * 1.0d) / j3);
             return new AppBatteryTracker.ImmutableBatteryUsage(batteryUsage);
         }
 
         @Override // com.android.server.am.BaseAppStateTimeEvents$BaseTimeEvent
         public final int hashCode() {
-            return this.mBatteryUsage.hashCode() + ((Long.hashCode(this.mTimestamp) + (Boolean.hashCode(this.mIsStart) * 31)) * 31);
+            return this.mBatteryUsage.hashCode()
+                    + ((Long.hashCode(this.mTimestamp) + (Boolean.hashCode(this.mIsStart) * 31))
+                            * 31);
         }
 
         public final String toString() {
-            return "UidStateEventWithBattery(" + this.mIsStart + ", " + this.mTimestamp + ", " + this.mBatteryUsage + ")";
+            return "UidStateEventWithBattery("
+                    + this.mIsStart
+                    + ", "
+                    + this.mTimestamp
+                    + ", "
+                    + this.mBatteryUsage
+                    + ")";
         }
 
         @Override // com.android.server.am.BaseAppStateTimeEvents$BaseTimeEvent
@@ -194,11 +244,15 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
             }
             UidStateEventWithBattery uidStateEventWithBattery = this.mPeer;
             if (uidStateEventWithBattery != null) {
-                AppBatteryTracker.ImmutableBatteryUsage immutableBatteryUsage = uidStateEventWithBattery.mBatteryUsage;
-                uidStateEventWithBattery.mBatteryUsage = uidStateEventWithBattery.getBatteryUsage(j, uidStateEventWithBattery.mTimestamp);
+                AppBatteryTracker.ImmutableBatteryUsage immutableBatteryUsage =
+                        uidStateEventWithBattery.mBatteryUsage;
+                uidStateEventWithBattery.mBatteryUsage =
+                        uidStateEventWithBattery.getBatteryUsage(
+                                j, uidStateEventWithBattery.mTimestamp);
                 AppBatteryTracker.ImmutableBatteryUsage immutableBatteryUsage2 = this.mBatteryUsage;
                 immutableBatteryUsage2.getClass();
-                AppBatteryTracker.BatteryUsage batteryUsage = new AppBatteryTracker.BatteryUsage(immutableBatteryUsage2);
+                AppBatteryTracker.BatteryUsage batteryUsage =
+                        new AppBatteryTracker.BatteryUsage(immutableBatteryUsage2);
                 batteryUsage.add(immutableBatteryUsage);
                 batteryUsage.subtract(this.mPeer.mBatteryUsage);
                 this.mBatteryUsage = new AppBatteryTracker.ImmutableBatteryUsage(batteryUsage);
@@ -209,7 +263,12 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
 
     @Override // com.android.server.am.BaseAppStateEventsTracker
     public final BaseAppStateEvents createAppStateEvents(int i, String str) {
-        return new UidBatteryStates(i, "", 5, (BaseAppStateEventsTracker.BaseAppStateEventsPolicy) this.mInjector.mAppStatePolicy);
+        return new UidBatteryStates(
+                i,
+                "",
+                5,
+                (BaseAppStateEventsTracker.BaseAppStateEventsPolicy)
+                        this.mInjector.mAppStatePolicy);
     }
 
     @Override // com.android.server.am.BaseAppStateEventsTracker
@@ -217,7 +276,8 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
         return new UidBatteryStates((UidBatteryStates) baseAppStateEvents);
     }
 
-    @Override // com.android.server.am.BaseAppStateEventsTracker, com.android.server.am.BaseAppStateTracker
+    @Override // com.android.server.am.BaseAppStateEventsTracker,
+              // com.android.server.am.BaseAppStateTracker
     public final void dump(PrintWriter printWriter, String str) {
         ((AppBatteryExemptionPolicy) this.mInjector.mAppStatePolicy).dump(printWriter, str);
     }
@@ -231,7 +291,8 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
         int i3;
         boolean z2;
         if (((AppBatteryExemptionPolicy) this.mInjector.mAppStatePolicy).mTrackerEnabled) {
-            AppBatteryTracker.ImmutableBatteryUsage uidBatteryUsage = this.mAppRestrictionController.getUidBatteryUsage(i);
+            AppBatteryTracker.ImmutableBatteryUsage uidBatteryUsage =
+                    this.mAppRestrictionController.getUidBatteryUsage(i);
             int numberOfTrailingZeros = Integer.numberOfTrailingZeros(i2);
             synchronized (this.mLock) {
                 try {
@@ -285,9 +346,16 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
                         z2 = z3;
                     }
                     if (z2) {
-                        UidBatteryStates uidBatteryStates = (UidBatteryStates) this.mPkgEvents.get(i, "");
+                        UidBatteryStates uidBatteryStates =
+                                (UidBatteryStates) this.mPkgEvents.get(i, "");
                         if (uidBatteryStates == null) {
-                            uidBatteryStates = new UidBatteryStates(i, "", 5, (BaseAppStateEventsTracker.BaseAppStateEventsPolicy) this.mInjector.mAppStatePolicy);
+                            uidBatteryStates =
+                                    new UidBatteryStates(
+                                            i,
+                                            "",
+                                            5,
+                                            (BaseAppStateEventsTracker.BaseAppStateEventsPolicy)
+                                                    this.mInjector.mAppStatePolicy);
                             this.mPkgEvents.put("", i, uidBatteryStates);
                         }
                         uidBatteryStates.addEvent(z, j, uidBatteryUsage, numberOfTrailingZeros);
@@ -304,14 +372,16 @@ public final class AppBatteryExemptionTracker extends BaseAppStateDurationsTrack
         AppRestrictionController appRestrictionController = this.mAppRestrictionController;
         int size = appRestrictionController.mAppStateTrackers.size();
         for (int i = 0; i < size; i++) {
-            BaseAppStateTracker baseAppStateTracker = (BaseAppStateTracker) appRestrictionController.mAppStateTrackers.get(i);
+            BaseAppStateTracker baseAppStateTracker =
+                    (BaseAppStateTracker) appRestrictionController.mAppStateTrackers.get(i);
             synchronized (baseAppStateTracker.mLock) {
                 baseAppStateTracker.mStateListeners.add(this);
             }
         }
     }
 
-    @Override // com.android.server.am.BaseAppStateDurationsTracker, com.android.server.am.BaseAppStateEventsTracker
+    @Override // com.android.server.am.BaseAppStateDurationsTracker,
+              // com.android.server.am.BaseAppStateEventsTracker
     public void reset() {
         super.reset();
         synchronized (this.mLock) {

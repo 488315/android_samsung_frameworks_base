@@ -8,14 +8,15 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface INtnSignalStrengthCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.satellite.INtnSignalStrengthCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.satellite.INtnSignalStrengthCallback";
 
     void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) throws RemoteException;
 
     public static class Default implements INtnSignalStrengthCallback {
         @Override // android.telephony.satellite.INtnSignalStrengthCallback
-        public void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) throws RemoteException {
-        }
+        public void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface INtnSignalStrengthCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INtnSignalStrengthCallback {
+    public abstract static class Stub extends Binder implements INtnSignalStrengthCallback {
         static final int TRANSACTION_onNtnSignalStrengthChanged = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface INtnSignalStrengthCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(INtnSignalStrengthCallback.DESCRIPTOR);
             }
@@ -71,7 +73,8 @@ public interface INtnSignalStrengthCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    NtnSignalStrength _arg0 = (NtnSignalStrength) data.readTypedObject(NtnSignalStrength.CREATOR);
+                    NtnSignalStrength _arg0 =
+                            (NtnSignalStrength) data.readTypedObject(NtnSignalStrength.CREATOR);
                     data.enforceNoDataAvail();
                     onNtnSignalStrengthChanged(_arg0);
                     return true;
@@ -97,7 +100,8 @@ public interface INtnSignalStrengthCallback extends IInterface {
             }
 
             @Override // android.telephony.satellite.INtnSignalStrengthCallback
-            public void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength) throws RemoteException {
+            public void onNtnSignalStrengthChanged(NtnSignalStrength ntnSignalStrength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(INtnSignalStrengthCallback.DESCRIPTOR);

@@ -11,9 +11,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
 import android.provider.DocumentsContract;
+
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.internal.util.Preconditions;
+
 import java.io.CharArrayWriter;
 import java.io.File;
 import java.util.Locale;
@@ -21,20 +23,23 @@ import java.util.UUID;
 
 /* loaded from: classes3.dex */
 public final class StorageVolume implements Parcelable {
-    private static final String ACTION_OPEN_EXTERNAL_DIRECTORY = "android.os.storage.action.OPEN_EXTERNAL_DIRECTORY";
-    public static final Parcelable.Creator<StorageVolume> CREATOR = new Parcelable.Creator<StorageVolume>() { // from class: android.os.storage.StorageVolume.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StorageVolume createFromParcel(Parcel in) {
-            return new StorageVolume(in);
-        }
+    private static final String ACTION_OPEN_EXTERNAL_DIRECTORY =
+            "android.os.storage.action.OPEN_EXTERNAL_DIRECTORY";
+    public static final Parcelable.Creator<StorageVolume> CREATOR =
+            new Parcelable.Creator<
+                    StorageVolume>() { // from class: android.os.storage.StorageVolume.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StorageVolume createFromParcel(Parcel in) {
+                    return new StorageVolume(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StorageVolume[] newArray(int size) {
-            return new StorageVolume[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StorageVolume[] newArray(int size) {
+                    return new StorageVolume[size];
+                }
+            };
     public static final String EXTRA_DIRECTORY_NAME = "android.os.storage.extra.DIRECTORY_NAME";
     public static final String EXTRA_STORAGE_VOLUME = "android.os.storage.extra.STORAGE_VOLUME";
     public static final int STORAGE_ID_INVALID = 0;
@@ -58,7 +63,21 @@ public final class StorageVolume implements Parcelable {
     private final String mSubSystem;
     private final UUID mUuid;
 
-    public StorageVolume(String id, File path, File internalPath, String description, boolean primary, boolean removable, boolean emulated, boolean externallyManaged, boolean allowMassStorage, long maxFileSize, UserHandle owner, UUID uuid, String fsUuid, String state) {
+    public StorageVolume(
+            String id,
+            File path,
+            File internalPath,
+            String description,
+            boolean primary,
+            boolean removable,
+            boolean emulated,
+            boolean externallyManaged,
+            boolean allowMassStorage,
+            long maxFileSize,
+            UserHandle owner,
+            UUID uuid,
+            String fsUuid,
+            String state) {
         this.mId = (String) Preconditions.checkNotNull(id);
         this.mPath = (File) Preconditions.checkNotNull(path);
         this.mInternalPath = (File) Preconditions.checkNotNull(internalPath);
@@ -215,7 +234,9 @@ public final class StorageVolume implements Parcelable {
             return -1;
         }
         try {
-            return (int) Long.parseLong(this.mFsUuid.replace(NativeLibraryHelper.CLEAR_ABI_OVERRIDE, ""), 16);
+            return (int)
+                    Long.parseLong(
+                            this.mFsUuid.replace(NativeLibraryHelper.CLEAR_ABI_OVERRIDE, ""), 16);
         } catch (NumberFormatException e) {
             return -1;
         }
@@ -250,8 +271,13 @@ public final class StorageVolume implements Parcelable {
         } else {
             rootId = this.mFsUuid;
         }
-        Uri rootUri = DocumentsContract.buildRootUri(DocumentsContract.EXTERNAL_STORAGE_PROVIDER_AUTHORITY, rootId);
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).putExtra(DocumentsContract.EXTRA_INITIAL_URI, rootUri).putExtra(DocumentsContract.EXTRA_SHOW_ADVANCED, true);
+        Uri rootUri =
+                DocumentsContract.buildRootUri(
+                        DocumentsContract.EXTERNAL_STORAGE_PROVIDER_AUTHORITY, rootId);
+        Intent intent =
+                new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+                        .putExtra(DocumentsContract.EXTRA_INITIAL_URI, rootUri)
+                        .putExtra(DocumentsContract.EXTRA_SHOW_ADVANCED, true);
         return intent;
     }
 
@@ -380,11 +406,42 @@ public final class StorageVolume implements Parcelable {
         }
 
         public StorageVolume build() {
-            return new StorageVolume(this.mId, this.mPath, this.mPath, this.mDescription, this.mPrimary, this.mRemovable, this.mEmulated, false, false, 0L, this.mOwner, this.mStorageUuid, this.mUuid, this.mState);
+            return new StorageVolume(
+                    this.mId,
+                    this.mPath,
+                    this.mPath,
+                    this.mDescription,
+                    this.mPrimary,
+                    this.mRemovable,
+                    this.mEmulated,
+                    false,
+                    false,
+                    0L,
+                    this.mOwner,
+                    this.mStorageUuid,
+                    this.mUuid,
+                    this.mState);
         }
     }
 
-    public StorageVolume(String id, File path, File internalPath, String description, boolean primary, boolean removable, boolean emulated, boolean externallyManaged, boolean allowMassStorage, long maxFileSize, UserHandle owner, UUID uuid, String fsUuid, String state, int storageId, String subSystem, boolean activitySecureContainer) {
+    public StorageVolume(
+            String id,
+            File path,
+            File internalPath,
+            String description,
+            boolean primary,
+            boolean removable,
+            boolean emulated,
+            boolean externallyManaged,
+            boolean allowMassStorage,
+            long maxFileSize,
+            UserHandle owner,
+            UUID uuid,
+            String fsUuid,
+            String state,
+            int storageId,
+            String subSystem,
+            boolean activitySecureContainer) {
         this.mId = (String) Preconditions.checkNotNull(id);
         this.mPath = (File) Preconditions.checkNotNull(path);
         this.mInternalPath = (File) Preconditions.checkNotNull(internalPath);

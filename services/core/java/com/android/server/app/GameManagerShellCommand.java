@@ -5,9 +5,11 @@ import android.app.IGameManagerService;
 import android.hardware.soundtrigger.V2_3.OptionalModelParameterRange$$ExternalSyntheticOutline0;
 import android.os.ServiceManager;
 import android.os.ShellCommand;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.StringJoiner;
@@ -20,7 +22,11 @@ public final class GameManagerShellCommand extends ShellCommand {
     }
 
     public static String gameModeIntToString(int i) {
-        return i != 0 ? i != 1 ? i != 2 ? i != 3 ? i != 4 ? "" : "custom" : "battery" : "performance" : "standard" : "unsupported";
+        return i != 0
+                ? i != 1
+                        ? i != 2 ? i != 3 ? i != 4 ? "" : "custom" : "battery" : "performance"
+                        : "standard"
+                : "unsupported";
     }
 
     public final int onCommand(String str) {
@@ -100,20 +106,55 @@ public final class GameManagerShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("      Print this help text.");
         outPrintWriter.println("  downscale");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      Deprecated. Please use `custom` command.", "  list-configs <PACKAGE_NAME>", "      Lists the current intervention configs of an app.", "  list-modes <PACKAGE_NAME>");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      Lists the current selected and available game modes of an app.", "  mode [--user <USER_ID>] [1|2|3|4|standard|performance|battery|custom] <PACKAGE_NAME>", "      Set app to run in the specified game mode, if supported.", "      --user <USER_ID>: apply for the given user,");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "                        the current user is used when unspecified.", "  set [intervention configs] <PACKAGE_NAME>", "      Set app to run at custom mode using provided intervention configs", "      Intervention configs consists of:");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      --downscale [0.3|0.35|0.4|0.45|0.5|0.55|0.6|0.65", "                  |0.7|0.75|0.8|0.85|0.9|disable]: Set app to run at the", "                                                   specified scaling ratio.", "      --fps: Integer value to set app to run at the specified fps,");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "             if supported. 0 to disable.", "  reset [--mode [2|3|performance|battery] --user <USER_ID>] <PACKAGE_NAME>", "      Resets the game mode of the app to device configuration.", "      This should only be used to reset any override to non custom game mode");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      applied using the deprecated `set` command", "      --mode [2|3|performance|battery]: apply for the given mode,", "                                        resets all modes when unspecified.", "      --user <USER_ID>: apply for the given user,");
-        outPrintWriter.println("                        the current user is used when unspecified.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      Deprecated. Please use `custom` command.",
+                "  list-configs <PACKAGE_NAME>",
+                "      Lists the current intervention configs of an app.",
+                "  list-modes <PACKAGE_NAME>");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      Lists the current selected and available game modes of an app.",
+                "  mode [--user <USER_ID>] [1|2|3|4|standard|performance|battery|custom]"
+                    + " <PACKAGE_NAME>",
+                "      Set app to run in the specified game mode, if supported.",
+                "      --user <USER_ID>: apply for the given user,");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "                        the current user is used when unspecified.",
+                "  set [intervention configs] <PACKAGE_NAME>",
+                "      Set app to run at custom mode using provided intervention configs",
+                "      Intervention configs consists of:");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      --downscale [0.3|0.35|0.4|0.45|0.5|0.55|0.6|0.65",
+                "                  |0.7|0.75|0.8|0.85|0.9|disable]: Set app to run at the",
+                "                                                   specified scaling ratio.",
+                "      --fps: Integer value to set app to run at the specified fps,");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "             if supported. 0 to disable.",
+                "  reset [--mode [2|3|performance|battery] --user <USER_ID>] <PACKAGE_NAME>",
+                "      Resets the game mode of the app to device configuration.",
+                "      This should only be used to reset any override to non custom game mode");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      applied using the deprecated `set` command",
+                "      --mode [2|3|performance|battery]: apply for the given mode,",
+                "                                        resets all modes when unspecified.",
+                "      --user <USER_ID>: apply for the given user,");
+        outPrintWriter.println(
+                "                        the current user is used when unspecified.");
     }
 
     public final void runListGameModeConfigs(PrintWriter printWriter) {
         String nextArgRequired = getNextArgRequired();
-        String interventionList = ((GameManagerService) ServiceManager.getService("game")).getInterventionList(ActivityManager.getCurrentUser(), nextArgRequired);
+        String interventionList =
+                ((GameManagerService) ServiceManager.getService("game"))
+                        .getInterventionList(ActivityManager.getCurrentUser(), nextArgRequired);
         if (interventionList == null) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(printWriter, "No interventions found for ", nextArgRequired);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(
+                    printWriter, "No interventions found for ", nextArgRequired);
             return;
         }
         printWriter.println(nextArgRequired + " interventions: " + interventionList);
@@ -122,8 +163,10 @@ public final class GameManagerShellCommand extends ShellCommand {
     public final void runListGameModes(PrintWriter printWriter) {
         String nextArgRequired = getNextArgRequired();
         int currentUser = ActivityManager.getCurrentUser();
-        GameManagerService gameManagerService = (GameManagerService) ServiceManager.getService("game");
-        String gameModeIntToString = gameModeIntToString(gameManagerService.getGameMode(nextArgRequired, currentUser));
+        GameManagerService gameManagerService =
+                (GameManagerService) ServiceManager.getService("game");
+        String gameModeIntToString =
+                gameModeIntToString(gameManagerService.getGameMode(nextArgRequired, currentUser));
         StringJoiner stringJoiner = new StringJoiner(",");
         for (int i : gameManagerService.getAvailableGameModes(nextArgRequired, currentUser)) {
             stringJoiner.add(gameModeIntToString(i));
@@ -146,8 +189,10 @@ public final class GameManagerShellCommand extends ShellCommand {
             String nextOption = getNextOption();
             if (nextOption == null) {
                 String nextArgRequired = getNextArgRequired();
-                GameManagerService gameManagerService = (GameManagerService) ServiceManager.getService("game");
-                int parseInt = str != null ? Integer.parseInt(str) : ActivityManager.getCurrentUser();
+                GameManagerService gameManagerService =
+                        (GameManagerService) ServiceManager.getService("game");
+                int parseInt =
+                        str != null ? Integer.parseInt(str) : ActivityManager.getCurrentUser();
                 if (str2 == null) {
                     gameManagerService.resetGameModeConfigOverride(nextArgRequired, parseInt, -1);
                     return 0;
@@ -190,11 +235,13 @@ public final class GameManagerShellCommand extends ShellCommand {
                 switch (z) {
                     case false:
                     case true:
-                        gameManagerService.resetGameModeConfigOverride(nextArgRequired, parseInt, 2);
+                        gameManagerService.resetGameModeConfigOverride(
+                                nextArgRequired, parseInt, 2);
                         return 0;
                     case true:
                     case true:
-                        gameManagerService.resetGameModeConfigOverride(nextArgRequired, parseInt, 3);
+                        gameManagerService.resetGameModeConfigOverride(
+                                nextArgRequired, parseInt, 3);
                         return 0;
                     default:
                         printWriter.println("Invalid game mode: ".concat(str2));
@@ -203,17 +250,20 @@ public final class GameManagerShellCommand extends ShellCommand {
             }
             if (nextOption.equals("--mode")) {
                 if (str2 != null) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Duplicate option '", nextOption, "'");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter, "Duplicate option '", nextOption, "'");
                     return -1;
                 }
                 str2 = getNextArgRequired();
             } else {
                 if (!nextOption.equals("--user")) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Invalid option '", nextOption, "'");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter, "Invalid option '", nextOption, "'");
                     return -1;
                 }
                 if (str != null) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Duplicate option '", nextOption, "'");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter, "Duplicate option '", nextOption, "'");
                     return -1;
                 }
                 str = getNextArgRequired();
@@ -225,11 +275,16 @@ public final class GameManagerShellCommand extends ShellCommand {
     public final int runSetGameMode(PrintWriter printWriter) {
         char c;
         String nextOption = getNextOption();
-        String nextArgRequired = (nextOption == null || !nextOption.equals("--user")) ? null : getNextArgRequired();
+        String nextArgRequired =
+                (nextOption == null || !nextOption.equals("--user")) ? null : getNextArgRequired();
         String nextArgRequired2 = getNextArgRequired();
         String nextArgRequired3 = getNextArgRequired();
-        IGameManagerService asInterface = IGameManagerService.Stub.asInterface(ServiceManager.getServiceOrThrow("game"));
-        int parseInt = nextArgRequired != null ? Integer.parseInt(nextArgRequired) : ActivityManager.getCurrentUser();
+        IGameManagerService asInterface =
+                IGameManagerService.Stub.asInterface(ServiceManager.getServiceOrThrow("game"));
+        int parseInt =
+                nextArgRequired != null
+                        ? Integer.parseInt(nextArgRequired)
+                        : ActivityManager.getCurrentUser();
         boolean z = false;
         boolean z2 = false;
         for (int i : asInterface.getAvailableGameModes(nextArgRequired3, parseInt)) {
@@ -306,30 +361,58 @@ public final class GameManagerShellCommand extends ShellCommand {
             case 0:
             case 4:
                 if (!z2) {
-                    printWriter.println("Game mode: " + nextArgRequired2 + " not supported by " + nextArgRequired3);
+                    printWriter.println(
+                            "Game mode: "
+                                    + nextArgRequired2
+                                    + " not supported by "
+                                    + nextArgRequired3);
                     return -1;
                 }
                 asInterface.setGameMode(nextArgRequired3, 2, parseInt);
-                printWriter.println("Set game mode to `PERFORMANCE` for user `" + parseInt + "` in game `" + nextArgRequired3 + "`");
+                printWriter.println(
+                        "Set game mode to `PERFORMANCE` for user `"
+                                + parseInt
+                                + "` in game `"
+                                + nextArgRequired3
+                                + "`");
                 return 0;
             case 1:
             case 6:
                 asInterface.setGameMode(nextArgRequired3, 4, parseInt);
-                printWriter.println("Set game mode to `CUSTOM` for user `" + parseInt + "` in game `" + nextArgRequired3 + "`");
+                printWriter.println(
+                        "Set game mode to `CUSTOM` for user `"
+                                + parseInt
+                                + "` in game `"
+                                + nextArgRequired3
+                                + "`");
                 return 0;
             case 2:
             case 5:
                 if (!z) {
-                    printWriter.println("Game mode: " + nextArgRequired2 + " not supported by " + nextArgRequired3);
+                    printWriter.println(
+                            "Game mode: "
+                                    + nextArgRequired2
+                                    + " not supported by "
+                                    + nextArgRequired3);
                     return -1;
                 }
                 asInterface.setGameMode(nextArgRequired3, 3, parseInt);
-                printWriter.println("Set game mode to `BATTERY` for user `" + parseInt + "` in game `" + nextArgRequired3 + "`");
+                printWriter.println(
+                        "Set game mode to `BATTERY` for user `"
+                                + parseInt
+                                + "` in game `"
+                                + nextArgRequired3
+                                + "`");
                 return 0;
             case 3:
             case 7:
                 asInterface.setGameMode(nextArgRequired3, 1, parseInt);
-                printWriter.println("Set game mode to `STANDARD` for user `" + parseInt + "` in game `" + nextArgRequired3 + "`");
+                printWriter.println(
+                        "Set game mode to `STANDARD` for user `"
+                                + parseInt
+                                + "` in game `"
+                                + nextArgRequired3
+                                + "`");
                 return 0;
             default:
                 printWriter.println("Invalid game mode: ".concat(nextArgRequired2));
@@ -350,14 +433,28 @@ public final class GameManagerShellCommand extends ShellCommand {
                 String nextOption = getNextOption();
                 if (nextOption == null) {
                     String nextArgRequired = getNextArgRequired();
-                    int parseInt = str != null ? Integer.parseInt(str) : ActivityManager.getCurrentUser();
-                    GameManagerService gameManagerService = (GameManagerService) ServiceManager.getService("game");
+                    int parseInt =
+                            str != null ? Integer.parseInt(str) : ActivityManager.getCurrentUser();
+                    GameManagerService gameManagerService =
+                            (GameManagerService) ServiceManager.getService("game");
                     if (gameManagerService == null) {
                         printWriter.println("Failed to find GameManagerService on device");
                         return -1;
                     }
-                    gameManagerService.setGameModeConfigOverride(nextArgRequired, parseInt, i2, str2, str3);
-                    printWriter.println(OptionalModelParameterRange$$ExternalSyntheticOutline0.m(DirEncryptService$$ExternalSyntheticOutline0.m(parseInt, "Set custom mode intervention config for user `", "` in game `", nextArgRequired, "` as: `downscaling-ratio: "), str3, ";fps-override: ", str2, "`"));
+                    gameManagerService.setGameModeConfigOverride(
+                            nextArgRequired, parseInt, i2, str2, str3);
+                    printWriter.println(
+                            OptionalModelParameterRange$$ExternalSyntheticOutline0.m(
+                                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                                            parseInt,
+                                            "Set custom mode intervention config for user `",
+                                            "` in game `",
+                                            nextArgRequired,
+                                            "` as: `downscaling-ratio: "),
+                                    str3,
+                                    ";fps-override: ",
+                                    str2,
+                                    "`"));
                     return 0;
                 }
                 switch (nextOption.hashCode()) {
@@ -396,7 +493,8 @@ public final class GameManagerShellCommand extends ShellCommand {
                 switch (c) {
                     case 0:
                         if (str2 != null) {
-                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Duplicate option '", nextOption, "'");
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    printWriter, "Duplicate option '", nextOption, "'");
                             return -1;
                         }
                         String nextArgRequired2 = getNextArgRequired();
@@ -405,21 +503,24 @@ public final class GameManagerShellCommand extends ShellCommand {
                             str2 = nextArgRequired2;
                             break;
                         } catch (NumberFormatException unused) {
-                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Invalid frame rate: '", nextArgRequired2, "'");
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    printWriter, "Invalid frame rate: '", nextArgRequired2, "'");
                             return -1;
                         }
                     case 1:
                         break;
                     case 2:
                         if (str != null) {
-                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Duplicate option '", nextOption, "'");
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    printWriter, "Duplicate option '", nextOption, "'");
                             return -1;
                         }
                         str = getNextArgRequired();
                         break;
                     case 3:
                         if (str3 != null) {
-                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Duplicate option '", nextOption, "'");
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    printWriter, "Duplicate option '", nextOption, "'");
                             return -1;
                         }
                         String nextArgRequired3 = getNextArgRequired();
@@ -429,14 +530,19 @@ public final class GameManagerShellCommand extends ShellCommand {
                             try {
                                 Float.parseFloat(nextArgRequired3);
                             } catch (NumberFormatException unused2) {
-                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Invalid scaling ratio '", nextArgRequired3, "'");
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        printWriter,
+                                        "Invalid scaling ratio '",
+                                        nextArgRequired3,
+                                        "'");
                                 return -1;
                             }
                         }
                         str3 = nextArgRequired3;
                         break;
                     default:
-                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Invalid option '", nextOption, "'");
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                printWriter, "Invalid option '", nextOption, "'");
                         return -1;
                 }
             }

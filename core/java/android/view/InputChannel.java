@@ -3,6 +3,7 @@ package android.view;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes4.dex */
@@ -10,22 +11,25 @@ public final class InputChannel implements Parcelable {
     private static final boolean DEBUG = false;
     private static final String TAG = "InputChannel";
     private long mPtr;
-    private static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(InputChannel.class.getClassLoader(), nativeGetFinalizer());
-    public static final Parcelable.Creator<InputChannel> CREATOR = new Parcelable.Creator<InputChannel>() { // from class: android.view.InputChannel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputChannel createFromParcel(Parcel source) {
-            InputChannel result = new InputChannel();
-            result.readFromParcel(source);
-            return result;
-        }
+    private static final NativeAllocationRegistry sRegistry =
+            NativeAllocationRegistry.createMalloced(
+                    InputChannel.class.getClassLoader(), nativeGetFinalizer());
+    public static final Parcelable.Creator<InputChannel> CREATOR =
+            new Parcelable.Creator<InputChannel>() { // from class: android.view.InputChannel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputChannel createFromParcel(Parcel source) {
+                    InputChannel result = new InputChannel();
+                    result.readFromParcel(source);
+                    return result;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputChannel[] newArray(int size) {
-            return new InputChannel[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputChannel[] newArray(int size) {
+                    return new InputChannel[size];
+                }
+            };
 
     private native void nativeDispose(long j);
 
@@ -76,8 +80,7 @@ public final class InputChannel implements Parcelable {
         nativeDispose(this.mPtr);
     }
 
-    public void release() {
-    }
+    public void release() {}
 
     public void copyTo(InputChannel outParameter) {
         if (outParameter == null) {

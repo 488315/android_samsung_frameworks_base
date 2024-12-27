@@ -39,16 +39,14 @@ public final class ProcessOomProto {
         public static final long SET_RAW_ADJ = 1120986464259L;
         public static final long SET_STATE = 1159641169928L;
 
-        public Detail() {
-        }
+        public Detail() {}
 
         public final class CpuRunTime {
             public static final long OVER_MS = 1112396529665L;
             public static final long ULTILIZATION = 1108101562371L;
             public static final long USED_MS = 1112396529666L;
 
-            public CpuRunTime() {
-            }
+            public CpuRunTime() {}
         }
     }
 }

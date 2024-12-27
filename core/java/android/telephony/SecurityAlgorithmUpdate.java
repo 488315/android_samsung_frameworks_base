@@ -2,6 +2,7 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -24,19 +25,22 @@ public final class SecurityAlgorithmUpdate implements Parcelable {
     public static final int CONNECTION_EVENT_VONR_RTP_SOS = 15;
     public static final int CONNECTION_EVENT_VONR_SIP = 12;
     public static final int CONNECTION_EVENT_VONR_SIP_SOS = 13;
-    public static final Parcelable.Creator<SecurityAlgorithmUpdate> CREATOR = new Parcelable.Creator<SecurityAlgorithmUpdate>() { // from class: android.telephony.SecurityAlgorithmUpdate.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SecurityAlgorithmUpdate createFromParcel(Parcel in) {
-            return new SecurityAlgorithmUpdate(in);
-        }
+    public static final Parcelable.Creator<SecurityAlgorithmUpdate> CREATOR =
+            new Parcelable.Creator<
+                    SecurityAlgorithmUpdate>() { // from class:
+                                                 // android.telephony.SecurityAlgorithmUpdate.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SecurityAlgorithmUpdate createFromParcel(Parcel in) {
+                    return new SecurityAlgorithmUpdate(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SecurityAlgorithmUpdate[] newArray(int size) {
-            return new SecurityAlgorithmUpdate[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SecurityAlgorithmUpdate[] newArray(int size) {
+                    return new SecurityAlgorithmUpdate[size];
+                }
+            };
     public static final int SECURITY_ALGORITHM_A50 = 0;
     public static final int SECURITY_ALGORITHM_A51 = 1;
     public static final int SECURITY_ALGORITHM_A52 = 2;
@@ -87,14 +91,13 @@ public final class SecurityAlgorithmUpdate implements Parcelable {
     private boolean mIsUnprotectedEmergency;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConnectionEvent {
-    }
+    public @interface ConnectionEvent {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SecurityAlgorithm {
-    }
+    public @interface SecurityAlgorithm {}
 
-    public SecurityAlgorithmUpdate(int connectionEvent, int encryption, int integrity, boolean isUnprotectedEmergency) {
+    public SecurityAlgorithmUpdate(
+            int connectionEvent, int encryption, int integrity, boolean isUnprotectedEmergency) {
         this.mConnectionEvent = connectionEvent;
         this.mEncryption = encryption;
         this.mIntegrity = integrity;
@@ -142,7 +145,14 @@ public final class SecurityAlgorithmUpdate implements Parcelable {
     }
 
     public String toString() {
-        return "SecurityAlgorithmUpdate:{ mConnectionEvent = " + this.mConnectionEvent + " mEncryption = " + this.mEncryption + " mIntegrity = " + this.mIntegrity + " mIsUnprotectedEmergency = " + this.mIsUnprotectedEmergency;
+        return "SecurityAlgorithmUpdate:{ mConnectionEvent = "
+                + this.mConnectionEvent
+                + " mEncryption = "
+                + this.mEncryption
+                + " mIntegrity = "
+                + this.mIntegrity
+                + " mIsUnprotectedEmergency = "
+                + this.mIsUnprotectedEmergency;
     }
 
     public boolean equals(Object o) {
@@ -153,10 +163,17 @@ public final class SecurityAlgorithmUpdate implements Parcelable {
             return false;
         }
         SecurityAlgorithmUpdate that = (SecurityAlgorithmUpdate) o;
-        return this.mConnectionEvent == that.mConnectionEvent && this.mEncryption == that.mEncryption && this.mIntegrity == that.mIntegrity && this.mIsUnprotectedEmergency == that.mIsUnprotectedEmergency;
+        return this.mConnectionEvent == that.mConnectionEvent
+                && this.mEncryption == that.mEncryption
+                && this.mIntegrity == that.mIntegrity
+                && this.mIsUnprotectedEmergency == that.mIsUnprotectedEmergency;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mConnectionEvent), Integer.valueOf(this.mEncryption), Integer.valueOf(this.mIntegrity), Boolean.valueOf(this.mIsUnprotectedEmergency));
+        return Objects.hash(
+                Integer.valueOf(this.mConnectionEvent),
+                Integer.valueOf(this.mEncryption),
+                Integer.valueOf(this.mIntegrity),
+                Boolean.valueOf(this.mIsUnprotectedEmergency));
     }
 }

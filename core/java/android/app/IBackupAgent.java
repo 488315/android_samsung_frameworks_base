@@ -9,95 +9,180 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface IBackupAgent extends IInterface {
     void clearBackupRestoreEventLogger() throws RemoteException;
 
-    void doBackup(ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, ParcelFileDescriptor parcelFileDescriptor3, long j, IBackupCallback iBackupCallback, int i) throws RemoteException;
+    void doBackup(
+            ParcelFileDescriptor parcelFileDescriptor,
+            ParcelFileDescriptor parcelFileDescriptor2,
+            ParcelFileDescriptor parcelFileDescriptor3,
+            long j,
+            IBackupCallback iBackupCallback,
+            int i)
+            throws RemoteException;
 
     void doDisableDataExtractionRules(boolean z) throws RemoteException;
 
-    void doFullBackup(ParcelFileDescriptor parcelFileDescriptor, long j, int i, IBackupManager iBackupManager, int i2) throws RemoteException;
+    void doFullBackup(
+            ParcelFileDescriptor parcelFileDescriptor,
+            long j,
+            int i,
+            IBackupManager iBackupManager,
+            int i2)
+            throws RemoteException;
 
-    void doFullBackupPath(ParcelFileDescriptor parcelFileDescriptor, long j, int i, IBackupManager iBackupManager, int i2, String[] strArr) throws RemoteException;
+    void doFullBackupPath(
+            ParcelFileDescriptor parcelFileDescriptor,
+            long j,
+            int i,
+            IBackupManager iBackupManager,
+            int i2,
+            String[] strArr)
+            throws RemoteException;
 
-    void doMeasureFullBackup(long j, int i, IBackupManager iBackupManager, int i2) throws RemoteException;
+    void doMeasureFullBackup(long j, int i, IBackupManager iBackupManager, int i2)
+            throws RemoteException;
 
     void doQuotaExceeded(long j, long j2, IBackupCallback iBackupCallback) throws RemoteException;
 
-    void doRestore(ParcelFileDescriptor parcelFileDescriptor, long j, ParcelFileDescriptor parcelFileDescriptor2, int i, IBackupManager iBackupManager) throws RemoteException;
+    void doRestore(
+            ParcelFileDescriptor parcelFileDescriptor,
+            long j,
+            ParcelFileDescriptor parcelFileDescriptor2,
+            int i,
+            IBackupManager iBackupManager)
+            throws RemoteException;
 
-    void doRestoreFile(ParcelFileDescriptor parcelFileDescriptor, long j, int i, String str, String str2, long j2, long j3, int i2, IBackupManager iBackupManager) throws RemoteException;
+    void doRestoreFile(
+            ParcelFileDescriptor parcelFileDescriptor,
+            long j,
+            int i,
+            String str,
+            String str2,
+            long j2,
+            long j3,
+            int i2,
+            IBackupManager iBackupManager)
+            throws RemoteException;
 
     void doRestoreFinished(int i, IBackupManager iBackupManager) throws RemoteException;
 
-    void doRestoreWithExcludedKeys(ParcelFileDescriptor parcelFileDescriptor, long j, ParcelFileDescriptor parcelFileDescriptor2, int i, IBackupManager iBackupManager, List<String> list) throws RemoteException;
+    void doRestoreWithExcludedKeys(
+            ParcelFileDescriptor parcelFileDescriptor,
+            long j,
+            ParcelFileDescriptor parcelFileDescriptor2,
+            int i,
+            IBackupManager iBackupManager,
+            List<String> list)
+            throws RemoteException;
 
     void fail(String str) throws RemoteException;
 
-    void getLoggerResults(AndroidFuture<List<BackupRestoreEventLogger.DataTypeResult>> androidFuture) throws RemoteException;
+    void getLoggerResults(
+            AndroidFuture<List<BackupRestoreEventLogger.DataTypeResult>> androidFuture)
+            throws RemoteException;
 
     void getOperationType(AndroidFuture<Integer> androidFuture) throws RemoteException;
 
     public static class Default implements IBackupAgent {
         @Override // android.app.IBackupAgent
-        public void doBackup(ParcelFileDescriptor oldState, ParcelFileDescriptor data, ParcelFileDescriptor newState, long quotaBytes, IBackupCallback callbackBinder, int transportFlags) throws RemoteException {
-        }
+        public void doBackup(
+                ParcelFileDescriptor oldState,
+                ParcelFileDescriptor data,
+                ParcelFileDescriptor newState,
+                long quotaBytes,
+                IBackupCallback callbackBinder,
+                int transportFlags)
+                throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void doRestore(ParcelFileDescriptor data, long appVersionCode, ParcelFileDescriptor newState, int token, IBackupManager callbackBinder) throws RemoteException {
-        }
+        public void doRestore(
+                ParcelFileDescriptor data,
+                long appVersionCode,
+                ParcelFileDescriptor newState,
+                int token,
+                IBackupManager callbackBinder)
+                throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void doRestoreWithExcludedKeys(ParcelFileDescriptor data, long appVersionCode, ParcelFileDescriptor newState, int token, IBackupManager callbackBinder, List<String> excludedKeys) throws RemoteException {
-        }
+        public void doRestoreWithExcludedKeys(
+                ParcelFileDescriptor data,
+                long appVersionCode,
+                ParcelFileDescriptor newState,
+                int token,
+                IBackupManager callbackBinder,
+                List<String> excludedKeys)
+                throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void doFullBackup(ParcelFileDescriptor data, long quotaBytes, int token, IBackupManager callbackBinder, int transportFlags) throws RemoteException {
-        }
+        public void doFullBackup(
+                ParcelFileDescriptor data,
+                long quotaBytes,
+                int token,
+                IBackupManager callbackBinder,
+                int transportFlags)
+                throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void doFullBackupPath(ParcelFileDescriptor data, long quotaBytes, int token, IBackupManager callbackBinder, int transportFlags, String[] path) throws RemoteException {
-        }
+        public void doFullBackupPath(
+                ParcelFileDescriptor data,
+                long quotaBytes,
+                int token,
+                IBackupManager callbackBinder,
+                int transportFlags,
+                String[] path)
+                throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void doDisableDataExtractionRules(boolean disable) throws RemoteException {
-        }
+        public void doDisableDataExtractionRules(boolean disable) throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void doMeasureFullBackup(long quotaBytes, int token, IBackupManager callbackBinder, int transportFlags) throws RemoteException {
-        }
+        public void doMeasureFullBackup(
+                long quotaBytes, int token, IBackupManager callbackBinder, int transportFlags)
+                throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void doQuotaExceeded(long backupDataBytes, long quotaBytes, IBackupCallback callbackBinder) throws RemoteException {
-        }
+        public void doQuotaExceeded(
+                long backupDataBytes, long quotaBytes, IBackupCallback callbackBinder)
+                throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void doRestoreFile(ParcelFileDescriptor data, long size, int type, String domain, String path, long mode, long mtime, int token, IBackupManager callbackBinder) throws RemoteException {
-        }
+        public void doRestoreFile(
+                ParcelFileDescriptor data,
+                long size,
+                int type,
+                String domain,
+                String path,
+                long mode,
+                long mtime,
+                int token,
+                IBackupManager callbackBinder)
+                throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void doRestoreFinished(int token, IBackupManager callbackBinder) throws RemoteException {
-        }
+        public void doRestoreFinished(int token, IBackupManager callbackBinder)
+                throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void fail(String message) throws RemoteException {
-        }
+        public void fail(String message) throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void getLoggerResults(AndroidFuture<List<BackupRestoreEventLogger.DataTypeResult>> resultsFuture) throws RemoteException {
-        }
+        public void getLoggerResults(
+                AndroidFuture<List<BackupRestoreEventLogger.DataTypeResult>> resultsFuture)
+                throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void getOperationType(AndroidFuture<Integer> operationTypeFuture) throws RemoteException {
-        }
+        public void getOperationType(AndroidFuture<Integer> operationTypeFuture)
+                throws RemoteException {}
 
         @Override // android.app.IBackupAgent
-        public void clearBackupRestoreEventLogger() throws RemoteException {
-        }
+        public void clearBackupRestoreEventLogger() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -105,7 +190,7 @@ public interface IBackupAgent extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBackupAgent {
+    public abstract static class Stub extends Binder implements IBackupAgent {
         public static final String DESCRIPTOR = "android.app.IBackupAgent";
         static final int TRANSACTION_clearBackupRestoreEventLogger = 14;
         static final int TRANSACTION_doBackup = 1;
@@ -183,7 +268,8 @@ public interface IBackupAgent extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -193,48 +279,71 @@ public interface IBackupAgent extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    ParcelFileDescriptor _arg1 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    ParcelFileDescriptor _arg2 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg1 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg2 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg3 = data.readLong();
-                    IBackupCallback _arg4 = IBackupCallback.Stub.asInterface(data.readStrongBinder());
+                    IBackupCallback _arg4 =
+                            IBackupCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg5 = data.readInt();
                     data.enforceNoDataAvail();
                     doBackup(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5);
                     return true;
                 case 2:
-                    ParcelFileDescriptor _arg02 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg02 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg12 = data.readLong();
-                    ParcelFileDescriptor _arg22 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg22 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     int _arg32 = data.readInt();
-                    IBackupManager _arg42 = IBackupManager.Stub.asInterface(data.readStrongBinder());
+                    IBackupManager _arg42 =
+                            IBackupManager.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     doRestore(_arg02, _arg12, _arg22, _arg32, _arg42);
                     return true;
                 case 3:
-                    ParcelFileDescriptor _arg03 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg03 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg13 = data.readLong();
-                    ParcelFileDescriptor _arg23 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg23 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     int _arg33 = data.readInt();
-                    IBackupManager _arg43 = IBackupManager.Stub.asInterface(data.readStrongBinder());
+                    IBackupManager _arg43 =
+                            IBackupManager.Stub.asInterface(data.readStrongBinder());
                     List<String> _arg52 = data.createStringArrayList();
                     data.enforceNoDataAvail();
                     doRestoreWithExcludedKeys(_arg03, _arg13, _arg23, _arg33, _arg43, _arg52);
                     return true;
                 case 4:
-                    ParcelFileDescriptor _arg04 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg04 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg14 = data.readLong();
                     int _arg24 = data.readInt();
-                    IBackupManager _arg34 = IBackupManager.Stub.asInterface(data.readStrongBinder());
+                    IBackupManager _arg34 =
+                            IBackupManager.Stub.asInterface(data.readStrongBinder());
                     int _arg44 = data.readInt();
                     data.enforceNoDataAvail();
                     doFullBackup(_arg04, _arg14, _arg24, _arg34, _arg44);
                     return true;
                 case 5:
-                    ParcelFileDescriptor _arg05 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg05 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg15 = data.readLong();
                     int _arg25 = data.readInt();
-                    IBackupManager _arg35 = IBackupManager.Stub.asInterface(data.readStrongBinder());
+                    IBackupManager _arg35 =
+                            IBackupManager.Stub.asInterface(data.readStrongBinder());
                     int _arg45 = data.readInt();
                     String[] _arg53 = data.createStringArray();
                     data.enforceNoDataAvail();
@@ -248,7 +357,8 @@ public interface IBackupAgent extends IInterface {
                 case 7:
                     long _arg07 = data.readLong();
                     int _arg16 = data.readInt();
-                    IBackupManager _arg26 = IBackupManager.Stub.asInterface(data.readStrongBinder());
+                    IBackupManager _arg26 =
+                            IBackupManager.Stub.asInterface(data.readStrongBinder());
                     int _arg36 = data.readInt();
                     data.enforceNoDataAvail();
                     doMeasureFullBackup(_arg07, _arg16, _arg26, _arg36);
@@ -256,12 +366,15 @@ public interface IBackupAgent extends IInterface {
                 case 8:
                     long _arg08 = data.readLong();
                     long _arg17 = data.readLong();
-                    IBackupCallback _arg27 = IBackupCallback.Stub.asInterface(data.readStrongBinder());
+                    IBackupCallback _arg27 =
+                            IBackupCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     doQuotaExceeded(_arg08, _arg17, _arg27);
                     return true;
                 case 9:
-                    ParcelFileDescriptor _arg09 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg09 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg18 = data.readLong();
                     int _arg28 = data.readInt();
                     String _arg37 = data.readString();
@@ -271,11 +384,13 @@ public interface IBackupAgent extends IInterface {
                     int _arg7 = data.readInt();
                     IBackupManager _arg8 = IBackupManager.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    doRestoreFile(_arg09, _arg18, _arg28, _arg37, _arg46, _arg54, _arg6, _arg7, _arg8);
+                    doRestoreFile(
+                            _arg09, _arg18, _arg28, _arg37, _arg46, _arg54, _arg6, _arg7, _arg8);
                     return true;
                 case 10:
                     int _arg010 = data.readInt();
-                    IBackupManager _arg19 = IBackupManager.Stub.asInterface(data.readStrongBinder());
+                    IBackupManager _arg19 =
+                            IBackupManager.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     doRestoreFinished(_arg010, _arg19);
                     return true;
@@ -285,12 +400,14 @@ public interface IBackupAgent extends IInterface {
                     fail(_arg011);
                     return true;
                 case 12:
-                    AndroidFuture<List<BackupRestoreEventLogger.DataTypeResult>> _arg012 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<List<BackupRestoreEventLogger.DataTypeResult>> _arg012 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getLoggerResults(_arg012);
                     return true;
                 case 13:
-                    AndroidFuture<Integer> _arg013 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<Integer> _arg013 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getOperationType(_arg013);
                     return true;
@@ -319,7 +436,14 @@ public interface IBackupAgent extends IInterface {
             }
 
             @Override // android.app.IBackupAgent
-            public void doBackup(ParcelFileDescriptor oldState, ParcelFileDescriptor data, ParcelFileDescriptor newState, long quotaBytes, IBackupCallback callbackBinder, int transportFlags) throws RemoteException {
+            public void doBackup(
+                    ParcelFileDescriptor oldState,
+                    ParcelFileDescriptor data,
+                    ParcelFileDescriptor newState,
+                    long quotaBytes,
+                    IBackupCallback callbackBinder,
+                    int transportFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -336,7 +460,13 @@ public interface IBackupAgent extends IInterface {
             }
 
             @Override // android.app.IBackupAgent
-            public void doRestore(ParcelFileDescriptor data, long appVersionCode, ParcelFileDescriptor newState, int token, IBackupManager callbackBinder) throws RemoteException {
+            public void doRestore(
+                    ParcelFileDescriptor data,
+                    long appVersionCode,
+                    ParcelFileDescriptor newState,
+                    int token,
+                    IBackupManager callbackBinder)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -352,7 +482,14 @@ public interface IBackupAgent extends IInterface {
             }
 
             @Override // android.app.IBackupAgent
-            public void doRestoreWithExcludedKeys(ParcelFileDescriptor data, long appVersionCode, ParcelFileDescriptor newState, int token, IBackupManager callbackBinder, List<String> excludedKeys) throws RemoteException {
+            public void doRestoreWithExcludedKeys(
+                    ParcelFileDescriptor data,
+                    long appVersionCode,
+                    ParcelFileDescriptor newState,
+                    int token,
+                    IBackupManager callbackBinder,
+                    List<String> excludedKeys)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -369,7 +506,13 @@ public interface IBackupAgent extends IInterface {
             }
 
             @Override // android.app.IBackupAgent
-            public void doFullBackup(ParcelFileDescriptor data, long quotaBytes, int token, IBackupManager callbackBinder, int transportFlags) throws RemoteException {
+            public void doFullBackup(
+                    ParcelFileDescriptor data,
+                    long quotaBytes,
+                    int token,
+                    IBackupManager callbackBinder,
+                    int transportFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -385,7 +528,14 @@ public interface IBackupAgent extends IInterface {
             }
 
             @Override // android.app.IBackupAgent
-            public void doFullBackupPath(ParcelFileDescriptor data, long quotaBytes, int token, IBackupManager callbackBinder, int transportFlags, String[] path) throws RemoteException {
+            public void doFullBackupPath(
+                    ParcelFileDescriptor data,
+                    long quotaBytes,
+                    int token,
+                    IBackupManager callbackBinder,
+                    int transportFlags,
+                    String[] path)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -414,7 +564,9 @@ public interface IBackupAgent extends IInterface {
             }
 
             @Override // android.app.IBackupAgent
-            public void doMeasureFullBackup(long quotaBytes, int token, IBackupManager callbackBinder, int transportFlags) throws RemoteException {
+            public void doMeasureFullBackup(
+                    long quotaBytes, int token, IBackupManager callbackBinder, int transportFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -429,7 +581,9 @@ public interface IBackupAgent extends IInterface {
             }
 
             @Override // android.app.IBackupAgent
-            public void doQuotaExceeded(long backupDataBytes, long quotaBytes, IBackupCallback callbackBinder) throws RemoteException {
+            public void doQuotaExceeded(
+                    long backupDataBytes, long quotaBytes, IBackupCallback callbackBinder)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -443,7 +597,17 @@ public interface IBackupAgent extends IInterface {
             }
 
             @Override // android.app.IBackupAgent
-            public void doRestoreFile(ParcelFileDescriptor data, long size, int type, String domain, String path, long mode, long mtime, int token, IBackupManager callbackBinder) throws RemoteException {
+            public void doRestoreFile(
+                    ParcelFileDescriptor data,
+                    long size,
+                    int type,
+                    String domain,
+                    String path,
+                    long mode,
+                    long mtime,
+                    int token,
+                    IBackupManager callbackBinder)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -510,7 +674,8 @@ public interface IBackupAgent extends IInterface {
             }
 
             @Override // android.app.IBackupAgent
-            public void doRestoreFinished(int token, IBackupManager callbackBinder) throws RemoteException {
+            public void doRestoreFinished(int token, IBackupManager callbackBinder)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -535,7 +700,9 @@ public interface IBackupAgent extends IInterface {
             }
 
             @Override // android.app.IBackupAgent
-            public void getLoggerResults(AndroidFuture<List<BackupRestoreEventLogger.DataTypeResult>> resultsFuture) throws RemoteException {
+            public void getLoggerResults(
+                    AndroidFuture<List<BackupRestoreEventLogger.DataTypeResult>> resultsFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -547,7 +714,8 @@ public interface IBackupAgent extends IInterface {
             }
 
             @Override // android.app.IBackupAgent
-            public void getOperationType(AndroidFuture<Integer> operationTypeFuture) throws RemoteException {
+            public void getOperationType(AndroidFuture<Integer> operationTypeFuture)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

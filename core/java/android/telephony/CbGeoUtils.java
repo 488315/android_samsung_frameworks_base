@@ -2,10 +2,11 @@ package android.telephony;
 
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.telephony.CbGeoUtils;
 import android.text.TextUtils;
 import android.util.NtpTrustedTime;
+
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -28,8 +29,7 @@ public class CbGeoUtils {
         boolean contains(LatLng latLng);
     }
 
-    private CbGeoUtils() {
-    }
+    private CbGeoUtils() {}
 
     public static class LatLng {
         public final double lat;
@@ -47,12 +47,21 @@ public class CbGeoUtils {
         public double distance(LatLng p) {
             double dlat = Math.sin(Math.toRadians(this.lat - p.lat) * 0.5d);
             double dlng = Math.sin(Math.toRadians(this.lng - p.lng) * 0.5d);
-            double x = (dlat * dlat) + (dlng * dlng * Math.cos(Math.toRadians(this.lat)) * Math.cos(Math.toRadians(p.lat)));
+            double x =
+                    (dlat * dlat)
+                            + (dlng
+                                    * dlng
+                                    * Math.cos(Math.toRadians(this.lat))
+                                    * Math.cos(Math.toRadians(p.lat)));
             return Math.atan2(Math.sqrt(x), Math.sqrt(1.0d - x)) * 2.0d * 6371000.0d;
         }
 
         public String toString() {
-            return NavigationBarInflaterView.KEY_CODE_START + this.lat + "," + this.lng + NavigationBarInflaterView.KEY_CODE_END;
+            return NavigationBarInflaterView.KEY_CODE_START
+                    + this.lat
+                    + ","
+                    + this.lng
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
 
         public boolean equals(Object o) {
@@ -82,14 +91,22 @@ public class CbGeoUtils {
                 }
             }
             this.mOrigin = vertices.get(idx);
-            this.mScaledVertices = (List) vertices.stream().map(new Function() { // from class: android.telephony.CbGeoUtils$Polygon$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    CbGeoUtils.Polygon.Point lambda$new$0;
-                    lambda$new$0 = CbGeoUtils.Polygon.this.lambda$new$0((CbGeoUtils.LatLng) obj);
-                    return lambda$new$0;
-                }
-            }).collect(Collectors.toList());
+            this.mScaledVertices =
+                    (List)
+                            vertices.stream()
+                                    .map(
+                                            new Function() { // from class:
+                                                             // android.telephony.CbGeoUtils$Polygon$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    CbGeoUtils.Polygon.Point lambda$new$0;
+                                                    lambda$new$0 =
+                                                            CbGeoUtils.Polygon.this.lambda$new$0(
+                                                                    (CbGeoUtils.LatLng) obj);
+                                                    return lambda$new$0;
+                                                }
+                                            })
+                                    .collect(Collectors.toList());
         }
 
         public List<LatLng> getVertices() {
@@ -106,7 +123,10 @@ public class CbGeoUtils {
                 Point b = this.mScaledVertices.get((i + 1) % n);
                 int ccw = CbGeoUtils.sign(crossProduct(b.subtract(a), p.subtract(a)));
                 if (ccw == 0) {
-                    if (Math.min(a.x, b.x) <= p.x && p.x <= Math.max(a.x, b.x) && Math.min(a.y, b.y) <= p.y && p.y <= Math.max(a.y, b.y)) {
+                    if (Math.min(a.x, b.x) <= p.x
+                            && p.x <= Math.max(a.x, b.x)
+                            && Math.min(a.y, b.y) <= p.y
+                            && p.y <= Math.max(a.y, b.y)) {
                         return true;
                     }
                 } else if (CbGeoUtils.sign(a.y - p.y) <= 0) {
@@ -125,7 +145,8 @@ public class CbGeoUtils {
         public Point lambda$new$0(LatLng latLng) {
             double x = latLng.lat - this.mOrigin.lat;
             double y = latLng.lng - this.mOrigin.lng;
-            if (CbGeoUtils.sign(this.mOrigin.lng) != 0 && CbGeoUtils.sign(this.mOrigin.lng) != CbGeoUtils.sign(latLng.lng)) {
+            if (CbGeoUtils.sign(this.mOrigin.lng) != 0
+                    && CbGeoUtils.sign(this.mOrigin.lng) != CbGeoUtils.sign(latLng.lng)) {
                 double distCross0thMeridian = Math.abs(this.mOrigin.lng) + Math.abs(latLng.lng);
                 if (CbGeoUtils.sign((2.0d * distCross0thMeridian) - 360.0d) > 0) {
                     y = CbGeoUtils.sign(this.mOrigin.lng) * (360.0d - distCross0thMeridian);
@@ -218,7 +239,8 @@ public class CbGeoUtils {
                 return false;
             }
             Circle c = (Circle) o;
-            return this.mCenter.equals(c.mCenter) && Double.compare(this.mRadiusMeter, c.mRadiusMeter) == 0;
+            return this.mCenter.equals(c.mCenter)
+                    && Double.compare(this.mRadiusMeter, c.mRadiusMeter) == 0;
         }
     }
 
@@ -250,7 +272,10 @@ public class CbGeoUtils {
             }
             switch (c) {
                 case 0:
-                    geometries.add(new Circle(parseLatLngFromString(geoParameters[1]), Double.parseDouble(geoParameters[2])));
+                    geometries.add(
+                            new Circle(
+                                    parseLatLngFromString(geoParameters[1]),
+                                    Double.parseDouble(geoParameters[2])));
                     break;
                 case 1:
                     List<LatLng> vertices = new ArrayList<>(geoParameters.length - 1);
@@ -271,19 +296,30 @@ public class CbGeoUtils {
         if (geometries == null || geometries.isEmpty()) {
             return "";
         }
-        return (String) geometries.stream().map(new Function() { // from class: android.telephony.CbGeoUtils$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String encodeGeometryToString;
-                encodeGeometryToString = CbGeoUtils.encodeGeometryToString((CbGeoUtils.Geometry) obj);
-                return encodeGeometryToString;
-            }
-        }).filter(new Predicate() { // from class: android.telephony.CbGeoUtils$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return CbGeoUtils.lambda$encodeGeometriesToString$1((String) obj);
-            }
-        }).collect(Collectors.joining(NavigationBarInflaterView.GRAVITY_SEPARATOR));
+        return (String)
+                geometries.stream()
+                        .map(
+                                new Function() { // from class:
+                                                 // android.telephony.CbGeoUtils$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        String encodeGeometryToString;
+                                        encodeGeometryToString =
+                                                CbGeoUtils.encodeGeometryToString(
+                                                        (CbGeoUtils.Geometry) obj);
+                                        return encodeGeometryToString;
+                                    }
+                                })
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // android.telephony.CbGeoUtils$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return CbGeoUtils.lambda$encodeGeometriesToString$1(
+                                                (String) obj);
+                                    }
+                                })
+                        .collect(Collectors.joining(NavigationBarInflaterView.GRAVITY_SEPARATOR));
     }
 
     static /* synthetic */ boolean lambda$encodeGeometriesToString$1(String encodedStr) {

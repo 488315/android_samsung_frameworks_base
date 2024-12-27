@@ -12,23 +12,27 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.util.Log;
 import android.util.TimeUtils;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.SystemUpdateManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.accessory.manager.SAccessoryManager;
 import com.samsung.accessory.manager.authentication.AuthenticationResult;
 import com.samsung.accessory.manager.authentication.AuthenticationSession;
 import com.samsung.accessory.manager.authentication.LocalAuthenticator;
 import com.samsung.accessory.manager.authentication.cover.CoverInfo;
 import com.samsung.android.sepunion.SemUnionManagerLocal;
+
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicReference;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class UsbAuthenticator extends LocalAuthenticator implements SAccessoryManager.AuthenticationResultCallback {
+public final class UsbAuthenticator extends LocalAuthenticator
+        implements SAccessoryManager.AuthenticationResultCallback {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final SAccessoryManager.AnonymousClass1 mAuthenticationTask;
     public final Context mContext;
@@ -114,12 +118,16 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
                 case 1:
                     Log.i("SAccessoryManager_UsbAuthenticator", "Initialize usb authenticator");
                     usbAuthenticator.mIsFactoryBinary = FactoryTest.isFactoryBinary();
-                    PowerManager powerManager = (PowerManager) usbAuthenticator.mContext.getSystemService("power");
+                    PowerManager powerManager =
+                            (PowerManager) usbAuthenticator.mContext.getSystemService("power");
                     usbAuthenticator.mPowerManager = powerManager;
-                    PowerManager.WakeLock newWakeLock = powerManager.newWakeLock(1, "SAccessoryManager_UsbAuthenticator");
+                    PowerManager.WakeLock newWakeLock =
+                            powerManager.newWakeLock(1, "SAccessoryManager_UsbAuthenticator");
                     usbAuthenticator.mUsbAuthWakeLock = newWakeLock;
                     newWakeLock.setReferenceCounted(false);
-                    PowerManager.WakeLock newWakeLock2 = usbAuthenticator.mPowerManager.newWakeLock(1, "SAccessoryManager_UsbAuthenticatorDetachTimeoutWakeLock");
+                    PowerManager.WakeLock newWakeLock2 =
+                            usbAuthenticator.mPowerManager.newWakeLock(
+                                    1, "SAccessoryManager_UsbAuthenticatorDetachTimeoutWakeLock");
                     usbAuthenticator.mSafetyDetachTimeoutWakeLock = newWakeLock2;
                     newWakeLock2.setReferenceCounted(false);
                     usbAuthenticator.mSystemReady = true;
@@ -129,7 +137,8 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
                     Log.i("SAccessoryManager_UsbAuthenticator", "handleAuthStart");
                     usbAuthenticator.mUsbAuthWakeLock.acquire();
                     AuthenticationSession authenticationSession = usbAuthenticator.mCurrentSession;
-                    SAccessoryManager.AnonymousClass1 anonymousClass1 = usbAuthenticator.mAuthenticationTask;
+                    SAccessoryManager.AnonymousClass1 anonymousClass1 =
+                            usbAuthenticator.mAuthenticationTask;
                     int sessionState = anonymousClass1.getSessionState(authenticationSession);
                     if (sessionState != 7 && sessionState != 1) {
                         Log.e("SAccessoryManager_UsbAuthenticator", "session is busy");
@@ -138,7 +147,9 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
                     }
                     Message message2 = new Message();
                     if (anonymousClass1.getSessionState(usbAuthenticator.mCurrentSession) == 7) {
-                        Bundle m = SystemUpdateManagerService$$ExternalSyntheticOutline0.m(3, "connectivity_type");
+                        Bundle m =
+                                SystemUpdateManagerService$$ExternalSyntheticOutline0.m(
+                                        3, "connectivity_type");
                         message2.obj = usbAuthenticator;
                         message2.setData(m);
                         anonymousClass1.start(message2);
@@ -171,7 +182,8 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
                                     usbAuthenticator.removeAuthenticationTimeOuts();
                                     usbAuthHandler.removeMessages(2);
                                 } else if (i3 == 13) {
-                                    if (usbAuthenticator.mRetryCounterWhenBusy >= 2 || !usbAuthHandler.hasMessages(5)) {
+                                    if (usbAuthenticator.mRetryCounterWhenBusy >= 2
+                                            || !usbAuthHandler.hasMessages(5)) {
                                         usbAuthenticator.mRetryCounterWhenBusy = 0;
                                         usbAuthenticator.removeAuthenticationTimeOuts();
                                         usbAuthHandler.removeMessages(2);
@@ -180,7 +192,8 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
                                         if (usbAuthenticator.mSystemReady) {
                                             usbAuthHandler.removeMessages(4);
                                             usbAuthenticator.removeAuthenticationTimeOuts();
-                                            usbAuthenticator.mUsbAuthHandler.sendEmptyMessageDelayed(5, 10000L);
+                                            usbAuthenticator.mUsbAuthHandler
+                                                    .sendEmptyMessageDelayed(5, 10000L);
                                             usbAuthHandler.sendEmptyMessageDelayed(2, 5000L);
                                         }
                                     }
@@ -196,7 +209,10 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
                     if (usbAuthenticator.mAuthenticationHistory.size() > 60) {
                         usbAuthenticator.mAuthenticationHistory.removeFirst();
                     }
-                    usbAuthenticator.mAuthenticationHistory.add(String.valueOf(i3) + "/" + TimeUtils.logTimeOfDay(System.currentTimeMillis()));
+                    usbAuthenticator.mAuthenticationHistory.add(
+                            String.valueOf(i3)
+                                    + "/"
+                                    + TimeUtils.logTimeOfDay(System.currentTimeMillis()));
                     if (z2) {
                         usbAuthenticator.setUsbVerified(z3, coverInfo, authenticationResult);
                         usbAuthenticator.removeAuthenticationTimeOuts();
@@ -227,7 +243,8 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
             } else {
                 z = false;
             }
-            if (usbAuthenticator.usbState == 1 || ((message.what == 5 && usbAuthenticator.mFailuresCount > 1) || z)) {
+            if (usbAuthenticator.usbState == 1
+                    || ((message.what == 5 && usbAuthenticator.mFailuresCount > 1) || z)) {
                 usbAuthenticator.setUsbVerified(false, null, null);
                 usbAuthenticator.mResult.set(null);
             }
@@ -238,7 +255,8 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
         Debug.semIsProductDev();
     }
 
-    public UsbAuthenticator(Context context, Looper looper, SAccessoryManager.AnonymousClass1 anonymousClass1) {
+    public UsbAuthenticator(
+            Context context, Looper looper, SAccessoryManager.AnonymousClass1 anonymousClass1) {
         this.mContext = context;
         this.mAuthenticationTask = anonymousClass1;
         this.mUsbAuthHandler = new UsbAuthHandler(looper);
@@ -249,13 +267,18 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
         printWriter.println(" Current UsbAuthenticator state:");
         AuthenticationResult authenticationResult = (AuthenticationResult) this.mResult.get();
         if (authenticationResult != null) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("  auth reason = "), authenticationResult.mReason, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("  auth reason = "),
+                    authenticationResult.mReason,
+                    printWriter);
         }
         printWriter.println("  Historical authentication: ");
         for (int i = 0; i < this.mAuthenticationHistory.size(); i++) {
             printWriter.println("    " + ((String) this.mAuthenticationHistory.get(i)));
         }
-        StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "  mLastAuthenticationTime = 0", "  mLastAttachTime = ");
+        StringBuilder m$1 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                        printWriter, "  mLastAuthenticationTime = 0", "  mLastAttachTime = ");
         m$1.append(TimeUtils.logTimeOfDay(this.mLastAttachTime));
         printWriter.println(m$1.toString());
         printWriter.println("  mLastDetachTime = " + TimeUtils.logTimeOfDay(this.mLastDetachTime));
@@ -263,13 +286,19 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
 
     public final void notifyFriendsStateChanged$1(boolean z, byte[] bArr, byte[] bArr2) {
         if (this.mUnionManagerLocal == null) {
-            this.mUnionManagerLocal = (SemUnionManagerLocal) LocalServices.getService(SemUnionManagerLocal.class);
+            this.mUnionManagerLocal =
+                    (SemUnionManagerLocal) LocalServices.getService(SemUnionManagerLocal.class);
         }
         SemUnionManagerLocal semUnionManagerLocal = this.mUnionManagerLocal;
         if (semUnionManagerLocal != null) {
             semUnionManagerLocal.accessoryStateChanged(z, bArr, bArr2);
             try {
-                Intent component = new Intent().setComponent(new ComponentName("com.sec.enterprise.knox.cloudmdm.smdms", "com.sec.enterprise.knox.cloudmdm.smdms.core.AccessoryStateChangeReceiver"));
+                Intent component =
+                        new Intent()
+                                .setComponent(
+                                        new ComponentName(
+                                                "com.sec.enterprise.knox.cloudmdm.smdms",
+                                                "com.sec.enterprise.knox.cloudmdm.smdms.core.AccessoryStateChangeReceiver"));
                 component.putExtra("accessoryType", this.mCoverType);
                 component.putExtra("accessoryState", z ? 1001 : 1002);
                 component.putExtra("accessoryUid", bArr);
@@ -296,14 +325,16 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
 
     @Override // com.samsung.accessory.manager.SAccessoryManager.AuthenticationResultCallback
     public final void onAuthenticationStarting(final AuthenticationSession authenticationSession) {
-        this.mUsbAuthHandler.post(new Runnable() { // from class: com.samsung.accessory.manager.authentication.usb.UsbAuthenticator.3
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i = UsbAuthenticator.$r8$clinit;
-                Log.i("SAccessoryManager_UsbAuthenticator", "onAuthenticationStarting");
-                UsbAuthenticator.this.mCurrentSession = authenticationSession;
-            }
-        });
+        this.mUsbAuthHandler.post(
+                new Runnable() { // from class:
+                                 // com.samsung.accessory.manager.authentication.usb.UsbAuthenticator.3
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i = UsbAuthenticator.$r8$clinit;
+                        Log.i("SAccessoryManager_UsbAuthenticator", "onAuthenticationStarting");
+                        UsbAuthenticator.this.mCurrentSession = authenticationSession;
+                    }
+                });
     }
 
     @Override // com.samsung.accessory.manager.SAccessoryManager.AuthenticationResultCallback
@@ -342,7 +373,8 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
         this.mUsbAuthHandler.removeMessages(5);
     }
 
-    public final void setUsbVerified(boolean z, CoverInfo coverInfo, AuthenticationResult authenticationResult) {
+    public final void setUsbVerified(
+            boolean z, CoverInfo coverInfo, AuthenticationResult authenticationResult) {
         byte b;
         Log.i("SAccessoryManager_UsbAuthenticator", "setUsbVerified");
         if (coverInfo != null) {
@@ -355,7 +387,12 @@ public final class UsbAuthenticator extends LocalAuthenticator implements SAcces
         }
         byte[] bArr = authenticationResult.mByteArrayManagerURI;
         this.mUriData = bArr;
-        if (coverInfo == null || coverInfo.url == 0 || bArr == null || bArr.length < 2 || (b = bArr[1]) < 17 || b >= 32) {
+        if (coverInfo == null
+                || coverInfo.url == 0
+                || bArr == null
+                || bArr.length < 2
+                || (b = bArr[1]) < 17
+                || b >= 32) {
             return;
         }
         notifyFriendsStateChanged$1(true, bArr, coverInfo.chip_id);

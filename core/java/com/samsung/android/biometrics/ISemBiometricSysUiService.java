@@ -7,12 +7,13 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.biometrics.ISemBiometricSysUiCallback;
+
 import java.io.FileDescriptor;
 
 /* loaded from: classes5.dex */
 public interface ISemBiometricSysUiService extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.biometrics.ISemBiometricSysUiService";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.biometrics.ISemBiometricSysUiService";
 
     void hideBiometricDialog(int i, int i2, int i3) throws RemoteException;
 
@@ -24,38 +25,61 @@ public interface ISemBiometricSysUiService extends IInterface {
 
     void sendCommand(int i, int i2, int i3, Bundle bundle) throws RemoteException;
 
-    void setBiometricTheme(int i, String str, byte[] bArr, FileDescriptor fileDescriptor) throws RemoteException;
+    void setBiometricTheme(int i, String str, byte[] bArr, FileDescriptor fileDescriptor)
+            throws RemoteException;
 
-    void showBiometricDialog(int i, int i2, Bundle bundle, ISemBiometricSysUiCallback iSemBiometricSysUiCallback, boolean z, int i3, String str, long j, PromptInfo promptInfo) throws RemoteException;
+    void showBiometricDialog(
+            int i,
+            int i2,
+            Bundle bundle,
+            ISemBiometricSysUiCallback iSemBiometricSysUiCallback,
+            boolean z,
+            int i3,
+            String str,
+            long j,
+            PromptInfo promptInfo)
+            throws RemoteException;
 
     public static class Default implements ISemBiometricSysUiService {
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-        public void showBiometricDialog(int sessionId, int type, Bundle bundle, ISemBiometricSysUiCallback receiver, boolean requireConfirmation, int userId, String opPackageName, long operationId, PromptInfo promptInfo) throws RemoteException {
-        }
+        public void showBiometricDialog(
+                int sessionId,
+                int type,
+                Bundle bundle,
+                ISemBiometricSysUiCallback receiver,
+                boolean requireConfirmation,
+                int userId,
+                String opPackageName,
+                long operationId,
+                PromptInfo promptInfo)
+                throws RemoteException {}
 
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-        public void onBiometricAuthenticated(int sessionId, int modality, boolean authenticated, String extraInfo) throws RemoteException {
-        }
+        public void onBiometricAuthenticated(
+                int sessionId, int modality, boolean authenticated, String extraInfo)
+                throws RemoteException {}
 
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-        public void onBiometricHelp(int sessionId, int modality, int helpCode, int vendorCode, String message) throws RemoteException {
-        }
+        public void onBiometricHelp(
+                int sessionId, int modality, int helpCode, int vendorCode, String message)
+                throws RemoteException {}
 
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-        public void onBiometricError(int sessionId, int modality, int errCode, int vendorCode, String message) throws RemoteException {
-        }
+        public void onBiometricError(
+                int sessionId, int modality, int errCode, int vendorCode, String message)
+                throws RemoteException {}
 
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-        public void hideBiometricDialog(int sessionId, int reason, int flag) throws RemoteException {
-        }
+        public void hideBiometricDialog(int sessionId, int reason, int flag)
+                throws RemoteException {}
 
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-        public void sendCommand(int sessionId, int cmd, int code, Bundle bundle) throws RemoteException {
-        }
+        public void sendCommand(int sessionId, int cmd, int code, Bundle bundle)
+                throws RemoteException {}
 
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-        public void setBiometricTheme(int type, String extra, byte[] data, FileDescriptor fd) throws RemoteException {
-        }
+        public void setBiometricTheme(int type, String extra, byte[] data, FileDescriptor fd)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -63,7 +87,7 @@ public interface ISemBiometricSysUiService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemBiometricSysUiService {
+    public abstract static class Stub extends Binder implements ISemBiometricSysUiService {
         static final int TRANSACTION_hideBiometricDialog = 5;
         static final int TRANSACTION_onBiometricAuthenticated = 2;
         static final int TRANSACTION_onBiometricError = 4;
@@ -119,7 +143,8 @@ public interface ISemBiometricSysUiService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemBiometricSysUiService.DESCRIPTOR);
             }
@@ -132,14 +157,16 @@ public interface ISemBiometricSysUiService extends IInterface {
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
                     Bundle _arg2 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    ISemBiometricSysUiCallback _arg3 = ISemBiometricSysUiCallback.Stub.asInterface(data.readStrongBinder());
+                    ISemBiometricSysUiCallback _arg3 =
+                            ISemBiometricSysUiCallback.Stub.asInterface(data.readStrongBinder());
                     boolean _arg4 = data.readBoolean();
                     int _arg5 = data.readInt();
                     String _arg6 = data.readString();
                     long _arg7 = data.readLong();
                     PromptInfo _arg8 = (PromptInfo) data.readTypedObject(PromptInfo.CREATOR);
                     data.enforceNoDataAvail();
-                    showBiometricDialog(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
+                    showBiometricDialog(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
@@ -212,7 +239,17 @@ public interface ISemBiometricSysUiService extends IInterface {
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-            public void showBiometricDialog(int sessionId, int type, Bundle bundle, ISemBiometricSysUiCallback receiver, boolean requireConfirmation, int userId, String opPackageName, long operationId, PromptInfo promptInfo) throws RemoteException {
+            public void showBiometricDialog(
+                    int sessionId,
+                    int type,
+                    Bundle bundle,
+                    ISemBiometricSysUiCallback receiver,
+                    boolean requireConfirmation,
+                    int userId,
+                    String opPackageName,
+                    long operationId,
+                    PromptInfo promptInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
@@ -232,7 +269,9 @@ public interface ISemBiometricSysUiService extends IInterface {
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-            public void onBiometricAuthenticated(int sessionId, int modality, boolean authenticated, String extraInfo) throws RemoteException {
+            public void onBiometricAuthenticated(
+                    int sessionId, int modality, boolean authenticated, String extraInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
@@ -247,7 +286,9 @@ public interface ISemBiometricSysUiService extends IInterface {
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-            public void onBiometricHelp(int sessionId, int modality, int helpCode, int vendorCode, String message) throws RemoteException {
+            public void onBiometricHelp(
+                    int sessionId, int modality, int helpCode, int vendorCode, String message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
@@ -263,7 +304,9 @@ public interface ISemBiometricSysUiService extends IInterface {
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-            public void onBiometricError(int sessionId, int modality, int errCode, int vendorCode, String message) throws RemoteException {
+            public void onBiometricError(
+                    int sessionId, int modality, int errCode, int vendorCode, String message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
@@ -279,7 +322,8 @@ public interface ISemBiometricSysUiService extends IInterface {
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-            public void hideBiometricDialog(int sessionId, int reason, int flag) throws RemoteException {
+            public void hideBiometricDialog(int sessionId, int reason, int flag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
@@ -293,7 +337,8 @@ public interface ISemBiometricSysUiService extends IInterface {
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-            public void sendCommand(int sessionId, int cmd, int code, Bundle bundle) throws RemoteException {
+            public void sendCommand(int sessionId, int cmd, int code, Bundle bundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);
@@ -308,7 +353,8 @@ public interface ISemBiometricSysUiService extends IInterface {
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiService
-            public void setBiometricTheme(int type, String extra, byte[] data, FileDescriptor fd) throws RemoteException {
+            public void setBiometricTheme(int type, String extra, byte[] data, FileDescriptor fd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemBiometricSysUiService.DESCRIPTOR);

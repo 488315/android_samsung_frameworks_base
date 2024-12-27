@@ -5,9 +5,11 @@ import android.text.TextUtils;
 import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +28,8 @@ public final class SystemAppUpdateTracker {
     public final Object mFileLock = new Object();
     public final Set mUpdatedApps = new HashSet();
 
-    public SystemAppUpdateTracker(Context context, LocaleManagerService localeManagerService, AtomicFile atomicFile) {
+    public SystemAppUpdateTracker(
+            Context context, LocaleManagerService localeManagerService, AtomicFile atomicFile) {
         this.mContext = context;
         this.mLocaleManagerService = localeManagerService;
         this.mUpdatedAppsFile = atomicFile;

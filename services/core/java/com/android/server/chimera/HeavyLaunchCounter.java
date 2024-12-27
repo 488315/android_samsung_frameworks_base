@@ -2,8 +2,10 @@ package com.android.server.chimera;
 
 import android.os.SystemClock;
 import android.util.Pair;
+
 import com.android.internal.util.RingBuffer;
 import com.android.server.clipboard.ClipboardService;
+
 import java.util.HashSet;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -31,14 +33,16 @@ public class HeavyLaunchCounter {
     public void addLaunch(int i, long j) {
         this.mBuffer.append(new Pair(Integer.valueOf(i), Long.valueOf(j)));
         this.mLaunchCounter++;
-        if (SystemClock.uptimeMillis() - this.mStartTime <= DELAY || this.mLaunchCounter % 10 != 0) {
+        if (SystemClock.uptimeMillis() - this.mStartTime <= DELAY
+                || this.mLaunchCounter % 10 != 0) {
             return;
         }
         Pair[] pairArr = (Pair[]) this.mBuffer.toArray();
         int length = pairArr.length;
         int i2 = this.mBufferSize;
         if (length == i2) {
-            if (((Long) pairArr[i2 - 1].second).longValue() - ((Long) pairArr[0].second).longValue() >= ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS) {
+            if (((Long) pairArr[i2 - 1].second).longValue() - ((Long) pairArr[0].second).longValue()
+                    >= ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS) {
                 this.mIsHeavyLaunch = false;
                 return;
             }

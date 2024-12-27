@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;
 import android.view.ViewTreeObserver;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /* loaded from: classes.dex */
@@ -95,7 +96,9 @@ public final class IdsController {
 
     private SharedPreferences getIdsSharedPreference() {
         try {
-            Log.i(TAG, "Getting Shared Preference for " + this.mContext + " uid = " + Process.myUid());
+            Log.i(
+                    TAG,
+                    "Getting Shared Preference for " + this.mContext + " uid = " + Process.myUid());
             if (Process.myUid() == 1000) {
                 Log.e(TAG, "System UID: no SharedPreferences here, no IDS");
                 return null;
@@ -108,12 +111,15 @@ public final class IdsController {
     }
 
     private void registerLayoutListener(View v, Choreographer mChoreographer) {
-        v.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() { // from class: android.app.IdsController.1
-            @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-            public void onGlobalLayout() {
-                IdsController.this.uiUpdated(2);
-            }
-        });
+        v.getViewTreeObserver()
+                .addOnGlobalLayoutListener(
+                        new ViewTreeObserver.OnGlobalLayoutListener() { // from class:
+                            // android.app.IdsController.1
+                            @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
+                            public void onGlobalLayout() {
+                                IdsController.this.uiUpdated(2);
+                            }
+                        });
     }
 
     private boolean getUiUpdated() {

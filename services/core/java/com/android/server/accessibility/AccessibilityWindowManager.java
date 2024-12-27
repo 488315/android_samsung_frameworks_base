@@ -10,10 +10,10 @@ import android.view.WindowInfo;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityWindowInfo;
 import android.view.accessibility.IAccessibilityInteractionConnection;
+
 import com.android.internal.util.function.pooled.PooledLambda;
-import com.android.server.accessibility.AccessibilityManagerService;
-import com.android.server.accessibility.AccessibilitySecurityPolicy;
 import com.android.server.wm.WindowManagerInternal;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -52,11 +52,11 @@ public final class AccessibilityWindowManager {
     public final SparseArray mWindowAttributes = new SparseArray();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface AccessibilityEventSender {
-    }
+    public interface AccessibilityEventSender {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class DisplayWindowsObserver implements WindowManagerInternal.WindowsForAccessibilityCallback {
+    public final class DisplayWindowsObserver
+            implements WindowManagerInternal.WindowsForAccessibilityCallback {
         public final int mDisplayId;
         public boolean mHasWatchOutsideTouchWindow;
         public boolean mIsProxy;
@@ -78,24 +78,29 @@ public final class AccessibilityWindowManager {
             ArrayList arrayList = (ArrayList) list;
             int size2 = arrayList.size();
             for (int i = 0; i < size2; i++) {
-                ((ArrayList) this.mCachedWindowInfos).add(WindowInfo.obtain((WindowInfo) arrayList.get(i)));
+                ((ArrayList) this.mCachedWindowInfos)
+                        .add(WindowInfo.obtain((WindowInfo) arrayList.get(i)));
             }
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:42:0x00bb, code lost:
-        
-            if (r10 == 2030) goto L72;
-         */
+
+           if (r10 == 2030) goto L72;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final java.util.List createWindowInfoListLocked(android.graphics.Point r14, java.util.List r15) {
+        public final java.util.List createWindowInfoListLocked(
+                android.graphics.Point r14, java.util.List r15) {
             /*
                 Method dump skipped, instructions count: 364
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.AccessibilityWindowManager.DisplayWindowsObserver.createWindowInfoListLocked(android.graphics.Point, java.util.List):java.util.List");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.accessibility.AccessibilityWindowManager.DisplayWindowsObserver.createWindowInfoListLocked(android.graphics.Point,"
+                        + " java.util.List):java.util.List");
         }
 
         public final List getWatchOutsideTouchWindowIdLocked(int i) {
@@ -106,7 +111,9 @@ public final class AccessibilityWindowManager {
             ArrayList arrayList = new ArrayList();
             for (int i2 = 0; i2 < this.mWindowInfoById.size(); i2++) {
                 WindowInfo windowInfo2 = (WindowInfo) this.mWindowInfoById.valueAt(i2);
-                if (windowInfo2 != null && windowInfo2.layer < windowInfo.layer && windowInfo2.hasFlagWatchOutsideTouch) {
+                if (windowInfo2 != null
+                        && windowInfo2.layer < windowInfo.layer
+                        && windowInfo2.hasFlagWatchOutsideTouch) {
                     arrayList.add(Integer.valueOf(this.mWindowInfoById.keyAt(i2)));
                 }
             }
@@ -121,7 +128,8 @@ public final class AccessibilityWindowManager {
             int size = list.size();
             boolean z = false;
             for (int i2 = 0; i2 < size; i2++) {
-                AccessibilityWindowInfo accessibilityWindowInfo = (AccessibilityWindowInfo) this.mWindows.get(i2);
+                AccessibilityWindowInfo accessibilityWindowInfo =
+                        (AccessibilityWindowInfo) this.mWindows.get(i2);
                 if (accessibilityWindowInfo.getId() == i) {
                     z = true;
                     accessibilityWindowInfo.setAccessibilityFocused(true);
@@ -145,7 +153,10 @@ public final class AccessibilityWindowManager {
                 Method dump skipped, instructions count: 233
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.AccessibilityWindowManager.DisplayWindowsObserver.shouldUpdateWindowsLocked(java.util.List, boolean):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.accessibility.AccessibilityWindowManager.DisplayWindowsObserver.shouldUpdateWindowsLocked(java.util.List,"
+                        + " boolean):boolean");
         }
 
         public final void startTrackingWindowsLocked() {
@@ -157,24 +168,35 @@ public final class AccessibilityWindowManager {
             boolean traceWMEnabled = accessibilityWindowManager.traceWMEnabled();
             int i = this.mDisplayId;
             if (traceWMEnabled) {
-                accessibilityWindowManager.logTraceWM("setWindowsForAccessibilityCallback", "displayId=" + i + ";callback=" + this);
+                accessibilityWindowManager.logTraceWM(
+                        "setWindowsForAccessibilityCallback",
+                        "displayId=" + i + ";callback=" + this);
             }
-            accessibilityWindowManager.mWindowManagerInternal.setWindowsForAccessibilityCallback(i, this);
+            accessibilityWindowManager.mWindowManagerInternal.setWindowsForAccessibilityCallback(
+                    i, this);
         }
 
         public final void stopTrackingWindowsLocked() {
             if (this.mTrackingWindows) {
-                AccessibilityWindowManager accessibilityWindowManager = AccessibilityWindowManager.this;
+                AccessibilityWindowManager accessibilityWindowManager =
+                        AccessibilityWindowManager.this;
                 boolean traceWMEnabled = accessibilityWindowManager.traceWMEnabled();
                 int i = this.mDisplayId;
                 if (traceWMEnabled) {
-                    accessibilityWindowManager.logTraceWM("setWindowsForAccessibilityCallback", "displayId=" + i + ";callback=null");
+                    accessibilityWindowManager.logTraceWM(
+                            "setWindowsForAccessibilityCallback",
+                            "displayId=" + i + ";callback=null");
                 }
-                accessibilityWindowManager.mWindowManagerInternal.setWindowsForAccessibilityCallback(i, null);
+                accessibilityWindowManager.mWindowManagerInternal
+                        .setWindowsForAccessibilityCallback(i, null);
                 this.mTrackingWindows = false;
                 List emptyList = Collections.emptyList();
                 int i2 = accessibilityWindowManager.mActiveWindowId;
-                updateWindowsLocked(((AccessibilityManagerService) accessibilityWindowManager.mAccessibilityUserManager).mCurrentUserId, emptyList);
+                updateWindowsLocked(
+                        ((AccessibilityManagerService)
+                                        accessibilityWindowManager.mAccessibilityUserManager)
+                                .mCurrentUserId,
+                        emptyList);
                 accessibilityWindowManager.mActiveWindowId = i2;
                 this.mWindows = null;
             }
@@ -200,7 +222,10 @@ public final class AccessibilityWindowManager {
                 Method dump skipped, instructions count: 782
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.AccessibilityWindowManager.DisplayWindowsObserver.updateWindowsLocked(int, java.util.List):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.accessibility.AccessibilityWindowManager.DisplayWindowsObserver.updateWindowsLocked(int,"
+                        + " java.util.List):void");
         }
     }
 
@@ -212,7 +237,12 @@ public final class AccessibilityWindowManager {
         public final int mUserId;
         public final int mWindowId;
 
-        public RemoteAccessibilityConnection(int i, IAccessibilityInteractionConnection iAccessibilityInteractionConnection, String str, int i2, int i3) {
+        public RemoteAccessibilityConnection(
+                int i,
+                IAccessibilityInteractionConnection iAccessibilityInteractionConnection,
+                String str,
+                int i2,
+                int i3) {
             this.mWindowId = i;
             this.mPackageName = str;
             this.mUid = i2;
@@ -224,13 +254,16 @@ public final class AccessibilityWindowManager {
         public final void binderDied() {
             this.mConnection.asBinder().unlinkToDeath(this, 0);
             synchronized (AccessibilityWindowManager.this.mLock) {
-                AccessibilityWindowManager.m127$$Nest$mremoveAccessibilityInteractionConnectionLocked(AccessibilityWindowManager.this, this.mWindowId, this.mUserId);
+                AccessibilityWindowManager
+                        .m127$$Nest$mremoveAccessibilityInteractionConnectionLocked(
+                                AccessibilityWindowManager.this, this.mWindowId, this.mUserId);
             }
         }
     }
 
     /* renamed from: -$$Nest$mremoveAccessibilityInteractionConnectionLocked, reason: not valid java name */
-    public static void m127$$Nest$mremoveAccessibilityInteractionConnectionLocked(AccessibilityWindowManager accessibilityWindowManager, int i, int i2) {
+    public static void m127$$Nest$mremoveAccessibilityInteractionConnectionLocked(
+            AccessibilityWindowManager accessibilityWindowManager, int i, int i2) {
         IBinder iBinder;
         IBinder iBinder2;
         if (i2 == -1) {
@@ -239,7 +272,9 @@ public final class AccessibilityWindowManager {
             accessibilityWindowManager.mGlobalInteractionConnections.remove(i);
         } else {
             if (accessibilityWindowManager.mWindowTokens.indexOfKey(i2) >= 0) {
-                iBinder = (IBinder) accessibilityWindowManager.getWindowTokensForUserLocked(i2).get(i);
+                iBinder =
+                        (IBinder)
+                                accessibilityWindowManager.getWindowTokensForUserLocked(i2).get(i);
                 accessibilityWindowManager.getWindowTokensForUserLocked(i2).remove(i);
             } else {
                 iBinder = null;
@@ -252,7 +287,14 @@ public final class AccessibilityWindowManager {
         accessibilityWindowManager.onAccessibilityInteractionConnectionRemovedLocked(i, iBinder2);
     }
 
-    public AccessibilityWindowManager(Object obj, AccessibilityManagerService.MainHandler mainHandler, WindowManagerInternal windowManagerInternal, AccessibilityEventSender accessibilityEventSender, AccessibilitySecurityPolicy accessibilitySecurityPolicy, AccessibilitySecurityPolicy.AccessibilityUserManager accessibilityUserManager, AccessibilityTraceManager accessibilityTraceManager) {
+    public AccessibilityWindowManager(
+            Object obj,
+            AccessibilityManagerService.MainHandler mainHandler,
+            WindowManagerInternal windowManagerInternal,
+            AccessibilityEventSender accessibilityEventSender,
+            AccessibilitySecurityPolicy accessibilitySecurityPolicy,
+            AccessibilitySecurityPolicy.AccessibilityUserManager accessibilityUserManager,
+            AccessibilityTraceManager accessibilityTraceManager) {
         this.mLock = obj;
         this.mHandler = mainHandler;
         this.mWindowManagerInternal = windowManagerInternal;
@@ -262,14 +304,19 @@ public final class AccessibilityWindowManager {
         this.mTraceManager = accessibilityTraceManager;
     }
 
-    public static int removeAccessibilityInteractionConnectionInternalLocked(IBinder iBinder, SparseArray sparseArray, SparseArray sparseArray2) {
+    public static int removeAccessibilityInteractionConnectionInternalLocked(
+            IBinder iBinder, SparseArray sparseArray, SparseArray sparseArray2) {
         int size = sparseArray.size();
         for (int i = 0; i < size; i++) {
             if (sparseArray.valueAt(i) == iBinder) {
                 int keyAt = sparseArray.keyAt(i);
                 sparseArray.removeAt(i);
-                RemoteAccessibilityConnection remoteAccessibilityConnection = (RemoteAccessibilityConnection) sparseArray2.get(keyAt);
-                remoteAccessibilityConnection.mConnection.asBinder().unlinkToDeath(remoteAccessibilityConnection, 0);
+                RemoteAccessibilityConnection remoteAccessibilityConnection =
+                        (RemoteAccessibilityConnection) sparseArray2.get(keyAt);
+                remoteAccessibilityConnection
+                        .mConnection
+                        .asBinder()
+                        .unlinkToDeath(remoteAccessibilityConnection, 0);
                 sparseArray2.remove(keyAt);
                 return keyAt;
             }
@@ -278,12 +325,20 @@ public final class AccessibilityWindowManager {
     }
 
     public final void clearAccessibilityFocusLocked(int i) {
-        this.mHandler.sendMessage(PooledLambda.obtainMessage(new AccessibilityWindowManager$$ExternalSyntheticLambda0(), this, Integer.valueOf(((AccessibilityManagerService) this.mAccessibilityUserManager).mCurrentUserId), Integer.valueOf(i)));
+        this.mHandler.sendMessage(
+                PooledLambda.obtainMessage(
+                        new AccessibilityWindowManager$$ExternalSyntheticLambda0(),
+                        this,
+                        Integer.valueOf(
+                                ((AccessibilityManagerService) this.mAccessibilityUserManager)
+                                        .mCurrentUserId),
+                        Integer.valueOf(i)));
     }
 
     public final boolean computePartialInteractiveRegionForWindowLocked(int i, Region region) {
         int resolveParentWindowIdLocked = resolveParentWindowIdLocked(i);
-        DisplayWindowsObserver displayWindowObserverByWindowIdLocked = getDisplayWindowObserverByWindowIdLocked(resolveParentWindowIdLocked);
+        DisplayWindowsObserver displayWindowObserverByWindowIdLocked =
+                getDisplayWindowObserverByWindowIdLocked(resolveParentWindowIdLocked);
         boolean z = false;
         if (displayWindowObserverByWindowIdLocked != null) {
             boolean z2 = resolveParentWindowIdLocked != i;
@@ -293,21 +348,22 @@ public final class AccessibilityWindowManager {
                 Region region2 = new Region();
                 Region region3 = null;
                 for (int i2 = size - 1; i2 >= 0; i2--) {
-                    AccessibilityWindowInfo accessibilityWindowInfo = (AccessibilityWindowInfo) ((ArrayList) displayWindowObserverByWindowIdLocked.mWindows).get(i2);
+                    AccessibilityWindowInfo accessibilityWindowInfo =
+                            (AccessibilityWindowInfo)
+                                    ((ArrayList) displayWindowObserverByWindowIdLocked.mWindows)
+                                            .get(i2);
                     if (region3 == null) {
                         if (accessibilityWindowInfo.getId() == resolveParentWindowIdLocked) {
                             accessibilityWindowInfo.getRegionInScreen(region2);
                             region.set(region2);
                             region3 = region;
-                            if (!z2) {
-                            }
+                            if (!z2) {}
                             z = true;
                         }
                     } else {
                         if (accessibilityWindowInfo.getType() != 4) {
                             accessibilityWindowInfo.getRegionInScreen(region2);
-                            if (!region3.op(region2, Region.Op.DIFFERENCE)) {
-                            }
+                            if (!region3.op(region2, Region.Op.DIFFERENCE)) {}
                             z = true;
                         }
                     }
@@ -338,14 +394,20 @@ public final class AccessibilityWindowManager {
             Method dump skipped, instructions count: 446
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.AccessibilityWindowManager.dump(java.io.PrintWriter, java.lang.String[]):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.AccessibilityWindowManager.dump(java.io.PrintWriter,"
+                    + " java.lang.String[]):void");
     }
 
     public final AccessibilityWindowInfo findA11yWindowInfoByIdLocked(int i) {
         int resolveParentWindowIdLocked = resolveParentWindowIdLocked(i);
-        DisplayWindowsObserver displayWindowObserverByWindowIdLocked = getDisplayWindowObserverByWindowIdLocked(resolveParentWindowIdLocked);
+        DisplayWindowsObserver displayWindowObserverByWindowIdLocked =
+                getDisplayWindowObserverByWindowIdLocked(resolveParentWindowIdLocked);
         if (displayWindowObserverByWindowIdLocked != null) {
-            return (AccessibilityWindowInfo) displayWindowObserverByWindowIdLocked.mA11yWindowInfoById.get(resolveParentWindowIdLocked);
+            return (AccessibilityWindowInfo)
+                    displayWindowObserverByWindowIdLocked.mA11yWindowInfoById.get(
+                            resolveParentWindowIdLocked);
         }
         return null;
     }
@@ -355,7 +417,8 @@ public final class AccessibilityWindowManager {
         if (traceWMEnabled()) {
             logTraceWM("getFocusedWindowToken", "");
         }
-        IBinder focusedWindowTokenFromWindowStates = this.mWindowManagerInternal.getFocusedWindowTokenFromWindowStates();
+        IBinder focusedWindowTokenFromWindowStates =
+                this.mWindowManagerInternal.getFocusedWindowTokenFromWindowStates();
         synchronized (this.mLock) {
             findWindowIdLocked = findWindowIdLocked(i, focusedWindowTokenFromWindowStates);
         }
@@ -368,7 +431,8 @@ public final class AccessibilityWindowManager {
         if (indexOfValue2 >= 0) {
             return this.mGlobalWindowTokens.keyAt(indexOfValue2);
         }
-        if (this.mWindowTokens.indexOfKey(i) < 0 || (indexOfValue = getWindowTokensForUserLocked(i).indexOfValue(iBinder)) < 0) {
+        if (this.mWindowTokens.indexOfKey(i) < 0
+                || (indexOfValue = getWindowTokensForUserLocked(i).indexOfValue(iBinder)) < 0) {
             return -1;
         }
         return getWindowTokensForUserLocked(i).keyAt(indexOfValue);
@@ -382,11 +446,16 @@ public final class AccessibilityWindowManager {
     }
 
     public final RemoteAccessibilityConnection getConnectionLocked(int i, int i2) {
-        RemoteAccessibilityConnection remoteAccessibilityConnection = (RemoteAccessibilityConnection) this.mGlobalInteractionConnections.get(i2);
-        if (remoteAccessibilityConnection == null && this.mInteractionConnections.indexOfKey(i) >= 0) {
-            remoteAccessibilityConnection = (RemoteAccessibilityConnection) getInteractionConnectionsForUserLocked(i).get(i2);
+        RemoteAccessibilityConnection remoteAccessibilityConnection =
+                (RemoteAccessibilityConnection) this.mGlobalInteractionConnections.get(i2);
+        if (remoteAccessibilityConnection == null
+                && this.mInteractionConnections.indexOfKey(i) >= 0) {
+            remoteAccessibilityConnection =
+                    (RemoteAccessibilityConnection)
+                            getInteractionConnectionsForUserLocked(i).get(i2);
         }
-        if (remoteAccessibilityConnection == null || remoteAccessibilityConnection.mConnection == null) {
+        if (remoteAccessibilityConnection == null
+                || remoteAccessibilityConnection.mConnection == null) {
             return null;
         }
         return remoteAccessibilityConnection;
@@ -410,15 +479,19 @@ public final class AccessibilityWindowManager {
         if (traceWMEnabled()) {
             logTraceWM("getDisplayIdForWindow", "token=" + windowTokenForUserAndWindowIdLocked);
         }
-        return this.mWindowManagerInternal.getDisplayIdForWindow(windowTokenForUserAndWindowIdLocked);
+        return this.mWindowManagerInternal.getDisplayIdForWindow(
+                windowTokenForUserAndWindowIdLocked);
     }
 
     public final DisplayWindowsObserver getDisplayWindowObserverByWindowIdLocked(int i) {
         int size = this.mDisplayWindowsObservers.size();
         for (int i2 = 0; i2 < size; i2++) {
-            DisplayWindowsObserver displayWindowsObserver = (DisplayWindowsObserver) this.mDisplayWindowsObservers.valueAt(i2);
-            if (displayWindowsObserver != null && ((WindowInfo) displayWindowsObserver.mWindowInfoById.get(i)) != null) {
-                return (DisplayWindowsObserver) this.mDisplayWindowsObservers.get(displayWindowsObserver.mDisplayId);
+            DisplayWindowsObserver displayWindowsObserver =
+                    (DisplayWindowsObserver) this.mDisplayWindowsObservers.valueAt(i2);
+            if (displayWindowsObserver != null
+                    && ((WindowInfo) displayWindowsObserver.mWindowInfoById.get(i)) != null) {
+                return (DisplayWindowsObserver)
+                        this.mDisplayWindowsObservers.get(displayWindowsObserver.mDisplayId);
             }
         }
         return null;
@@ -436,7 +509,9 @@ public final class AccessibilityWindowManager {
 
     public final IBinder getWindowTokenForUserAndWindowIdLocked(int i, int i2) {
         IBinder iBinder = (IBinder) this.mGlobalWindowTokens.get(i2);
-        return (iBinder != null || this.mWindowTokens.indexOfKey(i) < 0) ? iBinder : (IBinder) getWindowTokensForUserLocked(i).get(i2);
+        return (iBinder != null || this.mWindowTokens.indexOfKey(i) < 0)
+                ? iBinder
+                : (IBinder) getWindowTokensForUserLocked(i).get(i2);
     }
 
     public final SparseArray getWindowTokensForUserLocked(int i) {
@@ -450,7 +525,8 @@ public final class AccessibilityWindowManager {
     }
 
     public final boolean isTrackingWindowsLocked(int i) {
-        DisplayWindowsObserver displayWindowsObserver = (DisplayWindowsObserver) this.mDisplayWindowsObservers.get(i);
+        DisplayWindowsObserver displayWindowsObserver =
+                (DisplayWindowsObserver) this.mDisplayWindowsObservers.get(i);
         if (displayWindowsObserver != null) {
             return displayWindowsObserver.mTrackingWindows;
         }
@@ -466,11 +542,18 @@ public final class AccessibilityWindowManager {
         ArrayList arrayList = new ArrayList();
         synchronized (this.mLock) {
             try {
-                DisplayWindowsObserver displayWindowObserverByWindowIdLocked = getDisplayWindowObserverByWindowIdLocked(i2);
+                DisplayWindowsObserver displayWindowObserverByWindowIdLocked =
+                        getDisplayWindowObserverByWindowIdLocked(i2);
                 if (displayWindowObserverByWindowIdLocked != null) {
-                    List watchOutsideTouchWindowIdLocked = displayWindowObserverByWindowIdLocked.getWatchOutsideTouchWindowIdLocked(i2);
+                    List watchOutsideTouchWindowIdLocked =
+                            displayWindowObserverByWindowIdLocked
+                                    .getWatchOutsideTouchWindowIdLocked(i2);
                     for (int i4 = 0; i4 < watchOutsideTouchWindowIdLocked.size(); i4++) {
-                        arrayList.add(getConnectionLocked(i, ((Integer) watchOutsideTouchWindowIdLocked.get(i4)).intValue()));
+                        arrayList.add(
+                                getConnectionLocked(
+                                        i,
+                                        ((Integer) watchOutsideTouchWindowIdLocked.get(i4))
+                                                .intValue()));
                     }
                 }
             } catch (Throwable th) {
@@ -478,10 +561,12 @@ public final class AccessibilityWindowManager {
             }
         }
         for (i3 = 0; i3 < arrayList.size(); i3++) {
-            RemoteAccessibilityConnection remoteAccessibilityConnection = (RemoteAccessibilityConnection) arrayList.get(i3);
+            RemoteAccessibilityConnection remoteAccessibilityConnection =
+                    (RemoteAccessibilityConnection) arrayList.get(i3);
             if (remoteAccessibilityConnection != null) {
                 if (this.mTraceManager.isA11yTracingEnabledForTypes(16L)) {
-                    this.mTraceManager.logTrace("AccessibilityWindowManager.notifyOutsideTouch", 16L);
+                    this.mTraceManager.logTrace(
+                            "AccessibilityWindowManager.notifyOutsideTouch", 16L);
                 }
                 try {
                     remoteAccessibilityConnection.mConnection.notifyOutsideTouch();
@@ -497,7 +582,11 @@ public final class AccessibilityWindowManager {
         }
         if (iBinder != null) {
             if (traceWMEnabled()) {
-                logTraceWM("setAccessibilityIdToSurfaceMetadata", "token=" + iBinder + ";windowId=AccessibilityWindowInfo.UNDEFINED_WINDOW_ID");
+                logTraceWM(
+                        "setAccessibilityIdToSurfaceMetadata",
+                        "token="
+                                + iBinder
+                                + ";windowId=AccessibilityWindowInfo.UNDEFINED_WINDOW_ID");
             }
             this.mWindowManagerInternal.setAccessibilityIdToSurfaceMetadata(iBinder, -1);
         }
@@ -513,7 +602,8 @@ public final class AccessibilityWindowManager {
         int size = this.mDisplayWindowsObservers.size();
         boolean z = false;
         for (int i = 0; i < size; i++) {
-            DisplayWindowsObserver displayWindowsObserver = (DisplayWindowsObserver) this.mDisplayWindowsObservers.valueAt(i);
+            DisplayWindowsObserver displayWindowsObserver =
+                    (DisplayWindowsObserver) this.mDisplayWindowsObservers.valueAt(i);
             if (displayWindowsObserver != null && displayWindowsObserver.mIsProxy) {
                 z = true;
             }
@@ -549,8 +639,10 @@ public final class AccessibilityWindowManager {
             this.mAccessibilityFocusedWindowId = i;
             int size = this.mDisplayWindowsObservers.size();
             for (int i4 = 0; i4 < size; i4++) {
-                DisplayWindowsObserver displayWindowsObserver = (DisplayWindowsObserver) this.mDisplayWindowsObservers.valueAt(i4);
-                if (displayWindowsObserver != null && displayWindowsObserver.setAccessibilityFocusedWindowLocked(i)) {
+                DisplayWindowsObserver displayWindowsObserver =
+                        (DisplayWindowsObserver) this.mDisplayWindowsObservers.valueAt(i4);
+                if (displayWindowsObserver != null
+                        && displayWindowsObserver.setAccessibilityFocusedWindowLocked(i)) {
                     int i5 = displayWindowsObserver.mDisplayId;
                     this.mAccessibilityFocusedDisplayId = i5;
                     arrayList.add(AccessibilityEvent.obtainWindowsChangedEvent(i5, i, 128));
@@ -558,7 +650,8 @@ public final class AccessibilityWindowManager {
             }
             Iterator it = arrayList.iterator();
             while (it.hasNext()) {
-                ((AccessibilityManagerService) this.mAccessibilityEventSender).sendAccessibilityEventForCurrentUserLocked((AccessibilityEvent) it.next());
+                ((AccessibilityManagerService) this.mAccessibilityEventSender)
+                        .sendAccessibilityEventForCurrentUserLocked((AccessibilityEvent) it.next());
             }
         }
     }
@@ -569,20 +662,30 @@ public final class AccessibilityWindowManager {
         if (this.mActiveWindowId != i) {
             ArrayList arrayList = new ArrayList(2);
             int i2 = this.mActiveWindowId;
-            if (i2 != -1 && (displayWindowObserverByWindowIdLocked = getDisplayWindowObserverByWindowIdLocked(i2)) != null) {
-                arrayList.add(AccessibilityEvent.obtainWindowsChangedEvent(displayWindowObserverByWindowIdLocked.mDisplayId, this.mActiveWindowId, 32));
+            if (i2 != -1
+                    && (displayWindowObserverByWindowIdLocked =
+                                    getDisplayWindowObserverByWindowIdLocked(i2))
+                            != null) {
+                arrayList.add(
+                        AccessibilityEvent.obtainWindowsChangedEvent(
+                                displayWindowObserverByWindowIdLocked.mDisplayId,
+                                this.mActiveWindowId,
+                                32));
             }
             this.mActiveWindowId = i;
             int size = this.mDisplayWindowsObservers.size();
             for (int i3 = 0; i3 < size; i3++) {
-                DisplayWindowsObserver displayWindowsObserver = (DisplayWindowsObserver) this.mDisplayWindowsObservers.valueAt(i3);
+                DisplayWindowsObserver displayWindowsObserver =
+                        (DisplayWindowsObserver) this.mDisplayWindowsObservers.valueAt(i3);
                 if (displayWindowsObserver != null) {
                     List list = displayWindowsObserver.mWindows;
                     if (list != null) {
                         int size2 = list.size();
                         z = false;
                         for (int i4 = 0; i4 < size2; i4++) {
-                            AccessibilityWindowInfo accessibilityWindowInfo = (AccessibilityWindowInfo) displayWindowsObserver.mWindows.get(i4);
+                            AccessibilityWindowInfo accessibilityWindowInfo =
+                                    (AccessibilityWindowInfo)
+                                            displayWindowsObserver.mWindows.get(i4);
                             if (accessibilityWindowInfo.getId() == i) {
                                 z = true;
                                 accessibilityWindowInfo.setActive(true);
@@ -594,21 +697,27 @@ public final class AccessibilityWindowManager {
                         z = false;
                     }
                     if (z) {
-                        arrayList.add(AccessibilityEvent.obtainWindowsChangedEvent(displayWindowsObserver.mDisplayId, i, 32));
+                        arrayList.add(
+                                AccessibilityEvent.obtainWindowsChangedEvent(
+                                        displayWindowsObserver.mDisplayId, i, 32));
                     }
                 }
             }
             Iterator it = arrayList.iterator();
             while (it.hasNext()) {
-                ((AccessibilityManagerService) this.mAccessibilityEventSender).sendAccessibilityEventForCurrentUserLocked((AccessibilityEvent) it.next());
+                ((AccessibilityManagerService) this.mAccessibilityEventSender)
+                        .sendAccessibilityEventForCurrentUserLocked((AccessibilityEvent) it.next());
             }
         }
     }
 
     public final boolean setProxyFocusLocked(int i) {
         for (int i2 = 0; i2 < this.mDisplayWindowsObservers.size(); i2++) {
-            DisplayWindowsObserver displayWindowsObserver = (DisplayWindowsObserver) this.mDisplayWindowsObservers.valueAt(i2);
-            if (displayWindowsObserver != null && displayWindowsObserver.mIsProxy && displayWindowsObserver.setAccessibilityFocusedWindowLocked(i)) {
+            DisplayWindowsObserver displayWindowsObserver =
+                    (DisplayWindowsObserver) this.mDisplayWindowsObservers.valueAt(i2);
+            if (displayWindowsObserver != null
+                    && displayWindowsObserver.mIsProxy
+                    && displayWindowsObserver.setAccessibilityFocusedWindowLocked(i)) {
                 int i3 = displayWindowsObserver.mProxyDisplayAccessibilityFocusedWindow;
                 if (i3 == i) {
                     return true;
@@ -617,10 +726,14 @@ public final class AccessibilityWindowManager {
                 int i4 = displayWindowsObserver.mDisplayId;
                 if (i3 != -1) {
                     clearAccessibilityFocusLocked(i3);
-                    ((AccessibilityManagerService) accessibilityEventSender).sendAccessibilityEventForCurrentUserLocked(AccessibilityEvent.obtainWindowsChangedEvent(i4, i3, 128));
+                    ((AccessibilityManagerService) accessibilityEventSender)
+                            .sendAccessibilityEventForCurrentUserLocked(
+                                    AccessibilityEvent.obtainWindowsChangedEvent(i4, i3, 128));
                 }
                 displayWindowsObserver.mProxyDisplayAccessibilityFocusedWindow = i;
-                ((AccessibilityManagerService) accessibilityEventSender).sendAccessibilityEventForCurrentUserLocked(AccessibilityEvent.obtainWindowsChangedEvent(i4, i, 128));
+                ((AccessibilityManagerService) accessibilityEventSender)
+                        .sendAccessibilityEventForCurrentUserLocked(
+                                AccessibilityEvent.obtainWindowsChangedEvent(i4, i, 128));
                 return true;
             }
         }
@@ -630,7 +743,8 @@ public final class AccessibilityWindowManager {
     public final void stopTrackingWindows(int i) {
         synchronized (this.mLock) {
             try {
-                DisplayWindowsObserver displayWindowsObserver = (DisplayWindowsObserver) this.mDisplayWindowsObservers.get(i);
+                DisplayWindowsObserver displayWindowsObserver =
+                        (DisplayWindowsObserver) this.mDisplayWindowsObservers.get(i);
                 if (displayWindowsObserver != null) {
                     displayWindowsObserver.stopTrackingWindowsLocked();
                     this.mDisplayWindowsObservers.remove(i);
@@ -646,7 +760,8 @@ public final class AccessibilityWindowManager {
         return this.mTraceManager.isA11yTracingEnabledForTypes(512L);
     }
 
-    public final void updateActiveAndAccessibilityFocusedWindowLocked(int i, int i2, int i3, int i4, long j) {
+    public final void updateActiveAndAccessibilityFocusedWindowLocked(
+            int i, int i2, int i3, int i4, long j) {
         List list;
         if (i3 == 32) {
             synchronized (this.mLock) {
@@ -698,12 +813,22 @@ public final class AccessibilityWindowManager {
             try {
                 if (this.mHasProxy && i4 != 64) {
                     for (int i6 = 0; i6 < this.mDisplayWindowsObservers.size(); i6++) {
-                        DisplayWindowsObserver displayWindowsObserver = (DisplayWindowsObserver) this.mDisplayWindowsObservers.get(i6);
-                        if (displayWindowsObserver != null && (list = displayWindowsObserver.mWindows) != null && displayWindowsObserver.mIsProxy) {
+                        DisplayWindowsObserver displayWindowsObserver =
+                                (DisplayWindowsObserver) this.mDisplayWindowsObservers.get(i6);
+                        if (displayWindowsObserver != null
+                                && (list = displayWindowsObserver.mWindows) != null
+                                && displayWindowsObserver.mIsProxy) {
                             int size = ((ArrayList) list).size();
                             for (int i7 = 0; i7 < size; i7++) {
-                                if (((AccessibilityWindowInfo) ((ArrayList) displayWindowsObserver.mWindows).get(i7)).getId() == i2) {
-                                    displayWindowsObserver.mProxyDisplayAccessibilityFocusedWindow = -1;
+                                if (((AccessibilityWindowInfo)
+                                                        ((ArrayList)
+                                                                        displayWindowsObserver
+                                                                                .mWindows)
+                                                                .get(i7))
+                                                .getId()
+                                        == i2) {
+                                    displayWindowsObserver.mProxyDisplayAccessibilityFocusedWindow =
+                                            -1;
                                     return;
                                 }
                             }
@@ -713,7 +838,9 @@ public final class AccessibilityWindowManager {
                 if (this.mAccessibilityFocusNodeId == j) {
                     this.mAccessibilityFocusNodeId = 2147483647L;
                 }
-                if (this.mAccessibilityFocusNodeId == 2147483647L && this.mAccessibilityFocusedWindowId == i2 && i4 != 64) {
+                if (this.mAccessibilityFocusNodeId == 2147483647L
+                        && this.mAccessibilityFocusedWindowId == i2
+                        && i4 != 64) {
                     this.mAccessibilityFocusedWindowId = -1;
                     this.mAccessibilityFocusedDisplayId = -1;
                 }
@@ -723,9 +850,9 @@ public final class AccessibilityWindowManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:27:0x003a, code lost:
-    
-        if ((r9 & 1) != 0) goto L24;
-     */
+
+       if ((r9 & 1) != 0) goto L24;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -786,6 +913,9 @@ public final class AccessibilityWindowManager {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L3e
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.AccessibilityWindowManager.windowIdBelongsToDisplayType(int, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.AccessibilityWindowManager.windowIdBelongsToDisplayType(int,"
+                    + " int):boolean");
     }
 }

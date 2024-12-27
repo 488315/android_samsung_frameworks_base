@@ -4,8 +4,7 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 /* loaded from: classes5.dex */
 class Utils {
-    Utils() {
-    }
+    Utils() {}
 
     static byte[] octetStringFixed(byte[] octets, int n) {
         if (octets.length != n) {

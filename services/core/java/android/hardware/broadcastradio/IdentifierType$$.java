@@ -37,6 +37,45 @@ public interface IdentifierType$$ {
     }
 
     static String toString(int i) {
-        return i == 1000 ? "VENDOR_START" : i == 1999 ? "VENDOR_END" : i == 0 ? "INVALID" : i == 1 ? "AMFM_FREQUENCY_KHZ" : i == 2 ? "RDS_PI" : i == 3 ? "HD_STATION_ID_EXT" : i == 4 ? "HD_STATION_NAME" : i == 5 ? "DAB_SID_EXT" : i == 6 ? "DAB_ENSEMBLE" : i == 7 ? "DAB_SCID" : i == 8 ? "DAB_FREQUENCY_KHZ" : i == 9 ? "DRMO_SERVICE_ID" : i == 10 ? "DRMO_FREQUENCY_KHZ" : i == 12 ? "SXM_SERVICE_ID" : i == 13 ? "SXM_CHANNEL" : i == 14 ? "HD_STATION_LOCATION" : Integer.toString(i);
+        return i == 1000
+                ? "VENDOR_START"
+                : i == 1999
+                        ? "VENDOR_END"
+                        : i == 0
+                                ? "INVALID"
+                                : i == 1
+                                        ? "AMFM_FREQUENCY_KHZ"
+                                        : i == 2
+                                                ? "RDS_PI"
+                                                : i == 3
+                                                        ? "HD_STATION_ID_EXT"
+                                                        : i == 4
+                                                                ? "HD_STATION_NAME"
+                                                                : i == 5
+                                                                        ? "DAB_SID_EXT"
+                                                                        : i == 6
+                                                                                ? "DAB_ENSEMBLE"
+                                                                                : i == 7
+                                                                                        ? "DAB_SCID"
+                                                                                        : i == 8
+                                                                                                ? "DAB_FREQUENCY_KHZ"
+                                                                                                : i
+                                                                                                                == 9
+                                                                                                        ? "DRMO_SERVICE_ID"
+                                                                                                        : i
+                                                                                                                        == 10
+                                                                                                                ? "DRMO_FREQUENCY_KHZ"
+                                                                                                                : i
+                                                                                                                                == 12
+                                                                                                                        ? "SXM_SERVICE_ID"
+                                                                                                                        : i
+                                                                                                                                        == 13
+                                                                                                                                ? "SXM_CHANNEL"
+                                                                                                                                : i
+                                                                                                                                                == 14
+                                                                                                                                        ? "HD_STATION_LOCATION"
+                                                                                                                                        : Integer
+                                                                                                                                                .toString(
+                                                                                                                                                        i);
     }
 }

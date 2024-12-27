@@ -3,25 +3,28 @@ package android.media.metrics;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class TrackChangeEvent extends Event implements Parcelable {
-    public static final Parcelable.Creator<TrackChangeEvent> CREATOR = new Parcelable.Creator<TrackChangeEvent>() { // from class: android.media.metrics.TrackChangeEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TrackChangeEvent[] newArray(int size) {
-            return new TrackChangeEvent[size];
-        }
+    public static final Parcelable.Creator<TrackChangeEvent> CREATOR =
+            new Parcelable.Creator<
+                    TrackChangeEvent>() { // from class: android.media.metrics.TrackChangeEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TrackChangeEvent[] newArray(int size) {
+                    return new TrackChangeEvent[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TrackChangeEvent createFromParcel(Parcel in) {
-            return new TrackChangeEvent(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TrackChangeEvent createFromParcel(Parcel in) {
+                    return new TrackChangeEvent(in);
+                }
+            };
     public static final int TRACK_CHANGE_REASON_ADAPTIVE = 4;
     public static final int TRACK_CHANGE_REASON_INITIAL = 2;
     public static final int TRACK_CHANGE_REASON_MANUAL = 3;
@@ -49,18 +52,31 @@ public final class TrackChangeEvent extends Event implements Parcelable {
     private final int mWidth;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TrackChangeReason {
-    }
+    public @interface TrackChangeReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TrackState {
-    }
+    public @interface TrackState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TrackType {
-    }
+    public @interface TrackType {}
 
-    private TrackChangeEvent(int state, int reason, String containerMimeType, String sampleMimeType, String codecName, int bitrate, long timeSinceCreatedMillis, int type, String language, String languageRegion, int channelCount, int sampleRate, int width, int height, float videoFrameRate, Bundle extras) {
+    private TrackChangeEvent(
+            int state,
+            int reason,
+            String containerMimeType,
+            String sampleMimeType,
+            String codecName,
+            int bitrate,
+            long timeSinceCreatedMillis,
+            int type,
+            String language,
+            String languageRegion,
+            int channelCount,
+            int sampleRate,
+            int width,
+            int height,
+            float videoFrameRate,
+            Bundle extras) {
         this.mState = state;
         this.mReason = reason;
         this.mContainerMimeType = containerMimeType;
@@ -231,7 +247,37 @@ public final class TrackChangeEvent extends Event implements Parcelable {
     }
 
     public String toString() {
-        return "TrackChangeEvent { state = " + this.mState + ", reason = " + this.mReason + ", containerMimeType = " + this.mContainerMimeType + ", sampleMimeType = " + this.mSampleMimeType + ", codecName = " + this.mCodecName + ", bitrate = " + this.mBitrate + ", timeSinceCreatedMillis = " + this.mTimeSinceCreatedMillis + ", type = " + this.mType + ", language = " + this.mLanguage + ", languageRegion = " + this.mLanguageRegion + ", channelCount = " + this.mChannelCount + ", sampleRate = " + this.mAudioSampleRate + ", width = " + this.mWidth + ", height = " + this.mHeight + ", videoFrameRate = " + this.mVideoFrameRate + " }";
+        return "TrackChangeEvent { state = "
+                + this.mState
+                + ", reason = "
+                + this.mReason
+                + ", containerMimeType = "
+                + this.mContainerMimeType
+                + ", sampleMimeType = "
+                + this.mSampleMimeType
+                + ", codecName = "
+                + this.mCodecName
+                + ", bitrate = "
+                + this.mBitrate
+                + ", timeSinceCreatedMillis = "
+                + this.mTimeSinceCreatedMillis
+                + ", type = "
+                + this.mType
+                + ", language = "
+                + this.mLanguage
+                + ", languageRegion = "
+                + this.mLanguageRegion
+                + ", channelCount = "
+                + this.mChannelCount
+                + ", sampleRate = "
+                + this.mAudioSampleRate
+                + ", width = "
+                + this.mWidth
+                + ", height = "
+                + this.mHeight
+                + ", videoFrameRate = "
+                + this.mVideoFrameRate
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -242,14 +288,43 @@ public final class TrackChangeEvent extends Event implements Parcelable {
             return false;
         }
         TrackChangeEvent that = (TrackChangeEvent) o;
-        if (this.mState == that.mState && this.mReason == that.mReason && Objects.equals(this.mContainerMimeType, that.mContainerMimeType) && Objects.equals(this.mSampleMimeType, that.mSampleMimeType) && Objects.equals(this.mCodecName, that.mCodecName) && this.mBitrate == that.mBitrate && this.mTimeSinceCreatedMillis == that.mTimeSinceCreatedMillis && this.mType == that.mType && Objects.equals(this.mLanguage, that.mLanguage) && Objects.equals(this.mLanguageRegion, that.mLanguageRegion) && this.mChannelCount == that.mChannelCount && this.mAudioSampleRate == that.mAudioSampleRate && this.mWidth == that.mWidth && this.mHeight == that.mHeight && this.mVideoFrameRate == that.mVideoFrameRate) {
+        if (this.mState == that.mState
+                && this.mReason == that.mReason
+                && Objects.equals(this.mContainerMimeType, that.mContainerMimeType)
+                && Objects.equals(this.mSampleMimeType, that.mSampleMimeType)
+                && Objects.equals(this.mCodecName, that.mCodecName)
+                && this.mBitrate == that.mBitrate
+                && this.mTimeSinceCreatedMillis == that.mTimeSinceCreatedMillis
+                && this.mType == that.mType
+                && Objects.equals(this.mLanguage, that.mLanguage)
+                && Objects.equals(this.mLanguageRegion, that.mLanguageRegion)
+                && this.mChannelCount == that.mChannelCount
+                && this.mAudioSampleRate == that.mAudioSampleRate
+                && this.mWidth == that.mWidth
+                && this.mHeight == that.mHeight
+                && this.mVideoFrameRate == that.mVideoFrameRate) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mState), Integer.valueOf(this.mReason), this.mContainerMimeType, this.mSampleMimeType, this.mCodecName, Integer.valueOf(this.mBitrate), Long.valueOf(this.mTimeSinceCreatedMillis), Integer.valueOf(this.mType), this.mLanguage, this.mLanguageRegion, Integer.valueOf(this.mChannelCount), Integer.valueOf(this.mAudioSampleRate), Integer.valueOf(this.mWidth), Integer.valueOf(this.mHeight), Float.valueOf(this.mVideoFrameRate));
+        return Objects.hash(
+                Integer.valueOf(this.mState),
+                Integer.valueOf(this.mReason),
+                this.mContainerMimeType,
+                this.mSampleMimeType,
+                this.mCodecName,
+                Integer.valueOf(this.mBitrate),
+                Long.valueOf(this.mTimeSinceCreatedMillis),
+                Integer.valueOf(this.mType),
+                this.mLanguage,
+                this.mLanguageRegion,
+                Integer.valueOf(this.mChannelCount),
+                Integer.valueOf(this.mAudioSampleRate),
+                Integer.valueOf(this.mWidth),
+                Integer.valueOf(this.mHeight),
+                Float.valueOf(this.mVideoFrameRate));
     }
 
     public static final class Builder {
@@ -273,7 +348,9 @@ public final class TrackChangeEvent extends Event implements Parcelable {
 
         public Builder(int type) {
             if (type != 0 && type != 1 && type != 2) {
-                throw new IllegalArgumentException("track type must be one of TRACK_TYPE_AUDIO, TRACK_TYPE_VIDEO, TRACK_TYPE_TEXT.");
+                throw new IllegalArgumentException(
+                        "track type must be one of TRACK_TYPE_AUDIO, TRACK_TYPE_VIDEO,"
+                                + " TRACK_TYPE_TEXT.");
             }
             this.mType = type;
         }
@@ -383,13 +460,31 @@ public final class TrackChangeEvent extends Event implements Parcelable {
         public TrackChangeEvent build() {
             checkNotUsed();
             this.mBuilderFieldsSet |= 16384;
-            TrackChangeEvent o = new TrackChangeEvent(this.mState, this.mReason, this.mContainerMimeType, this.mSampleMimeType, this.mCodecName, this.mBitrate, this.mTimeSinceCreatedMillis, this.mType, this.mLanguage, this.mLanguageRegion, this.mChannelCount, this.mAudioSampleRate, this.mWidth, this.mHeight, this.mVideoFrameRate, this.mMetricsBundle);
+            TrackChangeEvent o =
+                    new TrackChangeEvent(
+                            this.mState,
+                            this.mReason,
+                            this.mContainerMimeType,
+                            this.mSampleMimeType,
+                            this.mCodecName,
+                            this.mBitrate,
+                            this.mTimeSinceCreatedMillis,
+                            this.mType,
+                            this.mLanguage,
+                            this.mLanguageRegion,
+                            this.mChannelCount,
+                            this.mAudioSampleRate,
+                            this.mWidth,
+                            this.mHeight,
+                            this.mVideoFrameRate,
+                            this.mMetricsBundle);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 16384) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }

@@ -4,26 +4,29 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import com.samsung.android.allshare.Item;
+
 import com.sec.android.allshare.iface.IBundleHolder;
 import com.sec.android.allshare.iface.message.AllShareKey;
+
 import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
 final class AudioItemImpl extends Item implements IBundleHolder, Parcelable {
-    public static final Parcelable.Creator<AudioItemImpl> CREATOR = new Parcelable.Creator<AudioItemImpl>() { // from class: com.samsung.android.allshare.AudioItemImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioItemImpl createFromParcel(Parcel src) {
-            return new AudioItemImpl(src);
-        }
+    public static final Parcelable.Creator<AudioItemImpl> CREATOR =
+            new Parcelable.Creator<
+                    AudioItemImpl>() { // from class: com.samsung.android.allshare.AudioItemImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioItemImpl createFromParcel(Parcel src) {
+                    return new AudioItemImpl(src);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioItemImpl[] newArray(int size) {
-            return new AudioItemImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioItemImpl[] newArray(int size) {
+                    return new AudioItemImpl[size];
+                }
+            };
     private final ItemImpl mItemImpl;
 
     AudioItemImpl(Bundle bundle) {
@@ -31,17 +34,28 @@ final class AudioItemImpl extends Item implements IBundleHolder, Parcelable {
     }
 
     public Uri getAlbumArt() {
-        return (Uri) (this.mItemImpl.getBundle() == null ? null : this.mItemImpl.getBundle().getParcelable(AllShareKey.BUNDLE_PARCELABLE_AUDIO_ITEM_ALBUMART));
+        return (Uri)
+                (this.mItemImpl.getBundle() == null
+                        ? null
+                        : this.mItemImpl
+                                .getBundle()
+                                .getParcelable(AllShareKey.BUNDLE_PARCELABLE_AUDIO_ITEM_ALBUMART));
     }
 
     @Override // com.samsung.android.allshare.Item
     public String getAlbumTitle() {
-        return this.mItemImpl.getBundle() == null ? "" : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_AUDIO_ITEM_ALBUM_TITLE);
+        return this.mItemImpl.getBundle() == null
+                ? ""
+                : this.mItemImpl
+                        .getBundle()
+                        .getString(AllShareKey.BUNDLE_STRING_AUDIO_ITEM_ALBUM_TITLE);
     }
 
     @Override // com.samsung.android.allshare.Item
     public String getArtist() {
-        return this.mItemImpl.getBundle() == null ? "" : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_AUDIO_ITEM_ARTIST);
+        return this.mItemImpl.getBundle() == null
+                ? ""
+                : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_AUDIO_ITEM_ARTIST);
     }
 
     @Override // com.samsung.android.allshare.Item
@@ -54,12 +68,16 @@ final class AudioItemImpl extends Item implements IBundleHolder, Parcelable {
 
     @Override // com.samsung.android.allshare.Item
     public String getMimetype() {
-        return this.mItemImpl.getBundle() == null ? "" : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
+        return this.mItemImpl.getBundle() == null
+                ? ""
+                : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
     }
 
     @Override // com.samsung.android.allshare.Item
     public String getExtension() {
-        return this.mItemImpl.getBundle() == null ? "" : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_ITEM_EXTENSION);
+        return this.mItemImpl.getBundle() == null
+                ? ""
+                : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_ITEM_EXTENSION);
     }
 
     @Override // com.samsung.android.allshare.Item
@@ -79,7 +97,9 @@ final class AudioItemImpl extends Item implements IBundleHolder, Parcelable {
 
     @Override // com.samsung.android.allshare.Item
     public String getGenre() {
-        return this.mItemImpl.getBundle() == null ? "" : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_AUDIO_ITEM_GENRE);
+        return this.mItemImpl.getBundle() == null
+                ? ""
+                : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_AUDIO_ITEM_GENRE);
     }
 
     public boolean equals(Object o) {
@@ -127,7 +147,12 @@ final class AudioItemImpl extends Item implements IBundleHolder, Parcelable {
 
     @Override // com.samsung.android.allshare.Item
     public Uri getThumbnail() {
-        return (Uri) (this.mItemImpl.getBundle() == null ? null : this.mItemImpl.getBundle().getParcelable(AllShareKey.BUNDLE_PARCELABLE_AUDIO_ITEM_ALBUMART));
+        return (Uri)
+                (this.mItemImpl.getBundle() == null
+                        ? null
+                        : this.mItemImpl
+                                .getBundle()
+                                .getParcelable(AllShareKey.BUNDLE_PARCELABLE_AUDIO_ITEM_ALBUMART));
     }
 
     @Override // com.samsung.android.allshare.Item

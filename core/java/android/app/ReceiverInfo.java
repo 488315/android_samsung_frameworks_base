@@ -11,21 +11,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ReceiverInfo implements Parcelable {
-    public static final Parcelable.Creator<ReceiverInfo> CREATOR = new Parcelable.Creator<ReceiverInfo>() { // from class: android.app.ReceiverInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ReceiverInfo createFromParcel(Parcel _aidl_source) {
-            ReceiverInfo _aidl_out = new ReceiverInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ReceiverInfo> CREATOR =
+            new Parcelable.Creator<ReceiverInfo>() { // from class: android.app.ReceiverInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ReceiverInfo createFromParcel(Parcel _aidl_source) {
+                    ReceiverInfo _aidl_out = new ReceiverInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ReceiverInfo[] newArray(int _aidl_size) {
-            return new ReceiverInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ReceiverInfo[] newArray(int _aidl_size) {
+                    return new ReceiverInfo[_aidl_size];
+                }
+            };
     public ActivityInfo activityInfo;
     public CompatibilityInfo compatInfo;
     public String data;
@@ -195,7 +196,8 @@ public class ReceiverInfo implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.compatInfo = (CompatibilityInfo) _aidl_parcel.readTypedObject(CompatibilityInfo.CREATOR);
+            this.compatInfo =
+                    (CompatibilityInfo) _aidl_parcel.readTypedObject(CompatibilityInfo.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -220,7 +222,10 @@ public class ReceiverInfo implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.intent);
-        return _mask | describeContents(this.extras) | describeContents(this.activityInfo) | describeContents(this.compatInfo);
+        return _mask
+                | describeContents(this.extras)
+                | describeContents(this.activityInfo)
+                | describeContents(this.compatInfo);
     }
 
     private int describeContents(Object _v) {

@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class CommonProps implements Parcelable {
-    public static final Parcelable.Creator<CommonProps> CREATOR = new Parcelable.Creator<CommonProps>() { // from class: android.hardware.biometrics.common.CommonProps.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CommonProps createFromParcel(Parcel _aidl_source) {
-            CommonProps _aidl_out = new CommonProps();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CommonProps> CREATOR =
+            new Parcelable.Creator<
+                    CommonProps>() { // from class: android.hardware.biometrics.common.CommonProps.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CommonProps createFromParcel(Parcel _aidl_source) {
+                    CommonProps _aidl_out = new CommonProps();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CommonProps[] newArray(int _aidl_size) {
-            return new CommonProps[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CommonProps[] newArray(int _aidl_size) {
+                    return new CommonProps[_aidl_size];
+                }
+            };
     public ComponentInfo[] componentInfo;
     public int sensorId = 0;
     public byte sensorStrength = 0;
@@ -82,7 +84,8 @@ public class CommonProps implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.componentInfo = (ComponentInfo[]) _aidl_parcel.createTypedArray(ComponentInfo.CREATOR);
+                this.componentInfo =
+                        (ComponentInfo[]) _aidl_parcel.createTypedArray(ComponentInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

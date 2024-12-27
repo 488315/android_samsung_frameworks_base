@@ -5,7 +5,8 @@ package com.android.server.input;
 public final /* synthetic */ class BatteryController$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ BatteryController f$0;
 
-    public /* synthetic */ BatteryController$$ExternalSyntheticLambda2(BatteryController batteryController) {
+    public /* synthetic */ BatteryController$$ExternalSyntheticLambda2(
+            BatteryController batteryController) {
         this.f$0 = batteryController;
     }
 

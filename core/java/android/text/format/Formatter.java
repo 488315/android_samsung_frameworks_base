@@ -11,8 +11,10 @@ import android.icu.util.Measure;
 import android.icu.util.MeasureUnit;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
+
 import com.android.internal.R;
 import com.android.net.module.util.Inet4AddressUtils;
+
 import java.util.Locale;
 
 /* loaded from: classes4.dex */
@@ -25,7 +27,8 @@ public final class Formatter {
     private static final int SECONDS_PER_DAY = 86400;
     private static final int SECONDS_PER_HOUR = 3600;
     private static final int SECONDS_PER_MINUTE = 60;
-    private static final UnicodeSetSpanner SPACES_AND_CONTROLS = new UnicodeSetSpanner(new UnicodeSet("[[:Zs:][:Cf:]]").freeze());
+    private static final UnicodeSetSpanner SPACES_AND_CONTROLS =
+            new UnicodeSetSpanner(new UnicodeSet("[[:Zs:][:Cf:]]").freeze());
 
     public static class BytesResult {
         public final long roundedBytes;
@@ -33,7 +36,8 @@ public final class Formatter {
         public final String unitsContentDescription;
         public final String value;
 
-        public BytesResult(String value, String units, String unitsContentDescription, long roundedBytes) {
+        public BytesResult(
+                String value, String units, String unitsContentDescription, long roundedBytes) {
             this.value = value;
             this.units = units;
             this.unitsContentDescription = unitsContentDescription;
@@ -89,11 +93,14 @@ public final class Formatter {
         if (location == -1) {
             return source;
         }
-        return source.substring(0, location) + source.substring(toDelete.length() + location, source.length());
+        return source.substring(0, location)
+                + source.substring(toDelete.length() + location, source.length());
     }
 
-    private static String formatMeasureShort(Locale locale, NumberFormat numberFormatter, float value, MeasureUnit units) {
-        MeasureFormat measureFormatter = MeasureFormat.getInstance(locale, MeasureFormat.FormatWidth.SHORT, numberFormatter);
+    private static String formatMeasureShort(
+            Locale locale, NumberFormat numberFormatter, float value, MeasureUnit units) {
+        MeasureFormat measureFormatter =
+                MeasureFormat.getInstance(locale, MeasureFormat.FormatWidth.SHORT, numberFormatter);
         return measureFormatter.format(new Measure(Float.valueOf(value), units));
     }
 
@@ -102,7 +109,10 @@ public final class Formatter {
         NumberFormat numberFormatter = getNumberFormatter(locale, input.fractionDigits);
         if (input.units == MeasureUnit.BYTE) {
             String formattedNumber = numberFormatter.format(input.value);
-            return context.getString(R.string.fileSizeSuffix, formattedNumber, getByteSuffixOverride(context.getResources()));
+            return context.getString(
+                    R.string.fileSizeSuffix,
+                    formattedNumber,
+                    getByteSuffixOverride(context.getResources()));
         }
         return formatMeasureShort(locale, numberFormatter, input.value, input.units);
     }
@@ -113,7 +123,8 @@ public final class Formatter {
         public final MeasureUnit units;
         public final float value;
 
-        private RoundedBytesResult(float value, MeasureUnit units, int fractionDigits, long roundedBytes) {
+        private RoundedBytesResult(
+                float value, MeasureUnit units, int fractionDigits, long roundedBytes) {
             this.value = value;
             this.units = units;
             this.fractionDigits = fractionDigits;
@@ -203,7 +214,8 @@ public final class Formatter {
         Locale locale = res.getConfiguration().getLocales().get(0);
         NumberFormat numberFormatter = getNumberFormatter(locale, rounded.fractionDigits);
         String formattedNumber = numberFormatter.format(rounded.value);
-        String formattedMeasure = formatMeasureShort(locale, numberFormatter, rounded.value, rounded.units);
+        String formattedMeasure =
+                formatMeasureShort(locale, numberFormatter, rounded.value, rounded.units);
         String numberRemoved = deleteFirstFromString(formattedMeasure, formattedNumber);
         String units2 = SPACES_AND_CONTROLS.trim(numberRemoved).toString();
         if (rounded.units != MeasureUnit.BYTE) {
@@ -238,24 +250,35 @@ public final class Formatter {
         }
         int seconds = (int) secondsLong;
         Locale locale = localeFromContext(context);
-        MeasureFormat measureFormat = MeasureFormat.getInstance(locale, MeasureFormat.FormatWidth.SHORT);
+        MeasureFormat measureFormat =
+                MeasureFormat.getInstance(locale, MeasureFormat.FormatWidth.SHORT);
         if (days >= 2 || (days > 0 && hours == 0)) {
-            return measureFormat.format(new Measure(Integer.valueOf(days + ((hours + 12) / 24)), MeasureUnit.DAY));
+            return measureFormat.format(
+                    new Measure(Integer.valueOf(days + ((hours + 12) / 24)), MeasureUnit.DAY));
         }
         if (days > 0) {
-            return measureFormat.formatMeasures(new Measure(Integer.valueOf(days), MeasureUnit.DAY), new Measure(Integer.valueOf(hours), MeasureUnit.HOUR));
+            return measureFormat.formatMeasures(
+                    new Measure(Integer.valueOf(days), MeasureUnit.DAY),
+                    new Measure(Integer.valueOf(hours), MeasureUnit.HOUR));
         }
         if (hours >= 2 || (hours > 0 && minutes == 0)) {
-            return measureFormat.format(new Measure(Integer.valueOf(hours + ((minutes + 30) / 60)), MeasureUnit.HOUR));
+            return measureFormat.format(
+                    new Measure(Integer.valueOf(hours + ((minutes + 30) / 60)), MeasureUnit.HOUR));
         }
         if (hours > 0) {
-            return measureFormat.formatMeasures(new Measure(Integer.valueOf(hours), MeasureUnit.HOUR), new Measure(Integer.valueOf(minutes), MeasureUnit.MINUTE));
+            return measureFormat.formatMeasures(
+                    new Measure(Integer.valueOf(hours), MeasureUnit.HOUR),
+                    new Measure(Integer.valueOf(minutes), MeasureUnit.MINUTE));
         }
         if (minutes >= 2 || (minutes > 0 && seconds == 0)) {
-            return measureFormat.format(new Measure(Integer.valueOf(minutes + ((seconds + 30) / 60)), MeasureUnit.MINUTE));
+            return measureFormat.format(
+                    new Measure(
+                            Integer.valueOf(minutes + ((seconds + 30) / 60)), MeasureUnit.MINUTE));
         }
         if (minutes > 0) {
-            return measureFormat.formatMeasures(new Measure(Integer.valueOf(minutes), MeasureUnit.MINUTE), new Measure(Integer.valueOf(seconds), MeasureUnit.SECOND));
+            return measureFormat.formatMeasures(
+                    new Measure(Integer.valueOf(minutes), MeasureUnit.MINUTE),
+                    new Measure(Integer.valueOf(seconds), MeasureUnit.SECOND));
         }
         return measureFormat.format(new Measure(Integer.valueOf(seconds), MeasureUnit.SECOND));
     }
@@ -264,8 +287,10 @@ public final class Formatter {
         long minutesRoundedUp = ((millis + 60000) - 1) / 60000;
         if (minutesRoundedUp == 0 || minutesRoundedUp == 1) {
             Locale locale = localeFromContext(context);
-            MeasureFormat measureFormat = MeasureFormat.getInstance(locale, MeasureFormat.FormatWidth.SHORT);
-            return measureFormat.format(new Measure(Long.valueOf(minutesRoundedUp), MeasureUnit.MINUTE));
+            MeasureFormat measureFormat =
+                    MeasureFormat.getInstance(locale, MeasureFormat.FormatWidth.SHORT);
+            return measureFormat.format(
+                    new Measure(Long.valueOf(minutesRoundedUp), MeasureUnit.MINUTE));
         }
         return formatShortElapsedTime(context, 60000 * minutesRoundedUp);
     }

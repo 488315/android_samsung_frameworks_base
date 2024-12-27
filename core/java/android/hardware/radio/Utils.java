@@ -3,6 +3,7 @@ package android.hardware.radio;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,8 +17,7 @@ import java.util.function.Consumer;
 final class Utils {
     private static final String TAG = "BroadcastRadio.utils";
 
-    Utils() {
-    }
+    Utils() {}
 
     static void writeStringMap(Parcel dest, Map<String, String> map) {
         if (map == null) {
@@ -80,12 +80,15 @@ final class Utils {
             dest.writeInt(0);
         } else {
             dest.writeInt(set.size());
-            set.stream().forEach(new Consumer() { // from class: android.hardware.radio.Utils$$ExternalSyntheticLambda1
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    Parcel.this.writeTypedObject((Parcelable) obj, 0);
-                }
-            });
+            set.stream()
+                    .forEach(
+                            new Consumer() { // from class:
+                                // android.hardware.radio.Utils$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    Parcel.this.writeTypedObject((Parcelable) obj, 0);
+                                }
+                            });
         }
     }
 
@@ -108,12 +111,17 @@ final class Utils {
             dest.writeInt(0);
         } else {
             dest.writeInt(set.size());
-            set.stream().forEach(new Consumer() { // from class: android.hardware.radio.Utils$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    Parcel.this.writeInt(((Integer) Objects.requireNonNull((Integer) obj)).intValue());
-                }
-            });
+            set.stream()
+                    .forEach(
+                            new Consumer() { // from class:
+                                // android.hardware.radio.Utils$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    Parcel.this.writeInt(
+                                            ((Integer) Objects.requireNonNull((Integer) obj))
+                                                    .intValue());
+                                }
+                            });
         }
     }
 

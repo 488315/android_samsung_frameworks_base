@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.KeyEvent;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -13,30 +14,30 @@ public final class VirtualKeyEvent implements Parcelable {
     public static final int ACTION_DOWN = 0;
     public static final int ACTION_UNKNOWN = -1;
     public static final int ACTION_UP = 1;
-    public static final Parcelable.Creator<VirtualKeyEvent> CREATOR = new Parcelable.Creator<VirtualKeyEvent>() { // from class: android.hardware.input.VirtualKeyEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualKeyEvent createFromParcel(Parcel source) {
-            return new VirtualKeyEvent(source);
-        }
+    public static final Parcelable.Creator<VirtualKeyEvent> CREATOR =
+            new Parcelable.Creator<
+                    VirtualKeyEvent>() { // from class: android.hardware.input.VirtualKeyEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualKeyEvent createFromParcel(Parcel source) {
+                    return new VirtualKeyEvent(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualKeyEvent[] newArray(int size) {
-            return new VirtualKeyEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualKeyEvent[] newArray(int size) {
+                    return new VirtualKeyEvent[size];
+                }
+            };
     private final int mAction;
     private final long mEventTimeNanos;
     private final int mKeyCode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Action {
-    }
+    public @interface Action {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SupportedKeycode {
-    }
+    public @interface SupportedKeycode {}
 
     private VirtualKeyEvent(int action, int keyCode, long eventTimeNanos) {
         this.mAction = action;
@@ -63,7 +64,12 @@ public final class VirtualKeyEvent implements Parcelable {
     }
 
     public String toString() {
-        return "VirtualKeyEvent( action=" + KeyEvent.actionToString(this.mAction) + " keyCode=" + KeyEvent.keyCodeToString(this.mKeyCode) + " eventTime(ns)=" + this.mEventTimeNanos;
+        return "VirtualKeyEvent( action="
+                + KeyEvent.actionToString(this.mAction)
+                + " keyCode="
+                + KeyEvent.keyCodeToString(this.mKeyCode)
+                + " eventTime(ns)="
+                + this.mEventTimeNanos;
     }
 
     public int getKeyCode() {
@@ -85,7 +91,8 @@ public final class VirtualKeyEvent implements Parcelable {
 
         public VirtualKeyEvent build() {
             if (this.mAction == -1 || this.mKeyCode == -1) {
-                throw new IllegalArgumentException("Cannot build virtual key event with unset fields");
+                throw new IllegalArgumentException(
+                        "Cannot build virtual key event with unset fields");
             }
             return new VirtualKeyEvent(this.mAction, this.mKeyCode, this.mEventTimeNanos);
         }

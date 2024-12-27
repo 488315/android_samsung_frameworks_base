@@ -2,7 +2,9 @@ package com.samsung.android.wifi;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.google.android.mms.pdu.CharacterSets;
+
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -18,22 +20,25 @@ public class SemMobileWipsWifiSsid implements Parcelable {
     private static final String CHARSET_ALL = "EUC-KR";
     private static final String CHARSET_CN = "gbk";
     private static final String CHARSET_KOR = "ksc5601";
-    public static final Parcelable.Creator<SemMobileWipsWifiSsid> CREATOR = new Parcelable.Creator<SemMobileWipsWifiSsid>() { // from class: com.samsung.android.wifi.SemMobileWipsWifiSsid.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemMobileWipsWifiSsid createFromParcel(Parcel in) {
-            SemMobileWipsWifiSsid ssid = new SemMobileWipsWifiSsid();
-            byte[] b = in.createByteArray();
-            ssid.octets.write(b, 0, b.length);
-            return ssid;
-        }
+    public static final Parcelable.Creator<SemMobileWipsWifiSsid> CREATOR =
+            new Parcelable.Creator<
+                    SemMobileWipsWifiSsid>() { // from class:
+                                               // com.samsung.android.wifi.SemMobileWipsWifiSsid.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemMobileWipsWifiSsid createFromParcel(Parcel in) {
+                    SemMobileWipsWifiSsid ssid = new SemMobileWipsWifiSsid();
+                    byte[] b = in.createByteArray();
+                    ssid.octets.write(b, 0, b.length);
+                    return ssid;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemMobileWipsWifiSsid[] newArray(int size) {
-            return new SemMobileWipsWifiSsid[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemMobileWipsWifiSsid[] newArray(int size) {
+                    return new SemMobileWipsWifiSsid[size];
+                }
+            };
     private static final int HEX_RADIX = 16;
     public static final String NONE = "<unknown ssid>";
     private static final String TAG = "SemMobileWipsWifiSsid";
@@ -81,7 +86,9 @@ public class SemMobileWipsWifiSsid implements Parcelable {
 
     private String getCharacterSet() {
         String localeString = Locale.getDefault().toString();
-        return (localeString == null || !localeString.startsWith("zh")) ? "EUC-KR" : CharacterSets.MIMENAME_GBK;
+        return (localeString == null || !localeString.startsWith("zh"))
+                ? "EUC-KR"
+                : CharacterSets.MIMENAME_GBK;
     }
 
     static boolean isUTF8String(byte[] str, long length) {
@@ -233,7 +240,10 @@ public class SemMobileWipsWifiSsid implements Parcelable {
             return "";
         }
         Charset charset = Charset.forName("UTF-8");
-        CharsetDecoder decoder = charset.newDecoder().onMalformedInput(CodingErrorAction.REPLACE).onUnmappableCharacter(CodingErrorAction.REPLACE);
+        CharsetDecoder decoder =
+                charset.newDecoder()
+                        .onMalformedInput(CodingErrorAction.REPLACE)
+                        .onUnmappableCharacter(CodingErrorAction.REPLACE);
         CharBuffer out = CharBuffer.allocate(32);
         CoderResult result = decoder.decode(ByteBuffer.wrap(ssidBytes), out, true);
         out.flip();
@@ -242,7 +252,9 @@ public class SemMobileWipsWifiSsid implements Parcelable {
         }
         String decodedSsid = out.toString();
         int length = this.octets.size();
-        if (CHARSET_CN.equals(this.CONFIG_CHARSET) || CHARSET_KOR.equals(this.CONFIG_CHARSET) || "EUC-KR".equals(this.CONFIG_CHARSET)) {
+        if (CHARSET_CN.equals(this.CONFIG_CHARSET)
+                || CHARSET_KOR.equals(this.CONFIG_CHARSET)
+                || "EUC-KR".equals(this.CONFIG_CHARSET)) {
             if (!isUTF8String(ssidBytes, length) && isUCNVString(ssidBytes, length)) {
                 try {
                     if (CHARSET_CN.equals(this.CONFIG_CHARSET)) {

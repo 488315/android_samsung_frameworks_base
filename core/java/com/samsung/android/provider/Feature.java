@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class Feature implements Parcelable {
-    public static final Parcelable.Creator<Feature> CREATOR = new Parcelable.Creator<Feature>() { // from class: com.samsung.android.provider.Feature.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Feature createFromParcel(Parcel source) {
-            return new Feature(source);
-        }
+    public static final Parcelable.Creator<Feature> CREATOR =
+            new Parcelable.Creator<
+                    Feature>() { // from class: com.samsung.android.provider.Feature.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Feature createFromParcel(Parcel source) {
+                    return new Feature(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Feature[] newArray(int size) {
-            return new Feature[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Feature[] newArray(int size) {
+                    return new Feature[size];
+                }
+            };
     private boolean abTest;
     private String name;
     private String value;

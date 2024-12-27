@@ -6,7 +6,9 @@ import android.os.DropBoxManager;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
+
 import com.android.internal.R;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -23,7 +25,8 @@ public class DropBoxManagerLoggerBackend implements PersistentLoggerBackend {
     private final DropBoxManager mDropBoxManager;
     private final boolean mDropBoxManagerLoggingEnabled;
     private final Handler mHandler;
-    private static final DateTimeFormatter LOG_TIMESTAMP_FORMATTER = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
+    private static final DateTimeFormatter LOG_TIMESTAMP_FORMATTER =
+            DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
     private static final ZoneId LOCAL_ZONE_ID = ZoneId.systemDefault();
     private final Object mBufferLock = new Object();
     private final StringBuilder mLogBuffer = new StringBuilder();
@@ -51,7 +54,8 @@ public class DropBoxManagerLoggerBackend implements PersistentLoggerBackend {
 
     private boolean persistentLoggingEnabled(Context context) {
         try {
-            return context.getResources().getBoolean(R.bool.config_dropboxmanager_persistent_logging_enabled);
+            return context.getResources()
+                    .getBoolean(R.bool.config_dropboxmanager_persistent_logging_enabled);
         } catch (RuntimeException e) {
             Log.w("DropBoxManagerLoggerBackend", "Persistent logging config not found");
             return false;
@@ -112,13 +116,17 @@ public class DropBoxManagerLoggerBackend implements PersistentLoggerBackend {
     }
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:27:0x003b
-        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
-        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
-        */
-    private synchronized void bufferLog(java.lang.String r5, java.lang.String r6, java.lang.String r7, java.util.Optional<java.lang.Throwable> r8) {
+    jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:27:0x003b
+    	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
+    	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
+    */
+    private synchronized void bufferLog(
+            java.lang.String r5,
+            java.lang.String r6,
+            java.lang.String r7,
+            java.util.Optional<java.lang.Throwable> r8) {
         /*
             r4 = this;
             monitor-enter(r4)
@@ -163,16 +171,30 @@ public class DropBoxManagerLoggerBackend implements PersistentLoggerBackend {
             monitor-exit(r4)
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.DropBoxManagerLoggerBackend.bufferLog(java.lang.String, java.lang.String, java.lang.String, java.util.Optional):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.telephony.DropBoxManagerLoggerBackend.bufferLog(java.lang.String,"
+                    + " java.lang.String, java.lang.String, java.util.Optional):void");
     }
 
     private String formatLog(String level, String tag, final String msg, Optional<Throwable> t) {
-        return formatTimestamp(System.currentTimeMillis()) + " " + level + " " + tag + ": " + ((String) t.map(new Function() { // from class: android.telephony.DropBoxManagerLoggerBackend$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return DropBoxManagerLoggerBackend.lambda$formatLog$0(msg, (Throwable) obj);
-            }
-        }).orElse(msg));
+        return formatTimestamp(System.currentTimeMillis())
+                + " "
+                + level
+                + " "
+                + tag
+                + ": "
+                + ((String)
+                        t.map(
+                                        new Function() { // from class:
+                                                         // android.telephony.DropBoxManagerLoggerBackend$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return DropBoxManagerLoggerBackend
+                                                        .lambda$formatLog$0(msg, (Throwable) obj);
+                                            }
+                                        })
+                                .orElse(msg));
     }
 
     static /* synthetic */ String lambda$formatLog$0(String msg, Throwable throwable) {
@@ -180,19 +202,23 @@ public class DropBoxManagerLoggerBackend implements PersistentLoggerBackend {
     }
 
     private String formatTimestamp(long currentTimeMillis) {
-        return Instant.ofEpochMilli(currentTimeMillis).atZone(LOCAL_ZONE_ID).format(LOG_TIMESTAMP_FORMATTER);
+        return Instant.ofEpochMilli(currentTimeMillis)
+                .atZone(LOCAL_ZONE_ID)
+                .format(LOG_TIMESTAMP_FORMATTER);
     }
 
     public void flushAsync() {
         if (!this.mDropBoxManagerLoggingEnabled) {
             return;
         }
-        this.mHandler.post(new Runnable() { // from class: android.telephony.DropBoxManagerLoggerBackend$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                DropBoxManagerLoggerBackend.this.flush();
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.telephony.DropBoxManagerLoggerBackend$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        DropBoxManagerLoggerBackend.this.flush();
+                    }
+                });
     }
 
     public void flush() {
@@ -203,11 +229,21 @@ public class DropBoxManagerLoggerBackend implements PersistentLoggerBackend {
             if (this.mLogBuffer.length() < 5120) {
                 return;
             }
-            Log.d("DropBoxManagerLoggerBackend", "Flushing logs from " + formatTimestamp(this.mBufferStartTime) + " to " + formatTimestamp(System.currentTimeMillis()));
+            Log.d(
+                    "DropBoxManagerLoggerBackend",
+                    "Flushing logs from "
+                            + formatTimestamp(this.mBufferStartTime)
+                            + " to "
+                            + formatTimestamp(System.currentTimeMillis()));
             try {
                 this.mDropBoxManager.addText("Telephony", this.mLogBuffer.toString());
             } catch (Exception e) {
-                Log.w("DropBoxManagerLoggerBackend", "Failed to flush logs of length " + this.mLogBuffer.length() + " to DropBoxManager", e);
+                Log.w(
+                        "DropBoxManagerLoggerBackend",
+                        "Failed to flush logs of length "
+                                + this.mLogBuffer.length()
+                                + " to DropBoxManager",
+                        e);
             }
             this.mLogBuffer.setLength(0);
             this.mBufferStartTime = -1L;

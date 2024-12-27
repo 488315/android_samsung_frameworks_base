@@ -1,31 +1,38 @@
 package com.android.internal.pm.pkg.component;
 
 import android.util.ArraySet;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public class ParsedAttributionUtils {
     /* JADX WARN: Code restructure failed: missing block: B:31:0x00b0, code lost:
-    
-        if (r0 != null) goto L51;
-     */
+
+       if (r0 != null) goto L51;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:32:0x00b2, code lost:
-    
-        r0 = java.util.Collections.emptyList();
-     */
+
+       r0 = java.util.Collections.emptyList();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x00c6, code lost:
-    
-        return r13.success(new com.android.internal.pm.pkg.component.ParsedAttributionImpl(r4, r5, r0));
-     */
+
+       return r13.success(new com.android.internal.pm.pkg.component.ParsedAttributionImpl(r4, r5, r0));
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x00b7, code lost:
-    
-        ((java.util.ArrayList) r0).trimToSize();
-     */
+
+       ((java.util.ArrayList) r0).trimToSize();
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.component.ParsedAttribution> parseAttribution(android.content.res.Resources r11, android.content.res.XmlResourceParser r12, android.content.pm.parsing.result.ParseInput r13) throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
+    public static android.content.pm.parsing.result.ParseResult<
+                    com.android.internal.pm.pkg.component.ParsedAttribution>
+            parseAttribution(
+                    android.content.res.Resources r11,
+                    android.content.res.XmlResourceParser r12,
+                    android.content.pm.parsing.result.ParseInput r13)
+                    throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
         /*
             r0 = 0
             int[] r1 = com.android.internal.R.styleable.AndroidManifestAttribution
@@ -126,7 +133,11 @@ public class ParsedAttributionUtils {
             r1.recycle()
             throw r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.component.ParsedAttributionUtils.parseAttribution(android.content.res.Resources, android.content.res.XmlResourceParser, android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.component.ParsedAttributionUtils.parseAttribution(android.content.res.Resources,"
+                    + " android.content.res.XmlResourceParser,"
+                    + " android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
     }
 
     public static boolean isCombinationValid(List<ParsedAttribution> attributions) {

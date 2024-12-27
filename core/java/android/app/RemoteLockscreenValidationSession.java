@@ -3,30 +3,34 @@ package android.app;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class RemoteLockscreenValidationSession implements Parcelable {
-    public static final Parcelable.Creator<RemoteLockscreenValidationSession> CREATOR = new Parcelable.Creator<RemoteLockscreenValidationSession>() { // from class: android.app.RemoteLockscreenValidationSession.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteLockscreenValidationSession createFromParcel(Parcel source) {
-            return new RemoteLockscreenValidationSession(source);
-        }
+    public static final Parcelable.Creator<RemoteLockscreenValidationSession> CREATOR =
+            new Parcelable.Creator<RemoteLockscreenValidationSession>() { // from class:
+                // android.app.RemoteLockscreenValidationSession.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteLockscreenValidationSession createFromParcel(Parcel source) {
+                    return new RemoteLockscreenValidationSession(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteLockscreenValidationSession[] newArray(int size) {
-            return new RemoteLockscreenValidationSession[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteLockscreenValidationSession[] newArray(int size) {
+                    return new RemoteLockscreenValidationSession[size];
+                }
+            };
     private int mLockType;
     private int mRemainingAttempts;
     private byte[] mSourcePublicKey;
 
     public static final class Builder {
-        private RemoteLockscreenValidationSession mInstance = new RemoteLockscreenValidationSession();
+        private RemoteLockscreenValidationSession mInstance =
+                new RemoteLockscreenValidationSession();
 
         public Builder setLockType(int lockType) {
             this.mInstance.mLockType = lockType;
@@ -68,8 +72,7 @@ public final class RemoteLockscreenValidationSession implements Parcelable {
         out.writeInt(this.mRemainingAttempts);
     }
 
-    private RemoteLockscreenValidationSession() {
-    }
+    private RemoteLockscreenValidationSession() {}
 
     private RemoteLockscreenValidationSession(Parcel in) {
         this.mLockType = in.readInt();

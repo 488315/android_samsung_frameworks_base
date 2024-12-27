@@ -1,7 +1,6 @@
 package android.media.tv.tuner.filter;
 
 import android.annotation.SystemApi;
-import android.media.tv.tuner.filter.SectionSettings;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -10,7 +9,15 @@ public class SectionSettingsWithSectionBits extends SectionSettings {
     private final byte[] mMask;
     private final byte[] mMode;
 
-    private SectionSettingsWithSectionBits(int mainType, boolean isCheckCrc, boolean isRepeat, boolean isRaw, int bitWidthOfLengthField, byte[] filter, byte[] mask, byte[] mode) {
+    private SectionSettingsWithSectionBits(
+            int mainType,
+            boolean isCheckCrc,
+            boolean isRepeat,
+            boolean isRaw,
+            int bitWidthOfLengthField,
+            byte[] filter,
+            byte[] mask,
+            byte[] mode) {
         super(mainType, isCheckCrc, isRepeat, isRaw, bitWidthOfLengthField);
         this.mFilter = filter;
         this.mMask = mask;
@@ -61,7 +68,15 @@ public class SectionSettingsWithSectionBits extends SectionSettings {
         }
 
         public SectionSettingsWithSectionBits build() {
-            return new SectionSettingsWithSectionBits(this.mMainType, this.mCrcEnabled, this.mIsRepeat, this.mIsRaw, this.mBitWidthOfLengthField, this.mFilter, this.mMask, this.mMode);
+            return new SectionSettingsWithSectionBits(
+                    this.mMainType,
+                    this.mCrcEnabled,
+                    this.mIsRepeat,
+                    this.mIsRaw,
+                    this.mBitWidthOfLengthField,
+                    this.mFilter,
+                    this.mMask,
+                    this.mMode);
         }
 
         /* JADX INFO: Access modifiers changed from: package-private */

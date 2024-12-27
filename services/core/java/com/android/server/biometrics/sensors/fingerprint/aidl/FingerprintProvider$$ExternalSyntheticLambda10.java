@@ -4,7 +4,8 @@ import android.os.IBinder;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class FingerprintProvider$$ExternalSyntheticLambda10 implements Runnable {
+public final /* synthetic */ class FingerprintProvider$$ExternalSyntheticLambda10
+        implements Runnable {
     public final /* synthetic */ FingerprintProvider f$0;
     public final /* synthetic */ int f$1;
     public final /* synthetic */ IBinder f$2;
@@ -12,7 +13,13 @@ public final /* synthetic */ class FingerprintProvider$$ExternalSyntheticLambda1
     public final /* synthetic */ String f$4;
     public final /* synthetic */ long f$5;
 
-    public /* synthetic */ FingerprintProvider$$ExternalSyntheticLambda10(FingerprintProvider fingerprintProvider, int i, IBinder iBinder, int i2, String str, long j) {
+    public /* synthetic */ FingerprintProvider$$ExternalSyntheticLambda10(
+            FingerprintProvider fingerprintProvider,
+            int i,
+            IBinder iBinder,
+            int i2,
+            String str,
+            long j) {
         this.f$0 = fingerprintProvider;
         this.f$1 = i;
         this.f$2 = iBinder;
@@ -30,6 +37,19 @@ public final /* synthetic */ class FingerprintProvider$$ExternalSyntheticLambda1
         String str = this.f$4;
         long j = this.f$5;
         fingerprintProvider.getClass();
-        fingerprintProvider.scheduleForSensor$1(i, new FingerprintRevokeChallengeClient(fingerprintProvider.mContext, ((Sensor) fingerprintProvider.mFingerprintSensors.mSensors.get(i)).mLazySession, iBinder, i2, str, i, fingerprintProvider.createLogger$1(0, 0, fingerprintProvider.mAuthenticationStatsCollector), fingerprintProvider.mBiometricContext, j));
+        fingerprintProvider.scheduleForSensor$1(
+                i,
+                new FingerprintRevokeChallengeClient(
+                        fingerprintProvider.mContext,
+                        ((Sensor) fingerprintProvider.mFingerprintSensors.mSensors.get(i))
+                                .mLazySession,
+                        iBinder,
+                        i2,
+                        str,
+                        i,
+                        fingerprintProvider.createLogger$1(
+                                0, 0, fingerprintProvider.mAuthenticationStatsCollector),
+                        fingerprintProvider.mBiometricContext,
+                        j));
     }
 }

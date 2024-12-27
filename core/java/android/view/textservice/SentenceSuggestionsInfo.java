@@ -2,28 +2,33 @@ package android.view.textservice;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 
 /* loaded from: classes4.dex */
 public final class SentenceSuggestionsInfo implements Parcelable {
-    public static final Parcelable.Creator<SentenceSuggestionsInfo> CREATOR = new Parcelable.Creator<SentenceSuggestionsInfo>() { // from class: android.view.textservice.SentenceSuggestionsInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SentenceSuggestionsInfo createFromParcel(Parcel source) {
-            return new SentenceSuggestionsInfo(source);
-        }
+    public static final Parcelable.Creator<SentenceSuggestionsInfo> CREATOR =
+            new Parcelable.Creator<
+                    SentenceSuggestionsInfo>() { // from class:
+                                                 // android.view.textservice.SentenceSuggestionsInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SentenceSuggestionsInfo createFromParcel(Parcel source) {
+                    return new SentenceSuggestionsInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SentenceSuggestionsInfo[] newArray(int size) {
-            return new SentenceSuggestionsInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SentenceSuggestionsInfo[] newArray(int size) {
+                    return new SentenceSuggestionsInfo[size];
+                }
+            };
     private final int[] mLengths;
     private final int[] mOffsets;
     private final SuggestionsInfo[] mSuggestionsInfos;
 
-    public SentenceSuggestionsInfo(SuggestionsInfo[] suggestionsInfos, int[] offsets, int[] lengths) {
+    public SentenceSuggestionsInfo(
+            SuggestionsInfo[] suggestionsInfos, int[] offsets, int[] lengths) {
         if (suggestionsInfos == null || offsets == null || lengths == null) {
             throw new NullPointerException();
         }

@@ -2,6 +2,7 @@ package android.app;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -10,27 +11,27 @@ public class CameraCompatTaskInfo implements Parcelable {
     public static final int CAMERA_COMPAT_FREEFORM_LANDSCAPE = 2;
     public static final int CAMERA_COMPAT_FREEFORM_NONE = 0;
     public static final int CAMERA_COMPAT_FREEFORM_PORTRAIT = 1;
-    public static final Parcelable.Creator<CameraCompatTaskInfo> CREATOR = new Parcelable.Creator<CameraCompatTaskInfo>() { // from class: android.app.CameraCompatTaskInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraCompatTaskInfo createFromParcel(Parcel in) {
-            return new CameraCompatTaskInfo(in);
-        }
+    public static final Parcelable.Creator<CameraCompatTaskInfo> CREATOR =
+            new Parcelable.Creator<
+                    CameraCompatTaskInfo>() { // from class: android.app.CameraCompatTaskInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraCompatTaskInfo createFromParcel(Parcel in) {
+                    return new CameraCompatTaskInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraCompatTaskInfo[] newArray(int size) {
-            return new CameraCompatTaskInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraCompatTaskInfo[] newArray(int size) {
+                    return new CameraCompatTaskInfo[size];
+                }
+            };
     public int freeformCameraCompatMode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FreeformCameraCompatMode {
-    }
+    public @interface FreeformCameraCompatMode {}
 
-    private CameraCompatTaskInfo() {
-    }
+    private CameraCompatTaskInfo() {}
 
     static CameraCompatTaskInfo create() {
         return new CameraCompatTaskInfo();
@@ -63,7 +64,9 @@ public class CameraCompatTaskInfo implements Parcelable {
     }
 
     public String toString() {
-        return "CameraCompatTaskInfo { freeformCameraCompatMode=" + freeformCameraCompatModeToString(this.freeformCameraCompatMode) + "}";
+        return "CameraCompatTaskInfo { freeformCameraCompatMode="
+                + freeformCameraCompatModeToString(this.freeformCameraCompatMode)
+                + "}";
     }
 
     public static String freeformCameraCompatModeToString(int freeformCameraCompatMode) {
@@ -75,7 +78,8 @@ public class CameraCompatTaskInfo implements Parcelable {
             case 2:
                 return "landscape";
             default:
-                throw new AssertionError("Unexpected camera compat mode: " + freeformCameraCompatMode);
+                throw new AssertionError(
+                        "Unexpected camera compat mode: " + freeformCameraCompatMode);
         }
     }
 }

@@ -3,6 +3,7 @@ package com.android.server.selinux;
 import android.provider.DeviceConfig;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,14 +49,30 @@ public final class SelinuxAuditLogBuilder {
         this.mAuditLog = selinuxAuditLog;
         Matcher matcher3 = NO_OP_MATCHER;
         try {
-            matcher = Pattern.compile(TextUtils.formatSimple("u:r:(?<stype>%s):s0(:c)?(?<scategories>((,c)?\\d+)+)*", new Object[]{DeviceConfig.getString("adservices", CONFIG_SELINUX_AUDIT_DOMAIN, "no_match^")})).matcher("");
+            matcher =
+                    Pattern.compile(
+                                    TextUtils.formatSimple(
+                                            "u:r:(?<stype>%s):s0(:c)?(?<scategories>((,c)?\\d+)+)*",
+                                            new Object[] {
+                                                DeviceConfig.getString(
+                                                        "adservices",
+                                                        CONFIG_SELINUX_AUDIT_DOMAIN,
+                                                        "no_match^")
+                                            }))
+                            .matcher("");
             try {
-                matcher2 = Pattern.compile("u:object_r:(?<ttype>\\w+):s0(:c)?(?<tcategories>((,c)?\\d+)+)*").matcher("");
+                matcher2 =
+                        Pattern.compile(
+                                        "u:object_r:(?<ttype>\\w+):s0(:c)?(?<tcategories>((,c)?\\d+)+)*")
+                                .matcher("");
                 try {
                     matcher3 = Pattern.compile("\"(?<path>/\\w+(/\\w+)?)(/\\w+)*\"").matcher("");
                 } catch (PatternSyntaxException e) {
                     e = e;
-                    Slog.e("SelinuxAuditLogs", "Invalid pattern, setting every matcher to no-op.", e);
+                    Slog.e(
+                            "SelinuxAuditLogs",
+                            "Invalid pattern, setting every matcher to no-op.",
+                            e);
                     this.mScontextMatcher = matcher;
                     this.mTcontextMatcher = matcher2;
                     this.mPathMatcher = matcher3;
@@ -75,6 +92,7 @@ public final class SelinuxAuditLogBuilder {
     }
 
     public final boolean nextTokenMatches(Matcher matcher) {
-        return this.mTokens.hasNext() && matcher.reset((CharSequence) this.mTokens.next()).matches();
+        return this.mTokens.hasNext()
+                && matcher.reset((CharSequence) this.mTokens.next()).matches();
     }
 }

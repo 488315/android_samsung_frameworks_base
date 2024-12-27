@@ -6,13 +6,16 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseArray;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.pm.SettingsXml$ReadSectionImpl;
 import com.android.server.pm.verify.domain.models.DomainVerificationInternalUserState;
 import com.android.server.pm.verify.domain.models.DomainVerificationPkgState;
 import com.android.server.pm.verify.domain.models.DomainVerificationStateMap;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -37,7 +40,8 @@ public abstract class DomainVerificationPersistence {
     public static ReadResult readFromXml(TypedXmlPullParser typedXmlPullParser) {
         ArrayMap arrayMap = new ArrayMap();
         ArrayMap arrayMap2 = new ArrayMap();
-        SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl = new SettingsXml$ReadSectionImpl(typedXmlPullParser);
+        SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl =
+                new SettingsXml$ReadSectionImpl(typedXmlPullParser);
         settingsXml$ReadSectionImpl.children();
         while (settingsXml$ReadSectionImpl.moveToNextInternal(null)) {
             String name = ((TypedXmlPullParser) settingsXml$ReadSectionImpl.mParser).getName();
@@ -53,7 +57,8 @@ public abstract class DomainVerificationPersistence {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Failed to find 'out' block for switch in B:14:0x0097. Please report as an issue. */
-    public static void readPackageStates(SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl, ArrayMap arrayMap) {
+    public static void readPackageStates(
+            SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl, ArrayMap arrayMap) {
         boolean z;
         int i;
         int i2;
@@ -74,7 +79,9 @@ public abstract class DomainVerificationPersistence {
             String string2 = settingsXml$ReadSectionImpl.getString("id");
             DomainVerificationPkgState domainVerificationPkgState = null;
             String str3 = null;
-            boolean attributeBoolean = ((TypedXmlPullParser) settingsXml$ReadSectionImpl.mParser).getAttributeBoolean((String) null, "hasAutoVerifyDomains", z5);
+            boolean attributeBoolean =
+                    ((TypedXmlPullParser) settingsXml$ReadSectionImpl.mParser)
+                            .getAttributeBoolean((String) null, "hasAutoVerifyDomains", z5);
             String string3 = settingsXml$ReadSectionImpl.getString("signature");
             if (TextUtils.isEmpty(string) || TextUtils.isEmpty(string2)) {
                 z = z5 ? 1 : 0;
@@ -86,7 +93,8 @@ public abstract class DomainVerificationPersistence {
                 ArrayMap arrayMap3 = new ArrayMap();
                 settingsXml$ReadSectionImpl.children();
                 while (settingsXml$ReadSectionImpl.moveToNextInternal(str3)) {
-                    String name = ((TypedXmlPullParser) settingsXml$ReadSectionImpl.mParser).getName();
+                    String name =
+                            ((TypedXmlPullParser) settingsXml$ReadSectionImpl.mParser).getName();
                     name.getClass();
                     switch (name.hashCode()) {
                         case -1576041916:
@@ -125,22 +133,35 @@ public abstract class DomainVerificationPersistence {
                                 if (i5 == -1) {
                                     domainVerificationInternalUserState = null;
                                 } else {
-                                    boolean attributeBoolean2 = ((TypedXmlPullParser) settingsXml$ReadSectionImpl.mParser).getAttributeBoolean((String) null, "allowLinkHandling", false);
+                                    boolean attributeBoolean2 =
+                                            ((TypedXmlPullParser)
+                                                            settingsXml$ReadSectionImpl.mParser)
+                                                    .getAttributeBoolean(
+                                                            (String) null,
+                                                            "allowLinkHandling",
+                                                            false);
                                     ArraySet arraySet = new ArraySet();
                                     settingsXml$ReadSectionImpl.children();
-                                    while (settingsXml$ReadSectionImpl.moveToNextInternal("enabled-hosts")) {
+                                    while (settingsXml$ReadSectionImpl.moveToNextInternal(
+                                            "enabled-hosts")) {
                                         settingsXml$ReadSectionImpl.children();
-                                        while (settingsXml$ReadSectionImpl.moveToNextInternal("host")) {
-                                            String string4 = settingsXml$ReadSectionImpl.getString("name");
+                                        while (settingsXml$ReadSectionImpl.moveToNextInternal(
+                                                "host")) {
+                                            String string4 =
+                                                    settingsXml$ReadSectionImpl.getString("name");
                                             if (!TextUtils.isEmpty(string4)) {
                                                 arraySet.add(string4);
                                             }
                                         }
                                     }
-                                    domainVerificationInternalUserState = new DomainVerificationInternalUserState(i5, arraySet, attributeBoolean2);
+                                    domainVerificationInternalUserState =
+                                            new DomainVerificationInternalUserState(
+                                                    i5, arraySet, attributeBoolean2);
                                 }
                                 if (domainVerificationInternalUserState != null) {
-                                    sparseArray.put(domainVerificationInternalUserState.mUserId, domainVerificationInternalUserState);
+                                    sparseArray.put(
+                                            domainVerificationInternalUserState.mUserId,
+                                            domainVerificationInternalUserState);
                                 }
                             }
                             i3 = -1;
@@ -153,7 +174,13 @@ public abstract class DomainVerificationPersistence {
                             str = string3;
                             settingsXml$ReadSectionImpl.children();
                             while (settingsXml$ReadSectionImpl.moveToNextInternal("domain")) {
-                                arrayMap2.put(settingsXml$ReadSectionImpl.getString("name"), Integer.valueOf(settingsXml$ReadSectionImpl.getInt(0, LauncherConfigurationInternal.KEY_STATE_BOOLEAN)));
+                                arrayMap2.put(
+                                        settingsXml$ReadSectionImpl.getString("name"),
+                                        Integer.valueOf(
+                                                settingsXml$ReadSectionImpl.getInt(
+                                                        0,
+                                                        LauncherConfigurationInternal
+                                                                .KEY_STATE_BOOLEAN)));
                             }
                             i3 = -1;
                             str3 = null;
@@ -165,16 +192,28 @@ public abstract class DomainVerificationPersistence {
                                 String string5 = settingsXml$ReadSectionImpl.getString("name");
                                 settingsXml$ReadSectionImpl.children();
                                 ArrayList arrayList = new ArrayList();
-                                while (settingsXml$ReadSectionImpl.moveToNextInternal("uri-relative-filter-group")) {
-                                    UriRelativeFilterGroup uriRelativeFilterGroup = new UriRelativeFilterGroup(settingsXml$ReadSectionImpl.getInt(i4, "action"));
+                                while (settingsXml$ReadSectionImpl.moveToNextInternal(
+                                        "uri-relative-filter-group")) {
+                                    UriRelativeFilterGroup uriRelativeFilterGroup =
+                                            new UriRelativeFilterGroup(
+                                                    settingsXml$ReadSectionImpl.getInt(
+                                                            i4, "action"));
                                     settingsXml$ReadSectionImpl.children();
-                                    while (settingsXml$ReadSectionImpl.moveToNextInternal("uri-relative-filter")) {
-                                        String string6 = settingsXml$ReadSectionImpl.getString("filter");
+                                    while (settingsXml$ReadSectionImpl.moveToNextInternal(
+                                            "uri-relative-filter")) {
+                                        String string6 =
+                                                settingsXml$ReadSectionImpl.getString("filter");
                                         if (string6 != null) {
                                             str2 = string3;
                                             z4 = attributeBoolean;
                                             uuid2 = fromString;
-                                            uriRelativeFilterGroup.addUriRelativeFilter(new UriRelativeFilter(settingsXml$ReadSectionImpl.getInt(-1, "uri-part"), settingsXml$ReadSectionImpl.getInt(-1, "pattern-type"), string6));
+                                            uriRelativeFilterGroup.addUriRelativeFilter(
+                                                    new UriRelativeFilter(
+                                                            settingsXml$ReadSectionImpl.getInt(
+                                                                    -1, "uri-part"),
+                                                            settingsXml$ReadSectionImpl.getInt(
+                                                                    -1, "pattern-type"),
+                                                            string6));
                                         } else {
                                             uuid2 = fromString;
                                             z4 = attributeBoolean;
@@ -214,7 +253,15 @@ public abstract class DomainVerificationPersistence {
                 }
                 z = z5 ? 1 : 0;
                 i = i4;
-                domainVerificationPkgState = new DomainVerificationPkgState(string, fromString, attributeBoolean, arrayMap2, sparseArray, string3, arrayMap3);
+                domainVerificationPkgState =
+                        new DomainVerificationPkgState(
+                                string,
+                                fromString,
+                                attributeBoolean,
+                                arrayMap2,
+                                sparseArray,
+                                string3,
+                                arrayMap3);
             }
             if (domainVerificationPkgState != null) {
                 arrayMap.put(domainVerificationPkgState.mPackageName, domainVerificationPkgState);
@@ -224,15 +271,25 @@ public abstract class DomainVerificationPersistence {
         }
     }
 
-    public static void writePackageStates(SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl, Collection collection, int i, DomainVerificationService$$ExternalSyntheticLambda1 domainVerificationService$$ExternalSyntheticLambda1) {
+    public static void writePackageStates(
+            SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl,
+            Collection collection,
+            int i,
+            DomainVerificationService$$ExternalSyntheticLambda1
+                    domainVerificationService$$ExternalSyntheticLambda1) {
         if (collection.isEmpty()) {
             return;
         }
         Iterator it = collection.iterator();
         while (it.hasNext()) {
-            DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) it.next();
+            DomainVerificationPkgState domainVerificationPkgState =
+                    (DomainVerificationPkgState) it.next();
             String str = domainVerificationPkgState.mPackageName;
-            String str2 = domainVerificationService$$ExternalSyntheticLambda1 == null ? null : (String) domainVerificationService$$ExternalSyntheticLambda1.apply(str);
+            String str2 =
+                    domainVerificationService$$ExternalSyntheticLambda1 == null
+                            ? null
+                            : (String)
+                                    domainVerificationService$$ExternalSyntheticLambda1.apply(str);
             if (str2 == null) {
                 str2 = domainVerificationPkgState.mBackupSignatureHash;
             }
@@ -241,7 +298,8 @@ public abstract class DomainVerificationPersistence {
             settingsXml$ReadSectionImpl.attribute("id", domainVerificationPkgState.mId.toString());
             boolean z = domainVerificationPkgState.mHasAutoVerifyDomains;
             if (z) {
-                ((TypedXmlSerializer) settingsXml$ReadSectionImpl.mParser).attributeBoolean((String) null, "hasAutoVerifyDomains", z);
+                ((TypedXmlSerializer) settingsXml$ReadSectionImpl.mParser)
+                        .attributeBoolean((String) null, "hasAutoVerifyDomains", z);
             }
             settingsXml$ReadSectionImpl.attribute("signature", str2);
             try {
@@ -253,19 +311,27 @@ public abstract class DomainVerificationPersistence {
                     if (i == -1) {
                         for (int i2 = 0; i2 < size; i2++) {
                             try {
-                                writeUserStateToXml(settingsXml$ReadSectionImpl, (DomainVerificationInternalUserState) sparseArray.valueAt(i2));
+                                writeUserStateToXml(
+                                        settingsXml$ReadSectionImpl,
+                                        (DomainVerificationInternalUserState)
+                                                sparseArray.valueAt(i2));
                             } finally {
                             }
                         }
                     } else {
-                        DomainVerificationInternalUserState domainVerificationInternalUserState = (DomainVerificationInternalUserState) sparseArray.get(i);
+                        DomainVerificationInternalUserState domainVerificationInternalUserState =
+                                (DomainVerificationInternalUserState) sparseArray.get(i);
                         if (domainVerificationInternalUserState != null) {
-                            writeUserStateToXml(settingsXml$ReadSectionImpl, domainVerificationInternalUserState);
+                            writeUserStateToXml(
+                                    settingsXml$ReadSectionImpl,
+                                    domainVerificationInternalUserState);
                         }
                     }
                     settingsXml$ReadSectionImpl.close();
                 }
-                writeUriRelativeFilterGroupMap(settingsXml$ReadSectionImpl, domainVerificationPkgState.mUriRelativeFilterGroupMap);
+                writeUriRelativeFilterGroupMap(
+                        settingsXml$ReadSectionImpl,
+                        domainVerificationPkgState.mUriRelativeFilterGroupMap);
                 settingsXml$ReadSectionImpl.close();
             } catch (Throwable th) {
                 try {
@@ -278,7 +344,8 @@ public abstract class DomainVerificationPersistence {
         }
     }
 
-    public static void writeStateMap(SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl, ArrayMap arrayMap) {
+    public static void writeStateMap(
+            SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl, ArrayMap arrayMap) {
         if (arrayMap.isEmpty()) {
             return;
         }
@@ -288,7 +355,9 @@ public abstract class DomainVerificationPersistence {
             for (int i = 0; i < size; i++) {
                 settingsXml$ReadSectionImpl.startSection("domain");
                 settingsXml$ReadSectionImpl.attribute("name", (String) arrayMap.keyAt(i));
-                settingsXml$ReadSectionImpl.attribute(((Integer) arrayMap.valueAt(i)).intValue(), LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                settingsXml$ReadSectionImpl.attribute(
+                        ((Integer) arrayMap.valueAt(i)).intValue(),
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                 settingsXml$ReadSectionImpl.close();
             }
             settingsXml$ReadSectionImpl.close();
@@ -302,15 +371,25 @@ public abstract class DomainVerificationPersistence {
         }
     }
 
-    public static void writeToXml(TypedXmlSerializer typedXmlSerializer, DomainVerificationStateMap domainVerificationStateMap, ArrayMap arrayMap, ArrayMap arrayMap2, int i, DomainVerificationService$$ExternalSyntheticLambda1 domainVerificationService$$ExternalSyntheticLambda1) {
-        SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl = new SettingsXml$ReadSectionImpl(typedXmlSerializer);
+    public static void writeToXml(
+            TypedXmlSerializer typedXmlSerializer,
+            DomainVerificationStateMap domainVerificationStateMap,
+            ArrayMap arrayMap,
+            ArrayMap arrayMap2,
+            int i,
+            DomainVerificationService$$ExternalSyntheticLambda1
+                    domainVerificationService$$ExternalSyntheticLambda1) {
+        SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl =
+                new SettingsXml$ReadSectionImpl(typedXmlSerializer);
         try {
             settingsXml$ReadSectionImpl.startSection("domain-verifications");
             try {
                 ArraySet arraySet = new ArraySet();
                 int size = domainVerificationStateMap.mPackageNameMap.size();
                 for (int i2 = 0; i2 < size; i2++) {
-                    arraySet.add((DomainVerificationPkgState) domainVerificationStateMap.mPackageNameMap.valueAt(i2));
+                    arraySet.add(
+                            (DomainVerificationPkgState)
+                                    domainVerificationStateMap.mPackageNameMap.valueAt(i2));
                 }
                 int size2 = arrayMap.size();
                 for (int i3 = 0; i3 < size2; i3++) {
@@ -318,11 +397,19 @@ public abstract class DomainVerificationPersistence {
                 }
                 settingsXml$ReadSectionImpl.startSection("active");
                 try {
-                    writePackageStates(settingsXml$ReadSectionImpl, arraySet, i, domainVerificationService$$ExternalSyntheticLambda1);
+                    writePackageStates(
+                            settingsXml$ReadSectionImpl,
+                            arraySet,
+                            i,
+                            domainVerificationService$$ExternalSyntheticLambda1);
                     settingsXml$ReadSectionImpl.close();
                     settingsXml$ReadSectionImpl.startSection("restored");
                     try {
-                        writePackageStates(settingsXml$ReadSectionImpl, arrayMap2.values(), i, domainVerificationService$$ExternalSyntheticLambda1);
+                        writePackageStates(
+                                settingsXml$ReadSectionImpl,
+                                arrayMap2.values(),
+                                i,
+                                domainVerificationService$$ExternalSyntheticLambda1);
                         settingsXml$ReadSectionImpl.close();
                         settingsXml$ReadSectionImpl.close();
                         if (settingsXml$ReadSectionImpl.mDepthStack != null) {
@@ -352,14 +439,18 @@ public abstract class DomainVerificationPersistence {
         }
     }
 
-    public static void writeUriRelativeFilterGroup(SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl, UriRelativeFilterGroup uriRelativeFilterGroup) {
+    public static void writeUriRelativeFilterGroup(
+            SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl,
+            UriRelativeFilterGroup uriRelativeFilterGroup) {
         settingsXml$ReadSectionImpl.startSection("uri-relative-filter-group");
         settingsXml$ReadSectionImpl.attribute(uriRelativeFilterGroup.getAction(), "action");
         try {
-            for (UriRelativeFilter uriRelativeFilter : uriRelativeFilterGroup.getUriRelativeFilters()) {
+            for (UriRelativeFilter uriRelativeFilter :
+                    uriRelativeFilterGroup.getUriRelativeFilters()) {
                 settingsXml$ReadSectionImpl.startSection("uri-relative-filter");
                 settingsXml$ReadSectionImpl.attribute(uriRelativeFilter.getUriPart(), "uri-part");
-                settingsXml$ReadSectionImpl.attribute(uriRelativeFilter.getPatternType(), "pattern-type");
+                settingsXml$ReadSectionImpl.attribute(
+                        uriRelativeFilter.getPatternType(), "pattern-type");
                 settingsXml$ReadSectionImpl.attribute("filter", uriRelativeFilter.getFilter());
                 settingsXml$ReadSectionImpl.close();
             }
@@ -374,7 +465,8 @@ public abstract class DomainVerificationPersistence {
         }
     }
 
-    public static void writeUriRelativeFilterGroupMap(SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl, ArrayMap arrayMap) {
+    public static void writeUriRelativeFilterGroupMap(
+            SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl, ArrayMap arrayMap) {
         if (arrayMap.isEmpty()) {
             return;
         }
@@ -388,7 +480,9 @@ public abstract class DomainVerificationPersistence {
                     settingsXml$ReadSectionImpl.attribute("name", str);
                     for (int i2 = 0; i2 < list.size(); i2++) {
                         try {
-                            writeUriRelativeFilterGroup(settingsXml$ReadSectionImpl, (UriRelativeFilterGroup) list.get(i2));
+                            writeUriRelativeFilterGroup(
+                                    settingsXml$ReadSectionImpl,
+                                    (UriRelativeFilterGroup) list.get(i2));
                         } finally {
                         }
                     }
@@ -406,12 +500,16 @@ public abstract class DomainVerificationPersistence {
         settingsXml$ReadSectionImpl.close();
     }
 
-    public static void writeUserStateToXml(SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl, DomainVerificationInternalUserState domainVerificationInternalUserState) {
+    public static void writeUserStateToXml(
+            SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl,
+            DomainVerificationInternalUserState domainVerificationInternalUserState) {
         settingsXml$ReadSectionImpl.startSection("user-state");
-        settingsXml$ReadSectionImpl.attribute(domainVerificationInternalUserState.mUserId, "userId");
+        settingsXml$ReadSectionImpl.attribute(
+                domainVerificationInternalUserState.mUserId, "userId");
         boolean z = domainVerificationInternalUserState.mLinkHandlingAllowed;
         if (z) {
-            ((TypedXmlSerializer) settingsXml$ReadSectionImpl.mParser).attributeBoolean((String) null, "allowLinkHandling", z);
+            ((TypedXmlSerializer) settingsXml$ReadSectionImpl.mParser)
+                    .attributeBoolean((String) null, "allowLinkHandling", z);
         }
         try {
             ArraySet arraySet = domainVerificationInternalUserState.mEnabledHosts;

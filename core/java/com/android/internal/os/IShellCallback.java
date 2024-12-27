@@ -13,7 +13,8 @@ public interface IShellCallback extends IInterface {
 
     public static class Default implements IShellCallback {
         @Override // com.android.internal.os.IShellCallback
-        public ParcelFileDescriptor openFile(String path, String seLinuxContext, String mode) throws RemoteException {
+        public ParcelFileDescriptor openFile(String path, String seLinuxContext, String mode)
+                throws RemoteException {
             return null;
         }
 
@@ -23,7 +24,7 @@ public interface IShellCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IShellCallback {
+    public abstract static class Stub extends Binder implements IShellCallback {
         public static final String DESCRIPTOR = "com.android.internal.os.IShellCallback";
         static final int TRANSACTION_openFile = 1;
 
@@ -62,7 +63,8 @@ public interface IShellCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -102,7 +104,8 @@ public interface IShellCallback extends IInterface {
             }
 
             @Override // com.android.internal.os.IShellCallback
-            public ParcelFileDescriptor openFile(String path, String seLinuxContext, String mode) throws RemoteException {
+            public ParcelFileDescriptor openFile(String path, String seLinuxContext, String mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -112,7 +115,9 @@ public interface IShellCallback extends IInterface {
                     _data.writeString(mode);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

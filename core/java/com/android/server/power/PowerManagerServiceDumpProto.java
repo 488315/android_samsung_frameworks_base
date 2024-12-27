@@ -63,8 +63,7 @@ public final class PowerManagerServiceDumpProto {
     public final class ConstantsProto {
         public static final long IS_NO_CACHED_WAKE_LOCKS = 1133871366145L;
 
-        public ConstantsProto() {
-        }
+        public ConstantsProto() {}
     }
 
     public final class ActiveWakeLocksProto {
@@ -77,8 +76,7 @@ public final class PowerManagerServiceDumpProto {
         public static final long IS_SCREEN_DIM = 1133871366147L;
         public static final long IS_STAY_AWAKE = 1133871366150L;
 
-        public ActiveWakeLocksProto() {
-        }
+        public ActiveWakeLocksProto() {}
     }
 
     public final class UserActivityProto {
@@ -89,8 +87,7 @@ public final class PowerManagerServiceDumpProto {
         public static final long LAST_USER_ACTIVITY_TIME_MS = 1112396529668L;
         public static final long LAST_USER_ACTIVITY_TIME_NO_CHANGE_LIGHTS_MS = 1112396529669L;
 
-        public UserActivityProto() {
-        }
+        public UserActivityProto() {}
     }
 
     public final class UidStateProto {
@@ -100,7 +97,6 @@ public final class PowerManagerServiceDumpProto {
         public static final long UID = 1120986464257L;
         public static final long UID_STRING = 1138166333442L;
 
-        public UidStateProto() {
-        }
+        public UidStateProto() {}
     }
 }

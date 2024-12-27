@@ -13,6 +13,10 @@ public class ClipRectLRAnimation extends ClipRectAnimation {
     @Override // android.view.animation.ClipRectAnimation, android.view.animation.Animation
     protected void applyTransformation(float it, Transformation tr) {
         Rect oldClipRect = tr.getClipRect();
-        tr.setClipRect(this.mFromRect.left + ((int) ((this.mToRect.left - this.mFromRect.left) * it)), oldClipRect.top, this.mFromRect.right + ((int) ((this.mToRect.right - this.mFromRect.right) * it)), oldClipRect.bottom);
+        tr.setClipRect(
+                this.mFromRect.left + ((int) ((this.mToRect.left - this.mFromRect.left) * it)),
+                oldClipRect.top,
+                this.mFromRect.right + ((int) ((this.mToRect.right - this.mFromRect.right) * it)),
+                oldClipRect.bottom);
     }
 }

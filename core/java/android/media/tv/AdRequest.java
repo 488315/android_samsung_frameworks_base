@@ -5,24 +5,26 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public final class AdRequest implements Parcelable {
-    public static final Parcelable.Creator<AdRequest> CREATOR = new Parcelable.Creator<AdRequest>() { // from class: android.media.tv.AdRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AdRequest createFromParcel(Parcel source) {
-            return new AdRequest(source);
-        }
+    public static final Parcelable.Creator<AdRequest> CREATOR =
+            new Parcelable.Creator<AdRequest>() { // from class: android.media.tv.AdRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AdRequest createFromParcel(Parcel source) {
+                    return new AdRequest(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AdRequest[] newArray(int size) {
-            return new AdRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AdRequest[] newArray(int size) {
+                    return new AdRequest[size];
+                }
+            };
     public static final String KEY_AUDIO_METADATA = "key_audio_metadata";
     public static final String KEY_VIDEO_METADATA = "key_video_metadata";
     public static final int REQUEST_TYPE_START = 1;
@@ -38,18 +40,50 @@ public final class AdRequest implements Parcelable {
     private final Uri mUri;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RequestType {
+    public @interface RequestType {}
+
+    public AdRequest(
+            int id,
+            int requestType,
+            ParcelFileDescriptor fileDescriptor,
+            long startTime,
+            long stopTime,
+            long echoInterval,
+            String mediaFileType,
+            Bundle metadata) {
+        this(
+                id,
+                requestType,
+                fileDescriptor,
+                null,
+                startTime,
+                stopTime,
+                echoInterval,
+                mediaFileType,
+                metadata);
     }
 
-    public AdRequest(int id, int requestType, ParcelFileDescriptor fileDescriptor, long startTime, long stopTime, long echoInterval, String mediaFileType, Bundle metadata) {
-        this(id, requestType, fileDescriptor, null, startTime, stopTime, echoInterval, mediaFileType, metadata);
-    }
-
-    public AdRequest(int id, int requestType, Uri uri, long startTime, long stopTime, long echoInterval, Bundle metadata) {
+    public AdRequest(
+            int id,
+            int requestType,
+            Uri uri,
+            long startTime,
+            long stopTime,
+            long echoInterval,
+            Bundle metadata) {
         this(id, requestType, null, uri, startTime, stopTime, echoInterval, null, metadata);
     }
 
-    private AdRequest(int id, int requestType, ParcelFileDescriptor fileDescriptor, Uri uri, long startTime, long stopTime, long echoInterval, String mediaFileType, Bundle metadata) {
+    private AdRequest(
+            int id,
+            int requestType,
+            ParcelFileDescriptor fileDescriptor,
+            Uri uri,
+            long startTime,
+            long stopTime,
+            long echoInterval,
+            String mediaFileType,
+            Bundle metadata) {
         this.mId = id;
         this.mRequestType = requestType;
         this.mFileDescriptor = fileDescriptor;

@@ -8,14 +8,15 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IWirelessKeyboardShareChangedListener extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.input.IWirelessKeyboardShareChangedListener";
+    public static final String DESCRIPTOR =
+            "android.hardware.input.IWirelessKeyboardShareChangedListener";
 
     void onWirelessKeyboardShareChanged(long j, int i, String str) throws RemoteException;
 
     public static class Default implements IWirelessKeyboardShareChangedListener {
         @Override // android.hardware.input.IWirelessKeyboardShareChangedListener
-        public void onWirelessKeyboardShareChanged(long whenNanos, int index, String contents) throws RemoteException {
-        }
+        public void onWirelessKeyboardShareChanged(long whenNanos, int index, String contents)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,8 @@ public interface IWirelessKeyboardShareChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWirelessKeyboardShareChangedListener {
+    public abstract static class Stub extends Binder
+            implements IWirelessKeyboardShareChangedListener {
         static final int TRANSACTION_onWirelessKeyboardShareChanged = 1;
 
         public Stub() {
@@ -34,7 +36,8 @@ public interface IWirelessKeyboardShareChangedListener extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IWirelessKeyboardShareChangedListener.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IWirelessKeyboardShareChangedListener.DESCRIPTOR);
             if (iin != null && (iin instanceof IWirelessKeyboardShareChangedListener)) {
                 return (IWirelessKeyboardShareChangedListener) iin;
             }
@@ -61,7 +64,8 @@ public interface IWirelessKeyboardShareChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWirelessKeyboardShareChangedListener.DESCRIPTOR);
             }
@@ -99,7 +103,8 @@ public interface IWirelessKeyboardShareChangedListener extends IInterface {
             }
 
             @Override // android.hardware.input.IWirelessKeyboardShareChangedListener
-            public void onWirelessKeyboardShareChanged(long whenNanos, int index, String contents) throws RemoteException {
+            public void onWirelessKeyboardShareChanged(long whenNanos, int index, String contents)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWirelessKeyboardShareChangedListener.DESCRIPTOR);

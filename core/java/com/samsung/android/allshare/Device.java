@@ -2,6 +2,7 @@ package com.samsung.android.allshare;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
+
 import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
@@ -44,8 +45,7 @@ public abstract class Device {
 
     public abstract void requestMobileToTV(String str, int i);
 
-    protected Device() {
-    }
+    protected Device() {}
 
     public enum DeviceDomain {
         MY_DEVICE("MY_DEVICE"),
@@ -168,6 +168,14 @@ public abstract class Device {
     }
 
     public String toString() {
-        return "Type[" + getDeviceType() + "] Name[" + getName() + "] Ip[" + getIPAddress() + "] Model[" + getModelName() + NavigationBarInflaterView.SIZE_MOD_END;
+        return "Type["
+                + getDeviceType()
+                + "] Name["
+                + getName()
+                + "] Ip["
+                + getIPAddress()
+                + "] Model["
+                + getModelName()
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

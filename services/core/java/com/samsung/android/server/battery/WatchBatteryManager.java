@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -33,8 +36,7 @@ public final class WatchBatteryManager {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenOffAlarmListener implements AlarmManager.OnAlarmListener {
-        public ScreenOffAlarmListener() {
-        }
+        public ScreenOffAlarmListener() {}
 
         @Override // android.app.AlarmManager.OnAlarmListener
         public final void onAlarm() {
@@ -54,7 +56,12 @@ public final class WatchBatteryManager {
             return;
         }
         if (this.mSyncState == 1) {
-            this.mAlarmManager.setExact(2, (60 * 60000) + SystemClock.elapsedRealtime(), "WatchBatteryManagerAlarm", this.mAlarmListener, this.mHandler);
+            this.mAlarmManager.setExact(
+                    2,
+                    (60 * 60000) + SystemClock.elapsedRealtime(),
+                    "WatchBatteryManagerAlarm",
+                    this.mAlarmListener,
+                    this.mHandler);
             this.mAlarmRegistered = true;
         }
     }
@@ -71,7 +78,9 @@ public final class WatchBatteryManager {
         sb.append(" / mConnected:");
         HeimdAllFsService$$ExternalSyntheticOutline0.m("WatchBatteryManager", sb, this.mConnected);
         if (this.mRegistered) {
-            if ((this.mScreenOn || this.mAodShowState == 1) && this.mConnected && this.mSyncState == 0) {
+            if ((this.mScreenOn || this.mAodShowState == 1)
+                    && this.mConnected
+                    && this.mSyncState == 0) {
                 requestBatteryDataSync(1);
                 this.mSyncState = 1;
             }
@@ -107,13 +116,19 @@ public final class WatchBatteryManager {
         }
         this.mScreenOn = false;
         if (this.mAodShowState == 0 && this.mSyncState == 1) {
-            this.mAlarmManager.setExact(2, (60 * 60000) + SystemClock.elapsedRealtime(), "WatchBatteryManagerAlarm", this.mAlarmListener, this.mHandler);
+            this.mAlarmManager.setExact(
+                    2,
+                    (60 * 60000) + SystemClock.elapsedRealtime(),
+                    "WatchBatteryManagerAlarm",
+                    this.mAlarmListener,
+                    this.mHandler);
             this.mAlarmRegistered = true;
         }
     }
 
     public final void notifyPackageRegistered(boolean z) {
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("isRegistered: ", "/ mSyncState:", z);
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m("isRegistered: ", "/ mSyncState:", z);
         m.append(this.mSyncState);
         m.append("/ mScreenOn:");
         HeimdAllFsService$$ExternalSyntheticOutline0.m("WatchBatteryManager", m, this.mScreenOn);
@@ -151,28 +166,53 @@ public final class WatchBatteryManager {
 
     public final void requestBatteryDataSync(final int i) {
         Slog.i("WatchBatteryManager", "requestBatteryDataSync syncData: " + i);
-        this.mHandler.post(new Runnable() { // from class: com.samsung.android.server.battery.WatchBatteryManager.1
-            @Override // java.lang.Runnable
-            public final void run() {
-                try {
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("sync_battery_data", i);
-                    Iterator it = WatchBatteryManager.this.mProviderUriMap.entrySet().iterator();
-                    while (it.hasNext()) {
-                        Uri uri = (Uri) ((Map.Entry) it.next()).getValue();
-                        Slog.i("WatchBatteryManager", "requestBatteryDataSync : " + uri.toString());
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // com.samsung.android.server.battery.WatchBatteryManager.1
+                    @Override // java.lang.Runnable
+                    public final void run() {
                         try {
-                            Slog.i("WatchBatteryManager", "requestBatteryDataSync : " + WatchBatteryManager.this.mContext.getContentResolver().call(uri, "sync_request", (String) null, bundle).getInt(KnoxCustomManagerService.SPCM_KEY_RESULT));
-                        } catch (IllegalArgumentException e) {
-                            Slog.e("WatchBatteryManager", "requestBatteryDataSync - IllegalArgumentException : " + e);
-                        } catch (IllegalStateException e2) {
-                            Slog.e("WatchBatteryManager", "requestBatteryDataSync - IllegalStateException : " + e2);
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("sync_battery_data", i);
+                            Iterator it =
+                                    WatchBatteryManager.this.mProviderUriMap.entrySet().iterator();
+                            while (it.hasNext()) {
+                                Uri uri = (Uri) ((Map.Entry) it.next()).getValue();
+                                Slog.i(
+                                        "WatchBatteryManager",
+                                        "requestBatteryDataSync : " + uri.toString());
+                                try {
+                                    Slog.i(
+                                            "WatchBatteryManager",
+                                            "requestBatteryDataSync : "
+                                                    + WatchBatteryManager.this
+                                                            .mContext
+                                                            .getContentResolver()
+                                                            .call(
+                                                                    uri,
+                                                                    "sync_request",
+                                                                    (String) null,
+                                                                    bundle)
+                                                            .getInt(
+                                                                    KnoxCustomManagerService
+                                                                            .SPCM_KEY_RESULT));
+                                } catch (IllegalArgumentException e) {
+                                    Slog.e(
+                                            "WatchBatteryManager",
+                                            "requestBatteryDataSync - IllegalArgumentException : "
+                                                    + e);
+                                } catch (IllegalStateException e2) {
+                                    Slog.e(
+                                            "WatchBatteryManager",
+                                            "requestBatteryDataSync - IllegalStateException : "
+                                                    + e2);
+                                }
+                            }
+                        } catch (Exception e3) {
+                            BootReceiver$$ExternalSyntheticOutline0.m(
+                                    e3, "Exception occurred : ", "WatchBatteryManager");
                         }
                     }
-                } catch (Exception e3) {
-                    BootReceiver$$ExternalSyntheticOutline0.m(e3, "Exception occurred : ", "WatchBatteryManager");
-                }
-            }
-        });
+                });
     }
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ScrollView;
-import com.android.internal.widget.remotecompose.player.RemoteComposePlayer;
+
 import com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas;
 
 /* loaded from: classes5.dex */
@@ -63,8 +63,10 @@ public class RemoteComposePlayer extends FrameLayout {
                 if (!(this.mInner.getParent() instanceof HorizontalScrollView)) {
                     ((ViewGroup) this.mInner.getParent()).removeView(this.mInner);
                     removeAllViews();
-                    FrameLayout.LayoutParams layoutParamsInner = new FrameLayout.LayoutParams(-2, -1);
-                    HorizontalScrollView horizontalScrollView = new HorizontalScrollView(getContext());
+                    FrameLayout.LayoutParams layoutParamsInner =
+                            new FrameLayout.LayoutParams(-2, -1);
+                    HorizontalScrollView horizontalScrollView =
+                            new HorizontalScrollView(getContext());
                     horizontalScrollView.setBackgroundColor(0);
                     horizontalScrollView.setFillViewport(true);
                     horizontalScrollView.addView(this.mInner, layoutParamsInner);
@@ -77,7 +79,8 @@ public class RemoteComposePlayer extends FrameLayout {
                 if (!(this.mInner.getParent() instanceof ScrollView)) {
                     ((ViewGroup) this.mInner.getParent()).removeView(this.mInner);
                     removeAllViews();
-                    FrameLayout.LayoutParams layoutParamsInner2 = new FrameLayout.LayoutParams(-1, -2);
+                    FrameLayout.LayoutParams layoutParamsInner2 =
+                            new FrameLayout.LayoutParams(-1, -2);
                     ScrollView scrollView = new ScrollView(getContext());
                     scrollView.setBackgroundColor(0);
                     scrollView.setFillViewport(true);
@@ -108,12 +111,15 @@ public class RemoteComposePlayer extends FrameLayout {
     }
 
     public void addClickListener(final ClickCallbacks callback) {
-        this.mInner.addClickListener(new RemoteComposeCanvas.ClickCallbacks() { // from class: com.android.internal.widget.remotecompose.player.RemoteComposePlayer$$ExternalSyntheticLambda0
-            @Override // com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas.ClickCallbacks
-            public final void click(int i, String str) {
-                RemoteComposePlayer.ClickCallbacks.this.click(i, str);
-            }
-        });
+        this.mInner.addClickListener(
+                new RemoteComposeCanvas
+                        .ClickCallbacks() { // from class:
+                                            // com.android.internal.widget.remotecompose.player.RemoteComposePlayer$$ExternalSyntheticLambda0
+                    @Override // com.android.internal.widget.remotecompose.player.platform.RemoteComposeCanvas.ClickCallbacks
+                    public final void click(int i, String str) {
+                        RemoteComposePlayer.ClickCallbacks.this.click(i, str);
+                    }
+                });
     }
 
     public void setTheme(int theme) {

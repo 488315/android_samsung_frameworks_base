@@ -1,9 +1,10 @@
 package com.android.server.hdmi;
 
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
-import com.android.server.hdmi.HdmiControlService;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -13,7 +14,8 @@ public final class TimerRecordingAction extends HdmiCecFeatureAction {
     public final int mRecorderAddress;
     public final int mSourceType;
 
-    public TimerRecordingAction(HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv, int i, int i2, byte[] bArr) {
+    public TimerRecordingAction(
+            HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv, int i, int i2, byte[] bArr) {
         super(hdmiCecLocalDeviceTv);
         this.mRecorderAddress = i;
         this.mSourceType = i2;
@@ -23,9 +25,17 @@ public final class TimerRecordingAction extends HdmiCecFeatureAction {
     @Override // com.android.server.hdmi.HdmiCecFeatureAction
     public final void handleTimerEvent(int i) {
         if (this.mState != i) {
-            Slog.w("TimerRecordingAction", ActivityManagerService$$ExternalSyntheticOutline0.m(this.mState, i, ", Actual:", "]", new StringBuilder("Timeout in invalid state:[Expected:")));
+            Slog.w(
+                    "TimerRecordingAction",
+                    ActivityManagerService$$ExternalSyntheticOutline0.m(
+                            this.mState,
+                            i,
+                            ", Actual:",
+                            "]",
+                            new StringBuilder("Timeout in invalid state:[Expected:")));
         } else {
-            ((HdmiCecLocalDeviceTv) this.mSource).announceTimerRecordingResult(this.mRecorderAddress, 1);
+            ((HdmiCecLocalDeviceTv) this.mSource)
+                    .announceTimerRecordingResult(this.mRecorderAddress, 1);
             finish(true);
         }
     }
@@ -48,7 +58,9 @@ public final class TimerRecordingAction extends HdmiCecFeatureAction {
             if (i4 != 52 && i4 != 151 && i4 != 162) {
                 return false;
             }
-            Slog.i("TimerRecordingAction", "[Feature Abort] for " + i4 + " reason:" + (bArr[1] & 255));
+            Slog.i(
+                    "TimerRecordingAction",
+                    "[Feature Abort] for " + i4 + " reason:" + (bArr[1] & 255));
             ((HdmiCecLocalDeviceTv) hdmiCecLocalDevice).announceTimerRecordingResult(i2, 1);
             finish(true);
             return true;
@@ -81,7 +93,13 @@ public final class TimerRecordingAction extends HdmiCecFeatureAction {
         int i = this.mRecorderAddress;
         int i2 = this.mSourceType;
         if (i2 == 1) {
-            build = HdmiCecMessage.build(getSourceAddress(), i, FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__BIND_CROSS_PROFILE_SERVICE, bArr);
+            build =
+                    HdmiCecMessage.build(
+                            getSourceAddress(),
+                            i,
+                            FrameworkStatsLog
+                                    .DEVICE_POLICY_EVENT__EVENT_ID__BIND_CROSS_PROFILE_SERVICE,
+                            bArr);
         } else if (i2 == 2) {
             build = HdmiCecMessage.build(getSourceAddress(), i, 52, bArr);
         } else {
@@ -92,18 +110,24 @@ public final class TimerRecordingAction extends HdmiCecFeatureAction {
             }
             build = HdmiCecMessage.build(getSourceAddress(), i, 162, bArr);
         }
-        this.mService.sendCecCommand(build, new HdmiControlService.SendMessageCallback() { // from class: com.android.server.hdmi.TimerRecordingAction.1
-            @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
-            public final void onSendCompleted(int i3) {
-                TimerRecordingAction timerRecordingAction = TimerRecordingAction.this;
-                if (i3 != 0) {
-                    ((HdmiCecLocalDeviceTv) timerRecordingAction.mSource).announceTimerRecordingResult(timerRecordingAction.mRecorderAddress, 1);
-                    timerRecordingAction.finish(true);
-                } else {
-                    timerRecordingAction.mState = 1;
-                    timerRecordingAction.addTimer(1, 120000);
-                }
-            }
-        });
+        this.mService.sendCecCommand(
+                build,
+                new HdmiControlService
+                        .SendMessageCallback() { // from class:
+                                                 // com.android.server.hdmi.TimerRecordingAction.1
+                    @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
+                    public final void onSendCompleted(int i3) {
+                        TimerRecordingAction timerRecordingAction = TimerRecordingAction.this;
+                        if (i3 != 0) {
+                            ((HdmiCecLocalDeviceTv) timerRecordingAction.mSource)
+                                    .announceTimerRecordingResult(
+                                            timerRecordingAction.mRecorderAddress, 1);
+                            timerRecordingAction.finish(true);
+                        } else {
+                            timerRecordingAction.mState = 1;
+                            timerRecordingAction.addTimer(1, 120000);
+                        }
+                    }
+                });
     }
 }

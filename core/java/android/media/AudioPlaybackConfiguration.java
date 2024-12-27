@@ -1,15 +1,13 @@
 package android.media;
 
 import android.annotation.SystemApi;
-import android.media.AudioAttributes;
-import android.media.IPlayer;
-import android.media.PlayerBase;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -18,71 +16,55 @@ import java.util.Objects;
 /* loaded from: classes2.dex */
 public final class AudioPlaybackConfiguration implements Parcelable {
     private static final boolean DEBUG = false;
-    public static final String EXTRA_PLAYER_EVENT_CHANNEL_MASK = "android.media.extra.PLAYER_EVENT_CHANNEL_MASK";
+    public static final String EXTRA_PLAYER_EVENT_CHANNEL_MASK =
+            "android.media.extra.PLAYER_EVENT_CHANNEL_MASK";
     public static final String EXTRA_PLAYER_EVENT_MUTE = "android.media.extra.PLAYER_EVENT_MUTE";
-    public static final String EXTRA_PLAYER_EVENT_SAMPLE_RATE = "android.media.extra.PLAYER_EVENT_SAMPLE_RATE";
-    public static final String EXTRA_PLAYER_EVENT_SPATIALIZED = "android.media.extra.PLAYER_EVENT_SPATIALIZED";
+    public static final String EXTRA_PLAYER_EVENT_SAMPLE_RATE =
+            "android.media.extra.PLAYER_EVENT_SAMPLE_RATE";
+    public static final String EXTRA_PLAYER_EVENT_SPATIALIZED =
+            "android.media.extra.PLAYER_EVENT_SPATIALIZED";
 
-    @SystemApi
-    public static final int MUTED_BY_APP_OPS = 8;
+    @SystemApi public static final int MUTED_BY_APP_OPS = 8;
 
-    @SystemApi
-    public static final int MUTED_BY_CLIENT_VOLUME = 16;
+    @SystemApi public static final int MUTED_BY_CLIENT_VOLUME = 16;
 
-    @SystemApi
-    public static final int MUTED_BY_MASTER = 1;
+    @SystemApi public static final int MUTED_BY_MASTER = 1;
 
-    @SystemApi
-    public static final int MUTED_BY_STREAM_MUTED = 4;
+    @SystemApi public static final int MUTED_BY_STREAM_MUTED = 4;
 
-    @SystemApi
-    public static final int MUTED_BY_STREAM_VOLUME = 2;
+    @SystemApi public static final int MUTED_BY_STREAM_VOLUME = 2;
 
-    @SystemApi
-    public static final int MUTED_BY_VOLUME_SHAPER = 32;
+    @SystemApi public static final int MUTED_BY_VOLUME_SHAPER = 32;
     public static final int PLAYER_DEVICEID_INVALID = 0;
     public static final int PLAYER_PIID_INVALID = -1;
 
-    @SystemApi
-    public static final int PLAYER_STATE_IDLE = 1;
+    @SystemApi public static final int PLAYER_STATE_IDLE = 1;
 
-    @SystemApi
-    public static final int PLAYER_STATE_PAUSED = 3;
+    @SystemApi public static final int PLAYER_STATE_PAUSED = 3;
 
-    @SystemApi
-    public static final int PLAYER_STATE_RELEASED = 0;
+    @SystemApi public static final int PLAYER_STATE_RELEASED = 0;
 
-    @SystemApi
-    public static final int PLAYER_STATE_STARTED = 2;
+    @SystemApi public static final int PLAYER_STATE_STARTED = 2;
 
-    @SystemApi
-    public static final int PLAYER_STATE_STOPPED = 4;
+    @SystemApi public static final int PLAYER_STATE_STOPPED = 4;
 
-    @SystemApi
-    public static final int PLAYER_STATE_UNKNOWN = -1;
+    @SystemApi public static final int PLAYER_STATE_UNKNOWN = -1;
 
-    @SystemApi
-    public static final int PLAYER_TYPE_AAUDIO = 13;
+    @SystemApi public static final int PLAYER_TYPE_AAUDIO = 13;
     public static final int PLAYER_TYPE_EXTERNAL_PROXY = 15;
     public static final int PLAYER_TYPE_HW_SOURCE = 14;
 
-    @SystemApi
-    public static final int PLAYER_TYPE_JAM_AUDIOTRACK = 1;
+    @SystemApi public static final int PLAYER_TYPE_JAM_AUDIOTRACK = 1;
 
-    @SystemApi
-    public static final int PLAYER_TYPE_JAM_MEDIAPLAYER = 2;
+    @SystemApi public static final int PLAYER_TYPE_JAM_MEDIAPLAYER = 2;
 
-    @SystemApi
-    public static final int PLAYER_TYPE_JAM_SOUNDPOOL = 3;
+    @SystemApi public static final int PLAYER_TYPE_JAM_SOUNDPOOL = 3;
 
-    @SystemApi
-    public static final int PLAYER_TYPE_SLES_AUDIOPLAYER_BUFFERQUEUE = 11;
+    @SystemApi public static final int PLAYER_TYPE_SLES_AUDIOPLAYER_BUFFERQUEUE = 11;
 
-    @SystemApi
-    public static final int PLAYER_TYPE_SLES_AUDIOPLAYER_URI_FD = 12;
+    @SystemApi public static final int PLAYER_TYPE_SLES_AUDIOPLAYER_URI_FD = 12;
 
-    @SystemApi
-    public static final int PLAYER_TYPE_UNKNOWN = -1;
+    @SystemApi public static final int PLAYER_TYPE_UNKNOWN = -1;
     public static final int PLAYER_UPDATE_DEVICE_ID = 5;
     public static final int PLAYER_UPDATE_FORMAT = 8;
     public static final int PLAYER_UPDATE_MUTED = 7;
@@ -117,35 +99,34 @@ public final class AudioPlaybackConfiguration implements Parcelable {
     private int mSessionId;
     private final Object mUpdateablePropLock;
     private static final String TAG = new String("AudioPlaybackConfiguration");
-    public static final Parcelable.Creator<AudioPlaybackConfiguration> CREATOR = new Parcelable.Creator<AudioPlaybackConfiguration>() { // from class: android.media.AudioPlaybackConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPlaybackConfiguration createFromParcel(Parcel p) {
-            return new AudioPlaybackConfiguration(p);
-        }
+    public static final Parcelable.Creator<AudioPlaybackConfiguration> CREATOR =
+            new Parcelable.Creator<AudioPlaybackConfiguration>() { // from class:
+                // android.media.AudioPlaybackConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPlaybackConfiguration createFromParcel(Parcel p) {
+                    return new AudioPlaybackConfiguration(p);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPlaybackConfiguration[] newArray(int size) {
-            return new AudioPlaybackConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPlaybackConfiguration[] newArray(int size) {
+                    return new AudioPlaybackConfiguration[size];
+                }
+            };
 
     public interface PlayerDeathMonitor {
         void playerDeath(int i);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PlayerMuteEvent {
-    }
+    public @interface PlayerMuteEvent {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PlayerState {
-    }
+    public @interface PlayerState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PlayerType {
-    }
+    public @interface PlayerType {}
 
     public static String playerStateToString(int state) {
         switch (state) {
@@ -207,7 +188,8 @@ public final class AudioPlaybackConfiguration implements Parcelable {
         }
     }
 
-    private void setUpdateableFields(int deviceId, int sessionId, int mutedState, FormatInfo format) {
+    private void setUpdateableFields(
+            int deviceId, int sessionId, int mutedState, FormatInfo format) {
         synchronized (this.mUpdateablePropLock) {
             this.mDeviceId = deviceId;
             this.mSessionId = sessionId;
@@ -219,7 +201,12 @@ public final class AudioPlaybackConfiguration implements Parcelable {
     public static AudioPlaybackConfiguration anonymizedCopy(AudioPlaybackConfiguration in) {
         AudioPlaybackConfiguration anonymCopy = new AudioPlaybackConfiguration(in.mPlayerIId);
         anonymCopy.mPlayerState = in.mPlayerState;
-        AudioAttributes.Builder builder = new AudioAttributes.Builder().setContentType(in.mPlayerAttr.getContentType()).setFlags(in.mPlayerAttr.getFlags()).setAllowedCapturePolicy(in.mPlayerAttr.getAllowedCapturePolicy() != 1 ? 3 : 1);
+        AudioAttributes.Builder builder =
+                new AudioAttributes.Builder()
+                        .setContentType(in.mPlayerAttr.getContentType())
+                        .setFlags(in.mPlayerAttr.getFlags())
+                        .setAllowedCapturePolicy(
+                                in.mPlayerAttr.getAllowedCapturePolicy() != 1 ? 3 : 1);
         if (AudioAttributes.isSystemUsage(in.mPlayerAttr.getSystemUsage())) {
             builder.setSystemUsage(in.mPlayerAttr.getSystemUsage());
         } else {
@@ -341,7 +328,9 @@ public final class AudioPlaybackConfiguration implements Parcelable {
     public int getChannelMask() {
         int convertNativeChannelMaskToOutMask;
         synchronized (this.mUpdateablePropLock) {
-            convertNativeChannelMaskToOutMask = AudioFormat.convertNativeChannelMaskToOutMask(this.mFormatInfo.mNativeChannelMask);
+            convertNativeChannelMaskToOutMask =
+                    AudioFormat.convertNativeChannelMaskToOutMask(
+                            this.mFormatInfo.mNativeChannelMask);
         }
         return convertNativeChannelMaskToOutMask;
     }
@@ -421,7 +410,11 @@ public final class AudioPlaybackConfiguration implements Parcelable {
     }
 
     private boolean isMuteAffectingActiveState() {
-        return ((this.mMutedState & 16) == 0 && (this.mMutedState & 32) == 0 && (this.mMutedState & 8) == 0) ? false : true;
+        return ((this.mMutedState & 16) == 0
+                        && (this.mMutedState & 32) == 0
+                        && (this.mMutedState & 8) == 0)
+                ? false
+                : true;
     }
 
     @SystemApi
@@ -441,7 +434,15 @@ public final class AudioPlaybackConfiguration implements Parcelable {
     public int hashCode() {
         int hash;
         synchronized (this.mUpdateablePropLock) {
-            hash = Objects.hash(Integer.valueOf(this.mPlayerIId), Integer.valueOf(this.mDeviceId), Integer.valueOf(this.mMutedState), Integer.valueOf(this.mPlayerType), Integer.valueOf(this.mClientUid), Integer.valueOf(this.mClientPid), Integer.valueOf(this.mSessionId));
+            hash =
+                    Objects.hash(
+                            Integer.valueOf(this.mPlayerIId),
+                            Integer.valueOf(this.mDeviceId),
+                            Integer.valueOf(this.mMutedState),
+                            Integer.valueOf(this.mPlayerType),
+                            Integer.valueOf(this.mClientUid),
+                            Integer.valueOf(this.mClientPid),
+                            Integer.valueOf(this.mSessionId));
         }
         return hash;
     }
@@ -496,7 +497,13 @@ public final class AudioPlaybackConfiguration implements Parcelable {
             return false;
         }
         AudioPlaybackConfiguration that = (AudioPlaybackConfiguration) o;
-        if (this.mPlayerIId == that.mPlayerIId && this.mDeviceId == that.mDeviceId && this.mMutedState == that.mMutedState && this.mPlayerType == that.mPlayerType && this.mClientUid == that.mClientUid && this.mClientPid == that.mClientPid && this.mSessionId == that.mSessionId) {
+        if (this.mPlayerIId == that.mPlayerIId
+                && this.mDeviceId == that.mDeviceId
+                && this.mMutedState == that.mMutedState
+                && this.mPlayerType == that.mPlayerType
+                && this.mClientUid == that.mClientUid
+                && this.mClientPid == that.mClientPid
+                && this.mSessionId == that.mSessionId) {
             return true;
         }
         return false;
@@ -505,7 +512,24 @@ public final class AudioPlaybackConfiguration implements Parcelable {
     public String toString() {
         StringBuilder apcToString = new StringBuilder();
         synchronized (this.mUpdateablePropLock) {
-            apcToString.append("AudioPlaybackConfiguration piid:").append(this.mPlayerIId).append(" deviceId:").append(this.mDeviceId).append(" type:").append(toLogFriendlyPlayerType(this.mPlayerType)).append(" u/pid:").append(this.mClientUid).append("/").append(this.mClientPid).append(" state:").append(toLogFriendlyPlayerState(this.mPlayerState)).append(" attr:").append(this.mPlayerAttr).append(" sessionId:").append(this.mSessionId).append(" mutedState:");
+            apcToString
+                    .append("AudioPlaybackConfiguration piid:")
+                    .append(this.mPlayerIId)
+                    .append(" deviceId:")
+                    .append(this.mDeviceId)
+                    .append(" type:")
+                    .append(toLogFriendlyPlayerType(this.mPlayerType))
+                    .append(" u/pid:")
+                    .append(this.mClientUid)
+                    .append("/")
+                    .append(this.mClientPid)
+                    .append(" state:")
+                    .append(toLogFriendlyPlayerState(this.mPlayerState))
+                    .append(" attr:")
+                    .append(this.mPlayerAttr)
+                    .append(" sessionId:")
+                    .append(this.mSessionId)
+                    .append(" mutedState:");
             if (this.mMutedState == 0) {
                 apcToString.append("none ");
             } else {
@@ -550,7 +574,10 @@ public final class AudioPlaybackConfiguration implements Parcelable {
                 this.mIPlayer.asBinder().linkToDeath(this, 0);
             } catch (RemoteException e) {
                 if (this.mMonitor != null) {
-                    Log.w(AudioPlaybackConfiguration.TAG, "Could not link to client death for piid=" + this.mMonitor.mPlayerIId, e);
+                    Log.w(
+                            AudioPlaybackConfiguration.TAG,
+                            "Could not link to client death for piid=" + this.mMonitor.mPlayerIId,
+                            e);
                 } else {
                     Log.w(AudioPlaybackConfiguration.TAG, "Could not link to client death", e);
                 }
@@ -583,19 +610,21 @@ public final class AudioPlaybackConfiguration implements Parcelable {
         final int mNativeChannelMask;
         final int mSampleRate;
         static final FormatInfo DEFAULT = new FormatInfo(false, 0, 0);
-        public static final Parcelable.Creator<FormatInfo> CREATOR = new Parcelable.Creator<FormatInfo>() { // from class: android.media.AudioPlaybackConfiguration.FormatInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FormatInfo createFromParcel(Parcel p) {
-                return new FormatInfo(p);
-            }
+        public static final Parcelable.Creator<FormatInfo> CREATOR =
+                new Parcelable.Creator<FormatInfo>() { // from class:
+                    // android.media.AudioPlaybackConfiguration.FormatInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FormatInfo createFromParcel(Parcel p) {
+                        return new FormatInfo(p);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FormatInfo[] newArray(int size) {
-                return new FormatInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FormatInfo[] newArray(int size) {
+                        return new FormatInfo[size];
+                    }
+                };
 
         public FormatInfo(boolean isSpatialized, int nativeChannelMask, int sampleRate) {
             this.mIsSpatialized = isSpatialized;
@@ -604,7 +633,13 @@ public final class AudioPlaybackConfiguration implements Parcelable {
         }
 
         public String toString() {
-            return "FormatInfo{isSpatialized=" + this.mIsSpatialized + ", channelMask=0x" + Integer.toHexString(this.mNativeChannelMask) + ", sampleRate=" + this.mSampleRate + '}';
+            return "FormatInfo{isSpatialized="
+                    + this.mIsSpatialized
+                    + ", channelMask=0x"
+                    + Integer.toHexString(this.mNativeChannelMask)
+                    + ", sampleRate="
+                    + this.mSampleRate
+                    + '}';
         }
 
         public boolean equals(Object o) {
@@ -615,11 +650,16 @@ public final class AudioPlaybackConfiguration implements Parcelable {
                 return false;
             }
             FormatInfo that = (FormatInfo) o;
-            return this.mIsSpatialized == that.mIsSpatialized && this.mNativeChannelMask == that.mNativeChannelMask && this.mSampleRate == that.mSampleRate;
+            return this.mIsSpatialized == that.mIsSpatialized
+                    && this.mNativeChannelMask == that.mNativeChannelMask
+                    && this.mSampleRate == that.mSampleRate;
         }
 
         public int hashCode() {
-            return Objects.hash(Boolean.valueOf(this.mIsSpatialized), Integer.valueOf(this.mNativeChannelMask), Integer.valueOf(this.mSampleRate));
+            return Objects.hash(
+                    Boolean.valueOf(this.mIsSpatialized),
+                    Integer.valueOf(this.mNativeChannelMask),
+                    Integer.valueOf(this.mSampleRate));
         }
 
         @Override // android.os.Parcelable

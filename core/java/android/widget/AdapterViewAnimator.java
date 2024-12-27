@@ -13,17 +13,19 @@ import android.util.AttributeSet;
 import android.view.RemotableViewMethod;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.RemoteViews;
-import android.widget.RemoteViewsAdapter;
+
 import com.android.internal.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /* loaded from: classes4.dex */
-public abstract class AdapterViewAnimator extends AdapterView<Adapter> implements RemoteViewsAdapter.RemoteAdapterConnectionCallback, Advanceable {
-    private static final String APPWIDGET_CURRENT_DISPLAYED_POSITION_ACTION = "android.widget.AdapterViewAnimator.APPWIDGET_CURRENT_DISPLAYED_POSITION";
-    private static final String APPWIDGET_EXTRA_CURRENT_DISPLAYED_POSITION = "appwidgetCurrentDisplayedPosition";
+public abstract class AdapterViewAnimator extends AdapterView<Adapter>
+        implements RemoteViewsAdapter.RemoteAdapterConnectionCallback, Advanceable {
+    private static final String APPWIDGET_CURRENT_DISPLAYED_POSITION_ACTION =
+            "android.widget.AdapterViewAnimator.APPWIDGET_CURRENT_DISPLAYED_POSITION";
+    private static final String APPWIDGET_EXTRA_CURRENT_DISPLAYED_POSITION =
+            "appwidgetCurrentDisplayedPosition";
     private static final int APP_WIDGET_BROADCAST_CURRENT_DISPLAYED_POSITION_TYPE = 1;
     private static final int DEFAULT_ANIMATION_DURATION = 200;
     private static final String TAG = "RemoteViewAnimator";
@@ -70,7 +72,8 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public AdapterViewAnimator(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public AdapterViewAnimator(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mWhichChild = 0;
         this.mRestoreWhichChild = -1;
@@ -92,8 +95,11 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         this.mDeferSetDisplayedChild = false;
         this.mDeferSetDisplayedChildIndex = 0;
         this.mAppWidgetGetCurrentDisplayedPosition = "";
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AdapterViewAnimator, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.AdapterViewAnimator, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.AdapterViewAnimator, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.AdapterViewAnimator, attrs, a, defStyleAttr, defStyleRes);
         int resource = a.getResourceId(0, 0);
         if (resource > 0) {
             setInAnimation(context, resource);
@@ -211,8 +217,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         semSendBroadcastPosition(whichChild, 1);
     }
 
-    void applyTransformForChildAtIndex(View child, int relativeIndex) {
-    }
+    void applyTransformForChildAtIndex(View child, int relativeIndex) {}
 
     public int getDisplayedChild() {
         return this.mWhichChild;
@@ -234,7 +239,9 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     View getViewAtRelativeIndex(int relativeIndex) {
-        if (relativeIndex >= 0 && relativeIndex <= getNumActiveViews() - 1 && this.mAdapter != null) {
+        if (relativeIndex >= 0
+                && relativeIndex <= getNumActiveViews() - 1
+                && this.mAdapter != null) {
             int i = modulo(this.mCurrentWindowStartUnbounded + relativeIndex, getWindowSize());
             if (this.mViewsMap.get(Integer.valueOf(i)) != null) {
                 return this.mViewsMap.get(Integer.valueOf(i)).view;
@@ -367,7 +374,9 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
                 transformViewForTransition(oldRelativeIndex2, -1, previousView, animate);
             }
         }
-        if (newWindowStart != this.mCurrentWindowStart || newWindowEnd != this.mCurrentWindowEnd || newWindowStartUnbounded2 != this.mCurrentWindowStartUnbounded) {
+        if (newWindowStart != this.mCurrentWindowStart
+                || newWindowEnd != this.mCurrentWindowEnd
+                || newWindowStartUnbounded2 != this.mCurrentWindowStartUnbounded) {
             int i2 = newWindowStart;
             while (i2 <= newWindowEnd) {
                 int index2 = modulo(i2, getWindowSize());
@@ -377,7 +386,9 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
                     oldRelativeIndex = -1;
                 }
                 int newRelativeIndex2 = i2 - newWindowStartUnbounded2;
-                boolean inOldRange = this.mViewsMap.containsKey(Integer.valueOf(index2)) && !this.mPreviousViews.contains(Integer.valueOf(index2));
+                boolean inOldRange =
+                        this.mViewsMap.containsKey(Integer.valueOf(index2))
+                                && !this.mPreviousViews.contains(Integer.valueOf(index2));
                 if (inOldRange) {
                     View view = this.mViewsMap.get(Integer.valueOf(index2)).view;
                     this.mViewsMap.get(Integer.valueOf(index2)).relativeIndex = newRelativeIndex2;
@@ -404,7 +415,9 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
                     rangeEnd = rangeEnd2;
                     rangeStart = rangeStart2;
                     newWindowEnd2 = newWindowEnd;
-                    this.mViewsMap.put(Integer.valueOf(index2), new ViewAndMetaData(fl, newRelativeIndex2, adapterPosition, itemId));
+                    this.mViewsMap.put(
+                            Integer.valueOf(index2),
+                            new ViewAndMetaData(fl, newRelativeIndex2, adapterPosition, itemId));
                     addChild(fl);
                     applyTransformForChildAtIndex(fl, newRelativeIndex2);
                     newRelativeIndex = -1;
@@ -460,8 +473,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     final class CheckForTap implements Runnable {
-        CheckForTap() {
-        }
+        CheckForTap() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -474,9 +486,9 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x0082, code lost:
-    
-        return r1;
-     */
+
+       return r1;
+    */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -559,7 +571,9 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         L82:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.AdapterViewAnimator.onTouchEvent(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.widget.AdapterViewAnimator.onTouchEvent(android.view.MotionEvent):boolean");
     }
 
     private void measureChildren() {
@@ -568,7 +582,9 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         int childHeight = (getMeasuredHeight() - this.mPaddingTop) - this.mPaddingBottom;
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
-            child.measure(View.MeasureSpec.makeMeasureSpec(childWidth, 1073741824), View.MeasureSpec.makeMeasureSpec(childHeight, 1073741824));
+            child.measure(
+                    View.MeasureSpec.makeMeasureSpec(childWidth, 1073741824),
+                    View.MeasureSpec.makeMeasureSpec(childHeight, 1073741824));
         }
     }
 
@@ -578,15 +594,24 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
         int heightSpecSize = View.MeasureSpec.getSize(heightMeasureSpec);
         int widthSpecMode = View.MeasureSpec.getMode(widthMeasureSpec);
         int heightSpecMode = View.MeasureSpec.getMode(heightMeasureSpec);
-        boolean haveChildRefSize = (this.mReferenceChildWidth == -1 || this.mReferenceChildHeight == -1) ? false : true;
+        boolean haveChildRefSize =
+                (this.mReferenceChildWidth == -1 || this.mReferenceChildHeight == -1)
+                        ? false
+                        : true;
         if (heightSpecMode == 0) {
-            heightSpecSize = haveChildRefSize ? this.mReferenceChildHeight + this.mPaddingTop + this.mPaddingBottom : 0;
+            heightSpecSize =
+                    haveChildRefSize
+                            ? this.mReferenceChildHeight + this.mPaddingTop + this.mPaddingBottom
+                            : 0;
         } else if (heightSpecMode == Integer.MIN_VALUE && haveChildRefSize) {
             int height = this.mReferenceChildHeight + this.mPaddingTop + this.mPaddingBottom;
             heightSpecSize = height > heightSpecSize ? heightSpecSize | 16777216 : height;
         }
         if (widthSpecMode == 0) {
-            widthSpecSize = haveChildRefSize ? this.mReferenceChildWidth + this.mPaddingLeft + this.mPaddingRight : 0;
+            widthSpecSize =
+                    haveChildRefSize
+                            ? this.mReferenceChildWidth + this.mPaddingLeft + this.mPaddingRight
+                            : 0;
         } else if (heightSpecMode == Integer.MIN_VALUE && haveChildRefSize) {
             int width = this.mReferenceChildWidth + this.mPaddingLeft + this.mPaddingRight;
             widthSpecSize = width > widthSpecSize ? widthSpecSize | 16777216 : width;
@@ -598,20 +623,25 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     void checkForAndHandleDataChanged() {
         boolean dataChanged = this.mDataChanged;
         if (dataChanged) {
-            post(new Runnable() { // from class: android.widget.AdapterViewAnimator.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    AdapterViewAnimator.this.handleDataChanged();
-                    if (AdapterViewAnimator.this.mWhichChild >= AdapterViewAnimator.this.getWindowSize()) {
-                        AdapterViewAnimator.this.mWhichChild = 0;
-                        AdapterViewAnimator.this.showOnly(AdapterViewAnimator.this.mWhichChild, false);
-                    } else if (AdapterViewAnimator.this.mOldItemCount != AdapterViewAnimator.this.getCount()) {
-                        AdapterViewAnimator.this.showOnly(AdapterViewAnimator.this.mWhichChild, false);
-                    }
-                    AdapterViewAnimator.this.refreshChildren();
-                    AdapterViewAnimator.this.requestLayout();
-                }
-            });
+            post(
+                    new Runnable() { // from class: android.widget.AdapterViewAnimator.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            AdapterViewAnimator.this.handleDataChanged();
+                            if (AdapterViewAnimator.this.mWhichChild
+                                    >= AdapterViewAnimator.this.getWindowSize()) {
+                                AdapterViewAnimator.this.mWhichChild = 0;
+                                AdapterViewAnimator.this.showOnly(
+                                        AdapterViewAnimator.this.mWhichChild, false);
+                            } else if (AdapterViewAnimator.this.mOldItemCount
+                                    != AdapterViewAnimator.this.getCount()) {
+                                AdapterViewAnimator.this.showOnly(
+                                        AdapterViewAnimator.this.mWhichChild, false);
+                            }
+                            AdapterViewAnimator.this.refreshChildren();
+                            AdapterViewAnimator.this.requestLayout();
+                        }
+                    });
         }
         this.mDataChanged = false;
     }
@@ -629,19 +659,22 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     static class SavedState extends View.BaseSavedState {
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: android.widget.AdapterViewAnimator.SavedState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<
+                        SavedState>() { // from class:
+                                        // android.widget.AdapterViewAnimator.SavedState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
         int whichChild;
 
         SavedState(Parcelable superState, int whichChild) {
@@ -654,7 +687,8 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
             this.whichChild = in.readInt();
         }
 
-        @Override // android.view.View.BaseSavedState, android.view.AbsSavedState, android.os.Parcelable
+        @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
+                  // android.os.Parcelable
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeInt(this.whichChild);
@@ -758,7 +792,9 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     public void setRemoteViewsAdapter(Intent intent, boolean isAsync) {
         if (this.mRemoteViewsAdapter != null) {
             Intent.FilterComparison fcNew = new Intent.FilterComparison(intent);
-            Intent.FilterComparison fcOld = new Intent.FilterComparison(this.mRemoteViewsAdapter.getRemoteViewsServiceIntent());
+            Intent.FilterComparison fcOld =
+                    new Intent.FilterComparison(
+                            this.mRemoteViewsAdapter.getRemoteViewsServiceIntent());
             if (fcNew.equals(fcOld)) {
                 return;
             }
@@ -817,8 +853,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     @Override // android.widget.RemoteViewsAdapter.RemoteAdapterConnectionCallback
-    public void onRemoteAdapterDisconnected() {
-    }
+    public void onRemoteAdapterDisconnected() {}
 
     @Override // android.widget.Advanceable
     public void advance() {
@@ -826,8 +861,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     @Override // android.widget.Advanceable
-    public void fyiWillBeAdvancedByHostKThx() {
-    }
+    public void fyiWillBeAdvancedByHostKThx() {}
 
     @Override // android.widget.AdapterView, android.view.ViewGroup, android.view.View
     public CharSequence getAccessibilityClassName() {
@@ -836,7 +870,11 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
 
     private void semSendBroadcastPositionInternal(String component, Intent intent) {
         String[] str = component.split("/");
-        if (str.length > 1 && str[0] != null && str[1] != null && !str[0].isEmpty() && !str[1].isEmpty()) {
+        if (str.length > 1
+                && str[0] != null
+                && str[1] != null
+                && !str[0].isEmpty()
+                && !str[1].isEmpty()) {
             intent.setPackage(str[0]);
             intent.setComponent(new ComponentName(str[0], str[1]));
             if (str.length == 3 && str[2] != null && !str[2].isEmpty()) {
@@ -848,15 +886,15 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter> implement
     }
 
     private void semSendBroadcastPosition(int position, int type) {
-        if (position < 0) {
-        }
+        if (position < 0) {}
         switch (type) {
             case 1:
                 if (!this.mAppWidgetGetCurrentDisplayedPosition.isEmpty()) {
                     Intent intent = new Intent(APPWIDGET_CURRENT_DISPLAYED_POSITION_ACTION);
                     intent.putExtra(APPWIDGET_EXTRA_CURRENT_DISPLAYED_POSITION, position);
                     intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, this.mAppWidgetId);
-                    semSendBroadcastPositionInternal(this.mAppWidgetGetCurrentDisplayedPosition, intent);
+                    semSendBroadcastPositionInternal(
+                            this.mAppWidgetGetCurrentDisplayedPosition, intent);
                     break;
                 }
                 break;

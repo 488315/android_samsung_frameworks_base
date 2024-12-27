@@ -34,6 +34,7 @@ import android.security.KeyChain;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.LocalServices;
@@ -62,6 +63,7 @@ import com.android.server.enterprise.utils.CertificateUtil;
 import com.android.server.enterprise.utils.EnterpriseDumpHelper;
 import com.android.server.enterprise.utils.Utils;
 import com.android.server.input.KeyboardMetricsCollector;
+
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.emergencymode.SemEmergencyManager;
@@ -78,6 +80,7 @@ import com.samsung.android.knox.keystore.CertificateProvisioning;
 import com.samsung.android.knox.localservice.SecurityPolicyInternal;
 import com.samsung.android.security.IDirEncryptService;
 import com.samsung.android.security.SemSdCardEncryption;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -101,7 +104,8 @@ import java.util.concurrent.TimeUnit;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class SecurityPolicy extends ISecurityPolicy.Stub implements EnterpriseServiceCallback, KeyCodeRestrictionCallback {
+public final class SecurityPolicy extends ISecurityPolicy.Stub
+        implements EnterpriseServiceCallback, KeyCodeRestrictionCallback {
     public static Map mBannerMap;
     public FactoryWipeReceiver factoryReceiver;
     public final AnonymousClass1 mBlocker;
@@ -121,8 +125,7 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FactoryWipeReceiver extends MasterClearReceiver {
-        public FactoryWipeReceiver() {
-        }
+        public FactoryWipeReceiver() {}
 
         @Override // com.android.server.MasterClearReceiver, android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -147,8 +150,7 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends SecurityPolicyInternal {
-        public LocalService() {
-        }
+        public LocalService() {}
 
         public final boolean isDodBannerVisibleAsUser(int i) {
             return SecurityPolicy.this.isDodBannerVisibleAsUser(i);
@@ -157,15 +159,15 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ResetKeyChain extends AsyncTask {
-        public ResetKeyChain() {
-        }
+        public ResetKeyChain() {}
 
         @Override // android.os.AsyncTask
         public final Object doInBackground(Object[] objArr) {
             Boolean bool;
             int intValue = ((Integer[]) objArr)[0].intValue();
             try {
-                KeyChain.KeyChainConnection bindAsUser = KeyChain.bindAsUser(SecurityPolicy.this.mContext, new UserHandle(intValue));
+                KeyChain.KeyChainConnection bindAsUser =
+                        KeyChain.bindAsUser(SecurityPolicy.this.mContext, new UserHandle(intValue));
                 try {
                     try {
                         bool = Boolean.valueOf(bindAsUser.getService().reset());
@@ -179,7 +181,11 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                     throw th;
                 }
             } catch (AssertionError unused2) {
-                AudioDeviceInventory$$ExternalSyntheticOutline0.m(intValue, "ResetKeyChain - is KeyChainService running for user ", "?", "SecurityPolicy");
+                AudioDeviceInventory$$ExternalSyntheticOutline0.m(
+                        intValue,
+                        "ResetKeyChain - is KeyChainService running for user ",
+                        "?",
+                        "SecurityPolicy");
                 return Boolean.FALSE;
             } catch (InterruptedException unused3) {
                 return Boolean.FALSE;
@@ -189,14 +195,14 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ResponseHandler extends Handler {
-        public ResponseHandler() {
-        }
+        public ResponseHandler() {}
 
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             super.handleMessage(message);
             if (message.what != 1) {
-                GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("unknown msg type "), message.what, "SecurityPolicy");
+                GestureWakeup$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("unknown msg type "), message.what, "SecurityPolicy");
                 return;
             }
             if (!((Boolean) message.obj).booleanValue()) {
@@ -217,28 +223,26 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserSwitchObserver extends IUserSwitchObserver.Stub {
-        public final void onBeforeUserSwitching(int i) {
-        }
+        public final void onBeforeUserSwitching(int i) {}
 
-        public final void onForegroundProfileSwitch(int i) {
-        }
+        public final void onForegroundProfileSwitch(int i) {}
 
-        public final void onLockedBootComplete(int i) {
-        }
+        public final void onLockedBootComplete(int i) {}
 
-        public final void onUserSwitchComplete(int i) {
-        }
+        public final void onUserSwitchComplete(int i) {}
 
-        public final void onUserSwitching(int i, IRemoteCallback iRemoteCallback) {
-        }
+        public final void onUserSwitching(int i, IRemoteCallback iRemoteCallback) {}
     }
 
     /* renamed from: -$$Nest$msaveDeviceBootMode, reason: not valid java name */
     public static void m524$$Nest$msaveDeviceBootMode(SecurityPolicy securityPolicy, boolean z) {
         securityPolicy.getClass();
         try {
-            securityPolicy.mEdmStorageProvider.putGenericValueAsUser(0, "deviceBootMode", Integer.toString(z ? 1 : 0));
-            Log.i("SecurityPolicy", "Device safe mode saved in generic table : " + Integer.toString(z ? 1 : 0));
+            securityPolicy.mEdmStorageProvider.putGenericValueAsUser(
+                    0, "deviceBootMode", Integer.toString(z ? 1 : 0));
+            Log.i(
+                    "SecurityPolicy",
+                    "Device safe mode saved in generic table : " + Integer.toString(z ? 1 : 0));
         } catch (Exception unused) {
         }
     }
@@ -250,90 +254,139 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         ArrayList arrayList = new ArrayList();
         this.mStatusBarService = null;
         this.mToken = new Binder();
-        this.mBlocker = new SemDesktopModeManager.DesktopModeBlocker() { // from class: com.android.server.enterprise.security.SecurityPolicy.1
-            public final String onBlocked() {
-                return SecurityPolicy.this.mContext.getString(R.string.heavy_weight_switcher_text);
-            }
-        };
+        this.mBlocker =
+                new SemDesktopModeManager
+                        .DesktopModeBlocker() { // from class:
+                                                // com.android.server.enterprise.security.SecurityPolicy.1
+                    public final String onBlocked() {
+                        return SecurityPolicy.this.mContext.getString(
+                                R.string.heavy_weight_switcher_text);
+                    }
+                };
         this.mEmergencyMgr = null;
         this.mEDM = null;
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.enterprise.security.SecurityPolicy.3
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                String action = intent.getAction();
-                int intExtra = intent.getIntExtra("android.intent.extra.user_handle", -1);
-                NetworkScoreService$$ExternalSyntheticOutline0.m(intExtra, "action = ", action, ", userId = ", "SecurityPolicy");
-                try {
-                    if (!action.equals("android.intent.action.LOCKED_BOOT_COMPLETED")) {
-                        if (action.equals("com.samsung.android.knox.intent.action.EDM_BOOT_COMPLETED_INTERNAL")) {
-                        }
-                    }
-                    SecurityPolicy.this.mBootCompleted = true;
-                    ((PersonaManagerAdapter) ((IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class))).getClass();
-                    if (SemPersonaManager.isKnoxId(intExtra)) {
-                        return;
-                    }
-                    if (SecurityPolicy.this.isRebootBannerEnabled(0)) {
-                        if (context2.getPackageManager().isSafeMode()) {
-                            Log.i("SecurityPolicy", "Saving Device safe mode to true in generic table");
-                            SecurityPolicy.m524$$Nest$msaveDeviceBootMode(SecurityPolicy.this, true);
-                        } else {
-                            String genericValueAsUser = SecurityPolicy.this.mEdmStorageProvider.getGenericValueAsUser(0, "deviceBootMode");
-                            if (genericValueAsUser != null && genericValueAsUser.equals("1")) {
-                                Log.i("SecurityPolicy", "Sending broadcast: com.samsung.android.knox.intent.action.LAST_BOOT_SAFE_MODE_INTERNAL");
-                                context2.sendBroadcast(new Intent("com.samsung.android.knox.intent.action.LAST_BOOT_SAFE_MODE_INTERNAL").addFlags(16777216));
-                                SecurityPolicy.m524$$Nest$msaveDeviceBootMode(SecurityPolicy.this, false);
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class:
+                    // com.android.server.enterprise.security.SecurityPolicy.3
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        int intExtra = intent.getIntExtra("android.intent.extra.user_handle", -1);
+                        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                                intExtra, "action = ", action, ", userId = ", "SecurityPolicy");
+                        try {
+                            if (!action.equals("android.intent.action.LOCKED_BOOT_COMPLETED")) {
+                                if (action.equals(
+                                        "com.samsung.android.knox.intent.action.EDM_BOOT_COMPLETED_INTERNAL")) {}
                             }
+                            SecurityPolicy.this.mBootCompleted = true;
+                            ((PersonaManagerAdapter)
+                                            ((IPersonaManagerAdapter)
+                                                    AdapterRegistry.mAdapterHandles.get(
+                                                            IPersonaManagerAdapter.class)))
+                                    .getClass();
+                            if (SemPersonaManager.isKnoxId(intExtra)) {
+                                return;
+                            }
+                            if (SecurityPolicy.this.isRebootBannerEnabled(0)) {
+                                if (context2.getPackageManager().isSafeMode()) {
+                                    Log.i(
+                                            "SecurityPolicy",
+                                            "Saving Device safe mode to true in generic table");
+                                    SecurityPolicy.m524$$Nest$msaveDeviceBootMode(
+                                            SecurityPolicy.this, true);
+                                } else {
+                                    String genericValueAsUser =
+                                            SecurityPolicy.this.mEdmStorageProvider
+                                                    .getGenericValueAsUser(0, "deviceBootMode");
+                                    if (genericValueAsUser != null
+                                            && genericValueAsUser.equals("1")) {
+                                        Log.i(
+                                                "SecurityPolicy",
+                                                "Sending broadcast:"
+                                                    + " com.samsung.android.knox.intent.action.LAST_BOOT_SAFE_MODE_INTERNAL");
+                                        context2.sendBroadcast(
+                                                new Intent(
+                                                                "com.samsung.android.knox.intent.action.LAST_BOOT_SAFE_MODE_INTERNAL")
+                                                        .addFlags(16777216));
+                                        SecurityPolicy.m524$$Nest$msaveDeviceBootMode(
+                                                SecurityPolicy.this, false);
+                                    }
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        };
+                };
         this.mPendingGetCerificates = new HashMap();
         this.mInjector = injector;
         Objects.requireNonNull(context);
         this.mContext = context;
         new Handler();
         this.mEdmStorageProvider = new EdmStorageProvider(context);
-        context.registerReceiverAsUser(broadcastReceiver, UserHandle.ALL, GmsAlarmManager$$ExternalSyntheticOutline0.m("android.intent.action.LOCKED_BOOT_COMPLETED", "com.samsung.android.knox.intent.action.EDM_BOOT_COMPLETED_INTERNAL", "com.samsung.intent.action.EMERGENCY_STATE_CHANGED"), null, null, 2);
+        context.registerReceiverAsUser(
+                broadcastReceiver,
+                UserHandle.ALL,
+                GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                        "android.intent.action.LOCKED_BOOT_COMPLETED",
+                        "com.samsung.android.knox.intent.action.EDM_BOOT_COMPLETED_INTERNAL",
+                        "com.samsung.intent.action.EMERGENCY_STATE_CHANGED"),
+                null,
+                null,
+                2);
         mBannerMap = new HashMap();
         arrayList.add("com.samsung.android.email.provider");
         this.mEnterpriseDumpHelper = new EnterpriseDumpHelper(context);
         Log.d("SecurityPolicy", "SEC_PRODUCT_FEATURE_COMMON_SUPPORT_KNOX_DESKTOP is true");
-        SemDesktopModeManager semDesktopModeManager = (SemDesktopModeManager) context.getSystemService("desktopmode");
+        SemDesktopModeManager semDesktopModeManager =
+                (SemDesktopModeManager) context.getSystemService("desktopmode");
         if (semDesktopModeManager != null) {
-            semDesktopModeManager.registerListener(new SemDesktopModeManager.DesktopModeListener() { // from class: com.android.server.enterprise.security.SecurityPolicy.2
-                public final void onDesktopModeStateChanged(SemDesktopModeState semDesktopModeState) {
-                    if (semDesktopModeState.state == 20 && semDesktopModeState.enabled == 3) {
-                        Log.d("SecurityPolicy", "listener - Dex Enabling");
-                        if (SecurityPolicy.this.isDodBannerVisibleAsUser(0)) {
-                            SecurityPolicy.this.registerDexBlocker$3();
+            semDesktopModeManager.registerListener(
+                    new SemDesktopModeManager
+                            .DesktopModeListener() { // from class:
+                                                     // com.android.server.enterprise.security.SecurityPolicy.2
+                        public final void onDesktopModeStateChanged(
+                                SemDesktopModeState semDesktopModeState) {
+                            if (semDesktopModeState.state == 20
+                                    && semDesktopModeState.enabled == 3) {
+                                Log.d("SecurityPolicy", "listener - Dex Enabling");
+                                if (SecurityPolicy.this.isDodBannerVisibleAsUser(0)) {
+                                    SecurityPolicy.this.registerDexBlocker$3();
+                                }
+                            }
                         }
-                    }
-                }
-            });
+                    });
         }
         try {
-            ActivityManagerNative.getDefault().registerUserSwitchObserver(new UserSwitchObserver(), "SecurityPolicy");
+            ActivityManagerNative.getDefault()
+                    .registerUserSwitchObserver(new UserSwitchObserver(), "SecurityPolicy");
         } catch (RemoteException e) {
             Slog.w("SecurityPolicy", "Exception during register UserSwitchObserver ", e);
         }
         this.mEmergencyMgr = SemEmergencyManager.getInstance(this.mInjector.mContext);
-        ((EnterpriseDeviceManagerServiceImpl) ((EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance)).getClass();
+        ((EnterpriseDeviceManagerServiceImpl)
+                        ((EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance))
+                .getClass();
         if (EnterpriseDeviceManagerServiceImpl.mIsFirmwareUpgrade && isRebootBannerEnabled(0)) {
             addBannerAppToBatteryOptimizationWhitelist(new ContextInfo(), true);
         }
         LocalServices.addService(SecurityPolicyInternal.class, new LocalService());
     }
 
-    public static void addBannerAppToBatteryOptimizationWhitelist(ContextInfo contextInfo, boolean z) {
-        ApplicationPolicy applicationPolicy = (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
+    public static void addBannerAppToBatteryOptimizationWhitelist(
+            ContextInfo contextInfo, boolean z) {
+        ApplicationPolicy applicationPolicy =
+                (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
         if (z) {
-            applicationPolicy.addPackageToBatteryOptimizationWhiteList(contextInfo, new AppIdentity(KnoxCustomManagerService.KNOX_PP_AGENT_PKG_NAME, (String) null));
+            applicationPolicy.addPackageToBatteryOptimizationWhiteList(
+                    contextInfo,
+                    new AppIdentity(
+                            KnoxCustomManagerService.KNOX_PP_AGENT_PKG_NAME, (String) null));
         } else {
-            applicationPolicy.removePackageFromBatteryOptimizationWhiteList(contextInfo, new AppIdentity(KnoxCustomManagerService.KNOX_PP_AGENT_PKG_NAME, (String) null));
+            applicationPolicy.removePackageFromBatteryOptimizationWhiteList(
+                    contextInfo,
+                    new AppIdentity(
+                            KnoxCustomManagerService.KNOX_PP_AGENT_PKG_NAME, (String) null));
         }
     }
 
@@ -393,10 +446,12 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         }
     }
 
-    public static String retrieveCertificateAliasFromKeyChain(IKeyChainService iKeyChainService, Certificate certificate) {
+    public static String retrieveCertificateAliasFromKeyChain(
+            IKeyChainService iKeyChainService, Certificate certificate) {
         if (iKeyChainService != null) {
             try {
-                return iKeyChainService.getCertificateAlias(Credentials.convertToPem(new Certificate[]{certificate}));
+                return iKeyChainService.getCertificateAlias(
+                        Credentials.convertToPem(new Certificate[] {certificate}));
             } catch (RemoteException e) {
                 Log.e("SecurityPolicy", "retrieveCertificateAliasFromKeyChain: " + e.toString());
             } catch (IOException e2) {
@@ -427,7 +482,9 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             return false;
         }
         for (String str2 : split) {
-            if (!str2.matches("^[A-Za-z0-9_]+$") || str2.charAt(0) == '_' || (str2.charAt(0) >= '0' && str2.charAt(0) <= '9')) {
+            if (!str2.matches("^[A-Za-z0-9_]+$")
+                    || str2.charAt(0) == '_'
+                    || (str2.charAt(0) >= '0' && str2.charAt(0) <= '9')) {
                 return false;
             }
         }
@@ -437,9 +494,12 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
     public final boolean addPackagesToCertificateWhiteList(ContextInfo contextInfo, List list) {
         boolean z;
         boolean z2;
-        ContextInfo enforceCaller = EnterpriseAccessController.enforceCaller(contextInfo, "ADD_PACKAGE_CERT_WHITE_LIST");
+        ContextInfo enforceCaller =
+                EnterpriseAccessController.enforceCaller(
+                        contextInfo, "ADD_PACKAGE_CERT_WHITE_LIST");
         int userId = UserHandle.getUserId(enforceCaller.mCallerUid);
-        Context createContextAsUser = Utils.createContextAsUser(this.mContext, "android", 0, userId);
+        Context createContextAsUser =
+                Utils.createContextAsUser(this.mContext, "android", 0, userId);
         if (list == null || list.isEmpty()) {
             return false;
         }
@@ -456,7 +516,8 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                     str2 = appIdentity.getSignature();
                 }
                 if (validatePackageName$1(str) && !isPackageAlreadyWhiteListed(userId, str)) {
-                    if (str2 == null || Utils.comparePackageSignature(0, createContextAsUser, str, str2)) {
+                    if (str2 == null
+                            || Utils.comparePackageSignature(0, createContextAsUser, str, str2)) {
                         z = false;
                         z2 = true;
                     } else {
@@ -467,7 +528,9 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                                 z2 = false;
                             }
                         }
-                        Log.d("SecurityPolicy", "context or PackageManager is null : returning false");
+                        Log.d(
+                                "SecurityPolicy",
+                                "context or PackageManager is null : returning false");
                         z = false;
                         z2 = false;
                     }
@@ -476,7 +539,10 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                         contentValues.put("adminUid", Integer.valueOf(enforceCaller.mCallerUid));
                         contentValues.put("packageName", str);
                         contentValues.put("signature", str2);
-                        z3 &= this.mEdmStorageProvider.insert("CertificateWhiteListTable", contentValues) > 0;
+                        z3 &=
+                                this.mEdmStorageProvider.insert(
+                                                "CertificateWhiteListTable", contentValues)
+                                        > 0;
                     }
                 }
                 z3 = false;
@@ -498,19 +564,27 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean deleteCertificateFromKeystore(com.samsung.android.knox.ContextInfo r25, com.samsung.android.knox.keystore.CertificateInfo r26, int r27) {
+    public final boolean deleteCertificateFromKeystore(
+            com.samsung.android.knox.ContextInfo r25,
+            com.samsung.android.knox.keystore.CertificateInfo r26,
+            int r27) {
         /*
             Method dump skipped, instructions count: 523
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.security.SecurityPolicy.deleteCertificateFromKeystore(com.samsung.android.knox.ContextInfo, com.samsung.android.knox.keystore.CertificateInfo, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.security.SecurityPolicy.deleteCertificateFromKeystore(com.samsung.android.knox.ContextInfo,"
+                    + " com.samsung.android.knox.keystore.CertificateInfo, int):boolean");
     }
 
-    public final boolean deleteCertificateFromUserKeystore(ContextInfo contextInfo, CertificateInfo certificateInfo, int i) {
+    public final boolean deleteCertificateFromUserKeystore(
+            ContextInfo contextInfo, CertificateInfo certificateInfo, int i) {
         return false;
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
             printWriter.println("Permission Denial: can't dump SecurityPolicy");
             return;
@@ -527,7 +601,8 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             Binder.restoreCallingIdentity(clearCallingIdentity);
             Iterator it = users.iterator();
             while (it.hasNext()) {
-                arrayList.add(Integer.valueOf(((UserInfo) it.next()).getUserHandle().getIdentifier()));
+                arrayList.add(
+                        Integer.valueOf(((UserInfo) it.next()).getUserHandle().getIdentifier()));
             }
             sb.append("[VPN and Apps keystore]" + System.lineSeparator());
             Iterator it2 = arrayList.iterator();
@@ -540,7 +615,8 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                 sb.append("Aliases for user ");
                 sb.append(intValue);
                 sb.append(": ");
-                CertificateUtil.KeyChainCRUD keyChainCRUD = new CertificateUtil.KeyChainCRUD(this.mContext, intValue);
+                CertificateUtil.KeyChainCRUD keyChainCRUD =
+                        new CertificateUtil.KeyChainCRUD(this.mContext, intValue);
                 String[] listAliases = keyChainCRUD.listAliases(-1, null);
                 keyChainCRUD.disconnect();
                 if (listAliases != null) {
@@ -550,7 +626,8 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             }
             sb.append(System.lineSeparator());
             sb.append("[Wifi keystore]" + System.lineSeparator() + "Aliases: ");
-            CertificateUtil.KeyChainCRUD keyChainCRUD2 = new CertificateUtil.KeyChainCRUD(this.mContext, 0);
+            CertificateUtil.KeyChainCRUD keyChainCRUD2 =
+                    new CertificateUtil.KeyChainCRUD(this.mContext, 0);
             String[] listAliases2 = keyChainCRUD2.listAliases(1010, null);
             keyChainCRUD2.disconnect();
             sb.append(dumpAliases(listAliases2 != null ? Arrays.asList(listAliases2) : null));
@@ -562,7 +639,9 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                     Iterator it3 = arrayList.iterator();
                     while (it3.hasNext()) {
                         int intValue2 = ((Integer) it3.next()).intValue();
-                        IKeyChainService service = KeyChain.bindAsUser(this.mContext, new UserHandle(intValue2)).getService();
+                        IKeyChainService service =
+                                KeyChain.bindAsUser(this.mContext, new UserHandle(intValue2))
+                                        .getService();
                         if (service != null) {
                             try {
                                 try {
@@ -584,8 +663,16 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                 }
                 sb.append(System.lineSeparator());
                 printWriter.write(sb.toString());
-                this.mEnterpriseDumpHelper.dumpTable(printWriter, "SECURITY", new String[]{"deviceEnrolled", "bannerText"}, null);
-                this.mEnterpriseDumpHelper.dumpTable(printWriter, "generic", new String[]{"dodBannerVisible", "deviceLastAccessDate", "deviceBootMode"}, null);
+                this.mEnterpriseDumpHelper.dumpTable(
+                        printWriter,
+                        "SECURITY",
+                        new String[] {"deviceEnrolled", "bannerText"},
+                        null);
+                this.mEnterpriseDumpHelper.dumpTable(
+                        printWriter,
+                        "generic",
+                        new String[] {"dodBannerVisible", "deviceLastAccessDate", "deviceBootMode"},
+                        null);
             } finally {
             }
         } finally {
@@ -599,9 +686,27 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 if (z) {
-                    AuditLog.logAsUser(5, 1, true, Process.myPid(), "SecurityPolicy", String.format("Admin %d has enabled reboot banner.", Integer.valueOf(contextInfo.mCallerUid)), userId);
+                    AuditLog.logAsUser(
+                            5,
+                            1,
+                            true,
+                            Process.myPid(),
+                            "SecurityPolicy",
+                            String.format(
+                                    "Admin %d has enabled reboot banner.",
+                                    Integer.valueOf(contextInfo.mCallerUid)),
+                            userId);
                 } else {
-                    AuditLog.logAsUser(5, 1, true, Process.myPid(), "SecurityPolicy", String.format("Admin %d has disabled reboot banner.", Integer.valueOf(contextInfo.mCallerUid)), userId);
+                    AuditLog.logAsUser(
+                            5,
+                            1,
+                            true,
+                            Process.myPid(),
+                            "SecurityPolicy",
+                            String.format(
+                                    "Admin %d has disabled reboot banner.",
+                                    Integer.valueOf(contextInfo.mCallerUid)),
+                            userId);
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             } catch (Throwable th) {
@@ -612,9 +717,11 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         return enableRebootBannerInternal;
     }
 
-    public final boolean enableRebootBannerInternal(ContextInfo contextInfo, String str, boolean z) {
+    public final boolean enableRebootBannerInternal(
+            ContextInfo contextInfo, String str, boolean z) {
         boolean z2;
-        ContextInfo enforceOwnerOnlyAndSecurityPermission$2 = enforceOwnerOnlyAndSecurityPermission$2(contextInfo);
+        ContextInfo enforceOwnerOnlyAndSecurityPermission$2 =
+                enforceOwnerOnlyAndSecurityPermission$2(contextInfo);
         int i = enforceOwnerOnlyAndSecurityPermission$2.mCallerUid;
         if (!z) {
             str = null;
@@ -630,16 +737,35 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         return z2;
     }
 
-    public final boolean enableRebootBannerWithText(ContextInfo contextInfo, boolean z, String str) {
+    public final boolean enableRebootBannerWithText(
+            ContextInfo contextInfo, boolean z, String str) {
         boolean enableRebootBannerInternal = enableRebootBannerInternal(contextInfo, str, z);
         int userId = UserHandle.getUserId(contextInfo.mCallerUid);
         if (enableRebootBannerInternal) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 if (z) {
-                    AuditLog.logAsUser(5, 1, true, Process.myPid(), "SecurityPolicy", String.format("Admin %d has enabled reboot banner with text %s", Integer.valueOf(contextInfo.mCallerUid), str), userId);
+                    AuditLog.logAsUser(
+                            5,
+                            1,
+                            true,
+                            Process.myPid(),
+                            "SecurityPolicy",
+                            String.format(
+                                    "Admin %d has enabled reboot banner with text %s",
+                                    Integer.valueOf(contextInfo.mCallerUid), str),
+                            userId);
                 } else {
-                    AuditLog.logAsUser(5, 1, true, Process.myPid(), "SecurityPolicy", String.format("Admin %d has disabled reboot banner.", Integer.valueOf(contextInfo.mCallerUid)), userId);
+                    AuditLog.logAsUser(
+                            5,
+                            1,
+                            true,
+                            Process.myPid(),
+                            "SecurityPolicy",
+                            String.format(
+                                    "Admin %d has disabled reboot banner.",
+                                    Integer.valueOf(contextInfo.mCallerUid)),
+                            userId);
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             } catch (Throwable th) {
@@ -650,52 +776,93 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         return enableRebootBannerInternal;
     }
 
-    public final ContextInfo enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission(ContextInfo contextInfo, int i, boolean z) {
-        ContextInfo adminContextIfCallerInCertWhiteList = getEDM$29().getAdminContextIfCallerInCertWhiteList(new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_SECURITY")));
+    public final ContextInfo enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission(
+            ContextInfo contextInfo, int i, boolean z) {
+        ContextInfo adminContextIfCallerInCertWhiteList =
+                getEDM$29()
+                        .getAdminContextIfCallerInCertWhiteList(
+                                new ArrayList(
+                                        Arrays.asList(
+                                                "com.samsung.android.knox.permission.KNOX_SECURITY")));
         if (adminContextIfCallerInCertWhiteList == null) {
-            return EnterpriseAccessController.enforceCaller(contextInfo, (i & 2) != 0 ? z ? "INSTALL_CERT_TO_GLOBAL_SCOPE_KEYSTORE" : "DELETE_CERT_FROM_GLOBAL_SCOPE_KEYSTORE" : z ? "INSTALL_CERT_TO_USER_SCOPE_KEYSTORE" : "DELETE_CERT_FROM_USER_SCOPE_KEYSTORE");
+            return EnterpriseAccessController.enforceCaller(
+                    contextInfo,
+                    (i & 2) != 0
+                            ? z
+                                    ? "INSTALL_CERT_TO_GLOBAL_SCOPE_KEYSTORE"
+                                    : "DELETE_CERT_FROM_GLOBAL_SCOPE_KEYSTORE"
+                            : z
+                                    ? "INSTALL_CERT_TO_USER_SCOPE_KEYSTORE"
+                                    : "DELETE_CERT_FROM_USER_SCOPE_KEYSTORE");
         }
-        if ((i & 2) == 0 || UserHandle.getUserId(adminContextIfCallerInCertWhiteList.mCallerUid) == 0) {
+        if ((i & 2) == 0
+                || UserHandle.getUserId(adminContextIfCallerInCertWhiteList.mCallerUid) == 0) {
             return adminContextIfCallerInCertWhiteList;
         }
         throw new SecurityException("Operation supported only on owner space");
     }
 
     public final ContextInfo enforceCertificateProvisioningPermission(ContextInfo contextInfo) {
-        return getEDM$29().enforceActiveAdminPermissionByContext(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_SECURITY", "com.samsung.android.knox.permission.KNOX_CERT_PROVISIONING")));
+        return getEDM$29()
+                .enforceActiveAdminPermissionByContext(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.samsung.android.knox.permission.KNOX_SECURITY",
+                                        "com.samsung.android.knox.permission.KNOX_CERT_PROVISIONING")));
     }
 
     public final ContextInfo enforceOnlySecurityPermission$1(ContextInfo contextInfo) {
-        return getEDM$29().enforcePermissionByContext(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_SECURITY")));
+        return getEDM$29()
+                .enforcePermissionByContext(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.samsung.android.knox.permission.KNOX_SECURITY")));
     }
 
-    public final ContextInfo enforceOwnerOnlyAndCertProvisioningPermission(ContextInfo contextInfo) {
-        return getEDM$29().enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_CERT_PROVISIONING")));
+    public final ContextInfo enforceOwnerOnlyAndCertProvisioningPermission(
+            ContextInfo contextInfo) {
+        return getEDM$29()
+                .enforceOwnerOnlyAndActiveAdminPermission(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.samsung.android.knox.permission.KNOX_CERT_PROVISIONING")));
     }
 
     public final ContextInfo enforceOwnerOnlyAndSecurityPermission$2(ContextInfo contextInfo) {
-        return getEDM$29().enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_SECURITY")));
+        return getEDM$29()
+                .enforceOwnerOnlyAndActiveAdminPermission(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.samsung.android.knox.permission.KNOX_SECURITY")));
     }
 
     public final void formatExternalStorageCard() {
         try {
             ((StorageManager) this.mContext.getSystemService("storage")).wipeAdoptableDisks();
             final Object obj = new Object();
-            BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.enterprise.security.SecurityPolicy.4
-                @Override // android.content.BroadcastReceiver
-                public final void onReceive(Context context, Intent intent) {
-                    if (intent.getAction().equals("android.intent.action.MEDIA_MOUNTED")) {
-                        synchronized (obj) {
-                            try {
-                                SecurityPolicy.this.mMediaFormatRet = true;
-                                obj.notify();
-                            } catch (IllegalMonitorStateException unused) {
-                                Log.w("SecurityPolicy", "formatStorageCard - IllegalMonitorStateException");
+            BroadcastReceiver broadcastReceiver =
+                    new BroadcastReceiver() { // from class:
+                                              // com.android.server.enterprise.security.SecurityPolicy.4
+                        @Override // android.content.BroadcastReceiver
+                        public final void onReceive(Context context, Intent intent) {
+                            if (intent.getAction().equals("android.intent.action.MEDIA_MOUNTED")) {
+                                synchronized (obj) {
+                                    try {
+                                        SecurityPolicy.this.mMediaFormatRet = true;
+                                        obj.notify();
+                                    } catch (IllegalMonitorStateException unused) {
+                                        Log.w(
+                                                "SecurityPolicy",
+                                                "formatStorageCard - IllegalMonitorStateException");
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-            };
+                    };
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction("android.intent.action.MEDIA_MOUNTED");
             intentFilter.addDataScheme("file");
@@ -713,17 +880,27 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         }
     }
 
-    public final String[] formatSelective(ContextInfo contextInfo, String[] strArr, String[] strArr2) {
+    public final String[] formatSelective(
+            ContextInfo contextInfo, String[] strArr, String[] strArr2) {
         return null;
     }
 
     public final List getCertificatesFromKeystore(ContextInfo contextInfo, int i, int i2) {
         KeyChain.KeyChainConnection bindAsUser;
         IKeyChainService service;
-        ContextInfo adminContextIfCallerInCertWhiteList = getEDM$29().getAdminContextIfCallerInCertWhiteList(new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_SECURITY")));
+        ContextInfo adminContextIfCallerInCertWhiteList =
+                getEDM$29()
+                        .getAdminContextIfCallerInCertWhiteList(
+                                new ArrayList(
+                                        Arrays.asList(
+                                                "com.samsung.android.knox.permission.KNOX_SECURITY")));
         if (adminContextIfCallerInCertWhiteList == null) {
-            adminContextIfCallerInCertWhiteList = (i & 2) != 0 ? enforceOwnerOnlyAndCertProvisioningPermission(contextInfo) : enforceCertificateProvisioningPermission(contextInfo);
-        } else if ((i & 2) != 0 && UserHandle.getUserId(adminContextIfCallerInCertWhiteList.mCallerUid) != 0) {
+            adminContextIfCallerInCertWhiteList =
+                    (i & 2) != 0
+                            ? enforceOwnerOnlyAndCertProvisioningPermission(contextInfo)
+                            : enforceCertificateProvisioningPermission(contextInfo);
+        } else if ((i & 2) != 0
+                && UserHandle.getUserId(adminContextIfCallerInCertWhiteList.mCallerUid) != 0) {
             throw new SecurityException("Operation supported only on owner space");
         }
         int userId = UserHandle.getUserId(adminContextIfCallerInCertWhiteList.mCallerUid);
@@ -743,7 +920,12 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                             bindAsUser = KeyChain.bindAsUser(this.mContext, new UserHandle(userId));
                             service = bindAsUser.getService();
                         } catch (AssertionError unused) {
-                            Log.e("SecurityPolicy", "getAndroidInstalledCertificatesAsUser - is KeyChainService running for user " + userId + "?");
+                            Log.e(
+                                    "SecurityPolicy",
+                                    "getAndroidInstalledCertificatesAsUser - is KeyChainService"
+                                        + " running for user "
+                                            + userId
+                                            + "?");
                         }
                     } catch (InterruptedException e) {
                         Log.e("SecurityPolicy", "getSystemCertificatesAsUser " + e);
@@ -753,12 +935,17 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                             try {
                                 Iterator it = service.userAliases().iterator();
                                 while (it.hasNext()) {
-                                    byte[] certificateFromTrustCredential = service.getCertificateFromTrustCredential((String) it.next(), false);
+                                    byte[] certificateFromTrustCredential =
+                                            service.getCertificateFromTrustCredential(
+                                                    (String) it.next(), false);
                                     if (certificateFromTrustCredential != null) {
                                         try {
-                                            for (X509Certificate x509Certificate : Credentials.convertFromPem(certificateFromTrustCredential)) {
+                                            for (X509Certificate x509Certificate :
+                                                    Credentials.convertFromPem(
+                                                            certificateFromTrustCredential)) {
                                                 if (x509Certificate != null) {
-                                                    CertificateInfo certificateInfo = new CertificateInfo();
+                                                    CertificateInfo certificateInfo =
+                                                            new CertificateInfo();
                                                     certificateInfo.setCertificate(x509Certificate);
                                                     certificateInfo.setKeystore(1);
                                                     certificateInfo.setSystemPreloaded(false);
@@ -766,9 +953,13 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                                                 }
                                             }
                                         } catch (IOException e2) {
-                                            Log.e("SecurityPolicy", "getAndroidInstalledCertificates " + e2);
+                                            Log.e(
+                                                    "SecurityPolicy",
+                                                    "getAndroidInstalledCertificates " + e2);
                                         } catch (CertificateException e3) {
-                                            Log.e("SecurityPolicy", "getAndroidInstalledCertificates " + e3);
+                                            Log.e(
+                                                    "SecurityPolicy",
+                                                    "getAndroidInstalledCertificates " + e3);
                                         }
                                     }
                                 }
@@ -795,7 +986,10 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             }
         }
         if (arrayList.size() >= CertificateProvisioning.MAXIMUM_CERTIFICATE_NUMBERS) {
-            this.mPendingGetCerificates.put(Integer.valueOf(i2), arrayList.subList(CertificateProvisioning.MAXIMUM_CERTIFICATE_NUMBERS, arrayList.size()));
+            this.mPendingGetCerificates.put(
+                    Integer.valueOf(i2),
+                    arrayList.subList(
+                            CertificateProvisioning.MAXIMUM_CERTIFICATE_NUMBERS, arrayList.size()));
             return arrayList.subList(0, CertificateProvisioning.MAXIMUM_CERTIFICATE_NUMBERS);
         }
         this.mPendingGetCerificates.remove(Integer.valueOf(i2));
@@ -807,7 +1001,8 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
     }
 
     public final String getDeviceLastAccessDate(ContextInfo contextInfo) {
-        return this.mEdmStorageProvider.getGenericValueAsUser(Utils.getCallingOrCurrentUserId(contextInfo), "deviceLastAccessDate");
+        return this.mEdmStorageProvider.getGenericValueAsUser(
+                Utils.getCallingOrCurrentUserId(contextInfo), "deviceLastAccessDate");
     }
 
     public final EnterpriseDeviceManager getEDM$29() {
@@ -868,21 +1063,36 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
     }
 
     public final List getPackagesFromCertificateWhiteList(ContextInfo contextInfo) {
-        ContextInfo enforceCertificateProvisioningPermission = enforceCertificateProvisioningPermission(contextInfo);
+        ContextInfo enforceCertificateProvisioningPermission =
+                enforceCertificateProvisioningPermission(contextInfo);
         ContentValues contentValues = new ContentValues();
-        contentValues.put("adminUid", Integer.valueOf(enforceCertificateProvisioningPermission.mCallerUid));
-        List values = this.mEdmStorageProvider.getValues("CertificateWhiteListTable", new String[]{"packageName", "signature"}, contentValues);
+        contentValues.put(
+                "adminUid", Integer.valueOf(enforceCertificateProvisioningPermission.mCallerUid));
+        List values =
+                this.mEdmStorageProvider.getValues(
+                        "CertificateWhiteListTable",
+                        new String[] {"packageName", "signature"},
+                        contentValues);
         ArrayList arrayList = new ArrayList();
         Iterator it = ((ArrayList) values).iterator();
         while (it.hasNext()) {
             ContentValues contentValues2 = (ContentValues) it.next();
-            arrayList.add(new AppIdentity(contentValues2.getAsString("packageName"), contentValues2.getAsString("signature")));
+            arrayList.add(
+                    new AppIdentity(
+                            contentValues2.getAsString("packageName"),
+                            contentValues2.getAsString("signature")));
         }
         return arrayList;
     }
 
     public final String getRebootBannerText(ContextInfo contextInfo) {
-        Iterator it = ((ArrayList) this.mEdmStorageProvider.getStringListAsUser(Utils.getCallingOrCurrentUserId(contextInfo), "SECURITY", "bannerText")).iterator();
+        Iterator it =
+                ((ArrayList)
+                                this.mEdmStorageProvider.getStringListAsUser(
+                                        Utils.getCallingOrCurrentUserId(contextInfo),
+                                        "SECURITY",
+                                        "bannerText"))
+                        .iterator();
         while (it.hasNext()) {
             String str = (String) it.next();
             if (str != null) {
@@ -892,10 +1102,12 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         return null;
     }
 
-    public final boolean getRequireDeviceEncryption(ContextInfo contextInfo, ComponentName componentName) {
+    public final boolean getRequireDeviceEncryption(
+            ContextInfo contextInfo, ComponentName componentName) {
         enforceOwnerOnlyAndSecurityPermission$2(contextInfo);
         try {
-            return ((DevicePolicyManager) this.mContext.getSystemService("device_policy")).getStorageEncryption(componentName);
+            return ((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                    .getStorageEncryption(componentName);
         } catch (Exception e) {
             Log.w("SecurityPolicy", "getRequireDeviceEncryption Ex" + e.getMessage());
             e.printStackTrace();
@@ -903,12 +1115,14 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         }
     }
 
-    public final boolean getRequireStorageCardEncryption(ContextInfo contextInfo, ComponentName componentName) {
+    public final boolean getRequireStorageCardEncryption(
+            ContextInfo contextInfo, ComponentName componentName) {
         enforceOwnerOnlyAndSecurityPermission$2(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                return ((DevicePolicyManager) this.mContext.getSystemService("device_policy")).semGetRequireStorageCardEncryption(componentName, contextInfo.mParent);
+                return ((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                        .semGetRequireStorageCardEncryption(componentName, contextInfo.mParent);
             } catch (Exception e) {
                 Log.w("SecurityPolicy", "getRequireStorageCardEncryption Ex" + e.getMessage());
                 e.printStackTrace();
@@ -923,7 +1137,13 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
     @Override // com.android.server.enterprise.common.KeyCodeRestrictionCallback
     public final Set getRestrictedKeyCodes() {
         if (isDodBannerVisibleAsUser(0)) {
-            return new HashSet(Arrays.asList(3, 1001, Integer.valueOf(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CREDENTIAL_MANAGEMENT_APP_REMOVED)));
+            return new HashSet(
+                    Arrays.asList(
+                            3,
+                            1001,
+                            Integer.valueOf(
+                                    FrameworkStatsLog
+                                            .DEVICE_POLICY_EVENT__EVENT_ID__CREDENTIAL_MANAGEMENT_APP_REMOVED)));
         }
         return null;
     }
@@ -934,7 +1154,10 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
     }
 
     public final List getSystemCertificates(ContextInfo contextInfo) {
-        return getSystemCertificatesAsUser(UserHandle.getUserId(enforceCertificateProvisioningPermission(contextInfo).mCallerUid), false);
+        return getSystemCertificatesAsUser(
+                UserHandle.getUserId(
+                        enforceCertificateProvisioningPermission(contextInfo).mCallerUid),
+                false);
     }
 
     public final List getSystemCertificatesAsUser(int i, boolean z) {
@@ -947,7 +1170,11 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                 bindAsUser = KeyChain.bindAsUser(this.mContext, new UserHandle(i));
                 service = bindAsUser.getService();
             } catch (AssertionError unused) {
-                Log.e("SecurityPolicy", "getSystemCertificatesAsUser - is KeyChainService running for user " + i + "?");
+                Log.e(
+                        "SecurityPolicy",
+                        "getSystemCertificatesAsUser - is KeyChainService running for user "
+                                + i
+                                + "?");
             } catch (InterruptedException e) {
                 Log.e("SecurityPolicy", "getSystemCertificatesAsUser " + e);
             }
@@ -956,10 +1183,13 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                     try {
                         for (String str : service.allSystemAliases()) {
                             CertificateInfo certificateInfo = new CertificateInfo();
-                            byte[] certificateFromTrustCredential = service.getCertificateFromTrustCredential(str, z);
+                            byte[] certificateFromTrustCredential =
+                                    service.getCertificateFromTrustCredential(str, z);
                             if (certificateFromTrustCredential != null) {
                                 try {
-                                    for (X509Certificate x509Certificate : Credentials.convertFromPem(certificateFromTrustCredential)) {
+                                    for (X509Certificate x509Certificate :
+                                            Credentials.convertFromPem(
+                                                    certificateFromTrustCredential)) {
                                         if (x509Certificate != null) {
                                             certificateInfo.setCertificate(x509Certificate);
                                             certificateInfo.setKeystore(1);
@@ -988,11 +1218,23 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         }
     }
 
-    public final int installCertificateToKeystore(ContextInfo contextInfo, String str, byte[] bArr, String str2, String str3, int i, boolean z) {
+    public final int installCertificateToKeystore(
+            ContextInfo contextInfo,
+            String str,
+            byte[] bArr,
+            String str2,
+            String str3,
+            int i,
+            boolean z) {
         int i2;
         int i3;
-        ContextInfo enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission = enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission(contextInfo, i, true);
-        int userId = UserHandle.getUserId(enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission.mCallerUid);
+        ContextInfo enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission =
+                enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission(
+                        contextInfo, i, true);
+        int userId =
+                UserHandle.getUserId(
+                        enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission
+                                .mCallerUid);
         String validStr$2 = getValidStr$2(str);
         String validStr$22 = getValidStr$2(str2);
         String trim = str3 != null ? str3.trim() : str3;
@@ -1000,20 +1242,47 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         try {
             if (validateKeystoreParam(i)) {
                 if (!z) {
-                    if (validStr$2 != null) {
-                    }
+                    if (validStr$2 != null) {}
                 }
                 if (bArr != null && bArr.length != 0 && validStr$22 != null) {
-                    AuditLog.logAsUser(5, 1, true, Process.myPid(), "SecurityPolicy", String.format("Admin %d has requested to install a certificate. Keystore(s) : %s, Name : %s", Integer.valueOf(enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission.mCallerUid), getKeystoreString(i), validStr$22), userId);
+                    AuditLog.logAsUser(
+                            5,
+                            1,
+                            true,
+                            Process.myPid(),
+                            "SecurityPolicy",
+                            String.format(
+                                    "Admin %d has requested to install a certificate. Keystore(s) :"
+                                        + " %s, Name : %s",
+                                    Integer.valueOf(
+                                            enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission
+                                                    .mCallerUid),
+                                    getKeystoreString(i),
+                                    validStr$22),
+                            userId);
                     i2 = userId;
-                    i3 = new CertificateUtil(this.mContext).installAsUser(validStr$2, bArr, validStr$22, trim, i, userId);
-                    new CertificateUtil(this.mContext).sendIntentToSettings(i2, this.mBootCompleted);
+                    i3 =
+                            new CertificateUtil(this.mContext)
+                                    .installAsUser(validStr$2, bArr, validStr$22, trim, i, userId);
+                    new CertificateUtil(this.mContext)
+                            .sendIntentToSettings(i2, this.mBootCompleted);
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     if (!z && i3 == 0) {
-                        KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_AKS", 1, "API:installCertificateToKeystore");
-                        knoxAnalyticsData.setProperty("cId", enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission.mCallerUid);
+                        KnoxAnalyticsData knoxAnalyticsData =
+                                new KnoxAnalyticsData(
+                                        "KNOX_AKS", 1, "API:installCertificateToKeystore");
+                        knoxAnalyticsData.setProperty(
+                                "cId",
+                                enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission
+                                        .mCallerUid);
                         knoxAnalyticsData.setProperty("uId", i2);
-                        knoxAnalyticsData.setProperty("pN", this.mContext.getPackageManager().getNameForUid(enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission.mCallerUid));
+                        knoxAnalyticsData.setProperty(
+                                "pN",
+                                this.mContext
+                                        .getPackageManager()
+                                        .getNameForUid(
+                                                enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission
+                                                        .mCallerUid));
                         knoxAnalyticsData.setProperty("key", getKeystoreString(i));
                         KnoxAnalytics.log(knoxAnalyticsData);
                     }
@@ -1026,10 +1295,20 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             new CertificateUtil(this.mContext).sendIntentToSettings(i2, this.mBootCompleted);
             Binder.restoreCallingIdentity(clearCallingIdentity);
             if (!z) {
-                KnoxAnalyticsData knoxAnalyticsData2 = new KnoxAnalyticsData("KNOX_AKS", 1, "API:installCertificateToKeystore");
-                knoxAnalyticsData2.setProperty("cId", enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission.mCallerUid);
+                KnoxAnalyticsData knoxAnalyticsData2 =
+                        new KnoxAnalyticsData("KNOX_AKS", 1, "API:installCertificateToKeystore");
+                knoxAnalyticsData2.setProperty(
+                        "cId",
+                        enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission
+                                .mCallerUid);
                 knoxAnalyticsData2.setProperty("uId", i2);
-                knoxAnalyticsData2.setProperty("pN", this.mContext.getPackageManager().getNameForUid(enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission.mCallerUid));
+                knoxAnalyticsData2.setProperty(
+                        "pN",
+                        this.mContext
+                                .getPackageManager()
+                                .getNameForUid(
+                                        enforceAdminPermissionIfCallerInCertWhiteListOrDangerousPermission
+                                                .mCallerUid));
                 knoxAnalyticsData2.setProperty("key", getKeystoreString(i));
                 KnoxAnalytics.log(knoxAnalyticsData2);
             }
@@ -1040,7 +1319,8 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         }
     }
 
-    public final boolean installCertificateToUserKeystore(ContextInfo contextInfo, String str, byte[] bArr, String str2, String str3, int i) {
+    public final boolean installCertificateToUserKeystore(
+            ContextInfo contextInfo, String str, byte[] bArr, String str2, String str3, int i) {
         return false;
     }
 
@@ -1092,7 +1372,9 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         try {
             str = this.mEdmStorageProvider.getGenericValueAsUser(i, "dodBannerVisible");
         } catch (Exception unused) {
-            Log.i("SecurityPolicy", "isDodBannerVisibleAsUser facing exception, return default value");
+            Log.i(
+                    "SecurityPolicy",
+                    "isDodBannerVisibleAsUser facing exception, return default value");
             str = null;
         }
         return str != null && str.equals("1");
@@ -1106,7 +1388,9 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             EncryptionManagerAdapter.getInstance(this.mContext).getClass();
             if (SemSdCardEncryption.isEncryptionFeatureEnabled()) {
                 try {
-                    IDirEncryptService asInterface = IDirEncryptService.Stub.asInterface(ServiceManager.getService("DirEncryptService"));
+                    IDirEncryptService asInterface =
+                            IDirEncryptService.Stub.asInterface(
+                                    ServiceManager.getService("DirEncryptService"));
                     if (asInterface != null) {
                         z = asInterface.isSdCardEncryped();
                     }
@@ -1126,7 +1410,9 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         enforceOwnerOnlyAndSecurityPermission$2(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            int storageEncryptionStatus = ((DevicePolicyManager) this.mContext.getSystemService("device_policy")).getStorageEncryptionStatus();
+            int storageEncryptionStatus =
+                    ((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                            .getStorageEncryptionStatus();
             if (storageEncryptionStatus != 3 && storageEncryptionStatus != 5) {
                 return false;
             }
@@ -1144,7 +1430,9 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         enforceOwnerOnlyAndSecurityPermission$2(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            return ((DevicePolicyManager) this.mContext.getSystemService("device_policy")).getStorageEncryptionStatus() == 4;
+            return ((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                            .getStorageEncryptionStatus()
+                    == 4;
         } catch (Exception unused) {
             Log.w("SecurityPolicy", "is Internal Storage Encrypted by Default key?");
             return false;
@@ -1164,12 +1452,21 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
     public final boolean isPackageAlreadyWhiteListed(int i, String str) {
         ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("packageName", str);
         m.put(EdmStorageProviderBase.getAdminLUIDWhereIn(0, i), "#SelectClause#");
-        ArrayList arrayList = (ArrayList) this.mEdmStorageProvider.getValues("CertificateWhiteListTable", new String[]{"adminUid"}, m);
-        return (arrayList.size() > 0 ? ((ContentValues) arrayList.get(0)).getAsInteger("adminUid").intValue() : -1) != -1;
+        ArrayList arrayList =
+                (ArrayList)
+                        this.mEdmStorageProvider.getValues(
+                                "CertificateWhiteListTable", new String[] {"adminUid"}, m);
+        return (arrayList.size() > 0
+                        ? ((ContentValues) arrayList.get(0)).getAsInteger("adminUid").intValue()
+                        : -1)
+                != -1;
     }
 
     public final boolean isRebootBannerEnabled(int i) {
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(i, "SECURITY", "deviceEnrolled").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(i, "SECURITY", "deviceEnrolled")
+                        .iterator();
         while (it.hasNext()) {
             boolean booleanValue = ((Boolean) it.next()).booleanValue();
             if (booleanValue) {
@@ -1184,16 +1481,13 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminRemoved(int i) {
-    }
+    public final void onAdminRemoved(int i) {}
 
     public final void onKeyguardLaunched() {
         enforceOnlySecurityPermission$1(new ContextInfo(Binder.getCallingUid()));
@@ -1212,13 +1506,14 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onPreAdminRemoval(int i) {
-    }
+    public final void onPreAdminRemoval(int i) {}
 
     public final void registerDexBlocker$3() {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            ((SemDesktopModeManager) this.mContext.getApplicationContext().getSystemService("desktopmode")).registerBlocker(this.mBlocker);
+            ((SemDesktopModeManager)
+                            this.mContext.getApplicationContext().getSystemService("desktopmode"))
+                    .registerBlocker(this.mBlocker);
             Log.d("SecurityPolicy", "DexBlocker was registered");
         } catch (Exception unused) {
             Log.d("SecurityPolicy", "DexBlocker was failed");
@@ -1227,24 +1522,36 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
     }
 
     public final boolean removeAccountsByType(ContextInfo contextInfo, String str) {
-        ContextInfo enforceActiveAdminPermissionByContext = getEDM$29().enforceActiveAdminPermissionByContext(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_SECURITY")));
+        ContextInfo enforceActiveAdminPermissionByContext =
+                getEDM$29()
+                        .enforceActiveAdminPermissionByContext(
+                                contextInfo,
+                                new ArrayList(
+                                        Arrays.asList(
+                                                "com.samsung.android.knox.permission.KNOX_SECURITY")));
         boolean z = false;
         if (str == null) {
             Log.i("SecurityPolicy", "removeAccountsByType() failed - type is invalid");
             return false;
         }
-        int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceActiveAdminPermissionByContext);
+        int callingOrCurrentUserId =
+                Utils.getCallingOrCurrentUserId(enforceActiveAdminPermissionByContext);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 AccountManager accountManager = AccountManager.get(this.mContext);
-                Account[] accountsByTypeAsUser = accountManager.getAccountsByTypeAsUser(str, new UserHandle(callingOrCurrentUserId));
+                Account[] accountsByTypeAsUser =
+                        accountManager.getAccountsByTypeAsUser(
+                                str, new UserHandle(callingOrCurrentUserId));
                 if (accountsByTypeAsUser == null || accountsByTypeAsUser.length <= 0) {
-                    Log.i("SecurityPolicy", "removeAccountsByType() : there is no account for type - ".concat(str));
+                    Log.i(
+                            "SecurityPolicy",
+                            "removeAccountsByType() : there is no account for type - ".concat(str));
                 } else {
                     for (Account account : accountsByTypeAsUser) {
                         Log.i("SecurityPolicy", "removeAccountsByType() account = " + account.name);
-                        accountManager.removeAccountAsUser(account, null, null, new UserHandle(callingOrCurrentUserId));
+                        accountManager.removeAccountAsUser(
+                                account, null, null, new UserHandle(callingOrCurrentUserId));
                     }
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1263,11 +1570,15 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         }
     }
 
-    public final boolean removePackagesFromCertificateWhiteList(ContextInfo contextInfo, List list) {
-        ContextInfo enforceCertificateProvisioningPermission = enforceCertificateProvisioningPermission(contextInfo);
+    public final boolean removePackagesFromCertificateWhiteList(
+            ContextInfo contextInfo, List list) {
+        ContextInfo enforceCertificateProvisioningPermission =
+                enforceCertificateProvisioningPermission(contextInfo);
         if (list == null) {
             ContentValues contentValues = new ContentValues();
-            contentValues.put("adminUid", Integer.valueOf(enforceCertificateProvisioningPermission.mCallerUid));
+            contentValues.put(
+                    "adminUid",
+                    Integer.valueOf(enforceCertificateProvisioningPermission.mCallerUid));
             return this.mEdmStorageProvider.delete("CertificateWhiteListTable", contentValues) > 0;
         }
         if (list.isEmpty()) {
@@ -1281,38 +1592,64 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                 z = false;
             } else {
                 ContentValues contentValues2 = new ContentValues();
-                contentValues2.put("adminUid", Integer.valueOf(enforceCertificateProvisioningPermission.mCallerUid));
+                contentValues2.put(
+                        "adminUid",
+                        Integer.valueOf(enforceCertificateProvisioningPermission.mCallerUid));
                 contentValues2.put("packageName", appIdentity.getPackageName());
                 if (appIdentity.getSignature() != null) {
                     contentValues2.put("signature", appIdentity.getSignature());
                 }
-                z &= this.mEdmStorageProvider.delete("CertificateWhiteListTable", contentValues2) > 0;
+                z &=
+                        this.mEdmStorageProvider.delete("CertificateWhiteListTable", contentValues2)
+                                > 0;
             }
         }
         return z;
     }
 
     public final boolean resetCredentialStorage(ContextInfo contextInfo) {
-        ContextInfo enforceCaller = EnterpriseAccessController.enforceCaller(contextInfo, "RESET_CREDENTIAL_STORAGE");
+        ContextInfo enforceCaller =
+                EnterpriseAccessController.enforceCaller(contextInfo, "RESET_CREDENTIAL_STORAGE");
         int userId = UserHandle.getUserId(enforceCaller.mCallerUid);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            AuditLog.logAsUser(5, 1, true, Process.myPid(), "SecurityPolicy", String.format("Admin %d has requested to clear credential storages", Integer.valueOf(enforceCaller.mCallerUid)), userId);
-            boolean z = AndroidKeyStoreMaintenance.clearNamespace(0, (long) UserHandle.getUid(userId, 1000)) == 0;
+            AuditLog.logAsUser(
+                    5,
+                    1,
+                    true,
+                    Process.myPid(),
+                    "SecurityPolicy",
+                    String.format(
+                            "Admin %d has requested to clear credential storages",
+                            Integer.valueOf(enforceCaller.mCallerUid)),
+                    userId);
+            boolean z =
+                    AndroidKeyStoreMaintenance.clearNamespace(
+                                    0, (long) UserHandle.getUid(userId, 1000))
+                            == 0;
             if (userId == 0) {
                 z &= AndroidKeyStoreMaintenance.clearNamespace(2, 102L) == 0;
             }
             try {
-                z &= ((Boolean) new ResetKeyChain().execute(Integer.valueOf(userId)).get(3000L, TimeUnit.MILLISECONDS)).booleanValue();
-                new CertificateUtil(this.mContext).sendIntentToSettings(userId, this.mBootCompleted);
+                z &=
+                        ((Boolean)
+                                        new ResetKeyChain()
+                                                .execute(Integer.valueOf(userId))
+                                                .get(3000L, TimeUnit.MILLISECONDS))
+                                .booleanValue();
+                new CertificateUtil(this.mContext)
+                        .sendIntentToSettings(userId, this.mBootCompleted);
             } catch (Exception unused) {
                 Log.e("SecurityPolicy", "resetCredentialStorage EX: ");
             }
             if (z) {
-                KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_AKS", 1, "API:resetCredentialStorage");
+                KnoxAnalyticsData knoxAnalyticsData =
+                        new KnoxAnalyticsData("KNOX_AKS", 1, "API:resetCredentialStorage");
                 knoxAnalyticsData.setProperty("cId", enforceCaller.mCallerUid);
                 knoxAnalyticsData.setProperty("uId", userId);
-                knoxAnalyticsData.setProperty("pN", this.mContext.getPackageManager().getNameForUid(enforceCaller.mCallerUid));
+                knoxAnalyticsData.setProperty(
+                        "pN",
+                        this.mContext.getPackageManager().getNameForUid(enforceCaller.mCallerUid));
                 KnoxAnalytics.log(knoxAnalyticsData);
             }
             return z;
@@ -1321,14 +1658,22 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         }
     }
 
-    public final boolean retrieveAliasAndDeleteCertificate(Certificate certificate, String str, int i, int i2) {
+    public final boolean retrieveAliasAndDeleteCertificate(
+            Certificate certificate, String str, int i, int i2) {
         CertificateUtil.KeyChainCRUD keyChainCRUD;
-        String retrieveAliasToBeDeleted = retrieveAliasToBeDeleted(certificate, str, "CACERT_", i, i2);
+        String retrieveAliasToBeDeleted =
+                retrieveAliasToBeDeleted(certificate, str, "CACERT_", i, i2);
         if (retrieveAliasToBeDeleted == null) {
-            retrieveAliasToBeDeleted = retrieveAliasToBeDeleted(certificate, str, "USRCERT_", i, i2);
+            retrieveAliasToBeDeleted =
+                    retrieveAliasToBeDeleted(certificate, str, "USRCERT_", i, i2);
         }
         if (retrieveAliasToBeDeleted == null) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, i2, "deleteCertificateFromNativeKeystoreAsUser: alias is null for keystore = ", ", userId = ", "SecurityPolicy");
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    i,
+                    i2,
+                    "deleteCertificateFromNativeKeystoreAsUser: alias is null for keystore = ",
+                    ", userId = ",
+                    "SecurityPolicy");
             return true;
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -1339,7 +1684,8 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             th = th;
         }
         try {
-            boolean deleteEntry = keyChainCRUD.deleteEntry(i == 4 ? -1 : 1010, retrieveAliasToBeDeleted);
+            boolean deleteEntry =
+                    keyChainCRUD.deleteEntry(i == 4 ? -1 : 1010, retrieveAliasToBeDeleted);
             Log.d("SecurityPolicy", "Delete state : " + deleteEntry);
             keyChainCRUD.disconnect();
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1362,7 +1708,12 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.String retrieveAliasToBeDeleted(java.security.cert.Certificate r16, java.lang.String r17, java.lang.String r18, int r19, int r20) {
+    public final java.lang.String retrieveAliasToBeDeleted(
+            java.security.cert.Certificate r16,
+            java.lang.String r17,
+            java.lang.String r18,
+            int r19,
+            int r20) {
         /*
             r15 = this;
             r0 = r15
@@ -1463,17 +1814,25 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             android.os.Binder.restoreCallingIdentity(r3)
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.security.SecurityPolicy.retrieveAliasToBeDeleted(java.security.cert.Certificate, java.lang.String, java.lang.String, int, int):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.security.SecurityPolicy.retrieveAliasToBeDeleted(java.security.cert.Certificate,"
+                    + " java.lang.String, java.lang.String, int, int):java.lang.String");
     }
 
     public final boolean setDeviceLastAccessDate(ContextInfo contextInfo, String str) {
         ContextInfo enforceOnlySecurityPermission$1 = enforceOnlySecurityPermission$1(contextInfo);
-        if (!this.mContext.getPackageManager().getNameForUid(enforceOnlySecurityPermission$1.mCallerUid).equals(KnoxCustomManagerService.KNOX_PP_AGENT_PKG_NAME)) {
+        if (!this.mContext
+                .getPackageManager()
+                .getNameForUid(enforceOnlySecurityPermission$1.mCallerUid)
+                .equals(KnoxCustomManagerService.KNOX_PP_AGENT_PKG_NAME)) {
             return false;
         }
-        int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOnlySecurityPermission$1);
+        int callingOrCurrentUserId =
+                Utils.getCallingOrCurrentUserId(enforceOnlySecurityPermission$1);
         try {
-            this.mEdmStorageProvider.putGenericValueAsUser(callingOrCurrentUserId, "deviceLastAccessDate", str);
+            this.mEdmStorageProvider.putGenericValueAsUser(
+                    callingOrCurrentUserId, "deviceLastAccessDate", str);
             ((HashMap) mBannerMap).remove(Integer.valueOf(callingOrCurrentUserId));
             return true;
         } catch (Exception unused) {
@@ -1483,12 +1842,17 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
 
     public final boolean setDodBannerVisibleStatus(ContextInfo contextInfo, boolean z) {
         ContextInfo enforceOnlySecurityPermission$1 = enforceOnlySecurityPermission$1(contextInfo);
-        if (!this.mContext.getPackageManager().getNameForUid(enforceOnlySecurityPermission$1.mCallerUid).equals(KnoxCustomManagerService.KNOX_PP_AGENT_PKG_NAME)) {
+        if (!this.mContext
+                .getPackageManager()
+                .getNameForUid(enforceOnlySecurityPermission$1.mCallerUid)
+                .equals(KnoxCustomManagerService.KNOX_PP_AGENT_PKG_NAME)) {
             return false;
         }
-        int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOnlySecurityPermission$1);
+        int callingOrCurrentUserId =
+                Utils.getCallingOrCurrentUserId(enforceOnlySecurityPermission$1);
         try {
-            this.mEdmStorageProvider.putGenericValueAsUser(callingOrCurrentUserId, "dodBannerVisible", Integer.toString(z ? 1 : 0));
+            this.mEdmStorageProvider.putGenericValueAsUser(
+                    callingOrCurrentUserId, "dodBannerVisible", Integer.toString(z ? 1 : 0));
             if (callingOrCurrentUserId == 0) {
                 if (z) {
                     registerDexBlocker$3();
@@ -1496,7 +1860,11 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                 } else {
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        ((SemDesktopModeManager) this.mContext.getApplicationContext().getSystemService("desktopmode")).unregisterBlocker(this.mBlocker);
+                        ((SemDesktopModeManager)
+                                        this.mContext
+                                                .getApplicationContext()
+                                                .getSystemService("desktopmode"))
+                                .unregisterBlocker(this.mBlocker);
                         Log.d("SecurityPolicy", "DexBlocker was unregistered");
                     } catch (Exception unused) {
                         Log.d("SecurityPolicy", "DexBlocker was failed");
@@ -1518,17 +1886,34 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             try {
                 EncryptionManagerAdapter.getInstance(this.mContext).getClass();
                 if (SemSdCardEncryption.isEncryptionFeatureEnabled()) {
-                    if (!z && ((DevicePolicyManager) EncryptionManagerAdapter.mContext.getSystemService("device_policy")).semGetRequireStorageCardEncryption(null)) {
-                        Log.d("SecurityPolicy", "SD Encryption enabled by some other admin cannot decrypt");
+                    if (!z
+                            && ((DevicePolicyManager)
+                                            EncryptionManagerAdapter.mContext.getSystemService(
+                                                    "device_policy"))
+                                    .semGetRequireStorageCardEncryption(null)) {
+                        Log.d(
+                                "SecurityPolicy",
+                                "SD Encryption enabled by some other admin cannot decrypt");
                         return;
                     } else if (z) {
-                        new SemSdCardEncryption(EncryptionManagerAdapter.mContext).setSdCardEncryptionPolicy(1, -1, (String) null);
+                        new SemSdCardEncryption(EncryptionManagerAdapter.mContext)
+                                .setSdCardEncryptionPolicy(1, -1, (String) null);
                     } else {
-                        new SemSdCardEncryption(EncryptionManagerAdapter.mContext).setSdCardEncryptionPolicy(0, -1, (String) null);
+                        new SemSdCardEncryption(EncryptionManagerAdapter.mContext)
+                                .setSdCardEncryptionPolicy(0, -1, (String) null);
                     }
                 }
                 if (z) {
-                    AuditLog.logAsUser(5, 1, true, Process.myPid(), "SecurityPolicy", String.format("Admin %d has requested encryption of external storage", Integer.valueOf(contextInfo.mCallerUid)), UserHandle.getUserId(contextInfo.mCallerUid));
+                    AuditLog.logAsUser(
+                            5,
+                            1,
+                            true,
+                            Process.myPid(),
+                            "SecurityPolicy",
+                            String.format(
+                                    "Admin %d has requested encryption of external storage",
+                                    Integer.valueOf(contextInfo.mCallerUid)),
+                            UserHandle.getUserId(contextInfo.mCallerUid));
                 }
             } catch (Exception unused) {
                 Log.w("SecurityPolicy", "is External Storage Encrypted?");
@@ -1546,7 +1931,9 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                 synchronized (this) {
                     try {
                         if (this.mStatusBarService == null) {
-                            IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
+                            IStatusBarService asInterface =
+                                    IStatusBarService.Stub.asInterface(
+                                            ServiceManager.getService("statusbar"));
                             this.mStatusBarService = asInterface;
                             if (asInterface == null) {
                                 Log.d("SecurityPolicy", "warning: no STATUS_BAR_SERVICE");
@@ -1568,11 +1955,16 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             }
             KeyCodeMediatorImpl keyCodeMediatorImpl = this.mKeyCodeMediator;
             if (keyCodeMediatorImpl == null) {
-                Log.e("SecurityPolicy", "mKeyCodeMediator must not be null! This will cause problems on hardware key restriction.");
+                Log.e(
+                        "SecurityPolicy",
+                        "mKeyCodeMediator must not be null! This will cause problems on hardware"
+                            + " key restriction.");
             } else {
                 keyCodeMediatorImpl.update(3);
                 this.mKeyCodeMediator.update(1001);
-                this.mKeyCodeMediator.update(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CREDENTIAL_MANAGEMENT_APP_REMOVED);
+                this.mKeyCodeMediator.update(
+                        FrameworkStatsLog
+                                .DEVICE_POLICY_EVENT__EVENT_ID__CREDENTIAL_MANAGEMENT_APP_REMOVED);
             }
         } catch (Exception unused) {
             Log.d("SecurityPolicy", "setHomeAndRecentKey was failed");
@@ -1589,7 +1981,8 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                devicePolicyManager = (DevicePolicyManager) this.mContext.getSystemService("device_policy");
+                devicePolicyManager =
+                        (DevicePolicyManager) this.mContext.getSystemService("device_policy");
             } catch (Exception unused) {
                 Log.w("SecurityPolicy", "is Internal Storage Encrypted?");
             }
@@ -1602,7 +1995,9 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                 return;
             }
             if (z && isInternalStorageEncrypted(contextInfo)) {
-                Log.w("SecurityPolicy", "setInternalStorageEncryption : device is already encrypted");
+                Log.w(
+                        "SecurityPolicy",
+                        "setInternalStorageEncryption : device is already encrypted");
                 return;
             }
             Log.d("SecurityPolicy", "setInternalStorageEncryption : Launching Encrption activity");
@@ -1616,7 +2011,16 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
                     intent2.addFlags(268435456);
                     this.mContext.startActivity(intent2);
                 }
-                AuditLog.logAsUser(5, 1, true, Process.myPid(), "SecurityPolicy", String.format("Admin %d has requested encryption of internal storage", Integer.valueOf(contextInfo.mCallerUid)), UserHandle.getUserId(contextInfo.mCallerUid));
+                AuditLog.logAsUser(
+                        5,
+                        1,
+                        true,
+                        Process.myPid(),
+                        "SecurityPolicy",
+                        String.format(
+                                "Admin %d has requested encryption of internal storage",
+                                Integer.valueOf(contextInfo.mCallerUid)),
+                        UserHandle.getUserId(contextInfo.mCallerUid));
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1631,12 +2035,14 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         }
     }
 
-    public final void setRequireDeviceEncryption(ContextInfo contextInfo, ComponentName componentName, boolean z) {
+    public final void setRequireDeviceEncryption(
+            ContextInfo contextInfo, ComponentName componentName, boolean z) {
         enforceOwnerOnlyAndSecurityPermission$2(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                ((DevicePolicyManager) this.mContext.getSystemService("device_policy")).setStorageEncryption(componentName, z);
+                ((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                        .setStorageEncryption(componentName, z);
             } catch (Exception e) {
                 Log.w("SecurityPolicy", "setRequireDeviceEncryption Ex" + e.getMessage());
                 e.printStackTrace();
@@ -1646,12 +2052,14 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         }
     }
 
-    public final void setRequireStorageCardEncryption(ContextInfo contextInfo, ComponentName componentName, boolean z) {
+    public final void setRequireStorageCardEncryption(
+            ContextInfo contextInfo, ComponentName componentName, boolean z) {
         enforceOwnerOnlyAndSecurityPermission$2(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                ((DevicePolicyManager) this.mContext.getSystemService("device_policy")).semSetRequireStorageCardEncryption(componentName, z, contextInfo.mParent);
+                ((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                        .semSetRequireStorageCardEncryption(componentName, z, contextInfo.mParent);
             } catch (Exception e) {
                 Log.w("SecurityPolicy", "setRequireStorageCardEncryption Ex" + e.getMessage());
                 e.printStackTrace();
@@ -1671,12 +2079,15 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
         Intent intent = new Intent();
         intent.setAction("android.intent.action.MAIN");
         intent.addCategory("android.intent.category.LAUNCHER");
-        intent.setClassName(KnoxCustomManagerService.KNOX_PP_AGENT_PKG_NAME, "com.samsung.android.mdm.DodBanner");
+        intent.setClassName(
+                KnoxCustomManagerService.KNOX_PP_AGENT_PKG_NAME,
+                "com.samsung.android.mdm.DodBanner");
         boolean z = this.mContext.startServiceAsUser(intent, new UserHandle(0)) != null;
         if (z) {
             return;
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("startBannerService() failed. userId = 0, ret = ", "SecurityPolicy", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "startBannerService() failed. userId = 0, ret = ", "SecurityPolicy", z);
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
@@ -1686,9 +2097,9 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
 
     /* JADX WARN: Can't wrap try/catch for region: R(20:0|1|(4:4|(3:15|16|17)|18|2)|23|24|(6:(8:55|56|57|(8:37|38|(1:42)|43|(1:45)|46|(1:48)(1:51)|49)|30|(1:33)|34|35)(2:60|61)|53|30|(1:33)|34|35)|27|(0)|37|38|(2:40|42)|43|(0)|46|(0)(0)|49|30|(0)|34|35) */
     /* JADX WARN: Code restructure failed: missing block: B:52:0x008c, code lost:
-    
-        r1 = r5;
-     */
+
+       r1 = r5;
+    */
     /* JADX WARN: Removed duplicated region for block: B:32:0x0113 A[ADDED_TO_REGION] */
     /* JADX WARN: Removed duplicated region for block: B:45:0x0093 A[Catch: Exception -> 0x008c, TryCatch #1 {Exception -> 0x008c, blocks: (B:38:0x006c, B:40:0x007b, B:42:0x0088, B:43:0x008f, B:45:0x0093, B:46:0x009a, B:48:0x00cc, B:49:0x00d2), top: B:37:0x006c }] */
     /* JADX WARN: Removed duplicated region for block: B:48:0x00cc A[Catch: Exception -> 0x008c, TryCatch #1 {Exception -> 0x008c, blocks: (B:38:0x006c, B:40:0x007b, B:42:0x0088, B:43:0x008f, B:45:0x0093, B:46:0x009a, B:48:0x00cc, B:49:0x00d2), top: B:37:0x006c }] */
@@ -1702,6 +2113,9 @@ public final class SecurityPolicy extends ISecurityPolicy.Stub implements Enterp
             Method dump skipped, instructions count: 332
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.security.SecurityPolicy.wipeDevice(com.samsung.android.knox.ContextInfo, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.security.SecurityPolicy.wipeDevice(com.samsung.android.knox.ContextInfo,"
+                    + " int):boolean");
     }
 }

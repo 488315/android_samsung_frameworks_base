@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IBrailleDisplayConnection extends IInterface {
-    public static final String DESCRIPTOR = "android.accessibilityservice.IBrailleDisplayConnection";
+    public static final String DESCRIPTOR =
+            "android.accessibilityservice.IBrailleDisplayConnection";
 
     void disconnect() throws RemoteException;
 
@@ -17,12 +18,10 @@ public interface IBrailleDisplayConnection extends IInterface {
 
     public static class Default implements IBrailleDisplayConnection {
         @Override // android.accessibilityservice.IBrailleDisplayConnection
-        public void disconnect() throws RemoteException {
-        }
+        public void disconnect() throws RemoteException {}
 
         @Override // android.accessibilityservice.IBrailleDisplayConnection
-        public void write(byte[] output) throws RemoteException {
-        }
+        public void write(byte[] output) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface IBrailleDisplayConnection extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBrailleDisplayConnection {
+    public abstract static class Stub extends Binder implements IBrailleDisplayConnection {
         static final int TRANSACTION_disconnect = 1;
         static final int TRANSACTION_write = 2;
 
@@ -71,7 +70,8 @@ public interface IBrailleDisplayConnection extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBrailleDisplayConnection.DESCRIPTOR);
             }

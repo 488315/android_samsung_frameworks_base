@@ -6,8 +6,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.telephony.DataFailCause;
 import android.telephony.PreciseDataConnectionState;
+
 import com.android.internal.util.Preconditions;
 import com.android.internal.vibrator.persistence.XmlConstants;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.net.InetAddress;
@@ -20,19 +22,21 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class DataCallResponse implements Parcelable {
-    public static final Parcelable.Creator<DataCallResponse> CREATOR = new Parcelable.Creator<DataCallResponse>() { // from class: android.telephony.data.DataCallResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DataCallResponse createFromParcel(Parcel source) {
-            return new DataCallResponse(source);
-        }
+    public static final Parcelable.Creator<DataCallResponse> CREATOR =
+            new Parcelable.Creator<
+                    DataCallResponse>() { // from class: android.telephony.data.DataCallResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DataCallResponse createFromParcel(Parcel source) {
+                    return new DataCallResponse(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DataCallResponse[] newArray(int size) {
-            return new DataCallResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DataCallResponse[] newArray(int size) {
+                    return new DataCallResponse[size];
+                }
+            };
     public static final int HANDOVER_FAILURE_MODE_DO_FALLBACK = 1;
     public static final int HANDOVER_FAILURE_MODE_LEGACY = 0;
     public static final int HANDOVER_FAILURE_MODE_NO_FALLBACK_RETRY_HANDOVER = 2;
@@ -66,18 +70,67 @@ public final class DataCallResponse implements Parcelable {
     private final List<TrafficDescriptor> mTrafficDescriptors;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface HandoverFailureMode {
-    }
+    public @interface HandoverFailureMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LinkStatus {
+    public @interface LinkStatus {}
+
+    public DataCallResponse(
+            int cause,
+            int suggestedRetryTime,
+            int id,
+            int linkStatus,
+            int protocolType,
+            String interfaceName,
+            List<LinkAddress> addresses,
+            List<InetAddress> dnsAddresses,
+            List<InetAddress> gatewayAddresses,
+            List<InetAddress> pcscfAddresses,
+            int mtu) {
+        this(
+                cause,
+                suggestedRetryTime,
+                id,
+                linkStatus,
+                protocolType,
+                interfaceName == null ? "" : interfaceName,
+                addresses == null ? Collections.emptyList() : addresses,
+                dnsAddresses == null ? Collections.emptyList() : dnsAddresses,
+                gatewayAddresses == null ? Collections.emptyList() : gatewayAddresses,
+                pcscfAddresses == null ? Collections.emptyList() : pcscfAddresses,
+                mtu,
+                mtu,
+                mtu,
+                0,
+                0,
+                null,
+                Collections.emptyList(),
+                null,
+                Collections.emptyList(),
+                0);
     }
 
-    public DataCallResponse(int cause, int suggestedRetryTime, int id, int linkStatus, int protocolType, String interfaceName, List<LinkAddress> addresses, List<InetAddress> dnsAddresses, List<InetAddress> gatewayAddresses, List<InetAddress> pcscfAddresses, int mtu) {
-        this(cause, suggestedRetryTime, id, linkStatus, protocolType, interfaceName == null ? "" : interfaceName, addresses == null ? Collections.emptyList() : addresses, dnsAddresses == null ? Collections.emptyList() : dnsAddresses, gatewayAddresses == null ? Collections.emptyList() : gatewayAddresses, pcscfAddresses == null ? Collections.emptyList() : pcscfAddresses, mtu, mtu, mtu, 0, 0, null, Collections.emptyList(), null, Collections.emptyList(), 0);
-    }
-
-    private DataCallResponse(int cause, long suggestedRetryTime, int id, int linkStatus, int protocolType, String interfaceName, List<LinkAddress> addresses, List<InetAddress> dnsAddresses, List<InetAddress> gatewayAddresses, List<InetAddress> pcscfAddresses, int mtu, int mtuV4, int mtuV6, int handoverFailureMode, int pduSessionId, Qos defaultQos, List<QosBearerSession> qosBearerSessions, NetworkSliceInfo sliceInfo, List<TrafficDescriptor> trafficDescriptors, int networkValidationStatus) {
+    private DataCallResponse(
+            int cause,
+            long suggestedRetryTime,
+            int id,
+            int linkStatus,
+            int protocolType,
+            String interfaceName,
+            List<LinkAddress> addresses,
+            List<InetAddress> dnsAddresses,
+            List<InetAddress> gatewayAddresses,
+            List<InetAddress> pcscfAddresses,
+            int mtu,
+            int mtuV4,
+            int mtuV6,
+            int handoverFailureMode,
+            int pduSessionId,
+            Qos defaultQos,
+            List<QosBearerSession> qosBearerSessions,
+            NetworkSliceInfo sliceInfo,
+            List<TrafficDescriptor> trafficDescriptors,
+            int networkValidationStatus) {
         this.mCause = cause;
         this.mSuggestedRetryTime = suggestedRetryTime;
         this.mId = id;
@@ -99,7 +152,8 @@ public final class DataCallResponse implements Parcelable {
         this.mTrafficDescriptors = new ArrayList(trafficDescriptors);
         this.mNetworkValidationStatus = networkValidationStatus;
         if (this.mLinkStatus == 2 || this.mLinkStatus == 1) {
-            Objects.requireNonNull(this.mInterfaceName, "Active data calls must be on a valid interface!");
+            Objects.requireNonNull(
+                    this.mInterfaceName, "Active data calls must be on a valid interface!");
             if (this.mCause != 0) {
                 throw new IllegalStateException("Active data call must not have a failure!");
             }
@@ -118,9 +172,11 @@ public final class DataCallResponse implements Parcelable {
         this.mDnsAddresses = new ArrayList();
         source.readList(this.mDnsAddresses, InetAddress.class.getClassLoader(), InetAddress.class);
         this.mGatewayAddresses = new ArrayList();
-        source.readList(this.mGatewayAddresses, InetAddress.class.getClassLoader(), InetAddress.class);
+        source.readList(
+                this.mGatewayAddresses, InetAddress.class.getClassLoader(), InetAddress.class);
         this.mPcscfAddresses = new ArrayList();
-        source.readList(this.mPcscfAddresses, InetAddress.class.getClassLoader(), InetAddress.class);
+        source.readList(
+                this.mPcscfAddresses, InetAddress.class.getClassLoader(), InetAddress.class);
         this.mMtu = source.readInt();
         this.mMtuV4 = source.readInt();
         this.mMtuV6 = source.readInt();
@@ -128,10 +184,19 @@ public final class DataCallResponse implements Parcelable {
         this.mPduSessionId = source.readInt();
         this.mDefaultQos = (Qos) source.readParcelable(Qos.class.getClassLoader(), Qos.class);
         this.mQosBearerSessions = new ArrayList();
-        source.readList(this.mQosBearerSessions, QosBearerSession.class.getClassLoader(), QosBearerSession.class);
-        this.mSliceInfo = (NetworkSliceInfo) source.readParcelable(NetworkSliceInfo.class.getClassLoader(), NetworkSliceInfo.class);
+        source.readList(
+                this.mQosBearerSessions,
+                QosBearerSession.class.getClassLoader(),
+                QosBearerSession.class);
+        this.mSliceInfo =
+                (NetworkSliceInfo)
+                        source.readParcelable(
+                                NetworkSliceInfo.class.getClassLoader(), NetworkSliceInfo.class);
         this.mTrafficDescriptors = new ArrayList();
-        source.readList(this.mTrafficDescriptors, TrafficDescriptor.class.getClassLoader(), TrafficDescriptor.class);
+        source.readList(
+                this.mTrafficDescriptors,
+                TrafficDescriptor.class.getClassLoader(),
+                TrafficDescriptor.class);
         this.mNetworkValidationStatus = source.readInt();
     }
 
@@ -229,7 +294,50 @@ public final class DataCallResponse implements Parcelable {
 
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("DataCallResponse: {").append(" cause=").append(DataFailCause.toString(this.mCause)).append(" retry=").append(this.mSuggestedRetryTime).append(" cid=").append(this.mId).append(" linkStatus=").append(this.mLinkStatus).append(" protocolType=").append(this.mProtocolType).append(" ifname=").append(this.mInterfaceName).append(" addresses=").append(this.mAddresses).append(" dnses=").append(this.mDnsAddresses).append(" gateways=").append(this.mGatewayAddresses).append(" pcscf=").append(this.mPcscfAddresses).append(" mtu=").append(getMtu()).append(" mtuV4=").append(getMtuV4()).append(" mtuV6=").append(getMtuV6()).append(" handoverFailureMode=").append(failureModeToString(this.mHandoverFailureMode)).append(" pduSessionId=").append(getPduSessionId()).append(" defaultQos=").append(this.mDefaultQos).append(" qosBearerSessions=").append(this.mQosBearerSessions).append(" sliceInfo=").append(this.mSliceInfo).append(" trafficDescriptors=").append(this.mTrafficDescriptors).append(" networkValidationStatus=").append(PreciseDataConnectionState.networkValidationStatusToString(this.mNetworkValidationStatus)).append("}");
+        sb.append("DataCallResponse: {")
+                .append(" cause=")
+                .append(DataFailCause.toString(this.mCause))
+                .append(" retry=")
+                .append(this.mSuggestedRetryTime)
+                .append(" cid=")
+                .append(this.mId)
+                .append(" linkStatus=")
+                .append(this.mLinkStatus)
+                .append(" protocolType=")
+                .append(this.mProtocolType)
+                .append(" ifname=")
+                .append(this.mInterfaceName)
+                .append(" addresses=")
+                .append(this.mAddresses)
+                .append(" dnses=")
+                .append(this.mDnsAddresses)
+                .append(" gateways=")
+                .append(this.mGatewayAddresses)
+                .append(" pcscf=")
+                .append(this.mPcscfAddresses)
+                .append(" mtu=")
+                .append(getMtu())
+                .append(" mtuV4=")
+                .append(getMtuV4())
+                .append(" mtuV6=")
+                .append(getMtuV6())
+                .append(" handoverFailureMode=")
+                .append(failureModeToString(this.mHandoverFailureMode))
+                .append(" pduSessionId=")
+                .append(getPduSessionId())
+                .append(" defaultQos=")
+                .append(this.mDefaultQos)
+                .append(" qosBearerSessions=")
+                .append(this.mQosBearerSessions)
+                .append(" sliceInfo=")
+                .append(this.mSliceInfo)
+                .append(" trafficDescriptors=")
+                .append(this.mTrafficDescriptors)
+                .append(" networkValidationStatus=")
+                .append(
+                        PreciseDataConnectionState.networkValidationStatusToString(
+                                this.mNetworkValidationStatus))
+                .append("}");
         return sb.toString();
     }
 
@@ -241,11 +349,56 @@ public final class DataCallResponse implements Parcelable {
             return false;
         }
         DataCallResponse other = (DataCallResponse) o;
-        return this.mCause == other.mCause && this.mSuggestedRetryTime == other.mSuggestedRetryTime && this.mId == other.mId && this.mLinkStatus == other.mLinkStatus && this.mProtocolType == other.mProtocolType && this.mInterfaceName.equals(other.mInterfaceName) && this.mAddresses.size() == other.mAddresses.size() && this.mAddresses.containsAll(other.mAddresses) && this.mDnsAddresses.size() == other.mDnsAddresses.size() && this.mDnsAddresses.containsAll(other.mDnsAddresses) && this.mGatewayAddresses.size() == other.mGatewayAddresses.size() && this.mGatewayAddresses.containsAll(other.mGatewayAddresses) && this.mPcscfAddresses.size() == other.mPcscfAddresses.size() && this.mPcscfAddresses.containsAll(other.mPcscfAddresses) && this.mMtu == other.mMtu && this.mMtuV4 == other.mMtuV4 && this.mMtuV6 == other.mMtuV6 && this.mHandoverFailureMode == other.mHandoverFailureMode && this.mPduSessionId == other.mPduSessionId && Objects.equals(this.mDefaultQos, other.mDefaultQos) && this.mQosBearerSessions.size() == other.mQosBearerSessions.size() && this.mQosBearerSessions.containsAll(other.mQosBearerSessions) && Objects.equals(this.mSliceInfo, other.mSliceInfo) && this.mTrafficDescriptors.size() == other.mTrafficDescriptors.size() && this.mTrafficDescriptors.containsAll(other.mTrafficDescriptors) && this.mNetworkValidationStatus == other.mNetworkValidationStatus;
+        return this.mCause == other.mCause
+                && this.mSuggestedRetryTime == other.mSuggestedRetryTime
+                && this.mId == other.mId
+                && this.mLinkStatus == other.mLinkStatus
+                && this.mProtocolType == other.mProtocolType
+                && this.mInterfaceName.equals(other.mInterfaceName)
+                && this.mAddresses.size() == other.mAddresses.size()
+                && this.mAddresses.containsAll(other.mAddresses)
+                && this.mDnsAddresses.size() == other.mDnsAddresses.size()
+                && this.mDnsAddresses.containsAll(other.mDnsAddresses)
+                && this.mGatewayAddresses.size() == other.mGatewayAddresses.size()
+                && this.mGatewayAddresses.containsAll(other.mGatewayAddresses)
+                && this.mPcscfAddresses.size() == other.mPcscfAddresses.size()
+                && this.mPcscfAddresses.containsAll(other.mPcscfAddresses)
+                && this.mMtu == other.mMtu
+                && this.mMtuV4 == other.mMtuV4
+                && this.mMtuV6 == other.mMtuV6
+                && this.mHandoverFailureMode == other.mHandoverFailureMode
+                && this.mPduSessionId == other.mPduSessionId
+                && Objects.equals(this.mDefaultQos, other.mDefaultQos)
+                && this.mQosBearerSessions.size() == other.mQosBearerSessions.size()
+                && this.mQosBearerSessions.containsAll(other.mQosBearerSessions)
+                && Objects.equals(this.mSliceInfo, other.mSliceInfo)
+                && this.mTrafficDescriptors.size() == other.mTrafficDescriptors.size()
+                && this.mTrafficDescriptors.containsAll(other.mTrafficDescriptors)
+                && this.mNetworkValidationStatus == other.mNetworkValidationStatus;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mCause), Long.valueOf(this.mSuggestedRetryTime), Integer.valueOf(this.mId), Integer.valueOf(this.mLinkStatus), Integer.valueOf(this.mProtocolType), this.mInterfaceName, Set.copyOf(this.mAddresses), Set.copyOf(this.mDnsAddresses), Set.copyOf(this.mGatewayAddresses), Set.copyOf(this.mPcscfAddresses), Integer.valueOf(this.mMtu), Integer.valueOf(this.mMtuV4), Integer.valueOf(this.mMtuV6), Integer.valueOf(this.mHandoverFailureMode), Integer.valueOf(this.mPduSessionId), this.mDefaultQos, Set.copyOf(this.mQosBearerSessions), this.mSliceInfo, Set.copyOf(this.mTrafficDescriptors), Integer.valueOf(this.mNetworkValidationStatus));
+        return Objects.hash(
+                Integer.valueOf(this.mCause),
+                Long.valueOf(this.mSuggestedRetryTime),
+                Integer.valueOf(this.mId),
+                Integer.valueOf(this.mLinkStatus),
+                Integer.valueOf(this.mProtocolType),
+                this.mInterfaceName,
+                Set.copyOf(this.mAddresses),
+                Set.copyOf(this.mDnsAddresses),
+                Set.copyOf(this.mGatewayAddresses),
+                Set.copyOf(this.mPcscfAddresses),
+                Integer.valueOf(this.mMtu),
+                Integer.valueOf(this.mMtuV4),
+                Integer.valueOf(this.mMtuV6),
+                Integer.valueOf(this.mHandoverFailureMode),
+                Integer.valueOf(this.mPduSessionId),
+                this.mDefaultQos,
+                Set.copyOf(this.mQosBearerSessions),
+                this.mSliceInfo,
+                Set.copyOf(this.mTrafficDescriptors),
+                Integer.valueOf(this.mNetworkValidationStatus));
     }
 
     @Override // android.os.Parcelable
@@ -400,8 +553,10 @@ public final class DataCallResponse implements Parcelable {
         }
 
         public Builder setPduSessionId(int pduSessionId) {
-            Preconditions.checkArgument(pduSessionId >= 0, "pduSessionId must be greater than or equal to0");
-            Preconditions.checkArgument(pduSessionId <= 15, "pduSessionId must be less than or equal to 15.");
+            Preconditions.checkArgument(
+                    pduSessionId >= 0, "pduSessionId must be greater than or equal to0");
+            Preconditions.checkArgument(
+                    pduSessionId <= 15, "pduSessionId must be less than or equal to 15.");
             this.mPduSessionId = pduSessionId;
             return this;
         }
@@ -434,7 +589,27 @@ public final class DataCallResponse implements Parcelable {
         }
 
         public DataCallResponse build() {
-            return new DataCallResponse(this.mCause, this.mSuggestedRetryTime, this.mId, this.mLinkStatus, this.mProtocolType, this.mInterfaceName, this.mAddresses, this.mDnsAddresses, this.mGatewayAddresses, this.mPcscfAddresses, this.mMtu, this.mMtuV4, this.mMtuV6, this.mHandoverFailureMode, this.mPduSessionId, this.mDefaultQos, this.mQosBearerSessions, this.mSliceInfo, this.mTrafficDescriptors, this.mNetworkValidationStatus);
+            return new DataCallResponse(
+                    this.mCause,
+                    this.mSuggestedRetryTime,
+                    this.mId,
+                    this.mLinkStatus,
+                    this.mProtocolType,
+                    this.mInterfaceName,
+                    this.mAddresses,
+                    this.mDnsAddresses,
+                    this.mGatewayAddresses,
+                    this.mPcscfAddresses,
+                    this.mMtu,
+                    this.mMtuV4,
+                    this.mMtuV6,
+                    this.mHandoverFailureMode,
+                    this.mPduSessionId,
+                    this.mDefaultQos,
+                    this.mQosBearerSessions,
+                    this.mSliceInfo,
+                    this.mTrafficDescriptors,
+                    this.mNetworkValidationStatus);
         }
     }
 }

@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class FrontendModulationStatus implements Parcelable {
-    public static final Parcelable.Creator<FrontendModulationStatus> CREATOR = new Parcelable.Creator<FrontendModulationStatus>() { // from class: android.hardware.tv.tuner.FrontendModulationStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendModulationStatus createFromParcel(Parcel _aidl_source) {
-            return new FrontendModulationStatus(_aidl_source);
-        }
+    public static final Parcelable.Creator<FrontendModulationStatus> CREATOR =
+            new Parcelable.Creator<FrontendModulationStatus>() { // from class:
+                // android.hardware.tv.tuner.FrontendModulationStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendModulationStatus createFromParcel(Parcel _aidl_source) {
+                    return new FrontendModulationStatus(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendModulationStatus[] newArray(int _aidl_size) {
-            return new FrontendModulationStatus[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendModulationStatus[] newArray(int _aidl_size) {
+                    return new FrontendModulationStatus[_aidl_size];
+                }
+            };
     public static final int dvbc = 0;
     public static final int dvbs = 1;
     public static final int isdbs = 2;
@@ -180,7 +182,12 @@ public final class FrontendModulationStatus implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

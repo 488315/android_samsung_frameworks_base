@@ -12,7 +12,8 @@ public final /* synthetic */ class QuotaTracker$$ExternalSyntheticLambda0 implem
         this.f$0 = quotaTracker;
     }
 
-    public /* synthetic */ QuotaTracker$$ExternalSyntheticLambda0(QuotaTracker quotaTracker, int i, String str, String str2) {
+    public /* synthetic */ QuotaTracker$$ExternalSyntheticLambda0(
+            QuotaTracker quotaTracker, int i, String str, String str2) {
         this.f$0 = quotaTracker;
     }
 
@@ -25,7 +26,9 @@ public final /* synthetic */ class QuotaTracker$$ExternalSyntheticLambda0 implem
             case 0:
                 synchronized (quotaTracker.mLock) {
                     ArraySet arraySet = quotaTracker.mQuotaChangeListeners;
-                    quotaChangeListenerArr = (QuotaChangeListener[]) arraySet.toArray(new QuotaChangeListener[arraySet.size()]);
+                    quotaChangeListenerArr =
+                            (QuotaChangeListener[])
+                                    arraySet.toArray(new QuotaChangeListener[arraySet.size()]);
                 }
                 if (quotaChangeListenerArr.length <= 0) {
                     return;
@@ -36,7 +39,9 @@ public final /* synthetic */ class QuotaTracker$$ExternalSyntheticLambda0 implem
                 synchronized (quotaTracker.mLock) {
                     if (quotaTracker.mQuotaChangeListeners.size() > 0) {
                         CountQuotaTracker countQuotaTracker = (CountQuotaTracker) quotaTracker;
-                        countQuotaTracker.mEventTimes.forEach(new CountQuotaTracker$$ExternalSyntheticLambda5(countQuotaTracker, new UptcMap(), 1));
+                        countQuotaTracker.mEventTimes.forEach(
+                                new CountQuotaTracker$$ExternalSyntheticLambda5(
+                                        countQuotaTracker, new UptcMap(), 1));
                     }
                 }
                 return;

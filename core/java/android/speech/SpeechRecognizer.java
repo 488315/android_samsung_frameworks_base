@@ -4,7 +4,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+
 import com.android.internal.R;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -30,7 +32,8 @@ public class SpeechRecognizer {
     public static final int ERROR_SERVER_DISCONNECTED = 11;
     public static final int ERROR_SPEECH_TIMEOUT = 6;
     public static final int ERROR_TOO_MANY_REQUESTS = 10;
-    public static final String LANGUAGE_DETECTION_CONFIDENCE_LEVEL = "language_detection_confidence_level";
+    public static final String LANGUAGE_DETECTION_CONFIDENCE_LEVEL =
+            "language_detection_confidence_level";
     public static final int LANGUAGE_DETECTION_CONFIDENCE_LEVEL_CONFIDENT = 2;
     public static final int LANGUAGE_DETECTION_CONFIDENCE_LEVEL_HIGHLY_CONFIDENT = 3;
     public static final int LANGUAGE_DETECTION_CONFIDENCE_LEVEL_NOT_CONFIDENT = 1;
@@ -54,29 +57,29 @@ public class SpeechRecognizer {
 
     @Documented
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LanguageDetectionConfidenceLevel {
-    }
+    public @interface LanguageDetectionConfidenceLevel {}
 
     @Documented
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LanguageSwitchResult {
-    }
+    public @interface LanguageSwitchResult {}
 
     @Documented
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RecognitionError {
-    }
+    public @interface RecognitionError {}
 
-    SpeechRecognizer() {
-    }
+    SpeechRecognizer() {}
 
     public static boolean isRecognitionAvailable(Context context) {
-        List<ResolveInfo> list = context.getPackageManager().queryIntentServices(new Intent(RecognitionService.SERVICE_INTERFACE), 0);
+        List<ResolveInfo> list =
+                context.getPackageManager()
+                        .queryIntentServices(new Intent(RecognitionService.SERVICE_INTERFACE), 0);
         return (list == null || list.size() == 0) ? false : true;
     }
 
     public static boolean isOnDeviceRecognitionAvailable(Context context) {
-        ComponentName componentName = ComponentName.unflattenFromString(context.getString(R.string.config_defaultOnDeviceSpeechRecognitionService));
+        ComponentName componentName =
+                ComponentName.unflattenFromString(
+                        context.getString(R.string.config_defaultOnDeviceSpeechRecognitionService));
         return componentName != null;
     }
 
@@ -84,7 +87,8 @@ public class SpeechRecognizer {
         return createSpeechRecognizer(context, null);
     }
 
-    public static SpeechRecognizer createSpeechRecognizer(Context context, ComponentName serviceComponent) {
+    public static SpeechRecognizer createSpeechRecognizer(
+            Context context, ComponentName serviceComponent) {
         if (context == null) {
             throw new IllegalArgumentException("Context cannot be null");
         }
@@ -123,7 +127,10 @@ public class SpeechRecognizer {
         throw new UnsupportedOperationException();
     }
 
-    public void checkRecognitionSupport(Intent recognizerIntent, Executor executor, RecognitionSupportCallback supportListener) {
+    public void checkRecognitionSupport(
+            Intent recognizerIntent,
+            Executor executor,
+            RecognitionSupportCallback supportListener) {
         throw new UnsupportedOperationException();
     }
 
@@ -131,7 +138,8 @@ public class SpeechRecognizer {
         throw new UnsupportedOperationException();
     }
 
-    public void triggerModelDownload(Intent recognizerIntent, Executor executor, ModelDownloadListener listener) {
+    public void triggerModelDownload(
+            Intent recognizerIntent, Executor executor, ModelDownloadListener listener) {
         throw new UnsupportedOperationException();
     }
 

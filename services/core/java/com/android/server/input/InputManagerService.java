@@ -106,6 +106,7 @@ import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
+
 import com.android.input.flags.Flags;
 import com.android.internal.os.SomeArgs;
 import com.android.internal.os.TimeoutRecord;
@@ -143,17 +144,9 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.audio.AudioService$$ExternalSyntheticOutline0;
 import com.android.server.desktopmode.CoverStateManager;
-import com.android.server.input.BatteryController;
 import com.android.server.input.BatteryController.DeviceMonitor;
 import com.android.server.input.BatteryController.ListenerRecord;
-import com.android.server.input.InputKeyCounter;
-import com.android.server.input.InputManagerService;
-import com.android.server.input.KeyboardLayoutManager;
-import com.android.server.input.NativeInputManagerService;
-import com.android.server.input.PersistentDataStore;
-import com.android.server.input.StickyModifierStateController;
 import com.android.server.input.StickyModifierStateController.StickyModifierStateListenerRecord;
-import com.android.server.input.ToastDialog;
 import com.android.server.input.debug.FocusEventDebugView;
 import com.android.server.input.debug.FocusEventDebugView$$ExternalSyntheticLambda0;
 import com.android.server.input.debug.FocusEventDebugView$$ExternalSyntheticLambda1;
@@ -169,6 +162,7 @@ import com.android.server.wm.ViewServer;
 import com.android.server.wm.WindowManagerGlobalLock;
 import com.android.server.wm.WindowManagerService;
 import com.android.server.wm.WindowState;
+
 import com.samsung.android.core.CoreSaLogger;
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.DesktopModeManagerInternal;
@@ -179,6 +173,10 @@ import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.android.rune.InputRune;
 import com.samsung.android.sepunion.SemUnionManagerLocal;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -196,8 +194,6 @@ import java.util.Vector;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -333,8 +329,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.input.InputManagerService$1, reason: invalid class name */
-    public final class AnonymousClass1 implements UEventManager, KeyboardBacklightControllerInterface {
-    }
+    public final class AnonymousClass1
+            implements UEventManager, KeyboardBacklightControllerInterface {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.input.InputManagerService$3, reason: invalid class name */
@@ -373,7 +369,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                             sb.append(stringExtra != null ? stringExtra : "null");
                             Log.d("InputManager", sb.toString());
                             if (!TextUtils.isEmpty(stringExtra)) {
-                                this.this$0.setBlockDeviceMode(booleanExtra, intExtra, booleanExtra2, stringExtra);
+                                this.this$0.setBlockDeviceMode(
+                                        booleanExtra, intExtra, booleanExtra2, stringExtra);
                                 break;
                             }
                         } catch (Exception e) {
@@ -394,51 +391,70 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                             if (z) {
                                 Log.i("InputKeyCounter", "read old data!");
                             }
-                            String[] split = SystemProperties.get("persist.service.bgkeycount", "null").split("/");
-                            InputKeyCounter.HwKeyCount hwKeyCount = new InputKeyCounter.HwKeyCount();
+                            String[] split =
+                                    SystemProperties.get("persist.service.bgkeycount", "null")
+                                            .split("/");
+                            InputKeyCounter.HwKeyCount hwKeyCount =
+                                    new InputKeyCounter.HwKeyCount();
                             try {
                                 for (String str : split) {
                                     if (z) {
-                                        Log.d("InputKeyCounter", "read old saved keycount strings = " + str);
+                                        Log.d(
+                                                "InputKeyCounter",
+                                                "read old saved keycount strings = " + str);
                                     }
                                     String[] split2 = str.split(",");
                                     if (split2.length != 2) {
                                         Log.w("InputKeyCounter", "throw up the data!");
                                     } else {
-                                        hwKeyCount.add(Integer.parseInt(split2[0]), Integer.parseInt(split2[1]));
+                                        hwKeyCount.add(
+                                                Integer.parseInt(split2[0]),
+                                                Integer.parseInt(split2[1]));
                                     }
                                 }
                             } catch (NumberFormatException unused) {
-                                Log.e("InputKeyCounter", "NumberFormatException, throw up the data!");
+                                Log.e(
+                                        "InputKeyCounter",
+                                        "NumberFormatException, throw up the data!");
                                 SystemProperties.set("persist.service.bgkeycount", "");
                             }
-                            InputKeyCounter.sendBroadcastKeyCountInternal(context2, hwKeyCount.getKeyCountMap());
+                            InputKeyCounter.sendBroadcastKeyCountInternal(
+                                    context2, hwKeyCount.getKeyCountMap());
                             SystemProperties.set("persist.service.bgkeycount", "");
                         }
-                        this.this$0.mHandler.post(new Runnable(this) { // from class: com.android.server.input.InputManagerService$16$$ExternalSyntheticLambda0
-                            public final /* synthetic */ InputManagerService.AnonymousClass3 f$0;
+                        this.this$0.mHandler.post(
+                                new Runnable(
+                                        this) { // from class:
+                                                // com.android.server.input.InputManagerService$16$$ExternalSyntheticLambda0
+                                    public final /* synthetic */ InputManagerService.AnonymousClass3
+                                            f$0;
 
-                            {
-                                this.f$0 = this;
-                            }
+                                    {
+                                        this.f$0 = this;
+                                    }
 
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                int i3 = i;
-                                InputManagerService.AnonymousClass3 anonymousClass3 = this.f$0;
-                                switch (i3) {
-                                    case 0:
-                                        anonymousClass3.this$0.updateMultiFingerTapBehavior(4);
-                                        anonymousClass3.this$0.updateMultiFingerTapBehavior(1);
-                                        anonymousClass3.this$0.updateFlowPointerSettings();
-                                        anonymousClass3.this$0.updateFlowPointerDirectionSettings();
-                                        break;
-                                    default:
-                                        anonymousClass3.this$0.showingTouchSensitivityNotificationIfNeeded();
-                                        break;
-                                }
-                            }
-                        });
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        int i3 = i;
+                                        InputManagerService.AnonymousClass3 anonymousClass3 =
+                                                this.f$0;
+                                        switch (i3) {
+                                            case 0:
+                                                anonymousClass3.this$0.updateMultiFingerTapBehavior(
+                                                        4);
+                                                anonymousClass3.this$0.updateMultiFingerTapBehavior(
+                                                        1);
+                                                anonymousClass3.this$0.updateFlowPointerSettings();
+                                                anonymousClass3.this$0
+                                                        .updateFlowPointerDirectionSettings();
+                                                break;
+                                            default:
+                                                anonymousClass3.this$0
+                                                        .showingTouchSensitivityNotificationIfNeeded();
+                                                break;
+                                        }
+                                    }
+                                });
                         InputManagerService inputManagerService2 = this.this$0;
                         if (inputManagerService2.mNotifyPogoKeyboardNotMatchPending) {
                             inputManagerService2.notifyPogoKeyboardNotMatch();
@@ -447,38 +463,52 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                         InputManagerService inputManagerService3 = this.this$0;
                         if (inputManagerService3.mPaperCoverNotificationPending) {
                             inputManagerService3.mPaperCoverNotificationPending = false;
-                            inputManagerService3.mHandler.post(new Runnable(this) { // from class: com.android.server.input.InputManagerService$16$$ExternalSyntheticLambda0
-                                public final /* synthetic */ InputManagerService.AnonymousClass3 f$0;
+                            inputManagerService3.mHandler.post(
+                                    new Runnable(
+                                            this) { // from class:
+                                                    // com.android.server.input.InputManagerService$16$$ExternalSyntheticLambda0
+                                        public final /* synthetic */ InputManagerService
+                                                        .AnonymousClass3
+                                                f$0;
 
-                                {
-                                    this.f$0 = this;
-                                }
+                                        {
+                                            this.f$0 = this;
+                                        }
 
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    int i3 = i2;
-                                    InputManagerService.AnonymousClass3 anonymousClass3 = this.f$0;
-                                    switch (i3) {
-                                        case 0:
-                                            anonymousClass3.this$0.updateMultiFingerTapBehavior(4);
-                                            anonymousClass3.this$0.updateMultiFingerTapBehavior(1);
-                                            anonymousClass3.this$0.updateFlowPointerSettings();
-                                            anonymousClass3.this$0.updateFlowPointerDirectionSettings();
-                                            break;
-                                        default:
-                                            anonymousClass3.this$0.showingTouchSensitivityNotificationIfNeeded();
-                                            break;
-                                    }
-                                }
-                            });
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            int i3 = i2;
+                                            InputManagerService.AnonymousClass3 anonymousClass3 =
+                                                    this.f$0;
+                                            switch (i3) {
+                                                case 0:
+                                                    anonymousClass3.this$0
+                                                            .updateMultiFingerTapBehavior(4);
+                                                    anonymousClass3.this$0
+                                                            .updateMultiFingerTapBehavior(1);
+                                                    anonymousClass3.this$0
+                                                            .updateFlowPointerSettings();
+                                                    anonymousClass3.this$0
+                                                            .updateFlowPointerDirectionSettings();
+                                                    break;
+                                                default:
+                                                    anonymousClass3.this$0
+                                                            .showingTouchSensitivityNotificationIfNeeded();
+                                                    break;
+                                            }
+                                        }
+                                    });
                             break;
                         }
                     }
                     break;
                 case 3:
-                    if ("com.sec.android.app.kidshome.action.DEFAULT_HOME_CHANGE".equals(intent.getAction())) {
+                    if ("com.sec.android.app.kidshome.action.DEFAULT_HOME_CHANGE"
+                            .equals(intent.getAction())) {
                         boolean booleanExtra3 = intent.getBooleanExtra("kids_home_mode", false);
-                        Log.d("InputManager", "KidsMode : " + this.this$0.mIsKidsMode + " -> " + booleanExtra3);
+                        Log.d(
+                                "InputManager",
+                                "KidsMode : " + this.this$0.mIsKidsMode + " -> " + booleanExtra3);
                         InputManagerService inputManagerService4 = this.this$0;
                         if (inputManagerService4.mIsKidsMode != booleanExtra3) {
                             inputManagerService4.mNative.updateInputMetaState(16, booleanExtra3);
@@ -493,11 +523,17 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                     inputManagerService5.reloadDeviceAliases();
                     break;
                 default:
-                    if ("com.samsung.android.action.SHOWING_TOUCH_SENSITIVITY_NOTI".equals(intent.getAction())) {
-                        Settings.System.putIntForUser(this.this$0.mContext.getContentResolver(), "auto_adjust_touch", 1, -2);
+                    if ("com.samsung.android.action.SHOWING_TOUCH_SENSITIVITY_NOTI"
+                            .equals(intent.getAction())) {
+                        Settings.System.putIntForUser(
+                                this.this$0.mContext.getContentResolver(),
+                                "auto_adjust_touch",
+                                1,
+                                -2);
                         int intExtra2 = intent.getIntExtra("channelId", 0);
                         if (intExtra2 == 0) {
-                            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(intExtra2, "channel id was wrong. id=", "InputManager");
+                            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                                    intExtra2, "channel id was wrong. id=", "InputManager");
                             break;
                         } else {
                             this.this$0.mNotificationManager.cancel(intExtra2);
@@ -516,7 +552,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         public final /* synthetic */ InputManagerService this$0;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public /* synthetic */ AnonymousClass8(InputManagerService inputManagerService, Handler handler, int i) {
+        public /* synthetic */ AnonymousClass8(
+                InputManagerService inputManagerService, Handler handler, int i) {
             super(handler);
             this.$r8$classId = i;
             this.this$0 = inputManagerService;
@@ -556,8 +593,7 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface DesktopModeServiceCallbacks {
-    }
+    public interface DesktopModeServiceCallbacks {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class Injector {
@@ -577,7 +613,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         public final IInputDevicesChangedListener mListener;
         public final int mPid;
 
-        public InputDevicesChangedListenerRecord(int i, IInputDevicesChangedListener iInputDevicesChangedListener) {
+        public InputDevicesChangedListenerRecord(
+                int i, IInputDevicesChangedListener iInputDevicesChangedListener) {
             this.mPid = i;
             this.mListener = iInputDevicesChangedListener;
         }
@@ -585,7 +622,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             if (InputManagerService.DEBUG) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Input devices changed listener for pid "), this.mPid, " died.", "InputManager");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Input devices changed listener for pid "),
+                        this.mPid,
+                        " died.",
+                        "InputManager");
             }
             InputManagerService.this.onInputDevicesChangedListenerDied(this.mPid);
         }
@@ -595,20 +636,22 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final class InputFilterHost extends IInputFilterHost.Stub {
         public boolean mDisconnected;
 
-        public InputFilterHost() {
-        }
+        public InputFilterHost() {}
 
         public final void sendInputEvent(InputEvent inputEvent, int i) {
             InputManagerService inputManagerService = InputManagerService.this;
             boolean z = InputManagerService.DEBUG;
-            if (!inputManagerService.checkCallingPermission("android.permission.INJECT_EVENTS", "sendInputEvent()", false)) {
-                throw new SecurityException("The INJECT_EVENTS permission is required for injecting input events.");
+            if (!inputManagerService.checkCallingPermission(
+                    "android.permission.INJECT_EVENTS", "sendInputEvent()", false)) {
+                throw new SecurityException(
+                        "The INJECT_EVENTS permission is required for injecting input events.");
             }
             Objects.requireNonNull(inputEvent, "event must not be null");
             synchronized (InputManagerService.this.mInputFilterLock) {
                 try {
                     if (!this.mDisconnected) {
-                        InputManagerService.this.mNative.injectInputEvent(inputEvent, false, -1, 0, 0, 0, 0, i | 67108864);
+                        InputManagerService.this.mNative.injectInputEvent(
+                                inputEvent, false, -1, 0, 0, 0, 0, i | 67108864);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -647,7 +690,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             switch (i) {
                 case 103:
                     long j2 = (r6.argi1 & 4294967295L) | (r6.argi2 << 32);
-                    boolean booleanValue2 = ((Boolean) ((SomeArgs) message.obj).arg1).booleanValue();
+                    boolean booleanValue2 =
+                            ((Boolean) ((SomeArgs) message.obj).arg1).booleanValue();
                     boolean z4 = InputManagerService.DEBUG;
                     inputManagerService.deliverLidStateChanged(j2, booleanValue2);
                     break;
@@ -691,8 +735,7 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface InputMethodManagerCallbacks {
-    }
+    public interface InputMethodManagerCallbacks {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class InputMonitorHost extends IInputMonitorHost.Stub {
@@ -716,8 +759,7 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class KeyCountRunnable implements Runnable {
-        public KeyCountRunnable() {
-        }
+        public KeyCountRunnable() {}
 
         @Override // java.lang.Runnable
         public final void run() {
@@ -736,29 +778,23 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface KeyboardBacklightControllerInterface {
-        default void decrementKeyboardBacklight(int i) {
-        }
+        default void decrementKeyboardBacklight(int i) {}
 
-        default void dump(PrintWriter printWriter) {
-        }
+        default void dump(PrintWriter printWriter) {}
 
-        default void incrementKeyboardBacklight(int i) {
-        }
+        default void incrementKeyboardBacklight(int i) {}
 
-        default void notifyUserActivity() {
-        }
+        default void notifyUserActivity() {}
 
-        default void onInteractiveChanged(boolean z) {
-        }
+        default void onInteractiveChanged(boolean z) {}
 
-        default void registerKeyboardBacklightListener(IKeyboardBacklightListener iKeyboardBacklightListener, int i) {
-        }
+        default void registerKeyboardBacklightListener(
+                IKeyboardBacklightListener iKeyboardBacklightListener, int i) {}
 
-        default void systemRunning() {
-        }
+        default void systemRunning() {}
 
-        default void unregisterKeyboardBacklightListener(IKeyboardBacklightListener iKeyboardBacklightListener, int i) {
-        }
+        default void unregisterKeyboardBacklightListener(
+                IKeyboardBacklightListener iKeyboardBacklightListener, int i) {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -766,7 +802,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         public final ISemLidStateChangedListener mListener;
         public final int mPid;
 
-        public LidStateChangedListenerRecord(int i, ISemLidStateChangedListener iSemLidStateChangedListener) {
+        public LidStateChangedListenerRecord(
+                int i, ISemLidStateChangedListener iSemLidStateChangedListener) {
             this.mPid = i;
             this.mListener = iSemLidStateChangedListener;
         }
@@ -774,7 +811,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             if (InputManagerService.DEBUG) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Lid state changed listener for pid "), this.mPid, " died.", "InputManager");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Lid state changed listener for pid "),
+                        this.mPid,
+                        " died.",
+                        "InputManager");
             }
             InputManagerService.this.onLidStateChangedListenerDied(this.mPid);
         }
@@ -808,8 +849,7 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
-        public LocalService() {
-        }
+        public LocalService() {}
 
         public final void setInteractive(boolean z) {
             InputManagerService.this.mNative.setInteractive(z);
@@ -823,23 +863,41 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 return;
             }
             synchronized (InputManagerService.this.mInputWirelessKeyboardMouseShareLock) {
-                final WirelessKeyboardMouseShare wirelessKeyboardMouseShare = InputManagerService.this.mWirelessKeyboardMouseShare;
-                if (wirelessKeyboardMouseShare != null && !((HashMap) wirelessKeyboardMouseShare.mLogInfos).isEmpty()) {
-                    ((HashMap) wirelessKeyboardMouseShare.mLogInfos).entrySet().forEach(new Consumer() { // from class: com.android.server.input.WirelessKeyboardMouseShare$$ExternalSyntheticLambda1
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare2 = WirelessKeyboardMouseShare.this;
-                            Map.Entry entry = (Map.Entry) obj;
-                            wirelessKeyboardMouseShare2.getClass();
-                            try {
-                                int intValue = ((Integer) entry.getKey()).intValue();
-                                int intValue2 = ((Integer) entry.getValue()).intValue();
-                                CoreSaLogger.logForBasic(wirelessKeyboardMouseShare2.CONN_ID[intValue - 1], intValue2 + " " + wirelessKeyboardMouseShare2.mPairedDevices[intValue].getName());
-                            } catch (NullPointerException unused) {
-                                Slog.d("WirelessKeyboardMouseShare", "notifySALogging nullpointer exception");
-                            }
-                        }
-                    });
+                final WirelessKeyboardMouseShare wirelessKeyboardMouseShare =
+                        InputManagerService.this.mWirelessKeyboardMouseShare;
+                if (wirelessKeyboardMouseShare != null
+                        && !((HashMap) wirelessKeyboardMouseShare.mLogInfos).isEmpty()) {
+                    ((HashMap) wirelessKeyboardMouseShare.mLogInfos)
+                            .entrySet()
+                            .forEach(
+                                    new Consumer() { // from class:
+                                                     // com.android.server.input.WirelessKeyboardMouseShare$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare2 =
+                                                    WirelessKeyboardMouseShare.this;
+                                            Map.Entry entry = (Map.Entry) obj;
+                                            wirelessKeyboardMouseShare2.getClass();
+                                            try {
+                                                int intValue =
+                                                        ((Integer) entry.getKey()).intValue();
+                                                int intValue2 =
+                                                        ((Integer) entry.getValue()).intValue();
+                                                CoreSaLogger.logForBasic(
+                                                        wirelessKeyboardMouseShare2
+                                                                .CONN_ID[intValue - 1],
+                                                        intValue2
+                                                                + " "
+                                                                + wirelessKeyboardMouseShare2
+                                                                        .mPairedDevices[intValue]
+                                                                        .getName());
+                                            } catch (NullPointerException unused) {
+                                                Slog.d(
+                                                        "WirelessKeyboardMouseShare",
+                                                        "notifySALogging nullpointer exception");
+                                            }
+                                        }
+                                    });
                     ((HashMap) wirelessKeyboardMouseShare.mLogInfos).clear();
                 }
             }
@@ -851,7 +909,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         public final IMultiFingerGestureListener mListener;
         public final int mPid;
 
-        public MultiFingerGestureListenerRecord(int i, IMultiFingerGestureListener iMultiFingerGestureListener) {
+        public MultiFingerGestureListenerRecord(
+                int i, IMultiFingerGestureListener iMultiFingerGestureListener) {
             this.mPid = i;
             this.mListener = iMultiFingerGestureListener;
         }
@@ -859,7 +918,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             if (InputManagerService.DEBUG) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("MultiFingerGesture listener for pid "), this.mPid, " died.", "InputManager");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("MultiFingerGesture listener for pid "),
+                        this.mPid,
+                        " died.",
+                        "InputManager");
             }
             InputManagerService.this.onMultiFingerGestureListenerDied(this.mPid);
         }
@@ -870,7 +933,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         public final IPointerIconChangedListener mListener;
         public final int mPid;
 
-        public PointerIconChangedListenerRecord(int i, IPointerIconChangedListener iPointerIconChangedListener) {
+        public PointerIconChangedListenerRecord(
+                int i, IPointerIconChangedListener iPointerIconChangedListener) {
             this.mPid = i;
             this.mListener = iPointerIconChangedListener;
         }
@@ -878,22 +942,26 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             if (InputManagerService.DEBUG) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("PointerIcon changed listener for pid "), this.mPid, " died.", "InputManager");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("PointerIcon changed listener for pid "),
+                        this.mPid,
+                        " died.",
+                        "InputManager");
             }
             InputManagerService.this.onPointerIconChangedListenerDied(this.mPid);
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface SecAccessoryManagerCallbacks {
-    }
+    public interface SecAccessoryManagerCallbacks {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SensorEventListenerRecord implements IBinder.DeathRecipient {
         public final IInputSensorEventListener mListener;
         public final int mPid;
 
-        public SensorEventListenerRecord(int i, IInputSensorEventListener iInputSensorEventListener) {
+        public SensorEventListenerRecord(
+                int i, IInputSensorEventListener iInputSensorEventListener) {
             this.mPid = i;
             this.mListener = iInputSensorEventListener;
         }
@@ -901,7 +969,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             if (InputManagerService.DEBUG) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Sensor event listener for pid "), this.mPid, " died.", "InputManager");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Sensor event listener for pid "),
+                        this.mPid,
+                        " died.",
+                        "InputManager");
             }
             InputManagerService.this.onSensorEventListenerDied(this.mPid);
         }
@@ -912,7 +984,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         public final ISwitchEventChangedListener mListener;
         public final int mPid;
 
-        public SwitchEventChangedListenerRecord(int i, ISwitchEventChangedListener iSwitchEventChangedListener) {
+        public SwitchEventChangedListenerRecord(
+                int i, ISwitchEventChangedListener iSwitchEventChangedListener) {
             this.mPid = i;
             this.mListener = iSwitchEventChangedListener;
         }
@@ -920,7 +993,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             if (InputManagerService.DEBUG) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("SwitchEventChanged listener for pid "), this.mPid, " died.", "InputManager");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("SwitchEventChanged listener for pid "),
+                        this.mPid,
+                        " died.",
+                        "InputManager");
             }
             InputManagerService.this.onSwitchEventChangedListenerDied(this.mPid);
         }
@@ -931,7 +1008,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         public final ITabletModeChangedListener mListener;
         public final int mPid;
 
-        public TabletModeChangedListenerRecord(int i, ITabletModeChangedListener iTabletModeChangedListener) {
+        public TabletModeChangedListenerRecord(
+                int i, ITabletModeChangedListener iTabletModeChangedListener) {
             this.mPid = i;
             this.mListener = iTabletModeChangedListener;
         }
@@ -939,7 +1017,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             if (InputManagerService.DEBUG) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Tablet mode changed listener for pid "), this.mPid, " died.", "InputManager");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Tablet mode changed listener for pid "),
+                        this.mPid,
+                        " died.",
+                        "InputManager");
             }
             InputManagerService.this.onTabletModeChangedListenerDied(this.mPid);
         }
@@ -968,10 +1050,13 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                     if (i3 >= size) {
                         break;
                     }
-                    StepSegment stepSegment = (VibrationEffectSegment) composed.getSegments().get(i3);
+                    StepSegment stepSegment =
+                            (VibrationEffectSegment) composed.getSegments().get(i3);
                     i = composed.getRepeatIndex() == i3 ? i2 : i;
                     if (!(stepSegment instanceof StepSegment)) {
-                        Slog.w("InputManager", "Input devices don't support segment " + stepSegment);
+                        Slog.w(
+                                "InputManager",
+                                "Input devices don't support segment " + stepSegment);
                         i2 = -1;
                         break;
                     }
@@ -992,7 +1077,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 iArr = null;
             }
             if (i2 < 0) {
-                Slog.w("InputManager", "Only oneshot and step waveforms are supported on input devices");
+                Slog.w(
+                        "InputManager",
+                        "Only oneshot and step waveforms are supported on input devices");
                 this.mPattern = new long[0];
                 this.mAmplitudes = new int[0];
                 this.mRepeat = -1;
@@ -1008,7 +1095,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             if (i < jArr2.length) {
                 return;
             }
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Repeat index ", " must be within the bounds of the pattern.length ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i,
+                            "Repeat index ",
+                            " must be within the bounds of the pattern.length ");
             m.append(jArr2.length);
             throw new ArrayIndexOutOfBoundsException(m.toString());
         }
@@ -1037,19 +1128,20 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface WindowManagerCallbacks extends InputManagerInternal$LidSwitchCallback {
-    }
+    public interface WindowManagerCallbacks extends InputManagerInternal$LidSwitchCallback {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface WiredAccessoryCallbacks {
-    }
+    public interface WiredAccessoryCallbacks {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class WirelessKeyboardShareChangedListenerRecord implements IBinder.DeathRecipient {
+    public final class WirelessKeyboardShareChangedListenerRecord
+            implements IBinder.DeathRecipient {
         public final IWirelessKeyboardShareChangedListener mListener;
         public final int mPid;
 
-        public WirelessKeyboardShareChangedListenerRecord(int i, IWirelessKeyboardShareChangedListener iWirelessKeyboardShareChangedListener) {
+        public WirelessKeyboardShareChangedListenerRecord(
+                int i,
+                IWirelessKeyboardShareChangedListener iWirelessKeyboardShareChangedListener) {
             this.mPid = i;
             this.mListener = iWirelessKeyboardShareChangedListener;
         }
@@ -1057,7 +1149,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             if (InputManagerService.DEBUG) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Wireless Keyboard Share changed listener for pid "), this.mPid, " died.", "InputManager");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Wireless Keyboard Share changed listener for pid "),
+                        this.mPid,
+                        " died.",
+                        "InputManager");
             }
             InputManagerService.this.onWirelessKeyboardShareChangedListenerDied(this.mPid);
         }
@@ -1065,11 +1161,15 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     static {
         new AdditionalDisplayInputProperties();
-        IS_TABLET_DEVICE = SystemProperties.get("ro.build.characteristics", "phone").contains("tablet");
-        mHighHysteresis = new float[]{30.0f, 160.0f, 360.0f};
-        mLowHysteresis = new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, 20.0f, 150.0f};
+        IS_TABLET_DEVICE =
+                SystemProperties.get("ro.build.characteristics", "phone").contains("tablet");
+        mHighHysteresis = new float[] {30.0f, 160.0f, 360.0f};
+        mLowHysteresis =
+                new float[] {FullScreenMagnificationGestureHandler.MAX_SCALE, 20.0f, 150.0f};
         mMultiFingerGestureEnable = Build.VERSION.SEM_PLATFORM_INT >= 110100;
-        DEX_SETTINGS_URI = Uri.parse("content://com.sec.android.desktopmode.uiservice.SettingsProvider/settings");
+        DEX_SETTINGS_URI =
+                Uri.parse(
+                        "content://com.sec.android.desktopmode.uiservice.SettingsProvider/settings");
     }
 
     public InputManagerService(Context context) {
@@ -1104,7 +1204,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         this.mPointerIconLock = new Object();
         this.mPointerIconChangedListeners = new SparseArray();
         this.mTempPointerIconChangedListenersToNotify = new ArrayList();
-        PersistentDataStore persistentDataStore = new PersistentDataStore(new PersistentDataStore.Injector());
+        PersistentDataStore persistentDataStore =
+                new PersistentDataStore(new PersistentDataStore.Injector());
         this.mDataStore = persistentDataStore;
         this.mInputDevicesLock = new Object();
         this.mInputDevices = new InputDevice[0];
@@ -1158,9 +1259,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         this.mPaperCoverNotificationPending = false;
         this.mShowingTouchSensitivityNotiCount = 0;
         this.mShowingTouchSensitivityNotiCountOld = 0;
-        new IDisplayFoldListener.Stub() { // from class: com.android.server.input.InputManagerService.6
+        new IDisplayFoldListener
+                .Stub() { // from class: com.android.server.input.InputManagerService.6
             public final void onDisplayFoldChanged(int i, boolean z) {
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m("onDisplayFoldChanged: folded = ", "InputManager", z);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        "onDisplayFoldChanged: folded = ", "InputManager", z);
                 InputManagerService.this.mNative.setDisplayFolded(z);
             }
         };
@@ -1173,8 +1276,7 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         this.mDisplayIdForPointerIcon = 0;
         new SensorEventListener() { // from class: com.android.server.input.InputManagerService.12
             @Override // android.hardware.SensorEventListener
-            public final void onAccuracyChanged(Sensor sensor, int i) {
-            }
+            public final void onAccuracyChanged(Sensor sensor, int i) {}
 
             @Override // android.hardware.SensorEventListener
             public final void onSensorChanged(SensorEvent sensorEvent) {
@@ -1199,12 +1301,15 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                     z = true;
                 }
                 if (z) {
-                    StringBuilder sb = new StringBuilder("mFoldingAngleListener: state changed, angle = ");
+                    StringBuilder sb =
+                            new StringBuilder("mFoldingAngleListener: state changed, angle = ");
                     sb.append(f);
                     sb.append(", state = ");
-                    GestureWakeup$$ExternalSyntheticOutline0.m(sb, InputManagerService.this.mFoldingState, "InputManager");
+                    GestureWakeup$$ExternalSyntheticOutline0.m(
+                            sb, InputManagerService.this.mFoldingState, "InputManager");
                     InputManagerService inputManagerService3 = InputManagerService.this;
-                    inputManagerService3.mNative.setFoldingState(inputManagerService3.mFoldingState);
+                    inputManagerService3.mNative.setFoldingState(
+                            inputManagerService3.mFoldingState);
                 }
             }
         };
@@ -1217,20 +1322,42 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         this.mContext = context2;
         InputManagerHandler inputManagerHandler2 = new InputManagerHandler(injector.mLooper);
         this.mHandler = inputManagerHandler2;
-        NativeInputManagerService.NativeImpl nativeImpl2 = new NativeInputManagerService.NativeImpl(this, injector.mLooper.getQueue());
+        NativeInputManagerService.NativeImpl nativeImpl2 =
+                new NativeInputManagerService.NativeImpl(this, injector.mLooper.getQueue());
         this.mNative = nativeImpl2;
-        this.mSettingsObserver = new InputSettingsObserver(context2, inputManagerHandler2, this, nativeImpl2);
-        this.mKeyboardLayoutManager = new KeyboardLayoutManager(context2, nativeImpl2, persistentDataStore, injector.mLooper);
+        this.mSettingsObserver =
+                new InputSettingsObserver(context2, inputManagerHandler2, this, nativeImpl2);
+        this.mKeyboardLayoutManager =
+                new KeyboardLayoutManager(
+                        context2, nativeImpl2, persistentDataStore, injector.mLooper);
         Looper looper = injector.mLooper;
-        this.mBatteryController = new BatteryController(context2, nativeImpl2, looper, injector.mUEventManager, new BatteryController.LocalBluetoothBatteryManager(context2, looper));
-        if (((Boolean) InputFeatureFlagProvider.sKeyboardBacklightControlOverride.orElse(Boolean.valueOf(InputFeatureFlagProvider.KEYBOARD_BACKLIGHT_CONTROL_ENABLED))).booleanValue()) {
+        this.mBatteryController =
+                new BatteryController(
+                        context2,
+                        nativeImpl2,
+                        looper,
+                        injector.mUEventManager,
+                        new BatteryController.LocalBluetoothBatteryManager(context2, looper));
+        if (((Boolean)
+                        InputFeatureFlagProvider.sKeyboardBacklightControlOverride.orElse(
+                                Boolean.valueOf(
+                                        InputFeatureFlagProvider
+                                                .KEYBOARD_BACKLIGHT_CONTROL_ENABLED)))
+                .booleanValue()) {
             nativeImpl = nativeImpl2;
             inputManagerHandler = inputManagerHandler2;
             context = context2;
             anonymousClass3 = anonymousClass37;
             anonymousClass32 = anonymousClass36;
             anonymousClass33 = anonymousClass35;
-            anonymousClass1 = new KeyboardBacklightController(context2, nativeImpl, persistentDataStore, injector.mLooper, new KeyboardBacklightController$$ExternalSyntheticLambda0(), injector.mUEventManager);
+            anonymousClass1 =
+                    new KeyboardBacklightController(
+                            context2,
+                            nativeImpl,
+                            persistentDataStore,
+                            injector.mLooper,
+                            new KeyboardBacklightController$$ExternalSyntheticLambda0(),
+                            injector.mUEventManager);
         } else {
             nativeImpl = nativeImpl2;
             inputManagerHandler = inputManagerHandler2;
@@ -1243,17 +1370,24 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         this.mKeyboardBacklightController = anonymousClass1;
         this.mStickyModifierStateController = new StickyModifierStateController();
         NativeInputManagerService.NativeImpl nativeImpl3 = nativeImpl;
-        this.mKeyboardLedController = new KeyboardLedController(context, injector.mLooper, nativeImpl3);
-        this.mKeyRemapper = new KeyRemapper(context, nativeImpl3, persistentDataStore, injector.mLooper);
+        this.mKeyboardLedController =
+                new KeyboardLedController(context, injector.mLooper, nativeImpl3);
+        this.mKeyRemapper =
+                new KeyRemapper(context, nativeImpl3, persistentDataStore, injector.mLooper);
         this.mPointerIconCache = new PointerIconCache(context, nativeImpl3);
         this.mGamePadRemapper = new GamePadRemapper(persistentDataStore);
-        SEP_FULL = !context.getPackageManager().hasSystemFeature("com.samsung.feature.samsung_experience_mobile_lite");
-        boolean z = context.getResources().getBoolean(R.bool.config_viewRotaryEncoderHapticScrollFedbackEnabled);
+        SEP_FULL =
+                !context.getPackageManager()
+                        .hasSystemFeature("com.samsung.feature.samsung_experience_mobile_lite");
+        boolean z =
+                context.getResources()
+                        .getBoolean(R.bool.config_viewRotaryEncoderHapticScrollFedbackEnabled);
         this.mUseDevInputEventForAudioJack = z;
         Slog.i("InputManager", "Initializing input manager, mUseDevInputEventForAudioJack=" + z);
         String string = context.getResources().getString(R.string.dream_accessibility_action_click);
         this.mDoubleTouchGestureEnableFile = TextUtils.isEmpty(string) ? null : new File(string);
-        this.mVelocityTrackerStrategy = DeviceConfig.getProperty("input_native_boot", "velocitytracker_strategy");
+        this.mVelocityTrackerStrategy =
+                DeviceConfig.getProperty("input_native_boot", "velocitytracker_strategy");
         LocalServices.addService(LocalService.class, new LocalService());
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.BOOT_COMPLETED");
@@ -1261,9 +1395,22 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         context.registerReceiver(anonymousClass32, intentFilter, null, inputManagerHandler3);
         IntentFilter intentFilter2 = new IntentFilter();
         intentFilter2.addAction("com.samsung.android.intent.action.SET_INWATER_TOUCH");
-        context.registerReceiver(anonymousClass33, intentFilter2, "com.samsung.android.permission.SEM_SET_DEVICE_BLOCK", inputManagerHandler3, 4);
-        context.registerReceiver(anonymousClass3, new IntentFilter("com.sec.android.app.kidshome.action.DEFAULT_HOME_CHANGE"), "com.samsung.kidshome.broadcast.DEFAULT_HOME_CHANGE_PERMISSION", inputManagerHandler3, 4);
-        context.registerReceiver(anonymousClass34, new IntentFilter("com.samsung.android.action.SHOWING_TOUCH_SENSITIVITY_NOTI"), 4);
+        context.registerReceiver(
+                anonymousClass33,
+                intentFilter2,
+                "com.samsung.android.permission.SEM_SET_DEVICE_BLOCK",
+                inputManagerHandler3,
+                4);
+        context.registerReceiver(
+                anonymousClass3,
+                new IntentFilter("com.sec.android.app.kidshome.action.DEFAULT_HOME_CHANGE"),
+                "com.samsung.kidshome.broadcast.DEFAULT_HOME_CHANGE_PERMISSION",
+                inputManagerHandler3,
+                4);
+        context.registerReceiver(
+                anonymousClass34,
+                new IntentFilter("com.samsung.android.action.SHOWING_TOUCH_SENSITIVITY_NOTI"),
+                4);
         ToastDialog toastDialog = new ToastDialog(context);
         this.mToastDialog = toastDialog;
         ControlWakeKey controlWakeKey = new ControlWakeKey();
@@ -1278,8 +1425,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         controlWakeKey.writeWakeKeyString(controlWakeKey.makeWakeKeyString());
         this.mControlWakeKey = controlWakeKey;
         if (IS_TABLET_DEVICE) {
-            this.mWirelessKeyboardMouseShare = new WirelessKeyboardMouseShare(context, this, toastDialog, obj);
-            PowerManager.WakeLock newWakeLock = ((PowerManager) context.getSystemService("power")).newWakeLock(1, "InputManager.mSharedKeyWakeLock");
+            this.mWirelessKeyboardMouseShare =
+                    new WirelessKeyboardMouseShare(context, this, toastDialog, obj);
+            PowerManager.WakeLock newWakeLock =
+                    ((PowerManager) context.getSystemService("power"))
+                            .newWakeLock(1, "InputManager.mSharedKeyWakeLock");
             this.mSharedKeyWakeLock = newWakeLock;
             newWakeLock.setReferenceCounted(false);
             this.mSharedKeyReferenceCount = 0;
@@ -1290,7 +1440,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         return checkCallingPermission(str, str2, false);
     }
 
-    public static boolean containsInputDeviceWithDescriptor(InputDevice[] inputDeviceArr, String str) {
+    public static boolean containsInputDeviceWithDescriptor(
+            InputDevice[] inputDeviceArr, String str) {
         for (InputDevice inputDevice : inputDeviceArr) {
             if (inputDevice.getDescriptor().equals(str)) {
                 return true;
@@ -1321,7 +1472,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                         if (!"device".equals(resolvePullParser.getName())) {
                             break;
                         }
-                        String attributeValue = resolvePullParser.getAttributeValue((String) null, "name");
+                        String attributeValue =
+                                resolvePullParser.getAttributeValue((String) null, "name");
                         if (attributeValue != null) {
                             arrayList2.add(attributeValue);
                         }
@@ -1353,32 +1505,38 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         return flatten(arrayMap);
     }
 
-    public static /* synthetic */ void lambda$dump$4(IndentingPrintWriter indentingPrintWriter, String str, String str2) {
+    public static /* synthetic */ void lambda$dump$4(
+            IndentingPrintWriter indentingPrintWriter, String str, String str2) {
         indentingPrintWriter.print("  port: " + str);
         indentingPrintWriter.println("  layout: " + str2);
     }
 
-    public static /* synthetic */ void lambda$dumpAssociations$5(IndentingPrintWriter indentingPrintWriter, String str, Integer num) {
+    public static /* synthetic */ void lambda$dumpAssociations$5(
+            IndentingPrintWriter indentingPrintWriter, String str, Integer num) {
         indentingPrintWriter.print("  port: " + str);
         indentingPrintWriter.println("  display: " + num);
     }
 
-    public static /* synthetic */ void lambda$dumpAssociations$6(IndentingPrintWriter indentingPrintWriter, String str, Integer num) {
+    public static /* synthetic */ void lambda$dumpAssociations$6(
+            IndentingPrintWriter indentingPrintWriter, String str, Integer num) {
         indentingPrintWriter.print("  port: " + str);
         indentingPrintWriter.println("  display: " + num);
     }
 
-    public static /* synthetic */ void lambda$dumpAssociations$7(IndentingPrintWriter indentingPrintWriter, String str, String str2) {
+    public static /* synthetic */ void lambda$dumpAssociations$7(
+            IndentingPrintWriter indentingPrintWriter, String str, String str2) {
         indentingPrintWriter.print("  port: " + str);
         indentingPrintWriter.println("  uniqueId: " + str2);
     }
 
-    public static /* synthetic */ void lambda$dumpAssociations$8(IndentingPrintWriter indentingPrintWriter, String str, String str2) {
+    public static /* synthetic */ void lambda$dumpAssociations$8(
+            IndentingPrintWriter indentingPrintWriter, String str, String str2) {
         indentingPrintWriter.print("  descriptor: " + str);
         indentingPrintWriter.println("  uniqueId: " + str2);
     }
 
-    public static /* synthetic */ void lambda$dumpAssociations$9(IndentingPrintWriter indentingPrintWriter, String str, String str2) {
+    public static /* synthetic */ void lambda$dumpAssociations$9(
+            IndentingPrintWriter indentingPrintWriter, String str, String str2) {
         indentingPrintWriter.print("  port: " + str);
         indentingPrintWriter.println("  type: " + str2);
     }
@@ -1396,7 +1554,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             try {
-                Map processInputPortAssociations = ConfigurationProcessor.processInputPortAssociations(fileInputStream);
+                Map processInputPortAssociations =
+                        ConfigurationProcessor.processInputPortAssociations(fileInputStream);
                 fileInputStream.close();
                 return processInputPortAssociations;
             } catch (Throwable th) {
@@ -1422,8 +1581,13 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 if (!this.mSystemReady || this.mWirelessKeyboardMouseShare == null) {
                     z = true;
                 } else {
-                    if (this.mContext.getPackageManager().checkSignatures(1000, Binder.getCallingUid()) != 0) {
-                        Slog.d("InputManager", "addDeviceWirelessKeyboardShare : called by not allowed app");
+                    if (this.mContext
+                                    .getPackageManager()
+                                    .checkSignatures(1000, Binder.getCallingUid())
+                            != 0) {
+                        Slog.d(
+                                "InputManager",
+                                "addDeviceWirelessKeyboardShare : called by not allowed app");
                         return false;
                     }
                     z = this.mWirelessKeyboardMouseShare.addDevice(i);
@@ -1441,13 +1605,17 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         Objects.requireNonNull(str2);
         Objects.requireNonNull(str3);
         synchronized (this.mAssociationsLock) {
-            ((ArrayMap) this.mKeyboardLayoutAssociations).put(str, TextUtils.formatSimple("%s,%s", new Object[]{str2, str3}));
+            ((ArrayMap) this.mKeyboardLayoutAssociations)
+                    .put(str, TextUtils.formatSimple("%s,%s", new Object[] {str2, str3}));
         }
         this.mNative.changeKeyboardLayoutAssociation();
     }
 
     public final void addPortAssociation(String str, int i) {
-        if (!checkCallingPermission("android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY", "addPortAssociation()", false)) {
+        if (!checkCallingPermission(
+                "android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY",
+                "addPortAssociation()",
+                false)) {
             throw new SecurityException("Requires ASSOCIATE_INPUT_DEVICE_TO_DISPLAY permission");
         }
         Objects.requireNonNull(str);
@@ -1458,7 +1626,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void addUniqueIdAssociationByDescriptor(String str, String str2) {
-        if (!checkCallingPermission("android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY", "addUniqueIdAssociationByDescriptor()", false)) {
+        if (!checkCallingPermission(
+                "android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY",
+                "addUniqueIdAssociationByDescriptor()",
+                false)) {
             throw new SecurityException("Requires ASSOCIATE_INPUT_DEVICE_TO_DISPLAY permission");
         }
         Objects.requireNonNull(str);
@@ -1470,7 +1641,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void addUniqueIdAssociationByPort(String str, String str2) {
-        if (!checkCallingPermission("android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY", "addUniqueIdAssociation()", false)) {
+        if (!checkCallingPermission(
+                "android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY",
+                "addUniqueIdAssociation()",
+                false)) {
             throw new SecurityException("Requires ASSOCIATE_INPUT_DEVICE_TO_DISPLAY permission");
         }
         Objects.requireNonNull(str);
@@ -1482,7 +1656,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final Notification.Action buildTurnOnAction(int i) {
-        return new Notification.Action.Builder((Icon) null, this.mContext.getString(17043030), createPendingIntentAction(i)).build();
+        return new Notification.Action.Builder(
+                        (Icon) null,
+                        this.mContext.getString(17043030),
+                        createPendingIntentAction(i))
+                .build();
     }
 
     public final boolean canDispatchToDisplay(int i, int i2) {
@@ -1490,7 +1668,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void cancelCurrentTouch() {
-        if (!checkCallingPermission("android.permission.MONITOR_INPUT", "cancelCurrentTouch()", false)) {
+        if (!checkCallingPermission(
+                "android.permission.MONITOR_INPUT", "cancelCurrentTouch()", false)) {
             throw new SecurityException("Requires MONITOR_INPUT permission");
         }
         this.mNative.cancelCurrentTouch();
@@ -1498,7 +1677,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     public final void cancelVibrate(int i, IBinder iBinder) {
         synchronized (this.mVibratorLock) {
-            VibratorToken vibratorToken = (VibratorToken) ((ArrayMap) this.mVibratorTokens).get(iBinder);
+            VibratorToken vibratorToken =
+                    (VibratorToken) ((ArrayMap) this.mVibratorTokens).get(iBinder);
             if (vibratorToken != null && vibratorToken.mDeviceId == i) {
                 cancelVibrateIfNeeded(vibratorToken);
             }
@@ -1522,8 +1702,13 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         synchronized (this.mInputWirelessKeyboardMouseShareLock) {
             try {
                 if (this.mSystemReady && this.mWirelessKeyboardMouseShare != null) {
-                    if (this.mContext.getPackageManager().checkSignatures(1000, Binder.getCallingUid()) != 0) {
-                        Slog.d("InputManager", "changeDeviceWirelessKeyboardShare : called by not allowed app");
+                    if (this.mContext
+                                    .getPackageManager()
+                                    .checkSignatures(1000, Binder.getCallingUid())
+                            != 0) {
+                        Slog.d(
+                                "InputManager",
+                                "changeDeviceWirelessKeyboardShare : called by not allowed app");
                         return;
                     }
                     long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -1548,13 +1733,18 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final boolean checkCallingPermission(String str, String str2, boolean z) {
-        if (Binder.getCallingPid() == Process.myPid() || this.mContext.checkCallingPermission(str) == 0) {
+        if (Binder.getCallingPid() == Process.myPid()
+                || this.mContext.checkCallingPermission(str) == 0) {
             return true;
         }
         if (z) {
-            ActivityManagerInternal activityManagerInternal = (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
-            Objects.requireNonNull(activityManagerInternal, "ActivityManagerInternal should not be null.");
-            int instrumentationSourceUid = activityManagerInternal.getInstrumentationSourceUid(Binder.getCallingUid());
+            ActivityManagerInternal activityManagerInternal =
+                    (ActivityManagerInternal)
+                            LocalServices.getService(ActivityManagerInternal.class);
+            Objects.requireNonNull(
+                    activityManagerInternal, "ActivityManagerInternal should not be null.");
+            int instrumentationSourceUid =
+                    activityManagerInternal.getInstrumentationSourceUid(Binder.getCallingUid());
             if (instrumentationSourceUid != -1) {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
@@ -1566,7 +1756,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 }
             }
         }
-        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Permission Denial: ", str2, " from pid=");
+        StringBuilder m =
+                DumpUtils$$ExternalSyntheticOutline0.m("Permission Denial: ", str2, " from pid=");
         m.append(Binder.getCallingPid());
         m.append(", uid=");
         m.append(Binder.getCallingUid());
@@ -1578,11 +1769,22 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     public final int checkInputFeature() {
         if (this.mSystemReady) {
-            int tspSupportFeature = ((SemInputDeviceManager) this.mContext.getSystemService("SemInputDeviceManagerService")).getTspSupportFeature(1);
-            Slog.d("InputManager", "checkInputFeature: features = ".concat(String.format("0x%X", Integer.valueOf(tspSupportFeature))));
+            int tspSupportFeature =
+                    ((SemInputDeviceManager)
+                                    this.mContext.getSystemService("SemInputDeviceManagerService"))
+                            .getTspSupportFeature(1);
+            Slog.d(
+                    "InputManager",
+                    "checkInputFeature: features = "
+                            .concat(String.format("0x%X", Integer.valueOf(tspSupportFeature))));
             return tspSupportFeature;
         }
-        Slog.d("InputManager", "checkInputFeature: system not ready, return 0. caller=" + Debug.getCallers(5) + ", pid=" + Binder.getCallingPid());
+        Slog.d(
+                "InputManager",
+                "checkInputFeature: system not ready, return 0. caller="
+                        + Debug.getCallers(5)
+                        + ", pid="
+                        + Binder.getCallingPid());
         return 0;
     }
 
@@ -1591,14 +1793,17 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         if (this.mContext.getPackageManager().checkSignatures(1000, callingUid) == 0) {
             return true;
         }
-        Log.d("InputManager", "uid(" + callingUid + ") does not match signature of system uid :" + str);
+        Log.d(
+                "InputManager",
+                "uid(" + callingUid + ") does not match signature of system uid :" + str);
         return false;
     }
 
     public final void clearAllModifierKeyRemappings() {
         clearAllModifierKeyRemappings_enforcePermission();
         KeyRemapper keyRemapper = this.mKeyRemapper;
-        if (FeatureFlagUtils.isEnabled(keyRemapper.mContext, "settings_new_keyboard_modifier_key")) {
+        if (FeatureFlagUtils.isEnabled(
+                keyRemapper.mContext, "settings_new_keyboard_modifier_key")) {
             keyRemapper.mHandler.sendMessage(Message.obtain(keyRemapper.mHandler, 3));
         }
     }
@@ -1626,7 +1831,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         WirelessKeyboardMouseShare wirelessKeyboardMouseShare;
         synchronized (this.mInputWirelessKeyboardMouseShareLock) {
             try {
-                if (this.mSystemReady && (wirelessKeyboardMouseShare = this.mWirelessKeyboardMouseShare) != null) {
+                if (this.mSystemReady
+                        && (wirelessKeyboardMouseShare = this.mWirelessKeyboardMouseShare)
+                                != null) {
                     wirelessKeyboardMouseShare.connectByBtDevice(bluetoothDevice);
                     Slog.d("InputManager", "connectByBtDevice");
                 }
@@ -1637,7 +1844,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void controlSpenWithToken(IBinder iBinder, boolean z) {
-        if (!checkCallingPermission("android.permission.DISABLE_INPUT_DEVICE", "disableInputDevice()", false)) {
+        if (!checkCallingPermission(
+                "android.permission.DISABLE_INPUT_DEVICE", "disableInputDevice()", false)) {
             throw new SecurityException("Requires DISABLE_INPUT_DEVICE permission spen");
         }
         Objects.requireNonNull(iBinder, "spenContolToken must not be null");
@@ -1661,10 +1869,15 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             Log.d("InputManager", "not find spen device");
             return;
         }
-        Log.d("InputManager", "call controlSpenWithToken by pid " + Binder.getCallingPid() + ", " + z);
+        Log.d(
+                "InputManager",
+                "call controlSpenWithToken by pid " + Binder.getCallingPid() + ", " + z);
         if (z) {
             if (this.mSpenControlToken == null) {
-                Log.d("InputManager", "disable spen by other or already enabled or call first time after booting");
+                Log.d(
+                        "InputManager",
+                        "disable spen by other or already enabled or call first time after"
+                            + " booting");
                 return;
             } else {
                 enableInputDevice(this.mSpenDeviceId);
@@ -1673,14 +1886,18 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             }
         }
         try {
-            iBinder.linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.server.input.InputManagerService$$ExternalSyntheticLambda12
-                @Override // android.os.IBinder.DeathRecipient
-                public final void binderDied() {
-                    InputManagerService inputManagerService = InputManagerService.this;
-                    boolean z2 = InputManagerService.DEBUG;
-                    inputManagerService.lambda$controlSpenWithToken$1();
-                }
-            }, 0);
+            iBinder.linkToDeath(
+                    new IBinder
+                            .DeathRecipient() { // from class:
+                                                // com.android.server.input.InputManagerService$$ExternalSyntheticLambda12
+                        @Override // android.os.IBinder.DeathRecipient
+                        public final void binderDied() {
+                            InputManagerService inputManagerService = InputManagerService.this;
+                            boolean z2 = InputManagerService.DEBUG;
+                            inputManagerService.lambda$controlSpenWithToken$1();
+                        }
+                    },
+                    0);
             disableInputDevice(this.mSpenDeviceId);
             this.mSpenControlToken = iBinder;
         } catch (RemoteException unused) {
@@ -1697,7 +1914,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final PendingIntent createPendingIntent() {
-        Bundle m142m = AccountManagerService$$ExternalSyntheticOutline0.m142m(":settings:fragment_args_key", "increse_touch_sensetivity");
+        Bundle m142m =
+                AccountManagerService$$ExternalSyntheticOutline0.m142m(
+                        ":settings:fragment_args_key", "increse_touch_sensetivity");
         Intent intent = new Intent("android.settings.DISPLAY_SETTINGS");
         intent.setFlags(268468224);
         intent.putExtra(":settings:show_fragment_args", m142m);
@@ -1711,26 +1930,49 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         return PendingIntent.getBroadcast(this.mContext, 0, intent, 67108864);
     }
 
-    public final InputChannel createSpyWindowGestureMonitor(IBinder iBinder, String str, SurfaceControl surfaceControl, int i, int i2, int i3, int i4) {
+    public final InputChannel createSpyWindowGestureMonitor(
+            IBinder iBinder,
+            String str,
+            SurfaceControl surfaceControl,
+            int i,
+            int i2,
+            int i3,
+            int i4) {
         final InputChannel createInputChannel = this.mNative.createInputChannel(str, i4);
         try {
-            iBinder.linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.server.input.InputManagerService$$ExternalSyntheticLambda6
-                @Override // android.os.IBinder.DeathRecipient
-                public final void binderDied() {
-                    InputManagerService inputManagerService = InputManagerService.this;
-                    InputChannel inputChannel = createInputChannel;
-                    boolean z = InputManagerService.DEBUG;
-                    inputManagerService.lambda$createSpyWindowGestureMonitor$0(inputChannel);
-                }
-            }, 0);
+            iBinder.linkToDeath(
+                    new IBinder
+                            .DeathRecipient() { // from class:
+                                                // com.android.server.input.InputManagerService$$ExternalSyntheticLambda6
+                        @Override // android.os.IBinder.DeathRecipient
+                        public final void binderDied() {
+                            InputManagerService inputManagerService = InputManagerService.this;
+                            InputChannel inputChannel = createInputChannel;
+                            boolean z = InputManagerService.DEBUG;
+                            inputManagerService.lambda$createSpyWindowGestureMonitor$0(
+                                    inputChannel);
+                        }
+                    },
+                    0);
             synchronized (this.mInputMonitors) {
-                ((HashMap) this.mInputMonitors).put(createInputChannel.getToken(), new GestureMonitorSpyWindow(iBinder, str, i, i2, i3, surfaceControl, createInputChannel));
+                ((HashMap) this.mInputMonitors)
+                        .put(
+                                createInputChannel.getToken(),
+                                new GestureMonitorSpyWindow(
+                                        iBinder,
+                                        str,
+                                        i,
+                                        i2,
+                                        i3,
+                                        surfaceControl,
+                                        createInputChannel));
             }
             InputChannel inputChannel = new InputChannel();
             createInputChannel.copyTo(inputChannel);
             return inputChannel;
         } catch (RemoteException unused) {
-            BootReceiver$$ExternalSyntheticOutline0.m58m("Client died before '", str, "' could be created.", "InputManager");
+            BootReceiver$$ExternalSyntheticOutline0.m58m(
+                    "Client died before '", str, "' could be created.", "InputManager");
             return null;
         }
     }
@@ -1744,7 +1986,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                     this.mInputDevicesChangedPending = false;
                     int size = this.mInputDevicesChangedListeners.size();
                     for (int i = 0; i < size; i++) {
-                        this.mTempInputDevicesChangedListenersToNotify.add((InputDevicesChangedListenerRecord) this.mInputDevicesChangedListeners.valueAt(i));
+                        this.mTempInputDevicesChangedListenersToNotify.add(
+                                (InputDevicesChangedListenerRecord)
+                                        this.mInputDevicesChangedListeners.valueAt(i));
                     }
                     int length = this.mInputDevices.length;
                     int[] iArr = new int[length * 2];
@@ -1755,7 +1999,12 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                         iArr[i3] = inputDevice.getId();
                         iArr[i3 + 1] = inputDevice.getGeneration();
                         if (DEBUG) {
-                            Log.d("InputManager", "device " + inputDevice.getId() + " generation " + inputDevice.getGeneration());
+                            Log.d(
+                                    "InputManager",
+                                    "device "
+                                            + inputDevice.getId()
+                                            + " generation "
+                                            + inputDevice.getGeneration());
                         }
                         int vendorId = inputDevice.getVendorId();
                         int productId = inputDevice.getProductId();
@@ -1763,17 +2012,28 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                         if (vendorId == 1256 && productId == 41013) {
                             z = true;
                         }
-                        if (inputDevice.supportsSource(1025) && ((inputDevice.getName() == null || !inputDevice.getName().contains("Test)")) && !containsInputDeviceWithDescriptor(inputDeviceArr, inputDevice.getDescriptor()))) {
+                        if (inputDevice.supportsSource(1025)
+                                && ((inputDevice.getName() == null
+                                                || !inputDevice.getName().contains("Test)"))
+                                        && !containsInputDeviceWithDescriptor(
+                                                inputDeviceArr, inputDevice.getDescriptor()))) {
                             this.mTempGamePads.add(inputDevice);
                         }
                     }
                     for (int i4 = 0; i4 < size; i4++) {
-                        InputDevicesChangedListenerRecord inputDevicesChangedListenerRecord = (InputDevicesChangedListenerRecord) this.mTempInputDevicesChangedListenersToNotify.get(i4);
+                        InputDevicesChangedListenerRecord inputDevicesChangedListenerRecord =
+                                (InputDevicesChangedListenerRecord)
+                                        this.mTempInputDevicesChangedListenersToNotify.get(i4);
                         inputDevicesChangedListenerRecord.getClass();
                         try {
                             inputDevicesChangedListenerRecord.mListener.onInputDevicesChanged(iArr);
                         } catch (RemoteException e) {
-                            Slog.w("InputManager", "Failed to notify process " + inputDevicesChangedListenerRecord.mPid + " that input devices changed, assuming it died.", e);
+                            Slog.w(
+                                    "InputManager",
+                                    "Failed to notify process "
+                                            + inputDevicesChangedListenerRecord.mPid
+                                            + " that input devices changed, assuming it died.",
+                                    e);
                             inputDevicesChangedListenerRecord.binderDied();
                         }
                     }
@@ -1793,7 +2053,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                     int size2 = this.mTempGamePads.size();
                     for (int i5 = 0; i5 < size2; i5++) {
                         InputDevice inputDevice2 = (InputDevice) this.mTempGamePads.get(i5);
-                        ((InputManagerCallback) this.mWindowManagerCallbacks).mService.mExt.mPolicyExt.startGameToolsService(inputDevice2.getVendorId(), inputDevice2.getProductId(), true);
+                        ((InputManagerCallback) this.mWindowManagerCallbacks)
+                                .mService.mExt.mPolicyExt.startGameToolsService(
+                                        inputDevice2.getVendorId(),
+                                        inputDevice2.getProductId(),
+                                        true);
                     }
                     this.mTempGamePads.clear();
                 }
@@ -1811,19 +2075,29 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 size = this.mLidStateChangedListeners.size();
                 for (int i2 = 0; i2 < size; i2++) {
-                    ((ArrayList) this.mTempLidStateChangedListenersToNotify).add((LidStateChangedListenerRecord) this.mLidStateChangedListeners.valueAt(i2));
+                    ((ArrayList) this.mTempLidStateChangedListenersToNotify)
+                            .add(
+                                    (LidStateChangedListenerRecord)
+                                            this.mLidStateChangedListeners.valueAt(i2));
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
         for (i = 0; i < size; i++) {
-            LidStateChangedListenerRecord lidStateChangedListenerRecord = (LidStateChangedListenerRecord) ((ArrayList) this.mTempLidStateChangedListenersToNotify).get(i);
+            LidStateChangedListenerRecord lidStateChangedListenerRecord =
+                    (LidStateChangedListenerRecord)
+                            ((ArrayList) this.mTempLidStateChangedListenersToNotify).get(i);
             lidStateChangedListenerRecord.getClass();
             try {
                 lidStateChangedListenerRecord.mListener.onLidStateChanged(j, z);
             } catch (RemoteException e) {
-                Slog.w("InputManager", "Failed to notify process " + lidStateChangedListenerRecord.mPid + " that lid state changed, assuming it died.", e);
+                Slog.w(
+                        "InputManager",
+                        "Failed to notify process "
+                                + lidStateChangedListenerRecord.mPid
+                                + " that lid state changed, assuming it died.",
+                        e);
                 lidStateChangedListenerRecord.binderDied();
             }
         }
@@ -1837,19 +2111,29 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 size = this.mMultiFingerGestureListeners.size();
                 for (int i4 = 0; i4 < size; i4++) {
-                    ((ArrayList) this.mTempMultiFingerGestureListenersToNotify).add((MultiFingerGestureListenerRecord) this.mMultiFingerGestureListeners.valueAt(i4));
+                    ((ArrayList) this.mTempMultiFingerGestureListenersToNotify)
+                            .add(
+                                    (MultiFingerGestureListenerRecord)
+                                            this.mMultiFingerGestureListeners.valueAt(i4));
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
         for (i3 = 0; i3 < size; i3++) {
-            MultiFingerGestureListenerRecord multiFingerGestureListenerRecord = (MultiFingerGestureListenerRecord) ((ArrayList) this.mTempMultiFingerGestureListenersToNotify).get(i3);
+            MultiFingerGestureListenerRecord multiFingerGestureListenerRecord =
+                    (MultiFingerGestureListenerRecord)
+                            ((ArrayList) this.mTempMultiFingerGestureListenersToNotify).get(i3);
             multiFingerGestureListenerRecord.getClass();
             try {
                 multiFingerGestureListenerRecord.mListener.onMultiFingerGesture(i, i2);
             } catch (RemoteException e) {
-                Slog.w("InputManager", "Failed to notify process " + multiFingerGestureListenerRecord.mPid + " that multi finge gesture was made, assuming it died.", e);
+                Slog.w(
+                        "InputManager",
+                        "Failed to notify process "
+                                + multiFingerGestureListenerRecord.mPid
+                                + " that multi finge gesture was made, assuming it died.",
+                        e);
                 multiFingerGestureListenerRecord.binderDied();
             }
         }
@@ -1863,19 +2147,29 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 size = this.mPointerIconChangedListeners.size();
                 for (int i3 = 0; i3 < size; i3++) {
-                    ((ArrayList) this.mTempPointerIconChangedListenersToNotify).add((PointerIconChangedListenerRecord) this.mPointerIconChangedListeners.valueAt(i3));
+                    ((ArrayList) this.mTempPointerIconChangedListenersToNotify)
+                            .add(
+                                    (PointerIconChangedListenerRecord)
+                                            this.mPointerIconChangedListeners.valueAt(i3));
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
         for (i2 = 0; i2 < size; i2++) {
-            PointerIconChangedListenerRecord pointerIconChangedListenerRecord = (PointerIconChangedListenerRecord) ((ArrayList) this.mTempPointerIconChangedListenersToNotify).get(i2);
+            PointerIconChangedListenerRecord pointerIconChangedListenerRecord =
+                    (PointerIconChangedListenerRecord)
+                            ((ArrayList) this.mTempPointerIconChangedListenersToNotify).get(i2);
             pointerIconChangedListenerRecord.getClass();
             try {
                 pointerIconChangedListenerRecord.mListener.onPointerIconChanged(i, pointerIcon);
             } catch (RemoteException e) {
-                Slog.w("InputManager", "Failed to notify process " + pointerIconChangedListenerRecord.mPid + " that pointer icon changed, assuming it died.", e);
+                Slog.w(
+                        "InputManager",
+                        "Failed to notify process "
+                                + pointerIconChangedListenerRecord.mPid
+                                + " that pointer icon changed, assuming it died.",
+                        e);
                 pointerIconChangedListenerRecord.binderDied();
             }
         }
@@ -1889,19 +2183,29 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 size = this.mSwitchEventChangedListeners.size();
                 for (int i6 = 0; i6 < size; i6++) {
-                    ((ArrayList) this.mTempSwitchEventChangedListenersToNotify).add((SwitchEventChangedListenerRecord) this.mSwitchEventChangedListeners.valueAt(i6));
+                    ((ArrayList) this.mTempSwitchEventChangedListenersToNotify)
+                            .add(
+                                    (SwitchEventChangedListenerRecord)
+                                            this.mSwitchEventChangedListeners.valueAt(i6));
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
         for (i5 = 0; i5 < size; i5++) {
-            SwitchEventChangedListenerRecord switchEventChangedListenerRecord = (SwitchEventChangedListenerRecord) ((ArrayList) this.mTempSwitchEventChangedListenersToNotify).get(i5);
+            SwitchEventChangedListenerRecord switchEventChangedListenerRecord =
+                    (SwitchEventChangedListenerRecord)
+                            ((ArrayList) this.mTempSwitchEventChangedListenersToNotify).get(i5);
             switchEventChangedListenerRecord.getClass();
             try {
                 switchEventChangedListenerRecord.mListener.onSwitchEventChanged(i, i2, i3, i4);
             } catch (RemoteException e) {
-                Slog.w("InputManager", "Failed to notify process " + switchEventChangedListenerRecord.mPid + " that switch event changed was made, assuming it died.", e);
+                Slog.w(
+                        "InputManager",
+                        "Failed to notify process "
+                                + switchEventChangedListenerRecord.mPid
+                                + " that switch event changed was made, assuming it died.",
+                        e);
                 switchEventChangedListenerRecord.binderDied();
             }
         }
@@ -1915,19 +2219,29 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 size = this.mTabletModeChangedListeners.size();
                 for (int i2 = 0; i2 < size; i2++) {
-                    ((ArrayList) this.mTempTabletModeChangedListenersToNotify).add((TabletModeChangedListenerRecord) this.mTabletModeChangedListeners.valueAt(i2));
+                    ((ArrayList) this.mTempTabletModeChangedListenersToNotify)
+                            .add(
+                                    (TabletModeChangedListenerRecord)
+                                            this.mTabletModeChangedListeners.valueAt(i2));
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
         for (i = 0; i < size; i++) {
-            TabletModeChangedListenerRecord tabletModeChangedListenerRecord = (TabletModeChangedListenerRecord) ((ArrayList) this.mTempTabletModeChangedListenersToNotify).get(i);
+            TabletModeChangedListenerRecord tabletModeChangedListenerRecord =
+                    (TabletModeChangedListenerRecord)
+                            ((ArrayList) this.mTempTabletModeChangedListenersToNotify).get(i);
             tabletModeChangedListenerRecord.getClass();
             try {
                 tabletModeChangedListenerRecord.mListener.onTabletModeChanged(j, z);
             } catch (RemoteException e) {
-                Slog.w("InputManager", "Failed to notify process " + tabletModeChangedListenerRecord.mPid + " that tablet mode changed, assuming it died.", e);
+                Slog.w(
+                        "InputManager",
+                        "Failed to notify process "
+                                + tabletModeChangedListenerRecord.mPid
+                                + " that tablet mode changed, assuming it died.",
+                        e);
                 tabletModeChangedListenerRecord.binderDied();
             }
         }
@@ -1950,26 +2264,40 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 size = this.mWirelessKeyboardShareChangedListeners.size();
                 for (int i3 = 0; i3 < size; i3++) {
-                    ((ArrayList) this.mTempWirelessKeyboardShareChangedListenersToNotify).add((WirelessKeyboardShareChangedListenerRecord) this.mWirelessKeyboardShareChangedListeners.valueAt(i3));
+                    ((ArrayList) this.mTempWirelessKeyboardShareChangedListenersToNotify)
+                            .add(
+                                    (WirelessKeyboardShareChangedListenerRecord)
+                                            this.mWirelessKeyboardShareChangedListeners.valueAt(
+                                                    i3));
                 }
             } finally {
             }
         }
         for (i2 = 0; i2 < size; i2++) {
-            WirelessKeyboardShareChangedListenerRecord wirelessKeyboardShareChangedListenerRecord = (WirelessKeyboardShareChangedListenerRecord) ((ArrayList) this.mTempWirelessKeyboardShareChangedListenersToNotify).get(i2);
+            WirelessKeyboardShareChangedListenerRecord wirelessKeyboardShareChangedListenerRecord =
+                    (WirelessKeyboardShareChangedListenerRecord)
+                            ((ArrayList) this.mTempWirelessKeyboardShareChangedListenersToNotify)
+                                    .get(i2);
             long uptimeMillis = SystemClock.uptimeMillis();
             wirelessKeyboardShareChangedListenerRecord.getClass();
             try {
-                wirelessKeyboardShareChangedListenerRecord.mListener.onWirelessKeyboardShareChanged(uptimeMillis, i, str);
+                wirelessKeyboardShareChangedListenerRecord.mListener.onWirelessKeyboardShareChanged(
+                        uptimeMillis, i, str);
             } catch (RemoteException e) {
-                Slog.w("InputManager", "Failed to notify process " + wirelessKeyboardShareChangedListenerRecord.mPid + " that wireless keyboard share changed, assuming it died.", e);
+                Slog.w(
+                        "InputManager",
+                        "Failed to notify process "
+                                + wirelessKeyboardShareChangedListenerRecord.mPid
+                                + " that wireless keyboard share changed, assuming it died.",
+                        e);
                 wirelessKeyboardShareChangedListenerRecord.binderDied();
             }
         }
     }
 
     public final void disableInputDevice(int i) {
-        if (!checkCallingPermission("android.permission.DISABLE_INPUT_DEVICE", "disableInputDevice()", false)) {
+        if (!checkCallingPermission(
+                "android.permission.DISABLE_INPUT_DEVICE", "disableInputDevice()", false)) {
             throw new SecurityException("Requires DISABLE_INPUT_DEVICE permission");
         }
         this.mNative.disableInputDevice(i);
@@ -1988,10 +2316,12 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final KeyEvent dispatchUnhandledKey(IBinder iBinder, KeyEvent keyEvent, int i) {
-        return ((InputManagerCallback) this.mWindowManagerCallbacks).dispatchUnhandledKey(iBinder, keyEvent, i);
+        return ((InputManagerCallback) this.mWindowManagerCallbacks)
+                .dispatchUnhandledKey(iBinder, keyEvent, i);
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         int i;
         if (DumpUtils.checkDumpPermission(this.mContext, "InputManager", printWriter)) {
             IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, "  ");
@@ -2007,25 +2337,35 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             dumpDisplayInputPropertiesValues(indentingPrintWriter);
             BatteryController batteryController = this.mBatteryController;
             batteryController.getClass();
-            IndentingPrintWriter indentingPrintWriter2 = new IndentingPrintWriter(indentingPrintWriter);
+            IndentingPrintWriter indentingPrintWriter2 =
+                    new IndentingPrintWriter(indentingPrintWriter);
             synchronized (batteryController.mLock) {
                 try {
                     indentingPrintWriter2.println("BatteryController:");
                     indentingPrintWriter2.increaseIndent();
-                    indentingPrintWriter2.println("State: Polling = " + batteryController.mIsPolling + ", Interactive = " + batteryController.mIsInteractive);
+                    indentingPrintWriter2.println(
+                            "State: Polling = "
+                                    + batteryController.mIsPolling
+                                    + ", Interactive = "
+                                    + batteryController.mIsInteractive);
                     StringBuilder sb = new StringBuilder("Listeners: ");
                     sb.append(batteryController.mListenerRecords.size());
                     sb.append(" battery listeners");
                     indentingPrintWriter2.println(sb.toString());
                     indentingPrintWriter2.increaseIndent();
                     for (int i2 = 0; i2 < batteryController.mListenerRecords.size(); i2++) {
-                        indentingPrintWriter2.println(i2 + ": " + batteryController.mListenerRecords.valueAt(i2));
+                        indentingPrintWriter2.println(
+                                i2 + ": " + batteryController.mListenerRecords.valueAt(i2));
                     }
                     indentingPrintWriter2.decreaseIndent();
-                    indentingPrintWriter2.println("Device Monitors: " + batteryController.mDeviceMonitors.size() + " monitors");
+                    indentingPrintWriter2.println(
+                            "Device Monitors: "
+                                    + batteryController.mDeviceMonitors.size()
+                                    + " monitors");
                     indentingPrintWriter2.increaseIndent();
                     for (int i3 = 0; i3 < batteryController.mDeviceMonitors.size(); i3++) {
-                        indentingPrintWriter2.println(i3 + ": " + batteryController.mDeviceMonitors.valueAt(i3));
+                        indentingPrintWriter2.println(
+                                i3 + ": " + batteryController.mDeviceMonitors.valueAt(i3));
                     }
                     indentingPrintWriter2.decreaseIndent();
                     indentingPrintWriter2.decreaseIndent();
@@ -2035,12 +2375,23 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             this.mKeyboardBacklightController.dump(indentingPrintWriter);
             KeyboardLedController keyboardLedController = this.mKeyboardLedController;
             keyboardLedController.getClass();
-            IndentingPrintWriter indentingPrintWriter3 = new IndentingPrintWriter(indentingPrintWriter);
-            indentingPrintWriter3.println("KeyboardLedController: " + keyboardLedController.mKeyboardsWithMicMuteLed.size() + " keyboard mic mute lights");
+            IndentingPrintWriter indentingPrintWriter3 =
+                    new IndentingPrintWriter(indentingPrintWriter);
+            indentingPrintWriter3.println(
+                    "KeyboardLedController: "
+                            + keyboardLedController.mKeyboardsWithMicMuteLed.size()
+                            + " keyboard mic mute lights");
             indentingPrintWriter3.increaseIndent();
             for (i = 0; i < keyboardLedController.mKeyboardsWithMicMuteLed.size(); i++) {
-                InputDevice inputDevice = (InputDevice) keyboardLedController.mKeyboardsWithMicMuteLed.valueAt(i);
-                indentingPrintWriter3.println(i + " " + inputDevice.getName() + ": " + KeyboardLedController.getKeyboardMicMuteLight(inputDevice).toString());
+                InputDevice inputDevice =
+                        (InputDevice) keyboardLedController.mKeyboardsWithMicMuteLed.valueAt(i);
+                indentingPrintWriter3.println(
+                        i
+                                + " "
+                                + inputDevice.getName()
+                                + ": "
+                                + KeyboardLedController.getKeyboardMicMuteLight(inputDevice)
+                                        .toString());
             }
             indentingPrintWriter3.decreaseIndent();
             this.mKeyboardLayoutManager.dump(indentingPrintWriter);
@@ -2048,7 +2399,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 try {
                     if (!((ArrayMap) this.mKeyboardLayoutAssociations).isEmpty()) {
                         indentingPrintWriter.println("Keyboard layout Associations:");
-                        ((ArrayMap) this.mKeyboardLayoutAssociations).forEach(new InputManagerService$$ExternalSyntheticLambda0(0, indentingPrintWriter));
+                        ((ArrayMap) this.mKeyboardLayoutAssociations)
+                                .forEach(
+                                        new InputManagerService$$ExternalSyntheticLambda0(
+                                                0, indentingPrintWriter));
                     }
                 } finally {
                 }
@@ -2081,25 +2435,38 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final void dumpAssociations(IndentingPrintWriter indentingPrintWriter) {
         if (!this.mStaticAssociations.isEmpty()) {
             indentingPrintWriter.println("Static Associations:");
-            this.mStaticAssociations.forEach(new InputManagerService$$ExternalSyntheticLambda0(3, indentingPrintWriter));
+            this.mStaticAssociations.forEach(
+                    new InputManagerService$$ExternalSyntheticLambda0(3, indentingPrintWriter));
         }
         synchronized (this.mAssociationsLock) {
             try {
                 if (!((ArrayMap) this.mRuntimeAssociations).isEmpty()) {
                     indentingPrintWriter.println("Runtime Associations:");
-                    ((ArrayMap) this.mRuntimeAssociations).forEach(new InputManagerService$$ExternalSyntheticLambda0(4, indentingPrintWriter));
+                    ((ArrayMap) this.mRuntimeAssociations)
+                            .forEach(
+                                    new InputManagerService$$ExternalSyntheticLambda0(
+                                            4, indentingPrintWriter));
                 }
                 if (!((ArrayMap) this.mUniqueIdAssociationsByPort).isEmpty()) {
                     indentingPrintWriter.println("Unique Id Associations:");
-                    ((ArrayMap) this.mUniqueIdAssociationsByPort).forEach(new InputManagerService$$ExternalSyntheticLambda0(5, indentingPrintWriter));
+                    ((ArrayMap) this.mUniqueIdAssociationsByPort)
+                            .forEach(
+                                    new InputManagerService$$ExternalSyntheticLambda0(
+                                            5, indentingPrintWriter));
                 }
                 if (!((ArrayMap) this.mUniqueIdAssociationsByDescriptor).isEmpty()) {
                     indentingPrintWriter.println("Unique Id Associations:");
-                    ((ArrayMap) this.mUniqueIdAssociationsByDescriptor).forEach(new InputManagerService$$ExternalSyntheticLambda0(1, indentingPrintWriter));
+                    ((ArrayMap) this.mUniqueIdAssociationsByDescriptor)
+                            .forEach(
+                                    new InputManagerService$$ExternalSyntheticLambda0(
+                                            1, indentingPrintWriter));
                 }
                 if (!((ArrayMap) this.mDeviceTypeAssociations).isEmpty()) {
                     indentingPrintWriter.println("Type Associations:");
-                    ((ArrayMap) this.mDeviceTypeAssociations).forEach(new InputManagerService$$ExternalSyntheticLambda0(2, indentingPrintWriter));
+                    ((ArrayMap) this.mDeviceTypeAssociations)
+                            .forEach(
+                                    new InputManagerService$$ExternalSyntheticLambda0(
+                                            2, indentingPrintWriter));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -2117,10 +2484,18 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                     return;
                 }
                 for (int i = 0; i < this.mAdditionalDisplayInputProperties.size(); i++) {
-                    indentingPrintWriter.println("displayId: " + this.mAdditionalDisplayInputProperties.keyAt(i));
-                    AdditionalDisplayInputProperties additionalDisplayInputProperties = (AdditionalDisplayInputProperties) this.mAdditionalDisplayInputProperties.valueAt(i);
-                    indentingPrintWriter.println("mousePointerAccelerationEnabled: " + additionalDisplayInputProperties.mousePointerAccelerationEnabled);
-                    indentingPrintWriter.println("pointerIconVisible: " + additionalDisplayInputProperties.pointerIconVisible);
+                    indentingPrintWriter.println(
+                            "displayId: " + this.mAdditionalDisplayInputProperties.keyAt(i));
+                    AdditionalDisplayInputProperties additionalDisplayInputProperties =
+                            (AdditionalDisplayInputProperties)
+                                    this.mAdditionalDisplayInputProperties.valueAt(i);
+                    indentingPrintWriter.println(
+                            "mousePointerAccelerationEnabled: "
+                                    + additionalDisplayInputProperties
+                                            .mousePointerAccelerationEnabled);
+                    indentingPrintWriter.println(
+                            "pointerIconVisible: "
+                                    + additionalDisplayInputProperties.pointerIconVisible);
                 }
             } finally {
                 indentingPrintWriter.decreaseIndent();
@@ -2138,7 +2513,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 Iterator it = ((HashMap) this.mInputMonitors).values().iterator();
                 int i = 0;
                 while (it.hasNext()) {
-                    indentingPrintWriter.append("  " + i + ": ").println(((GestureMonitorSpyWindow) it.next()).dump());
+                    indentingPrintWriter
+                            .append("  " + i + ": ")
+                            .println(((GestureMonitorSpyWindow) it.next()).dump());
                     i++;
                 }
             } catch (Throwable th) {
@@ -2148,7 +2525,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void enableInputDevice(int i) {
-        if (!checkCallingPermission("android.permission.DISABLE_INPUT_DEVICE", "enableInputDevice()", false)) {
+        if (!checkCallingPermission(
+                "android.permission.DISABLE_INPUT_DEVICE", "enableInputDevice()", false)) {
             throw new SecurityException("Requires DISABLE_INPUT_DEVICE permission");
         }
         this.mNative.enableInputDevice(i);
@@ -2185,7 +2563,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final boolean flushSensor(int i, int i2) {
         synchronized (this.mSensorEventLock) {
             try {
-                if (((SensorEventListenerRecord) this.mSensorEventListeners.get(Binder.getCallingPid())) == null) {
+                if (((SensorEventListenerRecord)
+                                this.mSensorEventListeners.get(Binder.getCallingPid()))
+                        == null) {
                     return false;
                 }
                 return this.mNative.flushSensor(i, i2);
@@ -2205,9 +2585,21 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         synchronized (batteryController.mLock) {
             try {
                 long uptimeMillis = SystemClock.uptimeMillis();
-                BatteryController.DeviceMonitor deviceMonitor = (BatteryController.DeviceMonitor) batteryController.mDeviceMonitors.get(Integer.valueOf(i));
+                BatteryController.DeviceMonitor deviceMonitor =
+                        (BatteryController.DeviceMonitor)
+                                batteryController.mDeviceMonitors.get(Integer.valueOf(i));
                 if (deviceMonitor == null) {
-                    batteryStateForReporting = batteryController.queryBatteryStateFromNative(i, uptimeMillis, ((Boolean) batteryController.processInputDevice(i, Boolean.FALSE, new BatteryController$$ExternalSyntheticLambda0(0))).booleanValue());
+                    batteryStateForReporting =
+                            batteryController.queryBatteryStateFromNative(
+                                    i,
+                                    uptimeMillis,
+                                    ((Boolean)
+                                                    batteryController.processInputDevice(
+                                                            i,
+                                                            Boolean.FALSE,
+                                                            new BatteryController$$ExternalSyntheticLambda0(
+                                                                    0)))
+                                            .booleanValue());
                 } else {
                     deviceMonitor.onPoll(uptimeMillis);
                     batteryStateForReporting = deviceMonitor.getBatteryStateForReporting();
@@ -2276,7 +2668,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         if (str != null) {
             synchronized (gamePadRemapper.mDeviceToProfileLock) {
                 i2 = -1;
-                num = (Integer) ((HashMap) gamePadRemapper.mDeviceToProfile).getOrDefault(str.toUpperCase(), -1);
+                num =
+                        (Integer)
+                                ((HashMap) gamePadRemapper.mDeviceToProfile)
+                                        .getOrDefault(str.toUpperCase(), -1);
                 intValue = num.intValue();
             }
             if (intValue != 0 && GamePadRemapper.isValidId(intValue)) {
@@ -2289,9 +2684,20 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                                 case 2064:
                                     break;
                                 default:
-                                    PersistentDataStore persistentDataStore = gamePadRemapper.mDataStore;
+                                    PersistentDataStore persistentDataStore =
+                                            gamePadRemapper.mDataStore;
                                     persistentDataStore.loadIfNeededGamePadProfiles();
-                                    stickForGamePadProfiles = ((Integer) ((PersistentDataStore.GamePadProfile) ((HashMap) persistentDataStore.mGamePadProfiles).get(num)).mSimpeButtonMap.getOrDefault(Integer.valueOf(i), Integer.valueOf(i))).intValue();
+                                    stickForGamePadProfiles =
+                                            ((Integer)
+                                                            ((PersistentDataStore.GamePadProfile)
+                                                                            ((HashMap)
+                                                                                            persistentDataStore
+                                                                                                    .mGamePadProfiles)
+                                                                                    .get(num))
+                                                                    .mSimpeButtonMap.getOrDefault(
+                                                                            Integer.valueOf(i),
+                                                                            Integer.valueOf(i)))
+                                                    .intValue();
                                     break;
                             }
                             i = stickForGamePadProfiles;
@@ -2309,7 +2715,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                             }
                             i2 = 2059;
                         }
-                        stickForGamePadProfiles = gamePadRemapper.mDataStore.getStickForGamePadProfiles(intValue, i2);
+                        stickForGamePadProfiles =
+                                gamePadRemapper.mDataStore.getStickForGamePadProfiles(intValue, i2);
                         i = stickForGamePadProfiles;
                     } finally {
                     }
@@ -2332,8 +2739,22 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             if (isValidId) {
                 synchronized (gamePadRemapper.mDataStore) {
                     try {
-                        String str2 = ((PersistentDataStore.GamePadProfile) ((HashMap) gamePadRemapper.mDataStore.mGamePadProfiles).get(Integer.valueOf(i))).mName;
-                        boolean z = ((PersistentDataStore.GamePadProfile) ((HashMap) gamePadRemapper.mDataStore.mGamePadProfiles).get(Integer.valueOf(i))).mUsed;
+                        String str2 =
+                                ((PersistentDataStore.GamePadProfile)
+                                                ((HashMap)
+                                                                gamePadRemapper
+                                                                        .mDataStore
+                                                                        .mGamePadProfiles)
+                                                        .get(Integer.valueOf(i)))
+                                        .mName;
+                        boolean z =
+                                ((PersistentDataStore.GamePadProfile)
+                                                ((HashMap)
+                                                                gamePadRemapper
+                                                                        .mDataStore
+                                                                        .mGamePadProfiles)
+                                                        .get(Integer.valueOf(i)))
+                                        .mUsed;
                         jSONObject.put("ProfileName", str2);
                         jSONObject.put("ProfileUsed", z ? "true" : "false");
                         Iterator it = ((ArraySet) GamePadRemapper.SIMPLE_BUTTON_LIST).iterator();
@@ -2342,7 +2763,17 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                             int intValue = num.intValue();
                             PersistentDataStore persistentDataStore = gamePadRemapper.mDataStore;
                             persistentDataStore.loadIfNeededGamePadProfiles();
-                            int intValue2 = ((Integer) ((PersistentDataStore.GamePadProfile) ((HashMap) persistentDataStore.mGamePadProfiles).get(Integer.valueOf(i))).mSimpeButtonMap.getOrDefault(num, num)).intValue();
+                            int intValue2 =
+                                    ((Integer)
+                                                    ((PersistentDataStore.GamePadProfile)
+                                                                    ((HashMap)
+                                                                                    persistentDataStore
+                                                                                            .mGamePadProfiles)
+                                                                            .get(
+                                                                                    Integer.valueOf(
+                                                                                            i)))
+                                                            .mSimpeButtonMap.getOrDefault(num, num))
+                                            .intValue();
                             if (intValue != intValue2) {
                                 jSONObject.put("ButtonCode=" + intValue, "ToCode=" + intValue2);
                             }
@@ -2350,9 +2781,29 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                         Iterator it2 = ((ArraySet) GamePadRemapper.SIMPLE_STICK_LIST).iterator();
                         while (it2.hasNext()) {
                             int intValue3 = ((Integer) it2.next()).intValue();
-                            int stickForGamePadProfiles = gamePadRemapper.mDataStore.getStickForGamePadProfiles(i, intValue3);
+                            int stickForGamePadProfiles =
+                                    gamePadRemapper.mDataStore.getStickForGamePadProfiles(
+                                            i, intValue3);
                             if (intValue3 != stickForGamePadProfiles) {
-                                jSONObject.put("StickCode=" + intValue3, "ToCode=" + (stickForGamePadProfiles & 4095) + " h=" + ((stickForGamePadProfiles & 32768) == 32768 ? "true" : "false") + " v=" + ((stickForGamePadProfiles & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION) == 16384 ? "true" : "false") + " r=" + ((stickForGamePadProfiles & 4096) == 4096 ? "true" : "false"));
+                                jSONObject.put(
+                                        "StickCode=" + intValue3,
+                                        "ToCode="
+                                                + (stickForGamePadProfiles & 4095)
+                                                + " h="
+                                                + ((stickForGamePadProfiles & 32768) == 32768
+                                                        ? "true"
+                                                        : "false")
+                                                + " v="
+                                                + ((stickForGamePadProfiles
+                                                                        & EndpointMonitorConst
+                                                                                .FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION)
+                                                                == 16384
+                                                        ? "true"
+                                                        : "false")
+                                                + " r="
+                                                + ((stickForGamePadProfiles & 4096) == 4096
+                                                        ? "true"
+                                                        : "false"));
                             }
                         }
                     } finally {
@@ -2438,7 +2889,12 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         if (BluetoothAdapter.checkBluetoothAddress(bluetoothAddress)) {
             return bluetoothAddress;
         }
-        throw new IllegalStateException(AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "The Bluetooth address of input device ", " should not be invalid: address=", bluetoothAddress));
+        throw new IllegalStateException(
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i,
+                        "The Bluetooth address of input device ",
+                        " should not be invalid: address=",
+                        bluetoothAddress));
     }
 
     public final int[] getInputDeviceIds() {
@@ -2494,8 +2950,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         KeyboardLayoutManager keyboardLayoutManager = this.mKeyboardLayoutManager;
         keyboardLayoutManager.getClass();
         String[] strArr = new String[1];
-        keyboardLayoutManager.visitKeyboardLayout(str, new KeyboardLayoutManager$$ExternalSyntheticLambda1(1, strArr));
-        return TextUtils.isEmpty(strArr[0]) ? KeyCharacterMap.load(-1) : KeyCharacterMap.load(str, strArr[0]);
+        keyboardLayoutManager.visitKeyboardLayout(
+                str, new KeyboardLayoutManager$$ExternalSyntheticLambda1(1, strArr));
+        return TextUtils.isEmpty(strArr[0])
+                ? KeyCharacterMap.load(-1)
+                : KeyCharacterMap.load(str, strArr[0]);
     }
 
     public final int getKeyCodeForKeyLocation(int i, int i2) {
@@ -2513,45 +2972,83 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         return this.mKeyboardLayoutManager.getKeyboardLayout(str);
     }
 
-    public final KeyboardLayoutSelectionResult getKeyboardLayoutForInputDevice(InputDeviceIdentifier inputDeviceIdentifier, int i, InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype) {
+    public final KeyboardLayoutSelectionResult getKeyboardLayoutForInputDevice(
+            InputDeviceIdentifier inputDeviceIdentifier,
+            int i,
+            InputMethodInfo inputMethodInfo,
+            InputMethodSubtype inputMethodSubtype) {
         KeyboardLayoutManager keyboardLayoutManager = this.mKeyboardLayoutManager;
         InputDevice inputDevice = keyboardLayoutManager.getInputDevice(inputDeviceIdentifier);
         if (inputDevice == null || inputDevice.isVirtual() || !inputDevice.isFullKeyboard()) {
             return KeyboardLayoutSelectionResult.FAILED;
         }
-        KeyboardLayoutSelectionResult keyboardLayoutForInputDeviceInternal = keyboardLayoutManager.getKeyboardLayoutForInputDeviceInternal(new KeyboardLayoutManager.KeyboardIdentifier(inputDevice), new KeyboardLayoutManager.ImeInfo(i, inputMethodInfo, inputMethodSubtype));
+        KeyboardLayoutSelectionResult keyboardLayoutForInputDeviceInternal =
+                keyboardLayoutManager.getKeyboardLayoutForInputDeviceInternal(
+                        new KeyboardLayoutManager.KeyboardIdentifier(inputDevice),
+                        new KeyboardLayoutManager.ImeInfo(i, inputMethodInfo, inputMethodSubtype));
         if (!KeyboardLayoutManager.DEBUG) {
             return keyboardLayoutForInputDeviceInternal;
         }
-        Slog.d("KeyboardLayoutManager", "getKeyboardLayoutForInputDevice() " + inputDeviceIdentifier.toString() + ", userId : " + i + ", subtype = " + inputMethodSubtype + " -> " + keyboardLayoutForInputDeviceInternal);
+        Slog.d(
+                "KeyboardLayoutManager",
+                "getKeyboardLayoutForInputDevice() "
+                        + inputDeviceIdentifier.toString()
+                        + ", userId : "
+                        + i
+                        + ", subtype = "
+                        + inputMethodSubtype
+                        + " -> "
+                        + keyboardLayoutForInputDeviceInternal);
         return keyboardLayoutForInputDeviceInternal;
     }
 
-    public final KeyboardLayout[] getKeyboardLayoutListForInputDevice(InputDeviceIdentifier inputDeviceIdentifier, int i, InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype) {
+    public final KeyboardLayout[] getKeyboardLayoutListForInputDevice(
+            InputDeviceIdentifier inputDeviceIdentifier,
+            int i,
+            InputMethodInfo inputMethodInfo,
+            InputMethodSubtype inputMethodSubtype) {
         KeyboardLayoutManager keyboardLayoutManager = this.mKeyboardLayoutManager;
         InputDevice inputDevice = keyboardLayoutManager.getInputDevice(inputDeviceIdentifier);
-        return (inputDevice == null || inputDevice.isVirtual() || !inputDevice.isFullKeyboard()) ? new KeyboardLayout[0] : keyboardLayoutManager.getKeyboardLayoutListForInputDeviceInternal(new KeyboardLayoutManager.KeyboardIdentifier(inputDevice), new KeyboardLayoutManager.ImeInfo(i, inputMethodInfo, inputMethodSubtype));
+        return (inputDevice == null || inputDevice.isVirtual() || !inputDevice.isFullKeyboard())
+                ? new KeyboardLayout[0]
+                : keyboardLayoutManager.getKeyboardLayoutListForInputDeviceInternal(
+                        new KeyboardLayoutManager.KeyboardIdentifier(inputDevice),
+                        new KeyboardLayoutManager.ImeInfo(i, inputMethodInfo, inputMethodSubtype));
     }
 
-    public final String[] getKeyboardLayoutOverlay(InputDeviceIdentifier inputDeviceIdentifier, String str, String str2) {
+    public final String[] getKeyboardLayoutOverlay(
+            InputDeviceIdentifier inputDeviceIdentifier, String str, String str2) {
         String layoutDescriptor;
         if (!this.mSystemReady) {
             return null;
         }
         KeyboardLayoutManager keyboardLayoutManager = this.mKeyboardLayoutManager;
         synchronized (keyboardLayoutManager.mImeInfoLock) {
-            layoutDescriptor = keyboardLayoutManager.getKeyboardLayoutForInputDeviceInternal(new KeyboardLayoutManager.KeyboardIdentifier(inputDeviceIdentifier, str, str2), keyboardLayoutManager.mCurrentImeInfo).getLayoutDescriptor();
+            layoutDescriptor =
+                    keyboardLayoutManager
+                            .getKeyboardLayoutForInputDeviceInternal(
+                                    new KeyboardLayoutManager.KeyboardIdentifier(
+                                            inputDeviceIdentifier, str, str2),
+                                    keyboardLayoutManager.mCurrentImeInfo)
+                            .getLayoutDescriptor();
         }
         if (layoutDescriptor == null) {
             return null;
         }
-        Log.d("KeyboardLayoutManager", "Overlay KLD=" + layoutDescriptor + ", dev=" + inputDeviceIdentifier);
+        Log.d(
+                "KeyboardLayoutManager",
+                "Overlay KLD=" + layoutDescriptor + ", dev=" + inputDeviceIdentifier);
         String[] strArr = new String[2];
-        keyboardLayoutManager.visitKeyboardLayout(layoutDescriptor, new KeyboardLayoutManager$$ExternalSyntheticLambda1(0, strArr));
+        keyboardLayoutManager.visitKeyboardLayout(
+                layoutDescriptor, new KeyboardLayoutManager$$ExternalSyntheticLambda1(0, strArr));
         if (strArr[0] != null) {
             return strArr;
         }
-        PinnerService$$ExternalSyntheticOutline0.m("Could not get keyboard layout with descriptor '", layoutDescriptor, "'.", "KeyboardLayoutManager");
+        PinnerService$$ExternalSyntheticOutline0.m(
+                "Could not get keyboard layout with descriptor '",
+                layoutDescriptor,
+                "'.",
+                "KeyboardLayoutManager");
         return null;
     }
 
@@ -2559,7 +3056,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         KeyboardLayoutManager keyboardLayoutManager = this.mKeyboardLayoutManager;
         keyboardLayoutManager.getClass();
         ArrayList arrayList = new ArrayList();
-        keyboardLayoutManager.visitAllKeyboardLayouts(new KeyboardLayoutManager$$ExternalSyntheticLambda0(1, arrayList));
+        keyboardLayoutManager.visitAllKeyboardLayouts(
+                new KeyboardLayoutManager$$ExternalSyntheticLambda0(1, arrayList));
         return (KeyboardLayout[]) arrayList.toArray(new KeyboardLayout[0]);
     }
 
@@ -2574,7 +3072,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final LightState getLightState(int i, int i2) {
         LightState lightState;
         synchronized (this.mLightLock) {
-            lightState = new LightState(this.mNative.getLightColor(i, i2), this.mNative.getLightPlayerId(i, i2));
+            lightState =
+                    new LightState(
+                            this.mNative.getLightColor(i, i2),
+                            this.mNative.getLightPlayerId(i, i2));
         }
         return lightState;
     }
@@ -2588,18 +3089,28 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         PointerIconCache pointerIconCache = this.mPointerIconCache;
         synchronized (pointerIconCache.mLoadedPointerIconsByDisplayAndType) {
             try {
-                SparseArray sparseArray = (SparseArray) pointerIconCache.mLoadedPointerIconsByDisplayAndType.get(i);
+                SparseArray sparseArray =
+                        (SparseArray) pointerIconCache.mLoadedPointerIconsByDisplayAndType.get(i);
                 if (sparseArray == null) {
                     sparseArray = new SparseArray();
                     pointerIconCache.mLoadedPointerIconsByDisplayAndType.put(i, sparseArray);
                 }
                 pointerIcon = (PointerIcon) sparseArray.get(i2);
                 if (pointerIcon == null) {
-                    Context contextForDisplayLocked = pointerIconCache.getContextForDisplayLocked(i);
+                    Context contextForDisplayLocked =
+                            pointerIconCache.getContextForDisplayLocked(i);
                     Resources.Theme newTheme = contextForDisplayLocked.getResources().newTheme();
                     newTheme.setTo(contextForDisplayLocked.getTheme());
-                    newTheme.applyStyle(PointerIcon.vectorFillStyleToResource(pointerIconCache.mPointerIconFillStyle), true);
-                    pointerIcon = PointerIcon.getLoadedSystemIcon(new ContextThemeWrapper(contextForDisplayLocked, newTheme), i2, pointerIconCache.mUseLargePointerIcons, pointerIconCache.mPointerIconScale);
+                    newTheme.applyStyle(
+                            PointerIcon.vectorFillStyleToResource(
+                                    pointerIconCache.mPointerIconFillStyle),
+                            true);
+                    pointerIcon =
+                            PointerIcon.getLoadedSystemIcon(
+                                    new ContextThemeWrapper(contextForDisplayLocked, newTheme),
+                                    i2,
+                                    pointerIconCache.mUseLargePointerIcons,
+                                    pointerIconCache.mPointerIconScale);
                     sparseArray.put(i2, pointerIcon);
                 }
                 Objects.requireNonNull(pointerIcon);
@@ -2628,7 +3139,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         bundle.putString("key", str);
         bundle.putString("def", String.valueOf(i));
         try {
-            Bundle call = this.mContext.getContentResolver().call(DEX_SETTINGS_URI, "getSettings", (String) null, bundle);
+            Bundle call =
+                    this.mContext
+                            .getContentResolver()
+                            .call(DEX_SETTINGS_URI, "getSettings", (String) null, bundle);
             if (call == null) {
                 return i;
             }
@@ -2642,14 +3156,20 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     public final long getParentSurfaceForPointers(int i) {
         SurfaceControl surfaceControl;
-        InputManagerCallback inputManagerCallback = (InputManagerCallback) this.mWindowManagerCallbacks;
+        InputManagerCallback inputManagerCallback =
+                (InputManagerCallback) this.mWindowManagerCallbacks;
         WindowManagerGlobalLock windowManagerGlobalLock = inputManagerCallback.mService.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                DisplayContent displayContent = inputManagerCallback.mService.mRoot.getDisplayContent(i);
+                DisplayContent displayContent =
+                        inputManagerCallback.mService.mRoot.getDisplayContent(i);
                 if (displayContent == null) {
-                    Slog.e("WindowManager", "Failed to get parent surface for pointers on display " + i + " - DisplayContent not found.");
+                    Slog.e(
+                            "WindowManager",
+                            "Failed to get parent surface for pointers on display "
+                                    + i
+                                    + " - DisplayContent not found.");
                     WindowManagerService.resetPriorityAfterLockedSection();
                     surfaceControl = null;
                 } else {
@@ -2688,7 +3208,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         bundle.putString("key", "spen_mode");
         bundle.putString("def", i == 0 ? "pen" : "mouse");
         try {
-            Bundle call = this.mContext.getContentResolver().call(DEX_SETTINGS_URI, "getSettings", (String) null, bundle);
+            Bundle call =
+                    this.mContext
+                            .getContentResolver()
+                            .call(DEX_SETTINGS_URI, "getSettings", (String) null, bundle);
             if (call != null) {
                 return call.getString("spen_mode").equals("mouse") ? 1 : 0;
             }
@@ -2710,21 +3233,26 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             jSONObject.put("BUTTON_START", "");
             while (it.hasNext()) {
                 int intValue = ((Integer) it.next()).intValue();
-                jSONObject.put(Integer.toString(intValue), GamePadRemapper.getButtonString(intValue));
+                jSONObject.put(
+                        Integer.toString(intValue), GamePadRemapper.getButtonString(intValue));
             }
             jSONObject.put("BUTTON_END", "");
             jSONObject.put("STICK_START", "");
             Iterator it2 = ((ArraySet) GamePadRemapper.SIMPLE_STICK_LIST).iterator();
             while (it2.hasNext()) {
                 int intValue2 = ((Integer) it2.next()).intValue();
-                jSONObject.put(Integer.toString(intValue2), GamePadRemapper.getButtonString(intValue2));
+                jSONObject.put(
+                        Integer.toString(intValue2), GamePadRemapper.getButtonString(intValue2));
             }
             jSONObject.put("STICK_END", "");
             str = jSONObject.toString();
         } catch (JSONException e) {
-            Log.e("InputManager-GamePadRemapper", "Json getSupportButtonNStick error: " + e.getMessage());
+            Log.e(
+                    "InputManager-GamePadRemapper",
+                    "Json getSupportButtonNStick error: " + e.getMessage());
         }
-        DualAppManagerService$$ExternalSyntheticOutline0.m("getSupportButtonNStick ", str, "InputManager");
+        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                "getSupportButtonNStick ", str, "InputManager");
         return str;
     }
 
@@ -2742,7 +3270,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         synchronized (this.mDataStore) {
             PersistentDataStore persistentDataStore = this.mDataStore;
             persistentDataStore.loadIfNeeded();
-            PersistentDataStore.InputDeviceState inputDeviceState = (PersistentDataStore.InputDeviceState) persistentDataStore.mInputDevices.get(str);
+            PersistentDataStore.InputDeviceState inputDeviceState =
+                    (PersistentDataStore.InputDeviceState)
+                            persistentDataStore.mInputDevices.get(str);
             if (inputDeviceState == null) {
                 touchCalibration = TouchCalibration.IDENTITY;
             } else {
@@ -2761,7 +3291,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final int getTouchSensitivity() {
-        return Settings.System.getIntForUser(this.mContext.getContentResolver(), "auto_adjust_touch", 0, -2);
+        return Settings.System.getIntForUser(
+                this.mContext.getContentResolver(), "auto_adjust_touch", 0, -2);
     }
 
     public final int getTouchSensitivityNotiCount() {
@@ -2837,8 +3368,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final boolean injectInputEventToTarget(InputEvent inputEvent, int i, int i2) {
-        if (!checkCallingPermission("android.permission.INJECT_EVENTS", "injectInputEvent()", true)) {
-            throw new SecurityException("Injecting input events requires the caller (or the source of the instrumentation, if any) to have the INJECT_EVENTS permission.");
+        if (!checkCallingPermission(
+                "android.permission.INJECT_EVENTS", "injectInputEvent()", true)) {
+            throw new SecurityException(
+                    "Injecting input events requires the caller (or the source of the"
+                        + " instrumentation, if any) to have the INJECT_EVENTS permission.");
         }
         Objects.requireNonNull(inputEvent, "event must not be null");
         if (i != 0 && i != 2 && i != 1) {
@@ -2853,29 +3387,40 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 KeyEvent keyEvent = (KeyEvent) inputEvent;
                 if (keyEvent.getKeyCode() == 4) {
                     if (!this.mDexImeWindowVisibleInDefaultDisplay) {
-                        if (this.mBackKeyDownAdjusted) {
-                        }
+                        if (this.mBackKeyDownAdjusted) {}
                     }
                     inputEvent.setDisplayId(2);
                     this.mBackKeyDownAdjusted = keyEvent.getAction() == 0;
                 }
             }
-            int injectInputEvent = this.mNative.injectInputEvent(inputEvent, z, i2, i, callingPid, callingUid, 30000, 134217728);
+            int injectInputEvent =
+                    this.mNative.injectInputEvent(
+                            inputEvent, z, i2, i, callingPid, callingUid, 30000, 134217728);
             Binder.restoreCallingIdentity(clearCallingIdentity);
             if (injectInputEvent == 0) {
                 return true;
             }
             if (injectInputEvent == 1) {
                 if (z) {
-                    throw new IllegalArgumentException(DualAppManagerService$$ExternalSyntheticOutline0.m(callingPid, i2, "Targeted input event injection from pid ", " was not directed at a window owned by uid ", "."));
+                    throw new IllegalArgumentException(
+                            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                    callingPid,
+                                    i2,
+                                    "Targeted input event injection from pid ",
+                                    " was not directed at a window owned by uid ",
+                                    "."));
                 }
-                throw new IllegalStateException("Injection should not result in TARGET_MISMATCH when it is not targeted into to a specific uid.");
+                throw new IllegalStateException(
+                        "Injection should not result in TARGET_MISMATCH when it is not targeted"
+                            + " into to a specific uid.");
             }
             if (injectInputEvent != 3) {
-                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(callingPid, "Input event injection from pid ", " failed.", "InputManager");
+                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                        callingPid, "Input event injection from pid ", " failed.", "InputManager");
                 return false;
             }
-            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(callingPid, "Input event injection from pid ", " timed out.", "InputManager");
+            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                    callingPid, "Input event injection from pid ", " timed out.", "InputManager");
             return false;
         } catch (Throwable th) {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -2884,7 +3429,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final long interceptKeyBeforeDispatching(IBinder iBinder, KeyEvent keyEvent, int i) {
-        return ((InputManagerCallback) this.mWindowManagerCallbacks).interceptKeyBeforeDispatching(iBinder, keyEvent, i);
+        return ((InputManagerCallback) this.mWindowManagerCallbacks)
+                .interceptKeyBeforeDispatching(iBinder, keyEvent, i);
     }
 
     public final int interceptKeyBeforeQueueing(KeyEvent keyEvent, int i) {
@@ -2892,28 +3438,50 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         synchronized (this.mFocusEventDebugViewLock) {
             FocusEventDebugView focusEventDebugView = this.mFocusEventDebugView;
             if (focusEventDebugView != null) {
-                focusEventDebugView.post(new FocusEventDebugView$$ExternalSyntheticLambda1(focusEventDebugView, KeyEvent.obtain(keyEvent)));
+                focusEventDebugView.post(
+                        new FocusEventDebugView$$ExternalSyntheticLambda1(
+                                focusEventDebugView, KeyEvent.obtain(keyEvent)));
             }
         }
         if (InputRune.IFW_KEY_COUNTER) {
             int keyCode = keyEvent.getKeyCode();
             int action = keyEvent.getAction();
-            if ((keyCode == 24 || keyCode == 25 || keyCode == 26 || keyCode == 1082 || keyCode == 187 || keyCode == 4 || keyCode == 3) && action == 0 && keyEvent.getDevice() != null && !keyEvent.getDevice().isExternal() && keyEvent.getScanCode() != 0 && keyEvent.getDeviceId() != -1) {
+            if ((keyCode == 24
+                            || keyCode == 25
+                            || keyCode == 26
+                            || keyCode == 1082
+                            || keyCode == 187
+                            || keyCode == 4
+                            || keyCode == 3)
+                    && action == 0
+                    && keyEvent.getDevice() != null
+                    && !keyEvent.getDevice().isExternal()
+                    && keyEvent.getScanCode() != 0
+                    && keyEvent.getDeviceId() != -1) {
                 InputKeyCounter.HwKeyCount hwKeyCount = this.mInputKeyCounter.mCurrentKeyCount;
                 synchronized (hwKeyCount.mKeyCountMap) {
                     try {
                         if (hwKeyCount.mKeyCountMap.containsKey(Integer.valueOf(keyCode))) {
-                            int intValue = ((Integer) hwKeyCount.mKeyCountMap.get(Integer.valueOf(keyCode))).intValue();
+                            int intValue =
+                                    ((Integer)
+                                                    hwKeyCount.mKeyCountMap.get(
+                                                            Integer.valueOf(keyCode)))
+                                            .intValue();
                             hwKeyCount.mKeyCountMap.remove(Integer.valueOf(keyCode));
                             int i2 = intValue + 1;
-                            hwKeyCount.mKeyCountMap.put(Integer.valueOf(keyCode), Integer.valueOf(i2));
+                            hwKeyCount.mKeyCountMap.put(
+                                    Integer.valueOf(keyCode), Integer.valueOf(i2));
                             if (InputKeyCounter.DEBUG) {
-                                Log.d("InputKeyCounter", "Add keyCode: " + keyCode + ", currentCount= " + i2);
+                                Log.d(
+                                        "InputKeyCounter",
+                                        "Add keyCode: " + keyCode + ", currentCount= " + i2);
                             }
                         } else {
                             hwKeyCount.mKeyCountMap.put(Integer.valueOf(keyCode), 1);
                             if (InputKeyCounter.DEBUG) {
-                                Log.d("InputKeyCounter", "Add keyCode: " + keyCode + ", currentCount: 1");
+                                Log.d(
+                                        "InputKeyCounter",
+                                        "Add keyCode: " + keyCode + ", currentCount: 1");
                             }
                         }
                         hwKeyCount.mAllKeyCount++;
@@ -2954,11 +3522,14 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 }
             }
         }
-        return ((InputManagerCallback) this.mWindowManagerCallbacks).interceptKeyBeforeQueueing(keyEvent, i);
+        return ((InputManagerCallback) this.mWindowManagerCallbacks)
+                .interceptKeyBeforeQueueing(keyEvent, i);
     }
 
-    public final int interceptMotionBeforeQueueingNonInteractive(int i, int i2, int i3, long j, int i4) {
-        return ((InputManagerCallback) this.mWindowManagerCallbacks).interceptMotionBeforeQueueingNonInteractive(i, i2, i3, j, i4);
+    public final int interceptMotionBeforeQueueingNonInteractive(
+            int i, int i2, int i3, long j, int i4) {
+        return ((InputManagerCallback) this.mWindowManagerCallbacks)
+                .interceptMotionBeforeQueueingNonInteractive(i, i2, i3, j, i4);
     }
 
     public final boolean interceptQuickAccess(boolean z) {
@@ -2966,7 +3537,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             Log.d("InputManager", "QuickAccess: system not ready");
             return false;
         }
-        String scrubPosition = ((SemInputDeviceManager) this.mContext.getSystemService("SemInputDeviceManagerService")).getScrubPosition(z ? 1 : 2);
+        String scrubPosition =
+                ((SemInputDeviceManager)
+                                this.mContext.getSystemService("SemInputDeviceManagerService"))
+                        .getScrubPosition(z ? 1 : 2);
         try {
             String[] split = scrubPosition.split(" ");
             if (split.length < 3) {
@@ -2976,14 +3550,25 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             int parseInt = Integer.parseInt(split[0]);
             float parseFloat = Float.parseFloat(split[1]);
             float parseFloat2 = Float.parseFloat(split[2]);
-            Log.d("InputManager", "QuickAccess info: " + parseInt + ", (" + parseFloat + ", " + parseFloat2 + ")");
-            ((InputManagerCallback) this.mWindowManagerCallbacks).interceptQuickAccess(parseInt, parseFloat, parseFloat2);
+            Log.d(
+                    "InputManager",
+                    "QuickAccess info: "
+                            + parseInt
+                            + ", ("
+                            + parseFloat
+                            + ", "
+                            + parseFloat2
+                            + ")");
+            ((InputManagerCallback) this.mWindowManagerCallbacks)
+                    .interceptQuickAccess(parseInt, parseFloat, parseFloat2);
             return false;
         } catch (NullPointerException unused) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("NPE on QuickAccess: ", scrubPosition, "InputManager");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "NPE on QuickAccess: ", scrubPosition, "InputManager");
             return false;
         } catch (NumberFormatException unused2) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("NFE on QuickAccess: ", scrubPosition, "InputManager");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "NFE on QuickAccess: ", scrubPosition, "InputManager");
             return false;
         }
     }
@@ -3009,7 +3594,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     public final boolean isSpayFullAppInstalled() {
         try {
-            if (this.mContext.getPackageManager().getApplicationInfo("com.samsung.android.spay", 128) != null) {
+            if (this.mContext
+                            .getPackageManager()
+                            .getApplicationInfo("com.samsung.android.spay", 128)
+                    != null) {
                 return !r3.metaData.getBoolean("com.samsung.android.spay.is_stub", false);
             }
             return false;
@@ -3034,7 +3622,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final /* synthetic */ void lambda$createSpyWindowGestureMonitor$0(InputChannel inputChannel) {
+    public final /* synthetic */ void lambda$createSpyWindowGestureMonitor$0(
+            InputChannel inputChannel) {
         removeSpyWindowGestureMonitor(inputChannel.getToken());
     }
 
@@ -3067,8 +3656,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         return monitorGestureInputFiltered(iBinder, str, i, GnssNative.GNSS_AIDING_TYPE_ALL);
     }
 
-    public final InputMonitor monitorGestureInputFiltered(IBinder iBinder, String str, int i, int i2) {
-        if (!checkCallingPermission("android.permission.MONITOR_INPUT", "monitorGestureInput()", false)) {
+    public final InputMonitor monitorGestureInputFiltered(
+            IBinder iBinder, String str, int i, int i2) {
+        if (!checkCallingPermission(
+                "android.permission.MONITOR_INPUT", "monitorGestureInput()", false)) {
             throw new SecurityException("Requires MONITOR_INPUT permission");
         }
         Objects.requireNonNull(str, "name must not be null.");
@@ -3081,12 +3672,27 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         int callingUid = Binder.getCallingUid();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            SurfaceControl createSurfaceForGestureMonitor = ((InputManagerCallback) this.mWindowManagerCallbacks).createSurfaceForGestureMonitor(i, concat);
+            SurfaceControl createSurfaceForGestureMonitor =
+                    ((InputManagerCallback) this.mWindowManagerCallbacks)
+                            .createSurfaceForGestureMonitor(i, concat);
             if (createSurfaceForGestureMonitor != null) {
-                InputChannel createSpyWindowGestureMonitor = createSpyWindowGestureMonitor(iBinder, concat, createSurfaceForGestureMonitor, i, callingPid, callingUid, i2);
-                return new InputMonitor(createSpyWindowGestureMonitor, new InputMonitorHost(createSpyWindowGestureMonitor.getToken()), new SurfaceControl(createSurfaceForGestureMonitor, "IMS.monitorGestureInput"));
+                InputChannel createSpyWindowGestureMonitor =
+                        createSpyWindowGestureMonitor(
+                                iBinder,
+                                concat,
+                                createSurfaceForGestureMonitor,
+                                i,
+                                callingPid,
+                                callingUid,
+                                i2);
+                return new InputMonitor(
+                        createSpyWindowGestureMonitor,
+                        new InputMonitorHost(createSpyWindowGestureMonitor.getToken()),
+                        new SurfaceControl(
+                                createSurfaceForGestureMonitor, "IMS.monitorGestureInput"));
             }
-            throw new IllegalArgumentException("Could not create gesture monitor surface on display: " + i);
+            throw new IllegalArgumentException(
+                    "Could not create gesture monitor surface on display: " + i);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -3107,10 +3713,15 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final InputChannel monitorInputForBinder(String str, int i, int i2) {
         int callingPid = Binder.getCallingPid();
         int callingUid = Binder.getCallingUid();
-        if (callingUid == 1000 || this.mContext.checkPermission("android.permission.MONITOR_INPUT", callingPid, callingUid) == 0) {
+        if (callingUid == 1000
+                || this.mContext.checkPermission(
+                                "android.permission.MONITOR_INPUT", callingPid, callingUid)
+                        == 0) {
             return monitorInput(str, i, i2);
         }
-        throw new SecurityException(VibrationParam$1$$ExternalSyntheticOutline0.m(callingUid, "can only call from system. "));
+        throw new SecurityException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(
+                        callingUid, "can only call from system. "));
     }
 
     public final boolean needGamePadRemapping(String str) {
@@ -3121,7 +3732,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
         if (str != null) {
             synchronized (gamePadRemapper.mDeviceToProfileLock) {
-                int intValue = ((Integer) ((HashMap) gamePadRemapper.mDeviceToProfile).getOrDefault(str.toUpperCase(), -1)).intValue();
+                int intValue =
+                        ((Integer)
+                                        ((HashMap) gamePadRemapper.mDeviceToProfile)
+                                                .getOrDefault(str.toUpperCase(), -1))
+                                .intValue();
                 if (intValue != 0 && GamePadRemapper.isValidId(intValue)) {
                     z = true;
                 }
@@ -3131,12 +3746,14 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void notifyConfigurationChanged(long j) {
-        InputManagerCallback inputManagerCallback = (InputManagerCallback) this.mWindowManagerCallbacks;
+        InputManagerCallback inputManagerCallback =
+                (InputManagerCallback) this.mWindowManagerCallbacks;
         WindowManagerGlobalLock windowManagerGlobalLock = inputManagerCallback.mService.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                inputManagerCallback.mService.mRoot.forAllDisplays(new InputManagerCallback$$ExternalSyntheticLambda0());
+                inputManagerCallback.mService.mRoot.forAllDisplays(
+                        new InputManagerCallback$$ExternalSyntheticLambda0());
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
                 throw th;
@@ -3156,119 +3773,206 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void notifyDisplayIdChangedByUser(int i) {
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "notifyDisplayIdChangedByUser: ", "InputManager");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i, "notifyDisplayIdChangedByUser: ", "InputManager");
         if (this.mDisplayIdForPointerIcon != i) {
             this.mDisplayIdForPointerIcon = i;
         }
     }
 
     public final void notifyDropWindow(IBinder iBinder, float f, float f2) {
-        WindowManagerService windowManagerService = ((InputManagerCallback) this.mWindowManagerCallbacks).mService;
+        WindowManagerService windowManagerService =
+                ((InputManagerCallback) this.mWindowManagerCallbacks).mService;
         WindowManagerService.H h = windowManagerService.mH;
         final DragDropController dragDropController = windowManagerService.mDragDropController;
         Objects.requireNonNull(dragDropController);
-        h.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: com.android.server.wm.InputManagerCallback$$ExternalSyntheticLambda3
-            public final void accept(Object obj, Object obj2, Object obj3) {
-                DragDropController dragDropController2 = DragDropController.this;
-                IBinder iBinder2 = (IBinder) obj;
-                float floatValue = ((Float) obj2).floatValue();
-                float floatValue2 = ((Float) obj3).floatValue();
-                if (dragDropController2.mDragState == null) {
-                    Slog.w("WindowManager", "Drag state is closed.");
-                    return;
-                }
-                WindowManagerGlobalLock windowManagerGlobalLock = dragDropController2.mService.mGlobalLock;
-                WindowManagerService.boostPriorityForLockedSection();
-                synchronized (windowManagerGlobalLock) {
-                    try {
-                        dragDropController2.mDragState.reportDropWindowLock(iBinder2, floatValue, floatValue2);
-                    } catch (Throwable th) {
-                        WindowManagerService.resetPriorityAfterLockedSection();
-                        throw th;
-                    }
-                }
-                WindowManagerService.resetPriorityAfterLockedSection();
-            }
-        }, iBinder, Float.valueOf(f), Float.valueOf(f2)));
+        h.sendMessage(
+                PooledLambda.obtainMessage(
+                        new TriConsumer() { // from class:
+                                            // com.android.server.wm.InputManagerCallback$$ExternalSyntheticLambda3
+                            public final void accept(Object obj, Object obj2, Object obj3) {
+                                DragDropController dragDropController2 = DragDropController.this;
+                                IBinder iBinder2 = (IBinder) obj;
+                                float floatValue = ((Float) obj2).floatValue();
+                                float floatValue2 = ((Float) obj3).floatValue();
+                                if (dragDropController2.mDragState == null) {
+                                    Slog.w("WindowManager", "Drag state is closed.");
+                                    return;
+                                }
+                                WindowManagerGlobalLock windowManagerGlobalLock =
+                                        dragDropController2.mService.mGlobalLock;
+                                WindowManagerService.boostPriorityForLockedSection();
+                                synchronized (windowManagerGlobalLock) {
+                                    try {
+                                        dragDropController2.mDragState.reportDropWindowLock(
+                                                iBinder2, floatValue, floatValue2);
+                                    } catch (Throwable th) {
+                                        WindowManagerService.resetPriorityAfterLockedSection();
+                                        throw th;
+                                    }
+                                }
+                                WindowManagerService.resetPriorityAfterLockedSection();
+                            }
+                        },
+                        iBinder,
+                        Float.valueOf(f),
+                        Float.valueOf(f2)));
     }
 
     public final void notifyFocusChanged(IBinder iBinder, IBinder iBinder2) {
-        final WindowManagerService windowManagerService = ((InputManagerCallback) this.mWindowManagerCallbacks).mService;
-        windowManagerService.mH.sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: com.android.server.wm.InputManagerCallback$$ExternalSyntheticLambda2
-            /* JADX WARN: Finally extract failed */
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                WindowManagerService windowManagerService2 = WindowManagerService.this;
-                IBinder iBinder3 = (IBinder) obj;
-                IBinder iBinder4 = (IBinder) obj2;
-                WindowManagerGlobalLock windowManagerGlobalLock = windowManagerService2.mGlobalLock;
-                WindowManagerService.boostPriorityForLockedSection();
-                synchronized (windowManagerGlobalLock) {
-                    try {
-                        InputTarget inputTargetFromToken = windowManagerService2.getInputTargetFromToken(iBinder3);
-                        InputTarget inputTargetFromToken2 = windowManagerService2.getInputTargetFromToken(iBinder4);
-                        if (inputTargetFromToken2 == null && inputTargetFromToken == null) {
-                            Slog.v("WindowManager", "Unknown focus tokens, dropping reportFocusChanged");
-                            WindowManagerService.resetPriorityAfterLockedSection();
-                            return;
-                        }
-                        windowManagerService2.mFocusedInputTarget = inputTargetFromToken2;
-                        windowManagerService2.mAccessibilityController.onFocusChanged(inputTargetFromToken, inputTargetFromToken2);
-                        if (ProtoLogImpl_54989576.Cache.WM_DEBUG_FOCUS_LIGHT_enabled[2]) {
-                            ProtoLogImpl_54989576.i(ProtoLogGroup.WM_DEBUG_FOCUS_LIGHT, -3428027271337724889L, 0, null, String.valueOf(inputTargetFromToken), String.valueOf(inputTargetFromToken2));
-                        }
-                        WindowManagerService.resetPriorityAfterLockedSection();
-                        WindowState windowState = inputTargetFromToken2 != null ? inputTargetFromToken2.getWindowState() : null;
-                        if (windowState != null && windowState.mInputChannelToken == iBinder4) {
-                            AnrController anrController = windowManagerService2.mAnrController;
-                            WindowManagerGlobalLock windowManagerGlobalLock2 = anrController.mService.mGlobalLock;
-                            WindowManagerService.boostPriorityForLockedSection();
-                            synchronized (windowManagerGlobalLock2) {
-                                try {
-                                    ActivityRecord activityRecord = (ActivityRecord) anrController.mUnresponsiveAppByDisplay.get(windowState.getDisplayId());
-                                    if (activityRecord != null && activityRecord == windowState.mActivityRecord) {
+        final WindowManagerService windowManagerService =
+                ((InputManagerCallback) this.mWindowManagerCallbacks).mService;
+        windowManagerService.mH.sendMessage(
+                PooledLambda.obtainMessage(
+                        new BiConsumer() { // from class:
+                            // com.android.server.wm.InputManagerCallback$$ExternalSyntheticLambda2
+                            /* JADX WARN: Finally extract failed */
+                            @Override // java.util.function.BiConsumer
+                            public final void accept(Object obj, Object obj2) {
+                                WindowManagerService windowManagerService2 =
+                                        WindowManagerService.this;
+                                IBinder iBinder3 = (IBinder) obj;
+                                IBinder iBinder4 = (IBinder) obj2;
+                                WindowManagerGlobalLock windowManagerGlobalLock =
+                                        windowManagerService2.mGlobalLock;
+                                WindowManagerService.boostPriorityForLockedSection();
+                                synchronized (windowManagerGlobalLock) {
+                                    try {
+                                        InputTarget inputTargetFromToken =
+                                                windowManagerService2.getInputTargetFromToken(
+                                                        iBinder3);
+                                        InputTarget inputTargetFromToken2 =
+                                                windowManagerService2.getInputTargetFromToken(
+                                                        iBinder4);
+                                        if (inputTargetFromToken2 == null
+                                                && inputTargetFromToken == null) {
+                                            Slog.v(
+                                                    "WindowManager",
+                                                    "Unknown focus tokens, dropping"
+                                                        + " reportFocusChanged");
+                                            WindowManagerService.resetPriorityAfterLockedSection();
+                                            return;
+                                        }
+                                        windowManagerService2.mFocusedInputTarget =
+                                                inputTargetFromToken2;
+                                        windowManagerService2.mAccessibilityController
+                                                .onFocusChanged(
+                                                        inputTargetFromToken,
+                                                        inputTargetFromToken2);
+                                        if (ProtoLogImpl_54989576.Cache
+                                                .WM_DEBUG_FOCUS_LIGHT_enabled[2]) {
+                                            ProtoLogImpl_54989576.i(
+                                                    ProtoLogGroup.WM_DEBUG_FOCUS_LIGHT,
+                                                    -3428027271337724889L,
+                                                    0,
+                                                    null,
+                                                    String.valueOf(inputTargetFromToken),
+                                                    String.valueOf(inputTargetFromToken2));
+                                        }
                                         WindowManagerService.resetPriorityAfterLockedSection();
-                                        anrController.mService.mAmInternal.inputDispatchingResumed(activityRecord.getPid());
-                                        anrController.mUnresponsiveAppByDisplay.remove(windowState.getDisplayId());
-                                    }
-                                    WindowManagerService.resetPriorityAfterLockedSection();
-                                } finally {
-                                    WindowManagerService.resetPriorityAfterLockedSection();
-                                }
-                            }
-                            windowState.reportFocusChangedSerialized(true);
-                            WindowManagerGlobalLock windowManagerGlobalLock3 = windowManagerService2.mGlobalLock;
-                            WindowManagerService.boostPriorityForLockedSection();
-                            synchronized (windowManagerGlobalLock3) {
-                                try {
-                                    if (!windowManagerService2.mWindowChangeListeners.isEmpty()) {
-                                        WindowManagerService.WindowChangeListener[] windowChangeListenerArr = (WindowManagerService.WindowChangeListener[]) windowManagerService2.mWindowChangeListeners.toArray(new WindowManagerService.WindowChangeListener[windowManagerService2.mWindowChangeListeners.size()]);
-                                        WindowManagerService.resetPriorityAfterLockedSection();
-                                        for (WindowManagerService.WindowChangeListener windowChangeListener : windowChangeListenerArr) {
-                                            ViewServer.ViewServerWorker viewServerWorker = (ViewServer.ViewServerWorker) windowChangeListener;
-                                            synchronized (viewServerWorker) {
-                                                viewServerWorker.mNeedFocusedWindowUpdate = true;
-                                                viewServerWorker.notifyAll();
+                                        WindowState windowState =
+                                                inputTargetFromToken2 != null
+                                                        ? inputTargetFromToken2.getWindowState()
+                                                        : null;
+                                        if (windowState != null
+                                                && windowState.mInputChannelToken == iBinder4) {
+                                            AnrController anrController =
+                                                    windowManagerService2.mAnrController;
+                                            WindowManagerGlobalLock windowManagerGlobalLock2 =
+                                                    anrController.mService.mGlobalLock;
+                                            WindowManagerService.boostPriorityForLockedSection();
+                                            synchronized (windowManagerGlobalLock2) {
+                                                try {
+                                                    ActivityRecord activityRecord =
+                                                            (ActivityRecord)
+                                                                    anrController
+                                                                            .mUnresponsiveAppByDisplay
+                                                                            .get(
+                                                                                    windowState
+                                                                                            .getDisplayId());
+                                                    if (activityRecord != null
+                                                            && activityRecord
+                                                                    == windowState
+                                                                            .mActivityRecord) {
+                                                        WindowManagerService
+                                                                .resetPriorityAfterLockedSection();
+                                                        anrController.mService.mAmInternal
+                                                                .inputDispatchingResumed(
+                                                                        activityRecord.getPid());
+                                                        anrController.mUnresponsiveAppByDisplay
+                                                                .remove(windowState.getDisplayId());
+                                                    }
+                                                    WindowManagerService
+                                                            .resetPriorityAfterLockedSection();
+                                                } finally {
+                                                    WindowManagerService
+                                                            .resetPriorityAfterLockedSection();
+                                                }
+                                            }
+                                            windowState.reportFocusChangedSerialized(true);
+                                            WindowManagerGlobalLock windowManagerGlobalLock3 =
+                                                    windowManagerService2.mGlobalLock;
+                                            WindowManagerService.boostPriorityForLockedSection();
+                                            synchronized (windowManagerGlobalLock3) {
+                                                try {
+                                                    if (!windowManagerService2
+                                                            .mWindowChangeListeners.isEmpty()) {
+                                                        WindowManagerService.WindowChangeListener[]
+                                                                windowChangeListenerArr =
+                                                                        (WindowManagerService
+                                                                                                .WindowChangeListener
+                                                                                        [])
+                                                                                windowManagerService2
+                                                                                        .mWindowChangeListeners
+                                                                                        .toArray(
+                                                                                                new WindowManagerService
+                                                                                                                .WindowChangeListener
+                                                                                                        [windowManagerService2
+                                                                                                                .mWindowChangeListeners
+                                                                                                                .size()]);
+                                                        WindowManagerService
+                                                                .resetPriorityAfterLockedSection();
+                                                        for (WindowManagerService
+                                                                        .WindowChangeListener
+                                                                windowChangeListener :
+                                                                        windowChangeListenerArr) {
+                                                            ViewServer.ViewServerWorker
+                                                                    viewServerWorker =
+                                                                            (ViewServer
+                                                                                            .ViewServerWorker)
+                                                                                    windowChangeListener;
+                                                            synchronized (viewServerWorker) {
+                                                                viewServerWorker
+                                                                                .mNeedFocusedWindowUpdate =
+                                                                        true;
+                                                                viewServerWorker.notifyAll();
+                                                            }
+                                                        }
+                                                    }
+                                                } catch (Throwable th) {
+                                                    WindowManagerService
+                                                            .resetPriorityAfterLockedSection();
+                                                    throw th;
+                                                }
                                             }
                                         }
+                                        WindowState windowState2 =
+                                                inputTargetFromToken != null
+                                                        ? inputTargetFromToken.getWindowState()
+                                                        : null;
+                                        if (windowState2 == null
+                                                || windowState2.mInputChannelToken != iBinder3) {
+                                            return;
+                                        }
+                                        windowState2.reportFocusChangedSerialized(false);
+                                    } finally {
+                                        WindowManagerService.resetPriorityAfterLockedSection();
                                     }
-                                } catch (Throwable th) {
-                                    WindowManagerService.resetPriorityAfterLockedSection();
-                                    throw th;
                                 }
                             }
-                        }
-                        WindowState windowState2 = inputTargetFromToken != null ? inputTargetFromToken.getWindowState() : null;
-                        if (windowState2 == null || windowState2.mInputChannelToken != iBinder3) {
-                            return;
-                        }
-                        windowState2.reportFocusChangedSerialized(false);
-                    } finally {
-                        WindowManagerService.resetPriorityAfterLockedSection();
-                    }
-                }
-            }
-        }, iBinder, iBinder2));
+                        },
+                        iBinder,
+                        iBinder2));
     }
 
     public final void notifyInputChannelBroken(IBinder iBinder) {
@@ -3280,7 +3984,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             } finally {
             }
         }
-        InputManagerCallback inputManagerCallback = (InputManagerCallback) this.mWindowManagerCallbacks;
+        InputManagerCallback inputManagerCallback =
+                (InputManagerCallback) this.mWindowManagerCallbacks;
         if (iBinder == null) {
             inputManagerCallback.getClass();
             return;
@@ -3289,7 +3994,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                WindowState windowState = (WindowState) inputManagerCallback.mService.mInputToWindowMap.get(iBinder);
+                WindowState windowState =
+                        (WindowState) inputManagerCallback.mService.mInputToWindowMap.get(iBinder);
                 if (windowState != null) {
                     Slog.i("WindowManager", "WINDOW DIED " + windowState);
                     windowState.removeIfPossible();
@@ -3331,9 +4037,14 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             }
         }
         if (mMultiFingerGestureEnable) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, i3, "notifyMultiFingerGesture: ", " ", "InputManager");
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    i, i3, "notifyMultiFingerGesture: ", " ", "InputManager");
         } else {
-            AudioService$$ExternalSyntheticOutline0.m(new StringBuilder("Not support multi finger gesture "), Build.VERSION.SEM_PLATFORM_INT, " 0", "InputManager");
+            AudioService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Not support multi finger gesture "),
+                    Build.VERSION.SEM_PLATFORM_INT,
+                    " 0",
+                    "InputManager");
             i3 = 0;
         }
         sendMultiFingerGesture(i3, i2);
@@ -3350,7 +4061,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             Method dump skipped, instructions count: 352
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.input.InputManagerService.notifyNoFocusedWindowAnr(android.view.InputApplicationHandle):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.input.InputManagerService.notifyNoFocusedWindowAnr(android.view.InputApplicationHandle):void");
     }
 
     public final void notifyPogoKeyboardNotMatch() {
@@ -3387,19 +4100,29 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 size = this.mSensorEventListeners.size();
                 for (int i5 = 0; i5 < size; i5++) {
-                    ((ArrayList) this.mSensorAccuracyListenersToNotify).add((SensorEventListenerRecord) this.mSensorEventListeners.valueAt(i5));
+                    ((ArrayList) this.mSensorAccuracyListenersToNotify)
+                            .add(
+                                    (SensorEventListenerRecord)
+                                            this.mSensorEventListeners.valueAt(i5));
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
         for (i4 = 0; i4 < size; i4++) {
-            SensorEventListenerRecord sensorEventListenerRecord = (SensorEventListenerRecord) ((ArrayList) this.mSensorAccuracyListenersToNotify).get(i4);
+            SensorEventListenerRecord sensorEventListenerRecord =
+                    (SensorEventListenerRecord)
+                            ((ArrayList) this.mSensorAccuracyListenersToNotify).get(i4);
             sensorEventListenerRecord.getClass();
             try {
                 sensorEventListenerRecord.mListener.onInputSensorAccuracyChanged(i, i2, i3);
             } catch (RemoteException e) {
-                Slog.w("InputManager", "Failed to notify process " + sensorEventListenerRecord.mPid + " that sensor accuracy notified, assuming it died.", e);
+                Slog.w(
+                        "InputManager",
+                        "Failed to notify process "
+                                + sensorEventListenerRecord.mPid
+                                + " that sensor accuracy notified, assuming it died.",
+                        e);
                 sensorEventListenerRecord.binderDied();
             }
         }
@@ -3409,7 +4132,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final void notifySensorEvent(int i, int i2, int i3, long j, float[] fArr) {
         int size;
         if (DEBUG) {
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "notifySensorEvent: deviceId=", " sensorType=", " values=");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "notifySensorEvent: deviceId=", " sensorType=", " values=");
             m.append(Arrays.toString(fArr));
             Slog.d("InputManager", m.toString());
         }
@@ -3418,19 +4143,29 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 size = this.mSensorEventListeners.size();
                 for (int i4 = 0; i4 < size; i4++) {
-                    ((ArrayList) this.mSensorEventListenersToNotify).add((SensorEventListenerRecord) this.mSensorEventListeners.valueAt(i4));
+                    ((ArrayList) this.mSensorEventListenersToNotify)
+                            .add(
+                                    (SensorEventListenerRecord)
+                                            this.mSensorEventListeners.valueAt(i4));
                 }
             } catch (Throwable th) {
                 throw th;
             }
         }
         for (int i5 = 0; i5 < size; i5++) {
-            SensorEventListenerRecord sensorEventListenerRecord = (SensorEventListenerRecord) ((ArrayList) this.mSensorEventListenersToNotify).get(i5);
+            SensorEventListenerRecord sensorEventListenerRecord =
+                    (SensorEventListenerRecord)
+                            ((ArrayList) this.mSensorEventListenersToNotify).get(i5);
             sensorEventListenerRecord.getClass();
             try {
                 sensorEventListenerRecord.mListener.onInputSensorChanged(i, i2, i3, j, fArr);
             } catch (RemoteException e) {
-                Slog.w("InputManager", "Failed to notify process " + sensorEventListenerRecord.mPid + " that sensor event notified, assuming it died.", e);
+                Slog.w(
+                        "InputManager",
+                        "Failed to notify process "
+                                + sensorEventListenerRecord.mPid
+                                + " that sensor event notified, assuming it died.",
+                        e);
                 sensorEventListenerRecord.binderDied();
             }
         }
@@ -3438,20 +4173,40 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void notifyStickyModifierStateChanged(int i, int i2) {
-        StickyModifierStateController stickyModifierStateController = this.mStickyModifierStateController;
+        StickyModifierStateController stickyModifierStateController =
+                this.mStickyModifierStateController;
         if (StickyModifierStateController.DEBUG) {
             stickyModifierStateController.getClass();
-            Slog.d("ModifierStateController", "Sticky modifier state changed, modifierState = " + i + ", lockedModifierState = " + i2);
+            Slog.d(
+                    "ModifierStateController",
+                    "Sticky modifier state changed, modifierState = "
+                            + i
+                            + ", lockedModifierState = "
+                            + i2);
         }
         synchronized (stickyModifierStateController.mStickyModifierStateListenerRecords) {
-            for (int i3 = 0; i3 < stickyModifierStateController.mStickyModifierStateListenerRecords.size(); i3++) {
+            for (int i3 = 0;
+                    i3 < stickyModifierStateController.mStickyModifierStateListenerRecords.size();
+                    i3++) {
                 try {
-                    StickyModifierStateController.StickyModifierStateListenerRecord stickyModifierStateListenerRecord = (StickyModifierStateController.StickyModifierStateListenerRecord) stickyModifierStateController.mStickyModifierStateListenerRecords.valueAt(i3);
+                    StickyModifierStateController.StickyModifierStateListenerRecord
+                            stickyModifierStateListenerRecord =
+                                    (StickyModifierStateController
+                                                    .StickyModifierStateListenerRecord)
+                                            stickyModifierStateController
+                                                    .mStickyModifierStateListenerRecords.valueAt(
+                                                    i3);
                     stickyModifierStateListenerRecord.getClass();
                     try {
-                        stickyModifierStateListenerRecord.mListener.onStickyModifierStateChanged(i, i2);
+                        stickyModifierStateListenerRecord.mListener.onStickyModifierStateChanged(
+                                i, i2);
                     } catch (RemoteException e) {
-                        Slog.w("ModifierStateController", "Failed to notify process " + stickyModifierStateListenerRecord.mPid + " that sticky modifier state changed, assuming it died.", e);
+                        Slog.w(
+                                "ModifierStateController",
+                                "Failed to notify process "
+                                        + stickyModifierStateListenerRecord.mPid
+                                        + " that sticky modifier state changed, assuming it died.",
+                                e);
                         stickyModifierStateListenerRecord.binderDied();
                     }
                 } catch (Throwable th) {
@@ -3466,7 +4221,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         BatteryController batteryController = this.mBatteryController;
         synchronized (batteryController.mLock) {
             try {
-                BatteryController.DeviceMonitor deviceMonitor = (BatteryController.DeviceMonitor) batteryController.mDeviceMonitors.get(Integer.valueOf(i));
+                BatteryController.DeviceMonitor deviceMonitor =
+                        (BatteryController.DeviceMonitor)
+                                batteryController.mDeviceMonitors.get(Integer.valueOf(i));
                 if (deviceMonitor == null) {
                     return;
                 }
@@ -3477,7 +4234,12 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void notifySwitch(long j, int i, int i2) {
-        Slog.d("InputManager", "notifySwitch: values=" + Integer.toHexString(i) + ", mask=" + Integer.toHexString(i2));
+        Slog.d(
+                "InputManager",
+                "notifySwitch: values="
+                        + Integer.toHexString(i)
+                        + ", mask="
+                        + Integer.toHexString(i2));
         SomeArgs obtain = SomeArgs.obtain();
         obtain.argi1 = i;
         obtain.argi2 = i2;
@@ -3490,7 +4252,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 try {
                     if (this.mSystemReady) {
                         for (int i3 = 0; i3 < ((ArrayList) this.mLidSwitchCallbacks).size(); i3++) {
-                            ((InputManagerInternal$LidSwitchCallback) ((ArrayList) this.mLidSwitchCallbacks).get(i3)).notifyLidSwitchChanged(z);
+                            ((InputManagerInternal$LidSwitchCallback)
+                                            ((ArrayList) this.mLidSwitchCallbacks).get(i3))
+                                    .notifyLidSwitchChanged(z);
                         }
                     }
                 } finally {
@@ -3502,7 +4266,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 try {
                     if (this.mSystemReady) {
                         for (int i4 = 0; i4 < ((ArrayList) this.mLidSwitchCallbacks).size(); i4++) {
-                            ((InputManagerInternal$LidSwitchCallback) ((ArrayList) this.mLidSwitchCallbacks).get(i4)).getClass();
+                            ((InputManagerInternal$LidSwitchCallback)
+                                            ((ArrayList) this.mLidSwitchCallbacks).get(i4))
+                                    .getClass();
                         }
                     }
                 } finally {
@@ -3518,10 +4284,12 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         this.mHandler.obtainMessage(103, obtain2).sendToTarget();
         this.mLastLidEventTime = j;
         if ((i2 & 524288) != 0) {
-            ((InputManagerCallback) this.mWindowManagerCallbacks).mService.mExt.mPolicyExt.notifyPenSwitchChanged(j, (524288 & i) == 0, false);
+            ((InputManagerCallback) this.mWindowManagerCallbacks)
+                    .mService.mExt.mPolicyExt.notifyPenSwitchChanged(j, (524288 & i) == 0, false);
         }
         if ((i2 & 1048576) != 0) {
-            ((InputManagerCallback) this.mWindowManagerCallbacks).mService.mExt.mPolicyExt.notifyPenSwitchChanged(j, (1048576 & i) == 0, true);
+            ((InputManagerCallback) this.mWindowManagerCallbacks)
+                    .mService.mExt.mPolicyExt.notifyPenSwitchChanged(j, (1048576 & i) == 0, true);
         }
         if ((i2 & 1073741824) != 0) {
             this.mSpenCoverAttached = (1073741824 & i) != 0;
@@ -3529,11 +4297,13 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
         if ((i2 & 512) != 0) {
             boolean z2 = (i & 512) != 0;
-            ((InputManagerCallback) this.mWindowManagerCallbacks).notifyCameraLensCoverSwitchChanged(j, z2);
+            ((InputManagerCallback) this.mWindowManagerCallbacks)
+                    .notifyCameraLensCoverSwitchChanged(j, z2);
             setSensorPrivacy(2, z2);
         }
         if (this.mUseDevInputEventForAudioJack && (i2 & 212) != 0) {
-            ((WiredAccessoryManager) this.mWiredAccessoryCallbacks).notifyWiredAccessoryChanged(i, i2);
+            ((WiredAccessoryManager) this.mWiredAccessoryCallbacks)
+                    .notifyWiredAccessoryChanged(i, i2);
         }
         if ((i2 & 2) != 0) {
             SomeArgs obtain3 = SomeArgs.obtain();
@@ -3543,32 +4313,46 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             this.mHandler.obtainMessage(3, obtain3).sendToTarget();
         }
         if ((i2 & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION) != 0) {
-            boolean z3 = (i & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION) != 0;
-            ((AudioManager) this.mContext.getSystemService(AudioManager.class)).setMicrophoneMuteFromSwitch(z3);
+            boolean z3 =
+                    (i & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION) != 0;
+            ((AudioManager) this.mContext.getSystemService(AudioManager.class))
+                    .setMicrophoneMuteFromSwitch(z3);
             setSensorPrivacy(1, z3);
         }
         if ((i2 & 2097152) != 0) {
             boolean z4 = (2097152 & i) == 0;
             if (this.mUnionManagerLocal == null) {
-                this.mUnionManagerLocal = (SemUnionManagerLocal) LocalServices.getService(SemUnionManagerLocal.class);
+                this.mUnionManagerLocal =
+                        (SemUnionManagerLocal) LocalServices.getService(SemUnionManagerLocal.class);
             }
             this.mUnionManagerLocal.notifyCoverSwitchStateChanged(j, z4);
         }
         if ((i2 & 134217728) != 0) {
             boolean z5 = (134217728 & i) != 0;
             if (this.mSecAccessoryManagerCallbacks != null) {
-                Log.i("SAccessoryManager_SAccessoryManager", "notifyUnverifiedCoverAttachChanged ignore whenNanos = " + j + ", attached = " + z5);
+                Log.i(
+                        "SAccessoryManager_SAccessoryManager",
+                        "notifyUnverifiedCoverAttachChanged ignore whenNanos = "
+                                + j
+                                + ", attached = "
+                                + z5);
             } else {
                 Log.d("InputManager", "UnVerifiedCoverAttachCallbacks is not registered");
             }
-            DesktopModeServiceCallbacks desktopModeServiceCallbacks = this.mDesktopModeServiceCallbacks;
+            DesktopModeServiceCallbacks desktopModeServiceCallbacks =
+                    this.mDesktopModeServiceCallbacks;
             if (desktopModeServiceCallbacks != null) {
-                CoverStateManager.Authenticator.AnonymousClass1 anonymousClass1 = (CoverStateManager.Authenticator.AnonymousClass1) desktopModeServiceCallbacks;
+                CoverStateManager.Authenticator.AnonymousClass1 anonymousClass1 =
+                        (CoverStateManager.Authenticator.AnonymousClass1)
+                                desktopModeServiceCallbacks;
                 if (DesktopModeFeature.DEBUG) {
-                    com.android.server.desktopmode.Log.d("[DMS]CoverStateManager", "notifyUnverifiedCoverAttachChanged, attached=" + z5);
+                    com.android.server.desktopmode.Log.d(
+                            "[DMS]CoverStateManager",
+                            "notifyUnverifiedCoverAttachChanged, attached=" + z5);
                 }
                 if (!z5) {
-                    CoverStateManager.Authenticator authenticator = CoverStateManager.Authenticator.this;
+                    CoverStateManager.Authenticator authenticator =
+                            CoverStateManager.Authenticator.this;
                     CoverStateManager.this.mHandler.removeCallbacksAndMessages(null);
                     authenticator.setAuthComplete();
                     CoverStateManager coverStateManager = CoverStateManager.this;
@@ -3576,18 +4360,25 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                     coverStateManager.mContext.unregisterReceiver(authenticator);
                 }
             } else {
-                Log.d("InputManager", "UnVerifiedCoverAttachCallbacks is not registered for DesktopModeService");
+                Log.d(
+                        "InputManager",
+                        "UnVerifiedCoverAttachCallbacks is not registered for DesktopModeService");
             }
         }
         if ((i2 & Integer.MIN_VALUE) != 0) {
             boolean z6 = (Integer.MIN_VALUE & i) != 0;
-            SamsungIMMSHWKeyboard.POGOKeyboardReceiver pOGOKeyboardReceiver = SamsungIMMSHWKeyboard.POGOKeyboardReceiver.this;
+            SamsungIMMSHWKeyboard.POGOKeyboardReceiver pOGOKeyboardReceiver =
+                    SamsungIMMSHWKeyboard.POGOKeyboardReceiver.this;
             if (z6) {
                 SamsungIMMSHWKeyboard.this.keyboardState |= 8;
             } else {
                 SamsungIMMSHWKeyboard.this.keyboardState &= -9;
             }
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m("notifyKeyboardCoverBackfolded: backfolded=", ", keyboardState=", z6), SamsungIMMSHWKeyboard.this.keyboardState, "InputMethodManagerServicePhysicalKey");
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            "notifyKeyboardCoverBackfolded: backfolded=", ", keyboardState=", z6),
+                    SamsungIMMSHWKeyboard.this.keyboardState,
+                    "InputMethodManagerServicePhysicalKey");
         }
         if ((i2 & 536870912) == 0 || (536870912 & i) == 0) {
             return;
@@ -3624,7 +4415,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void notifyVibratorStateListenerLocked(int i, IVibratorStateListener iVibratorStateListener) {
+    public final void notifyVibratorStateListenerLocked(
+            int i, IVibratorStateListener iVibratorStateListener) {
         try {
             iVibratorStateListener.onVibrating(this.mIsVibrating.get(i));
         } catch (RemoteException | RuntimeException e) {
@@ -3640,11 +4432,13 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             }
             return;
         }
-        RemoteCallbackList remoteCallbackList = (RemoteCallbackList) this.mVibratorStateListeners.get(i);
+        RemoteCallbackList remoteCallbackList =
+                (RemoteCallbackList) this.mVibratorStateListeners.get(i);
         int beginBroadcast = remoteCallbackList.beginBroadcast();
         for (int i2 = 0; i2 < beginBroadcast; i2++) {
             try {
-                notifyVibratorStateListenerLocked(i, (IVibratorStateListener) remoteCallbackList.getBroadcastItem(i2));
+                notifyVibratorStateListenerLocked(
+                        i, (IVibratorStateListener) remoteCallbackList.getBroadcastItem(i2));
             } finally {
                 remoteCallbackList.finishBroadcast();
             }
@@ -3654,12 +4448,14 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final void notifyWindowResponsive(IBinder iBinder, int i, boolean z) {
         WindowManagerCallbacks windowManagerCallbacks = this.mWindowManagerCallbacks;
         OptionalInt of = z ? OptionalInt.of(i) : OptionalInt.empty();
-        AnrController anrController = ((InputManagerCallback) windowManagerCallbacks).mService.mAnrController;
+        AnrController anrController =
+                ((InputManagerCallback) windowManagerCallbacks).mService.mAnrController;
         WindowManagerGlobalLock windowManagerGlobalLock = anrController.mService.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                InputTarget inputTargetFromToken = anrController.mService.getInputTargetFromToken(iBinder);
+                InputTarget inputTargetFromToken =
+                        anrController.mService.getInputTargetFromToken(iBinder);
                 if (inputTargetFromToken != null) {
                     int pid = inputTargetFromToken.getPid();
                     WindowManagerService.resetPriorityAfterLockedSection();
@@ -3671,7 +4467,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                     anrController.mService.mAmInternal.inputDispatchingResumed(of.getAsInt());
                     return;
                 }
-                Slog.w("WindowManager", "Failed to notify that window token=" + iBinder + " was responsive.");
+                Slog.w(
+                        "WindowManager",
+                        "Failed to notify that window token=" + iBinder + " was responsive.");
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
                 throw th;
@@ -3684,16 +4482,22 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         OptionalInt of = z ? OptionalInt.of(i) : OptionalInt.empty();
         InputManagerCallback inputManagerCallback = (InputManagerCallback) windowManagerCallbacks;
         inputManagerCallback.getClass();
-        TimeoutRecord forInputDispatchWindowUnresponsive = TimeoutRecord.forInputDispatchWindowUnresponsive(InputManagerCallback.timeoutMessage(of, str));
+        TimeoutRecord forInputDispatchWindowUnresponsive =
+                TimeoutRecord.forInputDispatchWindowUnresponsive(
+                        InputManagerCallback.timeoutMessage(of, str));
         AnrController anrController = inputManagerCallback.mService.mAnrController;
         anrController.getClass();
         try {
             forInputDispatchWindowUnresponsive.mLatencyTracker.notifyWindowUnresponsiveStarted();
-            if (!anrController.notifyWindowUnresponsive(iBinder, forInputDispatchWindowUnresponsive)) {
+            if (!anrController.notifyWindowUnresponsive(
+                    iBinder, forInputDispatchWindowUnresponsive)) {
                 if (of.isPresent()) {
-                    anrController.notifyWindowUnresponsive(of.getAsInt(), forInputDispatchWindowUnresponsive);
+                    anrController.notifyWindowUnresponsive(
+                            of.getAsInt(), forInputDispatchWindowUnresponsive);
                 } else {
-                    Slog.w("WindowManager", "Failed to notify that window token=" + iBinder + " was unresponsive.");
+                    Slog.w(
+                            "WindowManager",
+                            "Failed to notify that window token=" + iBinder + " was unresponsive.");
                 }
             }
             forInputDispatchWindowUnresponsive.mLatencyTracker.notifyWindowUnresponsiveEnded();
@@ -3704,7 +4508,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void onDisplayRemoved(int i) {
-        updateAdditionalDisplayInputProperties(i, new InputManagerService$$ExternalSyntheticLambda3());
+        updateAdditionalDisplayInputProperties(
+                i, new InputManagerService$$ExternalSyntheticLambda3());
         this.mNative.displayRemoved(i);
     }
 
@@ -3727,11 +4532,16 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void onPointerDownOutsideFocus(IBinder iBinder) {
-        ((InputManagerCallback) this.mWindowManagerCallbacks).mService.mH.obtainMessage(62, iBinder).sendToTarget();
+        ((InputManagerCallback) this.mWindowManagerCallbacks)
+                .mService
+                .mH
+                .obtainMessage(62, iBinder)
+                .sendToTarget();
     }
 
     public final void onPointerDownUpCancelOutsideFocus(IBinder iBinder, int i, int i2, int i3) {
-        InputManagerCallback inputManagerCallback = (InputManagerCallback) this.mWindowManagerCallbacks;
+        InputManagerCallback inputManagerCallback =
+                (InputManagerCallback) this.mWindowManagerCallbacks;
         inputManagerCallback.getClass();
         SomeArgs obtain = SomeArgs.obtain();
         obtain.arg1 = iBinder;
@@ -3754,8 +4564,22 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-        new InputShellCommand(new InputShellCommand$$ExternalSyntheticLambda0()).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+    public final void onShellCommand(
+            FileDescriptor fileDescriptor,
+            FileDescriptor fileDescriptor2,
+            FileDescriptor fileDescriptor3,
+            String[] strArr,
+            ShellCallback shellCallback,
+            ResultReceiver resultReceiver) {
+        new InputShellCommand(new InputShellCommand$$ExternalSyntheticLambda0())
+                .exec(
+                        this,
+                        fileDescriptor,
+                        fileDescriptor2,
+                        fileDescriptor3,
+                        strArr,
+                        shellCallback,
+                        resultReceiver);
     }
 
     public final void onSwitchEventChangedListenerDied(int i) {
@@ -3786,7 +4610,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final void openLightSession(int i, String str, IBinder iBinder) {
         Objects.requireNonNull(iBinder);
         synchronized (this.mLightLock) {
-            Preconditions.checkState(this.mLightSessions.get(iBinder) == null, "already registered");
+            Preconditions.checkState(
+                    this.mLightSessions.get(iBinder) == null, "already registered");
             LightSession lightSession = new LightSession(i, str, iBinder);
             try {
                 iBinder.linkToDeath(lightSession, 0);
@@ -3806,43 +4631,70 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         this.mNative.pilferPointers(iBinder);
     }
 
-    public final void registerBatteryListener(int i, IInputDeviceBatteryListener iInputDeviceBatteryListener) {
+    public final void registerBatteryListener(
+            int i, IInputDeviceBatteryListener iInputDeviceBatteryListener) {
         Objects.requireNonNull(iInputDeviceBatteryListener);
         BatteryController batteryController = this.mBatteryController;
         int callingPid = Binder.getCallingPid();
         synchronized (batteryController.mLock) {
             try {
-                BatteryController.ListenerRecord listenerRecord = (BatteryController.ListenerRecord) batteryController.mListenerRecords.get(Integer.valueOf(callingPid));
+                BatteryController.ListenerRecord listenerRecord =
+                        (BatteryController.ListenerRecord)
+                                batteryController.mListenerRecords.get(Integer.valueOf(callingPid));
                 if (listenerRecord == null) {
-                    listenerRecord = batteryController.new ListenerRecord(callingPid, iInputDeviceBatteryListener);
+                    listenerRecord =
+                            batteryController
+                            .new ListenerRecord(callingPid, iInputDeviceBatteryListener);
                     try {
-                        iInputDeviceBatteryListener.asBinder().linkToDeath(listenerRecord.mDeathRecipient, 0);
-                        batteryController.mListenerRecords.put(Integer.valueOf(callingPid), listenerRecord);
+                        iInputDeviceBatteryListener
+                                .asBinder()
+                                .linkToDeath(listenerRecord.mDeathRecipient, 0);
+                        batteryController.mListenerRecords.put(
+                                Integer.valueOf(callingPid), listenerRecord);
                         if (BatteryController.DEBUG) {
-                            Slog.d("BatteryController", "Battery listener added for pid " + callingPid);
+                            Slog.d(
+                                    "BatteryController",
+                                    "Battery listener added for pid " + callingPid);
                         }
                     } catch (RemoteException unused) {
-                        Slog.i("BatteryController", "Client died before battery listener could be registered.");
+                        Slog.i(
+                                "BatteryController",
+                                "Client died before battery listener could be registered.");
                         return;
                     }
                 }
                 if (listenerRecord.mListener.asBinder() != iInputDeviceBatteryListener.asBinder()) {
-                    throw new SecurityException("Cannot register a new battery listener when there is already another registered listener for pid " + callingPid);
+                    throw new SecurityException(
+                            "Cannot register a new battery listener when there is already another"
+                                + " registered listener for pid "
+                                    + callingPid);
                 }
                 if (!((ArraySet) listenerRecord.mMonitoredDevices).add(Integer.valueOf(i))) {
-                    throw new IllegalArgumentException("The battery listener for pid " + callingPid + " is already monitoring deviceId " + i);
+                    throw new IllegalArgumentException(
+                            "The battery listener for pid "
+                                    + callingPid
+                                    + " is already monitoring deviceId "
+                                    + i);
                 }
-                BatteryController.DeviceMonitor deviceMonitor = (BatteryController.DeviceMonitor) batteryController.mDeviceMonitors.get(Integer.valueOf(i));
+                BatteryController.DeviceMonitor deviceMonitor =
+                        (BatteryController.DeviceMonitor)
+                                batteryController.mDeviceMonitors.get(Integer.valueOf(i));
                 if (deviceMonitor == null) {
                     deviceMonitor = batteryController.new DeviceMonitor(i);
                     batteryController.mDeviceMonitors.put(Integer.valueOf(i), deviceMonitor);
                     batteryController.updateBluetoothBatteryMonitoring();
                 }
                 if (BatteryController.DEBUG) {
-                    Slog.d("BatteryController", "Battery listener for pid " + callingPid + " is monitoring deviceId " + i);
+                    Slog.d(
+                            "BatteryController",
+                            "Battery listener for pid "
+                                    + callingPid
+                                    + " is monitoring deviceId "
+                                    + i);
                 }
                 batteryController.updatePollingLocked(true);
-                BatteryController.notifyBatteryListener(listenerRecord, deviceMonitor.getBatteryStateForReporting());
+                BatteryController.notifyBatteryListener(
+                        listenerRecord, deviceMonitor.getBatteryStateForReporting());
             } catch (Throwable th) {
                 throw th;
             }
@@ -3850,61 +4702,99 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void registerDesktopModeStateChangedListener() {
-        SemDesktopModeManager semDesktopModeManager = (SemDesktopModeManager) this.mContext.getSystemService("desktopmode");
+        SemDesktopModeManager semDesktopModeManager =
+                (SemDesktopModeManager) this.mContext.getSystemService("desktopmode");
         if (semDesktopModeManager == null) {
             return;
         }
-        semDesktopModeManager.registerListener(new SemDesktopModeManager.DesktopModeListener() { // from class: com.android.server.input.InputManagerService.13
-            public final void onDesktopModeStateChanged(SemDesktopModeState semDesktopModeState) {
-                int i = semDesktopModeState.state;
-                if ((i != 40 || semDesktopModeState.enabled != 4) && (i != 20 || semDesktopModeState.enabled != 1)) {
-                    if (i == 50) {
-                        GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("STATE_CONFIG_CHANGE_FINISHED = "), semDesktopModeState.enabled, "InputManager");
-                        int i2 = semDesktopModeState.enabled;
-                        PointerIcon.setDexMode((i2 == 3) | (i2 == 4));
-                        PointerIcon.clearSystemIcons();
-                        InputManagerService.this.mNative.reloadPointerIcons();
-                        return;
+        semDesktopModeManager.registerListener(
+                new SemDesktopModeManager
+                        .DesktopModeListener() { // from class:
+                                                 // com.android.server.input.InputManagerService.13
+                    public final void onDesktopModeStateChanged(
+                            SemDesktopModeState semDesktopModeState) {
+                        int i = semDesktopModeState.state;
+                        if ((i != 40 || semDesktopModeState.enabled != 4)
+                                && (i != 20 || semDesktopModeState.enabled != 1)) {
+                            if (i == 50) {
+                                GestureWakeup$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("STATE_CONFIG_CHANGE_FINISHED = "),
+                                        semDesktopModeState.enabled,
+                                        "InputManager");
+                                int i2 = semDesktopModeState.enabled;
+                                PointerIcon.setDexMode((i2 == 3) | (i2 == 4));
+                                PointerIcon.clearSystemIcons();
+                                InputManagerService.this.mNative.reloadPointerIcons();
+                                return;
+                            }
+                            return;
+                        }
+                        boolean z = semDesktopModeState.enabled == 4;
+                        int touchpadSupportedFeatures =
+                                ((DesktopModeManagerInternal)
+                                                LocalServices.getService(
+                                                        DesktopModeManagerInternal.class))
+                                        .getTouchpadSupportedFeatures();
+                        int displayType = semDesktopModeState.getDisplayType();
+                        if (Settings.System.getIntForUser(
+                                        InputManagerService.this.mContext.getContentResolver(),
+                                        "dexonpc_connection_state",
+                                        0,
+                                        -2)
+                                == 3) {
+                            displayType = 2001;
+                        }
+                        InputManagerService.this.mNative.setDexMode(
+                                z, displayType, touchpadSupportedFeatures);
+                        StringBuilder sb = new StringBuilder("set dexmode ");
+                        sb.append(z);
+                        sb.append(" displayType ");
+                        sb.append(displayType);
+                        sb.append(" dexFeature ");
+                        GestureWakeup$$ExternalSyntheticOutline0.m(
+                                sb, touchpadSupportedFeatures, "InputManager");
                     }
-                    return;
-                }
-                boolean z = semDesktopModeState.enabled == 4;
-                int touchpadSupportedFeatures = ((DesktopModeManagerInternal) LocalServices.getService(DesktopModeManagerInternal.class)).getTouchpadSupportedFeatures();
-                int displayType = semDesktopModeState.getDisplayType();
-                if (Settings.System.getIntForUser(InputManagerService.this.mContext.getContentResolver(), "dexonpc_connection_state", 0, -2) == 3) {
-                    displayType = 2001;
-                }
-                InputManagerService.this.mNative.setDexMode(z, displayType, touchpadSupportedFeatures);
-                StringBuilder sb = new StringBuilder("set dexmode ");
-                sb.append(z);
-                sb.append(" displayType ");
-                sb.append(displayType);
-                sb.append(" dexFeature ");
-                GestureWakeup$$ExternalSyntheticOutline0.m(sb, touchpadSupportedFeatures, "InputManager");
-            }
-        });
+                });
     }
 
     public final void registerFlowPointerDirectionSettingObserver() {
-        this.mContext.getContentResolver().registerContentObserver(Uri.withAppendedPath(DEX_SETTINGS_URI, "flow_pointer_from_where_dex"), true, new AnonymousClass8(this, this.mHandler, 4));
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        Uri.withAppendedPath(DEX_SETTINGS_URI, "flow_pointer_from_where_dex"),
+                        true,
+                        new AnonymousClass8(this, this.mHandler, 4));
     }
 
     public final void registerFlowPointerSettingObserver() {
-        this.mContext.getContentResolver().registerContentObserver(Uri.withAppendedPath(DEX_SETTINGS_URI, "flow_pointer_is_on_dex"), true, new AnonymousClass8(this, this.mHandler, 0));
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        Uri.withAppendedPath(DEX_SETTINGS_URI, "flow_pointer_is_on_dex"),
+                        true,
+                        new AnonymousClass8(this, this.mHandler, 0));
     }
 
-    public final void registerInputDevicesChangedListener(IInputDevicesChangedListener iInputDevicesChangedListener) {
+    public final void registerInputDevicesChangedListener(
+            IInputDevicesChangedListener iInputDevicesChangedListener) {
         Objects.requireNonNull(iInputDevicesChangedListener, "listener must not be null");
         synchronized (this.mInputDevicesLock) {
             try {
                 int callingPid = Binder.getCallingPid();
                 if (this.mInputDevicesChangedListeners.get(callingPid) != null) {
-                    throw new SecurityException("The calling process has already registered an InputDevicesChangedListener.");
+                    throw new SecurityException(
+                            "The calling process has already registered an"
+                                + " InputDevicesChangedListener.");
                 }
-                InputDevicesChangedListenerRecord inputDevicesChangedListenerRecord = new InputDevicesChangedListenerRecord(callingPid, iInputDevicesChangedListener);
+                InputDevicesChangedListenerRecord inputDevicesChangedListenerRecord =
+                        new InputDevicesChangedListenerRecord(
+                                callingPid, iInputDevicesChangedListener);
                 try {
-                    iInputDevicesChangedListener.asBinder().linkToDeath(inputDevicesChangedListenerRecord, 0);
-                    this.mInputDevicesChangedListeners.put(callingPid, inputDevicesChangedListenerRecord);
+                    iInputDevicesChangedListener
+                            .asBinder()
+                            .linkToDeath(inputDevicesChangedListenerRecord, 0);
+                    this.mInputDevicesChangedListeners.put(
+                            callingPid, inputDevicesChangedListenerRecord);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
@@ -3914,14 +4804,20 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void registerKeyboardBacklightListener(IKeyboardBacklightListener iKeyboardBacklightListener) {
+    public final void registerKeyboardBacklightListener(
+            IKeyboardBacklightListener iKeyboardBacklightListener) {
         registerKeyboardBacklightListener_enforcePermission();
         Objects.requireNonNull(iKeyboardBacklightListener);
-        this.mKeyboardBacklightController.registerKeyboardBacklightListener(iKeyboardBacklightListener, Binder.getCallingPid());
+        this.mKeyboardBacklightController.registerKeyboardBacklightListener(
+                iKeyboardBacklightListener, Binder.getCallingPid());
     }
 
-    public final void registerLidStateChangedListener(ISemLidStateChangedListener iSemLidStateChangedListener) {
-        if (!checkCallingPermission("com.samsung.android.permission.LID_STATE", "registerLidStateChangedListener()", false)) {
+    public final void registerLidStateChangedListener(
+            ISemLidStateChangedListener iSemLidStateChangedListener) {
+        if (!checkCallingPermission(
+                "com.samsung.android.permission.LID_STATE",
+                "registerLidStateChangedListener()",
+                false)) {
             throw new SecurityException("Requires LID_STATE permission");
         }
         if (iSemLidStateChangedListener == null) {
@@ -3931,11 +4827,16 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 int callingPid = Binder.getCallingPid();
                 if (this.mLidStateChangedListeners.get(callingPid) != null) {
-                    throw new IllegalStateException("The calling process has already registered a LidStateChangedListener.");
+                    throw new IllegalStateException(
+                            "The calling process has already registered a"
+                                + " LidStateChangedListener.");
                 }
-                LidStateChangedListenerRecord lidStateChangedListenerRecord = new LidStateChangedListenerRecord(callingPid, iSemLidStateChangedListener);
+                LidStateChangedListenerRecord lidStateChangedListenerRecord =
+                        new LidStateChangedListenerRecord(callingPid, iSemLidStateChangedListener);
                 try {
-                    iSemLidStateChangedListener.asBinder().linkToDeath(lidStateChangedListenerRecord, 0);
+                    iSemLidStateChangedListener
+                            .asBinder()
+                            .linkToDeath(lidStateChangedListenerRecord, 0);
                     this.mLidStateChangedListeners.put(callingPid, lidStateChangedListenerRecord);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
@@ -3946,12 +4847,14 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void registerLidSwitchCallbackInternal(InputManagerInternal$LidSwitchCallback inputManagerInternal$LidSwitchCallback) {
+    public final void registerLidSwitchCallbackInternal(
+            InputManagerInternal$LidSwitchCallback inputManagerInternal$LidSwitchCallback) {
         synchronized (this.mLidSwitchLock) {
             try {
                 ((ArrayList) this.mLidSwitchCallbacks).add(inputManagerInternal$LidSwitchCallback);
                 if (this.mSystemReady) {
-                    inputManagerInternal$LidSwitchCallback.notifyLidSwitchChanged(this.mNative.getSwitchState(-1, -256, 0) == 0);
+                    inputManagerInternal$LidSwitchCallback.notifyLidSwitchChanged(
+                            this.mNative.getSwitchState(-1, -256, 0) == 0);
                     this.mNative.getSwitchState(-1, -256, 23);
                 }
             } catch (Throwable th) {
@@ -3960,7 +4863,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void registerMultiFingerGestureListener(IMultiFingerGestureListener iMultiFingerGestureListener) {
+    public final void registerMultiFingerGestureListener(
+            IMultiFingerGestureListener iMultiFingerGestureListener) {
         if (iMultiFingerGestureListener == null) {
             throw new IllegalArgumentException("listener must not be null");
         }
@@ -3968,12 +4872,19 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 int callingPid = Binder.getCallingPid();
                 if (this.mMultiFingerGestureListeners.get(callingPid) != null) {
-                    throw new IllegalStateException("The calling process has already registered a MultiFingerGestureListener.");
+                    throw new IllegalStateException(
+                            "The calling process has already registered a"
+                                + " MultiFingerGestureListener.");
                 }
-                MultiFingerGestureListenerRecord multiFingerGestureListenerRecord = new MultiFingerGestureListenerRecord(callingPid, iMultiFingerGestureListener);
+                MultiFingerGestureListenerRecord multiFingerGestureListenerRecord =
+                        new MultiFingerGestureListenerRecord(
+                                callingPid, iMultiFingerGestureListener);
                 try {
-                    iMultiFingerGestureListener.asBinder().linkToDeath(multiFingerGestureListenerRecord, 0);
-                    this.mMultiFingerGestureListeners.put(callingPid, multiFingerGestureListenerRecord);
+                    iMultiFingerGestureListener
+                            .asBinder()
+                            .linkToDeath(multiFingerGestureListenerRecord, 0);
+                    this.mMultiFingerGestureListeners.put(
+                            callingPid, multiFingerGestureListenerRecord);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
@@ -3985,13 +4896,26 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     public final void registerMultiFingerTapBehavior(int i) {
         if (i == 4) {
-            this.mContext.getContentResolver().registerContentObserver(Uri.withAppendedPath(DEX_SETTINGS_URI, "touchpad_gestures_three_finger_tap"), true, new AnonymousClass8(this, this.mHandler, 1));
+            this.mContext
+                    .getContentResolver()
+                    .registerContentObserver(
+                            Uri.withAppendedPath(
+                                    DEX_SETTINGS_URI, "touchpad_gestures_three_finger_tap"),
+                            true,
+                            new AnonymousClass8(this, this.mHandler, 1));
         } else if (i == 1) {
-            this.mContext.getContentResolver().registerContentObserver(Uri.withAppendedPath(DEX_SETTINGS_URI, "touchpad_gestures_four_finger_tap"), true, new AnonymousClass8(this, this.mHandler, 2));
+            this.mContext
+                    .getContentResolver()
+                    .registerContentObserver(
+                            Uri.withAppendedPath(
+                                    DEX_SETTINGS_URI, "touchpad_gestures_four_finger_tap"),
+                            true,
+                            new AnonymousClass8(this, this.mHandler, 2));
         }
     }
 
-    public final void registerPointerIconChangedListener(IPointerIconChangedListener iPointerIconChangedListener) {
+    public final void registerPointerIconChangedListener(
+            IPointerIconChangedListener iPointerIconChangedListener) {
         if (iPointerIconChangedListener == null) {
             throw new IllegalArgumentException("listener must not be null");
         }
@@ -3999,12 +4923,19 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 int callingPid = Binder.getCallingPid();
                 if (this.mPointerIconChangedListeners.get(callingPid) != null) {
-                    throw new IllegalStateException("The calling process has already registered a PointerIconChangedListener.");
+                    throw new IllegalStateException(
+                            "The calling process has already registered a"
+                                + " PointerIconChangedListener.");
                 }
-                PointerIconChangedListenerRecord pointerIconChangedListenerRecord = new PointerIconChangedListenerRecord(callingPid, iPointerIconChangedListener);
+                PointerIconChangedListenerRecord pointerIconChangedListenerRecord =
+                        new PointerIconChangedListenerRecord(
+                                callingPid, iPointerIconChangedListener);
                 try {
-                    iPointerIconChangedListener.asBinder().linkToDeath(pointerIconChangedListenerRecord, 0);
-                    this.mPointerIconChangedListeners.put(callingPid, pointerIconChangedListenerRecord);
+                    iPointerIconChangedListener
+                            .asBinder()
+                            .linkToDeath(pointerIconChangedListenerRecord, 0);
+                    this.mPointerIconChangedListeners.put(
+                            callingPid, pointerIconChangedListenerRecord);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
@@ -4014,19 +4945,30 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final boolean registerSensorListener(IInputSensorEventListener iInputSensorEventListener) {
+    public final boolean registerSensorListener(
+            IInputSensorEventListener iInputSensorEventListener) {
         if (DEBUG) {
-            Slog.d("InputManager", "registerSensorListener: listener=" + iInputSensorEventListener + " callingPid=" + Binder.getCallingPid());
+            Slog.d(
+                    "InputManager",
+                    "registerSensorListener: listener="
+                            + iInputSensorEventListener
+                            + " callingPid="
+                            + Binder.getCallingPid());
         }
         Objects.requireNonNull(iInputSensorEventListener, "listener must not be null");
         synchronized (this.mSensorEventLock) {
             try {
                 int callingPid = Binder.getCallingPid();
                 if (this.mSensorEventListeners.get(callingPid) != null) {
-                    Slog.e("InputManager", "The calling process " + callingPid + " has already registered an InputSensorEventListener.");
+                    Slog.e(
+                            "InputManager",
+                            "The calling process "
+                                    + callingPid
+                                    + " has already registered an InputSensorEventListener.");
                     return false;
                 }
-                SensorEventListenerRecord sensorEventListenerRecord = new SensorEventListenerRecord(callingPid, iInputSensorEventListener);
+                SensorEventListenerRecord sensorEventListenerRecord =
+                        new SensorEventListenerRecord(callingPid, iInputSensorEventListener);
                 try {
                     iInputSensorEventListener.asBinder().linkToDeath(sensorEventListenerRecord, 0);
                     this.mSensorEventListeners.put(callingPid, sensorEventListenerRecord);
@@ -4041,23 +4983,41 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void registerSetPenModeOnDexObserver() {
-        this.mContext.getContentResolver().registerContentObserver(Uri.withAppendedPath(DEX_SETTINGS_URI, "spen_mode"), true, new AnonymousClass8(this, this.mHandler, 3));
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        Uri.withAppendedPath(DEX_SETTINGS_URI, "spen_mode"),
+                        true,
+                        new AnonymousClass8(this, this.mHandler, 3));
     }
 
-    public final void registerStickyModifierStateListener(IStickyModifierStateListener iStickyModifierStateListener) {
+    public final void registerStickyModifierStateListener(
+            IStickyModifierStateListener iStickyModifierStateListener) {
         registerStickyModifierStateListener_enforcePermission();
         Objects.requireNonNull(iStickyModifierStateListener);
-        StickyModifierStateController stickyModifierStateController = this.mStickyModifierStateController;
+        StickyModifierStateController stickyModifierStateController =
+                this.mStickyModifierStateController;
         int callingPid = Binder.getCallingPid();
         synchronized (stickyModifierStateController.mStickyModifierStateListenerRecords) {
             try {
-                if (stickyModifierStateController.mStickyModifierStateListenerRecords.get(callingPid) != null) {
-                    throw new IllegalStateException("The calling process has already registered a StickyModifierStateListener.");
+                if (stickyModifierStateController.mStickyModifierStateListenerRecords.get(
+                                callingPid)
+                        != null) {
+                    throw new IllegalStateException(
+                            "The calling process has already registered a"
+                                + " StickyModifierStateListener.");
                 }
-                StickyModifierStateController.StickyModifierStateListenerRecord stickyModifierStateListenerRecord = stickyModifierStateController.new StickyModifierStateListenerRecord(callingPid, iStickyModifierStateListener);
+                StickyModifierStateController.StickyModifierStateListenerRecord
+                        stickyModifierStateListenerRecord =
+                                stickyModifierStateController
+                                .new StickyModifierStateListenerRecord(
+                                        callingPid, iStickyModifierStateListener);
                 try {
-                    iStickyModifierStateListener.asBinder().linkToDeath(stickyModifierStateListenerRecord, 0);
-                    stickyModifierStateController.mStickyModifierStateListenerRecords.put(callingPid, stickyModifierStateListenerRecord);
+                    iStickyModifierStateListener
+                            .asBinder()
+                            .linkToDeath(stickyModifierStateListenerRecord, 0);
+                    stickyModifierStateController.mStickyModifierStateListenerRecords.put(
+                            callingPid, stickyModifierStateListenerRecord);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
@@ -4067,7 +5027,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void registerSwitchEventChangedListener(ISwitchEventChangedListener iSwitchEventChangedListener) {
+    public final void registerSwitchEventChangedListener(
+            ISwitchEventChangedListener iSwitchEventChangedListener) {
         if (iSwitchEventChangedListener == null) {
             throw new IllegalArgumentException("listener must not be null");
         }
@@ -4075,12 +5036,19 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 int callingPid = Binder.getCallingPid();
                 if (this.mSwitchEventChangedListeners.get(callingPid) != null) {
-                    throw new IllegalStateException("The calling process has already registered a SwitchEventChangedListener.");
+                    throw new IllegalStateException(
+                            "The calling process has already registered a"
+                                + " SwitchEventChangedListener.");
                 }
-                SwitchEventChangedListenerRecord switchEventChangedListenerRecord = new SwitchEventChangedListenerRecord(callingPid, iSwitchEventChangedListener);
+                SwitchEventChangedListenerRecord switchEventChangedListenerRecord =
+                        new SwitchEventChangedListenerRecord(
+                                callingPid, iSwitchEventChangedListener);
                 try {
-                    iSwitchEventChangedListener.asBinder().linkToDeath(switchEventChangedListenerRecord, 0);
-                    this.mSwitchEventChangedListeners.put(callingPid, switchEventChangedListenerRecord);
+                    iSwitchEventChangedListener
+                            .asBinder()
+                            .linkToDeath(switchEventChangedListenerRecord, 0);
+                    this.mSwitchEventChangedListeners.put(
+                            callingPid, switchEventChangedListenerRecord);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
@@ -4090,8 +5058,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void registerTabletModeChangedListener(ITabletModeChangedListener iTabletModeChangedListener) {
-        if (!checkCallingPermission("android.permission.TABLET_MODE", "registerTabletModeChangedListener()", false)) {
+    public final void registerTabletModeChangedListener(
+            ITabletModeChangedListener iTabletModeChangedListener) {
+        if (!checkCallingPermission(
+                "android.permission.TABLET_MODE", "registerTabletModeChangedListener()", false)) {
             throw new SecurityException("Requires TABLET_MODE_LISTENER permission");
         }
         Objects.requireNonNull(iTabletModeChangedListener, "event must not be null");
@@ -4099,12 +5069,18 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 int callingPid = Binder.getCallingPid();
                 if (this.mTabletModeChangedListeners.get(callingPid) != null) {
-                    throw new IllegalStateException("The calling process has already registered a TabletModeChangedListener.");
+                    throw new IllegalStateException(
+                            "The calling process has already registered a"
+                                + " TabletModeChangedListener.");
                 }
-                TabletModeChangedListenerRecord tabletModeChangedListenerRecord = new TabletModeChangedListenerRecord(callingPid, iTabletModeChangedListener);
+                TabletModeChangedListenerRecord tabletModeChangedListenerRecord =
+                        new TabletModeChangedListenerRecord(callingPid, iTabletModeChangedListener);
                 try {
-                    iTabletModeChangedListener.asBinder().linkToDeath(tabletModeChangedListenerRecord, 0);
-                    this.mTabletModeChangedListeners.put(callingPid, tabletModeChangedListenerRecord);
+                    iTabletModeChangedListener
+                            .asBinder()
+                            .linkToDeath(tabletModeChangedListenerRecord, 0);
+                    this.mTabletModeChangedListeners.put(
+                            callingPid, tabletModeChangedListenerRecord);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
@@ -4114,7 +5090,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final boolean registerVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener) {
+    public final boolean registerVibratorStateListener(
+            int i, IVibratorStateListener iVibratorStateListener) {
         RemoteCallbackList remoteCallbackList;
         Objects.requireNonNull(iVibratorStateListener, "listener must not be null");
         synchronized (this.mVibratorLock) {
@@ -4131,7 +5108,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                         notifyVibratorStateListenerLocked(i, iVibratorStateListener);
                         return true;
                     }
-                    Slog.e("InputManager", "Could not register vibrator state listener " + iVibratorStateListener);
+                    Slog.e(
+                            "InputManager",
+                            "Could not register vibrator state listener " + iVibratorStateListener);
                     return false;
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -4142,10 +5121,16 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void registerWirelessKeyboardShareChangedListener(IWirelessKeyboardShareChangedListener iWirelessKeyboardShareChangedListener) {
+    public final void registerWirelessKeyboardShareChangedListener(
+            IWirelessKeyboardShareChangedListener iWirelessKeyboardShareChangedListener) {
         int callingUid = Binder.getCallingUid();
         if (this.mContext.getPackageManager().checkSignatures(1000, callingUid) != 0) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(callingUid, "only system signature can use registerWirelessKeyboardShareChangedListener(), but UID(", ") has not system signature"));
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            callingUid,
+                            "only system signature can use"
+                                + " registerWirelessKeyboardShareChangedListener(), but UID(",
+                            ") has not system signature"));
         }
         if (iWirelessKeyboardShareChangedListener == null) {
             throw new IllegalArgumentException("listener must not be null");
@@ -4154,12 +5139,20 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 int callingPid = Binder.getCallingPid();
                 if (this.mWirelessKeyboardShareChangedListeners.get(callingPid) != null) {
-                    throw new IllegalStateException("The calling process has already registered a WirelessKeyboardShareChangedListener.");
+                    throw new IllegalStateException(
+                            "The calling process has already registered a"
+                                + " WirelessKeyboardShareChangedListener.");
                 }
-                WirelessKeyboardShareChangedListenerRecord wirelessKeyboardShareChangedListenerRecord = new WirelessKeyboardShareChangedListenerRecord(callingPid, iWirelessKeyboardShareChangedListener);
+                WirelessKeyboardShareChangedListenerRecord
+                        wirelessKeyboardShareChangedListenerRecord =
+                                new WirelessKeyboardShareChangedListenerRecord(
+                                        callingPid, iWirelessKeyboardShareChangedListener);
                 try {
-                    iWirelessKeyboardShareChangedListener.asBinder().linkToDeath(wirelessKeyboardShareChangedListenerRecord, 0);
-                    this.mWirelessKeyboardShareChangedListeners.put(callingPid, wirelessKeyboardShareChangedListenerRecord);
+                    iWirelessKeyboardShareChangedListener
+                            .asBinder()
+                            .linkToDeath(wirelessKeyboardShareChangedListenerRecord, 0);
+                    this.mWirelessKeyboardShareChangedListeners.put(
+                            callingPid, wirelessKeyboardShareChangedListenerRecord);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
@@ -4184,7 +5177,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final void remapModifierKey(int i, int i2) {
         remapModifierKey_enforcePermission();
         KeyRemapper keyRemapper = this.mKeyRemapper;
-        if (FeatureFlagUtils.isEnabled(keyRemapper.mContext, "settings_new_keyboard_modifier_key")) {
+        if (FeatureFlagUtils.isEnabled(
+                keyRemapper.mContext, "settings_new_keyboard_modifier_key")) {
             keyRemapper.mHandler.sendMessage(Message.obtain(keyRemapper.mHandler, 2, i, i2));
         }
         if (i == 111) {
@@ -4193,7 +5187,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void removeAllDeviceToGamepadProfile() {
-        if (this.mGamePadRemapper != null && checkSystemSignature("removeAllDeviceToGamepadProfile")) {
+        if (this.mGamePadRemapper != null
+                && checkSystemSignature("removeAllDeviceToGamepadProfile")) {
             Log.d("InputManager", "removeAllDeviceToGamepadProfile");
             GamePadRemapper gamePadRemapper = this.mGamePadRemapper;
             synchronized (gamePadRemapper.mDeviceToProfileLock) {
@@ -4219,17 +5214,22 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     public final void removeDeviceToGamepadProfile(String str) {
         if (this.mGamePadRemapper != null && checkSystemSignature("removeDeviceToGamepadProfile")) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("removeDeviceToGamepadProfile :", str, "InputManager");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "removeDeviceToGamepadProfile :", str, "InputManager");
             GamePadRemapper gamePadRemapper = this.mGamePadRemapper;
             if (str == null) {
                 gamePadRemapper.getClass();
-                Log.d("InputManager-GamePadRemapper", "removeDeviceToGamepadProfile : bt addr is null");
+                Log.d(
+                        "InputManager-GamePadRemapper",
+                        "removeDeviceToGamepadProfile : bt addr is null");
                 return;
             }
             synchronized (gamePadRemapper.mDeviceToProfileLock) {
                 ((HashMap) gamePadRemapper.mDeviceToProfile).remove(str.toUpperCase());
             }
-            Log.d("InputManager-GamePadRemapper", "removeDeviceToGamepadProfile : " + str.toUpperCase());
+            Log.d(
+                    "InputManager-GamePadRemapper",
+                    "removeDeviceToGamepadProfile : " + str.toUpperCase());
         }
     }
 
@@ -4237,8 +5237,13 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         synchronized (this.mInputWirelessKeyboardMouseShareLock) {
             try {
                 if (this.mSystemReady && this.mWirelessKeyboardMouseShare != null) {
-                    if (this.mContext.getPackageManager().checkSignatures(1000, Binder.getCallingUid()) != 0) {
-                        Slog.d("InputManager", "removeDeviceWirelessKeyboardShare : called by not allowed app");
+                    if (this.mContext
+                                    .getPackageManager()
+                                    .checkSignatures(1000, Binder.getCallingUid())
+                            != 0) {
+                        Slog.d(
+                                "InputManager",
+                                "removeDeviceWirelessKeyboardShare : called by not allowed app");
                         return;
                     }
                     long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -4268,11 +5273,15 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             GamePadRemapper gamePadRemapper = this.mGamePadRemapper;
             synchronized (gamePadRemapper.mDataStore) {
                 PersistentDataStore persistentDataStore = gamePadRemapper.mDataStore;
-                ((PersistentDataStore.GamePadProfile) ((HashMap) persistentDataStore.mGamePadProfiles).get(Integer.valueOf(i))).clearData();
+                ((PersistentDataStore.GamePadProfile)
+                                ((HashMap) persistentDataStore.mGamePadProfiles)
+                                        .get(Integer.valueOf(i)))
+                        .clearData();
                 persistentDataStore.mDirtyGamePadProfiles = true;
                 persistentDataStore.saveIfNeededGamePadProfiles();
             }
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "removeGamepadProfile : ", "InputManager-GamePadRemapper");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    i, "removeGamepadProfile : ", "InputManager-GamePadRemapper");
         }
     }
 
@@ -4290,7 +5299,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void removePortAssociation(String str) {
-        if (!checkCallingPermission("android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY", "removePortAssociation()", false)) {
+        if (!checkCallingPermission(
+                "android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY",
+                "removePortAssociation()",
+                false)) {
             throw new SecurityException("Requires ASSOCIATE_INPUT_DEVICE_TO_DISPLAY permission");
         }
         Objects.requireNonNull(str);
@@ -4303,7 +5315,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final void removeSpyWindowGestureMonitor(IBinder iBinder) {
         GestureMonitorSpyWindow gestureMonitorSpyWindow;
         synchronized (this.mInputMonitors) {
-            gestureMonitorSpyWindow = (GestureMonitorSpyWindow) ((HashMap) this.mInputMonitors).remove(iBinder);
+            gestureMonitorSpyWindow =
+                    (GestureMonitorSpyWindow) ((HashMap) this.mInputMonitors).remove(iBinder);
         }
         removeInputChannel(iBinder);
         if (gestureMonitorSpyWindow == null) {
@@ -4317,7 +5330,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void removeUniqueIdAssociationByDescriptor(String str) {
-        if (!checkCallingPermission("android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY", "removeUniqueIdAssociationByDescriptor()", false)) {
+        if (!checkCallingPermission(
+                "android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY",
+                "removeUniqueIdAssociationByDescriptor()",
+                false)) {
             throw new SecurityException("Requires ASSOCIATE_INPUT_DEVICE_TO_DISPLAY permission");
         }
         Objects.requireNonNull(str);
@@ -4328,7 +5344,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void removeUniqueIdAssociationByPort(String str) {
-        if (!checkCallingPermission("android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY", "removeUniqueIdAssociation()", false)) {
+        if (!checkCallingPermission(
+                "android.permission.ASSOCIATE_INPUT_DEVICE_TO_DISPLAY",
+                "removeUniqueIdAssociation()",
+                false)) {
             throw new SecurityException("Requires ASSOCIATE_INPUT_DEVICE_TO_DISPLAY permission");
         }
         Objects.requireNonNull(str);
@@ -4350,35 +5369,41 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final int sendKeyboardWirelessKeyboardShare(int i, int i2) {
         synchronized (this.mInputWirelessKeyboardMouseShareLock) {
             try {
-                WirelessKeyboardMouseShare wirelessKeyboardMouseShare = this.mWirelessKeyboardMouseShare;
+                WirelessKeyboardMouseShare wirelessKeyboardMouseShare =
+                        this.mWirelessKeyboardMouseShare;
                 if (wirelessKeyboardMouseShare != null) {
                     wirelessKeyboardMouseShare.notifyKeyboardAciton(i, i2);
                     if (i == 0) {
                         this.mSharedKeyReferenceCount++;
                         final int i3 = 0;
-                        this.mHandler.post(new Runnable(this) { // from class: com.android.server.input.InputManagerService$$ExternalSyntheticLambda4
-                            public final /* synthetic */ InputManagerService f$0;
+                        this.mHandler.post(
+                                new Runnable(
+                                        this) { // from class:
+                                                // com.android.server.input.InputManagerService$$ExternalSyntheticLambda4
+                                    public final /* synthetic */ InputManagerService f$0;
 
-                            {
-                                this.f$0 = this;
-                            }
+                                    {
+                                        this.f$0 = this;
+                                    }
 
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                int i4 = i3;
-                                InputManagerService inputManagerService = this.f$0;
-                                switch (i4) {
-                                    case 0:
-                                        boolean z = InputManagerService.DEBUG;
-                                        inputManagerService.lambda$sendKeyboardWirelessKeyboardShare$11();
-                                        break;
-                                    default:
-                                        boolean z2 = InputManagerService.DEBUG;
-                                        inputManagerService.lambda$sendKeyboardWirelessKeyboardShare$12();
-                                        break;
-                                }
-                            }
-                        });
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        int i4 = i3;
+                                        InputManagerService inputManagerService = this.f$0;
+                                        switch (i4) {
+                                            case 0:
+                                                boolean z = InputManagerService.DEBUG;
+                                                inputManagerService
+                                                        .lambda$sendKeyboardWirelessKeyboardShare$11();
+                                                break;
+                                            default:
+                                                boolean z2 = InputManagerService.DEBUG;
+                                                inputManagerService
+                                                        .lambda$sendKeyboardWirelessKeyboardShare$12();
+                                                break;
+                                        }
+                                    }
+                                });
                     } else {
                         int i4 = this.mSharedKeyReferenceCount;
                         if (i4 > 0) {
@@ -4386,29 +5411,34 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                         }
                         if (this.mSharedKeyReferenceCount == 0) {
                             final int i5 = 1;
-                            this.mHandler.post(new Runnable(this) { // from class: com.android.server.input.InputManagerService$$ExternalSyntheticLambda4
-                                public final /* synthetic */ InputManagerService f$0;
+                            this.mHandler.post(
+                                    new Runnable(
+                                            this) { // from class:
+                                                    // com.android.server.input.InputManagerService$$ExternalSyntheticLambda4
+                                        public final /* synthetic */ InputManagerService f$0;
 
-                                {
-                                    this.f$0 = this;
-                                }
+                                        {
+                                            this.f$0 = this;
+                                        }
 
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    int i42 = i5;
-                                    InputManagerService inputManagerService = this.f$0;
-                                    switch (i42) {
-                                        case 0:
-                                            boolean z = InputManagerService.DEBUG;
-                                            inputManagerService.lambda$sendKeyboardWirelessKeyboardShare$11();
-                                            break;
-                                        default:
-                                            boolean z2 = InputManagerService.DEBUG;
-                                            inputManagerService.lambda$sendKeyboardWirelessKeyboardShare$12();
-                                            break;
-                                    }
-                                }
-                            });
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            int i42 = i5;
+                                            InputManagerService inputManagerService = this.f$0;
+                                            switch (i42) {
+                                                case 0:
+                                                    boolean z = InputManagerService.DEBUG;
+                                                    inputManagerService
+                                                            .lambda$sendKeyboardWirelessKeyboardShare$11();
+                                                    break;
+                                                default:
+                                                    boolean z2 = InputManagerService.DEBUG;
+                                                    inputManagerService
+                                                            .lambda$sendKeyboardWirelessKeyboardShare$12();
+                                                    break;
+                                            }
+                                        }
+                                    });
                         }
                     }
                 }
@@ -4428,12 +5458,15 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         intent.putExtra(Constants.JSON_CLIENT_DATA_STATUS, z);
         intent.addFlags(16777216);
         this.mContext.sendStickyBroadcast(intent);
-        WindowManagerService windowManagerService = ((InputManagerCallback) this.mWindowManagerCallbacks).mService;
+        WindowManagerService windowManagerService =
+                ((InputManagerCallback) this.mWindowManagerCallbacks).mService;
         windowManagerService.mH.removeMessages(200);
-        windowManagerService.mH.sendMessage(windowManagerService.mH.obtainMessage(200, z ? 1 : 0, 0));
+        windowManagerService.mH.sendMessage(
+                windowManagerService.mH.obtainMessage(200, z ? 1 : 0, 0));
         synchronized (this.mInputWirelessKeyboardMouseShareLock) {
             try {
-                WirelessKeyboardMouseShare wirelessKeyboardMouseShare = this.mWirelessKeyboardMouseShare;
+                WirelessKeyboardMouseShare wirelessKeyboardMouseShare =
+                        this.mWirelessKeyboardMouseShare;
                 if (wirelessKeyboardMouseShare != null) {
                     wirelessKeyboardMouseShare.setPogoConnected(z);
                 }
@@ -4468,7 +5501,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         boolean z;
         synchronized (this.mInputWirelessKeyboardMouseShareLock) {
             try {
-                WirelessKeyboardMouseShare wirelessKeyboardMouseShare = this.mWirelessKeyboardMouseShare;
+                WirelessKeyboardMouseShare wirelessKeyboardMouseShare =
+                        this.mWirelessKeyboardMouseShare;
                 i2 = 1;
                 if (wirelessKeyboardMouseShare != null) {
                     z = wirelessKeyboardMouseShare.switchRemoteDeviceByKey(i == 1);
@@ -4497,7 +5531,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final int sendTouchPadGestureWirelessKeyboardShare(int i, float f, float f2, int i2) {
         synchronized (this.mInputWirelessKeyboardMouseShareLock) {
             try {
-                WirelessKeyboardMouseShare wirelessKeyboardMouseShare = this.mWirelessKeyboardMouseShare;
+                WirelessKeyboardMouseShare wirelessKeyboardMouseShare =
+                        this.mWirelessKeyboardMouseShare;
                 if (wirelessKeyboardMouseShare != null) {
                     wirelessKeyboardMouseShare.notifyMouseAciton(i, f, f2, i2);
                 }
@@ -4549,7 +5584,18 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                     if (this.mBlockTkeyCallerList.size() > 0) {
                         this.mBlockDeviceMode |= 2;
                     }
-                    Slog.d("InputManager", "sBDM(): isSet=" + z + " deviceType=" + i + " isForce=" + z2 + " caller=" + str + " blockMode=" + this.mBlockDeviceMode);
+                    Slog.d(
+                            "InputManager",
+                            "sBDM(): isSet="
+                                    + z
+                                    + " deviceType="
+                                    + i
+                                    + " isForce="
+                                    + z2
+                                    + " caller="
+                                    + str
+                                    + " blockMode="
+                                    + this.mBlockDeviceMode);
                     this.mNative.setInputMetaData(1, this.mBlockDeviceMode);
                     return;
                 }
@@ -4561,32 +5607,36 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void setCoverVerify(int i) {
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "setCoverVerify = ", "InputManager");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i, "setCoverVerify = ", "InputManager");
         this.mNative.setCoverVerify(i);
     }
 
     public final void setCustomPointerIcons(final int i, final float f) {
         final PointerIconCache pointerIconCache = this.mPointerIconCache;
-        pointerIconCache.mUiThreadHandler.post(new Runnable() { // from class: com.android.server.input.PointerIconCache$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                PointerIconCache pointerIconCache2 = PointerIconCache.this;
-                int i2 = i;
-                float f2 = f;
-                synchronized (pointerIconCache2.mLoadedPointerIconsByDisplayAndType) {
-                    try {
-                        if (pointerIconCache2.mPointerIconSizeScale == f2 && pointerIconCache2.mPointerIconColor == i2) {
-                            return;
+        pointerIconCache.mUiThreadHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.input.PointerIconCache$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        PointerIconCache pointerIconCache2 = PointerIconCache.this;
+                        int i2 = i;
+                        float f2 = f;
+                        synchronized (pointerIconCache2.mLoadedPointerIconsByDisplayAndType) {
+                            try {
+                                if (pointerIconCache2.mPointerIconSizeScale == f2
+                                        && pointerIconCache2.mPointerIconColor == i2) {
+                                    return;
+                                }
+                                pointerIconCache2.mPointerIconSizeScale = f2;
+                                pointerIconCache2.mPointerIconColor = i2;
+                                pointerIconCache2.mLoadedPointerIconsByDisplayAndType.clear();
+                                pointerIconCache2.mNative.reloadPointerIcons();
+                            } finally {
+                            }
                         }
-                        pointerIconCache2.mPointerIconSizeScale = f2;
-                        pointerIconCache2.mPointerIconColor = i2;
-                        pointerIconCache2.mLoadedPointerIconsByDisplayAndType.clear();
-                        pointerIconCache2.mNative.reloadPointerIcons();
-                    } finally {
                     }
-                }
-            }
-        });
+                });
     }
 
     public final void setDefaultPointerIcon(int i, PointerIcon pointerIcon, boolean z) {
@@ -4613,7 +5663,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void setDesktopModeServiceCallbacks(DesktopModeServiceCallbacks desktopModeServiceCallbacks) {
+    public final void setDesktopModeServiceCallbacks(
+            DesktopModeServiceCallbacks desktopModeServiceCallbacks) {
         this.mDesktopModeServiceCallbacks = desktopModeServiceCallbacks;
     }
 
@@ -4624,7 +5675,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final void setDisplayDpi() {
         if (SEP_FULL) {
             DisplayMetrics displayMetrics = new DisplayMetrics();
-            ((WindowManager) this.mContext.getSystemService("window")).getDefaultDisplay().getMetrics(displayMetrics);
+            ((WindowManager) this.mContext.getSystemService("window"))
+                    .getDefaultDisplay()
+                    .getMetrics(displayMetrics);
             this.mNative.setDisplayDpi(displayMetrics.xdpi, displayMetrics.ydpi);
         }
     }
@@ -4647,7 +5700,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             displayViewportArr[size] = (DisplayViewport) list.get(size);
         }
         this.mNative.setDisplayViewports(displayViewportArr);
-        this.mNative.setPointerDisplayId(((InputManagerCallback) this.mWindowManagerCallbacks).getPointerDisplayId());
+        this.mNative.setPointerDisplayId(
+                ((InputManagerCallback) this.mWindowManagerCallbacks).getPointerDisplayId());
     }
 
     public final void setFocusedApplication(int i, InputApplicationHandle inputApplicationHandle) {
@@ -4659,7 +5713,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void setForcedDefaultPointerIconInternal(int i, PointerIcon pointerIcon) {
-        boolean z = this.mForcedDefaultPointerIcon == this.mDefaultPointerIcon && this.mToolTypeForForcedDefaultPointerIcon == this.mToolTypeForDefaultPointerIcon;
+        boolean z =
+                this.mForcedDefaultPointerIcon == this.mDefaultPointerIcon
+                        && this.mToolTypeForForcedDefaultPointerIcon
+                                == this.mToolTypeForDefaultPointerIcon;
         this.mForcedDefaultPointerIcon = pointerIcon;
         if (pointerIcon != null) {
             this.mForcedDefaultPointerIconChanged = true;
@@ -4683,7 +5740,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         if (GamePadRemapper.isValidId(i)) {
             synchronized (gamePadRemapper.mDataStore) {
                 PersistentDataStore persistentDataStore = gamePadRemapper.mDataStore;
-                PersistentDataStore.GamePadProfile gamePadProfile = (PersistentDataStore.GamePadProfile) ((HashMap) persistentDataStore.mGamePadProfiles).get(Integer.valueOf(i));
+                PersistentDataStore.GamePadProfile gamePadProfile =
+                        (PersistentDataStore.GamePadProfile)
+                                ((HashMap) persistentDataStore.mGamePadProfiles)
+                                        .get(Integer.valueOf(i));
                 gamePadProfile.mName = str;
                 gamePadProfile.mUsed = true;
                 persistentDataStore.mDirtyGamePadProfiles = true;
@@ -4700,8 +5760,13 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         synchronized (this.mInputWirelessKeyboardMouseShareLock) {
             try {
                 if (this.mSystemReady && this.mWirelessKeyboardMouseShare != null) {
-                    if (this.mContext.getPackageManager().checkSignatures(1000, Binder.getCallingUid()) != 0) {
-                        Slog.d("InputManager", "setHostRoleWirelessKeyboardShare : called by not allowed app");
+                    if (this.mContext
+                                    .getPackageManager()
+                                    .checkSignatures(1000, Binder.getCallingUid())
+                            != 0) {
+                        Slog.d(
+                                "InputManager",
+                                "setHostRoleWirelessKeyboardShare : called by not allowed app");
                         return;
                     }
                     this.mWirelessKeyboardMouseShare.setHostRoleWirelessKeyboardShare();
@@ -4758,11 +5823,17 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void setInputMethodManagerCallbacks(InputMethodManagerCallbacks inputMethodManagerCallbacks) {
+    public final void setInputMethodManagerCallbacks(
+            InputMethodManagerCallbacks inputMethodManagerCallbacks) {
         this.mInputMethodManagerCallbacks = inputMethodManagerCallbacks;
     }
 
-    public final void setKeyboardLayoutForInputDevice(InputDeviceIdentifier inputDeviceIdentifier, int i, InputMethodInfo inputMethodInfo, InputMethodSubtype inputMethodSubtype, String str) {
+    public final void setKeyboardLayoutForInputDevice(
+            InputDeviceIdentifier inputDeviceIdentifier,
+            int i,
+            InputMethodInfo inputMethodInfo,
+            InputMethodSubtype inputMethodSubtype,
+            String str) {
         setKeyboardLayoutForInputDevice_enforcePermission();
         KeyboardLayoutManager keyboardLayoutManager = this.mKeyboardLayoutManager;
         keyboardLayoutManager.getClass();
@@ -4771,17 +5842,38 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         if (inputDevice == null || inputDevice.isVirtual() || !inputDevice.isFullKeyboard()) {
             return;
         }
-        KeyboardLayoutManager.KeyboardIdentifier keyboardIdentifier = new KeyboardLayoutManager.KeyboardIdentifier(inputDevice);
-        KeyboardLayoutManager.ImeInfo imeInfo = new KeyboardLayoutManager.ImeInfo(i, inputMethodInfo, inputMethodSubtype);
+        KeyboardLayoutManager.KeyboardIdentifier keyboardIdentifier =
+                new KeyboardLayoutManager.KeyboardIdentifier(inputDevice);
+        KeyboardLayoutManager.ImeInfo imeInfo =
+                new KeyboardLayoutManager.ImeInfo(i, inputMethodInfo, inputMethodSubtype);
         Objects.requireNonNull(imeInfo.mImeSubtypeHandle, "subtypeHandle must not be null");
-        String str2 = "layoutDescriptor:" + keyboardIdentifier + ",userId:" + i + ",subtypeHandle:" + imeInfo.mImeSubtypeHandle.toStringHandle();
+        String str2 =
+                "layoutDescriptor:"
+                        + keyboardIdentifier
+                        + ",userId:"
+                        + i
+                        + ",subtypeHandle:"
+                        + imeInfo.mImeSubtypeHandle.toStringHandle();
         synchronized (keyboardLayoutManager.mDataStore) {
             try {
                 try {
                     PersistentDataStore persistentDataStore = keyboardLayoutManager.mDataStore;
-                    if (!Objects.equals(((ArrayMap) persistentDataStore.getOrCreateInputDeviceState(keyboardIdentifier.toString()).mKeyboardLayoutMap).put(str2, str), str)) {
+                    if (!Objects.equals(
+                            ((ArrayMap)
+                                            persistentDataStore.getOrCreateInputDeviceState(
+                                                            keyboardIdentifier.toString())
+                                                    .mKeyboardLayoutMap)
+                                    .put(str2, str),
+                            str)) {
                         persistentDataStore.mDirty = true;
-                        Slog.d("KeyboardLayoutManager", "setKeyboardLayoutForInputDevice() " + inputDeviceIdentifier + " key: " + str2 + " keyboardLayoutDescriptor: " + str);
+                        Slog.d(
+                                "KeyboardLayoutManager",
+                                "setKeyboardLayoutForInputDevice() "
+                                        + inputDeviceIdentifier
+                                        + " key: "
+                                        + str2
+                                        + " keyboardLayoutDescriptor: "
+                                        + str);
                         keyboardLayoutManager.mHandler.sendEmptyMessage(2);
                     }
                 } finally {
@@ -4795,7 +5887,14 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final void setLightStateInternal(int i, Light light, LightState lightState) {
         Objects.requireNonNull(light, "light does not exist");
         if (DEBUG) {
-            Slog.d("InputManager", "setLightStateInternal device " + i + " light " + light + "lightState " + lightState);
+            Slog.d(
+                    "InputManager",
+                    "setLightStateInternal device "
+                            + i
+                            + " light "
+                            + light
+                            + "lightState "
+                            + lightState);
         }
         if (light.getType() == 10002) {
             this.mNative.setLightPlayerId(i, light.getId(), lightState.getPlayerId());
@@ -4804,8 +5903,10 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void setLightStates(int i, int[] iArr, LightState[] lightStateArr, IBinder iBinder) {
-        Preconditions.checkArgument(iArr.length == lightStateArr.length, "lights and light states are not same length");
+    public final void setLightStates(
+            int i, int[] iArr, LightState[] lightStateArr, IBinder iBinder) {
+        Preconditions.checkArgument(
+                iArr.length == lightStateArr.length, "lights and light states are not same length");
         synchronized (this.mLightLock) {
             try {
                 LightSession lightSession = (LightSession) this.mLightSessions.get(iBinder);
@@ -4814,7 +5915,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 lightSession.mLightIds = (int[]) iArr.clone();
                 lightSession.mLightStates = (LightState[]) lightStateArr.clone();
                 if (DEBUG) {
-                    Slog.d("InputManager", "setLightStates for " + lightSession.mOpPkg + " device " + i);
+                    Slog.d(
+                            "InputManager",
+                            "setLightStates for " + lightSession.mOpPkg + " device " + i);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -4837,32 +5940,36 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void setMousePointerAccelerationEnabled(boolean z, int i) {
-        updateAdditionalDisplayInputProperties(i, new InputManagerService$$ExternalSyntheticLambda1(1, z));
+        updateAdditionalDisplayInputProperties(
+                i, new InputManagerService$$ExternalSyntheticLambda1(1, z));
     }
 
     public final void setPointerFillStyle(final int i) {
         final PointerIconCache pointerIconCache = this.mPointerIconCache;
-        pointerIconCache.mUiThreadHandler.post(new Runnable() { // from class: com.android.server.input.PointerIconCache$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                PointerIconCache pointerIconCache2 = PointerIconCache.this;
-                int i2 = i;
-                synchronized (pointerIconCache2.mLoadedPointerIconsByDisplayAndType) {
-                    try {
-                        if (pointerIconCache2.mPointerIconFillStyle == i2) {
-                            return;
+        pointerIconCache.mUiThreadHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.input.PointerIconCache$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        PointerIconCache pointerIconCache2 = PointerIconCache.this;
+                        int i2 = i;
+                        synchronized (pointerIconCache2.mLoadedPointerIconsByDisplayAndType) {
+                            try {
+                                if (pointerIconCache2.mPointerIconFillStyle == i2) {
+                                    return;
+                                }
+                                pointerIconCache2.mPointerIconFillStyle = i2;
+                                pointerIconCache2.mLoadedPointerIconsByDisplayAndType.clear();
+                                pointerIconCache2.mNative.reloadPointerIcons();
+                            } finally {
+                            }
                         }
-                        pointerIconCache2.mPointerIconFillStyle = i2;
-                        pointerIconCache2.mLoadedPointerIconsByDisplayAndType.clear();
-                        pointerIconCache2.mNative.reloadPointerIcons();
-                    } finally {
                     }
-                }
-            }
-        });
+                });
     }
 
-    public final boolean setPointerIcon(PointerIcon pointerIcon, int i, int i2, int i3, IBinder iBinder) {
+    public final boolean setPointerIcon(
+            PointerIcon pointerIcon, int i, int i2, int i3, IBinder iBinder) {
         Objects.requireNonNull(pointerIcon);
         if (!this.mNative.setPointerIcon(pointerIcon, i, i2, i3, iBinder)) {
             return false;
@@ -4872,29 +5979,32 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void setPointerIconVisible(boolean z, int i) {
-        updateAdditionalDisplayInputProperties(i, new InputManagerService$$ExternalSyntheticLambda1(0, z));
+        updateAdditionalDisplayInputProperties(
+                i, new InputManagerService$$ExternalSyntheticLambda1(0, z));
     }
 
     public final void setPointerScale(final float f) {
         final PointerIconCache pointerIconCache = this.mPointerIconCache;
-        pointerIconCache.mUiThreadHandler.post(new Runnable() { // from class: com.android.server.input.PointerIconCache$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                PointerIconCache pointerIconCache2 = PointerIconCache.this;
-                float f2 = f;
-                synchronized (pointerIconCache2.mLoadedPointerIconsByDisplayAndType) {
-                    try {
-                        if (pointerIconCache2.mPointerIconScale == f2) {
-                            return;
+        pointerIconCache.mUiThreadHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.input.PointerIconCache$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        PointerIconCache pointerIconCache2 = PointerIconCache.this;
+                        float f2 = f;
+                        synchronized (pointerIconCache2.mLoadedPointerIconsByDisplayAndType) {
+                            try {
+                                if (pointerIconCache2.mPointerIconScale == f2) {
+                                    return;
+                                }
+                                pointerIconCache2.mPointerIconScale = f2;
+                                pointerIconCache2.mLoadedPointerIconsByDisplayAndType.clear();
+                                pointerIconCache2.mNative.reloadPointerIcons();
+                            } finally {
+                            }
                         }
-                        pointerIconCache2.mPointerIconScale = f2;
-                        pointerIconCache2.mLoadedPointerIconsByDisplayAndType.clear();
-                        pointerIconCache2.mNative.reloadPointerIcons();
-                    } finally {
                     }
-                }
-            }
-        });
+                });
     }
 
     public final void setPointerSpeedUnchecked(int i) {
@@ -4918,9 +6028,17 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         if (z) {
             synchronized (gamePadRemapper.mDataStore) {
                 PersistentDataStore persistentDataStore = gamePadRemapper.mDataStore;
-                PersistentDataStore.GamePadProfile gamePadProfile = (PersistentDataStore.GamePadProfile) ((HashMap) persistentDataStore.mGamePadProfiles).get(Integer.valueOf(i));
-                if (((Integer) gamePadProfile.mSimpeButtonMap.getOrDefault(Integer.valueOf(i2), Integer.valueOf(i2))).intValue() != i3) {
-                    ((ArrayMap) gamePadProfile.mSimpeButtonMap).put(Integer.valueOf(i2), Integer.valueOf(i3));
+                PersistentDataStore.GamePadProfile gamePadProfile =
+                        (PersistentDataStore.GamePadProfile)
+                                ((HashMap) persistentDataStore.mGamePadProfiles)
+                                        .get(Integer.valueOf(i));
+                if (((Integer)
+                                        gamePadProfile.mSimpeButtonMap.getOrDefault(
+                                                Integer.valueOf(i2), Integer.valueOf(i2)))
+                                .intValue()
+                        != i3) {
+                    ((ArrayMap) gamePadProfile.mSimpeButtonMap)
+                            .put(Integer.valueOf(i2), Integer.valueOf(i3));
                     gamePadProfile.mUsed = true;
                     persistentDataStore.mDirtyGamePadProfiles = true;
                     persistentDataStore.saveIfNeededGamePadProfiles();
@@ -4928,12 +6046,16 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             }
             z = true;
         }
-        StringBuilder m = AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "setRemapGamepadButton : ", " ", " ", z);
+        StringBuilder m =
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i, "setRemapGamepadButton : ", " ", " ", z);
         m.append(i2);
         m.append(" ");
         m.append(i3);
         Log.d("InputManager-GamePadRemapper", m.toString());
-        StringBuilder m2 = AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "setRemapGamepadButton ", " : ", " ", z);
+        StringBuilder m2 =
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i, "setRemapGamepadButton ", " : ", " ", z);
         m2.append(i2);
         m2.append(" ");
         m2.append(i3);
@@ -4941,7 +6063,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         return z;
     }
 
-    public final boolean setRemapGamepadStick(int i, int i2, int i3, boolean z, boolean z2, boolean z3) {
+    public final boolean setRemapGamepadStick(
+            int i, int i2, int i3, boolean z, boolean z2, boolean z3) {
         if (this.mGamePadRemapper == null || !checkSystemSignature("setRemapGamepadStick")) {
             return false;
         }
@@ -4961,7 +6084,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             }
             z4 = true;
         }
-        StringBuilder m = AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "setRemapGamepadStick : ", " ", " ", z4);
+        StringBuilder m =
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i, "setRemapGamepadStick : ", " ", " ", z4);
         ServiceKeeper$$ExternalSyntheticOutline0.m(i2, i3, " ", " ", m);
         BatteryService$$ExternalSyntheticOutline0.m(m, z, " ", z2, " ");
         m.append(z3);
@@ -4981,12 +6106,15 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         return z4;
     }
 
-    public final void setSecAccessoryManagerCallbacks(SecAccessoryManagerCallbacks secAccessoryManagerCallbacks) {
+    public final void setSecAccessoryManagerCallbacks(
+            SecAccessoryManagerCallbacks secAccessoryManagerCallbacks) {
         this.mSecAccessoryManagerCallbacks = secAccessoryManagerCallbacks;
     }
 
     public final void setSensorPrivacy(int i, boolean z) {
-        ((SensorPrivacyManagerInternal) LocalServices.getService(SensorPrivacyManagerInternal.class)).setPhysicalToggleSensorPrivacy(-2, i, z);
+        ((SensorPrivacyManagerInternal)
+                        LocalServices.getService(SensorPrivacyManagerInternal.class))
+                .setPhysicalToggleSensorPrivacy(-2, i, z);
     }
 
     public final void setShowAllTouches(boolean z) {
@@ -4999,11 +6127,19 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             this.mNative.updateInputMetaState(8, z);
             if (InputRune.IFW_KEY_COUNTER) {
                 String str = "";
-                for (Map.Entry entry : this.mInputKeyCounter.mCurrentKeyCount.getKeyCountMap().entrySet()) {
-                    str = str.concat(Integer.toString(((Integer) entry.getKey()).intValue())).concat(",").concat(Integer.toString(((Integer) entry.getValue()).intValue())).concat("/");
+                for (Map.Entry entry :
+                        this.mInputKeyCounter.mCurrentKeyCount.getKeyCountMap().entrySet()) {
+                    str =
+                            str.concat(Integer.toString(((Integer) entry.getKey()).intValue()))
+                                    .concat(",")
+                                    .concat(
+                                            Integer.toString(
+                                                    ((Integer) entry.getValue()).intValue()))
+                                    .concat("/");
                 }
                 if (InputKeyCounter.DEBUG) {
-                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("saveCount - concat data :", str, "InputKeyCounter");
+                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                            "saveCount - concat data :", str, "InputKeyCounter");
                 }
                 SystemProperties.set("persist.service.bgkeycount", str);
             }
@@ -5018,8 +6154,12 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         this.mNative.setSystemUiLightsOutForDisplay(z, i);
     }
 
-    public final void setTouchCalibrationForInputDevice(String str, int i, TouchCalibration touchCalibration) {
-        if (!checkCallingPermission("android.permission.SET_INPUT_CALIBRATION", "setTouchCalibrationForInputDevice()", false)) {
+    public final void setTouchCalibrationForInputDevice(
+            String str, int i, TouchCalibration touchCalibration) {
+        if (!checkCallingPermission(
+                "android.permission.SET_INPUT_CALIBRATION",
+                "setTouchCalibrationForInputDevice()",
+                false)) {
             throw new SecurityException("Requires SET_INPUT_CALIBRATION permission");
         }
         Objects.requireNonNull(str, "inputDeviceDescriptor must not be null");
@@ -5031,9 +6171,11 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 try {
                     PersistentDataStore persistentDataStore = this.mDataStore;
-                    PersistentDataStore.InputDeviceState orCreateInputDeviceState = persistentDataStore.getOrCreateInputDeviceState(str);
+                    PersistentDataStore.InputDeviceState orCreateInputDeviceState =
+                            persistentDataStore.getOrCreateInputDeviceState(str);
                     try {
-                        if (!touchCalibration.equals(orCreateInputDeviceState.mTouchCalibration[i])) {
+                        if (!touchCalibration.equals(
+                                orCreateInputDeviceState.mTouchCalibration[i])) {
                             orCreateInputDeviceState.mTouchCalibration[i] = touchCalibration;
                             persistentDataStore.mDirty = true;
                             this.mNative.reloadCalibration();
@@ -5059,9 +6201,15 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
         int callingUid = Binder.getCallingUid();
         if (this.mContext.getPackageManager().checkSignatures(1000, callingUid) != 0) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(callingUid, "only system signature can use setEnableTSP(), but UID(", ") has not system signature"));
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            callingUid,
+                            "only system signature can use setEnableTSP(), but UID(",
+                            ") has not system signature"));
         }
-        SemInputDeviceManager semInputDeviceManager = (SemInputDeviceManager) this.mContext.getSystemService("SemInputDeviceManagerService");
+        SemInputDeviceManager semInputDeviceManager =
+                (SemInputDeviceManager)
+                        this.mContext.getSystemService("SemInputDeviceManagerService");
         if (i == InputManager.SemTspCommandType.SPAY.getvalue()) {
             semInputDeviceManager.setSpayEnable(z ? 1 : 0);
             SystemProperties.set("persist.service.tspcmd.spay", z ? "true" : "false");
@@ -5090,24 +6238,26 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     public final void setUseLargePointerIcons(final boolean z) {
         final PointerIconCache pointerIconCache = this.mPointerIconCache;
-        pointerIconCache.mUiThreadHandler.post(new Runnable() { // from class: com.android.server.input.PointerIconCache$$ExternalSyntheticLambda3
-            @Override // java.lang.Runnable
-            public final void run() {
-                PointerIconCache pointerIconCache2 = PointerIconCache.this;
-                boolean z2 = z;
-                synchronized (pointerIconCache2.mLoadedPointerIconsByDisplayAndType) {
-                    try {
-                        if (pointerIconCache2.mUseLargePointerIcons == z2) {
-                            return;
+        pointerIconCache.mUiThreadHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.input.PointerIconCache$$ExternalSyntheticLambda3
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        PointerIconCache pointerIconCache2 = PointerIconCache.this;
+                        boolean z2 = z;
+                        synchronized (pointerIconCache2.mLoadedPointerIconsByDisplayAndType) {
+                            try {
+                                if (pointerIconCache2.mUseLargePointerIcons == z2) {
+                                    return;
+                                }
+                                pointerIconCache2.mUseLargePointerIcons = z2;
+                                pointerIconCache2.mLoadedPointerIconsByDisplayAndType.clear();
+                                pointerIconCache2.mNative.reloadPointerIcons();
+                            } finally {
+                            }
                         }
-                        pointerIconCache2.mUseLargePointerIcons = z2;
-                        pointerIconCache2.mLoadedPointerIconsByDisplayAndType.clear();
-                        pointerIconCache2.mNative.reloadPointerIcons();
-                    } finally {
                     }
-                }
-            }
-        });
+                });
     }
 
     public final synchronized void setWakeKeyDynamically(String str, boolean z, String str2) {
@@ -5129,10 +6279,15 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
 
     public final void showingTouchSensitivityNotificationIfNeeded() {
         int touchSensitivity = getTouchSensitivity();
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(touchSensitivity, "showingTouchSensitivityNotificationIfNeeded, mAutoAdjustTouch=", " count=");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        touchSensitivity,
+                        "showingTouchSensitivityNotificationIfNeeded, mAutoAdjustTouch=",
+                        " count=");
         m.append(this.mShowingTouchSensitivityNotiCount);
         m.append(" old count=");
-        DeviceIdleController$$ExternalSyntheticOutline0.m(m, this.mShowingTouchSensitivityNotiCountOld, "InputManager");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                m, this.mShowingTouchSensitivityNotiCountOld, "InputManager");
         if (touchSensitivity != 0) {
             return;
         }
@@ -5146,8 +6301,20 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
         String string = this.mContext.getString(17043032);
         String string2 = this.mContext.getString(17043031);
-        this.mNotificationManager.createNotificationChannel(new NotificationChannel("TouchSensitivityNoti", string, 3));
-        this.mNotificationManager.notify(17043031, new Notification.Builder(this.mContext, "TouchSensitivityNoti").setSmallIcon(R.drawable.ic_vibrate_small).setContentTitle(string).setContentText(string2).setStyle(new Notification.BigTextStyle().bigText(string2)).setContentIntent(createPendingIntent()).setAutoCancel(true).setShowWhen(true).setActions(buildTurnOnAction(17043031)).build());
+        this.mNotificationManager.createNotificationChannel(
+                new NotificationChannel("TouchSensitivityNoti", string, 3));
+        this.mNotificationManager.notify(
+                17043031,
+                new Notification.Builder(this.mContext, "TouchSensitivityNoti")
+                        .setSmallIcon(R.drawable.ic_vibrate_small)
+                        .setContentTitle(string)
+                        .setContentText(string2)
+                        .setStyle(new Notification.BigTextStyle().bigText(string2))
+                        .setContentIntent(createPendingIntent())
+                        .setAutoCancel(true)
+                        .setShowWhen(true)
+                        .setActions(buildTurnOnAction(17043031))
+                        .build());
         increaseTouchSensitivityNotiCount();
     }
 
@@ -5160,20 +6327,36 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         registerMultiFingerTapBehavior(4);
         registerMultiFingerTapBehavior(1);
         registerSetPenModeOnDexObserver();
-        this.mContext.registerReceiver(new AnonymousClass3(this, 0), new IntentFilter("android.intent.action.USER_SWITCHED"), null, this.mHandler);
+        this.mContext.registerReceiver(
+                new AnonymousClass3(this, 0),
+                new IntentFilter("android.intent.action.USER_SWITCHED"),
+                null,
+                this.mHandler);
     }
 
     public final boolean startDragAndDrop(InputChannel inputChannel, InputChannel inputChannel2) {
-        return this.mNative.transferTouchGesture(inputChannel.getToken(), inputChannel2.getToken(), true);
+        return this.mNative.transferTouchGesture(
+                inputChannel.getToken(), inputChannel2.getToken(), true);
     }
 
     public final boolean supportPogoDevice() {
         if (this.mSystemReady) {
-            boolean z = ((SemInputDeviceManager) this.mContext.getSystemService("SemInputDeviceManagerService")).getSupportDevice(31) == 0;
-            DeviceIdleController$$ExternalSyntheticOutline0.m("supportPogoDevice: ", "InputManager", z);
+            boolean z =
+                    ((SemInputDeviceManager)
+                                            this.mContext.getSystemService(
+                                                    "SemInputDeviceManagerService"))
+                                    .getSupportDevice(31)
+                            == 0;
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    "supportPogoDevice: ", "InputManager", z);
             return z;
         }
-        Slog.d("InputManager", "supportPogoDevice: system not ready, , caller=" + Debug.getCallers(5) + ", pid=" + Binder.getCallingPid());
+        Slog.d(
+                "InputManager",
+                "supportPogoDevice: system not ready, , caller="
+                        + Debug.getCallers(5)
+                        + ", pid="
+                        + Binder.getCallingPid());
         return false;
     }
 
@@ -5184,13 +6367,19 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 if (!this.mSystemReady || this.mWirelessKeyboardMouseShare == null) {
                     z = true;
                 } else {
-                    if (this.mContext.getPackageManager().checkSignatures(1000, Binder.getCallingUid()) != 0) {
-                        Slog.d("InputManager", "switchDeviceWirelessKeyboardShare : called by not allowed app");
+                    if (this.mContext
+                                    .getPackageManager()
+                                    .checkSignatures(1000, Binder.getCallingUid())
+                            != 0) {
+                        Slog.d(
+                                "InputManager",
+                                "switchDeviceWirelessKeyboardShare : called by not allowed app");
                         return false;
                     }
                     z = this.mWirelessKeyboardMouseShare.switchDevice(i, str);
                 }
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m("switchDeviceWirelessKeyboardShare : ", str, "InputManager");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        "switchDeviceWirelessKeyboardShare : ", str, "InputManager");
                 return z;
             } catch (Throwable th) {
                 throw th;
@@ -5207,29 +6396,44 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         if (DEBUG) {
             Slog.d("InputManager", "System ready.");
         }
-        this.mNotificationManager = (NotificationManager) this.mContext.getSystemService("notification");
-        this.mDisplayManagerInternal = (DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class);
+        this.mNotificationManager =
+                (NotificationManager) this.mContext.getSystemService("notification");
+        this.mDisplayManagerInternal =
+                (DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class);
         final InputSettingsObserver inputSettingsObserver = this.mSettingsObserver;
         Iterator it = inputSettingsObserver.mObservers.keySet().iterator();
         while (it.hasNext()) {
-            inputSettingsObserver.mContext.getContentResolver().registerContentObserver((Uri) it.next(), true, inputSettingsObserver, -1);
+            inputSettingsObserver
+                    .mContext
+                    .getContentResolver()
+                    .registerContentObserver((Uri) it.next(), true, inputSettingsObserver, -1);
         }
-        inputSettingsObserver.mContext.registerReceiver(new BroadcastReceiver() { // from class: com.android.server.input.InputSettingsObserver.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context, Intent intent) {
-                Iterator it2 = InputSettingsObserver.this.mObservers.values().iterator();
-                while (it2.hasNext()) {
-                    ((Consumer) it2.next()).accept("user switched");
-                }
-            }
-        }, new IntentFilter("android.intent.action.USER_SWITCHED"), null, inputSettingsObserver.mHandler);
+        inputSettingsObserver.mContext.registerReceiver(
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.input.InputSettingsObserver.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context, Intent intent) {
+                        Iterator it2 = InputSettingsObserver.this.mObservers.values().iterator();
+                        while (it2.hasNext()) {
+                            ((Consumer) it2.next()).accept("user switched");
+                        }
+                    }
+                },
+                new IntentFilter("android.intent.action.USER_SWITCHED"),
+                null,
+                inputSettingsObserver.mHandler);
         Iterator it2 = inputSettingsObserver.mObservers.values().iterator();
         while (it2.hasNext()) {
             ((Consumer) it2.next()).accept("just booted");
         }
         if (Flags.rateLimitUserActivityPokeInDispatcher()) {
-            int integer = inputSettingsObserver.mContext.getResources().getInteger(R.integer.config_num_physical_slots);
-            DirEncryptService$$ExternalSyntheticOutline0.m(integer, "Setting user activity interval (ms) of ", "InputManager");
+            int integer =
+                    inputSettingsObserver
+                            .mContext
+                            .getResources()
+                            .getInteger(R.integer.config_num_physical_slots);
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    integer, "Setting user activity interval (ms) of ", "InputManager");
             inputSettingsObserver.mNative.setMinTimeBetweenUserActivityPokes(integer);
         }
         synchronized (this.mLidSwitchLock) {
@@ -5237,11 +6441,15 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 this.mSystemReady = true;
                 int switchState = this.mNative.getSwitchState(-1, -256, 0);
                 for (int i2 = 0; i2 < ((ArrayList) this.mLidSwitchCallbacks).size(); i2++) {
-                    ((InputManagerInternal$LidSwitchCallback) ((ArrayList) this.mLidSwitchCallbacks).get(i2)).notifyLidSwitchChanged(switchState == 0);
+                    ((InputManagerInternal$LidSwitchCallback)
+                                    ((ArrayList) this.mLidSwitchCallbacks).get(i2))
+                            .notifyLidSwitchChanged(switchState == 0);
                 }
                 this.mNative.getSwitchState(-1, -256, 23);
                 for (int i3 = 0; i3 < ((ArrayList) this.mLidSwitchCallbacks).size(); i3++) {
-                    ((InputManagerInternal$LidSwitchCallback) ((ArrayList) this.mLidSwitchCallbacks).get(i3)).getClass();
+                    ((InputManagerInternal$LidSwitchCallback)
+                                    ((ArrayList) this.mLidSwitchCallbacks).get(i3))
+                            .getClass();
                 }
             } finally {
             }
@@ -5262,14 +6470,20 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         if (this.mNative.getSwitchState(-1, -256, 29) == 1) {
             this.mPaperCoverNotificationPending = true;
         }
-        this.mContext.registerReceiver(new AnonymousClass3(this, 4), new IntentFilter("android.bluetooth.device.action.ALIAS_CHANGED"), null, this.mHandler);
+        this.mContext.registerReceiver(
+                new AnonymousClass3(this, 4),
+                new IntentFilter("android.bluetooth.device.action.ALIAS_CHANGED"),
+                null,
+                this.mHandler);
         this.mHandler.sendEmptyMessage(2);
         WiredAccessoryCallbacks wiredAccessoryCallbacks = this.mWiredAccessoryCallbacks;
         if (wiredAccessoryCallbacks != null) {
-            WiredAccessoryManager wiredAccessoryManager = (WiredAccessoryManager) wiredAccessoryCallbacks;
+            WiredAccessoryManager wiredAccessoryManager =
+                    (WiredAccessoryManager) wiredAccessoryCallbacks;
             synchronized (wiredAccessoryManager.mLock) {
                 wiredAccessoryManager.mWakeLock.acquire();
-                wiredAccessoryManager.mHandler.sendMessage(wiredAccessoryManager.mHandler.obtainMessage(2, 0, 0, null));
+                wiredAccessoryManager.mHandler.sendMessage(
+                        wiredAccessoryManager.mHandler.obtainMessage(2, 0, 0, null));
             }
         }
         this.mNative.setTspFeatures(checkInputFeature());
@@ -5291,50 +6505,78 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         intentFilter.addAction("android.intent.action.PACKAGE_CHANGED");
         intentFilter.addAction("android.intent.action.PACKAGE_REPLACED");
         intentFilter.addDataScheme("package");
-        keyboardLayoutManager.mContext.registerReceiver(new BroadcastReceiver() { // from class: com.android.server.input.KeyboardLayoutManager.1
-            public AnonymousClass1() {
-            }
+        keyboardLayoutManager.mContext.registerReceiver(
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.input.KeyboardLayoutManager.1
+                    public AnonymousClass1() {}
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context, Intent intent) {
-                KeyboardLayoutManager.this.updateKeyboardLayouts();
-            }
-        }, intentFilter, null, keyboardLayoutManager.mHandler);
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context, Intent intent) {
+                        KeyboardLayoutManager.this.updateKeyboardLayouts();
+                    }
+                },
+                intentFilter,
+                null,
+                keyboardLayoutManager.mHandler);
         keyboardLayoutManager.mHandler.sendEmptyMessage(3);
-        InputManager inputManager = (InputManager) keyboardLayoutManager.mContext.getSystemService(InputManager.class);
+        InputManager inputManager =
+                (InputManager) keyboardLayoutManager.mContext.getSystemService(InputManager.class);
         Objects.requireNonNull(inputManager);
-        inputManager.registerInputDeviceListener(keyboardLayoutManager, keyboardLayoutManager.mHandler);
-        keyboardLayoutManager.mHandler.sendMessage(Message.obtain(keyboardLayoutManager.mHandler, 1, inputManager.getInputDeviceIds()));
+        inputManager.registerInputDeviceListener(
+                keyboardLayoutManager, keyboardLayoutManager.mHandler);
+        keyboardLayoutManager.mHandler.sendMessage(
+                Message.obtain(
+                        keyboardLayoutManager.mHandler, 1, inputManager.getInputDeviceIds()));
         BatteryController batteryController = this.mBatteryController;
-        InputManager inputManager2 = (InputManager) batteryController.mContext.getSystemService(InputManager.class);
+        InputManager inputManager2 =
+                (InputManager) batteryController.mContext.getSystemService(InputManager.class);
         Objects.requireNonNull(inputManager2);
-        inputManager2.registerInputDeviceListener(batteryController.mInputDeviceListener, batteryController.mHandler);
+        inputManager2.registerInputDeviceListener(
+                batteryController.mInputDeviceListener, batteryController.mHandler);
         for (int i4 : inputManager2.getInputDeviceIds()) {
             batteryController.mInputDeviceListener.onInputDeviceAdded(i4);
         }
         this.mKeyboardBacklightController.systemRunning();
         KeyboardLedController keyboardLedController = this.mKeyboardLedController;
-        SensorPrivacyManager sensorPrivacyManager = (SensorPrivacyManager) keyboardLedController.mContext.getSystemService(SensorPrivacyManager.class);
+        SensorPrivacyManager sensorPrivacyManager =
+                (SensorPrivacyManager)
+                        keyboardLedController.mContext.getSystemService(SensorPrivacyManager.class);
         Objects.requireNonNull(sensorPrivacyManager);
         keyboardLedController.mSensorPrivacyManager = sensorPrivacyManager;
-        InputManager inputManager3 = (InputManager) keyboardLedController.mContext.getSystemService(InputManager.class);
+        InputManager inputManager3 =
+                (InputManager) keyboardLedController.mContext.getSystemService(InputManager.class);
         Objects.requireNonNull(inputManager3);
         keyboardLedController.mInputManager = inputManager3;
-        AudioManager audioManager = (AudioManager) keyboardLedController.mContext.getSystemService(AudioManager.class);
+        AudioManager audioManager =
+                (AudioManager) keyboardLedController.mContext.getSystemService(AudioManager.class);
         Objects.requireNonNull(audioManager);
         keyboardLedController.mAudioManager = audioManager;
-        keyboardLedController.mInputManager.registerInputDeviceListener(keyboardLedController, keyboardLedController.mHandler);
-        keyboardLedController.mHandler.sendMessage(Message.obtain(keyboardLedController.mHandler, 1, keyboardLedController.mInputManager.getInputDeviceIds()));
-        keyboardLedController.mContext.registerReceiverAsUser(keyboardLedController.mMicrophoneMuteChangedIntentReceiver, UserHandle.ALL, new IntentFilter("android.media.action.MICROPHONE_MUTE_CHANGED"), null, keyboardLedController.mHandler);
+        keyboardLedController.mInputManager.registerInputDeviceListener(
+                keyboardLedController, keyboardLedController.mHandler);
+        keyboardLedController.mHandler.sendMessage(
+                Message.obtain(
+                        keyboardLedController.mHandler,
+                        1,
+                        keyboardLedController.mInputManager.getInputDeviceIds()));
+        keyboardLedController.mContext.registerReceiverAsUser(
+                keyboardLedController.mMicrophoneMuteChangedIntentReceiver,
+                UserHandle.ALL,
+                new IntentFilter("android.media.action.MICROPHONE_MUTE_CHANGED"),
+                null,
+                keyboardLedController.mHandler);
         KeyRemapper keyRemapper = this.mKeyRemapper;
-        InputManager inputManager4 = (InputManager) keyRemapper.mContext.getSystemService(InputManager.class);
+        InputManager inputManager4 =
+                (InputManager) keyRemapper.mContext.getSystemService(InputManager.class);
         Objects.requireNonNull(inputManager4);
         inputManager4.registerInputDeviceListener(keyRemapper, keyRemapper.mHandler);
-        keyRemapper.mHandler.sendMessage(Message.obtain(keyRemapper.mHandler, 1, inputManager4.getInputDeviceIds()));
+        keyRemapper.mHandler.sendMessage(
+                Message.obtain(keyRemapper.mHandler, 1, inputManager4.getInputDeviceIds()));
         PointerIconCache pointerIconCache = this.mPointerIconCache;
-        DisplayManager displayManager = (DisplayManager) pointerIconCache.mContext.getSystemService(DisplayManager.class);
+        DisplayManager displayManager =
+                (DisplayManager) pointerIconCache.mContext.getSystemService(DisplayManager.class);
         Objects.requireNonNull(displayManager);
-        displayManager.registerDisplayListener(pointerIconCache.mDisplayListener, pointerIconCache.mUiThreadHandler);
+        displayManager.registerDisplayListener(
+                pointerIconCache.mDisplayListener, pointerIconCache.mUiThreadHandler);
         for (Display display : displayManager.getDisplays()) {
             pointerIconCache.mDisplayListener.onDisplayAdded(display.getDisplayId());
         }
@@ -5354,7 +6596,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     }
 
     public final void tryPointerSpeed(int i) {
-        if (!checkCallingPermission("android.permission.SET_POINTER_SPEED", "tryPointerSpeed()", false)) {
+        if (!checkCallingPermission(
+                "android.permission.SET_POINTER_SPEED", "tryPointerSpeed()", false)) {
             throw new SecurityException("Requires SET_POINTER_SPEED permission");
         }
         if (i < -7 || i > 7) {
@@ -5363,21 +6606,32 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         setPointerSpeedUnchecked(i);
     }
 
-    public final void unregisterBatteryListener(int i, IInputDeviceBatteryListener iInputDeviceBatteryListener) {
+    public final void unregisterBatteryListener(
+            int i, IInputDeviceBatteryListener iInputDeviceBatteryListener) {
         Objects.requireNonNull(iInputDeviceBatteryListener);
         BatteryController batteryController = this.mBatteryController;
         int callingPid = Binder.getCallingPid();
         synchronized (batteryController.mLock) {
             try {
-                BatteryController.ListenerRecord listenerRecord = (BatteryController.ListenerRecord) batteryController.mListenerRecords.get(Integer.valueOf(callingPid));
+                BatteryController.ListenerRecord listenerRecord =
+                        (BatteryController.ListenerRecord)
+                                batteryController.mListenerRecords.get(Integer.valueOf(callingPid));
                 if (listenerRecord == null) {
-                    throw new IllegalArgumentException("Cannot unregister battery callback: No listener registered for pid " + callingPid);
+                    throw new IllegalArgumentException(
+                            "Cannot unregister battery callback: No listener registered for pid "
+                                    + callingPid);
                 }
                 if (listenerRecord.mListener.asBinder() != iInputDeviceBatteryListener.asBinder()) {
-                    throw new IllegalArgumentException("Cannot unregister battery callback: The listener is not the one that is registered for pid " + callingPid);
+                    throw new IllegalArgumentException(
+                            "Cannot unregister battery callback: The listener is not the one that"
+                                + " is registered for pid "
+                                    + callingPid);
                 }
                 if (!((ArraySet) listenerRecord.mMonitoredDevices).contains(Integer.valueOf(i))) {
-                    throw new IllegalArgumentException("Cannot unregister battery callback: The device is not being monitored for deviceId " + i);
+                    throw new IllegalArgumentException(
+                            "Cannot unregister battery callback: The device is not being monitored"
+                                + " for deviceId "
+                                    + i);
                 }
                 batteryController.unregisterRecordLocked(listenerRecord, i);
             } catch (Throwable th) {
@@ -5386,28 +6640,39 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void unregisterKeyboardBacklightListener(IKeyboardBacklightListener iKeyboardBacklightListener) {
+    public final void unregisterKeyboardBacklightListener(
+            IKeyboardBacklightListener iKeyboardBacklightListener) {
         unregisterKeyboardBacklightListener_enforcePermission();
         Objects.requireNonNull(iKeyboardBacklightListener);
-        this.mKeyboardBacklightController.unregisterKeyboardBacklightListener(iKeyboardBacklightListener, Binder.getCallingPid());
+        this.mKeyboardBacklightController.unregisterKeyboardBacklightListener(
+                iKeyboardBacklightListener, Binder.getCallingPid());
     }
 
-    public final void unregisterLidSwitchCallbackInternal(InputManagerInternal$LidSwitchCallback inputManagerInternal$LidSwitchCallback) {
+    public final void unregisterLidSwitchCallbackInternal(
+            InputManagerInternal$LidSwitchCallback inputManagerInternal$LidSwitchCallback) {
         synchronized (this.mLidSwitchLock) {
             ((ArrayList) this.mLidSwitchCallbacks).remove(inputManagerInternal$LidSwitchCallback);
         }
     }
 
-    public final void unregisterSensorListener(IInputSensorEventListener iInputSensorEventListener) {
+    public final void unregisterSensorListener(
+            IInputSensorEventListener iInputSensorEventListener) {
         if (DEBUG) {
-            Slog.d("InputManager", "unregisterSensorListener: listener=" + iInputSensorEventListener + " callingPid=" + Binder.getCallingPid());
+            Slog.d(
+                    "InputManager",
+                    "unregisterSensorListener: listener="
+                            + iInputSensorEventListener
+                            + " callingPid="
+                            + Binder.getCallingPid());
         }
         Objects.requireNonNull(iInputSensorEventListener, "listener must not be null");
         synchronized (this.mSensorEventLock) {
             try {
                 int callingPid = Binder.getCallingPid();
                 if (this.mSensorEventListeners.get(callingPid) != null) {
-                    if (((SensorEventListenerRecord) this.mSensorEventListeners.get(callingPid)).mListener.asBinder() != iInputSensorEventListener.asBinder()) {
+                    if (((SensorEventListenerRecord) this.mSensorEventListeners.get(callingPid))
+                                    .mListener.asBinder()
+                            != iInputSensorEventListener.asBinder()) {
                         throw new IllegalArgumentException("listener is not registered");
                     }
                     this.mSensorEventListeners.remove(callingPid);
@@ -5418,34 +6683,51 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
     }
 
-    public final void unregisterStickyModifierStateListener(IStickyModifierStateListener iStickyModifierStateListener) {
+    public final void unregisterStickyModifierStateListener(
+            IStickyModifierStateListener iStickyModifierStateListener) {
         unregisterStickyModifierStateListener_enforcePermission();
         Objects.requireNonNull(iStickyModifierStateListener);
-        StickyModifierStateController stickyModifierStateController = this.mStickyModifierStateController;
+        StickyModifierStateController stickyModifierStateController =
+                this.mStickyModifierStateController;
         int callingPid = Binder.getCallingPid();
         synchronized (stickyModifierStateController.mStickyModifierStateListenerRecords) {
             try {
-                StickyModifierStateController.StickyModifierStateListenerRecord stickyModifierStateListenerRecord = (StickyModifierStateController.StickyModifierStateListenerRecord) stickyModifierStateController.mStickyModifierStateListenerRecords.get(callingPid);
+                StickyModifierStateController.StickyModifierStateListenerRecord
+                        stickyModifierStateListenerRecord =
+                                (StickyModifierStateController.StickyModifierStateListenerRecord)
+                                        stickyModifierStateController
+                                                .mStickyModifierStateListenerRecords.get(
+                                                callingPid);
                 if (stickyModifierStateListenerRecord == null) {
-                    throw new IllegalStateException("The calling process has no registered StickyModifierStateListener.");
+                    throw new IllegalStateException(
+                            "The calling process has no registered StickyModifierStateListener.");
                 }
-                if (stickyModifierStateListenerRecord.mListener.asBinder() != iStickyModifierStateListener.asBinder()) {
-                    throw new IllegalStateException("The calling process has a different registered StickyModifierStateListener.");
+                if (stickyModifierStateListenerRecord.mListener.asBinder()
+                        != iStickyModifierStateListener.asBinder()) {
+                    throw new IllegalStateException(
+                            "The calling process has a different registered"
+                                + " StickyModifierStateListener.");
                 }
-                stickyModifierStateListenerRecord.mListener.asBinder().unlinkToDeath(stickyModifierStateListenerRecord, 0);
-                stickyModifierStateController.mStickyModifierStateListenerRecords.remove(callingPid);
+                stickyModifierStateListenerRecord
+                        .mListener
+                        .asBinder()
+                        .unlinkToDeath(stickyModifierStateListenerRecord, 0);
+                stickyModifierStateController.mStickyModifierStateListenerRecords.remove(
+                        callingPid);
             } catch (Throwable th) {
                 throw th;
             }
         }
     }
 
-    public final boolean unregisterVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener) {
+    public final boolean unregisterVibratorStateListener(
+            int i, IVibratorStateListener iVibratorStateListener) {
         synchronized (this.mVibratorLock) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 if (this.mVibratorStateListeners.contains(i)) {
-                    return ((RemoteCallbackList) this.mVibratorStateListeners.get(i)).unregister(iVibratorStateListener);
+                    return ((RemoteCallbackList) this.mVibratorStateListeners.get(i))
+                            .unregister(iVibratorStateListener);
                 }
                 Slog.w("InputManager", "Vibrator state listener " + i + " doesn't exist");
                 return false;
@@ -5466,7 +6748,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final void updateAdditionalDisplayInputProperties(int i, Consumer consumer) {
         synchronized (this.mAdditionalDisplayInputPropertiesLock) {
             try {
-                AdditionalDisplayInputProperties additionalDisplayInputProperties = (AdditionalDisplayInputProperties) this.mAdditionalDisplayInputProperties.get(i);
+                AdditionalDisplayInputProperties additionalDisplayInputProperties =
+                        (AdditionalDisplayInputProperties)
+                                this.mAdditionalDisplayInputProperties.get(i);
                 if (additionalDisplayInputProperties == null) {
                     additionalDisplayInputProperties = new AdditionalDisplayInputProperties();
                     this.mAdditionalDisplayInputProperties.put(i, additionalDisplayInputProperties);
@@ -5482,7 +6766,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 if (z2 != z4) {
                     this.mNative.setMousePointerAccelerationEnabled(i, z4);
                 }
-                if (additionalDisplayInputProperties.mousePointerAccelerationEnabled && additionalDisplayInputProperties.pointerIconVisible) {
+                if (additionalDisplayInputProperties.mousePointerAccelerationEnabled
+                        && additionalDisplayInputProperties.pointerIconVisible) {
                     this.mAdditionalDisplayInputProperties.remove(i);
                 }
             } catch (Throwable th) {
@@ -5494,23 +6779,29 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
     public final void updateDeviceToGamepadProfile(String str, int i) {
         boolean z;
         if (this.mGamePadRemapper != null && checkSystemSignature("updateDeviceToGamepadProfile")) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "updateDeviceToGamepadProfile :", str, " ", "InputManager");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i, "updateDeviceToGamepadProfile :", str, " ", "InputManager");
             GamePadRemapper gamePadRemapper = this.mGamePadRemapper;
             if (str == null) {
                 gamePadRemapper.getClass();
-                Log.d("InputManager-GamePadRemapper", "removeDeviceToGamepadProfile : bt addr is null");
+                Log.d(
+                        "InputManager-GamePadRemapper",
+                        "removeDeviceToGamepadProfile : bt addr is null");
                 return;
             }
             gamePadRemapper.getClass();
             if (GamePadRemapper.isValidId(i)) {
                 synchronized (gamePadRemapper.mDeviceToProfileLock) {
-                    ((HashMap) gamePadRemapper.mDeviceToProfile).put(str.toUpperCase(), Integer.valueOf(i));
+                    ((HashMap) gamePadRemapper.mDeviceToProfile)
+                            .put(str.toUpperCase(), Integer.valueOf(i));
                 }
                 z = true;
             } else {
                 z = false;
             }
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("updateDeviceToGamepadProfile : ", " ", z);
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            "updateDeviceToGamepadProfile : ", " ", z);
             m.append(str.toUpperCase());
             m.append(" ");
             m.append(i);
@@ -5525,8 +6816,12 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         bundle.putString("def", "left");
         int i2 = 0;
         try {
-            Bundle call = this.mContext.getContentResolver().call(DEX_SETTINGS_URI, "getSettings", (String) null, bundle);
-            String string = call != null ? call.getString("flow_pointer_from_where_dex", "left") : "";
+            Bundle call =
+                    this.mContext
+                            .getContentResolver()
+                            .call(DEX_SETTINGS_URI, "getSettings", (String) null, bundle);
+            String string =
+                    call != null ? call.getString("flow_pointer_from_where_dex", "left") : "";
             if (string.equals("left")) {
                 i = 0;
             } else if (string.equals("right")) {
@@ -5546,14 +6841,20 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         bundle.putString("def", "false");
         boolean z = false;
         try {
-            Bundle call = this.mContext.getContentResolver().call(DEX_SETTINGS_URI, "getSettings", (String) null, bundle);
+            Bundle call =
+                    this.mContext
+                            .getContentResolver()
+                            .call(DEX_SETTINGS_URI, "getSettings", (String) null, bundle);
             if (call != null) {
                 if (call.getString("flow_pointer_is_on_dex").equals("true")) {
                     z = true;
                 }
             }
         } catch (IllegalArgumentException e) {
-            Log.e("InputManager", "Failed to get settings SETTINGS_KEY_FLOW_POINTER_TO_PHONE_SCREEN", e);
+            Log.e(
+                    "InputManager",
+                    "Failed to get settings SETTINGS_KEY_FLOW_POINTER_TO_PHONE_SCREEN",
+                    e);
         }
         this.mNative.enableFlowPointer(z);
         Log.d("InputManager", "updateFlowPointerSettings : " + z);
@@ -5571,37 +6872,45 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                     final Context context = this.mContext;
                     final int i = 0;
                     final int i2 = 1;
-                    focusEventDebugView = new FocusEventDebugView(context, this, new Supplier() { // from class: com.android.server.input.debug.FocusEventDebugView$$ExternalSyntheticLambda3
-                        @Override // java.util.function.Supplier
-                        public final Object get() {
-                            int i3 = i;
-                            Context context2 = context;
-                            switch (i3) {
-                                case 0:
-                                    return new RotaryInputValueView(context2);
-                                default:
-                                    return new RotaryInputGraphView(context2);
-                            }
-                        }
-                    }, new Supplier() { // from class: com.android.server.input.debug.FocusEventDebugView$$ExternalSyntheticLambda3
-                        @Override // java.util.function.Supplier
-                        public final Object get() {
-                            int i3 = i2;
-                            Context context2 = context;
-                            switch (i3) {
-                                case 0:
-                                    return new RotaryInputValueView(context2);
-                                default:
-                                    return new RotaryInputGraphView(context2);
-                            }
-                        }
-                    });
+                    focusEventDebugView =
+                            new FocusEventDebugView(
+                                    context,
+                                    this,
+                                    new Supplier() { // from class:
+                                                     // com.android.server.input.debug.FocusEventDebugView$$ExternalSyntheticLambda3
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            int i3 = i;
+                                            Context context2 = context;
+                                            switch (i3) {
+                                                case 0:
+                                                    return new RotaryInputValueView(context2);
+                                                default:
+                                                    return new RotaryInputGraphView(context2);
+                                            }
+                                        }
+                                    },
+                                    new Supplier() { // from class:
+                                                     // com.android.server.input.debug.FocusEventDebugView$$ExternalSyntheticLambda3
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            int i3 = i2;
+                                            Context context2 = context;
+                                            switch (i3) {
+                                                case 0:
+                                                    return new RotaryInputValueView(context2);
+                                                default:
+                                                    return new RotaryInputGraphView(context2);
+                                            }
+                                        }
+                                    });
                     this.mFocusEventDebugView = focusEventDebugView;
                 } else {
                     this.mFocusEventDebugView = null;
                 }
                 Objects.requireNonNull(focusEventDebugView);
-                WindowManager windowManager = (WindowManager) this.mContext.getSystemService(WindowManager.class);
+                WindowManager windowManager =
+                        (WindowManager) this.mContext.getSystemService(WindowManager.class);
                 Objects.requireNonNull(windowManager);
                 WindowManager windowManager2 = windowManager;
                 if (!z) {
@@ -5615,7 +6924,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                 layoutParams.setFitInsetsTypes(0);
                 layoutParams.layoutInDisplayCutoutMode = 3;
                 layoutParams.format = -3;
-                layoutParams.setTitle("FocusEventDebugView - display " + this.mContext.getDisplayId());
+                layoutParams.setTitle(
+                        "FocusEventDebugView - display " + this.mContext.getDisplayId());
                 layoutParams.inputFeatures = layoutParams.inputFeatures | 1;
                 windowManager2.addView(focusEventDebugView, layoutParams);
             } finally {
@@ -5634,11 +6944,13 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         } else {
             i2 = 0;
         }
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i2, "updateMultiFingerTapBehavior : ", "InputManager");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i2, "updateMultiFingerTapBehavior : ", "InputManager");
     }
 
     public final void updatePointerLocationEnabled(boolean z) {
-        final InputManagerCallback inputManagerCallback = (InputManagerCallback) this.mWindowManagerCallbacks;
+        final InputManagerCallback inputManagerCallback =
+                (InputManagerCallback) this.mWindowManagerCallbacks;
         WindowManagerService windowManagerService = inputManagerCallback.mService;
         if (windowManagerService.mPointerLocationEnabled == z) {
             return;
@@ -5649,12 +6961,18 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             try {
                 WindowManagerService windowManagerService2 = inputManagerCallback.mService;
                 windowManagerService2.mPointerLocationEnabled = z;
-                windowManagerService2.mRoot.forAllDisplayPolicies(new Consumer() { // from class: com.android.server.wm.InputManagerCallback$$ExternalSyntheticLambda1
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        ((DisplayPolicy) obj).setPointerLocationEnabled(InputManagerCallback.this.mService.mPointerLocationEnabled);
-                    }
-                });
+                windowManagerService2.mRoot.forAllDisplayPolicies(
+                        new Consumer() { // from class:
+                                         // com.android.server.wm.InputManagerCallback$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                ((DisplayPolicy) obj)
+                                        .setPointerLocationEnabled(
+                                                InputManagerCallback.this
+                                                        .mService
+                                                        .mPointerLocationEnabled);
+                            }
+                        });
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
                 throw th;
@@ -5679,7 +6997,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             FocusEventDebugView focusEventDebugView = this.mFocusEventDebugView;
             if (focusEventDebugView != null) {
                 focusEventDebugView.getClass();
-                focusEventDebugView.post(new FocusEventDebugView$$ExternalSyntheticLambda0(focusEventDebugView, z, 0));
+                focusEventDebugView.post(
+                        new FocusEventDebugView$$ExternalSyntheticLambda0(
+                                focusEventDebugView, z, 0));
             }
         }
     }
@@ -5694,7 +7014,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
             FocusEventDebugView focusEventDebugView = this.mFocusEventDebugView;
             if (focusEventDebugView != null) {
                 focusEventDebugView.getClass();
-                focusEventDebugView.post(new FocusEventDebugView$$ExternalSyntheticLambda0(focusEventDebugView, z, 1));
+                focusEventDebugView.post(
+                        new FocusEventDebugView$$ExternalSyntheticLambda0(
+                                focusEventDebugView, z, 1));
             }
         }
     }
@@ -5706,7 +7028,9 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         }
         int i = this.mPogoKeyboardConnected ? 2 : this.mSpenCoverAttached ? 1 : 0;
         if (i != this.mLastWacomMode) {
-            SemInputDeviceManager semInputDeviceManager = (SemInputDeviceManager) this.mContext.getSystemService("SemInputDeviceManagerService");
+            SemInputDeviceManager semInputDeviceManager =
+                    (SemInputDeviceManager)
+                            this.mContext.getSystemService("SemInputDeviceManagerService");
             Log.d("InputManager", "updateWacomMode: " + this.mLastWacomMode + " -> " + i);
             semInputDeviceManager.setSpenCoverType(i);
             this.mLastWacomMode = i;
@@ -5742,7 +7066,12 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         VibratorToken vibratorToken = getVibratorToken(i, iBinder);
         synchronized (vibratorToken) {
             vibratorToken.mVibrating = true;
-            this.mNative.vibrate(i, vibrationInfo.mPattern, vibrationInfo.mAmplitudes, vibrationInfo.mRepeat, vibratorToken.mTokenValue);
+            this.mNative.vibrate(
+                    i,
+                    vibrationInfo.mPattern,
+                    vibrationInfo.mAmplitudes,
+                    vibrationInfo.mRepeat,
+                    vibratorToken.mTokenValue);
         }
     }
 
@@ -5750,21 +7079,31 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
         VibratorToken vibratorToken = getVibratorToken(i, iBinder);
         synchronized (vibratorToken) {
             try {
-                if (!(combinedVibration instanceof CombinedVibration.Mono) && !(combinedVibration instanceof CombinedVibration.Stereo)) {
+                if (!(combinedVibration instanceof CombinedVibration.Mono)
+                        && !(combinedVibration instanceof CombinedVibration.Stereo)) {
                     Slog.e("InputManager", "Only Mono and Stereo effects are supported");
                     return;
                 }
                 vibratorToken.mVibrating = true;
                 if (combinedVibration instanceof CombinedVibration.Mono) {
-                    VibrationInfo vibrationInfo = new VibrationInfo(((CombinedVibration.Mono) combinedVibration).getEffect());
-                    this.mNative.vibrate(i, vibrationInfo.mPattern, vibrationInfo.mAmplitudes, vibrationInfo.mRepeat, vibratorToken.mTokenValue);
+                    VibrationInfo vibrationInfo =
+                            new VibrationInfo(
+                                    ((CombinedVibration.Mono) combinedVibration).getEffect());
+                    this.mNative.vibrate(
+                            i,
+                            vibrationInfo.mPattern,
+                            vibrationInfo.mAmplitudes,
+                            vibrationInfo.mRepeat,
+                            vibratorToken.mTokenValue);
                 } else if (combinedVibration instanceof CombinedVibration.Stereo) {
-                    SparseArray effects = ((CombinedVibration.Stereo) combinedVibration).getEffects();
+                    SparseArray effects =
+                            ((CombinedVibration.Stereo) combinedVibration).getEffects();
                     SparseArray sparseArray = new SparseArray(effects.size());
                     long[] jArr = new long[0];
                     int i2 = Integer.MIN_VALUE;
                     for (int i3 = 0; i3 < effects.size(); i3++) {
-                        VibrationInfo vibrationInfo2 = new VibrationInfo((VibrationEffect) effects.valueAt(i3));
+                        VibrationInfo vibrationInfo2 =
+                                new VibrationInfo((VibrationEffect) effects.valueAt(i3));
                         if (jArr.length == 0) {
                             jArr = vibrationInfo2.mPattern;
                         }
@@ -5773,7 +7112,8 @@ public final class InputManagerService extends IInputManager.Stub implements Wat
                         }
                         sparseArray.put(effects.keyAt(i3), vibrationInfo2.mAmplitudes);
                     }
-                    this.mNative.vibrateCombined(i, jArr, sparseArray, i2, vibratorToken.mTokenValue);
+                    this.mNative.vibrateCombined(
+                            i, jArr, sparseArray, i2, vibratorToken.mTokenValue);
                 }
             } catch (Throwable th) {
                 throw th;

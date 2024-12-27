@@ -8,38 +8,39 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISoundTriggerCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.media.soundtrigger_middleware.ISoundTriggerCallback";
+    public static final String DESCRIPTOR =
+            "android.media.soundtrigger_middleware.ISoundTriggerCallback";
 
     void onModelUnloaded(int i) throws RemoteException;
 
     void onModuleDied() throws RemoteException;
 
-    void onPhraseRecognition(int i, PhraseRecognitionEventSys phraseRecognitionEventSys, int i2) throws RemoteException;
+    void onPhraseRecognition(int i, PhraseRecognitionEventSys phraseRecognitionEventSys, int i2)
+            throws RemoteException;
 
-    void onRecognition(int i, RecognitionEventSys recognitionEventSys, int i2) throws RemoteException;
+    void onRecognition(int i, RecognitionEventSys recognitionEventSys, int i2)
+            throws RemoteException;
 
     void onResourcesAvailable() throws RemoteException;
 
     public static class Default implements ISoundTriggerCallback {
         @Override // android.media.soundtrigger_middleware.ISoundTriggerCallback
-        public void onRecognition(int modelHandle, RecognitionEventSys event, int captureSession) throws RemoteException {
-        }
+        public void onRecognition(int modelHandle, RecognitionEventSys event, int captureSession)
+                throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerCallback
-        public void onPhraseRecognition(int modelHandle, PhraseRecognitionEventSys event, int captureSession) throws RemoteException {
-        }
+        public void onPhraseRecognition(
+                int modelHandle, PhraseRecognitionEventSys event, int captureSession)
+                throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerCallback
-        public void onResourcesAvailable() throws RemoteException {
-        }
+        public void onResourcesAvailable() throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerCallback
-        public void onModelUnloaded(int modelHandle) throws RemoteException {
-        }
+        public void onModelUnloaded(int modelHandle) throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerCallback
-        public void onModuleDied() throws RemoteException {
-        }
+        public void onModuleDied() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +48,7 @@ public interface ISoundTriggerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISoundTriggerCallback {
+    public abstract static class Stub extends Binder implements ISoundTriggerCallback {
         static final int TRANSACTION_onModelUnloaded = 4;
         static final int TRANSACTION_onModuleDied = 5;
         static final int TRANSACTION_onPhraseRecognition = 2;
@@ -75,7 +76,8 @@ public interface ISoundTriggerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISoundTriggerCallback.DESCRIPTOR);
             }
@@ -86,14 +88,17 @@ public interface ISoundTriggerCallback extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    RecognitionEventSys _arg1 = (RecognitionEventSys) data.readTypedObject(RecognitionEventSys.CREATOR);
+                    RecognitionEventSys _arg1 =
+                            (RecognitionEventSys) data.readTypedObject(RecognitionEventSys.CREATOR);
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     onRecognition(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    PhraseRecognitionEventSys _arg12 = (PhraseRecognitionEventSys) data.readTypedObject(PhraseRecognitionEventSys.CREATOR);
+                    PhraseRecognitionEventSys _arg12 =
+                            (PhraseRecognitionEventSys)
+                                    data.readTypedObject(PhraseRecognitionEventSys.CREATOR);
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
                     onPhraseRecognition(_arg02, _arg12, _arg22);
@@ -131,7 +136,9 @@ public interface ISoundTriggerCallback extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerCallback
-            public void onRecognition(int modelHandle, RecognitionEventSys event, int captureSession) throws RemoteException {
+            public void onRecognition(
+                    int modelHandle, RecognitionEventSys event, int captureSession)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundTriggerCallback.DESCRIPTOR);
@@ -145,7 +152,9 @@ public interface ISoundTriggerCallback extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.ISoundTriggerCallback
-            public void onPhraseRecognition(int modelHandle, PhraseRecognitionEventSys event, int captureSession) throws RemoteException {
+            public void onPhraseRecognition(
+                    int modelHandle, PhraseRecognitionEventSys event, int captureSession)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundTriggerCallback.DESCRIPTOR);

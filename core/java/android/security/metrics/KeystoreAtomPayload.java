@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class KeystoreAtomPayload implements Parcelable {
-    public static final Parcelable.Creator<KeystoreAtomPayload> CREATOR = new Parcelable.Creator<KeystoreAtomPayload>() { // from class: android.security.metrics.KeystoreAtomPayload.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeystoreAtomPayload createFromParcel(Parcel _aidl_source) {
-            return new KeystoreAtomPayload(_aidl_source);
-        }
+    public static final Parcelable.Creator<KeystoreAtomPayload> CREATOR =
+            new Parcelable.Creator<
+                    KeystoreAtomPayload>() { // from class:
+                                             // android.security.metrics.KeystoreAtomPayload.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeystoreAtomPayload createFromParcel(Parcel _aidl_source) {
+                    return new KeystoreAtomPayload(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeystoreAtomPayload[] newArray(int _aidl_size) {
-            return new KeystoreAtomPayload[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeystoreAtomPayload[] newArray(int _aidl_size) {
+                    return new KeystoreAtomPayload[_aidl_size];
+                }
+            };
     public static final int crashStats = 8;
     public static final int keyCreationWithAuthInfo = 2;
     public static final int keyCreationWithGeneralInfo = 1;
@@ -73,7 +76,8 @@ public final class KeystoreAtomPayload implements Parcelable {
         _set(0, _value);
     }
 
-    public static KeystoreAtomPayload keyCreationWithGeneralInfo(KeyCreationWithGeneralInfo _value) {
+    public static KeystoreAtomPayload keyCreationWithGeneralInfo(
+            KeyCreationWithGeneralInfo _value) {
         return new KeystoreAtomPayload(1, _value);
     }
 
@@ -99,7 +103,8 @@ public final class KeystoreAtomPayload implements Parcelable {
         _set(2, _value);
     }
 
-    public static KeystoreAtomPayload keyCreationWithPurposeAndModesInfo(KeyCreationWithPurposeAndModesInfo _value) {
+    public static KeystoreAtomPayload keyCreationWithPurposeAndModesInfo(
+            KeyCreationWithPurposeAndModesInfo _value) {
         return new KeystoreAtomPayload(3, _value);
     }
 
@@ -125,7 +130,8 @@ public final class KeystoreAtomPayload implements Parcelable {
         _set(4, _value);
     }
 
-    public static KeystoreAtomPayload keyOperationWithPurposeAndModesInfo(KeyOperationWithPurposeAndModesInfo _value) {
+    public static KeystoreAtomPayload keyOperationWithPurposeAndModesInfo(
+            KeyOperationWithPurposeAndModesInfo _value) {
         return new KeystoreAtomPayload(5, _value);
     }
 
@@ -138,7 +144,8 @@ public final class KeystoreAtomPayload implements Parcelable {
         _set(5, _value);
     }
 
-    public static KeystoreAtomPayload keyOperationWithGeneralInfo(KeyOperationWithGeneralInfo _value) {
+    public static KeystoreAtomPayload keyOperationWithGeneralInfo(
+            KeyOperationWithGeneralInfo _value) {
         return new KeystoreAtomPayload(6, _value);
     }
 
@@ -215,39 +222,56 @@ public final class KeystoreAtomPayload implements Parcelable {
         int _aidl_tag = _aidl_parcel.readInt();
         switch (_aidl_tag) {
             case 0:
-                StorageStats _aidl_value = (StorageStats) _aidl_parcel.readTypedObject(StorageStats.CREATOR);
+                StorageStats _aidl_value =
+                        (StorageStats) _aidl_parcel.readTypedObject(StorageStats.CREATOR);
                 _set(_aidl_tag, _aidl_value);
                 return;
             case 1:
-                KeyCreationWithGeneralInfo _aidl_value2 = (KeyCreationWithGeneralInfo) _aidl_parcel.readTypedObject(KeyCreationWithGeneralInfo.CREATOR);
+                KeyCreationWithGeneralInfo _aidl_value2 =
+                        (KeyCreationWithGeneralInfo)
+                                _aidl_parcel.readTypedObject(KeyCreationWithGeneralInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
-                KeyCreationWithAuthInfo _aidl_value3 = (KeyCreationWithAuthInfo) _aidl_parcel.readTypedObject(KeyCreationWithAuthInfo.CREATOR);
+                KeyCreationWithAuthInfo _aidl_value3 =
+                        (KeyCreationWithAuthInfo)
+                                _aidl_parcel.readTypedObject(KeyCreationWithAuthInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value3);
                 return;
             case 3:
-                KeyCreationWithPurposeAndModesInfo _aidl_value4 = (KeyCreationWithPurposeAndModesInfo) _aidl_parcel.readTypedObject(KeyCreationWithPurposeAndModesInfo.CREATOR);
+                KeyCreationWithPurposeAndModesInfo _aidl_value4 =
+                        (KeyCreationWithPurposeAndModesInfo)
+                                _aidl_parcel.readTypedObject(
+                                        KeyCreationWithPurposeAndModesInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value4);
                 return;
             case 4:
-                Keystore2AtomWithOverflow _aidl_value5 = (Keystore2AtomWithOverflow) _aidl_parcel.readTypedObject(Keystore2AtomWithOverflow.CREATOR);
+                Keystore2AtomWithOverflow _aidl_value5 =
+                        (Keystore2AtomWithOverflow)
+                                _aidl_parcel.readTypedObject(Keystore2AtomWithOverflow.CREATOR);
                 _set(_aidl_tag, _aidl_value5);
                 return;
             case 5:
-                KeyOperationWithPurposeAndModesInfo _aidl_value6 = (KeyOperationWithPurposeAndModesInfo) _aidl_parcel.readTypedObject(KeyOperationWithPurposeAndModesInfo.CREATOR);
+                KeyOperationWithPurposeAndModesInfo _aidl_value6 =
+                        (KeyOperationWithPurposeAndModesInfo)
+                                _aidl_parcel.readTypedObject(
+                                        KeyOperationWithPurposeAndModesInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value6);
                 return;
             case 6:
-                KeyOperationWithGeneralInfo _aidl_value7 = (KeyOperationWithGeneralInfo) _aidl_parcel.readTypedObject(KeyOperationWithGeneralInfo.CREATOR);
+                KeyOperationWithGeneralInfo _aidl_value7 =
+                        (KeyOperationWithGeneralInfo)
+                                _aidl_parcel.readTypedObject(KeyOperationWithGeneralInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value7);
                 return;
             case 7:
-                RkpErrorStats _aidl_value8 = (RkpErrorStats) _aidl_parcel.readTypedObject(RkpErrorStats.CREATOR);
+                RkpErrorStats _aidl_value8 =
+                        (RkpErrorStats) _aidl_parcel.readTypedObject(RkpErrorStats.CREATOR);
                 _set(_aidl_tag, _aidl_value8);
                 return;
             case 8:
-                CrashStats _aidl_value9 = (CrashStats) _aidl_parcel.readTypedObject(CrashStats.CREATOR);
+                CrashStats _aidl_value9 =
+                        (CrashStats) _aidl_parcel.readTypedObject(CrashStats.CREATOR);
                 _set(_aidl_tag, _aidl_value9);
                 return;
             default:
@@ -299,7 +323,12 @@ public final class KeystoreAtomPayload implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

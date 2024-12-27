@@ -17,9 +17,16 @@ public class SemHwrsManager {
         this.mUserId = userId;
     }
 
-    public boolean addShare(String aResName, String aResPath, String aUserName, String aGroupName, String aMaxConnections) throws RemoteException {
+    public boolean addShare(
+            String aResName,
+            String aResPath,
+            String aUserName,
+            String aGroupName,
+            String aMaxConnections)
+            throws RemoteException {
         try {
-            return this.mService.addShare(aResName, aResPath, aUserName, aGroupName, aMaxConnections);
+            return this.mService.addShare(
+                    aResName, aResPath, aUserName, aGroupName, aMaxConnections);
         } catch (RemoteException e) {
             Log.e(TAG, "addShare failed- " + e);
             return false;

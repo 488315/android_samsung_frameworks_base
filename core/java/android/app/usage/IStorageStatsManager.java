@@ -21,15 +21,18 @@ public interface IStorageStatsManager extends IInterface {
 
     boolean isReservedSupported(String str, String str2) throws RemoteException;
 
-    ParceledListSlice queryCratesForPackage(String str, String str2, int i, String str3) throws RemoteException;
+    ParceledListSlice queryCratesForPackage(String str, String str2, int i, String str3)
+            throws RemoteException;
 
     ParceledListSlice queryCratesForUid(String str, int i, String str2) throws RemoteException;
 
     ParceledListSlice queryCratesForUser(String str, int i, String str2) throws RemoteException;
 
-    ExternalStorageStats queryExternalStatsForUser(String str, int i, String str2) throws RemoteException;
+    ExternalStorageStats queryExternalStatsForUser(String str, int i, String str2)
+            throws RemoteException;
 
-    StorageStats queryStatsForPackage(String str, String str2, int i, String str3) throws RemoteException;
+    StorageStats queryStatsForPackage(String str, String str2, int i, String str3)
+            throws RemoteException;
 
     StorageStats queryStatsForUid(String str, int i, String str2) throws RemoteException;
 
@@ -37,12 +40,14 @@ public interface IStorageStatsManager extends IInterface {
 
     public static class Default implements IStorageStatsManager {
         @Override // android.app.usage.IStorageStatsManager
-        public boolean isQuotaSupported(String volumeUuid, String callingPackage) throws RemoteException {
+        public boolean isQuotaSupported(String volumeUuid, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.usage.IStorageStatsManager
-        public boolean isReservedSupported(String volumeUuid, String callingPackage) throws RemoteException {
+        public boolean isReservedSupported(String volumeUuid, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
@@ -62,42 +67,52 @@ public interface IStorageStatsManager extends IInterface {
         }
 
         @Override // android.app.usage.IStorageStatsManager
-        public long getCacheQuotaBytes(String volumeUuid, int uid, String callingPackage) throws RemoteException {
+        public long getCacheQuotaBytes(String volumeUuid, int uid, String callingPackage)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.app.usage.IStorageStatsManager
-        public StorageStats queryStatsForPackage(String volumeUuid, String packageName, int userId, String callingPackage) throws RemoteException {
+        public StorageStats queryStatsForPackage(
+                String volumeUuid, String packageName, int userId, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IStorageStatsManager
-        public StorageStats queryStatsForUid(String volumeUuid, int uid, String callingPackage) throws RemoteException {
+        public StorageStats queryStatsForUid(String volumeUuid, int uid, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IStorageStatsManager
-        public StorageStats queryStatsForUser(String volumeUuid, int userId, String callingPackage) throws RemoteException {
+        public StorageStats queryStatsForUser(String volumeUuid, int userId, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IStorageStatsManager
-        public ExternalStorageStats queryExternalStatsForUser(String volumeUuid, int userId, String callingPackage) throws RemoteException {
+        public ExternalStorageStats queryExternalStatsForUser(
+                String volumeUuid, int userId, String callingPackage) throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IStorageStatsManager
-        public ParceledListSlice queryCratesForPackage(String volumeUuid, String packageName, int userId, String callingPackage) throws RemoteException {
+        public ParceledListSlice queryCratesForPackage(
+                String volumeUuid, String packageName, int userId, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IStorageStatsManager
-        public ParceledListSlice queryCratesForUid(String volumeUuid, int uid, String callingPackage) throws RemoteException {
+        public ParceledListSlice queryCratesForUid(
+                String volumeUuid, int uid, String callingPackage) throws RemoteException {
             return null;
         }
 
         @Override // android.app.usage.IStorageStatsManager
-        public ParceledListSlice queryCratesForUser(String volumeUuid, int userId, String callingPackage) throws RemoteException {
+        public ParceledListSlice queryCratesForUser(
+                String volumeUuid, int userId, String callingPackage) throws RemoteException {
             return null;
         }
 
@@ -107,7 +122,7 @@ public interface IStorageStatsManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStorageStatsManager {
+    public abstract static class Stub extends Binder implements IStorageStatsManager {
         public static final String DESCRIPTOR = "android.app.usage.IStorageStatsManager";
         static final int TRANSACTION_getCacheBytes = 5;
         static final int TRANSACTION_getCacheQuotaBytes = 6;
@@ -182,7 +197,8 @@ public interface IStorageStatsManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -273,7 +289,8 @@ public interface IStorageStatsManager extends IInterface {
                     int _arg110 = data.readInt();
                     String _arg25 = data.readString();
                     data.enforceNoDataAvail();
-                    ExternalStorageStats _result10 = queryExternalStatsForUser(_arg010, _arg110, _arg25);
+                    ExternalStorageStats _result10 =
+                            queryExternalStatsForUser(_arg010, _arg110, _arg25);
                     reply.writeNoException();
                     reply.writeTypedObject(_result10, 1);
                     return true;
@@ -283,7 +300,8 @@ public interface IStorageStatsManager extends IInterface {
                     int _arg26 = data.readInt();
                     String _arg32 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result11 = queryCratesForPackage(_arg011, _arg111, _arg26, _arg32);
+                    ParceledListSlice _result11 =
+                            queryCratesForPackage(_arg011, _arg111, _arg26, _arg32);
                     reply.writeNoException();
                     reply.writeTypedObject(_result11, 1);
                     return true;
@@ -327,7 +345,8 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public boolean isQuotaSupported(String volumeUuid, String callingPackage) throws RemoteException {
+            public boolean isQuotaSupported(String volumeUuid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -345,7 +364,8 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public boolean isReservedSupported(String volumeUuid, String callingPackage) throws RemoteException {
+            public boolean isReservedSupported(String volumeUuid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -363,7 +383,8 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public long getTotalBytes(String volumeUuid, String callingPackage) throws RemoteException {
+            public long getTotalBytes(String volumeUuid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -381,7 +402,8 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public long getFreeBytes(String volumeUuid, String callingPackage) throws RemoteException {
+            public long getFreeBytes(String volumeUuid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -399,7 +421,8 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public long getCacheBytes(String volumeUuid, String callingPackage) throws RemoteException {
+            public long getCacheBytes(String volumeUuid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -417,7 +440,8 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public long getCacheQuotaBytes(String volumeUuid, int uid, String callingPackage) throws RemoteException {
+            public long getCacheQuotaBytes(String volumeUuid, int uid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -436,7 +460,9 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public StorageStats queryStatsForPackage(String volumeUuid, String packageName, int userId, String callingPackage) throws RemoteException {
+            public StorageStats queryStatsForPackage(
+                    String volumeUuid, String packageName, int userId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -447,7 +473,8 @@ public interface IStorageStatsManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    StorageStats _result = (StorageStats) _reply.readTypedObject(StorageStats.CREATOR);
+                    StorageStats _result =
+                            (StorageStats) _reply.readTypedObject(StorageStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -456,7 +483,8 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public StorageStats queryStatsForUid(String volumeUuid, int uid, String callingPackage) throws RemoteException {
+            public StorageStats queryStatsForUid(String volumeUuid, int uid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -466,7 +494,8 @@ public interface IStorageStatsManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    StorageStats _result = (StorageStats) _reply.readTypedObject(StorageStats.CREATOR);
+                    StorageStats _result =
+                            (StorageStats) _reply.readTypedObject(StorageStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -475,7 +504,8 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public StorageStats queryStatsForUser(String volumeUuid, int userId, String callingPackage) throws RemoteException {
+            public StorageStats queryStatsForUser(
+                    String volumeUuid, int userId, String callingPackage) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -485,7 +515,8 @@ public interface IStorageStatsManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    StorageStats _result = (StorageStats) _reply.readTypedObject(StorageStats.CREATOR);
+                    StorageStats _result =
+                            (StorageStats) _reply.readTypedObject(StorageStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -494,7 +525,8 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public ExternalStorageStats queryExternalStatsForUser(String volumeUuid, int userId, String callingPackage) throws RemoteException {
+            public ExternalStorageStats queryExternalStatsForUser(
+                    String volumeUuid, int userId, String callingPackage) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -504,7 +536,9 @@ public interface IStorageStatsManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    ExternalStorageStats _result = (ExternalStorageStats) _reply.readTypedObject(ExternalStorageStats.CREATOR);
+                    ExternalStorageStats _result =
+                            (ExternalStorageStats)
+                                    _reply.readTypedObject(ExternalStorageStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -513,7 +547,9 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public ParceledListSlice queryCratesForPackage(String volumeUuid, String packageName, int userId, String callingPackage) throws RemoteException {
+            public ParceledListSlice queryCratesForPackage(
+                    String volumeUuid, String packageName, int userId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -524,7 +560,8 @@ public interface IStorageStatsManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -533,7 +570,8 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public ParceledListSlice queryCratesForUid(String volumeUuid, int uid, String callingPackage) throws RemoteException {
+            public ParceledListSlice queryCratesForUid(
+                    String volumeUuid, int uid, String callingPackage) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -543,7 +581,8 @@ public interface IStorageStatsManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(12, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -552,7 +591,8 @@ public interface IStorageStatsManager extends IInterface {
             }
 
             @Override // android.app.usage.IStorageStatsManager
-            public ParceledListSlice queryCratesForUser(String volumeUuid, int userId, String callingPackage) throws RemoteException {
+            public ParceledListSlice queryCratesForUser(
+                    String volumeUuid, int userId, String callingPackage) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -562,7 +602,8 @@ public interface IStorageStatsManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(13, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

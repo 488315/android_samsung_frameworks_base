@@ -34,6 +34,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
@@ -44,6 +45,7 @@ import com.android.server.accessibility.ProxyManager$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.app.SemMultiWindowManager;
 import com.samsung.android.audio.AudioManagerHelper;
 import com.samsung.android.desktopmode.SemDesktopModeManager;
@@ -54,6 +56,7 @@ import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.android.media.SemMediaResourceHelper;
 import com.samsung.android.view.SemWindowManager;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -184,34 +187,49 @@ public final class MdnieScenarioControlService {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.displaysolution.MdnieScenarioControlService$1, reason: invalid class name */
     public final class AnonymousClass1 extends IProcessObserver.Stub {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         public final void onForegroundActivitiesChanged(int i, int i2, boolean z) {
             String str;
-            MdnieScenarioControlService mdnieScenarioControlService = MdnieScenarioControlService.this;
+            MdnieScenarioControlService mdnieScenarioControlService =
+                    MdnieScenarioControlService.this;
             if (mdnieScenarioControlService.mHandler == null) {
                 return;
             }
-            mdnieScenarioControlService.mActivityManager = (ActivityManager) mdnieScenarioControlService.mContext.getSystemService("activity");
+            mdnieScenarioControlService.mActivityManager =
+                    (ActivityManager)
+                            mdnieScenarioControlService.mContext.getSystemService("activity");
             if (i != -1) {
                 long uptimeMillis = SystemClock.uptimeMillis();
                 MdnieScenarioControlService.this.mHandler.removeMessages(1);
-                MdnieScenarioControlService.this.mHandler.sendEmptyMessageAtTime(1, uptimeMillis + r5.FOREGROUND_RESCAN_DEBOUNCE_MILLIS);
+                MdnieScenarioControlService.this.mHandler.sendEmptyMessageAtTime(
+                        1, uptimeMillis + r5.FOREGROUND_RESCAN_DEBOUNCE_MILLIS);
                 return;
             }
             ActivityManager activityManager = MdnieScenarioControlService.this.mActivityManager;
             if (activityManager == null || activityManager.getRunningTasks(1) == null) {
                 str = null;
             } else {
-                List<ActivityManager.RunningTaskInfo> runningTasks = MdnieScenarioControlService.this.mActivityManager.getRunningTasks(1);
+                List<ActivityManager.RunningTaskInfo> runningTasks =
+                        MdnieScenarioControlService.this.mActivityManager.getRunningTasks(1);
                 if (runningTasks.size() <= 0) {
                     return;
                 }
-                String packageName = runningTasks.get(0).topActivity.getPackageName() != null ? runningTasks.get(0).topActivity.getPackageName() : null;
-                r1 = runningTasks.get(0).topActivity.getClassName() != null ? runningTasks.get(0).topActivity.getClassName() : null;
+                String packageName =
+                        runningTasks.get(0).topActivity.getPackageName() != null
+                                ? runningTasks.get(0).topActivity.getPackageName()
+                                : null;
+                r1 =
+                        runningTasks.get(0).topActivity.getClassName() != null
+                                ? runningTasks.get(0).topActivity.getClassName()
+                                : null;
                 if (packageName != null && !packageName.contains("com.att.iqi")) {
-                    GmsAlarmManager$$ExternalSyntheticOutline0.m(" packageName : ", packageName, "    className : ", r1, "MdnieScenarioControlService");
+                    GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                            " packageName : ",
+                            packageName,
+                            "    className : ",
+                            r1,
+                            "MdnieScenarioControlService");
                 }
                 MdnieScenarioControlService.this.FrontPackageName = packageName;
                 str = r1;
@@ -228,14 +246,11 @@ public final class MdnieScenarioControlService {
             MdnieScenarioControlService.this.mHandler.sendMessage(obtainMessage);
         }
 
-        public final void onForegroundServicesChanged(int i, int i2, int i3) {
-        }
+        public final void onForegroundServicesChanged(int i, int i2, int i3) {}
 
-        public final void onProcessDied(int i, int i2) {
-        }
+        public final void onProcessDied(int i, int i2) {}
 
-        public final void onProcessStarted(int i, int i2, int i3, String str, String str2) {
-        }
+        public final void onProcessStarted(int i, int i2, int i3, String str, String str2) {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -261,7 +276,8 @@ public final class MdnieScenarioControlService {
             int i;
             int i2 = message.what;
             int i3 = 0;
-            MdnieScenarioControlService mdnieScenarioControlService = MdnieScenarioControlService.this;
+            MdnieScenarioControlService mdnieScenarioControlService =
+                    MdnieScenarioControlService.this;
             switch (i2) {
                 case 0:
                     String str2 = (String) message.obj;
@@ -383,7 +399,8 @@ public final class MdnieScenarioControlService {
                     }
                     int i14 = 0;
                     while (true) {
-                        String[] strArr11 = mdnieScenarioControlService.EYE_COMFORT_BLACKLIST_APP_LIST;
+                        String[] strArr11 =
+                                mdnieScenarioControlService.EYE_COMFORT_BLACKLIST_APP_LIST;
                         int length = strArr11.length;
                         z10 = mdnieScenarioControlService.mUseEyeComfortSolutionServiceConfig;
                         if (i14 < length) {
@@ -391,7 +408,8 @@ public final class MdnieScenarioControlService {
                                 i14++;
                             } else if (z10) {
                                 mdnieScenarioControlService.mEyeComfortScaleAppEnabled = true;
-                                SemDisplaySolutionManager semDisplaySolutionManager2 = mdnieScenarioControlService.mSemDisplaySolutionManager;
+                                SemDisplaySolutionManager semDisplaySolutionManager2 =
+                                        mdnieScenarioControlService.mSemDisplaySolutionManager;
                                 if (semDisplaySolutionManager2 != null) {
                                     semDisplaySolutionManager2.setEyeComfortWeightingFactor(0.5f);
                                 }
@@ -406,7 +424,8 @@ public final class MdnieScenarioControlService {
                                 i15++;
                             } else if (z10) {
                                 mdnieScenarioControlService.mEyeComfortScaleAppEnabled = true;
-                                SemDisplaySolutionManager semDisplaySolutionManager3 = mdnieScenarioControlService.mSemDisplaySolutionManager;
+                                SemDisplaySolutionManager semDisplaySolutionManager3 =
+                                        mdnieScenarioControlService.mSemDisplaySolutionManager;
                                 if (semDisplaySolutionManager3 != null) {
                                     semDisplaySolutionManager3.setEyeComfortWeightingFactor(1.05f);
                                 }
@@ -421,7 +440,8 @@ public final class MdnieScenarioControlService {
                                 i16++;
                             } else if (z10) {
                                 mdnieScenarioControlService.mEyeComfortScaleAppEnabled = true;
-                                SemDisplaySolutionManager semDisplaySolutionManager4 = mdnieScenarioControlService.mSemDisplaySolutionManager;
+                                SemDisplaySolutionManager semDisplaySolutionManager4 =
+                                        mdnieScenarioControlService.mSemDisplaySolutionManager;
                                 if (semDisplaySolutionManager4 != null) {
                                     semDisplaySolutionManager4.setEyeComfortWeightingFactor(1.1f);
                                 }
@@ -436,14 +456,19 @@ public final class MdnieScenarioControlService {
                                 i17++;
                             } else if (z10) {
                                 mdnieScenarioControlService.mEyeComfortScaleAppEnabled = true;
-                                SemDisplaySolutionManager semDisplaySolutionManager5 = mdnieScenarioControlService.mSemDisplaySolutionManager;
+                                SemDisplaySolutionManager semDisplaySolutionManager5 =
+                                        mdnieScenarioControlService.mSemDisplaySolutionManager;
                                 if (semDisplaySolutionManager5 != null) {
                                     semDisplaySolutionManager5.setEyeComfortWeightingFactor(1.15f);
                                 }
                             }
                         }
                     }
-                    if (!mdnieScenarioControlService.mEyeComfortScaleAppEnabled && z10 && (semDisplaySolutionManager = mdnieScenarioControlService.mSemDisplaySolutionManager) != null) {
+                    if (!mdnieScenarioControlService.mEyeComfortScaleAppEnabled
+                            && z10
+                            && (semDisplaySolutionManager =
+                                            mdnieScenarioControlService.mSemDisplaySolutionManager)
+                                    != null) {
                         semDisplaySolutionManager.setEyeComfortWeightingFactor(1.0f);
                     }
                     boolean z11 = mdnieScenarioControlService.mMultiWindowOn;
@@ -457,45 +482,73 @@ public final class MdnieScenarioControlService {
                                             if (z11 || !z8) {
                                                 if (z11 || !z9) {
                                                     if (z11 || !z) {
-                                                        long uptimeMillis = SystemClock.uptimeMillis();
-                                                        mdnieScenarioControlService.scenario_enable_reset();
-                                                        Slog.v("MdnieScenarioControlService", "setUIMode from UI function(3)");
+                                                        long uptimeMillis =
+                                                                SystemClock.uptimeMillis();
+                                                        mdnieScenarioControlService
+                                                                .scenario_enable_reset();
+                                                        Slog.v(
+                                                                "MdnieScenarioControlService",
+                                                                "setUIMode from UI function(3)");
                                                         mSCSControlHandler.removeMessages(2);
-                                                        mSCSControlHandler.sendEmptyMessageAtTime(2, uptimeMillis + mdnieScenarioControlService.ACTION_SET_UI_MODE_DEBOUNCE_MILLIS);
+                                                        mSCSControlHandler.sendEmptyMessageAtTime(
+                                                                2,
+                                                                uptimeMillis
+                                                                        + mdnieScenarioControlService
+                                                                                .ACTION_SET_UI_MODE_DEBOUNCE_MILLIS);
                                                         break;
-                                                    } else if (!mdnieScenarioControlService.mUIScenarioEnabled) {
-                                                        mdnieScenarioControlService.scenario_enable_reset();
-                                                        mdnieScenarioControlService.mUIScenarioEnabled = true;
-                                                        Slog.v("MdnieScenarioControlService", "setUIMode from UI function(2)");
+                                                    } else if (!mdnieScenarioControlService
+                                                            .mUIScenarioEnabled) {
+                                                        mdnieScenarioControlService
+                                                                .scenario_enable_reset();
+                                                        mdnieScenarioControlService
+                                                                        .mUIScenarioEnabled =
+                                                                true;
+                                                        Slog.v(
+                                                                "MdnieScenarioControlService",
+                                                                "setUIMode from UI function(2)");
                                                         mSCSControlHandler.removeMessages(2);
                                                         mSCSControlHandler.sendEmptyMessage(2);
                                                         break;
                                                     }
-                                                } else if (!mdnieScenarioControlService.mEbookScenarioEnabled) {
-                                                    mdnieScenarioControlService.scenario_enable_reset();
-                                                    mdnieScenarioControlService.mEbookScenarioEnabled = true;
+                                                } else if (!mdnieScenarioControlService
+                                                        .mEbookScenarioEnabled) {
+                                                    mdnieScenarioControlService
+                                                            .scenario_enable_reset();
+                                                    mdnieScenarioControlService
+                                                                    .mEbookScenarioEnabled =
+                                                            true;
                                                     mSCSControlHandler.removeMessages(10);
                                                     mSCSControlHandler.sendEmptyMessage(10);
                                                     break;
                                                 }
-                                            } else if (!mdnieScenarioControlService.mEmailScenarioEnabled) {
+                                            } else if (!mdnieScenarioControlService
+                                                    .mEmailScenarioEnabled) {
                                                 mdnieScenarioControlService.scenario_enable_reset();
-                                                mdnieScenarioControlService.mEmailScenarioEnabled = true;
+                                                mdnieScenarioControlService.mEmailScenarioEnabled =
+                                                        true;
                                                 mSCSControlHandler.removeMessages(9);
                                                 mSCSControlHandler.sendEmptyMessage(9);
                                                 break;
                                             }
-                                        } else if (!mdnieScenarioControlService.mVideoScenarioEnabled) {
+                                        } else if (!mdnieScenarioControlService
+                                                .mVideoScenarioEnabled) {
                                             mdnieScenarioControlService.scenario_enable_reset();
-                                            mdnieScenarioControlService.mVideoScenarioEnabled = true;
+                                            mdnieScenarioControlService.mVideoScenarioEnabled =
+                                                    true;
                                             long uptimeMillis2 = SystemClock.uptimeMillis();
                                             mSCSControlHandler.removeMessages(6);
-                                            mSCSControlHandler.sendEmptyMessageAtTime(6, uptimeMillis2 + mdnieScenarioControlService.ACTION_VIDEO_APP_STATE_IN_DEBOUNCE_MILLIS);
+                                            mSCSControlHandler.sendEmptyMessageAtTime(
+                                                    6,
+                                                    uptimeMillis2
+                                                            + mdnieScenarioControlService
+                                                                    .ACTION_VIDEO_APP_STATE_IN_DEBOUNCE_MILLIS);
                                             break;
                                         }
-                                    } else if (!mdnieScenarioControlService.mSVideoOptionScenarioEnabled) {
+                                    } else if (!mdnieScenarioControlService
+                                            .mSVideoOptionScenarioEnabled) {
                                         mdnieScenarioControlService.scenario_enable_reset();
-                                        mdnieScenarioControlService.mSVideoOptionScenarioEnabled = true;
+                                        mdnieScenarioControlService.mSVideoOptionScenarioEnabled =
+                                                true;
                                         mSCSControlHandler.removeMessages(14);
                                         mSCSControlHandler.sendEmptyMessage(14);
                                         break;
@@ -504,14 +557,26 @@ public final class MdnieScenarioControlService {
                                     mdnieScenarioControlService.scenario_enable_reset();
                                     mdnieScenarioControlService.mSVideoScenarioEnabled = true;
                                     long uptimeMillis3 = SystemClock.uptimeMillis();
-                                    AnyMotionDetector$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", new StringBuilder("in video Real Multi Window State : "), mdnieScenarioControlService.mMultiWindowOn);
+                                    AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                                            "MdnieScenarioControlService",
+                                            new StringBuilder(
+                                                    "in video Real Multi Window State : "),
+                                            mdnieScenarioControlService.mMultiWindowOn);
                                     if (mdnieScenarioControlService.mMultiWindowOn) {
                                         mSCSControlHandler.removeMessages(8);
-                                        mSCSControlHandler.sendEmptyMessageAtTime(8, uptimeMillis3 + mdnieScenarioControlService.ACTION_MOVIE_PLAYER_STATE_OUT_DEBOUNCE_MILLIS);
+                                        mSCSControlHandler.sendEmptyMessageAtTime(
+                                                8,
+                                                uptimeMillis3
+                                                        + mdnieScenarioControlService
+                                                                .ACTION_MOVIE_PLAYER_STATE_OUT_DEBOUNCE_MILLIS);
                                         break;
                                     } else {
                                         mSCSControlHandler.removeMessages(7);
-                                        mSCSControlHandler.sendEmptyMessageAtTime(7, uptimeMillis3 + mdnieScenarioControlService.ACTION_MOVIE_PLAYER_STATE_IN_DEBOUNCE_MILLIS);
+                                        mSCSControlHandler.sendEmptyMessageAtTime(
+                                                7,
+                                                uptimeMillis3
+                                                        + mdnieScenarioControlService
+                                                                .ACTION_MOVIE_PLAYER_STATE_IN_DEBOUNCE_MILLIS);
                                         break;
                                     }
                                 }
@@ -520,7 +585,11 @@ public final class MdnieScenarioControlService {
                                 mdnieScenarioControlService.mCameraScenarioEnabled = true;
                                 long uptimeMillis4 = SystemClock.uptimeMillis();
                                 mSCSControlHandler.removeMessages(5);
-                                mSCSControlHandler.sendEmptyMessageAtTime(5, uptimeMillis4 + mdnieScenarioControlService.IS_CAMERA_APP_DEBOUNCE_MILLIS);
+                                mSCSControlHandler.sendEmptyMessageAtTime(
+                                        5,
+                                        uptimeMillis4
+                                                + mdnieScenarioControlService
+                                                        .IS_CAMERA_APP_DEBOUNCE_MILLIS);
                                 break;
                             }
                         } else if (!mdnieScenarioControlService.mGalleryScenarioEnabled) {
@@ -528,7 +597,11 @@ public final class MdnieScenarioControlService {
                             mdnieScenarioControlService.mGalleryScenarioEnabled = true;
                             long uptimeMillis5 = SystemClock.uptimeMillis();
                             mSCSControlHandler.removeMessages(4);
-                            mSCSControlHandler.sendEmptyMessageAtTime(4, uptimeMillis5 + mdnieScenarioControlService.ACTION_DETAIL_VIEW_STATE_IN_DEBOUNCE_MILLIS);
+                            mSCSControlHandler.sendEmptyMessageAtTime(
+                                    4,
+                                    uptimeMillis5
+                                            + mdnieScenarioControlService
+                                                    .ACTION_DETAIL_VIEW_STATE_IN_DEBOUNCE_MILLIS);
                             break;
                         }
                     } else if (!mdnieScenarioControlService.mBrowserScenarioEnabled) {
@@ -541,18 +614,21 @@ public final class MdnieScenarioControlService {
                     break;
                 case 1:
                     try {
-                        mdnieScenarioControlService.mProcessObserver.onForegroundActivitiesChanged(-1, 0, false);
+                        mdnieScenarioControlService.mProcessObserver.onForegroundActivitiesChanged(
+                                -1, 0, false);
                         break;
                     } catch (RemoteException unused) {
                         return;
                     }
                 case 2:
-                    mdnieScenarioControlService.setUIMode(mdnieScenarioControlService.FrontPackageName);
+                    mdnieScenarioControlService.setUIMode(
+                            mdnieScenarioControlService.FrontPackageName);
                     break;
                 case 3:
                     String str3 = mdnieScenarioControlService.FrontPackageName;
                     mdnieScenarioControlService.getScenarioMode();
-                    mdnieScenarioControlService.mAclOffEnabled = mdnieScenarioControlService.getting_autocurrentlimit_state();
+                    mdnieScenarioControlService.mAclOffEnabled =
+                            mdnieScenarioControlService.getting_autocurrentlimit_state();
                     int i18 = 0;
                     while (true) {
                         String[] strArr15 = mdnieScenarioControlService.DAY_OF_USE_SUPPORT_APP_LIST;
@@ -569,13 +645,22 @@ public final class MdnieScenarioControlService {
                     }
                     mdnieScenarioControlService.mdnie_reset();
                     String str4 = mdnieScenarioControlService.SCENARIO_VALUE;
-                    if (str4 != null && !str4.equals("8") && !mdnieScenarioControlService.SCENARIO_VALUE.contains("BROWSER") && !mdnieScenarioControlService.isLockScreenOn) {
-                        ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", new StringBuilder("mAclOffEnabled : "), mdnieScenarioControlService.mAclOffEnabled);
+                    if (str4 != null
+                            && !str4.equals("8")
+                            && !mdnieScenarioControlService.SCENARIO_VALUE.contains("BROWSER")
+                            && !mdnieScenarioControlService.isLockScreenOn) {
+                        ProxyManager$$ExternalSyntheticOutline0.m(
+                                "MdnieScenarioControlService",
+                                new StringBuilder("mAclOffEnabled : "),
+                                mdnieScenarioControlService.mAclOffEnabled);
                         if (mdnieScenarioControlService.mAclOffEnabled) {
                             mdnieScenarioControlService.setAclModeScenario(1, false);
                         }
                         mdnieScenarioControlService.setMdnieScenarioMode(8);
-                        if (mdnieScenarioControlService.DOU_BRIGHTNESS_STANDARD_VALUE == 255 || !mdnieScenarioControlService.mDayOfUseSupportAppState || mdnieScenarioControlService.mAutoBrightnessMode || mdnieScenarioControlService.mHighBrightnessModeEnabled) {
+                        if (mdnieScenarioControlService.DOU_BRIGHTNESS_STANDARD_VALUE == 255
+                                || !mdnieScenarioControlService.mDayOfUseSupportAppState
+                                || mdnieScenarioControlService.mAutoBrightnessMode
+                                || mdnieScenarioControlService.mHighBrightnessModeEnabled) {
                             mdnieScenarioControlService.setBrightnessScaleFactor(0);
                         } else {
                             mdnieScenarioControlService.setBrightnessScaleFactor(6);
@@ -585,7 +670,9 @@ public final class MdnieScenarioControlService {
                         mdnieScenarioControlService.setCameraAppLaunch(false);
                         mdnieScenarioControlService.mGalleryAppState = false;
                         mdnieScenarioControlService.mOverheatControlSupportAppState = false;
-                        Slog.v("MdnieScenarioControlService", "setBrowserMode from Browser function");
+                        Slog.v(
+                                "MdnieScenarioControlService",
+                                "setBrowserMode from Browser function");
                         break;
                     }
                     break;
@@ -595,16 +682,24 @@ public final class MdnieScenarioControlService {
                     int i19 = 0;
                     boolean z12 = false;
                     while (true) {
-                        String[] strArr16 = mdnieScenarioControlService.ACL_CONTROL_GALLERY_APP_LIST;
+                        String[] strArr16 =
+                                mdnieScenarioControlService.ACL_CONTROL_GALLERY_APP_LIST;
                         if (i19 >= strArr16.length) {
                             mdnieScenarioControlService.mdnie_reset();
                             String str6 = mdnieScenarioControlService.SCENARIO_VALUE;
-                            if (str6 != null && !str6.equals("6") && !mdnieScenarioControlService.SCENARIO_VALUE.contains("GALLERY") && !mdnieScenarioControlService.isLockScreenOn) {
+                            if (str6 != null
+                                    && !str6.equals("6")
+                                    && !mdnieScenarioControlService.SCENARIO_VALUE.contains(
+                                            "GALLERY")
+                                    && !mdnieScenarioControlService.isLockScreenOn) {
                                 if (z12) {
                                     mdnieScenarioControlService.setAclModeScenario(0, true);
                                 }
                                 mdnieScenarioControlService.setMdnieScenarioMode(6);
-                                if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_LARGE_COVER_SCREEN", false)) {
+                                if (SemFloatingFeature.getInstance()
+                                        .getBoolean(
+                                                "SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_LARGE_COVER_SCREEN",
+                                                false)) {
                                     mdnieScenarioControlService.setBrightnessScaleFactor(3);
                                 } else {
                                     mdnieScenarioControlService.setBrightnessScaleFactor(0);
@@ -616,7 +711,9 @@ public final class MdnieScenarioControlService {
                                 mdnieScenarioControlService.mGalleryAppState = true;
                                 mdnieScenarioControlService.mDayOfUseSupportAppState = false;
                                 mdnieScenarioControlService.mOverheatControlSupportAppState = false;
-                                Slog.v("MdnieScenarioControlService", "setGalleryMode from Gallery function");
+                                Slog.v(
+                                        "MdnieScenarioControlService",
+                                        "setGalleryMode from Gallery function");
                                 break;
                             }
                         } else {
@@ -630,20 +727,30 @@ public final class MdnieScenarioControlService {
                 case 5:
                     String str7 = mdnieScenarioControlService.FrontPackageName;
                     mdnieScenarioControlService.getScenarioMode();
-                    mdnieScenarioControlService.mAclOffEnabled = mdnieScenarioControlService.getting_autocurrentlimit_state();
+                    mdnieScenarioControlService.mAclOffEnabled =
+                            mdnieScenarioControlService.getting_autocurrentlimit_state();
                     mdnieScenarioControlService.mdnie_reset();
                     if (mdnieScenarioControlService.mVideoEnd) {
                         mdnieScenarioControlService.mVideoEnd = false;
                         break;
                     } else {
                         String str8 = mdnieScenarioControlService.SCENARIO_VALUE;
-                        if (str8 != null && !str8.equals("4") && !mdnieScenarioControlService.SCENARIO_VALUE.contains("CAMERA") && !mdnieScenarioControlService.isLockScreenOn) {
-                            ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", new StringBuilder("mAclOffEnabled : "), mdnieScenarioControlService.mAclOffEnabled);
+                        if (str8 != null
+                                && !str8.equals("4")
+                                && !mdnieScenarioControlService.SCENARIO_VALUE.contains("CAMERA")
+                                && !mdnieScenarioControlService.isLockScreenOn) {
+                            ProxyManager$$ExternalSyntheticOutline0.m(
+                                    "MdnieScenarioControlService",
+                                    new StringBuilder("mAclOffEnabled : "),
+                                    mdnieScenarioControlService.mAclOffEnabled);
                             if (mdnieScenarioControlService.mAclOffEnabled) {
                                 mdnieScenarioControlService.setAclModeScenario(1, false);
                             }
                             mdnieScenarioControlService.setMdnieScenarioMode(4);
-                            if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_LARGE_COVER_SCREEN", false)) {
+                            if (SemFloatingFeature.getInstance()
+                                    .getBoolean(
+                                            "SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_LARGE_COVER_SCREEN",
+                                            false)) {
                                 mdnieScenarioControlService.setBrightnessScaleFactor(4);
                             } else {
                                 mdnieScenarioControlService.setBrightnessScaleFactor(0);
@@ -654,7 +761,9 @@ public final class MdnieScenarioControlService {
                             mdnieScenarioControlService.setDouAppLaunch(false);
                             mdnieScenarioControlService.mGalleryAppState = false;
                             mdnieScenarioControlService.mDayOfUseSupportAppState = false;
-                            Slog.v("MdnieScenarioControlService", "setCameraMode from Camera function");
+                            Slog.v(
+                                    "MdnieScenarioControlService",
+                                    "setCameraMode from Camera function");
                             break;
                         }
                     }
@@ -678,30 +787,50 @@ public final class MdnieScenarioControlService {
                     }
                     boolean z13 = mdnieScenarioControlService.getting_setting_value();
                     mdnieScenarioControlService.getting_knox_mode_enabled();
-                    mdnieScenarioControlService.mAclOffEnabled = mdnieScenarioControlService.getting_autocurrentlimit_state();
+                    mdnieScenarioControlService.mAclOffEnabled =
+                            mdnieScenarioControlService.getting_autocurrentlimit_state();
                     mdnieScenarioControlService.mdnie_reset();
                     StringBuilder sb = new StringBuilder("hdr_effect_enable : ");
                     sb.append(z13);
                     sb.append(" , app_setting_value : ");
-                    ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", sb, mdnieScenarioControlService.getAppSettingState(str9) == 1);
+                    ProxyManager$$ExternalSyntheticOutline0.m(
+                            "MdnieScenarioControlService",
+                            sb,
+                            mdnieScenarioControlService.getAppSettingState(str9) == 1);
                     int i21 = mdnieScenarioControlService.DOU_BRIGHTNESS_STANDARD_VALUE;
                     if (z13 && mdnieScenarioControlService.getAppSettingState(str9) == 1) {
                         boolean z14 = mdnieScenarioControlService.mMultiWindowOn;
                         if (!z14) {
                             String str10 = mdnieScenarioControlService.SCENARIO_VALUE;
-                            if (str10 != null && !str10.equals("15") && !mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO_ENHANCER_THIRD") && !mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO_BRIGHTNESS_THIRD") && !mdnieScenarioControlService.isLockScreenOn) {
+                            if (str10 != null
+                                    && !str10.equals("15")
+                                    && !mdnieScenarioControlService.SCENARIO_VALUE.contains(
+                                            "VIDEO_ENHANCER_THIRD")
+                                    && !mdnieScenarioControlService.SCENARIO_VALUE.contains(
+                                            "VIDEO_BRIGHTNESS_THIRD")
+                                    && !mdnieScenarioControlService.isLockScreenOn) {
                                 StringBuilder sb2 = new StringBuilder("mAclOffEnabled : ");
                                 sb2.append(mdnieScenarioControlService.mAclOffEnabled);
                                 sb2.append(" mHighDynamicRangeEnabled : ");
-                                ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", sb2, mdnieScenarioControlService.mHighDynamicRangeEnabled);
-                                if (mdnieScenarioControlService.mAclOffEnabled && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
+                                ProxyManager$$ExternalSyntheticOutline0.m(
+                                        "MdnieScenarioControlService",
+                                        sb2,
+                                        mdnieScenarioControlService.mHighDynamicRangeEnabled);
+                                if (mdnieScenarioControlService.mAclOffEnabled
+                                        && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
                                     mdnieScenarioControlService.setAclModeScenario(1, false);
                                 }
                                 mdnieScenarioControlService.setMdnieScenarioMode(15);
-                                ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", new StringBuilder("mDexModeState : "), mdnieScenarioControlService.mDexModeState);
+                                ProxyManager$$ExternalSyntheticOutline0.m(
+                                        "MdnieScenarioControlService",
+                                        new StringBuilder("mDexModeState : "),
+                                        mdnieScenarioControlService.mDexModeState);
                                 if (!mdnieScenarioControlService.mDexModeState) {
                                     mdnieScenarioControlService.setBrightnessScaleFactor(2);
-                                } else if (i21 == 255 || !mdnieScenarioControlService.mDayOfUseSupportAppState || mdnieScenarioControlService.mAutoBrightnessMode || mdnieScenarioControlService.mHighBrightnessModeEnabled) {
+                                } else if (i21 == 255
+                                        || !mdnieScenarioControlService.mDayOfUseSupportAppState
+                                        || mdnieScenarioControlService.mAutoBrightnessMode
+                                        || mdnieScenarioControlService.mHighBrightnessModeEnabled) {
                                     mdnieScenarioControlService.setBrightnessScaleFactor(0);
                                 } else {
                                     mdnieScenarioControlService.setBrightnessScaleFactor(6);
@@ -711,19 +840,32 @@ public final class MdnieScenarioControlService {
                                 mdnieScenarioControlService.setCameraAppLaunch(false);
                                 mdnieScenarioControlService.mGalleryAppState = false;
                                 mdnieScenarioControlService.mOverheatControlSupportAppState = false;
-                                Slog.v("MdnieScenarioControlService", "setVideoMode from Video function(VIDEO_ENHANCER_THIRD)");
+                                Slog.v(
+                                        "MdnieScenarioControlService",
+                                        "setVideoMode from Video function(VIDEO_ENHANCER_THIRD)");
                                 break;
                             }
-                        } else if (z14 && (str = mdnieScenarioControlService.SCENARIO_VALUE) != null && !str.equals("1") && !mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO") && !mdnieScenarioControlService.isLockScreenOn) {
+                        } else if (z14
+                                && (str = mdnieScenarioControlService.SCENARIO_VALUE) != null
+                                && !str.equals("1")
+                                && !mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO")
+                                && !mdnieScenarioControlService.isLockScreenOn) {
                             StringBuilder sb3 = new StringBuilder("mAclOffEnabled : ");
                             sb3.append(mdnieScenarioControlService.mAclOffEnabled);
                             sb3.append(" mHighDynamicRangeEnabled : ");
-                            ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", sb3, mdnieScenarioControlService.mHighDynamicRangeEnabled);
-                            if (mdnieScenarioControlService.mAclOffEnabled && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
+                            ProxyManager$$ExternalSyntheticOutline0.m(
+                                    "MdnieScenarioControlService",
+                                    sb3,
+                                    mdnieScenarioControlService.mHighDynamicRangeEnabled);
+                            if (mdnieScenarioControlService.mAclOffEnabled
+                                    && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
                                 mdnieScenarioControlService.setAclModeScenario(1, false);
                             }
                             mdnieScenarioControlService.setMdnieScenarioMode(1);
-                            if (i21 == 255 || !mdnieScenarioControlService.mDayOfUseSupportAppState || mdnieScenarioControlService.mAutoBrightnessMode || mdnieScenarioControlService.mHighBrightnessModeEnabled) {
+                            if (i21 == 255
+                                    || !mdnieScenarioControlService.mDayOfUseSupportAppState
+                                    || mdnieScenarioControlService.mAutoBrightnessMode
+                                    || mdnieScenarioControlService.mHighBrightnessModeEnabled) {
                                 mdnieScenarioControlService.setBrightnessScaleFactor(0);
                             } else {
                                 mdnieScenarioControlService.setBrightnessScaleFactor(6);
@@ -733,21 +875,33 @@ public final class MdnieScenarioControlService {
                             mdnieScenarioControlService.setCameraAppLaunch(false);
                             mdnieScenarioControlService.mGalleryAppState = false;
                             mdnieScenarioControlService.mOverheatControlSupportAppState = false;
-                            Slog.v("MdnieScenarioControlService", "setVideoMode from Video function");
+                            Slog.v(
+                                    "MdnieScenarioControlService",
+                                    "setVideoMode from Video function");
                             break;
                         }
                     } else {
                         String str11 = mdnieScenarioControlService.SCENARIO_VALUE;
-                        if (str11 != null && !str11.equals("1") && !mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO") && !mdnieScenarioControlService.isLockScreenOn) {
+                        if (str11 != null
+                                && !str11.equals("1")
+                                && !mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO")
+                                && !mdnieScenarioControlService.isLockScreenOn) {
                             StringBuilder sb4 = new StringBuilder("mAclOffEnabled : ");
                             sb4.append(mdnieScenarioControlService.mAclOffEnabled);
                             sb4.append(" mHighDynamicRangeEnabled : ");
-                            ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", sb4, mdnieScenarioControlService.mHighDynamicRangeEnabled);
-                            if (mdnieScenarioControlService.mAclOffEnabled && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
+                            ProxyManager$$ExternalSyntheticOutline0.m(
+                                    "MdnieScenarioControlService",
+                                    sb4,
+                                    mdnieScenarioControlService.mHighDynamicRangeEnabled);
+                            if (mdnieScenarioControlService.mAclOffEnabled
+                                    && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
                                 mdnieScenarioControlService.setAclModeScenario(1, false);
                             }
                             mdnieScenarioControlService.setMdnieScenarioMode(1);
-                            if (i21 == 255 || !mdnieScenarioControlService.mDayOfUseSupportAppState || mdnieScenarioControlService.mAutoBrightnessMode || mdnieScenarioControlService.mHighBrightnessModeEnabled) {
+                            if (i21 == 255
+                                    || !mdnieScenarioControlService.mDayOfUseSupportAppState
+                                    || mdnieScenarioControlService.mAutoBrightnessMode
+                                    || mdnieScenarioControlService.mHighBrightnessModeEnabled) {
                                 mdnieScenarioControlService.setBrightnessScaleFactor(0);
                             } else {
                                 mdnieScenarioControlService.setBrightnessScaleFactor(6);
@@ -757,24 +911,39 @@ public final class MdnieScenarioControlService {
                             mdnieScenarioControlService.setCameraAppLaunch(false);
                             mdnieScenarioControlService.mGalleryAppState = false;
                             mdnieScenarioControlService.mOverheatControlSupportAppState = false;
-                            Slog.v("MdnieScenarioControlService", "setVideoMode from Video function");
+                            Slog.v(
+                                    "MdnieScenarioControlService",
+                                    "setVideoMode from Video function");
                             break;
                         }
                     }
                     break;
                 case 7:
-                    MdnieScenarioControlService.m1140$$Nest$msetSVideoMode(mdnieScenarioControlService, true, mdnieScenarioControlService.FrontPackageName);
+                    MdnieScenarioControlService.m1140$$Nest$msetSVideoMode(
+                            mdnieScenarioControlService,
+                            true,
+                            mdnieScenarioControlService.FrontPackageName);
                     break;
                 case 8:
-                    MdnieScenarioControlService.m1140$$Nest$msetSVideoMode(mdnieScenarioControlService, false, mdnieScenarioControlService.FrontPackageName);
+                    MdnieScenarioControlService.m1140$$Nest$msetSVideoMode(
+                            mdnieScenarioControlService,
+                            false,
+                            mdnieScenarioControlService.FrontPackageName);
                     break;
                 case 9:
                     mdnieScenarioControlService.getScenarioMode();
-                    mdnieScenarioControlService.mAclOffEnabled = mdnieScenarioControlService.getting_autocurrentlimit_state();
+                    mdnieScenarioControlService.mAclOffEnabled =
+                            mdnieScenarioControlService.getting_autocurrentlimit_state();
                     mdnieScenarioControlService.mdnie_reset();
                     String str12 = mdnieScenarioControlService.SCENARIO_VALUE;
-                    if (str12 != null && !str12.equals("10") && !mdnieScenarioControlService.SCENARIO_VALUE.contains("EMAIL") && !mdnieScenarioControlService.isLockScreenOn) {
-                        ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", new StringBuilder("mAclOffEnabled : "), mdnieScenarioControlService.mAclOffEnabled);
+                    if (str12 != null
+                            && !str12.equals("10")
+                            && !mdnieScenarioControlService.SCENARIO_VALUE.contains("EMAIL")
+                            && !mdnieScenarioControlService.isLockScreenOn) {
+                        ProxyManager$$ExternalSyntheticOutline0.m(
+                                "MdnieScenarioControlService",
+                                new StringBuilder("mAclOffEnabled : "),
+                                mdnieScenarioControlService.mAclOffEnabled);
                         if (mdnieScenarioControlService.mAclOffEnabled) {
                             mdnieScenarioControlService.setAclModeScenario(1, false);
                         }
@@ -793,11 +962,19 @@ public final class MdnieScenarioControlService {
                     break;
                 case 10:
                     mdnieScenarioControlService.getScenarioMode();
-                    mdnieScenarioControlService.mAclOffEnabled = mdnieScenarioControlService.getting_autocurrentlimit_state();
+                    mdnieScenarioControlService.mAclOffEnabled =
+                            mdnieScenarioControlService.getting_autocurrentlimit_state();
                     mdnieScenarioControlService.mdnie_reset();
                     String str13 = mdnieScenarioControlService.SCENARIO_VALUE;
-                    if (str13 != null && !str13.equals("9") && !mdnieScenarioControlService.SCENARIO_VALUE.contains("eBOOK") && !mdnieScenarioControlService.SCENARIO_VALUE.contains("EBOOK") && !mdnieScenarioControlService.isLockScreenOn) {
-                        ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", new StringBuilder("mAclOffEnabled : "), mdnieScenarioControlService.mAclOffEnabled);
+                    if (str13 != null
+                            && !str13.equals("9")
+                            && !mdnieScenarioControlService.SCENARIO_VALUE.contains("eBOOK")
+                            && !mdnieScenarioControlService.SCENARIO_VALUE.contains("EBOOK")
+                            && !mdnieScenarioControlService.isLockScreenOn) {
+                        ProxyManager$$ExternalSyntheticOutline0.m(
+                                "MdnieScenarioControlService",
+                                new StringBuilder("mAclOffEnabled : "),
+                                mdnieScenarioControlService.mAclOffEnabled);
                         if (mdnieScenarioControlService.mAclOffEnabled) {
                             mdnieScenarioControlService.setAclModeScenario(1, false);
                         }
@@ -816,15 +993,23 @@ public final class MdnieScenarioControlService {
                     break;
                 case 14:
                     mdnieScenarioControlService.getScenarioMode();
-                    mdnieScenarioControlService.mAclOffEnabled = mdnieScenarioControlService.getting_autocurrentlimit_state();
+                    mdnieScenarioControlService.mAclOffEnabled =
+                            mdnieScenarioControlService.getting_autocurrentlimit_state();
                     mdnieScenarioControlService.mdnie_reset();
                     String str14 = mdnieScenarioControlService.SCENARIO_VALUE;
-                    if (str14 != null && !str14.equals("1") && !mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO") && !mdnieScenarioControlService.isLockScreenOn) {
+                    if (str14 != null
+                            && !str14.equals("1")
+                            && !mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO")
+                            && !mdnieScenarioControlService.isLockScreenOn) {
                         StringBuilder sb5 = new StringBuilder("mAclOffEnabled : ");
                         sb5.append(mdnieScenarioControlService.mAclOffEnabled);
                         sb5.append(" mHighDynamicRangeEnabled : ");
-                        ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", sb5, mdnieScenarioControlService.mHighDynamicRangeEnabled);
-                        if (mdnieScenarioControlService.mAclOffEnabled && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
+                        ProxyManager$$ExternalSyntheticOutline0.m(
+                                "MdnieScenarioControlService",
+                                sb5,
+                                mdnieScenarioControlService.mHighDynamicRangeEnabled);
+                        if (mdnieScenarioControlService.mAclOffEnabled
+                                && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
                             mdnieScenarioControlService.setAclModeScenario(1, false);
                         }
                         mdnieScenarioControlService.setMdnieScenarioMode(1);
@@ -836,51 +1021,110 @@ public final class MdnieScenarioControlService {
                         mdnieScenarioControlService.mGalleryAppState = false;
                         mdnieScenarioControlService.mDayOfUseSupportAppState = false;
                         mdnieScenarioControlService.mOverheatControlSupportAppState = false;
-                        Slog.v("MdnieScenarioControlService", "setVideoMode from SVideoOption function");
+                        Slog.v(
+                                "MdnieScenarioControlService",
+                                "setVideoMode from SVideoOption function");
                         break;
                     }
                     break;
                 case 15:
-                    mdnieScenarioControlService.mActivityManager = (ActivityManager) mdnieScenarioControlService.mContext.getSystemService("activity");
-                    Slog.v("MdnieScenarioControlService", "mActivityManager : " + mdnieScenarioControlService.mActivityManager);
-                    mdnieScenarioControlService.mMdnieManager = (SemMdnieManager) mdnieScenarioControlService.mContext.getSystemService("mDNIe");
-                    Slog.v("MdnieScenarioControlService", "mMdnieManager : " + mdnieScenarioControlService.mMdnieManager);
-                    mdnieScenarioControlService.mInputManager = (InputManager) mdnieScenarioControlService.mContext.getSystemService("input");
-                    Slog.v("MdnieScenarioControlService", "mInputManager : " + mdnieScenarioControlService.mInputManager);
-                    mdnieScenarioControlService.mSemDisplaySolutionManager = (SemDisplaySolutionManager) mdnieScenarioControlService.mContext.getSystemService("DisplaySolution");
-                    Slog.v("MdnieScenarioControlService", "mSemDisplaySolutionManager : " + mdnieScenarioControlService.mSemDisplaySolutionManager);
-                    mdnieScenarioControlService.mDisplayManager = (DisplayManager) mdnieScenarioControlService.mContext.getSystemService("display");
-                    Slog.v("MdnieScenarioControlService", "mDisplayManager : " + mdnieScenarioControlService.mDisplayManager);
-                    mdnieScenarioControlService.mDisplayAiqeManager = (DisplayAiqeManager) mdnieScenarioControlService.mContext.getSystemService("display_aiqe");
-                    Slog.v("MdnieScenarioControlService", "mDisplayAiqeManager : " + mdnieScenarioControlService.mDisplayAiqeManager);
+                    mdnieScenarioControlService.mActivityManager =
+                            (ActivityManager)
+                                    mdnieScenarioControlService.mContext.getSystemService(
+                                            "activity");
+                    Slog.v(
+                            "MdnieScenarioControlService",
+                            "mActivityManager : " + mdnieScenarioControlService.mActivityManager);
+                    mdnieScenarioControlService.mMdnieManager =
+                            (SemMdnieManager)
+                                    mdnieScenarioControlService.mContext.getSystemService("mDNIe");
+                    Slog.v(
+                            "MdnieScenarioControlService",
+                            "mMdnieManager : " + mdnieScenarioControlService.mMdnieManager);
+                    mdnieScenarioControlService.mInputManager =
+                            (InputManager)
+                                    mdnieScenarioControlService.mContext.getSystemService("input");
+                    Slog.v(
+                            "MdnieScenarioControlService",
+                            "mInputManager : " + mdnieScenarioControlService.mInputManager);
+                    mdnieScenarioControlService.mSemDisplaySolutionManager =
+                            (SemDisplaySolutionManager)
+                                    mdnieScenarioControlService.mContext.getSystemService(
+                                            "DisplaySolution");
+                    Slog.v(
+                            "MdnieScenarioControlService",
+                            "mSemDisplaySolutionManager : "
+                                    + mdnieScenarioControlService.mSemDisplaySolutionManager);
+                    mdnieScenarioControlService.mDisplayManager =
+                            (DisplayManager)
+                                    mdnieScenarioControlService.mContext.getSystemService(
+                                            "display");
+                    Slog.v(
+                            "MdnieScenarioControlService",
+                            "mDisplayManager : " + mdnieScenarioControlService.mDisplayManager);
+                    mdnieScenarioControlService.mDisplayAiqeManager =
+                            (DisplayAiqeManager)
+                                    mdnieScenarioControlService.mContext.getSystemService(
+                                            "display_aiqe");
+                    Slog.v(
+                            "MdnieScenarioControlService",
+                            "mDisplayAiqeManager : "
+                                    + mdnieScenarioControlService.mDisplayAiqeManager);
                     ActivityManager activityManager = mdnieScenarioControlService.mActivityManager;
                     MSCSControlHandler mSCSControlHandler2 = mdnieScenarioControlService.mHandler;
-                    if (activityManager != null && mdnieScenarioControlService.mMdnieManager != null && mdnieScenarioControlService.mInputManager != null && mdnieScenarioControlService.mSemDisplaySolutionManager != null && mdnieScenarioControlService.mDisplayManager != null && mdnieScenarioControlService.mDisplayAiqeManager != null) {
+                    if (activityManager != null
+                            && mdnieScenarioControlService.mMdnieManager != null
+                            && mdnieScenarioControlService.mInputManager != null
+                            && mdnieScenarioControlService.mSemDisplaySolutionManager != null
+                            && mdnieScenarioControlService.mDisplayManager != null
+                            && mdnieScenarioControlService.mDisplayAiqeManager != null) {
                         try {
-                            ActivityManagerNative.getDefault().registerProcessObserver(mdnieScenarioControlService.mProcessObserver);
+                            ActivityManagerNative.getDefault()
+                                    .registerProcessObserver(
+                                            mdnieScenarioControlService.mProcessObserver);
                             if (mdnieScenarioControlService.mDesktopModeManager == null) {
-                                mdnieScenarioControlService.mDesktopModeManager = (SemDesktopModeManager) mdnieScenarioControlService.mContext.getSystemService("desktopmode");
-                                Slog.v("MdnieScenarioControlService", "mDesktopModeManager : " + mdnieScenarioControlService.mDesktopModeManager);
+                                mdnieScenarioControlService.mDesktopModeManager =
+                                        (SemDesktopModeManager)
+                                                mdnieScenarioControlService.mContext
+                                                        .getSystemService("desktopmode");
+                                Slog.v(
+                                        "MdnieScenarioControlService",
+                                        "mDesktopModeManager : "
+                                                + mdnieScenarioControlService.mDesktopModeManager);
                             }
                             if (mdnieScenarioControlService.mDesktopModeManager != null) {
-                                SemDesktopModeManager.registerListener(mdnieScenarioControlService.eventListener);
+                                SemDesktopModeManager.registerListener(
+                                        mdnieScenarioControlService.eventListener);
                             }
-                            DisplayManager displayManager = mdnieScenarioControlService.mDisplayManager;
+                            DisplayManager displayManager =
+                                    mdnieScenarioControlService.mDisplayManager;
                             if (displayManager != null) {
-                                displayManager.registerDisplayListener(mdnieScenarioControlService.mDisplayListener, mSCSControlHandler2, 8L);
+                                displayManager.registerDisplayListener(
+                                        mdnieScenarioControlService.mDisplayListener,
+                                        mSCSControlHandler2,
+                                        8L);
                             }
                             mdnieScenarioControlService.setting_is_changed();
                         } catch (Exception unused2) {
-                            Slog.d("MdnieScenarioControlService", "failed to registerProcessObserver");
+                            Slog.d(
+                                    "MdnieScenarioControlService",
+                                    "failed to registerProcessObserver");
                         }
                         mdnieScenarioControlService.mWorkingCondition = true;
-                        Slog.v("MdnieScenarioControlService", "Success to register all of the services system.");
+                        Slog.v(
+                                "MdnieScenarioControlService",
+                                "Success to register all of the services system.");
                         break;
                     } else {
                         long uptimeMillis6 = SystemClock.uptimeMillis();
                         mSCSControlHandler2.removeMessages(15);
-                        mSCSControlHandler2.sendEmptyMessageAtTime(15, uptimeMillis6 + mdnieScenarioControlService.GET_SYSTEM_SERVICES_MILLIS);
-                        Slog.v("MdnieScenarioControlService", "Failure to register all of the services system.");
+                        mSCSControlHandler2.sendEmptyMessageAtTime(
+                                15,
+                                uptimeMillis6
+                                        + mdnieScenarioControlService.GET_SYSTEM_SERVICES_MILLIS);
+                        Slog.v(
+                                "MdnieScenarioControlService",
+                                "Failure to register all of the services system.");
                         break;
                     }
                     break;
@@ -895,7 +1139,8 @@ public final class MdnieScenarioControlService {
                     String str15 = mdnieScenarioControlService.ON_PIXEL_RATIO_PATH;
                     if (new File(str15).exists()) {
                         try {
-                            String stringFromFile = MdnieScenarioControlService.getStringFromFile(str15);
+                            String stringFromFile =
+                                    MdnieScenarioControlService.getStringFromFile(str15);
                             if (stringFromFile != null) {
                                 String[] split = stringFromFile.trim().split(",");
                                 try {
@@ -909,7 +1154,9 @@ public final class MdnieScenarioControlService {
                                         }
                                     }
                                 } catch (NumberFormatException e) {
-                                    Slog.e("MdnieScenarioControlService", "NumberFormatException : " + e);
+                                    Slog.e(
+                                            "MdnieScenarioControlService",
+                                            "NumberFormatException : " + e);
                                 }
                             }
                         } catch (Exception e2) {
@@ -919,19 +1166,31 @@ public final class MdnieScenarioControlService {
                     } else {
                         i = -1;
                     }
-                    Slog.d("MdnieScenarioControlService", "currentOpr : " + String.valueOf(i) + ", mQuickPanelState : " + String.valueOf(mdnieScenarioControlService.mQuickPanelState));
-                    SemDisplaySolutionManager semDisplaySolutionManager6 = mdnieScenarioControlService.mSemDisplaySolutionManager;
+                    Slog.d(
+                            "MdnieScenarioControlService",
+                            "currentOpr : "
+                                    + String.valueOf(i)
+                                    + ", mQuickPanelState : "
+                                    + String.valueOf(mdnieScenarioControlService.mQuickPanelState));
+                    SemDisplaySolutionManager semDisplaySolutionManager6 =
+                            mdnieScenarioControlService.mSemDisplaySolutionManager;
                     if (semDisplaySolutionManager6 != null) {
-                        semDisplaySolutionManager6.setOnPixelRatioValueForPMS(String.valueOf(i) + "," + String.valueOf(mdnieScenarioControlService.mQuickPanelState));
+                        semDisplaySolutionManager6.setOnPixelRatioValueForPMS(
+                                String.valueOf(i)
+                                        + ","
+                                        + String.valueOf(
+                                                mdnieScenarioControlService.mQuickPanelState));
                         break;
                     }
                     break;
                 case 20:
-                    MdnieScenarioControlService.m1138$$Nest$manti_glare_state(mdnieScenarioControlService);
+                    MdnieScenarioControlService.m1138$$Nest$manti_glare_state(
+                            mdnieScenarioControlService);
                     break;
                 case 21:
                     try {
-                        MdnieScenarioControlService.m1142$$Nest$mwriteVideoEnhancerListInDataBase2(mdnieScenarioControlService);
+                        MdnieScenarioControlService.m1142$$Nest$mwriteVideoEnhancerListInDataBase2(
+                                mdnieScenarioControlService);
                         break;
                     } catch (Exception e3) {
                         e3.printStackTrace();
@@ -943,7 +1202,8 @@ public final class MdnieScenarioControlService {
                                 i24++;
                             } else {
                                 while (true) {
-                                    String[] strArr19 = mdnieScenarioControlService.SVIDEO_APP_LAUNCHER;
+                                    String[] strArr19 =
+                                            mdnieScenarioControlService.SVIDEO_APP_LAUNCHER;
                                     if (i3 >= strArr19.length) {
                                         return;
                                     }
@@ -959,45 +1219,71 @@ public final class MdnieScenarioControlService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenWatchingReceiver extends BroadcastReceiver {
-        public ScreenWatchingReceiver() {
-        }
+        public ScreenWatchingReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Slog.i("MdnieScenarioControlService", "action  :  " + action);
             if ("android.intent.action.BOOT_COMPLETED".equals(action)) {
-                Slog.i("MdnieScenarioControlService", "mActivityManager  :  " + MdnieScenarioControlService.this.mActivityManager + ", mMdnieManager  :  " + MdnieScenarioControlService.this.mMdnieManager + ", mSemDisplaySolutionManager  :  " + MdnieScenarioControlService.this.mSemDisplaySolutionManager + ", DesktopModeFeature  :  true");
-                MdnieScenarioControlService mdnieScenarioControlService = MdnieScenarioControlService.this;
-                if (mdnieScenarioControlService.mActivityManager == null || mdnieScenarioControlService.mMdnieManager == null || mdnieScenarioControlService.mSemDisplaySolutionManager == null) {
+                Slog.i(
+                        "MdnieScenarioControlService",
+                        "mActivityManager  :  "
+                                + MdnieScenarioControlService.this.mActivityManager
+                                + ", mMdnieManager  :  "
+                                + MdnieScenarioControlService.this.mMdnieManager
+                                + ", mSemDisplaySolutionManager  :  "
+                                + MdnieScenarioControlService.this.mSemDisplaySolutionManager
+                                + ", DesktopModeFeature  :  true");
+                MdnieScenarioControlService mdnieScenarioControlService =
+                        MdnieScenarioControlService.this;
+                if (mdnieScenarioControlService.mActivityManager == null
+                        || mdnieScenarioControlService.mMdnieManager == null
+                        || mdnieScenarioControlService.mSemDisplaySolutionManager == null) {
                     long uptimeMillis = SystemClock.uptimeMillis();
                     MdnieScenarioControlService.this.mHandler.removeMessages(15);
-                    MdnieScenarioControlService.this.mHandler.sendEmptyMessageAtTime(15, uptimeMillis + r0.GET_SYSTEM_SERVICES_MILLIS);
-                    Slog.v("MdnieScenarioControlService", "Failure to register all of the services system.");
+                    MdnieScenarioControlService.this.mHandler.sendEmptyMessageAtTime(
+                            15, uptimeMillis + r0.GET_SYSTEM_SERVICES_MILLIS);
+                    Slog.v(
+                            "MdnieScenarioControlService",
+                            "Failure to register all of the services system.");
                 }
-                MdnieScenarioControlService mdnieScenarioControlService2 = MdnieScenarioControlService.this;
+                MdnieScenarioControlService mdnieScenarioControlService2 =
+                        MdnieScenarioControlService.this;
                 if (mdnieScenarioControlService2.mActivityManager != null) {
                     mdnieScenarioControlService2.setting_is_changed();
                 }
-                if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_WIDE_COLOR_GAMUT", false)) {
-                    MdnieScenarioControlService.m1141$$Nest$mset_wcg_property(MdnieScenarioControlService.this);
+                if (SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_WIDE_COLOR_GAMUT", false)) {
+                    MdnieScenarioControlService.m1141$$Nest$mset_wcg_property(
+                            MdnieScenarioControlService.this);
                     return;
                 }
                 return;
             }
             if ("android.intent.action.SCREEN_ON".equals(action)) {
-                MdnieScenarioControlService mdnieScenarioControlService3 = MdnieScenarioControlService.this;
+                MdnieScenarioControlService mdnieScenarioControlService3 =
+                        MdnieScenarioControlService.this;
                 if (mdnieScenarioControlService3.mKeyGuardManager == null) {
-                    mdnieScenarioControlService3.mKeyGuardManager = (KeyguardManager) mdnieScenarioControlService3.mContext.getSystemService("keyguard");
-                    Slog.v("MdnieScenarioControlService", "mKeyGuardManager : " + MdnieScenarioControlService.this.mKeyGuardManager);
+                    mdnieScenarioControlService3.mKeyGuardManager =
+                            (KeyguardManager)
+                                    mdnieScenarioControlService3.mContext.getSystemService(
+                                            "keyguard");
+                    Slog.v(
+                            "MdnieScenarioControlService",
+                            "mKeyGuardManager : "
+                                    + MdnieScenarioControlService.this.mKeyGuardManager);
                 }
                 KeyguardManager keyguardManager = MdnieScenarioControlService.this.mKeyGuardManager;
                 if (keyguardManager != null && keyguardManager.isKeyguardLocked()) {
                     MdnieScenarioControlService.this.isLockScreenOn = true;
                 }
-                Slog.d("MdnieScenarioControlService", "isLockScreenOn : " + MdnieScenarioControlService.this.isLockScreenOn);
+                Slog.d(
+                        "MdnieScenarioControlService",
+                        "isLockScreenOn : " + MdnieScenarioControlService.this.isLockScreenOn);
                 SystemClock.uptimeMillis();
-                MdnieScenarioControlService mdnieScenarioControlService4 = MdnieScenarioControlService.this;
+                MdnieScenarioControlService mdnieScenarioControlService4 =
+                        MdnieScenarioControlService.this;
                 mdnieScenarioControlService4.mScreenStateOn = true;
                 if (mdnieScenarioControlService4.isLockScreenOn) {
                     mdnieScenarioControlService4.mBrowserScenarioEnabled = false;
@@ -1015,7 +1301,8 @@ public final class MdnieScenarioControlService {
                 return;
             }
             if ("android.intent.action.SCREEN_OFF".equals(action)) {
-                MdnieScenarioControlService mdnieScenarioControlService5 = MdnieScenarioControlService.this;
+                MdnieScenarioControlService mdnieScenarioControlService5 =
+                        MdnieScenarioControlService.this;
                 mdnieScenarioControlService5.mScreenStateOn = false;
                 boolean z2 = mdnieScenarioControlService5.mBrowserBrightnessDecreaseEnabled;
                 MSCSControlHandler mSCSControlHandler = mdnieScenarioControlService5.mHandler;
@@ -1033,40 +1320,49 @@ public final class MdnieScenarioControlService {
                 }
             }
             if ("android.intent.action.USER_PRESENT".equals(action)) {
-                MdnieScenarioControlService mdnieScenarioControlService6 = MdnieScenarioControlService.this;
+                MdnieScenarioControlService mdnieScenarioControlService6 =
+                        MdnieScenarioControlService.this;
                 mdnieScenarioControlService6.isLockScreenOn = false;
                 mdnieScenarioControlService6.mScreenStateOn = true;
                 try {
                     if (mdnieScenarioControlService6.mActivityManager != null) {
-                        mdnieScenarioControlService6.mProcessObserver.onForegroundActivitiesChanged(-1, 0, false);
+                        mdnieScenarioControlService6.mProcessObserver.onForegroundActivitiesChanged(
+                                -1, 0, false);
                         return;
                     }
                     return;
                 } catch (RemoteException unused) {
-                    Slog.d("MdnieScenarioControlService", "failed to onForegroundActivitiesChanged");
+                    Slog.d(
+                            "MdnieScenarioControlService",
+                            "failed to onForegroundActivitiesChanged");
                     return;
                 }
             }
             if ("ACTION_MOVIE_PLAYER_STATE_IN".equals(action)) {
-                MdnieScenarioControlService mdnieScenarioControlService7 = MdnieScenarioControlService.this;
+                MdnieScenarioControlService mdnieScenarioControlService7 =
+                        MdnieScenarioControlService.this;
                 mdnieScenarioControlService7.mVideoModeCheck = true;
                 mdnieScenarioControlService7.mGalleryAppState = false;
                 long uptimeMillis2 = SystemClock.uptimeMillis();
                 MdnieScenarioControlService.this.mHandler.removeMessages(7);
-                MdnieScenarioControlService.this.mHandler.sendEmptyMessageAtTime(7, uptimeMillis2 + r7.ACTION_MOVIE_PLAYER_STATE_IN_DEBOUNCE_MILLIS);
+                MdnieScenarioControlService.this.mHandler.sendEmptyMessageAtTime(
+                        7, uptimeMillis2 + r7.ACTION_MOVIE_PLAYER_STATE_IN_DEBOUNCE_MILLIS);
                 return;
             }
             if ("ACTION_MOVIE_PLAYER_STATE_OUT".equals(action)) {
-                MdnieScenarioControlService mdnieScenarioControlService8 = MdnieScenarioControlService.this;
+                MdnieScenarioControlService mdnieScenarioControlService8 =
+                        MdnieScenarioControlService.this;
                 mdnieScenarioControlService8.mVideoModeCheck = false;
                 mdnieScenarioControlService8.mVideoEnd = true;
                 long uptimeMillis3 = SystemClock.uptimeMillis();
                 MdnieScenarioControlService.this.mHandler.removeMessages(8);
-                MdnieScenarioControlService.this.mHandler.sendEmptyMessageAtTime(8, uptimeMillis3 + r7.ACTION_MOVIE_PLAYER_STATE_OUT_DEBOUNCE_MILLIS);
+                MdnieScenarioControlService.this.mHandler.sendEmptyMessageAtTime(
+                        8, uptimeMillis3 + r7.ACTION_MOVIE_PLAYER_STATE_OUT_DEBOUNCE_MILLIS);
                 return;
             }
             if ("com.samsung.server.PowerManagerService.action.USER_ACTIVITY".equals(action)) {
-                MdnieScenarioControlService.this.mUserActivityStatus = intent.getIntExtra(Constants.JSON_CLIENT_DATA_STATUS, 1);
+                MdnieScenarioControlService.this.mUserActivityStatus =
+                        intent.getIntExtra(Constants.JSON_CLIENT_DATA_STATUS, 1);
                 return;
             }
             if ("com.samsung.systemui.statusbar.EXPANDED".equals(action)) {
@@ -1074,7 +1370,8 @@ public final class MdnieScenarioControlService {
                 return;
             }
             if ("com.samsung.systemui.statusbar.COLLAPSED".equals(action)) {
-                MdnieScenarioControlService mdnieScenarioControlService9 = MdnieScenarioControlService.this;
+                MdnieScenarioControlService mdnieScenarioControlService9 =
+                        MdnieScenarioControlService.this;
                 mdnieScenarioControlService9.mQuickPanelState = 0;
                 if (mdnieScenarioControlService9.mAutoBrightnessMode) {
                     mdnieScenarioControlService9.mHandler.removeMessages(19);
@@ -1105,10 +1402,14 @@ public final class MdnieScenarioControlService {
             this.BRIGHTNESS_MODE_URI = Settings.System.getUriFor("screen_brightness_mode");
             this.BRIGHTNESS_ADJ_URI = Settings.System.getUriFor("screen_auto_brightness_adj");
             this.BLUE_LIGHT_FILTER_URI = Settings.System.getUriFor("blue_light_filter");
-            this.BLUE_LIGHT_FILTER_ADAPTIVE_MODE_URI = Settings.System.getUriFor("blue_light_filter_adaptive_mode");
-            this.BLUE_LIGHT_FILTER_ANTI_GLARE_URI = Settings.System.getUriFor("blue_light_filter_anti_glare");
-            this.REDUCE_BRIGHT_COLORS_ACTIVATED_URI = Settings.Secure.getUriFor("reduce_bright_colors_activated");
-            this.REDUCE_BRIGHT_COLORS_LEVEL_URI = Settings.Secure.getUriFor("reduce_bright_colors_level");
+            this.BLUE_LIGHT_FILTER_ADAPTIVE_MODE_URI =
+                    Settings.System.getUriFor("blue_light_filter_adaptive_mode");
+            this.BLUE_LIGHT_FILTER_ANTI_GLARE_URI =
+                    Settings.System.getUriFor("blue_light_filter_anti_glare");
+            this.REDUCE_BRIGHT_COLORS_ACTIVATED_URI =
+                    Settings.Secure.getUriFor("reduce_bright_colors_activated");
+            this.REDUCE_BRIGHT_COLORS_LEVEL_URI =
+                    Settings.Secure.getUriFor("reduce_bright_colors_level");
             this.SCREEN_MODE_SETTING_URI = Settings.System.getUriFor("screen_mode_setting");
             this.VIVIDNESS_INTENSITY_URI = Settings.System.getUriFor("vividness_intensity");
         }
@@ -1118,80 +1419,121 @@ public final class MdnieScenarioControlService {
             SemMdnieManager semMdnieManager;
             MdnieScenarioControlService.this.setting_is_changed();
             if (MdnieScenarioControlService.this.AUTO_CURRENT_LIMIT_VERSION == 4) {
-                if (this.BRIGHTNESS_MODE_URI.equals(uri) && Settings.System.getIntForUser(this.resolver, "screen_brightness_mode", 0, -2) == 0) {
-                    MdnieScenarioControlService mdnieScenarioControlService = MdnieScenarioControlService.this;
+                if (this.BRIGHTNESS_MODE_URI.equals(uri)
+                        && Settings.System.getIntForUser(
+                                        this.resolver, "screen_brightness_mode", 0, -2)
+                                == 0) {
+                    MdnieScenarioControlService mdnieScenarioControlService =
+                            MdnieScenarioControlService.this;
                     mdnieScenarioControlService.mPrevAclValue = 3;
                     mdnieScenarioControlService.mAntiGlareEnable = false;
                 }
-                if (this.BRIGHTNESS_URI.equals(uri) && Settings.System.getIntForUser(this.resolver, "screen_brightness_mode", 0, -2) == 1) {
-                    MdnieScenarioControlService mdnieScenarioControlService2 = MdnieScenarioControlService.this;
+                if (this.BRIGHTNESS_URI.equals(uri)
+                        && Settings.System.getIntForUser(
+                                        this.resolver, "screen_brightness_mode", 0, -2)
+                                == 1) {
+                    MdnieScenarioControlService mdnieScenarioControlService2 =
+                            MdnieScenarioControlService.this;
                     if (!mdnieScenarioControlService2.mHighBrightnessModeEnabled) {
-                        MdnieScenarioControlService.m1138$$Nest$manti_glare_state(mdnieScenarioControlService2);
-                        MdnieScenarioControlService.m1139$$Nest$msetAclModeSettings(MdnieScenarioControlService.this);
+                        MdnieScenarioControlService.m1138$$Nest$manti_glare_state(
+                                mdnieScenarioControlService2);
+                        MdnieScenarioControlService.m1139$$Nest$msetAclModeSettings(
+                                MdnieScenarioControlService.this);
                     }
                 }
-                if (this.BLUE_LIGHT_FILTER_URI.equals(uri) || this.BLUE_LIGHT_FILTER_ADAPTIVE_MODE_URI.equals(uri) || this.BLUE_LIGHT_FILTER_ANTI_GLARE_URI.equals(uri)) {
-                    if (Settings.System.getIntForUser(this.resolver, "screen_brightness_mode", 0, -2) == 1) {
-                        MdnieScenarioControlService mdnieScenarioControlService3 = MdnieScenarioControlService.this;
+                if (this.BLUE_LIGHT_FILTER_URI.equals(uri)
+                        || this.BLUE_LIGHT_FILTER_ADAPTIVE_MODE_URI.equals(uri)
+                        || this.BLUE_LIGHT_FILTER_ANTI_GLARE_URI.equals(uri)) {
+                    if (Settings.System.getIntForUser(
+                                    this.resolver, "screen_brightness_mode", 0, -2)
+                            == 1) {
+                        MdnieScenarioControlService mdnieScenarioControlService3 =
+                                MdnieScenarioControlService.this;
                         if (!mdnieScenarioControlService3.mHighBrightnessModeEnabled) {
-                            MdnieScenarioControlService.m1138$$Nest$manti_glare_state(mdnieScenarioControlService3);
-                            MdnieScenarioControlService.m1139$$Nest$msetAclModeSettings(MdnieScenarioControlService.this);
+                            MdnieScenarioControlService.m1138$$Nest$manti_glare_state(
+                                    mdnieScenarioControlService3);
+                            MdnieScenarioControlService.m1139$$Nest$msetAclModeSettings(
+                                    MdnieScenarioControlService.this);
                         }
                     }
                     MdnieScenarioControlService.this.mAntiGlareEnable = false;
                 }
             }
             if (this.BRIGHTNESS_ADJ_URI.equals(uri)) {
-                MdnieScenarioControlService mdnieScenarioControlService4 = MdnieScenarioControlService.this;
+                MdnieScenarioControlService mdnieScenarioControlService4 =
+                        MdnieScenarioControlService.this;
                 if (mdnieScenarioControlService4.mAutoBrightnessMode) {
                     mdnieScenarioControlService4.mHandler.removeMessages(19);
                     MdnieScenarioControlService.this.mHandler.sendEmptyMessage(19);
                 }
             }
-            if ((this.REDUCE_BRIGHT_COLORS_ACTIVATED_URI.equals(uri) || this.REDUCE_BRIGHT_COLORS_LEVEL_URI.equals(uri)) && SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0) == 1) {
+            if ((this.REDUCE_BRIGHT_COLORS_ACTIVATED_URI.equals(uri)
+                            || this.REDUCE_BRIGHT_COLORS_LEVEL_URI.equals(uri))
+                    && SemFloatingFeature.getInstance()
+                                    .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0)
+                            == 1) {
                 StringBuilder sb = new StringBuilder("mReduceBrightColorsActivatedEnabled(");
                 sb.append(MdnieScenarioControlService.this.mReduceBrightColorsActivatedEnabled);
                 sb.append(") - level : ");
-                DeviceIdleController$$ExternalSyntheticOutline0.m(sb, MdnieScenarioControlService.this.mReduceBrightColorsLevel, "MdnieScenarioControlService");
-                MdnieScenarioControlService mdnieScenarioControlService5 = MdnieScenarioControlService.this;
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        sb,
+                        MdnieScenarioControlService.this.mReduceBrightColorsLevel,
+                        "MdnieScenarioControlService");
+                MdnieScenarioControlService mdnieScenarioControlService5 =
+                        MdnieScenarioControlService.this;
                 boolean z2 = mdnieScenarioControlService5.mReduceBrightColorsActivatedEnabled;
                 if (z2) {
                     SemMdnieManager semMdnieManager2 = mdnieScenarioControlService5.mMdnieManager;
                     if (semMdnieManager2 != null) {
-                        semMdnieManager2.setExtraDimMode(mdnieScenarioControlService5.mReduceBrightColorsLevel);
+                        semMdnieManager2.setExtraDimMode(
+                                mdnieScenarioControlService5.mReduceBrightColorsLevel);
                     }
-                } else if (!z2 && (semMdnieManager = mdnieScenarioControlService5.mMdnieManager) != null) {
+                } else if (!z2
+                        && (semMdnieManager = mdnieScenarioControlService5.mMdnieManager) != null) {
                     semMdnieManager.setExtraDimMode(0);
                 }
             }
-            if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_WIDE_COLOR_GAMUT", false)) {
-                if (this.VIVIDNESS_INTENSITY_URI.equals(uri) || this.SCREEN_MODE_SETTING_URI.equals(uri)) {
-                    MdnieScenarioControlService.m1141$$Nest$mset_wcg_property(MdnieScenarioControlService.this);
+            if (SemFloatingFeature.getInstance()
+                    .getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_WIDE_COLOR_GAMUT", false)) {
+                if (this.VIVIDNESS_INTENSITY_URI.equals(uri)
+                        || this.SCREEN_MODE_SETTING_URI.equals(uri)) {
+                    MdnieScenarioControlService.m1141$$Nest$mset_wcg_property(
+                            MdnieScenarioControlService.this);
                 }
             }
         }
     }
 
     /* renamed from: -$$Nest$manti_glare_state, reason: not valid java name */
-    public static void m1138$$Nest$manti_glare_state(MdnieScenarioControlService mdnieScenarioControlService) {
+    public static void m1138$$Nest$manti_glare_state(
+            MdnieScenarioControlService mdnieScenarioControlService) {
         mdnieScenarioControlService.getClass();
         try {
-            mdnieScenarioControlService.LUX_VALUE = getStringFromFile(mdnieScenarioControlService.READING_LUX_PATH);
-            String stringFromFile = getStringFromFile(mdnieScenarioControlService.READING_LUX_SUB_PATH);
+            mdnieScenarioControlService.LUX_VALUE =
+                    getStringFromFile(mdnieScenarioControlService.READING_LUX_PATH);
+            String stringFromFile =
+                    getStringFromFile(mdnieScenarioControlService.READING_LUX_SUB_PATH);
             mdnieScenarioControlService.SUB_LUX_VALUE = stringFromFile;
             boolean z = mdnieScenarioControlService.mIsFolded;
             if (z) {
                 if (z && stringFromFile != null) {
-                    Slog.d("MdnieScenarioControlService", "anti_glare_state SUB_LUX_VALUE : " + mdnieScenarioControlService.SUB_LUX_VALUE);
-                    if (Integer.parseInt(mdnieScenarioControlService.SUB_LUX_VALUE) >= 0 && 10 > Integer.parseInt(mdnieScenarioControlService.SUB_LUX_VALUE)) {
+                    Slog.d(
+                            "MdnieScenarioControlService",
+                            "anti_glare_state SUB_LUX_VALUE : "
+                                    + mdnieScenarioControlService.SUB_LUX_VALUE);
+                    if (Integer.parseInt(mdnieScenarioControlService.SUB_LUX_VALUE) >= 0
+                            && 10 > Integer.parseInt(mdnieScenarioControlService.SUB_LUX_VALUE)) {
                         mdnieScenarioControlService.mAntiGlareEnable = false;
                     } else if (10 <= Integer.parseInt(mdnieScenarioControlService.SUB_LUX_VALUE)) {
                         mdnieScenarioControlService.mAntiGlareEnable = false;
                     }
                 }
             } else if (mdnieScenarioControlService.LUX_VALUE != null) {
-                Slog.d("MdnieScenarioControlService", "anti_glare_state LUX_VALUE : " + mdnieScenarioControlService.LUX_VALUE);
-                if (Integer.parseInt(mdnieScenarioControlService.LUX_VALUE) >= 0 && 10 > Integer.parseInt(mdnieScenarioControlService.LUX_VALUE)) {
+                Slog.d(
+                        "MdnieScenarioControlService",
+                        "anti_glare_state LUX_VALUE : " + mdnieScenarioControlService.LUX_VALUE);
+                if (Integer.parseInt(mdnieScenarioControlService.LUX_VALUE) >= 0
+                        && 10 > Integer.parseInt(mdnieScenarioControlService.LUX_VALUE)) {
                     mdnieScenarioControlService.mAntiGlareEnable = false;
                 } else if (10 <= Integer.parseInt(mdnieScenarioControlService.LUX_VALUE)) {
                     mdnieScenarioControlService.mAntiGlareEnable = false;
@@ -1203,8 +1545,10 @@ public final class MdnieScenarioControlService {
     }
 
     /* renamed from: -$$Nest$msetAclModeSettings, reason: not valid java name */
-    public static void m1139$$Nest$msetAclModeSettings(MdnieScenarioControlService mdnieScenarioControlService) {
-        if (mdnieScenarioControlService.mSemDisplaySolutionManager == null || !mdnieScenarioControlService.mAutoBrightnessMode) {
+    public static void m1139$$Nest$msetAclModeSettings(
+            MdnieScenarioControlService mdnieScenarioControlService) {
+        if (mdnieScenarioControlService.mSemDisplaySolutionManager == null
+                || !mdnieScenarioControlService.mAutoBrightnessMode) {
             return;
         }
         if (mdnieScenarioControlService.mAntiGlareEnable) {
@@ -1222,26 +1566,43 @@ public final class MdnieScenarioControlService {
                 mdnieScenarioControlService.mCurAclValue = 1;
             }
         }
-        Slog.v("MdnieScenarioControlService", "setAclModeSettings() ACL mPrevAclValue (" + mdnieScenarioControlService.mPrevAclValue + ") - mCurrentValue (" + mdnieScenarioControlService.mCurAclValue + ")");
-        mdnieScenarioControlService.mSemDisplaySolutionManager.onAutoCurrentLimitStateChangedInt(mdnieScenarioControlService.mCurAclValue);
+        Slog.v(
+                "MdnieScenarioControlService",
+                "setAclModeSettings() ACL mPrevAclValue ("
+                        + mdnieScenarioControlService.mPrevAclValue
+                        + ") - mCurrentValue ("
+                        + mdnieScenarioControlService.mCurAclValue
+                        + ")");
+        mdnieScenarioControlService.mSemDisplaySolutionManager.onAutoCurrentLimitStateChangedInt(
+                mdnieScenarioControlService.mCurAclValue);
         mdnieScenarioControlService.mPrevAclValue = mdnieScenarioControlService.mCurAclValue;
     }
 
     /* renamed from: -$$Nest$msetSVideoMode, reason: not valid java name */
-    public static void m1140$$Nest$msetSVideoMode(MdnieScenarioControlService mdnieScenarioControlService, boolean z, String str) {
+    public static void m1140$$Nest$msetSVideoMode(
+            MdnieScenarioControlService mdnieScenarioControlService, boolean z, String str) {
         String str2;
         String str3;
         mdnieScenarioControlService.getScenarioMode();
         if (!z) {
             mdnieScenarioControlService.mdnie_reset();
-            if (mdnieScenarioControlService.GALLERY_APP_PACKAGENAME.equalsIgnoreCase(mdnieScenarioControlService.FrontPackageName) || (str2 = mdnieScenarioControlService.SCENARIO_VALUE) == null || str2.equals("0") || mdnieScenarioControlService.SCENARIO_VALUE.contains("UI") || mdnieScenarioControlService.isLockScreenOn) {
+            if (mdnieScenarioControlService.GALLERY_APP_PACKAGENAME.equalsIgnoreCase(
+                            mdnieScenarioControlService.FrontPackageName)
+                    || (str2 = mdnieScenarioControlService.SCENARIO_VALUE) == null
+                    || str2.equals("0")
+                    || mdnieScenarioControlService.SCENARIO_VALUE.contains("UI")
+                    || mdnieScenarioControlService.isLockScreenOn) {
                 return;
             }
             StringBuilder sb = new StringBuilder("mAclOffEnabled : ");
             sb.append(mdnieScenarioControlService.mAclOffEnabled);
             sb.append(" mHighDynamicRangeEnabled : ");
-            ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", sb, mdnieScenarioControlService.mHighDynamicRangeEnabled);
-            if (mdnieScenarioControlService.mAclOffEnabled && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
+            ProxyManager$$ExternalSyntheticOutline0.m(
+                    "MdnieScenarioControlService",
+                    sb,
+                    mdnieScenarioControlService.mHighDynamicRangeEnabled);
+            if (mdnieScenarioControlService.mAclOffEnabled
+                    && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
                 mdnieScenarioControlService.setAclModeScenario(1, false);
             }
             mdnieScenarioControlService.setMdnieScenarioMode(0);
@@ -1258,24 +1619,33 @@ public final class MdnieScenarioControlService {
         }
         boolean z2 = mdnieScenarioControlService.getting_setting_value();
         mdnieScenarioControlService.getting_knox_mode_enabled();
-        mdnieScenarioControlService.mAclOffEnabled = mdnieScenarioControlService.getting_autocurrentlimit_state();
+        mdnieScenarioControlService.mAclOffEnabled =
+                mdnieScenarioControlService.getting_autocurrentlimit_state();
         mdnieScenarioControlService.mdnie_reset();
         StringBuilder sb2 = new StringBuilder("hdr_effect_enable : ");
         sb2.append(z2);
         sb2.append(" , app_setting_value : ");
         sb2.append(mdnieScenarioControlService.getAppSettingState(str) == 1);
         sb2.append(" , mVideoModeCheck : ");
-        ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", sb2, mdnieScenarioControlService.mVideoModeCheck);
+        ProxyManager$$ExternalSyntheticOutline0.m(
+                "MdnieScenarioControlService", sb2, mdnieScenarioControlService.mVideoModeCheck);
         if (!z2 || mdnieScenarioControlService.getAppSettingState(str) != 1) {
             String str4 = mdnieScenarioControlService.SCENARIO_VALUE;
-            if (str4 == null || str4.equals("1") || mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO") || mdnieScenarioControlService.isLockScreenOn) {
+            if (str4 == null
+                    || str4.equals("1")
+                    || mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO")
+                    || mdnieScenarioControlService.isLockScreenOn) {
                 return;
             }
             StringBuilder sb3 = new StringBuilder("mAclOffEnabled : ");
             sb3.append(mdnieScenarioControlService.mAclOffEnabled);
             sb3.append(" mHighDynamicRangeEnabled : ");
-            ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", sb3, mdnieScenarioControlService.mHighDynamicRangeEnabled);
-            if (mdnieScenarioControlService.mAclOffEnabled && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
+            ProxyManager$$ExternalSyntheticOutline0.m(
+                    "MdnieScenarioControlService",
+                    sb3,
+                    mdnieScenarioControlService.mHighDynamicRangeEnabled);
+            if (mdnieScenarioControlService.mAclOffEnabled
+                    && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
                 mdnieScenarioControlService.setAclModeScenario(1, false);
             }
             mdnieScenarioControlService.setMdnieScenarioMode(1);
@@ -1292,14 +1662,22 @@ public final class MdnieScenarioControlService {
         }
         boolean z3 = mdnieScenarioControlService.mMultiWindowOn;
         if (z3 || !mdnieScenarioControlService.mVideoModeCheck) {
-            if ((!z3 && mdnieScenarioControlService.mVideoModeCheck) || (str3 = mdnieScenarioControlService.SCENARIO_VALUE) == null || str3.equals("1") || mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO") || mdnieScenarioControlService.isLockScreenOn) {
+            if ((!z3 && mdnieScenarioControlService.mVideoModeCheck)
+                    || (str3 = mdnieScenarioControlService.SCENARIO_VALUE) == null
+                    || str3.equals("1")
+                    || mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO")
+                    || mdnieScenarioControlService.isLockScreenOn) {
                 return;
             }
             StringBuilder sb4 = new StringBuilder("mAclOffEnabled : ");
             sb4.append(mdnieScenarioControlService.mAclOffEnabled);
             sb4.append(" mHighDynamicRangeEnabled : ");
-            ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", sb4, mdnieScenarioControlService.mHighDynamicRangeEnabled);
-            if (mdnieScenarioControlService.mAclOffEnabled && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
+            ProxyManager$$ExternalSyntheticOutline0.m(
+                    "MdnieScenarioControlService",
+                    sb4,
+                    mdnieScenarioControlService.mHighDynamicRangeEnabled);
+            if (mdnieScenarioControlService.mAclOffEnabled
+                    && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
                 mdnieScenarioControlService.setAclModeScenario(1, false);
             }
             mdnieScenarioControlService.setMdnieScenarioMode(1);
@@ -1315,18 +1693,29 @@ public final class MdnieScenarioControlService {
             return;
         }
         String str5 = mdnieScenarioControlService.SCENARIO_VALUE;
-        if (str5 == null || str5.equals("14") || mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO_ENHANCER") || mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO_BRIGHTNESS") || mdnieScenarioControlService.isLockScreenOn) {
+        if (str5 == null
+                || str5.equals("14")
+                || mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO_ENHANCER")
+                || mdnieScenarioControlService.SCENARIO_VALUE.contains("VIDEO_BRIGHTNESS")
+                || mdnieScenarioControlService.isLockScreenOn) {
             return;
         }
         StringBuilder sb5 = new StringBuilder("mAclOffEnabled : ");
         sb5.append(mdnieScenarioControlService.mAclOffEnabled);
         sb5.append(" mHighDynamicRangeEnabled : ");
-        ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", sb5, mdnieScenarioControlService.mHighDynamicRangeEnabled);
-        if (mdnieScenarioControlService.mAclOffEnabled && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
+        ProxyManager$$ExternalSyntheticOutline0.m(
+                "MdnieScenarioControlService",
+                sb5,
+                mdnieScenarioControlService.mHighDynamicRangeEnabled);
+        if (mdnieScenarioControlService.mAclOffEnabled
+                && !mdnieScenarioControlService.mHighDynamicRangeEnabled) {
             mdnieScenarioControlService.setAclModeScenario(1, false);
         }
         mdnieScenarioControlService.setMdnieScenarioMode(14);
-        ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", new StringBuilder("mDexModeState : "), mdnieScenarioControlService.mDexModeState);
+        ProxyManager$$ExternalSyntheticOutline0.m(
+                "MdnieScenarioControlService",
+                new StringBuilder("mDexModeState : "),
+                mdnieScenarioControlService.mDexModeState);
         if (mdnieScenarioControlService.mDexModeState) {
             mdnieScenarioControlService.setBrightnessScaleFactor(0);
         } else {
@@ -1343,18 +1732,26 @@ public final class MdnieScenarioControlService {
     }
 
     /* renamed from: -$$Nest$mset_wcg_property, reason: not valid java name */
-    public static void m1141$$Nest$mset_wcg_property(MdnieScenarioControlService mdnieScenarioControlService) {
+    public static void m1141$$Nest$mset_wcg_property(
+            MdnieScenarioControlService mdnieScenarioControlService) {
         if (mdnieScenarioControlService.mNaturalGammaScreenModeSupported) {
             return;
         }
         int i = mdnieScenarioControlService.mScreenModeSetting;
         if (i == 4) {
-            if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0) == 0) {
+            if (SemFloatingFeature.getInstance()
+                            .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0)
+                    == 0) {
                 mdnieScenarioControlService.wcg_property_changed(1, 1);
-            } else if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0) == 1) {
+            } else if (SemFloatingFeature.getInstance()
+                            .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0)
+                    == 1) {
                 mdnieScenarioControlService.wcg_property_changed(0, 0);
-            } else if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0) >= 2) {
-                mdnieScenarioControlService.wcg_property_changed(0, mdnieScenarioControlService.mVividnessIndex + 256);
+            } else if (SemFloatingFeature.getInstance()
+                            .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0)
+                    >= 2) {
+                mdnieScenarioControlService.wcg_property_changed(
+                        0, mdnieScenarioControlService.mVividnessIndex + 256);
             }
         } else if (i == 3) {
             mdnieScenarioControlService.wcg_property_changed(0, 0);
@@ -1365,13 +1762,15 @@ public final class MdnieScenarioControlService {
     }
 
     /* renamed from: -$$Nest$mwriteVideoEnhancerListInDataBase2, reason: not valid java name */
-    public static void m1142$$Nest$mwriteVideoEnhancerListInDataBase2(MdnieScenarioControlService mdnieScenarioControlService) {
+    public static void m1142$$Nest$mwriteVideoEnhancerListInDataBase2(
+            MdnieScenarioControlService mdnieScenarioControlService) {
         mdnieScenarioControlService.getClass();
         try {
             ArrayList arrayList = new ArrayList();
             Collections.addAll(arrayList, mdnieScenarioControlService.VIDEO_APP_LAUNCHER);
             Collections.addAll(arrayList, mdnieScenarioControlService.SVIDEO_APP_LAUNCHER);
-            HashMap appListRegistState = mdnieScenarioControlService.getAppListRegistState(arrayList);
+            HashMap appListRegistState =
+                    mdnieScenarioControlService.getAppListRegistState(arrayList);
             ArrayList arrayList2 = new ArrayList();
             for (int i = 0; i < arrayList.size(); i++) {
                 if (appListRegistState.get(arrayList.get(i)) == null) {
@@ -1507,95 +1906,164 @@ public final class MdnieScenarioControlService {
         this.mReduceBrightColorsActivatedEnabled = false;
         this.mNaturalGammaScreenModeSupported = false;
         this.mProcessObserver = new AnonymousClass1();
-        this.eventListener = new SemDesktopModeManager.EventListener() { // from class: com.samsung.android.displaysolution.MdnieScenarioControlService.2
-            public final void onDesktopDockConnectionChanged(boolean z) {
-            }
+        this.eventListener =
+                new SemDesktopModeManager
+                        .EventListener() { // from class:
+                                           // com.samsung.android.displaysolution.MdnieScenarioControlService.2
+                    public final void onDesktopDockConnectionChanged(boolean z) {}
 
-            public final void onDesktopModeChanged(boolean z) {
-                if (z) {
-                    Slog.d("MdnieScenarioControlService", "Dex Mode Connected");
-                    MdnieScenarioControlService.this.mDexModeState = true;
-                } else {
-                    Slog.d("MdnieScenarioControlService", "Dex Mode Disconnected");
-                    MdnieScenarioControlService.this.mDexModeState = false;
-                }
-            }
-        };
-        this.mDisplayListener = new DisplayManager.DisplayListener() { // from class: com.samsung.android.displaysolution.MdnieScenarioControlService.4
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayAdded(int i) {
-            }
-
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayChanged(int i) {
-                BrightnessInfo brightnessInfo;
-                if (i != 0 || (brightnessInfo = MdnieScenarioControlService.this.mDisplayManager.getDisplay(i).getBrightnessInfo()) == null) {
-                    return;
-                }
-                MdnieScenarioControlService mdnieScenarioControlService = MdnieScenarioControlService.this;
-                boolean z = brightnessInfo.isAnimating;
-                mdnieScenarioControlService.getClass();
-                if (!z && mdnieScenarioControlService.mPrevAclValue == 5 && mdnieScenarioControlService.mAutoBrightnessMode) {
-                    Slog.v("MdnieScenarioControlService", "BrightnessAnimating() ACL mPrevAclValue (" + MdnieScenarioControlService.this.mPrevAclValue + ") - mCurrentValue (4)");
-                    SemDisplaySolutionManager semDisplaySolutionManager = MdnieScenarioControlService.this.mSemDisplaySolutionManager;
-                    if (semDisplaySolutionManager != null) {
-                        semDisplaySolutionManager.onAutoCurrentLimitStateChangedInt(4);
+                    public final void onDesktopModeChanged(boolean z) {
+                        if (z) {
+                            Slog.d("MdnieScenarioControlService", "Dex Mode Connected");
+                            MdnieScenarioControlService.this.mDexModeState = true;
+                        } else {
+                            Slog.d("MdnieScenarioControlService", "Dex Mode Disconnected");
+                            MdnieScenarioControlService.this.mDexModeState = false;
+                        }
                     }
-                    MdnieScenarioControlService.this.mPrevAclValue = 4;
-                }
-            }
+                };
+        this.mDisplayListener =
+                new DisplayManager
+                        .DisplayListener() { // from class:
+                                             // com.samsung.android.displaysolution.MdnieScenarioControlService.4
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayAdded(int i) {}
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayRemoved(int i) {
-            }
-        };
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayChanged(int i) {
+                        BrightnessInfo brightnessInfo;
+                        if (i != 0
+                                || (brightnessInfo =
+                                                MdnieScenarioControlService.this
+                                                        .mDisplayManager
+                                                        .getDisplay(i)
+                                                        .getBrightnessInfo())
+                                        == null) {
+                            return;
+                        }
+                        MdnieScenarioControlService mdnieScenarioControlService =
+                                MdnieScenarioControlService.this;
+                        boolean z = brightnessInfo.isAnimating;
+                        mdnieScenarioControlService.getClass();
+                        if (!z
+                                && mdnieScenarioControlService.mPrevAclValue == 5
+                                && mdnieScenarioControlService.mAutoBrightnessMode) {
+                            Slog.v(
+                                    "MdnieScenarioControlService",
+                                    "BrightnessAnimating() ACL mPrevAclValue ("
+                                            + MdnieScenarioControlService.this.mPrevAclValue
+                                            + ") - mCurrentValue (4)");
+                            SemDisplaySolutionManager semDisplaySolutionManager =
+                                    MdnieScenarioControlService.this.mSemDisplaySolutionManager;
+                            if (semDisplaySolutionManager != null) {
+                                semDisplaySolutionManager.onAutoCurrentLimitStateChangedInt(4);
+                            }
+                            MdnieScenarioControlService.this.mPrevAclValue = 4;
+                        }
+                    }
+
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayRemoved(int i) {}
+                };
         this.mContext = context;
-        DisplaySolutionDataBase displaySolutionDataBase = new DisplaySolutionDataBase(context, "displaysolution_setting.db", null, 1);
+        DisplaySolutionDataBase displaySolutionDataBase =
+                new DisplaySolutionDataBase(context, "displaysolution_setting.db", null, 1);
         this.mDBHelper = displaySolutionDataBase;
         this.mDisplaySolutionDataBase = displaySolutionDataBase.getWritableDatabase();
-        MSCSControlHandler mSCSControlHandler = new MSCSControlHandler(KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("MdnieScenarioControlServiceThread").getLooper());
+        MSCSControlHandler mSCSControlHandler =
+                new MSCSControlHandler(
+                        KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(
+                                        "MdnieScenarioControlServiceThread")
+                                .getLooper());
         this.mHandler = mSCSControlHandler;
-        this.mUseMdnieScenarioControlConfig = context.getResources().getBoolean(R.bool.config_noHomeScreen);
-        if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_SUPPORT_BLUE_FILTER_ADAPTIVE_MODE", 0) > 0) {
+        this.mUseMdnieScenarioControlConfig =
+                context.getResources().getBoolean(R.bool.config_noHomeScreen);
+        if (SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_LCD_SUPPORT_BLUE_FILTER_ADAPTIVE_MODE", 0)
+                > 0) {
             this.mUseEyeComfortSolutionServiceConfig = true;
         }
-        if (!"DDI".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LCD_CONFIG_HW_MDNIE"))) {
+        if (!"DDI"
+                .equals(
+                        SemFloatingFeature.getInstance()
+                                .getString("SEC_FLOATING_FEATURE_LCD_CONFIG_HW_MDNIE"))) {
             this.mSupportAPmDNIe = true;
         }
-        this.ANDROID_APP_LAUNCHER = context.getResources().getStringArray(R.array.config_deviceTabletopRotations);
-        this.SBROWSER_APP_LAUNCHER = context.getResources().getStringArray(R.array.config_halfFoldedDeviceStates);
-        this.CHROMEBROWSER_APP_LAUNCHER = context.getResources().getStringArray(R.array.config_disabledUntilUsedPreinstalledImes);
-        this.GALLERY_APP_LAUNCHER = context.getResources().getStringArray(R.array.config_enabledCredentialProviderService);
-        this.CAMERA_APP_LAUNCHER = context.getResources().getStringArray(R.array.config_disabledDreamComponents);
-        this.SVIDEO_APP_LAUNCHER = context.getResources().getStringArray(R.array.config_highAmbientBrightnessThresholdsOfFixedRefreshRate);
-        this.SVIDEO_APP_OPTION_LAUNCHER = context.getResources().getStringArray(R.array.config_highDisplayBrightnessThresholdsOfFixedRefreshRate);
-        this.VIDEO_APP_LAUNCHER = context.getResources().getStringArray(R.array.config_integrityRuleProviderPackages);
-        this.EMAIL_APP_LAUNCHER = context.getResources().getStringArray(R.array.config_displayWhiteBalanceStrongDisplayColorTemperatures);
-        this.EBOOK_APP_LAUNCHER = context.getResources().getStringArray(R.array.config_displayWhiteBalanceStrongAmbientColorTemperatures);
-        this.ACL_CONTROL_GALLERY_APP_LIST = context.getResources().getStringArray(R.array.config_deviceStatesAvailableForAppRequests);
+        this.ANDROID_APP_LAUNCHER =
+                context.getResources().getStringArray(R.array.config_deviceTabletopRotations);
+        this.SBROWSER_APP_LAUNCHER =
+                context.getResources().getStringArray(R.array.config_halfFoldedDeviceStates);
+        this.CHROMEBROWSER_APP_LAUNCHER =
+                context.getResources()
+                        .getStringArray(R.array.config_disabledUntilUsedPreinstalledImes);
+        this.GALLERY_APP_LAUNCHER =
+                context.getResources()
+                        .getStringArray(R.array.config_enabledCredentialProviderService);
+        this.CAMERA_APP_LAUNCHER =
+                context.getResources().getStringArray(R.array.config_disabledDreamComponents);
+        this.SVIDEO_APP_LAUNCHER =
+                context.getResources()
+                        .getStringArray(
+                                R.array.config_highAmbientBrightnessThresholdsOfFixedRefreshRate);
+        this.SVIDEO_APP_OPTION_LAUNCHER =
+                context.getResources()
+                        .getStringArray(
+                                R.array.config_highDisplayBrightnessThresholdsOfFixedRefreshRate);
+        this.VIDEO_APP_LAUNCHER =
+                context.getResources().getStringArray(R.array.config_integrityRuleProviderPackages);
+        this.EMAIL_APP_LAUNCHER =
+                context.getResources()
+                        .getStringArray(
+                                R.array.config_displayWhiteBalanceStrongDisplayColorTemperatures);
+        this.EBOOK_APP_LAUNCHER =
+                context.getResources()
+                        .getStringArray(
+                                R.array.config_displayWhiteBalanceStrongAmbientColorTemperatures);
+        this.ACL_CONTROL_GALLERY_APP_LIST =
+                context.getResources()
+                        .getStringArray(R.array.config_deviceStatesAvailableForAppRequests);
         context.getResources().getStringArray(R.array.config_deviceSpecificSystemServices);
-        this.DAY_OF_USE_SUPPORT_APP_LIST = context.getResources().getStringArray(R.array.config_displayCutoutPathArray);
-        this.OVERHEAT_CONTROL_SUPPORT_APP_LIST = context.getResources().getStringArray(R.array.config_globalActionsList);
-        this.EYE_COMFORT_BLACKLIST_APP_LIST = context.getResources().getStringArray(R.array.config_dropboxLowPriorityTags);
-        this.EYE_COMFORT_1_05_APP_LIST = context.getResources().getStringArray(R.array.config_dockExtconStateMapping);
-        this.EYE_COMFORT_1_10_APP_LIST = context.getResources().getStringArray(R.array.config_doubleClickVibePattern);
-        this.EYE_COMFORT_1_15_APP_LIST = context.getResources().getStringArray(R.array.config_dozeTapSensorPostureMapping);
-        this.DOU_BRIGHTNESS_STANDARD_VALUE = context.getResources().getInteger(R.integer.config_deskDockKeepsScreenOn);
-        this.AUTO_CURRENT_LIMIT_VERSION = context.getResources().getInteger(R.integer.config_audio_ring_vol_default);
-        this.FOREGROUND_RESCAN_DEBOUNCE_MILLIS = context.getResources().getInteger(R.integer.config_maxNumVisibleRecentTasks_lowRam);
-        this.ACTION_DETAIL_VIEW_STATE_IN_DEBOUNCE_MILLIS = context.getResources().getInteger(R.integer.config_autoBrightnessBrighteningLightDebounce);
+        this.DAY_OF_USE_SUPPORT_APP_LIST =
+                context.getResources().getStringArray(R.array.config_displayCutoutPathArray);
+        this.OVERHEAT_CONTROL_SUPPORT_APP_LIST =
+                context.getResources().getStringArray(R.array.config_globalActionsList);
+        this.EYE_COMFORT_BLACKLIST_APP_LIST =
+                context.getResources().getStringArray(R.array.config_dropboxLowPriorityTags);
+        this.EYE_COMFORT_1_05_APP_LIST =
+                context.getResources().getStringArray(R.array.config_dockExtconStateMapping);
+        this.EYE_COMFORT_1_10_APP_LIST =
+                context.getResources().getStringArray(R.array.config_doubleClickVibePattern);
+        this.EYE_COMFORT_1_15_APP_LIST =
+                context.getResources().getStringArray(R.array.config_dozeTapSensorPostureMapping);
+        this.DOU_BRIGHTNESS_STANDARD_VALUE =
+                context.getResources().getInteger(R.integer.config_deskDockKeepsScreenOn);
+        this.AUTO_CURRENT_LIMIT_VERSION =
+                context.getResources().getInteger(R.integer.config_audio_ring_vol_default);
+        this.FOREGROUND_RESCAN_DEBOUNCE_MILLIS =
+                context.getResources().getInteger(R.integer.config_maxNumVisibleRecentTasks_lowRam);
+        this.ACTION_DETAIL_VIEW_STATE_IN_DEBOUNCE_MILLIS =
+                context.getResources()
+                        .getInteger(R.integer.config_autoBrightnessBrighteningLightDebounce);
         context.getResources().getInteger(R.integer.config_autoBrightnessDarkeningLightDebounce);
-        this.ACTION_MOVIE_PLAYER_STATE_IN_DEBOUNCE_MILLIS = context.getResources().getInteger(R.integer.config_autoBrightnessShortTermModelTimeout);
-        this.ACTION_MOVIE_PLAYER_STATE_OUT_DEBOUNCE_MILLIS = context.getResources().getInteger(R.integer.config_autoGroupAtCount);
-        this.ACTION_VIDEO_APP_STATE_IN_DEBOUNCE_MILLIS = context.getResources().getInteger(R.integer.config_autoPowerModeThresholdAngle);
+        this.ACTION_MOVIE_PLAYER_STATE_IN_DEBOUNCE_MILLIS =
+                context.getResources()
+                        .getInteger(R.integer.config_autoBrightnessShortTermModelTimeout);
+        this.ACTION_MOVIE_PLAYER_STATE_OUT_DEBOUNCE_MILLIS =
+                context.getResources().getInteger(R.integer.config_autoGroupAtCount);
+        this.ACTION_VIDEO_APP_STATE_IN_DEBOUNCE_MILLIS =
+                context.getResources().getInteger(R.integer.config_autoPowerModeThresholdAngle);
         context.getResources().getInteger(R.integer.config_backgroundUserScheduledStopTimeSecs);
-        this.ACTION_SET_UI_MODE_DEBOUNCE_MILLIS = context.getResources().getInteger(R.integer.default_reserved_data_coding_scheme);
+        this.ACTION_SET_UI_MODE_DEBOUNCE_MILLIS =
+                context.getResources().getInteger(R.integer.default_reserved_data_coding_scheme);
         context.getResources().getInteger(R.integer.config_autoPowerModeAnyMotionSensor);
         context.getResources().getInteger(R.integer.config_maximumScreenDimDuration);
-        this.IS_CAMERA_APP_DEBOUNCE_MILLIS = context.getResources().getInteger(R.integer.config_maxUiWidth);
+        this.IS_CAMERA_APP_DEBOUNCE_MILLIS =
+                context.getResources().getInteger(R.integer.config_maxUiWidth);
         mSCSControlHandler.removeMessages(21);
         mSCSControlHandler.sendEmptyMessage(21);
-        this.mBrowserBrightnessStringArray = context.getResources().getStringArray(R.array.config_reduceBrightColorsCoefficientsNonlinear);
+        this.mBrowserBrightnessStringArray =
+                context.getResources()
+                        .getStringArray(R.array.config_reduceBrightColorsCoefficientsNonlinear);
         this.mBrowserBrightnessArray = new int[2];
         int i = 0;
         while (true) {
@@ -1606,9 +2074,15 @@ public final class MdnieScenarioControlService {
             this.mBrowserBrightnessArray[i] = Integer.parseInt(strArr[i]);
             i++;
         }
-        this.mVisionBoosterStringArray = this.mContext.getResources().getStringArray(R.array.config_displayWhiteBalanceAmbientColorTemperatures);
+        this.mVisionBoosterStringArray =
+                this.mContext
+                        .getResources()
+                        .getStringArray(R.array.config_displayWhiteBalanceAmbientColorTemperatures);
         if (new File(this.ADAPTIVE_CONTROL_PATH).exists()) {
-            String[] stringArray = this.mContext.getResources().getStringArray(R.array.config_locationDriverAssistancePackageNames);
+            String[] stringArray =
+                    this.mContext
+                            .getResources()
+                            .getStringArray(R.array.config_locationDriverAssistancePackageNames);
             if (stringArray.length == 2) {
                 this.mAclDimmingFunction = true;
             }
@@ -1617,52 +2091,100 @@ public final class MdnieScenarioControlService {
             sb.append(" , array lenght : ");
             sb.append(stringArray.length);
             sb.append(" , AclVersion : ");
-            SystemServiceManager$$ExternalSyntheticOutline0.m(sb, this.AUTO_CURRENT_LIMIT_VERSION, "MdnieScenarioControlService");
+            SystemServiceManager$$ExternalSyntheticOutline0.m(
+                    sb, this.AUTO_CURRENT_LIMIT_VERSION, "MdnieScenarioControlService");
         }
-        Slog.i("MdnieScenarioControlService", "mEnvironmentAdaptiveDisplaySupported true , mGlareReductionSupported : false");
-        if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_NATURAL_MODE_TYPE", 0) == 1) {
+        Slog.i(
+                "MdnieScenarioControlService",
+                "mEnvironmentAdaptiveDisplaySupported true , mGlareReductionSupported : false");
+        if (SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_NATURAL_MODE_TYPE", 0)
+                == 1) {
             this.mNaturalGammaScreenModeSupported = true;
         }
         SettingsObserver settingsObserver = new SettingsObserver(this.mHandler);
         this.mSemMultiWindowManager = new SemMultiWindowManager();
         ContentResolver contentResolver = this.mContext.getContentResolver();
         long uptimeMillis = SystemClock.uptimeMillis();
-        contentResolver.registerContentObserver(Settings.Global.getUriFor("low_power"), false, settingsObserver);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_mode_setting"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("vividness_intensity"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_brightness"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_auto_brightness_adj"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_brightness_mode"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("lcd_curtain"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("color_blind"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_off_timeout"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("blue_light_filter"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("blue_light_filter_adaptive_mode"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("blue_light_filter_anti_glare"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("blue_light_filter_type"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.Secure.getUriFor("reduce_bright_colors_activated"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.Secure.getUriFor("reduce_bright_colors_level"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("high_brightness_mode_pms_enter"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.Global.getUriFor("low_power"), false, settingsObserver);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_mode_setting"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("vividness_intensity"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_brightness"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_auto_brightness_adj"),
+                false,
+                settingsObserver,
+                -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_brightness_mode"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("lcd_curtain"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("color_blind"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_off_timeout"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("blue_light_filter"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("blue_light_filter_adaptive_mode"),
+                false,
+                settingsObserver,
+                -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("blue_light_filter_anti_glare"),
+                false,
+                settingsObserver,
+                -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("blue_light_filter_type"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.Secure.getUriFor("reduce_bright_colors_activated"),
+                false,
+                settingsObserver,
+                -1);
+        contentResolver.registerContentObserver(
+                Settings.Secure.getUriFor("reduce_bright_colors_level"),
+                false,
+                settingsObserver,
+                -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("high_brightness_mode_pms_enter"),
+                false,
+                settingsObserver,
+                -1);
         Slog.d("MdnieScenarioControlService", "registerDisplayStateListener");
-        this.mFoldStateListener = new SemWindowManager.FoldStateListener() { // from class: com.samsung.android.displaysolution.MdnieScenarioControlService.3
-            public final void onFoldStateChanged(boolean z) {
-                synchronized (MdnieScenarioControlService.this.mLock) {
-                    MdnieScenarioControlService.this.mIsFolded = z;
-                }
-            }
+        this.mFoldStateListener =
+                new SemWindowManager
+                        .FoldStateListener() { // from class:
+                                               // com.samsung.android.displaysolution.MdnieScenarioControlService.3
+                    public final void onFoldStateChanged(boolean z) {
+                        synchronized (MdnieScenarioControlService.this.mLock) {
+                            MdnieScenarioControlService.this.mIsFolded = z;
+                        }
+                    }
 
-            public final void onTableModeChanged(boolean z) {
-            }
-        };
-        SemWindowManager.getInstance().registerFoldStateListener(this.mFoldStateListener, (Handler) null);
+                    public final void onTableModeChanged(boolean z) {}
+                };
+        SemWindowManager.getInstance()
+                .registerFoldStateListener(this.mFoldStateListener, (Handler) null);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.BOOT_COMPLETED");
         intentFilter.addAction("android.intent.action.SCREEN_ON");
-        ActivityManagerService$$ExternalSyntheticOutline0.m(intentFilter, "android.intent.action.SCREEN_OFF", "android.intent.action.USER_PRESENT", "ACTION_MOVIE_PLAYER_STATE_IN", "ACTION_MOVIE_PLAYER_STATE_OUT");
+        ActivityManagerService$$ExternalSyntheticOutline0.m(
+                intentFilter,
+                "android.intent.action.SCREEN_OFF",
+                "android.intent.action.USER_PRESENT",
+                "ACTION_MOVIE_PLAYER_STATE_IN",
+                "ACTION_MOVIE_PLAYER_STATE_OUT");
         intentFilter.addAction("com.samsung.server.PowerManagerService.action.USER_ACTIVITY");
         intentFilter.addAction("com.samsung.systemui.statusbar.EXPANDED");
         intentFilter.addAction("com.samsung.systemui.statusbar.COLLAPSED");
-        this.mContext.registerReceiverAsUser(new ScreenWatchingReceiver(), UserHandle.ALL, intentFilter, null, null, 2);
+        this.mContext.registerReceiverAsUser(
+                new ScreenWatchingReceiver(), UserHandle.ALL, intentFilter, null, null, 2);
         this.mHandler.removeMessages(15);
         this.mHandler.sendEmptyMessageAtTime(15, uptimeMillis + this.GET_SYSTEM_SERVICES_MILLIS);
         SemSystemProperties.set("sys.mdniecontrolservice.mscon", "false");
@@ -1670,10 +2192,18 @@ public final class MdnieScenarioControlService {
             SemSystemProperties.set("sys.mdniecontrolservice.mscon", "true");
         }
         this.mScreenStateOn = true;
-        if ("500".equals(SemSystemProperties.get("persist.dm.passive.ambient_brightness", "")) || "1000".equals(SemSystemProperties.get("persist.dm.passive.ambient_brightness", ""))) {
+        if ("500".equals(SemSystemProperties.get("persist.dm.passive.ambient_brightness", ""))
+                || "1000"
+                        .equals(
+                                SemSystemProperties.get(
+                                        "persist.dm.passive.ambient_brightness", ""))) {
             SemSystemProperties.set("persist.dm.passive.ambient_brightness", "1000,1500");
         }
-        if ("172".equals(SemSystemProperties.get("persist.dm.passive.display_brightness", "")) || "255".equals(SemSystemProperties.get("persist.dm.passive.display_brightness", ""))) {
+        if ("172".equals(SemSystemProperties.get("persist.dm.passive.display_brightness", ""))
+                || "255"
+                        .equals(
+                                SemSystemProperties.get(
+                                        "persist.dm.passive.display_brightness", ""))) {
             SemSystemProperties.set("persist.dm.passive.display_brightness", "255,85");
         }
     }
@@ -1799,7 +2329,9 @@ public final class MdnieScenarioControlService {
         L9e:
             return r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.displaysolution.MdnieScenarioControlService.getStringFromFile(java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.displaysolution.MdnieScenarioControlService.getStringFromFile(java.lang.String):java.lang.String");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:12:0x0044  */
@@ -1812,7 +2344,9 @@ public final class MdnieScenarioControlService {
             Method dump skipped, instructions count: 337
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.displaysolution.MdnieScenarioControlService.browser_brightness_decrease_mode(boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.displaysolution.MdnieScenarioControlService.browser_brightness_decrease_mode(boolean):void");
     }
 
     /* JADX WARN: Finally extract failed */
@@ -1828,7 +2362,9 @@ public final class MdnieScenarioControlService {
                 displaySolutionDataBase.getClass();
                 SQLiteQueryBuilder sQLiteQueryBuilder = new SQLiteQueryBuilder();
                 sQLiteQueryBuilder.setTables("MSCS_APP_LIST");
-                cursor = sQLiteQueryBuilder.query(sQLiteDatabase, strArr, str, null, null, null, null);
+                cursor =
+                        sQLiteQueryBuilder.query(
+                                sQLiteDatabase, strArr, str, null, null, null, null);
                 if (cursor != null) {
                     while (cursor.moveToNext()) {
                         hashMap.put(cursor.getString(0), Boolean.TRUE);
@@ -1856,9 +2392,18 @@ public final class MdnieScenarioControlService {
             displaySolutionDataBase.getClass();
             SQLiteQueryBuilder sQLiteQueryBuilder = new SQLiteQueryBuilder();
             sQLiteQueryBuilder.setTables("MSCS_APP_LIST");
-            cursor = sQLiteQueryBuilder.query(this.mDisplaySolutionDataBase, null, "packagename = '" + str + "' ", null, null, null, null);
+            cursor =
+                    sQLiteQueryBuilder.query(
+                            this.mDisplaySolutionDataBase,
+                            null,
+                            "packagename = '" + str + "' ",
+                            null,
+                            null,
+                            null,
+                            null);
             if (cursor != null && cursor.moveToFirst()) {
-                this.mAppLaunchStateInDatabase = cursor.getInt(cursor.getColumnIndex("settingstate"));
+                this.mAppLaunchStateInDatabase =
+                        cursor.getInt(cursor.getColumnIndex("settingstate"));
             }
             return this.mAppLaunchStateInDatabase;
         } finally {
@@ -1889,17 +2434,20 @@ public final class MdnieScenarioControlService {
     }
 
     public final boolean getting_knox_mode_enabled() {
-        return SemPersonaManager.isKnoxId(((SemPersonaManager) this.mContext.getSystemService("persona")).getFocusedUser());
+        return SemPersonaManager.isKnoxId(
+                ((SemPersonaManager) this.mContext.getSystemService("persona")).getFocusedUser());
     }
 
     public final boolean getting_setting_value() {
         boolean z = getting_knox_mode_enabled();
         ContentResolver contentResolver = this.mContext.getContentResolver();
         if (z) {
-            this.mHdrEffectEnabled = Settings.System.getIntForUser(contentResolver, "hdr_effect", 0, 0) == 1;
+            this.mHdrEffectEnabled =
+                    Settings.System.getIntForUser(contentResolver, "hdr_effect", 0, 0) == 1;
             Slog.d("MdnieScenarioControlService", "Use Owner User");
         } else {
-            this.mHdrEffectEnabled = Settings.System.getIntForUser(contentResolver, "hdr_effect", 0, -2) == 1;
+            this.mHdrEffectEnabled =
+                    Settings.System.getIntForUser(contentResolver, "hdr_effect", 0, -2) == 1;
             Slog.d("MdnieScenarioControlService", "Use Current User");
         }
         return this.mHdrEffectEnabled;
@@ -1914,7 +2462,15 @@ public final class MdnieScenarioControlService {
             displaySolutionDataBase.getClass();
             SQLiteQueryBuilder sQLiteQueryBuilder = new SQLiteQueryBuilder();
             sQLiteQueryBuilder.setTables("MSCS_APP_LIST");
-            cursor = sQLiteQueryBuilder.query(this.mDisplaySolutionDataBase, null, "packagename = '" + str + "' ", null, null, null, null);
+            cursor =
+                    sQLiteQueryBuilder.query(
+                            this.mDisplaySolutionDataBase,
+                            null,
+                            "packagename = '" + str + "' ",
+                            null,
+                            null,
+                            null,
+                            null);
             if ((cursor != null ? cursor.getCount() : 0) == 0) {
                 SQLiteDatabase sQLiteDatabase = this.mDisplaySolutionDataBase;
                 DisplaySolutionDataBase displaySolutionDataBase2 = this.mDBHelper;
@@ -1974,7 +2530,13 @@ public final class MdnieScenarioControlService {
                     if (i == 1) {
                         i = 3;
                     }
-                    Slog.v("MdnieScenarioControlService", "setAclModeScenario() ACL mPrevAclValue (" + this.mPrevAclValue + ") - mCurrentValue (" + this.mCurAclValue + ")");
+                    Slog.v(
+                            "MdnieScenarioControlService",
+                            "setAclModeScenario() ACL mPrevAclValue ("
+                                    + this.mPrevAclValue
+                                    + ") - mCurrentValue ("
+                                    + this.mCurAclValue
+                                    + ")");
                     this.mSemDisplaySolutionManager.onAutoCurrentLimitStateChangedInt(i);
                     this.mPrevAclValue = this.mCurAclValue;
                     return;
@@ -1986,7 +2548,13 @@ public final class MdnieScenarioControlService {
                         i = 5;
                     }
                 }
-                Slog.v("MdnieScenarioControlService", "setAclModeScenario() ACL mPrevAclValue (" + this.mPrevAclValue + ") - mCurrentValue (" + this.mCurAclValue + ")");
+                Slog.v(
+                        "MdnieScenarioControlService",
+                        "setAclModeScenario() ACL mPrevAclValue ("
+                                + this.mPrevAclValue
+                                + ") - mCurrentValue ("
+                                + this.mCurAclValue
+                                + ")");
                 this.mSemDisplaySolutionManager.onAutoCurrentLimitStateChangedInt(i);
                 this.mPrevAclValue = this.mCurAclValue;
             }
@@ -1999,37 +2567,61 @@ public final class MdnieScenarioControlService {
             if (i == 0) {
                 this.mUseScaleFactorState = false;
                 semDisplaySolutionManager.setMultipleScreenBrightness("brightness_scale_off");
-                Slog.v("MdnieScenarioControlService", "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness(" + i + ")");
+                Slog.v(
+                        "MdnieScenarioControlService",
+                        "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness("
+                                + i
+                                + ")");
                 return;
             }
             if (i == 1 && !this.isLockScreenOn) {
                 this.mUseScaleFactorState = true;
                 semDisplaySolutionManager.setMultipleScreenBrightness("brightness_scale_on_1");
-                Slog.v("MdnieScenarioControlService", "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness(" + i + ")");
+                Slog.v(
+                        "MdnieScenarioControlService",
+                        "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness("
+                                + i
+                                + ")");
                 return;
             }
             if (i == 2 && !this.isLockScreenOn) {
                 this.mUseScaleFactorState = true;
                 semDisplaySolutionManager.setMultipleScreenBrightness("brightness_scale_on_2");
-                Slog.v("MdnieScenarioControlService", "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness(" + i + ")");
+                Slog.v(
+                        "MdnieScenarioControlService",
+                        "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness("
+                                + i
+                                + ")");
                 return;
             }
             if (i == 3 && !this.isLockScreenOn) {
                 this.mUseScaleFactorState = true;
                 semDisplaySolutionManager.setMultipleScreenBrightness("brightness_scale_on_3");
-                Slog.v("MdnieScenarioControlService", "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness(" + i + ")");
+                Slog.v(
+                        "MdnieScenarioControlService",
+                        "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness("
+                                + i
+                                + ")");
                 return;
             }
             if (i == 4 && !this.isLockScreenOn) {
                 this.mUseScaleFactorState = true;
                 semDisplaySolutionManager.setMultipleScreenBrightness("brightness_scale_on_4");
-                Slog.v("MdnieScenarioControlService", "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness(" + i + ")");
+                Slog.v(
+                        "MdnieScenarioControlService",
+                        "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness("
+                                + i
+                                + ")");
                 return;
             }
             if (i == 5 && !this.isLockScreenOn) {
                 this.mUseScaleFactorState = true;
                 semDisplaySolutionManager.setMultipleScreenBrightness("brightness_scale_on_5");
-                Slog.v("MdnieScenarioControlService", "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness(" + i + ")");
+                Slog.v(
+                        "MdnieScenarioControlService",
+                        "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness("
+                                + i
+                                + ")");
                 return;
             }
             if (i != 6 || this.isLockScreenOn) {
@@ -2038,23 +2630,34 @@ public final class MdnieScenarioControlService {
                 }
                 this.mUseScaleFactorState = true;
                 semDisplaySolutionManager.setMultipleScreenBrightness("brightness_scale_on_7");
-                Slog.v("MdnieScenarioControlService", "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness(" + i + ")");
+                Slog.v(
+                        "MdnieScenarioControlService",
+                        "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness("
+                                + i
+                                + ")");
                 return;
             }
             this.mUseScaleFactorState = true;
             if (this.DOU_BRIGHTNESS_STANDARD_VALUE == 255) {
                 semDisplaySolutionManager.setMultipleScreenBrightness("brightness_scale_off");
-                Slog.v("MdnieScenarioControlService", "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness(" + i + ")");
+                Slog.v(
+                        "MdnieScenarioControlService",
+                        "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness("
+                                + i
+                                + ")");
                 return;
             }
             semDisplaySolutionManager.setMultipleScreenBrightness("brightness_scale_on_6");
-            Slog.v("MdnieScenarioControlService", "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness(" + i + ")");
+            Slog.v(
+                    "MdnieScenarioControlService",
+                    "Calling SemDisplaySolutionManager API(setMultipleScreenBrightness(" + i + ")");
         }
     }
 
     public final void setCameraAppLaunch(boolean z) {
         if (this.mSemDisplaySolutionManager == null) {
-            this.mSemDisplaySolutionManager = (SemDisplaySolutionManager) this.mContext.getSystemService("DisplaySolution");
+            this.mSemDisplaySolutionManager =
+                    (SemDisplaySolutionManager) this.mContext.getSystemService("DisplaySolution");
         }
         SemDisplaySolutionManager semDisplaySolutionManager = this.mSemDisplaySolutionManager;
         if (semDisplaySolutionManager != null) {
@@ -2064,7 +2667,8 @@ public final class MdnieScenarioControlService {
 
     public final void setDouAppLaunch(boolean z) {
         if (this.mSemDisplaySolutionManager == null) {
-            this.mSemDisplaySolutionManager = (SemDisplaySolutionManager) this.mContext.getSystemService("DisplaySolution");
+            this.mSemDisplaySolutionManager =
+                    (SemDisplaySolutionManager) this.mContext.getSystemService("DisplaySolution");
         }
         SemDisplaySolutionManager semDisplaySolutionManager = this.mSemDisplaySolutionManager;
         if (semDisplaySolutionManager != null) {
@@ -2077,13 +2681,16 @@ public final class MdnieScenarioControlService {
         SemMdnieManager semMdnieManager = this.mMdnieManager;
         if (semMdnieManager != null) {
             semMdnieManager.setContentMode(i);
-            Slog.v("MdnieScenarioControlService", "Calling MdnieManager API(setContentMode(" + i + "))");
+            Slog.v(
+                    "MdnieScenarioControlService",
+                    "Calling MdnieManager API(setContentMode(" + i + "))");
             MSCSControlHandler mSCSControlHandler = this.mHandler;
             if (i == 8) {
                 this.mBrowserAppLauncher = true;
                 Slog.d("MdnieScenarioControlService", "Start Browser Brightness Decrease Timer");
                 mSCSControlHandler.removeMessages(17);
-                mSCSControlHandler.sendEmptyMessageAtTime(17, uptimeMillis + this.ACTION_BROWSER_BRIGHTNESS_DECREASE_FIRST_MILLIS);
+                mSCSControlHandler.sendEmptyMessageAtTime(
+                        17, uptimeMillis + this.ACTION_BROWSER_BRIGHTNESS_DECREASE_FIRST_MILLIS);
                 return;
             }
             this.mBrowserAppLauncher = false;
@@ -2119,11 +2726,16 @@ public final class MdnieScenarioControlService {
             }
         }
         mdnie_reset();
-        ProxyManager$$ExternalSyntheticOutline0.m("MdnieScenarioControlService", new StringBuilder("mAclOffEnabled : "), this.mAclOffEnabled);
+        ProxyManager$$ExternalSyntheticOutline0.m(
+                "MdnieScenarioControlService",
+                new StringBuilder("mAclOffEnabled : "),
+                this.mAclOffEnabled);
         if (this.mAclOffEnabled && !this.isLockScreenOn) {
             setAclModeScenario(1, false);
         }
-        if (this.mOverheatControlSupportAppState && !this.mHighBrightnessModeEnabled && !this.mMultiWindowOn) {
+        if (this.mOverheatControlSupportAppState
+                && !this.mHighBrightnessModeEnabled
+                && !this.mMultiWindowOn) {
             setBrightnessScaleFactor(7);
         } else if (this.mUseScaleFactorState) {
             setBrightnessScaleFactor(0);
@@ -2144,7 +2756,8 @@ public final class MdnieScenarioControlService {
 
     public final void setVideoAppLaunch(boolean z) {
         if (this.mSemDisplaySolutionManager == null) {
-            this.mSemDisplaySolutionManager = (SemDisplaySolutionManager) this.mContext.getSystemService("DisplaySolution");
+            this.mSemDisplaySolutionManager =
+                    (SemDisplaySolutionManager) this.mContext.getSystemService("DisplaySolution");
         }
         SemDisplaySolutionManager semDisplaySolutionManager = this.mSemDisplaySolutionManager;
         if (semDisplaySolutionManager != null) {
@@ -2157,9 +2770,18 @@ public final class MdnieScenarioControlService {
         if (semMdnieManager != null) {
             int i3 = -1;
             try {
-                Slog.d("MdnieScenarioControlService", "getVisionBoosterIndex() mAutoBrightnessMode : " + this.mAutoBrightnessMode + " , mReduceBrightColorsActivatedEnabled : " + this.mReduceBrightColorsActivatedEnabled + " , lux : " + i2);
+                Slog.d(
+                        "MdnieScenarioControlService",
+                        "getVisionBoosterIndex() mAutoBrightnessMode : "
+                                + this.mAutoBrightnessMode
+                                + " , mReduceBrightColorsActivatedEnabled : "
+                                + this.mReduceBrightColorsActivatedEnabled
+                                + " , lux : "
+                                + i2);
                 int i4 = 0;
-                if (this.mAutoBrightnessMode && !this.mReduceBrightColorsActivatedEnabled && i2 != -1) {
+                if (this.mAutoBrightnessMode
+                        && !this.mReduceBrightColorsActivatedEnabled
+                        && i2 != -1) {
                     int i5 = 0;
                     while (true) {
                         String[] strArr = this.mVisionBoosterStringArray;
@@ -2181,7 +2803,9 @@ public final class MdnieScenarioControlService {
     }
 
     public final void setmDNIeModeState(String str) {
-        if (!this.mNaturalGammaScreenModeSupported || str == null || str.equals(this.mPrevmDNIeMode)) {
+        if (!this.mNaturalGammaScreenModeSupported
+                || str == null
+                || str.equals(this.mPrevmDNIeMode)) {
             return;
         }
         this.mPrevmDNIeMode = str;
@@ -2194,9 +2818,13 @@ public final class MdnieScenarioControlService {
             if (i == 3) {
                 wcg_property_changed(0, 300);
             }
-        } else if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0) == 1) {
+        } else if (SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0)
+                == 1) {
             wcg_property_changed(0, 256);
-        } else if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0) >= 2) {
+        } else if (SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDPLUS", 0)
+                >= 2) {
             wcg_property_changed(0, this.mVividnessIndex + 256);
         }
     }
@@ -2204,19 +2832,35 @@ public final class MdnieScenarioControlService {
     public final void setting_is_changed() {
         ContentResolver contentResolver = this.mContext.getContentResolver();
         Settings.Global.getInt(contentResolver, "low_power", 0);
-        this.mScreenCurtainEnabled = Settings.System.getIntForUser(contentResolver, "lcd_curtain", 0, -2) == 1;
-        this.mColorBlindEnabled = Settings.System.getIntForUser(contentResolver, "color_blind", 0, -2) == 1;
-        this.mHighBrightnessModeEnabled = Settings.System.getIntForUser(contentResolver, "high_brightness_mode_pms_enter", 0, -2) == 1;
-        this.mAutoBrightnessMode = Settings.System.getIntForUser(contentResolver, "screen_brightness_mode", 0, -2) == 1;
-        this.mScreenOffTomeoutAbnormal = Settings.System.getIntForUser(contentResolver, "screen_off_timeout", 0, -2) > 600000;
+        this.mScreenCurtainEnabled =
+                Settings.System.getIntForUser(contentResolver, "lcd_curtain", 0, -2) == 1;
+        this.mColorBlindEnabled =
+                Settings.System.getIntForUser(contentResolver, "color_blind", 0, -2) == 1;
+        this.mHighBrightnessModeEnabled =
+                Settings.System.getIntForUser(
+                                contentResolver, "high_brightness_mode_pms_enter", 0, -2)
+                        == 1;
+        this.mAutoBrightnessMode =
+                Settings.System.getIntForUser(contentResolver, "screen_brightness_mode", 0, -2)
+                        == 1;
+        this.mScreenOffTomeoutAbnormal =
+                Settings.System.getIntForUser(contentResolver, "screen_off_timeout", 0, -2)
+                        > 600000;
         Settings.System.getIntForUser(contentResolver, "blue_light_filter", 0, -2);
         Settings.System.getIntForUser(contentResolver, "blue_light_filter_adaptive_mode", 0, -2);
         Settings.System.getIntForUser(contentResolver, "blue_light_filter_anti_glare", 0, -2);
         Settings.System.getIntForUser(contentResolver, "blue_light_filter_type", 0, -2);
-        this.mReduceBrightColorsActivatedEnabled = Settings.Secure.getIntForUser(contentResolver, "reduce_bright_colors_activated", 0, -2) == 1;
-        this.mReduceBrightColorsLevel = Settings.Secure.getIntForUser(contentResolver, "reduce_bright_colors_level", 50, -2);
-        this.mScreenModeSetting = Settings.System.getIntForUser(contentResolver, "screen_mode_setting", 4, -2);
-        this.mVividnessIndex = Settings.System.getIntForUser(contentResolver, "vividness_intensity", 0, -2);
+        this.mReduceBrightColorsActivatedEnabled =
+                Settings.Secure.getIntForUser(
+                                contentResolver, "reduce_bright_colors_activated", 0, -2)
+                        == 1;
+        this.mReduceBrightColorsLevel =
+                Settings.Secure.getIntForUser(
+                        contentResolver, "reduce_bright_colors_level", 50, -2);
+        this.mScreenModeSetting =
+                Settings.System.getIntForUser(contentResolver, "screen_mode_setting", 4, -2);
+        this.mVividnessIndex =
+                Settings.System.getIntForUser(contentResolver, "vividness_intensity", 0, -2);
         boolean z = (this.mScreenCurtainEnabled || this.mColorBlindEnabled) ? false : true;
         this.mSettingCondition = z;
         if (this.mScreenStateOn && z && this.mWorkingCondition) {
@@ -2229,7 +2873,9 @@ public final class MdnieScenarioControlService {
     }
 
     public final void updateVideoEnhancerSettingState(int i, String str) {
-        Slog.d("MdnieScenarioControlService", "Update Video Enhancer SubKey state. package : " + str + " , state : " + i);
+        Slog.d(
+                "MdnieScenarioControlService",
+                "Update Video Enhancer SubKey state. package : " + str + " , state : " + i);
         ContentValues contentValues = new ContentValues();
         contentValues.put("settingstate", Integer.valueOf(i));
         SQLiteDatabase sQLiteDatabase = this.mDisplaySolutionDataBase;
@@ -2249,7 +2895,10 @@ public final class MdnieScenarioControlService {
         }
         this.mPrevPropertyValue = i;
         this.mPrevRenderIntentValue = i2;
-        Slog.d("MdnieScenarioControlService", DualAppManagerService$$ExternalSyntheticOutline0.m(i, i2, "GRAPHIC_PROPERTY(", "), SurfaceFlinger_RI(", ")"));
+        Slog.d(
+                "MdnieScenarioControlService",
+                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                        i, i2, "GRAPHIC_PROPERTY(", "), SurfaceFlinger_RI(", ")"));
         SemSystemProperties.set("persist.sys.sf.native_mode", Integer.toString(i));
         IBinder service = ServiceManager.getService("SurfaceFlinger");
         if (service != null) {

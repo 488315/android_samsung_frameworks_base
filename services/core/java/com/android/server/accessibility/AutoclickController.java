@@ -28,14 +28,20 @@ public final class AutoclickController extends BaseEventStreamTransformation {
 
         public ClickDelayObserver(int i, Handler handler) {
             super(handler);
-            this.mAutoclickDelaySettingUri = Settings.Secure.getUriFor("accessibility_autoclick_delay");
+            this.mAutoclickDelaySettingUri =
+                    Settings.Secure.getUriFor("accessibility_autoclick_delay");
             this.mUserId = i;
         }
 
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
             if (this.mAutoclickDelaySettingUri.equals(uri)) {
-                this.mClickScheduler.mDelay = Settings.Secure.getIntForUser(this.mContentResolver, "accessibility_autoclick_delay", 600, this.mUserId);
+                this.mClickScheduler.mDelay =
+                        Settings.Secure.getIntForUser(
+                                this.mContentResolver,
+                                "accessibility_autoclick_delay",
+                                600,
+                                this.mUserId);
             }
         }
     }
@@ -89,15 +95,36 @@ public final class AutoclickController extends BaseEventStreamTransformation {
             if (motionEvent != null && AutoclickController.this.mNext != null) {
                 int actionIndex = motionEvent.getActionIndex();
                 if (this.mTempPointerProperties == null) {
-                    this.mTempPointerProperties = new MotionEvent.PointerProperties[]{new MotionEvent.PointerProperties()};
+                    this.mTempPointerProperties =
+                            new MotionEvent.PointerProperties[] {
+                                new MotionEvent.PointerProperties()
+                            };
                 }
-                this.mLastMotionEvent.getPointerProperties(actionIndex, this.mTempPointerProperties[0]);
+                this.mLastMotionEvent.getPointerProperties(
+                        actionIndex, this.mTempPointerProperties[0]);
                 if (this.mTempPointerCoords == null) {
-                    this.mTempPointerCoords = new MotionEvent.PointerCoords[]{new MotionEvent.PointerCoords()};
+                    this.mTempPointerCoords =
+                            new MotionEvent.PointerCoords[] {new MotionEvent.PointerCoords()};
                 }
                 this.mLastMotionEvent.getPointerCoords(actionIndex, this.mTempPointerCoords[0]);
                 long uptimeMillis2 = SystemClock.uptimeMillis();
-                MotionEvent obtain = MotionEvent.obtain(uptimeMillis2, uptimeMillis2, 0, 1, this.mTempPointerProperties, this.mTempPointerCoords, this.mMetaState, 1, 1.0f, 1.0f, this.mLastMotionEvent.getDeviceId(), 0, this.mLastMotionEvent.getSource(), this.mLastMotionEvent.getDisplayId(), this.mLastMotionEvent.getFlags());
+                MotionEvent obtain =
+                        MotionEvent.obtain(
+                                uptimeMillis2,
+                                uptimeMillis2,
+                                0,
+                                1,
+                                this.mTempPointerProperties,
+                                this.mTempPointerCoords,
+                                this.mMetaState,
+                                1,
+                                1.0f,
+                                1.0f,
+                                this.mLastMotionEvent.getDeviceId(),
+                                0,
+                                this.mLastMotionEvent.getSource(),
+                                this.mLastMotionEvent.getDisplayId(),
+                                this.mLastMotionEvent.getFlags());
                 MotionEvent obtain2 = MotionEvent.obtain(obtain);
                 obtain2.setAction(11);
                 obtain2.setActionButton(1);
@@ -121,11 +148,28 @@ public final class AutoclickController extends BaseEventStreamTransformation {
         }
 
         public final String toString() {
-            return "ClickScheduler: { active=" + this.mActive + ", delay=" + this.mDelay + ", scheduledClickTime=" + this.mScheduledClickTime + ", anchor={x:" + this.mAnchorCoords.x + ", y:" + this.mAnchorCoords.y + "}, metastate=" + this.mMetaState + ", policyFlags=" + this.mEventPolicyFlags + ", lastMotionEvent=" + this.mLastMotionEvent + " }";
+            return "ClickScheduler: { active="
+                    + this.mActive
+                    + ", delay="
+                    + this.mDelay
+                    + ", scheduledClickTime="
+                    + this.mScheduledClickTime
+                    + ", anchor={x:"
+                    + this.mAnchorCoords.x
+                    + ", y:"
+                    + this.mAnchorCoords.y
+                    + "}, metastate="
+                    + this.mMetaState
+                    + ", policyFlags="
+                    + this.mEventPolicyFlags
+                    + ", lastMotionEvent="
+                    + this.mLastMotionEvent
+                    + " }";
         }
     }
 
-    public AutoclickController(Context context, int i, AccessibilityTraceManager accessibilityTraceManager) {
+    public AutoclickController(
+            Context context, int i, AccessibilityTraceManager accessibilityTraceManager) {
         this.mTrace = accessibilityTraceManager;
         this.mContext = context;
         this.mUserId = i;
@@ -162,7 +206,10 @@ public final class AutoclickController extends BaseEventStreamTransformation {
     public final void onKeyEvent(KeyEvent keyEvent, int i) {
         AccessibilityTraceManager accessibilityTraceManager = this.mTrace;
         if (accessibilityTraceManager.isA11yTracingEnabledForTypes(4096L)) {
-            accessibilityTraceManager.logTrace("AutoclickController.onKeyEvent", 4096L, "event=" + keyEvent + ";policyFlags=" + i);
+            accessibilityTraceManager.logTrace(
+                    "AutoclickController.onKeyEvent",
+                    4096L,
+                    "event=" + keyEvent + ";policyFlags=" + i);
         }
         if (this.mClickScheduler != null) {
             if (KeyEvent.isModifierKey(keyEvent.getKeyCode())) {
@@ -182,11 +229,15 @@ public final class AutoclickController extends BaseEventStreamTransformation {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onMotionEvent(android.view.MotionEvent r10, android.view.MotionEvent r11, int r12) {
+    public final void onMotionEvent(
+            android.view.MotionEvent r10, android.view.MotionEvent r11, int r12) {
         /*
             Method dump skipped, instructions count: 320
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.AutoclickController.onMotionEvent(android.view.MotionEvent, android.view.MotionEvent, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.AutoclickController.onMotionEvent(android.view.MotionEvent,"
+                    + " android.view.MotionEvent, int):void");
     }
 }

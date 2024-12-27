@@ -4,11 +4,14 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.provider.UserDictionary;
 import android.view.View;
+
 import com.android.internal.R;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.Locale;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes4.dex */
 public class AutoText {

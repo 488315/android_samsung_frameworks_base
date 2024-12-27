@@ -4,24 +4,28 @@ import android.annotation.SystemApi;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class RtpHeaderExtensionType implements Parcelable {
-    public static final Parcelable.Creator<RtpHeaderExtensionType> CREATOR = new Parcelable.Creator<RtpHeaderExtensionType>() { // from class: android.telephony.ims.RtpHeaderExtensionType.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RtpHeaderExtensionType createFromParcel(Parcel in) {
-            return new RtpHeaderExtensionType(in);
-        }
+    public static final Parcelable.Creator<RtpHeaderExtensionType> CREATOR =
+            new Parcelable.Creator<
+                    RtpHeaderExtensionType>() { // from class:
+                                                // android.telephony.ims.RtpHeaderExtensionType.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RtpHeaderExtensionType createFromParcel(Parcel in) {
+                    return new RtpHeaderExtensionType(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RtpHeaderExtensionType[] newArray(int size) {
-            return new RtpHeaderExtensionType[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RtpHeaderExtensionType[] newArray(int size) {
+                    return new RtpHeaderExtensionType[size];
+                }
+            };
     private int mLocalIdentifier;
     private Uri mUri;
 
@@ -79,6 +83,10 @@ public final class RtpHeaderExtensionType implements Parcelable {
     }
 
     public String toString() {
-        return "RtpHeaderExtensionType{mLocalIdentifier=" + this.mLocalIdentifier + ", mUri=" + this.mUri + "}";
+        return "RtpHeaderExtensionType{mLocalIdentifier="
+                + this.mLocalIdentifier
+                + ", mUri="
+                + this.mUri
+                + "}";
     }
 }

@@ -21,6 +21,7 @@ import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.security.keystore.KeyGenParameterSpec;
 import android.util.Log;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.FunctionalUtils;
@@ -46,6 +47,7 @@ import com.android.server.knox.dar.sdp.security.BytesUtil;
 import com.android.server.knox.zt.devicetrust.AppMonitor;
 import com.android.server.knox.zt.devicetrust.EndpointMonitorImpl;
 import com.android.server.pm.UserManagerInternal;
+
 import com.samsung.android.knox.EnterpriseKnoxManager;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
@@ -61,6 +63,7 @@ import com.samsung.android.security.keystore.AttestParameterSpec;
 import com.samsung.android.security.keystore.AttestationUtils;
 import com.samsung.android.service.DeviceRootKeyService.DeviceRootKeyServiceManager;
 import com.samsung.android.service.EngineeringMode.EngineeringModeManager;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -127,13 +130,26 @@ public final class DarManagerService extends IDarManagerService.Stub {
                 darManagerService.getClass();
                 if (StorageManager.isFileEncrypted()) {
                     if (SemPersonaManager.isKnoxId(i2)) {
-                        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i2, "Locked boot completed for user ", "DarManagerService");
+                        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                                i2, "Locked boot completed for user ", "DarManagerService");
                     }
                     if (SemPersonaManager.isSecureFolderId(i2)) {
-                        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i2, "Locked boot completed for SecureFolder user ", "DarManagerService");
-                        int intForUser = Settings.Secure.getIntForUser(darManagerService.mContext.getContentResolver(), "automatic_data_decryption", 0, i2);
-                        UserInfo profileParent = darManagerService.getUserManager().getProfileParent(i2);
-                        if (profileParent == null || !darManagerService.getUserManager().isUserUnlockingOrUnlocked(profileParent.id)) {
+                        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                                i2,
+                                "Locked boot completed for SecureFolder user ",
+                                "DarManagerService");
+                        int intForUser =
+                                Settings.Secure.getIntForUser(
+                                        darManagerService.mContext.getContentResolver(),
+                                        "automatic_data_decryption",
+                                        0,
+                                        i2);
+                        UserInfo profileParent =
+                                darManagerService.getUserManager().getProfileParent(i2);
+                        if (profileParent == null
+                                || !darManagerService
+                                        .getUserManager()
+                                        .isUserUnlockingOrUnlocked(profileParent.id)) {
                             StringBuilder sb = new StringBuilder("Parent ");
                             sb.append(profileParent != null ? profileParent.id : 0);
                             sb.append(" is not ready to unlock secure folder user ");
@@ -141,19 +157,24 @@ public final class DarManagerService extends IDarManagerService.Stub {
                             Log.d("DarManagerService", sb.toString());
                             return;
                         }
-                        if (darManagerService.getUserManager().isUserUnlockingOrUnlocked(i2) || intForUser != 1) {
+                        if (darManagerService.getUserManager().isUserUnlockingOrUnlocked(i2)
+                                || intForUser != 1) {
                             return;
                         }
                         Log.d("DarManagerService", "Unlock secure folder user " + i2);
                         darManagerService.checkSystemPermission();
-                        darManagerService.mDarHandler.sendMessage(darManagerService.mDarHandler.obtainMessage(150, i2, 0));
+                        darManagerService.mDarHandler.sendMessage(
+                                darManagerService.mDarHandler.obtainMessage(150, i2, 0));
                         return;
                     }
                     return;
                 }
                 return;
             }
-            GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder(" MSG_SET_RESET_TOKEN_FOR_LEGACY : user : "), message.arg1, "DarManagerServiceHandler");
+            GestureWakeup$$ExternalSyntheticOutline0.m(
+                    new StringBuilder(" MSG_SET_RESET_TOKEN_FOR_LEGACY : user : "),
+                    message.arg1,
+                    "DarManagerServiceHandler");
             String str = (String) message.obj;
             int i3 = message.arg1;
             darManagerService.getClass();
@@ -169,42 +190,86 @@ public final class DarManagerService extends IDarManagerService.Stub {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
             } catch (Exception e) {
-                Log.e("DarManagerService", "exception occurred during getUserInfo for Legacy user " + i3, e);
+                Log.e(
+                        "DarManagerService",
+                        "exception occurred during getUserInfo for Legacy user " + i3,
+                        e);
                 e.printStackTrace();
                 darManagerService.mInjector.getClass();
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 userInfo = null;
             }
             if (userInfo == null) {
-                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i3, "handle reset Token getUserInfo failed. ", "DarManagerService");
+                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                        i3, "handle reset Token getUserInfo failed. ", "DarManagerService");
                 return;
             }
             boolean isSecureFolder = userInfo.isSecureFolder();
             if (isSecureFolder) {
-                GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("Identified as legacy type container user : "), userInfo.id, "DARUtil");
+                GestureWakeup$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Identified as legacy type container user : "),
+                        userInfo.id,
+                        "DARUtil");
             }
             if (!isSecureFolder) {
-                Log.d("DarManagerService", String.format("On created - User %d workspace identified as new-fashioned", Integer.valueOf(i3)));
+                Log.d(
+                        "DarManagerService",
+                        String.format(
+                                "On created - User %d workspace identified as new-fashioned",
+                                Integer.valueOf(i3)));
                 return;
             }
-            Log.d("DarManagerService", String.format("On created - User %d workspace identified as old-fashioned", Integer.valueOf(i3)));
+            Log.d(
+                    "DarManagerService",
+                    String.format(
+                            "On created - User %d workspace identified as old-fashioned",
+                            Integer.valueOf(i3)));
             boolean isEmpty = SecureUtil.isEmpty(str);
-            byte[] generateSeed = isEmpty ? SecureUtil.sSecureRandom.generateSeed(32) : str.getBytes(Charset.forName("UTF-8"));
+            byte[] generateSeed =
+                    isEmpty
+                            ? SecureUtil.sSecureRandom.generateSeed(32)
+                            : str.getBytes(Charset.forName("UTF-8"));
             if (isEmpty) {
-                Log.d("DarManagerService", String.format("On created - Save reset token via protector for Legacy user %d has been deployed : %s", Integer.valueOf(i3), Boolean.valueOf(darManagerService.saveResetTokenViaProtectorForLegacy(generateSeed, i3))));
+                Log.d(
+                        "DarManagerService",
+                        String.format(
+                                "On created - Save reset token via protector for Legacy user %d has"
+                                    + " been deployed : %s",
+                                Integer.valueOf(i3),
+                                Boolean.valueOf(
+                                        darManagerService.saveResetTokenViaProtectorForLegacy(
+                                                generateSeed, i3))));
             }
-            boolean resetTokenForLegacy = darManagerService.setResetTokenForLegacy(generateSeed, i3);
+            boolean resetTokenForLegacy =
+                    darManagerService.setResetTokenForLegacy(generateSeed, i3);
             SecureUtil.clear(generateSeed);
-            Log.d("DarManagerService", String.format("On created - Set reset token for Legacy user %d has been deployed : %s", Integer.valueOf(i3), Boolean.valueOf(resetTokenForLegacy)));
+            Log.d(
+                    "DarManagerService",
+                    String.format(
+                            "On created - Set reset token for Legacy user %d has been deployed :"
+                                + " %s",
+                            Integer.valueOf(i3), Boolean.valueOf(resetTokenForLegacy)));
             if (isEmpty) {
                 return;
             }
             try {
-                z = EnterpriseKnoxManager.getInstance().getKnoxContainerManager(darManagerService.mContext, i3).getPasswordPolicy().enforcePwdChange();
+                z =
+                        EnterpriseKnoxManager.getInstance()
+                                .getKnoxContainerManager(darManagerService.mContext, i3)
+                                .getPasswordPolicy()
+                                .enforcePwdChange();
             } catch (Exception e2) {
-                Log.e("DarManagerService", "Unexpected exception while enforce password for Legacy user " + i3, e2);
+                Log.e(
+                        "DarManagerService",
+                        "Unexpected exception while enforce password for Legacy user " + i3,
+                        e2);
             }
-            Log.d("DarManagerService", String.format("On created - Password enforcement for Legacy user %d has been deployed : %s", Integer.valueOf(i3), Boolean.valueOf(z)));
+            Log.d(
+                    "DarManagerService",
+                    String.format(
+                            "On created - Password enforcement for Legacy user %d has been deployed"
+                                + " : %s",
+                            Integer.valueOf(i3), Boolean.valueOf(z)));
         }
     }
 
@@ -213,7 +278,8 @@ public final class DarManagerService extends IDarManagerService.Stub {
         public final Context mContext;
         public final DarDatabaseCache mDarDatabaseCache;
         public final LockPatternUtils mLockPatternUtils;
-        public LockPatternUtils.EscrowTokenStateChangeCallback mEscrowTokenStateChangeCallback = null;
+        public LockPatternUtils.EscrowTokenStateChangeCallback mEscrowTokenStateChangeCallback =
+                null;
         public IDualDARPolicy mDualDARPolicyService = null;
 
         public Injector(Context context) {
@@ -226,7 +292,16 @@ public final class DarManagerService extends IDarManagerService.Stub {
             int callingPid = Binder.getCallingPid();
             int callingUid = Binder.getCallingUid();
             if (callingUid != 5250 && callingPid != Process.myPid()) {
-                throw new SecurityException(AudioOffloadInfo$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(callingPid, callingUid, "Security Exception Occurred while pid[", "] with uid[", "] trying to access methodName ["), str, "] in [DarManagerService] service"));
+                throw new SecurityException(
+                        AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                ArrayUtils$$ExternalSyntheticOutline0.m(
+                                        callingPid,
+                                        callingUid,
+                                        "Security Exception Occurred while pid[",
+                                        "] with uid[",
+                                        "] trying to access methodName ["),
+                                str,
+                                "] in [DarManagerService] service"));
             }
         }
     }
@@ -235,28 +310,43 @@ public final class DarManagerService extends IDarManagerService.Stub {
     public DarManagerService(Injector injector) {
         this.mKeyProtector = null;
         this.mUserManager = null;
-        LockPatternUtils.EscrowTokenStateChangeCallback escrowTokenStateChangeCallback = new LockPatternUtils.EscrowTokenStateChangeCallback() { // from class: com.android.server.knox.dar.DarManagerService$$ExternalSyntheticLambda1
-            public final void onEscrowTokenActivated(long j, int i) {
-                DarManagerService darManagerService = DarManagerService.this;
-                if (darManagerService.isDualDarDoSupported()) {
-                    DualDarDoManagerImpl dualDarDoManagerImpl = darManagerService.mDualDarDoManagerImpl;
-                    dualDarDoManagerImpl.getClass();
-                    if (DualDarManager.isOnDeviceOwnerEnabled() && dualDarDoManagerImpl.getInnerAuthUserId(0) == i) {
-                        Log.d("DualDarManagerImpl", String.format("Token(%x) activated for user %d", Long.valueOf(j), Integer.valueOf(i)));
-                        if (dualDarDoManagerImpl.mHasTokenSetForInner) {
-                            dualDarDoManagerImpl.mHasTokenSetForInner = false;
-                            Binder.withCleanCallingIdentity(new DualDarDoManagerImpl$$ExternalSyntheticLambda1(dualDarDoManagerImpl));
+        LockPatternUtils.EscrowTokenStateChangeCallback escrowTokenStateChangeCallback =
+                new LockPatternUtils
+                        .EscrowTokenStateChangeCallback() { // from class:
+                                                            // com.android.server.knox.dar.DarManagerService$$ExternalSyntheticLambda1
+                    public final void onEscrowTokenActivated(long j, int i) {
+                        DarManagerService darManagerService = DarManagerService.this;
+                        if (darManagerService.isDualDarDoSupported()) {
+                            DualDarDoManagerImpl dualDarDoManagerImpl =
+                                    darManagerService.mDualDarDoManagerImpl;
+                            dualDarDoManagerImpl.getClass();
+                            if (DualDarManager.isOnDeviceOwnerEnabled()
+                                    && dualDarDoManagerImpl.getInnerAuthUserId(0) == i) {
+                                Log.d(
+                                        "DualDarManagerImpl",
+                                        String.format(
+                                                "Token(%x) activated for user %d",
+                                                Long.valueOf(j), Integer.valueOf(i)));
+                                if (dualDarDoManagerImpl.mHasTokenSetForInner) {
+                                    dualDarDoManagerImpl.mHasTokenSetForInner = false;
+                                    Binder.withCleanCallingIdentity(
+                                            new DualDarDoManagerImpl$$ExternalSyntheticLambda1(
+                                                    dualDarDoManagerImpl));
+                                }
+                            }
                         }
                     }
-                }
-            }
-        };
-        this.mUserSwitchObserver = new UserSwitchObserver() { // from class: com.android.server.knox.dar.DarManagerService.1
-            public final void onLockedBootComplete(int i) {
-                DirEncryptService$$ExternalSyntheticOutline0.m(i, "onLockedBootComplete: ", "DarManagerService");
-                DarManagerService.this.mDarHandler.sendMessage(DarManagerService.this.mDarHandler.obtainMessage(120, i, 0));
-            }
-        };
+                };
+        this.mUserSwitchObserver =
+                new UserSwitchObserver() { // from class:
+                                           // com.android.server.knox.dar.DarManagerService.1
+                    public final void onLockedBootComplete(int i) {
+                        DirEncryptService$$ExternalSyntheticOutline0.m(
+                                i, "onLockedBootComplete: ", "DarManagerService");
+                        DarManagerService.this.mDarHandler.sendMessage(
+                                DarManagerService.this.mDarHandler.obtainMessage(120, i, 0));
+                    }
+                };
         Log.i("DarManagerService", "DarManagerService init");
         Context context = injector.mContext;
         this.mContext = context;
@@ -279,7 +369,8 @@ public final class DarManagerService extends IDarManagerService.Stub {
         this.mVirtualLockImpl = new VirtualLockImpl(injector);
         this.mDualDarDoManagerImpl = new DualDarDoManagerImpl(injector);
         Log.i("DarManagerService_DUAL_DAR", "prepare DualDAR DO Service");
-        this.mActivityManagerInternal = (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
+        this.mActivityManagerInternal =
+                (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
         this.mEndpointMonitorImpl = new EndpointMonitorImpl(context);
         Log.i("DarManagerService_SDP", "prepare EndpointMonitor Service");
     }
@@ -356,7 +447,10 @@ public final class DarManagerService extends IDarManagerService.Stub {
             if (internal.equals("empty")) {
                 darDatabaseCache.putInternal(i, "pkg_blocked_clearable", str);
             } else {
-                darDatabaseCache.putInternal(i, "pkg_blocked_clearable", AnyMotionDetector$$ExternalSyntheticOutline0.m(internal, ",", str));
+                darDatabaseCache.putInternal(
+                        i,
+                        "pkg_blocked_clearable",
+                        AnyMotionDetector$$ExternalSyntheticOutline0.m(internal, ",", str));
             }
         }
     }
@@ -374,18 +468,24 @@ public final class DarManagerService extends IDarManagerService.Stub {
     public final boolean checkDeviceIntegrity(Certificate[] certificateArr) {
         IntegrityStatus integrityStatus;
         try {
-            integrityStatus = new AttestedCertParser((X509Certificate) certificateArr[0]).mKnoxIngetrity;
+            integrityStatus =
+                    new AttestedCertParser((X509Certificate) certificateArr[0]).mKnoxIngetrity;
         } catch (CertificateParsingException e) {
             e.printStackTrace();
         }
-        if (integrityStatus != null && integrityStatus.mWarranty == 0 && integrityStatus.mTrustBoot == 0) {
+        if (integrityStatus != null
+                && integrityStatus.mWarranty == 0
+                && integrityStatus.mTrustBoot == 0) {
             return true;
         }
         EngineeringModeManager engineeringModeManager = new EngineeringModeManager(this.mContext);
-        boolean z = engineeringModeManager.isConnected() && engineeringModeManager.getStatus(66) == 1;
+        boolean z =
+                engineeringModeManager.isConnected() && engineeringModeManager.getStatus(66) == 1;
         Log.d("DarManagerService", "EM Token status : " + z);
         if (z) {
-            Log.d("DarManagerService", "Failed in device integrity check. But, EM Token is allowed. Continue - ");
+            Log.d(
+                    "DarManagerService",
+                    "Failed in device integrity check. But, EM Token is allowed. Continue - ");
             return true;
         }
         return false;
@@ -418,7 +518,9 @@ public final class DarManagerService extends IDarManagerService.Stub {
         if (VirtualLockUtils.isVirtualUserId(i)) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                clearResetPasswordTokenInternal = virtualLockImpl.clearResetPasswordTokenInternal(i, virtualLockImpl.mDarDatabaseCache.getLong(i));
+                clearResetPasswordTokenInternal =
+                        virtualLockImpl.clearResetPasswordTokenInternal(
+                                i, virtualLockImpl.mDarDatabaseCache.getLong(i));
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -428,9 +530,12 @@ public final class DarManagerService extends IDarManagerService.Stub {
         if (clearResetPasswordTokenInternal && isDualDarDoSupported()) {
             DualDarDoManagerImpl dualDarDoManagerImpl = this.mDualDarDoManagerImpl;
             dualDarDoManagerImpl.getClass();
-            if (DualDarManager.isOnDeviceOwnerEnabled() && dualDarDoManagerImpl.getInnerAuthUserId(0) == i && dualDarDoManagerImpl.mHasTokenSetForInner) {
+            if (DualDarManager.isOnDeviceOwnerEnabled()
+                    && dualDarDoManagerImpl.getInnerAuthUserId(0) == i
+                    && dualDarDoManagerImpl.mHasTokenSetForInner) {
                 dualDarDoManagerImpl.mHasTokenSetForInner = false;
-                Binder.withCleanCallingIdentity(new DualDarDoManagerImpl$$ExternalSyntheticLambda1(dualDarDoManagerImpl));
+                Binder.withCleanCallingIdentity(
+                        new DualDarDoManagerImpl$$ExternalSyntheticLambda1(dualDarDoManagerImpl));
             }
         }
         return clearResetPasswordTokenInternal;
@@ -459,41 +564,50 @@ public final class DarManagerService extends IDarManagerService.Stub {
         String attach = KeyProtector.attach(i, str);
         boolean checkSecretKey = KeyProtector.checkSecretKey(attach);
         if (checkSecretKey) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("Key exists in keystore(", attach, ")", "KeyProtector");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "Key exists in keystore(", attach, ")", "KeyProtector");
         }
         return checkSecretKey;
     }
 
-    public final void dump(final FileDescriptor fileDescriptor, final PrintWriter printWriter, final String[] strArr) {
+    public final void dump(
+            final FileDescriptor fileDescriptor,
+            final PrintWriter printWriter,
+            final String[] strArr) {
         RandomAccessFile randomAccessFile;
         if (DumpUtils.checkDumpPermission(this.mContext, "DarManagerService", printWriter)) {
             isSdpSupported();
             if (isDualDarDoSupported()) {
                 printWriter.println("dualdar_dump");
                 Injector injector = this.mInjector;
-                FunctionalUtils.ThrowingRunnable throwingRunnable = new FunctionalUtils.ThrowingRunnable(fileDescriptor, printWriter, strArr) { // from class: com.android.server.knox.dar.DarManagerService$$ExternalSyntheticLambda0
-                    public final /* synthetic */ PrintWriter f$2;
+                FunctionalUtils.ThrowingRunnable throwingRunnable =
+                        new FunctionalUtils.ThrowingRunnable(
+                                fileDescriptor, printWriter, strArr) { // from class:
+                            // com.android.server.knox.dar.DarManagerService$$ExternalSyntheticLambda0
+                            public final /* synthetic */ PrintWriter f$2;
 
-                    {
-                        this.f$2 = printWriter;
-                    }
+                            {
+                                this.f$2 = printWriter;
+                            }
 
-                    /* JADX WARN: Code restructure failed: missing block: B:37:0x0163, code lost:
-                    
-                        if (r4 >= 300000) goto L42;
-                     */
-                    /*
-                        Code decompiled incorrectly, please refer to instructions dump.
-                        To view partially-correct code enable 'Show inconsistent code' option in preferences
-                    */
-                    public final void runOrThrow() {
-                        /*
-                            Method dump skipped, instructions count: 530
-                            To view this dump change 'Code comments level' option to 'DEBUG'
-                        */
-                        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.dar.DarManagerService$$ExternalSyntheticLambda0.runOrThrow():void");
-                    }
-                };
+                            /* JADX WARN: Code restructure failed: missing block: B:37:0x0163, code lost:
+
+                               if (r4 >= 300000) goto L42;
+                            */
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                                To view partially-correct code enable 'Show inconsistent code' option in preferences
+                            */
+                            public final void runOrThrow() {
+                                /*
+                                    Method dump skipped, instructions count: 530
+                                    To view this dump change 'Code comments level' option to 'DEBUG'
+                                */
+                                throw new UnsupportedOperationException(
+                                        "Method not decompiled:"
+                                            + " com.android.server.knox.dar.DarManagerService$$ExternalSyntheticLambda0.runOrThrow():void");
+                            }
+                        };
                 injector.getClass();
                 Binder.withCleanCallingIdentity(throwingRunnable);
             }
@@ -502,7 +616,9 @@ public final class DarManagerService extends IDarManagerService.Stub {
             }
             if (Arrays.asList(strArr).contains("-a") || Arrays.asList(strArr).contains("sdplog")) {
                 printWriter.println("sdplog_dump");
-                printWriter.println("-------------------------------------------------- START DUMP --------------------------------------------------");
+                printWriter.println(
+                        "-------------------------------------------------- START DUMP"
+                            + " --------------------------------------------------");
                 boolean z = SDPLog.DEBUG;
                 boolean z2 = SDPLogger.DEBUG;
                 if (((ReentrantLock) SDPLogFile.FILE_LOCK).tryLock()) {
@@ -547,10 +663,14 @@ public final class DarManagerService extends IDarManagerService.Stub {
                     } finally {
                     }
                 } else {
-                    Log.e("SDPLogFile", "Failed to dump: Maybe target file is already being used...");
+                    Log.e(
+                            "SDPLogFile",
+                            "Failed to dump: Maybe target file is already being used...");
                     printWriter.println("Target file busy");
                 }
-                printWriter.println("-------------------------------------------------- END DUMP --------------------------------------------------");
+                printWriter.println(
+                        "-------------------------------------------------- END DUMP"
+                            + " --------------------------------------------------");
             }
         }
     }
@@ -565,7 +685,8 @@ public final class DarManagerService extends IDarManagerService.Stub {
         byte[] generateSeed = SecureUtil.sSecureRandom.generateSeed(32);
         try {
             if (!SecureUtil.isEmpty(str)) {
-                boolean saveSpecificKeyViaProtector = saveSpecificKeyViaProtector(generateSeed, str, i);
+                boolean saveSpecificKeyViaProtector =
+                        saveSpecificKeyViaProtector(generateSeed, str, i);
                 SecureUtil.record(saveSpecificKeyViaProtector);
                 if (saveSpecificKeyViaProtector) {
                     z = true;
@@ -667,9 +788,9 @@ public final class DarManagerService extends IDarManagerService.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0084, code lost:
-    
-        if (r2 == null) goto L37;
-     */
+
+       if (r2 == null) goto L37;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:9:0x0090  */
     /* JADX WARN: Type inference failed for: r2v13 */
@@ -687,7 +808,10 @@ public final class DarManagerService extends IDarManagerService.Stub {
             Method dump skipped, instructions count: 219
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.dar.DarManagerService.getSpecificKeyViaProtector(java.lang.String, int):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.knox.dar.DarManagerService.getSpecificKeyViaProtector(java.lang.String,"
+                    + " int):byte[]");
     }
 
     public final double getSupportedSDKVersion() {
@@ -721,17 +845,27 @@ public final class DarManagerService extends IDarManagerService.Stub {
             checkSystemPermission();
             byte[] specificKeyViaProtector2 = getSpecificKeyViaProtector("SdpResetToken", i);
             this.mInjector.getClass();
-            LockSettingsInternal lockSettingsInternal = (LockSettingsInternal) LocalServices.getService(LockSettingsInternal.class);
+            LockSettingsInternal lockSettingsInternal =
+                    (LockSettingsInternal) LocalServices.getService(LockSettingsInternal.class);
             if (lockSettingsInternal != null) {
                 try {
                     lockSettingsInternal.unlockUserWithToken(j, specificKeyViaProtector2, i);
                 } catch (Exception e) {
-                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "Unexpected failure while unlock secure folder with token", "DarManagerService");
+                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                            e,
+                            "Unexpected failure while unlock secure folder with token",
+                            "DarManagerService");
                 }
             }
             SecureUtil.clear(specificKeyViaProtector2);
             Locale locale = Locale.US;
-            Log.d("DarManagerService", "SecureFolder user " + i + " has been unlocked [ res : " + getUserManager().isUserUnlocked(i) + " ]");
+            Log.d(
+                    "DarManagerService",
+                    "SecureFolder user "
+                            + i
+                            + " has been unlocked [ res : "
+                            + getUserManager().isUserUnlocked(i)
+                            + " ]");
         }
     }
 
@@ -749,7 +883,10 @@ public final class DarManagerService extends IDarManagerService.Stub {
         Injector injector;
         boolean z;
         if ("1".equals(SystemProperties.get("ro.hardware.virtual_device"))) {
-            Log.d("DarManagerService", "Will be Failed in device integrity check. But, running on VirtualDevice. Continue .. ");
+            Log.d(
+                    "DarManagerService",
+                    "Will be Failed in device integrity check. But, running on VirtualDevice."
+                        + " Continue .. ");
             return true;
         }
         boolean z2 = false;
@@ -758,7 +895,8 @@ public final class DarManagerService extends IDarManagerService.Stub {
             clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
-                    DeviceRootKeyServiceManager deviceRootKeyServiceManager = new DeviceRootKeyServiceManager(this.mContext);
+                    DeviceRootKeyServiceManager deviceRootKeyServiceManager =
+                            new DeviceRootKeyServiceManager(this.mContext);
                     if (deviceRootKeyServiceManager.isAliveDeviceRootKeyService()) {
                         z2 = deviceRootKeyServiceManager.isExistDeviceRootKey(1);
                     } else {
@@ -782,7 +920,12 @@ public final class DarManagerService extends IDarManagerService.Stub {
         clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                z = new AttestationUtils().generateKeyPair("KnoxTestKey", SecureUtil.sSecureRandom.generateSeed(8)) != null;
+                z =
+                        new AttestationUtils()
+                                        .generateKeyPair(
+                                                "KnoxTestKey",
+                                                SecureUtil.sSecureRandom.generateSeed(8))
+                                != null;
                 if (z) {
                     try {
                         Log.d("DarManagerService", "Generated keypair is protected by SAK");
@@ -826,12 +969,14 @@ public final class DarManagerService extends IDarManagerService.Stub {
         Injector injector = dualDarDoManagerImpl.mInjector;
         EnterprisePartitionManager.getInstance(injector.mContext).getClass();
         boolean dualDARLockstate = EnterprisePartitionManager.getDualDARLockstate();
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isInnerLayerLockedState - result : ", "DualDarManagerImpl", dualDARLockstate);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isInnerLayerLockedState - result : ", "DualDarManagerImpl", dualDARLockstate);
         if (!dualDARLockstate) {
             if (!dualDarDoManagerImpl.mHasTokenSetForInner) {
                 return false;
             }
-            if (!injector.mLockPatternUtils.hasPendingEscrowToken(dualDarDoManagerImpl.getInnerAuthUserId(i))) {
+            if (!injector.mLockPatternUtils.hasPendingEscrowToken(
+                    dualDarDoManagerImpl.getInnerAuthUserId(i))) {
                 dualDarDoManagerImpl.mHasTokenSetForInner = false;
                 return false;
             }
@@ -844,7 +989,10 @@ public final class DarManagerService extends IDarManagerService.Stub {
         AttestationUtils attestationUtils;
         byte[] generateSeed;
         if ("1".equals(SystemProperties.get("ro.hardware.virtual_device"))) {
-            Log.d("DarManagerService", "Will be Failed in device integrity check. But, running on VirtualDevice. Continue - ");
+            Log.d(
+                    "DarManagerService",
+                    "Will be Failed in device integrity check. But, running on VirtualDevice."
+                        + " Continue - ");
             return true;
         }
         this.mInjector.getClass();
@@ -861,7 +1009,20 @@ public final class DarManagerService extends IDarManagerService.Stub {
             if (generateSeed == null) {
                 throw new NullPointerException("challenge == null");
             }
-            if (attestationUtils.generateKeyPair(new AttestParameterSpec(generateSeed, true, false, new KeyGenParameterSpec.Builder("KnoxTestKey", 4).setDigests("NONE", "SHA-1", "SHA-224", "SHA-256", "SHA-384", "SHA-512").build())) != null && (z = checkDeviceIntegrity(AttestationUtils.getCertificateChain("KnoxTestKey")))) {
+            if (attestationUtils.generateKeyPair(
+                                    new AttestParameterSpec(
+                                            generateSeed,
+                                            true,
+                                            false,
+                                            new KeyGenParameterSpec.Builder("KnoxTestKey", 4)
+                                                    .setDigests(
+                                                            "NONE", "SHA-1", "SHA-224", "SHA-256",
+                                                            "SHA-384", "SHA-512")
+                                                    .build()))
+                            != null
+                    && (z =
+                            checkDeviceIntegrity(
+                                    AttestationUtils.getCertificateChain("KnoxTestKey")))) {
                 AttestationUtils.deleteKey();
             }
             injector = this.mInjector;
@@ -891,7 +1052,8 @@ public final class DarManagerService extends IDarManagerService.Stub {
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            return virtualLockImpl.mLockPatternUtils.isEscrowTokenActive(virtualLockImpl.mDarDatabaseCache.getLong(i), i);
+            return virtualLockImpl.mLockPatternUtils.isEscrowTokenActive(
+                    virtualLockImpl.mDarDatabaseCache.getLong(i), i);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -917,7 +1079,11 @@ public final class DarManagerService extends IDarManagerService.Stub {
         if (userInfo == null) {
             userInfo = NULL_USER;
         }
-        return (userInfo == null || !userInfo.isSecureFolder() || userInfo.isSdpNotSupportedSecureFolder()) ? false : true;
+        return (userInfo == null
+                        || !userInfo.isSecureFolder()
+                        || userInfo.isSdpNotSupportedSecureFolder())
+                ? false
+                : true;
     }
 
     public final boolean isSensitive(String str) {
@@ -951,7 +1117,12 @@ public final class DarManagerService extends IDarManagerService.Stub {
         if (doesSpecificKeyExist("SdpSecureDataKey", i)) {
             return;
         }
-        Log.d("DarManagerService", String.format("Generate secure data key for user %d [ res : %b ]", Integer.valueOf(i), Boolean.valueOf(generateAndSaveSpecificKey("SdpSecureDataKey", i))));
+        Log.d(
+                "DarManagerService",
+                String.format(
+                        "Generate secure data key for user %d [ res : %b ]",
+                        Integer.valueOf(i),
+                        Boolean.valueOf(generateAndSaveSpecificKey("SdpSecureDataKey", i))));
     }
 
     public final void registerClient(int i, ISdpListener iSdpListener) {
@@ -968,19 +1139,27 @@ public final class DarManagerService extends IDarManagerService.Stub {
         return -10;
     }
 
-    public final void reportApplicationBinding(final long j, final int i, final int i2, final String str, final String str2) {
+    public final void reportApplicationBinding(
+            final long j, final int i, final int i2, final String str, final String str2) {
         if (AppMonitor.get().isOn()) {
             if (Binder.getCallingPid() != i) {
                 Log.e("DarManagerService", "reportApplicationBinding: pid is not matched");
             } else if (this.mActivityManagerInternal.getPackageNameByPid(i) == null) {
-                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "reportApplicationBinding: Package is not valid with pid : ", "DarManagerService");
+                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                        i,
+                        "reportApplicationBinding: Package is not valid with pid : ",
+                        "DarManagerService");
             } else {
-                BackgroundThread.getHandler().post(new Runnable() { // from class: com.android.server.knox.dar.DarManagerService.2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        AppMonitor.get().reportApplicationBinding(j, i, i2, str, str2);
-                    }
-                });
+                BackgroundThread.getHandler()
+                        .post(
+                                new Runnable() { // from class:
+                                                 // com.android.server.knox.dar.DarManagerService.2
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        AppMonitor.get()
+                                                .reportApplicationBinding(j, i, i2, str, str2);
+                                    }
+                                });
             }
         }
     }
@@ -1023,16 +1202,33 @@ public final class DarManagerService extends IDarManagerService.Stub {
             final long j = virtualLockImpl.mDarDatabaseCache.getLong(i);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                final LockscreenCredential createPin = PasswordMetrics.isNumericOnly(str) ? LockscreenCredential.createPin(str) : LockscreenCredential.createPasswordOrNone(str);
+                final LockscreenCredential createPin =
+                        PasswordMetrics.isNumericOnly(str)
+                                ? LockscreenCredential.createPin(str)
+                                : LockscreenCredential.createPasswordOrNone(str);
                 if (virtualLockImpl.mLockSettingsInternal == null) {
-                    virtualLockImpl.mLockSettingsInternal = (LockSettingsInternal) LocalServices.getService(LockSettingsInternal.class);
+                    virtualLockImpl.mLockSettingsInternal =
+                            (LockSettingsInternal)
+                                    LocalServices.getService(LockSettingsInternal.class);
                 }
-                z = ((Boolean) Optional.ofNullable(virtualLockImpl.mLockSettingsInternal).map(new Function() { // from class: com.android.server.knox.dar.VirtualLockImpl$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Function
-                    public final Object apply(Object obj) {
-                        return Boolean.valueOf(((LockSettingsInternal) obj).setLockCredentialWithToken(createPin, j, bArr, i));
-                    }
-                }).orElse(Boolean.FALSE)).booleanValue();
+                z =
+                        ((Boolean)
+                                        Optional.ofNullable(virtualLockImpl.mLockSettingsInternal)
+                                                .map(
+                                                        new Function() { // from class:
+                                                                         // com.android.server.knox.dar.VirtualLockImpl$$ExternalSyntheticLambda0
+                                                            @Override // java.util.function.Function
+                                                            public final Object apply(Object obj) {
+                                                                return Boolean.valueOf(
+                                                                        ((LockSettingsInternal) obj)
+                                                                                .setLockCredentialWithToken(
+                                                                                        createPin,
+                                                                                        j, bArr,
+                                                                                        i));
+                                                            }
+                                                        })
+                                                .orElse(Boolean.FALSE))
+                                .booleanValue();
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             } catch (Throwable th) {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1095,7 +1291,8 @@ public final class DarManagerService extends IDarManagerService.Stub {
         this.mDualDarDoManagerImpl.mInjector.getClass();
         Injector.enforceCallerKnoxCoreOrSelf("setDualDarInfo");
         if (((UserManagerInternal) LocalServices.getService(UserManagerInternal.class)) != null) {
-            return ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class)).setDualDarInfo(i, i2);
+            return ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class))
+                    .setDualDarInfo(i, i2);
         }
         return false;
     }
@@ -1144,8 +1341,11 @@ public final class DarManagerService extends IDarManagerService.Stub {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 virtualLockImpl.clearResetPasswordTokenInternal(i, darDatabaseCache.getLong(i));
-                long addEscrowToken = virtualLockImpl.mLockPatternUtils.addEscrowToken(bArr, i, virtualLockImpl.mInjector.mEscrowTokenStateChangeCallback);
-                darDatabaseCache.putInternal(i, "vl.rst.token.handle", String.valueOf(addEscrowToken));
+                long addEscrowToken =
+                        virtualLockImpl.mLockPatternUtils.addEscrowToken(
+                                bArr, i, virtualLockImpl.mInjector.mEscrowTokenStateChangeCallback);
+                darDatabaseCache.putInternal(
+                        i, "vl.rst.token.handle", String.valueOf(addEscrowToken));
                 z = addEscrowToken != 0;
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1154,9 +1354,12 @@ public final class DarManagerService extends IDarManagerService.Stub {
         if (z && isDualDarDoSupported()) {
             DualDarDoManagerImpl dualDarDoManagerImpl = this.mDualDarDoManagerImpl;
             dualDarDoManagerImpl.getClass();
-            if (DualDarManager.isOnDeviceOwnerEnabled() && dualDarDoManagerImpl.getInnerAuthUserId(0) == i && !dualDarDoManagerImpl.mHasTokenSetForInner) {
+            if (DualDarManager.isOnDeviceOwnerEnabled()
+                    && dualDarDoManagerImpl.getInnerAuthUserId(0) == i
+                    && !dualDarDoManagerImpl.mHasTokenSetForInner) {
                 dualDarDoManagerImpl.mHasTokenSetForInner = true;
-                Binder.withCleanCallingIdentity(new DualDarDoManagerImpl$$ExternalSyntheticLambda1(dualDarDoManagerImpl));
+                Binder.withCleanCallingIdentity(
+                        new DualDarDoManagerImpl$$ExternalSyntheticLambda1(dualDarDoManagerImpl));
             }
         }
         return z;
@@ -1171,8 +1374,11 @@ public final class DarManagerService extends IDarManagerService.Stub {
         boolean z = false;
         try {
             try {
-                long addEscrowToken = this.mLockPatternUtils.addEscrowToken(bArr, i, (LockPatternUtils.EscrowTokenStateChangeCallback) null);
-                if (addEscrowToken != 0 && saveTokenHandleViaProtectorForLegacy(addEscrowToken, i)) {
+                long addEscrowToken =
+                        this.mLockPatternUtils.addEscrowToken(
+                                bArr, i, (LockPatternUtils.EscrowTokenStateChangeCallback) null);
+                if (addEscrowToken != 0
+                        && saveTokenHandleViaProtectorForLegacy(addEscrowToken, i)) {
                     z = true;
                 }
                 if (SecureUtil.isFailed(Boolean.valueOf(z))) {
@@ -1200,7 +1406,8 @@ public final class DarManagerService extends IDarManagerService.Stub {
         return false;
     }
 
-    public final int startMonitoring(int i, int i2, Bundle bundle, IEndpointMonitorListener iEndpointMonitorListener) {
+    public final int startMonitoring(
+            int i, int i2, Bundle bundle, IEndpointMonitorListener iEndpointMonitorListener) {
         checkSystemPermission();
         EndpointMonitorImpl endpointMonitorImpl = this.mEndpointMonitorImpl;
         if (endpointMonitorImpl != null) {
@@ -1209,7 +1416,8 @@ public final class DarManagerService extends IDarManagerService.Stub {
         return -6;
     }
 
-    public final int startTracing(int i, int i2, Bundle bundle, IEndpointMonitorListener iEndpointMonitorListener) {
+    public final int startTracing(
+            int i, int i2, Bundle bundle, IEndpointMonitorListener iEndpointMonitorListener) {
         checkSystemPermission();
         return startMonitoring(i, i2, bundle, iEndpointMonitorListener);
     }

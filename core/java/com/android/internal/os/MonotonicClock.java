@@ -3,8 +3,12 @@ package com.android.internal.os;
 import android.util.AtomicFile;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public class MonotonicClock {
@@ -56,7 +59,8 @@ public class MonotonicClock {
             return defaultTimeshift;
         }
         try {
-            return readXml(new ByteArrayInputStream(this.mFile.readFully()), Xml.newBinaryPullParser());
+            return readXml(
+                    new ByteArrayInputStream(this.mFile.readFully()), Xml.newBinaryPullParser());
         } catch (IOException e) {
             Log.e(TAG, "Cannot load monotonic clock from " + this.mFile.getBaseFile(), e);
             return defaultTimeshift;

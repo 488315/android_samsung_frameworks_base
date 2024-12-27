@@ -4,7 +4,9 @@ import android.annotation.NonNull;
 import android.icu.util.ULocale;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,29 +14,29 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TranslationSpec implements Parcelable {
-    public static final Parcelable.Creator<TranslationSpec> CREATOR = new Parcelable.Creator<TranslationSpec>() { // from class: android.view.translation.TranslationSpec.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationSpec[] newArray(int size) {
-            return new TranslationSpec[size];
-        }
+    public static final Parcelable.Creator<TranslationSpec> CREATOR =
+            new Parcelable.Creator<
+                    TranslationSpec>() { // from class: android.view.translation.TranslationSpec.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationSpec[] newArray(int size) {
+                    return new TranslationSpec[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationSpec createFromParcel(Parcel in) {
-            return new TranslationSpec(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationSpec createFromParcel(Parcel in) {
+                    return new TranslationSpec(in);
+                }
+            };
     public static final int DATA_FORMAT_TEXT = 1;
     private final int mDataFormat;
 
-    @Deprecated
-    private final String mLanguage;
+    @Deprecated private final String mLanguage;
     private final ULocale mLocale;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DataFormat {
-    }
+    public @interface DataFormat {}
 
     void parcelLocale(Parcel dest, int flags) {
         dest.writeSerializable(this.mLocale);
@@ -72,7 +74,13 @@ public final class TranslationSpec implements Parcelable {
     }
 
     public String toString() {
-        return "TranslationSpec { language = " + this.mLanguage + ", locale = " + this.mLocale + ", dataFormat = " + this.mDataFormat + " }";
+        return "TranslationSpec { language = "
+                + this.mLanguage
+                + ", locale = "
+                + this.mLocale
+                + ", dataFormat = "
+                + this.mDataFormat
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -83,7 +91,9 @@ public final class TranslationSpec implements Parcelable {
             return false;
         }
         TranslationSpec that = (TranslationSpec) o;
-        if (Objects.equals(this.mLanguage, that.mLanguage) && Objects.equals(this.mLocale, that.mLocale) && this.mDataFormat == that.mDataFormat) {
+        if (Objects.equals(this.mLanguage, that.mLanguage)
+                && Objects.equals(this.mLocale, that.mLocale)
+                && this.mDataFormat == that.mDataFormat) {
             return true;
         }
         return false;
@@ -111,15 +121,20 @@ public final class TranslationSpec implements Parcelable {
         ULocale locale = unparcelLocale(in);
         int dataFormat = in.readInt();
         this.mLanguage = language;
-        AnnotationValidations.validate((Class<? extends Annotation>) Deprecated.class, (Annotation) null, this.mLanguage);
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLanguage);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) Deprecated.class, (Annotation) null, this.mLanguage);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLanguage);
         this.mLocale = locale;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLocale);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLocale);
         this.mDataFormat = dataFormat;
-        AnnotationValidations.validate((Class<? extends Annotation>) DataFormat.class, (Annotation) null, this.mDataFormat);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) DataFormat.class,
+                (Annotation) null,
+                this.mDataFormat);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

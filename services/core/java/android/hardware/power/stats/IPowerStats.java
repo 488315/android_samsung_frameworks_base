@@ -9,7 +9,8 @@ import android.os.RemoteException;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public interface IPowerStats extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$power$stats$IPowerStats".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$power$stats$IPowerStats".replace('$', '.');
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IPowerStats {
@@ -34,7 +35,8 @@ public interface IPowerStats extends IInterface {
                         throw new RemoteException("Method getEnergyConsumed is unimplemented.");
                     }
                     obtain2.readException();
-                    return (EnergyConsumerResult[]) obtain2.createTypedArray(EnergyConsumerResult.CREATOR);
+                    return (EnergyConsumerResult[])
+                            obtain2.createTypedArray(EnergyConsumerResult.CREATOR);
                 } finally {
                     obtain2.recycle();
                     obtain.recycle();
@@ -99,7 +101,8 @@ public interface IPowerStats extends IInterface {
                         throw new RemoteException("Method getStateResidency is unimplemented.");
                     }
                     obtain2.readException();
-                    return (StateResidencyResult[]) obtain2.createTypedArray(StateResidencyResult.CREATOR);
+                    return (StateResidencyResult[])
+                            obtain2.createTypedArray(StateResidencyResult.CREATOR);
                 } finally {
                     obtain2.recycle();
                     obtain.recycle();
@@ -116,7 +119,8 @@ public interface IPowerStats extends IInterface {
                         throw new RemoteException("Method readEnergyMeter is unimplemented.");
                     }
                     obtain2.readException();
-                    return (EnergyMeasurement[]) obtain2.createTypedArray(EnergyMeasurement.CREATOR);
+                    return (EnergyMeasurement[])
+                            obtain2.createTypedArray(EnergyMeasurement.CREATOR);
                 } finally {
                     obtain2.recycle();
                     obtain.recycle();

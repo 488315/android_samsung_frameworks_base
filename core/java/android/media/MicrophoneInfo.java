@@ -1,6 +1,7 @@
 package android.media;
 
 import android.util.Pair;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -38,18 +39,31 @@ public final class MicrophoneInfo {
     private Coordinate3F mPosition;
     private float mSensitivity;
     private int mType;
-    public static final Coordinate3F POSITION_UNKNOWN = new Coordinate3F(-3.4028235E38f, -3.4028235E38f, -3.4028235E38f);
+    public static final Coordinate3F POSITION_UNKNOWN =
+            new Coordinate3F(-3.4028235E38f, -3.4028235E38f, -3.4028235E38f);
     public static final Coordinate3F ORIENTATION_UNKNOWN = new Coordinate3F(0.0f, 0.0f, 0.0f);
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MicrophoneDirectionality {
-    }
+    public @interface MicrophoneDirectionality {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MicrophoneLocation {
-    }
+    public @interface MicrophoneLocation {}
 
-    MicrophoneInfo(String deviceId, int type, String address, int location, int group, int indexInTheGroup, Coordinate3F position, Coordinate3F orientation, List<Pair<Float, Float>> frequencyResponse, List<Pair<Integer, Integer>> channelMapping, float sensitivity, float maxSpl, float minSpl, int directionality) {
+    MicrophoneInfo(
+            String deviceId,
+            int type,
+            String address,
+            int location,
+            int group,
+            int indexInTheGroup,
+            Coordinate3F position,
+            Coordinate3F orientation,
+            List<Pair<Float, Float>> frequencyResponse,
+            List<Pair<Integer, Integer>> channelMapping,
+            float sensitivity,
+            float maxSpl,
+            float minSpl,
+            int directionality) {
         this.mDeviceId = deviceId;
         this.mType = type;
         this.mAddress = address;

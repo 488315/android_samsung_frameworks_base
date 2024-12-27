@@ -2,17 +2,22 @@ package android.os;
 
 import android.annotation.SystemApi;
 import android.media.MediaMetrics;
-import android.os.IBinder;
 import android.util.ExceptionUtils;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.os.BinderCallHeavyHitterWatcher;
 import com.android.internal.os.BinderInternal;
 import com.android.internal.os.SomeArgs;
 import com.android.internal.util.FastPrintWriter;
 import com.android.internal.util.FunctionalUtils;
 import com.android.internal.util.Preconditions;
+
 import dalvik.annotation.optimization.CriticalNative;
+
+import libcore.io.IoUtils;
+import libcore.util.NativeAllocationRegistry;
+
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,8 +25,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import java.util.function.Supplier;
-import libcore.io.IoUtils;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes3.dex */
 public class Binder implements IBinder {
@@ -37,7 +40,9 @@ public class Binder implements IBinder {
     private IInterface mOwner;
     private volatile String mSimpleDescriptor;
     private volatile AtomicReferenceArray<String> mTransactionTraceNames;
-    public static boolean isSystemServerBinderTrackerEnabled = Boolean.parseBoolean(SystemProperties.get("persist.systemserver.sa_bindertracker", "false"));
+    public static boolean isSystemServerBinderTrackerEnabled =
+            Boolean.parseBoolean(
+                    SystemProperties.get("persist.systemserver.sa_bindertracker", "false"));
     public static boolean LOG_RUNTIME_EXCEPTION = false;
     private static volatile String sDumpDisabled = null;
     private static volatile TransactionTracker sTransactionTracker = null;
@@ -46,24 +51,29 @@ public class Binder implements IBinder {
     private static volatile boolean sStackTrackingEnabled = false;
     static volatile boolean sWarnOnBlocking = false;
     static volatile boolean isSystemServer = false;
-    static ThreadLocal<Boolean> sWarnOnBlockingOnCurrentThread = ThreadLocal.withInitial(new Supplier() { // from class: android.os.Binder$$ExternalSyntheticLambda0
-        @Override // java.util.function.Supplier
-        public final Object get() {
-            Boolean valueOf;
-            valueOf = Boolean.valueOf(Binder.sWarnOnBlocking);
-            return valueOf;
-        }
-    });
+    static ThreadLocal<Boolean> sWarnOnBlockingOnCurrentThread =
+            ThreadLocal.withInitial(
+                    new Supplier() { // from class: android.os.Binder$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Supplier
+                        public final Object get() {
+                            Boolean valueOf;
+                            valueOf = Boolean.valueOf(Binder.sWarnOnBlocking);
+                            return valueOf;
+                        }
+                    });
     private static boolean sIsHandlingBinderTransaction = false;
     private static IBinderCallback sBinderCallback = null;
-    private static volatile BinderInternal.WorkSourceProvider sWorkSourceProvider = new BinderInternal.WorkSourceProvider() { // from class: android.os.Binder$$ExternalSyntheticLambda1
-        @Override // com.android.internal.os.BinderInternal.WorkSourceProvider
-        public final int resolveWorkSourceUid(int i) {
-            int callingUid;
-            callingUid = Binder.getCallingUid();
-            return callingUid;
-        }
-    };
+    private static volatile BinderInternal.WorkSourceProvider sWorkSourceProvider =
+            new BinderInternal
+                    .WorkSourceProvider() { // from class:
+                                            // android.os.Binder$$ExternalSyntheticLambda1
+                @Override // com.android.internal.os.BinderInternal.WorkSourceProvider
+                public final int resolveWorkSourceUid(int i) {
+                    int callingUid;
+                    callingUid = Binder.getCallingUid();
+                    return callingUid;
+                }
+            };
 
     public static final native void blockUntilThreadAvailable();
 
@@ -121,10 +131,11 @@ public class Binder implements IBinder {
     public final native void setExtension(IBinder iBinder);
 
     private static class NoImagePreloadHolder {
-        public static final NativeAllocationRegistry sRegistry = new NativeAllocationRegistry(Binder.class.getClassLoader(), Binder.getNativeFinalizer(), 500);
+        public static final NativeAllocationRegistry sRegistry =
+                new NativeAllocationRegistry(
+                        Binder.class.getClassLoader(), Binder.getNativeFinalizer(), 500);
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     public static void enableStackTracking() {
@@ -166,7 +177,9 @@ public class Binder implements IBinder {
         try {
             if (binder instanceof BinderProxy) {
                 ((BinderProxy) binder).mWarnOnBlocking = false;
-            } else if (binder != null && binder.getInterfaceDescriptor() != null && binder.queryLocalInterface(binder.getInterfaceDescriptor()) == null) {
+            } else if (binder != null
+                    && binder.getInterfaceDescriptor() != null
+                    && binder.queryLocalInterface(binder.getInterfaceDescriptor()) == null) {
                 Log.w(TAG, "Unable to allow blocking on interface " + binder);
             }
         } catch (RemoteException e) {
@@ -196,8 +209,7 @@ public class Binder implements IBinder {
     }
 
     private static class IdentitySupplier implements Supplier<SomeArgs> {
-        private IdentitySupplier() {
-        }
+        private IdentitySupplier() {}
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // java.util.function.Supplier
@@ -223,19 +235,31 @@ public class Binder implements IBinder {
     }
 
     private static boolean hasExplicitIdentity$ravenwood() {
-        return ((SomeArgs) ((ThreadLocal) Preconditions.requireNonNullViaRavenwoodRule(sIdentity$ravenwood)).get()).arg1 == Boolean.TRUE;
+        return ((SomeArgs)
+                                ((ThreadLocal)
+                                                Preconditions.requireNonNullViaRavenwoodRule(
+                                                        sIdentity$ravenwood))
+                                        .get())
+                        .arg1
+                == Boolean.TRUE;
     }
 
     public static final int getCallingUidOrThrow() {
         if (!isDirectlyHandlingTransaction() && !hasExplicitIdentity()) {
-            throw new IllegalStateException("Thread is not in a binder transaction, and the calling identity has not been explicitly set with clearCallingIdentity");
+            throw new IllegalStateException(
+                    "Thread is not in a binder transaction, and the calling identity has not been"
+                        + " explicitly set with clearCallingIdentity");
         }
         return getCallingUid();
     }
 
     public static final int getCallingUidOrWtf(String message) {
         if (!isDirectlyHandlingTransaction() && !hasExplicitIdentity()) {
-            Slog.wtf(TAG, message + ": Thread is not in a binder transaction, and the calling identity has not been explicitly set with clearCallingIdentity");
+            Slog.wtf(
+                    TAG,
+                    message
+                            + ": Thread is not in a binder transaction, and the calling identity"
+                            + " has not been explicitly set with clearCallingIdentity");
         }
         return getCallingUid();
     }
@@ -246,7 +270,12 @@ public class Binder implements IBinder {
 
     public static final long clearCallingIdentity$ravenwood() {
         long res;
-        SomeArgs args = (SomeArgs) ((ThreadLocal) Preconditions.requireNonNullViaRavenwoodRule(sIdentity$ravenwood)).get();
+        SomeArgs args =
+                (SomeArgs)
+                        ((ThreadLocal)
+                                        Preconditions.requireNonNullViaRavenwoodRule(
+                                                sIdentity$ravenwood))
+                                .get();
         long res2 = (args.argi1 << 32) | args.argi2;
         if (args.arg1 == Boolean.TRUE) {
             res = res2 | 1073741824;
@@ -260,7 +289,12 @@ public class Binder implements IBinder {
     }
 
     public static final void restoreCallingIdentity$ravenwood(long token) {
-        SomeArgs args = (SomeArgs) ((ThreadLocal) Preconditions.requireNonNullViaRavenwoodRule(sIdentity$ravenwood)).get();
+        SomeArgs args =
+                (SomeArgs)
+                        ((ThreadLocal)
+                                        Preconditions.requireNonNullViaRavenwoodRule(
+                                                sIdentity$ravenwood))
+                                .get();
         args.arg1 = (1073741824 & token) != 0 ? Boolean.TRUE : Boolean.FALSE;
         args.argi1 = (int) (token >> 32);
         args.argi2 = (int) ((-1073741825) & token);
@@ -295,8 +329,7 @@ public class Binder implements IBinder {
         }
     }
 
-    public static final void flushPendingCommands$ravenwood() {
-    }
+    public static final void flushPendingCommands$ravenwood() {}
 
     public static final void joinThreadPool() {
         BinderInternal.joinThreadPool();
@@ -397,7 +430,8 @@ public class Binder implements IBinder {
         BinderProxy.setTransactListener(listener);
     }
 
-    protected boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+    protected boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+            throws RemoteException {
         FileDescriptor fileDescriptor;
         if (code != 1598968902) {
             if (code != 1598311760) {
@@ -436,7 +470,13 @@ public class Binder implements IBinder {
                             throw th;
                         }
                     }
-                    shellCommand(fileDescriptor, out.getFileDescriptor(), err != null ? err.getFileDescriptor() : out.getFileDescriptor(), args, shellCallback, resultReceiver);
+                    shellCommand(
+                            fileDescriptor,
+                            out.getFileDescriptor(),
+                            err != null ? err.getFileDescriptor() : out.getFileDescriptor(),
+                            args,
+                            shellCallback,
+                            resultReceiver);
                 }
                 IoUtils.closeQuietly(in);
                 IoUtils.closeQuietly(out);
@@ -559,27 +599,40 @@ public class Binder implements IBinder {
         FileOutputStream fout = new FileOutputStream(fd);
         final PrintWriter pw = new FastPrintWriter(fout);
         Thread thr = new Thread("Binder.dumpAsync") { // from class: android.os.Binder.1
-            @Override // java.lang.Thread, java.lang.Runnable
-            public void run() {
-                try {
-                    Binder.this.dump(fd, pw, args);
-                } finally {
-                    pw.flush();
-                }
-            }
-        };
+                    @Override // java.lang.Thread, java.lang.Runnable
+                    public void run() {
+                        try {
+                            Binder.this.dump(fd, pw, args);
+                        } finally {
+                            pw.flush();
+                        }
+                    }
+                };
         thr.start();
     }
 
-    protected void dump(FileDescriptor fd, PrintWriter fout, String[] args) {
-    }
+    protected void dump(FileDescriptor fd, PrintWriter fout, String[] args) {}
 
     @Override // android.os.IBinder
-    public void shellCommand(FileDescriptor in, FileDescriptor out, FileDescriptor err, String[] args, ShellCallback callback, ResultReceiver resultReceiver) throws RemoteException {
+    public void shellCommand(
+            FileDescriptor in,
+            FileDescriptor out,
+            FileDescriptor err,
+            String[] args,
+            ShellCallback callback,
+            ResultReceiver resultReceiver)
+            throws RemoteException {
         onShellCommand(in, out, err, args, callback, resultReceiver);
     }
 
-    public void onShellCommand(FileDescriptor in, FileDescriptor out, FileDescriptor err, String[] args, ShellCallback callback, ResultReceiver resultReceiver) throws RemoteException {
+    public void onShellCommand(
+            FileDescriptor in,
+            FileDescriptor out,
+            FileDescriptor err,
+            String[] args,
+            ShellCallback callback,
+            ResultReceiver resultReceiver)
+            throws RemoteException {
         ParcelFileDescriptor inPfd;
         ParcelFileDescriptor outPfd;
         int callingUid = getCallingUid();
@@ -651,7 +704,11 @@ public class Binder implements IBinder {
     }
 
     @SystemApi
-    public int handleShellCommand(ParcelFileDescriptor in, ParcelFileDescriptor out, ParcelFileDescriptor err, String[] args) {
+    public int handleShellCommand(
+            ParcelFileDescriptor in,
+            ParcelFileDescriptor out,
+            ParcelFileDescriptor err,
+            String[] args) {
         FileOutputStream ferr = new FileOutputStream(err.getFileDescriptor());
         PrintWriter pw = new FastPrintWriter(ferr);
         pw.println("No shell command implementation.");
@@ -660,7 +717,8 @@ public class Binder implements IBinder {
     }
 
     @Override // android.os.IBinder
-    public final boolean transact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+    public final boolean transact(int code, Parcel data, Parcel reply, int flags)
+            throws RemoteException {
         if (data != null) {
             data.setDataPosition(0);
         }
@@ -672,16 +730,14 @@ public class Binder implements IBinder {
     }
 
     @Override // android.os.IBinder
-    public void linkToDeath(IBinder.DeathRecipient recipient, int flags) {
-    }
+    public void linkToDeath(IBinder.DeathRecipient recipient, int flags) {}
 
     @Override // android.os.IBinder
     public boolean unlinkToDeath(IBinder.DeathRecipient recipient, int flags) {
         return true;
     }
 
-    static void checkParcel(IBinder obj, int code, Parcel parcel, String msg) {
-    }
+    static void checkParcel(IBinder obj, int code, Parcel parcel, String msg) {}
 
     private static long getNativeBBinderHolder$ravenwood() {
         return 0L;
@@ -700,7 +756,8 @@ public class Binder implements IBinder {
         int callingUid = data.isForRpc() ? -1 : getCallingUid();
         long origWorkSource = callingUid == -1 ? -1L : ThreadLocalWorkSource.setUid(callingUid);
         try {
-            boolean execTransactInternal = execTransactInternal(code, data, reply, flags, callingUid);
+            boolean execTransactInternal =
+                    execTransactInternal(code, data, reply, flags, callingUid);
             reply.recycle();
             data.recycle();
             if (callingUid != -1) {
@@ -712,35 +769,36 @@ public class Binder implements IBinder {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:27:0x0067, code lost:
-    
-        if (r6 != null) goto L36;
-     */
+
+       if (r6 != null) goto L36;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0069, code lost:
-    
-        r8 = android.os.Binder.sWorkSourceProvider.resolveWorkSourceUid(r18.readCallingWorkSourceUid());
-        r6.callEnded(r7, r18.dataSize(), r19.dataSize(), r8);
-     */
+
+       r8 = android.os.Binder.sWorkSourceProvider.resolveWorkSourceUid(r18.readCallingWorkSourceUid());
+       r6.callEnded(r7, r18.dataSize(), r19.dataSize(), r8);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x007e, code lost:
-    
-        checkParcel(r16, r17, r19, "Unreasonably large binder reply buffer");
-     */
+
+       checkParcel(r16, r17, r19, "Unreasonably large binder reply buffer");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x00bd, code lost:
-    
-        android.os.StrictMode.clearGatheredViolations();
-     */
+
+       android.os.StrictMode.clearGatheredViolations();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x00c0, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:60:0x00ba, code lost:
-    
-        if (r6 != null) goto L36;
-     */
+
+       if (r6 != null) goto L36;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private boolean execTransactInternal(int r17, android.os.Parcel r18, android.os.Parcel r19, int r20, int r21) {
+    private boolean execTransactInternal(
+            int r17, android.os.Parcel r18, android.os.Parcel r19, int r20, int r21) {
         /*
             r16 = this;
             r1 = r16
@@ -872,12 +930,25 @@ public class Binder implements IBinder {
             checkParcel(r1, r2, r3, r5)
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.Binder.execTransactInternal(int, android.os.Parcel, android.os.Parcel, int, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.os.Binder.execTransactInternal(int,"
+                    + " android.os.Parcel, android.os.Parcel, int, int):boolean");
     }
 
-    public static synchronized void setHeavyHitterWatcherConfig(boolean enabled, int batchSize, float threshold, BinderCallHeavyHitterWatcher.BinderCallHeavyHitterListener listener) {
+    public static synchronized void setHeavyHitterWatcherConfig(
+            boolean enabled,
+            int batchSize,
+            float threshold,
+            BinderCallHeavyHitterWatcher.BinderCallHeavyHitterListener listener) {
         synchronized (Binder.class) {
-            Slog.i(TAG, "Setting heavy hitter watcher config: " + enabled + ", " + batchSize + ", " + threshold);
+            Slog.i(
+                    TAG,
+                    "Setting heavy hitter watcher config: "
+                            + enabled
+                            + ", "
+                            + batchSize
+                            + ", "
+                            + threshold);
             BinderCallHeavyHitterWatcher watcher = sHeavyHitterWatcher;
             if (enabled) {
                 if (listener == null) {

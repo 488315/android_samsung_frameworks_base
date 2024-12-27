@@ -1,7 +1,6 @@
 package android.os;
 
 import android.companion.virtualcamera.SupportedStreamConfiguration$$ExternalSyntheticOutline0;
-import android.os.Parcelable;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -61,22 +60,27 @@ public class CreateAppDataArgs implements Parcelable {
                                         if (parcel.dataPosition() - dataPosition < readInt) {
                                             this.targetSdkVersion = parcel.readInt();
                                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                throw new BadParcelableException(
+                                                        "Overflow in the size of parcelable");
                                             }
                                             parcel.setDataPosition(dataPosition + readInt);
                                             return;
                                         }
                                         if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -111,7 +115,9 @@ public class CreateAppDataArgs implements Parcelable {
         parcel.writeInt(this.appId);
         parcel.writeInt(this.previousAppId);
         parcel.writeString(this.seInfo);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.targetSdkVersion, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.targetSdkVersion, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

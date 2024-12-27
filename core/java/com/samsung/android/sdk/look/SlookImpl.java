@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+
 import com.samsung.android.cocktailbar.CocktailBarManager;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -83,7 +85,10 @@ public class SlookImpl {
             try {
                 sCocktailLevel = pm.hasSystemFeature("com.sec.feature.cocktailbar", 0) ? 6 : 0;
                 if (sCocktailLevel == 0) {
-                    sCocktailLevel = pm.hasSystemFeature(PackageManager.SEM_FEATURE_COCKTAIL_PANEL, 0) ? 7 : 0;
+                    sCocktailLevel =
+                            pm.hasSystemFeature(PackageManager.SEM_FEATURE_COCKTAIL_PANEL, 0)
+                                    ? 7
+                                    : 0;
                 }
             } catch (RemoteException e) {
                 throw new RuntimeException("Package manager has died", e);
@@ -103,26 +108,48 @@ public class SlookImpl {
                 return;
             }
             try {
-                ApplicationInfo ai = pm.getApplicationInfo(packageName, 128L, UserHandle.myUserId());
+                ApplicationInfo ai =
+                        pm.getApplicationInfo(packageName, 128L, UserHandle.myUserId());
                 if (ai != null) {
                     Bundle metaData = ai.metaData;
-                    if (metaData != null && (value2 = metaData.getString("com.samsung.android.cocktail.mode", "")) != null && value2.equals("edge_single")) {
+                    if (metaData != null
+                            && (value2 =
+                                            metaData.getString(
+                                                    "com.samsung.android.cocktail.mode", ""))
+                                    != null
+                            && value2.equals("edge_single")) {
                         sHasMetaEdgeSingle = 1;
                     }
                     if (sHasMetaEdgeSingle == 0) {
                         Intent intent = new Intent(CocktailBarManager.ACTION_COCKTAIL_UPDATE);
                         intent.setPackage(packageName);
-                        intent.resolveTypeIfNeeded(ActivityThread.currentApplication().getContentResolver());
-                        List<ResolveInfo> broadcastReceivers = pm.queryIntentReceivers(intent, intent.resolveTypeIfNeeded(ActivityThread.currentApplication().getContentResolver()), 128L, UserHandle.myUserId()).getList();
+                        intent.resolveTypeIfNeeded(
+                                ActivityThread.currentApplication().getContentResolver());
+                        List<ResolveInfo> broadcastReceivers =
+                                pm.queryIntentReceivers(
+                                                intent,
+                                                intent.resolveTypeIfNeeded(
+                                                        ActivityThread.currentApplication()
+                                                                .getContentResolver()),
+                                                128L,
+                                                UserHandle.myUserId())
+                                        .getList();
                         if (broadcastReceivers != null) {
                             N = broadcastReceivers.size();
                         }
                         for (int i = 0; i < N; i++) {
                             ResolveInfo ri = broadcastReceivers.get(i);
                             ActivityInfo activityInfo = ri.activityInfo;
-                            if ((activityInfo.applicationInfo.flags & 262144) == 0 && packageName.equals(activityInfo.packageName)) {
+                            if ((activityInfo.applicationInfo.flags & 262144) == 0
+                                    && packageName.equals(activityInfo.packageName)) {
                                 Bundle metaData2 = activityInfo.metaData;
-                                if (metaData2 != null && (value = metaData2.getString("com.samsung.android.cocktail.mode", "")) != null && value.equals("edge_single")) {
+                                if (metaData2 != null
+                                        && (value =
+                                                        metaData2.getString(
+                                                                "com.samsung.android.cocktail.mode",
+                                                                ""))
+                                                != null
+                                        && value.equals("edge_single")) {
                                     sHasMetaEdgeSingle = 1;
                                     return;
                                 }

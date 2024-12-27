@@ -10,8 +10,11 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -130,7 +133,8 @@ public interface ISapCallback extends IBase {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.radio.V1_0.ISapCallback, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.radio.V1_0.ISapCallback,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -152,7 +156,8 @@ public interface ISapCallback extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.ISapCallback
-        public void connectResponse(int token, int sapConnectRsp, int maxMsgSize) throws RemoteException {
+        public void connectResponse(int token, int sapConnectRsp, int maxMsgSize)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISapCallback.kInterfaceName);
             _hidl_request.writeInt32(token);
@@ -197,7 +202,8 @@ public interface ISapCallback extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.ISapCallback
-        public void apduResponse(int token, int resultCode, ArrayList<Byte> apduRsp) throws RemoteException {
+        public void apduResponse(int token, int resultCode, ArrayList<Byte> apduRsp)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISapCallback.kInterfaceName);
             _hidl_request.writeInt32(token);
@@ -213,7 +219,8 @@ public interface ISapCallback extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.ISapCallback
-        public void transferAtrResponse(int token, int resultCode, ArrayList<Byte> atr) throws RemoteException {
+        public void transferAtrResponse(int token, int resultCode, ArrayList<Byte> atr)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISapCallback.kInterfaceName);
             _hidl_request.writeInt32(token);
@@ -274,7 +281,8 @@ public interface ISapCallback extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.ISapCallback
-        public void transferCardReaderStatusResponse(int token, int resultCode, int cardReaderStatus) throws RemoteException {
+        public void transferCardReaderStatusResponse(
+                int token, int resultCode, int cardReaderStatus) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISapCallback.kInterfaceName);
             _hidl_request.writeInt32(token);
@@ -378,7 +386,9 @@ public interface ISapCallback extends IBase {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -406,7 +416,8 @@ public interface ISapCallback extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.ISapCallback, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
@@ -460,20 +471,21 @@ public interface ISapCallback extends IBase {
         }
     }
 
-    public static abstract class Stub extends HwBinder implements ISapCallback {
-        @Override // android.hardware.radio.V1_0.ISapCallback, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements ISapCallback {
+        @Override // android.hardware.radio.V1_0.ISapCallback,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
         @Override // android.hardware.radio.V1_0.ISapCallback, android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(ISapCallback.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(ISapCallback.kInterfaceName, IBase.kInterfaceName));
         }
 
         @Override // android.hardware.radio.V1_0.ISapCallback, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
         @Override // android.hardware.radio.V1_0.ISapCallback, android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
@@ -482,21 +494,89 @@ public interface ISapCallback extends IBase {
 
         @Override // android.hardware.radio.V1_0.ISapCallback, android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{-47, -125, -28, 6, -17, 8, -105, -33, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT, 23, -87, -35, -29, -124, -24, -26, -22, 79, -90, -85, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, Byte.MAX_VALUE, 111, 40, -26, 91, -121, 1, 18, 24, -55, -22}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                -47,
+                                -125,
+                                -28,
+                                6,
+                                -17,
+                                8,
+                                -105,
+                                -33,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT,
+                                23,
+                                -87,
+                                -35,
+                                -29,
+                                -124,
+                                -24,
+                                -26,
+                                -22,
+                                79,
+                                -90,
+                                -85,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN,
+                                Byte.MAX_VALUE,
+                                111,
+                                40,
+                                -26,
+                                91,
+                                -121,
+                                1,
+                                18,
+                                24,
+                                -55,
+                                -22
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
         @Override // android.hardware.radio.V1_0.ISapCallback, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
         @Override // android.hardware.radio.V1_0.ISapCallback, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        public final void ping() {}
 
         @Override // android.hardware.radio.V1_0.ISapCallback, android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
@@ -512,7 +592,8 @@ public interface ISapCallback extends IBase {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -534,7 +615,9 @@ public interface ISapCallback extends IBase {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(ISapCallback.kInterfaceName);
@@ -639,7 +722,8 @@ public interface ISapCallback extends IBase {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

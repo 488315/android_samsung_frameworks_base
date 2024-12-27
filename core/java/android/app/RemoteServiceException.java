@@ -58,7 +58,8 @@ public class RemoteServiceException extends AndroidRuntimeException {
         }
     }
 
-    public static class CannotPostForegroundServiceNotificationException extends RemoteServiceException {
+    public static class CannotPostForegroundServiceNotificationException
+            extends RemoteServiceException {
         public static final int TYPE_ID = 2;
 
         public CannotPostForegroundServiceNotificationException(String msg) {
@@ -82,7 +83,8 @@ public class RemoteServiceException extends AndroidRuntimeException {
         }
     }
 
-    public static class MissingRequestPasswordComplexityPermissionException extends RemoteServiceException {
+    public static class MissingRequestPasswordComplexityPermissionException
+            extends RemoteServiceException {
         public static final int TYPE_ID = 4;
 
         public MissingRequestPasswordComplexityPermissionException(String msg) {

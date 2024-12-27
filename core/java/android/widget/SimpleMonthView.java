@@ -26,8 +26,10 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.flags.Flags;
+
 import com.android.internal.R;
 import com.android.internal.widget.ExploreByTouchHelper;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -113,10 +115,12 @@ class SimpleMonthView extends View {
         this.mIsTouchHighlighted = false;
         Resources res = context.getResources();
         this.mDesiredMonthHeight = res.getDimensionPixelSize(R.dimen.date_picker_month_height);
-        this.mDesiredDayOfWeekHeight = res.getDimensionPixelSize(R.dimen.date_picker_day_of_week_height);
+        this.mDesiredDayOfWeekHeight =
+                res.getDimensionPixelSize(R.dimen.date_picker_day_of_week_height);
         this.mDesiredDayHeight = res.getDimensionPixelSize(R.dimen.date_picker_day_height);
         this.mDesiredCellWidth = res.getDimensionPixelSize(R.dimen.date_picker_day_width);
-        this.mDesiredDaySelectorRadius = res.getDimensionPixelSize(R.dimen.date_picker_day_selector_radius);
+        this.mDesiredDaySelectorRadius =
+                res.getDimensionPixelSize(R.dimen.date_picker_day_selector_radius);
         this.mTouchHelper = new MonthViewTouchHelper(this);
         setAccessibilityDelegate(this.mTouchHelper);
         setImportantForAccessibility(1);
@@ -143,7 +147,8 @@ class SimpleMonthView extends View {
     }
 
     private ColorStateList applyTextAppearance(Paint p, int resId) {
-        TypedArray ta = this.mContext.obtainStyledAttributes(null, R.styleable.TextAppearance, 0, resId);
+        TypedArray ta =
+                this.mContext.obtainStyledAttributes(null, R.styleable.TextAppearance, 0, resId);
         String fontFamily = ta.getString(12);
         if (fontFamily != null) {
             p.setTypeface(Typeface.create(fontFamily, 0));
@@ -189,7 +194,8 @@ class SimpleMonthView extends View {
         String dayOfWeekTypeface = res.getString(R.string.date_picker_day_of_week_typeface);
         String dayTypeface = res.getString(R.string.date_picker_day_typeface);
         int monthTextSize = res.getDimensionPixelSize(R.dimen.date_picker_month_text_size);
-        int dayOfWeekTextSize = res.getDimensionPixelSize(R.dimen.date_picker_day_of_week_text_size);
+        int dayOfWeekTextSize =
+                res.getDimensionPixelSize(R.dimen.date_picker_day_of_week_text_size);
         int dayTextSize = res.getDimensionPixelSize(R.dimen.date_picker_day_text_size);
         this.mMonthPaint.setAntiAlias(true);
         this.mMonthPaint.setTextSize(monthTextSize);
@@ -307,7 +313,9 @@ class SimpleMonthView extends View {
         L3e:
             return r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SimpleMonthView.onTouchEvent(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.widget.SimpleMonthView.onTouchEvent(android.view.MotionEvent):boolean");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:15:0x0033  */
@@ -413,13 +421,16 @@ class SimpleMonthView extends View {
             boolean r1 = super.onKeyDown(r7, r8)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.widget.SimpleMonthView.onKeyDown(int, android.view.KeyEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.widget.SimpleMonthView.onKeyDown(int,"
+                    + " android.view.KeyEvent):boolean");
     }
 
     private boolean moveOneDay(boolean positive) {
         ensureFocusedDay();
         if (positive) {
-            if (isLastDayOfWeek(this.mHighlightedDay) || this.mHighlightedDay >= this.mDaysInMonth) {
+            if (isLastDayOfWeek(this.mHighlightedDay)
+                    || this.mHighlightedDay >= this.mDaysInMonth) {
                 return false;
             }
             this.mHighlightedDay++;
@@ -627,7 +638,11 @@ class SimpleMonthView extends View {
                     int stateMask5 = stateMask2 | 16;
                     if (isDayEnabled) {
                         stateMask = stateMask5;
-                        canvas.drawCircle(colCenterRtl, rowCenter, this.mDaySelectorRadius, this.mDayHighlightPaint);
+                        canvas.drawCircle(
+                                colCenterRtl,
+                                rowCenter,
+                                this.mDaySelectorRadius,
+                                this.mDayHighlightPaint);
                     } else {
                         stateMask = stateMask5;
                     }
@@ -642,7 +657,8 @@ class SimpleMonthView extends View {
                 dayTextColor = this.mDayTextColor.getColorForState(stateSet, 0);
             }
             p.setColor(dayTextColor);
-            canvas.drawText(this.mDayFormatter.format(day), colCenterRtl, rowCenter - halfLineHeight, p);
+            canvas.drawText(
+                    this.mDayFormatter.format(day), colCenterRtl, rowCenter - halfLineHeight, p);
             col++;
             if (col == 7) {
                 rowCenter += rowHeight;
@@ -689,7 +705,13 @@ class SimpleMonthView extends View {
         invalidate();
     }
 
-    void setMonthParams(int selectedDay, int month, int year, int weekStart, int enabledDayStart, int enabledDayEnd) {
+    void setMonthParams(
+            int selectedDay,
+            int month,
+            int year,
+            int weekStart,
+            int enabledDayStart,
+            int enabledDayEnd) {
         this.mActivatedDay = selectedDay;
         if (isValidMonth(month)) {
             this.mMonth = month;
@@ -715,7 +737,8 @@ class SimpleMonthView extends View {
         }
         int i2 = this.mDaysInMonth;
         this.mEnabledDayStart = MathUtils.constrain(enabledDayStart, 1, i2);
-        this.mEnabledDayEnd = MathUtils.constrain(enabledDayEnd, this.mEnabledDayStart, this.mDaysInMonth);
+        this.mEnabledDayEnd =
+                MathUtils.constrain(enabledDayEnd, this.mEnabledDayStart, this.mDaysInMonth);
         updateMonthYearLabel();
         updateDayOfWeekLabels();
         this.mTouchHelper.invalidateRoot();
@@ -750,7 +773,12 @@ class SimpleMonthView extends View {
 
     @Override // android.view.View
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int preferredHeight = (this.mDesiredDayHeight * 6) + this.mDesiredDayOfWeekHeight + this.mDesiredMonthHeight + getPaddingTop() + getPaddingBottom();
+        int preferredHeight =
+                (this.mDesiredDayHeight * 6)
+                        + this.mDesiredDayOfWeekHeight
+                        + this.mDesiredMonthHeight
+                        + getPaddingTop()
+                        + getPaddingBottom();
         int preferredWidth = (this.mDesiredCellWidth * 7) + getPaddingStart() + getPaddingEnd();
         int resolvedWidth = resolveSize(preferredWidth, widthMeasureSpec);
         int resolvedHeight = resolveSize(preferredHeight, heightMeasureSpec);
@@ -812,7 +840,11 @@ class SimpleMonthView extends View {
         int paddedY;
         int paddedXRtl;
         int paddedX = x - getPaddingLeft();
-        if (paddedX < 0 || paddedX >= this.mPaddedWidth || (paddedY = y - getPaddingTop()) < (headerHeight = this.mMonthHeight + this.mDayOfWeekHeight) || paddedY >= this.mPaddedHeight) {
+        if (paddedX < 0
+                || paddedX >= this.mPaddedWidth
+                || (paddedY = y - getPaddingTop())
+                        < (headerHeight = this.mMonthHeight + this.mDayOfWeekHeight)
+                || paddedY >= this.mPaddedHeight) {
             return -1;
         }
         if (isLayoutRtl()) {
@@ -934,7 +966,10 @@ class SimpleMonthView extends View {
             node.setContentDescription(getDayDescription(virtualViewId));
             if (virtualViewId == SimpleMonthView.this.mToday) {
                 RelativeDateTimeFormatter fmt = RelativeDateTimeFormatter.getInstance();
-                node.setStateDescription(fmt.format(RelativeDateTimeFormatter.Direction.THIS, RelativeDateTimeFormatter.AbsoluteUnit.DAY));
+                node.setStateDescription(
+                        fmt.format(
+                                RelativeDateTimeFormatter.Direction.THIS,
+                                RelativeDateTimeFormatter.AbsoluteUnit.DAY));
             }
             if (virtualViewId == SimpleMonthView.this.mActivatedDay) {
                 node.setSelected(true);
@@ -952,7 +987,8 @@ class SimpleMonthView extends View {
         }
 
         @Override // com.android.internal.widget.ExploreByTouchHelper
-        protected boolean onPerformActionForVirtualView(int virtualViewId, int action, Bundle arguments) {
+        protected boolean onPerformActionForVirtualView(
+                int virtualViewId, int action, Bundle arguments) {
             switch (action) {
                 case 16:
                     return SimpleMonthView.this.onDayClicked(virtualViewId);

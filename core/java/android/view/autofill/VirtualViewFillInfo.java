@@ -1,7 +1,9 @@
 package android.view.autofill;
 
 import android.annotation.SuppressLint;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 
 /* loaded from: classes4.dex */
@@ -15,7 +17,12 @@ public final class VirtualViewFillInfo {
 
     VirtualViewFillInfo(String[] autofillHints) {
         this.mAutofillHints = autofillHints;
-        AnnotationValidations.validate((Class<? extends Annotation>) SuppressLint.class, (Annotation) null, this.mAutofillHints, "value", "NullableCollection");
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) SuppressLint.class,
+                (Annotation) null,
+                this.mAutofillHints,
+                "value",
+                "NullableCollection");
     }
 
     public String[] getAutofillHints() {
@@ -45,12 +52,12 @@ public final class VirtualViewFillInfo {
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 2) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

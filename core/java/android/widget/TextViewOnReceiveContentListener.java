@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputContentInfo;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,7 +77,8 @@ public final class TextViewOnReceiveContentListener implements OnReceiveContentL
 
     private void onReceiveForAutofill(TextView view, ContentInfo payload) {
         ClipData clip = payload.getClip();
-        if (isUsageOfImeCommitContentEnabled(view) && (clip = handleNonTextViaImeCommitContent(clip)) == null) {
+        if (isUsageOfImeCommitContentEnabled(view)
+                && (clip = handleNonTextViaImeCommitContent(clip)) == null) {
             if (Log.isLoggable(LOG_TAG, 2)) {
                 Log.v(LOG_TAG, "onReceive: Handled via IME");
             }
@@ -106,20 +108,27 @@ public final class TextViewOnReceiveContentListener implements OnReceiveContentL
     }
 
     private static boolean isUsageOfImeCommitContentEnabled(View view) {
-        return view.getReceiveContentMimeTypes() == null && !Compatibility.isChangeEnabled(AUTOFILL_NON_TEXT_REQUIRES_ON_RECEIVE_CONTENT_LISTENER);
+        return view.getReceiveContentMimeTypes() == null
+                && !Compatibility.isChangeEnabled(
+                        AUTOFILL_NON_TEXT_REQUIRES_ON_RECEIVE_CONTENT_LISTENER);
     }
 
     private static final class InputConnectionInfo {
         private final String[] mEditorInfoContentMimeTypes;
         private final WeakReference<InputConnection> mInputConnection;
 
-        private InputConnectionInfo(InputConnection inputConnection, String[] editorInfoContentMimeTypes) {
+        private InputConnectionInfo(
+                InputConnection inputConnection, String[] editorInfoContentMimeTypes) {
             this.mInputConnection = new WeakReference<>(inputConnection);
             this.mEditorInfoContentMimeTypes = editorInfoContentMimeTypes;
         }
 
         public String toString() {
-            return "InputConnectionInfo{mimeTypes=" + Arrays.toString(this.mEditorInfoContentMimeTypes) + ", ic=" + this.mInputConnection + '}';
+            return "InputConnectionInfo{mimeTypes="
+                    + Arrays.toString(this.mEditorInfoContentMimeTypes)
+                    + ", ic="
+                    + this.mInputConnection
+                    + '}';
         }
     }
 
@@ -142,7 +151,8 @@ public final class TextViewOnReceiveContentListener implements OnReceiveContentL
 
     public String[] getFallbackMimeTypesForAutofill(TextView view) {
         InputConnectionInfo icInfo;
-        if (isUsageOfImeCommitContentEnabled(view) && (icInfo = this.mInputConnectionInfo) != null) {
+        if (isUsageOfImeCommitContentEnabled(view)
+                && (icInfo = this.mInputConnectionInfo) != null) {
             return icInfo.mEditorInfoContentMimeTypes;
         }
         return null;
@@ -152,7 +162,8 @@ public final class TextViewOnReceiveContentListener implements OnReceiveContentL
         ClipDescription description = clip.getDescription();
         if (containsUri(clip) && !containsOnlyText(clip)) {
             InputConnectionInfo icInfo = this.mInputConnectionInfo;
-            InputConnection inputConnection = icInfo != null ? (InputConnection) icInfo.mInputConnection.get() : null;
+            InputConnection inputConnection =
+                    icInfo != null ? (InputConnection) icInfo.mInputConnection.get() : null;
             if (inputConnection == null) {
                 if (Log.isLoggable(LOG_TAG, 3)) {
                     Log.d(LOG_TAG, "onReceive: No usable EditorInfo/InputConnection");
@@ -162,7 +173,10 @@ public final class TextViewOnReceiveContentListener implements OnReceiveContentL
             String[] editorInfoContentMimeTypes = icInfo.mEditorInfoContentMimeTypes;
             if (!isClipMimeTypeSupported(editorInfoContentMimeTypes, clip.getDescription())) {
                 if (Log.isLoggable(LOG_TAG, 3)) {
-                    Log.d(LOG_TAG, "onReceive: MIME type is not supported by the app's commitContent impl");
+                    Log.d(
+                            LOG_TAG,
+                            "onReceive: MIME type is not supported by the app's commitContent"
+                                + " impl");
                 }
                 return clip;
             }
@@ -187,7 +201,9 @@ public final class TextViewOnReceiveContentListener implements OnReceiveContentL
                     InputContentInfo contentInfo = new InputContentInfo(uri, description);
                     if (!inputConnection.commitContent(contentInfo, i, null)) {
                         if (Log.isLoggable(LOG_TAG, 2)) {
-                            Log.v(LOG_TAG, "onReceive: Call to commitContent returned false: uri=" + uri);
+                            Log.v(
+                                    LOG_TAG,
+                                    "onReceive: Call to commitContent returned false: uri=" + uri);
                         }
                         remainingItems.add(item);
                     }
@@ -206,7 +222,8 @@ public final class TextViewOnReceiveContentListener implements OnReceiveContentL
         return clip;
     }
 
-    private static boolean isClipMimeTypeSupported(String[] supportedMimeTypes, ClipDescription description) {
+    private static boolean isClipMimeTypeSupported(
+            String[] supportedMimeTypes, ClipDescription description) {
         for (String imeSupportedMimeType : supportedMimeTypes) {
             if (description.hasMimeType(imeSupportedMimeType)) {
                 return true;

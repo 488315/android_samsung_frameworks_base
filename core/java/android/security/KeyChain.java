@@ -18,15 +18,16 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
-import android.security.IKeyChainAliasCallback;
-import android.security.IKeyChainService;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
 import android.security.keystore2.AndroidKeyStoreProvider;
 import android.system.keystore2.KeyDescriptor;
 import android.util.Log;
+
 import com.android.org.conscrypt.TrustedCertificateStore;
+
 import com.samsung.ucm.keystore.UcmKeyStoreKeyFactory;
+
 import java.io.ByteArrayInputStream;
 import java.io.Closeable;
 import java.security.KeyPair;
@@ -43,6 +44,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes3.dex */
@@ -51,13 +53,16 @@ public final class KeyChain {
     private static final String ACTION_CHOOSER = "com.android.keychain.CHOOSER";
     private static final String ACTION_INSTALL = "android.credentials.INSTALL";
     public static final String ACTION_KEYCHAIN_CHANGED = "android.security.action.KEYCHAIN_CHANGED";
-    public static final String ACTION_KEY_ACCESS_CHANGED = "android.security.action.KEY_ACCESS_CHANGED";
+    public static final String ACTION_KEY_ACCESS_CHANGED =
+            "android.security.action.KEY_ACCESS_CHANGED";
     public static final String ACTION_STORAGE_CHANGED = "android.security.STORAGE_CHANGED";
-    public static final String ACTION_TRUST_STORE_CHANGED = "android.security.action.TRUST_STORE_CHANGED";
+    public static final String ACTION_TRUST_STORE_CHANGED =
+            "android.security.action.TRUST_STORE_CHANGED";
     private static final String ANDROID_SOURCE = "android";
     private static final String CERT_INSTALLER_PACKAGE = "com.android.certinstaller";
     public static final String EXTRA_ALIAS = "alias";
-    public static final String EXTRA_AUTHENTICATION_POLICY = "android.security.extra.AUTHENTICATION_POLICY";
+    public static final String EXTRA_AUTHENTICATION_POLICY =
+            "android.security.extra.AUTHENTICATION_POLICY";
     public static final String EXTRA_CERTIFICATE = "CERT";
     public static final String EXTRA_ISSUERS = "issuers";
     public static final String EXTRA_KEY_ACCESSIBLE = "android.security.extra.KEY_ACCESSIBLE";
@@ -96,12 +101,21 @@ public final class KeyChain {
 
     public static Intent createManageCredentialsIntent(AppUriAuthenticationPolicy policy) {
         Intent intent = new Intent(Credentials.ACTION_MANAGE_CREDENTIALS);
-        intent.setComponent(ComponentName.createRelative("com.android.settings", ".security.RequestManageCredentials"));
+        intent.setComponent(
+                ComponentName.createRelative(
+                        "com.android.settings", ".security.RequestManageCredentials"));
         intent.putExtra(EXTRA_AUTHENTICATION_POLICY, policy);
         return intent;
     }
 
-    public static void choosePrivateKeyAlias(Activity activity, KeyChainAliasCallback response, String[] keyTypes, Principal[] issuers, String host, int port, String alias) {
+    public static void choosePrivateKeyAlias(
+            Activity activity,
+            KeyChainAliasCallback response,
+            String[] keyTypes,
+            Principal[] issuers,
+            String host,
+            int port,
+            String alias) {
         Uri uri = null;
         if (host != null) {
             uri = new Uri.Builder().authority(host + (port != -1 ? ":" + port : "")).build();
@@ -109,7 +123,13 @@ public final class KeyChain {
         choosePrivateKeyAlias(activity, response, keyTypes, issuers, uri, alias);
     }
 
-    public static void choosePrivateKeyAlias(Activity activity, KeyChainAliasCallback response, String[] keyTypes, Principal[] issuers, Uri uri, String alias) {
+    public static void choosePrivateKeyAlias(
+            Activity activity,
+            KeyChainAliasCallback response,
+            String[] keyTypes,
+            Principal[] issuers,
+            Uri uri,
+            String alias) {
         if (activity == null) {
             throw new NullPointerException("activity == null");
         }
@@ -126,13 +146,17 @@ public final class KeyChain {
         if (issuers != null) {
             for (Principal issuer : issuers) {
                 if (!(issuer instanceof X500Principal)) {
-                    throw new IllegalArgumentException(String.format("Issuer %s is of type %s, not X500Principal", issuer.toString(), issuer.getClass()));
+                    throw new IllegalArgumentException(
+                            String.format(
+                                    "Issuer %s is of type %s, not X500Principal",
+                                    issuer.toString(), issuer.getClass()));
                 }
                 issuersList.add(((X500Principal) issuer).getEncoded());
             }
         }
         intent.putExtra(EXTRA_ISSUERS, issuersList);
-        intent.putExtra(EXTRA_SENDER, PendingIntent.getActivity(activity, 0, new Intent(), 67108864));
+        intent.putExtra(
+                EXTRA_SENDER, PendingIntent.getActivity(activity, 0, new Intent(), 67108864));
         activity.startActivity(intent);
     }
 
@@ -140,7 +164,10 @@ public final class KeyChain {
         try {
             KeyChainConnection keyChainConnection = bind(context);
             try {
-                boolean isCredentialManagementApp = keyChainConnection.getService().isCredentialManagementApp(context.getPackageName());
+                boolean isCredentialManagementApp =
+                        keyChainConnection
+                                .getService()
+                                .isCredentialManagementApp(context.getPackageName());
                 if (keyChainConnection == null) {
                     return isCredentialManagementApp;
                 }
@@ -160,13 +187,17 @@ public final class KeyChain {
             e.rethrowAsRuntimeException();
             return false;
         } catch (InterruptedException e2) {
-            throw new RuntimeException("Interrupted while checking whether the caller is the credential management app.", e2);
+            throw new RuntimeException(
+                    "Interrupted while checking whether the caller is the credential management"
+                        + " app.",
+                    e2);
         } catch (SecurityException e3) {
             return false;
         }
     }
 
-    public static AppUriAuthenticationPolicy getCredentialManagementAppPolicy(Context context) throws SecurityException {
+    public static AppUriAuthenticationPolicy getCredentialManagementAppPolicy(Context context)
+            throws SecurityException {
         AppUriAuthenticationPolicy policy = null;
         try {
             KeyChainConnection keyChainConnection = bind(context);
@@ -180,16 +211,20 @@ public final class KeyChain {
         } catch (RemoteException e) {
             e.rethrowAsRuntimeException();
         } catch (InterruptedException e2) {
-            throw new RuntimeException("Interrupted while getting credential management app policy.", e2);
+            throw new RuntimeException(
+                    "Interrupted while getting credential management app policy.", e2);
         }
         return policy;
     }
 
-    public static boolean setCredentialManagementApp(Context context, String packageName, AppUriAuthenticationPolicy authenticationPolicy) {
+    public static boolean setCredentialManagementApp(
+            Context context, String packageName, AppUriAuthenticationPolicy authenticationPolicy) {
         try {
             KeyChainConnection keyChainConnection = bind(context);
             try {
-                keyChainConnection.getService().setCredentialManagementApp(packageName, authenticationPolicy);
+                keyChainConnection
+                        .getService()
+                        .setCredentialManagementApp(packageName, authenticationPolicy);
                 if (keyChainConnection != null) {
                     keyChainConnection.close();
                     return true;
@@ -252,7 +287,8 @@ public final class KeyChain {
         }
     }
 
-    public static PrivateKey getPrivateKey(Context context, String alias) throws KeyChainException, InterruptedException {
+    public static PrivateKey getPrivateKey(Context context, String alias)
+            throws KeyChainException, InterruptedException {
         KeyPair keyPair = getKeyPair(context, alias);
         if (keyPair != null) {
             return keyPair.getPrivate();
@@ -266,7 +302,8 @@ public final class KeyChain {
         result.blob = null;
         result.alias = null;
         try {
-            result.nspace = Long.parseUnsignedLong(keyid.substring(GRANT_ALIAS_PREFIX.length()), 16);
+            result.nspace =
+                    Long.parseUnsignedLong(keyid.substring(GRANT_ALIAS_PREFIX.length()), 16);
             return result;
         } catch (NumberFormatException e) {
             return null;
@@ -277,7 +314,8 @@ public final class KeyChain {
         return String.format("ks2_keychain_grant_id:%016X", Long.valueOf(key.nspace));
     }
 
-    public static KeyPair getKeyPair(Context context, String alias) throws KeyChainException, InterruptedException {
+    public static KeyPair getKeyPair(Context context, String alias)
+            throws KeyChainException, InterruptedException {
         if (alias == null) {
             throw new NullPointerException("alias == null");
         }
@@ -287,7 +325,10 @@ public final class KeyChain {
         if (isUcmKeyChainUriAndProvider(alias)) {
             if (isAndroidProvider(alias)) {
                 String originalAlias = getRawAlias(alias);
-                Log.d(LOG, "Provider is ANDROID_SOURCE, flow default sequence with alias : " + originalAlias);
+                Log.d(
+                        LOG,
+                        "Provider is ANDROID_SOURCE, flow default sequence with alias : "
+                                + originalAlias);
                 alias = originalAlias;
             } else {
                 return new KeyPair(null, getUCMPrivateKey(alias));
@@ -304,7 +345,8 @@ public final class KeyChain {
                     return null;
                 }
                 try {
-                    return AndroidKeyStoreProvider.loadAndroidKeyStoreKeyPairFromKeystore(KeyStore2.getInstance(), getGrantDescriptor(keyId));
+                    return AndroidKeyStoreProvider.loadAndroidKeyStoreKeyPairFromKeystore(
+                            KeyStore2.getInstance(), getGrantDescriptor(keyId));
                 } catch (KeyPermanentlyInvalidatedException | UnrecoverableKeyException e) {
                     throw new KeyChainException(e);
                 }
@@ -317,14 +359,18 @@ public final class KeyChain {
         }
     }
 
-    public static X509Certificate[] getCertificateChain(Context context, String alias) throws KeyChainException, InterruptedException {
+    public static X509Certificate[] getCertificateChain(Context context, String alias)
+            throws KeyChainException, InterruptedException {
         if (alias == null) {
             throw new NullPointerException("alias == null");
         }
         if (isUcmKeyChainUriAndProvider(alias)) {
             if (isAndroidProvider(alias)) {
                 String originalAlias = getRawAlias(alias);
-                Log.d(LOG, "Provider is ANDROID_SOURCE, flow default sequence with alias : " + originalAlias);
+                Log.d(
+                        LOG,
+                        "Provider is ANDROID_SOURCE, flow default sequence with alias : "
+                                + originalAlias);
                 alias = originalAlias;
             } else {
                 IEDMProxy lService = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
@@ -370,15 +416,19 @@ public final class KeyChain {
                     try {
                         X509Certificate leafCert = toCertificate(certificateBytes2);
                         if (certChainBytes != null && certChainBytes.length != 0) {
-                            Collection<? extends X509Certificate> chain2 = toCertificates(certChainBytes);
-                            ArrayList<X509Certificate> fullChain = new ArrayList<>(chain2.size() + 1);
+                            Collection<? extends X509Certificate> chain2 =
+                                    toCertificates(certChainBytes);
+                            ArrayList<X509Certificate> fullChain =
+                                    new ArrayList<>(chain2.size() + 1);
                             fullChain.add(leafCert);
                             fullChain.addAll(chain2);
-                            return (X509Certificate[]) fullChain.toArray(new X509Certificate[fullChain.size()]);
+                            return (X509Certificate[])
+                                    fullChain.toArray(new X509Certificate[fullChain.size()]);
                         }
                         TrustedCertificateStore store = new TrustedCertificateStore();
                         List<X509Certificate> chain3 = store.getCertificateChain(leafCert);
-                        return (X509Certificate[]) chain3.toArray(new X509Certificate[chain3.size()]);
+                        return (X509Certificate[])
+                                chain3.toArray(new X509Certificate[chain3.size()]);
                     } catch (RuntimeException | CertificateException e2) {
                         throw new KeyChainException(e2);
                     }
@@ -436,7 +486,8 @@ public final class KeyChain {
         private final IKeyChainService mService;
         private final ServiceConnection mServiceConnection;
 
-        protected KeyChainConnection(Context context, ServiceConnection serviceConnection, IKeyChainService service) {
+        protected KeyChainConnection(
+                Context context, ServiceConnection serviceConnection, IKeyChainService service) {
             this.mContext = context;
             this.mServiceConnection = serviceConnection;
             this.mService = service;
@@ -456,7 +507,8 @@ public final class KeyChain {
         return bindAsUser(context, Process.myUserHandle());
     }
 
-    public static KeyChainConnection bindAsUser(Context context, UserHandle user) throws InterruptedException {
+    public static KeyChainConnection bindAsUser(Context context, UserHandle user)
+            throws InterruptedException {
         return bindAsUser(context, null, user);
     }
 
@@ -464,9 +516,11 @@ public final class KeyChain {
     public static String getWifiKeyGrantAsUser(Context context, UserHandle user, String alias) {
         try {
             try {
-                KeyChainConnection keyChainConnection = bindAsUser(context.getApplicationContext(), user);
+                KeyChainConnection keyChainConnection =
+                        bindAsUser(context.getApplicationContext(), user);
                 try {
-                    String wifiKeyGrantAsUser = keyChainConnection.getService().getWifiKeyGrantAsUser(alias);
+                    String wifiKeyGrantAsUser =
+                            keyChainConnection.getService().getWifiKeyGrantAsUser(alias);
                     if (keyChainConnection != null) {
                         keyChainConnection.close();
                     }
@@ -496,7 +550,8 @@ public final class KeyChain {
     public static boolean hasWifiKeyGrantAsUser(Context context, UserHandle user, String alias) {
         try {
             try {
-                KeyChainConnection keyChainConnection = bindAsUser(context.getApplicationContext(), user);
+                KeyChainConnection keyChainConnection =
+                        bindAsUser(context.getApplicationContext(), user);
                 try {
                     boolean hasGrant = keyChainConnection.getService().hasGrant(1010, alias);
                     if (keyChainConnection != null) {
@@ -524,7 +579,8 @@ public final class KeyChain {
         }
     }
 
-    public static KeyChainConnection bindAsUser(Context context, Handler handler, UserHandle user) throws InterruptedException {
+    public static KeyChainConnection bindAsUser(Context context, Handler handler, UserHandle user)
+            throws InterruptedException {
         boolean bindSucceed;
         if (context == null) {
             throw new NullPointerException("context == null");
@@ -537,30 +593,32 @@ public final class KeyChain {
         }
         final CountDownLatch countDownLatch = new CountDownLatch(1);
         final AtomicReference<IKeyChainService> keyChainService = new AtomicReference<>();
-        ServiceConnection keyChainServiceConnection = new ServiceConnection() { // from class: android.security.KeyChain.1
-            volatile boolean mConnectedAtLeastOnce = false;
+        ServiceConnection keyChainServiceConnection =
+                new ServiceConnection() { // from class: android.security.KeyChain.1
+                    volatile boolean mConnectedAtLeastOnce = false;
 
-            @Override // android.content.ServiceConnection
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                if (!this.mConnectedAtLeastOnce) {
-                    this.mConnectedAtLeastOnce = true;
-                    keyChainService.set(IKeyChainService.Stub.asInterface(Binder.allowBlocking(service)));
-                    countDownLatch.countDown();
-                }
-            }
+                    @Override // android.content.ServiceConnection
+                    public void onServiceConnected(ComponentName name, IBinder service) {
+                        if (!this.mConnectedAtLeastOnce) {
+                            this.mConnectedAtLeastOnce = true;
+                            keyChainService.set(
+                                    IKeyChainService.Stub.asInterface(
+                                            Binder.allowBlocking(service)));
+                            countDownLatch.countDown();
+                        }
+                    }
 
-            @Override // android.content.ServiceConnection
-            public void onBindingDied(ComponentName name) {
-                if (!this.mConnectedAtLeastOnce) {
-                    this.mConnectedAtLeastOnce = true;
-                    countDownLatch.countDown();
-                }
-            }
+                    @Override // android.content.ServiceConnection
+                    public void onBindingDied(ComponentName name) {
+                        if (!this.mConnectedAtLeastOnce) {
+                            this.mConnectedAtLeastOnce = true;
+                            countDownLatch.countDown();
+                        }
+                    }
 
-            @Override // android.content.ServiceConnection
-            public void onServiceDisconnected(ComponentName name) {
-            }
-        };
+                    @Override // android.content.ServiceConnection
+                    public void onServiceDisconnected(ComponentName name) {}
+                };
         Intent intent = new Intent(IKeyChainService.class.getName());
         ComponentName comp = intent.resolveSystemService(context.getPackageManager(), 0);
         if (comp == null) {
@@ -568,7 +626,8 @@ public final class KeyChain {
         }
         intent.setComponent(comp);
         if (handler != null) {
-            bindSucceed = context.bindServiceAsUser(intent, keyChainServiceConnection, 1, handler, user);
+            bindSucceed =
+                    context.bindServiceAsUser(intent, keyChainServiceConnection, 1, handler, user);
         } else {
             bindSucceed = context.bindServiceAsUser(intent, keyChainServiceConnection, 1, user);
         }
@@ -588,7 +647,8 @@ public final class KeyChain {
     private static void ensureNotOnMainThread(Context context) {
         Looper looper = Looper.myLooper();
         if (looper != null && looper == context.getMainLooper()) {
-            throw new IllegalStateException("calling this from your main thread can lead to deadlock");
+            throw new IllegalStateException(
+                    "calling this from your main thread can lead to deadlock");
         }
     }
 
@@ -614,7 +674,14 @@ public final class KeyChain {
             String sourcePath = paths.get(0);
             String resourcetype = paths.get(1);
             String uriuid = paths.get(2);
-            Log.d(LOG, "getSource: source = " + sourcePath + ", resource type = " + resourcetype + ", uid = " + uriuid);
+            Log.d(
+                    LOG,
+                    "getSource: source = "
+                            + sourcePath
+                            + ", resource type = "
+                            + resourcetype
+                            + ", uid = "
+                            + uriuid);
             return sourcePath;
         } catch (IndexOutOfBoundsException e) {
             e.printStackTrace();

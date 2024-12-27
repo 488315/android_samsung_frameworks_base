@@ -22,7 +22,8 @@ public class DrmRights {
         this.mAccountId = accountId;
     }
 
-    public DrmRights(String rightsFilePath, String mimeType, String accountId, String subscriptionId) {
+    public DrmRights(
+            String rightsFilePath, String mimeType, String accountId, String subscriptionId) {
         this(rightsFilePath, mimeType);
         this.mAccountId = accountId;
         this.mSubscriptionId = subscriptionId;
@@ -76,6 +77,11 @@ public class DrmRights {
     }
 
     boolean isValid() {
-        return (this.mMimeType == null || this.mMimeType.equals("") || this.mData == null || this.mData.length <= 0) ? false : true;
+        return (this.mMimeType == null
+                        || this.mMimeType.equals("")
+                        || this.mData == null
+                        || this.mData.length <= 0)
+                ? false
+                : true;
     }
 }

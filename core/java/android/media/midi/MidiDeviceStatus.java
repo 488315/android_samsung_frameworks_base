@@ -6,34 +6,39 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class MidiDeviceStatus implements Parcelable {
-    public static final Parcelable.Creator<MidiDeviceStatus> CREATOR = new Parcelable.Creator<MidiDeviceStatus>() { // from class: android.media.midi.MidiDeviceStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MidiDeviceStatus createFromParcel(Parcel in) {
-            ClassLoader classLoader = MidiDeviceInfo.class.getClassLoader();
-            MidiDeviceInfo deviceInfo = (MidiDeviceInfo) in.readParcelable(classLoader, MidiDeviceInfo.class);
-            boolean[] inputPortOpen = in.createBooleanArray();
-            int[] outputPortOpenCount = in.createIntArray();
-            return new MidiDeviceStatus(deviceInfo, inputPortOpen, outputPortOpenCount);
-        }
+    public static final Parcelable.Creator<MidiDeviceStatus> CREATOR =
+            new Parcelable.Creator<
+                    MidiDeviceStatus>() { // from class: android.media.midi.MidiDeviceStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MidiDeviceStatus createFromParcel(Parcel in) {
+                    ClassLoader classLoader = MidiDeviceInfo.class.getClassLoader();
+                    MidiDeviceInfo deviceInfo =
+                            (MidiDeviceInfo) in.readParcelable(classLoader, MidiDeviceInfo.class);
+                    boolean[] inputPortOpen = in.createBooleanArray();
+                    int[] outputPortOpenCount = in.createIntArray();
+                    return new MidiDeviceStatus(deviceInfo, inputPortOpen, outputPortOpenCount);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MidiDeviceStatus[] newArray(int size) {
-            return new MidiDeviceStatus[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MidiDeviceStatus[] newArray(int size) {
+                    return new MidiDeviceStatus[size];
+                }
+            };
     private static final String TAG = "MidiDeviceStatus";
     private final MidiDeviceInfo mDeviceInfo;
     private final boolean[] mInputPortOpen;
     private final int[] mOutputPortOpenCount;
 
-    public MidiDeviceStatus(MidiDeviceInfo deviceInfo, boolean[] inputPortOpen, int[] outputPortOpenCount) {
+    public MidiDeviceStatus(
+            MidiDeviceInfo deviceInfo, boolean[] inputPortOpen, int[] outputPortOpenCount) {
         this.mDeviceInfo = deviceInfo;
         this.mInputPortOpen = new boolean[inputPortOpen.length];
         System.arraycopy(inputPortOpen, 0, this.mInputPortOpen, 0, inputPortOpen.length);
         this.mOutputPortOpenCount = new int[outputPortOpenCount.length];
-        System.arraycopy(outputPortOpenCount, 0, this.mOutputPortOpenCount, 0, outputPortOpenCount.length);
+        System.arraycopy(
+                outputPortOpenCount, 0, this.mOutputPortOpenCount, 0, outputPortOpenCount.length);
     }
 
     public MidiDeviceStatus(MidiDeviceInfo deviceInfo) {

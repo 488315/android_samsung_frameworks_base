@@ -5,16 +5,18 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IPlaybackConfigDispatcher extends IInterface {
-    void dispatchPlaybackConfigChange(List<AudioPlaybackConfiguration> list, boolean z) throws RemoteException;
+    void dispatchPlaybackConfigChange(List<AudioPlaybackConfiguration> list, boolean z)
+            throws RemoteException;
 
     public static class Default implements IPlaybackConfigDispatcher {
         @Override // android.media.IPlaybackConfigDispatcher
-        public void dispatchPlaybackConfigChange(List<AudioPlaybackConfiguration> configs, boolean flush) throws RemoteException {
-        }
+        public void dispatchPlaybackConfigChange(
+                List<AudioPlaybackConfiguration> configs, boolean flush) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +24,7 @@ public interface IPlaybackConfigDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPlaybackConfigDispatcher {
+    public abstract static class Stub extends Binder implements IPlaybackConfigDispatcher {
         public static final String DESCRIPTOR = "android.media.IPlaybackConfigDispatcher";
         static final int TRANSACTION_dispatchPlaybackConfigChange = 1;
 
@@ -61,7 +63,8 @@ public interface IPlaybackConfigDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -71,7 +74,8 @@ public interface IPlaybackConfigDispatcher extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<AudioPlaybackConfiguration> _arg0 = data.createTypedArrayList(AudioPlaybackConfiguration.CREATOR);
+                    List<AudioPlaybackConfiguration> _arg0 =
+                            data.createTypedArrayList(AudioPlaybackConfiguration.CREATOR);
                     boolean _arg1 = data.readBoolean();
                     data.enforceNoDataAvail();
                     dispatchPlaybackConfigChange(_arg0, _arg1);
@@ -98,7 +102,9 @@ public interface IPlaybackConfigDispatcher extends IInterface {
             }
 
             @Override // android.media.IPlaybackConfigDispatcher
-            public void dispatchPlaybackConfigChange(List<AudioPlaybackConfiguration> configs, boolean flush) throws RemoteException {
+            public void dispatchPlaybackConfigChange(
+                    List<AudioPlaybackConfiguration> configs, boolean flush)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

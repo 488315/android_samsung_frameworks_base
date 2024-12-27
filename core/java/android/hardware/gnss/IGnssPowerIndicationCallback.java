@@ -14,7 +14,8 @@ public interface IGnssPowerIndicationCallback extends IInterface {
     public static final int CAPABILITY_SINGLEBAND_ACQUISITION = 8;
     public static final int CAPABILITY_SINGLEBAND_TRACKING = 2;
     public static final int CAPABILITY_TOTAL = 1;
-    public static final String DESCRIPTOR = "android$hardware$gnss$IGnssPowerIndicationCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$IGnssPowerIndicationCallback".replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";
     public static final int VERSION = 2;
 
@@ -28,12 +29,10 @@ public interface IGnssPowerIndicationCallback extends IInterface {
 
     public static class Default implements IGnssPowerIndicationCallback {
         @Override // android.hardware.gnss.IGnssPowerIndicationCallback
-        public void setCapabilitiesCb(int capabilities) throws RemoteException {
-        }
+        public void setCapabilitiesCb(int capabilities) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssPowerIndicationCallback
-        public void gnssPowerStatsCb(GnssPowerStats gnssPowerStats) throws RemoteException {
-        }
+        public void gnssPowerStatsCb(GnssPowerStats gnssPowerStats) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssPowerIndicationCallback
         public int getInterfaceVersion() {
@@ -51,7 +50,7 @@ public interface IGnssPowerIndicationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssPowerIndicationCallback {
+    public abstract static class Stub extends Binder implements IGnssPowerIndicationCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_gnssPowerStatsCb = 2;
@@ -99,7 +98,8 @@ public interface IGnssPowerIndicationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -126,7 +126,8 @@ public interface IGnssPowerIndicationCallback extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 2:
-                    GnssPowerStats _arg02 = (GnssPowerStats) data.readTypedObject(GnssPowerStats.CREATOR);
+                    GnssPowerStats _arg02 =
+                            (GnssPowerStats) data.readTypedObject(GnssPowerStats.CREATOR);
                     data.enforceNoDataAvail();
                     gnssPowerStatsCb(_arg02);
                     return true;

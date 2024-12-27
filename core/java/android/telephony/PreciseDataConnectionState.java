@@ -7,26 +7,31 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.telephony.data.ApnSetting;
 import android.telephony.data.Qos;
+
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class PreciseDataConnectionState implements Parcelable {
-    public static final Parcelable.Creator<PreciseDataConnectionState> CREATOR = new Parcelable.Creator<PreciseDataConnectionState>() { // from class: android.telephony.PreciseDataConnectionState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PreciseDataConnectionState createFromParcel(Parcel in) {
-            return new PreciseDataConnectionState(in);
-        }
+    public static final Parcelable.Creator<PreciseDataConnectionState> CREATOR =
+            new Parcelable.Creator<
+                    PreciseDataConnectionState>() { // from class:
+                                                    // android.telephony.PreciseDataConnectionState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PreciseDataConnectionState createFromParcel(Parcel in) {
+                    return new PreciseDataConnectionState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PreciseDataConnectionState[] newArray(int size) {
-            return new PreciseDataConnectionState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PreciseDataConnectionState[] newArray(int size) {
+                    return new PreciseDataConnectionState[size];
+                }
+            };
     private static final long GET_DATA_CONNECTION_STATE_R_VERSION = 148535736;
     public static final int NETWORK_VALIDATION_FAILURE = 4;
     public static final int NETWORK_VALIDATION_IN_PROGRESS = 2;
@@ -45,15 +50,44 @@ public final class PreciseDataConnectionState implements Parcelable {
     private final int mTransportType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NetworkValidationStatus {
-    }
+    public @interface NetworkValidationStatus {}
 
     @Deprecated
-    public PreciseDataConnectionState(int state, int networkType, int apnTypes, String apn, LinkProperties linkProperties, int failCause) {
-        this(-1, -1, -1, state, networkType, linkProperties, failCause, new ApnSetting.Builder().setApnTypeBitmask(apnTypes).setApnName(apn).setEntryName(apn).build(), null, 0);
+    public PreciseDataConnectionState(
+            int state,
+            int networkType,
+            int apnTypes,
+            String apn,
+            LinkProperties linkProperties,
+            int failCause) {
+        this(
+                -1,
+                -1,
+                -1,
+                state,
+                networkType,
+                linkProperties,
+                failCause,
+                new ApnSetting.Builder()
+                        .setApnTypeBitmask(apnTypes)
+                        .setApnName(apn)
+                        .setEntryName(apn)
+                        .build(),
+                null,
+                0);
     }
 
-    private PreciseDataConnectionState(int transportType, int id, int netId, int state, int networkType, LinkProperties linkProperties, int failCause, ApnSetting apnSetting, Qos defaultQos, int networkValidationStatus) {
+    private PreciseDataConnectionState(
+            int transportType,
+            int id,
+            int netId,
+            int state,
+            int networkType,
+            LinkProperties linkProperties,
+            int failCause,
+            ApnSetting apnSetting,
+            Qos defaultQos,
+            int networkValidationStatus) {
         this.mTransportType = transportType;
         this.mId = id;
         this.mNetId = netId;
@@ -72,9 +106,13 @@ public final class PreciseDataConnectionState implements Parcelable {
         this.mNetId = in.readInt();
         this.mState = in.readInt();
         this.mNetworkType = in.readInt();
-        this.mLinkProperties = (LinkProperties) in.readParcelable(LinkProperties.class.getClassLoader(), LinkProperties.class);
+        this.mLinkProperties =
+                (LinkProperties)
+                        in.readParcelable(
+                                LinkProperties.class.getClassLoader(), LinkProperties.class);
         this.mFailCause = in.readInt();
-        this.mApnSetting = (ApnSetting) in.readParcelable(ApnSetting.class.getClassLoader(), ApnSetting.class);
+        this.mApnSetting =
+                (ApnSetting) in.readParcelable(ApnSetting.class.getClassLoader(), ApnSetting.class);
         this.mDefaultQos = (Qos) in.readParcelable(Qos.class.getClassLoader(), Qos.class);
         this.mNetworkValidationStatus = in.readInt();
     }
@@ -82,7 +120,8 @@ public final class PreciseDataConnectionState implements Parcelable {
     @SystemApi
     @Deprecated
     public int getDataConnectionState() {
-        if (this.mState == 4 && !Compatibility.isChangeEnabled(GET_DATA_CONNECTION_STATE_R_VERSION)) {
+        if (this.mState == 4
+                && !Compatibility.isChangeEnabled(GET_DATA_CONNECTION_STATE_R_VERSION)) {
             return 2;
         }
         return this.mState;
@@ -169,7 +208,17 @@ public final class PreciseDataConnectionState implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mTransportType), Integer.valueOf(this.mId), Integer.valueOf(this.mNetId), Integer.valueOf(this.mState), Integer.valueOf(this.mNetworkType), Integer.valueOf(this.mFailCause), this.mLinkProperties, this.mApnSetting, this.mDefaultQos, Integer.valueOf(this.mNetworkValidationStatus));
+        return Objects.hash(
+                Integer.valueOf(this.mTransportType),
+                Integer.valueOf(this.mId),
+                Integer.valueOf(this.mNetId),
+                Integer.valueOf(this.mState),
+                Integer.valueOf(this.mNetworkType),
+                Integer.valueOf(this.mFailCause),
+                this.mLinkProperties,
+                this.mApnSetting,
+                this.mDefaultQos,
+                Integer.valueOf(this.mNetworkValidationStatus));
     }
 
     public boolean equals(Object o) {
@@ -180,7 +229,16 @@ public final class PreciseDataConnectionState implements Parcelable {
             return false;
         }
         PreciseDataConnectionState that = (PreciseDataConnectionState) o;
-        if (this.mTransportType == that.mTransportType && this.mId == that.mId && this.mNetId == that.mNetId && this.mState == that.mState && this.mNetworkType == that.mNetworkType && this.mFailCause == that.mFailCause && Objects.equals(this.mLinkProperties, that.mLinkProperties) && Objects.equals(this.mApnSetting, that.mApnSetting) && Objects.equals(this.mDefaultQos, that.mDefaultQos) && this.mNetworkValidationStatus == that.mNetworkValidationStatus) {
+        if (this.mTransportType == that.mTransportType
+                && this.mId == that.mId
+                && this.mNetId == that.mNetId
+                && this.mState == that.mState
+                && this.mNetworkType == that.mNetworkType
+                && this.mFailCause == that.mFailCause
+                && Objects.equals(this.mLinkProperties, that.mLinkProperties)
+                && Objects.equals(this.mApnSetting, that.mApnSetting)
+                && Objects.equals(this.mDefaultQos, that.mDefaultQos)
+                && this.mNetworkValidationStatus == that.mNetworkValidationStatus) {
             return true;
         }
         return false;
@@ -189,15 +247,18 @@ public final class PreciseDataConnectionState implements Parcelable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(" state: ").append(TelephonyUtils.dataStateToString(this.mState));
-        sb.append(", transport: ").append(AccessNetworkConstants.transportTypeToString(this.mTransportType));
+        sb.append(", transport: ")
+                .append(AccessNetworkConstants.transportTypeToString(this.mTransportType));
         sb.append(", id: ").append(this.mId);
         sb.append(", netId: ").append(this.mNetId);
-        sb.append(", network type: ").append(TelephonyManager.getNetworkTypeName(this.mNetworkType));
+        sb.append(", network type: ")
+                .append(TelephonyManager.getNetworkTypeName(this.mNetworkType));
         sb.append(", APN Setting: ").append(this.mApnSetting);
         sb.append(", link properties: ").append(this.mLinkProperties);
         sb.append(", default QoS: ").append(this.mDefaultQos);
         sb.append(", fail cause: ").append(DataFailCause.toString(this.mFailCause));
-        sb.append(", network validation status: ").append(networkValidationStatusToString(this.mNetworkValidationStatus));
+        sb.append(", network validation status: ")
+                .append(networkValidationStatusToString(this.mNetworkValidationStatus));
         return sb.toString();
     }
 
@@ -281,7 +342,17 @@ public final class PreciseDataConnectionState implements Parcelable {
         }
 
         public PreciseDataConnectionState build() {
-            return new PreciseDataConnectionState(this.mTransportType, this.mId, this.mNetworkAgentId, this.mState, this.mNetworkType, this.mLinkProperties, this.mFailCause, this.mApnSetting, this.mDefaultQos, this.mNetworkValidationStatus);
+            return new PreciseDataConnectionState(
+                    this.mTransportType,
+                    this.mId,
+                    this.mNetworkAgentId,
+                    this.mState,
+                    this.mNetworkType,
+                    this.mLinkProperties,
+                    this.mFailCause,
+                    this.mApnSetting,
+                    this.mDefaultQos,
+                    this.mNetworkValidationStatus);
         }
     }
 }

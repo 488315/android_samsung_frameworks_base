@@ -3,10 +3,12 @@ package android.security;
 import android.content.Context;
 import android.security.keystore.KeyProperties;
 import android.text.TextUtils;
+
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.Date;
+
 import javax.security.auth.x500.X500Principal;
 
 @Deprecated
@@ -22,7 +24,17 @@ public final class KeyPairGeneratorSpec implements AlgorithmParameterSpec {
     private final Date mStartDate;
     private final X500Principal mSubjectDN;
 
-    public KeyPairGeneratorSpec(Context context, String keyStoreAlias, String keyType, int keySize, AlgorithmParameterSpec spec, X500Principal subjectDN, BigInteger serialNumber, Date startDate, Date endDate, int flags) {
+    public KeyPairGeneratorSpec(
+            Context context,
+            String keyStoreAlias,
+            String keyType,
+            int keySize,
+            AlgorithmParameterSpec spec,
+            X500Principal subjectDN,
+            BigInteger serialNumber,
+            Date startDate,
+            Date endDate,
+            int flags) {
         if (context == null) {
             throw new IllegalArgumentException("context == null");
         }
@@ -197,7 +209,17 @@ public final class KeyPairGeneratorSpec implements AlgorithmParameterSpec {
         }
 
         public KeyPairGeneratorSpec build() {
-            return new KeyPairGeneratorSpec(this.mContext, this.mKeystoreAlias, this.mKeyType, this.mKeySize, this.mSpec, this.mSubjectDN, this.mSerialNumber, this.mStartDate, this.mEndDate, 0);
+            return new KeyPairGeneratorSpec(
+                    this.mContext,
+                    this.mKeystoreAlias,
+                    this.mKeyType,
+                    this.mKeySize,
+                    this.mSpec,
+                    this.mSubjectDN,
+                    this.mSerialNumber,
+                    this.mStartDate,
+                    this.mEndDate,
+                    0);
         }
     }
 }

@@ -94,11 +94,12 @@ public class SemAudioThumbnail {
             this.mListener = listener;
             if (this.mHandle >= 0) {
                 if (extract(this.mHandle) == 0) {
-                    new Thread("SemAudioThumbnail thread") { // from class: com.samsung.android.media.mir.SemAudioThumbnail.1
+                    new Thread("SemAudioThumbnail thread") { // from class:
+                        // com.samsung.android.media.mir.SemAudioThumbnail.1
                         /* JADX WARN: Code restructure failed: missing block: B:37:0x0003, code lost:
-                        
-                            continue;
-                         */
+
+                           continue;
+                        */
                         @Override // java.lang.Thread, java.lang.Runnable
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
@@ -194,7 +195,9 @@ public class SemAudioThumbnail {
                             L95:
                                 return
                             */
-                            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.media.mir.SemAudioThumbnail.AnonymousClass1.run():void");
+                            throw new UnsupportedOperationException(
+                                    "Method not decompiled:"
+                                        + " com.samsung.android.media.mir.SemAudioThumbnail.AnonymousClass1.run():void");
                         }
                     }.start();
                 } else {
@@ -238,11 +241,12 @@ public class SemAudioThumbnail {
             this.mListener = listener;
             if (this.mHandle >= 0) {
                 if (extract(this.mHandle) == 0) {
-                    new Thread("SemAudioThumbnail thread") { // from class: com.samsung.android.media.mir.SemAudioThumbnail.2
+                    new Thread("SemAudioThumbnail thread") { // from class:
+                        // com.samsung.android.media.mir.SemAudioThumbnail.2
                         /* JADX WARN: Code restructure failed: missing block: B:37:0x0003, code lost:
-                        
-                            continue;
-                         */
+
+                           continue;
+                        */
                         @Override // java.lang.Thread, java.lang.Runnable
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
@@ -338,7 +342,9 @@ public class SemAudioThumbnail {
                             L95:
                                 return
                             */
-                            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.media.mir.SemAudioThumbnail.AnonymousClass2.run():void");
+                            throw new UnsupportedOperationException(
+                                    "Method not decompiled:"
+                                        + " com.samsung.android.media.mir.SemAudioThumbnail.AnonymousClass2.run():void");
                         }
                     }.start();
                 } else {
@@ -382,11 +388,12 @@ public class SemAudioThumbnail {
             this.mListener = listener;
             if (this.mHandle >= 0) {
                 if (extract(this.mHandle) == 0) {
-                    new Thread("SemAudioThumbnail thread") { // from class: com.samsung.android.media.mir.SemAudioThumbnail.3
+                    new Thread("SemAudioThumbnail thread") { // from class:
+                        // com.samsung.android.media.mir.SemAudioThumbnail.3
                         /* JADX WARN: Code restructure failed: missing block: B:37:0x0003, code lost:
-                        
-                            continue;
-                         */
+
+                           continue;
+                        */
                         @Override // java.lang.Thread, java.lang.Runnable
                         /*
                             Code decompiled incorrectly, please refer to instructions dump.
@@ -482,7 +489,9 @@ public class SemAudioThumbnail {
                             L95:
                                 return
                             */
-                            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.media.mir.SemAudioThumbnail.AnonymousClass3.run():void");
+                            throw new UnsupportedOperationException(
+                                    "Method not decompiled:"
+                                        + " com.samsung.android.media.mir.SemAudioThumbnail.AnonymousClass3.run():void");
                         }
                     }.start();
                 } else {
@@ -512,7 +521,9 @@ public class SemAudioThumbnail {
     private void sendErrorMessage(ResultListener listener, int errorType) {
         this.mListener = listener;
         this.lastError = errorType;
-        new Thread("SemAudioThumbnail thread") { // from class: com.samsung.android.media.mir.SemAudioThumbnail.4
+        new Thread(
+                "SemAudioThumbnail thread") { // from class:
+                                              // com.samsung.android.media.mir.SemAudioThumbnail.4
             @Override // java.lang.Thread, java.lang.Runnable
             public void run() {
                 try {

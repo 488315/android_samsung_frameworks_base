@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.text.TextUtils;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
@@ -21,14 +22,18 @@ public class SelectionBuilder {
     public SelectionBuilder append(String selection, Object... selectionArgs) {
         if (TextUtils.isEmpty(selection)) {
             if (selectionArgs != null && selectionArgs.length > 0) {
-                throw new IllegalArgumentException("Valid selection required when including arguments");
+                throw new IllegalArgumentException(
+                        "Valid selection required when including arguments");
             }
             return this;
         }
         if (this.mSelection.length() > 0) {
             this.mSelection.append(" AND ");
         }
-        this.mSelection.append(NavigationBarInflaterView.KEY_CODE_START).append(selection).append(NavigationBarInflaterView.KEY_CODE_END);
+        this.mSelection
+                .append(NavigationBarInflaterView.KEY_CODE_START)
+                .append(selection)
+                .append(NavigationBarInflaterView.KEY_CODE_END);
         if (selectionArgs != null) {
             for (Object arg : selectionArgs) {
                 this.mSelectionArgs.add(String.valueOf(arg));
@@ -49,8 +54,23 @@ public class SelectionBuilder {
         return query(db, table, columns, null, null, orderBy, null);
     }
 
-    public Cursor query(SQLiteDatabase db, String table, String[] columns, String groupBy, String having, String orderBy, String limit) {
-        return db.query(table, columns, getSelection(), getSelectionArgs(), groupBy, having, orderBy, limit);
+    public Cursor query(
+            SQLiteDatabase db,
+            String table,
+            String[] columns,
+            String groupBy,
+            String having,
+            String orderBy,
+            String limit) {
+        return db.query(
+                table,
+                columns,
+                getSelection(),
+                getSelectionArgs(),
+                groupBy,
+                having,
+                orderBy,
+                limit);
     }
 
     public int update(SQLiteDatabase db, String table, ContentValues values) {

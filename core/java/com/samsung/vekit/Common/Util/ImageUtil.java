@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.media.ExifInterface;
 import android.util.Log;
+
 import com.samsung.vekit.Common.Object.ImageInfo;
 
 /* loaded from: classes6.dex */
@@ -50,14 +51,23 @@ public class ImageUtil {
             orientation = 0;
         }
         ImageInfo info = new ImageInfo(width, height, orientation);
-        Log.e(TAG, "width : " + width + ", height  : " + height + ", orientation :  " + orientation);
+        Log.e(
+                TAG,
+                "width : " + width + ", height  : " + height + ", orientation :  " + orientation);
         return info;
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     public static Bitmap decodeImage(String filePath, int targetWidth, int targetHeight) {
         boolean isNewBitmapNeeded;
-        Log.e(TAG, "filePath : " + filePath + ", targetWidth : " + targetWidth + ", targetHeight :" + targetHeight);
+        Log.e(
+                TAG,
+                "filePath : "
+                        + filePath
+                        + ", targetWidth : "
+                        + targetWidth
+                        + ", targetHeight :"
+                        + targetHeight);
         Bitmap bitmap = decodeImageBySkia(filePath, targetWidth, targetHeight);
         if (bitmap == null) {
             Log.e(TAG, "can't decode image file");
@@ -105,7 +115,9 @@ public class ImageUtil {
                 break;
         }
         if (isNewBitmapNeeded) {
-            finalBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            finalBitmap =
+                    Bitmap.createBitmap(
+                            bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
             bitmap.recycle();
         }
         if (finalBitmap == null) {
@@ -144,7 +156,9 @@ public class ImageUtil {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(filepath, options);
-        int calculateInSampleSize = calculateInSampleSize(options.outWidth, options.outHeight, targetWidth, targetHeight);
+        int calculateInSampleSize =
+                calculateInSampleSize(
+                        options.outWidth, options.outHeight, targetWidth, targetHeight);
         options.inSampleSize = calculateInSampleSize;
         sampleSize = calculateInSampleSize;
         Log.e(TAG, "decodeImageBySkia: inSampleSize = " + options.inSampleSize);
@@ -153,7 +167,8 @@ public class ImageUtil {
         return bitmap;
     }
 
-    public static int calculateInSampleSize(int width2, int height2, int targetWidth, int targetHeight) {
+    public static int calculateInSampleSize(
+            int width2, int height2, int targetWidth, int targetHeight) {
         int sampleSize2 = 1;
         int tempWidth = width2;
         int tempHeight = height2;
@@ -166,7 +181,14 @@ public class ImageUtil {
                 tempWidth = width2 / sampleSize2;
                 tempHeight = height2 / sampleSize2;
             } else {
-                Log.d(TAG, "sampleSize : " + sampleSize2 + " tempWidth : " + tempWidth + " tempHeight : " + tempHeight);
+                Log.d(
+                        TAG,
+                        "sampleSize : "
+                                + sampleSize2
+                                + " tempWidth : "
+                                + tempWidth
+                                + " tempHeight : "
+                                + tempHeight);
                 return sampleSize2;
             }
         }

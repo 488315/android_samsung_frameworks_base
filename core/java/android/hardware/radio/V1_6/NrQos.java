@@ -3,6 +3,7 @@ package android.hardware.radio.V1_6;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,18 +23,37 @@ public final class NrQos {
             return false;
         }
         NrQos other = (NrQos) otherObject;
-        if (this.fiveQi == other.fiveQi && HidlSupport.deepEquals(this.downlink, other.downlink) && HidlSupport.deepEquals(this.uplink, other.uplink) && this.qfi == other.qfi && this.averagingWindowMs == other.averagingWindowMs) {
+        if (this.fiveQi == other.fiveQi
+                && HidlSupport.deepEquals(this.downlink, other.downlink)
+                && HidlSupport.deepEquals(this.uplink, other.uplink)
+                && this.qfi == other.qfi
+                && this.averagingWindowMs == other.averagingWindowMs) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.fiveQi))), Integer.valueOf(HidlSupport.deepHashCode(this.downlink)), Integer.valueOf(HidlSupport.deepHashCode(this.uplink)), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.qfi))), Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.averagingWindowMs))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.fiveQi))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.downlink)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.uplink)),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.qfi))),
+                Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.averagingWindowMs))));
     }
 
     public final String toString() {
-        return "{.fiveQi = " + ((int) this.fiveQi) + ", .downlink = " + this.downlink + ", .uplink = " + this.uplink + ", .qfi = " + ((int) this.qfi) + ", .averagingWindowMs = " + ((int) this.averagingWindowMs) + "}";
+        return "{.fiveQi = "
+                + ((int) this.fiveQi)
+                + ", .downlink = "
+                + this.downlink
+                + ", .uplink = "
+                + this.uplink
+                + ", .qfi = "
+                + ((int) this.qfi)
+                + ", .averagingWindowMs = "
+                + ((int) this.averagingWindowMs)
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -45,7 +65,8 @@ public final class NrQos {
         ArrayList<NrQos> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             NrQos _hidl_vec_element = new NrQos();
@@ -55,7 +76,8 @@ public final class NrQos {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.fiveQi = _hidl_blob.getInt16(0 + _hidl_offset);
         this.downlink.readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
         this.uplink.readEmbeddedFromParcel(parcel, _hidl_blob, 12 + _hidl_offset);

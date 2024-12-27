@@ -10,7 +10,8 @@ import java.util.function.Predicate;
 /* loaded from: classes2.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_SOUND_TRIGGER_GENERIC_MODEL_API, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(Arrays.asList(Flags.FLAG_SOUND_TRIGGER_GENERIC_MODEL_API, ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,12 +19,15 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // android.media.soundtrigger.FeatureFlags
     public boolean soundTriggerGenericModelApi() {
-        return getValue(Flags.FLAG_SOUND_TRIGGER_GENERIC_MODEL_API, new Predicate() { // from class: android.media.soundtrigger.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).soundTriggerGenericModelApi();
-            }
-        });
+        return getValue(
+                Flags.FLAG_SOUND_TRIGGER_GENERIC_MODEL_API,
+                new Predicate() { // from class:
+                    // android.media.soundtrigger.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).soundTriggerGenericModelApi();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {

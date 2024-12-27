@@ -1,7 +1,6 @@
 package android.net.metrics;
 
 import android.annotation.SystemApi;
-import android.net.metrics.IpConnectivityLog;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -9,19 +8,20 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes3.dex */
 public final class ApfStats implements IpConnectivityLog.Event {
-    public static final Parcelable.Creator<ApfStats> CREATOR = new Parcelable.Creator<ApfStats>() { // from class: android.net.metrics.ApfStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApfStats createFromParcel(Parcel in) {
-            return new ApfStats(in);
-        }
+    public static final Parcelable.Creator<ApfStats> CREATOR =
+            new Parcelable.Creator<ApfStats>() { // from class: android.net.metrics.ApfStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApfStats createFromParcel(Parcel in) {
+                    return new ApfStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApfStats[] newArray(int size) {
-            return new ApfStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApfStats[] newArray(int size) {
+                    return new ApfStats[size];
+                }
+            };
     public final int droppedRas;
     public final long durationMs;
     public final int matchingRas;
@@ -46,7 +46,17 @@ public final class ApfStats implements IpConnectivityLog.Event {
         this.maxProgramSize = in.readInt();
     }
 
-    private ApfStats(long durationMs, int receivedRas, int matchingRas, int droppedRas, int zeroLifetimeRas, int parseErrors, int programUpdates, int programUpdatesAll, int programUpdatesAllowingMulticast, int maxProgramSize) {
+    private ApfStats(
+            long durationMs,
+            int receivedRas,
+            int matchingRas,
+            int droppedRas,
+            int zeroLifetimeRas,
+            int parseErrors,
+            int programUpdates,
+            int programUpdatesAll,
+            int programUpdatesAllowingMulticast,
+            int maxProgramSize) {
         this.durationMs = durationMs;
         this.receivedRas = receivedRas;
         this.matchingRas = matchingRas;
@@ -123,7 +133,17 @@ public final class ApfStats implements IpConnectivityLog.Event {
         }
 
         public ApfStats build() {
-            return new ApfStats(this.mDurationMs, this.mReceivedRas, this.mMatchingRas, this.mDroppedRas, this.mZeroLifetimeRas, this.mParseErrors, this.mProgramUpdates, this.mProgramUpdatesAll, this.mProgramUpdatesAllowingMulticast, this.mMaxProgramSize);
+            return new ApfStats(
+                    this.mDurationMs,
+                    this.mReceivedRas,
+                    this.mMatchingRas,
+                    this.mDroppedRas,
+                    this.mZeroLifetimeRas,
+                    this.mParseErrors,
+                    this.mProgramUpdates,
+                    this.mProgramUpdatesAll,
+                    this.mProgramUpdatesAllowingMulticast,
+                    this.mMaxProgramSize);
         }
     }
 
@@ -147,7 +167,19 @@ public final class ApfStats implements IpConnectivityLog.Event {
     }
 
     public String toString() {
-        return "ApfStats(" + String.format("%dms ", Long.valueOf(this.durationMs)) + String.format("%dB RA: {", Integer.valueOf(this.maxProgramSize)) + String.format("%d received, ", Integer.valueOf(this.receivedRas)) + String.format("%d matching, ", Integer.valueOf(this.matchingRas)) + String.format("%d dropped, ", Integer.valueOf(this.droppedRas)) + String.format("%d zero lifetime, ", Integer.valueOf(this.zeroLifetimeRas)) + String.format("%d parse errors}, ", Integer.valueOf(this.parseErrors)) + String.format("updates: {all: %d, RAs: %d, allow multicast: %d})", Integer.valueOf(this.programUpdatesAll), Integer.valueOf(this.programUpdates), Integer.valueOf(this.programUpdatesAllowingMulticast));
+        return "ApfStats("
+                + String.format("%dms ", Long.valueOf(this.durationMs))
+                + String.format("%dB RA: {", Integer.valueOf(this.maxProgramSize))
+                + String.format("%d received, ", Integer.valueOf(this.receivedRas))
+                + String.format("%d matching, ", Integer.valueOf(this.matchingRas))
+                + String.format("%d dropped, ", Integer.valueOf(this.droppedRas))
+                + String.format("%d zero lifetime, ", Integer.valueOf(this.zeroLifetimeRas))
+                + String.format("%d parse errors}, ", Integer.valueOf(this.parseErrors))
+                + String.format(
+                        "updates: {all: %d, RAs: %d, allow multicast: %d})",
+                        Integer.valueOf(this.programUpdatesAll),
+                        Integer.valueOf(this.programUpdates),
+                        Integer.valueOf(this.programUpdatesAllowingMulticast));
     }
 
     public boolean equals(Object obj) {
@@ -155,6 +187,15 @@ public final class ApfStats implements IpConnectivityLog.Event {
             return false;
         }
         ApfStats other = (ApfStats) obj;
-        return this.durationMs == other.durationMs && this.receivedRas == other.receivedRas && this.matchingRas == other.matchingRas && this.droppedRas == other.droppedRas && this.zeroLifetimeRas == other.zeroLifetimeRas && this.parseErrors == other.parseErrors && this.programUpdates == other.programUpdates && this.programUpdatesAll == other.programUpdatesAll && this.programUpdatesAllowingMulticast == other.programUpdatesAllowingMulticast && this.maxProgramSize == other.maxProgramSize;
+        return this.durationMs == other.durationMs
+                && this.receivedRas == other.receivedRas
+                && this.matchingRas == other.matchingRas
+                && this.droppedRas == other.droppedRas
+                && this.zeroLifetimeRas == other.zeroLifetimeRas
+                && this.parseErrors == other.parseErrors
+                && this.programUpdates == other.programUpdates
+                && this.programUpdatesAll == other.programUpdatesAll
+                && this.programUpdatesAllowingMulticast == other.programUpdatesAllowingMulticast
+                && this.maxProgramSize == other.maxProgramSize;
     }
 }

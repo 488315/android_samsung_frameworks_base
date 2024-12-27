@@ -18,14 +18,17 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArraySet;
 import android.view.inputmethod.InputMethodInfo;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.inputmethod.InputMethodManagerInternal;
 import com.android.settingslib.RestrictedLockUtils;
+
+import libcore.util.EmptyArray;
+
 import java.util.List;
 import java.util.Set;
-import libcore.util.EmptyArray;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -45,10 +48,13 @@ public final class AccessibilitySecurityPolicy {
     public boolean mSendNonA11yToolNotificationEnabled = false;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface AccessibilityUserManager {
-    }
+    public interface AccessibilityUserManager {}
 
-    public AccessibilitySecurityPolicy(PolicyWarningUIController policyWarningUIController, Context context, AccessibilityUserManager accessibilityUserManager, PackageManagerInternal packageManagerInternal) {
+    public AccessibilitySecurityPolicy(
+            PolicyWarningUIController policyWarningUIController,
+            Context context,
+            AccessibilityUserManager accessibilityUserManager,
+            PackageManagerInternal packageManagerInternal) {
         this.mContext = context;
         this.mAccessibilityUserManager = accessibilityUserManager;
         this.mPackageManager = context.getPackageManager();
@@ -58,20 +64,27 @@ public final class AccessibilitySecurityPolicy {
         this.mPolicyWarningUIController = policyWarningUIController;
     }
 
-    public static boolean canControlMagnification(AbstractAccessibilityServiceConnection abstractAccessibilityServiceConnection) {
+    public static boolean canControlMagnification(
+            AbstractAccessibilityServiceConnection abstractAccessibilityServiceConnection) {
         return (abstractAccessibilityServiceConnection.getCapabilities() & 16) != 0;
     }
 
     public static boolean isCallerInteractingAcrossUsers(int i) {
-        return Binder.getCallingPid() == Process.myPid() || Binder.getCallingUid() == 2000 || i == -2 || i == -3;
+        return Binder.getCallingPid() == Process.myPid()
+                || Binder.getCallingUid() == 2000
+                || i == -2
+                || i == -3;
     }
 
-    public final int canEnableDisableInputMethod(String str, AbstractAccessibilityServiceConnection abstractAccessibilityServiceConnection) {
+    public final int canEnableDisableInputMethod(
+            String str,
+            AbstractAccessibilityServiceConnection abstractAccessibilityServiceConnection) {
         boolean z;
         RestrictedLockUtils.EnforcedAdmin enforcedAdmin;
         String packageName = abstractAccessibilityServiceConnection.mComponentName.getPackageName();
         int callingUserId = UserHandle.getCallingUserId();
-        List<InputMethodInfo> inputMethodListAsUser = InputMethodManagerInternal.get().getInputMethodListAsUser(callingUserId);
+        List<InputMethodInfo> inputMethodListAsUser =
+                InputMethodManagerInternal.get().getInputMethodListAsUser(callingUserId);
         RestrictedLockUtils.EnforcedAdmin enforcedAdmin2 = null;
         if (inputMethodListAsUser != null) {
             for (InputMethodInfo inputMethodInfo : inputMethodListAsUser) {
@@ -82,18 +95,44 @@ public final class AccessibilitySecurityPolicy {
         }
         inputMethodInfo = null;
         if (inputMethodInfo == null || !inputMethodInfo.getPackageName().equals(packageName)) {
-            throw new SecurityException("The input method is in a different package with the accessibility service");
+            throw new SecurityException(
+                    "The input method is in a different package with the accessibility service");
         }
         Context context = this.mContext;
         String packageName2 = inputMethodInfo.getPackageName();
-        DevicePolicyManager devicePolicyManager = (DevicePolicyManager) context.getSystemService(DevicePolicyManager.class);
+        DevicePolicyManager devicePolicyManager =
+                (DevicePolicyManager) context.getSystemService(DevicePolicyManager.class);
         if (devicePolicyManager != null) {
-            RestrictedLockUtils.EnforcedAdmin profileOrDeviceOwner = RestrictedLockUtils.getProfileOrDeviceOwner(context, callingUserId == -10000 ? null : UserHandle.of(callingUserId));
-            boolean isInputMethodPermittedByAdmin = profileOrDeviceOwner != null ? devicePolicyManager.isInputMethodPermittedByAdmin(profileOrDeviceOwner.component, packageName2, callingUserId) : true;
-            int managedProfileId = RestrictedLockUtilsInternal.getManagedProfileId(context, callingUserId);
+            RestrictedLockUtils.EnforcedAdmin profileOrDeviceOwner =
+                    RestrictedLockUtils.getProfileOrDeviceOwner(
+                            context, callingUserId == -10000 ? null : UserHandle.of(callingUserId));
+            boolean isInputMethodPermittedByAdmin =
+                    profileOrDeviceOwner != null
+                            ? devicePolicyManager.isInputMethodPermittedByAdmin(
+                                    profileOrDeviceOwner.component, packageName2, callingUserId)
+                            : true;
+            int managedProfileId =
+                    RestrictedLockUtilsInternal.getManagedProfileId(context, callingUserId);
             if (managedProfileId != -10000) {
-                enforcedAdmin = RestrictedLockUtils.getProfileOrDeviceOwner(context, managedProfileId == -10000 ? null : UserHandle.of(managedProfileId));
-                z = (enforcedAdmin == null || !devicePolicyManager.isOrganizationOwnedDeviceWithManagedProfile()) ? true : devicePolicyManager.getParentProfileInstance(UserManager.get(context).getUserInfo(managedProfileId)).isInputMethodPermittedByAdmin(enforcedAdmin.component, packageName2, managedProfileId);
+                enforcedAdmin =
+                        RestrictedLockUtils.getProfileOrDeviceOwner(
+                                context,
+                                managedProfileId == -10000
+                                        ? null
+                                        : UserHandle.of(managedProfileId));
+                z =
+                        (enforcedAdmin == null
+                                        || !devicePolicyManager
+                                                .isOrganizationOwnedDeviceWithManagedProfile())
+                                ? true
+                                : devicePolicyManager
+                                        .getParentProfileInstance(
+                                                UserManager.get(context)
+                                                        .getUserInfo(managedProfileId))
+                                        .isInputMethodPermittedByAdmin(
+                                                enforcedAdmin.component,
+                                                packageName2,
+                                                managedProfileId);
             } else {
                 z = true;
                 enforcedAdmin = null;
@@ -109,13 +148,19 @@ public final class AccessibilitySecurityPolicy {
         return enforcedAdmin2 != null ? 1 : 0;
     }
 
-    public final boolean canGetAccessibilityNodeInfoLocked(int i, AbstractAccessibilityServiceConnection abstractAccessibilityServiceConnection, int i2) {
-        return (abstractAccessibilityServiceConnection.getCapabilities() & 1) != 0 && isRetrievalAllowingWindowLocked(i, i2);
+    public final boolean canGetAccessibilityNodeInfoLocked(
+            int i,
+            AbstractAccessibilityServiceConnection abstractAccessibilityServiceConnection,
+            int i2) {
+        return (abstractAccessibilityServiceConnection.getCapabilities() & 1) != 0
+                && isRetrievalAllowingWindowLocked(i, i2);
     }
 
-    public final boolean checkAccessibilityAccess(AbstractAccessibilityServiceConnection abstractAccessibilityServiceConnection) {
+    public final boolean checkAccessibilityAccess(
+            AbstractAccessibilityServiceConnection abstractAccessibilityServiceConnection) {
         String packageName = abstractAccessibilityServiceConnection.mComponentName.getPackageName();
-        ResolveInfo resolveInfo = abstractAccessibilityServiceConnection.getServiceInfo().getResolveInfo();
+        ResolveInfo resolveInfo =
+                abstractAccessibilityServiceConnection.getServiceInfo().getResolveInfo();
         if (resolveInfo == null) {
             return true;
         }
@@ -125,24 +170,33 @@ public final class AccessibilitySecurityPolicy {
         String str = abstractAccessibilityServiceConnection.mAttributionTag;
         try {
             if (OWN_PROCESS_ID == callingPid) {
-                return this.mAppOpsManager.noteOpNoThrow("android:access_accessibility", i, packageName, str, null) == 0;
+                return this.mAppOpsManager.noteOpNoThrow(
+                                "android:access_accessibility", i, packageName, str, null)
+                        == 0;
             }
-            return this.mAppOpsManager.noteOp("android:access_accessibility", i, packageName, str, null) == 0;
+            return this.mAppOpsManager.noteOp(
+                            "android:access_accessibility", i, packageName, str, null)
+                    == 0;
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
     public final void checkForAccessibilityPermissionOrRole() {
-        if (this.mContext.checkCallingOrSelfPermission("android.permission.MANAGE_ACCESSIBILITY") == 0) {
+        if (this.mContext.checkCallingOrSelfPermission("android.permission.MANAGE_ACCESSIBILITY")
+                == 0) {
             return;
         }
         int callingUid = Binder.getCallingUid();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            RoleManager roleManager = (RoleManager) this.mContext.getSystemService(RoleManager.class);
+            RoleManager roleManager =
+                    (RoleManager) this.mContext.getSystemService(RoleManager.class);
             if (roleManager != null) {
-                List roleHoldersAsUser = roleManager.getRoleHoldersAsUser("android.app.role.COMPANION_DEVICE_APP_STREAMING", UserHandle.getUserHandleForUid(callingUid));
+                List roleHoldersAsUser =
+                        roleManager.getRoleHoldersAsUser(
+                                "android.app.role.COMPANION_DEVICE_APP_STREAMING",
+                                UserHandle.getUserHandleForUid(callingUid));
                 String[] packagesForUid = this.mPackageManager.getPackagesForUid(callingUid);
                 if (packagesForUid != null) {
                     for (String str : packagesForUid) {
@@ -152,7 +206,10 @@ public final class AccessibilitySecurityPolicy {
                     }
                 }
             }
-            throw new SecurityException("Cannot register a proxy for a device without the android.app.role.COMPANION_DEVICE_APP_STREAMING role or the MANAGE_ACCESSIBILITY permission.");
+            throw new SecurityException(
+                    "Cannot register a proxy for a device without the"
+                        + " android.app.role.COMPANION_DEVICE_APP_STREAMING role or the"
+                        + " MANAGE_ACCESSIBILITY permission.");
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -165,7 +222,10 @@ public final class AccessibilitySecurityPolicy {
         }
         String[] strArr = {str};
         AppWidgetManagerInternal appWidgetManagerInternal = this.mAppWidgetService;
-        if (appWidgetManagerInternal == null || (hostedWidgetPackages = appWidgetManagerInternal.getHostedWidgetPackages(i)) == null || hostedWidgetPackages.isEmpty()) {
+        if (appWidgetManagerInternal == null
+                || (hostedWidgetPackages = appWidgetManagerInternal.getHostedWidgetPackages(i))
+                        == null
+                || hostedWidgetPackages.isEmpty()) {
             return strArr;
         }
         String[] strArr2 = new String[hostedWidgetPackages.size() + 1];
@@ -259,7 +319,10 @@ public final class AccessibilitySecurityPolicy {
         L89:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.AccessibilitySecurityPolicy.isRetrievalAllowingWindowLocked(int, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.AccessibilitySecurityPolicy.isRetrievalAllowingWindowLocked(int,"
+                    + " int):boolean");
     }
 
     public final void onSwitchUserLocked(int i, Set set) {
@@ -269,12 +332,22 @@ public final class AccessibilitySecurityPolicy {
         ArraySet arraySet = new ArraySet(set);
         PolicyWarningUIController policyWarningUIController = this.mPolicyWarningUIController;
         policyWarningUIController.getClass();
-        Message obtainMessage = PooledLambda.obtainMessage(new PolicyWarningUIController$$ExternalSyntheticLambda2(3, policyWarningUIController), Integer.valueOf(i), arraySet);
+        Message obtainMessage =
+                PooledLambda.obtainMessage(
+                        new PolicyWarningUIController$$ExternalSyntheticLambda2(
+                                3, policyWarningUIController),
+                        Integer.valueOf(i),
+                        arraySet);
         Handler handler = policyWarningUIController.mMainHandler;
         handler.sendMessage(obtainMessage);
         for (int i2 = 0; i2 < this.mNonA11yCategoryServices.size(); i2++) {
             int i3 = this.mCurrentUserId;
-            handler.sendMessage(PooledLambda.obtainMessage(new PolicyWarningUIController$$ExternalSyntheticLambda2(1, policyWarningUIController), Integer.valueOf(i3), (ComponentName) this.mNonA11yCategoryServices.valueAt(i2)));
+            handler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new PolicyWarningUIController$$ExternalSyntheticLambda2(
+                                    1, policyWarningUIController),
+                            Integer.valueOf(i3),
+                            (ComponentName) this.mNonA11yCategoryServices.valueAt(i2)));
         }
         this.mNonA11yCategoryServices.clear();
         this.mCurrentUserId = i;
@@ -293,10 +366,20 @@ public final class AccessibilitySecurityPolicy {
         if (resolveProfileParentLocked(userId) == i2 && (i == -2 || i == -3)) {
             return i2;
         }
-        if (this.mContext.checkCallingPermission("android.permission.INTERACT_ACROSS_USERS") == 0 || this.mContext.checkCallingPermission("android.permission.INTERACT_ACROSS_USERS_FULL") == 0) {
+        if (this.mContext.checkCallingPermission("android.permission.INTERACT_ACROSS_USERS") == 0
+                || this.mContext.checkCallingPermission(
+                                "android.permission.INTERACT_ACROSS_USERS_FULL")
+                        == 0) {
             return (i == -2 || i == -3) ? i2 : resolveProfileParentLocked(i);
         }
-        throw new SecurityException(DualAppManagerService$$ExternalSyntheticOutline0.m(userId, i, "Call from user ", " as user ", " without permission INTERACT_ACROSS_USERS or INTERACT_ACROSS_USERS_FULL not allowed."));
+        throw new SecurityException(
+                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                        userId,
+                        i,
+                        "Call from user ",
+                        " as user ",
+                        " without permission INTERACT_ACROSS_USERS or INTERACT_ACROSS_USERS_FULL"
+                            + " not allowed."));
     }
 
     public final int resolveProfileParentLocked(int i) {
@@ -314,7 +397,8 @@ public final class AccessibilitySecurityPolicy {
         return i;
     }
 
-    public final String resolveValidReportedPackageLocked(CharSequence charSequence, int i, int i2, int i3) {
+    public final String resolveValidReportedPackageLocked(
+            CharSequence charSequence, int i, int i2, int i3) {
         if (charSequence == null) {
             return null;
         }
@@ -325,11 +409,18 @@ public final class AccessibilitySecurityPolicy {
         int uid = UserHandle.getUid(i2, i);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            if (this.mPackageManagerInternal.isSameApp(uid, UserHandle.getUserId(uid), 4194304L, charSequence2)) {
+            if (this.mPackageManagerInternal.isSameApp(
+                    uid, UserHandle.getUserId(uid), 4194304L, charSequence2)) {
                 return charSequence.toString();
             }
             AppWidgetManagerInternal appWidgetManagerInternal = this.mAppWidgetService;
-            if ((appWidgetManagerInternal == null || !ArrayUtils.contains(appWidgetManagerInternal.getHostedWidgetPackages(uid), charSequence2)) && this.mContext.checkPermission("android.permission.ACT_AS_PACKAGE_FOR_ACCESSIBILITY", i3, uid) != 0) {
+            if ((appWidgetManagerInternal == null
+                            || !ArrayUtils.contains(
+                                    appWidgetManagerInternal.getHostedWidgetPackages(uid),
+                                    charSequence2))
+                    && this.mContext.checkPermission(
+                                    "android.permission.ACT_AS_PACKAGE_FOR_ACCESSIBILITY", i3, uid)
+                            != 0) {
                 String[] packagesForUid = this.mPackageManager.getPackagesForUid(uid);
                 if (ArrayUtils.isEmpty(packagesForUid)) {
                     return null;
@@ -349,12 +440,21 @@ public final class AccessibilitySecurityPolicy {
         this.mSendNonA11yToolNotificationEnabled = z;
         PolicyWarningUIController policyWarningUIController = this.mPolicyWarningUIController;
         policyWarningUIController.getClass();
-        Message obtainMessage = PooledLambda.obtainMessage(new PolicyWarningUIController$$ExternalSyntheticLambda0(0, policyWarningUIController), Boolean.valueOf(z));
+        Message obtainMessage =
+                PooledLambda.obtainMessage(
+                        new PolicyWarningUIController$$ExternalSyntheticLambda0(
+                                0, policyWarningUIController),
+                        Boolean.valueOf(z));
         Handler handler = policyWarningUIController.mMainHandler;
         handler.sendMessage(obtainMessage);
         if (z) {
             for (int i = 0; i < this.mNonA11yCategoryServices.size(); i++) {
-                handler.sendMessage(PooledLambda.obtainMessage(new PolicyWarningUIController$$ExternalSyntheticLambda2(0, policyWarningUIController), Integer.valueOf(this.mCurrentUserId), (ComponentName) this.mNonA11yCategoryServices.valueAt(i)));
+                handler.sendMessage(
+                        PooledLambda.obtainMessage(
+                                new PolicyWarningUIController$$ExternalSyntheticLambda2(
+                                        0, policyWarningUIController),
+                                Integer.valueOf(this.mCurrentUserId),
+                                (ComponentName) this.mNonA11yCategoryServices.valueAt(i)));
             }
         }
     }

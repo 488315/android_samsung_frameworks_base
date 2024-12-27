@@ -37,12 +37,10 @@ public interface IResourceManagerClient extends IInterface {
         }
 
         @Override // android.media.IResourceManagerClient
-        public void startWatchingMode() throws RemoteException {
-        }
+        public void startWatchingMode() throws RemoteException {}
 
         @Override // android.media.IResourceManagerClient
-        public void stopWatchingMode() throws RemoteException {
-        }
+        public void stopWatchingMode() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -50,7 +48,7 @@ public interface IResourceManagerClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IResourceManagerClient {
+    public abstract static class Stub extends Binder implements IResourceManagerClient {
         static final int TRANSACTION_getCodecState = 3;
         static final int TRANSACTION_getName = 2;
         static final int TRANSACTION_reclaimResource = 1;
@@ -100,7 +98,8 @@ public interface IResourceManagerClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IResourceManagerClient.DESCRIPTOR);
             }

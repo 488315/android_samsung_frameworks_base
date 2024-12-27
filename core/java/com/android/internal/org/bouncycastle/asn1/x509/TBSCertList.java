@@ -11,6 +11,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1UTCTime;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
+
 import java.util.Enumeration;
 import java.util.NoSuchElementException;
 
@@ -60,7 +61,8 @@ public class TBSCertList extends ASN1Object {
             return this.crlEntryExtensions;
         }
 
-        @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+        @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+                  // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
         public ASN1Primitive toASN1Primitive() {
             return this.seq;
         }
@@ -89,8 +91,7 @@ public class TBSCertList extends ASN1Object {
     }
 
     private class EmptyEnumeration implements Enumeration {
-        private EmptyEnumeration() {
-        }
+        private EmptyEnumeration() {}
 
         @Override // java.util.Enumeration
         public boolean hasMoreElements() {
@@ -135,7 +136,10 @@ public class TBSCertList extends ASN1Object {
         this.issuer = X500Name.getInstance(seq.getObjectAt(seqPos3));
         int seqPos5 = seqPos4 + 1;
         this.thisUpdate = Time.getInstance(seq.getObjectAt(seqPos4));
-        if (seqPos5 < seq.size() && ((seq.getObjectAt(seqPos5) instanceof ASN1UTCTime) || (seq.getObjectAt(seqPos5) instanceof ASN1GeneralizedTime) || (seq.getObjectAt(seqPos5) instanceof Time))) {
+        if (seqPos5 < seq.size()
+                && ((seq.getObjectAt(seqPos5) instanceof ASN1UTCTime)
+                        || (seq.getObjectAt(seqPos5) instanceof ASN1GeneralizedTime)
+                        || (seq.getObjectAt(seqPos5) instanceof Time))) {
             this.nextUpdate = Time.getInstance(seq.getObjectAt(seqPos5));
             seqPos5++;
         }
@@ -146,7 +150,10 @@ public class TBSCertList extends ASN1Object {
         }
         int seqPos7 = seq.size();
         if (seqPos5 < seqPos7 && (seq.getObjectAt(seqPos5) instanceof ASN1TaggedObject)) {
-            this.crlExtensions = Extensions.getInstance(ASN1Sequence.getInstance((ASN1TaggedObject) seq.getObjectAt(seqPos5), true));
+            this.crlExtensions =
+                    Extensions.getInstance(
+                            ASN1Sequence.getInstance(
+                                    (ASN1TaggedObject) seq.getObjectAt(seqPos5), true));
         }
     }
 
@@ -199,7 +206,8 @@ public class TBSCertList extends ASN1Object {
         return this.crlExtensions;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(7);
         if (this.version != null) {

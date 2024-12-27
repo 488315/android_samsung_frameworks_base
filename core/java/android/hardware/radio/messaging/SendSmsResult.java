@@ -3,26 +3,29 @@ package android.hardware.radio.messaging;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SendSmsResult implements Parcelable {
-    public static final Parcelable.Creator<SendSmsResult> CREATOR = new Parcelable.Creator<SendSmsResult>() { // from class: android.hardware.radio.messaging.SendSmsResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SendSmsResult createFromParcel(Parcel _aidl_source) {
-            SendSmsResult _aidl_out = new SendSmsResult();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SendSmsResult> CREATOR =
+            new Parcelable.Creator<SendSmsResult>() { // from class:
+                // android.hardware.radio.messaging.SendSmsResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SendSmsResult createFromParcel(Parcel _aidl_source) {
+                    SendSmsResult _aidl_out = new SendSmsResult();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SendSmsResult[] newArray(int _aidl_size) {
-            return new SendSmsResult[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SendSmsResult[] newArray(int _aidl_size) {
+                    return new SendSmsResult[_aidl_size];
+                }
+            };
     public String ackPDU;
     public int messageRef = 0;
     public int errorCode = 0;

@@ -2,11 +2,13 @@ package com.android.server.media;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class SystemMediaRoute2Provider$$ExternalSyntheticLambda1 implements Runnable {
+public final /* synthetic */ class SystemMediaRoute2Provider$$ExternalSyntheticLambda1
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ SystemMediaRoute2Provider f$0;
 
-    public /* synthetic */ SystemMediaRoute2Provider$$ExternalSyntheticLambda1(SystemMediaRoute2Provider systemMediaRoute2Provider, int i) {
+    public /* synthetic */ SystemMediaRoute2Provider$$ExternalSyntheticLambda1(
+            SystemMediaRoute2Provider systemMediaRoute2Provider, int i) {
         this.$r8$classId = i;
         this.f$0 = systemMediaRoute2Provider;
     }
@@ -22,8 +24,10 @@ public final /* synthetic */ class SystemMediaRoute2Provider$$ExternalSyntheticL
                 systemMediaRoute2Provider.notifyProviderState();
                 break;
             case 1:
-                systemMediaRoute2Provider.mDeviceRouteController.start(systemMediaRoute2Provider.mUser);
-                systemMediaRoute2Provider.mBluetoothRouteController.start(systemMediaRoute2Provider.mUser);
+                systemMediaRoute2Provider.mDeviceRouteController.start(
+                        systemMediaRoute2Provider.mUser);
+                systemMediaRoute2Provider.mBluetoothRouteController.start(
+                        systemMediaRoute2Provider.mUser);
                 break;
             case 2:
                 systemMediaRoute2Provider.updateProviderState();

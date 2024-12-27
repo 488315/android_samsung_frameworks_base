@@ -5,6 +5,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.hardware.scontext.SContextConstants;
 import android.text.format.DateFormat;
+
 import com.samsung.android.graphics.spr.document.SprDocument;
 import com.samsung.android.graphics.spr.document.SprInputStream;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
@@ -14,13 +15,15 @@ import com.samsung.android.graphics.spr.document.attribute.SprAttributeStrokeLin
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeStrokeLinejoin;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeStrokeMiterlimit;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeStrokeWidth;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes6.dex */
 public class SprObjectShapePath extends SprObjectBase {
@@ -373,7 +376,8 @@ public class SprObjectShapePath extends SprObjectBase {
                     } else {
                         attribute3.color = -65536;
                     }
-                    attribute3.color = (attribute3.color & (-16777216)) | (~(attribute3.color & 16777215));
+                    attribute3.color =
+                            (attribute3.color & (-16777216)) | (~(attribute3.color & 16777215));
                 } else if ("fillColor".equals(name)) {
                     SprAttributeFill attribute4 = null;
                     Iterator<SprAttributeBase> it3 = this.mAttributeList.iterator();
@@ -417,29 +421,37 @@ public class SprObjectShapePath extends SprObjectBase {
                     attribute5.color = (attribute5.color & 16777215) | (opacity2 << 24);
                 } else if ("pathData".equals(name)) {
                     createNodesFromPathData(value);
-                } else if (!"trimPathStart".equals(name) && !"trimPathEnd".equals(name) && !"trimPathOffset".equals(name)) {
+                } else if (!"trimPathStart".equals(name)
+                        && !"trimPathEnd".equals(name)
+                        && !"trimPathOffset".equals(name)) {
                     if ("strokeLineCap".equals(name)) {
                         SprAttributeStrokeLinecap attribute6 = new SprAttributeStrokeLinecap();
                         if ("butt".equals(value)) {
                             attribute6.linecap = SprAttributeStrokeLinecap.STROKE_LINECAP_TYPE_BUTT;
                         } else if ("round".equals(value)) {
-                            attribute6.linecap = SprAttributeStrokeLinecap.STROKE_LINECAP_TYPE_ROUND;
+                            attribute6.linecap =
+                                    SprAttributeStrokeLinecap.STROKE_LINECAP_TYPE_ROUND;
                         } else if ("square".equals(value)) {
-                            attribute6.linecap = SprAttributeStrokeLinecap.STROKE_LINECAP_TYPE_SQUARE;
+                            attribute6.linecap =
+                                    SprAttributeStrokeLinecap.STROKE_LINECAP_TYPE_SQUARE;
                         }
                         this.mAttributeList.add(attribute6);
                     } else if ("strokeLineJoin".equals(name)) {
                         SprAttributeStrokeLinejoin attribute7 = new SprAttributeStrokeLinejoin();
                         if ("miter".equals(value)) {
-                            attribute7.linejoin = SprAttributeStrokeLinejoin.STROKE_LINEJOIN_TYPE_MITER;
+                            attribute7.linejoin =
+                                    SprAttributeStrokeLinejoin.STROKE_LINEJOIN_TYPE_MITER;
                         } else if ("round".equals(value)) {
-                            attribute7.linejoin = SprAttributeStrokeLinejoin.STROKE_LINEJOIN_TYPE_ROUND;
+                            attribute7.linejoin =
+                                    SprAttributeStrokeLinejoin.STROKE_LINEJOIN_TYPE_ROUND;
                         } else if ("bevel".equals(value)) {
-                            attribute7.linejoin = SprAttributeStrokeLinejoin.STROKE_LINEJOIN_TYPE_BEVEL;
+                            attribute7.linejoin =
+                                    SprAttributeStrokeLinejoin.STROKE_LINEJOIN_TYPE_BEVEL;
                         }
                         this.mAttributeList.add(attribute7);
                     } else if ("strokeMiterLimit".equals(name)) {
-                        SprAttributeStrokeMiterlimit attribute8 = new SprAttributeStrokeMiterlimit();
+                        SprAttributeStrokeMiterlimit attribute8 =
+                                new SprAttributeStrokeMiterlimit();
                         attribute8.miterLimit = Float.valueOf(value).floatValue();
                         this.mAttributeList.add(attribute8);
                     }
@@ -516,8 +528,7 @@ public class SprObjectShapePath extends SprObjectBase {
         int mEndPosition;
         boolean mEndWithNegSign;
 
-        private ExtractFloatResult() {
-        }
+        private ExtractFloatResult() {}
     }
 
     private float[] getFloats(String s) {
@@ -633,7 +644,16 @@ public class SprObjectShapePath extends SprObjectBase {
             switch (cmd) {
                 case 'A':
                     k = k2;
-                    drawArc(currentX2, currentY2, val[k + 5], val[k + 6], val[k + 0], val[k + 1], val[k + 2], val[k + 3] != 0.0f, val[k + 4] != 0.0f);
+                    drawArc(
+                            currentX2,
+                            currentY2,
+                            val[k + 5],
+                            val[k + 6],
+                            val[k + 0],
+                            val[k + 1],
+                            val[k + 2],
+                            val[k + 3] != 0.0f,
+                            val[k + 4] != 0.0f);
                     float currentX3 = val[k + 5];
                     float currentY3 = val[k + 6];
                     currentX2 = currentX3;
@@ -692,7 +712,10 @@ public class SprObjectShapePath extends SprObjectBase {
                     float currentX9 = currentX2;
                     k = k2;
                     char previousCmd3 = previousCmd2;
-                    if (previousCmd3 != 'c' && previousCmd3 != 's' && previousCmd3 != 'C' && previousCmd3 != 'S') {
+                    if (previousCmd3 != 'c'
+                            && previousCmd3 != 's'
+                            && previousCmd3 != 'C'
+                            && previousCmd3 != 'S') {
                         reflectiveCtrlPointX = currentX9;
                         reflectiveCtrlPointY = currentY8;
                     } else {
@@ -701,7 +724,13 @@ public class SprObjectShapePath extends SprObjectBase {
                         reflectiveCtrlPointX = reflectiveCtrlPointX3;
                         reflectiveCtrlPointY = reflectiveCtrlPointY3;
                     }
-                    cubicTo(reflectiveCtrlPointX, reflectiveCtrlPointY, val[k + 0], val[k + 1], val[k + 2], val[k + 3]);
+                    cubicTo(
+                            reflectiveCtrlPointX,
+                            reflectiveCtrlPointY,
+                            val[k + 0],
+                            val[k + 1],
+                            val[k + 2],
+                            val[k + 3]);
                     float ctrlPointX5 = val[k + 0];
                     float ctrlPointY5 = val[k + 1];
                     float currentX10 = val[k + 2];
@@ -718,7 +747,10 @@ public class SprObjectShapePath extends SprObjectBase {
                     char previousCmd4 = previousCmd2;
                     float reflectiveCtrlPointX4 = currentX11;
                     float reflectiveCtrlPointY4 = currentY10;
-                    if (previousCmd4 == 'q' || previousCmd4 == 't' || previousCmd4 == 'Q' || previousCmd4 == 'T') {
+                    if (previousCmd4 == 'q'
+                            || previousCmd4 == 't'
+                            || previousCmd4 == 'Q'
+                            || previousCmd4 == 'T') {
                         reflectiveCtrlPointX4 = (currentX11 * 2.0f) - ctrlPointX2;
                         reflectiveCtrlPointY4 = (currentY10 * 2.0f) - ctrlPointY2;
                     }
@@ -741,7 +773,16 @@ public class SprObjectShapePath extends SprObjectBase {
                 case 'a':
                     float currentY13 = currentY2;
                     k = k2;
-                    drawArc(currentX2, currentY13, val[k2 + 5] + currentX2, val[k2 + 6] + currentY13, val[k2 + 0], val[k2 + 1], val[k2 + 2], val[k2 + 3] != 0.0f ? true : z, val[k2 + 4] != 0.0f ? true : z);
+                    drawArc(
+                            currentX2,
+                            currentY13,
+                            val[k2 + 5] + currentX2,
+                            val[k2 + 6] + currentY13,
+                            val[k2 + 0],
+                            val[k2 + 1],
+                            val[k2 + 2],
+                            val[k2 + 3] != 0.0f ? true : z,
+                            val[k2 + 4] != 0.0f ? true : z);
                     currentX2 += val[k + 5];
                     currentY2 = currentY13 + val[k + 6];
                     ctrlPointX2 = currentX2;
@@ -749,7 +790,13 @@ public class SprObjectShapePath extends SprObjectBase {
                     break;
                 case 'c':
                     float currentY14 = currentY2;
-                    cubicTo(currentX2 + val[k2 + 0], currentY14 + val[k2 + 1], currentX2 + val[k2 + 2], currentY14 + val[k2 + 3], currentX2 + val[k2 + 4], currentY14 + val[k2 + 5]);
+                    cubicTo(
+                            currentX2 + val[k2 + 0],
+                            currentY14 + val[k2 + 1],
+                            currentX2 + val[k2 + 2],
+                            currentY14 + val[k2 + 3],
+                            currentX2 + val[k2 + 4],
+                            currentY14 + val[k2 + 5]);
                     float ctrlPointX7 = val[k2 + 2] + currentX2;
                     float ctrlPointY7 = currentY14 + val[k2 + 3];
                     currentX2 += val[k2 + 4];
@@ -777,7 +824,11 @@ public class SprObjectShapePath extends SprObjectBase {
                     break;
                 case 'q':
                     float currentY15 = currentY2;
-                    quadTo(val[k2 + 0] + currentX2, currentY15 + val[k2 + 1], val[k2 + 2] + currentX2, val[k2 + 3] + currentY15);
+                    quadTo(
+                            val[k2 + 0] + currentX2,
+                            currentY15 + val[k2 + 1],
+                            val[k2 + 2] + currentX2,
+                            val[k2 + 3] + currentY15);
                     float ctrlPointX8 = val[k2 + 0] + currentX2;
                     float ctrlPointY8 = currentY15 + val[k2 + 1];
                     currentX2 += val[k2 + 2];
@@ -787,7 +838,10 @@ public class SprObjectShapePath extends SprObjectBase {
                     currentY2 = val[k2 + 3] + currentY15;
                     break;
                 case 's':
-                    if (previousCmd2 != 'c' && previousCmd2 != 's' && previousCmd2 != 'C' && previousCmd2 != 'S') {
+                    if (previousCmd2 != 'c'
+                            && previousCmd2 != 's'
+                            && previousCmd2 != 'C'
+                            && previousCmd2 != 'S') {
                         reflectiveCtrlPointX2 = 0.0f;
                         reflectiveCtrlPointY2 = 0.0f;
                     } else {
@@ -797,7 +851,13 @@ public class SprObjectShapePath extends SprObjectBase {
                         reflectiveCtrlPointY2 = reflectiveCtrlPointY5;
                     }
                     float currentY16 = currentY2;
-                    cubicTo(currentX2 + reflectiveCtrlPointX2, currentY2 + reflectiveCtrlPointY2, currentX2 + val[k2 + 0], currentY2 + val[k2 + 1], currentX2 + val[k2 + 2], currentY2 + val[k2 + 3]);
+                    cubicTo(
+                            currentX2 + reflectiveCtrlPointX2,
+                            currentY2 + reflectiveCtrlPointY2,
+                            currentX2 + val[k2 + 0],
+                            currentY2 + val[k2 + 1],
+                            currentX2 + val[k2 + 2],
+                            currentY2 + val[k2 + 3]);
                     float ctrlPointX9 = val[k2 + 0] + currentX2;
                     float ctrlPointY9 = currentY16 + val[k2 + 1];
                     currentX2 += val[k2 + 2];
@@ -809,11 +869,18 @@ public class SprObjectShapePath extends SprObjectBase {
                 case 't':
                     float reflectiveCtrlPointX6 = 0.0f;
                     float reflectiveCtrlPointY6 = 0.0f;
-                    if (previousCmd2 == 'q' || previousCmd2 == 't' || previousCmd2 == 'Q' || previousCmd2 == 'T') {
+                    if (previousCmd2 == 'q'
+                            || previousCmd2 == 't'
+                            || previousCmd2 == 'Q'
+                            || previousCmd2 == 'T') {
                         reflectiveCtrlPointX6 = currentX2 - ctrlPointX2;
                         reflectiveCtrlPointY6 = currentY2 - ctrlPointY2;
                     }
-                    quadTo(currentX2 + reflectiveCtrlPointX6, currentY2 + reflectiveCtrlPointY6, val[k2 + 0] + currentX2, val[k2 + 1] + currentY2);
+                    quadTo(
+                            currentX2 + reflectiveCtrlPointX6,
+                            currentY2 + reflectiveCtrlPointY6,
+                            val[k2 + 0] + currentX2,
+                            val[k2 + 1] + currentY2);
                     float ctrlPointX10 = currentX2 + reflectiveCtrlPointX6;
                     float ctrlPointY10 = currentY2 + reflectiveCtrlPointY6;
                     currentX2 += val[k2 + 0];
@@ -841,7 +908,16 @@ public class SprObjectShapePath extends SprObjectBase {
         current[3] = ctrlPointY2;
     }
 
-    private void drawArc(float x0, float y0, float x1, float y1, float a, float b, float theta, boolean isMoreThanHalf, boolean isPositiveArc) {
+    private void drawArc(
+            float x0,
+            float y0,
+            float x1,
+            float y1,
+            float a,
+            float b,
+            float theta,
+            boolean isMoreThanHalf,
+            boolean isPositiveArc) {
         double cx;
         double cy;
         double thetaD = Math.toRadians(theta);
@@ -894,7 +970,16 @@ public class SprObjectShapePath extends SprObjectBase {
         arcToBezier(cx3, cy3, cy4, b, x0, y0, thetaD, eta0, sweep);
     }
 
-    private void arcToBezier(double cx, double cy, double a, double b, double e1x, double e1y, double theta, double start, double sweep) {
+    private void arcToBezier(
+            double cx,
+            double cy,
+            double a,
+            double b,
+            double e1x,
+            double e1y,
+            double theta,
+            double start,
+            double sweep) {
         double d = a;
         int numSegments = Math.abs((int) Math.ceil((sweep * 4.0d) / 3.141592653589793d));
         double cosTheta = Math.cos(theta);
@@ -917,7 +1002,8 @@ public class SprObjectShapePath extends SprObjectBase {
             double sinEta2 = Math.sin(eta2);
             double cosEta2 = Math.cos(eta2);
             double anglePerSegment2 = anglePerSegment;
-            double anglePerSegment3 = (cx + ((d * cosTheta) * cosEta2)) - ((b * sinTheta) * sinEta2);
+            double anglePerSegment3 =
+                    (cx + ((d * cosTheta) * cosEta2)) - ((b * sinTheta) * sinEta2);
             double cosEta12 = cosEta1;
             double cosEta13 = cy + (d * sinTheta * cosEta2) + (b * cosTheta * sinEta2);
             double sinEta12 = sinEta1;
@@ -925,13 +1011,22 @@ public class SprObjectShapePath extends SprObjectBase {
             double e2y = -d;
             double ep2y = (e2y * sinTheta * sinEta2) + (b * cosTheta * cosEta2);
             double tanDiff2 = Math.tan((eta2 - eta1) / 2.0d);
-            double alpha = (Math.sin(eta2 - eta1) * (Math.sqrt(((tanDiff2 * 3.0d) * tanDiff2) + 4.0d) - 1.0d)) / 3.0d;
+            double alpha =
+                    (Math.sin(eta2 - eta1)
+                                    * (Math.sqrt(((tanDiff2 * 3.0d) * tanDiff2) + 4.0d) - 1.0d))
+                            / 3.0d;
             double q1x = eta12 + (alpha * ep1x3);
             int numSegments2 = numSegments;
             double q1y = e1y2 + (alpha * ep1y2);
             double q2x = anglePerSegment3 - (alpha * ep2x);
             double q2y = cosEta13 - (alpha * ep2y);
-            cubicTo((float) q1x, (float) q1y, (float) q2x, (float) q2y, (float) anglePerSegment3, (float) cosEta13);
+            cubicTo(
+                    (float) q1x,
+                    (float) q1y,
+                    (float) q2x,
+                    (float) q2y,
+                    (float) anglePerSegment3,
+                    (float) cosEta13);
             eta1 = eta2;
             eta12 = anglePerSegment3;
             e1y2 = cosEta13;

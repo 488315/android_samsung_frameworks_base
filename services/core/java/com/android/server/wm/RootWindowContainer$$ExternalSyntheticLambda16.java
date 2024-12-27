@@ -4,12 +4,14 @@ import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda16 implements Consumer {
+public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda16
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ RootWindowContainer f$0;
     public final /* synthetic */ String f$1;
 
-    public /* synthetic */ RootWindowContainer$$ExternalSyntheticLambda16(RootWindowContainer rootWindowContainer, String str, int i) {
+    public /* synthetic */ RootWindowContainer$$ExternalSyntheticLambda16(
+            RootWindowContainer rootWindowContainer, String str, int i) {
         this.$r8$classId = i;
         this.f$0 = rootWindowContainer;
         this.f$1 = str;
@@ -28,8 +30,7 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda1
                     if (activityRecord.isActivityTypeAssistant() && str != "assist") {
                         z = rootWindowContainer.mWmService.mAssistantOnTopOfDream;
                     }
-                    if (!z) {
-                    }
+                    if (!z) {}
                 }
                 activityRecord.finishIfPossible(str, true);
                 break;
@@ -43,8 +44,7 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda1
                     if (activityRecord2.isActivityTypeAssistant() && str2 != "assist") {
                         z2 = rootWindowContainer2.mWmService.mAssistantOnTopOfDream;
                     }
-                    if (!z2) {
-                    }
+                    if (!z2) {}
                 }
                 activityRecord2.finishIfPossible(str2, true);
                 break;
@@ -55,7 +55,13 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda1
                 rootWindowContainer3.getClass();
                 if (taskDisplayArea.topRunningActivity(false) == null) {
                     WindowManagerService windowManagerService = rootWindowContainer3.mWmService;
-                    rootWindowContainer3.startHomeOnTaskDisplayArea(windowManagerService.mUmInternal.getUserAssignedToDisplay(taskDisplayArea.mDisplayContent.mDisplayId), str3, taskDisplayArea, false, false);
+                    rootWindowContainer3.startHomeOnTaskDisplayArea(
+                            windowManagerService.mUmInternal.getUserAssignedToDisplay(
+                                    taskDisplayArea.mDisplayContent.mDisplayId),
+                            str3,
+                            taskDisplayArea,
+                            false,
+                            false);
                     break;
                 }
                 break;

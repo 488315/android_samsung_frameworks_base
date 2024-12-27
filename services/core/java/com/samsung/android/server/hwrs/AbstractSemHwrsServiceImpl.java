@@ -11,7 +11,9 @@ import android.os.SystemService;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.hwrs.ISemHwrsManager;
 import com.samsung.android.server.hwrs.common.HwrsUtils;
 import com.samsung.android.server.hwrs.common.HwrsUtils$$ExternalSyntheticLambda0;
@@ -20,6 +22,7 @@ import com.samsung.android.server.hwrs.samba.ServerManager;
 import com.samsung.android.server.hwrs.samba.ServerUserManager;
 import com.samsung.android.server.hwrs.utils.FileUtil;
 import com.samsung.android.server.hwrs.utils.StorageServiceException;
+
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -34,7 +37,14 @@ public abstract class AbstractSemHwrsServiceImpl extends ISemHwrsManager.Stub {
 
     public AbstractSemHwrsServiceImpl(Context context, PreconditionObserver preconditionObserver) {
         Log.d("[HWRS_SYS]SemHwrsService", "AbstractSemHwrsServiceImpl entered");
-        new ThreadPoolExecutor(64, 64, 60L, TimeUnit.SECONDS, new LinkedBlockingQueue(), new HwrsUtils$$ExternalSyntheticLambda0()).allowCoreThreadTimeOut(true);
+        new ThreadPoolExecutor(
+                        64,
+                        64,
+                        60L,
+                        TimeUnit.SECONDS,
+                        new LinkedBlockingQueue(),
+                        new HwrsUtils$$ExternalSyntheticLambda0())
+                .allowCoreThreadTimeOut(true);
         HwrsUtils.sHandler = new Handler(Looper.getMainLooper());
         this.mUserManager = (UserManager) context.getSystemService("user");
         this.mPrecondManager = preconditionObserver;
@@ -85,7 +95,11 @@ public abstract class AbstractSemHwrsServiceImpl extends ISemHwrsManager.Stub {
             return null;
         }
         try {
-            return SystemService.getState("ksmbd_start").equals(SystemService.State.RUNNING) ? INetd.IF_FLAG_RUNNING : !SystemService.getState("ksmbd_stop").equals(SystemService.State.STOPPED) ? "stopping" : "stopped";
+            return SystemService.getState("ksmbd_start").equals(SystemService.State.RUNNING)
+                    ? INetd.IF_FLAG_RUNNING
+                    : !SystemService.getState("ksmbd_stop").equals(SystemService.State.STOPPED)
+                            ? "stopping"
+                            : "stopped";
         } catch (StorageServiceException e) {
             Log.e("[HWRS_SYS]SemHwrsService", "getKsmbdServerStatus failed- " + e);
             return null;
@@ -114,11 +128,15 @@ public abstract class AbstractSemHwrsServiceImpl extends ISemHwrsManager.Stub {
         int callingPid = Binder.getCallingPid();
         int callingUid = Binder.getCallingUid();
         String[] packagesForUid = this.mContext.getPackageManager().getPackagesForUid(callingUid);
-        String str = (packagesForUid == null || packagesForUid.length <= 0) ? null : packagesForUid[0];
-        if (this.mContext.checkPermission("com.samsung.android.permission.HW_RESOURCE_SHARE", callingPid, callingUid) == 0) {
+        String str =
+                (packagesForUid == null || packagesForUid.length <= 0) ? null : packagesForUid[0];
+        if (this.mContext.checkPermission(
+                        "com.samsung.android.permission.HW_RESOURCE_SHARE", callingPid, callingUid)
+                == 0) {
             return Boolean.TRUE;
         }
-        DualAppManagerService$$ExternalSyntheticOutline0.m("Unauthorized access attempt by package : ", str, "[HWRS_SYS]SemHwrsService");
+        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                "Unauthorized access attempt by package : ", str, "[HWRS_SYS]SemHwrsService");
         return Boolean.FALSE;
     }
 

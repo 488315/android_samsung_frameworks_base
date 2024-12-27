@@ -2,190 +2,194 @@ package android.graphics;
 
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
-import java.io.PrintWriter;
+
 import libcore.util.NativeAllocationRegistry;
+
+import java.io.PrintWriter;
 
 /* loaded from: classes.dex */
 public class Matrix {
-    public static final Matrix IDENTITY_MATRIX = new Matrix() { // from class: android.graphics.Matrix.1
-        void oops() {
-            throw new IllegalStateException("Matrix can not be modified");
-        }
+    public static final Matrix IDENTITY_MATRIX =
+            new Matrix() { // from class: android.graphics.Matrix.1
+                void oops() {
+                    throw new IllegalStateException("Matrix can not be modified");
+                }
 
-        @Override // android.graphics.Matrix
-        public void set(Matrix src) {
-            oops();
-        }
+                @Override // android.graphics.Matrix
+                public void set(Matrix src) {
+                    oops();
+                }
 
-        @Override // android.graphics.Matrix
-        public void reset() {
-            oops();
-        }
+                @Override // android.graphics.Matrix
+                public void reset() {
+                    oops();
+                }
 
-        @Override // android.graphics.Matrix
-        public void setTranslate(float dx, float dy) {
-            oops();
-        }
+                @Override // android.graphics.Matrix
+                public void setTranslate(float dx, float dy) {
+                    oops();
+                }
 
-        @Override // android.graphics.Matrix
-        public void setScale(float sx, float sy, float px, float py) {
-            oops();
-        }
+                @Override // android.graphics.Matrix
+                public void setScale(float sx, float sy, float px, float py) {
+                    oops();
+                }
 
-        @Override // android.graphics.Matrix
-        public void setScale(float sx, float sy) {
-            oops();
-        }
+                @Override // android.graphics.Matrix
+                public void setScale(float sx, float sy) {
+                    oops();
+                }
 
-        @Override // android.graphics.Matrix
-        public void setRotate(float degrees, float px, float py) {
-            oops();
-        }
+                @Override // android.graphics.Matrix
+                public void setRotate(float degrees, float px, float py) {
+                    oops();
+                }
 
-        @Override // android.graphics.Matrix
-        public void setRotate(float degrees) {
-            oops();
-        }
+                @Override // android.graphics.Matrix
+                public void setRotate(float degrees) {
+                    oops();
+                }
 
-        @Override // android.graphics.Matrix
-        public void setSinCos(float sinValue, float cosValue, float px, float py) {
-            oops();
-        }
+                @Override // android.graphics.Matrix
+                public void setSinCos(float sinValue, float cosValue, float px, float py) {
+                    oops();
+                }
 
-        @Override // android.graphics.Matrix
-        public void setSinCos(float sinValue, float cosValue) {
-            oops();
-        }
+                @Override // android.graphics.Matrix
+                public void setSinCos(float sinValue, float cosValue) {
+                    oops();
+                }
 
-        @Override // android.graphics.Matrix
-        public void setSkew(float kx, float ky, float px, float py) {
-            oops();
-        }
+                @Override // android.graphics.Matrix
+                public void setSkew(float kx, float ky, float px, float py) {
+                    oops();
+                }
 
-        @Override // android.graphics.Matrix
-        public void setSkew(float kx, float ky) {
-            oops();
-        }
+                @Override // android.graphics.Matrix
+                public void setSkew(float kx, float ky) {
+                    oops();
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean setConcat(Matrix a, Matrix b) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean setConcat(Matrix a, Matrix b) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean preTranslate(float dx, float dy) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean preTranslate(float dx, float dy) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean preScale(float sx, float sy, float px, float py) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean preScale(float sx, float sy, float px, float py) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean preScale(float sx, float sy) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean preScale(float sx, float sy) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean preRotate(float degrees, float px, float py) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean preRotate(float degrees, float px, float py) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean preRotate(float degrees) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean preRotate(float degrees) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean preSkew(float kx, float ky, float px, float py) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean preSkew(float kx, float ky, float px, float py) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean preSkew(float kx, float ky) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean preSkew(float kx, float ky) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean preConcat(Matrix other) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean preConcat(Matrix other) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean postTranslate(float dx, float dy) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean postTranslate(float dx, float dy) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean postScale(float sx, float sy, float px, float py) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean postScale(float sx, float sy, float px, float py) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean postScale(float sx, float sy) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean postScale(float sx, float sy) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean postRotate(float degrees, float px, float py) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean postRotate(float degrees, float px, float py) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean postRotate(float degrees) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean postRotate(float degrees) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean postSkew(float kx, float ky, float px, float py) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean postSkew(float kx, float ky, float px, float py) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean postSkew(float kx, float ky) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean postSkew(float kx, float ky) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean postConcat(Matrix other) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean postConcat(Matrix other) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean setRectToRect(RectF src, RectF dst, ScaleToFit stf) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean setRectToRect(RectF src, RectF dst, ScaleToFit stf) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public boolean setPolyToPoly(float[] src, int srcIndex, float[] dst, int dstIndex, int pointCount) {
-            oops();
-            return false;
-        }
+                @Override // android.graphics.Matrix
+                public boolean setPolyToPoly(
+                        float[] src, int srcIndex, float[] dst, int dstIndex, int pointCount) {
+                    oops();
+                    return false;
+                }
 
-        @Override // android.graphics.Matrix
-        public void setValues(float[] values) {
-            oops();
-        }
-    };
+                @Override // android.graphics.Matrix
+                public void setValues(float[] values) {
+                    oops();
+                }
+            };
     public static final int MPERSP_0 = 6;
     public static final int MPERSP_1 = 7;
     public static final int MPERSP_2 = 8;
@@ -213,7 +217,8 @@ public class Matrix {
     private static native boolean nIsIdentity(long j);
 
     @FastNative
-    private static native void nMapPoints(long j, float[] fArr, int i, float[] fArr2, int i2, int i3, boolean z);
+    private static native void nMapPoints(
+            long j, float[] fArr, int i, float[] fArr2, int i2, int i3, boolean z);
 
     @CriticalNative
     private static native float nMapRadius(long j, float f);
@@ -282,7 +287,8 @@ public class Matrix {
     private static native void nSetConcat(long j, long j2, long j3);
 
     @FastNative
-    private static native boolean nSetPolyToPoly(long j, float[] fArr, int i, float[] fArr2, int i2, int i3);
+    private static native boolean nSetPolyToPoly(
+            long j, float[] fArr, int i, float[] fArr2, int i2, int i3);
 
     @FastNative
     private static native boolean nSetRectToRect(long j, RectF rectF, RectF rectF2, int i);
@@ -318,10 +324,11 @@ public class Matrix {
     private static native void nSetValues(long j, float[] fArr);
 
     private static class NoImagePreloadHolder {
-        public static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(Matrix.class.getClassLoader(), ExtraNatives.nGetNativeFinalizer());
+        public static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        Matrix.class.getClassLoader(), ExtraNatives.nGetNativeFinalizer());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     public Matrix() {
@@ -510,15 +517,19 @@ public class Matrix {
         return nSetRectToRect(this.native_instance, src, dst, stf.nativeInt);
     }
 
-    private static void checkPointArrays(float[] src, int srcIndex, float[] dst, int dstIndex, int pointCount) {
+    private static void checkPointArrays(
+            float[] src, int srcIndex, float[] dst, int dstIndex, int pointCount) {
         int srcStop = (pointCount << 1) + srcIndex;
         int dstStop = (pointCount << 1) + dstIndex;
-        if ((pointCount | srcIndex | dstIndex | srcStop | dstStop) < 0 || srcStop > src.length || dstStop > dst.length) {
+        if ((pointCount | srcIndex | dstIndex | srcStop | dstStop) < 0
+                || srcStop > src.length
+                || dstStop > dst.length) {
             throw new ArrayIndexOutOfBoundsException();
         }
     }
 
-    public boolean setPolyToPoly(float[] src, int srcIndex, float[] dst, int dstIndex, int pointCount) {
+    public boolean setPolyToPoly(
+            float[] src, int srcIndex, float[] dst, int dstIndex, int pointCount) {
         if (pointCount > 4) {
             throw new IllegalArgumentException();
         }
@@ -662,7 +673,6 @@ public class Matrix {
 
         static native long nGetNativeFinalizer();
 
-        private ExtraNatives() {
-        }
+        private ExtraNatives() {}
     }
 }

@@ -12,8 +12,7 @@ public interface IEraseSubscriptionsCallback extends IInterface {
 
     public static class Default implements IEraseSubscriptionsCallback {
         @Override // android.service.euicc.IEraseSubscriptionsCallback
-        public void onComplete(int result) throws RemoteException {
-        }
+        public void onComplete(int result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IEraseSubscriptionsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEraseSubscriptionsCallback {
+    public abstract static class Stub extends Binder implements IEraseSubscriptionsCallback {
         public static final String DESCRIPTOR = "android.service.euicc.IEraseSubscriptionsCallback";
         static final int TRANSACTION_onComplete = 1;
 
@@ -60,7 +59,8 @@ public interface IEraseSubscriptionsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

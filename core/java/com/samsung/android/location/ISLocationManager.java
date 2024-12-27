@@ -6,16 +6,15 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.location.ISLocationBatchingListener;
-import com.samsung.android.location.ISLocationListener;
-import com.samsung.android.location.ISLocationSystemCallV1;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public interface ISLocationManager extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.location.ISLocationManager";
 
-    int addGeofences(List<SemGeofence> list, PendingIntent pendingIntent, String str, String str2) throws RemoteException;
+    int addGeofences(List<SemGeofence> list, PendingIntent pendingIntent, String str, String str2)
+            throws RemoteException;
 
     void flushBatchedLocations(String str, String str2) throws RemoteException;
 
@@ -27,112 +26,208 @@ public interface ISLocationManager extends IInterface {
 
     void onPermissionsChangedForSLocation(int i) throws RemoteException;
 
-    void onSvStatusChanged(int i, int[] iArr, float[] fArr, float[] fArr2, float[] fArr3, float[] fArr4, float[] fArr5) throws RemoteException;
+    void onSvStatusChanged(
+            int i,
+            int[] iArr,
+            float[] fArr,
+            float[] fArr2,
+            float[] fArr3,
+            float[] fArr4,
+            float[] fArr5)
+            throws RemoteException;
 
-    int removeBatchedLocations(PendingIntent pendingIntent, ISLocationBatchingListener iSLocationBatchingListener, String str, String str2) throws RemoteException;
+    int removeBatchedLocations(
+            PendingIntent pendingIntent,
+            ISLocationBatchingListener iSLocationBatchingListener,
+            String str,
+            String str2)
+            throws RemoteException;
 
     int removeGeofences(List<String> list, String str, String str2) throws RemoteException;
 
-    int removeGeofencesPendingIntent(PendingIntent pendingIntent, String str, String str2) throws RemoteException;
+    int removeGeofencesPendingIntent(PendingIntent pendingIntent, String str, String str2)
+            throws RemoteException;
 
-    int removeLocation(ISLocationListener iSLocationListener, String str, String str2) throws RemoteException;
+    int removeLocation(ISLocationListener iSLocationListener, String str, String str2)
+            throws RemoteException;
 
-    void removePassiveLocation(PendingIntent pendingIntent, ISLocationListener iSLocationListener, String str, String str2) throws RemoteException;
+    void removePassiveLocation(
+            PendingIntent pendingIntent,
+            ISLocationListener iSLocationListener,
+            String str,
+            String str2)
+            throws RemoteException;
 
-    int removeSingleLocation(PendingIntent pendingIntent, ISLocationListener iSLocationListener, String str, String str2) throws RemoteException;
+    int removeSingleLocation(
+            PendingIntent pendingIntent,
+            ISLocationListener iSLocationListener,
+            String str,
+            String str2)
+            throws RemoteException;
 
-    int requestBatchedLocations(SemLocationBatchingRequest semLocationBatchingRequest, PendingIntent pendingIntent, ISLocationBatchingListener iSLocationBatchingListener, String str, String str2) throws RemoteException;
+    int requestBatchedLocations(
+            SemLocationBatchingRequest semLocationBatchingRequest,
+            PendingIntent pendingIntent,
+            ISLocationBatchingListener iSLocationBatchingListener,
+            String str,
+            String str2)
+            throws RemoteException;
 
-    int requestLocation(boolean z, ISLocationListener iSLocationListener, String str, String str2) throws RemoteException;
+    int requestLocation(boolean z, ISLocationListener iSLocationListener, String str, String str2)
+            throws RemoteException;
 
-    void requestPassiveLocation(PendingIntent pendingIntent, ISLocationListener iSLocationListener, String str, String str2) throws RemoteException;
+    void requestPassiveLocation(
+            PendingIntent pendingIntent,
+            ISLocationListener iSLocationListener,
+            String str,
+            String str2)
+            throws RemoteException;
 
-    int requestSingleLocation(int i, int i2, boolean z, PendingIntent pendingIntent, ISLocationListener iSLocationListener, String str, String str2) throws RemoteException;
+    int requestSingleLocation(
+            int i,
+            int i2,
+            boolean z,
+            PendingIntent pendingIntent,
+            ISLocationListener iSLocationListener,
+            String str,
+            String str2)
+            throws RemoteException;
 
     void setSystemCallV1(ISLocationSystemCallV1 iSLocationSystemCallV1) throws RemoteException;
 
     public static class Default implements ISLocationManager {
         @Override // com.samsung.android.location.ISLocationManager
-        public void onSvStatusChanged(int svCount, int[] svidWithFlags, float[] cn0s, float[] svElevations, float[] svAzimuths, float[] svCarrierFreqs, float[] basebandCn0s) throws RemoteException {
-        }
+        public void onSvStatusChanged(
+                int svCount,
+                int[] svidWithFlags,
+                float[] cn0s,
+                float[] svElevations,
+                float[] svAzimuths,
+                float[] svCarrierFreqs,
+                float[] basebandCn0s)
+                throws RemoteException {}
 
         @Override // com.samsung.android.location.ISLocationManager
-        public void onGnssStatusChanged(boolean isNavigating) throws RemoteException {
-        }
+        public void onGnssStatusChanged(boolean isNavigating) throws RemoteException {}
 
         @Override // com.samsung.android.location.ISLocationManager
-        public void setSystemCallV1(ISLocationSystemCallV1 iSystemCall) throws RemoteException {
-        }
+        public void setSystemCallV1(ISLocationSystemCallV1 iSystemCall) throws RemoteException {}
 
         @Override // com.samsung.android.location.ISLocationManager
-        public void notifyAppForeground(int uid, boolean foreground) throws RemoteException {
-        }
+        public void notifyAppForeground(int uid, boolean foreground) throws RemoteException {}
 
         @Override // com.samsung.android.location.ISLocationManager
-        public boolean isAvailable(int module, String packageName, String attributionTag) throws RemoteException {
+        public boolean isAvailable(int module, String packageName, String attributionTag)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.location.ISLocationManager
-        public int addGeofences(List<SemGeofence> params, PendingIntent intent, String packageName, String attributionTag) throws RemoteException {
+        public int addGeofences(
+                List<SemGeofence> params,
+                PendingIntent intent,
+                String packageName,
+                String attributionTag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.location.ISLocationManager
-        public int removeGeofences(List<String> names, String packageName, String attributionTag) throws RemoteException {
+        public int removeGeofences(List<String> names, String packageName, String attributionTag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.location.ISLocationManager
-        public int removeGeofencesPendingIntent(PendingIntent intent, String packageName, String attributionTag) throws RemoteException {
+        public int removeGeofencesPendingIntent(
+                PendingIntent intent, String packageName, String attributionTag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.location.ISLocationManager
-        public int requestSingleLocation(int accuracy, int timeout, boolean isAddress, PendingIntent intent, ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
+        public int requestSingleLocation(
+                int accuracy,
+                int timeout,
+                boolean isAddress,
+                PendingIntent intent,
+                ISLocationListener listener,
+                String packageName,
+                String attributionTag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.location.ISLocationManager
-        public int requestLocation(boolean isAddress, ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
+        public int requestLocation(
+                boolean isAddress,
+                ISLocationListener listener,
+                String packageName,
+                String attributionTag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.location.ISLocationManager
-        public void requestPassiveLocation(PendingIntent intent, ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
-        }
+        public void requestPassiveLocation(
+                PendingIntent intent,
+                ISLocationListener listener,
+                String packageName,
+                String attributionTag)
+                throws RemoteException {}
 
         @Override // com.samsung.android.location.ISLocationManager
-        public int removeSingleLocation(PendingIntent intent, ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
+        public int removeSingleLocation(
+                PendingIntent intent,
+                ISLocationListener listener,
+                String packageName,
+                String attributionTag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.location.ISLocationManager
-        public int removeLocation(ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
+        public int removeLocation(
+                ISLocationListener listener, String packageName, String attributionTag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.location.ISLocationManager
-        public void removePassiveLocation(PendingIntent intent, ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
-        }
+        public void removePassiveLocation(
+                PendingIntent intent,
+                ISLocationListener listener,
+                String packageName,
+                String attributionTag)
+                throws RemoteException {}
 
         @Override // com.samsung.android.location.ISLocationManager
-        public int requestBatchedLocations(SemLocationBatchingRequest req, PendingIntent intent, ISLocationBatchingListener listener, String packageName, String attributionTag) throws RemoteException {
+        public int requestBatchedLocations(
+                SemLocationBatchingRequest req,
+                PendingIntent intent,
+                ISLocationBatchingListener listener,
+                String packageName,
+                String attributionTag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.location.ISLocationManager
-        public int removeBatchedLocations(PendingIntent intent, ISLocationBatchingListener listener, String packageName, String attributionTag) throws RemoteException {
+        public int removeBatchedLocations(
+                PendingIntent intent,
+                ISLocationBatchingListener listener,
+                String packageName,
+                String attributionTag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.location.ISLocationManager
-        public void flushBatchedLocations(String packageName, String attributionTag) throws RemoteException {
-        }
+        public void flushBatchedLocations(String packageName, String attributionTag)
+                throws RemoteException {}
 
         @Override // com.samsung.android.location.ISLocationManager
-        public void onPermissionsChangedForSLocation(int uid) throws RemoteException {
-        }
+        public void onPermissionsChangedForSLocation(int uid) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -140,7 +235,7 @@ public interface ISLocationManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISLocationManager {
+    public abstract static class Stub extends Binder implements ISLocationManager {
         static final int TRANSACTION_addGeofences = 6;
         static final int TRANSACTION_flushBatchedLocations = 17;
         static final int TRANSACTION_isAvailable = 5;
@@ -229,7 +324,8 @@ public interface ISLocationManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISLocationManager.DESCRIPTOR);
             }
@@ -257,7 +353,8 @@ public interface ISLocationManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 3:
-                    ISLocationSystemCallV1 _arg03 = ISLocationSystemCallV1.Stub.asInterface(data.readStrongBinder());
+                    ISLocationSystemCallV1 _arg03 =
+                            ISLocationSystemCallV1.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setSystemCallV1(_arg03);
                     reply.writeNoException();
@@ -280,7 +377,8 @@ public interface ISLocationManager extends IInterface {
                     return true;
                 case 6:
                     List<SemGeofence> _arg06 = data.createTypedArrayList(SemGeofence.CREATOR);
-                    PendingIntent _arg14 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg14 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     String _arg23 = data.readString();
                     String _arg32 = data.readString();
                     data.enforceNoDataAvail();
@@ -298,7 +396,8 @@ public interface ISLocationManager extends IInterface {
                     reply.writeInt(_result3);
                     return true;
                 case 8:
-                    PendingIntent _arg08 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg08 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     String _arg16 = data.readString();
                     String _arg25 = data.readString();
                     data.enforceNoDataAvail();
@@ -310,18 +409,23 @@ public interface ISLocationManager extends IInterface {
                     int _arg09 = data.readInt();
                     int _arg17 = data.readInt();
                     boolean _arg26 = data.readBoolean();
-                    PendingIntent _arg33 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    ISLocationListener _arg42 = ISLocationListener.Stub.asInterface(data.readStrongBinder());
+                    PendingIntent _arg33 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    ISLocationListener _arg42 =
+                            ISLocationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg52 = data.readString();
                     String _arg62 = data.readString();
                     data.enforceNoDataAvail();
-                    int _result5 = requestSingleLocation(_arg09, _arg17, _arg26, _arg33, _arg42, _arg52, _arg62);
+                    int _result5 =
+                            requestSingleLocation(
+                                    _arg09, _arg17, _arg26, _arg33, _arg42, _arg52, _arg62);
                     reply.writeNoException();
                     reply.writeInt(_result5);
                     return true;
                 case 10:
                     boolean _arg010 = data.readBoolean();
-                    ISLocationListener _arg18 = ISLocationListener.Stub.asInterface(data.readStrongBinder());
+                    ISLocationListener _arg18 =
+                            ISLocationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg27 = data.readString();
                     String _arg34 = data.readString();
                     data.enforceNoDataAvail();
@@ -330,8 +434,10 @@ public interface ISLocationManager extends IInterface {
                     reply.writeInt(_result6);
                     return true;
                 case 11:
-                    PendingIntent _arg011 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    ISLocationListener _arg19 = ISLocationListener.Stub.asInterface(data.readStrongBinder());
+                    PendingIntent _arg011 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    ISLocationListener _arg19 =
+                            ISLocationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg28 = data.readString();
                     String _arg35 = data.readString();
                     data.enforceNoDataAvail();
@@ -339,8 +445,10 @@ public interface ISLocationManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 12:
-                    PendingIntent _arg012 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    ISLocationListener _arg110 = ISLocationListener.Stub.asInterface(data.readStrongBinder());
+                    PendingIntent _arg012 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    ISLocationListener _arg110 =
+                            ISLocationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg29 = data.readString();
                     String _arg36 = data.readString();
                     data.enforceNoDataAvail();
@@ -349,7 +457,8 @@ public interface ISLocationManager extends IInterface {
                     reply.writeInt(_result7);
                     return true;
                 case 13:
-                    ISLocationListener _arg013 = ISLocationListener.Stub.asInterface(data.readStrongBinder());
+                    ISLocationListener _arg013 =
+                            ISLocationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg111 = data.readString();
                     String _arg210 = data.readString();
                     data.enforceNoDataAvail();
@@ -358,8 +467,10 @@ public interface ISLocationManager extends IInterface {
                     reply.writeInt(_result8);
                     return true;
                 case 14:
-                    PendingIntent _arg014 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    ISLocationListener _arg112 = ISLocationListener.Stub.asInterface(data.readStrongBinder());
+                    PendingIntent _arg014 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    ISLocationListener _arg112 =
+                            ISLocationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg211 = data.readString();
                     String _arg37 = data.readString();
                     data.enforceNoDataAvail();
@@ -367,19 +478,26 @@ public interface ISLocationManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 15:
-                    SemLocationBatchingRequest _arg015 = (SemLocationBatchingRequest) data.readTypedObject(SemLocationBatchingRequest.CREATOR);
-                    PendingIntent _arg113 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    ISLocationBatchingListener _arg212 = ISLocationBatchingListener.Stub.asInterface(data.readStrongBinder());
+                    SemLocationBatchingRequest _arg015 =
+                            (SemLocationBatchingRequest)
+                                    data.readTypedObject(SemLocationBatchingRequest.CREATOR);
+                    PendingIntent _arg113 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    ISLocationBatchingListener _arg212 =
+                            ISLocationBatchingListener.Stub.asInterface(data.readStrongBinder());
                     String _arg38 = data.readString();
                     String _arg43 = data.readString();
                     data.enforceNoDataAvail();
-                    int _result9 = requestBatchedLocations(_arg015, _arg113, _arg212, _arg38, _arg43);
+                    int _result9 =
+                            requestBatchedLocations(_arg015, _arg113, _arg212, _arg38, _arg43);
                     reply.writeNoException();
                     reply.writeInt(_result9);
                     return true;
                 case 16:
-                    PendingIntent _arg016 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
-                    ISLocationBatchingListener _arg114 = ISLocationBatchingListener.Stub.asInterface(data.readStrongBinder());
+                    PendingIntent _arg016 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    ISLocationBatchingListener _arg114 =
+                            ISLocationBatchingListener.Stub.asInterface(data.readStrongBinder());
                     String _arg213 = data.readString();
                     String _arg39 = data.readString();
                     data.enforceNoDataAvail();
@@ -422,7 +540,15 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public void onSvStatusChanged(int svCount, int[] svidWithFlags, float[] cn0s, float[] svElevations, float[] svAzimuths, float[] svCarrierFreqs, float[] basebandCn0s) throws RemoteException {
+            public void onSvStatusChanged(
+                    int svCount,
+                    int[] svidWithFlags,
+                    float[] cn0s,
+                    float[] svElevations,
+                    float[] svAzimuths,
+                    float[] svCarrierFreqs,
+                    float[] basebandCn0s)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -489,7 +615,8 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public boolean isAvailable(int module, String packageName, String attributionTag) throws RemoteException {
+            public boolean isAvailable(int module, String packageName, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -508,7 +635,12 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public int addGeofences(List<SemGeofence> params, PendingIntent intent, String packageName, String attributionTag) throws RemoteException {
+            public int addGeofences(
+                    List<SemGeofence> params,
+                    PendingIntent intent,
+                    String packageName,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -528,7 +660,9 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public int removeGeofences(List<String> names, String packageName, String attributionTag) throws RemoteException {
+            public int removeGeofences(
+                    List<String> names, String packageName, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -547,7 +681,9 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public int removeGeofencesPendingIntent(PendingIntent intent, String packageName, String attributionTag) throws RemoteException {
+            public int removeGeofencesPendingIntent(
+                    PendingIntent intent, String packageName, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -566,7 +702,15 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public int requestSingleLocation(int accuracy, int timeout, boolean isAddress, PendingIntent intent, ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
+            public int requestSingleLocation(
+                    int accuracy,
+                    int timeout,
+                    boolean isAddress,
+                    PendingIntent intent,
+                    ISLocationListener listener,
+                    String packageName,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -589,7 +733,12 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public int requestLocation(boolean isAddress, ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
+            public int requestLocation(
+                    boolean isAddress,
+                    ISLocationListener listener,
+                    String packageName,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -609,7 +758,12 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public void requestPassiveLocation(PendingIntent intent, ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
+            public void requestPassiveLocation(
+                    PendingIntent intent,
+                    ISLocationListener listener,
+                    String packageName,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -627,7 +781,12 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public int removeSingleLocation(PendingIntent intent, ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
+            public int removeSingleLocation(
+                    PendingIntent intent,
+                    ISLocationListener listener,
+                    String packageName,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -647,7 +806,9 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public int removeLocation(ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
+            public int removeLocation(
+                    ISLocationListener listener, String packageName, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -666,7 +827,12 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public void removePassiveLocation(PendingIntent intent, ISLocationListener listener, String packageName, String attributionTag) throws RemoteException {
+            public void removePassiveLocation(
+                    PendingIntent intent,
+                    ISLocationListener listener,
+                    String packageName,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -684,7 +850,13 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public int requestBatchedLocations(SemLocationBatchingRequest req, PendingIntent intent, ISLocationBatchingListener listener, String packageName, String attributionTag) throws RemoteException {
+            public int requestBatchedLocations(
+                    SemLocationBatchingRequest req,
+                    PendingIntent intent,
+                    ISLocationBatchingListener listener,
+                    String packageName,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -705,7 +877,12 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public int removeBatchedLocations(PendingIntent intent, ISLocationBatchingListener listener, String packageName, String attributionTag) throws RemoteException {
+            public int removeBatchedLocations(
+                    PendingIntent intent,
+                    ISLocationBatchingListener listener,
+                    String packageName,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -725,7 +902,8 @@ public interface ISLocationManager extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationManager
-            public void flushBatchedLocations(String packageName, String attributionTag) throws RemoteException {
+            public void flushBatchedLocations(String packageName, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

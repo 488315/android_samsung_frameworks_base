@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
+
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -32,7 +33,8 @@ public class ExtendedKeyUsage extends ASN1Object {
     }
 
     public static ExtendedKeyUsage fromExtensions(Extensions extensions) {
-        return getInstance(Extensions.getExtensionParsedValue(extensions, Extension.extendedKeyUsage));
+        return getInstance(
+                Extensions.getExtensionParsedValue(extensions, Extension.extendedKeyUsage));
     }
 
     public ExtendedKeyUsage(KeyPurposeId usage) {
@@ -46,7 +48,8 @@ public class ExtendedKeyUsage extends ASN1Object {
         while (e.hasMoreElements()) {
             ASN1Encodable o = (ASN1Encodable) e.nextElement();
             if (!(o.toASN1Primitive() instanceof ASN1ObjectIdentifier)) {
-                throw new IllegalArgumentException("Only ASN1ObjectIdentifiers allowed in ExtendedKeyUsage.");
+                throw new IllegalArgumentException(
+                        "Only ASN1ObjectIdentifiers allowed in ExtendedKeyUsage.");
             }
             this.usageTable.put(o, o);
         }
@@ -91,7 +94,8 @@ public class ExtendedKeyUsage extends ASN1Object {
         return this.usageTable.size();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.seq;
     }

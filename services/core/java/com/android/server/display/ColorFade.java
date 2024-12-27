@@ -14,19 +14,23 @@ import android.util.Slog;
 import android.view.DisplayInfo;
 import android.view.Surface;
 import android.view.SurfaceControl;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.display.utils.DebugUtils;
+
+import libcore.io.Streams;
+
 import com.samsung.android.hardware.display.SemMdnieManager;
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-import libcore.io.Streams;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -84,12 +88,12 @@ public final class ColorFade {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.ColorFade$1, reason: invalid class name */
     public final class AnonymousClass1 {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class NaturalSurfaceLayout implements DisplayManagerInternal.DisplayTransactionListener {
+    public final class NaturalSurfaceLayout
+            implements DisplayManagerInternal.DisplayTransactionListener {
         public final BLASTBufferQueue mBlastBuffer;
         public final SurfaceControl mBlastControl;
         public AnonymousClass1 mCallback;
@@ -100,7 +104,14 @@ public final class ColorFade {
         public int mDisplayWidth;
         public SurfaceControl mSurfaceControl;
 
-        public NaturalSurfaceLayout(DisplayManagerInternal displayManagerInternal, int i, SurfaceControl surfaceControl, BLASTBufferQueue bLASTBufferQueue, SurfaceControl surfaceControl2, int i2, int i3) {
+        public NaturalSurfaceLayout(
+                DisplayManagerInternal displayManagerInternal,
+                int i,
+                SurfaceControl surfaceControl,
+                BLASTBufferQueue bLASTBufferQueue,
+                SurfaceControl surfaceControl2,
+                int i2,
+                int i3) {
             this.mDisplayManagerInternal = displayManagerInternal;
             this.mDisplayId = i;
             this.mSurfaceControl = surfaceControl;
@@ -118,39 +129,101 @@ public final class ColorFade {
                     if (this.mSurfaceControl == null) {
                         return;
                     }
-                    DisplayInfo displayInfo = this.mDisplayManagerInternal.getDisplayInfo(this.mDisplayId);
+                    DisplayInfo displayInfo =
+                            this.mDisplayManagerInternal.getDisplayInfo(this.mDisplayId);
                     if (displayInfo == null) {
                         return;
                     }
                     int i = displayInfo.rotation;
                     if (i == 0) {
-                        transaction.setPosition(this.mSurfaceControl, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE);
-                        transaction.setMatrix(this.mSurfaceControl, 1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f);
+                        transaction.setPosition(
+                                this.mSurfaceControl,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE);
+                        transaction.setMatrix(
+                                this.mSurfaceControl,
+                                1.0f,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                1.0f);
                     } else if (i == 1) {
-                        transaction.setPosition(this.mSurfaceControl, FullScreenMagnificationGestureHandler.MAX_SCALE, displayInfo.logicalHeight);
-                        transaction.setMatrix(this.mSurfaceControl, FullScreenMagnificationGestureHandler.MAX_SCALE, -1.0f, 1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                        transaction.setPosition(
+                                this.mSurfaceControl,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                displayInfo.logicalHeight);
+                        transaction.setMatrix(
+                                this.mSurfaceControl,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                -1.0f,
+                                1.0f,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE);
                     } else if (i == 2) {
-                        transaction.setPosition(this.mSurfaceControl, displayInfo.logicalWidth, displayInfo.logicalHeight);
-                        transaction.setMatrix(this.mSurfaceControl, -1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, -1.0f);
+                        transaction.setPosition(
+                                this.mSurfaceControl,
+                                displayInfo.logicalWidth,
+                                displayInfo.logicalHeight);
+                        transaction.setMatrix(
+                                this.mSurfaceControl,
+                                -1.0f,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                -1.0f);
                     } else if (i == 3) {
-                        transaction.setPosition(this.mSurfaceControl, displayInfo.logicalWidth, FullScreenMagnificationGestureHandler.MAX_SCALE);
-                        transaction.setMatrix(this.mSurfaceControl, FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f, -1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                        transaction.setPosition(
+                                this.mSurfaceControl,
+                                displayInfo.logicalWidth,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE);
+                        transaction.setMatrix(
+                                this.mSurfaceControl,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                1.0f,
+                                -1.0f,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE);
                     }
                     int naturalWidth = displayInfo.getNaturalWidth();
                     if (this.mDisplayWidth != naturalWidth) {
                         int naturalHeight = displayInfo.getNaturalHeight();
-                        Slog.d("ColorFade", "ColorFade_d" + this.mDisplayId + " Surface Size Changing From(" + this.mDisplayWidth + "," + this.mDisplayHeight + ") To(" + naturalWidth + "," + naturalHeight + ")");
+                        Slog.d(
+                                "ColorFade",
+                                "ColorFade_d"
+                                        + this.mDisplayId
+                                        + " Surface Size Changing From("
+                                        + this.mDisplayWidth
+                                        + ","
+                                        + this.mDisplayHeight
+                                        + ") To("
+                                        + naturalWidth
+                                        + ","
+                                        + naturalHeight
+                                        + ")");
                         this.mDisplayWidth = naturalWidth;
                         this.mDisplayHeight = naturalHeight;
-                        transaction.setBufferSize(this.mSurfaceControl, naturalWidth, naturalHeight);
-                        transaction.setWindowCrop(this.mSurfaceControl, this.mDisplayWidth, this.mDisplayHeight);
+                        transaction.setBufferSize(
+                                this.mSurfaceControl, naturalWidth, naturalHeight);
+                        transaction.setWindowCrop(
+                                this.mSurfaceControl, this.mDisplayWidth, this.mDisplayHeight);
                         if (this.mBlastBuffer != null) {
                             if (this.mChildSurfaceControl == null) {
-                                this.mChildSurfaceControl = new SurfaceControl.Builder().setName("ColorFade_d" + this.mDisplayId + "_child-surface").setColorLayer().setParent(this.mSurfaceControl).setCallsite("ColorFade.onDisplayTransaction").setMetadata(30, 2).build();
+                                this.mChildSurfaceControl =
+                                        new SurfaceControl.Builder()
+                                                .setName(
+                                                        "ColorFade_d"
+                                                                + this.mDisplayId
+                                                                + "_child-surface")
+                                                .setColorLayer()
+                                                .setParent(this.mSurfaceControl)
+                                                .setCallsite("ColorFade.onDisplayTransaction")
+                                                .setMetadata(30, 2)
+                                                .build();
                             }
-                            transaction.setRelativeLayer(this.mChildSurfaceControl, this.mSurfaceControl, 1);
+                            transaction.setRelativeLayer(
+                                    this.mChildSurfaceControl, this.mSurfaceControl, 1);
                             transaction.show(this.mChildSurfaceControl);
-                            this.mBlastBuffer.update(this.mBlastControl, this.mDisplayWidth, this.mDisplayHeight, -1);
+                            this.mBlastBuffer.update(
+                                    this.mBlastControl,
+                                    this.mDisplayWidth,
+                                    this.mDisplayHeight,
+                                    -1);
                         }
                         AnonymousClass1 anonymousClass1 = this.mCallback;
                         if (anonymousClass1 != null) {
@@ -185,14 +258,22 @@ public final class ColorFade {
             if (glGetError == 0) {
                 return z;
             }
-            Slog.e("ColorFade", VpnManagerService$$ExternalSyntheticOutline0.m(glGetError, str, " failed: error "), new Throwable());
+            Slog.e(
+                    "ColorFade",
+                    VpnManagerService$$ExternalSyntheticOutline0.m(
+                            glGetError, str, " failed: error "),
+                    new Throwable());
             z = true;
         }
     }
 
     public static int loadShader(Context context, int i, int i2) {
         try {
-            String str = new String(Streams.readFully(new InputStreamReader(context.getResources().openRawResource(i))));
+            String str =
+                    new String(
+                            Streams.readFully(
+                                    new InputStreamReader(
+                                            context.getResources().openRawResource(i))));
             int glCreateShader = GLES20.glCreateShader(i2);
             GLES20.glShaderSource(glCreateShader, str);
             GLES20.glCompileShader(glCreateShader);
@@ -201,7 +282,10 @@ public final class ColorFade {
             if (iArr[0] != 0) {
                 return glCreateShader;
             }
-            Slog.e("ColorFade", DualAppManagerService$$ExternalSyntheticOutline0.m(glCreateShader, i2, "Could not compile shader ", ", ", ":"));
+            Slog.e(
+                    "ColorFade",
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            glCreateShader, i2, "Could not compile shader ", ", ", ":"));
             Slog.e("ColorFade", GLES20.glGetShaderSource(glCreateShader));
             Slog.e("ColorFade", GLES20.glGetShaderInfoLog(glCreateShader));
             GLES20.glDeleteShader(glCreateShader);
@@ -231,7 +315,8 @@ public final class ColorFade {
     }
 
     public final boolean createEglSurface(boolean z, boolean z2) {
-        boolean z3 = (z == this.mLastWasProtectedContent && z2 == this.mLastWasWideColor) ? false : true;
+        boolean z3 =
+                (z == this.mLastWasProtectedContent && z2 == this.mLastWasWideColor) ? false : true;
         EGLSurface eGLSurface = this.mEglSurface;
         if (eGLSurface != null && z3) {
             EGL14.eglDestroySurface(this.mEglDisplay, eGLSurface);
@@ -255,7 +340,9 @@ public final class ColorFade {
                 iArr[i] = 12992;
                 iArr[i + 1] = 1;
             }
-            EGLSurface eglCreateWindowSurface = EGL14.eglCreateWindowSurface(this.mEglDisplay, this.mEglConfig, this.mSurface, iArr, 0);
+            EGLSurface eglCreateWindowSurface =
+                    EGL14.eglCreateWindowSurface(
+                            this.mEglDisplay, this.mEglConfig, this.mSurface, iArr, 0);
             this.mEglSurface = eglCreateWindowSurface;
             if (eglCreateWindowSurface == null) {
                 logEglError("eglCreateWindowSurface");
@@ -273,7 +360,11 @@ public final class ColorFade {
             return true;
         }
         try {
-            SurfaceControl.Builder callsite = new SurfaceControl.Builder().setName("ColorFade_d" + i).setMetadata(30, 2).setCallsite("ColorFade.createSurface");
+            SurfaceControl.Builder callsite =
+                    new SurfaceControl.Builder()
+                            .setName("ColorFade_d" + i)
+                            .setMetadata(30, 2)
+                            .setCallsite("ColorFade.createSurface");
             if (this.mMode == 2) {
                 callsite.setColorLayer();
             } else {
@@ -283,15 +374,47 @@ public final class ColorFade {
             SurfaceControl build = callsite.build();
             this.mSurfaceControl = build;
             this.mTransaction.setLayerStack(build, this.mDisplayLayerStack);
-            this.mTransaction.setWindowCrop(this.mSurfaceControl, this.mDisplayWidth, this.mDisplayHeight);
+            this.mTransaction.setWindowCrop(
+                    this.mSurfaceControl, this.mDisplayWidth, this.mDisplayHeight);
             if (this.mMode != 2) {
-                this.mBLASTSurfaceControl = new SurfaceControl.Builder().setName("ColorFade BLAST_d" + i).setParent(this.mSurfaceControl).setHidden(false).setSecure(z).setOpaque(true).setMetadata(30, 2).setBLASTLayer().build();
-                BLASTBufferQueue bLASTBufferQueue = new BLASTBufferQueue("ColorFade", this.mBLASTSurfaceControl, this.mDisplayWidth, this.mDisplayHeight, -1);
+                this.mBLASTSurfaceControl =
+                        new SurfaceControl.Builder()
+                                .setName("ColorFade BLAST_d" + i)
+                                .setParent(this.mSurfaceControl)
+                                .setHidden(false)
+                                .setSecure(z)
+                                .setOpaque(true)
+                                .setMetadata(30, 2)
+                                .setBLASTLayer()
+                                .build();
+                BLASTBufferQueue bLASTBufferQueue =
+                        new BLASTBufferQueue(
+                                "ColorFade",
+                                this.mBLASTSurfaceControl,
+                                this.mDisplayWidth,
+                                this.mDisplayHeight,
+                                -1);
                 this.mBLASTBufferQueue = bLASTBufferQueue;
                 this.mSurface = bLASTBufferQueue.createSurface();
-                this.mSurfaceLayout = new NaturalSurfaceLayout(this.mDisplayManagerInternal, this.mDisplayId, this.mSurfaceControl, this.mBLASTBufferQueue, this.mBLASTSurfaceControl, this.mDisplayWidth, this.mDisplayHeight);
+                this.mSurfaceLayout =
+                        new NaturalSurfaceLayout(
+                                this.mDisplayManagerInternal,
+                                this.mDisplayId,
+                                this.mSurfaceControl,
+                                this.mBLASTBufferQueue,
+                                this.mBLASTSurfaceControl,
+                                this.mDisplayWidth,
+                                this.mDisplayHeight);
             } else {
-                this.mSurfaceLayout = new NaturalSurfaceLayout(this.mDisplayManagerInternal, this.mDisplayId, this.mSurfaceControl, null, null, this.mDisplayWidth, this.mDisplayHeight);
+                this.mSurfaceLayout =
+                        new NaturalSurfaceLayout(
+                                this.mDisplayManagerInternal,
+                                this.mDisplayId,
+                                this.mSurfaceControl,
+                                null,
+                                null,
+                                this.mDisplayWidth,
+                                this.mDisplayHeight);
             }
             NaturalSurfaceLayout naturalSurfaceLayout = this.mSurfaceLayout;
             naturalSurfaceLayout.mCallback = this.mResolutionChangedCallback;
@@ -331,14 +454,17 @@ public final class ColorFade {
                 try {
                     naturalSurfaceLayout.mSurfaceControl = null;
                     if (naturalSurfaceLayout.mChildSurfaceControl != null) {
-                        new SurfaceControl.Transaction().remove(naturalSurfaceLayout.mChildSurfaceControl).apply();
+                        new SurfaceControl.Transaction()
+                                .remove(naturalSurfaceLayout.mChildSurfaceControl)
+                                .apply();
                         naturalSurfaceLayout.mChildSurfaceControl = null;
                     }
                 } catch (Throwable th) {
                     throw th;
                 }
             }
-            naturalSurfaceLayout.mDisplayManagerInternal.unregisterDisplayTransactionListener(naturalSurfaceLayout);
+            naturalSurfaceLayout.mDisplayManagerInternal.unregisterDisplayTransactionListener(
+                    naturalSurfaceLayout);
             this.mSurfaceLayout = null;
             this.mTransaction.remove(this.mSurfaceControl).apply();
             Surface surface = this.mSurface;
@@ -431,15 +557,40 @@ public final class ColorFade {
                     return;
                 }
                 try {
-                    GLES20.glClearColor(FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f);
-                    GLES20.glClear(EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION);
+                    GLES20.glClearColor(
+                            FullScreenMagnificationGestureHandler.MAX_SCALE,
+                            FullScreenMagnificationGestureHandler.MAX_SCALE,
+                            FullScreenMagnificationGestureHandler.MAX_SCALE,
+                            1.0f);
+                    GLES20.glClear(
+                            EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION);
                     if (this.mMode == 3) {
                         float f2 = this.mMinRadius;
-                        drawFaded(f, 1.0f, ((this.mMaxRadius - f2) * f) + f2, 1.0f - (2.0f * Math.max(FullScreenMagnificationGestureHandler.MAX_SCALE, f - 0.5f)));
+                        drawFaded(
+                                f,
+                                1.0f,
+                                ((this.mMaxRadius - f2) * f) + f2,
+                                1.0f
+                                        - (2.0f
+                                                * Math.max(
+                                                        FullScreenMagnificationGestureHandler
+                                                                .MAX_SCALE,
+                                                        f - 0.5f)));
                     } else {
                         double d = 1.0f - f;
                         double cos = Math.cos(3.141592653589793d * d);
-                        drawFaded(((float) (-Math.pow(d, 2.0d))) + 1.0f, 1.0f / ((float) ((((((cos < 0.0d ? -1.0d : 1.0d) * 0.5d) * Math.pow(cos, 2.0d)) + 0.5d) * 0.9d) + 0.1d)), FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                        drawFaded(
+                                ((float) (-Math.pow(d, 2.0d))) + 1.0f,
+                                1.0f
+                                        / ((float)
+                                                ((((((cos < 0.0d ? -1.0d : 1.0d) * 0.5d)
+                                                                                * Math.pow(
+                                                                                        cos, 2.0d))
+                                                                        + 0.5d)
+                                                                * 0.9d)
+                                                        + 0.1d)),
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE);
                     }
                     if (checkGlErrors("drawFrame")) {
                         detachEglContext();
@@ -459,7 +610,16 @@ public final class ColorFade {
 
     public final void drawFaded(float f, float f2, float f3, float f4) {
         if (DEBUG) {
-            Slog.d("ColorFade", "drawFaded: opacity=" + f + ", gamma=" + f2 + " radius=" + f3 + " vignetteAlpha=" + f4);
+            Slog.d(
+                    "ColorFade",
+                    "drawFaded: opacity="
+                            + f
+                            + ", gamma="
+                            + f2
+                            + " radius="
+                            + f3
+                            + " vignetteAlpha="
+                            + f4);
         }
         GLES20.glUseProgram(this.mProgram);
         GLES20.glUniformMatrix4fv(this.mProjMatrixLoc, 1, false, this.mProjMatrix, 0);
@@ -563,7 +723,8 @@ public final class ColorFade {
         GLES20.glBindBuffer(34962, iArr[0]);
         GLES20.glBufferData(34962, this.mVertexBuffer.capacity() * 4, this.mVertexBuffer, 35044);
         GLES20.glBindBuffer(34962, iArr[1]);
-        GLES20.glBufferData(34962, this.mTexCoordBuffer.capacity() * 4, this.mTexCoordBuffer, 35044);
+        GLES20.glBufferData(
+                34962, this.mTexCoordBuffer.capacity() * 4, this.mTexCoordBuffer, 35044);
         GLES20.glBindBuffer(34962, 0);
     }
 
@@ -637,7 +798,11 @@ public final class ColorFade {
         if (this.mSurfaceVisible && this.mSurfaceAlpha == f) {
             return;
         }
-        this.mTransaction.setLayer(this.mSurfaceControl, 1073741825).setAlpha(this.mSurfaceControl, f).show(this.mSurfaceControl).apply();
+        this.mTransaction
+                .setLayer(this.mSurfaceControl, 1073741825)
+                .setAlpha(this.mSurfaceControl, f)
+                .show(this.mSurfaceControl)
+                .apply();
         this.mSurfaceVisible = true;
         this.mSurfaceAlpha = f;
     }

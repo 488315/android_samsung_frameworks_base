@@ -1,6 +1,7 @@
 package android.view;
 
 import android.graphics.Rect;
+
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -132,8 +133,10 @@ public class SurfaceEffects {
                 return this;
             }
 
-            public Builder addPixAnimation(AnimParam animParam, int timeMs, float value, InterpMode interpolation) {
-                this.mPixelAnimationVector.add(new AnimKeyFrame(animParam, timeMs, value, interpolation));
+            public Builder addPixAnimation(
+                    AnimParam animParam, int timeMs, float value, InterpMode interpolation) {
+                this.mPixelAnimationVector.add(
+                        new AnimKeyFrame(animParam, timeMs, value, interpolation));
                 return this;
             }
 
@@ -141,8 +144,10 @@ public class SurfaceEffects {
                 return this.mPixelAnimationVector;
             }
 
-            public Builder addGeoAnimation(AnimParam animParam, int timeMs, float value, InterpMode interpolation) {
-                this.mGeometryAnimationVector.add(new AnimKeyFrame(animParam, timeMs, value, interpolation));
+            public Builder addGeoAnimation(
+                    AnimParam animParam, int timeMs, float value, InterpMode interpolation) {
+                this.mGeometryAnimationVector.add(
+                        new AnimKeyFrame(animParam, timeMs, value, interpolation));
                 return this;
             }
 
@@ -199,23 +204,53 @@ public class SurfaceEffects {
 
         public static String serializeEffect(Builder builder) {
             String newArgsList = "" + Float.toString(builder.mAnimationMode.id);
-            String newArgsList2 = ((((((newArgsList + " ") + Float.toString(builder.mEffectTarget.id)) + " ") + Float.toString(builder.mPixelEffectType.id)) + " ") + Float.toString(builder.getEffectRegion().size())) + " ";
+            String newArgsList2 =
+                    ((((((newArgsList + " ") + Float.toString(builder.mEffectTarget.id)) + " ")
+                                                    + Float.toString(builder.mPixelEffectType.id))
+                                            + " ")
+                                    + Float.toString(builder.getEffectRegion().size()))
+                            + " ";
             Iterator it = builder.mEffectRegion.iterator();
             while (it.hasNext()) {
                 Rect r = (Rect) it.next();
-                newArgsList2 = (((((((newArgsList2 + Float.toString(r.left)) + " ") + Float.toString(r.top)) + " ") + Float.toString(r.right)) + " ") + Float.toString(r.bottom)) + " ";
+                newArgsList2 =
+                        (((((((newArgsList2 + Float.toString(r.left)) + " ")
+                                                                        + Float.toString(r.top))
+                                                                + " ")
+                                                        + Float.toString(r.right))
+                                                + " ")
+                                        + Float.toString(r.bottom))
+                                + " ";
             }
-            String newArgsList3 = (newArgsList2 + Float.toString(builder.mPixelAnimationVector.size())) + " ";
+            String newArgsList3 =
+                    (newArgsList2 + Float.toString(builder.mPixelAnimationVector.size())) + " ";
             Iterator it2 = builder.mPixelAnimationVector.iterator();
             while (it2.hasNext()) {
                 AnimKeyFrame anim = (AnimKeyFrame) it2.next();
-                newArgsList3 = (((((((newArgsList3 + Float.toString(anim.animParam.id)) + " ") + Float.toString(anim.timeMs)) + " ") + Float.toString(anim.value)) + " ") + Float.toString(anim.interp.id)) + " ";
+                newArgsList3 =
+                        (((((((newArgsList3 + Float.toString(anim.animParam.id)) + " ")
+                                                                        + Float.toString(
+                                                                                anim.timeMs))
+                                                                + " ")
+                                                        + Float.toString(anim.value))
+                                                + " ")
+                                        + Float.toString(anim.interp.id))
+                                + " ";
             }
-            String newArgsList4 = (newArgsList3 + Float.toString(builder.mGeometryAnimationVector.size())) + " ";
+            String newArgsList4 =
+                    (newArgsList3 + Float.toString(builder.mGeometryAnimationVector.size())) + " ";
             Iterator it3 = builder.mGeometryAnimationVector.iterator();
             while (it3.hasNext()) {
                 AnimKeyFrame anim2 = (AnimKeyFrame) it3.next();
-                newArgsList4 = (((((((newArgsList4 + Float.toString(anim2.animParam.id)) + " ") + Float.toString(anim2.timeMs)) + " ") + Float.toString(anim2.value)) + " ") + Float.toString(anim2.interp.id)) + " ";
+                newArgsList4 =
+                        (((((((newArgsList4 + Float.toString(anim2.animParam.id)) + " ")
+                                                                        + Float.toString(
+                                                                                anim2.timeMs))
+                                                                + " ")
+                                                        + Float.toString(anim2.value))
+                                                + " ")
+                                        + Float.toString(anim2.interp.id))
+                                + " ";
             }
             return newArgsList4;
         }

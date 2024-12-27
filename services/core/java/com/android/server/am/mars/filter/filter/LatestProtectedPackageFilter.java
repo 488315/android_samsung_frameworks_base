@@ -2,7 +2,9 @@ package com.android.server.am.mars.filter.filter;
 
 import android.content.Context;
 import android.util.ArrayMap;
+
 import com.android.server.am.mars.filter.IFilter;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -16,7 +18,8 @@ public final class LatestProtectedPackageFilter implements IFilter {
         public static final LatestProtectedPackageFilter INSTANCE;
 
         static {
-            LatestProtectedPackageFilter latestProtectedPackageFilter = new LatestProtectedPackageFilter();
+            LatestProtectedPackageFilter latestProtectedPackageFilter =
+                    new LatestProtectedPackageFilter();
             latestProtectedPackageFilter.mProtectedAppSizeForGame = 0;
             latestProtectedPackageFilter.mLatestProtectedPackages = new ArrayMap();
             INSTANCE = latestProtectedPackageFilter;
@@ -24,13 +27,12 @@ public final class LatestProtectedPackageFilter implements IFilter {
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void deInit() {
-    }
+    public final void deInit() {}
 
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0043, code lost:
-    
-        if (r3 > 2) goto L24;
-     */
+
+       if (r3 > 2) goto L24;
+    */
     /* JADX WARN: Removed duplicated region for block: B:26:0x0053 A[Catch: all -> 0x005a, TryCatch #0 {all -> 0x005a, blocks: (B:13:0x001b, B:15:0x0029, B:17:0x002f, B:26:0x0053, B:31:0x005e, B:35:0x0068, B:33:0x006a, B:39:0x0045, B:42:0x004a, B:44:0x004e, B:45:0x006d), top: B:12:0x001b }] */
     /* JADX WARN: Removed duplicated region for block: B:31:0x005e A[Catch: all -> 0x005a, TryCatch #0 {all -> 0x005a, blocks: (B:13:0x001b, B:15:0x0029, B:17:0x002f, B:26:0x0053, B:31:0x005e, B:35:0x0068, B:33:0x006a, B:39:0x0045, B:42:0x004a, B:44:0x004e, B:45:0x006d), top: B:12:0x001b }] */
     @Override // com.android.server.am.mars.filter.IFilter
@@ -116,19 +118,22 @@ public final class LatestProtectedPackageFilter implements IFilter {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L5a
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.mars.filter.filter.LatestProtectedPackageFilter.filter(int, int, int, java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.mars.filter.filter.LatestProtectedPackageFilter.filter(int,"
+                    + " int, int, java.lang.String):int");
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void init(Context context) {
-    }
+    public final void init(Context context) {}
 
     public final void setLatestProtectedPkg(int i, String str) {
         ArrayMap arrayMap = this.mLatestProtectedPackages;
         if (arrayMap != null) {
             synchronized (arrayMap) {
                 try {
-                    ArrayList arrayList = (ArrayList) this.mLatestProtectedPackages.get(Integer.valueOf(i));
+                    ArrayList arrayList =
+                            (ArrayList) this.mLatestProtectedPackages.get(Integer.valueOf(i));
                     if (arrayList == null) {
                         arrayList = new ArrayList();
                         arrayList.add(str);

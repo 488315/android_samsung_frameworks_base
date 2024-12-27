@@ -2,12 +2,30 @@ package com.android.internal.org.bouncycastle.util.encoders;
 
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
 public class HexEncoder implements Encoder {
-    protected final byte[] encodingTable = {SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33, 50, 51, 52, 53, 54, 55, 56, 57, SprAttributeBase.TYPE_ANIMATOR_SET, 98, 99, 100, 101, 102};
+    protected final byte[] encodingTable = {
+        SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90,
+        SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        SprAttributeBase.TYPE_ANIMATOR_SET,
+        98,
+        99,
+        100,
+        101,
+        102
+    };
     protected final byte[] decodingTable = new byte[128];
 
     protected void initialiseDecodingTable() {
@@ -29,7 +47,8 @@ public class HexEncoder implements Encoder {
         initialiseDecodingTable();
     }
 
-    public int encode(byte[] inBuf, int inOff, int inLen, byte[] outBuf, int outOff) throws IOException {
+    public int encode(byte[] inBuf, int inOff, int inLen, byte[] outBuf, int outOff)
+            throws IOException {
         int b = inOff;
         int inEnd = inOff + inLen;
         int outPos = outOff;

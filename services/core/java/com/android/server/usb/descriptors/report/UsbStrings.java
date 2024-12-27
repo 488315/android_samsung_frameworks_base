@@ -1,10 +1,13 @@
 package com.android.server.usb.descriptors.report;
 
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import com.att.iqi.lib.metrics.hw.HwConstants;
 import com.att.iqi.lib.metrics.mm.MM05;
 import com.samsung.android.knoxguard.service.utils.IntegritySeUtil;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,7 +31,8 @@ public abstract class UsbStrings {
         sDescriptorNames.put((byte) 4, "Interface");
         sDescriptorNames.put((byte) 5, "Endpoint");
         sDescriptorNames.put((byte) 15, "BOS (whatever that means)");
-        sDescriptorNames.put(Byte.valueOf(MM05.IQ_SIP_CALL_STATE_DISCONNECTING), "Interface Association");
+        sDescriptorNames.put(
+                Byte.valueOf(MM05.IQ_SIP_CALL_STATE_DISCONNECTING), "Interface Association");
         sDescriptorNames.put(Byte.valueOf(HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED), "Capability");
         sDescriptorNames.put((byte) 33, "HID");
         sDescriptorNames.put((byte) 34, "Report");
@@ -50,7 +54,8 @@ public abstract class UsbStrings {
         sACControlInterfaceNames.put((byte) 7, "Processing Unit");
         sACControlInterfaceNames.put((byte) 8, "Extension Unit");
         sACControlInterfaceNames.put((byte) 10, "Clock Source");
-        sACControlInterfaceNames.put(Byte.valueOf(MM05.IQ_SIP_CALL_STATE_DISCONNECTING), "Clock Selector");
+        sACControlInterfaceNames.put(
+                Byte.valueOf(MM05.IQ_SIP_CALL_STATE_DISCONNECTING), "Clock Selector");
         sACControlInterfaceNames.put((byte) 12, "Clock Multiplier");
         sACControlInterfaceNames.put((byte) 13, "Sample Rate Converter");
         HashMap hashMap3 = new HashMap();
@@ -78,11 +83,19 @@ public abstract class UsbStrings {
         sClassNames.put(16, "Audio/Video");
         sClassNames.put(17, "Billboard");
         sClassNames.put(18, "Type C Bridge");
-        sClassNames.put(Integer.valueOf(FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_ASTRO), "Diagnostic");
+        sClassNames.put(
+                Integer.valueOf(
+                        FrameworkStatsLog
+                                .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_ASTRO),
+                "Diagnostic");
         sClassNames.put(224, "Wireless");
-        sClassNames.put(Integer.valueOf(FrameworkStatsLog.BOOT_TIME_EVENT_DURATION_REPORTED), "Misc");
-        sClassNames.put(Integer.valueOf(FrameworkStatsLog.APP_FREEZE_CHANGED), "Application Specific");
-        sClassNames.put(Integer.valueOf(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT), "Vendor Specific");
+        sClassNames.put(
+                Integer.valueOf(FrameworkStatsLog.BOOT_TIME_EVENT_DURATION_REPORTED), "Misc");
+        sClassNames.put(
+                Integer.valueOf(FrameworkStatsLog.APP_FREEZE_CHANGED), "Application Specific");
+        sClassNames.put(
+                Integer.valueOf(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT),
+                "Vendor Specific");
         HashMap hashMap5 = new HashMap();
         sAudioSubclassNames = hashMap5;
         hashMap5.put(0, "Undefinded");
@@ -98,7 +111,8 @@ public abstract class UsbStrings {
         sAudioEncodingNames.put(4, "Format I ALAW");
         sAudioEncodingNames.put(5, "Format I MuLAW");
         sAudioEncodingNames.put(4096, "FORMAT_II Undefined");
-        sAudioEncodingNames.put(Integer.valueOf(IntegritySeUtil.CLIENT_INTEGRITY_BASE2), "FORMAT_II MPEG");
+        sAudioEncodingNames.put(
+                Integer.valueOf(IntegritySeUtil.CLIENT_INTEGRITY_BASE2), "FORMAT_II MPEG");
         sAudioEncodingNames.put(4098, "FORMAT_II AC3");
         sAudioEncodingNames.put(8192, "FORMAT_III Undefined");
         sAudioEncodingNames.put(8193, "FORMAT_III IEC1937 AC3");
@@ -108,22 +122,41 @@ public abstract class UsbStrings {
         sAudioEncodingNames.put(8197, "FORMAT_III MPEG2 Layer1LS");
         HashMap hashMap7 = new HashMap();
         sTerminalNames = hashMap7;
-        hashMap7.put(Integer.valueOf(FrameworkStatsLog.HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP), "USB Streaming");
+        hashMap7.put(
+                Integer.valueOf(
+                        FrameworkStatsLog
+                                .HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP),
+                "USB Streaming");
         sTerminalNames.put(512, "Undefined");
         sTerminalNames.put(513, "Microphone");
-        sTerminalNames.put(Integer.valueOf(FrameworkStatsLog.DEVICE_WIDE_JOB_CONSTRAINT_CHANGED), "Desktop Microphone");
-        sTerminalNames.put(Integer.valueOf(FrameworkStatsLog.AMBIENT_MODE_CHANGED), "Personal (headset) Microphone");
-        sTerminalNames.put(Integer.valueOf(FrameworkStatsLog.ANR_LATENCY_REPORTED), "Omni Microphone");
-        sTerminalNames.put(Integer.valueOf(FrameworkStatsLog.RESOURCE_API_INFO), "Microphone Array");
+        sTerminalNames.put(
+                Integer.valueOf(FrameworkStatsLog.DEVICE_WIDE_JOB_CONSTRAINT_CHANGED),
+                "Desktop Microphone");
+        sTerminalNames.put(
+                Integer.valueOf(FrameworkStatsLog.AMBIENT_MODE_CHANGED),
+                "Personal (headset) Microphone");
+        sTerminalNames.put(
+                Integer.valueOf(FrameworkStatsLog.ANR_LATENCY_REPORTED), "Omni Microphone");
+        sTerminalNames.put(
+                Integer.valueOf(FrameworkStatsLog.RESOURCE_API_INFO), "Microphone Array");
         sTerminalNames.put(518, "Proecessing Microphone Array");
-        sTerminalNames.put(Integer.valueOf(FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_USAGE), "Undefined");
+        sTerminalNames.put(
+                Integer.valueOf(
+                        FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_USAGE),
+                "Undefined");
         sTerminalNames.put(769, "Speaker");
         sTerminalNames.put(770, "Headphones");
         sTerminalNames.put(771, "Head Mounted Speaker");
-        sTerminalNames.put(Integer.valueOf(FrameworkStatsLog.THERMAL_STATUS_CALLED), "Desktop Speaker");
-        sTerminalNames.put(Integer.valueOf(FrameworkStatsLog.THERMAL_HEADROOM_CALLED), "Room Speaker");
-        sTerminalNames.put(Integer.valueOf(FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS_CALLED), "Communications Speaker");
-        sTerminalNames.put(Integer.valueOf(FrameworkStatsLog.BOOT_INTEGRITY_INFO_REPORTED), "Low Frequency Speaker");
+        sTerminalNames.put(
+                Integer.valueOf(FrameworkStatsLog.THERMAL_STATUS_CALLED), "Desktop Speaker");
+        sTerminalNames.put(
+                Integer.valueOf(FrameworkStatsLog.THERMAL_HEADROOM_CALLED), "Room Speaker");
+        sTerminalNames.put(
+                Integer.valueOf(FrameworkStatsLog.THERMAL_HEADROOM_THRESHOLDS_CALLED),
+                "Communications Speaker");
+        sTerminalNames.put(
+                Integer.valueOf(FrameworkStatsLog.BOOT_INTEGRITY_INFO_REPORTED),
+                "Low Frequency Speaker");
         sTerminalNames.put(1024, "Undefined");
         sTerminalNames.put(1025, "Handset");
         sTerminalNames.put(1026, "Headset");
@@ -134,7 +167,11 @@ public abstract class UsbStrings {
         sTerminalNames.put(1281, "Phone Line");
         sTerminalNames.put(1282, "Telephone");
         sTerminalNames.put(1283, "Down Line Phone");
-        sTerminalNames.put(Integer.valueOf(FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM), "Undefined");
+        sTerminalNames.put(
+                Integer.valueOf(
+                        FrameworkStatsLog
+                                .APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM),
+                "Undefined");
         sTerminalNames.put(1537, "Analog Connector");
         sTerminalNames.put(1538, "Digital Connector");
         sTerminalNames.put(1539, "Line Connector");

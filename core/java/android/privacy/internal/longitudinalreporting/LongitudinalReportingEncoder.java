@@ -16,21 +16,35 @@ public class LongitudinalReportingEncoder implements DifferentialPrivacyEncoder 
     private final RapporEncoder mIRREncoder;
     private final boolean mIsSecure;
 
-    public static LongitudinalReportingEncoder createEncoder(LongitudinalReportingConfig config, byte[] userSecret) {
+    public static LongitudinalReportingEncoder createEncoder(
+            LongitudinalReportingConfig config, byte[] userSecret) {
         return new LongitudinalReportingEncoder(config, true, userSecret);
     }
 
-    public static LongitudinalReportingEncoder createInsecureEncoderForTest(LongitudinalReportingConfig config) {
+    public static LongitudinalReportingEncoder createInsecureEncoderForTest(
+            LongitudinalReportingConfig config) {
         return new LongitudinalReportingEncoder(config, false, null);
     }
 
-    private LongitudinalReportingEncoder(LongitudinalReportingConfig config, boolean secureEncoder, byte[] userSecret) {
+    private LongitudinalReportingEncoder(
+            LongitudinalReportingConfig config, boolean secureEncoder, byte[] userSecret) {
         RapporEncoder createInsecureEncoderForTest;
         this.mConfig = config;
         this.mIsSecure = secureEncoder;
-        boolean ignoreOriginalInput = getLongTermRandomizedResult(config.getProbabilityP(), secureEncoder, userSecret, config.getEncoderId() + PRR1_ENCODER_ID);
+        boolean ignoreOriginalInput =
+                getLongTermRandomizedResult(
+                        config.getProbabilityP(),
+                        secureEncoder,
+                        userSecret,
+                        config.getEncoderId() + PRR1_ENCODER_ID);
         if (ignoreOriginalInput) {
-            this.mFakeValue = Boolean.valueOf(getLongTermRandomizedResult(config.getProbabilityQ(), secureEncoder, userSecret, config.getEncoderId() + PRR2_ENCODER_ID));
+            this.mFakeValue =
+                    Boolean.valueOf(
+                            getLongTermRandomizedResult(
+                                    config.getProbabilityQ(),
+                                    secureEncoder,
+                                    userSecret,
+                                    config.getEncoderId() + PRR2_ENCODER_ID));
         } else {
             this.mFakeValue = null;
         }
@@ -72,11 +86,23 @@ public class LongitudinalReportingEncoder implements DifferentialPrivacyEncoder 
         return !this.mIsSecure;
     }
 
-    public static boolean getLongTermRandomizedResult(double p, boolean secureEncoder, byte[] userSecret, String encoderId) {
+    public static boolean getLongTermRandomizedResult(
+            double p, boolean secureEncoder, byte[] userSecret, String encoderId) {
         double effectiveF = p < 0.5d ? p * 2.0d : (1.0d - p) * 2.0d;
         boolean prrInput = p >= 0.5d;
-        RapporConfig prrConfig = new RapporConfig(encoderId, 1, effectiveF, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, 1.0d, 1, 1);
-        RapporEncoder encoder = secureEncoder ? RapporEncoder.createEncoder(prrConfig, userSecret) : RapporEncoder.createInsecureEncoderForTest(prrConfig);
+        RapporConfig prrConfig =
+                new RapporConfig(
+                        encoderId,
+                        1,
+                        effectiveF,
+                        SContextConstants.ENVIRONMENT_VALUE_UNKNOWN,
+                        1.0d,
+                        1,
+                        1);
+        RapporEncoder encoder =
+                secureEncoder
+                        ? RapporEncoder.createEncoder(prrConfig, userSecret)
+                        : RapporEncoder.createInsecureEncoderForTest(prrConfig);
         return encoder.encodeBoolean(prrInput)[0] > 0;
     }
 }

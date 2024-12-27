@@ -2,10 +2,11 @@ package com.android.server.pm.pu;
 
 import android.os.CancellationSignal;
 import android.util.Slog;
+
 import com.android.server.pm.PackageManagerLocal;
 import com.android.server.pm.PackageManagerServiceUtils;
 import com.android.server.pm.pkg.PackageState;
-import com.android.server.pm.pu.ProfileUtilizationService;
+
 import java.util.HashSet;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -14,7 +15,8 @@ public final /* synthetic */ class DexoptTrigger$$ExternalSyntheticLambda0 imple
     public final /* synthetic */ DexoptTrigger f$0;
     public final /* synthetic */ ProfileUtilizationService.App f$1;
 
-    public /* synthetic */ DexoptTrigger$$ExternalSyntheticLambda0(DexoptTrigger dexoptTrigger, ProfileUtilizationService.App app) {
+    public /* synthetic */ DexoptTrigger$$ExternalSyntheticLambda0(
+            DexoptTrigger dexoptTrigger, ProfileUtilizationService.App app) {
         this.f$0 = dexoptTrigger;
         this.f$1 = app;
     }
@@ -25,7 +27,8 @@ public final /* synthetic */ class DexoptTrigger$$ExternalSyntheticLambda0 imple
         ProfileUtilizationService.App app = this.f$1;
         dexoptTrigger.getClass();
         Slog.d("PU_DexoptTrigger", "Trigger dexopt for " + app.packageName);
-        PackageManagerLocal.FilteredSnapshot withFilteredSnapshot = PackageManagerServiceUtils.getPackageManagerLocal().withFilteredSnapshot();
+        PackageManagerLocal.FilteredSnapshot withFilteredSnapshot =
+                PackageManagerServiceUtils.getPackageManagerLocal().withFilteredSnapshot();
         try {
             PackageState packageState = withFilteredSnapshot.getPackageState(app.packageName);
             boolean z = (packageState == null ? null : packageState.getAndroidPackage()) != null;

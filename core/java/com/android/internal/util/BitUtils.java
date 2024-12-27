@@ -2,6 +2,7 @@ package com.android.internal.util;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.text.TextUtils;
+
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Objects;
@@ -10,8 +11,7 @@ import java.util.function.IntFunction;
 
 /* loaded from: classes5.dex */
 public final class BitUtils {
-    private BitUtils() {
-    }
+    private BitUtils() {}
 
     public static boolean maskedEquals(long a, long b, long mask) {
         return (a & mask) == (b & mask);
@@ -42,7 +42,14 @@ public final class BitUtils {
         if (mask == null) {
             return Objects.equals(a, b);
         }
-        return maskedEquals(a.getLeastSignificantBits(), b.getLeastSignificantBits(), mask.getLeastSignificantBits()) && maskedEquals(a.getMostSignificantBits(), b.getMostSignificantBits(), mask.getMostSignificantBits());
+        return maskedEquals(
+                        a.getLeastSignificantBits(),
+                        b.getLeastSignificantBits(),
+                        mask.getLeastSignificantBits())
+                && maskedEquals(
+                        a.getMostSignificantBits(),
+                        b.getMostSignificantBits(),
+                        mask.getMostSignificantBits());
     }
 
     public static int[] unpackBits(long val) {
@@ -86,7 +93,10 @@ public final class BitUtils {
     }
 
     public static int bytesToBEInt(byte[] bytes) {
-        return (uint8(bytes[0]) << 24) + (uint8(bytes[1]) << 16) + (uint8(bytes[2]) << 8) + uint8(bytes[3]);
+        return (uint8(bytes[0]) << 24)
+                + (uint8(bytes[1]) << 16)
+                + (uint8(bytes[2]) << 8)
+                + uint8(bytes[3]);
     }
 
     public static int bytesToLEInt(byte[] bytes) {
@@ -132,7 +142,10 @@ public final class BitUtils {
             builder.append(getFlagName.apply(flag));
             count++;
         }
-        TextUtils.wrap(builder, NavigationBarInflaterView.SIZE_MOD_START, NavigationBarInflaterView.SIZE_MOD_END);
+        TextUtils.wrap(
+                builder,
+                NavigationBarInflaterView.SIZE_MOD_START,
+                NavigationBarInflaterView.SIZE_MOD_END);
         return builder.toString();
     }
 

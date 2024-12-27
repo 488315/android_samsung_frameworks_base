@@ -10,7 +10,8 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 
 /* loaded from: classes5.dex */
-public class TBSCertificateStructure extends ASN1Object implements X509ObjectIdentifiers, PKCSObjectIdentifiers {
+public class TBSCertificateStructure extends ASN1Object
+        implements X509ObjectIdentifiers, PKCSObjectIdentifiers {
     Time endDate;
     X509Extensions extensions;
     X500Name issuer;
@@ -56,7 +57,8 @@ public class TBSCertificateStructure extends ASN1Object implements X509ObjectIde
         this.subject = X500Name.getInstance(seq.getObjectAt(seqStart + 5));
         this.subjectPublicKeyInfo = SubjectPublicKeyInfo.getInstance(seq.getObjectAt(seqStart + 6));
         for (int extras = (seq.size() - (seqStart + 6)) - 1; extras > 0; extras--) {
-            ASN1TaggedObject extra = ASN1TaggedObject.getInstance(seq.getObjectAt(seqStart + 6 + extras));
+            ASN1TaggedObject extra =
+                    ASN1TaggedObject.getInstance(seq.getObjectAt(seqStart + 6 + extras));
             switch (extra.getTagNo()) {
                 case 1:
                     this.issuerUniqueId = DERBitString.getInstance(extra, false);
@@ -119,7 +121,8 @@ public class TBSCertificateStructure extends ASN1Object implements X509ObjectIde
         return this.extensions;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.seq;
     }

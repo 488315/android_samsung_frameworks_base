@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContext implements Parcelable {
-    public static final Parcelable.Creator<SemContext> CREATOR = new Parcelable.Creator<SemContext>() { // from class: com.samsung.android.hardware.context.SemContext.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContext createFromParcel(Parcel in) {
-            return new SemContext(in);
-        }
+    public static final Parcelable.Creator<SemContext> CREATOR =
+            new Parcelable.Creator<
+                    SemContext>() { // from class: com.samsung.android.hardware.context.SemContext.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContext createFromParcel(Parcel in) {
+                    return new SemContext(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContext[] newArray(int size) {
-            return new SemContext[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContext[] newArray(int size) {
+                    return new SemContext[size];
+                }
+            };
     static final int REPORTING_MODE_BATCH = 5;
     static final int REPORTING_MODE_CONTINUOUS = 1;
     static final int REPORTING_MODE_ONE_SHOT = 2;
@@ -35,12 +37,12 @@ public class SemContext implements Parcelable {
     public static final int TYPE_AIRMOTION = 7;
     public static final int TYPE_ANY_MOTION_DETECTOR = 50;
 
-    @Deprecated
-    public static final int TYPE_APPROACH = 1;
+    @Deprecated public static final int TYPE_APPROACH = 1;
     public static final int TYPE_AUTO_BRIGHTNESS = 39;
 
     @Deprecated(forRemoval = true, since = "13.0")
     public static final int TYPE_AUTO_ROTATION = 6;
+
     public static final int TYPE_BOUNCE_LONG_MOTION = 18;
     public static final int TYPE_BOUNCE_SHORT_MOTION = 17;
     public static final int TYPE_CALL_MOTION = 32;
@@ -57,14 +59,12 @@ public class SemContext implements Parcelable {
     public static final int TYPE_GYRO_TEMPERATURE = 14;
     public static final int TYPE_HALL_SENSOR = 43;
 
-    @Deprecated
-    public static final int TYPE_INTERRUPTED_GYRO = 48;
+    @Deprecated public static final int TYPE_INTERRUPTED_GYRO = 48;
     public static final int TYPE_LOCATION_CHANGE_TRIGGER = 54;
     public static final int TYPE_LOCATION_CORE = 47;
     public static final int TYPE_MOVEMENT = 5;
 
-    @Deprecated
-    public static final int TYPE_MOVEMENT_ALERT = 21;
+    @Deprecated public static final int TYPE_MOVEMENT_ALERT = 21;
     public static final int TYPE_PEDOMETER = 2;
     public static final int TYPE_PHONE_STATUS_MONITOR = 42;
     public static final int TYPE_PUT_DOWN_MOTION = 15;
@@ -80,8 +80,7 @@ public class SemContext implements Parcelable {
     public static final int TYPE_WAKE_UP_VOICE = 16;
     public static final int TYPE_WIRELESS_CHARGING_DETECTION = 46;
 
-    @Deprecated
-    public static final int TYPE_WRIST_UP_MOTION = 19;
+    @Deprecated public static final int TYPE_WRIST_UP_MOTION = 19;
     private int mType;
 
     SemContext() {

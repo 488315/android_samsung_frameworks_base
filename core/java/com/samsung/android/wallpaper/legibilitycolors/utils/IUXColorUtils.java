@@ -88,7 +88,7 @@ public class IUXColorUtils {
     }
 
     public static float[] getCopiedHSV(float[] srcHSV) {
-        return new float[]{srcHSV[0], srcHSV[1], srcHSV[2]};
+        return new float[] {srcHSV[0], srcHSV[1], srcHSV[2]};
     }
 
     public static float[] getHSVFromColor(int color) {
@@ -252,9 +252,15 @@ public class IUXColorUtils {
     }
 
     public static double colorDistance_hue(float hueA, float hueB) {
-        double[] hueVector_color_A = {Math.cos(Math.toRadians(hueA)), Math.sin(Math.toRadians(hueA))};
-        double[] hueVector_color_B = {Math.cos(Math.toRadians(hueB)), Math.sin(Math.toRadians(hueB))};
-        double dot = (hueVector_color_A[0] * hueVector_color_B[0]) + (hueVector_color_A[1] * hueVector_color_B[1]);
+        double[] hueVector_color_A = {
+            Math.cos(Math.toRadians(hueA)), Math.sin(Math.toRadians(hueA))
+        };
+        double[] hueVector_color_B = {
+            Math.cos(Math.toRadians(hueB)), Math.sin(Math.toRadians(hueB))
+        };
+        double dot =
+                (hueVector_color_A[0] * hueVector_color_B[0])
+                        + (hueVector_color_A[1] * hueVector_color_B[1]);
         return Math.toDegrees(Math.acos(dot));
     }
 
@@ -271,9 +277,15 @@ public class IUXColorUtils {
     }
 
     public static double hsvDistanceSquare2(float[] hsv_a, float[] hsv_b, float[] hsv_weight) {
-        double[] hueVector_color_A = {Math.cos(Math.toRadians(hsv_a[0])), Math.sin(Math.toRadians(hsv_a[0]))};
-        double[] hueVector_color_B = {Math.cos(Math.toRadians(hsv_b[0])), Math.sin(Math.toRadians(hsv_b[0]))};
-        double dot = (hueVector_color_A[0] * hueVector_color_B[0]) + (hueVector_color_A[1] * hueVector_color_B[1]);
+        double[] hueVector_color_A = {
+            Math.cos(Math.toRadians(hsv_a[0])), Math.sin(Math.toRadians(hsv_a[0]))
+        };
+        double[] hueVector_color_B = {
+            Math.cos(Math.toRadians(hsv_b[0])), Math.sin(Math.toRadians(hsv_b[0]))
+        };
+        double dot =
+                (hueVector_color_A[0] * hueVector_color_B[0])
+                        + (hueVector_color_A[1] * hueVector_color_B[1]);
         double diff_h = Math.acos(dot) / 3.141592653589793d;
         double diff_s = hsv_b[1] - hsv_a[1];
         double diff_h2 = diff_h * hsv_weight[0] * 1.0d;
@@ -282,10 +294,17 @@ public class IUXColorUtils {
         return (diff_h2 * diff_h2) + (diff_s2 * diff_s2) + (diff_b * diff_b);
     }
 
-    public static double colorDistance_hsv_square2(float[] hsv_a, float[] hsv_b, float[] hsv_weight) {
-        double[] hueVector_color_A = {Math.cos(Math.toRadians(hsv_a[0])), Math.sin(Math.toRadians(hsv_a[0]))};
-        double[] hueVector_color_B = {Math.cos(Math.toRadians(hsv_b[0])), Math.sin(Math.toRadians(hsv_b[0]))};
-        double dot = (hueVector_color_A[0] * hueVector_color_B[0]) + (hueVector_color_A[1] * hueVector_color_B[1]);
+    public static double colorDistance_hsv_square2(
+            float[] hsv_a, float[] hsv_b, float[] hsv_weight) {
+        double[] hueVector_color_A = {
+            Math.cos(Math.toRadians(hsv_a[0])), Math.sin(Math.toRadians(hsv_a[0]))
+        };
+        double[] hueVector_color_B = {
+            Math.cos(Math.toRadians(hsv_b[0])), Math.sin(Math.toRadians(hsv_b[0]))
+        };
+        double dot =
+                (hueVector_color_A[0] * hueVector_color_B[0])
+                        + (hueVector_color_A[1] * hueVector_color_B[1]);
         double diff_h = Math.acos(dot) / 3.141592653589793d;
         double diff_s = hsv_b[1] - hsv_a[1];
         double diff_h2 = diff_h * hsv_weight[0] * 1.0d;
@@ -298,7 +317,10 @@ public class IUXColorUtils {
     public static float getHsvDistanceSquare2FromCornSpace(float[] hsvA, float[] hsvB, float d) {
         float[] hsvPositionA = getHsvPositionFromCornSpace(hsvA, d);
         float[] hsvPositionB = getHsvPositionFromCornSpace(hsvB, d);
-        return IUXMathUtils.distanceSqrt2(hsvPositionA[0] - hsvPositionB[0], hsvPositionA[1] - hsvPositionB[1], hsvPositionA[2] - hsvPositionB[2]);
+        return IUXMathUtils.distanceSqrt2(
+                hsvPositionA[0] - hsvPositionB[0],
+                hsvPositionA[1] - hsvPositionB[1],
+                hsvPositionA[2] - hsvPositionB[2]);
     }
 
     public static void convertHsv2CornSpace(float[] hsv, float weight, float[] dst) {
@@ -310,11 +332,16 @@ public class IUXColorUtils {
         dst[2] = v;
     }
 
-    public static float getHsvDistanceSquare2FromCornSpace(float[] hsvPositionA, float[] hsvPositionB) {
-        return IUXMathUtils.distanceSqrt2(hsvPositionA[0] - hsvPositionB[0], hsvPositionA[1] - hsvPositionB[1], hsvPositionA[2] - hsvPositionB[2]);
+    public static float getHsvDistanceSquare2FromCornSpace(
+            float[] hsvPositionA, float[] hsvPositionB) {
+        return IUXMathUtils.distanceSqrt2(
+                hsvPositionA[0] - hsvPositionB[0],
+                hsvPositionA[1] - hsvPositionB[1],
+                hsvPositionA[2] - hsvPositionB[2]);
     }
 
-    public static float getHsvDistanceSquare2FromCornSpace(float[] hsvA, float[] hsvB, float d, float[] bufferA, float[] bufferB) {
+    public static float getHsvDistanceSquare2FromCornSpace(
+            float[] hsvA, float[] hsvB, float d, float[] bufferA, float[] bufferB) {
         float v = hsvA[2];
         float hRadian = hsvA[0];
         float diameterValue = hsvA[1] * v * d;
@@ -334,7 +361,8 @@ public class IUXColorUtils {
         return result;
     }
 
-    public static void calculateHsvPositionFromCornSpace(float[] hsv, float sWeight, float[] result) {
+    public static void calculateHsvPositionFromCornSpace(
+            float[] hsv, float sWeight, float[] result) {
         float v = hsv[2];
         float hRadian = hsv[0] * 0.0174532f;
         float diameterValue = hsv[1] * v * sWeight;
@@ -343,19 +371,26 @@ public class IUXColorUtils {
         result[2] = v;
     }
 
-    public static double getHsvDistanceSquare2FromCornSpaceDouble(float[] hsvA, float[] hsvB, float d) {
+    public static double getHsvDistanceSquare2FromCornSpaceDouble(
+            float[] hsvA, float[] hsvB, float d) {
         float[] hsvPositionA = getHsvPositionFromCornSpace(hsvA, d);
         float[] hsvPositionB = getHsvPositionFromCornSpace(hsvB, d);
-        return IUXMathUtils.distanceSqrt2(hsvPositionA[0] - hsvPositionB[0], hsvPositionA[1] - hsvPositionB[1], hsvPositionA[2] - hsvPositionB[2]);
+        return IUXMathUtils.distanceSqrt2(
+                hsvPositionA[0] - hsvPositionB[0],
+                hsvPositionA[1] - hsvPositionB[1],
+                hsvPositionA[2] - hsvPositionB[2]);
     }
 
-    public static double getHsvDistanceSquare2FromCornSpaceDouble(float[] hsvA, float[] hsvB, float d, float[] bufferA, float[] bufferB) {
+    public static double getHsvDistanceSquare2FromCornSpaceDouble(
+            float[] hsvA, float[] hsvB, float d, float[] bufferA, float[] bufferB) {
         calculateHsvPositionFromCornSpace(hsvA, d, bufferA);
         calculateHsvPositionFromCornSpace(hsvB, d, bufferB);
-        return IUXMathUtils.distanceSqrt2(bufferA[0] - bufferB[0], bufferA[1] - bufferB[1], bufferA[2] - bufferB[2]);
+        return IUXMathUtils.distanceSqrt2(
+                bufferA[0] - bufferB[0], bufferA[1] - bufferB[1], bufferA[2] - bufferB[2]);
     }
 
-    public static double getHsvDistanceSquare2FromCornSpaceDoubleFast(float[] hsvA, float[] hsvB, float d) {
+    public static double getHsvDistanceSquare2FromCornSpaceDoubleFast(
+            float[] hsvA, float[] hsvB, float d) {
         float v = hsvA[2];
         float degree = hsvA[0];
         float diameterValue = hsvA[1] * v * d;
@@ -375,7 +410,8 @@ public class IUXColorUtils {
         return result;
     }
 
-    public static void calculateHsvPositionFromCornSpaceDouble(float[] hsv, double sWeight, double[] result) {
+    public static void calculateHsvPositionFromCornSpaceDouble(
+            float[] hsv, double sWeight, double[] result) {
         double v = hsv[2];
         double hRadian = hsv[0] * 0.0174532f;
         double diameterValue = hsv[1] * v * sWeight;
@@ -385,14 +421,23 @@ public class IUXColorUtils {
     }
 
     public static double colorDistanceHSV(float[] hsv_a, float[] hsv_b, float[] hsv_weight) {
-        double[] hueVector_color_A = {Math.cos(Math.toRadians(hsv_a[0])), Math.sin(Math.toRadians(hsv_a[0]))};
-        double[] hueVector_color_B = {Math.cos(Math.toRadians(hsv_b[0])), Math.sin(Math.toRadians(hsv_b[0]))};
-        double dot = (hueVector_color_A[0] * hueVector_color_B[0]) + (hueVector_color_A[1] * hueVector_color_B[1]);
+        double[] hueVector_color_A = {
+            Math.cos(Math.toRadians(hsv_a[0])), Math.sin(Math.toRadians(hsv_a[0]))
+        };
+        double[] hueVector_color_B = {
+            Math.cos(Math.toRadians(hsv_b[0])), Math.sin(Math.toRadians(hsv_b[0]))
+        };
+        double dot =
+                (hueVector_color_A[0] * hueVector_color_B[0])
+                        + (hueVector_color_A[1] * hueVector_color_B[1]);
         double diff_h = Math.acos(dot) / 3.141592653589793d;
         double diff_s = hsv_b[1] - hsv_a[1];
         double diff_b = hsv_b[2] - hsv_a[2];
         double invTotalLengthAdjuster = 1.0f / ((hsv_weight[0] + hsv_weight[1]) + hsv_weight[2]);
-        double hsvDistance_square2 = (diff_h * hsv_weight[0] * invTotalLengthAdjuster) + (diff_s * hsv_weight[1] * invTotalLengthAdjuster) + (diff_b * hsv_weight[2] * invTotalLengthAdjuster);
+        double hsvDistance_square2 =
+                (diff_h * hsv_weight[0] * invTotalLengthAdjuster)
+                        + (diff_s * hsv_weight[1] * invTotalLengthAdjuster)
+                        + (diff_b * hsv_weight[2] * invTotalLengthAdjuster);
         return hsvDistance_square2;
     }
 
@@ -401,11 +446,16 @@ public class IUXColorUtils {
     }
 
     public static double colorDistance_rgb(int c1, int c2) {
-        return Math.sqrt(Math.pow(Color.red(c1) - Color.red(c2), 2.0d) + Math.pow(Color.green(c1) - Color.green(c2), 2.0d) + Math.pow(Color.blue(c1) - Color.blue(c2), 2.0d));
+        return Math.sqrt(
+                Math.pow(Color.red(c1) - Color.red(c2), 2.0d)
+                        + Math.pow(Color.green(c1) - Color.green(c2), 2.0d)
+                        + Math.pow(Color.blue(c1) - Color.blue(c2), 2.0d));
     }
 
     public static double colorDistance_rgb_sqaure2(int c1, int c2) {
-        return Math.pow(Color.red(c1) - Color.red(c2), 2.0d) + Math.pow(Color.green(c1) - Color.green(c2), 2.0d) + Math.pow(Color.blue(c1) - Color.blue(c2), 2.0d);
+        return Math.pow(Color.red(c1) - Color.red(c2), 2.0d)
+                + Math.pow(Color.green(c1) - Color.green(c2), 2.0d)
+                + Math.pow(Color.blue(c1) - Color.blue(c2), 2.0d);
     }
 
     public static boolean checkGayScale(int color, double offsetValue) {
@@ -415,10 +465,12 @@ public class IUXColorUtils {
     }
 
     public static boolean checkGayScale(float[] hsv, double offsetValue) {
-        return ((double) hsv[1]) <= 0.10000000149011612d + offsetValue || ((double) hsv[2]) <= 0.15000000596046448d + offsetValue;
+        return ((double) hsv[1]) <= 0.10000000149011612d + offsetValue
+                || ((double) hsv[2]) <= 0.15000000596046448d + offsetValue;
     }
 
-    public static boolean checkGrayScaleWithSV(float[] hsv, float offsetValue_s, float offsetValue_b) {
+    public static boolean checkGrayScaleWithSV(
+            float[] hsv, float offsetValue_s, float offsetValue_b) {
         return hsv[1] <= offsetValue_s || hsv[2] <= offsetValue_b;
     }
 
@@ -429,7 +481,8 @@ public class IUXColorUtils {
     }
 
     public static boolean checkWhite(float[] hsv, double offsetValue) {
-        return ((double) hsv[1]) <= 0.05000000074505806d + offsetValue && ((double) hsv[2]) >= 0.8999999761581421d + offsetValue;
+        return ((double) hsv[1]) <= 0.05000000074505806d + offsetValue
+                && ((double) hsv[2]) >= 0.8999999761581421d + offsetValue;
     }
 
     @Deprecated
@@ -470,11 +523,21 @@ public class IUXColorUtils {
         double nr = r * 0.00392156862745098d;
         double ng = g * 0.00392156862745098d;
         double nb = b * 0.00392156862745098d;
-        return (float) ((0.2126d * (nr < 0.04045d ? nr / 12.92d : Math.pow((nr + 0.055d) / 1.055d, 2.4d))) + (0.7152d * (ng < 0.04045d ? ng / 12.92d : Math.pow((ng + 0.055d) / 1.055d, 2.4d))) + (0.0722d * (nb < 0.04045d ? nb / 12.92d : Math.pow((nb + 0.055d) / 1.055d, 2.4d))));
+        return (float)
+                ((0.2126d * (nr < 0.04045d ? nr / 12.92d : Math.pow((nr + 0.055d) / 1.055d, 2.4d)))
+                        + (0.7152d
+                                * (ng < 0.04045d
+                                        ? ng / 12.92d
+                                        : Math.pow((ng + 0.055d) / 1.055d, 2.4d)))
+                        + (0.0722d
+                                * (nb < 0.04045d
+                                        ? nb / 12.92d
+                                        : Math.pow((nb + 0.055d) / 1.055d, 2.4d))));
     }
 
     public static float getGammaCorrectedValue(float value) {
-        return (float) (value < 0.04045f ? value / 12.92d : Math.pow((value + 0.055d) / 1.055d, 2.4d));
+        return (float)
+                (value < 0.04045f ? value / 12.92d : Math.pow((value + 0.055d) / 1.055d, 2.4d));
     }
 
     public static double getGammaCorrectionFromValue(double val) {
@@ -518,8 +581,14 @@ public class IUXColorUtils {
             double[] hueVector_color_A = {IUXMathUtils.cos(hsvA[0]), IUXMathUtils.sin(hsvA[0])};
             double[] hueVector_color_B = {IUXMathUtils.cos(hsvB[0]), IUXMathUtils.sin(hsvB[0])};
             float shiftedAngleA = (hsvA[0] + 90.0f) % 360.0f;
-            boolean cw = (hueVector_color_B[0] * ((double) IUXMathUtils.cos(shiftedAngleA))) + (hueVector_color_B[1] * ((double) IUXMathUtils.sin(shiftedAngleA))) >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
-            double dot = (hueVector_color_A[0] * hueVector_color_B[0]) + (hueVector_color_A[1] * hueVector_color_B[1]);
+            boolean cw =
+                    (hueVector_color_B[0] * ((double) IUXMathUtils.cos(shiftedAngleA)))
+                                    + (hueVector_color_B[1]
+                                            * ((double) IUXMathUtils.sin(shiftedAngleA)))
+                            >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+            double dot =
+                    (hueVector_color_A[0] * hueVector_color_B[0])
+                            + (hueVector_color_A[1] * hueVector_color_B[1]);
             double hDiff = Math.toDegrees(Math.acos(dot)) * value;
             if (cw) {
                 resultHSV[0] = (float) (hsvA[0] + hDiff);
@@ -545,7 +614,15 @@ public class IUXColorUtils {
         if (hue > 252.0f) {
             adjustedHue = (hue - 252.0f) + 72.0f + hueScopeLength_lc + hueScopeLength_cb;
         } else {
-            adjustedHue = hue > 180.0f ? (((hue - 180.0f) / (252.0f - 180.0f)) * hueScopeLength_cb) + 72.0f + hueScopeLength_lc : hue > 72.0f ? (((hue - 72.0f) / (180.0f - 72.0f)) * hueScopeLength_lc) + 72.0f : hue;
+            adjustedHue =
+                    hue > 180.0f
+                            ? (((hue - 180.0f) / (252.0f - 180.0f)) * hueScopeLength_cb)
+                                    + 72.0f
+                                    + hueScopeLength_lc
+                            : hue > 72.0f
+                                    ? (((hue - 72.0f) / (180.0f - 72.0f)) * hueScopeLength_lc)
+                                            + 72.0f
+                                    : hue;
         }
         float maxHue = (360.0f - 252.0f) + 72.0f + hueScopeLength_lc + hueScopeLength_cb;
         return adjustedHue / maxHue;
@@ -561,10 +638,12 @@ public class IUXColorUtils {
         }
         float[] clusterCalcWeightColor = {1.0f, 0.35f, 0.65f};
         float squaredThresholdDistanceColor = 1.7320508f * distancThresholdRatio;
-        float squaredThresholdDistanceColor2 = squaredThresholdDistanceColor * squaredThresholdDistanceColor;
+        float squaredThresholdDistanceColor2 =
+                squaredThresholdDistanceColor * squaredThresholdDistanceColor;
         float[] clusterCalcWeightMono = {0.0f, 0.0f, 1.0f};
         float squaredThresholdDistanceMono = 1.0f * distancThresholdRatio;
-        float squaredThresholdDistanceMono2 = squaredThresholdDistanceMono * squaredThresholdDistanceMono;
+        float squaredThresholdDistanceMono2 =
+                squaredThresholdDistanceMono * squaredThresholdDistanceMono;
         if (isGrayScaleA) {
             clusterCalcWeight = clusterCalcWeightMono;
             squaredThresholdDistance = squaredThresholdDistanceMono2;
@@ -579,16 +658,24 @@ public class IUXColorUtils {
     }
 
     public static int[] getRGBFromColor(int color) {
-        return new int[]{Color.red(color), Color.green(color), Color.blue(color), Color.alpha(color)};
+        return new int[] {
+            Color.red(color), Color.green(color), Color.blue(color), Color.alpha(color)
+        };
     }
 
     public static int multipleColorValue(int color, float value) {
         float value2 = Math.min(value, 1.0f);
-        return Color.rgb((int) (Color.red(color) * value2), (int) (Color.green(color) * value2), (int) (Color.blue(color) * value2));
+        return Color.rgb(
+                (int) (Color.red(color) * value2),
+                (int) (Color.green(color) * value2),
+                (int) (Color.blue(color) * value2));
     }
 
     public static int addColorColor(int colorA, int colorB) {
-        return Color.rgb(Math.min(Color.red(colorA) + Color.red(colorB), 255), Math.min(Color.green(colorA) + Color.green(colorB), 255), Math.min(Color.blue(colorA) + Color.blue(colorB), 255));
+        return Color.rgb(
+                Math.min(Color.red(colorA) + Color.red(colorB), 255),
+                Math.min(Color.green(colorA) + Color.green(colorB), 255),
+                Math.min(Color.blue(colorA) + Color.blue(colorB), 255));
     }
 
     public static float getRedRatio(int color) {
@@ -618,27 +705,44 @@ public class IUXColorUtils {
 
     public static float[] getInverseHSV(float[] hsv) {
         float inverseHue = ((int) (hsv[0] + 180.0f)) % 360;
-        return new float[]{inverseHue, hsv[1], hsv[2]};
+        return new float[] {inverseHue, hsv[1], hsv[2]};
     }
 
-    Bitmap getGradation(final int colorA, final int colorB, final int gradient_width, final int gradient_hegith, final float angle) {
-        ShapeDrawable.ShaderFactory sf = new ShapeDrawable.ShaderFactory() { // from class: com.samsung.android.wallpaper.legibilitycolors.utils.IUXColorUtils.1
-            @Override // android.graphics.drawable.ShapeDrawable.ShaderFactory
-            public Shader resize(int width, int height) {
-                LinearGradient lg = new LinearGradient(0.0f, 0.0f, 0.0f, gradient_hegith, new int[]{colorA, colorB}, new float[]{0.0f, 1.0f}, Shader.TileMode.MIRROR);
-                Matrix rotMat = new Matrix();
-                rotMat.setRotate(angle, gradient_width * 0.5f, gradient_hegith * 0.5f);
-                Matrix transMat = new Matrix();
-                Matrix resultMat = new Matrix();
-                resultMat.setConcat(rotMat, transMat);
-                lg.setLocalMatrix(resultMat);
-                return lg;
-            }
-        };
+    Bitmap getGradation(
+            final int colorA,
+            final int colorB,
+            final int gradient_width,
+            final int gradient_hegith,
+            final float angle) {
+        ShapeDrawable.ShaderFactory sf =
+                new ShapeDrawable
+                        .ShaderFactory() { // from class:
+                                           // com.samsung.android.wallpaper.legibilitycolors.utils.IUXColorUtils.1
+                    @Override // android.graphics.drawable.ShapeDrawable.ShaderFactory
+                    public Shader resize(int width, int height) {
+                        LinearGradient lg =
+                                new LinearGradient(
+                                        0.0f,
+                                        0.0f,
+                                        0.0f,
+                                        gradient_hegith,
+                                        new int[] {colorA, colorB},
+                                        new float[] {0.0f, 1.0f},
+                                        Shader.TileMode.MIRROR);
+                        Matrix rotMat = new Matrix();
+                        rotMat.setRotate(angle, gradient_width * 0.5f, gradient_hegith * 0.5f);
+                        Matrix transMat = new Matrix();
+                        Matrix resultMat = new Matrix();
+                        resultMat.setConcat(rotMat, transMat);
+                        lg.setLocalMatrix(resultMat);
+                        return lg;
+                    }
+                };
         PaintDrawable gradationDrawable = new PaintDrawable();
         gradationDrawable.setShape(new RectShape());
         gradationDrawable.setShaderFactory(sf);
-        Bitmap gradientBitmap = Bitmap.createBitmap(gradient_width, gradient_hegith, Bitmap.Config.ARGB_8888);
+        Bitmap gradientBitmap =
+                Bitmap.createBitmap(gradient_width, gradient_hegith, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(gradientBitmap);
         gradationDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         gradationDrawable.draw(canvas);

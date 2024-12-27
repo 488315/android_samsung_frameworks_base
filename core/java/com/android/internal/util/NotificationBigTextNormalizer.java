@@ -1,6 +1,7 @@
 package com.android.internal.util;
 
 import android.os.Trace;
+
 import java.util.regex.Pattern;
 
 /* loaded from: classes5.dex */
@@ -8,13 +9,15 @@ public class NotificationBigTextNormalizer {
     private static final Pattern MULTIPLE_NEWLINES = Pattern.compile("\\v(\\s*\\v)?");
     private static final Pattern HORIZONTAL_WHITESPACES = Pattern.compile("\\h+");
 
-    private NotificationBigTextNormalizer() {
-    }
+    private NotificationBigTextNormalizer() {}
 
     public static String normalizeBigText(String text) {
         try {
             Trace.beginSection("NotifBigTextNormalizer#normalizeBigText");
-            return normalizeLines(HORIZONTAL_WHITESPACES.matcher(MULTIPLE_NEWLINES.matcher(text).replaceAll("\n")).replaceAll(" "));
+            return normalizeLines(
+                    HORIZONTAL_WHITESPACES
+                            .matcher(MULTIPLE_NEWLINES.matcher(text).replaceAll("\n"))
+                            .replaceAll(" "));
         } finally {
             Trace.endSection();
         }
@@ -28,7 +31,12 @@ public class NotificationBigTextNormalizer {
             boolean spaceSeen = false;
             for (int j = 0; j < line.length(); j++) {
                 char character = line.charAt(j);
-                if ((character < 8203 || character > 8205) && character != 65279 && character != 847 && ((character < 8288 || character > 8293) && ((character < 8298 || character > 8303) && (character < 65529 || character > 65531)))) {
+                if ((character < 8203 || character > 8205)
+                        && character != 65279
+                        && character != 847
+                        && ((character < 8288 || character > 8293)
+                                && ((character < 8298 || character > 8303)
+                                        && (character < 65529 || character > 65531)))) {
                     if (isSpace(character)) {
                         if (!spaceSeen) {
                             lineSB.append(" ");

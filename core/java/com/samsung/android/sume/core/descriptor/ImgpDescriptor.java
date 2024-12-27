@@ -22,13 +22,19 @@ public class ImgpDescriptor extends PluginDescriptor {
     }
 
     public ImgpDescriptor(ImgpPlugin.Type pluginType, Enum<?> imgpType) {
-        Def.require(pluginType == ImgpPlugin.Type.CUSTOM || (imgpType instanceof ImgpType), "For pre-defined plugin types, should set ImgpType as 2nd argument", new Object[0]);
+        Def.require(
+                pluginType == ImgpPlugin.Type.CUSTOM || (imgpType instanceof ImgpType),
+                "For pre-defined plugin types, should set ImgpType as 2nd argument",
+                new Object[0]);
         setPluginId(pluginType);
         getAll().put(2010, imgpType);
     }
 
     public ImgpDescriptor(String pluginClassName, String imgpTypeName) {
-        Def.require(pluginClassName.startsWith("com.samsung.android."), "pluginClassName should be follow sec package naming rule: com.samsung.android.{}", new Object[0]);
+        Def.require(
+                pluginClassName.startsWith("com.samsung.android."),
+                "pluginClassName should be follow sec package naming rule: com.samsung.android.{}",
+                new Object[0]);
         setPluginId(ImgpPlugin.Type.CUSTOM);
         getAll().put(2011, imgpTypeName);
         setPluginClassName(pluginClassName);

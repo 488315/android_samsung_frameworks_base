@@ -2,8 +2,9 @@ package android.print;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.print.PrintAttributes;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,20 +25,24 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
     private List<PrintAttributes.MediaSize> mMediaSizes;
     private PrintAttributes.Margins mMinMargins;
     private List<PrintAttributes.Resolution> mResolutions;
-    private static final PrintAttributes.Margins DEFAULT_MARGINS = new PrintAttributes.Margins(0, 0, 0, 0);
-    public static final Parcelable.Creator<PrinterCapabilitiesInfo> CREATOR = new Parcelable.Creator<PrinterCapabilitiesInfo>() { // from class: android.print.PrinterCapabilitiesInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrinterCapabilitiesInfo createFromParcel(Parcel parcel) {
-            return new PrinterCapabilitiesInfo(parcel);
-        }
+    private static final PrintAttributes.Margins DEFAULT_MARGINS =
+            new PrintAttributes.Margins(0, 0, 0, 0);
+    public static final Parcelable.Creator<PrinterCapabilitiesInfo> CREATOR =
+            new Parcelable.Creator<
+                    PrinterCapabilitiesInfo>() { // from class:
+                                                 // android.print.PrinterCapabilitiesInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrinterCapabilitiesInfo createFromParcel(Parcel parcel) {
+                    return new PrinterCapabilitiesInfo(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrinterCapabilitiesInfo[] newArray(int size) {
-            return new PrinterCapabilitiesInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrinterCapabilitiesInfo[] newArray(int size) {
+                    return new PrinterCapabilitiesInfo[size];
+                }
+            };
 
     public PrinterCapabilitiesInfo() {
         this.mMinMargins = DEFAULT_MARGINS;
@@ -139,23 +144,30 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
     private PrinterCapabilitiesInfo(Parcel parcel) {
         this.mMinMargins = DEFAULT_MARGINS;
         this.mDefaults = new int[4];
-        this.mMinMargins = (PrintAttributes.Margins) Preconditions.checkNotNull(readMargins(parcel));
+        this.mMinMargins =
+                (PrintAttributes.Margins) Preconditions.checkNotNull(readMargins(parcel));
         readMediaSizes(parcel);
         readResolutions(parcel);
         this.mColorModes = parcel.readInt();
-        enforceValidMask(this.mColorModes, new IntConsumer() { // from class: android.print.PrinterCapabilitiesInfo$$ExternalSyntheticLambda0
-            @Override // java.util.function.IntConsumer
-            public final void accept(int i) {
-                PrintAttributes.enforceValidColorMode(i);
-            }
-        });
+        enforceValidMask(
+                this.mColorModes,
+                new IntConsumer() { // from class:
+                                    // android.print.PrinterCapabilitiesInfo$$ExternalSyntheticLambda0
+                    @Override // java.util.function.IntConsumer
+                    public final void accept(int i) {
+                        PrintAttributes.enforceValidColorMode(i);
+                    }
+                });
         this.mDuplexModes = parcel.readInt();
-        enforceValidMask(this.mDuplexModes, new IntConsumer() { // from class: android.print.PrinterCapabilitiesInfo$$ExternalSyntheticLambda1
-            @Override // java.util.function.IntConsumer
-            public final void accept(int i) {
-                PrintAttributes.enforceValidDuplexMode(i);
-            }
-        });
+        enforceValidMask(
+                this.mDuplexModes,
+                new IntConsumer() { // from class:
+                                    // android.print.PrinterCapabilitiesInfo$$ExternalSyntheticLambda1
+                    @Override // java.util.function.IntConsumer
+                    public final void accept(int i) {
+                        PrintAttributes.enforceValidDuplexMode(i);
+                    }
+                });
         readDefaults(parcel);
         Preconditions.checkArgument(this.mMediaSizes.size() > this.mDefaults[0]);
         Preconditions.checkArgument(this.mResolutions.size() > this.mDefaults[1]);
@@ -178,7 +190,18 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
 
     public int hashCode() {
         int result = (1 * 31) + (this.mMinMargins == null ? 0 : this.mMinMargins.hashCode());
-        return (((((((((result * 31) + (this.mMediaSizes == null ? 0 : this.mMediaSizes.hashCode())) * 31) + (this.mResolutions != null ? this.mResolutions.hashCode() : 0)) * 31) + this.mColorModes) * 31) + this.mDuplexModes) * 31) + Arrays.hashCode(this.mDefaults);
+        return (((((((((result * 31) + (this.mMediaSizes == null ? 0 : this.mMediaSizes.hashCode()))
+                                                                        * 31)
+                                                                + (this.mResolutions != null
+                                                                        ? this.mResolutions
+                                                                                .hashCode()
+                                                                        : 0))
+                                                        * 31)
+                                                + this.mColorModes)
+                                        * 31)
+                                + this.mDuplexModes)
+                        * 31)
+                + Arrays.hashCode(this.mDefaults);
     }
 
     public boolean equals(Object obj) {
@@ -210,7 +233,9 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
         } else if (!this.mResolutions.equals(other.mResolutions)) {
             return false;
         }
-        if (this.mColorModes == other.mColorModes && this.mDuplexModes == other.mDuplexModes && Arrays.equals(this.mDefaults, other.mDefaults)) {
+        if (this.mColorModes == other.mColorModes
+                && this.mDuplexModes == other.mDuplexModes
+                && Arrays.equals(this.mDefaults, other.mDefaults)) {
             return true;
         }
         return false;
@@ -380,12 +405,15 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
         }
 
         public Builder setColorModes(int colorModes, int defaultColorMode) {
-            PrinterCapabilitiesInfo.enforceValidMask(colorModes, new IntConsumer() { // from class: android.print.PrinterCapabilitiesInfo$Builder$$ExternalSyntheticLambda1
-                @Override // java.util.function.IntConsumer
-                public final void accept(int i) {
-                    PrintAttributes.enforceValidColorMode(i);
-                }
-            });
+            PrinterCapabilitiesInfo.enforceValidMask(
+                    colorModes,
+                    new IntConsumer() { // from class:
+                                        // android.print.PrinterCapabilitiesInfo$Builder$$ExternalSyntheticLambda1
+                        @Override // java.util.function.IntConsumer
+                        public final void accept(int i) {
+                            PrintAttributes.enforceValidColorMode(i);
+                        }
+                    });
             PrintAttributes.enforceValidColorMode(defaultColorMode);
             this.mPrototype.mColorModes = colorModes;
             this.mPrototype.mDefaults[2] = defaultColorMode;
@@ -393,12 +421,15 @@ public final class PrinterCapabilitiesInfo implements Parcelable {
         }
 
         public Builder setDuplexModes(int duplexModes, int defaultDuplexMode) {
-            PrinterCapabilitiesInfo.enforceValidMask(duplexModes, new IntConsumer() { // from class: android.print.PrinterCapabilitiesInfo$Builder$$ExternalSyntheticLambda0
-                @Override // java.util.function.IntConsumer
-                public final void accept(int i) {
-                    PrintAttributes.enforceValidDuplexMode(i);
-                }
-            });
+            PrinterCapabilitiesInfo.enforceValidMask(
+                    duplexModes,
+                    new IntConsumer() { // from class:
+                                        // android.print.PrinterCapabilitiesInfo$Builder$$ExternalSyntheticLambda0
+                        @Override // java.util.function.IntConsumer
+                        public final void accept(int i) {
+                            PrintAttributes.enforceValidDuplexMode(i);
+                        }
+                    });
             PrintAttributes.enforceValidDuplexMode(defaultDuplexMode);
             this.mPrototype.mDuplexModes = duplexModes;
             this.mPrototype.mDefaults[3] = defaultDuplexMode;

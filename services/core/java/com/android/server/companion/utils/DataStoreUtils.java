@@ -2,11 +2,14 @@ package com.android.server.companion.utils;
 
 import android.util.AtomicFile;
 import android.util.Slog;
+
 import com.android.internal.util.FunctionalUtils;
+
+import org.xmlpull.v1.XmlPullParser;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import org.xmlpull.v1.XmlPullParser;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -46,7 +49,8 @@ public abstract class DataStoreUtils {
         return xmlPullParser.getEventType() == 2 && str.equals(xmlPullParser.getName());
     }
 
-    public static void writeToFileSafely(AtomicFile atomicFile, FunctionalUtils.ThrowingConsumer throwingConsumer) {
+    public static void writeToFileSafely(
+            AtomicFile atomicFile, FunctionalUtils.ThrowingConsumer throwingConsumer) {
         try {
             atomicFile.write(throwingConsumer);
         } catch (Exception e) {

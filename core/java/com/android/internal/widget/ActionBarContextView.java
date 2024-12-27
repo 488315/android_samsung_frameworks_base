@@ -17,6 +17,7 @@ import android.widget.ActionMenuPresenter;
 import android.widget.ActionMenuView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.internal.R;
 import com.android.internal.view.menu.MenuBuilder;
 
@@ -50,11 +51,14 @@ public class ActionBarContextView extends AbsActionBarView {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public ActionBarContextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ActionBarContextView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         boolean z;
         this.mMaxFontScale = 1.3f;
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ActionMode, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.ActionMode, defStyleAttr, defStyleRes);
         setBackground(a.getDrawable(0));
         this.mTitleStyleRes = a.getResourceId(2, 0);
         this.mSubtitleStyleRes = a.getResourceId(3, 0);
@@ -69,7 +73,9 @@ public class ActionBarContextView extends AbsActionBarView {
             z = true;
         }
         this.mIsThemeDeviceDefaultFamily = z;
-        this.mIsSetOpenTheme = this.mIsThemeDeviceDefaultFamily && context.getResources().getAssets().getSamsungThemeOverlays().size() > 0;
+        this.mIsSetOpenTheme =
+                this.mIsThemeDeviceDefaultFamily
+                        && context.getResources().getAssets().getSamsungThemeOverlays().size() > 0;
         if (this.mIsSetOpenTheme) {
             if (a.getResourceId(0, 0) == 17303944) {
                 setBackground(context.getDrawable(R.drawable.tw_action_bar_background));
@@ -84,7 +90,8 @@ public class ActionBarContextView extends AbsActionBarView {
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (this.mIsThemeDeviceDefaultFamily) {
-            TypedArray a = this.mContext.obtainStyledAttributes(null, R.styleable.ActionMode, 16843668, 0);
+            TypedArray a =
+                    this.mContext.obtainStyledAttributes(null, R.styleable.ActionMode, 16843668, 0);
             int height = a.getLayoutDimension(1, -1);
             if (height >= 0) {
                 setContentHeight(height);
@@ -125,7 +132,8 @@ public class ActionBarContextView extends AbsActionBarView {
                     }
                     addView(this.mMenuView, layoutParams);
                 } else {
-                    this.mActionMenuPresenter.setWidthLimit(getContext().getResources().getDisplayMetrics().widthPixels, true);
+                    this.mActionMenuPresenter.setWidthLimit(
+                            getContext().getResources().getDisplayMetrics().widthPixels, true);
                     this.mActionMenuPresenter.setItemLimit(Integer.MAX_VALUE);
                     layoutParams.width = -1;
                     layoutParams.height = this.mContentHeight;
@@ -186,7 +194,8 @@ public class ActionBarContextView extends AbsActionBarView {
             inflater.inflate(R.layout.action_bar_title_item, this);
             this.mTitleLayout = (LinearLayout) getChildAt(getChildCount() - 1);
             this.mTitleView = (TextView) this.mTitleLayout.findViewById(R.id.action_bar_title);
-            this.mSubtitleView = (TextView) this.mTitleLayout.findViewById(R.id.action_bar_subtitle);
+            this.mSubtitleView =
+                    (TextView) this.mTitleLayout.findViewById(R.id.action_bar_subtitle);
             if (this.mTitleStyleRes != 0) {
                 this.mTitleView.setTextAppearance(this.mTitleStyleRes);
             }
@@ -219,37 +228,52 @@ public class ActionBarContextView extends AbsActionBarView {
             addView(this.mClose);
         }
         View closeButton = this.mClose.findViewById(R.id.action_mode_close_button);
-        closeButton.setOnClickListener(new View.OnClickListener() { // from class: com.android.internal.widget.ActionBarContextView.1
-            @Override // android.view.View.OnClickListener
-            public void onClick(View v) {
-                mode.finish();
-            }
-        });
-        closeButton.setOnLongClickListener(new View.OnLongClickListener() { // from class: com.android.internal.widget.ActionBarContextView.2
-            @Override // android.view.View.OnLongClickListener
-            public boolean onLongClick(View v) {
-                int xOffset;
-                int[] screenPos = new int[2];
-                ActionBarContextView.this.getLocationOnScreen(screenPos);
-                int width = ActionBarContextView.this.getWidth();
-                int height = ActionBarContextView.this.getHeight();
-                int paddingStart = ActionBarContextView.this.getPaddingStart();
-                int paddingEnd = ActionBarContextView.this.getPaddingEnd();
-                int[] windowPos = new int[2];
-                ActionBarContextView.this.getLocationInWindow(windowPos);
-                Rect displayFrame = new Rect();
-                ActionBarContextView.this.getWindowVisibleDisplayFrame(displayFrame);
-                int yOffset = windowPos[1] + height;
-                if (ActionBarContextView.this.getLayoutDirection() == 0) {
-                    xOffset = ((((displayFrame.right - displayFrame.left) - (windowPos[0] + width)) + (((width - paddingStart) - paddingEnd) / 2)) + paddingEnd) - 0;
-                } else {
-                    int xOffset2 = windowPos[0];
-                    xOffset = ((xOffset2 + width) - (((width - paddingStart) - paddingEnd) / 2)) - paddingStart;
-                }
-                ActionBarContextView.this.setTooltipPosition(xOffset, yOffset);
-                return false;
-            }
-        });
+        closeButton.setOnClickListener(
+                new View
+                        .OnClickListener() { // from class:
+                                             // com.android.internal.widget.ActionBarContextView.1
+                    @Override // android.view.View.OnClickListener
+                    public void onClick(View v) {
+                        mode.finish();
+                    }
+                });
+        closeButton.setOnLongClickListener(
+                new View
+                        .OnLongClickListener() { // from class:
+                                                 // com.android.internal.widget.ActionBarContextView.2
+                    @Override // android.view.View.OnLongClickListener
+                    public boolean onLongClick(View v) {
+                        int xOffset;
+                        int[] screenPos = new int[2];
+                        ActionBarContextView.this.getLocationOnScreen(screenPos);
+                        int width = ActionBarContextView.this.getWidth();
+                        int height = ActionBarContextView.this.getHeight();
+                        int paddingStart = ActionBarContextView.this.getPaddingStart();
+                        int paddingEnd = ActionBarContextView.this.getPaddingEnd();
+                        int[] windowPos = new int[2];
+                        ActionBarContextView.this.getLocationInWindow(windowPos);
+                        Rect displayFrame = new Rect();
+                        ActionBarContextView.this.getWindowVisibleDisplayFrame(displayFrame);
+                        int yOffset = windowPos[1] + height;
+                        if (ActionBarContextView.this.getLayoutDirection() == 0) {
+                            xOffset =
+                                    ((((displayFrame.right - displayFrame.left)
+                                                                    - (windowPos[0] + width))
+                                                            + (((width - paddingStart) - paddingEnd)
+                                                                    / 2))
+                                                    + paddingEnd)
+                                            - 0;
+                        } else {
+                            int xOffset2 = windowPos[0];
+                            xOffset =
+                                    ((xOffset2 + width)
+                                                    - (((width - paddingStart) - paddingEnd) / 2))
+                                            - paddingStart;
+                        }
+                        ActionBarContextView.this.setTooltipPosition(xOffset, yOffset);
+                        return false;
+                    }
+                });
         MenuBuilder menu = (MenuBuilder) mode.getMenu();
         if (this.mActionMenuPresenter != null) {
             this.mActionMenuPresenter.dismissPopupMenus();
@@ -264,7 +288,8 @@ public class ActionBarContextView extends AbsActionBarView {
             addView(this.mMenuView, layoutParams);
             return;
         }
-        this.mActionMenuPresenter.setWidthLimit(getContext().getResources().getDisplayMetrics().widthPixels, true);
+        this.mActionMenuPresenter.setWidthLimit(
+                getContext().getResources().getDisplayMetrics().widthPixels, true);
         this.mActionMenuPresenter.setItemLimit(Integer.MAX_VALUE);
         layoutParams.width = -1;
         layoutParams.height = this.mContentHeight;
@@ -324,9 +349,9 @@ public class ActionBarContextView extends AbsActionBarView {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:36:0x00d2, code lost:
-    
-        if (r17.mClose.getVisibility() == 8) goto L41;
-     */
+
+       if (r17.mClose.getVisibility() == 8) goto L41;
+    */
     @Override // android.view.View
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -337,7 +362,9 @@ public class ActionBarContextView extends AbsActionBarView {
             Method dump skipped, instructions count: 542
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.ActionBarContextView.onMeasure(int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.widget.ActionBarContextView.onMeasure(int, int):void");
     }
 
     @Override // android.view.ViewGroup, android.view.View
@@ -348,23 +375,32 @@ public class ActionBarContextView extends AbsActionBarView {
         int y = getPaddingTop();
         int contentHeight = ((b - t) - getPaddingTop()) - getPaddingBottom();
         if (this.mClose != null && this.mClose.getVisibility() != 8) {
-            ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) this.mClose.getLayoutParams();
+            ViewGroup.MarginLayoutParams lp =
+                    (ViewGroup.MarginLayoutParams) this.mClose.getLayoutParams();
             int startMargin = isLayoutRtl ? lp.rightMargin : lp.leftMargin;
             int endMargin = isLayoutRtl ? lp.leftMargin : lp.rightMargin;
             int x3 = next(x2, startMargin, isLayoutRtl);
-            x = next(x3 + positionChild(this.mClose, x3, y, contentHeight, isLayoutRtl), endMargin, isLayoutRtl);
+            x =
+                    next(
+                            x3 + positionChild(this.mClose, x3, y, contentHeight, isLayoutRtl),
+                            endMargin,
+                            isLayoutRtl);
         } else {
             x = x2;
         }
-        if (this.mTitleLayout != null && this.mCustomView == null && this.mTitleLayout.getVisibility() != 8) {
+        if (this.mTitleLayout != null
+                && this.mCustomView == null
+                && this.mTitleLayout.getVisibility() != 8) {
             x += positionChild(this.mTitleLayout, x, y, contentHeight, isLayoutRtl);
         }
         if (this.mCustomView != null) {
-            int positionChild = x + positionChild(this.mCustomView, x, y, contentHeight, isLayoutRtl);
+            int positionChild =
+                    x + positionChild(this.mCustomView, x, y, contentHeight, isLayoutRtl);
         }
         int x4 = isLayoutRtl ? getPaddingLeft() : (r - l) - getPaddingRight();
         if (this.mMenuView != null) {
-            int positionChild2 = x4 + positionChild(this.mMenuView, x4, y, contentHeight, !isLayoutRtl);
+            int positionChild2 =
+                    x4 + positionChild(this.mMenuView, x4, y, contentHeight, !isLayoutRtl);
         }
     }
 

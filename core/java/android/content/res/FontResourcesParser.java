@@ -4,20 +4,22 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.internal.R;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class FontResourcesParser {
     private static final String TAG = "FontResourcesParser";
 
-    public interface FamilyResourceEntry {
-    }
+    public interface FamilyResourceEntry {}
 
     public static final class ProviderResourceEntry implements FamilyResourceEntry {
         private final List<List<String>> mCerts;
@@ -26,7 +28,12 @@ public class FontResourcesParser {
         private final String mQuery;
         private final String mSystemFontFamilyName;
 
-        public ProviderResourceEntry(String authority, String pkg, String query, List<List<String>> certs, String systemFontFamilyName) {
+        public ProviderResourceEntry(
+                String authority,
+                String pkg,
+                String query,
+                List<List<String>> certs,
+                String systemFontFamilyName) {
             this.mProviderAuthority = authority;
             this.mProviderPackage = pkg;
             this.mQuery = query;
@@ -66,7 +73,8 @@ public class FontResourcesParser {
         private String mVariationSettings;
         private int mWeight;
 
-        public FontFileResourceEntry(String fileName, int weight, int italic, String variationSettings, int ttcIndex) {
+        public FontFileResourceEntry(
+                String fileName, int weight, int italic, String variationSettings, int ttcIndex) {
             this.mFileName = fileName;
             this.mWeight = weight;
             this.mItalic = italic;
@@ -107,7 +115,8 @@ public class FontResourcesParser {
         }
     }
 
-    public static FamilyResourceEntry parse(XmlPullParser parser, Resources resources) throws XmlPullParserException, IOException {
+    public static FamilyResourceEntry parse(XmlPullParser parser, Resources resources)
+            throws XmlPullParserException, IOException {
         int type;
         do {
             type = parser.next();
@@ -121,7 +130,8 @@ public class FontResourcesParser {
         return readFamilies(parser, resources);
     }
 
-    private static FamilyResourceEntry readFamilies(XmlPullParser parser, Resources resources) throws XmlPullParserException, IOException {
+    private static FamilyResourceEntry readFamilies(XmlPullParser parser, Resources resources)
+            throws XmlPullParserException, IOException {
         parser.require(2, null, "font-family");
         String tag = parser.getName();
         if (tag.equals("font-family")) {
@@ -132,7 +142,8 @@ public class FontResourcesParser {
         return null;
     }
 
-    private static FamilyResourceEntry readFamily(XmlPullParser parser, Resources resources) throws XmlPullParserException, IOException {
+    private static FamilyResourceEntry readFamily(XmlPullParser parser, Resources resources)
+            throws XmlPullParserException, IOException {
         List<List<String>> certs;
         AttributeSet attrs = Xml.asAttributeSet(parser);
         TypedArray array = resources.obtainAttributes(attrs, R.styleable.FontFamily);
@@ -173,7 +184,8 @@ public class FontResourcesParser {
                 typedArray.recycle();
                 certs = certs2;
             }
-            return new ProviderResourceEntry(authority, providerPackage, query, certs, systemFontFamilyName);
+            return new ProviderResourceEntry(
+                    authority, providerPackage, query, certs, systemFontFamilyName);
         }
         List<FontFileResourceEntry> fonts = new ArrayList<>();
         while (parser.next() != 3) {
@@ -192,10 +204,12 @@ public class FontResourcesParser {
         if (fonts.isEmpty()) {
             return null;
         }
-        return new FontFamilyFilesResourceEntry((FontFileResourceEntry[]) fonts.toArray(new FontFileResourceEntry[fonts.size()]));
+        return new FontFamilyFilesResourceEntry(
+                (FontFileResourceEntry[]) fonts.toArray(new FontFileResourceEntry[fonts.size()]));
     }
 
-    private static FontFileResourceEntry readFont(XmlPullParser parser, Resources resources) throws XmlPullParserException, IOException {
+    private static FontFileResourceEntry readFont(XmlPullParser parser, Resources resources)
+            throws XmlPullParserException, IOException {
         AttributeSet attrs = Xml.asAttributeSet(parser);
         TypedArray array = resources.obtainAttributes(attrs, R.styleable.FontFamilyFont);
         int weight = array.getInt(1, -1);

@@ -1,6 +1,7 @@
 package com.android.internal.os;
 
 import android.net.LocalSocket;
+
 import java.io.FileDescriptor;
 import java.lang.ref.Reference;
 
@@ -78,9 +79,11 @@ class ZygoteCommandBuffer implements AutoCloseable {
         }
     }
 
-    boolean forkRepeatedly(FileDescriptor zygoteSocket, int expectedUid, int minUid, String firstNiceName) {
+    boolean forkRepeatedly(
+            FileDescriptor zygoteSocket, int expectedUid, int minUid, String firstNiceName) {
         try {
-            return nativeForkRepeatedly(this.mNativeBuffer, zygoteSocket.getInt$(), expectedUid, minUid, firstNiceName);
+            return nativeForkRepeatedly(
+                    this.mNativeBuffer, zygoteSocket.getInt$(), expectedUid, minUid, firstNiceName);
         } finally {
             Reference.reachabilityFence(this.mSocket);
             Reference.reachabilityFence(zygoteSocket);

@@ -1,11 +1,12 @@
 package com.samsung.android.feature;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /* loaded from: classes6.dex */
 class SecCarrier {
@@ -36,7 +37,8 @@ class SecCarrier {
         }
         String carrierGroup = salesCode;
         Map<? extends String, ? extends String> linkedHashMap = new LinkedHashMap<>();
-        if (jsonObject.has(TAG_SPECIFIC) && (specificFeatureObject = jsonObject.getJSONArray(TAG_SPECIFIC)) != null) {
+        if (jsonObject.has(TAG_SPECIFIC)
+                && (specificFeatureObject = jsonObject.getJSONArray(TAG_SPECIFIC)) != null) {
             int i = 0;
             while (true) {
                 if (i >= specificFeatureObject.length()) {
@@ -46,10 +48,15 @@ class SecCarrier {
                 if (ccid != carrierId) {
                     i++;
                 } else {
-                    Iterator<String> keys = specificFeatureObject.getJSONObject(i).getJSONObject("feature").keys();
+                    Iterator<String> keys =
+                            specificFeatureObject.getJSONObject(i).getJSONObject("feature").keys();
                     while (keys.hasNext()) {
                         String key = keys.next();
-                        String value = specificFeatureObject.getJSONObject(i).getJSONObject("feature").getString(key);
+                        String value =
+                                specificFeatureObject
+                                        .getJSONObject(i)
+                                        .getJSONObject("feature")
+                                        .getString(key);
                         if (key.equals(FEATURE_GROUP_KEY)) {
                             carrierGroup = value;
                         }
@@ -68,10 +75,16 @@ class SecCarrier {
                     this.isCarrierGroupValid = true;
                 }
                 if (carrierGroup.equals(cGroup)) {
-                    Iterator<String> keys2 = custFeatureObject.getJSONObject(i2).getJSONObject("feature").keys();
+                    Iterator<String> keys2 =
+                            custFeatureObject.getJSONObject(i2).getJSONObject("feature").keys();
                     while (keys2.hasNext()) {
                         String key2 = keys2.next();
-                        custFeatures.put(key2, custFeatureObject.getJSONObject(i2).getJSONObject("feature").getString(key2));
+                        custFeatures.put(
+                                key2,
+                                custFeatureObject
+                                        .getJSONObject(i2)
+                                        .getJSONObject("feature")
+                                        .getString(key2));
                     }
                 }
             }

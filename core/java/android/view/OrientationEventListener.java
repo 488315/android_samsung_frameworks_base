@@ -48,33 +48,39 @@ public abstract class OrientationEventListener {
         this.mNotSupportReversePortrait = false;
         if (this.mSensor != null) {
             this.mSensorEventListener = new SensorEventListenerImpl();
-            this.mDeviceInfoSensor = this.mSensorManager.getDefaultSensor(Sensor.SEM_TYPE_DEVICE_COMMON_INFO);
+            this.mDeviceInfoSensor =
+                    this.mSensorManager.getDefaultSensor(Sensor.SEM_TYPE_DEVICE_COMMON_INFO);
             if (this.mDeviceInfoSensor != null) {
                 Log.d(TAG, "supports device_common_info");
                 if (context.getPackageName().contains("whatsapp")) {
                     Log.d(TAG, "Package does not support reverse-portrait");
                     this.mNotSupportReversePortrait = true;
                 }
-                this.mDeviceInfoListener = new SensorEventListener() { // from class: android.view.OrientationEventListener.1
-                    @Override // android.hardware.SensorEventListener
-                    public void onSensorChanged(SensorEvent event) {
-                        if (event.values[0] == 3.0f) {
-                            if (event.values[1] != 1.0f) {
-                                if (event.values[1] == 0.0f) {
-                                    OrientationEventListener.this.mTableMode = false;
+                this.mDeviceInfoListener =
+                        new SensorEventListener() { // from class:
+                                                    // android.view.OrientationEventListener.1
+                            @Override // android.hardware.SensorEventListener
+                            public void onSensorChanged(SensorEvent event) {
+                                if (event.values[0] == 3.0f) {
+                                    if (event.values[1] != 1.0f) {
+                                        if (event.values[1] == 0.0f) {
+                                            OrientationEventListener.this.mTableMode = false;
+                                        }
+                                    } else if (OrientationEventListener.this
+                                                    .mNotSupportReversePortrait
+                                            && !OrientationEventListener.this.mTableMode) {
+                                        Log.d(
+                                                OrientationEventListener.TAG,
+                                                "onOrientationChanged 0");
+                                        OrientationEventListener.this.onOrientationChanged(0);
+                                        OrientationEventListener.this.mTableMode = true;
+                                    }
                                 }
-                            } else if (OrientationEventListener.this.mNotSupportReversePortrait && !OrientationEventListener.this.mTableMode) {
-                                Log.d(OrientationEventListener.TAG, "onOrientationChanged 0");
-                                OrientationEventListener.this.onOrientationChanged(0);
-                                OrientationEventListener.this.mTableMode = true;
                             }
-                        }
-                    }
 
-                    @Override // android.hardware.SensorEventListener
-                    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-                    }
-                };
+                            @Override // android.hardware.SensorEventListener
+                            public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+                        };
             }
         }
         this.mContext = context;
@@ -91,9 +97,11 @@ public abstract class OrientationEventListener {
         }
         if (!this.mEnabled) {
             this.mTableMode = false;
-            this.mSensorManager.registerListener(this.mSensorEventListener, this.mSensor, this.mRate);
+            this.mSensorManager.registerListener(
+                    this.mSensorEventListener, this.mSensor, this.mRate);
             if (this.mDeviceInfoSensor != null) {
-                this.mSensorManager.registerListener(this.mDeviceInfoListener, this.mDeviceInfoSensor, 3);
+                this.mSensorManager.registerListener(
+                        this.mDeviceInfoListener, this.mDeviceInfoSensor, 3);
             }
             this.mEnabled = true;
         }
@@ -116,8 +124,7 @@ public abstract class OrientationEventListener {
         private static final int _DATA_Y = 1;
         private static final int _DATA_Z = 2;
 
-        SensorEventListenerImpl() {
-        }
+        SensorEventListenerImpl() {}
 
         @Override // android.hardware.SensorEventListener
         public void onSensorChanged(SensorEvent event) {
@@ -158,8 +165,7 @@ public abstract class OrientationEventListener {
         }
 
         @Override // android.hardware.SensorEventListener
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        }
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {}
     }
 
     public boolean canDetectOrientation() {
@@ -169,6 +175,10 @@ public abstract class OrientationEventListener {
     /* JADX INFO: Access modifiers changed from: private */
     public boolean isInAppCastingDisplay() {
         Display display;
-        return (this.mContext == null || (display = this.mContext.getDisplayNoVerify()) == null || (display.getFlags() & 33554432) == 0) ? false : true;
+        return (this.mContext == null
+                        || (display = this.mContext.getDisplayNoVerify()) == null
+                        || (display.getFlags() & 33554432) == 0)
+                ? false
+                : true;
     }
 }

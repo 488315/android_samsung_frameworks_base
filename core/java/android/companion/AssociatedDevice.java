@@ -4,25 +4,28 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.ScanResult;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class AssociatedDevice implements Parcelable {
     private static final int BLUETOOTH_LE = 1;
     private static final int CLASSIC_BLUETOOTH = 0;
-    public static final Parcelable.Creator<AssociatedDevice> CREATOR = new Parcelable.Creator<AssociatedDevice>() { // from class: android.companion.AssociatedDevice.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssociatedDevice[] newArray(int size) {
-            return new AssociatedDevice[size];
-        }
+    public static final Parcelable.Creator<AssociatedDevice> CREATOR =
+            new Parcelable.Creator<
+                    AssociatedDevice>() { // from class: android.companion.AssociatedDevice.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssociatedDevice[] newArray(int size) {
+                    return new AssociatedDevice[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssociatedDevice createFromParcel(Parcel in) {
-            return new AssociatedDevice(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssociatedDevice createFromParcel(Parcel in) {
+                    return new AssociatedDevice(in);
+                }
+            };
     private static final int WIFI = 2;
     private final Parcelable mDevice;
 
@@ -108,7 +111,8 @@ public final class AssociatedDevice implements Parcelable {
         if (getDeviceType() != that.getDeviceType()) {
             return false;
         }
-        if ((this.mDevice instanceof ScanResult) || (this.mDevice instanceof android.net.wifi.ScanResult)) {
+        if ((this.mDevice instanceof ScanResult)
+                || (this.mDevice instanceof android.net.wifi.ScanResult)) {
             return this.mDevice.toString().equals(that.mDevice.toString());
         }
         return Objects.equals(this.mDevice, that.mDevice);

@@ -1,6 +1,7 @@
 package com.samsung.vekit.Layer;
 
 import android.util.Log;
+
 import com.samsung.vekit.Animation.Animation;
 import com.samsung.vekit.Animation.TransitionAnimation;
 import com.samsung.vekit.Common.Object.Element;
@@ -12,6 +13,7 @@ import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Interface.HierarchyInterface;
 import com.samsung.vekit.Item.Item;
 import com.samsung.vekit.Panel.Panel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -258,7 +260,8 @@ public class Layer extends Element implements HierarchyInterface<Item> {
         Iterator<TransitionAnimation> it = this.transitionAnimationList.iterator();
         while (it.hasNext()) {
             TransitionAnimation animation = it.next();
-            if (animation.getFirstTarget() == firstTarget && animation.getSecondTarget() == secondTarget) {
+            if (animation.getFirstTarget() == firstTarget
+                    && animation.getSecondTarget() == secondTarget) {
                 return animation;
             }
         }
@@ -303,12 +306,17 @@ public class Layer extends Element implements HierarchyInterface<Item> {
         if (this.availableTypes == null) {
             return;
         }
-        boolean valid = Arrays.stream(this.availableTypes).anyMatch(new Predicate() { // from class: com.samsung.vekit.Layer.Layer$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return Layer.lambda$checkValidItem$0(Item.this, (ItemType) obj);
-            }
-        });
+        boolean valid =
+                Arrays.stream(this.availableTypes)
+                        .anyMatch(
+                                new Predicate() { // from class:
+                                                  // com.samsung.vekit.Layer.Layer$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return Layer.lambda$checkValidItem$0(
+                                                Item.this, (ItemType) obj);
+                                    }
+                                });
         if (!valid) {
             throw new Exception("isInvalidElement : please attach correct Item.");
         }
@@ -321,7 +329,8 @@ public class Layer extends Element implements HierarchyInterface<Item> {
     public void checkValidAnimation(Animation animation) throws Exception {
         boolean valid = animation.getAnimationType() != AnimationType.TRANSITION;
         if (!valid) {
-            throw new Exception("isInvalidElement : please attach correct TransitionAnimation To Layer.");
+            throw new Exception(
+                    "isInvalidElement : please attach correct TransitionAnimation To Layer.");
         }
     }
 }

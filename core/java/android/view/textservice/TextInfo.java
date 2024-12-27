@@ -8,19 +8,20 @@ import android.text.style.SpellCheckSpan;
 
 /* loaded from: classes4.dex */
 public final class TextInfo implements Parcelable {
-    public static final Parcelable.Creator<TextInfo> CREATOR = new Parcelable.Creator<TextInfo>() { // from class: android.view.textservice.TextInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextInfo createFromParcel(Parcel source) {
-            return new TextInfo(source);
-        }
+    public static final Parcelable.Creator<TextInfo> CREATOR =
+            new Parcelable.Creator<TextInfo>() { // from class: android.view.textservice.TextInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextInfo createFromParcel(Parcel source) {
+                    return new TextInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextInfo[] newArray(int size) {
-            return new TextInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextInfo[] newArray(int size) {
+                    return new TextInfo[size];
+                }
+            };
     private static final int DEFAULT_COOKIE = 0;
     private static final int DEFAULT_SEQUENCE_NUMBER = 0;
     private final CharSequence mCharSequence;
@@ -46,8 +47,11 @@ public final class TextInfo implements Parcelable {
         if (TextUtils.isEmpty(charSequence)) {
             throw new IllegalArgumentException("charSequence is empty");
         }
-        SpannableStringBuilder spannableString = new SpannableStringBuilder(charSequence, start, end);
-        SpellCheckSpan[] spans = (SpellCheckSpan[]) spannableString.getSpans(0, spannableString.length(), SpellCheckSpan.class);
+        SpannableStringBuilder spannableString =
+                new SpannableStringBuilder(charSequence, start, end);
+        SpellCheckSpan[] spans =
+                (SpellCheckSpan[])
+                        spannableString.getSpans(0, spannableString.length(), SpellCheckSpan.class);
         for (SpellCheckSpan spellCheckSpan : spans) {
             spannableString.removeSpan(spellCheckSpan);
         }

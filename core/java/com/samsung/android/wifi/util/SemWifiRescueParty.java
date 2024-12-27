@@ -1,6 +1,7 @@
 package com.samsung.android.wifi.util;
 
 import android.util.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +34,15 @@ public class SemWifiRescueParty {
         if (removeFile("/data/system/WifiConfigStore.db-journal")) {
             counter++;
         }
-        int counter2 = counter + removeFiles("/data/misc/wifi") + removeFiles("/data/misc/apexdata/com.android.wifi");
+        int counter2 =
+                counter
+                        + removeFiles("/data/misc/wifi")
+                        + removeFiles("/data/misc/apexdata/com.android.wifi");
         for (int userId : userIds) {
-            counter2 = counter2 + removeFiles(MISC_USER_PATH + userId + "/wifi") + removeFiles(MISC_USER_PATH + userId + "/" + APEX_WIFI_DATA_PATH);
+            counter2 =
+                    counter2
+                            + removeFiles(MISC_USER_PATH + userId + "/wifi")
+                            + removeFiles(MISC_USER_PATH + userId + "/" + APEX_WIFI_DATA_PATH);
         }
         Log.e(TAG, "reset all Wi-Fi stored files: " + counter2);
         return counter2;
@@ -68,7 +75,8 @@ public class SemWifiRescueParty {
         return counter;
     }
 
-    private static void fetchCompleteList(List<String> filesList, List<String> folderList, String path) {
+    private static void fetchCompleteList(
+            List<String> filesList, List<String> folderList, String path) {
         File file = new File(path);
         File[] listOfFile = file.listFiles();
         if (listOfFile != null) {

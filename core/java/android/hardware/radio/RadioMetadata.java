@@ -10,7 +10,9 @@ import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.hidden_from_bootclasspath.android.hardware.radio.Flags;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,21 +28,34 @@ public final class RadioMetadata implements Parcelable {
     public static final String METADATA_KEY_ART = "android.hardware.radio.metadata.ART";
     public static final String METADATA_KEY_ARTIST = "android.hardware.radio.metadata.ARTIST";
     public static final String METADATA_KEY_CLOCK = "android.hardware.radio.metadata.CLOCK";
-    public static final String METADATA_KEY_COMMENT_ACTUAL_TEXT = "android.hardware.radio.metadata.COMMENT_ACTUAL_TEXT";
-    public static final String METADATA_KEY_COMMENT_SHORT_DESCRIPTION = "android.hardware.radio.metadata.COMMENT_SHORT_DESCRIPTION";
-    public static final String METADATA_KEY_COMMERCIAL = "android.hardware.radio.metadata.COMMERCIAL";
-    public static final String METADATA_KEY_DAB_COMPONENT_NAME = "android.hardware.radio.metadata.DAB_COMPONENT_NAME";
-    public static final String METADATA_KEY_DAB_COMPONENT_NAME_SHORT = "android.hardware.radio.metadata.DAB_COMPONENT_NAME_SHORT";
-    public static final String METADATA_KEY_DAB_ENSEMBLE_NAME = "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME";
-    public static final String METADATA_KEY_DAB_ENSEMBLE_NAME_SHORT = "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME_SHORT";
-    public static final String METADATA_KEY_DAB_SERVICE_NAME = "android.hardware.radio.metadata.DAB_SERVICE_NAME";
-    public static final String METADATA_KEY_DAB_SERVICE_NAME_SHORT = "android.hardware.radio.metadata.DAB_SERVICE_NAME_SHORT";
+    public static final String METADATA_KEY_COMMENT_ACTUAL_TEXT =
+            "android.hardware.radio.metadata.COMMENT_ACTUAL_TEXT";
+    public static final String METADATA_KEY_COMMENT_SHORT_DESCRIPTION =
+            "android.hardware.radio.metadata.COMMENT_SHORT_DESCRIPTION";
+    public static final String METADATA_KEY_COMMERCIAL =
+            "android.hardware.radio.metadata.COMMERCIAL";
+    public static final String METADATA_KEY_DAB_COMPONENT_NAME =
+            "android.hardware.radio.metadata.DAB_COMPONENT_NAME";
+    public static final String METADATA_KEY_DAB_COMPONENT_NAME_SHORT =
+            "android.hardware.radio.metadata.DAB_COMPONENT_NAME_SHORT";
+    public static final String METADATA_KEY_DAB_ENSEMBLE_NAME =
+            "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME";
+    public static final String METADATA_KEY_DAB_ENSEMBLE_NAME_SHORT =
+            "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME_SHORT";
+    public static final String METADATA_KEY_DAB_SERVICE_NAME =
+            "android.hardware.radio.metadata.DAB_SERVICE_NAME";
+    public static final String METADATA_KEY_DAB_SERVICE_NAME_SHORT =
+            "android.hardware.radio.metadata.DAB_SERVICE_NAME_SHORT";
     public static final String METADATA_KEY_GENRE = "android.hardware.radio.metadata.GENRE";
-    public static final String METADATA_KEY_HD_STATION_NAME_LONG = "android.hardware.radio.metadata.HD_STATION_NAME_LONG";
-    public static final String METADATA_KEY_HD_STATION_NAME_SHORT = "android.hardware.radio.metadata.HD_STATION_NAME_SHORT";
-    public static final String METADATA_KEY_HD_SUBCHANNELS_AVAILABLE = "android.hardware.radio.metadata.HD_SUBCHANNELS_AVAILABLE";
+    public static final String METADATA_KEY_HD_STATION_NAME_LONG =
+            "android.hardware.radio.metadata.HD_STATION_NAME_LONG";
+    public static final String METADATA_KEY_HD_STATION_NAME_SHORT =
+            "android.hardware.radio.metadata.HD_STATION_NAME_SHORT";
+    public static final String METADATA_KEY_HD_SUBCHANNELS_AVAILABLE =
+            "android.hardware.radio.metadata.HD_SUBCHANNELS_AVAILABLE";
     public static final String METADATA_KEY_ICON = "android.hardware.radio.metadata.ICON";
-    public static final String METADATA_KEY_PROGRAM_NAME = "android.hardware.radio.metadata.PROGRAM_NAME";
+    public static final String METADATA_KEY_PROGRAM_NAME =
+            "android.hardware.radio.metadata.PROGRAM_NAME";
     public static final String METADATA_KEY_RBDS_PTY = "android.hardware.radio.metadata.RBDS_PTY";
     public static final String METADATA_KEY_RDS_PI = "android.hardware.radio.metadata.RDS_PI";
     public static final String METADATA_KEY_RDS_PS = "android.hardware.radio.metadata.RDS_PS";
@@ -112,36 +127,40 @@ public final class RadioMetadata implements Parcelable {
         NATIVE_KEY_MAPPING.put(9, METADATA_KEY_ICON);
         NATIVE_KEY_MAPPING.put(10, METADATA_KEY_ART);
         NATIVE_KEY_MAPPING.put(11, METADATA_KEY_CLOCK);
-        CREATOR = new Parcelable.Creator<RadioMetadata>() { // from class: android.hardware.radio.RadioMetadata.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public RadioMetadata createFromParcel(Parcel in) {
-                return new RadioMetadata(in);
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        RadioMetadata>() { // from class: android.hardware.radio.RadioMetadata.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public RadioMetadata createFromParcel(Parcel in) {
+                        return new RadioMetadata(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public RadioMetadata[] newArray(int size) {
-                return new RadioMetadata[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public RadioMetadata[] newArray(int size) {
+                        return new RadioMetadata[size];
+                    }
+                };
     }
 
     @SystemApi
     public static final class Clock implements Parcelable {
-        public static final Parcelable.Creator<Clock> CREATOR = new Parcelable.Creator<Clock>() { // from class: android.hardware.radio.RadioMetadata.Clock.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Clock createFromParcel(Parcel in) {
-                return new Clock(in);
-            }
+        public static final Parcelable.Creator<Clock> CREATOR =
+                new Parcelable.Creator<
+                        Clock>() { // from class: android.hardware.radio.RadioMetadata.Clock.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Clock createFromParcel(Parcel in) {
+                        return new Clock(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Clock[] newArray(int size) {
-                return new Clock[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Clock[] newArray(int size) {
+                        return new Clock[size];
+                    }
+                };
         private final int mTimezoneOffsetMinutes;
         private final long mUtcEpochSeconds;
 
@@ -203,7 +222,8 @@ public final class RadioMetadata implements Parcelable {
         }
         for (String key : this.mBundle.keySet()) {
             if (Flags.hdRadioImproved() && Objects.equals(METADATA_KEYS_TYPE.get(key), 4)) {
-                if (!Arrays.equals(this.mBundle.getStringArray(key), otherBundle.getStringArray(key))) {
+                if (!Arrays.equals(
+                        this.mBundle.getStringArray(key), otherBundle.getStringArray(key))) {
                     return false;
                 }
             } else if (!Objects.equals(this.mBundle.get(key), otherBundle.get(key))) {
@@ -311,7 +331,8 @@ public final class RadioMetadata implements Parcelable {
     public String[] getStringArray(String key) {
         Objects.requireNonNull(key, "Metadata key can not be null");
         if (!Objects.equals(METADATA_KEYS_TYPE.get(key), 4)) {
-            throw new IllegalArgumentException("Failed to retrieve key " + key + " as string array");
+            throw new IllegalArgumentException(
+                    "Failed to retrieve key " + key + " as string array");
         }
         String[] stringArrayValue = this.mBundle.getStringArray(key);
         if (stringArrayValue == null) {
@@ -367,8 +388,10 @@ public final class RadioMetadata implements Parcelable {
         }
 
         public Builder putString(String key, String value) {
-            if (!RadioMetadata.METADATA_KEYS_TYPE.containsKey(key) || ((Integer) RadioMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 1) {
-                throw new IllegalArgumentException("The " + key + " key cannot be used to put a String");
+            if (!RadioMetadata.METADATA_KEYS_TYPE.containsKey(key)
+                    || ((Integer) RadioMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 1) {
+                throw new IllegalArgumentException(
+                        "The " + key + " key cannot be used to put a String");
             }
             this.mBundle.putString(key, value);
             return this;
@@ -380,16 +403,20 @@ public final class RadioMetadata implements Parcelable {
         }
 
         public Builder putBitmap(String key, Bitmap value) {
-            if (!RadioMetadata.METADATA_KEYS_TYPE.containsKey(key) || ((Integer) RadioMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 2) {
-                throw new IllegalArgumentException("The " + key + " key cannot be used to put a Bitmap");
+            if (!RadioMetadata.METADATA_KEYS_TYPE.containsKey(key)
+                    || ((Integer) RadioMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 2) {
+                throw new IllegalArgumentException(
+                        "The " + key + " key cannot be used to put a Bitmap");
             }
             this.mBundle.putParcelable(key, value);
             return this;
         }
 
         public Builder putClock(String key, long utcSecondsSinceEpoch, int timezoneOffsetMinutes) {
-            if (!RadioMetadata.METADATA_KEYS_TYPE.containsKey(key) || ((Integer) RadioMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 3) {
-                throw new IllegalArgumentException("The " + key + " key cannot be used to put a RadioMetadata.Clock.");
+            if (!RadioMetadata.METADATA_KEYS_TYPE.containsKey(key)
+                    || ((Integer) RadioMetadata.METADATA_KEYS_TYPE.get(key)).intValue() != 3) {
+                throw new IllegalArgumentException(
+                        "The " + key + " key cannot be used to put a RadioMetadata.Clock.");
             }
             this.mBundle.putParcelable(key, new Clock(utcSecondsSinceEpoch, timezoneOffsetMinutes));
             return this;
@@ -398,8 +425,10 @@ public final class RadioMetadata implements Parcelable {
         public Builder putStringArray(String key, String[] value) {
             Objects.requireNonNull(key, "Key can not be null");
             Objects.requireNonNull(value, "Value can not be null");
-            if (!RadioMetadata.METADATA_KEYS_TYPE.containsKey(key) || !Objects.equals(RadioMetadata.METADATA_KEYS_TYPE.get(key), 4)) {
-                throw new IllegalArgumentException("The " + key + " key cannot be used to put a RadioMetadata String Array.");
+            if (!RadioMetadata.METADATA_KEYS_TYPE.containsKey(key)
+                    || !Objects.equals(RadioMetadata.METADATA_KEYS_TYPE.get(key), 4)) {
+                throw new IllegalArgumentException(
+                        "The " + key + " key cannot be used to put a RadioMetadata String Array.");
             }
             this.mBundle.putStringArray(key, value);
             return this;

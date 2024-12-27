@@ -1,7 +1,9 @@
 package com.android.internal.accessibility.common;
 
 import android.content.ComponentName;
+
 import com.android.internal.accessibility.AccessibilityShortcutController;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
@@ -11,7 +13,25 @@ public final class ShortcutConstants {
     public static final String CHOOSER_PACKAGE_NAME = "android";
     public static final char SERVICES_SEPARATOR = ':';
     public static final int[] USER_SHORTCUT_TYPES = {1, 2, 4, 8, 16, 512};
-    public static final Map<ComponentName, ComponentName> A11Y_FEATURE_TO_FRAMEWORK_TILE = Map.of(AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME, AccessibilityShortcutController.COLOR_INVERSION_TILE_COMPONENT_NAME, AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME, AccessibilityShortcutController.DALTONIZER_TILE_COMPONENT_NAME, AccessibilityShortcutController.ONE_HANDED_COMPONENT_NAME, AccessibilityShortcutController.ONE_HANDED_TILE_COMPONENT_NAME, AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME, AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME, AccessibilityShortcutController.FONT_SIZE_COMPONENT_NAME, AccessibilityShortcutController.FONT_SIZE_TILE_COMPONENT_NAME, AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME, AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_TILE_COMPONENT_NAME, AccessibilityShortcutController.COLOR_LENS_COMPONENT_NAME, AccessibilityShortcutController.COLOR_LENS_TILE_COMPONENT_NAME, AccessibilityShortcutController.HIGH_CONTRAST_FONTS_COMPONENT_NAME, AccessibilityShortcutController.HIGH_CONTRAST_FONTS_TILE_COMPONENT_NAME);
+    public static final Map<ComponentName, ComponentName> A11Y_FEATURE_TO_FRAMEWORK_TILE =
+            Map.of(
+                    AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME,
+                    AccessibilityShortcutController.COLOR_INVERSION_TILE_COMPONENT_NAME,
+                    AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME,
+                    AccessibilityShortcutController.DALTONIZER_TILE_COMPONENT_NAME,
+                    AccessibilityShortcutController.ONE_HANDED_COMPONENT_NAME,
+                    AccessibilityShortcutController.ONE_HANDED_TILE_COMPONENT_NAME,
+                    AccessibilityShortcutController.REDUCE_BRIGHT_COLORS_COMPONENT_NAME,
+                    AccessibilityShortcutController
+                            .REDUCE_BRIGHT_COLORS_TILE_SERVICE_COMPONENT_NAME,
+                    AccessibilityShortcutController.FONT_SIZE_COMPONENT_NAME,
+                    AccessibilityShortcutController.FONT_SIZE_TILE_COMPONENT_NAME,
+                    AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME,
+                    AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_TILE_COMPONENT_NAME,
+                    AccessibilityShortcutController.COLOR_LENS_COMPONENT_NAME,
+                    AccessibilityShortcutController.COLOR_LENS_TILE_COMPONENT_NAME,
+                    AccessibilityShortcutController.HIGH_CONTRAST_FONTS_COMPONENT_NAME,
+                    AccessibilityShortcutController.HIGH_CONTRAST_FONTS_TILE_COMPONENT_NAME);
 
     @Retention(RetentionPolicy.SOURCE)
     public @interface AccessibilityFragmentType {
@@ -49,6 +69,5 @@ public final class ShortcutConstants {
         public static final int TWOFINGER_DOUBLETAP = 8;
     }
 
-    private ShortcutConstants() {
-    }
+    private ShortcutConstants() {}
 }

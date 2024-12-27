@@ -3,6 +3,7 @@ package com.android.server.biometrics.sensors.face.aidl;
 import android.hardware.biometrics.face.ISession;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.biometrics.sensors.ClientMonitorCallback;
 import com.android.server.biometrics.sensors.StopUserClient;
 
@@ -30,6 +31,5 @@ public final class FaceStopUserClient extends StopUserClient {
     }
 
     @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public final void unableToStart() {
-    }
+    public final void unableToStart() {}
 }

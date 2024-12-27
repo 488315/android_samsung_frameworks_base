@@ -14,12 +14,10 @@ public interface IWindowFocusObserver extends IInterface {
 
     public static class Default implements IWindowFocusObserver {
         @Override // android.view.IWindowFocusObserver
-        public void focusGained(IBinder inputToken) throws RemoteException {
-        }
+        public void focusGained(IBinder inputToken) throws RemoteException {}
 
         @Override // android.view.IWindowFocusObserver
-        public void focusLost(IBinder inputToken) throws RemoteException {
-        }
+        public void focusLost(IBinder inputToken) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +25,7 @@ public interface IWindowFocusObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWindowFocusObserver {
+    public abstract static class Stub extends Binder implements IWindowFocusObserver {
         public static final String DESCRIPTOR = "android.view.IWindowFocusObserver";
         static final int TRANSACTION_focusGained = 1;
         static final int TRANSACTION_focusLost = 2;
@@ -69,7 +67,8 @@ public interface IWindowFocusObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

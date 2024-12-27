@@ -1,7 +1,9 @@
 package android.content.pm;
 
 import android.annotation.NonNull;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +20,10 @@ public final class ArchivedPackageInfo {
     private int mVersionCode;
     private int mVersionCodeMajor;
 
-    public ArchivedPackageInfo(String packageName, SigningInfo signingInfo, List<ArchivedActivityInfo> launcherActivities) {
+    public ArchivedPackageInfo(
+            String packageName,
+            SigningInfo signingInfo,
+            List<ArchivedActivityInfo> launcherActivities) {
         this.mVersionCode = 0;
         this.mVersionCodeMajor = 0;
         this.mTargetSdkVersion = 0;
@@ -106,13 +111,15 @@ public final class ArchivedPackageInfo {
 
     public ArchivedPackageInfo setPackageName(String value) {
         this.mPackageName = value;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
         return this;
     }
 
     public ArchivedPackageInfo setSigningInfo(SigningInfo value) {
         this.mSigningInfo = value;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSigningInfo);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSigningInfo);
         return this;
     }
 
@@ -148,11 +155,11 @@ public final class ArchivedPackageInfo {
 
     public ArchivedPackageInfo setLauncherActivities(List<ArchivedActivityInfo> value) {
         this.mLauncherActivities = value;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLauncherActivities);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mLauncherActivities);
         return this;
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

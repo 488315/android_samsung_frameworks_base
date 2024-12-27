@@ -6,14 +6,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.GraphicsStatsService;
-import android.graphics.rendererpolicy.GraphicsRendererPolicy;
-import android.graphics.rendererpolicy.ScpmApiContract;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -29,10 +28,13 @@ import java.util.concurrent.TimeUnit;
 
 /* loaded from: classes.dex */
 public class GraphicsRendererPolicy {
-    private static final String ACTION_SCPM_UPDATE_RENDER_ENGINE_POLICY = "com.samsung.android.scpm.policy.UPDATE.hwui-skiagl-blocklist";
+    private static final String ACTION_SCPM_UPDATE_RENDER_ENGINE_POLICY =
+            "com.samsung.android.scpm.policy.UPDATE.hwui-skiagl-blocklist";
     private static final String AGENT_POLICY_FILE_DIRECTORY = "/data/system/";
-    private static final String AGENT_POLICY_UPDATED_FILE_NAME = "graphics_render_engine_policy.json";
-    private static final String AGENT_POLICY_UPDATED_TEMP_FILE_NAME = "graphics_render_engine_policy_temp.json";
+    private static final String AGENT_POLICY_UPDATED_FILE_NAME =
+            "graphics_render_engine_policy.json";
+    private static final String AGENT_POLICY_UPDATED_TEMP_FILE_NAME =
+            "graphics_render_engine_policy_temp.json";
     private static final String APP_ID = "zhjjzjgalv";
     private static final String FRAMEWORK_PACKAGE_NAME = "android";
     private static final String SCPM_POLICY_NAME = "hwui-skiagl-blocklist";
@@ -84,7 +86,8 @@ public class GraphicsRendererPolicy {
     public GraphicsRendererPolicy(Context context) {
         gLogD("Constructor GraphicsRendererPolicy");
         this.mContext = context;
-        this.mGraphicsRendererPolicyCipher = new GraphicsRendererPolicyCipher(this.mContext, APP_ID);
+        this.mGraphicsRendererPolicyCipher =
+                new GraphicsRendererPolicyCipher(this.mContext, APP_ID);
         this.mExecutorService = Executors.newSingleThreadScheduledExecutor();
         this.mBlocklistChecker = new BlocklistChecker();
         init();
@@ -92,12 +95,14 @@ public class GraphicsRendererPolicy {
 
     private void init() {
         initForScpm();
-        this.mExecutorService.execute(new Runnable() { // from class: android.graphics.rendererpolicy.GraphicsRendererPolicy$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                GraphicsRendererPolicy.this.lambda$init$0();
-            }
-        });
+        this.mExecutorService.execute(
+                new Runnable() { // from class:
+                    // android.graphics.rendererpolicy.GraphicsRendererPolicy$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        GraphicsRendererPolicy.this.lambda$init$0();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -129,35 +134,45 @@ public class GraphicsRendererPolicy {
 
     /* renamed from: android.graphics.rendererpolicy.GraphicsRendererPolicy$1, reason: invalid class name */
     class AnonymousClass1 extends BroadcastReceiver {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.content.BroadcastReceiver
         public void onReceive(final Context context, Intent intent) {
-            if (GraphicsRendererPolicy.ACTION_SCPM_UPDATE_RENDER_ENGINE_POLICY.equals(intent.getAction())) {
+            if (GraphicsRendererPolicy.ACTION_SCPM_UPDATE_RENDER_ENGINE_POLICY.equals(
+                    intent.getAction())) {
                 Slog.d(GraphicsRendererPolicy.TAG, "ACTION_UPDATE_RENDER_ENGINE");
-                GraphicsRendererPolicy.this.mExecutorService.execute(new Runnable() { // from class: android.graphics.rendererpolicy.GraphicsRendererPolicy$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        GraphicsRendererPolicy.AnonymousClass1.this.lambda$onReceive$0(context);
-                    }
-                });
+                GraphicsRendererPolicy.this.mExecutorService.execute(
+                        new Runnable() { // from class:
+                            // android.graphics.rendererpolicy.GraphicsRendererPolicy$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                GraphicsRendererPolicy.AnonymousClass1.this.lambda$onReceive$0(
+                                        context);
+                            }
+                        });
             } else if ("com.samsung.android.scpm.policy.CLEAR_DATA".equals(intent.getAction())) {
                 Slog.d(GraphicsRendererPolicy.TAG, "ACTION_CLEAR_DATA");
-                GraphicsRendererPolicy.this.mExecutorService.schedule(new Runnable() { // from class: android.graphics.rendererpolicy.GraphicsRendererPolicy$1$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        GraphicsRendererPolicy.AnonymousClass1.this.lambda$onReceive$1();
-                    }
-                }, 60L, TimeUnit.SECONDS);
+                GraphicsRendererPolicy.this.mExecutorService.schedule(
+                        new Runnable() { // from class:
+                            // android.graphics.rendererpolicy.GraphicsRendererPolicy$1$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                GraphicsRendererPolicy.AnonymousClass1.this.lambda$onReceive$1();
+                            }
+                        },
+                        60L,
+                        TimeUnit.SECONDS);
             } else if (Intent.ACTION_LAZY_BOOT_COMPLETED.equals(intent.getAction())) {
                 Slog.d(GraphicsRendererPolicy.TAG, "ACTION_LAZY_BOOT_COMPLETED");
-                GraphicsRendererPolicy.this.mExecutorService.execute(new Runnable() { // from class: android.graphics.rendererpolicy.GraphicsRendererPolicy$1$$ExternalSyntheticLambda2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        GraphicsRendererPolicy.AnonymousClass1.this.lambda$onReceive$2(context);
-                    }
-                });
+                GraphicsRendererPolicy.this.mExecutorService.execute(
+                        new Runnable() { // from class:
+                            // android.graphics.rendererpolicy.GraphicsRendererPolicy$1$$ExternalSyntheticLambda2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                GraphicsRendererPolicy.AnonymousClass1.this.lambda$onReceive$2(
+                                        context);
+                            }
+                        });
             }
         }
 
@@ -213,13 +228,22 @@ public class GraphicsRendererPolicy {
         String chipsetName = SystemProperties.get("ro.soc.model", "");
         String osVersionString = SystemProperties.get("ro.build.version.release", "0");
         int osVersion = Integer.parseInt(osVersionString);
-        gLogD("makeQueryInfo - packageName: " + packageName + ", modelName: " + modelName + ", chipsetName: " + chipsetName + ", osVersion: " + osVersion);
+        gLogD(
+                "makeQueryInfo - packageName: "
+                        + packageName
+                        + ", modelName: "
+                        + modelName
+                        + ", chipsetName: "
+                        + chipsetName
+                        + ", osVersion: "
+                        + osVersion);
         return new QueryInfo(packageName, modelName, chipsetName, osVersion);
     }
 
     private InputStream getFdFromStoredPolicy() {
         try {
-            File encryptedFile = new File(AGENT_POLICY_FILE_DIRECTORY, AGENT_POLICY_UPDATED_FILE_NAME);
+            File encryptedFile =
+                    new File(AGENT_POLICY_FILE_DIRECTORY, AGENT_POLICY_UPDATED_FILE_NAME);
             if (!encryptedFile.exists()) {
                 gLogW("getFdFromConfiguration encrypted File is not exist.");
                 return null;
@@ -242,7 +266,14 @@ public class GraphicsRendererPolicy {
                 extras.putString(ScpmApiContract.Key.APP_ID, APP_ID);
                 extras.putString("version", "1.0.0");
                 extras.putString(ScpmApiContract.Key.RECEIVER_PACKAGE_NAME, "android");
-                Bundle bundle = this.mContext.getContentResolver().call(this.SCPM_URI_V2, ScpmApiContract.Method.REGISTER, "android", extras);
+                Bundle bundle =
+                        this.mContext
+                                .getContentResolver()
+                                .call(
+                                        this.SCPM_URI_V2,
+                                        ScpmApiContract.Method.REGISTER,
+                                        "android",
+                                        extras);
                 if (bundle != null) {
                     int result = bundle.getInt("result", 1);
                     String token = bundle.getString("token", null);
@@ -331,9 +362,11 @@ public class GraphicsRendererPolicy {
         try {
             InputStream inputStream = new ByteArrayInputStream(jsonBuilder.toString().getBytes());
             try {
-                File tempFile = new File(AGENT_POLICY_FILE_DIRECTORY, AGENT_POLICY_UPDATED_TEMP_FILE_NAME);
+                File tempFile =
+                        new File(AGENT_POLICY_FILE_DIRECTORY, AGENT_POLICY_UPDATED_TEMP_FILE_NAME);
                 this.mGraphicsRendererPolicyCipher.encrypt(inputStream, tempFile);
-                File originalFile = new File(AGENT_POLICY_FILE_DIRECTORY, AGENT_POLICY_UPDATED_FILE_NAME);
+                File originalFile =
+                        new File(AGENT_POLICY_FILE_DIRECTORY, AGENT_POLICY_UPDATED_FILE_NAME);
                 if (originalFile.exists() && !originalFile.delete()) {
                     gLogE("original file deletion failed");
                 }
@@ -361,7 +394,11 @@ public class GraphicsRendererPolicy {
                     gLogD("bundle is null");
                     return null;
                 }
-                gLogD("code=" + bundle.getInt(ScpmApiContract.Key.RCODE, -1) + ", msg=" + bundle.getString(ScpmApiContract.Key.RMSG));
+                gLogD(
+                        "code="
+                                + bundle.getInt(ScpmApiContract.Key.RCODE, -1)
+                                + ", msg="
+                                + bundle.getString(ScpmApiContract.Key.RMSG));
                 return null;
             }
             gLogD("end of the get data");

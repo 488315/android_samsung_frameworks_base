@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Trace;
 import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -18,17 +19,23 @@ public class SemBitmapFactory {
     private static final String TAG = "SemBitmapFactory";
     private static boolean mLibraryLoaded = false;
 
-    private static native Bitmap native_decodeByteArray(byte[] bArr, int i, int i2, BitmapFactory.Options options, int i3);
+    private static native Bitmap native_decodeByteArray(
+            byte[] bArr, int i, int i2, BitmapFactory.Options options, int i3);
 
-    private static native Bitmap native_decodeFile(String str, BitmapFactory.Options options, int i);
+    private static native Bitmap native_decodeFile(
+            String str, BitmapFactory.Options options, int i);
 
-    private static native Bitmap native_decodeFileDescriptor(FileDescriptor fileDescriptor, BitmapFactory.Options options, int i);
+    private static native Bitmap native_decodeFileDescriptor(
+            FileDescriptor fileDescriptor, BitmapFactory.Options options, int i);
 
-    private static native Bitmap native_decodePhotoHdrByteArray(byte[] bArr, int i, int i2, BitmapFactory.Options options);
+    private static native Bitmap native_decodePhotoHdrByteArray(
+            byte[] bArr, int i, int i2, BitmapFactory.Options options);
 
-    private static native Bitmap native_decodePhotoHdrFile(String str, BitmapFactory.Options options);
+    private static native Bitmap native_decodePhotoHdrFile(
+            String str, BitmapFactory.Options options);
 
-    private static native Bitmap native_decodeStream(InputStream inputStream, BitmapFactory.Options options, int i);
+    private static native Bitmap native_decodeStream(
+            InputStream inputStream, BitmapFactory.Options options, int i);
 
     private static native byte[] native_getExifData(String str);
 
@@ -66,10 +73,16 @@ public class SemBitmapFactory {
         }
         Log.d(TAG, "decodeFile e");
         if (opts != null) {
-            Log.d(TAG, "opts.semInApplyPhotoHdr:" + opts.semInApplyPhotoHdr + "  opts.semInCreateGainmap:" + opts.semInCreateGainmap);
+            Log.d(
+                    TAG,
+                    "opts.semInApplyPhotoHdr:"
+                            + opts.semInApplyPhotoHdr
+                            + "  opts.semInCreateGainmap:"
+                            + opts.semInCreateGainmap);
             if (opts.inBitmap != null) {
                 if (opts.inBitmap.getConfig() == Bitmap.Config.HARDWARE) {
-                    throw new IllegalArgumentException("Bitmaps with Config.HARDWARE are always immutable");
+                    throw new IllegalArgumentException(
+                            "Bitmaps with Config.HARDWARE are always immutable");
                 }
                 if (opts.inBitmap.isRecycled()) {
                     throw new IllegalArgumentException("Cannot reuse a recycled Bitmap");
@@ -110,7 +123,8 @@ public class SemBitmapFactory {
         }
     }
 
-    private static Bitmap decodePhotoHdrByteArray(byte[] data, int offset, int length, BitmapFactory.Options opts) {
+    private static Bitmap decodePhotoHdrByteArray(
+            byte[] data, int offset, int length, BitmapFactory.Options opts) {
         try {
             Bitmap coverBitmap = native_decodePhotoHdrByteArray(data, offset, length, opts);
             if (coverBitmap != null) {
@@ -179,17 +193,24 @@ public class SemBitmapFactory {
         }
     }
 
-    public static Bitmap decodeByteArray(byte[] data, int offset, int length, BitmapFactory.Options opts) {
+    public static Bitmap decodeByteArray(
+            byte[] data, int offset, int length, BitmapFactory.Options opts) {
         if (!mLibraryLoaded) {
             Log.e(TAG, "decodeByteArray - mLibraryLoaded is false");
             return null;
         }
         Log.d(TAG, "decodeByteArray e");
         if (opts != null) {
-            Log.d(TAG, "opts.semInApplyPhotoHdr:" + opts.semInApplyPhotoHdr + "  opts.semInCreateGainmap:" + opts.semInCreateGainmap);
+            Log.d(
+                    TAG,
+                    "opts.semInApplyPhotoHdr:"
+                            + opts.semInApplyPhotoHdr
+                            + "  opts.semInCreateGainmap:"
+                            + opts.semInCreateGainmap);
             if (opts.inBitmap != null) {
                 if (opts.inBitmap.getConfig() == Bitmap.Config.HARDWARE) {
-                    throw new IllegalArgumentException("Bitmaps with Config.HARDWARE are always immutable");
+                    throw new IllegalArgumentException(
+                            "Bitmaps with Config.HARDWARE are always immutable");
                 }
                 if (opts.inBitmap.isRecycled()) {
                     throw new IllegalArgumentException("Cannot reuse a recycled Bitmap");
@@ -234,7 +255,8 @@ public class SemBitmapFactory {
         return thumbBitmap;
     }
 
-    public static Bitmap decodeThumbnailFileDescriptor(FileDescriptor fd, BitmapFactory.Options opts) {
+    public static Bitmap decodeThumbnailFileDescriptor(
+            FileDescriptor fd, BitmapFactory.Options opts) {
         if (!mLibraryLoaded) {
             Log.e(TAG, "decodeThumbnailFileDescriptor - mLibraryLoaded is false");
             return null;
@@ -289,7 +311,8 @@ public class SemBitmapFactory {
         }
     }
 
-    public static Bitmap decodeThumbnailByteArray(byte[] data, int offset, int length, BitmapFactory.Options opts) {
+    public static Bitmap decodeThumbnailByteArray(
+            byte[] data, int offset, int length, BitmapFactory.Options opts) {
         if (!mLibraryLoaded) {
             Log.e(TAG, "decodeThumbnailByteArray - mLibraryLoaded is false");
             return null;

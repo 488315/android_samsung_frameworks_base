@@ -4,8 +4,6 @@ import android.annotation.SystemApi;
 import android.app.BroadcastOptions;
 import android.app.IApplicationThread;
 import android.app.IServiceConnection;
-import android.content.ContextParams;
-import android.content.IntentSender;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -32,6 +30,7 @@ import android.view.DisplayAdjustments;
 import android.view.ViewDebug;
 import android.view.autofill.AutofillManager;
 import android.view.contentcapture.ContentCaptureManager;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -55,49 +54,41 @@ public abstract class Context {
     public static final String ADB_SERVICE = "adb";
     public static final String ALARM_SERVICE = "alarm";
 
-    @SystemApi
-    public static final String AMBIENT_CONTEXT_SERVICE = "ambient_context";
+    @SystemApi public static final String AMBIENT_CONTEXT_SERVICE = "ambient_context";
     public static final String APPWIDGET_SERVICE = "appwidget";
     public static final String APP_BINDING_SERVICE = "app_binding";
     public static final String APP_FUNCTION_SERVICE = "app_function";
 
-    @SystemApi
-    public static final String APP_HIBERNATION_SERVICE = "app_hibernation";
+    @SystemApi public static final String APP_HIBERNATION_SERVICE = "app_hibernation";
 
-    @SystemApi
-    public static final String APP_INTEGRITY_SERVICE = "app_integrity";
+    @SystemApi public static final String APP_INTEGRITY_SERVICE = "app_integrity";
     public static final String APP_OPS_SERVICE = "appops";
 
-    @SystemApi
-    public static final String APP_PREDICTION_SERVICE = "app_prediction";
+    @SystemApi public static final String APP_PREDICTION_SERVICE = "app_prediction";
     public static final String APP_SEARCH_SERVICE = "app_search";
     public static final String ATTENTION_SERVICE = "attention";
     public static final String ATTESTATION_VERIFICATION_SERVICE = "attestation_verification";
 
-    @SystemApi
-    public static final String AUDIO_DEVICE_VOLUME_SERVICE = "audio_device_volume";
+    @SystemApi public static final String AUDIO_DEVICE_VOLUME_SERVICE = "audio_device_volume";
     public static final String AUDIO_SERVICE = "audio";
     public static final String AUTH_SERVICE = "auth";
     public static final String AUTOFILL_MANAGER_SERVICE = "autofill";
     public static final String BACKGROUND_INSTALL_CONTROL_SERVICE = "background_install_control";
 
-    @SystemApi
-    public static final String BACKUP_SERVICE = "backup";
+    @SystemApi public static final String BACKUP_SERVICE = "backup";
     public static final String BATTERY_SERVICE = "batterymanager";
 
-    @SystemApi
-    public static final String BATTERY_STATS_SERVICE = "batterystats";
+    @SystemApi public static final String BATTERY_STATS_SERVICE = "batterystats";
     public static final String BINARY_TRANSPARENCY_SERVICE = "transparency";
     public static final int BIND_ABOVE_CLIENT = 8;
     public static final int BIND_ADJUST_WITH_ACTIVITY = 128;
     public static final int BIND_ALLOW_ACTIVITY_STARTS = 512;
 
-    @SystemApi
-    public static final int BIND_ALLOW_BACKGROUND_ACTIVITY_STARTS = 1048576;
+    @SystemApi public static final int BIND_ALLOW_BACKGROUND_ACTIVITY_STARTS = 1048576;
 
-    @SystemApi
-    @Deprecated
+    @SystemApi @Deprecated
     public static final int BIND_ALLOW_FOREGROUND_SERVICE_STARTS_FROM_BACKGROUND = 262144;
+
     public static final int BIND_ALLOW_INSTANT = 4194304;
     public static final int BIND_ALLOW_OOM_MANAGEMENT = 16;
     public static final int BIND_ALLOW_WHITELIST_MANAGEMENT = 16777216;
@@ -127,15 +118,13 @@ public abstract class Context {
     public static final int BIND_TREAT_LIKE_ACTIVITY = 134217728;
     public static final int BIND_TREAT_LIKE_VISIBLE_FOREGROUND_SERVICE = 268435456;
 
-    @Deprecated
-    public static final int BIND_VISIBLE = 268435456;
+    @Deprecated public static final int BIND_VISIBLE = 268435456;
     public static final int BIND_WAIVE_PRIORITY = 32;
     public static final String BIOMETRIC_SERVICE = "biometric";
     public static final String BLOB_STORE_SERVICE = "blob_store";
     public static final String BLOCKCHAIN_SERVICE = "blockchain";
 
-    @SystemApi
-    public static final String BLOCKED_NUMBERS_SERVICE = "blocked_numbers";
+    @SystemApi public static final String BLOCKED_NUMBERS_SERVICE = "blocked_numbers";
     public static final String BLUETOOTH_SERVICE = "bluetooth";
     public static final String BUGREPORT_SERVICE = "bugreport";
     public static final String CAMERA_SERVICE = "camera";
@@ -144,8 +133,7 @@ public abstract class Context {
     public static final String CFMS_SERVICE = "CustomFrequencyManagerService";
     public static final String CLIPBOARD_SERVICE = "clipboard";
 
-    @SystemApi
-    public static final String CLOUDSEARCH_SERVICE = "cloudsearch";
+    @SystemApi public static final String CLOUDSEARCH_SERVICE = "cloudsearch";
     public static final String COCKTAIL_BAR_SERVICE = "CocktailBarService";
     public static final String CODEC_SOLUTION_SERVICE = "CodecSolution";
     public static final String COLOR_DISPLAY_SERVICE = "color_display";
@@ -156,14 +144,11 @@ public abstract class Context {
     public static final String CONTACT_KEYS_SERVICE = "contact_keys";
     public static final String CONTENT_CAPTURE_MANAGER_SERVICE = "content_capture";
 
-    @SystemApi
-    public static final String CONTENT_SUGGESTIONS_SERVICE = "content_suggestions";
+    @SystemApi public static final String CONTENT_SUGGESTIONS_SERVICE = "content_suggestions";
 
-    @SystemApi
-    public static final String CONTEXTHUB_SERVICE = "contexthub";
+    @SystemApi public static final String CONTEXTHUB_SERVICE = "contexthub";
 
-    @SystemApi
-    public static final String CONTEXTUAL_SEARCH_SERVICE = "contextual_search";
+    @SystemApi public static final String CONTEXTUAL_SEARCH_SERVICE = "contextual_search";
     public static final int CONTEXT_CREDENTIAL_PROTECTED_STORAGE = 16;
     public static final int CONTEXT_DEVICE_PROTECTED_STORAGE = 8;
     public static final int CONTEXT_IGNORE_SECURITY = 2;
@@ -184,8 +169,7 @@ public abstract class Context {
     public static final String DEVICE_POLICY_SERVICE = "device_policy";
     public static final String DEVICE_STATE_SERVICE = "device_state";
 
-    @SystemApi
-    public static final String DISPLAY_AIQE_SERVICE = "display_aiqe";
+    @SystemApi public static final String DISPLAY_AIQE_SERVICE = "display_aiqe";
     public static final String DISPLAY_HASH_SERVICE = "display_hash";
     public static final String DISPLAY_SERVICE = "display";
     public static final String DOMAIN_VERIFICATION_SERVICE = "domain_verification";
@@ -196,13 +180,12 @@ public abstract class Context {
 
     @SystemApi
     public static final String ECM_ENHANCED_CONFIRMATION_SERVICE = "ecm_enhanced_confirmation";
+
     public static final String EPIC_SERVICE = "epic";
 
-    @SystemApi
-    public static final String ETHERNET_SERVICE = "ethernet";
+    @SystemApi public static final String ETHERNET_SERVICE = "ethernet";
 
-    @SystemApi
-    public static final String EUICC_CARD_SERVICE = "euicc_card";
+    @SystemApi public static final String EUICC_CARD_SERVICE = "euicc_card";
     public static final String EUICC_SERVICE = "euicc";
     public static final String EXTENDED_ETHERNET_SERVICE = "extendedethernetservice";
     public static final String EXYNOS_DISPLAY_SOLUTION_SERVICE = "exynos_display";
@@ -211,16 +194,14 @@ public abstract class Context {
     public static final String FILE_INTEGRITY_SERVICE = "file_integrity";
     public static final String FINGERPRINT_SERVICE = "fingerprint";
 
-    @SystemApi
-    public static final String FONT_SERVICE = "font";
+    @SystemApi public static final String FONT_SERVICE = "font";
     public static final String GAME_SERVICE = "game";
     public static final String GATEKEEPER_SERVICE = "android.service.gatekeeper.IGateKeeperService";
     public static final String GRAMMATICAL_INFLECTION_SERVICE = "grammatical_inflection";
     public static final String HARDWARE_PROPERTIES_SERVICE = "hardware_properties";
     public static final String HCM_SERVICE = "HcmManagerService";
 
-    @SystemApi
-    public static final String HDMI_CONTROL_SERVICE = "hdmi_control";
+    @SystemApi public static final String HDMI_CONTROL_SERVICE = "hdmi_control";
     public static final String HEALTHCONNECT_SERVICE = "healthconnect";
     public static final String HQM_SERVICE = "HqmManagerService";
     public static final String ICCCGRDM_SERVICE = "icccgrdm";
@@ -249,39 +230,30 @@ public abstract class Context {
     public static final String MEDIA_ROUTER_SERVICE = "media_router";
     public static final String MEDIA_SESSION_SERVICE = "media_session";
 
-    @SystemApi
-    public static final String MEDIA_TRANSCODING_SERVICE = "media_transcoding";
+    @SystemApi public static final String MEDIA_TRANSCODING_SERVICE = "media_transcoding";
     public static final String MIDI_SERVICE = "midi";
     public static final String MMS_SERVICE = "mms";
     public static final String MOBILE_PAYMENT_SERVICE = "mobile_payment";
     public static final int MODE_APPEND = 32768;
     public static final int MODE_ENABLE_WRITE_AHEAD_LOGGING = 8;
 
-    @Deprecated
-    public static final int MODE_MULTI_PROCESS = 4;
+    @Deprecated public static final int MODE_MULTI_PROCESS = 4;
     public static final int MODE_NO_LOCALIZED_COLLATORS = 16;
     public static final int MODE_PRIVATE = 0;
 
-    @Deprecated
-    public static final int MODE_WORLD_READABLE = 1;
+    @Deprecated public static final int MODE_WORLD_READABLE = 1;
 
-    @Deprecated
-    public static final int MODE_WORLD_WRITEABLE = 2;
+    @Deprecated public static final int MODE_WORLD_WRITEABLE = 2;
 
-    @SystemApi
-    public static final String MUSIC_RECOGNITION_SERVICE = "music_recognition";
+    @SystemApi public static final String MUSIC_RECOGNITION_SERVICE = "music_recognition";
 
-    @SystemApi
-    public static final String NEARBY_SERVICE = "nearby";
+    @SystemApi public static final String NEARBY_SERVICE = "nearby";
 
-    @SystemApi
-    public static final String NETD_SERVICE = "netd";
+    @SystemApi public static final String NETD_SERVICE = "netd";
     public static final String NETWORKMANAGEMENT_SERVICE = "network_management";
     public static final String NETWORK_POLICY_SERVICE = "netpolicy";
 
-    @SystemApi
-    @Deprecated
-    public static final String NETWORK_SCORE_SERVICE = "network_score";
+    @SystemApi @Deprecated public static final String NETWORK_SCORE_SERVICE = "network_score";
     public static final String NETWORK_STACK_SERVICE = "network_stack";
     public static final String NETWORK_STATS_SERVICE = "netstats";
     public static final String NETWORK_WATCHLIST_SERVICE = "network_watchlist";
@@ -289,26 +261,23 @@ public abstract class Context {
     public static final String NOTIFICATION_SERVICE = "notification";
     public static final String NSD_SERVICE = "servicediscovery";
 
-    @SystemApi
-    public static final String OEM_LOCK_SERVICE = "oem_lock";
+    @SystemApi public static final String OEM_LOCK_SERVICE = "oem_lock";
 
-    @SystemApi
-    public static final String ON_DEVICE_INTELLIGENCE_SERVICE = "on_device_intelligence";
+    @SystemApi public static final String ON_DEVICE_INTELLIGENCE_SERVICE = "on_device_intelligence";
     public static final String OVERLAY_SERVICE = "overlay";
     public static final long OVERRIDABLE_COMPONENT_CALLBACKS = 193247900;
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final String PAC_PROXY_SERVICE = "pac_proxy";
+
     public static final String PEOPLE_SERVICE = "people";
     public static final String PERFORMANCE_HINT_SERVICE = "performance_hint";
     public static final String PERMISSION_CHECKER_SERVICE = "permission_checker";
 
-    @SystemApi
-    public static final String PERMISSION_CONTROLLER_SERVICE = "permission_controller";
+    @SystemApi public static final String PERMISSION_CONTROLLER_SERVICE = "permission_controller";
     public static final String PERMISSION_ENFORCER_SERVICE = "permission_enforcer";
 
-    @SystemApi
-    public static final String PERMISSION_SERVICE = "permission";
+    @SystemApi public static final String PERMISSION_SERVICE = "permission";
     public static final String PERSISTENT_DATA_BLOCK_SERVICE = "persistent_data_block";
     public static final String PERSONA_SERVICE = "persona";
     public static final String PLATFORM_COMPAT_NATIVE_SERVICE = "platform_compat_native";
@@ -317,19 +286,16 @@ public abstract class Context {
     public static final String POWER_SERVICE = "power";
     public static final String POWER_STATS_SERVICE = "powerstats";
 
-    @Deprecated
-    public static final String POWER_WHITELIST_MANAGER = "power_whitelist";
+    @Deprecated public static final String POWER_WHITELIST_MANAGER = "power_whitelist";
     public static final String PRINT_SERVICE = "print";
     public static final String PROFILING_SERVICE = "profiling";
     public static final String RADIO_SERVICE = "broadcastradio";
     public static final String RCP_SERVICE = "rcp";
 
-    @SystemApi
-    public static final String REBOOT_READINESS_SERVICE = "reboot_readiness";
+    @SystemApi public static final String REBOOT_READINESS_SERVICE = "reboot_readiness";
     public static final int RECEIVER_EXPORTED = 2;
 
-    @Deprecated
-    public static final int RECEIVER_EXPORTED_UNAUDITED = 2;
+    @Deprecated public static final int RECEIVER_EXPORTED_UNAUDITED = 2;
     public static final int RECEIVER_NOT_EXPORTED = 4;
     public static final int RECEIVER_VISIBLE_TO_INSTANT_APPS = 1;
     public static final String RECOVERY_SERVICE = "recovery";
@@ -339,21 +305,17 @@ public abstract class Context {
     public static final String RESTRICTIONS_SERVICE = "restrictions";
     public static final String ROLE_SERVICE = "role";
 
-    @SystemApi
-    public static final String ROLLBACK_SERVICE = "rollback";
+    @SystemApi public static final String ROLLBACK_SERVICE = "rollback";
     public static final String ROTATION_RESOLVER_SERVICE = "resolver";
 
-    @SystemApi
-    public static final String SAFETY_CENTER_SERVICE = "safety_center";
+    @SystemApi public static final String SAFETY_CENTER_SERVICE = "safety_center";
     public static final String SATELLITE_SERVICE = "satellite";
     public static final String SCONTEXT_SERVICE = "scontext";
     public static final String SEARCH_SERVICE = "search";
 
-    @SystemApi
-    public static final String SEARCH_UI_SERVICE = "search_ui";
+    @SystemApi public static final String SEARCH_UI_SERVICE = "search_ui";
 
-    @SystemApi
-    public static final String SECURE_ELEMENT_SERVICE = "secure_element";
+    @SystemApi public static final String SECURE_ELEMENT_SERVICE = "secure_element";
     public static final String SECURITY_STATE_SERVICE = "security_state";
     public static final String SELECTION_TOOLBAR_SERVICE = "selection_toolbar";
     public static final String SEM_ALL_AROUND_SENSING_SERVICE = "AAS";
@@ -388,20 +350,19 @@ public abstract class Context {
     public static final String SEM_WIFI_AWARE_SERVICE = "sem_wifi_aware";
     public static final String SEM_WIFI_P2P_SERVICE = "sem_wifi_p2p";
     public static final String SEM_WIFI_SERVICE = "sem_wifi";
-    public static final String SENSITIVE_CONTENT_PROTECTION_SERVICE = "sensitive_content_protection_service";
+    public static final String SENSITIVE_CONTENT_PROTECTION_SERVICE =
+            "sensitive_content_protection_service";
     public static final String SENSOR_PRIVACY_SERVICE = "sensor_privacy";
     public static final String SENSOR_SERVICE = "sensor";
     public static final String SEP_UNION_SERVICE = "sepunion";
     public static final String SERIAL_SERVICE = "serial";
 
-    @SystemApi
-    public static final String SHARED_CONNECTIVITY_SERVICE = "shared_connectivity";
+    @SystemApi public static final String SHARED_CONNECTIVITY_SERVICE = "shared_connectivity";
     public static final String SHORTCUT_SERVICE = "shortcut";
     public static final String SIP_SERVICE = "sip";
     public static final String SLICE_SERVICE = "slice";
 
-    @SystemApi
-    public static final String SMARTSPACE_SERVICE = "smartspace";
+    @SystemApi public static final String SMARTSPACE_SERVICE = "smartspace";
     public static final String SMS_SERVICE = "sms";
     public static final String SOUND_TRIGGER_MIDDLEWARE_SERVICE = "soundtrigger_middleware";
     public static final String SOUND_TRIGGER_SERVICE = "soundtrigger";
@@ -410,19 +371,16 @@ public abstract class Context {
     public static final String STATS_BOOTSTRAP_ATOM_SERVICE = "statsbootstrap";
     public static final String STATS_COMPANION_SERVICE = "statscompanion";
 
-    @SystemApi
-    public static final String STATS_MANAGER = "stats";
+    @SystemApi public static final String STATS_MANAGER = "stats";
     public static final String STATS_MANAGER_SERVICE = "statsmanager";
     public static final String STATUS_BAR_SERVICE = "statusbar";
     public static final String STORAGE_SERVICE = "storage";
     public static final String STORAGE_STATS_SERVICE = "storagestats";
 
-    @SystemApi
-    public static final String SYSTEM_CONFIG_SERVICE = "system_config";
+    @SystemApi public static final String SYSTEM_CONFIG_SERVICE = "system_config";
     public static final String SYSTEM_HEALTH_SERVICE = "systemhealth";
 
-    @SystemApi
-    public static final String SYSTEM_UPDATE_SERVICE = "system_update";
+    @SystemApi public static final String SYSTEM_UPDATE_SERVICE = "system_update";
     public static final String TELECOM_SERVICE = "telecom";
     public static final String TELEPHONY_IMS_SERVICE = "telephony_ims";
     public static final String TELEPHONY_RCS_MESSAGE_SERVICE = "ircsmessage";
@@ -433,23 +391,19 @@ public abstract class Context {
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final String TEST_NETWORK_SERVICE = "test_network";
 
-    @SystemApi
-    public static final String TETHERING_SERVICE = "tethering";
+    @SystemApi public static final String TETHERING_SERVICE = "tethering";
     public static final String TEXT_CLASSIFICATION_SERVICE = "textclassification";
     public static final String TEXT_SERVICES_MANAGER_SERVICE = "textservices";
     public static final String TEXT_TO_SPEECH_MANAGER_SERVICE = "texttospeech";
     public static final String THERMAL_SERVICE = "thermalservice";
 
-    @SystemApi
-    public static final String THREAD_NETWORK_SERVICE = "thread_network";
+    @SystemApi public static final String THREAD_NETWORK_SERVICE = "thread_network";
     public static final String TIME_DETECTOR_SERVICE = "time_detector";
 
-    @SystemApi
-    public static final String TIME_MANAGER_SERVICE = "time_manager";
+    @SystemApi public static final String TIME_MANAGER_SERVICE = "time_manager";
     public static final String TIME_ZONE_DETECTOR_SERVICE = "time_zone_detector";
 
-    @SystemApi
-    public static final String TRANSLATION_MANAGER_SERVICE = "translation";
+    @SystemApi public static final String TRANSLATION_MANAGER_SERVICE = "translation";
     public static final String TRUST_SERVICE = "trust";
     public static final String TV_AD_SERVICE = "tv_ad";
     public static final String TV_INPUT_SERVICE = "tv_input";
@@ -457,8 +411,7 @@ public abstract class Context {
     public static final String TV_TUNER_RESOURCE_MGR_SERVICE = "tv_tuner_resource_mgr";
     public static final String UI_MODE_SERVICE = "uimode";
 
-    @SystemApi
-    public static final String UI_TRANSLATION_SERVICE = "ui_translation";
+    @SystemApi public static final String UI_TRANSLATION_SERVICE = "ui_translation";
     public static final String UPDATE_LOCK_SERVICE = "updatelock";
     public static final String URI_GRANTS_SERVICE = "uri_grants";
     public static final String URSP_SERVICE = "urspservice";
@@ -466,80 +419,66 @@ public abstract class Context {
     public static final String USB_SERVICE = "usb";
     public static final String USER_SERVICE = "user";
 
-    @SystemApi
-    public static final String UWB_SERVICE = "uwb";
+    @SystemApi public static final String UWB_SERVICE = "uwb";
     public static final String VCN_MANAGEMENT_SERVICE = "vcn_management";
     public static final String VIBRATOR_MANAGER_SERVICE = "vibrator_manager";
 
-    @Deprecated
-    public static final String VIBRATOR_SERVICE = "vibrator";
+    @Deprecated public static final String VIBRATOR_SERVICE = "vibrator";
 
-    @SystemApi
-    public static final String VIRTUALIZATION_SERVICE = "virtualization";
+    @SystemApi public static final String VIRTUALIZATION_SERVICE = "virtualization";
     public static final String VIRTUAL_DEVICE_SERVICE = "virtualdevice";
     public static final String VOICE_INTERACTION_MANAGER_SERVICE = "voiceinteraction";
     public static final String VPN_MANAGEMENT_SERVICE = "vpn_management";
 
-    @SystemApi
-    public static final String VR_SERVICE = "vrmanager";
+    @SystemApi public static final String VR_SERVICE = "vrmanager";
 
     @SystemApi
-    public static final String WALLPAPER_EFFECTS_GENERATION_SERVICE = "wallpaper_effects_generation";
+    public static final String WALLPAPER_EFFECTS_GENERATION_SERVICE =
+            "wallpaper_effects_generation";
+
     public static final String WALLPAPER_SERVICE = "wallpaper";
 
-    @SystemApi
-    public static final String WEARABLE_SENSING_SERVICE = "wearable_sensing";
+    @SystemApi public static final String WEARABLE_SENSING_SERVICE = "wearable_sensing";
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final String WEBVIEW_UPDATE_SERVICE = "webviewupdate";
+
     public static final String WIFI_AWARE_SERVICE = "wifiaware";
 
-    @SystemApi
-    public static final String WIFI_NL80211_SERVICE = "wifinl80211";
+    @SystemApi public static final String WIFI_NL80211_SERVICE = "wifinl80211";
     public static final String WIFI_P2P_SERVICE = "wifip2p";
     public static final String WIFI_RTT_RANGING_SERVICE = "wifirtt";
 
-    @SystemApi
-    @Deprecated
-    public static final String WIFI_RTT_SERVICE = "rttmanager";
+    @SystemApi @Deprecated public static final String WIFI_RTT_SERVICE = "rttmanager";
 
-    @SystemApi
-    public static final String WIFI_SCANNING_SERVICE = "wifiscanner";
+    @SystemApi public static final String WIFI_SCANNING_SERVICE = "wifiscanner";
     public static final String WIFI_SERVICE = "wifi";
     public static final String WINDOW_SERVICE = "window";
     private static int sLastAutofillId = -1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BindServiceFlagsBits {
-    }
+    public @interface BindServiceFlagsBits {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BindServiceFlagsLongBits {
-    }
+    public @interface BindServiceFlagsLongBits {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CreatePackageOptions {
-    }
+    public @interface CreatePackageOptions {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DatabaseMode {
-    }
+    public @interface DatabaseMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FileMode {
-    }
+    public @interface FileMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PreferencesMode {
-    }
+    public @interface PreferencesMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RegisterReceiverFlags {
-    }
+    public @interface RegisterReceiverFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ServiceName {
-    }
+    public @interface ServiceName {}
 
     public abstract boolean bindService(Intent intent, ServiceConnection serviceConnection, int i);
 
@@ -568,11 +507,13 @@ public abstract class Context {
     @Deprecated
     public abstract void clearWallpaper() throws IOException;
 
-    public abstract Context createApplicationContext(ApplicationInfo applicationInfo, int i) throws PackageManager.NameNotFoundException;
+    public abstract Context createApplicationContext(ApplicationInfo applicationInfo, int i)
+            throws PackageManager.NameNotFoundException;
 
     public abstract Context createConfigurationContext(Configuration configuration);
 
-    public abstract Context createContextForSplit(String str) throws PackageManager.NameNotFoundException;
+    public abstract Context createContextForSplit(String str)
+            throws PackageManager.NameNotFoundException;
 
     @SystemApi
     public abstract Context createCredentialProtectedStorageContext();
@@ -581,7 +522,8 @@ public abstract class Context {
 
     public abstract Context createDisplayContext(Display display);
 
-    public abstract Context createPackageContext(String str, int i) throws PackageManager.NameNotFoundException;
+    public abstract Context createPackageContext(String str, int i)
+            throws PackageManager.NameNotFoundException;
 
     public abstract String[] databaseList();
 
@@ -603,7 +545,8 @@ public abstract class Context {
 
     public abstract void enforceUriPermission(Uri uri, int i, int i2, int i3, String str);
 
-    public abstract void enforceUriPermission(Uri uri, String str, String str2, int i, int i2, int i3, String str3);
+    public abstract void enforceUriPermission(
+            Uri uri, String str, String str2, int i, int i2, int i3, String str3);
 
     public abstract String[] fileList();
 
@@ -706,24 +649,51 @@ public abstract class Context {
 
     public abstract FileOutputStream openFileOutput(String str, int i) throws FileNotFoundException;
 
-    public abstract SQLiteDatabase openOrCreateDatabase(String str, int i, SQLiteDatabase.CursorFactory cursorFactory);
+    public abstract SQLiteDatabase openOrCreateDatabase(
+            String str, int i, SQLiteDatabase.CursorFactory cursorFactory);
 
-    public abstract SQLiteDatabase openOrCreateDatabase(String str, int i, SQLiteDatabase.CursorFactory cursorFactory, DatabaseErrorHandler databaseErrorHandler);
+    public abstract SQLiteDatabase openOrCreateDatabase(
+            String str,
+            int i,
+            SQLiteDatabase.CursorFactory cursorFactory,
+            DatabaseErrorHandler databaseErrorHandler);
 
     @Deprecated
     public abstract Drawable peekWallpaper();
 
-    public abstract Intent registerReceiver(BroadcastReceiver broadcastReceiver, IntentFilter intentFilter);
+    public abstract Intent registerReceiver(
+            BroadcastReceiver broadcastReceiver, IntentFilter intentFilter);
 
-    public abstract Intent registerReceiver(BroadcastReceiver broadcastReceiver, IntentFilter intentFilter, int i);
+    public abstract Intent registerReceiver(
+            BroadcastReceiver broadcastReceiver, IntentFilter intentFilter, int i);
 
-    public abstract Intent registerReceiver(BroadcastReceiver broadcastReceiver, IntentFilter intentFilter, String str, Handler handler);
+    public abstract Intent registerReceiver(
+            BroadcastReceiver broadcastReceiver,
+            IntentFilter intentFilter,
+            String str,
+            Handler handler);
 
-    public abstract Intent registerReceiver(BroadcastReceiver broadcastReceiver, IntentFilter intentFilter, String str, Handler handler, int i);
+    public abstract Intent registerReceiver(
+            BroadcastReceiver broadcastReceiver,
+            IntentFilter intentFilter,
+            String str,
+            Handler handler,
+            int i);
 
-    public abstract Intent registerReceiverAsUser(BroadcastReceiver broadcastReceiver, UserHandle userHandle, IntentFilter intentFilter, String str, Handler handler);
+    public abstract Intent registerReceiverAsUser(
+            BroadcastReceiver broadcastReceiver,
+            UserHandle userHandle,
+            IntentFilter intentFilter,
+            String str,
+            Handler handler);
 
-    public abstract Intent registerReceiverAsUser(BroadcastReceiver broadcastReceiver, UserHandle userHandle, IntentFilter intentFilter, String str, Handler handler, int i);
+    public abstract Intent registerReceiverAsUser(
+            BroadcastReceiver broadcastReceiver,
+            UserHandle userHandle,
+            IntentFilter intentFilter,
+            String str,
+            Handler handler,
+            int i);
 
     public abstract void reloadSharedPreferences();
 
@@ -747,26 +717,72 @@ public abstract class Context {
 
     public abstract void sendBroadcastAsUser(Intent intent, UserHandle userHandle, String str);
 
-    public abstract void sendBroadcastAsUser(Intent intent, UserHandle userHandle, String str, int i);
+    public abstract void sendBroadcastAsUser(
+            Intent intent, UserHandle userHandle, String str, int i);
 
     @SystemApi
-    public abstract void sendBroadcastAsUser(Intent intent, UserHandle userHandle, String str, Bundle bundle);
+    public abstract void sendBroadcastAsUser(
+            Intent intent, UserHandle userHandle, String str, Bundle bundle);
 
-    public abstract void sendBroadcastAsUserMultiplePermissions(Intent intent, UserHandle userHandle, String[] strArr);
+    public abstract void sendBroadcastAsUserMultiplePermissions(
+            Intent intent, UserHandle userHandle, String[] strArr);
 
-    public abstract void sendBroadcastMultiplePermissionsAsUser(Intent intent, String[] strArr, UserHandle userHandle);
+    public abstract void sendBroadcastMultiplePermissionsAsUser(
+            Intent intent, String[] strArr, UserHandle userHandle);
 
     public abstract void sendOrderedBroadcast(Intent intent, String str);
 
-    public abstract void sendOrderedBroadcast(Intent intent, String str, int i, BroadcastReceiver broadcastReceiver, Handler handler, int i2, String str2, Bundle bundle);
+    public abstract void sendOrderedBroadcast(
+            Intent intent,
+            String str,
+            int i,
+            BroadcastReceiver broadcastReceiver,
+            Handler handler,
+            int i2,
+            String str2,
+            Bundle bundle);
 
-    public abstract void sendOrderedBroadcast(Intent intent, String str, BroadcastReceiver broadcastReceiver, Handler handler, int i, String str2, Bundle bundle);
+    public abstract void sendOrderedBroadcast(
+            Intent intent,
+            String str,
+            BroadcastReceiver broadcastReceiver,
+            Handler handler,
+            int i,
+            String str2,
+            Bundle bundle);
 
-    public abstract void sendOrderedBroadcastAsUser(Intent intent, UserHandle userHandle, String str, int i, BroadcastReceiver broadcastReceiver, Handler handler, int i2, String str2, Bundle bundle);
+    public abstract void sendOrderedBroadcastAsUser(
+            Intent intent,
+            UserHandle userHandle,
+            String str,
+            int i,
+            BroadcastReceiver broadcastReceiver,
+            Handler handler,
+            int i2,
+            String str2,
+            Bundle bundle);
 
-    public abstract void sendOrderedBroadcastAsUser(Intent intent, UserHandle userHandle, String str, int i, Bundle bundle, BroadcastReceiver broadcastReceiver, Handler handler, int i2, String str2, Bundle bundle2);
+    public abstract void sendOrderedBroadcastAsUser(
+            Intent intent,
+            UserHandle userHandle,
+            String str,
+            int i,
+            Bundle bundle,
+            BroadcastReceiver broadcastReceiver,
+            Handler handler,
+            int i2,
+            String str2,
+            Bundle bundle2);
 
-    public abstract void sendOrderedBroadcastAsUser(Intent intent, UserHandle userHandle, String str, BroadcastReceiver broadcastReceiver, Handler handler, int i, String str2, Bundle bundle);
+    public abstract void sendOrderedBroadcastAsUser(
+            Intent intent,
+            UserHandle userHandle,
+            String str,
+            BroadcastReceiver broadcastReceiver,
+            Handler handler,
+            int i,
+            String str2,
+            Bundle bundle);
 
     @Deprecated
     public abstract void sendStickyBroadcast(Intent intent);
@@ -775,13 +791,27 @@ public abstract class Context {
     public abstract void sendStickyBroadcastAsUser(Intent intent, UserHandle userHandle);
 
     @Deprecated
-    public abstract void sendStickyBroadcastAsUser(Intent intent, UserHandle userHandle, Bundle bundle);
+    public abstract void sendStickyBroadcastAsUser(
+            Intent intent, UserHandle userHandle, Bundle bundle);
 
     @Deprecated
-    public abstract void sendStickyOrderedBroadcast(Intent intent, BroadcastReceiver broadcastReceiver, Handler handler, int i, String str, Bundle bundle);
+    public abstract void sendStickyOrderedBroadcast(
+            Intent intent,
+            BroadcastReceiver broadcastReceiver,
+            Handler handler,
+            int i,
+            String str,
+            Bundle bundle);
 
     @Deprecated
-    public abstract void sendStickyOrderedBroadcastAsUser(Intent intent, UserHandle userHandle, BroadcastReceiver broadcastReceiver, Handler handler, int i, String str, Bundle bundle);
+    public abstract void sendStickyOrderedBroadcastAsUser(
+            Intent intent,
+            UserHandle userHandle,
+            BroadcastReceiver broadcastReceiver,
+            Handler handler,
+            int i,
+            String str,
+            Bundle bundle);
 
     public abstract void setTheme(int i);
 
@@ -801,13 +831,19 @@ public abstract class Context {
 
     public abstract ComponentName startForegroundService(Intent intent);
 
-    public abstract ComponentName startForegroundServiceAsUser(Intent intent, UserHandle userHandle);
+    public abstract ComponentName startForegroundServiceAsUser(
+            Intent intent, UserHandle userHandle);
 
-    public abstract boolean startInstrumentation(ComponentName componentName, String str, Bundle bundle);
+    public abstract boolean startInstrumentation(
+            ComponentName componentName, String str, Bundle bundle);
 
-    public abstract void startIntentSender(IntentSender intentSender, Intent intent, int i, int i2, int i3) throws IntentSender.SendIntentException;
+    public abstract void startIntentSender(
+            IntentSender intentSender, Intent intent, int i, int i2, int i3)
+            throws IntentSender.SendIntentException;
 
-    public abstract void startIntentSender(IntentSender intentSender, Intent intent, int i, int i2, int i3, Bundle bundle) throws IntentSender.SendIntentException;
+    public abstract void startIntentSender(
+            IntentSender intentSender, Intent intent, int i, int i2, int i3, Bundle bundle)
+            throws IntentSender.SendIntentException;
 
     public abstract ComponentName startService(Intent intent);
 
@@ -836,7 +872,9 @@ public abstract class Context {
 
         public static BindServiceFlags of(long value) {
             if ((Integer.toUnsignedLong(Integer.MIN_VALUE) & value) != 0) {
-                throw new IllegalArgumentException("BIND_EXTERNAL_SERVICE is deprecated. Use BIND_EXTERNAL_SERVICE_LONG instead");
+                throw new IllegalArgumentException(
+                        "BIND_EXTERNAL_SERVICE is deprecated. Use BIND_EXTERNAL_SERVICE_LONG"
+                                + " instead");
             }
             return new BindServiceFlags(value);
         }
@@ -894,7 +932,8 @@ public abstract class Context {
         return getTheme().obtainStyledAttributes(attrs);
     }
 
-    public final TypedArray obtainStyledAttributes(int resid, int[] attrs) throws Resources.NotFoundException {
+    public final TypedArray obtainStyledAttributes(int resid, int[] attrs)
+            throws Resources.NotFoundException {
         return getTheme().obtainStyledAttributes(resid, attrs);
     }
 
@@ -902,7 +941,8 @@ public abstract class Context {
         return getTheme().obtainStyledAttributes(set, attrs, 0, 0);
     }
 
-    public final TypedArray obtainStyledAttributes(AttributeSet set, int[] attrs, int defStyleAttr, int defStyleRes) {
+    public final TypedArray obtainStyledAttributes(
+            AttributeSet set, int[] attrs, int defStyleAttr, int defStyleRes) {
         return getTheme().obtainStyledAttributes(set, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -947,7 +987,9 @@ public abstract class Context {
     }
 
     public void startActivityForResult(String who, Intent intent, int requestCode, Bundle options) {
-        throw new RuntimeException("This method is only implemented for Activity-based Contexts. Check canStartActivityForResult() before calling.");
+        throw new RuntimeException(
+                "This method is only implemented for Activity-based Contexts. Check"
+                        + " canStartActivityForResult() before calling.");
     }
 
     public boolean canStartActivityForResult() {
@@ -962,25 +1004,39 @@ public abstract class Context {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public void sendBroadcastMultiplePermissions(Intent intent, String[] receiverPermissions, String[] excludedPermissions) {
+    public void sendBroadcastMultiplePermissions(
+            Intent intent, String[] receiverPermissions, String[] excludedPermissions) {
         sendBroadcastMultiplePermissions(intent, receiverPermissions, excludedPermissions, null);
     }
 
-    public void sendBroadcastMultiplePermissions(Intent intent, String[] receiverPermissions, String[] excludedPermissions, String[] excludedPackages) {
-        sendBroadcastMultiplePermissions(intent, receiverPermissions, excludedPermissions, excludedPackages, null);
+    public void sendBroadcastMultiplePermissions(
+            Intent intent,
+            String[] receiverPermissions,
+            String[] excludedPermissions,
+            String[] excludedPackages) {
+        sendBroadcastMultiplePermissions(
+                intent, receiverPermissions, excludedPermissions, excludedPackages, null);
     }
 
-    public void sendBroadcastMultiplePermissions(Intent intent, String[] receiverPermissions, String[] excludedPermissions, String[] excludedPackages, BroadcastOptions options) {
+    public void sendBroadcastMultiplePermissions(
+            Intent intent,
+            String[] receiverPermissions,
+            String[] excludedPermissions,
+            String[] excludedPackages,
+            BroadcastOptions options) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public void sendBroadcastMultiplePermissions(Intent intent, String[] receiverPermissions, Bundle options) {
+    public void sendBroadcastMultiplePermissions(
+            Intent intent, String[] receiverPermissions, Bundle options) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
     @SystemApi
-    public void sendBroadcastMultiplePermissions(Intent intent, String[] receiverPermissions, BroadcastOptions options) {
-        sendBroadcastMultiplePermissions(intent, receiverPermissions, options == null ? null : options.toBundle());
+    public void sendBroadcastMultiplePermissions(
+            Intent intent, String[] receiverPermissions, BroadcastOptions options) {
+        sendBroadcastMultiplePermissions(
+                intent, receiverPermissions, options == null ? null : options.toBundle());
     }
 
     public void sendBroadcastWithMultiplePermissions(Intent intent, String[] receiverPermissions) {
@@ -995,15 +1051,40 @@ public abstract class Context {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public void sendOrderedBroadcast(Intent intent, String receiverPermission, Bundle options, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
+    public void sendOrderedBroadcast(
+            Intent intent,
+            String receiverPermission,
+            Bundle options,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            int initialCode,
+            String initialData,
+            Bundle initialExtras) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public void sendOrderedBroadcast(Intent intent, String receiverPermission, String receiverAppOp, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
+    public void sendOrderedBroadcast(
+            Intent intent,
+            String receiverPermission,
+            String receiverAppOp,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            int initialCode,
+            String initialData,
+            Bundle initialExtras) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public void sendOrderedBroadcast(Intent intent, int initialCode, String receiverPermission, String receiverAppOp, BroadcastReceiver resultReceiver, Handler scheduler, String initialData, Bundle initialExtras, Bundle options) {
+    public void sendOrderedBroadcast(
+            Intent intent,
+            int initialCode,
+            String receiverPermission,
+            String receiverAppOp,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            String initialData,
+            Bundle initialExtras,
+            Bundle options) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
@@ -1013,12 +1094,21 @@ public abstract class Context {
     }
 
     @SystemApi
-    public Intent registerReceiverForAllUsers(BroadcastReceiver receiver, IntentFilter filter, String broadcastPermission, Handler scheduler) {
+    public Intent registerReceiverForAllUsers(
+            BroadcastReceiver receiver,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
     @SystemApi
-    public Intent registerReceiverForAllUsers(BroadcastReceiver receiver, IntentFilter filter, String broadcastPermission, Handler scheduler, int flags) {
+    public Intent registerReceiverForAllUsers(
+            BroadcastReceiver receiver,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler,
+            int flags) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
@@ -1026,35 +1116,55 @@ public abstract class Context {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public boolean bindService(Intent service, int flags, Executor executor, ServiceConnection conn) {
+    public boolean bindService(
+            Intent service, int flags, Executor executor, ServiceConnection conn) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public boolean bindService(Intent service, BindServiceFlags flags, Executor executor, ServiceConnection conn) {
+    public boolean bindService(
+            Intent service, BindServiceFlags flags, Executor executor, ServiceConnection conn) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public boolean bindIsolatedService(Intent service, int flags, String instanceName, Executor executor, ServiceConnection conn) {
+    public boolean bindIsolatedService(
+            Intent service,
+            int flags,
+            String instanceName,
+            Executor executor,
+            ServiceConnection conn) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public boolean bindIsolatedService(Intent service, BindServiceFlags flags, String instanceName, Executor executor, ServiceConnection conn) {
+    public boolean bindIsolatedService(
+            Intent service,
+            BindServiceFlags flags,
+            String instanceName,
+            Executor executor,
+            ServiceConnection conn) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public boolean bindServiceAsUser(Intent service, ServiceConnection conn, int flags, UserHandle user) {
+    public boolean bindServiceAsUser(
+            Intent service, ServiceConnection conn, int flags, UserHandle user) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public boolean bindServiceAsUser(Intent service, ServiceConnection conn, BindServiceFlags flags, UserHandle user) {
+    public boolean bindServiceAsUser(
+            Intent service, ServiceConnection conn, BindServiceFlags flags, UserHandle user) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public boolean bindServiceAsUser(Intent service, ServiceConnection conn, int flags, Handler handler, UserHandle user) {
+    public boolean bindServiceAsUser(
+            Intent service, ServiceConnection conn, int flags, Handler handler, UserHandle user) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public boolean bindServiceAsUser(Intent service, ServiceConnection conn, BindServiceFlags flags, Handler handler, UserHandle user) {
+    public boolean bindServiceAsUser(
+            Intent service,
+            ServiceConnection conn,
+            BindServiceFlags flags,
+            Handler handler,
+            UserHandle user) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
@@ -1095,18 +1205,22 @@ public abstract class Context {
     }
 
     @SystemApi
-    public Context createPackageContextAsUser(String packageName, int flags, UserHandle user) throws PackageManager.NameNotFoundException {
+    public Context createPackageContextAsUser(String packageName, int flags, UserHandle user)
+            throws PackageManager.NameNotFoundException {
         if (Build.IS_ENG) {
             throw new IllegalStateException("createPackageContextAsUser not overridden!");
         }
         return this;
     }
 
-    private Context hidden_createPackageContextAsUser(String packageName, int flags, UserHandle user) throws PackageManager.NameNotFoundException {
+    private Context hidden_createPackageContextAsUser(
+            String packageName, int flags, UserHandle user)
+            throws PackageManager.NameNotFoundException {
         return createPackageContextAsUser(packageName, flags, user);
     }
 
-    public Context semCreatePackageContextAsUser(String packageName, int flags, UserHandle user) throws PackageManager.NameNotFoundException {
+    public Context semCreatePackageContextAsUser(String packageName, int flags, UserHandle user)
+            throws PackageManager.NameNotFoundException {
         return createPackageContextAsUser(packageName, flags, user);
     }
 
@@ -1119,7 +1233,8 @@ public abstract class Context {
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public Context createContextForSdkInSandbox(ApplicationInfo sdkInfo, int flags) throws PackageManager.NameNotFoundException {
+    public Context createContextForSdkInSandbox(ApplicationInfo sdkInfo, int flags)
+            throws PackageManager.NameNotFoundException {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
@@ -1154,7 +1269,8 @@ public abstract class Context {
 
     @Deprecated
     public Context createFeatureContext(String attributionTag) {
-        return createContext(new ContextParams.Builder(getParams()).setAttributionTag(attributionTag).build());
+        return createContext(
+                new ContextParams.Builder(getParams()).setAttributionTag(attributionTag).build());
     }
 
     public Context createTokenContext(IBinder token, Display display) {
@@ -1202,10 +1318,13 @@ public abstract class Context {
     }
 
     public static IBinder getToken(Context context) {
-        return context.getActivityToken() != null ? context.getActivityToken() : context.getWindowContextToken();
+        return context.getActivityToken() != null
+                ? context.getActivityToken()
+                : context.getWindowContextToken();
     }
 
-    public IServiceConnection getServiceDispatcher(ServiceConnection conn, Handler handler, long flags) {
+    public IServiceConnection getServiceDispatcher(
+            ServiceConnection conn, Handler handler, long flags) {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
@@ -1226,8 +1345,7 @@ public abstract class Context {
         return null;
     }
 
-    public void setAutofillClient(AutofillManager.AutofillClient client) {
-    }
+    public void setAutofillClient(AutofillManager.AutofillClient client) {}
 
     public ContentCaptureManager.ContentCaptureClient getContentCaptureClient() {
         return null;
@@ -1242,19 +1360,19 @@ public abstract class Context {
         return null;
     }
 
-    public void setAutofillOptions(AutofillOptions options) {
-    }
+    public void setAutofillOptions(AutofillOptions options) {}
 
     public ContentCaptureOptions getContentCaptureOptions() {
         return null;
     }
 
-    public void setContentCaptureOptions(ContentCaptureOptions options) {
-    }
+    public void setContentCaptureOptions(ContentCaptureOptions options) {}
 
     public void assertRuntimeOverlayThemable() {
         if (getResources() == Resources.getSystem()) {
-            throw new IllegalArgumentException("Non-UI context used to display UI; get a UI context from ActivityThread#getSystemUiContext()");
+            throw new IllegalArgumentException(
+                    "Non-UI context used to display UI; get a UI context from"
+                            + " ActivityThread#getSystemUiContext()");
         }
     }
 
@@ -1262,8 +1380,7 @@ public abstract class Context {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public void destroy() {
-    }
+    public void destroy() {}
 
     public boolean isConfigurationContext() {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
@@ -1273,19 +1390,32 @@ public abstract class Context {
         throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
 
-    public Intent semRegisterReceiverAsUser(BroadcastReceiver receiver, UserHandle user, IntentFilter filter, String broadcastPermission, Handler scheduler) {
+    public Intent semRegisterReceiverAsUser(
+            BroadcastReceiver receiver,
+            UserHandle user,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler) {
         return registerReceiverAsUser(receiver, user, filter, broadcastPermission, scheduler);
     }
 
-    public Intent semRegisterReceiverAsUser(BroadcastReceiver receiver, UserHandle user, IntentFilter filter, String broadcastPermission, Handler scheduler, int flags) {
-        return registerReceiverAsUser(receiver, user, filter, broadcastPermission, scheduler, flags);
+    public Intent semRegisterReceiverAsUser(
+            BroadcastReceiver receiver,
+            UserHandle user,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler,
+            int flags) {
+        return registerReceiverAsUser(
+                receiver, user, filter, broadcastPermission, scheduler, flags);
     }
 
     public ComponentName semStartServiceAsUser(Intent service, UserHandle user) {
         return startServiceAsUser(service, user);
     }
 
-    public boolean semBindServiceAsUser(Intent service, ServiceConnection conn, int flags, UserHandle user) {
+    public boolean semBindServiceAsUser(
+            Intent service, ServiceConnection conn, int flags, UserHandle user) {
         return bindServiceAsUser(service, conn, flags, user);
     }
 }

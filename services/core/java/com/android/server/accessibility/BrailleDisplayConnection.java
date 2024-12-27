@@ -12,6 +12,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Pair;
 import android.util.Slog;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -58,7 +59,8 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
             try {
                 FileInputStream fileInputStream = new FileInputStream(path.toFile());
                 try {
-                    Object apply = function.apply(Integer.valueOf(fileInputStream.getFD().getInt$()));
+                    Object apply =
+                            function.apply(Integer.valueOf(fileInputStream.getFD().getInt$()));
                     fileInputStream.close();
                     return apply;
                 } finally {
@@ -75,13 +77,21 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
                     Objects.requireNonNull(path);
                     NativeInterface nativeInterface = (NativeInterface) this.val$nativeInterface;
                     Objects.requireNonNull(nativeInterface);
-                    Integer num = (Integer) readFromFileDescriptor(path, new BrailleDisplayConnection$1$$ExternalSyntheticLambda0(nativeInterface, 2));
+                    Integer num =
+                            (Integer)
+                                    readFromFileDescriptor(
+                                            path,
+                                            new BrailleDisplayConnection$1$$ExternalSyntheticLambda0(
+                                                    nativeInterface, 2));
                     if (num != null) {
                         return num.intValue();
                     }
                     return -1;
                 default:
-                    return ((Bundle) ((Map) this.val$nativeInterface).get(path)).getBoolean("BUS_BLUETOOTH") ? 5 : 3;
+                    return ((Bundle) ((Map) this.val$nativeInterface).get(path))
+                                    .getBoolean("BUS_BLUETOOTH")
+                            ? 5
+                            : 3;
             }
         }
 
@@ -90,9 +100,14 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
             switch (this.$r8$classId) {
                 case 0:
                     Objects.requireNonNull(path);
-                    return (byte[]) readFromFileDescriptor(path, new BrailleDisplayConnection$1$$ExternalSyntheticLambda0((NativeInterface) this.val$nativeInterface, 0));
+                    return (byte[])
+                            readFromFileDescriptor(
+                                    path,
+                                    new BrailleDisplayConnection$1$$ExternalSyntheticLambda0(
+                                            (NativeInterface) this.val$nativeInterface, 0));
                 default:
-                    return ((Bundle) ((Map) this.val$nativeInterface).get(path)).getByteArray("DESCRIPTOR");
+                    return ((Bundle) ((Map) this.val$nativeInterface).get(path))
+                            .getByteArray("DESCRIPTOR");
             }
         }
 
@@ -102,7 +117,8 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
                 case 0:
                     ArrayList arrayList = new ArrayList();
                     try {
-                        DirectoryStream<Path> newDirectoryStream = Files.newDirectoryStream(path, "hidraw*");
+                        DirectoryStream<Path> newDirectoryStream =
+                                Files.newDirectoryStream(path, "hidraw*");
                         try {
                             Iterator<Path> it = newDirectoryStream.iterator();
                             while (it.hasNext()) {
@@ -130,7 +146,11 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
                     Objects.requireNonNull(path);
                     NativeInterface nativeInterface = (NativeInterface) this.val$nativeInterface;
                     Objects.requireNonNull(nativeInterface);
-                    return (String) readFromFileDescriptor(path, new BrailleDisplayConnection$1$$ExternalSyntheticLambda0(nativeInterface, 1));
+                    return (String)
+                            readFromFileDescriptor(
+                                    path,
+                                    new BrailleDisplayConnection$1$$ExternalSyntheticLambda0(
+                                            nativeInterface, 1));
                 default:
                     return ((Bundle) ((Map) this.val$nativeInterface).get(path)).getString("NAME");
             }
@@ -143,9 +163,14 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
                     Objects.requireNonNull(path);
                     NativeInterface nativeInterface = (NativeInterface) this.val$nativeInterface;
                     Objects.requireNonNull(nativeInterface);
-                    return (String) readFromFileDescriptor(path, new BrailleDisplayConnection$1$$ExternalSyntheticLambda0(nativeInterface, 3));
+                    return (String)
+                            readFromFileDescriptor(
+                                    path,
+                                    new BrailleDisplayConnection$1$$ExternalSyntheticLambda0(
+                                            nativeInterface, 3));
                 default:
-                    return ((Bundle) ((Map) this.val$nativeInterface).get(path)).getString("UNIQUE_ID");
+                    return ((Bundle) ((Map) this.val$nativeInterface).get(path))
+                            .getString("UNIQUE_ID");
             }
         }
     }
@@ -204,7 +229,8 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
         String getHidrawUniq(int i);
     }
 
-    public BrailleDisplayConnection(Object obj, AccessibilityServiceConnection accessibilityServiceConnection) {
+    public BrailleDisplayConnection(
+            Object obj, AccessibilityServiceConnection accessibilityServiceConnection) {
         Objects.requireNonNull(obj);
         this.mLock = obj;
         this.mScanner = getDefaultNativeScanner(new DefaultNativeInterface());
@@ -224,7 +250,8 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
         while (i2 < bArr.length) {
             byte b = bArr[i2];
             if ((b & 240) == 240) {
-                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(b, "Item ", " declares unsupported long type", "BrailleDisplayConnection");
+                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                        b, "Item ", " declares unsupported long type", "BrailleDisplayConnection");
                 return false;
             }
             int i3 = b & 3;
@@ -240,7 +267,11 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
             }
             int i4 = i2 + i;
             if (i4 >= bArr.length) {
-                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(b, "Item ", " specifies size past the remaining bytes", "BrailleDisplayConnection");
+                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                        b,
+                        "Item ",
+                        " specifies size past the remaining bytes",
+                        "BrailleDisplayConnection");
                 return false;
             }
             if (i == 1) {
@@ -269,7 +300,8 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
     /* JADX INFO: Access modifiers changed from: private */
     public static native String nativeGetHidrawUniq(int i);
 
-    public final void connectLocked(String str, String str2, int i, IBrailleDisplayController iBrailleDisplayController) {
+    public final void connectLocked(
+            String str, String str2, int i, IBrailleDisplayController iBrailleDisplayController) {
         Objects.requireNonNull(str);
         Objects.requireNonNull(iBrailleDisplayController);
         this.mController = iBrailleDisplayController;
@@ -288,8 +320,14 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
                 z = true;
             } else {
                 String uniqueId = this.mScanner.getUniqueId(path);
-                boolean equalsIgnoreCase = uniqueId != null ? str.equalsIgnoreCase(uniqueId) : !TextUtils.isEmpty(str2) && str2.equals(this.mScanner.getName(path));
-                if (isBrailleDisplay(deviceReportDescriptor) && this.mScanner.getDeviceBusType(path) == i && equalsIgnoreCase) {
+                boolean equalsIgnoreCase =
+                        uniqueId != null
+                                ? str.equalsIgnoreCase(uniqueId)
+                                : !TextUtils.isEmpty(str2)
+                                        && str2.equals(this.mScanner.getName(path));
+                if (isBrailleDisplay(deviceReportDescriptor)
+                        && this.mScanner.getDeviceBusType(path) == i
+                        && equalsIgnoreCase) {
                     arrayList.add(Pair.create(path.toFile(), deviceReportDescriptor));
                 }
             }
@@ -297,10 +335,14 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
         int i2 = 2;
         if (arrayList.size() != 1) {
             if (z) {
-                Slog.w("BrailleDisplayConnection", "Unable to access some HIDRAW node's descriptor");
+                Slog.w(
+                        "BrailleDisplayConnection",
+                        "Unable to access some HIDRAW node's descriptor");
                 i2 = 3;
             } else {
-                Slog.w("BrailleDisplayConnection", "Unable to find a unique Braille display matching the provided device");
+                Slog.w(
+                        "BrailleDisplayConnection",
+                        "Unable to find a unique Braille display matching the provided device");
             }
             sendConnectionErrorLocked(i2);
             return;
@@ -309,49 +351,66 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
         byte[] bArr = (byte[]) ((Pair) arrayList.get(0)).second;
         ArraySet arraySet = (ArraySet) sConnectedNodes;
         if (arraySet.contains(this.mHidrawNode)) {
-            Slog.w("BrailleDisplayConnection", "Unable to find an unused Braille display matching the provided device");
+            Slog.w(
+                    "BrailleDisplayConnection",
+                    "Unable to find an unused Braille display matching the provided device");
             sendConnectionErrorLocked(2);
             return;
         }
         arraySet.add(this.mHidrawNode);
-        Thread thread = new Thread(new Runnable() { // from class: com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                BrailleDisplayConnection brailleDisplayConnection = BrailleDisplayConnection.this;
-                Set set = BrailleDisplayConnection.sConnectedNodes;
-                brailleDisplayConnection.getClass();
-                Process.setThreadPriority(10);
-                try {
-                    FileInputStream fileInputStream = new FileInputStream(brailleDisplayConnection.mHidrawNode);
-                    try {
-                        byte[] bArr2 = new byte[IBinder.getSuggestedMaxIpcSizeBytes()];
-                        while (true) {
-                            if (Thread.interrupted()) {
-                                break;
-                            }
-                            if (!brailleDisplayConnection.mHidrawNode.exists()) {
-                                brailleDisplayConnection.disconnect();
-                                break;
-                            }
-                            int read = fileInputStream.read(bArr2);
-                            if (read > 0) {
+        Thread thread =
+                new Thread(
+                        new Runnable() { // from class:
+                                         // com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticLambda2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                BrailleDisplayConnection brailleDisplayConnection =
+                                        BrailleDisplayConnection.this;
+                                Set set = BrailleDisplayConnection.sConnectedNodes;
+                                brailleDisplayConnection.getClass();
+                                Process.setThreadPriority(10);
                                 try {
-                                    brailleDisplayConnection.mController.onInput(Arrays.copyOfRange(bArr2, 0, read));
-                                } catch (RemoteException e) {
-                                    Slog.e("BrailleDisplayConnection", "Error calling onInput", e);
+                                    FileInputStream fileInputStream =
+                                            new FileInputStream(
+                                                    brailleDisplayConnection.mHidrawNode);
+                                    try {
+                                        byte[] bArr2 =
+                                                new byte[IBinder.getSuggestedMaxIpcSizeBytes()];
+                                        while (true) {
+                                            if (Thread.interrupted()) {
+                                                break;
+                                            }
+                                            if (!brailleDisplayConnection.mHidrawNode.exists()) {
+                                                brailleDisplayConnection.disconnect();
+                                                break;
+                                            }
+                                            int read = fileInputStream.read(bArr2);
+                                            if (read > 0) {
+                                                try {
+                                                    brailleDisplayConnection.mController.onInput(
+                                                            Arrays.copyOfRange(bArr2, 0, read));
+                                                } catch (RemoteException e) {
+                                                    Slog.e(
+                                                            "BrailleDisplayConnection",
+                                                            "Error calling onInput",
+                                                            e);
+                                                    brailleDisplayConnection.disconnect();
+                                                }
+                                            }
+                                        }
+                                        fileInputStream.close();
+                                    } finally {
+                                    }
+                                } catch (IOException e2) {
+                                    Slog.d(
+                                            "BrailleDisplayConnection",
+                                            "Error reading from connected Braille display",
+                                            e2);
                                     brailleDisplayConnection.disconnect();
                                 }
                             }
-                        }
-                        fileInputStream.close();
-                    } finally {
-                    }
-                } catch (IOException e2) {
-                    Slog.d("BrailleDisplayConnection", "Error reading from connected Braille display", e2);
-                    brailleDisplayConnection.disconnect();
-                }
-            }
-        }, "BrailleDisplayConnection input thread");
+                        },
+                        "BrailleDisplayConnection input thread");
         this.mInputThread = thread;
         thread.setDaemon(true);
         this.mInputThread.start();
@@ -419,7 +478,12 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
     public final void write(final byte[] bArr) {
         Objects.requireNonNull(bArr);
         if (bArr.length > IBinder.getSuggestedMaxIpcSizeBytes()) {
-            Slog.e("BrailleDisplayConnection", "Requested write of size " + bArr.length + " which is larger than maximum " + IBinder.getSuggestedMaxIpcSizeBytes());
+            Slog.e(
+                    "BrailleDisplayConnection",
+                    "Requested write of size "
+                            + bArr.length
+                            + " which is larger than maximum "
+                            + IBinder.getSuggestedMaxIpcSizeBytes());
             disconnect();
             return;
         }
@@ -431,7 +495,8 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
                 if (this.mOutputThread == null) {
                     try {
                         this.mOutputStream = new FileOutputStream(this.mHidrawNode);
-                        HandlerThread handlerThread = new HandlerThread("BrailleDisplayConnection output thread", 10);
+                        HandlerThread handlerThread =
+                                new HandlerThread("BrailleDisplayConnection output thread", 10);
                         this.mOutputThread = handlerThread;
                         handlerThread.setDaemon(true);
                         this.mOutputThread.start();
@@ -441,21 +506,29 @@ class BrailleDisplayConnection extends IBrailleDisplayConnection.Stub {
                         return;
                     }
                 }
-                this.mOutputThread.getThreadHandler().post(new Runnable() { // from class: com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        BrailleDisplayConnection brailleDisplayConnection = BrailleDisplayConnection.this;
-                        byte[] bArr2 = bArr;
-                        Set set = BrailleDisplayConnection.sConnectedNodes;
-                        brailleDisplayConnection.getClass();
-                        try {
-                            brailleDisplayConnection.mOutputStream.write(bArr2);
-                        } catch (IOException e2) {
-                            Slog.d("BrailleDisplayConnection", "Error writing to connected Braille display", e2);
-                            brailleDisplayConnection.disconnect();
-                        }
-                    }
-                });
+                this.mOutputThread
+                        .getThreadHandler()
+                        .post(
+                                new Runnable() { // from class:
+                                                 // com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticLambda1
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        BrailleDisplayConnection brailleDisplayConnection =
+                                                BrailleDisplayConnection.this;
+                                        byte[] bArr2 = bArr;
+                                        Set set = BrailleDisplayConnection.sConnectedNodes;
+                                        brailleDisplayConnection.getClass();
+                                        try {
+                                            brailleDisplayConnection.mOutputStream.write(bArr2);
+                                        } catch (IOException e2) {
+                                            Slog.d(
+                                                    "BrailleDisplayConnection",
+                                                    "Error writing to connected Braille display",
+                                                    e2);
+                                            brailleDisplayConnection.disconnect();
+                                        }
+                                    }
+                                });
             } catch (Throwable th) {
                 throw th;
             }

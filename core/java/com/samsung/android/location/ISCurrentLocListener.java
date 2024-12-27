@@ -15,8 +15,7 @@ public interface ISCurrentLocListener extends IInterface {
 
     public static class Default implements ISCurrentLocListener {
         @Override // com.samsung.android.location.ISCurrentLocListener
-        public void onCurrentLocation(Location location) throws RemoteException {
-        }
+        public void onCurrentLocation(Location location) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +23,7 @@ public interface ISCurrentLocListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISCurrentLocListener {
+    public abstract static class Stub extends Binder implements ISCurrentLocListener {
         static final int TRANSACTION_onCurrentLocation = 1;
 
         public Stub() {
@@ -62,7 +61,8 @@ public interface ISCurrentLocListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISCurrentLocListener.DESCRIPTOR);
             }

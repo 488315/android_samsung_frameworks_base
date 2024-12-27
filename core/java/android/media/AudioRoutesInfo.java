@@ -6,19 +6,21 @@ import android.text.TextUtils;
 
 /* loaded from: classes2.dex */
 public class AudioRoutesInfo implements Parcelable {
-    public static final Parcelable.Creator<AudioRoutesInfo> CREATOR = new Parcelable.Creator<AudioRoutesInfo>() { // from class: android.media.AudioRoutesInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioRoutesInfo createFromParcel(Parcel in) {
-            return new AudioRoutesInfo(in);
-        }
+    public static final Parcelable.Creator<AudioRoutesInfo> CREATOR =
+            new Parcelable.Creator<
+                    AudioRoutesInfo>() { // from class: android.media.AudioRoutesInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioRoutesInfo createFromParcel(Parcel in) {
+                    return new AudioRoutesInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioRoutesInfo[] newArray(int size) {
-            return new AudioRoutesInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioRoutesInfo[] newArray(int size) {
+                    return new AudioRoutesInfo[size];
+                }
+            };
     public static final int MAIN_DOCK_SPEAKERS = 4;
     public static final int MAIN_HDMI = 8;
     public static final int MAIN_HEADPHONES = 2;
@@ -54,11 +56,29 @@ public class AudioRoutesInfo implements Parcelable {
     }
 
     public String toString() {
-        return getClass().getSimpleName() + "{ type=" + typeToString(this.mainType) + (TextUtils.isEmpty(this.bluetoothName) ? "" : ", bluetoothName=" + ((Object) this.bluetoothName)) + " }";
+        return getClass().getSimpleName()
+                + "{ type="
+                + typeToString(this.mainType)
+                + (TextUtils.isEmpty(this.bluetoothName)
+                        ? ""
+                        : ", bluetoothName=" + ((Object) this.bluetoothName))
+                + " }";
     }
 
     private static String typeToString(int type) {
-        return type == 0 ? "SPEAKER" : (type & 1) != 0 ? "HEADSET" : (type & 2) != 0 ? "HEADPHONES" : (type & 4) != 0 ? "DOCK_SPEAKERS" : (type & 8) != 0 ? "HDMI" : (type & 16) != 0 ? "USB" : Integer.toHexString(type);
+        return type == 0
+                ? "SPEAKER"
+                : (type & 1) != 0
+                        ? "HEADSET"
+                        : (type & 2) != 0
+                                ? "HEADPHONES"
+                                : (type & 4) != 0
+                                        ? "DOCK_SPEAKERS"
+                                        : (type & 8) != 0
+                                                ? "HDMI"
+                                                : (type & 16) != 0
+                                                        ? "USB"
+                                                        : Integer.toHexString(type);
     }
 
     @Override // android.os.Parcelable

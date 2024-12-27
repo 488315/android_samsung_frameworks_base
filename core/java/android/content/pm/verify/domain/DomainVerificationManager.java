@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.util.ArrayMap;
+
 import com.android.internal.util.CollectionUtils;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -24,34 +26,33 @@ import java.util.function.ToIntFunction;
 /* loaded from: classes.dex */
 public final class DomainVerificationManager {
 
-    @SystemApi
-    public static final int ERROR_DOMAIN_SET_ID_INVALID = 1;
+    @SystemApi public static final int ERROR_DOMAIN_SET_ID_INVALID = 1;
+
+    @SystemApi public static final int ERROR_UNABLE_TO_APPROVE = 3;
+
+    @SystemApi public static final int ERROR_UNKNOWN_DOMAIN = 2;
 
     @SystemApi
-    public static final int ERROR_UNABLE_TO_APPROVE = 3;
+    public static final String EXTRA_VERIFICATION_REQUEST =
+            "android.content.pm.verify.domain.extra.VERIFICATION_REQUEST";
 
-    @SystemApi
-    public static final int ERROR_UNKNOWN_DOMAIN = 2;
-
-    @SystemApi
-    public static final String EXTRA_VERIFICATION_REQUEST = "android.content.pm.verify.domain.extra.VERIFICATION_REQUEST";
     public static final int INTERNAL_ERROR_NAME_NOT_FOUND = 1;
 
-    @SystemApi
-    public static final int STATUS_OK = 0;
+    @SystemApi public static final int STATUS_OK = 0;
     private final Context mContext;
     private final IDomainVerificationManager mDomainVerificationManager;
 
-    public @interface Error {
-    }
+    public @interface Error {}
 
-    public DomainVerificationManager(Context context, IDomainVerificationManager domainVerificationManager) {
+    public DomainVerificationManager(
+            Context context, IDomainVerificationManager domainVerificationManager) {
         this.mContext = context;
         this.mDomainVerificationManager = domainVerificationManager;
     }
 
     @SystemApi
-    public void setUriRelativeFilterGroups(String packageName, Map<String, List<UriRelativeFilterGroup>> domainToGroupsMap) {
+    public void setUriRelativeFilterGroups(
+            String packageName, Map<String, List<UriRelativeFilterGroup>> domainToGroupsMap) {
         Objects.requireNonNull(packageName);
         Objects.requireNonNull(domainToGroupsMap);
         Bundle bundle = new Bundle();
@@ -67,18 +68,23 @@ public final class DomainVerificationManager {
     }
 
     @SystemApi
-    public Map<String, List<UriRelativeFilterGroup>> getUriRelativeFilterGroups(String packageName, List<String> domains) {
+    public Map<String, List<UriRelativeFilterGroup>> getUriRelativeFilterGroups(
+            String packageName, List<String> domains) {
         Objects.requireNonNull(packageName);
         Objects.requireNonNull(domains);
         if (domains.isEmpty()) {
             return Collections.emptyMap();
         }
         try {
-            Bundle bundle = this.mDomainVerificationManager.getUriRelativeFilterGroups(packageName, domains);
+            Bundle bundle =
+                    this.mDomainVerificationManager.getUriRelativeFilterGroups(
+                            packageName, domains);
             ArrayMap<String, List<UriRelativeFilterGroup>> map = new ArrayMap<>();
             if (!bundle.isEmpty()) {
                 for (String domain : bundle.keySet()) {
-                    List<UriRelativeFilterGroupParcel> parcels = bundle.getParcelableArrayList(domain, UriRelativeFilterGroupParcel.class);
+                    List<UriRelativeFilterGroupParcel> parcels =
+                            bundle.getParcelableArrayList(
+                                    domain, UriRelativeFilterGroupParcel.class);
                     map.put(domain, UriRelativeFilterGroup.parcelsToGroups(parcels));
                 }
             }
@@ -98,7 +104,8 @@ public final class DomainVerificationManager {
     }
 
     @SystemApi
-    public DomainVerificationInfo getDomainVerificationInfo(String packageName) throws PackageManager.NameNotFoundException {
+    public DomainVerificationInfo getDomainVerificationInfo(String packageName)
+            throws PackageManager.NameNotFoundException {
         try {
             return this.mDomainVerificationManager.getDomainVerificationInfo(packageName);
         } catch (Exception e) {
@@ -114,10 +121,12 @@ public final class DomainVerificationManager {
     }
 
     @SystemApi
-    public int setDomainVerificationStatus(UUID domainSetId, Set<String> domains, int state) throws PackageManager.NameNotFoundException {
+    public int setDomainVerificationStatus(UUID domainSetId, Set<String> domains, int state)
+            throws PackageManager.NameNotFoundException {
         validateInput(domainSetId, domains);
         try {
-            return this.mDomainVerificationManager.setDomainVerificationStatus(domainSetId.toString(), new DomainSet(domains), state);
+            return this.mDomainVerificationManager.setDomainVerificationStatus(
+                    domainSetId.toString(), new DomainSet(domains), state);
         } catch (Exception e) {
             Exception converted = rethrow(e, null);
             if (converted instanceof PackageManager.NameNotFoundException) {
@@ -131,9 +140,11 @@ public final class DomainVerificationManager {
     }
 
     @SystemApi
-    public void setDomainVerificationLinkHandlingAllowed(String packageName, boolean allowed) throws PackageManager.NameNotFoundException {
+    public void setDomainVerificationLinkHandlingAllowed(String packageName, boolean allowed)
+            throws PackageManager.NameNotFoundException {
         try {
-            this.mDomainVerificationManager.setDomainVerificationLinkHandlingAllowed(packageName, allowed, this.mContext.getUserId());
+            this.mDomainVerificationManager.setDomainVerificationLinkHandlingAllowed(
+                    packageName, allowed, this.mContext.getUserId());
         } catch (Exception e) {
             Exception converted = rethrow(e, null);
             if (converted instanceof PackageManager.NameNotFoundException) {
@@ -147,10 +158,16 @@ public final class DomainVerificationManager {
     }
 
     @SystemApi
-    public int setDomainVerificationUserSelection(UUID domainSetId, Set<String> domains, boolean enabled) throws PackageManager.NameNotFoundException {
+    public int setDomainVerificationUserSelection(
+            UUID domainSetId, Set<String> domains, boolean enabled)
+            throws PackageManager.NameNotFoundException {
         validateInput(domainSetId, domains);
         try {
-            return this.mDomainVerificationManager.setDomainVerificationUserSelection(domainSetId.toString(), new DomainSet(domains), enabled, this.mContext.getUserId());
+            return this.mDomainVerificationManager.setDomainVerificationUserSelection(
+                    domainSetId.toString(),
+                    new DomainSet(domains),
+                    enabled,
+                    this.mContext.getUserId());
         } catch (Exception e) {
             Exception converted = rethrow(e, null);
             if (converted instanceof PackageManager.NameNotFoundException) {
@@ -163,9 +180,11 @@ public final class DomainVerificationManager {
         }
     }
 
-    public DomainVerificationUserState getDomainVerificationUserState(String packageName) throws PackageManager.NameNotFoundException {
+    public DomainVerificationUserState getDomainVerificationUserState(String packageName)
+            throws PackageManager.NameNotFoundException {
         try {
-            return this.mDomainVerificationManager.getDomainVerificationUserState(packageName, this.mContext.getUserId());
+            return this.mDomainVerificationManager.getDomainVerificationUserState(
+                    packageName, this.mContext.getUserId());
         } catch (Exception e) {
             Exception converted = rethrow(e, packageName);
             if (converted instanceof PackageManager.NameNotFoundException) {
@@ -182,14 +201,21 @@ public final class DomainVerificationManager {
     public SortedSet<DomainOwner> getOwnersForDomain(String domain) {
         try {
             Objects.requireNonNull(domain);
-            final List<DomainOwner> orderedList = this.mDomainVerificationManager.getOwnersForDomain(domain, this.mContext.getUserId());
+            final List<DomainOwner> orderedList =
+                    this.mDomainVerificationManager.getOwnersForDomain(
+                            domain, this.mContext.getUserId());
             Objects.requireNonNull(orderedList);
-            SortedSet<DomainOwner> set = new TreeSet<>((Comparator<? super DomainOwner>) Comparator.comparingInt(new ToIntFunction() { // from class: android.content.pm.verify.domain.DomainVerificationManager$$ExternalSyntheticLambda0
-                @Override // java.util.function.ToIntFunction
-                public final int applyAsInt(Object obj) {
-                    return orderedList.indexOf((DomainOwner) obj);
-                }
-            }));
+            SortedSet<DomainOwner> set =
+                    new TreeSet<>(
+                            (Comparator<? super DomainOwner>)
+                                    Comparator.comparingInt(
+                                            new ToIntFunction() { // from class:
+                                                // android.content.pm.verify.domain.DomainVerificationManager$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.ToIntFunction
+                                                public final int applyAsInt(Object obj) {
+                                                    return orderedList.indexOf((DomainOwner) obj);
+                                                }
+                                            }));
             set.addAll(orderedList);
             return set;
         } catch (RemoteException e) {

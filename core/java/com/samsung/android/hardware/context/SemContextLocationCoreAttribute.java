@@ -9,19 +9,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextLocationCoreAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextLocationCoreAttribute> CREATOR = new Parcelable.Creator<SemContextLocationCoreAttribute>() { // from class: com.samsung.android.hardware.context.SemContextLocationCoreAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextLocationCoreAttribute createFromParcel(Parcel in) {
-            return new SemContextLocationCoreAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextLocationCoreAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextLocationCoreAttribute>() { // from class:
+                                                         // com.samsung.android.hardware.context.SemContextLocationCoreAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextLocationCoreAttribute createFromParcel(Parcel in) {
+                    return new SemContextLocationCoreAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextLocationCoreAttribute[] newArray(int size) {
-            return new SemContextLocationCoreAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextLocationCoreAttribute[] newArray(int size) {
+                    return new SemContextLocationCoreAttribute[size];
+                }
+            };
     private static final String TAG = "SemContextLocationCoreAttribute";
     private int mAccuracy;
     private int mAction;
@@ -110,7 +113,15 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
         setAttribute();
     }
 
-    public SemContextLocationCoreAttribute(int mode, int action, int fence_id, double latitude, double longitude, int radius, int total_gps_cnt, int success_gps_cnt) {
+    public SemContextLocationCoreAttribute(
+            int mode,
+            int action,
+            int fence_id,
+            double latitude,
+            double longitude,
+            int radius,
+            int total_gps_cnt,
+            int success_gps_cnt) {
         this.mMode = -1;
         this.mAction = -1;
         this.mFenceId = 0;
@@ -173,7 +184,8 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
         setAttribute();
     }
 
-    public SemContextLocationCoreAttribute(int mode, int action, int fence_id, int radius, int status) {
+    public SemContextLocationCoreAttribute(
+            int mode, int action, int fence_id, int radius, int status) {
         this.mMode = -1;
         this.mAction = -1;
         this.mFenceId = 0;
@@ -226,7 +238,8 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
         setAttribute();
     }
 
-    public SemContextLocationCoreAttribute(int mode, int action, double latitude, double longitude, int accuracy, long timestamp) {
+    public SemContextLocationCoreAttribute(
+            int mode, int action, double latitude, double longitude, int accuracy, long timestamp) {
         this.mMode = -1;
         this.mAction = -1;
         this.mFenceId = 0;
@@ -254,7 +267,15 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
         setAttribute();
     }
 
-    public SemContextLocationCoreAttribute(int mode, int action, int request_id, long period, int source, int flags, double max_power, float distance_thrs) {
+    public SemContextLocationCoreAttribute(
+            int mode,
+            int action,
+            int request_id,
+            long period,
+            int source,
+            int flags,
+            double max_power,
+            float distance_thrs) {
         this.mMode = -1;
         this.mAction = -1;
         this.mFenceId = 0;
@@ -276,7 +297,8 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
         this.mMode = mode;
         this.mAction = action;
         this.mRequestId = request_id;
-        this.mFusedBatchOption = new FusedBatchOption(period, source, flags, max_power, distance_thrs);
+        this.mFusedBatchOption =
+                new FusedBatchOption(period, source, flags, max_power, distance_thrs);
         setAttribute();
     }
 
@@ -418,17 +440,22 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
             case 0:
                 if (this.mAction == 1) {
                     double[] doubleType = {this.mLatitude, this.mLongitude};
-                    attribute.putIntArray("IntType", new int[]{this.mFenceId, this.mRadius, this.mTotalGpsCnt, this.mSuccessGpsCnt});
+                    attribute.putIntArray(
+                            "IntType",
+                            new int[] {
+                                this.mFenceId, this.mRadius, this.mTotalGpsCnt, this.mSuccessGpsCnt
+                            });
                     attribute.putDoubleArray("DoubleType", doubleType);
                     break;
                 } else if (this.mAction == 2) {
-                    attribute.putIntArray("IntType", new int[]{this.mFenceId});
+                    attribute.putIntArray("IntType", new int[] {this.mFenceId});
                     break;
                 } else if (this.mAction == 7) {
-                    attribute.putIntArray("IntType", new int[]{this.mFenceId, this.mRadius, this.mStatus});
+                    attribute.putIntArray(
+                            "IntType", new int[] {this.mFenceId, this.mRadius, this.mStatus});
                     break;
                 } else if (this.mAction == 9) {
-                    attribute.putIntArray("IntType", new int[]{this.mMinDistance, this.mMinTime});
+                    attribute.putIntArray("IntType", new int[] {this.mMinDistance, this.mMinTime});
                     break;
                 } else if (this.mAction == 23) {
                     int[] intType = new int[this.mRawData.length];
@@ -454,7 +481,11 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
                 }
             case 3:
                 if (this.mAction == 16 || this.mAction == 17) {
-                    int[] intType3 = {this.mRequestId, this.mFusedBatchOption.user_info, this.mFusedBatchOption.flags};
+                    int[] intType3 = {
+                        this.mRequestId,
+                        this.mFusedBatchOption.user_info,
+                        this.mFusedBatchOption.flags
+                    };
                     long[] longType2 = {this.mFusedBatchOption.period};
                     double[] doubleType3 = {this.mFusedBatchOption.max_power};
                     float[] floatType = {this.mFusedBatchOption.distance_thrs};
@@ -464,16 +495,24 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
                     attribute.putFloatArray("FloatType", floatType);
                     break;
                 } else if (this.mAction == 18) {
-                    attribute.putIntArray("IntType", new int[]{this.mRequestId});
+                    attribute.putIntArray("IntType", new int[] {this.mRequestId});
                     break;
                 } else if (this.mAction == 19) {
-                    attribute.putIntArray("IntType", new int[]{this.mBatchingSize});
+                    attribute.putIntArray("IntType", new int[] {this.mBatchingSize});
                     break;
                 } else if (this.mAction == 21) {
                     String stringType = this.mLocation.getProvider();
                     long[] longType3 = {this.mLocation.getTime()};
-                    double[] doubleType4 = {this.mLocation.getLatitude(), this.mLocation.getLongitude(), this.mLocation.getAltitude()};
-                    float[] floatType2 = {this.mLocation.getSpeed(), this.mLocation.getBearing(), this.mLocation.getAccuracy()};
+                    double[] doubleType4 = {
+                        this.mLocation.getLatitude(),
+                        this.mLocation.getLongitude(),
+                        this.mLocation.getAltitude()
+                    };
+                    float[] floatType2 = {
+                        this.mLocation.getSpeed(),
+                        this.mLocation.getBearing(),
+                        this.mLocation.getAccuracy()
+                    };
                     attribute.putString("StringType", stringType);
                     attribute.putLongArray("IntType", longType3);
                     attribute.putDoubleArray("DoubleType", doubleType4);
@@ -487,7 +526,12 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
         }
         attribute.putInt("Mode", this.mMode);
         attribute.putInt("Action", this.mAction);
-        Log.d(TAG, "setAttribute() mode : " + attribute.getInt("Mode") + " action : " + attribute.getInt("Action"));
+        Log.d(
+                TAG,
+                "setAttribute() mode : "
+                        + attribute.getInt("Mode")
+                        + " action : "
+                        + attribute.getInt("Action"));
         super.setAttribute(47, attribute);
     }
 
@@ -498,7 +542,8 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
         final long period;
         final int user_info;
 
-        FusedBatchOption(long period, int user_info, int flags, double max_power, float distance_thrs) {
+        FusedBatchOption(
+                long period, int user_info, int flags, double max_power, float distance_thrs) {
             this.period = period;
             this.user_info = user_info;
             this.flags = flags;
@@ -524,7 +569,9 @@ public class SemContextLocationCoreAttribute extends SemContextAttribute {
                 return false;
             }
             if (this.distance_thrs < 0.0f) {
-                Log.d(SemContextLocationCoreAttribute.TAG, "FusedBatchOption.distance_thrs is wrong.");
+                Log.d(
+                        SemContextLocationCoreAttribute.TAG,
+                        "FusedBatchOption.distance_thrs is wrong.");
                 return false;
             }
             return true;

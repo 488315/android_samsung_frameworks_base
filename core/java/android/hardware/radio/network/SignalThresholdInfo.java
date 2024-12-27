@@ -4,26 +4,29 @@ import android.hardware.radio.AccessNetwork$$;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SignalThresholdInfo implements Parcelable {
-    public static final Parcelable.Creator<SignalThresholdInfo> CREATOR = new Parcelable.Creator<SignalThresholdInfo>() { // from class: android.hardware.radio.network.SignalThresholdInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalThresholdInfo createFromParcel(Parcel _aidl_source) {
-            SignalThresholdInfo _aidl_out = new SignalThresholdInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SignalThresholdInfo> CREATOR =
+            new Parcelable.Creator<SignalThresholdInfo>() { // from class:
+                // android.hardware.radio.network.SignalThresholdInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalThresholdInfo createFromParcel(Parcel _aidl_source) {
+                    SignalThresholdInfo _aidl_out = new SignalThresholdInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalThresholdInfo[] newArray(int _aidl_size) {
-            return new SignalThresholdInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalThresholdInfo[] newArray(int _aidl_size) {
+                    return new SignalThresholdInfo[_aidl_size];
+                }
+            };
     public static final int SIGNAL_MEASUREMENT_TYPE_ECNO = 9;
     public static final int SIGNAL_MEASUREMENT_TYPE_RSCP = 2;
     public static final int SIGNAL_MEASUREMENT_TYPE_RSRP = 3;

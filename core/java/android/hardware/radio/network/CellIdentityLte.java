@@ -3,27 +3,30 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CellIdentityLte implements Parcelable {
-    public static final Parcelable.Creator<CellIdentityLte> CREATOR = new Parcelable.Creator<CellIdentityLte>() { // from class: android.hardware.radio.network.CellIdentityLte.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentityLte createFromParcel(Parcel _aidl_source) {
-            CellIdentityLte _aidl_out = new CellIdentityLte();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CellIdentityLte> CREATOR =
+            new Parcelable.Creator<CellIdentityLte>() { // from class:
+                // android.hardware.radio.network.CellIdentityLte.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentityLte createFromParcel(Parcel _aidl_source) {
+                    CellIdentityLte _aidl_out = new CellIdentityLte();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentityLte[] newArray(int _aidl_size) {
-            return new CellIdentityLte[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentityLte[] newArray(int _aidl_size) {
+                    return new CellIdentityLte[_aidl_size];
+                }
+            };
     public String[] additionalPlmns;
     public int[] bands;
     public ClosedSubscriberGroupInfo csgInfo;
@@ -148,7 +151,9 @@ public class CellIdentityLte implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.csgInfo = (ClosedSubscriberGroupInfo) _aidl_parcel.readTypedObject(ClosedSubscriberGroupInfo.CREATOR);
+            this.csgInfo =
+                    (ClosedSubscriberGroupInfo)
+                            _aidl_parcel.readTypedObject(ClosedSubscriberGroupInfo.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

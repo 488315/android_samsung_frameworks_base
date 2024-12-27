@@ -6,6 +6,7 @@ import android.os.BatteryUsageStatsQuery;
 import android.os.UidBatteryConsumer;
 import android.util.ArrayMap;
 import android.util.SparseArray;
+
 import com.android.internal.os.PowerProfile;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -14,11 +15,17 @@ public final class WakelockPowerCalculator extends PowerCalculator {
     public final UsageBasedPowerEstimator mPowerEstimator;
 
     public WakelockPowerCalculator(PowerProfile powerProfile) {
-        this.mPowerEstimator = new UsageBasedPowerEstimator(powerProfile.getAveragePower("cpu.idle"));
+        this.mPowerEstimator =
+                new UsageBasedPowerEstimator(powerProfile.getAveragePower("cpu.idle"));
     }
 
     @Override // com.android.server.power.stats.PowerCalculator
-    public final void calculate(BatteryUsageStats.Builder builder, BatteryStats batteryStats, long j, long j2, BatteryUsageStatsQuery batteryUsageStatsQuery) {
+    public final void calculate(
+            BatteryUsageStats.Builder builder,
+            BatteryStats batteryStats,
+            long j,
+            long j2,
+            BatteryUsageStatsQuery batteryUsageStatsQuery) {
         UsageBasedPowerEstimator usageBasedPowerEstimator;
         long j3;
         double d;
@@ -38,7 +45,8 @@ public final class WakelockPowerCalculator extends PowerCalculator {
             if (size < 0) {
                 break;
             }
-            UidBatteryConsumer.Builder builder4 = (UidBatteryConsumer.Builder) uidBatteryConsumerBuilders.valueAt(size);
+            UidBatteryConsumer.Builder builder4 =
+                    (UidBatteryConsumer.Builder) uidBatteryConsumerBuilders.valueAt(size);
             SparseArray sparseArray = uidBatteryConsumerBuilders;
             ArrayMap wakelockStats = builder4.getBatteryStatsUid().getWakelockStats();
             UidBatteryConsumer.Builder builder5 = builder3;
@@ -48,7 +56,8 @@ public final class WakelockPowerCalculator extends PowerCalculator {
             long j8 = 0;
             while (i < size2) {
                 ArrayMap arrayMap = wakelockStats;
-                BatteryStats.Timer wakeTime = ((BatteryStats.Uid.Wakelock) wakelockStats.valueAt(i)).getWakeTime(0);
+                BatteryStats.Timer wakeTime =
+                        ((BatteryStats.Uid.Wakelock) wakelockStats.valueAt(i)).getWakeTime(0);
                 if (wakeTime != null) {
                     j8 = wakeTime.getTotalTimeLocked(j5, 0) + j8;
                 }
@@ -77,7 +86,9 @@ public final class WakelockPowerCalculator extends PowerCalculator {
         }
         UidBatteryConsumer.Builder builder6 = builder3;
         double d6 = d3;
-        long batteryUptime = ((batteryStats2.getBatteryUptime(j2) - batteryStats2.getScreenOnTime(j, 0)) / 1000) - j6;
+        long batteryUptime =
+                ((batteryStats2.getBatteryUptime(j2) - batteryStats2.getScreenOnTime(j, 0)) / 1000)
+                        - j6;
         if (batteryUptime > 0) {
             j3 = j6;
             d = d6 + (usageBasedPowerEstimator.mAveragePowerMahPerMs * batteryUptime);
@@ -90,15 +101,20 @@ public final class WakelockPowerCalculator extends PowerCalculator {
         if (builder6 != null) {
             builder6.setUsageDurationMillis(12, j4).setConsumedPower(12, d);
         }
-        long batteryUptime2 = (batteryStats2.getBatteryUptime(j2) - batteryStats2.getScreenOnTime(j, 0)) / 1000;
+        long batteryUptime2 =
+                (batteryStats2.getBatteryUptime(j2) - batteryStats2.getScreenOnTime(j, 0)) / 1000;
         if (batteryUptime2 < 0) {
             builder2 = builder;
             batteryUptime2 = 0;
         } else {
             builder2 = builder;
         }
-        builder2.getAggregateBatteryConsumerBuilder(0).setUsageDurationMillis(12, batteryUptime2).setConsumedPower(12, d + d2);
-        builder2.getAggregateBatteryConsumerBuilder(1).setUsageDurationMillis(12, j3).setConsumedPower(12, d2);
+        builder2.getAggregateBatteryConsumerBuilder(0)
+                .setUsageDurationMillis(12, batteryUptime2)
+                .setConsumedPower(12, d + d2);
+        builder2.getAggregateBatteryConsumerBuilder(1)
+                .setUsageDurationMillis(12, j3)
+                .setConsumedPower(12, d2);
     }
 
     @Override // com.android.server.power.stats.PowerCalculator

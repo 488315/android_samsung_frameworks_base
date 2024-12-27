@@ -6,13 +6,13 @@ import android.os.Trace;
 import android.os.incremental.IncrementalManager;
 import android.util.Slog;
 import android.util.SparseBooleanArray;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageLegacyUtils;
 import com.android.internal.pm.parsing.pkg.PackageImpl;
 import com.android.internal.pm.pkg.component.ParsedInstrumentation;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
-import com.android.server.pm.Installer;
 import com.android.server.pm.parsing.PackageCacher;
 import com.android.server.pm.permission.PermissionManagerService;
 import com.android.server.pm.pkg.AndroidPackage;
@@ -21,6 +21,7 @@ import com.android.server.pm.resolution.ComponentResolver;
 import com.android.server.pm.verify.domain.DomainVerificationService;
 import com.android.server.pm.verify.domain.DomainVerificationSettings;
 import com.android.server.pm.verify.domain.models.DomainVerificationStateMap;
+
 import java.io.File;
 import java.util.Collections;
 
@@ -35,19 +36,33 @@ public final class RemovePackageHelper {
     public final PackageManagerService mPm;
     public final SharedLibrariesImpl mSharedLibraries;
 
-    public RemovePackageHelper(PackageManagerService packageManagerService, AppDataHelper appDataHelper, BroadcastHelper broadcastHelper) {
+    public RemovePackageHelper(
+            PackageManagerService packageManagerService,
+            AppDataHelper appDataHelper,
+            BroadcastHelper broadcastHelper) {
         this.mPm = packageManagerService;
-        PackageManagerServiceInjector packageManagerServiceInjector = packageManagerService.mInjector;
-        this.mIncrementalManager = (IncrementalManager) packageManagerServiceInjector.mIncrementalManagerProducer.get(packageManagerServiceInjector.mPackageManager, packageManagerServiceInjector);
-        PackageManagerServiceInjector packageManagerServiceInjector2 = packageManagerService.mInjector;
+        PackageManagerServiceInjector packageManagerServiceInjector =
+                packageManagerService.mInjector;
+        this.mIncrementalManager =
+                (IncrementalManager)
+                        packageManagerServiceInjector.mIncrementalManagerProducer.get(
+                                packageManagerServiceInjector.mPackageManager,
+                                packageManagerServiceInjector);
+        PackageManagerServiceInjector packageManagerServiceInjector2 =
+                packageManagerService.mInjector;
         this.mInstaller = packageManagerServiceInjector2.mInstaller;
-        this.mPermissionManager = (PermissionManagerService.PermissionManagerServiceInternalImpl) packageManagerServiceInjector2.mPermissionManagerServiceProducer.get(packageManagerServiceInjector2.mPackageManager, packageManagerServiceInjector2);
+        this.mPermissionManager =
+                (PermissionManagerService.PermissionManagerServiceInternalImpl)
+                        packageManagerServiceInjector2.mPermissionManagerServiceProducer.get(
+                                packageManagerServiceInjector2.mPackageManager,
+                                packageManagerServiceInjector2);
         this.mSharedLibraries = packageManagerServiceInjector2.getSharedLibrariesImpl();
         this.mAppDataHelper = appDataHelper;
         this.mBroadcastHelper = broadcastHelper;
     }
 
-    public final void cleanPackageDataStructuresLILPw(AndroidPackage androidPackage, boolean z, boolean z2) {
+    public final void cleanPackageDataStructuresLILPw(
+            AndroidPackage androidPackage, boolean z, boolean z2) {
         ComponentResolver componentResolver = this.mPm.mComponentResolver;
         PackageManagerTracedLock packageManagerTracedLock = componentResolver.mLock;
         boolean z3 = PackageManagerService.DEBUG_COMPRESSION;
@@ -60,29 +75,46 @@ public final class RemovePackageHelper {
                 throw th;
             }
         }
-        PermissionManagerService.this.mPermissionManagerServiceImpl.onPackageRemoved(androidPackage);
+        PermissionManagerService.this.mPermissionManagerServiceImpl.onPackageRemoved(
+                androidPackage);
         PackageProperty packageProperty = this.mPm.mPackageProperty;
         packageProperty.getClass();
-        packageProperty.mApplicationProperties = PackageProperty.removeProperties(androidPackage.getProperties(), packageProperty.mApplicationProperties);
-        packageProperty.mActivityProperties = PackageProperty.removeComponentProperties(androidPackage.getActivities(), packageProperty.mActivityProperties);
-        packageProperty.mProviderProperties = PackageProperty.removeComponentProperties(androidPackage.getProviders(), packageProperty.mProviderProperties);
-        packageProperty.mReceiverProperties = PackageProperty.removeComponentProperties(androidPackage.getReceivers(), packageProperty.mReceiverProperties);
-        packageProperty.mServiceProperties = PackageProperty.removeComponentProperties(androidPackage.getServices(), packageProperty.mServiceProperties);
+        packageProperty.mApplicationProperties =
+                PackageProperty.removeProperties(
+                        androidPackage.getProperties(), packageProperty.mApplicationProperties);
+        packageProperty.mActivityProperties =
+                PackageProperty.removeComponentProperties(
+                        androidPackage.getActivities(), packageProperty.mActivityProperties);
+        packageProperty.mProviderProperties =
+                PackageProperty.removeComponentProperties(
+                        androidPackage.getProviders(), packageProperty.mProviderProperties);
+        packageProperty.mReceiverProperties =
+                PackageProperty.removeComponentProperties(
+                        androidPackage.getReceivers(), packageProperty.mReceiverProperties);
+        packageProperty.mServiceProperties =
+                PackageProperty.removeComponentProperties(
+                        androidPackage.getServices(), packageProperty.mServiceProperties);
         int size = ArrayUtils.size(androidPackage.getInstrumentations());
         for (int i = 0; i < size; i++) {
-            this.mPm.mInstrumentation.remove(((ParsedInstrumentation) androidPackage.getInstrumentations().get(i)).getComponentName());
+            this.mPm.mInstrumentation.remove(
+                    ((ParsedInstrumentation) androidPackage.getInstrumentations().get(i))
+                            .getComponentName());
         }
         if (z) {
             int size2 = androidPackage.getLibraryNames().size();
             for (int i2 = 0; i2 < size2; i2++) {
-                this.mSharedLibraries.removeSharedLibrary(0L, (String) androidPackage.getLibraryNames().get(i2));
+                this.mSharedLibraries.removeSharedLibrary(
+                        0L, (String) androidPackage.getLibraryNames().get(i2));
             }
         }
         if (androidPackage.getSdkLibraryName() != null) {
-            this.mSharedLibraries.removeSharedLibrary(androidPackage.getSdkLibVersionMajor(), androidPackage.getSdkLibraryName());
+            this.mSharedLibraries.removeSharedLibrary(
+                    androidPackage.getSdkLibVersionMajor(), androidPackage.getSdkLibraryName());
         }
         if (androidPackage.getStaticSharedLibraryName() != null) {
-            this.mSharedLibraries.removeSharedLibrary(androidPackage.getStaticSharedLibraryVersion(), androidPackage.getStaticSharedLibraryName());
+            this.mSharedLibraries.removeSharedLibrary(
+                    androidPackage.getStaticSharedLibraryVersion(),
+                    androidPackage.getStaticSharedLibraryName());
         }
     }
 
@@ -90,7 +122,8 @@ public final class RemovePackageHelper {
         int i;
         int i2;
         File file = new File(Environment.getDataAppDirectory(str), new File(str3).getName());
-        GmsAlarmManager$$ExternalSyntheticOutline0.m("Cleaning up ", str2, " on ", str, "PackageManager");
+        GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                "Cleaning up ", str2, " on ", str, "PackageManager");
         PackageManagerService packageManagerService = this.mPm;
         int[] userIds = packageManagerService.mUserManager.getUserIds();
         PackageManagerTracedLock packageManagerTracedLock = packageManagerService.mInstallLock;
@@ -103,7 +136,8 @@ public final class RemovePackageHelper {
                     i = length;
                     i2 = i3;
                     try {
-                        packageManagerService.mInstaller.destroyAppData(str, str2, userIds[i3], 131075, 0L);
+                        packageManagerService.mInstaller.destroyAppData(
+                                str, str2, userIds[i3], 131075, 0L);
                     } catch (Installer.InstallerException e) {
                         e = e;
                         Slog.w("PackageManager", String.valueOf(e));
@@ -130,7 +164,8 @@ public final class RemovePackageHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void cleanUpResources(java.lang.String r4, java.io.File r5, java.lang.String[] r6) {
+    public final void cleanUpResources(
+            java.lang.String r4, java.io.File r5, java.lang.String[] r6) {
         /*
             r3 = this;
             com.android.server.pm.PackageManagerService r0 = r3.mPm
@@ -201,10 +236,14 @@ public final class RemovePackageHelper {
         L7b:
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.RemovePackageHelper.cleanUpResources(java.lang.String, java.io.File, java.lang.String[]):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.RemovePackageHelper.cleanUpResources(java.lang.String,"
+                    + " java.io.File, java.lang.String[]):void");
     }
 
-    public final void clearPackageStateForUserLIF(final PackageSetting packageSetting, final int i, int i2) {
+    public final void clearPackageStateForUserLIF(
+            final PackageSetting packageSetting, final int i, int i2) {
         AndroidPackage androidPackage;
         SharedUserSetting sharedUserSettingLPr;
         int indexOfValue;
@@ -220,7 +259,10 @@ public final class RemovePackageHelper {
             } finally {
             }
         }
-        AndroidPackage buildFakeForDeletion = androidPackage != null ? androidPackage : PackageImpl.buildFakeForDeletion(str, packageSetting.volumeUuid);
+        AndroidPackage buildFakeForDeletion =
+                androidPackage != null
+                        ? androidPackage
+                        : PackageImpl.buildFakeForDeletion(str, packageSetting.volumeUuid);
         if ((i2 & 1) != 0) {
             if ((i2 & 16) != 0) {
                 this.mAppDataHelper.clearAppDataLIF(buildFakeForDeletion, i, 23);
@@ -234,7 +276,11 @@ public final class RemovePackageHelper {
         if (buildFakeForDeletion == null) {
             Slog.wtf("PackageManager", "Package was null!", new Throwable());
         } else {
-            appDataHelper.destroyAppDataLeafLIF(i, 7, buildFakeForDeletion.getPackageName(), buildFakeForDeletion.getVolumeUuid());
+            appDataHelper.destroyAppDataLeafLIF(
+                    i,
+                    7,
+                    buildFakeForDeletion.getPackageName(),
+                    buildFakeForDeletion.getVolumeUuid());
         }
         if (i != -1) {
             PackageUserStateImpl modifyUserState = packageSetting.modifyUserState(i);
@@ -247,16 +293,24 @@ public final class RemovePackageHelper {
             packageSetting.onChanged$2();
         }
         PackageManagerService packageManagerService = this.mPm;
-        final PreferredActivityHelper preferredActivityHelper = new PreferredActivityHelper(packageManagerService, this.mBroadcastHelper);
+        final PreferredActivityHelper preferredActivityHelper =
+                new PreferredActivityHelper(packageManagerService, this.mBroadcastHelper);
         if (i == -1) {
-            DomainVerificationService domainVerificationService = (DomainVerificationService) packageManagerService.mDomainVerificationManager;
+            DomainVerificationService domainVerificationService =
+                    (DomainVerificationService) packageManagerService.mDomainVerificationManager;
             synchronized (domainVerificationService.mLock) {
-                DomainVerificationStateMap domainVerificationStateMap = domainVerificationService.mAttachedPkgStates;
+                DomainVerificationStateMap domainVerificationStateMap =
+                        domainVerificationService.mAttachedPkgStates;
                 Object remove = domainVerificationStateMap.mPackageNameMap.remove(str);
-                if (remove != null && (indexOfValue = domainVerificationStateMap.mDomainSetIdMap.indexOfValue(remove)) >= 0) {
+                if (remove != null
+                        && (indexOfValue =
+                                        domainVerificationStateMap.mDomainSetIdMap.indexOfValue(
+                                                remove))
+                                >= 0) {
                     domainVerificationStateMap.mDomainSetIdMap.removeAt(indexOfValue);
                 }
-                DomainVerificationSettings domainVerificationSettings = domainVerificationService.mSettings;
+                DomainVerificationSettings domainVerificationSettings =
+                        domainVerificationService.mSettings;
                 synchronized (domainVerificationSettings.mLock) {
                     domainVerificationSettings.mPendingPkgStates.remove(str);
                     domainVerificationSettings.mRestoredPkgStates.remove(str);
@@ -266,59 +320,98 @@ public final class RemovePackageHelper {
             synchronized (this.mPm.mLock) {
                 try {
                     this.mPm.mSettings.mKeySetManagerService.removeAppKeySetDataLPw(str);
-                    PackageManagerServiceInjector packageManagerServiceInjector = this.mPm.mInjector;
-                    ((UpdateOwnershipHelper) packageManagerServiceInjector.mUpdateOwnershipHelperProducer.get(packageManagerServiceInjector.mPackageManager, packageManagerServiceInjector)).removeUpdateOwnerDenyList(str);
+                    PackageManagerServiceInjector packageManagerServiceInjector =
+                            this.mPm.mInjector;
+                    ((UpdateOwnershipHelper)
+                                    packageManagerServiceInjector.mUpdateOwnershipHelperProducer
+                                            .get(
+                                                    packageManagerServiceInjector.mPackageManager,
+                                                    packageManagerServiceInjector))
+                            .removeUpdateOwnerDenyList(str);
                     Computer snapshotComputer = this.mPm.snapshotComputer();
                     AppsFilterImpl appsFilterImpl = this.mPm.mAppsFilter;
-                    PackageSetting packageStateInternal = snapshotComputer.getPackageStateInternal(str);
+                    PackageSetting packageStateInternal =
+                            snapshotComputer.getPackageStateInternal(str);
                     appsFilterImpl.getClass();
                     long currentTimeMicro = SystemClock.currentTimeMicro();
-                    appsFilterImpl.removePackageInternal(snapshotComputer, packageStateInternal, false, false);
+                    appsFilterImpl.removePackageInternal(
+                            snapshotComputer, packageStateInternal, false, false);
                     long currentTimeMicro2 = SystemClock.currentTimeMicro() - currentTimeMicro;
                     int length = snapshotComputer.getUserInfos().length;
                     int size = snapshotComputer.getPackageStates().size();
                     int i3 = packageStateInternal.mAppId;
                     if (appsFilterImpl.mCacheReady) {
-                        FrameworkStatsLog.write(FrameworkStatsLog.PACKAGE_MANAGER_APPS_FILTER_CACHE_UPDATE_REPORTED, 2, i3, currentTimeMicro2, length, size, appsFilterImpl.mShouldFilterCache.mSize);
+                        FrameworkStatsLog.write(
+                                FrameworkStatsLog.PACKAGE_MANAGER_APPS_FILTER_CACHE_UPDATE_REPORTED,
+                                2,
+                                i3,
+                                currentTimeMicro2,
+                                length,
+                                size,
+                                appsFilterImpl.mShouldFilterCache.mSize);
                     }
                     final SparseBooleanArray sparseBooleanArray = new SparseBooleanArray();
                     this.mPm.clearPackagePreferredActivitiesLPw(str, sparseBooleanArray, -1);
-                    this.mPm.mInjector.mBackgroundHandler.post(new Runnable() { // from class: com.android.server.pm.RemovePackageHelper$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            RemovePackageHelper removePackageHelper = RemovePackageHelper.this;
-                            SparseBooleanArray sparseBooleanArray2 = sparseBooleanArray;
-                            PreferredActivityHelper preferredActivityHelper2 = preferredActivityHelper;
-                            removePackageHelper.getClass();
-                            if (sparseBooleanArray2.size() > 0) {
-                                preferredActivityHelper2.updateDefaultHomeNotLocked(removePackageHelper.mPm.snapshotComputer(), sparseBooleanArray2);
-                                removePackageHelper.mBroadcastHelper.sendPreferredActivityChangedBroadcast(-1);
-                            }
-                        }
-                    });
+                    this.mPm.mInjector.mBackgroundHandler.post(
+                            new Runnable() { // from class:
+                                             // com.android.server.pm.RemovePackageHelper$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    RemovePackageHelper removePackageHelper =
+                                            RemovePackageHelper.this;
+                                    SparseBooleanArray sparseBooleanArray2 = sparseBooleanArray;
+                                    PreferredActivityHelper preferredActivityHelper2 =
+                                            preferredActivityHelper;
+                                    removePackageHelper.getClass();
+                                    if (sparseBooleanArray2.size() > 0) {
+                                        preferredActivityHelper2.updateDefaultHomeNotLocked(
+                                                removePackageHelper.mPm.snapshotComputer(),
+                                                sparseBooleanArray2);
+                                        removePackageHelper.mBroadcastHelper
+                                                .sendPreferredActivityChangedBroadcast(-1);
+                                    }
+                                }
+                            });
                 } finally {
                 }
             }
         } else {
-            ((DomainVerificationService) packageManagerService.mDomainVerificationManager).clearPackageForUser(i, str);
+            ((DomainVerificationService) packageManagerService.mDomainVerificationManager)
+                    .clearPackageForUser(i, str);
             preferredActivityHelper.clearPackagePreferredActivities(i, str);
-            this.mPermissionManager.onPackageUninstalled(str, packageSetting.mAppId, packageSetting, androidPackage, sharedUserSettingLPr != null ? sharedUserSettingLPr.getPackages() : Collections.emptyList(), i);
+            this.mPermissionManager.onPackageUninstalled(
+                    str,
+                    packageSetting.mAppId,
+                    packageSetting,
+                    androidPackage,
+                    sharedUserSettingLPr != null
+                            ? sharedUserSettingLPr.getPackages()
+                            : Collections.emptyList(),
+                    i);
         }
-        this.mPm.mInjector.mBackgroundHandler.post(new Runnable() { // from class: com.android.server.pm.RemovePackageHelper$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                RemovePackageHelper removePackageHelper = RemovePackageHelper.this;
-                PackageSetting packageSetting2 = packageSetting;
-                int i4 = i;
-                removePackageHelper.getClass();
-                try {
-                    Trace.traceBegin(262144L, "clearKeystoreData:" + packageSetting2.mAppId + " for user: " + i4);
-                    removePackageHelper.mAppDataHelper.clearKeystoreData(i4, packageSetting2.mAppId);
-                } finally {
-                    Trace.traceEnd(262144L);
-                }
-            }
-        });
+        this.mPm.mInjector.mBackgroundHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.pm.RemovePackageHelper$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        RemovePackageHelper removePackageHelper = RemovePackageHelper.this;
+                        PackageSetting packageSetting2 = packageSetting;
+                        int i4 = i;
+                        removePackageHelper.getClass();
+                        try {
+                            Trace.traceBegin(
+                                    262144L,
+                                    "clearKeystoreData:"
+                                            + packageSetting2.mAppId
+                                            + " for user: "
+                                            + i4);
+                            removePackageHelper.mAppDataHelper.clearKeystoreData(
+                                    i4, packageSetting2.mAppId);
+                        } finally {
+                            Trace.traceEnd(262144L);
+                        }
+                    }
+                });
     }
 
     public final void removeCodePath(File file) {
@@ -349,7 +442,8 @@ public final class RemovePackageHelper {
         File parentFile = file.getParentFile();
         boolean startsWith = parentFile.getName().startsWith("~~");
         try {
-            if (this.mIncrementalManager != null && IncrementalManager.isIncrementalPath(file.getAbsolutePath())) {
+            if (this.mIncrementalManager != null
+                    && IncrementalManager.isIncrementalPath(file.getAbsolutePath())) {
                 if (startsWith) {
                     this.mIncrementalManager.rmPackageDir(parentFile);
                 } else {
@@ -364,7 +458,8 @@ public final class RemovePackageHelper {
                 if (packageManagerService.mCacheDir == null) {
                     return;
                 }
-                new PackageCacher(packageManagerService.mCacheDir, null).cleanCachedResult(parentFile);
+                new PackageCacher(packageManagerService.mCacheDir, null)
+                        .cleanCachedResult(parentFile);
             }
         } catch (Installer.InstallerException e) {
             Slog.w("PackageManager", "Failed to remove code path", e);
@@ -376,7 +471,10 @@ public final class RemovePackageHelper {
         PackageManagerTracedLock packageManagerTracedLock = packageManagerService.mInstallLock;
         packageManagerTracedLock.mLock.lock();
         try {
-            PackageSetting packageStateInternal = packageManagerService.snapshotComputer().getPackageStateInternal(androidPackage.getPackageName());
+            PackageSetting packageStateInternal =
+                    packageManagerService
+                            .snapshotComputer()
+                            .getPackageStateInternal(androidPackage.getPackageName());
             if (packageStateInternal != null) {
                 removePackageLI(packageStateInternal.mName, true);
             }
@@ -421,12 +519,21 @@ public final class RemovePackageHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void removePackageDataLIF(com.android.server.pm.PackageSetting r10, int r11, int[] r12, com.android.server.pm.PackageRemovedInfo r13, int r14, boolean r15) {
+    public final void removePackageDataLIF(
+            com.android.server.pm.PackageSetting r10,
+            int r11,
+            int[] r12,
+            com.android.server.pm.PackageRemovedInfo r13,
+            int r14,
+            boolean r15) {
         /*
             Method dump skipped, instructions count: 355
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.RemovePackageHelper.removePackageDataLIF(com.android.server.pm.PackageSetting, int, int[], com.android.server.pm.PackageRemovedInfo, int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.RemovePackageHelper.removePackageDataLIF(com.android.server.pm.PackageSetting,"
+                    + " int, int[], com.android.server.pm.PackageRemovedInfo, int, boolean):void");
     }
 
     public final void removePackageLI(String str, boolean z) {
@@ -435,9 +542,11 @@ public final class RemovePackageHelper {
         synchronized (packageManagerTracedLock) {
             try {
                 AndroidPackage androidPackage = (AndroidPackage) this.mPm.mPackages.remove(str);
-                PermissionManagerService.this.mPermissionManagerServiceImpl.removePackageGrantedPermissionsForMDM(str);
+                PermissionManagerService.this.mPermissionManagerServiceImpl
+                        .removePackageGrantedPermissionsForMDM(str);
                 if (androidPackage != null) {
-                    cleanPackageDataStructuresLILPw(androidPackage, AndroidPackageLegacyUtils.isSystem(androidPackage), z);
+                    cleanPackageDataStructuresLILPw(
+                            androidPackage, AndroidPackageLegacyUtils.isSystem(androidPackage), z);
                 }
             } catch (Throwable th) {
                 boolean z3 = PackageManagerService.DEBUG_COMPRESSION;

@@ -1,6 +1,7 @@
 package android.hardware.camera2.utils;
 
 import com.android.internal.util.Preconditions;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
@@ -17,7 +18,8 @@ public abstract class TypeReference<T> {
         ParameterizedType thisType = (ParameterizedType) getClass().getGenericSuperclass();
         this.mType = thisType.getActualTypeArguments()[0];
         if (containsTypeVariable(this.mType)) {
-            throw new IllegalArgumentException("Including a type variable in a type reference is not allowed");
+            throw new IllegalArgumentException(
+                    "Including a type variable in a type reference is not allowed");
         }
         this.mHash = this.mType.hashCode();
     }
@@ -29,7 +31,8 @@ public abstract class TypeReference<T> {
     private TypeReference(Type type) {
         this.mType = type;
         if (containsTypeVariable(this.mType)) {
-            throw new IllegalArgumentException("Including a type variable in a type reference is not allowed");
+            throw new IllegalArgumentException(
+                    "Including a type variable in a type reference is not allowed");
         }
         this.mHash = this.mType.hashCode();
     }
@@ -160,7 +163,8 @@ public abstract class TypeReference<T> {
             return false;
         }
         WildcardType wild = (WildcardType) type;
-        return containsTypeVariable(wild.getLowerBounds()) || containsTypeVariable(wild.getUpperBounds());
+        return containsTypeVariable(wild.getLowerBounds())
+                || containsTypeVariable(wild.getUpperBounds());
     }
 
     public String toString() {

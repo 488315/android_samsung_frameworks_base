@@ -19,8 +19,7 @@ public interface IProfileChangedCallback extends IInterface {
         }
 
         @Override // com.att.iqi.IProfileChangedCallback
-        public void onProfileChanged() throws RemoteException {
-        }
+        public void onProfileChanged() throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -64,8 +63,12 @@ public interface IProfileChangedCallback extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IProfileChangedCallback.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IProfileChangedCallback)) ? new Proxy(iBinder) : (IProfileChangedCallback) queryLocalInterface;
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(IProfileChangedCallback.DESCRIPTOR);
+            return (queryLocalInterface == null
+                            || !(queryLocalInterface instanceof IProfileChangedCallback))
+                    ? new Proxy(iBinder)
+                    : (IProfileChangedCallback) queryLocalInterface;
         }
 
         @Override // android.os.IInterface
@@ -74,7 +77,8 @@ public interface IProfileChangedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(IProfileChangedCallback.DESCRIPTOR);
             }

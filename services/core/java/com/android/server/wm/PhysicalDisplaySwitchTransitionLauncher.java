@@ -1,7 +1,6 @@
 package com.android.server.wm;
 
 import android.content.Context;
-import com.android.server.wm.DeviceStateController;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -12,9 +11,14 @@ public final class PhysicalDisplaySwitchTransitionLauncher {
     public Transition mTransition;
     public final TransitionController mTransitionController;
     public boolean mShouldRequestTransitionOnDisplaySwitch = false;
-    public DeviceStateController.DeviceState mDeviceState = DeviceStateController.DeviceState.UNKNOWN;
+    public DeviceStateController.DeviceState mDeviceState =
+            DeviceStateController.DeviceState.UNKNOWN;
 
-    public PhysicalDisplaySwitchTransitionLauncher(DisplayContent displayContent, ActivityTaskManagerService activityTaskManagerService, Context context, TransitionController transitionController) {
+    public PhysicalDisplaySwitchTransitionLauncher(
+            DisplayContent displayContent,
+            ActivityTaskManagerService activityTaskManagerService,
+            Context context,
+            TransitionController transitionController) {
         this.mDisplayContent = displayContent;
         this.mAtmService = activityTaskManagerService;
         this.mContext = context;

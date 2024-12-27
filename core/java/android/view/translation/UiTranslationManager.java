@@ -12,9 +12,9 @@ import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.autofill.AutofillId;
-import android.view.translation.UiTranslationManager;
-import android.view.translation.UiTranslationSpec;
+
 import com.android.internal.util.FunctionalUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -39,8 +39,7 @@ public final class UiTranslationManager {
     private final ITranslationManager mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UiTranslationState {
-    }
+    public @interface UiTranslationState {}
 
     public UiTranslationManager(Context context, ITranslationManager service) {
         this.mContext = (Context) Objects.requireNonNull(context);
@@ -49,12 +48,26 @@ public final class UiTranslationManager {
 
     @SystemApi
     @Deprecated
-    public void startTranslation(TranslationSpec sourceSpec, TranslationSpec targetSpec, List<AutofillId> viewIds, ActivityId activityId) {
-        startTranslation(sourceSpec, targetSpec, viewIds, activityId, new UiTranslationSpec.Builder().setShouldPadContentForCompat(true).build());
+    public void startTranslation(
+            TranslationSpec sourceSpec,
+            TranslationSpec targetSpec,
+            List<AutofillId> viewIds,
+            ActivityId activityId) {
+        startTranslation(
+                sourceSpec,
+                targetSpec,
+                viewIds,
+                activityId,
+                new UiTranslationSpec.Builder().setShouldPadContentForCompat(true).build());
     }
 
     @SystemApi
-    public void startTranslation(TranslationSpec sourceSpec, TranslationSpec targetSpec, List<AutofillId> viewIds, ActivityId activityId, UiTranslationSpec uiTranslationSpec) {
+    public void startTranslation(
+            TranslationSpec sourceSpec,
+            TranslationSpec targetSpec,
+            List<AutofillId> viewIds,
+            ActivityId activityId,
+            UiTranslationSpec uiTranslationSpec) {
         Objects.requireNonNull(sourceSpec);
         Objects.requireNonNull(targetSpec);
         Objects.requireNonNull(viewIds);
@@ -65,7 +78,15 @@ public final class UiTranslationManager {
             throw new IllegalArgumentException("Invalid empty views: " + viewIds);
         }
         try {
-            this.mService.updateUiTranslationState(0, sourceSpec, targetSpec, viewIds, activityId.getToken(), activityId.getTaskId(), uiTranslationSpec, this.mContext.getUserId());
+            this.mService.updateUiTranslationState(
+                    0,
+                    sourceSpec,
+                    targetSpec,
+                    viewIds,
+                    activityId.getToken(),
+                    activityId.getTaskId(),
+                    uiTranslationSpec,
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -76,7 +97,15 @@ public final class UiTranslationManager {
         try {
             Objects.requireNonNull(activityId);
             Objects.requireNonNull(activityId.getToken());
-            this.mService.updateUiTranslationState(3, null, null, null, activityId.getToken(), activityId.getTaskId(), null, this.mContext.getUserId());
+            this.mService.updateUiTranslationState(
+                    3,
+                    null,
+                    null,
+                    null,
+                    activityId.getToken(),
+                    activityId.getTaskId(),
+                    null,
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -87,7 +116,15 @@ public final class UiTranslationManager {
         try {
             Objects.requireNonNull(activityId);
             Objects.requireNonNull(activityId.getToken());
-            this.mService.updateUiTranslationState(1, null, null, null, activityId.getToken(), activityId.getTaskId(), null, this.mContext.getUserId());
+            this.mService.updateUiTranslationState(
+                    1,
+                    null,
+                    null,
+                    null,
+                    activityId.getToken(),
+                    activityId.getTaskId(),
+                    null,
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -98,23 +135,37 @@ public final class UiTranslationManager {
         try {
             Objects.requireNonNull(activityId);
             Objects.requireNonNull(activityId.getToken());
-            this.mService.updateUiTranslationState(2, null, null, null, activityId.getToken(), activityId.getTaskId(), null, this.mContext.getUserId());
+            this.mService.updateUiTranslationState(
+                    2,
+                    null,
+                    null,
+                    null,
+                    activityId.getToken(),
+                    activityId.getTaskId(),
+                    null,
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void registerUiTranslationStateCallback(Executor executor, UiTranslationStateCallback callback) {
+    public void registerUiTranslationStateCallback(
+            Executor executor, UiTranslationStateCallback callback) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(callback);
         synchronized (this.mCallbacks) {
             if (this.mCallbacks.containsKey(callback)) {
-                Log.w(TAG, "registerUiTranslationStateCallback: callback already registered; ignoring.");
+                Log.w(
+                        TAG,
+                        "registerUiTranslationStateCallback: callback already registered;"
+                            + " ignoring.");
                 return;
             }
-            IRemoteCallback remoteCallback = new UiTranslationStateRemoteCallback(executor, callback);
+            IRemoteCallback remoteCallback =
+                    new UiTranslationStateRemoteCallback(executor, callback);
             try {
-                this.mService.registerUiTranslationStateCallback(remoteCallback, this.mContext.getUserId());
+                this.mService.registerUiTranslationStateCallback(
+                        remoteCallback, this.mContext.getUserId());
                 this.mCallbacks.put(callback, remoteCallback);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
@@ -131,7 +182,8 @@ public final class UiTranslationManager {
                 return;
             }
             try {
-                this.mService.unregisterUiTranslationStateCallback(remoteCallback, this.mContext.getUserId());
+                this.mService.unregisterUiTranslationStateCallback(
+                        remoteCallback, this.mContext.getUserId());
                 this.mCallbacks.remove(callback);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
@@ -139,9 +191,14 @@ public final class UiTranslationManager {
         }
     }
 
-    public void onTranslationFinished(boolean activityDestroyed, ActivityId activityId, ComponentName componentName) {
+    public void onTranslationFinished(
+            boolean activityDestroyed, ActivityId activityId, ComponentName componentName) {
         try {
-            this.mService.onTranslationFinished(activityDestroyed, activityId.getToken(), componentName, this.mContext.getUserId());
+            this.mService.onTranslationFinished(
+                    activityDestroyed,
+                    activityId.getToken(),
+                    componentName,
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -161,22 +218,29 @@ public final class UiTranslationManager {
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$sendResult$1(final Bundle bundle) throws Exception {
-            this.mExecutor.execute(new Runnable() { // from class: android.view.translation.UiTranslationManager$UiTranslationStateRemoteCallback$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    UiTranslationManager.UiTranslationStateRemoteCallback.this.lambda$sendResult$0(bundle);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.view.translation.UiTranslationManager$UiTranslationStateRemoteCallback$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            UiTranslationManager.UiTranslationStateRemoteCallback.this
+                                    .lambda$sendResult$0(bundle);
+                        }
+                    });
         }
 
         @Override // android.os.IRemoteCallback
         public void sendResult(final Bundle bundle) {
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.view.translation.UiTranslationManager$UiTranslationStateRemoteCallback$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    UiTranslationManager.UiTranslationStateRemoteCallback.this.lambda$sendResult$1(bundle);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.view.translation.UiTranslationManager$UiTranslationStateRemoteCallback$$ExternalSyntheticLambda0
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            UiTranslationManager.UiTranslationStateRemoteCallback.this
+                                    .lambda$sendResult$1(bundle);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -186,8 +250,16 @@ public final class UiTranslationManager {
             String packageName = bundle.getString("package_name");
             switch (state) {
                 case 0:
-                    this.mSourceLocale = (ULocale) bundle.getSerializable(UiTranslationManager.EXTRA_SOURCE_LOCALE, ULocale.class);
-                    this.mTargetLocale = (ULocale) bundle.getSerializable(UiTranslationManager.EXTRA_TARGET_LOCALE, ULocale.class);
+                    this.mSourceLocale =
+                            (ULocale)
+                                    bundle.getSerializable(
+                                            UiTranslationManager.EXTRA_SOURCE_LOCALE,
+                                            ULocale.class);
+                    this.mTargetLocale =
+                            (ULocale)
+                                    bundle.getSerializable(
+                                            UiTranslationManager.EXTRA_TARGET_LOCALE,
+                                            ULocale.class);
                     this.mCallback.onStarted(this.mSourceLocale, this.mTargetLocale, packageName);
                     break;
                 case 1:

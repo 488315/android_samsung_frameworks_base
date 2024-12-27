@@ -1,6 +1,5 @@
 package com.android.server.autofill.ui;
 
-import com.android.server.autofill.ui.AutoFillUI;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -9,7 +8,8 @@ public final /* synthetic */ class AutoFillUI$$ExternalSyntheticLambda1 implemen
     public final /* synthetic */ AutoFillUI f$0;
     public final /* synthetic */ AutoFillUI.AutoFillUiCallback f$1;
 
-    public /* synthetic */ AutoFillUI$$ExternalSyntheticLambda1(AutoFillUI autoFillUI, AutoFillUI.AutoFillUiCallback autoFillUiCallback, int i) {
+    public /* synthetic */ AutoFillUI$$ExternalSyntheticLambda1(
+            AutoFillUI autoFillUI, AutoFillUI.AutoFillUiCallback autoFillUiCallback, int i) {
         this.$r8$classId = i;
         this.f$0 = autoFillUI;
         this.f$1 = autoFillUiCallback;

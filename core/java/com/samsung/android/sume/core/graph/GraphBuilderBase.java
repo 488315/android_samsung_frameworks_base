@@ -13,12 +13,19 @@ public abstract class GraphBuilderBase<T> implements GraphBuilder<T> {
 
     @Override // com.samsung.android.sume.core.graph.GraphBuilder
     public GraphBuilder<T> addNode(GraphNode<? extends T>... nodes) {
-        this.graphNodes.addAll((Collection) Arrays.stream(nodes).map(new Function() { // from class: com.samsung.android.sume.core.graph.GraphBuilderBase$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return GraphBuilderBase.lambda$addNode$0((GraphNode) obj);
-            }
-        }).collect(Collectors.toList()));
+        this.graphNodes.addAll(
+                (Collection)
+                        Arrays.stream(nodes)
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.graph.GraphBuilderBase$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return GraphBuilderBase.lambda$addNode$0(
+                                                        (GraphNode) obj);
+                                            }
+                                        })
+                                .collect(Collectors.toList()));
         return this;
     }
 

@@ -9,8 +9,10 @@ import android.os.Parcelable;
 import android.os.SystemClock;
 import android.util.Printer;
 import android.util.TimeUtils;
+
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.text.DecimalFormat;
@@ -23,9 +25,7 @@ import java.util.function.Supplier;
 /* loaded from: classes2.dex */
 public class Location implements Parcelable {
 
-    @SystemApi
-    @Deprecated
-    public static final String EXTRA_NO_GPS_LOCATION = "noGPSLocation";
+    @SystemApi @Deprecated public static final String EXTRA_NO_GPS_LOCATION = "noGPSLocation";
     public static final int FORMAT_DEGREES = 0;
     public static final int FORMAT_MINUTES = 1;
     public static final int FORMAT_SECONDS = 2;
@@ -55,71 +55,75 @@ public class Location implements Parcelable {
     private float mSpeedAccuracyMetersPerSecond;
     private float mSpeedMetersPerSecond;
     private long mTimeMs;
-    private static final ThreadLocal<BearingDistanceCache> sBearingDistanceCache = ThreadLocal.withInitial(new Supplier() { // from class: android.location.Location$$ExternalSyntheticLambda0
-        @Override // java.util.function.Supplier
-        public final Object get() {
-            return Location.m2105$r8$lambda$LCoyno7iOKo6n1w2mcfXqv702o();
-        }
-    });
-    public static final Parcelable.Creator<Location> CREATOR = new Parcelable.Creator<Location>() { // from class: android.location.Location.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Location createFromParcel(Parcel in) {
-            Location l = new Location(in.readString8());
-            l.mFieldsMask = in.readInt();
-            l.mTimeMs = in.readLong();
-            l.mElapsedRealtimeNs = in.readLong();
-            if (l.hasElapsedRealtimeUncertaintyNanos()) {
-                l.mElapsedRealtimeUncertaintyNs = in.readDouble();
-            }
-            l.mLatitudeDegrees = in.readDouble();
-            l.mLongitudeDegrees = in.readDouble();
-            if (l.hasAltitude()) {
-                l.mAltitudeMeters = in.readDouble();
-            }
-            if (l.hasSpeed()) {
-                l.mSpeedMetersPerSecond = in.readFloat();
-            }
-            if (l.hasBearing()) {
-                l.mBearingDegrees = in.readFloat();
-            }
-            if (l.hasAccuracy()) {
-                l.mHorizontalAccuracyMeters = in.readFloat();
-            }
-            if (l.hasVerticalAccuracy()) {
-                l.mAltitudeAccuracyMeters = in.readFloat();
-            }
-            if (l.hasSpeedAccuracy()) {
-                l.mSpeedAccuracyMetersPerSecond = in.readFloat();
-            }
-            if (l.hasBearingAccuracy()) {
-                l.mBearingAccuracyDegrees = in.readFloat();
-            }
-            if (l.hasMslAltitude()) {
-                l.mMslAltitudeMeters = in.readDouble();
-            }
-            if (l.hasMslAltitudeAccuracy()) {
-                l.mMslAltitudeAccuracyMeters = in.readFloat();
-            }
-            l.mExtras = Bundle.setDefusable(in.readBundle(), true);
-            return l;
-        }
+    private static final ThreadLocal<BearingDistanceCache> sBearingDistanceCache =
+            ThreadLocal.withInitial(
+                    new Supplier() { // from class:
+                        // android.location.Location$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Supplier
+                        public final Object get() {
+                            return Location.m2105$r8$lambda$LCoyno7iOKo6n1w2mcfXqv702o();
+                        }
+                    });
+    public static final Parcelable.Creator<Location> CREATOR =
+            new Parcelable.Creator<Location>() { // from class: android.location.Location.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Location createFromParcel(Parcel in) {
+                    Location l = new Location(in.readString8());
+                    l.mFieldsMask = in.readInt();
+                    l.mTimeMs = in.readLong();
+                    l.mElapsedRealtimeNs = in.readLong();
+                    if (l.hasElapsedRealtimeUncertaintyNanos()) {
+                        l.mElapsedRealtimeUncertaintyNs = in.readDouble();
+                    }
+                    l.mLatitudeDegrees = in.readDouble();
+                    l.mLongitudeDegrees = in.readDouble();
+                    if (l.hasAltitude()) {
+                        l.mAltitudeMeters = in.readDouble();
+                    }
+                    if (l.hasSpeed()) {
+                        l.mSpeedMetersPerSecond = in.readFloat();
+                    }
+                    if (l.hasBearing()) {
+                        l.mBearingDegrees = in.readFloat();
+                    }
+                    if (l.hasAccuracy()) {
+                        l.mHorizontalAccuracyMeters = in.readFloat();
+                    }
+                    if (l.hasVerticalAccuracy()) {
+                        l.mAltitudeAccuracyMeters = in.readFloat();
+                    }
+                    if (l.hasSpeedAccuracy()) {
+                        l.mSpeedAccuracyMetersPerSecond = in.readFloat();
+                    }
+                    if (l.hasBearingAccuracy()) {
+                        l.mBearingAccuracyDegrees = in.readFloat();
+                    }
+                    if (l.hasMslAltitude()) {
+                        l.mMslAltitudeMeters = in.readDouble();
+                    }
+                    if (l.hasMslAltitudeAccuracy()) {
+                        l.mMslAltitudeAccuracyMeters = in.readFloat();
+                    }
+                    l.mExtras = Bundle.setDefusable(in.readBundle(), true);
+                    return l;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Location[] newArray(int size) {
-            return new Location[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Location[] newArray(int size) {
+                    return new Location[size];
+                }
+            };
     private int mFieldsMask = 0;
     private Bundle mExtras = null;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Format {
-    }
+    public @interface Format {}
 
     /* renamed from: $r8$lambda$LCoyno7iOKo6n1w2mcfX-qv702o, reason: not valid java name */
-    public static /* synthetic */ BearingDistanceCache m2105$r8$lambda$LCoyno7iOKo6n1w2mcfXqv702o() {
+    public static /* synthetic */ BearingDistanceCache
+            m2105$r8$lambda$LCoyno7iOKo6n1w2mcfXqv702o() {
         return new BearingDistanceCache();
     }
 
@@ -173,16 +177,32 @@ public class Location implements Parcelable {
 
     public float distanceTo(Location dest) {
         BearingDistanceCache cache = sBearingDistanceCache.get();
-        if (this.mLatitudeDegrees != cache.mLat1 || this.mLongitudeDegrees != cache.mLon1 || dest.mLatitudeDegrees != cache.mLat2 || dest.mLongitudeDegrees != cache.mLon2) {
-            computeDistanceAndBearing(this.mLatitudeDegrees, this.mLongitudeDegrees, dest.mLatitudeDegrees, dest.mLongitudeDegrees, cache);
+        if (this.mLatitudeDegrees != cache.mLat1
+                || this.mLongitudeDegrees != cache.mLon1
+                || dest.mLatitudeDegrees != cache.mLat2
+                || dest.mLongitudeDegrees != cache.mLon2) {
+            computeDistanceAndBearing(
+                    this.mLatitudeDegrees,
+                    this.mLongitudeDegrees,
+                    dest.mLatitudeDegrees,
+                    dest.mLongitudeDegrees,
+                    cache);
         }
         return cache.mDistance;
     }
 
     public float bearingTo(Location dest) {
         BearingDistanceCache cache = sBearingDistanceCache.get();
-        if (this.mLatitudeDegrees != cache.mLat1 || this.mLongitudeDegrees != cache.mLon1 || dest.mLatitudeDegrees != cache.mLat2 || dest.mLongitudeDegrees != cache.mLon2) {
-            computeDistanceAndBearing(this.mLatitudeDegrees, this.mLongitudeDegrees, dest.mLatitudeDegrees, dest.mLongitudeDegrees, cache);
+        if (this.mLatitudeDegrees != cache.mLat1
+                || this.mLongitudeDegrees != cache.mLon1
+                || dest.mLatitudeDegrees != cache.mLat2
+                || dest.mLongitudeDegrees != cache.mLon2) {
+            computeDistanceAndBearing(
+                    this.mLatitudeDegrees,
+                    this.mLongitudeDegrees,
+                    dest.mLatitudeDegrees,
+                    dest.mLongitudeDegrees,
+                    cache);
         }
         return cache.mInitialBearing;
     }
@@ -446,7 +466,12 @@ public class Location implements Parcelable {
     }
 
     public boolean isComplete() {
-        return (this.mProvider == null || !hasAccuracy() || this.mTimeMs == 0 || this.mElapsedRealtimeNs == 0) ? false : true;
+        return (this.mProvider == null
+                        || !hasAccuracy()
+                        || this.mTimeMs == 0
+                        || this.mElapsedRealtimeNs == 0)
+                ? false
+                : true;
     }
 
     @SystemApi
@@ -474,7 +499,94 @@ public class Location implements Parcelable {
             return false;
         }
         Location location = (Location) o;
-        return this.mTimeMs == location.mTimeMs && this.mElapsedRealtimeNs == location.mElapsedRealtimeNs && hasElapsedRealtimeUncertaintyNanos() == location.hasElapsedRealtimeUncertaintyNanos() && (!hasElapsedRealtimeUncertaintyNanos() || Double.compare(location.mElapsedRealtimeUncertaintyNs, this.mElapsedRealtimeUncertaintyNs) == 0) && Double.compare(location.mLatitudeDegrees, this.mLatitudeDegrees) == 0 && Double.compare(location.mLongitudeDegrees, this.mLongitudeDegrees) == 0 && hasAltitude() == location.hasAltitude() && ((!hasAltitude() || Double.compare(location.mAltitudeMeters, this.mAltitudeMeters) == 0) && hasSpeed() == location.hasSpeed() && ((!hasSpeed() || Float.compare(location.mSpeedMetersPerSecond, this.mSpeedMetersPerSecond) == 0) && hasBearing() == location.hasBearing() && ((!hasBearing() || Float.compare(location.mBearingDegrees, this.mBearingDegrees) == 0) && hasAccuracy() == location.hasAccuracy() && ((!hasAccuracy() || Float.compare(location.mHorizontalAccuracyMeters, this.mHorizontalAccuracyMeters) == 0) && hasVerticalAccuracy() == location.hasVerticalAccuracy() && ((!hasVerticalAccuracy() || Float.compare(location.mAltitudeAccuracyMeters, this.mAltitudeAccuracyMeters) == 0) && hasSpeedAccuracy() == location.hasSpeedAccuracy() && ((!hasSpeedAccuracy() || Float.compare(location.mSpeedAccuracyMetersPerSecond, this.mSpeedAccuracyMetersPerSecond) == 0) && hasBearingAccuracy() == location.hasBearingAccuracy() && ((!hasBearingAccuracy() || Float.compare(location.mBearingAccuracyDegrees, this.mBearingAccuracyDegrees) == 0) && hasMslAltitude() == location.hasMslAltitude() && ((!hasMslAltitude() || Double.compare(location.mMslAltitudeMeters, this.mMslAltitudeMeters) == 0) && hasMslAltitudeAccuracy() == location.hasMslAltitudeAccuracy() && ((!hasMslAltitudeAccuracy() || Float.compare(location.mMslAltitudeAccuracyMeters, this.mMslAltitudeAccuracyMeters) == 0) && Objects.equals(this.mProvider, location.mProvider) && areExtrasEqual(this.mExtras, location.mExtras))))))))));
+        return this.mTimeMs == location.mTimeMs
+                && this.mElapsedRealtimeNs == location.mElapsedRealtimeNs
+                && hasElapsedRealtimeUncertaintyNanos()
+                        == location.hasElapsedRealtimeUncertaintyNanos()
+                && (!hasElapsedRealtimeUncertaintyNanos()
+                        || Double.compare(
+                                        location.mElapsedRealtimeUncertaintyNs,
+                                        this.mElapsedRealtimeUncertaintyNs)
+                                == 0)
+                && Double.compare(location.mLatitudeDegrees, this.mLatitudeDegrees) == 0
+                && Double.compare(location.mLongitudeDegrees, this.mLongitudeDegrees) == 0
+                && hasAltitude() == location.hasAltitude()
+                && ((!hasAltitude()
+                                || Double.compare(location.mAltitudeMeters, this.mAltitudeMeters)
+                                        == 0)
+                        && hasSpeed() == location.hasSpeed()
+                        && ((!hasSpeed()
+                                        || Float.compare(
+                                                        location.mSpeedMetersPerSecond,
+                                                        this.mSpeedMetersPerSecond)
+                                                == 0)
+                                && hasBearing() == location.hasBearing()
+                                && ((!hasBearing()
+                                                || Float.compare(
+                                                                location.mBearingDegrees,
+                                                                this.mBearingDegrees)
+                                                        == 0)
+                                        && hasAccuracy() == location.hasAccuracy()
+                                        && ((!hasAccuracy()
+                                                        || Float.compare(
+                                                                        location.mHorizontalAccuracyMeters,
+                                                                        this
+                                                                                .mHorizontalAccuracyMeters)
+                                                                == 0)
+                                                && hasVerticalAccuracy()
+                                                        == location.hasVerticalAccuracy()
+                                                && ((!hasVerticalAccuracy()
+                                                                || Float.compare(
+                                                                                location.mAltitudeAccuracyMeters,
+                                                                                this
+                                                                                        .mAltitudeAccuracyMeters)
+                                                                        == 0)
+                                                        && hasSpeedAccuracy()
+                                                                == location.hasSpeedAccuracy()
+                                                        && ((!hasSpeedAccuracy()
+                                                                        || Float.compare(
+                                                                                        location.mSpeedAccuracyMetersPerSecond,
+                                                                                        this
+                                                                                                .mSpeedAccuracyMetersPerSecond)
+                                                                                == 0)
+                                                                && hasBearingAccuracy()
+                                                                        == location
+                                                                                .hasBearingAccuracy()
+                                                                && ((!hasBearingAccuracy()
+                                                                                || Float.compare(
+                                                                                                location.mBearingAccuracyDegrees,
+                                                                                                this
+                                                                                                        .mBearingAccuracyDegrees)
+                                                                                        == 0)
+                                                                        && hasMslAltitude()
+                                                                                == location
+                                                                                        .hasMslAltitude()
+                                                                        && ((!hasMslAltitude()
+                                                                                        || Double
+                                                                                                        .compare(
+                                                                                                                location.mMslAltitudeMeters,
+                                                                                                                this
+                                                                                                                        .mMslAltitudeMeters)
+                                                                                                == 0)
+                                                                                && hasMslAltitudeAccuracy()
+                                                                                        == location
+                                                                                                .hasMslAltitudeAccuracy()
+                                                                                && ((!hasMslAltitudeAccuracy()
+                                                                                                || Float
+                                                                                                                .compare(
+                                                                                                                        location.mMslAltitudeAccuracyMeters,
+                                                                                                                        this
+                                                                                                                                .mMslAltitudeAccuracyMeters)
+                                                                                                        == 0)
+                                                                                        && Objects
+                                                                                                .equals(
+                                                                                                        this
+                                                                                                                .mProvider,
+                                                                                                        location.mProvider)
+                                                                                        && areExtrasEqual(
+                                                                                                this
+                                                                                                        .mExtras,
+                                                                                                location.mExtras))))))))));
     }
 
     private static boolean areExtrasEqual(Bundle extras1, Bundle extras2) {
@@ -488,14 +600,24 @@ public class Location implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(this.mProvider, Long.valueOf(this.mElapsedRealtimeNs), Double.valueOf(this.mLatitudeDegrees), Double.valueOf(this.mLongitudeDegrees));
+        return Objects.hash(
+                this.mProvider,
+                Long.valueOf(this.mElapsedRealtimeNs),
+                Double.valueOf(this.mLatitudeDegrees),
+                Double.valueOf(this.mLongitudeDegrees));
     }
 
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("Location[");
         s.append(this.mProvider);
-        s.append(" ").append(String.format(Locale.ROOT, "%.6f,%.6f", Double.valueOf(this.mLatitudeDegrees), Double.valueOf(this.mLongitudeDegrees)));
+        s.append(" ")
+                .append(
+                        String.format(
+                                Locale.ROOT,
+                                "%.6f,%.6f",
+                                Double.valueOf(this.mLatitudeDegrees),
+                                Double.valueOf(this.mLongitudeDegrees)));
         if (hasAccuracy()) {
             s.append(" hAcc=").append(this.mHorizontalAccuracyMeters);
         }
@@ -588,7 +710,10 @@ public class Location implements Parcelable {
 
     public static String convert(double coordinate, int outputType) {
         Preconditions.checkArgumentInRange(coordinate, -180.0d, 180.0d, "coordinate");
-        Preconditions.checkArgument(outputType == 0 || outputType == 1 || outputType == 2, "%d is an unrecognized format", Integer.valueOf(outputType));
+        Preconditions.checkArgument(
+                outputType == 0 || outputType == 1 || outputType == 2,
+                "%d is an unrecognized format",
+                Integer.valueOf(outputType));
         StringBuilder sb = new StringBuilder();
         if (coordinate < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
             sb.append('-');
@@ -647,12 +772,18 @@ public class Location implements Parcelable {
                 } else {
                     min = Double.parseDouble(minutes);
                 }
-                boolean isNegative180 = negative && deg == 180 && min == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && sec == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+                boolean isNegative180 =
+                        negative
+                                && deg == 180
+                                && min == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                                && sec == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
                 try {
-                    if (deg >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && (deg <= 179 || isNegative180)) {
+                    if (deg >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                            && (deg <= 179 || isNegative180)) {
                         if (min >= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && min < 60.0d) {
                             if (!secPresent || min <= 59.0d) {
-                                if (sec < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN || sec >= 60.0d) {
+                                if (sec < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                                        || sec >= 60.0d) {
                                     throw new IllegalArgumentException("coordinate=" + coordinate2);
                                 }
                                 double val2 = (((deg * 3600.0d) + (60.0d * min)) + sec) / 3600.0d;
@@ -674,7 +805,8 @@ public class Location implements Parcelable {
         }
     }
 
-    private static void computeDistanceAndBearing(double lat1, double lon1, double lat2, double lon2, BearingDistanceCache results) {
+    private static void computeDistanceAndBearing(
+            double lat1, double lon1, double lat2, double lon2, BearingDistanceCache results) {
         double lat22;
         double lon12;
         double sinAlpha;
@@ -683,7 +815,9 @@ public class Location implements Parcelable {
         double sinSigma = lon1 * 0.017453292519943295d;
         double lon22 = 0.017453292519943295d * lon2;
         double f = (6378137.0d - 6356752.3142d) / 6378137.0d;
-        double aSqMinusBSqOverBSq = ((6378137.0d * 6378137.0d) - (6356752.3142d * 6356752.3142d)) / (6356752.3142d * 6356752.3142d);
+        double aSqMinusBSqOverBSq =
+                ((6378137.0d * 6378137.0d) - (6356752.3142d * 6356752.3142d))
+                        / (6356752.3142d * 6356752.3142d);
         double l = lon22 - sinSigma;
         double aA = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         double u1 = Math.atan((1.0d - f) * Math.tan(lat12));
@@ -728,12 +862,42 @@ public class Location implements Parcelable {
                 cos2SM = lat23 - ((sinU1sinU2 * 2.0d) / cosSqAlpha);
             }
             double uSquared = cosSqAlpha * aSqMinusBSqOverBSq;
-            aA = ((uSquared / 16384.0d) * (((((320.0d - (175.0d * uSquared)) * uSquared) - 768.0d) * uSquared) + 4096.0d)) + 1.0d;
-            double bB = (uSquared / 1024.0d) * (((((74.0d - (47.0d * uSquared)) * uSquared) - 128.0d) * uSquared) + 256.0d);
+            aA =
+                    ((uSquared / 16384.0d)
+                                    * (((((320.0d - (175.0d * uSquared)) * uSquared) - 768.0d)
+                                                    * uSquared)
+                                            + 4096.0d))
+                            + 1.0d;
+            double bB =
+                    (uSquared / 1024.0d)
+                            * (((((74.0d - (47.0d * uSquared)) * uSquared) - 128.0d) * uSquared)
+                                    + 256.0d);
             double cC = (f / 16.0d) * cosSqAlpha * (((4.0d - (3.0d * cosSqAlpha)) * f) + 4.0d);
             double cos2SMSq = cos2SM * cos2SM;
-            deltaSigma = bB * sinSigma2 * (cos2SM + ((bB / 4.0d) * ((((cos2SMSq * 2.0d) - 1.0d) * lat23) - ((((bB / 6.0d) * cos2SM) * (((sinSigma2 * 4.0d) * sinSigma2) - 3.0d)) * ((4.0d * cos2SMSq) - 3.0d)))));
-            lambda = l + ((1.0d - cC) * f * sinAlpha * (sigma + (cC * sinSigma2 * (cos2SM + (cC * lat23 * (((2.0d * cos2SM) * cos2SM) - 1.0d))))));
+            deltaSigma =
+                    bB
+                            * sinSigma2
+                            * (cos2SM
+                                    + ((bB / 4.0d)
+                                            * ((((cos2SMSq * 2.0d) - 1.0d) * lat23)
+                                                    - ((((bB / 6.0d) * cos2SM)
+                                                                    * (((sinSigma2 * 4.0d)
+                                                                                    * sinSigma2)
+                                                                            - 3.0d))
+                                                            * ((4.0d * cos2SMSq) - 3.0d)))));
+            lambda =
+                    l
+                            + ((1.0d - cC)
+                                    * f
+                                    * sinAlpha
+                                    * (sigma
+                                            + (cC
+                                                    * sinSigma2
+                                                    * (cos2SM
+                                                            + (cC
+                                                                    * lat23
+                                                                    * (((2.0d * cos2SM) * cos2SM)
+                                                                            - 1.0d))))));
             double delta = (lambda - lambdaOrig) / lambda;
             if (Math.abs(delta) < 1.0E-12d) {
                 break;
@@ -743,9 +907,16 @@ public class Location implements Parcelable {
             cosSigma = lat22;
         }
         results.mDistance = (float) (6356752.3142d * aA * (sigma - deltaSigma));
-        float initialBearing = (float) Math.atan2(cosU2 * sinLambda, (cosU1 * sinU2) - ((sinU1 * cosU2) * cosLambda));
+        float initialBearing =
+                (float)
+                        Math.atan2(
+                                cosU2 * sinLambda, (cosU1 * sinU2) - ((sinU1 * cosU2) * cosLambda));
         results.mInitialBearing = (float) (initialBearing * 57.29577951308232d);
-        float finalBearing = (float) Math.atan2(cosU1 * sinLambda, ((-sinU1) * cosU2) + (cosU1 * sinU2 * cosLambda));
+        float finalBearing =
+                (float)
+                        Math.atan2(
+                                cosU1 * sinLambda,
+                                ((-sinU1) * cosU2) + (cosU1 * sinU2 * cosLambda));
         results.mFinalBearing = (float) (finalBearing * 57.29577951308232d);
         results.mLat1 = lat12;
         results.mLat2 = lat22;
@@ -753,7 +924,12 @@ public class Location implements Parcelable {
         results.mLon2 = lon22;
     }
 
-    public static void distanceBetween(double startLatitude, double startLongitude, double endLatitude, double endLongitude, float[] results) {
+    public static void distanceBetween(
+            double startLatitude,
+            double startLongitude,
+            double endLatitude,
+            double endLongitude,
+            float[] results) {
         if (results == null || results.length < 1) {
             throw new IllegalArgumentException("results is null or has length < 1");
         }

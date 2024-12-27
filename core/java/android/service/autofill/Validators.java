@@ -17,7 +17,10 @@ public final class Validators {
     }
 
     public static Validator not(Validator validator) {
-        Preconditions.checkArgument(validator instanceof InternalValidator, "validator not provided by Android System: %s", validator);
+        Preconditions.checkArgument(
+                validator instanceof InternalValidator,
+                "validator not provided by Android System: %s",
+                validator);
         return new NegationValidator((InternalValidator) validator);
     }
 
@@ -25,7 +28,11 @@ public final class Validators {
         Preconditions.checkArrayElementsNotNull(validators, "validators");
         InternalValidator[] internals = new InternalValidator[validators.length];
         for (int i = 0; i < validators.length; i++) {
-            Preconditions.checkArgument(validators[i] instanceof InternalValidator, "element %d not provided by Android System: %s", Integer.valueOf(i), validators[i]);
+            Preconditions.checkArgument(
+                    validators[i] instanceof InternalValidator,
+                    "element %d not provided by Android System: %s",
+                    Integer.valueOf(i),
+                    validators[i]);
             internals[i] = (InternalValidator) validators[i];
         }
         return internals;

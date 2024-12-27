@@ -5,6 +5,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -15,26 +16,28 @@ public final class KnownNetworkConnectionStatus implements Parcelable {
     public static final int CONNECTION_STATUS_SAVED = 1;
     public static final int CONNECTION_STATUS_SAVE_FAILED = 2;
     public static final int CONNECTION_STATUS_UNKNOWN = 0;
-    public static final Parcelable.Creator<KnownNetworkConnectionStatus> CREATOR = new Parcelable.Creator<KnownNetworkConnectionStatus>() { // from class: android.net.wifi.sharedconnectivity.app.KnownNetworkConnectionStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KnownNetworkConnectionStatus createFromParcel(Parcel in) {
-            return KnownNetworkConnectionStatus.readFromParcel(in);
-        }
+    public static final Parcelable.Creator<KnownNetworkConnectionStatus> CREATOR =
+            new Parcelable.Creator<
+                    KnownNetworkConnectionStatus>() { // from class:
+                                                      // android.net.wifi.sharedconnectivity.app.KnownNetworkConnectionStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KnownNetworkConnectionStatus createFromParcel(Parcel in) {
+                    return KnownNetworkConnectionStatus.readFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KnownNetworkConnectionStatus[] newArray(int size) {
-            return new KnownNetworkConnectionStatus[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KnownNetworkConnectionStatus[] newArray(int size) {
+                    return new KnownNetworkConnectionStatus[size];
+                }
+            };
     private final Bundle mExtras;
     private final KnownNetwork mKnownNetwork;
     private final int mStatus;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConnectionStatus {
-    }
+    public @interface ConnectionStatus {}
 
     public static final class Builder {
         private Bundle mExtras = Bundle.EMPTY;
@@ -91,7 +94,8 @@ public final class KnownNetworkConnectionStatus implements Parcelable {
             return false;
         }
         KnownNetworkConnectionStatus other = (KnownNetworkConnectionStatus) obj;
-        return this.mStatus == other.getStatus() && Objects.equals(this.mKnownNetwork, other.getKnownNetwork());
+        return this.mStatus == other.getStatus()
+                && Objects.equals(this.mKnownNetwork, other.getKnownNetwork());
     }
 
     public int hashCode() {
@@ -111,10 +115,17 @@ public final class KnownNetworkConnectionStatus implements Parcelable {
     }
 
     public static KnownNetworkConnectionStatus readFromParcel(Parcel in) {
-        return new KnownNetworkConnectionStatus(in.readInt(), KnownNetwork.readFromParcel(in), in.readBundle());
+        return new KnownNetworkConnectionStatus(
+                in.readInt(), KnownNetwork.readFromParcel(in), in.readBundle());
     }
 
     public String toString() {
-        return "KnownNetworkConnectionStatus[status=" + this.mStatus + "known network=" + this.mKnownNetwork.toString() + "extras=" + this.mExtras.toString() + NavigationBarInflaterView.SIZE_MOD_END;
+        return "KnownNetworkConnectionStatus[status="
+                + this.mStatus
+                + "known network="
+                + this.mKnownNetwork.toString()
+                + "extras="
+                + this.mExtras.toString()
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

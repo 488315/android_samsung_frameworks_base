@@ -5,9 +5,9 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
 import android.os.SystemProperties;
-import android.renderscript.Element;
 import android.util.Log;
 import android.view.Surface;
+
 import java.io.File;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
@@ -150,13 +150,15 @@ public class RenderScript {
 
     native long rsnAllocationAdapterCreate(long j, long j2, long j3);
 
-    native void rsnAllocationAdapterOffset(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9);
+    native void rsnAllocationAdapterOffset(
+            long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9);
 
     native void rsnAllocationCopyFromBitmap(long j, long j2, Bitmap bitmap);
 
     native void rsnAllocationCopyToBitmap(long j, long j2, Bitmap bitmap);
 
-    native long rsnAllocationCreateBitmapBackedAllocation(long j, long j2, int i, Bitmap bitmap, int i2);
+    native long rsnAllocationCreateBitmapBackedAllocation(
+            long j, long j2, int i, Bitmap bitmap, int i2);
 
     native long rsnAllocationCreateFromBitmap(long j, long j2, int i, Bitmap bitmap, int i2);
 
@@ -164,25 +166,83 @@ public class RenderScript {
 
     native long rsnAllocationCubeCreateFromBitmap(long j, long j2, int i, Bitmap bitmap, int i2);
 
-    native void rsnAllocationData1D(long j, long j2, int i, int i2, int i3, Object obj, int i4, int i5, int i6, boolean z);
+    native void rsnAllocationData1D(
+            long j, long j2, int i, int i2, int i3, Object obj, int i4, int i5, int i6, boolean z);
 
-    native void rsnAllocationData2D(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, long j3, int i7, int i8, int i9, int i10);
+    native void rsnAllocationData2D(
+            long j,
+            long j2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            long j3,
+            int i7,
+            int i8,
+            int i9,
+            int i10);
 
-    native void rsnAllocationData2D(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, Object obj, int i7, int i8, int i9, boolean z);
+    native void rsnAllocationData2D(
+            long j,
+            long j2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            Object obj,
+            int i7,
+            int i8,
+            int i9,
+            boolean z);
 
     native void rsnAllocationData2D(long j, long j2, int i, int i2, int i3, int i4, Bitmap bitmap);
 
-    native void rsnAllocationData3D(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7, long j3, int i8, int i9, int i10, int i11);
+    native void rsnAllocationData3D(
+            long j,
+            long j2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            long j3,
+            int i8,
+            int i9,
+            int i10,
+            int i11);
 
-    native void rsnAllocationData3D(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7, Object obj, int i8, int i9, int i10, boolean z);
+    native void rsnAllocationData3D(
+            long j,
+            long j2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            Object obj,
+            int i8,
+            int i9,
+            int i10,
+            boolean z);
 
-    native void rsnAllocationElementData(long j, long j2, int i, int i2, int i3, int i4, int i5, byte[] bArr, int i6);
+    native void rsnAllocationElementData(
+            long j, long j2, int i, int i2, int i3, int i4, int i5, byte[] bArr, int i6);
 
-    native void rsnAllocationElementRead(long j, long j2, int i, int i2, int i3, int i4, int i5, byte[] bArr, int i6);
+    native void rsnAllocationElementRead(
+            long j, long j2, int i, int i2, int i3, int i4, int i5, byte[] bArr, int i6);
 
     native void rsnAllocationGenerateMipmaps(long j, long j2);
 
-    native ByteBuffer rsnAllocationGetByteBuffer(long j, long j2, long[] jArr, int i, int i2, int i3);
+    native ByteBuffer rsnAllocationGetByteBuffer(
+            long j, long j2, long[] jArr, int i, int i2, int i3);
 
     native Surface rsnAllocationGetSurface(long j, long j2);
 
@@ -194,11 +254,39 @@ public class RenderScript {
 
     native void rsnAllocationRead(long j, long j2, Object obj, int i, int i2, boolean z);
 
-    native void rsnAllocationRead1D(long j, long j2, int i, int i2, int i3, Object obj, int i4, int i5, int i6, boolean z);
+    native void rsnAllocationRead1D(
+            long j, long j2, int i, int i2, int i3, Object obj, int i4, int i5, int i6, boolean z);
 
-    native void rsnAllocationRead2D(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, Object obj, int i7, int i8, int i9, boolean z);
+    native void rsnAllocationRead2D(
+            long j,
+            long j2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            Object obj,
+            int i7,
+            int i8,
+            int i9,
+            boolean z);
 
-    native void rsnAllocationRead3D(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7, Object obj, int i8, int i9, int i10, boolean z);
+    native void rsnAllocationRead3D(
+            long j,
+            long j2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            Object obj,
+            int i8,
+            int i9,
+            int i10,
+            boolean z);
 
     native void rsnAllocationResize1D(long j, long j2, int i);
 
@@ -212,7 +300,15 @@ public class RenderScript {
 
     native void rsnAssignName(long j, long j2, byte[] bArr);
 
-    native long rsnClosureCreate(long j, long j2, long j3, long[] jArr, long[] jArr2, int[] iArr, long[] jArr3, long[] jArr4);
+    native long rsnClosureCreate(
+            long j,
+            long j2,
+            long j3,
+            long[] jArr,
+            long[] jArr2,
+            int[] iArr,
+            long[] jArr3,
+            long[] jArr4);
 
     native void rsnClosureSetArg(long j, long j2, int i, long j3, int i2);
 
@@ -232,7 +328,22 @@ public class RenderScript {
 
     native long rsnContextCreate(long j, int i, int i2, int i3);
 
-    native long rsnContextCreateGL(long j, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, float f, int i13);
+    native long rsnContextCreateGL(
+            long j,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            int i11,
+            int i12,
+            float f,
+            int i13);
 
     native void rsnContextDestroy(long j);
 
@@ -274,7 +385,8 @@ public class RenderScript {
 
     native int rsnFileA3DGetNumIndexEntries(long j, long j2);
 
-    native long rsnFontCreateFromAsset(long j, AssetManager assetManager, String str, float f, int i);
+    native long rsnFontCreateFromAsset(
+            long j, AssetManager assetManager, String str, float f, int i);
 
     native long rsnFontCreateFromAssetStream(long j, String str, float f, int i, long j2);
 
@@ -282,7 +394,8 @@ public class RenderScript {
 
     native String rsnGetName(long j, long j2);
 
-    native long rsnInvokeClosureCreate(long j, long j2, byte[] bArr, long[] jArr, long[] jArr2, int[] iArr);
+    native long rsnInvokeClosureCreate(
+            long j, long j2, byte[] bArr, long[] jArr, long[] jArr2, int[] iArr);
 
     native long rsnMeshCreate(long j, long[] jArr, long[] jArr2, int[] iArr);
 
@@ -306,7 +419,17 @@ public class RenderScript {
 
     native long rsnProgramRasterCreate(long j, boolean z, int i);
 
-    native long rsnProgramStoreCreate(long j, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, int i, int i2, int i3);
+    native long rsnProgramStoreCreate(
+            long j,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            boolean z5,
+            boolean z6,
+            int i,
+            int i2,
+            int i3);
 
     native long rsnProgramVertexCreate(long j, String str, String[] strArr, long[] jArr);
 
@@ -318,7 +441,8 @@ public class RenderScript {
 
     native long rsnScriptFieldIDCreate(long j, long j2, int i);
 
-    native void rsnScriptForEach(long j, long j2, int i, long[] jArr, long j3, byte[] bArr, int[] iArr);
+    native void rsnScriptForEach(
+            long j, long j2, int i, long[] jArr, long j3, byte[] bArr, int[] iArr);
 
     native double rsnScriptGetVarD(long j, long j2, int i);
 
@@ -334,7 +458,8 @@ public class RenderScript {
 
     native void rsnScriptGroup2Execute(long j, long j2);
 
-    native long rsnScriptGroupCreate(long j, long[] jArr, long[] jArr2, long[] jArr3, long[] jArr4, long[] jArr5);
+    native long rsnScriptGroupCreate(
+            long j, long[] jArr, long[] jArr2, long[] jArr3, long[] jArr4, long[] jArr5);
 
     native void rsnScriptGroupExecute(long j, long j2);
 
@@ -342,15 +467,111 @@ public class RenderScript {
 
     native void rsnScriptGroupSetOutput(long j, long j2, long j3, long j4);
 
-    native void rsnScriptIntrinsicBLAS_BNNM(long j, long j2, int i, int i2, int i3, long j3, int i4, long j4, int i5, long j5, int i6, int i7);
+    native void rsnScriptIntrinsicBLAS_BNNM(
+            long j,
+            long j2,
+            int i,
+            int i2,
+            int i3,
+            long j3,
+            int i4,
+            long j4,
+            int i5,
+            long j5,
+            int i6,
+            int i7);
 
-    native void rsnScriptIntrinsicBLAS_Complex(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, float f, float f2, long j3, long j4, float f3, float f4, long j5, int i10, int i11, int i12, int i13);
+    native void rsnScriptIntrinsicBLAS_Complex(
+            long j,
+            long j2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            float f,
+            float f2,
+            long j3,
+            long j4,
+            float f3,
+            float f4,
+            long j5,
+            int i10,
+            int i11,
+            int i12,
+            int i13);
 
-    native void rsnScriptIntrinsicBLAS_Double(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, double d, long j3, long j4, double d2, long j5, int i10, int i11, int i12, int i13);
+    native void rsnScriptIntrinsicBLAS_Double(
+            long j,
+            long j2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            double d,
+            long j3,
+            long j4,
+            double d2,
+            long j5,
+            int i10,
+            int i11,
+            int i12,
+            int i13);
 
-    native void rsnScriptIntrinsicBLAS_Single(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, float f, long j3, long j4, float f2, long j5, int i10, int i11, int i12, int i13);
+    native void rsnScriptIntrinsicBLAS_Single(
+            long j,
+            long j2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            float f,
+            long j3,
+            long j4,
+            float f2,
+            long j5,
+            int i10,
+            int i11,
+            int i12,
+            int i13);
 
-    native void rsnScriptIntrinsicBLAS_Z(long j, long j2, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, double d, double d2, long j3, long j4, double d3, double d4, long j5, int i10, int i11, int i12, int i13);
+    native void rsnScriptIntrinsicBLAS_Z(
+            long j,
+            long j2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            double d,
+            double d2,
+            long j3,
+            long j4,
+            double d3,
+            double d4,
+            long j5,
+            int i10,
+            int i11,
+            int i12,
+            int i13);
 
     native long rsnScriptIntrinsicCreate(long j, int i, long j2);
 
@@ -380,7 +601,8 @@ public class RenderScript {
 
     native void rsnScriptSetVarVE(long j, long j2, int i, byte[] bArr, long j3, int[] iArr);
 
-    native long rsnTypeCreate(long j, long j2, int i, int i2, int i3, boolean z, boolean z2, int i4);
+    native long rsnTypeCreate(
+            long j, long j2, int i, int i2, int i3, boolean z, boolean z2, int i4);
 
     native void rsnTypeGetNativeData(long j, long j2, long[] jArr);
 
@@ -391,7 +613,8 @@ public class RenderScript {
                 Class<?> vm_runtime = Class.forName("dalvik.system.VMRuntime");
                 Method get_runtime = vm_runtime.getDeclaredMethod("getRuntime", new Class[0]);
                 sRuntime = get_runtime.invoke(null, new Object[0]);
-                registerNativeAllocation = vm_runtime.getDeclaredMethod("registerNativeAllocation", Long.TYPE);
+                registerNativeAllocation =
+                        vm_runtime.getDeclaredMethod("registerNativeAllocation", Long.TYPE);
                 registerNativeFree = vm_runtime.getDeclaredMethod("registerNativeFree", Long.TYPE);
                 try {
                     System.loadLibrary("rs_jni");
@@ -429,8 +652,38 @@ public class RenderScript {
         }
     }
 
-    synchronized long nContextCreateGL(long dev, int ver, int sdkVer, int colorMin, int colorPref, int alphaMin, int alphaPref, int depthMin, int depthPref, int stencilMin, int stencilPref, int samplesMin, int samplesPref, float samplesQ, int dpi) {
-        return rsnContextCreateGL(dev, ver, sdkVer, colorMin, colorPref, alphaMin, alphaPref, depthMin, depthPref, stencilMin, stencilPref, samplesMin, samplesPref, samplesQ, dpi);
+    synchronized long nContextCreateGL(
+            long dev,
+            int ver,
+            int sdkVer,
+            int colorMin,
+            int colorPref,
+            int alphaMin,
+            int alphaPref,
+            int depthMin,
+            int depthPref,
+            int stencilMin,
+            int stencilPref,
+            int samplesMin,
+            int samplesPref,
+            float samplesQ,
+            int dpi) {
+        return rsnContextCreateGL(
+                dev,
+                ver,
+                sdkVer,
+                colorMin,
+                colorPref,
+                alphaMin,
+                alphaPref,
+                depthMin,
+                depthPref,
+                stencilMin,
+                stencilPref,
+                samplesMin,
+                samplesPref,
+                samplesQ,
+                dpi);
     }
 
     synchronized long nContextCreate(long dev, int ver, int sdkVer, int contextType) {
@@ -522,17 +775,34 @@ public class RenderScript {
         rsnContextResume(this.mContext);
     }
 
-    synchronized long nClosureCreate(long kernelID, long returnValue, long[] fieldIDs, long[] values, int[] sizes, long[] depClosures, long[] depFieldIDs) {
+    synchronized long nClosureCreate(
+            long kernelID,
+            long returnValue,
+            long[] fieldIDs,
+            long[] values,
+            int[] sizes,
+            long[] depClosures,
+            long[] depFieldIDs) {
         long c;
         validate();
-        c = rsnClosureCreate(this.mContext, kernelID, returnValue, fieldIDs, values, sizes, depClosures, depFieldIDs);
+        c =
+                rsnClosureCreate(
+                        this.mContext,
+                        kernelID,
+                        returnValue,
+                        fieldIDs,
+                        values,
+                        sizes,
+                        depClosures,
+                        depFieldIDs);
         if (c == 0) {
             throw new RSRuntimeException("Failed creating closure.");
         }
         return c;
     }
 
-    synchronized long nInvokeClosureCreate(long invokeID, byte[] params, long[] fieldIDs, long[] values, int[] sizes) {
+    synchronized long nInvokeClosureCreate(
+            long invokeID, byte[] params, long[] fieldIDs, long[] values, int[] sizes) {
         long c;
         validate();
         c = rsnInvokeClosureCreate(this.mContext, invokeID, params, fieldIDs, values, sizes);
@@ -598,12 +868,14 @@ public class RenderScript {
         rsnElementGetNativeData(this.mContext, id, elementData);
     }
 
-    synchronized void nElementGetSubElements(long id, long[] IDs, String[] names, int[] arraySizes) {
+    synchronized void nElementGetSubElements(
+            long id, long[] IDs, String[] names, int[] arraySizes) {
         validate();
         rsnElementGetSubElements(this.mContext, id, IDs, names, arraySizes);
     }
 
-    synchronized long nTypeCreate(long eid, int x, int y, int z, boolean mips, boolean faces, int yuv) {
+    synchronized long nTypeCreate(
+            long eid, int x, int y, int z, boolean mips, boolean faces, int yuv) {
         validate();
         return rsnTypeCreate(this.mContext, eid, x, y, z, mips, faces, yuv);
     }
@@ -623,7 +895,8 @@ public class RenderScript {
         return rsnAllocationCreateFromBitmap(this.mContext, type, mip, bmp, usage);
     }
 
-    synchronized long nAllocationCreateBitmapBackedAllocation(long type, int mip, Bitmap bmp, int usage) {
+    synchronized long nAllocationCreateBitmapBackedAllocation(
+            long type, int mip, Bitmap bmp, int usage) {
         validate();
         return rsnAllocationCreateBitmapBackedAllocation(this.mContext, type, mip, bmp, usage);
     }
@@ -643,7 +916,8 @@ public class RenderScript {
         rsnAllocationSyncAll(this.mContext, alloc, src);
     }
 
-    synchronized ByteBuffer nAllocationGetByteBuffer(long alloc, long[] stride, int xBytesSize, int dimY, int dimZ) {
+    synchronized ByteBuffer nAllocationGetByteBuffer(
+            long alloc, long[] stride, int xBytesSize, int dimY, int dimZ) {
         validate();
         return rsnAllocationGetByteBuffer(this.mContext, alloc, stride, xBytesSize, dimY, dimZ);
     }
@@ -688,24 +962,85 @@ public class RenderScript {
         rsnAllocationCopyFromBitmap(this.mContext, alloc, bmp);
     }
 
-    synchronized void nAllocationData1D(long id, int off, int mip, int count, Object d, int sizeBytes, Element.DataType dt, int mSize, boolean usePadding) {
+    synchronized void nAllocationData1D(
+            long id,
+            int off,
+            int mip,
+            int count,
+            Object d,
+            int sizeBytes,
+            Element.DataType dt,
+            int mSize,
+            boolean usePadding) {
         validate();
-        rsnAllocationData1D(this.mContext, id, off, mip, count, d, sizeBytes, dt.mID, mSize, usePadding);
+        rsnAllocationData1D(
+                this.mContext, id, off, mip, count, d, sizeBytes, dt.mID, mSize, usePadding);
     }
 
-    synchronized void nAllocationElementData(long id, int xoff, int yoff, int zoff, int mip, int compIdx, byte[] d, int sizeBytes) {
+    synchronized void nAllocationElementData(
+            long id, int xoff, int yoff, int zoff, int mip, int compIdx, byte[] d, int sizeBytes) {
         validate();
         rsnAllocationElementData(this.mContext, id, xoff, yoff, zoff, mip, compIdx, d, sizeBytes);
     }
 
-    synchronized void nAllocationData2D(long dstAlloc, int dstXoff, int dstYoff, int dstMip, int dstFace, int width, int height, long srcAlloc, int srcXoff, int srcYoff, int srcMip, int srcFace) {
+    synchronized void nAllocationData2D(
+            long dstAlloc,
+            int dstXoff,
+            int dstYoff,
+            int dstMip,
+            int dstFace,
+            int width,
+            int height,
+            long srcAlloc,
+            int srcXoff,
+            int srcYoff,
+            int srcMip,
+            int srcFace) {
         validate();
-        rsnAllocationData2D(this.mContext, dstAlloc, dstXoff, dstYoff, dstMip, dstFace, width, height, srcAlloc, srcXoff, srcYoff, srcMip, srcFace);
+        rsnAllocationData2D(
+                this.mContext,
+                dstAlloc,
+                dstXoff,
+                dstYoff,
+                dstMip,
+                dstFace,
+                width,
+                height,
+                srcAlloc,
+                srcXoff,
+                srcYoff,
+                srcMip,
+                srcFace);
     }
 
-    synchronized void nAllocationData2D(long id, int xoff, int yoff, int mip, int face, int w, int h, Object d, int sizeBytes, Element.DataType dt, int mSize, boolean usePadding) {
+    synchronized void nAllocationData2D(
+            long id,
+            int xoff,
+            int yoff,
+            int mip,
+            int face,
+            int w,
+            int h,
+            Object d,
+            int sizeBytes,
+            Element.DataType dt,
+            int mSize,
+            boolean usePadding) {
         validate();
-        rsnAllocationData2D(this.mContext, id, xoff, yoff, mip, face, w, h, d, sizeBytes, dt.mID, mSize, usePadding);
+        rsnAllocationData2D(
+                this.mContext,
+                id,
+                xoff,
+                yoff,
+                mip,
+                face,
+                w,
+                h,
+                d,
+                sizeBytes,
+                dt.mID,
+                mSize,
+                usePadding);
     }
 
     synchronized void nAllocationData2D(long id, int xoff, int yoff, int mip, int face, Bitmap b) {
@@ -713,39 +1048,157 @@ public class RenderScript {
         rsnAllocationData2D(this.mContext, id, xoff, yoff, mip, face, b);
     }
 
-    synchronized void nAllocationData3D(long dstAlloc, int dstXoff, int dstYoff, int dstZoff, int dstMip, int width, int height, int depth, long srcAlloc, int srcXoff, int srcYoff, int srcZoff, int srcMip) {
+    synchronized void nAllocationData3D(
+            long dstAlloc,
+            int dstXoff,
+            int dstYoff,
+            int dstZoff,
+            int dstMip,
+            int width,
+            int height,
+            int depth,
+            long srcAlloc,
+            int srcXoff,
+            int srcYoff,
+            int srcZoff,
+            int srcMip) {
         validate();
-        rsnAllocationData3D(this.mContext, dstAlloc, dstXoff, dstYoff, dstZoff, dstMip, width, height, depth, srcAlloc, srcXoff, srcYoff, srcZoff, srcMip);
+        rsnAllocationData3D(
+                this.mContext,
+                dstAlloc,
+                dstXoff,
+                dstYoff,
+                dstZoff,
+                dstMip,
+                width,
+                height,
+                depth,
+                srcAlloc,
+                srcXoff,
+                srcYoff,
+                srcZoff,
+                srcMip);
     }
 
-    synchronized void nAllocationData3D(long id, int xoff, int yoff, int zoff, int mip, int w, int h, int depth, Object d, int sizeBytes, Element.DataType dt, int mSize, boolean usePadding) {
+    synchronized void nAllocationData3D(
+            long id,
+            int xoff,
+            int yoff,
+            int zoff,
+            int mip,
+            int w,
+            int h,
+            int depth,
+            Object d,
+            int sizeBytes,
+            Element.DataType dt,
+            int mSize,
+            boolean usePadding) {
         validate();
-        rsnAllocationData3D(this.mContext, id, xoff, yoff, zoff, mip, w, h, depth, d, sizeBytes, dt.mID, mSize, usePadding);
+        rsnAllocationData3D(
+                this.mContext,
+                id,
+                xoff,
+                yoff,
+                zoff,
+                mip,
+                w,
+                h,
+                depth,
+                d,
+                sizeBytes,
+                dt.mID,
+                mSize,
+                usePadding);
     }
 
-    synchronized void nAllocationRead(long id, Object d, Element.DataType dt, int mSize, boolean usePadding) {
+    synchronized void nAllocationRead(
+            long id, Object d, Element.DataType dt, int mSize, boolean usePadding) {
         validate();
         rsnAllocationRead(this.mContext, id, d, dt.mID, mSize, usePadding);
     }
 
-    synchronized void nAllocationRead1D(long id, int off, int mip, int count, Object d, int sizeBytes, Element.DataType dt, int mSize, boolean usePadding) {
+    synchronized void nAllocationRead1D(
+            long id,
+            int off,
+            int mip,
+            int count,
+            Object d,
+            int sizeBytes,
+            Element.DataType dt,
+            int mSize,
+            boolean usePadding) {
         validate();
-        rsnAllocationRead1D(this.mContext, id, off, mip, count, d, sizeBytes, dt.mID, mSize, usePadding);
+        rsnAllocationRead1D(
+                this.mContext, id, off, mip, count, d, sizeBytes, dt.mID, mSize, usePadding);
     }
 
-    synchronized void nAllocationElementRead(long id, int xoff, int yoff, int zoff, int mip, int compIdx, byte[] d, int sizeBytes) {
+    synchronized void nAllocationElementRead(
+            long id, int xoff, int yoff, int zoff, int mip, int compIdx, byte[] d, int sizeBytes) {
         validate();
         rsnAllocationElementRead(this.mContext, id, xoff, yoff, zoff, mip, compIdx, d, sizeBytes);
     }
 
-    synchronized void nAllocationRead2D(long id, int xoff, int yoff, int mip, int face, int w, int h, Object d, int sizeBytes, Element.DataType dt, int mSize, boolean usePadding) {
+    synchronized void nAllocationRead2D(
+            long id,
+            int xoff,
+            int yoff,
+            int mip,
+            int face,
+            int w,
+            int h,
+            Object d,
+            int sizeBytes,
+            Element.DataType dt,
+            int mSize,
+            boolean usePadding) {
         validate();
-        rsnAllocationRead2D(this.mContext, id, xoff, yoff, mip, face, w, h, d, sizeBytes, dt.mID, mSize, usePadding);
+        rsnAllocationRead2D(
+                this.mContext,
+                id,
+                xoff,
+                yoff,
+                mip,
+                face,
+                w,
+                h,
+                d,
+                sizeBytes,
+                dt.mID,
+                mSize,
+                usePadding);
     }
 
-    synchronized void nAllocationRead3D(long id, int xoff, int yoff, int zoff, int mip, int w, int h, int depth, Object d, int sizeBytes, Element.DataType dt, int mSize, boolean usePadding) {
+    synchronized void nAllocationRead3D(
+            long id,
+            int xoff,
+            int yoff,
+            int zoff,
+            int mip,
+            int w,
+            int h,
+            int depth,
+            Object d,
+            int sizeBytes,
+            Element.DataType dt,
+            int mSize,
+            boolean usePadding) {
         validate();
-        rsnAllocationRead3D(this.mContext, id, xoff, yoff, zoff, mip, w, h, depth, d, sizeBytes, dt.mID, mSize, usePadding);
+        rsnAllocationRead3D(
+                this.mContext,
+                id,
+                xoff,
+                yoff,
+                zoff,
+                mip,
+                w,
+                h,
+                depth,
+                d,
+                sizeBytes,
+                dt.mID,
+                mSize,
+                usePadding);
     }
 
     synchronized long nAllocationGetType(long id) {
@@ -763,7 +1216,8 @@ public class RenderScript {
         return rsnAllocationAdapterCreate(this.mContext, allocId, typeId);
     }
 
-    synchronized void nAllocationAdapterOffset(long id, int x, int y, int z, int mip, int face, int a1, int a2, int a3, int a4) {
+    synchronized void nAllocationAdapterOffset(
+            long id, int x, int y, int z, int mip, int face, int a1, int a2, int a3, int a4) {
         validate();
         rsnAllocationAdapterOffset(this.mContext, id, x, y, z, mip, face, a1, a2, a3, a4);
     }
@@ -788,7 +1242,8 @@ public class RenderScript {
         return rsnFileA3DGetNumIndexEntries(this.mContext, fileA3D);
     }
 
-    synchronized void nFileA3DGetIndexEntries(long fileA3D, int numEntries, int[] IDs, String[] names) {
+    synchronized void nFileA3DGetIndexEntries(
+            long fileA3D, int numEntries, int[] IDs, String[] names) {
         validate();
         rsnFileA3DGetIndexEntries(this.mContext, fileA3D, numEntries, IDs, names);
     }
@@ -803,7 +1258,8 @@ public class RenderScript {
         return rsnFontCreateFromFile(this.mContext, fileName, size, dpi);
     }
 
-    synchronized long nFontCreateFromAssetStream(String name, float size, int dpi, long assetStream) {
+    synchronized long nFontCreateFromAssetStream(
+            String name, float size, int dpi, long assetStream) {
         validate();
         return rsnFontCreateFromAssetStream(this.mContext, name, size, dpi, assetStream);
     }
@@ -828,7 +1284,8 @@ public class RenderScript {
         rsnScriptInvoke(this.mContext, id, slot);
     }
 
-    synchronized void nScriptForEach(long id, int slot, long[] ains, long aout, byte[] params, int[] limits) {
+    synchronized void nScriptForEach(
+            long id, int slot, long[] ains, long aout, byte[] params, int[] limits) {
         validate();
         rsnScriptForEach(this.mContext, id, slot, ains, aout, params, limits);
     }
@@ -928,7 +1385,8 @@ public class RenderScript {
         return rsnScriptFieldIDCreate(this.mContext, sid, slot);
     }
 
-    synchronized long nScriptGroupCreate(long[] kernels, long[] src, long[] dstk, long[] dstf, long[] types) {
+    synchronized long nScriptGroupCreate(
+            long[] kernels, long[] src, long[] dstk, long[] dstf, long[] types) {
         validate();
         return rsnScriptGroupCreate(this.mContext, kernels, src, dstk, dstf, types);
     }
@@ -948,14 +1406,25 @@ public class RenderScript {
         rsnScriptGroupExecute(this.mContext, group);
     }
 
-    synchronized long nSamplerCreate(int magFilter, int minFilter, int wrapS, int wrapT, int wrapR, float aniso) {
+    synchronized long nSamplerCreate(
+            int magFilter, int minFilter, int wrapS, int wrapT, int wrapR, float aniso) {
         validate();
         return rsnSamplerCreate(this.mContext, magFilter, minFilter, wrapS, wrapT, wrapR, aniso);
     }
 
-    synchronized long nProgramStoreCreate(boolean r, boolean g, boolean b, boolean a, boolean depthMask, boolean dither, int srcMode, int dstMode, int depthFunc) {
+    synchronized long nProgramStoreCreate(
+            boolean r,
+            boolean g,
+            boolean b,
+            boolean a,
+            boolean depthMask,
+            boolean dither,
+            int srcMode,
+            int dstMode,
+            int depthFunc) {
         validate();
-        return rsnProgramStoreCreate(this.mContext, r, g, b, a, depthMask, dither, srcMode, dstMode, depthFunc);
+        return rsnProgramStoreCreate(
+                this.mContext, r, g, b, a, depthMask, dither, srcMode, dstMode, depthFunc);
     }
 
     synchronized long nProgramRasterCreate(boolean pointSprite, int cullMode) {
@@ -1013,29 +1482,205 @@ public class RenderScript {
         rsnMeshGetIndices(this.mContext, id, idxIds, primitives, vtxIdCount);
     }
 
-    synchronized void nScriptIntrinsicBLAS_Single(long id, int func, int TransA, int TransB, int Side, int Uplo, int Diag, int M, int N, int K, float alpha, long A, long B, float beta, long C, int incX, int incY, int KL, int KU) {
+    synchronized void nScriptIntrinsicBLAS_Single(
+            long id,
+            int func,
+            int TransA,
+            int TransB,
+            int Side,
+            int Uplo,
+            int Diag,
+            int M,
+            int N,
+            int K,
+            float alpha,
+            long A,
+            long B,
+            float beta,
+            long C,
+            int incX,
+            int incY,
+            int KL,
+            int KU) {
         validate();
-        rsnScriptIntrinsicBLAS_Single(this.mContext, id, func, TransA, TransB, Side, Uplo, Diag, M, N, K, alpha, A, B, beta, C, incX, incY, KL, KU);
+        rsnScriptIntrinsicBLAS_Single(
+                this.mContext,
+                id,
+                func,
+                TransA,
+                TransB,
+                Side,
+                Uplo,
+                Diag,
+                M,
+                N,
+                K,
+                alpha,
+                A,
+                B,
+                beta,
+                C,
+                incX,
+                incY,
+                KL,
+                KU);
     }
 
-    synchronized void nScriptIntrinsicBLAS_Double(long id, int func, int TransA, int TransB, int Side, int Uplo, int Diag, int M, int N, int K, double alpha, long A, long B, double beta, long C, int incX, int incY, int KL, int KU) {
+    synchronized void nScriptIntrinsicBLAS_Double(
+            long id,
+            int func,
+            int TransA,
+            int TransB,
+            int Side,
+            int Uplo,
+            int Diag,
+            int M,
+            int N,
+            int K,
+            double alpha,
+            long A,
+            long B,
+            double beta,
+            long C,
+            int incX,
+            int incY,
+            int KL,
+            int KU) {
         validate();
-        rsnScriptIntrinsicBLAS_Double(this.mContext, id, func, TransA, TransB, Side, Uplo, Diag, M, N, K, alpha, A, B, beta, C, incX, incY, KL, KU);
+        rsnScriptIntrinsicBLAS_Double(
+                this.mContext,
+                id,
+                func,
+                TransA,
+                TransB,
+                Side,
+                Uplo,
+                Diag,
+                M,
+                N,
+                K,
+                alpha,
+                A,
+                B,
+                beta,
+                C,
+                incX,
+                incY,
+                KL,
+                KU);
     }
 
-    synchronized void nScriptIntrinsicBLAS_Complex(long id, int func, int TransA, int TransB, int Side, int Uplo, int Diag, int M, int N, int K, float alphaX, float alphaY, long A, long B, float betaX, float betaY, long C, int incX, int incY, int KL, int KU) {
+    synchronized void nScriptIntrinsicBLAS_Complex(
+            long id,
+            int func,
+            int TransA,
+            int TransB,
+            int Side,
+            int Uplo,
+            int Diag,
+            int M,
+            int N,
+            int K,
+            float alphaX,
+            float alphaY,
+            long A,
+            long B,
+            float betaX,
+            float betaY,
+            long C,
+            int incX,
+            int incY,
+            int KL,
+            int KU) {
         validate();
-        rsnScriptIntrinsicBLAS_Complex(this.mContext, id, func, TransA, TransB, Side, Uplo, Diag, M, N, K, alphaX, alphaY, A, B, betaX, betaY, C, incX, incY, KL, KU);
+        rsnScriptIntrinsicBLAS_Complex(
+                this.mContext,
+                id,
+                func,
+                TransA,
+                TransB,
+                Side,
+                Uplo,
+                Diag,
+                M,
+                N,
+                K,
+                alphaX,
+                alphaY,
+                A,
+                B,
+                betaX,
+                betaY,
+                C,
+                incX,
+                incY,
+                KL,
+                KU);
     }
 
-    synchronized void nScriptIntrinsicBLAS_Z(long id, int func, int TransA, int TransB, int Side, int Uplo, int Diag, int M, int N, int K, double alphaX, double alphaY, long A, long B, double betaX, double betaY, long C, int incX, int incY, int KL, int KU) {
+    synchronized void nScriptIntrinsicBLAS_Z(
+            long id,
+            int func,
+            int TransA,
+            int TransB,
+            int Side,
+            int Uplo,
+            int Diag,
+            int M,
+            int N,
+            int K,
+            double alphaX,
+            double alphaY,
+            long A,
+            long B,
+            double betaX,
+            double betaY,
+            long C,
+            int incX,
+            int incY,
+            int KL,
+            int KU) {
         validate();
-        rsnScriptIntrinsicBLAS_Z(this.mContext, id, func, TransA, TransB, Side, Uplo, Diag, M, N, K, alphaX, alphaY, A, B, betaX, betaY, C, incX, incY, KL, KU);
+        rsnScriptIntrinsicBLAS_Z(
+                this.mContext,
+                id,
+                func,
+                TransA,
+                TransB,
+                Side,
+                Uplo,
+                Diag,
+                M,
+                N,
+                K,
+                alphaX,
+                alphaY,
+                A,
+                B,
+                betaX,
+                betaY,
+                C,
+                incX,
+                incY,
+                KL,
+                KU);
     }
 
-    synchronized void nScriptIntrinsicBLAS_BNNM(long id, int M, int N, int K, long A, int a_offset, long B, int b_offset, long C, int c_offset, int c_mult_int) {
+    synchronized void nScriptIntrinsicBLAS_BNNM(
+            long id,
+            int M,
+            int N,
+            int K,
+            long A,
+            int a_offset,
+            long B,
+            int b_offset,
+            long C,
+            int c_offset,
+            int c_mult_int) {
         validate();
-        rsnScriptIntrinsicBLAS_BNNM(this.mContext, id, M, N, K, A, a_offset, B, b_offset, C, c_offset, c_mult_int);
+        rsnScriptIntrinsicBLAS_BNNM(
+                this.mContext, id, M, N, K, A, a_offset, B, b_offset, C, c_offset, c_mult_int);
     }
 
     public static class RSMessageHandler implements Runnable {
@@ -1044,8 +1689,7 @@ public class RenderScript {
         protected int mLength;
 
         @Override // java.lang.Runnable
-        public void run() {
-        }
+        public void run() {}
     }
 
     public void setMessageHandler(RSMessageHandler msg) {
@@ -1065,8 +1709,7 @@ public class RenderScript {
         protected int mErrorNum;
 
         @Override // java.lang.Runnable
-        public void run() {
-        }
+        public void run() {}
     }
 
     public void setErrorHandler(RSErrorHandler msg) {
@@ -1147,11 +1790,16 @@ public class RenderScript {
                         this.mRS.mMessageCallback.mLength = size;
                         this.mRS.mMessageCallback.run();
                     } else {
-                        throw new RSInvalidStateException("Received a message from the script with no message handler installed.");
+                        throw new RSInvalidStateException(
+                                "Received a message from the script with no message handler"
+                                    + " installed.");
                     }
                 } else if (msg == 3) {
                     String e = this.mRS.nContextGetErrorMessage(this.mRS.mContext);
-                    if (subID >= 4096 || (subID >= 2048 && (this.mRS.mContextType != ContextType.DEBUG || this.mRS.mErrorCallback == null))) {
+                    if (subID >= 4096
+                            || (subID >= 2048
+                                    && (this.mRS.mContextType != ContextType.DEBUG
+                                            || this.mRS.mErrorCallback == null))) {
                         throw new RSRuntimeException("Fatal error " + subID + ", details: " + e);
                     }
                     if (this.mRS.mErrorCallback != null) {
@@ -1192,7 +1840,8 @@ public class RenderScript {
         synchronized (RenderScript.class) {
             if (mCachePath == null) {
                 if (RenderScriptCacheDir.mCacheDir == null) {
-                    throw new RSRuntimeException("RenderScript code cache directory uninitialized.");
+                    throw new RSRuntimeException(
+                            "RenderScript code cache directory uninitialized.");
                 }
                 File f = new File(RenderScriptCacheDir.mCacheDir, "com.android.renderscript.cache");
                 mCachePath = f.getAbsolutePath();
@@ -1203,9 +1852,12 @@ public class RenderScript {
         return CACHE_PATH;
     }
 
-    private static RenderScript internalCreate(Context ctx, int sdkVersion, ContextType ct, int flags) {
+    private static RenderScript internalCreate(
+            Context ctx, int sdkVersion, ContextType ct, int flags) {
         if (!sInitialized) {
-            Log.e(LOG_TAG, "RenderScript.create() called when disabled; someone is likely to crash");
+            Log.e(
+                    LOG_TAG,
+                    "RenderScript.create() called when disabled; someone is likely to crash");
             return null;
         }
         if ((flags & (-15)) != 0) {
@@ -1251,7 +1903,9 @@ public class RenderScript {
             Iterator<RenderScript> it = mProcessContextList.iterator();
             while (it.hasNext()) {
                 RenderScript prs = it.next();
-                if (prs.mContextType == ct && prs.mContextFlags == flags && prs.mContextSdkVersion == sdkVersion) {
+                if (prs.mContextType == ct
+                        && prs.mContextFlags == flags
+                        && prs.mContextSdkVersion == sdkVersion) {
                     return prs;
                 }
             }
@@ -1277,7 +1931,8 @@ public class RenderScript {
         oldList.clear();
     }
 
-    public static RenderScript createMultiContext(Context ctx, ContextType ct, int flags, int API_number) {
+    public static RenderScript createMultiContext(
+            Context ctx, ContextType ct, int flags, int API_number) {
         return internalCreate(ctx, API_number, ct, flags);
     }
 

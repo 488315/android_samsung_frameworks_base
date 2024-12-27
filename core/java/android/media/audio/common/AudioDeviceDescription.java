@@ -3,6 +3,7 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -18,8 +19,7 @@ public class AudioDeviceDescription implements Parcelable {
     public static final String CONNECTION_BUILTIN_MIC4 = "mic4";
     public static final String CONNECTION_BUILTIN_MULTI_MIC = "multi_mic";
 
-    @Deprecated
-    public static final String CONNECTION_BUS = "bus";
+    @Deprecated public static final String CONNECTION_BUS = "bus";
     public static final String CONNECTION_HDMI = "hdmi";
     public static final String CONNECTION_HDMI_ARC = "hdmi-arc";
     public static final String CONNECTION_HDMI_EARC = "hdmi-earc";
@@ -28,21 +28,23 @@ public class AudioDeviceDescription implements Parcelable {
     public static final String CONNECTION_USB = "usb";
     public static final String CONNECTION_VIRTUAL = "virtual";
     public static final String CONNECTION_WIRELESS = "wireless";
-    public static final Parcelable.Creator<AudioDeviceDescription> CREATOR = new Parcelable.Creator<AudioDeviceDescription>() { // from class: android.media.audio.common.AudioDeviceDescription.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioDeviceDescription createFromParcel(Parcel _aidl_source) {
-            AudioDeviceDescription _aidl_out = new AudioDeviceDescription();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioDeviceDescription> CREATOR =
+            new Parcelable.Creator<AudioDeviceDescription>() { // from class:
+                // android.media.audio.common.AudioDeviceDescription.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioDeviceDescription createFromParcel(Parcel _aidl_source) {
+                    AudioDeviceDescription _aidl_out = new AudioDeviceDescription();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioDeviceDescription[] newArray(int _aidl_size) {
-            return new AudioDeviceDescription[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioDeviceDescription[] newArray(int _aidl_size) {
+                    return new AudioDeviceDescription[_aidl_size];
+                }
+            };
     public static final String VX_SEC_CONNECTION_FM = "fm";
     public String connection;
     public int type = 0;
@@ -115,14 +117,16 @@ public class AudioDeviceDescription implements Parcelable {
             return false;
         }
         AudioDeviceDescription that = (AudioDeviceDescription) other;
-        if (Objects.deepEquals(Integer.valueOf(this.type), Integer.valueOf(that.type)) && Objects.deepEquals(this.connection, that.connection)) {
+        if (Objects.deepEquals(Integer.valueOf(this.type), Integer.valueOf(that.type))
+                && Objects.deepEquals(this.connection, that.connection)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.type), this.connection).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this.type), this.connection).toArray());
     }
 
     @Override // android.os.Parcelable

@@ -7,23 +7,35 @@ import android.os.ServiceManager;
 import android.provider.Settings;
 import android.service.dreams.DreamService;
 import android.service.dreams.IDreamManager;
+
 import com.android.internal.R;
 
 /* loaded from: classes.dex */
 public class DreamManager {
     private final Context mContext;
-    private final IDreamManager mService = IDreamManager.Stub.asInterface(ServiceManager.getServiceOrThrow(DreamService.DREAM_SERVICE));
+    private final IDreamManager mService =
+            IDreamManager.Stub.asInterface(
+                    ServiceManager.getServiceOrThrow(DreamService.DREAM_SERVICE));
 
     public DreamManager(Context context) throws ServiceManager.ServiceNotFoundException {
         this.mContext = context;
     }
 
     public boolean isScreensaverEnabled() {
-        return Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.SCREENSAVER_ENABLED, 0, -2) != 0;
+        return Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.SCREENSAVER_ENABLED,
+                        0,
+                        -2)
+                != 0;
     }
 
     public void setScreensaverEnabled(boolean z) {
-        Settings.Secure.putIntForUser(this.mContext.getContentResolver(), Settings.Secure.SCREENSAVER_ENABLED, z ? 1 : 0, -2);
+        Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.SCREENSAVER_ENABLED,
+                z ? 1 : 0,
+                -2);
     }
 
     public boolean areDreamsSupported() {
@@ -49,7 +61,8 @@ public class DreamManager {
     public void setActiveDream(ComponentName dreamComponent) {
         ComponentName[] dreams = {dreamComponent};
         try {
-            this.mService.setDreamComponentsForUser(this.mContext.getUserId(), dreamComponent != null ? dreams : null);
+            this.mService.setDreamComponentsForUser(
+                    this.mContext.getUserId(), dreamComponent != null ? dreams : null);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }

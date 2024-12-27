@@ -7,27 +7,59 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListAdapter;
+
 import com.android.internal.R;
-import com.android.internal.app.AbstractMultiProfilePagerAdapter;
 
 /* loaded from: classes5.dex */
 public class ResolverMultiProfilePagerAdapter extends AbstractMultiProfilePagerAdapter {
     private final ResolverProfileDescriptor[] mItems;
     private boolean mUseLayoutWithDefault;
 
-    ResolverMultiProfilePagerAdapter(Context context, ResolverListAdapter adapter, AbstractMultiProfilePagerAdapter.EmptyStateProvider emptyStateProvider, AbstractMultiProfilePagerAdapter.QuietModeManager quietModeManager, UserHandle workProfileUserHandle, UserHandle cloneUserHandle) {
-        super(context, 0, emptyStateProvider, quietModeManager, workProfileUserHandle, cloneUserHandle);
-        this.mItems = new ResolverProfileDescriptor[]{createProfileDescriptor(adapter)};
+    ResolverMultiProfilePagerAdapter(
+            Context context,
+            ResolverListAdapter adapter,
+            AbstractMultiProfilePagerAdapter.EmptyStateProvider emptyStateProvider,
+            AbstractMultiProfilePagerAdapter.QuietModeManager quietModeManager,
+            UserHandle workProfileUserHandle,
+            UserHandle cloneUserHandle) {
+        super(
+                context,
+                0,
+                emptyStateProvider,
+                quietModeManager,
+                workProfileUserHandle,
+                cloneUserHandle);
+        this.mItems = new ResolverProfileDescriptor[] {createProfileDescriptor(adapter)};
     }
 
-    ResolverMultiProfilePagerAdapter(Context context, ResolverListAdapter personalAdapter, ResolverListAdapter workAdapter, AbstractMultiProfilePagerAdapter.EmptyStateProvider emptyStateProvider, AbstractMultiProfilePagerAdapter.QuietModeManager quietModeManager, int defaultProfile, UserHandle workProfileUserHandle, UserHandle cloneUserHandle) {
-        super(context, defaultProfile, emptyStateProvider, quietModeManager, workProfileUserHandle, cloneUserHandle);
-        this.mItems = new ResolverProfileDescriptor[]{createProfileDescriptor(personalAdapter), createProfileDescriptor(workAdapter)};
+    ResolverMultiProfilePagerAdapter(
+            Context context,
+            ResolverListAdapter personalAdapter,
+            ResolverListAdapter workAdapter,
+            AbstractMultiProfilePagerAdapter.EmptyStateProvider emptyStateProvider,
+            AbstractMultiProfilePagerAdapter.QuietModeManager quietModeManager,
+            int defaultProfile,
+            UserHandle workProfileUserHandle,
+            UserHandle cloneUserHandle) {
+        super(
+                context,
+                defaultProfile,
+                emptyStateProvider,
+                quietModeManager,
+                workProfileUserHandle,
+                cloneUserHandle);
+        this.mItems =
+                new ResolverProfileDescriptor[] {
+                    createProfileDescriptor(personalAdapter), createProfileDescriptor(workAdapter)
+                };
     }
 
     private ResolverProfileDescriptor createProfileDescriptor(ResolverListAdapter adapter) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.sem_resolver_list_per_profile, (ViewGroup) null, false);
+        ViewGroup rootView =
+                (ViewGroup)
+                        inflater.inflate(
+                                R.layout.sem_resolver_list_per_profile, (ViewGroup) null, false);
         return new ResolverProfileDescriptor(rootView, adapter);
     }
 
@@ -56,7 +88,8 @@ public class ResolverMultiProfilePagerAdapter extends AbstractMultiProfilePagerA
         return this.mItems[pageIndex].resolverListAdapter;
     }
 
-    @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter, com.android.internal.widget.PagerAdapter
+    @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter,
+              // com.android.internal.widget.PagerAdapter
     public ViewGroup instantiateItem(ViewGroup container, int position) {
         setupListAdapter(position);
         return super.instantiateItem(container, position);
@@ -64,10 +97,12 @@ public class ResolverMultiProfilePagerAdapter extends AbstractMultiProfilePagerA
 
     @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter
     ResolverListAdapter getListAdapterForUserHandle(UserHandle userHandle) {
-        if (getPersonalListAdapter().getUserHandle().equals(userHandle) || userHandle.equals(getCloneUserHandle())) {
+        if (getPersonalListAdapter().getUserHandle().equals(userHandle)
+                || userHandle.equals(getCloneUserHandle())) {
             return getPersonalListAdapter();
         }
-        if (getWorkListAdapter() != null && getWorkListAdapter().getUserHandle().equals(userHandle)) {
+        if (getWorkListAdapter() != null
+                && getWorkListAdapter().getUserHandle().equals(userHandle)) {
             return getWorkListAdapter();
         }
         return null;
@@ -126,7 +161,11 @@ public class ResolverMultiProfilePagerAdapter extends AbstractMultiProfilePagerA
     @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter
     protected void setupContainerPadding(View container) {
         int bottom = this.mUseLayoutWithDefault ? container.getPaddingBottom() : 0;
-        container.setPadding(container.getPaddingLeft(), container.getPaddingTop(), container.getPaddingRight(), bottom);
+        container.setPadding(
+                container.getPaddingLeft(),
+                container.getPaddingTop(),
+                container.getPaddingRight(),
+                bottom);
     }
 
     class ResolverProfileDescriptor extends AbstractMultiProfilePagerAdapter.ProfileDescriptor {

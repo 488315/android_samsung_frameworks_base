@@ -6,6 +6,13 @@ import android.hardware.audio.common.V2_0.AudioChannelMask$$ExternalSyntheticOut
 /* loaded from: classes.dex */
 public abstract class SoundModelType {
     public static final String toString(int i) {
-        return i == -1 ? "UNKNOWN" : i == 0 ? "KEYPHRASE" : i == 1 ? "GENERIC" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i);
+        return i == -1
+                ? "UNKNOWN"
+                : i == 0
+                        ? "KEYPHRASE"
+                        : i == 1
+                                ? "GENERIC"
+                                : AudioChannelMask$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("0x"), i);
     }
 }

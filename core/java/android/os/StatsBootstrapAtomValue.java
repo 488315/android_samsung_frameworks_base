@@ -1,22 +1,23 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class StatsBootstrapAtomValue implements Parcelable {
-    public static final Parcelable.Creator<StatsBootstrapAtomValue> CREATOR = new Parcelable.Creator<StatsBootstrapAtomValue>() { // from class: android.os.StatsBootstrapAtomValue.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatsBootstrapAtomValue createFromParcel(Parcel _aidl_source) {
-            return new StatsBootstrapAtomValue(_aidl_source);
-        }
+    public static final Parcelable.Creator<StatsBootstrapAtomValue> CREATOR =
+            new Parcelable.Creator<
+                    StatsBootstrapAtomValue>() { // from class: android.os.StatsBootstrapAtomValue.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatsBootstrapAtomValue createFromParcel(Parcel _aidl_source) {
+                    return new StatsBootstrapAtomValue(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatsBootstrapAtomValue[] newArray(int _aidl_size) {
-            return new StatsBootstrapAtomValue[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatsBootstrapAtomValue[] newArray(int _aidl_size) {
+                    return new StatsBootstrapAtomValue[_aidl_size];
+                }
+            };
     public static final int boolValue = 0;
     public static final int bytesValue = 5;
     public static final int floatValue = 3;
@@ -196,7 +197,12 @@ public final class StatsBootstrapAtomValue implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

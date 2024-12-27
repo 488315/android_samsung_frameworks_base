@@ -9,6 +9,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.GeneralNames;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.internal.org.bouncycastle.asn1.x509.X509Extension;
 import com.android.internal.org.bouncycastle.jce.PrincipalUtil;
+
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.PublicKey;
@@ -29,23 +30,44 @@ public class AuthorityKeyIdentifierStructure extends AuthorityKeyIdentifier {
         super((ASN1Sequence) extension.getParsedValue());
     }
 
-    private static ASN1Sequence fromCertificate(X509Certificate certificate) throws CertificateParsingException {
+    private static ASN1Sequence fromCertificate(X509Certificate certificate)
+            throws CertificateParsingException {
         try {
             if (certificate.getVersion() != 3) {
-                GeneralName genName = new GeneralName(PrincipalUtil.getIssuerX509Principal(certificate));
-                SubjectPublicKeyInfo info = SubjectPublicKeyInfo.getInstance(certificate.getPublicKey().getEncoded());
-                return (ASN1Sequence) new AuthorityKeyIdentifier(info, new GeneralNames(genName), certificate.getSerialNumber()).toASN1Primitive();
+                GeneralName genName =
+                        new GeneralName(PrincipalUtil.getIssuerX509Principal(certificate));
+                SubjectPublicKeyInfo info =
+                        SubjectPublicKeyInfo.getInstance(certificate.getPublicKey().getEncoded());
+                return (ASN1Sequence)
+                        new AuthorityKeyIdentifier(
+                                        info,
+                                        new GeneralNames(genName),
+                                        certificate.getSerialNumber())
+                                .toASN1Primitive();
             }
-            GeneralName genName2 = new GeneralName(PrincipalUtil.getIssuerX509Principal(certificate));
+            GeneralName genName2 =
+                    new GeneralName(PrincipalUtil.getIssuerX509Principal(certificate));
             byte[] ext = certificate.getExtensionValue(Extension.subjectKeyIdentifier.getId());
             if (ext != null) {
                 ASN1OctetString str = (ASN1OctetString) X509ExtensionUtil.fromExtensionValue(ext);
-                return (ASN1Sequence) new AuthorityKeyIdentifier(str.getOctets(), new GeneralNames(genName2), certificate.getSerialNumber()).toASN1Primitive();
+                return (ASN1Sequence)
+                        new AuthorityKeyIdentifier(
+                                        str.getOctets(),
+                                        new GeneralNames(genName2),
+                                        certificate.getSerialNumber())
+                                .toASN1Primitive();
             }
-            SubjectPublicKeyInfo info2 = SubjectPublicKeyInfo.getInstance(certificate.getPublicKey().getEncoded());
-            return (ASN1Sequence) new AuthorityKeyIdentifier(info2, new GeneralNames(genName2), certificate.getSerialNumber()).toASN1Primitive();
+            SubjectPublicKeyInfo info2 =
+                    SubjectPublicKeyInfo.getInstance(certificate.getPublicKey().getEncoded());
+            return (ASN1Sequence)
+                    new AuthorityKeyIdentifier(
+                                    info2,
+                                    new GeneralNames(genName2),
+                                    certificate.getSerialNumber())
+                            .toASN1Primitive();
         } catch (Exception e) {
-            throw new CertificateParsingException("Exception extracting certificate details: " + e.toString());
+            throw new CertificateParsingException(
+                    "Exception extracting certificate details: " + e.toString());
         }
     }
 
@@ -58,7 +80,8 @@ public class AuthorityKeyIdentifierStructure extends AuthorityKeyIdentifier {
         }
     }
 
-    public AuthorityKeyIdentifierStructure(X509Certificate certificate) throws CertificateParsingException {
+    public AuthorityKeyIdentifierStructure(X509Certificate certificate)
+            throws CertificateParsingException {
         super(fromCertificate(certificate));
     }
 

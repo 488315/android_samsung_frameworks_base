@@ -1,6 +1,7 @@
 package android.database;
 
 import android.hardware.scontext.SContextConstants;
+
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
@@ -23,7 +24,8 @@ public class MatrixCursor extends AbstractCursor {
 
     private Object get(int column) {
         if (column < 0 || column >= this.columnCount) {
-            throw new CursorIndexOutOfBoundsException("Requested column: " + column + ", # of columns: " + this.columnCount);
+            throw new CursorIndexOutOfBoundsException(
+                    "Requested column: " + column + ", # of columns: " + this.columnCount);
         }
         if (this.mPos < 0) {
             throw new CursorIndexOutOfBoundsException("Before first row.");
@@ -44,7 +46,11 @@ public class MatrixCursor extends AbstractCursor {
 
     public void addRow(Object[] columnValues) {
         if (columnValues.length != this.columnCount) {
-            throw new IllegalArgumentException("columnNames.length = " + this.columnCount + ", columnValues.length = " + columnValues.length);
+            throw new IllegalArgumentException(
+                    "columnNames.length = "
+                            + this.columnCount
+                            + ", columnValues.length = "
+                            + columnValues.length);
         }
         int i = this.rowCount;
         this.rowCount = i + 1;
@@ -79,7 +85,8 @@ public class MatrixCursor extends AbstractCursor {
     private void addRow(ArrayList<?> columnValues, int start) {
         int size = columnValues.size();
         if (size != this.columnCount) {
-            throw new IllegalArgumentException("columnNames.length = " + this.columnCount + ", columnValues.size() = " + size);
+            throw new IllegalArgumentException(
+                    "columnNames.length = " + this.columnCount + ", columnValues.size() = " + size);
         }
         this.rowCount++;
         Object[] localData = this.data;
@@ -132,7 +139,8 @@ public class MatrixCursor extends AbstractCursor {
         }
 
         public final RowBuilder add(int columnIndex, Object value) {
-            MatrixCursor.this.data[(this.row * MatrixCursor.this.columnCount) + columnIndex] = value;
+            MatrixCursor.this.data[(this.row * MatrixCursor.this.columnCount) + columnIndex] =
+                    value;
             return this;
         }
     }
@@ -162,7 +170,9 @@ public class MatrixCursor extends AbstractCursor {
         if (value == null) {
             return (short) 0;
         }
-        return value instanceof Number ? ((Number) value).shortValue() : Short.parseShort(value.toString());
+        return value instanceof Number
+                ? ((Number) value).shortValue()
+                : Short.parseShort(value.toString());
     }
 
     @Override // android.database.AbstractCursor, android.database.Cursor
@@ -171,7 +181,9 @@ public class MatrixCursor extends AbstractCursor {
         if (value == null) {
             return 0;
         }
-        return value instanceof Number ? ((Number) value).intValue() : Integer.parseInt(value.toString());
+        return value instanceof Number
+                ? ((Number) value).intValue()
+                : Integer.parseInt(value.toString());
     }
 
     @Override // android.database.AbstractCursor, android.database.Cursor
@@ -180,7 +192,9 @@ public class MatrixCursor extends AbstractCursor {
         if (value == null) {
             return 0L;
         }
-        return value instanceof Number ? ((Number) value).longValue() : Long.parseLong(value.toString());
+        return value instanceof Number
+                ? ((Number) value).longValue()
+                : Long.parseLong(value.toString());
     }
 
     @Override // android.database.AbstractCursor, android.database.Cursor
@@ -189,13 +203,19 @@ public class MatrixCursor extends AbstractCursor {
         if (value == null) {
             return 0.0f;
         }
-        return value instanceof Number ? ((Number) value).floatValue() : Float.parseFloat(value.toString());
+        return value instanceof Number
+                ? ((Number) value).floatValue()
+                : Float.parseFloat(value.toString());
     }
 
     @Override // android.database.AbstractCursor, android.database.Cursor
     public double getDouble(int column) {
         Object value = get(column);
-        return value == null ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN : value instanceof Number ? ((Number) value).doubleValue() : Double.parseDouble(value.toString());
+        return value == null
+                ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                : value instanceof Number
+                        ? ((Number) value).doubleValue()
+                        : Double.parseDouble(value.toString());
     }
 
     @Override // android.database.AbstractCursor, android.database.Cursor

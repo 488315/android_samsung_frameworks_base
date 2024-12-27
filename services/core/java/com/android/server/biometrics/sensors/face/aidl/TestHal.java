@@ -17,7 +17,8 @@ import android.util.Slog;
 public final class TestHal extends IFace.Stub {
     public final ISession createSession(int i, int i2, final ISessionCallback iSessionCallback) {
         Slog.w("face.aidl.TestHal", "createSession, sensorId: " + i + " userId: " + i2);
-        return new ISession.Stub() { // from class: com.android.server.biometrics.sensors.face.aidl.TestHal.1
+        return new ISession
+                .Stub() { // from class: com.android.server.biometrics.sensors.face.aidl.TestHal.1
 
             /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
             /* renamed from: com.android.server.biometrics.sensors.face.aidl.TestHal$1$1, reason: invalid class name and collision with other inner class name */
@@ -62,7 +63,8 @@ public final class TestHal extends IFace.Stub {
                 return new C00121(this, 1);
             }
 
-            public final ICancellationSignal authenticateWithContext(long j, OperationContext operationContext) {
+            public final ICancellationSignal authenticateWithContext(
+                    long j, OperationContext operationContext) {
                 return authenticate(j);
             }
 
@@ -76,21 +78,36 @@ public final class TestHal extends IFace.Stub {
                 return new C00121(this, 2);
             }
 
-            public final ICancellationSignal detectInteractionWithContext(OperationContext operationContext) {
+            public final ICancellationSignal detectInteractionWithContext(
+                    OperationContext operationContext) {
                 return detectInteraction();
             }
 
-            public final ICancellationSignal enroll(HardwareAuthToken hardwareAuthToken, byte b, byte[] bArr, NativeHandle nativeHandle) {
+            public final ICancellationSignal enroll(
+                    HardwareAuthToken hardwareAuthToken,
+                    byte b,
+                    byte[] bArr,
+                    NativeHandle nativeHandle) {
                 Slog.w("face.aidl.TestHal", "enroll");
                 return new C00121(this, 0);
             }
 
-            public final ICancellationSignal enrollWithContext(HardwareAuthToken hardwareAuthToken, byte b, byte[] bArr, NativeHandle nativeHandle, OperationContext operationContext) {
+            public final ICancellationSignal enrollWithContext(
+                    HardwareAuthToken hardwareAuthToken,
+                    byte b,
+                    byte[] bArr,
+                    NativeHandle nativeHandle,
+                    OperationContext operationContext) {
                 return enroll(hardwareAuthToken, b, bArr, nativeHandle);
             }
 
-            public final ICancellationSignal enrollWithOptions(FaceEnrollOptions faceEnrollOptions) {
-                return enroll(faceEnrollOptions.hardwareAuthToken, faceEnrollOptions.enrollmentType, faceEnrollOptions.features, faceEnrollOptions.nativeHandlePreview);
+            public final ICancellationSignal enrollWithOptions(
+                    FaceEnrollOptions faceEnrollOptions) {
+                return enroll(
+                        faceEnrollOptions.hardwareAuthToken,
+                        faceEnrollOptions.enrollmentType,
+                        faceEnrollOptions.features,
+                        faceEnrollOptions.nativeHandlePreview);
             }
 
             public final void enumerateEnrollments() {

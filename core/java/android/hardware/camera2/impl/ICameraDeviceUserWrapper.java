@@ -38,7 +38,8 @@ public class ICameraDeviceUserWrapper {
         }
     }
 
-    public SubmitInfo submitRequest(CaptureRequest request, boolean streaming) throws CameraAccessException {
+    public SubmitInfo submitRequest(CaptureRequest request, boolean streaming)
+            throws CameraAccessException {
         try {
             return this.mRemoteDevice.submitRequest(request, streaming);
         } catch (RemoteException e) {
@@ -48,7 +49,8 @@ public class ICameraDeviceUserWrapper {
         }
     }
 
-    public SubmitInfo submitRequestList(CaptureRequest[] requestList, boolean streaming) throws CameraAccessException {
+    public SubmitInfo submitRequestList(CaptureRequest[] requestList, boolean streaming)
+            throws CameraAccessException {
         try {
             return this.mRemoteDevice.submitRequestList(requestList, streaming);
         } catch (RemoteException e) {
@@ -78,9 +80,14 @@ public class ICameraDeviceUserWrapper {
         }
     }
 
-    public int[] endConfigure(int operatingMode, CameraMetadataNative sessionParams, long startTimeMs) throws CameraAccessException {
+    public int[] endConfigure(
+            int operatingMode, CameraMetadataNative sessionParams, long startTimeMs)
+            throws CameraAccessException {
         try {
-            return this.mRemoteDevice.endConfigure(operatingMode, sessionParams == null ? new CameraMetadataNative() : sessionParams, startTimeMs);
+            return this.mRemoteDevice.endConfigure(
+                    operatingMode,
+                    sessionParams == null ? new CameraMetadataNative() : sessionParams,
+                    startTimeMs);
         } catch (RemoteException e) {
             throw ExceptionUtils.throwAsPublicException(e);
         } catch (ServiceSpecificException e2) {
@@ -108,7 +115,8 @@ public class ICameraDeviceUserWrapper {
         }
     }
 
-    public int createInputStream(int width, int height, int format, boolean isMultiResolution) throws CameraAccessException {
+    public int createInputStream(int width, int height, int format, boolean isMultiResolution)
+            throws CameraAccessException {
         try {
             return this.mRemoteDevice.createInputStream(width, height, format, isMultiResolution);
         } catch (RemoteException e) {
@@ -158,14 +166,16 @@ public class ICameraDeviceUserWrapper {
         }
     }
 
-    public boolean isSessionConfigurationSupported(SessionConfiguration sessionConfig) throws CameraAccessException {
+    public boolean isSessionConfigurationSupported(SessionConfiguration sessionConfig)
+            throws CameraAccessException {
         try {
             return this.mRemoteDevice.isSessionConfigurationSupported(sessionConfig);
         } catch (RemoteException e) {
             throw ExceptionUtils.throwAsPublicException(e);
         } catch (ServiceSpecificException e2) {
             if (e2.errorCode == 10) {
-                throw new UnsupportedOperationException("Session configuration query not supported");
+                throw new UnsupportedOperationException(
+                        "Session configuration query not supported");
             }
             if (e2.errorCode == 3) {
                 throw new IllegalArgumentException("Invalid session configuration");
@@ -224,7 +234,8 @@ public class ICameraDeviceUserWrapper {
         }
     }
 
-    public void updateOutputConfiguration(int streamId, OutputConfiguration config) throws CameraAccessException {
+    public void updateOutputConfiguration(int streamId, OutputConfiguration config)
+            throws CameraAccessException {
         try {
             this.mRemoteDevice.updateOutputConfiguration(streamId, config);
         } catch (RemoteException e) {
@@ -234,7 +245,8 @@ public class ICameraDeviceUserWrapper {
         }
     }
 
-    public ICameraOfflineSession switchToOffline(ICameraDeviceCallbacks cbs, int[] offlineOutputIds) throws CameraAccessException {
+    public ICameraOfflineSession switchToOffline(ICameraDeviceCallbacks cbs, int[] offlineOutputIds)
+            throws CameraAccessException {
         try {
             return this.mRemoteDevice.switchToOffline(cbs, offlineOutputIds);
         } catch (RemoteException e) {
@@ -244,7 +256,8 @@ public class ICameraDeviceUserWrapper {
         }
     }
 
-    public void finalizeOutputConfigurations(int streamId, OutputConfiguration deferredConfig) throws CameraAccessException {
+    public void finalizeOutputConfigurations(int streamId, OutputConfiguration deferredConfig)
+            throws CameraAccessException {
         try {
             this.mRemoteDevice.finalizeOutputConfigurations(streamId, deferredConfig);
         } catch (RemoteException e) {

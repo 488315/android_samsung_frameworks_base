@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.ActivityManager;
 import android.content.ComponentName;
 
 /* loaded from: classes.dex */
@@ -17,6 +16,5 @@ public interface SemTaskChangeCallback {
 
     void onTaskRemoved(int i);
 
-    default void onTaskRequestedOrientationChanged(int taskId, int requestedOrientation) {
-    }
+    default void onTaskRequestedOrientationChanged(int taskId, int requestedOrientation) {}
 }

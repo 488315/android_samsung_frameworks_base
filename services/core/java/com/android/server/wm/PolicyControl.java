@@ -2,10 +2,13 @@ package com.android.server.wm;
 
 import android.util.ArraySet;
 import android.view.WindowManager;
+
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
 import com.android.server.policy.PhoneWindowManager;
+
 import com.samsung.android.multiwindow.MultiWindowCoreState;
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -48,7 +51,8 @@ public abstract class PolicyControl {
             ArraySet arraySet2 = new ArraySet();
             for (String str2 : str.split(",")) {
                 String trim = str2.trim();
-                if (!trim.startsWith(PackageManagerShellCommandDataLoader.STDIN_PATH) || trim.length() <= 1) {
+                if (!trim.startsWith(PackageManagerShellCommandDataLoader.STDIN_PATH)
+                        || trim.length() <= 1) {
                     arraySet.add(trim);
                 } else {
                     arraySet2.add(trim.substring(1));
@@ -81,7 +85,8 @@ public abstract class PolicyControl {
             if (z && this.mAllowList.contains("apps")) {
                 return true;
             }
-            return this.mAllowList.contains("*") || this.mAllowList.contains(layoutParams.packageName);
+            return this.mAllowList.contains("*")
+                    || this.mAllowList.contains(layoutParams.packageName);
         }
 
         public final String toString() {
@@ -93,8 +98,11 @@ public abstract class PolicyControl {
 
     public static boolean canBeSplitImmersiveTarget(WindowState windowState) {
         DisplayContent displayContent = windowState.getDisplayContent();
-        if (displayContent != null && displayContent.isDefaultDisplay && displayContent.getDefaultTaskDisplayArea().isSplitScreenModeActivated()) {
-            return windowState.getTask() == null || !windowState.getTask().isActivityTypeHomeOrRecents();
+        if (displayContent != null
+                && displayContent.isDefaultDisplay
+                && displayContent.getDefaultTaskDisplayArea().isSplitScreenModeActivated()) {
+            return windowState.getTask() == null
+                    || !windowState.getTask().isActivityTypeHomeOrRecents();
         }
         return false;
     }
@@ -113,7 +121,13 @@ public abstract class PolicyControl {
     }
 
     public static boolean isKeyguardShowingAndNotOccluded(DisplayContent displayContent) {
-        return (displayContent == null || !((PhoneWindowManager) displayContent.mWmService.mPolicy).isKeyguardShowing() || ((PhoneWindowManager) displayContent.mWmService.mPolicy).isKeyguardOccluded()) ? false : true;
+        return (displayContent == null
+                        || !((PhoneWindowManager) displayContent.mWmService.mPolicy)
+                                .isKeyguardShowing()
+                        || ((PhoneWindowManager) displayContent.mWmService.mPolicy)
+                                .isKeyguardOccluded())
+                ? false
+                : true;
     }
 
     public static void setFilters(String str) {
@@ -141,28 +155,46 @@ public abstract class PolicyControl {
     }
 
     public static boolean shouldApplyImmersiveNavigation(WindowState windowState, boolean z) {
-        if (windowState == null || isKeyguardShowingAndNotOccluded(windowState.getDisplayContent())) {
+        if (windowState == null
+                || isKeyguardShowingAndNotOccluded(windowState.getDisplayContent())) {
             return false;
         }
-        if (windowState.mAttrs.type != 2040 && ((windowState.getParentWindow() == null || windowState.getParentWindow().mAttrs.type != 2040) && ((MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED || MultiWindowCoreState.MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED) && canBeSplitImmersiveTarget(windowState)))) {
+        if (windowState.mAttrs.type != 2040
+                && ((windowState.getParentWindow() == null
+                                || windowState.getParentWindow().mAttrs.type != 2040)
+                        && ((MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED
+                                        || MultiWindowCoreState
+                                                .MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED)
+                                && canBeSplitImmersiveTarget(windowState)))) {
             return true;
         }
         if (!z && windowState.isDexMode()) {
-            return windowState.getDisplayContent().mAtmService.mDexController.mIsDexForceImmersiveModeEnabled;
+            return windowState.getDisplayContent()
+                    .mAtmService
+                    .mDexController
+                    .mIsDexForceImmersiveModeEnabled;
         }
         Filter filter = sImmersiveNavigationFilter;
         return filter != null && filter.matches(windowState.mAttrs);
     }
 
     public static boolean shouldApplyImmersiveStatus(WindowState windowState) {
-        if (windowState == null || isKeyguardShowingAndNotOccluded(windowState.getDisplayContent())) {
+        if (windowState == null
+                || isKeyguardShowingAndNotOccluded(windowState.getDisplayContent())) {
             return false;
         }
-        boolean z = windowState.mAttrs.type == 2040 || (windowState.getParentWindow() != null && windowState.getParentWindow().mAttrs.type == 2040);
-        if (CoreRune.MW_SPLIT_FLEX_PANEL_SYSTEMUI_VISIBILITY && !z && FlexPanelController.isFlexPanelTopEnabled(windowState)) {
+        boolean z =
+                windowState.mAttrs.type == 2040
+                        || (windowState.getParentWindow() != null
+                                && windowState.getParentWindow().mAttrs.type == 2040);
+        if (CoreRune.MW_SPLIT_FLEX_PANEL_SYSTEMUI_VISIBILITY
+                && !z
+                && FlexPanelController.isFlexPanelTopEnabled(windowState)) {
             return true;
         }
-        if (!z && MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED && canBeSplitImmersiveTarget(windowState)) {
+        if (!z
+                && MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED
+                && canBeSplitImmersiveTarget(windowState)) {
             return true;
         }
         Filter filter = sImmersiveStatusFilter;

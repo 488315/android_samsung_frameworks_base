@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewStructure;
 import android.view.autofill.AutofillId;
 import android.view.autofill.AutofillValue;
+
 import java.util.Objects;
 
 @SystemApi
@@ -472,9 +473,9 @@ public final class ViewNode extends AssistStructure.ViewNode {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0059, code lost:
-    
-        if ((((r42.mWidth & (-32768)) != 0) | ((r42.mHeight & (-32768)) != 0)) != false) goto L33;
-     */
+
+       if ((((r42.mWidth & (-32768)) != 0) | ((r42.mHeight & (-32768)) != 0)) != false) goto L33;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -484,7 +485,10 @@ public final class ViewNode extends AssistStructure.ViewNode {
             Method dump skipped, instructions count: 577
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.contentcapture.ViewNode.writeSelfToParcel(android.os.Parcel, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.contentcapture.ViewNode.writeSelfToParcel(android.os.Parcel,"
+                    + " int):void");
     }
 
     public static void writeToParcel(Parcel parcel, ViewNode node, int flags) {
@@ -871,7 +875,12 @@ public final class ViewNode extends AssistStructure.ViewNode {
         }
 
         boolean isSimple() {
-            return this.mTextBackgroundColor == 1 && this.mTextSelectionStart == 0 && this.mTextSelectionEnd == 0 && this.mLineCharOffsets == null && this.mLineBaselines == null && this.mHint == null;
+            return this.mTextBackgroundColor == 1
+                    && this.mTextSelectionStart == 0
+                    && this.mTextSelectionEnd == 0
+                    && this.mLineCharOffsets == null
+                    && this.mLineBaselines == null
+                    && this.mHint == null;
         }
 
         ViewNodeText(Parcel in, boolean simple) {

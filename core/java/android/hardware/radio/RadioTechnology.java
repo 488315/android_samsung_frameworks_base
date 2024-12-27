@@ -18,8 +18,7 @@ public @interface RadioTechnology {
     public static final int IWLAN = 18;
     public static final int LTE = 14;
 
-    @Deprecated
-    public static final int LTE_CA = 19;
+    @Deprecated public static final int LTE_CA = 19;
     public static final int NR = 20;
     public static final int ONE_X_RTT = 6;
     public static final int TD_SCDMA = 17;

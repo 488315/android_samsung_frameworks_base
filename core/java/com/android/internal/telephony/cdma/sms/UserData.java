@@ -3,6 +3,7 @@ package com.android.internal.telephony.cdma.sms;
 import android.telephony.PhoneNumberUtils;
 import android.text.format.DateFormat;
 import android.util.SparseIntArray;
+
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.telephony.SmsHeader;
 import com.android.internal.transition.EpicenterTranslateClipReveal;
@@ -42,7 +43,103 @@ public class UserData {
     public byte[] payload;
     public String payloadStr;
     public SmsHeader userDataHeader;
-    public static final char[] ASCII_MAP = {' ', '!', '\"', '#', '$', '%', '&', DateFormat.QUOTE, '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ShortcutConstants.SERVICES_SEPARATOR, ';', '<', '=', '>', '?', '@', DateFormat.CAPITAL_AM_PM, 'B', 'C', 'D', DateFormat.DAY, 'F', 'G', 'H', 'I', 'J', 'K', DateFormat.STANDALONE_MONTH, DateFormat.MONTH, PhoneNumberUtils.WILD, 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_', '`', DateFormat.AM_PM, 'b', 'c', DateFormat.DATE, 'e', 'f', 'g', DateFormat.HOUR, 'i', 'j', DateFormat.HOUR_OF_DAY, 'l', DateFormat.MINUTE, 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', EpicenterTranslateClipReveal.StateProperty.TARGET_X, 'y', DateFormat.TIME_ZONE, '{', '|', '}', '~'};
+    public static final char[] ASCII_MAP = {
+        ' ',
+        '!',
+        '\"',
+        '#',
+        '$',
+        '%',
+        '&',
+        DateFormat.QUOTE,
+        '(',
+        ')',
+        '*',
+        '+',
+        ',',
+        '-',
+        '.',
+        '/',
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        ShortcutConstants.SERVICES_SEPARATOR,
+        ';',
+        '<',
+        '=',
+        '>',
+        '?',
+        '@',
+        DateFormat.CAPITAL_AM_PM,
+        'B',
+        'C',
+        'D',
+        DateFormat.DAY,
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        DateFormat.STANDALONE_MONTH,
+        DateFormat.MONTH,
+        PhoneNumberUtils.WILD,
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z',
+        '[',
+        '\\',
+        ']',
+        '^',
+        '_',
+        '`',
+        DateFormat.AM_PM,
+        'b',
+        'c',
+        DateFormat.DATE,
+        'e',
+        'f',
+        'g',
+        DateFormat.HOUR,
+        'i',
+        'j',
+        DateFormat.HOUR_OF_DAY,
+        'l',
+        DateFormat.MINUTE,
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        EpicenterTranslateClipReveal.StateProperty.TARGET_X,
+        'y',
+        DateFormat.TIME_ZONE,
+        '{',
+        '|',
+        '}',
+        '~'
+    };
     public static final SparseIntArray charToAscii = new SparseIntArray();
     public boolean msgEncodingSet = false;
     public boolean isAutoLogin = false;
@@ -72,7 +169,9 @@ public class UserData {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("UserData ");
-        builder.append("{ msgEncoding=" + (this.msgEncodingSet ? Integer.valueOf(this.msgEncoding) : "unset"));
+        builder.append(
+                "{ msgEncoding="
+                        + (this.msgEncodingSet ? Integer.valueOf(this.msgEncoding) : "unset"));
         builder.append(", msgType=" + this.msgType);
         builder.append(", paddingBits=" + this.paddingBits);
         builder.append(", numFields=" + this.numFields);

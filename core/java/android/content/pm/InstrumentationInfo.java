@@ -6,19 +6,21 @@ import android.util.SparseArray;
 
 /* loaded from: classes.dex */
 public class InstrumentationInfo extends PackageItemInfo implements Parcelable {
-    public static final Parcelable.Creator<InstrumentationInfo> CREATOR = new Parcelable.Creator<InstrumentationInfo>() { // from class: android.content.pm.InstrumentationInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstrumentationInfo createFromParcel(Parcel source) {
-            return new InstrumentationInfo(source);
-        }
+    public static final Parcelable.Creator<InstrumentationInfo> CREATOR =
+            new Parcelable.Creator<
+                    InstrumentationInfo>() { // from class: android.content.pm.InstrumentationInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstrumentationInfo createFromParcel(Parcel source) {
+                    return new InstrumentationInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstrumentationInfo[] newArray(int size) {
-            return new InstrumentationInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstrumentationInfo[] newArray(int size) {
+                    return new InstrumentationInfo[size];
+                }
+            };
     public String credentialProtectedDataDir;
     public String dataDir;
     public String deviceProtectedDataDir;
@@ -37,8 +39,7 @@ public class InstrumentationInfo extends PackageItemInfo implements Parcelable {
     public String targetPackage;
     public String targetProcesses;
 
-    public InstrumentationInfo() {
-    }
+    public InstrumentationInfo() {}
 
     public InstrumentationInfo(InstrumentationInfo orig) {
         super(orig);
@@ -62,7 +63,11 @@ public class InstrumentationInfo extends PackageItemInfo implements Parcelable {
     }
 
     public String toString() {
-        return "InstrumentationInfo{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.packageName + "}";
+        return "InstrumentationInfo{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + this.packageName
+                + "}";
     }
 
     @Override // android.os.Parcelable

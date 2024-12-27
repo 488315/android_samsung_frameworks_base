@@ -3,8 +3,6 @@ package android.app.wearable;
 import android.annotation.SystemApi;
 import android.app.PendingIntent;
 import android.app.compat.CompatChanges;
-import android.app.wearable.IWearableSensingCallback;
-import android.app.wearable.WearableSensingManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -16,8 +14,10 @@ import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.os.SharedMemory;
 import android.util.Slog;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.util.FunctionalUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,16 +30,17 @@ import java.util.function.Consumer;
 /* loaded from: classes.dex */
 public class WearableSensingManager {
     static final long ALLOW_WEARABLE_SENSING_SERVICE_FILE_READ = 330701114;
-    public static final String EXTRA_WEARABLE_SENSING_DATA_REQUEST = "android.app.wearable.extra.WEARABLE_SENSING_DATA_REQUEST";
+    public static final String EXTRA_WEARABLE_SENSING_DATA_REQUEST =
+            "android.app.wearable.extra.WEARABLE_SENSING_DATA_REQUEST";
     public static final int STATUS_ACCESS_DENIED = 5;
     public static final int STATUS_CHANNEL_ERROR = 7;
-    public static final String STATUS_RESPONSE_BUNDLE_KEY = "android.app.wearable.WearableSensingStatusBundleKey";
+    public static final String STATUS_RESPONSE_BUNDLE_KEY =
+            "android.app.wearable.WearableSensingStatusBundleKey";
     public static final int STATUS_SERVICE_UNAVAILABLE = 3;
     public static final int STATUS_SUCCESS = 1;
     public static final int STATUS_UNKNOWN = 0;
 
-    @Deprecated
-    public static final int STATUS_UNSUPPORTED = 2;
+    @Deprecated public static final int STATUS_UNSUPPORTED = 2;
     public static final int STATUS_UNSUPPORTED_DATA_TYPE = 8;
     public static final int STATUS_UNSUPPORTED_OPERATION = 6;
     public static final int STATUS_WEARABLE_UNAVAILABLE = 4;
@@ -48,11 +49,12 @@ public class WearableSensingManager {
     private final IWearableSensingManager mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StatusCode {
-    }
+    public @interface StatusCode {}
 
     public static WearableSensingDataRequest getDataRequestFromIntent(Intent intent) {
-        return (WearableSensingDataRequest) intent.getParcelableExtra(EXTRA_WEARABLE_SENSING_DATA_REQUEST, WearableSensingDataRequest.class);
+        return (WearableSensingDataRequest)
+                intent.getParcelableExtra(
+                        EXTRA_WEARABLE_SENSING_DATA_REQUEST, WearableSensingDataRequest.class);
     }
 
     public WearableSensingManager(Context context, IWearableSensingManager service) {
@@ -60,30 +62,42 @@ public class WearableSensingManager {
         this.mService = service;
     }
 
-    public void provideConnection(ParcelFileDescriptor wearableConnection, Executor executor, Consumer<Integer> statusConsumer) {
+    public void provideConnection(
+            ParcelFileDescriptor wearableConnection,
+            Executor executor,
+            Consumer<Integer> statusConsumer) {
         RemoteCallback statusCallback = createStatusCallback(executor, statusConsumer);
         try {
-            this.mService.provideConnection(wearableConnection, createWearableSensingCallback(executor), statusCallback);
+            this.mService.provideConnection(
+                    wearableConnection, createWearableSensingCallback(executor), statusCallback);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
     @Deprecated
-    public void provideDataStream(ParcelFileDescriptor parcelFileDescriptor, Executor executor, Consumer<Integer> statusConsumer) {
+    public void provideDataStream(
+            ParcelFileDescriptor parcelFileDescriptor,
+            Executor executor,
+            Consumer<Integer> statusConsumer) {
         RemoteCallback statusCallback = createStatusCallback(executor, statusConsumer);
         IWearableSensingCallback wearableSensingCallback = null;
         if (CompatChanges.isChangeEnabled(ALLOW_WEARABLE_SENSING_SERVICE_FILE_READ)) {
             wearableSensingCallback = createWearableSensingCallback(executor);
         }
         try {
-            this.mService.provideDataStream(parcelFileDescriptor, wearableSensingCallback, statusCallback);
+            this.mService.provideDataStream(
+                    parcelFileDescriptor, wearableSensingCallback, statusCallback);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void provideData(PersistableBundle data, SharedMemory sharedMemory, Executor executor, Consumer<Integer> statusConsumer) {
+    public void provideData(
+            PersistableBundle data,
+            SharedMemory sharedMemory,
+            Executor executor,
+            Consumer<Integer> statusConsumer) {
         try {
             RemoteCallback callback = createStatusCallback(executor, statusConsumer);
             this.mService.provideData(data, sharedMemory, callback);
@@ -92,27 +106,41 @@ public class WearableSensingManager {
         }
     }
 
-    public void registerDataRequestObserver(int dataType, PendingIntent dataRequestPendingIntent, Executor executor, Consumer<Integer> statusConsumer) {
+    public void registerDataRequestObserver(
+            int dataType,
+            PendingIntent dataRequestPendingIntent,
+            Executor executor,
+            Consumer<Integer> statusConsumer) {
         try {
             RemoteCallback statusCallback = createStatusCallback(executor, statusConsumer);
-            this.mService.registerDataRequestObserver(dataType, dataRequestPendingIntent, statusCallback);
+            this.mService.registerDataRequestObserver(
+                    dataType, dataRequestPendingIntent, statusCallback);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void unregisterDataRequestObserver(int dataType, PendingIntent dataRequestPendingIntent, Executor executor, Consumer<Integer> statusConsumer) {
+    public void unregisterDataRequestObserver(
+            int dataType,
+            PendingIntent dataRequestPendingIntent,
+            Executor executor,
+            Consumer<Integer> statusConsumer) {
         try {
             RemoteCallback statusCallback = createStatusCallback(executor, statusConsumer);
-            this.mService.unregisterDataRequestObserver(dataType, dataRequestPendingIntent, statusCallback);
+            this.mService.unregisterDataRequestObserver(
+                    dataType, dataRequestPendingIntent, statusCallback);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void startHotwordRecognition(ComponentName targetVisComponentName, Executor executor, Consumer<Integer> statusConsumer) {
+    public void startHotwordRecognition(
+            ComponentName targetVisComponentName,
+            Executor executor,
+            Consumer<Integer> statusConsumer) {
         try {
-            this.mService.startHotwordRecognition(targetVisComponentName, createStatusCallback(executor, statusConsumer));
+            this.mService.startHotwordRecognition(
+                    targetVisComponentName, createStatusCallback(executor, statusConsumer));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -126,25 +154,32 @@ public class WearableSensingManager {
         }
     }
 
-    private static RemoteCallback createStatusCallback(final Executor executor, final Consumer<Integer> statusConsumer) {
-        return new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: android.app.wearable.WearableSensingManager$$ExternalSyntheticLambda0
-            @Override // android.os.RemoteCallback.OnResultListener
-            public final void onResult(Bundle bundle) {
-                WearableSensingManager.lambda$createStatusCallback$1(executor, statusConsumer, bundle);
-            }
-        });
+    private static RemoteCallback createStatusCallback(
+            final Executor executor, final Consumer<Integer> statusConsumer) {
+        return new RemoteCallback(
+                new RemoteCallback.OnResultListener() { // from class:
+                    // android.app.wearable.WearableSensingManager$$ExternalSyntheticLambda0
+                    @Override // android.os.RemoteCallback.OnResultListener
+                    public final void onResult(Bundle bundle) {
+                        WearableSensingManager.lambda$createStatusCallback$1(
+                                executor, statusConsumer, bundle);
+                    }
+                });
     }
 
-    static /* synthetic */ void lambda$createStatusCallback$1(Executor executor, final Consumer statusConsumer, Bundle result) {
+    static /* synthetic */ void lambda$createStatusCallback$1(
+            Executor executor, final Consumer statusConsumer, Bundle result) {
         final int status = result.getInt("android.app.wearable.WearableSensingStatusBundleKey");
         long identity = Binder.clearCallingIdentity();
         try {
-            executor.execute(new Runnable() { // from class: android.app.wearable.WearableSensingManager$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    statusConsumer.accept(Integer.valueOf(status));
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                        // android.app.wearable.WearableSensingManager$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            statusConsumer.accept(Integer.valueOf(status));
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(identity);
         }
@@ -159,25 +194,34 @@ public class WearableSensingManager {
         }
 
         @Override // android.app.wearable.IWearableSensingCallback
-        public void openFile(final String filename, final AndroidFuture<ParcelFileDescriptor> future) {
+        public void openFile(
+                final String filename, final AndroidFuture<ParcelFileDescriptor> future) {
             Slog.d(WearableSensingManager.TAG, "IWearableSensingCallback#openFile " + filename);
             final Executor executor = this.val$executor;
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.app.wearable.WearableSensingManager$1$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    WearableSensingManager.AnonymousClass1.this.lambda$openFile$1(executor, filename, future);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils.ThrowingRunnable() { // from class:
+                        // android.app.wearable.WearableSensingManager$1$$ExternalSyntheticLambda0
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            WearableSensingManager.AnonymousClass1.this.lambda$openFile$1(
+                                    executor, filename, future);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$openFile$1(Executor executor, final String filename, final AndroidFuture future) throws Exception {
-            executor.execute(new Runnable() { // from class: android.app.wearable.WearableSensingManager$1$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    WearableSensingManager.AnonymousClass1.this.lambda$openFile$0(filename, future);
-                }
-            });
+        public /* synthetic */ void lambda$openFile$1(
+                Executor executor, final String filename, final AndroidFuture future)
+                throws Exception {
+            executor.execute(
+                    new Runnable() { // from class:
+                        // android.app.wearable.WearableSensingManager$1$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            WearableSensingManager.AnonymousClass1.this.lambda$openFile$0(
+                                    filename, future);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -192,7 +236,9 @@ public class WearableSensingManager {
             try {
                 try {
                     pfd = ParcelFileDescriptor.open(file, 268435456);
-                    Slog.d(WearableSensingManager.TAG, "Successfully opened a file with ParcelFileDescriptor.");
+                    Slog.d(
+                            WearableSensingManager.TAG,
+                            "Successfully opened a file with ParcelFileDescriptor.");
                     future.complete(pfd);
                     if (pfd != null) {
                         pfd.close();
@@ -210,7 +256,10 @@ public class WearableSensingManager {
                     try {
                         pfd.close();
                     } catch (IOException ex2) {
-                        Slog.e(WearableSensingManager.TAG, "Error closing ParcelFileDescriptor.", ex2);
+                        Slog.e(
+                                WearableSensingManager.TAG,
+                                "Error closing ParcelFileDescriptor.",
+                                ex2);
                     }
                 }
                 throw th;

@@ -6,7 +6,7 @@ import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
-import com.android.internal.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -56,7 +56,13 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
             this.newHolder = newHolder;
         }
 
-        ChangeInfo(RecyclerView.ViewHolder oldHolder, RecyclerView.ViewHolder newHolder, int fromX, int fromY, int toX, int toY) {
+        ChangeInfo(
+                RecyclerView.ViewHolder oldHolder,
+                RecyclerView.ViewHolder newHolder,
+                int fromX,
+                int fromY,
+                int toX,
+                int toY) {
             this(oldHolder, newHolder);
             this.fromX = fromX;
             this.fromY = fromY;
@@ -65,7 +71,19 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
         }
 
         public String toString() {
-            return "ChangeInfo{oldHolder=" + this.oldHolder + ", newHolder=" + this.newHolder + ", fromX=" + this.fromX + ", fromY=" + this.fromY + ", toX=" + this.toX + ", toY=" + this.toY + '}';
+            return "ChangeInfo{oldHolder="
+                    + this.oldHolder
+                    + ", newHolder="
+                    + this.newHolder
+                    + ", fromX="
+                    + this.fromX
+                    + ", fromY="
+                    + this.fromY
+                    + ", toX="
+                    + this.toX
+                    + ", toY="
+                    + this.toY
+                    + '}';
         }
     }
 
@@ -89,18 +107,25 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
             moves.addAll(this.mPendingMoves);
             this.mMovesList.add(moves);
             this.mPendingMoves.clear();
-            Runnable mover = new Runnable() { // from class: com.android.internal.widget.DefaultItemAnimator.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    Iterator it2 = moves.iterator();
-                    while (it2.hasNext()) {
-                        MoveInfo moveInfo = (MoveInfo) it2.next();
-                        DefaultItemAnimator.this.animateMoveImpl(moveInfo.holder, moveInfo.fromX, moveInfo.fromY, moveInfo.toX, moveInfo.toY);
-                    }
-                    moves.clear();
-                    DefaultItemAnimator.this.mMovesList.remove(moves);
-                }
-            };
+            Runnable mover =
+                    new Runnable() { // from class:
+                                     // com.android.internal.widget.DefaultItemAnimator.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            Iterator it2 = moves.iterator();
+                            while (it2.hasNext()) {
+                                MoveInfo moveInfo = (MoveInfo) it2.next();
+                                DefaultItemAnimator.this.animateMoveImpl(
+                                        moveInfo.holder,
+                                        moveInfo.fromX,
+                                        moveInfo.fromY,
+                                        moveInfo.toX,
+                                        moveInfo.toY);
+                            }
+                            moves.clear();
+                            DefaultItemAnimator.this.mMovesList.remove(moves);
+                        }
+                    };
             if (removalsPending) {
                 View view = moves.get(0).holder.itemView;
                 view.postOnAnimationDelayed(mover, getRemoveDuration());
@@ -113,18 +138,20 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
             changes.addAll(this.mPendingChanges);
             this.mChangesList.add(changes);
             this.mPendingChanges.clear();
-            Runnable changer = new Runnable() { // from class: com.android.internal.widget.DefaultItemAnimator.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    Iterator it2 = changes.iterator();
-                    while (it2.hasNext()) {
-                        ChangeInfo change = (ChangeInfo) it2.next();
-                        DefaultItemAnimator.this.animateChangeImpl(change);
-                    }
-                    changes.clear();
-                    DefaultItemAnimator.this.mChangesList.remove(changes);
-                }
-            };
+            Runnable changer =
+                    new Runnable() { // from class:
+                                     // com.android.internal.widget.DefaultItemAnimator.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            Iterator it2 = changes.iterator();
+                            while (it2.hasNext()) {
+                                ChangeInfo change = (ChangeInfo) it2.next();
+                                DefaultItemAnimator.this.animateChangeImpl(change);
+                            }
+                            changes.clear();
+                            DefaultItemAnimator.this.mChangesList.remove(changes);
+                        }
+                    };
             if (removalsPending) {
                 RecyclerView.ViewHolder holder2 = changes.get(0).oldHolder;
                 holder2.itemView.postOnAnimationDelayed(changer, getRemoveDuration());
@@ -137,18 +164,21 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
             additions.addAll(this.mPendingAdditions);
             this.mAdditionsList.add(additions);
             this.mPendingAdditions.clear();
-            Runnable adder = new Runnable() { // from class: com.android.internal.widget.DefaultItemAnimator.3
-                @Override // java.lang.Runnable
-                public void run() {
-                    Iterator it2 = additions.iterator();
-                    while (it2.hasNext()) {
-                        RecyclerView.ViewHolder holder3 = (RecyclerView.ViewHolder) it2.next();
-                        DefaultItemAnimator.this.animateAddImpl(holder3);
-                    }
-                    additions.clear();
-                    DefaultItemAnimator.this.mAdditionsList.remove(additions);
-                }
-            };
+            Runnable adder =
+                    new Runnable() { // from class:
+                                     // com.android.internal.widget.DefaultItemAnimator.3
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            Iterator it2 = additions.iterator();
+                            while (it2.hasNext()) {
+                                RecyclerView.ViewHolder holder3 =
+                                        (RecyclerView.ViewHolder) it2.next();
+                                DefaultItemAnimator.this.animateAddImpl(holder3);
+                            }
+                            additions.clear();
+                            DefaultItemAnimator.this.mAdditionsList.remove(additions);
+                        }
+                    };
             if (removalsPending || movesPending || changesPending) {
                 long removeDuration = removalsPending ? getRemoveDuration() : 0L;
                 long moveDuration = movesPending ? getMoveDuration() : 0L;
@@ -173,21 +203,29 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
         final View view = holder.itemView;
         final ViewPropertyAnimator animation = view.animate();
         this.mRemoveAnimations.add(holder);
-        animation.setDuration(getRemoveDuration()).alpha(0.0f).setListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.DefaultItemAnimator.4
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationStart(Animator animator) {
-                DefaultItemAnimator.this.dispatchRemoveStarting(holder);
-            }
+        animation
+                .setDuration(getRemoveDuration())
+                .alpha(0.0f)
+                .setListener(
+                        new AnimatorListenerAdapter() { // from class:
+                                                        // com.android.internal.widget.DefaultItemAnimator.4
+                            @Override // android.animation.AnimatorListenerAdapter,
+                                      // android.animation.Animator.AnimatorListener
+                            public void onAnimationStart(Animator animator) {
+                                DefaultItemAnimator.this.dispatchRemoveStarting(holder);
+                            }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animator) {
-                animation.setListener(null);
-                view.setAlpha(1.0f);
-                DefaultItemAnimator.this.dispatchRemoveFinished(holder);
-                DefaultItemAnimator.this.mRemoveAnimations.remove(holder);
-                DefaultItemAnimator.this.dispatchFinishedWhenDone();
-            }
-        }).start();
+                            @Override // android.animation.AnimatorListenerAdapter,
+                                      // android.animation.Animator.AnimatorListener
+                            public void onAnimationEnd(Animator animator) {
+                                animation.setListener(null);
+                                view.setAlpha(1.0f);
+                                DefaultItemAnimator.this.dispatchRemoveFinished(holder);
+                                DefaultItemAnimator.this.mRemoveAnimations.remove(holder);
+                                DefaultItemAnimator.this.dispatchFinishedWhenDone();
+                            }
+                        })
+                .start();
     }
 
     @Override // com.android.internal.widget.SimpleItemAnimator
@@ -202,29 +240,39 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
         final View view = holder.itemView;
         final ViewPropertyAnimator animation = view.animate();
         this.mAddAnimations.add(holder);
-        animation.alpha(1.0f).setDuration(getAddDuration()).setListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.DefaultItemAnimator.5
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationStart(Animator animator) {
-                DefaultItemAnimator.this.dispatchAddStarting(holder);
-            }
+        animation
+                .alpha(1.0f)
+                .setDuration(getAddDuration())
+                .setListener(
+                        new AnimatorListenerAdapter() { // from class:
+                                                        // com.android.internal.widget.DefaultItemAnimator.5
+                            @Override // android.animation.AnimatorListenerAdapter,
+                                      // android.animation.Animator.AnimatorListener
+                            public void onAnimationStart(Animator animator) {
+                                DefaultItemAnimator.this.dispatchAddStarting(holder);
+                            }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationCancel(Animator animator) {
-                view.setAlpha(1.0f);
-            }
+                            @Override // android.animation.AnimatorListenerAdapter,
+                                      // android.animation.Animator.AnimatorListener
+                            public void onAnimationCancel(Animator animator) {
+                                view.setAlpha(1.0f);
+                            }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animator) {
-                animation.setListener(null);
-                DefaultItemAnimator.this.dispatchAddFinished(holder);
-                DefaultItemAnimator.this.mAddAnimations.remove(holder);
-                DefaultItemAnimator.this.dispatchFinishedWhenDone();
-            }
-        }).start();
+                            @Override // android.animation.AnimatorListenerAdapter,
+                                      // android.animation.Animator.AnimatorListener
+                            public void onAnimationEnd(Animator animator) {
+                                animation.setListener(null);
+                                DefaultItemAnimator.this.dispatchAddFinished(holder);
+                                DefaultItemAnimator.this.mAddAnimations.remove(holder);
+                                DefaultItemAnimator.this.dispatchFinishedWhenDone();
+                            }
+                        })
+                .start();
     }
 
     @Override // com.android.internal.widget.SimpleItemAnimator
-    public boolean animateMove(RecyclerView.ViewHolder holder, int fromX, int fromY, int toX, int toY) {
+    public boolean animateMove(
+            RecyclerView.ViewHolder holder, int fromX, int fromY, int toX, int toY) {
         View view = holder.itemView;
         int fromX2 = (int) (fromX + holder.itemView.getTranslationX());
         int fromY2 = (int) (fromY + holder.itemView.getTranslationY());
@@ -245,7 +293,8 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
         return true;
     }
 
-    void animateMoveImpl(final RecyclerView.ViewHolder holder, int fromX, int fromY, int toX, int toY) {
+    void animateMoveImpl(
+            final RecyclerView.ViewHolder holder, int fromX, int fromY, int toX, int toY) {
         final View view = holder.itemView;
         final int deltaX = toX - fromX;
         final int deltaY = toY - fromY;
@@ -257,34 +306,48 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
         }
         final ViewPropertyAnimator animation = view.animate();
         this.mMoveAnimations.add(holder);
-        animation.setDuration(getMoveDuration()).setListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.DefaultItemAnimator.6
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationStart(Animator animator) {
-                DefaultItemAnimator.this.dispatchMoveStarting(holder);
-            }
+        animation
+                .setDuration(getMoveDuration())
+                .setListener(
+                        new AnimatorListenerAdapter() { // from class:
+                                                        // com.android.internal.widget.DefaultItemAnimator.6
+                            @Override // android.animation.AnimatorListenerAdapter,
+                                      // android.animation.Animator.AnimatorListener
+                            public void onAnimationStart(Animator animator) {
+                                DefaultItemAnimator.this.dispatchMoveStarting(holder);
+                            }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationCancel(Animator animator) {
-                if (deltaX != 0) {
-                    view.setTranslationX(0.0f);
-                }
-                if (deltaY != 0) {
-                    view.setTranslationY(0.0f);
-                }
-            }
+                            @Override // android.animation.AnimatorListenerAdapter,
+                                      // android.animation.Animator.AnimatorListener
+                            public void onAnimationCancel(Animator animator) {
+                                if (deltaX != 0) {
+                                    view.setTranslationX(0.0f);
+                                }
+                                if (deltaY != 0) {
+                                    view.setTranslationY(0.0f);
+                                }
+                            }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animator) {
-                animation.setListener(null);
-                DefaultItemAnimator.this.dispatchMoveFinished(holder);
-                DefaultItemAnimator.this.mMoveAnimations.remove(holder);
-                DefaultItemAnimator.this.dispatchFinishedWhenDone();
-            }
-        }).start();
+                            @Override // android.animation.AnimatorListenerAdapter,
+                                      // android.animation.Animator.AnimatorListener
+                            public void onAnimationEnd(Animator animator) {
+                                animation.setListener(null);
+                                DefaultItemAnimator.this.dispatchMoveFinished(holder);
+                                DefaultItemAnimator.this.mMoveAnimations.remove(holder);
+                                DefaultItemAnimator.this.dispatchFinishedWhenDone();
+                            }
+                        })
+                .start();
     }
 
     @Override // com.android.internal.widget.SimpleItemAnimator
-    public boolean animateChange(RecyclerView.ViewHolder oldHolder, RecyclerView.ViewHolder newHolder, int fromX, int fromY, int toX, int toY) {
+    public boolean animateChange(
+            RecyclerView.ViewHolder oldHolder,
+            RecyclerView.ViewHolder newHolder,
+            int fromX,
+            int fromY,
+            int toX,
+            int toY) {
         if (oldHolder == newHolder) {
             return animateMove(oldHolder, fromX, fromY, toX, toY);
         }
@@ -313,55 +376,81 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
         RecyclerView.ViewHolder newHolder = changeInfo.newHolder;
         final View newView = newHolder != null ? newHolder.itemView : null;
         if (view != null) {
-            final ViewPropertyAnimator oldViewAnim = view.animate().setDuration(getChangeDuration());
+            final ViewPropertyAnimator oldViewAnim =
+                    view.animate().setDuration(getChangeDuration());
             this.mChangeAnimations.add(changeInfo.oldHolder);
             oldViewAnim.translationX(changeInfo.toX - changeInfo.fromX);
             oldViewAnim.translationY(changeInfo.toY - changeInfo.fromY);
-            oldViewAnim.alpha(0.0f).setListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.DefaultItemAnimator.7
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animator) {
-                    DefaultItemAnimator.this.dispatchChangeStarting(changeInfo.oldHolder, true);
-                }
+            oldViewAnim
+                    .alpha(0.0f)
+                    .setListener(
+                            new AnimatorListenerAdapter() { // from class:
+                                                            // com.android.internal.widget.DefaultItemAnimator.7
+                                @Override // android.animation.AnimatorListenerAdapter,
+                                          // android.animation.Animator.AnimatorListener
+                                public void onAnimationStart(Animator animator) {
+                                    DefaultItemAnimator.this.dispatchChangeStarting(
+                                            changeInfo.oldHolder, true);
+                                }
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animator) {
-                    oldViewAnim.setListener(null);
-                    view.setAlpha(1.0f);
-                    view.setTranslationX(0.0f);
-                    view.setTranslationY(0.0f);
-                    DefaultItemAnimator.this.dispatchChangeFinished(changeInfo.oldHolder, true);
-                    DefaultItemAnimator.this.mChangeAnimations.remove(changeInfo.oldHolder);
-                    DefaultItemAnimator.this.dispatchFinishedWhenDone();
-                }
-            }).start();
+                                @Override // android.animation.AnimatorListenerAdapter,
+                                          // android.animation.Animator.AnimatorListener
+                                public void onAnimationEnd(Animator animator) {
+                                    oldViewAnim.setListener(null);
+                                    view.setAlpha(1.0f);
+                                    view.setTranslationX(0.0f);
+                                    view.setTranslationY(0.0f);
+                                    DefaultItemAnimator.this.dispatchChangeFinished(
+                                            changeInfo.oldHolder, true);
+                                    DefaultItemAnimator.this.mChangeAnimations.remove(
+                                            changeInfo.oldHolder);
+                                    DefaultItemAnimator.this.dispatchFinishedWhenDone();
+                                }
+                            })
+                    .start();
         }
         if (newView != null) {
             final ViewPropertyAnimator newViewAnimation = newView.animate();
             this.mChangeAnimations.add(changeInfo.newHolder);
-            newViewAnimation.translationX(0.0f).translationY(0.0f).setDuration(getChangeDuration()).alpha(1.0f).setListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.DefaultItemAnimator.8
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animator) {
-                    DefaultItemAnimator.this.dispatchChangeStarting(changeInfo.newHolder, false);
-                }
+            newViewAnimation
+                    .translationX(0.0f)
+                    .translationY(0.0f)
+                    .setDuration(getChangeDuration())
+                    .alpha(1.0f)
+                    .setListener(
+                            new AnimatorListenerAdapter() { // from class:
+                                                            // com.android.internal.widget.DefaultItemAnimator.8
+                                @Override // android.animation.AnimatorListenerAdapter,
+                                          // android.animation.Animator.AnimatorListener
+                                public void onAnimationStart(Animator animator) {
+                                    DefaultItemAnimator.this.dispatchChangeStarting(
+                                            changeInfo.newHolder, false);
+                                }
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animator) {
-                    newViewAnimation.setListener(null);
-                    newView.setAlpha(1.0f);
-                    newView.setTranslationX(0.0f);
-                    newView.setTranslationY(0.0f);
-                    DefaultItemAnimator.this.dispatchChangeFinished(changeInfo.newHolder, false);
-                    DefaultItemAnimator.this.mChangeAnimations.remove(changeInfo.newHolder);
-                    DefaultItemAnimator.this.dispatchFinishedWhenDone();
-                }
-            }).start();
+                                @Override // android.animation.AnimatorListenerAdapter,
+                                          // android.animation.Animator.AnimatorListener
+                                public void onAnimationEnd(Animator animator) {
+                                    newViewAnimation.setListener(null);
+                                    newView.setAlpha(1.0f);
+                                    newView.setTranslationX(0.0f);
+                                    newView.setTranslationY(0.0f);
+                                    DefaultItemAnimator.this.dispatchChangeFinished(
+                                            changeInfo.newHolder, false);
+                                    DefaultItemAnimator.this.mChangeAnimations.remove(
+                                            changeInfo.newHolder);
+                                    DefaultItemAnimator.this.dispatchFinishedWhenDone();
+                                }
+                            })
+                    .start();
         }
     }
 
     private void endChangeAnimation(List<ChangeInfo> infoList, RecyclerView.ViewHolder item) {
         for (int i = infoList.size() - 1; i >= 0; i--) {
             ChangeInfo changeInfo = infoList.get(i);
-            if (endChangeAnimationIfNecessary(changeInfo, item) && changeInfo.oldHolder == null && changeInfo.newHolder == null) {
+            if (endChangeAnimationIfNecessary(changeInfo, item)
+                    && changeInfo.oldHolder == null
+                    && changeInfo.newHolder == null) {
                 infoList.remove(changeInfo);
             }
         }
@@ -376,7 +465,8 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
         }
     }
 
-    private boolean endChangeAnimationIfNecessary(ChangeInfo changeInfo, RecyclerView.ViewHolder item) {
+    private boolean endChangeAnimationIfNecessary(
+            ChangeInfo changeInfo, RecyclerView.ViewHolder item) {
         boolean oldItem = false;
         if (changeInfo.newHolder == item) {
             changeInfo.newHolder = null;
@@ -474,7 +564,19 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
 
     @Override // com.android.internal.widget.RecyclerView.ItemAnimator
     public boolean isRunning() {
-        return (this.mPendingAdditions.isEmpty() && this.mPendingChanges.isEmpty() && this.mPendingMoves.isEmpty() && this.mPendingRemovals.isEmpty() && this.mMoveAnimations.isEmpty() && this.mRemoveAnimations.isEmpty() && this.mAddAnimations.isEmpty() && this.mChangeAnimations.isEmpty() && this.mMovesList.isEmpty() && this.mAdditionsList.isEmpty() && this.mChangesList.isEmpty()) ? false : true;
+        return (this.mPendingAdditions.isEmpty()
+                        && this.mPendingChanges.isEmpty()
+                        && this.mPendingMoves.isEmpty()
+                        && this.mPendingRemovals.isEmpty()
+                        && this.mMoveAnimations.isEmpty()
+                        && this.mRemoveAnimations.isEmpty()
+                        && this.mAddAnimations.isEmpty()
+                        && this.mChangeAnimations.isEmpty()
+                        && this.mMovesList.isEmpty()
+                        && this.mAdditionsList.isEmpty()
+                        && this.mChangesList.isEmpty())
+                ? false
+                : true;
     }
 
     void dispatchFinishedWhenDone() {
@@ -569,7 +671,8 @@ public class DefaultItemAnimator extends SimpleItemAnimator {
     }
 
     @Override // com.android.internal.widget.RecyclerView.ItemAnimator
-    public boolean canReuseUpdatedViewHolder(RecyclerView.ViewHolder viewHolder, List<Object> payloads) {
+    public boolean canReuseUpdatedViewHolder(
+            RecyclerView.ViewHolder viewHolder, List<Object> payloads) {
         return !payloads.isEmpty() || super.canReuseUpdatedViewHolder(viewHolder, payloads);
     }
 }

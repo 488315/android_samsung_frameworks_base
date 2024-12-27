@@ -1,7 +1,9 @@
 package com.android.server.devicepolicy;
 
 import android.content.res.Resources;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -36,7 +38,8 @@ public final class RecursiveStringArrayResourceResolver {
                 }
                 int identifier = this.mResources.getIdentifier(str4, "array", str3);
                 if (identifier == 0) {
-                    throw new Resources.NotFoundException(AnyMotionDetector$$ExternalSyntheticOutline0.m(str3, ":array/", str4));
+                    throw new Resources.NotFoundException(
+                            AnyMotionDetector$$ExternalSyntheticOutline0.m(str3, ":array/", str4));
                 }
                 Set resolve = resolve(identifier, str3, arrayList);
                 arrayList.addAll(resolve);

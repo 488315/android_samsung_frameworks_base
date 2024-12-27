@@ -11,10 +11,11 @@ import android.os.Message;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
-import android.telecom.Call;
+
 import com.android.internal.os.SomeArgs;
 import com.android.internal.telecom.ICallScreeningAdapter;
 import com.android.internal.telecom.ICallScreeningService;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -24,38 +25,52 @@ public abstract class CallScreeningService extends Service {
     private static final int MSG_SCREEN_CALL = 1;
     public static final String SERVICE_INTERFACE = "android.telecom.CallScreeningService";
     private ICallScreeningAdapter mCallScreeningAdapter;
-    private final Handler mHandler = new Handler(Looper.getMainLooper()) { // from class: android.telecom.CallScreeningService.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    SomeArgs args = (SomeArgs) msg.obj;
-                    try {
-                        try {
-                            CallScreeningService.this.mCallScreeningAdapter = (ICallScreeningAdapter) args.arg1;
-                            Call.Details callDetails = Call.Details.createFromParcelableCall((ParcelableCall) args.arg2);
-                            CallScreeningService.this.onScreenCall(callDetails);
-                            if (callDetails.getCallDirection() == 1) {
-                                CallScreeningService.this.mCallScreeningAdapter.onScreeningResponse(callDetails.getTelecomCallId(), new ComponentName(CallScreeningService.this.getPackageName(), getClass().getName()), null);
+    private final Handler mHandler =
+            new Handler(
+                    Looper.getMainLooper()) { // from class: android.telecom.CallScreeningService.1
+                @Override // android.os.Handler
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case 1:
+                            SomeArgs args = (SomeArgs) msg.obj;
+                            try {
+                                try {
+                                    CallScreeningService.this.mCallScreeningAdapter =
+                                            (ICallScreeningAdapter) args.arg1;
+                                    Call.Details callDetails =
+                                            Call.Details.createFromParcelableCall(
+                                                    (ParcelableCall) args.arg2);
+                                    CallScreeningService.this.onScreenCall(callDetails);
+                                    if (callDetails.getCallDirection() == 1) {
+                                        CallScreeningService.this.mCallScreeningAdapter
+                                                .onScreeningResponse(
+                                                        callDetails.getTelecomCallId(),
+                                                        new ComponentName(
+                                                                CallScreeningService.this
+                                                                        .getPackageName(),
+                                                                getClass().getName()),
+                                                        null);
+                                    }
+                                } catch (RemoteException e) {
+                                    Log.w(
+                                            this,
+                                            "Exception when screening call: " + e,
+                                            new Object[0]);
+                                }
+                                return;
+                            } finally {
+                                args.recycle();
                             }
-                        } catch (RemoteException e) {
-                            Log.w(this, "Exception when screening call: " + e, new Object[0]);
-                        }
-                        return;
-                    } finally {
-                        args.recycle();
+                        default:
+                            return;
                     }
-                default:
-                    return;
-            }
-        }
-    };
+                }
+            };
 
     public abstract void onScreenCall(Call.Details details);
 
     private final class CallScreeningBinder extends ICallScreeningService.Stub {
-        private CallScreeningBinder() {
-        }
+        private CallScreeningBinder() {}
 
         @Override // com.android.internal.telecom.ICallScreeningService
         public void screenCall(ICallScreeningAdapter adapter, ParcelableCall call) {
@@ -68,19 +83,22 @@ public abstract class CallScreeningService extends Service {
     }
 
     public static class ParcelableCallResponse implements Parcelable {
-        public static final Parcelable.Creator<ParcelableCallResponse> CREATOR = new Parcelable.Creator<ParcelableCallResponse>() { // from class: android.telecom.CallScreeningService.ParcelableCallResponse.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ParcelableCallResponse createFromParcel(Parcel in) {
-                return new ParcelableCallResponse(in);
-            }
+        public static final Parcelable.Creator<ParcelableCallResponse> CREATOR =
+                new Parcelable.Creator<
+                        ParcelableCallResponse>() { // from class:
+                                                    // android.telecom.CallScreeningService.ParcelableCallResponse.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ParcelableCallResponse createFromParcel(Parcel in) {
+                        return new ParcelableCallResponse(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ParcelableCallResponse[] newArray(int size) {
-                return new ParcelableCallResponse[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ParcelableCallResponse[] newArray(int size) {
+                        return new ParcelableCallResponse[size];
+                    }
+                };
         private final int mCallComposerAttachmentsToShow;
         private final boolean mShouldDisallowCall;
         private final boolean mShouldRejectCall;
@@ -89,7 +107,14 @@ public abstract class CallScreeningService extends Service {
         private final boolean mShouldSkipCallLog;
         private final boolean mShouldSkipNotification;
 
-        private ParcelableCallResponse(boolean shouldDisallowCall, boolean shouldRejectCall, boolean shouldSilenceCall, boolean shouldSkipCallLog, boolean shouldSkipNotification, boolean shouldScreenCallViaAudioProcessing, int callComposerAttachmentsToShow) {
+        private ParcelableCallResponse(
+                boolean shouldDisallowCall,
+                boolean shouldRejectCall,
+                boolean shouldSilenceCall,
+                boolean shouldSkipCallLog,
+                boolean shouldSkipNotification,
+                boolean shouldScreenCallViaAudioProcessing,
+                int callComposerAttachmentsToShow) {
             this.mShouldDisallowCall = shouldDisallowCall;
             this.mShouldRejectCall = shouldRejectCall;
             this.mShouldSilenceCall = shouldSilenceCall;
@@ -110,7 +135,15 @@ public abstract class CallScreeningService extends Service {
         }
 
         public CallResponse toCallResponse() {
-            return new CallResponse.Builder().setDisallowCall(this.mShouldDisallowCall).setRejectCall(this.mShouldRejectCall).setSilenceCall(this.mShouldSilenceCall).setSkipCallLog(this.mShouldSkipCallLog).setSkipNotification(this.mShouldSkipNotification).setShouldScreenCallViaAudioProcessing(this.mShouldScreenCallViaAudioProcessing).setCallComposerAttachmentsToShow(this.mCallComposerAttachmentsToShow).build();
+            return new CallResponse.Builder()
+                    .setDisallowCall(this.mShouldDisallowCall)
+                    .setRejectCall(this.mShouldRejectCall)
+                    .setSilenceCall(this.mShouldSilenceCall)
+                    .setSkipCallLog(this.mShouldSkipCallLog)
+                    .setSkipNotification(this.mShouldSkipNotification)
+                    .setShouldScreenCallViaAudioProcessing(this.mShouldScreenCallViaAudioProcessing)
+                    .setCallComposerAttachmentsToShow(this.mCallComposerAttachmentsToShow)
+                    .build();
         }
 
         public boolean shouldDisallowCall() {
@@ -173,11 +206,18 @@ public abstract class CallScreeningService extends Service {
         private final boolean mShouldSkipNotification;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface CallComposerAttachmentType {
-        }
+        public @interface CallComposerAttachmentType {}
 
-        private CallResponse(boolean shouldDisallowCall, boolean shouldRejectCall, boolean shouldSilenceCall, boolean shouldSkipCallLog, boolean shouldSkipNotification, boolean shouldScreenCallViaAudioProcessing, int callComposerAttachmentsToShow) {
-            if (!shouldDisallowCall && (shouldRejectCall || shouldSkipCallLog || shouldSkipNotification)) {
+        private CallResponse(
+                boolean shouldDisallowCall,
+                boolean shouldRejectCall,
+                boolean shouldSilenceCall,
+                boolean shouldSkipCallLog,
+                boolean shouldSkipNotification,
+                boolean shouldScreenCallViaAudioProcessing,
+                int callComposerAttachmentsToShow) {
+            if (!shouldDisallowCall
+                    && (shouldRejectCall || shouldSkipCallLog || shouldSkipNotification)) {
                 throw new IllegalStateException("Invalid response state for allowed call.");
             }
             if (shouldDisallowCall && shouldScreenCallViaAudioProcessing) {
@@ -221,7 +261,14 @@ public abstract class CallScreeningService extends Service {
         }
 
         public ParcelableCallResponse toParcelable() {
-            return new ParcelableCallResponse(this.mShouldDisallowCall, this.mShouldRejectCall, this.mShouldSilenceCall, this.mShouldSkipCallLog, this.mShouldSkipNotification, this.mShouldScreenCallViaAudioProcessing, this.mCallComposerAttachmentsToShow);
+            return new ParcelableCallResponse(
+                    this.mShouldDisallowCall,
+                    this.mShouldRejectCall,
+                    this.mShouldSilenceCall,
+                    this.mShouldSkipCallLog,
+                    this.mShouldSkipNotification,
+                    this.mShouldScreenCallViaAudioProcessing,
+                    this.mCallComposerAttachmentsToShow);
         }
 
         public boolean equals(Object o) {
@@ -232,14 +279,28 @@ public abstract class CallScreeningService extends Service {
                 return false;
             }
             CallResponse that = (CallResponse) o;
-            if (this.mShouldDisallowCall == that.mShouldDisallowCall && this.mShouldRejectCall == that.mShouldRejectCall && this.mShouldSilenceCall == that.mShouldSilenceCall && this.mShouldSkipCallLog == that.mShouldSkipCallLog && this.mShouldSkipNotification == that.mShouldSkipNotification && this.mShouldScreenCallViaAudioProcessing == that.mShouldScreenCallViaAudioProcessing && this.mCallComposerAttachmentsToShow == that.mCallComposerAttachmentsToShow) {
+            if (this.mShouldDisallowCall == that.mShouldDisallowCall
+                    && this.mShouldRejectCall == that.mShouldRejectCall
+                    && this.mShouldSilenceCall == that.mShouldSilenceCall
+                    && this.mShouldSkipCallLog == that.mShouldSkipCallLog
+                    && this.mShouldSkipNotification == that.mShouldSkipNotification
+                    && this.mShouldScreenCallViaAudioProcessing
+                            == that.mShouldScreenCallViaAudioProcessing
+                    && this.mCallComposerAttachmentsToShow == that.mCallComposerAttachmentsToShow) {
                 return true;
             }
             return false;
         }
 
         public int hashCode() {
-            return Objects.hash(Boolean.valueOf(this.mShouldDisallowCall), Boolean.valueOf(this.mShouldRejectCall), Boolean.valueOf(this.mShouldSilenceCall), Boolean.valueOf(this.mShouldSkipCallLog), Boolean.valueOf(this.mShouldSkipNotification), Boolean.valueOf(this.mShouldScreenCallViaAudioProcessing), Integer.valueOf(this.mCallComposerAttachmentsToShow));
+            return Objects.hash(
+                    Boolean.valueOf(this.mShouldDisallowCall),
+                    Boolean.valueOf(this.mShouldRejectCall),
+                    Boolean.valueOf(this.mShouldSilenceCall),
+                    Boolean.valueOf(this.mShouldSkipCallLog),
+                    Boolean.valueOf(this.mShouldSkipNotification),
+                    Boolean.valueOf(this.mShouldScreenCallViaAudioProcessing),
+                    Integer.valueOf(this.mCallComposerAttachmentsToShow));
         }
 
         public static class Builder {
@@ -277,7 +338,8 @@ public abstract class CallScreeningService extends Service {
             }
 
             @SystemApi
-            public Builder setShouldScreenCallViaAudioProcessing(boolean shouldScreenCallViaAudioProcessing) {
+            public Builder setShouldScreenCallViaAudioProcessing(
+                    boolean shouldScreenCallViaAudioProcessing) {
                 this.mShouldScreenCallViaAudioProcessing = shouldScreenCallViaAudioProcessing;
                 return this;
             }
@@ -287,14 +349,22 @@ public abstract class CallScreeningService extends Service {
                     return this;
                 }
                 if ((callComposerAttachmentsToShow & 16) != 0) {
-                    throw new IllegalArgumentException("Attachment types must match the ones defined in CallResponse");
+                    throw new IllegalArgumentException(
+                            "Attachment types must match the ones defined in CallResponse");
                 }
                 this.mCallComposerAttachmentsToShow = callComposerAttachmentsToShow;
                 return this;
             }
 
             public CallResponse build() {
-                return new CallResponse(this.mShouldDisallowCall, this.mShouldRejectCall, this.mShouldSilenceCall, this.mShouldSkipCallLog, this.mShouldSkipNotification, this.mShouldScreenCallViaAudioProcessing, this.mCallComposerAttachmentsToShow);
+                return new CallResponse(
+                        this.mShouldDisallowCall,
+                        this.mShouldRejectCall,
+                        this.mShouldSilenceCall,
+                        this.mShouldSkipCallLog,
+                        this.mShouldSkipNotification,
+                        this.mShouldScreenCallViaAudioProcessing,
+                        this.mCallComposerAttachmentsToShow);
             }
         }
     }
@@ -313,7 +383,10 @@ public abstract class CallScreeningService extends Service {
 
     public final void respondToCall(Call.Details callDetails, CallResponse response) {
         try {
-            this.mCallScreeningAdapter.onScreeningResponse(callDetails.getTelecomCallId(), new ComponentName(getPackageName(), getClass().getName()), response.toParcelable());
+            this.mCallScreeningAdapter.onScreeningResponse(
+                    callDetails.getTelecomCallId(),
+                    new ComponentName(getPackageName(), getClass().getName()),
+                    response.toParcelable());
         } catch (RemoteException e) {
             Log.e(this, e, "Got remote exception when returning response", new Object[0]);
         }

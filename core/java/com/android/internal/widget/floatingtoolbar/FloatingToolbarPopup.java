@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupWindow;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -36,9 +37,13 @@ public interface FloatingToolbarPopup {
 
     void setWidthChanged(boolean z);
 
-    void show(List<MenuItem> list, MenuItem.OnMenuItemClickListener onMenuItemClickListener, Rect rect);
+    void show(
+            List<MenuItem> list,
+            MenuItem.OnMenuItemClickListener onMenuItemClickListener,
+            Rect rect);
 
-    static FloatingToolbarPopup createInstance(Context context, View parent, boolean isSemTypeFloating) {
+    static FloatingToolbarPopup createInstance(
+            Context context, View parent, boolean isSemTypeFloating) {
         return new LocalFloatingToolbarPopup(context, parent, isSemTypeFloating);
     }
 }

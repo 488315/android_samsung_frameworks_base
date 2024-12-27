@@ -3,30 +3,33 @@ package android.util;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
+
+import libcore.io.IoUtils;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.UUID;
-import libcore.io.IoUtils;
 
 /* loaded from: classes4.dex */
 public final class MemoryIntArray implements Parcelable, Closeable {
-    public static final Parcelable.Creator<MemoryIntArray> CREATOR = new Parcelable.Creator<MemoryIntArray>() { // from class: android.util.MemoryIntArray.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MemoryIntArray createFromParcel(Parcel parcel) {
-            try {
-                return new MemoryIntArray(parcel);
-            } catch (IOException e) {
-                throw new IllegalArgumentException("Error unparceling MemoryIntArray");
-            }
-        }
+    public static final Parcelable.Creator<MemoryIntArray> CREATOR =
+            new Parcelable.Creator<MemoryIntArray>() { // from class: android.util.MemoryIntArray.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MemoryIntArray createFromParcel(Parcel parcel) {
+                    try {
+                        return new MemoryIntArray(parcel);
+                    } catch (IOException e) {
+                        throw new IllegalArgumentException("Error unparceling MemoryIntArray");
+                    }
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MemoryIntArray[] newArray(int size) {
-            return new MemoryIntArray[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MemoryIntArray[] newArray(int size) {
+                    return new MemoryIntArray[size];
+                }
+            };
     private static final int MAX_SIZE = 1024;
     private static final String TAG = "MemoryIntArray";
     private final dalvik.system.CloseGuard mCloseGuard;
@@ -65,7 +68,8 @@ public final class MemoryIntArray implements Parcelable, Closeable {
         this.mCloseGuard = dalvik.system.CloseGuard.get();
         this.mFd = -1;
         this.mIsOwner = false;
-        ParcelFileDescriptor pfd = (ParcelFileDescriptor) parcel.readParcelable(null, ParcelFileDescriptor.class);
+        ParcelFileDescriptor pfd =
+                (ParcelFileDescriptor) parcel.readParcelable(null, ParcelFileDescriptor.class);
         if (pfd == null) {
             throw new IOException("No backing file descriptor");
         }

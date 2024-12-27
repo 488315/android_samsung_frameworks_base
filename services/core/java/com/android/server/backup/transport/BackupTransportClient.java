@@ -6,9 +6,11 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.backup.IBackupTransport;
 import com.android.internal.infra.AndroidFuture;
 import com.android.server.backup.BackupAndRestoreFeatureFlags;
+
 import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -56,7 +58,8 @@ public final class BackupTransportClient {
             TransportStatusCallback transportStatusCallback;
             synchronized (this.mPoolLock) {
                 try {
-                    transportStatusCallback = (TransportStatusCallback) ((ArrayDeque) this.mCallbackPool).poll();
+                    transportStatusCallback =
+                            (TransportStatusCallback) ((ArrayDeque) this.mCallbackPool).poll();
                     if (transportStatusCallback == null) {
                         transportStatusCallback = new TransportStatusCallback();
                     }
@@ -77,7 +80,9 @@ public final class BackupTransportClient {
                 try {
                     ((HashSet) this.mActiveCallbacks).remove(transportStatusCallback);
                     if (((ArrayDeque) this.mCallbackPool).size() > 100) {
-                        Slog.d("BackupTransportClient", "TransportStatusCallback pool size exceeded");
+                        Slog.d(
+                                "BackupTransportClient",
+                                "TransportStatusCallback pool size exceeded");
                     } else {
                         ((ArrayDeque) this.mCallbackPool).add(transportStatusCallback);
                     }
@@ -145,8 +150,13 @@ public final class BackupTransportClient {
         TransportFutures transportFutures = this.mTransportFutures;
         try {
             try {
-                return androidFuture.get(BackupAndRestoreFeatureFlags.getBackupTransportFutureTimeoutMillis(), TimeUnit.MILLISECONDS);
-            } catch (InterruptedException | CancellationException | ExecutionException | TimeoutException e) {
+                return androidFuture.get(
+                        BackupAndRestoreFeatureFlags.getBackupTransportFutureTimeoutMillis(),
+                        TimeUnit.MILLISECONDS);
+            } catch (InterruptedException
+                    | CancellationException
+                    | ExecutionException
+                    | TimeoutException e) {
                 Slog.w("BackupTransportClient", "Failed to get result from transport:", e);
                 transportFutures.remove(androidFuture);
                 return null;
@@ -188,14 +198,16 @@ public final class BackupTransportClient {
         synchronized (transportStatusCallbackPool.mPoolLock) {
             Iterator it = ((HashSet) transportStatusCallbackPool.mActiveCallbacks).iterator();
             while (it.hasNext()) {
-                TransportStatusCallback transportStatusCallback = (TransportStatusCallback) it.next();
+                TransportStatusCallback transportStatusCallback =
+                        (TransportStatusCallback) it.next();
                 try {
                     transportStatusCallback.onOperationCompleteWithStatus(-1000);
                     transportStatusCallback.getOperationStatus();
                 } catch (RemoteException unused) {
                 }
                 if (((ArrayDeque) transportStatusCallbackPool.mCallbackPool).size() < 100) {
-                    ((ArrayDeque) transportStatusCallbackPool.mCallbackPool).add(transportStatusCallback);
+                    ((ArrayDeque) transportStatusCallbackPool.mCallbackPool)
+                            .add(transportStatusCallback);
                 }
             }
             ((HashSet) transportStatusCallbackPool.mActiveCallbacks).clear();
@@ -213,7 +225,8 @@ public final class BackupTransportClient {
         }
     }
 
-    public final int performFullBackup(PackageInfo packageInfo, ParcelFileDescriptor parcelFileDescriptor, int i) {
+    public final int performFullBackup(
+            PackageInfo packageInfo, ParcelFileDescriptor parcelFileDescriptor, int i) {
         TransportStatusCallbackPool transportStatusCallbackPool = this.mCallbackPool;
         TransportStatusCallback acquire = transportStatusCallbackPool.acquire();
         try {

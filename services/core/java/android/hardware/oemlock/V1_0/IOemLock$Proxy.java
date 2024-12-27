@@ -11,7 +11,9 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.server.oemlock.VendorLockHidl$$ExternalSyntheticLambda0;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -21,11 +23,13 @@ public final class IOemLock$Proxy implements IBase {
     public IHwBinder mRemote;
 
     public static IOemLock$Proxy getService() {
-        IHwBinder service = HwBinder.getService("android.hardware.oemlock@1.0::IOemLock", "default", true);
+        IHwBinder service =
+                HwBinder.getService("android.hardware.oemlock@1.0::IOemLock", "default", true);
         if (service == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = service.queryLocalInterface("android.hardware.oemlock@1.0::IOemLock");
+        IHwInterface queryLocalInterface =
+                service.queryLocalInterface("android.hardware.oemlock@1.0::IOemLock");
         if (queryLocalInterface != null && (queryLocalInterface instanceof IOemLock$Proxy)) {
             return (IOemLock$Proxy) queryLocalInterface;
         }
@@ -51,7 +55,9 @@ public final class IOemLock$Proxy implements IBase {
 
     @Override // android.hidl.base.V1_0.IBase
     public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        IBase.kInterfaceName, nativeHandle, arrayList);
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -93,7 +99,8 @@ public final class IOemLock$Proxy implements IBase {
             ArrayList arrayList = new ArrayList();
             HwBlob readBuffer = hwParcel.readBuffer(16L);
             int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+            HwBlob readEmbeddedBuffer =
+                    hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 byte[] bArr = new byte[32];
@@ -106,8 +113,11 @@ public final class IOemLock$Proxy implements IBase {
         }
     }
 
-    public final void getName(VendorLockHidl$$ExternalSyntheticLambda0 vendorLockHidl$$ExternalSyntheticLambda0) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.oemlock@1.0::IOemLock");
+    public final void getName(
+            VendorLockHidl$$ExternalSyntheticLambda0 vendorLockHidl$$ExternalSyntheticLambda0) {
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        "android.hardware.oemlock@1.0::IOemLock");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(1, m, hwParcel, 0);
@@ -154,8 +164,11 @@ public final class IOemLock$Proxy implements IBase {
         }
     }
 
-    public final void isOemUnlockAllowedByCarrier(VendorLockHidl$$ExternalSyntheticLambda0 vendorLockHidl$$ExternalSyntheticLambda0) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.oemlock@1.0::IOemLock");
+    public final void isOemUnlockAllowedByCarrier(
+            VendorLockHidl$$ExternalSyntheticLambda0 vendorLockHidl$$ExternalSyntheticLambda0) {
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        "android.hardware.oemlock@1.0::IOemLock");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(3, m, hwParcel, 0);
@@ -164,14 +177,18 @@ public final class IOemLock$Proxy implements IBase {
             int readInt32 = hwParcel.readInt32();
             boolean readBool = hwParcel.readBool();
             vendorLockHidl$$ExternalSyntheticLambda0.f$0[0] = Integer.valueOf(readInt32);
-            ((Boolean[]) vendorLockHidl$$ExternalSyntheticLambda0.f$1)[0] = Boolean.valueOf(readBool);
+            ((Boolean[]) vendorLockHidl$$ExternalSyntheticLambda0.f$1)[0] =
+                    Boolean.valueOf(readBool);
         } finally {
             hwParcel.release();
         }
     }
 
-    public final void isOemUnlockAllowedByDevice(VendorLockHidl$$ExternalSyntheticLambda0 vendorLockHidl$$ExternalSyntheticLambda0) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.oemlock@1.0::IOemLock");
+    public final void isOemUnlockAllowedByDevice(
+            VendorLockHidl$$ExternalSyntheticLambda0 vendorLockHidl$$ExternalSyntheticLambda0) {
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        "android.hardware.oemlock@1.0::IOemLock");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(5, m, hwParcel, 0);
@@ -180,7 +197,8 @@ public final class IOemLock$Proxy implements IBase {
             int readInt32 = hwParcel.readInt32();
             boolean readBool = hwParcel.readBool();
             vendorLockHidl$$ExternalSyntheticLambda0.f$0[0] = Integer.valueOf(readInt32);
-            ((Boolean[]) vendorLockHidl$$ExternalSyntheticLambda0.f$1)[0] = Boolean.valueOf(readBool);
+            ((Boolean[]) vendorLockHidl$$ExternalSyntheticLambda0.f$1)[0] =
+                    Boolean.valueOf(readBool);
         } finally {
             hwParcel.release();
         }

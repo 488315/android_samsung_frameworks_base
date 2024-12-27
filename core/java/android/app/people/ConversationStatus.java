@@ -4,6 +4,7 @@ import android.graphics.drawable.Icon;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateFormat;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -23,19 +24,21 @@ public final class ConversationStatus implements Parcelable {
     public static final int AVAILABILITY_BUSY = 1;
     public static final int AVAILABILITY_OFFLINE = 2;
     public static final int AVAILABILITY_UNKNOWN = -1;
-    public static final Parcelable.Creator<ConversationStatus> CREATOR = new Parcelable.Creator<ConversationStatus>() { // from class: android.app.people.ConversationStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConversationStatus createFromParcel(Parcel source) {
-            return new ConversationStatus(source);
-        }
+    public static final Parcelable.Creator<ConversationStatus> CREATOR =
+            new Parcelable.Creator<
+                    ConversationStatus>() { // from class: android.app.people.ConversationStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConversationStatus createFromParcel(Parcel source) {
+                    return new ConversationStatus(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConversationStatus[] newArray(int size) {
-            return new ConversationStatus[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConversationStatus[] newArray(int size) {
+                    return new ConversationStatus[size];
+                }
+            };
     private static final String TAG = "ConversationStatus";
     private final int mActivity;
     private int mAvailability;
@@ -46,12 +49,10 @@ public final class ConversationStatus implements Parcelable {
     private long mStartTimeMs;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ActivityType {
-    }
+    public @interface ActivityType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Availability {
-    }
+    public @interface Availability {}
 
     private ConversationStatus(Builder b) {
         this.mId = b.mId;
@@ -120,18 +121,46 @@ public final class ConversationStatus implements Parcelable {
             return false;
         }
         ConversationStatus that = (ConversationStatus) o;
-        if (this.mActivity == that.mActivity && this.mAvailability == that.mAvailability && this.mStartTimeMs == that.mStartTimeMs && this.mEndTimeMs == that.mEndTimeMs && this.mId.equals(that.mId) && Objects.equals(this.mDescription, that.mDescription) && Objects.equals(this.mIcon, that.mIcon)) {
+        if (this.mActivity == that.mActivity
+                && this.mAvailability == that.mAvailability
+                && this.mStartTimeMs == that.mStartTimeMs
+                && this.mEndTimeMs == that.mEndTimeMs
+                && this.mId.equals(that.mId)
+                && Objects.equals(this.mDescription, that.mDescription)
+                && Objects.equals(this.mIcon, that.mIcon)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mId, Integer.valueOf(this.mActivity), Integer.valueOf(this.mAvailability), this.mDescription, this.mIcon, Long.valueOf(this.mStartTimeMs), Long.valueOf(this.mEndTimeMs));
+        return Objects.hash(
+                this.mId,
+                Integer.valueOf(this.mActivity),
+                Integer.valueOf(this.mAvailability),
+                this.mDescription,
+                this.mIcon,
+                Long.valueOf(this.mStartTimeMs),
+                Long.valueOf(this.mEndTimeMs));
     }
 
     public String toString() {
-        return "ConversationStatus{mId='" + this.mId + DateFormat.QUOTE + ", mActivity=" + this.mActivity + ", mAvailability=" + this.mAvailability + ", mDescription=" + ((Object) this.mDescription) + ", mIcon=" + this.mIcon + ", mStartTimeMs=" + this.mStartTimeMs + ", mEndTimeMs=" + this.mEndTimeMs + '}';
+        return "ConversationStatus{mId='"
+                + this.mId
+                + DateFormat.QUOTE
+                + ", mActivity="
+                + this.mActivity
+                + ", mAvailability="
+                + this.mAvailability
+                + ", mDescription="
+                + ((Object) this.mDescription)
+                + ", mIcon="
+                + this.mIcon
+                + ", mStartTimeMs="
+                + this.mStartTimeMs
+                + ", mEndTimeMs="
+                + this.mEndTimeMs
+                + '}';
     }
 
     @Override // android.os.Parcelable

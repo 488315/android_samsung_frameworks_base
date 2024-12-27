@@ -9,14 +9,14 @@ import android.telephony.ims.PublishAttributes;
 
 /* loaded from: classes4.dex */
 public interface IRcsUcePublishStateCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.ims.aidl.IRcsUcePublishStateCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.ims.aidl.IRcsUcePublishStateCallback";
 
     void onPublishUpdated(PublishAttributes publishAttributes) throws RemoteException;
 
     public static class Default implements IRcsUcePublishStateCallback {
         @Override // android.telephony.ims.aidl.IRcsUcePublishStateCallback
-        public void onPublishUpdated(PublishAttributes attributes) throws RemoteException {
-        }
+        public void onPublishUpdated(PublishAttributes attributes) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IRcsUcePublishStateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRcsUcePublishStateCallback {
+    public abstract static class Stub extends Binder implements IRcsUcePublishStateCallback {
         static final int TRANSACTION_onPublishUpdated = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IRcsUcePublishStateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRcsUcePublishStateCallback.DESCRIPTOR);
             }
@@ -72,7 +73,8 @@ public interface IRcsUcePublishStateCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    PublishAttributes _arg0 = (PublishAttributes) data.readTypedObject(PublishAttributes.CREATOR);
+                    PublishAttributes _arg0 =
+                            (PublishAttributes) data.readTypedObject(PublishAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     onPublishUpdated(_arg0);
                     return true;

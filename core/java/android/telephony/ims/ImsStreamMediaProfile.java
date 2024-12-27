@@ -28,19 +28,22 @@ public final class ImsStreamMediaProfile implements Parcelable {
     public static final int AUDIO_QUALITY_GSM_HR = 10;
     public static final int AUDIO_QUALITY_NONE = 0;
     public static final int AUDIO_QUALITY_QCELP13K = 3;
-    public static final Parcelable.Creator<ImsStreamMediaProfile> CREATOR = new Parcelable.Creator<ImsStreamMediaProfile>() { // from class: android.telephony.ims.ImsStreamMediaProfile.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsStreamMediaProfile createFromParcel(Parcel in) {
-            return new ImsStreamMediaProfile(in);
-        }
+    public static final Parcelable.Creator<ImsStreamMediaProfile> CREATOR =
+            new Parcelable.Creator<
+                    ImsStreamMediaProfile>() { // from class:
+                                               // android.telephony.ims.ImsStreamMediaProfile.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsStreamMediaProfile createFromParcel(Parcel in) {
+                    return new ImsStreamMediaProfile(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsStreamMediaProfile[] newArray(int size) {
-            return new ImsStreamMediaProfile[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsStreamMediaProfile[] newArray(int size) {
+                    return new ImsStreamMediaProfile[size];
+                }
+            };
     public static final int DIRECTION_INACTIVE = 0;
     public static final int DIRECTION_INVALID = -1;
     public static final int DIRECTION_RECEIVE = 1;
@@ -68,7 +71,12 @@ public final class ImsStreamMediaProfile implements Parcelable {
         readFromParcel(in);
     }
 
-    public ImsStreamMediaProfile(int audioQuality, int audioDirection, int videoQuality, int videoDirection, int rttMode) {
+    public ImsStreamMediaProfile(
+            int audioQuality,
+            int audioDirection,
+            int videoQuality,
+            int videoDirection,
+            int rttMode) {
         this.mIsReceivingRttAudio = false;
         this.mAudioQuality = audioQuality;
         this.mAudioDirection = audioDirection;
@@ -86,7 +94,8 @@ public final class ImsStreamMediaProfile implements Parcelable {
         this.mRttMode = 0;
     }
 
-    public ImsStreamMediaProfile(int audioQuality, int audioDirection, int videoQuality, int videoDirection) {
+    public ImsStreamMediaProfile(
+            int audioQuality, int audioDirection, int videoQuality, int videoDirection) {
         this.mIsReceivingRttAudio = false;
         this.mAudioQuality = audioQuality;
         this.mAudioDirection = audioDirection;
@@ -109,7 +118,21 @@ public final class ImsStreamMediaProfile implements Parcelable {
     }
 
     public String toString() {
-        return "{ audioQuality=" + this.mAudioQuality + ", audioDirection=" + this.mAudioDirection + ", audioCodecAttribute=" + this.mAudioCodecAttributes + ", videoQuality=" + this.mVideoQuality + ", videoDirection=" + this.mVideoDirection + ", rttMode=" + this.mRttMode + ", hasRttAudioSpeech=" + this.mIsReceivingRttAudio + " }";
+        return "{ audioQuality="
+                + this.mAudioQuality
+                + ", audioDirection="
+                + this.mAudioDirection
+                + ", audioCodecAttribute="
+                + this.mAudioCodecAttributes
+                + ", videoQuality="
+                + this.mVideoQuality
+                + ", videoDirection="
+                + this.mVideoDirection
+                + ", rttMode="
+                + this.mRttMode
+                + ", hasRttAudioSpeech="
+                + this.mIsReceivingRttAudio
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -131,7 +154,8 @@ public final class ImsStreamMediaProfile implements Parcelable {
     private void readFromParcel(Parcel in) {
         this.mAudioQuality = in.readInt();
         this.mAudioDirection = in.readInt();
-        this.mAudioCodecAttributes = (AudioCodecAttributes) in.readTypedObject(AudioCodecAttributes.CREATOR);
+        this.mAudioCodecAttributes =
+                (AudioCodecAttributes) in.readTypedObject(AudioCodecAttributes.CREATOR);
         this.mVideoQuality = in.readInt();
         this.mVideoDirection = in.readInt();
         this.mRttMode = in.readInt();

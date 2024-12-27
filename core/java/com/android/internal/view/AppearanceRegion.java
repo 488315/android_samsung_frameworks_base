@@ -6,23 +6,27 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.InsetsFlags;
 import android.view.ViewDebug;
+
 import com.android.internal.util.AnnotationValidations;
 
 /* loaded from: classes5.dex */
 public class AppearanceRegion implements Parcelable {
-    public static final Parcelable.Creator<AppearanceRegion> CREATOR = new Parcelable.Creator<AppearanceRegion>() { // from class: com.android.internal.view.AppearanceRegion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppearanceRegion[] newArray(int size) {
-            return new AppearanceRegion[size];
-        }
+    public static final Parcelable.Creator<AppearanceRegion> CREATOR =
+            new Parcelable.Creator<
+                    AppearanceRegion>() { // from class:
+                                          // com.android.internal.view.AppearanceRegion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppearanceRegion[] newArray(int size) {
+                    return new AppearanceRegion[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppearanceRegion createFromParcel(Parcel in) {
-            return new AppearanceRegion(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppearanceRegion createFromParcel(Parcel in) {
+                    return new AppearanceRegion(in);
+                }
+            };
     private int mAppearance;
     private Rect mBounds;
 
@@ -41,14 +45,20 @@ public class AppearanceRegion implements Parcelable {
     }
 
     public String toString() {
-        String appearanceString = ViewDebug.flagsToString(InsetsFlags.class, "appearance", this.mAppearance);
-        return "AppearanceRegion{" + appearanceString + " bounds=" + this.mBounds.toShortString() + "}";
+        String appearanceString =
+                ViewDebug.flagsToString(InsetsFlags.class, "appearance", this.mAppearance);
+        return "AppearanceRegion{"
+                + appearanceString
+                + " bounds="
+                + this.mBounds.toShortString()
+                + "}";
     }
 
     public AppearanceRegion(int appearance, Rect bounds) {
         this.mAppearance = appearance;
         this.mBounds = bounds;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBounds);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBounds);
     }
 
     public int getAppearance() {
@@ -75,10 +85,10 @@ public class AppearanceRegion implements Parcelable {
         Rect bounds = (Rect) in.readTypedObject(Rect.CREATOR);
         this.mAppearance = appearance;
         this.mBounds = bounds;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBounds);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBounds);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

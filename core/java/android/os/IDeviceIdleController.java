@@ -2,15 +2,19 @@ package android.os;
 
 import android.Manifest;
 import android.app.ActivityThread;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface IDeviceIdleController extends IInterface {
-    void addPowerSaveTempWhitelistApp(String str, long j, int i, int i2, String str2) throws RemoteException;
+    void addPowerSaveTempWhitelistApp(String str, long j, int i, int i2, String str2)
+            throws RemoteException;
 
-    long addPowerSaveTempWhitelistAppForMms(String str, int i, int i2, String str2) throws RemoteException;
+    long addPowerSaveTempWhitelistAppForMms(String str, int i, int i2, String str2)
+            throws RemoteException;
 
-    long addPowerSaveTempWhitelistAppForSms(String str, int i, int i2, String str2) throws RemoteException;
+    long addPowerSaveTempWhitelistAppForSms(String str, int i, int i2, String str2)
+            throws RemoteException;
 
     void addPowerSaveWhitelistApp(String str) throws RemoteException;
 
@@ -52,8 +56,7 @@ public interface IDeviceIdleController extends IInterface {
 
     public static class Default implements IDeviceIdleController {
         @Override // android.os.IDeviceIdleController
-        public void addPowerSaveWhitelistApp(String name) throws RemoteException {
-        }
+        public void addPowerSaveWhitelistApp(String name) throws RemoteException {}
 
         @Override // android.os.IDeviceIdleController
         public int addPowerSaveWhitelistApps(List<String> packageNames) throws RemoteException {
@@ -61,16 +64,13 @@ public interface IDeviceIdleController extends IInterface {
         }
 
         @Override // android.os.IDeviceIdleController
-        public void removePowerSaveWhitelistApp(String name) throws RemoteException {
-        }
+        public void removePowerSaveWhitelistApp(String name) throws RemoteException {}
 
         @Override // android.os.IDeviceIdleController
-        public void removeSystemPowerWhitelistApp(String name) throws RemoteException {
-        }
+        public void removeSystemPowerWhitelistApp(String name) throws RemoteException {}
 
         @Override // android.os.IDeviceIdleController
-        public void restoreSystemPowerWhitelistApp(String name) throws RemoteException {
-        }
+        public void restoreSystemPowerWhitelistApp(String name) throws RemoteException {}
 
         @Override // android.os.IDeviceIdleController
         public String[] getRemovedSystemPowerWhitelistApps() throws RemoteException {
@@ -133,27 +133,30 @@ public interface IDeviceIdleController extends IInterface {
         }
 
         @Override // android.os.IDeviceIdleController
-        public void addPowerSaveTempWhitelistApp(String name, long duration, int userId, int reasonCode, String reason) throws RemoteException {
-        }
+        public void addPowerSaveTempWhitelistApp(
+                String name, long duration, int userId, int reasonCode, String reason)
+                throws RemoteException {}
 
         @Override // android.os.IDeviceIdleController
-        public long addPowerSaveTempWhitelistAppForMms(String name, int userId, int reasonCode, String reason) throws RemoteException {
+        public long addPowerSaveTempWhitelistAppForMms(
+                String name, int userId, int reasonCode, String reason) throws RemoteException {
             return 0L;
         }
 
         @Override // android.os.IDeviceIdleController
-        public long addPowerSaveTempWhitelistAppForSms(String name, int userId, int reasonCode, String reason) throws RemoteException {
+        public long addPowerSaveTempWhitelistAppForSms(
+                String name, int userId, int reasonCode, String reason) throws RemoteException {
             return 0L;
         }
 
         @Override // android.os.IDeviceIdleController
-        public long whitelistAppTemporarily(String name, int userId, int reasonCode, String reason) throws RemoteException {
+        public long whitelistAppTemporarily(String name, int userId, int reasonCode, String reason)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.os.IDeviceIdleController
-        public void exitIdle(String reason) throws RemoteException {
-        }
+        public void exitIdle(String reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -161,7 +164,7 @@ public interface IDeviceIdleController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDeviceIdleController {
+    public abstract static class Stub extends Binder implements IDeviceIdleController {
         public static final String DESCRIPTOR = "android.os.IDeviceIdleController";
         static final int TRANSACTION_addPowerSaveTempWhitelistApp = 18;
         static final int TRANSACTION_addPowerSaveTempWhitelistAppForMms = 19;
@@ -197,7 +200,9 @@ public interface IDeviceIdleController extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IDeviceIdleController asInterface(IBinder obj) {
@@ -273,7 +278,8 @@ public interface IDeviceIdleController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -393,7 +399,8 @@ public interface IDeviceIdleController extends IInterface {
                     int _arg22 = data.readInt();
                     String _arg32 = data.readString();
                     data.enforceNoDataAvail();
-                    long _result14 = addPowerSaveTempWhitelistAppForMms(_arg09, _arg12, _arg22, _arg32);
+                    long _result14 =
+                            addPowerSaveTempWhitelistAppForMms(_arg09, _arg12, _arg22, _arg32);
                     reply.writeNoException();
                     reply.writeLong(_result14);
                     return true;
@@ -403,7 +410,8 @@ public interface IDeviceIdleController extends IInterface {
                     int _arg23 = data.readInt();
                     String _arg33 = data.readString();
                     data.enforceNoDataAvail();
-                    long _result15 = addPowerSaveTempWhitelistAppForSms(_arg010, _arg13, _arg23, _arg33);
+                    long _result15 =
+                            addPowerSaveTempWhitelistAppForSms(_arg010, _arg13, _arg23, _arg33);
                     reply.writeNoException();
                     reply.writeLong(_result15);
                     return true;
@@ -716,7 +724,9 @@ public interface IDeviceIdleController extends IInterface {
             }
 
             @Override // android.os.IDeviceIdleController
-            public void addPowerSaveTempWhitelistApp(String name, long duration, int userId, int reasonCode, String reason) throws RemoteException {
+            public void addPowerSaveTempWhitelistApp(
+                    String name, long duration, int userId, int reasonCode, String reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -735,7 +745,8 @@ public interface IDeviceIdleController extends IInterface {
             }
 
             @Override // android.os.IDeviceIdleController
-            public long addPowerSaveTempWhitelistAppForMms(String name, int userId, int reasonCode, String reason) throws RemoteException {
+            public long addPowerSaveTempWhitelistAppForMms(
+                    String name, int userId, int reasonCode, String reason) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -755,7 +766,8 @@ public interface IDeviceIdleController extends IInterface {
             }
 
             @Override // android.os.IDeviceIdleController
-            public long addPowerSaveTempWhitelistAppForSms(String name, int userId, int reasonCode, String reason) throws RemoteException {
+            public long addPowerSaveTempWhitelistAppForSms(
+                    String name, int userId, int reasonCode, String reason) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -775,7 +787,8 @@ public interface IDeviceIdleController extends IInterface {
             }
 
             @Override // android.os.IDeviceIdleController
-            public long whitelistAppTemporarily(String name, int userId, int reasonCode, String reason) throws RemoteException {
+            public long whitelistAppTemporarily(
+                    String name, int userId, int reasonCode, String reason) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -811,7 +824,8 @@ public interface IDeviceIdleController extends IInterface {
         }
 
         protected void exitIdle_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DEVICE_POWER, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

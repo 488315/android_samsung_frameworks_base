@@ -55,16 +55,13 @@ public interface IDnsResolver extends IInterface {
         }
 
         @Override // android.net.IDnsResolver
-        public void createNetworkCache(int i) throws RemoteException {
-        }
+        public void createNetworkCache(int i) throws RemoteException {}
 
         @Override // android.net.IDnsResolver
-        public void destroyNetworkCache(int i) throws RemoteException {
-        }
+        public void destroyNetworkCache(int i) throws RemoteException {}
 
         @Override // android.net.IDnsResolver
-        public void flushNetworkCache(int i) throws RemoteException {
-        }
+        public void flushNetworkCache(int i) throws RemoteException {}
 
         @Override // android.net.IDnsResolver
         public String getInterfaceHash() {
@@ -82,8 +79,15 @@ public interface IDnsResolver extends IInterface {
         }
 
         @Override // android.net.IDnsResolver
-        public void getResolverInfo(int i, String[] strArr, String[] strArr2, String[] strArr3, int[] iArr, int[] iArr2, int[] iArr3) throws RemoteException {
-        }
+        public void getResolverInfo(
+                int i,
+                String[] strArr,
+                String[] strArr2,
+                String[] strArr3,
+                int[] iArr,
+                int[] iArr2,
+                int[] iArr3)
+                throws RemoteException {}
 
         @Override // android.net.IDnsResolver
         public boolean isAlive() throws RemoteException {
@@ -91,36 +95,33 @@ public interface IDnsResolver extends IInterface {
         }
 
         @Override // android.net.IDnsResolver
-        public void registerEventListener(INetdEventListener iNetdEventListener) throws RemoteException {
-        }
+        public void registerEventListener(INetdEventListener iNetdEventListener)
+                throws RemoteException {}
 
         @Override // android.net.IDnsResolver
-        public void registerUnsolicitedEventListener(IDnsResolverUnsolicitedEventListener iDnsResolverUnsolicitedEventListener) throws RemoteException {
-        }
+        public void registerUnsolicitedEventListener(
+                IDnsResolverUnsolicitedEventListener iDnsResolverUnsolicitedEventListener)
+                throws RemoteException {}
 
         @Override // android.net.IDnsResolver
-        public void setLogSeverity(int i) throws RemoteException {
-        }
+        public void setLogSeverity(int i) throws RemoteException {}
 
         @Override // android.net.IDnsResolver
-        public void setPrefix64(int i, String str) throws RemoteException {
-        }
+        public void setPrefix64(int i, String str) throws RemoteException {}
 
         @Override // android.net.IDnsResolver
-        public void setResolverConfiguration(ResolverParamsParcel resolverParamsParcel) throws RemoteException {
-        }
+        public void setResolverConfiguration(ResolverParamsParcel resolverParamsParcel)
+                throws RemoteException {}
 
         @Override // android.net.IDnsResolver
-        public void setResolverOptions(int i, ResolverOptionsParcel resolverOptionsParcel) throws RemoteException {
-        }
+        public void setResolverOptions(int i, ResolverOptionsParcel resolverOptionsParcel)
+                throws RemoteException {}
 
         @Override // android.net.IDnsResolver
-        public void startPrefix64Discovery(int i) throws RemoteException {
-        }
+        public void startPrefix64Discovery(int i) throws RemoteException {}
 
         @Override // android.net.IDnsResolver
-        public void stopPrefix64Discovery(int i) throws RemoteException {
-        }
+        public void stopPrefix64Discovery(int i) throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -212,7 +213,8 @@ public interface IDnsResolver extends IInterface {
                         Parcel obtain2 = Parcel.obtain();
                         try {
                             obtain.writeInterfaceToken(IDnsResolver.DESCRIPTOR);
-                            this.mRemote.transact(Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
+                            this.mRemote.transact(
+                                    Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
                             obtain2.readException();
                             this.mCachedHash = obtain2.readString();
                             obtain2.recycle();
@@ -236,7 +238,8 @@ public interface IDnsResolver extends IInterface {
                     Parcel obtain2 = Parcel.obtain();
                     try {
                         obtain.writeInterfaceToken(IDnsResolver.DESCRIPTOR);
-                        this.mRemote.transact(Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
+                        this.mRemote.transact(
+                                Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
                         obtain2.readException();
                         this.mCachedVersion = obtain2.readInt();
                     } finally {
@@ -266,7 +269,14 @@ public interface IDnsResolver extends IInterface {
             }
 
             @Override // android.net.IDnsResolver
-            public final void getResolverInfo(int i, String[] strArr, String[] strArr2, String[] strArr3, int[] iArr, int[] iArr2, int[] iArr3) {
+            public final void getResolverInfo(
+                    int i,
+                    String[] strArr,
+                    String[] strArr2,
+                    String[] strArr3,
+                    int[] iArr,
+                    int[] iArr2,
+                    int[] iArr3) {
                 Parcel obtain = Parcel.obtain();
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -329,14 +339,16 @@ public interface IDnsResolver extends IInterface {
             }
 
             @Override // android.net.IDnsResolver
-            public final void registerUnsolicitedEventListener(IDnsResolverUnsolicitedEventListener iDnsResolverUnsolicitedEventListener) {
+            public final void registerUnsolicitedEventListener(
+                    IDnsResolverUnsolicitedEventListener iDnsResolverUnsolicitedEventListener) {
                 Parcel obtain = Parcel.obtain();
                 Parcel obtain2 = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IDnsResolver.DESCRIPTOR);
                     obtain.writeStrongInterface(iDnsResolverUnsolicitedEventListener);
                     if (!this.mRemote.transact(13, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method registerUnsolicitedEventListener is unimplemented.");
+                        throw new RemoteException(
+                                "Method registerUnsolicitedEventListener is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -388,7 +400,8 @@ public interface IDnsResolver extends IInterface {
                     obtain.writeInterfaceToken(IDnsResolver.DESCRIPTOR);
                     obtain.writeTypedObject(resolverParamsParcel, 0);
                     if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method setResolverConfiguration is unimplemented.");
+                        throw new RemoteException(
+                                "Method setResolverConfiguration is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -398,7 +411,8 @@ public interface IDnsResolver extends IInterface {
             }
 
             @Override // android.net.IDnsResolver
-            public final void setResolverOptions(int i, ResolverOptionsParcel resolverOptionsParcel) {
+            public final void setResolverOptions(
+                    int i, ResolverOptionsParcel resolverOptionsParcel) {
                 Parcel obtain = Parcel.obtain();
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -423,7 +437,8 @@ public interface IDnsResolver extends IInterface {
                     obtain.writeInterfaceToken(IDnsResolver.DESCRIPTOR);
                     obtain.writeInt(i);
                     if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method startPrefix64Discovery is unimplemented.");
+                        throw new RemoteException(
+                                "Method startPrefix64Discovery is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -475,7 +490,8 @@ public interface IDnsResolver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             String str = IDnsResolver.DESCRIPTOR;
             if (i >= 1 && i <= TRANSACTION_getInterfaceVersion) {
                 parcel.enforceInterface(str);
@@ -501,11 +517,14 @@ public interface IDnsResolver extends IInterface {
                     parcel2.writeBoolean(isAlive);
                     return true;
                 case 2:
-                    registerEventListener(INetdEventListener.Stub.asInterface(parcel.readStrongBinder()));
+                    registerEventListener(
+                            INetdEventListener.Stub.asInterface(parcel.readStrongBinder()));
                     parcel2.writeNoException();
                     return true;
                 case 3:
-                    setResolverConfiguration((ResolverParamsParcel) parcel.readTypedObject(ResolverParamsParcel.CREATOR));
+                    setResolverConfiguration(
+                            (ResolverParamsParcel)
+                                    parcel.readTypedObject(ResolverParamsParcel.CREATOR));
                     parcel2.writeNoException();
                     return true;
                 case 4:
@@ -565,11 +584,16 @@ public interface IDnsResolver extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 13:
-                    registerUnsolicitedEventListener(IDnsResolverUnsolicitedEventListener.Stub.asInterface(parcel.readStrongBinder()));
+                    registerUnsolicitedEventListener(
+                            IDnsResolverUnsolicitedEventListener.Stub.asInterface(
+                                    parcel.readStrongBinder()));
                     parcel2.writeNoException();
                     return true;
                 case 14:
-                    setResolverOptions(parcel.readInt(), (ResolverOptionsParcel) parcel.readTypedObject(ResolverOptionsParcel.CREATOR));
+                    setResolverOptions(
+                            parcel.readInt(),
+                            (ResolverOptionsParcel)
+                                    parcel.readTypedObject(ResolverOptionsParcel.CREATOR));
                     parcel2.writeNoException();
                     return true;
                 default:
@@ -590,13 +614,23 @@ public interface IDnsResolver extends IInterface {
 
     String getPrefix64(int i) throws RemoteException;
 
-    void getResolverInfo(int i, String[] strArr, String[] strArr2, String[] strArr3, int[] iArr, int[] iArr2, int[] iArr3) throws RemoteException;
+    void getResolverInfo(
+            int i,
+            String[] strArr,
+            String[] strArr2,
+            String[] strArr3,
+            int[] iArr,
+            int[] iArr2,
+            int[] iArr3)
+            throws RemoteException;
 
     boolean isAlive() throws RemoteException;
 
     void registerEventListener(INetdEventListener iNetdEventListener) throws RemoteException;
 
-    void registerUnsolicitedEventListener(IDnsResolverUnsolicitedEventListener iDnsResolverUnsolicitedEventListener) throws RemoteException;
+    void registerUnsolicitedEventListener(
+            IDnsResolverUnsolicitedEventListener iDnsResolverUnsolicitedEventListener)
+            throws RemoteException;
 
     void setLogSeverity(int i) throws RemoteException;
 
@@ -604,7 +638,8 @@ public interface IDnsResolver extends IInterface {
 
     void setResolverConfiguration(ResolverParamsParcel resolverParamsParcel) throws RemoteException;
 
-    void setResolverOptions(int i, ResolverOptionsParcel resolverOptionsParcel) throws RemoteException;
+    void setResolverOptions(int i, ResolverOptionsParcel resolverOptionsParcel)
+            throws RemoteException;
 
     void startPrefix64Discovery(int i) throws RemoteException;
 

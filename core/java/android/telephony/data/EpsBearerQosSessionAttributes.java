@@ -5,6 +5,7 @@ import android.net.QosSessionAttributes;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
@@ -23,19 +24,22 @@ public final class EpsBearerQosSessionAttributes implements Parcelable, QosSessi
     private final int mQci;
     private final List<InetSocketAddress> mRemoteAddresses;
     private static final String TAG = EpsBearerQosSessionAttributes.class.getSimpleName();
-    public static final Parcelable.Creator<EpsBearerQosSessionAttributes> CREATOR = new Parcelable.Creator<EpsBearerQosSessionAttributes>() { // from class: android.telephony.data.EpsBearerQosSessionAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EpsBearerQosSessionAttributes createFromParcel(Parcel in) {
-            return new EpsBearerQosSessionAttributes(in);
-        }
+    public static final Parcelable.Creator<EpsBearerQosSessionAttributes> CREATOR =
+            new Parcelable.Creator<
+                    EpsBearerQosSessionAttributes>() { // from class:
+                                                       // android.telephony.data.EpsBearerQosSessionAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EpsBearerQosSessionAttributes createFromParcel(Parcel in) {
+                    return new EpsBearerQosSessionAttributes(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EpsBearerQosSessionAttributes[] newArray(int size) {
-            return new EpsBearerQosSessionAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EpsBearerQosSessionAttributes[] newArray(int size) {
+                    return new EpsBearerQosSessionAttributes[size];
+                }
+            };
 
     public int getQosIdentifier() {
         return this.mQci;
@@ -61,7 +65,13 @@ public final class EpsBearerQosSessionAttributes implements Parcelable, QosSessi
         return this.mRemoteAddresses;
     }
 
-    public EpsBearerQosSessionAttributes(int qci, long maxDownlinkBitRate, long maxUplinkBitRate, long guaranteedDownlinkBitRate, long guaranteedUplinkBitRate, List<InetSocketAddress> remoteAddresses) {
+    public EpsBearerQosSessionAttributes(
+            int qci,
+            long maxDownlinkBitRate,
+            long maxUplinkBitRate,
+            long guaranteedDownlinkBitRate,
+            long guaranteedUplinkBitRate,
+            List<InetSocketAddress> remoteAddresses) {
         Objects.requireNonNull(remoteAddresses, "remoteAddress must be non-null");
         this.mQci = qci;
         this.mMaxDownlinkBitRate = maxDownlinkBitRate;
@@ -72,7 +82,8 @@ public final class EpsBearerQosSessionAttributes implements Parcelable, QosSessi
         this.mRemoteAddresses = Collections.unmodifiableList(remoteAddressesTemp);
     }
 
-    private static List<InetSocketAddress> copySocketAddresses(List<InetSocketAddress> remoteAddresses) {
+    private static List<InetSocketAddress> copySocketAddresses(
+            List<InetSocketAddress> remoteAddresses) {
         List<InetSocketAddress> remoteAddressesTemp = new ArrayList<>();
         for (InetSocketAddress socketAddress : remoteAddresses) {
             if (socketAddress != null && socketAddress.getAddress() != null) {
@@ -94,7 +105,8 @@ public final class EpsBearerQosSessionAttributes implements Parcelable, QosSessi
             byte[] addressBytes = in.createByteArray();
             int port = in.readInt();
             try {
-                remoteAddresses.add(new InetSocketAddress(InetAddress.getByAddress(addressBytes), port));
+                remoteAddresses.add(
+                        new InetSocketAddress(InetAddress.getByAddress(addressBytes), port));
             } catch (UnknownHostException e) {
                 Log.e(TAG, "unable to unparcel remote address at index: " + i, e);
             }
@@ -131,13 +143,25 @@ public final class EpsBearerQosSessionAttributes implements Parcelable, QosSessi
             return false;
         }
         EpsBearerQosSessionAttributes epsBearerAttr = (EpsBearerQosSessionAttributes) o;
-        if (this.mQci == epsBearerAttr.mQci && this.mMaxUplinkBitRate == epsBearerAttr.mMaxUplinkBitRate && this.mMaxDownlinkBitRate == epsBearerAttr.mMaxDownlinkBitRate && this.mGuaranteedUplinkBitRate == epsBearerAttr.mGuaranteedUplinkBitRate && this.mGuaranteedDownlinkBitRate == epsBearerAttr.mGuaranteedDownlinkBitRate && this.mRemoteAddresses.size() == epsBearerAttr.mRemoteAddresses.size() && this.mRemoteAddresses.containsAll(epsBearerAttr.mRemoteAddresses)) {
+        if (this.mQci == epsBearerAttr.mQci
+                && this.mMaxUplinkBitRate == epsBearerAttr.mMaxUplinkBitRate
+                && this.mMaxDownlinkBitRate == epsBearerAttr.mMaxDownlinkBitRate
+                && this.mGuaranteedUplinkBitRate == epsBearerAttr.mGuaranteedUplinkBitRate
+                && this.mGuaranteedDownlinkBitRate == epsBearerAttr.mGuaranteedDownlinkBitRate
+                && this.mRemoteAddresses.size() == epsBearerAttr.mRemoteAddresses.size()
+                && this.mRemoteAddresses.containsAll(epsBearerAttr.mRemoteAddresses)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mQci), Long.valueOf(this.mMaxUplinkBitRate), Long.valueOf(this.mMaxDownlinkBitRate), Long.valueOf(this.mGuaranteedUplinkBitRate), Long.valueOf(this.mGuaranteedDownlinkBitRate), this.mRemoteAddresses);
+        return Objects.hash(
+                Integer.valueOf(this.mQci),
+                Long.valueOf(this.mMaxUplinkBitRate),
+                Long.valueOf(this.mMaxDownlinkBitRate),
+                Long.valueOf(this.mGuaranteedUplinkBitRate),
+                Long.valueOf(this.mGuaranteedDownlinkBitRate),
+                this.mRemoteAddresses);
     }
 }

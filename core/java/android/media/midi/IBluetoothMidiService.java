@@ -23,7 +23,7 @@ public interface IBluetoothMidiService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBluetoothMidiService {
+    public abstract static class Stub extends Binder implements IBluetoothMidiService {
         public static final String DESCRIPTOR = "android.media.midi.IBluetoothMidiService";
         static final int TRANSACTION_addBluetoothDevice = 1;
 
@@ -62,7 +62,8 @@ public interface IBluetoothMidiService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -72,7 +73,8 @@ public interface IBluetoothMidiService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    BluetoothDevice _arg0 = (BluetoothDevice) data.readTypedObject(BluetoothDevice.CREATOR);
+                    BluetoothDevice _arg0 =
+                            (BluetoothDevice) data.readTypedObject(BluetoothDevice.CREATOR);
                     data.enforceNoDataAvail();
                     IBinder _result = addBluetoothDevice(_arg0);
                     reply.writeNoException();
@@ -100,7 +102,8 @@ public interface IBluetoothMidiService extends IInterface {
             }
 
             @Override // android.media.midi.IBluetoothMidiService
-            public IBinder addBluetoothDevice(BluetoothDevice bluetoothDevice) throws RemoteException {
+            public IBinder addBluetoothDevice(BluetoothDevice bluetoothDevice)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

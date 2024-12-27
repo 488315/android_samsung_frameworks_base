@@ -1,6 +1,7 @@
 package android.database;
 
 import android.util.SparseArray;
+
 import java.util.Map;
 
 /* loaded from: classes.dex */
@@ -39,7 +40,8 @@ public class RedactingCursor extends CrossProcessCursorWrapper {
 
     @Override // android.database.CursorWrapper
     public Cursor getWrappedCursor() {
-        throw new UnsupportedOperationException("Returning underlying cursor risks leaking redacted data");
+        throw new UnsupportedOperationException(
+                "Returning underlying cursor risks leaking redacted data");
     }
 
     @Override // android.database.CursorWrapper, android.database.Cursor

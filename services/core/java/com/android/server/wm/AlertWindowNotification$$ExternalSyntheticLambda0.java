@@ -14,14 +14,17 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+
 import com.android.internal.util.ImageUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class AlertWindowNotification$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class AlertWindowNotification$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ AlertWindowNotification f$0;
 
-    public /* synthetic */ AlertWindowNotification$$ExternalSyntheticLambda0(AlertWindowNotification alertWindowNotification) {
+    public /* synthetic */ AlertWindowNotification$$ExternalSyntheticLambda0(
+            AlertWindowNotification alertWindowNotification) {
         this.f$0 = alertWindowNotification;
     }
 
@@ -42,11 +45,19 @@ public final /* synthetic */ class AlertWindowNotification$$ExternalSyntheticLam
         } catch (PackageManager.NameNotFoundException unused) {
             applicationInfo = null;
         }
-        String charSequence = applicationInfo != null ? packageManager.getApplicationLabel(applicationInfo).toString() : str;
+        String charSequence =
+                applicationInfo != null
+                        ? packageManager.getApplicationLabel(applicationInfo).toString()
+                        : str;
         if (AlertWindowNotification.sChannelGroup == null) {
-            NotificationChannelGroup notificationChannelGroup = new NotificationChannelGroup("com.android.server.wm.AlertWindowNotification - ", windowManagerService.mContext.getString(R.string.call_notification_decline_action));
+            NotificationChannelGroup notificationChannelGroup =
+                    new NotificationChannelGroup(
+                            "com.android.server.wm.AlertWindowNotification - ",
+                            windowManagerService.mContext.getString(
+                                    R.string.call_notification_decline_action));
             AlertWindowNotification.sChannelGroup = notificationChannelGroup;
-            alertWindowNotification.mNotificationManager.createNotificationChannelGroup(notificationChannelGroup);
+            alertWindowNotification.mNotificationManager.createNotificationChannelGroup(
+                    notificationChannelGroup);
         }
         String string = context.getString(R.string.call_notification_hang_up_action, charSequence);
         NotificationManager notificationManager = alertWindowNotification.mNotificationManager;
@@ -58,19 +69,40 @@ public final /* synthetic */ class AlertWindowNotification$$ExternalSyntheticLam
             notificationChannel.setBlockable(true);
             notificationChannel.setGroup(AlertWindowNotification.sChannelGroup.getId());
             notificationChannel.setBypassDnd(true);
-            alertWindowNotification.mNotificationManager.createNotificationChannel(notificationChannel);
+            alertWindowNotification.mNotificationManager.createNotificationChannel(
+                    notificationChannel);
         }
         String string2 = context.getString(R.string.call_notification_incoming_text, charSequence);
         Bundle bundle = new Bundle();
-        bundle.putStringArray("android.foregroundApps", new String[]{str});
-        Notification.Builder addExtras = new Notification.Builder(context, str2).setOngoing(true).setContentTitle(context.getString(R.string.call_notification_ongoing_text, charSequence)).setContentText(string2).setSmallIcon(R.drawable.archived_app_cloud_overlay).setColor(context.getColor(R.color.system_notification_accent_color)).setStyle(new Notification.BigTextStyle().bigText(string2)).setLocalOnly(true).addExtras(bundle);
-        Intent intent = new Intent("android.settings.MANAGE_APP_OVERLAY_PERMISSION", Uri.fromParts("package", str, null));
+        bundle.putStringArray("android.foregroundApps", new String[] {str});
+        Notification.Builder addExtras =
+                new Notification.Builder(context, str2)
+                        .setOngoing(true)
+                        .setContentTitle(
+                                context.getString(
+                                        R.string.call_notification_ongoing_text, charSequence))
+                        .setContentText(string2)
+                        .setSmallIcon(R.drawable.archived_app_cloud_overlay)
+                        .setColor(context.getColor(R.color.system_notification_accent_color))
+                        .setStyle(new Notification.BigTextStyle().bigText(string2))
+                        .setLocalOnly(true)
+                        .addExtras(bundle);
+        Intent intent =
+                new Intent(
+                        "android.settings.MANAGE_APP_OVERLAY_PERMISSION",
+                        Uri.fromParts("package", str, null));
         intent.setFlags(268468224);
-        Notification.Builder contentIntent = addExtras.setContentIntent(PendingIntent.getActivity(context, alertWindowNotification.mRequestCode, intent, 335544320));
+        Notification.Builder contentIntent =
+                addExtras.setContentIntent(
+                        PendingIntent.getActivity(
+                                context, alertWindowNotification.mRequestCode, intent, 335544320));
         if (applicationInfo != null) {
             Drawable applicationIcon = packageManager.getApplicationIcon(applicationInfo);
-            int dimensionPixelSize = context.getResources().getDimensionPixelSize(R.dimen.app_icon_size);
-            Bitmap buildScaledBitmap = ImageUtils.buildScaledBitmap(applicationIcon, dimensionPixelSize, dimensionPixelSize);
+            int dimensionPixelSize =
+                    context.getResources().getDimensionPixelSize(R.dimen.app_icon_size);
+            Bitmap buildScaledBitmap =
+                    ImageUtils.buildScaledBitmap(
+                            applicationIcon, dimensionPixelSize, dimensionPixelSize);
             if (buildScaledBitmap != null) {
                 contentIntent.setLargeIcon(buildScaledBitmap);
             }

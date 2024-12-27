@@ -15,6 +15,7 @@ import android.os.image.IDynamicSystemService;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.util.Slog;
+
 import java.io.File;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -89,7 +90,9 @@ public final class DynamicSystemService extends IDynamicSystemService.Stub {
     }
 
     public final IGsiService getGsiService() {
-        return this.mGsiService != null ? this.mGsiService : IGsiService.Stub.asInterface(ServiceManager.waitForService("gsiservice"));
+        return this.mGsiService != null
+                ? this.mGsiService
+                : IGsiService.Stub.asInterface(ServiceManager.waitForService("gsiservice"));
     }
 
     public final GsiProgress getInstallationProgress() {
@@ -163,16 +166,23 @@ public final class DynamicSystemService extends IDynamicSystemService.Stub {
         String str2 = SystemProperties.get("os.aot.path");
         if (str2.isEmpty()) {
             int myUserId = UserHandle.myUserId();
-            for (VolumeInfo volumeInfo : ((StorageManager) this.mContext.getSystemService(StorageManager.class)).getVolumes()) {
-                if (volumeInfo.getType() == 0 && volumeInfo.isMountedWritable() && "vfat".equalsIgnoreCase(volumeInfo.fsType)) {
+            for (VolumeInfo volumeInfo :
+                    ((StorageManager) this.mContext.getSystemService(StorageManager.class))
+                            .getVolumes()) {
+                if (volumeInfo.getType() == 0
+                        && volumeInfo.isMountedWritable()
+                        && "vfat".equalsIgnoreCase(volumeInfo.fsType)) {
                     long j = volumeInfo.getDisk().size >> 20;
                     StringBuilder sb = new StringBuilder();
                     sb.append(volumeInfo.getPath());
                     sb.append(": ");
                     sb.append(j);
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(sb, " MB", "DynamicSystemService");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            sb, " MB", "DynamicSystemService");
                     if (j < 30720) {
-                        Slog.i("DynamicSystemService", volumeInfo.getPath() + ": insufficient storage");
+                        Slog.i(
+                                "DynamicSystemService",
+                                volumeInfo.getPath() + ": insufficient storage");
                     } else {
                         File internalPathForUser = volumeInfo.getInternalPathForUser(myUserId);
                         if (internalPathForUser != null) {
@@ -182,7 +192,9 @@ public final class DynamicSystemService extends IDynamicSystemService.Stub {
                 }
             }
             if (str2.isEmpty()) {
-                str2 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("/data/gsi/dsu/", str);
+                str2 =
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                "/data/gsi/dsu/", str);
             }
             Slog.i("DynamicSystemService", "startInstallation -> " + str2);
         }

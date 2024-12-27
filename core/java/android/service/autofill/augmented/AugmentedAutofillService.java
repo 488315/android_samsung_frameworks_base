@@ -18,8 +18,6 @@ import android.os.RemoteException;
 import android.os.SystemClock;
 import android.service.autofill.Dataset;
 import android.service.autofill.FillEventHistory;
-import android.service.autofill.augmented.IAugmentedAutofillService;
-import android.service.autofill.augmented.PresentationParams;
 import android.util.Log;
 import android.util.Pair;
 import android.util.SparseArray;
@@ -30,9 +28,11 @@ import android.view.autofill.AutofillValue;
 import android.view.autofill.IAugmentedAutofillManagerClient;
 import android.view.autofill.IAutofillWindowPresenter;
 import android.view.inputmethod.InlineSuggestionsRequest;
+
 import com.android.internal.util.function.DecConsumer;
 import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
@@ -44,7 +44,8 @@ import java.util.function.Consumer;
 @SystemApi
 /* loaded from: classes3.dex */
 public abstract class AugmentedAutofillService extends Service {
-    public static final String SERVICE_INTERFACE = "android.service.autofill.augmented.AugmentedAutofillService";
+    public static final String SERVICE_INTERFACE =
+            "android.service.autofill.augmented.AugmentedAutofillService";
     private static final String TAG = AugmentedAutofillService.class.getSimpleName();
     static boolean sDebug = !Build.IS_USER;
     static boolean sVerbose = false;
@@ -55,47 +56,106 @@ public abstract class AugmentedAutofillService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     final class AugmentedAutofillServiceImpl extends IAugmentedAutofillService.Stub {
-        private AugmentedAutofillServiceImpl() {
-        }
+        private AugmentedAutofillServiceImpl() {}
 
         @Override // android.service.autofill.augmented.IAugmentedAutofillService
         public void onConnected(boolean debug, boolean verbose) {
-            AugmentedAutofillService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.autofill.augmented.AugmentedAutofillService$AugmentedAutofillServiceImpl$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((AugmentedAutofillService) obj).handleOnConnected(((Boolean) obj2).booleanValue(), ((Boolean) obj3).booleanValue());
-                }
-            }, AugmentedAutofillService.this, Boolean.valueOf(debug), Boolean.valueOf(verbose)));
+            AugmentedAutofillService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.autofill.augmented.AugmentedAutofillService$AugmentedAutofillServiceImpl$$ExternalSyntheticLambda0
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((AugmentedAutofillService) obj)
+                                            .handleOnConnected(
+                                                    ((Boolean) obj2).booleanValue(),
+                                                    ((Boolean) obj3).booleanValue());
+                                }
+                            },
+                            AugmentedAutofillService.this,
+                            Boolean.valueOf(debug),
+                            Boolean.valueOf(verbose)));
         }
 
         @Override // android.service.autofill.augmented.IAugmentedAutofillService
         public void onDisconnected() {
-            AugmentedAutofillService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.service.autofill.augmented.AugmentedAutofillService$AugmentedAutofillServiceImpl$$ExternalSyntheticLambda2
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((AugmentedAutofillService) obj).handleOnDisconnected();
-                }
-            }, AugmentedAutofillService.this));
+            AugmentedAutofillService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new Consumer() { // from class:
+                                             // android.service.autofill.augmented.AugmentedAutofillService$AugmentedAutofillServiceImpl$$ExternalSyntheticLambda2
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    ((AugmentedAutofillService) obj).handleOnDisconnected();
+                                }
+                            },
+                            AugmentedAutofillService.this));
         }
 
         @Override // android.service.autofill.augmented.IAugmentedAutofillService
-        public void onFillRequest(int sessionId, IBinder client, int taskId, ComponentName componentName, AutofillId focusedId, AutofillValue focusedValue, long requestTime, InlineSuggestionsRequest inlineSuggestionsRequest, IFillCallback callback) {
-            AugmentedAutofillService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new DecConsumer() { // from class: android.service.autofill.augmented.AugmentedAutofillService$AugmentedAutofillServiceImpl$$ExternalSyntheticLambda1
-                @Override // com.android.internal.util.function.DecConsumer
-                public final void accept(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6, Object obj7, Object obj8, Object obj9, Object obj10) {
-                    ((AugmentedAutofillService) obj).handleOnFillRequest(((Integer) obj2).intValue(), (IBinder) obj3, ((Integer) obj4).intValue(), (ComponentName) obj5, (AutofillId) obj6, (AutofillValue) obj7, ((Long) obj8).longValue(), (InlineSuggestionsRequest) obj9, (IFillCallback) obj10);
-                }
-            }, AugmentedAutofillService.this, Integer.valueOf(sessionId), client, Integer.valueOf(taskId), componentName, focusedId, focusedValue, Long.valueOf(requestTime), inlineSuggestionsRequest, callback));
+        public void onFillRequest(
+                int sessionId,
+                IBinder client,
+                int taskId,
+                ComponentName componentName,
+                AutofillId focusedId,
+                AutofillValue focusedValue,
+                long requestTime,
+                InlineSuggestionsRequest inlineSuggestionsRequest,
+                IFillCallback callback) {
+            AugmentedAutofillService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new DecConsumer() { // from class:
+                                                // android.service.autofill.augmented.AugmentedAutofillService$AugmentedAutofillServiceImpl$$ExternalSyntheticLambda1
+                                @Override // com.android.internal.util.function.DecConsumer
+                                public final void accept(
+                                        Object obj,
+                                        Object obj2,
+                                        Object obj3,
+                                        Object obj4,
+                                        Object obj5,
+                                        Object obj6,
+                                        Object obj7,
+                                        Object obj8,
+                                        Object obj9,
+                                        Object obj10) {
+                                    ((AugmentedAutofillService) obj)
+                                            .handleOnFillRequest(
+                                                    ((Integer) obj2).intValue(),
+                                                    (IBinder) obj3,
+                                                    ((Integer) obj4).intValue(),
+                                                    (ComponentName) obj5,
+                                                    (AutofillId) obj6,
+                                                    (AutofillValue) obj7,
+                                                    ((Long) obj8).longValue(),
+                                                    (InlineSuggestionsRequest) obj9,
+                                                    (IFillCallback) obj10);
+                                }
+                            },
+                            AugmentedAutofillService.this,
+                            Integer.valueOf(sessionId),
+                            client,
+                            Integer.valueOf(taskId),
+                            componentName,
+                            focusedId,
+                            focusedValue,
+                            Long.valueOf(requestTime),
+                            inlineSuggestionsRequest,
+                            callback));
         }
 
         @Override // android.service.autofill.augmented.IAugmentedAutofillService
         public void onDestroyAllFillWindowsRequest() {
-            AugmentedAutofillService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.service.autofill.augmented.AugmentedAutofillService$AugmentedAutofillServiceImpl$$ExternalSyntheticLambda3
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((AugmentedAutofillService) obj).handleOnDestroyAllFillWindowsRequest();
-                }
-            }, AugmentedAutofillService.this));
+            AugmentedAutofillService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new Consumer() { // from class:
+                                             // android.service.autofill.augmented.AugmentedAutofillService$AugmentedAutofillServiceImpl$$ExternalSyntheticLambda3
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    ((AugmentedAutofillService) obj)
+                                            .handleOnDestroyAllFillWindowsRequest();
+                                }
+                            },
+                            AugmentedAutofillService.this));
         }
     }
 
@@ -112,27 +172,36 @@ public abstract class AugmentedAutofillService extends Service {
         if (SERVICE_INTERFACE.equals(intent.getAction())) {
             return new AugmentedAutofillServiceImpl();
         }
-        Log.w(TAG, "Tried to bind to wrong intent (should be android.service.autofill.augmented.AugmentedAutofillService: " + intent);
+        Log.w(
+                TAG,
+                "Tried to bind to wrong intent (should be"
+                    + " android.service.autofill.augmented.AugmentedAutofillService: "
+                        + intent);
         return null;
     }
 
     @Override // android.app.Service
     public boolean onUnbind(Intent intent) {
-        this.mHandler.sendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.service.autofill.augmented.AugmentedAutofillService$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((AugmentedAutofillService) obj).handleOnUnbind();
-            }
-        }, this));
+        this.mHandler.sendMessage(
+                PooledLambda.obtainMessage(
+                        new Consumer() { // from class:
+                                         // android.service.autofill.augmented.AugmentedAutofillService$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                ((AugmentedAutofillService) obj).handleOnUnbind();
+                            }
+                        },
+                        this));
         return false;
     }
 
-    public void onConnected() {
-    }
+    public void onConnected() {}
 
     public final boolean requestAutofill(ComponentName activityComponent, AutofillId autofillId) {
         AutofillProxy proxy = this.mAutofillProxyForLastRequest;
-        if (proxy == null || !proxy.mComponentName.equals(activityComponent) || !proxy.mFocusedId.equals(autofillId)) {
+        if (proxy == null
+                || !proxy.mComponentName.equals(activityComponent)
+                || !proxy.mFocusedId.equals(autofillId)) {
             return false;
         }
         try {
@@ -143,11 +212,13 @@ public abstract class AugmentedAutofillService extends Service {
         }
     }
 
-    public void onFillRequest(FillRequest request, CancellationSignal cancellationSignal, FillController controller, FillCallback callback) {
-    }
+    public void onFillRequest(
+            FillRequest request,
+            CancellationSignal cancellationSignal,
+            FillController controller,
+            FillCallback callback) {}
 
-    public void onDisconnected() {
-    }
+    public void onDisconnected() {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public void handleOnConnected(boolean debug, boolean verbose) {
@@ -165,7 +236,16 @@ public abstract class AugmentedAutofillService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void handleOnFillRequest(int sessionId, IBinder client, int taskId, ComponentName componentName, AutofillId focusedId, AutofillValue focusedValue, long requestTime, InlineSuggestionsRequest inlineSuggestionsRequest, IFillCallback callback) {
+    public void handleOnFillRequest(
+            int sessionId,
+            IBinder client,
+            int taskId,
+            ComponentName componentName,
+            AutofillId focusedId,
+            AutofillValue focusedValue,
+            long requestTime,
+            InlineSuggestionsRequest inlineSuggestionsRequest,
+            IFillCallback callback) {
         ICancellationSignal transport;
         IFillCallback iFillCallback;
         CancellationSignal cancellationSignal;
@@ -178,7 +258,18 @@ public abstract class AugmentedAutofillService extends Service {
         AutofillProxy proxy2 = this.mAutofillProxies.get(sessionId);
         if (proxy2 == null) {
             transport = transport2;
-            AutofillProxy proxy3 = new AutofillProxy(sessionId, client, taskId, this.mServiceComponentName, componentName, focusedId, focusedValue, requestTime, callback, cancellationSignal2);
+            AutofillProxy proxy3 =
+                    new AutofillProxy(
+                            sessionId,
+                            client,
+                            taskId,
+                            this.mServiceComponentName,
+                            componentName,
+                            focusedId,
+                            focusedValue,
+                            requestTime,
+                            callback,
+                            cancellationSignal2);
             this.mAutofillProxies.put(sessionId, proxy3);
             iFillCallback = callback;
             proxy = proxy3;
@@ -199,7 +290,11 @@ public abstract class AugmentedAutofillService extends Service {
             e.rethrowFromSystemServer();
         }
         this.mAutofillProxyForLastRequest = proxy;
-        onFillRequest(new FillRequest(proxy, inlineSuggestionsRequest), cancellationSignal, new FillController(proxy), new FillCallback(proxy));
+        onFillRequest(
+                new FillRequest(proxy, inlineSuggestionsRequest),
+                cancellationSignal,
+                new FillController(proxy),
+                new FillCallback(proxy));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -313,10 +408,19 @@ public abstract class AugmentedAutofillService extends Service {
         private long mUiFirstShownTime;
 
         @Retention(RetentionPolicy.SOURCE)
-        @interface ReportEvent {
-        }
+        @interface ReportEvent {}
 
-        private AutofillProxy(int sessionId, IBinder client, int taskId, ComponentName serviceComponentName, ComponentName componentName, AutofillId focusedId, AutofillValue focusedValue, long requestTime, IFillCallback callback, CancellationSignal cancellationSignal) {
+        private AutofillProxy(
+                int sessionId,
+                IBinder client,
+                int taskId,
+                ComponentName serviceComponentName,
+                ComponentName componentName,
+                AutofillId focusedId,
+                AutofillValue focusedValue,
+                long requestTime,
+                IFillCallback callback,
+                CancellationSignal cancellationSignal) {
             this.mLock = new Object();
             this.mSessionId = sessionId;
             this.mClient = IAugmentedAutofillManagerClient.Stub.asInterface(client);
@@ -339,15 +443,20 @@ public abstract class AugmentedAutofillService extends Service {
                     Rect rect = this.mClient.getViewCoordinates(this.mFocusedId);
                     if (rect == null) {
                         if (AugmentedAutofillService.sDebug) {
-                            Log.d(AugmentedAutofillService.TAG, "getViewCoordinates(" + this.mFocusedId + ") returned null");
+                            Log.d(
+                                    AugmentedAutofillService.TAG,
+                                    "getViewCoordinates(" + this.mFocusedId + ") returned null");
                         }
                         return null;
                     }
-                    this.mSmartSuggestion = new PresentationParams.SystemPopupPresentationParams(this, rect);
+                    this.mSmartSuggestion =
+                            new PresentationParams.SystemPopupPresentationParams(this, rect);
                     this.mLastShownId = this.mFocusedId;
                     return this.mSmartSuggestion;
                 } catch (RemoteException e) {
-                    Log.w(AugmentedAutofillService.TAG, "Could not get coordinates for " + this.mFocusedId);
+                    Log.w(
+                            AugmentedAutofillService.TAG,
+                            "Could not get coordinates for " + this.mFocusedId);
                     return null;
                 }
             }
@@ -383,15 +492,20 @@ public abstract class AugmentedAutofillService extends Service {
             return fillWindow;
         }
 
-        public void requestShowFillUi(int width, int height, Rect anchorBounds, IAutofillWindowPresenter presenter) throws RemoteException {
+        public void requestShowFillUi(
+                int width, int height, Rect anchorBounds, IAutofillWindowPresenter presenter)
+                throws RemoteException {
             if (this.mCancellationSignal.isCanceled()) {
                 if (AugmentedAutofillService.sVerbose) {
-                    Log.v(AugmentedAutofillService.TAG, "requestShowFillUi() not showing because request is cancelled");
+                    Log.v(
+                            AugmentedAutofillService.TAG,
+                            "requestShowFillUi() not showing because request is cancelled");
                     return;
                 }
                 return;
             }
-            this.mClient.requestShowFillUi(this.mSessionId, this.mFocusedId, width, height, anchorBounds, presenter);
+            this.mClient.requestShowFillUi(
+                    this.mSessionId, this.mFocusedId, width, height, anchorBounds, presenter);
         }
 
         public void requestHideFillUi() throws RemoteException {
@@ -404,7 +518,11 @@ public abstract class AugmentedAutofillService extends Service {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public void update(AutofillId focusedId, AutofillValue focusedValue, IFillCallback callback, CancellationSignal cancellationSignal) {
+        public void update(
+                AutofillId focusedId,
+                AutofillValue focusedValue,
+                IFillCallback callback,
+                CancellationSignal cancellationSignal) {
             synchronized (this.mLock) {
                 this.mFocusedId = focusedId;
                 this.mFocusedValue = focusedValue;
@@ -415,7 +533,10 @@ public abstract class AugmentedAutofillService extends Service {
                             this.mCallback.cancel();
                         }
                     } catch (RemoteException e) {
-                        Log.e(AugmentedAutofillService.TAG, "failed to check current pending request status", e);
+                        Log.e(
+                                AugmentedAutofillService.TAG,
+                                "failed to check current pending request status",
+                                e);
                     }
                     Log.d(AugmentedAutofillService.TAG, "mCallback is updated.");
                 }
@@ -440,11 +561,16 @@ public abstract class AugmentedAutofillService extends Service {
             return autofillValue;
         }
 
-        void reportResult(List<Dataset> inlineSuggestionsData, Bundle clientState, boolean showingFillWindow) {
+        void reportResult(
+                List<Dataset> inlineSuggestionsData,
+                Bundle clientState,
+                boolean showingFillWindow) {
             try {
                 this.mCallback.onSuccess(inlineSuggestionsData, clientState, showingFillWindow);
             } catch (RemoteException e) {
-                Log.e(AugmentedAutofillService.TAG, "Error calling back with the inline suggestions data: " + e);
+                Log.e(
+                        AugmentedAutofillService.TAG,
+                        "Error calling back with the inline suggestions data: " + e);
             }
         }
 
@@ -453,12 +579,15 @@ public abstract class AugmentedAutofillService extends Service {
             synchronized (this.mLock) {
                 if (this.mFocusedViewNode == null) {
                     try {
-                        AssistStructure.ViewNodeParcelable viewNodeParcelable = this.mClient.getViewNodeParcelable(this.mFocusedId);
+                        AssistStructure.ViewNodeParcelable viewNodeParcelable =
+                                this.mClient.getViewNodeParcelable(this.mFocusedId);
                         if (viewNodeParcelable != null) {
                             this.mFocusedViewNode = viewNodeParcelable.getViewNode();
                         }
                     } catch (RemoteException e) {
-                        Log.e(AugmentedAutofillService.TAG, "Error getting the ViewNode of the focused view: " + e);
+                        Log.e(
+                                AugmentedAutofillService.TAG,
+                                "Error getting the ViewNode of the focused view: " + e);
                         return null;
                     }
                 }
@@ -480,7 +609,10 @@ public abstract class AugmentedAutofillService extends Service {
                         this.mFirstOnSuccessTime = SystemClock.elapsedRealtime();
                         duration = this.mFirstOnSuccessTime - this.mFirstRequestTime;
                         if (AugmentedAutofillService.sDebug) {
-                            Log.d(AugmentedAutofillService.TAG, "Service responded nothing in " + TimeUtils.formatDuration(duration));
+                            Log.d(
+                                    AugmentedAutofillService.TAG,
+                                    "Service responded nothing in "
+                                            + TimeUtils.formatDuration(duration));
                             break;
                         }
                     }
@@ -491,7 +623,9 @@ public abstract class AugmentedAutofillService extends Service {
                         this.mUiFirstShownTime = SystemClock.elapsedRealtime();
                         duration = this.mUiFirstShownTime - this.mFirstRequestTime;
                         if (AugmentedAutofillService.sDebug) {
-                            Log.d(AugmentedAutofillService.TAG, "UI shown in " + TimeUtils.formatDuration(duration));
+                            Log.d(
+                                    AugmentedAutofillService.TAG,
+                                    "UI shown in " + TimeUtils.formatDuration(duration));
                             break;
                         }
                     }
@@ -502,7 +636,9 @@ public abstract class AugmentedAutofillService extends Service {
                         this.mUiFirstDestroyedTime = SystemClock.elapsedRealtime();
                         duration = this.mUiFirstDestroyedTime - this.mFirstRequestTime;
                         if (AugmentedAutofillService.sDebug) {
-                            Log.d(AugmentedAutofillService.TAG, "UI destroyed in " + TimeUtils.formatDuration(duration));
+                            Log.d(
+                                    AugmentedAutofillService.TAG,
+                                    "UI destroyed in " + TimeUtils.formatDuration(duration));
                             break;
                         }
                     }
@@ -512,7 +648,9 @@ public abstract class AugmentedAutofillService extends Service {
                         this.mFirstOnSuccessTime = SystemClock.elapsedRealtime();
                         duration = this.mFirstOnSuccessTime - this.mFirstRequestTime;
                         if (AugmentedAutofillService.sDebug) {
-                            Log.d(AugmentedAutofillService.TAG, "Inline response in " + TimeUtils.formatDuration(duration));
+                            Log.d(
+                                    AugmentedAutofillService.TAG,
+                                    "Inline response in " + TimeUtils.formatDuration(duration));
                             break;
                         }
                     }
@@ -521,7 +659,8 @@ public abstract class AugmentedAutofillService extends Service {
                     Log.w(AugmentedAutofillService.TAG, "invalid event reported: " + event);
                     break;
             }
-            Helper.logResponse(type, this.mServicePackageName, this.mComponentName, this.mSessionId, duration);
+            Helper.logResponse(
+                    type, this.mServicePackageName, this.mComponentName, this.mSessionId, duration);
         }
 
         public void dump(String prefix, PrintWriter pw) {

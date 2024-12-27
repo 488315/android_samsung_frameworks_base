@@ -2,6 +2,7 @@ package com.android.server.incident;
 
 import android.os.Handler;
 import android.os.IBinder;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -10,30 +11,31 @@ public final class RequestQueue {
     public final Handler mHandler;
     public boolean mStarted;
     public final ArrayList mPending = new ArrayList();
-    public final AnonymousClass1 mWorker = new Runnable() { // from class: com.android.server.incident.RequestQueue.1
-        @Override // java.lang.Runnable
-        public final void run() {
-            ArrayList arrayList;
-            synchronized (RequestQueue.this.mPending) {
-                try {
-                    if (RequestQueue.this.mPending.size() > 0) {
-                        arrayList = new ArrayList(RequestQueue.this.mPending);
-                        RequestQueue.this.mPending.clear();
-                    } else {
-                        arrayList = null;
+    public final AnonymousClass1 mWorker =
+            new Runnable() { // from class: com.android.server.incident.RequestQueue.1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    ArrayList arrayList;
+                    synchronized (RequestQueue.this.mPending) {
+                        try {
+                            if (RequestQueue.this.mPending.size() > 0) {
+                                arrayList = new ArrayList(RequestQueue.this.mPending);
+                                RequestQueue.this.mPending.clear();
+                            } else {
+                                arrayList = null;
+                            }
+                        } catch (Throwable th) {
+                            throw th;
+                        }
                     }
-                } catch (Throwable th) {
-                    throw th;
+                    if (arrayList != null) {
+                        int size = arrayList.size();
+                        for (int i = 0; i < size; i++) {
+                            ((Rec) arrayList.get(i)).runnable.run();
+                        }
+                    }
                 }
-            }
-            if (arrayList != null) {
-                int size = arrayList.size();
-                for (int i = 0; i < size; i++) {
-                    ((Rec) arrayList.get(i)).runnable.run();
-                }
-            }
-        }
-    };
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Rec {

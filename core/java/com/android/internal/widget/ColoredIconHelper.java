@@ -4,14 +4,14 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+
 import com.android.internal.util.ContrastColorUtil;
 
 /* loaded from: classes5.dex */
 final class ColoredIconHelper {
     static final int COLOR_INVALID = 1;
 
-    private ColoredIconHelper() {
-    }
+    private ColoredIconHelper() {}
 
     static void applyGrayTint(Context ctx, Drawable drawable, boolean apply, int originalColor) {
         if (originalColor == 1) {

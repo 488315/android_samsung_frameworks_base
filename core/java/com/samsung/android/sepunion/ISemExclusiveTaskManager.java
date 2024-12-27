@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -25,7 +26,7 @@ public interface ISemExclusiveTaskManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemExclusiveTaskManager {
+    public abstract static class Stub extends Binder implements ISemExclusiveTaskManager {
         static final int TRANSACTION_getExclusiveTaskList = 1;
 
         public Stub() {
@@ -63,7 +64,8 @@ public interface ISemExclusiveTaskManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemExclusiveTaskManager.DESCRIPTOR);
             }

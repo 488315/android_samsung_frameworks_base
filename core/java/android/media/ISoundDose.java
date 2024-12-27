@@ -7,6 +7,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -22,7 +23,8 @@ public interface ISoundDose extends IInterface {
 
     float getOutputRs2UpperBound() throws RemoteException;
 
-    void initCachedAudioDeviceCategories(AudioDeviceCategory[] audioDeviceCategoryArr) throws RemoteException;
+    void initCachedAudioDeviceCategories(AudioDeviceCategory[] audioDeviceCategoryArr)
+            throws RemoteException;
 
     boolean isSoundDoseHalSupported() throws RemoteException;
 
@@ -38,28 +40,24 @@ public interface ISoundDose extends IInterface {
 
     public static class Default implements ISoundDose {
         @Override // android.media.ISoundDose
-        public void setOutputRs2UpperBound(float rs2Value) throws RemoteException {
-        }
+        public void setOutputRs2UpperBound(float rs2Value) throws RemoteException {}
 
         @Override // android.media.ISoundDose
-        public void resetCsd(float currentCsd, SoundDoseRecord[] records) throws RemoteException {
-        }
+        public void resetCsd(float currentCsd, SoundDoseRecord[] records) throws RemoteException {}
 
         @Override // android.media.ISoundDose
-        public void updateAttenuation(float attenuationDB, int device) throws RemoteException {
-        }
+        public void updateAttenuation(float attenuationDB, int device) throws RemoteException {}
 
         @Override // android.media.ISoundDose
-        public void setCsdEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setCsdEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.media.ISoundDose
-        public void initCachedAudioDeviceCategories(AudioDeviceCategory[] audioDevices) throws RemoteException {
-        }
+        public void initCachedAudioDeviceCategories(AudioDeviceCategory[] audioDevices)
+                throws RemoteException {}
 
         @Override // android.media.ISoundDose
-        public void setAudioDeviceCategory(AudioDeviceCategory audioDevice) throws RemoteException {
-        }
+        public void setAudioDeviceCategory(AudioDeviceCategory audioDevice)
+                throws RemoteException {}
 
         @Override // android.media.ISoundDose
         public float getOutputRs2UpperBound() throws RemoteException {
@@ -77,12 +75,11 @@ public interface ISoundDose extends IInterface {
         }
 
         @Override // android.media.ISoundDose
-        public void forceUseFrameworkMel(boolean useFrameworkMel) throws RemoteException {
-        }
+        public void forceUseFrameworkMel(boolean useFrameworkMel) throws RemoteException {}
 
         @Override // android.media.ISoundDose
-        public void forceComputeCsdOnAllDevices(boolean computeCsdOnAllDevices) throws RemoteException {
-        }
+        public void forceComputeCsdOnAllDevices(boolean computeCsdOnAllDevices)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -90,7 +87,7 @@ public interface ISoundDose extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISoundDose {
+    public abstract static class Stub extends Binder implements ISoundDose {
         static final int TRANSACTION_forceComputeCsdOnAllDevices = 11;
         static final int TRANSACTION_forceUseFrameworkMel = 10;
         static final int TRANSACTION_getCsd = 8;
@@ -124,7 +121,8 @@ public interface ISoundDose extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISoundDose.DESCRIPTOR);
             }
@@ -140,7 +138,8 @@ public interface ISoundDose extends IInterface {
                     return true;
                 case 2:
                     float _arg02 = data.readFloat();
-                    SoundDoseRecord[] _arg1 = (SoundDoseRecord[]) data.createTypedArray(SoundDoseRecord.CREATOR);
+                    SoundDoseRecord[] _arg1 =
+                            (SoundDoseRecord[]) data.createTypedArray(SoundDoseRecord.CREATOR);
                     data.enforceNoDataAvail();
                     resetCsd(_arg02, _arg1);
                     return true;
@@ -156,12 +155,15 @@ public interface ISoundDose extends IInterface {
                     setCsdEnabled(_arg04);
                     return true;
                 case 5:
-                    AudioDeviceCategory[] _arg05 = (AudioDeviceCategory[]) data.createTypedArray(AudioDeviceCategory.CREATOR);
+                    AudioDeviceCategory[] _arg05 =
+                            (AudioDeviceCategory[])
+                                    data.createTypedArray(AudioDeviceCategory.CREATOR);
                     data.enforceNoDataAvail();
                     initCachedAudioDeviceCategories(_arg05);
                     return true;
                 case 6:
-                    AudioDeviceCategory _arg06 = (AudioDeviceCategory) data.readTypedObject(AudioDeviceCategory.CREATOR);
+                    AudioDeviceCategory _arg06 =
+                            (AudioDeviceCategory) data.readTypedObject(AudioDeviceCategory.CREATOR);
                     data.enforceNoDataAvail();
                     setAudioDeviceCategory(_arg06);
                     return true;
@@ -224,7 +226,8 @@ public interface ISoundDose extends IInterface {
             }
 
             @Override // android.media.ISoundDose
-            public void resetCsd(float currentCsd, SoundDoseRecord[] records) throws RemoteException {
+            public void resetCsd(float currentCsd, SoundDoseRecord[] records)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundDose.DESCRIPTOR);
@@ -262,7 +265,8 @@ public interface ISoundDose extends IInterface {
             }
 
             @Override // android.media.ISoundDose
-            public void initCachedAudioDeviceCategories(AudioDeviceCategory[] audioDevices) throws RemoteException {
+            public void initCachedAudioDeviceCategories(AudioDeviceCategory[] audioDevices)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundDose.DESCRIPTOR);
@@ -274,7 +278,8 @@ public interface ISoundDose extends IInterface {
             }
 
             @Override // android.media.ISoundDose
-            public void setAudioDeviceCategory(AudioDeviceCategory audioDevice) throws RemoteException {
+            public void setAudioDeviceCategory(AudioDeviceCategory audioDevice)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundDose.DESCRIPTOR);
@@ -346,7 +351,8 @@ public interface ISoundDose extends IInterface {
             }
 
             @Override // android.media.ISoundDose
-            public void forceComputeCsdOnAllDevices(boolean computeCsdOnAllDevices) throws RemoteException {
+            public void forceComputeCsdOnAllDevices(boolean computeCsdOnAllDevices)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISoundDose.DESCRIPTOR);
@@ -360,21 +366,23 @@ public interface ISoundDose extends IInterface {
     }
 
     public static class AudioDeviceCategory implements Parcelable {
-        public static final Parcelable.Creator<AudioDeviceCategory> CREATOR = new Parcelable.Creator<AudioDeviceCategory>() { // from class: android.media.ISoundDose.AudioDeviceCategory.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AudioDeviceCategory createFromParcel(Parcel _aidl_source) {
-                AudioDeviceCategory _aidl_out = new AudioDeviceCategory();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<AudioDeviceCategory> CREATOR =
+                new Parcelable.Creator<AudioDeviceCategory>() { // from class:
+                    // android.media.ISoundDose.AudioDeviceCategory.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AudioDeviceCategory createFromParcel(Parcel _aidl_source) {
+                        AudioDeviceCategory _aidl_out = new AudioDeviceCategory();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AudioDeviceCategory[] newArray(int _aidl_size) {
-                return new AudioDeviceCategory[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AudioDeviceCategory[] newArray(int _aidl_size) {
+                        return new AudioDeviceCategory[_aidl_size];
+                    }
+                };
         public String address;
         public int internalAudioType = 0;
         public boolean csdCompatible = false;

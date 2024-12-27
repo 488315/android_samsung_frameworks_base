@@ -4,23 +4,28 @@ import android.content.ComponentName;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.pm.parsing.pkg.PackageImpl;
 
 /* loaded from: classes5.dex */
-public class ParsedServiceImpl extends ParsedMainComponentImpl implements ParsedService, Parcelable {
-    public static final Parcelable.Creator<ParsedServiceImpl> CREATOR = new Parcelable.Creator<ParsedServiceImpl>() { // from class: com.android.internal.pm.pkg.component.ParsedServiceImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedServiceImpl createFromParcel(Parcel source) {
-            return new ParsedServiceImpl(source);
-        }
+public class ParsedServiceImpl extends ParsedMainComponentImpl
+        implements ParsedService, Parcelable {
+    public static final Parcelable.Creator<ParsedServiceImpl> CREATOR =
+            new Parcelable.Creator<
+                    ParsedServiceImpl>() { // from class:
+                                           // com.android.internal.pm.pkg.component.ParsedServiceImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedServiceImpl createFromParcel(Parcel source) {
+                    return new ParsedServiceImpl(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedServiceImpl[] newArray(int size) {
-            return new ParsedServiceImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedServiceImpl[] newArray(int size) {
+                    return new ParsedServiceImpl[size];
+                }
+            };
     private int foregroundServiceType;
     private String permission;
 
@@ -45,20 +50,21 @@ public class ParsedServiceImpl extends ParsedMainComponentImpl implements Parsed
         return sb.toString();
     }
 
-    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl, com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
+    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl,
+              // com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
     public int describeContents() {
         return 0;
     }
 
-    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl, com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
+    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl,
+              // com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeInt(this.foregroundServiceType);
         PackageImpl.sForInternedString.parcel(this.permission, dest, flags);
     }
 
-    public ParsedServiceImpl() {
-    }
+    public ParsedServiceImpl() {}
 
     protected ParsedServiceImpl(Parcel in) {
         super(in);
@@ -87,6 +93,5 @@ public class ParsedServiceImpl extends ParsedMainComponentImpl implements Parsed
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

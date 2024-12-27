@@ -20,23 +20,20 @@ public final class DataSetProto {
         public static final long STOP_REASONS = 2246267895817L;
         public static final long UID = 1120986464257L;
 
-        public PackageEntryProto() {
-        }
+        public PackageEntryProto() {}
 
         public final class State {
             public static final long COUNT = 1120986464258L;
             public static final long DURATION_MS = 1112396529665L;
 
-            public State() {
-            }
+            public State() {}
         }
 
         public final class StopReasonCount {
             public static final long COUNT = 1120986464258L;
             public static final long REASON = 1159641169921L;
 
-            public StopReasonCount() {
-            }
+            public StopReasonCount() {}
         }
     }
 }

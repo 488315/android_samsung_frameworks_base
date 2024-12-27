@@ -30,15 +30,22 @@ public final class Presentations {
     }
 
     private void onConstructed() {
-        if (this.mMenuPresentation == null && this.mInlinePresentation == null && this.mDialogPresentation == null) {
+        if (this.mMenuPresentation == null
+                && this.mInlinePresentation == null
+                && this.mDialogPresentation == null) {
             throw new IllegalStateException("All presentations are null.");
         }
         if (this.mInlineTooltipPresentation != null && this.mInlinePresentation == null) {
-            throw new IllegalStateException("The inline presentation is required for mInlineTooltipPresentation.");
+            throw new IllegalStateException(
+                    "The inline presentation is required for mInlineTooltipPresentation.");
         }
     }
 
-    Presentations(RemoteViews menuPresentation, InlinePresentation inlinePresentation, RemoteViews dialogPresentation, InlinePresentation inlineTooltipPresentation) {
+    Presentations(
+            RemoteViews menuPresentation,
+            InlinePresentation inlinePresentation,
+            RemoteViews dialogPresentation,
+            InlinePresentation inlineTooltipPresentation) {
         this.mMenuPresentation = menuPresentation;
         this.mInlinePresentation = inlinePresentation;
         this.mDialogPresentation = dialogPresentation;
@@ -112,18 +119,23 @@ public final class Presentations {
             if ((this.mBuilderFieldsSet & 8) == 0) {
                 this.mInlineTooltipPresentation = Presentations.defaultInlineTooltipPresentation();
             }
-            Presentations o = new Presentations(this.mMenuPresentation, this.mInlinePresentation, this.mDialogPresentation, this.mInlineTooltipPresentation);
+            Presentations o =
+                    new Presentations(
+                            this.mMenuPresentation,
+                            this.mInlinePresentation,
+                            this.mDialogPresentation,
+                            this.mInlineTooltipPresentation);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 16) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

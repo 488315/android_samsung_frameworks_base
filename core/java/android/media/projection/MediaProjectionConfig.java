@@ -3,7 +3,9 @@ package android.media.projection;
 import android.annotation.IntRange;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,25 +14,26 @@ import java.lang.annotation.RetentionPolicy;
 public final class MediaProjectionConfig implements Parcelable {
     public static final int CAPTURE_REGION_FIXED_DISPLAY = 1;
     public static final int CAPTURE_REGION_USER_CHOICE = 0;
-    public static final Parcelable.Creator<MediaProjectionConfig> CREATOR = new Parcelable.Creator<MediaProjectionConfig>() { // from class: android.media.projection.MediaProjectionConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaProjectionConfig[] newArray(int size) {
-            return new MediaProjectionConfig[size];
-        }
+    public static final Parcelable.Creator<MediaProjectionConfig> CREATOR =
+            new Parcelable.Creator<MediaProjectionConfig>() { // from class:
+                // android.media.projection.MediaProjectionConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaProjectionConfig[] newArray(int size) {
+                    return new MediaProjectionConfig[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaProjectionConfig createFromParcel(Parcel in) {
-            return new MediaProjectionConfig(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaProjectionConfig createFromParcel(Parcel in) {
+                    return new MediaProjectionConfig(in);
+                }
+            };
     private int mDisplayToCapture;
     private int mRegionToCapture;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CaptureRegion {
-    }
+    public @interface CaptureRegion {}
 
     private MediaProjectionConfig() {
         this.mRegionToCapture = 0;
@@ -63,7 +66,11 @@ public final class MediaProjectionConfig implements Parcelable {
     }
 
     public String toString() {
-        return "MediaProjectionConfig { displayToCapture = " + this.mDisplayToCapture + ", regionToCapture = " + captureRegionToString(this.mRegionToCapture) + " }";
+        return "MediaProjectionConfig { displayToCapture = "
+                + this.mDisplayToCapture
+                + ", regionToCapture = "
+                + captureRegionToString(this.mRegionToCapture)
+                + " }";
     }
 
     public int getDisplayToCapture() {
@@ -82,7 +89,8 @@ public final class MediaProjectionConfig implements Parcelable {
             return false;
         }
         MediaProjectionConfig that = (MediaProjectionConfig) o;
-        if (this.mDisplayToCapture == that.mDisplayToCapture && this.mRegionToCapture == that.mRegionToCapture) {
+        if (this.mDisplayToCapture == that.mDisplayToCapture
+                && this.mRegionToCapture == that.mRegionToCapture) {
             return true;
         }
         return false;
@@ -109,12 +117,21 @@ public final class MediaProjectionConfig implements Parcelable {
         int displayToCapture = in.readInt();
         int regionToCapture = in.readInt();
         this.mDisplayToCapture = displayToCapture;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, this.mDisplayToCapture, "from", 0L, "to", 0L);
+        AnnotationValidations.validate(
+                (Class<IntRange>) IntRange.class,
+                (IntRange) null,
+                this.mDisplayToCapture,
+                "from",
+                0L,
+                "to",
+                0L);
         this.mRegionToCapture = regionToCapture;
-        AnnotationValidations.validate((Class<? extends Annotation>) CaptureRegion.class, (Annotation) null, this.mRegionToCapture);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) CaptureRegion.class,
+                (Annotation) null,
+                this.mRegionToCapture);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

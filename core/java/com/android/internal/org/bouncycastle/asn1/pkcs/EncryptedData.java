@@ -35,7 +35,10 @@ public class EncryptedData extends ASN1Object {
         this.data = ASN1Sequence.getInstance(seq.getObjectAt(1));
     }
 
-    public EncryptedData(ASN1ObjectIdentifier contentType, AlgorithmIdentifier encryptionAlgorithm, ASN1Encodable content) {
+    public EncryptedData(
+            ASN1ObjectIdentifier contentType,
+            AlgorithmIdentifier encryptionAlgorithm,
+            ASN1Encodable content) {
         ASN1EncodableVector v = new ASN1EncodableVector(3);
         v.add(contentType);
         v.add(encryptionAlgorithm.toASN1Primitive());
@@ -59,7 +62,8 @@ public class EncryptedData extends ASN1Object {
         return null;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         v.add(new ASN1Integer(0L));

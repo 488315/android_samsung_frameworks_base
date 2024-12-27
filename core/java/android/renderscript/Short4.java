@@ -8,8 +8,7 @@ public class Short4 {
     public short y;
     public short z;
 
-    public Short4() {
-    }
+    public Short4() {}
 
     public Short4(short i) {
         this.w = i;

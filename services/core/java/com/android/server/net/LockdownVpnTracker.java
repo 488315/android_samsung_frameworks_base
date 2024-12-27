@@ -14,10 +14,12 @@ import android.net.NetworkRequest;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.connectivity.Vpn;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -42,8 +44,7 @@ public final class LockdownVpnTracker {
         public Network mNetwork = null;
         public LinkProperties mLinkProperties = null;
 
-        public NetworkCallback() {
-        }
+        public NetworkCallback() {}
 
         @Override // android.net.ConnectivityManager.NetworkCallback
         public final void onLinkPropertiesChanged(Network network, LinkProperties linkProperties) {
@@ -85,7 +86,8 @@ public final class LockdownVpnTracker {
             }
         }
 
-        @Override // com.android.server.net.LockdownVpnTracker.NetworkCallback, android.net.ConnectivityManager.NetworkCallback
+        @Override // com.android.server.net.LockdownVpnTracker.NetworkCallback,
+                  // android.net.ConnectivityManager.NetworkCallback
         public final void onLost(Network network) {
             onAvailable(network);
         }
@@ -99,8 +101,11 @@ public final class LockdownVpnTracker {
         this.mHandler = handler;
         this.mVpn = vpn;
         this.mProfile = vpnProfile;
-        this.mNotificationManager = (NotificationManager) context.getSystemService(NotificationManager.class);
-        this.mConfigIntent = PendingIntent.getActivity(context, 0, new Intent("android.settings.VPN_SETTINGS"), 67108864);
+        this.mNotificationManager =
+                (NotificationManager) context.getSystemService(NotificationManager.class);
+        this.mConfigIntent =
+                PendingIntent.getActivity(
+                        context, 0, new Intent("android.settings.VPN_SETTINGS"), 67108864);
         Intent intent = new Intent("com.android.server.action.LOCKDOWN_RESET");
         intent.addFlags(1073741824);
         this.mResetIntent = PendingIntent.getBroadcast(context, 0, intent, 67108864);
@@ -114,9 +119,14 @@ public final class LockdownVpnTracker {
         NetworkInfo networkInfo = vpn.mNetworkInfo;
         VpnConfig legacyVpnConfig = vpn.getLegacyVpnConfig();
         boolean z = network == null;
-        boolean z2 = linkProperties == null || !TextUtils.equals(this.mAcceptedEgressIface, linkProperties.getInterfaceName());
+        boolean z2 =
+                linkProperties == null
+                        || !TextUtils.equals(
+                                this.mAcceptedEgressIface, linkProperties.getInterfaceName());
         String interfaceName = linkProperties == null ? null : linkProperties.getInterfaceName();
-        Log.d("LockdownVpnTracker", "handleStateChanged: egress=" + this.mAcceptedEgressIface + "->" + interfaceName);
+        Log.d(
+                "LockdownVpnTracker",
+                "handleStateChanged: egress=" + this.mAcceptedEgressIface + "->" + interfaceName);
         if (z || z2) {
             this.mAcceptedEgressIface = null;
             vpn.stopVpnRunnerPrivileged();
@@ -131,7 +141,9 @@ public final class LockdownVpnTracker {
             }
             String str = legacyVpnConfig.interfaze;
             List list = legacyVpnConfig.addresses;
-            StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("VPN connected using iface=", str, ", sourceAddr=");
+            StringBuilder m =
+                    DumpUtils$$ExternalSyntheticOutline0.m(
+                            "VPN connected using iface=", str, ", sourceAddr=");
             m.append(list.toString());
             Log.d("LockdownVpnTracker", m.toString());
             showNotification(17043466, 17304844);
@@ -161,11 +173,29 @@ public final class LockdownVpnTracker {
         this.mCm.setLegacyLockdownVpnEnabled(true);
         handleStateChangedLocked();
         this.mCm.registerSystemDefaultNetworkCallback(this.mDefaultNetworkCallback, this.mHandler);
-        this.mCm.registerNetworkCallback(new NetworkRequest.Builder().clearCapabilities().addTransportType(4).build(), this.mVpnNetworkCallback, this.mHandler);
+        this.mCm.registerNetworkCallback(
+                new NetworkRequest.Builder().clearCapabilities().addTransportType(4).build(),
+                this.mVpnNetworkCallback,
+                this.mHandler);
     }
 
     public final void showNotification(int i, int i2) {
-        this.mNotificationManager.notify(null, 20, new Notification.Builder(this.mContext, "VPN").setWhen(0L).setSmallIcon(i2).setContentTitle(this.mContext.getString(i)).setContentText(this.mContext.getString(17043465)).setContentIntent(this.mConfigIntent).setOngoing(true).addAction(R.drawable.ic_perm_group_microphone, this.mContext.getString(17042564), this.mResetIntent).setColor(this.mContext.getColor(R.color.system_notification_accent_color)).build());
+        this.mNotificationManager.notify(
+                null,
+                20,
+                new Notification.Builder(this.mContext, "VPN")
+                        .setWhen(0L)
+                        .setSmallIcon(i2)
+                        .setContentTitle(this.mContext.getString(i))
+                        .setContentText(this.mContext.getString(17043465))
+                        .setContentIntent(this.mConfigIntent)
+                        .setOngoing(true)
+                        .addAction(
+                                R.drawable.ic_perm_group_microphone,
+                                this.mContext.getString(17042564),
+                                this.mResetIntent)
+                        .setColor(this.mContext.getColor(R.color.system_notification_accent_color))
+                        .build());
     }
 
     public final void shutdownLocked() {

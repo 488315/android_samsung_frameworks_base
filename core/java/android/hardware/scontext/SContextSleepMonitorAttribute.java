@@ -2,6 +2,7 @@ package android.hardware.scontext;
 
 import android.os.Bundle;
 import android.util.Log;
+
 import com.android.internal.os.BinderCallsStats;
 
 @Deprecated
@@ -33,7 +34,8 @@ public class SContextSleepMonitorAttribute extends SContextAttribute {
         return this.mSamplingInterval;
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mSensibility < 0) {
             Log.e(TAG, "The sensibility is wrong.");
@@ -49,7 +51,9 @@ public class SContextSleepMonitorAttribute extends SContextAttribute {
     private void setAttribute() {
         Bundle attribute = new Bundle();
         attribute.putInt("sensibility", this.mSensibility);
-        attribute.putInt(BinderCallsStats.SettingsObserver.SETTINGS_SAMPLING_INTERVAL_KEY, this.mSamplingInterval);
+        attribute.putInt(
+                BinderCallsStats.SettingsObserver.SETTINGS_SAMPLING_INTERVAL_KEY,
+                this.mSamplingInterval);
         super.setAttribute(29, attribute);
     }
 }

@@ -17,8 +17,7 @@ public class FieldPort extends InputPort {
     }
 
     @Override // android.filterfw.core.FilterPort
-    public void clear() {
-    }
+    public void clear() {}
 
     @Override // android.filterfw.core.FilterPort
     public void pushFrame(Frame frame) {
@@ -49,7 +48,8 @@ public class FieldPort extends InputPort {
                     this.mFilter.notifyFieldPortValueUpdated(this.mName, context);
                 }
             } catch (IllegalAccessException e) {
-                throw new RuntimeException("Access to field '" + this.mField.getName() + "' was denied!");
+                throw new RuntimeException(
+                        "Access to field '" + this.mField.getName() + "' was denied!");
             }
         }
     }

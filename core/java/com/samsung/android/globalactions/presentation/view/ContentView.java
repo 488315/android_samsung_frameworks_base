@@ -27,18 +27,13 @@ public interface ContentView {
 
     void updateItemLists(SamsungGlobalActionsPresenter samsungGlobalActionsPresenter);
 
-    default void registerRotationWatcher() {
-    }
+    default void registerRotationWatcher() {}
 
-    default void onDismiss() {
-    }
+    default void onDismiss() {}
 
-    default void notifyDataSetChanged() {
-    }
+    default void notifyDataSetChanged() {}
 
-    default void hideDialogOnSecureConfirm() {
-    }
+    default void hideDialogOnSecureConfirm() {}
 
-    default void setInterceptor() {
-    }
+    default void setInterceptor() {}
 }

@@ -9,8 +9,8 @@ import android.telephony.ims.FeatureTagState;
 import android.telephony.ims.SipDelegateConfiguration;
 import android.telephony.ims.SipDelegateImsConfiguration;
 import android.telephony.ims.SipMessage;
-import android.telephony.ims.aidl.ISipDelegate;
 import android.telephony.ims.stub.SipDelegate;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Set;
@@ -27,8 +27,7 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
 
     /* renamed from: android.telephony.ims.aidl.SipDelegateAidlWrapper$1, reason: invalid class name */
     class AnonymousClass1 extends ISipDelegate.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.telephony.ims.aidl.ISipDelegate
         public void sendMessage(final SipMessage sipMessage, final long configVersion) {
@@ -38,12 +37,14 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
             }
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegate.this.sendMessage(sipMessage, configVersion);
-                    }
-                });
+                SipDelegateAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegate.this.sendMessage(sipMessage, configVersion);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -57,12 +58,14 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
             }
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda3
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegate.this.notifyMessageReceived(viaTransactionId);
-                    }
-                });
+                SipDelegateAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda3
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegate.this.notifyMessageReceived(viaTransactionId);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -76,12 +79,15 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
             }
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegate.this.notifyMessageReceiveError(viaTransactionId, reason);
-                    }
-                });
+                SipDelegateAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegate.this.notifyMessageReceiveError(
+                                        viaTransactionId, reason);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -95,19 +101,24 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
             }
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegate.this.cleanupSession(callId);
-                    }
-                });
+                SipDelegateAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateAidlWrapper$1$$ExternalSyntheticLambda2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegate.this.cleanupSession(callId);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public SipDelegateAidlWrapper(Executor executor, ISipDelegateStateCallback stateBinder, ISipDelegateMessageCallback messageBinder) {
+    public SipDelegateAidlWrapper(
+            Executor executor,
+            ISipDelegateStateCallback stateBinder,
+            ISipDelegateMessageCallback messageBinder) {
         this.mExecutor = executor;
         this.mStateBinder = stateBinder;
         this.mMessageBinder = messageBinder;
@@ -145,7 +156,9 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
     public void onCreated(SipDelegate delegate, Set<FeatureTagState> deniedTags) {
         this.mDelegate = delegate;
         try {
-            this.mStateBinder.onCreated(this.mDelegateBinder, new ArrayList(deniedTags == null ? Collections.emptySet() : deniedTags));
+            this.mStateBinder.onCreated(
+                    this.mDelegateBinder,
+                    new ArrayList(deniedTags == null ? Collections.emptySet() : deniedTags));
         } catch (RemoteException e) {
         }
     }
@@ -199,12 +212,14 @@ public class SipDelegateAidlWrapper implements DelegateStateCallback, DelegateMe
         final String transactionId = m.getViaBranchParameter();
         final SipDelegate d = this.mDelegate;
         if (d != null) {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateAidlWrapper$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SipDelegate.this.notifyMessageReceiveError(transactionId, reason);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.aidl.SipDelegateAidlWrapper$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SipDelegate.this.notifyMessageReceiveError(transactionId, reason);
+                        }
+                    });
         }
     }
 }

@@ -6,20 +6,23 @@ import com.android.server.power.stats.wakeups.CpuWakeupStats;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda43 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda43
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ int f$1;
     public final /* synthetic */ long f$2;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda43(BatteryStatsService batteryStatsService, int i, long j, int i2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda43(
+            BatteryStatsService batteryStatsService, int i, long j, int i2) {
         this.$r8$classId = i2;
         this.f$0 = batteryStatsService;
         this.f$1 = i;
         this.f$2 = j;
     }
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda43(BatteryStatsService batteryStatsService, int i, String str, long j) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda43(
+            BatteryStatsService batteryStatsService, int i, String str, long j) {
         this.$r8$classId = 2;
         this.f$0 = batteryStatsService;
         this.f$1 = i;
@@ -62,7 +65,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda4
                         }
                         batteryStatsImpl.mWifiState = i3;
                         batteryStatsImpl.mWifiStateTimer[i3].startRunningLocked(j3);
-                        WifiPowerStatsCollector wifiPowerStatsCollector = batteryStatsImpl.mWifiPowerStatsCollector;
+                        WifiPowerStatsCollector wifiPowerStatsCollector =
+                                batteryStatsImpl.mWifiPowerStatsCollector;
                         if (wifiPowerStatsCollector.mEnabled) {
                             wifiPowerStatsCollector.schedule();
                         } else {

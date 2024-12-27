@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -11,19 +12,21 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class CallForwardingInfo implements Parcelable {
-    public static final Parcelable.Creator<CallForwardingInfo> CREATOR = new Parcelable.Creator<CallForwardingInfo>() { // from class: android.telephony.CallForwardingInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CallForwardingInfo createFromParcel(Parcel in) {
-            return new CallForwardingInfo(in);
-        }
+    public static final Parcelable.Creator<CallForwardingInfo> CREATOR =
+            new Parcelable.Creator<
+                    CallForwardingInfo>() { // from class: android.telephony.CallForwardingInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CallForwardingInfo createFromParcel(Parcel in) {
+                    return new CallForwardingInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CallForwardingInfo[] newArray(int size) {
-            return new CallForwardingInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CallForwardingInfo[] newArray(int size) {
+                    return new CallForwardingInfo[size];
+                }
+            };
     public static final int REASON_ALL = 4;
     public static final int REASON_ALL_CONDITIONAL = 5;
     public static final int REASON_BUSY = 1;
@@ -37,8 +40,7 @@ public final class CallForwardingInfo implements Parcelable {
     private int mTimeSeconds;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CallForwardingReason {
-    }
+    public @interface CallForwardingReason {}
 
     public CallForwardingInfo(boolean enabled, int reason, String number, int timeSeconds) {
         this.mEnabled = enabled;
@@ -91,14 +93,29 @@ public final class CallForwardingInfo implements Parcelable {
             return false;
         }
         CallForwardingInfo other = (CallForwardingInfo) o;
-        return this.mEnabled == other.mEnabled && this.mNumber == other.mNumber && this.mReason == other.mReason && this.mTimeSeconds == other.mTimeSeconds;
+        return this.mEnabled == other.mEnabled
+                && this.mNumber == other.mNumber
+                && this.mReason == other.mReason
+                && this.mTimeSeconds == other.mTimeSeconds;
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mEnabled), this.mNumber, Integer.valueOf(this.mReason), Integer.valueOf(this.mTimeSeconds));
+        return Objects.hash(
+                Boolean.valueOf(this.mEnabled),
+                this.mNumber,
+                Integer.valueOf(this.mReason),
+                Integer.valueOf(this.mTimeSeconds));
     }
 
     public String toString() {
-        return "[CallForwardingInfo: enabled=" + this.mEnabled + ", reason= " + this.mReason + ", timeSec= " + this.mTimeSeconds + " seconds, number=" + com.android.telephony.Rlog.pii(TAG, this.mNumber) + NavigationBarInflaterView.SIZE_MOD_END;
+        return "[CallForwardingInfo: enabled="
+                + this.mEnabled
+                + ", reason= "
+                + this.mReason
+                + ", timeSec= "
+                + this.mTimeSeconds
+                + " seconds, number="
+                + com.android.telephony.Rlog.pii(TAG, this.mNumber)
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

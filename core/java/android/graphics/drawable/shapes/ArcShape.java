@@ -3,6 +3,7 @@ package android.graphics.drawable.shapes;
 import android.graphics.Canvas;
 import android.graphics.Outline;
 import android.graphics.Paint;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -29,8 +30,7 @@ public class ArcShape extends RectShape {
     }
 
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape
-    public void getOutline(Outline outline) {
-    }
+    public void getOutline(Outline outline) {}
 
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape
     /* renamed from: clone */
@@ -47,7 +47,8 @@ public class ArcShape extends RectShape {
             return false;
         }
         ArcShape arcShape = (ArcShape) o;
-        if (Float.compare(arcShape.mStartAngle, this.mStartAngle) == 0 && Float.compare(arcShape.mSweepAngle, this.mSweepAngle) == 0) {
+        if (Float.compare(arcShape.mStartAngle, this.mStartAngle) == 0
+                && Float.compare(arcShape.mSweepAngle, this.mSweepAngle) == 0) {
             return true;
         }
         return false;
@@ -55,6 +56,9 @@ public class ArcShape extends RectShape {
 
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(super.hashCode()), Float.valueOf(this.mStartAngle), Float.valueOf(this.mSweepAngle));
+        return Objects.hash(
+                Integer.valueOf(super.hashCode()),
+                Float.valueOf(this.mStartAngle),
+                Float.valueOf(this.mSweepAngle));
     }
 }

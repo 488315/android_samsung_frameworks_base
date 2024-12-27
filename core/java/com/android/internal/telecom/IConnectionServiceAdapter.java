@@ -16,25 +16,39 @@ import android.telecom.ParcelableConference;
 import android.telecom.ParcelableConnection;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.StatusHints;
-import com.android.internal.telecom.IVideoProvider;
-import com.android.internal.telecom.RemoteServiceCallback;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface IConnectionServiceAdapter extends IInterface {
-    void addConferenceCall(String str, ParcelableConference parcelableConference, Session.Info info) throws RemoteException;
+    void addConferenceCall(String str, ParcelableConference parcelableConference, Session.Info info)
+            throws RemoteException;
 
-    void addExistingConnection(String str, ParcelableConnection parcelableConnection, Session.Info info) throws RemoteException;
+    void addExistingConnection(
+            String str, ParcelableConnection parcelableConnection, Session.Info info)
+            throws RemoteException;
 
-    void handleCreateConferenceComplete(String str, ConnectionRequest connectionRequest, ParcelableConference parcelableConference, Session.Info info) throws RemoteException;
+    void handleCreateConferenceComplete(
+            String str,
+            ConnectionRequest connectionRequest,
+            ParcelableConference parcelableConference,
+            Session.Info info)
+            throws RemoteException;
 
-    void handleCreateConnectionComplete(String str, ConnectionRequest connectionRequest, ParcelableConnection parcelableConnection, Session.Info info) throws RemoteException;
+    void handleCreateConnectionComplete(
+            String str,
+            ConnectionRequest connectionRequest,
+            ParcelableConnection parcelableConnection,
+            Session.Info info)
+            throws RemoteException;
 
-    void onConnectionEvent(String str, String str2, Bundle bundle, Session.Info info) throws RemoteException;
+    void onConnectionEvent(String str, String str2, Bundle bundle, Session.Info info)
+            throws RemoteException;
 
     void onConnectionServiceFocusReleased(Session.Info info) throws RemoteException;
 
-    void onPhoneAccountChanged(String str, PhoneAccountHandle phoneAccountHandle, Session.Info info) throws RemoteException;
+    void onPhoneAccountChanged(String str, PhoneAccountHandle phoneAccountHandle, Session.Info info)
+            throws RemoteException;
 
     void onPostDialChar(String str, char c, Session.Info info) throws RemoteException;
 
@@ -50,15 +64,21 @@ public interface IConnectionServiceAdapter extends IInterface {
 
     void putExtras(String str, Bundle bundle, Session.Info info) throws RemoteException;
 
-    void queryLocation(String str, long j, String str2, ResultReceiver resultReceiver, Session.Info info) throws RemoteException;
+    void queryLocation(
+            String str, long j, String str2, ResultReceiver resultReceiver, Session.Info info)
+            throws RemoteException;
 
-    void queryRemoteConnectionServices(RemoteServiceCallback remoteServiceCallback, String str, Session.Info info) throws RemoteException;
+    void queryRemoteConnectionServices(
+            RemoteServiceCallback remoteServiceCallback, String str, Session.Info info)
+            throws RemoteException;
 
     void removeCall(String str, Session.Info info) throws RemoteException;
 
     void removeExtras(String str, List<String> list, Session.Info info) throws RemoteException;
 
-    void requestCallEndpointChange(String str, CallEndpoint callEndpoint, ResultReceiver resultReceiver, Session.Info info) throws RemoteException;
+    void requestCallEndpointChange(
+            String str, CallEndpoint callEndpoint, ResultReceiver resultReceiver, Session.Info info)
+            throws RemoteException;
 
     void resetConnectionTime(String str, Session.Info info) throws RemoteException;
 
@@ -70,13 +90,15 @@ public interface IConnectionServiceAdapter extends IInterface {
 
     void setCallDirection(String str, int i, Session.Info info) throws RemoteException;
 
-    void setCallerDisplayName(String str, String str2, int i, Session.Info info) throws RemoteException;
+    void setCallerDisplayName(String str, String str2, int i, Session.Info info)
+            throws RemoteException;
 
     void setConferenceMergeFailed(String str, Session.Info info) throws RemoteException;
 
     void setConferenceState(String str, boolean z, Session.Info info) throws RemoteException;
 
-    void setConferenceableConnections(String str, List<String> list, Session.Info info) throws RemoteException;
+    void setConferenceableConnections(String str, List<String> list, Session.Info info)
+            throws RemoteException;
 
     void setConnectionCapabilities(String str, int i, Session.Info info) throws RemoteException;
 
@@ -84,7 +106,8 @@ public interface IConnectionServiceAdapter extends IInterface {
 
     void setDialing(String str, Session.Info info) throws RemoteException;
 
-    void setDisconnected(String str, DisconnectCause disconnectCause, Session.Info info) throws RemoteException;
+    void setDisconnected(String str, DisconnectCause disconnectCause, Session.Info info)
+            throws RemoteException;
 
     void setIsConferenced(String str, String str2, Session.Info info) throws RemoteException;
 
@@ -98,176 +121,204 @@ public interface IConnectionServiceAdapter extends IInterface {
 
     void setRinging(String str, Session.Info info) throws RemoteException;
 
-    void setStatusHints(String str, StatusHints statusHints, Session.Info info) throws RemoteException;
+    void setStatusHints(String str, StatusHints statusHints, Session.Info info)
+            throws RemoteException;
 
-    void setVideoProvider(String str, IVideoProvider iVideoProvider, Session.Info info) throws RemoteException;
+    void setVideoProvider(String str, IVideoProvider iVideoProvider, Session.Info info)
+            throws RemoteException;
 
     void setVideoState(String str, int i, Session.Info info) throws RemoteException;
 
     public static class Default implements IConnectionServiceAdapter {
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void handleCreateConnectionComplete(String callId, ConnectionRequest request, ParcelableConnection connection, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void handleCreateConnectionComplete(
+                String callId,
+                ConnectionRequest request,
+                ParcelableConnection connection,
+                Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void handleCreateConferenceComplete(String callId, ConnectionRequest request, ParcelableConference connection, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void handleCreateConferenceComplete(
+                String callId,
+                ConnectionRequest request,
+                ParcelableConference connection,
+                Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setActive(String callId, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setActive(String callId, Session.Info sessionInfo) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setRinging(String callId, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setRinging(String callId, Session.Info sessionInfo) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setDialing(String callId, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setDialing(String callId, Session.Info sessionInfo) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setPulling(String callId, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setPulling(String callId, Session.Info sessionInfo) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setDisconnected(String callId, DisconnectCause disconnectCause, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setDisconnected(
+                String callId, DisconnectCause disconnectCause, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setOnHold(String callId, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setOnHold(String callId, Session.Info sessionInfo) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setRingbackRequested(String callId, boolean ringing, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setRingbackRequested(String callId, boolean ringing, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setConnectionCapabilities(String callId, int connectionCapabilities, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setConnectionCapabilities(
+                String callId, int connectionCapabilities, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setConnectionProperties(String callId, int connectionProperties, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setConnectionProperties(
+                String callId, int connectionProperties, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setIsConferenced(String callId, String conferenceCallId, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setIsConferenced(
+                String callId, String conferenceCallId, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setConferenceMergeFailed(String callId, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setConferenceMergeFailed(String callId, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void addConferenceCall(String callId, ParcelableConference conference, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void addConferenceCall(
+                String callId, ParcelableConference conference, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void removeCall(String callId, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void removeCall(String callId, Session.Info sessionInfo) throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void onPostDialWait(String callId, String remaining, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void onPostDialWait(String callId, String remaining, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void onPostDialChar(String callId, char nextChar, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void onPostDialChar(String callId, char nextChar, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void queryRemoteConnectionServices(RemoteServiceCallback callback, String callingPackage, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void queryRemoteConnectionServices(
+                RemoteServiceCallback callback, String callingPackage, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setVideoProvider(String callId, IVideoProvider videoProvider, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setVideoProvider(
+                String callId, IVideoProvider videoProvider, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setVideoState(String callId, int videoState, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setVideoState(String callId, int videoState, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setIsVoipAudioMode(String callId, boolean isVoip, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setIsVoipAudioMode(String callId, boolean isVoip, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setStatusHints(String callId, StatusHints statusHints, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setStatusHints(String callId, StatusHints statusHints, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setAddress(String callId, Uri address, int presentation, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setAddress(
+                String callId, Uri address, int presentation, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setCallerDisplayName(String callId, String callerDisplayName, int presentation, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setCallerDisplayName(
+                String callId, String callerDisplayName, int presentation, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setConferenceableConnections(String callId, List<String> conferenceableCallIds, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setConferenceableConnections(
+                String callId, List<String> conferenceableCallIds, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void addExistingConnection(String callId, ParcelableConnection connection, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void addExistingConnection(
+                String callId, ParcelableConnection connection, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void putExtras(String callId, Bundle extras, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void putExtras(String callId, Bundle extras, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void removeExtras(String callId, List<String> keys, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void removeExtras(String callId, List<String> keys, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setAudioRoute(String callId, int audioRoute, String bluetoothAddress, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setAudioRoute(
+                String callId, int audioRoute, String bluetoothAddress, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void requestCallEndpointChange(String callId, CallEndpoint endpoint, ResultReceiver callback, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void requestCallEndpointChange(
+                String callId,
+                CallEndpoint endpoint,
+                ResultReceiver callback,
+                Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void onConnectionEvent(String callId, String event, Bundle extras, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void onConnectionEvent(
+                String callId, String event, Bundle extras, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void onRttInitiationSuccess(String callId, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void onRttInitiationSuccess(String callId, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void onRttInitiationFailure(String callId, int reason, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void onRttInitiationFailure(String callId, int reason, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void onRttSessionRemotelyTerminated(String callId, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void onRttSessionRemotelyTerminated(String callId, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void onRemoteRttRequest(String callId, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void onRemoteRttRequest(String callId, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void onPhoneAccountChanged(String callId, PhoneAccountHandle pHandle, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void onPhoneAccountChanged(
+                String callId, PhoneAccountHandle pHandle, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void onConnectionServiceFocusReleased(Session.Info sessionInfo) throws RemoteException {
-        }
+        public void onConnectionServiceFocusReleased(Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void resetConnectionTime(String callIdi, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void resetConnectionTime(String callIdi, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setConferenceState(String callId, boolean isConference, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setConferenceState(
+                String callId, boolean isConference, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void setCallDirection(String callId, int direction, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void setCallDirection(String callId, int direction, Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.IConnectionServiceAdapter
-        public void queryLocation(String callId, long timeoutMillis, String provider, ResultReceiver callback, Session.Info sessionInfo) throws RemoteException {
-        }
+        public void queryLocation(
+                String callId,
+                long timeoutMillis,
+                String provider,
+                ResultReceiver callback,
+                Session.Info sessionInfo)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -275,8 +326,9 @@ public interface IConnectionServiceAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IConnectionServiceAdapter {
-        public static final String DESCRIPTOR = "com.android.internal.telecom.IConnectionServiceAdapter";
+    public abstract static class Stub extends Binder implements IConnectionServiceAdapter {
+        public static final String DESCRIPTOR =
+                "com.android.internal.telecom.IConnectionServiceAdapter";
         static final int TRANSACTION_addConferenceCall = 14;
         static final int TRANSACTION_addExistingConnection = 26;
         static final int TRANSACTION_handleCreateConferenceComplete = 2;
@@ -434,7 +486,8 @@ public interface IConnectionServiceAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -445,16 +498,22 @@ public interface IConnectionServiceAdapter extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    ConnectionRequest _arg1 = (ConnectionRequest) data.readTypedObject(ConnectionRequest.CREATOR);
-                    ParcelableConnection _arg2 = (ParcelableConnection) data.readTypedObject(ParcelableConnection.CREATOR);
+                    ConnectionRequest _arg1 =
+                            (ConnectionRequest) data.readTypedObject(ConnectionRequest.CREATOR);
+                    ParcelableConnection _arg2 =
+                            (ParcelableConnection)
+                                    data.readTypedObject(ParcelableConnection.CREATOR);
                     Session.Info _arg3 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     handleCreateConnectionComplete(_arg0, _arg1, _arg2, _arg3);
                     return true;
                 case 2:
                     String _arg02 = data.readString();
-                    ConnectionRequest _arg12 = (ConnectionRequest) data.readTypedObject(ConnectionRequest.CREATOR);
-                    ParcelableConference _arg22 = (ParcelableConference) data.readTypedObject(ParcelableConference.CREATOR);
+                    ConnectionRequest _arg12 =
+                            (ConnectionRequest) data.readTypedObject(ConnectionRequest.CREATOR);
+                    ParcelableConference _arg22 =
+                            (ParcelableConference)
+                                    data.readTypedObject(ParcelableConference.CREATOR);
                     Session.Info _arg32 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     handleCreateConferenceComplete(_arg02, _arg12, _arg22, _arg32);
@@ -485,7 +544,8 @@ public interface IConnectionServiceAdapter extends IInterface {
                     return true;
                 case 7:
                     String _arg07 = data.readString();
-                    DisconnectCause _arg17 = (DisconnectCause) data.readTypedObject(DisconnectCause.CREATOR);
+                    DisconnectCause _arg17 =
+                            (DisconnectCause) data.readTypedObject(DisconnectCause.CREATOR);
                     Session.Info _arg23 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     setDisconnected(_arg07, _arg17, _arg23);
@@ -526,20 +586,24 @@ public interface IConnectionServiceAdapter extends IInterface {
                     return true;
                 case 13:
                     String _arg013 = data.readString();
-                    Session.Info _arg113 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg113 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     setConferenceMergeFailed(_arg013, _arg113);
                     return true;
                 case 14:
                     String _arg014 = data.readString();
-                    ParcelableConference _arg114 = (ParcelableConference) data.readTypedObject(ParcelableConference.CREATOR);
+                    ParcelableConference _arg114 =
+                            (ParcelableConference)
+                                    data.readTypedObject(ParcelableConference.CREATOR);
                     Session.Info _arg28 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     addConferenceCall(_arg014, _arg114, _arg28);
                     return true;
                 case 15:
                     String _arg015 = data.readString();
-                    Session.Info _arg115 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg115 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     removeCall(_arg015, _arg115);
                     return true;
@@ -553,42 +617,50 @@ public interface IConnectionServiceAdapter extends IInterface {
                 case 17:
                     String _arg017 = data.readString();
                     char _arg117 = (char) data.readInt();
-                    Session.Info _arg210 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg210 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     onPostDialChar(_arg017, _arg117, _arg210);
                     return true;
                 case 18:
-                    RemoteServiceCallback _arg018 = RemoteServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    RemoteServiceCallback _arg018 =
+                            RemoteServiceCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg118 = data.readString();
-                    Session.Info _arg211 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg211 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     queryRemoteConnectionServices(_arg018, _arg118, _arg211);
                     return true;
                 case 19:
                     String _arg019 = data.readString();
-                    IVideoProvider _arg119 = IVideoProvider.Stub.asInterface(data.readStrongBinder());
-                    Session.Info _arg212 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    IVideoProvider _arg119 =
+                            IVideoProvider.Stub.asInterface(data.readStrongBinder());
+                    Session.Info _arg212 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     setVideoProvider(_arg019, _arg119, _arg212);
                     return true;
                 case 20:
                     String _arg020 = data.readString();
                     int _arg120 = data.readInt();
-                    Session.Info _arg213 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg213 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     setVideoState(_arg020, _arg120, _arg213);
                     return true;
                 case 21:
                     String _arg021 = data.readString();
                     boolean _arg121 = data.readBoolean();
-                    Session.Info _arg214 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg214 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     setIsVoipAudioMode(_arg021, _arg121, _arg214);
                     return true;
                 case 22:
                     String _arg022 = data.readString();
                     StatusHints _arg122 = (StatusHints) data.readTypedObject(StatusHints.CREATOR);
-                    Session.Info _arg215 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg215 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     setStatusHints(_arg022, _arg122, _arg215);
                     return true;
@@ -611,28 +683,34 @@ public interface IConnectionServiceAdapter extends IInterface {
                 case 25:
                     String _arg025 = data.readString();
                     List<String> _arg125 = data.createStringArrayList();
-                    Session.Info _arg218 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg218 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     setConferenceableConnections(_arg025, _arg125, _arg218);
                     return true;
                 case 26:
                     String _arg026 = data.readString();
-                    ParcelableConnection _arg126 = (ParcelableConnection) data.readTypedObject(ParcelableConnection.CREATOR);
-                    Session.Info _arg219 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    ParcelableConnection _arg126 =
+                            (ParcelableConnection)
+                                    data.readTypedObject(ParcelableConnection.CREATOR);
+                    Session.Info _arg219 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     addExistingConnection(_arg026, _arg126, _arg219);
                     return true;
                 case 27:
                     String _arg027 = data.readString();
                     Bundle _arg127 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    Session.Info _arg220 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg220 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     putExtras(_arg027, _arg127, _arg220);
                     return true;
                 case 28:
                     String _arg028 = data.readString();
                     List<String> _arg128 = data.createStringArrayList();
-                    Session.Info _arg221 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg221 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     removeExtras(_arg028, _arg128, _arg221);
                     return true;
@@ -646,8 +724,10 @@ public interface IConnectionServiceAdapter extends IInterface {
                     return true;
                 case 30:
                     String _arg030 = data.readString();
-                    CallEndpoint _arg130 = (CallEndpoint) data.readTypedObject(CallEndpoint.CREATOR);
-                    ResultReceiver _arg223 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    CallEndpoint _arg130 =
+                            (CallEndpoint) data.readTypedObject(CallEndpoint.CREATOR);
+                    ResultReceiver _arg223 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     Session.Info _arg36 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     requestCallEndpointChange(_arg030, _arg130, _arg223, _arg36);
@@ -662,58 +742,68 @@ public interface IConnectionServiceAdapter extends IInterface {
                     return true;
                 case 32:
                     String _arg032 = data.readString();
-                    Session.Info _arg132 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg132 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     onRttInitiationSuccess(_arg032, _arg132);
                     return true;
                 case 33:
                     String _arg033 = data.readString();
                     int _arg133 = data.readInt();
-                    Session.Info _arg225 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg225 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     onRttInitiationFailure(_arg033, _arg133, _arg225);
                     return true;
                 case 34:
                     String _arg034 = data.readString();
-                    Session.Info _arg134 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg134 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     onRttSessionRemotelyTerminated(_arg034, _arg134);
                     return true;
                 case 35:
                     String _arg035 = data.readString();
-                    Session.Info _arg135 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg135 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     onRemoteRttRequest(_arg035, _arg135);
                     return true;
                 case 36:
                     String _arg036 = data.readString();
-                    PhoneAccountHandle _arg136 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
-                    Session.Info _arg226 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    PhoneAccountHandle _arg136 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    Session.Info _arg226 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     onPhoneAccountChanged(_arg036, _arg136, _arg226);
                     return true;
                 case 37:
-                    Session.Info _arg037 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg037 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     onConnectionServiceFocusReleased(_arg037);
                     return true;
                 case 38:
                     String _arg038 = data.readString();
-                    Session.Info _arg137 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg137 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     resetConnectionTime(_arg038, _arg137);
                     return true;
                 case 39:
                     String _arg039 = data.readString();
                     boolean _arg138 = data.readBoolean();
-                    Session.Info _arg227 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg227 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     setConferenceState(_arg039, _arg138, _arg227);
                     return true;
                 case 40:
                     String _arg040 = data.readString();
                     int _arg139 = data.readInt();
-                    Session.Info _arg228 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
+                    Session.Info _arg228 =
+                            (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     setCallDirection(_arg040, _arg139, _arg228);
                     return true;
@@ -721,7 +811,8 @@ public interface IConnectionServiceAdapter extends IInterface {
                     String _arg041 = data.readString();
                     long _arg140 = data.readLong();
                     String _arg229 = data.readString();
-                    ResultReceiver _arg38 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg38 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     Session.Info _arg4 = (Session.Info) data.readTypedObject(Session.Info.CREATOR);
                     data.enforceNoDataAvail();
                     queryLocation(_arg041, _arg140, _arg229, _arg38, _arg4);
@@ -748,7 +839,12 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void handleCreateConnectionComplete(String callId, ConnectionRequest request, ParcelableConnection connection, Session.Info sessionInfo) throws RemoteException {
+            public void handleCreateConnectionComplete(
+                    String callId,
+                    ConnectionRequest request,
+                    ParcelableConnection connection,
+                    Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -763,7 +859,12 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void handleCreateConferenceComplete(String callId, ConnectionRequest request, ParcelableConference connection, Session.Info sessionInfo) throws RemoteException {
+            public void handleCreateConferenceComplete(
+                    String callId,
+                    ConnectionRequest request,
+                    ParcelableConference connection,
+                    Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -830,7 +931,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setDisconnected(String callId, DisconnectCause disconnectCause, Session.Info sessionInfo) throws RemoteException {
+            public void setDisconnected(
+                    String callId, DisconnectCause disconnectCause, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -857,7 +960,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setRingbackRequested(String callId, boolean ringing, Session.Info sessionInfo) throws RemoteException {
+            public void setRingbackRequested(
+                    String callId, boolean ringing, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -871,7 +976,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setConnectionCapabilities(String callId, int connectionCapabilities, Session.Info sessionInfo) throws RemoteException {
+            public void setConnectionCapabilities(
+                    String callId, int connectionCapabilities, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -885,7 +992,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setConnectionProperties(String callId, int connectionProperties, Session.Info sessionInfo) throws RemoteException {
+            public void setConnectionProperties(
+                    String callId, int connectionProperties, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -899,7 +1008,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setIsConferenced(String callId, String conferenceCallId, Session.Info sessionInfo) throws RemoteException {
+            public void setIsConferenced(
+                    String callId, String conferenceCallId, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -913,7 +1024,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setConferenceMergeFailed(String callId, Session.Info sessionInfo) throws RemoteException {
+            public void setConferenceMergeFailed(String callId, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -926,7 +1038,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void addConferenceCall(String callId, ParcelableConference conference, Session.Info sessionInfo) throws RemoteException {
+            public void addConferenceCall(
+                    String callId, ParcelableConference conference, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -953,7 +1067,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void onPostDialWait(String callId, String remaining, Session.Info sessionInfo) throws RemoteException {
+            public void onPostDialWait(String callId, String remaining, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -967,7 +1082,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void onPostDialChar(String callId, char nextChar, Session.Info sessionInfo) throws RemoteException {
+            public void onPostDialChar(String callId, char nextChar, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -981,7 +1097,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void queryRemoteConnectionServices(RemoteServiceCallback callback, String callingPackage, Session.Info sessionInfo) throws RemoteException {
+            public void queryRemoteConnectionServices(
+                    RemoteServiceCallback callback, String callingPackage, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -995,7 +1113,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setVideoProvider(String callId, IVideoProvider videoProvider, Session.Info sessionInfo) throws RemoteException {
+            public void setVideoProvider(
+                    String callId, IVideoProvider videoProvider, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1009,7 +1129,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setVideoState(String callId, int videoState, Session.Info sessionInfo) throws RemoteException {
+            public void setVideoState(String callId, int videoState, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1023,7 +1144,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setIsVoipAudioMode(String callId, boolean isVoip, Session.Info sessionInfo) throws RemoteException {
+            public void setIsVoipAudioMode(String callId, boolean isVoip, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1037,7 +1159,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setStatusHints(String callId, StatusHints statusHints, Session.Info sessionInfo) throws RemoteException {
+            public void setStatusHints(
+                    String callId, StatusHints statusHints, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1051,7 +1175,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setAddress(String callId, Uri address, int presentation, Session.Info sessionInfo) throws RemoteException {
+            public void setAddress(
+                    String callId, Uri address, int presentation, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1066,7 +1192,12 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setCallerDisplayName(String callId, String callerDisplayName, int presentation, Session.Info sessionInfo) throws RemoteException {
+            public void setCallerDisplayName(
+                    String callId,
+                    String callerDisplayName,
+                    int presentation,
+                    Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1081,7 +1212,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setConferenceableConnections(String callId, List<String> conferenceableCallIds, Session.Info sessionInfo) throws RemoteException {
+            public void setConferenceableConnections(
+                    String callId, List<String> conferenceableCallIds, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1095,7 +1228,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void addExistingConnection(String callId, ParcelableConnection connection, Session.Info sessionInfo) throws RemoteException {
+            public void addExistingConnection(
+                    String callId, ParcelableConnection connection, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1109,7 +1244,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void putExtras(String callId, Bundle extras, Session.Info sessionInfo) throws RemoteException {
+            public void putExtras(String callId, Bundle extras, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1123,7 +1259,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void removeExtras(String callId, List<String> keys, Session.Info sessionInfo) throws RemoteException {
+            public void removeExtras(String callId, List<String> keys, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1137,7 +1274,12 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setAudioRoute(String callId, int audioRoute, String bluetoothAddress, Session.Info sessionInfo) throws RemoteException {
+            public void setAudioRoute(
+                    String callId,
+                    int audioRoute,
+                    String bluetoothAddress,
+                    Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1152,7 +1294,12 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void requestCallEndpointChange(String callId, CallEndpoint endpoint, ResultReceiver callback, Session.Info sessionInfo) throws RemoteException {
+            public void requestCallEndpointChange(
+                    String callId,
+                    CallEndpoint endpoint,
+                    ResultReceiver callback,
+                    Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1167,7 +1314,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void onConnectionEvent(String callId, String event, Bundle extras, Session.Info sessionInfo) throws RemoteException {
+            public void onConnectionEvent(
+                    String callId, String event, Bundle extras, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1182,7 +1331,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void onRttInitiationSuccess(String callId, Session.Info sessionInfo) throws RemoteException {
+            public void onRttInitiationSuccess(String callId, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1195,7 +1345,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void onRttInitiationFailure(String callId, int reason, Session.Info sessionInfo) throws RemoteException {
+            public void onRttInitiationFailure(String callId, int reason, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1209,7 +1360,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void onRttSessionRemotelyTerminated(String callId, Session.Info sessionInfo) throws RemoteException {
+            public void onRttSessionRemotelyTerminated(String callId, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1222,7 +1374,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void onRemoteRttRequest(String callId, Session.Info sessionInfo) throws RemoteException {
+            public void onRemoteRttRequest(String callId, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1235,7 +1388,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void onPhoneAccountChanged(String callId, PhoneAccountHandle pHandle, Session.Info sessionInfo) throws RemoteException {
+            public void onPhoneAccountChanged(
+                    String callId, PhoneAccountHandle pHandle, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1249,7 +1404,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void onConnectionServiceFocusReleased(Session.Info sessionInfo) throws RemoteException {
+            public void onConnectionServiceFocusReleased(Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1261,7 +1417,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void resetConnectionTime(String callIdi, Session.Info sessionInfo) throws RemoteException {
+            public void resetConnectionTime(String callIdi, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1274,7 +1431,9 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setConferenceState(String callId, boolean isConference, Session.Info sessionInfo) throws RemoteException {
+            public void setConferenceState(
+                    String callId, boolean isConference, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1288,7 +1447,8 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void setCallDirection(String callId, int direction, Session.Info sessionInfo) throws RemoteException {
+            public void setCallDirection(String callId, int direction, Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1302,7 +1462,13 @@ public interface IConnectionServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IConnectionServiceAdapter
-            public void queryLocation(String callId, long timeoutMillis, String provider, ResultReceiver callback, Session.Info sessionInfo) throws RemoteException {
+            public void queryLocation(
+                    String callId,
+                    long timeoutMillis,
+                    String provider,
+                    ResultReceiver callback,
+                    Session.Info sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

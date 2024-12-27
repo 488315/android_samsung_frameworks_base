@@ -3,24 +3,27 @@ package android.hardware.display;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.Display;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes2.dex */
 public final class HdrConversionMode implements Parcelable {
-    public static final Parcelable.Creator<HdrConversionMode> CREATOR = new Parcelable.Creator<HdrConversionMode>() { // from class: android.hardware.display.HdrConversionMode.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HdrConversionMode createFromParcel(Parcel source) {
-            return new HdrConversionMode(source);
-        }
+    public static final Parcelable.Creator<HdrConversionMode> CREATOR =
+            new Parcelable.Creator<HdrConversionMode>() { // from class:
+                // android.hardware.display.HdrConversionMode.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HdrConversionMode createFromParcel(Parcel source) {
+                    return new HdrConversionMode(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HdrConversionMode[] newArray(int size) {
-            return new HdrConversionMode[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HdrConversionMode[] newArray(int size) {
+                    return new HdrConversionMode[size];
+                }
+            };
     public static final int HDR_CONVERSION_FORCE = 3;
     public static final int HDR_CONVERSION_PASSTHROUGH = 1;
     public static final int HDR_CONVERSION_SYSTEM = 2;
@@ -29,12 +32,13 @@ public final class HdrConversionMode implements Parcelable {
     private int mPreferredHdrOutputType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConversionMode {
-    }
+    public @interface ConversionMode {}
 
     public HdrConversionMode(int conversionMode, int preferredHdrOutputType) {
         if ((conversionMode == 1 || conversionMode == 0) && preferredHdrOutputType != -1) {
-            throw new IllegalArgumentException("preferredHdrOutputType must not be set if the conversion mode is " + hdrConversionModeString(conversionMode));
+            throw new IllegalArgumentException(
+                    "preferredHdrOutputType must not be set if the conversion mode is "
+                            + hdrConversionModeString(conversionMode));
         }
         this.mConversionMode = conversionMode;
         this.mPreferredHdrOutputType = preferredHdrOutputType;
@@ -77,11 +81,17 @@ public final class HdrConversionMode implements Parcelable {
     }
 
     public String toString() {
-        return "HdrConversionMode{ConversionMode=" + hdrConversionModeString(getConversionMode()) + ", PreferredHdrOutputType=" + Display.HdrCapabilities.hdrTypeToString(getPreferredHdrOutputType()) + "}";
+        return "HdrConversionMode{ConversionMode="
+                + hdrConversionModeString(getConversionMode())
+                + ", PreferredHdrOutputType="
+                + Display.HdrCapabilities.hdrTypeToString(getPreferredHdrOutputType())
+                + "}";
     }
 
     private boolean equals(HdrConversionMode other) {
-        return other != null && this.mConversionMode == other.getConversionMode() && this.mPreferredHdrOutputType == other.getPreferredHdrOutputType();
+        return other != null
+                && this.mConversionMode == other.getConversionMode()
+                && this.mPreferredHdrOutputType == other.getPreferredHdrOutputType();
     }
 
     private static String hdrConversionModeString(int hdrConversionMode) {

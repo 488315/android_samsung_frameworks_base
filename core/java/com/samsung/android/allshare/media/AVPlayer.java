@@ -4,6 +4,7 @@ import com.samsung.android.allshare.Caption;
 import com.samsung.android.allshare.Device;
 import com.samsung.android.allshare.ERROR;
 import com.samsung.android.allshare.Item;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -116,17 +117,21 @@ public abstract class AVPlayer extends Device {
 
     public abstract void setEventListener(IAVPlayerEventListener iAVPlayerEventListener);
 
-    public abstract void setExtensionEventListener(IAVPlayerExtensionEventListener iAVPlayerExtensionEventListener);
+    public abstract void setExtensionEventListener(
+            IAVPlayerExtensionEventListener iAVPlayerExtensionEventListener);
 
-    public abstract void setExtensionResponseListener(IAVPlayerExtensionResponseListener iAVPlayerExtensionResponseListener);
+    public abstract void setExtensionResponseListener(
+            IAVPlayerExtensionResponseListener iAVPlayerExtensionResponseListener);
 
     public abstract void setMute(boolean z);
 
-    public abstract void setResponseListener(IAVPlayerPlaybackResponseListener iAVPlayerPlaybackResponseListener);
+    public abstract void setResponseListener(
+            IAVPlayerPlaybackResponseListener iAVPlayerPlaybackResponseListener);
 
     public abstract void setVolume(int i);
 
-    public abstract void setVolumeResponseListener(IAVPlayerVolumeResponseListener iAVPlayerVolumeResponseListener);
+    public abstract void setVolumeResponseListener(
+            IAVPlayerVolumeResponseListener iAVPlayerVolumeResponseListener);
 
     public abstract void skipDynamicBuffering();
 
@@ -134,8 +139,7 @@ public abstract class AVPlayer extends Device {
 
     public abstract void zoom360View(float f);
 
-    protected AVPlayer() {
-    }
+    protected AVPlayer() {}
 
     public enum AVPlayerState {
         STOPPED("STOPPED"),

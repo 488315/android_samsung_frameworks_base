@@ -5,14 +5,11 @@ import android.view.KeyEvent;
 /* loaded from: classes.dex */
 public interface DialogInterface {
 
-    @Deprecated
-    public static final int BUTTON1 = -1;
+    @Deprecated public static final int BUTTON1 = -1;
 
-    @Deprecated
-    public static final int BUTTON2 = -2;
+    @Deprecated public static final int BUTTON2 = -2;
 
-    @Deprecated
-    public static final int BUTTON3 = -3;
+    @Deprecated public static final int BUTTON3 = -3;
     public static final int BUTTON_NEGATIVE = -2;
     public static final int BUTTON_NEUTRAL = -3;
     public static final int BUTTON_POSITIVE = -1;

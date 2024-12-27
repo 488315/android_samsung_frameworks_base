@@ -3,6 +3,7 @@ package android.media.audio.common;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -38,19 +39,21 @@ public final class AudioChannelLayout implements Parcelable {
     public static final int CHANNEL_TOP_SIDE_RIGHT = 524288;
     public static final int CHANNEL_VOICE_DNLINK = 32768;
     public static final int CHANNEL_VOICE_UPLINK = 16384;
-    public static final Parcelable.Creator<AudioChannelLayout> CREATOR = new Parcelable.Creator<AudioChannelLayout>() { // from class: android.media.audio.common.AudioChannelLayout.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioChannelLayout createFromParcel(Parcel _aidl_source) {
-            return new AudioChannelLayout(_aidl_source);
-        }
+    public static final Parcelable.Creator<AudioChannelLayout> CREATOR =
+            new Parcelable.Creator<AudioChannelLayout>() { // from class:
+                // android.media.audio.common.AudioChannelLayout.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioChannelLayout createFromParcel(Parcel _aidl_source) {
+                    return new AudioChannelLayout(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioChannelLayout[] newArray(int _aidl_size) {
-            return new AudioChannelLayout[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioChannelLayout[] newArray(int _aidl_size) {
+                    return new AudioChannelLayout[_aidl_size];
+                }
+            };
     public static final int INDEX_MASK_1 = 1;
     public static final int INDEX_MASK_10 = 1023;
     public static final int INDEX_MASK_11 = 2047;
@@ -275,15 +278,25 @@ public final class AudioChannelLayout implements Parcelable {
     public String toString() {
         switch (this._tag) {
             case 0:
-                return "AudioChannelLayout.none(" + getNone() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioChannelLayout.none("
+                        + getNone()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "AudioChannelLayout.invalid(" + getInvalid() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioChannelLayout.invalid("
+                        + getInvalid()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 2:
-                return "AudioChannelLayout.indexMask(" + getIndexMask() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioChannelLayout.indexMask("
+                        + getIndexMask()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 3:
-                return "AudioChannelLayout.layoutMask(" + getLayoutMask() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioChannelLayout.layoutMask("
+                        + getLayoutMask()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 4:
-                return "AudioChannelLayout.voiceMask(" + getVoiceMask() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AudioChannelLayout.voiceMask("
+                        + getVoiceMask()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -304,12 +317,18 @@ public final class AudioChannelLayout implements Parcelable {
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
     }
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

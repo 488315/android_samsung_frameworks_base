@@ -1,7 +1,6 @@
 package android.hardware;
 
 import android.content.Context;
-import android.hardware.IConsumerIrService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
@@ -10,7 +9,9 @@ import android.util.Log;
 public final class ConsumerIrManager {
     private static final String TAG = "ConsumerIr";
     private final String mPackageName;
-    private final IConsumerIrService mService = IConsumerIrService.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.CONSUMER_IR_SERVICE));
+    private final IConsumerIrService mService =
+            IConsumerIrService.Stub.asInterface(
+                    ServiceManager.getServiceOrThrow(Context.CONSUMER_IR_SERVICE));
 
     public ConsumerIrManager(Context context) throws ServiceManager.ServiceNotFoundException {
         this.mPackageName = context.getPackageName();

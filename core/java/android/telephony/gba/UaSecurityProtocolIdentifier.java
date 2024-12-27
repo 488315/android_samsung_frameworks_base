@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.nio.ByteBuffer;
@@ -33,50 +34,50 @@ public final class UaSecurityProtocolIdentifier implements Parcelable {
     private int mProtocol;
     private int mTlsCipherSuite;
     private static final int[] sUaSp3gppIds = {0, 1, 2, 3, 4, 5, 6, 256, 65536, 131072};
-    public static final Parcelable.Creator<UaSecurityProtocolIdentifier> CREATOR = new Parcelable.Creator<UaSecurityProtocolIdentifier>() { // from class: android.telephony.gba.UaSecurityProtocolIdentifier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UaSecurityProtocolIdentifier createFromParcel(Parcel in) {
-            int org2 = in.readInt();
-            int protocol = in.readInt();
-            int cs = in.readInt();
-            if (org2 < 0 || protocol < 0 || cs < 0) {
-                return null;
-            }
-            Builder builder = new Builder();
-            if (org2 > 0) {
-                try {
-                    builder.setOrg(org2);
-                } catch (IllegalArgumentException e) {
-                    return null;
+    public static final Parcelable.Creator<UaSecurityProtocolIdentifier> CREATOR =
+            new Parcelable.Creator<
+                    UaSecurityProtocolIdentifier>() { // from class:
+                                                      // android.telephony.gba.UaSecurityProtocolIdentifier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UaSecurityProtocolIdentifier createFromParcel(Parcel in) {
+                    int org2 = in.readInt();
+                    int protocol = in.readInt();
+                    int cs = in.readInt();
+                    if (org2 < 0 || protocol < 0 || cs < 0) {
+                        return null;
+                    }
+                    Builder builder = new Builder();
+                    if (org2 > 0) {
+                        try {
+                            builder.setOrg(org2);
+                        } catch (IllegalArgumentException e) {
+                            return null;
+                        }
+                    }
+                    if (protocol > 0) {
+                        builder.setProtocol(protocol);
+                    }
+                    if (cs > 0) {
+                        builder.setTlsCipherSuite(cs);
+                    }
+                    return builder.build();
                 }
-            }
-            if (protocol > 0) {
-                builder.setProtocol(protocol);
-            }
-            if (cs > 0) {
-                builder.setTlsCipherSuite(cs);
-            }
-            return builder.build();
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UaSecurityProtocolIdentifier[] newArray(int size) {
-            return new UaSecurityProtocolIdentifier[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UaSecurityProtocolIdentifier[] newArray(int size) {
+                    return new UaSecurityProtocolIdentifier[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OrganizationCode {
-    }
+    public @interface OrganizationCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UaSecurityProtocol3gpp {
-    }
+    public @interface UaSecurityProtocol3gpp {}
 
-    private UaSecurityProtocolIdentifier() {
-    }
+    private UaSecurityProtocolIdentifier() {}
 
     private UaSecurityProtocolIdentifier(UaSecurityProtocolIdentifier sp) {
         this.mOrg = sp.mOrg;
@@ -117,7 +118,11 @@ public final class UaSecurityProtocolIdentifier implements Parcelable {
     }
 
     public String toString() {
-        return "UaSecurityProtocolIdentifier[" + this.mOrg + " , " + (this.mProtocol | this.mTlsCipherSuite) + NavigationBarInflaterView.SIZE_MOD_END;
+        return "UaSecurityProtocolIdentifier["
+                + this.mOrg
+                + " , "
+                + (this.mProtocol | this.mTlsCipherSuite)
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public boolean equals(Object obj) {
@@ -125,11 +130,16 @@ public final class UaSecurityProtocolIdentifier implements Parcelable {
             return false;
         }
         UaSecurityProtocolIdentifier other = (UaSecurityProtocolIdentifier) obj;
-        return this.mOrg == other.mOrg && this.mProtocol == other.mProtocol && this.mTlsCipherSuite == other.mTlsCipherSuite;
+        return this.mOrg == other.mOrg
+                && this.mProtocol == other.mProtocol
+                && this.mTlsCipherSuite == other.mTlsCipherSuite;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mOrg), Integer.valueOf(this.mProtocol), Integer.valueOf(this.mTlsCipherSuite));
+        return Objects.hash(
+                Integer.valueOf(this.mOrg),
+                Integer.valueOf(this.mProtocol),
+                Integer.valueOf(this.mTlsCipherSuite));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -163,7 +173,9 @@ public final class UaSecurityProtocolIdentifier implements Parcelable {
         }
 
         public Builder setProtocol(int protocol) {
-            if (protocol < 0 || ((protocol > 6 && protocol != 256 && protocol != 65536 && protocol != 131072) || this.mSp.mOrg != 1)) {
+            if (protocol < 0
+                    || ((protocol > 6 && protocol != 256 && protocol != 65536 && protocol != 131072)
+                            || this.mSp.mOrg != 1)) {
                 throw new IllegalArgumentException("illegal protocol code");
             }
             this.mSp.mProtocol = protocol;

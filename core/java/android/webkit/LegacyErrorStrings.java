@@ -2,14 +2,14 @@ package android.webkit;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
 class LegacyErrorStrings {
     private static final String LOGTAG = "Http";
 
-    private LegacyErrorStrings() {
-    }
+    private LegacyErrorStrings() {}
 
     static String getString(int errorCode, Context context) {
         return context.getText(getResource(errorCode)).toString();

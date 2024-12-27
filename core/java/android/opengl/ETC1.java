@@ -11,11 +11,13 @@ public class ETC1 {
 
     public static native void decodeBlock(Buffer buffer, Buffer buffer2);
 
-    public static native void decodeImage(Buffer buffer, Buffer buffer2, int i, int i2, int i3, int i4);
+    public static native void decodeImage(
+            Buffer buffer, Buffer buffer2, int i, int i2, int i3, int i4);
 
     public static native void encodeBlock(Buffer buffer, int i, Buffer buffer2);
 
-    public static native void encodeImage(Buffer buffer, int i, int i2, int i3, int i4, Buffer buffer2);
+    public static native void encodeImage(
+            Buffer buffer, int i, int i2, int i3, int i4, Buffer buffer2);
 
     public static native void formatHeader(Buffer buffer, int i, int i2);
 

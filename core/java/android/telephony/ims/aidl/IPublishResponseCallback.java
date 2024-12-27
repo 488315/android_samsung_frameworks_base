@@ -17,12 +17,10 @@ public interface IPublishResponseCallback extends IInterface {
 
     public static class Default implements IPublishResponseCallback {
         @Override // android.telephony.ims.aidl.IPublishResponseCallback
-        public void onCommandError(int code) throws RemoteException {
-        }
+        public void onCommandError(int code) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IPublishResponseCallback
-        public void onNetworkResponse(SipDetails details) throws RemoteException {
-        }
+        public void onNetworkResponse(SipDetails details) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +28,7 @@ public interface IPublishResponseCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPublishResponseCallback {
+    public abstract static class Stub extends Binder implements IPublishResponseCallback {
         static final int TRANSACTION_onCommandError = 1;
         static final int TRANSACTION_onNetworkResponse = 2;
 
@@ -71,7 +69,8 @@ public interface IPublishResponseCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPublishResponseCallback.DESCRIPTOR);
             }

@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.crypto.AsymmetricBlockCipher;
 import com.android.internal.org.bouncycastle.crypto.CipherParameters;
@@ -17,6 +18,7 @@ import com.android.internal.org.bouncycastle.jcajce.provider.util.DigestFactory;
 import com.android.internal.org.bouncycastle.jcajce.util.DefaultJcaJceHelper;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -29,6 +31,7 @@ import java.security.interfaces.RSAPublicKey;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
 import java.security.spec.MGF1ParameterSpec;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -80,9 +83,15 @@ public class CipherSpi extends BaseCipherSpi {
         MGF1ParameterSpec mgfParams = (MGF1ParameterSpec) pSpec.getMGFParameters();
         Digest digest = DigestFactory.getDigest(mgfParams.getDigestAlgorithm());
         if (digest == null) {
-            throw new NoSuchPaddingException("no match on OAEP constructor for digest algorithm: " + mgfParams.getDigestAlgorithm());
+            throw new NoSuchPaddingException(
+                    "no match on OAEP constructor for digest algorithm: "
+                            + mgfParams.getDigestAlgorithm());
         }
-        this.cipher = new OAEPEncoding(new RSABlindedEngine(), digest, ((PSource.PSpecified) pSpec.getPSource()).getValue());
+        this.cipher =
+                new OAEPEncoding(
+                        new RSABlindedEngine(),
+                        digest,
+                        ((PSource.PSpecified) pSpec.getPSource()).getValue());
         this.paramSpec = pSpec;
     }
 
@@ -161,7 +170,12 @@ public class CipherSpi extends BaseCipherSpi {
             return;
         }
         if (pad.equals("OAEPWITHMD5ANDMGF1PADDING")) {
-            initFromSpec(new OAEPParameterSpec(KeyProperties.DIGEST_MD5, "MGF1", new MGF1ParameterSpec(KeyProperties.DIGEST_MD5), PSource.PSpecified.DEFAULT));
+            initFromSpec(
+                    new OAEPParameterSpec(
+                            KeyProperties.DIGEST_MD5,
+                            "MGF1",
+                            new MGF1ParameterSpec(KeyProperties.DIGEST_MD5),
+                            PSource.PSpecified.DEFAULT));
             return;
         }
         if (pad.equals("OAEPPADDING")) {
@@ -172,19 +186,43 @@ public class CipherSpi extends BaseCipherSpi {
             initFromSpec(OAEPParameterSpec.DEFAULT);
             return;
         }
-        if (pad.equals("OAEPWITHSHA224ANDMGF1PADDING") || pad.equals("OAEPWITHSHA-224ANDMGF1PADDING")) {
-            initFromSpec(new OAEPParameterSpec(KeyProperties.DIGEST_SHA224, "MGF1", new MGF1ParameterSpec(KeyProperties.DIGEST_SHA224), PSource.PSpecified.DEFAULT));
+        if (pad.equals("OAEPWITHSHA224ANDMGF1PADDING")
+                || pad.equals("OAEPWITHSHA-224ANDMGF1PADDING")) {
+            initFromSpec(
+                    new OAEPParameterSpec(
+                            KeyProperties.DIGEST_SHA224,
+                            "MGF1",
+                            new MGF1ParameterSpec(KeyProperties.DIGEST_SHA224),
+                            PSource.PSpecified.DEFAULT));
             return;
         }
-        if (pad.equals("OAEPWITHSHA256ANDMGF1PADDING") || pad.equals("OAEPWITHSHA-256ANDMGF1PADDING")) {
-            initFromSpec(new OAEPParameterSpec("SHA-256", "MGF1", MGF1ParameterSpec.SHA256, PSource.PSpecified.DEFAULT));
+        if (pad.equals("OAEPWITHSHA256ANDMGF1PADDING")
+                || pad.equals("OAEPWITHSHA-256ANDMGF1PADDING")) {
+            initFromSpec(
+                    new OAEPParameterSpec(
+                            "SHA-256",
+                            "MGF1",
+                            MGF1ParameterSpec.SHA256,
+                            PSource.PSpecified.DEFAULT));
             return;
         }
-        if (pad.equals("OAEPWITHSHA384ANDMGF1PADDING") || pad.equals("OAEPWITHSHA-384ANDMGF1PADDING")) {
-            initFromSpec(new OAEPParameterSpec(KeyProperties.DIGEST_SHA384, "MGF1", MGF1ParameterSpec.SHA384, PSource.PSpecified.DEFAULT));
+        if (pad.equals("OAEPWITHSHA384ANDMGF1PADDING")
+                || pad.equals("OAEPWITHSHA-384ANDMGF1PADDING")) {
+            initFromSpec(
+                    new OAEPParameterSpec(
+                            KeyProperties.DIGEST_SHA384,
+                            "MGF1",
+                            MGF1ParameterSpec.SHA384,
+                            PSource.PSpecified.DEFAULT));
         } else {
-            if (pad.equals("OAEPWITHSHA512ANDMGF1PADDING") || pad.equals("OAEPWITHSHA-512ANDMGF1PADDING")) {
-                initFromSpec(new OAEPParameterSpec(KeyProperties.DIGEST_SHA512, "MGF1", MGF1ParameterSpec.SHA512, PSource.PSpecified.DEFAULT));
+            if (pad.equals("OAEPWITHSHA512ANDMGF1PADDING")
+                    || pad.equals("OAEPWITHSHA-512ANDMGF1PADDING")) {
+                initFromSpec(
+                        new OAEPParameterSpec(
+                                KeyProperties.DIGEST_SHA512,
+                                "MGF1",
+                                MGF1ParameterSpec.SHA512,
+                                PSource.PSpecified.DEFAULT));
                 return;
             }
             throw new NoSuchPaddingException(padding + " unavailable with RSA.");
@@ -192,7 +230,9 @@ public class CipherSpi extends BaseCipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected void engineInit(int opmode, Key key, AlgorithmParameterSpec params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected void engineInit(
+            int opmode, Key key, AlgorithmParameterSpec params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         CipherParameters param;
         if (params == null || (params instanceof OAEPParameterSpec)) {
             if (key instanceof RSAPublicKey) {
@@ -211,28 +251,39 @@ public class CipherSpi extends BaseCipherSpi {
             if (params != null) {
                 OAEPParameterSpec spec = (OAEPParameterSpec) params;
                 this.paramSpec = params;
-                if (!spec.getMGFAlgorithm().equalsIgnoreCase("MGF1") && !spec.getMGFAlgorithm().equals(PKCSObjectIdentifiers.id_mgf1.getId())) {
-                    throw new InvalidAlgorithmParameterException("unknown mask generation function specified");
+                if (!spec.getMGFAlgorithm().equalsIgnoreCase("MGF1")
+                        && !spec.getMGFAlgorithm().equals(PKCSObjectIdentifiers.id_mgf1.getId())) {
+                    throw new InvalidAlgorithmParameterException(
+                            "unknown mask generation function specified");
                 }
                 if (!(spec.getMGFParameters() instanceof MGF1ParameterSpec)) {
                     throw new InvalidAlgorithmParameterException("unkown MGF parameters");
                 }
                 Digest digest = DigestFactory.getDigest(spec.getDigestAlgorithm());
                 if (digest == null) {
-                    throw new InvalidAlgorithmParameterException("no match on digest algorithm: " + spec.getDigestAlgorithm());
+                    throw new InvalidAlgorithmParameterException(
+                            "no match on digest algorithm: " + spec.getDigestAlgorithm());
                 }
                 MGF1ParameterSpec mgfParams = (MGF1ParameterSpec) spec.getMGFParameters();
                 Digest mgfDigest = DigestFactory.getDigest(mgfParams.getDigestAlgorithm());
                 if (mgfDigest == null) {
-                    throw new InvalidAlgorithmParameterException("no match on MGF digest algorithm: " + mgfParams.getDigestAlgorithm());
+                    throw new InvalidAlgorithmParameterException(
+                            "no match on MGF digest algorithm: " + mgfParams.getDigestAlgorithm());
                 }
-                this.cipher = new OAEPEncoding(new RSABlindedEngine(), digest, mgfDigest, ((PSource.PSpecified) spec.getPSource()).getValue());
+                this.cipher =
+                        new OAEPEncoding(
+                                new RSABlindedEngine(),
+                                digest,
+                                mgfDigest,
+                                ((PSource.PSpecified) spec.getPSource()).getValue());
             }
             if (!(this.cipher instanceof RSABlindedEngine)) {
                 if (random != null) {
                     param = new ParametersWithRandom(param, random);
                 } else {
-                    param = new ParametersWithRandom(param, CryptoServicesRegistrar.getSecureRandom());
+                    param =
+                            new ParametersWithRandom(
+                                    param, CryptoServicesRegistrar.getSecureRandom());
                 }
             }
             this.bOut.reset();
@@ -246,20 +297,24 @@ public class CipherSpi extends BaseCipherSpi {
                     this.cipher.init(false, param);
                     return;
                 default:
-                    throw new InvalidParameterException("unknown opmode " + opmode + " passed to RSA");
+                    throw new InvalidParameterException(
+                            "unknown opmode " + opmode + " passed to RSA");
             }
         }
-        throw new InvalidAlgorithmParameterException("unknown parameter type: " + params.getClass().getName());
+        throw new InvalidAlgorithmParameterException(
+                "unknown parameter type: " + params.getClass().getName());
     }
 
     @Override // javax.crypto.CipherSpi
-    protected void engineInit(int opmode, Key key, AlgorithmParameters params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected void engineInit(int opmode, Key key, AlgorithmParameters params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         AlgorithmParameterSpec paramSpec = null;
         if (params != null) {
             try {
                 paramSpec = params.getParameterSpec(OAEPParameterSpec.class);
             } catch (InvalidParameterSpecException e) {
-                throw new InvalidAlgorithmParameterException("cannot recognise parameters: " + e.toString(), e);
+                throw new InvalidAlgorithmParameterException(
+                        "cannot recognise parameters: " + e.toString(), e);
             }
         }
         this.engineParams = params;
@@ -291,7 +346,8 @@ public class CipherSpi extends BaseCipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected int engineUpdate(byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset) {
+    protected int engineUpdate(
+            byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset) {
         this.bOut.write(input, inputOffset, inputLen);
         if (this.cipher instanceof RSABlindedEngine) {
             if (this.bOut.size() > this.cipher.getInputBlockSize() + 1) {
@@ -306,7 +362,8 @@ public class CipherSpi extends BaseCipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected byte[] engineDoFinal(byte[] input, int inputOffset, int inputLen) throws IllegalBlockSizeException, BadPaddingException {
+    protected byte[] engineDoFinal(byte[] input, int inputOffset, int inputLen)
+            throws IllegalBlockSizeException, BadPaddingException {
         if (input != null) {
             this.bOut.write(input, inputOffset, inputLen);
         }
@@ -321,7 +378,9 @@ public class CipherSpi extends BaseCipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    protected int engineDoFinal(byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset) throws IllegalBlockSizeException, BadPaddingException, ShortBufferException {
+    protected int engineDoFinal(
+            byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset)
+            throws IllegalBlockSizeException, BadPaddingException, ShortBufferException {
         if (engineGetOutputSize(inputLen) + outputOffset > output.length) {
             throw new ShortBufferException("output buffer too short for input.");
         }

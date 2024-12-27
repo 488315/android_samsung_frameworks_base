@@ -110,7 +110,8 @@ public class Holder extends ASN1Object {
         return this.objectDigestInfo;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         if (this.version == 1) {
             ASN1EncodableVector v = new ASN1EncodableVector(3);

@@ -2,6 +2,7 @@ package com.android.server.biometrics.log;
 
 import android.hardware.biometrics.common.OperationContext;
 import android.hardware.biometrics.common.OperationState;
+
 import java.util.concurrent.ConcurrentHashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,15 +22,19 @@ public final class OperationContextExt {
         this.mIsBP = z;
         this.mIsMandatoryBiometrics = z2;
         if (i == 2) {
-            operationContext.operationState = OperationState.fingerprintOperationState(new OperationState.FingerprintOperationState());
+            operationContext.operationState =
+                    OperationState.fingerprintOperationState(
+                            new OperationState.FingerprintOperationState());
         } else if (i == 8) {
-            operationContext.operationState = OperationState.faceOperationState(new OperationState.FaceOperationState());
+            operationContext.operationState =
+                    OperationState.faceOperationState(new OperationState.FaceOperationState());
         }
     }
 
     public final void update(BiometricContext biometricContext, boolean z) {
         OperationContext operationContext = this.mAidlContext;
-        BiometricContextProvider biometricContextProvider = (BiometricContextProvider) biometricContext;
+        BiometricContextProvider biometricContextProvider =
+                (BiometricContextProvider) biometricContext;
         int i = biometricContextProvider.mDisplayState;
         int i2 = 4;
         operationContext.isAod = i == 4;
@@ -56,10 +61,14 @@ public final class OperationContextExt {
         operationContext.isCrypto = z;
         OperationState operationState = operationContext.operationState;
         if (operationState != null && operationState.getTag() == 0) {
-            this.mAidlContext.operationState.getFingerprintOperationState().isHardwareIgnoringTouches = biometricContextProvider.mIsHardwareIgnoringTouches;
+            this.mAidlContext.operationState.getFingerprintOperationState()
+                            .isHardwareIgnoringTouches =
+                    biometricContextProvider.mIsHardwareIgnoringTouches;
         }
         if (this.mIsBP) {
-            BiometricContextSessionInfo biometricContextSessionInfo = (BiometricContextSessionInfo) ((ConcurrentHashMap) biometricContextProvider.mSession).get(2);
+            BiometricContextSessionInfo biometricContextSessionInfo =
+                    (BiometricContextSessionInfo)
+                            ((ConcurrentHashMap) biometricContextProvider.mSession).get(2);
             this.mSessionInfo = biometricContextSessionInfo;
             if (biometricContextSessionInfo != null) {
                 this.mAidlContext.id = biometricContextSessionInfo.mId.getId();
@@ -69,7 +78,9 @@ public final class OperationContextExt {
             operationContext2.id = 0;
             operationContext2.reason = (byte) 0;
         } else {
-            BiometricContextSessionInfo biometricContextSessionInfo2 = (BiometricContextSessionInfo) ((ConcurrentHashMap) biometricContextProvider.mSession).get(1);
+            BiometricContextSessionInfo biometricContextSessionInfo2 =
+                    (BiometricContextSessionInfo)
+                            ((ConcurrentHashMap) biometricContextProvider.mSession).get(1);
             this.mSessionInfo = biometricContextSessionInfo2;
             if (biometricContextSessionInfo2 != null) {
                 this.mAidlContext.id = biometricContextSessionInfo2.mId.getId();
@@ -79,9 +90,11 @@ public final class OperationContextExt {
             operationContext22.id = 0;
             operationContext22.reason = (byte) 0;
         }
-        this.mIsDisplayOn = biometricContextProvider.mWindowManager.getDefaultDisplay().getState() == 2;
+        this.mIsDisplayOn =
+                biometricContextProvider.mWindowManager.getDefaultDisplay().getState() == 2;
         this.mDockState = biometricContextProvider.mDockState;
         this.mFoldState = biometricContextProvider.mFoldState;
-        this.mOrientation = biometricContextProvider.mWindowManager.getDefaultDisplay().getRotation();
+        this.mOrientation =
+                biometricContextProvider.mWindowManager.getDefaultDisplay().getRotation();
     }
 }

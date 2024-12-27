@@ -1,13 +1,14 @@
 package android.graphics;
 
-import android.graphics.ColorSpace;
 import android.hardware.HardwareBuffer;
 import android.hardware.SyncFence;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public class HardwareBufferRenderer implements AutoCloseable {
@@ -27,24 +28,28 @@ public class HardwareBufferRenderer implements AutoCloseable {
     /* JADX INFO: Access modifiers changed from: private */
     public static native long nGetFinalizer();
 
-    static native int nRender(long j, int i, int i2, int i3, long j2, Consumer<RenderResult> consumer);
+    static native int nRender(
+            long j, int i, int i2, int i3, long j2, Consumer<RenderResult> consumer);
 
     private static native void nSetLightAlpha(long j, float f, float f2);
 
     private static native void nSetLightGeometry(long j, float f, float f2, float f3, float f4);
 
     private static class HardwareBufferRendererHolder {
-        public static final NativeAllocationRegistry REGISTRY = NativeAllocationRegistry.createMalloced(HardwareBufferRenderer.class.getClassLoader(), HardwareBufferRenderer.nGetFinalizer());
+        public static final NativeAllocationRegistry REGISTRY =
+                NativeAllocationRegistry.createMalloced(
+                        HardwareBufferRenderer.class.getClassLoader(),
+                        HardwareBufferRenderer.nGetFinalizer());
 
-        private HardwareBufferRendererHolder() {
-        }
+        private HardwareBufferRendererHolder() {}
     }
 
     public HardwareBufferRenderer(HardwareBuffer buffer) {
         RenderNode rootNode = RenderNode.adopt(nCreateRootRenderNode());
         rootNode.setClipToBounds(false);
         this.mProxy = nCreateHardwareBufferRenderer(buffer, rootNode.mNativeRenderNode);
-        this.mCleaner = HardwareBufferRendererHolder.REGISTRY.registerNativeAllocation(this, this.mProxy);
+        this.mCleaner =
+                HardwareBufferRendererHolder.REGISTRY.registerNativeAllocation(this, this.mProxy);
         this.mRenderRequest = new RenderRequest();
         this.mRootNode = rootNode;
         this.mHardwareBuffer = buffer;
@@ -76,7 +81,8 @@ public class HardwareBufferRenderer implements AutoCloseable {
         }
     }
 
-    public void setLightSourceGeometry(float lightX, float lightY, float lightZ, float lightRadius) {
+    public void setLightSourceGeometry(
+            float lightX, float lightY, float lightZ, float lightRadius) {
         validateFinite(lightX, "lightX");
         validateFinite(lightY, "lightY");
         validatePositive(lightZ, "lightZ");
@@ -97,8 +103,7 @@ public class HardwareBufferRenderer implements AutoCloseable {
         private final int mResultStatus;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface RenderResultStatus {
-        }
+        public @interface RenderResultStatus {}
 
         private RenderResult(SyncFence fence, int resultStatus) {
             this.mFence = fence;
@@ -126,17 +131,20 @@ public class HardwareBufferRenderer implements AutoCloseable {
         public void draw(final Executor executor, final Consumer<RenderResult> renderCallback) {
             int renderWidth;
             int renderHeight;
-            Consumer<RenderResult> wrapped = new Consumer() { // from class: android.graphics.HardwareBufferRenderer$RenderRequest$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    executor.execute(new Runnable() { // from class: android.graphics.HardwareBufferRenderer$RenderRequest$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            r1.accept(r2);
+            Consumer<RenderResult> wrapped = new Consumer() { // from class:
+                        // android.graphics.HardwareBufferRenderer$RenderRequest$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            executor.execute(
+                                    new Runnable() { // from class:
+                                        // android.graphics.HardwareBufferRenderer$RenderRequest$$ExternalSyntheticLambda1
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            r1.accept(r2);
+                                        }
+                                    });
                         }
-                    });
-                }
-            };
+                    };
             if (!HardwareBufferRenderer.this.isClosed()) {
                 if (this.mTransform == 4 || this.mTransform == 7) {
                     int renderWidth2 = HardwareBufferRenderer.this.mHardwareBuffer.getHeight();
@@ -147,10 +155,18 @@ public class HardwareBufferRenderer implements AutoCloseable {
                     renderWidth = renderWidth3;
                     renderHeight = HardwareBufferRenderer.this.mHardwareBuffer.getHeight();
                 }
-                HardwareBufferRenderer.nRender(HardwareBufferRenderer.this.mProxy, this.mTransform, renderWidth, renderHeight, this.mColorSpace.getNativeInstance(), wrapped);
+                HardwareBufferRenderer.nRender(
+                        HardwareBufferRenderer.this.mProxy,
+                        this.mTransform,
+                        renderWidth,
+                        renderHeight,
+                        this.mColorSpace.getNativeInstance(),
+                        wrapped);
                 return;
             }
-            throw new IllegalStateException("Attempt to draw with a HardwareBufferRenderer instance that has already been closed");
+            throw new IllegalStateException(
+                    "Attempt to draw with a HardwareBufferRenderer instance that has already been"
+                            + " closed");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -169,12 +185,18 @@ public class HardwareBufferRenderer implements AutoCloseable {
         }
 
         public RenderRequest setBufferTransform(int bufferTransform) {
-            boolean validTransform = bufferTransform == 0 || bufferTransform == 4 || bufferTransform == 3 || bufferTransform == 7;
+            boolean validTransform =
+                    bufferTransform == 0
+                            || bufferTransform == 4
+                            || bufferTransform == 3
+                            || bufferTransform == 7;
             if (validTransform) {
                 this.mTransform = bufferTransform;
                 return this;
             }
-            throw new IllegalArgumentException("Invalid transform provided, must be one ofthe SurfaceControl.BufferTransform values");
+            throw new IllegalArgumentException(
+                    "Invalid transform provided, must be one ofthe SurfaceControl.BufferTransform"
+                            + " values");
         }
     }
 
@@ -184,7 +206,11 @@ public class HardwareBufferRenderer implements AutoCloseable {
 
     private static void validateAlpha(float alpha, String argumentName) {
         if (alpha < 0.0f || alpha > 1.0f) {
-            throw new IllegalArgumentException(argumentName + " must be a valid alpha, " + alpha + " is not in the range of 0.0f to 1.0f");
+            throw new IllegalArgumentException(
+                    argumentName
+                            + " must be a valid alpha, "
+                            + alpha
+                            + " is not in the range of 0.0f to 1.0f");
         }
     }
 
@@ -196,7 +222,8 @@ public class HardwareBufferRenderer implements AutoCloseable {
 
     private static void validatePositive(float f, String argumentName) {
         if (!Float.isFinite(f) || f < 0.0f) {
-            throw new IllegalArgumentException(argumentName + " must be a finite positive, given=" + f);
+            throw new IllegalArgumentException(
+                    argumentName + " must be a finite positive, given=" + f);
         }
     }
 }

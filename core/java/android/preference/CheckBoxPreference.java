@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Checkable;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -15,9 +16,12 @@ public class CheckBoxPreference extends TwoStatePreference {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public CheckBoxPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CheckBoxPreference(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CheckBoxPreference, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.CheckBoxPreference, defStyleAttr, defStyleRes);
         setSummaryOn(a.getString(0));
         setSummaryOff(a.getString(1));
         setDisableDependentsState(a.getBoolean(2, false));

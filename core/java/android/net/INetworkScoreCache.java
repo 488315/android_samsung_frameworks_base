@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -15,12 +16,10 @@ public interface INetworkScoreCache extends IInterface {
 
     public static class Default implements INetworkScoreCache {
         @Override // android.net.INetworkScoreCache
-        public void updateScores(List<ScoredNetwork> networks) throws RemoteException {
-        }
+        public void updateScores(List<ScoredNetwork> networks) throws RemoteException {}
 
         @Override // android.net.INetworkScoreCache
-        public void clearScores() throws RemoteException {
-        }
+        public void clearScores() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +27,7 @@ public interface INetworkScoreCache extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INetworkScoreCache {
+    public abstract static class Stub extends Binder implements INetworkScoreCache {
         public static final String DESCRIPTOR = "android.net.INetworkScoreCache";
         static final int TRANSACTION_clearScores = 2;
         static final int TRANSACTION_updateScores = 1;
@@ -70,7 +69,8 @@ public interface INetworkScoreCache extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

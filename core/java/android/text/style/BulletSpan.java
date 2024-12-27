@@ -93,7 +93,19 @@ public class BulletSpan implements LeadingMarginSpan, ParcelableSpan {
     }
 
     @Override // android.text.style.LeadingMarginSpan
-    public void drawLeadingMargin(Canvas canvas, Paint paint, int x, int dir, int top, int baseline, int bottom, CharSequence text, int start, int end, boolean first, Layout layout) {
+    public void drawLeadingMargin(
+            Canvas canvas,
+            Paint paint,
+            int x,
+            int dir,
+            int top,
+            int baseline,
+            int bottom,
+            CharSequence text,
+            int start,
+            int end,
+            boolean first,
+            Layout layout) {
         int bottom2;
         if (((Spanned) text).getSpanStart(this) == start) {
             Paint.Style style = paint.getStyle();
@@ -120,6 +132,12 @@ public class BulletSpan implements LeadingMarginSpan, ParcelableSpan {
     }
 
     public String toString() {
-        return "BulletSpan{gapWidth=" + getGapWidth() + ", bulletRadius=" + getBulletRadius() + ", color=" + String.format("%08X", Integer.valueOf(getColor())) + '}';
+        return "BulletSpan{gapWidth="
+                + getGapWidth()
+                + ", bulletRadius="
+                + getBulletRadius()
+                + ", color="
+                + String.format("%08X", Integer.valueOf(getColor()))
+                + '}';
     }
 }

@@ -37,7 +37,9 @@ public final class Uptc {
             return false;
         }
         Uptc uptc = (Uptc) obj;
-        return this.userId == uptc.userId && Objects.equals(this.packageName, uptc.packageName) && Objects.equals(this.tag, uptc.tag);
+        return this.userId == uptc.userId
+                && Objects.equals(this.packageName, uptc.packageName)
+                && Objects.equals(this.tag, uptc.tag);
     }
 
     public final int hashCode() {

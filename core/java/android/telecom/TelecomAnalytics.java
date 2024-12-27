@@ -3,42 +3,48 @@ package android.telecom;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class TelecomAnalytics implements Parcelable {
-    public static final Parcelable.Creator<TelecomAnalytics> CREATOR = new Parcelable.Creator<TelecomAnalytics>() { // from class: android.telecom.TelecomAnalytics.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelecomAnalytics createFromParcel(Parcel in) {
-            return new TelecomAnalytics(in);
-        }
+    public static final Parcelable.Creator<TelecomAnalytics> CREATOR =
+            new Parcelable.Creator<
+                    TelecomAnalytics>() { // from class: android.telecom.TelecomAnalytics.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelecomAnalytics createFromParcel(Parcel in) {
+                    return new TelecomAnalytics(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelecomAnalytics[] newArray(int size) {
-            return new TelecomAnalytics[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelecomAnalytics[] newArray(int size) {
+                    return new TelecomAnalytics[size];
+                }
+            };
     private List<ParcelableCallAnalytics> mCallAnalytics;
     private List<SessionTiming> mSessionTimings;
 
     public static final class SessionTiming extends TimedEvent<Integer> implements Parcelable {
-        public static final Parcelable.Creator<SessionTiming> CREATOR = new Parcelable.Creator<SessionTiming>() { // from class: android.telecom.TelecomAnalytics.SessionTiming.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SessionTiming createFromParcel(Parcel in) {
-                return new SessionTiming(in);
-            }
+        public static final Parcelable.Creator<SessionTiming> CREATOR =
+                new Parcelable.Creator<
+                        SessionTiming>() { // from class:
+                                           // android.telecom.TelecomAnalytics.SessionTiming.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SessionTiming createFromParcel(Parcel in) {
+                        return new SessionTiming(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SessionTiming[] newArray(int size) {
-                return new SessionTiming[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SessionTiming[] newArray(int size) {
+                        return new SessionTiming[size];
+                    }
+                };
         public static final int CSW_ADD_CONFERENCE_CALL = 108;
         public static final int CSW_HANDLE_CREATE_CONNECTION_COMPLETE = 100;
         public static final int CSW_REMOVE_CALL = 106;
@@ -92,7 +98,8 @@ public final class TelecomAnalytics implements Parcelable {
         }
     }
 
-    public TelecomAnalytics(List<SessionTiming> sessionTimings, List<ParcelableCallAnalytics> callAnalytics) {
+    public TelecomAnalytics(
+            List<SessionTiming> sessionTimings, List<ParcelableCallAnalytics> callAnalytics) {
         this.mSessionTimings = sessionTimings;
         this.mCallAnalytics = callAnalytics;
     }

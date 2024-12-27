@@ -3,7 +3,7 @@ package android.view.animation;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.animation.Animation;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -68,7 +68,15 @@ public class TranslateAnimation extends Animation {
         this.mToYType = 0;
     }
 
-    public TranslateAnimation(int fromXType, float fromXValue, int toXType, float toXValue, int fromYType, float fromYValue, int toYType, float toYValue) {
+    public TranslateAnimation(
+            int fromXType,
+            float fromXValue,
+            int toXType,
+            float toXValue,
+            int fromYType,
+            float fromYValue,
+            int toYType,
+            float toYValue) {
         this.mFromXType = 0;
         this.mToXType = 0;
         this.mFromYType = 0;
@@ -112,11 +120,13 @@ public class TranslateAnimation extends Animation {
     }
 
     public boolean isXAxisTransition() {
-        return this.mFromXDelta - this.mToXDelta != 0.0f && this.mFromYDelta - this.mToYDelta == 0.0f;
+        return this.mFromXDelta - this.mToXDelta != 0.0f
+                && this.mFromYDelta - this.mToYDelta == 0.0f;
     }
 
     public boolean isFullWidthTranslate() {
-        boolean isXAxisSlideTransition = isSlideInLeft() || isSlideOutRight() || isSlideInRight() || isSlideOutLeft();
+        boolean isXAxisSlideTransition =
+                isSlideInLeft() || isSlideOutRight() || isSlideInRight() || isSlideOutLeft();
         return this.mWidth == this.mParentWidth && isXAxisSlideTransition;
     }
 
@@ -141,10 +151,14 @@ public class TranslateAnimation extends Animation {
     }
 
     private boolean endsXEnclosedWithinParent() {
-        return this.mWidth <= this.mParentWidth && this.mToXDelta + ((float) this.mWidth) <= ((float) this.mParentWidth) && this.mToXDelta >= 0.0f;
+        return this.mWidth <= this.mParentWidth
+                && this.mToXDelta + ((float) this.mWidth) <= ((float) this.mParentWidth)
+                && this.mToXDelta >= 0.0f;
     }
 
     private boolean startsXEnclosedWithinParent() {
-        return this.mWidth <= this.mParentWidth && this.mFromXDelta + ((float) this.mWidth) <= ((float) this.mParentWidth) && this.mFromXDelta >= 0.0f;
+        return this.mWidth <= this.mParentWidth
+                && this.mFromXDelta + ((float) this.mWidth) <= ((float) this.mParentWidth)
+                && this.mFromXDelta >= 0.0f;
     }
 }

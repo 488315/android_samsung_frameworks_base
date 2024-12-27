@@ -4,26 +4,29 @@ import android.hardware.radio.RadioError$$;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class NetworkScanResult implements Parcelable {
-    public static final Parcelable.Creator<NetworkScanResult> CREATOR = new Parcelable.Creator<NetworkScanResult>() { // from class: android.hardware.radio.network.NetworkScanResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkScanResult createFromParcel(Parcel _aidl_source) {
-            NetworkScanResult _aidl_out = new NetworkScanResult();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<NetworkScanResult> CREATOR =
+            new Parcelable.Creator<NetworkScanResult>() { // from class:
+                // android.hardware.radio.network.NetworkScanResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkScanResult createFromParcel(Parcel _aidl_source) {
+                    NetworkScanResult _aidl_out = new NetworkScanResult();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkScanResult[] newArray(int _aidl_size) {
-            return new NetworkScanResult[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkScanResult[] newArray(int _aidl_size) {
+                    return new NetworkScanResult[_aidl_size];
+                }
+            };
     public static final int SCAN_STATUS_COMPLETE = 2;
     public static final int SCAN_STATUS_PARTIAL = 1;
     public int error;

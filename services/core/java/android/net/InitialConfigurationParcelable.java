@@ -7,6 +7,7 @@ import android.hardware.broadcastradio.DabTableEntry$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
@@ -24,7 +25,8 @@ public class InitialConfigurationParcelable implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            InitialConfigurationParcelable initialConfigurationParcelable = new InitialConfigurationParcelable();
+            InitialConfigurationParcelable initialConfigurationParcelable =
+                    new InitialConfigurationParcelable();
             initialConfigurationParcelable.readFromParcel(parcel);
             return initialConfigurationParcelable;
         }
@@ -67,13 +69,15 @@ public class InitialConfigurationParcelable implements Parcelable {
             if (parcel.dataPosition() - dataPosition < readInt) {
                 this.ipAddresses = (LinkAddress[]) parcel.createTypedArray(LinkAddress.CREATOR);
                 if (parcel.dataPosition() - dataPosition < readInt) {
-                    this.directlyConnectedRoutes = (IpPrefix[]) parcel.createTypedArray(IpPrefix.CREATOR);
+                    this.directlyConnectedRoutes =
+                            (IpPrefix[]) parcel.createTypedArray(IpPrefix.CREATOR);
                     if (parcel.dataPosition() - dataPosition < readInt) {
                         this.dnsServers = parcel.createStringArray();
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             this.gateway = parcel.readString();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                             parcel.setDataPosition(dataPosition + readInt);
                             return;
@@ -102,7 +106,25 @@ public class InitialConfigurationParcelable implements Parcelable {
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, DabTableEntry$$ExternalSyntheticOutline0.m(this.gateway, "InitialConfigurationParcelable", AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.dnsServers), "gateway: ", AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.directlyConnectedRoutes), "dnsServers: ", AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.ipAddresses), "directlyConnectedRoutes: ", new StringBuilder("ipAddresses: "), stringJoiner), stringJoiner), stringJoiner), stringJoiner));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                DabTableEntry$$ExternalSyntheticOutline0.m(
+                        this.gateway,
+                        "InitialConfigurationParcelable",
+                        AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                                Arrays.toString(this.dnsServers),
+                                "gateway: ",
+                                AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                                        Arrays.toString(this.directlyConnectedRoutes),
+                                        "dnsServers: ",
+                                        AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                                                Arrays.toString(this.ipAddresses),
+                                                "directlyConnectedRoutes: ",
+                                                new StringBuilder("ipAddresses: "),
+                                                stringJoiner),
+                                        stringJoiner),
+                                stringJoiner),
+                        stringJoiner));
     }
 
     @Override // android.os.Parcelable
@@ -115,6 +137,7 @@ public class InitialConfigurationParcelable implements Parcelable {
         parcel.writeString(this.gateway);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

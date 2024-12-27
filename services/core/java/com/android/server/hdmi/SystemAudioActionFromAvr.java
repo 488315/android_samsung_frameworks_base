@@ -14,7 +14,13 @@ public final class SystemAudioActionFromAvr extends SystemAudioAction {
             return;
         }
         if (hdmiCecLocalDeviceTv.mService.isProhibitMode()) {
-            this.mService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), this.mAvrLogicalAddress, 0, new byte[]{(byte) 114, (byte) 4}), null);
+            this.mService.sendCecCommand(
+                    HdmiCecMessage.build(
+                            getSourceAddress(),
+                            this.mAvrLogicalAddress,
+                            0,
+                            new byte[] {(byte) 114, (byte) 4}),
+                    null);
             this.mTargetAudioStatus = false;
             sendSystemAudioModeRequest();
             return;

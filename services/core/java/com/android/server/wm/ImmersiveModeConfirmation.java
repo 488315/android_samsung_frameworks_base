@@ -35,6 +35,7 @@ import android.view.animation.Interpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+
 import com.android.server.SystemUpdateManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
@@ -70,9 +71,18 @@ public final class ImmersiveModeConfirmation {
                     if (!ImmersiveModeConfirmation.sConfirmed) {
                         ImmersiveModeConfirmation.sConfirmed = true;
                         try {
-                            Settings.Secure.putStringForUser(((ImmersiveModeConfirmation) this.this$0).mContext.getContentResolver(), "immersive_mode_confirmations", "confirmed", -2);
+                            Settings.Secure.putStringForUser(
+                                    ((ImmersiveModeConfirmation) this.this$0)
+                                            .mContext.getContentResolver(),
+                                    "immersive_mode_confirmations",
+                                    "confirmed",
+                                    -2);
                         } catch (Throwable th) {
-                            Slog.w("ImmersiveModeConfirmation", "Error saving confirmations, sConfirmed=" + ImmersiveModeConfirmation.sConfirmed, th);
+                            Slog.w(
+                                    "ImmersiveModeConfirmation",
+                                    "Error saving confirmations, sConfirmed="
+                                            + ImmersiveModeConfirmation.sConfirmed,
+                                    th);
                         }
                     }
                     ((ImmersiveModeConfirmation) this.this$0).handleHide();
@@ -82,9 +92,19 @@ public final class ImmersiveModeConfirmation {
                     if (viewGroup != null && viewGroup.getParent() != null) {
                         ClingWindowView clingWindowView = (ClingWindowView) this.this$0;
                         ViewGroup viewGroup2 = clingWindowView.mClingLayout;
-                        ImmersiveModeConfirmation immersiveModeConfirmation = ImmersiveModeConfirmation.this;
+                        ImmersiveModeConfirmation immersiveModeConfirmation =
+                                ImmersiveModeConfirmation.this;
                         immersiveModeConfirmation.getClass();
-                        viewGroup2.setLayoutParams(new FrameLayout.LayoutParams(immersiveModeConfirmation.mContext.getResources().getDimensionPixelSize(R.dimen.keyguard_avatar_frame_shadow_radius), -2, 49));
+                        viewGroup2.setLayoutParams(
+                                new FrameLayout.LayoutParams(
+                                        immersiveModeConfirmation
+                                                .mContext
+                                                .getResources()
+                                                .getDimensionPixelSize(
+                                                        R.dimen
+                                                                .keyguard_avatar_frame_shadow_radius),
+                                        -2,
+                                        49));
                         break;
                     }
                     break;
@@ -110,48 +130,76 @@ public final class ImmersiveModeConfirmation {
             ColorDrawable colorDrawable = new ColorDrawable(0);
             this.mColor = colorDrawable;
             this.mUpdateLayoutRunnable = new AnonymousClass1(1, this);
-            this.mInsetsListener = new ViewTreeObserver.OnComputeInternalInsetsListener() { // from class: com.android.server.wm.ImmersiveModeConfirmation.ClingWindowView.2
-                public final int[] mTmpInt2 = new int[2];
+            this.mInsetsListener =
+                    new ViewTreeObserver
+                            .OnComputeInternalInsetsListener() { // from class:
+                                                                 // com.android.server.wm.ImmersiveModeConfirmation.ClingWindowView.2
+                        public final int[] mTmpInt2 = new int[2];
 
-                public final void onComputeInternalInsets(ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
-                    ClingWindowView.this.mClingLayout.getLocationInWindow(this.mTmpInt2);
-                    internalInsetsInfo.setTouchableInsets(3);
-                    Region region = internalInsetsInfo.touchableRegion;
-                    int[] iArr = this.mTmpInt2;
-                    int i = iArr[0];
-                    region.set(i, iArr[1], ClingWindowView.this.mClingLayout.getWidth() + i, ClingWindowView.this.mClingLayout.getHeight() + this.mTmpInt2[1]);
-                }
-            };
-            this.mReceiver = new BroadcastReceiver() { // from class: com.android.server.wm.ImmersiveModeConfirmation.ClingWindowView.3
-                @Override // android.content.BroadcastReceiver
-                public final void onReceive(Context context2, Intent intent) {
-                    if (intent.getAction().equals("android.intent.action.CONFIGURATION_CHANGED")) {
-                        ClingWindowView clingWindowView = ClingWindowView.this;
-                        clingWindowView.post(clingWindowView.mUpdateLayoutRunnable);
-                    }
-                }
-            };
+                        public final void onComputeInternalInsets(
+                                ViewTreeObserver.InternalInsetsInfo internalInsetsInfo) {
+                            ClingWindowView.this.mClingLayout.getLocationInWindow(this.mTmpInt2);
+                            internalInsetsInfo.setTouchableInsets(3);
+                            Region region = internalInsetsInfo.touchableRegion;
+                            int[] iArr = this.mTmpInt2;
+                            int i = iArr[0];
+                            region.set(
+                                    i,
+                                    iArr[1],
+                                    ClingWindowView.this.mClingLayout.getWidth() + i,
+                                    ClingWindowView.this.mClingLayout.getHeight()
+                                            + this.mTmpInt2[1]);
+                        }
+                    };
+            this.mReceiver =
+                    new BroadcastReceiver() { // from class:
+                                              // com.android.server.wm.ImmersiveModeConfirmation.ClingWindowView.3
+                        @Override // android.content.BroadcastReceiver
+                        public final void onReceive(Context context2, Intent intent) {
+                            if (intent.getAction()
+                                    .equals("android.intent.action.CONFIGURATION_CHANGED")) {
+                                ClingWindowView clingWindowView = ClingWindowView.this;
+                                clingWindowView.post(clingWindowView.mUpdateLayoutRunnable);
+                            }
+                        }
+                    };
             this.mConfirm = runnable;
             setBackground(colorDrawable);
             setImportantForAccessibility(2);
-            this.mInterpolator = AnimationUtils.loadInterpolator(((FrameLayout) this).mContext, R.interpolator.linear_out_slow_in);
+            this.mInterpolator =
+                    AnimationUtils.loadInterpolator(
+                            ((FrameLayout) this).mContext, R.interpolator.linear_out_slow_in);
         }
 
         @Override // android.view.View
         public final WindowInsets onApplyWindowInsets(WindowInsets windowInsets) {
             View findViewById;
             int width = getWidth();
-            int dimensionPixelSize = ImmersiveModeConfirmation.this.mContext.getResources().getDimensionPixelSize(R.dimen.keyguard_avatar_frame_shadow_radius);
-            Rect boundingRectTop = windowInsets.getDisplayCutout() != null ? windowInsets.getDisplayCutout().getBoundingRectTop() : new Rect();
+            int dimensionPixelSize =
+                    ImmersiveModeConfirmation.this
+                            .mContext
+                            .getResources()
+                            .getDimensionPixelSize(R.dimen.keyguard_avatar_frame_shadow_radius);
+            Rect boundingRectTop =
+                    windowInsets.getDisplayCutout() != null
+                            ? windowInsets.getDisplayCutout().getBoundingRectTop()
+                            : new Rect();
             int i = dimensionPixelSize / 2;
-            boolean intersects = boundingRectTop.intersects(width - i, 0, i + width, boundingRectTop.bottom);
+            boolean intersects =
+                    boundingRectTop.intersects(width - i, 0, i + width, boundingRectTop.bottom);
             ClingWindowView clingWindowView = ImmersiveModeConfirmation.this.mClingWindow;
-            if (clingWindowView != null && ((dimensionPixelSize < 0 || (width > 0 && intersects)) && (findViewById = clingWindowView.findViewById(R.id.insertion_handle)) != null)) {
-                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) findViewById.getLayoutParams();
+            if (clingWindowView != null
+                    && ((dimensionPixelSize < 0 || (width > 0 && intersects))
+                            && (findViewById = clingWindowView.findViewById(R.id.insertion_handle))
+                                    != null)) {
+                RelativeLayout.LayoutParams layoutParams =
+                        (RelativeLayout.LayoutParams) findViewById.getLayoutParams();
                 layoutParams.topMargin = boundingRectTop.bottom;
                 findViewById.setLayoutParams(layoutParams);
             }
-            return new WindowInsets.Builder(windowInsets).setInsets(WindowInsets.Type.systemBars(), Insets.NONE).build();
+            return new WindowInsets.Builder(windowInsets)
+                    .setInsets(WindowInsets.Type.systemBars(), Insets.NONE)
+                    .build();
         }
 
         @Override // android.view.ViewGroup, android.view.View
@@ -161,43 +209,81 @@ public final class ImmersiveModeConfirmation {
             ((FrameLayout) this).mContext.getDisplay().getMetrics(displayMetrics);
             float f = displayMetrics.density;
             getViewTreeObserver().addOnComputeInternalInsetsListener(this.mInsetsListener);
-            ViewGroup viewGroup = (ViewGroup) View.inflate(getContext(), R.layout.language_picker_section_header, null);
+            ViewGroup viewGroup =
+                    (ViewGroup)
+                            View.inflate(
+                                    getContext(), R.layout.language_picker_section_header, null);
             this.mClingLayout = viewGroup;
-            ((Button) viewGroup.findViewById(R.id.qwertz)).setOnClickListener(new View.OnClickListener() { // from class: com.android.server.wm.ImmersiveModeConfirmation.ClingWindowView.4
-                @Override // android.view.View.OnClickListener
-                public final void onClick(View view) {
-                    ClingWindowView.this.mConfirm.run();
-                }
-            });
+            ((Button) viewGroup.findViewById(R.id.qwertz))
+                    .setOnClickListener(
+                            new View
+                                    .OnClickListener() { // from class:
+                                                         // com.android.server.wm.ImmersiveModeConfirmation.ClingWindowView.4
+                                @Override // android.view.View.OnClickListener
+                                public final void onClick(View view) {
+                                    ClingWindowView.this.mConfirm.run();
+                                }
+                            });
             ViewGroup viewGroup2 = this.mClingLayout;
             ImmersiveModeConfirmation immersiveModeConfirmation = ImmersiveModeConfirmation.this;
             immersiveModeConfirmation.getClass();
-            addView(viewGroup2, new FrameLayout.LayoutParams(immersiveModeConfirmation.mContext.getResources().getDimensionPixelSize(R.dimen.keyguard_avatar_frame_shadow_radius), -2, 49));
+            addView(
+                    viewGroup2,
+                    new FrameLayout.LayoutParams(
+                            immersiveModeConfirmation
+                                    .mContext
+                                    .getResources()
+                                    .getDimensionPixelSize(
+                                            R.dimen.keyguard_avatar_frame_shadow_radius),
+                            -2,
+                            49));
             if (ActivityManager.isHighEndGfx()) {
                 final ViewGroup viewGroup3 = this.mClingLayout;
                 viewGroup3.setAlpha(FullScreenMagnificationGestureHandler.MAX_SCALE);
                 viewGroup3.setTranslationY(f * (-96.0f));
-                postOnAnimation(new Runnable() { // from class: com.android.server.wm.ImmersiveModeConfirmation.ClingWindowView.5
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        viewGroup3.animate().alpha(1.0f).translationY(FullScreenMagnificationGestureHandler.MAX_SCALE).setDuration(250L).setInterpolator(ClingWindowView.this.mInterpolator).withLayer().start();
-                        ClingWindowView.this.mColorAnim = ValueAnimator.ofObject(new ArgbEvaluator(), 0, Integer.MIN_VALUE);
-                        ClingWindowView.this.mColorAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.android.server.wm.ImmersiveModeConfirmation.ClingWindowView.5.1
-                            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                                ClingWindowView.this.mColor.setColor(((Integer) valueAnimator.getAnimatedValue()).intValue());
+                postOnAnimation(
+                        new Runnable() { // from class:
+                                         // com.android.server.wm.ImmersiveModeConfirmation.ClingWindowView.5
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                viewGroup3
+                                        .animate()
+                                        .alpha(1.0f)
+                                        .translationY(
+                                                FullScreenMagnificationGestureHandler.MAX_SCALE)
+                                        .setDuration(250L)
+                                        .setInterpolator(ClingWindowView.this.mInterpolator)
+                                        .withLayer()
+                                        .start();
+                                ClingWindowView.this.mColorAnim =
+                                        ValueAnimator.ofObject(
+                                                new ArgbEvaluator(), 0, Integer.MIN_VALUE);
+                                ClingWindowView.this.mColorAnim.addUpdateListener(
+                                        new ValueAnimator
+                                                .AnimatorUpdateListener() { // from class:
+                                                                            // com.android.server.wm.ImmersiveModeConfirmation.ClingWindowView.5.1
+                                            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                                            public final void onAnimationUpdate(
+                                                    ValueAnimator valueAnimator) {
+                                                ClingWindowView.this.mColor.setColor(
+                                                        ((Integer) valueAnimator.getAnimatedValue())
+                                                                .intValue());
+                                            }
+                                        });
+                                ClingWindowView.this.mColorAnim.setDuration(250L);
+                                ClingWindowView clingWindowView = ClingWindowView.this;
+                                clingWindowView.mColorAnim.setInterpolator(
+                                        clingWindowView.mInterpolator);
+                                ClingWindowView.this.mColorAnim.start();
                             }
                         });
-                        ClingWindowView.this.mColorAnim.setDuration(250L);
-                        ClingWindowView clingWindowView = ClingWindowView.this;
-                        clingWindowView.mColorAnim.setInterpolator(clingWindowView.mInterpolator);
-                        ClingWindowView.this.mColorAnim.start();
-                    }
-                });
             } else {
                 this.mColor.setColor(Integer.MIN_VALUE);
             }
-            ((FrameLayout) this).mContext.registerReceiver(this.mReceiver, new IntentFilter("android.intent.action.CONFIGURATION_CHANGED"));
+            ((FrameLayout) this)
+                    .mContext.registerReceiver(
+                            this.mReceiver,
+                            new IntentFilter("android.intent.action.CONFIGURATION_CHANGED"));
         }
 
         @Override // android.view.ViewGroup, android.view.View
@@ -239,9 +325,14 @@ public final class ImmersiveModeConfirmation {
                     immersiveModeConfirmation.handleHide();
                 }
             }
-            immersiveModeConfirmation.mClingWindow = immersiveModeConfirmation.new ClingWindowView(immersiveModeConfirmation.mContext, immersiveModeConfirmation.mConfirm);
-            WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-1, -1, 2017, 16777504, -3);
-            layoutParams.setFitInsetsTypes(layoutParams.getFitInsetsTypes() & (~WindowInsets.Type.statusBars()));
+            immersiveModeConfirmation.mClingWindow =
+                    immersiveModeConfirmation
+                    .new ClingWindowView(
+                            immersiveModeConfirmation.mContext, immersiveModeConfirmation.mConfirm);
+            WindowManager.LayoutParams layoutParams =
+                    new WindowManager.LayoutParams(-1, -1, 2017, 16777504, -3);
+            layoutParams.setFitInsetsTypes(
+                    layoutParams.getFitInsetsTypes() & (~WindowInsets.Type.statusBars()));
             layoutParams.layoutInDisplayCutoutMode = 3;
             layoutParams.privateFlags |= 537002000;
             layoutParams.setTitle("ImmersiveModeConfirmation");
@@ -249,15 +340,27 @@ public final class ImmersiveModeConfirmation {
             layoutParams.token = immersiveModeConfirmation.mWindowToken;
             try {
                 if (immersiveModeConfirmation.mWindowManager != null) {
-                    throw new IllegalStateException("Must not create a new WindowManager while there is an existing one");
+                    throw new IllegalStateException(
+                            "Must not create a new WindowManager while there is an existing one");
                 }
-                Bundle m = i2 == -1 ? null : SystemUpdateManagerService$$ExternalSyntheticOutline0.m(i2, "root_display_area_id");
+                Bundle m =
+                        i2 == -1
+                                ? null
+                                : SystemUpdateManagerService$$ExternalSyntheticOutline0.m(
+                                        i2, "root_display_area_id");
                 immersiveModeConfirmation.mWindowContextRootDisplayAreaId = i2;
-                WindowManager windowManager = (WindowManager) immersiveModeConfirmation.mContext.createWindowContext(2017, m).getSystemService(WindowManager.class);
+                WindowManager windowManager =
+                        (WindowManager)
+                                immersiveModeConfirmation
+                                        .mContext
+                                        .createWindowContext(2017, m)
+                                        .getSystemService(WindowManager.class);
                 immersiveModeConfirmation.mWindowManager = windowManager;
                 windowManager.addView(immersiveModeConfirmation.mClingWindow, layoutParams);
             } catch (WindowManager.InvalidDisplayException e) {
-                Slog.w("ImmersiveModeConfirmation", "Fail to show the immersive confirmation window because of " + e);
+                Slog.w(
+                        "ImmersiveModeConfirmation",
+                        "Fail to show the immersive confirmation window because of " + e);
             }
         }
     }
@@ -265,10 +368,14 @@ public final class ImmersiveModeConfirmation {
     public ImmersiveModeConfirmation(Context context, Looper looper, boolean z) {
         Display display = context.getDisplay();
         Context systemUiContext = ActivityThread.currentActivityThread().getSystemUiContext();
-        this.mContext = display.getDisplayId() != 0 ? systemUiContext.createDisplayContext(display) : systemUiContext;
+        this.mContext =
+                display.getDisplayId() != 0
+                        ? systemUiContext.createDisplayContext(display)
+                        : systemUiContext;
         this.mHandler = new H(looper);
         context.getResources().getInteger(17695145);
-        this.mPanicThresholdMs = context.getResources().getInteger(R.integer.config_maxShortcutTargetsPerApp);
+        this.mPanicThresholdMs =
+                context.getResources().getInteger(R.integer.config_maxShortcutTargetsPerApp);
     }
 
     public static boolean loadSetting(Context context) {
@@ -276,7 +383,9 @@ public final class ImmersiveModeConfirmation {
         sConfirmed = false;
         String str = null;
         try {
-            str = Settings.Secure.getStringForUser(context.getContentResolver(), "immersive_mode_confirmations", -2);
+            str =
+                    Settings.Secure.getStringForUser(
+                            context.getContentResolver(), "immersive_mode_confirmations", -2);
             sConfirmed = "confirmed".equals(str);
         } catch (Throwable th) {
             Slog.w("ImmersiveModeConfirmation", "Error loading confirmations, value=" + str, th);
@@ -292,7 +401,9 @@ public final class ImmersiveModeConfirmation {
                 try {
                     windowManager.removeView(clingWindowView);
                 } catch (WindowManager.InvalidDisplayException e) {
-                    Slog.w("ImmersiveModeConfirmation", "Fail to hide the immersive confirmation window because of " + e);
+                    Slog.w(
+                            "ImmersiveModeConfirmation",
+                            "Fail to hide the immersive confirmation window because of " + e);
                 }
                 this.mWindowManager = null;
             }

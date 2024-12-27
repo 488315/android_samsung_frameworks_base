@@ -11,7 +11,8 @@ import android.telecom.VideoProfile;
 public interface IImsVideoCallCallback extends IInterface {
     void changeCallDataUsage(long j) throws RemoteException;
 
-    void changeCameraCapabilities(VideoProfile.CameraCapabilities cameraCapabilities) throws RemoteException;
+    void changeCameraCapabilities(VideoProfile.CameraCapabilities cameraCapabilities)
+            throws RemoteException;
 
     void changePeerDimensions(int i, int i2) throws RemoteException;
 
@@ -21,36 +22,33 @@ public interface IImsVideoCallCallback extends IInterface {
 
     void receiveSessionModifyRequest(VideoProfile videoProfile) throws RemoteException;
 
-    void receiveSessionModifyResponse(int i, VideoProfile videoProfile, VideoProfile videoProfile2) throws RemoteException;
+    void receiveSessionModifyResponse(int i, VideoProfile videoProfile, VideoProfile videoProfile2)
+            throws RemoteException;
 
     public static class Default implements IImsVideoCallCallback {
         @Override // com.android.ims.internal.IImsVideoCallCallback
-        public void receiveSessionModifyRequest(VideoProfile videoProfile) throws RemoteException {
-        }
+        public void receiveSessionModifyRequest(VideoProfile videoProfile) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallCallback
-        public void receiveSessionModifyResponse(int status, VideoProfile requestedProfile, VideoProfile responseProfile) throws RemoteException {
-        }
+        public void receiveSessionModifyResponse(
+                int status, VideoProfile requestedProfile, VideoProfile responseProfile)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallCallback
-        public void handleCallSessionEvent(int event) throws RemoteException {
-        }
+        public void handleCallSessionEvent(int event) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallCallback
-        public void changePeerDimensions(int width, int height) throws RemoteException {
-        }
+        public void changePeerDimensions(int width, int height) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallCallback
-        public void changeCallDataUsage(long dataUsage) throws RemoteException {
-        }
+        public void changeCallDataUsage(long dataUsage) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallCallback
-        public void changeCameraCapabilities(VideoProfile.CameraCapabilities cameraCapabilities) throws RemoteException {
-        }
+        public void changeCameraCapabilities(VideoProfile.CameraCapabilities cameraCapabilities)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallCallback
-        public void changeVideoQuality(int videoQuality) throws RemoteException {
-        }
+        public void changeVideoQuality(int videoQuality) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -58,7 +56,7 @@ public interface IImsVideoCallCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsVideoCallCallback {
+    public abstract static class Stub extends Binder implements IImsVideoCallCallback {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsVideoCallCallback";
         static final int TRANSACTION_changeCallDataUsage = 5;
         static final int TRANSACTION_changeCameraCapabilities = 6;
@@ -115,7 +113,8 @@ public interface IImsVideoCallCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -153,7 +152,9 @@ public interface IImsVideoCallCallback extends IInterface {
                     changeCallDataUsage(_arg05);
                     return true;
                 case 6:
-                    VideoProfile.CameraCapabilities _arg06 = (VideoProfile.CameraCapabilities) data.readTypedObject(VideoProfile.CameraCapabilities.CREATOR);
+                    VideoProfile.CameraCapabilities _arg06 =
+                            (VideoProfile.CameraCapabilities)
+                                    data.readTypedObject(VideoProfile.CameraCapabilities.CREATOR);
                     data.enforceNoDataAvail();
                     changeCameraCapabilities(_arg06);
                     return true;
@@ -184,7 +185,8 @@ public interface IImsVideoCallCallback extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsVideoCallCallback
-            public void receiveSessionModifyRequest(VideoProfile videoProfile) throws RemoteException {
+            public void receiveSessionModifyRequest(VideoProfile videoProfile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -196,7 +198,9 @@ public interface IImsVideoCallCallback extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsVideoCallCallback
-            public void receiveSessionModifyResponse(int status, VideoProfile requestedProfile, VideoProfile responseProfile) throws RemoteException {
+            public void receiveSessionModifyResponse(
+                    int status, VideoProfile requestedProfile, VideoProfile responseProfile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -247,7 +251,8 @@ public interface IImsVideoCallCallback extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsVideoCallCallback
-            public void changeCameraCapabilities(VideoProfile.CameraCapabilities cameraCapabilities) throws RemoteException {
+            public void changeCameraCapabilities(VideoProfile.CameraCapabilities cameraCapabilities)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -3,25 +3,30 @@ package android.media.tv;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public final class SignalingDataResponse extends BroadcastInfoResponse implements Parcelable {
-    public static final Parcelable.Creator<SignalingDataResponse> CREATOR = new Parcelable.Creator<SignalingDataResponse>() { // from class: android.media.tv.SignalingDataResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalingDataResponse[] newArray(int size) {
-            return new SignalingDataResponse[size];
-        }
+    public static final Parcelable.Creator<SignalingDataResponse> CREATOR =
+            new Parcelable.Creator<
+                    SignalingDataResponse>() { // from class:
+                                               // android.media.tv.SignalingDataResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalingDataResponse[] newArray(int size) {
+                    return new SignalingDataResponse[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SignalingDataResponse createFromParcel(Parcel in) {
-            return new SignalingDataResponse(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SignalingDataResponse createFromParcel(Parcel in) {
+                    return new SignalingDataResponse(in);
+                }
+            };
     private static final int RESPONSE_TYPE = 9;
     private final List<SignalingDataInfo> mSignalingDataInfoList;
     private final List<String> mSignalingDataTypes;
@@ -30,12 +35,21 @@ public final class SignalingDataResponse extends BroadcastInfoResponse implement
         return new SignalingDataResponse(in);
     }
 
-    public SignalingDataResponse(int requestId, int sequence, int responseResult, List<String> signalingDataTypes, List<SignalingDataInfo> signalingDataInfoList) {
+    public SignalingDataResponse(
+            int requestId,
+            int sequence,
+            int responseResult,
+            List<String> signalingDataTypes,
+            List<SignalingDataInfo> signalingDataInfoList) {
         super(9, requestId, sequence, responseResult);
         this.mSignalingDataTypes = signalingDataTypes;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataTypes);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataTypes);
         this.mSignalingDataInfoList = signalingDataInfoList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataInfoList);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mSignalingDataInfoList);
     }
 
     public List<String> getSignalingDataTypes() {
@@ -65,8 +79,12 @@ public final class SignalingDataResponse extends BroadcastInfoResponse implement
         ArrayList arrayList = new ArrayList();
         in.readParcelableList(arrayList, SignalingDataInfo.class.getClassLoader());
         this.mSignalingDataTypes = types;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataTypes);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataTypes);
         this.mSignalingDataInfoList = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSignalingDataInfoList);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mSignalingDataInfoList);
     }
 }

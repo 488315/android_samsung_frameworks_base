@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class ResultNamespaceParcel implements Parcelable {
-    public static final Parcelable.Creator<ResultNamespaceParcel> CREATOR = new Parcelable.Creator<ResultNamespaceParcel>() { // from class: android.security.identity.ResultNamespaceParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResultNamespaceParcel createFromParcel(Parcel _aidl_source) {
-            ResultNamespaceParcel _aidl_out = new ResultNamespaceParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ResultNamespaceParcel> CREATOR =
+            new Parcelable.Creator<
+                    ResultNamespaceParcel>() { // from class:
+                                               // android.security.identity.ResultNamespaceParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResultNamespaceParcel createFromParcel(Parcel _aidl_source) {
+                    ResultNamespaceParcel _aidl_out = new ResultNamespaceParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResultNamespaceParcel[] newArray(int _aidl_size) {
-            return new ResultNamespaceParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResultNamespaceParcel[] newArray(int _aidl_size) {
+                    return new ResultNamespaceParcel[_aidl_size];
+                }
+            };
     public ResultEntryParcel[] entries;
     public String namespaceName;
 
@@ -57,7 +60,9 @@ public class ResultNamespaceParcel implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.entries = (ResultEntryParcel[]) _aidl_parcel.createTypedArray(ResultEntryParcel.CREATOR);
+                this.entries =
+                        (ResultEntryParcel[])
+                                _aidl_parcel.createTypedArray(ResultEntryParcel.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

@@ -11,6 +11,7 @@ import android.os.Message;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.sec.android.sdhms.ISamsungDeviceHealthManager;
 
 /* loaded from: classes6.dex */
@@ -38,23 +39,25 @@ public class SemPerfManager {
     public static final String VALUE_GAME_TOUCH_BOOSTER_LOW = "low_game_touch_booster";
     public static final String VALUE_GAME_TOUCH_BOOSTER_MID = "mid_game_touch_booster";
     public static final String VALUE_GAME_TOUCH_BOOSTER_OFF = "off_game_touch_booster";
-    static boolean sIsDebugLevelHigh = "0x4948".equals(SystemProperties.get("ro.debug_level", "0x4f4c"));
+    static boolean sIsDebugLevelHigh =
+            "0x4948".equals(SystemProperties.get("ro.debug_level", "0x4f4c"));
     static String BOARD_PLATFORM = SystemProperties.get("ro.board.platform");
     static final String DEVICE_TYPE = SystemProperties.get("ro.build.characteristics");
-    private static Handler mCommandHandler = new Handler(Looper.getMainLooper()) { // from class: com.samsung.android.os.SemPerfManager.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            Bundle bundle = msg.getData();
-            String type = bundle.getString("type");
-            String value = bundle.getString("value");
-            SemPerfManager.sendCommand(type, value);
-        }
-    };
+    private static Handler mCommandHandler =
+            new Handler(
+                    Looper.getMainLooper()) { // from class: com.samsung.android.os.SemPerfManager.1
+                @Override // android.os.Handler
+                public void handleMessage(Message msg) {
+                    Bundle bundle = msg.getData();
+                    String type = bundle.getString("type");
+                    String value = bundle.getString("value");
+                    SemPerfManager.sendCommand(type, value);
+                }
+            };
     static volatile ICustomFrequencyManager sCfmsService = null;
     static volatile ISamsungDeviceHealthManager sdhmservice = null;
 
-    protected SemPerfManager() {
-    }
+    protected SemPerfManager() {}
 
     public static void onScrollEvent(boolean isScroll) {
         sendCommandToSsrm(COMMAND_SCROLL, isScroll ? "TRUE" : "FALSE");
@@ -83,8 +86,18 @@ public class SemPerfManager {
             if (sCfmsService == null || sdhmservice == null) {
                 initService();
             }
-            if (!COMMAND_SCROLL.equals(type) && !"SMOOTH_SCROLL".equals(type) && !"GESTURE_DETECTED".equals(type) && !"TASK_BOOST".equals(type) && !"ANIMATION_BOOST".equals(type)) {
-                if ((COMMAND_HOVERING_EVENT.equals(type) || COMMAND_BROWSER_DASH_MODE.equals(type) || COMMAND_SUSTAINED_PERF.equals(type) || COMMAND_GAME_TOUCH_BOOSTER.equals(type) || "NORMAL_TOUCH_BOOSTER".equals(type) || "MIDGROUND_PROCESS_DETECT".equals(type)) && sdhmservice != null) {
+            if (!COMMAND_SCROLL.equals(type)
+                    && !"SMOOTH_SCROLL".equals(type)
+                    && !"GESTURE_DETECTED".equals(type)
+                    && !"TASK_BOOST".equals(type)
+                    && !"ANIMATION_BOOST".equals(type)) {
+                if ((COMMAND_HOVERING_EVENT.equals(type)
+                                || COMMAND_BROWSER_DASH_MODE.equals(type)
+                                || COMMAND_SUSTAINED_PERF.equals(type)
+                                || COMMAND_GAME_TOUCH_BOOSTER.equals(type)
+                                || "NORMAL_TOUCH_BOOSTER".equals(type)
+                                || "MIDGROUND_PROCESS_DETECT".equals(type))
+                        && sdhmservice != null) {
                     sdhmservice.sendCommand(type, value);
                     return;
                 }
@@ -108,7 +121,8 @@ public class SemPerfManager {
         IBinder b;
         IBinder b2;
         try {
-            if (sCfmsService == null && (b2 = ServiceManager.getService(Context.CFMS_SERVICE)) != null) {
+            if (sCfmsService == null
+                    && (b2 = ServiceManager.getService(Context.CFMS_SERVICE)) != null) {
                 sCfmsService = ICustomFrequencyManager.Stub.asInterface(b2);
             }
             if (sdhmservice == null && (b = ServiceManager.getService("sdhms")) != null) {

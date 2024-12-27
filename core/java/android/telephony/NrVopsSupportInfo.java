@@ -3,6 +3,7 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -10,20 +11,22 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class NrVopsSupportInfo extends VopsSupportInfo {
-    public static final Parcelable.Creator<NrVopsSupportInfo> CREATOR = new Parcelable.Creator<NrVopsSupportInfo>() { // from class: android.telephony.NrVopsSupportInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrVopsSupportInfo createFromParcel(Parcel in) {
-            in.readInt();
-            return new NrVopsSupportInfo(in);
-        }
+    public static final Parcelable.Creator<NrVopsSupportInfo> CREATOR =
+            new Parcelable.Creator<
+                    NrVopsSupportInfo>() { // from class: android.telephony.NrVopsSupportInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrVopsSupportInfo createFromParcel(Parcel in) {
+                    in.readInt();
+                    return new NrVopsSupportInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrVopsSupportInfo[] newArray(int size) {
-            return new NrVopsSupportInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrVopsSupportInfo[] newArray(int size) {
+                    return new NrVopsSupportInfo[size];
+                }
+            };
     public static final int NR_STATUS_EMC_5GCN_ONLY = 1;
     public static final int NR_STATUS_EMC_EUTRA_5GCN_ONLY = 2;
     public static final int NR_STATUS_EMC_NOT_SUPPORTED = 0;
@@ -40,16 +43,13 @@ public final class NrVopsSupportInfo extends VopsSupportInfo {
     private final int mVopsSupport;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NrEmcStatus {
-    }
+    public @interface NrEmcStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NrEmfStatus {
-    }
+    public @interface NrEmfStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NrVopsStatus {
-    }
+    public @interface NrVopsStatus {}
 
     public NrVopsSupportInfo(int vops, int emc, int emf) {
         this.mVopsSupport = vops;
@@ -106,7 +106,9 @@ public final class NrVopsSupportInfo extends VopsSupportInfo {
             return true;
         }
         NrVopsSupportInfo other = (NrVopsSupportInfo) o;
-        if (this.mVopsSupport != other.mVopsSupport || this.mEmcSupport != other.mEmcSupport || this.mEmfSupport != other.mEmfSupport) {
+        if (this.mVopsSupport != other.mVopsSupport
+                || this.mEmcSupport != other.mEmcSupport
+                || this.mEmfSupport != other.mEmfSupport) {
             return false;
         }
         return true;
@@ -114,11 +116,19 @@ public final class NrVopsSupportInfo extends VopsSupportInfo {
 
     @Override // android.telephony.VopsSupportInfo
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mVopsSupport), Integer.valueOf(this.mEmcSupport), Integer.valueOf(this.mEmfSupport));
+        return Objects.hash(
+                Integer.valueOf(this.mVopsSupport),
+                Integer.valueOf(this.mEmcSupport),
+                Integer.valueOf(this.mEmfSupport));
     }
 
     public String toString() {
-        return "NrVopsSupportInfo :  mVopsSupport = " + this.mVopsSupport + " mEmcSupport = " + this.mEmcSupport + " mEmfSupport = " + this.mEmfSupport;
+        return "NrVopsSupportInfo :  mVopsSupport = "
+                + this.mVopsSupport
+                + " mEmcSupport = "
+                + this.mEmcSupport
+                + " mEmfSupport = "
+                + this.mEmfSupport;
     }
 
     protected static NrVopsSupportInfo createFromParcelBody(Parcel in) {

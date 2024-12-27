@@ -1,10 +1,13 @@
 package com.android.apex;
 
 import com.sec.android.iaft.SmLib_IafdConstant;
-import java.io.IOException;
-import javax.xml.datatype.DatatypeConfigurationException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+
+import javax.xml.datatype.DatatypeConfigurationException;
 
 /* loaded from: classes4.dex */
 public class ApexInfo {
@@ -168,7 +171,8 @@ public class ApexInfo {
         this.provideSharedApexLibs = Boolean.valueOf(provideSharedApexLibs);
     }
 
-    static ApexInfo read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static ApexInfo read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         ApexInfo _instance = new ApexInfo();
         String _raw = _parser.getAttributeValue(null, "moduleName");
         if (_raw != null) {

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -38,7 +39,12 @@ public abstract class ToggleAction implements Action {
         }
     }
 
-    public ToggleAction(int enabledIconResId, int disabledIconResid, int message, int enabledStatusMessageResId, int disabledStatusMessageResId) {
+    public ToggleAction(
+            int enabledIconResId,
+            int disabledIconResid,
+            int message,
+            int enabledStatusMessageResId,
+            int disabledStatusMessageResId) {
         this.mEnabledIconResId = enabledIconResId;
         this.mDisabledIconResid = disabledIconResid;
         this.mMessageResId = message;
@@ -46,8 +52,7 @@ public abstract class ToggleAction implements Action {
         this.mDisabledStatusMessageResId = disabledStatusMessageResId;
     }
 
-    void willCreate() {
-    }
+    void willCreate() {}
 
     @Override // com.android.internal.globalactions.Action
     public CharSequence getLabelForAccessibility(Context context) {
@@ -55,7 +60,8 @@ public abstract class ToggleAction implements Action {
     }
 
     @Override // com.android.internal.globalactions.Action
-    public View create(Context context, View convertView, ViewGroup parent, LayoutInflater inflater) {
+    public View create(
+            Context context, View convertView, ViewGroup parent, LayoutInflater inflater) {
         willCreate();
         View v = inflater.inflate(R.layout.global_actions_item, parent, false);
         ImageView icon = (ImageView) v.findViewById(16908294);
@@ -68,11 +74,13 @@ public abstract class ToggleAction implements Action {
         }
         boolean on = this.mState == State.On || this.mState == State.TurningOn;
         if (icon != null) {
-            icon.lambda$setImageURIAsync$0(context.getDrawable(on ? this.mEnabledIconResId : this.mDisabledIconResid));
+            icon.lambda$setImageURIAsync$0(
+                    context.getDrawable(on ? this.mEnabledIconResId : this.mDisabledIconResid));
             icon.setEnabled(enabled);
         }
         if (statusView != null) {
-            statusView.setText(on ? this.mEnabledStatusMessageResId : this.mDisabledStatusMessageResId);
+            statusView.setText(
+                    on ? this.mEnabledStatusMessageResId : this.mDisabledStatusMessageResId);
             statusView.setVisibility(0);
             statusView.setEnabled(enabled);
         }

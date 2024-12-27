@@ -16,6 +16,7 @@ import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.policy.IKeyguardDismissCallback;
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
@@ -28,8 +29,10 @@ import com.android.server.LocalServices;
 import com.android.server.ServiceKeeper$$ExternalSyntheticOutline0;
 import com.android.server.statusbar.StatusBarManagerInternal;
 import com.android.server.statusbar.StatusBarManagerService;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,13 +79,13 @@ public final class LockTaskController {
         }
 
         public final void onDismissSucceeded() {
-            LockTaskController.this.mHandler.post(new LockTaskController$$ExternalSyntheticLambda5(this.val$userId, 1, this));
+            LockTaskController.this.mHandler.post(
+                    new LockTaskController$$ExternalSyntheticLambda5(this.val$userId, 1, this));
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class LockTaskToken extends Binder {
-    }
+    public final class LockTaskToken extends Binder {}
 
     static {
         SparseArray sparseArray = new SparseArray();
@@ -94,7 +97,11 @@ public final class LockTaskController {
         sparseArray.append(16, new Pair(0, 8));
     }
 
-    public LockTaskController(Context context, ActivityTaskSupervisor activityTaskSupervisor, Handler handler, TaskChangeNotificationController taskChangeNotificationController) {
+    public LockTaskController(
+            Context context,
+            ActivityTaskSupervisor activityTaskSupervisor,
+            Handler handler,
+            TaskChangeNotificationController taskChangeNotificationController) {
         this.mContext = context;
         this.mSupervisor = activityTaskSupervisor;
         this.mHandler = handler;
@@ -105,22 +112,50 @@ public final class LockTaskController {
         Task task = activityRecord.task;
         if (task.mLockTaskAuth != 4 && this.mLockTaskModeTasks.indexOf(task) == 0) {
             ActivityRecord topNonFinishingActivity = task.getTopNonFinishingActivity(true, true);
-            if (activityRecord != task.getRootActivity(true, false) || activityRecord != topNonFinishingActivity) {
+            if (activityRecord != task.getRootActivity(true, false)
+                    || activityRecord != topNonFinishingActivity) {
                 TaskFragment taskFragment = activityRecord.getTaskFragment();
                 final TaskFragment taskFragment2 = taskFragment.mAdjacentTaskFragment;
-                if (taskFragment.asTask() != null || ((!taskFragment.mDelayLastActivityRemoval && (!CoreRune.MW_EMBED_ACTIVITY || !taskFragment.mIsEmbedded)) || taskFragment2 == null || taskFragment.getActivity(new Predicate() { // from class: com.android.server.wm.LockTaskController$$ExternalSyntheticLambda3
-                    @Override // java.util.function.Predicate
-                    public final boolean test(Object obj) {
-                        ActivityRecord activityRecord2 = (ActivityRecord) obj;
-                        return (activityRecord2.finishing || activityRecord2 == ActivityRecord.this) ? false : true;
-                    }
-                }) != null || task.getActivity(new Predicate() { // from class: com.android.server.wm.LockTaskController$$ExternalSyntheticLambda4
-                    @Override // java.util.function.Predicate
-                    public final boolean test(Object obj) {
-                        ActivityRecord activityRecord2 = (ActivityRecord) obj;
-                        return (activityRecord2.finishing || activityRecord2 == ActivityRecord.this || activityRecord2.getTaskFragment() == taskFragment2) ? false : true;
-                    }
-                }) != null)) {
+                if (taskFragment.asTask() != null
+                        || ((!taskFragment.mDelayLastActivityRemoval
+                                        && (!CoreRune.MW_EMBED_ACTIVITY
+                                                || !taskFragment.mIsEmbedded))
+                                || taskFragment2 == null
+                                || taskFragment.getActivity(
+                                                new Predicate() { // from class:
+                                                                  // com.android.server.wm.LockTaskController$$ExternalSyntheticLambda3
+                                                    @Override // java.util.function.Predicate
+                                                    public final boolean test(Object obj) {
+                                                        ActivityRecord activityRecord2 =
+                                                                (ActivityRecord) obj;
+                                                        return (activityRecord2.finishing
+                                                                        || activityRecord2
+                                                                                == ActivityRecord
+                                                                                        .this)
+                                                                ? false
+                                                                : true;
+                                                    }
+                                                })
+                                        != null
+                                || task.getActivity(
+                                                new Predicate() { // from class:
+                                                                  // com.android.server.wm.LockTaskController$$ExternalSyntheticLambda4
+                                                    @Override // java.util.function.Predicate
+                                                    public final boolean test(Object obj) {
+                                                        ActivityRecord activityRecord2 =
+                                                                (ActivityRecord) obj;
+                                                        return (activityRecord2.finishing
+                                                                        || activityRecord2
+                                                                                == ActivityRecord
+                                                                                        .this
+                                                                        || activityRecord2
+                                                                                        .getTaskFragment()
+                                                                                == taskFragment2)
+                                                                ? false
+                                                                : true;
+                                                    }
+                                                })
+                                        != null)) {
                     return false;
                 }
             }
@@ -150,7 +185,8 @@ public final class LockTaskController {
 
     public final void clearLockedTasks(String str) {
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_LOCKTASK_enabled[2]) {
-            ProtoLogImpl_54989576.i(ProtoLogGroup.WM_DEBUG_LOCKTASK, 8891808212671675155L, 0, null, str);
+            ProtoLogImpl_54989576.i(
+                    ProtoLogGroup.WM_DEBUG_LOCKTASK, 8891808212671675155L, 0, null, str);
         }
         if (this.mLockTaskModeTasks.isEmpty()) {
             return;
@@ -160,7 +196,9 @@ public final class LockTaskController {
 
     public final void dump(PrintWriter printWriter) {
         String str;
-        StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "  LockTaskController:", "    mLockTaskModeState=");
+        StringBuilder m$1 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                        printWriter, "  LockTaskController:", "    mLockTaskModeState=");
         int i = this.mLockTaskModeState;
         if (i == 0) {
             str = "NONE";
@@ -181,14 +219,20 @@ public final class LockTaskController {
         }
         printWriter.println("    mLockTaskPackages (userId:packages)=");
         for (int i3 = 0; i3 < this.mLockTaskPackages.size(); i3++) {
-            printWriter.println("      u" + this.mLockTaskPackages.keyAt(i3) + ":" + Arrays.toString((Object[]) this.mLockTaskPackages.valueAt(i3)));
+            printWriter.println(
+                    "      u"
+                            + this.mLockTaskPackages.keyAt(i3)
+                            + ":"
+                            + Arrays.toString((Object[]) this.mLockTaskPackages.valueAt(i3)));
         }
         printWriter.println();
     }
 
     public final IDevicePolicyManager getDevicePolicyManager() {
         if (this.mDevicePolicyManager == null) {
-            IDevicePolicyManager asInterface = IDevicePolicyManager.Stub.asInterface(ServiceManager.checkService("device_policy"));
+            IDevicePolicyManager asInterface =
+                    IDevicePolicyManager.Stub.asInterface(
+                            ServiceManager.checkService("device_policy"));
             this.mDevicePolicyManager = asInterface;
             if (asInterface == null) {
                 Slog.w("ActivityTaskManager", "warning: no DEVICE_POLICY_SERVICE");
@@ -205,7 +249,10 @@ public final class LockTaskController {
         if (activityRecord == null) {
             return 1;
         }
-        String packageName = (task == null || (componentName = task.realActivity) == null) ? activityRecord.packageName : componentName.getPackageName();
+        String packageName =
+                (task == null || (componentName = task.realActivity) == null)
+                        ? activityRecord.packageName
+                        : componentName.getPackageName();
         int i = task != null ? task.mUserId : activityRecord.mUserId;
         int i2 = activityRecord.lockTaskLaunchMode;
         if (i2 != 0) {
@@ -243,7 +290,8 @@ public final class LockTaskController {
 
     public final IStatusBarService getStatusBarService() {
         if (this.mStatusBarService == null) {
-            IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.checkService("statusbar"));
+            IStatusBarService asInterface =
+                    IStatusBarService.Stub.asInterface(ServiceManager.checkService("statusbar"));
             this.mStatusBarService = asInterface;
             if (asInterface == null) {
                 Slog.w("StatusBarManager", "warning: no STATUS_BAR_SERVICE");
@@ -253,7 +301,9 @@ public final class LockTaskController {
     }
 
     public final boolean isLockTaskModeViolation(Task task, boolean z) {
-        if ((isTaskLocked(task) && !z) || !isLockTaskModeViolationInternal(task, task.mUserId, task.intent, task.mLockTaskAuth)) {
+        if ((isTaskLocked(task) && !z)
+                || !isLockTaskModeViolationInternal(
+                        task, task.mUserId, task.intent, task.mLockTaskAuth)) {
             return false;
         }
         showLockTaskToast();
@@ -261,14 +311,15 @@ public final class LockTaskController {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0063, code lost:
-    
-        if (r4.equals(r5.getComponent().getPackageName()) != false) goto L28;
-     */
+
+       if (r4.equals(r5.getComponent().getPackageName()) != false) goto L28;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean isLockTaskModeViolationInternal(com.android.server.wm.WindowContainer r3, int r4, android.content.Intent r5, int r6) {
+    public final boolean isLockTaskModeViolationInternal(
+            com.android.server.wm.WindowContainer r3, int r4, android.content.Intent r5, int r6) {
         /*
             r2 = this;
             boolean r0 = r3.isActivityTypeRecents()
@@ -352,7 +403,10 @@ public final class LockTaskController {
         L96:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.LockTaskController.isLockTaskModeViolationInternal(com.android.server.wm.WindowContainer, int, android.content.Intent, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.LockTaskController.isLockTaskModeViolationInternal(com.android.server.wm.WindowContainer,"
+                    + " int, android.content.Intent, int):boolean");
     }
 
     public final boolean isPackageAllowlisted(int i, String str) {
@@ -373,13 +427,13 @@ public final class LockTaskController {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:20:0x003d, code lost:
-    
-        if (android.provider.Settings.System.getInt(r6.mContext.getContentResolver(), "interaction_control_exit_locked", 0) != 0) goto L18;
-     */
+
+       if (android.provider.Settings.System.getInt(r6.mContext.getContentResolver(), "interaction_control_exit_locked", 0) != 0) goto L18;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:6:0x001e, code lost:
-    
-        if (android.provider.Settings.System.getInt(r6.mContext.getContentResolver(), "lock_to_app_enabled", 0) != 0) goto L18;
-     */
+
+       if (android.provider.Settings.System.getInt(r6.mContext.getContentResolver(), "lock_to_app_enabled", 0) != 0) goto L18;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -448,11 +502,14 @@ public final class LockTaskController {
         L7c:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.LockTaskController.lockKeyguardIfNeeded(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.LockTaskController.lockKeyguardIfNeeded(int):void");
     }
 
     public final void notifyLockTaskStateChanged(int i) {
-        ActivityTaskManagerServiceExt activityTaskManagerServiceExt = this.mSupervisor.mService.mExt;
+        ActivityTaskManagerServiceExt activityTaskManagerServiceExt =
+                this.mSupervisor.mService.mExt;
         activityTaskManagerServiceExt.getClass();
         boolean z = i != 0;
         if (CoreRune.FW_SUPPORT_LOCK_TASK_MODE_BROADCAST) {
@@ -462,54 +519,84 @@ public final class LockTaskController {
         }
         Intent intent2 = new Intent("com.samsung.android.action.LOCK_TASK_MODE");
         intent2.putExtra("enable", z);
-        activityTaskManagerServiceExt.mContext.sendBroadcastAsUser(intent2, UserHandle.CURRENT, "com.samsung.android.permission.LOCK_TASK_MODE");
+        activityTaskManagerServiceExt.mContext.sendBroadcastAsUser(
+                intent2, UserHandle.CURRENT, "com.samsung.android.permission.LOCK_TASK_MODE");
     }
 
     public final void removeLockedTask(final Task task) {
         if (this.mLockTaskModeTasks.remove(task)) {
             boolean[] zArr = ProtoLogImpl_54989576.Cache.WM_DEBUG_LOCKTASK_enabled;
             if (zArr[0]) {
-                ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_LOCKTASK, 8970634498594714645L, 0, null, String.valueOf(task));
+                ProtoLogImpl_54989576.d(
+                        ProtoLogGroup.WM_DEBUG_LOCKTASK,
+                        8970634498594714645L,
+                        0,
+                        null,
+                        String.valueOf(task));
             }
             if (this.mLockTaskModeTasks.isEmpty()) {
                 if (zArr[0]) {
-                    ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_LOCKTASK, 8735562128135241598L, 0, null, String.valueOf(task), String.valueOf(Debug.getCallers(3)));
+                    ProtoLogImpl_54989576.d(
+                            ProtoLogGroup.WM_DEBUG_LOCKTASK,
+                            8735562128135241598L,
+                            0,
+                            null,
+                            String.valueOf(task),
+                            String.valueOf(Debug.getCallers(3)));
                 }
-                this.mHandler.post(new Runnable() { // from class: com.android.server.wm.LockTaskController$$ExternalSyntheticLambda2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        IStatusBarService statusBarService;
-                        LockTaskController lockTaskController = LockTaskController.this;
-                        Task task2 = task;
-                        lockTaskController.getClass();
-                        int i = task2.mUserId;
-                        int i2 = lockTaskController.mLockTaskModeState;
-                        lockTaskController.mLockTaskModeState = 0;
-                        boolean z = lockTaskController.mInteractionControlEnabled;
-                        lockTaskController.mInteractionControlEnabled = false;
-                        TaskChangeNotificationController taskChangeNotificationController = lockTaskController.mTaskChangeNotificationController;
-                        Message obtainMessage = taskChangeNotificationController.mHandler.obtainMessage(28, lockTaskController.mLockTaskModeState, 0);
-                        taskChangeNotificationController.forAllLocalListeners(taskChangeNotificationController.mNotifyLockTaskModeChanged, obtainMessage);
-                        obtainMessage.sendToTarget();
-                        try {
-                            lockTaskController.setStatusBarState(lockTaskController.mLockTaskModeState, i);
-                            lockTaskController.setKeyguardState(lockTaskController.mLockTaskModeState, i);
-                            if (i2 == 2) {
-                                lockTaskController.lockKeyguardIfNeeded(i);
+                this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // com.android.server.wm.LockTaskController$$ExternalSyntheticLambda2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                IStatusBarService statusBarService;
+                                LockTaskController lockTaskController = LockTaskController.this;
+                                Task task2 = task;
+                                lockTaskController.getClass();
+                                int i = task2.mUserId;
+                                int i2 = lockTaskController.mLockTaskModeState;
+                                lockTaskController.mLockTaskModeState = 0;
+                                boolean z = lockTaskController.mInteractionControlEnabled;
+                                lockTaskController.mInteractionControlEnabled = false;
+                                TaskChangeNotificationController taskChangeNotificationController =
+                                        lockTaskController.mTaskChangeNotificationController;
+                                Message obtainMessage =
+                                        taskChangeNotificationController.mHandler.obtainMessage(
+                                                28, lockTaskController.mLockTaskModeState, 0);
+                                taskChangeNotificationController.forAllLocalListeners(
+                                        taskChangeNotificationController.mNotifyLockTaskModeChanged,
+                                        obtainMessage);
+                                obtainMessage.sendToTarget();
+                                try {
+                                    lockTaskController.setStatusBarState(
+                                            lockTaskController.mLockTaskModeState, i);
+                                    lockTaskController.setKeyguardState(
+                                            lockTaskController.mLockTaskModeState, i);
+                                    if (i2 == 2) {
+                                        lockTaskController.lockKeyguardIfNeeded(i);
+                                    }
+                                    if (lockTaskController.getDevicePolicyManager() != null) {
+                                        lockTaskController
+                                                .getDevicePolicyManager()
+                                                .notifyLockTaskModeChanged(false, (String) null, i);
+                                    }
+                                    if (i2 == 2
+                                            && !z
+                                            && (statusBarService =
+                                                            lockTaskController
+                                                                    .getStatusBarService())
+                                                    != null) {
+                                        statusBarService.showPinningEnterExitToast(false);
+                                    }
+                                    lockTaskController.mWindowManager.onLockTaskStateChanged(
+                                            lockTaskController.mLockTaskModeState);
+                                    lockTaskController.notifyLockTaskStateChanged(
+                                            lockTaskController.mLockTaskModeState);
+                                } catch (RemoteException e) {
+                                    throw new RuntimeException(e);
+                                }
                             }
-                            if (lockTaskController.getDevicePolicyManager() != null) {
-                                lockTaskController.getDevicePolicyManager().notifyLockTaskModeChanged(false, (String) null, i);
-                            }
-                            if (i2 == 2 && !z && (statusBarService = lockTaskController.getStatusBarService()) != null) {
-                                statusBarService.showPinningEnterExitToast(false);
-                            }
-                            lockTaskController.mWindowManager.onLockTaskStateChanged(lockTaskController.mLockTaskModeState);
-                            lockTaskController.notifyLockTaskStateChanged(lockTaskController.mLockTaskModeState);
-                        } catch (RemoteException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                });
+                        });
             }
         }
     }
@@ -527,7 +614,8 @@ public final class LockTaskController {
         }
         if ((this.mLockTaskFeatures.get(i2, 0) & 32) != 0) {
             this.mWindowManager.reenableKeyguard(lockTaskToken, i2);
-        } else if (!this.mWindowManager.isKeyguardLocked() || this.mWindowManager.isKeyguardSecure(i2)) {
+        } else if (!this.mWindowManager.isKeyguardLocked()
+                || this.mWindowManager.isKeyguardSecure(i2)) {
             this.mWindowManager.disableKeyguard(lockTaskToken, "Lock-to-App", i2);
         } else {
             this.mPendingDisableFromDismiss = i2;
@@ -540,13 +628,16 @@ public final class LockTaskController {
         boolean[] zArr = ProtoLogImpl_54989576.Cache.WM_DEBUG_LOCKTASK_enabled;
         if (i2 == 0) {
             if (zArr[3]) {
-                ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_LOCKTASK, -4314079913933391851L, 0, null, null);
+                ProtoLogImpl_54989576.w(
+                        ProtoLogGroup.WM_DEBUG_LOCKTASK, -4314079913933391851L, 0, null, null);
                 return;
             }
             return;
         }
         if (isLockTaskModeViolation(task, false)) {
-            Slog.e("ActivityTaskManager", "setLockTaskMode: Attempt to start an unauthorized lock task.");
+            Slog.e(
+                    "ActivityTaskManager",
+                    "setLockTaskMode: Attempt to start an unauthorized lock task.");
             return;
         }
         final Intent intent = task.intent;
@@ -569,43 +660,67 @@ public final class LockTaskController {
                     }
                 }
             }
-            this.mHandler.post(new Runnable() { // from class: com.android.server.wm.LockTaskController$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IStatusBarService statusBarService;
-                    LockTaskController lockTaskController = LockTaskController.this;
-                    Intent intent2 = intent;
-                    Task task3 = task;
-                    int i5 = i;
-                    lockTaskController.getClass();
-                    String packageName = intent2.getComponent().getPackageName();
-                    int i6 = task3.mUserId;
-                    try {
-                        boolean z2 = lockTaskController.mWindowManager.mExt.mPolicyExt.mIsInteractionControlEnabled;
-                        lockTaskController.mInteractionControlEnabled = z2;
-                        if (i5 == 2 && !z2 && (statusBarService = lockTaskController.getStatusBarService()) != null) {
-                            statusBarService.showPinningEnterExitToast(true);
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.wm.LockTaskController$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IStatusBarService statusBarService;
+                            LockTaskController lockTaskController = LockTaskController.this;
+                            Intent intent2 = intent;
+                            Task task3 = task;
+                            int i5 = i;
+                            lockTaskController.getClass();
+                            String packageName = intent2.getComponent().getPackageName();
+                            int i6 = task3.mUserId;
+                            try {
+                                boolean z2 =
+                                        lockTaskController
+                                                .mWindowManager
+                                                .mExt
+                                                .mPolicyExt
+                                                .mIsInteractionControlEnabled;
+                                lockTaskController.mInteractionControlEnabled = z2;
+                                if (i5 == 2
+                                        && !z2
+                                        && (statusBarService =
+                                                        lockTaskController.getStatusBarService())
+                                                != null) {
+                                    statusBarService.showPinningEnterExitToast(true);
+                                }
+                                lockTaskController.mWindowManager.onLockTaskStateChanged(i5);
+                                lockTaskController.mLockTaskModeState = i5;
+                                TaskChangeNotificationController taskChangeNotificationController =
+                                        lockTaskController.mTaskChangeNotificationController;
+                                Message obtainMessage =
+                                        taskChangeNotificationController.mHandler.obtainMessage(
+                                                28, lockTaskController.mLockTaskModeState, 0);
+                                taskChangeNotificationController.forAllLocalListeners(
+                                        taskChangeNotificationController.mNotifyLockTaskModeChanged,
+                                        obtainMessage);
+                                obtainMessage.sendToTarget();
+                                lockTaskController.setStatusBarState(i5, i6);
+                                lockTaskController.setKeyguardState(i5, i6);
+                                if (lockTaskController.getDevicePolicyManager() != null) {
+                                    lockTaskController
+                                            .getDevicePolicyManager()
+                                            .notifyLockTaskModeChanged(true, packageName, i6);
+                                }
+                                lockTaskController.notifyLockTaskStateChanged(i5);
+                            } catch (RemoteException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
-                        lockTaskController.mWindowManager.onLockTaskStateChanged(i5);
-                        lockTaskController.mLockTaskModeState = i5;
-                        TaskChangeNotificationController taskChangeNotificationController = lockTaskController.mTaskChangeNotificationController;
-                        Message obtainMessage = taskChangeNotificationController.mHandler.obtainMessage(28, lockTaskController.mLockTaskModeState, 0);
-                        taskChangeNotificationController.forAllLocalListeners(taskChangeNotificationController.mNotifyLockTaskModeChanged, obtainMessage);
-                        obtainMessage.sendToTarget();
-                        lockTaskController.setStatusBarState(i5, i6);
-                        lockTaskController.setKeyguardState(i5, i6);
-                        if (lockTaskController.getDevicePolicyManager() != null) {
-                            lockTaskController.getDevicePolicyManager().notifyLockTaskModeChanged(true, packageName, i6);
-                        }
-                        lockTaskController.notifyLockTaskStateChanged(i5);
-                    } catch (RemoteException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });
+                    });
         }
         if (zArr[3]) {
-            ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_LOCKTASK, 3321878763832425380L, 0, null, String.valueOf(task), String.valueOf(Debug.getCallers(4)));
+            ProtoLogImpl_54989576.w(
+                    ProtoLogGroup.WM_DEBUG_LOCKTASK,
+                    3321878763832425380L,
+                    0,
+                    null,
+                    String.valueOf(task),
+                    String.valueOf(Debug.getCallers(4)));
         }
         if (!this.mLockTaskModeTasks.contains(task)) {
             this.mLockTaskModeTasks.add(task);
@@ -616,7 +731,13 @@ public final class LockTaskController {
         activityTaskSupervisor.mService.mMultiWindowEnableController.dismissMultiWindowMode();
         if (!z) {
             if (i != 0) {
-                activityTaskSupervisor.handleNonResizableTaskIfNeeded(task, 0, activityTaskSupervisor.mRootWindowContainer.mDefaultDisplay.getDefaultTaskDisplayArea(), task.getRootTask(), true);
+                activityTaskSupervisor.handleNonResizableTaskIfNeeded(
+                        task,
+                        0,
+                        activityTaskSupervisor.mRootWindowContainer.mDefaultDisplay
+                                .getDefaultTaskDisplayArea(),
+                        task.getRootTask(),
+                        true);
             }
         } else {
             this.mSupervisor.findTaskToMoveToFront(task, 0, null, str, i != 0);
@@ -641,7 +762,8 @@ public final class LockTaskController {
             i4 = STATUS_BAR_MASK_PINNED;
             i3 = 0;
         } else if (i == 1) {
-            Pair statusBarDisableFlags = getStatusBarDisableFlags(this.mLockTaskFeatures.get(i2, 0));
+            Pair statusBarDisableFlags =
+                    getStatusBarDisableFlags(this.mLockTaskFeatures.get(i2, 0));
             i4 = ((Integer) statusBarDisableFlags.first).intValue();
             i3 = ((Integer) statusBarDisableFlags.second).intValue();
         } else {
@@ -674,7 +796,8 @@ public final class LockTaskController {
         boolean[] zArr = ProtoLogImpl_54989576.Cache.WM_DEBUG_LOCKTASK_enabled;
         if (i2 == 0) {
             if (zArr[3]) {
-                ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_LOCKTASK, 737192738184050156L, 0, null, null);
+                ProtoLogImpl_54989576.w(
+                        ProtoLogGroup.WM_DEBUG_LOCKTASK, 737192738184050156L, 0, null, null);
                 return;
             }
             return;
@@ -683,9 +806,12 @@ public final class LockTaskController {
             task.mLockTaskUid = i;
             if (i2 == 1) {
                 if (zArr[3]) {
-                    ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_LOCKTASK, -7119521978513736788L, 0, null, null);
+                    ProtoLogImpl_54989576.w(
+                            ProtoLogGroup.WM_DEBUG_LOCKTASK, -7119521978513736788L, 0, null, null);
                 }
-                StatusBarManagerInternal statusBarManagerInternal = (StatusBarManagerInternal) LocalServices.getService(StatusBarManagerInternal.class);
+                StatusBarManagerInternal statusBarManagerInternal =
+                        (StatusBarManagerInternal)
+                                LocalServices.getService(StatusBarManagerInternal.class);
                 if (statusBarManagerInternal != null) {
                     int i3 = task.mTaskId;
                     IStatusBar iStatusBar = StatusBarManagerService.this.mBar;
@@ -702,13 +828,20 @@ public final class LockTaskController {
                 return;
             }
             if (this.mLockTaskModeState == 2) {
-                Slog.i("ActivityTaskManager", "Stop app pinning before entering full lock task mode");
+                Slog.i(
+                        "ActivityTaskManager",
+                        "Stop app pinning before entering full lock task mode");
                 stopLockTaskMode(i, null, true);
             }
         }
         this.mSupervisor.mRootWindowContainer.removeRootTasksInWindowingModes(2);
         if (zArr[3]) {
-            ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_LOCKTASK, -1557441750657584614L, 0, null, z ? "Locking pinned" : "Locking fully");
+            ProtoLogImpl_54989576.w(
+                    ProtoLogGroup.WM_DEBUG_LOCKTASK,
+                    -1557441750657584614L,
+                    0,
+                    null,
+                    z ? "Locking pinned" : "Locking fully");
         }
         setLockTaskMode(z ? 2 : 1, task, "startLockTask", true);
     }
@@ -736,7 +869,8 @@ public final class LockTaskController {
             return;
         }
         StringBuilder sb = new StringBuilder("Invalid uid, expected ");
-        ServiceKeeper$$ExternalSyntheticOutline0.m(task.mLockTaskUid, i, " callingUid=", " effectiveUid=", sb);
+        ServiceKeeper$$ExternalSyntheticOutline0.m(
+                task.mLockTaskUid, i, " callingUid=", " effectiveUid=", sb);
         sb.append(task.effectiveUid);
         throw new SecurityException(sb.toString());
     }
@@ -748,7 +882,8 @@ public final class LockTaskController {
         this.mLockTaskFeatures.put(i, i2);
         SparseIntArray sparseIntArray = this.mLockTaskFeatures;
         WindowManagerServiceExt windowManagerServiceExt = this.mWindowManager.mExt;
-        WindowManagerGlobalLock windowManagerGlobalLock = windowManagerServiceExt.mService.mGlobalLock;
+        WindowManagerGlobalLock windowManagerGlobalLock =
+                windowManagerServiceExt.mService.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
@@ -759,7 +894,8 @@ public final class LockTaskController {
             }
         }
         WindowManagerService.resetPriorityAfterLockedSection();
-        if (this.mLockTaskModeTasks.isEmpty() || i != ((Task) this.mLockTaskModeTasks.get(0)).mUserId) {
+        if (this.mLockTaskModeTasks.isEmpty()
+                || i != ((Task) this.mLockTaskModeTasks.get(0)).mUserId) {
             return;
         }
         this.mHandler.post(new LockTaskController$$ExternalSyntheticLambda5(i, 0, this));
@@ -784,7 +920,13 @@ public final class LockTaskController {
             boolean z4 = i3 == 2 || i3 == 3;
             if (this.mLockTaskModeState == 1 && task.mUserId == i && z3 && !z4) {
                 if (zArr[0]) {
-                    ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_LOCKTASK, -4819015209006579825L, 0, null, String.valueOf(task), String.valueOf(task.lockTaskAuthToString()));
+                    ProtoLogImpl_54989576.d(
+                            ProtoLogGroup.WM_DEBUG_LOCKTASK,
+                            -4819015209006579825L,
+                            0,
+                            null,
+                            String.valueOf(task),
+                            String.valueOf(task.lockTaskAuthToString()));
                 }
                 removeLockedTask(task);
                 task.performClearTaskForReuse(false);
@@ -792,12 +934,18 @@ public final class LockTaskController {
             }
             size--;
         }
-        this.mSupervisor.mRootWindowContainer.forAllTasks(new LockTaskController$$ExternalSyntheticLambda1());
+        this.mSupervisor.mRootWindowContainer.forAllTasks(
+                new LockTaskController$$ExternalSyntheticLambda1());
         ActivityRecord activityRecord = this.mSupervisor.mRootWindowContainer.topRunningActivity();
         Task task2 = activityRecord != null ? activityRecord.task : null;
         if (this.mLockTaskModeTasks.isEmpty() && task2 != null && task2.mLockTaskAuth == 2) {
             if (zArr[0]) {
-                ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_LOCKTASK, 2119751067469297845L, 0, null, String.valueOf(task2));
+                ProtoLogImpl_54989576.d(
+                        ProtoLogGroup.WM_DEBUG_LOCKTASK,
+                        2119751067469297845L,
+                        0,
+                        null,
+                        String.valueOf(task2));
             }
             setLockTaskMode(1, task2, "package updated", false);
         } else {

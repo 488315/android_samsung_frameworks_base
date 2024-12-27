@@ -7,37 +7,53 @@ import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.KeyF
 import com.android.internal.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 import com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricAlgorithmProvider;
 import com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /* loaded from: classes5.dex */
 public class RSA {
-    private static final String PREFIX = "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.";
+    private static final String PREFIX =
+            "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.";
     private static final Map<String, String> generalRsaAttributes = new HashMap();
 
     static {
-        generalRsaAttributes.put("SupportedKeyClasses", "javax.crypto.interfaces.RSAPublicKey|javax.crypto.interfaces.RSAPrivateKey");
+        generalRsaAttributes.put(
+                "SupportedKeyClasses",
+                "javax.crypto.interfaces.RSAPublicKey|javax.crypto.interfaces.RSAPrivateKey");
         generalRsaAttributes.put("SupportedKeyFormats", "PKCS#8|X.509");
     }
 
     public static class Mappings extends AsymmetricAlgorithmProvider {
         @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider
         public void configure(ConfigurableProvider provider) {
-            provider.addAlgorithm("AlgorithmParameters.PSS", "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.AlgorithmParametersSpi$PSS");
+            provider.addAlgorithm(
+                    "AlgorithmParameters.PSS",
+                    "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.AlgorithmParametersSpi$PSS");
             provider.addAttributes("Cipher.RSA", RSA.generalRsaAttributes);
-            provider.addAlgorithm("Cipher.RSA", "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.CipherSpi$NoPadding");
+            provider.addAlgorithm(
+                    "Cipher.RSA",
+                    "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.CipherSpi$NoPadding");
             provider.addAlgorithm("Alg.Alias.Cipher.RSA/RAW", "RSA");
             provider.addAlgorithm("Alg.Alias.Cipher.RSA//RAW", "RSA");
             provider.addAlgorithm("Alg.Alias.Cipher.RSA//NOPADDING", "RSA");
-            provider.addAlgorithm("KeyFactory.RSA", "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.KeyFactorySpi");
-            provider.addAlgorithm("KeyPairGenerator.RSA", "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.KeyPairGeneratorSpi");
+            provider.addAlgorithm(
+                    "KeyFactory.RSA",
+                    "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.KeyFactorySpi");
+            provider.addAlgorithm(
+                    "KeyPairGenerator.RSA",
+                    "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa.KeyPairGeneratorSpi");
             AsymmetricKeyInfoConverter keyFact = new KeyFactorySpi();
             registerOid(provider, PKCSObjectIdentifiers.rsaEncryption, "RSA", keyFact);
             registerOid(provider, X509ObjectIdentifiers.id_ea_rsa, "RSA", keyFact);
             registerOid(provider, PKCSObjectIdentifiers.id_RSAES_OAEP, "RSA", keyFact);
         }
 
-        private void addDigestSignature(ConfigurableProvider provider, String digest, String className, ASN1ObjectIdentifier oid) {
+        private void addDigestSignature(
+                ConfigurableProvider provider,
+                String digest,
+                String className,
+                ASN1ObjectIdentifier oid) {
             String mainName = digest + "WITHRSA";
             String jdk11Variation1 = digest + "withRSA";
             String jdk11Variation2 = digest + "WithRSA";
@@ -58,23 +74,36 @@ public class RSA {
             }
         }
 
-        private void addISO9796Signature(ConfigurableProvider provider, String digest, String className) {
-            provider.addAlgorithm("Alg.Alias.Signature." + digest + "withRSA/ISO9796-2", digest + "WITHRSA/ISO9796-2");
-            provider.addAlgorithm("Alg.Alias.Signature." + digest + "WithRSA/ISO9796-2", digest + "WITHRSA/ISO9796-2");
+        private void addISO9796Signature(
+                ConfigurableProvider provider, String digest, String className) {
+            provider.addAlgorithm(
+                    "Alg.Alias.Signature." + digest + "withRSA/ISO9796-2",
+                    digest + "WITHRSA/ISO9796-2");
+            provider.addAlgorithm(
+                    "Alg.Alias.Signature." + digest + "WithRSA/ISO9796-2",
+                    digest + "WITHRSA/ISO9796-2");
             provider.addAlgorithm("Signature." + digest + "WITHRSA/ISO9796-2", className);
         }
 
-        private void addPSSSignature(ConfigurableProvider provider, String digest, String className) {
-            provider.addAlgorithm("Alg.Alias.Signature." + digest + "withRSA/PSS", digest + "WITHRSAANDMGF1");
-            provider.addAlgorithm("Alg.Alias.Signature." + digest + "WithRSA/PSS", digest + "WITHRSAANDMGF1");
-            provider.addAlgorithm("Alg.Alias.Signature." + digest + "withRSAandMGF1", digest + "WITHRSAANDMGF1");
-            provider.addAlgorithm("Alg.Alias.Signature." + digest + "WithRSAAndMGF1", digest + "WITHRSAANDMGF1");
+        private void addPSSSignature(
+                ConfigurableProvider provider, String digest, String className) {
+            provider.addAlgorithm(
+                    "Alg.Alias.Signature." + digest + "withRSA/PSS", digest + "WITHRSAANDMGF1");
+            provider.addAlgorithm(
+                    "Alg.Alias.Signature." + digest + "WithRSA/PSS", digest + "WITHRSAANDMGF1");
+            provider.addAlgorithm(
+                    "Alg.Alias.Signature." + digest + "withRSAandMGF1", digest + "WITHRSAANDMGF1");
+            provider.addAlgorithm(
+                    "Alg.Alias.Signature." + digest + "WithRSAAndMGF1", digest + "WITHRSAANDMGF1");
             provider.addAlgorithm("Signature." + digest + "WITHRSAANDMGF1", className);
         }
 
-        private void addX931Signature(ConfigurableProvider provider, String digest, String className) {
-            provider.addAlgorithm("Alg.Alias.Signature." + digest + "withRSA/X9.31", digest + "WITHRSA/X9.31");
-            provider.addAlgorithm("Alg.Alias.Signature." + digest + "WithRSA/X9.31", digest + "WITHRSA/X9.31");
+        private void addX931Signature(
+                ConfigurableProvider provider, String digest, String className) {
+            provider.addAlgorithm(
+                    "Alg.Alias.Signature." + digest + "withRSA/X9.31", digest + "WITHRSA/X9.31");
+            provider.addAlgorithm(
+                    "Alg.Alias.Signature." + digest + "WithRSA/X9.31", digest + "WITHRSA/X9.31");
             provider.addAlgorithm("Signature." + digest + "WITHRSA/X9.31", className);
         }
     }

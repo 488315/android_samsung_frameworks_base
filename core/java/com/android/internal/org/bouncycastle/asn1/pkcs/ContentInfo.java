@@ -10,6 +10,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.BERSequence;
 import com.android.internal.org.bouncycastle.asn1.BERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DLSequence;
+
 import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
@@ -52,7 +53,8 @@ public class ContentInfo extends ASN1Object implements PKCSObjectIdentifiers {
         return this.content;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         v.add(this.contentType);

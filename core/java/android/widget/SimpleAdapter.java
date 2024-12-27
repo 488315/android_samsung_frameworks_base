@@ -7,7 +7,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +29,12 @@ public class SimpleAdapter extends BaseAdapter implements Filterable, ThemedSpin
         boolean setViewValue(View view, Object obj, String str);
     }
 
-    public SimpleAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to) {
+    public SimpleAdapter(
+            Context context,
+            List<? extends Map<String, ?>> data,
+            int resource,
+            String[] from,
+            int[] to) {
         this.mData = data;
         this.mDropDownResource = resource;
         this.mResource = resource;
@@ -55,10 +60,16 @@ public class SimpleAdapter extends BaseAdapter implements Filterable, ThemedSpin
 
     @Override // android.widget.Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        return createViewFromResource(this.mInflater, position, convertView, parent, this.mResource);
+        return createViewFromResource(
+                this.mInflater, position, convertView, parent, this.mResource);
     }
 
-    private View createViewFromResource(LayoutInflater inflater, int position, View convertView, ViewGroup parent, int resource) {
+    private View createViewFromResource(
+            LayoutInflater inflater,
+            int position,
+            View convertView,
+            ViewGroup parent,
+            int resource) {
         View v;
         if (convertView == null) {
             v = inflater.inflate(resource, parent, false);
@@ -95,8 +106,10 @@ public class SimpleAdapter extends BaseAdapter implements Filterable, ThemedSpin
 
     @Override // android.widget.BaseAdapter, android.widget.SpinnerAdapter
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = this.mDropDownInflater == null ? this.mInflater : this.mDropDownInflater;
-        return createViewFromResource(inflater, position, convertView, parent, this.mDropDownResource);
+        LayoutInflater inflater =
+                this.mDropDownInflater == null ? this.mInflater : this.mDropDownInflater;
+        return createViewFromResource(
+                inflater, position, convertView, parent, this.mDropDownResource);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -129,7 +142,10 @@ public class SimpleAdapter extends BaseAdapter implements Filterable, ThemedSpin
                     } else if (findViewById instanceof TextView) {
                         setViewText((TextView) findViewById, text);
                     } else {
-                        throw new IllegalStateException(findViewById.getClass().getName() + " should be bound to a Boolean, not a " + (data == null ? "<unknown type>" : data.getClass()));
+                        throw new IllegalStateException(
+                                findViewById.getClass().getName()
+                                        + " should be bound to a Boolean, not a "
+                                        + (data == null ? "<unknown type>" : data.getClass()));
                     }
                 } else if (findViewById instanceof TextView) {
                     setViewText((TextView) findViewById, text);
@@ -140,7 +156,9 @@ public class SimpleAdapter extends BaseAdapter implements Filterable, ThemedSpin
                         setViewImage((ImageView) findViewById, text);
                     }
                 } else {
-                    throw new IllegalStateException(findViewById.getClass().getName() + " is not a  view that can be bounds by this SimpleAdapter");
+                    throw new IllegalStateException(
+                            findViewById.getClass().getName()
+                                    + " is not a  view that can be bounds by this SimpleAdapter");
                 }
             }
         }
@@ -179,8 +197,7 @@ public class SimpleAdapter extends BaseAdapter implements Filterable, ThemedSpin
     }
 
     private class SimpleFilter extends Filter {
-        private SimpleFilter() {
-        }
+        private SimpleFilter() {}
 
         @Override // android.widget.Filter
         protected Filter.FilterResults performFiltering(CharSequence prefix) {

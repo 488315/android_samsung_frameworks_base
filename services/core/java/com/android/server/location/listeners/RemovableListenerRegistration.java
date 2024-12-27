@@ -1,6 +1,7 @@
 package com.android.server.location.listeners;
 
 import com.android.internal.listeners.ListenerExecutor;
+
 import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -30,16 +31,25 @@ public abstract class RemovableListenerRegistration implements ListenerExecutor 
     }
 
     public final void executeOperation(ListenerExecutor.ListenerOperation listenerOperation) {
-        executeSafely(this.mExecutor, new Supplier() { // from class: com.android.server.location.listeners.ListenerRegistration$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return RemovableListenerRegistration.this.mListener;
-            }
-        }, listenerOperation, new ListenerExecutor.FailureCallback() { // from class: com.android.server.location.listeners.ListenerRegistration$$ExternalSyntheticLambda1
-            public final void onFailure(ListenerExecutor.ListenerOperation listenerOperation2, Exception exc) {
-                RemovableListenerRegistration.this.onOperationFailure(listenerOperation2, exc);
-            }
-        });
+        executeSafely(
+                this.mExecutor,
+                new Supplier() { // from class:
+                                 // com.android.server.location.listeners.ListenerRegistration$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        return RemovableListenerRegistration.this.mListener;
+                    }
+                },
+                listenerOperation,
+                new ListenerExecutor
+                        .FailureCallback() { // from class:
+                                             // com.android.server.location.listeners.ListenerRegistration$$ExternalSyntheticLambda1
+                    public final void onFailure(
+                            ListenerExecutor.ListenerOperation listenerOperation2, Exception exc) {
+                        RemovableListenerRegistration.this.onOperationFailure(
+                                listenerOperation2, exc);
+                    }
+                });
     }
 
     public abstract ListenerMultiplexer getOwner();
@@ -50,13 +60,12 @@ public abstract class RemovableListenerRegistration implements ListenerExecutor 
 
     public abstract void onActive();
 
-    public void onInactive() {
-    }
+    public void onInactive() {}
 
-    public void onListenerUnregister() {
-    }
+    public void onListenerUnregister() {}
 
-    public abstract void onOperationFailure(ListenerExecutor.ListenerOperation listenerOperation, Exception exc);
+    public abstract void onOperationFailure(
+            ListenerExecutor.ListenerOperation listenerOperation, Exception exc);
 
     public abstract void onRegister();
 

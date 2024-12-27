@@ -10,12 +10,14 @@ import android.os.RemoteException;
 public interface IDisplayPortAltModeInfoListener extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.usb.IDisplayPortAltModeInfoListener";
 
-    void onDisplayPortAltModeInfoChanged(String str, DisplayPortAltModeInfo displayPortAltModeInfo) throws RemoteException;
+    void onDisplayPortAltModeInfoChanged(String str, DisplayPortAltModeInfo displayPortAltModeInfo)
+            throws RemoteException;
 
     public static class Default implements IDisplayPortAltModeInfoListener {
         @Override // android.hardware.usb.IDisplayPortAltModeInfoListener
-        public void onDisplayPortAltModeInfoChanged(String portId, DisplayPortAltModeInfo DisplayPortAltModeInfo) throws RemoteException {
-        }
+        public void onDisplayPortAltModeInfoChanged(
+                String portId, DisplayPortAltModeInfo DisplayPortAltModeInfo)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,7 @@ public interface IDisplayPortAltModeInfoListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDisplayPortAltModeInfoListener {
+    public abstract static class Stub extends Binder implements IDisplayPortAltModeInfoListener {
         static final int TRANSACTION_onDisplayPortAltModeInfoChanged = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface IDisplayPortAltModeInfoListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDisplayPortAltModeInfoListener.DESCRIPTOR);
             }
@@ -72,7 +75,9 @@ public interface IDisplayPortAltModeInfoListener extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    DisplayPortAltModeInfo _arg1 = (DisplayPortAltModeInfo) data.readTypedObject(DisplayPortAltModeInfo.CREATOR);
+                    DisplayPortAltModeInfo _arg1 =
+                            (DisplayPortAltModeInfo)
+                                    data.readTypedObject(DisplayPortAltModeInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onDisplayPortAltModeInfoChanged(_arg0, _arg1);
                     return true;
@@ -98,7 +103,9 @@ public interface IDisplayPortAltModeInfoListener extends IInterface {
             }
 
             @Override // android.hardware.usb.IDisplayPortAltModeInfoListener
-            public void onDisplayPortAltModeInfoChanged(String portId, DisplayPortAltModeInfo DisplayPortAltModeInfo) throws RemoteException {
+            public void onDisplayPortAltModeInfoChanged(
+                    String portId, DisplayPortAltModeInfo DisplayPortAltModeInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayPortAltModeInfoListener.DESCRIPTOR);

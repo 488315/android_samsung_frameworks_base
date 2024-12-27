@@ -7,19 +7,21 @@ import android.util.Printer;
 
 /* loaded from: classes.dex */
 public final class ProviderInfo extends ComponentInfo implements Parcelable {
-    public static final Parcelable.Creator<ProviderInfo> CREATOR = new Parcelable.Creator<ProviderInfo>() { // from class: android.content.pm.ProviderInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ProviderInfo createFromParcel(Parcel in) {
-            return new ProviderInfo(in);
-        }
+    public static final Parcelable.Creator<ProviderInfo> CREATOR =
+            new Parcelable.Creator<
+                    ProviderInfo>() { // from class: android.content.pm.ProviderInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ProviderInfo createFromParcel(Parcel in) {
+                    return new ProviderInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ProviderInfo[] newArray(int size) {
-            return new ProviderInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ProviderInfo[] newArray(int size) {
+                    return new ProviderInfo[size];
+                }
+            };
     public static final int FLAG_SINGLE_USER = 1073741824;
     public static final int FLAG_SYSTEM_USER_ONLY = 536870912;
     public static final int FLAG_VISIBLE_TO_INSTANT_APP = 1048576;
@@ -29,8 +31,7 @@ public final class ProviderInfo extends ComponentInfo implements Parcelable {
     public boolean grantUriPermissions;
     public int initOrder;
 
-    @Deprecated
-    public boolean isSyncable;
+    @Deprecated public boolean isSyncable;
     public boolean multiprocess;
     public PathPermission[] pathPermissions;
     public String readPermission;
@@ -93,7 +94,8 @@ public final class ProviderInfo extends ComponentInfo implements Parcelable {
         return 0;
     }
 
-    @Override // android.content.pm.ComponentInfo, android.content.pm.PackageItemInfo, android.os.Parcelable
+    @Override // android.content.pm.ComponentInfo, android.content.pm.PackageItemInfo,
+    // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
         super.writeToParcel(parcel, i);
         parcel.writeString8(this.authority);

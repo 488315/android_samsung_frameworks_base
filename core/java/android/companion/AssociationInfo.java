@@ -6,24 +6,27 @@ import android.net.MacAddress;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateFormat;
+
 import java.util.Date;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class AssociationInfo implements Parcelable {
-    public static final Parcelable.Creator<AssociationInfo> CREATOR = new Parcelable.Creator<AssociationInfo>() { // from class: android.companion.AssociationInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssociationInfo[] newArray(int size) {
-            return new AssociationInfo[size];
-        }
+    public static final Parcelable.Creator<AssociationInfo> CREATOR =
+            new Parcelable.Creator<
+                    AssociationInfo>() { // from class: android.companion.AssociationInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssociationInfo[] newArray(int size) {
+                    return new AssociationInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AssociationInfo createFromParcel(Parcel in) {
-            return new AssociationInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AssociationInfo createFromParcel(Parcel in) {
+                    return new AssociationInfo(in);
+                }
+            };
     private static final String LAST_TIME_CONNECTED_NONE = "None";
     private final AssociatedDevice mAssociatedDevice;
     private final MacAddress mDeviceMacAddress;
@@ -41,12 +44,28 @@ public final class AssociationInfo implements Parcelable {
     private final long mTimeApprovedMs;
     private final int mUserId;
 
-    public AssociationInfo(int id, int userId, String packageName, String tag, MacAddress macAddress, CharSequence displayName, String deviceProfile, AssociatedDevice associatedDevice, boolean selfManaged, boolean notifyOnDeviceNearby, boolean revoked, boolean pending, long timeApprovedMs, long lastTimeConnectedMs, int systemDataSyncFlags) {
+    public AssociationInfo(
+            int id,
+            int userId,
+            String packageName,
+            String tag,
+            MacAddress macAddress,
+            CharSequence displayName,
+            String deviceProfile,
+            AssociatedDevice associatedDevice,
+            boolean selfManaged,
+            boolean notifyOnDeviceNearby,
+            boolean revoked,
+            boolean pending,
+            long timeApprovedMs,
+            long lastTimeConnectedMs,
+            int systemDataSyncFlags) {
         if (id <= 0) {
             throw new IllegalArgumentException("Association ID should be greater than 0");
         }
         if (macAddress == null && displayName == null) {
-            throw new IllegalArgumentException("MAC address and the Display Name must NOT be null at the same time");
+            throw new IllegalArgumentException(
+                    "MAC address and the Display Name must NOT be null at the same time");
         }
         this.mId = id;
         this.mUserId = userId;
@@ -171,7 +190,43 @@ public final class AssociationInfo implements Parcelable {
     }
 
     public String toString() {
-        return "Association{mId=" + this.mId + ", mUserId=" + this.mUserId + ", mPackageName='" + this.mPackageName + DateFormat.QUOTE + ", mTag='" + this.mTag + DateFormat.QUOTE + ", mDeviceMacAddress=" + this.mDeviceMacAddress + ", mDisplayName='" + ((Object) this.mDisplayName) + DateFormat.QUOTE + ", mDeviceProfile='" + this.mDeviceProfile + DateFormat.QUOTE + ", mSelfManaged=" + this.mSelfManaged + ", mAssociatedDevice=" + this.mAssociatedDevice + ", mNotifyOnDeviceNearby=" + this.mNotifyOnDeviceNearby + ", mRevoked=" + this.mRevoked + ", mPending=" + this.mPending + ", mTimeApprovedMs=" + new Date(this.mTimeApprovedMs) + ", mLastTimeConnectedMs=" + (this.mLastTimeConnectedMs == Long.MAX_VALUE ? "None" : new Date(this.mLastTimeConnectedMs)) + ", mSystemDataSyncFlags=" + this.mSystemDataSyncFlags + '}';
+        return "Association{mId="
+                + this.mId
+                + ", mUserId="
+                + this.mUserId
+                + ", mPackageName='"
+                + this.mPackageName
+                + DateFormat.QUOTE
+                + ", mTag='"
+                + this.mTag
+                + DateFormat.QUOTE
+                + ", mDeviceMacAddress="
+                + this.mDeviceMacAddress
+                + ", mDisplayName='"
+                + ((Object) this.mDisplayName)
+                + DateFormat.QUOTE
+                + ", mDeviceProfile='"
+                + this.mDeviceProfile
+                + DateFormat.QUOTE
+                + ", mSelfManaged="
+                + this.mSelfManaged
+                + ", mAssociatedDevice="
+                + this.mAssociatedDevice
+                + ", mNotifyOnDeviceNearby="
+                + this.mNotifyOnDeviceNearby
+                + ", mRevoked="
+                + this.mRevoked
+                + ", mPending="
+                + this.mPending
+                + ", mTimeApprovedMs="
+                + new Date(this.mTimeApprovedMs)
+                + ", mLastTimeConnectedMs="
+                + (this.mLastTimeConnectedMs == Long.MAX_VALUE
+                        ? "None"
+                        : new Date(this.mLastTimeConnectedMs))
+                + ", mSystemDataSyncFlags="
+                + this.mSystemDataSyncFlags
+                + '}';
     }
 
     public boolean equals(Object o) {
@@ -182,11 +237,40 @@ public final class AssociationInfo implements Parcelable {
             return false;
         }
         AssociationInfo that = (AssociationInfo) o;
-        return this.mId == that.mId && this.mUserId == that.mUserId && this.mSelfManaged == that.mSelfManaged && this.mNotifyOnDeviceNearby == that.mNotifyOnDeviceNearby && this.mRevoked == that.mRevoked && this.mPending == that.mPending && this.mTimeApprovedMs == that.mTimeApprovedMs && this.mLastTimeConnectedMs == that.mLastTimeConnectedMs && Objects.equals(this.mPackageName, that.mPackageName) && Objects.equals(this.mTag, that.mTag) && Objects.equals(this.mDeviceMacAddress, that.mDeviceMacAddress) && Objects.equals(this.mDisplayName, that.mDisplayName) && Objects.equals(this.mDeviceProfile, that.mDeviceProfile) && Objects.equals(this.mAssociatedDevice, that.mAssociatedDevice) && this.mSystemDataSyncFlags == that.mSystemDataSyncFlags;
+        return this.mId == that.mId
+                && this.mUserId == that.mUserId
+                && this.mSelfManaged == that.mSelfManaged
+                && this.mNotifyOnDeviceNearby == that.mNotifyOnDeviceNearby
+                && this.mRevoked == that.mRevoked
+                && this.mPending == that.mPending
+                && this.mTimeApprovedMs == that.mTimeApprovedMs
+                && this.mLastTimeConnectedMs == that.mLastTimeConnectedMs
+                && Objects.equals(this.mPackageName, that.mPackageName)
+                && Objects.equals(this.mTag, that.mTag)
+                && Objects.equals(this.mDeviceMacAddress, that.mDeviceMacAddress)
+                && Objects.equals(this.mDisplayName, that.mDisplayName)
+                && Objects.equals(this.mDeviceProfile, that.mDeviceProfile)
+                && Objects.equals(this.mAssociatedDevice, that.mAssociatedDevice)
+                && this.mSystemDataSyncFlags == that.mSystemDataSyncFlags;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mId), Integer.valueOf(this.mUserId), this.mPackageName, this.mTag, this.mDeviceMacAddress, this.mDisplayName, this.mDeviceProfile, this.mAssociatedDevice, Boolean.valueOf(this.mSelfManaged), Boolean.valueOf(this.mNotifyOnDeviceNearby), Boolean.valueOf(this.mRevoked), Boolean.valueOf(this.mPending), Long.valueOf(this.mTimeApprovedMs), Long.valueOf(this.mLastTimeConnectedMs), Integer.valueOf(this.mSystemDataSyncFlags));
+        return Objects.hash(
+                Integer.valueOf(this.mId),
+                Integer.valueOf(this.mUserId),
+                this.mPackageName,
+                this.mTag,
+                this.mDeviceMacAddress,
+                this.mDisplayName,
+                this.mDeviceProfile,
+                this.mAssociatedDevice,
+                Boolean.valueOf(this.mSelfManaged),
+                Boolean.valueOf(this.mNotifyOnDeviceNearby),
+                Boolean.valueOf(this.mRevoked),
+                Boolean.valueOf(this.mPending),
+                Long.valueOf(this.mTimeApprovedMs),
+                Long.valueOf(this.mLastTimeConnectedMs),
+                Integer.valueOf(this.mSystemDataSyncFlags));
     }
 
     @Override // android.os.Parcelable
@@ -337,7 +421,10 @@ public final class AssociationInfo implements Parcelable {
 
         public Builder setTimeApproved(long timeApprovedMs) {
             if (timeApprovedMs < 0) {
-                throw new IllegalArgumentException("timeApprovedMs must be positive. Was given (" + timeApprovedMs + NavigationBarInflaterView.KEY_CODE_END);
+                throw new IllegalArgumentException(
+                        "timeApprovedMs must be positive. Was given ("
+                                + timeApprovedMs
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
             this.mTimeApprovedMs = timeApprovedMs;
             return this;
@@ -345,7 +432,10 @@ public final class AssociationInfo implements Parcelable {
 
         public Builder setLastTimeConnected(long lastTimeConnectedMs) {
             if (lastTimeConnectedMs < 0) {
-                throw new IllegalArgumentException("lastTimeConnectedMs must not be negative! (Given " + lastTimeConnectedMs + " )");
+                throw new IllegalArgumentException(
+                        "lastTimeConnectedMs must not be negative! (Given "
+                                + lastTimeConnectedMs
+                                + " )");
             }
             this.mLastTimeConnectedMs = lastTimeConnectedMs;
             return this;
@@ -361,9 +451,25 @@ public final class AssociationInfo implements Parcelable {
                 throw new IllegalArgumentException("Association ID should be greater than 0");
             }
             if (this.mDeviceMacAddress == null && this.mDisplayName == null) {
-                throw new IllegalArgumentException("MAC address and the display name must NOT be null at the same time");
+                throw new IllegalArgumentException(
+                        "MAC address and the display name must NOT be null at the same time");
             }
-            return new AssociationInfo(this.mId, this.mUserId, this.mPackageName, this.mTag, this.mDeviceMacAddress, this.mDisplayName, this.mDeviceProfile, this.mAssociatedDevice, this.mSelfManaged, this.mNotifyOnDeviceNearby, this.mRevoked, this.mPending, this.mTimeApprovedMs, this.mLastTimeConnectedMs, this.mSystemDataSyncFlags);
+            return new AssociationInfo(
+                    this.mId,
+                    this.mUserId,
+                    this.mPackageName,
+                    this.mTag,
+                    this.mDeviceMacAddress,
+                    this.mDisplayName,
+                    this.mDeviceProfile,
+                    this.mAssociatedDevice,
+                    this.mSelfManaged,
+                    this.mNotifyOnDeviceNearby,
+                    this.mRevoked,
+                    this.mPending,
+                    this.mTimeApprovedMs,
+                    this.mLastTimeConnectedMs,
+                    this.mSystemDataSyncFlags);
         }
     }
 }

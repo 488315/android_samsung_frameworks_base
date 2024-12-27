@@ -1,10 +1,10 @@
 package android.app;
 
-import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.os.Debug;
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -16,10 +16,10 @@ public class SemActivityTaskManager {
     private static final String TAG = "SemActivityTaskManager";
     private static SemActivityTaskManager sInstance;
     private TaskChangeController mTaskChangeController = new TaskChangeController();
-    private final CopyOnWriteArrayList<SemTaskChangeCallback> mTaskChangeCallbacks = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<SemTaskChangeCallback> mTaskChangeCallbacks =
+            new CopyOnWriteArrayList<>();
 
-    private SemActivityTaskManager() {
-    }
+    private SemActivityTaskManager() {}
 
     public static synchronized SemActivityTaskManager getInstance() {
         SemActivityTaskManager semActivityTaskManager;
@@ -86,8 +86,7 @@ public class SemActivityTaskManager {
     }
 
     private class TaskChangeController extends TaskStackListener {
-        private TaskChangeController() {
-        }
+        private TaskChangeController() {}
 
         @Override // android.app.TaskStackListener, android.app.ITaskStackListener
         public void onTaskCreated(int taskId, ComponentName componentName) {

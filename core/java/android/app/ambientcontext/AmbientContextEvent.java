@@ -5,8 +5,10 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Parcelling;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -38,20 +40,16 @@ public final class AmbientContextEvent implements Parcelable {
     private final PersistableBundle mVendorData;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Event {
-    }
+    public @interface Event {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EventCode {
-    }
+    public @interface EventCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Level {
-    }
+    public @interface Level {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LevelValue {
-    }
+    public @interface LevelValue {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int defaultEventType() {
@@ -119,19 +117,35 @@ public final class AmbientContextEvent implements Parcelable {
         }
     }
 
-    AmbientContextEvent(int eventType, Instant startTime, Instant endTime, int confidenceLevel, int densityLevel, PersistableBundle vendorData) {
+    AmbientContextEvent(
+            int eventType,
+            Instant startTime,
+            Instant endTime,
+            int confidenceLevel,
+            int densityLevel,
+            PersistableBundle vendorData) {
         this.mEventType = eventType;
-        AnnotationValidations.validate((Class<? extends Annotation>) EventCode.class, (Annotation) null, this.mEventType);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) EventCode.class, (Annotation) null, this.mEventType);
         this.mStartTime = startTime;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStartTime);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStartTime);
         this.mEndTime = endTime;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEndTime);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEndTime);
         this.mConfidenceLevel = confidenceLevel;
-        AnnotationValidations.validate((Class<? extends Annotation>) LevelValue.class, (Annotation) null, this.mConfidenceLevel);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) LevelValue.class,
+                (Annotation) null,
+                this.mConfidenceLevel);
         this.mDensityLevel = densityLevel;
-        AnnotationValidations.validate((Class<? extends Annotation>) LevelValue.class, (Annotation) null, this.mDensityLevel);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) LevelValue.class,
+                (Annotation) null,
+                this.mDensityLevel);
         this.mVendorData = vendorData;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mVendorData);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mVendorData);
     }
 
     public int getEventType() {
@@ -159,7 +173,19 @@ public final class AmbientContextEvent implements Parcelable {
     }
 
     public String toString() {
-        return "AmbientContextEvent { eventType = " + this.mEventType + ", startTime = " + this.mStartTime + ", endTime = " + this.mEndTime + ", confidenceLevel = " + this.mConfidenceLevel + ", densityLevel = " + this.mDensityLevel + ", vendorData = " + this.mVendorData + " }";
+        return "AmbientContextEvent { eventType = "
+                + this.mEventType
+                + ", startTime = "
+                + this.mStartTime
+                + ", endTime = "
+                + this.mEndTime
+                + ", confidenceLevel = "
+                + this.mConfidenceLevel
+                + ", densityLevel = "
+                + this.mDensityLevel
+                + ", vendorData = "
+                + this.mVendorData
+                + " }";
     }
 
     static {
@@ -171,19 +197,21 @@ public final class AmbientContextEvent implements Parcelable {
         if (sParcellingForEndTime == null) {
             sParcellingForEndTime = Parcelling.Cache.put(new Parcelling.BuiltIn.ForInstant());
         }
-        CREATOR = new Parcelable.Creator<AmbientContextEvent>() { // from class: android.app.ambientcontext.AmbientContextEvent.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AmbientContextEvent[] newArray(int size) {
-                return new AmbientContextEvent[size];
-            }
+        CREATOR =
+                new Parcelable.Creator<AmbientContextEvent>() { // from class:
+                    // android.app.ambientcontext.AmbientContextEvent.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AmbientContextEvent[] newArray(int size) {
+                        return new AmbientContextEvent[size];
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AmbientContextEvent createFromParcel(Parcel in) {
-                return new AmbientContextEvent(in);
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AmbientContextEvent createFromParcel(Parcel in) {
+                        return new AmbientContextEvent(in);
+                    }
+                };
     }
 
     @Override // android.os.Parcelable
@@ -207,19 +235,30 @@ public final class AmbientContextEvent implements Parcelable {
         Instant endTime = sParcellingForEndTime.unparcel(in);
         int confidenceLevel = in.readInt();
         int densityLevel = in.readInt();
-        PersistableBundle vendorData = (PersistableBundle) in.readTypedObject(PersistableBundle.CREATOR);
+        PersistableBundle vendorData =
+                (PersistableBundle) in.readTypedObject(PersistableBundle.CREATOR);
         this.mEventType = eventType;
-        AnnotationValidations.validate((Class<? extends Annotation>) EventCode.class, (Annotation) null, this.mEventType);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) EventCode.class, (Annotation) null, this.mEventType);
         this.mStartTime = startTime;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStartTime);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStartTime);
         this.mEndTime = endTime;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEndTime);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEndTime);
         this.mConfidenceLevel = confidenceLevel;
-        AnnotationValidations.validate((Class<? extends Annotation>) LevelValue.class, (Annotation) null, this.mConfidenceLevel);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) LevelValue.class,
+                (Annotation) null,
+                this.mConfidenceLevel);
         this.mDensityLevel = densityLevel;
-        AnnotationValidations.validate((Class<? extends Annotation>) LevelValue.class, (Annotation) null, this.mDensityLevel);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) LevelValue.class,
+                (Annotation) null,
+                this.mDensityLevel);
         this.mVendorData = vendorData;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mVendorData);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mVendorData);
     }
 
     public static final class Builder {
@@ -294,18 +333,25 @@ public final class AmbientContextEvent implements Parcelable {
             if ((this.mBuilderFieldsSet & 32) == 0) {
                 this.mVendorData = AmbientContextEvent.defaultVendorData();
             }
-            AmbientContextEvent o = new AmbientContextEvent(this.mEventType, this.mStartTime, this.mEndTime, this.mConfidenceLevel, this.mDensityLevel, this.mVendorData);
+            AmbientContextEvent o =
+                    new AmbientContextEvent(
+                            this.mEventType,
+                            this.mStartTime,
+                            this.mEndTime,
+                            this.mConfidenceLevel,
+                            this.mDensityLevel,
+                            this.mVendorData);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 64) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

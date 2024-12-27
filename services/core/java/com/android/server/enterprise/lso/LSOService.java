@@ -18,11 +18,13 @@ import android.os.UserHandle;
 import android.sec.enterprise.auditlog.AuditLog;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.EnterpriseServiceCallback;
 import com.android.server.enterprise.adapterlayer.SystemUIAdapter;
 import com.android.server.enterprise.utils.Utils;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.lockscreen.ILockscreenOverlay;
@@ -32,6 +34,7 @@ import com.samsung.android.knox.lockscreen.LSOItemContainer;
 import com.samsung.android.knox.lockscreen.LSOItemData;
 import com.samsung.android.knox.lockscreen.LSOItemImage;
 import com.samsung.android.knox.lockscreen.LSOUtils;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -51,22 +54,29 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
     public final Point screenDimesions;
     public final LSOStorageProvider storageProvider;
     public EnterpriseDeviceManager mEDM = null;
-    public final AnonymousClass1 mReceiver = new BroadcastReceiver() { // from class: com.android.server.enterprise.lso.LSOService.1
-        @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
-            if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL".equals(intent.getAction())) {
-                int intExtra = intent.getIntExtra("com.samsung.android.knox.intent.extra.USER_ID_INTERNAL", 0);
-                LSOService lSOService = LSOService.this;
-                lSOService.setLockscreenInvisibleOverlaySystemUI(intExtra, lSOService.isConfigured(null, 1));
-                lSOService.setLockscreenWallpaperSystemUI(intExtra, lSOService.isConfigured(null, 2));
-            }
-        }
-    };
+    public final AnonymousClass1 mReceiver =
+            new BroadcastReceiver() { // from class: com.android.server.enterprise.lso.LSOService.1
+                @Override // android.content.BroadcastReceiver
+                public final void onReceive(Context context, Intent intent) {
+                    if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"
+                            .equals(intent.getAction())) {
+                        int intExtra =
+                                intent.getIntExtra(
+                                        "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL",
+                                        0);
+                        LSOService lSOService = LSOService.this;
+                        lSOService.setLockscreenInvisibleOverlaySystemUI(
+                                intExtra, lSOService.isConfigured(null, 1));
+                        lSOService.setLockscreenWallpaperSystemUI(
+                                intExtra, lSOService.isConfigured(null, 2));
+                    }
+                }
+            };
 
     /* JADX WARN: Code restructure failed: missing block: B:48:0x00a5, code lost:
-    
-        if (r8 != null) goto L24;
-     */
+
+       if (r8 != null) goto L24;
+    */
     /* JADX WARN: Removed duplicated region for block: B:40:0x0105 A[SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:44:0x00ee  */
     /* JADX WARN: Removed duplicated region for block: B:45:0x0105 A[SYNTHETIC] */
@@ -80,7 +90,9 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
             Method dump skipped, instructions count: 290
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.lso.LSOService.<init>(android.content.Context):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.lso.LSOService.<init>(android.content.Context):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:49:0x0096 A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -90,7 +102,8 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String copyFileFromParcel(android.os.ParcelFileDescriptor r8, java.lang.String r9) {
+    public static java.lang.String copyFileFromParcel(
+            android.os.ParcelFileDescriptor r8, java.lang.String r9) {
         /*
             java.lang.String r0 = "failed to close outputstream"
             java.lang.String r1 = "failed to close inputstream"
@@ -195,7 +208,10 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
         L9d:
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.lso.LSOService.copyFileFromParcel(android.os.ParcelFileDescriptor, java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.lso.LSOService.copyFileFromParcel(android.os.ParcelFileDescriptor,"
+                    + " java.lang.String):java.lang.String");
     }
 
     public static void deleteWallpaperFiles() {
@@ -217,13 +233,13 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
 
     /* JADX WARN: Can't wrap try/catch for region: R(14:0|1|(2:2|3)|(2:26|(5:29|(3:18|19|(1:22))|(1:13)|14|15))|7|(0)|18|19|(0)|22|(1:13)(1:13)|14|15|(1:(0))) */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x002b, code lost:
-    
-        r6 = e;
-     */
+
+       r6 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x002f, code lost:
-    
-        com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(r6, "canConfigure() Unhandled exception.", "LSOService");
-     */
+
+       com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(r6, "canConfigure() Unhandled exception.", "LSOService");
+    */
     /* JADX WARN: Removed duplicated region for block: B:12:0x0037 A[ADDED_TO_REGION] */
     /* JADX WARN: Removed duplicated region for block: B:17:0x003c A[ADDED_TO_REGION] */
     /*
@@ -295,11 +311,16 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
             android.util.Log.d(r0, r6)
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.lso.LSOService.canConfigure(com.samsung.android.knox.ContextInfo, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.lso.LSOService.canConfigure(com.samsung.android.knox.ContextInfo,"
+                    + " int):boolean");
     }
 
     public final synchronized String copyFile(int i, String str, String str2) {
-        return LSOUtils.copyFile(str, str2 + "_" + String.valueOf(i) + String.valueOf(0) + "_" + new File(str).getName());
+        return LSOUtils.copyFile(
+                str,
+                str2 + "_" + String.valueOf(i) + String.valueOf(0) + "_" + new File(str).getName());
     }
 
     public final synchronized boolean copyFiles(int i, LSOItemData lSOItemData, int i2) {
@@ -346,7 +367,9 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
             if (type == 3) {
                 LSOItemImage lSOItemImage = (LSOItemImage) lSOItemData;
                 if (lSOItemImage.getImagePath() != null) {
-                    String copyFileFromParcel = copyFileFromParcel(lSOItemImage.getFileDescriptor(), lSOItemImage.getImagePath());
+                    String copyFileFromParcel =
+                            copyFileFromParcel(
+                                    lSOItemImage.getFileDescriptor(), lSOItemImage.getImagePath());
                     if (copyFileFromParcel == null) {
                         Log.e("LSOService", "copyFiles2 - LSO_ITEM_TYPE_IMAGE : file no created");
                         return false;
@@ -362,9 +385,14 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
             } else if (type == 4) {
                 LSOItemContainer lSOItemContainer = (LSOItemContainer) lSOItemData;
                 if (lSOItemContainer.getBGImagePath() != null) {
-                    String copyFileFromParcel2 = copyFileFromParcel(lSOItemContainer.getFileDescriptor(), lSOItemContainer.getBGImagePath());
+                    String copyFileFromParcel2 =
+                            copyFileFromParcel(
+                                    lSOItemContainer.getFileDescriptor(),
+                                    lSOItemContainer.getBGImagePath());
                     if (copyFileFromParcel2 == null) {
-                        Log.e("LSOService", "copyFiles2 - LSO_ITEM_TYPE_CONTAINER : file no created");
+                        Log.e(
+                                "LSOService",
+                                "copyFiles2 - LSO_ITEM_TYPE_CONTAINER : file no created");
                         return false;
                     }
                     String copyFile2 = copyFile(i, copyFileFromParcel2, str);
@@ -382,7 +410,9 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
             Log.e("LSOService", "copyFiles2() - failed. ", e);
         }
         if (z && (attrs = lSOItemData.getAttrs()) != null && attrs.containsKey("android:src")) {
-            String copyFileFromParcel3 = copyFileFromParcel(lSOItemData.getFileDescriptor(), attrs.getAsString("android:src"));
+            String copyFileFromParcel3 =
+                    copyFileFromParcel(
+                            lSOItemData.getFileDescriptor(), attrs.getAsString("android:src"));
             if (copyFileFromParcel3 == null) {
                 Log.e("LSOService", "copyFiles2 - attrSet ATTR_IMAGE_SRC : file no created");
                 return false;
@@ -412,7 +442,10 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
                     LSOUtils.deleteRecursive(new File("/data/system/enterprise/lso/" + i));
                 }
             } catch (Exception e) {
-                Log.e("LSOService", "deleteFiles() : failed layer - " + LSOConstants.getLayerName(i), e);
+                Log.e(
+                        "LSOService",
+                        "deleteFiles() : failed layer - " + LSOConstants.getLayerName(i),
+                        e);
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
         } catch (Throwable th) {
@@ -421,7 +454,8 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
         }
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
             printWriter.println("Permission Denial: can't dump LSOService");
             return;
@@ -443,7 +477,8 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
                 LSOItemData data = getData(null, i);
                 if (data != null) {
                     sb.append(System.lineSeparator());
-                    sb.append("    Layer " + LSOConstants.getLayerName(i) + " : " + data.toString());
+                    sb.append(
+                            "    Layer " + LSOConstants.getLayerName(i) + " : " + data.toString());
                 }
             }
             sb.append(System.lineSeparator());
@@ -455,7 +490,10 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        return this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_LOCKSCREEN")));
+        return this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(
+                contextInfo,
+                new ArrayList(
+                        Arrays.asList("com.samsung.android.knox.permission.KNOX_LOCKSCREEN")));
     }
 
     public final synchronized LSOItemData getData(ContextInfo contextInfo, int i) {
@@ -494,12 +532,10 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     public final void onAdminRemoved(int i) {
@@ -533,14 +569,21 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
         ContextInfo enforceOwnerOnlyPermission = enforceOwnerOnlyPermission(contextInfo);
         int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOwnerOnlyPermission);
         if (i < 0 || i > 3) {
-            throw new InvalidParameterException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid layer. Layer must be 0...3 but requseted "));
+            throw new InvalidParameterException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(
+                            i, "Invalid layer. Layer must be 0...3 but requseted "));
         }
         if (!canConfigure(enforceOwnerOnlyPermission, 1)) {
             Log.e("LSOService", "resetData() : Not allowed to reset Overlay");
             return;
         }
         if (enforceOwnerOnlyPermission.mCallerUid != this.mOverlayAdminUid) {
-            Log.e("LSOService", "resetData() : requested uid is diffren with present admin = " + this.mOverlayAdminUid + " but " + enforceOwnerOnlyPermission.mCallerUid);
+            Log.e(
+                    "LSOService",
+                    "resetData() : requested uid is diffren with present admin = "
+                            + this.mOverlayAdminUid
+                            + " but "
+                            + enforceOwnerOnlyPermission.mCallerUid);
             return;
         }
         deleteFiles(i);
@@ -560,7 +603,16 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                AuditLog.logAsUser(5, 1, true, Process.myPid(), "LSOService", String.format("Admin %d has reset banner settings.", Integer.valueOf(enforceOwnerOnlyPermission.mCallerUid)), callingOrCurrentUserId);
+                AuditLog.logAsUser(
+                        5,
+                        1,
+                        true,
+                        Process.myPid(),
+                        "LSOService",
+                        String.format(
+                                "Admin %d has reset banner settings.",
+                                Integer.valueOf(enforceOwnerOnlyPermission.mCallerUid)),
+                        callingOrCurrentUserId);
             } catch (Exception e) {
                 if (DEBUG) {
                     e.printStackTrace();
@@ -586,7 +638,16 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
             this.mWallpaperAdminUid = -1;
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AuditLog.logAsUser(5, 1, true, Process.myPid(), "LSOService", String.format("Admin %d has reset banner wallpaper.", Integer.valueOf(enforceOwnerOnlyPermission.mCallerUid)), callingOrCurrentUserId);
+                AuditLog.logAsUser(
+                        5,
+                        1,
+                        true,
+                        Process.myPid(),
+                        "LSOService",
+                        String.format(
+                                "Admin %d has reset banner wallpaper.",
+                                Integer.valueOf(enforceOwnerOnlyPermission.mCallerUid)),
+                        callingOrCurrentUserId);
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 sendConfigChangeNotification(callingOrCurrentUserId);
             } catch (Throwable th) {
@@ -602,8 +663,12 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                Intent intent = new Intent("com.samsung.android.knox.intent.action.LSO_CONFIG_CHANGED_INTERNAL");
-                intent.putExtra("com.samsung.android.knox.intent.extra.KNOX_WALLPAPER_ENABLED_INTERNAL", isConfigured2 ? 1 : 0);
+                Intent intent =
+                        new Intent(
+                                "com.samsung.android.knox.intent.action.LSO_CONFIG_CHANGED_INTERNAL");
+                intent.putExtra(
+                        "com.samsung.android.knox.intent.extra.KNOX_WALLPAPER_ENABLED_INTERNAL",
+                        isConfigured2 ? 1 : 0);
                 this.mContext.sendBroadcastAsUser(intent, UserHandle.ALL, null);
                 Log.d("LSOService", "sendConfigChangeNotification() - done");
             } catch (Exception e) {
@@ -613,7 +678,10 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
                 setLockscreenInvisibleOverlaySystemUI(i, isConfigured2);
                 setLockscreenWallpaperSystemUI(i, isConfigured);
             } catch (Exception e2) {
-                Log.e("LSOService", "sendConfigChangeNotification() : failed to update system ui.", e2);
+                Log.e(
+                        "LSOService",
+                        "sendConfigChangeNotification() : failed to update system ui.",
+                        e2);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -630,10 +698,13 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
                 throw new InvalidParameterException("Invalid layer. Layer must be 1...3");
             }
             if (!canConfigure(enforceOwnerOnlyPermission, 1)) {
-                Log.i("LSOService", "Lockscreen is configured by another admin. Overwrite not allowed.");
+                Log.i(
+                        "LSOService",
+                        "Lockscreen is configured by another admin. Overwrite not allowed.");
                 return -1;
             }
-            TelephonyManager telephonyManager = (TelephonyManager) this.mContext.getSystemService("phone");
+            TelephonyManager telephonyManager =
+                    (TelephonyManager) this.mContext.getSystemService("phone");
             if (i == 3 && (telephonyManager == null || !telephonyManager.isVoiceCapable())) {
                 Log.i("LSOService", "setData() failed because telephony is not supported.");
                 return -3;
@@ -657,7 +728,16 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
             sendConfigChangeNotification(callingOrCurrentUserId);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AuditLog.logAsUser(5, 1, true, Process.myPid(), "LSOService", String.format("Admin %d has changed banner settings.", Integer.valueOf(enforceOwnerOnlyPermission.mCallerUid)), callingOrCurrentUserId);
+                AuditLog.logAsUser(
+                        5,
+                        1,
+                        true,
+                        Process.myPid(),
+                        "LSOService",
+                        String.format(
+                                "Admin %d has changed banner settings.",
+                                Integer.valueOf(enforceOwnerOnlyPermission.mCallerUid)),
+                        callingOrCurrentUserId);
                 return 0;
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -671,7 +751,8 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                SystemUIAdapter.getInstance(this.mContext).setLockscreenInvisibleOverlayAsUser(i, z);
+                SystemUIAdapter.getInstance(this.mContext)
+                        .setLockscreenInvisibleOverlayAsUser(i, z);
             } catch (Exception e) {
                 Log.e("LSOService", "setLockscreenInvisibleOverlaySystemUI() failed. ", e);
             }
@@ -701,7 +782,10 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
             return -6;
         }
         if (i != enforceOwnerOnlyPermission.mCallerUid) {
-            Log.i("LSOService", "setPreferences() : Lockscreen is configured by another admin. Overwrite not allowed.");
+            Log.i(
+                    "LSOService",
+                    "setPreferences() : Lockscreen is configured by another admin. Overwrite not"
+                        + " allowed.");
             return -1;
         }
         LSOItemData[] lSOItemDataArr = this.mItemData;
@@ -719,10 +803,18 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
         }
         Log.d("LSOStorageProvider", "Insert/Update record: ADMIN_REF");
         SQLiteDatabase writableDatabase = lSOStorageProvider.mEdmDbHelper.getWritableDatabase();
-        int update = writableDatabase.update("ADMIN_REF", contentValues, "policyName=?", new String[]{"LOCKSCREEN_OVERLAY"});
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(update, "Number of rows updated: ", "LSOStorageProvider");
+        int update =
+                writableDatabase.update(
+                        "ADMIN_REF",
+                        contentValues,
+                        "policyName=?",
+                        new String[] {"LOCKSCREEN_OVERLAY"});
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                update, "Number of rows updated: ", "LSOStorageProvider");
         if (update <= 0) {
-            Log.e("LSOStorageProvider", "ADMIN_REF: Failed to insert record - " + contentValues.toString());
+            Log.e(
+                    "LSOStorageProvider",
+                    "ADMIN_REF: Failed to insert record - " + contentValues.toString());
             writableDatabase.close();
         }
         boolean z = update > 0;
@@ -731,7 +823,16 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
             this.lsoPref = lSOAttributeSet;
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AuditLog.logAsUser(5, 1, true, Process.myPid(), "LSOService", String.format("Admin %d has changed banner settings.", Integer.valueOf(enforceOwnerOnlyPermission.mCallerUid)), UserHandle.getUserId(enforceOwnerOnlyPermission.mCallerUid));
+                AuditLog.logAsUser(
+                        5,
+                        1,
+                        true,
+                        Process.myPid(),
+                        "LSOService",
+                        String.format(
+                                "Admin %d has changed banner settings.",
+                                Integer.valueOf(enforceOwnerOnlyPermission.mCallerUid)),
+                        UserHandle.getUserId(enforceOwnerOnlyPermission.mCallerUid));
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -739,18 +840,24 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
         return z ? 0 : -4;
     }
 
-    public final int setWallpaper(ContextInfo contextInfo, String str, ParcelFileDescriptor parcelFileDescriptor) {
+    public final int setWallpaper(
+            ContextInfo contextInfo, String str, ParcelFileDescriptor parcelFileDescriptor) {
         boolean z;
         DualAppManagerService$$ExternalSyntheticOutline0.m("setWallpaper(", str, ")", "LSOService");
         ContextInfo enforceOwnerOnlyPermission = enforceOwnerOnlyPermission(contextInfo);
         int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOwnerOnlyPermission);
         int i = enforceOwnerOnlyPermission.mCallerUid;
         if (!canConfigure(enforceOwnerOnlyPermission, 2)) {
-            Log.d("LSOService", "setWallpaper() : Lockscreen is configured by another admin. Overwrite not allowed.");
+            Log.d(
+                    "LSOService",
+                    "setWallpaper() : Lockscreen is configured by another admin. Overwrite not"
+                        + " allowed.");
             return -1;
         }
         if (str == null || parcelFileDescriptor == null) {
-            Log.d("LSOService", "setWallpaper() : imageFilePath or image is null, please check path");
+            Log.d(
+                    "LSOService",
+                    "setWallpaper() : imageFilePath or image is null, please check path");
             return -4;
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -779,10 +886,19 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
             }
             this.storageProvider.resetWallpaperData();
             Bitmap.CompressFormat compressFormat = Bitmap.CompressFormat.JPEG;
-            z = LSOUtils.convertImageFormat(copyFileFromParcel, compressFormat, "/data/system/enterprise/lso/lockscreen_wallpaper.jpg", this.screenDimesions);
+            z =
+                    LSOUtils.convertImageFormat(
+                            copyFileFromParcel,
+                            compressFormat,
+                            "/data/system/enterprise/lso/lockscreen_wallpaper.jpg",
+                            this.screenDimesions);
             if (z) {
                 Log.d("LSOService", "setWallpaper() : Create Ripple image");
-                z = LSOUtils.createRippleImage("/data/system/enterprise/lso/lockscreen_wallpaper.jpg", compressFormat, "/data/system/enterprise/lso/lockscreen_wallpaper_ripple.jpg");
+                z =
+                        LSOUtils.createRippleImage(
+                                "/data/system/enterprise/lso/lockscreen_wallpaper.jpg",
+                                compressFormat,
+                                "/data/system/enterprise/lso/lockscreen_wallpaper_ripple.jpg");
             }
             if (!z) {
                 Log.e("LSOService", "setWallpaper() : Error in copying file");
@@ -814,7 +930,16 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
             sendConfigChangeNotification(callingOrCurrentUserId);
             clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AuditLog.logAsUser(5, 1, true, Process.myPid(), "LSOService", String.format("Admin %d has changed banner wallpaper to file %s", Integer.valueOf(enforceOwnerOnlyPermission.mCallerUid), str), callingOrCurrentUserId);
+                AuditLog.logAsUser(
+                        5,
+                        1,
+                        true,
+                        Process.myPid(),
+                        "LSOService",
+                        String.format(
+                                "Admin %d has changed banner wallpaper to file %s",
+                                Integer.valueOf(enforceOwnerOnlyPermission.mCallerUid), str),
+                        callingOrCurrentUserId);
             } catch (Exception unused) {
             } catch (Throwable th) {
                 throw th;
@@ -827,6 +952,5 @@ public final class LSOService extends ILockscreenOverlay.Stub implements Enterpr
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void systemReady() {
-    }
+    public final void systemReady() {}
 }

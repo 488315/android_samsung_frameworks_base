@@ -9,19 +9,22 @@ import android.view.animation.AnimationUtils;
 
 /* loaded from: classes4.dex */
 public class SemRemoteViewsViewAnimation extends SemRemoteViewsAnimation {
-    public static final Parcelable.Creator<SemRemoteViewsViewAnimation> CREATOR = new Parcelable.Creator<SemRemoteViewsViewAnimation>() { // from class: android.widget.SemRemoteViewsViewAnimation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemRemoteViewsViewAnimation createFromParcel(Parcel in) {
-            return new SemRemoteViewsViewAnimation(in);
-        }
+    public static final Parcelable.Creator<SemRemoteViewsViewAnimation> CREATOR =
+            new Parcelable.Creator<
+                    SemRemoteViewsViewAnimation>() { // from class:
+                                                     // android.widget.SemRemoteViewsViewAnimation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemRemoteViewsViewAnimation createFromParcel(Parcel in) {
+                    return new SemRemoteViewsViewAnimation(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemRemoteViewsViewAnimation[] newArray(int size) {
-            return new SemRemoteViewsViewAnimation[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemRemoteViewsViewAnimation[] newArray(int size) {
+                    return new SemRemoteViewsViewAnimation[size];
+                }
+            };
     private static final String LOG_TAG = "SemRemoteViewsViewAnimation";
     private final int mAnimResId;
 
@@ -57,7 +60,10 @@ public class SemRemoteViewsViewAnimation extends SemRemoteViewsAnimation {
     @Override // android.widget.SemRemoteViewsAnimation
     protected void startAnimation(View root) {
         View target;
-        if (root == null || this.mAnimResId <= 0 || this.mIsExpired || (target = root.findViewById(this.mViewId)) == null) {
+        if (root == null
+                || this.mAnimResId <= 0
+                || this.mIsExpired
+                || (target = root.findViewById(this.mViewId)) == null) {
             return;
         }
         Context context = root.getContext();
@@ -65,20 +71,21 @@ public class SemRemoteViewsViewAnimation extends SemRemoteViewsAnimation {
         if (anim == null) {
             return;
         }
-        anim.setAnimationListener(new Animation.AnimationListener() { // from class: android.widget.SemRemoteViewsViewAnimation.2
-            @Override // android.view.animation.Animation.AnimationListener
-            public void onAnimationStart(Animation animation) {
-            }
+        anim.setAnimationListener(
+                new Animation
+                        .AnimationListener() { // from class:
+                                               // android.widget.SemRemoteViewsViewAnimation.2
+                    @Override // android.view.animation.Animation.AnimationListener
+                    public void onAnimationStart(Animation animation) {}
 
-            @Override // android.view.animation.Animation.AnimationListener
-            public void onAnimationRepeat(Animation animation) {
-            }
+                    @Override // android.view.animation.Animation.AnimationListener
+                    public void onAnimationRepeat(Animation animation) {}
 
-            @Override // android.view.animation.Animation.AnimationListener
-            public void onAnimationEnd(Animation animation) {
-                SemRemoteViewsViewAnimation.this.mIsExpired = true;
-            }
-        });
+                    @Override // android.view.animation.Animation.AnimationListener
+                    public void onAnimationEnd(Animation animation) {
+                        SemRemoteViewsViewAnimation.this.mIsExpired = true;
+                    }
+                });
         if (this.mIsExpired) {
             anim.setDuration(0L);
         }
@@ -88,6 +95,5 @@ public class SemRemoteViewsViewAnimation extends SemRemoteViewsAnimation {
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.widget.SemRemoteViewsAnimation
     /* renamed from: endAnimation */
-    public void lambda$play$0(View root) {
-    }
+    public void lambda$play$0(View root) {}
 }

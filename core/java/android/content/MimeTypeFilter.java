@@ -4,15 +4,16 @@ import java.util.ArrayList;
 
 /* loaded from: classes.dex */
 public final class MimeTypeFilter {
-    private MimeTypeFilter() {
-    }
+    private MimeTypeFilter() {}
 
     private static boolean mimeTypeAgainstFilter(String[] mimeTypeParts, String[] filterParts) {
         if (filterParts.length != 2) {
-            throw new IllegalArgumentException("Ill-formatted MIME type filter. Must be type/subtype.");
+            throw new IllegalArgumentException(
+                    "Ill-formatted MIME type filter. Must be type/subtype.");
         }
         if (filterParts[0].isEmpty() || filterParts[1].isEmpty()) {
-            throw new IllegalArgumentException("Ill-formatted MIME type filter. Type or subtype empty.");
+            throw new IllegalArgumentException(
+                    "Ill-formatted MIME type filter. Type or subtype empty.");
         }
         if (mimeTypeParts.length != 2) {
             return false;

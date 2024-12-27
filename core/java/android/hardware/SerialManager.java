@@ -3,6 +3,7 @@ package android.hardware;
 import android.content.Context;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+
 import java.io.IOException;
 
 /* loaded from: classes.dex */

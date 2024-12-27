@@ -5,11 +5,13 @@ import android.os.Build;
 import android.os.SystemProperties;
 import android.security.keystore.KeyGenParameterSpec;
 import android.util.Slog;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
 import com.samsung.android.security.keystore.AttestParameterSpec;
 import com.samsung.android.security.keystore.AttestationUtils;
-import com.samsung.android.ssdid.ISemSsdidManagerService;
 import com.samsung.android.wifi.SemWifiManager;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,13 +37,24 @@ public final class SemSsdidManagerService extends ISemSsdidManagerService.Stub {
     public final String getSsdid() {
         AttestationUtils attestationUtils;
         String str;
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.READ_SSDID", "required permissions");
-        this.mContext.enforceCallingOrSelfPermission("android.permission.READ_PRIVILEGED_PHONE_STATE", "required permissions");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.READ_SSDID", "required permissions");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.READ_PRIVILEGED_PHONE_STATE", "required permissions");
         if (this.mSsdid.isEmpty()) {
             String str2 = "";
             String str3 = SystemProperties.get("ro.security.keystore.keytype", "");
             int i = 0;
-            String str4 = str3.contains("sakv2") ? "sakv2" : (!str3.contains("sakm") || SystemProperties.getInt("ro.product.first_api_level", 0) < 34 || "m55xq".contains(Build.DEVICE)) ? "" : "sakm";
+            String str4 =
+                    str3.contains("sakv2")
+                            ? "sakv2"
+                            : (!str3.contains("sakm")
+                                            || SystemProperties.getInt(
+                                                            "ro.product.first_api_level", 0)
+                                                    < 34
+                                            || "m55xq".contains(Build.DEVICE))
+                                    ? ""
+                                    : "sakm";
             String str5 = null;
             r10 = null;
             byte[] bArr = null;
@@ -50,7 +63,11 @@ public final class SemSsdidManagerService extends ISemSsdidManagerService.Stub {
                 String serial = Build.getSerial();
                 if (serial == null || "unknown".equals(serial)) {
                     try {
-                        BufferedReader bufferedReader = new BufferedReader(new FileReader("/efs/FactoryApp/serial_no", StandardCharsets.UTF_8));
+                        BufferedReader bufferedReader =
+                                new BufferedReader(
+                                        new FileReader(
+                                                "/efs/FactoryApp/serial_no",
+                                                StandardCharsets.UTF_8));
                         try {
                             str = bufferedReader.readLine();
                             bufferedReader.close();
@@ -62,7 +79,9 @@ public final class SemSsdidManagerService extends ISemSsdidManagerService.Stub {
                     }
                     serial = str != null ? str.split(",")[0] : null;
                 }
-                String factoryMacAddress = ((SemWifiManager) this.mContext.getSystemService("sem_wifi")).getFactoryMacAddress();
+                String factoryMacAddress =
+                        ((SemWifiManager) this.mContext.getSystemService("sem_wifi"))
+                                .getFactoryMacAddress();
                 if (serial != null && factoryMacAddress != null) {
                     String concat = serial.concat(factoryMacAddress);
                     if (concat != null) {
@@ -87,13 +106,27 @@ public final class SemSsdidManagerService extends ISemSsdidManagerService.Stub {
                 if ("sakv2".equals(str4)) {
                     attestationUtils.generateKeyPair("SemSsdidManagerService", new byte[0]);
                 } else if ("sakm".equals(str4)) {
-                    attestationUtils.generateKeyPair(new AttestParameterSpec(new byte[0], false, true, new KeyGenParameterSpec.Builder("SemSsdidManagerService", 4).setDigests("NONE", "SHA-1", "SHA-224", "SHA-256", "SHA-384", "SHA-512").build()));
+                    attestationUtils.generateKeyPair(
+                            new AttestParameterSpec(
+                                    new byte[0],
+                                    false,
+                                    true,
+                                    new KeyGenParameterSpec.Builder("SemSsdidManagerService", 4)
+                                            .setDigests(
+                                                    "NONE", "SHA-1", "SHA-224", "SHA-256",
+                                                    "SHA-384", "SHA-512")
+                                            .build()));
                 } else {
                     Slog.e("SemSsdidManagerService", "invalid ".concat(str4));
                     this.mSsdid = str2;
                 }
-                X509Certificate x509Certificate = (X509Certificate) AttestationUtils.getCertificateChain("SemSsdidManagerService")[0];
-                Principal issuerDN = "sakv2".equals(str4) ? x509Certificate.getIssuerDN() : x509Certificate.getSubjectDN();
+                X509Certificate x509Certificate =
+                        (X509Certificate)
+                                AttestationUtils.getCertificateChain("SemSsdidManagerService")[0];
+                Principal issuerDN =
+                        "sakv2".equals(str4)
+                                ? x509Certificate.getIssuerDN()
+                                : x509Certificate.getSubjectDN();
                 String[] split = issuerDN != null ? issuerDN.toString().split(",") : null;
                 if (split != null) {
                     int length = split.length;
@@ -119,7 +152,8 @@ public final class SemSsdidManagerService extends ISemSsdidManagerService.Stub {
                 this.mSsdid = str2;
             }
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("getSsdid: "), this.mSsdid, "SemSsdidManagerService");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("getSsdid: "), this.mSsdid, "SemSsdidManagerService");
         return this.mSsdid;
     }
 }

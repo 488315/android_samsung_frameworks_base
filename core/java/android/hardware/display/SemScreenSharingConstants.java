@@ -65,6 +65,5 @@ public final class SemScreenSharingConstants {
         WFD_SERVICE_WITH_GOOGLE_CAST = Build.VERSION.SEM_PLATFORM_INT >= 80100;
     }
 
-    private SemScreenSharingConstants() {
-    }
+    private SemScreenSharingConstants() {}
 }

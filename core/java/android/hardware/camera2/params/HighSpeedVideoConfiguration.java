@@ -3,6 +3,7 @@ package android.hardware.camera2.params;
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.util.Range;
 import android.util.Size;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes2.dex */
@@ -16,7 +17,8 @@ public final class HighSpeedVideoConfiguration {
     private final Size mSize;
     private final int mWidth;
 
-    public HighSpeedVideoConfiguration(int width, int height, int fpsMin, int fpsMax, int batchSizeMax) {
+    public HighSpeedVideoConfiguration(
+            int width, int height, int fpsMin, int fpsMax, int batchSizeMax) {
         if (fpsMax < 120) {
             throw new IllegalArgumentException("fpsMax must be at least 120");
         }
@@ -25,7 +27,8 @@ public final class HighSpeedVideoConfiguration {
         this.mHeight = Preconditions.checkArgumentPositive(height, "height must be positive");
         this.mFpsMin = Preconditions.checkArgumentPositive(fpsMin, "fpsMin must be positive");
         this.mSize = new Size(this.mWidth, this.mHeight);
-        this.mBatchSizeMax = Preconditions.checkArgumentPositive(batchSizeMax, "batchSizeMax must be positive");
+        this.mBatchSizeMax =
+                Preconditions.checkArgumentPositive(batchSizeMax, "batchSizeMax must be positive");
         this.mFpsRange = new Range<>(Integer.valueOf(this.mFpsMin), Integer.valueOf(this.mFpsMax));
     }
 
@@ -68,7 +71,11 @@ public final class HighSpeedVideoConfiguration {
             return false;
         }
         HighSpeedVideoConfiguration other = (HighSpeedVideoConfiguration) obj;
-        if (this.mWidth != other.mWidth || this.mHeight != other.mHeight || this.mFpsMin != other.mFpsMin || this.mFpsMax != other.mFpsMax || this.mBatchSizeMax != other.mBatchSizeMax) {
+        if (this.mWidth != other.mWidth
+                || this.mHeight != other.mHeight
+                || this.mFpsMin != other.mFpsMin
+                || this.mFpsMax != other.mFpsMax
+                || this.mBatchSizeMax != other.mBatchSizeMax) {
             return false;
         }
         return true;

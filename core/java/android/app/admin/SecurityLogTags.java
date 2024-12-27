@@ -49,8 +49,7 @@ public class SecurityLogTags {
     public static final int SECURITY_WIFI_DISCONNECTION = 210038;
     public static final int SECURITY_WIPE_FAILED = 210023;
 
-    private SecurityLogTags() {
-    }
+    private SecurityLogTags() {}
 
     public static void writeSecurityAdbShellInteractive() {
         EventLog.writeEvent(210001, new Object[0]);
@@ -68,8 +67,16 @@ public class SecurityLogTags {
         EventLog.writeEvent(210004, path);
     }
 
-    public static void writeSecurityAppProcessStart(String process, long startTime, int uid, int pid, String seinfo, String sha256) {
-        EventLog.writeEvent(210005, process, Long.valueOf(startTime), Integer.valueOf(uid), Integer.valueOf(pid), seinfo, sha256);
+    public static void writeSecurityAppProcessStart(
+            String process, long startTime, int uid, int pid, String seinfo, String sha256) {
+        EventLog.writeEvent(
+                210005,
+                process,
+                Long.valueOf(startTime),
+                Integer.valueOf(uid),
+                Integer.valueOf(pid),
+                seinfo,
+                sha256);
     }
 
     public static void writeSecurityKeyguardDismissed() {
@@ -112,32 +119,86 @@ public class SecurityLogTags {
         EventLog.writeEvent(210015, new Object[0]);
     }
 
-    public static void writeSecurityPasswordExpirationSet(String package_, int adminUser, int targetUser, long timeout) {
-        EventLog.writeEvent(210016, package_, Integer.valueOf(adminUser), Integer.valueOf(targetUser), Long.valueOf(timeout));
+    public static void writeSecurityPasswordExpirationSet(
+            String package_, int adminUser, int targetUser, long timeout) {
+        EventLog.writeEvent(
+                210016,
+                package_,
+                Integer.valueOf(adminUser),
+                Integer.valueOf(targetUser),
+                Long.valueOf(timeout));
     }
 
-    public static void writeSecurityPasswordComplexitySet(String package_, int adminUser, int targetUser, int length, int quality, int numLetters, int numNonLetters, int numNumeric, int numUppercase, int numLowercase, int numSymbols) {
-        EventLog.writeEvent(210017, package_, Integer.valueOf(adminUser), Integer.valueOf(targetUser), Integer.valueOf(length), Integer.valueOf(quality), Integer.valueOf(numLetters), Integer.valueOf(numNonLetters), Integer.valueOf(numNumeric), Integer.valueOf(numUppercase), Integer.valueOf(numLowercase), Integer.valueOf(numSymbols));
+    public static void writeSecurityPasswordComplexitySet(
+            String package_,
+            int adminUser,
+            int targetUser,
+            int length,
+            int quality,
+            int numLetters,
+            int numNonLetters,
+            int numNumeric,
+            int numUppercase,
+            int numLowercase,
+            int numSymbols) {
+        EventLog.writeEvent(
+                210017,
+                package_,
+                Integer.valueOf(adminUser),
+                Integer.valueOf(targetUser),
+                Integer.valueOf(length),
+                Integer.valueOf(quality),
+                Integer.valueOf(numLetters),
+                Integer.valueOf(numNonLetters),
+                Integer.valueOf(numNumeric),
+                Integer.valueOf(numUppercase),
+                Integer.valueOf(numLowercase),
+                Integer.valueOf(numSymbols));
     }
 
-    public static void writeSecurityPasswordHistoryLengthSet(String package_, int adminUser, int targetUser, int length) {
-        EventLog.writeEvent(210018, package_, Integer.valueOf(adminUser), Integer.valueOf(targetUser), Integer.valueOf(length));
+    public static void writeSecurityPasswordHistoryLengthSet(
+            String package_, int adminUser, int targetUser, int length) {
+        EventLog.writeEvent(
+                210018,
+                package_,
+                Integer.valueOf(adminUser),
+                Integer.valueOf(targetUser),
+                Integer.valueOf(length));
     }
 
-    public static void writeSecurityMaxScreenLockTimeoutSet(String package_, int adminUser, int targetUser, long timeout) {
-        EventLog.writeEvent(210019, package_, Integer.valueOf(adminUser), Integer.valueOf(targetUser), Long.valueOf(timeout));
+    public static void writeSecurityMaxScreenLockTimeoutSet(
+            String package_, int adminUser, int targetUser, long timeout) {
+        EventLog.writeEvent(
+                210019,
+                package_,
+                Integer.valueOf(adminUser),
+                Integer.valueOf(targetUser),
+                Long.valueOf(timeout));
     }
 
-    public static void writeSecurityMaxPasswordAttemptsSet(String package_, int adminUser, int targetUser, int numFailures) {
-        EventLog.writeEvent(210020, package_, Integer.valueOf(adminUser), Integer.valueOf(targetUser), Integer.valueOf(numFailures));
+    public static void writeSecurityMaxPasswordAttemptsSet(
+            String package_, int adminUser, int targetUser, int numFailures) {
+        EventLog.writeEvent(
+                210020,
+                package_,
+                Integer.valueOf(adminUser),
+                Integer.valueOf(targetUser),
+                Integer.valueOf(numFailures));
     }
 
-    public static void writeSecurityKeyguardDisabledFeaturesSet(String package_, int adminUser, int targetUser, int features) {
-        EventLog.writeEvent(210021, package_, Integer.valueOf(adminUser), Integer.valueOf(targetUser), Integer.valueOf(features));
+    public static void writeSecurityKeyguardDisabledFeaturesSet(
+            String package_, int adminUser, int targetUser, int features) {
+        EventLog.writeEvent(
+                210021,
+                package_,
+                Integer.valueOf(adminUser),
+                Integer.valueOf(targetUser),
+                Integer.valueOf(features));
     }
 
     public static void writeSecurityRemoteLock(String package_, int adminUser, int targetUser) {
-        EventLog.writeEvent(210022, package_, Integer.valueOf(adminUser), Integer.valueOf(targetUser));
+        EventLog.writeEvent(
+                210022, package_, Integer.valueOf(adminUser), Integer.valueOf(targetUser));
     }
 
     public static void writeSecurityWipeFailed(String package_, int adminUser) {
@@ -156,19 +217,23 @@ public class SecurityLogTags {
         EventLog.writeEvent(210026, Integer.valueOf(success), keyId, Integer.valueOf(uid));
     }
 
-    public static void writeSecurityUserRestrictionAdded(String package_, int adminUser, String restriction) {
+    public static void writeSecurityUserRestrictionAdded(
+            String package_, int adminUser, String restriction) {
         EventLog.writeEvent(210027, package_, Integer.valueOf(adminUser), restriction);
     }
 
-    public static void writeSecurityUserRestrictionRemoved(String package_, int adminUser, String restriction) {
+    public static void writeSecurityUserRestrictionRemoved(
+            String package_, int adminUser, String restriction) {
         EventLog.writeEvent(210028, package_, Integer.valueOf(adminUser), restriction);
     }
 
-    public static void writeSecurityCertAuthorityInstalled(int success, String subject, int targetUser) {
+    public static void writeSecurityCertAuthorityInstalled(
+            int success, String subject, int targetUser) {
         EventLog.writeEvent(210029, Integer.valueOf(success), subject, Integer.valueOf(targetUser));
     }
 
-    public static void writeSecurityCertAuthorityRemoved(int success, String subject, int targetUser) {
+    public static void writeSecurityCertAuthorityRemoved(
+            int success, String subject, int targetUser) {
         EventLog.writeEvent(210030, Integer.valueOf(success), subject, Integer.valueOf(targetUser));
     }
 
@@ -184,16 +249,29 @@ public class SecurityLogTags {
         EventLog.writeEvent(210033, reason);
     }
 
-    public static void writeSecurityCameraPolicySet(String package_, int adminUser, int targetUser, int disabled) {
-        EventLog.writeEvent(210034, package_, Integer.valueOf(adminUser), Integer.valueOf(targetUser), Integer.valueOf(disabled));
+    public static void writeSecurityCameraPolicySet(
+            String package_, int adminUser, int targetUser, int disabled) {
+        EventLog.writeEvent(
+                210034,
+                package_,
+                Integer.valueOf(adminUser),
+                Integer.valueOf(targetUser),
+                Integer.valueOf(disabled));
     }
 
-    public static void writeSecurityPasswordComplexityRequired(String package_, int adminUser, int targetUser, int complexity) {
-        EventLog.writeEvent(210035, package_, Integer.valueOf(adminUser), Integer.valueOf(targetUser), Integer.valueOf(complexity));
+    public static void writeSecurityPasswordComplexityRequired(
+            String package_, int adminUser, int targetUser, int complexity) {
+        EventLog.writeEvent(
+                210035,
+                package_,
+                Integer.valueOf(adminUser),
+                Integer.valueOf(targetUser),
+                Integer.valueOf(complexity));
     }
 
     public static void writeSecurityPasswordChanged(int passwordComplexity, int targetUser) {
-        EventLog.writeEvent(210036, Integer.valueOf(passwordComplexity), Integer.valueOf(targetUser));
+        EventLog.writeEvent(
+                210036, Integer.valueOf(passwordComplexity), Integer.valueOf(targetUser));
     }
 
     public static void writeSecurityWifiConnection(String bssid, String eventType, String reason) {
@@ -212,19 +290,26 @@ public class SecurityLogTags {
         EventLog.writeEvent(210040, addr, reason);
     }
 
-    public static void writeSecurityPackageInstalled(String packageName, int versionCode, int userId) {
-        EventLog.writeEvent(210041, packageName, Integer.valueOf(versionCode), Integer.valueOf(userId));
+    public static void writeSecurityPackageInstalled(
+            String packageName, int versionCode, int userId) {
+        EventLog.writeEvent(
+                210041, packageName, Integer.valueOf(versionCode), Integer.valueOf(userId));
     }
 
-    public static void writeSecurityPackageUpdated(String packageName, int versionCode, int userId) {
-        EventLog.writeEvent(210042, packageName, Integer.valueOf(versionCode), Integer.valueOf(userId));
+    public static void writeSecurityPackageUpdated(
+            String packageName, int versionCode, int userId) {
+        EventLog.writeEvent(
+                210042, packageName, Integer.valueOf(versionCode), Integer.valueOf(userId));
     }
 
-    public static void writeSecurityPackageUninstalled(String packageName, int versionCode, int userId) {
-        EventLog.writeEvent(210043, packageName, Integer.valueOf(versionCode), Integer.valueOf(userId));
+    public static void writeSecurityPackageUninstalled(
+            String packageName, int versionCode, int userId) {
+        EventLog.writeEvent(
+                210043, packageName, Integer.valueOf(versionCode), Integer.valueOf(userId));
     }
 
-    public static void writeSecurityBackupServiceToggled(String package_, int adminUser, int enabled) {
+    public static void writeSecurityBackupServiceToggled(
+            String package_, int adminUser, int enabled) {
         EventLog.writeEvent(210044, package_, Integer.valueOf(adminUser), Integer.valueOf(enabled));
     }
 }

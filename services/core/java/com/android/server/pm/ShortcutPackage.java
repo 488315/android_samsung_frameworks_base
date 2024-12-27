@@ -23,6 +23,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.ArrayUtils;
@@ -31,10 +32,11 @@ import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
-import com.android.server.pm.ShareTargetInfo;
 import com.android.server.usage.UsageStatsService;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knoxguard.service.SystemIntentProcessor;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -81,7 +83,11 @@ public final class ShortcutPackage extends ShortcutPackageItem {
 
         @Override // android.app.appsearch.BatchResultCallback
         public final void onResult(AppSearchBatchResult appSearchBatchResult) {
-            this.val$cb.accept((List) appSearchBatchResult.getSuccesses().values().stream().map(new ShortcutPackage$$ExternalSyntheticLambda38(2, this)).collect(Collectors.toList()));
+            this.val$cb.accept(
+                    (List)
+                            appSearchBatchResult.getSuccesses().values().stream()
+                                    .map(new ShortcutPackage$$ExternalSyntheticLambda38(2, this))
+                                    .collect(Collectors.toList()));
         }
 
         @Override // android.app.appsearch.BatchResultCallback
@@ -107,7 +113,10 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         while (it.hasNext()) {
             ShortcutInfo shortcutInfo = (ShortcutInfo) it.next();
             if (shortcutInfo.isExcludedFromSurfaces(1)) {
-                throw new IllegalArgumentException("Shortcut ID=" + shortcutInfo.getId() + " is hidden from launcher and may not be manipulated via APIs");
+                throw new IllegalArgumentException(
+                        "Shortcut ID="
+                                + shortcutInfo.getId()
+                                + " is hidden from launcher and may not be manipulated via APIs");
             }
         }
     }
@@ -116,20 +125,35 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         Icon icon;
         for (int size = list.size() - 1; size >= 0; size--) {
             ShortcutInfo shortcutInfo = (ShortcutInfo) list.get(size);
-            if (shortcutInfo.isLongLived() && (((icon = shortcutInfo.getIcon()) == null || icon.getType() == 1 || icon.getType() == 5) && (icon != null || shortcutInfo.hasIconFile()))) {
-                Slog.e("ShortcutService", "Invalid icon type in shortcut " + shortcutInfo.getId() + ". Bitmaps are not allowed in long-lived shortcuts. Use Resource icons, or Uri-based icons instead.");
+            if (shortcutInfo.isLongLived()
+                    && (((icon = shortcutInfo.getIcon()) == null
+                                    || icon.getType() == 1
+                                    || icon.getType() == 5)
+                            && (icon != null || shortcutInfo.hasIconFile()))) {
+                Slog.e(
+                        "ShortcutService",
+                        "Invalid icon type in shortcut "
+                                + shortcutInfo.getId()
+                                + ". Bitmaps are not allowed in long-lived shortcuts. Use Resource"
+                                + " icons, or Uri-based icons instead.");
                 return;
             }
         }
     }
 
     public static void ensureNotImmutable(ShortcutInfo shortcutInfo) {
-        if (shortcutInfo != null && shortcutInfo.isImmutable() && shortcutInfo.isVisibleToPublisher()) {
-            throw new IllegalArgumentException("Manifest shortcut ID=" + shortcutInfo.getId() + " may not be manipulated via APIs");
+        if (shortcutInfo != null
+                && shortcutInfo.isImmutable()
+                && shortcutInfo.isVisibleToPublisher()) {
+            throw new IllegalArgumentException(
+                    "Manifest shortcut ID="
+                            + shortcutInfo.getId()
+                            + " may not be manipulated via APIs");
         }
     }
 
-    public static void incrementCountForActivity(ArrayMap arrayMap, ComponentName componentName, int i) {
+    public static void incrementCountForActivity(
+            ArrayMap arrayMap, ComponentName componentName, int i) {
         Integer num = (Integer) arrayMap.get(componentName);
         if (num == null) {
             num = 0;
@@ -162,7 +186,11 @@ public final class ShortcutPackage extends ShortcutPackageItem {
                         if (next == 2) {
                             depth = resolvePullParser.getDepth();
                             name = resolvePullParser.getName();
-                            Slog.d("ShortcutService", String.format("depth=%d type=%d name=%s", Integer.valueOf(depth), Integer.valueOf(next), name));
+                            Slog.d(
+                                    "ShortcutService",
+                                    String.format(
+                                            "depth=%d type=%d name=%s",
+                                            Integer.valueOf(depth), Integer.valueOf(next), name));
                             if (depth != 1 || !"package".equals(name)) {
                                 break;
                             }
@@ -199,79 +227,86 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.pm.ShortcutPackage loadFromXml(com.android.server.pm.ShortcutUser r12, com.android.modules.utils.TypedXmlPullParser r13, boolean r14) {
+    public static com.android.server.pm.ShortcutPackage loadFromXml(
+            com.android.server.pm.ShortcutUser r12,
+            com.android.modules.utils.TypedXmlPullParser r13,
+            boolean r14) {
         /*
             Method dump skipped, instructions count: 213
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.ShortcutPackage.loadFromXml(com.android.server.pm.ShortcutUser, com.android.modules.utils.TypedXmlPullParser, boolean):com.android.server.pm.ShortcutPackage");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.ShortcutPackage.loadFromXml(com.android.server.pm.ShortcutUser,"
+                    + " com.android.modules.utils.TypedXmlPullParser,"
+                    + " boolean):com.android.server.pm.ShortcutPackage");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:18:0x00fe, code lost:
-    
-        r49 = r5;
-        r47 = r7;
-        r2 = r20;
-        r5 = r26;
-     */
+
+       r49 = r5;
+       r47 = r7;
+       r2 = r20;
+       r5 = r26;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:19:0x033d, code lost:
-    
-        if (r31 == null) goto L119;
-     */
+
+       if (r31 == null) goto L119;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x033f, code lost:
-    
-        android.content.pm.ShortcutInfo.setIntentExtras(r31, r14);
-        r2.clear();
-        r2.add(r31);
-     */
+
+       android.content.pm.ShortcutInfo.setIntentExtras(r31, r14);
+       r2.clear();
+       r2.add(r31);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:21:0x034a, code lost:
-    
-        if (r11 != 0) goto L123;
-     */
+
+       if (r11 != 0) goto L123;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x034e, code lost:
-    
-        if ((r9 & 64) == 0) goto L123;
-     */
+
+       if ((r9 & 64) == 0) goto L123;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0350, code lost:
-    
-        r39 = 1;
-     */
+
+       r39 = 1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0355, code lost:
-    
-        if (r57 == false) goto L126;
-     */
+
+       if (r57 == false) goto L126;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x0357, code lost:
-    
-        r0 = r9 | 4096;
-     */
+
+       r0 = r9 | 4096;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x035f, code lost:
-    
-        if (r13 != null) goto L129;
-     */
+
+       if (r13 != null) goto L129;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0361, code lost:
-    
-        r12 = null;
-     */
+
+       r12 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x03a4, code lost:
-    
-        return new android.content.pm.ShortcutInfo(r56, r15, r55, r17, null, r19, r49, r21, r22, r9, r24, r25, r47, r27, r41, (android.content.Intent[]) r2.toArray(new android.content.Intent[r2.size()]), r9, r43, r32, r0, r45, r36, r37, r38, r39, (android.app.Person[]) r5.toArray(new android.app.Person[r5.size()]), r12, r42, r44);
-     */
+
+       return new android.content.pm.ShortcutInfo(r56, r15, r55, r17, null, r19, r49, r21, r22, r9, r24, r25, r47, r27, r41, (android.content.Intent[]) r2.toArray(new android.content.Intent[r2.size()]), r9, r43, r32, r0, r45, r36, r37, r38, r39, (android.app.Person[]) r5.toArray(new android.app.Person[r5.size()]), r12, r42, r44);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:32:0x0363, code lost:
-    
-        r12 = new android.content.LocusId(r13);
-     */
+
+       r12 = new android.content.LocusId(r13);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:33:0x035c, code lost:
-    
-        r0 = r9;
-     */
+
+       r0 = r9;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x0353, code lost:
-    
-        r39 = r11;
-     */
+
+       r39 = r11;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:89:0x0314, code lost:
-    
-        r2.add(r0);
-     */
+
+       r2.add(r0);
+    */
     /* JADX WARN: Failed to find 'out' block for switch in B:44:0x014a. Please report as an issue. */
     /* JADX WARN: Removed duplicated region for block: B:102:0x030f A[SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:79:0x02b2  */
@@ -280,12 +315,19 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.content.pm.ShortcutInfo parseShortcut(com.android.modules.utils.TypedXmlPullParser r54, java.lang.String r55, int r56, boolean r57) {
+    public static android.content.pm.ShortcutInfo parseShortcut(
+            com.android.modules.utils.TypedXmlPullParser r54,
+            java.lang.String r55,
+            int r56,
+            boolean r57) {
         /*
             Method dump skipped, instructions count: 982
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.ShortcutPackage.parseShortcut(com.android.modules.utils.TypedXmlPullParser, java.lang.String, int, boolean):android.content.pm.ShortcutInfo");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.ShortcutPackage.parseShortcut(com.android.modules.utils.TypedXmlPullParser,"
+                    + " java.lang.String, int, boolean):android.content.pm.ShortcutInfo");
     }
 
     public static void runAsSystem(Runnable runnable) {
@@ -298,7 +340,9 @@ public final class ShortcutPackage extends ShortcutPackageItem {
     }
 
     public final void addOrReplaceDynamicShortcut(ShortcutInfo shortcutInfo) {
-        Preconditions.checkArgument(shortcutInfo.isEnabled(), "add/setDynamicShortcuts() cannot publish disabled shortcuts");
+        Preconditions.checkArgument(
+                shortcutInfo.isEnabled(),
+                "add/setDynamicShortcuts() cannot publish disabled shortcuts");
         shortcutInfo.addFlags(1);
         ShortcutInfo findShortcutById = findShortcutById(shortcutInfo.getId());
         if (findShortcutById != null) {
@@ -317,18 +361,20 @@ public final class ShortcutPackage extends ShortcutPackageItem {
     public final void adjustRanks() {
         ShortcutService shortcutService = this.mShortcutUser.mService;
         final long injectCurrentTimeMillis = shortcutService.injectCurrentTimeMillis();
-        forEachShortcutMutate(new Consumer() { // from class: com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda17
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                long j = injectCurrentTimeMillis;
-                ShortcutInfo shortcutInfo = (ShortcutInfo) obj;
-                if (!shortcutInfo.isFloating() || shortcutInfo.getRank() == 0) {
-                    return;
-                }
-                shortcutInfo.setTimestamp(j);
-                shortcutInfo.setRank(0);
-            }
-        });
+        forEachShortcutMutate(
+                new Consumer() { // from class:
+                                 // com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda17
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        long j = injectCurrentTimeMillis;
+                        ShortcutInfo shortcutInfo = (ShortcutInfo) obj;
+                        if (!shortcutInfo.isFloating() || shortcutInfo.getRank() == 0) {
+                            return;
+                        }
+                        shortcutInfo.setTimestamp(j);
+                        shortcutInfo.setRank(0);
+                    }
+                });
         ArrayMap sortShortcutsToActivities = sortShortcutsToActivities();
         for (int size = sortShortcutsToActivities.size() - 1; size >= 0; size--) {
             ArrayList arrayList = (ArrayList) sortShortcutsToActivities.valueAt(size);
@@ -341,20 +387,26 @@ public final class ShortcutPackage extends ShortcutPackageItem {
                     if (shortcutInfo.isDynamic()) {
                         int i3 = i + 1;
                         if (shortcutInfo.getRank() != i) {
-                            mutateShortcut(shortcutInfo.getId(), shortcutInfo, new Consumer() { // from class: com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda18
-                                @Override // java.util.function.Consumer
-                                public final void accept(Object obj) {
-                                    long j = injectCurrentTimeMillis;
-                                    int i4 = i;
-                                    ShortcutInfo shortcutInfo2 = (ShortcutInfo) obj;
-                                    shortcutInfo2.setTimestamp(j);
-                                    shortcutInfo2.setRank(i4);
-                                }
-                            });
+                            mutateShortcut(
+                                    shortcutInfo.getId(),
+                                    shortcutInfo,
+                                    new Consumer() { // from class:
+                                                     // com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda18
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            long j = injectCurrentTimeMillis;
+                                            int i4 = i;
+                                            ShortcutInfo shortcutInfo2 = (ShortcutInfo) obj;
+                                            shortcutInfo2.setTimestamp(j);
+                                            shortcutInfo2.setRank(i4);
+                                        }
+                                    });
                         }
                         i = i3;
                     } else {
-                        shortcutService.wtf("Non-dynamic shortcut found. " + shortcutInfo.toInsecureString(), null);
+                        shortcutService.wtf(
+                                "Non-dynamic shortcut found. " + shortcutInfo.toInsecureString(),
+                                null);
                     }
                 }
             }
@@ -389,10 +441,15 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         return null;
     }
 
-    public final ShortcutInfo deleteOrDisableWithId(String str, final boolean z, boolean z2, boolean z3, final int i, boolean z4) {
-        Preconditions.checkState(z == (i != 0), "disable and disabledReason disagree: " + z + " vs " + i);
+    public final ShortcutInfo deleteOrDisableWithId(
+            String str, final boolean z, boolean z2, boolean z3, final int i, boolean z4) {
+        Preconditions.checkState(
+                z == (i != 0), "disable and disabledReason disagree: " + z + " vs " + i);
         ShortcutInfo findShortcutById = findShortcutById(str);
-        if (findShortcutById != null && (findShortcutById.isEnabled() || !z3 || findShortcutById.isVisibleToPublisher())) {
+        if (findShortcutById != null
+                && (findShortcutById.isEnabled()
+                        || !z3
+                        || findShortcutById.isVisibleToPublisher())) {
             if (!z2) {
                 ensureNotImmutable(findShortcutById);
             }
@@ -406,32 +463,40 @@ public final class ShortcutPackage extends ShortcutPackageItem {
                 forceDeleteShortcutInner(str);
                 return findShortcutById;
             }
-            mutateShortcut(findShortcutById.getId(), findShortcutById, new Consumer() { // from class: com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda20
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ShortcutPackage shortcutPackage = ShortcutPackage.this;
-                    boolean z5 = z;
-                    int i2 = i;
-                    ShortcutInfo shortcutInfo = (ShortcutInfo) obj;
-                    shortcutPackage.getClass();
-                    shortcutInfo.setRank(0);
-                    shortcutInfo.clearFlags(33);
-                    if (z5) {
-                        shortcutInfo.addFlags(64);
-                        if (shortcutInfo.getDisabledReason() == 0) {
-                            shortcutInfo.setDisabledReason(i2);
+            mutateShortcut(
+                    findShortcutById.getId(),
+                    findShortcutById,
+                    new Consumer() { // from class:
+                                     // com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda20
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ShortcutPackage shortcutPackage = ShortcutPackage.this;
+                            boolean z5 = z;
+                            int i2 = i;
+                            ShortcutInfo shortcutInfo = (ShortcutInfo) obj;
+                            shortcutPackage.getClass();
+                            shortcutInfo.setRank(0);
+                            shortcutInfo.clearFlags(33);
+                            if (z5) {
+                                shortcutInfo.addFlags(64);
+                                if (shortcutInfo.getDisabledReason() == 0) {
+                                    shortcutInfo.setDisabledReason(i2);
+                                }
+                            }
+                            shortcutInfo.setTimestamp(
+                                    shortcutPackage.mShortcutUser.mService
+                                            .injectCurrentTimeMillis());
+                            ShortcutService shortcutService =
+                                    shortcutPackage.mShortcutUser.mService;
+                            ComponentName activity = shortcutInfo.getActivity();
+                            shortcutService.getClass();
+                            if (activity == null
+                                    || !"android.__dummy__".equals(activity.getClassName())) {
+                                return;
+                            }
+                            shortcutInfo.setActivity(null);
                         }
-                    }
-                    shortcutInfo.setTimestamp(shortcutPackage.mShortcutUser.mService.injectCurrentTimeMillis());
-                    ShortcutService shortcutService = shortcutPackage.mShortcutUser.mService;
-                    ComponentName activity = shortcutInfo.getActivity();
-                    shortcutService.getClass();
-                    if (activity == null || !"android.__dummy__".equals(activity.getClassName())) {
-                        return;
-                    }
-                    shortcutInfo.setActivity(null);
-                }
-            });
+                    });
         }
         return null;
     }
@@ -481,12 +546,22 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         }
     }
 
-    public final void findAll(final List list, final Predicate predicate, final int i, final String str, int i2, final boolean z) {
+    public final void findAll(
+            final List list,
+            final Predicate predicate,
+            final int i,
+            final String str,
+            int i2,
+            final boolean z) {
         ArraySet pinnedShortcutIds;
         boolean z2 = this.mPackageInfo.mIsShadow;
         String str2 = this.mPackageName;
         if (z2) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("findAll() returned empty results because ", str2, " isn't installed yet", "ShortcutService");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "findAll() returned empty results because ",
+                    str2,
+                    " isn't installed yet",
+                    "ShortcutService");
             return;
         }
         ShortcutService shortcutService = this.mShortcutUser.mService;
@@ -494,38 +569,50 @@ public final class ShortcutPackage extends ShortcutPackageItem {
             pinnedShortcutIds = null;
         } else {
             int i3 = this.mPackageUserId;
-            pinnedShortcutIds = shortcutService.getLauncherShortcutsLocked(i3, i2, str).getPinnedShortcutIds(i3, str2);
+            pinnedShortcutIds =
+                    shortcutService
+                            .getLauncherShortcutsLocked(i3, i2, str)
+                            .getPinnedShortcutIds(i3, str2);
         }
         final ArraySet arraySet = pinnedShortcutIds;
-        forEachShortcut(new Consumer() { // from class: com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda31
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ShortcutPackage shortcutPackage = ShortcutPackage.this;
-                List list2 = list;
-                Predicate predicate2 = predicate;
-                int i4 = i;
-                String str3 = str;
-                ArraySet arraySet2 = arraySet;
-                boolean z3 = z;
-                ShortcutInfo shortcutInfo = (ShortcutInfo) obj;
-                shortcutPackage.getClass();
-                boolean z4 = str3 == null || (arraySet2 != null && arraySet2.contains(shortcutInfo.getId()));
-                if (!z3 && shortcutInfo.isFloating() && !shortcutInfo.isCached() && !z4) {
-                    Log.d("ShortcutService", shortcutInfo.getId() + " ignored because it isn't pinned by " + str3);
-                    return;
-                }
-                ShortcutInfo clone = shortcutInfo.clone(i4);
-                if (!z3 && !z4) {
-                    clone.clearFlags(2);
-                }
-                if (predicate2 == null || predicate2.test(clone)) {
-                    if (!z4) {
-                        clone.clearFlags(2);
+        forEachShortcut(
+                new Consumer() { // from class:
+                                 // com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda31
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        ShortcutPackage shortcutPackage = ShortcutPackage.this;
+                        List list2 = list;
+                        Predicate predicate2 = predicate;
+                        int i4 = i;
+                        String str3 = str;
+                        ArraySet arraySet2 = arraySet;
+                        boolean z3 = z;
+                        ShortcutInfo shortcutInfo = (ShortcutInfo) obj;
+                        shortcutPackage.getClass();
+                        boolean z4 =
+                                str3 == null
+                                        || (arraySet2 != null
+                                                && arraySet2.contains(shortcutInfo.getId()));
+                        if (!z3 && shortcutInfo.isFloating() && !shortcutInfo.isCached() && !z4) {
+                            Log.d(
+                                    "ShortcutService",
+                                    shortcutInfo.getId()
+                                            + " ignored because it isn't pinned by "
+                                            + str3);
+                            return;
+                        }
+                        ShortcutInfo clone = shortcutInfo.clone(i4);
+                        if (!z3 && !z4) {
+                            clone.clearFlags(2);
+                        }
+                        if (predicate2 == null || predicate2.test(clone)) {
+                            if (!z4) {
+                                clone.clearFlags(2);
+                            }
+                            list2.add(clone);
+                        }
                     }
-                    list2.add(clone);
-                }
-            }
-        });
+                });
     }
 
     public final ShortcutInfo findShortcutById(String str) {
@@ -553,7 +640,8 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         synchronized (this.mPackageItemLock) {
             try {
                 for (int size = this.mShortcuts.size() - 1; size >= 0; size--) {
-                    if (((Boolean) function.apply((ShortcutInfo) this.mShortcuts.valueAt(size))).booleanValue()) {
+                    if (((Boolean) function.apply((ShortcutInfo) this.mShortcuts.valueAt(size)))
+                            .booleanValue()) {
                         return;
                     }
                 }
@@ -585,13 +673,21 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         int i = this.mShortcutUser.mService.mMaxShortcutsPerApp;
         synchronized (this.mPackageItemLock) {
             try {
-                List list = (List) this.mShortcuts.values().stream().filter(new ShortcutPackage$$ExternalSyntheticLambda4(1)).collect(Collectors.toList());
+                List list =
+                        (List)
+                                this.mShortcuts.values().stream()
+                                        .filter(new ShortcutPackage$$ExternalSyntheticLambda4(1))
+                                        .collect(Collectors.toList());
                 if (list.size() >= i) {
                     Collections.sort(list, this.mShortcutTypeRankAndTimeComparator);
                     while (list.size() >= i) {
                         ShortcutInfo shortcutInfo2 = (ShortcutInfo) list.remove(list.size() - 1);
                         if (shortcutInfo2.isDeclaredInManifest()) {
-                            throw new IllegalArgumentException(this.mPackageName + " has published " + list.size() + " manifest shortcuts across different activities.");
+                            throw new IllegalArgumentException(
+                                    this.mPackageName
+                                            + " has published "
+                                            + list.size()
+                                            + " manifest shortcuts across different activities.");
                         }
                         forceDeleteShortcutInner(shortcutInfo2.getId());
                     }
@@ -605,23 +701,34 @@ public final class ShortcutPackage extends ShortcutPackageItem {
 
     public final AndroidFuture fromAppSearch() {
         StrictMode.ThreadPolicy threadPolicy = StrictMode.getThreadPolicy();
-        AppSearchManager.SearchContext build = new AppSearchManager.SearchContext.Builder(this.mPackageName).build();
+        AppSearchManager.SearchContext build =
+                new AppSearchManager.SearchContext.Builder(this.mPackageName).build();
         AndroidFuture androidFuture = null;
         try {
             try {
-                StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
+                StrictMode.setThreadPolicy(
+                        new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().build());
                 androidFuture = this.mShortcutUser.getAppSearch(build);
                 synchronized (this.mPackageItemLock) {
                     try {
                         if (!this.mIsAppSearchSchemaUpToDate) {
-                            androidFuture = androidFuture.thenCompose(new ShortcutPackage$$ExternalSyntheticLambda43(this, 0));
+                            androidFuture =
+                                    androidFuture.thenCompose(
+                                            new ShortcutPackage$$ExternalSyntheticLambda43(
+                                                    this, 0));
                         }
                         this.mIsAppSearchSchemaUpToDate = true;
                     } finally {
                     }
                 }
             } catch (Exception e) {
-                Slog.e("ShortcutService", "Failed to create app search session. pkg=" + this.mPackageName + " user=" + this.mShortcutUser.mUserId, e);
+                Slog.e(
+                        "ShortcutService",
+                        "Failed to create app search session. pkg="
+                                + this.mPackageName
+                                + " user="
+                                + this.mShortcutUser.mUserId,
+                        e);
                 Objects.requireNonNull(androidFuture);
                 AndroidFuture androidFuture2 = androidFuture;
                 androidFuture.completeExceptionally(e);
@@ -650,7 +757,10 @@ public final class ShortcutPackage extends ShortcutPackageItem {
     public final int getApiCallCount(boolean z) {
         ShortcutService shortcutService = this.mShortcutUser.mService;
         int i = this.mPackageUid;
-        if (shortcutService.isUidForegroundLocked(i) || this.mLastKnownForegroundElapsedTime < shortcutService.mUidLastForegroundElapsedTime.get(i) || z) {
+        if (shortcutService.isUidForegroundLocked(i)
+                || this.mLastKnownForegroundElapsedTime
+                        < shortcutService.mUidLastForegroundElapsedTime.get(i)
+                || z) {
             this.mLastKnownForegroundElapsedTime = shortcutService.injectElapsedRealtime();
             if (this.mApiCallCount > 0) {
                 this.mApiCallCount = 0;
@@ -660,7 +770,8 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         shortcutService.updateTimesLocked();
         long j = shortcutService.mRawLastResetTime.get();
         long injectCurrentTimeMillis = shortcutService.injectCurrentTimeMillis();
-        if ((injectCurrentTimeMillis >= 1420070400) && this.mLastResetTime > injectCurrentTimeMillis) {
+        if ((injectCurrentTimeMillis >= 1420070400)
+                && this.mLastResetTime > injectCurrentTimeMillis) {
             Slog.w("ShortcutService", "Clock rewound");
             this.mLastResetTime = injectCurrentTimeMillis;
             this.mApiCallCount = 0;
@@ -668,7 +779,14 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         }
         long j2 = this.mLastResetTime;
         if (j2 < j) {
-            Slog.d("ShortcutService", String.format("%s: last reset=%d, now=%d, last=%d: resetting", this.mPackageName, Long.valueOf(j2), Long.valueOf(injectCurrentTimeMillis), Long.valueOf(j)));
+            Slog.d(
+                    "ShortcutService",
+                    String.format(
+                            "%s: last reset=%d, now=%d, last=%d: resetting",
+                            this.mPackageName,
+                            Long.valueOf(j2),
+                            Long.valueOf(injectCurrentTimeMillis),
+                            Long.valueOf(j)));
             this.mApiCallCount = 0;
             this.mLastResetTime = j;
         }
@@ -699,7 +817,13 @@ public final class ShortcutPackage extends ShortcutPackageItem {
                     return new ArrayList();
                 }
                 ArrayList arrayList2 = new ArrayList();
-                findAll(arrayList2, new ShortcutPackage$$ExternalSyntheticLambda4(0), 9, str, 0, false);
+                findAll(
+                        arrayList2,
+                        new ShortcutPackage$$ExternalSyntheticLambda4(0),
+                        9,
+                        str,
+                        0,
+                        false);
                 ArrayList arrayList3 = new ArrayList();
                 for (int i3 = 0; i3 < arrayList2.size(); i3++) {
                     Set<String> categories = ((ShortcutInfo) arrayList2.get(i3)).getCategories();
@@ -707,12 +831,18 @@ public final class ShortcutPackage extends ShortcutPackageItem {
                         int i4 = 0;
                         while (true) {
                             if (i4 < arrayList.size()) {
-                                ShareTargetInfo shareTargetInfo2 = (ShareTargetInfo) arrayList.get(i4);
+                                ShareTargetInfo shareTargetInfo2 =
+                                        (ShareTargetInfo) arrayList.get(i4);
                                 int i5 = 0;
                                 while (true) {
                                     String[] strArr = shareTargetInfo2.mCategories;
                                     if (i5 >= strArr.length) {
-                                        arrayList3.add(new ShortcutManager.ShareShortcutInfo((ShortcutInfo) arrayList2.get(i3), new ComponentName(this.mPackageName, shareTargetInfo2.mTargetClass)));
+                                        arrayList3.add(
+                                                new ShortcutManager.ShareShortcutInfo(
+                                                        (ShortcutInfo) arrayList2.get(i3),
+                                                        new ComponentName(
+                                                                this.mPackageName,
+                                                                shareTargetInfo2.mTargetClass)));
                                         break;
                                     }
                                     if (!categories.contains(strArr[i5])) {
@@ -738,13 +868,22 @@ public final class ShortcutPackage extends ShortcutPackageItem {
     }
 
     public final SearchSpec getSearchSpec() {
-        return new SearchSpec.Builder().addFilterSchemas("Shortcut").addFilterNamespaces(this.mPackageName).setTermMatch(1).setResultCountPerPage(this.mShortcutUser.mService.mMaxShortcuts).build();
+        return new SearchSpec.Builder()
+                .addFilterSchemas("Shortcut")
+                .addFilterNamespaces(this.mPackageName)
+                .setTermMatch(1)
+                .setResultCountPerPage(this.mShortcutUser.mService.mMaxShortcuts)
+                .build();
     }
 
     @Override // com.android.server.pm.ShortcutPackageItem
     public final File getShortcutPackageItemFile() {
         ShortcutUser shortcutUser = this.mShortcutUser;
-        return new File(new File(shortcutUser.mService.injectUserDataPath(shortcutUser.mUserId), "packages"), AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mPackageName, ".xml"));
+        return new File(
+                new File(
+                        shortcutUser.mService.injectUserDataPath(shortcutUser.mUserId), "packages"),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                        new StringBuilder(), this.mPackageName, ".xml"));
     }
 
     public void getTopShortcutsFromPersistence(AndroidFuture androidFuture) {
@@ -784,21 +923,25 @@ public final class ShortcutPackage extends ShortcutPackageItem {
 
     @Override // com.android.server.pm.ShortcutPackageItem
     public final void onRestored(final int i) {
-        forEachShortcutMutate(new Consumer() { // from class: com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda11
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                int i2 = i;
-                ShortcutInfo shortcutInfo = (ShortcutInfo) obj;
-                if (i2 == 0 && !shortcutInfo.hasFlags(4096) && shortcutInfo.getDisabledReason() == i2) {
-                    return;
-                }
-                shortcutInfo.clearFlags(4096);
-                shortcutInfo.setDisabledReason(i2);
-                if (i2 != 0) {
-                    shortcutInfo.addFlags(64);
-                }
-            }
-        });
+        forEachShortcutMutate(
+                new Consumer() { // from class:
+                                 // com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda11
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        int i2 = i;
+                        ShortcutInfo shortcutInfo = (ShortcutInfo) obj;
+                        if (i2 == 0
+                                && !shortcutInfo.hasFlags(4096)
+                                && shortcutInfo.getDisabledReason() == i2) {
+                            return;
+                        }
+                        shortcutInfo.clearFlags(4096);
+                        shortcutInfo.setDisabledReason(i2);
+                        if (i2 != 0) {
+                            shortcutInfo.addFlags(64);
+                        }
+                    }
+                });
         refreshPinnedFlags();
     }
 
@@ -810,7 +953,8 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean pushDynamicShortcut(android.content.pm.ShortcutInfo r11, java.util.List r12) {
+    public final boolean pushDynamicShortcut(
+            android.content.pm.ShortcutInfo r11, java.util.List r12) {
         /*
             r10 = this;
             boolean r0 = r11.isEnabled()
@@ -916,18 +1060,26 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         Le1:
             return r12
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.ShortcutPackage.pushDynamicShortcut(android.content.pm.ShortcutInfo, java.util.List):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.ShortcutPackage.pushDynamicShortcut(android.content.pm.ShortcutInfo,"
+                    + " java.util.List):boolean");
     }
 
     public final void refreshPinnedFlags() {
         List list;
         ArraySet arraySet = new ArraySet();
-        this.mShortcutUser.forAllLaunchers(new ShortcutPackage$$ExternalSyntheticLambda23(2, this, arraySet));
+        this.mShortcutUser.forAllLaunchers(
+                new ShortcutPackage$$ExternalSyntheticLambda23(2, this, arraySet));
         synchronized (this.mPackageItemLock) {
             Stream stream = arraySet.stream();
             ArrayMap arrayMap = this.mShortcuts;
             Objects.requireNonNull(arrayMap);
-            list = (List) stream.map(new ShortcutPackage$$ExternalSyntheticLambda38(1, arrayMap)).filter(new ShortcutPackage$$ExternalSyntheticLambda4(3)).collect(Collectors.toList());
+            list =
+                    (List)
+                            stream.map(new ShortcutPackage$$ExternalSyntheticLambda38(1, arrayMap))
+                                    .filter(new ShortcutPackage$$ExternalSyntheticLambda4(3))
+                                    .collect(Collectors.toList());
         }
         if (list != null) {
             list.forEach(new ShortcutPackage$$ExternalSyntheticLambda14(2));
@@ -948,25 +1100,31 @@ public final class ShortcutPackage extends ShortcutPackageItem {
         return arrayList;
     }
 
-    public final void reportShortcutUsed(UsageStatsManagerInternal usageStatsManagerInternal, String str) {
+    public final void reportShortcutUsed(
+            UsageStatsManagerInternal usageStatsManagerInternal, String str) {
         synchronized (this.mPackageItemLock) {
             try {
                 long elapsedRealtime = SystemClock.elapsedRealtime();
-                if (elapsedRealtime - this.mLastReportedTime > this.mShortcutUser.mService.mSaveDelayMillis) {
+                if (elapsedRealtime - this.mLastReportedTime
+                        > this.mShortcutUser.mService.mSaveDelayMillis) {
                     this.mLastReportedTime = elapsedRealtime;
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         String str2 = this.mPackageName;
                         int i = this.mPackageUserId;
-                        UsageStatsService.LocalService localService = (UsageStatsService.LocalService) usageStatsManagerInternal;
+                        UsageStatsService.LocalService localService =
+                                (UsageStatsService.LocalService) usageStatsManagerInternal;
                         localService.getClass();
                         if (str2 != null && str != null) {
-                            UsageEvents.Event event = new UsageEvents.Event(8, SystemClock.elapsedRealtime());
+                            UsageEvents.Event event =
+                                    new UsageEvents.Event(8, SystemClock.elapsedRealtime());
                             event.mPackage = str2.intern();
                             event.mShortcutId = str.intern();
                             UsageStatsService.this.reportEventOrAddToQueue(i, event);
                         }
-                        Slog.w("UsageStatsService", "Event reported without a package name or a shortcut ID");
+                        Slog.w(
+                                "UsageStatsService",
+                                "Event reported without a package name or a shortcut ID");
                     } finally {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     }
@@ -997,10 +1155,17 @@ public final class ShortcutPackage extends ShortcutPackageItem {
             Method dump skipped, instructions count: 640
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.ShortcutPackage.rescanPackageIfNeeded(boolean, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.ShortcutPackage.rescanPackageIfNeeded(boolean,"
+                    + " boolean):boolean");
     }
 
-    public final void saveShortcut(TypedXmlSerializer typedXmlSerializer, ShortcutInfo shortcutInfo, boolean z, boolean z2) {
+    public final void saveShortcut(
+            TypedXmlSerializer typedXmlSerializer,
+            ShortcutInfo shortcutInfo,
+            boolean z,
+            boolean z2) {
         ShortcutService shortcutService = this.mShortcutUser.mService;
         if (!z || (shortcutInfo.isPinned() && shortcutInfo.isEnabled())) {
             boolean z3 = !z || this.mShortcutUser.mService.mSmartSwitchBackupAllowed.get() || z2;
@@ -1011,43 +1176,71 @@ public final class ShortcutPackage extends ShortcutPackageItem {
             ShortcutService.writeAttr(typedXmlSerializer, "id", shortcutInfo.getId());
             ComponentName activity = shortcutInfo.getActivity();
             if (activity != null) {
-                ShortcutService.writeAttr(typedXmlSerializer, "activity", activity.flattenToString());
+                ShortcutService.writeAttr(
+                        typedXmlSerializer, "activity", activity.flattenToString());
             }
-            ShortcutService.writeAttr(typedXmlSerializer, KnoxCustomManagerService.SHORTCUT_TITLE, shortcutInfo.getTitle());
+            ShortcutService.writeAttr(
+                    typedXmlSerializer,
+                    KnoxCustomManagerService.SHORTCUT_TITLE,
+                    shortcutInfo.getTitle());
             ShortcutService.writeAttr(typedXmlSerializer, "titleid", shortcutInfo.getTitleResId());
-            ShortcutService.writeAttr(typedXmlSerializer, "titlename", shortcutInfo.getTitleResName());
-            ShortcutService.writeAttr(typedXmlSerializer, "splash-screen-theme-name", shortcutInfo.getStartingThemeResName());
+            ShortcutService.writeAttr(
+                    typedXmlSerializer, "titlename", shortcutInfo.getTitleResName());
+            ShortcutService.writeAttr(
+                    typedXmlSerializer,
+                    "splash-screen-theme-name",
+                    shortcutInfo.getStartingThemeResName());
             ShortcutService.writeAttr(typedXmlSerializer, "text", shortcutInfo.getText());
             ShortcutService.writeAttr(typedXmlSerializer, "textid", shortcutInfo.getTextResId());
-            ShortcutService.writeAttr(typedXmlSerializer, "textname", shortcutInfo.getTextResName());
+            ShortcutService.writeAttr(
+                    typedXmlSerializer, "textname", shortcutInfo.getTextResName());
             if (z3) {
-                ShortcutService.writeAttr(typedXmlSerializer, "dmessage", shortcutInfo.getDisabledMessage());
-                ShortcutService.writeAttr(typedXmlSerializer, "dmessageid", shortcutInfo.getDisabledMessageResourceId());
-                ShortcutService.writeAttr(typedXmlSerializer, "dmessagename", shortcutInfo.getDisabledMessageResName());
+                ShortcutService.writeAttr(
+                        typedXmlSerializer, "dmessage", shortcutInfo.getDisabledMessage());
+                ShortcutService.writeAttr(
+                        typedXmlSerializer,
+                        "dmessageid",
+                        shortcutInfo.getDisabledMessageResourceId());
+                ShortcutService.writeAttr(
+                        typedXmlSerializer,
+                        "dmessagename",
+                        shortcutInfo.getDisabledMessageResName());
             }
-            ShortcutService.writeAttr(typedXmlSerializer, "disabled-reason", shortcutInfo.getDisabledReason());
-            ShortcutService.writeAttr(typedXmlSerializer, "timestamp", shortcutInfo.getLastChangedTimestamp());
+            ShortcutService.writeAttr(
+                    typedXmlSerializer, "disabled-reason", shortcutInfo.getDisabledReason());
+            ShortcutService.writeAttr(
+                    typedXmlSerializer, "timestamp", shortcutInfo.getLastChangedTimestamp());
             if (shortcutInfo.getLocusId() != null) {
-                ShortcutService.writeAttr(typedXmlSerializer, "locus-id", shortcutInfo.getLocusId().getId());
+                ShortcutService.writeAttr(
+                        typedXmlSerializer, "locus-id", shortcutInfo.getLocusId().getId());
             }
             if (!z || this.mShortcutUser.mService.mSmartSwitchBackupAllowed.get()) {
                 ShortcutService.writeAttr(typedXmlSerializer, "rank", shortcutInfo.getRank());
                 ShortcutService.writeAttr(typedXmlSerializer, "flags", shortcutInfo.getFlags());
-                ShortcutService.writeAttr(typedXmlSerializer, "icon-res", shortcutInfo.getIconResourceId());
-                ShortcutService.writeAttr(typedXmlSerializer, "icon-resname", shortcutInfo.getIconResName());
-                ShortcutService.writeAttr(typedXmlSerializer, "bitmap-path", shortcutInfo.getBitmapPath());
-                ShortcutService.writeAttr(typedXmlSerializer, "icon-uri", shortcutInfo.getIconUri());
+                ShortcutService.writeAttr(
+                        typedXmlSerializer, "icon-res", shortcutInfo.getIconResourceId());
+                ShortcutService.writeAttr(
+                        typedXmlSerializer, "icon-resname", shortcutInfo.getIconResName());
+                ShortcutService.writeAttr(
+                        typedXmlSerializer, "bitmap-path", shortcutInfo.getBitmapPath());
+                ShortcutService.writeAttr(
+                        typedXmlSerializer, "icon-uri", shortcutInfo.getIconUri());
             } else {
-                ShortcutService.writeAttr(typedXmlSerializer, "flags", shortcutInfo.getFlags() & (-35342));
+                ShortcutService.writeAttr(
+                        typedXmlSerializer, "flags", shortcutInfo.getFlags() & (-35342));
                 if (this.mPackageInfo.mVersionCode == 0) {
-                    shortcutService.wtf("Package version code should be available at this point.", null);
+                    shortcutService.wtf(
+                            "Package version code should be available at this point.", null);
                 }
             }
             if (z3) {
                 Set<String> categories = shortcutInfo.getCategories();
                 if (categories != null && categories.size() > 0) {
                     typedXmlSerializer.startTag((String) null, "categories");
-                    XmlUtils.writeStringArrayXml((String[]) categories.toArray(new String[categories.size()]), "categories", XmlUtils.makeTyped(typedXmlSerializer));
+                    XmlUtils.writeStringArrayXml(
+                            (String[]) categories.toArray(new String[categories.size()]),
+                            "categories",
+                            XmlUtils.makeTyped(typedXmlSerializer));
                     typedXmlSerializer.endTag((String) null, "categories");
                 }
                 if (!z) {
@@ -1056,23 +1249,29 @@ public final class ShortcutPackage extends ShortcutPackageItem {
                         for (Person person : persons) {
                             typedXmlSerializer.startTag((String) null, "person");
                             ShortcutService.writeAttr(typedXmlSerializer, "name", person.getName());
-                            ShortcutService.writeAttr(typedXmlSerializer, SystemIntentProcessor.KEY_URI, person.getUri());
+                            ShortcutService.writeAttr(
+                                    typedXmlSerializer,
+                                    SystemIntentProcessor.KEY_URI,
+                                    person.getUri());
                             ShortcutService.writeAttr(typedXmlSerializer, "key", person.getKey());
                             ShortcutService.writeAttr(typedXmlSerializer, "is-bot", person.isBot());
-                            ShortcutService.writeAttr(typedXmlSerializer, "is-important", person.isImportant());
+                            ShortcutService.writeAttr(
+                                    typedXmlSerializer, "is-important", person.isImportant());
                             typedXmlSerializer.endTag((String) null, "person");
                         }
                     }
                 }
                 Intent[] intentsNoExtras = shortcutInfo.getIntentsNoExtras();
-                PersistableBundle[] intentPersistableExtrases = shortcutInfo.getIntentPersistableExtrases();
+                PersistableBundle[] intentPersistableExtrases =
+                        shortcutInfo.getIntentPersistableExtrases();
                 if (intentsNoExtras != null && intentPersistableExtrases != null) {
                     int length = intentsNoExtras.length;
                     for (int i = 0; i < length; i++) {
                         typedXmlSerializer.startTag((String) null, KnoxCustomManagerService.INTENT);
                         Intent intent = intentsNoExtras[i];
                         if (intent != null) {
-                            ShortcutService.writeAttr(typedXmlSerializer, "intent-base", intent.toUri(0));
+                            ShortcutService.writeAttr(
+                                    typedXmlSerializer, "intent-base", intent.toUri(0));
                         }
                         PersistableBundle persistableBundle = intentPersistableExtrases[i];
                         if (persistableBundle != null) {
@@ -1091,7 +1290,8 @@ public final class ShortcutPackage extends ShortcutPackageItem {
                 }
                 Map capabilityBindingsInternal = shortcutInfo.getCapabilityBindingsInternal();
                 if (capabilityBindingsInternal != null && !capabilityBindingsInternal.isEmpty()) {
-                    XmlUtils.writeMapXml(capabilityBindingsInternal, "capability", typedXmlSerializer);
+                    XmlUtils.writeMapXml(
+                            capabilityBindingsInternal, "capability", typedXmlSerializer);
                 }
             }
             typedXmlSerializer.endTag((String) null, "shortcut");
@@ -1140,15 +1340,23 @@ public final class ShortcutPackage extends ShortcutPackageItem {
                 ShortcutService.writeAttr(typedXmlSerializer, "call-count", this.mApiCallCount);
                 ShortcutService.writeAttr(typedXmlSerializer, "last-reset", this.mLastResetTime);
                 if (!z) {
-                    ShortcutService.writeAttr(typedXmlSerializer, "schema-version", this.mIsAppSearchSchemaUpToDate ? 3L : 0L);
+                    ShortcutService.writeAttr(
+                            typedXmlSerializer,
+                            "schema-version",
+                            this.mIsAppSearchSchemaUpToDate ? 3L : 0L);
                 }
                 this.mPackageInfo.saveToXml(this.mShortcutUser.mService, typedXmlSerializer, z);
                 for (int i = 0; i < size2; i++) {
-                    saveShortcut(typedXmlSerializer, (ShortcutInfo) this.mShortcuts.valueAt(i), z, this.mPackageInfo.mBackupAllowed);
+                    saveShortcut(
+                            typedXmlSerializer,
+                            (ShortcutInfo) this.mShortcuts.valueAt(i),
+                            z,
+                            this.mPackageInfo.mBackupAllowed);
                 }
                 if (!z) {
                     for (int i2 = 0; i2 < size3; i2++) {
-                        ((ShareTargetInfo) this.mShareTargets.get(i2)).saveToXml(typedXmlSerializer);
+                        ((ShareTargetInfo) this.mShareTargets.get(i2))
+                                .saveToXml(typedXmlSerializer);
                     }
                 }
                 typedXmlSerializer.endTag((String) null, "package");
@@ -1165,12 +1373,26 @@ public final class ShortcutPackage extends ShortcutPackageItem {
             arrayMap.putAll((Map) this.mTransientShortcuts);
             this.mTransientShortcuts.clear();
         }
-        Collection collection = (Collection) arrayMap.values().stream().filter(new ShortcutPackage$$ExternalSyntheticLambda4(2)).collect(Collectors.toList());
+        Collection collection =
+                (Collection)
+                        arrayMap.values().stream()
+                                .filter(new ShortcutPackage$$ExternalSyntheticLambda4(2))
+                                .collect(Collectors.toList());
         Objects.requireNonNull(collection);
         if (!isAppSearchEnabled() || collection.isEmpty()) {
             return;
         }
-        Slog.d("ShortcutService", "Saving shortcuts async for user=" + this.mShortcutUser.mUserId + " pkg=" + this.mPackageName + " ids=" + ((String) collection.stream().map(new ShortcutPackage$$ExternalSyntheticLambda51(2)).collect(Collectors.joining(",", "[", "]"))));
+        Slog.d(
+                "ShortcutService",
+                "Saving shortcuts async for user="
+                        + this.mShortcutUser.mUserId
+                        + " pkg="
+                        + this.mPackageName
+                        + " ids="
+                        + ((String)
+                                collection.stream()
+                                        .map(new ShortcutPackage$$ExternalSyntheticLambda51(2))
+                                        .collect(Collectors.joining(",", "[", "]"))));
         runAsSystem(new ShortcutPackage$$ExternalSyntheticLambda37(this, collection, 1));
     }
 
@@ -1198,7 +1420,16 @@ public final class ShortcutPackage extends ShortcutPackageItem {
             }
             ShortcutInfo shortcutInfo = (ShortcutInfo) arrayList.get(i);
             if (shortcutInfo.getRank() != i) {
-                Log.e("ShortcutService.verify", "Package " + this.mPackageName + ": shortcut " + shortcutInfo.getId() + " rank=" + shortcutInfo.getRank() + " but expected to be " + i);
+                Log.e(
+                        "ShortcutService.verify",
+                        "Package "
+                                + this.mPackageName
+                                + ": shortcut "
+                                + shortcutInfo.getId()
+                                + " rank="
+                                + shortcutInfo.getRank()
+                                + " but expected to be "
+                                + i);
             }
             i++;
         }
@@ -1213,7 +1444,15 @@ public final class ShortcutPackage extends ShortcutPackageItem {
             ArrayList arrayList = (ArrayList) sortShortcutsToActivities.valueAt(size);
             if (arrayList.size() > this.mShortcutUser.mService.mMaxShortcuts) {
                 zArr[0] = true;
-                Log.e("ShortcutService.verify", "Package " + this.mPackageName + ": activity " + sortShortcutsToActivities.keyAt(size) + " has " + ((ArrayList) sortShortcutsToActivities.valueAt(size)).size() + " shortcuts.");
+                Log.e(
+                        "ShortcutService.verify",
+                        "Package "
+                                + this.mPackageName
+                                + ": activity "
+                                + sortShortcutsToActivities.keyAt(size)
+                                + " has "
+                                + ((ArrayList) sortShortcutsToActivities.valueAt(size)).size()
+                                + " shortcuts.");
             }
             Collections.sort(arrayList, new ShortcutPackage$$ExternalSyntheticLambda7(1));
             ArrayList arrayList2 = new ArrayList(arrayList);

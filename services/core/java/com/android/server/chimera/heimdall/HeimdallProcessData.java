@@ -123,7 +123,21 @@ public final class HeimdallProcessData {
         sb.append(" killTime=" + this.killTime);
         int i = this.flags;
         int i2 = i & (-i);
-        sb.append(" currentPhase=".concat(i2 != 4 ? i2 != 8 ? i2 != 16 ? i2 != 32 ? i2 != 64 ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG : "StartPhase" : "ScanPhase" : "GCPhase" : "RescanPhase" : "KillAndReportPhase"));
+        sb.append(
+                " currentPhase="
+                        .concat(
+                                i2 != 4
+                                        ? i2 != 8
+                                                ? i2 != 16
+                                                        ? i2 != 32
+                                                                ? i2 != 64
+                                                                        ? KeyboardMetricsCollector
+                                                                                .DEFAULT_LANGUAGE_TAG
+                                                                        : "StartPhase"
+                                                                : "ScanPhase"
+                                                        : "GCPhase"
+                                                : "RescanPhase"
+                                        : "KillAndReportPhase"));
         sb.append(" isGlobalKill=" + isGlobalKill());
         sb.append(" isSpecKill=" + isSpecKill());
         sb.append(" isAlwaysRunningSpecKill=" + isAlwaysRunningSpecKill());

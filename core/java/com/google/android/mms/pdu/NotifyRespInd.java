@@ -4,7 +4,8 @@ import com.google.android.mms.InvalidHeaderValueException;
 
 /* loaded from: classes5.dex */
 public class NotifyRespInd extends GenericPdu {
-    public NotifyRespInd(int mmsVersion, byte[] transactionId, int status) throws InvalidHeaderValueException {
+    public NotifyRespInd(int mmsVersion, byte[] transactionId, int status)
+            throws InvalidHeaderValueException {
         setMessageType(131);
         setMmsVersion(mmsVersion);
         setTransactionId(transactionId);

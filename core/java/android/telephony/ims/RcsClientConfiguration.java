@@ -3,6 +3,7 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -10,24 +11,32 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class RcsClientConfiguration implements Parcelable {
-    public static final Parcelable.Creator<RcsClientConfiguration> CREATOR = new Parcelable.Creator<RcsClientConfiguration>() { // from class: android.telephony.ims.RcsClientConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RcsClientConfiguration createFromParcel(Parcel in) {
-            String rcsVersion = in.readString();
-            String rcsProfile = in.readString();
-            String clientVendor = in.readString();
-            String clientVersion = in.readString();
-            Boolean rcsEnabledByUser = Boolean.valueOf(in.readBoolean());
-            return new RcsClientConfiguration(rcsVersion, rcsProfile, clientVendor, clientVersion, rcsEnabledByUser.booleanValue());
-        }
+    public static final Parcelable.Creator<RcsClientConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    RcsClientConfiguration>() { // from class:
+                                                // android.telephony.ims.RcsClientConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RcsClientConfiguration createFromParcel(Parcel in) {
+                    String rcsVersion = in.readString();
+                    String rcsProfile = in.readString();
+                    String clientVendor = in.readString();
+                    String clientVersion = in.readString();
+                    Boolean rcsEnabledByUser = Boolean.valueOf(in.readBoolean());
+                    return new RcsClientConfiguration(
+                            rcsVersion,
+                            rcsProfile,
+                            clientVendor,
+                            clientVersion,
+                            rcsEnabledByUser.booleanValue());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RcsClientConfiguration[] newArray(int size) {
-            return new RcsClientConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RcsClientConfiguration[] newArray(int size) {
+                    return new RcsClientConfiguration[size];
+                }
+            };
     public static final String RCS_PROFILE_1_0 = "UP_1.0";
     public static final String RCS_PROFILE_2_3 = "UP_2.3";
     public static final String RCS_PROFILE_2_4 = "UP_2.4";
@@ -38,15 +47,20 @@ public final class RcsClientConfiguration implements Parcelable {
     private String mRcsVersion;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StringRcsProfile {
-    }
+    public @interface StringRcsProfile {}
 
     @Deprecated
-    public RcsClientConfiguration(String rcsVersion, String rcsProfile, String clientVendor, String clientVersion) {
+    public RcsClientConfiguration(
+            String rcsVersion, String rcsProfile, String clientVendor, String clientVersion) {
         this(rcsVersion, rcsProfile, clientVendor, clientVersion, true);
     }
 
-    public RcsClientConfiguration(String rcsVersion, String rcsProfile, String clientVendor, String clientVersion, boolean isRcsEnabledByUser) {
+    public RcsClientConfiguration(
+            String rcsVersion,
+            String rcsProfile,
+            String clientVendor,
+            String clientVersion,
+            boolean isRcsEnabledByUser) {
         this.mRcsVersion = rcsVersion;
         this.mRcsProfile = rcsProfile;
         this.mClientVendor = clientVendor;
@@ -93,10 +107,19 @@ public final class RcsClientConfiguration implements Parcelable {
             return false;
         }
         RcsClientConfiguration other = (RcsClientConfiguration) obj;
-        return this.mRcsVersion.equals(other.mRcsVersion) && this.mRcsProfile.equals(other.mRcsProfile) && this.mClientVendor.equals(other.mClientVendor) && this.mClientVersion.equals(other.mClientVersion) && this.mRcsEnabledByUser == other.mRcsEnabledByUser;
+        return this.mRcsVersion.equals(other.mRcsVersion)
+                && this.mRcsProfile.equals(other.mRcsProfile)
+                && this.mClientVendor.equals(other.mClientVendor)
+                && this.mClientVersion.equals(other.mClientVersion)
+                && this.mRcsEnabledByUser == other.mRcsEnabledByUser;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mRcsVersion, this.mRcsProfile, this.mClientVendor, this.mClientVersion, Boolean.valueOf(this.mRcsEnabledByUser));
+        return Objects.hash(
+                this.mRcsVersion,
+                this.mRcsProfile,
+                this.mClientVendor,
+                this.mClientVersion,
+                Boolean.valueOf(this.mRcsEnabledByUser));
     }
 }

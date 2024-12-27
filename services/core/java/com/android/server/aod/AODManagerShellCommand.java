@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.ShellCommand;
 import android.os.UserHandle;
+
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -75,7 +77,9 @@ public final class AODManagerShellCommand extends ShellCommand {
             r0.printStackTrace(r6)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.aod.AODManagerShellCommand.onCommand(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.aod.AODManagerShellCommand.onCommand(java.lang.String):int");
     }
 
     public final void onHelp() {
@@ -83,11 +87,14 @@ public final class AODManagerShellCommand extends ShellCommand {
         try {
             outPrintWriter.println("aod service commands:");
             outPrintWriter.println("");
-            outPrintWriter.println("NOTE: when aod is shown, the command should should be executed, and -user USER_ID is optional argument.");
+            outPrintWriter.println(
+                    "NOTE: when aod is shown, the command should should be executed, and -user"
+                        + " USER_ID is optional argument.");
             outPrintWriter.println("  help");
             outPrintWriter.println("    Prints this help text.");
             outPrintWriter.println("");
-            outPrintWriter.println("  tsp [ACTION_INFO] [-x X_POSITION] [-y Y_POSITION] [-user USER_ID]");
+            outPrintWriter.println(
+                    "  tsp [ACTION_INFO] [-x X_POSITION] [-y Y_POSITION] [-user USER_ID]");
             outPrintWriter.println("    Send tsp event with the below arguments.");
             outPrintWriter.println("      ACTION_INFO");
             outPrintWriter.println("          8  : tap to show");
@@ -126,7 +133,8 @@ public final class AODManagerShellCommand extends ShellCommand {
                     String nextOption = getNextOption();
                     if (nextOption == null) {
                         PrintWriter outPrintWriter = getOutPrintWriter();
-                        StringBuilder sb = new StringBuilder("aod service commands: runTspEvent : info: ");
+                        StringBuilder sb =
+                                new StringBuilder("aod service commands: runTspEvent : info: ");
                         switch (parseInt) {
                             case 8:
                                 str = "tap to show(8)";
@@ -144,16 +152,22 @@ public final class AODManagerShellCommand extends ShellCommand {
                                 str = "";
                                 break;
                         }
-                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, str, " , x: ", " , y: ", sb);
+                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                i, str, " , x: ", " , y: ", sb);
                         sb.append(i2);
                         sb.append(" , userId: ");
                         sb.append(userHandle.toString());
                         outPrintWriter.println(sb.toString());
-                        Intent intent = new Intent("com.samsung.android.app.aodservice.intent.action.CHANGE_AOD_MODE");
+                        Intent intent =
+                                new Intent(
+                                        "com.samsung.android.app.aodservice.intent.action.CHANGE_AOD_MODE");
                         intent.putExtra("info", parseInt);
-                        intent.putExtra("location", new float[]{i, i2});
+                        intent.putExtra("location", new float[] {i, i2});
                         intent.addFlags(32);
-                        this.mContext.sendBroadcastAsUser(intent, userHandle, "com.samsung.android.app.aodservice.permission.BROADCAST_RECEIVER");
+                        this.mContext.sendBroadcastAsUser(
+                                intent,
+                                userHandle,
+                                "com.samsung.android.app.aodservice.permission.BROADCAST_RECEIVER");
                         return;
                     }
                     if ("-x".equals(nextOption)) {

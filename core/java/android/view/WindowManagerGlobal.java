@@ -18,20 +18,16 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.Pair;
 import android.util.SparseArray;
-import android.view.IRotationWatcher;
-import android.view.IWindowManager;
-import android.view.IWindowSessionCallback;
-import android.view.ViewGroup;
-import android.view.ViewRootImpl;
-import android.view.WindowManager;
-import android.view.WindowManagerGlobal;
 import android.view.inputmethod.InputMethodManager;
 import android.window.ITrustedPresentationListener;
 import android.window.InputTransferToken;
 import android.window.TrustedPresentationThresholds;
+
 import com.android.internal.policy.DecorView;
 import com.android.internal.util.FastPrintWriter;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -89,13 +85,14 @@ public final class WindowManagerGlobal {
     private final ArrayList<WindowManager.LayoutParams> mParams = new ArrayList<>();
     private final ArraySet<View> mDyingViews = new ArraySet<>();
     private final ArrayList<ViewRootImpl> mWindowlessRoots = new ArrayList<>();
-    private final TrustedPresentationListener mTrustedPresentationListener = new TrustedPresentationListener();
-    private final SparseArray<SurfaceControlInputReceiverInfo> mSurfaceControlInputReceivers = new SparseArray<>();
+    private final TrustedPresentationListener mTrustedPresentationListener =
+            new TrustedPresentationListener();
+    private final SparseArray<SurfaceControlInputReceiverInfo> mSurfaceControlInputReceivers =
+            new SparseArray<>();
     private long mLastAddViewTime = 0;
     private int mAddRepeatCount = 0;
 
-    private WindowManagerGlobal() {
-    }
+    private WindowManagerGlobal() {}
 
     public static void initialize() {
         getWindowManagerService();
@@ -123,10 +120,13 @@ public final class WindowManagerGlobal {
         }
         synchronized (WindowManagerGlobal.class) {
             if (sWindowManagerService == null) {
-                sWindowManagerService = IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
+                sWindowManagerService =
+                        IWindowManager.Stub.asInterface(
+                                ServiceManager.getService(Context.WINDOW_SERVICE));
                 try {
                     if (sWindowManagerService != null) {
-                        ValueAnimator.setDurationScale(sWindowManagerService.getCurrentAnimatorScale());
+                        ValueAnimator.setDurationScale(
+                                sWindowManagerService.getCurrentAnimatorScale());
                     }
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
@@ -144,12 +144,16 @@ public final class WindowManagerGlobal {
                 try {
                     InputMethodManager.ensureDefaultInstanceForDefaultDisplayIfNecessary();
                     IWindowManager windowManager = getWindowManagerService();
-                    sWindowSession = windowManager.openSession(new IWindowSessionCallback.Stub() { // from class: android.view.WindowManagerGlobal.1
-                        @Override // android.view.IWindowSessionCallback
-                        public void onAnimatorScaleChanged(float scale) {
-                            ValueAnimator.setDurationScale(scale);
-                        }
-                    });
+                    sWindowSession =
+                            windowManager.openSession(
+                                    new IWindowSessionCallback
+                                            .Stub() { // from class:
+                                                      // android.view.WindowManagerGlobal.1
+                                        @Override // android.view.IWindowSessionCallback
+                                        public void onAnimatorScaleChanged(float scale) {
+                                            ValueAnimator.setDurationScale(scale);
+                                        }
+                                    });
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
@@ -200,7 +204,8 @@ public final class WindowManagerGlobal {
                                 }
                                 View viewj = this.mViews.get(j);
                                 WindowManager.LayoutParams paramsj = this.mParams.get(j);
-                                if (params.token != viewj.getWindowToken() || paramsj.token != token) {
+                                if (params.token != viewj.getWindowToken()
+                                        || paramsj.token != token) {
                                     j++;
                                 } else {
                                     isChild = true;
@@ -208,8 +213,7 @@ public final class WindowManagerGlobal {
                                 }
                             }
                         }
-                        if (!isChild) {
-                        }
+                        if (!isChild) {}
                     }
                     views.add(this.mRoots.get(i));
                 }
@@ -257,7 +261,12 @@ public final class WindowManagerGlobal {
         }
     }
 
-    public void addView(View view, ViewGroup.LayoutParams params, Display display, Window parentWindow, int userId) {
+    public void addView(
+            View view,
+            ViewGroup.LayoutParams params,
+            Display display,
+            Window parentWindow,
+            int userId) {
         ViewRootImpl root;
         View decorView;
         if (view == null) {
@@ -286,9 +295,21 @@ public final class WindowManagerGlobal {
             synchronized (this.mLock) {
                 int i = this.mViews.size() - 1;
                 for (int j = 0; i >= 0 && j < 50; j++) {
-                    Log.d(TAG, "addedView(" + i + NavigationBarInflaterView.KEY_CODE_END + this.mViews.get(i));
+                    Log.d(
+                            TAG,
+                            "addedView("
+                                    + i
+                                    + NavigationBarInflaterView.KEY_CODE_END
+                                    + this.mViews.get(i));
                     if (this.mParams.get(i) != null) {
-                        Log.d(TAG, "addedParams(" + i + NavigationBarInflaterView.KEY_CODE_END + this.mParams.get(i) + " / Title: " + ((Object) this.mParams.get(i).getTitle()));
+                        Log.d(
+                                TAG,
+                                "addedParams("
+                                        + i
+                                        + NavigationBarInflaterView.KEY_CODE_END
+                                        + this.mParams.get(i)
+                                        + " / Title: "
+                                        + ((Object) this.mParams.get(i).getTitle()));
                     }
                     i--;
                 }
@@ -305,21 +326,32 @@ public final class WindowManagerGlobal {
             }
         }
         if (wparams.type != 1 && wparams.type != 3) {
-            Log.i(TAG, "WindowManagerGlobal#addView, ty=" + wparams.type + ", view=" + view + ", caller=" + Debug.getCallers(3));
+            Log.i(
+                    TAG,
+                    "WindowManagerGlobal#addView, ty="
+                            + wparams.type
+                            + ", view="
+                            + view
+                            + ", caller="
+                            + Debug.getCallers(3));
         }
         View panelParentView = null;
         synchronized (this.mLock) {
             if (this.mSystemPropertyUpdater == null) {
-                this.mSystemPropertyUpdater = new Runnable() { // from class: android.view.WindowManagerGlobal.2
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        synchronized (WindowManagerGlobal.this.mLock) {
-                            for (int i2 = WindowManagerGlobal.this.mRoots.size() - 1; i2 >= 0; i2--) {
-                                ((ViewRootImpl) WindowManagerGlobal.this.mRoots.get(i2)).loadSystemProperties();
+                this.mSystemPropertyUpdater =
+                        new Runnable() { // from class: android.view.WindowManagerGlobal.2
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                synchronized (WindowManagerGlobal.this.mLock) {
+                                    for (int i2 = WindowManagerGlobal.this.mRoots.size() - 1;
+                                            i2 >= 0;
+                                            i2--) {
+                                        ((ViewRootImpl) WindowManagerGlobal.this.mRoots.get(i2))
+                                                .loadSystemProperties();
+                                    }
+                                }
                             }
-                        }
-                    }
-                };
+                        };
                 SystemProperties.addChangeCallback(this.mSystemPropertyUpdater);
             }
             int index = findViewLocked(view, false);
@@ -327,7 +359,8 @@ public final class WindowManagerGlobal {
                 if (this.mDyingViews.contains(view)) {
                     this.mRoots.get(index).doDie();
                 } else {
-                    throw new IllegalStateException("View " + view + " has already been added to the window manager.");
+                    throw new IllegalStateException(
+                            "View " + view + " has already been added to the window manager.");
                 }
             }
             if (wparams.type >= 1000 && wparams.type <= 1999) {
@@ -357,12 +390,18 @@ public final class WindowManagerGlobal {
             if (windowlessSession == null) {
                 root = new ViewRootImpl(view.getContext(), display);
             } else {
-                root = new ViewRootImpl(view.getContext(), display, windowlessSession, new WindowlessWindowLayout());
+                root =
+                        new ViewRootImpl(
+                                view.getContext(),
+                                display,
+                                windowlessSession,
+                                new WindowlessWindowLayout());
             }
             if (ActivityThread.isFixedAppContextDisplay() && display.getDisplayId() != 0) {
                 Context appCtx = ActivityThread.currentActivityThread().getApplication();
                 if (root.mContext.equals(appCtx)) {
-                    throw new IllegalArgumentException("bad display id : " + display.getDisplayId());
+                    throw new IllegalArgumentException(
+                            "bad display id : " + display.getDisplayId());
                 }
             }
             view.setLayoutParams(wparams);
@@ -419,7 +458,11 @@ public final class WindowManagerGlobal {
             View curView = this.mRoots.get(index).getView();
             removeViewLocked(index, immediate);
             if (curView != view) {
-                throw new IllegalStateException("Calling with view " + view + " but the ViewAncestor is attached to " + curView);
+                throw new IllegalStateException(
+                        "Calling with view "
+                                + view
+                                + " but the ViewAncestor is attached to "
+                                + curView);
             }
         }
     }
@@ -432,10 +475,18 @@ public final class WindowManagerGlobal {
         synchronized (this.mLock) {
             int count = this.mViews.size();
             for (int i = 0; i < count; i++) {
-                if ((view == null || this.mViews.get(i) != view) && (token == null || this.mParams.get(i).token == token)) {
+                if ((view == null || this.mViews.get(i) != view)
+                        && (token == null || this.mParams.get(i).token == token)) {
                     ViewRootImpl root = this.mRoots.get(i);
                     if (who != null) {
-                        WindowLeaked leak = new WindowLeaked(what + " " + who + " has leaked window " + root.getView() + " that was originally added here");
+                        WindowLeaked leak =
+                                new WindowLeaked(
+                                        what
+                                                + " "
+                                                + who
+                                                + " has leaked window "
+                                                + root.getView()
+                                                + " that was originally added here");
                         leak.setStackTrace(root.getLocation().getStackTrace());
                         Log.e(TAG, "", leak);
                     }
@@ -450,7 +501,14 @@ public final class WindowManagerGlobal {
         ViewRootImpl root = this.mRoots.get(index);
         View view = root.getView();
         if (root != null && (type = root.mWindowAttributes.type) != 1 && type != 3) {
-            Log.i(TAG, "WindowManagerGlobal#removeView, ty=" + type + ", view=" + view + ", caller=" + Debug.getCallers(3));
+            Log.i(
+                    TAG,
+                    "WindowManagerGlobal#removeView, ty="
+                            + type
+                            + ", view="
+                            + view
+                            + ", caller="
+                            + Debug.getCallers(3));
         }
         if (root != null) {
             root.getImeFocusController().onWindowDismissed();
@@ -510,7 +568,9 @@ public final class WindowManagerGlobal {
                 for (int i = 0; i < count; i++) {
                     ViewRootImpl root = this.mRoots.get(i);
                     String name = getWindowName(root);
-                    pw.printf("\n\t%s (visibility=%d)", name, Integer.valueOf(root.getHostVisibility()));
+                    pw.printf(
+                            "\n\t%s (visibility=%d)",
+                            name, Integer.valueOf(root.getHostVisibility()));
                     ThreadedRenderer renderer = root.getView().mAttachInfo.mThreadedRenderer;
                     if (renderer != null) {
                         renderer.dumpGfxInfo(pw, fd, args);
@@ -523,15 +583,26 @@ public final class WindowManagerGlobal {
                     ViewRootImpl.GfxInfo info = root2.getGfxInfo();
                     totals.add(info);
                     String name2 = getWindowName(root2);
-                    pw.printf("  %s\n  %d views, %.2f kB of render nodes", name2, Integer.valueOf(info.viewCount), Float.valueOf(info.renderNodeMemoryUsage / 1024.0f));
+                    pw.printf(
+                            "  %s\n  %d views, %.2f kB of render nodes",
+                            name2,
+                            Integer.valueOf(info.viewCount),
+                            Float.valueOf(info.renderNodeMemoryUsage / 1024.0f));
                     pw.printf("\n\n", new Object[0]);
                 }
                 pw.printf("\nTotal %-15s: %d\n", "ViewRootImpl", Integer.valueOf(count));
                 pw.printf("Total %-15s: %d\n", "attached Views", Integer.valueOf(totals.viewCount));
-                pw.printf("Total %-15s: %.2f kB (used) / %.2f kB (capacity)\n\n", "RenderNode", Float.valueOf(totals.renderNodeMemoryUsage / 1024.0f), Float.valueOf(totals.renderNodeMemoryAllocated / 1024.0f));
-                Choreographer choreographer = Looper.myLooper() != null ? Choreographer.getInstance() : null;
+                pw.printf(
+                        "Total %-15s: %.2f kB (used) / %.2f kB (capacity)\n\n",
+                        "RenderNode",
+                        Float.valueOf(totals.renderNodeMemoryUsage / 1024.0f),
+                        Float.valueOf(totals.renderNodeMemoryAllocated / 1024.0f));
+                Choreographer choreographer =
+                        Looper.myLooper() != null ? Choreographer.getInstance() : null;
                 if (choreographer != null) {
-                    pw.printf("Total STB frames rendered : %d\n", Long.valueOf(choreographer.getSTBCount()));
+                    pw.printf(
+                            "Total STB frames rendered : %d\n",
+                            Long.valueOf(choreographer.getSTBCount()));
                     if (args.length != 0 && args[args.length - 1].equals("reset")) {
                         choreographer.resetSTBCount();
                     }
@@ -547,7 +618,11 @@ public final class WindowManagerGlobal {
     }
 
     private static String getWindowName(ViewRootImpl root) {
-        return ((Object) root.mWindowAttributes.getTitle()) + "/" + root.getClass().getName() + '@' + Integer.toHexString(root.hashCode());
+        return ((Object) root.mWindowAttributes.getTitle())
+                + "/"
+                + root.getClass().getName()
+                + '@'
+                + Integer.toHexString(root.hashCode());
     }
 
     public void setStoppedState(IBinder token, final boolean stopped) {
@@ -572,12 +647,15 @@ public final class WindowManagerGlobal {
         if (nonCurrentThreadRoots != null) {
             for (int i2 = nonCurrentThreadRoots.size() - 1; i2 >= 0; i2--) {
                 final ViewRootImpl root2 = nonCurrentThreadRoots.get(i2);
-                root2.mHandler.runWithScissors(new Runnable() { // from class: android.view.WindowManagerGlobal$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ViewRootImpl.this.setWindowStopped(stopped);
-                    }
-                }, 0L);
+                root2.mHandler.runWithScissors(
+                        new Runnable() { // from class:
+                                         // android.view.WindowManagerGlobal$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ViewRootImpl.this.setWindowStopped(stopped);
+                            }
+                        },
+                        0L);
             }
         }
     }
@@ -615,30 +693,38 @@ public final class WindowManagerGlobal {
         }
     }
 
-    public void registerProposedRotationListener(IBinder contextToken, Executor executor, final IntConsumer listener) {
+    public void registerProposedRotationListener(
+            IBinder contextToken, Executor executor, final IntConsumer listener) {
         synchronized (this.mLock) {
             if (this.mProposedRotationListenerMap == null) {
                 this.mProposedRotationListenerMap = new WeakHashMap<>(1);
             }
-            final ProposedRotationListenerDelegate delegate = this.mProposedRotationListenerMap.get(contextToken);
+            final ProposedRotationListenerDelegate delegate =
+                    this.mProposedRotationListenerMap.get(contextToken);
             if (delegate == null) {
-                WeakHashMap<IBinder, ProposedRotationListenerDelegate> weakHashMap = this.mProposedRotationListenerMap;
-                ProposedRotationListenerDelegate proposedRotationListenerDelegate = new ProposedRotationListenerDelegate();
+                WeakHashMap<IBinder, ProposedRotationListenerDelegate> weakHashMap =
+                        this.mProposedRotationListenerMap;
+                ProposedRotationListenerDelegate proposedRotationListenerDelegate =
+                        new ProposedRotationListenerDelegate();
                 delegate = proposedRotationListenerDelegate;
                 weakHashMap.put(contextToken, proposedRotationListenerDelegate);
             }
             if (delegate.add(executor, listener)) {
                 if (delegate != null) {
-                    executor.execute(new Runnable() { // from class: android.view.WindowManagerGlobal$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            listener.accept(delegate.mLastRotation);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // android.view.WindowManagerGlobal$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    listener.accept(delegate.mLastRotation);
+                                }
+                            });
                     return;
                 }
                 try {
-                    int currentRotation = getWindowManagerService().registerProposedRotationListener(contextToken, delegate);
+                    int currentRotation =
+                            getWindowManagerService()
+                                    .registerProposedRotationListener(contextToken, delegate);
                     delegate.onRotationChanged(currentRotation);
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
@@ -652,7 +738,8 @@ public final class WindowManagerGlobal {
             if (this.mProposedRotationListenerMap == null) {
                 return;
             }
-            ProposedRotationListenerDelegate delegate = this.mProposedRotationListenerMap.get(contextToken);
+            ProposedRotationListenerDelegate delegate =
+                    this.mProposedRotationListenerMap.get(contextToken);
             if (delegate == null) {
                 return;
             }
@@ -694,7 +781,8 @@ public final class WindowManagerGlobal {
                 }
             }
             this.mListeners.add(new ListenerWrapper(executor, listener));
-            this.mListenerArray = (ListenerWrapper[]) this.mListeners.toArray(new ListenerWrapper[0]);
+            this.mListenerArray =
+                    (ListenerWrapper[]) this.mListeners.toArray(new ListenerWrapper[0]);
             return true;
         }
 
@@ -707,7 +795,8 @@ public final class WindowManagerGlobal {
                 }
             } while (this.mListeners.get(i).mListener.get() != listener);
             this.mListeners.remove(i);
-            this.mListenerArray = (ListenerWrapper[]) this.mListeners.toArray(new ListenerWrapper[0]);
+            this.mListenerArray =
+                    (ListenerWrapper[]) this.mListeners.toArray(new ListenerWrapper[0]);
             return this.mListeners.isEmpty();
         }
 
@@ -718,12 +807,14 @@ public final class WindowManagerGlobal {
             for (ListenerWrapper listenerWrapper : this.mListenerArray) {
                 final IntConsumer listener = listenerWrapper.mListener.get();
                 if (listener != null) {
-                    listenerWrapper.mExecutor.execute(new Runnable() { // from class: android.view.WindowManagerGlobal$ProposedRotationListenerDelegate$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            listener.accept(rotation);
-                        }
-                    });
+                    listenerWrapper.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.view.WindowManagerGlobal$ProposedRotationListenerDelegate$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    listener.accept(rotation);
+                                }
+                            });
                     alive = true;
                 }
             }
@@ -737,7 +828,11 @@ public final class WindowManagerGlobal {
         }
     }
 
-    public void registerTrustedPresentationListener(IBinder window, TrustedPresentationThresholds thresholds, Executor executor, Consumer<Boolean> listener) {
+    public void registerTrustedPresentationListener(
+            IBinder window,
+            TrustedPresentationThresholds thresholds,
+            Executor executor,
+            Consumer<Boolean> listener) {
         this.mTrustedPresentationListener.addListener(window, thresholds, listener, executor);
     }
 
@@ -745,10 +840,27 @@ public final class WindowManagerGlobal {
         this.mTrustedPresentationListener.removeListener(listener);
     }
 
-    private static InputChannel createInputChannel(IBinder clientToken, InputTransferToken hostToken, SurfaceControl surfaceControl, InputTransferToken inputTransferToken) {
+    private static InputChannel createInputChannel(
+            IBinder clientToken,
+            InputTransferToken hostToken,
+            SurfaceControl surfaceControl,
+            InputTransferToken inputTransferToken) {
         InputChannel inputChannel = new InputChannel();
         try {
-            getWindowSession().grantInputChannel(-1, surfaceControl, clientToken, hostToken, 0, 0, 2, 0, null, inputTransferToken, surfaceControl.getName(), inputChannel);
+            getWindowSession()
+                    .grantInputChannel(
+                            -1,
+                            surfaceControl,
+                            clientToken,
+                            hostToken,
+                            0,
+                            0,
+                            2,
+                            0,
+                            null,
+                            inputTransferToken,
+                            surfaceControl.getName(),
+                            inputChannel);
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to create input channel", e);
             e.rethrowAsRuntimeException();
@@ -765,34 +877,58 @@ public final class WindowManagerGlobal {
         }
     }
 
-    InputTransferToken registerBatchedSurfaceControlInputReceiver(InputTransferToken hostToken, SurfaceControl surfaceControl, Choreographer choreographer, final SurfaceControlInputReceiver receiver) {
+    InputTransferToken registerBatchedSurfaceControlInputReceiver(
+            InputTransferToken hostToken,
+            SurfaceControl surfaceControl,
+            Choreographer choreographer,
+            final SurfaceControlInputReceiver receiver) {
         IBinder clientToken = new Binder();
         InputTransferToken inputTransferToken = new InputTransferToken();
-        InputChannel inputChannel = createInputChannel(clientToken, hostToken, surfaceControl, inputTransferToken);
+        InputChannel inputChannel =
+                createInputChannel(clientToken, hostToken, surfaceControl, inputTransferToken);
         synchronized (this.mSurfaceControlInputReceivers) {
-            this.mSurfaceControlInputReceivers.put(surfaceControl.getLayerId(), new SurfaceControlInputReceiverInfo(clientToken, new BatchedInputEventReceiver(inputChannel, choreographer.getLooper(), choreographer) { // from class: android.view.WindowManagerGlobal.3
-                @Override // android.view.InputEventReceiver
-                public void onInputEvent(InputEvent event) {
-                    boolean handled = receiver.onInputEvent(event);
-                    finishInputEvent(event, handled);
-                }
-            }));
+            this.mSurfaceControlInputReceivers.put(
+                    surfaceControl.getLayerId(),
+                    new SurfaceControlInputReceiverInfo(
+                            clientToken,
+                            new BatchedInputEventReceiver(
+                                    inputChannel,
+                                    choreographer.getLooper(),
+                                    choreographer) { // from class:
+                                                     // android.view.WindowManagerGlobal.3
+                                @Override // android.view.InputEventReceiver
+                                public void onInputEvent(InputEvent event) {
+                                    boolean handled = receiver.onInputEvent(event);
+                                    finishInputEvent(event, handled);
+                                }
+                            }));
         }
         return inputTransferToken;
     }
 
-    InputTransferToken registerUnbatchedSurfaceControlInputReceiver(InputTransferToken hostToken, SurfaceControl surfaceControl, Looper looper, final SurfaceControlInputReceiver receiver) {
+    InputTransferToken registerUnbatchedSurfaceControlInputReceiver(
+            InputTransferToken hostToken,
+            SurfaceControl surfaceControl,
+            Looper looper,
+            final SurfaceControlInputReceiver receiver) {
         IBinder clientToken = new Binder();
         InputTransferToken inputTransferToken = new InputTransferToken();
-        InputChannel inputChannel = createInputChannel(clientToken, hostToken, surfaceControl, inputTransferToken);
+        InputChannel inputChannel =
+                createInputChannel(clientToken, hostToken, surfaceControl, inputTransferToken);
         synchronized (this.mSurfaceControlInputReceivers) {
-            this.mSurfaceControlInputReceivers.put(surfaceControl.getLayerId(), new SurfaceControlInputReceiverInfo(clientToken, new InputEventReceiver(inputChannel, looper) { // from class: android.view.WindowManagerGlobal.4
-                @Override // android.view.InputEventReceiver
-                public void onInputEvent(InputEvent event) {
-                    boolean handled = receiver.onInputEvent(event);
-                    finishInputEvent(event, handled);
-                }
-            }));
+            this.mSurfaceControlInputReceivers.put(
+                    surfaceControl.getLayerId(),
+                    new SurfaceControlInputReceiverInfo(
+                            clientToken,
+                            new InputEventReceiver(
+                                    inputChannel,
+                                    looper) { // from class: android.view.WindowManagerGlobal.4
+                                @Override // android.view.InputEventReceiver
+                                public void onInputEvent(InputEvent event) {
+                                    boolean handled = receiver.onInputEvent(event);
+                                    finishInputEvent(event, handled);
+                                }
+                            }));
         }
         return inputTransferToken;
     }
@@ -800,7 +936,8 @@ public final class WindowManagerGlobal {
     void unregisterSurfaceControlInputReceiver(SurfaceControl surfaceControl) {
         SurfaceControlInputReceiverInfo surfaceControlInputReceiverInfo;
         synchronized (this.mSurfaceControlInputReceivers) {
-            surfaceControlInputReceiverInfo = this.mSurfaceControlInputReceivers.removeReturnOld(surfaceControl.getLayerId());
+            surfaceControlInputReceiverInfo =
+                    this.mSurfaceControlInputReceivers.removeReturnOld(surfaceControl.getLayerId());
         }
         if (surfaceControlInputReceiverInfo == null) {
             Log.w(TAG, "No registered input event receiver with sc: " + surfaceControl);
@@ -813,7 +950,8 @@ public final class WindowManagerGlobal {
     IBinder getSurfaceControlInputClientToken(SurfaceControl surfaceControl) {
         SurfaceControlInputReceiverInfo surfaceControlInputReceiverInfo;
         synchronized (this.mSurfaceControlInputReceivers) {
-            surfaceControlInputReceiverInfo = this.mSurfaceControlInputReceivers.get(surfaceControl.getLayerId());
+            surfaceControlInputReceiverInfo =
+                    this.mSurfaceControlInputReceivers.get(surfaceControl.getLayerId());
         }
         if (surfaceControlInputReceiverInfo == null) {
             Log.w(TAG, "No registered input event receiver with sc: " + surfaceControl);
@@ -822,9 +960,11 @@ public final class WindowManagerGlobal {
         return surfaceControlInputReceiverInfo.mClientToken;
     }
 
-    boolean transferTouchGesture(InputTransferToken transferFromToken, InputTransferToken transferToToken) {
+    boolean transferTouchGesture(
+            InputTransferToken transferFromToken, InputTransferToken transferToToken) {
         try {
-            return getWindowManagerService().transferTouchGesture(transferFromToken, transferToToken);
+            return getWindowManagerService()
+                    .transferTouchGesture(transferFromToken, transferToToken);
         } catch (RemoteException e) {
             e.rethrowAsRuntimeException();
             return false;
@@ -843,17 +983,24 @@ public final class WindowManagerGlobal {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public void addListener(IBinder window, TrustedPresentationThresholds thresholds, Consumer<Boolean> listener, Executor executor) {
+        public void addListener(
+                IBinder window,
+                TrustedPresentationThresholds thresholds,
+                Consumer<Boolean> listener,
+                Executor executor) {
             synchronized (this.mTplLock) {
                 if (this.mListeners.containsKey(listener)) {
-                    Log.i(WindowManagerGlobal.TAG, "Updating listener " + listener + " thresholds to " + thresholds);
+                    Log.i(
+                            WindowManagerGlobal.TAG,
+                            "Updating listener " + listener + " thresholds to " + thresholds);
                     removeListener(listener);
                 }
                 int id = sId;
                 sId = id + 1;
                 this.mListeners.put(listener, new Pair<>(Integer.valueOf(id), executor));
                 try {
-                    WindowManagerGlobal.getWindowManagerService().registerTrustedPresentationListener(window, this, thresholds, id);
+                    WindowManagerGlobal.getWindowManagerService()
+                            .registerTrustedPresentationListener(window, this, thresholds, id);
                 } catch (RemoteException e) {
                     e.rethrowFromSystemServer();
                 }
@@ -869,7 +1016,9 @@ public final class WindowManagerGlobal {
                     return;
                 }
                 try {
-                    WindowManagerGlobal.getWindowManagerService().unregisterTrustedPresentationListener(this, removedListener.first.intValue());
+                    WindowManagerGlobal.getWindowManagerService()
+                            .unregisterTrustedPresentationListener(
+                                    this, removedListener.first.intValue());
                 } catch (RemoteException e) {
                     e.rethrowFromSystemServer();
                 }
@@ -877,15 +1026,24 @@ public final class WindowManagerGlobal {
         }
 
         @Override // android.window.ITrustedPresentationListener
-        public void onTrustedPresentationChanged(final int[] inTrustedStateListenerIds, final int[] outOfTrustedStateListenerIds) {
+        public void onTrustedPresentationChanged(
+                final int[] inTrustedStateListenerIds, final int[] outOfTrustedStateListenerIds) {
             final ArrayList<Runnable> firedListeners = new ArrayList<>();
             synchronized (this.mTplLock) {
-                this.mListeners.forEach(new BiConsumer() { // from class: android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda0
-                    @Override // java.util.function.BiConsumer
-                    public final void accept(Object obj, Object obj2) {
-                        WindowManagerGlobal.TrustedPresentationListener.lambda$onTrustedPresentationChanged$4(inTrustedStateListenerIds, firedListeners, outOfTrustedStateListenerIds, (Consumer) obj, (Pair) obj2);
-                    }
-                });
+                this.mListeners.forEach(
+                        new BiConsumer() { // from class:
+                                           // android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda0
+                            @Override // java.util.function.BiConsumer
+                            public final void accept(Object obj, Object obj2) {
+                                WindowManagerGlobal.TrustedPresentationListener
+                                        .lambda$onTrustedPresentationChanged$4(
+                                                inTrustedStateListenerIds,
+                                                firedListeners,
+                                                outOfTrustedStateListenerIds,
+                                                (Consumer) obj,
+                                                (Pair) obj2);
+                            }
+                        });
             }
             for (int i = 0; i < firedListeners.size(); i++) {
                 firedListeners.get(i).run();
@@ -893,37 +1051,50 @@ public final class WindowManagerGlobal {
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        static /* synthetic */ void lambda$onTrustedPresentationChanged$4(int[] inTrustedStateListenerIds, ArrayList firedListeners, int[] outOfTrustedStateListenerIds, final Consumer listener, Pair idExecutorPair) {
+        static /* synthetic */ void lambda$onTrustedPresentationChanged$4(
+                int[] inTrustedStateListenerIds,
+                ArrayList firedListeners,
+                int[] outOfTrustedStateListenerIds,
+                final Consumer listener,
+                Pair idExecutorPair) {
             Integer listenerId = (Integer) idExecutorPair.first;
             final Executor executor = (Executor) idExecutorPair.second;
             for (int id : inTrustedStateListenerIds) {
                 if (listenerId.intValue() == id) {
-                    firedListeners.add(new Runnable() { // from class: android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            executor.execute(new Runnable() { // from class: android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda3
+                    firedListeners.add(
+                            new Runnable() { // from class:
+                                             // android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda1
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    r1.accept(true);
+                                    executor.execute(
+                                            new Runnable() { // from class:
+                                                             // android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda3
+                                                @Override // java.lang.Runnable
+                                                public final void run() {
+                                                    r1.accept(true);
+                                                }
+                                            });
                                 }
                             });
-                        }
-                    });
                 }
             }
             for (int id2 : outOfTrustedStateListenerIds) {
                 if (listenerId.intValue() == id2) {
-                    firedListeners.add(new Runnable() { // from class: android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda2
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            executor.execute(new Runnable() { // from class: android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda4
+                    firedListeners.add(
+                            new Runnable() { // from class:
+                                             // android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda2
                                 @Override // java.lang.Runnable
                                 public final void run() {
-                                    r1.accept(false);
+                                    executor.execute(
+                                            new Runnable() { // from class:
+                                                             // android.view.WindowManagerGlobal$TrustedPresentationListener$$ExternalSyntheticLambda4
+                                                @Override // java.lang.Runnable
+                                                public final void run() {
+                                                    r1.accept(false);
+                                                }
+                                            });
                                 }
                             });
-                        }
-                    });
                 }
             }
         }
@@ -953,7 +1124,8 @@ public final class WindowManagerGlobal {
         final IBinder mClientToken;
         final InputEventReceiver mInputEventReceiver;
 
-        private SurfaceControlInputReceiverInfo(IBinder clientToken, InputEventReceiver inputEventReceiver) {
+        private SurfaceControlInputReceiverInfo(
+                IBinder clientToken, InputEventReceiver inputEventReceiver) {
             this.mClientToken = clientToken;
             this.mInputEventReceiver = inputEventReceiver;
         }

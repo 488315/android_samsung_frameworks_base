@@ -16,8 +16,10 @@ import android.os.RemoteException;
 import android.util.SparseArray;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.Flags;
+
 import com.android.internal.R;
 import com.android.internal.compat.IPlatformCompat;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -29,28 +31,29 @@ public class AccessibilityServiceInfo implements Parcelable {
     public static final int CAPABILITY_CAN_CONTROL_MAGNIFICATION = 16;
     public static final int CAPABILITY_CAN_PERFORM_GESTURES = 32;
 
-    @Deprecated
-    public static final int CAPABILITY_CAN_REQUEST_ENHANCED_WEB_ACCESSIBILITY = 4;
+    @Deprecated public static final int CAPABILITY_CAN_REQUEST_ENHANCED_WEB_ACCESSIBILITY = 4;
     public static final int CAPABILITY_CAN_REQUEST_FILTER_KEY_EVENTS = 8;
     public static final int CAPABILITY_CAN_REQUEST_FINGERPRINT_GESTURES = 64;
     public static final int CAPABILITY_CAN_REQUEST_TOUCH_EXPLORATION = 2;
     public static final int CAPABILITY_CAN_RETRIEVE_WINDOW_CONTENT = 1;
     public static final int CAPABILITY_CAN_TAKE_SCREENSHOT = 128;
-    public static final Parcelable.Creator<AccessibilityServiceInfo> CREATOR = new Parcelable.Creator<AccessibilityServiceInfo>() { // from class: android.accessibilityservice.AccessibilityServiceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessibilityServiceInfo createFromParcel(Parcel parcel) {
-            AccessibilityServiceInfo info = new AccessibilityServiceInfo();
-            info.initFromParcel(parcel);
-            return info;
-        }
+    public static final Parcelable.Creator<AccessibilityServiceInfo> CREATOR =
+            new Parcelable.Creator<AccessibilityServiceInfo>() { // from class:
+                // android.accessibilityservice.AccessibilityServiceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessibilityServiceInfo createFromParcel(Parcel parcel) {
+                    AccessibilityServiceInfo info = new AccessibilityServiceInfo();
+                    info.initFromParcel(parcel);
+                    return info;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessibilityServiceInfo[] newArray(int size) {
-            return new AccessibilityServiceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessibilityServiceInfo[] newArray(int size) {
+                    return new AccessibilityServiceInfo[size];
+                }
+            };
     public static final int DEFAULT = 1;
     public static final int FEEDBACK_ALL_MASK = -1;
     public static final int FEEDBACK_AUDIBLE = 4;
@@ -67,8 +70,7 @@ public class AccessibilityServiceInfo implements Parcelable {
     public static final int FLAG_REQUEST_2_FINGER_PASSTHROUGH = 8192;
     public static final int FLAG_REQUEST_ACCESSIBILITY_BUTTON = 256;
 
-    @Deprecated
-    public static final int FLAG_REQUEST_ENHANCED_WEB_ACCESSIBILITY = 8;
+    @Deprecated public static final int FLAG_REQUEST_ENHANCED_WEB_ACCESSIBILITY = 8;
     public static final int FLAG_REQUEST_FILTER_KEY_EVENTS = 32;
     public static final int FLAG_REQUEST_FINGERPRINT_GESTURES = 512;
     public static final int FLAG_REQUEST_MULTI_FINGER_GESTURES = 4096;
@@ -106,12 +108,10 @@ public class AccessibilityServiceInfo implements Parcelable {
     public String[] packageNames;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FeedbackType {
-    }
+    public @interface FeedbackType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MotionEventSources {
-    }
+    public @interface MotionEventSources {}
 
     private static class DynamicPropertyDefaults {
         private final int mEventTypesDefault;
@@ -153,12 +153,16 @@ public class AccessibilityServiceInfo implements Parcelable {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public AccessibilityServiceInfo(android.content.pm.ResolveInfo r20, android.content.Context r21) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    public AccessibilityServiceInfo(android.content.pm.ResolveInfo r20, android.content.Context r21)
+            throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             Method dump skipped, instructions count: 543
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.accessibilityservice.AccessibilityServiceInfo.<init>(android.content.pm.ResolveInfo, android.content.Context):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.accessibilityservice.AccessibilityServiceInfo.<init>(android.content.pm.ResolveInfo,"
+                    + " android.content.Context):void");
     }
 
     public void resetDynamicallyConfigurableProperties() {
@@ -166,20 +170,26 @@ public class AccessibilityServiceInfo implements Parcelable {
         if (this.mDynamicPropertyDefaults.mPackageNamesDefault == null) {
             this.packageNames = null;
         } else {
-            this.packageNames = (String[]) this.mDynamicPropertyDefaults.mPackageNamesDefault.toArray(new String[0]);
+            this.packageNames =
+                    (String[])
+                            this.mDynamicPropertyDefaults.mPackageNamesDefault.toArray(
+                                    new String[0]);
         }
         this.feedbackType = this.mDynamicPropertyDefaults.mFeedbackTypeDefault;
         this.notificationTimeout = this.mDynamicPropertyDefaults.mNotificationTimeoutDefault;
-        this.mNonInteractiveUiTimeout = this.mDynamicPropertyDefaults.mNonInteractiveUiTimeoutDefault;
+        this.mNonInteractiveUiTimeout =
+                this.mDynamicPropertyDefaults.mNonInteractiveUiTimeoutDefault;
         this.mInteractiveUiTimeout = this.mDynamicPropertyDefaults.mInteractiveUiTimeoutDefault;
         this.flags = this.mDynamicPropertyDefaults.mFlagsDefault;
         this.mMotionEventSources = this.mDynamicPropertyDefaults.mMotionEventSourcesDefault;
         if (Flags.motionEventObserving()) {
-            this.mObservedMotionEventSources = this.mDynamicPropertyDefaults.mObservedMotionEventSourcesDefault;
+            this.mObservedMotionEventSources =
+                    this.mDynamicPropertyDefaults.mObservedMotionEventSourcesDefault;
         }
     }
 
-    public void updateDynamicallyConfigurableProperties(IPlatformCompat platformCompat, AccessibilityServiceInfo other) {
+    public void updateDynamicallyConfigurableProperties(
+            IPlatformCompat platformCompat, AccessibilityServiceInfo other) {
         if (isRequestAccessibilityButtonChangeEnabled(platformCompat)) {
             other.flags &= -257;
             other.flags |= this.flags & 256;
@@ -203,7 +213,9 @@ public class AccessibilityServiceInfo implements Parcelable {
         }
         if (platformCompat != null) {
             try {
-                return platformCompat.isChangeEnabled(REQUEST_ACCESSIBILITY_BUTTON_CHANGE, this.mResolveInfo.serviceInfo.applicationInfo);
+                return platformCompat.isChangeEnabled(
+                        REQUEST_ACCESSIBILITY_BUTTON_CHANGE,
+                        this.mResolveInfo.serviceInfo.applicationInfo);
             } catch (RemoteException e) {
             }
         }
@@ -249,7 +261,8 @@ public class AccessibilityServiceInfo implements Parcelable {
         if (this.mAnimatedImageRes == 0) {
             return null;
         }
-        return AccessibilityUtils.loadSafeAnimatedImage(context, this.mResolveInfo.serviceInfo.applicationInfo, this.mAnimatedImageRes);
+        return AccessibilityUtils.loadSafeAnimatedImage(
+                context, this.mResolveInfo.serviceInfo.applicationInfo, this.mAnimatedImageRes);
     }
 
     public boolean getCanRetrieveWindowContent() {
@@ -275,7 +288,12 @@ public class AccessibilityServiceInfo implements Parcelable {
 
     public void setObservedMotionEventSources(int observedMotionEventSources) {
         if (((~this.mMotionEventSources) & observedMotionEventSources) != 0) {
-            String message = String.format("Requested motion event sources for listening = 0x%x but requested motion event sources for observing = 0x%x.", Integer.valueOf(this.mMotionEventSources), Integer.valueOf(observedMotionEventSources));
+            String message =
+                    String.format(
+                            "Requested motion event sources for listening = 0x%x but requested"
+                                    + " motion event sources for observing = 0x%x.",
+                            Integer.valueOf(this.mMotionEventSources),
+                            Integer.valueOf(observedMotionEventSources));
             throw new IllegalArgumentException(message);
         }
         this.mObservedMotionEventSources = observedMotionEventSources;
@@ -290,7 +308,9 @@ public class AccessibilityServiceInfo implements Parcelable {
             return this.mNonLocalizedSummary;
         }
         ServiceInfo serviceInfo = this.mResolveInfo.serviceInfo;
-        CharSequence summary = packageManager.getText(serviceInfo.packageName, this.mSummaryResId, serviceInfo.applicationInfo);
+        CharSequence summary =
+                packageManager.getText(
+                        serviceInfo.packageName, this.mSummaryResId, serviceInfo.applicationInfo);
         if (summary != null) {
             return summary.toString().trim();
         }
@@ -302,7 +322,9 @@ public class AccessibilityServiceInfo implements Parcelable {
             return null;
         }
         ServiceInfo serviceInfo = this.mResolveInfo.serviceInfo;
-        CharSequence intro = packageManager.getText(serviceInfo.packageName, this.mIntroResId, serviceInfo.applicationInfo);
+        CharSequence intro =
+                packageManager.getText(
+                        serviceInfo.packageName, this.mIntroResId, serviceInfo.applicationInfo);
         if (intro != null) {
             return intro.toString().trim();
         }
@@ -318,7 +340,11 @@ public class AccessibilityServiceInfo implements Parcelable {
             return this.mNonLocalizedDescription;
         }
         ServiceInfo serviceInfo = this.mResolveInfo.serviceInfo;
-        CharSequence description = packageManager.getText(serviceInfo.packageName, this.mDescriptionResId, serviceInfo.applicationInfo);
+        CharSequence description =
+                packageManager.getText(
+                        serviceInfo.packageName,
+                        this.mDescriptionResId,
+                        serviceInfo.applicationInfo);
         if (description != null) {
             return description.toString().trim();
         }
@@ -330,7 +356,11 @@ public class AccessibilityServiceInfo implements Parcelable {
             return null;
         }
         ServiceInfo serviceInfo = this.mResolveInfo.serviceInfo;
-        CharSequence htmlDescription = packageManager.getText(serviceInfo.packageName, this.mHtmlDescriptionRes, serviceInfo.applicationInfo);
+        CharSequence htmlDescription =
+                packageManager.getText(
+                        serviceInfo.packageName,
+                        this.mHtmlDescriptionRes,
+                        serviceInfo.applicationInfo);
         if (htmlDescription != null) {
             return AccessibilityUtils.getFilteredHtmlText(htmlDescription.toString().trim());
         }
@@ -416,7 +446,9 @@ public class AccessibilityServiceInfo implements Parcelable {
         this.mInteractiveUiTimeout = parcel.readInt();
         this.flags = parcel.readInt();
         this.crashed = parcel.readInt() != 0;
-        this.mComponentName = (ComponentName) parcel.readParcelable(getClass().getClassLoader(), ComponentName.class);
+        this.mComponentName =
+                (ComponentName)
+                        parcel.readParcelable(getClass().getClassLoader(), ComponentName.class);
         this.mResolveInfo = (ResolveInfo) parcel.readParcelable(null, ResolveInfo.class);
         this.mSettingsActivityName = parcel.readString();
         this.mCapabilities = parcel.readInt();
@@ -677,7 +709,8 @@ public class AccessibilityServiceInfo implements Parcelable {
         }
         int capabilities = this.mCapabilities;
         List<CapabilityInfo> capabilityInfos = new ArrayList<>();
-        SparseArray<CapabilityInfo> capabilityInfoSparseArray = getCapabilityInfoSparseArray(context);
+        SparseArray<CapabilityInfo> capabilityInfoSparseArray =
+                getCapabilityInfoSparseArray(context);
         while (capabilities != 0) {
             int capabilityBit = 1 << Integer.numberOfTrailingZeros(capabilities);
             capabilities &= ~capabilityBit;
@@ -693,7 +726,9 @@ public class AccessibilityServiceInfo implements Parcelable {
         List<SemCapabilityInfo> semCapabilityInfos = new ArrayList<>();
         List<CapabilityInfo> capabilityInfos = getCapabilityInfos(context);
         for (CapabilityInfo info : capabilityInfos) {
-            semCapabilityInfos.add(new SemCapabilityInfo(context.getString(info.titleResId), context.getString(info.descResId)));
+            semCapabilityInfos.add(
+                    new SemCapabilityInfo(
+                            context.getString(info.titleResId), context.getString(info.descResId)));
         }
         return semCapabilityInfos;
     }
@@ -701,21 +736,58 @@ public class AccessibilityServiceInfo implements Parcelable {
     private static SparseArray<CapabilityInfo> getCapabilityInfoSparseArray(Context context) {
         if (sAvailableCapabilityInfos == null) {
             sAvailableCapabilityInfos = new SparseArray<>();
-            sAvailableCapabilityInfos.put(1, new CapabilityInfo(1, R.string.capability_title_canRetrieveWindowContent, R.string.capability_desc_canRetrieveWindowContent));
-            sAvailableCapabilityInfos.put(2, new CapabilityInfo(2, R.string.capability_title_canRequestTouchExploration, R.string.capability_desc_canRequestTouchExploration));
-            sAvailableCapabilityInfos.put(8, new CapabilityInfo(8, R.string.capability_title_canRequestFilterKeyEvents, R.string.capability_desc_canRequestFilterKeyEvents));
-            sAvailableCapabilityInfos.put(16, new CapabilityInfo(16, R.string.capability_title_canControlMagnification, R.string.capability_desc_canControlMagnification));
-            sAvailableCapabilityInfos.put(32, new CapabilityInfo(32, R.string.capability_title_canPerformGestures, R.string.capability_desc_canPerformGestures));
-            sAvailableCapabilityInfos.put(128, new CapabilityInfo(128, R.string.capability_title_canTakeScreenshot, R.string.capability_desc_canTakeScreenshot));
+            sAvailableCapabilityInfos.put(
+                    1,
+                    new CapabilityInfo(
+                            1,
+                            R.string.capability_title_canRetrieveWindowContent,
+                            R.string.capability_desc_canRetrieveWindowContent));
+            sAvailableCapabilityInfos.put(
+                    2,
+                    new CapabilityInfo(
+                            2,
+                            R.string.capability_title_canRequestTouchExploration,
+                            R.string.capability_desc_canRequestTouchExploration));
+            sAvailableCapabilityInfos.put(
+                    8,
+                    new CapabilityInfo(
+                            8,
+                            R.string.capability_title_canRequestFilterKeyEvents,
+                            R.string.capability_desc_canRequestFilterKeyEvents));
+            sAvailableCapabilityInfos.put(
+                    16,
+                    new CapabilityInfo(
+                            16,
+                            R.string.capability_title_canControlMagnification,
+                            R.string.capability_desc_canControlMagnification));
+            sAvailableCapabilityInfos.put(
+                    32,
+                    new CapabilityInfo(
+                            32,
+                            R.string.capability_title_canPerformGestures,
+                            R.string.capability_desc_canPerformGestures));
+            sAvailableCapabilityInfos.put(
+                    128,
+                    new CapabilityInfo(
+                            128,
+                            R.string.capability_title_canTakeScreenshot,
+                            R.string.capability_desc_canTakeScreenshot));
             if (context == null || fingerprintAvailable(context)) {
-                sAvailableCapabilityInfos.put(64, new CapabilityInfo(64, R.string.capability_title_canCaptureFingerprintGestures, R.string.capability_desc_canCaptureFingerprintGestures));
+                sAvailableCapabilityInfos.put(
+                        64,
+                        new CapabilityInfo(
+                                64,
+                                R.string.capability_title_canCaptureFingerprintGestures,
+                                R.string.capability_desc_canCaptureFingerprintGestures));
             }
         }
         return sAvailableCapabilityInfos;
     }
 
     private static boolean fingerprintAvailable(Context context) {
-        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT) && ((FingerprintManager) context.getSystemService(FingerprintManager.class)).isHardwareDetected();
+        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)
+                && ((FingerprintManager) context.getSystemService(FingerprintManager.class))
+                        .isHardwareDetected();
     }
 
     public static final class CapabilityInfo {

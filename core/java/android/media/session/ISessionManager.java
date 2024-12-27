@@ -2,15 +2,6 @@ package android.media.session;
 
 import android.content.ComponentName;
 import android.media.IRemoteSessionCallback;
-import android.media.session.IActiveSessionsListener;
-import android.media.session.IOnMediaKeyEventDispatchedListener;
-import android.media.session.IOnMediaKeyEventSessionChangedListener;
-import android.media.session.IOnMediaKeyListener;
-import android.media.session.IOnVolumeKeyLongPressListener;
-import android.media.session.ISession;
-import android.media.session.ISession2TokensListener;
-import android.media.session.ISessionCallback;
-import android.media.session.MediaSession;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -18,29 +9,47 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.KeyEvent;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface ISessionManager extends IInterface {
-    void addOnMediaKeyEventDispatchedListener(IOnMediaKeyEventDispatchedListener iOnMediaKeyEventDispatchedListener) throws RemoteException;
+    void addOnMediaKeyEventDispatchedListener(
+            IOnMediaKeyEventDispatchedListener iOnMediaKeyEventDispatchedListener)
+            throws RemoteException;
 
-    void addOnMediaKeyEventSessionChangedListener(IOnMediaKeyEventSessionChangedListener iOnMediaKeyEventSessionChangedListener, String str) throws RemoteException;
+    void addOnMediaKeyEventSessionChangedListener(
+            IOnMediaKeyEventSessionChangedListener iOnMediaKeyEventSessionChangedListener,
+            String str)
+            throws RemoteException;
 
-    void addSession2TokensListener(ISession2TokensListener iSession2TokensListener, int i) throws RemoteException;
+    void addSession2TokensListener(ISession2TokensListener iSession2TokensListener, int i)
+            throws RemoteException;
 
-    void addSessionsListener(IActiveSessionsListener iActiveSessionsListener, ComponentName componentName, int i) throws RemoteException;
+    void addSessionsListener(
+            IActiveSessionsListener iActiveSessionsListener, ComponentName componentName, int i)
+            throws RemoteException;
 
-    ISession createSession(String str, ISessionCallback iSessionCallback, String str2, Bundle bundle, int i) throws RemoteException;
+    ISession createSession(
+            String str, ISessionCallback iSessionCallback, String str2, Bundle bundle, int i)
+            throws RemoteException;
 
-    void dispatchAdjustVolume(String str, String str2, int i, int i2, int i3) throws RemoteException;
+    void dispatchAdjustVolume(String str, String str2, int i, int i2, int i3)
+            throws RemoteException;
 
-    void dispatchMediaKeyEvent(String str, boolean z, KeyEvent keyEvent, boolean z2) throws RemoteException;
+    void dispatchMediaKeyEvent(String str, boolean z, KeyEvent keyEvent, boolean z2)
+            throws RemoteException;
 
-    boolean dispatchMediaKeyEventToSessionAsSystemService(String str, KeyEvent keyEvent, MediaSession.Token token) throws RemoteException;
+    boolean dispatchMediaKeyEventToSessionAsSystemService(
+            String str, KeyEvent keyEvent, MediaSession.Token token) throws RemoteException;
 
-    void dispatchVolumeKeyEvent(String str, String str2, boolean z, KeyEvent keyEvent, int i, boolean z2) throws RemoteException;
+    void dispatchVolumeKeyEvent(
+            String str, String str2, boolean z, KeyEvent keyEvent, int i, boolean z2)
+            throws RemoteException;
 
-    void dispatchVolumeKeyEventToSessionAsSystemService(String str, String str2, KeyEvent keyEvent, MediaSession.Token token) throws RemoteException;
+    void dispatchVolumeKeyEventToSessionAsSystemService(
+            String str, String str2, KeyEvent keyEvent, MediaSession.Token token)
+            throws RemoteException;
 
     void expireTempEngagedSessions() throws RemoteException;
 
@@ -60,15 +69,22 @@ public interface ISessionManager extends IInterface {
 
     boolean isTrusted(String str, int i, int i2) throws RemoteException;
 
-    void registerRemoteSessionCallback(IRemoteSessionCallback iRemoteSessionCallback) throws RemoteException;
+    void registerRemoteSessionCallback(IRemoteSessionCallback iRemoteSessionCallback)
+            throws RemoteException;
 
-    void removeOnMediaKeyEventDispatchedListener(IOnMediaKeyEventDispatchedListener iOnMediaKeyEventDispatchedListener) throws RemoteException;
+    void removeOnMediaKeyEventDispatchedListener(
+            IOnMediaKeyEventDispatchedListener iOnMediaKeyEventDispatchedListener)
+            throws RemoteException;
 
-    void removeOnMediaKeyEventSessionChangedListener(IOnMediaKeyEventSessionChangedListener iOnMediaKeyEventSessionChangedListener) throws RemoteException;
+    void removeOnMediaKeyEventSessionChangedListener(
+            IOnMediaKeyEventSessionChangedListener iOnMediaKeyEventSessionChangedListener)
+            throws RemoteException;
 
-    void removeSession2TokensListener(ISession2TokensListener iSession2TokensListener) throws RemoteException;
+    void removeSession2TokensListener(ISession2TokensListener iSession2TokensListener)
+            throws RemoteException;
 
-    void removeSessionsListener(IActiveSessionsListener iActiveSessionsListener) throws RemoteException;
+    void removeSessionsListener(IActiveSessionsListener iActiveSessionsListener)
+            throws RemoteException;
 
     void setCustomMediaKeyDispatcher(String str) throws RemoteException;
 
@@ -76,77 +92,106 @@ public interface ISessionManager extends IInterface {
 
     void setOnMediaKeyListener(IOnMediaKeyListener iOnMediaKeyListener) throws RemoteException;
 
-    void setOnVolumeKeyLongPressListener(IOnVolumeKeyLongPressListener iOnVolumeKeyLongPressListener) throws RemoteException;
+    void setOnVolumeKeyLongPressListener(
+            IOnVolumeKeyLongPressListener iOnVolumeKeyLongPressListener) throws RemoteException;
 
     void setSessionPolicies(MediaSession.Token token, int i) throws RemoteException;
 
-    void unregisterRemoteSessionCallback(IRemoteSessionCallback iRemoteSessionCallback) throws RemoteException;
+    void unregisterRemoteSessionCallback(IRemoteSessionCallback iRemoteSessionCallback)
+            throws RemoteException;
 
     public static class Default implements ISessionManager {
         @Override // android.media.session.ISessionManager
-        public ISession createSession(String packageName, ISessionCallback sessionCb, String tag, Bundle sessionInfo, int userId) throws RemoteException {
+        public ISession createSession(
+                String packageName,
+                ISessionCallback sessionCb,
+                String tag,
+                Bundle sessionInfo,
+                int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.session.ISessionManager
-        public List<MediaSession.Token> getSessions(ComponentName compName, int userId) throws RemoteException {
+        public List<MediaSession.Token> getSessions(ComponentName compName, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.session.ISessionManager
-        public MediaSession.Token getMediaKeyEventSession(String packageName) throws RemoteException {
+        public MediaSession.Token getMediaKeyEventSession(String packageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.session.ISessionManager
-        public String getMediaKeyEventSessionPackageName(String packageName) throws RemoteException {
+        public String getMediaKeyEventSessionPackageName(String packageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.session.ISessionManager
-        public void dispatchMediaKeyEvent(String packageName, boolean asSystemService, KeyEvent keyEvent, boolean needWakeLock) throws RemoteException {
-        }
+        public void dispatchMediaKeyEvent(
+                String packageName,
+                boolean asSystemService,
+                KeyEvent keyEvent,
+                boolean needWakeLock)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public boolean dispatchMediaKeyEventToSessionAsSystemService(String packageName, KeyEvent keyEvent, MediaSession.Token sessionToken) throws RemoteException {
+        public boolean dispatchMediaKeyEventToSessionAsSystemService(
+                String packageName, KeyEvent keyEvent, MediaSession.Token sessionToken)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.session.ISessionManager
-        public void dispatchVolumeKeyEvent(String packageName, String opPackageName, boolean asSystemService, KeyEvent keyEvent, int stream, boolean musicOnly) throws RemoteException {
-        }
+        public void dispatchVolumeKeyEvent(
+                String packageName,
+                String opPackageName,
+                boolean asSystemService,
+                KeyEvent keyEvent,
+                int stream,
+                boolean musicOnly)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void dispatchVolumeKeyEventToSessionAsSystemService(String packageName, String opPackageName, KeyEvent keyEvent, MediaSession.Token sessionToken) throws RemoteException {
-        }
+        public void dispatchVolumeKeyEventToSessionAsSystemService(
+                String packageName,
+                String opPackageName,
+                KeyEvent keyEvent,
+                MediaSession.Token sessionToken)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void dispatchAdjustVolume(String packageName, String opPackageName, int suggestedStream, int delta, int flags) throws RemoteException {
-        }
+        public void dispatchAdjustVolume(
+                String packageName, String opPackageName, int suggestedStream, int delta, int flags)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void addSessionsListener(IActiveSessionsListener listener, ComponentName compName, int userId) throws RemoteException {
-        }
+        public void addSessionsListener(
+                IActiveSessionsListener listener, ComponentName compName, int userId)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void removeSessionsListener(IActiveSessionsListener listener) throws RemoteException {
-        }
+        public void removeSessionsListener(IActiveSessionsListener listener)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void addSession2TokensListener(ISession2TokensListener listener, int userId) throws RemoteException {
-        }
+        public void addSession2TokensListener(ISession2TokensListener listener, int userId)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void removeSession2TokensListener(ISession2TokensListener listener) throws RemoteException {
-        }
+        public void removeSession2TokensListener(ISession2TokensListener listener)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void registerRemoteSessionCallback(IRemoteSessionCallback rvc) throws RemoteException {
-        }
+        public void registerRemoteSessionCallback(IRemoteSessionCallback rvc)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void unregisterRemoteSessionCallback(IRemoteSessionCallback rvc) throws RemoteException {
-        }
+        public void unregisterRemoteSessionCallback(IRemoteSessionCallback rvc)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
         public boolean isGlobalPriorityActive() throws RemoteException {
@@ -154,41 +199,40 @@ public interface ISessionManager extends IInterface {
         }
 
         @Override // android.media.session.ISessionManager
-        public void addOnMediaKeyEventDispatchedListener(IOnMediaKeyEventDispatchedListener listener) throws RemoteException {
-        }
+        public void addOnMediaKeyEventDispatchedListener(
+                IOnMediaKeyEventDispatchedListener listener) throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void removeOnMediaKeyEventDispatchedListener(IOnMediaKeyEventDispatchedListener listener) throws RemoteException {
-        }
+        public void removeOnMediaKeyEventDispatchedListener(
+                IOnMediaKeyEventDispatchedListener listener) throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void addOnMediaKeyEventSessionChangedListener(IOnMediaKeyEventSessionChangedListener listener, String packageName) throws RemoteException {
-        }
+        public void addOnMediaKeyEventSessionChangedListener(
+                IOnMediaKeyEventSessionChangedListener listener, String packageName)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void removeOnMediaKeyEventSessionChangedListener(IOnMediaKeyEventSessionChangedListener listener) throws RemoteException {
-        }
+        public void removeOnMediaKeyEventSessionChangedListener(
+                IOnMediaKeyEventSessionChangedListener listener) throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void setOnVolumeKeyLongPressListener(IOnVolumeKeyLongPressListener listener) throws RemoteException {
-        }
+        public void setOnVolumeKeyLongPressListener(IOnVolumeKeyLongPressListener listener)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void setOnMediaKeyListener(IOnMediaKeyListener listener) throws RemoteException {
-        }
+        public void setOnMediaKeyListener(IOnMediaKeyListener listener) throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public boolean isTrusted(String controllerPackageName, int controllerPid, int controllerUid) throws RemoteException {
+        public boolean isTrusted(String controllerPackageName, int controllerPid, int controllerUid)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.session.ISessionManager
-        public void setCustomMediaKeyDispatcher(String name) throws RemoteException {
-        }
+        public void setCustomMediaKeyDispatcher(String name) throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void setCustomMediaSessionPolicyProvider(String name) throws RemoteException {
-        }
+        public void setCustomMediaSessionPolicyProvider(String name) throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
         public boolean hasCustomMediaKeyDispatcher(String componentName) throws RemoteException {
@@ -196,7 +240,8 @@ public interface ISessionManager extends IInterface {
         }
 
         @Override // android.media.session.ISessionManager
-        public boolean hasCustomMediaSessionPolicyProvider(String componentName) throws RemoteException {
+        public boolean hasCustomMediaSessionPolicyProvider(String componentName)
+                throws RemoteException {
             return false;
         }
 
@@ -206,12 +251,11 @@ public interface ISessionManager extends IInterface {
         }
 
         @Override // android.media.session.ISessionManager
-        public void setSessionPolicies(MediaSession.Token token, int policies) throws RemoteException {
-        }
+        public void setSessionPolicies(MediaSession.Token token, int policies)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionManager
-        public void expireTempEngagedSessions() throws RemoteException {
-        }
+        public void expireTempEngagedSessions() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -219,7 +263,7 @@ public interface ISessionManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISessionManager {
+    public abstract static class Stub extends Binder implements ISessionManager {
         public static final String DESCRIPTOR = "android.media.session.ISessionManager";
         static final int TRANSACTION_addOnMediaKeyEventDispatchedListener = 17;
         static final int TRANSACTION_addOnMediaKeyEventSessionChangedListener = 19;
@@ -345,7 +389,8 @@ public interface ISessionManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -356,7 +401,8 @@ public interface ISessionManager extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    ISessionCallback _arg1 = ISessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ISessionCallback _arg1 =
+                            ISessionCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg2 = data.readString();
                     Bundle _arg3 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg4 = data.readInt();
@@ -366,7 +412,8 @@ public interface ISessionManager extends IInterface {
                     reply.writeStrongInterface(_result);
                     return true;
                 case 2:
-                    ComponentName _arg02 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg02 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg12 = data.readInt();
                     data.enforceNoDataAvail();
                     List<MediaSession.Token> _result2 = getSessions(_arg02, _arg12);
@@ -399,9 +446,11 @@ public interface ISessionManager extends IInterface {
                 case 6:
                     String _arg06 = data.readString();
                     KeyEvent _arg14 = (KeyEvent) data.readTypedObject(KeyEvent.CREATOR);
-                    MediaSession.Token _arg23 = (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
+                    MediaSession.Token _arg23 =
+                            (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
                     data.enforceNoDataAvail();
-                    boolean _result5 = dispatchMediaKeyEventToSessionAsSystemService(_arg06, _arg14, _arg23);
+                    boolean _result5 =
+                            dispatchMediaKeyEventToSessionAsSystemService(_arg06, _arg14, _arg23);
                     reply.writeNoException();
                     reply.writeBoolean(_result5);
                     return true;
@@ -420,7 +469,8 @@ public interface ISessionManager extends IInterface {
                     String _arg08 = data.readString();
                     String _arg16 = data.readString();
                     KeyEvent _arg25 = (KeyEvent) data.readTypedObject(KeyEvent.CREATOR);
-                    MediaSession.Token _arg34 = (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
+                    MediaSession.Token _arg34 =
+                            (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
                     data.enforceNoDataAvail();
                     dispatchVolumeKeyEventToSessionAsSystemService(_arg08, _arg16, _arg25, _arg34);
                     reply.writeNoException();
@@ -436,40 +486,47 @@ public interface ISessionManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 10:
-                    IActiveSessionsListener _arg010 = IActiveSessionsListener.Stub.asInterface(data.readStrongBinder());
-                    ComponentName _arg18 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    IActiveSessionsListener _arg010 =
+                            IActiveSessionsListener.Stub.asInterface(data.readStrongBinder());
+                    ComponentName _arg18 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg27 = data.readInt();
                     data.enforceNoDataAvail();
                     addSessionsListener(_arg010, _arg18, _arg27);
                     reply.writeNoException();
                     return true;
                 case 11:
-                    IActiveSessionsListener _arg011 = IActiveSessionsListener.Stub.asInterface(data.readStrongBinder());
+                    IActiveSessionsListener _arg011 =
+                            IActiveSessionsListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeSessionsListener(_arg011);
                     reply.writeNoException();
                     return true;
                 case 12:
-                    ISession2TokensListener _arg012 = ISession2TokensListener.Stub.asInterface(data.readStrongBinder());
+                    ISession2TokensListener _arg012 =
+                            ISession2TokensListener.Stub.asInterface(data.readStrongBinder());
                     int _arg19 = data.readInt();
                     data.enforceNoDataAvail();
                     addSession2TokensListener(_arg012, _arg19);
                     reply.writeNoException();
                     return true;
                 case 13:
-                    ISession2TokensListener _arg013 = ISession2TokensListener.Stub.asInterface(data.readStrongBinder());
+                    ISession2TokensListener _arg013 =
+                            ISession2TokensListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeSession2TokensListener(_arg013);
                     reply.writeNoException();
                     return true;
                 case 14:
-                    IRemoteSessionCallback _arg014 = IRemoteSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteSessionCallback _arg014 =
+                            IRemoteSessionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerRemoteSessionCallback(_arg014);
                     reply.writeNoException();
                     return true;
                 case 15:
-                    IRemoteSessionCallback _arg015 = IRemoteSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteSessionCallback _arg015 =
+                            IRemoteSessionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterRemoteSessionCallback(_arg015);
                     reply.writeNoException();
@@ -480,38 +537,48 @@ public interface ISessionManager extends IInterface {
                     reply.writeBoolean(_result6);
                     return true;
                 case 17:
-                    IOnMediaKeyEventDispatchedListener _arg016 = IOnMediaKeyEventDispatchedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnMediaKeyEventDispatchedListener _arg016 =
+                            IOnMediaKeyEventDispatchedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addOnMediaKeyEventDispatchedListener(_arg016);
                     reply.writeNoException();
                     return true;
                 case 18:
-                    IOnMediaKeyEventDispatchedListener _arg017 = IOnMediaKeyEventDispatchedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnMediaKeyEventDispatchedListener _arg017 =
+                            IOnMediaKeyEventDispatchedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeOnMediaKeyEventDispatchedListener(_arg017);
                     reply.writeNoException();
                     return true;
                 case 19:
-                    IOnMediaKeyEventSessionChangedListener _arg018 = IOnMediaKeyEventSessionChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnMediaKeyEventSessionChangedListener _arg018 =
+                            IOnMediaKeyEventSessionChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg110 = data.readString();
                     data.enforceNoDataAvail();
                     addOnMediaKeyEventSessionChangedListener(_arg018, _arg110);
                     reply.writeNoException();
                     return true;
                 case 20:
-                    IOnMediaKeyEventSessionChangedListener _arg019 = IOnMediaKeyEventSessionChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnMediaKeyEventSessionChangedListener _arg019 =
+                            IOnMediaKeyEventSessionChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeOnMediaKeyEventSessionChangedListener(_arg019);
                     reply.writeNoException();
                     return true;
                 case 21:
-                    IOnVolumeKeyLongPressListener _arg020 = IOnVolumeKeyLongPressListener.Stub.asInterface(data.readStrongBinder());
+                    IOnVolumeKeyLongPressListener _arg020 =
+                            IOnVolumeKeyLongPressListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setOnVolumeKeyLongPressListener(_arg020);
                     reply.writeNoException();
                     return true;
                 case 22:
-                    IOnMediaKeyListener _arg021 = IOnMediaKeyListener.Stub.asInterface(data.readStrongBinder());
+                    IOnMediaKeyListener _arg021 =
+                            IOnMediaKeyListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setOnMediaKeyListener(_arg021);
                     reply.writeNoException();
@@ -552,14 +619,16 @@ public interface ISessionManager extends IInterface {
                     reply.writeBoolean(_result9);
                     return true;
                 case 28:
-                    MediaSession.Token _arg027 = (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
+                    MediaSession.Token _arg027 =
+                            (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
                     data.enforceNoDataAvail();
                     int _result10 = getSessionPolicies(_arg027);
                     reply.writeNoException();
                     reply.writeInt(_result10);
                     return true;
                 case 29:
-                    MediaSession.Token _arg028 = (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
+                    MediaSession.Token _arg028 =
+                            (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
                     int _arg112 = data.readInt();
                     data.enforceNoDataAvail();
                     setSessionPolicies(_arg028, _arg112);
@@ -591,7 +660,13 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public ISession createSession(String packageName, ISessionCallback sessionCb, String tag, Bundle sessionInfo, int userId) throws RemoteException {
+            public ISession createSession(
+                    String packageName,
+                    ISessionCallback sessionCb,
+                    String tag,
+                    Bundle sessionInfo,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -612,7 +687,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public List<MediaSession.Token> getSessions(ComponentName compName, int userId) throws RemoteException {
+            public List<MediaSession.Token> getSessions(ComponentName compName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -621,7 +697,8 @@ public interface ISessionManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    List<MediaSession.Token> _result = _reply.createTypedArrayList(MediaSession.Token.CREATOR);
+                    List<MediaSession.Token> _result =
+                            _reply.createTypedArrayList(MediaSession.Token.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -630,7 +707,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public MediaSession.Token getMediaKeyEventSession(String packageName) throws RemoteException {
+            public MediaSession.Token getMediaKeyEventSession(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -638,7 +716,8 @@ public interface ISessionManager extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    MediaSession.Token _result = (MediaSession.Token) _reply.readTypedObject(MediaSession.Token.CREATOR);
+                    MediaSession.Token _result =
+                            (MediaSession.Token) _reply.readTypedObject(MediaSession.Token.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -647,7 +726,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public String getMediaKeyEventSessionPackageName(String packageName) throws RemoteException {
+            public String getMediaKeyEventSessionPackageName(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -664,7 +744,12 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void dispatchMediaKeyEvent(String packageName, boolean asSystemService, KeyEvent keyEvent, boolean needWakeLock) throws RemoteException {
+            public void dispatchMediaKeyEvent(
+                    String packageName,
+                    boolean asSystemService,
+                    KeyEvent keyEvent,
+                    boolean needWakeLock)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -682,7 +767,9 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public boolean dispatchMediaKeyEventToSessionAsSystemService(String packageName, KeyEvent keyEvent, MediaSession.Token sessionToken) throws RemoteException {
+            public boolean dispatchMediaKeyEventToSessionAsSystemService(
+                    String packageName, KeyEvent keyEvent, MediaSession.Token sessionToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -701,7 +788,14 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void dispatchVolumeKeyEvent(String packageName, String opPackageName, boolean asSystemService, KeyEvent keyEvent, int stream, boolean musicOnly) throws RemoteException {
+            public void dispatchVolumeKeyEvent(
+                    String packageName,
+                    String opPackageName,
+                    boolean asSystemService,
+                    KeyEvent keyEvent,
+                    int stream,
+                    boolean musicOnly)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -721,7 +815,12 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void dispatchVolumeKeyEventToSessionAsSystemService(String packageName, String opPackageName, KeyEvent keyEvent, MediaSession.Token sessionToken) throws RemoteException {
+            public void dispatchVolumeKeyEventToSessionAsSystemService(
+                    String packageName,
+                    String opPackageName,
+                    KeyEvent keyEvent,
+                    MediaSession.Token sessionToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -739,7 +838,13 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void dispatchAdjustVolume(String packageName, String opPackageName, int suggestedStream, int delta, int flags) throws RemoteException {
+            public void dispatchAdjustVolume(
+                    String packageName,
+                    String opPackageName,
+                    int suggestedStream,
+                    int delta,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -758,7 +863,9 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void addSessionsListener(IActiveSessionsListener listener, ComponentName compName, int userId) throws RemoteException {
+            public void addSessionsListener(
+                    IActiveSessionsListener listener, ComponentName compName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -775,7 +882,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void removeSessionsListener(IActiveSessionsListener listener) throws RemoteException {
+            public void removeSessionsListener(IActiveSessionsListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -790,7 +898,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void addSession2TokensListener(ISession2TokensListener listener, int userId) throws RemoteException {
+            public void addSession2TokensListener(ISession2TokensListener listener, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -806,7 +915,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void removeSession2TokensListener(ISession2TokensListener listener) throws RemoteException {
+            public void removeSession2TokensListener(ISession2TokensListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -821,7 +931,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void registerRemoteSessionCallback(IRemoteSessionCallback rvc) throws RemoteException {
+            public void registerRemoteSessionCallback(IRemoteSessionCallback rvc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -836,7 +947,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void unregisterRemoteSessionCallback(IRemoteSessionCallback rvc) throws RemoteException {
+            public void unregisterRemoteSessionCallback(IRemoteSessionCallback rvc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -867,7 +979,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void addOnMediaKeyEventDispatchedListener(IOnMediaKeyEventDispatchedListener listener) throws RemoteException {
+            public void addOnMediaKeyEventDispatchedListener(
+                    IOnMediaKeyEventDispatchedListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -882,7 +995,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void removeOnMediaKeyEventDispatchedListener(IOnMediaKeyEventDispatchedListener listener) throws RemoteException {
+            public void removeOnMediaKeyEventDispatchedListener(
+                    IOnMediaKeyEventDispatchedListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -897,7 +1011,9 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void addOnMediaKeyEventSessionChangedListener(IOnMediaKeyEventSessionChangedListener listener, String packageName) throws RemoteException {
+            public void addOnMediaKeyEventSessionChangedListener(
+                    IOnMediaKeyEventSessionChangedListener listener, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -913,7 +1029,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void removeOnMediaKeyEventSessionChangedListener(IOnMediaKeyEventSessionChangedListener listener) throws RemoteException {
+            public void removeOnMediaKeyEventSessionChangedListener(
+                    IOnMediaKeyEventSessionChangedListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -928,7 +1045,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void setOnVolumeKeyLongPressListener(IOnVolumeKeyLongPressListener listener) throws RemoteException {
+            public void setOnVolumeKeyLongPressListener(IOnVolumeKeyLongPressListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -958,7 +1076,9 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public boolean isTrusted(String controllerPackageName, int controllerPid, int controllerUid) throws RemoteException {
+            public boolean isTrusted(
+                    String controllerPackageName, int controllerPid, int controllerUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1007,7 +1127,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public boolean hasCustomMediaKeyDispatcher(String componentName) throws RemoteException {
+            public boolean hasCustomMediaKeyDispatcher(String componentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1024,7 +1145,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public boolean hasCustomMediaSessionPolicyProvider(String componentName) throws RemoteException {
+            public boolean hasCustomMediaSessionPolicyProvider(String componentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1058,7 +1180,8 @@ public interface ISessionManager extends IInterface {
             }
 
             @Override // android.media.session.ISessionManager
-            public void setSessionPolicies(MediaSession.Token token, int policies) throws RemoteException {
+            public void setSessionPolicies(MediaSession.Token token, int policies)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

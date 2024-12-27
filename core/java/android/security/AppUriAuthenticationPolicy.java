@@ -3,35 +3,41 @@ package android.security;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
 
 /* loaded from: classes3.dex */
 public final class AppUriAuthenticationPolicy implements Parcelable {
-    public static final Parcelable.Creator<AppUriAuthenticationPolicy> CREATOR = new Parcelable.Creator<AppUriAuthenticationPolicy>() { // from class: android.security.AppUriAuthenticationPolicy.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppUriAuthenticationPolicy createFromParcel(Parcel in) {
-            Map<String, UrisToAliases> appToUris = new HashMap<>();
-            in.readMap(appToUris, UrisToAliases.class.getClassLoader());
-            return new AppUriAuthenticationPolicy(appToUris);
-        }
+    public static final Parcelable.Creator<AppUriAuthenticationPolicy> CREATOR =
+            new Parcelable.Creator<
+                    AppUriAuthenticationPolicy>() { // from class:
+                                                    // android.security.AppUriAuthenticationPolicy.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppUriAuthenticationPolicy createFromParcel(Parcel in) {
+                    Map<String, UrisToAliases> appToUris = new HashMap<>();
+                    in.readMap(appToUris, UrisToAliases.class.getClassLoader());
+                    return new AppUriAuthenticationPolicy(appToUris);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppUriAuthenticationPolicy[] newArray(int size) {
-            return new AppUriAuthenticationPolicy[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppUriAuthenticationPolicy[] newArray(int size) {
+                    return new AppUriAuthenticationPolicy[size];
+                }
+            };
     private static final String KEY_AUTHENTICATION_POLICY_APP = "policy_app";
-    private static final String KEY_AUTHENTICATION_POLICY_APP_TO_URIS = "authentication_policy_app_to_uris";
+    private static final String KEY_AUTHENTICATION_POLICY_APP_TO_URIS =
+            "authentication_policy_app_to_uris";
     private final Map<String, UrisToAliases> mAppToUris;
 
     private AppUriAuthenticationPolicy(Map<String, UrisToAliases> appToUris) {
@@ -46,7 +52,8 @@ public final class AppUriAuthenticationPolicy implements Parcelable {
             Objects.requireNonNull(appPackageName);
             Objects.requireNonNull(uri);
             Objects.requireNonNull(alias);
-            UrisToAliases urisToAliases = this.mPackageNameToUris.getOrDefault(appPackageName, new UrisToAliases());
+            UrisToAliases urisToAliases =
+                    this.mPackageNameToUris.getOrDefault(appPackageName, new UrisToAliases());
             urisToAliases.addUriToAlias(uri, alias);
             this.mPackageNameToUris.put(appPackageName, urisToAliases);
             return this;
@@ -86,7 +93,8 @@ public final class AppUriAuthenticationPolicy implements Parcelable {
         return appAndUris;
     }
 
-    public static AppUriAuthenticationPolicy readFromXml(XmlPullParser parser) throws IOException, XmlPullParserException {
+    public static AppUriAuthenticationPolicy readFromXml(XmlPullParser parser)
+            throws IOException, XmlPullParserException {
         Builder builder = new Builder();
         int outerDepth = parser.getDepth();
         while (true) {
@@ -94,7 +102,9 @@ public final class AppUriAuthenticationPolicy implements Parcelable {
             if (type == 1 || (type == 3 && parser.getDepth() <= outerDepth)) {
                 break;
             }
-            if (type != 3 && type != 4 && parser.getName().equals(KEY_AUTHENTICATION_POLICY_APP_TO_URIS)) {
+            if (type != 3
+                    && type != 4
+                    && parser.getName().equals(KEY_AUTHENTICATION_POLICY_APP_TO_URIS)) {
                 String app = parser.getAttributeValue(null, KEY_AUTHENTICATION_POLICY_APP);
                 UrisToAliases urisToAliases = UrisToAliases.readFromXml(parser);
                 builder.addAppAndUriMapping(app, urisToAliases);

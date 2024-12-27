@@ -5,24 +5,23 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.autofill.ISurfacePackageResultCallback;
 
 /* loaded from: classes3.dex */
 public interface IInlineSuggestionUi extends IInterface {
     public static final String DESCRIPTOR = "android.service.autofill.IInlineSuggestionUi";
 
-    void getSurfacePackage(ISurfacePackageResultCallback iSurfacePackageResultCallback) throws RemoteException;
+    void getSurfacePackage(ISurfacePackageResultCallback iSurfacePackageResultCallback)
+            throws RemoteException;
 
     void releaseSurfaceControlViewHost() throws RemoteException;
 
     public static class Default implements IInlineSuggestionUi {
         @Override // android.service.autofill.IInlineSuggestionUi
-        public void getSurfacePackage(ISurfacePackageResultCallback callback) throws RemoteException {
-        }
+        public void getSurfacePackage(ISurfacePackageResultCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.autofill.IInlineSuggestionUi
-        public void releaseSurfaceControlViewHost() throws RemoteException {
-        }
+        public void releaseSurfaceControlViewHost() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface IInlineSuggestionUi extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInlineSuggestionUi {
+    public abstract static class Stub extends Binder implements IInlineSuggestionUi {
         static final int TRANSACTION_getSurfacePackage = 1;
         static final int TRANSACTION_releaseSurfaceControlViewHost = 2;
 
@@ -71,7 +70,8 @@ public interface IInlineSuggestionUi extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInlineSuggestionUi.DESCRIPTOR);
             }
@@ -81,7 +81,8 @@ public interface IInlineSuggestionUi extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ISurfacePackageResultCallback _arg0 = ISurfacePackageResultCallback.Stub.asInterface(data.readStrongBinder());
+                    ISurfacePackageResultCallback _arg0 =
+                            ISurfacePackageResultCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getSurfacePackage(_arg0);
                     return true;
@@ -110,7 +111,8 @@ public interface IInlineSuggestionUi extends IInterface {
             }
 
             @Override // android.service.autofill.IInlineSuggestionUi
-            public void getSurfacePackage(ISurfacePackageResultCallback callback) throws RemoteException {
+            public void getSurfacePackage(ISurfacePackageResultCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInlineSuggestionUi.DESCRIPTOR);

@@ -12,8 +12,7 @@ public interface ISyncStatusObserver extends IInterface {
 
     public static class Default implements ISyncStatusObserver {
         @Override // android.content.ISyncStatusObserver
-        public void onStatusChanged(int which) throws RemoteException {
-        }
+        public void onStatusChanged(int which) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface ISyncStatusObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISyncStatusObserver {
+    public abstract static class Stub extends Binder implements ISyncStatusObserver {
         public static final String DESCRIPTOR = "android.content.ISyncStatusObserver";
         static final int TRANSACTION_onStatusChanged = 1;
 
@@ -60,7 +59,8 @@ public interface ISyncStatusObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

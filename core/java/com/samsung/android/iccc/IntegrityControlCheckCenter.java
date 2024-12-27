@@ -2,6 +2,7 @@ package com.samsung.android.iccc;
 
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.nio.charset.Charset;
 
 /* loaded from: classes6.dex */
@@ -68,7 +69,13 @@ public class IntegrityControlCheckCenter {
     public synchronized String getDeviceStatus(int comp_type, String nonce) throws RemoteException {
         byte[] responseBytes;
         Log.d("ICCC", "Method getDeviceStatus in IntegrityControlCheckCenter Class");
-        if (this.mService == null || nonce == null || (responseBytes = this.mService.getDeviceStatus(comp_type, nonce.getBytes(Charset.defaultCharset()))) == null || responseBytes.length <= 1) {
+        if (this.mService == null
+                || nonce == null
+                || (responseBytes =
+                                this.mService.getDeviceStatus(
+                                        comp_type, nonce.getBytes(Charset.defaultCharset())))
+                        == null
+                || responseBytes.length <= 1) {
             return null;
         }
         return new String(responseBytes, Charset.defaultCharset());
@@ -77,7 +84,13 @@ public class IntegrityControlCheckCenter {
     public synchronized String getDeviceInfo(String nonce) throws RemoteException {
         byte[] responseBytes;
         Log.d("ICCC", "Method getDeviceInfo in IntegrityControlCheckCenter Class");
-        if (this.mService == null || nonce == null || (responseBytes = this.mService.getDeviceInfo(nonce.getBytes(Charset.defaultCharset()))) == null || responseBytes.length <= 1) {
+        if (this.mService == null
+                || nonce == null
+                || (responseBytes =
+                                this.mService.getDeviceInfo(
+                                        nonce.getBytes(Charset.defaultCharset())))
+                        == null
+                || responseBytes.length <= 1) {
             return null;
         }
         return new String(responseBytes, Charset.defaultCharset());

@@ -3,6 +3,7 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -10,31 +11,31 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class LteVopsSupportInfo extends VopsSupportInfo {
-    public static final Parcelable.Creator<LteVopsSupportInfo> CREATOR = new Parcelable.Creator<LteVopsSupportInfo>() { // from class: android.telephony.LteVopsSupportInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LteVopsSupportInfo createFromParcel(Parcel in) {
-            in.readInt();
-            return new LteVopsSupportInfo(in);
-        }
+    public static final Parcelable.Creator<LteVopsSupportInfo> CREATOR =
+            new Parcelable.Creator<
+                    LteVopsSupportInfo>() { // from class: android.telephony.LteVopsSupportInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LteVopsSupportInfo createFromParcel(Parcel in) {
+                    in.readInt();
+                    return new LteVopsSupportInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LteVopsSupportInfo[] newArray(int size) {
-            return new LteVopsSupportInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LteVopsSupportInfo[] newArray(int size) {
+                    return new LteVopsSupportInfo[size];
+                }
+            };
 
-    @Deprecated
-    public static final int LTE_STATUS_NOT_AVAILABLE = 1;
+    @Deprecated public static final int LTE_STATUS_NOT_AVAILABLE = 1;
     public static final int LTE_STATUS_NOT_SUPPORTED = 3;
     public static final int LTE_STATUS_SUPPORTED = 2;
     private final int mEmcBearerSupport;
     private final int mVopsSupport;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LteVopsStatus {
-    }
+    public @interface LteVopsStatus {}
 
     public LteVopsSupportInfo(int vops, int emergency) {
         this.mVopsSupport = vops;
@@ -85,7 +86,8 @@ public final class LteVopsSupportInfo extends VopsSupportInfo {
             return true;
         }
         LteVopsSupportInfo other = (LteVopsSupportInfo) o;
-        if (this.mVopsSupport != other.mVopsSupport || this.mEmcBearerSupport != other.mEmcBearerSupport) {
+        if (this.mVopsSupport != other.mVopsSupport
+                || this.mEmcBearerSupport != other.mEmcBearerSupport) {
             return false;
         }
         return true;
@@ -93,11 +95,15 @@ public final class LteVopsSupportInfo extends VopsSupportInfo {
 
     @Override // android.telephony.VopsSupportInfo
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mVopsSupport), Integer.valueOf(this.mEmcBearerSupport));
+        return Objects.hash(
+                Integer.valueOf(this.mVopsSupport), Integer.valueOf(this.mEmcBearerSupport));
     }
 
     public String toString() {
-        return "LteVopsSupportInfo :  mVopsSupport = " + this.mVopsSupport + " mEmcBearerSupport = " + this.mEmcBearerSupport;
+        return "LteVopsSupportInfo :  mVopsSupport = "
+                + this.mVopsSupport
+                + " mEmcBearerSupport = "
+                + this.mEmcBearerSupport;
     }
 
     protected static LteVopsSupportInfo createFromParcelBody(Parcel in) {

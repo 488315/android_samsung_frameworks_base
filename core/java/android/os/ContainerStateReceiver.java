@@ -29,11 +29,13 @@ public class ContainerStateReceiver extends BroadcastReceiver {
     public static final int DEVICE_EVENT_OWNER_LICENSE_EXPIRED = 20;
     private static String TAG = "ContainerStateReceiver";
     private static boolean DEBUG = false;
-    public static String ACTION_CONTAINER_STATE_RECEIVER = "com.samsung.android.knox.ACTION_CONTAINER_STATE_RECEIVER";
+    public static String ACTION_CONTAINER_STATE_RECEIVER =
+            "com.samsung.android.knox.ACTION_CONTAINER_STATE_RECEIVER";
     public static String EXTRA_CONTIANER_ID = "com.samsung.knox.EXTRA_CONTIANER_ID";
     public static String EXTRA_CONTIANER_EVENT_ID = "com.samsung.knox.EXTRA_CONTIANER_EVENT_ID";
     public static String EXTRA_LOCKSCREEN_VISIBLE = "com.samsung.knox.EXTRA_LOCKSCREEN_VISIBLE";
-    public static String EXTRA_CONTIANER_CONFIGURATION_TYPE = "com.samsung.knox.EXTRA_CONTIANER_CONFIGURATION_TYPE";
+    public static String EXTRA_CONTIANER_CONFIGURATION_TYPE =
+            "com.samsung.knox.EXTRA_CONTIANER_CONFIGURATION_TYPE";
     public static String EXTRA_USER_INFO = "com.samsung.knox.EXTRA_USER_INFO";
 
     public static String toEventString(int event) {
@@ -92,62 +94,44 @@ public class ContainerStateReceiver extends BroadcastReceiver {
         c.unregisterReceiver(receiver);
     }
 
-    public void onContainerCreated(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerCreated(Context context, int userHandle, Bundle b) {}
 
-    public void onContainerRunning(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerRunning(Context context, int userHandle, Bundle b) {}
 
-    public void onContainerShutdown(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerShutdown(Context context, int userHandle, Bundle b) {}
 
-    public void onContainerSwitch(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerSwitch(Context context, int userHandle, Bundle b) {}
 
-    public void onPersonalSwitch(Context context, Bundle b) {
-    }
+    public void onPersonalSwitch(Context context, Bundle b) {}
 
-    public void onContainerLocked(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerLocked(Context context, int userHandle, Bundle b) {}
 
-    public void onContainerUnlocked(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerUnlocked(Context context, int userHandle, Bundle b) {}
 
-    public void onContainerRemoved(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerRemoved(Context context, int userHandle, Bundle b) {}
 
-    public void onLicenseActivated(Context context, int userHandle, Bundle b) {
-    }
+    public void onLicenseActivated(Context context, int userHandle, Bundle b) {}
 
-    public void onLicenseExpired(Context context, int userHandle, Bundle b) {
-    }
+    public void onLicenseExpired(Context context, int userHandle, Bundle b) {}
 
-    public void onContainerReset(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerReset(Context context, int userHandle, Bundle b) {}
 
-    public void onDeviceOwnerActivated(Context context, Bundle b) {
-    }
+    public void onDeviceOwnerActivated(Context context, Bundle b) {}
 
-    public void onDeviceOwnerLicenseActivated(Context context, Bundle b) {
-    }
+    public void onDeviceOwnerLicenseActivated(Context context, Bundle b) {}
 
-    public void onDeviceOwnerLicenseExpired(Context context, Bundle b) {
-    }
+    public void onDeviceOwnerLicenseExpired(Context context, Bundle b) {}
 
-    public void onLockScreenStateChanged(Context context, int userHandle, boolean visible, Bundle b) {
-    }
+    public void onLockScreenStateChanged(
+            Context context, int userHandle, boolean visible, Bundle b) {}
 
-    public void onContainerAdminLocked(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerAdminLocked(Context context, int userHandle, Bundle b) {}
 
-    public void onContainerAdminUnlocked(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerAdminUnlocked(Context context, int userHandle, Bundle b) {}
 
-    public void onContainerEnabled(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerEnabled(Context context, int userHandle, Bundle b) {}
 
-    public void onContainerOneLocked(Context context, int userHandle, Bundle b) {
-    }
+    public void onContainerOneLocked(Context context, int userHandle, Bundle b) {}
 
     @Override // android.content.BroadcastReceiver
     public void onReceive(Context context, Intent intent) {
@@ -211,7 +195,11 @@ public class ContainerStateReceiver extends BroadcastReceiver {
                     onDeviceOwnerLicenseActivated(context, b);
                     break;
                 case 15:
-                    onLockScreenStateChanged(context, userHandle, intent.getBooleanExtra(EXTRA_LOCKSCREEN_VISIBLE, false), b);
+                    onLockScreenStateChanged(
+                            context,
+                            userHandle,
+                            intent.getBooleanExtra(EXTRA_LOCKSCREEN_VISIBLE, false),
+                            b);
                     break;
                 case 16:
                     onContainerAdminLocked(context, userHandle, b);

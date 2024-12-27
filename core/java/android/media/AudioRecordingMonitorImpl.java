@@ -1,9 +1,5 @@
 package android.media;
 
-import android.media.AudioManager;
-import android.media.AudioRecordingMonitorImpl;
-import android.media.IAudioService;
-import android.media.IRecordingConfigDispatcher;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -13,6 +9,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -29,27 +26,35 @@ public class AudioRecordingMonitorImpl implements AudioRecordingMonitor {
     private HandlerThread mRecordingCallbackHandlerThread;
     private final Object mRecordCallbackLock = new Object();
     private LinkedList<AudioRecordingCallbackInfo> mRecordCallbackList = new LinkedList<>();
-    private final IRecordingConfigDispatcher mRecordingCallback = new IRecordingConfigDispatcher.Stub() { // from class: android.media.AudioRecordingMonitorImpl.1
-        @Override // android.media.IRecordingConfigDispatcher
-        public void dispatchRecordingConfigChange(List<AudioRecordingConfiguration> configs) {
-            AudioRecordingConfiguration config = AudioRecordingMonitorImpl.this.getMyConfig(configs);
-            if (config != null) {
-                synchronized (AudioRecordingMonitorImpl.this.mRecordCallbackLock) {
-                    if (AudioRecordingMonitorImpl.this.mRecordingCallbackHandler != null) {
-                        Message m = AudioRecordingMonitorImpl.this.mRecordingCallbackHandler.obtainMessage(1, config);
-                        AudioRecordingMonitorImpl.this.mRecordingCallbackHandler.sendMessage(m);
+    private final IRecordingConfigDispatcher mRecordingCallback =
+            new IRecordingConfigDispatcher
+                    .Stub() { // from class: android.media.AudioRecordingMonitorImpl.1
+                @Override // android.media.IRecordingConfigDispatcher
+                public void dispatchRecordingConfigChange(
+                        List<AudioRecordingConfiguration> configs) {
+                    AudioRecordingConfiguration config =
+                            AudioRecordingMonitorImpl.this.getMyConfig(configs);
+                    if (config != null) {
+                        synchronized (AudioRecordingMonitorImpl.this.mRecordCallbackLock) {
+                            if (AudioRecordingMonitorImpl.this.mRecordingCallbackHandler != null) {
+                                Message m =
+                                        AudioRecordingMonitorImpl.this.mRecordingCallbackHandler
+                                                .obtainMessage(1, config);
+                                AudioRecordingMonitorImpl.this.mRecordingCallbackHandler
+                                        .sendMessage(m);
+                            }
+                        }
                     }
                 }
-            }
-        }
-    };
+            };
 
     AudioRecordingMonitorImpl(AudioRecordingMonitorClient client) {
         this.mClient = client;
     }
 
     @Override // android.media.AudioRecordingMonitor
-    public void registerAudioRecordingCallback(Executor executor, AudioManager.AudioRecordingCallback cb) {
+    public void registerAudioRecordingCallback(
+            Executor executor, AudioManager.AudioRecordingCallback cb) {
         if (cb == null) {
             throw new IllegalArgumentException("Illegal null AudioRecordingCallback");
         }
@@ -113,7 +118,8 @@ public class AudioRecordingMonitorImpl implements AudioRecordingMonitor {
 
     private void beginRecordingCallbackHandling() {
         if (this.mRecordingCallbackHandlerThread == null) {
-            this.mRecordingCallbackHandlerThread = new HandlerThread("android.media.AudioRecordingMonitor.RecordingCallback");
+            this.mRecordingCallbackHandlerThread =
+                    new HandlerThread("android.media.AudioRecordingMonitor.RecordingCallback");
             this.mRecordingCallbackHandlerThread.start();
             Looper looper = this.mRecordingCallbackHandlerThread.getLooper();
             if (looper != null) {
@@ -147,18 +153,24 @@ public class AudioRecordingMonitorImpl implements AudioRecordingMonitor {
                         if (AudioRecordingMonitorImpl.this.mRecordCallbackList.size() == 0) {
                             return;
                         }
-                        LinkedList<AudioRecordingCallbackInfo> cbInfoList = new LinkedList<>(AudioRecordingMonitorImpl.this.mRecordCallbackList);
+                        LinkedList<AudioRecordingCallbackInfo> cbInfoList =
+                                new LinkedList<>(
+                                        AudioRecordingMonitorImpl.this.mRecordCallbackList);
                         long identity = Binder.clearCallingIdentity();
                         try {
                             Iterator<AudioRecordingCallbackInfo> it = cbInfoList.iterator();
                             while (it.hasNext()) {
                                 final AudioRecordingCallbackInfo cbi = it.next();
-                                cbi.mExecutor.execute(new Runnable() { // from class: android.media.AudioRecordingMonitorImpl$2$$ExternalSyntheticLambda0
-                                    @Override // java.lang.Runnable
-                                    public final void run() {
-                                        AudioRecordingMonitorImpl.AudioRecordingCallbackInfo.this.mCb.onRecordingConfigChanged(configs);
-                                    }
-                                });
+                                cbi.mExecutor.execute(
+                                        new Runnable() { // from class:
+                                            // android.media.AudioRecordingMonitorImpl$2$$ExternalSyntheticLambda0
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                AudioRecordingMonitorImpl.AudioRecordingCallbackInfo
+                                                        .this
+                                                        .mCb.onRecordingConfigChanged(configs);
+                                            }
+                                        });
                             }
                             return;
                         } finally {

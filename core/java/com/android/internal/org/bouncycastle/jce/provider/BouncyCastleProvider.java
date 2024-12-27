@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.jce.provider;
 import android.media.MediaMetrics;
 import android.security.KeyChain;
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
@@ -11,6 +12,7 @@ import com.android.internal.org.bouncycastle.jcajce.provider.config.ProviderConf
 import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.ClassUtil;
 import com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider;
 import com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter;
+
 import java.io.IOException;
 import java.security.AccessController;
 import java.security.KeyFactory;
@@ -27,34 +29,51 @@ import java.util.Map;
 
 /* loaded from: classes5.dex */
 public final class BouncyCastleProvider extends Provider implements ConfigurableProvider {
-    private static final String ASYMMETRIC_PACKAGE = "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.";
-    private static final String DIGEST_PACKAGE = "com.android.internal.org.bouncycastle.jcajce.provider.digest.";
-    private static final String KEYSTORE_PACKAGE = "com.android.internal.org.bouncycastle.jcajce.provider.keystore.";
-    private static final String SYMMETRIC_PACKAGE = "com.android.internal.org.bouncycastle.jcajce.provider.symmetric.";
+    private static final String ASYMMETRIC_PACKAGE =
+            "com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.";
+    private static final String DIGEST_PACKAGE =
+            "com.android.internal.org.bouncycastle.jcajce.provider.digest.";
+    private static final String KEYSTORE_PACKAGE =
+            "com.android.internal.org.bouncycastle.jcajce.provider.keystore.";
+    private static final String SYMMETRIC_PACKAGE =
+            "com.android.internal.org.bouncycastle.jcajce.provider.symmetric.";
     private final Provider privateProvider;
     private static String info = "BouncyCastle Security Provider v1.68";
-    public static final ProviderConfiguration CONFIGURATION = new BouncyCastleProviderConfiguration();
+    public static final ProviderConfiguration CONFIGURATION =
+            new BouncyCastleProviderConfiguration();
     private static final Map keyInfoConverters = new HashMap();
-    private static final Class revChkClass = ClassUtil.loadClass(BouncyCastleProvider.class, "java.security.cert.PKIXRevocationChecker");
-    private static final String[] SYMMETRIC_GENERIC = {"PBEPBKDF2", "PBEPKCS12", "PBES2AlgorithmParameters"};
+    private static final Class revChkClass =
+            ClassUtil.loadClass(
+                    BouncyCastleProvider.class, "java.security.cert.PKIXRevocationChecker");
+    private static final String[] SYMMETRIC_GENERIC = {
+        "PBEPBKDF2", "PBEPKCS12", "PBES2AlgorithmParameters"
+    };
     private static final String[] SYMMETRIC_MACS = new String[0];
-    private static final String[] SYMMETRIC_CIPHERS = {"AES", "ARC4", "Blowfish", "DES", KeyProperties.KEY_ALGORITHM_3DES, "RC2", "Twofish"};
+    private static final String[] SYMMETRIC_CIPHERS = {
+        "AES", "ARC4", "Blowfish", "DES", KeyProperties.KEY_ALGORITHM_3DES, "RC2", "Twofish"
+    };
     private static final String[] ASYMMETRIC_GENERIC = {"X509"};
-    private static final String[] ASYMMETRIC_CIPHERS = {"DSA", "DH", KeyProperties.KEY_ALGORITHM_EC, "RSA"};
-    private static final String[] DIGESTS = {KeyProperties.DIGEST_MD5, "SHA1", "SHA224", "SHA256", "SHA384", "SHA512"};
+    private static final String[] ASYMMETRIC_CIPHERS = {
+        "DSA", "DH", KeyProperties.KEY_ALGORITHM_EC, "RSA"
+    };
+    private static final String[] DIGESTS = {
+        KeyProperties.DIGEST_MD5, "SHA1", "SHA224", "SHA256", "SHA384", "SHA512"
+    };
     public static final String PROVIDER_NAME = "BC";
     private static final String[] KEYSTORES = {PROVIDER_NAME, "BCFKS", KeyChain.EXTRA_PKCS12};
 
     public BouncyCastleProvider() {
         super(PROVIDER_NAME, 1.68d, info);
         this.privateProvider = new PrivateProvider();
-        AccessController.doPrivileged(new PrivilegedAction() { // from class: com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider.1
-            @Override // java.security.PrivilegedAction
-            public Object run() {
-                BouncyCastleProvider.this.setup();
-                return null;
-            }
-        });
+        AccessController.doPrivileged(
+                new PrivilegedAction() { // from class:
+                                         // com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider.1
+                    @Override // java.security.PrivilegedAction
+                    public Object run() {
+                        BouncyCastleProvider.this.setup();
+                        return null;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -66,19 +85,32 @@ public final class BouncyCastleProvider extends Provider implements Configurable
         loadAlgorithms(ASYMMETRIC_PACKAGE, ASYMMETRIC_GENERIC);
         loadAlgorithms(ASYMMETRIC_PACKAGE, ASYMMETRIC_CIPHERS);
         loadAlgorithms(KEYSTORE_PACKAGE, KEYSTORES);
-        put("CertPathValidator.PKIX", "com.android.internal.org.bouncycastle.jce.provider.PKIXCertPathValidatorSpi");
-        put("CertPathBuilder.PKIX", "com.android.internal.org.bouncycastle.jce.provider.PKIXCertPathBuilderSpi");
-        put("CertStore.Collection", "com.android.internal.org.bouncycastle.jce.provider.CertStoreCollectionSpi");
+        put(
+                "CertPathValidator.PKIX",
+                "com.android.internal.org.bouncycastle.jce.provider.PKIXCertPathValidatorSpi");
+        put(
+                "CertPathBuilder.PKIX",
+                "com.android.internal.org.bouncycastle.jce.provider.PKIXCertPathBuilderSpi");
+        put(
+                "CertStore.Collection",
+                "com.android.internal.org.bouncycastle.jce.provider.CertStoreCollectionSpi");
     }
 
     private void loadAlgorithms(String packageName, String[] names) {
         for (int i = 0; i != names.length; i++) {
-            Class clazz = ClassUtil.loadClass(BouncyCastleProvider.class, packageName + names[i] + "$Mappings");
+            Class clazz =
+                    ClassUtil.loadClass(
+                            BouncyCastleProvider.class, packageName + names[i] + "$Mappings");
             if (clazz != null) {
                 try {
                     ((AlgorithmProvider) clazz.newInstance()).configure(this);
                 } catch (Exception e) {
-                    throw new InternalError("cannot create instance of " + packageName + names[i] + "$Mappings : " + e);
+                    throw new InternalError(
+                            "cannot create instance of "
+                                    + packageName
+                                    + names[i]
+                                    + "$Mappings : "
+                                    + e);
                 }
             }
         }
@@ -87,13 +119,26 @@ public final class BouncyCastleProvider extends Provider implements Configurable
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.config.ConfigurableProvider
     public void setParameter(String parameterName, Object parameter) {
         synchronized (CONFIGURATION) {
-            ((BouncyCastleProviderConfiguration) CONFIGURATION).setParameter(parameterName, parameter);
+            ((BouncyCastleProviderConfiguration) CONFIGURATION)
+                    .setParameter(parameterName, parameter);
         }
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.config.ConfigurableProvider
     public boolean hasAlgorithm(String type, String name) {
-        return containsKey(new StringBuilder().append(type).append(MediaMetrics.SEPARATOR).append(name).toString()) || containsKey(new StringBuilder().append("Alg.Alias.").append(type).append(MediaMetrics.SEPARATOR).append(name).toString());
+        return containsKey(
+                        new StringBuilder()
+                                .append(type)
+                                .append(MediaMetrics.SEPARATOR)
+                                .append(name)
+                                .toString())
+                || containsKey(
+                        new StringBuilder()
+                                .append("Alg.Alias.")
+                                .append(type)
+                                .append(MediaMetrics.SEPARATOR)
+                                .append(name)
+                                .toString());
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.config.ConfigurableProvider
@@ -111,7 +156,8 @@ public final class BouncyCastleProvider extends Provider implements Configurable
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.config.ConfigurableProvider
-    public void addKeyInfoConverter(ASN1ObjectIdentifier oid, AsymmetricKeyInfoConverter keyInfoConverter) {
+    public void addKeyInfoConverter(
+            ASN1ObjectIdentifier oid, AsymmetricKeyInfoConverter keyInfoConverter) {
         synchronized (keyInfoConverters) {
             keyInfoConverters.put(oid, keyInfoConverter);
         }
@@ -127,23 +173,27 @@ public final class BouncyCastleProvider extends Provider implements Configurable
         for (String attributeName : attributeMap.keySet()) {
             String attributeKey = key + " " + attributeName;
             if (containsKey(attributeKey)) {
-                throw new IllegalStateException("duplicate provider attribute key (" + attributeKey + ") found");
+                throw new IllegalStateException(
+                        "duplicate provider attribute key (" + attributeKey + ") found");
             }
             put(attributeKey, attributeMap.get(attributeName));
         }
     }
 
-    private static AsymmetricKeyInfoConverter getAsymmetricKeyInfoConverter(ASN1ObjectIdentifier algorithm) {
+    private static AsymmetricKeyInfoConverter getAsymmetricKeyInfoConverter(
+            ASN1ObjectIdentifier algorithm) {
         AsymmetricKeyInfoConverter asymmetricKeyInfoConverter;
         synchronized (keyInfoConverters) {
-            asymmetricKeyInfoConverter = (AsymmetricKeyInfoConverter) keyInfoConverters.get(algorithm);
+            asymmetricKeyInfoConverter =
+                    (AsymmetricKeyInfoConverter) keyInfoConverters.get(algorithm);
         }
         return asymmetricKeyInfoConverter;
     }
 
     public static PublicKey getPublicKey(SubjectPublicKeyInfo publicKeyInfo) throws IOException {
         try {
-            return KeyFactory.getInstance(publicKeyInfo.getAlgorithmId().getAlgorithm().getId()).generatePublic(new X509EncodedKeySpec(publicKeyInfo.getEncoded()));
+            return KeyFactory.getInstance(publicKeyInfo.getAlgorithmId().getAlgorithm().getId())
+                    .generatePublic(new X509EncodedKeySpec(publicKeyInfo.getEncoded()));
         } catch (NoSuchAlgorithmException e) {
             return null;
         } catch (InvalidKeySpecException ex) {
@@ -153,7 +203,9 @@ public final class BouncyCastleProvider extends Provider implements Configurable
 
     public static PrivateKey getPrivateKey(PrivateKeyInfo privateKeyInfo) throws IOException {
         try {
-            return KeyFactory.getInstance(privateKeyInfo.getPrivateKeyAlgorithm().getAlgorithm().getId()).generatePrivate(new PKCS8EncodedKeySpec(privateKeyInfo.getEncoded()));
+            return KeyFactory.getInstance(
+                            privateKeyInfo.getPrivateKeyAlgorithm().getAlgorithm().getId())
+                    .generatePrivate(new PKCS8EncodedKeySpec(privateKeyInfo.getEncoded()));
         } catch (NoSuchAlgorithmException e) {
             return null;
         } catch (InvalidKeySpecException ex) {

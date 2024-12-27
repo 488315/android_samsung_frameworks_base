@@ -16,26 +16,24 @@ public interface IProxyCallback extends IInterface {
 
     void getProxyPort(IBinder iBinder) throws RemoteException;
 
-    void onCredentialsReceived(Bundle bundle, IProxyCredentialsCallback iProxyCredentialsCallback) throws RemoteException;
+    void onCredentialsReceived(Bundle bundle, IProxyCredentialsCallback iProxyCredentialsCallback)
+            throws RemoteException;
 
     void setEnterpriseProxy(boolean z) throws RemoteException;
 
     public static class Default implements IProxyCallback {
         @Override // com.android.net.IProxyCallback
-        public void getProxyPort(IBinder callback) throws RemoteException {
-        }
+        public void getProxyPort(IBinder callback) throws RemoteException {}
 
         @Override // com.android.net.IProxyCallback
-        public void clearProxyServerCache() throws RemoteException {
-        }
+        public void clearProxyServerCache() throws RemoteException {}
 
         @Override // com.android.net.IProxyCallback
-        public void onCredentialsReceived(Bundle response, IProxyCredentialsCallback callback) throws RemoteException {
-        }
+        public void onCredentialsReceived(Bundle response, IProxyCredentialsCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.net.IProxyCallback
-        public void setEnterpriseProxy(boolean value) throws RemoteException {
-        }
+        public void setEnterpriseProxy(boolean value) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -43,7 +41,7 @@ public interface IProxyCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProxyCallback {
+    public abstract static class Stub extends Binder implements IProxyCallback {
         static final int TRANSACTION_clearProxyServerCache = 2;
         static final int TRANSACTION_getProxyPort = 1;
         static final int TRANSACTION_onCredentialsReceived = 3;
@@ -90,7 +88,8 @@ public interface IProxyCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IProxyCallback.DESCRIPTOR);
             }
@@ -109,7 +108,8 @@ public interface IProxyCallback extends IInterface {
                     return true;
                 case 3:
                     Bundle _arg02 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    IProxyCredentialsCallback _arg1 = IProxyCredentialsCallback.Stub.asInterface(data.readStrongBinder());
+                    IProxyCredentialsCallback _arg1 =
+                            IProxyCredentialsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCredentialsReceived(_arg02, _arg1);
                     reply.writeNoException();
@@ -164,7 +164,8 @@ public interface IProxyCallback extends IInterface {
             }
 
             @Override // com.android.net.IProxyCallback
-            public void onCredentialsReceived(Bundle response, IProxyCredentialsCallback callback) throws RemoteException {
+            public void onCredentialsReceived(Bundle response, IProxyCredentialsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

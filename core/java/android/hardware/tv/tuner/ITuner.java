@@ -1,9 +1,5 @@
 package android.hardware.tv.tuner;
 
-import android.hardware.tv.tuner.IDemux;
-import android.hardware.tv.tuner.IDescrambler;
-import android.hardware.tv.tuner.IFrontend;
-import android.hardware.tv.tuner.ILnb;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -99,12 +95,11 @@ public interface ITuner extends IInterface {
         }
 
         @Override // android.hardware.tv.tuner.ITuner
-        public void setLna(boolean bEnable) throws RemoteException {
-        }
+        public void setLna(boolean bEnable) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ITuner
-        public void setMaxNumberOfFrontends(int frontendType, int maxNumber) throws RemoteException {
-        }
+        public void setMaxNumberOfFrontends(int frontendType, int maxNumber)
+                throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ITuner
         public int getMaxNumberOfFrontends(int frontendType) throws RemoteException {
@@ -147,7 +142,7 @@ public interface ITuner extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITuner {
+    public abstract static class Stub extends Binder implements ITuner {
         static final int TRANSACTION_getDemuxCaps = 4;
         static final int TRANSACTION_getDemuxIds = 14;
         static final int TRANSACTION_getDemuxInfo = 16;
@@ -189,7 +184,8 @@ public interface ITuner extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             int[] _arg0;
             int[] _arg1;
             String descriptor = DESCRIPTOR;
@@ -417,7 +413,8 @@ public interface ITuner extends IInterface {
                         throw new RemoteException("Method getDemuxCaps is unimplemented.");
                     }
                     _reply.readException();
-                    DemuxCapabilities _result = (DemuxCapabilities) _reply.readTypedObject(DemuxCapabilities.CREATOR);
+                    DemuxCapabilities _result =
+                            (DemuxCapabilities) _reply.readTypedObject(DemuxCapabilities.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -456,7 +453,8 @@ public interface ITuner extends IInterface {
                         throw new RemoteException("Method getFrontendInfo is unimplemented.");
                     }
                     _reply.readException();
-                    FrontendInfo _result = (FrontendInfo) _reply.readTypedObject(FrontendInfo.CREATOR);
+                    FrontendInfo _result =
+                            (FrontendInfo) _reply.readTypedObject(FrontendInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -544,7 +542,8 @@ public interface ITuner extends IInterface {
             }
 
             @Override // android.hardware.tv.tuner.ITuner
-            public void setMaxNumberOfFrontends(int frontendType, int maxNumber) throws RemoteException {
+            public void setMaxNumberOfFrontends(int frontendType, int maxNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -553,7 +552,8 @@ public interface ITuner extends IInterface {
                     _data.writeInt(maxNumber);
                     boolean _status = this.mRemote.transact(11, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method setMaxNumberOfFrontends is unimplemented.");
+                        throw new RemoteException(
+                                "Method setMaxNumberOfFrontends is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -571,7 +571,8 @@ public interface ITuner extends IInterface {
                     _data.writeInt(frontendType);
                     boolean _status = this.mRemote.transact(12, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getMaxNumberOfFrontends is unimplemented.");
+                        throw new RemoteException(
+                                "Method getMaxNumberOfFrontends is unimplemented.");
                     }
                     _reply.readException();
                     int _result = _reply.readInt();

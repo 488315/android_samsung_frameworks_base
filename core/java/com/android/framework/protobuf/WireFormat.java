@@ -1,6 +1,7 @@
 package com.android.framework.protobuf;
 
 import android.hardware.scontext.SContextConstants;
+
 import java.io.IOException;
 
 /* loaded from: classes3.dex */
@@ -49,8 +50,7 @@ public final class WireFormat {
         abstract Object readString(CodedInputStream codedInputStream) throws IOException;
     }
 
-    private WireFormat() {
-    }
+    private WireFormat() {}
 
     public static int getTagWireType(int tag) {
         return tag & 7;
@@ -101,12 +101,17 @@ public final class WireFormat {
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     public static class FieldType {
         public static final FieldType BYTES;
-        public static final FieldType GROUP = new FieldType("GROUP", 9, JavaType.MESSAGE, 3) { // from class: com.android.framework.protobuf.WireFormat.FieldType.2
-            @Override // com.android.framework.protobuf.WireFormat.FieldType
-            public boolean isPackable() {
-                return false;
-            }
-        };
+        public static final FieldType GROUP =
+                new FieldType(
+                        "GROUP",
+                        9,
+                        JavaType.MESSAGE,
+                        3) { // from class: com.android.framework.protobuf.WireFormat.FieldType.2
+                    @Override // com.android.framework.protobuf.WireFormat.FieldType
+                    public boolean isPackable() {
+                        return false;
+                    }
+                };
         public static final FieldType MESSAGE;
         public static final FieldType STRING;
         private final JavaType javaType;
@@ -128,7 +133,10 @@ public final class WireFormat {
         private static final /* synthetic */ FieldType[] $VALUES = $values();
 
         private static /* synthetic */ FieldType[] $values() {
-            return new FieldType[]{DOUBLE, FLOAT, INT64, UINT64, INT32, FIXED64, FIXED32, BOOL, STRING, GROUP, MESSAGE, BYTES, UINT32, ENUM, SFIXED32, SFIXED64, SINT32, SINT64};
+            return new FieldType[] {
+                DOUBLE, FLOAT, INT64, UINT64, INT32, FIXED64, FIXED32, BOOL, STRING, GROUP, MESSAGE,
+                BYTES, UINT32, ENUM, SFIXED32, SFIXED64, SINT32, SINT64
+            };
         }
 
         public static FieldType valueOf(String name) {
@@ -141,24 +149,42 @@ public final class WireFormat {
 
         static {
             int i = 2;
-            STRING = new FieldType("STRING", 8, JavaType.STRING, i) { // from class: com.android.framework.protobuf.WireFormat.FieldType.1
-                @Override // com.android.framework.protobuf.WireFormat.FieldType
-                public boolean isPackable() {
-                    return false;
-                }
-            };
-            MESSAGE = new FieldType("MESSAGE", 10, JavaType.MESSAGE, i) { // from class: com.android.framework.protobuf.WireFormat.FieldType.3
-                @Override // com.android.framework.protobuf.WireFormat.FieldType
-                public boolean isPackable() {
-                    return false;
-                }
-            };
-            BYTES = new FieldType("BYTES", 11, JavaType.BYTE_STRING, i) { // from class: com.android.framework.protobuf.WireFormat.FieldType.4
-                @Override // com.android.framework.protobuf.WireFormat.FieldType
-                public boolean isPackable() {
-                    return false;
-                }
-            };
+            STRING =
+                    new FieldType(
+                            "STRING",
+                            8,
+                            JavaType.STRING,
+                            i) { // from class:
+                                 // com.android.framework.protobuf.WireFormat.FieldType.1
+                        @Override // com.android.framework.protobuf.WireFormat.FieldType
+                        public boolean isPackable() {
+                            return false;
+                        }
+                    };
+            MESSAGE =
+                    new FieldType(
+                            "MESSAGE",
+                            10,
+                            JavaType.MESSAGE,
+                            i) { // from class:
+                                 // com.android.framework.protobuf.WireFormat.FieldType.3
+                        @Override // com.android.framework.protobuf.WireFormat.FieldType
+                        public boolean isPackable() {
+                            return false;
+                        }
+                    };
+            BYTES =
+                    new FieldType(
+                            "BYTES",
+                            11,
+                            JavaType.BYTE_STRING,
+                            i) { // from class:
+                                 // com.android.framework.protobuf.WireFormat.FieldType.4
+                        @Override // com.android.framework.protobuf.WireFormat.FieldType
+                        public boolean isPackable() {
+                            return false;
+                        }
+                    };
         }
 
         private FieldType(String str, int i, JavaType javaType, int wireType) {
@@ -179,7 +205,9 @@ public final class WireFormat {
         }
     }
 
-    static Object readPrimitiveField(CodedInputStream input, FieldType type, Utf8Validation utf8Validation) throws IOException {
+    static Object readPrimitiveField(
+            CodedInputStream input, FieldType type, Utf8Validation utf8Validation)
+            throws IOException {
         switch (type.ordinal()) {
             case 0:
                 return Double.valueOf(input.readDouble());
@@ -200,9 +228,11 @@ public final class WireFormat {
             case 8:
                 return utf8Validation.readString(input);
             case 9:
-                throw new IllegalArgumentException("readPrimitiveField() cannot handle nested groups.");
+                throw new IllegalArgumentException(
+                        "readPrimitiveField() cannot handle nested groups.");
             case 10:
-                throw new IllegalArgumentException("readPrimitiveField() cannot handle embedded messages.");
+                throw new IllegalArgumentException(
+                        "readPrimitiveField() cannot handle embedded messages.");
             case 11:
                 return input.readBytes();
             case 12:
@@ -218,7 +248,8 @@ public final class WireFormat {
             case 17:
                 return Long.valueOf(input.readSInt64());
             default:
-                throw new RuntimeException("There is no way to get here, but the compiler thinks otherwise.");
+                throw new RuntimeException(
+                        "There is no way to get here, but the compiler thinks otherwise.");
         }
     }
 }

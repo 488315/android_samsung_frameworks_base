@@ -5,23 +5,27 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
 import com.android.internal.R;
 
 @Deprecated
 /* loaded from: classes3.dex */
-public class RingtonePreference extends Preference implements PreferenceManager.OnActivityResultListener {
+public class RingtonePreference extends Preference
+        implements PreferenceManager.OnActivityResultListener {
     private static final String TAG = "RingtonePreference";
     private int mRequestCode;
     private int mRingtoneType;
     private boolean mShowDefault;
     private boolean mShowSilent;
 
-    public RingtonePreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public RingtonePreference(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.RingtonePreference, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.RingtonePreference, defStyleAttr, defStyleRes);
         this.mRingtoneType = a.getInt(0, 1);
         this.mShowDefault = a.getBoolean(1, true);
         this.mShowSilent = a.getBoolean(2, true);
@@ -77,10 +81,14 @@ public class RingtonePreference extends Preference implements PreferenceManager.
     }
 
     protected void onPrepareRingtonePickerIntent(Intent ringtonePickerIntent) {
-        ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, onRestoreRingtone());
-        ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, this.mShowDefault);
+        ringtonePickerIntent.putExtra(
+                RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, onRestoreRingtone());
+        ringtonePickerIntent.putExtra(
+                RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, this.mShowDefault);
         if (this.mShowDefault) {
-            ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI, RingtoneManager.getDefaultUri(getRingtoneType()));
+            ringtonePickerIntent.putExtra(
+                    RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
+                    RingtoneManager.getDefaultUri(getRingtoneType()));
         }
         ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, this.mShowSilent);
         ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, this.mRingtoneType);
@@ -124,7 +132,10 @@ public class RingtonePreference extends Preference implements PreferenceManager.
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == this.mRequestCode) {
             if (data != null) {
-                Uri uri = (Uri) data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI, Uri.class);
+                Uri uri =
+                        (Uri)
+                                data.getParcelableExtra(
+                                        RingtoneManager.EXTRA_RINGTONE_PICKED_URI, Uri.class);
                 if (callChangeListener(uri != null ? uri.toString() : "")) {
                     onSaveRingtone(uri);
                     return true;

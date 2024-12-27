@@ -9,26 +9,30 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.proto.ProtoOutputStream;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes4.dex */
 public class RemoteAnimationTarget implements Parcelable {
-    public static final Parcelable.Creator<RemoteAnimationTarget> CREATOR = new Parcelable.Creator<RemoteAnimationTarget>() { // from class: android.view.RemoteAnimationTarget.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteAnimationTarget createFromParcel(Parcel in) {
-            return new RemoteAnimationTarget(in);
-        }
+    public static final Parcelable.Creator<RemoteAnimationTarget> CREATOR =
+            new Parcelable.Creator<
+                    RemoteAnimationTarget>() { // from class: android.view.RemoteAnimationTarget.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteAnimationTarget createFromParcel(Parcel in) {
+                    return new RemoteAnimationTarget(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteAnimationTarget[] newArray(int size) {
-            return new RemoteAnimationTarget[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteAnimationTarget[] newArray(int size) {
+                    return new RemoteAnimationTarget[size];
+                }
+            };
     public static final int MODE_CHANGING = 2;
     public static final int MODE_CLOSING = 1;
     public static final int MODE_OPENING = 0;
@@ -44,17 +48,14 @@ public class RemoteAnimationTarget implements Parcelable {
     public final Rect localBounds;
     public final int mode;
 
-    @Deprecated
-    public final Point position;
+    @Deprecated public final Point position;
 
-    @Deprecated
-    public final int prefixOrderIndex;
+    @Deprecated public final int prefixOrderIndex;
     public int rotationChange;
     public final Rect screenSpaceBounds;
     public boolean showBackdrop;
 
-    @Deprecated
-    public final Rect sourceContainerBounds;
+    @Deprecated public final Rect sourceContainerBounds;
     public final Rect startBounds;
     public final SurfaceControl startLeash;
     public final int taskId;
@@ -64,14 +65,63 @@ public class RemoteAnimationTarget implements Parcelable {
     public final int windowType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Mode {
+    public @interface Mode {}
+
+    public RemoteAnimationTarget(
+            int taskId,
+            int mode,
+            SurfaceControl leash,
+            boolean isTranslucent,
+            Rect clipRect,
+            Rect contentInsets,
+            int prefixOrderIndex,
+            Point position,
+            Rect localBounds,
+            Rect screenSpaceBounds,
+            WindowConfiguration windowConfig,
+            boolean isNotInRecents,
+            SurfaceControl startLeash,
+            Rect startBounds,
+            ActivityManager.RunningTaskInfo taskInfo,
+            boolean allowEnterPip) {
+        this(
+                taskId,
+                mode,
+                leash,
+                isTranslucent,
+                clipRect,
+                contentInsets,
+                prefixOrderIndex,
+                position,
+                localBounds,
+                screenSpaceBounds,
+                windowConfig,
+                isNotInRecents,
+                startLeash,
+                startBounds,
+                taskInfo,
+                allowEnterPip,
+                -1);
     }
 
-    public RemoteAnimationTarget(int taskId, int mode, SurfaceControl leash, boolean isTranslucent, Rect clipRect, Rect contentInsets, int prefixOrderIndex, Point position, Rect localBounds, Rect screenSpaceBounds, WindowConfiguration windowConfig, boolean isNotInRecents, SurfaceControl startLeash, Rect startBounds, ActivityManager.RunningTaskInfo taskInfo, boolean allowEnterPip) {
-        this(taskId, mode, leash, isTranslucent, clipRect, contentInsets, prefixOrderIndex, position, localBounds, screenSpaceBounds, windowConfig, isNotInRecents, startLeash, startBounds, taskInfo, allowEnterPip, -1);
-    }
-
-    public RemoteAnimationTarget(int taskId, int mode, SurfaceControl leash, boolean isTranslucent, Rect clipRect, Rect contentInsets, int prefixOrderIndex, Point position, Rect localBounds, Rect screenSpaceBounds, WindowConfiguration windowConfig, boolean isNotInRecents, SurfaceControl startLeash, Rect startBounds, ActivityManager.RunningTaskInfo taskInfo, boolean allowEnterPip, int windowType) {
+    public RemoteAnimationTarget(
+            int taskId,
+            int mode,
+            SurfaceControl leash,
+            boolean isTranslucent,
+            Rect clipRect,
+            Rect contentInsets,
+            int prefixOrderIndex,
+            Point position,
+            Rect localBounds,
+            Rect screenSpaceBounds,
+            WindowConfiguration windowConfig,
+            boolean isNotInRecents,
+            SurfaceControl startLeash,
+            Rect startBounds,
+            ActivityManager.RunningTaskInfo taskInfo,
+            boolean allowEnterPip,
+            int windowType) {
         Rect rect;
         this.mode = mode;
         this.taskId = taskId;
@@ -113,14 +163,17 @@ public class RemoteAnimationTarget implements Parcelable {
         this.localBounds = (Rect) in.readTypedObject(Rect.CREATOR);
         this.sourceContainerBounds = (Rect) in.readTypedObject(Rect.CREATOR);
         this.screenSpaceBounds = (Rect) in.readTypedObject(Rect.CREATOR);
-        this.windowConfiguration = (WindowConfiguration) in.readTypedObject(WindowConfiguration.CREATOR);
+        this.windowConfiguration =
+                (WindowConfiguration) in.readTypedObject(WindowConfiguration.CREATOR);
         this.isNotInRecents = in.readBoolean();
         this.startLeash = (SurfaceControl) in.readTypedObject(SurfaceControl.CREATOR);
         if (this.startLeash != null) {
             this.startLeash.setUnreleasedWarningCallSite("RemoteAnimationTarget[startLeash]");
         }
         this.startBounds = (Rect) in.readTypedObject(Rect.CREATOR);
-        this.taskInfo = (ActivityManager.RunningTaskInfo) in.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+        this.taskInfo =
+                (ActivityManager.RunningTaskInfo)
+                        in.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
         this.allowEnterPip = in.readBoolean();
         this.windowType = in.readInt();
         this.hasAnimatingParent = in.readBoolean();

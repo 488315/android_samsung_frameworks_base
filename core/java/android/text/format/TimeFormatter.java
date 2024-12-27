@@ -3,10 +3,12 @@ package android.text.format;
 import android.content.res.Resources;
 import android.icu.text.DateFormatSymbols;
 import android.icu.text.DecimalFormatSymbols;
+
 import com.android.i18n.timezone.WallTime;
 import com.android.i18n.timezone.ZoneInfoData;
 import com.android.internal.R;
 import com.android.internal.accessibility.common.ShortcutConstants;
+
 import java.nio.CharBuffer;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -129,7 +131,8 @@ class TimeFormatter {
         }
     }
 
-    private boolean handleToken(CharBuffer formatBuffer, WallTime wallTime, ZoneInfoData zoneInfoData) {
+    private boolean handleToken(
+            CharBuffer formatBuffer, WallTime wallTime, ZoneInfoData zoneInfoData) {
         int w;
         String str;
         String str2;
@@ -253,7 +256,9 @@ class TimeFormatter {
                         }
                     }
                     if (currentChar == 86) {
-                        this.numberFormatter.format(getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(w));
+                        this.numberFormatter.format(
+                                getFormat(modifier, "%02d", "%2d", "%d", "%02d"),
+                                Integer.valueOf(w));
                         return false;
                     }
                     if (currentChar == 103) {
@@ -263,14 +268,20 @@ class TimeFormatter {
                     outputYear(year, true, true, modifier);
                     return false;
                 case 72:
-                    this.numberFormatter.format(getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(wallTime.getHour()));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%02d", "%2d", "%d", "%02d"),
+                            Integer.valueOf(wallTime.getHour()));
                     return false;
                 case 73:
                     int hour = wallTime.getHour() % 12 != 0 ? wallTime.getHour() % 12 : 12;
-                    this.numberFormatter.format(getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(hour));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%02d", "%2d", "%d", "%02d"),
+                            Integer.valueOf(hour));
                     return false;
                 case 77:
-                    this.numberFormatter.format(getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(wallTime.getMinute()));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%02d", "%2d", "%d", "%02d"),
+                            Integer.valueOf(wallTime.getMinute()));
                     return false;
                 case 80:
                     if (wallTime.getHour() >= 12) {
@@ -284,17 +295,28 @@ class TimeFormatter {
                     formatInternal(DateUtils.HOUR_MINUTE_24, wallTime, zoneInfoData);
                     return false;
                 case 83:
-                    this.numberFormatter.format(getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(wallTime.getSecond()));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%02d", "%2d", "%d", "%02d"),
+                            Integer.valueOf(wallTime.getSecond()));
                     return false;
                 case 84:
                     formatInternal("%H:%M:%S", wallTime, zoneInfoData);
                     return false;
                 case 85:
-                    this.numberFormatter.format(getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(((wallTime.getYearDay() + 7) - wallTime.getWeekDay()) / 7));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%02d", "%2d", "%d", "%02d"),
+                            Integer.valueOf(
+                                    ((wallTime.getYearDay() + 7) - wallTime.getWeekDay()) / 7));
                     return false;
                 case 87:
-                    int n = ((wallTime.getYearDay() + 7) - (wallTime.getWeekDay() != 0 ? wallTime.getWeekDay() - 1 : 6)) / 7;
-                    this.numberFormatter.format(getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(n));
+                    int n =
+                            ((wallTime.getYearDay() + 7)
+                                            - (wallTime.getWeekDay() != 0
+                                                    ? wallTime.getWeekDay() - 1
+                                                    : 6))
+                                    / 7;
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(n));
                     return false;
                 case 88:
                     formatInternal(this.timeOnlyFormat, wallTime, zoneInfoData);
@@ -307,7 +329,9 @@ class TimeFormatter {
                         return false;
                     }
                     boolean isDst = wallTime.getIsDst() != 0;
-                    modifyAndAppend(TimeZone.getTimeZone(zoneInfoData.getID()).getDisplayName(isDst, 0), modifier);
+                    modifyAndAppend(
+                            TimeZone.getTimeZone(zoneInfoData.getID()).getDisplayName(isDst, 0),
+                            modifier);
                     return false;
                 case 97:
                     if (wallTime.getWeekDay() >= 0 && wallTime.getWeekDay() < 7) {
@@ -326,24 +350,35 @@ class TimeFormatter {
                     formatInternal(this.dateTimeFormat, wallTime, zoneInfoData);
                     return false;
                 case 100:
-                    this.numberFormatter.format(getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(wallTime.getMonthDay()));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%02d", "%2d", "%d", "%02d"),
+                            Integer.valueOf(wallTime.getMonthDay()));
                     return false;
                 case 101:
-                    this.numberFormatter.format(getFormat(modifier, "%2d", "%2d", "%d", "%02d"), Integer.valueOf(wallTime.getMonthDay()));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%2d", "%2d", "%d", "%02d"),
+                            Integer.valueOf(wallTime.getMonthDay()));
                     return false;
                 case 106:
                     int yearDay = wallTime.getYearDay() + 1;
-                    this.numberFormatter.format(getFormat(modifier, "%03d", "%3d", "%d", "%03d"), Integer.valueOf(yearDay));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%03d", "%3d", "%d", "%03d"),
+                            Integer.valueOf(yearDay));
                     return false;
                 case 107:
-                    this.numberFormatter.format(getFormat(modifier, "%2d", "%2d", "%d", "%02d"), Integer.valueOf(wallTime.getHour()));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%2d", "%2d", "%d", "%02d"),
+                            Integer.valueOf(wallTime.getHour()));
                     return false;
                 case 108:
                     int n2 = wallTime.getHour() % 12 != 0 ? wallTime.getHour() % 12 : 12;
-                    this.numberFormatter.format(getFormat(modifier, "%2d", "%2d", "%d", "%02d"), Integer.valueOf(n2));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%2d", "%2d", "%d", "%02d"), Integer.valueOf(n2));
                     return false;
                 case 109:
-                    this.numberFormatter.format(getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(wallTime.getMonth() + 1));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%02d", "%2d", "%d", "%02d"),
+                            Integer.valueOf(wallTime.getMonth() + 1));
                     return false;
                 case 110:
                     this.outputBuilder.append('\n');
@@ -395,7 +430,9 @@ class TimeFormatter {
                     }
                     this.outputBuilder.append(sign);
                     int diff2 = diff / 60;
-                    this.numberFormatter.format(getFormat(modifier, "%04d", "%4d", "%d", "%04d"), Integer.valueOf(((diff2 / 60) * 100) + (diff2 % 60)));
+                    this.numberFormatter.format(
+                            getFormat(modifier, "%04d", "%4d", "%d", "%04d"),
+                            Integer.valueOf(((diff2 / 60) * 100) + (diff2 % 60)));
                     return false;
             }
         }
@@ -443,18 +480,21 @@ class TimeFormatter {
         }
         if (outputTop) {
             if (lead != 0 || trail2 >= 0) {
-                this.numberFormatter.format(getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(lead));
+                this.numberFormatter.format(
+                        getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(lead));
             } else {
                 this.outputBuilder.append("-0");
             }
         }
         if (outputBottom) {
             int n = trail2 < 0 ? -trail2 : trail2;
-            this.numberFormatter.format(getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(n));
+            this.numberFormatter.format(
+                    getFormat(modifier, "%02d", "%2d", "%d", "%02d"), Integer.valueOf(n));
         }
     }
 
-    private static String getFormat(int modifier, String normal, String underscore, String dash, String zero) {
+    private static String getFormat(
+            int modifier, String normal, String underscore, String dash, String zero) {
         switch (modifier) {
             case 45:
                 return dash;

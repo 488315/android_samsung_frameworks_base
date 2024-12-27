@@ -8,19 +8,21 @@ import android.text.TextUtils;
 
 /* loaded from: classes.dex */
 public class LabeledIntent extends Intent {
-    public static final Parcelable.Creator<LabeledIntent> CREATOR = new Parcelable.Creator<LabeledIntent>() { // from class: android.content.pm.LabeledIntent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LabeledIntent createFromParcel(Parcel source) {
-            return new LabeledIntent(source);
-        }
+    public static final Parcelable.Creator<LabeledIntent> CREATOR =
+            new Parcelable.Creator<
+                    LabeledIntent>() { // from class: android.content.pm.LabeledIntent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LabeledIntent createFromParcel(Parcel source) {
+                    return new LabeledIntent(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LabeledIntent[] newArray(int size) {
-            return new LabeledIntent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LabeledIntent[] newArray(int size) {
+                    return new LabeledIntent[size];
+                }
+            };
     private int mIcon;
     private int mLabelRes;
     private CharSequence mNonLocalizedLabel;
@@ -34,7 +36,8 @@ public class LabeledIntent extends Intent {
         this.mIcon = icon;
     }
 
-    public LabeledIntent(Intent origIntent, String sourcePackage, CharSequence nonLocalizedLabel, int icon) {
+    public LabeledIntent(
+            Intent origIntent, String sourcePackage, CharSequence nonLocalizedLabel, int icon) {
         super(origIntent);
         this.mSourcePackage = sourcePackage;
         this.mLabelRes = 0;
@@ -77,7 +80,9 @@ public class LabeledIntent extends Intent {
         if (this.mNonLocalizedLabel != null) {
             return this.mNonLocalizedLabel;
         }
-        if (this.mLabelRes == 0 || this.mSourcePackage == null || (label = pm.getText(this.mSourcePackage, this.mLabelRes, null)) == null) {
+        if (this.mLabelRes == 0
+                || this.mSourcePackage == null
+                || (label = pm.getText(this.mSourcePackage, this.mLabelRes, null)) == null) {
             return null;
         }
         return label;
@@ -85,7 +90,9 @@ public class LabeledIntent extends Intent {
 
     public Drawable loadIcon(PackageManager pm) {
         Drawable icon;
-        if (this.mIcon == 0 || this.mSourcePackage == null || (icon = pm.getDrawable(this.mSourcePackage, this.mIcon, null)) == null) {
+        if (this.mIcon == 0
+                || this.mSourcePackage == null
+                || (icon = pm.getDrawable(this.mSourcePackage, this.mIcon, null)) == null) {
             return null;
         }
         return icon;

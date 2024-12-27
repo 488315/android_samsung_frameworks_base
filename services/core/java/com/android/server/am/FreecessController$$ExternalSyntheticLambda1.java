@@ -1,11 +1,11 @@
 package com.android.server.am;
 
 import android.util.Slog;
-import com.android.server.am.FreecessController;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class FreecessController$$ExternalSyntheticLambda1 implements FreecessController.checkResultCallback {
+public final /* synthetic */ class FreecessController$$ExternalSyntheticLambda1
+        implements FreecessController.checkResultCallback {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 

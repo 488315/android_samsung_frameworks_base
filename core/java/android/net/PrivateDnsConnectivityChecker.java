@@ -1,8 +1,10 @@
 package android.net;
 
 import android.util.Log;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
+
 import javax.net.SocketFactory;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
@@ -13,8 +15,7 @@ public class PrivateDnsConnectivityChecker {
     private static final int PRIVATE_DNS_PORT = 853;
     private static final String TAG = "NetworkUtils";
 
-    private PrivateDnsConnectivityChecker() {
-    }
+    private PrivateDnsConnectivityChecker() {}
 
     public static boolean canConnectToPrivateDnsServer(String hostname) {
         SocketFactory factory = SSLSocketFactory.getDefault();

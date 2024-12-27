@@ -24,8 +24,13 @@ public class SemSurfaceControl {
         }
         Log.d(TAG, "Taking fullscreen screenshot");
         IBinder displayToken = getInternalDisplayToken();
-        ScreenCapture.DisplayCaptureArgs captureArgs = new ScreenCapture.DisplayCaptureArgs.Builder(displayToken).setSize(width, height).setUseIdentityTransform(true).build();
-        ScreenCapture.ScreenshotHardwareBuffer screenshotBuffer = ScreenCapture.captureDisplay(captureArgs);
+        ScreenCapture.DisplayCaptureArgs captureArgs =
+                new ScreenCapture.DisplayCaptureArgs.Builder(displayToken)
+                        .setSize(width, height)
+                        .setUseIdentityTransform(true)
+                        .build();
+        ScreenCapture.ScreenshotHardwareBuffer screenshotBuffer =
+                ScreenCapture.captureDisplay(captureArgs);
         Bitmap screenShot = screenshotBuffer == null ? null : screenshotBuffer.asBitmap();
         if (screenShot == null) {
             Log.e(TAG, "Failed to take fullscreen screenshot");
@@ -34,14 +39,27 @@ public class SemSurfaceControl {
         return screenShot;
     }
 
-    public static Bitmap screenshot(Rect sourceCrop, int width, int height, int minLayer, int maxLayer, boolean useIdentityTransform, int rotation) {
+    public static Bitmap screenshot(
+            Rect sourceCrop,
+            int width,
+            int height,
+            int minLayer,
+            int maxLayer,
+            boolean useIdentityTransform,
+            int rotation) {
         if (width <= 0 || height <= 0) {
             return null;
         }
         Log.d(TAG, "Taking screenshot with sourceCrop");
         IBinder displayToken = getInternalDisplayToken();
-        ScreenCapture.DisplayCaptureArgs captureArgs = new ScreenCapture.DisplayCaptureArgs.Builder(displayToken).setSourceCrop(sourceCrop).setSize(width, height).setUseIdentityTransform(useIdentityTransform).build();
-        ScreenCapture.ScreenshotHardwareBuffer screenshotBuffer = ScreenCapture.captureDisplay(captureArgs);
+        ScreenCapture.DisplayCaptureArgs captureArgs =
+                new ScreenCapture.DisplayCaptureArgs.Builder(displayToken)
+                        .setSourceCrop(sourceCrop)
+                        .setSize(width, height)
+                        .setUseIdentityTransform(useIdentityTransform)
+                        .build();
+        ScreenCapture.ScreenshotHardwareBuffer screenshotBuffer =
+                ScreenCapture.captureDisplay(captureArgs);
         Bitmap screenShot = screenshotBuffer == null ? null : screenshotBuffer.asBitmap();
         if (screenShot == null) {
             Log.e(TAG, "Failed to take screenshot with sourceCrop");

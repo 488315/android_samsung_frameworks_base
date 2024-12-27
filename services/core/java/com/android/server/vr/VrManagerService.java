@@ -32,6 +32,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.util.DumpUtils;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -45,6 +46,7 @@ import com.android.server.input.KeyboardMetricsCollector;
 import com.android.server.utils.ManagedApplicationService;
 import com.android.server.wm.ActivityTaskManagerInternal;
 import com.android.server.wm.WindowManagerInternal;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -58,7 +60,8 @@ import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public class VrManagerService extends SystemService implements ActivityTaskManagerInternal.ScreenObserver {
+public class VrManagerService extends SystemService
+        implements ActivityTaskManagerInternal.ScreenObserver {
     public static final AnonymousClass3 sBinderChecker = new AnonymousClass3();
     public boolean mBootsToVr;
     public EnabledComponentsObserver mComponentObserver;
@@ -93,8 +96,7 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.vr.VrManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         public final void onServiceEvent(ManagedApplicationService.LogEvent logEvent) {
             ComponentName componentName;
@@ -102,9 +104,15 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
             VrManagerService.this.logEvent(logEvent);
             synchronized (VrManagerService.this.mLock) {
                 try {
-                    ManagedApplicationService managedApplicationService = VrManagerService.this.mCurrentVrService;
-                    componentName = managedApplicationService == null ? null : managedApplicationService.mComponent;
-                    if (componentName != null && componentName.equals(logEvent.component) && ((i = logEvent.event) == 2 || i == 3)) {
+                    ManagedApplicationService managedApplicationService =
+                            VrManagerService.this.mCurrentVrService;
+                    componentName =
+                            managedApplicationService == null
+                                    ? null
+                                    : managedApplicationService.mComponent;
+                    if (componentName != null
+                            && componentName.equals(logEvent.component)
+                            && ((i = logEvent.event) == 2 || i == 3)) {
                         VrManagerService.this.callFocusedActivityChangedLocked();
                     }
                 } catch (Throwable th) {
@@ -115,7 +123,9 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
                 return;
             }
             if (componentName == null || componentName.equals(logEvent.component)) {
-                Slog.e("VrManagerService", "VrListenerSevice has died permanently, leaving system VR mode.");
+                Slog.e(
+                        "VrManagerService",
+                        "VrListenerSevice has died permanently, leaving system VR mode.");
                 VrManagerService.this.setPersistentVrModeEnabled(false);
             }
         }
@@ -123,8 +133,7 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.vr.VrManagerService$3, reason: invalid class name */
-    public final class AnonymousClass3 {
-    }
+    public final class AnonymousClass3 {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.vr.VrManagerService$6, reason: invalid class name */
@@ -142,8 +151,7 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService {
-        public LocalService() {
-        }
+        public LocalService() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -151,8 +159,7 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
         public final SparseArray mAllowedPackages = new SparseArray();
         public final ArrayMap mNotificationAccessPackageToUserId = new ArrayMap();
 
-        public NotificationAccessManager() {
-        }
+        public NotificationAccessManager() {}
 
         public final void update(Collection collection) {
             VrManagerService vrManagerService;
@@ -167,14 +174,21 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
                 if (size < 0) {
                     break;
                 }
-                int intValue = ((Integer) this.mNotificationAccessPackageToUserId.valueAt(size)).intValue();
+                int intValue =
+                        ((Integer) this.mNotificationAccessPackageToUserId.valueAt(size))
+                                .intValue();
                 if (intValue != currentUser) {
                     String str = (String) this.mNotificationAccessPackageToUserId.keyAt(size);
-                    VrManagerService.m1038$$Nest$mrevokeNotificationListenerAccess(vrManagerService, str, intValue);
-                    NotificationManager notificationManager = (NotificationManager) vrManagerService.mContext.getSystemService(NotificationManager.class);
+                    VrManagerService.m1038$$Nest$mrevokeNotificationListenerAccess(
+                            vrManagerService, str, intValue);
+                    NotificationManager notificationManager =
+                            (NotificationManager)
+                                    vrManagerService.mContext.getSystemService(
+                                            NotificationManager.class);
                     notificationManager.removeAutomaticZenRules(str);
                     notificationManager.setNotificationPolicyAccessGranted(str, false);
-                    VrManagerService.m1037$$Nest$mrevokeCoarseLocationPermissionIfNeeded(vrManagerService, str, intValue);
+                    VrManagerService.m1037$$Nest$mrevokeCoarseLocationPermissionIfNeeded(
+                            vrManagerService, str, intValue);
                     this.mNotificationAccessPackageToUserId.removeAt(size);
                 }
                 size--;
@@ -183,11 +197,16 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
             while (it.hasNext()) {
                 String str2 = (String) it.next();
                 if (!((ArraySet) collection).contains(str2)) {
-                    VrManagerService.m1038$$Nest$mrevokeNotificationListenerAccess(vrManagerService, str2, currentUser);
-                    NotificationManager notificationManager2 = (NotificationManager) vrManagerService.mContext.getSystemService(NotificationManager.class);
+                    VrManagerService.m1038$$Nest$mrevokeNotificationListenerAccess(
+                            vrManagerService, str2, currentUser);
+                    NotificationManager notificationManager2 =
+                            (NotificationManager)
+                                    vrManagerService.mContext.getSystemService(
+                                            NotificationManager.class);
                     notificationManager2.removeAutomaticZenRules(str2);
                     notificationManager2.setNotificationPolicyAccessGranted(str2, false);
-                    VrManagerService.m1037$$Nest$mrevokeCoarseLocationPermissionIfNeeded(vrManagerService, str2, currentUser);
+                    VrManagerService.m1037$$Nest$mrevokeCoarseLocationPermissionIfNeeded(
+                            vrManagerService, str2, currentUser);
                     this.mNotificationAccessPackageToUserId.remove(str2);
                 }
             }
@@ -195,24 +214,58 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
             while (it2.hasNext()) {
                 String str3 = (String) it2.next();
                 if (!arraySet.contains(str3)) {
-                    ((NotificationManager) vrManagerService.mContext.getSystemService(NotificationManager.class)).setNotificationPolicyAccessGranted(str3, true);
-                    NotificationManager notificationManager3 = (NotificationManager) vrManagerService.mContext.getSystemService(NotificationManager.class);
-                    Iterator it3 = EnabledComponentsObserver.loadComponentNames(vrManagerService.mContext.getPackageManager(), currentUser, "android.service.notification.NotificationListenerService", "android.permission.BIND_NOTIFICATION_LISTENER_SERVICE").iterator();
+                    ((NotificationManager)
+                                    vrManagerService.mContext.getSystemService(
+                                            NotificationManager.class))
+                            .setNotificationPolicyAccessGranted(str3, true);
+                    NotificationManager notificationManager3 =
+                            (NotificationManager)
+                                    vrManagerService.mContext.getSystemService(
+                                            NotificationManager.class);
+                    Iterator it3 =
+                            EnabledComponentsObserver.loadComponentNames(
+                                            vrManagerService.mContext.getPackageManager(),
+                                            currentUser,
+                                            "android.service.notification.NotificationListenerService",
+                                            "android.permission.BIND_NOTIFICATION_LISTENER_SERVICE")
+                                    .iterator();
                     while (it3.hasNext()) {
                         ComponentName componentName = (ComponentName) it3.next();
                         if (Objects.equals(componentName.getPackageName(), str3)) {
                             try {
-                                notificationManager3.setNotificationListenerAccessGrantedForUser(componentName, currentUser, true);
+                                notificationManager3.setNotificationListenerAccessGrantedForUser(
+                                        componentName, currentUser, true);
                             } catch (Exception e) {
-                                Slog.w("VrManagerService", "Could not grant NLS access to package " + str3, e);
+                                Slog.w(
+                                        "VrManagerService",
+                                        "Could not grant NLS access to package " + str3,
+                                        e);
                             }
                         }
                     }
-                    if ((vrManagerService.mContext.getPackageManager().getPermissionFlags("android.permission.ACCESS_COARSE_LOCATION", str3, new UserHandle(currentUser)) & 3) == 0) {
+                    if ((vrManagerService
+                                            .mContext
+                                            .getPackageManager()
+                                            .getPermissionFlags(
+                                                    "android.permission.ACCESS_COARSE_LOCATION",
+                                                    str3,
+                                                    new UserHandle(currentUser))
+                                    & 3)
+                            == 0) {
                         try {
-                            vrManagerService.mContext.getPackageManager().grantRuntimePermission(str3, "android.permission.ACCESS_COARSE_LOCATION", new UserHandle(currentUser));
+                            vrManagerService
+                                    .mContext
+                                    .getPackageManager()
+                                    .grantRuntimePermission(
+                                            str3,
+                                            "android.permission.ACCESS_COARSE_LOCATION",
+                                            new UserHandle(currentUser));
                         } catch (IllegalArgumentException unused) {
-                            PinnerService$$ExternalSyntheticOutline0.m("Could not grant coarse location permission, package ", str3, " was removed.", "VrManagerService");
+                            PinnerService$$ExternalSyntheticOutline0.m(
+                                    "Could not grant coarse location permission, package ",
+                                    str3,
+                                    " was removed.",
+                                    "VrManagerService");
                         }
                     }
                     this.mNotificationAccessPackageToUserId.put(str3, Integer.valueOf(currentUser));
@@ -249,7 +302,13 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
         public final long timestamp = System.currentTimeMillis();
         public final int userId;
 
-        public VrState(boolean z, boolean z2, ComponentName componentName, int i, int i2, ComponentName componentName2) {
+        public VrState(
+                boolean z,
+                boolean z2,
+                ComponentName componentName,
+                int i,
+                int i2,
+                ComponentName componentName2) {
             this.enabled = z;
             this.running2dInVr = z2;
             this.userId = i;
@@ -258,7 +317,14 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
             this.callingPackage = componentName2;
         }
 
-        public VrState(boolean z, boolean z2, ComponentName componentName, int i, int i2, ComponentName componentName2, int i3) {
+        public VrState(
+                boolean z,
+                boolean z2,
+                ComponentName componentName,
+                int i,
+                int i2,
+                ComponentName componentName2,
+                int i3) {
             this.enabled = z;
             this.running2dInVr = z2;
             this.userId = i;
@@ -280,7 +346,10 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
                 sb.append("\n  Current VR Activity=");
                 ComponentName componentName = this.callingPackage;
                 String str = KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG;
-                sb.append(componentName == null ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG : componentName.flattenToString());
+                sb.append(
+                        componentName == null
+                                ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG
+                                : componentName.flattenToString());
                 sb.append("\n  Bound VrListenerService=");
                 ComponentName componentName2 = this.targetPackageName;
                 if (componentName2 != null) {
@@ -294,34 +363,57 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
     }
 
     /* renamed from: -$$Nest$menforceCallerPermissionAnyOf, reason: not valid java name */
-    public static void m1036$$Nest$menforceCallerPermissionAnyOf(VrManagerService vrManagerService, String[] strArr) {
+    public static void m1036$$Nest$menforceCallerPermissionAnyOf(
+            VrManagerService vrManagerService, String[] strArr) {
         vrManagerService.getClass();
         for (String str : strArr) {
             if (vrManagerService.mContext.checkCallingOrSelfPermission(str) == 0) {
                 return;
             }
         }
-        throw new SecurityException("Caller does not hold at least one of the permissions: " + Arrays.toString(strArr));
+        throw new SecurityException(
+                "Caller does not hold at least one of the permissions: " + Arrays.toString(strArr));
     }
 
     /* renamed from: -$$Nest$mrevokeCoarseLocationPermissionIfNeeded, reason: not valid java name */
-    public static void m1037$$Nest$mrevokeCoarseLocationPermissionIfNeeded(VrManagerService vrManagerService, String str, int i) {
-        if ((vrManagerService.mContext.getPackageManager().getPermissionFlags("android.permission.ACCESS_COARSE_LOCATION", str, new UserHandle(i)) & 3) != 0) {
+    public static void m1037$$Nest$mrevokeCoarseLocationPermissionIfNeeded(
+            VrManagerService vrManagerService, String str, int i) {
+        if ((vrManagerService
+                                .mContext
+                                .getPackageManager()
+                                .getPermissionFlags(
+                                        "android.permission.ACCESS_COARSE_LOCATION",
+                                        str,
+                                        new UserHandle(i))
+                        & 3)
+                != 0) {
             return;
         }
         try {
-            vrManagerService.mContext.getPackageManager().revokeRuntimePermission(str, "android.permission.ACCESS_COARSE_LOCATION", new UserHandle(i));
+            vrManagerService
+                    .mContext
+                    .getPackageManager()
+                    .revokeRuntimePermission(
+                            str, "android.permission.ACCESS_COARSE_LOCATION", new UserHandle(i));
         } catch (IllegalArgumentException unused) {
-            PinnerService$$ExternalSyntheticOutline0.m("Could not revoke coarse location permission, package ", str, " was removed.", "VrManagerService");
+            PinnerService$$ExternalSyntheticOutline0.m(
+                    "Could not revoke coarse location permission, package ",
+                    str,
+                    " was removed.",
+                    "VrManagerService");
         }
     }
 
     /* renamed from: -$$Nest$mrevokeNotificationListenerAccess, reason: not valid java name */
-    public static void m1038$$Nest$mrevokeNotificationListenerAccess(VrManagerService vrManagerService, String str, int i) {
-        NotificationManager notificationManager = (NotificationManager) vrManagerService.mContext.getSystemService(NotificationManager.class);
+    public static void m1038$$Nest$mrevokeNotificationListenerAccess(
+            VrManagerService vrManagerService, String str, int i) {
+        NotificationManager notificationManager =
+                (NotificationManager)
+                        vrManagerService.mContext.getSystemService(NotificationManager.class);
         for (ComponentName componentName : notificationManager.getEnabledNotificationListeners(i)) {
             if (componentName != null && componentName.getPackageName().equals(str)) {
-                notificationManager.setNotificationListenerAccessGrantedForUser(componentName, i, false);
+                notificationManager.setNotificationListenerAccessGrantedForUser(
+                        componentName, i, false);
             }
         }
     }
@@ -338,278 +430,384 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
         this.mNotifAccessManager = new NotificationAccessManager();
         this.mSystemSleepFlags = 5;
         this.mEventCallback = new AnonymousClass1();
-        this.mHandler = new Handler() { // from class: com.android.server.vr.VrManagerService.2
-            @Override // android.os.Handler
-            public final void handleMessage(Message message) {
-                boolean z;
-                int i = message.what;
-                if (i == 0) {
-                    z = message.arg1 == 1;
-                    int beginBroadcast = VrManagerService.this.mVrStateRemoteCallbacks.beginBroadcast();
-                    while (beginBroadcast > 0) {
-                        beginBroadcast--;
-                        try {
-                            VrManagerService.this.mVrStateRemoteCallbacks.getBroadcastItem(beginBroadcast).onVrStateChanged(z);
-                        } catch (RemoteException unused) {
+        this.mHandler =
+                new Handler() { // from class: com.android.server.vr.VrManagerService.2
+                    @Override // android.os.Handler
+                    public final void handleMessage(Message message) {
+                        boolean z;
+                        int i = message.what;
+                        if (i == 0) {
+                            z = message.arg1 == 1;
+                            int beginBroadcast =
+                                    VrManagerService.this.mVrStateRemoteCallbacks.beginBroadcast();
+                            while (beginBroadcast > 0) {
+                                beginBroadcast--;
+                                try {
+                                    VrManagerService.this
+                                            .mVrStateRemoteCallbacks
+                                            .getBroadcastItem(beginBroadcast)
+                                            .onVrStateChanged(z);
+                                } catch (RemoteException unused) {
+                                }
+                            }
+                            VrManagerService.this.mVrStateRemoteCallbacks.finishBroadcast();
+                            return;
                         }
-                    }
-                    VrManagerService.this.mVrStateRemoteCallbacks.finishBroadcast();
-                    return;
-                }
-                if (i == 1) {
-                    synchronized (VrManagerService.this.mLock) {
-                        VrManagerService vrManagerService = VrManagerService.this;
-                        if (vrManagerService.mVrModeAllowed) {
-                            vrManagerService.consumeAndApplyPendingStateLocked(true);
+                        if (i == 1) {
+                            synchronized (VrManagerService.this.mLock) {
+                                VrManagerService vrManagerService = VrManagerService.this;
+                                if (vrManagerService.mVrModeAllowed) {
+                                    vrManagerService.consumeAndApplyPendingStateLocked(true);
+                                }
+                            }
+                            return;
                         }
+                        if (i != 2) {
+                            throw new IllegalStateException(
+                                    "Unknown message type: " + message.what);
+                        }
+                        z = message.arg1 == 1;
+                        int beginBroadcast2 =
+                                VrManagerService.this.mPersistentVrStateRemoteCallbacks
+                                        .beginBroadcast();
+                        while (beginBroadcast2 > 0) {
+                            beginBroadcast2--;
+                            try {
+                                VrManagerService.this
+                                        .mPersistentVrStateRemoteCallbacks
+                                        .getBroadcastItem(beginBroadcast2)
+                                        .onPersistentVrStateChanged(z);
+                            } catch (RemoteException unused2) {
+                            }
+                        }
+                        VrManagerService.this.mPersistentVrStateRemoteCallbacks.finishBroadcast();
                     }
-                    return;
-                }
-                if (i != 2) {
-                    throw new IllegalStateException("Unknown message type: " + message.what);
-                }
-                z = message.arg1 == 1;
-                int beginBroadcast2 = VrManagerService.this.mPersistentVrStateRemoteCallbacks.beginBroadcast();
-                while (beginBroadcast2 > 0) {
-                    beginBroadcast2--;
-                    try {
-                        VrManagerService.this.mPersistentVrStateRemoteCallbacks.getBroadcastItem(beginBroadcast2).onPersistentVrStateChanged(z);
-                    } catch (RemoteException unused2) {
-                    }
-                }
-                VrManagerService.this.mPersistentVrStateRemoteCallbacks.finishBroadcast();
-            }
-        };
-        this.mVrManager = new IVrManager.Stub() { // from class: com.android.server.vr.VrManagerService.4
-            public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-                ArraySet arraySet;
-                if (DumpUtils.checkDumpPermission(VrManagerService.this.mContext, "VrManagerService", printWriter)) {
-                    printWriter.println("********* Dump of VrManagerService *********");
-                    printWriter.println("VR mode is currently: ".concat(VrManagerService.this.mVrModeAllowed ? "allowed" : "disallowed"));
-                    printWriter.println("Persistent VR mode is currently: ".concat(VrManagerService.this.mPersistentVrModeEnabled ? "enabled" : "disabled"));
-                    StringBuilder sb = new StringBuilder("Currently bound VR listener service: ");
-                    ManagedApplicationService managedApplicationService = VrManagerService.this.mCurrentVrService;
-                    StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, managedApplicationService == null ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG : managedApplicationService.mComponent.flattenToString(), "Currently bound VR compositor service: ", sb);
-                    ManagedApplicationService managedApplicationService2 = VrManagerService.this.mCurrentVrCompositorService;
-                    m.append(managedApplicationService2 == null ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG : managedApplicationService2.mComponent.flattenToString());
-                    printWriter.println(m.toString());
-                    printWriter.println("Previous state transitions:\n");
-                    VrManagerService vrManagerService = VrManagerService.this;
-                    vrManagerService.getClass();
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
-                    synchronized (vrManagerService.mLoggingDeque) {
-                        try {
-                            if (vrManagerService.mLoggingDeque.size() == 0) {
+                };
+        this.mVrManager =
+                new IVrManager.Stub() { // from class: com.android.server.vr.VrManagerService.4
+                    public final void dump(
+                            FileDescriptor fileDescriptor,
+                            PrintWriter printWriter,
+                            String[] strArr) {
+                        ArraySet arraySet;
+                        if (DumpUtils.checkDumpPermission(
+                                VrManagerService.this.mContext, "VrManagerService", printWriter)) {
+                            printWriter.println("********* Dump of VrManagerService *********");
+                            printWriter.println(
+                                    "VR mode is currently: "
+                                            .concat(
+                                                    VrManagerService.this.mVrModeAllowed
+                                                            ? "allowed"
+                                                            : "disallowed"));
+                            printWriter.println(
+                                    "Persistent VR mode is currently: "
+                                            .concat(
+                                                    VrManagerService.this.mPersistentVrModeEnabled
+                                                            ? "enabled"
+                                                            : "disabled"));
+                            StringBuilder sb =
+                                    new StringBuilder("Currently bound VR listener service: ");
+                            ManagedApplicationService managedApplicationService =
+                                    VrManagerService.this.mCurrentVrService;
+                            StringBuilder m =
+                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                            printWriter,
+                                            managedApplicationService == null
+                                                    ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG
+                                                    : managedApplicationService.mComponent
+                                                            .flattenToString(),
+                                            "Currently bound VR compositor service: ",
+                                            sb);
+                            ManagedApplicationService managedApplicationService2 =
+                                    VrManagerService.this.mCurrentVrCompositorService;
+                            m.append(
+                                    managedApplicationService2 == null
+                                            ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG
+                                            : managedApplicationService2.mComponent
+                                                    .flattenToString());
+                            printWriter.println(m.toString());
+                            printWriter.println("Previous state transitions:\n");
+                            VrManagerService vrManagerService = VrManagerService.this;
+                            vrManagerService.getClass();
+                            SimpleDateFormat simpleDateFormat =
+                                    new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
+                            synchronized (vrManagerService.mLoggingDeque) {
+                                try {
+                                    if (vrManagerService.mLoggingDeque.size() == 0) {
+                                        printWriter.print("  ");
+                                        printWriter.println(
+                                                KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG);
+                                    }
+                                    if (vrManagerService.mLogLimitHit) {
+                                        printWriter.println("...");
+                                    }
+                                    Iterator it = vrManagerService.mLoggingDeque.iterator();
+                                    while (it.hasNext()) {
+                                        printWriter.println(
+                                                ((ManagedApplicationService.LogFormattable)
+                                                                it.next())
+                                                        .toLogString(simpleDateFormat));
+                                    }
+                                } finally {
+                                }
+                            }
+                            printWriter.println("\n\nRemote Callbacks:");
+                            int beginBroadcast =
+                                    VrManagerService.this.mVrStateRemoteCallbacks.beginBroadcast();
+                            while (true) {
+                                int i = beginBroadcast - 1;
+                                if (beginBroadcast <= 0) {
+                                    break;
+                                }
                                 printWriter.print("  ");
+                                printWriter.print(
+                                        VrManagerService.this.mVrStateRemoteCallbacks
+                                                .getBroadcastItem(i));
+                                if (i > 0) {
+                                    printWriter.println(",");
+                                }
+                                beginBroadcast = i;
+                            }
+                            VrManagerService.this.mVrStateRemoteCallbacks.finishBroadcast();
+                            printWriter.println("\n\nPersistent Vr State Remote Callbacks:");
+                            int beginBroadcast2 =
+                                    VrManagerService.this.mPersistentVrStateRemoteCallbacks
+                                            .beginBroadcast();
+                            while (true) {
+                                int i2 = beginBroadcast2 - 1;
+                                if (beginBroadcast2 <= 0) {
+                                    break;
+                                }
+                                printWriter.print("  ");
+                                printWriter.print(
+                                        VrManagerService.this.mPersistentVrStateRemoteCallbacks
+                                                .getBroadcastItem(i2));
+                                if (i2 > 0) {
+                                    printWriter.println(",");
+                                }
+                                beginBroadcast2 = i2;
+                            }
+                            VrManagerService.this.mPersistentVrStateRemoteCallbacks
+                                    .finishBroadcast();
+                            printWriter.println("\n");
+                            printWriter.println("Installed VrListenerService components:");
+                            VrManagerService vrManagerService2 = VrManagerService.this;
+                            int i3 = vrManagerService2.mCurrentVrModeUser;
+                            EnabledComponentsObserver enabledComponentsObserver =
+                                    vrManagerService2.mComponentObserver;
+                            synchronized (enabledComponentsObserver.mLock) {
+                                try {
+                                    arraySet =
+                                            (ArraySet)
+                                                    enabledComponentsObserver.mInstalledSet.get(i3);
+                                    if (arraySet == null) {
+                                        arraySet = new ArraySet();
+                                    }
+                                } finally {
+                                }
+                            }
+                            if (arraySet.size() == 0) {
                                 printWriter.println(KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG);
+                            } else {
+                                Iterator it2 = arraySet.iterator();
+                                while (it2.hasNext()) {
+                                    ComponentName componentName = (ComponentName) it2.next();
+                                    printWriter.print("  ");
+                                    printWriter.println(componentName.flattenToString());
+                                }
                             }
-                            if (vrManagerService.mLogLimitHit) {
-                                printWriter.println("...");
+                            printWriter.println("Enabled VrListenerService components:");
+                            ArraySet enabled =
+                                    VrManagerService.this.mComponentObserver.getEnabled(i3);
+                            if (enabled.size() == 0) {
+                                printWriter.println(KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG);
+                            } else {
+                                Iterator it3 = enabled.iterator();
+                                while (it3.hasNext()) {
+                                    ComponentName componentName2 = (ComponentName) it3.next();
+                                    printWriter.print("  ");
+                                    printWriter.println(componentName2.flattenToString());
+                                }
                             }
-                            Iterator it = vrManagerService.mLoggingDeque.iterator();
-                            while (it.hasNext()) {
-                                printWriter.println(((ManagedApplicationService.LogFormattable) it.next()).toLogString(simpleDateFormat));
+                            printWriter.println("\n");
+                            printWriter.println("********* End of VrManagerService Dump *********");
+                        }
+                    }
+
+                    public final boolean getPersistentVrModeEnabled() {
+                        boolean z;
+                        VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(
+                                VrManagerService.this,
+                                new String[] {
+                                    "android.permission.ACCESS_VR_MANAGER",
+                                    "android.permission.ACCESS_VR_STATE"
+                                });
+                        VrManagerService vrManagerService = VrManagerService.this;
+                        synchronized (vrManagerService.mLock) {
+                            z = vrManagerService.mPersistentVrModeEnabled;
+                        }
+                        return z;
+                    }
+
+                    public final int getVr2dDisplayId() {
+                        Vr2dDisplay vr2dDisplay = VrManagerService.this.mVr2dDisplay;
+                        int i = -1;
+                        if (vr2dDisplay != null) {
+                            synchronized (vr2dDisplay.mVdLock) {
+                                try {
+                                    VirtualDisplay virtualDisplay = vr2dDisplay.mVirtualDisplay;
+                                    if (virtualDisplay != null) {
+                                        i = virtualDisplay.getDisplay().getDisplayId();
+                                    }
+                                } finally {
+                                }
                             }
-                        } finally {
-                        }
-                    }
-                    printWriter.println("\n\nRemote Callbacks:");
-                    int beginBroadcast = VrManagerService.this.mVrStateRemoteCallbacks.beginBroadcast();
-                    while (true) {
-                        int i = beginBroadcast - 1;
-                        if (beginBroadcast <= 0) {
-                            break;
-                        }
-                        printWriter.print("  ");
-                        printWriter.print(VrManagerService.this.mVrStateRemoteCallbacks.getBroadcastItem(i));
-                        if (i > 0) {
-                            printWriter.println(",");
-                        }
-                        beginBroadcast = i;
-                    }
-                    VrManagerService.this.mVrStateRemoteCallbacks.finishBroadcast();
-                    printWriter.println("\n\nPersistent Vr State Remote Callbacks:");
-                    int beginBroadcast2 = VrManagerService.this.mPersistentVrStateRemoteCallbacks.beginBroadcast();
-                    while (true) {
-                        int i2 = beginBroadcast2 - 1;
-                        if (beginBroadcast2 <= 0) {
-                            break;
-                        }
-                        printWriter.print("  ");
-                        printWriter.print(VrManagerService.this.mPersistentVrStateRemoteCallbacks.getBroadcastItem(i2));
-                        if (i2 > 0) {
-                            printWriter.println(",");
-                        }
-                        beginBroadcast2 = i2;
-                    }
-                    VrManagerService.this.mPersistentVrStateRemoteCallbacks.finishBroadcast();
-                    printWriter.println("\n");
-                    printWriter.println("Installed VrListenerService components:");
-                    VrManagerService vrManagerService2 = VrManagerService.this;
-                    int i3 = vrManagerService2.mCurrentVrModeUser;
-                    EnabledComponentsObserver enabledComponentsObserver = vrManagerService2.mComponentObserver;
-                    synchronized (enabledComponentsObserver.mLock) {
-                        try {
-                            arraySet = (ArraySet) enabledComponentsObserver.mInstalledSet.get(i3);
-                            if (arraySet == null) {
-                                arraySet = new ArraySet();
-                            }
-                        } finally {
-                        }
-                    }
-                    if (arraySet.size() == 0) {
-                        printWriter.println(KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG);
-                    } else {
-                        Iterator it2 = arraySet.iterator();
-                        while (it2.hasNext()) {
-                            ComponentName componentName = (ComponentName) it2.next();
-                            printWriter.print("  ");
-                            printWriter.println(componentName.flattenToString());
-                        }
-                    }
-                    printWriter.println("Enabled VrListenerService components:");
-                    ArraySet enabled = VrManagerService.this.mComponentObserver.getEnabled(i3);
-                    if (enabled.size() == 0) {
-                        printWriter.println(KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG);
-                    } else {
-                        Iterator it3 = enabled.iterator();
-                        while (it3.hasNext()) {
-                            ComponentName componentName2 = (ComponentName) it3.next();
-                            printWriter.print("  ");
-                            printWriter.println(componentName2.flattenToString());
-                        }
-                    }
-                    printWriter.println("\n");
-                    printWriter.println("********* End of VrManagerService Dump *********");
-                }
-            }
-
-            public final boolean getPersistentVrModeEnabled() {
-                boolean z;
-                VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(VrManagerService.this, new String[]{"android.permission.ACCESS_VR_MANAGER", "android.permission.ACCESS_VR_STATE"});
-                VrManagerService vrManagerService = VrManagerService.this;
-                synchronized (vrManagerService.mLock) {
-                    z = vrManagerService.mPersistentVrModeEnabled;
-                }
-                return z;
-            }
-
-            public final int getVr2dDisplayId() {
-                Vr2dDisplay vr2dDisplay = VrManagerService.this.mVr2dDisplay;
-                int i = -1;
-                if (vr2dDisplay != null) {
-                    synchronized (vr2dDisplay.mVdLock) {
-                        try {
-                            VirtualDisplay virtualDisplay = vr2dDisplay.mVirtualDisplay;
-                            if (virtualDisplay != null) {
-                                i = virtualDisplay.getDisplay().getDisplayId();
-                            }
-                        } finally {
-                        }
-                    }
-                } else {
-                    Slog.w("VrManagerService", "Vr2dDisplay is null!");
-                }
-                return i;
-            }
-
-            public final boolean getVrModeState() {
-                boolean z;
-                VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(VrManagerService.this, new String[]{"android.permission.ACCESS_VR_MANAGER", "android.permission.ACCESS_VR_STATE"});
-                VrManagerService vrManagerService = VrManagerService.this;
-                synchronized (vrManagerService.mLock) {
-                    z = vrManagerService.mVrModeEnabled;
-                }
-                return z;
-            }
-
-            public final void registerListener(IVrStateCallbacks iVrStateCallbacks) {
-                VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(VrManagerService.this, new String[]{"android.permission.ACCESS_VR_MANAGER", "android.permission.ACCESS_VR_STATE"});
-                if (iVrStateCallbacks == null) {
-                    throw new IllegalArgumentException("Callback binder object is null.");
-                }
-                VrManagerService.this.mVrStateRemoteCallbacks.register(iVrStateCallbacks);
-            }
-
-            public final void registerPersistentVrStateListener(IPersistentVrStateCallbacks iPersistentVrStateCallbacks) {
-                VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(VrManagerService.this, new String[]{"android.permission.ACCESS_VR_MANAGER", "android.permission.ACCESS_VR_STATE"});
-                if (iPersistentVrStateCallbacks == null) {
-                    throw new IllegalArgumentException("Callback binder object is null.");
-                }
-                VrManagerService.this.mPersistentVrStateRemoteCallbacks.register(iPersistentVrStateCallbacks);
-            }
-
-            public final void setAndBindCompositor(String str) {
-                VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(VrManagerService.this, new String[]{"android.permission.RESTRICTED_VR_ACCESS"});
-                VrManagerService vrManagerService = VrManagerService.this;
-                ComponentName unflattenFromString = str == null ? null : ComponentName.unflattenFromString(str);
-                vrManagerService.getClass();
-                int callingUserId = UserHandle.getCallingUserId();
-                long clearCallingIdentity = Binder.clearCallingIdentity();
-                try {
-                    synchronized (vrManagerService.mLock) {
-                        vrManagerService.updateCompositorServiceLocked(callingUserId, unflattenFromString);
-                    }
-                } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
-                }
-            }
-
-            public final void setPersistentVrModeEnabled(boolean z) {
-                VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(VrManagerService.this, new String[]{"android.permission.RESTRICTED_VR_ACCESS"});
-                VrManagerService.this.setPersistentVrModeEnabled(z);
-            }
-
-            public final void setStandbyEnabled(boolean z) {
-                VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(VrManagerService.this, new String[]{"android.permission.ACCESS_VR_MANAGER"});
-                VrManagerService vrManagerService = VrManagerService.this;
-                synchronized (vrManagerService.mLock) {
-                    try {
-                        if (!vrManagerService.mBootsToVr) {
-                            Slog.e("VrManagerService", "Attempting to set standby mode on a non-standalone device");
                         } else {
-                            vrManagerService.mStandby = z;
-                            vrManagerService.updateVrModeAllowedLocked();
+                            Slog.w("VrManagerService", "Vr2dDisplay is null!");
                         }
-                    } finally {
+                        return i;
                     }
-                }
-            }
 
-            public final void setVr2dDisplayProperties(Vr2dDisplayProperties vr2dDisplayProperties) {
-                VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(VrManagerService.this, new String[]{"android.permission.RESTRICTED_VR_ACCESS"});
-                VrManagerService vrManagerService = VrManagerService.this;
-                vrManagerService.getClass();
-                long clearCallingIdentity = Binder.clearCallingIdentity();
-                try {
-                    Vr2dDisplay vr2dDisplay = vrManagerService.mVr2dDisplay;
-                    if (vr2dDisplay != null) {
-                        vr2dDisplay.setVirtualDisplayProperties(vr2dDisplayProperties);
-                    } else {
-                        Binder.restoreCallingIdentity(clearCallingIdentity);
-                        Slog.w("VrManagerService", "Vr2dDisplay is null!");
+                    public final boolean getVrModeState() {
+                        boolean z;
+                        VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(
+                                VrManagerService.this,
+                                new String[] {
+                                    "android.permission.ACCESS_VR_MANAGER",
+                                    "android.permission.ACCESS_VR_STATE"
+                                });
+                        VrManagerService vrManagerService = VrManagerService.this;
+                        synchronized (vrManagerService.mLock) {
+                            z = vrManagerService.mVrModeEnabled;
+                        }
+                        return z;
                     }
-                } finally {
-                    Binder.restoreCallingIdentity(clearCallingIdentity);
-                }
-            }
 
-            public final void unregisterListener(IVrStateCallbacks iVrStateCallbacks) {
-                VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(VrManagerService.this, new String[]{"android.permission.ACCESS_VR_MANAGER", "android.permission.ACCESS_VR_STATE"});
-                if (iVrStateCallbacks == null) {
-                    throw new IllegalArgumentException("Callback binder object is null.");
-                }
-                VrManagerService.this.mVrStateRemoteCallbacks.unregister(iVrStateCallbacks);
-            }
+                    public final void registerListener(IVrStateCallbacks iVrStateCallbacks) {
+                        VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(
+                                VrManagerService.this,
+                                new String[] {
+                                    "android.permission.ACCESS_VR_MANAGER",
+                                    "android.permission.ACCESS_VR_STATE"
+                                });
+                        if (iVrStateCallbacks == null) {
+                            throw new IllegalArgumentException("Callback binder object is null.");
+                        }
+                        VrManagerService.this.mVrStateRemoteCallbacks.register(iVrStateCallbacks);
+                    }
 
-            public final void unregisterPersistentVrStateListener(IPersistentVrStateCallbacks iPersistentVrStateCallbacks) {
-                VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(VrManagerService.this, new String[]{"android.permission.ACCESS_VR_MANAGER", "android.permission.ACCESS_VR_STATE"});
-                if (iPersistentVrStateCallbacks == null) {
-                    throw new IllegalArgumentException("Callback binder object is null.");
-                }
-                VrManagerService.this.mPersistentVrStateRemoteCallbacks.unregister(iPersistentVrStateCallbacks);
-            }
-        };
+                    public final void registerPersistentVrStateListener(
+                            IPersistentVrStateCallbacks iPersistentVrStateCallbacks) {
+                        VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(
+                                VrManagerService.this,
+                                new String[] {
+                                    "android.permission.ACCESS_VR_MANAGER",
+                                    "android.permission.ACCESS_VR_STATE"
+                                });
+                        if (iPersistentVrStateCallbacks == null) {
+                            throw new IllegalArgumentException("Callback binder object is null.");
+                        }
+                        VrManagerService.this.mPersistentVrStateRemoteCallbacks.register(
+                                iPersistentVrStateCallbacks);
+                    }
+
+                    public final void setAndBindCompositor(String str) {
+                        VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(
+                                VrManagerService.this,
+                                new String[] {"android.permission.RESTRICTED_VR_ACCESS"});
+                        VrManagerService vrManagerService = VrManagerService.this;
+                        ComponentName unflattenFromString =
+                                str == null ? null : ComponentName.unflattenFromString(str);
+                        vrManagerService.getClass();
+                        int callingUserId = UserHandle.getCallingUserId();
+                        long clearCallingIdentity = Binder.clearCallingIdentity();
+                        try {
+                            synchronized (vrManagerService.mLock) {
+                                vrManagerService.updateCompositorServiceLocked(
+                                        callingUserId, unflattenFromString);
+                            }
+                        } finally {
+                            Binder.restoreCallingIdentity(clearCallingIdentity);
+                        }
+                    }
+
+                    public final void setPersistentVrModeEnabled(boolean z) {
+                        VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(
+                                VrManagerService.this,
+                                new String[] {"android.permission.RESTRICTED_VR_ACCESS"});
+                        VrManagerService.this.setPersistentVrModeEnabled(z);
+                    }
+
+                    public final void setStandbyEnabled(boolean z) {
+                        VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(
+                                VrManagerService.this,
+                                new String[] {"android.permission.ACCESS_VR_MANAGER"});
+                        VrManagerService vrManagerService = VrManagerService.this;
+                        synchronized (vrManagerService.mLock) {
+                            try {
+                                if (!vrManagerService.mBootsToVr) {
+                                    Slog.e(
+                                            "VrManagerService",
+                                            "Attempting to set standby mode on a non-standalone"
+                                                + " device");
+                                } else {
+                                    vrManagerService.mStandby = z;
+                                    vrManagerService.updateVrModeAllowedLocked();
+                                }
+                            } finally {
+                            }
+                        }
+                    }
+
+                    public final void setVr2dDisplayProperties(
+                            Vr2dDisplayProperties vr2dDisplayProperties) {
+                        VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(
+                                VrManagerService.this,
+                                new String[] {"android.permission.RESTRICTED_VR_ACCESS"});
+                        VrManagerService vrManagerService = VrManagerService.this;
+                        vrManagerService.getClass();
+                        long clearCallingIdentity = Binder.clearCallingIdentity();
+                        try {
+                            Vr2dDisplay vr2dDisplay = vrManagerService.mVr2dDisplay;
+                            if (vr2dDisplay != null) {
+                                vr2dDisplay.setVirtualDisplayProperties(vr2dDisplayProperties);
+                            } else {
+                                Binder.restoreCallingIdentity(clearCallingIdentity);
+                                Slog.w("VrManagerService", "Vr2dDisplay is null!");
+                            }
+                        } finally {
+                            Binder.restoreCallingIdentity(clearCallingIdentity);
+                        }
+                    }
+
+                    public final void unregisterListener(IVrStateCallbacks iVrStateCallbacks) {
+                        VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(
+                                VrManagerService.this,
+                                new String[] {
+                                    "android.permission.ACCESS_VR_MANAGER",
+                                    "android.permission.ACCESS_VR_STATE"
+                                });
+                        if (iVrStateCallbacks == null) {
+                            throw new IllegalArgumentException("Callback binder object is null.");
+                        }
+                        VrManagerService.this.mVrStateRemoteCallbacks.unregister(iVrStateCallbacks);
+                    }
+
+                    public final void unregisterPersistentVrStateListener(
+                            IPersistentVrStateCallbacks iPersistentVrStateCallbacks) {
+                        VrManagerService.m1036$$Nest$menforceCallerPermissionAnyOf(
+                                VrManagerService.this,
+                                new String[] {
+                                    "android.permission.ACCESS_VR_MANAGER",
+                                    "android.permission.ACCESS_VR_STATE"
+                                });
+                        if (iPersistentVrStateCallbacks == null) {
+                            throw new IllegalArgumentException("Callback binder object is null.");
+                        }
+                        VrManagerService.this.mPersistentVrStateRemoteCallbacks.unregister(
+                                iPersistentVrStateCallbacks);
+                    }
+                };
     }
 
     private static native void initializeNative();
@@ -649,13 +847,29 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
                 updateCurrentVrServiceLocked(false, false, null, 0, -1, null);
             }
         } else {
-            updateCurrentVrServiceLocked(vrState.enabled, vrState.running2dInVr, vrState.targetPackageName, vrState.userId, vrState.processId, vrState.callingPackage);
+            updateCurrentVrServiceLocked(
+                    vrState.enabled,
+                    vrState.running2dInVr,
+                    vrState.targetPackageName,
+                    vrState.userId,
+                    vrState.processId,
+                    vrState.callingPackage);
             this.mPendingState = null;
         }
     }
 
     public final void createAndConnectService(int i, ComponentName componentName) {
-        ManagedApplicationService managedApplicationService = new ManagedApplicationService(this.mContext, componentName, i, 17043474, "android.settings.VR_LISTENER_SETTINGS", sBinderChecker, this.mBootsToVr ? 1 : 2, this.mHandler, this.mEventCallback);
+        ManagedApplicationService managedApplicationService =
+                new ManagedApplicationService(
+                        this.mContext,
+                        componentName,
+                        i,
+                        17043474,
+                        "android.settings.VR_LISTENER_SETTINGS",
+                        sBinderChecker,
+                        this.mBootsToVr ? 1 : 2,
+                        this.mHandler,
+                        this.mEventCallback);
         this.mCurrentVrService = managedApplicationService;
         managedApplicationService.connect();
         Slog.i("VrManagerService", "Connecting " + componentName + " for user " + i);
@@ -683,7 +897,9 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
     @Override // com.android.server.SystemService
     public final void onBootPhase(int i) {
         if (i == 500) {
-            ((ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class)).registerScreenObserver(this);
+            ((ActivityTaskManagerInternal)
+                            LocalServices.getService(ActivityTaskManagerInternal.class))
+                    .registerScreenObserver(this);
             INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
             synchronized (this.mLock) {
                 Looper mainLooper = Looper.getMainLooper();
@@ -692,13 +908,19 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
                 arrayList.add(this);
                 Context context = this.mContext;
                 Object obj = this.mLock;
-                SettingsObserver settingsObserver = new SettingsObserver(context, handler, Settings.Secure.getUriFor("enabled_vr_listeners"));
-                final EnabledComponentsObserver enabledComponentsObserver = new EnabledComponentsObserver(context, obj, arrayList);
-                new PackageMonitor() { // from class: com.android.server.vr.EnabledComponentsObserver.1
-                    public AnonymousClass1() {
-                    }
+                SettingsObserver settingsObserver =
+                        new SettingsObserver(
+                                context,
+                                handler,
+                                Settings.Secure.getUriFor("enabled_vr_listeners"));
+                final EnabledComponentsObserver enabledComponentsObserver =
+                        new EnabledComponentsObserver(context, obj, arrayList);
+                new PackageMonitor() { // from class:
+                                       // com.android.server.vr.EnabledComponentsObserver.1
+                    public AnonymousClass1() {}
 
-                    public final boolean onHandleForceStop(Intent intent, String[] strArr, int i2, boolean z) {
+                    public final boolean onHandleForceStop(
+                            Intent intent, String[] strArr, int i2, boolean z) {
                         EnabledComponentsObserver.this.rebuildAll();
                         return super.onHandleForceStop(intent, strArr, i2, z);
                     }
@@ -725,8 +947,14 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
             } else {
                 Slog.i("VrManagerService", "No default vr listener service found.");
             }
-            DisplayManager displayManager = (DisplayManager) getContext().getSystemService("display");
-            Vr2dDisplay vr2dDisplay = new Vr2dDisplay(displayManager, (WindowManagerInternal) LocalServices.getService(WindowManagerInternal.class), this.mVrManager);
+            DisplayManager displayManager =
+                    (DisplayManager) getContext().getSystemService("display");
+            Vr2dDisplay vr2dDisplay =
+                    new Vr2dDisplay(
+                            displayManager,
+                            (WindowManagerInternal)
+                                    LocalServices.getService(WindowManagerInternal.class),
+                            this.mVrManager);
             this.mVr2dDisplay = vr2dDisplay;
             getContext();
             boolean z = this.mBootsToVr;
@@ -742,18 +970,24 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
             if (z) {
                 vr2dDisplay.updateVirtualDisplay();
             }
-            getContext().registerReceiver(new BroadcastReceiver() { // from class: com.android.server.vr.VrManagerService.5
-                @Override // android.content.BroadcastReceiver
-                public final void onReceive(Context context2, Intent intent) {
-                    if ("android.intent.action.USER_UNLOCKED".equals(intent.getAction())) {
-                        VrManagerService vrManagerService = VrManagerService.this;
-                        synchronized (vrManagerService.mLock) {
-                            vrManagerService.mUserUnlocked = true;
-                            vrManagerService.updateVrModeAllowedLocked();
-                        }
-                    }
-                }
-            }, BatteryService$$ExternalSyntheticOutline0.m("android.intent.action.USER_UNLOCKED"));
+            getContext()
+                    .registerReceiver(
+                            new BroadcastReceiver() { // from class:
+                                                      // com.android.server.vr.VrManagerService.5
+                                @Override // android.content.BroadcastReceiver
+                                public final void onReceive(Context context2, Intent intent) {
+                                    if ("android.intent.action.USER_UNLOCKED"
+                                            .equals(intent.getAction())) {
+                                        VrManagerService vrManagerService = VrManagerService.this;
+                                        synchronized (vrManagerService.mLock) {
+                                            vrManagerService.mUserUnlocked = true;
+                                            vrManagerService.updateVrModeAllowedLocked();
+                                        }
+                                    }
+                                }
+                            },
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    "android.intent.action.USER_UNLOCKED"));
         }
     }
 
@@ -801,16 +1035,20 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
     }
 
     @Override // com.android.server.SystemService
-    public final void onUserSwitching(SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
-        FgThread.getHandler().post(new Runnable() { // from class: com.android.server.vr.VrManagerService$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                VrManagerService vrManagerService = VrManagerService.this;
-                synchronized (vrManagerService.mLock) {
-                    vrManagerService.mComponentObserver.rebuildAll();
-                }
-            }
-        });
+    public final void onUserSwitching(
+            SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
+        FgThread.getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.vr.VrManagerService$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                VrManagerService vrManagerService = VrManagerService.this;
+                                synchronized (vrManagerService.mLock) {
+                                    vrManagerService.mComponentObserver.rebuildAll();
+                                }
+                            }
+                        });
     }
 
     public final void setPersistentModeAndNotifyListenersLocked(boolean z) {
@@ -864,7 +1102,12 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setVrMode(boolean r17, android.content.ComponentName r18, int r19, int r20, android.content.ComponentName r21) {
+    public final void setVrMode(
+            boolean r17,
+            android.content.ComponentName r18,
+            int r19,
+            int r20,
+            android.content.ComponentName r21) {
         /*
             r16 = this;
             r0 = r16
@@ -946,21 +1189,39 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
             monitor-exit(r8)     // Catch: java.lang.Throwable -> L10
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.vr.VrManagerService.setVrMode(boolean, android.content.ComponentName, int, int, android.content.ComponentName):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.vr.VrManagerService.setVrMode(boolean,"
+                    + " android.content.ComponentName, int, int,"
+                    + " android.content.ComponentName):void");
     }
 
     public final void updateCompositorServiceLocked(int i, ComponentName componentName) {
         ManagedApplicationService managedApplicationService = this.mCurrentVrCompositorService;
-        if (managedApplicationService != null && (!Objects.equals(managedApplicationService.mComponent, componentName) || managedApplicationService.mUserId != i)) {
+        if (managedApplicationService != null
+                && (!Objects.equals(managedApplicationService.mComponent, componentName)
+                        || managedApplicationService.mUserId != i)) {
             managedApplicationService.disconnect();
-            Slog.i("VrManagerService", "Disconnecting compositor service: " + this.mCurrentVrCompositorService.mComponent);
+            Slog.i(
+                    "VrManagerService",
+                    "Disconnecting compositor service: "
+                            + this.mCurrentVrCompositorService.mComponent);
             this.mCurrentVrCompositorService = null;
         }
         if (componentName == null || this.mCurrentVrCompositorService != null) {
             return;
         }
         Slog.i("VrManagerService", "Connecting compositor service: " + componentName);
-        ManagedApplicationService managedApplicationService2 = new ManagedApplicationService(this.mContext, componentName, i, 0, null, null, this.mBootsToVr ? 1 : 3, this.mHandler, this.mEventCallback);
+        ManagedApplicationService managedApplicationService2 =
+                new ManagedApplicationService(
+                        this.mContext,
+                        componentName,
+                        i,
+                        0,
+                        null,
+                        null,
+                        this.mBootsToVr ? 1 : 3,
+                        this.mHandler,
+                        this.mEventCallback);
         this.mCurrentVrCompositorService = managedApplicationService2;
         managedApplicationService2.connect();
     }
@@ -977,12 +1238,22 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateCurrentVrServiceLocked(boolean r23, boolean r24, android.content.ComponentName r25, int r26, int r27, android.content.ComponentName r28) {
+    public final void updateCurrentVrServiceLocked(
+            boolean r23,
+            boolean r24,
+            android.content.ComponentName r25,
+            int r26,
+            int r27,
+            android.content.ComponentName r28) {
         /*
             Method dump skipped, instructions count: 338
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.vr.VrManagerService.updateCurrentVrServiceLocked(boolean, boolean, android.content.ComponentName, int, int, android.content.ComponentName):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.vr.VrManagerService.updateCurrentVrServiceLocked(boolean,"
+                    + " boolean, android.content.ComponentName, int, int,"
+                    + " android.content.ComponentName):void");
     }
 
     public final void updateDependentAppOpsLocked(int i, int i2, String str, String str2) {
@@ -991,11 +1262,17 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            AppOpsManager appOpsManager = (AppOpsManager) getContext().getSystemService(AppOpsManager.class);
+            AppOpsManager appOpsManager =
+                    (AppOpsManager) getContext().getSystemService(AppOpsManager.class);
             if (i2 != i) {
                 appOpsManager.setUserRestrictionForUser(24, false, this.mOverlayToken, null, i2);
             }
-            appOpsManager.setUserRestrictionForUser(24, this.mVrModeEnabled, this.mOverlayToken, str != null ? new PackageTagsList.Builder(1).add(str).build() : null, i);
+            appOpsManager.setUserRestrictionForUser(
+                    24,
+                    this.mVrModeEnabled,
+                    this.mOverlayToken,
+                    str != null ? new PackageTagsList.Builder(1).add(str).build() : null,
+                    i);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -1004,13 +1281,25 @@ public class VrManagerService extends SystemService implements ActivityTaskManag
     public final void updateVrModeAllowedLocked() {
         ManagedApplicationService managedApplicationService;
         boolean z = this.mBootsToVr;
-        boolean z2 = (this.mSystemSleepFlags == 7 || (z && this.mUseStandbyToExitVrMode)) && this.mUserUnlocked && !(this.mStandby && this.mUseStandbyToExitVrMode);
+        boolean z2 =
+                (this.mSystemSleepFlags == 7 || (z && this.mUseStandbyToExitVrMode))
+                        && this.mUserUnlocked
+                        && !(this.mStandby && this.mUseStandbyToExitVrMode);
         if (this.mVrModeAllowed != z2) {
             this.mVrModeAllowed = z2;
             if (!z2) {
                 setPersistentModeAndNotifyListenersLocked(false);
                 boolean z3 = this.mVrModeEnabled;
-                this.mPendingState = (!z3 || (managedApplicationService = this.mCurrentVrService) == null) ? null : new VrState(z3, this.mRunning2dInVr, managedApplicationService.mComponent, managedApplicationService.mUserId, this.mVrAppProcessId, this.mCurrentVrModeComponent);
+                this.mPendingState =
+                        (!z3 || (managedApplicationService = this.mCurrentVrService) == null)
+                                ? null
+                                : new VrState(
+                                        z3,
+                                        this.mRunning2dInVr,
+                                        managedApplicationService.mComponent,
+                                        managedApplicationService.mUserId,
+                                        this.mVrAppProcessId,
+                                        this.mCurrentVrModeComponent);
                 updateCurrentVrServiceLocked(false, false, null, 0, -1, null);
                 return;
             }

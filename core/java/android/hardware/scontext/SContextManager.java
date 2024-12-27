@@ -6,10 +6,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+
 import com.samsung.android.hardware.context.SemContextAttribute;
 import com.samsung.android.hardware.context.SemContextEvent;
 import com.samsung.android.hardware.context.SemContextListener;
 import com.samsung.android.hardware.context.SemContextManager;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -56,12 +58,15 @@ public class SContextManager extends SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SContextListener listener, int service, SContextAttribute attribute) {
+    public boolean registerListener(
+            SContextListener listener, int service, SContextAttribute attribute) {
         if (service == 48) {
             boolean res = setReferenceData(service, attribute);
             return res;
         }
-        if (attribute == null || !attribute.checkAttribute() || !checkListenerAndService(listener, service)) {
+        if (attribute == null
+                || !attribute.checkAttribute()
+                || !checkListenerAndService(listener, service)) {
             return false;
         }
         SContextListenerDelegate scontextListener = getListenerDelegate(listener);
@@ -73,13 +78,21 @@ public class SContextManager extends SemContextManager {
         if (!super.registerListener(scontextListener, service, attribute)) {
             return false;
         }
-        Log.d(TAG, "  .registerListener : listener = " + listener + ", service=" + SContext.getServiceName(service));
+        Log.d(
+                TAG,
+                "  .registerListener : listener = "
+                        + listener
+                        + ", service="
+                        + SContext.getServiceName(service));
         return true;
     }
 
     @Deprecated
-    public boolean registerListener(SContextListener listener, int service, SContextAttribute attribute, Looper looper) {
-        if (attribute == null || !attribute.checkAttribute() || !checkListenerAndService(listener, service)) {
+    public boolean registerListener(
+            SContextListener listener, int service, SContextAttribute attribute, Looper looper) {
+        if (attribute == null
+                || !attribute.checkAttribute()
+                || !checkListenerAndService(listener, service)) {
             return false;
         }
         SContextListenerDelegate scontextListener = getListenerDelegate(listener);
@@ -91,7 +104,12 @@ public class SContextManager extends SemContextManager {
         if (!super.registerListener(scontextListener, service, attribute, looper)) {
             return false;
         }
-        Log.d(TAG, "  .registerListener : listener = " + listener + ", service=" + SContext.getServiceName(service));
+        Log.d(
+                TAG,
+                "  .registerListener : listener = "
+                        + listener
+                        + ", service="
+                        + SContext.getServiceName(service));
         return true;
     }
 
@@ -148,7 +166,8 @@ public class SContextManager extends SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SContextListener listener, int service, int arg1, int arg2, int arg3) {
+    public boolean registerListener(
+            SContextListener listener, int service, int arg1, int arg2, int arg3) {
         SContextAttribute attribute = null;
         if (service == 35) {
             attribute = new SContextInactiveTimerAttribute(arg1, arg2, arg3, 1500, 1500);
@@ -158,7 +177,8 @@ public class SContextManager extends SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SContextListener listener, int service, int arg1, double arg2, double arg3) {
+    public boolean registerListener(
+            SContextListener listener, int service, int arg1, double arg2, double arg3) {
         SContextAttribute attribute = null;
         if (service == 2) {
             attribute = new SContextPedometerAttribute(arg1, arg2, arg3);
@@ -168,7 +188,8 @@ public class SContextManager extends SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SContextListener listener, int service, int arg1, int arg2, boolean arg3) {
+    public boolean registerListener(
+            SContextListener listener, int service, int arg1, int arg2, boolean arg3) {
         SContextAttribute attribute = null;
         if (service == 23) {
             attribute = new SContextTemperatureAlertAttribute(arg1, arg2, arg3);
@@ -178,7 +199,8 @@ public class SContextManager extends SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SContextListener listener, int service, int arg1, int arg2, double arg3, int arg4) {
+    public boolean registerListener(
+            SContextListener listener, int service, int arg1, int arg2, double arg3, int arg4) {
         SContextAttribute attribute = null;
         if (service == 9) {
             attribute = new SContextMovementForPositioningAttribute(arg1, arg2, arg3, arg4);
@@ -188,7 +210,8 @@ public class SContextManager extends SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SContextListener listener, int service, int arg1, int arg2, int arg3, int arg4) {
+    public boolean registerListener(
+            SContextListener listener, int service, int arg1, int arg2, int arg3, int arg4) {
         SContextAttribute attribute = null;
         if (service == 28) {
             attribute = new SContextSpecificPoseAlertAttribute(arg1, arg2, arg3, arg4);
@@ -198,7 +221,14 @@ public class SContextManager extends SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SContextListener listener, int service, int arg1, int arg2, int arg3, int arg4, int arg5) {
+    public boolean registerListener(
+            SContextListener listener,
+            int service,
+            int arg1,
+            int arg2,
+            int arg3,
+            int arg4,
+            int arg5) {
         SContextAttribute attribute = null;
         if (service == 24) {
             attribute = new SContextActivityLocationLoggingAttribute(arg1, arg2, arg3, arg4, arg5);
@@ -237,7 +267,12 @@ public class SContextManager extends SemContextManager {
             Log.e(TAG, "  .unregisterListener : SContextListener is null!");
         } else {
             super.unregisterListener(scontextListener, service);
-            Log.d(TAG, "  .unregisterListener : listener = " + listener + ", service=" + SContext.getServiceName(service));
+            Log.d(
+                    TAG,
+                    "  .unregisterListener : listener = "
+                            + listener
+                            + ", service="
+                            + SContext.getServiceName(service));
         }
     }
 
@@ -255,11 +290,21 @@ public class SContextManager extends SemContextManager {
     }
 
     @Deprecated
-    public boolean changeParameters(SContextListener listener, int service, SContextAttribute attribute) {
-        if (attribute == null || !attribute.checkAttribute() || !checkListenerAndService(listener, service)) {
+    public boolean changeParameters(
+            SContextListener listener, int service, SContextAttribute attribute) {
+        if (attribute == null
+                || !attribute.checkAttribute()
+                || !checkListenerAndService(listener, service)) {
             return false;
         }
-        if (service != 1 && service != 2 && service != 33 && service != 35 && service != 39 && service != 47 && service != 51 && service != 53) {
+        if (service != 1
+                && service != 2
+                && service != 33
+                && service != 35
+                && service != 39
+                && service != 47
+                && service != 51
+                && service != 53) {
             return false;
         }
         SContextListenerDelegate scontextListener = getListenerDelegate(listener);
@@ -274,7 +319,8 @@ public class SContextManager extends SemContextManager {
     }
 
     @Deprecated
-    public boolean changeParameters(SContextListener listener, int service, int arg1, int arg2, int arg3, int arg4) {
+    public boolean changeParameters(
+            SContextListener listener, int service, int arg1, int arg2, int arg3, int arg4) {
         SContextAttribute attribute = null;
         if (service == 35) {
             attribute = new SContextInactiveTimerAttribute(1, arg1, arg2, arg3, arg4);
@@ -284,7 +330,8 @@ public class SContextManager extends SemContextManager {
     }
 
     @Deprecated
-    public boolean changeParameters(SContextListener listener, int service, int arg1, double arg2, double arg3) {
+    public boolean changeParameters(
+            SContextListener listener, int service, int arg1, double arg2, double arg3) {
         SContextAttribute attribute = null;
         if (service == 2) {
             attribute = new SContextPedometerAttribute(arg1, arg2, arg3);
@@ -310,7 +357,14 @@ public class SContextManager extends SemContextManager {
         if (!isAvailableService(service)) {
             return;
         }
-        if (service != 2 && service != 25 && service != 26 && service != 29 && service != 40 && service != 50 && service != 51 && service != 52) {
+        if (service != 2
+                && service != 25
+                && service != 26
+                && service != 29
+                && service != 40
+                && service != 50
+                && service != 51
+                && service != 52) {
             Log.e(TAG, "  .requestToUpdate : This service is not supported!");
             return;
         }
@@ -501,14 +555,16 @@ public class SContextManager extends SemContextManager {
                 sb.append(" Angle : " + autoRotation.getAngle());
                 break;
             case 26:
-                SContextActivityBatch activityBatchContext = scontextevent.getActivityBatchContext();
+                SContextActivityBatch activityBatchContext =
+                        scontextevent.getActivityBatchContext();
                 if (activityBatchContext.getMode() == 1) {
                     res = true;
                     break;
                 }
                 break;
             case 33:
-                SContextStepLevelMonitor stepLevelMonitorContext = scontextevent.getStepLevelMonitorContext();
+                SContextStepLevelMonitor stepLevelMonitorContext =
+                        scontextevent.getStepLevelMonitorContext();
                 if (stepLevelMonitorContext.getMode() == 1) {
                     res = true;
                     break;
@@ -529,26 +585,43 @@ public class SContextManager extends SemContextManager {
             this.mListener = listener;
             Looper mLooper = looper != null ? looper : SContextManager.this.mMainLooper;
             this.mIsHistoryData = isHistoryData;
-            this.mHandler = new Handler(mLooper) { // from class: android.hardware.scontext.SContextManager.SContextListenerDelegate.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    SContextEvent scontextEvent;
-                    SContext scontext;
-                    if (!SContextListenerDelegate.this.mDereisgeredListener && SContextListenerDelegate.this.mListener != null && (scontextEvent = (SContextEvent) msg.obj) != null && (scontext = scontextEvent.scontext) != null) {
-                        int type = scontext.getType();
-                        if (SContextListenerDelegate.this.mIsHistoryData) {
-                            Log.d(SContextManager.TAG, "Data is received so remove listener related HistoryData");
-                            SContextListenerDelegate.this.mListener.onSContextChanged(scontextEvent);
-                            SContextManager.this.unregisterListener(SContextListenerDelegate.this.mListener, type);
-                        } else if (!SContextManager.this.checkHistoryMode(scontextEvent)) {
-                            SContextListenerDelegate.this.mListener.onSContextChanged(scontextEvent);
-                        } else if (SContextManager.this.mIsHistoryDataListener != null && SContextManager.this.mIsHistoryDataListener.equals(SContextListenerDelegate.this.mListener)) {
-                            Log.d(SContextManager.TAG, "Listener is already registered and history data is sent to Application");
-                            SContextManager.this.mIsHistoryDataListener.onSContextChanged(scontextEvent);
+            this.mHandler =
+                    new Handler(mLooper) { // from class:
+                        // android.hardware.scontext.SContextManager.SContextListenerDelegate.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            SContextEvent scontextEvent;
+                            SContext scontext;
+                            if (!SContextListenerDelegate.this.mDereisgeredListener
+                                    && SContextListenerDelegate.this.mListener != null
+                                    && (scontextEvent = (SContextEvent) msg.obj) != null
+                                    && (scontext = scontextEvent.scontext) != null) {
+                                int type = scontext.getType();
+                                if (SContextListenerDelegate.this.mIsHistoryData) {
+                                    Log.d(
+                                            SContextManager.TAG,
+                                            "Data is received so remove listener related"
+                                                    + " HistoryData");
+                                    SContextListenerDelegate.this.mListener.onSContextChanged(
+                                            scontextEvent);
+                                    SContextManager.this.unregisterListener(
+                                            SContextListenerDelegate.this.mListener, type);
+                                } else if (!SContextManager.this.checkHistoryMode(scontextEvent)) {
+                                    SContextListenerDelegate.this.mListener.onSContextChanged(
+                                            scontextEvent);
+                                } else if (SContextManager.this.mIsHistoryDataListener != null
+                                        && SContextManager.this.mIsHistoryDataListener.equals(
+                                                SContextListenerDelegate.this.mListener)) {
+                                    Log.d(
+                                            SContextManager.TAG,
+                                            "Listener is already registered and history data is"
+                                                    + " sent to Application");
+                                    SContextManager.this.mIsHistoryDataListener.onSContextChanged(
+                                            scontextEvent);
+                                }
+                            }
                         }
-                    }
-                }
-            };
+                    };
         }
 
         public SContextListener getListener() {

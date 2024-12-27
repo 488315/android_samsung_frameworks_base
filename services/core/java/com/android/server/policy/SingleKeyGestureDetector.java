@@ -8,9 +8,12 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.KeyEvent;
+
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.rune.InputRune;
+
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.runtime.ObjectMethods;
@@ -53,7 +56,10 @@ public final class SingleKeyGestureDetector {
         }
 
         public final String toString() {
-            return "KeyCode=" + KeyEvent.keyCodeToString(this.mKeyCode) + ", size=" + this.mTypeList.size();
+            return "KeyCode="
+                    + KeyEvent.keyCodeToString(this.mKeyCode)
+                    + ", size="
+                    + this.mTypeList.size();
         }
     }
 
@@ -81,20 +87,33 @@ public final class SingleKeyGestureDetector {
             SingleKeyGestureDetector singleKeyGestureDetector = SingleKeyGestureDetector.this;
             if (i6 == 0) {
                 if (SingleKeyGestureDetector.DEBUG) {
-                    Log.i("SingleKeyGesture", "Detect long press " + KeyEvent.keyCodeToString(i3) + " type=" + i2 + " info : " + singleKeyGestureDetector.mHandleLongPressInfo);
+                    Log.i(
+                            "SingleKeyGesture",
+                            "Detect long press "
+                                    + KeyEvent.keyCodeToString(i3)
+                                    + " type="
+                                    + i2
+                                    + " info : "
+                                    + singleKeyGestureDetector.mHandleLongPressInfo);
                 }
-                HandleLongPressInfo handleLongPressInfo = singleKeyGestureDetector.mHandleLongPressInfo;
+                HandleLongPressInfo handleLongPressInfo =
+                        singleKeyGestureDetector.mHandleLongPressInfo;
                 int i7 = handleLongPressInfo.mKeyCode;
-                HandleLongPressInfo handleLongPressInfo2 = singleKeyGestureDetector.mHandleLongPressInfo;
+                HandleLongPressInfo handleLongPressInfo2 =
+                        singleKeyGestureDetector.mHandleLongPressInfo;
                 if (i3 == i7 && handleLongPressInfo.mTypeList.size() == 1) {
                     Log.i("SingleKeyGesture", "The long press already have been consumed");
                     handleLongPressInfo2.reset();
                     return;
                 }
-                if ((handleLongPressInfo2.mKeyCode != 0 || handleLongPressInfo2.mTypeList.size() != 0) && (i3 != handleLongPressInfo2.mKeyCode || handleLongPressInfo2.mTypeList.size() >= 2)) {
+                if ((handleLongPressInfo2.mKeyCode != 0
+                                || handleLongPressInfo2.mTypeList.size() != 0)
+                        && (i3 != handleLongPressInfo2.mKeyCode
+                                || handleLongPressInfo2.mTypeList.size() >= 2)) {
                     handleLongPressInfo2.reset();
                 }
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(i3, i2, "addInfo, keyCode=", " type=", "SingleKeyGesture");
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i3, i2, "addInfo, keyCode=", " type=", "SingleKeyGesture");
                 handleLongPressInfo2.mKeyCode = i3;
                 handleLongPressInfo2.mTypeList.add(Integer.valueOf(i2));
                 singleKeyRule.onLongPress(singleKeyGestureDetector.mLastDownTime, keyEvent, i);
@@ -102,7 +121,9 @@ public final class SingleKeyGestureDetector {
             }
             if (i6 == 1) {
                 if (SingleKeyGestureDetector.DEBUG) {
-                    Log.i("SingleKeyGesture", "Detect very long press " + KeyEvent.keyCodeToString(i3));
+                    Log.i(
+                            "SingleKeyGesture",
+                            "Detect very long press " + KeyEvent.keyCodeToString(i3));
                 }
                 long j = singleKeyGestureDetector.mLastDownTime;
                 singleKeyRule.onVeryLongPress();
@@ -113,7 +134,9 @@ public final class SingleKeyGestureDetector {
                     return;
                 }
                 if (SingleKeyGestureDetector.DEBUG) {
-                    Log.i("SingleKeyGesture", "Detect key up " + KeyEvent.keyCodeToString(i3) + " on display " + i5);
+                    Log.i(
+                            "SingleKeyGesture",
+                            "Detect key up " + KeyEvent.keyCodeToString(i3) + " on display " + i5);
                 }
                 singleKeyRule.onKeyUp(i4, i5, singleKeyGestureDetector.mLastDownTime);
                 return;
@@ -127,9 +150,12 @@ public final class SingleKeyGestureDetector {
                 UiModeManagerService$13$$ExternalSyntheticOutline0.m(sb, i4, "SingleKeyGesture");
             }
             if (i4 != 1) {
-                singleKeyRule.onMultiPress(singleKeyGestureDetector.mLastDownTime, i4, i5, keyEvent);
+                singleKeyRule.onMultiPress(
+                        singleKeyGestureDetector.mLastDownTime, i4, i5, keyEvent);
             } else if (singleKeyGestureDetector.mTriggeredMultiPressTime > keyEvent.getDownTime()) {
-                Log.d("SingleKeyGesture", "SinglePress downTime is older than multiPress triggered time.");
+                Log.d(
+                        "SingleKeyGesture",
+                        "SinglePress downTime is older than multiPress triggered time.");
             } else {
                 singleKeyRule.onPress(singleKeyGestureDetector.mLastDownTime, keyEvent, i5);
             }
@@ -146,7 +172,14 @@ public final class SingleKeyGestureDetector {
         public final int policyFlags;
         public final int pressCount;
 
-        public MessageObject(SingleKeyRule singleKeyRule, int i, int i2, int i3, KeyEvent keyEvent, int i4, int i5) {
+        public MessageObject(
+                SingleKeyRule singleKeyRule,
+                int i,
+                int i2,
+                int i3,
+                KeyEvent keyEvent,
+                int i4,
+                int i5) {
             this.activeRule = singleKeyRule;
             this.keyCode = i;
             this.pressCount = i2;
@@ -158,17 +191,63 @@ public final class SingleKeyGestureDetector {
 
         @Override // java.lang.Record
         public final boolean equals(Object obj) {
-            return (boolean) ObjectMethods.bootstrap(MethodHandles.lookup(), "equals", MethodType.methodType(Boolean.TYPE, MessageObject.class, Object.class), MessageObject.class, "activeRule;keyCode;pressCount;displayId;event;policyFlags;longPressType", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->activeRule:Lcom/android/server/policy/SingleKeyGestureDetector$SingleKeyRule;", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->keyCode:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->pressCount:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->displayId:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->event:Landroid/view/KeyEvent;", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->policyFlags:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->longPressType:I").dynamicInvoker().invoke(this, obj) /* invoke-custom */;
+            return (boolean)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "equals",
+                                    MethodType.methodType(
+                                            Boolean.TYPE, MessageObject.class, Object.class),
+                                    MessageObject.class,
+                                    "activeRule;keyCode;pressCount;displayId;event;policyFlags;longPressType",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->activeRule:Lcom/android/server/policy/SingleKeyGestureDetector$SingleKeyRule;",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->keyCode:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->pressCount:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->displayId:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->event:Landroid/view/KeyEvent;",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->policyFlags:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->longPressType:I")
+                            .dynamicInvoker()
+                            .invoke(this, obj) /* invoke-custom */;
         }
 
         @Override // java.lang.Record
         public final int hashCode() {
-            return (int) ObjectMethods.bootstrap(MethodHandles.lookup(), "hashCode", MethodType.methodType(Integer.TYPE, MessageObject.class), MessageObject.class, "activeRule;keyCode;pressCount;displayId;event;policyFlags;longPressType", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->activeRule:Lcom/android/server/policy/SingleKeyGestureDetector$SingleKeyRule;", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->keyCode:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->pressCount:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->displayId:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->event:Landroid/view/KeyEvent;", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->policyFlags:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->longPressType:I").dynamicInvoker().invoke(this) /* invoke-custom */;
+            return (int)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "hashCode",
+                                    MethodType.methodType(Integer.TYPE, MessageObject.class),
+                                    MessageObject.class,
+                                    "activeRule;keyCode;pressCount;displayId;event;policyFlags;longPressType",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->activeRule:Lcom/android/server/policy/SingleKeyGestureDetector$SingleKeyRule;",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->keyCode:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->pressCount:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->displayId:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->event:Landroid/view/KeyEvent;",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->policyFlags:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->longPressType:I")
+                            .dynamicInvoker()
+                            .invoke(this) /* invoke-custom */;
         }
 
         @Override // java.lang.Record
         public final String toString() {
-            return (String) ObjectMethods.bootstrap(MethodHandles.lookup(), "toString", MethodType.methodType(String.class, MessageObject.class), MessageObject.class, "activeRule;keyCode;pressCount;displayId;event;policyFlags;longPressType", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->activeRule:Lcom/android/server/policy/SingleKeyGestureDetector$SingleKeyRule;", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->keyCode:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->pressCount:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->displayId:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->event:Landroid/view/KeyEvent;", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->policyFlags:I", "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->longPressType:I").dynamicInvoker().invoke(this) /* invoke-custom */;
+            return (String)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "toString",
+                                    MethodType.methodType(String.class, MessageObject.class),
+                                    MessageObject.class,
+                                    "activeRule;keyCode;pressCount;displayId;event;policyFlags;longPressType",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->activeRule:Lcom/android/server/policy/SingleKeyGestureDetector$SingleKeyRule;",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->keyCode:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->pressCount:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->displayId:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->event:Landroid/view/KeyEvent;",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->policyFlags:I",
+                                    "FIELD:Lcom/android/server/policy/SingleKeyGestureDetector$MessageObject;->longPressType:I")
+                            .dynamicInvoker()
+                            .invoke(this) /* invoke-custom */;
         }
     }
 
@@ -186,7 +265,8 @@ public final class SingleKeyGestureDetector {
             if (this == obj) {
                 return true;
             }
-            return (obj instanceof SingleKeyRule) && this.mKeyCode == ((SingleKeyRule) obj).mKeyCode;
+            return (obj instanceof SingleKeyRule)
+                    && this.mKeyCode == ((SingleKeyRule) obj).mKeyCode;
         }
 
         public long getLongPressTimeoutMs() {
@@ -194,7 +274,8 @@ public final class SingleKeyGestureDetector {
         }
 
         public int getMaxMultiPressCount() {
-            KeyCustomizationManager keyCustomizationManager = SingleKeyGestureDetector.mKeyCustomizationPolicy;
+            KeyCustomizationManager keyCustomizationManager =
+                    SingleKeyGestureDetector.mKeyCustomizationPolicy;
             int i = this.mKeyCode;
             if (keyCustomizationManager.hasLastInfo(64, i)) {
                 return 5;
@@ -217,8 +298,7 @@ public final class SingleKeyGestureDetector {
             sendBroadcastIfNeeded(keyEvent);
         }
 
-        public void onKeyUp(int i, int i2, long j) {
-        }
+        public void onKeyUp(int i, int i2, long j) {}
 
         public void onKeyUp(KeyEvent keyEvent) {
             sendBroadcastIfNeeded(keyEvent);
@@ -235,14 +315,16 @@ public final class SingleKeyGestureDetector {
 
         public abstract void onPress(long j, KeyEvent keyEvent, int i);
 
-        public void onVeryLongPress() {
-        }
+        public void onVeryLongPress() {}
 
         public final void sendBroadcastIfNeeded(KeyEvent keyEvent) {
             Set set = SingleKeyGestureDetector.KEYCODE_KEY_DISPATCHING_ALLOWLIST;
             int i = this.mKeyCode;
-            if ((!((ArraySet) set).contains(Integer.valueOf(i)) || (keyEvent.getFlags() & 268435456) == 0) && SingleKeyGestureDetector.mKeyCustomizationPolicy.getLastAction(3, i) == 2) {
-                SingleKeyGestureDetector.mKeyCustomizationPolicy.launchPressSendBroadcast(keyEvent, i, this.mIsKeyLongPressed);
+            if ((!((ArraySet) set).contains(Integer.valueOf(i))
+                            || (keyEvent.getFlags() & 268435456) == 0)
+                    && SingleKeyGestureDetector.mKeyCustomizationPolicy.getLastAction(3, i) == 2) {
+                SingleKeyGestureDetector.mKeyCustomizationPolicy.launchPressSendBroadcast(
+                        keyEvent, i, this.mIsKeyLongPressed);
             }
         }
 
@@ -253,7 +335,14 @@ public final class SingleKeyGestureDetector {
         }
 
         public final String toString() {
-            return "KeyCode=" + KeyEvent.keyCodeToString(this.mKeyCode) + ", LongPress=" + supportLongPress() + ", VeryLongPress=" + supportVeryLongPress() + ", MaxMultiPressCount=" + getMaxMultiPressCount();
+            return "KeyCode="
+                    + KeyEvent.keyCodeToString(this.mKeyCode)
+                    + ", LongPress="
+                    + supportLongPress()
+                    + ", VeryLongPress="
+                    + supportVeryLongPress()
+                    + ", MaxMultiPressCount="
+                    + getMaxMultiPressCount();
         }
     }
 

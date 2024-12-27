@@ -1,13 +1,10 @@
 package android.media;
 
-import android.media.CallbackUtil;
-import android.media.ILoudnessCodecUpdatesDispatcher;
-import android.media.LoudnessCodecController;
-import android.media.LoudnessCodecDispatcher;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -25,11 +22,17 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
     private final IAudioService mAudioService;
 
     /* JADX INFO: Access modifiers changed from: private */
-    static final class LoudnessCodecUpdatesDispatcherStub extends ILoudnessCodecUpdatesDispatcher.Stub {
+    static final class LoudnessCodecUpdatesDispatcherStub
+            extends ILoudnessCodecUpdatesDispatcher.Stub {
         private static LoudnessCodecUpdatesDispatcherStub sLoudnessCodecStub;
-        private final CallbackUtil.LazyListenerManager<LoudnessCodecController.OnLoudnessCodecUpdateListener> mLoudnessListenerMgr = new CallbackUtil.LazyListenerManager<>();
+        private final CallbackUtil.LazyListenerManager<
+                        LoudnessCodecController.OnLoudnessCodecUpdateListener>
+                mLoudnessListenerMgr = new CallbackUtil.LazyListenerManager<>();
         private final Object mLock = new Object();
-        private final HashMap<LoudnessCodecController.OnLoudnessCodecUpdateListener, LoudnessCodecController> mConfiguratorListener = new HashMap<>();
+        private final HashMap<
+                        LoudnessCodecController.OnLoudnessCodecUpdateListener,
+                        LoudnessCodecController>
+                mConfiguratorListener = new HashMap<>();
 
         public static synchronized LoudnessCodecUpdatesDispatcherStub getInstance() {
             LoudnessCodecUpdatesDispatcherStub loudnessCodecUpdatesDispatcherStub;
@@ -42,44 +45,76 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
             return loudnessCodecUpdatesDispatcherStub;
         }
 
-        private LoudnessCodecUpdatesDispatcherStub() {
-        }
+        private LoudnessCodecUpdatesDispatcherStub() {}
 
         @Override // android.media.ILoudnessCodecUpdatesDispatcher
-        public void dispatchLoudnessCodecParameterChange(final int sessionId, final PersistableBundle params) {
-            this.mLoudnessListenerMgr.callListeners(new CallbackUtil.CallbackMethod() { // from class: android.media.LoudnessCodecDispatcher$LoudnessCodecUpdatesDispatcherStub$$ExternalSyntheticLambda0
-                @Override // android.media.CallbackUtil.CallbackMethod
-                public final void callbackMethod(Object obj) {
-                    LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub.this.lambda$dispatchLoudnessCodecParameterChange$2(sessionId, params, (LoudnessCodecController.OnLoudnessCodecUpdateListener) obj);
-                }
-            });
+        public void dispatchLoudnessCodecParameterChange(
+                final int sessionId, final PersistableBundle params) {
+            this.mLoudnessListenerMgr.callListeners(
+                    new CallbackUtil.CallbackMethod() { // from class:
+                        // android.media.LoudnessCodecDispatcher$LoudnessCodecUpdatesDispatcherStub$$ExternalSyntheticLambda0
+                        @Override // android.media.CallbackUtil.CallbackMethod
+                        public final void callbackMethod(Object obj) {
+                            LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub.this
+                                    .lambda$dispatchLoudnessCodecParameterChange$2(
+                                            sessionId,
+                                            params,
+                                            (LoudnessCodecController.OnLoudnessCodecUpdateListener)
+                                                    obj);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$dispatchLoudnessCodecParameterChange$2(final int sessionId, final PersistableBundle params, LoudnessCodecController.OnLoudnessCodecUpdateListener listener) {
+        public /* synthetic */ void lambda$dispatchLoudnessCodecParameterChange$2(
+                final int sessionId,
+                final PersistableBundle params,
+                LoudnessCodecController.OnLoudnessCodecUpdateListener listener) {
             synchronized (this.mLock) {
-                this.mConfiguratorListener.computeIfPresent(listener, new BiFunction() { // from class: android.media.LoudnessCodecDispatcher$LoudnessCodecUpdatesDispatcherStub$$ExternalSyntheticLambda3
-                    @Override // java.util.function.BiFunction
-                    public final Object apply(Object obj, Object obj2) {
-                        return LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub.lambda$dispatchLoudnessCodecParameterChange$1(sessionId, params, (LoudnessCodecController.OnLoudnessCodecUpdateListener) obj, (LoudnessCodecController) obj2);
-                    }
-                });
+                this.mConfiguratorListener.computeIfPresent(
+                        listener,
+                        new BiFunction() { // from class:
+                            // android.media.LoudnessCodecDispatcher$LoudnessCodecUpdatesDispatcherStub$$ExternalSyntheticLambda3
+                            @Override // java.util.function.BiFunction
+                            public final Object apply(Object obj, Object obj2) {
+                                return LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub
+                                        .lambda$dispatchLoudnessCodecParameterChange$1(
+                                                sessionId,
+                                                params,
+                                                (LoudnessCodecController
+                                                                .OnLoudnessCodecUpdateListener)
+                                                        obj,
+                                                (LoudnessCodecController) obj2);
+                            }
+                        });
             }
         }
 
-        static /* synthetic */ LoudnessCodecController lambda$dispatchLoudnessCodecParameterChange$1(int sessionId, final PersistableBundle params, final LoudnessCodecController.OnLoudnessCodecUpdateListener l, LoudnessCodecController lcConfig) {
+        static /* synthetic */ LoudnessCodecController
+                lambda$dispatchLoudnessCodecParameterChange$1(
+                        int sessionId,
+                        final PersistableBundle params,
+                        final LoudnessCodecController.OnLoudnessCodecUpdateListener l,
+                        LoudnessCodecController lcConfig) {
             if (lcConfig.getSessionId() == sessionId) {
-                lcConfig.mediaCodecsConsume(new Consumer() { // from class: android.media.LoudnessCodecDispatcher$LoudnessCodecUpdatesDispatcherStub$$ExternalSyntheticLambda2
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub.lambda$dispatchLoudnessCodecParameterChange$0(PersistableBundle.this, l, (Map.Entry) obj);
-                    }
-                });
+                lcConfig.mediaCodecsConsume(
+                        new Consumer() { // from class:
+                            // android.media.LoudnessCodecDispatcher$LoudnessCodecUpdatesDispatcherStub$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub
+                                        .lambda$dispatchLoudnessCodecParameterChange$0(
+                                                PersistableBundle.this, l, (Map.Entry) obj);
+                            }
+                        });
             }
             return lcConfig;
         }
 
-        static /* synthetic */ void lambda$dispatchLoudnessCodecParameterChange$0(PersistableBundle params, LoudnessCodecController.OnLoudnessCodecUpdateListener l, Map.Entry mcEntry) {
+        static /* synthetic */ void lambda$dispatchLoudnessCodecParameterChange$0(
+                PersistableBundle params,
+                LoudnessCodecController.OnLoudnessCodecUpdateListener l,
+                Map.Entry mcEntry) {
             LoudnessCodecInfo codecInfo = (LoudnessCodecInfo) mcEntry.getKey();
             String infoKey = Integer.toString(codecInfo.hashCode());
             Bundle bundle = null;
@@ -100,7 +135,9 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
                         try {
                             mediaCodec.setParameters(bundle);
                         } catch (IllegalStateException e) {
-                            Log.w(LoudnessCodecDispatcher.TAG, "Cannot set loudness bundle on media codec " + mediaCodec);
+                            Log.w(
+                                    LoudnessCodecDispatcher.TAG,
+                                    "Cannot set loudness bundle on media codec " + mediaCodec);
                         }
                     }
                     if (canBreak) {
@@ -113,42 +150,66 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
         private static Bundle filterLoudnessParams(Bundle bundle) {
             Bundle filteredBundle = new Bundle();
             if (bundle.containsKey(MediaFormat.KEY_AAC_DRC_TARGET_REFERENCE_LEVEL)) {
-                filteredBundle.putInt(MediaFormat.KEY_AAC_DRC_TARGET_REFERENCE_LEVEL, bundle.getInt(MediaFormat.KEY_AAC_DRC_TARGET_REFERENCE_LEVEL));
+                filteredBundle.putInt(
+                        MediaFormat.KEY_AAC_DRC_TARGET_REFERENCE_LEVEL,
+                        bundle.getInt(MediaFormat.KEY_AAC_DRC_TARGET_REFERENCE_LEVEL));
             }
             if (bundle.containsKey(MediaFormat.KEY_AAC_DRC_HEAVY_COMPRESSION)) {
-                filteredBundle.putInt(MediaFormat.KEY_AAC_DRC_HEAVY_COMPRESSION, bundle.getInt(MediaFormat.KEY_AAC_DRC_HEAVY_COMPRESSION));
+                filteredBundle.putInt(
+                        MediaFormat.KEY_AAC_DRC_HEAVY_COMPRESSION,
+                        bundle.getInt(MediaFormat.KEY_AAC_DRC_HEAVY_COMPRESSION));
             }
             if (bundle.containsKey(MediaFormat.KEY_AAC_DRC_EFFECT_TYPE)) {
-                filteredBundle.putInt(MediaFormat.KEY_AAC_DRC_EFFECT_TYPE, bundle.getInt(MediaFormat.KEY_AAC_DRC_EFFECT_TYPE));
+                filteredBundle.putInt(
+                        MediaFormat.KEY_AAC_DRC_EFFECT_TYPE,
+                        bundle.getInt(MediaFormat.KEY_AAC_DRC_EFFECT_TYPE));
             }
             if (bundle.containsKey(MediaFormat.KEY_AAC_DRC_BOOST_FACTOR)) {
-                filteredBundle.putInt(MediaFormat.KEY_AAC_DRC_BOOST_FACTOR, bundle.getInt(MediaFormat.KEY_AAC_DRC_BOOST_FACTOR));
+                filteredBundle.putInt(
+                        MediaFormat.KEY_AAC_DRC_BOOST_FACTOR,
+                        bundle.getInt(MediaFormat.KEY_AAC_DRC_BOOST_FACTOR));
             }
             if (bundle.containsKey(MediaFormat.KEY_AAC_DRC_ATTENUATION_FACTOR)) {
-                filteredBundle.putInt(MediaFormat.KEY_AAC_DRC_ATTENUATION_FACTOR, bundle.getInt(MediaFormat.KEY_AAC_DRC_ATTENUATION_FACTOR));
+                filteredBundle.putInt(
+                        MediaFormat.KEY_AAC_DRC_ATTENUATION_FACTOR,
+                        bundle.getInt(MediaFormat.KEY_AAC_DRC_ATTENUATION_FACTOR));
             }
             if (bundle.containsKey(MediaFormat.KEY_AAC_DRC_ALBUM_MODE)) {
-                filteredBundle.putInt(MediaFormat.KEY_AAC_DRC_ALBUM_MODE, bundle.getInt(MediaFormat.KEY_AAC_DRC_ALBUM_MODE));
+                filteredBundle.putInt(
+                        MediaFormat.KEY_AAC_DRC_ALBUM_MODE,
+                        bundle.getInt(MediaFormat.KEY_AAC_DRC_ALBUM_MODE));
             }
             return filteredBundle;
         }
 
-        void addLoudnessCodecListener(final CallbackUtil.DispatcherStub dispatcher, LoudnessCodecController configurator, Executor executor, LoudnessCodecController.OnLoudnessCodecUpdateListener listener) {
+        void addLoudnessCodecListener(
+                final CallbackUtil.DispatcherStub dispatcher,
+                LoudnessCodecController configurator,
+                Executor executor,
+                LoudnessCodecController.OnLoudnessCodecUpdateListener listener) {
             Objects.requireNonNull(configurator);
             Objects.requireNonNull(executor);
             Objects.requireNonNull(listener);
-            this.mLoudnessListenerMgr.addListener(executor, listener, "addLoudnessCodecListener", new Supplier() { // from class: android.media.LoudnessCodecDispatcher$LoudnessCodecUpdatesDispatcherStub$$ExternalSyntheticLambda1
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    return LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub.lambda$addLoudnessCodecListener$3(CallbackUtil.DispatcherStub.this);
-                }
-            });
+            this.mLoudnessListenerMgr.addListener(
+                    executor,
+                    listener,
+                    "addLoudnessCodecListener",
+                    new Supplier() { // from class:
+                        // android.media.LoudnessCodecDispatcher$LoudnessCodecUpdatesDispatcherStub$$ExternalSyntheticLambda1
+                        @Override // java.util.function.Supplier
+                        public final Object get() {
+                            return LoudnessCodecDispatcher.LoudnessCodecUpdatesDispatcherStub
+                                    .lambda$addLoudnessCodecListener$3(
+                                            CallbackUtil.DispatcherStub.this);
+                        }
+                    });
             synchronized (this.mLock) {
                 this.mConfiguratorListener.put(listener, configurator);
             }
         }
 
-        static /* synthetic */ CallbackUtil.DispatcherStub lambda$addLoudnessCodecListener$3(CallbackUtil.DispatcherStub dispatcher) {
+        static /* synthetic */ CallbackUtil.DispatcherStub lambda$addLoudnessCodecListener$3(
+                CallbackUtil.DispatcherStub dispatcher) {
             return dispatcher;
         }
 
@@ -156,12 +217,19 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
             Objects.requireNonNull(configurator);
             LoudnessCodecController.OnLoudnessCodecUpdateListener listenerToRemove = null;
             synchronized (this.mLock) {
-                Iterator<Map.Entry<LoudnessCodecController.OnLoudnessCodecUpdateListener, LoudnessCodecController>> iterator = this.mConfiguratorListener.entrySet().iterator();
+                Iterator<
+                                Map.Entry<
+                                        LoudnessCodecController.OnLoudnessCodecUpdateListener,
+                                        LoudnessCodecController>>
+                        iterator = this.mConfiguratorListener.entrySet().iterator();
                 while (true) {
                     if (!iterator.hasNext()) {
                         break;
                     }
-                    Map.Entry<LoudnessCodecController.OnLoudnessCodecUpdateListener, LoudnessCodecController> e = iterator.next();
+                    Map.Entry<
+                                    LoudnessCodecController.OnLoudnessCodecUpdateListener,
+                                    LoudnessCodecController>
+                            e = iterator.next();
                     if (e.getValue() == configurator) {
                         LoudnessCodecController.OnLoudnessCodecUpdateListener listener = e.getKey();
                         iterator.remove();
@@ -171,7 +239,8 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
                 }
             }
             if (listenerToRemove != null) {
-                this.mLoudnessListenerMgr.removeListener(listenerToRemove, "removeLoudnessCodecListener");
+                this.mLoudnessListenerMgr.removeListener(
+                        listenerToRemove, "removeLoudnessCodecListener");
             }
         }
     }
@@ -184,17 +253,23 @@ public class LoudnessCodecDispatcher implements CallbackUtil.DispatcherStub {
     public void register(boolean register) {
         try {
             if (register) {
-                this.mAudioService.registerLoudnessCodecUpdatesDispatcher(LoudnessCodecUpdatesDispatcherStub.getInstance());
+                this.mAudioService.registerLoudnessCodecUpdatesDispatcher(
+                        LoudnessCodecUpdatesDispatcherStub.getInstance());
             } else {
-                this.mAudioService.unregisterLoudnessCodecUpdatesDispatcher(LoudnessCodecUpdatesDispatcherStub.getInstance());
+                this.mAudioService.unregisterLoudnessCodecUpdatesDispatcher(
+                        LoudnessCodecUpdatesDispatcherStub.getInstance());
             }
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
     }
 
-    public void addLoudnessCodecListener(LoudnessCodecController configurator, Executor executor, LoudnessCodecController.OnLoudnessCodecUpdateListener listener) {
-        LoudnessCodecUpdatesDispatcherStub.getInstance().addLoudnessCodecListener(this, configurator, executor, listener);
+    public void addLoudnessCodecListener(
+            LoudnessCodecController configurator,
+            Executor executor,
+            LoudnessCodecController.OnLoudnessCodecUpdateListener listener) {
+        LoudnessCodecUpdatesDispatcherStub.getInstance()
+                .addLoudnessCodecListener(this, configurator, executor, listener);
     }
 
     public void removeLoudnessCodecListener(LoudnessCodecController configurator) {

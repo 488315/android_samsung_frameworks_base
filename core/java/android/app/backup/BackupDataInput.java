@@ -1,6 +1,7 @@
 package android.app.backup;
 
 import android.annotation.SystemApi;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 
@@ -24,8 +25,7 @@ public class BackupDataInput {
         int dataSize;
         String key;
 
-        private EntityHeader() {
-        }
+        private EntityHeader() {}
     }
 
     @SystemApi

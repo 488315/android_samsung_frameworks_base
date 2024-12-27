@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.InputEvent;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
@@ -19,10 +20,12 @@ public class SemRemoteAppDataExtractionManager {
             Log.e(TAG, "SemRemoteAppDataExtractionManager : Context is null! ");
             throw new RuntimeException("Context should not be null!");
         }
-        this.mManager = (SpenGestureManager) context.getSystemService(Context.SEM_SPEN_GESTURE_SERVICE);
+        this.mManager =
+                (SpenGestureManager) context.getSystemService(Context.SEM_SPEN_GESTURE_SERVICE);
         if (this.mManager == null) {
             Log.e(TAG, "SemRemoteAppDataExtractionManager : Failed to connect to the service");
-            throw new RuntimeException("Failed to connect to the service. Feature is not supported");
+            throw new RuntimeException(
+                    "Failed to connect to the service. Feature is not supported");
         }
     }
 
@@ -30,7 +33,8 @@ public class SemRemoteAppDataExtractionManager {
         return getSmartClipDataByScreenRect(null, null, 1);
     }
 
-    public SemSmartClipDataRepository getSmartClipDataByScreenRect(Rect rect, IBinder skipWindowToken, int extractionMode) {
+    public SemSmartClipDataRepository getSmartClipDataByScreenRect(
+            Rect rect, IBinder skipWindowToken, int extractionMode) {
         return this.mManager.getSmartClipDataByScreenRect(rect, skipWindowToken, extractionMode);
     }
 
@@ -50,12 +54,18 @@ public class SemRemoteAppDataExtractionManager {
         return this.mManager.getScrollableViewInfo(rect, viewHash, skipWindowToken);
     }
 
-    public boolean injectInputEvent(int targetX, int targetY, ArrayList<InputEvent> inputEvents, boolean waitUntilConsume, IBinder skipWindowToken) {
+    public boolean injectInputEvent(
+            int targetX,
+            int targetY,
+            ArrayList<InputEvent> inputEvents,
+            boolean waitUntilConsume,
+            IBinder skipWindowToken) {
         if (inputEvents == null || inputEvents.size() == 0) {
             Log.e(TAG, "injectInputEvent : Empty input event");
             return false;
         }
-        this.mManager.injectInputEvent(targetX, targetY, inputEvents, waitUntilConsume, skipWindowToken);
+        this.mManager.injectInputEvent(
+                targetX, targetY, inputEvents, waitUntilConsume, skipWindowToken);
         return true;
     }
 }

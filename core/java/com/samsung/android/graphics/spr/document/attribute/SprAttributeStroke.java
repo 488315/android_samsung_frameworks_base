@@ -2,6 +2,7 @@ package com.samsung.android.graphics.spr.document.attribute;
 
 import com.samsung.android.graphics.spr.document.SprInputStream;
 import com.samsung.android.graphics.spr.document.attribute.impl.SprGradientBase;
+
 import java.io.IOException;
 
 /* loaded from: classes6.dex */

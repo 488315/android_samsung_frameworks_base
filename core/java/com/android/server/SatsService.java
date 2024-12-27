@@ -12,7 +12,9 @@ import android.os.Binder;
 import android.os.Build;
 import android.os.UEventObserver;
 import android.util.Slog;
+
 import com.samsung.android.service.sats.ISatsService;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -24,9 +26,12 @@ import java.util.Iterator;
 
 /* loaded from: classes5.dex */
 public final class SatsService extends ISatsService.Stub {
-    private static final String ACTION_EM_AT_ACTIVATION_REQUEST = "com.sec.atd.em_at_activation_request";
-    private static final String ACTION_EM_AT_REQUEST_RECONNECT = "com.sec.atd.em_at_request_reconnect";
-    private static final String ACTION_FACM_REQUEST_FTCLIENT_START = "com.sec.factory.entry.REQUEST_FTCLIENT_START";
+    private static final String ACTION_EM_AT_ACTIVATION_REQUEST =
+            "com.sec.atd.em_at_activation_request";
+    private static final String ACTION_EM_AT_REQUEST_RECONNECT =
+            "com.sec.atd.em_at_request_reconnect";
+    private static final String ACTION_FACM_REQUEST_FTCLIENT_START =
+            "com.sec.factory.entry.REQUEST_FTCLIENT_START";
     private static final String ACTION_HMT_REQUEST_RECONNECT = "com.sec.hmt.request_reconnect";
     private static final int CONNECT_AT_DISTRIBUTOR = 0;
     private static final int CONNECT_DATA_DISTRIBUTOR = 1;
@@ -52,60 +57,72 @@ public final class SatsService extends ISatsService.Stub {
     private ArrayList<String> cmdList = new ArrayList<>();
     private IWorkOnAt mDrkAtCommander = null;
     private IWorkOnAt mHermesAtCommander = null;
-    private final UEventObserver mUEventObserver = new UEventObserver() { // from class: com.android.server.SatsService.1
-        @Override // android.os.UEventObserver
-        public void onUEvent(UEventObserver.UEvent event) {
-            synchronized (SatsService.mLockUEvent) {
-                if (event.toString().indexOf(SatsService.JIG_STATE) != -1) {
-                    try {
-                        String switchName = event.get(SatsService.JIG_STATE);
-                        if ("uart3".equalsIgnoreCase(switchName)) {
-                            String switchState = event.get("SWITCH_STATE");
-                            int state = Integer.parseInt(switchState);
-                            switch (state) {
-                                case 0:
-                                    Slog.i(SatsService.TAG, "SATServiceAt will wait.");
-                                    SatsService.this.mThreadUartGoWait = true;
-                                    break;
-                                case 1:
-                                    Slog.i(SatsService.TAG, "SATServiceAt will wake up.");
-                                    SatsService.this.mThreadUartGoWait = false;
-                                    synchronized (SatsService.this.mThreadUart) {
-                                        SatsService.this.mThreadUart.notifyAll();
+    private final UEventObserver mUEventObserver =
+            new UEventObserver() { // from class: com.android.server.SatsService.1
+                @Override // android.os.UEventObserver
+                public void onUEvent(UEventObserver.UEvent event) {
+                    synchronized (SatsService.mLockUEvent) {
+                        if (event.toString().indexOf(SatsService.JIG_STATE) != -1) {
+                            try {
+                                String switchName = event.get(SatsService.JIG_STATE);
+                                if ("uart3".equalsIgnoreCase(switchName)) {
+                                    String switchState = event.get("SWITCH_STATE");
+                                    int state = Integer.parseInt(switchState);
+                                    switch (state) {
+                                        case 0:
+                                            Slog.i(SatsService.TAG, "SATServiceAt will wait.");
+                                            SatsService.this.mThreadUartGoWait = true;
+                                            break;
+                                        case 1:
+                                            Slog.i(SatsService.TAG, "SATServiceAt will wake up.");
+                                            SatsService.this.mThreadUartGoWait = false;
+                                            synchronized (SatsService.this.mThreadUart) {
+                                                SatsService.this.mThreadUart.notifyAll();
+                                            }
+                                            break;
+                                        default:
+                                            Slog.e(
+                                                    SatsService.TAG,
+                                                    "Unknown state["
+                                                            + state
+                                                            + NavigationBarInflaterView
+                                                                    .SIZE_MOD_END);
+                                            break;
                                     }
-                                    break;
-                                default:
-                                    Slog.e(SatsService.TAG, "Unknown state[" + state + NavigationBarInflaterView.SIZE_MOD_END);
-                                    break;
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            };
+    private final BroadcastReceiver mReceiver =
+            new BroadcastReceiver() { // from class: com.android.server.SatsService.2
+                @Override // android.content.BroadcastReceiver
+                public void onReceive(Context context, Intent intent) {
+                    String action = intent.getAction();
+                    Slog.i(SatsService.TAG, "Broadcast received:" + action);
+                    try {
+                        if (SatsService.ACTION_EM_AT_REQUEST_RECONNECT.equals(action)
+                                || SatsService.ACTION_EM_AT_ACTIVATION_REQUEST.equals(action)
+                                || SatsService.ACTION_HMT_REQUEST_RECONNECT.equals(action)
+                                || SatsService.ACTION_FACM_REQUEST_FTCLIENT_START.equals(action)) {
+                            Slog.i(SatsService.TAG, "onReceive:" + action);
+                            Slog.i(
+                                    SatsService.TAG,
+                                    "SATServiceAt will wake up through received intent...");
+                            Thread.sleep(500L);
+                            SatsService.this.mThreadUartGoWait = false;
+                            synchronized (SatsService.this.mThreadUart) {
+                                SatsService.this.mThreadUart.notifyAll();
                             }
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
-            }
-        }
-    };
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() { // from class: com.android.server.SatsService.2
-        @Override // android.content.BroadcastReceiver
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            Slog.i(SatsService.TAG, "Broadcast received:" + action);
-            try {
-                if (SatsService.ACTION_EM_AT_REQUEST_RECONNECT.equals(action) || SatsService.ACTION_EM_AT_ACTIVATION_REQUEST.equals(action) || SatsService.ACTION_HMT_REQUEST_RECONNECT.equals(action) || SatsService.ACTION_FACM_REQUEST_FTCLIENT_START.equals(action)) {
-                    Slog.i(SatsService.TAG, "onReceive:" + action);
-                    Slog.i(SatsService.TAG, "SATServiceAt will wake up through received intent...");
-                    Thread.sleep(500L);
-                    SatsService.this.mThreadUartGoWait = false;
-                    synchronized (SatsService.this.mThreadUart) {
-                        SatsService.this.mThreadUart.notifyAll();
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    };
+            };
     private int mErrorCode = 0;
 
     public native byte[] commandForESS(Context context, String str);
@@ -118,7 +135,8 @@ public final class SatsService extends ISatsService.Stub {
             this.cmdList.add("AT+FRPUNLCK");
             this.serviceInterfaces.add(new HdcptestATCmd(context.getApplicationContext()));
             this.cmdList.add("AT+HDCPTEST");
-            this.serviceInterfaces.add(new SamsungAttestationATCmd(context.getApplicationContext()));
+            this.serviceInterfaces.add(
+                    new SamsungAttestationATCmd(context.getApplicationContext()));
             this.cmdList.add("AT+DEVROOTK");
             this.serviceInterfaces.add(new HermesATCmd(context.getApplicationContext()));
             this.cmdList.add("AT+ISOSECHW");
@@ -179,16 +197,24 @@ public final class SatsService extends ISatsService.Stub {
             switch (connectTarget) {
                 case 0:
                     Slog.i(UART_SOCKET_NAME, "connect at distributor");
-                    this.mLocalSocketAddress = new LocalSocketAddress(UART_SOCKET_NAME, LocalSocketAddress.Namespace.ABSTRACT);
+                    this.mLocalSocketAddress =
+                            new LocalSocketAddress(
+                                    UART_SOCKET_NAME, LocalSocketAddress.Namespace.ABSTRACT);
                     this.THREAD_TAG = "SatsServiceAt";
                     break;
                 case 1:
                     Slog.i(UART_SOCKET_NAME, "connect data distributor");
-                    this.mLocalSocketAddress = new LocalSocketAddress(USB_SOCKET_NAME, LocalSocketAddress.Namespace.FILESYSTEM);
+                    this.mLocalSocketAddress =
+                            new LocalSocketAddress(
+                                    USB_SOCKET_NAME, LocalSocketAddress.Namespace.FILESYSTEM);
                     this.THREAD_TAG = "SatsServiceData";
                     break;
                 default:
-                    Slog.e(UART_SOCKET_NAME, "Invalid target : [" + connectTarget + NavigationBarInflaterView.SIZE_MOD_END);
+                    Slog.e(
+                            UART_SOCKET_NAME,
+                            "Invalid target : ["
+                                    + connectTarget
+                                    + NavigationBarInflaterView.SIZE_MOD_END);
                     break;
             }
         }
@@ -211,8 +237,14 @@ public final class SatsService extends ISatsService.Stub {
                     BufferedReader br = null;
                     BufferedWriter bw = null;
                     try {
-                        br = new BufferedReader(new InputStreamReader(this.mLocalSocket.getInputStream(), "UTF-8"));
-                        bw = new BufferedWriter(new OutputStreamWriter(this.mLocalSocket.getOutputStream(), "UTF-8"));
+                        br =
+                                new BufferedReader(
+                                        new InputStreamReader(
+                                                this.mLocalSocket.getInputStream(), "UTF-8"));
+                        bw =
+                                new BufferedWriter(
+                                        new OutputStreamWriter(
+                                                this.mLocalSocket.getOutputStream(), "UTF-8"));
                         this.mGettedBuffer = true;
                     } catch (Exception e2) {
                         Slog.e(this.THREAD_TAG, "Failed to get input/output stream - " + e2);
@@ -241,11 +273,16 @@ public final class SatsService extends ISatsService.Stub {
                                     }
                                     bw.write(response);
                                     bw.flush();
-                                    Slog.i(this.THREAD_TAG, "command_1:" + strIncome + " Response:" + response);
-                                } else if (!strIncome.equals("") && this.THREAD_TAG.equals("SatsServiceData")) {
+                                    Slog.i(
+                                            this.THREAD_TAG,
+                                            "command_1:" + strIncome + " Response:" + response);
+                                } else if (!strIncome.equals("")
+                                        && this.THREAD_TAG.equals("SatsServiceData")) {
                                     bw.write("NA");
                                     bw.flush();
-                                    Slog.i(this.THREAD_TAG, "Command:" + strIncome + " Response:NA");
+                                    Slog.i(
+                                            this.THREAD_TAG,
+                                            "Command:" + strIncome + " Response:NA");
                                 }
                             } else {
                                 Slog.e(this.THREAD_TAG, "Socket seems be closed.");
@@ -263,7 +300,9 @@ public final class SatsService extends ISatsService.Stub {
                     try {
                         Thread.sleep(5000L);
                         if (this.THREAD_TAG.equals("SatsServiceAt")) {
-                            Slog.i(this.THREAD_TAG, "Wait until JIG is inserted or ATD Activation intent");
+                            Slog.i(
+                                    this.THREAD_TAG,
+                                    "Wait until JIG is inserted or ATD Activation intent");
                             synchronized (SatsService.this.mThreadUart) {
                                 while (SatsService.this.mThreadUartGoWait) {
                                     SatsService.this.mThreadUart.wait();
@@ -310,7 +349,9 @@ public final class SatsService extends ISatsService.Stub {
                 Slog.e(this.THREAD_TAG, "error: cmd = null");
                 return false;
             }
-            Slog.i(this.THREAD_TAG, "isValidCommand: cmd is [" + cmd + NavigationBarInflaterView.SIZE_MOD_END);
+            Slog.i(
+                    this.THREAD_TAG,
+                    "isValidCommand: cmd is [" + cmd + NavigationBarInflaterView.SIZE_MOD_END);
             try {
                 if (cmd.contains("=") && cmd.indexOf("=") > AT_COMMAND_HEADER.length()) {
                     Iterator<String> cmdListIter = SatsService.this.cmdList.iterator();
@@ -329,18 +370,49 @@ public final class SatsService extends ISatsService.Stub {
         }
 
         private String executeEmAtCommand(String cmd) {
-            String[] testParams = {"8,0,0", "8,0,1", "8,0,2", "8,0,3", "7,0,1,0,0", "7,1,0,0,0", "7,1,1,0,0", "7,2,0,0,0", "7,2,1,0,0", "7,1,1,1,0", "7,0,0,1,0", "7,0,0,2,0", "7,0,0,3,0", "7,0,0,4,0", "7,0,0,5,0", "7,0,0,0,1"};
-            String response = (this.THREAD_TAG.equals("SatsServiceData") ? "" + cmd.trim() : "") + AT_RESPONSE_START;
+            String[] testParams = {
+                "8,0,0",
+                "8,0,1",
+                "8,0,2",
+                "8,0,3",
+                "7,0,1,0,0",
+                "7,1,0,0,0",
+                "7,1,1,0,0",
+                "7,2,0,0,0",
+                "7,2,1,0,0",
+                "7,1,1,1,0",
+                "7,0,0,1,0",
+                "7,0,0,2,0",
+                "7,0,0,3,0",
+                "7,0,0,4,0",
+                "7,0,0,5,0",
+                "7,0,0,0,1"
+            };
+            String response =
+                    (this.THREAD_TAG.equals("SatsServiceData") ? "" + cmd.trim() : "")
+                            + AT_RESPONSE_START;
             String parameter = cmd.substring(cmd.indexOf("=") + 1, cmd.length());
             for (String testParam : testParams) {
                 if (parameter.equals(testParam)) {
-                    Slog.i(this.THREAD_TAG, "executeEmAtCommand: test command(" + testParam + NavigationBarInflaterView.KEY_CODE_END);
-                    return (((response + "+ENGMODES:") + cmd.substring(cmd.indexOf("=") + 1, cmd.indexOf("=") + 2)) + ",OK") + AT_RESPONSE_END;
+                    Slog.i(
+                            this.THREAD_TAG,
+                            "executeEmAtCommand: test command("
+                                    + testParam
+                                    + NavigationBarInflaterView.KEY_CODE_END);
+                    return (((response + "+ENGMODES:")
+                                            + cmd.substring(
+                                                    cmd.indexOf("=") + 1, cmd.indexOf("=") + 2))
+                                    + ",OK")
+                            + AT_RESPONSE_END;
                 }
             }
-            byte[] result = SatsService.this.mEmCmdHelper.processCmd(SatsService.mContext, parameter);
+            byte[] result =
+                    SatsService.this.mEmCmdHelper.processCmd(SatsService.mContext, parameter);
             if (result == null) {
-                return (((response + "+ENGMODES:") + cmd.substring(cmd.indexOf("=") + 1, cmd.indexOf("=") + 2)) + ",NG,FFFFFFFF") + AT_RESPONSE_END;
+                return (((response + "+ENGMODES:")
+                                        + cmd.substring(cmd.indexOf("=") + 1, cmd.indexOf("=") + 2))
+                                + ",NG,FFFFFFFF")
+                        + AT_RESPONSE_END;
             }
             return response + new String(result, StandardCharsets.UTF_8);
         }
@@ -362,13 +434,25 @@ public final class SatsService extends ISatsService.Stub {
                     }
                     StringBuilder responseDo3 = responseDo2.append(AT_RESPONSE_START);
                     try {
-                        responseDo = responseDo3.append(cmd.substring(cmd.indexOf("+"), cmd.indexOf("=")));
+                        responseDo =
+                                responseDo3.append(
+                                        cmd.substring(cmd.indexOf("+"), cmd.indexOf("=")));
                     } catch (Exception e) {
                         e.printStackTrace();
-                        responseDo = responseDo3.append(AT_RESPONSE_INVALID_PARAM).append(AT_RESPONSE_END);
+                        responseDo =
+                                responseDo3
+                                        .append(AT_RESPONSE_INVALID_PARAM)
+                                        .append(AT_RESPONSE_END);
                     }
                     Slog.i(UART_SOCKET_NAME, "doWork: cmdResponse is equal to cmd.");
-                    responseDo2 = responseDo.append(":").append(atCmd.processCmd(cmd.substring(cmd.indexOf("=") + 1, cmd.length()))).append(AT_RESPONSE_END);
+                    responseDo2 =
+                            responseDo
+                                    .append(":")
+                                    .append(
+                                            atCmd.processCmd(
+                                                    cmd.substring(
+                                                            cmd.indexOf("=") + 1, cmd.length())))
+                                    .append(AT_RESPONSE_END);
                 } else {
                     Slog.i(UART_SOCKET_NAME, "doWork: cmd not in list");
                 }
@@ -401,7 +485,8 @@ public final class SatsService extends ISatsService.Stub {
                 ActivityManager am = (ActivityManager) mContext.getSystemService("activity");
                 if (am.getRunningAppProcesses() != null) {
                     try {
-                        Iterator<ActivityManager.RunningAppProcessInfo> it = am.getRunningAppProcesses().iterator();
+                        Iterator<ActivityManager.RunningAppProcessInfo> it =
+                                am.getRunningAppProcesses().iterator();
                         while (true) {
                             if (!it.hasNext()) {
                                 break;
@@ -466,15 +551,28 @@ public final class SatsService extends ISatsService.Stub {
             }
             if ("system".equals(callerName) && callerUid == 1000) {
                 if (this.mDrkAtCommander == null) {
-                    this.mDrkAtCommander = new SamsungAttestationATCmd(mContext.getApplicationContext());
+                    this.mDrkAtCommander =
+                            new SamsungAttestationATCmd(mContext.getApplicationContext());
                 }
                 if (this.mHermesAtCommander == null) {
                     this.mHermesAtCommander = new HermesATCmd(mContext.getApplicationContext());
                 }
-                if (cmd.substring(0, cmd.indexOf("=")).equals("AT+" + this.mDrkAtCommander.getCmd())) {
-                    response = "\r\n" + cmd.substring(cmd.indexOf("+"), cmd.indexOf("=")) + ":" + this.mDrkAtCommander.processCmd(cmd.substring(cmd.indexOf("=") + 1, cmd.length()));
-                } else if (cmd.substring(0, cmd.indexOf("=")).equals("AT+" + this.mHermesAtCommander.getCmd())) {
-                    response = "\r\n" + cmd.substring(cmd.indexOf("+"), cmd.indexOf("=")) + ":" + this.mHermesAtCommander.processCmd(cmd.substring(cmd.indexOf("=") + 1, cmd.length()));
+                if (cmd.substring(0, cmd.indexOf("="))
+                        .equals("AT+" + this.mDrkAtCommander.getCmd())) {
+                    response =
+                            "\r\n"
+                                    + cmd.substring(cmd.indexOf("+"), cmd.indexOf("="))
+                                    + ":"
+                                    + this.mDrkAtCommander.processCmd(
+                                            cmd.substring(cmd.indexOf("=") + 1, cmd.length()));
+                } else if (cmd.substring(0, cmd.indexOf("="))
+                        .equals("AT+" + this.mHermesAtCommander.getCmd())) {
+                    response =
+                            "\r\n"
+                                    + cmd.substring(cmd.indexOf("+"), cmd.indexOf("="))
+                                    + ":"
+                                    + this.mHermesAtCommander.processCmd(
+                                            cmd.substring(cmd.indexOf("=") + 1, cmd.length()));
                 } else {
                     Slog.e(TAG, "Invalid command : " + cmd);
                     response = "\r\nNG (INVALID PARAM)";
@@ -482,7 +580,13 @@ public final class SatsService extends ISatsService.Stub {
                 sb = new StringBuilder();
                 return sb.append(response).append("\r\n\r\nOK\r\n").toString();
             }
-            Slog.e(TAG, "Permission denied : Name = [" + callerName + "], UID = [" + callerUid + NavigationBarInflaterView.SIZE_MOD_END);
+            Slog.e(
+                    TAG,
+                    "Permission denied : Name = ["
+                            + callerName
+                            + "], UID = ["
+                            + callerUid
+                            + NavigationBarInflaterView.SIZE_MOD_END);
             String str3 = "\r\n\r\n\r\nOK\r\n";
             return "NG (Permission Denied)";
         } catch (Throwable th5) {
@@ -510,7 +614,8 @@ public final class SatsService extends ISatsService.Stub {
             try {
                 for (String lCmdParam : this.lCmdParams) {
                     int lCmdParamLen = lCmdParam.length();
-                    if (param.length() >= lCmdParamLen && lCmdParam.equals(param.substring(0, lCmdParamLen))) {
+                    if (param.length() >= lCmdParamLen
+                            && lCmdParam.equals(param.substring(0, lCmdParamLen))) {
                         return proceedlCmd(context, param, lCmdParamLen);
                     }
                 }
@@ -519,7 +624,12 @@ public final class SatsService extends ISatsService.Stub {
                 Slog.e(SatsService.TAG, "Failed to excute ENGMODES AT command : " + param);
                 e.printStackTrace();
                 init();
-                return ("+ENGMODES:" + param.substring(0, 1) + "," + AT_RESPONSE_EXCEPION + AT_RESPONSE_END).getBytes(StandardCharsets.UTF_8);
+                return ("+ENGMODES:"
+                                + param.substring(0, 1)
+                                + ","
+                                + AT_RESPONSE_EXCEPION
+                                + AT_RESPONSE_END)
+                        .getBytes(StandardCharsets.UTF_8);
             }
         }
 
@@ -531,9 +641,24 @@ public final class SatsService extends ISatsService.Stub {
             } else {
                 sequenceNo = Integer.parseInt(strSequenceNo);
             }
-            if (!appendData(sequenceNo, param.substring(fixedParamLen + 3, param.length()).trim())) {
-                Slog.e(SatsService.TAG, "Failed to append command SN-" + sequenceNo + " EN-" + (getDataIndex() + 1));
-                String errStr = "+ENGMODES:" + param.substring(0, 1) + "," + AT_RESPONSE_MISSED_DATA + " SN-" + sequenceNo + " EN-" + (getDataIndex() + 1) + AT_RESPONSE_END;
+            if (!appendData(
+                    sequenceNo, param.substring(fixedParamLen + 3, param.length()).trim())) {
+                Slog.e(
+                        SatsService.TAG,
+                        "Failed to append command SN-"
+                                + sequenceNo
+                                + " EN-"
+                                + (getDataIndex() + 1));
+                String errStr =
+                        "+ENGMODES:"
+                                + param.substring(0, 1)
+                                + ","
+                                + AT_RESPONSE_MISSED_DATA
+                                + " SN-"
+                                + sequenceNo
+                                + " EN-"
+                                + (getDataIndex() + 1)
+                                + AT_RESPONSE_END;
                 init();
                 return errStr.getBytes(StandardCharsets.UTF_8);
             }
@@ -546,7 +671,8 @@ public final class SatsService extends ISatsService.Stub {
                 init();
                 return result;
             }
-            return ("+ENGMODES:" + param.substring(0, 1) + ",OK" + AT_RESPONSE_END).getBytes(StandardCharsets.UTF_8);
+            return ("+ENGMODES:" + param.substring(0, 1) + ",OK" + AT_RESPONSE_END)
+                    .getBytes(StandardCharsets.UTF_8);
         }
 
         public boolean appendData(int sequenceNo, String data) {

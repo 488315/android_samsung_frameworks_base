@@ -6,8 +6,7 @@ import android.util.secutil.LogSwitcher;
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
 /* loaded from: classes4.dex */
 public final class Slog {
-    private Slog() {
-    }
+    private Slog() {}
 
     public static int v(String tag, String msg) {
         return Log.println_native(3, 2, tag, msg);

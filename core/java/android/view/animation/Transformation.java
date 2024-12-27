@@ -3,6 +3,7 @@ package android.view.animation;
 import android.graphics.Insets;
 import android.graphics.Matrix;
 import android.graphics.Rect;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes4.dex */
@@ -61,7 +62,11 @@ public class Transformation {
         if (t.mHasClipRect) {
             Rect bounds = t.getClipRect();
             if (this.mHasClipRect) {
-                setClipRect(this.mClipRect.left + bounds.left, this.mClipRect.top + bounds.top, this.mClipRect.right + bounds.right, this.mClipRect.bottom + bounds.bottom);
+                setClipRect(
+                        this.mClipRect.left + bounds.left,
+                        this.mClipRect.top + bounds.top,
+                        this.mClipRect.right + bounds.right,
+                        this.mClipRect.bottom + bounds.bottom);
             } else {
                 setClipRect(bounds);
             }
@@ -75,7 +80,11 @@ public class Transformation {
         if (t.mHasClipRect) {
             Rect bounds = t.getClipRect();
             if (this.mHasClipRect) {
-                setClipRect(this.mClipRect.left + bounds.left, this.mClipRect.top + bounds.top, this.mClipRect.right + bounds.right, this.mClipRect.bottom + bounds.bottom);
+                setClipRect(
+                        this.mClipRect.left + bounds.left,
+                        this.mClipRect.top + bounds.top,
+                        this.mClipRect.right + bounds.right,
+                        this.mClipRect.bottom + bounds.bottom);
             } else {
                 setClipRect(bounds);
             }

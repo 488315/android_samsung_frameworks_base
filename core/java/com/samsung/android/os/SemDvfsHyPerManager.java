@@ -19,8 +19,7 @@ public class SemDvfsHyPerManager extends SemDvfsManager {
     }
 
     @Override // com.samsung.android.os.SemDvfsManager
-    public void setDvfsValue(String actionName) {
-    }
+    public void setDvfsValue(String actionName) {}
 
     @Override // com.samsung.android.os.SemDvfsManager
     public void acquire() {

@@ -8,6 +8,7 @@ import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -32,12 +33,14 @@ public class MicroAlertController extends AlertController {
         if (this.mListView != null) {
             View topPanel = this.mScrollView.findViewById(R.id.topPanel);
             ((ViewGroup) topPanel.getParent()).removeView(topPanel);
-            FrameLayout.LayoutParams topParams = new FrameLayout.LayoutParams(topPanel.getLayoutParams());
+            FrameLayout.LayoutParams topParams =
+                    new FrameLayout.LayoutParams(topPanel.getLayoutParams());
             topParams.gravity = 48;
             topPanel.setLayoutParams(topParams);
             View buttonPanel = this.mScrollView.findViewById(R.id.buttonPanel);
             ((ViewGroup) buttonPanel.getParent()).removeView(buttonPanel);
-            FrameLayout.LayoutParams buttonParams = new FrameLayout.LayoutParams(buttonPanel.getLayoutParams());
+            FrameLayout.LayoutParams buttonParams =
+                    new FrameLayout.LayoutParams(buttonPanel.getLayoutParams());
             buttonParams.gravity = 80;
             buttonPanel.setLayoutParams(buttonParams);
             ViewGroup scrollParent = (ViewGroup) this.mScrollView.getParent();

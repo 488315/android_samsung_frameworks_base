@@ -2,7 +2,8 @@ package com.android.server.display;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class AdaptiveBrightnessLongtermModelBuilder$$ExternalSyntheticLambda1 implements Runnable {
+public final /* synthetic */ class AdaptiveBrightnessLongtermModelBuilder$$ExternalSyntheticLambda1
+        implements Runnable {
     public final /* synthetic */ AdaptiveBrightnessLongtermModelBuilder f$0;
 
     /* JADX WARN: Removed duplicated region for block: B:12:0x0060 A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -99,6 +100,8 @@ public final /* synthetic */ class AdaptiveBrightnessLongtermModelBuilder$$Exter
             monitor-exit(r1)     // Catch: java.lang.Throwable -> Lf
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.AdaptiveBrightnessLongtermModelBuilder$$ExternalSyntheticLambda1.run():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.AdaptiveBrightnessLongtermModelBuilder$$ExternalSyntheticLambda1.run():void");
     }
 }

@@ -3,11 +3,13 @@ package com.android.server.pm.resolution;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ProviderInfo;
+
 import com.android.internal.pm.pkg.component.ParsedActivity;
 import com.android.internal.pm.pkg.component.ParsedProvider;
 import com.android.internal.pm.pkg.component.ParsedService;
 import com.android.server.pm.Computer;
 import com.android.server.pm.DumpState;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -18,7 +20,8 @@ public interface ComponentResolverApi {
 
     void dumpActivityResolvers(DumpState dumpState, PrintWriter printWriter, String str);
 
-    void dumpContentProviders(Computer computer, PrintWriter printWriter, DumpState dumpState, String str);
+    void dumpContentProviders(
+            Computer computer, PrintWriter printWriter, DumpState dumpState, String str);
 
     void dumpProviderResolvers(DumpState dumpState, PrintWriter printWriter, String str);
 

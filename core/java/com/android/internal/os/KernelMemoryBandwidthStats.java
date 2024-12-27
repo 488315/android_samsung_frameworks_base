@@ -5,6 +5,7 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.LongSparseLongArray;
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -70,9 +71,13 @@ public class KernelMemoryBandwidthStats {
                 do {
                     int index = this.mBandwidthEntries.indexOfKey(bandwidth);
                     if (index >= 0) {
-                        this.mBandwidthEntries.put(bandwidth, this.mBandwidthEntries.valueAt(index) + (Long.parseLong(splitter.next()) / 1000000));
+                        this.mBandwidthEntries.put(
+                                bandwidth,
+                                this.mBandwidthEntries.valueAt(index)
+                                        + (Long.parseLong(splitter.next()) / 1000000));
                     } else {
-                        this.mBandwidthEntries.put(bandwidth, Long.parseLong(splitter.next()) / 1000000);
+                        this.mBandwidthEntries.put(
+                                bandwidth, Long.parseLong(splitter.next()) / 1000000);
                     }
                     bandwidth++;
                 } while (splitter.hasNext());

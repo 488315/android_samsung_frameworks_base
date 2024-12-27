@@ -12,8 +12,7 @@ public interface IGraphicsStatsCallback extends IInterface {
 
     public static class Default implements IGraphicsStatsCallback {
         @Override // android.view.IGraphicsStatsCallback
-        public void onRotateGraphicsStatsBuffer() throws RemoteException {
-        }
+        public void onRotateGraphicsStatsBuffer() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IGraphicsStatsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGraphicsStatsCallback {
+    public abstract static class Stub extends Binder implements IGraphicsStatsCallback {
         public static final String DESCRIPTOR = "android.view.IGraphicsStatsCallback";
         static final int TRANSACTION_onRotateGraphicsStatsBuffer = 1;
 
@@ -60,7 +59,8 @@ public interface IGraphicsStatsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

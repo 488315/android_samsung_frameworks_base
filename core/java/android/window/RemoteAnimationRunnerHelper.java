@@ -5,8 +5,9 @@ import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.SurfaceControl;
-import android.window.TransitionInfo;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -20,8 +21,7 @@ public final class RemoteAnimationRunnerHelper {
     private final HashMap<Integer, Runnable> mAnimCallbacks = new HashMap<>();
     Predicate<TransitionInfo> mMergeAnimFilter = null;
 
-    private RemoteAnimationRunnerHelper() {
-    }
+    private RemoteAnimationRunnerHelper() {}
 
     public static RemoteAnimationRunnerHelper getInstance() {
         RemoteAnimationRunnerHelper remoteAnimationRunnerHelper;
@@ -42,11 +42,19 @@ public final class RemoteAnimationRunnerHelper {
         this.mAnimCallbacks.put(Integer.valueOf(callbackType), callback);
     }
 
-    public boolean mergeOrTransferAnimation(IBinder token, TransitionInfo info, SurfaceControl.Transaction t, IBinder mergeTarget, IRemoteTransitionFinishedCallback finishCallback, ArrayMap<SurfaceControl, SurfaceControl> leashMap) throws RemoteException {
+    public boolean mergeOrTransferAnimation(
+            IBinder token,
+            TransitionInfo info,
+            SurfaceControl.Transaction t,
+            IBinder mergeTarget,
+            IRemoteTransitionFinishedCallback finishCallback,
+            ArrayMap<SurfaceControl, SurfaceControl> leashMap)
+            throws RemoteException {
         if (CoreRune.FW_SHELL_TRANSITION_MERGE && mergeAnimation(info, t, finishCallback)) {
             return true;
         }
-        return CoreRune.FW_SHELL_TRANSITION_MERGE_TRANSFER && transferAnimation(info, t, finishCallback, leashMap);
+        return CoreRune.FW_SHELL_TRANSITION_MERGE_TRANSFER
+                && transferAnimation(info, t, finishCallback, leashMap);
     }
 
     private void runCallback(int type) {
@@ -58,7 +66,11 @@ public final class RemoteAnimationRunnerHelper {
         }
     }
 
-    private boolean mergeAnimation(TransitionInfo info, SurfaceControl.Transaction t, IRemoteTransitionFinishedCallback finishCallback) throws RemoteException {
+    private boolean mergeAnimation(
+            TransitionInfo info,
+            SurfaceControl.Transaction t,
+            IRemoteTransitionFinishedCallback finishCallback)
+            throws RemoteException {
         if (this.mMergeAnimFilter != null && this.mMergeAnimFilter.test(info)) {
             if (info.canMergeAnimation()) {
                 for (int i = 0; i < info.getChanges().size(); i++) {
@@ -78,7 +90,12 @@ public final class RemoteAnimationRunnerHelper {
         return false;
     }
 
-    private boolean transferAnimation(TransitionInfo info, SurfaceControl.Transaction t, IRemoteTransitionFinishedCallback finishCallback, ArrayMap<SurfaceControl, SurfaceControl> leashMap) throws RemoteException {
+    private boolean transferAnimation(
+            TransitionInfo info,
+            SurfaceControl.Transaction t,
+            IRemoteTransitionFinishedCallback finishCallback,
+            ArrayMap<SurfaceControl, SurfaceControl> leashMap)
+            throws RemoteException {
         if (!info.canTransferAnimation() || this.mAnimCallbacks.get(2) == null) {
             return false;
         }

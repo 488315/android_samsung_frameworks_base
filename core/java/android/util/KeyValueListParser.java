@@ -3,6 +3,7 @@ package android.util;
 import android.hardware.gnss.GnssSignalType;
 import android.text.TextUtils;
 import android.util.proto.ProtoOutputStream;
+
 import java.io.PrintWriter;
 import java.time.format.DateTimeParseException;
 
@@ -23,7 +24,8 @@ public class KeyValueListParser {
                 int sep = pair.indexOf(61);
                 if (sep < 0) {
                     this.mValues.clear();
-                    throw new IllegalArgumentException("'" + pair + "' in '" + str + "' is not a valid key-value pair");
+                    throw new IllegalArgumentException(
+                            "'" + pair + "' in '" + str + "' is not a valid key-value pair");
                 }
                 this.mValues.put(pair.substring(0, sep).trim(), pair.substring(sep + 1).trim());
             }

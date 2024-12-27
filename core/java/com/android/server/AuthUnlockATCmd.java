@@ -4,6 +4,7 @@ import android.content.Context;
 import android.provider.Settings;
 import android.service.persistentdata.PersistentDataBlockManager;
 import android.util.Slog;
+
 import java.nio.charset.StandardCharsets;
 
 /* loaded from: classes5.dex */
@@ -50,7 +51,9 @@ public class AuthUnlockATCmd implements IWorkOnAt {
         if (params == null) {
             return AT_RESPONSE_INVALID_PARAM;
         }
-        this.mPDB = (PersistentDataBlockManager) this.mContext.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
+        this.mPDB =
+                (PersistentDataBlockManager)
+                        this.mContext.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
         if (this.mPDB == null) {
             return AT_RESPONSE_CONN_FAILED;
         }
@@ -85,7 +88,8 @@ public class AuthUnlockATCmd implements IWorkOnAt {
                     } else {
                         Slog.e(TAG, "FRP partition is wiped, but can't update the FRP status");
                     }
-                    Settings.Secure.putInt(this.mContext.getContentResolver(), "secure_frp_mode", 0);
+                    Settings.Secure.putInt(
+                            this.mContext.getContentResolver(), "secure_frp_mode", 0);
                     return result + "UNLOCK SUCCESS";
                 }
                 Slog.i(TAG, "FRP deactivating FAILED!");

@@ -14,9 +14,12 @@ import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.util.EventLog;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.server.SystemService;
+
 import dalvik.system.BlockGuard;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -41,7 +44,8 @@ public class Installer extends SystemService {
         public final List mArgs = new ArrayList();
         public final List mFutures = new ArrayList();
 
-        public final synchronized CompletableFuture createAppData(CreateAppDataArgs createAppDataArgs) {
+        public final synchronized CompletableFuture createAppData(
+                CreateAppDataArgs createAppDataArgs) {
             CompletableFuture completableFuture;
             if (this.mExecuted) {
                 throw new IllegalStateException();
@@ -64,14 +68,16 @@ public class Installer extends SystemService {
                     int min = Math.min(size - i, 256);
                     CreateAppDataArgs[] createAppDataArgsArr = new CreateAppDataArgs[min];
                     for (int i2 = 0; i2 < min; i2++) {
-                        createAppDataArgsArr[i2] = (CreateAppDataArgs) ((ArrayList) this.mArgs).get(i + i2);
+                        createAppDataArgsArr[i2] =
+                                (CreateAppDataArgs) ((ArrayList) this.mArgs).get(i + i2);
                     }
                     if (installer.checkBeforeRemote()) {
                         for (int i3 = 0; i3 < min; i3++) {
                             createAppDataArgsArr[i3].previousAppId = 0;
                         }
                         try {
-                            createAppDataBatched = installer.mInstalld.createAppDataBatched(createAppDataArgsArr);
+                            createAppDataBatched =
+                                    installer.mInstalld.createAppDataBatched(createAppDataArgsArr);
                         } catch (Exception e) {
                             InstallerException.from(e);
                             throw null;
@@ -87,11 +93,13 @@ public class Installer extends SystemService {
                     }
                     for (int i4 = 0; i4 < createAppDataBatched.length; i4++) {
                         CreateAppDataResult createAppDataResult2 = createAppDataBatched[i4];
-                        CompletableFuture completableFuture = (CompletableFuture) ((ArrayList) this.mFutures).get(i + i4);
+                        CompletableFuture completableFuture =
+                                (CompletableFuture) ((ArrayList) this.mFutures).get(i + i4);
                         if (createAppDataResult2.exceptionCode == 0) {
                             completableFuture.complete(createAppDataResult2);
                         } else {
-                            completableFuture.completeExceptionally(new InstallerException(createAppDataResult2.exceptionMessage));
+                            completableFuture.completeExceptionally(
+                                    new InstallerException(createAppDataResult2.exceptionMessage));
                         }
                     }
                 }
@@ -134,7 +142,8 @@ public class Installer extends SystemService {
         this.mIsolated = z;
     }
 
-    public static CreateAppDataArgs buildCreateAppDataArgs(int i, int i2, boolean z, int i3, String str, String str2, String str3, int i4) {
+    public static CreateAppDataArgs buildCreateAppDataArgs(
+            int i, int i2, boolean z, int i3, String str, String str2, String str3, int i4) {
         CreateAppDataArgs createAppDataArgs = new CreateAppDataArgs();
         createAppDataArgs.uuid = str;
         createAppDataArgs.packageName = str2;
@@ -151,7 +160,13 @@ public class Installer extends SystemService {
 
     public final boolean checkBeforeRemote() {
         if (this.mWarnIfHeld != null && Thread.holdsLock(this.mWarnIfHeld)) {
-            Slog.wtf("Installer", "Calling thread " + Thread.currentThread().getName() + " is holding 0x" + Integer.toHexString(System.identityHashCode(this.mWarnIfHeld)), new Throwable());
+            Slog.wtf(
+                    "Installer",
+                    "Calling thread "
+                            + Thread.currentThread().getName()
+                            + " is holding 0x"
+                            + Integer.toHexString(System.identityHashCode(this.mWarnIfHeld)),
+                    new Throwable());
         }
         if (this.mIsolated) {
             Slog.i("Installer", "Ignoring request because this installer is isolated");
@@ -172,9 +187,19 @@ public class Installer extends SystemService {
             try {
                 this.mInstalld.clearAppData(str, str2, i, i2, j);
                 StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-                EventLog.writeEvent(39000, Integer.valueOf(Binder.getCallingPid()), Integer.valueOf(Binder.getCallingUid()), str2, Integer.valueOf(i2));
+                EventLog.writeEvent(
+                        39000,
+                        Integer.valueOf(Binder.getCallingPid()),
+                        Integer.valueOf(Binder.getCallingUid()),
+                        str2,
+                        Integer.valueOf(i2));
                 for (int i3 = 2; i3 < stackTrace.length; i3++) {
-                    EventLog.writeEvent(39001, stackTrace[i3].getMethodName(), stackTrace[i3].getClassName(), stackTrace[i3].getFileName(), Integer.valueOf(stackTrace[i3].getLineNumber()));
+                    EventLog.writeEvent(
+                            39001,
+                            stackTrace[i3].getMethodName(),
+                            stackTrace[i3].getClassName(),
+                            stackTrace[i3].getFileName(),
+                            Integer.valueOf(stackTrace[i3].getLineNumber()));
                 }
             } catch (Exception e) {
                 InstallerException.from(e);
@@ -187,28 +212,36 @@ public class Installer extends SystemService {
         IBinder service = ServiceManager.getService("installd");
         if (service != null) {
             try {
-                service.linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.server.pm.Installer$$ExternalSyntheticLambda0
-                    @Override // android.os.IBinder.DeathRecipient
-                    public final void binderDied() {
-                        Installer installer = Installer.this;
-                        installer.getClass();
-                        Slog.w("Installer", "installd died; reconnecting");
-                        installer.mInstalldLatch = new CountDownLatch(1);
-                        installer.connect();
-                    }
-                }, 0);
+                service.linkToDeath(
+                        new IBinder
+                                .DeathRecipient() { // from class:
+                                                    // com.android.server.pm.Installer$$ExternalSyntheticLambda0
+                            @Override // android.os.IBinder.DeathRecipient
+                            public final void binderDied() {
+                                Installer installer = Installer.this;
+                                installer.getClass();
+                                Slog.w("Installer", "installd died; reconnecting");
+                                installer.mInstalldLatch = new CountDownLatch(1);
+                                installer.connect();
+                            }
+                        },
+                        0);
             } catch (RemoteException unused) {
                 service = null;
             }
         }
         if (service == null) {
             Slog.w("Installer", "installd not found; trying again");
-            BackgroundThread.getHandler().postDelayed(new Runnable() { // from class: com.android.server.pm.Installer$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    Installer.this.connect();
-                }
-            }, 1000L);
+            BackgroundThread.getHandler()
+                    .postDelayed(
+                            new Runnable() { // from class:
+                                             // com.android.server.pm.Installer$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    Installer.this.connect();
+                                }
+                            },
+                            1000L);
             return;
         }
         this.mInstalld = IInstalld.Stub.asInterface(service);
@@ -240,7 +273,22 @@ public class Installer extends SystemService {
         }
     }
 
-    public boolean dexopt(String str, int i, String str2, String str3, int i2, String str4, int i3, String str5, String str6, String str7, String str8, int i4, String str9, String str10, String str11) {
+    public boolean dexopt(
+            String str,
+            int i,
+            String str2,
+            String str3,
+            int i2,
+            String str4,
+            int i3,
+            String str5,
+            String str6,
+            String str7,
+            String str8,
+            int i4,
+            String str9,
+            String str10,
+            String str11) {
         throw new LegacyDexoptDisabledException();
     }
 
@@ -255,7 +303,15 @@ public class Installer extends SystemService {
         }
     }
 
-    public final void getAppSize(String str, String[] strArr, int i, int i2, int i3, long[] jArr, String[] strArr2, PackageStats packageStats) {
+    public final void getAppSize(
+            String str,
+            String[] strArr,
+            int i,
+            int i2,
+            int i3,
+            long[] jArr,
+            String[] strArr2,
+            PackageStats packageStats) {
         long[] jArr2;
         if (checkBeforeRemote()) {
             if (strArr2 != null) {
@@ -272,15 +328,28 @@ public class Installer extends SystemService {
                 packageStats.externalDataSize += appSize[4];
                 packageStats.externalCacheSize += appSize[5];
                 if (str == null) {
-                    Iterator it = ((StorageManager) getContext().getSystemService(StorageManager.class)).getVolumes().iterator();
+                    Iterator it =
+                            ((StorageManager) getContext().getSystemService(StorageManager.class))
+                                    .getVolumes()
+                                    .iterator();
                     while (true) {
                         if (!it.hasNext()) {
                             jArr2 = null;
                             break;
                         }
                         VolumeInfo volumeInfo = (VolumeInfo) it.next();
-                        if (volumeInfo.getDisk() != null && volumeInfo.getDisk().isSd() && volumeInfo.isMountedWritable()) {
-                            jArr2 = this.mInstalld.getAppSize(volumeInfo.getFsUuid(), strArr, i, i2, i3, jArr, strArr2);
+                        if (volumeInfo.getDisk() != null
+                                && volumeInfo.getDisk().isSd()
+                                && volumeInfo.isMountedWritable()) {
+                            jArr2 =
+                                    this.mInstalld.getAppSize(
+                                            volumeInfo.getFsUuid(),
+                                            strArr,
+                                            i,
+                                            i2,
+                                            i3,
+                                            jArr,
+                                            strArr2);
                             break;
                         }
                     }
@@ -300,7 +369,8 @@ public class Installer extends SystemService {
         }
     }
 
-    public final void getUserSize(String str, int i, int i2, int[] iArr, PackageStats packageStats) {
+    public final void getUserSize(
+            String str, int i, int i2, int[] iArr, PackageStats packageStats) {
         if (checkBeforeRemote()) {
             try {
                 long[] userSize = this.mInstalld.getUserSize(str, i, i2, iArr);

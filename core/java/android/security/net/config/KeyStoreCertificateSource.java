@@ -1,7 +1,9 @@
 package android.security.net.config;
 
 import android.util.ArraySet;
+
 import com.android.org.conscrypt.TrustedCertificateIndex;
+
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.cert.X509Certificate;
@@ -86,6 +88,5 @@ class KeyStoreCertificateSource implements CertificateSource {
     }
 
     @Override // android.security.net.config.CertificateSource
-    public void handleTrustStorageUpdate() {
-    }
+    public void handleTrustStorageUpdate() {}
 }

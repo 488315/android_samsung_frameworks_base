@@ -10,21 +10,28 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.text.TextUtils;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.os.IParcelFileDescriptorFactory;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface IShortcutService extends IInterface {
-    boolean addDynamicShortcuts(String str, ParceledListSlice parceledListSlice, int i) throws RemoteException;
+    boolean addDynamicShortcuts(String str, ParceledListSlice parceledListSlice, int i)
+            throws RemoteException;
 
     void applyRestore(byte[] bArr, int i) throws RemoteException;
 
-    int applyRestoreSmartSwitch(ParcelFileDescriptor parcelFileDescriptor, int i) throws RemoteException;
+    int applyRestoreSmartSwitch(ParcelFileDescriptor parcelFileDescriptor, int i)
+            throws RemoteException;
 
-    void createShortcutResultIntent(String str, ShortcutInfo shortcutInfo, int i, AndroidFuture<Intent> androidFuture) throws RemoteException;
+    void createShortcutResultIntent(
+            String str, ShortcutInfo shortcutInfo, int i, AndroidFuture<Intent> androidFuture)
+            throws RemoteException;
 
-    void disableShortcuts(String str, List<String> list, CharSequence charSequence, int i, int i2) throws RemoteException;
+    void disableShortcuts(String str, List<String> list, CharSequence charSequence, int i, int i2)
+            throws RemoteException;
 
     void enableShortcuts(String str, List<String> list, int i) throws RemoteException;
 
@@ -42,7 +49,8 @@ public interface IShortcutService extends IInterface {
 
     int getRemainingCallCount(String str, int i) throws RemoteException;
 
-    ParceledListSlice getShareTargets(String str, IntentFilter intentFilter, int i) throws RemoteException;
+    ParceledListSlice getShareTargets(String str, IntentFilter intentFilter, int i)
+            throws RemoteException;
 
     IParcelFileDescriptorFactory getShortcutBitmapsFileDescriptor() throws RemoteException;
 
@@ -66,60 +74,94 @@ public interface IShortcutService extends IInterface {
 
     void reportShortcutUsed(String str, String str2, int i) throws RemoteException;
 
-    void requestPinShortcut(String str, ShortcutInfo shortcutInfo, IntentSender intentSender, int i, AndroidFuture<String> androidFuture) throws RemoteException;
+    void requestPinShortcut(
+            String str,
+            ShortcutInfo shortcutInfo,
+            IntentSender intentSender,
+            int i,
+            AndroidFuture<String> androidFuture)
+            throws RemoteException;
 
-    void requestPinShortcutAsDisplay(String str, ShortcutInfo shortcutInfo, IntentSender intentSender, int i, int i2, AndroidFuture<String> androidFuture) throws RemoteException;
+    void requestPinShortcutAsDisplay(
+            String str,
+            ShortcutInfo shortcutInfo,
+            IntentSender intentSender,
+            int i,
+            int i2,
+            AndroidFuture<String> androidFuture)
+            throws RemoteException;
 
     void resetThrottling() throws RemoteException;
 
-    void restoreBitmapsFromBackupService(ParcelFileDescriptor parcelFileDescriptor, String str, String str2) throws RemoteException;
+    void restoreBitmapsFromBackupService(
+            ParcelFileDescriptor parcelFileDescriptor, String str, String str2)
+            throws RemoteException;
 
-    boolean setDynamicShortcuts(String str, ParceledListSlice parceledListSlice, int i) throws RemoteException;
+    boolean setDynamicShortcuts(String str, ParceledListSlice parceledListSlice, int i)
+            throws RemoteException;
 
-    boolean updateShortcuts(String str, ParceledListSlice parceledListSlice, int i) throws RemoteException;
+    boolean updateShortcuts(String str, ParceledListSlice parceledListSlice, int i)
+            throws RemoteException;
 
     public static class Default implements IShortcutService {
         @Override // android.content.pm.IShortcutService
-        public boolean setDynamicShortcuts(String packageName, ParceledListSlice shortcutInfoList, int userId) throws RemoteException {
+        public boolean setDynamicShortcuts(
+                String packageName, ParceledListSlice shortcutInfoList, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IShortcutService
-        public boolean addDynamicShortcuts(String packageName, ParceledListSlice shortcutInfoList, int userId) throws RemoteException {
+        public boolean addDynamicShortcuts(
+                String packageName, ParceledListSlice shortcutInfoList, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IShortcutService
-        public void removeDynamicShortcuts(String packageName, List<String> shortcutIds, int userId) throws RemoteException {
-        }
+        public void removeDynamicShortcuts(String packageName, List<String> shortcutIds, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
-        public void removeAllDynamicShortcuts(String packageName, int userId) throws RemoteException {
-        }
+        public void removeAllDynamicShortcuts(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
-        public boolean updateShortcuts(String packageName, ParceledListSlice shortcuts, int userId) throws RemoteException {
+        public boolean updateShortcuts(String packageName, ParceledListSlice shortcuts, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IShortcutService
-        public void requestPinShortcut(String packageName, ShortcutInfo shortcut, IntentSender resultIntent, int userId, AndroidFuture<String> ret) throws RemoteException {
-        }
+        public void requestPinShortcut(
+                String packageName,
+                ShortcutInfo shortcut,
+                IntentSender resultIntent,
+                int userId,
+                AndroidFuture<String> ret)
+                throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
-        public void createShortcutResultIntent(String packageName, ShortcutInfo shortcut, int userId, AndroidFuture<Intent> ret) throws RemoteException {
-        }
+        public void createShortcutResultIntent(
+                String packageName, ShortcutInfo shortcut, int userId, AndroidFuture<Intent> ret)
+                throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
-        public void disableShortcuts(String packageName, List<String> shortcutIds, CharSequence disabledMessage, int disabledMessageResId, int userId) throws RemoteException {
-        }
+        public void disableShortcuts(
+                String packageName,
+                List<String> shortcutIds,
+                CharSequence disabledMessage,
+                int disabledMessageResId,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
-        public void enableShortcuts(String packageName, List<String> shortcutIds, int userId) throws RemoteException {
-        }
+        public void enableShortcuts(String packageName, List<String> shortcutIds, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
-        public int getMaxShortcutCountPerActivity(String packageName, int userId) throws RemoteException {
+        public int getMaxShortcutCountPerActivity(String packageName, int userId)
+                throws RemoteException {
             return 0;
         }
 
@@ -139,16 +181,14 @@ public interface IShortcutService extends IInterface {
         }
 
         @Override // android.content.pm.IShortcutService
-        public void reportShortcutUsed(String packageName, String shortcutId, int userId) throws RemoteException {
-        }
+        public void reportShortcutUsed(String packageName, String shortcutId, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
-        public void resetThrottling() throws RemoteException {
-        }
+        public void resetThrottling() throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
-        public void onApplicationActive(String packageName, int userId) throws RemoteException {
-        }
+        public void onApplicationActive(String packageName, int userId) throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
         public byte[] getBackupPayload(int user) throws RemoteException {
@@ -156,8 +196,7 @@ public interface IShortcutService extends IInterface {
         }
 
         @Override // android.content.pm.IShortcutService
-        public void applyRestore(byte[] payload, int user) throws RemoteException {
-        }
+        public void applyRestore(byte[] payload, int user) throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
         public boolean isRequestPinItemSupported(int user, int requestType) throws RemoteException {
@@ -165,41 +204,47 @@ public interface IShortcutService extends IInterface {
         }
 
         @Override // android.content.pm.IShortcutService
-        public ParceledListSlice getShareTargets(String packageName, IntentFilter filter, int userId) throws RemoteException {
+        public ParceledListSlice getShareTargets(
+                String packageName, IntentFilter filter, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IShortcutService
-        public boolean hasShareTargets(String packageName, String packageToCheck, int userId) throws RemoteException {
+        public boolean hasShareTargets(String packageName, String packageToCheck, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IShortcutService
-        public void removeLongLivedShortcuts(String packageName, List<String> shortcutIds, int userId) throws RemoteException {
-        }
+        public void removeLongLivedShortcuts(
+                String packageName, List<String> shortcutIds, int userId) throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
-        public ParceledListSlice getShortcuts(String packageName, int matchFlags, int userId) throws RemoteException {
+        public ParceledListSlice getShortcuts(String packageName, int matchFlags, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IShortcutService
-        public void pushDynamicShortcut(String packageName, ShortcutInfo shortcut, int userId) throws RemoteException {
-        }
+        public void pushDynamicShortcut(String packageName, ShortcutInfo shortcut, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
-        public int applyRestoreSmartSwitch(ParcelFileDescriptor payload, int userId) throws RemoteException {
+        public int applyRestoreSmartSwitch(ParcelFileDescriptor payload, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.IShortcutService
-        public IParcelFileDescriptorFactory getShortcutBitmapsFileDescriptor() throws RemoteException {
+        public IParcelFileDescriptorFactory getShortcutBitmapsFileDescriptor()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IShortcutService
-        public void restoreBitmapsFromBackupService(ParcelFileDescriptor target, String packageName, String bitmapPath) throws RemoteException {
-        }
+        public void restoreBitmapsFromBackupService(
+                ParcelFileDescriptor target, String packageName, String bitmapPath)
+                throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
         public String[] getBitmapPathList(int userId) throws RemoteException {
@@ -212,12 +257,17 @@ public interface IShortcutService extends IInterface {
         }
 
         @Override // android.content.pm.IShortcutService
-        public void handleLocaleChanged(boolean force) throws RemoteException {
-        }
+        public void handleLocaleChanged(boolean force) throws RemoteException {}
 
         @Override // android.content.pm.IShortcutService
-        public void requestPinShortcutAsDisplay(String packageName, ShortcutInfo shortcut, IntentSender resultIntent, int userId, int displayId, AndroidFuture<String> ret) throws RemoteException {
-        }
+        public void requestPinShortcutAsDisplay(
+                String packageName,
+                ShortcutInfo shortcut,
+                IntentSender resultIntent,
+                int userId,
+                int displayId,
+                AndroidFuture<String> ret)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -225,7 +275,7 @@ public interface IShortcutService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IShortcutService {
+    public abstract static class Stub extends Binder implements IShortcutService {
         public static final String DESCRIPTOR = "android.content.pm.IShortcutService";
         static final int TRANSACTION_addDynamicShortcuts = 2;
         static final int TRANSACTION_applyRestore = 18;
@@ -354,7 +404,8 @@ public interface IShortcutService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -365,7 +416,8 @@ public interface IShortcutService extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    ParceledListSlice _arg1 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg1 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result = setDynamicShortcuts(_arg0, _arg1, _arg2);
@@ -374,7 +426,8 @@ public interface IShortcutService extends IInterface {
                     return true;
                 case 2:
                     String _arg02 = data.readString();
-                    ParceledListSlice _arg12 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg12 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result2 = addDynamicShortcuts(_arg02, _arg12, _arg22);
@@ -398,7 +451,8 @@ public interface IShortcutService extends IInterface {
                     return true;
                 case 5:
                     String _arg05 = data.readString();
-                    ParceledListSlice _arg15 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg15 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     int _arg24 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result3 = updateShortcuts(_arg05, _arg15, _arg24);
@@ -410,7 +464,8 @@ public interface IShortcutService extends IInterface {
                     ShortcutInfo _arg16 = (ShortcutInfo) data.readTypedObject(ShortcutInfo.CREATOR);
                     IntentSender _arg25 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     int _arg3 = data.readInt();
-                    AndroidFuture<String> _arg4 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<String> _arg4 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     requestPinShortcut(_arg06, _arg16, _arg25, _arg3, _arg4);
                     reply.writeNoException();
@@ -419,7 +474,8 @@ public interface IShortcutService extends IInterface {
                     String _arg07 = data.readString();
                     ShortcutInfo _arg17 = (ShortcutInfo) data.readTypedObject(ShortcutInfo.CREATOR);
                     int _arg26 = data.readInt();
-                    AndroidFuture<Intent> _arg32 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<Intent> _arg32 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     createShortcutResultIntent(_arg07, _arg17, _arg26, _arg32);
                     reply.writeNoException();
@@ -427,7 +483,8 @@ public interface IShortcutService extends IInterface {
                 case 8:
                     String _arg08 = data.readString();
                     List<String> _arg18 = data.createStringArrayList();
-                    CharSequence _arg27 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg27 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     int _arg33 = data.readInt();
                     int _arg42 = data.readInt();
                     data.enforceNoDataAvail();
@@ -516,7 +573,8 @@ public interface IShortcutService extends IInterface {
                     return true;
                 case 20:
                     String _arg019 = data.readString();
-                    IntentFilter _arg118 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
+                    IntentFilter _arg118 =
+                            (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
                     int _arg210 = data.readInt();
                     data.enforceNoDataAvail();
                     ParceledListSlice _result10 = getShareTargets(_arg019, _arg118, _arg210);
@@ -551,14 +609,17 @@ public interface IShortcutService extends IInterface {
                     return true;
                 case 24:
                     String _arg023 = data.readString();
-                    ShortcutInfo _arg122 = (ShortcutInfo) data.readTypedObject(ShortcutInfo.CREATOR);
+                    ShortcutInfo _arg122 =
+                            (ShortcutInfo) data.readTypedObject(ShortcutInfo.CREATOR);
                     int _arg214 = data.readInt();
                     data.enforceNoDataAvail();
                     pushDynamicShortcut(_arg023, _arg122, _arg214);
                     reply.writeNoException();
                     return true;
                 case 25:
-                    ParcelFileDescriptor _arg024 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg024 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     int _arg123 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result13 = applyRestoreSmartSwitch(_arg024, _arg123);
@@ -571,7 +632,9 @@ public interface IShortcutService extends IInterface {
                     reply.writeStrongInterface(_result14);
                     return true;
                 case 27:
-                    ParcelFileDescriptor _arg025 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg025 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     String _arg124 = data.readString();
                     String _arg215 = data.readString();
                     data.enforceNoDataAvail();
@@ -600,11 +663,14 @@ public interface IShortcutService extends IInterface {
                     return true;
                 case 31:
                     String _arg029 = data.readString();
-                    ShortcutInfo _arg125 = (ShortcutInfo) data.readTypedObject(ShortcutInfo.CREATOR);
-                    IntentSender _arg216 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
+                    ShortcutInfo _arg125 =
+                            (ShortcutInfo) data.readTypedObject(ShortcutInfo.CREATOR);
+                    IntentSender _arg216 =
+                            (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     int _arg34 = data.readInt();
                     int _arg43 = data.readInt();
-                    AndroidFuture<String> _arg5 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<String> _arg5 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     requestPinShortcutAsDisplay(_arg029, _arg125, _arg216, _arg34, _arg43, _arg5);
                     reply.writeNoException();
@@ -631,7 +697,9 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public boolean setDynamicShortcuts(String packageName, ParceledListSlice shortcutInfoList, int userId) throws RemoteException {
+            public boolean setDynamicShortcuts(
+                    String packageName, ParceledListSlice shortcutInfoList, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -650,7 +718,9 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public boolean addDynamicShortcuts(String packageName, ParceledListSlice shortcutInfoList, int userId) throws RemoteException {
+            public boolean addDynamicShortcuts(
+                    String packageName, ParceledListSlice shortcutInfoList, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -669,7 +739,9 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public void removeDynamicShortcuts(String packageName, List<String> shortcutIds, int userId) throws RemoteException {
+            public void removeDynamicShortcuts(
+                    String packageName, List<String> shortcutIds, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -686,7 +758,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public void removeAllDynamicShortcuts(String packageName, int userId) throws RemoteException {
+            public void removeAllDynamicShortcuts(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -702,7 +775,9 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public boolean updateShortcuts(String packageName, ParceledListSlice shortcuts, int userId) throws RemoteException {
+            public boolean updateShortcuts(
+                    String packageName, ParceledListSlice shortcuts, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -721,7 +796,13 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public void requestPinShortcut(String packageName, ShortcutInfo shortcut, IntentSender resultIntent, int userId, AndroidFuture<String> ret) throws RemoteException {
+            public void requestPinShortcut(
+                    String packageName,
+                    ShortcutInfo shortcut,
+                    IntentSender resultIntent,
+                    int userId,
+                    AndroidFuture<String> ret)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -740,7 +821,12 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public void createShortcutResultIntent(String packageName, ShortcutInfo shortcut, int userId, AndroidFuture<Intent> ret) throws RemoteException {
+            public void createShortcutResultIntent(
+                    String packageName,
+                    ShortcutInfo shortcut,
+                    int userId,
+                    AndroidFuture<Intent> ret)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -758,7 +844,13 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public void disableShortcuts(String packageName, List<String> shortcutIds, CharSequence disabledMessage, int disabledMessageResId, int userId) throws RemoteException {
+            public void disableShortcuts(
+                    String packageName,
+                    List<String> shortcutIds,
+                    CharSequence disabledMessage,
+                    int disabledMessageResId,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -782,7 +874,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public void enableShortcuts(String packageName, List<String> shortcutIds, int userId) throws RemoteException {
+            public void enableShortcuts(String packageName, List<String> shortcutIds, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -799,7 +892,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public int getMaxShortcutCountPerActivity(String packageName, int userId) throws RemoteException {
+            public int getMaxShortcutCountPerActivity(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -817,7 +911,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public int getRemainingCallCount(String packageName, int userId) throws RemoteException {
+            public int getRemainingCallCount(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -835,7 +930,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public long getRateLimitResetTime(String packageName, int userId) throws RemoteException {
+            public long getRateLimitResetTime(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -871,7 +967,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public void reportShortcutUsed(String packageName, String shortcutId, int userId) throws RemoteException {
+            public void reportShortcutUsed(String packageName, String shortcutId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -948,7 +1045,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public boolean isRequestPinItemSupported(int user, int requestType) throws RemoteException {
+            public boolean isRequestPinItemSupported(int user, int requestType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -966,7 +1064,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public ParceledListSlice getShareTargets(String packageName, IntentFilter filter, int userId) throws RemoteException {
+            public ParceledListSlice getShareTargets(
+                    String packageName, IntentFilter filter, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -976,7 +1075,8 @@ public interface IShortcutService extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(20, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -985,7 +1085,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public boolean hasShareTargets(String packageName, String packageToCheck, int userId) throws RemoteException {
+            public boolean hasShareTargets(String packageName, String packageToCheck, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1004,7 +1105,9 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public void removeLongLivedShortcuts(String packageName, List<String> shortcutIds, int userId) throws RemoteException {
+            public void removeLongLivedShortcuts(
+                    String packageName, List<String> shortcutIds, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1021,7 +1124,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public ParceledListSlice getShortcuts(String packageName, int matchFlags, int userId) throws RemoteException {
+            public ParceledListSlice getShortcuts(String packageName, int matchFlags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1031,7 +1135,8 @@ public interface IShortcutService extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(23, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1040,7 +1145,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public void pushDynamicShortcut(String packageName, ShortcutInfo shortcut, int userId) throws RemoteException {
+            public void pushDynamicShortcut(String packageName, ShortcutInfo shortcut, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1057,7 +1163,8 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public int applyRestoreSmartSwitch(ParcelFileDescriptor payload, int userId) throws RemoteException {
+            public int applyRestoreSmartSwitch(ParcelFileDescriptor payload, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1075,14 +1182,17 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public IParcelFileDescriptorFactory getShortcutBitmapsFileDescriptor() throws RemoteException {
+            public IParcelFileDescriptorFactory getShortcutBitmapsFileDescriptor()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(26, _data, _reply, 0);
                     _reply.readException();
-                    IParcelFileDescriptorFactory _result = IParcelFileDescriptorFactory.Stub.asInterface(_reply.readStrongBinder());
+                    IParcelFileDescriptorFactory _result =
+                            IParcelFileDescriptorFactory.Stub.asInterface(
+                                    _reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1091,7 +1201,9 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public void restoreBitmapsFromBackupService(ParcelFileDescriptor target, String packageName, String bitmapPath) throws RemoteException {
+            public void restoreBitmapsFromBackupService(
+                    ParcelFileDescriptor target, String packageName, String bitmapPath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1133,7 +1245,9 @@ public interface IShortcutService extends IInterface {
                     _data.writeInt(user);
                     this.mRemote.transact(29, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1157,7 +1271,14 @@ public interface IShortcutService extends IInterface {
             }
 
             @Override // android.content.pm.IShortcutService
-            public void requestPinShortcutAsDisplay(String packageName, ShortcutInfo shortcut, IntentSender resultIntent, int userId, int displayId, AndroidFuture<String> ret) throws RemoteException {
+            public void requestPinShortcutAsDisplay(
+                    String packageName,
+                    ShortcutInfo shortcut,
+                    IntentSender resultIntent,
+                    int userId,
+                    int displayId,
+                    AndroidFuture<String> ret)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

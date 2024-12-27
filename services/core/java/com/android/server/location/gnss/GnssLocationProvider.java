@@ -42,6 +42,7 @@ import android.text.format.DateFormat;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.TimeUtils;
+
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.location.GpsNetInitiatedHandler;
 import com.android.internal.notification.SystemNotificationChannels;
@@ -59,11 +60,6 @@ import com.android.server.backup.BackupManagerConstants;
 import com.android.server.input.KeyboardMetricsCollector;
 import com.android.server.location.LocationManagerService;
 import com.android.server.location.LocationServiceThread;
-import com.android.server.location.gnss.GnssMetrics;
-import com.android.server.location.gnss.GnssSatelliteBlocklistHelper;
-import com.android.server.location.gnss.GnssVisibilityControl;
-import com.android.server.location.gnss.NetworkTimeHelper;
-import com.android.server.location.gnss.TimeDetectorNetworkTimeHelper;
 import com.android.server.location.gnss.hal.GnssNative;
 import com.android.server.location.gnss.sec.GnssHalStatus;
 import com.android.server.location.gnss.sec.GnssVendorConfig;
@@ -75,6 +71,7 @@ import com.android.server.location.nsflp.NSLocationProviderHelper;
 import com.android.server.location.provider.AbstractLocationProvider;
 import com.android.server.location.provider.AbstractLocationProvider$$ExternalSyntheticLambda0;
 import com.android.server.location.provider.LocationProviderManager$Registration$$ExternalSyntheticLambda0;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -89,7 +86,17 @@ import java.util.concurrent.TimeUnit;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public abstract class GnssLocationProvider extends AbstractLocationProvider implements NetworkTimeHelper.InjectTimeCallback, GnssSatelliteBlocklistHelper.GnssSatelliteBlocklistCallback, GnssNative.BaseCallbacks, GnssNative.LocationCallbacks, GnssNative.SvStatusCallbacks, GnssNative.AGpsCallbacks, GnssNative.PsdsCallbacks, GnssNative.NotificationCallbacks, GnssNative.LocationRequestCallbacks, GnssNative.TimeCallbacks {
+public abstract class GnssLocationProvider extends AbstractLocationProvider
+        implements NetworkTimeHelper.InjectTimeCallback,
+                GnssSatelliteBlocklistHelper.GnssSatelliteBlocklistCallback,
+                GnssNative.BaseCallbacks,
+                GnssNative.LocationCallbacks,
+                GnssNative.SvStatusCallbacks,
+                GnssNative.AGpsCallbacks,
+                GnssNative.PsdsCallbacks,
+                GnssNative.NotificationCallbacks,
+                GnssNative.LocationRequestCallbacks,
+                GnssNative.TimeCallbacks {
     public boolean isExtraCommandFromAllowedAppRequest;
     public final AlarmManager mAlarmManager;
     public final AppOpsManager mAppOps;
@@ -146,7 +153,15 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
     public final PowerManager.WakeLock mWakeLock;
     public final AlarmManager.OnAlarmListener mWakeupListener;
     public static final boolean VERBOSE = Log.isLoggable("GnssLocationProvider", 2);
-    public static final ProviderProperties PROPERTIES = new ProviderProperties.Builder().setHasSatelliteRequirement(true).setHasAltitudeSupport(true).setHasSpeedSupport(true).setHasBearingSupport(true).setPowerUsage(3).setAccuracy(1).build();
+    public static final ProviderProperties PROPERTIES =
+            new ProviderProperties.Builder()
+                    .setHasSatelliteRequirement(true)
+                    .setHasAltitudeSupport(true)
+                    .setHasSpeedSupport(true)
+                    .setHasBearingSupport(true)
+                    .setPowerUsage(3)
+                    .setAccuracy(1)
+                    .build();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.location.gnss.GnssLocationProvider$1, reason: invalid class name */
@@ -158,16 +173,23 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         }
 
         public final void onEmergencyCallEnd() {
-            String property = this.this$0.mGnssConfiguration.mProperties.getProperty("ENABLE_ACTIVE_SIM_EMERGENCY_SUPL");
+            String property =
+                    this.this$0.mGnssConfiguration.mProperties.getProperty(
+                            "ENABLE_ACTIVE_SIM_EMERGENCY_SUPL");
             if (TextUtils.isEmpty(property) ? false : Boolean.parseBoolean(property)) {
-                this.this$0.mHandler.postDelayed(new GnssLocationProvider$$ExternalSyntheticLambda12(2, this), TimeUnit.SECONDS.toMillis(r0.mGnssConfiguration.mEsExtensionSec));
+                this.this$0.mHandler.postDelayed(
+                        new GnssLocationProvider$$ExternalSyntheticLambda12(2, this),
+                        TimeUnit.SECONDS.toMillis(r0.mGnssConfiguration.mEsExtensionSec));
             }
         }
 
         public final void onEmergencyCallStart(int i) {
-            String property = this.this$0.mGnssConfiguration.mProperties.getProperty("ENABLE_ACTIVE_SIM_EMERGENCY_SUPL");
+            String property =
+                    this.this$0.mGnssConfiguration.mProperties.getProperty(
+                            "ENABLE_ACTIVE_SIM_EMERGENCY_SUPL");
             if (TextUtils.isEmpty(property) ? false : Boolean.parseBoolean(property)) {
-                this.this$0.mHandler.post(new GnssLocationProvider$$ExternalSyntheticLambda3(i, 5, this));
+                this.this$0.mHandler.post(
+                        new GnssLocationProvider$$ExternalSyntheticLambda3(i, 5, this));
             }
         }
     }
@@ -195,7 +217,10 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
                 Method dump skipped, instructions count: 322
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.location.gnss.GnssLocationProvider.AnonymousClass2.onReceive(android.content.Context, android.content.Intent):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.location.gnss.GnssLocationProvider.AnonymousClass2.onReceive(android.content.Context,"
+                        + " android.content.Intent):void");
         }
     }
 
@@ -242,61 +267,67 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         this.mSuplEsEnabled = false;
         this.mLocationExtras = new LocationExtras();
         final int i = 1;
-        this.mWakeupListener = new AlarmManager.OnAlarmListener(this) { // from class: com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda7
-            public final /* synthetic */ GnssLocationProvider f$0;
+        this.mWakeupListener =
+                new AlarmManager.OnAlarmListener(
+                        this) { // from class:
+                                // com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda7
+                    public final /* synthetic */ GnssLocationProvider f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // android.app.AlarmManager.OnAlarmListener
-            public final void onAlarm() {
-                int i2 = i;
-                GnssLocationProvider gnssLocationProvider = this.f$0;
-                switch (i2) {
-                    case 0:
-                        gnssLocationProvider.startNavigating();
-                        break;
-                    case 1:
-                        gnssLocationProvider.startNavigating();
-                        break;
-                    case 2:
-                        gnssLocationProvider.hibernate();
-                        break;
-                    default:
-                        gnssLocationProvider.hibernate();
-                        break;
-                }
-            }
-        };
+                    @Override // android.app.AlarmManager.OnAlarmListener
+                    public final void onAlarm() {
+                        int i2 = i;
+                        GnssLocationProvider gnssLocationProvider = this.f$0;
+                        switch (i2) {
+                            case 0:
+                                gnssLocationProvider.startNavigating();
+                                break;
+                            case 1:
+                                gnssLocationProvider.startNavigating();
+                                break;
+                            case 2:
+                                gnssLocationProvider.hibernate();
+                                break;
+                            default:
+                                gnssLocationProvider.hibernate();
+                                break;
+                        }
+                    }
+                };
         final int i2 = 2;
-        this.mTimeoutListener = new AlarmManager.OnAlarmListener(this) { // from class: com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda7
-            public final /* synthetic */ GnssLocationProvider f$0;
+        this.mTimeoutListener =
+                new AlarmManager.OnAlarmListener(
+                        this) { // from class:
+                                // com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda7
+                    public final /* synthetic */ GnssLocationProvider f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // android.app.AlarmManager.OnAlarmListener
-            public final void onAlarm() {
-                int i22 = i2;
-                GnssLocationProvider gnssLocationProvider = this.f$0;
-                switch (i22) {
-                    case 0:
-                        gnssLocationProvider.startNavigating();
-                        break;
-                    case 1:
-                        gnssLocationProvider.startNavigating();
-                        break;
-                    case 2:
-                        gnssLocationProvider.hibernate();
-                        break;
-                    default:
-                        gnssLocationProvider.hibernate();
-                        break;
-                }
-            }
-        };
+                    @Override // android.app.AlarmManager.OnAlarmListener
+                    public final void onAlarm() {
+                        int i22 = i2;
+                        GnssLocationProvider gnssLocationProvider = this.f$0;
+                        switch (i22) {
+                            case 0:
+                                gnssLocationProvider.startNavigating();
+                                break;
+                            case 1:
+                                gnssLocationProvider.startNavigating();
+                                break;
+                            case 2:
+                                gnssLocationProvider.hibernate();
+                                break;
+                            default:
+                                gnssLocationProvider.hibernate();
+                                break;
+                        }
+                    }
+                };
         this.mFlushListeners = new ArrayList(0);
         this.mIntentReceiver = new AnonymousClass2(this, 1);
         this.mContext = context;
@@ -317,8 +348,13 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         this.mNSLocationProviderHelper = null;
     }
 
-    public GnssLocationProvider(Context context, Injector injector, GnssNative gnssNative, GnssMetrics gnssMetrics) {
-        super(LocationServiceThread.getExecutor(), CallerIdentity.fromContext(context), PROPERTIES, Collections.emptySet());
+    public GnssLocationProvider(
+            Context context, Injector injector, GnssNative gnssNative, GnssMetrics gnssMetrics) {
+        super(
+                LocationServiceThread.getExecutor(),
+                CallerIdentity.fromContext(context),
+                PROPERTIES,
+                Collections.emptySet());
         this.mLock = new Object();
         this.mPsdsBackOff = new ExponentialBackOff();
         this.mFixInterval = 1000;
@@ -339,76 +375,85 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         this.mLocationExtras = new LocationExtras();
         final GnssLocationProviderSec gnssLocationProviderSec = (GnssLocationProviderSec) this;
         final int i = 0;
-        this.mWakeupListener = new AlarmManager.OnAlarmListener(gnssLocationProviderSec) { // from class: com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda7
-            public final /* synthetic */ GnssLocationProvider f$0;
+        this.mWakeupListener =
+                new AlarmManager.OnAlarmListener(
+                        gnssLocationProviderSec) { // from class:
+                                                   // com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda7
+                    public final /* synthetic */ GnssLocationProvider f$0;
 
-            {
-                this.f$0 = gnssLocationProviderSec;
-            }
+                    {
+                        this.f$0 = gnssLocationProviderSec;
+                    }
 
-            @Override // android.app.AlarmManager.OnAlarmListener
-            public final void onAlarm() {
-                int i22 = i;
-                GnssLocationProvider gnssLocationProvider = this.f$0;
-                switch (i22) {
-                    case 0:
-                        gnssLocationProvider.startNavigating();
-                        break;
-                    case 1:
-                        gnssLocationProvider.startNavigating();
-                        break;
-                    case 2:
-                        gnssLocationProvider.hibernate();
-                        break;
-                    default:
-                        gnssLocationProvider.hibernate();
-                        break;
-                }
-            }
-        };
+                    @Override // android.app.AlarmManager.OnAlarmListener
+                    public final void onAlarm() {
+                        int i22 = i;
+                        GnssLocationProvider gnssLocationProvider = this.f$0;
+                        switch (i22) {
+                            case 0:
+                                gnssLocationProvider.startNavigating();
+                                break;
+                            case 1:
+                                gnssLocationProvider.startNavigating();
+                                break;
+                            case 2:
+                                gnssLocationProvider.hibernate();
+                                break;
+                            default:
+                                gnssLocationProvider.hibernate();
+                                break;
+                        }
+                    }
+                };
         final int i2 = 3;
-        this.mTimeoutListener = new AlarmManager.OnAlarmListener(gnssLocationProviderSec) { // from class: com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda7
-            public final /* synthetic */ GnssLocationProvider f$0;
+        this.mTimeoutListener =
+                new AlarmManager.OnAlarmListener(
+                        gnssLocationProviderSec) { // from class:
+                                                   // com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda7
+                    public final /* synthetic */ GnssLocationProvider f$0;
 
-            {
-                this.f$0 = gnssLocationProviderSec;
-            }
+                    {
+                        this.f$0 = gnssLocationProviderSec;
+                    }
 
-            @Override // android.app.AlarmManager.OnAlarmListener
-            public final void onAlarm() {
-                int i22 = i2;
-                GnssLocationProvider gnssLocationProvider = this.f$0;
-                switch (i22) {
-                    case 0:
-                        gnssLocationProvider.startNavigating();
-                        break;
-                    case 1:
-                        gnssLocationProvider.startNavigating();
-                        break;
-                    case 2:
-                        gnssLocationProvider.hibernate();
-                        break;
-                    default:
-                        gnssLocationProvider.hibernate();
-                        break;
-                }
-            }
-        };
+                    @Override // android.app.AlarmManager.OnAlarmListener
+                    public final void onAlarm() {
+                        int i22 = i2;
+                        GnssLocationProvider gnssLocationProvider = this.f$0;
+                        switch (i22) {
+                            case 0:
+                                gnssLocationProvider.startNavigating();
+                                break;
+                            case 1:
+                                gnssLocationProvider.startNavigating();
+                                break;
+                            case 2:
+                                gnssLocationProvider.hibernate();
+                                break;
+                            default:
+                                gnssLocationProvider.hibernate();
+                                break;
+                        }
+                    }
+                };
         this.mFlushListeners = new ArrayList(0);
         this.mIntentReceiver = new AnonymousClass2(this, 1);
         Log.i("GnssLocationProvider", "GnssLocationProvider()");
         this.mContext = context;
         this.mGnssNative = gnssNative;
         this.mGnssMetrics = gnssMetrics;
-        LocationManagerService.SystemInjector systemInjector = (LocationManagerService.SystemInjector) injector;
+        LocationManagerService.SystemInjector systemInjector =
+                (LocationManagerService.SystemInjector) injector;
         this.mNSConnectionHelper = systemInjector.mNSConnectionHelper;
         this.mNSLocationProviderHelper = systemInjector.mNSLocationProviderHelper;
         PowerManager powerManager = (PowerManager) context.getSystemService(PowerManager.class);
         Objects.requireNonNull(powerManager);
-        PowerManager.WakeLock newWakeLock = powerManager.newWakeLock(1, "*location*:GnssLocationProvider");
+        PowerManager.WakeLock newWakeLock =
+                powerManager.newWakeLock(1, "*location*:GnssLocationProvider");
         this.mWakeLock = newWakeLock;
         newWakeLock.setReferenceCounted(true);
-        this.mSubscriptionManager = (SubscriptionManager) context.getSystemService("telephony_subscription_service");
+        this.mSubscriptionManager =
+                (SubscriptionManager) context.getSystemService("telephony_subscription_service");
         VelocitySmoothingFilter velocitySmoothingFilter = new VelocitySmoothingFilter();
         velocitySmoothingFilter.isDriving = false;
         velocitySmoothingFilter.mDriveCount = 0;
@@ -419,16 +464,29 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         newWakeLock2.setReferenceCounted(true);
         this.mAlarmManager = (AlarmManager) context.getSystemService("alarm");
         this.mAppOps = (AppOpsManager) context.getSystemService(AppOpsManager.class);
-        this.mBatteryStats = IBatteryStats.Stub.asInterface(ServiceManager.getService("batterystats"));
+        this.mBatteryStats =
+                IBatteryStats.Stub.asInterface(ServiceManager.getService("batterystats"));
         Handler handler = LocationServiceThread.getHandler();
         this.mHandler = handler;
         this.mGnssConfiguration = gnssNative.mConfiguration;
-        GpsNetInitiatedHandler gpsNetInitiatedHandler = new GpsNetInitiatedHandler(context, new AnonymousClass1(gnssLocationProviderSec), this.mSuplEsEnabled);
+        GpsNetInitiatedHandler gpsNetInitiatedHandler =
+                new GpsNetInitiatedHandler(
+                        context, new AnonymousClass1(gnssLocationProviderSec), this.mSuplEsEnabled);
         this.mNIHandler = gpsNetInitiatedHandler;
         hashSet.add(1);
-        this.mNetworkConnectivityHandler = new GnssNetworkConnectivityHandler(context, new GnssLocationProvider$$ExternalSyntheticLambda9(gnssLocationProviderSec), handler.getLooper(), gpsNetInitiatedHandler);
-        this.mNetworkTimeHelper = new TimeDetectorNetworkTimeHelper(new TimeDetectorNetworkTimeHelper.EnvironmentImpl(handler.getLooper()), gnssLocationProviderSec);
-        this.mGnssSatelliteBlocklistHelper = new GnssSatelliteBlocklistHelper(context, handler.getLooper(), gnssLocationProviderSec);
+        this.mNetworkConnectivityHandler =
+                new GnssNetworkConnectivityHandler(
+                        context,
+                        new GnssLocationProvider$$ExternalSyntheticLambda9(gnssLocationProviderSec),
+                        handler.getLooper(),
+                        gpsNetInitiatedHandler);
+        this.mNetworkTimeHelper =
+                new TimeDetectorNetworkTimeHelper(
+                        new TimeDetectorNetworkTimeHelper.EnvironmentImpl(handler.getLooper()),
+                        gnssLocationProviderSec);
+        this.mGnssSatelliteBlocklistHelper =
+                new GnssSatelliteBlocklistHelper(
+                        context, handler.getLooper(), gnssLocationProviderSec);
         setState(new AbstractLocationProvider$$ExternalSyntheticLambda0(true));
         gnssNative.addBaseCallbacks(this);
         gnssNative.addLocationCallbacks(this);
@@ -441,7 +499,8 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
     }
 
     public static String getTimestamp() {
-        return DateFormat.format("[yyyy-MM-dd HH:mm:ss]", Calendar.getInstance().getTime()).toString();
+        return DateFormat.format("[yyyy-MM-dd HH:mm:ss]", Calendar.getInstance().getTime())
+                .toString();
     }
 
     public abstract void changeNlpAccuracyInForce(Location location);
@@ -450,16 +509,22 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         Log.d("GnssLocationProvider", "demandUtcTimeInjection");
         TimeDetectorNetworkTimeHelper timeDetectorNetworkTimeHelper = this.mNetworkTimeHelper;
         Objects.requireNonNull(timeDetectorNetworkTimeHelper);
-        postWithWakeLockHeld(new GnssLocationProvider$$ExternalSyntheticLambda12(1, timeDetectorNetworkTimeHelper));
+        postWithWakeLockHeld(
+                new GnssLocationProvider$$ExternalSyntheticLambda12(
+                        1, timeDetectorNetworkTimeHelper));
     }
 
     @Override // com.android.server.location.provider.AbstractLocationProvider
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         boolean z;
         GpsBatteryStats gpsBatteryStats;
         String str;
         int i = 0;
-        while (i < strArr.length && (str = strArr[i]) != null && str.length() > 0 && str.charAt(0) == '-') {
+        while (i < strArr.length
+                && (str = strArr[i]) != null
+                && str.length() > 0
+                && str.charAt(0) == '-') {
             i++;
             if ("-a".equals(str)) {
                 z = true;
@@ -468,12 +533,23 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         }
         z = false;
         printWriter.print("mStarted=" + this.mStarted + "   (changed ");
-        TimeUtils.formatDuration(SystemClock.elapsedRealtime() - this.mStartedChangedElapsedRealtime, printWriter);
+        TimeUtils.formatDuration(
+                SystemClock.elapsedRealtime() - this.mStartedChangedElapsedRealtime, printWriter);
         printWriter.println(" ago)");
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mBatchingEnabled="), this.mBatchingEnabled, printWriter, "mBatchingStarted="), this.mBatchingStarted, printWriter, "mBatchSize=");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("mBatchingEnabled="),
+                                this.mBatchingEnabled,
+                                printWriter,
+                                "mBatchingStarted="),
+                        this.mBatchingStarted,
+                        printWriter,
+                        "mBatchSize=");
         m.append(getBatchSize());
         printWriter.println(m.toString());
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("mFixInterval="), this.mFixInterval, printWriter);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("mFixInterval="), this.mFixInterval, printWriter);
         GnssMetrics gnssMetrics = this.mGnssMetrics;
         gnssMetrics.getClass();
         StringBuilder sb = new StringBuilder();
@@ -585,7 +661,8 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
                 sb.append("  Amount of time (while on battery) Top 4 Avg CN0 > 20.0 dB-Hz (min): ");
                 sb.append(timeInGpsSignalQualityLevel[1] / 60000.0d);
                 sb.append("\n");
-                sb.append("  Amount of time (while on battery) Top 4 Avg CN0 <= 20.0 dB-Hz (min): ");
+                sb.append(
+                        "  Amount of time (while on battery) Top 4 Avg CN0 <= 20.0 dB-Hz (min): ");
                 sb.append(timeInGpsSignalQualityLevel[0] / 60000.0d);
                 sb.append("\n");
             }
@@ -604,13 +681,29 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, "  ");
             indentingPrintWriter.increaseIndent();
             synchronized (timeDetectorNetworkTimeHelper) {
-                indentingPrintWriter.println("mPeriodicTimeInjectionEnabled=" + timeDetectorNetworkTimeHelper.mPeriodicTimeInjectionEnabled);
+                indentingPrintWriter.println(
+                        "mPeriodicTimeInjectionEnabled="
+                                + timeDetectorNetworkTimeHelper.mPeriodicTimeInjectionEnabled);
             }
             indentingPrintWriter.println("Debug log:");
             timeDetectorNetworkTimeHelper.mDumpLog.dump(indentingPrintWriter);
-            StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mSupportsPsds="), this.mSupportsPsds, printWriter, "PsdsServerConfigured=");
+            StringBuilder m2 =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("mSupportsPsds="),
+                            this.mSupportsPsds,
+                            printWriter,
+                            "PsdsServerConfigured=");
             GnssConfiguration gnssConfiguration = this.mGnssConfiguration;
-            m2.append((gnssConfiguration.mProperties.getProperty("LONGTERM_PSDS_SERVER_1") == null && gnssConfiguration.mProperties.getProperty("LONGTERM_PSDS_SERVER_2") == null && gnssConfiguration.mProperties.getProperty("LONGTERM_PSDS_SERVER_3") == null) ? false : true);
+            m2.append(
+                    (gnssConfiguration.mProperties.getProperty("LONGTERM_PSDS_SERVER_1") == null
+                                    && gnssConfiguration.mProperties.getProperty(
+                                                    "LONGTERM_PSDS_SERVER_2")
+                                            == null
+                                    && gnssConfiguration.mProperties.getProperty(
+                                                    "LONGTERM_PSDS_SERVER_3")
+                                            == null)
+                            ? false
+                            : true);
             printWriter.println(m2.toString());
             printWriter.println("native internal state: ");
             printWriter.println("  " + this.mGnssNative.getInternalState());
@@ -642,7 +735,9 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         try {
             String str = SystemProperties.get("persist.sys.xtra_time");
             long currentTimeMillis = System.currentTimeMillis();
-            if ("user".equals(Build.TYPE) && str != null && !this.isExtraCommandFromAllowedAppRequest) {
+            if ("user".equals(Build.TYPE)
+                    && str != null
+                    && !this.isExtraCommandFromAllowedAppRequest) {
                 if (currentTimeMillis - Long.parseLong(str) < 21600000) {
                     Log.d("GnssLocationProvider", "Ignore xtra download request");
                     return;
@@ -653,7 +748,9 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             Log.d("GnssLocationProvider", "NumberFormatException while using parseLong.");
         }
         if (!this.mSupportsPsds) {
-            Log.d("GnssLocationProvider", "handleDownloadPsdsData() called when PSDS not supported");
+            Log.d(
+                    "GnssLocationProvider",
+                    "handleDownloadPsdsData() called when PSDS not supported");
             return;
         }
         if (!this.mNetworkConnectivityHandler.isDataNetworkConnected()) {
@@ -665,13 +762,16 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         synchronized (this.mLock) {
             try {
                 if (this.mDownloadInProgressPsdsTypes.contains(Integer.valueOf(i))) {
-                    Log.d("GnssLocationProvider", "PSDS type " + i + " download in progress. Ignore the request.");
+                    Log.d(
+                            "GnssLocationProvider",
+                            "PSDS type " + i + " download in progress. Ignore the request.");
                     return;
                 }
                 this.mDownloadPsdsWakeLock.acquire(60000L);
                 this.mDownloadInProgressPsdsTypes.add(Integer.valueOf(i));
                 Log.i("GnssLocationProvider", "WakeLock acquired by handleDownloadPsdsData()");
-                Executors.newSingleThreadExecutor().execute(new GnssLocationProvider$$ExternalSyntheticLambda3(i, 1, this));
+                Executors.newSingleThreadExecutor()
+                        .execute(new GnssLocationProvider$$ExternalSyntheticLambda3(i, 1, this));
                 this.isExtraCommandFromAllowedAppRequest = false;
             } catch (Throwable th) {
                 throw th;
@@ -685,7 +785,12 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
 
     public final void hibernate() {
         stopNavigating();
-        this.mAlarmManager.set(2, SystemClock.elapsedRealtime() + this.mFixInterval, "GnssLocationProvider", this.mWakeupListener, this.mHandler);
+        this.mAlarmManager.set(
+                2,
+                SystemClock.elapsedRealtime() + this.mFixInterval,
+                "GnssLocationProvider",
+                this.mWakeupListener,
+                this.mHandler);
     }
 
     public abstract boolean isDeviceBasedHybridSupported();
@@ -725,15 +830,19 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             }
             if ("force_psds_injection".equals(str)) {
                 if (this.mSupportsPsds) {
-                    postWithWakeLockHeld(new GnssLocationProvider$$ExternalSyntheticLambda0(this, 2));
+                    postWithWakeLockHeld(
+                            new GnssLocationProvider$$ExternalSyntheticLambda0(this, 2));
                     return;
                 }
                 return;
             } else if ("request_power_stats".equals(str)) {
-                gnssNative.requestPowerStats(new SystemServerInitThreadPool$$ExternalSyntheticLambda0(), new GnssLocationProvider$$ExternalSyntheticLambda20());
+                gnssNative.requestPowerStats(
+                        new SystemServerInitThreadPool$$ExternalSyntheticLambda0(),
+                        new GnssLocationProvider$$ExternalSyntheticLambda20());
                 return;
             } else {
-                NetworkScorerAppManager$$ExternalSyntheticOutline0.m("sendExtraCommand: unknown command ", str, "GnssLocationProvider");
+                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                        "sendExtraCommand: unknown command ", str, "GnssLocationProvider");
                 return;
             }
         }
@@ -805,11 +914,17 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
     }
 
     @Override // com.android.server.location.provider.AbstractLocationProvider
-    public final void onFlush(LocationProviderManager$Registration$$ExternalSyntheticLambda0 locationProviderManager$Registration$$ExternalSyntheticLambda0) {
+    public final void onFlush(
+            LocationProviderManager$Registration$$ExternalSyntheticLambda0
+                    locationProviderManager$Registration$$ExternalSyntheticLambda0) {
         boolean add;
         synchronized (this.mLock) {
             try {
-                add = this.mBatchingEnabled ? this.mFlushListeners.add(locationProviderManager$Registration$$ExternalSyntheticLambda0) : false;
+                add =
+                        this.mBatchingEnabled
+                                ? this.mFlushListeners.add(
+                                        locationProviderManager$Registration$$ExternalSyntheticLambda0)
+                                : false;
             } catch (Throwable th) {
                 throw th;
             }
@@ -832,8 +947,10 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         synchronized (this.mLock) {
             try {
                 if (this.mInitialized) {
-                    GnssNetworkConnectivityHandler gnssNetworkConnectivityHandler = this.mNetworkConnectivityHandler;
-                    gnssNetworkConnectivityHandler.mConnMgr.unregisterNetworkCallback(gnssNetworkConnectivityHandler.mNetworkConnectivityCallback);
+                    GnssNetworkConnectivityHandler gnssNetworkConnectivityHandler =
+                            this.mNetworkConnectivityHandler;
+                    gnssNetworkConnectivityHandler.mConnMgr.unregisterNetworkCallback(
+                            gnssNetworkConnectivityHandler.mNetworkConnectivityCallback);
                     gnssNetworkConnectivityHandler.mNetworkConnectivityCallback = null;
                     this.mNetworkConnectivityHandler.registerNetworkCallbacks();
                 }
@@ -845,48 +962,58 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
 
     public final void onReportAGpsStatus(final int i, int i2, final byte[] bArr) {
         StringBuilder sb = new StringBuilder("AGPS_DATA_CONNECTION: ");
-        final GnssNetworkConnectivityHandler gnssNetworkConnectivityHandler = this.mNetworkConnectivityHandler;
+        final GnssNetworkConnectivityHandler gnssNetworkConnectivityHandler =
+                this.mNetworkConnectivityHandler;
         gnssNetworkConnectivityHandler.getClass();
-        VpnManagerService$$ExternalSyntheticOutline0.m(sb, GnssNetworkConnectivityHandler.agpsDataConnStatusAsString(i2), "GnssNetworkConnectivityHandler");
+        VpnManagerService$$ExternalSyntheticOutline0.m(
+                sb,
+                GnssNetworkConnectivityHandler.agpsDataConnStatusAsString(i2),
+                "GnssNetworkConnectivityHandler");
         Handler handler = gnssNetworkConnectivityHandler.mHandler;
         if (i2 == 1) {
-            final Runnable runnable = new Runnable() { // from class: com.android.server.location.gnss.GnssNetworkConnectivityHandler$$ExternalSyntheticLambda0
-                /* JADX WARN: Code restructure failed: missing block: B:27:0x00b6, code lost:
-                
-                    if (com.android.server.location.gnss.sec.GnssVendorConfig.isIzatServiceEnabled() == false) goto L48;
-                 */
-                /* JADX WARN: Removed duplicated region for block: B:51:0x017f  */
-                /* JADX WARN: Removed duplicated region for block: B:58:0x019b  */
-                /* JADX WARN: Removed duplicated region for block: B:63:? A[RETURN, SYNTHETIC] */
-                /* JADX WARN: Removed duplicated region for block: B:69:0x014d  */
-                @Override // java.lang.Runnable
-                /*
-                    Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
-                */
-                public final void run() {
-                    /*
-                        Method dump skipped, instructions count: 441
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.server.location.gnss.GnssNetworkConnectivityHandler$$ExternalSyntheticLambda0.run():void");
-                }
-            };
+            final Runnable runnable = new Runnable() { // from class:
+                        // com.android.server.location.gnss.GnssNetworkConnectivityHandler$$ExternalSyntheticLambda0
+                        /* JADX WARN: Code restructure failed: missing block: B:27:0x00b6, code lost:
+
+                           if (com.android.server.location.gnss.sec.GnssVendorConfig.isIzatServiceEnabled() == false) goto L48;
+                        */
+                        /* JADX WARN: Removed duplicated region for block: B:51:0x017f  */
+                        /* JADX WARN: Removed duplicated region for block: B:58:0x019b  */
+                        /* JADX WARN: Removed duplicated region for block: B:63:? A[RETURN, SYNTHETIC] */
+                        /* JADX WARN: Removed duplicated region for block: B:69:0x014d  */
+                        @Override // java.lang.Runnable
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                            To view partially-correct code enable 'Show inconsistent code' option in preferences
+                        */
+                        public final void run() {
+                            /*
+                                Method dump skipped, instructions count: 441
+                                To view this dump change 'Code comments level' option to 'DEBUG'
+                            */
+                            throw new UnsupportedOperationException(
+                                    "Method not decompiled:"
+                                        + " com.android.server.location.gnss.GnssNetworkConnectivityHandler$$ExternalSyntheticLambda0.run():void");
+                        }
+                    };
             gnssNetworkConnectivityHandler.mWakeLock.acquire(60000L);
-            if (handler.post(new Runnable() { // from class: com.android.server.location.gnss.GnssNetworkConnectivityHandler$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    GnssNetworkConnectivityHandler gnssNetworkConnectivityHandler2 = GnssNetworkConnectivityHandler.this;
-                    Runnable runnable2 = runnable;
-                    boolean z = GnssNetworkConnectivityHandler.VERBOSE;
-                    gnssNetworkConnectivityHandler2.getClass();
-                    try {
-                        runnable2.run();
-                    } finally {
-                        gnssNetworkConnectivityHandler2.mWakeLock.release();
-                    }
-                }
-            })) {
+            if (handler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.location.gnss.GnssNetworkConnectivityHandler$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            GnssNetworkConnectivityHandler gnssNetworkConnectivityHandler2 =
+                                    GnssNetworkConnectivityHandler.this;
+                            Runnable runnable2 = runnable;
+                            boolean z = GnssNetworkConnectivityHandler.VERBOSE;
+                            gnssNetworkConnectivityHandler2.getClass();
+                            try {
+                                runnable2.run();
+                            } finally {
+                                gnssNetworkConnectivityHandler2.mWakeLock.release();
+                            }
+                        }
+                    })) {
                 return;
             }
             gnssNetworkConnectivityHandler.mWakeLock.release();
@@ -896,140 +1023,256 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             if (i2 == 3 || i2 == 4 || i2 == 5) {
                 return;
             }
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i2, "Received unknown AGPS status: ", "GnssNetworkConnectivityHandler");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i2, "Received unknown AGPS status: ", "GnssNetworkConnectivityHandler");
             return;
         }
-        final GnssNetworkConnectivityHandler$$ExternalSyntheticLambda1 gnssNetworkConnectivityHandler$$ExternalSyntheticLambda1 = new GnssNetworkConnectivityHandler$$ExternalSyntheticLambda1(gnssNetworkConnectivityHandler, 0);
+        final GnssNetworkConnectivityHandler$$ExternalSyntheticLambda1
+                gnssNetworkConnectivityHandler$$ExternalSyntheticLambda1 =
+                        new GnssNetworkConnectivityHandler$$ExternalSyntheticLambda1(
+                                gnssNetworkConnectivityHandler, 0);
         gnssNetworkConnectivityHandler.mWakeLock.acquire(60000L);
-        if (handler.post(new Runnable() { // from class: com.android.server.location.gnss.GnssNetworkConnectivityHandler$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                GnssNetworkConnectivityHandler gnssNetworkConnectivityHandler2 = GnssNetworkConnectivityHandler.this;
-                Runnable runnable2 = gnssNetworkConnectivityHandler$$ExternalSyntheticLambda1;
-                boolean z = GnssNetworkConnectivityHandler.VERBOSE;
-                gnssNetworkConnectivityHandler2.getClass();
-                try {
-                    runnable2.run();
-                } finally {
-                    gnssNetworkConnectivityHandler2.mWakeLock.release();
-                }
-            }
-        })) {
+        if (handler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.location.gnss.GnssNetworkConnectivityHandler$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        GnssNetworkConnectivityHandler gnssNetworkConnectivityHandler2 =
+                                GnssNetworkConnectivityHandler.this;
+                        Runnable runnable2 =
+                                gnssNetworkConnectivityHandler$$ExternalSyntheticLambda1;
+                        boolean z = GnssNetworkConnectivityHandler.VERBOSE;
+                        gnssNetworkConnectivityHandler2.getClass();
+                        try {
+                            runnable2.run();
+                        } finally {
+                            gnssNetworkConnectivityHandler2.mWakeLock.release();
+                        }
+                    }
+                })) {
             return;
         }
         gnssNetworkConnectivityHandler.mWakeLock.release();
     }
 
-    public final void onReportNfwNotification(final String str, final byte b, final String str2, final byte b2, final String str3, final byte b3, final boolean z, final boolean z2) {
+    public final void onReportNfwNotification(
+            final String str,
+            final byte b,
+            final String str2,
+            final byte b2,
+            final String str3,
+            final byte b3,
+            final boolean z,
+            final boolean z2) {
         final GnssVisibilityControl gnssVisibilityControl = this.mGnssVisibilityControl;
         if (gnssVisibilityControl == null) {
-            Log.e("GnssLocationProvider", "reportNfwNotification: mGnssVisibilityControl uninitialized.");
+            Log.e(
+                    "GnssLocationProvider",
+                    "reportNfwNotification: mGnssVisibilityControl uninitialized.");
             return;
         }
         gnssVisibilityControl.getClass();
-        gnssVisibilityControl.runOnHandler(new Runnable() { // from class: com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                boolean z3;
-                boolean z4;
-                GnssVisibilityControl gnssVisibilityControl2 = GnssVisibilityControl.this;
-                String str4 = str;
-                byte b4 = b;
-                String str5 = str2;
-                byte b5 = b2;
-                String str6 = str3;
-                byte b6 = b3;
-                boolean z5 = z;
-                boolean z6 = z2;
-                gnssVisibilityControl2.getClass();
-                GnssVisibilityControl.NfwNotification nfwNotification = new GnssVisibilityControl.NfwNotification(str4, b4, str5, b5, str6, b6, z5, z6);
-                Log.d("GnssVisibilityControl", "Non-framework location access notification: " + nfwNotification);
-                if (z5 && !(!TextUtils.isEmpty(str4))) {
-                    if (b6 != 0) {
-                        z3 = false;
-                    } else {
-                        Log.e("GnssVisibilityControl", "Emergency non-framework location request incorrectly rejected. Notification: " + nfwNotification);
-                        z3 = true;
-                    }
-                    if (gnssVisibilityControl2.mNiHandler.getInEmergency(128000L)) {
-                        z4 = z3;
-                    } else {
-                        Log.w("GnssVisibilityControl", "Emergency state mismatch. Device currently not in user initiated emergency session. Notification: " + nfwNotification);
-                        z4 = true;
-                    }
-                    FrameworkStatsLog.write(131, str4, b4, str5, b5, str6, b6, z5, z6, z4);
-                    if (b6 == 2) {
-                        NotificationManager notificationManager = (NotificationManager) gnssVisibilityControl2.mContext.getSystemService("notification");
-                        if (notificationManager == null) {
-                            Log.w("GnssVisibilityControl", "Could not notify user of emergency location request. Notification: " + nfwNotification);
+        gnssVisibilityControl.runOnHandler(
+                new Runnable() { // from class:
+                    // com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        boolean z3;
+                        boolean z4;
+                        GnssVisibilityControl gnssVisibilityControl2 = GnssVisibilityControl.this;
+                        String str4 = str;
+                        byte b4 = b;
+                        String str5 = str2;
+                        byte b5 = b2;
+                        String str6 = str3;
+                        byte b6 = b3;
+                        boolean z5 = z;
+                        boolean z6 = z2;
+                        gnssVisibilityControl2.getClass();
+                        GnssVisibilityControl.NfwNotification nfwNotification =
+                                new GnssVisibilityControl.NfwNotification(
+                                        str4, b4, str5, b5, str6, b6, z5, z6);
+                        Log.d(
+                                "GnssVisibilityControl",
+                                "Non-framework location access notification: " + nfwNotification);
+                        if (z5 && !(!TextUtils.isEmpty(str4))) {
+                            if (b6 != 0) {
+                                z3 = false;
+                            } else {
+                                Log.e(
+                                        "GnssVisibilityControl",
+                                        "Emergency non-framework location request incorrectly"
+                                            + " rejected. Notification: "
+                                                + nfwNotification);
+                                z3 = true;
+                            }
+                            if (gnssVisibilityControl2.mNiHandler.getInEmergency(128000L)) {
+                                z4 = z3;
+                            } else {
+                                Log.w(
+                                        "GnssVisibilityControl",
+                                        "Emergency state mismatch. Device currently not in user"
+                                            + " initiated emergency session. Notification: "
+                                                + nfwNotification);
+                                z4 = true;
+                            }
+                            FrameworkStatsLog.write(131, str4, b4, str5, b5, str6, b6, z5, z6, z4);
+                            if (b6 == 2) {
+                                NotificationManager notificationManager =
+                                        (NotificationManager)
+                                                gnssVisibilityControl2.mContext.getSystemService(
+                                                        "notification");
+                                if (notificationManager == null) {
+                                    Log.w(
+                                            "GnssVisibilityControl",
+                                            "Could not notify user of emergency location request."
+                                                + " Notification: "
+                                                    + nfwNotification);
+                                    return;
+                                }
+                                Context context = gnssVisibilityControl2.mContext;
+                                String string =
+                                        context.getString(R.string.mime_type_compressed_ext);
+                                String string2 = context.getString(R.string.mediasize_iso_c7);
+                                notificationManager.notifyAsUser(
+                                        null,
+                                        0,
+                                        new Notification.Builder(
+                                                        context,
+                                                        SystemNotificationChannels.NETWORK_STATUS)
+                                                .setSmallIcon(17304491)
+                                                .setWhen(0L)
+                                                .setOngoing(false)
+                                                .setAutoCancel(true)
+                                                .setColor(
+                                                        context.getColor(
+                                                                R.color
+                                                                        .system_notification_accent_color))
+                                                .setDefaults(0)
+                                                .setTicker(string + " (" + string2 + ")")
+                                                .setContentTitle(string)
+                                                .setContentText(string2)
+                                                .build(),
+                                        UserHandle.ALL);
+                                return;
+                            }
                             return;
                         }
-                        Context context = gnssVisibilityControl2.mContext;
-                        String string = context.getString(R.string.mime_type_compressed_ext);
-                        String string2 = context.getString(R.string.mediasize_iso_c7);
-                        notificationManager.notifyAsUser(null, 0, new Notification.Builder(context, SystemNotificationChannels.NETWORK_STATUS).setSmallIcon(17304491).setWhen(0L).setOngoing(false).setAutoCancel(true).setColor(context.getColor(R.color.system_notification_accent_color)).setDefaults(0).setTicker(string + " (" + string2 + ")").setContentTitle(string).setContentText(string2).build(), UserHandle.ALL);
-                        return;
+                        GnssVisibilityControl.ProxyAppState proxyAppState =
+                                (GnssVisibilityControl.ProxyAppState)
+                                        gnssVisibilityControl2.mProxyAppsState.get(str4);
+                        boolean z7 = b6 != 0;
+                        boolean z8 = b6 != 0;
+                        boolean z9 =
+                                (proxyAppState == null || !gnssVisibilityControl2.mIsGpsEnabled)
+                                        ? z8
+                                        : proxyAppState.mHasLocationPermission != z8;
+                        FrameworkStatsLog.write(131, str4, b4, str5, b5, str6, b6, z5, z6, z9);
+                        if (!(!TextUtils.isEmpty(str4))) {
+                            if (z7) {
+                                Log.e(
+                                        "GnssVisibilityControl",
+                                        "ProxyAppPackageName field is not set. AppOps service not"
+                                            + " notified for notification: "
+                                                + nfwNotification);
+                                return;
+                            } else {
+                                Log.d(
+                                        "GnssVisibilityControl",
+                                        "Non-framework location request rejected."
+                                            + " ProxyAppPackageName field is not set in the"
+                                            + " notification: "
+                                                + nfwNotification
+                                                + ". Number of configured proxy apps: "
+                                                + gnssVisibilityControl2.mProxyAppsState.size());
+                                return;
+                            }
+                        }
+                        if (proxyAppState == null) {
+                            Log.w(
+                                    "GnssVisibilityControl",
+                                    "Could not find proxy app "
+                                            + str4
+                                            + " in the value specified for config parameter:"
+                                            + " NFW_PROXY_APPS. AppOps service not notified for"
+                                            + " notification: "
+                                            + nfwNotification);
+                            return;
+                        }
+                        ApplicationInfo proxyAppInfo = gnssVisibilityControl2.getProxyAppInfo(str4);
+                        if (proxyAppInfo == null) {
+                            Log.e(
+                                    "GnssVisibilityControl",
+                                    "Proxy app "
+                                            + str4
+                                            + " is not found. AppOps service not notified for"
+                                            + " notification: "
+                                            + nfwNotification);
+                            return;
+                        }
+                        if (b6 == 2) {
+                            int i = proxyAppInfo.uid;
+                            boolean z10 = proxyAppState.mIsLocationIconOn;
+                            Handler handler = gnssVisibilityControl2.mHandler;
+                            if (z10) {
+                                handler.removeCallbacksAndMessages(proxyAppState);
+                            } else if (gnssVisibilityControl2.updateLocationIcon(i, str4, true)) {
+                                proxyAppState.mIsLocationIconOn = true;
+                            } else {
+                                Log.w(
+                                        "GnssVisibilityControl",
+                                        "Failed to show Location icon for notification: "
+                                                + nfwNotification);
+                                gnssVisibilityControl2.mAppOps.noteOpNoThrow(
+                                        1, proxyAppInfo.uid, str4);
+                            }
+                            StringBuilder sb = new StringBuilder("Location icon on. ");
+                            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                    i,
+                                    z10 ? "Extending" : "Setting",
+                                    " icon display timer. Uid: ",
+                                    ", proxyAppPkgName: ",
+                                    sb);
+                            sb.append(str4);
+                            Log.d("GnssVisibilityControl", sb.toString());
+                            if (!handler.postDelayed(
+                                    new GnssVisibilityControl$$ExternalSyntheticLambda1(
+                                            gnssVisibilityControl2, str4, 2),
+                                    proxyAppState,
+                                    5000L)) {
+                                gnssVisibilityControl2.clearLocationIcon(proxyAppState, i, str4);
+                                Log.w(
+                                        "GnssVisibilityControl",
+                                        "Failed to show location icon for the full duration for"
+                                            + " notification: "
+                                                + nfwNotification);
+                            }
+                            gnssVisibilityControl2.mAppOps.noteOpNoThrow(1, proxyAppInfo.uid, str4);
+                        }
+                        if (z9) {
+                            StringBuilder m =
+                                    DumpUtils$$ExternalSyntheticOutline0.m(
+                                            "Permission mismatch. Proxy app ",
+                                            str4,
+                                            " location permission is set to ");
+                            m.append(proxyAppState.mHasLocationPermission);
+                            m.append(" and GNSS HAL enabled is set to ");
+                            m.append(gnssVisibilityControl2.mIsGpsEnabled);
+                            m.append(" but GNSS non-framework location access response type is ");
+                            m.append(
+                                    b6 != 0
+                                            ? b6 != 1
+                                                    ? b6 != 2
+                                                            ? "<Unknown>"
+                                                            : "ACCEPTED_LOCATION_PROVIDED"
+                                                    : "ACCEPTED_NO_LOCATION_PROVIDED"
+                                            : "REJECTED");
+                            m.append(" for notification: ");
+                            m.append(nfwNotification);
+                            Log.w("GnssVisibilityControl", m.toString());
+                        }
                     }
-                    return;
-                }
-                GnssVisibilityControl.ProxyAppState proxyAppState = (GnssVisibilityControl.ProxyAppState) gnssVisibilityControl2.mProxyAppsState.get(str4);
-                boolean z7 = b6 != 0;
-                boolean z8 = b6 != 0;
-                boolean z9 = (proxyAppState == null || !gnssVisibilityControl2.mIsGpsEnabled) ? z8 : proxyAppState.mHasLocationPermission != z8;
-                FrameworkStatsLog.write(131, str4, b4, str5, b5, str6, b6, z5, z6, z9);
-                if (!(!TextUtils.isEmpty(str4))) {
-                    if (z7) {
-                        Log.e("GnssVisibilityControl", "ProxyAppPackageName field is not set. AppOps service not notified for notification: " + nfwNotification);
-                        return;
-                    } else {
-                        Log.d("GnssVisibilityControl", "Non-framework location request rejected. ProxyAppPackageName field is not set in the notification: " + nfwNotification + ". Number of configured proxy apps: " + gnssVisibilityControl2.mProxyAppsState.size());
-                        return;
-                    }
-                }
-                if (proxyAppState == null) {
-                    Log.w("GnssVisibilityControl", "Could not find proxy app " + str4 + " in the value specified for config parameter: NFW_PROXY_APPS. AppOps service not notified for notification: " + nfwNotification);
-                    return;
-                }
-                ApplicationInfo proxyAppInfo = gnssVisibilityControl2.getProxyAppInfo(str4);
-                if (proxyAppInfo == null) {
-                    Log.e("GnssVisibilityControl", "Proxy app " + str4 + " is not found. AppOps service not notified for notification: " + nfwNotification);
-                    return;
-                }
-                if (b6 == 2) {
-                    int i = proxyAppInfo.uid;
-                    boolean z10 = proxyAppState.mIsLocationIconOn;
-                    Handler handler = gnssVisibilityControl2.mHandler;
-                    if (z10) {
-                        handler.removeCallbacksAndMessages(proxyAppState);
-                    } else if (gnssVisibilityControl2.updateLocationIcon(i, str4, true)) {
-                        proxyAppState.mIsLocationIconOn = true;
-                    } else {
-                        Log.w("GnssVisibilityControl", "Failed to show Location icon for notification: " + nfwNotification);
-                        gnssVisibilityControl2.mAppOps.noteOpNoThrow(1, proxyAppInfo.uid, str4);
-                    }
-                    StringBuilder sb = new StringBuilder("Location icon on. ");
-                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, z10 ? "Extending" : "Setting", " icon display timer. Uid: ", ", proxyAppPkgName: ", sb);
-                    sb.append(str4);
-                    Log.d("GnssVisibilityControl", sb.toString());
-                    if (!handler.postDelayed(new GnssVisibilityControl$$ExternalSyntheticLambda1(gnssVisibilityControl2, str4, 2), proxyAppState, 5000L)) {
-                        gnssVisibilityControl2.clearLocationIcon(proxyAppState, i, str4);
-                        Log.w("GnssVisibilityControl", "Failed to show location icon for the full duration for notification: " + nfwNotification);
-                    }
-                    gnssVisibilityControl2.mAppOps.noteOpNoThrow(1, proxyAppInfo.uid, str4);
-                }
-                if (z9) {
-                    StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Permission mismatch. Proxy app ", str4, " location permission is set to ");
-                    m.append(proxyAppState.mHasLocationPermission);
-                    m.append(" and GNSS HAL enabled is set to ");
-                    m.append(gnssVisibilityControl2.mIsGpsEnabled);
-                    m.append(" but GNSS non-framework location access response type is ");
-                    m.append(b6 != 0 ? b6 != 1 ? b6 != 2 ? "<Unknown>" : "ACCEPTED_LOCATION_PROVIDED" : "ACCEPTED_NO_LOCATION_PROVIDED" : "REJECTED");
-                    m.append(" for notification: ");
-                    m.append(nfwNotification);
-                    Log.w("GnssVisibilityControl", m.toString());
-                }
-            }
-        });
+                });
         Bundle bundle = new Bundle();
         bundle.putString("proxyAppPackageName", str);
         bundle.putByte("protocolStack", b);
@@ -1039,24 +1282,30 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         bundle.putByte("responseType", b3);
         bundle.putBoolean("inEmergencyMode", z);
         bundle.putBoolean("isCachedLocation", z2);
-        this.mNSConnectionHelper.onStateUpdated(LocationConstants.STATE_TYPE.REPORT_NFW_NOTIFICATION, bundle);
+        this.mNSConnectionHelper.onStateUpdated(
+                LocationConstants.STATE_TYPE.REPORT_NFW_NOTIFICATION, bundle);
     }
 
     @Override // com.android.server.location.gnss.hal.GnssNative.SvStatusCallbacks
     public final void onReportSvStatus(GnssStatus gnssStatus) {
         Handler handler;
-        postWithWakeLockHeld(new GnssLocationProvider$$ExternalSyntheticLambda14(this, gnssStatus, 0));
+        postWithWakeLockHeld(
+                new GnssLocationProvider$$ExternalSyntheticLambda14(this, gnssStatus, 0));
         NSConnectionHelper nSConnectionHelper = this.mNSConnectionHelper;
-        if (!nSConnectionHelper.mHasNsflpFeature || (handler = nSConnectionHelper.mHandler) == null || gnssStatus == null) {
+        if (!nSConnectionHelper.mHasNsflpFeature
+                || (handler = nSConnectionHelper.mHandler) == null
+                || gnssStatus == null) {
             return;
         }
-        handler.post(new NSConnectionHelper$$ExternalSyntheticLambda0(nSConnectionHelper, gnssStatus, 0));
+        handler.post(
+                new NSConnectionHelper$$ExternalSyntheticLambda0(
+                        nSConnectionHelper, gnssStatus, 0));
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:40:0x00b8, code lost:
-    
-        if (r8 != (r10.getType() != 6 ? Long.MAX_VALUE : 2147483647L)) goto L47;
-     */
+
+       if (r8 != (r10.getType() != 6 ? Long.MAX_VALUE : 2147483647L)) goto L47;
+    */
     /* JADX WARN: Removed duplicated region for block: B:38:0x00ad  */
     /* JADX WARN: Removed duplicated region for block: B:41:0x00b3  */
     @Override // com.android.server.location.gnss.hal.GnssNative.LocationRequestCallbacks
@@ -1069,18 +1318,24 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             Method dump skipped, instructions count: 320
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.location.gnss.GnssLocationProvider.onRequestRefLocation():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.location.gnss.GnssLocationProvider.onRequestRefLocation():void");
     }
 
     @Override // com.android.server.location.gnss.hal.GnssNative.AGpsCallbacks
     public void onRequestSetID(int i) {
         String str;
         int i2;
-        TelephonyManager telephonyManager = (TelephonyManager) this.mContext.getSystemService("phone");
+        TelephonyManager telephonyManager =
+                (TelephonyManager) this.mContext.getSystemService("phone");
         int defaultDataSubscriptionId = SubscriptionManager.getDefaultDataSubscriptionId();
-        String property = this.mGnssConfiguration.mProperties.getProperty("ENABLE_ACTIVE_SIM_EMERGENCY_SUPL");
+        String property =
+                this.mGnssConfiguration.mProperties.getProperty("ENABLE_ACTIVE_SIM_EMERGENCY_SUPL");
         int i3 = 0;
-        if ((TextUtils.isEmpty(property) ? false : Boolean.parseBoolean(property)) && this.mNIHandler.getInEmergency() && (i2 = this.mNetworkConnectivityHandler.mActiveSubId) >= 0) {
+        if ((TextUtils.isEmpty(property) ? false : Boolean.parseBoolean(property))
+                && this.mNIHandler.getInEmergency()
+                && (i2 = this.mNetworkConnectivityHandler.mActiveSubId) >= 0) {
             defaultDataSubscriptionId = i2;
         }
         if (SubscriptionManager.isValidSubscriptionId(defaultDataSubscriptionId)) {
@@ -1114,7 +1369,8 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
 
     public final void postWithWakeLockHeld(Runnable runnable) {
         this.mWakeLock.acquire(30000L);
-        if (this.mHandler.post(new GnssLocationProvider$$ExternalSyntheticLambda14(this, runnable, 1))) {
+        if (this.mHandler.post(
+                new GnssLocationProvider$$ExternalSyntheticLambda14(this, runnable, 1))) {
             return;
         }
         this.mWakeLock.release();
@@ -1132,7 +1388,12 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             this.mSuplEsEnabled = gnssConfiguration.getIntConfig("SUPL_ES") == 1;
             GnssVisibilityControl gnssVisibilityControl = this.mGnssVisibilityControl;
             if (gnssVisibilityControl != null) {
-                gnssVisibilityControl.runOnHandler(new GnssVisibilityControl$$ExternalSyntheticLambda1(gnssVisibilityControl, PortStatus_1_1$$ExternalSyntheticOutline0.m("com.sec.location.nfwlocationprivacy"), 0));
+                gnssVisibilityControl.runOnHandler(
+                        new GnssVisibilityControl$$ExternalSyntheticLambda1(
+                                gnssVisibilityControl,
+                                PortStatus_1_1$$ExternalSyntheticOutline0.m(
+                                        "com.sec.location.nfwlocationprivacy"),
+                                0));
                 return;
             }
             return;
@@ -1143,7 +1404,9 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             gnssVisibilityControl2.getClass();
             ArrayList arrayList = new ArrayList();
             arrayList.add("com.sec.location.nfwlocationprivacy");
-            gnssVisibilityControl2.runOnHandler(new GnssVisibilityControl$$ExternalSyntheticLambda1(gnssVisibilityControl2, arrayList, 0));
+            gnssVisibilityControl2.runOnHandler(
+                    new GnssVisibilityControl$$ExternalSyntheticLambda1(
+                            gnssVisibilityControl2, arrayList, 0));
             GnssConfiguration.setEsExtensionSec();
             this.mNIHandler.setEmergencyExtensionSeconds(GnssConfiguration.getEsExtensionSecCSC());
         }
@@ -1226,7 +1489,8 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
                     i3 = tac2;
                     i5 = pci;
                 }
-                this.mGnssNative.setAgpsReferenceLocationCellId(i, parseInt, parseInt2, i2, j, i3, i5, i4);
+                this.mGnssNative.setAgpsReferenceLocationCellId(
+                        i, parseInt, parseInt2, i2, j, i3, i5, i4);
             }
             CellIdentityWcdma cellIdentityWcdma = (CellIdentityWcdma) cellIdentity;
             cid = cellIdentityWcdma.getCid();
@@ -1262,9 +1526,19 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         this.mLastFixTime = 0L;
         setStarted(true);
         this.mPositionMode = 0;
-        boolean z = Settings.Global.getInt(this.mContext.getContentResolver(), "assisted_gps_enabled", 1) != 0;
+        boolean z =
+                Settings.Global.getInt(
+                                this.mContext.getContentResolver(), "assisted_gps_enabled", 1)
+                        != 0;
         GnssNative gnssNative = this.mGnssNative;
-        int i = (!z || (intConfig = this.mGnssConfiguration.getIntConfig("SUPL_MODE")) == 0 || !gnssNative.mCapabilities.hasMsb() || (intConfig & 1) == 0) ? 0 : 1;
+        int i =
+                (!z
+                                || (intConfig = this.mGnssConfiguration.getIntConfig("SUPL_MODE"))
+                                        == 0
+                                || !gnssNative.mCapabilities.hasMsb()
+                                || (intConfig & 1) == 0)
+                        ? 0
+                        : 1;
         this.mPositionMode = i;
         if (i != 0) {
             this.mPositionMode = getPositionModeSec(i);
@@ -1273,7 +1547,13 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             updateSuplServerForNewSISession();
         }
         int i2 = this.mPositionMode;
-        Log.d("GnssLocationProvider", "setting position_mode to ".concat(i2 != 0 ? i2 != 1 ? i2 != 2 ? "unknown" : "MS_ASSISTED" : "MS_BASED" : "standalone"));
+        Log.d(
+                "GnssLocationProvider",
+                "setting position_mode to "
+                        .concat(
+                                i2 != 0
+                                        ? i2 != 1 ? i2 != 2 ? "unknown" : "MS_ASSISTED" : "MS_BASED"
+                                        : "standalone"));
         int i3 = gnssNative.mCapabilities.hasScheduling() ? this.mFixInterval : 1000;
         if (!setPositionMode(this.mPositionMode, i3, this.mProviderRequest.isLowPower())) {
             setStarted(false);
@@ -1287,9 +1567,17 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             this.mLocationExtras.set(0, 0, 0);
             this.mFixRequestTime = SystemClock.elapsedRealtime();
             if (!gnssNative.mCapabilities.hasScheduling() && this.mFixInterval >= 60000) {
-                this.mAlarmManager.set(2, SystemClock.elapsedRealtime() + 60000, "GnssLocationProvider", this.mTimeoutListener, this.mHandler);
+                this.mAlarmManager.set(
+                        2,
+                        SystemClock.elapsedRealtime() + 60000,
+                        "GnssLocationProvider",
+                        this.mTimeoutListener,
+                        this.mHandler);
             }
-            this.mNSLocationProviderHelper.reportProviderStatus(LocationConstants.STATE_TYPE.NAVIGATING, Integer.valueOf(this.mPositionMode), Integer.valueOf(i3));
+            this.mNSLocationProviderHelper.reportProviderStatus(
+                    LocationConstants.STATE_TYPE.NAVIGATING,
+                    Integer.valueOf(this.mPositionMode),
+                    Integer.valueOf(i3));
         }
     }
 
@@ -1298,7 +1586,8 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
     public final void stopBatching() {
         Log.d("GnssLocationProvider", "stopBatching");
         if (this.mBatchingStarted) {
-            GnssLocationProvider$$ExternalSyntheticLambda10 gnssLocationProvider$$ExternalSyntheticLambda10 = this.mBatchingAlarm;
+            GnssLocationProvider$$ExternalSyntheticLambda10
+                    gnssLocationProvider$$ExternalSyntheticLambda10 = this.mBatchingAlarm;
             if (gnssLocationProvider$$ExternalSyntheticLambda10 != null) {
                 this.mAlarmManager.cancel(gnssLocationProvider$$ExternalSyntheticLambda10);
                 this.mBatchingAlarm = null;
@@ -1312,7 +1601,10 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
 
     public final void stopNavigating() {
         GnssHalStatus gnssHalStatus;
-        RCPManagerService$$ExternalSyntheticOutline0.m("GnssLocationProvider", new StringBuilder("stopNavigating, mStarted="), this.mStarted);
+        RCPManagerService$$ExternalSyntheticOutline0.m(
+                "GnssLocationProvider",
+                new StringBuilder("stopNavigating, mStarted="),
+                this.mStarted);
         if (this.mStarted) {
             setStarted(false);
             this.mGnssVendorConfig.getClass();
@@ -1333,7 +1625,8 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         }
         this.mAlarmManager.cancel(this.mTimeoutListener);
         this.mAlarmManager.cancel(this.mWakeupListener);
-        this.mNSLocationProviderHelper.reportProviderStatus(LocationConstants.STATE_TYPE.NAVIGATING, -1, null);
+        this.mNSLocationProviderHelper.reportProviderStatus(
+                LocationConstants.STATE_TYPE.NAVIGATING, -1, null);
     }
 
     public abstract void stopNavigatingSec();
@@ -1353,12 +1646,14 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             ArrayList<WorkSource.WorkChain> arrayList2 = diffChains[1];
             if (arrayList != null) {
                 for (WorkSource.WorkChain workChain : arrayList) {
-                    this.mAppOps.startOpNoThrow(2, workChain.getAttributionUid(), workChain.getAttributionTag());
+                    this.mAppOps.startOpNoThrow(
+                            2, workChain.getAttributionUid(), workChain.getAttributionTag());
                 }
             }
             if (arrayList2 != null) {
                 for (WorkSource.WorkChain workChain2 : arrayList2) {
-                    this.mAppOps.finishOp(2, workChain2.getAttributionUid(), workChain2.getAttributionTag());
+                    this.mAppOps.finishOp(
+                            2, workChain2.getAttributionUid(), workChain2.getAttributionTag());
                 }
             }
             this.mClientSource.transferWorkChains(workSource);
@@ -1369,12 +1664,14 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             WorkSource workSource3 = returningDiffs[1];
             if (workSource2 != null) {
                 for (int i = 0; i < workSource2.size(); i++) {
-                    this.mAppOps.startOpNoThrow(2, workSource2.getUid(i), workSource2.getPackageName(i));
+                    this.mAppOps.startOpNoThrow(
+                            2, workSource2.getUid(i), workSource2.getPackageName(i));
                 }
             }
             if (workSource3 != null) {
                 for (int i2 = 0; i2 < workSource3.size(); i2++) {
-                    this.mAppOps.finishOp(2, workSource3.getUid(i2), workSource3.getPackageName(i2));
+                    this.mAppOps.finishOp(
+                            2, workSource3.getUid(i2), workSource3.getPackageName(i2));
                 }
             }
         }
@@ -1383,8 +1680,12 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
     public final void updateEnabled() {
         boolean z;
         GnssHalStatus gnssHalStatus;
-        LocationManager locationManager = (LocationManager) this.mContext.getSystemService(LocationManager.class);
-        Iterator it = ((UserManager) this.mContext.getSystemService(UserManager.class)).getVisibleUsers().iterator();
+        LocationManager locationManager =
+                (LocationManager) this.mContext.getSystemService(LocationManager.class);
+        Iterator it =
+                ((UserManager) this.mContext.getSystemService(UserManager.class))
+                        .getVisibleUsers()
+                        .iterator();
         final boolean z2 = false;
         boolean z3 = false;
         while (it.hasNext()) {
@@ -1392,7 +1693,11 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         }
         ProviderRequest providerRequest = this.mProviderRequest;
         final boolean z4 = true;
-        boolean z5 = (providerRequest != null && providerRequest.isActive() && this.mProviderRequest.isBypass()) | z3;
+        boolean z5 =
+                (providerRequest != null
+                                && providerRequest.isActive()
+                                && this.mProviderRequest.isBypass())
+                        | z3;
         synchronized (this.mLock) {
             z = z5 & (!this.mAutomotiveSuspend);
         }
@@ -1407,21 +1712,40 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             stopNavigating();
             stopBatching();
             final GnssVisibilityControl gnssVisibilityControl = this.mGnssVisibilityControl;
-            if (gnssVisibilityControl != null && !gnssVisibilityControl.mHandler.runWithScissors(new Runnable() { // from class: com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    GnssVisibilityControl gnssVisibilityControl2 = GnssVisibilityControl.this;
-                    boolean z7 = z2;
-                    Log.d("GnssVisibilityControl", "handleGpsEnabledChanged, mIsGpsEnabled: " + gnssVisibilityControl2.mIsGpsEnabled + ", isGpsEnabled: " + z7);
-                    gnssVisibilityControl2.mIsGpsEnabled = z7;
-                    if (z7) {
-                        gnssVisibilityControl2.setNfwLocationAccessProxyAppsInGnssHal(gnssVisibilityControl2.getLocationPermissionEnabledProxyApps());
-                    } else {
-                        gnssVisibilityControl2.setNfwLocationAccessProxyAppsInGnssHal(GnssVisibilityControl.NO_LOCATION_ENABLED_PROXY_APPS);
-                    }
-                }
-            }, 3000L)) {
-                Log.w("GnssVisibilityControl", "Native call to disable non-framework location access in GNSS HAL may get executed after native_cleanup().");
+            if (gnssVisibilityControl != null
+                    && !gnssVisibilityControl.mHandler.runWithScissors(
+                            new Runnable() { // from class:
+                                             // com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    GnssVisibilityControl gnssVisibilityControl2 =
+                                            GnssVisibilityControl.this;
+                                    boolean z7 = z2;
+                                    Log.d(
+                                            "GnssVisibilityControl",
+                                            "handleGpsEnabledChanged, mIsGpsEnabled: "
+                                                    + gnssVisibilityControl2.mIsGpsEnabled
+                                                    + ", isGpsEnabled: "
+                                                    + z7);
+                                    gnssVisibilityControl2.mIsGpsEnabled = z7;
+                                    if (z7) {
+                                        gnssVisibilityControl2
+                                                .setNfwLocationAccessProxyAppsInGnssHal(
+                                                        gnssVisibilityControl2
+                                                                .getLocationPermissionEnabledProxyApps());
+                                    } else {
+                                        gnssVisibilityControl2
+                                                .setNfwLocationAccessProxyAppsInGnssHal(
+                                                        GnssVisibilityControl
+                                                                .NO_LOCATION_ENABLED_PROXY_APPS);
+                                    }
+                                }
+                            },
+                            3000L)) {
+                Log.w(
+                        "GnssVisibilityControl",
+                        "Native call to disable non-framework location access in GNSS HAL may get"
+                            + " executed after native_cleanup().");
             }
             GnssNative gnssNative = this.mGnssNative;
             gnssNative.cleanupBatching();
@@ -1462,20 +1786,32 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             this.mBatchingEnabled = z2;
             final GnssVisibilityControl gnssVisibilityControl2 = this.mGnssVisibilityControl;
             if (gnssVisibilityControl2 != null) {
-                gnssVisibilityControl2.mHandler.runWithScissors(new Runnable() { // from class: com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        GnssVisibilityControl gnssVisibilityControl22 = GnssVisibilityControl.this;
-                        boolean z7 = z4;
-                        Log.d("GnssVisibilityControl", "handleGpsEnabledChanged, mIsGpsEnabled: " + gnssVisibilityControl22.mIsGpsEnabled + ", isGpsEnabled: " + z7);
-                        gnssVisibilityControl22.mIsGpsEnabled = z7;
-                        if (z7) {
-                            gnssVisibilityControl22.setNfwLocationAccessProxyAppsInGnssHal(gnssVisibilityControl22.getLocationPermissionEnabledProxyApps());
-                        } else {
-                            gnssVisibilityControl22.setNfwLocationAccessProxyAppsInGnssHal(GnssVisibilityControl.NO_LOCATION_ENABLED_PROXY_APPS);
-                        }
-                    }
-                }, 3000L);
+                gnssVisibilityControl2.mHandler.runWithScissors(
+                        new Runnable() { // from class:
+                                         // com.android.server.location.gnss.GnssVisibilityControl$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                GnssVisibilityControl gnssVisibilityControl22 =
+                                        GnssVisibilityControl.this;
+                                boolean z7 = z4;
+                                Log.d(
+                                        "GnssVisibilityControl",
+                                        "handleGpsEnabledChanged, mIsGpsEnabled: "
+                                                + gnssVisibilityControl22.mIsGpsEnabled
+                                                + ", isGpsEnabled: "
+                                                + z7);
+                                gnssVisibilityControl22.mIsGpsEnabled = z7;
+                                if (z7) {
+                                    gnssVisibilityControl22.setNfwLocationAccessProxyAppsInGnssHal(
+                                            gnssVisibilityControl22
+                                                    .getLocationPermissionEnabledProxyApps());
+                                } else {
+                                    gnssVisibilityControl22.setNfwLocationAccessProxyAppsInGnssHal(
+                                            GnssVisibilityControl.NO_LOCATION_ENABLED_PROXY_APPS);
+                                }
+                            }
+                        },
+                        3000L);
             }
         } else {
             setGpsEnabled(false);
@@ -1497,7 +1833,13 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         if (this.mSecGpsDump.size() > 300) {
             this.mSecGpsDump.remove(0);
         }
-        this.mSecGpsDump.add("\n" + getTimestamp() + ": " + this.mProviderRequest + " " + this.mProviderRequest.getWorkSource());
+        this.mSecGpsDump.add(
+                "\n"
+                        + getTimestamp()
+                        + ": "
+                        + this.mProviderRequest
+                        + " "
+                        + this.mProviderRequest.getWorkSource());
         StringBuilder sb = new StringBuilder("mStarted =  ");
         sb.append(this.mStarted);
         sb.append(", isEnabled = ");
@@ -1513,11 +1855,16 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         if (this.mProviderRequest.getIntervalMillis() <= 2147483647L) {
             this.mFixInterval = (int) this.mProviderRequest.getIntervalMillis();
         } else {
-            Log.w("GnssLocationProvider", "interval overflow: " + this.mProviderRequest.getIntervalMillis());
+            Log.w(
+                    "GnssLocationProvider",
+                    "interval overflow: " + this.mProviderRequest.getIntervalMillis());
             this.mFixInterval = Integer.MAX_VALUE;
         }
         int max = Math.max(this.mFixInterval, 1000);
-        final long min = Math.min(this.mProviderRequest.getMaxUpdateDelayMillis(), BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS);
+        final long min =
+                Math.min(
+                        this.mProviderRequest.getMaxUpdateDelayMillis(),
+                        BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS);
         boolean z = this.mBatchingEnabled;
         GnssNative gnssNative = this.mGnssNative;
         if (z) {
@@ -1527,36 +1874,53 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
                 this.mFixInterval = max;
                 long j2 = min / j;
                 Log.d("GnssLocationProvider", "startBatching " + this.mFixInterval + " " + min);
-                if (!gnssNative.startBatch(TimeUnit.MILLISECONDS.toNanos(this.mFixInterval), FullScreenMagnificationGestureHandler.MAX_SCALE, true)) {
+                if (!gnssNative.startBatch(
+                        TimeUnit.MILLISECONDS.toNanos(this.mFixInterval),
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        true)) {
                     Log.e("GnssLocationProvider", "native_start_batch failed in startBatching()");
                     return;
                 }
                 this.mBatchingStarted = true;
                 if (j2 < getBatchSize()) {
-                    this.mBatchingAlarm = new AlarmManager.OnAlarmListener() { // from class: com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda10
-                        @Override // android.app.AlarmManager.OnAlarmListener
-                        public final void onAlarm() {
-                            boolean z2;
-                            GnssLocationProvider gnssLocationProvider = GnssLocationProvider.this;
-                            long j3 = min;
-                            synchronized (gnssLocationProvider.mLock) {
-                                try {
-                                    if (gnssLocationProvider.mBatchingAlarm != null) {
-                                        gnssLocationProvider.mAlarmManager.setExact(2, SystemClock.elapsedRealtime() + j3, "GnssLocationProvider", gnssLocationProvider.mBatchingAlarm, LocationServiceThread.getHandler());
-                                        z2 = true;
-                                    } else {
-                                        z2 = false;
+                    this.mBatchingAlarm =
+                            new AlarmManager
+                                    .OnAlarmListener() { // from class:
+                                                         // com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda10
+                                @Override // android.app.AlarmManager.OnAlarmListener
+                                public final void onAlarm() {
+                                    boolean z2;
+                                    GnssLocationProvider gnssLocationProvider =
+                                            GnssLocationProvider.this;
+                                    long j3 = min;
+                                    synchronized (gnssLocationProvider.mLock) {
+                                        try {
+                                            if (gnssLocationProvider.mBatchingAlarm != null) {
+                                                gnssLocationProvider.mAlarmManager.setExact(
+                                                        2,
+                                                        SystemClock.elapsedRealtime() + j3,
+                                                        "GnssLocationProvider",
+                                                        gnssLocationProvider.mBatchingAlarm,
+                                                        LocationServiceThread.getHandler());
+                                                z2 = true;
+                                            } else {
+                                                z2 = false;
+                                            }
+                                        } catch (Throwable th) {
+                                            throw th;
+                                        }
                                     }
-                                } catch (Throwable th) {
-                                    throw th;
+                                    if (z2) {
+                                        gnssLocationProvider.mGnssNative.flushBatch();
+                                    }
                                 }
-                            }
-                            if (z2) {
-                                gnssLocationProvider.mGnssNative.flushBatch();
-                            }
-                        }
-                    };
-                    this.mAlarmManager.setExact(2, SystemClock.elapsedRealtime() + min, "GnssLocationProvider", this.mBatchingAlarm, LocationServiceThread.getHandler());
+                            };
+                    this.mAlarmManager.setExact(
+                            2,
+                            SystemClock.elapsedRealtime() + min,
+                            "GnssLocationProvider",
+                            this.mBatchingAlarm,
+                            LocationServiceThread.getHandler());
                     return;
                 }
                 return;
@@ -1564,10 +1928,14 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
         }
         stopBatching();
         if (this.mStarted) {
-            this.mNSLocationProviderHelper.reportProviderStatus(LocationConstants.STATE_TYPE.UPDATE_GNSS_INTERVAL, null, Integer.valueOf(this.mFixInterval));
+            this.mNSLocationProviderHelper.reportProviderStatus(
+                    LocationConstants.STATE_TYPE.UPDATE_GNSS_INTERVAL,
+                    null,
+                    Integer.valueOf(this.mFixInterval));
         }
         if (this.mStarted && gnssNative.mCapabilities.hasScheduling()) {
-            if (setPositionMode(this.mPositionMode, this.mFixInterval, this.mProviderRequest.isLowPower())) {
+            if (setPositionMode(
+                    this.mPositionMode, this.mFixInterval, this.mProviderRequest.isLowPower())) {
                 return;
             }
             Log.e("GnssLocationProvider", "set_position_mode failed in updateRequirements");
@@ -1578,7 +1946,12 @@ public abstract class GnssLocationProvider extends AbstractLocationProvider impl
             }
             this.mAlarmManager.cancel(this.mTimeoutListener);
             if (this.mFixInterval >= 60000) {
-                this.mAlarmManager.set(2, SystemClock.elapsedRealtime() + 60000, "GnssLocationProvider", this.mTimeoutListener, this.mHandler);
+                this.mAlarmManager.set(
+                        2,
+                        SystemClock.elapsedRealtime() + 60000,
+                        "GnssLocationProvider",
+                        this.mTimeoutListener,
+                        this.mHandler);
             }
         }
     }

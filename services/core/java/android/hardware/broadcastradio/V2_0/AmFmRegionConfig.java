@@ -3,6 +3,7 @@ package android.hardware.broadcastradio.V2_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -21,17 +22,26 @@ public final class AmFmRegionConfig {
             return false;
         }
         AmFmRegionConfig amFmRegionConfig = (AmFmRegionConfig) obj;
-        return HidlSupport.deepEquals(this.ranges, amFmRegionConfig.ranges) && HidlSupport.deepEquals(Byte.valueOf(this.fmDeemphasis), Byte.valueOf(amFmRegionConfig.fmDeemphasis)) && HidlSupport.deepEquals(Byte.valueOf(this.fmRds), Byte.valueOf(amFmRegionConfig.fmRds));
+        return HidlSupport.deepEquals(this.ranges, amFmRegionConfig.ranges)
+                && HidlSupport.deepEquals(
+                        Byte.valueOf(this.fmDeemphasis),
+                        Byte.valueOf(amFmRegionConfig.fmDeemphasis))
+                && HidlSupport.deepEquals(
+                        Byte.valueOf(this.fmRds), Byte.valueOf(amFmRegionConfig.fmRds));
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.ranges)), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.fmDeemphasis))), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.fmRds))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.ranges)),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.fmDeemphasis))),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.fmRds))));
     }
 
     public final void readFromParcel(HwParcel hwParcel) {
         HwBlob readBuffer = hwParcel.readBuffer(24L);
         int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 16, readBuffer.handle(), 0L, true);
+        HwBlob readEmbeddedBuffer =
+                hwParcel.readEmbeddedBuffer(int32 * 16, readBuffer.handle(), 0L, true);
         this.ranges.clear();
         for (int i = 0; i < int32; i++) {
             AmFmBandRange amFmBandRange = new AmFmBandRange();

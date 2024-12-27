@@ -14,8 +14,8 @@ public interface IOnPermissionsChangeListener extends IInterface {
 
     public static class Default implements IOnPermissionsChangeListener {
         @Override // android.permission.IOnPermissionsChangeListener
-        public void onPermissionsChanged(int uid, String persistentDeviceId) throws RemoteException {
-        }
+        public void onPermissionsChanged(int uid, String persistentDeviceId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IOnPermissionsChangeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnPermissionsChangeListener {
+    public abstract static class Stub extends Binder implements IOnPermissionsChangeListener {
         static final int TRANSACTION_onPermissionsChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IOnPermissionsChangeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOnPermissionsChangeListener.DESCRIPTOR);
             }
@@ -98,7 +99,8 @@ public interface IOnPermissionsChangeListener extends IInterface {
             }
 
             @Override // android.permission.IOnPermissionsChangeListener
-            public void onPermissionsChanged(int uid, String persistentDeviceId) throws RemoteException {
+            public void onPermissionsChanged(int uid, String persistentDeviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOnPermissionsChangeListener.DESCRIPTOR);

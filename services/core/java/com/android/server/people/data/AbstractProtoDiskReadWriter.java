@@ -5,7 +5,9 @@ import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
@@ -37,7 +39,8 @@ public abstract class AbstractProtoDiskReadWriter {
         void write(ProtoOutputStream protoOutputStream, Object obj);
     }
 
-    public AbstractProtoDiskReadWriter(File file, ScheduledExecutorService scheduledExecutorService) {
+    public AbstractProtoDiskReadWriter(
+            File file, ScheduledExecutorService scheduledExecutorService) {
         this.mRootDir = file;
         this.mScheduledExecutorService = scheduledExecutorService;
     }
@@ -57,17 +60,23 @@ public abstract class AbstractProtoDiskReadWriter {
     public abstract ProtoStreamWriter protoStreamWriter();
 
     public final Object read(final String str) {
-        File[] listFiles = this.mRootDir.listFiles(new FileFilter() { // from class: com.android.server.people.data.AbstractProtoDiskReadWriter$$ExternalSyntheticLambda1
-            @Override // java.io.FileFilter
-            public final boolean accept(File file) {
-                return file.isFile() && file.getName().equals(str);
-            }
-        });
+        File[] listFiles =
+                this.mRootDir.listFiles(
+                        new FileFilter() { // from class:
+                                           // com.android.server.people.data.AbstractProtoDiskReadWriter$$ExternalSyntheticLambda1
+                            @Override // java.io.FileFilter
+                            public final boolean accept(File file) {
+                                return file.isFile() && file.getName().equals(str);
+                            }
+                        });
         if (listFiles == null || listFiles.length == 0) {
             return null;
         }
         if (listFiles.length > 1) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Found multiple files with the same name: "), Arrays.toString(listFiles), "AbstractProtoDiskReadWriter");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Found multiple files with the same name: "),
+                    Arrays.toString(listFiles),
+                    "AbstractProtoDiskReadWriter");
         }
         try {
             FileInputStream openRead = new AtomicFile(listFiles[0]).openRead();
@@ -91,15 +100,23 @@ public abstract class AbstractProtoDiskReadWriter {
         }
         synchronized (this) {
             try {
-                if (!((ArrayMap) this.mScheduledFileDataMap).isEmpty() && !this.mScheduledExecutorService.isShutdown()) {
+                if (!((ArrayMap) this.mScheduledFileDataMap).isEmpty()
+                        && !this.mScheduledExecutorService.isShutdown()) {
                     ScheduledFuture scheduledFuture = this.mScheduledFuture;
                     if (scheduledFuture != null) {
                         scheduledFuture.cancel(true);
                     }
                     try {
-                        this.mScheduledExecutorService.submit(new AbstractProtoDiskReadWriter$$ExternalSyntheticLambda0(this)).get(5000L, TimeUnit.MILLISECONDS);
+                        this.mScheduledExecutorService
+                                .submit(
+                                        new AbstractProtoDiskReadWriter$$ExternalSyntheticLambda0(
+                                                this))
+                                .get(5000L, TimeUnit.MILLISECONDS);
                     } catch (InterruptedException | ExecutionException | TimeoutException e) {
-                        Slog.e("AbstractProtoDiskReadWriter", "Failed to save data immediately.", e);
+                        Slog.e(
+                                "AbstractProtoDiskReadWriter",
+                                "Failed to save data immediately.",
+                                e);
                     }
                 }
             } finally {
@@ -110,12 +127,18 @@ public abstract class AbstractProtoDiskReadWriter {
     public final synchronized void scheduleSave(String str, Object obj) {
         ((ArrayMap) this.mScheduledFileDataMap).put(str, obj);
         if (this.mScheduledExecutorService.isShutdown()) {
-            Slog.e("AbstractProtoDiskReadWriter", "Worker is shutdown, failed to schedule data saving.");
+            Slog.e(
+                    "AbstractProtoDiskReadWriter",
+                    "Worker is shutdown, failed to schedule data saving.");
         } else {
             if (this.mScheduledFuture != null) {
                 return;
             }
-            this.mScheduledFuture = this.mScheduledExecutorService.schedule(new AbstractProtoDiskReadWriter$$ExternalSyntheticLambda0(this), 120000L, TimeUnit.MILLISECONDS);
+            this.mScheduledFuture =
+                    this.mScheduledExecutorService.schedule(
+                            new AbstractProtoDiskReadWriter$$ExternalSyntheticLambda0(this),
+                            120000L,
+                            TimeUnit.MILLISECONDS);
         }
     }
 

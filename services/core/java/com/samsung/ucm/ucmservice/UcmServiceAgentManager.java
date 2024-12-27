@@ -15,10 +15,13 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.storage.EdmStorageProvider;
+
 import com.samsung.ucm.ucmservice.security.UcmSecurityHelper;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -26,7 +29,8 @@ import java.util.List;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class UcmServiceAgentManager implements IUcmAgentManagerDeleteDelegate {
-    public static final Intent CREDENTIAL_AGENT_INTENT_FILTER = new Intent("com.samsung.android.knox.intent.action.UCM_AGENT");
+    public static final Intent CREDENTIAL_AGENT_INTENT_FILTER =
+            new Intent("com.samsung.android.knox.intent.action.UCM_AGENT");
     public static final boolean DBG = UcmServiceUtil.isDebug();
     public List mActiveAgentList;
     public Context mContext;
@@ -44,11 +48,15 @@ public final class UcmServiceAgentManager implements IUcmAgentManagerDeleteDeleg
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        if (packageManager.checkPermission("com.samsung.android.knox.permission.KNOX_UCM_ESE_MGMT", str, i) == 0) {
+        if (packageManager.checkPermission(
+                        "com.samsung.android.knox.permission.KNOX_UCM_ESE_MGMT", str, i)
+                == 0) {
             Log.i("UcmService.UcmAgentManager", "KNOX_UCM_ESE_PERMISSION is granted");
             return true;
         }
-        if (packageManager.checkPermission("com.samsung.android.knox.permission.KNOX_UCM_MGMT", str, i) == 0) {
+        if (packageManager.checkPermission(
+                        "com.samsung.android.knox.permission.KNOX_UCM_MGMT", str, i)
+                == 0) {
             Log.i("UcmService.UcmAgentManager", "KNOX_UCM_UNIFIED_PERMISSION is granted");
             return true;
         }
@@ -74,14 +82,17 @@ public final class UcmServiceAgentManager implements IUcmAgentManagerDeleteDeleg
             try {
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("storagePackageName", "com.samsung.ucs.agent.ese");
-                if (new EdmStorageProvider(this.mContext).getCount("UniversalCredentialInfoTable", contentValues) > 0) {
+                if (new EdmStorageProvider(this.mContext)
+                                .getCount("UniversalCredentialInfoTable", contentValues)
+                        > 0) {
                     z2 = true;
                 }
             } catch (Exception e) {
                 Log.i("UcmService.UcmAgentManager", "The exception occurs " + e.getMessage());
             }
             if (z) {
-                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("isEseManaged - status : ", "UcmService.UcmAgentManager", z2);
+                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                        "isEseManaged - status : ", "UcmService.UcmAgentManager", z2);
             }
             return z2;
         } finally {
@@ -96,7 +107,10 @@ public final class UcmServiceAgentManager implements IUcmAgentManagerDeleteDeleg
             Log.i("UcmService.UcmAgentManager", "The exception occurs " + e.getMessage());
         }
         if (!ActivityManager.isSystemReady()) {
-            Log.i("UcmService.UcmAgentManager", "refreshAgentList system ready is not called yet. Ignoring agent refresh logic");
+            Log.i(
+                    "UcmService.UcmAgentManager",
+                    "refreshAgentList system ready is not called yet. Ignoring agent refresh"
+                        + " logic");
             return;
         }
         ArraySet arraySet = new ArraySet();
@@ -106,7 +120,9 @@ public final class UcmServiceAgentManager implements IUcmAgentManagerDeleteDeleg
         while (it.hasNext()) {
             UcmAgentWrapper ucmAgentWrapper = (UcmAgentWrapper) it.next();
             if (ucmAgentWrapper.info != null) {
-                Log.i("UcmService.UcmAgentManager", "  Removing unwanted agent- " + ucmAgentWrapper.info.id);
+                Log.i(
+                        "UcmService.UcmAgentManager",
+                        "  Removing unwanted agent- " + ucmAgentWrapper.info.id);
             }
             ucmAgentWrapper.unbind();
             ((ArrayList) this.mActiveAgentList).remove(ucmAgentWrapper);
@@ -117,10 +133,15 @@ public final class UcmServiceAgentManager implements IUcmAgentManagerDeleteDeleg
         ComponentName componentName;
         ServiceInfo serviceInfo;
         Log.i("UcmService.UcmAgentManager", "*****refreshAgentListInternal is called***");
-        int organizationOwnedProfileUserId = UcmServiceUtil.isOrganizationOwnedProfile(this.mContext) ? UcmServiceUtil.getOrganizationOwnedProfileUserId() : 0;
+        int organizationOwnedProfileUserId =
+                UcmServiceUtil.isOrganizationOwnedProfile(this.mContext)
+                        ? UcmServiceUtil.getOrganizationOwnedProfileUserId()
+                        : 0;
         PackageManager packageManager = this.mContext.getPackageManager();
         Log.i("UcmService.UcmAgentManager", "getAllPlugins");
-        List<ResolveInfo> queryIntentServicesAsUser = packageManager.queryIntentServicesAsUser(CREDENTIAL_AGENT_INTENT_FILTER, 128, organizationOwnedProfileUserId);
+        List<ResolveInfo> queryIntentServicesAsUser =
+                packageManager.queryIntentServicesAsUser(
+                        CREDENTIAL_AGENT_INTENT_FILTER, 128, organizationOwnedProfileUserId);
         ArrayList arrayList = new ArrayList(queryIntentServicesAsUser.size());
         for (ResolveInfo resolveInfo : queryIntentServicesAsUser) {
             ServiceInfo serviceInfo2 = resolveInfo.serviceInfo;
@@ -142,54 +163,95 @@ public final class UcmServiceAgentManager implements IUcmAgentManagerDeleteDeleg
             if (componentName == null) {
                 Log.i("UcmService.UcmAgentManager", "name is empty");
             } else {
-                UcmAgentWrapper ucmAgentWrapper = new UcmAgentWrapper(this.mContext, this, componentName);
+                UcmAgentWrapper ucmAgentWrapper =
+                        new UcmAgentWrapper(this.mContext, this, componentName);
                 String packageName = componentName.getPackageName();
                 try {
-                    Log.i("UcmService.UcmAgentManager", "-------Processing started for agentPackageName------" + packageName);
-                    Log.i("UcmService.UcmAgentManager", "  agentPackageName -" + packageName + " is an active plugin");
-                    Log.i("UcmService.UcmAgentManager", "  Check if caller has UCS Plugin permission...");
+                    Log.i(
+                            "UcmService.UcmAgentManager",
+                            "-------Processing started for agentPackageName------" + packageName);
+                    Log.i(
+                            "UcmService.UcmAgentManager",
+                            "  agentPackageName -" + packageName + " is an active plugin");
+                    Log.i(
+                            "UcmService.UcmAgentManager",
+                            "  Check if caller has UCS Plugin permission...");
                     try {
-                        Log.i("UcmService.UcmAgentManager", "  Agent has UCS PLUGIN permission. Processing further...");
+                        Log.i(
+                                "UcmService.UcmAgentManager",
+                                "  Agent has UCS PLUGIN permission. Processing further...");
                         boolean equals = packageName.equals("com.samsung.ucs.agent.ese");
                         UcmSecurityHelper ucmSecurityHelper = this.mSecurityHelper;
                         if (equals || packageName.equals("com.samsung.ucs.agent.boot")) {
-                            Log.i("UcmService.UcmAgentManager", "  agentPackageName " + packageName + " is system storage. Checking system signature");
+                            Log.i(
+                                    "UcmService.UcmAgentManager",
+                                    "  agentPackageName "
+                                            + packageName
+                                            + " is system storage. Checking system signature");
                             if (ucmSecurityHelper.isSystemApp(packageName)) {
-                                Log.i("UcmService.UcmAgentManager", "  Valid system storage found is " + packageName);
+                                Log.i(
+                                        "UcmService.UcmAgentManager",
+                                        "  Valid system storage found is " + packageName);
                             } else {
-                                Log.i("UcmService.UcmAgentManager", "  system storage found - " + packageName + " is not valid. Ignoring it...");
+                                Log.i(
+                                        "UcmService.UcmAgentManager",
+                                        "  system storage found - "
+                                                + packageName
+                                                + " is not valid. Ignoring it...");
                             }
                         }
-                        if ("com.samsung.ucs.agent.ese".equals(packageName) && !this.mNeedToBindESE) {
+                        if ("com.samsung.ucs.agent.ese".equals(packageName)
+                                && !this.mNeedToBindESE) {
                             if (isEseManaged()) {
                                 this.mNeedToBindESE = true;
                             } else {
-                                Log.i("UcmService.UcmAgentManager", "Do not need to bind eSE Service");
+                                Log.i(
+                                        "UcmService.UcmAgentManager",
+                                        "Do not need to bind eSE Service");
                             }
                         }
                         if (((ArrayList) this.mActiveAgentList).contains(ucmAgentWrapper)) {
                             if (DBG) {
-                                Log.i("UcmService.UcmAgentManager", "agent is already added in activeAgentList");
+                                Log.i(
+                                        "UcmService.UcmAgentManager",
+                                        "agent is already added in activeAgentList");
                             }
                             arraySet.remove(ucmAgentWrapper);
                         } else {
-                            if (resolveInfo2 != null && (serviceInfo = resolveInfo2.serviceInfo) != null && serviceInfo.metaData != null) {
-                                ucmAgentWrapper.initialize(resolveInfo2, new UserHandle(organizationOwnedProfileUserId));
-                                if (ucmSecurityHelper.isSystemApp(ucmAgentWrapper.info.packageName)) {
-                                    Log.i("UcmService.UcmAgentManager", "  Adding system signed agent");
+                            if (resolveInfo2 != null
+                                    && (serviceInfo = resolveInfo2.serviceInfo) != null
+                                    && serviceInfo.metaData != null) {
+                                ucmAgentWrapper.initialize(
+                                        resolveInfo2,
+                                        new UserHandle(organizationOwnedProfileUserId));
+                                if (ucmSecurityHelper.isSystemApp(
+                                        ucmAgentWrapper.info.packageName)) {
+                                    Log.i(
+                                            "UcmService.UcmAgentManager",
+                                            "  Adding system signed agent");
                                 } else {
-                                    Log.i("UcmService.UcmAgentManager", "Agent entry is not in PersistentServices, but has proper permissions");
+                                    Log.i(
+                                            "UcmService.UcmAgentManager",
+                                            "Agent entry is not in PersistentServices, but has"
+                                                + " proper permissions");
                                 }
-                                Log.i("UcmService.UcmAgentManager", "  Adding new agent -" + ucmAgentWrapper.info.id);
+                                Log.i(
+                                        "UcmService.UcmAgentManager",
+                                        "  Adding new agent -" + ucmAgentWrapper.info.id);
                                 ((ArrayList) this.mActiveAgentList).add(ucmAgentWrapper);
                             }
                             Log.i("UcmService.UcmAgentManager", "resolveInfo null");
                         }
                     } catch (Exception e) {
-                        Log.i("UcmService.UcmAgentManager", "The exception occurs " + e.getMessage());
+                        Log.i(
+                                "UcmService.UcmAgentManager",
+                                "The exception occurs " + e.getMessage());
                     }
                 } catch (Exception e2) {
-                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), "UcmService.UcmAgentManager");
+                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                            e2,
+                            new StringBuilder("The exception occurs "),
+                            "UcmService.UcmAgentManager");
                 }
             }
         }

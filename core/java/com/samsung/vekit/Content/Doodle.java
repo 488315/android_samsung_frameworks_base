@@ -1,11 +1,13 @@
 package com.samsung.vekit.Content;
 
 import android.util.Log;
+
 import com.samsung.vekit.Common.Object.DoodleStroke;
 import com.samsung.vekit.Common.Type.ContentColorType;
 import com.samsung.vekit.Common.Type.ContentType;
 import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Panel.Panel;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -133,7 +135,13 @@ public class Doodle extends Content {
         return this;
     }
 
-    public Doodle setCapturedImageInfo(String path, int width, int height, int savedStrokeSize, ContentColorType colorType, boolean hasCapturedMask) {
+    public Doodle setCapturedImageInfo(
+            String path,
+            int width,
+            int height,
+            int savedStrokeSize,
+            ContentColorType colorType,
+            boolean hasCapturedMask) {
         Log.d(this.TAG, "setCapturedImageInfo");
         this.capturedImagePath = path;
         this.width = width;

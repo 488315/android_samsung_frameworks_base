@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class DemuxFilterMediaEventExtraMetaData implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterMediaEventExtraMetaData> CREATOR = new Parcelable.Creator<DemuxFilterMediaEventExtraMetaData>() { // from class: android.hardware.tv.tuner.DemuxFilterMediaEventExtraMetaData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterMediaEventExtraMetaData createFromParcel(Parcel _aidl_source) {
-            return new DemuxFilterMediaEventExtraMetaData(_aidl_source);
-        }
+    public static final Parcelable.Creator<DemuxFilterMediaEventExtraMetaData> CREATOR =
+            new Parcelable.Creator<DemuxFilterMediaEventExtraMetaData>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterMediaEventExtraMetaData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterMediaEventExtraMetaData createFromParcel(Parcel _aidl_source) {
+                    return new DemuxFilterMediaEventExtraMetaData(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterMediaEventExtraMetaData[] newArray(int _aidl_size) {
-            return new DemuxFilterMediaEventExtraMetaData[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterMediaEventExtraMetaData[] newArray(int _aidl_size) {
+                    return new DemuxFilterMediaEventExtraMetaData[_aidl_size];
+                }
+            };
     public static final int audio = 1;
     public static final int audioPresentations = 2;
     public static final int noinit = 0;
@@ -74,7 +76,8 @@ public final class DemuxFilterMediaEventExtraMetaData implements Parcelable {
         _set(1, _value);
     }
 
-    public static DemuxFilterMediaEventExtraMetaData audioPresentations(AudioPresentation[] _value) {
+    public static DemuxFilterMediaEventExtraMetaData audioPresentations(
+            AudioPresentation[] _value) {
         return new DemuxFilterMediaEventExtraMetaData(2, _value);
     }
 
@@ -116,11 +119,15 @@ public final class DemuxFilterMediaEventExtraMetaData implements Parcelable {
                 _set(_aidl_tag, Boolean.valueOf(_aidl_value));
                 return;
             case 1:
-                AudioExtraMetaData _aidl_value2 = (AudioExtraMetaData) _aidl_parcel.readTypedObject(AudioExtraMetaData.CREATOR);
+                AudioExtraMetaData _aidl_value2 =
+                        (AudioExtraMetaData)
+                                _aidl_parcel.readTypedObject(AudioExtraMetaData.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
-                AudioPresentation[] _aidl_value3 = (AudioPresentation[]) _aidl_parcel.createTypedArray(AudioPresentation.CREATOR);
+                AudioPresentation[] _aidl_value3 =
+                        (AudioPresentation[])
+                                _aidl_parcel.createTypedArray(AudioPresentation.CREATOR);
                 _set(_aidl_tag, _aidl_value3);
                 return;
             default:
@@ -161,7 +168,12 @@ public final class DemuxFilterMediaEventExtraMetaData implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

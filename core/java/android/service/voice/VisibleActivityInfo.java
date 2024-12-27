@@ -4,25 +4,29 @@ import android.annotation.NonNull;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.service.voice.VoiceInteractionSession;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class VisibleActivityInfo implements Parcelable {
-    public static final Parcelable.Creator<VisibleActivityInfo> CREATOR = new Parcelable.Creator<VisibleActivityInfo>() { // from class: android.service.voice.VisibleActivityInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisibleActivityInfo[] newArray(int size) {
-            return new VisibleActivityInfo[size];
-        }
+    public static final Parcelable.Creator<VisibleActivityInfo> CREATOR =
+            new Parcelable.Creator<
+                    VisibleActivityInfo>() { // from class:
+                                             // android.service.voice.VisibleActivityInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisibleActivityInfo[] newArray(int size) {
+                    return new VisibleActivityInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisibleActivityInfo createFromParcel(Parcel in) {
-            return new VisibleActivityInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisibleActivityInfo createFromParcel(Parcel in) {
+                    return new VisibleActivityInfo(in);
+                }
+            };
     public static final int TYPE_ACTIVITY_ADDED = 1;
     public static final int TYPE_ACTIVITY_REMOVED = 2;
     private final IBinder mAssistToken;
@@ -39,7 +43,11 @@ public final class VisibleActivityInfo implements Parcelable {
     }
 
     public String toString() {
-        return "VisibleActivityInfo { taskId = " + this.mTaskId + ", assistToken = " + this.mAssistToken + " }";
+        return "VisibleActivityInfo { taskId = "
+                + this.mTaskId
+                + ", assistToken = "
+                + this.mAssistToken
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -77,10 +85,10 @@ public final class VisibleActivityInfo implements Parcelable {
         IBinder assistToken = in.readStrongBinder();
         this.mTaskId = taskId;
         this.mAssistToken = assistToken;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAssistToken);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAssistToken);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

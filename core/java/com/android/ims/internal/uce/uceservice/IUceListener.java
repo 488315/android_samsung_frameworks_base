@@ -12,8 +12,7 @@ public interface IUceListener extends IInterface {
 
     public static class Default implements IUceListener {
         @Override // com.android.ims.internal.uce.uceservice.IUceListener
-        public void setStatus(int serviceStatusValue) throws RemoteException {
-        }
+        public void setStatus(int serviceStatusValue) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +20,9 @@ public interface IUceListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUceListener {
-        public static final String DESCRIPTOR = "com.android.ims.internal.uce.uceservice.IUceListener";
+    public abstract static class Stub extends Binder implements IUceListener {
+        public static final String DESCRIPTOR =
+                "com.android.ims.internal.uce.uceservice.IUceListener";
         static final int TRANSACTION_setStatus = 1;
 
         public Stub() {
@@ -60,7 +60,8 @@ public interface IUceListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

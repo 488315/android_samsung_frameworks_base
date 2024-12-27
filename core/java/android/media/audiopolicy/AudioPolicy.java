@@ -13,7 +13,6 @@ import android.media.AudioRecord;
 import android.media.AudioTrack;
 import android.media.FadeManagerConfiguration;
 import android.media.IAudioService;
-import android.media.audiopolicy.IAudioPolicyCallback;
 import android.media.projection.MediaProjection;
 import android.os.Binder;
 import android.os.Handler;
@@ -25,7 +24,9 @@ import android.os.ServiceManager;
 import android.util.Log;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -73,8 +74,7 @@ public class AudioPolicy {
     private final AudioPolicyVolumeCallback mVolCb;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PolicyStatus {
-    }
+    public @interface PolicyStatus {}
 
     public AudioPolicyConfig getConfig() {
         return this.mConfig;
@@ -106,54 +106,67 @@ public class AudioPolicy {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static AttributionSource getAttributionSource(Context context) {
-        return context == null ? AttributionSource.myAttributionSource() : context.getAttributionSource();
+        return context == null
+                ? AttributionSource.myAttributionSource()
+                : context.getAttributionSource();
     }
 
-    private AudioPolicy(AudioPolicyConfig config, Context context, Looper looper, AudioPolicyFocusListener fl, AudioPolicyStatusListener sl, boolean isFocusPolicy, boolean isTestFocusPolicy, AudioPolicyVolumeCallback vc, MediaProjection projection) {
+    private AudioPolicy(
+            AudioPolicyConfig config,
+            Context context,
+            Looper looper,
+            AudioPolicyFocusListener fl,
+            AudioPolicyStatusListener sl,
+            boolean isFocusPolicy,
+            boolean isTestFocusPolicy,
+            AudioPolicyVolumeCallback vc,
+            MediaProjection projection) {
         this.mLock = new Object();
-        this.mPolicyCb = new IAudioPolicyCallback.Stub() { // from class: android.media.audiopolicy.AudioPolicy.1
-            @Override // android.media.audiopolicy.IAudioPolicyCallback
-            public void notifyAudioFocusGrant(AudioFocusInfo afi, int requestResult) {
-                AudioPolicy.this.sendMsg(1, afi, requestResult);
-            }
-
-            @Override // android.media.audiopolicy.IAudioPolicyCallback
-            public void notifyAudioFocusLoss(AudioFocusInfo audioFocusInfo, boolean z) {
-                AudioPolicy.this.sendMsg(2, audioFocusInfo, z ? 1 : 0);
-            }
-
-            @Override // android.media.audiopolicy.IAudioPolicyCallback
-            public void notifyAudioFocusRequest(AudioFocusInfo afi, int requestResult) {
-                AudioPolicy.this.sendMsg(4, afi, requestResult);
-            }
-
-            @Override // android.media.audiopolicy.IAudioPolicyCallback
-            public void notifyAudioFocusAbandon(AudioFocusInfo afi) {
-                AudioPolicy.this.sendMsg(5, afi, 0);
-            }
-
-            @Override // android.media.audiopolicy.IAudioPolicyCallback
-            public void notifyMixStateUpdate(String regId, int state) {
-                Iterator<AudioMix> it = AudioPolicy.this.mConfig.getMixes().iterator();
-                while (it.hasNext()) {
-                    AudioMix mix = it.next();
-                    if (mix.getRegistration().equals(regId)) {
-                        mix.mMixState = state;
-                        AudioPolicy.this.sendMsg(3, mix, 0);
+        this.mPolicyCb =
+                new IAudioPolicyCallback
+                        .Stub() { // from class: android.media.audiopolicy.AudioPolicy.1
+                    @Override // android.media.audiopolicy.IAudioPolicyCallback
+                    public void notifyAudioFocusGrant(AudioFocusInfo afi, int requestResult) {
+                        AudioPolicy.this.sendMsg(1, afi, requestResult);
                     }
-                }
-            }
 
-            @Override // android.media.audiopolicy.IAudioPolicyCallback
-            public void notifyVolumeAdjust(int adjustment) {
-                AudioPolicy.this.sendMsg(6, null, adjustment);
-            }
+                    @Override // android.media.audiopolicy.IAudioPolicyCallback
+                    public void notifyAudioFocusLoss(AudioFocusInfo audioFocusInfo, boolean z) {
+                        AudioPolicy.this.sendMsg(2, audioFocusInfo, z ? 1 : 0);
+                    }
 
-            @Override // android.media.audiopolicy.IAudioPolicyCallback
-            public void notifyUnregistration() {
-                AudioPolicy.this.setRegistration(null);
-            }
-        };
+                    @Override // android.media.audiopolicy.IAudioPolicyCallback
+                    public void notifyAudioFocusRequest(AudioFocusInfo afi, int requestResult) {
+                        AudioPolicy.this.sendMsg(4, afi, requestResult);
+                    }
+
+                    @Override // android.media.audiopolicy.IAudioPolicyCallback
+                    public void notifyAudioFocusAbandon(AudioFocusInfo afi) {
+                        AudioPolicy.this.sendMsg(5, afi, 0);
+                    }
+
+                    @Override // android.media.audiopolicy.IAudioPolicyCallback
+                    public void notifyMixStateUpdate(String regId, int state) {
+                        Iterator<AudioMix> it = AudioPolicy.this.mConfig.getMixes().iterator();
+                        while (it.hasNext()) {
+                            AudioMix mix = it.next();
+                            if (mix.getRegistration().equals(regId)) {
+                                mix.mMixState = state;
+                                AudioPolicy.this.sendMsg(3, mix, 0);
+                            }
+                        }
+                    }
+
+                    @Override // android.media.audiopolicy.IAudioPolicyCallback
+                    public void notifyVolumeAdjust(int adjustment) {
+                        AudioPolicy.this.sendMsg(6, null, adjustment);
+                    }
+
+                    @Override // android.media.audiopolicy.IAudioPolicyCallback
+                    public void notifyUnregistration() {
+                        AudioPolicy.this.setRegistration(null);
+                    }
+                };
         this.mConfig = config;
         this.mStatus = 1;
         this.mContext = context;
@@ -191,8 +204,10 @@ public class AudioPolicy {
             if (mix == null) {
                 throw new IllegalArgumentException("Illegal null AudioMix argument");
             }
-            if (com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags.deviceAwarePermissionApisEnabled()) {
-                mix.setVirtualDeviceId(AudioPolicy.getAttributionSource(this.mContext).getDeviceId());
+            if (com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags
+                    .deviceAwarePermissionApisEnabled()) {
+                mix.setVirtualDeviceId(
+                        AudioPolicy.getAttributionSource(this.mContext).getDeviceId());
             }
             this.mMixes.add(mix);
             return this;
@@ -249,9 +264,19 @@ public class AudioPolicy {
                 }
             }
             if (this.mIsFocusPolicy && this.mFocusListener == null) {
-                throw new IllegalStateException("Cannot be a focus policy without an AudioPolicyFocusListener");
+                throw new IllegalStateException(
+                        "Cannot be a focus policy without an AudioPolicyFocusListener");
             }
-            return new AudioPolicy(new AudioPolicyConfig(this.mMixes), this.mContext, this.mLooper, this.mFocusListener, this.mStatusListener, this.mIsFocusPolicy, this.mIsTestFocusPolicy, this.mVolCb, this.mProjection);
+            return new AudioPolicy(
+                    new AudioPolicyConfig(this.mMixes),
+                    this.mContext,
+                    this.mLooper,
+                    this.mFocusListener,
+                    this.mStatusListener,
+                    this.mIsFocusPolicy,
+                    this.mIsTestFocusPolicy,
+                    this.mVolCb,
+                    this.mProjection);
         }
     }
 
@@ -269,7 +294,8 @@ public class AudioPolicy {
                 if (mix == null) {
                     throw new IllegalArgumentException("Illegal null AudioMix in attachMixes");
                 }
-                if (com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags.deviceAwarePermissionApisEnabled()) {
+                if (com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags
+                        .deviceAwarePermissionApisEnabled()) {
                     mix.setVirtualDeviceId(getAttributionSource(this.mContext).getDeviceId());
                 }
                 zeMixes.add(mix);
@@ -303,7 +329,8 @@ public class AudioPolicy {
                 if (mix == null) {
                     throw new IllegalArgumentException("Illegal null AudioMix in detachMixes");
                 }
-                if (com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags.deviceAwarePermissionApisEnabled()) {
+                if (com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags
+                        .deviceAwarePermissionApisEnabled()) {
                     mix.setVirtualDeviceId(getAttributionSource(this.mContext).getDeviceId());
                 }
                 zeMixes.add(mix);
@@ -329,27 +356,53 @@ public class AudioPolicy {
         IAudioService service = getService();
         try {
             synchronized (this.mLock) {
-                status = service.updateMixingRulesForPolicy((AudioMix[]) mixingRuleUpdates.stream().map(new Function() { // from class: android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda1
-                    @Override // java.util.function.Function
-                    public final Object apply(Object obj) {
-                        return AudioPolicy.lambda$updateMixingRules$0((Pair) obj);
-                    }
-                }).toArray(new IntFunction() { // from class: android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda2
-                    @Override // java.util.function.IntFunction
-                    public final Object apply(int i) {
-                        return AudioPolicy.lambda$updateMixingRules$1(i);
-                    }
-                }), (AudioMixingRule[]) mixingRuleUpdates.stream().map(new Function() { // from class: android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda3
-                    @Override // java.util.function.Function
-                    public final Object apply(Object obj) {
-                        return AudioPolicy.lambda$updateMixingRules$2((Pair) obj);
-                    }
-                }).toArray(new IntFunction() { // from class: android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda4
-                    @Override // java.util.function.IntFunction
-                    public final Object apply(int i) {
-                        return AudioPolicy.lambda$updateMixingRules$3(i);
-                    }
-                }), cb());
+                status =
+                        service.updateMixingRulesForPolicy(
+                                (AudioMix[])
+                                        mixingRuleUpdates.stream()
+                                                .map(
+                                                        new Function() { // from class:
+                                                            // android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda1
+                                                            @Override // java.util.function.Function
+                                                            public final Object apply(Object obj) {
+                                                                return AudioPolicy
+                                                                        .lambda$updateMixingRules$0(
+                                                                                (Pair) obj);
+                                                            }
+                                                        })
+                                                .toArray(
+                                                        new IntFunction() { // from class:
+                                                            // android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda2
+                                                            @Override // java.util.function.IntFunction
+                                                            public final Object apply(int i) {
+                                                                return AudioPolicy
+                                                                        .lambda$updateMixingRules$1(
+                                                                                i);
+                                                            }
+                                                        }),
+                                (AudioMixingRule[])
+                                        mixingRuleUpdates.stream()
+                                                .map(
+                                                        new Function() { // from class:
+                                                            // android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda3
+                                                            @Override // java.util.function.Function
+                                                            public final Object apply(Object obj) {
+                                                                return AudioPolicy
+                                                                        .lambda$updateMixingRules$2(
+                                                                                (Pair) obj);
+                                                            }
+                                                        })
+                                                .toArray(
+                                                        new IntFunction() { // from class:
+                                                            // android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda4
+                                                            @Override // java.util.function.IntFunction
+                                                            public final Object apply(int i) {
+                                                                return AudioPolicy
+                                                                        .lambda$updateMixingRules$3(
+                                                                                i);
+                                                            }
+                                                        }),
+                                cb());
                 if (status == 0) {
                     this.mConfig.updateMixingRules(mixingRuleUpdates);
                 }
@@ -394,9 +447,11 @@ public class AudioPolicy {
             int i = 0;
             for (AudioDeviceInfo device : devices) {
                 if (device == null) {
-                    throw new IllegalArgumentException("Illegal null AudioDeviceInfo in setUidDeviceAffinity");
+                    throw new IllegalArgumentException(
+                            "Illegal null AudioDeviceInfo in setUidDeviceAffinity");
                 }
-                deviceTypes[i] = AudioDeviceInfo.convertDeviceTypeToInternalDevice(device.getType());
+                deviceTypes[i] =
+                        AudioDeviceInfo.convertDeviceTypeToInternalDevice(device.getType());
                 deviceAdresses[i] = device.getAddress();
                 i++;
             }
@@ -463,15 +518,18 @@ public class AudioPolicy {
             int i = 0;
             for (AudioDeviceInfo device : devices) {
                 if (device == null) {
-                    throw new IllegalArgumentException("Illegal null AudioDeviceInfo in setUserIdDeviceAffinity");
+                    throw new IllegalArgumentException(
+                            "Illegal null AudioDeviceInfo in setUserIdDeviceAffinity");
                 }
-                deviceTypes[i] = AudioDeviceInfo.convertDeviceTypeToInternalDevice(device.getType());
+                deviceTypes[i] =
+                        AudioDeviceInfo.convertDeviceTypeToInternalDevice(device.getType());
                 deviceAddresses[i] = device.getAddress();
                 i++;
             }
             IAudioService service = getService();
             try {
-                int status = service.setUserIdDeviceAffinity(cb(), userId, deviceTypes, deviceAddresses);
+                int status =
+                        service.setUserIdDeviceAffinity(cb(), userId, deviceTypes, deviceAddresses);
                 z = status == 0;
             } catch (RemoteException e) {
                 Log.e(TAG, "Dead object in setUserIdDeviceAffinity", e);
@@ -517,14 +575,21 @@ public class AudioPolicy {
     @SystemApi
     public int setFadeManagerConfigurationForFocusLoss(FadeManagerConfiguration fmcForFocusLoss) {
         int fadeManagerConfigurationForFocusLoss;
-        Objects.requireNonNull(fmcForFocusLoss, "FadeManagerConfiguration for focus loss cannot be null");
+        Objects.requireNonNull(
+                fmcForFocusLoss, "FadeManagerConfiguration for focus loss cannot be null");
         IAudioService service = getService();
         synchronized (this.mLock) {
-            Preconditions.checkState(isAudioPolicyRegisteredLocked(), "Cannot set FadeManagerConfiguration with unregistered AudioPolicy");
+            Preconditions.checkState(
+                    isAudioPolicyRegisteredLocked(),
+                    "Cannot set FadeManagerConfiguration with unregistered AudioPolicy");
             try {
-                fadeManagerConfigurationForFocusLoss = service.setFadeManagerConfigurationForFocusLoss(fmcForFocusLoss);
+                fadeManagerConfigurationForFocusLoss =
+                        service.setFadeManagerConfigurationForFocusLoss(fmcForFocusLoss);
             } catch (RemoteException e) {
-                Log.e(TAG, "Received remote exception for setFadeManagerConfigurationForFocusLoss:", e);
+                Log.e(
+                        TAG,
+                        "Received remote exception for setFadeManagerConfigurationForFocusLoss:",
+                        e);
                 throw e.rethrowFromSystemServer();
             }
         }
@@ -536,11 +601,17 @@ public class AudioPolicy {
         int clearFadeManagerConfigurationForFocusLoss;
         IAudioService service = getService();
         synchronized (this.mLock) {
-            Preconditions.checkState(isAudioPolicyRegisteredLocked(), "Cannot clear FadeManagerConfiguration from unregistered AudioPolicy");
+            Preconditions.checkState(
+                    isAudioPolicyRegisteredLocked(),
+                    "Cannot clear FadeManagerConfiguration from unregistered AudioPolicy");
             try {
-                clearFadeManagerConfigurationForFocusLoss = service.clearFadeManagerConfigurationForFocusLoss();
+                clearFadeManagerConfigurationForFocusLoss =
+                        service.clearFadeManagerConfigurationForFocusLoss();
             } catch (RemoteException e) {
-                Log.e(TAG, "Received remote exception for clearFadeManagerConfigurationForFocusLoss:", e);
+                Log.e(
+                        TAG,
+                        "Received remote exception for clearFadeManagerConfigurationForFocusLoss:",
+                        e);
                 throw e.rethrowFromSystemServer();
             }
         }
@@ -552,11 +623,17 @@ public class AudioPolicy {
         FadeManagerConfiguration fadeManagerConfigurationForFocusLoss;
         IAudioService service = getService();
         synchronized (this.mLock) {
-            Preconditions.checkState(isAudioPolicyRegisteredLocked(), "Cannot get FadeManagerConfiguration from unregistered AudioPolicy");
+            Preconditions.checkState(
+                    isAudioPolicyRegisteredLocked(),
+                    "Cannot get FadeManagerConfiguration from unregistered AudioPolicy");
             try {
-                fadeManagerConfigurationForFocusLoss = service.getFadeManagerConfigurationForFocusLoss();
+                fadeManagerConfigurationForFocusLoss =
+                        service.getFadeManagerConfigurationForFocusLoss();
             } catch (RemoteException e) {
-                Log.e(TAG, "Received remote exception for getFadeManagerConfigurationForFocusLoss:", e);
+                Log.e(
+                        TAG,
+                        "Received remote exception for getFadeManagerConfigurationForFocusLoss:",
+                        e);
                 throw e.rethrowFromSystemServer();
             }
         }
@@ -578,23 +655,40 @@ public class AudioPolicy {
                 Log.e(TAG, "Cannot use unregistered AudioPolicy");
                 return false;
             }
-            boolean canModifyAudioRouting = checkCallingOrSelfPermission(Manifest.permission.MODIFY_AUDIO_ROUTING) == 0;
-            boolean canInterceptCallAudio = checkCallingOrSelfPermission(Manifest.permission.CALL_AUDIO_INTERCEPTION) == 0;
+            boolean canModifyAudioRouting =
+                    checkCallingOrSelfPermission(Manifest.permission.MODIFY_AUDIO_ROUTING) == 0;
+            boolean canInterceptCallAudio =
+                    checkCallingOrSelfPermission(Manifest.permission.CALL_AUDIO_INTERCEPTION) == 0;
             try {
                 if (this.mProjection != null) {
                     if (this.mProjection.getProjection().canProjectAudio()) {
                         canProjectAudio = true;
-                        if ((!isLoopbackRenderPolicy() && canProjectAudio) || ((isCallRedirectionPolicy() && canInterceptCallAudio) || canModifyAudioRouting)) {
+                        if ((!isLoopbackRenderPolicy() && canProjectAudio)
+                                || ((isCallRedirectionPolicy() && canInterceptCallAudio)
+                                        || canModifyAudioRouting)) {
                             return true;
                         }
-                        Slog.w(TAG, "Cannot use AudioPolicy for pid " + Binder.getCallingPid() + " / uid " + Binder.getCallingUid() + ", needs MODIFY_AUDIO_ROUTING or MediaProjection that can project audio.");
+                        Slog.w(
+                                TAG,
+                                "Cannot use AudioPolicy for pid "
+                                        + Binder.getCallingPid()
+                                        + " / uid "
+                                        + Binder.getCallingUid()
+                                        + ", needs MODIFY_AUDIO_ROUTING or MediaProjection that can"
+                                        + " project audio.");
                         return false;
                     }
                 }
                 canProjectAudio = false;
-                if (!isLoopbackRenderPolicy()) {
-                }
-                Slog.w(TAG, "Cannot use AudioPolicy for pid " + Binder.getCallingPid() + " / uid " + Binder.getCallingUid() + ", needs MODIFY_AUDIO_ROUTING or MediaProjection that can project audio.");
+                if (!isLoopbackRenderPolicy()) {}
+                Slog.w(
+                        TAG,
+                        "Cannot use AudioPolicy for pid "
+                                + Binder.getCallingPid()
+                                + " / uid "
+                                + Binder.getCallingUid()
+                                + ", needs MODIFY_AUDIO_ROUTING or MediaProjection that can project"
+                                + " audio.");
                 return false;
             } catch (RemoteException e) {
                 Log.e(TAG, "Failed to check if MediaProjection#canProjectAudio");
@@ -606,12 +700,17 @@ public class AudioPolicy {
     private boolean isLoopbackRenderPolicy() {
         boolean allMatch;
         synchronized (this.mLock) {
-            allMatch = this.mConfig.mMixes.stream().allMatch(new Predicate() { // from class: android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return AudioPolicy.lambda$isLoopbackRenderPolicy$4((AudioMix) obj);
-                }
-            });
+            allMatch =
+                    this.mConfig.mMixes.stream()
+                            .allMatch(
+                                    new Predicate() { // from class:
+                                        // android.media.audiopolicy.AudioPolicy$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            return AudioPolicy.lambda$isLoopbackRenderPolicy$4(
+                                                    (AudioMix) obj);
+                                        }
+                                    });
         }
         return allMatch;
     }
@@ -647,9 +746,13 @@ public class AudioPolicy {
         }
     }
 
-    private void checkMixReadyToUse(AudioMix mix, boolean forTrack) throws IllegalArgumentException {
+    private void checkMixReadyToUse(AudioMix mix, boolean forTrack)
+            throws IllegalArgumentException {
         if (mix == null) {
-            String msg = forTrack ? "Invalid null AudioMix for AudioTrack creation" : "Invalid null AudioMix for AudioRecord creation";
+            String msg =
+                    forTrack
+                            ? "Invalid null AudioMix for AudioTrack creation"
+                            : "Invalid null AudioMix for AudioRecord creation";
             throw new IllegalArgumentException(msg);
         }
         if (!this.mConfig.mMixes.contains(mix)) {
@@ -659,10 +762,12 @@ public class AudioPolicy {
             throw new IllegalArgumentException("Invalid AudioMix: not defined for loop back");
         }
         if (forTrack && mix.getMixType() != 1) {
-            throw new IllegalArgumentException("Invalid AudioMix: not defined for being a recording source");
+            throw new IllegalArgumentException(
+                    "Invalid AudioMix: not defined for being a recording source");
         }
         if (!forTrack && mix.getMixType() != 0) {
-            throw new IllegalArgumentException("Invalid AudioMix: not defined for capturing playback");
+            throw new IllegalArgumentException(
+                    "Invalid AudioMix: not defined for capturing playback");
         }
     }
 
@@ -670,17 +775,20 @@ public class AudioPolicy {
         return this.mConfig.mDuckingPolicy;
     }
 
-    public int setFocusDuckingBehavior(int behavior) throws IllegalArgumentException, IllegalStateException {
+    public int setFocusDuckingBehavior(int behavior)
+            throws IllegalArgumentException, IllegalStateException {
         int status;
         if (behavior != 0 && behavior != 1) {
             throw new IllegalArgumentException("Invalid ducking behavior " + behavior);
         }
         synchronized (this.mLock) {
             if (this.mStatus != 2) {
-                throw new IllegalStateException("Cannot change ducking behavior for unregistered policy");
+                throw new IllegalStateException(
+                        "Cannot change ducking behavior for unregistered policy");
             }
             if (behavior == 1 && this.mFocusListener == null) {
-                throw new IllegalStateException("Cannot handle ducking without an audio focus listener");
+                throw new IllegalStateException(
+                        "Cannot handle ducking without an audio focus listener");
             }
             IAudioService service = getService();
             try {
@@ -719,12 +827,27 @@ public class AudioPolicy {
             return null;
         }
         checkMixReadyToUse(mix, false);
-        AudioFormat mixFormat = new AudioFormat.Builder(mix.getFormat()).setChannelMask(AudioFormat.inChannelMaskFromOutChannelMask(mix.getFormat().getChannelMask())).build();
-        AudioAttributes.Builder ab = new AudioAttributes.Builder().setInternalCapturePreset(8).addTag(addressForTag(mix)).addTag(AudioRecord.SUBMIX_FIXED_VOLUME);
+        AudioFormat mixFormat =
+                new AudioFormat.Builder(mix.getFormat())
+                        .setChannelMask(
+                                AudioFormat.inChannelMaskFromOutChannelMask(
+                                        mix.getFormat().getChannelMask()))
+                        .build();
+        AudioAttributes.Builder ab =
+                new AudioAttributes.Builder()
+                        .setInternalCapturePreset(8)
+                        .addTag(addressForTag(mix))
+                        .addTag(AudioRecord.SUBMIX_FIXED_VOLUME);
         if (mix.isForCallRedirection()) {
             ab.setForCallRedirection();
         }
-        AudioRecord ar = new AudioRecord(ab.build(), mixFormat, AudioRecord.getMinBufferSize(mix.getFormat().getSampleRate(), 12, mix.getFormat().getEncoding()), 0);
+        AudioRecord ar =
+                new AudioRecord(
+                        ab.build(),
+                        mixFormat,
+                        AudioRecord.getMinBufferSize(
+                                mix.getFormat().getSampleRate(), 12, mix.getFormat().getEncoding()),
+                        0);
         synchronized (this.mLock) {
             if (this.mCaptors == null) {
                 this.mCaptors = new ArrayList<>(1);
@@ -740,11 +863,21 @@ public class AudioPolicy {
             return null;
         }
         checkMixReadyToUse(mix, true);
-        AudioAttributes.Builder ab = new AudioAttributes.Builder().setUsage(15).addTag(addressForTag(mix));
+        AudioAttributes.Builder ab =
+                new AudioAttributes.Builder().setUsage(15).addTag(addressForTag(mix));
         if (mix.isForCallRedirection()) {
             ab.setForCallRedirection();
         }
-        AudioTrack at = new AudioTrack(ab.build(), mix.getFormat(), AudioTrack.getMinBufferSize(mix.getFormat().getSampleRate(), mix.getFormat().getChannelMask(), mix.getFormat().getEncoding()), 1, 0);
+        AudioTrack at =
+                new AudioTrack(
+                        ab.build(),
+                        mix.getFormat(),
+                        AudioTrack.getMinBufferSize(
+                                mix.getFormat().getSampleRate(),
+                                mix.getFormat().getChannelMask(),
+                                mix.getFormat().getEncoding()),
+                        1,
+                        0);
         synchronized (this.mLock) {
             if (this.mInjectors == null) {
                 this.mInjectors = new ArrayList<>(1);
@@ -795,31 +928,24 @@ public class AudioPolicy {
         return this.mStatus;
     }
 
-    public static abstract class AudioPolicyStatusListener {
-        public void onStatusChange() {
-        }
+    public abstract static class AudioPolicyStatusListener {
+        public void onStatusChange() {}
 
-        public void onMixStateUpdate(AudioMix mix) {
-        }
+        public void onMixStateUpdate(AudioMix mix) {}
     }
 
-    public static abstract class AudioPolicyFocusListener {
-        public void onAudioFocusGrant(AudioFocusInfo afi, int requestResult) {
-        }
+    public abstract static class AudioPolicyFocusListener {
+        public void onAudioFocusGrant(AudioFocusInfo afi, int requestResult) {}
 
-        public void onAudioFocusLoss(AudioFocusInfo afi, boolean wasNotified) {
-        }
+        public void onAudioFocusLoss(AudioFocusInfo afi, boolean wasNotified) {}
 
-        public void onAudioFocusRequest(AudioFocusInfo afi, int requestResult) {
-        }
+        public void onAudioFocusRequest(AudioFocusInfo afi, int requestResult) {}
 
-        public void onAudioFocusAbandon(AudioFocusInfo afi) {
-        }
+        public void onAudioFocusAbandon(AudioFocusInfo afi) {}
     }
 
-    public static abstract class AudioPolicyVolumeCallback {
-        public void onVolumeAdjustment(int adjustment) {
-        }
+    public abstract static class AudioPolicyVolumeCallback {
+        public void onVolumeAdjustment(int adjustment) {}
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -846,13 +972,15 @@ public class AudioPolicy {
                     break;
                 case 1:
                     if (AudioPolicy.this.mFocusListener != null) {
-                        AudioPolicy.this.mFocusListener.onAudioFocusGrant((AudioFocusInfo) msg.obj, msg.arg1);
+                        AudioPolicy.this.mFocusListener.onAudioFocusGrant(
+                                (AudioFocusInfo) msg.obj, msg.arg1);
                         break;
                     }
                     break;
                 case 2:
                     if (AudioPolicy.this.mFocusListener != null) {
-                        AudioPolicy.this.mFocusListener.onAudioFocusLoss((AudioFocusInfo) msg.obj, msg.arg1 != 0);
+                        AudioPolicy.this.mFocusListener.onAudioFocusLoss(
+                                (AudioFocusInfo) msg.obj, msg.arg1 != 0);
                         break;
                     }
                     break;
@@ -864,18 +992,24 @@ public class AudioPolicy {
                     break;
                 case 4:
                     if (AudioPolicy.this.mFocusListener != null) {
-                        AudioPolicy.this.mFocusListener.onAudioFocusRequest((AudioFocusInfo) msg.obj, msg.arg1);
+                        AudioPolicy.this.mFocusListener.onAudioFocusRequest(
+                                (AudioFocusInfo) msg.obj, msg.arg1);
                         break;
                     } else {
-                        Log.e(AudioPolicy.TAG, "Invalid null focus listener for focus request event");
+                        Log.e(
+                                AudioPolicy.TAG,
+                                "Invalid null focus listener for focus request event");
                         break;
                     }
                 case 5:
                     if (AudioPolicy.this.mFocusListener != null) {
-                        AudioPolicy.this.mFocusListener.onAudioFocusAbandon((AudioFocusInfo) msg.obj);
+                        AudioPolicy.this.mFocusListener.onAudioFocusAbandon(
+                                (AudioFocusInfo) msg.obj);
                         break;
                     } else {
-                        Log.e(AudioPolicy.TAG, "Invalid null focus listener for focus abandon event");
+                        Log.e(
+                                AudioPolicy.TAG,
+                                "Invalid null focus listener for focus abandon event");
                         break;
                     }
                 case 6:

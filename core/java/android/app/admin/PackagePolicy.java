@@ -3,6 +3,7 @@ package android.app.admin;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -11,19 +12,21 @@ import java.util.Set;
 
 /* loaded from: classes.dex */
 public final class PackagePolicy implements Parcelable {
-    public static final Parcelable.Creator<PackagePolicy> CREATOR = new Parcelable.Creator<PackagePolicy>() { // from class: android.app.admin.PackagePolicy.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackagePolicy createFromParcel(Parcel in) {
-            return new PackagePolicy(in);
-        }
+    public static final Parcelable.Creator<PackagePolicy> CREATOR =
+            new Parcelable.Creator<
+                    PackagePolicy>() { // from class: android.app.admin.PackagePolicy.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackagePolicy createFromParcel(Parcel in) {
+                    return new PackagePolicy(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackagePolicy[] newArray(int size) {
-            return new PackagePolicy[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackagePolicy[] newArray(int size) {
+                    return new PackagePolicy[size];
+                }
+            };
     public static final int PACKAGE_POLICY_ALLOWLIST = 3;
     public static final int PACKAGE_POLICY_ALLOWLIST_AND_SYSTEM = 2;
     public static final int PACKAGE_POLICY_BLOCKLIST = 1;
@@ -31,8 +34,7 @@ public final class PackagePolicy implements Parcelable {
     private int mPolicyType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PackagePolicyType {
-    }
+    public @interface PackagePolicyType {}
 
     public PackagePolicy(int policyType) {
         this(policyType, (Set<String>) Collections.emptySet());
@@ -83,7 +85,8 @@ public final class PackagePolicy implements Parcelable {
             return false;
         }
         PackagePolicy that = (PackagePolicy) thatObject;
-        return this.mPolicyType == that.mPolicyType && this.mPackageNames.equals(that.mPackageNames);
+        return this.mPolicyType == that.mPolicyType
+                && this.mPackageNames.equals(that.mPackageNames);
     }
 
     public int hashCode() {

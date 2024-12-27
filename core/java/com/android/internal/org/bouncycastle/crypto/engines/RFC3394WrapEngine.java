@@ -23,7 +23,7 @@ public class RFC3394WrapEngine implements Wrapper {
     }
 
     public RFC3394WrapEngine(BlockCipher engine, boolean useReverseDirection) {
-        this.iv = new byte[]{-90, -90, -90, -90, -90, -90, -90, -90};
+        this.iv = new byte[] {-90, -90, -90, -90, -90, -90, -90, -90};
         this.engine = engine;
         this.wrapCipherMode = !useReverseDirection;
     }

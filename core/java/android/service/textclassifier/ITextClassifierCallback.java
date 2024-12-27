@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface ITextClassifierCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.textclassifier.ITextClassifierCallback";
+    public static final String DESCRIPTOR =
+            "android.service.textclassifier.ITextClassifierCallback";
 
     void onFailure() throws RemoteException;
 
@@ -17,12 +18,10 @@ public interface ITextClassifierCallback extends IInterface {
 
     public static class Default implements ITextClassifierCallback {
         @Override // android.service.textclassifier.ITextClassifierCallback
-        public void onSuccess(Bundle result) throws RemoteException {
-        }
+        public void onSuccess(Bundle result) throws RemoteException {}
 
         @Override // android.service.textclassifier.ITextClassifierCallback
-        public void onFailure() throws RemoteException {
-        }
+        public void onFailure() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface ITextClassifierCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITextClassifierCallback {
+    public abstract static class Stub extends Binder implements ITextClassifierCallback {
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -71,7 +70,8 @@ public interface ITextClassifierCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITextClassifierCallback.DESCRIPTOR);
             }

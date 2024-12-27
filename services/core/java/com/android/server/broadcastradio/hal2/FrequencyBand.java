@@ -23,7 +23,10 @@ final class FrequencyBand {
         AM_MW = frequencyBand4;
         FrequencyBand frequencyBand5 = new FrequencyBand("AM_SW", 4);
         AM_SW = frequencyBand5;
-        $VALUES = new FrequencyBand[]{frequencyBand, frequencyBand2, frequencyBand3, frequencyBand4, frequencyBand5};
+        $VALUES =
+                new FrequencyBand[] {
+                    frequencyBand, frequencyBand2, frequencyBand3, frequencyBand4, frequencyBand5
+                };
     }
 
     public static FrequencyBand valueOf(String str) {

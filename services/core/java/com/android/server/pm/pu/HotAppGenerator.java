@@ -4,6 +4,7 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -87,7 +88,8 @@ public final class HotAppGenerator {
     }
 
     public final void queryAndParseUsageStats(long j, long j2, Set set, BiConsumer biConsumer) {
-        Map<String, UsageStats> queryAndAggregateUsageStats = this.mUsageStatsManager.queryAndAggregateUsageStats(j, j2);
+        Map<String, UsageStats> queryAndAggregateUsageStats =
+                this.mUsageStatsManager.queryAndAggregateUsageStats(j, j2);
         if (queryAndAggregateUsageStats == null) {
             return;
         }
@@ -96,7 +98,8 @@ public final class HotAppGenerator {
         for (UsageStats usageStats : queryAndAggregateUsageStats.values()) {
             String packageName = usageStats.getPackageName();
             if (((HashSet) set).contains(packageName)) {
-                treeSet.add(new ComparablePackage(usageStats.getTotalTimeInForeground(), packageName));
+                treeSet.add(
+                        new ComparablePackage(usageStats.getTotalTimeInForeground(), packageName));
                 treeSet2.add(new ComparablePackage(usageStats.mLaunchCount, packageName));
             }
         }

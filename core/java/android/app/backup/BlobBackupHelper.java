@@ -3,6 +3,7 @@ package android.app.backup;
 import android.os.ParcelFileDescriptor;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -148,7 +149,10 @@ public abstract class BlobBackupHelper extends BackupHelperWithLogger {
     }
 
     @Override // android.app.backup.BackupHelperWithLogger, android.app.backup.BackupHelper
-    public void performBackup(ParcelFileDescriptor oldStateFd, BackupDataOutput data, ParcelFileDescriptor newStateFd) {
+    public void performBackup(
+            ParcelFileDescriptor oldStateFd,
+            BackupDataOutput data,
+            ParcelFileDescriptor newStateFd) {
         ArrayMap<String, Long> oldState = readOldState(oldStateFd);
         ArrayMap<String, Long> newState = new ArrayMap<>();
         try {

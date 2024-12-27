@@ -6,6 +6,7 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.misc.MiscObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
+
 import java.io.IOException;
 import java.security.PrivateKey;
 import java.util.ArrayList;
@@ -48,7 +49,10 @@ public class CompositePrivateKey implements PrivateKey {
             v.add(PrivateKeyInfo.getInstance(this.keys.get(i).getEncoded()));
         }
         try {
-            return new PrivateKeyInfo(new AlgorithmIdentifier(MiscObjectIdentifiers.id_alg_composite), new DERSequence(v)).getEncoded(ASN1Encoding.DER);
+            return new PrivateKeyInfo(
+                            new AlgorithmIdentifier(MiscObjectIdentifiers.id_alg_composite),
+                            new DERSequence(v))
+                    .getEncoded(ASN1Encoding.DER);
         } catch (IOException e) {
             throw new IllegalStateException("unable to encode composite key: " + e.getMessage());
         }

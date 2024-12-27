@@ -5,7 +5,7 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import com.samsung.android.game.IGameManagerService;
+
 import java.util.List;
 import java.util.Map;
 
@@ -135,7 +135,14 @@ public class SemGameManager {
         }
         try {
             String ret = this.mService.requestWithJson(command, jsonParam);
-            GmsLog.d(TAG, "requestWithJson(), command=" + command + ", jsonParam=" + jsonParam + ", ret=" + ret);
+            GmsLog.d(
+                    TAG,
+                    "requestWithJson(), command="
+                            + command
+                            + ", jsonParam="
+                            + jsonParam
+                            + ", ret="
+                            + ret);
             return ret;
         } catch (RemoteException e) {
             throw new IllegalStateException("failed to call gamemanager system service");
@@ -224,7 +231,12 @@ public class SemGameManager {
         }
         try {
             boolean ret = this.mService.setPackageConfigurations(packageConfigurations);
-            GmsLog.d(TAG, "setPackageConfigurations(), packageConfigurations=" + packageConfigurations + ", ret=" + ret);
+            GmsLog.d(
+                    TAG,
+                    "setPackageConfigurations(), packageConfigurations="
+                            + packageConfigurations
+                            + ", ret="
+                            + ret);
             return ret;
         } catch (RemoteException e) {
             throw new IllegalStateException("failed to call gamemanager system service");
@@ -233,7 +245,12 @@ public class SemGameManager {
 
     public boolean setPerformanceMode(int tunePerformanceMode, String callerPackageName) {
         if (callerPackageName == null || tunePerformanceMode < -1 || 1 < tunePerformanceMode) {
-            GmsLog.e(TAG, "setPerformanceMode(), unexpected param. tunePerformanceMode: " + tunePerformanceMode + ", callerPackageName: " + callerPackageName);
+            GmsLog.e(
+                    TAG,
+                    "setPerformanceMode(), unexpected param. tunePerformanceMode: "
+                            + tunePerformanceMode
+                            + ", callerPackageName: "
+                            + callerPackageName);
             return false;
         }
         if (this.mService == null) {
@@ -241,7 +258,14 @@ public class SemGameManager {
         }
         try {
             boolean ret = this.mService.setPerformanceMode(tunePerformanceMode, callerPackageName);
-            GmsLog.d(TAG, "setPerformanceMode(), tunePerformanceMode=" + tunePerformanceMode + ", callerPackageName=" + callerPackageName + ", ret=" + ret);
+            GmsLog.d(
+                    TAG,
+                    "setPerformanceMode(), tunePerformanceMode="
+                            + tunePerformanceMode
+                            + ", callerPackageName="
+                            + callerPackageName
+                            + ", ret="
+                            + ret);
             return ret;
         } catch (RemoteException e) {
             throw new IllegalStateException("failed to call gamemanager system service");

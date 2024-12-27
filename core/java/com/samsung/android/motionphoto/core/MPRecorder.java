@@ -1,7 +1,7 @@
 package com.samsung.android.motionphoto.core;
 
 import android.util.Log;
-import com.samsung.android.motionphoto.core.MPClientEventHandler;
+
 import java.util.concurrent.locks.ReentrantLock;
 
 /* loaded from: classes6.dex */

@@ -1,15 +1,18 @@
 package com.android.server.wm;
 
 import android.app.ActivityManagerInternal;
+
 import com.android.server.am.AppStateBroadcaster;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class ActivityTaskManagerService$$ExternalSyntheticLambda14 implements Runnable {
+public final /* synthetic */ class ActivityTaskManagerService$$ExternalSyntheticLambda14
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
-    public /* synthetic */ ActivityTaskManagerService$$ExternalSyntheticLambda14(int i, Object obj) {
+    public /* synthetic */ ActivityTaskManagerService$$ExternalSyntheticLambda14(
+            int i, Object obj) {
         this.$r8$classId = i;
         this.f$0 = obj;
     }
@@ -21,12 +24,16 @@ public final /* synthetic */ class ActivityTaskManagerService$$ExternalSynthetic
         Object obj = this.f$0;
         switch (i) {
             case 0:
-                ActivityTaskManagerService activityTaskManagerService = (ActivityTaskManagerService) obj;
-                WindowManagerGlobalLock windowManagerGlobalLock = activityTaskManagerService.mGlobalLock;
+                ActivityTaskManagerService activityTaskManagerService =
+                        (ActivityTaskManagerService) obj;
+                WindowManagerGlobalLock windowManagerGlobalLock =
+                        activityTaskManagerService.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock) {
                     try {
-                        Task topDisplayFocusedRootTask = activityTaskManagerService.mRootWindowContainer.getTopDisplayFocusedRootTask();
+                        Task topDisplayFocusedRootTask =
+                                activityTaskManagerService.mRootWindowContainer
+                                        .getTopDisplayFocusedRootTask();
                         if (topDisplayFocusedRootTask != null) {
                             activityRecord = topDisplayFocusedRootTask.topRunningActivityLocked();
                             if (activityRecord == null) {

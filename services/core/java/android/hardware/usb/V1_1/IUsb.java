@@ -11,7 +11,9 @@ import android.os.HwParcel;
 import android.os.IHwBinder;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.server.usb.hal.port.UsbPortHidl;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -29,7 +31,9 @@ public interface IUsb extends android.hardware.usb.V1_0.IUsb {
 
         @Override // android.hidl.base.V1_0.IBase
         public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -71,7 +75,8 @@ public interface IUsb extends android.hardware.usb.V1_0.IUsb {
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -148,7 +153,9 @@ public interface IUsb extends android.hardware.usb.V1_0.IUsb {
 
         @Override // android.hardware.usb.V1_0.IUsb
         public final void queryPortStatus() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.usb@1.0::IUsb");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.usb@1.0::IUsb");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(3, m, hwParcel, 1);
@@ -160,8 +167,11 @@ public interface IUsb extends android.hardware.usb.V1_0.IUsb {
 
         @Override // android.hardware.usb.V1_0.IUsb
         public final void setCallback(IUsbCallback iUsbCallback) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.usb@1.0::IUsb");
-            m.writeStrongBinder(iUsbCallback == null ? null : (UsbPortHidl.HALCallback) iUsbCallback);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.usb@1.0::IUsb");
+            m.writeStrongBinder(
+                    iUsbCallback == null ? null : (UsbPortHidl.HALCallback) iUsbCallback);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(2, m, hwParcel, 1);

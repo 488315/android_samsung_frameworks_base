@@ -1,6 +1,5 @@
 package android.hardware.power;
 
-import android.hardware.power.IPowerHintSession;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -17,7 +16,9 @@ public interface IPower extends IInterface {
 
     IPowerHintSession createHintSession(int i, int i2, int[] iArr, long j) throws RemoteException;
 
-    IPowerHintSession createHintSessionWithConfig(int i, int i2, int[] iArr, long j, int i3, SessionConfig sessionConfig) throws RemoteException;
+    IPowerHintSession createHintSessionWithConfig(
+            int i, int i2, int[] iArr, long j, int i3, SessionConfig sessionConfig)
+            throws RemoteException;
 
     long getHintSessionPreferredRate() throws RemoteException;
 
@@ -37,8 +38,7 @@ public interface IPower extends IInterface {
 
     public static class Default implements IPower {
         @Override // android.hardware.power.IPower
-        public void setMode(int type, boolean enabled) throws RemoteException {
-        }
+        public void setMode(int type, boolean enabled) throws RemoteException {}
 
         @Override // android.hardware.power.IPower
         public boolean isModeSupported(int type) throws RemoteException {
@@ -46,8 +46,7 @@ public interface IPower extends IInterface {
         }
 
         @Override // android.hardware.power.IPower
-        public void setBoost(int type, int durationMs) throws RemoteException {
-        }
+        public void setBoost(int type, int durationMs) throws RemoteException {}
 
         @Override // android.hardware.power.IPower
         public boolean isBoostSupported(int type) throws RemoteException {
@@ -55,7 +54,8 @@ public interface IPower extends IInterface {
         }
 
         @Override // android.hardware.power.IPower
-        public IPowerHintSession createHintSession(int tgid, int uid, int[] threadIds, long durationNanos) throws RemoteException {
+        public IPowerHintSession createHintSession(
+                int tgid, int uid, int[] threadIds, long durationNanos) throws RemoteException {
             return null;
         }
 
@@ -65,7 +65,14 @@ public interface IPower extends IInterface {
         }
 
         @Override // android.hardware.power.IPower
-        public IPowerHintSession createHintSessionWithConfig(int tgid, int uid, int[] threadIds, long durationNanos, int tag, SessionConfig config) throws RemoteException {
+        public IPowerHintSession createHintSessionWithConfig(
+                int tgid,
+                int uid,
+                int[] threadIds,
+                long durationNanos,
+                int tag,
+                SessionConfig config)
+                throws RemoteException {
             return null;
         }
 
@@ -75,8 +82,7 @@ public interface IPower extends IInterface {
         }
 
         @Override // android.hardware.power.IPower
-        public void closeSessionChannel(int tgid, int uid) throws RemoteException {
-        }
+        public void closeSessionChannel(int tgid, int uid) throws RemoteException {}
 
         @Override // android.hardware.power.IPower
         public int getInterfaceVersion() {
@@ -94,7 +100,7 @@ public interface IPower extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPower {
+    public abstract static class Stub extends Binder implements IPower {
         static final int TRANSACTION_closeSessionChannel = 9;
         static final int TRANSACTION_createHintSession = 5;
         static final int TRANSACTION_createHintSessionWithConfig = 7;
@@ -163,7 +169,8 @@ public interface IPower extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -232,7 +239,9 @@ public interface IPower extends IInterface {
                     int _arg4 = data.readInt();
                     SessionConfig _arg5 = new SessionConfig();
                     data.enforceNoDataAvail();
-                    IPowerHintSession _result5 = createHintSessionWithConfig(_arg06, _arg14, _arg22, _arg32, _arg4, _arg5);
+                    IPowerHintSession _result5 =
+                            createHintSessionWithConfig(
+                                    _arg06, _arg14, _arg22, _arg32, _arg4, _arg5);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result5);
                     reply.writeTypedObject(_arg5, 1);
@@ -347,7 +356,8 @@ public interface IPower extends IInterface {
             }
 
             @Override // android.hardware.power.IPower
-            public IPowerHintSession createHintSession(int tgid, int uid, int[] threadIds, long durationNanos) throws RemoteException {
+            public IPowerHintSession createHintSession(
+                    int tgid, int uid, int[] threadIds, long durationNanos) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -361,7 +371,8 @@ public interface IPower extends IInterface {
                         throw new RemoteException("Method createHintSession is unimplemented.");
                     }
                     _reply.readException();
-                    IPowerHintSession _result = IPowerHintSession.Stub.asInterface(_reply.readStrongBinder());
+                    IPowerHintSession _result =
+                            IPowerHintSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -377,7 +388,8 @@ public interface IPower extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(6, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getHintSessionPreferredRate is unimplemented.");
+                        throw new RemoteException(
+                                "Method getHintSessionPreferredRate is unimplemented.");
                     }
                     _reply.readException();
                     long _result = _reply.readLong();
@@ -389,7 +401,14 @@ public interface IPower extends IInterface {
             }
 
             @Override // android.hardware.power.IPower
-            public IPowerHintSession createHintSessionWithConfig(int tgid, int uid, int[] threadIds, long durationNanos, int tag, SessionConfig config) throws RemoteException {
+            public IPowerHintSession createHintSessionWithConfig(
+                    int tgid,
+                    int uid,
+                    int[] threadIds,
+                    long durationNanos,
+                    int tag,
+                    SessionConfig config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -401,10 +420,12 @@ public interface IPower extends IInterface {
                     _data.writeInt(tag);
                     boolean _status = this.mRemote.transact(7, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method createHintSessionWithConfig is unimplemented.");
+                        throw new RemoteException(
+                                "Method createHintSessionWithConfig is unimplemented.");
                     }
                     _reply.readException();
-                    IPowerHintSession _result = IPowerHintSession.Stub.asInterface(_reply.readStrongBinder());
+                    IPowerHintSession _result =
+                            IPowerHintSession.Stub.asInterface(_reply.readStrongBinder());
                     if (_reply.readInt() != 0) {
                         config.readFromParcel(_reply);
                     }
@@ -428,7 +449,8 @@ public interface IPower extends IInterface {
                         throw new RemoteException("Method getSessionChannel is unimplemented.");
                     }
                     _reply.readException();
-                    ChannelConfig _result = (ChannelConfig) _reply.readTypedObject(ChannelConfig.CREATOR);
+                    ChannelConfig _result =
+                            (ChannelConfig) _reply.readTypedObject(ChannelConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

@@ -14,8 +14,7 @@ public interface IUiModeManagerCallback extends IInterface {
 
     public static class Default implements IUiModeManagerCallback {
         @Override // android.app.IUiModeManagerCallback
-        public void notifyContrastChanged(float contrast) throws RemoteException {
-        }
+        public void notifyContrastChanged(float contrast) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IUiModeManagerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUiModeManagerCallback {
+    public abstract static class Stub extends Binder implements IUiModeManagerCallback {
         static final int TRANSACTION_notifyContrastChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IUiModeManagerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUiModeManagerCallback.DESCRIPTOR);
             }

@@ -5,17 +5,18 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.widget.Toast;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.server.UiThread;
-import com.android.server.wm.ActivityRefresher;
-import com.android.server.wm.CameraStateMonitor;
 import com.android.server.wm.utils.OptPropFactory;
+
 import com.samsung.android.rune.CoreRune;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class DisplayRotationCompatPolicy implements CameraStateMonitor.CameraCompatStateListener, ActivityRefresher.Evaluator {
+public final class DisplayRotationCompatPolicy
+        implements CameraStateMonitor.CameraCompatStateListener, ActivityRefresher.Evaluator {
     public final ActivityRefresher mActivityRefresher;
     public final CameraStateMonitor mCameraStateMonitor;
     public Task mCameraTask;
@@ -24,7 +25,10 @@ public final class DisplayRotationCompatPolicy implements CameraStateMonitor.Cam
     public int mLastReportedOrientation = -2;
     public final WindowManagerService mWmService;
 
-    public DisplayRotationCompatPolicy(DisplayContent displayContent, CameraStateMonitor cameraStateMonitor, ActivityRefresher activityRefresher) {
+    public DisplayRotationCompatPolicy(
+            DisplayContent displayContent,
+            CameraStateMonitor cameraStateMonitor,
+            ActivityRefresher activityRefresher) {
         this.mDisplayContent = displayContent;
         this.mWmService = displayContent.mWmService;
         this.mCameraStateMonitor = cameraStateMonitor;
@@ -32,7 +36,10 @@ public final class DisplayRotationCompatPolicy implements CameraStateMonitor.Cam
     }
 
     public final boolean isCameraActive(boolean z, ActivityRecord activityRecord) {
-        return ((z && activityRecord.inMultiWindowMode()) || this.mCameraStateMonitor.getCameraIdForActivity(activityRecord) == null) ? false : true;
+        return ((z && activityRecord.inMultiWindowMode())
+                        || this.mCameraStateMonitor.getCameraIdForActivity(activityRecord) == null)
+                ? false
+                : true;
     }
 
     public boolean isRunning() {
@@ -49,17 +56,30 @@ public final class DisplayRotationCompatPolicy implements CameraStateMonitor.Cam
             if (!CoreRune.MT_APP_COMPAT_CAMERA_POLICY) {
                 return false;
             }
-            if (((activityRecord.occludesParent(false) || (task = activityRecord.task) == null || (activityBelow = task.getActivityBelow(activityRecord)) == null) ? 0 : activityBelow.getRequestedConfigurationOrientation()) == 0) {
+            if (((activityRecord.occludesParent(false)
+                                    || (task = activityRecord.task) == null
+                                    || (activityBelow = task.getActivityBelow(activityRecord))
+                                            == null)
+                            ? 0
+                            : activityBelow.getRequestedConfigurationOrientation())
+                    == 0) {
                 return false;
             }
         }
-        return (activityRecord.getOverrideOrientation() == 5 || activityRecord.getOverrideOrientation() == 14 || !activityRecord.mAppCompatController.mAppCompatOverrides.mAppCompatCameraOverrides.shouldForceRotateForCameraCompat()) ? false : true;
+        return (activityRecord.getOverrideOrientation() == 5
+                        || activityRecord.getOverrideOrientation() == 14
+                        || !activityRecord.mAppCompatController.mAppCompatOverrides
+                                .mAppCompatCameraOverrides.shouldForceRotateForCameraCompat())
+                ? false
+                : true;
     }
 
     public final boolean isTreatmentEnabledForDisplay() {
-        if (this.mWmService.mAppCompatConfiguration.mDeviceConfig.getFlagValue("enable_compat_camera_treatment")) {
+        if (this.mWmService.mAppCompatConfiguration.mDeviceConfig.getFlagValue(
+                "enable_compat_camera_treatment")) {
             DisplayContent displayContent = this.mDisplayContent;
-            if (displayContent.getIgnoreOrientationRequest() && displayContent.mDisplay.getType() == 1) {
+            if (displayContent.getIgnoreOrientationRequest()
+                    && displayContent.mDisplay.getType() == 1) {
                 return true;
             }
         }
@@ -179,68 +199,110 @@ public final class DisplayRotationCompatPolicy implements CameraStateMonitor.Cam
             monitor-exit(r12)     // Catch: java.lang.Throwable -> L66
             throw r13
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DisplayRotationCompatPolicy.onCameraClosed(java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DisplayRotationCompatPolicy.onCameraClosed(java.lang.String):boolean");
     }
 
     @Override // com.android.server.wm.CameraStateMonitor.CameraCompatStateListener
     public final void onCameraOpened(ActivityRecord activityRecord) {
         this.mCameraTask = activityRecord.task;
         if (activityRecord.getWindowingMode() == 1) {
-            AppCompatCameraOverrides appCompatCameraOverrides = activityRecord.mAppCompatController.mAppCompatOverrides.mAppCompatCameraOverrides;
-            if (appCompatCameraOverrides.mActivityRecord.info.isChangeEnabled(265456536L) || appCompatCameraOverrides.isCameraCompatSplitScreenAspectRatioAllowed() || appCompatCameraOverrides.shouldOverrideMinAspectRatioForCamera()) {
+            AppCompatCameraOverrides appCompatCameraOverrides =
+                    activityRecord
+                            .mAppCompatController
+                            .mAppCompatOverrides
+                            .mAppCompatCameraOverrides;
+            if (appCompatCameraOverrides.mActivityRecord.info.isChangeEnabled(265456536L)
+                    || appCompatCameraOverrides.isCameraCompatSplitScreenAspectRatioAllowed()
+                    || appCompatCameraOverrides.shouldOverrideMinAspectRatioForCamera()) {
                 activityRecord.recomputeConfiguration();
             }
             this.mDisplayContent.updateOrientation(false);
             return;
         }
         Task task = this.mCameraTask;
-        if (task != null && task.getWindowingMode() == 6 && isTreatmentEnabledForActivity(false, activityRecord)) {
+        if (task != null
+                && task.getWindowingMode() == 6
+                && isTreatmentEnabledForActivity(false, activityRecord)) {
             PackageManager packageManager = this.mWmService.mContext.getPackageManager();
             try {
-                showToast(R.string.ime_action_done, (String) packageManager.getApplicationLabel(packageManager.getApplicationInfo(activityRecord.packageName, 0)));
+                showToast(
+                        R.string.ime_action_done,
+                        (String)
+                                packageManager.getApplicationLabel(
+                                        packageManager.getApplicationInfo(
+                                                activityRecord.packageName, 0)));
             } catch (PackageManager.NameNotFoundException unused) {
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ORIENTATION_enabled[4]) {
-                    ProtoLogImpl_54989576.e(ProtoLogGroup.WM_DEBUG_ORIENTATION, -1534784331886673955L, 0, null, String.valueOf(activityRecord.packageName));
+                    ProtoLogImpl_54989576.e(
+                            ProtoLogGroup.WM_DEBUG_ORIENTATION,
+                            -1534784331886673955L,
+                            0,
+                            null,
+                            String.valueOf(activityRecord.packageName));
                 }
             }
         }
     }
 
     @Override // com.android.server.wm.ActivityRefresher.Evaluator
-    public final boolean shouldRefreshActivity(ActivityRecord activityRecord, Configuration configuration, Configuration configuration2) {
-        boolean z = configuration.windowConfiguration.getDisplayRotation() != configuration2.windowConfiguration.getDisplayRotation();
-        if (!isTreatmentEnabledForDisplay() || !isTreatmentEnabledForActivity(true, activityRecord)) {
+    public final boolean shouldRefreshActivity(
+            ActivityRecord activityRecord,
+            Configuration configuration,
+            Configuration configuration2) {
+        boolean z =
+                configuration.windowConfiguration.getDisplayRotation()
+                        != configuration2.windowConfiguration.getDisplayRotation();
+        if (!isTreatmentEnabledForDisplay()
+                || !isTreatmentEnabledForActivity(true, activityRecord)) {
             return false;
         }
-        AppCompatCameraOverrides appCompatCameraOverrides = activityRecord.mAppCompatController.mAppCompatOverrides.mAppCompatCameraOverrides;
-        boolean isChangeEnabled = appCompatCameraOverrides.mActivityRecord.info.isChangeEnabled(264304459L);
+        AppCompatCameraOverrides appCompatCameraOverrides =
+                activityRecord.mAppCompatController.mAppCompatOverrides.mAppCompatCameraOverrides;
+        boolean isChangeEnabled =
+                appCompatCameraOverrides.mActivityRecord.info.isChangeEnabled(264304459L);
         OptPropFactory.OptProp optProp = appCompatCameraOverrides.mCameraCompatAllowRefreshOptProp;
         if (!optProp.mCondition.getAsBoolean() || optProp.getValue() == 0 || isChangeEnabled) {
             return false;
         }
-        return z || activityRecord.mAppCompatController.mAppCompatOverrides.mAppCompatCameraOverrides.isCameraCompatSplitScreenAspectRatioAllowed();
+        return z
+                || activityRecord.mAppCompatController.mAppCompatOverrides.mAppCompatCameraOverrides
+                        .isCameraCompatSplitScreenAspectRatioAllowed();
     }
 
     public void showToast(final int i) {
-        UiThread.getHandler().post(new Runnable() { // from class: com.android.server.wm.DisplayRotationCompatPolicy$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                DisplayRotationCompatPolicy displayRotationCompatPolicy = DisplayRotationCompatPolicy.this;
-                Toast.makeText(displayRotationCompatPolicy.mWmService.mContext, i, 1).show();
-            }
-        });
+        UiThread.getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.wm.DisplayRotationCompatPolicy$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                DisplayRotationCompatPolicy displayRotationCompatPolicy =
+                                        DisplayRotationCompatPolicy.this;
+                                Toast.makeText(
+                                                displayRotationCompatPolicy.mWmService.mContext,
+                                                i,
+                                                1)
+                                        .show();
+                            }
+                        });
     }
 
     public void showToast(final int i, final String str) {
-        UiThread.getHandler().post(new Runnable() { // from class: com.android.server.wm.DisplayRotationCompatPolicy$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                DisplayRotationCompatPolicy displayRotationCompatPolicy = DisplayRotationCompatPolicy.this;
-                int i2 = i;
-                String str2 = str;
-                Context context = displayRotationCompatPolicy.mWmService.mContext;
-                Toast.makeText(context, context.getString(i2, str2), 1).show();
-            }
-        });
+        UiThread.getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.wm.DisplayRotationCompatPolicy$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                DisplayRotationCompatPolicy displayRotationCompatPolicy =
+                                        DisplayRotationCompatPolicy.this;
+                                int i2 = i;
+                                String str2 = str;
+                                Context context = displayRotationCompatPolicy.mWmService.mContext;
+                                Toast.makeText(context, context.getString(i2, str2), 1).show();
+                            }
+                        });
     }
 }

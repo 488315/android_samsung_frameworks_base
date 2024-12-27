@@ -3,6 +3,7 @@ package android.app.timedetector;
 import android.app.time.UnixEpochTime;
 import android.os.Parcel;
 import android.os.ShellCommand;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +27,9 @@ public final class TimeSuggestionHelper {
     }
 
     public List<String> getDebugInfo() {
-        return this.mDebugInfo == null ? Collections.emptyList() : Collections.unmodifiableList(this.mDebugInfo);
+        return this.mDebugInfo == null
+                ? Collections.emptyList()
+                : Collections.unmodifiableList(this.mDebugInfo);
     }
 
     public void addDebugInfo(String debugInfo) {
@@ -59,7 +62,8 @@ public final class TimeSuggestionHelper {
     }
 
     public boolean handleEquals(TimeSuggestionHelper o) {
-        return Objects.equals(this.mHelpedClass, o.mHelpedClass) && Objects.equals(this.mUnixEpochTime, o.mUnixEpochTime);
+        return Objects.equals(this.mHelpedClass, o.mHelpedClass)
+                && Objects.equals(this.mUnixEpochTime, o.mUnixEpochTime);
     }
 
     public int hashCode() {
@@ -67,12 +71,18 @@ public final class TimeSuggestionHelper {
     }
 
     public String handleToString() {
-        return this.mHelpedClass.getSimpleName() + "{mUnixEpochTime=" + this.mUnixEpochTime + ", mDebugInfo=" + this.mDebugInfo + '}';
+        return this.mHelpedClass.getSimpleName()
+                + "{mUnixEpochTime="
+                + this.mUnixEpochTime
+                + ", mDebugInfo="
+                + this.mDebugInfo
+                + '}';
     }
 
     public static TimeSuggestionHelper handleCreateFromParcel(Class<?> helpedClass, Parcel in) {
         UnixEpochTime unixEpochTime = (UnixEpochTime) in.readParcelable(null, UnixEpochTime.class);
-        TimeSuggestionHelper suggestionHelper = new TimeSuggestionHelper(helpedClass, unixEpochTime);
+        TimeSuggestionHelper suggestionHelper =
+                new TimeSuggestionHelper(helpedClass, unixEpochTime);
         suggestionHelper.mDebugInfo = in.readArrayList(null, String.class);
         return suggestionHelper;
     }
@@ -83,7 +93,8 @@ public final class TimeSuggestionHelper {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    public static TimeSuggestionHelper handleParseCommandLineArg(Class<?> helpedClass, ShellCommand cmd) throws IllegalArgumentException {
+    public static TimeSuggestionHelper handleParseCommandLineArg(
+            Class<?> helpedClass, ShellCommand cmd) throws IllegalArgumentException {
         char c;
         Long elapsedRealtimeMillis = null;
         Long unixEpochTimeMillis = null;
@@ -119,10 +130,12 @@ public final class TimeSuggestionHelper {
                 switch (c) {
                     case 0:
                     case 1:
-                        elapsedRealtimeMillis = Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
+                        elapsedRealtimeMillis =
+                                Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
                         break;
                     case 2:
-                        unixEpochTimeMillis = Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
+                        unixEpochTimeMillis =
+                                Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
                         break;
                     default:
                         throw new IllegalArgumentException("Unknown option: " + opt);
@@ -134,8 +147,11 @@ public final class TimeSuggestionHelper {
                 if (unixEpochTimeMillis == null) {
                     throw new IllegalArgumentException("No unixEpochTimeMillis specified.");
                 }
-                UnixEpochTime timeSignal = new UnixEpochTime(elapsedRealtimeMillis.longValue(), unixEpochTimeMillis.longValue());
-                TimeSuggestionHelper suggestionHelper = new TimeSuggestionHelper(helpedClass, timeSignal);
+                UnixEpochTime timeSignal =
+                        new UnixEpochTime(
+                                elapsedRealtimeMillis.longValue(), unixEpochTimeMillis.longValue());
+                TimeSuggestionHelper suggestionHelper =
+                        new TimeSuggestionHelper(helpedClass, timeSignal);
                 suggestionHelper.addDebugInfo("Command line injection");
                 return suggestionHelper;
             }
@@ -144,7 +160,9 @@ public final class TimeSuggestionHelper {
 
     public static void handlePrintCommandLineOpts(PrintWriter pw, String typeName, Class<?> clazz) {
         pw.printf("%s suggestion options:\n", typeName);
-        pw.println("  --elapsed_realtime <elapsed realtime millis> - the elapsed realtime millis when unix epoch time was read");
+        pw.println(
+                "  --elapsed_realtime <elapsed realtime millis> - the elapsed realtime millis when"
+                        + " unix epoch time was read");
         pw.println("  --unix_epoch_time <Unix epoch time millis>");
         pw.println();
         pw.println("See " + clazz.getName() + " for more information");

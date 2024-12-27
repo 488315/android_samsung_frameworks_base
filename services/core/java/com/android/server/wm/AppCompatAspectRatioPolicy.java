@@ -19,7 +19,10 @@ public final class AppCompatAspectRatioPolicy {
         public Rect mLetterboxBoundsForFixedOrientationAndAspectRatio;
     }
 
-    public AppCompatAspectRatioPolicy(ActivityRecord activityRecord, TransparentPolicy transparentPolicy, AppCompatOverrides appCompatOverrides) {
+    public AppCompatAspectRatioPolicy(
+            ActivityRecord activityRecord,
+            TransparentPolicy transparentPolicy,
+            AppCompatOverrides appCompatOverrides) {
         this.mActivityRecord = activityRecord;
         this.mTransparentPolicy = transparentPolicy;
         this.mAppCompatOverrides = appCompatOverrides;
@@ -33,12 +36,19 @@ public final class AppCompatAspectRatioPolicy {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean applyAspectRatio(android.graphics.Rect r17, android.graphics.Rect r18, android.graphics.Rect r19, float r20) {
+    public final boolean applyAspectRatio(
+            android.graphics.Rect r17,
+            android.graphics.Rect r18,
+            android.graphics.Rect r19,
+            float r20) {
         /*
             Method dump skipped, instructions count: 352
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.AppCompatAspectRatioPolicy.applyAspectRatio(android.graphics.Rect, android.graphics.Rect, android.graphics.Rect, float):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.AppCompatAspectRatioPolicy.applyAspectRatio(android.graphics.Rect,"
+                    + " android.graphics.Rect, android.graphics.Rect, float):boolean");
     }
 
     public final float getMinAspectRatio() {
@@ -53,15 +63,59 @@ public final class AppCompatAspectRatioPolicy {
             return activityInfo.getMinAspectRatio();
         }
         AppCompatOverrides appCompatOverrides = this.mAppCompatOverrides;
-        AppCompatAspectRatioOverrides appCompatAspectRatioOverrides = appCompatOverrides.mAppCompatAspectRatioOverrides;
-        return appCompatAspectRatioOverrides.shouldApplyUserMinAspectRatioOverride() ? appCompatAspectRatioOverrides.getUserMinAspectRatio() : (appCompatAspectRatioOverrides.mAllowMinAspectRatioOverrideOptProp.shouldEnableWithOptInOverrideAndOptOutProperty(appCompatAspectRatioOverrides.mActivityRecord.info.isChangeEnabled(174042980L)) || appCompatOverrides.mAppCompatCameraOverrides.shouldOverrideMinAspectRatioForCamera()) ? (!activityInfo.isChangeEnabled(203647190L) || ActivityInfo.isFixedOrientationPortrait(activityRecord.getOverrideOrientation())) ? (activityInfo.isChangeEnabled(218959984L) && (parent = activityRecord.getParent()) != null && parent.getConfiguration().orientation == 1 && parent.getWindowConfiguration().getWindowingMode() == 1) ? activityInfo.getMinAspectRatio() : activityInfo.isChangeEnabled(208648326L) ? Math.max(appCompatAspectRatioOverrides.getSplitScreenAspectRatio(), activityInfo.getMinAspectRatio()) : activityInfo.isChangeEnabled(180326787L) ? Math.max(1.7777778f, activityInfo.getMinAspectRatio()) : activityInfo.isChangeEnabled(180326845L) ? Math.max(1.5f, activityInfo.getMinAspectRatio()) : activityInfo.isChangeEnabled(349045028L) ? Math.max(1.3333334f, activityInfo.getMinAspectRatio()) : activityInfo.getMinAspectRatio() : activityInfo.getMinAspectRatio() : activityInfo.getMinAspectRatio();
+        AppCompatAspectRatioOverrides appCompatAspectRatioOverrides =
+                appCompatOverrides.mAppCompatAspectRatioOverrides;
+        return appCompatAspectRatioOverrides.shouldApplyUserMinAspectRatioOverride()
+                ? appCompatAspectRatioOverrides.getUserMinAspectRatio()
+                : (appCompatAspectRatioOverrides.mAllowMinAspectRatioOverrideOptProp
+                                        .shouldEnableWithOptInOverrideAndOptOutProperty(
+                                                appCompatAspectRatioOverrides.mActivityRecord.info
+                                                        .isChangeEnabled(174042980L))
+                                || appCompatOverrides.mAppCompatCameraOverrides
+                                        .shouldOverrideMinAspectRatioForCamera())
+                        ? (!activityInfo.isChangeEnabled(203647190L)
+                                        || ActivityInfo.isFixedOrientationPortrait(
+                                                activityRecord.getOverrideOrientation()))
+                                ? (activityInfo.isChangeEnabled(218959984L)
+                                                && (parent = activityRecord.getParent()) != null
+                                                && parent.getConfiguration().orientation == 1
+                                                && parent.getWindowConfiguration()
+                                                                .getWindowingMode()
+                                                        == 1)
+                                        ? activityInfo.getMinAspectRatio()
+                                        : activityInfo.isChangeEnabled(208648326L)
+                                                ? Math.max(
+                                                        appCompatAspectRatioOverrides
+                                                                .getSplitScreenAspectRatio(),
+                                                        activityInfo.getMinAspectRatio())
+                                                : activityInfo.isChangeEnabled(180326787L)
+                                                        ? Math.max(
+                                                                1.7777778f,
+                                                                activityInfo.getMinAspectRatio())
+                                                        : activityInfo.isChangeEnabled(180326845L)
+                                                                ? Math.max(
+                                                                        1.5f,
+                                                                        activityInfo
+                                                                                .getMinAspectRatio())
+                                                                : activityInfo.isChangeEnabled(
+                                                                                349045028L)
+                                                                        ? Math.max(
+                                                                                1.3333334f,
+                                                                                activityInfo
+                                                                                        .getMinAspectRatio())
+                                                                        : activityInfo
+                                                                                .getMinAspectRatio()
+                                : activityInfo.getMinAspectRatio()
+                        : activityInfo.getMinAspectRatio();
     }
 
     public final boolean isLetterboxedForFixedOrientationAndAspectRatio() {
-        return this.mAppCompatAspectRatioState.mLetterboxBoundsForFixedOrientationAndAspectRatio != null;
+        return this.mAppCompatAspectRatioState.mLetterboxBoundsForFixedOrientationAndAspectRatio
+                != null;
     }
 
     public final boolean isUserOrSystemMinAspectRatioApplied() {
-        return this.mAppCompatAspectRatioState.mIsAspectRatioApplied && this.mUserOrSystemMinAspectRatio != -1.0f;
+        return this.mAppCompatAspectRatioState.mIsAspectRatioApplied
+                && this.mUserOrSystemMinAspectRatio != -1.0f;
     }
 }

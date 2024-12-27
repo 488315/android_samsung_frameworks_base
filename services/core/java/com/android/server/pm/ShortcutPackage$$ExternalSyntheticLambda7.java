@@ -8,9 +8,9 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda7 imp
     public final /* synthetic */ int $r8$classId;
 
     /* JADX WARN: Code restructure failed: missing block: B:60:0x00d1, code lost:
-    
-        if (r5.hasFlags(1073741824) != false) goto L27;
-     */
+
+       if (r5.hasFlags(1073741824) != false) goto L27;
+    */
     @Override // java.util.Comparator
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -21,6 +21,9 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda7 imp
             Method dump skipped, instructions count: 304
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda7.compare(java.lang.Object, java.lang.Object):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.ShortcutPackage$$ExternalSyntheticLambda7.compare(java.lang.Object,"
+                    + " java.lang.Object):int");
     }
 }

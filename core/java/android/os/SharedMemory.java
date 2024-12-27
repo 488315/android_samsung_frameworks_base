@@ -1,17 +1,19 @@
 package android.os;
 
-import android.os.Parcelable;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
+
 import dalvik.system.VMRuntime;
+
+import sun.misc.Cleaner;
+
 import java.io.Closeable;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.DirectByteBuffer;
 import java.nio.NioUtils;
-import sun.misc.Cleaner;
 
 /* loaded from: classes3.dex */
 public final class SharedMemory implements Parcelable, Closeable {
@@ -19,21 +21,24 @@ public final class SharedMemory implements Parcelable, Closeable {
     private final FileDescriptor mFileDescriptor;
     private final MemoryRegistration mMemoryRegistration;
     private final int mSize;
-    private static final int PROT_MASK = ((OsConstants.PROT_READ | OsConstants.PROT_WRITE) | OsConstants.PROT_EXEC) | OsConstants.PROT_NONE;
-    public static final Parcelable.Creator<SharedMemory> CREATOR = new Parcelable.Creator<SharedMemory>() { // from class: android.os.SharedMemory.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SharedMemory createFromParcel(Parcel source) {
-            FileDescriptor descriptor = source.readRawFileDescriptor();
-            return new SharedMemory(descriptor);
-        }
+    private static final int PROT_MASK =
+            ((OsConstants.PROT_READ | OsConstants.PROT_WRITE) | OsConstants.PROT_EXEC)
+                    | OsConstants.PROT_NONE;
+    public static final Parcelable.Creator<SharedMemory> CREATOR =
+            new Parcelable.Creator<SharedMemory>() { // from class: android.os.SharedMemory.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SharedMemory createFromParcel(Parcel source) {
+                    FileDescriptor descriptor = source.readRawFileDescriptor();
+                    return new SharedMemory(descriptor);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SharedMemory[] newArray(int size) {
-            return new SharedMemory[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SharedMemory[] newArray(int size) {
+                    return new SharedMemory[size];
+                }
+            };
 
     private static native FileDescriptor nCreate(String str, int i) throws ErrnoException;
 
@@ -43,10 +48,12 @@ public final class SharedMemory implements Parcelable, Closeable {
 
     private SharedMemory(FileDescriptor fileDescriptor) {
         if (fileDescriptor == null) {
-            throw new IllegalArgumentException("Unable to create SharedMemory from a null FileDescriptor");
+            throw new IllegalArgumentException(
+                    "Unable to create SharedMemory from a null FileDescriptor");
         }
         if (!fileDescriptor.valid()) {
-            throw new IllegalArgumentException("Unable to create SharedMemory from closed FileDescriptor");
+            throw new IllegalArgumentException(
+                    "Unable to create SharedMemory from closed FileDescriptor");
         }
         this.mFileDescriptor = fileDescriptor;
         this.mSize = nGetSize(this.mFileDescriptor);
@@ -54,7 +61,10 @@ public final class SharedMemory implements Parcelable, Closeable {
             throw new IllegalArgumentException("FileDescriptor is not a valid ashmem fd");
         }
         this.mMemoryRegistration = new MemoryRegistration(this.mSize);
-        this.mCleaner = Cleaner.create(this.mFileDescriptor, new Closer(this.mFileDescriptor.getInt$(), this.mMemoryRegistration));
+        this.mCleaner =
+                Cleaner.create(
+                        this.mFileDescriptor,
+                        new Closer(this.mFileDescriptor.getInt$(), this.mMemoryRegistration));
     }
 
     public static SharedMemory create(String name, int size) throws ErrnoException {
@@ -118,10 +128,19 @@ public final class SharedMemory implements Parcelable, Closeable {
         }
         if (length > 0) {
             if (offset + length <= this.mSize) {
-                long address = Os.mmap(0L, length, prot, OsConstants.MAP_SHARED, this.mFileDescriptor, offset);
+                long address =
+                        Os.mmap(
+                                0L,
+                                length,
+                                prot,
+                                OsConstants.MAP_SHARED,
+                                this.mFileDescriptor,
+                                offset);
                 boolean readOnly = (prot & OsConstants.PROT_WRITE) == 0;
-                Runnable unmapper = new Unmapper(address, length, this.mMemoryRegistration.acquire());
-                return new DirectByteBuffer(length, address, this.mFileDescriptor, unmapper, readOnly);
+                Runnable unmapper =
+                        new Unmapper(address, length, this.mMemoryRegistration.acquire());
+                return new DirectByteBuffer(
+                        length, address, this.mFileDescriptor, unmapper, readOnly);
             }
             throw new IllegalArgumentException("offset + length must not exceed getSize()");
         }
@@ -133,7 +152,8 @@ public final class SharedMemory implements Parcelable, Closeable {
             NioUtils.freeDirectBuffer(buffer);
             return;
         }
-        throw new IllegalArgumentException("ByteBuffer wasn't created by #map(int, int, int); can't unmap");
+        throw new IllegalArgumentException(
+                "ByteBuffer wasn't created by #map(int, int, int); can't unmap");
     }
 
     @Override // java.io.Closeable, java.lang.AutoCloseable

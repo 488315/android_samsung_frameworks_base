@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.IAlarmCompleteListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -13,8 +12,7 @@ public interface IAlarmListener extends IInterface {
 
     public static class Default implements IAlarmListener {
         @Override // android.app.IAlarmListener
-        public void doAlarm(IAlarmCompleteListener callback) throws RemoteException {
-        }
+        public void doAlarm(IAlarmCompleteListener callback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +20,7 @@ public interface IAlarmListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAlarmListener {
+    public abstract static class Stub extends Binder implements IAlarmListener {
         public static final String DESCRIPTOR = "android.app.IAlarmListener";
         static final int TRANSACTION_doAlarm = 1;
 
@@ -61,7 +59,8 @@ public interface IAlarmListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -71,7 +70,8 @@ public interface IAlarmListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IAlarmCompleteListener _arg0 = IAlarmCompleteListener.Stub.asInterface(data.readStrongBinder());
+                    IAlarmCompleteListener _arg0 =
+                            IAlarmCompleteListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     doAlarm(_arg0);
                     return true;

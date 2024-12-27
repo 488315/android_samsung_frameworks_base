@@ -3,24 +3,26 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class SrvccCall implements Parcelable {
-    public static final Parcelable.Creator<SrvccCall> CREATOR = new Parcelable.Creator<SrvccCall>() { // from class: android.telephony.ims.SrvccCall.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SrvccCall createFromParcel(Parcel in) {
-            return new SrvccCall(in);
-        }
+    public static final Parcelable.Creator<SrvccCall> CREATOR =
+            new Parcelable.Creator<SrvccCall>() { // from class: android.telephony.ims.SrvccCall.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SrvccCall createFromParcel(Parcel in) {
+                    return new SrvccCall(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SrvccCall[] newArray(int size) {
-            return new SrvccCall[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SrvccCall[] newArray(int size) {
+                    return new SrvccCall[size];
+                }
+            };
     private static final String TAG = "SrvccCall";
     private String mCallId;
     private int mCallState;
@@ -55,7 +57,13 @@ public final class SrvccCall implements Parcelable {
     }
 
     public String toString() {
-        return "{ callId=" + this.mCallId + ", callState=" + this.mCallState + ", imsCallProfile=" + this.mImsCallProfile + " }";
+        return "{ callId="
+                + this.mCallId
+                + ", callState="
+                + this.mCallState
+                + ", imsCallProfile="
+                + this.mImsCallProfile
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -66,7 +74,9 @@ public final class SrvccCall implements Parcelable {
             return false;
         }
         SrvccCall that = (SrvccCall) o;
-        if (this.mImsCallProfile.equals(that.mImsCallProfile) && this.mCallId.equals(that.mCallId) && this.mCallState == that.mCallState) {
+        if (this.mImsCallProfile.equals(that.mImsCallProfile)
+                && this.mCallId.equals(that.mCallId)
+                && this.mCallState == that.mCallState) {
             return true;
         }
         return false;
@@ -92,6 +102,9 @@ public final class SrvccCall implements Parcelable {
     private void readFromParcel(Parcel in) {
         this.mCallId = in.readString();
         this.mCallState = in.readInt();
-        this.mImsCallProfile = (ImsCallProfile) in.readParcelable(ImsCallProfile.class.getClassLoader(), ImsCallProfile.class);
+        this.mImsCallProfile =
+                (ImsCallProfile)
+                        in.readParcelable(
+                                ImsCallProfile.class.getClassLoader(), ImsCallProfile.class);
     }
 }

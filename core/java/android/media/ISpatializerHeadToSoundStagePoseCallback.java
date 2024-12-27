@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISpatializerHeadToSoundStagePoseCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.media.ISpatializerHeadToSoundStagePoseCallback";
+    public static final String DESCRIPTOR =
+            "android.media.ISpatializerHeadToSoundStagePoseCallback";
 
     void dispatchPoseChanged(float[] fArr) throws RemoteException;
 
     public static class Default implements ISpatializerHeadToSoundStagePoseCallback {
         @Override // android.media.ISpatializerHeadToSoundStagePoseCallback
-        public void dispatchPoseChanged(float[] pose) throws RemoteException {
-        }
+        public void dispatchPoseChanged(float[] pose) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,8 @@ public interface ISpatializerHeadToSoundStagePoseCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpatializerHeadToSoundStagePoseCallback {
+    public abstract static class Stub extends Binder
+            implements ISpatializerHeadToSoundStagePoseCallback {
         static final int TRANSACTION_dispatchPoseChanged = 1;
 
         public Stub() {
@@ -34,7 +35,8 @@ public interface ISpatializerHeadToSoundStagePoseCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(ISpatializerHeadToSoundStagePoseCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(ISpatializerHeadToSoundStagePoseCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof ISpatializerHeadToSoundStagePoseCallback)) {
                 return (ISpatializerHeadToSoundStagePoseCallback) iin;
             }
@@ -61,7 +63,8 @@ public interface ISpatializerHeadToSoundStagePoseCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISpatializerHeadToSoundStagePoseCallback.DESCRIPTOR);
             }

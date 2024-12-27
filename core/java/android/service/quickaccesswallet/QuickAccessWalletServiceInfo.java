@@ -19,10 +19,13 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.internal.R;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes3.dex */
 class QuickAccessWalletServiceInfo {
@@ -32,7 +35,10 @@ class QuickAccessWalletServiceInfo {
     private final ServiceMetadata mServiceMetadata;
     private final TileServiceMetadata mTileServiceMetadata;
 
-    private QuickAccessWalletServiceInfo(ServiceInfo serviceInfo, ServiceMetadata metadata, TileServiceMetadata tileServiceMetadata) {
+    private QuickAccessWalletServiceInfo(
+            ServiceInfo serviceInfo,
+            ServiceMetadata metadata,
+            TileServiceMetadata tileServiceMetadata) {
         this.mServiceInfo = serviceInfo;
         this.mServiceMetadata = metadata;
         this.mTileServiceMetadata = tileServiceMetadata;
@@ -54,11 +60,18 @@ class QuickAccessWalletServiceInfo {
             return null;
         }
         if (!Manifest.permission.BIND_QUICK_ACCESS_WALLET_SERVICE.equals(serviceInfo.permission)) {
-            Log.w(TAG, String.format("%s.%s does not require permission %s", serviceInfo.packageName, serviceInfo.name, Manifest.permission.BIND_QUICK_ACCESS_WALLET_SERVICE));
+            Log.w(
+                    TAG,
+                    String.format(
+                            "%s.%s does not require permission %s",
+                            serviceInfo.packageName,
+                            serviceInfo.name,
+                            Manifest.permission.BIND_QUICK_ACCESS_WALLET_SERVICE));
             return null;
         }
         ServiceMetadata metadata = parseServiceMetadata(context, serviceInfo);
-        TileServiceMetadata tileServiceMetadata = new TileServiceMetadata(parseTileServiceMetadata(context, serviceInfo));
+        TileServiceMetadata tileServiceMetadata =
+                new TileServiceMetadata(parseTileServiceMetadata(context, serviceInfo));
         return new QuickAccessWalletServiceInfo(serviceInfo, metadata, tileServiceMetadata);
     }
 
@@ -95,7 +108,8 @@ class QuickAccessWalletServiceInfo {
     private static ServiceInfo getWalletServiceInfo(Context context, String packageName) {
         Intent intent = new Intent(QuickAccessWalletService.SERVICE_INTERFACE);
         intent.setPackage(packageName);
-        List<ResolveInfo> resolveInfos = context.getPackageManager().queryIntentServices(intent, 852096);
+        List<ResolveInfo> resolveInfos =
+                context.getPackageManager().queryIntentServices(intent, 852096);
         if (resolveInfos.isEmpty()) {
             return null;
         }
@@ -112,7 +126,8 @@ class QuickAccessWalletServiceInfo {
 
     private static Drawable parseTileServiceMetadata(Context context, ServiceInfo serviceInfo) {
         PackageManager pm = context.getPackageManager();
-        int tileIconDrawableId = serviceInfo.metaData.getInt(QuickAccessWalletService.TILE_SERVICE_META_DATA);
+        int tileIconDrawableId =
+                serviceInfo.metaData.getInt(QuickAccessWalletService.TILE_SERVICE_META_DATA);
         if (tileIconDrawableId != 0) {
             try {
                 Resources resources = pm.getResourcesForApplication(serviceInfo.applicationInfo);
@@ -135,7 +150,11 @@ class QuickAccessWalletServiceInfo {
             return new ServiceMetadata(null, null, null, null);
         }
 
-        private ServiceMetadata(String targetActivity, String settingsActivity, CharSequence shortcutShortLabel, CharSequence shortcutLongLabel) {
+        private ServiceMetadata(
+                String targetActivity,
+                String settingsActivity,
+                CharSequence shortcutShortLabel,
+                CharSequence shortcutLongLabel) {
             this.mTargetActivity = targetActivity;
             this.mSettingsActivity = settingsActivity;
             this.mShortcutShortLabel = shortcutShortLabel;
@@ -146,14 +165,14 @@ class QuickAccessWalletServiceInfo {
     static ServiceMetadata parseServiceMetadata(Context context, ServiceInfo serviceInfo) {
         Resources resources;
         PackageManager pm = context.getPackageManager();
-        XmlResourceParser parser = serviceInfo.loadXmlMetaData(pm, QuickAccessWalletService.SERVICE_META_DATA);
+        XmlResourceParser parser =
+                serviceInfo.loadXmlMetaData(pm, QuickAccessWalletService.SERVICE_META_DATA);
         if (parser == null) {
             return ServiceMetadata.empty();
         }
         try {
             resources = pm.getResourcesForApplication(serviceInfo.applicationInfo);
-            for (int type = 0; type != 1 && type != 2; type = parser.next()) {
-            }
+            for (int type = 0; type != 1 && type != 2; type = parser.next()) {}
         } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
             Log.e(TAG, "Error parsing quickaccesswallet service meta-data", e);
         }
@@ -161,12 +180,15 @@ class QuickAccessWalletServiceInfo {
             AttributeSet allAttributes = Xml.asAttributeSet(parser);
             TypedArray afsAttributes = null;
             try {
-                afsAttributes = resources.obtainAttributes(allAttributes, R.styleable.QuickAccessWalletService);
+                afsAttributes =
+                        resources.obtainAttributes(
+                                allAttributes, R.styleable.QuickAccessWalletService);
                 String targetActivity = afsAttributes.getString(0);
                 String settingsActivity = afsAttributes.getString(1);
                 CharSequence shortcutShortLabel = afsAttributes.getText(2);
                 CharSequence shortcutLongLabel = afsAttributes.getText(3);
-                return new ServiceMetadata(targetActivity, settingsActivity, shortcutShortLabel, shortcutLongLabel);
+                return new ServiceMetadata(
+                        targetActivity, settingsActivity, shortcutShortLabel, shortcutLongLabel);
             } finally {
                 if (afsAttributes != null) {
                     afsAttributes.recycle();

@@ -4,20 +4,23 @@ import com.android.internal.util.FunctionalUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLambda11 implements FunctionalUtils.ThrowingSupplier {
+public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLambda11
+        implements FunctionalUtils.ThrowingSupplier {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ KnoxCustomManagerService f$0;
     public final /* synthetic */ int f$1;
     public final /* synthetic */ boolean f$2;
 
-    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda11(KnoxCustomManagerService knoxCustomManagerService, int i, boolean z, int i2) {
+    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda11(
+            KnoxCustomManagerService knoxCustomManagerService, int i, boolean z, int i2) {
         this.$r8$classId = i2;
         this.f$0 = knoxCustomManagerService;
         this.f$1 = i;
         this.f$2 = z;
     }
 
-    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda11(KnoxCustomManagerService knoxCustomManagerService, boolean z, int i) {
+    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda11(
+            KnoxCustomManagerService knoxCustomManagerService, boolean z, int i) {
         this.$r8$classId = 10;
         this.f$0 = knoxCustomManagerService;
         this.f$2 = z;
@@ -97,13 +100,15 @@ public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLa
                 int i12 = this.f$1;
                 boolean z12 = this.f$2;
                 String str12 = KnoxCustomManagerService.TAG;
-                return knoxCustomManagerService12.lambda$setInputMethodRestrictionState$17(i12, z12);
+                return knoxCustomManagerService12.lambda$setInputMethodRestrictionState$17(
+                        i12, z12);
             case 12:
                 KnoxCustomManagerService knoxCustomManagerService13 = this.f$0;
                 int i13 = this.f$1;
                 boolean z13 = this.f$2;
                 String str13 = KnoxCustomManagerService.TAG;
-                return knoxCustomManagerService13.lambda$setScreenOffOnHomeLongPressState$79(i13, z13);
+                return knoxCustomManagerService13.lambda$setScreenOffOnHomeLongPressState$79(
+                        i13, z13);
             case 13:
                 KnoxCustomManagerService knoxCustomManagerService14 = this.f$0;
                 int i14 = this.f$1;
@@ -157,13 +162,15 @@ public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLa
                 int i22 = this.f$1;
                 boolean z22 = this.f$2;
                 String str22 = KnoxCustomManagerService.TAG;
-                return knoxCustomManagerService22.lambda$setScreenOffOnStatusBarDoubleTapState$80(i22, z22);
+                return knoxCustomManagerService22.lambda$setScreenOffOnStatusBarDoubleTapState$80(
+                        i22, z22);
             default:
                 KnoxCustomManagerService knoxCustomManagerService23 = this.f$0;
                 int i23 = this.f$1;
                 boolean z23 = this.f$2;
                 String str23 = KnoxCustomManagerService.TAG;
-                return knoxCustomManagerService23.lambda$setStatusBarNotificationsState$113(i23, z23);
+                return knoxCustomManagerService23.lambda$setStatusBarNotificationsState$113(
+                        i23, z23);
         }
     }
 }

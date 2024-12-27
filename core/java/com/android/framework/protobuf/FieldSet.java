@@ -1,10 +1,7 @@
 package com.android.framework.protobuf;
 
 import com.android.framework.protobuf.FieldSet.FieldDescriptorLite;
-import com.android.framework.protobuf.Internal;
-import com.android.framework.protobuf.LazyField;
-import com.android.framework.protobuf.MessageLite;
-import com.android.framework.protobuf.WireFormat;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -124,7 +121,9 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
     public Map<T, Object> getAllFields() {
         if (!this.hasLazyField) {
-            return this.fields.isImmutable() ? this.fields : Collections.unmodifiableMap(this.fields);
+            return this.fields.isImmutable()
+                    ? this.fields
+                    : Collections.unmodifiableMap(this.fields);
         }
         SmallSortedMap<T, Object> result = cloneAllFieldsMap(this.fields, false);
         if (this.fields.isImmutable()) {
@@ -134,7 +133,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static <T extends FieldDescriptorLite<T>> SmallSortedMap<T, Object> cloneAllFieldsMap(SmallSortedMap<T, Object> fields, boolean copyList) {
+    public static <T extends FieldDescriptorLite<T>> SmallSortedMap<T, Object> cloneAllFieldsMap(
+            SmallSortedMap<T, Object> fields, boolean copyList) {
         SmallSortedMap<T, Object> result = SmallSortedMap.newFieldMap(16);
         for (int i = 0; i < fields.getNumArrayEntries(); i++) {
             cloneFieldEntry(result, fields.getArrayEntryAt(i), copyList);
@@ -145,7 +145,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         return result;
     }
 
-    private static <T extends FieldDescriptorLite<T>> void cloneFieldEntry(Map<T, Object> map, Map.Entry<T, Object> entry, boolean copyList) {
+    private static <T extends FieldDescriptorLite<T>> void cloneFieldEntry(
+            Map<T, Object> map, Map.Entry<T, Object> entry, boolean copyList) {
         T key = entry.getKey();
         Object value = entry.getValue();
         if (value instanceof LazyField) {
@@ -173,7 +174,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
     public boolean hasField(T descriptor) {
         if (descriptor.isRepeated()) {
-            throw new IllegalArgumentException("hasField() can only be called on non-repeated fields.");
+            throw new IllegalArgumentException(
+                    "hasField() can only be called on non-repeated fields.");
         }
         return this.fields.get(descriptor) != null;
     }
@@ -189,7 +191,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
     public void setField(T descriptor, Object value) {
         if (descriptor.isRepeated()) {
             if (!(value instanceof List)) {
-                throw new IllegalArgumentException("Wrong object type used with protocol message reflection.");
+                throw new IllegalArgumentException(
+                        "Wrong object type used with protocol message reflection.");
             }
             List newList = new ArrayList();
             newList.addAll((List) value);
@@ -215,7 +218,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
     public int getRepeatedFieldCount(T descriptor) {
         if (!descriptor.isRepeated()) {
-            throw new IllegalArgumentException("getRepeatedField() can only be called on repeated fields.");
+            throw new IllegalArgumentException(
+                    "getRepeatedField() can only be called on repeated fields.");
         }
         Object value = getField(descriptor);
         if (value == null) {
@@ -226,7 +230,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
     public Object getRepeatedField(T descriptor, int index) {
         if (!descriptor.isRepeated()) {
-            throw new IllegalArgumentException("getRepeatedField() can only be called on repeated fields.");
+            throw new IllegalArgumentException(
+                    "getRepeatedField() can only be called on repeated fields.");
         }
         Object value = getField(descriptor);
         if (value == null) {
@@ -237,7 +242,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
     public void setRepeatedField(T descriptor, int index, Object value) {
         if (!descriptor.isRepeated()) {
-            throw new IllegalArgumentException("getRepeatedField() can only be called on repeated fields.");
+            throw new IllegalArgumentException(
+                    "getRepeatedField() can only be called on repeated fields.");
         }
         Object list = getField(descriptor);
         if (list == null) {
@@ -250,7 +256,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
     public void addRepeatedField(T descriptor, Object value) {
         List<Object> list;
         if (!descriptor.isRepeated()) {
-            throw new IllegalArgumentException("addRepeatedField() can only be called on repeated fields.");
+            throw new IllegalArgumentException(
+                    "addRepeatedField() can only be called on repeated fields.");
         }
         verifyType(descriptor, value);
         Object existingValue = getField(descriptor);
@@ -265,7 +272,13 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
     private void verifyType(T descriptor, Object value) {
         if (!isValidType(descriptor.getLiteType(), value)) {
-            throw new IllegalArgumentException(String.format("Wrong object type used with protocol message reflection.\nField number: %d, field java type: %s, value type: %s\n", Integer.valueOf(descriptor.getNumber()), descriptor.getLiteType().getJavaType(), value.getClass().getName()));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Wrong object type used with protocol message reflection.\n"
+                                + "Field number: %d, field java type: %s, value type: %s\n",
+                            Integer.valueOf(descriptor.getNumber()),
+                            descriptor.getLiteType().getJavaType(),
+                            value.getClass().getName()));
         }
     }
 
@@ -307,7 +320,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static <T extends FieldDescriptorLite<T>> boolean isInitialized(Map.Entry<T, Object> entry) {
+    public static <T extends FieldDescriptorLite<T>> boolean isInitialized(
+            Map.Entry<T, Object> entry) {
         T descriptor = entry.getKey();
         if (descriptor.getLiteJavaType() == WireFormat.JavaType.MESSAGE) {
             if (descriptor.isRepeated()) {
@@ -330,7 +344,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         if (value instanceof LazyField) {
             return true;
         }
-        throw new IllegalArgumentException("Wrong object type used with protocol message reflection.");
+        throw new IllegalArgumentException(
+                "Wrong object type used with protocol message reflection.");
     }
 
     static int getWireFormatForFieldType(WireFormat.FieldType type, boolean isPacked) {
@@ -380,17 +395,27 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         if (descriptor.getLiteJavaType() == WireFormat.JavaType.MESSAGE) {
             Object value2 = getField(descriptor);
             if (value2 == null) {
-                this.fields.put((SmallSortedMap<T, Object>) descriptor, (T) cloneIfMutable(otherValue));
+                this.fields.put(
+                        (SmallSortedMap<T, Object>) descriptor, (T) cloneIfMutable(otherValue));
                 return;
             } else {
-                this.fields.put((SmallSortedMap<T, Object>) descriptor, (T) descriptor.internalMergeFrom(((MessageLite) value2).toBuilder(), (MessageLite) otherValue).build());
+                this.fields.put(
+                        (SmallSortedMap<T, Object>) descriptor,
+                        (T)
+                                descriptor
+                                        .internalMergeFrom(
+                                                ((MessageLite) value2).toBuilder(),
+                                                (MessageLite) otherValue)
+                                        .build());
                 return;
             }
         }
         this.fields.put((SmallSortedMap<T, Object>) descriptor, (T) cloneIfMutable(otherValue));
     }
 
-    public static Object readPrimitiveField(CodedInputStream input, WireFormat.FieldType type, boolean checkUtf8) throws IOException {
+    public static Object readPrimitiveField(
+            CodedInputStream input, WireFormat.FieldType type, boolean checkUtf8)
+            throws IOException {
         if (checkUtf8) {
             return WireFormat.readPrimitiveField(input, type, WireFormat.Utf8Validation.STRICT);
         }
@@ -416,9 +441,12 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         }
     }
 
-    private void writeMessageSetTo(Map.Entry<T, Object> entry, CodedOutputStream output) throws IOException {
+    private void writeMessageSetTo(Map.Entry<T, Object> entry, CodedOutputStream output)
+            throws IOException {
         T descriptor = entry.getKey();
-        if (descriptor.getLiteJavaType() == WireFormat.JavaType.MESSAGE && !descriptor.isRepeated() && !descriptor.isPacked()) {
+        if (descriptor.getLiteJavaType() == WireFormat.JavaType.MESSAGE
+                && !descriptor.isRepeated()
+                && !descriptor.isPacked()) {
             Object value = entry.getValue();
             if (value instanceof LazyField) {
                 value = ((LazyField) value).getValue();
@@ -429,7 +457,9 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         writeField(descriptor, entry.getValue(), output);
     }
 
-    static void writeElement(CodedOutputStream output, WireFormat.FieldType type, int number, Object value) throws IOException {
+    static void writeElement(
+            CodedOutputStream output, WireFormat.FieldType type, int number, Object value)
+            throws IOException {
         if (type == WireFormat.FieldType.GROUP) {
             output.writeGroup(number, (MessageLite) value);
         } else {
@@ -440,123 +470,181 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
     /* renamed from: com.android.framework.protobuf.FieldSet$1, reason: invalid class name */
     static /* synthetic */ class AnonymousClass1 {
-        static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType = new int[WireFormat.FieldType.values().length];
+        static final /* synthetic */ int[] $SwitchMap$com$google$protobuf$WireFormat$FieldType =
+                new int[WireFormat.FieldType.values().length];
 
         static {
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.DOUBLE.ordinal()] = 1;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.DOUBLE.ordinal()] =
+                        1;
             } catch (NoSuchFieldError e) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.FLOAT.ordinal()] = 2;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.FLOAT.ordinal()] =
+                        2;
             } catch (NoSuchFieldError e2) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.INT64.ordinal()] = 3;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.INT64.ordinal()] =
+                        3;
             } catch (NoSuchFieldError e3) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.UINT64.ordinal()] = 4;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.UINT64.ordinal()] =
+                        4;
             } catch (NoSuchFieldError e4) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.INT32.ordinal()] = 5;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.INT32.ordinal()] =
+                        5;
             } catch (NoSuchFieldError e5) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.FIXED64.ordinal()] = 6;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.FIXED64.ordinal()] =
+                        6;
             } catch (NoSuchFieldError e6) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.FIXED32.ordinal()] = 7;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.FIXED32.ordinal()] =
+                        7;
             } catch (NoSuchFieldError e7) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.BOOL.ordinal()] = 8;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.BOOL.ordinal()] =
+                        8;
             } catch (NoSuchFieldError e8) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.GROUP.ordinal()] = 9;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.GROUP.ordinal()] =
+                        9;
             } catch (NoSuchFieldError e9) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.MESSAGE.ordinal()] = 10;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.MESSAGE.ordinal()] =
+                        10;
             } catch (NoSuchFieldError e10) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.STRING.ordinal()] = 11;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.STRING.ordinal()] =
+                        11;
             } catch (NoSuchFieldError e11) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.BYTES.ordinal()] = 12;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.BYTES.ordinal()] =
+                        12;
             } catch (NoSuchFieldError e12) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.UINT32.ordinal()] = 13;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.UINT32.ordinal()] =
+                        13;
             } catch (NoSuchFieldError e13) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SFIXED32.ordinal()] = 14;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SFIXED32.ordinal()] =
+                        14;
             } catch (NoSuchFieldError e14) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SFIXED64.ordinal()] = 15;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SFIXED64.ordinal()] =
+                        15;
             } catch (NoSuchFieldError e15) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SINT32.ordinal()] = 16;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SINT32.ordinal()] =
+                        16;
             } catch (NoSuchFieldError e16) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.SINT64.ordinal()] = 17;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.SINT64.ordinal()] =
+                        17;
             } catch (NoSuchFieldError e17) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$FieldType[WireFormat.FieldType.ENUM.ordinal()] = 18;
+                $SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                                WireFormat.FieldType.ENUM.ordinal()] =
+                        18;
             } catch (NoSuchFieldError e18) {
             }
-            $SwitchMap$com$google$protobuf$WireFormat$JavaType = new int[WireFormat.JavaType.values().length];
+            $SwitchMap$com$google$protobuf$WireFormat$JavaType =
+                    new int[WireFormat.JavaType.values().length];
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$JavaType[WireFormat.JavaType.INT.ordinal()] = 1;
+                $SwitchMap$com$google$protobuf$WireFormat$JavaType[
+                                WireFormat.JavaType.INT.ordinal()] =
+                        1;
             } catch (NoSuchFieldError e19) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$JavaType[WireFormat.JavaType.LONG.ordinal()] = 2;
+                $SwitchMap$com$google$protobuf$WireFormat$JavaType[
+                                WireFormat.JavaType.LONG.ordinal()] =
+                        2;
             } catch (NoSuchFieldError e20) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$JavaType[WireFormat.JavaType.FLOAT.ordinal()] = 3;
+                $SwitchMap$com$google$protobuf$WireFormat$JavaType[
+                                WireFormat.JavaType.FLOAT.ordinal()] =
+                        3;
             } catch (NoSuchFieldError e21) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$JavaType[WireFormat.JavaType.DOUBLE.ordinal()] = 4;
+                $SwitchMap$com$google$protobuf$WireFormat$JavaType[
+                                WireFormat.JavaType.DOUBLE.ordinal()] =
+                        4;
             } catch (NoSuchFieldError e22) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$JavaType[WireFormat.JavaType.BOOLEAN.ordinal()] = 5;
+                $SwitchMap$com$google$protobuf$WireFormat$JavaType[
+                                WireFormat.JavaType.BOOLEAN.ordinal()] =
+                        5;
             } catch (NoSuchFieldError e23) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$JavaType[WireFormat.JavaType.STRING.ordinal()] = 6;
+                $SwitchMap$com$google$protobuf$WireFormat$JavaType[
+                                WireFormat.JavaType.STRING.ordinal()] =
+                        6;
             } catch (NoSuchFieldError e24) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$JavaType[WireFormat.JavaType.BYTE_STRING.ordinal()] = 7;
+                $SwitchMap$com$google$protobuf$WireFormat$JavaType[
+                                WireFormat.JavaType.BYTE_STRING.ordinal()] =
+                        7;
             } catch (NoSuchFieldError e25) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$JavaType[WireFormat.JavaType.ENUM.ordinal()] = 8;
+                $SwitchMap$com$google$protobuf$WireFormat$JavaType[
+                                WireFormat.JavaType.ENUM.ordinal()] =
+                        8;
             } catch (NoSuchFieldError e26) {
             }
             try {
-                $SwitchMap$com$google$protobuf$WireFormat$JavaType[WireFormat.JavaType.MESSAGE.ordinal()] = 9;
+                $SwitchMap$com$google$protobuf$WireFormat$JavaType[
+                                WireFormat.JavaType.MESSAGE.ordinal()] =
+                        9;
             } catch (NoSuchFieldError e27) {
             }
         }
     }
 
-    static void writeElementNoTag(CodedOutputStream output, WireFormat.FieldType type, Object value) throws IOException {
-        switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[type.ordinal()]) {
+    static void writeElementNoTag(CodedOutputStream output, WireFormat.FieldType type, Object value)
+            throws IOException {
+        switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                type.ordinal()]) {
             case 1:
                 output.writeDoubleNoTag(((Double) value).doubleValue());
                 break;
@@ -629,7 +717,9 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         }
     }
 
-    public static void writeField(FieldDescriptorLite<?> descriptor, Object value, CodedOutputStream output) throws IOException {
+    public static void writeField(
+            FieldDescriptorLite<?> descriptor, Object value, CodedOutputStream output)
+            throws IOException {
         WireFormat.FieldType type = descriptor.getLiteType();
         int number = descriptor.getNumber();
         if (descriptor.isRepeated()) {
@@ -684,11 +774,15 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
     private int getMessageSetSerializedSize(Map.Entry<T, Object> entry) {
         T descriptor = entry.getKey();
         Object value = entry.getValue();
-        if (descriptor.getLiteJavaType() == WireFormat.JavaType.MESSAGE && !descriptor.isRepeated() && !descriptor.isPacked()) {
+        if (descriptor.getLiteJavaType() == WireFormat.JavaType.MESSAGE
+                && !descriptor.isRepeated()
+                && !descriptor.isPacked()) {
             if (value instanceof LazyField) {
-                return CodedOutputStream.computeLazyFieldMessageSetExtensionSize(entry.getKey().getNumber(), (LazyField) value);
+                return CodedOutputStream.computeLazyFieldMessageSetExtensionSize(
+                        entry.getKey().getNumber(), (LazyField) value);
             }
-            return CodedOutputStream.computeMessageSetExtensionSize(entry.getKey().getNumber(), (MessageLite) value);
+            return CodedOutputStream.computeMessageSetExtensionSize(
+                    entry.getKey().getNumber(), (MessageLite) value);
         }
         return computeFieldSize(descriptor, value);
     }
@@ -702,7 +796,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
     }
 
     static int computeElementSizeNoTag(WireFormat.FieldType type, Object value) {
-        switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[type.ordinal()]) {
+        switch (AnonymousClass1.$SwitchMap$com$google$protobuf$WireFormat$FieldType[
+                type.ordinal()]) {
             case 1:
                 return CodedOutputStream.computeDoubleSizeNoTag(((Double) value).doubleValue());
             case 2:
@@ -748,11 +843,13 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
                 return CodedOutputStream.computeSInt64SizeNoTag(((Long) value).longValue());
             case 18:
                 if (value instanceof Internal.EnumLite) {
-                    return CodedOutputStream.computeEnumSizeNoTag(((Internal.EnumLite) value).getNumber());
+                    return CodedOutputStream.computeEnumSizeNoTag(
+                            ((Internal.EnumLite) value).getNumber());
                 }
                 return CodedOutputStream.computeEnumSizeNoTag(((Integer) value).intValue());
             default:
-                throw new RuntimeException("There is no way to get here, but the compiler thinks otherwise.");
+                throw new RuntimeException(
+                        "There is no way to get here, but the compiler thinks otherwise.");
         }
     }
 
@@ -765,7 +862,9 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
                 for (Object element : (List) value) {
                     dataSize += computeElementSizeNoTag(type, element);
                 }
-                return CodedOutputStream.computeTagSize(number) + dataSize + CodedOutputStream.computeUInt32SizeNoTag(dataSize);
+                return CodedOutputStream.computeTagSize(number)
+                        + dataSize
+                        + CodedOutputStream.computeUInt32SizeNoTag(dataSize);
             }
             int size = 0;
             for (Object element2 : (List) value) {
@@ -819,7 +918,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
             return fieldSet;
         }
 
-        private static <T extends FieldDescriptorLite<T>> void replaceBuilders(SmallSortedMap<T, Object> fieldMap, boolean partial) {
+        private static <T extends FieldDescriptorLite<T>> void replaceBuilders(
+                SmallSortedMap<T, Object> fieldMap, boolean partial) {
             for (int i = 0; i < fieldMap.getNumArrayEntries(); i++) {
                 replaceBuilders(fieldMap.getArrayEntryAt(i), partial);
             }
@@ -828,18 +928,22 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
             }
         }
 
-        private static <T extends FieldDescriptorLite<T>> void replaceBuilders(Map.Entry<T, Object> entry, boolean partial) {
+        private static <T extends FieldDescriptorLite<T>> void replaceBuilders(
+                Map.Entry<T, Object> entry, boolean partial) {
             entry.setValue(replaceBuilders(entry.getKey(), entry.getValue(), partial));
         }
 
-        private static <T extends FieldDescriptorLite<T>> Object replaceBuilders(T descriptor, Object value, boolean partial) {
+        private static <T extends FieldDescriptorLite<T>> Object replaceBuilders(
+                T descriptor, Object value, boolean partial) {
             if (value == null) {
                 return value;
             }
             if (descriptor.getLiteJavaType() == WireFormat.JavaType.MESSAGE) {
                 if (descriptor.isRepeated()) {
                     if (!(value instanceof List)) {
-                        throw new IllegalStateException("Repeated field should contains a List but actually contains type: " + value.getClass());
+                        throw new IllegalStateException(
+                                "Repeated field should contains a List but actually contains type: "
+                                        + value.getClass());
                     }
                     List<Object> list = (List) value;
                     for (int i = 0; i < list.size(); i++) {
@@ -870,15 +974,19 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
             return builder.build();
         }
 
-        public static <T extends FieldDescriptorLite<T>> Builder<T> fromFieldSet(FieldSet<T> fieldSet) {
-            Builder<T> builder = new Builder<>(FieldSet.cloneAllFieldsMap(((FieldSet) fieldSet).fields, true));
+        public static <T extends FieldDescriptorLite<T>> Builder<T> fromFieldSet(
+                FieldSet<T> fieldSet) {
+            Builder<T> builder =
+                    new Builder<>(FieldSet.cloneAllFieldsMap(((FieldSet) fieldSet).fields, true));
             ((Builder) builder).hasLazyField = ((FieldSet) fieldSet).hasLazyField;
             return builder;
         }
 
         public Map<T, Object> getAllFields() {
             if (!this.hasLazyField) {
-                return this.fields.isImmutable() ? this.fields : Collections.unmodifiableMap(this.fields);
+                return this.fields.isImmutable()
+                        ? this.fields
+                        : Collections.unmodifiableMap(this.fields);
             }
             SmallSortedMap<T, Object> result = FieldSet.cloneAllFieldsMap(this.fields, false);
             if (this.fields.isImmutable()) {
@@ -891,7 +999,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
         public boolean hasField(T descriptor) {
             if (descriptor.isRepeated()) {
-                throw new IllegalArgumentException("hasField() can only be called on non-repeated fields.");
+                throw new IllegalArgumentException(
+                        "hasField() can only be called on non-repeated fields.");
             }
             return this.fields.get(descriptor) != null;
         }
@@ -920,12 +1029,14 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
             ensureIsMutable();
             if (descriptor.isRepeated()) {
                 if (!(value instanceof List)) {
-                    throw new IllegalArgumentException("Wrong object type used with protocol message reflection.");
+                    throw new IllegalArgumentException(
+                            "Wrong object type used with protocol message reflection.");
                 }
                 List newList = new ArrayList((List) value);
                 for (Object element : newList) {
                     verifyType(descriptor, element);
-                    this.hasNestedBuilders = this.hasNestedBuilders || (element instanceof MessageLite.Builder);
+                    this.hasNestedBuilders =
+                            this.hasNestedBuilders || (element instanceof MessageLite.Builder);
                 }
                 value = newList;
             } else {
@@ -934,7 +1045,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
             if (value instanceof LazyField) {
                 this.hasLazyField = true;
             }
-            this.hasNestedBuilders = this.hasNestedBuilders || (value instanceof MessageLite.Builder);
+            this.hasNestedBuilders =
+                    this.hasNestedBuilders || (value instanceof MessageLite.Builder);
             this.fields.put((SmallSortedMap<T, Object>) descriptor, (T) value);
         }
 
@@ -948,7 +1060,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
         public int getRepeatedFieldCount(T descriptor) {
             if (!descriptor.isRepeated()) {
-                throw new IllegalArgumentException("getRepeatedFieldCount() can only be called on repeated fields.");
+                throw new IllegalArgumentException(
+                        "getRepeatedFieldCount() can only be called on repeated fields.");
             }
             Object value = getFieldAllowBuilders(descriptor);
             if (value == null) {
@@ -967,7 +1080,8 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
         Object getRepeatedFieldAllowBuilders(T descriptor, int index) {
             if (!descriptor.isRepeated()) {
-                throw new IllegalArgumentException("getRepeatedField() can only be called on repeated fields.");
+                throw new IllegalArgumentException(
+                        "getRepeatedField() can only be called on repeated fields.");
             }
             Object value = getFieldAllowBuilders(descriptor);
             if (value == null) {
@@ -979,9 +1093,11 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
         public void setRepeatedField(T descriptor, int index, Object value) {
             ensureIsMutable();
             if (!descriptor.isRepeated()) {
-                throw new IllegalArgumentException("getRepeatedField() can only be called on repeated fields.");
+                throw new IllegalArgumentException(
+                        "getRepeatedField() can only be called on repeated fields.");
             }
-            this.hasNestedBuilders = this.hasNestedBuilders || (value instanceof MessageLite.Builder);
+            this.hasNestedBuilders =
+                    this.hasNestedBuilders || (value instanceof MessageLite.Builder);
             Object list = getFieldAllowBuilders(descriptor);
             if (list == null) {
                 throw new IndexOutOfBoundsException();
@@ -994,9 +1110,11 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
             List<Object> list;
             ensureIsMutable();
             if (!descriptor.isRepeated()) {
-                throw new IllegalArgumentException("addRepeatedField() can only be called on repeated fields.");
+                throw new IllegalArgumentException(
+                        "addRepeatedField() can only be called on repeated fields.");
             }
-            this.hasNestedBuilders = this.hasNestedBuilders || (value instanceof MessageLite.Builder);
+            this.hasNestedBuilders =
+                    this.hasNestedBuilders || (value instanceof MessageLite.Builder);
             verifyType(descriptor, value);
             Object existingValue = getFieldAllowBuilders(descriptor);
             if (existingValue == null) {
@@ -1010,9 +1128,16 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
 
         private void verifyType(T descriptor, Object value) {
             if (!FieldSet.isValidType(descriptor.getLiteType(), value)) {
-                if (descriptor.getLiteType().getJavaType() == WireFormat.JavaType.MESSAGE && (value instanceof MessageLite.Builder)) {
+                if (descriptor.getLiteType().getJavaType() == WireFormat.JavaType.MESSAGE
+                        && (value instanceof MessageLite.Builder)) {
                 } else {
-                    throw new IllegalArgumentException(String.format("Wrong object type used with protocol message reflection.\nField number: %d, field java type: %s, value type: %s\n", Integer.valueOf(descriptor.getNumber()), descriptor.getLiteType().getJavaType(), value.getClass().getName()));
+                    throw new IllegalArgumentException(
+                            String.format(
+                                    "Wrong object type used with protocol message reflection.\n"
+                                        + "Field number: %d, field java type: %s, value type: %s\n",
+                                    Integer.valueOf(descriptor.getNumber()),
+                                    descriptor.getLiteType().getJavaType(),
+                                    value.getClass().getName()));
                 }
             }
         }
@@ -1059,16 +1184,28 @@ final class FieldSet<T extends FieldDescriptorLite<T>> {
                 return;
             }
             if (descriptor.getLiteJavaType() != WireFormat.JavaType.MESSAGE) {
-                this.fields.put((SmallSortedMap<T, Object>) descriptor, (T) FieldSet.cloneIfMutable(otherValue));
+                this.fields.put(
+                        (SmallSortedMap<T, Object>) descriptor,
+                        (T) FieldSet.cloneIfMutable(otherValue));
                 return;
             }
             Object value2 = getFieldAllowBuilders(descriptor);
             if (value2 == null) {
-                this.fields.put((SmallSortedMap<T, Object>) descriptor, (T) FieldSet.cloneIfMutable(otherValue));
+                this.fields.put(
+                        (SmallSortedMap<T, Object>) descriptor,
+                        (T) FieldSet.cloneIfMutable(otherValue));
             } else if (value2 instanceof MessageLite.Builder) {
-                descriptor.internalMergeFrom((MessageLite.Builder) value2, (MessageLite) otherValue);
+                descriptor.internalMergeFrom(
+                        (MessageLite.Builder) value2, (MessageLite) otherValue);
             } else {
-                this.fields.put((SmallSortedMap<T, Object>) descriptor, (T) descriptor.internalMergeFrom(((MessageLite) value2).toBuilder(), (MessageLite) otherValue).build());
+                this.fields.put(
+                        (SmallSortedMap<T, Object>) descriptor,
+                        (T)
+                                descriptor
+                                        .internalMergeFrom(
+                                                ((MessageLite) value2).toBuilder(),
+                                                (MessageLite) otherValue)
+                                        .build());
             }
         }
     }

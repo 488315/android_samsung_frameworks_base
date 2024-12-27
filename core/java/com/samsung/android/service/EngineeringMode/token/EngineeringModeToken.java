@@ -1,6 +1,7 @@
 package com.samsung.android.service.EngineeringMode.token;
 
 import com.samsung.android.core.SizeCompatInfo;
+
 import java.util.ArrayList;
 
 /* loaded from: classes6.dex */

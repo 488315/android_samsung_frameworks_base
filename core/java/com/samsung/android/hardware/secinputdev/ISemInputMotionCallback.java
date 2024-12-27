@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISemInputMotionCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.hardware.secinputdev.ISemInputMotionCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.hardware.secinputdev.ISemInputMotionCallback";
 
     void onEventChanged(int i) throws RemoteException;
 
     public static class Default implements ISemInputMotionCallback {
         @Override // com.samsung.android.hardware.secinputdev.ISemInputMotionCallback
-        public void onEventChanged(int value) throws RemoteException {
-        }
+        public void onEventChanged(int value) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ISemInputMotionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemInputMotionCallback {
+    public abstract static class Stub extends Binder implements ISemInputMotionCallback {
         static final int TRANSACTION_onEventChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ISemInputMotionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemInputMotionCallback.DESCRIPTOR);
             }

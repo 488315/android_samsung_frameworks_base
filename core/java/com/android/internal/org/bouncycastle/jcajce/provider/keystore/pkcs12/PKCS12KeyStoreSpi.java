@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.keystore.pkcs12;
 
 import android.media.MediaMetrics;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1EncodableVector;
 import com.android.internal.org.bouncycastle.asn1.ASN1InputStream;
@@ -55,6 +56,7 @@ import com.android.internal.org.bouncycastle.util.Integers;
 import com.android.internal.org.bouncycastle.util.Properties;
 import com.android.internal.org.bouncycastle.util.Strings;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -89,6 +91,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
 import javax.crypto.NoSuchPaddingException;
@@ -99,7 +102,8 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
 /* loaded from: classes5.dex */
-public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifiers, X509ObjectIdentifiers, BCKeyStore {
+public class PKCS12KeyStoreSpi extends KeyStoreSpi
+        implements PKCSObjectIdentifiers, X509ObjectIdentifiers, BCKeyStore {
     static final int CERTIFICATE = 1;
     static final int KEY = 2;
     static final int KEY_PRIVATE = 0;
@@ -107,7 +111,8 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
     static final int KEY_SECRET = 2;
     private static final int MIN_ITERATIONS = 51200;
     static final int NULL = 0;
-    static final String PKCS12_MAX_IT_COUNT_PROPERTY = "com.android.internal.org.bouncycastle.pkcs12.max_it_count";
+    static final String PKCS12_MAX_IT_COUNT_PROPERTY =
+            "com.android.internal.org.bouncycastle.pkcs12.max_it_count";
     private static final int SALT_SIZE = 20;
     static final int SEALED = 4;
     static final int SECRET = 3;
@@ -123,7 +128,8 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
     private Hashtable chainCerts = new Hashtable();
     private Hashtable keyCerts = new Hashtable();
     protected SecureRandom random = CryptoServicesRegistrar.getSecureRandom();
-    private AlgorithmIdentifier macAlgorithm = new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);
+    private AlgorithmIdentifier macAlgorithm =
+            new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);
     private int itCount = 102400;
     private int saltLength = 20;
 
@@ -154,7 +160,10 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
         }
     }
 
-    public PKCS12KeyStoreSpi(JcaJceHelper helper, ASN1ObjectIdentifier keyAlgorithm, ASN1ObjectIdentifier certAlgorithm) {
+    public PKCS12KeyStoreSpi(
+            JcaJceHelper helper,
+            ASN1ObjectIdentifier keyAlgorithm,
+            ASN1ObjectIdentifier certAlgorithm) {
         this.keys = new IgnoresCaseHashtable();
         this.certs = new IgnoresCaseHashtable();
         this.keyAlgorithm = keyAlgorithm;
@@ -285,7 +294,8 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
             byte[] akiBytes = x509c.getExtensionValue(Extension.authorityKeyIdentifier.getId());
             if (akiBytes != null) {
                 ASN1OctetString akiValue = ASN1OctetString.getInstance(akiBytes);
-                AuthorityKeyIdentifier aki = AuthorityKeyIdentifier.getInstance(akiValue.getOctets());
+                AuthorityKeyIdentifier aki =
+                        AuthorityKeyIdentifier.getInstance(akiValue.getOctets());
                 byte[] keyID = aki.getKeyIdentifier();
                 if (keyID != null) {
                     nextC = (Certificate) this.chainCerts.get(new CertId(keyID));
@@ -300,7 +310,8 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                         if (!e.hasMoreElements()) {
                             break;
                         }
-                        X509Certificate crt = (X509Certificate) this.chainCerts.get(e.nextElement());
+                        X509Certificate crt =
+                                (X509Certificate) this.chainCerts.get(e.nextElement());
                         Principal sub = crt.getSubjectDN();
                         if (sub.equals(i)) {
                             try {
@@ -343,7 +354,8 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
     }
 
     @Override // java.security.KeyStoreSpi
-    public Key engineGetKey(String alias, char[] password) throws NoSuchAlgorithmException, UnrecoverableKeyException {
+    public Key engineGetKey(String alias, char[] password)
+            throws NoSuchAlgorithmException, UnrecoverableKeyException {
         if (alias == null) {
             throw new IllegalArgumentException("null alias passed to getKey.");
         }
@@ -363,19 +375,22 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
     @Override // java.security.KeyStoreSpi
     public void engineSetCertificateEntry(String alias, Certificate cert) throws KeyStoreException {
         if (this.keys.get(alias) != null) {
-            throw new KeyStoreException("There is a key entry with the name " + alias + MediaMetrics.SEPARATOR);
+            throw new KeyStoreException(
+                    "There is a key entry with the name " + alias + MediaMetrics.SEPARATOR);
         }
         this.certs.put(alias, cert);
         this.chainCerts.put(new CertId(cert.getPublicKey()), cert);
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineSetKeyEntry(String alias, byte[] key, Certificate[] chain) throws KeyStoreException {
+    public void engineSetKeyEntry(String alias, byte[] key, Certificate[] chain)
+            throws KeyStoreException {
         throw new RuntimeException("operation not supported");
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineSetKeyEntry(String alias, Key key, char[] password, Certificate[] chain) throws KeyStoreException {
+    public void engineSetKeyEntry(String alias, Key key, char[] password, Certificate[] chain)
+            throws KeyStoreException {
         if (!(key instanceof PrivateKey)) {
             throw new KeyStoreException("PKCS12 does not support non-PrivateKeys");
         }
@@ -411,12 +426,17 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
         return tab.size();
     }
 
-    protected PrivateKey unwrapKey(AlgorithmIdentifier algId, byte[] data, char[] password, boolean wrongPKCS12Zero) throws IOException {
+    protected PrivateKey unwrapKey(
+            AlgorithmIdentifier algId, byte[] data, char[] password, boolean wrongPKCS12Zero)
+            throws IOException {
         ASN1ObjectIdentifier algorithm = algId.getAlgorithm();
         try {
             if (algorithm.on(PKCSObjectIdentifiers.pkcs_12PbeIds)) {
                 PKCS12PBEParams pbeParams = PKCS12PBEParams.getInstance(algId.getParameters());
-                PBEParameterSpec defParams = new PBEParameterSpec(pbeParams.getIV(), validateIterationCount(pbeParams.getIterations()));
+                PBEParameterSpec defParams =
+                        new PBEParameterSpec(
+                                pbeParams.getIV(),
+                                validateIterationCount(pbeParams.getIterations()));
                 Cipher cipher = this.helper.createCipher(algorithm.getId());
                 PKCS12Key key = new PKCS12Key(password, wrongPKCS12Zero);
                 cipher.init(4, key, defParams);
@@ -425,17 +445,20 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
             if (algorithm.equals((ASN1Primitive) PKCSObjectIdentifiers.id_PBES2)) {
                 return (PrivateKey) createCipher(4, password, algId).unwrap(data, "", 2);
             }
-            throw new IOException("exception unwrapping private key - cannot recognise: " + algorithm);
+            throw new IOException(
+                    "exception unwrapping private key - cannot recognise: " + algorithm);
         } catch (Exception e) {
             throw new IOException("exception unwrapping private key - " + e.toString());
         }
     }
 
-    protected byte[] wrapKey(String algorithm, Key key, PKCS12PBEParams pbeParams, char[] password) throws IOException {
+    protected byte[] wrapKey(String algorithm, Key key, PKCS12PBEParams pbeParams, char[] password)
+            throws IOException {
         PBEKeySpec pbeSpec = new PBEKeySpec(password);
         try {
             SecretKeyFactory keyFact = this.helper.createSecretKeyFactory(algorithm);
-            PBEParameterSpec defParams = new PBEParameterSpec(pbeParams.getIV(), pbeParams.getIterations().intValue());
+            PBEParameterSpec defParams =
+                    new PBEParameterSpec(pbeParams.getIV(), pbeParams.getIterations().intValue());
             Cipher cipher = this.helper.createCipher(algorithm);
             cipher.init(3, keyFact.generateSecret(pbeSpec), defParams);
             byte[] out = cipher.wrap(key);
@@ -445,13 +468,21 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
         }
     }
 
-    protected byte[] cryptData(boolean forEncryption, AlgorithmIdentifier algId, char[] password, boolean wrongPKCS12Zero, byte[] data) throws IOException {
+    protected byte[] cryptData(
+            boolean forEncryption,
+            AlgorithmIdentifier algId,
+            char[] password,
+            boolean wrongPKCS12Zero,
+            byte[] data)
+            throws IOException {
         ASN1ObjectIdentifier algorithm = algId.getAlgorithm();
         int mode = forEncryption ? 1 : 2;
         if (algorithm.on(PKCSObjectIdentifiers.pkcs_12PbeIds)) {
             PKCS12PBEParams pbeParams = PKCS12PBEParams.getInstance(algId.getParameters());
             try {
-                PBEParameterSpec defParams = new PBEParameterSpec(pbeParams.getIV(), pbeParams.getIterations().intValue());
+                PBEParameterSpec defParams =
+                        new PBEParameterSpec(
+                                pbeParams.getIV(), pbeParams.getIterations().intValue());
                 PKCS12Key key = new PKCS12Key(password, wrongPKCS12Zero);
                 Cipher cipher = this.helper.createCipher(algorithm.getId());
                 cipher.init(mode, key, defParams);
@@ -470,21 +501,46 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
         throw new IOException("unknown PBE algorithm: " + algorithm);
     }
 
-    private Cipher createCipher(int mode, char[] password, AlgorithmIdentifier algId) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchProviderException {
+    private Cipher createCipher(int mode, char[] password, AlgorithmIdentifier algId)
+            throws NoSuchAlgorithmException,
+                    InvalidKeySpecException,
+                    NoSuchPaddingException,
+                    InvalidKeyException,
+                    InvalidAlgorithmParameterException,
+                    NoSuchProviderException {
         SecretKey key;
         PBES2Parameters alg = PBES2Parameters.getInstance(algId.getParameters());
         PBKDF2Params func = PBKDF2Params.getInstance(alg.getKeyDerivationFunc().getParameters());
         AlgorithmIdentifier encScheme = AlgorithmIdentifier.getInstance(alg.getEncryptionScheme());
-        SecretKeyFactory keyFact = this.selfHelper.createSecretKeyFactory(alg.getKeyDerivationFunc().getAlgorithm().getId());
+        SecretKeyFactory keyFact =
+                this.selfHelper.createSecretKeyFactory(
+                        alg.getKeyDerivationFunc().getAlgorithm().getId());
         if (func.isDefaultPrf()) {
-            key = keyFact.generateSecret(new PBEKeySpec(password, func.getSalt(), validateIterationCount(func.getIterationCount()), keySizeProvider.getKeySize(encScheme)));
+            key =
+                    keyFact.generateSecret(
+                            new PBEKeySpec(
+                                    password,
+                                    func.getSalt(),
+                                    validateIterationCount(func.getIterationCount()),
+                                    keySizeProvider.getKeySize(encScheme)));
         } else {
-            key = keyFact.generateSecret(new PBKDF2KeySpec(password, func.getSalt(), validateIterationCount(func.getIterationCount()), keySizeProvider.getKeySize(encScheme), func.getPrf()));
+            key =
+                    keyFact.generateSecret(
+                            new PBKDF2KeySpec(
+                                    password,
+                                    func.getSalt(),
+                                    validateIterationCount(func.getIterationCount()),
+                                    keySizeProvider.getKeySize(encScheme),
+                                    func.getPrf()));
         }
-        Cipher cipher = this.selfHelper.createCipher(alg.getEncryptionScheme().getAlgorithm().getId());
+        Cipher cipher =
+                this.selfHelper.createCipher(alg.getEncryptionScheme().getAlgorithm().getId());
         ASN1Encodable encParams = alg.getEncryptionScheme().getParameters();
         if (encParams instanceof ASN1OctetString) {
-            cipher.init(mode, key, new IvParameterSpec(ASN1OctetString.getInstance(encParams).getOctets()));
+            cipher.init(
+                    mode,
+                    key,
+                    new IvParameterSpec(ASN1OctetString.getInstance(encParams).getOctets()));
         }
         return cipher;
     }
@@ -553,16 +609,34 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                 try {
                     chain = chain2;
                     try {
-                        byte[] res = calculatePbeMac(this.macAlgorithm.getAlgorithm(), salt, this.itCount, password, false, data);
+                        byte[] res =
+                                calculatePbeMac(
+                                        this.macAlgorithm.getAlgorithm(),
+                                        salt,
+                                        this.itCount,
+                                        password,
+                                        false,
+                                        data);
                         byte[] dig = dInfo.getDigest();
                         if (!Arrays.constantTimeAreEqual(res, dig)) {
                             try {
                                 if (cArr.length > 0) {
-                                    throw new IOException("PKCS12 key store mac invalid - wrong password or corrupted file.");
+                                    throw new IOException(
+                                            "PKCS12 key store mac invalid - wrong password or"
+                                                + " corrupted file.");
                                 }
-                                byte[] res2 = calculatePbeMac(this.macAlgorithm.getAlgorithm(), salt, this.itCount, password, true, data);
+                                byte[] res2 =
+                                        calculatePbeMac(
+                                                this.macAlgorithm.getAlgorithm(),
+                                                salt,
+                                                this.itCount,
+                                                password,
+                                                true,
+                                                data);
                                 if (!Arrays.constantTimeAreEqual(res2, dig)) {
-                                    throw new IOException("PKCS12 key store mac invalid - wrong password or corrupted file.");
+                                    throw new IOException(
+                                            "PKCS12 key store mac invalid - wrong password or"
+                                                + " corrupted file.");
                                 }
                                 wrongPKCS12Zero4 = true;
                             } catch (IOException e) {
@@ -598,7 +672,8 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                 int i = 0;
                 while (i != c2.length) {
                     if (c2[i].getContentType().equals((ASN1Primitive) data)) {
-                        ASN1OctetString authSafeContent = ASN1OctetString.getInstance(c2[i].getContent());
+                        ASN1OctetString authSafeContent =
+                                ASN1OctetString.getInstance(c2[i].getContent());
                         ASN1Sequence seq3 = ASN1Sequence.getInstance(authSafeContent.getOctets());
                         int j = 0;
                         while (true) {
@@ -608,9 +683,15 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                                 ASN1OctetString authSafeContent2 = authSafeContent;
                                 ASN1Sequence seq4 = seq3;
                                 if (b2.getBagId().equals((ASN1Primitive) pkcs8ShroudedKeyBag)) {
-                                    EncryptedPrivateKeyInfo eIn = EncryptedPrivateKeyInfo.getInstance(b2.getBagValue());
+                                    EncryptedPrivateKeyInfo eIn =
+                                            EncryptedPrivateKeyInfo.getInstance(b2.getBagValue());
                                     head3 = head4;
-                                    PrivateKey privKey = unwrapKey(eIn.getEncryptionAlgorithm(), eIn.getEncryptedData(), cArr, wrongPKCS12Zero);
+                                    PrivateKey privKey =
+                                            unwrapKey(
+                                                    eIn.getEncryptionAlgorithm(),
+                                                    eIn.getEncryptedData(),
+                                                    cArr,
+                                                    wrongPKCS12Zero);
                                     String alias = null;
                                     ASN1OctetString localId = null;
                                     if (b2.getBagAttributes() != null) {
@@ -619,19 +700,24 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                                             EncryptedPrivateKeyInfo eIn2 = eIn;
                                             ASN1Sequence sq = (ASN1Sequence) e7.nextElement();
                                             String alias2 = alias;
-                                            ASN1ObjectIdentifier aOid = (ASN1ObjectIdentifier) sq.getObjectAt(0);
+                                            ASN1ObjectIdentifier aOid =
+                                                    (ASN1ObjectIdentifier) sq.getObjectAt(0);
                                             ASN1InputStream bIn4 = bIn3;
                                             ASN1Set attrSet = (ASN1Set) sq.getObjectAt(1);
                                             ASN1Primitive attr = null;
                                             if (attrSet.size() > 0) {
                                                 bag3 = bag4;
-                                                ASN1Primitive attr2 = (ASN1Primitive) attrSet.getObjectAt(0);
+                                                ASN1Primitive attr2 =
+                                                        (ASN1Primitive) attrSet.getObjectAt(0);
                                                 if (privKey instanceof PKCS12BagAttributeCarrier) {
-                                                    PKCS12BagAttributeCarrier bagAttr = (PKCS12BagAttributeCarrier) privKey;
-                                                    ASN1Encodable existing = bagAttr.getBagAttribute(aOid);
+                                                    PKCS12BagAttributeCarrier bagAttr =
+                                                            (PKCS12BagAttributeCarrier) privKey;
+                                                    ASN1Encodable existing =
+                                                            bagAttr.getBagAttribute(aOid);
                                                     if (existing == null) {
                                                         bagAttr.setBagAttribute(aOid, attr2);
-                                                    } else if (!existing.toASN1Primitive().equals(attr2)) {
+                                                    } else if (!existing.toASN1Primitive()
+                                                            .equals(attr2)) {
                                                         throw new IOException(str9);
                                                     }
                                                 }
@@ -639,11 +725,13 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                                             } else {
                                                 bag3 = bag4;
                                             }
-                                            if (aOid.equals((ASN1Primitive) pkcs_9_at_friendlyName)) {
+                                            if (aOid.equals(
+                                                    (ASN1Primitive) pkcs_9_at_friendlyName)) {
                                                 String alias3 = ((DERBMPString) attr).getString();
                                                 this.keys.put(alias3, privKey);
                                                 alias = alias3;
-                                            } else if (!aOid.equals((ASN1Primitive) pkcs_9_at_localKeyId)) {
+                                            } else if (!aOid.equals(
+                                                    (ASN1Primitive) pkcs_9_at_localKeyId)) {
                                                 alias = alias2;
                                             } else {
                                                 localId = (ASN1OctetString) attr;
@@ -712,7 +800,13 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                             int i2 = 0;
                             String str10 = str9;
                             str5 = str8;
-                            byte[] octets2 = cryptData(false, d2.getEncryptionAlgorithm(), password, wrongPKCS12Zero, d2.getContent().getOctets());
+                            byte[] octets2 =
+                                    cryptData(
+                                            false,
+                                            d2.getEncryptionAlgorithm(),
+                                            password,
+                                            wrongPKCS12Zero,
+                                            d2.getContent().getOctets());
                             ASN1Sequence seq5 = ASN1Sequence.getInstance(octets2);
                             int j2 = 0;
                             while (j2 != seq5.size()) {
@@ -724,23 +818,34 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                                     seq = seq5;
                                     wrongPKCS12Zero3 = wrongPKCS12Zero;
                                     str6 = str10;
-                                } else if (b3.getBagId().equals((ASN1Primitive) pkcs8ShroudedKeyBag)) {
-                                    EncryptedPrivateKeyInfo eIn3 = EncryptedPrivateKeyInfo.getInstance(b3.getBagValue());
-                                    PrivateKey privKey2 = unwrapKey(eIn3.getEncryptionAlgorithm(), eIn3.getEncryptedData(), cArr, wrongPKCS12Zero);
-                                    PKCS12BagAttributeCarrier bagAttr2 = (PKCS12BagAttributeCarrier) privKey2;
+                                } else if (b3.getBagId()
+                                        .equals((ASN1Primitive) pkcs8ShroudedKeyBag)) {
+                                    EncryptedPrivateKeyInfo eIn3 =
+                                            EncryptedPrivateKeyInfo.getInstance(b3.getBagValue());
+                                    PrivateKey privKey2 =
+                                            unwrapKey(
+                                                    eIn3.getEncryptionAlgorithm(),
+                                                    eIn3.getEncryptedData(),
+                                                    cArr,
+                                                    wrongPKCS12Zero);
+                                    PKCS12BagAttributeCarrier bagAttr2 =
+                                            (PKCS12BagAttributeCarrier) privKey2;
                                     ASN1OctetString localId2 = null;
                                     Enumeration e8 = b3.getBagAttributes().getObjects();
                                     String alias4 = null;
                                     while (e8.hasMoreElements()) {
                                         EncryptedData d3 = d2;
                                         ASN1Sequence sq2 = (ASN1Sequence) e8.nextElement();
-                                        ASN1ObjectIdentifier aOid2 = (ASN1ObjectIdentifier) sq2.getObjectAt(i2);
+                                        ASN1ObjectIdentifier aOid2 =
+                                                (ASN1ObjectIdentifier) sq2.getObjectAt(i2);
                                         byte[] octets3 = octets2;
                                         ASN1Set attrSet2 = (ASN1Set) sq2.getObjectAt(1);
                                         ASN1Encodable existing2 = null;
                                         if (attrSet2.size() > 0) {
-                                            ASN1Primitive attr3 = (ASN1Primitive) attrSet2.getObjectAt(0);
-                                            ASN1Encodable existing3 = bagAttr2.getBagAttribute(aOid2);
+                                            ASN1Primitive attr3 =
+                                                    (ASN1Primitive) attrSet2.getObjectAt(0);
+                                            ASN1Encodable existing3 =
+                                                    bagAttr2.getBagAttribute(aOid2);
                                             if (existing3 == null) {
                                                 seq2 = seq5;
                                                 str7 = str10;
@@ -761,7 +866,8 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                                             String alias5 = ((DERBMPString) existing2).getString();
                                             this.keys.put(alias5, privKey2);
                                             alias4 = alias5;
-                                        } else if (aOid2.equals((ASN1Primitive) pkcs_9_at_localKeyId)) {
+                                        } else if (aOid2.equals(
+                                                (ASN1Primitive) pkcs_9_at_localKeyId)) {
                                             localId2 = (ASN1OctetString) existing2;
                                         }
                                         str10 = str7;
@@ -788,30 +894,43 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                                     seq = seq5;
                                     str6 = str10;
                                     if (b3.getBagId().equals((ASN1Primitive) keyBag)) {
-                                        PrivateKeyInfo kInfo = PrivateKeyInfo.getInstance(b3.getBagValue());
-                                        PrivateKey privKey3 = BouncyCastleProvider.getPrivateKey(kInfo);
-                                        PKCS12BagAttributeCarrier bagAttr3 = (PKCS12BagAttributeCarrier) privKey3;
+                                        PrivateKeyInfo kInfo =
+                                                PrivateKeyInfo.getInstance(b3.getBagValue());
+                                        PrivateKey privKey3 =
+                                                BouncyCastleProvider.getPrivateKey(kInfo);
+                                        PKCS12BagAttributeCarrier bagAttr3 =
+                                                (PKCS12BagAttributeCarrier) privKey3;
                                         String alias7 = null;
                                         ASN1OctetString localId3 = null;
                                         Enumeration e9 = b3.getBagAttributes().getObjects();
                                         while (e9.hasMoreElements()) {
                                             PrivateKeyInfo kInfo2 = kInfo;
-                                            ASN1Sequence sq3 = ASN1Sequence.getInstance(e9.nextElement());
+                                            ASN1Sequence sq3 =
+                                                    ASN1Sequence.getInstance(e9.nextElement());
                                             boolean wrongPKCS12Zero5 = wrongPKCS12Zero;
-                                            ASN1ObjectIdentifier aOid3 = ASN1ObjectIdentifier.getInstance(sq3.getObjectAt(0));
-                                            ASN1Set attrSet3 = ASN1Set.getInstance(sq3.getObjectAt(1));
+                                            ASN1ObjectIdentifier aOid3 =
+                                                    ASN1ObjectIdentifier.getInstance(
+                                                            sq3.getObjectAt(0));
+                                            ASN1Set attrSet3 =
+                                                    ASN1Set.getInstance(sq3.getObjectAt(1));
                                             if (attrSet3.size() > 0) {
-                                                ASN1Primitive attr4 = (ASN1Primitive) attrSet3.getObjectAt(0);
-                                                ASN1Encodable existing4 = bagAttr3.getBagAttribute(aOid3);
+                                                ASN1Primitive attr4 =
+                                                        (ASN1Primitive) attrSet3.getObjectAt(0);
+                                                ASN1Encodable existing4 =
+                                                        bagAttr3.getBagAttribute(aOid3);
                                                 if (existing4 == null) {
                                                     bagAttr3.setBagAttribute(aOid3, attr4);
-                                                } else if (!existing4.toASN1Primitive().equals(attr4)) {
+                                                } else if (!existing4
+                                                        .toASN1Primitive()
+                                                        .equals(attr4)) {
                                                     throw new IOException(str6);
                                                 }
-                                                if (aOid3.equals((ASN1Primitive) pkcs_9_at_friendlyName)) {
+                                                if (aOid3.equals(
+                                                        (ASN1Primitive) pkcs_9_at_friendlyName)) {
                                                     alias7 = ((DERBMPString) attr4).getString();
                                                     this.keys.put(alias7, privKey3);
-                                                } else if (aOid3.equals((ASN1Primitive) pkcs_9_at_localKeyId)) {
+                                                } else if (aOid3.equals(
+                                                        (ASN1Primitive) pkcs_9_at_localKeyId)) {
                                                     localId3 = (ASN1OctetString) attr4;
                                                 }
                                             }
@@ -827,7 +946,8 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                                         }
                                     } else {
                                         wrongPKCS12Zero3 = wrongPKCS12Zero;
-                                        System.out.println("extra in encryptedData " + b3.getBagId());
+                                        System.out.println(
+                                                "extra in encryptedData " + b3.getBagId());
                                         System.out.println(ASN1Dump.dumpAsString(b3));
                                     }
                                 }
@@ -849,7 +969,8 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                             str5 = str8;
                             wrongPKCS12Zero2 = wrongPKCS12Zero;
                             System.out.println("extra " + c[head2].getContentType().getId());
-                            System.out.println("extra " + ASN1Dump.dumpAsString(c[head2].getContent()));
+                            System.out.println(
+                                    "extra " + ASN1Dump.dumpAsString(c[head2].getContent()));
                         }
                     }
                     i = head2 + 1;
@@ -877,7 +998,9 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                     throw new RuntimeException("Unsupported certificate type: " + cb.getCertId());
                 }
                 try {
-                    ByteArrayInputStream cIn = new ByteArrayInputStream(((ASN1OctetString) cb.getCertValue()).getOctets());
+                    ByteArrayInputStream cIn =
+                            new ByteArrayInputStream(
+                                    ((ASN1OctetString) cb.getCertValue()).getOctets());
                     Certificate generateCertificate = this.certFact.generateCertificate(cIn);
                     ASN1OctetString localId4 = null;
                     String alias8 = null;
@@ -885,7 +1008,8 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                         Enumeration e10 = b4.getBagAttributes().getObjects();
                         while (e10.hasMoreElements()) {
                             ASN1Sequence sq4 = ASN1Sequence.getInstance(e10.nextElement());
-                            ASN1ObjectIdentifier oid = ASN1ObjectIdentifier.getInstance(sq4.getObjectAt(0));
+                            ASN1ObjectIdentifier oid =
+                                    ASN1ObjectIdentifier.getInstance(sq4.getObjectAt(0));
                             ASN1Set attrSet4 = ASN1Set.getInstance(sq4.getObjectAt(1));
                             if (attrSet4.size() <= 0) {
                                 b = b4;
@@ -894,7 +1018,8 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                                 if (!(generateCertificate instanceof PKCS12BagAttributeCarrier)) {
                                     b = b4;
                                 } else {
-                                    PKCS12BagAttributeCarrier bagAttr4 = (PKCS12BagAttributeCarrier) generateCertificate;
+                                    PKCS12BagAttributeCarrier bagAttr4 =
+                                            (PKCS12BagAttributeCarrier) generateCertificate;
                                     ASN1Encodable existing5 = bagAttr4.getBagAttribute(oid);
                                     if (existing5 != null) {
                                         b = b4;
@@ -915,12 +1040,19 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                             b4 = b;
                         }
                     }
-                    this.chainCerts.put(new CertId(generateCertificate.getPublicKey()), generateCertificate);
+                    this.chainCerts.put(
+                            new CertId(generateCertificate.getPublicKey()), generateCertificate);
                     if (unmarkedKey) {
                         if (!this.keyCerts.isEmpty()) {
                             str3 = str2;
                         } else {
-                            String name4 = new String(Hex.encode(createSubjectKeyId(generateCertificate.getPublicKey()).getKeyIdentifier()));
+                            String name4 =
+                                    new String(
+                                            Hex.encode(
+                                                    createSubjectKeyId(
+                                                                    generateCertificate
+                                                                            .getPublicKey())
+                                                            .getKeyIdentifier()));
                             this.keyCerts.put(name4, generateCertificate);
                             str3 = str2;
                             this.keys.put(name4, this.keys.remove(str3));
@@ -928,7 +1060,9 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
                     } else {
                         str3 = str2;
                         if (localId4 != null) {
-                            this.keyCerts.put(new String(Hex.encode(localId4.getOctets())), generateCertificate);
+                            this.keyCerts.put(
+                                    new String(Hex.encode(localId4.getOctets())),
+                                    generateCertificate);
                         }
                         if (alias8 != null) {
                             this.certs.put(alias8, generateCertificate);
@@ -952,25 +1086,33 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
         }
         BigInteger maxValue = Properties.asBigInteger(PKCS12_MAX_IT_COUNT_PROPERTY);
         if (maxValue != null && maxValue.intValue() < count) {
-            throw new IllegalStateException("iteration count " + count + " greater than " + maxValue.intValue());
+            throw new IllegalStateException(
+                    "iteration count " + count + " greater than " + maxValue.intValue());
         }
         return count;
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineStore(KeyStore.LoadStoreParameter param) throws IOException, NoSuchAlgorithmException, CertificateException {
+    public void engineStore(KeyStore.LoadStoreParameter param)
+            throws IOException, NoSuchAlgorithmException, CertificateException {
         PKCS12StoreParameter bcParam;
         char[] password;
         if (param == null) {
             throw new IllegalArgumentException("'param' arg cannot be null");
         }
-        if (!(param instanceof PKCS12StoreParameter) && !(param instanceof JDKPKCS12StoreParameter)) {
-            throw new IllegalArgumentException("No support for 'param' of type " + param.getClass().getName());
+        if (!(param instanceof PKCS12StoreParameter)
+                && !(param instanceof JDKPKCS12StoreParameter)) {
+            throw new IllegalArgumentException(
+                    "No support for 'param' of type " + param.getClass().getName());
         }
         if (param instanceof PKCS12StoreParameter) {
             bcParam = (PKCS12StoreParameter) param;
         } else {
-            bcParam = new PKCS12StoreParameter(((JDKPKCS12StoreParameter) param).getOutputStream(), param.getProtectionParameter(), ((JDKPKCS12StoreParameter) param).isUseDEREncoding());
+            bcParam =
+                    new PKCS12StoreParameter(
+                            ((JDKPKCS12StoreParameter) param).getOutputStream(),
+                            param.getProtectionParameter(),
+                            ((JDKPKCS12StoreParameter) param).isUseDEREncoding());
         }
         KeyStore.ProtectionParameter protParam = param.getProtectionParameter();
         if (protParam == null) {
@@ -978,7 +1120,9 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
         } else if (protParam instanceof KeyStore.PasswordProtection) {
             password = ((KeyStore.PasswordProtection) protParam).getPassword();
         } else {
-            throw new IllegalArgumentException("No support for protection parameter of type " + protParam.getClass().getName());
+            throw new IllegalArgumentException(
+                    "No support for protection parameter of type "
+                            + protParam.getClass().getName());
         }
         doStore(bcParam.getOutputStream(), password, bcParam.isForDEREncoding());
     }
@@ -1008,16 +1152,21 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void doStore(java.io.OutputStream r32, char[] r33, boolean r34) throws java.io.IOException {
+    private void doStore(java.io.OutputStream r32, char[] r33, boolean r34)
+            throws java.io.IOException {
         /*
             Method dump skipped, instructions count: 1318
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jcajce.provider.keystore.pkcs12.PKCS12KeyStoreSpi.doStore(java.io.OutputStream, char[], boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.org.bouncycastle.jcajce.provider.keystore.pkcs12.PKCS12KeyStoreSpi.doStore(java.io.OutputStream,"
+                    + " char[], boolean):void");
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private SafeBag createSafeBag(String certId, Certificate certificate) throws CertificateEncodingException {
+    private SafeBag createSafeBag(String certId, Certificate certificate)
+            throws CertificateEncodingException {
         CertBag cBag = new CertBag(x509Certificate, new DEROctetString(certificate.getEncoded()));
         ASN1EncodableVector fName = new ASN1EncodableVector();
         boolean cAttrSet = false;
@@ -1067,7 +1216,14 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
         return usedSet;
     }
 
-    private byte[] calculatePbeMac(ASN1ObjectIdentifier oid, byte[] salt, int itCount, char[] password, boolean wrongPkcs12Zero, byte[] data) throws Exception {
+    private byte[] calculatePbeMac(
+            ASN1ObjectIdentifier oid,
+            byte[] salt,
+            int itCount,
+            char[] password,
+            boolean wrongPkcs12Zero,
+            byte[] data)
+            throws Exception {
         PBEParameterSpec defParams = new PBEParameterSpec(salt, itCount);
         Mac mac = this.selfHelper.createMac(oid.getId());
         mac.init(new PKCS12Key(password, wrongPkcs12Zero), defParams);
@@ -1077,7 +1233,10 @@ public class PKCS12KeyStoreSpi extends KeyStoreSpi implements PKCSObjectIdentifi
 
     public static class BCPKCS12KeyStore extends PKCS12KeyStoreSpi {
         public BCPKCS12KeyStore() {
-            super(new DefaultJcaJceHelper(), pbeWithSHAAnd3_KeyTripleDES_CBC, pbeWithSHAAnd40BitRC2_CBC);
+            super(
+                    new DefaultJcaJceHelper(),
+                    pbeWithSHAAnd3_KeyTripleDES_CBC,
+                    pbeWithSHAAnd40BitRC2_CBC);
         }
     }
 

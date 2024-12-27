@@ -7,8 +7,6 @@ import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.telephony.ims.RcsClientConfiguration;
-import android.telephony.ims.aidl.IImsConfigCallback;
-import android.telephony.ims.aidl.IRcsConfigCallback;
 
 /* loaded from: classes4.dex */
 public interface IImsConfig extends IInterface {
@@ -48,7 +46,8 @@ public interface IImsConfig extends IInterface {
 
     int setConfigString(int i, String str) throws RemoteException;
 
-    void setRcsClientConfiguration(RcsClientConfiguration rcsClientConfiguration) throws RemoteException;
+    void setRcsClientConfiguration(RcsClientConfiguration rcsClientConfiguration)
+            throws RemoteException;
 
     void triggerRcsReconfiguration() throws RemoteException;
 
@@ -56,12 +55,10 @@ public interface IImsConfig extends IInterface {
 
     public static class Default implements IImsConfig {
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void addImsConfigCallback(IImsConfigCallback c) throws RemoteException {
-        }
+        public void addImsConfigCallback(IImsConfigCallback c) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void removeImsConfigCallback(IImsConfigCallback c) throws RemoteException {
-        }
+        public void removeImsConfigCallback(IImsConfigCallback c) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
         public int getConfigInt(int item) throws RemoteException {
@@ -84,44 +81,37 @@ public interface IImsConfig extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void updateImsCarrierConfigs(PersistableBundle bundle) throws RemoteException {
-        }
+        public void updateImsCarrierConfigs(PersistableBundle bundle) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void notifyRcsAutoConfigurationReceived(byte[] config, boolean isCompressed) throws RemoteException {
-        }
+        public void notifyRcsAutoConfigurationReceived(byte[] config, boolean isCompressed)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void notifyRcsAutoConfigurationRemoved() throws RemoteException {
-        }
+        public void notifyRcsAutoConfigurationRemoved() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void notifyRcsAutoConfigurationErrorReceived(int errorCode, String errorString) throws RemoteException {
-        }
+        public void notifyRcsAutoConfigurationErrorReceived(int errorCode, String errorString)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void notifyRcsPreConfigurationReceived(byte[] configXml) throws RemoteException {
-        }
+        public void notifyRcsPreConfigurationReceived(byte[] configXml) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void notifyProvisionedIntValueChanged(int item, int value) throws RemoteException {
-        }
+        public void notifyProvisionedIntValueChanged(int item, int value) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void notifyProvisionedStringValueChanged(int item, String value) throws RemoteException {
-        }
+        public void notifyProvisionedStringValueChanged(int item, String value)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void addRcsConfigCallback(IRcsConfigCallback c) throws RemoteException {
-        }
+        public void addRcsConfigCallback(IRcsConfigCallback c) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void removeRcsConfigCallback(IRcsConfigCallback c) throws RemoteException {
-        }
+        public void removeRcsConfigCallback(IRcsConfigCallback c) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void triggerRcsReconfiguration() throws RemoteException {
-        }
+        public void triggerRcsReconfiguration() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
         public String getRcsClientConfiguration(int item) throws RemoteException {
@@ -129,16 +119,13 @@ public interface IImsConfig extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void setRcsClientConfiguration(RcsClientConfiguration rcc) throws RemoteException {
-        }
+        public void setRcsClientConfiguration(RcsClientConfiguration rcc) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void notifyIntImsConfigChanged(int item, int value) throws RemoteException {
-        }
+        public void notifyIntImsConfigChanged(int item, int value) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsConfig
-        public void notifyStringImsConfigChanged(int item, String value) throws RemoteException {
-        }
+        public void notifyStringImsConfigChanged(int item, String value) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -146,7 +133,7 @@ public interface IImsConfig extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsConfig {
+    public abstract static class Stub extends Binder implements IImsConfig {
         static final int TRANSACTION_addImsConfigCallback = 1;
         static final int TRANSACTION_addRcsConfigCallback = 14;
         static final int TRANSACTION_getConfigInt = 3;
@@ -241,7 +228,8 @@ public interface IImsConfig extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsConfig.DESCRIPTOR);
             }
@@ -251,13 +239,15 @@ public interface IImsConfig extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IImsConfigCallback _arg0 = IImsConfigCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsConfigCallback _arg0 =
+                            IImsConfigCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addImsConfigCallback(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IImsConfigCallback _arg02 = IImsConfigCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsConfigCallback _arg02 =
+                            IImsConfigCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeImsConfigCallback(_arg02);
                     reply.writeNoException();
@@ -293,7 +283,8 @@ public interface IImsConfig extends IInterface {
                     reply.writeInt(_result4);
                     return true;
                 case 7:
-                    PersistableBundle _arg07 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg07 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     updateImsCarrierConfigs(_arg07);
                     reply.writeNoException();
@@ -337,13 +328,15 @@ public interface IImsConfig extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 14:
-                    IRcsConfigCallback _arg013 = IRcsConfigCallback.Stub.asInterface(data.readStrongBinder());
+                    IRcsConfigCallback _arg013 =
+                            IRcsConfigCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addRcsConfigCallback(_arg013);
                     reply.writeNoException();
                     return true;
                 case 15:
-                    IRcsConfigCallback _arg014 = IRcsConfigCallback.Stub.asInterface(data.readStrongBinder());
+                    IRcsConfigCallback _arg014 =
+                            IRcsConfigCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeRcsConfigCallback(_arg014);
                     reply.writeNoException();
@@ -360,7 +353,9 @@ public interface IImsConfig extends IInterface {
                     reply.writeString(_result5);
                     return true;
                 case 18:
-                    RcsClientConfiguration _arg016 = (RcsClientConfiguration) data.readTypedObject(RcsClientConfiguration.CREATOR);
+                    RcsClientConfiguration _arg016 =
+                            (RcsClientConfiguration)
+                                    data.readTypedObject(RcsClientConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     setRcsClientConfiguration(_arg016);
                     reply.writeNoException();
@@ -516,7 +511,8 @@ public interface IImsConfig extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsConfig
-            public void notifyRcsAutoConfigurationReceived(byte[] config, boolean isCompressed) throws RemoteException {
+            public void notifyRcsAutoConfigurationReceived(byte[] config, boolean isCompressed)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -546,7 +542,8 @@ public interface IImsConfig extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsConfig
-            public void notifyRcsAutoConfigurationErrorReceived(int errorCode, String errorString) throws RemoteException {
+            public void notifyRcsAutoConfigurationErrorReceived(int errorCode, String errorString)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -577,7 +574,8 @@ public interface IImsConfig extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsConfig
-            public void notifyProvisionedIntValueChanged(int item, int value) throws RemoteException {
+            public void notifyProvisionedIntValueChanged(int item, int value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -593,7 +591,8 @@ public interface IImsConfig extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsConfig
-            public void notifyProvisionedStringValueChanged(int item, String value) throws RemoteException {
+            public void notifyProvisionedStringValueChanged(int item, String value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -670,7 +669,8 @@ public interface IImsConfig extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsConfig
-            public void setRcsClientConfiguration(RcsClientConfiguration rcc) throws RemoteException {
+            public void setRcsClientConfiguration(RcsClientConfiguration rcc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -701,7 +701,8 @@ public interface IImsConfig extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsConfig
-            public void notifyStringImsConfigChanged(int item, String value) throws RemoteException {
+            public void notifyStringImsConfigChanged(int item, String value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

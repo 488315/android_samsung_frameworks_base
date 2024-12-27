@@ -2,11 +2,12 @@ package com.android.server.pm.pu;
 
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import com.android.server.art.model.DexoptParams;
 import com.android.server.art.model.DexoptResult;
 import com.android.server.pm.DexOptHelper;
 import com.android.server.pm.PackageManagerLocal;
-import com.android.server.pm.pu.ProfileUtilizationService;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -16,7 +17,8 @@ import java.util.concurrent.Executors;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class DexoptTrigger {
-    public static final int DEXOPT_CONCURRENCY = SystemProperties.getInt("pm.dexopt.boot-after-mainline-update.concurrency", 1);
+    public static final int DEXOPT_CONCURRENCY =
+            SystemProperties.getInt("pm.dexopt.boot-after-mainline-update.concurrency", 1);
     public boolean mDexopting;
     public final ExecutorService mExecutor;
     public final Set mRunningApps;
@@ -30,9 +32,20 @@ public final class DexoptTrigger {
         this.mWatcher = deviceStatusWatcher;
     }
 
-    public static int performDexopt(PackageManagerLocal.FilteredSnapshot filteredSnapshot, ProfileUtilizationService.App app) {
+    public static int performDexopt(
+            PackageManagerLocal.FilteredSnapshot filteredSnapshot,
+            ProfileUtilizationService.App app) {
         try {
-            DexoptResult dexoptPackage = DexOptHelper.getArtManagerLocal().dexoptPackage(filteredSnapshot, app.packageName, new DexoptParams.Builder("profile-utilization").setCompilerFilter("speed-profile").setPriorityClass(60).build(), app.mCancellationSignal);
+            DexoptResult dexoptPackage =
+                    DexOptHelper.getArtManagerLocal()
+                            .dexoptPackage(
+                                    filteredSnapshot,
+                                    app.packageName,
+                                    new DexoptParams.Builder("profile-utilization")
+                                            .setCompilerFilter("speed-profile")
+                                            .setPriorityClass(60)
+                                            .build(),
+                                    app.mCancellationSignal);
             app.mResult = dexoptPackage;
             return dexoptPackage.getFinalStatus();
         } catch (IllegalArgumentException | IllegalStateException e) {
@@ -70,10 +83,12 @@ public final class DexoptTrigger {
                 while (it.hasNext()) {
                     ProfileUtilizationService.App app = (ProfileUtilizationService.App) it.next();
                     ProfileUtilizationService.App.State state = app.mState;
-                    ProfileUtilizationService.App.State state2 = ProfileUtilizationService.App.State.OPTIMIZING;
+                    ProfileUtilizationService.App.State state2 =
+                            ProfileUtilizationService.App.State.OPTIMIZING;
                     if (state != state2) {
                         app.mState = state2;
-                        this.mExecutor.execute(new DexoptTrigger$$ExternalSyntheticLambda0(this, app));
+                        this.mExecutor.execute(
+                                new DexoptTrigger$$ExternalSyntheticLambda0(this, app));
                     }
                 }
             } catch (Throwable th) {

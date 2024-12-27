@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteGlobal;
 import android.os.FileUtils;
 import android.util.Log;
+
 import java.io.File;
 import java.util.Objects;
 
@@ -26,25 +27,48 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
 
     public abstract void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2);
 
-    public SemSQLiteSecureOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public SemSQLiteSecureOpenHelper(
+            Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         this(context, name, factory, version, (DatabaseErrorHandler) null);
     }
 
-    public SemSQLiteSecureOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
+    public SemSQLiteSecureOpenHelper(
+            Context context,
+            String name,
+            SQLiteDatabase.CursorFactory factory,
+            int version,
+            DatabaseErrorHandler errorHandler) {
         this(context, name, factory, version, 0, errorHandler);
     }
 
-    public SemSQLiteSecureOpenHelper(Context context, String name, int version, SQLiteDatabase.OpenParams openParams) {
+    public SemSQLiteSecureOpenHelper(
+            Context context, String name, int version, SQLiteDatabase.OpenParams openParams) {
         this(context, name, version, 0, openParams.toBuilder());
     }
 
-    public SemSQLiteSecureOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, int minimumSupportedVersion, DatabaseErrorHandler errorHandler) {
-        this(context, name, version, minimumSupportedVersion, new SQLiteDatabase.OpenParams.Builder());
+    public SemSQLiteSecureOpenHelper(
+            Context context,
+            String name,
+            SQLiteDatabase.CursorFactory factory,
+            int version,
+            int minimumSupportedVersion,
+            DatabaseErrorHandler errorHandler) {
+        this(
+                context,
+                name,
+                version,
+                minimumSupportedVersion,
+                new SQLiteDatabase.OpenParams.Builder());
         this.mOpenParamsBuilder.setCursorFactory(factory);
         this.mOpenParamsBuilder.setErrorHandler(errorHandler);
     }
 
-    private SemSQLiteSecureOpenHelper(Context context, String name, int version, int minimumSupportedVersion, SQLiteDatabase.OpenParams.Builder openParamsBuilder) {
+    private SemSQLiteSecureOpenHelper(
+            Context context,
+            String name,
+            int version,
+            int minimumSupportedVersion,
+            SQLiteDatabase.OpenParams.Builder openParamsBuilder) {
         Objects.requireNonNull(openParamsBuilder);
         if (version < 1) {
             throw new IllegalArgumentException("Version must be >= 1, was " + version);
@@ -63,7 +87,9 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
     public void setWriteAheadLoggingEnabled(boolean enabled) {
         synchronized (this) {
             if (this.mOpenParamsBuilder.isWriteAheadLoggingEnabled() != enabled) {
-                if (this.mDatabase != null && this.mDatabase.isOpen() && !this.mDatabase.isReadOnly()) {
+                if (this.mDatabase != null
+                        && this.mDatabase.isOpen()
+                        && !this.mDatabase.isReadOnly()) {
                     if (enabled) {
                         this.mDatabase.enableWriteAheadLogging();
                     } else {
@@ -85,7 +111,8 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
     public void setLookasideConfig(int slotSize, int slotCount) {
         synchronized (this) {
             if (this.mDatabase != null && this.mDatabase.isOpen()) {
-                throw new IllegalStateException("Lookaside memory config cannot be changed after opening the database");
+                throw new IllegalStateException(
+                        "Lookaside memory config cannot be changed after opening the database");
             }
             this.mOpenParamsBuilder.setLookasideConfig(slotSize, slotCount);
         }
@@ -96,7 +123,8 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
         Objects.requireNonNull(openParams);
         synchronized (this) {
             if (this.mDatabase != null && this.mDatabase.isOpen()) {
-                throw new IllegalStateException("OpenParams cannot be set after opening the database");
+                throw new IllegalStateException(
+                        "OpenParams cannot be set after opening the database");
             }
             setOpenParamsBuilder(new SQLiteDatabase.OpenParams.Builder(openParams));
         }
@@ -110,7 +138,8 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
     public void setIdleConnectionShrinkTimeout(long idleConnectionTimeoutMs) {
         synchronized (this) {
             if (this.mDatabase != null && this.mDatabase.isOpen()) {
-                throw new IllegalStateException("Shrink timeout setting cannot be changed after opening the database");
+                throw new IllegalStateException(
+                        "Shrink timeout setting cannot be changed after opening the database");
             }
             this.mOpenParamsBuilder.semSetIdleConnectionShrinkTimeout(idleConnectionTimeoutMs);
         }
@@ -119,7 +148,8 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
     public void setSeparateCacheModeEnabled(boolean enabled) {
         synchronized (this) {
             if (this.mDatabase != null && this.mDatabase.isOpen()) {
-                throw new IllegalStateException("Separate cache config cannot be changed after opening the database");
+                throw new IllegalStateException(
+                        "Separate cache config cannot be changed after opening the database");
             }
             this.mOpenParamsBuilder.semSetSeparateCacheModeEnabled(enabled);
         }
@@ -128,7 +158,9 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
     @Deprecated
     public void setCacheSize(int cacheSizeByte) {
         if (cacheSizeByte < 0 || cacheSizeByte > 8388608) {
-            throw new IllegalArgumentException("The cache size should not be negative value. Also, it should be less than soft heap size (8M)");
+            throw new IllegalArgumentException(
+                    "The cache size should not be negative value. Also, it should be less than soft"
+                        + " heap size (8M)");
         }
         synchronized (this) {
             if (this.mDatabase != null && this.mDatabase.isOpen()) {
@@ -141,7 +173,8 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
     public void setUserDataRecoveryEnabled(boolean enabled) {
         synchronized (this) {
             if (this.mDatabase != null && this.mDatabase.isOpen()) {
-                throw new IllegalStateException("Database Recovery config cannot be changed after opening the database");
+                throw new IllegalStateException(
+                        "Database Recovery config cannot be changed after opening the database");
             }
             this.mOpenParamsBuilder.setUserDataRecoveryEnabled(enabled);
         }
@@ -189,7 +222,9 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
                 File filePath = this.mContext.getDatabasePath(this.mName);
                 SQLiteDatabase.OpenParams params = this.mOpenParamsBuilder.build();
                 try {
-                    db = SQLiteDatabase.openSecureDatabase(filePath.getPath(), params, password, this.mContext);
+                    db =
+                            SQLiteDatabase.openSecureDatabase(
+                                    filePath.getPath(), params, password, this.mContext);
                     setFilePermissionsForDb(filePath.getPath());
                 } catch (SQLException ex) {
                     throw ex;
@@ -199,7 +234,13 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
             int version = db.getVersion();
             if (version != this.mNewVersion) {
                 if (db.isReadOnly()) {
-                    throw new SQLiteException("Can't upgrade read-only database from version " + db.getVersion() + " to " + this.mNewVersion + ": " + this.mName);
+                    throw new SQLiteException(
+                            "Can't upgrade read-only database from version "
+                                    + db.getVersion()
+                                    + " to "
+                                    + this.mNewVersion
+                                    + ": "
+                                    + this.mName);
                 }
                 if (version > 0 && version < this.mMinimumSupportedVersion) {
                     File databaseFile = new File(db.getPath());
@@ -209,17 +250,28 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
                         this.mIsInitializing = false;
                         return getDatabaseLocked(writable, password);
                     }
-                    throw new IllegalStateException("Unable to delete obsolete database " + this.mName + " with version " + version);
+                    throw new IllegalStateException(
+                            "Unable to delete obsolete database "
+                                    + this.mName
+                                    + " with version "
+                                    + version);
                 }
                 db.beginTransaction();
                 try {
                     if (version == 0) {
                         onCreate(db);
                     } else if (version > this.mNewVersion) {
-                        Log.i(TAG, "DB version downgrading from " + version + " to " + this.mNewVersion);
+                        Log.i(
+                                TAG,
+                                "DB version downgrading from "
+                                        + version
+                                        + " to "
+                                        + this.mNewVersion);
                         onDowngrade(db, version, this.mNewVersion);
                     } else {
-                        Log.i(TAG, "DB version upgrading from " + version + " to " + this.mNewVersion);
+                        Log.i(
+                                TAG,
+                                "DB version upgrading from " + version + " to " + this.mNewVersion);
                         onUpgrade(db, version, this.mNewVersion);
                     }
                     db.setVersion(this.mNewVersion);
@@ -263,24 +315,24 @@ public abstract class SemSQLiteSecureOpenHelper implements AutoCloseable {
         }
     }
 
-    public void onConfigure(SQLiteDatabase db) {
-    }
+    public void onConfigure(SQLiteDatabase db) {}
 
-    public void onBeforeDelete(SQLiteDatabase db) {
-    }
+    public void onBeforeDelete(SQLiteDatabase db) {}
 
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        throw new SQLiteException("Can't downgrade database from version " + oldVersion + " to " + newVersion);
+        throw new SQLiteException(
+                "Can't downgrade database from version " + oldVersion + " to " + newVersion);
     }
 
-    public void onOpen(SQLiteDatabase db) {
-    }
+    public void onOpen(SQLiteDatabase db) {}
 
-    public static final void convertToPlainDatabase(File sourceDbFile, File destDbFile, byte[] password) throws Exception {
+    public static final void convertToPlainDatabase(
+            File sourceDbFile, File destDbFile, byte[] password) throws Exception {
         SQLiteDatabase.convertToPlainDatabase(sourceDbFile, destDbFile, password);
     }
 
-    public static final void convertToSecureDatabase(File sourceDbFile, File destDbFile, byte[] password) throws Exception {
+    public static final void convertToSecureDatabase(
+            File sourceDbFile, File destDbFile, byte[] password) throws Exception {
         SQLiteDatabase.convertToSecureDatabase(sourceDbFile, destDbFile, password);
     }
 

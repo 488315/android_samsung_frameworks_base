@@ -1,6 +1,5 @@
 package android.media;
 
-import android.media.AudioMetadata;
 import java.util.Set;
 
 /* loaded from: classes2.dex */

@@ -4,14 +4,18 @@ import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.params.HighSpeedVideoConfiguration;
 import android.hardware.camera2.utils.TypeReference;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
-public class MarshalQueryableHighSpeedVideoConfiguration implements MarshalQueryable<HighSpeedVideoConfiguration> {
+public class MarshalQueryableHighSpeedVideoConfiguration
+        implements MarshalQueryable<HighSpeedVideoConfiguration> {
     private static final int SIZE = 20;
 
-    private class MarshalerHighSpeedVideoConfiguration extends Marshaler<HighSpeedVideoConfiguration> {
-        protected MarshalerHighSpeedVideoConfiguration(TypeReference<HighSpeedVideoConfiguration> typeReference, int nativeType) {
+    private class MarshalerHighSpeedVideoConfiguration
+            extends Marshaler<HighSpeedVideoConfiguration> {
+        protected MarshalerHighSpeedVideoConfiguration(
+                TypeReference<HighSpeedVideoConfiguration> typeReference, int nativeType) {
             super(MarshalQueryableHighSpeedVideoConfiguration.this, typeReference, nativeType);
         }
 
@@ -42,12 +46,14 @@ public class MarshalQueryableHighSpeedVideoConfiguration implements MarshalQuery
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public Marshaler<HighSpeedVideoConfiguration> createMarshaler(TypeReference<HighSpeedVideoConfiguration> managedType, int nativeType) {
+    public Marshaler<HighSpeedVideoConfiguration> createMarshaler(
+            TypeReference<HighSpeedVideoConfiguration> managedType, int nativeType) {
         return new MarshalerHighSpeedVideoConfiguration(managedType, nativeType);
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public boolean isTypeMappingSupported(TypeReference<HighSpeedVideoConfiguration> managedType, int nativeType) {
+    public boolean isTypeMappingSupported(
+            TypeReference<HighSpeedVideoConfiguration> managedType, int nativeType) {
         return nativeType == 1 && managedType.getType().equals(HighSpeedVideoConfiguration.class);
     }
 }

@@ -24,9 +24,13 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.Size;
+
 import com.android.internal.util.Preconditions;
-import com.samsung.android.app.SemDualAppManager;
+
 import dalvik.system.VMRuntime;
+
+import com.samsung.android.app.SemDualAppManager;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -38,18 +42,22 @@ import java.util.Objects;
 public final class DocumentsContract {
 
     @SystemApi
-    public static final String ACTION_DOCUMENT_ROOT_SETTINGS = "android.provider.action.DOCUMENT_ROOT_SETTINGS";
-    public static final String ACTION_DOCUMENT_SETTINGS = "android.provider.action.DOCUMENT_SETTINGS";
+    public static final String ACTION_DOCUMENT_ROOT_SETTINGS =
+            "android.provider.action.DOCUMENT_ROOT_SETTINGS";
+
+    public static final String ACTION_DOCUMENT_SETTINGS =
+            "android.provider.action.DOCUMENT_SETTINGS";
 
     @SystemApi
     public static final String ACTION_MANAGE_DOCUMENT = "android.provider.action.MANAGE_DOCUMENT";
 
-    @SystemApi
-    public static final String DOWNLOADS_PROVIDER_AUTHORITY = "downloads";
+    @SystemApi public static final String DOWNLOADS_PROVIDER_AUTHORITY = "downloads";
     public static final String EXTERNAL_STORAGE_PRIMARY_EMULATED_ROOT_ID = "primary";
 
     @SystemApi
-    public static final String EXTERNAL_STORAGE_PROVIDER_AUTHORITY = "com.android.externalstorage.documents";
+    public static final String EXTERNAL_STORAGE_PROVIDER_AUTHORITY =
+            "com.android.externalstorage.documents";
+
     public static final String EXTRA_ERROR = "error";
     public static final String EXTRA_EXCLUDE_SELF = "android.provider.extra.EXCLUDE_SELF";
     public static final String EXTRA_INFO = "info";
@@ -58,14 +66,14 @@ public final class DocumentsContract {
     public static final String EXTRA_OPTIONS = "options";
     public static final String EXTRA_ORIENTATION = "android.provider.extra.ORIENTATION";
 
-    @Deprecated
-    public static final String EXTRA_PACKAGE_NAME = "android.intent.extra.PACKAGE_NAME";
+    @Deprecated public static final String EXTRA_PACKAGE_NAME = "android.intent.extra.PACKAGE_NAME";
     public static final String EXTRA_PARENT_URI = "parentUri";
     public static final String EXTRA_PROMPT = "android.provider.extra.PROMPT";
     public static final String EXTRA_RESULT = "result";
 
     @SystemApi
     public static final String EXTRA_SHOW_ADVANCED = "android.provider.extra.SHOW_ADVANCED";
+
     public static final String EXTRA_TARGET_URI = "android.content.extra.TARGET_URI";
     public static final String EXTRA_URI = "uri";
     public static final String EXTRA_URI_PERMISSIONS = "uriPermissions";
@@ -97,12 +105,12 @@ public final class DocumentsContract {
     public static final String QUERY_ARG_DISPLAY_NAME = "android:query-arg-display-name";
     public static final String QUERY_ARG_EXCLUDE_MEDIA = "android:query-arg-exclude-media";
     public static final String QUERY_ARG_FILE_SIZE_OVER = "android:query-arg-file-size-over";
-    public static final String QUERY_ARG_LAST_MODIFIED_AFTER = "android:query-arg-last-modified-after";
+    public static final String QUERY_ARG_LAST_MODIFIED_AFTER =
+            "android:query-arg-last-modified-after";
     public static final String QUERY_ARG_MIME_TYPES = "android:query-arg-mime-types";
     private static final String TAG = "DocumentsContract";
 
-    private DocumentsContract() {
-    }
+    private DocumentsContract() {}
 
     public static final class Document {
         public static final String COLUMN_DISPLAY_NAME = "_display_name";
@@ -131,8 +139,7 @@ public final class DocumentsContract {
         public static final int FLAG_WEB_LINKABLE = 4096;
         public static final String MIME_TYPE_DIR = "vnd.android.document/directory";
 
-        private Document() {
-        }
+        private Document() {}
     }
 
     public static final class Root {
@@ -147,19 +154,15 @@ public final class DocumentsContract {
         public static final String COLUMN_SUMMARY = "summary";
         public static final String COLUMN_TITLE = "title";
 
-        @SystemApi
-        public static final int FLAG_ADVANCED = 65536;
+        @SystemApi public static final int FLAG_ADVANCED = 65536;
         public static final int FLAG_EMPTY = 64;
 
-        @SystemApi
-        public static final int FLAG_HAS_SETTINGS = 131072;
+        @SystemApi public static final int FLAG_HAS_SETTINGS = 131072;
         public static final int FLAG_LOCAL_ONLY = 2;
 
-        @SystemApi
-        public static final int FLAG_REMOVABLE_SD = 262144;
+        @SystemApi public static final int FLAG_REMOVABLE_SD = 262144;
 
-        @SystemApi
-        public static final int FLAG_REMOVABLE_USB = 524288;
+        @SystemApi public static final int FLAG_REMOVABLE_USB = 524288;
         public static final int FLAG_SUPPORTS_CREATE = 1;
         public static final int FLAG_SUPPORTS_EJECT = 32;
         public static final int FLAG_SUPPORTS_IS_CHILD = 16;
@@ -167,24 +170,43 @@ public final class DocumentsContract {
         public static final int FLAG_SUPPORTS_SEARCH = 8;
         public static final String MIME_TYPE_ITEM = "vnd.android.document/root";
 
-        private Root() {
-        }
+        private Root() {}
     }
 
     public static Uri buildRootsUri(String authority) {
-        return new Uri.Builder().scheme("content").authority(authority).appendPath(PATH_ROOT).build();
+        return new Uri.Builder()
+                .scheme("content")
+                .authority(authority)
+                .appendPath(PATH_ROOT)
+                .build();
     }
 
     public static Uri buildRootUri(String authority, String rootId) {
-        return new Uri.Builder().scheme("content").authority(authority).appendPath(PATH_ROOT).appendPath(rootId).build();
+        return new Uri.Builder()
+                .scheme("content")
+                .authority(authority)
+                .appendPath(PATH_ROOT)
+                .appendPath(rootId)
+                .build();
     }
 
     public static Uri buildRecentDocumentsUri(String authority, String rootId) {
-        return new Uri.Builder().scheme("content").authority(authority).appendPath(PATH_ROOT).appendPath(rootId).appendPath("recent").build();
+        return new Uri.Builder()
+                .scheme("content")
+                .authority(authority)
+                .appendPath(PATH_ROOT)
+                .appendPath(rootId)
+                .appendPath("recent")
+                .build();
     }
 
     public static Uri buildTreeDocumentUri(String authority, String documentId) {
-        return new Uri.Builder().scheme("content").authority(authority).appendPath(PATH_TREE).appendPath(documentId).build();
+        return new Uri.Builder()
+                .scheme("content")
+                .authority(authority)
+                .appendPath(PATH_TREE)
+                .appendPath(documentId)
+                .build();
     }
 
     public static Uri buildDocumentUri(String authority, String documentId) {
@@ -193,7 +215,8 @@ public final class DocumentsContract {
 
     @SystemApi
     public static Uri buildDocumentUriAsUser(String authority, String documentId, UserHandle user) {
-        return ContentProvider.maybeAddUserId(buildDocumentUri(authority, documentId), user.getIdentifier());
+        return ContentProvider.maybeAddUserId(
+                buildDocumentUri(authority, documentId), user.getIdentifier());
     }
 
     public static Uri buildBaseDocumentUri(String authority) {
@@ -205,7 +228,14 @@ public final class DocumentsContract {
     }
 
     public static Uri buildDocumentUriUsingTree(Uri treeUri, String documentId) {
-        return new Uri.Builder().scheme("content").authority(treeUri.getAuthority()).appendPath(PATH_TREE).appendPath(getTreeDocumentId(treeUri)).appendPath(PATH_DOCUMENT).appendPath(documentId).build();
+        return new Uri.Builder()
+                .scheme("content")
+                .authority(treeUri.getAuthority())
+                .appendPath(PATH_TREE)
+                .appendPath(getTreeDocumentId(treeUri))
+                .appendPath(PATH_DOCUMENT)
+                .appendPath(documentId)
+                .build();
     }
 
     public static Uri buildDocumentUriMaybeUsingTree(Uri baseUri, String documentId) {
@@ -216,23 +246,46 @@ public final class DocumentsContract {
     }
 
     public static Uri buildChildDocumentsUri(String authority, String parentDocumentId) {
-        return new Uri.Builder().scheme("content").authority(authority).appendPath(PATH_DOCUMENT).appendPath(parentDocumentId).appendPath(PATH_CHILDREN).build();
+        return new Uri.Builder()
+                .scheme("content")
+                .authority(authority)
+                .appendPath(PATH_DOCUMENT)
+                .appendPath(parentDocumentId)
+                .appendPath(PATH_CHILDREN)
+                .build();
     }
 
     public static Uri buildChildDocumentsUriUsingTree(Uri treeUri, String parentDocumentId) {
-        return new Uri.Builder().scheme("content").authority(treeUri.getAuthority()).appendPath(PATH_TREE).appendPath(getTreeDocumentId(treeUri)).appendPath(PATH_DOCUMENT).appendPath(parentDocumentId).appendPath(PATH_CHILDREN).build();
+        return new Uri.Builder()
+                .scheme("content")
+                .authority(treeUri.getAuthority())
+                .appendPath(PATH_TREE)
+                .appendPath(getTreeDocumentId(treeUri))
+                .appendPath(PATH_DOCUMENT)
+                .appendPath(parentDocumentId)
+                .appendPath(PATH_CHILDREN)
+                .build();
     }
 
     public static Uri buildSearchDocumentsUri(String authority, String rootId, String query) {
-        return new Uri.Builder().scheme("content").authority(authority).appendPath(PATH_ROOT).appendPath(rootId).appendPath("search").appendQueryParameter("query", query).build();
+        return new Uri.Builder()
+                .scheme("content")
+                .authority(authority)
+                .appendPath(PATH_ROOT)
+                .appendPath(rootId)
+                .appendPath("search")
+                .appendQueryParameter("query", query)
+                .build();
     }
 
-    public static boolean matchSearchQueryArguments(Bundle queryArgs, String displayName, String mimeType, long lastModified, long size) {
+    public static boolean matchSearchQueryArguments(
+            Bundle queryArgs, String displayName, String mimeType, long lastModified, long size) {
         if (queryArgs == null) {
             return true;
         }
         String argDisplayName = queryArgs.getString(QUERY_ARG_DISPLAY_NAME, "");
-        if (!argDisplayName.isEmpty() && !displayName.toLowerCase().contains(argDisplayName.toLowerCase())) {
+        if (!argDisplayName.isEmpty()
+                && !displayName.toLowerCase().contains(argDisplayName.toLowerCase())) {
             return false;
         }
         long argFileSize = queryArgs.getLong(QUERY_ARG_FILE_SIZE_OVER, -1L);
@@ -285,7 +338,9 @@ public final class DocumentsContract {
             if (paths.size() == 2) {
                 return PATH_DOCUMENT.equals(paths.get(0));
             }
-            return paths.size() == 4 && PATH_TREE.equals(paths.get(0)) && PATH_DOCUMENT.equals(paths.get(2));
+            return paths.size() == 4
+                    && PATH_TREE.equals(paths.get(0))
+                    && PATH_DOCUMENT.equals(paths.get(2));
         }
         return false;
     }
@@ -319,7 +374,8 @@ public final class DocumentsContract {
 
     private static boolean isDocumentsProvider(Context context, String authority) {
         Intent intent = new Intent(PROVIDER_INTERFACE);
-        List<ResolveInfo> infos = context.getPackageManager().queryIntentContentProviders(intent, 0);
+        List<ResolveInfo> infos =
+                context.getPackageManager().queryIntentContentProviders(intent, 0);
         if (SemDualAppManager.isDualAppId(UserHandle.getCallingUserId())) {
             authority = ContentProvider.getAuthorityWithoutUserId(authority);
         }
@@ -344,7 +400,9 @@ public final class DocumentsContract {
         if (paths.size() >= 2 && PATH_DOCUMENT.equals(paths.get(0))) {
             return paths.get(1);
         }
-        if (paths.size() >= 4 && PATH_TREE.equals(paths.get(0)) && PATH_DOCUMENT.equals(paths.get(2))) {
+        if (paths.size() >= 4
+                && PATH_TREE.equals(paths.get(0))
+                && PATH_DOCUMENT.equals(paths.get(2))) {
             return paths.get(3);
         }
         throw new IllegalArgumentException("Invalid URI: " + documentUri);
@@ -379,9 +437,12 @@ public final class DocumentsContract {
         return uri.getBooleanQueryParameter(PARAM_MANAGE, false);
     }
 
-    public static Bitmap getDocumentThumbnail(ContentResolver content, Uri documentUri, Point size, CancellationSignal signal) throws FileNotFoundException {
+    public static Bitmap getDocumentThumbnail(
+            ContentResolver content, Uri documentUri, Point size, CancellationSignal signal)
+            throws FileNotFoundException {
         try {
-            return ContentResolver.loadThumbnail(content, documentUri, new Size(size.x, size.y), signal, 1);
+            return ContentResolver.loadThumbnail(
+                    content, documentUri, new Size(size.x, size.y), signal, 1);
         } catch (Exception e) {
             if (!(e instanceof OperationCanceledException)) {
                 Log.w(TAG, "Failed to load thumbnail for " + documentUri + ": " + e);
@@ -391,13 +452,20 @@ public final class DocumentsContract {
         }
     }
 
-    public static Uri createDocument(ContentResolver content, Uri parentDocumentUri, String mimeType, String displayName) throws FileNotFoundException {
+    public static Uri createDocument(
+            ContentResolver content, Uri parentDocumentUri, String mimeType, String displayName)
+            throws FileNotFoundException {
         try {
             Bundle in = new Bundle();
             in.putParcelable("uri", parentDocumentUri);
             in.putString("mime_type", mimeType);
             in.putString("_display_name", displayName);
-            Bundle out = content.call(parentDocumentUri.getAuthority(), METHOD_CREATE_DOCUMENT, (String) null, in);
+            Bundle out =
+                    content.call(
+                            parentDocumentUri.getAuthority(),
+                            METHOD_CREATE_DOCUMENT,
+                            (String) null,
+                            in);
             return (Uri) out.getParcelable("uri", Uri.class);
         } catch (Exception e) {
             Log.w(TAG, "Failed to create document", e);
@@ -406,7 +474,9 @@ public final class DocumentsContract {
         }
     }
 
-    public static boolean isChildDocument(ContentResolver content, Uri parentDocumentUri, Uri childDocumentUri) throws FileNotFoundException {
+    public static boolean isChildDocument(
+            ContentResolver content, Uri parentDocumentUri, Uri childDocumentUri)
+            throws FileNotFoundException {
         Preconditions.checkNotNull(content, "content can not be null");
         Preconditions.checkNotNull(parentDocumentUri, "parentDocumentUri can not be null");
         Preconditions.checkNotNull(childDocumentUri, "childDocumentUri can not be null");
@@ -414,7 +484,12 @@ public final class DocumentsContract {
             Bundle in = new Bundle();
             in.putParcelable("uri", parentDocumentUri);
             in.putParcelable(EXTRA_TARGET_URI, childDocumentUri);
-            Bundle out = content.call(parentDocumentUri.getAuthority(), METHOD_IS_CHILD_DOCUMENT, (String) null, in);
+            Bundle out =
+                    content.call(
+                            parentDocumentUri.getAuthority(),
+                            METHOD_IS_CHILD_DOCUMENT,
+                            (String) null,
+                            in);
             if (out == null) {
                 throw new RemoteException("Failed to get a response from isChildDocument query.");
             }
@@ -429,12 +504,15 @@ public final class DocumentsContract {
         }
     }
 
-    public static Uri renameDocument(ContentResolver content, Uri documentUri, String displayName) throws FileNotFoundException {
+    public static Uri renameDocument(ContentResolver content, Uri documentUri, String displayName)
+            throws FileNotFoundException {
         try {
             Bundle in = new Bundle();
             in.putParcelable("uri", documentUri);
             in.putString("_display_name", displayName);
-            Bundle out = content.call(documentUri.getAuthority(), METHOD_RENAME_DOCUMENT, (String) null, in);
+            Bundle out =
+                    content.call(
+                            documentUri.getAuthority(), METHOD_RENAME_DOCUMENT, (String) null, in);
             Uri outUri = (Uri) out.getParcelable("uri", Uri.class);
             return outUri != null ? outUri : documentUri;
         } catch (Exception e) {
@@ -444,7 +522,8 @@ public final class DocumentsContract {
         }
     }
 
-    public static boolean deleteDocument(ContentResolver content, Uri documentUri) throws FileNotFoundException {
+    public static boolean deleteDocument(ContentResolver content, Uri documentUri)
+            throws FileNotFoundException {
         try {
             Bundle in = new Bundle();
             in.putParcelable("uri", documentUri);
@@ -457,12 +536,19 @@ public final class DocumentsContract {
         }
     }
 
-    public static Uri copyDocument(ContentResolver content, Uri sourceDocumentUri, Uri targetParentDocumentUri) throws FileNotFoundException {
+    public static Uri copyDocument(
+            ContentResolver content, Uri sourceDocumentUri, Uri targetParentDocumentUri)
+            throws FileNotFoundException {
         try {
             Bundle in = new Bundle();
             in.putParcelable("uri", sourceDocumentUri);
             in.putParcelable(EXTRA_TARGET_URI, targetParentDocumentUri);
-            Bundle out = content.call(sourceDocumentUri.getAuthority(), METHOD_COPY_DOCUMENT, (String) null, in);
+            Bundle out =
+                    content.call(
+                            sourceDocumentUri.getAuthority(),
+                            METHOD_COPY_DOCUMENT,
+                            (String) null,
+                            in);
             return (Uri) out.getParcelable("uri", Uri.class);
         } catch (Exception e) {
             Log.w(TAG, "Failed to copy document", e);
@@ -471,13 +557,23 @@ public final class DocumentsContract {
         }
     }
 
-    public static Uri moveDocument(ContentResolver content, Uri sourceDocumentUri, Uri sourceParentDocumentUri, Uri targetParentDocumentUri) throws FileNotFoundException {
+    public static Uri moveDocument(
+            ContentResolver content,
+            Uri sourceDocumentUri,
+            Uri sourceParentDocumentUri,
+            Uri targetParentDocumentUri)
+            throws FileNotFoundException {
         try {
             Bundle in = new Bundle();
             in.putParcelable("uri", sourceDocumentUri);
             in.putParcelable(EXTRA_PARENT_URI, sourceParentDocumentUri);
             in.putParcelable(EXTRA_TARGET_URI, targetParentDocumentUri);
-            Bundle out = content.call(sourceDocumentUri.getAuthority(), METHOD_MOVE_DOCUMENT, (String) null, in);
+            Bundle out =
+                    content.call(
+                            sourceDocumentUri.getAuthority(),
+                            METHOD_MOVE_DOCUMENT,
+                            (String) null,
+                            in);
             return (Uri) out.getParcelable("uri", Uri.class);
         } catch (Exception e) {
             Log.w(TAG, "Failed to move document", e);
@@ -486,7 +582,9 @@ public final class DocumentsContract {
         }
     }
 
-    public static boolean removeDocument(ContentResolver content, Uri documentUri, Uri parentDocumentUri) throws FileNotFoundException {
+    public static boolean removeDocument(
+            ContentResolver content, Uri documentUri, Uri parentDocumentUri)
+            throws FileNotFoundException {
         try {
             Bundle in = new Bundle();
             in.putParcelable("uri", documentUri);
@@ -510,13 +608,15 @@ public final class DocumentsContract {
         }
     }
 
-    public static Bundle getDocumentMetadata(ContentResolver content, Uri documentUri) throws FileNotFoundException {
+    public static Bundle getDocumentMetadata(ContentResolver content, Uri documentUri)
+            throws FileNotFoundException {
         Preconditions.checkNotNull(content, "content can not be null");
         Preconditions.checkNotNull(documentUri, "documentUri can not be null");
         try {
             Bundle in = new Bundle();
             in.putParcelable("uri", documentUri);
-            return content.call(documentUri.getAuthority(), METHOD_GET_DOCUMENT_METADATA, (String) null, in);
+            return content.call(
+                    documentUri.getAuthority(), METHOD_GET_DOCUMENT_METADATA, (String) null, in);
         } catch (Exception e) {
             Log.w(TAG, "Failed to get document metadata");
             rethrowIfNecessary(e);
@@ -524,11 +624,14 @@ public final class DocumentsContract {
         }
     }
 
-    public static Path findDocumentPath(ContentResolver content, Uri treeUri) throws FileNotFoundException {
+    public static Path findDocumentPath(ContentResolver content, Uri treeUri)
+            throws FileNotFoundException {
         try {
             Bundle in = new Bundle();
             in.putParcelable("uri", treeUri);
-            Bundle out = content.call(treeUri.getAuthority(), METHOD_FIND_DOCUMENT_PATH, (String) null, in);
+            Bundle out =
+                    content.call(
+                            treeUri.getAuthority(), METHOD_FIND_DOCUMENT_PATH, (String) null, in);
             return (Path) out.getParcelable("result", Path.class);
         } catch (Exception e) {
             Log.w(TAG, "Failed to find path", e);
@@ -537,14 +640,17 @@ public final class DocumentsContract {
         }
     }
 
-    public static IntentSender createWebLinkIntent(ContentResolver content, Uri uri, Bundle options) throws FileNotFoundException {
+    public static IntentSender createWebLinkIntent(ContentResolver content, Uri uri, Bundle options)
+            throws FileNotFoundException {
         try {
             Bundle in = new Bundle();
             in.putParcelable("uri", uri);
             if (options != null) {
                 in.putBundle("options", options);
             }
-            Bundle out = content.call(uri.getAuthority(), METHOD_CREATE_WEB_LINK_INTENT, (String) null, in);
+            Bundle out =
+                    content.call(
+                            uri.getAuthority(), METHOD_CREATE_WEB_LINK_INTENT, (String) null, in);
             return (IntentSender) out.getParcelable("result", IntentSender.class);
         } catch (Exception e) {
             Log.w(TAG, "Failed to create a web link intent", e);
@@ -600,21 +706,23 @@ public final class DocumentsContract {
     }
 
     public static final class Path implements Parcelable {
-        public static final Parcelable.Creator<Path> CREATOR = new Parcelable.Creator<Path>() { // from class: android.provider.DocumentsContract.Path.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Path createFromParcel(Parcel in) {
-                String rootId = in.readString();
-                List<String> path = in.createStringArrayList();
-                return new Path(rootId, path);
-            }
+        public static final Parcelable.Creator<Path> CREATOR =
+                new Parcelable.Creator<
+                        Path>() { // from class: android.provider.DocumentsContract.Path.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Path createFromParcel(Parcel in) {
+                        String rootId = in.readString();
+                        List<String> path = in.createStringArrayList();
+                        return new Path(rootId, path);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Path[] newArray(int size) {
-                return new Path[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Path[] newArray(int size) {
+                        return new Path[size];
+                    }
+                };
         private final List<String> mPath;
         private final String mRootId;
 
@@ -641,7 +749,8 @@ public final class DocumentsContract {
                 return false;
             }
             Path path = (Path) o;
-            if (Objects.equals(this.mRootId, path.mRootId) && Objects.equals(this.mPath, path.mPath)) {
+            if (Objects.equals(this.mRootId, path.mRootId)
+                    && Objects.equals(this.mPath, path.mPath)) {
                 return true;
             }
             return false;

@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioDataIndication extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$data$ISehRadioDataIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$data$ISehRadioDataIndication".replace('$', '.');
     public static final String HASH = "1c18f89373d68cf0030dbdb95f4a9287fe232a2e";
     public static final int VERSION = 1;
 
@@ -28,12 +29,12 @@ public interface ISehRadioDataIndication extends IInterface {
 
     public static class Default implements ISehRadioDataIndication {
         @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
-        public void rrcStateChanged(int indicationType, SehRrcStateInfo state) throws RemoteException {
-        }
+        public void rrcStateChanged(int indicationType, SehRrcStateInfo state)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
-        public void timerStatusChangedInd(int indicationType, int[] eventNoti) throws RemoteException {
-        }
+        public void timerStatusChangedInd(int indicationType, int[] eventNoti)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
         public SehApnProfile needApnProfileIndication(String select) throws RemoteException {
@@ -66,7 +67,7 @@ public interface ISehRadioDataIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioDataIndication {
+    public abstract static class Stub extends Binder implements ISehRadioDataIndication {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_needApnProfileIndication = 3;
@@ -97,7 +98,8 @@ public interface ISehRadioDataIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -119,7 +121,8 @@ public interface ISehRadioDataIndication extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    SehRrcStateInfo _arg1 = (SehRrcStateInfo) data.readTypedObject(SehRrcStateInfo.CREATOR);
+                    SehRrcStateInfo _arg1 =
+                            (SehRrcStateInfo) data.readTypedObject(SehRrcStateInfo.CREATOR);
                     data.enforceNoDataAvail();
                     rrcStateChanged(_arg0, _arg1);
                     return true;
@@ -175,7 +178,8 @@ public interface ISehRadioDataIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
-            public void rrcStateChanged(int indicationType, SehRrcStateInfo state) throws RemoteException {
+            public void rrcStateChanged(int indicationType, SehRrcStateInfo state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -191,7 +195,8 @@ public interface ISehRadioDataIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.data.ISehRadioDataIndication
-            public void timerStatusChangedInd(int indicationType, int[] eventNoti) throws RemoteException {
+            public void timerStatusChangedInd(int indicationType, int[] eventNoti)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -215,10 +220,12 @@ public interface ISehRadioDataIndication extends IInterface {
                     _data.writeString(select);
                     boolean _status = this.mRemote.transact(3, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method needApnProfileIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method needApnProfileIndication is unimplemented.");
                     }
                     _reply.readException();
-                    SehApnProfile _result = (SehApnProfile) _reply.readTypedObject(SehApnProfile.CREATOR);
+                    SehApnProfile _result =
+                            (SehApnProfile) _reply.readTypedObject(SehApnProfile.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -236,7 +243,8 @@ public interface ISehRadioDataIndication extends IInterface {
                     _data.writeString(table);
                     boolean _status = this.mRemote.transact(4, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method needSettingValueIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method needSettingValueIndication is unimplemented.");
                     }
                     _reply.readException();
                     int _result = _reply.readInt();
@@ -259,7 +267,8 @@ public interface ISehRadioDataIndication extends IInterface {
                         throw new RemoteException("Method needPacketUsage is unimplemented.");
                     }
                     _reply.readException();
-                    SehPacketUsage _result = (SehPacketUsage) _reply.readTypedObject(SehPacketUsage.CREATOR);
+                    SehPacketUsage _result =
+                            (SehPacketUsage) _reply.readTypedObject(SehPacketUsage.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

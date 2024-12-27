@@ -24,6 +24,7 @@ import android.os.SystemProperties;
 import android.os.Trace;
 import android.provider.Settings;
 import android.util.EventLog;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.UiEventLogger;
 import com.android.internal.logging.UiEventLoggerImpl;
@@ -61,42 +62,52 @@ public final class GestureLauncherService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CameraLiftTriggerEventListener extends TriggerEventListener {
-        public CameraLiftTriggerEventListener() {
-        }
+        public CameraLiftTriggerEventListener() {}
 
         @Override // android.hardware.TriggerEventListener
         public final void onTrigger(TriggerEvent triggerEvent) {
             GestureLauncherService gestureLauncherService = GestureLauncherService.this;
-            if (gestureLauncherService.mCameraLiftRegistered && triggerEvent.sensor == gestureLauncherService.mCameraLiftTriggerSensor) {
+            if (gestureLauncherService.mCameraLiftRegistered
+                    && triggerEvent.sensor == gestureLauncherService.mCameraLiftTriggerSensor) {
                 gestureLauncherService.mContext.getResources();
-                SensorManager sensorManager = (SensorManager) GestureLauncherService.this.mContext.getSystemService("sensor");
-                boolean isKeyguardShowingAndNotOccluded = GestureLauncherService.this.mWindowManagerInternal.isKeyguardShowingAndNotOccluded();
+                SensorManager sensorManager =
+                        (SensorManager)
+                                GestureLauncherService.this.mContext.getSystemService("sensor");
+                boolean isKeyguardShowingAndNotOccluded =
+                        GestureLauncherService.this.mWindowManagerInternal
+                                .isKeyguardShowingAndNotOccluded();
                 boolean isInteractive = GestureLauncherService.this.mPowerManager.isInteractive();
-                if ((isKeyguardShowingAndNotOccluded || !isInteractive) && GestureLauncherService.this.handleCameraGesture(true, 2)) {
+                if ((isKeyguardShowingAndNotOccluded || !isInteractive)
+                        && GestureLauncherService.this.handleCameraGesture(true, 2)) {
                     MetricsLogger.action(GestureLauncherService.this.mContext, 989);
-                    GestureLauncherService.this.mUiEventLogger.log(GestureLauncherEvent.GESTURE_CAMERA_LIFT);
+                    GestureLauncherService.this.mUiEventLogger.log(
+                            GestureLauncherEvent.GESTURE_CAMERA_LIFT);
                 }
                 GestureLauncherService gestureLauncherService2 = GestureLauncherService.this;
-                gestureLauncherService2.mCameraLiftRegistered = sensorManager.requestTriggerSensor(gestureLauncherService2.mCameraLiftTriggerListener, gestureLauncherService2.mCameraLiftTriggerSensor);
+                gestureLauncherService2.mCameraLiftRegistered =
+                        sensorManager.requestTriggerSensor(
+                                gestureLauncherService2.mCameraLiftTriggerListener,
+                                gestureLauncherService2.mCameraLiftTriggerSensor);
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class GestureEventListener implements SensorEventListener {
-        public GestureEventListener() {
-        }
+        public GestureEventListener() {}
 
         @Override // android.hardware.SensorEventListener
-        public final void onAccuracyChanged(Sensor sensor, int i) {
-        }
+        public final void onAccuracyChanged(Sensor sensor, int i) {}
 
         @Override // android.hardware.SensorEventListener
         public final void onSensorChanged(SensorEvent sensorEvent) {
             GestureLauncherService gestureLauncherService = GestureLauncherService.this;
-            if (gestureLauncherService.mCameraLaunchRegistered && sensorEvent.sensor == gestureLauncherService.mCameraLaunchSensor && gestureLauncherService.handleCameraGesture(true, 0)) {
+            if (gestureLauncherService.mCameraLaunchRegistered
+                    && sensorEvent.sensor == gestureLauncherService.mCameraLaunchSensor
+                    && gestureLauncherService.handleCameraGesture(true, 0)) {
                 GestureLauncherService.this.mMetricsLogger.action(256);
-                GestureLauncherService.this.mUiEventLogger.log(GestureLauncherEvent.GESTURE_CAMERA_WIGGLE);
+                GestureLauncherService.this.mUiEventLogger.log(
+                        GestureLauncherEvent.GESTURE_CAMERA_WIGGLE);
                 long elapsedRealtime = SystemClock.elapsedRealtime();
                 GestureLauncherService gestureLauncherService2 = GestureLauncherService.this;
                 long j = elapsedRealtime - gestureLauncherService2.mCameraGestureOnTimeMs;
@@ -111,7 +122,12 @@ public final class GestureLauncherService extends SystemService {
                 if (j4 < 0 || j5 < 0 || j6 < 0) {
                     return;
                 }
-                EventLog.writeEvent(40100, Long.valueOf(j4), Long.valueOf(j5), Long.valueOf(j6), Integer.valueOf(i2));
+                EventLog.writeEvent(
+                        40100,
+                        Long.valueOf(j4),
+                        Long.valueOf(j5),
+                        Long.valueOf(j6),
+                        Integer.valueOf(i2));
                 GestureLauncherService gestureLauncherService3 = GestureLauncherService.this;
                 gestureLauncherService3.mCameraGestureLastEventTime = elapsedRealtime;
                 gestureLauncherService3.mCameraGestureSensor1LastOnTimeMs = j2;
@@ -147,7 +163,8 @@ public final class GestureLauncherService extends SystemService {
 
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.GestureLauncherService$1] */
     /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.GestureLauncherService$2] */
-    public GestureLauncherService(Context context, MetricsLogger metricsLogger, UiEventLogger uiEventLogger) {
+    public GestureLauncherService(
+            Context context, MetricsLogger metricsLogger, UiEventLogger uiEventLogger) {
         super(context);
         this.mGestureListener = new GestureEventListener();
         this.mCameraLiftTriggerListener = new CameraLiftTriggerEventListener();
@@ -156,39 +173,54 @@ public final class GestureLauncherService extends SystemService {
         this.mCameraGestureSensor1LastOnTimeMs = 0L;
         this.mCameraGestureSensor2LastOnTimeMs = 0L;
         this.mCameraLaunchLastEventExtra = 0;
-        this.mUserReceiver = new BroadcastReceiver() { // from class: com.android.server.GestureLauncherService.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                if ("android.intent.action.USER_SWITCHED".equals(intent.getAction())) {
-                    GestureLauncherService.this.mUserId = intent.getIntExtra("android.intent.extra.user_handle", 0);
-                    GestureLauncherService.this.mContext.getContentResolver().unregisterContentObserver(GestureLauncherService.this.mSettingObserver);
-                    GestureLauncherService.this.registerContentObservers();
-                    GestureLauncherService.this.updateCameraRegistered();
-                    GestureLauncherService.this.updateCameraDoubleTapPowerEnabled();
-                    GestureLauncherService.this.updateEmergencyGestureEnabled();
-                    GestureLauncherService.this.updateEmergencyGesturePowerButtonCooldownPeriodMs();
-                }
-            }
-        };
-        this.mSettingObserver = new ContentObserver(new Handler()) { // from class: com.android.server.GestureLauncherService.2
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z, Uri uri, int i) {
-                GestureLauncherService gestureLauncherService = GestureLauncherService.this;
-                if (i == gestureLauncherService.mUserId) {
-                    gestureLauncherService.updateCameraRegistered();
-                    GestureLauncherService.this.updateCameraDoubleTapPowerEnabled();
-                    GestureLauncherService.this.updateEmergencyGestureEnabled();
-                    GestureLauncherService.this.updateEmergencyGesturePowerButtonCooldownPeriodMs();
-                }
-            }
-        };
+        this.mUserReceiver =
+                new BroadcastReceiver() { // from class: com.android.server.GestureLauncherService.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        if ("android.intent.action.USER_SWITCHED".equals(intent.getAction())) {
+                            GestureLauncherService.this.mUserId =
+                                    intent.getIntExtra("android.intent.extra.user_handle", 0);
+                            GestureLauncherService.this
+                                    .mContext
+                                    .getContentResolver()
+                                    .unregisterContentObserver(
+                                            GestureLauncherService.this.mSettingObserver);
+                            GestureLauncherService.this.registerContentObservers();
+                            GestureLauncherService.this.updateCameraRegistered();
+                            GestureLauncherService.this.updateCameraDoubleTapPowerEnabled();
+                            GestureLauncherService.this.updateEmergencyGestureEnabled();
+                            GestureLauncherService.this
+                                    .updateEmergencyGesturePowerButtonCooldownPeriodMs();
+                        }
+                    }
+                };
+        this.mSettingObserver =
+                new ContentObserver(
+                        new Handler()) { // from class: com.android.server.GestureLauncherService.2
+                    @Override // android.database.ContentObserver
+                    public final void onChange(boolean z, Uri uri, int i) {
+                        GestureLauncherService gestureLauncherService = GestureLauncherService.this;
+                        if (i == gestureLauncherService.mUserId) {
+                            gestureLauncherService.updateCameraRegistered();
+                            GestureLauncherService.this.updateCameraDoubleTapPowerEnabled();
+                            GestureLauncherService.this.updateEmergencyGestureEnabled();
+                            GestureLauncherService.this
+                                    .updateEmergencyGesturePowerButtonCooldownPeriodMs();
+                        }
+                    }
+                };
         this.mContext = context;
         this.mMetricsLogger = metricsLogger;
         this.mUiEventLogger = uiEventLogger;
     }
 
     public static int getEmergencyGesturePowerButtonCooldownPeriodMs(Context context, int i) {
-        return Math.min(Settings.Global.getInt(context.getContentResolver(), "emergency_gesture_power_button_cooldown_period_ms", 3000), 5000);
+        return Math.min(
+                Settings.Global.getInt(
+                        context.getContentResolver(),
+                        "emergency_gesture_power_button_cooldown_period_ms",
+                        3000),
+                5000);
     }
 
     public static boolean isCameraDoubleTapPowerEnabled(Resources resources) {
@@ -196,13 +228,19 @@ public final class GestureLauncherService extends SystemService {
     }
 
     public static boolean isGestureLauncherEnabled(Resources resources) {
-        return !(resources.getInteger(R.integer.config_defaultNotificationLedOff) == -1 || SystemProperties.getBoolean("gesture.disable_camera_launch", false)) || isCameraDoubleTapPowerEnabled(resources) || resources.getInteger(R.integer.config_defaultNotificationLedOn) != -1 || resources.getBoolean(R.bool.config_enableBurnInProtection);
+        return !(resources.getInteger(R.integer.config_defaultNotificationLedOff) == -1
+                        || SystemProperties.getBoolean("gesture.disable_camera_launch", false))
+                || isCameraDoubleTapPowerEnabled(resources)
+                || resources.getInteger(R.integer.config_defaultNotificationLedOn) != -1
+                || resources.getBoolean(R.bool.config_enableBurnInProtection);
     }
 
     public boolean handleCameraGesture(boolean z, int i) {
         Trace.traceBegin(64L, "GestureLauncher:handleCameraGesture");
         try {
-            if (Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "user_setup_complete", 0, -2) == 0) {
+            if (Settings.Secure.getIntForUser(
+                            this.mContext.getContentResolver(), "user_setup_complete", 0, -2)
+                    == 0) {
                 Trace.traceEnd(64L);
                 return false;
             }
@@ -227,7 +265,9 @@ public final class GestureLauncherService extends SystemService {
     public boolean handleEmergencyGesture() {
         Trace.traceBegin(64L, "GestureLauncher:handleEmergencyGesture");
         try {
-            if (Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "user_setup_complete", 0, -2) == 0) {
+            if (Settings.Secure.getIntForUser(
+                            this.mContext.getContentResolver(), "user_setup_complete", 0, -2)
+                    == 0) {
                 return false;
             }
             IStatusBar iStatusBar = StatusBarManagerService.this.mBar;
@@ -247,7 +287,8 @@ public final class GestureLauncherService extends SystemService {
     @Override // com.android.server.SystemService
     public final void onBootPhase(int i) {
         if (i == 600 && isGestureLauncherEnabled(this.mContext.getResources())) {
-            this.mWindowManagerInternal = (WindowManagerInternal) LocalServices.getService(WindowManagerInternal.class);
+            this.mWindowManagerInternal =
+                    (WindowManagerInternal) LocalServices.getService(WindowManagerInternal.class);
             PowerManager powerManager = (PowerManager) this.mContext.getSystemService("power");
             this.mPowerManager = powerManager;
             this.mWakeLock = powerManager.newWakeLock(1, "GestureLauncherService");
@@ -256,7 +297,8 @@ public final class GestureLauncherService extends SystemService {
             updateEmergencyGestureEnabled();
             updateEmergencyGesturePowerButtonCooldownPeriodMs();
             this.mUserId = ActivityManager.getCurrentUser();
-            this.mContext.registerReceiver(this.mUserReceiver, new IntentFilter("android.intent.action.USER_SWITCHED"));
+            this.mContext.registerReceiver(
+                    this.mUserReceiver, new IntentFilter("android.intent.action.USER_SWITCHED"));
             registerContentObservers();
             this.mContext.getPackageManager().hasSystemFeature("android.hardware.type.watch");
         }
@@ -273,17 +315,43 @@ public final class GestureLauncherService extends SystemService {
         int i = this.mUserId;
         AnonymousClass2 anonymousClass2 = this.mSettingObserver;
         contentResolver.registerContentObserver(uriFor, false, anonymousClass2, i);
-        this.mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("camera_double_tap_power_gesture_disabled"), false, anonymousClass2, this.mUserId);
-        this.mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("camera_lift_trigger_enabled"), false, anonymousClass2, this.mUserId);
-        this.mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor("emergency_gesture_enabled"), false, anonymousClass2, this.mUserId);
-        this.mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor("emergency_gesture_power_button_cooldown_period_ms"), false, anonymousClass2, this.mUserId);
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        Settings.Secure.getUriFor("camera_double_tap_power_gesture_disabled"),
+                        false,
+                        anonymousClass2,
+                        this.mUserId);
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        Settings.Secure.getUriFor("camera_lift_trigger_enabled"),
+                        false,
+                        anonymousClass2,
+                        this.mUserId);
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        Settings.Secure.getUriFor("emergency_gesture_enabled"),
+                        false,
+                        anonymousClass2,
+                        this.mUserId);
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        Settings.Global.getUriFor(
+                                "emergency_gesture_power_button_cooldown_period_ms"),
+                        false,
+                        anonymousClass2,
+                        this.mUserId);
     }
 
     public void updateCameraDoubleTapPowerEnabled() {
         Context context = this.mContext;
         int i = this.mUserId;
         if (isCameraDoubleTapPowerEnabled(context.getResources())) {
-            Settings.Secure.getIntForUser(context.getContentResolver(), "camera_double_tap_power_gesture_disabled", 0, i);
+            Settings.Secure.getIntForUser(
+                    context.getContentResolver(), "camera_double_tap_power_gesture_disabled", 0, i);
         }
         synchronized (this) {
         }
@@ -293,25 +361,44 @@ public final class GestureLauncherService extends SystemService {
         Resources resources = this.mContext.getResources();
         Context context = this.mContext;
         int i = this.mUserId;
-        boolean z = (context.getResources().getInteger(R.integer.config_defaultNotificationLedOff) == -1 || SystemProperties.getBoolean("gesture.disable_camera_launch", false)) ? false : true;
+        boolean z =
+                (context.getResources().getInteger(R.integer.config_defaultNotificationLedOff) == -1
+                                || SystemProperties.getBoolean(
+                                        "gesture.disable_camera_launch", false))
+                        ? false
+                        : true;
         GestureEventListener gestureEventListener = this.mGestureListener;
-        if (z && Settings.Secure.getIntForUser(context.getContentResolver(), "camera_gesture_disabled", 0, i) == 0) {
+        if (z
+                && Settings.Secure.getIntForUser(
+                                context.getContentResolver(), "camera_gesture_disabled", 0, i)
+                        == 0) {
             if (!this.mCameraLaunchRegistered) {
                 long elapsedRealtime = SystemClock.elapsedRealtime();
                 this.mCameraGestureOnTimeMs = elapsedRealtime;
                 this.mCameraGestureLastEventTime = elapsedRealtime;
-                SensorManager sensorManager = (SensorManager) this.mContext.getSystemService("sensor");
+                SensorManager sensorManager =
+                        (SensorManager) this.mContext.getSystemService("sensor");
                 int integer = resources.getInteger(R.integer.config_defaultNotificationLedOff);
                 if (integer != -1) {
                     this.mCameraLaunchRegistered = false;
-                    String string = resources.getString(R.string.conversation_title_fallback_group_chat);
+                    String string =
+                            resources.getString(R.string.conversation_title_fallback_group_chat);
                     Sensor defaultSensor = sensorManager.getDefaultSensor(integer, true);
                     this.mCameraLaunchSensor = defaultSensor;
                     if (defaultSensor != null) {
                         if (!string.equals(defaultSensor.getStringType())) {
-                            throw new RuntimeException(XmlUtils$$ExternalSyntheticOutline0.m("Wrong configuration. Sensor type and sensor string type don't match: ", string, " in resources, ", this.mCameraLaunchSensor.getStringType(), " in the sensor."));
+                            throw new RuntimeException(
+                                    XmlUtils$$ExternalSyntheticOutline0.m(
+                                            "Wrong configuration. Sensor type and sensor string"
+                                                + " type don't match: ",
+                                            string,
+                                            " in resources, ",
+                                            this.mCameraLaunchSensor.getStringType(),
+                                            " in the sensor."));
                         }
-                        this.mCameraLaunchRegistered = sensorManager.registerListener(gestureEventListener, this.mCameraLaunchSensor, 0);
+                        this.mCameraLaunchRegistered =
+                                sensorManager.registerListener(
+                                        gestureEventListener, this.mCameraLaunchSensor, 0);
                     }
                 }
             }
@@ -322,16 +409,24 @@ public final class GestureLauncherService extends SystemService {
             this.mCameraGestureSensor1LastOnTimeMs = 0L;
             this.mCameraGestureSensor2LastOnTimeMs = 0L;
             this.mCameraLaunchLastEventExtra = 0;
-            ((SensorManager) this.mContext.getSystemService("sensor")).unregisterListener(gestureEventListener);
+            ((SensorManager) this.mContext.getSystemService("sensor"))
+                    .unregisterListener(gestureEventListener);
         }
         Context context2 = this.mContext;
         int i2 = this.mUserId;
-        boolean z2 = context2.getResources().getInteger(R.integer.config_defaultNotificationLedOn) != -1;
-        CameraLiftTriggerEventListener cameraLiftTriggerEventListener = this.mCameraLiftTriggerListener;
-        if (!z2 || Settings.Secure.getIntForUser(context2.getContentResolver(), "camera_lift_trigger_enabled", 1, i2) == 0) {
+        boolean z2 =
+                context2.getResources().getInteger(R.integer.config_defaultNotificationLedOn) != -1;
+        CameraLiftTriggerEventListener cameraLiftTriggerEventListener =
+                this.mCameraLiftTriggerListener;
+        if (!z2
+                || Settings.Secure.getIntForUser(
+                                context2.getContentResolver(), "camera_lift_trigger_enabled", 1, i2)
+                        == 0) {
             if (this.mCameraLiftRegistered) {
                 this.mCameraLiftRegistered = false;
-                ((SensorManager) this.mContext.getSystemService("sensor")).cancelTriggerSensor(cameraLiftTriggerEventListener, this.mCameraLiftTriggerSensor);
+                ((SensorManager) this.mContext.getSystemService("sensor"))
+                        .cancelTriggerSensor(
+                                cameraLiftTriggerEventListener, this.mCameraLiftTriggerSensor);
                 return;
             }
             return;
@@ -348,9 +443,18 @@ public final class GestureLauncherService extends SystemService {
             this.mCameraLiftTriggerSensor = defaultSensor2;
             if (defaultSensor2 != null) {
                 if (!string2.equals(defaultSensor2.getStringType())) {
-                    throw new RuntimeException(XmlUtils$$ExternalSyntheticOutline0.m("Wrong configuration. Sensor type and sensor string type don't match: ", string2, " in resources, ", this.mCameraLiftTriggerSensor.getStringType(), " in the sensor."));
+                    throw new RuntimeException(
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    "Wrong configuration. Sensor type and sensor string type don't"
+                                        + " match: ",
+                                    string2,
+                                    " in resources, ",
+                                    this.mCameraLiftTriggerSensor.getStringType(),
+                                    " in the sensor."));
                 }
-                this.mCameraLiftRegistered = sensorManager2.requestTriggerSensor(cameraLiftTriggerEventListener, this.mCameraLiftTriggerSensor);
+                this.mCameraLiftRegistered =
+                        sensorManager2.requestTriggerSensor(
+                                cameraLiftTriggerEventListener, this.mCameraLiftTriggerSensor);
             }
         }
     }
@@ -359,7 +463,13 @@ public final class GestureLauncherService extends SystemService {
         Context context = this.mContext;
         int i = this.mUserId;
         if (context.getResources().getBoolean(R.bool.config_enableBurnInProtection)) {
-            Settings.Secure.getIntForUser(context.getContentResolver(), "emergency_gesture_enabled", context.getResources().getBoolean(R.bool.config_defaultWindowFeatureContextMenu) ? 1 : 0, i);
+            Settings.Secure.getIntForUser(
+                    context.getContentResolver(),
+                    "emergency_gesture_enabled",
+                    context.getResources().getBoolean(R.bool.config_defaultWindowFeatureContextMenu)
+                            ? 1
+                            : 0,
+                    i);
         }
         synchronized (this) {
         }

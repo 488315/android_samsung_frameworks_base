@@ -2,6 +2,7 @@ package com.android.server.wm;
 
 import android.os.RemoteException;
 import android.view.ViewRootImpl;
+
 import com.android.internal.statusbar.IStatusBar;
 import com.android.server.LocalServices;
 import com.android.server.statusbar.StatusBarManagerInternal;
@@ -14,7 +15,8 @@ public final /* synthetic */ class DisplayPolicy$$ExternalSyntheticLambda2 imple
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ DisplayPolicy f$0;
 
-    public /* synthetic */ DisplayPolicy$$ExternalSyntheticLambda2(DisplayPolicy displayPolicy, int i) {
+    public /* synthetic */ DisplayPolicy$$ExternalSyntheticLambda2(
+            DisplayPolicy displayPolicy, int i) {
         this.$r8$classId = i;
         this.f$0 = displayPolicy;
     }
@@ -40,14 +42,19 @@ public final /* synthetic */ class DisplayPolicy$$ExternalSyntheticLambda2 imple
                 return;
             case 1:
                 int i2 = displayPolicy.mDisplayContent.mDisplayId;
-                StatusBarManagerInternal statusBarManagerInternal = displayPolicy.getStatusBarManagerInternal();
-                if (statusBarManagerInternal != null && (iStatusBar = StatusBarManagerService.this.mBar) != null) {
+                StatusBarManagerInternal statusBarManagerInternal =
+                        displayPolicy.getStatusBarManagerInternal();
+                if (statusBarManagerInternal != null
+                        && (iStatusBar = StatusBarManagerService.this.mBar) != null) {
                     try {
                         iStatusBar.onDisplayReady(i2);
                     } catch (RemoteException unused) {
                     }
                 }
-                WallpaperManagerService.LocalService localService = (WallpaperManagerService.LocalService) LocalServices.getService(WallpaperManagerService.LocalService.class);
+                WallpaperManagerService.LocalService localService =
+                        (WallpaperManagerService.LocalService)
+                                LocalServices.getService(
+                                        WallpaperManagerService.LocalService.class);
                 if (localService != null) {
                     localService.onDisplayReady(i2);
                     return;

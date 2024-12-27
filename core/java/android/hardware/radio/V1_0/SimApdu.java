@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,18 +25,45 @@ public final class SimApdu {
             return false;
         }
         SimApdu other = (SimApdu) otherObject;
-        if (this.sessionId == other.sessionId && this.cla == other.cla && this.instruction == other.instruction && this.p1 == other.p1 && this.p2 == other.p2 && this.p3 == other.p3 && HidlSupport.deepEquals(this.data, other.data)) {
+        if (this.sessionId == other.sessionId
+                && this.cla == other.cla
+                && this.instruction == other.instruction
+                && this.p1 == other.p1
+                && this.p2 == other.p2
+                && this.p3 == other.p3
+                && HidlSupport.deepEquals(this.data, other.data)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.sessionId))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cla))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.instruction))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.p1))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.p2))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.p3))), Integer.valueOf(HidlSupport.deepHashCode(this.data)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.sessionId))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cla))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.instruction))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.p1))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.p2))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.p3))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.data)));
     }
 
     public final String toString() {
-        return "{.sessionId = " + this.sessionId + ", .cla = " + this.cla + ", .instruction = " + this.instruction + ", .p1 = " + this.p1 + ", .p2 = " + this.p2 + ", .p3 = " + this.p3 + ", .data = " + this.data + "}";
+        return "{.sessionId = "
+                + this.sessionId
+                + ", .cla = "
+                + this.cla
+                + ", .instruction = "
+                + this.instruction
+                + ", .p1 = "
+                + this.p1
+                + ", .p2 = "
+                + this.p2
+                + ", .p3 = "
+                + this.p3
+                + ", .data = "
+                + this.data
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -47,7 +75,8 @@ public final class SimApdu {
         ArrayList<SimApdu> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SimApdu _hidl_vec_element = new SimApdu();
@@ -57,7 +86,8 @@ public final class SimApdu {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.sessionId = _hidl_blob.getInt32(_hidl_offset + 0);
         this.cla = _hidl_blob.getInt32(_hidl_offset + 4);
         this.instruction = _hidl_blob.getInt32(_hidl_offset + 8);
@@ -65,7 +95,8 @@ public final class SimApdu {
         this.p2 = _hidl_blob.getInt32(_hidl_offset + 16);
         this.p3 = _hidl_blob.getInt32(_hidl_offset + 20);
         this.data = _hidl_blob.getString(_hidl_offset + 24);
-        parcel.readEmbeddedBuffer(this.data.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 24 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.data.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 24 + 0, false);
     }
 
     public final void writeToParcel(HwParcel parcel) {

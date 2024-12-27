@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.Internal;
 import java.util.AbstractList;
 import java.util.Collection;
 import java.util.List;
@@ -11,8 +10,7 @@ abstract class AbstractProtobufList<E> extends AbstractList<E> implements Intern
     protected static final int DEFAULT_CAPACITY = 10;
     private boolean isMutable = true;
 
-    AbstractProtobufList() {
-    }
+    AbstractProtobufList() {}
 
     @Override // java.util.AbstractList, java.util.Collection, java.util.List
     public boolean equals(Object o) {
@@ -48,7 +46,8 @@ abstract class AbstractProtobufList<E> extends AbstractList<E> implements Intern
         return hashCode;
     }
 
-    @Override // java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.util.List
+    @Override // java.util.AbstractList, java.util.AbstractCollection, java.util.Collection,
+              // java.util.List
     public boolean add(E e) {
         ensureIsMutable();
         return super.add(e);
@@ -72,7 +71,8 @@ abstract class AbstractProtobufList<E> extends AbstractList<E> implements Intern
         return super.addAll(index, c);
     }
 
-    @Override // java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.util.List
+    @Override // java.util.AbstractList, java.util.AbstractCollection, java.util.Collection,
+              // java.util.List
     public void clear() {
         ensureIsMutable();
         super.clear();

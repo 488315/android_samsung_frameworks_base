@@ -5,27 +5,30 @@ import android.os.BadParcelableException;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class RecognitionEventSys implements Parcelable {
-    public static final Parcelable.Creator<RecognitionEventSys> CREATOR = new Parcelable.Creator<RecognitionEventSys>() { // from class: android.media.soundtrigger_middleware.RecognitionEventSys.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionEventSys createFromParcel(Parcel _aidl_source) {
-            RecognitionEventSys _aidl_out = new RecognitionEventSys();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RecognitionEventSys> CREATOR =
+            new Parcelable.Creator<RecognitionEventSys>() { // from class:
+                // android.media.soundtrigger_middleware.RecognitionEventSys.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionEventSys createFromParcel(Parcel _aidl_source) {
+                    RecognitionEventSys _aidl_out = new RecognitionEventSys();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionEventSys[] newArray(int _aidl_size) {
-            return new RecognitionEventSys[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionEventSys[] newArray(int _aidl_size) {
+                    return new RecognitionEventSys[_aidl_size];
+                }
+            };
     public long halEventReceivedMillis = -1;
     public RecognitionEvent recognitionEvent;
     public IBinder token;
@@ -57,7 +60,8 @@ public class RecognitionEventSys implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.recognitionEvent = (RecognitionEvent) _aidl_parcel.readTypedObject(RecognitionEvent.CREATOR);
+            this.recognitionEvent =
+                    (RecognitionEvent) _aidl_parcel.readTypedObject(RecognitionEvent.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -103,14 +107,23 @@ public class RecognitionEventSys implements Parcelable {
             return false;
         }
         RecognitionEventSys that = (RecognitionEventSys) other;
-        if (Objects.deepEquals(this.recognitionEvent, that.recognitionEvent) && Objects.deepEquals(Long.valueOf(this.halEventReceivedMillis), Long.valueOf(that.halEventReceivedMillis)) && Objects.deepEquals(this.token, that.token)) {
+        if (Objects.deepEquals(this.recognitionEvent, that.recognitionEvent)
+                && Objects.deepEquals(
+                        Long.valueOf(this.halEventReceivedMillis),
+                        Long.valueOf(that.halEventReceivedMillis))
+                && Objects.deepEquals(this.token, that.token)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.recognitionEvent, Long.valueOf(this.halEventReceivedMillis), this.token).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.recognitionEvent,
+                                Long.valueOf(this.halEventReceivedMillis),
+                                this.token)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

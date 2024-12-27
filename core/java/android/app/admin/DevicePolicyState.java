@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -11,19 +12,21 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes.dex */
 public final class DevicePolicyState implements Parcelable {
-    public static final Parcelable.Creator<DevicePolicyState> CREATOR = new Parcelable.Creator<DevicePolicyState>() { // from class: android.app.admin.DevicePolicyState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DevicePolicyState createFromParcel(Parcel source) {
-            return new DevicePolicyState(source);
-        }
+    public static final Parcelable.Creator<DevicePolicyState> CREATOR =
+            new Parcelable.Creator<
+                    DevicePolicyState>() { // from class: android.app.admin.DevicePolicyState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DevicePolicyState createFromParcel(Parcel source) {
+                    return new DevicePolicyState(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DevicePolicyState[] newArray(int size) {
-            return new DevicePolicyState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DevicePolicyState[] newArray(int size) {
+                    return new DevicePolicyState[size];
+                }
+            };
     private final Map<UserHandle, Map<PolicyKey, PolicyState<?>>> mPolicies;
 
     public DevicePolicyState(Map<UserHandle, Map<PolicyKey, PolicyState<?>>> policies) {
@@ -38,8 +41,10 @@ public final class DevicePolicyState implements Parcelable {
             this.mPolicies.put(userHandle, new HashMap());
             int policiesSize = source.readInt();
             for (int j = 0; j < policiesSize; j++) {
-                PolicyKey policyKey = (PolicyKey) source.readParcelable(PolicyKey.class.getClassLoader());
-                PolicyState<?> policyState = (PolicyState) source.readParcelable(PolicyState.class.getClassLoader());
+                PolicyKey policyKey =
+                        (PolicyKey) source.readParcelable(PolicyKey.class.getClassLoader());
+                PolicyState<?> policyState =
+                        (PolicyState) source.readParcelable(PolicyState.class.getClassLoader());
                 this.mPolicies.get(userHandle).put(policyKey, policyState);
             }
         }

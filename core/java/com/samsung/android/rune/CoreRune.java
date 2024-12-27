@@ -6,9 +6,11 @@ import android.os.FactoryTest;
 import android.os.Process;
 import android.os.SystemProperties;
 import android.util.ArraySet;
+
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
@@ -220,7 +222,8 @@ public class CoreRune {
     public static final boolean FW_LARGE_FLIP_LAUNCHER_WIDGET_AVOID_START = false;
     public static final boolean FW_LARGE_FLIP_LAUNCHER_WIDGET_INSETS = false;
     public static final boolean FW_LARGE_FLIP_LAUNCHER_WIDGET_POLICY_CHN;
-    public static final boolean FW_LARGE_FLIP_LAUNCHER_WIDGET_RELAUNCH_WEBVIEW_ATTACHED_ACTIVITY = false;
+    public static final boolean FW_LARGE_FLIP_LAUNCHER_WIDGET_RELAUNCH_WEBVIEW_ATTACHED_ACTIVITY =
+            false;
     public static final boolean FW_LARGE_FLIP_LAUNCHER_WIDGET_SUPPORT_CUSTOM_DENSITY = false;
     public static final boolean FW_LARGE_FLIP_NAVBAR = false;
     public static final boolean FW_LARGE_FLIP_PENDING_INTENT = false;
@@ -1038,8 +1041,7 @@ public class CoreRune {
     public static final boolean IS_DEBUG_LEVEL_HIGH = DEBUG_LEVEL_HIGH.equals(DEBUG_LEVEL);
     public static final boolean IS_FACTORY_BINARY = FactoryTest.isFactoryMode();
 
-    private CoreRune() {
-    }
+    private CoreRune() {}
 
     public static CoreRune getInstance() {
         if (sInstance == null) {
@@ -1055,16 +1057,25 @@ public class CoreRune {
         ONE_UI_5_1_1 = Build.VERSION.SEM_PLATFORM_INT >= 140500;
         ONE_UI_6_1 = Build.VERSION.SEM_PLATFORM_INT >= 150100;
         ONE_UI_6_1_1 = Build.VERSION.SEM_PLATFORM_INT >= 150500;
-        IS_SHELL_TRANSITION_ENABLED = SystemProperties.getBoolean("persist.wm.debug.shell_transit", true);
-        IS_PREDICTIVE_BACK_ANIM_ENABLED = SystemProperties.getBoolean("persist.wm.debug.predictive_back_anim", true);
-        FW_SA_LOGGING = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE");
+        IS_SHELL_TRANSITION_ENABLED =
+                SystemProperties.getBoolean("persist.wm.debug.shell_transit", true);
+        IS_PREDICTIVE_BACK_ANIM_ENABLED =
+                SystemProperties.getBoolean("persist.wm.debug.predictive_back_anim", true);
+        FW_SA_LOGGING =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE");
         FW_ROTATION_LOG = FW_SA_LOGGING;
-        FW_SURFACE_DEBUG_CREATION = SystemProperties.getBoolean("persist.debug.surface.creation", false);
-        FW_SURFACE_DEBUG_REMOVE = SystemProperties.getBoolean("persist.debug.surface.remove", false);
-        FW_SURFACE_DEBUG_REPARENT = SystemProperties.getBoolean("persist.debug.surface.reparent", false);
+        FW_SURFACE_DEBUG_CREATION =
+                SystemProperties.getBoolean("persist.debug.surface.creation", false);
+        FW_SURFACE_DEBUG_REMOVE =
+                SystemProperties.getBoolean("persist.debug.surface.remove", false);
+        FW_SURFACE_DEBUG_REPARENT =
+                SystemProperties.getBoolean("persist.debug.surface.reparent", false);
         FW_SURFACE_DEBUG_ALPHA = SystemProperties.getBoolean("persist.debug.surface.alpha", false);
-        FW_SURFACE_DEBUG_VISIBILITY = SystemProperties.getBoolean("persist.debug.surface.visibility", false);
-        FW_SURFACE_DEBUG_TRANSFORM = SystemProperties.getBoolean("persist.debug.surface.transform", false);
+        FW_SURFACE_DEBUG_VISIBILITY =
+                SystemProperties.getBoolean("persist.debug.surface.visibility", false);
+        FW_SURFACE_DEBUG_TRANSFORM =
+                SystemProperties.getBoolean("persist.debug.surface.transform", false);
         FW_SURFACE_DEBUG_LAYER = SystemProperties.getBoolean("persist.debug.surface.layer", false);
         FW_SURFACE_DEBUG_CROP = SystemProperties.getBoolean("persist.debug.surface.crop", false);
         FW_SURFACE_DEBUG_APPLY = SystemProperties.getBoolean("persist.debug.surface.apply", true);
@@ -1077,7 +1088,9 @@ public class CoreRune {
         FW_SA_LOGGING_FOR_HALF_OPEN_MODE = FW_FLEXIBLE_TABLE_MODE && FW_SA_LOGGING;
         FW_FOLD_SA_LOGGING = false;
         FW_FOLD_WALLPAPER_POLICY = false;
-        FW_CHN_PREMIUM_WATCH = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_CLOCK_SUPPORT_PREMIUM_WATCH");
+        FW_CHN_PREMIUM_WATCH =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_CLOCK_SUPPORT_PREMIUM_WATCH");
         FW_MULTI_FOLD_TESTING = FW_MULTI_FOLD;
         FW_FLIP_RESTORE_DEFAULT_DISPLAY_DENSITY_IN_BOOT = false;
         FW_FLEX_PANEL = FW_FLEXIBLE_TABLE_MODE;
@@ -1090,24 +1103,45 @@ public class CoreRune {
         FW_FLIP_LARGE_COVER_SCREEN_SA_LOGGING = false;
         FW_TSP_STATE_CONTROLLER = !IS_FACTORY_BINARY;
         FW_TSP_SIP_MODE = FW_TSP_STATE_CONTROLLER;
-        FW_TSP_DEADZONE = FW_TSP_STATE_CONTROLLER && SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_TSP_STATE_MANAGER").contains("deadzone");
+        FW_TSP_DEADZONE =
+                FW_TSP_STATE_CONTROLLER
+                        && SemFloatingFeature.getInstance()
+                                .getString(
+                                        "SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_TSP_STATE_MANAGER")
+                                .contains("deadzone");
         FW_TSP_NOTE_MODE = FW_TSP_STATE_CONTROLLER;
-        FW_TSP_DEADZONE_V3 = FW_TSP_STATE_CONTROLLER && SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_TSP_STATE_MANAGER").contains("deadzone_v3");
+        FW_TSP_DEADZONE_V3 =
+                FW_TSP_STATE_CONTROLLER
+                        && SemFloatingFeature.getInstance()
+                                .getString(
+                                        "SEC_FLOATING_FEATURE_FRAMEWORK_SUPPORT_TSP_STATE_MANAGER")
+                                .contains("deadzone_v3");
         FW_USE_SMALLER_GRIPZONE_ON_GAME = FW_TSP_STATE_CONTROLLER && !IS_TABLET_DEVICE;
-        FW_TSP_DEADZONEHOLE_LAND = FW_TSP_DEADZONE && "bsxasm1".equals(SystemProperties.get("ro.com.google.cdb.spa1"));
+        FW_TSP_DEADZONEHOLE_LAND =
+                FW_TSP_DEADZONE && "bsxasm1".equals(SystemProperties.get("ro.com.google.cdb.spa1"));
         FW_VRR_POLICY = Integer.parseInt("3") > 0;
         FW_VRR_SEAMLESS = FW_VRR_POLICY && !IS_FACTORY_BINARY && Integer.parseInt("3") > 1;
         FW_VRR_DISCRETE = Integer.parseInt("3") == 4;
         FW_VRR_REFRESH_RATE_MODE = FW_VRR_POLICY;
         FW_VRR_RESOLUTION_POLICY = FW_VRR_POLICY && "WQHD,FHD,HD".equals("WQHD,FHD,HD");
-        FW_VRR_RESOLUTION_POLICY_FOR_SHELL_TRANSITION = FW_VRR_RESOLUTION_POLICY && IS_SHELL_TRANSITION_ENABLED;
+        FW_VRR_RESOLUTION_POLICY_FOR_SHELL_TRANSITION =
+                FW_VRR_RESOLUTION_POLICY && IS_SHELL_TRANSITION_ENABLED;
         FW_VRR_FIXED_REFRESH_RATE_PACKAGE = FW_VRR_POLICY;
         FW_VRR_REFRESH_RATE_TOKEN = FW_VRR_POLICY;
         FW_VRR_SYSTEM_HISTORY = FW_VRR_POLICY;
-        FW_VRR_HIGH_REFRESH_RATE_BLOCK_LIST = FW_VRR_SEAMLESS && SystemProperties.getBoolean("persist.debug.hrr.block.enabled", true);
-        FW_VRR_HRR_CHINA_DELTA = FW_VRR_HIGH_REFRESH_RATE_BLOCK_LIST && "CHINA".equalsIgnoreCase(SystemProperties.get("ro.csc.country_code"));
-        FW_VRR_LOW_REFRESH_RATE_LIST = FW_VRR_POLICY && SystemProperties.getBoolean("persist.debug.lrr.enabled", true);
-        FW_VRR_NAVIGATION_LOW_REFRESH_RATE = FW_VRR_POLICY && !IS_TABLET_DEVICE && Integer.parseInt("3") == 1 && SystemProperties.getBoolean("persist.debug.lrr_navi.enabled", true);
+        FW_VRR_HIGH_REFRESH_RATE_BLOCK_LIST =
+                FW_VRR_SEAMLESS
+                        && SystemProperties.getBoolean("persist.debug.hrr.block.enabled", true);
+        FW_VRR_HRR_CHINA_DELTA =
+                FW_VRR_HIGH_REFRESH_RATE_BLOCK_LIST
+                        && "CHINA".equalsIgnoreCase(SystemProperties.get("ro.csc.country_code"));
+        FW_VRR_LOW_REFRESH_RATE_LIST =
+                FW_VRR_POLICY && SystemProperties.getBoolean("persist.debug.lrr.enabled", true);
+        FW_VRR_NAVIGATION_LOW_REFRESH_RATE =
+                FW_VRR_POLICY
+                        && !IS_TABLET_DEVICE
+                        && Integer.parseInt("3") == 1
+                        && SystemProperties.getBoolean("persist.debug.lrr_navi.enabled", true);
         FW_VRR_FOR_SUB_DISPLAY = false;
         FW_VRR_IGNORE_RESTRICTED_RANGE = FW_VRR_POLICY;
         FW_VRR_PERFORMANCE = FW_VRR_POLICY;
@@ -1121,23 +1155,31 @@ public class CoreRune {
         FW_DVRR_TOOLKIT_PRIORITIZE_HIGH_HINT = FW_DVRR_TOOLKIT_POLICY;
         FW_DVRR_TOOLKIT_PROLONG_TOUCH_BOOST = FW_DVRR_TOOLKIT_POLICY;
         FW_DVRR_TOOLKIT_BUG_FIX = FW_DVRR_TOOLKIT_POLICY;
-        FW_SUPPORT_LOCK_TASK_MODE_BROADCAST = SemCscFeature.getInstance().getBoolean("CscFeature_Framework_SupportBroadcastScreenPinning", false);
+        FW_SUPPORT_LOCK_TASK_MODE_BROADCAST =
+                SemCscFeature.getInstance()
+                        .getBoolean("CscFeature_Framework_SupportBroadcastScreenPinning", false);
         FW_ALLOW_TOUCH_TO_KEYGUARD_WALLPAPER = ONE_UI_6_1;
         FW_NAVBAR_MOVABLE_POLICY = IS_TABLET_DEVICE;
         FW_NOTIFY_TASKBAR_VISIBLE = ONE_UI_4_1_1;
         FW_INSETS_LOG_DEBUG = SystemProperties.getBoolean("persist.wm.enable.insets_debug", false);
         FW_FLEX_MODE_APP_LIST = FW_FLEX_PANEL_CONTROL;
         FW_FLEX_PANEL_DEFAULT_LIST = FW_FLEX_PANEL_CONTROL;
-        FW_SCREENSHOT_FOR_HDR = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_MMFW_SUPPORT_PHOTOHDR");
+        FW_SCREENSHOT_FOR_HDR =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_MMFW_SUPPORT_PHOTOHDR");
         FW_CUSTOM_BASIC_ANIM = SystemProperties.getBoolean("persist.wm.enable.custom.anim", true);
         FW_INSET_ANIM = FW_CUSTOM_BASIC_ANIM;
-        FW_MINIMIZED_IME_INSET_ANIM = FW_INSET_ANIM && SystemProperties.getBoolean("persist.wm.enable.minimized_ime.anim", false);
+        FW_MINIMIZED_IME_INSET_ANIM =
+                FW_INSET_ANIM
+                        && SystemProperties.getBoolean(
+                                "persist.wm.enable.minimized_ime.anim", false);
         FW_CUSTOM_BASIC_ANIM_WITH_DIM = FW_CUSTOM_BASIC_ANIM;
         FW_CUSTOM_DISPLAY_CHANGE_ANIM = FW_CUSTOM_BASIC_ANIM;
         FW_UI_MODE_ANIMATION = FW_CUSTOM_BASIC_ANIM;
         FW_BLACK_SNAPSHOT_TRANSITION = FW_CUSTOM_BASIC_ANIM;
         FW_REMOTE_WALLPAPER_ANIM = FW_CUSTOM_BASIC_ANIM;
-        FW_EDGE_EXTENSION_ANIM_DEBUG = SystemProperties.getBoolean("persist.wm.edge.extension.debug", false);
+        FW_EDGE_EXTENSION_ANIM_DEBUG =
+                SystemProperties.getBoolean("persist.wm.edge.extension.debug", false);
         FW_PREDICTIVE_BACK_ANIM = FW_CUSTOM_BASIC_ANIM && IS_PREDICTIVE_BACK_ANIM_ENABLED;
         FW_PREDICTIVE_BACK_ANIM_BUG_FIX = FW_PREDICTIVE_BACK_ANIM;
         FW_SHELL_TRANSITION = FW_CUSTOM_BASIC_ANIM && IS_SHELL_TRANSITION_ENABLED;
@@ -1146,31 +1188,56 @@ public class CoreRune {
         FW_SHELL_TRANSITION_RESUMED_AFFORDANCE = FW_SHELL_TRANSITION;
         FW_SHELL_TRANSITION_BLACK_SNAPSHOT = FW_SHELL_TRANSITION && FW_BLACK_SNAPSHOT_TRANSITION;
         FW_SHELL_TRANSITION_REMOTE = FW_SHELL_TRANSITION;
-        FW_SHELL_TRANSITION_MERGE = FW_SHELL_TRANSITION_REMOTE && SystemProperties.getBoolean("persist.wm.enable.merge.transit", true);
-        FW_SHELL_TRANSITION_MERGE_TRANSFER = FW_SHELL_TRANSITION_MERGE && SystemProperties.getBoolean("persist.wm.enable.merge_transfer.transit", true);
+        FW_SHELL_TRANSITION_MERGE =
+                FW_SHELL_TRANSITION_REMOTE
+                        && SystemProperties.getBoolean("persist.wm.enable.merge.transit", true);
+        FW_SHELL_TRANSITION_MERGE_TRANSFER =
+                FW_SHELL_TRANSITION_MERGE
+                        && SystemProperties.getBoolean(
+                                "persist.wm.enable.merge_transfer.transit", true);
         FW_SHELL_TRANSITION_SEPARATE_RECENTS = FW_SHELL_TRANSITION;
-        FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY = FW_SHELL_TRANSITION_SEPARATE_RECENTS && SystemProperties.getBoolean("persist.wm.transient_launch.overlay", true);
+        FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY =
+                FW_SHELL_TRANSITION_SEPARATE_RECENTS
+                        && SystemProperties.getBoolean("persist.wm.transient_launch.overlay", true);
         FW_SHELL_TRANSITION_AOD_APPEAR = FW_SHELL_TRANSITION;
         FW_SHELL_TRANSITION_LOG = FW_SHELL_TRANSITION;
         FW_SHELL_TRANSITION_BUG_FIX = FW_SHELL_TRANSITION;
         FW_SHELL_TRANSITION_EXTENSION = FW_SHELL_TRANSITION_BUG_FIX;
-        FW_SHELL_TRANSITION_RECENTS_BUG_FIX = FW_SHELL_TRANSITION_BUG_FIX && FW_SHELL_TRANSITION_SEPARATE_RECENTS;
+        FW_SHELL_TRANSITION_RECENTS_BUG_FIX =
+                FW_SHELL_TRANSITION_BUG_FIX && FW_SHELL_TRANSITION_SEPARATE_RECENTS;
         FW_SHELL_TRANSITION_ROTATED_WALLPAPER_SNAPSHOT = FW_SHELL_TRANSITION_BUG_FIX;
         FW_DYNAMIC_RESOLUTION_CONTROL = "WQHD,FHD,HD".equals("WQHD,FHD,HD");
         FW_LOW_TASK_SNAPSHOT_SCALE_FOR_TABLET = IS_TABLET_DEVICE;
-        FW_DEVELOPMENT_DISABLE_STARTING_WINDOW = SystemProperties.getBoolean("persist.debug.disable.starting_window", false);
+        FW_DEVELOPMENT_DISABLE_STARTING_WINDOW =
+                SystemProperties.getBoolean("persist.debug.disable.starting_window", false);
         FW_ALLOW_ALL_ROTATION = IS_TABLET_DEVICE;
-        FW_AOD_FACE_WIDGET = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_AOD_ITEM").contains("aodversion");
+        FW_AOD_FACE_WIDGET =
+                SemFloatingFeature.getInstance()
+                        .getString("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_AOD_ITEM")
+                        .contains("aodversion");
         MT_DND_ANIMATION = ONE_UI_4_1;
         MT_DND_DISABLE_CANCEL_ANIMATION = MT_DND_ANIMATION;
         MT_DND_SEAMLESS_ANIMATION = MT_DND_ANIMATION;
         MT_DND_OBJECT_CAPTURE = MT_DND_ANIMATION;
-        FW_IMPROVED_MOVED_ANIMATION_FOR_IME = SystemProperties.getBoolean("persist.debug.improved.move.anim", true);
-        FW_SPEN_HOVER = SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION", -1) > 0;
-        FW_SUPPORT_APPLOCK = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME").equals("com.samsung.android.sm_cn");
+        FW_IMPROVED_MOVED_ANIMATION_FOR_IME =
+                SystemProperties.getBoolean("persist.debug.improved.move.anim", true);
+        FW_SPEN_HOVER =
+                SemFloatingFeature.getInstance()
+                                .getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION", -1)
+                        > 0;
+        FW_SUPPORT_APPLOCK =
+                SemFloatingFeature.getInstance()
+                        .getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME")
+                        .equals("com.samsung.android.sm_cn");
         FW_APPLOCK = FW_SUPPORT_APPLOCK;
-        FW_SCREEN_MODE_SETTING = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_WIDE_COLOR_GAMUT") || SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_NATURAL_SCREEN_MODE");
-        FW_SUPPORT_NATIVE_AI = !SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_DISABLE_NATIVE_AI");
+        FW_SCREEN_MODE_SETTING =
+                SemFloatingFeature.getInstance()
+                                .getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_WIDE_COLOR_GAMUT")
+                        || SemFloatingFeature.getInstance()
+                                .getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_NATURAL_SCREEN_MODE");
+        FW_SUPPORT_NATIVE_AI =
+                !SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_DISABLE_NATIVE_AI");
         FW_CCM_BUG_FIX = FW_SUPPORT_NATIVE_AI;
         MW_SA_LOGGING = FW_SA_LOGGING;
         MW_SHELL_TRANSITION = IS_SHELL_TRANSITION_ENABLED;
@@ -1179,10 +1246,20 @@ public class CoreRune {
         MW_SHELL_CHANGE_TRANSITION = MW_SHELL_TRANSITION;
         MW_SHELL_DISPLAY_CHANGE_TRANSITION = MW_SHELL_CHANGE_TRANSITION;
         MW_SHELL_KEYBOARD_SHORTCUT_SA_LOGGING = MW_SA_LOGGING;
-        MW_SUPPORT_3D_SURFACE_TRANSITION_FLAG = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_GRAPHICS_SUPPORT_3D_SURFACE_TRANSITION_FLAG");
-        MW_SUPPORT_DRAG_AND_DROP_PARTIAL_BLUR = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_GRAPHICS_SUPPORT_PARTIAL_BLUR");
-        MW_SUPPORT_DRAG_AND_DROP_REAL_TIME_BLUR = MW_SUPPORT_3D_SURFACE_TRANSITION_FLAG && MW_SUPPORT_DRAG_AND_DROP_PARTIAL_BLUR;
-        MW_SUPPORT_DRAG_AND_DROP_CAPTURED_BLUR = !MW_SUPPORT_3D_SURFACE_TRANSITION_FLAG && MW_SUPPORT_DRAG_AND_DROP_PARTIAL_BLUR && SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_GRAPHICS_SUPPORT_CAPTURED_BLUR");
+        MW_SUPPORT_3D_SURFACE_TRANSITION_FLAG =
+                SemFloatingFeature.getInstance()
+                        .getBoolean(
+                                "SEC_FLOATING_FEATURE_GRAPHICS_SUPPORT_3D_SURFACE_TRANSITION_FLAG");
+        MW_SUPPORT_DRAG_AND_DROP_PARTIAL_BLUR =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_GRAPHICS_SUPPORT_PARTIAL_BLUR");
+        MW_SUPPORT_DRAG_AND_DROP_REAL_TIME_BLUR =
+                MW_SUPPORT_3D_SURFACE_TRANSITION_FLAG && MW_SUPPORT_DRAG_AND_DROP_PARTIAL_BLUR;
+        MW_SUPPORT_DRAG_AND_DROP_CAPTURED_BLUR =
+                !MW_SUPPORT_3D_SURFACE_TRANSITION_FLAG
+                        && MW_SUPPORT_DRAG_AND_DROP_PARTIAL_BLUR
+                        && SemFloatingFeature.getInstance()
+                                .getBoolean("SEC_FLOATING_FEATURE_GRAPHICS_SUPPORT_CAPTURED_BLUR");
         MW_MULTI_SPLIT = "13".equals("0") || "23".equals("0");
         MW_MULTI_SPLIT_ROUNDED_CORNER = MW_MULTI_SPLIT;
         MW_SPLIT_FLEX_MODE_SA_LOGGING = FW_FLEXIBLE_TABLE_MODE;
@@ -1215,7 +1292,8 @@ public class CoreRune {
         MW_MULTI_SPLIT_FREE_POSITION_SA_LOGGING = MW_MULTI_SPLIT_FREE_POSITION && MW_SA_LOGGING;
         MW_MULTI_SPLIT_FULL_TO_SPLIT_BY_GESTURE = MW_MULTI_SPLIT_FREE_POSITION;
         MW_MULTI_SPLIT_BOUNDS_POLICY = MW_MULTI_SPLIT_FREE_POSITION;
-        MW_MULTI_SPLIT_BOUNDS_POLICY_IGNORING_CUTOUT = IS_TABLET_DEVICE && MW_MULTI_SPLIT_BOUNDS_POLICY;
+        MW_MULTI_SPLIT_BOUNDS_POLICY_IGNORING_CUTOUT =
+                IS_TABLET_DEVICE && MW_MULTI_SPLIT_BOUNDS_POLICY;
         MW_MULTI_SPLIT_BACKGROUND = MW_MULTI_SPLIT_BOUNDS_POLICY;
         MW_MULTI_SPLIT_TASK_ORGANIZER = MW_MULTI_SPLIT;
         MW_MULTI_SPLIT_TASK_VISIBILITY = MW_MULTI_SPLIT_TASK_ORGANIZER;
@@ -1227,7 +1305,8 @@ public class CoreRune {
         MW_MULTI_SPLIT_RECENT_TASKS = MW_MULTI_SPLIT;
         MW_MULTI_SPLIT_SHELL_DUMP = MW_MULTI_SPLIT;
         MW_MULTI_SPLIT_FOLDING_POLICY = false;
-        MW_MULTI_SPLIT_APP_PAIR_FOLDING_POLICY = MW_MULTI_SPLIT_APP_PAIR && MW_MULTI_SPLIT_FOLDING_POLICY;
+        MW_MULTI_SPLIT_APP_PAIR_FOLDING_POLICY =
+                MW_MULTI_SPLIT_APP_PAIR && MW_MULTI_SPLIT_FOLDING_POLICY;
         MW_MULTI_SPLIT_SHOW_INCALL_WHEN_FOLDING = MW_MULTI_SPLIT_FOLDING_POLICY;
         MW_MULTI_SPLIT_ENSURE_APP_SIZE = MW_MULTI_SPLIT;
         MW_MULTI_SPLIT_ADJUST_FOR_IME = MW_MULTI_SPLIT;
@@ -1251,9 +1330,16 @@ public class CoreRune {
         MW_FREEFORM_LARGE_SCREEN_BOUNDS_POLICY = IS_TABLET_DEVICE;
         MW_FREEFORM_CORNER_GESTURE_SA_LOGGING = MW_SA_LOGGING;
         MW_CAPTION_SHELL_BUG_FIX = MW_CAPTION_SHELL;
-        MW_CAPTION_SHELL_INSETS = MW_CAPTION_SHELL && SystemProperties.getBoolean("persist.debug.caption.insets", true);
+        MW_CAPTION_SHELL_INSETS =
+                MW_CAPTION_SHELL
+                        && SystemProperties.getBoolean("persist.debug.caption.insets", true);
         MW_CAPTION_SHELL_DEBUG = MW_CAPTION_SHELL;
-        MW_CAPTION_SHELL_SUPPORT_WINDOW_OPACITY = MW_CAPTION_SHELL && (SystemProperties.get("ro.surface_flinger.protected_contents", "").contains("true") || SystemProperties.get("ro.surface_flinger.protected_contents", "").contains("1"));
+        MW_CAPTION_SHELL_SUPPORT_WINDOW_OPACITY =
+                MW_CAPTION_SHELL
+                        && (SystemProperties.get("ro.surface_flinger.protected_contents", "")
+                                        .contains("true")
+                                || SystemProperties.get("ro.surface_flinger.protected_contents", "")
+                                        .contains("1"));
         MW_CAPTION_SHELL_POPUP = MW_CAPTION_SHELL;
         MW_CAPTION_SHELL_POPUP_HELP = MW_CAPTION_SHELL_POPUP;
         MW_CAPTION_SHELL_DEX = MW_CAPTION_SHELL;
@@ -1266,16 +1352,23 @@ public class CoreRune {
         MW_SHELL_FREEFORM_CAPTION_TYPE = MW_CAPTION_SHELL;
         MW_SHELL_FREEFORM_SHADOW_WITH_VIEW_ELEVATION = MW_CAPTION_SHELL;
         MW_SHELL_FREEFORM_TASK_POSITIONER = MW_CAPTION_SHELL;
-        MW_CAPTION_SHELL_FREEFORM_MOTION = MW_SHELL_FREEFORM_TASK_POSITIONER && MW_FREEFORM_SHELL_TRANSITION;
+        MW_CAPTION_SHELL_FREEFORM_MOTION =
+                MW_SHELL_FREEFORM_TASK_POSITIONER && MW_FREEFORM_SHELL_TRANSITION;
         MW_CAPTION_SHELL_FREEFORM_RESIZE_VIEW = MW_CAPTION_SHELL;
         MW_CAPTION_SHELL_FREEFORM_RESIZE_GESTURE = MW_CAPTION_SHELL_FREEFORM_RESIZE_VIEW;
-        MW_CAPTION_SHELL_FREEFORM_RESIZE_GESTURE_SA_LOGGING = MW_CAPTION_SHELL_FREEFORM_RESIZE_GESTURE && MW_SA_LOGGING;
+        MW_CAPTION_SHELL_FREEFORM_RESIZE_GESTURE_SA_LOGGING =
+                MW_CAPTION_SHELL_FREEFORM_RESIZE_GESTURE && MW_SA_LOGGING;
         MW_FREEFORM_RESIZE_TOUCHABLE_REGION = MW_CAPTION_SHELL_FREEFORM_RESIZE_VIEW;
         MW_CAPTION_SHELL_HANDLE_VIEW = MW_CAPTION_SHELL;
         MW_CAPTION_SHELL_CUSTOMIZABLE_WINDOW_HEADERS = MW_CAPTION_SHELL_INSETS;
         MW_PIP_SHELL_TRANSITION = MW_SHELL_TRANSITION;
         MW_PIP_REMOTE_TRANSITION = MW_PIP_SHELL_TRANSITION;
-        MW_PIP_DISABLE_ROUNDED_CORNER = (SystemProperties.get("ro.surface_flinger.protected_contents", "").contains("true") || SystemProperties.get("ro.surface_flinger.protected_contents", "").contains("1")) ? false : true;
+        MW_PIP_DISABLE_ROUNDED_CORNER =
+                (SystemProperties.get("ro.surface_flinger.protected_contents", "").contains("true")
+                                || SystemProperties.get("ro.surface_flinger.protected_contents", "")
+                                        .contains("1"))
+                        ? false
+                        : true;
         MW_PIP_SA_LOGGING = MW_SA_LOGGING;
         MW_NATURAL_SWITCHING_FULLSCREEN = ONE_UI_6_1_1;
         MW_NATURAL_SWITCHING_PIP = ONE_UI_6_1_1;
@@ -1295,11 +1388,20 @@ public class CoreRune {
         MD_DEX_MINIMIZE_SHELL_TRANSITION = MD_DEX_SHELL_TRANSITION;
         MW_CAPTION_SHELL_DEX_SNAPPING_WINDOW = MW_SHELL_FREEFORM_TASK_POSITIONER;
         MD_DEX_NOT_SUPPORT_CUTOUT = IS_TABLET_DEVICE;
-        SUPPORTED_MODES = Collections.unmodifiableSet(new ArraySet(Arrays.asList(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_DEX_MODE").split(","))));
+        SUPPORTED_MODES =
+                Collections.unmodifiableSet(
+                        new ArraySet(
+                                Arrays.asList(
+                                        SemFloatingFeature.getInstance()
+                                                .getString(
+                                                        "SEC_FLOATING_FEATURE_COMMON_CONFIG_DEX_MODE")
+                                                .split(","))));
         MD_DEX_WIRELESS = SUPPORTED_MODES.contains(AudioDeviceDescription.CONNECTION_WIRELESS);
-        MD_DEX_SUPPORT_STANDALONE = IS_TABLET_DEVICE && true && SUPPORTED_MODES.contains("standalone");
+        MD_DEX_SUPPORT_STANDALONE =
+                IS_TABLET_DEVICE && true && SUPPORTED_MODES.contains("standalone");
         MD_DEX_COMPAT_CAPTION_SHELL = MW_CAPTION_SHELL_DEX;
-        MD_FORCE_ENABLE_DESKTOP_MODE = SystemProperties.getBoolean("persist.wm.debug.force_enable_desktop_mode", false);
+        MD_FORCE_ENABLE_DESKTOP_MODE =
+                SystemProperties.getBoolean("persist.wm.debug.force_enable_desktop_mode", false);
         MT_NEW_DEX = MD_DEX_SUPPORT_STANDALONE;
         MD_DEX_STANDALONE_LAUNCH_POLICY = MT_NEW_DEX;
         MT_NEW_DEX_LAUNCH_POLICY = MT_NEW_DEX;
@@ -1311,9 +1413,11 @@ public class CoreRune {
         MT_NEW_DEX_PERSIST_BOUNDS = MT_NEW_DEX_BOUNDS_POLICY;
         MT_NEW_DEX_LIMIT_RUNNING_APPS = MT_NEW_DEX;
         MT_NEW_DEX_TASK_PINNING = MT_NEW_DEX;
-        MT_NEW_DEX_RESUMED_AFFORDANCE_ANIMATION = MT_NEW_DEX && MW_RESUMED_AFFORDANCE_SHELL_TRANSITION;
+        MT_NEW_DEX_RESUMED_AFFORDANCE_ANIMATION =
+                MT_NEW_DEX && MW_RESUMED_AFFORDANCE_SHELL_TRANSITION;
         MT_NEW_DEX_PIP = MT_NEW_DEX;
-        MT_NEW_DEX_PIP_ON_FREEFORM = MT_NEW_DEX_PIP && SystemProperties.getBoolean("persist.debug.pip.newdex", false);
+        MT_NEW_DEX_PIP_ON_FREEFORM =
+                MT_NEW_DEX_PIP && SystemProperties.getBoolean("persist.debug.pip.newdex", false);
         MT_NEW_DEX_CONFIG_MANAGEMENT = MT_NEW_DEX;
         MW_CAPTION_SHELL_NEW_DEX = MW_CAPTION_SHELL && MT_NEW_DEX;
         MW_CAPTION_SHELL_NEW_DEX_CAPTION_TYPE = MW_CAPTION_SHELL_NEW_DEX;
@@ -1321,7 +1425,8 @@ public class CoreRune {
         MT_APP_COMPAT_MIN_ASPECT_RATIO_LIST = false;
         MT_APP_COMPAT_LANDSCAPE_VIEW_FOR_PORTRAIT_APPS = IS_TABLET_DEVICE;
         MT_APP_COMPAT_ORIENTATION_POLICY = MT_APP_COMPAT_LANDSCAPE_VIEW_FOR_PORTRAIT_APPS;
-        MT_APP_COMPAT_ROTATION_COMPAT_MODE = MT_APP_COMPAT_ORIENTATION_POLICY && MT_APP_COMPAT_LANDSCAPE_VIEW_FOR_PORTRAIT_APPS;
+        MT_APP_COMPAT_ROTATION_COMPAT_MODE =
+                MT_APP_COMPAT_ORIENTATION_POLICY && MT_APP_COMPAT_LANDSCAPE_VIEW_FOR_PORTRAIT_APPS;
         MT_APP_COMPAT_STATUS_LOGGING = FW_SA_LOGGING;
         MT_APP_COMPAT_LARGE_SCREEN = MT_APP_COMPAT_LANDSCAPE_VIEW_FOR_PORTRAIT_APPS;
         MT_APP_COMPAT_TRANSPARENT_POLICY = MT_APP_COMPAT_LARGE_SCREEN;
@@ -1337,37 +1442,70 @@ public class CoreRune {
         MW_MULTISTAR_MULTI_SPLIT_GUIDE_VIEW = MW_MULTI_SPLIT;
         FW_TRIM_MEMORY_LOG = Build.IS_ENG;
         FW_DEDICATED_MEMORY = Process.getTotalMemory() / 1048576 > 6144;
-        FW_WINDOW_BLUR_SUPPORTED = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_GRAPHICS_SUPPORT_3D_SURFACE_TRANSITION_FLAG");
+        FW_WINDOW_BLUR_SUPPORTED =
+                SemFloatingFeature.getInstance()
+                        .getBoolean(
+                                "SEC_FLOATING_FEATURE_GRAPHICS_SUPPORT_3D_SURFACE_TRANSITION_FLAG");
         FW_STACKED_BLUR_SUPPORTED = FW_WINDOW_BLUR_SUPPORTED;
-        SUPPORT_APP_JUMP_BLOCK = SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportZProjectFunctionInGlobal");
+        SUPPORT_APP_JUMP_BLOCK =
+                SemCscFeature.getInstance()
+                        .getBoolean("CscFeature_Common_SupportZProjectFunctionInGlobal");
         SYSPERF_PRODUCT_DEVICE = SystemProperties.get("ro.product.device");
-        SYSPERF_BOOST_DISABLE_WHEN_FOLDED = "b2q".equalsIgnoreCase(SYSPERF_PRODUCT_DEVICE) || "b4q".equalsIgnoreCase(SYSPERF_PRODUCT_DEVICE) || "b5q".equalsIgnoreCase(SYSPERF_PRODUCT_DEVICE) || "b6q".equalsIgnoreCase(SYSPERF_PRODUCT_DEVICE);
+        SYSPERF_BOOST_DISABLE_WHEN_FOLDED =
+                "b2q".equalsIgnoreCase(SYSPERF_PRODUCT_DEVICE)
+                        || "b4q".equalsIgnoreCase(SYSPERF_PRODUCT_DEVICE)
+                        || "b5q".equalsIgnoreCase(SYSPERF_PRODUCT_DEVICE)
+                        || "b6q".equalsIgnoreCase(SYSPERF_PRODUCT_DEVICE);
         SYSPERF_QC_CHIPSET = "qcom".equalsIgnoreCase(SystemProperties.get("ro.hardware"));
         SYSPERF_QC_TASK_BOOST_ENABLE = SYSPERF_QC_CHIPSET;
         SYSPERF_QC_IOP_V3_ENABLE = SYSPERF_QC_CHIPSET;
         SYSPERF_JDM_MODEL = "jdm".equalsIgnoreCase("in_house");
         SYSPERF_BOOST_OPT = SystemProperties.getBoolean("sys.perf.boostopt", false);
         SYSPERF_VI_BOOST = SystemProperties.getBoolean("sys.perf.viboost", false);
-        SYSPERF_LAUNCHER_PROMOTION = !SystemProperties.getBoolean("debug.sf.enable_adpf_cpu_hint", false);
-        ALLIED_PROC_PROTECTION_LMKD = "true".equals(SystemProperties.get("ro.slmk.allied_proc_protect", "false"));
+        SYSPERF_LAUNCHER_PROMOTION =
+                !SystemProperties.getBoolean("debug.sf.enable_adpf_cpu_hint", false);
+        ALLIED_PROC_PROTECTION_LMKD =
+                "true".equals(SystemProperties.get("ro.slmk.allied_proc_protect", "false"));
         SYSFW_APP_SPEG = !SystemProperties.getBoolean("com.samsung.speg.disable", false);
         SYSUI_GRADLE_BUILD = !Build.IS_USER;
         SYSPERF_ACTIVE_APP_ADCP_ENABLE = true;
-        SYSPERF_ACTIVE_APP_GVS_ENABLE = SystemProperties.get("ro.csc.country_code").equalsIgnoreCase("CHINA");
-        FAST_MADVISE_ENABLED = SystemProperties.get("ro.csc.country_code").equalsIgnoreCase("CHINA") && SystemProperties.get("ro.product.model").startsWith("SM-S91");
+        SYSPERF_ACTIVE_APP_GVS_ENABLE =
+                SystemProperties.get("ro.csc.country_code").equalsIgnoreCase("CHINA");
+        FAST_MADVISE_ENABLED =
+                SystemProperties.get("ro.csc.country_code").equalsIgnoreCase("CHINA")
+                        && SystemProperties.get("ro.product.model").startsWith("SM-S91");
         SUPPORT_IQI = false;
-        MNO_TMO_DEVICE_REPORTING = "TMB".equals(SystemProperties.get("ro.csc.sales_code")) || "TMK".equals(SystemProperties.get("ro.csc.sales_code"));
-        GFW_DEBUG_DISABLE_HWRENDERING = SystemProperties.getBoolean("debug.skia.force_sw_gles", false);
-        SUPPORT_TRAFFIC_MANAGER = SemCscFeature.getInstance().getString("CscFeature_SmartManager_ConfigSubFeatures").contains("trafficmanager");
-        BAIDU_CARLIFE = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_CARLIFE");
+        MNO_TMO_DEVICE_REPORTING =
+                "TMB".equals(SystemProperties.get("ro.csc.sales_code"))
+                        || "TMK".equals(SystemProperties.get("ro.csc.sales_code"));
+        GFW_DEBUG_DISABLE_HWRENDERING =
+                SystemProperties.getBoolean("debug.skia.force_sw_gles", false);
+        SUPPORT_TRAFFIC_MANAGER =
+                SemCscFeature.getInstance()
+                        .getString("CscFeature_SmartManager_ConfigSubFeatures")
+                        .contains("trafficmanager");
+        BAIDU_CARLIFE =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_CARLIFE");
         CARLIFE_DISPLAY_GROUP = BAIDU_CARLIFE;
         CARLIFE_NAVBAR = BAIDU_CARLIFE;
-        DIRECT_WRITING = SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION") > 0;
+        DIRECT_WRITING =
+                SemFloatingFeature.getInstance()
+                                .getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION")
+                        > 0;
         SECONDARY_LAUNCHER_ACTIVITY_SUPPORT_FOR_DEX = Build.IS_ENG;
-        SUPPORT_SMARTMANAGER_CN = "com.samsung.android.sm_cn".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME"));
-        BIXBY_TOUCH = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_BIXBY_TOUCH");
+        SUPPORT_SMARTMANAGER_CN =
+                "com.samsung.android.sm_cn"
+                        .equals(
+                                SemFloatingFeature.getInstance()
+                                        .getString(
+                                                "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME"));
+        BIXBY_TOUCH =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_BIXBY_TOUCH");
         FW_SUPPORT_ONE_TOUCH = "true".equals(SystemProperties.get("ro.otch.support.entrance"));
-        GRAPHICS_RENDER_ENGINE_POLICY = SystemProperties.getBoolean("debug.graphics.render.engine.policy", true);
+        GRAPHICS_RENDER_ENGINE_POLICY =
+                SystemProperties.getBoolean("debug.graphics.render.engine.policy", true);
     }
 
     public static boolean isSamsungLogEnabled() {

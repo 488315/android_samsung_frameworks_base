@@ -5,7 +5,9 @@ import android.os.vibrator.RampSegment;
 import android.os.vibrator.VibrationEffectSegment;
 import android.util.MathUtils;
 import android.util.Range;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,11 @@ import java.util.List;
 public final class ClippingAmplitudeAndFrequencyAdapter implements VibrationSegmentsAdapter {
     public static float clampFrequency(VibratorInfo vibratorInfo, float f) {
         Range frequencyRangeHz = vibratorInfo.getFrequencyProfile().getFrequencyRangeHz();
-        return (f == FullScreenMagnificationGestureHandler.MAX_SCALE || frequencyRangeHz == null) ? Float.isNaN(vibratorInfo.getResonantFrequencyHz()) ? FullScreenMagnificationGestureHandler.MAX_SCALE : vibratorInfo.getResonantFrequencyHz() : ((Float) frequencyRangeHz.clamp(Float.valueOf(f))).floatValue();
+        return (f == FullScreenMagnificationGestureHandler.MAX_SCALE || frequencyRangeHz == null)
+                ? Float.isNaN(vibratorInfo.getResonantFrequencyHz())
+                        ? FullScreenMagnificationGestureHandler.MAX_SCALE
+                        : vibratorInfo.getResonantFrequencyHz()
+                : ((Float) frequencyRangeHz.clamp(Float.valueOf(f))).floatValue();
     }
 
     @Override // com.android.server.vibrator.VibrationSegmentsAdapter
@@ -25,20 +31,36 @@ public final class ClippingAmplitudeAndFrequencyAdapter implements VibrationSegm
             RampSegment rampSegment = (VibrationEffectSegment) arrayList.get(i2);
             if (rampSegment instanceof RampSegment) {
                 RampSegment rampSegment2 = rampSegment;
-                float clampFrequency = clampFrequency(vibratorInfo, rampSegment2.getStartFrequencyHz());
-                float clampFrequency2 = clampFrequency(vibratorInfo, rampSegment2.getEndFrequencyHz());
+                float clampFrequency =
+                        clampFrequency(vibratorInfo, rampSegment2.getStartFrequencyHz());
+                float clampFrequency2 =
+                        clampFrequency(vibratorInfo, rampSegment2.getEndFrequencyHz());
                 float startAmplitude = rampSegment2.getStartAmplitude();
                 VibratorInfo.FrequencyProfile frequencyProfile = vibratorInfo.getFrequencyProfile();
                 if (!frequencyProfile.isEmpty()) {
-                    startAmplitude = MathUtils.min(startAmplitude, frequencyProfile.getMaxAmplitude(clampFrequency));
+                    startAmplitude =
+                            MathUtils.min(
+                                    startAmplitude,
+                                    frequencyProfile.getMaxAmplitude(clampFrequency));
                 }
                 float f = startAmplitude;
                 float endAmplitude = rampSegment2.getEndAmplitude();
-                VibratorInfo.FrequencyProfile frequencyProfile2 = vibratorInfo.getFrequencyProfile();
+                VibratorInfo.FrequencyProfile frequencyProfile2 =
+                        vibratorInfo.getFrequencyProfile();
                 if (!frequencyProfile2.isEmpty()) {
-                    endAmplitude = MathUtils.min(endAmplitude, frequencyProfile2.getMaxAmplitude(clampFrequency2));
+                    endAmplitude =
+                            MathUtils.min(
+                                    endAmplitude,
+                                    frequencyProfile2.getMaxAmplitude(clampFrequency2));
                 }
-                arrayList.set(i2, new RampSegment(f, endAmplitude, clampFrequency, clampFrequency2, (int) rampSegment2.getDuration()));
+                arrayList.set(
+                        i2,
+                        new RampSegment(
+                                f,
+                                endAmplitude,
+                                clampFrequency,
+                                clampFrequency2,
+                                (int) rampSegment2.getDuration()));
             }
         }
         return i;

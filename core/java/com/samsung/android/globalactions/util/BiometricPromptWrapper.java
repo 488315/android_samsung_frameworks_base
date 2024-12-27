@@ -6,7 +6,7 @@ import android.hardware.biometrics.BiometricPrompt;
 import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.Looper;
-import com.samsung.android.globalactions.util.BiometricPromptWrapper;
+
 import java.util.concurrent.Executor;
 
 /* loaded from: classes6.dex */
@@ -23,20 +23,29 @@ public class BiometricPromptWrapper {
 
     /* renamed from: com.samsung.android.globalactions.util.BiometricPromptWrapper$1, reason: invalid class name */
     class AnonymousClass1 extends BiometricPrompt.AuthenticationCallback {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
-        @Override // android.hardware.biometrics.BiometricPrompt.AuthenticationCallback, android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback
+        @Override // android.hardware.biometrics.BiometricPrompt.AuthenticationCallback,
+                  // android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback
         public void onAuthenticationError(int errorCode, CharSequence errString) {
-            BiometricPromptWrapper.this.mLogWrapper.i(BiometricPromptWrapper.TAG, "onAuthenticationError() code : " + errorCode + ", errString : " + ((Object) errString));
+            BiometricPromptWrapper.this.mLogWrapper.i(
+                    BiometricPromptWrapper.TAG,
+                    "onAuthenticationError() code : "
+                            + errorCode
+                            + ", errString : "
+                            + ((Object) errString));
             super.onAuthenticationError(errorCode, errString);
             if (BiometricPromptWrapper.this.mFailRunnable != null) {
-                BiometricPromptWrapper.this.mHandler.postDelayed(new Runnable() { // from class: com.samsung.android.globalactions.util.BiometricPromptWrapper$1$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        BiometricPromptWrapper.AnonymousClass1.this.lambda$onAuthenticationError$0();
-                    }
-                }, 100L);
+                BiometricPromptWrapper.this.mHandler.postDelayed(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.globalactions.util.BiometricPromptWrapper$1$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                BiometricPromptWrapper.AnonymousClass1.this
+                                        .lambda$onAuthenticationError$0();
+                            }
+                        },
+                        100L);
             }
         }
 
@@ -48,12 +57,15 @@ public class BiometricPromptWrapper {
         @Override // android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
         public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
             if (BiometricPromptWrapper.this.mSuccessRunnable != null) {
-                BiometricPromptWrapper.this.mHandler.post(new Runnable() { // from class: com.samsung.android.globalactions.util.BiometricPromptWrapper$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        BiometricPromptWrapper.AnonymousClass1.this.lambda$onAuthenticationSucceeded$1();
-                    }
-                });
+                BiometricPromptWrapper.this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.globalactions.util.BiometricPromptWrapper$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                BiometricPromptWrapper.AnonymousClass1.this
+                                        .lambda$onAuthenticationSucceeded$1();
+                            }
+                        });
             }
             super.onAuthenticationSucceeded(result);
         }
@@ -67,7 +79,8 @@ public class BiometricPromptWrapper {
     public BiometricPromptWrapper(Context context, LogWrapper logWrapper) {
         this.mContext = context;
         this.mLogWrapper = logWrapper;
-        this.mBiometricManager = (BiometricManager) context.getSystemService(BiometricManager.class);
+        this.mBiometricManager =
+                (BiometricManager) context.getSystemService(BiometricManager.class);
         this.mBuilder = new BiometricPrompt.Builder(this.mContext);
     }
 
@@ -82,12 +95,16 @@ public class BiometricPromptWrapper {
 
     public void buildAndRun(CancellationSignal signal) {
         BiometricPrompt bp = this.mBuilder.build();
-        bp.authenticate(signal, new Executor() { // from class: com.samsung.android.globalactions.util.BiometricPromptWrapper$$ExternalSyntheticLambda0
-            @Override // java.util.concurrent.Executor
-            public final void execute(Runnable runnable) {
-                runnable.run();
-            }
-        }, this.mCallback);
+        bp.authenticate(
+                signal,
+                new Executor() { // from class:
+                                 // com.samsung.android.globalactions.util.BiometricPromptWrapper$$ExternalSyntheticLambda0
+                    @Override // java.util.concurrent.Executor
+                    public final void execute(Runnable runnable) {
+                        runnable.run();
+                    }
+                },
+                this.mCallback);
     }
 
     public boolean canAuthenticate(int authenticators) {

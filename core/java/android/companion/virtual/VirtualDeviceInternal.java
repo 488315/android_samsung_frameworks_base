@@ -1,11 +1,6 @@
 package android.companion.virtual;
 
 import android.app.PendingIntent;
-import android.companion.virtual.IVirtualDeviceActivityListener;
-import android.companion.virtual.IVirtualDeviceIntentInterceptor;
-import android.companion.virtual.IVirtualDeviceSoundEffectListener;
-import android.companion.virtual.VirtualDeviceInternal;
-import android.companion.virtual.VirtualDeviceManager;
 import android.companion.virtual.audio.VirtualAudioDevice;
 import android.companion.virtual.camera.VirtualCamera;
 import android.companion.virtual.camera.VirtualCameraConfig;
@@ -39,6 +34,7 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
 import android.util.ArrayMap;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
@@ -51,61 +47,100 @@ public class VirtualDeviceInternal {
     private VirtualAudioDevice mVirtualAudioDevice;
     private final IVirtualDevice mVirtualDevice;
     private final Object mActivityListenersLock = new Object();
-    private final ArrayMap<VirtualDeviceManager.ActivityListener, ActivityListenerDelegate> mActivityListeners = new ArrayMap<>();
+    private final ArrayMap<VirtualDeviceManager.ActivityListener, ActivityListenerDelegate>
+            mActivityListeners = new ArrayMap<>();
     private final Object mIntentInterceptorListenersLock = new Object();
-    private final ArrayMap<VirtualDeviceManager.IntentInterceptorCallback, IntentInterceptorDelegate> mIntentInterceptorListeners = new ArrayMap<>();
+    private final ArrayMap<
+                    VirtualDeviceManager.IntentInterceptorCallback, IntentInterceptorDelegate>
+            mIntentInterceptorListeners = new ArrayMap<>();
     private final Object mSoundEffectListenersLock = new Object();
-    private final ArrayMap<VirtualDeviceManager.SoundEffectListener, SoundEffectListenerDelegate> mSoundEffectListeners = new ArrayMap<>();
-    private final IVirtualDeviceActivityListener mActivityListenerBinder = new IVirtualDeviceActivityListener.Stub() { // from class: android.companion.virtual.VirtualDeviceInternal.1
-        @Override // android.companion.virtual.IVirtualDeviceActivityListener
-        public void onTopActivityChanged(int displayId, ComponentName topActivity, int userId) {
-            long token = Binder.clearCallingIdentity();
-            try {
-                synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
-                    for (int i = 0; i < VirtualDeviceInternal.this.mActivityListeners.size(); i++) {
-                        ((ActivityListenerDelegate) VirtualDeviceInternal.this.mActivityListeners.valueAt(i)).onTopActivityChanged(displayId, topActivity);
-                        ((ActivityListenerDelegate) VirtualDeviceInternal.this.mActivityListeners.valueAt(i)).onTopActivityChanged(displayId, topActivity, userId);
+    private final ArrayMap<VirtualDeviceManager.SoundEffectListener, SoundEffectListenerDelegate>
+            mSoundEffectListeners = new ArrayMap<>();
+    private final IVirtualDeviceActivityListener mActivityListenerBinder =
+            new IVirtualDeviceActivityListener
+                    .Stub() { // from class: android.companion.virtual.VirtualDeviceInternal.1
+                @Override // android.companion.virtual.IVirtualDeviceActivityListener
+                public void onTopActivityChanged(
+                        int displayId, ComponentName topActivity, int userId) {
+                    long token = Binder.clearCallingIdentity();
+                    try {
+                        synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
+                            for (int i = 0;
+                                    i < VirtualDeviceInternal.this.mActivityListeners.size();
+                                    i++) {
+                                ((ActivityListenerDelegate)
+                                                VirtualDeviceInternal.this.mActivityListeners
+                                                        .valueAt(i))
+                                        .onTopActivityChanged(displayId, topActivity);
+                                ((ActivityListenerDelegate)
+                                                VirtualDeviceInternal.this.mActivityListeners
+                                                        .valueAt(i))
+                                        .onTopActivityChanged(displayId, topActivity, userId);
+                            }
+                        }
+                    } finally {
+                        Binder.restoreCallingIdentity(token);
                     }
                 }
-            } finally {
-                Binder.restoreCallingIdentity(token);
-            }
-        }
 
-        @Override // android.companion.virtual.IVirtualDeviceActivityListener
-        public void onDisplayEmpty(int displayId) {
-            long token = Binder.clearCallingIdentity();
-            try {
-                synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
-                    for (int i = 0; i < VirtualDeviceInternal.this.mActivityListeners.size(); i++) {
-                        ((ActivityListenerDelegate) VirtualDeviceInternal.this.mActivityListeners.valueAt(i)).onDisplayEmpty(displayId);
+                @Override // android.companion.virtual.IVirtualDeviceActivityListener
+                public void onDisplayEmpty(int displayId) {
+                    long token = Binder.clearCallingIdentity();
+                    try {
+                        synchronized (VirtualDeviceInternal.this.mActivityListenersLock) {
+                            for (int i = 0;
+                                    i < VirtualDeviceInternal.this.mActivityListeners.size();
+                                    i++) {
+                                ((ActivityListenerDelegate)
+                                                VirtualDeviceInternal.this.mActivityListeners
+                                                        .valueAt(i))
+                                        .onDisplayEmpty(displayId);
+                            }
+                        }
+                    } finally {
+                        Binder.restoreCallingIdentity(token);
                     }
                 }
-            } finally {
-                Binder.restoreCallingIdentity(token);
-            }
-        }
-    };
-    private final IVirtualDeviceSoundEffectListener mSoundEffectListener = new IVirtualDeviceSoundEffectListener.Stub() { // from class: android.companion.virtual.VirtualDeviceInternal.2
-        @Override // android.companion.virtual.IVirtualDeviceSoundEffectListener
-        public void onPlaySoundEffect(int soundEffect) {
-            long token = Binder.clearCallingIdentity();
-            try {
-                synchronized (VirtualDeviceInternal.this.mSoundEffectListenersLock) {
-                    for (int i = 0; i < VirtualDeviceInternal.this.mSoundEffectListeners.size(); i++) {
-                        ((SoundEffectListenerDelegate) VirtualDeviceInternal.this.mSoundEffectListeners.valueAt(i)).onPlaySoundEffect(soundEffect);
+            };
+    private final IVirtualDeviceSoundEffectListener mSoundEffectListener =
+            new IVirtualDeviceSoundEffectListener
+                    .Stub() { // from class: android.companion.virtual.VirtualDeviceInternal.2
+                @Override // android.companion.virtual.IVirtualDeviceSoundEffectListener
+                public void onPlaySoundEffect(int soundEffect) {
+                    long token = Binder.clearCallingIdentity();
+                    try {
+                        synchronized (VirtualDeviceInternal.this.mSoundEffectListenersLock) {
+                            for (int i = 0;
+                                    i < VirtualDeviceInternal.this.mSoundEffectListeners.size();
+                                    i++) {
+                                ((SoundEffectListenerDelegate)
+                                                VirtualDeviceInternal.this.mSoundEffectListeners
+                                                        .valueAt(i))
+                                        .onPlaySoundEffect(soundEffect);
+                            }
+                        }
+                    } finally {
+                        Binder.restoreCallingIdentity(token);
                     }
                 }
-            } finally {
-                Binder.restoreCallingIdentity(token);
-            }
-        }
-    };
+            };
 
-    VirtualDeviceInternal(IVirtualDeviceManager service, Context context, int associationId, VirtualDeviceParams params) throws RemoteException {
+    VirtualDeviceInternal(
+            IVirtualDeviceManager service,
+            Context context,
+            int associationId,
+            VirtualDeviceParams params)
+            throws RemoteException {
         this.mService = service;
         this.mContext = context.getApplicationContext();
-        this.mVirtualDevice = service.createVirtualDevice(new Binder(), this.mContext.getAttributionSource(), associationId, params, this.mActivityListenerBinder, this.mSoundEffectListener);
+        this.mVirtualDevice =
+                service.createVirtualDevice(
+                        new Binder(),
+                        this.mContext.getAttributionSource(),
+                        associationId,
+                        params,
+                        this.mActivityListenerBinder,
+                        this.mSoundEffectListener);
     }
 
     int getDeviceId() {
@@ -140,9 +175,13 @@ public class VirtualDeviceInternal {
         }
     }
 
-    void launchPendingIntent(int displayId, PendingIntent pendingIntent, Executor executor, IntConsumer listener) {
+    void launchPendingIntent(
+            int displayId, PendingIntent pendingIntent, Executor executor, IntConsumer listener) {
         try {
-            this.mVirtualDevice.launchPendingIntent(displayId, pendingIntent, new AnonymousClass3(new Handler(Looper.getMainLooper()), executor, listener));
+            this.mVirtualDevice.launchPendingIntent(
+                    displayId,
+                    pendingIntent,
+                    new AnonymousClass3(new Handler(Looper.getMainLooper()), executor, listener));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -165,19 +204,28 @@ public class VirtualDeviceInternal {
             super.onReceiveResult(resultCode, resultData);
             Executor executor = this.val$executor;
             final IntConsumer intConsumer = this.val$listener;
-            executor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$3$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    intConsumer.accept(resultCode);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                        // android.companion.virtual.VirtualDeviceInternal$3$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            intConsumer.accept(resultCode);
+                        }
+                    });
         }
     }
 
-    VirtualDisplay createVirtualDisplay(VirtualDisplayConfig config, Executor executor, VirtualDisplay.Callback callback) {
-        IVirtualDisplayCallback callbackWrapper = new DisplayManagerGlobal.VirtualDisplayCallback(callback, executor);
+    VirtualDisplay createVirtualDisplay(
+            VirtualDisplayConfig config, Executor executor, VirtualDisplay.Callback callback) {
+        IVirtualDisplayCallback callbackWrapper =
+                new DisplayManagerGlobal.VirtualDisplayCallback(callback, executor);
         try {
-            int displayId = this.mService.createVirtualDisplay(config, callbackWrapper, this.mVirtualDevice, this.mContext.getPackageName());
+            int displayId =
+                    this.mService.createVirtualDisplay(
+                            config,
+                            callbackWrapper,
+                            this.mVirtualDevice,
+                            this.mContext.getPackageName());
             DisplayManagerGlobal displayManager = DisplayManagerGlobal.getInstance();
             return displayManager.createVirtualDisplayWrapper(config, callbackWrapper, displayId);
         } catch (RemoteException ex) {
@@ -223,7 +271,8 @@ public class VirtualDeviceInternal {
 
     VirtualDpad createVirtualDpad(VirtualDpadConfig config) {
         try {
-            IBinder token = new Binder("android.hardware.input.VirtualDpad:" + config.getInputDeviceName());
+            IBinder token =
+                    new Binder("android.hardware.input.VirtualDpad:" + config.getInputDeviceName());
             this.mVirtualDevice.createVirtualDpad(config, token);
             return new VirtualDpad(config, this.mVirtualDevice, token);
         } catch (RemoteException e) {
@@ -233,7 +282,10 @@ public class VirtualDeviceInternal {
 
     VirtualKeyboard createVirtualKeyboard(VirtualKeyboardConfig config) {
         try {
-            IBinder token = new Binder("android.hardware.input.VirtualKeyboard:" + config.getInputDeviceName());
+            IBinder token =
+                    new Binder(
+                            "android.hardware.input.VirtualKeyboard:"
+                                    + config.getInputDeviceName());
             this.mVirtualDevice.createVirtualKeyboard(config, token);
             return new VirtualKeyboard(config, this.mVirtualDevice, token);
         } catch (RemoteException e) {
@@ -243,7 +295,9 @@ public class VirtualDeviceInternal {
 
     VirtualMouse createVirtualMouse(VirtualMouseConfig config) {
         try {
-            IBinder token = new Binder("android.hardware.input.VirtualMouse:" + config.getInputDeviceName());
+            IBinder token =
+                    new Binder(
+                            "android.hardware.input.VirtualMouse:" + config.getInputDeviceName());
             this.mVirtualDevice.createVirtualMouse(config, token);
             return new VirtualMouse(config, this.mVirtualDevice, token);
         } catch (RemoteException e) {
@@ -253,7 +307,10 @@ public class VirtualDeviceInternal {
 
     VirtualTouchscreen createVirtualTouchscreen(VirtualTouchscreenConfig config) {
         try {
-            IBinder token = new Binder("android.hardware.input.VirtualTouchscreen:" + config.getInputDeviceName());
+            IBinder token =
+                    new Binder(
+                            "android.hardware.input.VirtualTouchscreen:"
+                                    + config.getInputDeviceName());
             this.mVirtualDevice.createVirtualTouchscreen(config, token);
             return new VirtualTouchscreen(config, this.mVirtualDevice, token);
         } catch (RemoteException e) {
@@ -263,7 +320,9 @@ public class VirtualDeviceInternal {
 
     VirtualStylus createVirtualStylus(VirtualStylusConfig config) {
         try {
-            IBinder token = new Binder("android.hardware.input.VirtualStylus:" + config.getInputDeviceName());
+            IBinder token =
+                    new Binder(
+                            "android.hardware.input.VirtualStylus:" + config.getInputDeviceName());
             this.mVirtualDevice.createVirtualStylus(config, token);
             return new VirtualStylus(config, this.mVirtualDevice, token);
         } catch (RemoteException e) {
@@ -271,9 +330,13 @@ public class VirtualDeviceInternal {
         }
     }
 
-    VirtualNavigationTouchpad createVirtualNavigationTouchpad(VirtualNavigationTouchpadConfig config) {
+    VirtualNavigationTouchpad createVirtualNavigationTouchpad(
+            VirtualNavigationTouchpadConfig config) {
         try {
-            IBinder token = new Binder("android.hardware.input.VirtualNavigationTouchpad:" + config.getInputDeviceName());
+            IBinder token =
+                    new Binder(
+                            "android.hardware.input.VirtualNavigationTouchpad:"
+                                    + config.getInputDeviceName());
             this.mVirtualDevice.createVirtualNavigationTouchpad(config, token);
             return new VirtualNavigationTouchpad(config, this.mVirtualDevice, token);
         } catch (RemoteException e) {
@@ -281,19 +344,32 @@ public class VirtualDeviceInternal {
         }
     }
 
-    VirtualAudioDevice createVirtualAudioDevice(VirtualDisplay display, Executor executor, VirtualAudioDevice.AudioConfigurationChangeCallback callback) {
+    VirtualAudioDevice createVirtualAudioDevice(
+            VirtualDisplay display,
+            Executor executor,
+            VirtualAudioDevice.AudioConfigurationChangeCallback callback) {
         if (this.mVirtualAudioDevice == null) {
             try {
                 Context context = this.mContext;
-                if (Flags.deviceAwareRecordAudioPermission() && this.mVirtualDevice.getDevicePolicy(1) == 1) {
+                if (Flags.deviceAwareRecordAudioPermission()
+                        && this.mVirtualDevice.getDevicePolicy(1) == 1) {
                     context = this.mContext.createDeviceContext(getDeviceId());
                 }
-                this.mVirtualAudioDevice = new VirtualAudioDevice(context, this.mVirtualDevice, display, executor, callback, new VirtualAudioDevice.CloseListener() { // from class: android.companion.virtual.VirtualDeviceInternal$$ExternalSyntheticLambda0
-                    @Override // android.companion.virtual.audio.VirtualAudioDevice.CloseListener
-                    public final void onClosed() {
-                        VirtualDeviceInternal.this.lambda$createVirtualAudioDevice$0();
-                    }
-                });
+                this.mVirtualAudioDevice =
+                        new VirtualAudioDevice(
+                                context,
+                                this.mVirtualDevice,
+                                display,
+                                executor,
+                                callback,
+                                new VirtualAudioDevice.CloseListener() { // from class:
+                                    // android.companion.virtual.VirtualDeviceInternal$$ExternalSyntheticLambda0
+                                    @Override // android.companion.virtual.audio.VirtualAudioDevice.CloseListener
+                                    public final void onClosed() {
+                                        VirtualDeviceInternal.this
+                                                .lambda$createVirtualAudioDevice$0();
+                                    }
+                                });
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -309,7 +385,8 @@ public class VirtualDeviceInternal {
     VirtualCamera createVirtualCamera(VirtualCameraConfig config) {
         try {
             this.mVirtualDevice.registerVirtualCamera(config);
-            return new VirtualCamera(this.mVirtualDevice, this.mVirtualDevice.getVirtualCameraId(config), config);
+            return new VirtualCamera(
+                    this.mVirtualDevice, this.mVirtualDevice.getVirtualCameraId(config), config);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -332,7 +409,10 @@ public class VirtualDeviceInternal {
     }
 
     void addActivityListener(Executor executor, VirtualDeviceManager.ActivityListener listener) {
-        ActivityListenerDelegate delegate = new ActivityListenerDelegate((VirtualDeviceManager.ActivityListener) Objects.requireNonNull(listener), (Executor) Objects.requireNonNull(executor));
+        ActivityListenerDelegate delegate =
+                new ActivityListenerDelegate(
+                        (VirtualDeviceManager.ActivityListener) Objects.requireNonNull(listener),
+                        (Executor) Objects.requireNonNull(executor));
         synchronized (this.mActivityListenersLock) {
             this.mActivityListeners.put(listener, delegate);
         }
@@ -344,8 +424,13 @@ public class VirtualDeviceInternal {
         }
     }
 
-    void addSoundEffectListener(Executor executor, VirtualDeviceManager.SoundEffectListener soundEffectListener) {
-        SoundEffectListenerDelegate delegate = new SoundEffectListenerDelegate((Executor) Objects.requireNonNull(executor), (VirtualDeviceManager.SoundEffectListener) Objects.requireNonNull(soundEffectListener));
+    void addSoundEffectListener(
+            Executor executor, VirtualDeviceManager.SoundEffectListener soundEffectListener) {
+        SoundEffectListenerDelegate delegate =
+                new SoundEffectListenerDelegate(
+                        (Executor) Objects.requireNonNull(executor),
+                        (VirtualDeviceManager.SoundEffectListener)
+                                Objects.requireNonNull(soundEffectListener));
         synchronized (this.mSoundEffectListenersLock) {
             this.mSoundEffectListeners.put(soundEffectListener, delegate);
         }
@@ -357,11 +442,15 @@ public class VirtualDeviceInternal {
         }
     }
 
-    void registerIntentInterceptor(IntentFilter interceptorFilter, Executor executor, VirtualDeviceManager.IntentInterceptorCallback interceptorCallback) {
+    void registerIntentInterceptor(
+            IntentFilter interceptorFilter,
+            Executor executor,
+            VirtualDeviceManager.IntentInterceptorCallback interceptorCallback) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(interceptorFilter);
         Objects.requireNonNull(interceptorCallback);
-        IntentInterceptorDelegate delegate = new IntentInterceptorDelegate(executor, interceptorCallback);
+        IntentInterceptorDelegate delegate =
+                new IntentInterceptorDelegate(executor, interceptorCallback);
         try {
             this.mVirtualDevice.registerIntentInterceptor(delegate, interceptorFilter);
             synchronized (this.mIntentInterceptorListenersLock) {
@@ -372,7 +461,8 @@ public class VirtualDeviceInternal {
         }
     }
 
-    void unregisterIntentInterceptor(VirtualDeviceManager.IntentInterceptorCallback interceptorCallback) {
+    void unregisterIntentInterceptor(
+            VirtualDeviceManager.IntentInterceptorCallback interceptorCallback) {
         IntentInterceptorDelegate delegate;
         Objects.requireNonNull(interceptorCallback);
         synchronized (this.mIntentInterceptorListenersLock) {
@@ -392,36 +482,46 @@ public class VirtualDeviceInternal {
         private final VirtualDeviceManager.ActivityListener mActivityListener;
         private final Executor mExecutor;
 
-        ActivityListenerDelegate(VirtualDeviceManager.ActivityListener listener, Executor executor) {
+        ActivityListenerDelegate(
+                VirtualDeviceManager.ActivityListener listener, Executor executor) {
             this.mActivityListener = listener;
             this.mExecutor = executor;
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onTopActivityChanged$0(int displayId, ComponentName topActivity) {
+        public /* synthetic */ void lambda$onTopActivityChanged$0(
+                int displayId, ComponentName topActivity) {
             this.mActivityListener.onTopActivityChanged(displayId, topActivity);
         }
 
         public void onTopActivityChanged(final int displayId, final ComponentName topActivity) {
-            this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    VirtualDeviceInternal.ActivityListenerDelegate.this.lambda$onTopActivityChanged$0(displayId, topActivity);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            VirtualDeviceInternal.ActivityListenerDelegate.this
+                                    .lambda$onTopActivityChanged$0(displayId, topActivity);
+                        }
+                    });
         }
 
-        public void onTopActivityChanged(final int displayId, final ComponentName topActivity, final int userId) {
-            this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    VirtualDeviceInternal.ActivityListenerDelegate.this.lambda$onTopActivityChanged$1(displayId, topActivity, userId);
-                }
-            });
+        public void onTopActivityChanged(
+                final int displayId, final ComponentName topActivity, final int userId) {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            VirtualDeviceInternal.ActivityListenerDelegate.this
+                                    .lambda$onTopActivityChanged$1(displayId, topActivity, userId);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onTopActivityChanged$1(int displayId, ComponentName topActivity, int userId) {
+        public /* synthetic */ void lambda$onTopActivityChanged$1(
+                int displayId, ComponentName topActivity, int userId) {
             this.mActivityListener.onTopActivityChanged(displayId, topActivity, userId);
         }
 
@@ -431,12 +531,15 @@ public class VirtualDeviceInternal {
         }
 
         public void onDisplayEmpty(final int displayId) {
-            this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    VirtualDeviceInternal.ActivityListenerDelegate.this.lambda$onDisplayEmpty$2(displayId);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.companion.virtual.VirtualDeviceInternal$ActivityListenerDelegate$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            VirtualDeviceInternal.ActivityListenerDelegate.this
+                                    .lambda$onDisplayEmpty$2(displayId);
+                        }
+                    });
         }
     }
 
@@ -445,7 +548,9 @@ public class VirtualDeviceInternal {
         private final Executor mExecutor;
         private final VirtualDeviceManager.IntentInterceptorCallback mIntentInterceptorCallback;
 
-        private IntentInterceptorDelegate(Executor executor, VirtualDeviceManager.IntentInterceptorCallback interceptorCallback) {
+        private IntentInterceptorDelegate(
+                Executor executor,
+                VirtualDeviceManager.IntentInterceptorCallback interceptorCallback) {
             this.mExecutor = executor;
             this.mIntentInterceptorCallback = interceptorCallback;
         }
@@ -454,12 +559,15 @@ public class VirtualDeviceInternal {
         public void onIntentIntercepted(final Intent intent) {
             long token = Binder.clearCallingIdentity();
             try {
-                this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$IntentInterceptorDelegate$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        VirtualDeviceInternal.IntentInterceptorDelegate.this.lambda$onIntentIntercepted$0(intent);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.companion.virtual.VirtualDeviceInternal$IntentInterceptorDelegate$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                VirtualDeviceInternal.IntentInterceptorDelegate.this
+                                        .lambda$onIntentIntercepted$0(intent);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -476,7 +584,8 @@ public class VirtualDeviceInternal {
         private final Executor mExecutor;
         private final VirtualDeviceManager.SoundEffectListener mSoundEffectListener;
 
-        private SoundEffectListenerDelegate(Executor executor, VirtualDeviceManager.SoundEffectListener soundEffectCallback) {
+        private SoundEffectListenerDelegate(
+                Executor executor, VirtualDeviceManager.SoundEffectListener soundEffectCallback) {
             this.mSoundEffectListener = soundEffectCallback;
             this.mExecutor = executor;
         }
@@ -487,12 +596,15 @@ public class VirtualDeviceInternal {
         }
 
         public void onPlaySoundEffect(final int effectType) {
-            this.mExecutor.execute(new Runnable() { // from class: android.companion.virtual.VirtualDeviceInternal$SoundEffectListenerDelegate$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    VirtualDeviceInternal.SoundEffectListenerDelegate.this.lambda$onPlaySoundEffect$0(effectType);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.companion.virtual.VirtualDeviceInternal$SoundEffectListenerDelegate$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            VirtualDeviceInternal.SoundEffectListenerDelegate.this
+                                    .lambda$onPlaySoundEffect$0(effectType);
+                        }
+                    });
         }
     }
 }

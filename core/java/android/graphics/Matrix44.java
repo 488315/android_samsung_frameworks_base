@@ -7,13 +7,21 @@ public class Matrix44 {
     final float[] mBackingArray;
 
     public Matrix44() {
-        this.mBackingArray = new float[]{1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f};
+        this.mBackingArray =
+                new float[] {
+                    1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+                    0.0f, 0.0f, 1.0f
+                };
     }
 
     public Matrix44(Matrix mat) {
         float[] m = new float[9];
         mat.getValues(m);
-        this.mBackingArray = new float[]{m[0], m[1], 0.0f, m[2], m[3], m[4], 0.0f, m[5], 0.0f, 0.0f, 1.0f, 0.0f, m[6], m[7], 0.0f, m[8]};
+        this.mBackingArray =
+                new float[] {
+                    m[0], m[1], 0.0f, m[2], m[3], m[4], 0.0f, m[5], 0.0f, 0.0f, 1.0f, 0.0f, m[6],
+                    m[7], 0.0f, m[8]
+                };
     }
 
     public void getValues(float[] dst) {
@@ -82,7 +90,9 @@ public class Matrix44 {
         float b09 = (a21 * a32) - (a22 * a31);
         float b10 = (a21 * a33) - (a23 * a31);
         float b11 = (a22 * a33) - (a23 * a32);
-        float det = (((((b00 * b11) - (b01 * b10)) + (b02 * b09)) + (b03 * b08)) - (b04 * b07)) + (b05 * b06);
+        float det =
+                (((((b00 * b11) - (b01 * b10)) + (b02 * b09)) + (b03 * b08)) - (b04 * b07))
+                        + (b05 * b06);
         if (det == 0.0f) {
             return false;
         }
@@ -117,10 +127,14 @@ public class Matrix44 {
     }
 
     private static float dot(Matrix44 a, Matrix44 b, int row, int col) {
-        return (a.get(row, 0) * b.get(0, col)) + (a.get(row, 1) * b.get(1, col)) + (a.get(row, 2) * b.get(2, col)) + (a.get(row, 3) * b.get(3, col));
+        return (a.get(row, 0) * b.get(0, col))
+                + (a.get(row, 1) * b.get(1, col))
+                + (a.get(row, 2) * b.get(2, col))
+                + (a.get(row, 3) * b.get(3, col));
     }
 
-    private static float dot(float r0, float r1, float r2, float r3, float c0, float c1, float c2, float c3) {
+    private static float dot(
+            float r0, float r1, float r2, float r3, float c0, float c1, float c2, float c3) {
         return (r0 * c0) + (r1 * c1) + (r2 * c2) + (r3 * c3);
     }
 
@@ -134,10 +148,26 @@ public class Matrix44 {
         if (dst.length != 4) {
             throw new IllegalArgumentException("Dst array must be of length 4");
         }
-        dst[0] = (this.mBackingArray[0] * x) + (this.mBackingArray[1] * y) + (this.mBackingArray[2] * z) + (this.mBackingArray[3] * w);
-        dst[1] = (this.mBackingArray[4] * x) + (this.mBackingArray[5] * y) + (this.mBackingArray[6] * z) + (this.mBackingArray[7] * w);
-        dst[2] = (this.mBackingArray[8] * x) + (this.mBackingArray[9] * y) + (this.mBackingArray[10] * z) + (this.mBackingArray[11] * w);
-        dst[3] = (this.mBackingArray[12] * x) + (this.mBackingArray[13] * y) + (this.mBackingArray[14] * z) + (this.mBackingArray[15] * w);
+        dst[0] =
+                (this.mBackingArray[0] * x)
+                        + (this.mBackingArray[1] * y)
+                        + (this.mBackingArray[2] * z)
+                        + (this.mBackingArray[3] * w);
+        dst[1] =
+                (this.mBackingArray[4] * x)
+                        + (this.mBackingArray[5] * y)
+                        + (this.mBackingArray[6] * z)
+                        + (this.mBackingArray[7] * w);
+        dst[2] =
+                (this.mBackingArray[8] * x)
+                        + (this.mBackingArray[9] * y)
+                        + (this.mBackingArray[10] * z)
+                        + (this.mBackingArray[11] * w);
+        dst[3] =
+                (this.mBackingArray[12] * x)
+                        + (this.mBackingArray[13] * y)
+                        + (this.mBackingArray[14] * z)
+                        + (this.mBackingArray[15] * w);
     }
 
     public Matrix44 concat(Matrix44 b) {
@@ -193,22 +223,166 @@ public class Matrix44 {
         float rotVals20 = ((t * x) * z) - (s * y);
         float rotVals21 = (t * y * z) + (s * x);
         float rotVals22 = (t * z * z) + c;
-        float v00 = dot(this.mBackingArray[0], this.mBackingArray[1], this.mBackingArray[2], this.mBackingArray[3], rotVals00, rotVals10, rotVals20, 0.0f);
-        float v01 = dot(this.mBackingArray[0], this.mBackingArray[1], this.mBackingArray[2], this.mBackingArray[3], rotVals01, rotVals11, rotVals21, 0.0f);
-        float v02 = dot(this.mBackingArray[0], this.mBackingArray[1], this.mBackingArray[2], this.mBackingArray[3], rotVals02, rotVals12, rotVals22, 0.0f);
-        float v03 = dot(this.mBackingArray[0], this.mBackingArray[1], this.mBackingArray[2], this.mBackingArray[3], 0.0f, 0.0f, 0.0f, 1.0f);
-        float v10 = dot(this.mBackingArray[4], this.mBackingArray[5], this.mBackingArray[6], this.mBackingArray[7], rotVals00, rotVals10, rotVals20, 0.0f);
-        float v11 = dot(this.mBackingArray[4], this.mBackingArray[5], this.mBackingArray[6], this.mBackingArray[7], rotVals01, rotVals11, rotVals21, 0.0f);
-        float v12 = dot(this.mBackingArray[4], this.mBackingArray[5], this.mBackingArray[6], this.mBackingArray[7], rotVals02, rotVals12, rotVals22, 0.0f);
-        float v13 = dot(this.mBackingArray[4], this.mBackingArray[5], this.mBackingArray[6], this.mBackingArray[7], 0.0f, 0.0f, 0.0f, 1.0f);
-        float v20 = dot(this.mBackingArray[8], this.mBackingArray[9], this.mBackingArray[10], this.mBackingArray[11], rotVals00, rotVals10, rotVals20, 0.0f);
-        float v21 = dot(this.mBackingArray[8], this.mBackingArray[9], this.mBackingArray[10], this.mBackingArray[11], rotVals01, rotVals11, rotVals21, 0.0f);
-        float v22 = dot(this.mBackingArray[8], this.mBackingArray[9], this.mBackingArray[10], this.mBackingArray[11], rotVals02, rotVals12, rotVals22, 0.0f);
-        float v23 = dot(this.mBackingArray[8], this.mBackingArray[9], this.mBackingArray[10], this.mBackingArray[11], 0.0f, 0.0f, 0.0f, 1.0f);
-        float v30 = dot(this.mBackingArray[12], this.mBackingArray[13], this.mBackingArray[14], this.mBackingArray[15], rotVals00, rotVals10, rotVals20, 0.0f);
-        float v31 = dot(this.mBackingArray[12], this.mBackingArray[13], this.mBackingArray[14], this.mBackingArray[15], rotVals01, rotVals11, rotVals21, 0.0f);
-        float v32 = dot(this.mBackingArray[12], this.mBackingArray[13], this.mBackingArray[14], this.mBackingArray[15], rotVals02, rotVals12, rotVals22, 0.0f);
-        float v33 = dot(this.mBackingArray[12], this.mBackingArray[13], this.mBackingArray[14], this.mBackingArray[15], 0.0f, 0.0f, 0.0f, 1.0f);
+        float v00 =
+                dot(
+                        this.mBackingArray[0],
+                        this.mBackingArray[1],
+                        this.mBackingArray[2],
+                        this.mBackingArray[3],
+                        rotVals00,
+                        rotVals10,
+                        rotVals20,
+                        0.0f);
+        float v01 =
+                dot(
+                        this.mBackingArray[0],
+                        this.mBackingArray[1],
+                        this.mBackingArray[2],
+                        this.mBackingArray[3],
+                        rotVals01,
+                        rotVals11,
+                        rotVals21,
+                        0.0f);
+        float v02 =
+                dot(
+                        this.mBackingArray[0],
+                        this.mBackingArray[1],
+                        this.mBackingArray[2],
+                        this.mBackingArray[3],
+                        rotVals02,
+                        rotVals12,
+                        rotVals22,
+                        0.0f);
+        float v03 =
+                dot(
+                        this.mBackingArray[0],
+                        this.mBackingArray[1],
+                        this.mBackingArray[2],
+                        this.mBackingArray[3],
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        1.0f);
+        float v10 =
+                dot(
+                        this.mBackingArray[4],
+                        this.mBackingArray[5],
+                        this.mBackingArray[6],
+                        this.mBackingArray[7],
+                        rotVals00,
+                        rotVals10,
+                        rotVals20,
+                        0.0f);
+        float v11 =
+                dot(
+                        this.mBackingArray[4],
+                        this.mBackingArray[5],
+                        this.mBackingArray[6],
+                        this.mBackingArray[7],
+                        rotVals01,
+                        rotVals11,
+                        rotVals21,
+                        0.0f);
+        float v12 =
+                dot(
+                        this.mBackingArray[4],
+                        this.mBackingArray[5],
+                        this.mBackingArray[6],
+                        this.mBackingArray[7],
+                        rotVals02,
+                        rotVals12,
+                        rotVals22,
+                        0.0f);
+        float v13 =
+                dot(
+                        this.mBackingArray[4],
+                        this.mBackingArray[5],
+                        this.mBackingArray[6],
+                        this.mBackingArray[7],
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        1.0f);
+        float v20 =
+                dot(
+                        this.mBackingArray[8],
+                        this.mBackingArray[9],
+                        this.mBackingArray[10],
+                        this.mBackingArray[11],
+                        rotVals00,
+                        rotVals10,
+                        rotVals20,
+                        0.0f);
+        float v21 =
+                dot(
+                        this.mBackingArray[8],
+                        this.mBackingArray[9],
+                        this.mBackingArray[10],
+                        this.mBackingArray[11],
+                        rotVals01,
+                        rotVals11,
+                        rotVals21,
+                        0.0f);
+        float v22 =
+                dot(
+                        this.mBackingArray[8],
+                        this.mBackingArray[9],
+                        this.mBackingArray[10],
+                        this.mBackingArray[11],
+                        rotVals02,
+                        rotVals12,
+                        rotVals22,
+                        0.0f);
+        float v23 =
+                dot(
+                        this.mBackingArray[8],
+                        this.mBackingArray[9],
+                        this.mBackingArray[10],
+                        this.mBackingArray[11],
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        1.0f);
+        float v30 =
+                dot(
+                        this.mBackingArray[12],
+                        this.mBackingArray[13],
+                        this.mBackingArray[14],
+                        this.mBackingArray[15],
+                        rotVals00,
+                        rotVals10,
+                        rotVals20,
+                        0.0f);
+        float v31 =
+                dot(
+                        this.mBackingArray[12],
+                        this.mBackingArray[13],
+                        this.mBackingArray[14],
+                        this.mBackingArray[15],
+                        rotVals01,
+                        rotVals11,
+                        rotVals21,
+                        0.0f);
+        float v32 =
+                dot(
+                        this.mBackingArray[12],
+                        this.mBackingArray[13],
+                        this.mBackingArray[14],
+                        this.mBackingArray[15],
+                        rotVals02,
+                        rotVals12,
+                        rotVals22,
+                        0.0f);
+        float v33 =
+                dot(
+                        this.mBackingArray[12],
+                        this.mBackingArray[13],
+                        this.mBackingArray[14],
+                        this.mBackingArray[15],
+                        0.0f,
+                        0.0f,
+                        0.0f,
+                        1.0f);
         this.mBackingArray[0] = v00;
         this.mBackingArray[1] = v01;
         this.mBackingArray[2] = v02;
@@ -257,10 +431,26 @@ public class Matrix44 {
     }
 
     public Matrix44 translate(float x, float y, float z) {
-        float newX = (this.mBackingArray[0] * x) + (this.mBackingArray[1] * y) + (this.mBackingArray[2] * z) + this.mBackingArray[3];
-        float newY = (this.mBackingArray[4] * x) + (this.mBackingArray[5] * y) + (this.mBackingArray[6] * z) + this.mBackingArray[7];
-        float newZ = (this.mBackingArray[8] * x) + (this.mBackingArray[9] * y) + (this.mBackingArray[10] * z) + this.mBackingArray[11];
-        float newW = (this.mBackingArray[12] * x) + (this.mBackingArray[13] * y) + (this.mBackingArray[14] * z) + this.mBackingArray[15];
+        float newX =
+                (this.mBackingArray[0] * x)
+                        + (this.mBackingArray[1] * y)
+                        + (this.mBackingArray[2] * z)
+                        + this.mBackingArray[3];
+        float newY =
+                (this.mBackingArray[4] * x)
+                        + (this.mBackingArray[5] * y)
+                        + (this.mBackingArray[6] * z)
+                        + this.mBackingArray[7];
+        float newZ =
+                (this.mBackingArray[8] * x)
+                        + (this.mBackingArray[9] * y)
+                        + (this.mBackingArray[10] * z)
+                        + this.mBackingArray[11];
+        float newW =
+                (this.mBackingArray[12] * x)
+                        + (this.mBackingArray[13] * y)
+                        + (this.mBackingArray[14] * z)
+                        + this.mBackingArray[15];
         this.mBackingArray[3] = newX;
         this.mBackingArray[7] = newY;
         this.mBackingArray[11] = newZ;
@@ -269,7 +459,24 @@ public class Matrix44 {
     }
 
     public String toString() {
-        return String.format("| %f %f %f %f |\n| %f %f %f %f |\n| %f %f %f %f |\n| %f %f %f %f |\n", Float.valueOf(this.mBackingArray[0]), Float.valueOf(this.mBackingArray[1]), Float.valueOf(this.mBackingArray[2]), Float.valueOf(this.mBackingArray[3]), Float.valueOf(this.mBackingArray[4]), Float.valueOf(this.mBackingArray[5]), Float.valueOf(this.mBackingArray[6]), Float.valueOf(this.mBackingArray[7]), Float.valueOf(this.mBackingArray[8]), Float.valueOf(this.mBackingArray[9]), Float.valueOf(this.mBackingArray[10]), Float.valueOf(this.mBackingArray[11]), Float.valueOf(this.mBackingArray[12]), Float.valueOf(this.mBackingArray[13]), Float.valueOf(this.mBackingArray[14]), Float.valueOf(this.mBackingArray[15]));
+        return String.format(
+                "| %f %f %f %f |\n| %f %f %f %f |\n| %f %f %f %f |\n| %f %f %f %f |\n",
+                Float.valueOf(this.mBackingArray[0]),
+                Float.valueOf(this.mBackingArray[1]),
+                Float.valueOf(this.mBackingArray[2]),
+                Float.valueOf(this.mBackingArray[3]),
+                Float.valueOf(this.mBackingArray[4]),
+                Float.valueOf(this.mBackingArray[5]),
+                Float.valueOf(this.mBackingArray[6]),
+                Float.valueOf(this.mBackingArray[7]),
+                Float.valueOf(this.mBackingArray[8]),
+                Float.valueOf(this.mBackingArray[9]),
+                Float.valueOf(this.mBackingArray[10]),
+                Float.valueOf(this.mBackingArray[11]),
+                Float.valueOf(this.mBackingArray[12]),
+                Float.valueOf(this.mBackingArray[13]),
+                Float.valueOf(this.mBackingArray[14]),
+                Float.valueOf(this.mBackingArray[15]));
     }
 
     public boolean equals(Object obj) {
@@ -280,6 +487,21 @@ public class Matrix44 {
     }
 
     public int hashCode() {
-        return ((int) this.mBackingArray[0]) + ((int) this.mBackingArray[1]) + ((int) this.mBackingArray[2]) + ((int) this.mBackingArray[3]) + ((int) this.mBackingArray[4]) + ((int) this.mBackingArray[5]) + ((int) this.mBackingArray[6]) + ((int) this.mBackingArray[7]) + ((int) this.mBackingArray[8]) + ((int) this.mBackingArray[9]) + ((int) this.mBackingArray[10]) + ((int) this.mBackingArray[11]) + ((int) this.mBackingArray[12]) + ((int) this.mBackingArray[13]) + ((int) this.mBackingArray[14]) + ((int) this.mBackingArray[15]);
+        return ((int) this.mBackingArray[0])
+                + ((int) this.mBackingArray[1])
+                + ((int) this.mBackingArray[2])
+                + ((int) this.mBackingArray[3])
+                + ((int) this.mBackingArray[4])
+                + ((int) this.mBackingArray[5])
+                + ((int) this.mBackingArray[6])
+                + ((int) this.mBackingArray[7])
+                + ((int) this.mBackingArray[8])
+                + ((int) this.mBackingArray[9])
+                + ((int) this.mBackingArray[10])
+                + ((int) this.mBackingArray[11])
+                + ((int) this.mBackingArray[12])
+                + ((int) this.mBackingArray[13])
+                + ((int) this.mBackingArray[14])
+                + ((int) this.mBackingArray[15]);
     }
 }

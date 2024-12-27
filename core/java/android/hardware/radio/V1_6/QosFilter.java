@@ -5,6 +5,7 @@ import android.media.MediaMetrics;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -45,8 +46,7 @@ public final class QosFilter {
                 }
             }
 
-            private hidl_discriminator() {
-            }
+            private hidl_discriminator() {}
         }
 
         public void noinit(Monostate noinit) {
@@ -57,7 +57,15 @@ public final class QosFilter {
         public Monostate noinit() {
             if (this.hidl_d != 0) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Monostate.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -73,7 +81,15 @@ public final class QosFilter {
         public byte value() {
             if (this.hidl_d != 1) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Byte.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -100,7 +116,9 @@ public final class QosFilter {
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)), Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)),
+                    Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
         }
 
         public final String toString() {
@@ -116,7 +134,8 @@ public final class QosFilter {
                     builder.append((int) value());
                     break;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
             builder.append("}");
             return builder.toString();
@@ -131,7 +150,8 @@ public final class QosFilter {
             ArrayList<TypeOfService> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 2, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 2, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 TypeOfService _hidl_vec_element = new TypeOfService();
@@ -141,19 +161,22 @@ public final class QosFilter {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.hidl_d = _hidl_blob.getInt8(0 + _hidl_offset);
             switch (this.hidl_d) {
                 case 0:
                     this.hidl_o = new Monostate();
-                    ((Monostate) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 1 + _hidl_offset);
+                    ((Monostate) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 1 + _hidl_offset);
                     return;
                 case 1:
                     this.hidl_o = 0;
                     this.hidl_o = Byte.valueOf(_hidl_blob.getInt8(1 + _hidl_offset));
                     return;
                 default:
-                    throw new IllegalStateException("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new IllegalStateException(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
 
@@ -163,7 +186,8 @@ public final class QosFilter {
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<TypeOfService> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<TypeOfService> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -186,7 +210,8 @@ public final class QosFilter {
                     _hidl_blob.putInt8(1 + _hidl_offset, value());
                     return;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
     }
@@ -215,8 +240,7 @@ public final class QosFilter {
                 }
             }
 
-            private hidl_discriminator() {
-            }
+            private hidl_discriminator() {}
         }
 
         public void noinit(Monostate noinit) {
@@ -227,7 +251,15 @@ public final class QosFilter {
         public Monostate noinit() {
             if (this.hidl_d != 0) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Monostate.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -243,7 +275,15 @@ public final class QosFilter {
         public int value() {
             if (this.hidl_d != 1) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Integer.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -270,7 +310,9 @@ public final class QosFilter {
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)), Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)),
+                    Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
         }
 
         public final String toString() {
@@ -286,7 +328,8 @@ public final class QosFilter {
                     builder.append(value());
                     break;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
             builder.append("}");
             return builder.toString();
@@ -301,7 +344,8 @@ public final class QosFilter {
             ArrayList<Ipv6FlowLabel> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 8, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 8, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 Ipv6FlowLabel _hidl_vec_element = new Ipv6FlowLabel();
@@ -311,19 +355,22 @@ public final class QosFilter {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.hidl_d = _hidl_blob.getInt8(0 + _hidl_offset);
             switch (this.hidl_d) {
                 case 0:
                     this.hidl_o = new Monostate();
-                    ((Monostate) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
+                    ((Monostate) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
                     return;
                 case 1:
                     this.hidl_o = 0;
                     this.hidl_o = Integer.valueOf(_hidl_blob.getInt32(4 + _hidl_offset));
                     return;
                 default:
-                    throw new IllegalStateException("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new IllegalStateException(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
 
@@ -333,7 +380,8 @@ public final class QosFilter {
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<Ipv6FlowLabel> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<Ipv6FlowLabel> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -356,7 +404,8 @@ public final class QosFilter {
                     _hidl_blob.putInt32(4 + _hidl_offset, value());
                     return;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
     }
@@ -385,8 +434,7 @@ public final class QosFilter {
                 }
             }
 
-            private hidl_discriminator() {
-            }
+            private hidl_discriminator() {}
         }
 
         public void noinit(Monostate noinit) {
@@ -397,7 +445,15 @@ public final class QosFilter {
         public Monostate noinit() {
             if (this.hidl_d != 0) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Monostate.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -413,7 +469,15 @@ public final class QosFilter {
         public int value() {
             if (this.hidl_d != 1) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Integer.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -440,7 +504,9 @@ public final class QosFilter {
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)), Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)),
+                    Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
         }
 
         public final String toString() {
@@ -456,7 +522,8 @@ public final class QosFilter {
                     builder.append(value());
                     break;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
             builder.append("}");
             return builder.toString();
@@ -471,7 +538,8 @@ public final class QosFilter {
             ArrayList<IpsecSpi> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 8, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 8, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 IpsecSpi _hidl_vec_element = new IpsecSpi();
@@ -481,19 +549,22 @@ public final class QosFilter {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.hidl_d = _hidl_blob.getInt8(0 + _hidl_offset);
             switch (this.hidl_d) {
                 case 0:
                     this.hidl_o = new Monostate();
-                    ((Monostate) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
+                    ((Monostate) this.hidl_o)
+                            .readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
                     return;
                 case 1:
                     this.hidl_o = 0;
                     this.hidl_o = Integer.valueOf(_hidl_blob.getInt32(4 + _hidl_offset));
                     return;
                 default:
-                    throw new IllegalStateException("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new IllegalStateException(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
 
@@ -503,7 +574,8 @@ public final class QosFilter {
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<IpsecSpi> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<IpsecSpi> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -526,7 +598,8 @@ public final class QosFilter {
                     _hidl_blob.putInt32(4 + _hidl_offset, value());
                     return;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
     }
@@ -539,18 +612,57 @@ public final class QosFilter {
             return false;
         }
         QosFilter other = (QosFilter) otherObject;
-        if (HidlSupport.deepEquals(this.localAddresses, other.localAddresses) && HidlSupport.deepEquals(this.remoteAddresses, other.remoteAddresses) && HidlSupport.deepEquals(this.localPort, other.localPort) && HidlSupport.deepEquals(this.remotePort, other.remotePort) && this.protocol == other.protocol && HidlSupport.deepEquals(this.tos, other.tos) && HidlSupport.deepEquals(this.flowLabel, other.flowLabel) && HidlSupport.deepEquals(this.spi, other.spi) && this.direction == other.direction && this.precedence == other.precedence) {
+        if (HidlSupport.deepEquals(this.localAddresses, other.localAddresses)
+                && HidlSupport.deepEquals(this.remoteAddresses, other.remoteAddresses)
+                && HidlSupport.deepEquals(this.localPort, other.localPort)
+                && HidlSupport.deepEquals(this.remotePort, other.remotePort)
+                && this.protocol == other.protocol
+                && HidlSupport.deepEquals(this.tos, other.tos)
+                && HidlSupport.deepEquals(this.flowLabel, other.flowLabel)
+                && HidlSupport.deepEquals(this.spi, other.spi)
+                && this.direction == other.direction
+                && this.precedence == other.precedence) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.localAddresses)), Integer.valueOf(HidlSupport.deepHashCode(this.remoteAddresses)), Integer.valueOf(HidlSupport.deepHashCode(this.localPort)), Integer.valueOf(HidlSupport.deepHashCode(this.remotePort)), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.protocol))), Integer.valueOf(HidlSupport.deepHashCode(this.tos)), Integer.valueOf(HidlSupport.deepHashCode(this.flowLabel)), Integer.valueOf(HidlSupport.deepHashCode(this.spi)), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.direction))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.precedence))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.localAddresses)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.remoteAddresses)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.localPort)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.remotePort)),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.protocol))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.tos)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.flowLabel)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.spi)),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.direction))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.precedence))));
     }
 
     public final String toString() {
-        return "{.localAddresses = " + this.localAddresses + ", .remoteAddresses = " + this.remoteAddresses + ", .localPort = " + this.localPort + ", .remotePort = " + this.remotePort + ", .protocol = " + QosProtocol.toString(this.protocol) + ", .tos = " + this.tos + ", .flowLabel = " + this.flowLabel + ", .spi = " + this.spi + ", .direction = " + QosFilterDirection.toString(this.direction) + ", .precedence = " + this.precedence + "}";
+        return "{.localAddresses = "
+                + this.localAddresses
+                + ", .remoteAddresses = "
+                + this.remoteAddresses
+                + ", .localPort = "
+                + this.localPort
+                + ", .remotePort = "
+                + this.remotePort
+                + ", .protocol = "
+                + QosProtocol.toString(this.protocol)
+                + ", .tos = "
+                + this.tos
+                + ", .flowLabel = "
+                + this.flowLabel
+                + ", .spi = "
+                + this.spi
+                + ", .direction = "
+                + QosFilterDirection.toString(this.direction)
+                + ", .precedence = "
+                + this.precedence
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -562,7 +674,8 @@ public final class QosFilter {
         ArrayList<QosFilter> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 88, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 88, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             QosFilter _hidl_vec_element = new QosFilter();
@@ -572,26 +685,39 @@ public final class QosFilter {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 0 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 0 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 0 + 0, true);
         this.localAddresses.clear();
         int _hidl_index_0 = 0;
         while (_hidl_index_0 < _hidl_vec_size) {
             new String();
             String _hidl_vec_element = childBlob.getString(_hidl_index_0 * 16);
-            parcel.readEmbeddedBuffer(_hidl_vec_element.getBytes().length + 1, childBlob.handle(), (_hidl_index_0 * 16) + 0, false);
+            parcel.readEmbeddedBuffer(
+                    _hidl_vec_element.getBytes().length + 1,
+                    childBlob.handle(),
+                    (_hidl_index_0 * 16) + 0,
+                    false);
             this.localAddresses.add(_hidl_vec_element);
             _hidl_index_0++;
             childBlob = childBlob;
         }
         int _hidl_vec_size2 = _hidl_blob.getInt32(_hidl_offset + 16 + 8);
-        HwBlob childBlob2 = parcel.readEmbeddedBuffer(_hidl_vec_size2 * 16, _hidl_blob.handle(), 0 + _hidl_offset + 16, true);
+        HwBlob childBlob2 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size2 * 16, _hidl_blob.handle(), 0 + _hidl_offset + 16, true);
         this.remoteAddresses.clear();
         for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
             new String();
             String _hidl_vec_element2 = childBlob2.getString(_hidl_index_02 * 16);
-            parcel.readEmbeddedBuffer(_hidl_vec_element2.getBytes().length + 1, childBlob2.handle(), (_hidl_index_02 * 16) + 0, false);
+            parcel.readEmbeddedBuffer(
+                    _hidl_vec_element2.getBytes().length + 1,
+                    childBlob2.handle(),
+                    (_hidl_index_02 * 16) + 0,
+                    false);
             this.remoteAddresses.add(_hidl_vec_element2);
         }
         this.localPort.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 32);

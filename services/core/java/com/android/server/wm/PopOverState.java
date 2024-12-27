@@ -3,7 +3,7 @@ package com.android.server.wm;
 import android.app.ActivityOptions;
 import android.graphics.Point;
 import android.graphics.Rect;
-import com.android.server.wm.Transition;
+
 import java.util.Arrays;
 import java.util.function.Consumer;
 
@@ -52,7 +52,8 @@ public final class PopOverState {
                 activityOptions.mPopOverAnchorMarginDp = (Point[]) pointArr.clone();
             }
             if (iArr3 != null) {
-                if (!Arrays.equals(activityOptions.mPopOverAnchorPosition, (int[]) iArr3.clone()) && (findMainWindow = activityRecord.findMainWindow(true)) != null) {
+                if (!Arrays.equals(activityOptions.mPopOverAnchorPosition, (int[]) iArr3.clone())
+                        && (findMainWindow = activityRecord.findMainWindow(true)) != null) {
                     findMainWindow.forceReportingResized();
                 }
                 activityOptions.mPopOverAnchorPosition = (int[]) iArr3.clone();
@@ -64,21 +65,31 @@ public final class PopOverState {
         if (bounds.width() == bounds2.width() && bounds.height() == bounds2.height()) {
             return;
         }
-        ChangeTransitionController changeTransitionController = activityRecord.mAtmService.mChangeTransitController;
+        ChangeTransitionController changeTransitionController =
+                activityRecord.mAtmService.mChangeTransitController;
         changeTransitionController.getClass();
         DisplayContent displayContent = activityRecord.mDisplayContent;
         Task task = activityRecord.task;
-        if (displayContent == null || task == null || !activityRecord.mPopOverState.mIsActivated || task.isChangeTransitionBlockedByCommonPolicy()) {
+        if (displayContent == null
+                || task == null
+                || !activityRecord.mPopOverState.mIsActivated
+                || task.isChangeTransitionBlockedByCommonPolicy()) {
             return;
         }
-        Transition.ChangeInfo findCollectingChangeInfo = changeTransitionController.findCollectingChangeInfo(activityRecord);
+        Transition.ChangeInfo findCollectingChangeInfo =
+                changeTransitionController.findCollectingChangeInfo(activityRecord);
         if (findCollectingChangeInfo == null || findCollectingChangeInfo.mChangeLeash == null) {
-            Transition createTransition = !changeTransitionController.mTransitionController.isCollecting() ? changeTransitionController.mTransitionController.createTransition(6, 0) : null;
+            Transition createTransition =
+                    !changeTransitionController.mTransitionController.isCollecting()
+                            ? changeTransitionController.mTransitionController.createTransition(
+                                    6, 0)
+                            : null;
             changeTransitionController.mTransitionController.collect(activityRecord);
             changeTransitionController.updateChangeInfo(activityRecord, 5, 1, bounds, 0);
             changeTransitionController.mTransitionController.collectVisibleChange(activityRecord);
             if (createTransition != null) {
-                changeTransitionController.mTransitionController.requestStartTransition(createTransition, task, null, null);
+                changeTransitionController.mTransitionController.requestStartTransition(
+                        createTransition, task, null, null);
                 createTransition.setReady(task, true);
             }
         }
@@ -87,7 +98,15 @@ public final class PopOverState {
     public boolean isAboveAnotherOpaquePopOver() {
         ActivityRecord activityRecord = this.mActivityRecord;
         Task task = activityRecord.task;
-        return (task == null || task.getActivity(new PopOverState$$ExternalSyntheticLambda0(0, this), activityRecord, false, true) == null) ? false : true;
+        return (task == null
+                        || task.getActivity(
+                                        new PopOverState$$ExternalSyntheticLambda0(0, this),
+                                        activityRecord,
+                                        false,
+                                        true)
+                                == null)
+                ? false
+                : true;
     }
 
     public boolean isInLargeSizeTask() {
@@ -106,7 +125,8 @@ public final class PopOverState {
             if (this.mIsActivated) {
                 this.mIsActivated = false;
                 activityRecord.mOccludesParent = this.mLastOccludesParent;
-                activityRecord.forAllWindows((Consumer) new PopOverState$$ExternalSyntheticLambda2(), true);
+                activityRecord.forAllWindows(
+                        (Consumer) new PopOverState$$ExternalSyntheticLambda2(), true);
                 return;
             }
             return;
@@ -115,12 +135,18 @@ public final class PopOverState {
             if (this.mIsActivated) {
                 this.mIsActivated = false;
                 activityRecord.mOccludesParent = this.mLastOccludesParent;
-                activityRecord.forAllWindows((Consumer) new PopOverState$$ExternalSyntheticLambda2(), true);
+                activityRecord.forAllWindows(
+                        (Consumer) new PopOverState$$ExternalSyntheticLambda2(), true);
                 return;
             }
             return;
         }
-        if (this.mIsActivated || this.mOptions == null || (task = activityRecord.task) == null || task.mTaskId != this.mOriginTaskId || activityRecord.isRootOfTask() || activityRecord.mReparenting) {
+        if (this.mIsActivated
+                || this.mOptions == null
+                || (task = activityRecord.task) == null
+                || task.mTaskId != this.mOriginTaskId
+                || activityRecord.isRootOfTask()
+                || activityRecord.mReparenting) {
             return;
         }
         this.mIsActivated = true;
@@ -129,9 +155,12 @@ public final class PopOverState {
         if (!task2.mLastDispatchedWindowFocusInTask) {
             task2.updateWindowFocusInTask();
         }
-        if (!activityRecord.getDisplayContent().mWaitingForConfig && activityRecord.mVisible && activityRecord.task.shouldBeVisible(null)) {
+        if (!activityRecord.getDisplayContent().mWaitingForConfig
+                && activityRecord.mVisible
+                && activityRecord.task.shouldBeVisible(null)) {
             if (activityRecord.task.inSplitScreenWindowingMode()) {
-                activityRecord.getParent().getParent().asTask().mPendingEnsureVisibleForPopOver = true;
+                activityRecord.getParent().getParent().asTask().mPendingEnsureVisibleForPopOver =
+                        true;
             } else if (activityRecord.task.inFreeformWindowingMode()) {
                 activityRecord.task.mPendingEnsureVisibleForPopOver = true;
             }

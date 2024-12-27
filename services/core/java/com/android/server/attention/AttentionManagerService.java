@@ -29,12 +29,14 @@ import android.service.attention.IAttentionService;
 import android.service.attention.IProximityUpdateCallback;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
 import com.android.server.SystemService;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Objects;
@@ -74,49 +76,60 @@ public final class AttentionManagerService extends SystemService {
         public boolean mIsFulfilled;
 
         /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.attention.AttentionManagerService$AttentionCheck$1] */
-        public AttentionCheck(final AttentionManagerInternal.AttentionCallbackInternal attentionCallbackInternal, final AttentionManagerService attentionManagerService) {
+        public AttentionCheck(
+                final AttentionManagerInternal.AttentionCallbackInternal attentionCallbackInternal,
+                final AttentionManagerService attentionManagerService) {
             this.mCallbackInternal = attentionCallbackInternal;
-            this.mIAttentionCallback = new IAttentionCallback.Stub() { // from class: com.android.server.attention.AttentionManagerService.AttentionCheck.1
-                public final void onFailure(int i) {
-                    AttentionCheck attentionCheck = AttentionCheck.this;
-                    if (attentionCheck.mIsFulfilled) {
-                        return;
-                    }
-                    attentionCheck.mIsFulfilled = true;
-                    attentionCallbackInternal.onFailure(i);
-                    FrameworkStatsLog.write(143, i);
-                }
-
-                public final void onSuccess(int i, long j) {
-                    AttentionCheck attentionCheck = AttentionCheck.this;
-                    if (attentionCheck.mIsFulfilled) {
-                        return;
-                    }
-                    attentionCheck.mIsFulfilled = true;
-                    attentionCallbackInternal.onSuccess(i, j);
-                    FrameworkStatsLog.write(143, i);
-                    AttentionManagerService attentionManagerService2 = attentionManagerService;
-                    AttentionCheckCache attentionCheckCache = new AttentionCheckCache(SystemClock.uptimeMillis(), i, j);
-                    synchronized (attentionManagerService2.mLock) {
-                        try {
-                            if (attentionManagerService2.mAttentionCheckCacheBuffer == null) {
-                                attentionManagerService2.mAttentionCheckCacheBuffer = new AttentionCheckCacheBuffer();
+            this.mIAttentionCallback =
+                    new IAttentionCallback
+                            .Stub() { // from class:
+                                      // com.android.server.attention.AttentionManagerService.AttentionCheck.1
+                        public final void onFailure(int i) {
+                            AttentionCheck attentionCheck = AttentionCheck.this;
+                            if (attentionCheck.mIsFulfilled) {
+                                return;
                             }
-                            AttentionCheckCacheBuffer attentionCheckCacheBuffer = attentionManagerService2.mAttentionCheckCacheBuffer;
-                            int i2 = attentionCheckCacheBuffer.mStartIndex;
-                            int i3 = attentionCheckCacheBuffer.mSize;
-                            attentionCheckCacheBuffer.mQueue[(i2 + i3) % 5] = attentionCheckCache;
-                            if (i3 == 5) {
-                                attentionCheckCacheBuffer.mStartIndex = i2 + 1;
-                            } else {
-                                attentionCheckCacheBuffer.mSize = i3 + 1;
-                            }
-                        } catch (Throwable th) {
-                            throw th;
+                            attentionCheck.mIsFulfilled = true;
+                            attentionCallbackInternal.onFailure(i);
+                            FrameworkStatsLog.write(143, i);
                         }
-                    }
-                }
-            };
+
+                        public final void onSuccess(int i, long j) {
+                            AttentionCheck attentionCheck = AttentionCheck.this;
+                            if (attentionCheck.mIsFulfilled) {
+                                return;
+                            }
+                            attentionCheck.mIsFulfilled = true;
+                            attentionCallbackInternal.onSuccess(i, j);
+                            FrameworkStatsLog.write(143, i);
+                            AttentionManagerService attentionManagerService2 =
+                                    attentionManagerService;
+                            AttentionCheckCache attentionCheckCache =
+                                    new AttentionCheckCache(SystemClock.uptimeMillis(), i, j);
+                            synchronized (attentionManagerService2.mLock) {
+                                try {
+                                    if (attentionManagerService2.mAttentionCheckCacheBuffer
+                                            == null) {
+                                        attentionManagerService2.mAttentionCheckCacheBuffer =
+                                                new AttentionCheckCacheBuffer();
+                                    }
+                                    AttentionCheckCacheBuffer attentionCheckCacheBuffer =
+                                            attentionManagerService2.mAttentionCheckCacheBuffer;
+                                    int i2 = attentionCheckCacheBuffer.mStartIndex;
+                                    int i3 = attentionCheckCacheBuffer.mSize;
+                                    attentionCheckCacheBuffer.mQueue[(i2 + i3) % 5] =
+                                            attentionCheckCache;
+                                    if (i3 == 5) {
+                                        attentionCheckCacheBuffer.mStartIndex = i2 + 1;
+                                    } else {
+                                        attentionCheckCacheBuffer.mSize = i3 + 1;
+                                    }
+                                } catch (Throwable th) {
+                                    throw th;
+                                }
+                            }
+                        }
+                    };
         }
     }
 
@@ -140,7 +153,9 @@ public final class AttentionManagerService extends SystemService {
         public int mSize = 0;
 
         /* renamed from: -$$Nest$mdump, reason: not valid java name */
-        public static void m256$$Nest$mdump(AttentionCheckCacheBuffer attentionCheckCacheBuffer, IndentingPrintWriter indentingPrintWriter) {
+        public static void m256$$Nest$mdump(
+                AttentionCheckCacheBuffer attentionCheckCacheBuffer,
+                IndentingPrintWriter indentingPrintWriter) {
             AttentionCheckCache attentionCheckCache;
             attentionCheckCacheBuffer.getClass();
             indentingPrintWriter.println("attention check cache:");
@@ -153,7 +168,9 @@ public final class AttentionManagerService extends SystemService {
                 if (i >= i2) {
                     attentionCheckCache = null;
                 } else {
-                    attentionCheckCache = attentionCheckCacheBuffer.mQueue[(attentionCheckCacheBuffer.mStartIndex + i) % 5];
+                    attentionCheckCache =
+                            attentionCheckCacheBuffer
+                                    .mQueue[(attentionCheckCacheBuffer.mStartIndex + i) % 5];
                 }
                 if (attentionCheckCache != null) {
                     indentingPrintWriter.increaseIndent();
@@ -177,7 +194,8 @@ public final class AttentionManagerService extends SystemService {
             int i = message.what;
             if (i == 1) {
                 synchronized (AttentionManagerService.this.mLock) {
-                    AttentionManagerService.m254$$Nest$mcancelAndUnbindLocked(AttentionManagerService.this);
+                    AttentionManagerService.m254$$Nest$mcancelAndUnbindLocked(
+                            AttentionManagerService.this);
                 }
             } else {
                 if (i != 2) {
@@ -196,7 +214,8 @@ public final class AttentionManagerService extends SystemService {
         public final TestableProximityUpdateCallbackInternal mTestableProximityUpdateCallback;
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-        public final class TestableAttentionCallbackInternal extends AttentionManagerInternal.AttentionCallbackInternal {
+        public final class TestableAttentionCallbackInternal
+                extends AttentionManagerInternal.AttentionCallbackInternal {
             public int mLastCallbackCode;
 
             public final void onFailure(int i) {
@@ -209,7 +228,8 @@ public final class AttentionManagerService extends SystemService {
         }
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-        public final class TestableProximityUpdateCallbackInternal implements AttentionManagerInternal.ProximityUpdateCallbackInternal {
+        public final class TestableProximityUpdateCallbackInternal
+                implements AttentionManagerInternal.ProximityUpdateCallbackInternal {
             public double mLastCallbackCode;
 
             public final void onProximityUpdate(double d) {
@@ -218,10 +238,12 @@ public final class AttentionManagerService extends SystemService {
         }
 
         public AttentionManagerServiceShellCommand() {
-            TestableAttentionCallbackInternal testableAttentionCallbackInternal = new TestableAttentionCallbackInternal();
+            TestableAttentionCallbackInternal testableAttentionCallbackInternal =
+                    new TestableAttentionCallbackInternal();
             testableAttentionCallbackInternal.mLastCallbackCode = -1;
             this.mTestableAttentionCallback = testableAttentionCallbackInternal;
-            TestableProximityUpdateCallbackInternal testableProximityUpdateCallbackInternal = new TestableProximityUpdateCallbackInternal();
+            TestableProximityUpdateCallbackInternal testableProximityUpdateCallbackInternal =
+                    new TestableProximityUpdateCallbackInternal();
             testableProximityUpdateCallbackInternal.mLastCallbackCode = -1.0d;
             this.mTestableProximityUpdateCallback = testableProximityUpdateCallbackInternal;
         }
@@ -283,8 +305,13 @@ public final class AttentionManagerService extends SystemService {
                 }
                 if (c == 0) {
                     PrintWriter outPrintWriter = getOutPrintWriter();
-                    ComponentName resolveAttentionService = AttentionManagerService.resolveAttentionService(AttentionManagerService.this.mContext);
-                    outPrintWriter.println(resolveAttentionService != null ? resolveAttentionService.flattenToShortString() : "");
+                    ComponentName resolveAttentionService =
+                            AttentionManagerService.resolveAttentionService(
+                                    AttentionManagerService.this.mContext);
+                    outPrintWriter.println(
+                            resolveAttentionService != null
+                                    ? resolveAttentionService.flattenToShortString()
+                                    : "");
                     return 0;
                 }
                 if (c != 1) {
@@ -296,7 +323,10 @@ public final class AttentionManagerService extends SystemService {
                         } else {
                             AttentionManagerService.sTestAttentionServicePackage = nextArgRequired;
                             resetStates();
-                            outPrintWriter2.println(AttentionManagerService.this.mComponentName != null ? "true" : "false");
+                            outPrintWriter2.println(
+                                    AttentionManagerService.this.mComponentName != null
+                                            ? "true"
+                                            : "false");
                         }
                         return 0;
                     }
@@ -308,13 +338,15 @@ public final class AttentionManagerService extends SystemService {
                         return 0;
                     }
                     if (c == 4) {
-                        getOutPrintWriter().println(this.mTestableAttentionCallback.mLastCallbackCode);
+                        getOutPrintWriter()
+                                .println(this.mTestableAttentionCallback.mLastCallbackCode);
                         return 0;
                     }
                     if (c != 5) {
                         return handleDefaultCommands(str);
                     }
-                    getOutPrintWriter().println(this.mTestableProximityUpdateCallback.mLastCallbackCode);
+                    getOutPrintWriter()
+                            .println(this.mTestableProximityUpdateCallback.mLastCallbackCode);
                     return 0;
                 }
                 String nextArgRequired2 = getNextArgRequired();
@@ -352,24 +384,36 @@ public final class AttentionManagerService extends SystemService {
                         break;
                 }
                 if (c2 == 0) {
-                    getOutPrintWriter().println(AttentionManagerService.this.checkAttention(2000L, this.mTestableAttentionCallback) ? "true" : "false");
+                    getOutPrintWriter()
+                            .println(
+                                    AttentionManagerService.this.checkAttention(
+                                                    2000L, this.mTestableAttentionCallback)
+                                            ? "true"
+                                            : "false");
                     return 0;
                 }
                 if (c2 == 1) {
                     PrintWriter outPrintWriter3 = getOutPrintWriter();
-                    AttentionManagerService.this.cancelAttentionCheck(this.mTestableAttentionCallback);
+                    AttentionManagerService.this.cancelAttentionCheck(
+                            this.mTestableAttentionCallback);
                     outPrintWriter3.println("true");
                     return 0;
                 }
                 if (c2 == 2) {
-                    getOutPrintWriter().println(AttentionManagerService.this.onStartProximityUpdates(this.mTestableProximityUpdateCallback) ? "true" : "false");
+                    getOutPrintWriter()
+                            .println(
+                                    AttentionManagerService.this.onStartProximityUpdates(
+                                                    this.mTestableProximityUpdateCallback)
+                                            ? "true"
+                                            : "false");
                     return 0;
                 }
                 if (c2 != 3) {
                     throw new IllegalArgumentException("Invalid argument");
                 }
                 PrintWriter outPrintWriter4 = getOutPrintWriter();
-                AttentionManagerService.this.onStopProximityUpdates(this.mTestableProximityUpdateCallback);
+                AttentionManagerService.this.onStopProximityUpdates(
+                        this.mTestableProximityUpdateCallback);
                 outPrintWriter4.println("true");
                 return 0;
             } catch (IllegalArgumentException e) {
@@ -381,15 +425,55 @@ public final class AttentionManagerService extends SystemService {
         public final void onHelp() {
             PrintWriter outPrintWriter = getOutPrintWriter();
             outPrintWriter.println("Attention commands: ");
-            outPrintWriter.println("  setTestableAttentionService <service_package>: Bind to a custom implementation of attention service");
+            outPrintWriter.println(
+                    "  setTestableAttentionService <service_package>: Bind to a custom"
+                        + " implementation of attention service");
             outPrintWriter.println("  ---<service_package>:");
-            outPrintWriter.println("       := Package containing the Attention Service implementation to bind to");
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  ---returns:", "       := true, if was bound successfully", "       := false, if was not bound successfully", "  clearTestableAttentionService: Undo custom bindings. Revert to previous behavior");
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  getAttentionServiceComponent: Get the current service component string", "  ---returns:", "       := If valid, the component string (in shorten form) for the currently bound service.", "       := else, empty string");
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  call checkAttention: Calls check attention", "  ---returns:", "       := true, if the call was successfully dispatched to the service implementation. (to see the result, call getLastTestCallbackCode)", "       := false, otherwise");
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  call cancelCheckAttention: Cancels check attention", "  call onStartProximityUpdates: Calls onStartProximityUpdates", "  ---returns:", "       := true, if the request was successfully dispatched to the service implementation. (to see the result, call getLastTestProximityUpdateCallbackCode)");
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "       := false, otherwise", "  call onStopProximityUpdates: Cancels proximity updates", "  getLastTestCallbackCode", "  ---returns:");
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "       := An integer, representing the last callback code received from the bounded implementation. If none, it will return -1", "  getLastTestProximityUpdateCallbackCode", "  ---returns:", "       := A double, representing the last proximity value received from the bounded implementation. If none, it will return -1.0");
+            outPrintWriter.println(
+                    "       := Package containing the Attention Service implementation to bind to");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "  ---returns:",
+                    "       := true, if was bound successfully",
+                    "       := false, if was not bound successfully",
+                    "  clearTestableAttentionService: Undo custom bindings. Revert to previous"
+                        + " behavior");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "  getAttentionServiceComponent: Get the current service component string",
+                    "  ---returns:",
+                    "       := If valid, the component string (in shorten form) for the currently"
+                        + " bound service.",
+                    "       := else, empty string");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "  call checkAttention: Calls check attention",
+                    "  ---returns:",
+                    "       := true, if the call was successfully dispatched to the service"
+                        + " implementation. (to see the result, call getLastTestCallbackCode)",
+                    "       := false, otherwise");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "  call cancelCheckAttention: Cancels check attention",
+                    "  call onStartProximityUpdates: Calls onStartProximityUpdates",
+                    "  ---returns:",
+                    "       := true, if the request was successfully dispatched to the service"
+                        + " implementation. (to see the result, call"
+                        + " getLastTestProximityUpdateCallbackCode)");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "       := false, otherwise",
+                    "  call onStopProximityUpdates: Cancels proximity updates",
+                    "  getLastTestCallbackCode",
+                    "  ---returns:");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "       := An integer, representing the last callback code received from the"
+                        + " bounded implementation. If none, it will return -1",
+                    "  getLastTestProximityUpdateCallbackCode",
+                    "  ---returns:",
+                    "       := A double, representing the last proximity value received from the"
+                        + " bounded implementation. If none, it will return -1.0");
         }
 
         public final void resetStates() {
@@ -399,14 +483,15 @@ public final class AttentionManagerService extends SystemService {
                 AttentionManagerService.m254$$Nest$mcancelAndUnbindLocked(attentionManagerService);
             }
             AttentionManagerService attentionManagerService2 = AttentionManagerService.this;
-            attentionManagerService2.mComponentName = AttentionManagerService.resolveAttentionService(attentionManagerService2.mContext);
+            attentionManagerService2.mComponentName =
+                    AttentionManagerService.resolveAttentionService(
+                            attentionManagerService2.mContext);
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AttentionServiceConnection implements ServiceConnection {
-        public AttentionServiceConnection() {
-        }
+        public AttentionServiceConnection() {}
 
         public final void cleanupService() {
             init(null);
@@ -418,7 +503,8 @@ public final class AttentionManagerService extends SystemService {
                 AttentionManagerService attentionManagerService = AttentionManagerService.this;
                 attentionManagerService.mService = iAttentionService;
                 attentionManagerService.mBinding = false;
-                AttentionManagerService.m255$$Nest$mhandlePendingCallbackLocked(attentionManagerService);
+                AttentionManagerService.m255$$Nest$mhandlePendingCallbackLocked(
+                        attentionManagerService);
             }
         }
 
@@ -449,48 +535,82 @@ public final class AttentionManagerService extends SystemService {
         public final AttentionManagerServiceShellCommand mAttentionManagerServiceShellCommand;
 
         public BinderService() {
-            this.mAttentionManagerServiceShellCommand = AttentionManagerService.this.new AttentionManagerServiceShellCommand();
+            this.mAttentionManagerServiceShellCommand =
+                    AttentionManagerService.this.new AttentionManagerServiceShellCommand();
         }
 
         @Override // android.os.Binder
-        public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-            if (DumpUtils.checkDumpPermission(AttentionManagerService.this.mContext, "AttentionManagerService", printWriter)) {
+        public final void dump(
+                FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+            if (DumpUtils.checkDumpPermission(
+                    AttentionManagerService.this.mContext,
+                    "AttentionManagerService",
+                    printWriter)) {
                 AttentionManagerService attentionManagerService = AttentionManagerService.this;
-                IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, "  ");
+                IndentingPrintWriter indentingPrintWriter =
+                        new IndentingPrintWriter(printWriter, "  ");
                 attentionManagerService.getClass();
-                indentingPrintWriter.println("Attention Manager Service (dumpsys attention) state:\n");
-                StringBuilder m = AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0.m(AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0.m(new StringBuilder("isServiceEnabled="), attentionManagerService.mIsServiceEnabled, indentingPrintWriter, "mIsProximityEnabled="), attentionManagerService.mIsProximityEnabled, indentingPrintWriter, "mStaleAfterMillis=");
+                indentingPrintWriter.println(
+                        "Attention Manager Service (dumpsys attention) state:\n");
+                StringBuilder m =
+                        AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0.m(
+                                AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("isServiceEnabled="),
+                                        attentionManagerService.mIsServiceEnabled,
+                                        indentingPrintWriter,
+                                        "mIsProximityEnabled="),
+                                attentionManagerService.mIsProximityEnabled,
+                                indentingPrintWriter,
+                                "mStaleAfterMillis=");
                 m.append(attentionManagerService.mStaleAfterMillis);
                 indentingPrintWriter.println(m.toString());
-                indentingPrintWriter.println("AttentionServicePackageName=" + attentionManagerService.mContext.getPackageManager().getAttentionServicePackageName());
+                indentingPrintWriter.println(
+                        "AttentionServicePackageName="
+                                + attentionManagerService
+                                        .mContext
+                                        .getPackageManager()
+                                        .getAttentionServicePackageName());
                 indentingPrintWriter.println("Resolved component:");
                 if (attentionManagerService.mComponentName != null) {
                     indentingPrintWriter.increaseIndent();
-                    indentingPrintWriter.println("Component=" + attentionManagerService.mComponentName.getPackageName());
-                    indentingPrintWriter.println("Class=" + attentionManagerService.mComponentName.getClassName());
+                    indentingPrintWriter.println(
+                            "Component=" + attentionManagerService.mComponentName.getPackageName());
+                    indentingPrintWriter.println(
+                            "Class=" + attentionManagerService.mComponentName.getClassName());
                     indentingPrintWriter.decreaseIndent();
                 }
                 synchronized (attentionManagerService.mLock) {
                     try {
                         indentingPrintWriter.println("binding=" + attentionManagerService.mBinding);
                         indentingPrintWriter.println("current attention check:");
-                        AttentionCheck attentionCheck = attentionManagerService.mCurrentAttentionCheck;
+                        AttentionCheck attentionCheck =
+                                attentionManagerService.mCurrentAttentionCheck;
                         if (attentionCheck != null) {
                             attentionCheck.getClass();
                             indentingPrintWriter.increaseIndent();
-                            StringBuilder m2 = AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0.m(new StringBuilder("is dispatched="), attentionCheck.mIsDispatched, indentingPrintWriter, "is fulfilled:=");
+                            StringBuilder m2 =
+                                    AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0
+                                            .m(
+                                                    new StringBuilder("is dispatched="),
+                                                    attentionCheck.mIsDispatched,
+                                                    indentingPrintWriter,
+                                                    "is fulfilled:=");
                             m2.append(attentionCheck.mIsFulfilled);
                             indentingPrintWriter.println(m2.toString());
                             indentingPrintWriter.decreaseIndent();
                         }
-                        AttentionCheckCacheBuffer attentionCheckCacheBuffer = attentionManagerService.mAttentionCheckCacheBuffer;
+                        AttentionCheckCacheBuffer attentionCheckCacheBuffer =
+                                attentionManagerService.mAttentionCheckCacheBuffer;
                         if (attentionCheckCacheBuffer != null) {
-                            AttentionCheckCacheBuffer.m256$$Nest$mdump(attentionCheckCacheBuffer, indentingPrintWriter);
+                            AttentionCheckCacheBuffer.m256$$Nest$mdump(
+                                    attentionCheckCacheBuffer, indentingPrintWriter);
                         }
-                        ProximityUpdate proximityUpdate = attentionManagerService.mCurrentProximityUpdate;
+                        ProximityUpdate proximityUpdate =
+                                attentionManagerService.mCurrentProximityUpdate;
                         if (proximityUpdate != null) {
                             indentingPrintWriter.increaseIndent();
-                            indentingPrintWriter.println("is StartedUpdates=" + proximityUpdate.mStartedUpdates);
+                            indentingPrintWriter.println(
+                                    "is StartedUpdates=" + proximityUpdate.mStartedUpdates);
                             indentingPrintWriter.decreaseIndent();
                         }
                     } catch (Throwable th) {
@@ -500,21 +620,36 @@ public final class AttentionManagerService extends SystemService {
             }
         }
 
-        public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-            this.mAttentionManagerServiceShellCommand.exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+        public final void onShellCommand(
+                FileDescriptor fileDescriptor,
+                FileDescriptor fileDescriptor2,
+                FileDescriptor fileDescriptor3,
+                String[] strArr,
+                ShellCallback shellCallback,
+                ResultReceiver resultReceiver) {
+            this.mAttentionManagerServiceShellCommand.exec(
+                    this,
+                    fileDescriptor,
+                    fileDescriptor2,
+                    fileDescriptor3,
+                    strArr,
+                    shellCallback,
+                    resultReceiver);
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends AttentionManagerInternal {
-        public LocalService() {
-        }
+        public LocalService() {}
 
-        public final void cancelAttentionCheck(AttentionManagerInternal.AttentionCallbackInternal attentionCallbackInternal) {
+        public final void cancelAttentionCheck(
+                AttentionManagerInternal.AttentionCallbackInternal attentionCallbackInternal) {
             AttentionManagerService.this.cancelAttentionCheck(attentionCallbackInternal);
         }
 
-        public final boolean checkAttention(long j, AttentionManagerInternal.AttentionCallbackInternal attentionCallbackInternal) {
+        public final boolean checkAttention(
+                long j,
+                AttentionManagerInternal.AttentionCallbackInternal attentionCallbackInternal) {
             return AttentionManagerService.this.checkAttention(j, attentionCallbackInternal);
         }
 
@@ -526,11 +661,16 @@ public final class AttentionManagerService extends SystemService {
             return AttentionManagerService.this.mIsProximityEnabled;
         }
 
-        public final boolean onStartProximityUpdates(AttentionManagerInternal.ProximityUpdateCallbackInternal proximityUpdateCallbackInternal) {
-            return AttentionManagerService.this.onStartProximityUpdates(proximityUpdateCallbackInternal);
+        public final boolean onStartProximityUpdates(
+                AttentionManagerInternal.ProximityUpdateCallbackInternal
+                        proximityUpdateCallbackInternal) {
+            return AttentionManagerService.this.onStartProximityUpdates(
+                    proximityUpdateCallbackInternal);
         }
 
-        public final void onStopProximityUpdates(AttentionManagerInternal.ProximityUpdateCallbackInternal proximityUpdateCallbackInternal) {
+        public final void onStopProximityUpdates(
+                AttentionManagerInternal.ProximityUpdateCallbackInternal
+                        proximityUpdateCallbackInternal) {
             AttentionManagerService.this.onStopProximityUpdates(proximityUpdateCallbackInternal);
         }
     }
@@ -538,18 +678,23 @@ public final class AttentionManagerService extends SystemService {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     final class ProximityUpdate {
         public final AttentionManagerInternal.ProximityUpdateCallbackInternal mCallbackInternal;
-        public final AnonymousClass1 mIProximityUpdateCallback = new IProximityUpdateCallback.Stub() { // from class: com.android.server.attention.AttentionManagerService.ProximityUpdate.1
-            public final void onProximityUpdate(double d) {
-                ProximityUpdate.this.mCallbackInternal.onProximityUpdate(d);
-                synchronized (AttentionManagerService.this.mLock) {
-                    AttentionManagerService.this.freeIfInactiveLocked();
-                }
-            }
-        };
+        public final AnonymousClass1 mIProximityUpdateCallback =
+                new IProximityUpdateCallback
+                        .Stub() { // from class:
+                                  // com.android.server.attention.AttentionManagerService.ProximityUpdate.1
+                    public final void onProximityUpdate(double d) {
+                        ProximityUpdate.this.mCallbackInternal.onProximityUpdate(d);
+                        synchronized (AttentionManagerService.this.mLock) {
+                            AttentionManagerService.this.freeIfInactiveLocked();
+                        }
+                    }
+                };
         public boolean mStartedUpdates;
 
         /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.attention.AttentionManagerService$ProximityUpdate$1] */
-        public ProximityUpdate(AttentionManagerInternal.ProximityUpdateCallbackInternal proximityUpdateCallbackInternal) {
+        public ProximityUpdate(
+                AttentionManagerInternal.ProximityUpdateCallbackInternal
+                        proximityUpdateCallbackInternal) {
             this.mCallbackInternal = proximityUpdateCallbackInternal;
         }
 
@@ -565,7 +710,10 @@ public final class AttentionManagerService extends SystemService {
                         iAttentionService.onStopProximityUpdates();
                         this.mStartedUpdates = false;
                     } catch (RemoteException e) {
-                        Slog.e("AttentionManagerService", "Cannot call into the AttentionService", e);
+                        Slog.e(
+                                "AttentionManagerService",
+                                "Cannot call into the AttentionService",
+                                e);
                     }
                 }
             }
@@ -575,12 +723,16 @@ public final class AttentionManagerService extends SystemService {
             synchronized (AttentionManagerService.this.mLock) {
                 try {
                     if (this.mStartedUpdates) {
-                        Slog.w("AttentionManagerService", "Already registered to a proximity service.");
+                        Slog.w(
+                                "AttentionManagerService",
+                                "Already registered to a proximity service.");
                         return false;
                     }
                     IAttentionService iAttentionService = AttentionManagerService.this.mService;
                     if (iAttentionService == null) {
-                        Slog.w("AttentionManagerService", "There is no service bound. Proximity update request rejected.");
+                        Slog.w(
+                                "AttentionManagerService",
+                                "There is no service bound. Proximity update request rejected.");
                         return false;
                     }
                     try {
@@ -588,7 +740,10 @@ public final class AttentionManagerService extends SystemService {
                         this.mStartedUpdates = true;
                         return true;
                     } catch (RemoteException e) {
-                        Slog.e("AttentionManagerService", "Cannot call into the AttentionService", e);
+                        Slog.e(
+                                "AttentionManagerService",
+                                "Cannot call into the AttentionService",
+                                e);
                         return false;
                     }
                 } catch (Throwable th) {
@@ -600,21 +755,22 @@ public final class AttentionManagerService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenStateReceiver extends BroadcastReceiver {
-        public ScreenStateReceiver() {
-        }
+        public ScreenStateReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             if ("android.intent.action.SCREEN_OFF".equals(intent.getAction())) {
                 synchronized (AttentionManagerService.this.mLock) {
-                    AttentionManagerService.m254$$Nest$mcancelAndUnbindLocked(AttentionManagerService.this);
+                    AttentionManagerService.m254$$Nest$mcancelAndUnbindLocked(
+                            AttentionManagerService.this);
                 }
             }
         }
     }
 
     /* renamed from: -$$Nest$mcancelAndUnbindLocked, reason: not valid java name */
-    public static void m254$$Nest$mcancelAndUnbindLocked(AttentionManagerService attentionManagerService) {
+    public static void m254$$Nest$mcancelAndUnbindLocked(
+            AttentionManagerService attentionManagerService) {
         synchronized (attentionManagerService.mLock) {
             try {
                 if (attentionManagerService.mCurrentAttentionCheck != null) {
@@ -627,7 +783,9 @@ public final class AttentionManagerService extends SystemService {
                 if (attentionManagerService.mService == null) {
                     return;
                 }
-                attentionManagerService.mAttentionHandler.post(new AttentionManagerService$$ExternalSyntheticLambda2(attentionManagerService, 1));
+                attentionManagerService.mAttentionHandler.post(
+                        new AttentionManagerService$$ExternalSyntheticLambda2(
+                                attentionManagerService, 1));
                 attentionManagerService.mConnection.cleanupService();
             } finally {
             }
@@ -635,7 +793,8 @@ public final class AttentionManagerService extends SystemService {
     }
 
     /* renamed from: -$$Nest$mhandlePendingCallbackLocked, reason: not valid java name */
-    public static void m255$$Nest$mhandlePendingCallbackLocked(AttentionManagerService attentionManagerService) {
+    public static void m255$$Nest$mhandlePendingCallbackLocked(
+            AttentionManagerService attentionManagerService) {
         AttentionCheck attentionCheck = attentionManagerService.mCurrentAttentionCheck;
         if (attentionCheck != null && !attentionCheck.mIsDispatched) {
             IAttentionService iAttentionService = attentionManagerService.mService;
@@ -660,7 +819,8 @@ public final class AttentionManagerService extends SystemService {
             attentionManagerService.mCurrentProximityUpdate = null;
         } else {
             try {
-                iAttentionService2.onStartProximityUpdates(proximityUpdate.mIProximityUpdateCallback);
+                iAttentionService2.onStartProximityUpdates(
+                        proximityUpdate.mIProximityUpdateCallback);
             } catch (RemoteException e) {
                 Slog.e("AttentionManagerService", "Cannot call into the AttentionService", e);
             }
@@ -672,7 +832,11 @@ public final class AttentionManagerService extends SystemService {
         this.mAttentionHandler = new AttentionHandler();
     }
 
-    public AttentionManagerService(Context context, PowerManager powerManager, Object obj, AttentionHandler attentionHandler) {
+    public AttentionManagerService(
+            Context context,
+            PowerManager powerManager,
+            Object obj,
+            AttentionHandler attentionHandler) {
         super(context);
         this.mConnection = new AttentionServiceConnection();
         Objects.requireNonNull(context);
@@ -688,7 +852,8 @@ public final class AttentionManagerService extends SystemService {
         int i;
         String str;
         ServiceInfo serviceInfo;
-        String attentionServicePackageName = context.getPackageManager().getAttentionServicePackageName();
+        String attentionServicePackageName =
+                context.getPackageManager().getAttentionServicePackageName();
         if (TextUtils.isEmpty(sTestAttentionServicePackage)) {
             if (!TextUtils.isEmpty(attentionServicePackageName)) {
                 i = 1048576;
@@ -698,15 +863,30 @@ public final class AttentionManagerService extends SystemService {
         }
         str = sTestAttentionServicePackage;
         i = 128;
-        ResolveInfo resolveService = context.getPackageManager().resolveService(new Intent("android.service.attention.AttentionService").setPackage(str), i);
+        ResolveInfo resolveService =
+                context.getPackageManager()
+                        .resolveService(
+                                new Intent("android.service.attention.AttentionService")
+                                        .setPackage(str),
+                                i);
         if (resolveService == null || (serviceInfo = resolveService.serviceInfo) == null) {
-            Slog.wtf("AttentionManagerService", "Service android.service.attention.AttentionService not found in package " + attentionServicePackageName);
+            Slog.wtf(
+                    "AttentionManagerService",
+                    "Service android.service.attention.AttentionService not found in package "
+                            + attentionServicePackageName);
             return null;
         }
         if ("android.permission.BIND_ATTENTION_SERVICE".equals(serviceInfo.permission)) {
             return serviceInfo.getComponentName();
         }
-        Slog.e("AttentionManagerService", "Service " + serviceInfo.getComponentName() + " should require android.permission.BIND_ATTENTION_SERVICE permission. Found " + serviceInfo.permission + " permission");
+        Slog.e(
+                "AttentionManagerService",
+                "Service "
+                        + serviceInfo.getComponentName()
+                        + " should require android.permission.BIND_ATTENTION_SERVICE permission."
+                        + " Found "
+                        + serviceInfo.permission
+                        + " permission");
         return null;
     }
 
@@ -731,10 +911,12 @@ public final class AttentionManagerService extends SystemService {
         }
     }
 
-    public void cancelAttentionCheck(AttentionManagerInternal.AttentionCallbackInternal attentionCallbackInternal) {
+    public void cancelAttentionCheck(
+            AttentionManagerInternal.AttentionCallbackInternal attentionCallbackInternal) {
         synchronized (this.mLock) {
             try {
-                if (this.mCurrentAttentionCheck.mCallbackInternal.equals(attentionCallbackInternal)) {
+                if (this.mCurrentAttentionCheck.mCallbackInternal.equals(
+                        attentionCallbackInternal)) {
                     cancel();
                 } else {
                     Slog.w("AttentionManagerService", "Cannot cancel a non-current request");
@@ -745,10 +927,13 @@ public final class AttentionManagerService extends SystemService {
         }
     }
 
-    public boolean checkAttention(long j, AttentionManagerInternal.AttentionCallbackInternal attentionCallbackInternal) {
+    public boolean checkAttention(
+            long j, AttentionManagerInternal.AttentionCallbackInternal attentionCallbackInternal) {
         Objects.requireNonNull(attentionCallbackInternal);
         if (!this.mIsServiceEnabled) {
-            Slog.w("AttentionManagerService", "Trying to call checkAttention() on an unsupported device.");
+            Slog.w(
+                    "AttentionManagerService",
+                    "Trying to call checkAttention() on an unsupported device.");
             return false;
         }
         if (!isServiceAvailable()) {
@@ -766,18 +951,24 @@ public final class AttentionManagerService extends SystemService {
             freeIfInactiveLocked();
             if (!this.mBinding && this.mService == null) {
                 this.mBinding = true;
-                this.mAttentionHandler.post(new AttentionManagerService$$ExternalSyntheticLambda2(this, 0));
+                this.mAttentionHandler.post(
+                        new AttentionManagerService$$ExternalSyntheticLambda2(this, 0));
             }
         }
         long uptimeMillis = SystemClock.uptimeMillis();
         try {
-            this.mServiceBindingLatch.await(Math.min(DEFAULT_STALE_AFTER_MILLIS, j), TimeUnit.MILLISECONDS);
+            this.mServiceBindingLatch.await(
+                    Math.min(DEFAULT_STALE_AFTER_MILLIS, j), TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
-            Slog.e("AttentionManagerService", "Interrupted while waiting to bind Attention Service.", e);
+            Slog.e(
+                    "AttentionManagerService",
+                    "Interrupted while waiting to bind Attention Service.",
+                    e);
         }
         synchronized (this.mLock) {
             try {
-                AttentionCheckCacheBuffer attentionCheckCacheBuffer = this.mAttentionCheckCacheBuffer;
+                AttentionCheckCacheBuffer attentionCheckCacheBuffer =
+                        this.mAttentionCheckCacheBuffer;
                 AttentionCheckCache attentionCheckCache = null;
                 if (attentionCheckCacheBuffer != null) {
                     int i = attentionCheckCacheBuffer.mStartIndex;
@@ -787,19 +978,24 @@ public final class AttentionManagerService extends SystemService {
                         attentionCheckCache = attentionCheckCacheBuffer.mQueue[i3];
                     }
                 }
-                if (attentionCheckCache != null && uptimeMillis < attentionCheckCache.mLastComputed + this.mStaleAfterMillis) {
-                    attentionCallbackInternal.onSuccess(attentionCheckCache.mResult, attentionCheckCache.mTimestamp);
+                if (attentionCheckCache != null
+                        && uptimeMillis
+                                < attentionCheckCache.mLastComputed + this.mStaleAfterMillis) {
+                    attentionCallbackInternal.onSuccess(
+                            attentionCheckCache.mResult, attentionCheckCache.mTimestamp);
                     return true;
                 }
                 AttentionCheck attentionCheck = this.mCurrentAttentionCheck;
-                if (attentionCheck != null && (!attentionCheck.mIsDispatched || !attentionCheck.mIsFulfilled)) {
+                if (attentionCheck != null
+                        && (!attentionCheck.mIsDispatched || !attentionCheck.mIsFulfilled)) {
                     return false;
                 }
                 this.mCurrentAttentionCheck = new AttentionCheck(attentionCallbackInternal, this);
                 if (this.mService != null) {
                     try {
                         this.mAttentionHandler.sendEmptyMessageDelayed(2, j);
-                        this.mService.checkAttention(this.mCurrentAttentionCheck.mIAttentionCallback);
+                        this.mService.checkAttention(
+                                this.mCurrentAttentionCheck.mIAttentionCallback);
                         this.mCurrentAttentionCheck.mIsDispatched = true;
                     } catch (RemoteException unused) {
                         Slog.e("AttentionManagerService", "Cannot call into the AttentionService");
@@ -819,7 +1015,11 @@ public final class AttentionManagerService extends SystemService {
     }
 
     public long getStaleAfterMillis() {
-        long j = DeviceConfig.getLong("attention_manager_service", KEY_STALE_AFTER_MILLIS, DEFAULT_STALE_AFTER_MILLIS);
+        long j =
+                DeviceConfig.getLong(
+                        "attention_manager_service",
+                        KEY_STALE_AFTER_MILLIS,
+                        DEFAULT_STALE_AFTER_MILLIS);
         if (j >= 0 && j <= 10000) {
             return j;
         }
@@ -837,24 +1037,39 @@ public final class AttentionManagerService extends SystemService {
     @Override // com.android.server.SystemService
     public final void onBootPhase(int i) {
         if (i == 500) {
-            this.mContext.registerReceiver(new ScreenStateReceiver(), new IntentFilter("android.intent.action.SCREEN_OFF"));
+            this.mContext.registerReceiver(
+                    new ScreenStateReceiver(),
+                    new IntentFilter("android.intent.action.SCREEN_OFF"));
             readValuesFromDeviceConfig();
-            DeviceConfig.addOnPropertiesChangedListener("attention_manager_service", ActivityThread.currentApplication().getMainExecutor(), new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.server.attention.AttentionManagerService$$ExternalSyntheticLambda0
-                public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                    AttentionManagerService attentionManagerService = AttentionManagerService.this;
-                    attentionManagerService.getClass();
-                    for (String str : properties.getKeyset()) {
-                        str.getClass();
-                        if (str.equals("stale_after_millis") || str.equals("service_enabled")) {
-                            attentionManagerService.readValuesFromDeviceConfig();
-                            return;
+            DeviceConfig.addOnPropertiesChangedListener(
+                    "attention_manager_service",
+                    ActivityThread.currentApplication().getMainExecutor(),
+                    new DeviceConfig
+                            .OnPropertiesChangedListener() { // from class:
+                                                             // com.android.server.attention.AttentionManagerService$$ExternalSyntheticLambda0
+                        public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                            AttentionManagerService attentionManagerService =
+                                    AttentionManagerService.this;
+                            attentionManagerService.getClass();
+                            for (String str : properties.getKeyset()) {
+                                str.getClass();
+                                if (str.equals("stale_after_millis")
+                                        || str.equals("service_enabled")) {
+                                    attentionManagerService.readValuesFromDeviceConfig();
+                                    return;
+                                }
+                                Slog.i(
+                                        "AttentionManagerService",
+                                        "Ignoring change on ".concat(str));
+                            }
                         }
-                        Slog.i("AttentionManagerService", "Ignoring change on ".concat(str));
-                    }
-                }
-            });
-            this.mIsProximityEnabled = this.mContext.getResources().getBoolean(R.bool.config_enableWallpaperService);
-            HeimdAllFsService$$ExternalSyntheticOutline0.m("AttentionManagerService", new StringBuilder("mIsProximityEnabled is: "), this.mIsProximityEnabled);
+                    });
+            this.mIsProximityEnabled =
+                    this.mContext.getResources().getBoolean(R.bool.config_enableWallpaperService);
+            HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                    "AttentionManagerService",
+                    new StringBuilder("mIsProximityEnabled is: "),
+                    this.mIsProximityEnabled);
         }
     }
 
@@ -864,10 +1079,14 @@ public final class AttentionManagerService extends SystemService {
         publishLocalService(AttentionManagerInternal.class, new LocalService());
     }
 
-    public boolean onStartProximityUpdates(AttentionManagerInternal.ProximityUpdateCallbackInternal proximityUpdateCallbackInternal) {
+    public boolean onStartProximityUpdates(
+            AttentionManagerInternal.ProximityUpdateCallbackInternal
+                    proximityUpdateCallbackInternal) {
         Objects.requireNonNull(proximityUpdateCallbackInternal);
         if (!this.mIsProximityEnabled) {
-            Slog.w("AttentionManagerService", "Trying to call onProximityUpdate() on an unsupported device.");
+            Slog.w(
+                    "AttentionManagerService",
+                    "Trying to call onProximityUpdate() on an unsupported device.");
             return false;
         }
         if (!isServiceAvailable()) {
@@ -875,45 +1094,61 @@ public final class AttentionManagerService extends SystemService {
             return false;
         }
         if (!this.mPowerManager.isInteractive()) {
-            Slog.w("AttentionManagerService", "Proximity Service is unavailable during screen off at this moment.");
+            Slog.w(
+                    "AttentionManagerService",
+                    "Proximity Service is unavailable during screen off at this moment.");
             return false;
         }
         synchronized (this.mLock) {
             freeIfInactiveLocked();
             if (!this.mBinding && this.mService == null) {
                 this.mBinding = true;
-                this.mAttentionHandler.post(new AttentionManagerService$$ExternalSyntheticLambda2(this, 0));
+                this.mAttentionHandler.post(
+                        new AttentionManagerService$$ExternalSyntheticLambda2(this, 0));
             }
         }
         try {
             this.mServiceBindingLatch.await(DEFAULT_STALE_AFTER_MILLIS, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
-            Slog.e("AttentionManagerService", "Interrupted while waiting to bind Attention Service.", e);
+            Slog.e(
+                    "AttentionManagerService",
+                    "Interrupted while waiting to bind Attention Service.",
+                    e);
         }
         synchronized (this.mLock) {
             try {
                 ProximityUpdate proximityUpdate = this.mCurrentProximityUpdate;
                 if (proximityUpdate == null || !proximityUpdate.mStartedUpdates) {
-                    ProximityUpdate proximityUpdate2 = new ProximityUpdate(proximityUpdateCallbackInternal);
+                    ProximityUpdate proximityUpdate2 =
+                            new ProximityUpdate(proximityUpdateCallbackInternal);
                     this.mCurrentProximityUpdate = proximityUpdate2;
                     return proximityUpdate2.startUpdates();
                 }
                 if (proximityUpdate.mCallbackInternal == proximityUpdateCallbackInternal) {
-                    Slog.w("AttentionManagerService", "Provided callback is already registered. Skipping.");
+                    Slog.w(
+                            "AttentionManagerService",
+                            "Provided callback is already registered. Skipping.");
                     return true;
                 }
-                Slog.w("AttentionManagerService", "New proximity update cannot be processed because there is already an ongoing update");
+                Slog.w(
+                        "AttentionManagerService",
+                        "New proximity update cannot be processed because there is already an"
+                            + " ongoing update");
                 return false;
             } finally {
             }
         }
     }
 
-    public void onStopProximityUpdates(AttentionManagerInternal.ProximityUpdateCallbackInternal proximityUpdateCallbackInternal) {
+    public void onStopProximityUpdates(
+            AttentionManagerInternal.ProximityUpdateCallbackInternal
+                    proximityUpdateCallbackInternal) {
         synchronized (this.mLock) {
             try {
                 ProximityUpdate proximityUpdate = this.mCurrentProximityUpdate;
-                if (proximityUpdate != null && proximityUpdate.mCallbackInternal.equals(proximityUpdateCallbackInternal)) {
+                if (proximityUpdate != null
+                        && proximityUpdate.mCallbackInternal.equals(
+                                proximityUpdateCallbackInternal)) {
                     ProximityUpdate proximityUpdate2 = this.mCurrentProximityUpdate;
                     if (proximityUpdate2.mStartedUpdates) {
                         proximityUpdate2.cancelUpdates();
@@ -929,8 +1164,14 @@ public final class AttentionManagerService extends SystemService {
     }
 
     public final void readValuesFromDeviceConfig() {
-        this.mIsServiceEnabled = DeviceConfig.getBoolean("attention_manager_service", KEY_SERVICE_ENABLED, true);
+        this.mIsServiceEnabled =
+                DeviceConfig.getBoolean("attention_manager_service", KEY_SERVICE_ENABLED, true);
         this.mStaleAfterMillis = getStaleAfterMillis();
-        Slog.i("AttentionManagerService", "readValuesFromDeviceConfig():\nmIsServiceEnabled=" + this.mIsServiceEnabled + "\nmStaleAfterMillis=" + this.mStaleAfterMillis);
+        Slog.i(
+                "AttentionManagerService",
+                "readValuesFromDeviceConfig():\nmIsServiceEnabled="
+                        + this.mIsServiceEnabled
+                        + "\nmStaleAfterMillis="
+                        + this.mStaleAfterMillis);
     }
 }

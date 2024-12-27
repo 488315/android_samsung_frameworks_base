@@ -40,7 +40,9 @@ class DlsStateShot {
         if (isPhoneOrSub && hasFlag(dlsState, 16)) {
             return true;
         }
-        return WhichChecker.isPhone(which) ? (dlsState & 2047) != 0 : WhichChecker.isSubDisplay(which) && (dlsState & STATE_SUB_MASK) != 0;
+        return WhichChecker.isPhone(which)
+                ? (dlsState & 2047) != 0
+                : WhichChecker.isSubDisplay(which) && (dlsState & STATE_SUB_MASK) != 0;
     }
 
     public boolean isSggEnabled(int which) {
@@ -60,7 +62,9 @@ class DlsStateShot {
     }
 
     private int getDlsState(int userId) {
-        int dlsState = Settings.System.semGetIntForUser(this.mContext.getContentResolver(), "dls_state", 2, userId);
+        int dlsState =
+                Settings.System.semGetIntForUser(
+                        this.mContext.getContentResolver(), "dls_state", 2, userId);
         Log.d(TAG, "getDlsState: " + dlsState + ", userId=" + userId);
         return dlsState;
     }

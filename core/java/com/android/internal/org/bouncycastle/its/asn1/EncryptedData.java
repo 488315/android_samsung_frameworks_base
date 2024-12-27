@@ -4,8 +4,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 
 /* loaded from: classes5.dex */
 public class EncryptedData {
-    private EncryptedData(ASN1Sequence seq) {
-    }
+    private EncryptedData(ASN1Sequence seq) {}
 
     public static EncryptedData getInstance(Object o) {
         if (o instanceof EncryptedData) {

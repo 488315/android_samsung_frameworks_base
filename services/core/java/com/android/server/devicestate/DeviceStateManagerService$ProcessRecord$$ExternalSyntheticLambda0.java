@@ -5,16 +5,17 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.Trace;
 import android.util.Slog;
-import com.android.server.devicestate.DeviceStateManagerService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class DeviceStateManagerService$ProcessRecord$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class DeviceStateManagerService$ProcessRecord$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ DeviceStateManagerService.ProcessRecord f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ DeviceStateManagerService$ProcessRecord$$ExternalSyntheticLambda0(DeviceStateManagerService.ProcessRecord processRecord, Object obj, int i) {
+    public /* synthetic */ DeviceStateManagerService$ProcessRecord$$ExternalSyntheticLambda0(
+            DeviceStateManagerService.ProcessRecord processRecord, Object obj, int i) {
         this.$r8$classId = i;
         this.f$0 = processRecord;
         this.f$1 = obj;
@@ -31,7 +32,12 @@ public final /* synthetic */ class DeviceStateManagerService$ProcessRecord$$Exte
                     processRecord.mCallback.onRequestActive(iBinder);
                     return;
                 } catch (RemoteException e) {
-                    Slog.w("DeviceStateManagerService", "Failed to notify process " + processRecord.mPid + " that request state changed.", e);
+                    Slog.w(
+                            "DeviceStateManagerService",
+                            "Failed to notify process "
+                                    + processRecord.mPid
+                                    + " that request state changed.",
+                            e);
                     return;
                 }
             case 1:
@@ -42,7 +48,12 @@ public final /* synthetic */ class DeviceStateManagerService$ProcessRecord$$Exte
                     processRecord2.mCallback.onRequestCanceled(iBinder2);
                     return;
                 } catch (RemoteException e2) {
-                    Slog.w("DeviceStateManagerService", "Failed to notify process " + processRecord2.mPid + " that request state changed.", e2);
+                    Slog.w(
+                            "DeviceStateManagerService",
+                            "Failed to notify process "
+                                    + processRecord2.mPid
+                                    + " that request state changed.",
+                            e2);
                     return;
                 }
             default:
@@ -51,7 +62,8 @@ public final /* synthetic */ class DeviceStateManagerService$ProcessRecord$$Exte
                 processRecord3.getClass();
                 boolean isTagEnabled = Trace.isTagEnabled(524288L);
                 if (isTagEnabled) {
-                    Trace.traceBegin(524288L, "notifyDeviceStateInfoAsync(pid=" + processRecord3.mPid + ")");
+                    Trace.traceBegin(
+                            524288L, "notifyDeviceStateInfoAsync(pid=" + processRecord3.mPid + ")");
                 }
                 try {
                     try {
@@ -60,7 +72,12 @@ public final /* synthetic */ class DeviceStateManagerService$ProcessRecord$$Exte
                             return;
                         }
                     } catch (RemoteException e3) {
-                        Slog.w("DeviceStateManagerService", "Failed to notify process " + processRecord3.mPid + " that device state changed.", e3);
+                        Slog.w(
+                                "DeviceStateManagerService",
+                                "Failed to notify process "
+                                        + processRecord3.mPid
+                                        + " that device state changed.",
+                                e3);
                         if (!isTagEnabled) {
                             return;
                         }

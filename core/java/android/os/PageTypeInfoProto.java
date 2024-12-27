@@ -13,8 +13,7 @@ public final class PageTypeInfoProto {
         public static final long TYPE = 1138166333443L;
         public static final long ZONE = 1138166333442L;
 
-        public MigrateType() {
-        }
+        public MigrateType() {}
     }
 
     public final class Block {
@@ -28,7 +27,6 @@ public final class PageTypeInfoProto {
         public static final long UNMOVABLE = 1120986464259L;
         public static final long ZONE = 1138166333442L;
 
-        public Block() {
-        }
+        public Block() {}
     }
 }

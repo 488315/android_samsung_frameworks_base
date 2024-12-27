@@ -10,8 +10,7 @@ public interface ConnectionlessHandwritingCallback {
     public static final int CONNECTIONLESS_HANDWRITING_ERROR_UNSUPPORTED = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConnectionlessHandwritingError {
-    }
+    public @interface ConnectionlessHandwritingError {}
 
     void onError(int i);
 

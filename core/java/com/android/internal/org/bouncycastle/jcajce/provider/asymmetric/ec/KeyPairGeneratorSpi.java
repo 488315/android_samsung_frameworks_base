@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.ec;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x9.ECNamedCurveTable;
 import com.android.internal.org.bouncycastle.asn1.x9.X9ECParameters;
@@ -21,6 +22,7 @@ import com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec;
 import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.util.Integers;
+
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidParameterException;
@@ -86,7 +88,8 @@ public abstract class KeyPairGeneratorSpi extends KeyPairGenerator {
             if (random != null) {
                 this.random = random;
             }
-            ECGenParameterSpec ecParams = (ECGenParameterSpec) ecParameters.get(Integers.valueOf(strength));
+            ECGenParameterSpec ecParams =
+                    (ECGenParameterSpec) ecParameters.get(Integers.valueOf(strength));
             if (ecParams == null) {
                 throw new InvalidParameterException("unknown key size.");
             }
@@ -98,14 +101,16 @@ public abstract class KeyPairGeneratorSpi extends KeyPairGenerator {
         }
 
         @Override // java.security.KeyPairGenerator, java.security.KeyPairGeneratorSpi
-        public void initialize(AlgorithmParameterSpec params, SecureRandom random) throws InvalidAlgorithmParameterException {
+        public void initialize(AlgorithmParameterSpec params, SecureRandom random)
+                throws InvalidAlgorithmParameterException {
             if (random == null) {
                 random = this.random;
             }
             if (params == null) {
                 ECParameterSpec implicitCA = this.configuration.getEcImplicitlyCa();
                 if (implicitCA == null) {
-                    throw new InvalidAlgorithmParameterException("null parameter passed but no implicitCA set");
+                    throw new InvalidAlgorithmParameterException(
+                            "null parameter passed but no implicitCA set");
                 }
                 this.ecParams = null;
                 this.param = createKeyGenParamsBC(implicitCA, random);
@@ -114,7 +119,8 @@ public abstract class KeyPairGeneratorSpi extends KeyPairGenerator {
                 this.param = createKeyGenParamsBC((ECParameterSpec) params, random);
             } else if (params instanceof java.security.spec.ECParameterSpec) {
                 this.ecParams = params;
-                this.param = createKeyGenParamsJCE((java.security.spec.ECParameterSpec) params, random);
+                this.param =
+                        createKeyGenParamsJCE((java.security.spec.ECParameterSpec) params, random);
             } else if (params instanceof ECGenParameterSpec) {
                 initializeNamedCurve(((ECGenParameterSpec) params).getName(), random);
             } else if (params instanceof ECNamedCurveGenParameterSpec) {
@@ -124,7 +130,8 @@ public abstract class KeyPairGeneratorSpi extends KeyPairGenerator {
                 if (name != null) {
                     initializeNamedCurve(name, random);
                 } else {
-                    throw new InvalidAlgorithmParameterException("invalid parameterSpec: " + params);
+                    throw new InvalidAlgorithmParameterException(
+                            "invalid parameterSpec: " + params);
                 }
             }
             this.engine.init(this.param);
@@ -141,25 +148,39 @@ public abstract class KeyPairGeneratorSpi extends KeyPairGenerator {
             ECPrivateKeyParameters priv = (ECPrivateKeyParameters) pair.getPrivate();
             if (this.ecParams instanceof ECParameterSpec) {
                 ECParameterSpec p = (ECParameterSpec) this.ecParams;
-                BCECPublicKey pubKey = new BCECPublicKey(this.algorithm, pub, p, this.configuration);
-                return new KeyPair(pubKey, new BCECPrivateKey(this.algorithm, priv, pubKey, p, this.configuration));
+                BCECPublicKey pubKey =
+                        new BCECPublicKey(this.algorithm, pub, p, this.configuration);
+                return new KeyPair(
+                        pubKey,
+                        new BCECPrivateKey(this.algorithm, priv, pubKey, p, this.configuration));
             }
             if (this.ecParams == null) {
-                return new KeyPair(new BCECPublicKey(this.algorithm, pub, this.configuration), new BCECPrivateKey(this.algorithm, priv, this.configuration));
+                return new KeyPair(
+                        new BCECPublicKey(this.algorithm, pub, this.configuration),
+                        new BCECPrivateKey(this.algorithm, priv, this.configuration));
             }
-            java.security.spec.ECParameterSpec p2 = (java.security.spec.ECParameterSpec) this.ecParams;
+            java.security.spec.ECParameterSpec p2 =
+                    (java.security.spec.ECParameterSpec) this.ecParams;
             BCECPublicKey pubKey2 = new BCECPublicKey(this.algorithm, pub, p2, this.configuration);
-            return new KeyPair(pubKey2, new BCECPrivateKey(this.algorithm, priv, pubKey2, p2, this.configuration));
+            return new KeyPair(
+                    pubKey2,
+                    new BCECPrivateKey(this.algorithm, priv, pubKey2, p2, this.configuration));
         }
 
-        protected ECKeyGenerationParameters createKeyGenParamsBC(ECParameterSpec p, SecureRandom r) {
-            return new ECKeyGenerationParameters(new ECDomainParameters(p.getCurve(), p.getG(), p.getN(), p.getH()), r);
+        protected ECKeyGenerationParameters createKeyGenParamsBC(
+                ECParameterSpec p, SecureRandom r) {
+            return new ECKeyGenerationParameters(
+                    new ECDomainParameters(p.getCurve(), p.getG(), p.getN(), p.getH()), r);
         }
 
-        protected ECKeyGenerationParameters createKeyGenParamsJCE(java.security.spec.ECParameterSpec p, SecureRandom r) {
+        protected ECKeyGenerationParameters createKeyGenParamsJCE(
+                java.security.spec.ECParameterSpec p, SecureRandom r) {
             X9ECParameters x9P;
-            if ((p instanceof ECNamedCurveSpec) && (x9P = ECUtils.getDomainParametersFromName(((ECNamedCurveSpec) p).getName())) != null) {
-                ECDomainParameters dp = new ECDomainParameters(x9P.getCurve(), x9P.getG(), x9P.getN(), x9P.getH());
+            if ((p instanceof ECNamedCurveSpec)
+                    && (x9P = ECUtils.getDomainParametersFromName(((ECNamedCurveSpec) p).getName()))
+                            != null) {
+                ECDomainParameters dp =
+                        new ECDomainParameters(x9P.getCurve(), x9P.getG(), x9P.getN(), x9P.getH());
                 return new ECKeyGenerationParameters(dp, r);
             }
             ECCurve curve = EC5Util.convertCurve(p.getCurve());
@@ -170,7 +191,8 @@ public abstract class KeyPairGeneratorSpi extends KeyPairGenerator {
             return new ECKeyGenerationParameters(dp2, r);
         }
 
-        protected ECNamedCurveSpec createNamedCurveSpec(String curveName) throws InvalidAlgorithmParameterException {
+        protected ECNamedCurveSpec createNamedCurveSpec(String curveName)
+                throws InvalidAlgorithmParameterException {
             X9ECParameters p = ECUtils.getDomainParametersFromName(curveName);
             if (p == null) {
                 try {
@@ -179,17 +201,21 @@ public abstract class KeyPairGeneratorSpi extends KeyPairGenerator {
                         Map extraCurves = this.configuration.getAdditionalECParameters();
                         p = (X9ECParameters) extraCurves.get(new ASN1ObjectIdentifier(curveName));
                         if (p == null) {
-                            throw new InvalidAlgorithmParameterException("unknown curve OID: " + curveName);
+                            throw new InvalidAlgorithmParameterException(
+                                    "unknown curve OID: " + curveName);
                         }
                     }
                 } catch (IllegalArgumentException e) {
-                    throw new InvalidAlgorithmParameterException("unknown curve name: " + curveName);
+                    throw new InvalidAlgorithmParameterException(
+                            "unknown curve name: " + curveName);
                 }
             }
-            return new ECNamedCurveSpec(curveName, p.getCurve(), p.getG(), p.getN(), p.getH(), null);
+            return new ECNamedCurveSpec(
+                    curveName, p.getCurve(), p.getG(), p.getN(), p.getH(), null);
         }
 
-        protected void initializeNamedCurve(String curveName, SecureRandom random) throws InvalidAlgorithmParameterException {
+        protected void initializeNamedCurve(String curveName, SecureRandom random)
+                throws InvalidAlgorithmParameterException {
             ECNamedCurveSpec namedCurve = createNamedCurveSpec(curveName);
             this.ecParams = namedCurve;
             this.param = createKeyGenParamsJCE(namedCurve, random);

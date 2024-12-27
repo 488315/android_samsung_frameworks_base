@@ -4,40 +4,64 @@ import android.annotation.SystemApi;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class DevicePolicyDrawableResource implements Parcelable {
-    public static final Parcelable.Creator<DevicePolicyDrawableResource> CREATOR = new Parcelable.Creator<DevicePolicyDrawableResource>() { // from class: android.app.admin.DevicePolicyDrawableResource.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DevicePolicyDrawableResource createFromParcel(Parcel in) {
-            String drawableId = in.readString();
-            String drawableStyle = in.readString();
-            String drawableSource = in.readString();
-            int resourceIdInCallingPackage = in.readInt();
-            ParcelableResource resource = (ParcelableResource) in.readTypedObject(ParcelableResource.CREATOR);
-            return new DevicePolicyDrawableResource(drawableId, drawableStyle, drawableSource, resourceIdInCallingPackage, resource);
-        }
+    public static final Parcelable.Creator<DevicePolicyDrawableResource> CREATOR =
+            new Parcelable.Creator<DevicePolicyDrawableResource>() { // from class:
+                // android.app.admin.DevicePolicyDrawableResource.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DevicePolicyDrawableResource createFromParcel(Parcel in) {
+                    String drawableId = in.readString();
+                    String drawableStyle = in.readString();
+                    String drawableSource = in.readString();
+                    int resourceIdInCallingPackage = in.readInt();
+                    ParcelableResource resource =
+                            (ParcelableResource) in.readTypedObject(ParcelableResource.CREATOR);
+                    return new DevicePolicyDrawableResource(
+                            drawableId,
+                            drawableStyle,
+                            drawableSource,
+                            resourceIdInCallingPackage,
+                            resource);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DevicePolicyDrawableResource[] newArray(int size) {
-            return new DevicePolicyDrawableResource[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DevicePolicyDrawableResource[] newArray(int size) {
+                    return new DevicePolicyDrawableResource[size];
+                }
+            };
     private final String mDrawableId;
     private final String mDrawableSource;
     private final String mDrawableStyle;
     private ParcelableResource mResource;
     private final int mResourceIdInCallingPackage;
 
-    public DevicePolicyDrawableResource(Context context, String drawableId, String drawableStyle, String drawableSource, int resourceIdInCallingPackage) {
-        this(drawableId, drawableStyle, drawableSource, resourceIdInCallingPackage, new ParcelableResource(context, resourceIdInCallingPackage, 1));
+    public DevicePolicyDrawableResource(
+            Context context,
+            String drawableId,
+            String drawableStyle,
+            String drawableSource,
+            int resourceIdInCallingPackage) {
+        this(
+                drawableId,
+                drawableStyle,
+                drawableSource,
+                resourceIdInCallingPackage,
+                new ParcelableResource(context, resourceIdInCallingPackage, 1));
     }
 
-    private DevicePolicyDrawableResource(String drawableId, String drawableStyle, String drawableSource, int resourceIdInCallingPackage, ParcelableResource resource) {
+    private DevicePolicyDrawableResource(
+            String drawableId,
+            String drawableStyle,
+            String drawableSource,
+            int resourceIdInCallingPackage,
+            ParcelableResource resource) {
         Objects.requireNonNull(drawableId);
         Objects.requireNonNull(drawableStyle);
         Objects.requireNonNull(drawableSource);
@@ -49,8 +73,17 @@ public final class DevicePolicyDrawableResource implements Parcelable {
         this.mResource = resource;
     }
 
-    public DevicePolicyDrawableResource(Context context, String drawableId, String drawableStyle, int resourceIdInCallingPackage) {
-        this(context, drawableId, drawableStyle, DevicePolicyResources.UNDEFINED, resourceIdInCallingPackage);
+    public DevicePolicyDrawableResource(
+            Context context,
+            String drawableId,
+            String drawableStyle,
+            int resourceIdInCallingPackage) {
+        this(
+                context,
+                drawableId,
+                drawableStyle,
+                DevicePolicyResources.UNDEFINED,
+                resourceIdInCallingPackage);
     }
 
     public String getDrawableId() {
@@ -81,14 +114,23 @@ public final class DevicePolicyDrawableResource implements Parcelable {
             return false;
         }
         DevicePolicyDrawableResource other = (DevicePolicyDrawableResource) o;
-        if (this.mDrawableId.equals(other.mDrawableId) && this.mDrawableStyle.equals(other.mDrawableStyle) && this.mDrawableSource.equals(other.mDrawableSource) && this.mResourceIdInCallingPackage == other.mResourceIdInCallingPackage && this.mResource.equals(other.mResource)) {
+        if (this.mDrawableId.equals(other.mDrawableId)
+                && this.mDrawableStyle.equals(other.mDrawableStyle)
+                && this.mDrawableSource.equals(other.mDrawableSource)
+                && this.mResourceIdInCallingPackage == other.mResourceIdInCallingPackage
+                && this.mResource.equals(other.mResource)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mDrawableId, this.mDrawableStyle, this.mDrawableSource, Integer.valueOf(this.mResourceIdInCallingPackage), this.mResource);
+        return Objects.hash(
+                this.mDrawableId,
+                this.mDrawableStyle,
+                this.mDrawableSource,
+                Integer.valueOf(this.mResourceIdInCallingPackage),
+                this.mResource);
     }
 
     @Override // android.os.Parcelable

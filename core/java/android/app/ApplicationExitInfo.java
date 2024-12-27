@@ -1,7 +1,5 @@
 package android.app;
 
-import android.app.IAppTraceRetriever;
-import android.app.IParcelFileDescriptorRetriever;
 import android.icu.text.SimpleDateFormat;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
@@ -14,8 +12,10 @@ import android.util.DebugUtils;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
 import android.util.proto.WireTypeMismatchException;
+
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.util.ArrayUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,19 +28,21 @@ import java.util.zip.GZIPInputStream;
 
 /* loaded from: classes.dex */
 public final class ApplicationExitInfo implements Parcelable {
-    public static final Parcelable.Creator<ApplicationExitInfo> CREATOR = new Parcelable.Creator<ApplicationExitInfo>() { // from class: android.app.ApplicationExitInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApplicationExitInfo createFromParcel(Parcel in) {
-            return new ApplicationExitInfo(in);
-        }
+    public static final Parcelable.Creator<ApplicationExitInfo> CREATOR =
+            new Parcelable.Creator<
+                    ApplicationExitInfo>() { // from class: android.app.ApplicationExitInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApplicationExitInfo createFromParcel(Parcel in) {
+                    return new ApplicationExitInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApplicationExitInfo[] newArray(int size) {
-            return new ApplicationExitInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApplicationExitInfo[] newArray(int size) {
+                    return new ApplicationExitInfo[size];
+                }
+            };
     public static final int REASON_ANR = 6;
     public static final int REASON_CRASH = 4;
     public static final int REASON_CRASH_NATIVE = 5;
@@ -119,12 +121,10 @@ public final class ApplicationExitInfo implements Parcelable {
     private File mTraceFile;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Reason {
-    }
+    public @interface Reason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SubReason {
-    }
+    public @interface SubReason {}
 
     public int getPid() {
         return this.mPid;
@@ -206,7 +206,9 @@ public final class ApplicationExitInfo implements Parcelable {
                 }
                 return new ParcelFileDescriptor.AutoCloseInputStream(pfd);
             }
-            ParcelFileDescriptor fd = this.mAppTraceRetriever.getTraceFileDescriptor(this.mPackageName, this.mPackageUid, this.mPid);
+            ParcelFileDescriptor fd =
+                    this.mAppTraceRetriever.getTraceFileDescriptor(
+                            this.mPackageName, this.mPackageUid, this.mPid);
             if (fd == null) {
                 return null;
             }
@@ -369,8 +371,7 @@ public final class ApplicationExitInfo implements Parcelable {
         }
     }
 
-    public ApplicationExitInfo() {
-    }
+    public ApplicationExitInfo() {}
 
     public ApplicationExitInfo(ApplicationExitInfo other) {
         this.mPid = other.mPid;
@@ -419,7 +420,8 @@ public final class ApplicationExitInfo implements Parcelable {
             this.mAppTraceRetriever = IAppTraceRetriever.Stub.asInterface(in.readStrongBinder());
         }
         if (in.readInt() == 1) {
-            this.mNativeTombstoneRetriever = IParcelFileDescriptorRetriever.Stub.asInterface(in.readStrongBinder());
+            this.mNativeTombstoneRetriever =
+                    IParcelFileDescriptorRetriever.Stub.asInterface(in.readStrongBinder());
         }
     }
 
@@ -432,14 +434,61 @@ public final class ApplicationExitInfo implements Parcelable {
 
     public void dump(PrintWriter pw, String prefix, String seqSuffix, SimpleDateFormat sdf) {
         StringBuilder sb = new StringBuilder();
-        sb.append(prefix).append("ApplicationExitInfo ").append(seqSuffix).append(ShortcutConstants.SERVICES_SEPARATOR).append('\n');
-        sb.append(prefix).append(' ').append(" timestamp=").append(sdf.format(new Date(this.mTimestamp))).append(" pid=").append(this.mPid).append(" realUid=").append(this.mRealUid).append(" packageUid=").append(this.mPackageUid).append(" definingUid=").append(this.mDefiningUid).append(" user=").append(UserHandle.getUserId(this.mPackageUid)).append('\n');
-        sb.append(prefix).append(' ').append(" process=").append(this.mProcessName).append(" reason=").append(this.mReason).append(" (").append(reasonCodeToString(this.mReason)).append(NavigationBarInflaterView.KEY_CODE_END).append(" subreason=").append(this.mSubReason).append(" (").append(subreasonToString(this.mSubReason)).append(NavigationBarInflaterView.KEY_CODE_END).append(" status=").append(this.mStatus).append('\n');
-        sb.append(prefix).append(' ').append(" importance=").append(this.mImportance).append(" pss=");
+        sb.append(prefix)
+                .append("ApplicationExitInfo ")
+                .append(seqSuffix)
+                .append(ShortcutConstants.SERVICES_SEPARATOR)
+                .append('\n');
+        sb.append(prefix)
+                .append(' ')
+                .append(" timestamp=")
+                .append(sdf.format(new Date(this.mTimestamp)))
+                .append(" pid=")
+                .append(this.mPid)
+                .append(" realUid=")
+                .append(this.mRealUid)
+                .append(" packageUid=")
+                .append(this.mPackageUid)
+                .append(" definingUid=")
+                .append(this.mDefiningUid)
+                .append(" user=")
+                .append(UserHandle.getUserId(this.mPackageUid))
+                .append('\n');
+        sb.append(prefix)
+                .append(' ')
+                .append(" process=")
+                .append(this.mProcessName)
+                .append(" reason=")
+                .append(this.mReason)
+                .append(" (")
+                .append(reasonCodeToString(this.mReason))
+                .append(NavigationBarInflaterView.KEY_CODE_END)
+                .append(" subreason=")
+                .append(this.mSubReason)
+                .append(" (")
+                .append(subreasonToString(this.mSubReason))
+                .append(NavigationBarInflaterView.KEY_CODE_END)
+                .append(" status=")
+                .append(this.mStatus)
+                .append('\n');
+        sb.append(prefix)
+                .append(' ')
+                .append(" importance=")
+                .append(this.mImportance)
+                .append(" pss=");
         DebugUtils.sizeValueToString(this.mPss << 10, sb);
         sb.append(" rss=");
         DebugUtils.sizeValueToString(this.mRss << 10, sb);
-        sb.append(" description=").append(this.mDescription).append(" state=").append(ArrayUtils.isEmpty(this.mState) ? "empty" : Integer.toString(this.mState.length) + " bytes").append(" trace=").append(this.mTraceFile).append('\n');
+        sb.append(" description=")
+                .append(this.mDescription)
+                .append(" state=")
+                .append(
+                        ArrayUtils.isEmpty(this.mState)
+                                ? "empty"
+                                : Integer.toString(this.mState.length) + " bytes")
+                .append(" trace=")
+                .append(this.mTraceFile)
+                .append('\n');
         pw.print(sb.toString());
     }
 
@@ -453,8 +502,16 @@ public final class ApplicationExitInfo implements Parcelable {
         sb.append(" definingUid=").append(this.mDefiningUid);
         sb.append(" user=").append(UserHandle.getUserId(this.mPackageUid));
         sb.append(" process=").append(this.mProcessName);
-        sb.append(" reason=").append(this.mReason).append(" (").append(reasonCodeToString(this.mReason)).append(NavigationBarInflaterView.KEY_CODE_END);
-        sb.append(" subreason=").append(this.mSubReason).append(" (").append(subreasonToString(this.mSubReason)).append(NavigationBarInflaterView.KEY_CODE_END);
+        sb.append(" reason=")
+                .append(this.mReason)
+                .append(" (")
+                .append(reasonCodeToString(this.mReason))
+                .append(NavigationBarInflaterView.KEY_CODE_END);
+        sb.append(" subreason=")
+                .append(this.mSubReason)
+                .append(" (")
+                .append(subreasonToString(this.mSubReason))
+                .append(NavigationBarInflaterView.KEY_CODE_END);
         sb.append(" status=").append(this.mStatus);
         sb.append(" importance=").append(this.mImportance);
         sb.append(" pss=");
@@ -462,7 +519,11 @@ public final class ApplicationExitInfo implements Parcelable {
         sb.append(" rss=");
         DebugUtils.sizeValueToString(this.mRss << 10, sb);
         sb.append(" description=").append(this.mDescription);
-        sb.append(" state=").append(ArrayUtils.isEmpty(this.mState) ? "empty" : Integer.toString(this.mState.length) + " bytes");
+        sb.append(" state=")
+                .append(
+                        ArrayUtils.isEmpty(this.mState)
+                                ? "empty"
+                                : Integer.toString(this.mState.length) + " bytes");
         sb.append(" trace=").append(this.mTraceFile);
         return sb.toString();
     }
@@ -593,11 +654,13 @@ public final class ApplicationExitInfo implements Parcelable {
         proto.write(1112396529677L, this.mTimestamp);
         proto.write(1138166333454L, this.mDescription);
         proto.write(ApplicationExitInfoProto.STATE, this.mState);
-        proto.write(1138166333456L, this.mTraceFile == null ? null : this.mTraceFile.getAbsolutePath());
+        proto.write(
+                1138166333456L, this.mTraceFile == null ? null : this.mTraceFile.getAbsolutePath());
         proto.end(token);
     }
 
-    public void readFromProto(ProtoInputStream proto, long fieldId) throws IOException, WireTypeMismatchException {
+    public void readFromProto(ProtoInputStream proto, long fieldId)
+            throws IOException, WireTypeMismatchException {
         long token = proto.start(fieldId);
         while (proto.nextField() != -1) {
             switch (proto.getFieldNumber()) {
@@ -664,11 +727,52 @@ public final class ApplicationExitInfo implements Parcelable {
             return false;
         }
         ApplicationExitInfo o = (ApplicationExitInfo) other;
-        return this.mPid == o.mPid && this.mRealUid == o.mRealUid && this.mPackageUid == o.mPackageUid && this.mDefiningUid == o.mDefiningUid && this.mConnectionGroup == o.mConnectionGroup && this.mReason == o.mReason && this.mSubReason == o.mSubReason && this.mImportance == o.mImportance && this.mStatus == o.mStatus && this.mTimestamp == o.mTimestamp && this.mPss == o.mPss && this.mRss == o.mRss && TextUtils.equals(this.mProcessName, o.mProcessName) && TextUtils.equals(this.mDescription, o.mDescription);
+        return this.mPid == o.mPid
+                && this.mRealUid == o.mRealUid
+                && this.mPackageUid == o.mPackageUid
+                && this.mDefiningUid == o.mDefiningUid
+                && this.mConnectionGroup == o.mConnectionGroup
+                && this.mReason == o.mReason
+                && this.mSubReason == o.mSubReason
+                && this.mImportance == o.mImportance
+                && this.mStatus == o.mStatus
+                && this.mTimestamp == o.mTimestamp
+                && this.mPss == o.mPss
+                && this.mRss == o.mRss
+                && TextUtils.equals(this.mProcessName, o.mProcessName)
+                && TextUtils.equals(this.mDescription, o.mDescription);
     }
 
     public int hashCode() {
         int result = this.mPid;
-        return (((((((((((((((((((((((((result * 31) + this.mRealUid) * 31) + this.mPackageUid) * 31) + this.mDefiningUid) * 31) + this.mConnectionGroup) * 31) + this.mReason) * 31) + this.mSubReason) * 31) + this.mImportance) * 31) + this.mStatus) * 31) + ((int) this.mPss)) * 31) + ((int) this.mRss)) * 31) + Long.hashCode(this.mTimestamp)) * 31) + Objects.hashCode(this.mProcessName)) * 31) + Objects.hashCode(this.mDescription);
+        return (((((((((((((((((((((((((result * 31) + this.mRealUid) * 31) + this.mPackageUid)
+                                                                                                                                                                                        * 31)
+                                                                                                                                                                                + this
+                                                                                                                                                                                        .mDefiningUid)
+                                                                                                                                                                        * 31)
+                                                                                                                                                                + this
+                                                                                                                                                                        .mConnectionGroup)
+                                                                                                                                                        * 31)
+                                                                                                                                                + this
+                                                                                                                                                        .mReason)
+                                                                                                                                        * 31)
+                                                                                                                                + this
+                                                                                                                                        .mSubReason)
+                                                                                                                        * 31)
+                                                                                                                + this
+                                                                                                                        .mImportance)
+                                                                                                        * 31)
+                                                                                                + this
+                                                                                                        .mStatus)
+                                                                                        * 31)
+                                                                                + ((int) this.mPss))
+                                                                        * 31)
+                                                                + ((int) this.mRss))
+                                                        * 31)
+                                                + Long.hashCode(this.mTimestamp))
+                                        * 31)
+                                + Objects.hashCode(this.mProcessName))
+                        * 31)
+                + Objects.hashCode(this.mDescription);
     }
 }

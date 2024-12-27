@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.AudioSystem;
 import android.media.MediaPlayer;
 import android.util.Slog;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -61,7 +62,11 @@ public final class SoundPlayer implements PlayerInterface {
                 Slog.e("Shutdown-SoundPlayer", "sound thread exception");
             }
             try {
-                Slog.i("Shutdown-SoundPlayer", "Set sound complete audioParam awaitResult = " + this.completeSignal.await(this.mediaPlayer.getDuration() * 2, TimeUnit.MILLISECONDS));
+                Slog.i(
+                        "Shutdown-SoundPlayer",
+                        "Set sound complete audioParam awaitResult = "
+                                + this.completeSignal.await(
+                                        this.mediaPlayer.getDuration() * 2, TimeUnit.MILLISECONDS));
                 AudioSystem.setParameters("g_shutdown_suspend=suspend");
                 Slog.i("Shutdown-SoundPlayer", "H/W workaround. wait 1000ms before power off");
                 Thread.sleep(1000L);
@@ -98,7 +103,9 @@ public final class SoundPlayer implements PlayerInterface {
             Method dump skipped, instructions count: 503
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.shutdown.SoundPlayer.prepare():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.shutdown.SoundPlayer.prepare():void");
     }
 
     @Override // com.android.server.power.shutdown.PlayerInterface

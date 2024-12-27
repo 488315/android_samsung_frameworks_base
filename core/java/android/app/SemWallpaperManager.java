@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ParcelFileDescriptor;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -55,8 +56,7 @@ public interface SemWallpaperManager {
         return null;
     }
 
-    default void semSetSmartCropRect(int which, Rect original, Rect smartCrop) {
-    }
+    default void semSetSmartCropRect(int which, Rect original, Rect smartCrop) {}
 
     default Rect semGetSmartCropRect(int which) {
         return null;
@@ -78,26 +78,32 @@ public interface SemWallpaperManager {
         return null;
     }
 
-    default void setWallpaperUri(String uriString, boolean allowBackup, int which) throws IOException, PackageManager.NameNotFoundException {
-    }
+    default void setWallpaperUri(String uriString, boolean allowBackup, int which)
+            throws IOException, PackageManager.NameNotFoundException {}
 
     default Uri semGetUri(int which) {
         return null;
     }
 
-    default void semSetDLSWallpaperColors(SemWallpaperColors colors, int which) {
-    }
+    default void semSetDLSWallpaperColors(SemWallpaperColors colors, int which) {}
 
-    default void semSetUri(Uri uri, boolean allowBackup, int which) throws IOException, PackageManager.NameNotFoundException {
-    }
+    default void semSetUri(Uri uri, boolean allowBackup, int which)
+            throws IOException, PackageManager.NameNotFoundException {}
 
-    default void semSetUri(Uri uri, boolean allowBackup, int which, int type) throws IOException, PackageManager.NameNotFoundException {
-    }
+    default void semSetUri(Uri uri, boolean allowBackup, int which, int type)
+            throws IOException, PackageManager.NameNotFoundException {}
 
-    default void setStream(InputStream data, int simSlot) throws IOException {
-    }
+    default void setStream(InputStream data, int simSlot) throws IOException {}
 
-    default int setStream(InputStream bitmapData, Rect visibleCropHint, boolean allowBackup, int which, int type, boolean isPreloaded, Bundle extras) throws IOException {
+    default int setStream(
+            InputStream bitmapData,
+            Rect visibleCropHint,
+            boolean allowBackup,
+            int which,
+            int type,
+            boolean isPreloaded,
+            Bundle extras)
+            throws IOException {
         return 0;
     }
 
@@ -117,18 +123,15 @@ public interface SemWallpaperManager {
         return false;
     }
 
-    default void resetMultipleWallpaperSettingIfNeeded() {
-    }
+    default void resetMultipleWallpaperSettingIfNeeded() {}
 
     default boolean isWallpaperBackupAllowed(int which) {
         return false;
     }
 
-    default void clearAll() throws IOException {
-    }
+    default void clearAll() throws IOException {}
 
-    default void setResourceAll(int resid) throws IOException {
-    }
+    default void setResourceAll(int resid) throws IOException {}
 
     default int getLockWallpaperType() {
         return semGetWallpaperType(2);
@@ -146,26 +149,39 @@ public interface SemWallpaperManager {
         return null;
     }
 
-    default void setVideoLockscreenWallpaper(String videoFilePath) {
-    }
+    default void setVideoLockscreenWallpaper(String videoFilePath) {}
 
-    default void setVideoLockscreenWallpaper(String videoFilePath, String themePackage) {
-    }
+    default void setVideoLockscreenWallpaper(String videoFilePath, String themePackage) {}
 
-    default void setVideoLockscreenWallpaper(String videoFilePath, String themePackage, String fileName, int which) {
-    }
+    default void setVideoLockscreenWallpaper(
+            String videoFilePath, String themePackage, String fileName, int which) {}
 
-    default void setVideoLockscreenWallpaper(String videoFilePath, String themePackage, String fileName, int which, boolean allowBackup) {
-    }
+    default void setVideoLockscreenWallpaper(
+            String videoFilePath,
+            String themePackage,
+            String fileName,
+            int which,
+            boolean allowBackup) {}
 
-    default void setVideoLockscreenWallpaper(String videoFilePath, String themePackage, String fileName, int userId, int which) {
-    }
+    default void setVideoLockscreenWallpaper(
+            String videoFilePath, String themePackage, String fileName, int userId, int which) {}
 
-    default void setVideoLockscreenWallpaper(String videoFilePath, String themePackage, String fileName, int userId, int which, boolean updateSetting) {
-    }
+    default void setVideoLockscreenWallpaper(
+            String videoFilePath,
+            String themePackage,
+            String fileName,
+            int userId,
+            int which,
+            boolean updateSetting) {}
 
-    default void setVideoLockscreenWallpaper(String videoFilePath, String themePackage, String fileName, int userId, int which, boolean updateSetting, boolean allowBackup) {
-    }
+    default void setVideoLockscreenWallpaper(
+            String videoFilePath,
+            String themePackage,
+            String fileName,
+            int userId,
+            int which,
+            boolean updateSetting,
+            boolean allowBackup) {}
 
     default String getVideoFilePath(int which) {
         return null;
@@ -191,27 +207,22 @@ public interface SemWallpaperManager {
         return false;
     }
 
-    default void setMotionWallpaper(String packageName) {
-    }
+    default void setMotionWallpaper(String packageName) {}
 
-    default void setMotionWallpaper(String packageName, int which) {
-    }
+    default void setMotionWallpaper(String packageName, int which) {}
 
-    default void setMotionWallpaper(String packageName, int which, boolean allowBackup) {
-    }
+    default void setMotionWallpaper(String packageName, int which, boolean allowBackup) {}
 
     default String getMotionWallpaperPkgName(int which) {
         return null;
     }
 
-    default void setAnimatedLockscreenWallpaper(String packageName) throws IOException {
-    }
+    default void setAnimatedLockscreenWallpaper(String packageName) throws IOException {}
 
-    default void setAnimatedLockscreenWallpaper(String packageName, int which) throws IOException {
-    }
+    default void setAnimatedLockscreenWallpaper(String packageName, int which) throws IOException {}
 
-    default void setAnimatedLockscreenWallpaper(String packageName, int which, boolean allowBackup) throws IOException {
-    }
+    default void setAnimatedLockscreenWallpaper(String packageName, int which, boolean allowBackup)
+            throws IOException {}
 
     default int semMakeBackupWallpaper() {
         return 1;
@@ -231,14 +242,11 @@ public interface SemWallpaperManager {
         return 1;
     }
 
-    default void semClearBackupWallpapers() {
-    }
+    default void semClearBackupWallpapers() {}
 
-    default void semClearBackupWallpapers(int which) {
-    }
+    default void semClearBackupWallpapers(int which) {}
 
-    default void clearBackupWallpaperGivenKey(int key) {
-    }
+    default void clearBackupWallpaperGivenKey(int key) {}
 
     default boolean semRestoreBackupWallpaper(int key) {
         if (key == 1) {
@@ -271,20 +279,18 @@ public interface SemWallpaperManager {
         return 0;
     }
 
-    default void addOnSemColorsChangedListener(OnSemColorsChangedListener listener, Handler handler) {
-    }
+    default void addOnSemColorsChangedListener(
+            OnSemColorsChangedListener listener, Handler handler) {}
 
-    default void addOnSemColorsChangedListener(OnSemColorsChangedListener listener, Handler handler, int userId) {
-    }
+    default void addOnSemColorsChangedListener(
+            OnSemColorsChangedListener listener, Handler handler, int userId) {}
 
-    default void removeOnSemColorsChangedListener(OnSemColorsChangedListener callback) {
-    }
+    default void removeOnSemColorsChangedListener(OnSemColorsChangedListener callback) {}
 
-    default void removeOnSemColorsChangedListener(OnSemColorsChangedListener callback, int userId) {
-    }
+    default void removeOnSemColorsChangedListener(
+            OnSemColorsChangedListener callback, int userId) {}
 
-    default void applyWallpaperColors(List colors, int sNum, int lNum, int which) {
-    }
+    default void applyWallpaperColors(List colors, int sNum, int lNum, int which) {}
 
     default List<int[][]> getColorPalettes(int[] seeds) {
         return null;
@@ -338,7 +344,8 @@ public interface SemWallpaperManager {
         return false;
     }
 
-    default ParcelFileDescriptor getWallpaperAssetFile(int which, int userId, String assetFilePath) {
+    default ParcelFileDescriptor getWallpaperAssetFile(
+            int which, int userId, String assetFilePath) {
         return null;
     }
 
@@ -358,7 +365,9 @@ public interface SemWallpaperManager {
         return null;
     }
 
-    default int setBitmap(Bitmap fullImage, Rect visibleCropHint, boolean allowBackup, int which, Bundle extras) throws IOException {
+    default int setBitmap(
+            Bitmap fullImage, Rect visibleCropHint, boolean allowBackup, int which, Bundle extras)
+            throws IOException {
         return 0;
     }
 }

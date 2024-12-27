@@ -5,10 +5,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.container.KnoxMUMContainerPolicy$$ExternalSyntheticOutline0;
 import com.android.server.knox.dar.sdp.SDPLog;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -16,14 +18,15 @@ import java.util.Map;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class DarDatabaseCache {
-    public final HashMap mCache = new LinkedHashMap() { // from class: com.android.server.knox.dar.DarDatabaseCache.1
-        private static final long serialVersionUID = 6754995611664672888L;
+    public final HashMap mCache =
+            new LinkedHashMap() { // from class: com.android.server.knox.dar.DarDatabaseCache.1
+                private static final long serialVersionUID = 6754995611664672888L;
 
-        @Override // java.util.LinkedHashMap
-        public final boolean removeEldestEntry(Map.Entry entry) {
-            return size() >= 30;
-        }
-    };
+                @Override // java.util.LinkedHashMap
+                public final boolean removeEldestEntry(Map.Entry entry) {
+                    return size() >= 30;
+                }
+            };
     public final DatabaseHelper mDatabaseHelper;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -31,12 +34,15 @@ public final class DarDatabaseCache {
         @Override // android.database.sqlite.SQLiteOpenHelper
         public final void onCreate(SQLiteDatabase sQLiteDatabase) {
             Log.i("DarDatabaseCache", "DB created! : " + sQLiteDatabase.getPath());
-            sQLiteDatabase.execSQL("CREATE TABLE dar_info (_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,user INTEGER,value TEXT);");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE dar_info (_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,user"
+                        + " INTEGER,value TEXT);");
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
         public final void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, i2, "DB upgraded! : ", " to ", "DarDatabaseCache");
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i, i2, "DB upgraded! : ", " to ", "DarDatabaseCache");
         }
     }
 
@@ -56,34 +62,34 @@ public final class DarDatabaseCache {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0067, code lost:
-    
-        if (r1 == false) goto L41;
-     */
+
+       if (r1 == false) goto L41;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0069, code lost:
-    
-        r13 = makeTag(r13, r14);
-        r14 = r12.mCache;
-     */
+
+       r13 = makeTag(r13, r14);
+       r14 = r12.mCache;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x006f, code lost:
-    
-        monitor-enter(r14);
-     */
+
+       monitor-enter(r14);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0070, code lost:
-    
-        r12.mCache.put(r13, r0);
-     */
+
+       r12.mCache.put(r13, r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0075, code lost:
-    
-        monitor-exit(r14);
-     */
+
+       monitor-exit(r14);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x007a, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:42:0x0064, code lost:
-    
-        if (r3 == null) goto L32;
-     */
+
+       if (r3 == null) goto L32;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -173,7 +179,10 @@ public final class DarDatabaseCache {
             monitor-exit(r1)     // Catch: java.lang.Throwable -> L1a
             throw r12
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.dar.DarDatabaseCache.getInternal(int, java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.knox.dar.DarDatabaseCache.getInternal(int,"
+                    + " java.lang.String):java.lang.String");
     }
 
     public final long getLong(int i) {
@@ -200,7 +209,10 @@ public final class DarDatabaseCache {
                 SQLiteDatabase writableDatabase = this.mDatabaseHelper.getWritableDatabase();
                 try {
                     writableDatabase.beginTransaction();
-                    writableDatabase.delete("dar_info", "name=? AND user=?", new String[]{str, Integer.toString(i)});
+                    writableDatabase.delete(
+                            "dar_info",
+                            "name=? AND user=?",
+                            new String[] {str, Integer.toString(i)});
                     writableDatabase.insert("dar_info", null, m);
                     writableDatabase.setTransactionSuccessful();
                     writableDatabase.endTransaction();

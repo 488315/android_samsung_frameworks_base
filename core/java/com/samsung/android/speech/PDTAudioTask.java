@@ -4,9 +4,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import com.samsung.android.speech.SemSpeechRecognizer;
+
 import com.samsung.voicebargein.BargeInEngine;
 import com.samsung.voicebargein.BargeInEngineWrapper;
+
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,7 +51,12 @@ class PDTAudioTask extends AudioTask implements Runnable {
     public short[] speech;
     private int totalReadCount;
 
-    PDTAudioTask(SemSpeechRecognizer.ResultListener listener, String path, int command, int language, boolean samsungOOVResult) {
+    PDTAudioTask(
+            SemSpeechRecognizer.ResultListener listener,
+            String path,
+            int command,
+            int language,
+            boolean samsungOOVResult) {
         super(listener, path, command, language, samsungOOVResult);
         this.TAG = PDTAudioTask.class.getSimpleName();
         this.q = null;
@@ -82,20 +88,28 @@ class PDTAudioTask extends AudioTask implements Runnable {
         this.isSensoryResult = false;
         this.mStopHandler = null;
         this.dualThresholdFlag = 0;
-        this.handler = new Handler() { // from class: com.samsung.android.speech.PDTAudioTask.1
-            @Override // android.os.Handler
-            public void handleMessage(Message msg) {
-                String[] result = msg.getData().getStringArray("recognition_result");
-                if (PDTAudioTask.this.m_listener != null) {
-                    PDTAudioTask.this.m_listener.onResults(result);
-                }
-            }
-        };
+        this.handler =
+                new Handler() { // from class: com.samsung.android.speech.PDTAudioTask.1
+                    @Override // android.os.Handler
+                    public void handleMessage(Message msg) {
+                        String[] result = msg.getData().getStringArray("recognition_result");
+                        if (PDTAudioTask.this.m_listener != null) {
+                            PDTAudioTask.this.m_listener.onResults(result);
+                        }
+                    }
+                };
         init(new LinkedBlockingQueue<>(), 320, listener, path, command, language, samsungOOVResult);
     }
 
     @Override // com.samsung.android.speech.AudioTask
-    void init(LinkedBlockingQueue<short[]> q, int block_size, SemSpeechRecognizer.ResultListener listener, String path, int command, int Language, boolean samsungOOVResult) {
+    void init(
+            LinkedBlockingQueue<short[]> q,
+            int block_size,
+            SemSpeechRecognizer.ResultListener listener,
+            String path,
+            int command,
+            int Language,
+            boolean samsungOOVResult) {
         this.TAG = PDTAudioTask.class.getSimpleName();
         Log.i(this.TAG, "PDTAudioTask init()");
         Log.i(this.TAG, "command : " + command);
@@ -146,7 +160,9 @@ class PDTAudioTask extends AudioTask implements Runnable {
         if (this.isPDTBargeInEnable) {
             this.aPDTBargeInEngine = BargeInEngineWrapper.getInstance();
             if (this.aPDTBargeInEngine != null) {
-                this.consoleInitReturn = this.aPDTBargeInEngine.phrasespotInit(this.acousticModelPathname, this.mLocale);
+                this.consoleInitReturn =
+                        this.aPDTBargeInEngine.phrasespotInit(
+                                this.acousticModelPathname, this.mLocale);
             } else {
                 Log.e(this.TAG, "BargeInEngineWrapper.getInstance() is null");
             }
@@ -239,10 +255,26 @@ class PDTAudioTask extends AudioTask implements Runnable {
             return -1;
         }
         if (this.readNshorts < 320) {
-            Log.e(this.TAG, "AudioRecord Read problem : nshorts = " + this.readNshorts + " command = " + this.mCommandType + " language : " + this.mLanguage);
+            Log.e(
+                    this.TAG,
+                    "AudioRecord Read problem : nshorts = "
+                            + this.readNshorts
+                            + " command = "
+                            + this.mCommandType
+                            + " language : "
+                            + this.mLanguage);
         }
         if (this.totalReadCount % 20 == 0) {
-            Log.d(this.TAG, "nshorts = " + (this.readNshorts * 10) + " command = " + this.mCommandType + " language : " + this.mLanguage + " dualThr : " + this.dualThresholdFlag);
+            Log.d(
+                    this.TAG,
+                    "nshorts = "
+                            + (this.readNshorts * 10)
+                            + " command = "
+                            + this.mCommandType
+                            + " language : "
+                            + this.mLanguage
+                            + " dualThr : "
+                            + this.dualThresholdFlag);
         }
         this.totalReadCount++;
         if (this.recogAfterReadCount != 0) {
@@ -287,7 +319,9 @@ class PDTAudioTask extends AudioTask implements Runnable {
 
     private boolean getPDTRecognitionResult(long consoleInitReturn, short[] speech) {
         float[] ResultValue = new float[3];
-        String consoleResult = this.aPDTBargeInEngine.phrasespotPipe(consoleInitReturn, speech, 320L, 16000L, ResultValue);
+        String consoleResult =
+                this.aPDTBargeInEngine.phrasespotPipe(
+                        consoleInitReturn, speech, 320L, 16000L, ResultValue);
         if (consoleResult != null) {
             this.BargeinAct[0] = (short) getPDTBargeInAct(this.mCommandType, consoleResult);
             this.strResult[0] = consoleResult;
@@ -375,31 +409,47 @@ class PDTAudioTask extends AudioTask implements Runnable {
                 if (result.startsWith("Shoot")) {
                     return 4;
                 }
-                if (result.startsWith("Record Video") || result.startsWith("Record_Video") || result.startsWith("RecordVideo")) {
+                if (result.startsWith("Record Video")
+                        || result.startsWith("Record_Video")
+                        || result.startsWith("RecordVideo")) {
                     return 5;
                 }
-                if (result.startsWith("auto settings") || result.startsWith("auto_settings") || result.startsWith("autosettings")) {
+                if (result.startsWith("auto settings")
+                        || result.startsWith("auto_settings")
+                        || result.startsWith("autosettings")) {
                     return 6;
                 }
-                if (result.startsWith("beauty face") || result.startsWith("beauty_face") || result.startsWith("beautyface")) {
+                if (result.startsWith("beauty face")
+                        || result.startsWith("beauty_face")
+                        || result.startsWith("beautyface")) {
                     return 7;
                 }
                 if (result.startsWith("timer")) {
                     return 8;
                 }
-                if (result.startsWith("zoom in") || result.startsWith("zoom_in") || result.startsWith("zoomin")) {
+                if (result.startsWith("zoom in")
+                        || result.startsWith("zoom_in")
+                        || result.startsWith("zoomin")) {
                     return 9;
                 }
-                if (result.startsWith("zoom out") || result.startsWith("zoom_out") || result.startsWith("zoomout")) {
+                if (result.startsWith("zoom out")
+                        || result.startsWith("zoom_out")
+                        || result.startsWith("zoomout")) {
                     return 10;
                 }
-                if (result.startsWith("flash on") || result.startsWith("flash_on") || result.startsWith("flashon")) {
+                if (result.startsWith("flash on")
+                        || result.startsWith("flash_on")
+                        || result.startsWith("flashon")) {
                     return 11;
                 }
-                if (result.startsWith("flash off") || result.startsWith("flash_off") || result.startsWith("flashoff")) {
+                if (result.startsWith("flash off")
+                        || result.startsWith("flash_off")
+                        || result.startsWith("flashoff")) {
                     return 12;
                 }
-                if (result.startsWith("upload pics") || result.startsWith("upload_pics") || result.startsWith("uploadpics")) {
+                if (result.startsWith("upload pics")
+                        || result.startsWith("upload_pics")
+                        || result.startsWith("uploadpics")) {
                     return 13;
                 }
                 if (result.startsWith("gallery")) {

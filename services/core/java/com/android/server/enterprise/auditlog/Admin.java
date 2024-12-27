@@ -11,6 +11,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.EnterpriseDeviceManagerService;
@@ -18,14 +19,15 @@ import com.android.server.enterprise.EnterpriseService;
 import com.android.server.enterprise.adapter.AdapterRegistry;
 import com.android.server.enterprise.adapter.IPersonaManagerAdapter;
 import com.android.server.enterprise.adapterlayer.PersonaManagerAdapter;
-import com.android.server.enterprise.auditlog.LogWritter;
 import com.android.server.enterprise.auditlog.LogWritter.LooperThread;
 import com.android.server.enterprise.storage.EdmStorageProvider;
 import com.android.server.enterprise.storage.SettingNotFoundException;
 import com.android.server.enterprise.utils.KpuHelper;
 import com.android.server.enterprise.utils.Utils;
+
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.log.AuditLogRulesInfo;
+
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
@@ -74,14 +76,25 @@ public final class Admin {
         } catch (SettingNotFoundException e) {
             Log.e("Admin", "mEdmStorageProvider.checkPseudoAdminForUid: error " + e.getMessage());
         }
-        IDevicePolicyManager asInterface = IDevicePolicyManager.Stub.asInterface(ServiceManager.getService("device_policy"));
+        IDevicePolicyManager asInterface =
+                IDevicePolicyManager.Stub.asInterface(ServiceManager.getService("device_policy"));
         if (asInterface != null) {
             try {
-                boolean isProfileOwnerOfOrganizationOwnedDeviceMDM = asInterface.isProfileOwnerOfOrganizationOwnedDeviceMDM(UserHandle.getUserId(i));
-                this.mIsProfileOwnerOfOrganizationOwnedDevice = isProfileOwnerOfOrganizationOwnedDeviceMDM;
-                Log.d("Admin", "mIsProfileOwnerOfOrganizationOwnedDevice = " + isProfileOwnerOfOrganizationOwnedDeviceMDM);
+                boolean isProfileOwnerOfOrganizationOwnedDeviceMDM =
+                        asInterface.isProfileOwnerOfOrganizationOwnedDeviceMDM(
+                                UserHandle.getUserId(i));
+                this.mIsProfileOwnerOfOrganizationOwnedDevice =
+                        isProfileOwnerOfOrganizationOwnedDeviceMDM;
+                Log.d(
+                        "Admin",
+                        "mIsProfileOwnerOfOrganizationOwnedDevice = "
+                                + isProfileOwnerOfOrganizationOwnedDeviceMDM);
             } catch (RemoteException e2) {
-                ActivityManagerService$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Error on calling isProfileOwnerOfOrganizationOwnedDeviceMDM : "), "Admin");
+                ActivityManagerService$$ExternalSyntheticOutline0.m(
+                        e2,
+                        new StringBuilder(
+                                "Error on calling isProfileOwnerOfOrganizationOwnedDeviceMDM : "),
+                        "Admin");
             }
         }
     }
@@ -106,8 +119,18 @@ public final class Admin {
             }
         }
         CircularBuffer.deleteDirectory(new File(circularBuffer.mAdminDirectoryPath));
-        CircularBuffer.deleteDirectory(new File(AmFmBandRange$$ExternalSyntheticOutline0.m(circularBuffer.mUid, new StringBuilder("/data/system/"), "_bubble/bubbleFile")));
-        CircularBuffer.deleteDirectory(new File(AmFmBandRange$$ExternalSyntheticOutline0.m(circularBuffer.mUid, new StringBuilder("/data/system/"), "_bubble")));
+        CircularBuffer.deleteDirectory(
+                new File(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                circularBuffer.mUid,
+                                new StringBuilder("/data/system/"),
+                                "_bubble/bubbleFile")));
+        CircularBuffer.deleteDirectory(
+                new File(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                circularBuffer.mUid,
+                                new StringBuilder("/data/system/"),
+                                "_bubble")));
     }
 
     public final boolean dump(ParcelFileDescriptor parcelFileDescriptor, long j, long j2) {
@@ -136,7 +159,9 @@ public final class Admin {
         this.mLogWritter.mCircularBuffer.mTypeOfDump = z2;
         this.mLogWritter.setIsDumping(false, z);
         int i = this.mUid;
-        IPersonaManagerAdapter iPersonaManagerAdapter = (IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class);
+        IPersonaManagerAdapter iPersonaManagerAdapter =
+                (IPersonaManagerAdapter)
+                        AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class);
         int userId = UserHandle.getUserId(this.mUid);
         ((PersonaManagerAdapter) iPersonaManagerAdapter).getClass();
         if (SemPersonaManager.isSecureFolderId(userId)) {
@@ -145,7 +170,8 @@ public final class Admin {
         int userId2 = UserHandle.getUserId(i);
         if (this.mIsPseudoAdminOfOrganizationOwnedDevice) {
             int i2 = EnterpriseDeviceManagerService.$r8$clinit;
-            EnterpriseDeviceManagerService enterpriseDeviceManagerService = (EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance;
+            EnterpriseDeviceManagerService enterpriseDeviceManagerService =
+                    (EnterpriseDeviceManagerService) EnterpriseService.sEdmsInstance;
             if (enterpriseDeviceManagerService != null) {
                 userId2 = enterpriseDeviceManagerService.getOrganizationOwnedProfileUserId();
             }
@@ -158,19 +184,30 @@ public final class Admin {
         if (z) {
             intent.putExtra("com.samsung.android.knox.intent.extra.AUDIT_RESULT", 0);
         } else {
-            InformFailure.getInstance().broadcastFailure("Dump failed! Sending Intent!", this.mPackageName);
+            InformFailure.getInstance()
+                    .broadcastFailure("Dump failed! Sending Intent!", this.mPackageName);
             intent.putExtra("com.samsung.android.knox.intent.extra.AUDIT_RESULT", -2000);
         }
         intent.putExtra("com.samsung.android.knox.intent.extra.ADMIN_UID", this.mUid);
-        this.mContext.sendBroadcastAsUser(intent, new UserHandle(userId2), "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
+        this.mContext.sendBroadcastAsUser(
+                intent,
+                new UserHandle(userId2),
+                "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
         try {
             String kpuPackageName = KpuHelper.getInstance(this.mContext).getKpuPackageName();
             Intent intent2 = new Intent(intent);
-            intent2.putExtra("com.samsung.android.knox.intent.extra.ADMIN_UID", this.mContext.getPackageManager().getPackageUidAsUser(kpuPackageName, UserHandle.getCallingUserId()));
+            intent2.putExtra(
+                    "com.samsung.android.knox.intent.extra.ADMIN_UID",
+                    this.mContext
+                            .getPackageManager()
+                            .getPackageUidAsUser(kpuPackageName, UserHandle.getCallingUserId()));
             if (this.mPackageName != null) {
                 intent2.setPackage(kpuPackageName);
             }
-            this.mContext.sendBroadcastAsUser(intent2, new UserHandle(userId2), "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
+            this.mContext.sendBroadcastAsUser(
+                    intent2,
+                    new UserHandle(userId2),
+                    "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -184,7 +221,9 @@ public final class Admin {
                 try {
                     Iterator it = circularBuffer.mPendingIntentErrors.iterator();
                     while (it.hasNext()) {
-                        InformFailure.getInstance().broadcastFailure((Exception) it.next(), circularBuffer.mPackageName);
+                        InformFailure.getInstance()
+                                .broadcastFailure(
+                                        (Exception) it.next(), circularBuffer.mPackageName);
                     }
                 } finally {
                 }

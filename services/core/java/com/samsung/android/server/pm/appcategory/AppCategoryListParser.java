@@ -5,17 +5,20 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Xml;
+
+import org.xmlpull.v1.XmlPullParser;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import org.xmlpull.v1.XmlPullParser;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class AppCategoryListParser {
-    public static final String SYSTEM_FILE_PATH = Environment.getRootDirectory() + "/etc/pm_appcategory.xml";
+    public static final String SYSTEM_FILE_PATH =
+            Environment.getRootDirectory() + "/etc/pm_appcategory.xml";
     public final Map mPackageMap = new ArrayMap();
 
     public void parseAppCategoryList() {
@@ -61,7 +64,9 @@ public abstract class AppCategoryListParser {
             Method dump skipped, instructions count: 324
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.pm.appcategory.AppCategoryListParser.parseAppCategoryListElement(org.xmlpull.v1.XmlPullParser):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.pm.appcategory.AppCategoryListParser.parseAppCategoryListElement(org.xmlpull.v1.XmlPullParser):void");
     }
 
     public List parsePackages(XmlPullParser xmlPullParser) {

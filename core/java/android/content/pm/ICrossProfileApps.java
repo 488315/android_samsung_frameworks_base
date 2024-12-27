@@ -10,6 +10,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -20,7 +21,8 @@ public interface ICrossProfileApps extends IInterface {
 
     boolean canRequestInteractAcrossProfiles(String str) throws RemoteException;
 
-    boolean canUserAttemptToConfigureInteractAcrossProfiles(int i, String str) throws RemoteException;
+    boolean canUserAttemptToConfigureInteractAcrossProfiles(int i, String str)
+            throws RemoteException;
 
     void clearInteractAcrossProfilesAppOps(int i) throws RemoteException;
 
@@ -30,21 +32,54 @@ public interface ICrossProfileApps extends IInterface {
 
     void setInteractAcrossProfilesAppOp(int i, String str, int i2) throws RemoteException;
 
-    void startActivityAsUser(IApplicationThread iApplicationThread, String str, String str2, ComponentName componentName, int i, boolean z, IBinder iBinder, Bundle bundle) throws RemoteException;
+    void startActivityAsUser(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            ComponentName componentName,
+            int i,
+            boolean z,
+            IBinder iBinder,
+            Bundle bundle)
+            throws RemoteException;
 
-    void startActivityAsUserByIntent(IApplicationThread iApplicationThread, String str, String str2, Intent intent, int i, IBinder iBinder, Bundle bundle) throws RemoteException;
+    void startActivityAsUserByIntent(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            Intent intent,
+            int i,
+            IBinder iBinder,
+            Bundle bundle)
+            throws RemoteException;
 
     public static class Default implements ICrossProfileApps {
         @Override // android.content.pm.ICrossProfileApps
-        public void startActivityAsUser(IApplicationThread caller, String callingPackage, String callingFeatureId, ComponentName component, int userId, boolean launchMainActivity, IBinder task, Bundle options) throws RemoteException {
-        }
+        public void startActivityAsUser(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                ComponentName component,
+                int userId,
+                boolean launchMainActivity,
+                IBinder task,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.content.pm.ICrossProfileApps
-        public void startActivityAsUserByIntent(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, int userId, IBinder callingActivity, Bundle options) throws RemoteException {
-        }
+        public void startActivityAsUserByIntent(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                Intent intent,
+                int userId,
+                IBinder callingActivity,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.content.pm.ICrossProfileApps
-        public List<UserHandle> getTargetUserProfiles(String callingPackage) throws RemoteException {
+        public List<UserHandle> getTargetUserProfiles(String callingPackage)
+                throws RemoteException {
             return null;
         }
 
@@ -54,31 +89,33 @@ public interface ICrossProfileApps extends IInterface {
         }
 
         @Override // android.content.pm.ICrossProfileApps
-        public boolean canRequestInteractAcrossProfiles(String callingPackage) throws RemoteException {
+        public boolean canRequestInteractAcrossProfiles(String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.ICrossProfileApps
-        public void setInteractAcrossProfilesAppOp(int userId, String packageName, int newMode) throws RemoteException {
-        }
+        public void setInteractAcrossProfilesAppOp(int userId, String packageName, int newMode)
+                throws RemoteException {}
 
         @Override // android.content.pm.ICrossProfileApps
-        public boolean canConfigureInteractAcrossProfiles(int userId, String packageName) throws RemoteException {
+        public boolean canConfigureInteractAcrossProfiles(int userId, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.ICrossProfileApps
-        public boolean canUserAttemptToConfigureInteractAcrossProfiles(int userId, String packageName) throws RemoteException {
+        public boolean canUserAttemptToConfigureInteractAcrossProfiles(
+                int userId, String packageName) throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.ICrossProfileApps
-        public void resetInteractAcrossProfilesAppOps(int userId, List<String> packageNames) throws RemoteException {
-        }
+        public void resetInteractAcrossProfilesAppOps(int userId, List<String> packageNames)
+                throws RemoteException {}
 
         @Override // android.content.pm.ICrossProfileApps
-        public void clearInteractAcrossProfilesAppOps(int userId) throws RemoteException {
-        }
+        public void clearInteractAcrossProfilesAppOps(int userId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -86,7 +123,7 @@ public interface ICrossProfileApps extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICrossProfileApps {
+    public abstract static class Stub extends Binder implements ICrossProfileApps {
         public static final String DESCRIPTOR = "android.content.pm.ICrossProfileApps";
         static final int TRANSACTION_canConfigureInteractAcrossProfiles = 7;
         static final int TRANSACTION_canInteractAcrossProfiles = 4;
@@ -152,7 +189,8 @@ public interface ICrossProfileApps extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -162,10 +200,12 @@ public interface ICrossProfileApps extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg0 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg1 = data.readString();
                     String _arg2 = data.readString();
-                    ComponentName _arg3 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg3 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg4 = data.readInt();
                     boolean _arg5 = data.readBoolean();
                     IBinder _arg6 = data.readStrongBinder();
@@ -175,7 +215,8 @@ public interface ICrossProfileApps extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IApplicationThread _arg02 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg02 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg12 = data.readString();
                     String _arg22 = data.readString();
                     Intent _arg32 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -183,7 +224,8 @@ public interface ICrossProfileApps extends IInterface {
                     IBinder _arg52 = data.readStrongBinder();
                     Bundle _arg62 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    startActivityAsUserByIntent(_arg02, _arg12, _arg22, _arg32, _arg42, _arg52, _arg62);
+                    startActivityAsUserByIntent(
+                            _arg02, _arg12, _arg22, _arg32, _arg42, _arg52, _arg62);
                     reply.writeNoException();
                     return true;
                 case 3:
@@ -227,7 +269,8 @@ public interface ICrossProfileApps extends IInterface {
                     int _arg08 = data.readInt();
                     String _arg15 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result5 = canUserAttemptToConfigureInteractAcrossProfiles(_arg08, _arg15);
+                    boolean _result5 =
+                            canUserAttemptToConfigureInteractAcrossProfiles(_arg08, _arg15);
                     reply.writeNoException();
                     reply.writeBoolean(_result5);
                     return true;
@@ -266,7 +309,16 @@ public interface ICrossProfileApps extends IInterface {
             }
 
             @Override // android.content.pm.ICrossProfileApps
-            public void startActivityAsUser(IApplicationThread caller, String callingPackage, String callingFeatureId, ComponentName component, int userId, boolean launchMainActivity, IBinder task, Bundle options) throws RemoteException {
+            public void startActivityAsUser(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    ComponentName component,
+                    int userId,
+                    boolean launchMainActivity,
+                    IBinder task,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -288,7 +340,15 @@ public interface ICrossProfileApps extends IInterface {
             }
 
             @Override // android.content.pm.ICrossProfileApps
-            public void startActivityAsUserByIntent(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, int userId, IBinder callingActivity, Bundle options) throws RemoteException {
+            public void startActivityAsUserByIntent(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    Intent intent,
+                    int userId,
+                    IBinder callingActivity,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -309,7 +369,8 @@ public interface ICrossProfileApps extends IInterface {
             }
 
             @Override // android.content.pm.ICrossProfileApps
-            public List<UserHandle> getTargetUserProfiles(String callingPackage) throws RemoteException {
+            public List<UserHandle> getTargetUserProfiles(String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -343,7 +404,8 @@ public interface ICrossProfileApps extends IInterface {
             }
 
             @Override // android.content.pm.ICrossProfileApps
-            public boolean canRequestInteractAcrossProfiles(String callingPackage) throws RemoteException {
+            public boolean canRequestInteractAcrossProfiles(String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -360,7 +422,8 @@ public interface ICrossProfileApps extends IInterface {
             }
 
             @Override // android.content.pm.ICrossProfileApps
-            public void setInteractAcrossProfilesAppOp(int userId, String packageName, int newMode) throws RemoteException {
+            public void setInteractAcrossProfilesAppOp(int userId, String packageName, int newMode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -377,7 +440,8 @@ public interface ICrossProfileApps extends IInterface {
             }
 
             @Override // android.content.pm.ICrossProfileApps
-            public boolean canConfigureInteractAcrossProfiles(int userId, String packageName) throws RemoteException {
+            public boolean canConfigureInteractAcrossProfiles(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -395,7 +459,8 @@ public interface ICrossProfileApps extends IInterface {
             }
 
             @Override // android.content.pm.ICrossProfileApps
-            public boolean canUserAttemptToConfigureInteractAcrossProfiles(int userId, String packageName) throws RemoteException {
+            public boolean canUserAttemptToConfigureInteractAcrossProfiles(
+                    int userId, String packageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -413,7 +478,8 @@ public interface ICrossProfileApps extends IInterface {
             }
 
             @Override // android.content.pm.ICrossProfileApps
-            public void resetInteractAcrossProfilesAppOps(int userId, List<String> packageNames) throws RemoteException {
+            public void resetInteractAcrossProfilesAppOps(int userId, List<String> packageNames)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

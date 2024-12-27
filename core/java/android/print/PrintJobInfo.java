@@ -5,26 +5,29 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
 
 /* loaded from: classes3.dex */
 public final class PrintJobInfo implements Parcelable {
-    public static final Parcelable.Creator<PrintJobInfo> CREATOR = new Parcelable.Creator<PrintJobInfo>() { // from class: android.print.PrintJobInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrintJobInfo createFromParcel(Parcel parcel) {
-            return new PrintJobInfo(parcel);
-        }
+    public static final Parcelable.Creator<PrintJobInfo> CREATOR =
+            new Parcelable.Creator<PrintJobInfo>() { // from class: android.print.PrintJobInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrintJobInfo createFromParcel(Parcel parcel) {
+                    return new PrintJobInfo(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrintJobInfo[] newArray(int size) {
-            return new PrintJobInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrintJobInfo[] newArray(int size) {
+                    return new PrintJobInfo[size];
+                }
+            };
     public static final int STATE_ANY = -1;
     public static final int STATE_ANY_ACTIVE = -3;
     public static final int STATE_ANY_SCHEDULED = -4;
@@ -56,8 +59,7 @@ public final class PrintJobInfo implements Parcelable {
     private String mTag;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-    }
+    public @interface State {}
 
     public PrintJobInfo() {
         this.mProgress = -1.0f;
@@ -102,7 +104,8 @@ public final class PrintJobInfo implements Parcelable {
             }
         }
         this.mAttributes = (PrintAttributes) parcel.readParcelable(null, PrintAttributes.class);
-        this.mDocumentInfo = (PrintDocumentInfo) parcel.readParcelable(null, PrintDocumentInfo.class);
+        this.mDocumentInfo =
+                (PrintDocumentInfo) parcel.readParcelable(null, PrintDocumentInfo.class);
         this.mProgress = parcel.readFloat();
         this.mStatus = parcel.readCharSequence();
         this.mStatusRes = parcel.readInt();
@@ -308,15 +311,24 @@ public final class PrintJobInfo implements Parcelable {
         builder.append(", tag: ").append(this.mTag);
         builder.append(", creationTime: " + this.mCreationTime);
         builder.append(", copies: ").append(this.mCopies);
-        builder.append(", attributes: " + (this.mAttributes != null ? this.mAttributes.toString() : null));
-        builder.append(", documentInfo: " + (this.mDocumentInfo != null ? this.mDocumentInfo.toString() : null));
+        builder.append(
+                ", attributes: " + (this.mAttributes != null ? this.mAttributes.toString() : null));
+        builder.append(
+                ", documentInfo: "
+                        + (this.mDocumentInfo != null ? this.mDocumentInfo.toString() : null));
         builder.append(", cancelling: " + this.mCanceling);
-        builder.append(", pages: " + (this.mPageRanges != null ? Arrays.toString(this.mPageRanges) : null));
+        builder.append(
+                ", pages: "
+                        + (this.mPageRanges != null ? Arrays.toString(this.mPageRanges) : null));
         builder.append(", hasAdvancedOptions: " + (this.mAdvancedOptions != null));
         builder.append(", progress: " + this.mProgress);
         builder.append(", status: " + (this.mStatus != null ? this.mStatus.toString() : null));
         builder.append(", statusRes: " + this.mStatusRes);
-        builder.append(", statusResAppPackageName: " + (this.mStatusResAppPackageName != null ? this.mStatusResAppPackageName.toString() : null));
+        builder.append(
+                ", statusResAppPackageName: "
+                        + (this.mStatusResAppPackageName != null
+                                ? this.mStatusResAppPackageName.toString()
+                                : null));
         builder.append("}");
         return builder.toString();
     }
@@ -351,7 +363,8 @@ public final class PrintJobInfo implements Parcelable {
             return this.mStatus;
         }
         try {
-            return pm.getResourcesForApplication(this.mStatusResAppPackageName.toString()).getString(this.mStatusRes);
+            return pm.getResourcesForApplication(this.mStatusResAppPackageName.toString())
+                    .getString(this.mStatusRes);
         } catch (PackageManager.NameNotFoundException | Resources.NotFoundException e) {
             return null;
         }

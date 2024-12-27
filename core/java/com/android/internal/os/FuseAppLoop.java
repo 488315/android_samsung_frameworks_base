@@ -8,7 +8,9 @@ import android.system.ErrnoException;
 import android.system.OsConstants;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -34,20 +36,20 @@ public class FuseAppLoop implements Handler.Callback {
     private final Thread mThread;
     private static final String TAG = "FuseAppLoop";
     private static final boolean DEBUG = Log.isLoggable(TAG, 3);
-    private static final ThreadFactory sDefaultThreadFactory = new ThreadFactory() { // from class: com.android.internal.os.FuseAppLoop.1
-        @Override // java.util.concurrent.ThreadFactory
-        public Thread newThread(Runnable r) {
-            return new Thread(r, FuseAppLoop.TAG);
-        }
-    };
+    private static final ThreadFactory sDefaultThreadFactory =
+            new ThreadFactory() { // from class: com.android.internal.os.FuseAppLoop.1
+                @Override // java.util.concurrent.ThreadFactory
+                public Thread newThread(Runnable r) {
+                    return new Thread(r, FuseAppLoop.TAG);
+                }
+            };
     private final Object mLock = new Object();
     private final SparseArray<CallbackEntry> mCallbackMap = new SparseArray<>();
     private final BytesMap mBytesMap = new BytesMap();
     private final LinkedList<Args> mArgsPool = new LinkedList<>();
     private int mNextInode = 2;
 
-    public static class UnmountedException extends Exception {
-    }
+    public static class UnmountedException extends Exception {}
 
     native void native_delete(long j);
 
@@ -71,12 +73,15 @@ public class FuseAppLoop implements Handler.Callback {
         this.mMountPointId = mountPointId;
         factory = factory == null ? sDefaultThreadFactory : factory;
         this.mInstance = native_new(fd.detachFd());
-        this.mThread = factory.newThread(new Runnable() { // from class: com.android.internal.os.FuseAppLoop$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                FuseAppLoop.this.lambda$new$0();
-            }
-        });
+        this.mThread =
+                factory.newThread(
+                        new Runnable() { // from class:
+                                         // com.android.internal.os.FuseAppLoop$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                FuseAppLoop.this.lambda$new$0();
+                            }
+                        });
         this.mThread.start();
     }
 
@@ -90,13 +95,17 @@ public class FuseAppLoop implements Handler.Callback {
         }
     }
 
-    public int registerCallback(ProxyFileDescriptorCallback callback, Handler handler) throws FuseUnavailableMountException {
+    public int registerCallback(ProxyFileDescriptorCallback callback, Handler handler)
+            throws FuseUnavailableMountException {
         int id;
         synchronized (this.mLock) {
             Objects.requireNonNull(callback);
             Objects.requireNonNull(handler);
-            Preconditions.checkState(this.mCallbackMap.size() < 2147483645, "Too many opened files.");
-            Preconditions.checkArgument(Thread.currentThread().getId() != handler.getLooper().getThread().getId(), "Handler must be different from the current thread");
+            Preconditions.checkState(
+                    this.mCallbackMap.size() < 2147483645, "Too many opened files.");
+            Preconditions.checkArgument(
+                    Thread.currentThread().getId() != handler.getLooper().getThread().getId(),
+                    "Handler must be different from the current thread");
             if (this.mInstance == 0) {
                 throw new FuseUnavailableMountException(this.mMountPointId);
             }
@@ -107,7 +116,8 @@ public class FuseAppLoop implements Handler.Callback {
                     this.mNextInode = 2;
                 }
             } while (this.mCallbackMap.get(id) != null);
-            this.mCallbackMap.put(id, new CallbackEntry(callback, new Handler(handler.getLooper(), this)));
+            this.mCallbackMap.put(
+                    id, new CallbackEntry(callback, new Handler(handler.getLooper(), this)));
         }
         return id;
     }
@@ -123,19 +133,19 @@ public class FuseAppLoop implements Handler.Callback {
     }
 
     /*  JADX ERROR: Types fix failed
-        java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
-        */
+    java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
+    */
     /* JADX WARN: Failed to apply debug info
     java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
     	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
@@ -160,10 +170,13 @@ public class FuseAppLoop implements Handler.Callback {
             Method dump skipped, instructions count: 624
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.os.FuseAppLoop.handleMessage(android.os.Message):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.os.FuseAppLoop.handleMessage(android.os.Message):boolean");
     }
 
-    private void onCommand(int command, long unique, long inode, long offset, int size, byte[] data) {
+    private void onCommand(
+            int command, long unique, long inode, long offset, int size, byte[] data) {
         Args args;
         synchronized (this.mLock) {
             try {
@@ -181,7 +194,8 @@ public class FuseAppLoop implements Handler.Callback {
             } catch (Exception error) {
                 replySimpleLocked(unique, getError(error));
             }
-            if (!args.entry.handler.sendMessage(Message.obtain(args.entry.handler, command, 0, 0, args))) {
+            if (!args.entry.handler.sendMessage(
+                    Message.obtain(args.entry.handler, command, 0, 0, args))) {
                 throw new ErrnoException("onCommand", OsConstants.EBADF);
             }
         }
@@ -209,7 +223,8 @@ public class FuseAppLoop implements Handler.Callback {
 
     private static int getError(Exception error) {
         int errno;
-        if ((error instanceof ErrnoException) && (errno = ((ErrnoException) error).errno) != OsConstants.ENOSYS) {
+        if ((error instanceof ErrnoException)
+                && (errno = ((ErrnoException) error).errno) != OsConstants.ENOSYS) {
             return -errno;
         }
         return -OsConstants.EBADF;
@@ -304,7 +319,6 @@ public class FuseAppLoop implements Handler.Callback {
         int size;
         long unique;
 
-        private Args() {
-        }
+        private Args() {}
     }
 }

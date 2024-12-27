@@ -11,26 +11,31 @@ import android.os.Parcelable;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.NtpTrustedTime;
+
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.logging.InstanceId;
 import com.android.internal.logging.nano.MetricsProto;
+
 import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
 public class StatusBarNotification implements Parcelable {
-    public static final Parcelable.Creator<StatusBarNotification> CREATOR = new Parcelable.Creator<StatusBarNotification>() { // from class: android.service.notification.StatusBarNotification.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatusBarNotification createFromParcel(Parcel parcel) {
-            return new StatusBarNotification(parcel);
-        }
+    public static final Parcelable.Creator<StatusBarNotification> CREATOR =
+            new Parcelable.Creator<
+                    StatusBarNotification>() { // from class:
+                                               // android.service.notification.StatusBarNotification.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatusBarNotification createFromParcel(Parcel parcel) {
+                    return new StatusBarNotification(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatusBarNotification[] newArray(int size) {
-            return new StatusBarNotification[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatusBarNotification[] newArray(int size) {
+                    return new StatusBarNotification[size];
+                }
+            };
     static final int MAX_LOG_TAG_LENGTH = 36;
     private String groupKey;
     private final int id;
@@ -47,7 +52,17 @@ public class StatusBarNotification implements Parcelable {
     private final int uid;
     private final UserHandle user;
 
-    public StatusBarNotification(String pkg, String opPkg, int id, String tag, int uid, int initialPid, Notification notification, UserHandle user, String overrideGroupKey, long postTime) {
+    public StatusBarNotification(
+            String pkg,
+            String opPkg,
+            int id,
+            String tag,
+            int uid,
+            int initialPid,
+            Notification notification,
+            UserHandle user,
+            String overrideGroupKey,
+            long postTime) {
         if (pkg == null) {
             throw new NullPointerException();
         }
@@ -69,7 +84,17 @@ public class StatusBarNotification implements Parcelable {
     }
 
     @Deprecated
-    public StatusBarNotification(String pkg, String opPkg, int id, String tag, int uid, int initialPid, int score, Notification notification, UserHandle user, long postTime) {
+    public StatusBarNotification(
+            String pkg,
+            String opPkg,
+            int id,
+            String tag,
+            int uid,
+            int initialPid,
+            int score,
+            Notification notification,
+            UserHandle user,
+            long postTime) {
         if (pkg == null) {
             throw new NullPointerException();
         }
@@ -135,9 +160,20 @@ public class StatusBarNotification implements Parcelable {
     }
 
     private String key() {
-        String sbnKey = this.user.getIdentifier() + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.pkg + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.id + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.tag + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.uid;
+        String sbnKey =
+                this.user.getIdentifier()
+                        + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                        + this.pkg
+                        + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                        + this.id
+                        + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                        + this.tag
+                        + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                        + this.uid;
         if (this.overrideGroupKey != null && getNotification().isGroupSummary()) {
-            return sbnKey + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.overrideGroupKey;
+            return sbnKey
+                    + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                    + this.overrideGroupKey;
         }
         return sbnKey;
     }
@@ -145,14 +181,23 @@ public class StatusBarNotification implements Parcelable {
     private String groupKey() {
         String str;
         if (this.overrideGroupKey != null) {
-            return this.user.getIdentifier() + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.pkg + "|g:" + this.overrideGroupKey;
+            return this.user.getIdentifier()
+                    + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                    + this.pkg
+                    + "|g:"
+                    + this.overrideGroupKey;
         }
         String group = getNotification().getGroup();
         String sortKey = getNotification().getSortKey();
         if (group == null && sortKey == null) {
             return this.key;
         }
-        StringBuilder append = new StringBuilder().append(this.user.getIdentifier()).append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append(this.pkg).append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
+        StringBuilder append =
+                new StringBuilder()
+                        .append(this.user.getIdentifier())
+                        .append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                        .append(this.pkg)
+                        .append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER);
         if (group == null) {
             str = "c:" + this.notification.getChannelId();
         } else {
@@ -222,13 +267,31 @@ public class StatusBarNotification implements Parcelable {
     }
 
     public StatusBarNotification cloneShallow(Notification notification) {
-        StatusBarNotification result = new StatusBarNotification(this.pkg, this.opPkg, this.id, this.tag, this.uid, this.initialPid, notification, this.user, this.overrideGroupKey, this.postTime);
+        StatusBarNotification result =
+                new StatusBarNotification(
+                        this.pkg,
+                        this.opPkg,
+                        this.id,
+                        this.tag,
+                        this.uid,
+                        this.initialPid,
+                        notification,
+                        this.user,
+                        this.overrideGroupKey,
+                        this.postTime);
         result.setInstanceId(this.mInstanceId);
         return result;
     }
 
     public String toString() {
-        return TextUtils.formatSimple("StatusBarNotification(pkg=%s user=%s id=%d tag=%s key=%s: %s)", this.pkg, this.user, Integer.valueOf(this.id), this.tag, this.key, this.notification);
+        return TextUtils.formatSimple(
+                "StatusBarNotification(pkg=%s user=%s id=%d tag=%s key=%s: %s)",
+                this.pkg,
+                this.user,
+                Integer.valueOf(this.id),
+                this.tag,
+                this.key,
+                this.notification);
     }
 
     public boolean isOngoing() {
@@ -331,7 +394,9 @@ public class StatusBarNotification implements Parcelable {
     public Context getPackageContext(Context context) {
         if (this.mContext == null) {
             try {
-                ApplicationInfo ai = context.getPackageManager().getApplicationInfoAsUser(this.pkg, 8192, getNormalizedUserId());
+                ApplicationInfo ai =
+                        context.getPackageManager()
+                                .getApplicationInfoAsUser(this.pkg, 8192, getNormalizedUserId());
                 this.mContext = context.createApplicationContext(ai, 4);
             } catch (PackageManager.NameNotFoundException e) {
                 this.mContext = null;
@@ -344,13 +409,33 @@ public class StatusBarNotification implements Parcelable {
     }
 
     public LogMaker getLogMaker() {
-        LogMaker addTaggedData = new LogMaker(0).setPackageName(getPackageName()).addTaggedData(MetricsProto.MetricsEvent.NOTIFICATION_ID, Integer.valueOf(getId())).addTaggedData(MetricsProto.MetricsEvent.NOTIFICATION_TAG, getTag()).addTaggedData(MetricsProto.MetricsEvent.FIELD_NOTIFICATION_CHANNEL_ID, getChannelIdLogTag()).addTaggedData(MetricsProto.MetricsEvent.FIELD_NOTIFICATION_GROUP_ID, getGroupLogTag()).addTaggedData(MetricsProto.MetricsEvent.FIELD_NOTIFICATION_GROUP_SUMMARY, Integer.valueOf(getNotification().isGroupSummary() ? 1 : 0)).addTaggedData(MetricsProto.MetricsEvent.FIELD_NOTIFICATION_CATEGORY, getNotification().category);
+        LogMaker addTaggedData =
+                new LogMaker(0)
+                        .setPackageName(getPackageName())
+                        .addTaggedData(
+                                MetricsProto.MetricsEvent.NOTIFICATION_ID, Integer.valueOf(getId()))
+                        .addTaggedData(MetricsProto.MetricsEvent.NOTIFICATION_TAG, getTag())
+                        .addTaggedData(
+                                MetricsProto.MetricsEvent.FIELD_NOTIFICATION_CHANNEL_ID,
+                                getChannelIdLogTag())
+                        .addTaggedData(
+                                MetricsProto.MetricsEvent.FIELD_NOTIFICATION_GROUP_ID,
+                                getGroupLogTag())
+                        .addTaggedData(
+                                MetricsProto.MetricsEvent.FIELD_NOTIFICATION_GROUP_SUMMARY,
+                                Integer.valueOf(getNotification().isGroupSummary() ? 1 : 0))
+                        .addTaggedData(
+                                MetricsProto.MetricsEvent.FIELD_NOTIFICATION_CATEGORY,
+                                getNotification().category);
         if (getNotification().extras != null) {
             String string = getNotification().extras.getString(Notification.EXTRA_TEMPLATE);
             if (string != null && !string.isEmpty()) {
                 addTaggedData.addTaggedData(1745, Integer.valueOf(string.hashCode()));
             }
-            ArrayList parcelableArrayList = getNotification().extras.getParcelableArrayList(Notification.EXTRA_PEOPLE_LIST, Person.class);
+            ArrayList parcelableArrayList =
+                    getNotification()
+                            .extras
+                            .getParcelableArrayList(Notification.EXTRA_PEOPLE_LIST, Person.class);
             if (parcelableArrayList != null && !parcelableArrayList.isEmpty()) {
                 addTaggedData.addTaggedData(1744, Integer.valueOf(parcelableArrayList.size()));
             }
@@ -378,6 +463,8 @@ public class StatusBarNotification implements Parcelable {
             return logTag;
         }
         String hash = Integer.toHexString(logTag.hashCode());
-        return logTag.substring(0, (36 - hash.length()) - 1) + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + hash;
+        return logTag.substring(0, (36 - hash.length()) - 1)
+                + NativeLibraryHelper.CLEAR_ABI_OVERRIDE
+                + hash;
     }
 }

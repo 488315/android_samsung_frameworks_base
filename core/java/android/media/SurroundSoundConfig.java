@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class SurroundSoundConfig implements Parcelable {
-    public static final Parcelable.Creator<SurroundSoundConfig> CREATOR = new Parcelable.Creator<SurroundSoundConfig>() { // from class: android.media.SurroundSoundConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SurroundSoundConfig createFromParcel(Parcel _aidl_source) {
-            SurroundSoundConfig _aidl_out = new SurroundSoundConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SurroundSoundConfig> CREATOR =
+            new Parcelable.Creator<
+                    SurroundSoundConfig>() { // from class: android.media.SurroundSoundConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SurroundSoundConfig createFromParcel(Parcel _aidl_source) {
+                    SurroundSoundConfig _aidl_out = new SurroundSoundConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SurroundSoundConfig[] newArray(int _aidl_size) {
-            return new SurroundSoundConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SurroundSoundConfig[] newArray(int _aidl_size) {
+                    return new SurroundSoundConfig[_aidl_size];
+                }
+            };
     public SurroundFormatFamily[] formatFamilies;
 
     @Override // android.os.Parcelable
@@ -48,7 +50,9 @@ public class SurroundSoundConfig implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.formatFamilies = (SurroundFormatFamily[]) _aidl_parcel.createTypedArray(SurroundFormatFamily.CREATOR);
+                this.formatFamilies =
+                        (SurroundFormatFamily[])
+                                _aidl_parcel.createTypedArray(SurroundFormatFamily.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -87,21 +91,23 @@ public class SurroundSoundConfig implements Parcelable {
     }
 
     public static class SurroundFormatFamily implements Parcelable {
-        public static final Parcelable.Creator<SurroundFormatFamily> CREATOR = new Parcelable.Creator<SurroundFormatFamily>() { // from class: android.media.SurroundSoundConfig.SurroundFormatFamily.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SurroundFormatFamily createFromParcel(Parcel _aidl_source) {
-                SurroundFormatFamily _aidl_out = new SurroundFormatFamily();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<SurroundFormatFamily> CREATOR =
+                new Parcelable.Creator<SurroundFormatFamily>() { // from class:
+                    // android.media.SurroundSoundConfig.SurroundFormatFamily.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SurroundFormatFamily createFromParcel(Parcel _aidl_source) {
+                        SurroundFormatFamily _aidl_out = new SurroundFormatFamily();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SurroundFormatFamily[] newArray(int _aidl_size) {
-                return new SurroundFormatFamily[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SurroundFormatFamily[] newArray(int _aidl_size) {
+                        return new SurroundFormatFamily[_aidl_size];
+                    }
+                };
         public AudioFormatDescription primaryFormat;
         public AudioFormatDescription[] subFormats;
 
@@ -131,14 +137,18 @@ public class SurroundSoundConfig implements Parcelable {
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                     return;
                 }
-                this.primaryFormat = (AudioFormatDescription) _aidl_parcel.readTypedObject(AudioFormatDescription.CREATOR);
+                this.primaryFormat =
+                        (AudioFormatDescription)
+                                _aidl_parcel.readTypedObject(AudioFormatDescription.CREATOR);
                 if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 } else {
-                    this.subFormats = (AudioFormatDescription[]) _aidl_parcel.createTypedArray(AudioFormatDescription.CREATOR);
+                    this.subFormats =
+                            (AudioFormatDescription[])
+                                    _aidl_parcel.createTypedArray(AudioFormatDescription.CREATOR);
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }

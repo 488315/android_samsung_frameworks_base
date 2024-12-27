@@ -9,6 +9,7 @@ import com.android.internal.org.bouncycastle.asn1.cms.CMSAlgorithmProtection;
 import com.android.internal.org.bouncycastle.asn1.cms.CMSAttributes;
 import com.android.internal.org.bouncycastle.asn1.cms.Time;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
+
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -33,22 +34,41 @@ public class DefaultSignedAttributeTableGenerator implements CMSAttributeTableGe
     protected Hashtable createStandardAttributeTable(Map parameters) {
         ASN1ObjectIdentifier contentType;
         Hashtable std = copyHashTable(this.table);
-        if (!std.containsKey(CMSAttributes.contentType) && (contentType = ASN1ObjectIdentifier.getInstance(parameters.get("contentType"))) != null) {
+        if (!std.containsKey(CMSAttributes.contentType)
+                && (contentType = ASN1ObjectIdentifier.getInstance(parameters.get("contentType")))
+                        != null) {
             Attribute attr = new Attribute(CMSAttributes.contentType, new DERSet(contentType));
             std.put(attr.getAttrType(), attr);
         }
         if (!std.containsKey(CMSAttributes.signingTime)) {
             Date signingTime = new Date();
-            Attribute attr2 = new Attribute(CMSAttributes.signingTime, new DERSet(new Time(signingTime)));
+            Attribute attr2 =
+                    new Attribute(CMSAttributes.signingTime, new DERSet(new Time(signingTime)));
             std.put(attr2.getAttrType(), attr2);
         }
         if (!std.containsKey(CMSAttributes.messageDigest)) {
             byte[] messageDigest = (byte[]) parameters.get(CMSAttributeTableGenerator.DIGEST);
-            Attribute attr3 = new Attribute(CMSAttributes.messageDigest, new DERSet(new DEROctetString(messageDigest)));
+            Attribute attr3 =
+                    new Attribute(
+                            CMSAttributes.messageDigest,
+                            new DERSet(new DEROctetString(messageDigest)));
             std.put(attr3.getAttrType(), attr3);
         }
         if (!std.contains(CMSAttributes.cmsAlgorithmProtect)) {
-            Attribute attr4 = new Attribute(CMSAttributes.cmsAlgorithmProtect, new DERSet(new CMSAlgorithmProtection((AlgorithmIdentifier) parameters.get(CMSAttributeTableGenerator.DIGEST_ALGORITHM_IDENTIFIER), 1, (AlgorithmIdentifier) parameters.get(CMSAttributeTableGenerator.SIGNATURE_ALGORITHM_IDENTIFIER))));
+            Attribute attr4 =
+                    new Attribute(
+                            CMSAttributes.cmsAlgorithmProtect,
+                            new DERSet(
+                                    new CMSAlgorithmProtection(
+                                            (AlgorithmIdentifier)
+                                                    parameters.get(
+                                                            CMSAttributeTableGenerator
+                                                                    .DIGEST_ALGORITHM_IDENTIFIER),
+                                            1,
+                                            (AlgorithmIdentifier)
+                                                    parameters.get(
+                                                            CMSAttributeTableGenerator
+                                                                    .SIGNATURE_ALGORITHM_IDENTIFIER))));
             std.put(attr4.getAttrType(), attr4);
         }
         return std;

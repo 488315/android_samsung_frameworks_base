@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toolbar;
+
 import com.android.internal.R;
 import com.android.internal.view.menu.ActionMenuItem;
 import com.android.internal.view.menu.MenuBuilder;
@@ -54,7 +55,8 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
         this(toolbar, style, R.string.action_bar_up_description);
     }
 
-    public ToolbarWidgetWrapper(Toolbar toolbar, boolean style, int defaultNavigationContentDescription) {
+    public ToolbarWidgetWrapper(
+            Toolbar toolbar, boolean style, int defaultNavigationContentDescription) {
         this.mNavigationMode = 0;
         this.mDefaultNavigationContentDescription = 0;
         this.mToolbar = toolbar;
@@ -62,7 +64,9 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
         this.mSubtitle = toolbar.getSubtitle();
         this.mTitleSet = this.mTitle != null;
         this.mNavIcon = this.mToolbar.getNavigationIcon();
-        TypedArray a = toolbar.getContext().obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
+        TypedArray a =
+                toolbar.getContext()
+                        .obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
         this.mDefaultNavigationIcon = a.getDrawable(13);
         if (!style) {
             this.mDisplayOpts = detectDisplayOptions();
@@ -89,7 +93,9 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
             setDisplayOptions(a.getInt(8, 0));
             int customNavId = a.getResourceId(10, 0);
             if (customNavId != 0) {
-                setCustomView(LayoutInflater.from(this.mToolbar.getContext()).inflate(customNavId, (ViewGroup) this.mToolbar, false));
+                setCustomView(
+                        LayoutInflater.from(this.mToolbar.getContext())
+                                .inflate(customNavId, (ViewGroup) this.mToolbar, false));
                 setDisplayOptions(this.mDisplayOpts | 16);
             }
             int height = a.getLayoutDimension(4, 0);
@@ -101,7 +107,8 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
             int contentInsetStart = a.getDimensionPixelOffset(22, -1);
             int contentInsetEnd = a.getDimensionPixelOffset(23, -1);
             if (contentInsetStart >= 0 || contentInsetEnd >= 0) {
-                this.mToolbar.setContentInsetsRelative(Math.max(contentInsetStart, 0), Math.max(contentInsetEnd, 0));
+                this.mToolbar.setContentInsetsRelative(
+                        Math.max(contentInsetStart, 0), Math.max(contentInsetEnd, 0));
             }
             int titleTextStyle = a.getResourceId(11, 0);
             if (titleTextStyle != 0) {
@@ -109,7 +116,8 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
             }
             int subtitleTextStyle = a.getResourceId(12, 0);
             if (subtitleTextStyle != 0) {
-                this.mToolbar.setSubtitleTextAppearance(this.mToolbar.getContext(), subtitleTextStyle);
+                this.mToolbar.setSubtitleTextAppearance(
+                        this.mToolbar.getContext(), subtitleTextStyle);
             }
             int popupTheme = a.getResourceId(26, 0);
             if (popupTheme != 0) {
@@ -119,20 +127,32 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
         a.recycle();
         setDefaultNavigationContentDescription(defaultNavigationContentDescription);
         this.mHomeDescription = this.mToolbar.getNavigationContentDescription();
-        this.mToolbar.setNavigationOnClickListener(new View.OnClickListener() { // from class: com.android.internal.widget.ToolbarWidgetWrapper.1
-            final ActionMenuItem mNavItem;
+        this.mToolbar.setNavigationOnClickListener(
+                new View
+                        .OnClickListener() { // from class:
+                                             // com.android.internal.widget.ToolbarWidgetWrapper.1
+                    final ActionMenuItem mNavItem;
 
-            {
-                this.mNavItem = new ActionMenuItem(ToolbarWidgetWrapper.this.mToolbar.getContext(), 0, 16908332, 0, 0, ToolbarWidgetWrapper.this.mTitle);
-            }
+                    {
+                        this.mNavItem =
+                                new ActionMenuItem(
+                                        ToolbarWidgetWrapper.this.mToolbar.getContext(),
+                                        0,
+                                        16908332,
+                                        0,
+                                        0,
+                                        ToolbarWidgetWrapper.this.mTitle);
+                    }
 
-            @Override // android.view.View.OnClickListener
-            public void onClick(View v) {
-                if (ToolbarWidgetWrapper.this.mWindowCallback != null && ToolbarWidgetWrapper.this.mMenuPrepared) {
-                    ToolbarWidgetWrapper.this.mWindowCallback.onMenuItemSelected(0, this.mNavItem);
-                }
-            }
-        });
+                    @Override // android.view.View.OnClickListener
+                    public void onClick(View v) {
+                        if (ToolbarWidgetWrapper.this.mWindowCallback != null
+                                && ToolbarWidgetWrapper.this.mMenuPrepared) {
+                            ToolbarWidgetWrapper.this.mWindowCallback.onMenuItemSelected(
+                                    0, this.mNavItem);
+                        }
+                    }
+                });
     }
 
     @Override // com.android.internal.widget.DecorToolbar
@@ -239,8 +259,7 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     }
 
     @Override // com.android.internal.widget.DecorToolbar
-    public void setSplitView(ViewGroup splitView) {
-    }
+    public void setSplitView(ViewGroup splitView) {}
 
     @Override // com.android.internal.widget.DecorToolbar
     public void setSplitToolbar(boolean split) {
@@ -250,8 +269,7 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     }
 
     @Override // com.android.internal.widget.DecorToolbar
-    public void setSplitWhenNarrow(boolean splitWhenNarrow) {
-    }
+    public void setSplitWhenNarrow(boolean splitWhenNarrow) {}
 
     @Override // com.android.internal.widget.DecorToolbar
     public boolean hasIcon() {
@@ -413,8 +431,7 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     }
 
     @Override // com.android.internal.widget.DecorToolbar
-    public void setHomeButtonEnabled(boolean enable) {
-    }
+    public void setHomeButtonEnabled(boolean enable) {}
 
     @Override // com.android.internal.widget.DecorToolbar
     public int getNavigationMode() {
@@ -450,7 +467,8 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
                 case 2:
                     if (this.mTabView != null) {
                         this.mToolbar.addView(this.mTabView, 0);
-                        Toolbar.LayoutParams lp = (Toolbar.LayoutParams) this.mTabView.getLayoutParams();
+                        Toolbar.LayoutParams lp =
+                                (Toolbar.LayoutParams) this.mTabView.getLayoutParams();
                         lp.width = -2;
                         lp.height = -2;
                         lp.gravity = 8388691;
@@ -472,7 +490,8 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     }
 
     @Override // com.android.internal.widget.DecorToolbar
-    public void setDropdownParams(SpinnerAdapter adapter, AdapterView.OnItemSelectedListener listener) {
+    public void setDropdownParams(
+            SpinnerAdapter adapter, AdapterView.OnItemSelectedListener listener) {
         ensureSpinner();
         this.mSpinner.setAdapter(adapter);
         this.mSpinner.setOnItemSelectedListener(listener);
@@ -481,7 +500,8 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     @Override // com.android.internal.widget.DecorToolbar
     public void setDropdownSelectedPosition(int position) {
         if (this.mSpinner == null) {
-            throw new IllegalStateException("Can't set dropdown selected position without an adapter");
+            throw new IllegalStateException(
+                    "Can't set dropdown selected position without an adapter");
         }
         this.mSpinner.setSelection(position);
     }
@@ -529,34 +549,45 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     @Override // com.android.internal.widget.DecorToolbar
     public Animator setupAnimatorToVisibility(int visibility, long duration) {
         if (visibility == 8) {
-            ObjectAnimator anim = ObjectAnimator.ofFloat(this.mToolbar, (Property<Toolbar, Float>) View.ALPHA, 1.0f, 0.0f);
+            ObjectAnimator anim =
+                    ObjectAnimator.ofFloat(
+                            this.mToolbar, (Property<Toolbar, Float>) View.ALPHA, 1.0f, 0.0f);
             anim.setDuration(duration);
-            anim.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.ToolbarWidgetWrapper.2
-                private boolean mCanceled = false;
+            anim.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // com.android.internal.widget.ToolbarWidgetWrapper.2
+                        private boolean mCanceled = false;
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    if (!this.mCanceled) {
-                        ToolbarWidgetWrapper.this.mToolbar.setVisibility(8);
-                    }
-                }
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            if (!this.mCanceled) {
+                                ToolbarWidgetWrapper.this.mToolbar.setVisibility(8);
+                            }
+                        }
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationCancel(Animator animation) {
-                    this.mCanceled = true;
-                }
-            });
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationCancel(Animator animation) {
+                            this.mCanceled = true;
+                        }
+                    });
             return anim;
         }
         if (visibility == 0) {
-            ObjectAnimator anim2 = ObjectAnimator.ofFloat(this.mToolbar, (Property<Toolbar, Float>) View.ALPHA, 0.0f, 1.0f);
+            ObjectAnimator anim2 =
+                    ObjectAnimator.ofFloat(
+                            this.mToolbar, (Property<Toolbar, Float>) View.ALPHA, 0.0f, 1.0f);
             anim2.setDuration(duration);
-            anim2.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.ToolbarWidgetWrapper.3
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animation) {
-                    ToolbarWidgetWrapper.this.mToolbar.setVisibility(0);
-                }
-            });
+            anim2.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // com.android.internal.widget.ToolbarWidgetWrapper.3
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationStart(Animator animation) {
+                            ToolbarWidgetWrapper.this.mToolbar.setVisibility(0);
+                        }
+                    });
             return anim2;
         }
         return null;
@@ -583,7 +614,8 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
 
     private void updateNavigationIcon() {
         if ((this.mDisplayOpts & 4) != 0) {
-            this.mToolbar.setNavigationIcon(this.mNavIcon != null ? this.mNavIcon : this.mDefaultNavigationIcon);
+            this.mToolbar.setNavigationIcon(
+                    this.mNavIcon != null ? this.mNavIcon : this.mDefaultNavigationIcon);
         } else {
             this.mToolbar.setNavigationIcon((Drawable) null);
         }
@@ -603,7 +635,8 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     private void updateHomeAccessibility() {
         if ((this.mDisplayOpts & 4) != 0) {
             if (TextUtils.isEmpty(this.mHomeDescription)) {
-                this.mToolbar.setNavigationContentDescription(this.mDefaultNavigationContentDescription);
+                this.mToolbar.setNavigationContentDescription(
+                        this.mDefaultNavigationContentDescription);
             } else {
                 this.mToolbar.setNavigationContentDescription(this.mHomeDescription);
             }
@@ -641,7 +674,8 @@ public class ToolbarWidgetWrapper implements DecorToolbar {
     }
 
     @Override // com.android.internal.widget.DecorToolbar
-    public void setMenuCallbacks(MenuPresenter.Callback presenterCallback, MenuBuilder.Callback menuBuilderCallback) {
+    public void setMenuCallbacks(
+            MenuPresenter.Callback presenterCallback, MenuBuilder.Callback menuBuilderCallback) {
         this.mToolbar.setMenuCallbacks(presenterCallback, menuBuilderCallback);
     }
 

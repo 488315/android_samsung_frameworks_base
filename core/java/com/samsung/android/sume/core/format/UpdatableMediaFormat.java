@@ -9,8 +9,7 @@ public interface UpdatableMediaFormat extends MediaFormat {
     public static final String UPDATE_AT_ALLOC = "update-at-alloc";
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UpdatableAttribute {
-    }
+    public @interface UpdatableAttribute {}
 
     Shape getCroppedShape();
 

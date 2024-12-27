@@ -3,25 +3,28 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class NrVopsInfo implements Parcelable {
-    public static final Parcelable.Creator<NrVopsInfo> CREATOR = new Parcelable.Creator<NrVopsInfo>() { // from class: android.hardware.radio.network.NrVopsInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrVopsInfo createFromParcel(Parcel _aidl_source) {
-            NrVopsInfo _aidl_out = new NrVopsInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<NrVopsInfo> CREATOR =
+            new Parcelable.Creator<
+                    NrVopsInfo>() { // from class: android.hardware.radio.network.NrVopsInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrVopsInfo createFromParcel(Parcel _aidl_source) {
+                    NrVopsInfo _aidl_out = new NrVopsInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrVopsInfo[] newArray(int _aidl_size) {
-            return new NrVopsInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrVopsInfo[] newArray(int _aidl_size) {
+                    return new NrVopsInfo[_aidl_size];
+                }
+            };
     public static final byte EMC_INDICATOR_BOTH_NR_EUTRA_CONNECTED_TO_5GCN = 3;
     public static final byte EMC_INDICATOR_EUTRA_CONNECTED_TO_5GCN = 2;
     public static final byte EMC_INDICATOR_NOT_SUPPORTED = 0;

@@ -6,19 +6,20 @@ import android.os.UserHandle;
 
 /* loaded from: classes.dex */
 public class SemUserInfo implements Parcelable {
-    public static final Parcelable.Creator<SemUserInfo> CREATOR = new Parcelable.Creator<SemUserInfo>() { // from class: android.content.pm.SemUserInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemUserInfo createFromParcel(Parcel source) {
-            return new SemUserInfo(source);
-        }
+    public static final Parcelable.Creator<SemUserInfo> CREATOR =
+            new Parcelable.Creator<SemUserInfo>() { // from class: android.content.pm.SemUserInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemUserInfo createFromParcel(Parcel source) {
+                    return new SemUserInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemUserInfo[] newArray(int size) {
-            return new SemUserInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemUserInfo[] newArray(int size) {
+                    return new SemUserInfo[size];
+                }
+            };
     public static final int FLAG_BMODE = 134217728;
     public static final int FLAG_BMODE_LEGACY = 65536;
     public static final int FLAG_DIGITAL_LEGACY_MODE = 16777216;

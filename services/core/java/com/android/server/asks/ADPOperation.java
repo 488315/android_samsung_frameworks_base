@@ -18,7 +18,17 @@ public abstract class ADPOperation {
     }
 
     public static boolean isGreaterOrEqual(int i, String str, String str2) {
-        return isGreaterOrEqual(Pattern.compile(i != 0 ? i != 5 ? i != 2 ? i != 3 ? "" : "^(\\d?\\d{4})\\d{2}(\\d{3})\\z" : "^(\\d?\\d{6})\\d{3}\\z" : "^(\\d?\\d{9})\\z" : "^(\\d?\\d{4})\\d{5}\\z"), str, str2);
+        return isGreaterOrEqual(
+                Pattern.compile(
+                        i != 0
+                                ? i != 5
+                                        ? i != 2
+                                                ? i != 3 ? "" : "^(\\d?\\d{4})\\d{2}(\\d{3})\\z"
+                                                : "^(\\d?\\d{6})\\d{3}\\z"
+                                        : "^(\\d?\\d{9})\\z"
+                                : "^(\\d?\\d{4})\\d{5}\\z"),
+                str,
+                str2);
     }
 
     public static boolean isGreaterOrEqual(Pattern pattern, String str, String str2) {

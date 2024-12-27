@@ -6,21 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AudioMixUpdate implements Parcelable {
-    public static final Parcelable.Creator<AudioMixUpdate> CREATOR = new Parcelable.Creator<AudioMixUpdate>() { // from class: android.media.AudioMixUpdate.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioMixUpdate createFromParcel(Parcel _aidl_source) {
-            AudioMixUpdate _aidl_out = new AudioMixUpdate();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioMixUpdate> CREATOR =
+            new Parcelable.Creator<AudioMixUpdate>() { // from class: android.media.AudioMixUpdate.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioMixUpdate createFromParcel(Parcel _aidl_source) {
+                    AudioMixUpdate _aidl_out = new AudioMixUpdate();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioMixUpdate[] newArray(int _aidl_size) {
-            return new AudioMixUpdate[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioMixUpdate[] newArray(int _aidl_size) {
+                    return new AudioMixUpdate[_aidl_size];
+                }
+            };
     public AudioMix audioMix;
     public AudioMixMatchCriterion[] newCriteria;
 
@@ -57,7 +58,9 @@ public class AudioMixUpdate implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.newCriteria = (AudioMixMatchCriterion[]) _aidl_parcel.createTypedArray(AudioMixMatchCriterion.CREATOR);
+                this.newCriteria =
+                        (AudioMixMatchCriterion[])
+                                _aidl_parcel.createTypedArray(AudioMixMatchCriterion.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

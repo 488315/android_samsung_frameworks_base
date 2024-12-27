@@ -17,7 +17,6 @@ public final class BroadcastQueueProto {
         public static final long FINISH_CLOCK_TIME_MS = 1112396529668L;
         public static final long INTENT = 1146756268033L;
 
-        public BroadcastSummary() {
-        }
+        public BroadcastSummary() {}
     }
 }

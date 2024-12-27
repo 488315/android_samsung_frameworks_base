@@ -16,10 +16,12 @@ public class ResizeFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "generateMipMap")
     private boolean mGenerateMipMap;
+
     private int mInputChannels;
 
     @GenerateFieldPort(hasDefault = true, name = "keepAspectRatio")
     private boolean mKeepAspectRatio;
+
     private FrameFormat mLastFormat;
 
     @GenerateFieldPort(name = "oheight")
@@ -27,6 +29,7 @@ public class ResizeFilter extends Filter {
 
     @GenerateFieldPort(name = "owidth")
     private int mOWidth;
+
     private MutableFrameFormat mOutputFormat;
     private Program mProgram;
 

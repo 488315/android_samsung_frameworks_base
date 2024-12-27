@@ -1,8 +1,11 @@
 package android.privacy.internal.rappor;
 
 import android.privacy.DifferentialPrivacyEncoder;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.google.android.rappor.Encoder;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -12,7 +15,56 @@ import java.util.Random;
 
 /* loaded from: classes3.dex */
 public class RapporEncoder implements DifferentialPrivacyEncoder {
-    private static final byte[] INSECURE_SECRET = {-41, 104, -103, -109, -108, 19, 83, 84, -2, MidiConstants.STATUS_CHANNEL_PRESSURE, 126, 84, -2, MidiConstants.STATUS_CHANNEL_PRESSURE, 126, 84, -41, 104, -103, -109, -108, 19, 83, 84, -2, MidiConstants.STATUS_CHANNEL_PRESSURE, 126, 84, -2, MidiConstants.STATUS_CHANNEL_PRESSURE, 126, 84, -41, 104, -103, -109, -108, 19, 83, 84, -2, MidiConstants.STATUS_CHANNEL_PRESSURE, 126, 84, -2, MidiConstants.STATUS_CHANNEL_PRESSURE, 126, 84};
+    private static final byte[] INSECURE_SECRET = {
+        -41,
+        104,
+        -103,
+        -109,
+        -108,
+        19,
+        83,
+        84,
+        -2,
+        MidiConstants.STATUS_CHANNEL_PRESSURE,
+        126,
+        84,
+        -2,
+        MidiConstants.STATUS_CHANNEL_PRESSURE,
+        126,
+        84,
+        -41,
+        104,
+        -103,
+        -109,
+        -108,
+        19,
+        83,
+        84,
+        -2,
+        MidiConstants.STATUS_CHANNEL_PRESSURE,
+        126,
+        84,
+        -2,
+        MidiConstants.STATUS_CHANNEL_PRESSURE,
+        126,
+        84,
+        -41,
+        104,
+        -103,
+        -109,
+        -108,
+        19,
+        83,
+        84,
+        -2,
+        MidiConstants.STATUS_CHANNEL_PRESSURE,
+        126,
+        84,
+        -2,
+        MidiConstants.STATUS_CHANNEL_PRESSURE,
+        126,
+        84
+    };
     private static final SecureRandom sSecureRandom = new SecureRandom();
     private final RapporConfig mConfig;
     private final Encoder mEncoder;
@@ -30,7 +82,19 @@ public class RapporEncoder implements DifferentialPrivacyEncoder {
             random = new Random(getInsecureSeed(config.mEncoderId));
             userSecret2 = INSECURE_SECRET;
         }
-        this.mEncoder = new Encoder(random, (MessageDigest) null, (MessageDigest) null, userSecret2, config.mEncoderId, config.mNumBits, config.mProbabilityF, config.mProbabilityP, config.mProbabilityQ, config.mNumCohorts, config.mNumBloomHashes);
+        this.mEncoder =
+                new Encoder(
+                        random,
+                        (MessageDigest) null,
+                        (MessageDigest) null,
+                        userSecret2,
+                        config.mEncoderId,
+                        config.mNumBits,
+                        config.mProbabilityF,
+                        config.mProbabilityP,
+                        config.mProbabilityQ,
+                        config.mNumCohorts,
+                        config.mNumBloomHashes);
     }
 
     private long getInsecureSeed(String input) {

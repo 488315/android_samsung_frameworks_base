@@ -1,9 +1,11 @@
 package android.graphics;
 
 import android.text.format.DateFormat;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public class MeshSpecification {
@@ -19,21 +21,28 @@ public class MeshSpecification {
     long mNativeMeshSpec;
 
     @Retention(RetentionPolicy.SOURCE)
-    private @interface AlphaType {
-    }
+    private @interface AlphaType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    private @interface Type {
-    }
+    private @interface Type {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeGetFinalizer();
 
-    private static native long nativeMake(Attribute[] attributeArr, int i, Varying[] varyingArr, String str, String str2);
+    private static native long nativeMake(
+            Attribute[] attributeArr, int i, Varying[] varyingArr, String str, String str2);
 
-    private static native long nativeMakeWithAlpha(Attribute[] attributeArr, int i, Varying[] varyingArr, String str, String str2, long j, int i2);
+    private static native long nativeMakeWithAlpha(
+            Attribute[] attributeArr,
+            int i,
+            Varying[] varyingArr,
+            String str,
+            String str2,
+            long j,
+            int i2);
 
-    private static native long nativeMakeWithCS(Attribute[] attributeArr, int i, Varying[] varyingArr, String str, String str2, long j);
+    private static native long nativeMakeWithCS(
+            Attribute[] attributeArr, int i, Varying[] varyingArr, String str, String str2, long j);
 
     public static class Attribute {
         private final String mName;
@@ -59,7 +68,14 @@ public class MeshSpecification {
         }
 
         public String toString() {
-            return "Attribute{mType=" + this.mType + ", mOffset=" + this.mOffset + ", mName='" + this.mName + DateFormat.QUOTE + '}';
+            return "Attribute{mType="
+                    + this.mType
+                    + ", mOffset="
+                    + this.mOffset
+                    + ", mName='"
+                    + this.mName
+                    + DateFormat.QUOTE
+                    + '}';
         }
     }
 
@@ -81,35 +97,76 @@ public class MeshSpecification {
         }
 
         public String toString() {
-            return "Varying{mType=" + this.mType + ", mName='" + this.mName + DateFormat.QUOTE + '}';
+            return "Varying{mType="
+                    + this.mType
+                    + ", mName='"
+                    + this.mName
+                    + DateFormat.QUOTE
+                    + '}';
         }
     }
 
     private static class MeshSpecificationHolder {
-        public static final NativeAllocationRegistry MESH_SPECIFICATION_REGISTRY = NativeAllocationRegistry.createMalloced(MeshSpecification.class.getClassLoader(), MeshSpecification.nativeGetFinalizer());
+        public static final NativeAllocationRegistry MESH_SPECIFICATION_REGISTRY =
+                NativeAllocationRegistry.createMalloced(
+                        MeshSpecification.class.getClassLoader(),
+                        MeshSpecification.nativeGetFinalizer());
 
-        private MeshSpecificationHolder() {
-        }
+        private MeshSpecificationHolder() {}
     }
 
-    public static MeshSpecification make(Attribute[] attributes, int vertexStride, Varying[] varyings, String vertexShader, String fragmentShader) {
-        long nativeMeshSpec = nativeMake(attributes, vertexStride, varyings, vertexShader, fragmentShader);
+    public static MeshSpecification make(
+            Attribute[] attributes,
+            int vertexStride,
+            Varying[] varyings,
+            String vertexShader,
+            String fragmentShader) {
+        long nativeMeshSpec =
+                nativeMake(attributes, vertexStride, varyings, vertexShader, fragmentShader);
         if (nativeMeshSpec == 0) {
             throw new IllegalArgumentException("MeshSpecification construction failed");
         }
         return new MeshSpecification(nativeMeshSpec);
     }
 
-    public static MeshSpecification make(Attribute[] attributes, int vertexStride, Varying[] varyings, String vertexShader, String fragmentShader, ColorSpace colorSpace) {
-        long nativeMeshSpec = nativeMakeWithCS(attributes, vertexStride, varyings, vertexShader, fragmentShader, colorSpace.getNativeInstance());
+    public static MeshSpecification make(
+            Attribute[] attributes,
+            int vertexStride,
+            Varying[] varyings,
+            String vertexShader,
+            String fragmentShader,
+            ColorSpace colorSpace) {
+        long nativeMeshSpec =
+                nativeMakeWithCS(
+                        attributes,
+                        vertexStride,
+                        varyings,
+                        vertexShader,
+                        fragmentShader,
+                        colorSpace.getNativeInstance());
         if (nativeMeshSpec == 0) {
             throw new IllegalArgumentException("MeshSpecification construction failed");
         }
         return new MeshSpecification(nativeMeshSpec);
     }
 
-    public static MeshSpecification make(Attribute[] attributes, int vertexStride, Varying[] varyings, String vertexShader, String fragmentShader, ColorSpace colorSpace, int alphaType) {
-        long nativeMeshSpec = nativeMakeWithAlpha(attributes, vertexStride, varyings, vertexShader, fragmentShader, colorSpace.getNativeInstance(), alphaType);
+    public static MeshSpecification make(
+            Attribute[] attributes,
+            int vertexStride,
+            Varying[] varyings,
+            String vertexShader,
+            String fragmentShader,
+            ColorSpace colorSpace,
+            int alphaType) {
+        long nativeMeshSpec =
+                nativeMakeWithAlpha(
+                        attributes,
+                        vertexStride,
+                        varyings,
+                        vertexShader,
+                        fragmentShader,
+                        colorSpace.getNativeInstance(),
+                        alphaType);
         if (nativeMeshSpec == 0) {
             throw new IllegalArgumentException("MeshSpecification construction failed");
         }
@@ -118,6 +175,7 @@ public class MeshSpecification {
 
     private MeshSpecification(long meshSpec) {
         this.mNativeMeshSpec = meshSpec;
-        MeshSpecificationHolder.MESH_SPECIFICATION_REGISTRY.registerNativeAllocation(this, meshSpec);
+        MeshSpecificationHolder.MESH_SPECIFICATION_REGISTRY.registerNativeAllocation(
+                this, meshSpec);
     }
 }

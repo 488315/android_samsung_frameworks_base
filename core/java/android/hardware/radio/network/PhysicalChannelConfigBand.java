@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class PhysicalChannelConfigBand implements Parcelable {
-    public static final Parcelable.Creator<PhysicalChannelConfigBand> CREATOR = new Parcelable.Creator<PhysicalChannelConfigBand>() { // from class: android.hardware.radio.network.PhysicalChannelConfigBand.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhysicalChannelConfigBand createFromParcel(Parcel _aidl_source) {
-            return new PhysicalChannelConfigBand(_aidl_source);
-        }
+    public static final Parcelable.Creator<PhysicalChannelConfigBand> CREATOR =
+            new Parcelable.Creator<PhysicalChannelConfigBand>() { // from class:
+                // android.hardware.radio.network.PhysicalChannelConfigBand.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhysicalChannelConfigBand createFromParcel(Parcel _aidl_source) {
+                    return new PhysicalChannelConfigBand(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhysicalChannelConfigBand[] newArray(int _aidl_size) {
-            return new PhysicalChannelConfigBand[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhysicalChannelConfigBand[] newArray(int _aidl_size) {
+                    return new PhysicalChannelConfigBand[_aidl_size];
+                }
+            };
     public static final int eutranBand = 3;
     public static final int geranBand = 1;
     public static final int ngranBand = 4;
@@ -182,15 +184,25 @@ public final class PhysicalChannelConfigBand implements Parcelable {
     public String toString() {
         switch (this._tag) {
             case 0:
-                return "PhysicalChannelConfigBand.noinit(" + getNoinit() + NavigationBarInflaterView.KEY_CODE_END;
+                return "PhysicalChannelConfigBand.noinit("
+                        + getNoinit()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "PhysicalChannelConfigBand.geranBand(" + GeranBands$$.toString(getGeranBand()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "PhysicalChannelConfigBand.geranBand("
+                        + GeranBands$$.toString(getGeranBand())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 2:
-                return "PhysicalChannelConfigBand.utranBand(" + UtranBands$$.toString(getUtranBand()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "PhysicalChannelConfigBand.utranBand("
+                        + UtranBands$$.toString(getUtranBand())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 3:
-                return "PhysicalChannelConfigBand.eutranBand(" + EutranBands$$.toString(getEutranBand()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "PhysicalChannelConfigBand.eutranBand("
+                        + EutranBands$$.toString(getEutranBand())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 4:
-                return "PhysicalChannelConfigBand.ngranBand(" + NgranBands$$.toString(getNgranBand()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "PhysicalChannelConfigBand.ngranBand("
+                        + NgranBands$$.toString(getNgranBand())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -198,7 +210,12 @@ public final class PhysicalChannelConfigBand implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

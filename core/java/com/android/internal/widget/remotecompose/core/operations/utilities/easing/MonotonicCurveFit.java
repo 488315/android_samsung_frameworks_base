@@ -1,6 +1,7 @@
 package com.android.internal.widget.remotecompose.core.operations.utilities.easing;
 
 import android.hardware.scontext.SContextConstants;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
@@ -124,7 +125,10 @@ public class MonotonicCurveFit {
             if (t >= this.mT[n - 1]) {
                 getSlope(this.mT[n - 1], this.mSlopeTemp);
                 for (int j2 = 0; j2 < dim; j2++) {
-                    v[j2] = (float) (this.mY[n - 1][j2] + ((t - this.mT[n - 1]) * this.mSlopeTemp[j2]));
+                    v[j2] =
+                            (float)
+                                    (this.mY[n - 1][j2]
+                                            + ((t - this.mT[n - 1]) * this.mSlopeTemp[j2]));
                 }
                 return;
             }
@@ -258,15 +262,29 @@ public class MonotonicCurveFit {
         return this.mT;
     }
 
-    private static double interpolate(double h, double x, double y1, double y2, double t1, double t2) {
+    private static double interpolate(
+            double h, double x, double y1, double y2, double t1, double t2) {
         double x2 = x * x;
         double x3 = x2 * x;
-        return (((((((((((-2.0d) * x3) * y2) + ((x2 * 3.0d) * y2)) + ((x3 * 2.0d) * y1)) - ((3.0d * x2) * y1)) + y1) + ((h * t2) * x3)) + ((h * t1) * x3)) - ((h * t2) * x2)) - (((h * 2.0d) * t1) * x2)) + (h * t1 * x);
+        return (((((((((((-2.0d) * x3) * y2) + ((x2 * 3.0d) * y2)) + ((x3 * 2.0d) * y1))
+                                                                - ((3.0d * x2) * y1))
+                                                        + y1)
+                                                + ((h * t2) * x3))
+                                        + ((h * t1) * x3))
+                                - ((h * t2) * x2))
+                        - (((h * 2.0d) * t1) * x2))
+                + (h * t1 * x);
     }
 
     private static double diff(double h, double x, double y1, double y2, double t1, double t2) {
         double x2 = x * x;
-        return ((((((((((-6.0d) * x2) * y2) + ((x * 6.0d) * y2)) + ((x2 * 6.0d) * y1)) - ((6.0d * x) * y1)) + (((h * 3.0d) * t2) * x2)) + (((3.0d * h) * t1) * x2)) - (((2.0d * h) * t2) * x)) - (((4.0d * h) * t1) * x)) + (h * t1);
+        return ((((((((((-6.0d) * x2) * y2) + ((x * 6.0d) * y2)) + ((x2 * 6.0d) * y1))
+                                                        - ((6.0d * x) * y1))
+                                                + (((h * 3.0d) * t2) * x2))
+                                        + (((3.0d * h) * t1) * x2))
+                                - (((2.0d * h) * t2) * x))
+                        - (((4.0d * h) * t1) * x))
+                + (h * t1);
     }
 
     public static MonotonicCurveFit buildWave(String configString) {

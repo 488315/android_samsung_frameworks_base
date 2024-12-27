@@ -72,6 +72,7 @@ public final class SehCommandResult implements Parcelable {
         parcel.writeByteArray(this.msg);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

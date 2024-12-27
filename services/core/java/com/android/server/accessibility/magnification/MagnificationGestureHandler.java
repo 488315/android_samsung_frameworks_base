@@ -3,9 +3,11 @@ package com.android.server.accessibility.magnification;
 import android.util.Log;
 import android.util.Slog;
 import android.view.MotionEvent;
+
 import com.android.server.accessibility.AccessibilityTraceManager;
 import com.android.server.accessibility.BaseEventStreamTransformation;
 import com.android.server.accessibility.Flags;
+
 import java.util.ArrayDeque;
 import java.util.Queue;
 
@@ -24,8 +26,7 @@ public abstract class MagnificationGestureHandler extends BaseEventStreamTransfo
     public final AccessibilityTraceManager mTrace;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Callback {
-    }
+    public interface Callback {}
 
     static {
         boolean isLoggable = Log.isLoggable("MagnificationGestureHandler", 3);
@@ -33,7 +34,12 @@ public abstract class MagnificationGestureHandler extends BaseEventStreamTransfo
         DEBUG_EVENT_STREAM = isLoggable;
     }
 
-    public MagnificationGestureHandler(int i, boolean z, boolean z2, AccessibilityTraceManager accessibilityTraceManager, Callback callback) {
+    public MagnificationGestureHandler(
+            int i,
+            boolean z,
+            boolean z2,
+            AccessibilityTraceManager accessibilityTraceManager,
+            Callback callback) {
         this.mDisplayId = i;
         this.mDetectSingleFingerTripleTap = z;
         Flags.enableMagnificationMultipleFingerMultipleTapGesture();
@@ -47,12 +53,15 @@ public abstract class MagnificationGestureHandler extends BaseEventStreamTransfo
 
     public static void storeEventInto(Queue queue, MotionEvent motionEvent) {
         queue.add(MotionEvent.obtain(motionEvent));
-        while (!queue.isEmpty() && motionEvent.getEventTime() - ((MotionEvent) queue.peek()).getEventTime() > 5000) {
+        while (!queue.isEmpty()
+                && motionEvent.getEventTime() - ((MotionEvent) queue.peek()).getEventTime()
+                        > 5000) {
             ((MotionEvent) queue.remove()).recycle();
         }
     }
 
-    public final void dispatchTransformedEvent(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
+    public final void dispatchTransformedEvent(
+            MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
         if (!DEBUG_EVENT_STREAM) {
             super.onMotionEvent(motionEvent, motionEvent2, i);
             return;
@@ -61,7 +70,12 @@ public abstract class MagnificationGestureHandler extends BaseEventStreamTransfo
         try {
             super.onMotionEvent(motionEvent, motionEvent2, i);
         } catch (Exception e) {
-            throw new RuntimeException("Exception downstream following input events: " + this.mDebugInputEventHistory + "\nTransformed into output events: " + this.mDebugOutputEventHistory, e);
+            throw new RuntimeException(
+                    "Exception downstream following input events: "
+                            + this.mDebugInputEventHistory
+                            + "\nTransformed into output events: "
+                            + this.mDebugOutputEventHistory,
+                    e);
         }
     }
 
@@ -78,12 +92,16 @@ public abstract class MagnificationGestureHandler extends BaseEventStreamTransfo
         }
         AccessibilityTraceManager accessibilityTraceManager = this.mTrace;
         if (accessibilityTraceManager.isA11yTracingEnabledForTypes(12288L)) {
-            accessibilityTraceManager.logTrace("MagnificationGestureHandler.onMotionEvent", 12288L, "event=" + motionEvent + ";rawEvent=" + motionEvent2 + ";policyFlags=" + i);
+            accessibilityTraceManager.logTrace(
+                    "MagnificationGestureHandler.onMotionEvent",
+                    12288L,
+                    "event=" + motionEvent + ";rawEvent=" + motionEvent2 + ";policyFlags=" + i);
         }
         if (DEBUG_EVENT_STREAM) {
             storeEventInto(this.mDebugInputEventHistory, motionEvent);
         }
-        if ((!this.mDetectSingleFingerTripleTap && !this.mDetectShortcutTrigger) || !motionEvent.isFromSource(4098)) {
+        if ((!this.mDetectSingleFingerTripleTap && !this.mDetectShortcutTrigger)
+                || !motionEvent.isFromSource(4098)) {
             dispatchTransformedEvent(motionEvent, motionEvent2, i);
             return;
         }
@@ -110,5 +128,6 @@ public abstract class MagnificationGestureHandler extends BaseEventStreamTransfo
         }
     }
 
-    public abstract void onMotionEventInternal(MotionEvent motionEvent, MotionEvent motionEvent2, int i);
+    public abstract void onMotionEventInternal(
+            MotionEvent motionEvent, MotionEvent motionEvent2, int i);
 }

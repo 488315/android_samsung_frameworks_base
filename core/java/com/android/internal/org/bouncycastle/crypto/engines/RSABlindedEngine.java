@@ -7,6 +7,7 @@ import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
 import com.android.internal.org.bouncycastle.crypto.params.RSAKeyParameters;
 import com.android.internal.org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -67,7 +68,8 @@ public class RSABlindedEngine implements AsymmetricBlockCipher {
                 BigInteger rInv = BigIntegers.modOddInverse(m, r);
                 result = blindedResult.multiply(rInv).mod(m);
                 if (!input.equals(result.modPow(e, m))) {
-                    throw new IllegalStateException("RSA engine faulty decryption/signing detected");
+                    throw new IllegalStateException(
+                            "RSA engine faulty decryption/signing detected");
                 }
             } else {
                 result = this.core.processBlock(input);

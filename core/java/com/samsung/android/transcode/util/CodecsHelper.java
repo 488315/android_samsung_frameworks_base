@@ -12,10 +12,12 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.util.NtpTrustedTime;
 import android.view.Surface;
+
 import com.samsung.android.transcode.constants.EncodeConstants;
 import com.samsung.android.transcode.info.ExportMediaInfo;
 import com.samsung.android.transcode.info.MediaInfo;
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -36,8 +38,12 @@ public class CodecsHelper {
     private static final float BITRATE_FRACTION_FRAMERATE = 0.8f;
     private static final float BITRATE_FRACTION_HEVC = 0.85f;
     private static final float BITRATE_MARGIN_FACTOR = 1.25f;
-    private static final String[] SEC_AAC_ENCODER_OMX_NAMES = {"OMX.SEC.naac.enc", "OMX.SEC.aac.enc", "c2.sec.aac.encoder"};
-    private static final String[] SEC_AAC_DECODER_OMX_NAMES = {"OMX.SEC.aac.dec", "c2.sec.aac.decoder"};
+    private static final String[] SEC_AAC_ENCODER_OMX_NAMES = {
+        "OMX.SEC.naac.enc", "OMX.SEC.aac.enc", "c2.sec.aac.encoder"
+    };
+    private static final String[] SEC_AAC_DECODER_OMX_NAMES = {
+        "OMX.SEC.aac.dec", "c2.sec.aac.decoder"
+    };
     public static final MediaExtractor sMediaExtractor = null;
     public static final MediaMetadataRetriever sMetadataRetriever = null;
 
@@ -60,7 +66,8 @@ public class CodecsHelper {
         return extractor;
     }
 
-    public static MediaExtractor createExtractor(FileDescriptor descriptor, long offset, long length) throws IOException {
+    public static MediaExtractor createExtractor(
+            FileDescriptor descriptor, long offset, long length) throws IOException {
         MediaExtractor extractor = newMediaExtractor();
         extractor.semSetRunningMode(1);
         extractor.setDataSource(descriptor, offset, length);
@@ -94,13 +101,15 @@ public class CodecsHelper {
         return -1;
     }
 
-    public static MediaMetadataRetriever createMediaMetadataRetriever(String inputFilePath) throws IllegalArgumentException {
+    public static MediaMetadataRetriever createMediaMetadataRetriever(String inputFilePath)
+            throws IllegalArgumentException {
         MediaMetadataRetriever retriever = newMetadataRetriever();
         retriever.setDataSource(inputFilePath);
         return retriever;
     }
 
-    public static MediaMetadataRetriever createMediaMetadataRetriever(Context context, Uri uri) throws IllegalArgumentException, SecurityException {
+    public static MediaMetadataRetriever createMediaMetadataRetriever(Context context, Uri uri)
+            throws IllegalArgumentException, SecurityException {
         MediaMetadataRetriever retriever = newMetadataRetriever();
         retriever.setDataSource(context, uri);
         return retriever;
@@ -128,7 +137,9 @@ public class CodecsHelper {
             int numCodecs = MediaCodecList.getCodecCount();
             for (int i = 0; i < numCodecs; i++) {
                 MediaCodecInfo codecInfo = MediaCodecList.getCodecInfoAt(i);
-                if ((!isEncoder || codecInfo.isEncoder()) && ((isEncoder || !codecInfo.isEncoder()) && isSupportCodec(mimeType, codecInfo))) {
+                if ((!isEncoder || codecInfo.isEncoder())
+                        && ((isEncoder || !codecInfo.isEncoder())
+                                && isSupportCodec(mimeType, codecInfo))) {
                     return codecInfo;
                 }
             }
@@ -216,22 +227,31 @@ public class CodecsHelper {
 
     private static boolean isSamsungAACCodec(MediaCodecInfo codec, boolean isEncoder) {
         String name = codec.getName();
-        return (isEncoder && codec.isEncoder() && Arrays.asList(SEC_AAC_ENCODER_OMX_NAMES).contains(name)) || !(isEncoder || codec.isEncoder() || !Arrays.asList(SEC_AAC_DECODER_OMX_NAMES).contains(name));
+        return (isEncoder
+                        && codec.isEncoder()
+                        && Arrays.asList(SEC_AAC_ENCODER_OMX_NAMES).contains(name))
+                || !(isEncoder
+                        || codec.isEncoder()
+                        || !Arrays.asList(SEC_AAC_DECODER_OMX_NAMES).contains(name));
     }
 
     static boolean isSupportCodec(final String mimeType, MediaCodecInfo codecInfo) {
         String[] types = codecInfo.getSupportedTypes();
-        return Arrays.stream(types).anyMatch(new Predicate() { // from class: com.samsung.android.transcode.util.CodecsHelper$$ExternalSyntheticLambda2
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean equalsIgnoreCase;
-                equalsIgnoreCase = ((String) obj).equalsIgnoreCase(mimeType);
-                return equalsIgnoreCase;
-            }
-        });
+        return Arrays.stream(types)
+                .anyMatch(
+                        new Predicate() { // from class:
+                                          // com.samsung.android.transcode.util.CodecsHelper$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                boolean equalsIgnoreCase;
+                                equalsIgnoreCase = ((String) obj).equalsIgnoreCase(mimeType);
+                                return equalsIgnoreCase;
+                            }
+                        });
     }
 
-    public static MediaCodec createAudioEncoder(MediaCodecInfo codecInfo, MediaFormat format) throws IOException {
+    public static MediaCodec createAudioEncoder(MediaCodecInfo codecInfo, MediaFormat format)
+            throws IOException {
         MediaCodec encoder = MediaCodec.createByCodecName(codecInfo.getName());
         encoder.configure(format, (Surface) null, (MediaCrypto) null, 1);
         encoder.start();
@@ -245,7 +265,8 @@ public class CodecsHelper {
         return decoder;
     }
 
-    public static MediaCodec createAudioDecoder(MediaCodecInfo codecInfo, MediaFormat inputFormat) throws IOException {
+    public static MediaCodec createAudioDecoder(MediaCodecInfo codecInfo, MediaFormat inputFormat)
+            throws IOException {
         MediaCodec decoder = MediaCodec.createByCodecName(codecInfo.getName());
         decoder.configure(inputFormat, (Surface) null, (MediaCrypto) null, 0);
         decoder.start();
@@ -275,10 +296,25 @@ public class CodecsHelper {
         return 99;
     }
 
-    public static int getVideoEncodingBitRate(float sizeFraction, long maxSizeKB, long timeDurationMs, int audioBitRate, int width, int height) {
+    public static int getVideoEncodingBitRate(
+            float sizeFraction,
+            long maxSizeKB,
+            long timeDurationMs,
+            int audioBitRate,
+            int width,
+            int height) {
         String log;
-        int bitRate = ((int) ((((maxSizeKB * sizeFraction) * 8.0f) * 1024.0f) / timeDurationMs)) - (audioBitRate + 2);
-        LogS.i("TranscodeLib", "getVideoEncodingBitRate maxSizeKB: " + maxSizeKB + " sizeFraction :" + sizeFraction + " bitatre :  " + bitRate);
+        int bitRate =
+                ((int) ((((maxSizeKB * sizeFraction) * 8.0f) * 1024.0f) / timeDurationMs))
+                        - (audioBitRate + 2);
+        LogS.i(
+                "TranscodeLib",
+                "getVideoEncodingBitRate maxSizeKB: "
+                        + maxSizeKB
+                        + " sizeFraction :"
+                        + sizeFraction
+                        + " bitatre :  "
+                        + bitRate);
         int minBitRate = getVideoMinBitrate(width, height);
         int maxBitRate = suggestBitRate(width, height);
         if (bitRate < minBitRate) {
@@ -294,7 +330,8 @@ public class CodecsHelper {
         return bitRate;
     }
 
-    public static MediaCodec createVideoDecoder(MediaFormat inputFormat, Surface surface, boolean startFlag) throws IOException {
+    public static MediaCodec createVideoDecoder(
+            MediaFormat inputFormat, Surface surface, boolean startFlag) throws IOException {
         MediaCodec decoder = MediaCodec.createDecoderByType(getMimeTypeFor(inputFormat));
         LogS.d("TranscodeLib", "createVideoDecoder");
         try {
@@ -310,8 +347,10 @@ public class CodecsHelper {
         }
     }
 
-    public static void scheduleAfter(int ms, Runnable schedulerCallback) throws InterruptedException, ExecutionException {
-        ScheduledThreadPoolExecutor sch = (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(2);
+    public static void scheduleAfter(int ms, Runnable schedulerCallback)
+            throws InterruptedException, ExecutionException {
+        ScheduledThreadPoolExecutor sch =
+                (ScheduledThreadPoolExecutor) Executors.newScheduledThreadPool(2);
         sch.schedule(schedulerCallback, ms, TimeUnit.SECONDS);
     }
 
@@ -319,7 +358,8 @@ public class CodecsHelper {
         return getCommonBitrate(width, height);
     }
 
-    public static int suggestBitrate(ExportMediaInfo outputInfo, MediaInfo.MediaFileInfo sourceInfo) {
+    public static int suggestBitrate(
+            ExportMediaInfo outputInfo, MediaInfo.MediaFileInfo sourceInfo) {
         int bitrate;
         if (outputInfo == null || sourceInfo == null) {
             return -1;
@@ -351,7 +391,12 @@ public class CodecsHelper {
                 bitrate = bitrate5 * 1000;
             }
         }
-        LogS.d("TranscodeLib", "[1] get from table. bitrate: " + bitrate + ", isHighBitrateMode: " + isHighBitrateMode);
+        LogS.d(
+                "TranscodeLib",
+                "[1] get from table. bitrate: "
+                        + bitrate
+                        + ", isHighBitrateMode: "
+                        + isHighBitrateMode);
         int outputFramerate = outputInfo.getFrameRate();
         if (outputFramerate >= 60) {
             bitrate = (int) (((bitrate * 0.8f) * outputFramerate) / 30.0f);
@@ -364,10 +409,19 @@ public class CodecsHelper {
         }
         if (sourceInfo.Bitrate != 0) {
             int originalBitrate = sourceInfo.Bitrate;
-            if (isSamsungAuthor(sourceInfo.Author) && !outputVideoCodecType.equals(sourceInfo.VideoCodecType)) {
-                originalBitrate = "video/hevc".equals(outputVideoCodecType) ? (int) (originalBitrate * BITRATE_FRACTION_HEVC) : (int) (originalBitrate / BITRATE_FRACTION_HEVC);
+            if (isSamsungAuthor(sourceInfo.Author)
+                    && !outputVideoCodecType.equals(sourceInfo.VideoCodecType)) {
+                originalBitrate =
+                        "video/hevc".equals(outputVideoCodecType)
+                                ? (int) (originalBitrate * BITRATE_FRACTION_HEVC)
+                                : (int) (originalBitrate / BITRATE_FRACTION_HEVC);
             }
-            LogS.d("TranscodeLib", "[4] sourceBitrate : " + sourceInfo.Bitrate + ", originalBitrate: " + originalBitrate);
+            LogS.d(
+                    "TranscodeLib",
+                    "[4] sourceBitrate : "
+                            + sourceInfo.Bitrate
+                            + ", originalBitrate: "
+                            + originalBitrate);
             bitrate = Math.min(bitrate, originalBitrate);
         }
         LogS.i("TranscodeLib", "suggestBitRate. bitrate: " + bitrate);
@@ -404,13 +458,46 @@ public class CodecsHelper {
         return 280;
     }
 
-    private static boolean keepOriginalBitrate(ExportMediaInfo outputInfo, MediaInfo.MediaFileInfo sourceInfo) {
-        LogS.d("TranscodeLib", "keepOriginalBitrate. exportInfo: [" + outputInfo.getWidth() + "x" + outputInfo.getHeight() + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + outputInfo.getVideoCodecType() + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + outputInfo.getFrameRate() + "], sourceInfo: [" + sourceInfo.Width + "x" + sourceInfo.Height + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + sourceInfo.VideoCodecType + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + sourceInfo.Framerate + NavigationBarInflaterView.SIZE_MOD_END);
-        return outputInfo.getVideoCodecType().equals(sourceInfo.VideoCodecType) && outputInfo.getFrameRate() == sourceInfo.Framerate && outputInfo.getWidth() == sourceInfo.Width && outputInfo.getHeight() == sourceInfo.Height;
+    private static boolean keepOriginalBitrate(
+            ExportMediaInfo outputInfo, MediaInfo.MediaFileInfo sourceInfo) {
+        LogS.d(
+                "TranscodeLib",
+                "keepOriginalBitrate. exportInfo: ["
+                        + outputInfo.getWidth()
+                        + "x"
+                        + outputInfo.getHeight()
+                        + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                        + outputInfo.getVideoCodecType()
+                        + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                        + outputInfo.getFrameRate()
+                        + "], sourceInfo: ["
+                        + sourceInfo.Width
+                        + "x"
+                        + sourceInfo.Height
+                        + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                        + sourceInfo.VideoCodecType
+                        + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                        + sourceInfo.Framerate
+                        + NavigationBarInflaterView.SIZE_MOD_END);
+        return outputInfo.getVideoCodecType().equals(sourceInfo.VideoCodecType)
+                && outputInfo.getFrameRate() == sourceInfo.Framerate
+                && outputInfo.getWidth() == sourceInfo.Width
+                && outputInfo.getHeight() == sourceInfo.Height;
     }
 
     private static boolean isHighBitrateMode(MediaInfo.MediaFileInfo sourceInfo) {
-        LogS.d("TranscodeLib", "isHighBitrateMode. codecType: " + sourceInfo.VideoCodecType + ", width: " + sourceInfo.Width + ", height: " + sourceInfo.Height + ", bitrate: " + sourceInfo.Bitrate + ", framerate: " + sourceInfo.Framerate);
+        LogS.d(
+                "TranscodeLib",
+                "isHighBitrateMode. codecType: "
+                        + sourceInfo.VideoCodecType
+                        + ", width: "
+                        + sourceInfo.Width
+                        + ", height: "
+                        + sourceInfo.Height
+                        + ", bitrate: "
+                        + sourceInfo.Bitrate
+                        + ", framerate: "
+                        + sourceInfo.Framerate);
         if (!"video/hevc".equals(sourceInfo.VideoCodecType)) {
             return false;
         }
@@ -490,27 +577,49 @@ public class CodecsHelper {
 
     public static boolean isSupportOMX() {
         MediaCodecInfo codecInfo = getMediaCodec("video/avc", false, false);
-        LogS.d("TranscodeLib", "isSupportOMX getMediaCodec : " + ((String) Optional.ofNullable(codecInfo).map(new Function() { // from class: com.samsung.android.transcode.util.CodecsHelper$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((MediaCodecInfo) obj).getName();
-            }
-        }).orElse("none")));
-        return ((Boolean) Optional.ofNullable(codecInfo).map(new Function() { // from class: com.samsung.android.transcode.util.CodecsHelper$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(((MediaCodecInfo) obj).getName().toLowerCase().contains("omx"));
-                return valueOf;
-            }
-        }).orElse(false)).booleanValue();
+        LogS.d(
+                "TranscodeLib",
+                "isSupportOMX getMediaCodec : "
+                        + ((String)
+                                Optional.ofNullable(codecInfo)
+                                        .map(
+                                                new Function() { // from class:
+                                                                 // com.samsung.android.transcode.util.CodecsHelper$$ExternalSyntheticLambda0
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        return ((MediaCodecInfo) obj).getName();
+                                                    }
+                                                })
+                                        .orElse("none")));
+        return ((Boolean)
+                        Optional.ofNullable(codecInfo)
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.transcode.util.CodecsHelper$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                Boolean valueOf;
+                                                valueOf =
+                                                        Boolean.valueOf(
+                                                                ((MediaCodecInfo) obj)
+                                                                        .getName()
+                                                                        .toLowerCase()
+                                                                        .contains("omx"));
+                                                return valueOf;
+                                            }
+                                        })
+                                .orElse(false))
+                .booleanValue();
     }
 
-    public static MediaCodecInfo getMediaCodec(String mimeType, boolean isEncoder, boolean preferSw) {
+    public static MediaCodecInfo getMediaCodec(
+            String mimeType, boolean isEncoder, boolean preferSw) {
         MediaCodecList mcl = new MediaCodecList(0);
         MediaCodecInfo[] infos = mcl.getCodecInfos();
         for (MediaCodecInfo info : infos) {
-            if (info.isEncoder() == isEncoder && info.isSoftwareOnly() == preferSw && isSupportCodec(mimeType, info)) {
+            if (info.isEncoder() == isEncoder
+                    && info.isSoftwareOnly() == preferSw
+                    && isSupportCodec(mimeType, info)) {
                 return info;
             }
         }

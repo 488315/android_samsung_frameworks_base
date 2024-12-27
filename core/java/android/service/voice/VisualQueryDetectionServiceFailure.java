@@ -4,25 +4,29 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class VisualQueryDetectionServiceFailure implements Parcelable {
-    public static final Parcelable.Creator<VisualQueryDetectionServiceFailure> CREATOR = new Parcelable.Creator<VisualQueryDetectionServiceFailure>() { // from class: android.service.voice.VisualQueryDetectionServiceFailure.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisualQueryDetectionServiceFailure[] newArray(int size) {
-            return new VisualQueryDetectionServiceFailure[size];
-        }
+    public static final Parcelable.Creator<VisualQueryDetectionServiceFailure> CREATOR =
+            new Parcelable.Creator<
+                    VisualQueryDetectionServiceFailure>() { // from class:
+                                                            // android.service.voice.VisualQueryDetectionServiceFailure.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisualQueryDetectionServiceFailure[] newArray(int size) {
+                    return new VisualQueryDetectionServiceFailure[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisualQueryDetectionServiceFailure createFromParcel(Parcel in) {
-            return new VisualQueryDetectionServiceFailure(in.readInt(), in.readString8());
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisualQueryDetectionServiceFailure createFromParcel(Parcel in) {
+                    return new VisualQueryDetectionServiceFailure(in.readInt(), in.readString8());
+                }
+            };
     public static final int ERROR_CODE_BINDING_DIED = 2;
     public static final int ERROR_CODE_BIND_FAILURE = 1;
     public static final int ERROR_CODE_ILLEGAL_ATTENTION_STATE = 3;
@@ -33,8 +37,7 @@ public final class VisualQueryDetectionServiceFailure implements Parcelable {
     private String mErrorMessage;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VisualQueryDetectionServiceErrorCode {
-    }
+    public @interface VisualQueryDetectionServiceErrorCode {}
 
     public VisualQueryDetectionServiceFailure(int errorCode, String errorMessage) {
         this.mErrorCode = 0;
@@ -80,6 +83,10 @@ public final class VisualQueryDetectionServiceFailure implements Parcelable {
     }
 
     public String toString() {
-        return "VisualQueryDetectionServiceFailure { errorCode = " + this.mErrorCode + ", errorMessage = " + this.mErrorMessage + " }";
+        return "VisualQueryDetectionServiceFailure { errorCode = "
+                + this.mErrorCode
+                + ", errorMessage = "
+                + this.mErrorMessage
+                + " }";
     }
 }

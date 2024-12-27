@@ -1,11 +1,11 @@
 package android.hardware.radio;
 
 import android.graphics.Bitmap;
-import android.hardware.radio.ProgramList;
-import android.hardware.radio.RadioManager;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.hidden_from_bootclasspath.android.hardware.radio.Flags;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -23,7 +23,8 @@ final class TunerAdapter extends RadioTuner {
 
     TunerAdapter(ITuner tuner, TunerCallbackAdapter callback, int band) {
         this.mTuner = (ITuner) Objects.requireNonNull(tuner, "Tuner cannot be null");
-        this.mCallback = (TunerCallbackAdapter) Objects.requireNonNull(callback, "Callback cannot be null");
+        this.mCallback =
+                (TunerCallbackAdapter) Objects.requireNonNull(callback, "Callback cannot be null");
         this.mBand = band;
     }
 
@@ -239,7 +240,8 @@ final class TunerAdapter extends RadioTuner {
         try {
             Bitmap bitmap = this.mTuner.getImage(id);
             if (bitmap == null) {
-                throw new IllegalArgumentException("Metadata image with id " + id + " is not available");
+                throw new IllegalArgumentException(
+                        "Metadata image with id " + id + " is not available");
             }
             return bitmap;
         } catch (RemoteException e) {
@@ -259,17 +261,23 @@ final class TunerAdapter extends RadioTuner {
     @Override // android.hardware.radio.RadioTuner
     public List<RadioManager.ProgramInfo> getProgramList(Map<String, String> vendorFilter) {
         synchronized (this.mLock) {
-            if (this.mLegacyListProxy == null || !Objects.equals(this.mLegacyListFilter, vendorFilter)) {
+            if (this.mLegacyListProxy == null
+                    || !Objects.equals(this.mLegacyListFilter, vendorFilter)) {
                 Log.i(TAG, "Program list filter has changed, requesting new list");
                 this.mLegacyListProxy = new ProgramList();
                 this.mLegacyListFilter = vendorFilter;
                 this.mCallback.clearLastCompleteList();
-                this.mCallback.setProgramListObserver(this.mLegacyListProxy, new ProgramList.OnCloseListener() { // from class: android.hardware.radio.TunerAdapter$$ExternalSyntheticLambda0
-                    @Override // android.hardware.radio.ProgramList.OnCloseListener
-                    public final void onClose() {
-                        Log.i(TunerAdapter.TAG, "Empty closeListener in programListObserver");
-                    }
-                });
+                this.mCallback.setProgramListObserver(
+                        this.mLegacyListProxy,
+                        new ProgramList.OnCloseListener() { // from class:
+                            // android.hardware.radio.TunerAdapter$$ExternalSyntheticLambda0
+                            @Override // android.hardware.radio.ProgramList.OnCloseListener
+                            public final void onClose() {
+                                Log.i(
+                                        TunerAdapter.TAG,
+                                        "Empty closeListener in programListObserver");
+                            }
+                        });
             }
         }
         try {
@@ -294,22 +302,28 @@ final class TunerAdapter extends RadioTuner {
             this.mLegacyListFilter = null;
         }
         ProgramList list = new ProgramList();
-        this.mCallback.setProgramListObserver(list, new ProgramList.OnCloseListener() { // from class: android.hardware.radio.TunerAdapter$$ExternalSyntheticLambda1
-            @Override // android.hardware.radio.ProgramList.OnCloseListener
-            public final void onClose() {
-                TunerAdapter.this.lambda$getDynamicProgramList$1();
-            }
-        });
+        this.mCallback.setProgramListObserver(
+                list,
+                new ProgramList.OnCloseListener() { // from class:
+                    // android.hardware.radio.TunerAdapter$$ExternalSyntheticLambda1
+                    @Override // android.hardware.radio.ProgramList.OnCloseListener
+                    public final void onClose() {
+                        TunerAdapter.this.lambda$getDynamicProgramList$1();
+                    }
+                });
         try {
             this.mTuner.startProgramListUpdates(filter);
             return list;
         } catch (RemoteException ex) {
-            this.mCallback.setProgramListObserver(null, new ProgramList.OnCloseListener() { // from class: android.hardware.radio.TunerAdapter$$ExternalSyntheticLambda2
-                @Override // android.hardware.radio.ProgramList.OnCloseListener
-                public final void onClose() {
-                    Log.i(TunerAdapter.TAG, "Empty closeListener in programListObserver");
-                }
-            });
+            this.mCallback.setProgramListObserver(
+                    null,
+                    new ProgramList.OnCloseListener() { // from class:
+                        // android.hardware.radio.TunerAdapter$$ExternalSyntheticLambda2
+                        @Override // android.hardware.radio.ProgramList.OnCloseListener
+                        public final void onClose() {
+                            Log.i(TunerAdapter.TAG, "Empty closeListener in programListObserver");
+                        }
+                    });
             throw new RuntimeException("Service died", ex);
         } catch (UnsupportedOperationException e) {
             Log.i(TAG, "Program list is not supported with this hardware");
@@ -376,7 +390,8 @@ final class TunerAdapter extends RadioTuner {
     @Override // android.hardware.radio.RadioTuner
     public Map<String, String> setParameters(Map<String, String> parameters) {
         try {
-            return this.mTuner.setParameters((Map) Objects.requireNonNull(parameters, "Parameters cannot be null"));
+            return this.mTuner.setParameters(
+                    (Map) Objects.requireNonNull(parameters, "Parameters cannot be null"));
         } catch (RemoteException e) {
             throw new RuntimeException("Service died", e);
         }
@@ -385,7 +400,8 @@ final class TunerAdapter extends RadioTuner {
     @Override // android.hardware.radio.RadioTuner
     public Map<String, String> getParameters(List<String> keys) {
         try {
-            return this.mTuner.getParameters((List) Objects.requireNonNull(keys, "Keys cannot be null"));
+            return this.mTuner.getParameters(
+                    (List) Objects.requireNonNull(keys, "Keys cannot be null"));
         } catch (RemoteException e) {
             throw new RuntimeException("Service died", e);
         }

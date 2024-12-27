@@ -19,6 +19,7 @@ import com.android.internal.org.bouncycastle.cert.X509CRLHolder;
 import com.android.internal.org.bouncycastle.cert.X509CertificateHolder;
 import com.android.internal.org.bouncycastle.util.Encodable;
 import com.android.internal.org.bouncycastle.util.Store;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -66,26 +67,32 @@ public class CMSSignedData implements Encodable {
         this(CMSUtils.readContentInfo(sigData));
     }
 
-    public CMSSignedData(final CMSProcessable signedContent, ContentInfo sigData) throws CMSException {
+    public CMSSignedData(final CMSProcessable signedContent, ContentInfo sigData)
+            throws CMSException {
         if (signedContent instanceof CMSTypedData) {
             this.signedContent = (CMSTypedData) signedContent;
         } else {
-            this.signedContent = new CMSTypedData() { // from class: com.android.internal.org.bouncycastle.cms.CMSSignedData.1
-                @Override // com.android.internal.org.bouncycastle.cms.CMSTypedData
-                public ASN1ObjectIdentifier getContentType() {
-                    return CMSSignedData.this.signedData.getEncapContentInfo().getContentType();
-                }
+            this.signedContent =
+                    new CMSTypedData() { // from class:
+                                         // com.android.internal.org.bouncycastle.cms.CMSSignedData.1
+                        @Override // com.android.internal.org.bouncycastle.cms.CMSTypedData
+                        public ASN1ObjectIdentifier getContentType() {
+                            return CMSSignedData.this
+                                    .signedData
+                                    .getEncapContentInfo()
+                                    .getContentType();
+                        }
 
-                @Override // com.android.internal.org.bouncycastle.cms.CMSProcessable
-                public void write(OutputStream out) throws IOException, CMSException {
-                    signedContent.write(out);
-                }
+                        @Override // com.android.internal.org.bouncycastle.cms.CMSProcessable
+                        public void write(OutputStream out) throws IOException, CMSException {
+                            signedContent.write(out);
+                        }
 
-                @Override // com.android.internal.org.bouncycastle.cms.CMSProcessable
-                public Object getContent() {
-                    return signedContent.getContent();
-                }
-            };
+                        @Override // com.android.internal.org.bouncycastle.cms.CMSProcessable
+                        public Object getContent() {
+                            return signedContent.getContent();
+                        }
+                    };
         }
         this.contentInfo = sigData;
         this.signedData = getSignedData();
@@ -103,10 +110,15 @@ public class CMSSignedData implements Encodable {
         ASN1Encodable content = this.signedData.getEncapContentInfo().getContent();
         if (content != null) {
             if (content instanceof ASN1OctetString) {
-                this.signedContent = new CMSProcessableByteArray(this.signedData.getEncapContentInfo().getContentType(), ((ASN1OctetString) content).getOctets());
+                this.signedContent =
+                        new CMSProcessableByteArray(
+                                this.signedData.getEncapContentInfo().getContentType(),
+                                ((ASN1OctetString) content).getOctets());
                 return;
             } else {
-                this.signedContent = new PKCS7ProcessableObject(this.signedData.getEncapContentInfo().getContentType(), content);
+                this.signedContent =
+                        new PKCS7ProcessableObject(
+                                this.signedData.getEncapContentInfo().getContentType(), content);
                 return;
             }
         }
@@ -135,9 +147,11 @@ public class CMSSignedData implements Encodable {
             List signerInfos = new ArrayList();
             for (int i = 0; i != s.size(); i++) {
                 SignerInfo info = SignerInfo.getInstance(s.getObjectAt(i));
-                ASN1ObjectIdentifier contentType = this.signedData.getEncapContentInfo().getContentType();
+                ASN1ObjectIdentifier contentType =
+                        this.signedData.getEncapContentInfo().getContentType();
                 if (this.hashes == null) {
-                    signerInfos.add(new SignerInformation(info, contentType, this.signedContent, null));
+                    signerInfos.add(
+                            new SignerInformation(info, contentType, this.signedContent, null));
                 } else {
                     Object obj = this.hashes.keySet().iterator().next();
                     if (obj instanceof String) {
@@ -157,11 +171,13 @@ public class CMSSignedData implements Encodable {
     }
 
     public boolean isDetachedSignature() {
-        return this.signedData.getEncapContentInfo().getContent() == null && this.signedData.getSignerInfos().size() > 0;
+        return this.signedData.getEncapContentInfo().getContent() == null
+                && this.signedData.getSignerInfos().size() > 0;
     }
 
     public boolean isCertificateManagementMessage() {
-        return this.signedData.getEncapContentInfo().getContent() == null && this.signedData.getSignerInfos().size() == 0;
+        return this.signedData.getEncapContentInfo().getContent() == null
+                && this.signedData.getSignerInfos().size() == 0;
     }
 
     public Store<X509CertificateHolder> getCertificates() {
@@ -177,7 +193,8 @@ public class CMSSignedData implements Encodable {
     }
 
     public Set<AlgorithmIdentifier> getDigestAlgorithmIDs() {
-        Set<AlgorithmIdentifier> digests = new HashSet<>(this.signedData.getDigestAlgorithms().size());
+        Set<AlgorithmIdentifier> digests =
+                new HashSet<>(this.signedData.getDigestAlgorithms().size());
         Enumeration en = this.signedData.getDigestAlgorithms().getObjects();
         while (en.hasMoreElements()) {
             digests.add(AlgorithmIdentifier.getInstance(en.nextElement()));
@@ -206,7 +223,8 @@ public class CMSSignedData implements Encodable {
         return this.contentInfo.getEncoded(encoding);
     }
 
-    public static CMSSignedData replaceSigners(CMSSignedData signedData, SignerInformationStore signerInformationStore) {
+    public static CMSSignedData replaceSigners(
+            CMSSignedData signedData, SignerInformationStore signerInformationStore) {
         CMSSignedData cms = new CMSSignedData(signedData);
         cms.signerInfoStore = signerInformationStore;
         ASN1EncodableVector digestAlgs = new ASN1EncodableVector();
@@ -230,7 +248,9 @@ public class CMSSignedData implements Encodable {
         return cms;
     }
 
-    public static CMSSignedData replaceCertificatesAndCRLs(CMSSignedData signedData, Store certificates, Store attrCerts, Store revocations) throws CMSException {
+    public static CMSSignedData replaceCertificatesAndCRLs(
+            CMSSignedData signedData, Store certificates, Store attrCerts, Store revocations)
+            throws CMSException {
         CMSSignedData cms = new CMSSignedData(signedData);
         ASN1Set certSet = null;
         ASN1Set crlSet = null;
@@ -253,7 +273,13 @@ public class CMSSignedData implements Encodable {
                 crlSet = set2;
             }
         }
-        cms.signedData = new SignedData(signedData.signedData.getDigestAlgorithms(), signedData.signedData.getEncapContentInfo(), certSet, crlSet, signedData.signedData.getSignerInfos());
+        cms.signedData =
+                new SignedData(
+                        signedData.signedData.getDigestAlgorithms(),
+                        signedData.signedData.getEncapContentInfo(),
+                        certSet,
+                        crlSet,
+                        signedData.signedData.getSignerInfos());
         cms.contentInfo = new ContentInfo(cms.contentInfo.getContentType(), cms.signedData);
         return cms;
     }

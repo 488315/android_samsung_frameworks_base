@@ -18,11 +18,11 @@ import android.util.ArraySet;
 import android.util.Slog;
 import android.view.MotionEvent;
 import android.window.WindowContainerToken;
+
 import com.android.internal.os.SomeArgs;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.am.ActivityManagerService;
-import com.android.server.wm.DexController;
-import com.android.server.wm.WindowContainer;
+
 import com.samsung.android.core.CoreSaLogger;
 import com.samsung.android.multiwindow.IDexSnappingCallback;
 import com.samsung.android.multiwindow.IDexTransientCaptionDelayListener;
@@ -33,6 +33,7 @@ import com.samsung.android.multiwindow.MultiWindowCoreState;
 import com.samsung.android.multiwindow.SurfaceFreezerSnapshot;
 import com.samsung.android.multiwindow.TaskOrganizerInfo;
 import com.samsung.android.rune.CoreRune;
+
 import java.io.FileDescriptor;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -61,12 +62,15 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
                     DexDockingController dexDockingController = this.mAtm.mDexDockingController;
                     dexDockingController.getClass();
                     final int i5 = i == 1 ? 2 : 1;
-                    Task task = dexDockingController.mAtm.mRootWindowContainer.getTask(new Predicate() { // from class: com.android.server.wm.DexDockingController$$ExternalSyntheticLambda1
-                        @Override // java.util.function.Predicate
-                        public final boolean test(Object obj) {
-                            return ((Task) obj).getDexTaskDockingState() == i5;
-                        }
-                    });
+                    Task task =
+                            dexDockingController.mAtm.mRootWindowContainer.getTask(
+                                    new Predicate() { // from class:
+                                                      // com.android.server.wm.DexDockingController$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            return ((Task) obj).getDexTaskDockingState() == i5;
+                                        }
+                                    });
                     if (task == null) {
                         i4 = -1;
                     } else {
@@ -101,12 +105,18 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
                     ActivityRecord isInRootTaskLocked = ActivityRecord.isInRootTaskLocked(iBinder);
                     Task task = isInRootTaskLocked != null ? isInRootTaskLocked.task : null;
                     if (task != null && task.inSplitScreenWindowingMode()) {
-                        if (task.getDisplayArea() != null && (task.getCreatedByOrganizerTask() == null || task.equals(task.getCreatedByOrganizerTask().getTopMostTask()))) {
-                            TaskOrganizerController taskOrganizerController = this.mAtm.mTaskOrganizerController;
+                        if (task.getDisplayArea() != null
+                                && (task.getCreatedByOrganizerTask() == null
+                                        || task.equals(
+                                                task.getCreatedByOrganizerTask()
+                                                        .getTopMostTask()))) {
+                            TaskOrganizerController taskOrganizerController =
+                                    this.mAtm.mTaskOrganizerController;
                             taskOrganizerController.getClass();
                             TaskOrganizerInfo taskOrganizerInfo = new TaskOrganizerInfo();
                             taskOrganizerInfo.changeToHorizontalSplitLayout();
-                            taskOrganizerController.onSplitLayoutChangeRequested(taskOrganizerInfo.toBundle());
+                            taskOrganizerController.onSplitLayoutChangeRequested(
+                                    taskOrganizerInfo.toBundle());
                             WindowManagerService.resetPriorityAfterLockedSection();
                             return;
                         }
@@ -130,7 +140,9 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
-            Slog.w("MultiTaskingBinder", "changeToHorizontalSplitLayout called from pid : " + Binder.getCallingPid());
+            Slog.w(
+                    "MultiTaskingBinder",
+                    "changeToHorizontalSplitLayout called from pid : " + Binder.getCallingPid());
         }
     }
 
@@ -171,7 +183,9 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
                             boolean z2 = false;
                             Task orCreateRootHomeTask = displayArea.getOrCreateRootHomeTask(false);
                             if (!CoreRune.MW_MULTI_SPLIT || !displayArea.isMultiSplitActive()) {
-                                if (task2.getCreatedByOrganizerTask() != null && task2.getCreatedByOrganizerTask().getTopChild() == task2) {
+                                if (task2.getCreatedByOrganizerTask() != null
+                                        && task2.getCreatedByOrganizerTask().getTopChild()
+                                                == task2) {
                                     if (task2.getStageType() == 2) {
                                         task = displayArea.mRootMainStageTask.getTopLeafTask();
                                     } else if (task2.getStageType() == 1) {
@@ -179,39 +193,64 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
                                     }
                                     if (task != null && !task.mCreatedByOrganizer) {
                                         final Task[] taskArr = new Task[1];
-                                        displayArea.forAllLeafTasks(new Predicate() { // from class: com.android.server.wm.MultiTaskingBinder$$ExternalSyntheticLambda1
-                                            @Override // java.util.function.Predicate
-                                            public final boolean test(Object obj) {
-                                                Task[] taskArr2 = taskArr;
-                                                Task task3 = (Task) obj;
-                                                if (task3.inMultiWindowMode() || task3.topRunningActivity(false) == null) {
-                                                    return false;
-                                                }
-                                                taskArr2[0] = task3;
-                                                return true;
-                                            }
-                                        });
+                                        displayArea.forAllLeafTasks(
+                                                new Predicate() { // from class:
+                                                                  // com.android.server.wm.MultiTaskingBinder$$ExternalSyntheticLambda1
+                                                    @Override // java.util.function.Predicate
+                                                    public final boolean test(Object obj) {
+                                                        Task[] taskArr2 = taskArr;
+                                                        Task task3 = (Task) obj;
+                                                        if (task3.inMultiWindowMode()
+                                                                || task3.topRunningActivity(false)
+                                                                        == null) {
+                                                            return false;
+                                                        }
+                                                        taskArr2[0] = task3;
+                                                        return true;
+                                                    }
+                                                });
                                         Task task3 = taskArr[0];
-                                        if (task3 == null || task3.compareTo((WindowContainer) task) <= 0) {
+                                        if (task3 == null
+                                                || task3.compareTo((WindowContainer) task) <= 0) {
                                             z2 = true;
                                         }
-                                        displayArea.onStageSplitScreenDismissed(task.getTopMostTask(), z2);
+                                        displayArea.onStageSplitScreenDismissed(
+                                                task.getTopMostTask(), z2);
                                         WindowManagerService.resetPriorityAfterLockedSection();
                                         return;
                                     }
-                                    Slog.w("MultiTaskingBinder", "dismissSplitTask: failed, couldn't found opposite task.");
+                                    Slog.w(
+                                            "MultiTaskingBinder",
+                                            "dismissSplitTask: failed, couldn't found opposite"
+                                                + " task.");
                                 }
-                                Slog.w("MultiTaskingBinder", "dismissSplitTask: failed, controlpanel is not top child");
-                            } else if (task2.inSplitScreenWindowingMode() && orCreateRootHomeTask != null && orCreateRootHomeTask.getRootTask().equals(task2.getRootTask())) {
+                                Slog.w(
+                                        "MultiTaskingBinder",
+                                        "dismissSplitTask: failed, controlpanel is not top child");
+                            } else if (task2.inSplitScreenWindowingMode()
+                                    && orCreateRootHomeTask != null
+                                    && orCreateRootHomeTask
+                                            .getRootTask()
+                                            .equals(task2.getRootTask())) {
                                 this.mAtm.deferWindowLayout();
                                 try {
-                                    orCreateRootHomeTask.getRootTask().positionChildAt(orCreateRootHomeTask.getRootTask().getChildCount() - 2, orCreateRootHomeTask, true);
+                                    orCreateRootHomeTask
+                                            .getRootTask()
+                                            .positionChildAt(
+                                                    orCreateRootHomeTask
+                                                                    .getRootTask()
+                                                                    .getChildCount()
+                                                            - 2,
+                                                    orCreateRootHomeTask,
+                                                    true);
                                     orCreateRootHomeTask.getRootTask().moveTaskToBack(task2, null);
                                 } finally {
                                     this.mAtm.continueWindowLayout();
                                 }
                             } else {
-                                Slog.w("MultiTaskingBinder", "dismissSplitTask: failed, now multi-split");
+                                Slog.w(
+                                        "MultiTaskingBinder",
+                                        "dismissSplitTask: failed, now multi-split");
                             }
                             WindowManagerService.resetPriorityAfterLockedSection();
                         }
@@ -262,13 +301,20 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
     }
 
     public final List getAllowedMultiWindowPackageList() {
-        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository = this.mAtm.mMwSupportPolicyController.mAllowListRepository;
-        if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository == null) {
+        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository =
+                        this.mAtm.mMwSupportPolicyController.mAllowListRepository;
+        if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                == null) {
             return Collections.emptyList();
         }
         ArrayList arrayList = new ArrayList();
-        synchronized (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository.mLock) {
-            arrayList.addAll(multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository.getPackages(false));
+        synchronized (
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                        .mLock) {
+            arrayList.addAll(
+                    multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                            .getPackages(false));
         }
         return arrayList;
     }
@@ -277,7 +323,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
     public final int getDexTaskInfoFlags(IBinder iBinder) {
         Task task;
         if (UserHandle.isIsolated(Binder.getCallingUid())) {
-            throw new SecurityException("Isolated process not allowed to call ".concat("getDexTaskInfoFlags"));
+            throw new SecurityException(
+                    "Isolated process not allowed to call ".concat("getDexTaskInfoFlags"));
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -300,7 +347,9 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return i;
                     }
-                    Slog.w("MultiTaskingBinder", "getDexTaskInfoFlags: cannot find ActivityRecord, token=" + iBinder);
+                    Slog.w(
+                            "MultiTaskingBinder",
+                            "getDexTaskInfoFlags: cannot find ActivityRecord, token=" + iBinder);
                     WindowManagerService.resetPriorityAfterLockedSection();
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return 0;
@@ -319,13 +368,17 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             return true;
         }
         if (Binder.getCallingUid() != 1000) {
-            throw new SecurityException("Non-System UID cannot call getEmbedActivityPackageEnabled");
+            throw new SecurityException(
+                    "Non-System UID cannot call getEmbedActivityPackageEnabled");
         }
         if (i != UserHandle.getCallingUserId()) {
-            this.mAtm.mAmInternal.enforceCallingPermission("android.permission.INTERACT_ACROSS_USERS", "getEmbedActivityPackageEnabled");
+            this.mAtm.mAmInternal.enforceCallingPermission(
+                    "android.permission.INTERACT_ACROSS_USERS", "getEmbedActivityPackageEnabled");
         }
         if (TextUtils.isEmpty(str)) {
-            throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("getEmbedActivityPackageEnabled, packageName=", str));
+            throw new IllegalArgumentException(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            "getEmbedActivityPackageEnabled, packageName=", str));
         }
         return this.mAtm.mMultiTaskingController.getEmbedActivityPackageEnabled(str, i);
     }
@@ -342,8 +395,15 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (this.mAtm.mGlobalLockWithoutBoost) {
-                MultiWindowEnableController multiWindowEnableController = this.mAtm.mMultiWindowEnableController;
-                List list = (ArrayList) multiWindowEnableController.mMWOffRequesters.get(multiWindowEnableController.mAtm.mWindowManager.mCurrentUserId);
+                MultiWindowEnableController multiWindowEnableController =
+                        this.mAtm.mMultiWindowEnableController;
+                List list =
+                        (ArrayList)
+                                multiWindowEnableController.mMWOffRequesters.get(
+                                        multiWindowEnableController
+                                                .mAtm
+                                                .mWindowManager
+                                                .mCurrentUserId);
                 if (list == null) {
                     list = Collections.EMPTY_LIST;
                 }
@@ -390,13 +450,20 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
 
     public final StringParceledListSlice getMultiWindowBlockListApp() {
         ArrayList arrayList;
-        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository = this.mAtm.mMwSupportPolicyController.mBlockListRepository;
-        if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository == null) {
+        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository =
+                        this.mAtm.mMwSupportPolicyController.mBlockListRepository;
+        if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                == null) {
             arrayList = new ArrayList();
         } else {
             ArrayList arrayList2 = new ArrayList();
-            synchronized (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository.mLock) {
-                arrayList2.addAll(multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository.getPackages(true));
+            synchronized (
+                    multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                            .mLock) {
+                arrayList2.addAll(
+                        multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                                .getPackages(true));
             }
             arrayList = arrayList2;
         }
@@ -410,28 +477,35 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                DisplayContent displayContent = multiTaskingController.mAtm.mRootWindowContainer.getDisplayContent(i);
+                DisplayContent displayContent =
+                        multiTaskingController.mAtm.mRootWindowContainer.getDisplayContent(i);
                 i2 = 0;
                 if (displayContent == null) {
                     WindowManagerService.resetPriorityAfterLockedSection();
                 } else {
-                    int i3 = displayContent.getDefaultTaskDisplayArea().isSplitScreenModeActivated() ? 2 : 0;
+                    int i3 =
+                            displayContent.getDefaultTaskDisplayArea().isSplitScreenModeActivated()
+                                    ? 2
+                                    : 0;
                     final int[] iArr = new int[1];
-                    displayContent.forAllRootTasks(new Consumer() { // from class: com.android.server.wm.MultiTaskingController$$ExternalSyntheticLambda11
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            int[] iArr2 = iArr;
-                            Task task = (Task) obj;
-                            if (task.topRunningActivityLocked() != null) {
-                                int windowingMode = task.getWindowingMode();
-                                if (windowingMode == 2) {
-                                    iArr2[0] = iArr2[0] | 4;
-                                } else if (windowingMode == 5 && !task.isUnderHomeRootTask()) {
-                                    iArr2[0] = iArr2[0] | 1;
+                    displayContent.forAllRootTasks(
+                            new Consumer() { // from class:
+                                             // com.android.server.wm.MultiTaskingController$$ExternalSyntheticLambda11
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    int[] iArr2 = iArr;
+                                    Task task = (Task) obj;
+                                    if (task.topRunningActivityLocked() != null) {
+                                        int windowingMode = task.getWindowingMode();
+                                        if (windowingMode == 2) {
+                                            iArr2[0] = iArr2[0] | 4;
+                                        } else if (windowingMode == 5
+                                                && !task.isUnderHomeRootTask()) {
+                                            iArr2[0] = iArr2[0] | 1;
+                                        }
+                                    }
                                 }
-                            }
-                        }
-                    });
+                            });
                     i2 = i3 | iArr[0];
                     WindowManagerService.resetPriorityAfterLockedSection();
                 }
@@ -515,7 +589,9 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         L6e:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.MultiTaskingBinder.getResizeMode(android.content.pm.ActivityInfo):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.MultiTaskingBinder.getResizeMode(android.content.pm.ActivityInfo):int");
     }
 
     public final List getSplitActivityAllowPackages() {
@@ -533,14 +609,16 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             return List.of();
         }
         if (Binder.getCallingUid() != 1000) {
-            throw new SecurityException("Non-System UID cannot call getSupportEmbedActivityPackages");
+            throw new SecurityException(
+                    "Non-System UID cannot call getSupportEmbedActivityPackages");
         }
         MultiTaskingController multiTaskingController = this.mAtm.mMultiTaskingController;
         multiTaskingController.getClass();
         if (!z) {
             return List.of();
         }
-        ActivityEmbeddedPackageRepository activityEmbeddedPackageRepository = multiTaskingController.mActivityEmbeddedPackageRepository;
+        ActivityEmbeddedPackageRepository activityEmbeddedPackageRepository =
+                multiTaskingController.mActivityEmbeddedPackageRepository;
         synchronized (activityEmbeddedPackageRepository) {
             list = activityEmbeddedPackageRepository.mRepository;
         }
@@ -548,7 +626,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
     }
 
     public final SurfaceFreezerSnapshot getSurfaceFreezerSnapshot(int i) {
-        this.mAtm.mAmInternal.enforceCallingPermission("android.permission.READ_FRAME_BUFFER", "getSurfaceFreezerSnapshot");
+        this.mAtm.mAmInternal.enforceCallingPermission(
+                "android.permission.READ_FRAME_BUFFER", "getSurfaceFreezerSnapshot");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             return this.mAtm.mNaturalSwitchingController.getSurfaceFreezerSnapshot(i);
@@ -572,8 +651,27 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         activityTaskManagerService.getClass();
         int callingUid = Binder.getCallingUid();
         int callingPid = Binder.getCallingPid();
-        boolean z = ActivityManagerService.checkComponentPermission(callingPid, callingUid, "android.permission.INTERACT_ACROSS_USERS", 0, -1, true) == 0 || ActivityManagerService.checkComponentPermission(callingPid, callingUid, "android.permission.INTERACT_ACROSS_USERS_FULL", 0, -1, true) == 0;
-        int[] profileIds = activityTaskManagerService.getUserManager().getProfileIds(null, true, false, UserHandle.getUserId(callingUid));
+        boolean z =
+                ActivityManagerService.checkComponentPermission(
+                                        callingPid,
+                                        callingUid,
+                                        "android.permission.INTERACT_ACROSS_USERS",
+                                        0,
+                                        -1,
+                                        true)
+                                == 0
+                        || ActivityManagerService.checkComponentPermission(
+                                        callingPid,
+                                        callingUid,
+                                        "android.permission.INTERACT_ACROSS_USERS_FULL",
+                                        0,
+                                        -1,
+                                        true)
+                                == 0;
+        int[] profileIds =
+                activityTaskManagerService
+                        .getUserManager()
+                        .getProfileIds(null, true, false, UserHandle.getUserId(callingUid));
         ArraySet arraySet = new ArraySet();
         for (int i : profileIds) {
             arraySet.add(Integer.valueOf(i));
@@ -583,7 +681,19 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                activityTaskManagerService.mTaskSupervisor.mRunningTasks.getTasks(100, arrayList, (z ? 4 : 0) | (activityTaskManagerService.isGetTasksAllowed(callingPid, callingUid, "getVisibleTasks") ? 2 : 0), activityTaskManagerService.mRecentTasks, activityTaskManagerService.mRootWindowContainer, callingUid, arraySet, true);
+                activityTaskManagerService.mTaskSupervisor.mRunningTasks.getTasks(
+                        100,
+                        arrayList,
+                        (z ? 4 : 0)
+                                | (activityTaskManagerService.isGetTasksAllowed(
+                                                callingPid, callingUid, "getVisibleTasks")
+                                        ? 2
+                                        : 0),
+                        activityTaskManagerService.mRecentTasks,
+                        activityTaskManagerService.mRootWindowContainer,
+                        callingUid,
+                        arraySet,
+                        true);
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
                 throw th;
@@ -640,7 +750,10 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
                     Task task = this.mAtm.mTaskSupervisor.mRecentTasks.getTask(i);
                     Task task2 = this.mAtm.mTaskSupervisor.mRecentTasks.getTask(i2);
                     if (!CoreRune.MW_MULTI_SPLIT_RECENT_TASKS) {
-                        if (task != null && task2 != null && task.supportsMultiWindowInDefaultDisplayArea() && task2.supportsMultiWindowInDefaultDisplayArea()) {
+                        if (task != null
+                                && task2 != null
+                                && task.supportsMultiWindowInDefaultDisplayArea()
+                                && task2.supportsMultiWindowInDefaultDisplayArea()) {
                             WindowManagerService.resetPriorityAfterLockedSection();
                             return true;
                         }
@@ -649,7 +762,10 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
                         return false;
                     }
                     if (i3 == -1) {
-                        if (task != null && task2 != null && task.supportsMultiWindowInDefaultDisplayArea() && task2.supportsMultiWindowInDefaultDisplayArea()) {
+                        if (task != null
+                                && task2 != null
+                                && task.supportsMultiWindowInDefaultDisplayArea()
+                                && task2.supportsMultiWindowInDefaultDisplayArea()) {
                             WindowManagerService.resetPriorityAfterLockedSection();
                             return true;
                         }
@@ -658,7 +774,12 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
                         return false;
                     }
                     Task task3 = this.mAtm.mTaskSupervisor.mRecentTasks.getTask(i3);
-                    if (task != null && task2 != null && task3 != null && task.supportsMultiWindowInDefaultDisplayArea() && task2.supportsMultiWindowInDefaultDisplayArea() && task3.supportsMultiWindowInDefaultDisplayArea()) {
+                    if (task != null
+                            && task2 != null
+                            && task3 != null
+                            && task.supportsMultiWindowInDefaultDisplayArea()
+                            && task2.supportsMultiWindowInDefaultDisplayArea()
+                            && task3.supportsMultiWindowInDefaultDisplayArea()) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return true;
                     }
@@ -676,8 +797,13 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
     }
 
     public final boolean isAllowedMultiWindowPackage(String str) {
-        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository = this.mAtm.mMwSupportPolicyController.mAllowListRepository;
-        return multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository != null && multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository.containsPackage(str, false);
+        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository =
+                        this.mAtm.mMwSupportPolicyController.mAllowListRepository;
+        return multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                        != null
+                && multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                        .containsPackage(str, false);
     }
 
     public final boolean isCornerGestureRunning() {
@@ -687,7 +813,9 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    MultiWindowPointerEventListener multiWindowPointerEventListener = this.mAtm.mWindowManager.getDefaultDisplayContentLocked().mMultiWindowPointerEventListener;
+                    MultiWindowPointerEventListener multiWindowPointerEventListener =
+                            this.mAtm.mWindowManager.getDefaultDisplayContentLocked()
+                                    .mMultiWindowPointerEventListener;
                     if (multiWindowPointerEventListener.isAllowCornerGestureState()) {
                         z = multiWindowPointerEventListener.mMultiWindowEdgeDetector.isEdge();
                     }
@@ -712,8 +840,13 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    TaskDisplayArea defaultTaskDisplayArea = this.mAtm.mRootWindowContainer.mDefaultDisplay.getDefaultTaskDisplayArea();
-                    Task task = defaultTaskDisplayArea != null ? defaultTaskDisplayArea.mRootSideStageTask : null;
+                    TaskDisplayArea defaultTaskDisplayArea =
+                            this.mAtm.mRootWindowContainer.mDefaultDisplay
+                                    .getDefaultTaskDisplayArea();
+                    Task task =
+                            defaultTaskDisplayArea != null
+                                    ? defaultTaskDisplayArea.mRootSideStageTask
+                                    : null;
                     if (task != null && task.hasChild()) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return false;
@@ -742,7 +875,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    isFlexPanelRunning = this.mAtm.mRootWindowContainer.mDefaultDisplay.isFlexPanelRunning();
+                    isFlexPanelRunning =
+                            this.mAtm.mRootWindowContainer.mDefaultDisplay.isFlexPanelRunning();
                 } finally {
                 }
             }
@@ -754,8 +888,13 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
     }
 
     public final boolean isMultiWindowBlockListApp(String str) {
-        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository = this.mAtm.mMwSupportPolicyController.mBlockListRepository;
-        return multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository != null && multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository.containsPackage(str, true);
+        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository =
+                        this.mAtm.mMwSupportPolicyController.mBlockListRepository;
+        return multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                        != null
+                && multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                        .containsPackage(str, true);
     }
 
     public final boolean isSplitImmersiveModeEnabled() {
@@ -764,9 +903,12 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    MultiWindowEnableController multiWindowEnableController = this.mAtm.mMultiWindowEnableController;
+                    MultiWindowEnableController multiWindowEnableController =
+                            this.mAtm.mMultiWindowEnableController;
                     if (multiWindowEnableController.mPref == null) {
-                        multiWindowEnableController.mPref = multiWindowEnableController.mAtm.mContext.getSharedPreferences("multiwindow.property", 0);
+                        multiWindowEnableController.mPref =
+                                multiWindowEnableController.mAtm.mContext.getSharedPreferences(
+                                        "multiwindow.property", 0);
                     }
                     z = multiWindowEnableController.mPref.getInt("mw_immersive_mode", 0) == 1;
                 } finally {
@@ -786,9 +928,13 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    MultiWindowPointerEventListener multiWindowPointerEventListener = this.mAtm.mWindowManager.getDefaultDisplayContentLocked().mMultiWindowPointerEventListener;
+                    MultiWindowPointerEventListener multiWindowPointerEventListener =
+                            this.mAtm.mWindowManager.getDefaultDisplayContentLocked()
+                                    .mMultiWindowPointerEventListener;
                     if (multiWindowPointerEventListener.isAllowCornerGestureState()) {
-                        z = multiWindowPointerEventListener.mMultiWindowEdgeDetector.onTouchEvent(motionEvent);
+                        z =
+                                multiWindowPointerEventListener.mMultiWindowEdgeDetector
+                                        .onTouchEvent(motionEvent);
                     }
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -809,7 +955,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    isVisibleTaskByTaskIdInDexDisplay = this.mAtm.mMultiTaskingController.isVisibleTaskByTaskIdInDexDisplay(i);
+                    isVisibleTaskByTaskIdInDexDisplay =
+                            this.mAtm.mMultiTaskingController.isVisibleTaskByTaskIdInDexDisplay(i);
                 } finally {
                 }
             }
@@ -829,7 +976,9 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    isVisibleTaskInDexDisplay = this.mAtm.mMultiTaskingController.isVisibleTaskInDexDisplay(pendingIntent);
+                    isVisibleTaskInDexDisplay =
+                            this.mAtm.mMultiTaskingController.isVisibleTaskInDexDisplay(
+                                    pendingIntent);
                 } finally {
                 }
             }
@@ -891,31 +1040,51 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    if (ActivityManagerService.checkComponentPermission(callingPid, callingUid, "android.permission.MANAGE_ACTIVITY_TASKS", 0, -1, true) != 0) {
-                        Slog.w("MultiTaskingBinder", "Permission Denial: minimizeTaskById, caller:" + callingUid);
+                    if (ActivityManagerService.checkComponentPermission(
+                                    callingPid,
+                                    callingUid,
+                                    "android.permission.MANAGE_ACTIVITY_TASKS",
+                                    0,
+                                    -1,
+                                    true)
+                            != 0) {
+                        Slog.w(
+                                "MultiTaskingBinder",
+                                "Permission Denial: minimizeTaskById, caller:" + callingUid);
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return false;
                     }
-                    Task anyTaskForId = this.mAtm.mRootWindowContainer.anyTaskForId(i, 0, null, false);
+                    Task anyTaskForId =
+                            this.mAtm.mRootWindowContainer.anyTaskForId(i, 0, null, false);
                     if (anyTaskForId == null) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return false;
                     }
                     if (CoreRune.MW_FREEFORM_MINIMIZE_SA_LOGGING && !anyTaskForId.isDexMode()) {
                         final int[] iArr = {1};
-                        this.mAtm.mRootWindowContainer.mDefaultDisplay.getDefaultTaskDisplayArea().forAllLeafTasks(new Consumer() { // from class: com.android.server.wm.MultiTaskingBinder$$ExternalSyntheticLambda2
-                            @Override // java.util.function.Consumer
-                            public final void accept(Object obj) {
-                                int[] iArr2 = iArr;
-                                Task task = (Task) obj;
-                                if (task.inFreeformWindowingMode() && task.isMinimized()) {
-                                    iArr2[0] = iArr2[0] + 1;
-                                }
-                            }
-                        }, true);
+                        this.mAtm
+                                .mRootWindowContainer
+                                .mDefaultDisplay
+                                .getDefaultTaskDisplayArea()
+                                .forAllLeafTasks(
+                                        new Consumer() { // from class:
+                                                         // com.android.server.wm.MultiTaskingBinder$$ExternalSyntheticLambda2
+                                            @Override // java.util.function.Consumer
+                                            public final void accept(Object obj) {
+                                                int[] iArr2 = iArr;
+                                                Task task = (Task) obj;
+                                                if (task.inFreeformWindowingMode()
+                                                        && task.isMinimized()) {
+                                                    iArr2[0] = iArr2[0] + 1;
+                                                }
+                                            }
+                                        },
+                                        true);
                         CoreSaLogger.logForAdvanced("2001", String.valueOf(iArr[0]));
                     }
-                    boolean minimizeTaskLocked = this.mAtm.mMultiTaskingController.minimizeTaskLocked(-1, -1, anyTaskForId, true);
+                    boolean minimizeTaskLocked =
+                            this.mAtm.mMultiTaskingController.minimizeTaskLocked(
+                                    -1, -1, anyTaskForId, true);
                     WindowManagerService.resetPriorityAfterLockedSection();
                     return minimizeTaskLocked;
                 } catch (Throwable th) {
@@ -937,7 +1106,9 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    minimizeTaskLocked = this.mAtm.mMultiTaskingController.minimizeTaskLocked(i2, i3, this.mAtm.mRootWindowContainer.anyTaskForId(i), z);
+                    minimizeTaskLocked =
+                            this.mAtm.mMultiTaskingController.minimizeTaskLocked(
+                                    i2, i3, this.mAtm.mRootWindowContainer.anyTaskForId(i), z);
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
@@ -959,7 +1130,9 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
                 try {
                     DragState dragState = this.mAtm.mWindowManager.mDragDropController.mDragState;
                     if (dragState != null && dragState.mDragSplitAppIconHasDrawable != z) {
-                        dragState.mTransaction.setAlpha(dragState.mSurfaceControl, z ? FullScreenMagnificationGestureHandler.MAX_SCALE : 0.3f);
+                        dragState.mTransaction.setAlpha(
+                                dragState.mSurfaceControl,
+                                z ? FullScreenMagnificationGestureHandler.MAX_SCALE : 0.3f);
                         dragState.mDragSplitAppIconHasDrawable = z;
                     }
                 } catch (Throwable th) {
@@ -981,7 +1154,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    Task anyTaskForId = freeformController.mAtm.mRootWindowContainer.anyTaskForId(i);
+                    Task anyTaskForId =
+                            freeformController.mAtm.mRootWindowContainer.anyTaskForId(i);
                     if (anyTaskForId != null) {
                         freeformController.mFreeformContainerPoint.set(pointF);
                         freeformController.notifyFreeformMinimizeAnimationEnd(anyTaskForId);
@@ -996,14 +1170,28 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
+    public final void onShellCommand(
+            FileDescriptor fileDescriptor,
+            FileDescriptor fileDescriptor2,
+            FileDescriptor fileDescriptor3,
+            String[] strArr,
+            ShellCallback shellCallback,
+            ResultReceiver resultReceiver) {
         int callingUid = Binder.getCallingUid();
         if (callingUid != 2000 && callingUid != 0) {
             throw new SecurityException("Caller must be shell");
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            new MultiWindowShellCommand(this.mAtm).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+            new MultiWindowShellCommand(this.mAtm)
+                    .exec(
+                            this,
+                            fileDescriptor,
+                            fileDescriptor2,
+                            fileDescriptor3,
+                            strArr,
+                            shellCallback,
+                            resultReceiver);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -1018,7 +1206,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    preventNaturalSwitching = this.mAtm.mNaturalSwitchingController.preventNaturalSwitching(i);
+                    preventNaturalSwitching =
+                            this.mAtm.mNaturalSwitchingController.preventNaturalSwitching(i);
                 } finally {
                 }
             }
@@ -1030,19 +1219,22 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
     }
 
     public final void registerDexSnappingCallback(IDexSnappingCallback iDexSnappingCallback) {
-        this.mAtm.mAmInternal.enforceCallingPermission("android.permission.REAL_GET_TASKS", "registerDexSnappingCallback()");
+        this.mAtm.mAmInternal.enforceCallingPermission(
+                "android.permission.REAL_GET_TASKS", "registerDexSnappingCallback()");
         DexController dexController = this.mAtm.mDexController;
         synchronized (dexController.mDexSnappingCallbacks) {
             dexController.mDexSnappingCallbacks.register(iDexSnappingCallback);
         }
     }
 
-    public final void registerDexTransientDelayListener(IDexTransientCaptionDelayListener iDexTransientCaptionDelayListener) {
+    public final void registerDexTransientDelayListener(
+            IDexTransientCaptionDelayListener iDexTransientCaptionDelayListener) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             DexController dexController = this.mAtm.mDexController;
             synchronized (dexController.mDexTransientCaptionDelayCallbacks) {
-                dexController.mDexTransientCaptionDelayCallbacks.register(iDexTransientCaptionDelayListener);
+                dexController.mDexTransientCaptionDelayCallbacks.register(
+                        iDexTransientCaptionDelayListener);
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1057,12 +1249,15 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         }
     }
 
-    public final void registerRemoteAppTransitionListener(IRemoteAppTransitionListener iRemoteAppTransitionListener) {
+    public final void registerRemoteAppTransitionListener(
+            IRemoteAppTransitionListener iRemoteAppTransitionListener) {
         if (iRemoteAppTransitionListener != null) {
-            ActivityTaskManagerService.enforceTaskPermission("registerRemoteAppTransitionListener()");
+            ActivityTaskManagerService.enforceTaskPermission(
+                    "registerRemoteAppTransitionListener()");
             MultiTaskingController multiTaskingController = this.mAtm.mMultiTaskingController;
             synchronized (multiTaskingController.mRemoteAppTransitionListeners) {
-                multiTaskingController.mRemoteAppTransitionListeners.register(iRemoteAppTransitionListener);
+                multiTaskingController.mRemoteAppTransitionListeners.register(
+                        iRemoteAppTransitionListener);
             }
         }
     }
@@ -1089,7 +1284,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    this.mAtm.mDexDockingController.resizeOtherTaskIfNeeded(this.mAtm.mRootWindowContainer.anyTaskForId(i), rect);
+                    this.mAtm.mDexDockingController.resizeOtherTaskIfNeeded(
+                            this.mAtm.mRootWindowContainer.anyTaskForId(i), rect);
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
@@ -1102,7 +1298,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
     /* JADX WARN: Multi-variable type inference failed */
     public final void rotateDexCompatTask(IBinder iBinder) {
         if (UserHandle.isIsolated(Binder.getCallingUid())) {
-            throw new SecurityException("Isolated process not allowed to call ".concat("rotateDexCompatTask"));
+            throw new SecurityException(
+                    "Isolated process not allowed to call ".concat("rotateDexCompatTask"));
         }
         WindowManagerGlobalLock windowManagerGlobalLock = this.mAtm.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
@@ -1111,17 +1308,26 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     if (!(iBinder instanceof WindowContainer.RemoteToken)) {
-                        Slog.w("MultiTaskingBinder", "rotateDexCompatTask: token is not RemoteToken, token=" + iBinder);
+                        Slog.w(
+                                "MultiTaskingBinder",
+                                "rotateDexCompatTask: token is not RemoteToken, token=" + iBinder);
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return;
                     }
-                    Task asTask = ((WindowContainer) ((WindowContainer.RemoteToken) iBinder).mWeakRef.get()).asTask();
-                    ActivityRecord activityRecord = asTask != null ? asTask.topRunningActivity(false) : null;
+                    Task asTask =
+                            ((WindowContainer)
+                                            ((WindowContainer.RemoteToken) iBinder).mWeakRef.get())
+                                    .asTask();
+                    ActivityRecord activityRecord =
+                            asTask != null ? asTask.topRunningActivity(false) : null;
                     if (activityRecord != null) {
                         this.mAtm.mDexCompatController.rotateDexCompatTaskLocked(activityRecord);
                         WindowManagerService.resetPriorityAfterLockedSection();
                     } else {
-                        Slog.w("MultiTaskingBinder", "rotateDexCompatTask: cannot find ActivityRecord, token=" + iBinder);
+                        Slog.w(
+                                "MultiTaskingBinder",
+                                "rotateDexCompatTask: cannot find ActivityRecord, token="
+                                        + iBinder);
                         WindowManagerService.resetPriorityAfterLockedSection();
                     }
                 } finally {
@@ -1163,7 +1369,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
 
     public final void setBlockedMinimizeFreeformEnable(boolean z) {
         this.mAtm.mMultiStarController.getClass();
-        MultiStarController.checkMultiStarPackageAndPermission("setBlockedMinimizeFreeformEnable", null);
+        MultiStarController.checkMultiStarPackageAndPermission(
+                "setBlockedMinimizeFreeformEnable", null);
         WindowManagerGlobalLock windowManagerGlobalLock = this.mAtm.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
@@ -1185,14 +1392,19 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    Task anyTaskForId = this.mAtm.mRootWindowContainer.anyTaskForId(i, 0, null, false);
+                    Task anyTaskForId =
+                            this.mAtm.mRootWindowContainer.anyTaskForId(i, 0, null, false);
                     if (anyTaskForId != null && anyTaskForId.inFreeformWindowingMode()) {
-                        Slog.d("MultiTaskingBinder", "setBoostFreeformTaskLayer: t #" + i + ", boost=" + z);
+                        Slog.d(
+                                "MultiTaskingBinder",
+                                "setBoostFreeformTaskLayer: t #" + i + ", boost=" + z);
                         anyTaskForId.setBoostTaskLayerForFreeform(z, true);
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return;
                     }
-                    Slog.w("MultiTaskingBinder", "setBoostFreeformTaskLayer: failed, cannot find t#" + i);
+                    Slog.w(
+                            "MultiTaskingBinder",
+                            "setBoostFreeformTaskLayer: failed, cannot find t#" + i);
                     WindowManagerService.resetPriorityAfterLockedSection();
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1228,28 +1440,33 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         ActivityTaskManagerService.enforceTaskPermission("setCornerGestureEnabledWithSettings");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            this.mAtm.mH.post(new Runnable() { // from class: com.android.server.wm.MultiTaskingBinder$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    MultiTaskingBinder multiTaskingBinder = MultiTaskingBinder.this;
-                    boolean z2 = z;
-                    WindowManagerGlobalLock windowManagerGlobalLock = multiTaskingBinder.mAtm.mGlobalLock;
-                    WindowManagerService.boostPriorityForLockedSection();
-                    synchronized (windowManagerGlobalLock) {
-                        try {
-                            if (MultiWindowCoreState.MW_FREEFORM_CORNER_GESTURE_ENABLED == z2) {
-                                WindowManagerService.resetPriorityAfterLockedSection();
-                            } else {
-                                multiTaskingBinder.mAtm.mMultiWindowEnableController.setCornerGestureEnabled(z2);
-                                WindowManagerService.resetPriorityAfterLockedSection();
+            this.mAtm.mH.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.wm.MultiTaskingBinder$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            MultiTaskingBinder multiTaskingBinder = MultiTaskingBinder.this;
+                            boolean z2 = z;
+                            WindowManagerGlobalLock windowManagerGlobalLock =
+                                    multiTaskingBinder.mAtm.mGlobalLock;
+                            WindowManagerService.boostPriorityForLockedSection();
+                            synchronized (windowManagerGlobalLock) {
+                                try {
+                                    if (MultiWindowCoreState.MW_FREEFORM_CORNER_GESTURE_ENABLED
+                                            == z2) {
+                                        WindowManagerService.resetPriorityAfterLockedSection();
+                                    } else {
+                                        multiTaskingBinder.mAtm.mMultiWindowEnableController
+                                                .setCornerGestureEnabled(z2);
+                                        WindowManagerService.resetPriorityAfterLockedSection();
+                                    }
+                                } catch (Throwable th) {
+                                    WindowManagerService.resetPriorityAfterLockedSection();
+                                    throw th;
+                                }
                             }
-                        } catch (Throwable th) {
-                            WindowManagerService.resetPriorityAfterLockedSection();
-                            throw th;
                         }
-                    }
-                }
-            });
+                    });
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -1282,13 +1499,18 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
     public final void setEmbedActivityPackageEnabled(String str, boolean z, int i) {
         if (CoreRune.MW_EMBED_ACTIVITY_PACKAGE_ENABLED) {
             if (Binder.getCallingUid() != 1000) {
-                throw new SecurityException("Non-System UID cannot call setEmbedActivityPackageEnabled");
+                throw new SecurityException(
+                        "Non-System UID cannot call setEmbedActivityPackageEnabled");
             }
             if (i != UserHandle.getCallingUserId()) {
-                this.mAtm.mAmInternal.enforceCallingPermission("android.permission.INTERACT_ACROSS_USERS", "setEmbedActivityPackageEnabled");
+                this.mAtm.mAmInternal.enforceCallingPermission(
+                        "android.permission.INTERACT_ACROSS_USERS",
+                        "setEmbedActivityPackageEnabled");
             }
             if (TextUtils.isEmpty(str)) {
-                throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("setEmbedActivityPackageEnabled, packageName=", str));
+                throw new IllegalArgumentException(
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                "setEmbedActivityPackageEnabled, packageName=", str));
             }
             this.mAtm.mMultiTaskingController.setEmbedActivityPackageEnabled(str, z, i);
         }
@@ -1340,12 +1562,16 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
     public final void setMultiWindowEnabledForUser(String str, String str2, boolean z, int i) {
         ActivityTaskManagerService.enforceTaskPermission("setMultiWindowEnabledForUser");
         if (i != UserHandle.getCallingUserId()) {
-            this.mAtm.mAmInternal.enforceCallingPermission("android.permission.INTERACT_ACROSS_USERS_FULL", "setMultiWindowEnabledForUser");
+            this.mAtm.mAmInternal.enforceCallingPermission(
+                    "android.permission.INTERACT_ACROSS_USERS_FULL",
+                    "setMultiWindowEnabledForUser");
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            MultiWindowEnableController multiWindowEnableController = this.mAtm.mMultiWindowEnableController;
-            WindowManagerGlobalLock windowManagerGlobalLock = multiWindowEnableController.mGlobalLock;
+            MultiWindowEnableController multiWindowEnableController =
+                    this.mAtm.mMultiWindowEnableController;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    multiWindowEnableController.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
@@ -1365,13 +1591,15 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         MultiStarController multiStarController = this.mAtm.mMultiStarController;
         ArrayList arrayList = new ArrayList(Arrays.asList("com.samsung.systemui.navillera"));
         multiStarController.getClass();
-        MultiStarController.checkMultiStarPackageAndPermission("setNaviBarImmersiveModeLocked", arrayList);
+        MultiStarController.checkMultiStarPackageAndPermission(
+                "setNaviBarImmersiveModeLocked", arrayList);
         synchronized (this.mAtm.mGlobalLockWithoutBoost) {
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     if (MultiWindowCoreState.MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED != z) {
-                        this.mAtm.mMultiWindowEnableController.setNaviStarImmersiveSplitModeLocked(z);
+                        this.mAtm.mMultiWindowEnableController.setNaviStarImmersiveSplitModeLocked(
+                                z);
                         this.mAtm.mWindowManager.getDefaultDisplayContentLocked().setLayoutNeeded();
                         this.mAtm.mWindowManager.requestTraversal();
                     }
@@ -1384,8 +1612,7 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         }
     }
 
-    public final void setSplitActivityPackageEnabled(String str, int i, int i2) {
-    }
+    public final void setSplitActivityPackageEnabled(String str, int i, int i2) {}
 
     public final void setSplitImmersiveMode(boolean z) {
         ActivityTaskManagerService.enforceTaskPermission("setSplitImmersiveMode");
@@ -1414,8 +1641,10 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    if (MultiWindowCoreState.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED != z) {
-                        this.mAtm.mMultiWindowEnableController.setStayFocusAndTopResumedActivityEnabled(z, z);
+                    if (MultiWindowCoreState.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED
+                            != z) {
+                        this.mAtm.mMultiWindowEnableController
+                                .setStayFocusAndTopResumedActivityEnabled(z, z);
                     }
                 } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
@@ -1430,17 +1659,25 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
 
     public final void setStayFocusAndTopResumedActivityEnabled(boolean z, boolean z2) {
         this.mAtm.mMultiStarController.getClass();
-        MultiStarController.checkMultiStarPackageAndPermission("setStayFocusAndTopResumedActivityEnabled", null);
+        MultiStarController.checkMultiStarPackageAndPermission(
+                "setStayFocusAndTopResumedActivityEnabled", null);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             WindowManagerGlobalLock windowManagerGlobalLock = this.mAtm.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    boolean z3 = z != MultiWindowCoreState.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED;
-                    boolean z4 = z2 != MultiWindowCoreState.MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED;
+                    boolean z3 =
+                            z
+                                    != MultiWindowCoreState
+                                            .MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED;
+                    boolean z4 =
+                            z2
+                                    != MultiWindowCoreState
+                                            .MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED;
                     if (z3 || z4) {
-                        this.mAtm.mMultiWindowEnableController.setStayFocusAndTopResumedActivityEnabled(z, z2);
+                        this.mAtm.mMultiWindowEnableController
+                                .setStayFocusAndTopResumedActivityEnabled(z, z2);
                     }
                 } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
@@ -1462,7 +1699,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    shouldDeferEnterSplit = this.mAtm.mMultiTaskingController.shouldDeferEnterSplit(list, list2);
+                    shouldDeferEnterSplit =
+                            this.mAtm.mMultiTaskingController.shouldDeferEnterSplit(list, list2);
                 } finally {
                 }
             }
@@ -1481,7 +1719,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    this.mAtm.mMultiTaskingController.startAssistantActivityToSplitLocked(intent, f);
+                    this.mAtm.mMultiTaskingController.startAssistantActivityToSplitLocked(
+                            intent, f);
                 } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
                     throw th;
@@ -1502,7 +1741,9 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    startNaturalSwitching = this.mAtm.mNaturalSwitchingController.startNaturalSwitching(iBinder, iBinder2);
+                    startNaturalSwitching =
+                            this.mAtm.mNaturalSwitchingController.startNaturalSwitching(
+                                    iBinder, iBinder2);
                 } finally {
                 }
             }
@@ -1533,7 +1774,9 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
                 if (task != null && task.getDisplayArea() != null) {
                     return task.supportsMultiWindowInDisplayArea(task.getTaskDisplayArea(), false);
                 }
-                Slog.w("MultiTaskingBinder", "supportsMultiWindow: cannot find task, token=" + iBinder);
+                Slog.w(
+                        "MultiTaskingBinder",
+                        "supportsMultiWindow: cannot find task, token=" + iBinder);
                 return false;
             }
         } finally {
@@ -1549,14 +1792,21 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    Task anyTaskForId = this.mAtm.mRootWindowContainer.anyTaskForId(i, 0, null, false);
+                    Task anyTaskForId =
+                            this.mAtm.mRootWindowContainer.anyTaskForId(i, 0, null, false);
                     if (anyTaskForId == null) {
-                        Slog.w("MultiTaskingBinder", "toggleFreeformForDexCompatApp : invalid task");
+                        Slog.w(
+                                "MultiTaskingBinder",
+                                "toggleFreeformForDexCompatApp : invalid task");
                         WindowManagerService.resetPriorityAfterLockedSection();
                     } else {
                         DexCompatController dexCompatController = this.mAtm.mDexCompatController;
                         dexCompatController.getClass();
-                        dexCompatController.scheduleStartActivityAsToggleFreeform(anyTaskForId, new DexCompatController$$ExternalSyntheticLambda0(anyTaskForId), new DexCompatController$$ExternalSyntheticLambda1(0, anyTaskForId), new DexCompatController$$ExternalSyntheticLambda2(0));
+                        dexCompatController.scheduleStartActivityAsToggleFreeform(
+                                anyTaskForId,
+                                new DexCompatController$$ExternalSyntheticLambda0(anyTaskForId),
+                                new DexCompatController$$ExternalSyntheticLambda1(0, anyTaskForId),
+                                new DexCompatController$$ExternalSyntheticLambda2(0));
                         WindowManagerService.resetPriorityAfterLockedSection();
                     }
                 } catch (Throwable th) {
@@ -1574,7 +1824,8 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         MultiStarController multiStarController = this.mAtm.mMultiStarController;
         ArrayList arrayList = new ArrayList(Arrays.asList("com.samsung.android.sidegesturepad"));
         multiStarController.getClass();
-        MultiStarController.checkMultiStarPackageAndPermission("toggleFreeformWindowingMode", arrayList);
+        MultiStarController.checkMultiStarPackageAndPermission(
+                "toggleFreeformWindowingMode", arrayList);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (this.mAtm.mGlobalLockWithoutBoost) {
@@ -1595,17 +1846,29 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    Task asTask = ((WindowContainer) ((WindowContainer.RemoteToken) windowContainerToken.asBinder()).mWeakRef.get()).asTask();
+                    Task asTask =
+                            ((WindowContainer)
+                                            ((WindowContainer.RemoteToken)
+                                                            windowContainerToken.asBinder())
+                                                    .mWeakRef.get())
+                                    .asTask();
                     if (asTask == null) {
-                        Slog.w("MultiTaskingBinder", "toggleFreeformWindowingModeForDex: task is null");
+                        Slog.w(
+                                "MultiTaskingBinder",
+                                "toggleFreeformWindowingModeForDex: task is null");
                     } else {
                         ActivityRecord activityRecord = asTask.topRunningActivity(false);
                         if (activityRecord != null) {
-                            this.mAtm.mActivityClientController.toggleFreeformWindowingMode(activityRecord.token);
+                            this.mAtm.mActivityClientController.toggleFreeformWindowingMode(
+                                    activityRecord.token);
                             WindowManagerService.resetPriorityAfterLockedSection();
                             return;
                         } else {
-                            Slog.w("MultiTaskingBinder", "toggleFreeformWindowingModeForDex: cannot find ActivityRecord, token= " + windowContainerToken);
+                            Slog.w(
+                                    "MultiTaskingBinder",
+                                    "toggleFreeformWindowingModeForDex: cannot find ActivityRecord,"
+                                        + " token= "
+                                            + windowContainerToken);
                         }
                     }
                     WindowManagerService.resetPriorityAfterLockedSection();
@@ -1634,12 +1897,15 @@ public final class MultiTaskingBinder extends IMultiTaskingBinder.Stub {
         }
     }
 
-    public final void unregisterRemoteAppTransitionListener(IRemoteAppTransitionListener iRemoteAppTransitionListener) {
+    public final void unregisterRemoteAppTransitionListener(
+            IRemoteAppTransitionListener iRemoteAppTransitionListener) {
         if (iRemoteAppTransitionListener != null) {
-            ActivityTaskManagerService.enforceTaskPermission("unregisterRemoteAppTransitionListener()");
+            ActivityTaskManagerService.enforceTaskPermission(
+                    "unregisterRemoteAppTransitionListener()");
             MultiTaskingController multiTaskingController = this.mAtm.mMultiTaskingController;
             synchronized (multiTaskingController.mRemoteAppTransitionListeners) {
-                multiTaskingController.mRemoteAppTransitionListeners.unregister(iRemoteAppTransitionListener);
+                multiTaskingController.mRemoteAppTransitionListeners.unregister(
+                        iRemoteAppTransitionListener);
             }
         }
     }

@@ -1,7 +1,6 @@
 package android.os;
 
 import android.content.Context;
-import android.os.ICustomFrequencyManager;
 import android.util.Log;
 
 /* loaded from: classes3.dex */
@@ -34,8 +33,7 @@ public class CustomFrequencyManager {
     private static final boolean DEBUG = "eng".equals(Build.TYPE);
     private static Context mContext = null;
 
-    private CustomFrequencyManager() {
-    }
+    private CustomFrequencyManager() {}
 
     private static void printExceptionTrace(Exception e) {
         if (DEBUG) {
@@ -54,9 +52,11 @@ public class CustomFrequencyManager {
         }
         try {
             if (isTopFullscreen) {
-                this.mService.requestMpParameterUpdate("--Nw 2.4 --Tw 150 --Ns 1.4 --Ts 100 --util_h 100 --util_l 0");
+                this.mService.requestMpParameterUpdate(
+                        "--Nw 2.4 --Tw 150 --Ns 1.4 --Ts 100 --util_h 100 --util_l 0");
             } else {
-                this.mService.requestMpParameterUpdate("--Nw 1.99 --Tw 140 --Ns 1.1 --Ts 190 --util_h 70 --util_l 60");
+                this.mService.requestMpParameterUpdate(
+                        "--Nw 1.99 --Tw 140 --Ns 1.1 --Ts 190 --util_h 70 --util_l 60");
             }
         } catch (Exception e) {
             printExceptionTrace(e);
@@ -185,7 +185,8 @@ public class CustomFrequencyManager {
     public void acquire(int pid, int token, String procName, int hint, int[] list) {
         IBinder b;
         try {
-            if (this.mService == null && (b = ServiceManager.getService(Context.CFMS_SERVICE)) != null) {
+            if (this.mService == null
+                    && (b = ServiceManager.getService(Context.CFMS_SERVICE)) != null) {
                 this.mService = ICustomFrequencyManager.Stub.asInterface(b);
             }
             if (this.mService != null) {
@@ -199,7 +200,8 @@ public class CustomFrequencyManager {
     public void release(int pid, int token) {
         IBinder b;
         try {
-            if (this.mService == null && (b = ServiceManager.getService(Context.CFMS_SERVICE)) != null) {
+            if (this.mService == null
+                    && (b = ServiceManager.getService(Context.CFMS_SERVICE)) != null) {
                 this.mService = ICustomFrequencyManager.Stub.asInterface(b);
             }
             if (this.mService != null) {
@@ -213,7 +215,8 @@ public class CustomFrequencyManager {
     public int[] getSupportedFrequency(int type, int level) {
         IBinder b;
         try {
-            if (this.mService == null && (b = ServiceManager.getService(Context.CFMS_SERVICE)) != null) {
+            if (this.mService == null
+                    && (b = ServiceManager.getService(Context.CFMS_SERVICE)) != null) {
                 this.mService = ICustomFrequencyManager.Stub.asInterface(b);
             }
             if (this.mService != null) {

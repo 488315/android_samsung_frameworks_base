@@ -8,6 +8,7 @@ import android.net.networkstack.aidl.quirks.IPv6ProvisioningLossQuirkParcelable;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -28,7 +29,8 @@ public class NetworkAttributesParcelable implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            NetworkAttributesParcelable networkAttributesParcelable = new NetworkAttributesParcelable();
+            NetworkAttributesParcelable networkAttributesParcelable =
+                    new NetworkAttributesParcelable();
             networkAttributesParcelable.readFromParcel(parcel);
             return networkAttributesParcelable;
         }
@@ -58,7 +60,8 @@ public class NetworkAttributesParcelable implements Parcelable {
 
     @Override // android.os.Parcelable
     public int describeContents() {
-        return describeContents(this.ipv6ProvisioningLossQuirk) | describeContents(this.dnsAddresses);
+        return describeContents(this.ipv6ProvisioningLossQuirk)
+                | describeContents(this.dnsAddresses);
     }
 
     public final void readFromParcel(Parcel parcel) {
@@ -79,18 +82,25 @@ public class NetworkAttributesParcelable implements Parcelable {
                             if (parcel.dataPosition() - dataPosition < readInt) {
                                 this.mtu = parcel.readInt();
                                 if (parcel.dataPosition() - dataPosition < readInt) {
-                                    this.ipv6ProvisioningLossQuirk = (IPv6ProvisioningLossQuirkParcelable) parcel.readTypedObject(IPv6ProvisioningLossQuirkParcelable.CREATOR);
+                                    this.ipv6ProvisioningLossQuirk =
+                                            (IPv6ProvisioningLossQuirkParcelable)
+                                                    parcel.readTypedObject(
+                                                            IPv6ProvisioningLossQuirkParcelable
+                                                                    .CREATOR);
                                     if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                     parcel.setDataPosition(dataPosition + readInt);
                                     return;
                                 }
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -118,10 +128,24 @@ public class NetworkAttributesParcelable implements Parcelable {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         stringJoiner.add("assignedV4Address: " + Arrays.toString(this.assignedV4Address));
         stringJoiner.add("assignedV4AddressExpiry: " + this.assignedV4AddressExpiry);
-        StringBuilder m = AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.dnsAddresses), "mtu: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.cluster, "dnsAddresses: ", new StringBuilder("cluster: "), stringJoiner), stringJoiner), this.mtu, stringJoiner, "ipv6ProvisioningLossQuirk: ");
+        StringBuilder m =
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                                Arrays.toString(this.dnsAddresses),
+                                "mtu: ",
+                                DabTableEntry$$ExternalSyntheticOutline0.m(
+                                        this.cluster,
+                                        "dnsAddresses: ",
+                                        new StringBuilder("cluster: "),
+                                        stringJoiner),
+                                stringJoiner),
+                        this.mtu,
+                        stringJoiner,
+                        "ipv6ProvisioningLossQuirk: ");
         m.append(Objects.toString(this.ipv6ProvisioningLossQuirk));
         stringJoiner.add(m.toString());
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, new StringBuilder("NetworkAttributesParcelable"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner, new StringBuilder("NetworkAttributesParcelable"));
     }
 
     @Override // android.os.Parcelable
@@ -136,6 +160,7 @@ public class NetworkAttributesParcelable implements Parcelable {
         parcel.writeTypedObject(this.ipv6ProvisioningLossQuirk, i);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

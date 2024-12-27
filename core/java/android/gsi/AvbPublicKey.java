@@ -6,21 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class AvbPublicKey implements Parcelable {
-    public static final Parcelable.Creator<AvbPublicKey> CREATOR = new Parcelable.Creator<AvbPublicKey>() { // from class: android.gsi.AvbPublicKey.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AvbPublicKey createFromParcel(Parcel _aidl_source) {
-            AvbPublicKey _aidl_out = new AvbPublicKey();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AvbPublicKey> CREATOR =
+            new Parcelable.Creator<AvbPublicKey>() { // from class: android.gsi.AvbPublicKey.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AvbPublicKey createFromParcel(Parcel _aidl_source) {
+                    AvbPublicKey _aidl_out = new AvbPublicKey();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AvbPublicKey[] newArray(int _aidl_size) {
-            return new AvbPublicKey[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AvbPublicKey[] newArray(int _aidl_size) {
+                    return new AvbPublicKey[_aidl_size];
+                }
+            };
     public byte[] bytes;
     public byte[] sha1;
 

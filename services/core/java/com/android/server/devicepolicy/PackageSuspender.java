@@ -2,7 +2,9 @@ package com.android.server.devicepolicy;
 
 import android.content.pm.PackageManagerInternal;
 import android.util.ArraySet;
+
 import com.android.server.utils.Slogf;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,7 +20,8 @@ public final class PackageSuspender {
     public final Set mSuspendedPackageBefore;
     public final int mUserId;
 
-    public PackageSuspender(Set set, Set set2, List list, PackageManagerInternal packageManagerInternal, int i) {
+    public PackageSuspender(
+            Set set, Set set2, List list, PackageManagerInternal packageManagerInternal, int i) {
         this.mSuspendedPackageBefore = set == null ? Collections.emptySet() : set;
         this.mSuspendedPackageAfter = set2 == null ? Collections.emptySet() : set2;
         this.mExemptedPackages = list;
@@ -31,8 +34,10 @@ public final class PackageSuspender {
         ArraySet arraySet2 = new ArraySet(this.mExemptedPackages);
         arraySet2.retainAll(arraySet);
         arraySet.removeAll(this.mExemptedPackages);
-        String[] strArr = (String[]) arraySet.toArray(new PackageSuspender$$ExternalSyntheticLambda0(2));
-        String[] packagesSuspendedByAdmin = this.mPackageManager.setPackagesSuspendedByAdmin(this.mUserId, true, strArr);
+        String[] strArr =
+                (String[]) arraySet.toArray(new PackageSuspender$$ExternalSyntheticLambda0(2));
+        String[] packagesSuspendedByAdmin =
+                this.mPackageManager.setPackagesSuspendedByAdmin(this.mUserId, true, strArr);
         if (packagesSuspendedByAdmin == null) {
             Slogf.w("DevicePolicyManager", "PM failed to suspend packages (%s)", set);
         } else {
@@ -48,8 +53,10 @@ public final class PackageSuspender {
         ArraySet arraySet2 = new ArraySet(set);
         arraySet2.retainAll(this.mSuspendedPackageAfter);
         arraySet2.removeAll(this.mExemptedPackages);
-        String[] strArr = (String[]) arraySet.toArray(new PackageSuspender$$ExternalSyntheticLambda0(3));
-        String[] packagesSuspendedByAdmin = this.mPackageManager.setPackagesSuspendedByAdmin(this.mUserId, false, strArr);
+        String[] strArr =
+                (String[]) arraySet.toArray(new PackageSuspender$$ExternalSyntheticLambda0(3));
+        String[] packagesSuspendedByAdmin =
+                this.mPackageManager.setPackagesSuspendedByAdmin(this.mUserId, false, strArr);
         if (packagesSuspendedByAdmin == null) {
             Slogf.w("DevicePolicyManager", "PM failed to unsuspend packages (%s)", arraySet);
         }

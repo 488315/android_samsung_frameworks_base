@@ -3,6 +3,7 @@ package android.filterfw.core;
 import android.filterfw.format.ObjectFormat;
 import android.graphics.Bitmap;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes.dex */
@@ -53,8 +54,7 @@ public class SimpleFrame extends Frame {
     }
 
     @Override // android.filterfw.core.Frame
-    protected void releaseNativeAllocation() {
-    }
+    protected void releaseNativeAllocation() {}
 
     @Override // android.filterfw.core.Frame
     public Object getObjectValue() {
@@ -129,7 +129,12 @@ public class SimpleFrame extends Frame {
         if (format.getObjectClass() == null) {
             setFormatObjectClass(object.getClass());
         } else if (!format.getObjectClass().isAssignableFrom(object.getClass())) {
-            throw new RuntimeException("Attempting to set object value of type '" + object.getClass() + "' on SimpleFrame of type '" + format.getObjectClass() + "'!");
+            throw new RuntimeException(
+                    "Attempting to set object value of type '"
+                            + object.getClass()
+                            + "' on SimpleFrame of type '"
+                            + format.getObjectClass()
+                            + "'!");
         }
         this.mObject = object;
     }

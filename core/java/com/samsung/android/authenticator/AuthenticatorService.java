@@ -3,7 +3,9 @@ package com.samsung.android.authenticator;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+
 import com.samsung.android.authnrservice.manager.ISemAuthnrService;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -268,7 +270,8 @@ final class AuthenticatorService {
     }
 
     static byte[] processPreloadedTa(int trustedAppType, byte[] command) {
-        AuthenticatorLog.d(TAG, "static byte[] processPreloadedTa(int trustedAppType, byte[] command)");
+        AuthenticatorLog.d(
+                TAG, "static byte[] processPreloadedTa(int trustedAppType, byte[] command)");
         byte[] result = new byte[0];
         ISemAuthnrService service = (ISemAuthnrService) checkNotNullState(getService());
         try {

@@ -3,6 +3,7 @@ package com.android.server.usage;
 import android.app.usage.AppStandbyInfo;
 import android.content.Context;
 import android.util.IndentingPrintWriter;
+
 import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -107,7 +108,8 @@ public interface AppStandbyInternal {
 
     void setAppStandbyBuckets(List<AppStandbyInfo> list, int i, int i2, int i3);
 
-    void setAppStandbyBucketsForMARs(List<AppStandbyInfo> list, int i, int i2, int i3, boolean z, boolean z2);
+    void setAppStandbyBucketsForMARs(
+            List<AppStandbyInfo> list, int i, int i2, int i3, boolean z, boolean z2);
 
     void setEstimatedLaunchTime(String str, int i, long j);
 
@@ -117,24 +119,26 @@ public interface AppStandbyInternal {
 
     static AppStandbyInternal newAppStandbyController(ClassLoader loader, Context context) {
         try {
-            Class<?> clazz = Class.forName("com.android.server.usage.AppStandbyController", true, loader);
+            Class<?> clazz =
+                    Class.forName("com.android.server.usage.AppStandbyController", true, loader);
             Constructor<?> ctor = clazz.getConstructor(Context.class);
             return (AppStandbyInternal) ctor.newInstance(context);
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (ClassNotFoundException
+                | IllegalAccessException
+                | InstantiationException
+                | NoSuchMethodException
+                | InvocationTargetException e) {
             throw new RuntimeException("Unable to instantiate AppStandbyController!", e);
         }
     }
 
-    public static abstract class AppIdleStateChangeListener {
+    public abstract static class AppIdleStateChangeListener {
         public abstract void onAppIdleStateChanged(String str, int i, boolean z, int i2, int i3);
 
-        public void onParoleStateChanged(boolean isParoleOn) {
-        }
+        public void onParoleStateChanged(boolean isParoleOn) {}
 
-        public void onUserInteractionStarted(String packageName, int userId) {
-        }
+        public void onUserInteractionStarted(String packageName, int userId) {}
 
-        public void triggerTemporaryQuotaBump(String packageName, int userId) {
-        }
+        public void triggerTemporaryQuotaBump(String packageName, int userId) {}
     }
 }

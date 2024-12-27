@@ -5,18 +5,20 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IStrategyNonDefaultDevicesDispatcher extends IInterface {
     public static final String DESCRIPTOR = "android.media.IStrategyNonDefaultDevicesDispatcher";
 
-    void dispatchNonDefDevicesChanged(int i, List<AudioDeviceAttributes> list) throws RemoteException;
+    void dispatchNonDefDevicesChanged(int i, List<AudioDeviceAttributes> list)
+            throws RemoteException;
 
     public static class Default implements IStrategyNonDefaultDevicesDispatcher {
         @Override // android.media.IStrategyNonDefaultDevicesDispatcher
-        public void dispatchNonDefDevicesChanged(int strategyId, List<AudioDeviceAttributes> devices) throws RemoteException {
-        }
+        public void dispatchNonDefDevicesChanged(
+                int strategyId, List<AudioDeviceAttributes> devices) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +26,8 @@ public interface IStrategyNonDefaultDevicesDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStrategyNonDefaultDevicesDispatcher {
+    public abstract static class Stub extends Binder
+            implements IStrategyNonDefaultDevicesDispatcher {
         static final int TRANSACTION_dispatchNonDefDevicesChanged = 1;
 
         public Stub() {
@@ -35,7 +38,8 @@ public interface IStrategyNonDefaultDevicesDispatcher extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IStrategyNonDefaultDevicesDispatcher.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IStrategyNonDefaultDevicesDispatcher.DESCRIPTOR);
             if (iin != null && (iin instanceof IStrategyNonDefaultDevicesDispatcher)) {
                 return (IStrategyNonDefaultDevicesDispatcher) iin;
             }
@@ -62,7 +66,8 @@ public interface IStrategyNonDefaultDevicesDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IStrategyNonDefaultDevicesDispatcher.DESCRIPTOR);
             }
@@ -73,7 +78,8 @@ public interface IStrategyNonDefaultDevicesDispatcher extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    List<AudioDeviceAttributes> _arg1 = data.createTypedArrayList(AudioDeviceAttributes.CREATOR);
+                    List<AudioDeviceAttributes> _arg1 =
+                            data.createTypedArrayList(AudioDeviceAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     dispatchNonDefDevicesChanged(_arg0, _arg1);
                     return true;
@@ -99,7 +105,8 @@ public interface IStrategyNonDefaultDevicesDispatcher extends IInterface {
             }
 
             @Override // android.media.IStrategyNonDefaultDevicesDispatcher
-            public void dispatchNonDefDevicesChanged(int strategyId, List<AudioDeviceAttributes> devices) throws RemoteException {
+            public void dispatchNonDefDevicesChanged(
+                    int strategyId, List<AudioDeviceAttributes> devices) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IStrategyNonDefaultDevicesDispatcher.DESCRIPTOR);

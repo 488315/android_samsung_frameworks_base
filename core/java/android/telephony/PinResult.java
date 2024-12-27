@@ -3,6 +3,7 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -17,23 +18,23 @@ public final class PinResult implements Parcelable {
     private final int mAttemptsRemaining;
     private final int mResult;
     private static final PinResult sFailedResult = new PinResult(2, -1);
-    public static final Parcelable.Creator<PinResult> CREATOR = new Parcelable.Creator<PinResult>() { // from class: android.telephony.PinResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PinResult createFromParcel(Parcel in) {
-            return new PinResult(in);
-        }
+    public static final Parcelable.Creator<PinResult> CREATOR =
+            new Parcelable.Creator<PinResult>() { // from class: android.telephony.PinResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PinResult createFromParcel(Parcel in) {
+                    return new PinResult(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PinResult[] newArray(int size) {
-            return new PinResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PinResult[] newArray(int size) {
+                    return new PinResult[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PinResultType {
-    }
+    public @interface PinResultType {}
 
     public int getResult() {
         return this.mResult;
@@ -73,7 +74,8 @@ public final class PinResult implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mAttemptsRemaining), Integer.valueOf(this.mResult));
+        return Objects.hash(
+                Integer.valueOf(this.mAttemptsRemaining), Integer.valueOf(this.mResult));
     }
 
     public boolean equals(Object obj) {

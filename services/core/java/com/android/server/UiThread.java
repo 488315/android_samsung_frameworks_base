@@ -3,7 +3,9 @@ package com.android.server;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Process;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,12 +23,15 @@ public final class UiThread extends ServiceThread {
                 Handler handler = getHandler();
                 final UiThread uiThread = sInstance;
                 Objects.requireNonNull(uiThread);
-                handler.runWithScissors(new Runnable() { // from class: com.android.server.UiThread$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        UiThread.this.quit();
-                    }
-                }, 0L);
+                handler.runWithScissors(
+                        new Runnable() { // from class:
+                                         // com.android.server.UiThread$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                UiThread.this.quit();
+                            }
+                        },
+                        0L);
                 sInstance = null;
             } catch (Throwable th) {
                 throw th;
@@ -64,7 +69,8 @@ public final class UiThread extends ServiceThread {
         return handler;
     }
 
-    @Override // com.android.server.ServiceThread, android.os.HandlerThread, java.lang.Thread, java.lang.Runnable
+    @Override // com.android.server.ServiceThread, android.os.HandlerThread, java.lang.Thread,
+              // java.lang.Runnable
     public final void run() {
         Process.setThreadGroup(Process.myTid(), CoreRune.SYSPERF_BOOST_OPT ? 10 : 5);
         super.run();

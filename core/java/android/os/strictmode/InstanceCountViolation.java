@@ -2,7 +2,10 @@ package android.os.strictmode;
 
 /* loaded from: classes3.dex */
 public class InstanceCountViolation extends Violation {
-    private static final StackTraceElement[] FAKE_STACK = {new StackTraceElement("android.os.StrictMode", "setClassInstanceLimit", "StrictMode.java", 1)};
+    private static final StackTraceElement[] FAKE_STACK = {
+        new StackTraceElement(
+                "android.os.StrictMode", "setClassInstanceLimit", "StrictMode.java", 1)
+    };
     private final long mInstances;
 
     public InstanceCountViolation(Class klass, long instances, int limit) {

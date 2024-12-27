@@ -27,6 +27,7 @@ public class SurfaceTargetFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "renderMode")
     private String mRenderModeString;
+
     private GLFrame mScreen;
 
     @GenerateFieldPort(name = "oheight")
@@ -37,6 +38,7 @@ public class SurfaceTargetFilter extends Filter {
 
     @GenerateFinalPort(name = "surface")
     private Surface mSurface;
+
     private int mSurfaceId;
 
     public SurfaceTargetFilter(String name) {
@@ -80,7 +82,8 @@ public class SurfaceTargetFilter extends Filter {
         this.mProgram.setSourceRect(0.0f, 1.0f, 1.0f, -1.0f);
         this.mProgram.setClearsOutput(true);
         this.mProgram.setClearColor(0.0f, 0.0f, 0.0f);
-        MutableFrameFormat screenFormat = ImageFormat.create(this.mScreenWidth, this.mScreenHeight, 3, 3);
+        MutableFrameFormat screenFormat =
+                ImageFormat.create(this.mScreenWidth, this.mScreenHeight, 3, 3);
         this.mScreen = (GLFrame) context.getFrameManager().newBoundFrame(screenFormat, 101, 0L);
         updateRenderMode();
     }
@@ -101,7 +104,12 @@ public class SurfaceTargetFilter extends Filter {
         float currentAspectRatio = input.getFormat().getWidth() / input.getFormat().getHeight();
         if (currentAspectRatio != this.mAspectRatio) {
             if (this.mLogVerbose) {
-                Log.v(TAG, "New aspect ratio: " + currentAspectRatio + ", previously: " + this.mAspectRatio);
+                Log.v(
+                        TAG,
+                        "New aspect ratio: "
+                                + currentAspectRatio
+                                + ", previously: "
+                                + this.mAspectRatio);
             }
             this.mAspectRatio = currentAspectRatio;
             updateTargetRect();
@@ -152,18 +160,34 @@ public class SurfaceTargetFilter extends Filter {
                     break;
                 case 1:
                     if (relativeAspectRatio > 1.0f) {
-                        this.mProgram.setTargetRect(0.5f - (0.5f / relativeAspectRatio), 0.0f, 1.0f / relativeAspectRatio, 1.0f);
+                        this.mProgram.setTargetRect(
+                                0.5f - (0.5f / relativeAspectRatio),
+                                0.0f,
+                                1.0f / relativeAspectRatio,
+                                1.0f);
                         break;
                     } else {
-                        this.mProgram.setTargetRect(0.0f, 0.5f - (relativeAspectRatio * 0.5f), 1.0f, relativeAspectRatio);
+                        this.mProgram.setTargetRect(
+                                0.0f,
+                                0.5f - (relativeAspectRatio * 0.5f),
+                                1.0f,
+                                relativeAspectRatio);
                         break;
                     }
                 case 2:
                     if (relativeAspectRatio > 1.0f) {
-                        this.mProgram.setTargetRect(0.0f, 0.5f - (relativeAspectRatio * 0.5f), 1.0f, relativeAspectRatio);
+                        this.mProgram.setTargetRect(
+                                0.0f,
+                                0.5f - (relativeAspectRatio * 0.5f),
+                                1.0f,
+                                relativeAspectRatio);
                         break;
                     } else {
-                        this.mProgram.setTargetRect(0.5f - (0.5f / relativeAspectRatio), 0.0f, 1.0f / relativeAspectRatio, 1.0f);
+                        this.mProgram.setTargetRect(
+                                0.5f - (0.5f / relativeAspectRatio),
+                                0.0f,
+                                1.0f / relativeAspectRatio,
+                                1.0f);
                         break;
                     }
             }

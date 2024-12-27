@@ -2,6 +2,7 @@ package android.mtp;
 
 import android.drm.DrmInfoRequest;
 import android.util.Log;
+
 import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
@@ -155,11 +156,19 @@ class MtpPropertyGroup {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int getPropertyList(android.content.ContentProviderClient r24, java.lang.String r25, android.mtp.MtpStorageManager.MtpObject r26, android.mtp.MtpPropertyList r27) {
+    public int getPropertyList(
+            android.content.ContentProviderClient r24,
+            java.lang.String r25,
+            android.mtp.MtpStorageManager.MtpObject r26,
+            android.mtp.MtpPropertyList r27) {
         /*
             Method dump skipped, instructions count: 556
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.mtp.MtpPropertyGroup.getPropertyList(android.content.ContentProviderClient, java.lang.String, android.mtp.MtpStorageManager$MtpObject, android.mtp.MtpPropertyList):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.mtp.MtpPropertyGroup.getPropertyList(android.content.ContentProviderClient,"
+                    + " java.lang.String, android.mtp.MtpStorageManager$MtpObject,"
+                    + " android.mtp.MtpPropertyList):int");
     }
 }

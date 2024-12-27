@@ -2,11 +2,13 @@ package com.android.server.pm.permission;
 
 import android.content.pm.PackageManagerInternal;
 import android.util.ArrayMap;
+
 import com.android.permission.persistence.RuntimePermissionsState;
 import com.android.server.LocalServices;
 import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.PackageManagerTracedLock;
 import com.android.server.pm.Settings;
+
 import java.util.List;
 import java.util.Map;
 
@@ -17,20 +19,28 @@ public final class PermissionMigrationHelperImpl {
         ArrayMap arrayMap = new ArrayMap();
         int size = list.size();
         for (int i = 0; i < size; i++) {
-            RuntimePermissionsState.PermissionState permissionState = (RuntimePermissionsState.PermissionState) list.get(i);
-            arrayMap.put(permissionState.getName(), new PermissionMigrationHelper$LegacyPermissionState(permissionState.getFlags(), permissionState.isGranted()));
+            RuntimePermissionsState.PermissionState permissionState =
+                    (RuntimePermissionsState.PermissionState) list.get(i);
+            arrayMap.put(
+                    permissionState.getName(),
+                    new PermissionMigrationHelper$LegacyPermissionState(
+                            permissionState.getFlags(), permissionState.isGranted()));
         }
         return arrayMap;
     }
 
     public final int getLegacyPermissionStateVersion(int i) {
         int i2;
-        PackageManagerService.PackageManagerInternalImpl packageManagerInternalImpl = (PackageManagerService.PackageManagerInternalImpl) ((PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class));
+        PackageManagerService.PackageManagerInternalImpl packageManagerInternalImpl =
+                (PackageManagerService.PackageManagerInternalImpl)
+                        ((PackageManagerInternal)
+                                LocalServices.getService(PackageManagerInternal.class));
         PackageManagerTracedLock packageManagerTracedLock = PackageManagerService.this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
             try {
-                Settings.RuntimePermissionPersistence runtimePermissionPersistence = PackageManagerService.this.mSettings.mRuntimePermissionsPersistence;
+                Settings.RuntimePermissionPersistence runtimePermissionPersistence =
+                        PackageManagerService.this.mSettings.mRuntimePermissionsPersistence;
                 synchronized (runtimePermissionPersistence.mLock) {
                     i2 = runtimePermissionPersistence.mVersions.get(i, 0);
                 }

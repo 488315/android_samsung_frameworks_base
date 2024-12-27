@@ -2,6 +2,7 @@ package android.provider;
 
 import android.media.ExifInterface;
 import android.os.Bundle;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -16,11 +17,28 @@ public final class MetadataReader {
     private static final int TYPE_DOUBLE = 1;
     private static final int TYPE_INT = 0;
     private static final int TYPE_STRING = 2;
-    private static final String[] DEFAULT_EXIF_TAGS = {"FNumber", ExifInterface.TAG_COPYRIGHT, ExifInterface.TAG_DATETIME, ExifInterface.TAG_EXPOSURE_TIME, ExifInterface.TAG_FOCAL_LENGTH, "FNumber", ExifInterface.TAG_GPS_LATITUDE, ExifInterface.TAG_GPS_LATITUDE_REF, ExifInterface.TAG_GPS_LONGITUDE, ExifInterface.TAG_GPS_LONGITUDE_REF, ExifInterface.TAG_IMAGE_LENGTH, ExifInterface.TAG_IMAGE_WIDTH, "ISOSpeedRatings", ExifInterface.TAG_MAKE, ExifInterface.TAG_MODEL, ExifInterface.TAG_ORIENTATION, ExifInterface.TAG_SHUTTER_SPEED_VALUE};
+    private static final String[] DEFAULT_EXIF_TAGS = {
+        "FNumber",
+        ExifInterface.TAG_COPYRIGHT,
+        ExifInterface.TAG_DATETIME,
+        ExifInterface.TAG_EXPOSURE_TIME,
+        ExifInterface.TAG_FOCAL_LENGTH,
+        "FNumber",
+        ExifInterface.TAG_GPS_LATITUDE,
+        ExifInterface.TAG_GPS_LATITUDE_REF,
+        ExifInterface.TAG_GPS_LONGITUDE,
+        ExifInterface.TAG_GPS_LONGITUDE_REF,
+        ExifInterface.TAG_IMAGE_LENGTH,
+        ExifInterface.TAG_IMAGE_WIDTH,
+        "ISOSpeedRatings",
+        ExifInterface.TAG_MAKE,
+        ExifInterface.TAG_MODEL,
+        ExifInterface.TAG_ORIENTATION,
+        ExifInterface.TAG_SHUTTER_SPEED_VALUE
+    };
     private static final Map<String, Integer> TYPE_MAPPING = new HashMap();
 
-    private MetadataReader() {
-    }
+    private MetadataReader() {}
 
     static {
         TYPE_MAPPING.put(ExifInterface.TAG_ARTIST, 2);
@@ -161,7 +179,9 @@ public final class MetadataReader {
         return "image/jpg".equals(mimeType) || "image/jpeg".equals(mimeType);
     }
 
-    public static void getMetadata(Bundle metadata, InputStream stream, String mimeType, String[] tags) throws IOException {
+    public static void getMetadata(
+            Bundle metadata, InputStream stream, String mimeType, String[] tags)
+            throws IOException {
         List<String> metadataTypes = new ArrayList<>();
         if (isSupportedMimeType(mimeType)) {
             Bundle exifData = getExifData(stream, tags);
@@ -170,7 +190,9 @@ public final class MetadataReader {
                 metadataTypes.add(DocumentsContract.METADATA_EXIF);
             }
         }
-        metadata.putStringArray(DocumentsContract.METADATA_TYPES, (String[]) metadataTypes.toArray(new String[metadataTypes.size()]));
+        metadata.putStringArray(
+                DocumentsContract.METADATA_TYPES,
+                (String[]) metadataTypes.toArray(new String[metadataTypes.size()]));
     }
 
     private static Bundle getExifData(InputStream stream, String[] tags) throws IOException {
@@ -191,7 +213,8 @@ public final class MetadataReader {
                 if (data3 != Double.MIN_VALUE) {
                     exif.putDouble(tag, data3);
                 }
-            } else if (TYPE_MAPPING.get(tag).equals(2) && (data = exifInterface.getAttribute(tag)) != null) {
+            } else if (TYPE_MAPPING.get(tag).equals(2)
+                    && (data = exifInterface.getAttribute(tag)) != null) {
                 exif.putString(tag, data);
             }
         }

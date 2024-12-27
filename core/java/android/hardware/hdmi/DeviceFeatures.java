@@ -1,6 +1,7 @@
 package android.hardware.hdmi;
 
 import android.hardware.gnss.GnssSignalType;
+
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
@@ -18,8 +19,7 @@ public class DeviceFeatures {
     private final int mSetAudioVolumeLevelSupport;
     private final int mSetOsdStringSupport;
 
-    public @interface FeatureSupportStatus {
-    }
+    public @interface FeatureSupportStatus {}
 
     static {
         ALL_FEATURES_SUPPORT_UNKNOWN = new Builder(2).build();
@@ -44,7 +44,13 @@ public class DeviceFeatures {
         Builder builder = new Builder(2);
         if (deviceFeaturesOperand.length >= 1) {
             byte b = deviceFeaturesOperand[0];
-            builder.setRecordTvScreenSupport(bitToFeatureSupportStatus(((b >> 6) & 1) == 1)).setSetOsdStringSupport(bitToFeatureSupportStatus(((b >> 5) & 1) == 1)).setDeckControlSupport(bitToFeatureSupportStatus(((b >> 4) & 1) == 1)).setSetAudioRateSupport(bitToFeatureSupportStatus(((b >> 3) & 1) == 1)).setArcTxSupport(bitToFeatureSupportStatus(((b >> 2) & 1) == 1)).setArcRxSupport(bitToFeatureSupportStatus(((b >> 1) & 1) == 1)).setSetAudioVolumeLevelSupport(bitToFeatureSupportStatus((b & 1) == 1));
+            builder.setRecordTvScreenSupport(bitToFeatureSupportStatus(((b >> 6) & 1) == 1))
+                    .setSetOsdStringSupport(bitToFeatureSupportStatus(((b >> 5) & 1) == 1))
+                    .setDeckControlSupport(bitToFeatureSupportStatus(((b >> 4) & 1) == 1))
+                    .setSetAudioRateSupport(bitToFeatureSupportStatus(((b >> 3) & 1) == 1))
+                    .setArcTxSupport(bitToFeatureSupportStatus(((b >> 2) & 1) == 1))
+                    .setArcRxSupport(bitToFeatureSupportStatus(((b >> 1) & 1) == 1))
+                    .setSetAudioVolumeLevelSupport(bitToFeatureSupportStatus((b & 1) == 1));
         }
         return builder.build();
     }
@@ -77,7 +83,7 @@ public class DeviceFeatures {
         if (this.mSetAudioVolumeLevelSupport == 1) {
             result = (byte) (result | 1);
         }
-        return new byte[]{result};
+        return new byte[] {result};
     }
 
     private static int bitToFeatureSupportStatus(boolean z) {
@@ -117,23 +123,46 @@ public class DeviceFeatures {
             return false;
         }
         DeviceFeatures other = (DeviceFeatures) obj;
-        return this.mRecordTvScreenSupport == other.mRecordTvScreenSupport && this.mSetOsdStringSupport == other.mSetOsdStringSupport && this.mDeckControlSupport == other.mDeckControlSupport && this.mSetAudioRateSupport == other.mSetAudioRateSupport && this.mArcTxSupport == other.mArcTxSupport && this.mArcRxSupport == other.mArcRxSupport && this.mSetAudioVolumeLevelSupport == other.mSetAudioVolumeLevelSupport;
+        return this.mRecordTvScreenSupport == other.mRecordTvScreenSupport
+                && this.mSetOsdStringSupport == other.mSetOsdStringSupport
+                && this.mDeckControlSupport == other.mDeckControlSupport
+                && this.mSetAudioRateSupport == other.mSetAudioRateSupport
+                && this.mArcTxSupport == other.mArcTxSupport
+                && this.mArcRxSupport == other.mArcRxSupport
+                && this.mSetAudioVolumeLevelSupport == other.mSetAudioVolumeLevelSupport;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mRecordTvScreenSupport), Integer.valueOf(this.mSetOsdStringSupport), Integer.valueOf(this.mDeckControlSupport), Integer.valueOf(this.mSetAudioRateSupport), Integer.valueOf(this.mArcTxSupport), Integer.valueOf(this.mArcRxSupport), Integer.valueOf(this.mSetAudioVolumeLevelSupport));
+        return Objects.hash(
+                Integer.valueOf(this.mRecordTvScreenSupport),
+                Integer.valueOf(this.mSetOsdStringSupport),
+                Integer.valueOf(this.mDeckControlSupport),
+                Integer.valueOf(this.mSetAudioRateSupport),
+                Integer.valueOf(this.mArcTxSupport),
+                Integer.valueOf(this.mArcRxSupport),
+                Integer.valueOf(this.mSetAudioVolumeLevelSupport));
     }
 
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("Device features: ");
-        s.append("record_tv_screen: ").append(featureSupportStatusToString(this.mRecordTvScreenSupport)).append(" ");
-        s.append("set_osd_string: ").append(featureSupportStatusToString(this.mSetOsdStringSupport)).append(" ");
-        s.append("deck_control: ").append(featureSupportStatusToString(this.mDeckControlSupport)).append(" ");
-        s.append("set_audio_rate: ").append(featureSupportStatusToString(this.mSetAudioRateSupport)).append(" ");
+        s.append("record_tv_screen: ")
+                .append(featureSupportStatusToString(this.mRecordTvScreenSupport))
+                .append(" ");
+        s.append("set_osd_string: ")
+                .append(featureSupportStatusToString(this.mSetOsdStringSupport))
+                .append(" ");
+        s.append("deck_control: ")
+                .append(featureSupportStatusToString(this.mDeckControlSupport))
+                .append(" ");
+        s.append("set_audio_rate: ")
+                .append(featureSupportStatusToString(this.mSetAudioRateSupport))
+                .append(" ");
         s.append("arc_tx: ").append(featureSupportStatusToString(this.mArcTxSupport)).append(" ");
         s.append("arc_rx: ").append(featureSupportStatusToString(this.mArcRxSupport)).append(" ");
-        s.append("set_audio_volume_level: ").append(featureSupportStatusToString(this.mSetAudioVolumeLevelSupport)).append(" ");
+        s.append("set_audio_volume_level: ")
+                .append(featureSupportStatusToString(this.mSetAudioVolumeLevelSupport))
+                .append(" ");
         return s.toString();
     }
 
@@ -217,13 +246,29 @@ public class DeviceFeatures {
         }
 
         public Builder update(DeviceFeatures newDeviceFeatures) {
-            this.mRecordTvScreenSupport = DeviceFeatures.updateFeatureSupportStatus(this.mRecordTvScreenSupport, newDeviceFeatures.getRecordTvScreenSupport());
-            this.mOsdStringSupport = DeviceFeatures.updateFeatureSupportStatus(this.mOsdStringSupport, newDeviceFeatures.getSetOsdStringSupport());
-            this.mDeckControlSupport = DeviceFeatures.updateFeatureSupportStatus(this.mDeckControlSupport, newDeviceFeatures.getDeckControlSupport());
-            this.mSetAudioRateSupport = DeviceFeatures.updateFeatureSupportStatus(this.mSetAudioRateSupport, newDeviceFeatures.getSetAudioRateSupport());
-            this.mArcTxSupport = DeviceFeatures.updateFeatureSupportStatus(this.mArcTxSupport, newDeviceFeatures.getArcTxSupport());
-            this.mArcRxSupport = DeviceFeatures.updateFeatureSupportStatus(this.mArcRxSupport, newDeviceFeatures.getArcRxSupport());
-            this.mSetAudioVolumeLevelSupport = DeviceFeatures.updateFeatureSupportStatus(this.mSetAudioVolumeLevelSupport, newDeviceFeatures.getSetAudioVolumeLevelSupport());
+            this.mRecordTvScreenSupport =
+                    DeviceFeatures.updateFeatureSupportStatus(
+                            this.mRecordTvScreenSupport,
+                            newDeviceFeatures.getRecordTvScreenSupport());
+            this.mOsdStringSupport =
+                    DeviceFeatures.updateFeatureSupportStatus(
+                            this.mOsdStringSupport, newDeviceFeatures.getSetOsdStringSupport());
+            this.mDeckControlSupport =
+                    DeviceFeatures.updateFeatureSupportStatus(
+                            this.mDeckControlSupport, newDeviceFeatures.getDeckControlSupport());
+            this.mSetAudioRateSupport =
+                    DeviceFeatures.updateFeatureSupportStatus(
+                            this.mSetAudioRateSupport, newDeviceFeatures.getSetAudioRateSupport());
+            this.mArcTxSupport =
+                    DeviceFeatures.updateFeatureSupportStatus(
+                            this.mArcTxSupport, newDeviceFeatures.getArcTxSupport());
+            this.mArcRxSupport =
+                    DeviceFeatures.updateFeatureSupportStatus(
+                            this.mArcRxSupport, newDeviceFeatures.getArcRxSupport());
+            this.mSetAudioVolumeLevelSupport =
+                    DeviceFeatures.updateFeatureSupportStatus(
+                            this.mSetAudioVolumeLevelSupport,
+                            newDeviceFeatures.getSetAudioVolumeLevelSupport());
             return this;
         }
     }

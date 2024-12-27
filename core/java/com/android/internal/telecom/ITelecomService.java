@@ -15,24 +15,33 @@ import android.telecom.CallAttributes;
 import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccountHandle;
 import android.telecom.TelecomAnalytics;
-import com.android.internal.telecom.ICallEventCallback;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface ITelecomService extends IInterface {
-    void acceptHandover(Uri uri, int i, PhoneAccountHandle phoneAccountHandle, String str) throws RemoteException;
+    void acceptHandover(Uri uri, int i, PhoneAccountHandle phoneAccountHandle, String str)
+            throws RemoteException;
 
     void acceptRingingCall(String str) throws RemoteException;
 
     void acceptRingingCallWithVideoState(String str, int i) throws RemoteException;
 
-    void addCall(CallAttributes callAttributes, ICallEventCallback iCallEventCallback, String str, String str2) throws RemoteException;
+    void addCall(
+            CallAttributes callAttributes,
+            ICallEventCallback iCallEventCallback,
+            String str,
+            String str2)
+            throws RemoteException;
 
-    void addNewIncomingCall(PhoneAccountHandle phoneAccountHandle, Bundle bundle, String str) throws RemoteException;
+    void addNewIncomingCall(PhoneAccountHandle phoneAccountHandle, Bundle bundle, String str)
+            throws RemoteException;
 
-    void addNewIncomingConference(PhoneAccountHandle phoneAccountHandle, Bundle bundle, String str) throws RemoteException;
+    void addNewIncomingConference(PhoneAccountHandle phoneAccountHandle, Bundle bundle, String str)
+            throws RemoteException;
 
-    void addNewUnknownCall(PhoneAccountHandle phoneAccountHandle, Bundle bundle) throws RemoteException;
+    void addNewUnknownCall(PhoneAccountHandle phoneAccountHandle, Bundle bundle)
+            throws RemoteException;
 
     void addOrRemoveTestCallCompanionApp(String str, boolean z) throws RemoteException;
 
@@ -50,11 +59,13 @@ public interface ITelecomService extends IInterface {
 
     TelecomAnalytics dumpCallAnalytics() throws RemoteException;
 
-    boolean enablePhoneAccount(PhoneAccountHandle phoneAccountHandle, boolean z) throws RemoteException;
+    boolean enablePhoneAccount(PhoneAccountHandle phoneAccountHandle, boolean z)
+            throws RemoteException;
 
     boolean endCall(String str) throws RemoteException;
 
-    Uri getAdnUriForPhoneAccount(PhoneAccountHandle phoneAccountHandle, String str) throws RemoteException;
+    Uri getAdnUriForPhoneAccount(PhoneAccountHandle phoneAccountHandle, String str)
+            throws RemoteException;
 
     ParceledListSlice<PhoneAccountHandle> getAllPhoneAccountHandles() throws RemoteException;
 
@@ -62,7 +73,8 @@ public interface ITelecomService extends IInterface {
 
     int getAllPhoneAccountsCount() throws RemoteException;
 
-    ParceledListSlice<PhoneAccountHandle> getCallCapablePhoneAccounts(boolean z, String str, String str2, boolean z2) throws RemoteException;
+    ParceledListSlice<PhoneAccountHandle> getCallCapablePhoneAccounts(
+            boolean z, String str, String str2, boolean z2) throws RemoteException;
 
     int getCallState() throws RemoteException;
 
@@ -74,23 +86,31 @@ public interface ITelecomService extends IInterface {
 
     String getDefaultDialerPackageForUser(int i) throws RemoteException;
 
-    PhoneAccountHandle getDefaultOutgoingPhoneAccount(String str, String str2, String str3) throws RemoteException;
+    PhoneAccountHandle getDefaultOutgoingPhoneAccount(String str, String str2, String str3)
+            throws RemoteException;
 
     ComponentName getDefaultPhoneApp() throws RemoteException;
 
-    String getLine1Number(PhoneAccountHandle phoneAccountHandle, String str, String str2) throws RemoteException;
+    String getLine1Number(PhoneAccountHandle phoneAccountHandle, String str, String str2)
+            throws RemoteException;
 
-    ParceledListSlice<PhoneAccountHandle> getOwnSelfManagedPhoneAccounts(String str, String str2) throws RemoteException;
+    ParceledListSlice<PhoneAccountHandle> getOwnSelfManagedPhoneAccounts(String str, String str2)
+            throws RemoteException;
 
-    PhoneAccount getPhoneAccount(PhoneAccountHandle phoneAccountHandle, String str) throws RemoteException;
+    PhoneAccount getPhoneAccount(PhoneAccountHandle phoneAccountHandle, String str)
+            throws RemoteException;
 
-    ParceledListSlice<PhoneAccountHandle> getPhoneAccountsForPackage(String str) throws RemoteException;
+    ParceledListSlice<PhoneAccountHandle> getPhoneAccountsForPackage(String str)
+            throws RemoteException;
 
-    ParceledListSlice<PhoneAccountHandle> getPhoneAccountsSupportingScheme(String str, String str2) throws RemoteException;
+    ParceledListSlice<PhoneAccountHandle> getPhoneAccountsSupportingScheme(String str, String str2)
+            throws RemoteException;
 
-    ParceledListSlice<PhoneAccount> getRegisteredPhoneAccounts(String str, String str2) throws RemoteException;
+    ParceledListSlice<PhoneAccount> getRegisteredPhoneAccounts(String str, String str2)
+            throws RemoteException;
 
-    ParceledListSlice<PhoneAccountHandle> getSelfManagedPhoneAccounts(String str, String str2) throws RemoteException;
+    ParceledListSlice<PhoneAccountHandle> getSelfManagedPhoneAccounts(String str, String str2)
+            throws RemoteException;
 
     PhoneAccountHandle getSimCallManager(int i, String str) throws RemoteException;
 
@@ -100,13 +120,15 @@ public interface ITelecomService extends IInterface {
 
     PhoneAccountHandle getUserSelectedOutgoingPhoneAccount(String str) throws RemoteException;
 
-    String getVoiceMailNumber(PhoneAccountHandle phoneAccountHandle, String str, String str2) throws RemoteException;
+    String getVoiceMailNumber(PhoneAccountHandle phoneAccountHandle, String str, String str2)
+            throws RemoteException;
 
     void handleCallIntent(Intent intent, String str) throws RemoteException;
 
     boolean handlePinMmi(String str, String str2) throws RemoteException;
 
-    boolean handlePinMmiForPhoneAccount(PhoneAccountHandle phoneAccountHandle, String str, String str2) throws RemoteException;
+    boolean handlePinMmiForPhoneAccount(
+            PhoneAccountHandle phoneAccountHandle, String str, String str2) throws RemoteException;
 
     boolean hasManageOngoingCallsPermission(String str) throws RemoteException;
 
@@ -116,19 +138,24 @@ public interface ITelecomService extends IInterface {
 
     boolean isInManagedCall(String str, String str2) throws RemoteException;
 
-    boolean isInSelfManagedCall(String str, UserHandle userHandle, String str2) throws RemoteException;
+    boolean isInSelfManagedCall(String str, UserHandle userHandle, String str2)
+            throws RemoteException;
 
-    boolean isIncomingCallPermitted(PhoneAccountHandle phoneAccountHandle, String str) throws RemoteException;
+    boolean isIncomingCallPermitted(PhoneAccountHandle phoneAccountHandle, String str)
+            throws RemoteException;
 
     boolean isNonUiInCallServiceBound(String str) throws RemoteException;
 
-    boolean isOutgoingCallPermitted(PhoneAccountHandle phoneAccountHandle, String str) throws RemoteException;
+    boolean isOutgoingCallPermitted(PhoneAccountHandle phoneAccountHandle, String str)
+            throws RemoteException;
 
     boolean isRinging(String str) throws RemoteException;
 
     boolean isTtySupported(String str, String str2) throws RemoteException;
 
-    boolean isVoiceMailNumber(PhoneAccountHandle phoneAccountHandle, String str, String str2, String str3) throws RemoteException;
+    boolean isVoiceMailNumber(
+            PhoneAccountHandle phoneAccountHandle, String str, String str2, String str3)
+            throws RemoteException;
 
     void placeCall(Uri uri, Bundle bundle, String str, String str2) throws RemoteException;
 
@@ -154,7 +181,8 @@ public interface ITelecomService extends IInterface {
 
     void setTestPhoneAcctSuggestionComponent(String str) throws RemoteException;
 
-    void setUserSelectedOutgoingPhoneAccount(PhoneAccountHandle phoneAccountHandle) throws RemoteException;
+    void setUserSelectedOutgoingPhoneAccount(PhoneAccountHandle phoneAccountHandle)
+            throws RemoteException;
 
     void showInCallScreen(boolean z, String str, String str2) throws RemoteException;
 
@@ -164,61 +192,77 @@ public interface ITelecomService extends IInterface {
 
     void stopBlockSuppression() throws RemoteException;
 
-    void unregisterPhoneAccount(PhoneAccountHandle phoneAccountHandle, String str) throws RemoteException;
+    void unregisterPhoneAccount(PhoneAccountHandle phoneAccountHandle, String str)
+            throws RemoteException;
 
     void waitOnHandlers() throws RemoteException;
 
     public static class Default implements ITelecomService {
         @Override // com.android.internal.telecom.ITelecomService
-        public void showInCallScreen(boolean showDialpad, String callingPackage, String callingFeatureId) throws RemoteException {
-        }
+        public void showInCallScreen(
+                boolean showDialpad, String callingPackage, String callingFeatureId)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public PhoneAccountHandle getDefaultOutgoingPhoneAccount(String uriScheme, String callingPackage, String callingFeatureId) throws RemoteException {
+        public PhoneAccountHandle getDefaultOutgoingPhoneAccount(
+                String uriScheme, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public PhoneAccountHandle getUserSelectedOutgoingPhoneAccount(String callingPackage) throws RemoteException {
+        public PhoneAccountHandle getUserSelectedOutgoingPhoneAccount(String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void setUserSelectedOutgoingPhoneAccount(PhoneAccountHandle account) throws RemoteException {
-        }
+        public void setUserSelectedOutgoingPhoneAccount(PhoneAccountHandle account)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public ParceledListSlice<PhoneAccountHandle> getCallCapablePhoneAccounts(boolean includeDisabledAccounts, String callingPackage, String callingFeatureId, boolean acrossProfiles) throws RemoteException {
+        public ParceledListSlice<PhoneAccountHandle> getCallCapablePhoneAccounts(
+                boolean includeDisabledAccounts,
+                String callingPackage,
+                String callingFeatureId,
+                boolean acrossProfiles)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public ParceledListSlice<PhoneAccountHandle> getSelfManagedPhoneAccounts(String callingPackage, String callingFeatureId) throws RemoteException {
+        public ParceledListSlice<PhoneAccountHandle> getSelfManagedPhoneAccounts(
+                String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public ParceledListSlice<PhoneAccountHandle> getOwnSelfManagedPhoneAccounts(String callingPackage, String callingFeatureId) throws RemoteException {
+        public ParceledListSlice<PhoneAccountHandle> getOwnSelfManagedPhoneAccounts(
+                String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public ParceledListSlice<PhoneAccountHandle> getPhoneAccountsSupportingScheme(String uriScheme, String callingPackage) throws RemoteException {
+        public ParceledListSlice<PhoneAccountHandle> getPhoneAccountsSupportingScheme(
+                String uriScheme, String callingPackage) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public ParceledListSlice<PhoneAccountHandle> getPhoneAccountsForPackage(String packageName) throws RemoteException {
+        public ParceledListSlice<PhoneAccountHandle> getPhoneAccountsForPackage(String packageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public PhoneAccount getPhoneAccount(PhoneAccountHandle account, String callingPackage) throws RemoteException {
+        public PhoneAccount getPhoneAccount(PhoneAccountHandle account, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public ParceledListSlice<PhoneAccount> getRegisteredPhoneAccounts(String callingPackage, String callingFeatureId) throws RemoteException {
+        public ParceledListSlice<PhoneAccount> getRegisteredPhoneAccounts(
+                String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
@@ -233,44 +277,55 @@ public interface ITelecomService extends IInterface {
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public ParceledListSlice<PhoneAccountHandle> getAllPhoneAccountHandles() throws RemoteException {
+        public ParceledListSlice<PhoneAccountHandle> getAllPhoneAccountHandles()
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public PhoneAccountHandle getSimCallManager(int subId, String callingPackage) throws RemoteException {
+        public PhoneAccountHandle getSimCallManager(int subId, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public PhoneAccountHandle getSimCallManagerForUser(int userId, String callingPackage) throws RemoteException {
+        public PhoneAccountHandle getSimCallManagerForUser(int userId, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void registerPhoneAccount(PhoneAccount metadata, String callingPackage) throws RemoteException {
-        }
+        public void registerPhoneAccount(PhoneAccount metadata, String callingPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void unregisterPhoneAccount(PhoneAccountHandle account, String callingPackage) throws RemoteException {
-        }
+        public void unregisterPhoneAccount(PhoneAccountHandle account, String callingPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void clearAccounts(String packageName) throws RemoteException {
-        }
+        public void clearAccounts(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public boolean isVoiceMailNumber(PhoneAccountHandle accountHandle, String number, String callingPackage, String callingFeatureId) throws RemoteException {
+        public boolean isVoiceMailNumber(
+                PhoneAccountHandle accountHandle,
+                String number,
+                String callingPackage,
+                String callingFeatureId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public String getVoiceMailNumber(PhoneAccountHandle accountHandle, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getVoiceMailNumber(
+                PhoneAccountHandle accountHandle, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public String getLine1Number(PhoneAccountHandle accountHandle, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getLine1Number(
+                PhoneAccountHandle accountHandle, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
@@ -300,21 +355,23 @@ public interface ITelecomService extends IInterface {
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void silenceRinger(String callingPackage) throws RemoteException {
-        }
+        public void silenceRinger(String callingPackage) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public boolean isInCall(String callingPackage, String callingFeatureId) throws RemoteException {
+        public boolean isInCall(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public boolean hasManageOngoingCallsPermission(String callingPackage) throws RemoteException {
+        public boolean hasManageOngoingCallsPermission(String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public boolean isInManagedCall(String callingPackage, String callingFeatureId) throws RemoteException {
+        public boolean isInManagedCall(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return false;
         }
 
@@ -329,7 +386,8 @@ public interface ITelecomService extends IInterface {
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public int getCallStateUsingPackage(String callingPackage, String callingFeatureId) throws RemoteException {
+        public int getCallStateUsingPackage(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return 0;
         }
 
@@ -339,64 +397,72 @@ public interface ITelecomService extends IInterface {
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void acceptRingingCall(String callingPackage) throws RemoteException {
-        }
+        public void acceptRingingCall(String callingPackage) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void acceptRingingCallWithVideoState(String callingPackage, int videoState) throws RemoteException {
-        }
+        public void acceptRingingCallWithVideoState(String callingPackage, int videoState)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void cancelMissedCallsNotification(String callingPackage) throws RemoteException {
-        }
+        public void cancelMissedCallsNotification(String callingPackage) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public boolean handlePinMmi(String dialString, String callingPackage) throws RemoteException {
+        public boolean handlePinMmi(String dialString, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public boolean handlePinMmiForPhoneAccount(PhoneAccountHandle accountHandle, String dialString, String callingPackage) throws RemoteException {
+        public boolean handlePinMmiForPhoneAccount(
+                PhoneAccountHandle accountHandle, String dialString, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public Uri getAdnUriForPhoneAccount(PhoneAccountHandle accountHandle, String callingPackage) throws RemoteException {
+        public Uri getAdnUriForPhoneAccount(PhoneAccountHandle accountHandle, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public boolean isTtySupported(String callingPackage, String callingFeatureId) throws RemoteException {
+        public boolean isTtySupported(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public int getCurrentTtyMode(String callingPackage, String callingFeatureId) throws RemoteException {
+        public int getCurrentTtyMode(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void addNewIncomingCall(PhoneAccountHandle phoneAccount, Bundle extras, String callingPackage) throws RemoteException {
-        }
+        public void addNewIncomingCall(
+                PhoneAccountHandle phoneAccount, Bundle extras, String callingPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void addNewIncomingConference(PhoneAccountHandle phoneAccount, Bundle extras, String callingPackage) throws RemoteException {
-        }
+        public void addNewIncomingConference(
+                PhoneAccountHandle phoneAccount, Bundle extras, String callingPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void addNewUnknownCall(PhoneAccountHandle phoneAccount, Bundle extras) throws RemoteException {
-        }
+        public void addNewUnknownCall(PhoneAccountHandle phoneAccount, Bundle extras)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void startConference(List<Uri> participants, Bundle extras, String callingPackage) throws RemoteException {
-        }
+        public void startConference(List<Uri> participants, Bundle extras, String callingPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void placeCall(Uri handle, Bundle extras, String callingPackage, String callingFeatureId) throws RemoteException {
-        }
+        public void placeCall(
+                Uri handle, Bundle extras, String callingPackage, String callingFeatureId)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public boolean enablePhoneAccount(PhoneAccountHandle accountHandle, boolean isEnabled) throws RemoteException {
+        public boolean enablePhoneAccount(PhoneAccountHandle accountHandle, boolean isEnabled)
+                throws RemoteException {
             return false;
         }
 
@@ -406,11 +472,11 @@ public interface ITelecomService extends IInterface {
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void stopBlockSuppression() throws RemoteException {
-        }
+        public void stopBlockSuppression() throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public Intent createManageBlockedNumbersIntent(String callingPackage) throws RemoteException {
+        public Intent createManageBlockedNumbersIntent(String callingPackage)
+                throws RemoteException {
             return null;
         }
 
@@ -420,26 +486,30 @@ public interface ITelecomService extends IInterface {
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public boolean isIncomingCallPermitted(PhoneAccountHandle phoneAccountHandle, String callingPackage) throws RemoteException {
+        public boolean isIncomingCallPermitted(
+                PhoneAccountHandle phoneAccountHandle, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public boolean isOutgoingCallPermitted(PhoneAccountHandle phoneAccountHandle, String callingPackage) throws RemoteException {
+        public boolean isOutgoingCallPermitted(
+                PhoneAccountHandle phoneAccountHandle, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void waitOnHandlers() throws RemoteException {
-        }
+        public void waitOnHandlers() throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void acceptHandover(Uri srcAddr, int videoState, PhoneAccountHandle destAcct, String callingPackage) throws RemoteException {
-        }
+        public void acceptHandover(
+                Uri srcAddr, int videoState, PhoneAccountHandle destAcct, String callingPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void setTestEmergencyPhoneAccountPackageNameFilter(String packageName) throws RemoteException {
-        }
+        public void setTestEmergencyPhoneAccountPackageNameFilter(String packageName)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
         public boolean isInEmergencyCall() throws RemoteException {
@@ -447,12 +517,11 @@ public interface ITelecomService extends IInterface {
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void handleCallIntent(Intent intent, String callingPackageProxy) throws RemoteException {
-        }
+        public void handleCallIntent(Intent intent, String callingPackageProxy)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void cleanupStuckCalls() throws RemoteException {
-        }
+        public void cleanupStuckCalls() throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
         public int cleanupOrphanPhoneAccounts() throws RemoteException {
@@ -465,49 +534,48 @@ public interface ITelecomService extends IInterface {
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void resetCarMode() throws RemoteException {
-        }
+        public void resetCarMode() throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void setTestDefaultCallRedirectionApp(String packageName) throws RemoteException {
-        }
+        public void setTestDefaultCallRedirectionApp(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void requestLogMark(String message) throws RemoteException {
-        }
+        public void requestLogMark(String message) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void setTestPhoneAcctSuggestionComponent(String flattenedComponentName) throws RemoteException {
-        }
+        public void setTestPhoneAcctSuggestionComponent(String flattenedComponentName)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void setTestDefaultCallScreeningApp(String packageName) throws RemoteException {
-        }
+        public void setTestDefaultCallScreeningApp(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void addOrRemoveTestCallCompanionApp(String packageName, boolean isAdded) throws RemoteException {
-        }
+        public void addOrRemoveTestCallCompanionApp(String packageName, boolean isAdded)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void setSystemDialer(ComponentName testComponentName) throws RemoteException {
-        }
+        public void setSystemDialer(ComponentName testComponentName) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void setTestDefaultDialer(String packageName) throws RemoteException {
-        }
+        public void setTestDefaultDialer(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void setTestCallDiagnosticService(String packageName) throws RemoteException {
-        }
+        public void setTestCallDiagnosticService(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ITelecomService
-        public boolean isInSelfManagedCall(String packageName, UserHandle userHandle, String callingPackage) throws RemoteException {
+        public boolean isInSelfManagedCall(
+                String packageName, UserHandle userHandle, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telecom.ITelecomService
-        public void addCall(CallAttributes callAttributes, ICallEventCallback callback, String callId, String callingPackage) throws RemoteException {
-        }
+        public void addCall(
+                CallAttributes callAttributes,
+                ICallEventCallback callback,
+                String callId,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -515,7 +583,7 @@ public interface ITelecomService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITelecomService {
+    public abstract static class Stub extends Binder implements ITelecomService {
         public static final String DESCRIPTOR = "com.android.internal.telecom.ITelecomService";
         static final int TRANSACTION_acceptHandover = 57;
         static final int TRANSACTION_acceptRingingCall = 36;
@@ -773,7 +841,8 @@ public interface ITelecomService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -795,7 +864,8 @@ public interface ITelecomService extends IInterface {
                     String _arg12 = data.readString();
                     String _arg22 = data.readString();
                     data.enforceNoDataAvail();
-                    PhoneAccountHandle _result = getDefaultOutgoingPhoneAccount(_arg02, _arg12, _arg22);
+                    PhoneAccountHandle _result =
+                            getDefaultOutgoingPhoneAccount(_arg02, _arg12, _arg22);
                     reply.writeNoException();
                     reply.writeTypedObject(_result, 1);
                     return true;
@@ -807,7 +877,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 4:
-                    PhoneAccountHandle _arg04 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg04 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     data.enforceNoDataAvail();
                     setUserSelectedOutgoingPhoneAccount(_arg04);
                     reply.writeNoException();
@@ -818,7 +889,8 @@ public interface ITelecomService extends IInterface {
                     String _arg23 = data.readString();
                     boolean _arg3 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<PhoneAccountHandle> _result3 = getCallCapablePhoneAccounts(_arg05, _arg13, _arg23, _arg3);
+                    ParceledListSlice<PhoneAccountHandle> _result3 =
+                            getCallCapablePhoneAccounts(_arg05, _arg13, _arg23, _arg3);
                     reply.writeNoException();
                     reply.writeTypedObject(_result3, 1);
                     return true;
@@ -826,7 +898,8 @@ public interface ITelecomService extends IInterface {
                     String _arg06 = data.readString();
                     String _arg14 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<PhoneAccountHandle> _result4 = getSelfManagedPhoneAccounts(_arg06, _arg14);
+                    ParceledListSlice<PhoneAccountHandle> _result4 =
+                            getSelfManagedPhoneAccounts(_arg06, _arg14);
                     reply.writeNoException();
                     reply.writeTypedObject(_result4, 1);
                     return true;
@@ -834,7 +907,8 @@ public interface ITelecomService extends IInterface {
                     String _arg07 = data.readString();
                     String _arg15 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<PhoneAccountHandle> _result5 = getOwnSelfManagedPhoneAccounts(_arg07, _arg15);
+                    ParceledListSlice<PhoneAccountHandle> _result5 =
+                            getOwnSelfManagedPhoneAccounts(_arg07, _arg15);
                     reply.writeNoException();
                     reply.writeTypedObject(_result5, 1);
                     return true;
@@ -842,19 +916,22 @@ public interface ITelecomService extends IInterface {
                     String _arg08 = data.readString();
                     String _arg16 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<PhoneAccountHandle> _result6 = getPhoneAccountsSupportingScheme(_arg08, _arg16);
+                    ParceledListSlice<PhoneAccountHandle> _result6 =
+                            getPhoneAccountsSupportingScheme(_arg08, _arg16);
                     reply.writeNoException();
                     reply.writeTypedObject(_result6, 1);
                     return true;
                 case 9:
                     String _arg09 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<PhoneAccountHandle> _result7 = getPhoneAccountsForPackage(_arg09);
+                    ParceledListSlice<PhoneAccountHandle> _result7 =
+                            getPhoneAccountsForPackage(_arg09);
                     reply.writeNoException();
                     reply.writeTypedObject(_result7, 1);
                     return true;
                 case 10:
-                    PhoneAccountHandle _arg010 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg010 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     String _arg17 = data.readString();
                     data.enforceNoDataAvail();
                     PhoneAccount _result8 = getPhoneAccount(_arg010, _arg17);
@@ -865,7 +942,8 @@ public interface ITelecomService extends IInterface {
                     String _arg011 = data.readString();
                     String _arg18 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<PhoneAccount> _result9 = getRegisteredPhoneAccounts(_arg011, _arg18);
+                    ParceledListSlice<PhoneAccount> _result9 =
+                            getRegisteredPhoneAccounts(_arg011, _arg18);
                     reply.writeNoException();
                     reply.writeTypedObject(_result9, 1);
                     return true;
@@ -901,14 +979,16 @@ public interface ITelecomService extends IInterface {
                     reply.writeTypedObject(_result14, 1);
                     return true;
                 case 17:
-                    PhoneAccount _arg014 = (PhoneAccount) data.readTypedObject(PhoneAccount.CREATOR);
+                    PhoneAccount _arg014 =
+                            (PhoneAccount) data.readTypedObject(PhoneAccount.CREATOR);
                     String _arg111 = data.readString();
                     data.enforceNoDataAvail();
                     registerPhoneAccount(_arg014, _arg111);
                     reply.writeNoException();
                     return true;
                 case 18:
-                    PhoneAccountHandle _arg015 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg015 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     String _arg112 = data.readString();
                     data.enforceNoDataAvail();
                     unregisterPhoneAccount(_arg015, _arg112);
@@ -921,7 +1001,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 20:
-                    PhoneAccountHandle _arg017 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg017 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     String _arg113 = data.readString();
                     String _arg24 = data.readString();
                     String _arg32 = data.readString();
@@ -931,7 +1012,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeBoolean(_result15);
                     return true;
                 case 21:
-                    PhoneAccountHandle _arg018 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg018 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     String _arg114 = data.readString();
                     String _arg25 = data.readString();
                     data.enforceNoDataAvail();
@@ -940,7 +1022,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeString(_result16);
                     return true;
                 case 22:
-                    PhoneAccountHandle _arg019 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg019 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     String _arg115 = data.readString();
                     String _arg26 = data.readString();
                     data.enforceNoDataAvail();
@@ -1063,7 +1146,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeBoolean(_result30);
                     return true;
                 case 40:
-                    PhoneAccountHandle _arg034 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg034 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     String _arg121 = data.readString();
                     String _arg27 = data.readString();
                     data.enforceNoDataAvail();
@@ -1072,7 +1156,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeBoolean(_result31);
                     return true;
                 case 41:
-                    PhoneAccountHandle _arg035 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg035 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     String _arg122 = data.readString();
                     data.enforceNoDataAvail();
                     Uri _result32 = getAdnUriForPhoneAccount(_arg035, _arg122);
@@ -1096,7 +1181,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeInt(_result34);
                     return true;
                 case 44:
-                    PhoneAccountHandle _arg038 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg038 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     Bundle _arg125 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     String _arg28 = data.readString();
                     data.enforceNoDataAvail();
@@ -1104,7 +1190,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 45:
-                    PhoneAccountHandle _arg039 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg039 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     Bundle _arg126 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     String _arg29 = data.readString();
                     data.enforceNoDataAvail();
@@ -1112,7 +1199,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 46:
-                    PhoneAccountHandle _arg040 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg040 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     Bundle _arg127 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     addNewUnknownCall(_arg040, _arg127);
@@ -1136,7 +1224,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 49:
-                    PhoneAccountHandle _arg043 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg043 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     boolean _arg130 = data.readBoolean();
                     data.enforceNoDataAvail();
                     boolean _result35 = enablePhoneAccount(_arg043, _arg130);
@@ -1169,7 +1258,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeTypedObject(_result38, 1);
                     return true;
                 case 54:
-                    PhoneAccountHandle _arg047 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg047 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     String _arg131 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result39 = isIncomingCallPermitted(_arg047, _arg131);
@@ -1177,7 +1267,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeBoolean(_result39);
                     return true;
                 case 55:
-                    PhoneAccountHandle _arg048 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg048 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     String _arg132 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result40 = isOutgoingCallPermitted(_arg048, _arg132);
@@ -1191,7 +1282,8 @@ public interface ITelecomService extends IInterface {
                 case 57:
                     Uri _arg049 = (Uri) data.readTypedObject(Uri.CREATOR);
                     int _arg133 = data.readInt();
-                    PhoneAccountHandle _arg212 = (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _arg212 =
+                            (PhoneAccountHandle) data.readTypedObject(PhoneAccountHandle.CREATOR);
                     String _arg34 = data.readString();
                     data.enforceNoDataAvail();
                     acceptHandover(_arg049, _arg133, _arg212, _arg34);
@@ -1267,7 +1359,8 @@ public interface ITelecomService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 70:
-                    ComponentName _arg058 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg058 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     setSystemDialer(_arg058);
                     reply.writeNoException();
@@ -1294,8 +1387,10 @@ public interface ITelecomService extends IInterface {
                     reply.writeBoolean(_result44);
                     return true;
                 case 74:
-                    CallAttributes _arg062 = (CallAttributes) data.readTypedObject(CallAttributes.CREATOR);
-                    ICallEventCallback _arg137 = ICallEventCallback.Stub.asInterface(data.readStrongBinder());
+                    CallAttributes _arg062 =
+                            (CallAttributes) data.readTypedObject(CallAttributes.CREATOR);
+                    ICallEventCallback _arg137 =
+                            ICallEventCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg214 = data.readString();
                     String _arg35 = data.readString();
                     data.enforceNoDataAvail();
@@ -1324,7 +1419,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void showInCallScreen(boolean showDialpad, String callingPackage, String callingFeatureId) throws RemoteException {
+            public void showInCallScreen(
+                    boolean showDialpad, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1341,7 +1438,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public PhoneAccountHandle getDefaultOutgoingPhoneAccount(String uriScheme, String callingPackage, String callingFeatureId) throws RemoteException {
+            public PhoneAccountHandle getDefaultOutgoingPhoneAccount(
+                    String uriScheme, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1351,7 +1450,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    PhoneAccountHandle _result = (PhoneAccountHandle) _reply.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _result =
+                            (PhoneAccountHandle) _reply.readTypedObject(PhoneAccountHandle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1360,7 +1460,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public PhoneAccountHandle getUserSelectedOutgoingPhoneAccount(String callingPackage) throws RemoteException {
+            public PhoneAccountHandle getUserSelectedOutgoingPhoneAccount(String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1368,7 +1469,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    PhoneAccountHandle _result = (PhoneAccountHandle) _reply.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _result =
+                            (PhoneAccountHandle) _reply.readTypedObject(PhoneAccountHandle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1377,7 +1479,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void setUserSelectedOutgoingPhoneAccount(PhoneAccountHandle account) throws RemoteException {
+            public void setUserSelectedOutgoingPhoneAccount(PhoneAccountHandle account)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1392,7 +1495,12 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public ParceledListSlice<PhoneAccountHandle> getCallCapablePhoneAccounts(boolean includeDisabledAccounts, String callingPackage, String callingFeatureId, boolean acrossProfiles) throws RemoteException {
+            public ParceledListSlice<PhoneAccountHandle> getCallCapablePhoneAccounts(
+                    boolean includeDisabledAccounts,
+                    String callingPackage,
+                    String callingFeatureId,
+                    boolean acrossProfiles)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1403,7 +1511,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeBoolean(acrossProfiles);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<PhoneAccountHandle> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<PhoneAccountHandle> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1412,7 +1521,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public ParceledListSlice<PhoneAccountHandle> getSelfManagedPhoneAccounts(String callingPackage, String callingFeatureId) throws RemoteException {
+            public ParceledListSlice<PhoneAccountHandle> getSelfManagedPhoneAccounts(
+                    String callingPackage, String callingFeatureId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1421,7 +1531,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<PhoneAccountHandle> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<PhoneAccountHandle> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1430,7 +1541,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public ParceledListSlice<PhoneAccountHandle> getOwnSelfManagedPhoneAccounts(String callingPackage, String callingFeatureId) throws RemoteException {
+            public ParceledListSlice<PhoneAccountHandle> getOwnSelfManagedPhoneAccounts(
+                    String callingPackage, String callingFeatureId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1439,7 +1551,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<PhoneAccountHandle> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<PhoneAccountHandle> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1448,7 +1561,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public ParceledListSlice<PhoneAccountHandle> getPhoneAccountsSupportingScheme(String uriScheme, String callingPackage) throws RemoteException {
+            public ParceledListSlice<PhoneAccountHandle> getPhoneAccountsSupportingScheme(
+                    String uriScheme, String callingPackage) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1457,7 +1571,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<PhoneAccountHandle> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<PhoneAccountHandle> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1466,7 +1581,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public ParceledListSlice<PhoneAccountHandle> getPhoneAccountsForPackage(String packageName) throws RemoteException {
+            public ParceledListSlice<PhoneAccountHandle> getPhoneAccountsForPackage(
+                    String packageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1474,7 +1590,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<PhoneAccountHandle> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<PhoneAccountHandle> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1483,7 +1600,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public PhoneAccount getPhoneAccount(PhoneAccountHandle account, String callingPackage) throws RemoteException {
+            public PhoneAccount getPhoneAccount(PhoneAccountHandle account, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1492,7 +1610,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    PhoneAccount _result = (PhoneAccount) _reply.readTypedObject(PhoneAccount.CREATOR);
+                    PhoneAccount _result =
+                            (PhoneAccount) _reply.readTypedObject(PhoneAccount.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1501,7 +1620,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public ParceledListSlice<PhoneAccount> getRegisteredPhoneAccounts(String callingPackage, String callingFeatureId) throws RemoteException {
+            public ParceledListSlice<PhoneAccount> getRegisteredPhoneAccounts(
+                    String callingPackage, String callingFeatureId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1510,7 +1630,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<PhoneAccount> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<PhoneAccount> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1542,7 +1663,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(13, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<PhoneAccount> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<PhoneAccount> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1551,14 +1673,16 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public ParceledListSlice<PhoneAccountHandle> getAllPhoneAccountHandles() throws RemoteException {
+            public ParceledListSlice<PhoneAccountHandle> getAllPhoneAccountHandles()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(14, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<PhoneAccountHandle> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<PhoneAccountHandle> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1567,7 +1691,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public PhoneAccountHandle getSimCallManager(int subId, String callingPackage) throws RemoteException {
+            public PhoneAccountHandle getSimCallManager(int subId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1576,7 +1701,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(15, _data, _reply, 0);
                     _reply.readException();
-                    PhoneAccountHandle _result = (PhoneAccountHandle) _reply.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _result =
+                            (PhoneAccountHandle) _reply.readTypedObject(PhoneAccountHandle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1585,7 +1711,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public PhoneAccountHandle getSimCallManagerForUser(int userId, String callingPackage) throws RemoteException {
+            public PhoneAccountHandle getSimCallManagerForUser(int userId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1594,7 +1721,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    PhoneAccountHandle _result = (PhoneAccountHandle) _reply.readTypedObject(PhoneAccountHandle.CREATOR);
+                    PhoneAccountHandle _result =
+                            (PhoneAccountHandle) _reply.readTypedObject(PhoneAccountHandle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1603,7 +1731,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void registerPhoneAccount(PhoneAccount metadata, String callingPackage) throws RemoteException {
+            public void registerPhoneAccount(PhoneAccount metadata, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1619,7 +1748,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void unregisterPhoneAccount(PhoneAccountHandle account, String callingPackage) throws RemoteException {
+            public void unregisterPhoneAccount(PhoneAccountHandle account, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1650,7 +1780,12 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public boolean isVoiceMailNumber(PhoneAccountHandle accountHandle, String number, String callingPackage, String callingFeatureId) throws RemoteException {
+            public boolean isVoiceMailNumber(
+                    PhoneAccountHandle accountHandle,
+                    String number,
+                    String callingPackage,
+                    String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1670,7 +1805,11 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public String getVoiceMailNumber(PhoneAccountHandle accountHandle, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getVoiceMailNumber(
+                    PhoneAccountHandle accountHandle,
+                    String callingPackage,
+                    String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1689,7 +1828,11 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public String getLine1Number(PhoneAccountHandle accountHandle, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getLine1Number(
+                    PhoneAccountHandle accountHandle,
+                    String callingPackage,
+                    String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1715,7 +1858,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(23, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1782,7 +1926,8 @@ public interface ITelecomService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(27, _data, _reply, 0);
                     _reply.readException();
-                    TelecomAnalytics _result = (TelecomAnalytics) _reply.readTypedObject(TelecomAnalytics.CREATOR);
+                    TelecomAnalytics _result =
+                            (TelecomAnalytics) _reply.readTypedObject(TelecomAnalytics.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1806,7 +1951,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public boolean isInCall(String callingPackage, String callingFeatureId) throws RemoteException {
+            public boolean isInCall(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1824,7 +1970,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public boolean hasManageOngoingCallsPermission(String callingPackage) throws RemoteException {
+            public boolean hasManageOngoingCallsPermission(String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1841,7 +1988,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public boolean isInManagedCall(String callingPackage, String callingFeatureId) throws RemoteException {
+            public boolean isInManagedCall(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1892,7 +2040,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public int getCallStateUsingPackage(String callingPackage, String callingFeatureId) throws RemoteException {
+            public int getCallStateUsingPackage(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1942,7 +2091,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void acceptRingingCallWithVideoState(String callingPackage, int videoState) throws RemoteException {
+            public void acceptRingingCallWithVideoState(String callingPackage, int videoState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1958,7 +2108,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void cancelMissedCallsNotification(String callingPackage) throws RemoteException {
+            public void cancelMissedCallsNotification(String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1973,7 +2124,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public boolean handlePinMmi(String dialString, String callingPackage) throws RemoteException {
+            public boolean handlePinMmi(String dialString, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1991,7 +2143,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public boolean handlePinMmiForPhoneAccount(PhoneAccountHandle accountHandle, String dialString, String callingPackage) throws RemoteException {
+            public boolean handlePinMmiForPhoneAccount(
+                    PhoneAccountHandle accountHandle, String dialString, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2010,7 +2164,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public Uri getAdnUriForPhoneAccount(PhoneAccountHandle accountHandle, String callingPackage) throws RemoteException {
+            public Uri getAdnUriForPhoneAccount(
+                    PhoneAccountHandle accountHandle, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2028,7 +2184,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public boolean isTtySupported(String callingPackage, String callingFeatureId) throws RemoteException {
+            public boolean isTtySupported(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2046,7 +2203,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public int getCurrentTtyMode(String callingPackage, String callingFeatureId) throws RemoteException {
+            public int getCurrentTtyMode(String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2064,7 +2222,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void addNewIncomingCall(PhoneAccountHandle phoneAccount, Bundle extras, String callingPackage) throws RemoteException {
+            public void addNewIncomingCall(
+                    PhoneAccountHandle phoneAccount, Bundle extras, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2081,7 +2241,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void addNewIncomingConference(PhoneAccountHandle phoneAccount, Bundle extras, String callingPackage) throws RemoteException {
+            public void addNewIncomingConference(
+                    PhoneAccountHandle phoneAccount, Bundle extras, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2098,7 +2260,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void addNewUnknownCall(PhoneAccountHandle phoneAccount, Bundle extras) throws RemoteException {
+            public void addNewUnknownCall(PhoneAccountHandle phoneAccount, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2114,7 +2277,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void startConference(List<Uri> participants, Bundle extras, String callingPackage) throws RemoteException {
+            public void startConference(
+                    List<Uri> participants, Bundle extras, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2131,7 +2296,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void placeCall(Uri handle, Bundle extras, String callingPackage, String callingFeatureId) throws RemoteException {
+            public void placeCall(
+                    Uri handle, Bundle extras, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2149,7 +2316,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public boolean enablePhoneAccount(PhoneAccountHandle accountHandle, boolean isEnabled) throws RemoteException {
+            public boolean enablePhoneAccount(PhoneAccountHandle accountHandle, boolean isEnabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2198,7 +2366,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public Intent createManageBlockedNumbersIntent(String callingPackage) throws RemoteException {
+            public Intent createManageBlockedNumbersIntent(String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2232,7 +2401,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public boolean isIncomingCallPermitted(PhoneAccountHandle phoneAccountHandle, String callingPackage) throws RemoteException {
+            public boolean isIncomingCallPermitted(
+                    PhoneAccountHandle phoneAccountHandle, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2250,7 +2421,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public boolean isOutgoingCallPermitted(PhoneAccountHandle phoneAccountHandle, String callingPackage) throws RemoteException {
+            public boolean isOutgoingCallPermitted(
+                    PhoneAccountHandle phoneAccountHandle, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2282,7 +2455,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void acceptHandover(Uri srcAddr, int videoState, PhoneAccountHandle destAcct, String callingPackage) throws RemoteException {
+            public void acceptHandover(
+                    Uri srcAddr, int videoState, PhoneAccountHandle destAcct, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2300,7 +2475,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void setTestEmergencyPhoneAccountPackageNameFilter(String packageName) throws RemoteException {
+            public void setTestEmergencyPhoneAccountPackageNameFilter(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2331,7 +2507,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void handleCallIntent(Intent intent, String callingPackageProxy) throws RemoteException {
+            public void handleCallIntent(Intent intent, String callingPackageProxy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2408,7 +2585,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void setTestDefaultCallRedirectionApp(String packageName) throws RemoteException {
+            public void setTestDefaultCallRedirectionApp(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2438,7 +2616,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void setTestPhoneAcctSuggestionComponent(String flattenedComponentName) throws RemoteException {
+            public void setTestPhoneAcctSuggestionComponent(String flattenedComponentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2468,7 +2647,8 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void addOrRemoveTestCallCompanionApp(String packageName, boolean isAdded) throws RemoteException {
+            public void addOrRemoveTestCallCompanionApp(String packageName, boolean isAdded)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2529,7 +2709,9 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public boolean isInSelfManagedCall(String packageName, UserHandle userHandle, String callingPackage) throws RemoteException {
+            public boolean isInSelfManagedCall(
+                    String packageName, UserHandle userHandle, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2548,7 +2730,12 @@ public interface ITelecomService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ITelecomService
-            public void addCall(CallAttributes callAttributes, ICallEventCallback callback, String callId, String callingPackage) throws RemoteException {
+            public void addCall(
+                    CallAttributes callAttributes,
+                    ICallEventCallback callback,
+                    String callId,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -4,25 +4,27 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
+
 import java.util.Arrays;
 import java.util.Map;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class GameModeInfo implements Parcelable {
-    public static final Parcelable.Creator<GameModeInfo> CREATOR = new Parcelable.Creator<GameModeInfo>() { // from class: android.app.GameModeInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GameModeInfo createFromParcel(Parcel in) {
-            return new GameModeInfo(in);
-        }
+    public static final Parcelable.Creator<GameModeInfo> CREATOR =
+            new Parcelable.Creator<GameModeInfo>() { // from class: android.app.GameModeInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GameModeInfo createFromParcel(Parcel in) {
+                    return new GameModeInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GameModeInfo[] newArray(int size) {
-            return new GameModeInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GameModeInfo[] newArray(int size) {
+                    return new GameModeInfo[size];
+                }
+            };
     private final int mActiveGameMode;
     private final int[] mAvailableGameModes;
     private final Map<Integer, GameModeConfiguration> mConfigMap;
@@ -64,13 +66,20 @@ public final class GameModeInfo implements Parcelable {
             return this;
         }
 
-        public Builder setGameModeConfiguration(int gameMode, GameModeConfiguration gameModeConfiguration) {
+        public Builder setGameModeConfiguration(
+                int gameMode, GameModeConfiguration gameModeConfiguration) {
             this.mConfigMap.put(Integer.valueOf(gameMode), gameModeConfiguration);
             return this;
         }
 
         public GameModeInfo build() {
-            return new GameModeInfo(this.mActiveGameMode, this.mAvailableGameModes, this.mOverriddenGameModes, this.mIsDownscalingAllowed, this.mIsFpsOverrideAllowed, this.mConfigMap);
+            return new GameModeInfo(
+                    this.mActiveGameMode,
+                    this.mAvailableGameModes,
+                    this.mOverriddenGameModes,
+                    this.mIsDownscalingAllowed,
+                    this.mIsFpsOverrideAllowed,
+                    this.mConfigMap);
         }
     }
 
@@ -78,7 +87,13 @@ public final class GameModeInfo implements Parcelable {
         this(activeGameMode, availableGameModes, new int[0], true, true, new ArrayMap());
     }
 
-    private GameModeInfo(int activeGameMode, int[] availableGameModes, int[] overriddenGameModes, boolean isDownscalingAllowed, boolean isFpsOverrideAllowed, Map<Integer, GameModeConfiguration> configMap) {
+    private GameModeInfo(
+            int activeGameMode,
+            int[] availableGameModes,
+            int[] overriddenGameModes,
+            boolean isDownscalingAllowed,
+            boolean isFpsOverrideAllowed,
+            Map<Integer, GameModeConfiguration> configMap) {
         this.mActiveGameMode = activeGameMode;
         this.mAvailableGameModes = Arrays.copyOf(availableGameModes, availableGameModes.length);
         this.mOverriddenGameModes = Arrays.copyOf(overriddenGameModes, overriddenGameModes.length);
@@ -94,7 +109,11 @@ public final class GameModeInfo implements Parcelable {
         this.mIsDownscalingAllowed = in.readBoolean();
         this.mIsFpsOverrideAllowed = in.readBoolean();
         this.mConfigMap = new ArrayMap();
-        in.readMap(this.mConfigMap, getClass().getClassLoader(), Integer.class, GameModeConfiguration.class);
+        in.readMap(
+                this.mConfigMap,
+                getClass().getClassLoader(),
+                Integer.class,
+                GameModeConfiguration.class);
     }
 
     public int getActiveGameMode() {

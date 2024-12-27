@@ -4,6 +4,7 @@ import android.content.Context;
 import android.flags.FeatureFlags;
 import android.flags.IFeatureFlags;
 import android.util.Slog;
+
 import com.android.server.SystemService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,7 +23,8 @@ public final class FeatureFlagsService extends SystemService {
 
         public void assertSyncPermission() {
             if (this.mContext.checkCallingOrSelfPermission("android.permission.SYNC_FLAGS") != 0) {
-                throw new SecurityException("Non-core flag queried. Requires SYNC_FLAGS permission!");
+                throw new SecurityException(
+                        "Non-core flag queried. Requires SYNC_FLAGS permission!");
             }
         }
 
@@ -35,7 +37,8 @@ public final class FeatureFlagsService extends SystemService {
 
     public FeatureFlagsService(Context context) {
         super(context);
-        FlagOverrideStore flagOverrideStore = new FlagOverrideStore(new GlobalSettingsProxy(context.getContentResolver()));
+        FlagOverrideStore flagOverrideStore =
+                new FlagOverrideStore(new GlobalSettingsProxy(context.getContentResolver()));
         this.mFlagStore = flagOverrideStore;
         this.mShellCommand = new FlagsShellCommand(flagOverrideStore);
     }
@@ -51,7 +54,9 @@ public final class FeatureFlagsService extends SystemService {
     @Override // com.android.server.SystemService
     public final void onStart() {
         Slog.d("FeatureFlagsService", "Started Feature Flag Service");
-        IFeatureFlags.Stub featureFlagsBinder = new FeatureFlagsBinder(this.mFlagStore, this.mShellCommand, new PermissionsChecker(getContext()));
+        IFeatureFlags.Stub featureFlagsBinder =
+                new FeatureFlagsBinder(
+                        this.mFlagStore, this.mShellCommand, new PermissionsChecker(getContext()));
         publishBinderService("feature_flags", featureFlagsBinder);
         publishLocalService(FeatureFlags.class, new FeatureFlags(featureFlagsBinder));
     }

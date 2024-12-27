@@ -7,7 +7,9 @@ import android.hardware.display.DisplayManagerGlobal;
 import android.os.Handler;
 import android.os.HandlerExecutor;
 import android.util.Log;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -27,8 +29,7 @@ public abstract class RotationHelper {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AudioDisplayListener implements DisplayManager.DisplayListener {
         @Override // android.hardware.display.DisplayManager.DisplayListener
-        public final void onDisplayAdded(int i) {
-        }
+        public final void onDisplayAdded(int i) {}
 
         @Override // android.hardware.display.DisplayManager.DisplayListener
         public final void onDisplayChanged(int i) {
@@ -36,19 +37,22 @@ public abstract class RotationHelper {
         }
 
         @Override // android.hardware.display.DisplayManager.DisplayListener
-        public final void onDisplayRemoved(int i) {
-        }
+        public final void onDisplayRemoved(int i) {}
     }
 
     public static void disable() {
-        ((DisplayManager) sContext.getSystemService("display")).unregisterDisplayListener(sDisplayListener);
-        ((DeviceStateManager) sContext.getSystemService(DeviceStateManager.class)).unregisterCallback(sFoldStateListener);
+        ((DisplayManager) sContext.getSystemService("display"))
+                .unregisterDisplayListener(sDisplayListener);
+        ((DeviceStateManager) sContext.getSystemService(DeviceStateManager.class))
+                .unregisterCallback(sFoldStateListener);
     }
 
     public static void enable() {
-        ((DisplayManager) sContext.getSystemService("display")).registerDisplayListener(sDisplayListener, sHandler);
+        ((DisplayManager) sContext.getSystemService("display"))
+                .registerDisplayListener(sDisplayListener, sHandler);
         updateOrientation();
-        ((DeviceStateManager) sContext.getSystemService(DeviceStateManager.class)).registerCallback(new HandlerExecutor(sHandler), sFoldStateListener);
+        ((DeviceStateManager) sContext.getSystemService(DeviceStateManager.class))
+                .registerCallback(new HandlerExecutor(sHandler), sFoldStateListener);
     }
 
     public static void forceUpdate() {
@@ -75,8 +79,7 @@ public abstract class RotationHelper {
             try {
                 Integer num = sRotation;
                 if (num != null) {
-                    if (num.intValue() != i2) {
-                    }
+                    if (num.intValue() != i2) {}
                 }
                 Integer valueOf = Integer.valueOf(i2);
                 sRotation = valueOf;
@@ -90,7 +93,9 @@ public abstract class RotationHelper {
                         Log.e("AudioService.RotationHelper", "Unknown device rotation");
                         i = -1;
                     } else {
-                        i = FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_AI_CLEAR_ZOOM_MERGE_ZSL_ANCHOR_6;
+                        i =
+                                FrameworkStatsLog
+                                        .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_AI_CLEAR_ZOOM_MERGE_ZSL_ANCHOR_6;
                     }
                 }
                 if (i != -1) {

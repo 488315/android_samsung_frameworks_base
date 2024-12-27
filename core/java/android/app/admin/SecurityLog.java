@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.util.EventLog;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -65,22 +66,23 @@ public class SecurityLog {
     public static final int TAG_WIPE_FAILURE = 210023;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SecurityLogLevel {
-    }
+    public @interface SecurityLogLevel {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SecurityLogTag {
-    }
+    public @interface SecurityLogTag {}
 
     public static native boolean isLoggingEnabled();
 
     public static native void readEvents(Collection<SecurityEvent> collection) throws IOException;
 
-    public static native void readEventsOnWrapping(long j, Collection<SecurityEvent> collection) throws IOException;
+    public static native void readEventsOnWrapping(long j, Collection<SecurityEvent> collection)
+            throws IOException;
 
-    public static native void readEventsSince(long j, Collection<SecurityEvent> collection) throws IOException;
+    public static native void readEventsSince(long j, Collection<SecurityEvent> collection)
+            throws IOException;
 
-    public static native void readPreviousEvents(Collection<SecurityEvent> collection) throws IOException;
+    public static native void readPreviousEvents(Collection<SecurityEvent> collection)
+            throws IOException;
 
     @SystemApi
     public static native int writeEvent(int i, Object... objArr);
@@ -94,19 +96,21 @@ public class SecurityLog {
     }
 
     public static final class SecurityEvent implements Parcelable {
-        public static final Parcelable.Creator<SecurityEvent> CREATOR = new Parcelable.Creator<SecurityEvent>() { // from class: android.app.admin.SecurityLog.SecurityEvent.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SecurityEvent createFromParcel(Parcel source) {
-                return new SecurityEvent(source);
-            }
+        public static final Parcelable.Creator<SecurityEvent> CREATOR =
+                new Parcelable.Creator<SecurityEvent>() { // from class:
+                    // android.app.admin.SecurityLog.SecurityEvent.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SecurityEvent createFromParcel(Parcel source) {
+                        return new SecurityEvent(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SecurityEvent[] newArray(int size) {
-                return new SecurityEvent[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SecurityEvent[] newArray(int size) {
+                        return new SecurityEvent[size];
+                    }
+                };
         private EventLog.Event mEvent;
         private long mId;
 
@@ -205,7 +209,9 @@ public class SecurityLog {
                 return false;
             }
             Object[] array = (Object[]) data;
-            return array.length >= 1 && (array[0] instanceof Integer) && ((Integer) array[0]).intValue() != 0;
+            return array.length >= 1
+                    && (array[0] instanceof Integer)
+                    && ((Integer) array[0]).intValue() != 0;
         }
 
         public SecurityEvent redact(int accessingUser) {
@@ -224,7 +230,9 @@ public class SecurityLog {
                 case 210014:
                     try {
                         String mountPoint = getStringData(0);
-                        return new SecurityEvent(getId(), this.mEvent.withNewData(new Object[]{mountPoint, ""}).getBytes());
+                        return new SecurityEvent(
+                                getId(),
+                                this.mEvent.withNewData(new Object[] {mountPoint, ""}).getBytes());
                     } catch (Exception e2) {
                         return null;
                     }

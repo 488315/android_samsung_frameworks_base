@@ -49,7 +49,8 @@ public class PsidSspRange extends ASN1Object {
         this.sspRange = sspRange;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector avec = new ASN1EncodableVector();
         avec.add(this.psid);

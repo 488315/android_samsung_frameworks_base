@@ -19,6 +19,9 @@ public class ServiceSpecificException extends RuntimeException {
 
     @Override // java.lang.Throwable
     public String toString() {
-        return super.toString() + " (code " + this.errorCode + NavigationBarInflaterView.KEY_CODE_END;
+        return super.toString()
+                + " (code "
+                + this.errorCode
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

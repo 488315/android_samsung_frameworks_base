@@ -2,9 +2,10 @@ package com.android.server.hdmi;
 
 import android.hardware.hdmi.HdmiDeviceInfo;
 import android.util.Slog;
+
 import com.android.server.HeapdumpWatcher$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.ProxyManager$$ExternalSyntheticOutline0;
-import com.android.server.hdmi.HdmiControlService;
+
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.Iterator;
@@ -23,7 +24,8 @@ public final class HotplugDetectionAction extends HdmiCecFeatureAction {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ HotplugDetectionAction this$0;
 
-        public /* synthetic */ AnonymousClass1(HotplugDetectionAction hotplugDetectionAction, int i) {
+        public /* synthetic */ AnonymousClass1(
+                HotplugDetectionAction hotplugDetectionAction, int i) {
             this.$r8$classId = i;
             this.this$0 = hotplugDetectionAction;
         }
@@ -43,7 +45,8 @@ public final class HotplugDetectionAction extends HdmiCecFeatureAction {
     }
 
     /* renamed from: -$$Nest$mcheckHotplug, reason: not valid java name */
-    public static void m578$$Nest$mcheckHotplug(HotplugDetectionAction hotplugDetectionAction, List list, boolean z) {
+    public static void m578$$Nest$mcheckHotplug(
+            HotplugDetectionAction hotplugDetectionAction, List list, boolean z) {
         HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv;
         HdmiDeviceInfo avrDeviceInfo;
         HdmiCecLocalDevice hdmiCecLocalDevice = hotplugDetectionAction.mSource;
@@ -63,7 +66,13 @@ public final class HotplugDetectionAction extends HdmiCecFeatureAction {
                 break;
             }
             boolean z2 = hotplugDetectionAction.mIsTvDevice;
-            if (z2 && i == 5 && (avrDeviceInfo = (hdmiCecLocalDeviceTv = (HdmiCecLocalDeviceTv) hdmiCecLocalDevice).getAvrDeviceInfo()) != null) {
+            if (z2
+                    && i == 5
+                    && (avrDeviceInfo =
+                                    (hdmiCecLocalDeviceTv =
+                                                    (HdmiCecLocalDeviceTv) hdmiCecLocalDevice)
+                                            .getAvrDeviceInfo())
+                            != null) {
                 int portId = avrDeviceInfo.getPortId();
                 hdmiCecLocalDeviceTv.assertRunOnServiceThread();
                 HdmiControlService hdmiControlService = hdmiCecLocalDeviceTv.mService;
@@ -72,25 +81,36 @@ public final class HotplugDetectionAction extends HdmiCecFeatureAction {
                 hdmiCecController.assertRunOnServiceThread();
                 if (hdmiCecController.mNativeWrapperImpl.nativeIsConnected(portId)) {
                     hotplugDetectionAction.mAvrStatusCount++;
-                    HeapdumpWatcher$$ExternalSyntheticOutline0.m(new StringBuilder("Ack not returned from AVR. count: "), hotplugDetectionAction.mAvrStatusCount, "HotPlugDetectionAction");
-                    if (hotplugDetectionAction.mAvrStatusCount < 3) {
-                    }
+                    HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("Ack not returned from AVR. count: "),
+                            hotplugDetectionAction.mAvrStatusCount,
+                            "HotPlugDetectionAction");
+                    if (hotplugDetectionAction.mAvrStatusCount < 3) {}
                 }
             }
-            ProxyManager$$ExternalSyntheticOutline0.m(i, "Remove device by hot-plug detection:", "HotPlugDetectionAction");
+            ProxyManager$$ExternalSyntheticOutline0.m(
+                    i, "Remove device by hot-plug detection:", "HotPlugDetectionAction");
             HdmiCecLocalDevice hdmiCecLocalDevice2 = hotplugDetectionAction.mSource;
             HdmiControlService hdmiControlService2 = hdmiCecLocalDevice.mService;
             if (z2) {
-                HdmiDeviceInfo cecDeviceInfo = hdmiControlService2.mHdmiCecNetwork.getCecDeviceInfo(i);
+                HdmiDeviceInfo cecDeviceInfo =
+                        hdmiControlService2.mHdmiCecNetwork.getCecDeviceInfo(i);
                 if (cecDeviceInfo != null) {
-                    HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv2 = (HdmiCecLocalDeviceTv) hdmiCecLocalDevice;
+                    HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv2 =
+                            (HdmiCecLocalDeviceTv) hdmiCecLocalDevice;
                     int physicalAddress = cecDeviceInfo.getPhysicalAddress();
                     hdmiCecLocalDeviceTv2.assertRunOnServiceThread();
-                    if (HdmiCecLocalDeviceTv.isTailOfActivePath(physicalAddress, hdmiCecLocalDeviceTv2.getActivePath())) {
-                        hdmiCecLocalDeviceTv2.startRoutingControl(hdmiCecLocalDeviceTv2.getActivePath(), hdmiCecLocalDeviceTv2.mService.portIdToPath(hdmiCecLocalDeviceTv2.getActivePortId()), null);
+                    if (HdmiCecLocalDeviceTv.isTailOfActivePath(
+                            physicalAddress, hdmiCecLocalDeviceTv2.getActivePath())) {
+                        hdmiCecLocalDeviceTv2.startRoutingControl(
+                                hdmiCecLocalDeviceTv2.getActivePath(),
+                                hdmiCecLocalDeviceTv2.mService.portIdToPath(
+                                        hdmiCecLocalDeviceTv2.getActivePortId()),
+                                null);
                     }
                 }
-                for (OneTouchRecordAction oneTouchRecordAction : hdmiCecLocalDevice.getActions(OneTouchRecordAction.class)) {
+                for (OneTouchRecordAction oneTouchRecordAction :
+                        hdmiCecLocalDevice.getActions(OneTouchRecordAction.class)) {
                     if (oneTouchRecordAction.mRecorderAddress == i) {
                         hdmiCecLocalDevice2.assertRunOnServiceThread();
                         oneTouchRecordAction.finish(false);
@@ -99,11 +119,13 @@ public final class HotplugDetectionAction extends HdmiCecFeatureAction {
                     }
                 }
                 if (HdmiUtils.isEligibleAddressForDevice(5, i)) {
-                    HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv3 = (HdmiCecLocalDeviceTv) hdmiCecLocalDevice;
+                    HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv3 =
+                            (HdmiCecLocalDeviceTv) hdmiCecLocalDevice;
                     hdmiCecLocalDeviceTv3.setSystemAudioMode$1(false);
                     if (hdmiCecLocalDeviceTv3.isArcEstablished()) {
                         hdmiCecLocalDeviceTv3.enableAudioReturnChannel$1(false);
-                        hdmiCecLocalDevice2.addAndStartAction(new RequestArcTerminationAction(hdmiCecLocalDevice, i, null));
+                        hdmiCecLocalDevice2.addAndStartAction(
+                                new RequestArcTerminationAction(hdmiCecLocalDevice, i, null));
                     }
                 }
             }
@@ -113,9 +135,11 @@ public final class HotplugDetectionAction extends HdmiCecFeatureAction {
                     hdmiCecLocalDevice2.removeActionExcept(DeviceSelectActionFromTv.class, null);
                 }
             }
-            Iterator it3 = hdmiCecLocalDevice.getActions(DeviceSelectActionFromPlayback.class).iterator();
+            Iterator it3 =
+                    hdmiCecLocalDevice.getActions(DeviceSelectActionFromPlayback.class).iterator();
             while (it3.hasNext()) {
-                if (((DeviceSelectActionFromPlayback) it3.next()).mTarget.getLogicalAddress() == i) {
+                if (((DeviceSelectActionFromPlayback) it3.next()).mTarget.getLogicalAddress()
+                        == i) {
                     hdmiCecLocalDevice2.removeActionExcept(DeviceSelectActionFromTv.class, null);
                 }
             }
@@ -134,7 +158,8 @@ public final class HotplugDetectionAction extends HdmiCecFeatureAction {
                 return;
             }
             Slog.v("HotPlugDetectionAction", "Add device by hot-plug detection:" + i2);
-            hotplugDetectionAction.mService.sendCecCommand(HdmiCecMessage.build(hotplugDetectionAction.getSourceAddress(), i2, 131), null);
+            hotplugDetectionAction.mService.sendCecCommand(
+                    HdmiCecMessage.build(hotplugDetectionAction.getSourceAddress(), i2, 131), null);
         }
     }
 

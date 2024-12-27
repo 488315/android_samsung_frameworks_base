@@ -32,13 +32,17 @@ public abstract class AbsCocktailLoadablePanel {
         public boolean onClickHandler(View view, PendingIntent pendingIntent) {
             try {
                 Context context = view.getContext();
-                context.startIntentSender(pendingIntent.getIntentSender(), new Intent(), 268435456, 268435456, 0);
+                context.startIntentSender(
+                        pendingIntent.getIntentSender(), new Intent(), 268435456, 268435456, 0);
                 return true;
             } catch (IntentSender.SendIntentException e) {
                 Log.e(AbsCocktailLoadablePanel.TAG, "Cannot send pending intent: ", e);
                 return false;
             } catch (Exception e2) {
-                Log.e(AbsCocktailLoadablePanel.TAG, "Cannot send pending intent due to unknown exception: ", e2);
+                Log.e(
+                        AbsCocktailLoadablePanel.TAG,
+                        "Cannot send pending intent due to unknown exception: ",
+                        e2);
                 return false;
             }
         }
@@ -77,21 +81,16 @@ public abstract class AbsCocktailLoadablePanel {
         return this.mOnCocktailClickHandler;
     }
 
-    public void onPanelVisibilityChanged(int visibility) {
-    }
+    public void onPanelVisibilityChanged(int visibility) {}
 
-    public void setData(Bundle bundle) {
-    }
+    public void setData(Bundle bundle) {}
 
     @Deprecated
-    public void onOrientationChanged(int orientation) {
-    }
+    public void onOrientationChanged(int orientation) {}
 
     @Deprecated
-    public void onChangedDisplayPolicy(int newDisplayPolicy) {
-    }
+    public void onChangedDisplayPolicy(int newDisplayPolicy) {}
 
     @Deprecated
-    public void onChangedReversedView(boolean isReversedViewMode) {
-    }
+    public void onChangedReversedView(boolean isReversedViewMode) {}
 }

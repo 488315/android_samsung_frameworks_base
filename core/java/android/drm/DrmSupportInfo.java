@@ -54,7 +54,9 @@ public class DrmSupportInfo {
     }
 
     public int hashCode() {
-        return this.mFileSuffixList.hashCode() + this.mMimeTypeList.hashCode() + this.mDescription.hashCode();
+        return this.mFileSuffixList.hashCode()
+                + this.mMimeTypeList.hashCode()
+                + this.mDescription.hashCode();
     }
 
     public boolean equals(Object object) {
@@ -62,7 +64,9 @@ public class DrmSupportInfo {
             return false;
         }
         DrmSupportInfo info = (DrmSupportInfo) object;
-        return this.mFileSuffixList.equals(info.mFileSuffixList) && this.mMimeTypeList.equals(info.mMimeTypeList) && this.mDescription.equals(info.mDescription);
+        return this.mFileSuffixList.equals(info.mFileSuffixList)
+                && this.mMimeTypeList.equals(info.mMimeTypeList)
+                && this.mDescription.equals(info.mDescription);
     }
 
     boolean isSupportedMimeType(String mimeType) {

@@ -1,6 +1,7 @@
 package com.samsung.android.wallpaper.colortheme.monet;
 
 import com.android.internal.graphics.cam.Cam;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -8,33 +8,43 @@ import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.view.autofill.AutofillId;
 import android.view.autofill.Helper;
+
 import com.android.internal.util.AnnotationValidations;
 
 /* loaded from: classes3.dex */
 public final class FillContext implements Parcelable {
-    public static final Parcelable.Creator<FillContext> CREATOR = new Parcelable.Creator<FillContext>() { // from class: android.service.autofill.FillContext.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FillContext[] newArray(int size) {
-            return new FillContext[size];
-        }
+    public static final Parcelable.Creator<FillContext> CREATOR =
+            new Parcelable.Creator<
+                    FillContext>() { // from class: android.service.autofill.FillContext.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FillContext[] newArray(int size) {
+                    return new FillContext[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FillContext createFromParcel(Parcel in) {
-            int requestId = in.readInt();
-            AssistStructure structure = (AssistStructure) in.readTypedObject(AssistStructure.CREATOR);
-            AutofillId focusedId = (AutofillId) in.readTypedObject(AutofillId.CREATOR);
-            return new FillContext(requestId, structure, focusedId);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FillContext createFromParcel(Parcel in) {
+                    int requestId = in.readInt();
+                    AssistStructure structure =
+                            (AssistStructure) in.readTypedObject(AssistStructure.CREATOR);
+                    AutofillId focusedId = (AutofillId) in.readTypedObject(AutofillId.CREATOR);
+                    return new FillContext(requestId, structure, focusedId);
+                }
+            };
     private final AutofillId mFocusedId;
     private final int mRequestId;
     private final AssistStructure mStructure;
     private transient ArrayMap<AutofillId, AssistStructure.ViewNode> mViewNodeLookupTable;
 
     public String toString() {
-        return !Helper.sDebug ? super.toString() : "FillContext [reqId=" + this.mRequestId + ", focusedId=" + this.mFocusedId + NavigationBarInflaterView.SIZE_MOD_END;
+        return !Helper.sDebug
+                ? super.toString()
+                : "FillContext [reqId="
+                        + this.mRequestId
+                        + ", focusedId="
+                        + this.mFocusedId
+                        + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     /* JADX WARN: Incorrect condition in loop: B:21:0x0053 */
@@ -42,7 +52,8 @@ public final class FillContext implements Parcelable {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public android.app.assist.AssistStructure.ViewNode[] findViewNodesByAutofillIds(android.view.autofill.AutofillId[] r11) {
+    public android.app.assist.AssistStructure.ViewNode[] findViewNodesByAutofillIds(
+            android.view.autofill.AutofillId[] r11) {
         /*
             r10 = this;
             java.util.ArrayDeque r0 = new java.util.ArrayDeque
@@ -154,15 +165,19 @@ public final class FillContext implements Parcelable {
         Lcb:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.service.autofill.FillContext.findViewNodesByAutofillIds(android.view.autofill.AutofillId[]):android.app.assist.AssistStructure$ViewNode[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.service.autofill.FillContext.findViewNodesByAutofillIds(android.view.autofill.AutofillId[]):android.app.assist.AssistStructure$ViewNode[]");
     }
 
     public FillContext(int requestId, AssistStructure structure, AutofillId focusedId) {
         this.mRequestId = requestId;
         this.mStructure = structure;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStructure);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStructure);
         this.mFocusedId = focusedId;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFocusedId);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFocusedId);
     }
 
     public int getRequestId() {
@@ -190,6 +205,5 @@ public final class FillContext implements Parcelable {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

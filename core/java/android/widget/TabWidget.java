@@ -14,8 +14,9 @@ import android.view.PointerIcon;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.flags.Flags;
-import android.widget.LinearLayout;
+
 import com.android.internal.R;
+
 import com.samsung.android.widget.SemTabDotLineView;
 
 @Deprecated
@@ -63,8 +64,11 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
         this.mImposedTabsHeight = -1;
         this.mDefaultTextSize = 14.0f;
         this.mMaxFontScale = 1.3f;
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TabWidget, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.TabWidget, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.TabWidget, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.TabWidget, attrs, a, defStyleAttr, defStyleRes);
         this.mDrawBottomStrips = a.getBoolean(3, this.mDrawBottomStrips);
         boolean isTargetSdkDonutOrLower = context.getApplicationInfo().targetSdkVersion <= 4;
         boolean hasExplicitLeft = a.hasValueOrEmpty(1);
@@ -89,10 +93,13 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
         context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, outValue, true);
         this.mIsThemeDeviceDefaultFamily = outValue.data != 0;
         if (this.mIsThemeDeviceDefaultFamily) {
-            TypedArray typedArray = context.getTheme().obtainStyledAttributes(null, R.styleable.Theme, 0, 0);
+            TypedArray typedArray =
+                    context.getTheme().obtainStyledAttributes(null, R.styleable.Theme, 0, 0);
             int tabTextAppearnceId = typedArray.getResourceId(143, 0);
             typedArray.recycle();
-            TypedArray typedArray2 = getContext().obtainStyledAttributes(tabTextAppearnceId, R.styleable.TextAppearance);
+            TypedArray typedArray2 =
+                    getContext()
+                            .obtainStyledAttributes(tabTextAppearnceId, R.styleable.TextAppearance);
             TypedValue outValue2 = typedArray2.peekValue(0);
             typedArray2.recycle();
             if (outValue2 != null) {
@@ -148,12 +155,22 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
     }
 
     @Override // android.widget.LinearLayout
-    void measureChildBeforeLayout(View child, int childIndex, int widthMeasureSpec, int totalWidth, int heightMeasureSpec, int totalHeight) {
+    void measureChildBeforeLayout(
+            View child,
+            int childIndex,
+            int widthMeasureSpec,
+            int totalWidth,
+            int heightMeasureSpec,
+            int totalHeight) {
         if (!isMeasureWithLargestChildEnabled() && this.mImposedTabsHeight >= 0) {
-            widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mImposedTabWidths[childIndex] + totalWidth, 1073741824);
-            heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(this.mImposedTabsHeight, 1073741824);
+            widthMeasureSpec =
+                    View.MeasureSpec.makeMeasureSpec(
+                            this.mImposedTabWidths[childIndex] + totalWidth, 1073741824);
+            heightMeasureSpec =
+                    View.MeasureSpec.makeMeasureSpec(this.mImposedTabsHeight, 1073741824);
         }
-        super.measureChildBeforeLayout(child, childIndex, widthMeasureSpec, totalWidth, heightMeasureSpec, totalHeight);
+        super.measureChildBeforeLayout(
+                child, childIndex, widthMeasureSpec, totalWidth, heightMeasureSpec, totalHeight);
     }
 
     @Override // android.widget.LinearLayout
@@ -188,7 +205,8 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
                         this.mImposedTabWidths[i2] = newWidth;
                         extraWidth -= childWidth - newWidth;
                         childCount--;
-                        this.mImposedTabsHeight = Math.max(this.mImposedTabsHeight, child.getMeasuredHeight());
+                        this.mImposedTabsHeight =
+                                Math.max(this.mImposedTabsHeight, child.getMeasuredHeight());
                     }
                 }
             }
@@ -279,10 +297,18 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
             bounds.right = selectedChild.getRight();
             int myHeight = getHeight();
             if (leftStrip != null) {
-                leftStrip.setBounds(Math.min(0, bounds.left - leftStrip.getIntrinsicWidth()), myHeight - leftStrip.getIntrinsicHeight(), bounds.left, myHeight);
+                leftStrip.setBounds(
+                        Math.min(0, bounds.left - leftStrip.getIntrinsicWidth()),
+                        myHeight - leftStrip.getIntrinsicHeight(),
+                        bounds.left,
+                        myHeight);
             }
             if (rightStrip != null) {
-                rightStrip.setBounds(bounds.right, myHeight - rightStrip.getIntrinsicHeight(), Math.max(getWidth(), bounds.right + rightStrip.getIntrinsicWidth()), myHeight);
+                rightStrip.setBounds(
+                        bounds.right,
+                        myHeight - rightStrip.getIntrinsicHeight(),
+                        Math.max(getWidth(), bounds.right + rightStrip.getIntrinsicWidth()),
+                        myHeight);
             }
             this.mStripMoved = false;
         }
@@ -302,13 +328,15 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
         }
         if (this.mSelectedTab != -1) {
             getChildTabViewAt(this.mSelectedTab).setSelected(false);
-            if (this.mIsThemeDeviceDefaultFamily && (oldTabView = getChildTabViewAt(this.mSelectedTab)) != null) {
+            if (this.mIsThemeDeviceDefaultFamily
+                    && (oldTabView = getChildTabViewAt(this.mSelectedTab)) != null) {
                 TextView oldTabTextView = (TextView) oldTabView.findViewById(16908310);
                 if (oldTabTextView != null) {
                     oldTabTextView.setTextColor(this.mTabTextColorStateList);
                     oldTabTextView.setTypeface(this.mSemRegularFont);
                 }
-                SemTabDotLineView oldSemTabDotLineView = (SemTabDotLineView) oldTabView.findViewById(R.id.sem_tab_indicator);
+                SemTabDotLineView oldSemTabDotLineView =
+                        (SemTabDotLineView) oldTabView.findViewById(R.id.sem_tab_indicator);
                 if (oldSemTabDotLineView != null) {
                     oldSemTabDotLineView.setDrawState(false);
                 }
@@ -317,13 +345,15 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
         this.mSelectedTab = index;
         getChildTabViewAt(this.mSelectedTab).setSelected(true);
         this.mStripMoved = true;
-        if (this.mIsThemeDeviceDefaultFamily && (tabView = getChildTabViewAt(this.mSelectedTab)) != null) {
+        if (this.mIsThemeDeviceDefaultFamily
+                && (tabView = getChildTabViewAt(this.mSelectedTab)) != null) {
             TextView tabTextView = (TextView) tabView.findViewById(16908310);
             if (tabTextView != null) {
                 tabTextView.setTextColor(this.mTabTextColorStateList);
                 tabTextView.setTypeface(this.mSemSemiBoldFont);
             }
-            SemTabDotLineView semTabDotLineView = (SemTabDotLineView) tabView.findViewById(R.id.sem_tab_indicator);
+            SemTabDotLineView semTabDotLineView =
+                    (SemTabDotLineView) tabView.findViewById(R.id.sem_tab_indicator);
             if (semTabDotLineView != null) {
                 semTabDotLineView.setDrawState(true);
             }
@@ -403,8 +433,7 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
     }
 
     @Override // android.view.View.OnFocusChangeListener
-    public void onFocusChange(View v, boolean hasFocus) {
-    }
+    public void onFocusChange(View v, boolean hasFocus) {}
 
     private class TabClickListener implements View.OnClickListener {
         private final int mTabIndex;
@@ -428,9 +457,9 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:19:0x00bf, code lost:
-        
-            return false;
-         */
+
+           return false;
+        */
         @Override // android.view.View.OnTouchListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -530,14 +559,18 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
             Lc1:
                 return r2
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.widget.TabWidget.SemTabTouchListener.onTouch(android.view.View, android.view.MotionEvent):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.widget.TabWidget.SemTabTouchListener.onTouch(android.view.View,"
+                        + " android.view.MotionEvent):boolean");
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public int getSelectedColor(ColorStateList colorStateList) {
         if (colorStateList != null) {
-            return colorStateList.getColorForState(new int[]{16842913, 16842910}, colorStateList.getDefaultColor());
+            return colorStateList.getColorForState(
+                    new int[] {16842913, 16842910}, colorStateList.getDefaultColor());
         }
         return -1;
     }
@@ -545,7 +578,8 @@ public class TabWidget extends LinearLayout implements View.OnFocusChangeListene
     /* JADX INFO: Access modifiers changed from: private */
     public int getNotSelectedColor(ColorStateList colorStateList) {
         if (colorStateList != null) {
-            return colorStateList.getColorForState(new int[]{-16842913, -16842908}, colorStateList.getDefaultColor());
+            return colorStateList.getColorForState(
+                    new int[] {-16842913, -16842908}, colorStateList.getDefaultColor());
         }
         return -1;
     }

@@ -19,6 +19,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.TtsSpan;
 import android.util.SparseIntArray;
+
 import com.android.i18n.phonenumbers.NumberParseException;
 import com.android.i18n.phonenumbers.PhoneNumberUtil;
 import com.android.i18n.phonenumbers.Phonenumber;
@@ -27,8 +28,10 @@ import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.telephony.SemTelephonyUtils;
 import com.android.internal.telephony.TelephonyFeatures;
 import com.android.internal.telephony.flags.Flags;
+
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
@@ -117,12 +120,14 @@ public class PhoneNumberUtils {
     private static String[] sConvertToEmergencyMap;
     private static final Pattern GLOBAL_PHONE_NUMBER_PATTERN = Pattern.compile("[\\+]?[0-9.-]+");
     private static int sMinMatch = 0;
-    private static final String[] NANP_COUNTRIES = {"US", "CA", "AS", "AI", "AG", "BS", "BB", "BM", "VG", "KY", "DM", "DO", "GD", "GU", "JM", "PR", "MS", "MP", "KN", "LC", "VC", "TT", "TC", "VI"};
+    private static final String[] NANP_COUNTRIES = {
+        "US", "CA", "AS", "AI", "AG", "BS", "BB", "BM", "VG", "KY", "DM", "DO", "GD", "GU", "JM",
+        "PR", "MS", "MP", "KN", "LC", "VC", "TT", "TC", "VI"
+    };
     private static final SparseIntArray KEYPAD_MAP = new SparseIntArray();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BcdExtendType {
-    }
+    public @interface BcdExtendType {}
 
     static {
         KEYPAD_MAP.put(97, 50);
@@ -177,7 +182,18 @@ public class PhoneNumberUtils {
         KEYPAD_MAP.put(88, 57);
         KEYPAD_MAP.put(89, 57);
         KEYPAD_MAP.put(90, 57);
-        COUNTRY_CALLING_CALL = new boolean[]{true, true, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, true, true, false, true, true, true, true, true, false, true, false, false, true, true, false, false, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, true, false, true, true, true, true, true, true, true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true, true, true, true, false, true, false, false, true, true, true, true, true, true, true, false, false, true, false};
+        COUNTRY_CALLING_CALL =
+                new boolean[] {
+                    true, true, false, false, false, false, false, true, false, false, false, false,
+                    false, false, false, false, false, false, false, false, true, false, false,
+                    false, false, false, false, true, true, false, true, true, true, true, true,
+                    false, true, false, false, true, true, false, false, true, true, true, true,
+                    true, true, true, false, true, true, true, true, true, true, true, true, false,
+                    true, true, true, true, true, true, true, false, false, false, false, false,
+                    false, false, false, false, false, false, false, false, false, true, true, true,
+                    true, false, true, false, false, true, true, true, true, true, true, true,
+                    false, false, true, false
+                };
         CCC_LENGTH = COUNTRY_CALLING_CALL.length;
         sConvertToEmergencyMap = null;
         refCountryName = "";
@@ -221,7 +237,13 @@ public class PhoneNumberUtils {
     }
 
     public static final boolean isNonSeparator(char c) {
-        return (c >= '0' && c <= '9') || c == '*' || c == '#' || c == '+' || c == 'N' || c == ';' || c == ',';
+        return (c >= '0' && c <= '9')
+                || c == '*'
+                || c == '#'
+                || c == '+'
+                || c == 'N'
+                || c == ';'
+                || c == ',';
     }
 
     public static final boolean isStartsPostDial(char c) {
@@ -238,7 +260,9 @@ public class PhoneNumberUtils {
 
     private static int getMinMatch() {
         if (sMinMatch == 0) {
-            sMinMatch = Resources.getSystem().getInteger(R.integer.config_phonenumber_compare_min_match);
+            sMinMatch =
+                    Resources.getSystem()
+                            .getInteger(R.integer.config_phonenumber_compare_min_match);
         }
         return sMinMatch;
     }
@@ -256,18 +280,19 @@ public class PhoneNumberUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0081, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x007e, code lost:
-    
-        if (r12 == null) goto L37;
-     */
+
+       if (r12 == null) goto L37;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String getNumberFromIntent(android.content.Intent r13, android.content.Context r14) {
+    public static java.lang.String getNumberFromIntent(
+            android.content.Intent r13, android.content.Context r14) {
         /*
             r0 = 0
             android.net.Uri r7 = r13.getData()
@@ -350,7 +375,10 @@ public class PhoneNumberUtils {
             java.lang.String r1 = r7.getSchemeSpecificPart()
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.PhoneNumberUtils.getNumberFromIntent(android.content.Intent, android.content.Context):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.telephony.PhoneNumberUtils.getNumberFromIntent(android.content.Intent,"
+                    + " android.content.Context):java.lang.String");
     }
 
     public static String extractNetworkPortion(String phoneNumber) {
@@ -496,7 +524,9 @@ public class PhoneNumberUtils {
 
     @Deprecated
     public static boolean compare(Context context, String a, String b) {
-        boolean useStrict = context.getResources().getBoolean(R.bool.config_use_strict_phone_number_comparation);
+        boolean useStrict =
+                context.getResources()
+                        .getBoolean(R.bool.config_use_strict_phone_number_comparation);
         return compare(a, b, useStrict);
     }
 
@@ -507,7 +537,8 @@ public class PhoneNumberUtils {
     public static boolean compareLoosely(String a, String b) {
         int numNonDialableCharsInA = 0;
         int numNonDialableCharsInB = 0;
-        int minMatch = SemCscFeature.getInstance().getInteger("CscFeature_RIL_CallerIdMatchingDigit", 7);
+        int minMatch =
+                SemCscFeature.getInstance().getInteger("CscFeature_RIL_CallerIdMatchingDigit", 7);
         if (a == null || b == null) {
             return a == b;
         }
@@ -572,8 +603,10 @@ public class PhoneNumberUtils {
                 }
                 int forwardIndexA = 0;
                 int forwardIndexB = 0;
-                CountryCallingCodeAndNewIndex cccA = tryGetCountryCallingCodeAndNewIndex(a, acceptInvalidCCCPrefix);
-                CountryCallingCodeAndNewIndex cccB = tryGetCountryCallingCodeAndNewIndex(b, acceptInvalidCCCPrefix);
+                CountryCallingCodeAndNewIndex cccA =
+                        tryGetCountryCallingCodeAndNewIndex(a, acceptInvalidCCCPrefix);
+                CountryCallingCodeAndNewIndex cccB =
+                        tryGetCountryCallingCodeAndNewIndex(b, acceptInvalidCCCPrefix);
                 boolean bothHasCountryCallingCode = false;
                 boolean okToIgnorePrefix = true;
                 boolean trunkPrefixIsOmittedA = false;
@@ -631,13 +664,15 @@ public class PhoneNumberUtils {
                     }
                 }
                 if (okToIgnorePrefix) {
-                    if ((trunkPrefixIsOmittedA && forwardIndexA <= backwardIndexA) || !checkPrefixIsIgnorable(a, forwardIndexA, backwardIndexA)) {
+                    if ((trunkPrefixIsOmittedA && forwardIndexA <= backwardIndexA)
+                            || !checkPrefixIsIgnorable(a, forwardIndexA, backwardIndexA)) {
                         if (acceptInvalidCCCPrefix) {
                             return compare(a, b, false);
                         }
                         return false;
                     }
-                    if ((trunkPrefixIsOmittedB && forwardIndexB <= backwardIndexB) || !checkPrefixIsIgnorable(b, forwardIndexA, backwardIndexB)) {
+                    if ((trunkPrefixIsOmittedB && forwardIndexB <= backwardIndexB)
+                            || !checkPrefixIsIgnorable(b, forwardIndexA, backwardIndexB)) {
                         if (acceptInvalidCCCPrefix) {
                             return compare(a, b, false);
                         }
@@ -735,7 +770,8 @@ public class PhoneNumberUtils {
         return calledPartyBCDToString(bytes, offset, length, 1);
     }
 
-    public static String calledPartyBCDToString(byte[] bytes, int offset, int length, int bcdExtType) {
+    public static String calledPartyBCDToString(
+            byte[] bytes, int offset, int length, int bcdExtType) {
         boolean prependPlus = false;
         StringBuilder ret = new StringBuilder((length * 2) + 1);
         if (length < 2) {
@@ -789,10 +825,13 @@ public class PhoneNumberUtils {
         return ret.toString();
     }
 
-    private static void internalCalledPartyBCDFragmentToString(StringBuilder sb, byte[] bytes, int offset, int length, int bcdExtType) {
+    private static void internalCalledPartyBCDFragmentToString(
+            StringBuilder sb, byte[] bytes, int offset, int length, int bcdExtType) {
         char c;
         char c2;
-        for (int i = offset; i < length + offset && (c = bcdToChar((byte) (bytes[i] & 15), bcdExtType)) != 0; i++) {
+        for (int i = offset;
+                i < length + offset && (c = bcdToChar((byte) (bytes[i] & 15), bcdExtType)) != 0;
+                i++) {
             sb.append(c);
             byte b = (byte) ((bytes[i] >> 4) & 15);
             if ((b == 15 && i + 1 == length + offset) || (c2 = bcdToChar(b, bcdExtType)) == 0) {
@@ -807,7 +846,8 @@ public class PhoneNumberUtils {
         return calledPartyBCDFragmentToString(bytes, offset, length, 1);
     }
 
-    public static String calledPartyBCDFragmentToString(byte[] bytes, int offset, int length, int bcdExtType) {
+    public static String calledPartyBCDFragmentToString(
+            byte[] bytes, int offset, int length, int bcdExtType) {
         StringBuilder ret = new StringBuilder(length * 2);
         internalCalledPartyBCDFragmentToString(ret, bytes, offset, length, bcdExtType);
         return ret.toString();
@@ -847,7 +887,11 @@ public class PhoneNumberUtils {
 
     public static boolean isWellFormedSmsAddress(String address) {
         String networkPortion = extractNetworkPortion(address);
-        return (networkPortion.equals(PLUS_SIGN_STRING) || TextUtils.isEmpty(networkPortion) || !isDialable(networkPortion)) ? false : true;
+        return (networkPortion.equals(PLUS_SIGN_STRING)
+                        || TextUtils.isEmpty(networkPortion)
+                        || !isDialable(networkPortion))
+                ? false
+                : true;
     }
 
     public static boolean isGlobalPhoneNumber(String phoneNumber) {
@@ -897,7 +941,8 @@ public class PhoneNumberUtils {
         return numberToCalledPartyBCDHelper(number, false, bcdExtType);
     }
 
-    private static byte[] numberToCalledPartyBCDHelper(String number, boolean includeLength, int bcdExtType) {
+    private static byte[] numberToCalledPartyBCDHelper(
+            String number, boolean includeLength, int bcdExtType) {
         int numberLenReal = number.length();
         int numberLenEffective = numberLenReal;
         char c = PLUS_SIGN_CHAR;
@@ -919,7 +964,8 @@ public class PhoneNumberUtils {
             if (c2 != c) {
                 int shift = (digitCount & 1) == 1 ? 4 : 0;
                 int i2 = (digitCount >> 1) + extraBytes;
-                result[i2] = (byte) (((byte) ((charToBCD(c2, bcdExtType) & 15) << shift)) | result[i2]);
+                result[i2] =
+                        (byte) (((byte) ((charToBCD(c2, bcdExtType) & 15) << shift)) | result[i2]);
                 digitCount++;
             }
             i++;
@@ -963,7 +1009,17 @@ public class PhoneNumberUtils {
     public static void formatNumber(Editable text, int defaultFormattingType) {
         int formatType = defaultFormattingType;
         if (text.length() > 2 && text.charAt(0) == '+') {
-            formatType = text.charAt(1) == '1' ? 1 : (text.length() >= 3 && text.charAt(1) == '8' && text.charAt(2) == '1') ? 2 : (TelephonyFeatures.isCountrySpecific(0, "KOR") && text.length() >= 3 && text.charAt(1) == '8' && text.charAt(2) == '2') ? 82 : 0;
+            formatType =
+                    text.charAt(1) == '1'
+                            ? 1
+                            : (text.length() >= 3 && text.charAt(1) == '8' && text.charAt(2) == '1')
+                                    ? 2
+                                    : (TelephonyFeatures.isCountrySpecific(0, "KOR")
+                                                    && text.length() >= 3
+                                                    && text.charAt(1) == '8'
+                                                    && text.charAt(2) == '2')
+                                            ? 82
+                                            : 0;
         }
         switch (formatType) {
             case 0:
@@ -1065,7 +1121,8 @@ public class PhoneNumberUtils {
     public static void formatKRnpNumber(Editable text) {
         int state;
         int length = text.length();
-        int lengthRemovedDash = text.toString().replace(NativeLibraryHelper.CLEAR_ABI_OVERRIDE, "").length();
+        int lengthRemovedDash =
+                text.toString().replace(NativeLibraryHelper.CLEAR_ABI_OVERRIDE, "").length();
         if (lengthRemovedDash > 12) {
             removeDashes(text);
             return;
@@ -1119,7 +1176,9 @@ public class PhoneNumberUtils {
             if (length < 4) {
                 return;
             }
-            if (Digits.startsWith("*23#") || Digits.startsWith("*22#") || Digits.startsWith(CLIR_ON)) {
+            if (Digits.startsWith("*23#")
+                    || Digits.startsWith("*22#")
+                    || Digits.startsWith(CLIR_ON)) {
                 if (length > 5) {
                     return;
                 } else {
@@ -1322,17 +1381,22 @@ public class PhoneNumberUtils {
         if (defaultCountryIso != null) {
             defaultCountryIso = defaultCountryIso.toUpperCase(Locale.ROOT);
         }
-        return formatNumberInternal(phoneNumber, defaultCountryIso, PhoneNumberUtil.PhoneNumberFormat.E164);
+        return formatNumberInternal(
+                phoneNumber, defaultCountryIso, PhoneNumberUtil.PhoneNumberFormat.E164);
     }
 
     public static String formatNumberToRFC3966(String phoneNumber, String defaultCountryIso) {
         if (defaultCountryIso != null) {
             defaultCountryIso = defaultCountryIso.toUpperCase(Locale.ROOT);
         }
-        return formatNumberInternal(phoneNumber, defaultCountryIso, PhoneNumberUtil.PhoneNumberFormat.RFC3966);
+        return formatNumberInternal(
+                phoneNumber, defaultCountryIso, PhoneNumberUtil.PhoneNumberFormat.RFC3966);
     }
 
-    private static String formatNumberInternal(String rawPhoneNumber, String defaultCountryIso, PhoneNumberUtil.PhoneNumberFormat formatIdentifier) {
+    private static String formatNumberInternal(
+            String rawPhoneNumber,
+            String defaultCountryIso,
+            PhoneNumberUtil.PhoneNumberFormat formatIdentifier) {
         PhoneNumberUtil util = PhoneNumberUtil.getInstance();
         try {
             Phonenumber.PhoneNumber phoneNumber = util.parse(rawPhoneNumber, defaultCountryIso);
@@ -1346,7 +1410,9 @@ public class PhoneNumberUtils {
     }
 
     public static boolean isInternationalNumber(String phoneNumber, String defaultCountryIso) {
-        if (TextUtils.isEmpty(phoneNumber) || phoneNumber.startsWith("#") || phoneNumber.startsWith("*")) {
+        if (TextUtils.isEmpty(phoneNumber)
+                || phoneNumber.startsWith("#")
+                || phoneNumber.startsWith("*")) {
             return false;
         }
         if (defaultCountryIso != null) {
@@ -1375,18 +1441,28 @@ public class PhoneNumberUtils {
             String networkCountryIso = TelephonyManager.getDefault().getNetworkCountryIso(0);
             Locale locale = Locale.getDefault();
             if (!phoneNumber.startsWith(PLUS_SIGN_STRING)) {
-                if ("ko".equals(locale.getLanguage()) || (phoneNumber.startsWith("050") && "kr".equals(networkCountryIso))) {
-                    return formatNumber(phoneNumber, getFormatTypeFromCountryCode(KOREA_ISO_COUNTRY_CODE));
+                if ("ko".equals(locale.getLanguage())
+                        || (phoneNumber.startsWith("050") && "kr".equals(networkCountryIso))) {
+                    return formatNumber(
+                            phoneNumber, getFormatTypeFromCountryCode(KOREA_ISO_COUNTRY_CODE));
                 }
                 try {
-                    return util.formatInOriginalFormat(util.parseAndKeepRawInput(phoneNumber, defaultCountryIso), defaultCountryIso);
+                    return util.formatInOriginalFormat(
+                            util.parseAndKeepRawInput(phoneNumber, defaultCountryIso),
+                            defaultCountryIso);
                 } catch (NumberParseException e) {
                     return null;
                 }
             }
             try {
-                Phonenumber.PhoneNumber pn = util.parseAndKeepRawInput(phoneNumber, defaultCountryIso);
-                if (KOREA_ISO_COUNTRY_CODE.equals(defaultCountryIso) && pn.getCountryCode() == util.getCountryCodeForRegion(KOREA_ISO_COUNTRY_CODE) && pn.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
+                Phonenumber.PhoneNumber pn =
+                        util.parseAndKeepRawInput(phoneNumber, defaultCountryIso);
+                if (KOREA_ISO_COUNTRY_CODE.equals(defaultCountryIso)
+                        && pn.getCountryCode()
+                                == util.getCountryCodeForRegion(KOREA_ISO_COUNTRY_CODE)
+                        && pn.getCountryCodeSource()
+                                == Phonenumber.PhoneNumber.CountryCodeSource
+                                        .FROM_NUMBER_WITH_PLUS_SIGN) {
                     result2 = util.format(pn, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
                 } else {
                     result2 = util.formatInOriginalFormat(pn, defaultCountryIso);
@@ -1402,11 +1478,25 @@ public class PhoneNumberUtils {
             if (result2 != null) {
                 return result2;
             }
-            if (KOREA_ISO_COUNTRY_CODE.equalsIgnoreCase(defaultCountryIso) && pn2.getCountryCode() == util.getCountryCodeForRegion(KOREA_ISO_COUNTRY_CODE) && pn2.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
+            if (KOREA_ISO_COUNTRY_CODE.equalsIgnoreCase(defaultCountryIso)
+                    && pn2.getCountryCode() == util.getCountryCodeForRegion(KOREA_ISO_COUNTRY_CODE)
+                    && pn2.getCountryCodeSource()
+                            == Phonenumber.PhoneNumber.CountryCodeSource
+                                    .FROM_NUMBER_WITH_PLUS_SIGN) {
                 result = util.format(pn2, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
-            } else if (JAPAN_ISO_COUNTRY_CODE.equalsIgnoreCase(defaultCountryIso) && pn2.getCountryCode() == util.getCountryCodeForRegion(JAPAN_ISO_COUNTRY_CODE) && pn2.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
+            } else if (JAPAN_ISO_COUNTRY_CODE.equalsIgnoreCase(defaultCountryIso)
+                    && pn2.getCountryCode() == util.getCountryCodeForRegion(JAPAN_ISO_COUNTRY_CODE)
+                    && pn2.getCountryCodeSource()
+                            == Phonenumber.PhoneNumber.CountryCodeSource
+                                    .FROM_NUMBER_WITH_PLUS_SIGN) {
                 result = util.format(pn2, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
-            } else if (Flags.removeCountryCodeFromLocalSingaporeCalls() && SINGAPORE_ISO_COUNTRY_CODE.equalsIgnoreCase(defaultCountryIso) && pn2.getCountryCode() == util.getCountryCodeForRegion(SINGAPORE_ISO_COUNTRY_CODE) && pn2.getCountryCodeSource() == Phonenumber.PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN) {
+            } else if (Flags.removeCountryCodeFromLocalSingaporeCalls()
+                    && SINGAPORE_ISO_COUNTRY_CODE.equalsIgnoreCase(defaultCountryIso)
+                    && pn2.getCountryCode()
+                            == util.getCountryCodeForRegion(SINGAPORE_ISO_COUNTRY_CODE)
+                    && pn2.getCountryCodeSource()
+                            == Phonenumber.PhoneNumber.CountryCodeSource
+                                    .FROM_NUMBER_WITH_PLUS_SIGN) {
                 result = util.format(pn2, PhoneNumberUtil.PhoneNumberFormat.NATIONAL);
             } else {
                 result = util.formatInOriginalFormat(pn2, defaultCountryIso);
@@ -1417,7 +1507,8 @@ public class PhoneNumberUtils {
         }
     }
 
-    public static String formatNumber(String phoneNumber, String phoneNumberE164, String defaultCountryIso) {
+    public static String formatNumber(
+            String phoneNumber, String phoneNumberE164, String defaultCountryIso) {
         if (defaultCountryIso != null) {
             defaultCountryIso = defaultCountryIso.toUpperCase(Locale.ROOT);
         }
@@ -1428,7 +1519,9 @@ public class PhoneNumberUtils {
             }
         }
         PhoneNumberUtil util = PhoneNumberUtil.getInstance();
-        if (phoneNumberE164 != null && phoneNumberE164.length() >= 2 && phoneNumberE164.charAt(0) == '+') {
+        if (phoneNumberE164 != null
+                && phoneNumberE164.length() >= 2
+                && phoneNumberE164.charAt(0) == '+') {
             try {
                 Phonenumber.PhoneNumber pn = util.parse(phoneNumberE164, "ZZ");
                 String regionCode = util.getRegionCodeForNumber(pn);
@@ -1501,7 +1594,8 @@ public class PhoneNumberUtils {
             }
             return TelephonyManager.getDefault().isEmergencyNumber(number);
         } catch (RuntimeException ex) {
-            com.android.telephony.Rlog.e(LOG_TAG, "isEmergencyNumberInternal: RuntimeException: " + ex);
+            com.android.telephony.Rlog.e(
+                    LOG_TAG, "isEmergencyNumberInternal: RuntimeException: " + ex);
             return false;
         }
     }
@@ -1537,8 +1631,15 @@ public class PhoneNumberUtils {
                 return false;
             }
             boolean compareWithMdn = false;
-            if (context != null && (configManager = (CarrierConfigManager) context.getSystemService("carrier_config")) != null && (b = configManager.getConfigForSubId(subId)) != null) {
-                compareWithMdn = b.getBoolean(CarrierConfigManager.KEY_MDN_IS_ADDITIONAL_VOICEMAIL_NUMBER_BOOL);
+            if (context != null
+                    && (configManager =
+                                    (CarrierConfigManager)
+                                            context.getSystemService("carrier_config"))
+                            != null
+                    && (b = configManager.getConfigForSubId(subId)) != null) {
+                compareWithMdn =
+                        b.getBoolean(
+                                CarrierConfigManager.KEY_MDN_IS_ADDITIONAL_VOICEMAIL_NUMBER_BOOL);
             }
             if (compareWithMdn) {
                 return compare(number2, vmNumber) || compare(number2, mdn);
@@ -1572,23 +1673,34 @@ public class PhoneNumberUtils {
     public static String cdmaCheckAndProcessPlusCode(String dialStr, int phoneId, Context context) {
         String currIso;
         String defaultIso;
-        if (!TextUtils.isEmpty(dialStr) && isReallyDialable(dialStr.charAt(0)) && isNonSeparator(dialStr)) {
+        if (!TextUtils.isEmpty(dialStr)
+                && isReallyDialable(dialStr.charAt(0))
+                && isNonSeparator(dialStr)) {
             if (context != null) {
-                currIso = ((TelephonyManager) context.getSystemService(TelephonyManager.class)).getNetworkCountryIso(phoneId);
+                currIso =
+                        ((TelephonyManager) context.getSystemService(TelephonyManager.class))
+                                .getNetworkCountryIso(phoneId);
                 defaultIso = TelephonyManager.getSimCountryIsoForPhone(phoneId);
             } else {
                 currIso = TelephonyManager.getDefault().getNetworkCountryIso();
                 defaultIso = TelephonyManager.getDefault().getSimCountryIso();
             }
             if (!TextUtils.isEmpty(currIso) && !TextUtils.isEmpty(defaultIso)) {
-                return cdmaCheckAndProcessPlusCodeByNumberFormat(dialStr, getFormatTypeFromCountryCode(currIso), getFormatTypeFromCountryCode(defaultIso), phoneId, context);
+                return cdmaCheckAndProcessPlusCodeByNumberFormat(
+                        dialStr,
+                        getFormatTypeFromCountryCode(currIso),
+                        getFormatTypeFromCountryCode(defaultIso),
+                        phoneId,
+                        context);
             }
         }
         return dialStr;
     }
 
     public static String cdmaCheckAndProcessPlusCodeForSms(String dialStr) {
-        if (!TextUtils.isEmpty(dialStr) && isReallyDialable(dialStr.charAt(0)) && isNonSeparator(dialStr)) {
+        if (!TextUtils.isEmpty(dialStr)
+                && isReallyDialable(dialStr.charAt(0))
+                && isNonSeparator(dialStr)) {
             String defaultIso = TelephonyManager.getDefault().getSimCountryIso();
             if (!TextUtils.isEmpty(defaultIso)) {
                 int format = getFormatTypeFromCountryCode(defaultIso);
@@ -1598,11 +1710,14 @@ public class PhoneNumberUtils {
         return dialStr;
     }
 
-    public static String cdmaCheckAndProcessPlusCodeByNumberFormat(String dialStr, int currFormat, int defaultFormat) {
-        return cdmaCheckAndProcessPlusCodeByNumberFormat(dialStr, currFormat, defaultFormat, 0, null);
+    public static String cdmaCheckAndProcessPlusCodeByNumberFormat(
+            String dialStr, int currFormat, int defaultFormat) {
+        return cdmaCheckAndProcessPlusCodeByNumberFormat(
+                dialStr, currFormat, defaultFormat, 0, null);
     }
 
-    public static String cdmaCheckAndProcessPlusCodeByNumberFormat(String dialStr, int currFormat, int defaultFormat, int phoneId, Context context) {
+    public static String cdmaCheckAndProcessPlusCodeByNumberFormat(
+            String dialStr, int currFormat, int defaultFormat, int phoneId, Context context) {
         String networkDialStr;
         String networkDialStr2;
         String retStr = dialStr;
@@ -1635,7 +1750,9 @@ public class PhoneNumberUtils {
                     if (!TextUtils.isEmpty(postDialStr)) {
                         int dialableIndex = findDialableIndexFromPostDialStr(postDialStr);
                         if (dialableIndex >= 1) {
-                            retStr = appendPwCharBackToOrigDialStr(dialableIndex, retStr, postDialStr);
+                            retStr =
+                                    appendPwCharBackToOrigDialStr(
+                                            dialableIndex, retStr, postDialStr);
                             tempDialStr = postDialStr.substring(dialableIndex);
                         } else {
                             if (dialableIndex < 0) {
@@ -1648,7 +1765,8 @@ public class PhoneNumberUtils {
                         break;
                     }
                 } else {
-                    com.android.telephony.Rlog.e("checkAndProcessPlusCode: null newDialStr", networkDialStr2);
+                    com.android.telephony.Rlog.e(
+                            "checkAndProcessPlusCode: null newDialStr", networkDialStr2);
                     return dialStr;
                 }
             } while (!TextUtils.isEmpty(tempDialStr));
@@ -1666,7 +1784,11 @@ public class PhoneNumberUtils {
     }
 
     public static void addTtsSpan(Spannable s, int start, int endExclusive) {
-        s.setSpan(createTtsSpan(s.subSequence(start, endExclusive).toString()), start, endExclusive, 33);
+        s.setSpan(
+                createTtsSpan(s.subSequence(start, endExclusive).toString()),
+                start,
+                endExclusive,
+                33);
     }
 
     @Deprecated
@@ -1734,7 +1856,8 @@ public class PhoneNumberUtils {
     }
 
     private static int getFormatTypeFromCountryCode(String country) {
-        if (TelephonyFeatures.isCountrySpecific(0, "KOR") && KOREA_ISO_COUNTRY_CODE.compareToIgnoreCase(country) == 0) {
+        if (TelephonyFeatures.isCountrySpecific(0, "KOR")
+                && KOREA_ISO_COUNTRY_CODE.compareToIgnoreCase(country) == 0) {
             return 82;
         }
         int length = NANP_COUNTRIES.length;
@@ -1748,7 +1871,9 @@ public class PhoneNumberUtils {
 
     public static boolean isNanp(String dialStr) {
         if (dialStr != null) {
-            if (dialStr.length() != 10 || !isTwoToNine(dialStr.charAt(0)) || !isTwoToNine(dialStr.charAt(3))) {
+            if (dialStr.length() != 10
+                    || !isTwoToNine(dialStr.charAt(0))
+                    || !isTwoToNine(dialStr.charAt(3))) {
                 return false;
             }
             for (int i = 1; i < 10; i++) {
@@ -1787,7 +1912,11 @@ public class PhoneNumberUtils {
             delimiterIndex = number.indexOf("%40");
         }
         if (delimiterIndex < 0) {
-            com.android.telephony.Rlog.w(LOG_TAG, "getUsernameFromUriNumber: no delimiter found in SIP addr '" + SemTelephonyUtils.maskPii(number) + "'");
+            com.android.telephony.Rlog.w(
+                    LOG_TAG,
+                    "getUsernameFromUriNumber: no delimiter found in SIP addr '"
+                            + SemTelephonyUtils.maskPii(number)
+                            + "'");
             delimiterIndex = number.length();
         }
         return number.substring(0, delimiterIndex);
@@ -1808,7 +1937,9 @@ public class PhoneNumberUtils {
     }
 
     private static String processPlusCode(String networkDialStr, boolean useNanp) {
-        if (networkDialStr == null || networkDialStr.charAt(0) != '+' || networkDialStr.length() <= 1) {
+        if (networkDialStr == null
+                || networkDialStr.charAt(0) != '+'
+                || networkDialStr.length() <= 1) {
             return networkDialStr;
         }
         String newStr = networkDialStr.substring(1);
@@ -1817,22 +1948,33 @@ public class PhoneNumberUtils {
             return newStr;
         }
         String retStr = networkDialStr.replaceFirst("[+]", getCurrentIdp(useNanp));
-        log("processPlusCode - Replaces the plus sign with the default IDP. useNanp: " + useNanp + ", current IDP: " + getCurrentIdp(useNanp));
+        log(
+                "processPlusCode - Replaces the plus sign with the default IDP. useNanp: "
+                        + useNanp
+                        + ", current IDP: "
+                        + getCurrentIdp(useNanp));
         return retStr;
     }
 
-    private static String processPlusCodeForSpr(String networkDialStr, int phoneId, Context context) {
-        if (networkDialStr == null || networkDialStr.charAt(0) != '+' || networkDialStr.length() <= 1) {
+    private static String processPlusCodeForSpr(
+            String networkDialStr, int phoneId, Context context) {
+        if (networkDialStr == null
+                || networkDialStr.charAt(0) != '+'
+                || networkDialStr.length() <= 1) {
             return networkDialStr;
         }
         String newStr = networkDialStr.substring(1);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         boolean isUSDialingValue = sp.getBoolean("toggle_country_name", true);
         if (isOneNanp(newStr) && isUSDialingValue) {
-            String iso = ((TelephonyManager) context.getSystemService(TelephonyManager.class)).getNetworkCountryIso(phoneId);
+            String iso =
+                    ((TelephonyManager) context.getSystemService(TelephonyManager.class))
+                            .getNetworkCountryIso(phoneId);
             String simIso = TelephonyManager.getSimCountryIsoForPhone(phoneId);
             log("processPlusCodeForSpr - ISO: " + iso + ", SIM ISO: " + simIso);
-            if (networkDialStr.length() <= 2 || getFormatTypeFromCountryCode(iso) != 1 || getFormatTypeFromCountryCode(simIso) != 1) {
+            if (networkDialStr.length() <= 2
+                    || getFormatTypeFromCountryCode(iso) != 1
+                    || getFormatTypeFromCountryCode(simIso) != 1) {
                 return networkDialStr;
             }
             String retStr = networkDialStr.substring(2);
@@ -1841,7 +1983,10 @@ public class PhoneNumberUtils {
         }
         String nanpIDPString = sp.getString(CallLog.Calls.SEM_COUNTRY_CODE, NANP_IDP_STRING);
         String retStr2 = networkDialStr.replaceFirst("[+]", nanpIDPString);
-        log("processPlusCodeForSpr - Replaces the plus sign with the NANP IDP (NANP IDP: " + nanpIDPString + NavigationBarInflaterView.KEY_CODE_END);
+        log(
+                "processPlusCodeForSpr - Replaces the plus sign with the NANP IDP (NANP IDP: "
+                        + nanpIDPString
+                        + NavigationBarInflaterView.KEY_CODE_END);
         return retStr2;
     }
 
@@ -1855,7 +2000,8 @@ public class PhoneNumberUtils {
         return -1;
     }
 
-    private static String appendPwCharBackToOrigDialStr(int dialableIndex, String origStr, String dialStr) {
+    private static String appendPwCharBackToOrigDialStr(
+            int dialableIndex, String origStr, String dialStr) {
         if (dialableIndex == 1) {
             StringBuilder ret = new StringBuilder(origStr);
             String retStr = ret.append(dialStr.charAt(0)).toString();
@@ -2007,7 +2153,9 @@ public class PhoneNumberUtils {
     }
 
     private static boolean isCountryCallingCode(int countryCallingCodeCandidate) {
-        return countryCallingCodeCandidate > 0 && countryCallingCodeCandidate < CCC_LENGTH && COUNTRY_CALLING_CALL[countryCallingCodeCandidate];
+        return countryCallingCodeCandidate > 0
+                && countryCallingCodeCandidate < CCC_LENGTH
+                && COUNTRY_CALLING_CALL[countryCallingCodeCandidate];
     }
 
     private static int tryGetISODigit(char ch) {
@@ -2027,7 +2175,8 @@ public class PhoneNumberUtils {
         }
     }
 
-    private static CountryCallingCodeAndNewIndex tryGetCountryCallingCodeAndNewIndex(String str, boolean acceptThailandCase) {
+    private static CountryCallingCodeAndNewIndex tryGetCountryCallingCodeAndNewIndex(
+            String str, boolean acceptThailandCase) {
         int state = 0;
         int ccc = 0;
         int length = str.length();
@@ -2166,7 +2315,9 @@ public class PhoneNumberUtils {
             return number;
         }
         if (sConvertToEmergencyMap == null) {
-            sConvertToEmergencyMap = context.getResources().getStringArray(R.array.config_convert_to_emergency_number_map);
+            sConvertToEmergencyMap =
+                    context.getResources()
+                            .getStringArray(R.array.config_convert_to_emergency_number_map);
         }
         if (sConvertToEmergencyMap == null || sConvertToEmergencyMap.length == 0) {
             return number;
@@ -2184,7 +2335,9 @@ public class PhoneNumberUtils {
                     filterNumbers = entry[0].split(",");
                 }
             }
-            if (!TextUtils.isEmpty(convertedNumber) && filterNumbers != null && filterNumbers.length != 0) {
+            if (!TextUtils.isEmpty(convertedNumber)
+                    && filterNumbers != null
+                    && filterNumbers.length != 0) {
                 for (String filterNumber : filterNumbers) {
                     if (!TextUtils.isEmpty(filterNumber) && filterNumber.equals(normalizedNumber)) {
                         return convertedNumber;
@@ -2195,7 +2348,8 @@ public class PhoneNumberUtils {
         return number;
     }
 
-    public static boolean areSamePhoneNumber(String number1, String number2, String defaultCountryIso) {
+    public static boolean areSamePhoneNumber(
+            String number1, String number2, String defaultCountryIso) {
         PhoneNumberUtil util = PhoneNumberUtil.getInstance();
         if (defaultCountryIso != null) {
             defaultCountryIso = defaultCountryIso.toUpperCase(Locale.ROOT);
@@ -2204,17 +2358,23 @@ public class PhoneNumberUtils {
             Phonenumber.PhoneNumber n1 = util.parseAndKeepRawInput(number1, defaultCountryIso);
             Phonenumber.PhoneNumber n2 = util.parseAndKeepRawInput(number2, defaultCountryIso);
             PhoneNumberUtil.MatchType matchType = util.isNumberMatch(n1, n2);
-            if (matchType == PhoneNumberUtil.MatchType.EXACT_MATCH || matchType == PhoneNumberUtil.MatchType.NSN_MATCH) {
+            if (matchType == PhoneNumberUtil.MatchType.EXACT_MATCH
+                    || matchType == PhoneNumberUtil.MatchType.NSN_MATCH) {
                 return true;
             }
-            return matchType == PhoneNumberUtil.MatchType.SHORT_NSN_MATCH && n1.getNationalNumber() == n2.getNationalNumber() && n1.getCountryCode() == n2.getCountryCode();
+            return matchType == PhoneNumberUtil.MatchType.SHORT_NSN_MATCH
+                    && n1.getNationalNumber() == n2.getNationalNumber()
+                    && n1.getCountryCode() == n2.getCountryCode();
         } catch (NumberParseException e) {
             return false;
         }
     }
 
     public static boolean isWpsCallNumber(String number) {
-        return number != null && (number.startsWith(PREFIX_WPS) || number.startsWith(PREFIX_WPS_CLIR_ACTIVATE) || number.startsWith(PREFIX_WPS_CLIR_DEACTIVATE));
+        return number != null
+                && (number.startsWith(PREFIX_WPS)
+                        || number.startsWith(PREFIX_WPS_CLIR_ACTIVATE)
+                        || number.startsWith(PREFIX_WPS_CLIR_DEACTIVATE));
     }
 
     private static int charToBCD(char c) {
@@ -2293,7 +2453,11 @@ public class PhoneNumberUtils {
     }
 
     private static boolean startWithCountryCode(String number, Context context) {
-        if (number.length() == 12 && (number.startsWith("7") || number.startsWith("20") || number.startsWith("65") || number.startsWith("90"))) {
+        if (number.length() == 12
+                && (number.startsWith("7")
+                        || number.startsWith("20")
+                        || number.startsWith("65")
+                        || number.startsWith("90"))) {
             log("length 12 - 7,20,65,90 is detected");
             return false;
         }
@@ -2321,142 +2485,149 @@ public class PhoneNumberUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:110:0x0131, code lost:
-    
-        if (r3 != 11) goto L55;
-     */
+
+       if (r3 != 11) goto L55;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:111:0x0133, code lost:
-    
-        if ('1' == r5) goto L54;
-     */
+
+       if ('1' == r5) goto L54;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:114:0x013c, code lost:
-    
-        r15 = r2.substring(r3 - 11);
-     */
+
+       r15 = r2.substring(r3 - 11);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:115:0x0146, code lost:
-    
-        if (r11 == false) goto L58;
-     */
+
+       if (r11 == false) goto L58;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:116:0x0148, code lost:
-    
-        r19 = android.telephony.PhoneNumberUtils.otaCountryIDDPrefix;
-        r4 = r2.substring(android.telephony.PhoneNumberUtils.otaCountryIDDPrefix.length(), r2.length());
-     */
+
+       r19 = android.telephony.PhoneNumberUtils.otaCountryIDDPrefix;
+       r4 = r2.substring(android.telephony.PhoneNumberUtils.otaCountryIDDPrefix.length(), r2.length());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:117:0x015f, code lost:
-    
-        if (r11 == false) goto L72;
-     */
+
+       if (r11 == false) goto L72;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:118:0x0161, code lost:
-    
-        r13 = android.telephony.PhoneNumberUtils.otaCountryIDDPrefix.length();
-        r13 = r2.substring(r13);
-     */
+
+       r13 = android.telephony.PhoneNumberUtils.otaCountryIDDPrefix.length();
+       r13 = r2.substring(r13);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:119:0x0170, code lost:
-    
-        if (isOneNanp(r15) == false) goto L65;
-     */
+
+       if (isOneNanp(r15) == false) goto L65;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:121:0x017c, code lost:
-    
-        if (r2.length() != (r13 + 11)) goto L66;
-     */
+
+       if (r2.length() != (r13 + 11)) goto L66;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:122:0x017e, code lost:
-    
-        r10.append(r13);
-     */
+
+       r10.append(r13);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:124:0x01a5, code lost:
-    
-        return r10.toString();
-     */
+
+       return r10.toString();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:126:0x018a, code lost:
-    
-        if (startWithCountryCode(r4, r22) == false) goto L69;
-     */
+
+       if (startWithCountryCode(r4, r22) == false) goto L69;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:127:0x018c, code lost:
-    
-        com.android.telephony.Rlog.d(android.telephony.PhoneNumberUtils.LOG_TAG, "Found Country Code after IDD");
-        r10.append(r2);
-        r10.replace(0, r13, android.telephony.PhoneNumberUtils.NANP_IDP_STRING);
-     */
+
+       com.android.telephony.Rlog.d(android.telephony.PhoneNumberUtils.LOG_TAG, "Found Country Code after IDD");
+       r10.append(r2);
+       r10.replace(0, r13, android.telephony.PhoneNumberUtils.NANP_IDP_STRING);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:128:0x0199, code lost:
-    
-        com.android.telephony.Rlog.d(android.telephony.PhoneNumberUtils.LOG_TAG, "No Condition");
-        r10.append(r2);
-     */
+
+       com.android.telephony.Rlog.d(android.telephony.PhoneNumberUtils.LOG_TAG, "No Condition");
+       r10.append(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:131:0x01ac, code lost:
-    
-        if ('+' != r5) goto L85;
-     */
+
+       if ('+' != r5) goto L85;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:132:0x01ae, code lost:
-    
-        r6 = r2.substring(1);
-     */
+
+       r6 = r2.substring(1);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:133:0x01b7, code lost:
-    
-        if (isOneNanp(r6) == false) goto L79;
-     */
+
+       if (isOneNanp(r6) == false) goto L79;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:135:0x01bf, code lost:
-    
-        if (r2.length() != 12) goto L79;
-     */
+
+       if (r2.length() != 12) goto L79;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:136:0x01c1, code lost:
-    
-        r10.append(r6);
-     */
+
+       r10.append(r6);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:138:0x01de, code lost:
-    
-        return r10.toString();
-     */
+
+       return r10.toString();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:140:0x01c9, code lost:
-    
-        if (startWithCountryCode(r6, r22) == false) goto L82;
-     */
+
+       if (startWithCountryCode(r6, r22) == false) goto L82;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:141:0x01cb, code lost:
-    
-        r10.append(android.telephony.PhoneNumberUtils.NANP_IDP_STRING);
-        r10.append(r6);
-     */
+
+       r10.append(android.telephony.PhoneNumberUtils.NANP_IDP_STRING);
+       r10.append(r6);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:142:0x01d2, code lost:
-    
-        com.android.telephony.Rlog.d(android.telephony.PhoneNumberUtils.LOG_TAG, "1NANP is not matched");
-        r10.append(r2);
-     */
+
+       com.android.telephony.Rlog.d(android.telephony.PhoneNumberUtils.LOG_TAG, "1NANP is not matched");
+       r10.append(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:144:0x01e3, code lost:
-    
-        if (startWithCountryCode(r2, r22) == false) goto L91;
-     */
+
+       if (startWithCountryCode(r2, r22) == false) goto L91;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:145:0x01e5, code lost:
-    
-        r10.append(android.telephony.PhoneNumberUtils.NANP_IDP_STRING);
-        r10.append(r2);
-     */
+
+       r10.append(android.telephony.PhoneNumberUtils.NANP_IDP_STRING);
+       r10.append(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:146:0x01ef, code lost:
-    
-        return r10.toString();
-     */
+
+       return r10.toString();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:147:0x015d, code lost:
-    
-        r4 = null;
-     */
+
+       r4 = null;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String convertSMSDestinationAddress(java.lang.String r21, android.content.Context r22, int r23) {
+    public static java.lang.String convertSMSDestinationAddress(
+            java.lang.String r21, android.content.Context r22, int r23) {
         /*
             Method dump skipped, instructions count: 800
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.PhoneNumberUtils.convertSMSDestinationAddress(java.lang.String, android.content.Context, int):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.telephony.PhoneNumberUtils.convertSMSDestinationAddress(java.lang.String,"
+                    + " android.content.Context, int):java.lang.String");
     }
 
-    private static boolean retrieveAssistedParams(int subId, String phoneNumber, String mdn, Context context) {
+    private static boolean retrieveAssistedParams(
+            int subId, String phoneNumber, String mdn, Context context) {
         int phoneId = SubscriptionManager.getPhoneId(subId);
         if ("LRA".equals(TelephonyFeatures.getSubOperatorName(phoneId))) {
             adLog("Assisted Dial not supported");
             return false;
         }
         numberLength = extractNetworkPortionAlt(phoneNumber).length();
-        isNetRoaming = ((TelephonyManager) context.getSystemService("phone")).isNetworkRoaming(subId);
-        int phoneType = ((TelephonyManager) context.getSystemService("phone")).getCurrentPhoneType(subId);
+        isNetRoaming =
+                ((TelephonyManager) context.getSystemService("phone")).isNetworkRoaming(subId);
+        int phoneType =
+                ((TelephonyManager) context.getSystemService("phone")).getCurrentPhoneType(subId);
         if (!TextUtils.isEmpty(mdn) && mdn.length() >= 3) {
             try {
                 ContentResolver cr = context.getContentResolver();
@@ -2469,7 +2640,10 @@ public class PhoneNumberUtils {
                 refCountryName = mCursor.getString(1);
                 String refmcc = mCursor.getString(2);
                 String str = "430";
-                refCountryMCC = refmcc.equals("310 to 316") ? "310" : refmcc.equals("430 to 431") ? "430" : refmcc;
+                refCountryMCC =
+                        refmcc.equals("310 to 316")
+                                ? "310"
+                                : refmcc.equals("430 to 431") ? "430" : refmcc;
                 refCountryIDDPrefix = mCursor.getString(3);
                 refCountryNDDPrefix = mCursor.getString(4);
                 isNANPCountry = mCursor.getString(5).equals("NANP");
@@ -2490,7 +2664,11 @@ public class PhoneNumberUtils {
                     } else {
                         refCountryNationalNumberLength = 10;
                     }
-                    adLog("refCountryNationalNumberLength - MDN length: " + mdn.length() + ", DB: " + assistedDialingNnl);
+                    adLog(
+                            "refCountryNationalNumberLength - MDN length: "
+                                    + mdn.length()
+                                    + ", DB: "
+                                    + assistedDialingNnl);
                     if (!TextUtils.isEmpty(assistedDialingNnl)) {
                         try {
                             refCountryNationalNumberLength = Integer.parseInt(assistedDialingNnl);
@@ -2554,8 +2732,44 @@ public class PhoneNumberUtils {
     }
 
     private static void displayAssistedParams() {
-        adLog("refCountryName: (" + refCountryName + "), refCountryMCC: " + refCountryMCC + ", refCountryIDDPrefix: " + refCountryIDDPrefix + ", refCountryNDDPrefix: " + refCountryNDDPrefix + ", refCountryAreaCode: " + refCountryAreaCode + ", refCountryNationalNumberLength: " + refCountryNationalNumberLength + ", isNANPCountry: " + isNANPCountry + ", refCountryCountryCode: " + refCountryCountryCode + ", isGSMRegistered: " + isGSMRegistered + ", isCDMARegistered: " + isCDMARegistered);
-        adLog("isNetRoaming: " + isNetRoaming + ", numberLength: " + numberLength + ", otaCountryName: (" + otaCountryName + "), otaCountryMCC: " + otaCountryMCC + ", otaCountryIDDPrefix: " + otaCountryIDDPrefix + ", otaCountryNDDPrefix: " + otaCountryNDDPrefix + ", isOTANANPCountry: " + isOTANANPCountry + ", otaCountryCountryCode: " + otaCountryCountryCode);
+        adLog(
+                "refCountryName: ("
+                        + refCountryName
+                        + "), refCountryMCC: "
+                        + refCountryMCC
+                        + ", refCountryIDDPrefix: "
+                        + refCountryIDDPrefix
+                        + ", refCountryNDDPrefix: "
+                        + refCountryNDDPrefix
+                        + ", refCountryAreaCode: "
+                        + refCountryAreaCode
+                        + ", refCountryNationalNumberLength: "
+                        + refCountryNationalNumberLength
+                        + ", isNANPCountry: "
+                        + isNANPCountry
+                        + ", refCountryCountryCode: "
+                        + refCountryCountryCode
+                        + ", isGSMRegistered: "
+                        + isGSMRegistered
+                        + ", isCDMARegistered: "
+                        + isCDMARegistered);
+        adLog(
+                "isNetRoaming: "
+                        + isNetRoaming
+                        + ", numberLength: "
+                        + numberLength
+                        + ", otaCountryName: ("
+                        + otaCountryName
+                        + "), otaCountryMCC: "
+                        + otaCountryMCC
+                        + ", otaCountryIDDPrefix: "
+                        + otaCountryIDDPrefix
+                        + ", otaCountryNDDPrefix: "
+                        + otaCountryNDDPrefix
+                        + ", isOTANANPCountry: "
+                        + isOTANANPCountry
+                        + ", otaCountryCountryCode: "
+                        + otaCountryCountryCode);
     }
 
     private static void adLog(String msg) {
@@ -2567,10 +2781,16 @@ public class PhoneNumberUtils {
         String spOtaCountryMcc = sp.getString(OTA_COUNTRY_MCC_KEY, null);
         ContentResolver otacr = context.getContentResolver();
         if (!useSharedPreference || spOtaCountryMcc == null) {
-            Cursor c = otacr.query(OTA_COUNTRY_URI.buildUpon().fragment(String.valueOf(subId)).build(), null, null, null, null);
+            Cursor c =
+                    otacr.query(
+                            OTA_COUNTRY_URI.buildUpon().fragment(String.valueOf(subId)).build(),
+                            null,
+                            null,
+                            null,
+                            null);
             return c;
         }
-        Cursor c2 = otacr.query(MCC_OTA_URI, null, "mcc=?", new String[]{spOtaCountryMcc}, null);
+        Cursor c2 = otacr.query(MCC_OTA_URI, null, "mcc=?", new String[] {spOtaCountryMcc}, null);
         return c2;
     }
 }

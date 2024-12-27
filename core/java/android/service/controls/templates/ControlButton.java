@@ -2,23 +2,27 @@ package android.service.controls.templates;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes3.dex */
 public final class ControlButton implements Parcelable {
-    public static final Parcelable.Creator<ControlButton> CREATOR = new Parcelable.Creator<ControlButton>() { // from class: android.service.controls.templates.ControlButton.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ControlButton createFromParcel(Parcel source) {
-            return new ControlButton(source);
-        }
+    public static final Parcelable.Creator<ControlButton> CREATOR =
+            new Parcelable.Creator<
+                    ControlButton>() { // from class:
+                                       // android.service.controls.templates.ControlButton.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ControlButton createFromParcel(Parcel source) {
+                    return new ControlButton(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ControlButton[] newArray(int size) {
-            return new ControlButton[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ControlButton[] newArray(int size) {
+                    return new ControlButton[size];
+                }
+            };
     private final CharSequence mActionDescription;
     private final boolean mChecked;
 

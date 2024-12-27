@@ -15,8 +15,7 @@ public class DarRune {
     private static final String TAG = "DarRune";
     private static DarRune sInstance;
 
-    private DarRune() {
-    }
+    private DarRune() {}
 
     public static DarRune getInstance() {
         if (sInstance == null) {

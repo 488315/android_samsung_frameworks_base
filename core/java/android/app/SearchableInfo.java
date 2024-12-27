@@ -14,28 +14,32 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
 import android.util.Xml;
+
 import com.android.internal.R;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+
 /* loaded from: classes.dex */
 public final class SearchableInfo implements Parcelable {
-    public static final Parcelable.Creator<SearchableInfo> CREATOR = new Parcelable.Creator<SearchableInfo>() { // from class: android.app.SearchableInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchableInfo createFromParcel(Parcel in) {
-            return new SearchableInfo(in);
-        }
+    public static final Parcelable.Creator<SearchableInfo> CREATOR =
+            new Parcelable.Creator<SearchableInfo>() { // from class: android.app.SearchableInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchableInfo createFromParcel(Parcel in) {
+                    return new SearchableInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchableInfo[] newArray(int size) {
-            return new SearchableInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchableInfo[] newArray(int size) {
+                    return new SearchableInfo[size];
+                }
+            };
     private static final boolean DBG = false;
     private static final String LOG_TAG = "SearchableInfo";
     private static final String MD_LABEL_SEARCHABLE = "android.app.searchable";
@@ -206,26 +210,29 @@ public final class SearchableInfo implements Parcelable {
     }
 
     public static class ActionKeyInfo implements Parcelable {
-        public static final Parcelable.Creator<ActionKeyInfo> CREATOR = new Parcelable.Creator<ActionKeyInfo>() { // from class: android.app.SearchableInfo.ActionKeyInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ActionKeyInfo createFromParcel(Parcel in) {
-                return new ActionKeyInfo(in);
-            }
+        public static final Parcelable.Creator<ActionKeyInfo> CREATOR =
+                new Parcelable.Creator<
+                        ActionKeyInfo>() { // from class: android.app.SearchableInfo.ActionKeyInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ActionKeyInfo createFromParcel(Parcel in) {
+                        return new ActionKeyInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ActionKeyInfo[] newArray(int size) {
-                return new ActionKeyInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ActionKeyInfo[] newArray(int size) {
+                        return new ActionKeyInfo[size];
+                    }
+                };
         private final int mKeyCode;
         private final String mQueryActionMsg;
         private final String mSuggestActionMsg;
         private final String mSuggestActionMsgColumn;
 
         ActionKeyInfo(Context activityContext, AttributeSet attr) {
-            TypedArray a = activityContext.obtainStyledAttributes(attr, R.styleable.SearchableActionKey);
+            TypedArray a =
+                    activityContext.obtainStyledAttributes(attr, R.styleable.SearchableActionKey);
             this.mKeyCode = a.getInt(0, 0);
             this.mQueryActionMsg = a.getString(1);
             this.mSuggestActionMsg = a.getString(2);
@@ -234,7 +241,9 @@ public final class SearchableInfo implements Parcelable {
             if (this.mKeyCode == 0) {
                 throw new IllegalArgumentException("No keycode.");
             }
-            if (this.mQueryActionMsg == null && this.mSuggestActionMsg == null && this.mSuggestActionMsgColumn == null) {
+            if (this.mQueryActionMsg == null
+                    && this.mSuggestActionMsg == null
+                    && this.mSuggestActionMsgColumn == null) {
                 throw new IllegalArgumentException("No message information.");
             }
         }
@@ -290,10 +299,14 @@ public final class SearchableInfo implements Parcelable {
         this.mActionKeys.put(Integer.valueOf(keyInfo.getKeyCode()), keyInfo);
     }
 
-    public static SearchableInfo getActivityMetaData(Context context, ActivityInfo activityInfo, int userId) {
+    public static SearchableInfo getActivityMetaData(
+            Context context, ActivityInfo activityInfo, int userId) {
         try {
-            Context userContext = context.createPackageContextAsUser("system", 0, new UserHandle(userId));
-            XmlResourceParser xml = activityInfo.loadXmlMetaData(userContext.getPackageManager(), MD_LABEL_SEARCHABLE);
+            Context userContext =
+                    context.createPackageContextAsUser("system", 0, new UserHandle(userId));
+            XmlResourceParser xml =
+                    activityInfo.loadXmlMetaData(
+                            userContext.getPackageManager(), MD_LABEL_SEARCHABLE);
             if (xml == null) {
                 return null;
             }
@@ -307,7 +320,8 @@ public final class SearchableInfo implements Parcelable {
         }
     }
 
-    private static SearchableInfo getActivityMetaData(Context context, XmlPullParser xml, ComponentName cName) {
+    private static SearchableInfo getActivityMetaData(
+            Context context, XmlPullParser xml, ComponentName cName) {
         SearchableInfo result = null;
         Context activityContext = createActivityContext(context, cName);
         if (activityContext == null) {
@@ -323,7 +337,12 @@ public final class SearchableInfo implements Parcelable {
                             try {
                                 result = new SearchableInfo(activityContext, attr, cName);
                             } catch (IllegalArgumentException ex) {
-                                Log.w(LOG_TAG, "Invalid searchable metadata for " + cName.flattenToShortString() + ": " + ex.getMessage());
+                                Log.w(
+                                        LOG_TAG,
+                                        "Invalid searchable metadata for "
+                                                + cName.flattenToShortString()
+                                                + ": "
+                                                + ex.getMessage());
                                 return null;
                             }
                         }
@@ -336,7 +355,12 @@ public final class SearchableInfo implements Parcelable {
                             try {
                                 result.addActionKey(new ActionKeyInfo(activityContext, attr2));
                             } catch (IllegalArgumentException ex2) {
-                                Log.w(LOG_TAG, "Invalid action key for " + cName.flattenToShortString() + ": " + ex2.getMessage());
+                                Log.w(
+                                        LOG_TAG,
+                                        "Invalid action key for "
+                                                + cName.flattenToShortString()
+                                                + ": "
+                                                + ex2.getMessage());
                                 return null;
                             }
                         }

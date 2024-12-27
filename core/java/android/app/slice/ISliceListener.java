@@ -12,8 +12,7 @@ public interface ISliceListener extends IInterface {
 
     public static class Default implements ISliceListener {
         @Override // android.app.slice.ISliceListener
-        public void onSliceUpdated(Slice s) throws RemoteException {
-        }
+        public void onSliceUpdated(Slice s) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface ISliceListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISliceListener {
+    public abstract static class Stub extends Binder implements ISliceListener {
         public static final String DESCRIPTOR = "android.app.slice.ISliceListener";
         static final int TRANSACTION_onSliceUpdated = 1;
 
@@ -60,7 +59,8 @@ public interface ISliceListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

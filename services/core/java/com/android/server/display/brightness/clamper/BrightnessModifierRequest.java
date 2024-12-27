@@ -21,10 +21,14 @@ public final class BrightnessModifierRequest {
             return false;
         }
         BrightnessModifierRequest brightnessModifierRequest = (BrightnessModifierRequest) obj;
-        return this.mDisplayState == brightnessModifierRequest.mDisplayState && this.mAwakenFromDozingInAutoBrightness == brightnessModifierRequest.mAwakenFromDozingInAutoBrightness;
+        return this.mDisplayState == brightnessModifierRequest.mDisplayState
+                && this.mAwakenFromDozingInAutoBrightness
+                        == brightnessModifierRequest.mAwakenFromDozingInAutoBrightness;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mDisplayState), Boolean.valueOf(this.mAwakenFromDozingInAutoBrightness));
+        return Objects.hash(
+                Integer.valueOf(this.mDisplayState),
+                Boolean.valueOf(this.mAwakenFromDozingInAutoBrightness));
     }
 }

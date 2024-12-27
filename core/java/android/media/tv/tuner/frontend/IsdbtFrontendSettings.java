@@ -3,6 +3,7 @@ package android.media.tv.tuner.frontend;
 import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerVersionChecker;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -51,26 +52,28 @@ public class IsdbtFrontendSettings extends FrontendSettings {
     private final int mServiceAreaId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Bandwidth {
-    }
+    public @interface Bandwidth {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Mode {
-    }
+    public @interface Mode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Modulation {
-    }
+    public @interface Modulation {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PartialReceptionFlag {
-    }
+    public @interface PartialReceptionFlag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TimeInterleaveMode {
-    }
+    public @interface TimeInterleaveMode {}
 
-    private IsdbtFrontendSettings(long frequency, int bandwidth, int mode, int guardInterval, int serviceAreaId, IsdbtLayerSettings[] layerSettings, int partialReceptionFlag) {
+    private IsdbtFrontendSettings(
+            long frequency,
+            int bandwidth,
+            int mode,
+            int guardInterval,
+            int serviceAreaId,
+            IsdbtLayerSettings[] layerSettings,
+            int partialReceptionFlag) {
         super(frequency);
         this.mBandwidth = bandwidth;
         this.mMode = mode;
@@ -85,7 +88,8 @@ public class IsdbtFrontendSettings extends FrontendSettings {
 
     @Deprecated
     public int getModulation() {
-        if (!TunerVersionChecker.isHigherOrEqualVersionTo(131072) && this.mLayerSettings.length > 0) {
+        if (!TunerVersionChecker.isHigherOrEqualVersionTo(131072)
+                && this.mLayerSettings.length > 0) {
             return this.mLayerSettings[0].getModulation();
         }
         return 0;
@@ -101,7 +105,8 @@ public class IsdbtFrontendSettings extends FrontendSettings {
 
     @Deprecated
     public int getCodeRate() {
-        if (!TunerVersionChecker.isHigherOrEqualVersionTo(131072) && this.mLayerSettings.length > 0) {
+        if (!TunerVersionChecker.isHigherOrEqualVersionTo(131072)
+                && this.mLayerSettings.length > 0) {
             return this.mLayerSettings[0].getCodeRate();
         }
         return 0;
@@ -221,14 +226,22 @@ public class IsdbtFrontendSettings extends FrontendSettings {
         }
 
         public Builder setPartialReceptionFlag(int flag) {
-            if (TunerVersionChecker.checkHigherOrEqualVersionTo(131072, "setPartialReceptionFlag")) {
+            if (TunerVersionChecker.checkHigherOrEqualVersionTo(
+                    131072, "setPartialReceptionFlag")) {
                 this.mPartialReceptionFlag = flag;
             }
             return this;
         }
 
         public IsdbtFrontendSettings build() {
-            return new IsdbtFrontendSettings(this.mFrequency, this.mBandwidth, this.mMode, this.mGuardInterval, this.mServiceAreaId, this.mLayerSettings, this.mPartialReceptionFlag);
+            return new IsdbtFrontendSettings(
+                    this.mFrequency,
+                    this.mBandwidth,
+                    this.mMode,
+                    this.mGuardInterval,
+                    this.mServiceAreaId,
+                    this.mLayerSettings,
+                    this.mPartialReceptionFlag);
         }
     }
 
@@ -243,7 +256,8 @@ public class IsdbtFrontendSettings extends FrontendSettings {
         private final int mNumOfSegments;
         private final int mTimeInterleaveMode;
 
-        private IsdbtLayerSettings(int modulation, int timeInterleaveMode, int codeRate, int numOfSegments) {
+        private IsdbtLayerSettings(
+                int modulation, int timeInterleaveMode, int codeRate, int numOfSegments) {
             this.mModulation = modulation;
             this.mTimeInterleaveMode = timeInterleaveMode;
             this.mCodeRate = codeRate;
@@ -304,7 +318,11 @@ public class IsdbtFrontendSettings extends FrontendSettings {
             }
 
             public IsdbtLayerSettings build() {
-                return new IsdbtLayerSettings(this.mModulation, this.mTimeInterleaveMode, this.mCodeRate, this.mNumOfSegments);
+                return new IsdbtLayerSettings(
+                        this.mModulation,
+                        this.mTimeInterleaveMode,
+                        this.mCodeRate,
+                        this.mNumOfSegments);
             }
         }
     }

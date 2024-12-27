@@ -3,32 +3,40 @@ package android.hardware.usb;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes2.dex */
 public class UsbConfiguration implements Parcelable {
     private static final int ATTR_REMOTE_WAKEUP = 32;
     private static final int ATTR_SELF_POWERED = 64;
-    public static final Parcelable.Creator<UsbConfiguration> CREATOR = new Parcelable.Creator<UsbConfiguration>() { // from class: android.hardware.usb.UsbConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsbConfiguration createFromParcel(Parcel in) {
-            int id = in.readInt();
-            String name = in.readString();
-            int attributes = in.readInt();
-            int maxPower = in.readInt();
-            Parcelable[] interfaces = (Parcelable[]) in.readParcelableArray(UsbInterface.class.getClassLoader(), UsbInterface.class);
-            UsbConfiguration configuration = new UsbConfiguration(id, name, attributes, maxPower);
-            configuration.setInterfaces(interfaces);
-            return configuration;
-        }
+    public static final Parcelable.Creator<UsbConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    UsbConfiguration>() { // from class: android.hardware.usb.UsbConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsbConfiguration createFromParcel(Parcel in) {
+                    int id = in.readInt();
+                    String name = in.readString();
+                    int attributes = in.readInt();
+                    int maxPower = in.readInt();
+                    Parcelable[] interfaces =
+                            (Parcelable[])
+                                    in.readParcelableArray(
+                                            UsbInterface.class.getClassLoader(),
+                                            UsbInterface.class);
+                    UsbConfiguration configuration =
+                            new UsbConfiguration(id, name, attributes, maxPower);
+                    configuration.setInterfaces(interfaces);
+                    return configuration;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsbConfiguration[] newArray(int size) {
-            return new UsbConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsbConfiguration[] newArray(int size) {
+                    return new UsbConfiguration[size];
+                }
+            };
     private final int mAttributes;
     private final int mId;
     private Parcelable[] mInterfaces;
@@ -75,11 +83,22 @@ public class UsbConfiguration implements Parcelable {
     }
 
     public void setInterfaces(Parcelable[] interfaces) {
-        this.mInterfaces = (Parcelable[]) Preconditions.checkArrayElementsNotNull(interfaces, "interfaces");
+        this.mInterfaces =
+                (Parcelable[]) Preconditions.checkArrayElementsNotNull(interfaces, "interfaces");
     }
 
     public String toString() {
-        StringBuilder builder = new StringBuilder("UsbConfiguration[mId=" + this.mId + ",mName=" + this.mName + ",mAttributes=" + this.mAttributes + ",mMaxPower=" + this.mMaxPower + ",mInterfaces=[");
+        StringBuilder builder =
+                new StringBuilder(
+                        "UsbConfiguration[mId="
+                                + this.mId
+                                + ",mName="
+                                + this.mName
+                                + ",mAttributes="
+                                + this.mAttributes
+                                + ",mMaxPower="
+                                + this.mMaxPower
+                                + ",mInterfaces=[");
         for (int i = 0; i < this.mInterfaces.length; i++) {
             builder.append("\n");
             builder.append(this.mInterfaces[i].toString());

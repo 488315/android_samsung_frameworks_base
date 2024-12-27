@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IInputContentUriToken extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.inputmethod.IInputContentUriToken";
+    public static final String DESCRIPTOR =
+            "com.android.internal.inputmethod.IInputContentUriToken";
 
     void release() throws RemoteException;
 
@@ -16,12 +17,10 @@ public interface IInputContentUriToken extends IInterface {
 
     public static class Default implements IInputContentUriToken {
         @Override // com.android.internal.inputmethod.IInputContentUriToken
-        public void take() throws RemoteException {
-        }
+        public void take() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputContentUriToken
-        public void release() throws RemoteException {
-        }
+        public void release() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface IInputContentUriToken extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputContentUriToken {
+    public abstract static class Stub extends Binder implements IInputContentUriToken {
         static final int TRANSACTION_release = 2;
         static final int TRANSACTION_take = 1;
 
@@ -70,7 +69,8 @@ public interface IInputContentUriToken extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInputContentUriToken.DESCRIPTOR);
             }

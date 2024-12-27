@@ -9,7 +9,9 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.widget.RemoteViews;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -18,19 +20,20 @@ import java.util.List;
 @Deprecated
 /* loaded from: classes.dex */
 public final class SliceItem implements Parcelable {
-    public static final Parcelable.Creator<SliceItem> CREATOR = new Parcelable.Creator<SliceItem>() { // from class: android.app.slice.SliceItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SliceItem createFromParcel(Parcel in) {
-            return new SliceItem(in);
-        }
+    public static final Parcelable.Creator<SliceItem> CREATOR =
+            new Parcelable.Creator<SliceItem>() { // from class: android.app.slice.SliceItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SliceItem createFromParcel(Parcel in) {
+                    return new SliceItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SliceItem[] newArray(int size) {
-            return new SliceItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SliceItem[] newArray(int size) {
+                    return new SliceItem[size];
+                }
+            };
     public static final String FORMAT_ACTION = "action";
     public static final String FORMAT_BUNDLE = "bundle";
     public static final String FORMAT_IMAGE = "image";
@@ -46,8 +49,7 @@ public final class SliceItem implements Parcelable {
     private final String mSubType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SliceType {
-    }
+    public @interface SliceType {}
 
     public SliceItem(Object obj, String format, String subType, List<String> hints) {
         this(obj, format, subType, (String[]) hints.toArray(new String[hints.size()]));
@@ -60,7 +62,8 @@ public final class SliceItem implements Parcelable {
         this.mObj = obj;
     }
 
-    public SliceItem(PendingIntent intent, Slice slice, String format, String subType, String[] hints) {
+    public SliceItem(
+            PendingIntent intent, Slice slice, String format, String subType, String[] hints) {
         this(new Pair(intent, slice), format, subType, hints);
     }
 
@@ -335,7 +338,9 @@ public final class SliceItem implements Parcelable {
             case 2:
                 return Icon.CREATOR.createFromParcel(in);
             case 3:
-                return new Pair(PendingIntent.CREATOR.createFromParcel(in), Slice.CREATOR.createFromParcel(in));
+                return new Pair(
+                        PendingIntent.CREATOR.createFromParcel(in),
+                        Slice.CREATOR.createFromParcel(in));
             case 4:
                 return Integer.valueOf(in.readInt());
             case 5:

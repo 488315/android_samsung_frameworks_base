@@ -51,16 +51,20 @@ public class ScrollCaptureInternal {
         return 1;
     }
 
-    public ScrollCaptureCallback requestCallback(View view, Rect localVisibleRect, Point positionInWindow) {
+    public ScrollCaptureCallback requestCallback(
+            View view, Rect localVisibleRect, Point positionInWindow) {
         int i = detectScrollingType(view);
         switch (i) {
             case 1:
-                return new ScrollCaptureViewSupport((ViewGroup) view, new ScrollViewCaptureHelper());
+                return new ScrollCaptureViewSupport(
+                        (ViewGroup) view, new ScrollViewCaptureHelper());
             case 2:
                 if (view instanceof ListView) {
-                    return new ScrollCaptureViewSupport((ListView) view, new ListViewCaptureHelper());
+                    return new ScrollCaptureViewSupport(
+                            (ListView) view, new ListViewCaptureHelper());
                 }
-                return new ScrollCaptureViewSupport((ViewGroup) view, new RecyclerViewCaptureHelper());
+                return new ScrollCaptureViewSupport(
+                        (ViewGroup) view, new RecyclerViewCaptureHelper());
             case 3:
                 if (view instanceof WebView) {
                     Log.d(TAG, "scroll capture: Using WebView support");
@@ -80,7 +84,10 @@ public class ScrollCaptureInternal {
         Resources resources = context.getResources();
         if (id >= 0) {
             try {
-                String fieldValue = resources.getResourceTypeName(id) + '/' + resources.getResourceEntryName(id);
+                String fieldValue =
+                        resources.getResourceTypeName(id)
+                                + '/'
+                                + resources.getResourceEntryName(id);
                 return fieldValue;
             } catch (Resources.NotFoundException e) {
                 String fieldValue2 = "id/" + formatIntToHexString(id);

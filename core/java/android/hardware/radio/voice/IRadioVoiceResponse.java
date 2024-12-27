@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioVoiceResponse extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$voice$IRadioVoiceResponse".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$voice$IRadioVoiceResponse".replace('$', '.');
     public static final String HASH = "78fb79bcb32590a868b3eb7affb39ab90e4ca782";
     public static final int VERSION = 3;
 
@@ -25,41 +26,53 @@ public interface IRadioVoiceResponse extends IInterface {
 
     void emergencyDialResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void exitEmergencyCallbackModeResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
+    void exitEmergencyCallbackModeResponse(RadioResponseInfo radioResponseInfo)
+            throws RemoteException;
 
     void explicitCallTransferResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void getCallForwardStatusResponse(RadioResponseInfo radioResponseInfo, CallForwardInfo[] callForwardInfoArr) throws RemoteException;
+    void getCallForwardStatusResponse(
+            RadioResponseInfo radioResponseInfo, CallForwardInfo[] callForwardInfoArr)
+            throws RemoteException;
 
-    void getCallWaitingResponse(RadioResponseInfo radioResponseInfo, boolean z, int i) throws RemoteException;
+    void getCallWaitingResponse(RadioResponseInfo radioResponseInfo, boolean z, int i)
+            throws RemoteException;
 
     void getClipResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException;
 
     void getClirResponse(RadioResponseInfo radioResponseInfo, int i, int i2) throws RemoteException;
 
-    void getCurrentCallsResponse(RadioResponseInfo radioResponseInfo, Call[] callArr) throws RemoteException;
+    void getCurrentCallsResponse(RadioResponseInfo radioResponseInfo, Call[] callArr)
+            throws RemoteException;
 
     String getInterfaceHash() throws RemoteException;
 
     int getInterfaceVersion() throws RemoteException;
 
-    void getLastCallFailCauseResponse(RadioResponseInfo radioResponseInfo, LastCallFailCauseInfo lastCallFailCauseInfo) throws RemoteException;
+    void getLastCallFailCauseResponse(
+            RadioResponseInfo radioResponseInfo, LastCallFailCauseInfo lastCallFailCauseInfo)
+            throws RemoteException;
 
     void getMuteResponse(RadioResponseInfo radioResponseInfo, boolean z) throws RemoteException;
 
-    void getPreferredVoicePrivacyResponse(RadioResponseInfo radioResponseInfo, boolean z) throws RemoteException;
+    void getPreferredVoicePrivacyResponse(RadioResponseInfo radioResponseInfo, boolean z)
+            throws RemoteException;
 
     void getTtyModeResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException;
 
-    void handleStkCallSetupRequestFromSimResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
+    void handleStkCallSetupRequestFromSimResponse(RadioResponseInfo radioResponseInfo)
+            throws RemoteException;
 
     void hangupConnectionResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void hangupForegroundResumeBackgroundResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
+    void hangupForegroundResumeBackgroundResponse(RadioResponseInfo radioResponseInfo)
+            throws RemoteException;
 
-    void hangupWaitingOrBackgroundResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
+    void hangupWaitingOrBackgroundResponse(RadioResponseInfo radioResponseInfo)
+            throws RemoteException;
 
-    void isVoNrEnabledResponse(RadioResponseInfo radioResponseInfo, boolean z) throws RemoteException;
+    void isVoNrEnabledResponse(RadioResponseInfo radioResponseInfo, boolean z)
+            throws RemoteException;
 
     void rejectCallResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
@@ -81,7 +94,8 @@ public interface IRadioVoiceResponse extends IInterface {
 
     void setMuteResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void setPreferredVoicePrivacyResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
+    void setPreferredVoicePrivacyResponse(RadioResponseInfo radioResponseInfo)
+            throws RemoteException;
 
     void setTtyModeResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
@@ -91,160 +105,138 @@ public interface IRadioVoiceResponse extends IInterface {
 
     void stopDtmfResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void switchWaitingOrHoldingAndActiveResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
+    void switchWaitingOrHoldingAndActiveResponse(RadioResponseInfo radioResponseInfo)
+            throws RemoteException;
 
     public static class Default implements IRadioVoiceResponse {
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void acceptCallResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void acceptCallResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void acknowledgeRequest(int serial) throws RemoteException {
-        }
+        public void acknowledgeRequest(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void cancelPendingUssdResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void cancelPendingUssdResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void conferenceResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void conferenceResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void dialResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void dialResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void emergencyDialResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void emergencyDialResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void exitEmergencyCallbackModeResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void exitEmergencyCallbackModeResponse(RadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void explicitCallTransferResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void explicitCallTransferResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void getCallForwardStatusResponse(RadioResponseInfo info, CallForwardInfo[] callForwardInfos) throws RemoteException {
-        }
+        public void getCallForwardStatusResponse(
+                RadioResponseInfo info, CallForwardInfo[] callForwardInfos)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void getCallWaitingResponse(RadioResponseInfo info, boolean enable, int serviceClass) throws RemoteException {
-        }
+        public void getCallWaitingResponse(RadioResponseInfo info, boolean enable, int serviceClass)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void getClipResponse(RadioResponseInfo info, int status) throws RemoteException {
-        }
+        public void getClipResponse(RadioResponseInfo info, int status) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void getClirResponse(RadioResponseInfo info, int n, int m) throws RemoteException {
-        }
+        public void getClirResponse(RadioResponseInfo info, int n, int m) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void getCurrentCallsResponse(RadioResponseInfo info, Call[] calls) throws RemoteException {
-        }
+        public void getCurrentCallsResponse(RadioResponseInfo info, Call[] calls)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void getLastCallFailCauseResponse(RadioResponseInfo info, LastCallFailCauseInfo failCauseinfo) throws RemoteException {
-        }
+        public void getLastCallFailCauseResponse(
+                RadioResponseInfo info, LastCallFailCauseInfo failCauseinfo)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void getMuteResponse(RadioResponseInfo info, boolean enable) throws RemoteException {
-        }
+        public void getMuteResponse(RadioResponseInfo info, boolean enable)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void getPreferredVoicePrivacyResponse(RadioResponseInfo info, boolean enable) throws RemoteException {
-        }
+        public void getPreferredVoicePrivacyResponse(RadioResponseInfo info, boolean enable)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void getTtyModeResponse(RadioResponseInfo info, int mode) throws RemoteException {
-        }
+        public void getTtyModeResponse(RadioResponseInfo info, int mode) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void handleStkCallSetupRequestFromSimResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void handleStkCallSetupRequestFromSimResponse(RadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void hangupConnectionResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void hangupConnectionResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void hangupForegroundResumeBackgroundResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void hangupForegroundResumeBackgroundResponse(RadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void hangupWaitingOrBackgroundResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void hangupWaitingOrBackgroundResponse(RadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void isVoNrEnabledResponse(RadioResponseInfo info, boolean enable) throws RemoteException {
-        }
+        public void isVoNrEnabledResponse(RadioResponseInfo info, boolean enable)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void rejectCallResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void rejectCallResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void sendBurstDtmfResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void sendBurstDtmfResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void sendCdmaFeatureCodeResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void sendCdmaFeatureCodeResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void sendDtmfResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void sendDtmfResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void sendUssdResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void sendUssdResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void separateConnectionResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void separateConnectionResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void setCallForwardResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setCallForwardResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void setCallWaitingResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setCallWaitingResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void setClirResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setClirResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void setMuteResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setMuteResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void setPreferredVoicePrivacyResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setPreferredVoicePrivacyResponse(RadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void setTtyModeResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setTtyModeResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void setVoNrEnabledResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setVoNrEnabledResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void startDtmfResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void startDtmfResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void stopDtmfResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void stopDtmfResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
-        public void switchWaitingOrHoldingAndActiveResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void switchWaitingOrHoldingAndActiveResponse(RadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceResponse
         public int getInterfaceVersion() {
@@ -262,7 +254,7 @@ public interface IRadioVoiceResponse extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioVoiceResponse {
+    public abstract static class Stub extends Binder implements IRadioVoiceResponse {
         static final int TRANSACTION_acceptCallResponse = 1;
         static final int TRANSACTION_acknowledgeRequest = 2;
         static final int TRANSACTION_cancelPendingUssdResponse = 3;
@@ -326,7 +318,8 @@ public interface IRadioVoiceResponse extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -347,7 +340,8 @@ public interface IRadioVoiceResponse extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RadioResponseInfo _arg0 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg0 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     acceptCallResponse(_arg0);
                     return true;
@@ -357,194 +351,233 @@ public interface IRadioVoiceResponse extends IInterface {
                     acknowledgeRequest(_arg02);
                     return true;
                 case 3:
-                    RadioResponseInfo _arg03 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg03 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     cancelPendingUssdResponse(_arg03);
                     return true;
                 case 4:
-                    RadioResponseInfo _arg04 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg04 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     conferenceResponse(_arg04);
                     return true;
                 case 5:
-                    RadioResponseInfo _arg05 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg05 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     dialResponse(_arg05);
                     return true;
                 case 6:
-                    RadioResponseInfo _arg06 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg06 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     emergencyDialResponse(_arg06);
                     return true;
                 case 7:
-                    RadioResponseInfo _arg07 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg07 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     exitEmergencyCallbackModeResponse(_arg07);
                     return true;
                 case 8:
-                    RadioResponseInfo _arg08 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg08 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     explicitCallTransferResponse(_arg08);
                     return true;
                 case 9:
-                    RadioResponseInfo _arg09 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
-                    CallForwardInfo[] _arg1 = (CallForwardInfo[]) data.createTypedArray(CallForwardInfo.CREATOR);
+                    RadioResponseInfo _arg09 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    CallForwardInfo[] _arg1 =
+                            (CallForwardInfo[]) data.createTypedArray(CallForwardInfo.CREATOR);
                     data.enforceNoDataAvail();
                     getCallForwardStatusResponse(_arg09, _arg1);
                     return true;
                 case 10:
-                    RadioResponseInfo _arg010 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg010 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     boolean _arg12 = data.readBoolean();
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     getCallWaitingResponse(_arg010, _arg12, _arg2);
                     return true;
                 case 11:
-                    RadioResponseInfo _arg011 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg011 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     getClipResponse(_arg011, _arg13);
                     return true;
                 case 12:
-                    RadioResponseInfo _arg012 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg012 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     int _arg14 = data.readInt();
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
                     getClirResponse(_arg012, _arg14, _arg22);
                     return true;
                 case 13:
-                    RadioResponseInfo _arg013 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg013 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     Call[] _arg15 = (Call[]) data.createTypedArray(Call.CREATOR);
                     data.enforceNoDataAvail();
                     getCurrentCallsResponse(_arg013, _arg15);
                     return true;
                 case 14:
-                    RadioResponseInfo _arg014 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
-                    LastCallFailCauseInfo _arg16 = (LastCallFailCauseInfo) data.readTypedObject(LastCallFailCauseInfo.CREATOR);
+                    RadioResponseInfo _arg014 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    LastCallFailCauseInfo _arg16 =
+                            (LastCallFailCauseInfo)
+                                    data.readTypedObject(LastCallFailCauseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     getLastCallFailCauseResponse(_arg014, _arg16);
                     return true;
                 case 15:
-                    RadioResponseInfo _arg015 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg015 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     boolean _arg17 = data.readBoolean();
                     data.enforceNoDataAvail();
                     getMuteResponse(_arg015, _arg17);
                     return true;
                 case 16:
-                    RadioResponseInfo _arg016 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg016 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     boolean _arg18 = data.readBoolean();
                     data.enforceNoDataAvail();
                     getPreferredVoicePrivacyResponse(_arg016, _arg18);
                     return true;
                 case 17:
-                    RadioResponseInfo _arg017 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg017 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     int _arg19 = data.readInt();
                     data.enforceNoDataAvail();
                     getTtyModeResponse(_arg017, _arg19);
                     return true;
                 case 18:
-                    RadioResponseInfo _arg018 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg018 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     handleStkCallSetupRequestFromSimResponse(_arg018);
                     return true;
                 case 19:
-                    RadioResponseInfo _arg019 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg019 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     hangupConnectionResponse(_arg019);
                     return true;
                 case 20:
-                    RadioResponseInfo _arg020 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg020 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     hangupForegroundResumeBackgroundResponse(_arg020);
                     return true;
                 case 21:
-                    RadioResponseInfo _arg021 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg021 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     hangupWaitingOrBackgroundResponse(_arg021);
                     return true;
                 case 22:
-                    RadioResponseInfo _arg022 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg022 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     boolean _arg110 = data.readBoolean();
                     data.enforceNoDataAvail();
                     isVoNrEnabledResponse(_arg022, _arg110);
                     return true;
                 case 23:
-                    RadioResponseInfo _arg023 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg023 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     rejectCallResponse(_arg023);
                     return true;
                 case 24:
-                    RadioResponseInfo _arg024 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg024 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     sendBurstDtmfResponse(_arg024);
                     return true;
                 case 25:
-                    RadioResponseInfo _arg025 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg025 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     sendCdmaFeatureCodeResponse(_arg025);
                     return true;
                 case 26:
-                    RadioResponseInfo _arg026 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg026 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     sendDtmfResponse(_arg026);
                     return true;
                 case 27:
-                    RadioResponseInfo _arg027 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg027 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     sendUssdResponse(_arg027);
                     return true;
                 case 28:
-                    RadioResponseInfo _arg028 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg028 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     separateConnectionResponse(_arg028);
                     return true;
                 case 29:
-                    RadioResponseInfo _arg029 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg029 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setCallForwardResponse(_arg029);
                     return true;
                 case 30:
-                    RadioResponseInfo _arg030 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg030 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setCallWaitingResponse(_arg030);
                     return true;
                 case 31:
-                    RadioResponseInfo _arg031 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg031 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setClirResponse(_arg031);
                     return true;
                 case 32:
-                    RadioResponseInfo _arg032 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg032 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setMuteResponse(_arg032);
                     return true;
                 case 33:
-                    RadioResponseInfo _arg033 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg033 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setPreferredVoicePrivacyResponse(_arg033);
                     return true;
                 case 34:
-                    RadioResponseInfo _arg034 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg034 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setTtyModeResponse(_arg034);
                     return true;
                 case 35:
-                    RadioResponseInfo _arg035 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg035 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setVoNrEnabledResponse(_arg035);
                     return true;
                 case 36:
-                    RadioResponseInfo _arg036 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg036 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     startDtmfResponse(_arg036);
                     return true;
                 case 37:
-                    RadioResponseInfo _arg037 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg037 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     stopDtmfResponse(_arg037);
                     return true;
                 case 38:
-                    RadioResponseInfo _arg038 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg038 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     switchWaitingOrHoldingAndActiveResponse(_arg038);
                     return true;
@@ -609,7 +642,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method cancelPendingUssdResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method cancelPendingUssdResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -662,14 +696,16 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void exitEmergencyCallbackModeResponse(RadioResponseInfo info) throws RemoteException {
+            public void exitEmergencyCallbackModeResponse(RadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(7, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method exitEmergencyCallbackModeResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method exitEmergencyCallbackModeResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -677,14 +713,16 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void explicitCallTransferResponse(RadioResponseInfo info) throws RemoteException {
+            public void explicitCallTransferResponse(RadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(8, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method explicitCallTransferResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method explicitCallTransferResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -692,7 +730,9 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void getCallForwardStatusResponse(RadioResponseInfo info, CallForwardInfo[] callForwardInfos) throws RemoteException {
+            public void getCallForwardStatusResponse(
+                    RadioResponseInfo info, CallForwardInfo[] callForwardInfos)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -700,7 +740,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeTypedArray(callForwardInfos, 0);
                     boolean _status = this.mRemote.transact(9, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getCallForwardStatusResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCallForwardStatusResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -708,7 +749,9 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void getCallWaitingResponse(RadioResponseInfo info, boolean enable, int serviceClass) throws RemoteException {
+            public void getCallWaitingResponse(
+                    RadioResponseInfo info, boolean enable, int serviceClass)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -717,7 +760,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeInt(serviceClass);
                     boolean _status = this.mRemote.transact(10, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getCallWaitingResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCallWaitingResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -741,7 +785,8 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void getClirResponse(RadioResponseInfo info, int n, int m) throws RemoteException {
+            public void getClirResponse(RadioResponseInfo info, int n, int m)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -758,7 +803,8 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void getCurrentCallsResponse(RadioResponseInfo info, Call[] calls) throws RemoteException {
+            public void getCurrentCallsResponse(RadioResponseInfo info, Call[] calls)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -766,7 +812,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeTypedArray(calls, 0);
                     boolean _status = this.mRemote.transact(13, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getCurrentCallsResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCurrentCallsResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -774,7 +821,9 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void getLastCallFailCauseResponse(RadioResponseInfo info, LastCallFailCauseInfo failCauseinfo) throws RemoteException {
+            public void getLastCallFailCauseResponse(
+                    RadioResponseInfo info, LastCallFailCauseInfo failCauseinfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -782,7 +831,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeTypedObject(failCauseinfo, 0);
                     boolean _status = this.mRemote.transact(14, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getLastCallFailCauseResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getLastCallFailCauseResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -790,7 +840,8 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void getMuteResponse(RadioResponseInfo info, boolean enable) throws RemoteException {
+            public void getMuteResponse(RadioResponseInfo info, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -806,7 +857,8 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void getPreferredVoicePrivacyResponse(RadioResponseInfo info, boolean enable) throws RemoteException {
+            public void getPreferredVoicePrivacyResponse(RadioResponseInfo info, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -814,7 +866,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeBoolean(enable);
                     boolean _status = this.mRemote.transact(16, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getPreferredVoicePrivacyResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getPreferredVoicePrivacyResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -822,7 +875,8 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void getTtyModeResponse(RadioResponseInfo info, int mode) throws RemoteException {
+            public void getTtyModeResponse(RadioResponseInfo info, int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -838,14 +892,17 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void handleStkCallSetupRequestFromSimResponse(RadioResponseInfo info) throws RemoteException {
+            public void handleStkCallSetupRequestFromSimResponse(RadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(18, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method handleStkCallSetupRequestFromSimResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method handleStkCallSetupRequestFromSimResponse is"
+                                        + " unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -860,7 +917,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(19, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method hangupConnectionResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method hangupConnectionResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -868,14 +926,17 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void hangupForegroundResumeBackgroundResponse(RadioResponseInfo info) throws RemoteException {
+            public void hangupForegroundResumeBackgroundResponse(RadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(20, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method hangupForegroundResumeBackgroundResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method hangupForegroundResumeBackgroundResponse is"
+                                        + " unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -883,14 +944,16 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void hangupWaitingOrBackgroundResponse(RadioResponseInfo info) throws RemoteException {
+            public void hangupWaitingOrBackgroundResponse(RadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(21, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method hangupWaitingOrBackgroundResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method hangupWaitingOrBackgroundResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -898,7 +961,8 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void isVoNrEnabledResponse(RadioResponseInfo info, boolean enable) throws RemoteException {
+            public void isVoNrEnabledResponse(RadioResponseInfo info, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -951,7 +1015,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(25, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method sendCdmaFeatureCodeResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method sendCdmaFeatureCodeResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -996,7 +1061,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(28, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method separateConnectionResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method separateConnectionResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1011,7 +1077,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(29, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setCallForwardResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCallForwardResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1026,7 +1093,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(30, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setCallWaitingResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCallWaitingResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1064,14 +1132,16 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void setPreferredVoicePrivacyResponse(RadioResponseInfo info) throws RemoteException {
+            public void setPreferredVoicePrivacyResponse(RadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(33, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setPreferredVoicePrivacyResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setPreferredVoicePrivacyResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1101,7 +1171,8 @@ public interface IRadioVoiceResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(35, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setVoNrEnabledResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setVoNrEnabledResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1139,14 +1210,16 @@ public interface IRadioVoiceResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceResponse
-            public void switchWaitingOrHoldingAndActiveResponse(RadioResponseInfo info) throws RemoteException {
+            public void switchWaitingOrHoldingAndActiveResponse(RadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(38, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method switchWaitingOrHoldingAndActiveResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method switchWaitingOrHoldingAndActiveResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

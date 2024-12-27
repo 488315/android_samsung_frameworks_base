@@ -14,13 +14,30 @@ class EventLogger extends AbstractEventLogger {
     @Override // android.speech.tts.AbstractEventLogger
     protected void logFailure(int statusCode) {
         if (statusCode != -2) {
-            EventLogTags.writeTtsSpeakFailure(this.mServiceApp, this.mCallerUid, this.mCallerPid, getUtteranceLength(), getLocaleString(), this.mRequest.getSpeechRate(), this.mRequest.getPitch());
+            EventLogTags.writeTtsSpeakFailure(
+                    this.mServiceApp,
+                    this.mCallerUid,
+                    this.mCallerPid,
+                    getUtteranceLength(),
+                    getLocaleString(),
+                    this.mRequest.getSpeechRate(),
+                    this.mRequest.getPitch());
         }
     }
 
     @Override // android.speech.tts.AbstractEventLogger
     protected void logSuccess(long audioLatency, long engineLatency, long engineTotal) {
-        EventLogTags.writeTtsSpeakSuccess(this.mServiceApp, this.mCallerUid, this.mCallerPid, getUtteranceLength(), getLocaleString(), this.mRequest.getSpeechRate(), this.mRequest.getPitch(), engineLatency, engineTotal, audioLatency);
+        EventLogTags.writeTtsSpeakSuccess(
+                this.mServiceApp,
+                this.mCallerUid,
+                this.mCallerPid,
+                getUtteranceLength(),
+                getLocaleString(),
+                this.mRequest.getSpeechRate(),
+                this.mRequest.getPitch(),
+                engineLatency,
+                engineTotal,
+                audioLatency);
     }
 
     private int getUtteranceLength() {

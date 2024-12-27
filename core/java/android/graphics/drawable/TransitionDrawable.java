@@ -2,8 +2,6 @@ package android.graphics.drawable;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.SystemClock;
 
 /* loaded from: classes.dex */
@@ -94,7 +92,11 @@ public class TransitionDrawable extends LayerDrawable implements Drawable.Callba
         this.mReverse = !this.mReverse;
         this.mFrom = this.mAlpha;
         this.mTo = this.mReverse ? 0 : 255;
-        this.mDuration = (int) (this.mReverse ? time - this.mStartTimeMillis : this.mOriginalDuration - (time - this.mStartTimeMillis));
+        this.mDuration =
+                (int)
+                        (this.mReverse
+                                ? time - this.mStartTimeMillis
+                                : this.mOriginalDuration - (time - this.mStartTimeMillis));
         this.mTransitionState = 0;
     }
 
@@ -109,9 +111,14 @@ public class TransitionDrawable extends LayerDrawable implements Drawable.Callba
                 break;
             case 1:
                 if (this.mStartTimeMillis >= 0) {
-                    float normalized = (SystemClock.uptimeMillis() - this.mStartTimeMillis) / this.mDuration;
+                    float normalized =
+                            (SystemClock.uptimeMillis() - this.mStartTimeMillis) / this.mDuration;
                     done = normalized >= 1.0f;
-                    this.mAlpha = (int) (this.mFrom + ((this.mTo - this.mFrom) * Math.min(normalized, 1.0f)));
+                    this.mAlpha =
+                            (int)
+                                    (this.mFrom
+                                            + ((this.mTo - this.mFrom)
+                                                    * Math.min(normalized, 1.0f)));
                     break;
                 }
                 break;
@@ -161,17 +168,20 @@ public class TransitionDrawable extends LayerDrawable implements Drawable.Callba
             super(orig, owner, res);
         }
 
-        @Override // android.graphics.drawable.LayerDrawable.LayerState, android.graphics.drawable.Drawable.ConstantState
+        @Override // android.graphics.drawable.LayerDrawable.LayerState,
+        // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable() {
             return new TransitionDrawable(this, null);
         }
 
-        @Override // android.graphics.drawable.LayerDrawable.LayerState, android.graphics.drawable.Drawable.ConstantState
+        @Override // android.graphics.drawable.LayerDrawable.LayerState,
+        // android.graphics.drawable.Drawable.ConstantState
         public Drawable newDrawable(Resources res) {
             return new TransitionDrawable(this, res);
         }
 
-        @Override // android.graphics.drawable.LayerDrawable.LayerState, android.graphics.drawable.Drawable.ConstantState
+        @Override // android.graphics.drawable.LayerDrawable.LayerState,
+        // android.graphics.drawable.Drawable.ConstantState
         public int getChangingConfigurations() {
             return this.mChangingConfigurations;
         }

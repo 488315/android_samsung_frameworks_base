@@ -6,6 +6,7 @@ import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -232,7 +233,8 @@ public interface WindowManagerProtos {
                 size += CodedOutputByteBufferNano.computeInt32Size(103, this.cutoutInsetRight);
             }
             if (this.cutoutInsetBottom != 0) {
-                return size + CodedOutputByteBufferNano.computeInt32Size(104, this.cutoutInsetBottom);
+                return size
+                        + CodedOutputByteBufferNano.computeInt32Size(104, this.cutoutInsetBottom);
             }
             return size;
         }
@@ -325,11 +327,13 @@ public interface WindowManagerProtos {
             }
         }
 
-        public static TaskSnapshotProto parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static TaskSnapshotProto parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (TaskSnapshotProto) MessageNano.mergeFrom(new TaskSnapshotProto(), data);
         }
 
-        public static TaskSnapshotProto parseFrom(CodedInputByteBufferNano input) throws IOException {
+        public static TaskSnapshotProto parseFrom(CodedInputByteBufferNano input)
+                throws IOException {
             return new TaskSnapshotProto().mergeFrom(input);
         }
     }
@@ -392,16 +396,24 @@ public interface WindowManagerProtos {
         protected int computeSerializedSize() {
             int size = super.computeSerializedSize();
             if (this.letterboxPositionForHorizontalReachability != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(1, this.letterboxPositionForHorizontalReachability);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                1, this.letterboxPositionForHorizontalReachability);
             }
             if (this.letterboxPositionForVerticalReachability != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(2, this.letterboxPositionForVerticalReachability);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                2, this.letterboxPositionForVerticalReachability);
             }
             if (this.letterboxPositionForBookModeReachability != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(3, this.letterboxPositionForBookModeReachability);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                3, this.letterboxPositionForBookModeReachability);
             }
             if (this.letterboxPositionForTabletopModeReachability != 0) {
-                return size + CodedOutputByteBufferNano.computeInt32Size(4, this.letterboxPositionForTabletopModeReachability);
+                return size
+                        + CodedOutputByteBufferNano.computeInt32Size(
+                                4, this.letterboxPositionForTabletopModeReachability);
             }
             return size;
         }
@@ -458,7 +470,8 @@ public interface WindowManagerProtos {
             }
         }
 
-        public static LetterboxProto parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static LetterboxProto parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (LetterboxProto) MessageNano.mergeFrom(new LetterboxProto(), data);
         }
 

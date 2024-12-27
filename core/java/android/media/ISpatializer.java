@@ -1,6 +1,5 @@
 package android.media;
 
-import android.media.ISpatializerHeadTrackingCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -29,7 +28,9 @@ public interface ISpatializer extends IInterface {
 
     void recenterHeadTracker() throws RemoteException;
 
-    void registerHeadTrackingCallback(ISpatializerHeadTrackingCallback iSpatializerHeadTrackingCallback) throws RemoteException;
+    void registerHeadTrackingCallback(
+            ISpatializerHeadTrackingCallback iSpatializerHeadTrackingCallback)
+            throws RemoteException;
 
     void release() throws RemoteException;
 
@@ -53,8 +54,7 @@ public interface ISpatializer extends IInterface {
 
     public static class Default implements ISpatializer {
         @Override // android.media.ISpatializer
-        public void release() throws RemoteException {
-        }
+        public void release() throws RemoteException {}
 
         @Override // android.media.ISpatializer
         public byte[] getSupportedLevels() throws RemoteException {
@@ -62,8 +62,7 @@ public interface ISpatializer extends IInterface {
         }
 
         @Override // android.media.ISpatializer
-        public void setLevel(byte level) throws RemoteException {
-        }
+        public void setLevel(byte level) throws RemoteException {}
 
         @Override // android.media.ISpatializer
         public byte getLevel() throws RemoteException {
@@ -81,8 +80,7 @@ public interface ISpatializer extends IInterface {
         }
 
         @Override // android.media.ISpatializer
-        public void setDesiredHeadTrackingMode(byte mode) throws RemoteException {
-        }
+        public void setDesiredHeadTrackingMode(byte mode) throws RemoteException {}
 
         @Override // android.media.ISpatializer
         public byte getActualHeadTrackingMode() throws RemoteException {
@@ -90,32 +88,25 @@ public interface ISpatializer extends IInterface {
         }
 
         @Override // android.media.ISpatializer
-        public void recenterHeadTracker() throws RemoteException {
-        }
+        public void recenterHeadTracker() throws RemoteException {}
 
         @Override // android.media.ISpatializer
-        public void setGlobalTransform(float[] screenToStage) throws RemoteException {
-        }
+        public void setGlobalTransform(float[] screenToStage) throws RemoteException {}
 
         @Override // android.media.ISpatializer
-        public void setHeadSensor(int sensorHandle) throws RemoteException {
-        }
+        public void setHeadSensor(int sensorHandle) throws RemoteException {}
 
         @Override // android.media.ISpatializer
-        public void setScreenSensor(int sensorHandle) throws RemoteException {
-        }
+        public void setScreenSensor(int sensorHandle) throws RemoteException {}
 
         @Override // android.media.ISpatializer
-        public void setDisplayOrientation(float physicalToLogicalAngle) throws RemoteException {
-        }
+        public void setDisplayOrientation(float physicalToLogicalAngle) throws RemoteException {}
 
         @Override // android.media.ISpatializer
-        public void setHingeAngle(float hingeAngle) throws RemoteException {
-        }
+        public void setHingeAngle(float hingeAngle) throws RemoteException {}
 
         @Override // android.media.ISpatializer
-        public void setFoldState(boolean folded) throws RemoteException {
-        }
+        public void setFoldState(boolean folded) throws RemoteException {}
 
         @Override // android.media.ISpatializer
         public byte[] getSupportedModes() throws RemoteException {
@@ -123,16 +114,14 @@ public interface ISpatializer extends IInterface {
         }
 
         @Override // android.media.ISpatializer
-        public void registerHeadTrackingCallback(ISpatializerHeadTrackingCallback callback) throws RemoteException {
-        }
+        public void registerHeadTrackingCallback(ISpatializerHeadTrackingCallback callback)
+                throws RemoteException {}
 
         @Override // android.media.ISpatializer
-        public void setParameter(int key, byte[] value) throws RemoteException {
-        }
+        public void setParameter(int key, byte[] value) throws RemoteException {}
 
         @Override // android.media.ISpatializer
-        public void getParameter(int key, byte[] value) throws RemoteException {
-        }
+        public void getParameter(int key, byte[] value) throws RemoteException {}
 
         @Override // android.media.ISpatializer
         public int getOutput() throws RemoteException {
@@ -145,7 +134,7 @@ public interface ISpatializer extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpatializer {
+    public abstract static class Stub extends Binder implements ISpatializer {
         static final int TRANSACTION_getActualHeadTrackingMode = 8;
         static final int TRANSACTION_getLevel = 4;
         static final int TRANSACTION_getOutput = 20;
@@ -188,7 +177,8 @@ public interface ISpatializer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISpatializer.DESCRIPTOR);
             }
@@ -284,7 +274,9 @@ public interface ISpatializer extends IInterface {
                     reply.writeByteArray(_result6);
                     return true;
                 case 17:
-                    ISpatializerHeadTrackingCallback _arg09 = ISpatializerHeadTrackingCallback.Stub.asInterface(data.readStrongBinder());
+                    ISpatializerHeadTrackingCallback _arg09 =
+                            ISpatializerHeadTrackingCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerHeadTrackingCallback(_arg09);
                     reply.writeNoException();
@@ -575,7 +567,8 @@ public interface ISpatializer extends IInterface {
             }
 
             @Override // android.media.ISpatializer
-            public void registerHeadTrackingCallback(ISpatializerHeadTrackingCallback callback) throws RemoteException {
+            public void registerHeadTrackingCallback(ISpatializerHeadTrackingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

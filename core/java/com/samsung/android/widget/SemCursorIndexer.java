@@ -7,11 +7,9 @@ import android.util.Log;
 /* loaded from: classes6.dex */
 public class SemCursorIndexer extends SemAbstractIndexer {
 
-    @Deprecated
-    public static final String EXTRA_INDEX_COUNTS = "indexscroll_index_counts";
+    @Deprecated public static final String EXTRA_INDEX_COUNTS = "indexscroll_index_counts";
 
-    @Deprecated
-    public static final String EXTRA_INDEX_TITLES = "indexscroll_index_titles";
+    @Deprecated public static final String EXTRA_INDEX_TITLES = "indexscroll_index_titles";
     private static final boolean debug = true;
     private final String TAG;
     protected int mColumnIndex;
@@ -33,7 +31,8 @@ public class SemCursorIndexer extends SemAbstractIndexer {
     }
 
     @Deprecated
-    public SemCursorIndexer(Cursor cursor, int sortedColumnIndex, String[] indexCharacters, int aLangIndex) {
+    public SemCursorIndexer(
+            Cursor cursor, int sortedColumnIndex, String[] indexCharacters, int aLangIndex) {
         super(indexCharacters, aLangIndex);
         this.TAG = "SemCursorIndexer";
         this.mCursor = cursor;
@@ -46,12 +45,22 @@ public class SemCursorIndexer extends SemAbstractIndexer {
         }
     }
 
-    public SemCursorIndexer(Cursor cursor, int sortedColumnIndex, CharSequence indexCharacters, int profileCount, int favoriteCount) {
+    public SemCursorIndexer(
+            Cursor cursor,
+            int sortedColumnIndex,
+            CharSequence indexCharacters,
+            int profileCount,
+            int favoriteCount) {
         super(indexCharacters, profileCount, favoriteCount);
         this.TAG = "SemCursorIndexer";
         this.mCursor = cursor;
         this.mColumnIndex = sortedColumnIndex;
-        Log.e("SemCursorIndexer", "SemCursorIndexer constructor, profileCount:" + profileCount + ", favoriteCount:" + favoriteCount);
+        Log.e(
+                "SemCursorIndexer",
+                "SemCursorIndexer constructor, profileCount:"
+                        + profileCount
+                        + ", favoriteCount:"
+                        + favoriteCount);
         if (sortedColumnIndex < 0) {
             RuntimeException e = new RuntimeException("here");
             e.fillInStackTrace();
@@ -59,12 +68,23 @@ public class SemCursorIndexer extends SemAbstractIndexer {
         }
     }
 
-    public SemCursorIndexer(Cursor cursor, int sortedColumnIndex, String[] indexCharacters, int aLangIndex, int profileCount, int favoriteCount) {
+    public SemCursorIndexer(
+            Cursor cursor,
+            int sortedColumnIndex,
+            String[] indexCharacters,
+            int aLangIndex,
+            int profileCount,
+            int favoriteCount) {
         super(indexCharacters, aLangIndex, profileCount, favoriteCount);
         this.TAG = "SemCursorIndexer";
         this.mCursor = cursor;
         this.mColumnIndex = sortedColumnIndex;
-        Log.e("SemCursorIndexer", "SemCursorIndexer constructor, profileCount:" + profileCount + ", favoriteCount:" + favoriteCount);
+        Log.e(
+                "SemCursorIndexer",
+                "SemCursorIndexer constructor, profileCount:"
+                        + profileCount
+                        + ", favoriteCount:"
+                        + favoriteCount);
         if (sortedColumnIndex < 0) {
             RuntimeException e = new RuntimeException("here");
             e.fillInStackTrace();
@@ -113,12 +133,18 @@ public class SemCursorIndexer extends SemAbstractIndexer {
     @Override // com.samsung.android.widget.SemAbstractIndexer
     protected void onBeginTransaction() {
         this.mSavedCursorPos = this.mCursor.getPosition();
-        Log.d("SemCursorIndexer", "SemCursorIndexer.onBeginTransaction() : Current cursor pos to save is :  " + this.mSavedCursorPos);
+        Log.d(
+                "SemCursorIndexer",
+                "SemCursorIndexer.onBeginTransaction() : Current cursor pos to save is :  "
+                        + this.mSavedCursorPos);
     }
 
     @Override // com.samsung.android.widget.SemAbstractIndexer
     protected void onEndTransaction() {
-        Log.d("SemCursorIndexer", "SemCursorIndexer.onEndTransaction() : Saved cursor pos to restore  is :  " + this.mSavedCursorPos);
+        Log.d(
+                "SemCursorIndexer",
+                "SemCursorIndexer.onEndTransaction() : Saved cursor pos to restore  is :  "
+                        + this.mSavedCursorPos);
         this.mCursor.moveToPosition(this.mSavedCursorPos);
     }
 

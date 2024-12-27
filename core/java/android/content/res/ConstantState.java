@@ -1,7 +1,5 @@
 package android.content.res;
 
-import android.content.res.Resources;
-
 /* loaded from: classes.dex */
 public abstract class ConstantState<T> {
     public abstract int getChangingConfigurations();

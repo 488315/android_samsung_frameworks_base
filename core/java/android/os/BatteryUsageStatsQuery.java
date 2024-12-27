@@ -1,8 +1,8 @@
 package android.os;
 
 import android.hardware.scontext.SContextConstants;
-import android.os.Parcelable;
 import android.util.IntArray;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -24,27 +24,28 @@ public final class BatteryUsageStatsQuery implements Parcelable {
     private final long mToTimestamp;
     private final int[] mUserIds;
     public static final BatteryUsageStatsQuery DEFAULT = new Builder().build();
-    public static final Parcelable.Creator<BatteryUsageStatsQuery> CREATOR = new Parcelable.Creator<BatteryUsageStatsQuery>() { // from class: android.os.BatteryUsageStatsQuery.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BatteryUsageStatsQuery createFromParcel(Parcel in) {
-            return new BatteryUsageStatsQuery(in);
-        }
+    public static final Parcelable.Creator<BatteryUsageStatsQuery> CREATOR =
+            new Parcelable.Creator<
+                    BatteryUsageStatsQuery>() { // from class: android.os.BatteryUsageStatsQuery.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BatteryUsageStatsQuery createFromParcel(Parcel in) {
+                    return new BatteryUsageStatsQuery(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BatteryUsageStatsQuery[] newArray(int size) {
-            return new BatteryUsageStatsQuery[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BatteryUsageStatsQuery[] newArray(int size) {
+                    return new BatteryUsageStatsQuery[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BatteryUsageStatsFlags {
-    }
+    public @interface BatteryUsageStatsFlags {}
 
     private BatteryUsageStatsQuery(Builder builder) {
         this.mFlags = builder.mFlags;
-        this.mUserIds = builder.mUserIds != null ? builder.mUserIds.toArray() : new int[]{-1};
+        this.mUserIds = builder.mUserIds != null ? builder.mUserIds.toArray() : new int[] {-1};
         this.mMaxStatsAgeMs = builder.mMaxStatsAgeMs;
         this.mMinConsumedPowerThreshold = builder.mMinConsumedPowerThreshold;
         this.mFromTimestamp = builder.mFromTimestamp;

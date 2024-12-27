@@ -16,8 +16,10 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.server.soundtrigger_middleware.SoundTriggerHw2Compat;
 import com.android.server.soundtrigger_middleware.SoundTriggerHw2Compat$$ExternalSyntheticLambda1;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Objects;
@@ -44,11 +46,20 @@ public interface ISoundTriggerHw extends IBase {
                 return false;
             }
             Phrase phrase = (Phrase) obj;
-            return this.id == phrase.id && this.recognitionModes == phrase.recognitionModes && HidlSupport.deepEquals(this.users, phrase.users) && HidlSupport.deepEquals(this.locale, phrase.locale) && HidlSupport.deepEquals(this.text, phrase.text);
+            return this.id == phrase.id
+                    && this.recognitionModes == phrase.recognitionModes
+                    && HidlSupport.deepEquals(this.users, phrase.users)
+                    && HidlSupport.deepEquals(this.locale, phrase.locale)
+                    && HidlSupport.deepEquals(this.text, phrase.text);
         }
 
         public final int hashCode() {
-            return Objects.hash(AudioConfig$$ExternalSyntheticOutline0.m(this.id), AudioConfig$$ExternalSyntheticOutline0.m(this.recognitionModes), Integer.valueOf(HidlSupport.deepHashCode(this.users)), Integer.valueOf(HidlSupport.deepHashCode(this.locale)), Integer.valueOf(HidlSupport.deepHashCode(this.text)));
+            return Objects.hash(
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.id),
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.recognitionModes),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.users)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.locale)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.text)));
         }
 
         public final String toString() {
@@ -94,11 +105,14 @@ public interface ISoundTriggerHw extends IBase {
                 return false;
             }
             PhraseSoundModel phraseSoundModel = (PhraseSoundModel) obj;
-            return HidlSupport.deepEquals(this.common, phraseSoundModel.common) && HidlSupport.deepEquals(this.phrases, phraseSoundModel.phrases);
+            return HidlSupport.deepEquals(this.common, phraseSoundModel.common)
+                    && HidlSupport.deepEquals(this.phrases, phraseSoundModel.phrases);
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.common)), Integer.valueOf(HidlSupport.deepHashCode(this.phrases)));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.common)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.phrases)));
         }
 
         public final String toString() {
@@ -144,11 +158,36 @@ public interface ISoundTriggerHw extends IBase {
                 return false;
             }
             Properties properties = (Properties) obj;
-            return HidlSupport.deepEquals(this.implementor, properties.implementor) && HidlSupport.deepEquals(this.description, properties.description) && this.version == properties.version && HidlSupport.deepEquals(this.uuid, properties.uuid) && this.maxSoundModels == properties.maxSoundModels && this.maxKeyPhrases == properties.maxKeyPhrases && this.maxUsers == properties.maxUsers && this.recognitionModes == properties.recognitionModes && this.captureTransition == properties.captureTransition && this.maxBufferMs == properties.maxBufferMs && this.concurrentCapture == properties.concurrentCapture && this.triggerInEvent == properties.triggerInEvent && this.powerConsumptionMw == properties.powerConsumptionMw;
+            return HidlSupport.deepEquals(this.implementor, properties.implementor)
+                    && HidlSupport.deepEquals(this.description, properties.description)
+                    && this.version == properties.version
+                    && HidlSupport.deepEquals(this.uuid, properties.uuid)
+                    && this.maxSoundModels == properties.maxSoundModels
+                    && this.maxKeyPhrases == properties.maxKeyPhrases
+                    && this.maxUsers == properties.maxUsers
+                    && this.recognitionModes == properties.recognitionModes
+                    && this.captureTransition == properties.captureTransition
+                    && this.maxBufferMs == properties.maxBufferMs
+                    && this.concurrentCapture == properties.concurrentCapture
+                    && this.triggerInEvent == properties.triggerInEvent
+                    && this.powerConsumptionMw == properties.powerConsumptionMw;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.implementor)), Integer.valueOf(HidlSupport.deepHashCode(this.description)), AudioConfig$$ExternalSyntheticOutline0.m(this.version), Integer.valueOf(HidlSupport.deepHashCode(this.uuid)), AudioConfig$$ExternalSyntheticOutline0.m(this.maxSoundModels), AudioConfig$$ExternalSyntheticOutline0.m(this.maxKeyPhrases), AudioConfig$$ExternalSyntheticOutline0.m(this.maxUsers), AudioConfig$$ExternalSyntheticOutline0.m(this.recognitionModes), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.captureTransition), AudioConfig$$ExternalSyntheticOutline0.m(this.maxBufferMs), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.concurrentCapture), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.triggerInEvent), AudioConfig$$ExternalSyntheticOutline0.m(this.powerConsumptionMw));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.implementor)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.description)),
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.version),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.uuid)),
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.maxSoundModels),
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.maxKeyPhrases),
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.maxUsers),
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.recognitionModes),
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.captureTransition),
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.maxBufferMs),
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.concurrentCapture),
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.triggerInEvent),
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.powerConsumptionMw));
         }
 
         public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob) {
@@ -216,7 +255,9 @@ public interface ISoundTriggerHw extends IBase {
 
         @Override // android.hidl.base.V1_0.IBase
         public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -258,7 +299,8 @@ public interface ISoundTriggerHw extends IBase {
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -272,8 +314,12 @@ public interface ISoundTriggerHw extends IBase {
         }
 
         @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
-        public final void getProperties(SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.soundtrigger@2.0::ISoundTriggerHw");
+        public final void getProperties(
+                SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                        soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.soundtrigger@2.0::ISoundTriggerHw");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(1, m, hwParcel, 0);
@@ -283,7 +329,8 @@ public interface ISoundTriggerHw extends IBase {
                 Properties properties = new Properties();
                 properties.readEmbeddedFromParcel(hwParcel, hwParcel.readBuffer(88L));
                 AtomicInteger atomicInteger = soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$0;
-                AtomicReference atomicReference = (AtomicReference) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
+                AtomicReference atomicReference =
+                        (AtomicReference) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
                 atomicInteger.set(readInt32);
                 atomicReference.set(properties);
             } finally {
@@ -329,7 +376,11 @@ public interface ISoundTriggerHw extends IBase {
         }
 
         @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
-        public final void loadPhraseSoundModel(PhraseSoundModel phraseSoundModel, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper, SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
+        public final void loadPhraseSoundModel(
+                PhraseSoundModel phraseSoundModel,
+                SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper,
+                SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                        soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
             HwParcel hwParcel = new HwParcel();
             hwParcel.writeInterfaceToken("android.hardware.soundtrigger@2.0::ISoundTriggerHw");
             phraseSoundModel.writeToParcel(hwParcel);
@@ -343,7 +394,8 @@ public interface ISoundTriggerHw extends IBase {
                 int readInt32 = hwParcel2.readInt32();
                 int readInt322 = hwParcel2.readInt32();
                 AtomicInteger atomicInteger = soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$0;
-                AtomicInteger atomicInteger2 = (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
+                AtomicInteger atomicInteger2 =
+                        (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
                 atomicInteger.set(readInt32);
                 atomicInteger2.set(readInt322);
             } finally {
@@ -352,7 +404,11 @@ public interface ISoundTriggerHw extends IBase {
         }
 
         @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
-        public final void loadSoundModel(SoundModel soundModel, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper, SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
+        public final void loadSoundModel(
+                SoundModel soundModel,
+                SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper,
+                SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                        soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
             HwParcel hwParcel = new HwParcel();
             hwParcel.writeInterfaceToken("android.hardware.soundtrigger@2.0::ISoundTriggerHw");
             soundModel.writeToParcel(hwParcel);
@@ -366,7 +422,8 @@ public interface ISoundTriggerHw extends IBase {
                 int readInt32 = hwParcel2.readInt32();
                 int readInt322 = hwParcel2.readInt32();
                 AtomicInteger atomicInteger = soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$0;
-                AtomicInteger atomicInteger2 = (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
+                AtomicInteger atomicInteger2 =
+                        (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
                 atomicInteger.set(readInt32);
                 atomicInteger2.set(readInt322);
             } finally {
@@ -412,7 +469,10 @@ public interface ISoundTriggerHw extends IBase {
         }
 
         @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
-        public final int startRecognition(int i, RecognitionConfig recognitionConfig, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper) {
+        public final int startRecognition(
+                int i,
+                RecognitionConfig recognitionConfig,
+                SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper) {
             HwParcel hwParcel = new HwParcel();
             hwParcel.writeInterfaceToken("android.hardware.soundtrigger@2.0::ISoundTriggerHw");
             hwParcel.writeInt32(i);
@@ -432,7 +492,9 @@ public interface ISoundTriggerHw extends IBase {
 
         @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
         public final int stopRecognition(int i) {
-            HwParcel m = ITunerSession$Proxy$$ExternalSyntheticOutline0.m(i, "android.hardware.soundtrigger@2.0::ISoundTriggerHw");
+            HwParcel m =
+                    ITunerSession$Proxy$$ExternalSyntheticOutline0.m(
+                            i, "android.hardware.soundtrigger@2.0::ISoundTriggerHw");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(6, m, hwParcel, 0);
@@ -448,7 +510,8 @@ public interface ISoundTriggerHw extends IBase {
             try {
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException unused) {
-                return "[class or subclass of android.hardware.soundtrigger@2.0::ISoundTriggerHw]@Proxy";
+                return "[class or subclass of"
+                           + " android.hardware.soundtrigger@2.0::ISoundTriggerHw]@Proxy";
             }
         }
 
@@ -459,7 +522,9 @@ public interface ISoundTriggerHw extends IBase {
 
         @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
         public final int unloadSoundModel(int i) {
-            HwParcel m = ITunerSession$Proxy$$ExternalSyntheticOutline0.m(i, "android.hardware.soundtrigger@2.0::ISoundTriggerHw");
+            HwParcel m =
+                    ITunerSession$Proxy$$ExternalSyntheticOutline0.m(
+                            i, "android.hardware.soundtrigger@2.0::ISoundTriggerHw");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(4, m, hwParcel, 0);
@@ -488,11 +553,20 @@ public interface ISoundTriggerHw extends IBase {
                 return false;
             }
             RecognitionConfig recognitionConfig = (RecognitionConfig) obj;
-            return this.captureHandle == recognitionConfig.captureHandle && this.captureDevice == recognitionConfig.captureDevice && this.captureRequested == recognitionConfig.captureRequested && HidlSupport.deepEquals(this.phrases, recognitionConfig.phrases) && HidlSupport.deepEquals(this.data, recognitionConfig.data);
+            return this.captureHandle == recognitionConfig.captureHandle
+                    && this.captureDevice == recognitionConfig.captureDevice
+                    && this.captureRequested == recognitionConfig.captureRequested
+                    && HidlSupport.deepEquals(this.phrases, recognitionConfig.phrases)
+                    && HidlSupport.deepEquals(this.data, recognitionConfig.data);
         }
 
         public final int hashCode() {
-            return Objects.hash(AudioConfig$$ExternalSyntheticOutline0.m(this.captureHandle), AudioConfig$$ExternalSyntheticOutline0.m(this.captureDevice), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.captureRequested), Integer.valueOf(HidlSupport.deepHashCode(this.phrases)), Integer.valueOf(HidlSupport.deepHashCode(this.data)));
+            return Objects.hash(
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.captureHandle),
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.captureDevice),
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.captureRequested),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.phrases)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.data)));
         }
 
         public final String toString() {
@@ -500,7 +574,198 @@ public interface ISoundTriggerHw extends IBase {
             sb.append(this.captureHandle);
             sb.append(", .captureDevice = ");
             int i = this.captureDevice;
-            sb.append(i == 0 ? "NONE" : i == Integer.MIN_VALUE ? "BIT_IN" : i == 1073741824 ? "BIT_DEFAULT" : i == 1 ? "OUT_EARPIECE" : i == 2 ? "OUT_SPEAKER" : i == 4 ? "OUT_WIRED_HEADSET" : i == 8 ? "OUT_WIRED_HEADPHONE" : i == 16 ? "OUT_BLUETOOTH_SCO" : i == 32 ? "OUT_BLUETOOTH_SCO_HEADSET" : i == 64 ? "OUT_BLUETOOTH_SCO_CARKIT" : i == 128 ? "OUT_BLUETOOTH_A2DP" : i == 256 ? "OUT_BLUETOOTH_A2DP_HEADPHONES" : i == 512 ? "OUT_BLUETOOTH_A2DP_SPEAKER" : i == 1024 ? "OUT_AUX_DIGITAL" : i == 1024 ? "OUT_HDMI" : i == 2048 ? "OUT_ANLG_DOCK_HEADSET" : i == 4096 ? "OUT_DGTL_DOCK_HEADSET" : i == 8192 ? "OUT_USB_ACCESSORY" : i == 16384 ? "OUT_USB_DEVICE" : i == 32768 ? "OUT_REMOTE_SUBMIX" : i == 65536 ? "OUT_TELEPHONY_TX" : i == 131072 ? "OUT_LINE" : i == 262144 ? "OUT_HDMI_ARC" : i == 524288 ? "OUT_SPDIF" : i == 1048576 ? "OUT_FM" : i == 2097152 ? "OUT_AUX_LINE" : i == 4194304 ? "OUT_SPEAKER_SAFE" : i == 8388608 ? "OUT_IP" : i == 16777216 ? "OUT_BUS" : i == 33554432 ? "OUT_PROXY" : i == 67108864 ? "OUT_USB_HEADSET" : i == 1073741824 ? "OUT_DEFAULT" : i == 1207959551 ? "OUT_ALL" : i == 896 ? "OUT_ALL_A2DP" : i == 112 ? "OUT_ALL_SCO" : i == 67133440 ? "OUT_ALL_USB" : i == -2147483647 ? "IN_COMMUNICATION" : i == -2147483646 ? "IN_AMBIENT" : i == -2147483644 ? "IN_BUILTIN_MIC" : i == -2147483640 ? "IN_BLUETOOTH_SCO_HEADSET" : i == -2147483632 ? "IN_WIRED_HEADSET" : i == -2147483616 ? "IN_AUX_DIGITAL" : i == -2147483616 ? "IN_HDMI" : i == -2147483584 ? "IN_VOICE_CALL" : i == -2147483584 ? "IN_TELEPHONY_RX" : i == -2147483520 ? "IN_BACK_MIC" : i == -2147483392 ? "IN_REMOTE_SUBMIX" : i == -2147483136 ? "IN_ANLG_DOCK_HEADSET" : i == -2147482624 ? "IN_DGTL_DOCK_HEADSET" : i == -2147481600 ? "IN_USB_ACCESSORY" : i == -2147479552 ? "IN_USB_DEVICE" : i == -2147475456 ? "IN_FM_TUNER" : i == -2147467264 ? "IN_TV_TUNER" : i == -2147450880 ? "IN_LINE" : i == -2147418112 ? "IN_SPDIF" : i == -2147352576 ? "IN_BLUETOOTH_A2DP" : i == -2147221504 ? "IN_LOOPBACK" : i == -2146959360 ? "IN_IP" : i == -2146435072 ? "IN_BUS" : i == -2130706432 ? "IN_PROXY" : i == -2113929216 ? "IN_USB_HEADSET" : i == -1073741824 ? "IN_DEFAULT" : i == -1021313025 ? "IN_ALL" : i == -2147483640 ? "IN_ALL_SCO" : i == -2113923072 ? "IN_ALL_USB" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i));
+            sb.append(
+                    i == 0
+                            ? "NONE"
+                            : i == Integer.MIN_VALUE
+                                    ? "BIT_IN"
+                                    : i == 1073741824
+                                            ? "BIT_DEFAULT"
+                                            : i == 1
+                                                    ? "OUT_EARPIECE"
+                                                    : i == 2
+                                                            ? "OUT_SPEAKER"
+                                                            : i == 4
+                                                                    ? "OUT_WIRED_HEADSET"
+                                                                    : i == 8
+                                                                            ? "OUT_WIRED_HEADPHONE"
+                                                                            : i == 16
+                                                                                    ? "OUT_BLUETOOTH_SCO"
+                                                                                    : i == 32
+                                                                                            ? "OUT_BLUETOOTH_SCO_HEADSET"
+                                                                                            : i
+                                                                                                            == 64
+                                                                                                    ? "OUT_BLUETOOTH_SCO_CARKIT"
+                                                                                                    : i
+                                                                                                                    == 128
+                                                                                                            ? "OUT_BLUETOOTH_A2DP"
+                                                                                                            : i
+                                                                                                                            == 256
+                                                                                                                    ? "OUT_BLUETOOTH_A2DP_HEADPHONES"
+                                                                                                                    : i
+                                                                                                                                    == 512
+                                                                                                                            ? "OUT_BLUETOOTH_A2DP_SPEAKER"
+                                                                                                                            : i
+                                                                                                                                            == 1024
+                                                                                                                                    ? "OUT_AUX_DIGITAL"
+                                                                                                                                    : i
+                                                                                                                                                    == 1024
+                                                                                                                                            ? "OUT_HDMI"
+                                                                                                                                            : i
+                                                                                                                                                            == 2048
+                                                                                                                                                    ? "OUT_ANLG_DOCK_HEADSET"
+                                                                                                                                                    : i
+                                                                                                                                                                    == 4096
+                                                                                                                                                            ? "OUT_DGTL_DOCK_HEADSET"
+                                                                                                                                                            : i
+                                                                                                                                                                            == 8192
+                                                                                                                                                                    ? "OUT_USB_ACCESSORY"
+                                                                                                                                                                    : i
+                                                                                                                                                                                    == 16384
+                                                                                                                                                                            ? "OUT_USB_DEVICE"
+                                                                                                                                                                            : i
+                                                                                                                                                                                            == 32768
+                                                                                                                                                                                    ? "OUT_REMOTE_SUBMIX"
+                                                                                                                                                                                    : i
+                                                                                                                                                                                                    == 65536
+                                                                                                                                                                                            ? "OUT_TELEPHONY_TX"
+                                                                                                                                                                                            : i
+                                                                                                                                                                                                            == 131072
+                                                                                                                                                                                                    ? "OUT_LINE"
+                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                    == 262144
+                                                                                                                                                                                                            ? "OUT_HDMI_ARC"
+                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                            == 524288
+                                                                                                                                                                                                                    ? "OUT_SPDIF"
+                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                    == 1048576
+                                                                                                                                                                                                                            ? "OUT_FM"
+                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                            == 2097152
+                                                                                                                                                                                                                                    ? "OUT_AUX_LINE"
+                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                    == 4194304
+                                                                                                                                                                                                                                            ? "OUT_SPEAKER_SAFE"
+                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                            == 8388608
+                                                                                                                                                                                                                                                    ? "OUT_IP"
+                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                    == 16777216
+                                                                                                                                                                                                                                                            ? "OUT_BUS"
+                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                            == 33554432
+                                                                                                                                                                                                                                                                    ? "OUT_PROXY"
+                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                    == 67108864
+                                                                                                                                                                                                                                                                            ? "OUT_USB_HEADSET"
+                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                            == 1073741824
+                                                                                                                                                                                                                                                                                    ? "OUT_DEFAULT"
+                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                    == 1207959551
+                                                                                                                                                                                                                                                                                            ? "OUT_ALL"
+                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                            == 896
+                                                                                                                                                                                                                                                                                                    ? "OUT_ALL_A2DP"
+                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                    == 112
+                                                                                                                                                                                                                                                                                                            ? "OUT_ALL_SCO"
+                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                            == 67133440
+                                                                                                                                                                                                                                                                                                                    ? "OUT_ALL_USB"
+                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                    == -2147483647
+                                                                                                                                                                                                                                                                                                                            ? "IN_COMMUNICATION"
+                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                            == -2147483646
+                                                                                                                                                                                                                                                                                                                                    ? "IN_AMBIENT"
+                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                    == -2147483644
+                                                                                                                                                                                                                                                                                                                                            ? "IN_BUILTIN_MIC"
+                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                            == -2147483640
+                                                                                                                                                                                                                                                                                                                                                    ? "IN_BLUETOOTH_SCO_HEADSET"
+                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                    == -2147483632
+                                                                                                                                                                                                                                                                                                                                                            ? "IN_WIRED_HEADSET"
+                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                            == -2147483616
+                                                                                                                                                                                                                                                                                                                                                                    ? "IN_AUX_DIGITAL"
+                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                    == -2147483616
+                                                                                                                                                                                                                                                                                                                                                                            ? "IN_HDMI"
+                                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                                            == -2147483584
+                                                                                                                                                                                                                                                                                                                                                                                    ? "IN_VOICE_CALL"
+                                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                                    == -2147483584
+                                                                                                                                                                                                                                                                                                                                                                                            ? "IN_TELEPHONY_RX"
+                                                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                                                            == -2147483520
+                                                                                                                                                                                                                                                                                                                                                                                                    ? "IN_BACK_MIC"
+                                                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                                                    == -2147483392
+                                                                                                                                                                                                                                                                                                                                                                                                            ? "IN_REMOTE_SUBMIX"
+                                                                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                                                                            == -2147483136
+                                                                                                                                                                                                                                                                                                                                                                                                                    ? "IN_ANLG_DOCK_HEADSET"
+                                                                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                    == -2147482624
+                                                                                                                                                                                                                                                                                                                                                                                                                            ? "IN_DGTL_DOCK_HEADSET"
+                                                                                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                            == -2147481600
+                                                                                                                                                                                                                                                                                                                                                                                                                                    ? "IN_USB_ACCESSORY"
+                                                                                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    == -2147479552
+                                                                                                                                                                                                                                                                                                                                                                                                                                            ? "IN_USB_DEVICE"
+                                                                                                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            == -2147475456
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    ? "IN_FM_TUNER"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    == -2147467264
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            ? "IN_TV_TUNER"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            == -2147450880
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ? "IN_LINE"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    == -2147418112
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ? "IN_SPDIF"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            == -2147352576
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ? "IN_BLUETOOTH_A2DP"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    == -2147221504
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ? "IN_LOOPBACK"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            == -2146959360
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ? "IN_IP"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    == -2146435072
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ? "IN_BUS"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            == -2130706432
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ? "IN_PROXY"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    == -2113929216
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ? "IN_USB_HEADSET"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            == -1073741824
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ? "IN_DEFAULT"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    == -1021313025
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ? "IN_ALL"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            == -2147483640
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ? "IN_ALL_SCO"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    : i
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    == -2113923072
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ? "IN_ALL_USB"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            : AudioChannelMask$$ExternalSyntheticOutline0
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    .m(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            new StringBuilder(
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "0x"),
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            i));
             sb.append(", .captureRequested = ");
             sb.append(this.captureRequested);
             sb.append(", .phrases = ");
@@ -523,7 +788,8 @@ public interface ISoundTriggerHw extends IBase {
             HwBlob hwBlob2 = new HwBlob(size * 32);
             int i = 0;
             while (i < size) {
-                PhraseRecognitionExtra phraseRecognitionExtra = (PhraseRecognitionExtra) this.phrases.get(i);
+                PhraseRecognitionExtra phraseRecognitionExtra =
+                        (PhraseRecognitionExtra) this.phrases.get(i);
                 long j3 = i * 32;
                 hwBlob2.putInt32(j3, phraseRecognitionExtra.id);
                 hwBlob2.putInt32(j3 + j, phraseRecognitionExtra.recognitionModes);
@@ -534,7 +800,8 @@ public interface ISoundTriggerHw extends IBase {
                 hwBlob2.putBool(j3 + 28, false);
                 HwBlob hwBlob3 = new HwBlob(size2 * 8);
                 for (int i2 = 0; i2 < size2; i2++) {
-                    ConfidenceLevel confidenceLevel = (ConfidenceLevel) phraseRecognitionExtra.levels.get(i2);
+                    ConfidenceLevel confidenceLevel =
+                            (ConfidenceLevel) phraseRecognitionExtra.levels.get(i2);
                     long j5 = i2 * 8;
                     hwBlob3.putInt32(j5, confidenceLevel.userId);
                     hwBlob3.putInt32(j5 + 4, confidenceLevel.levelPercent);
@@ -577,15 +844,30 @@ public interface ISoundTriggerHw extends IBase {
                 return false;
             }
             SoundModel soundModel = (SoundModel) obj;
-            return this.type == soundModel.type && HidlSupport.deepEquals(this.uuid, soundModel.uuid) && HidlSupport.deepEquals(this.vendorUuid, soundModel.vendorUuid) && HidlSupport.deepEquals(this.data, soundModel.data);
+            return this.type == soundModel.type
+                    && HidlSupport.deepEquals(this.uuid, soundModel.uuid)
+                    && HidlSupport.deepEquals(this.vendorUuid, soundModel.vendorUuid)
+                    && HidlSupport.deepEquals(this.data, soundModel.data);
         }
 
         public final int hashCode() {
-            return Objects.hash(AudioConfig$$ExternalSyntheticOutline0.m(this.type), Integer.valueOf(HidlSupport.deepHashCode(this.uuid)), Integer.valueOf(HidlSupport.deepHashCode(this.vendorUuid)), Integer.valueOf(HidlSupport.deepHashCode(this.data)));
+            return Objects.hash(
+                    AudioConfig$$ExternalSyntheticOutline0.m(this.type),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.uuid)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.vendorUuid)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.data)));
         }
 
         public final String toString() {
-            return "{.type = " + SoundModelType.toString(this.type) + ", .uuid = " + this.uuid + ", .vendorUuid = " + this.vendorUuid + ", .data = " + this.data + "}";
+            return "{.type = "
+                    + SoundModelType.toString(this.type)
+                    + ", .uuid = "
+                    + this.uuid
+                    + ", .vendorUuid = "
+                    + this.vendorUuid
+                    + ", .data = "
+                    + this.data
+                    + "}";
         }
 
         public final void writeEmbeddedToBlob(HwBlob hwBlob) {
@@ -613,7 +895,8 @@ public interface ISoundTriggerHw extends IBase {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface("android.hardware.soundtrigger@2.0::ISoundTriggerHw");
+        IHwInterface queryLocalInterface =
+                iHwBinder.queryLocalInterface("android.hardware.soundtrigger@2.0::ISoundTriggerHw");
         if (queryLocalInterface != null && (queryLocalInterface instanceof ISoundTriggerHw)) {
             return (ISoundTriggerHw) queryLocalInterface;
         }
@@ -622,7 +905,8 @@ public interface ISoundTriggerHw extends IBase {
         try {
             Iterator it = proxy.interfaceChain().iterator();
             while (it.hasNext()) {
-                if (((String) it.next()).equals("android.hardware.soundtrigger@2.0::ISoundTriggerHw")) {
+                if (((String) it.next())
+                        .equals("android.hardware.soundtrigger@2.0::ISoundTriggerHw")) {
                     return proxy;
                 }
             }
@@ -631,13 +915,26 @@ public interface ISoundTriggerHw extends IBase {
         return null;
     }
 
-    void getProperties(SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1);
+    void getProperties(
+            SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                    soundTriggerHw2Compat$$ExternalSyntheticLambda1);
 
-    void loadPhraseSoundModel(PhraseSoundModel phraseSoundModel, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper, SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1);
+    void loadPhraseSoundModel(
+            PhraseSoundModel phraseSoundModel,
+            SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper,
+            SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                    soundTriggerHw2Compat$$ExternalSyntheticLambda1);
 
-    void loadSoundModel(SoundModel soundModel, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper, SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1);
+    void loadSoundModel(
+            SoundModel soundModel,
+            SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper,
+            SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                    soundTriggerHw2Compat$$ExternalSyntheticLambda1);
 
-    int startRecognition(int i, RecognitionConfig recognitionConfig, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper);
+    int startRecognition(
+            int i,
+            RecognitionConfig recognitionConfig,
+            SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper);
 
     int stopRecognition(int i);
 

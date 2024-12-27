@@ -7,19 +7,22 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class DownloadSubscriptionResult implements Parcelable {
-    public static final Parcelable.Creator<DownloadSubscriptionResult> CREATOR = new Parcelable.Creator<DownloadSubscriptionResult>() { // from class: android.service.euicc.DownloadSubscriptionResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DownloadSubscriptionResult createFromParcel(Parcel in) {
-            return new DownloadSubscriptionResult(in);
-        }
+    public static final Parcelable.Creator<DownloadSubscriptionResult> CREATOR =
+            new Parcelable.Creator<
+                    DownloadSubscriptionResult>() { // from class:
+                                                    // android.service.euicc.DownloadSubscriptionResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DownloadSubscriptionResult createFromParcel(Parcel in) {
+                    return new DownloadSubscriptionResult(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DownloadSubscriptionResult[] newArray(int size) {
-            return new DownloadSubscriptionResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DownloadSubscriptionResult[] newArray(int size) {
+                    return new DownloadSubscriptionResult[size];
+                }
+            };
     private final int mCardId;
     private final int mResolvableErrors;
     private final int mResult;

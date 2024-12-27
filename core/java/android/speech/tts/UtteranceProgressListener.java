@@ -1,6 +1,5 @@
 package android.speech.tts;
 
-import android.speech.tts.TextToSpeech;
 
 /* loaded from: classes3.dex */
 public abstract class UtteranceProgressListener {
@@ -15,25 +14,24 @@ public abstract class UtteranceProgressListener {
         onError(utteranceId);
     }
 
-    public void onStop(String utteranceId, boolean interrupted) {
-    }
+    public void onStop(String utteranceId, boolean interrupted) {}
 
-    public void onBeginSynthesis(String utteranceId, int sampleRateInHz, int audioFormat, int channelCount) {
-    }
+    public void onBeginSynthesis(
+            String utteranceId, int sampleRateInHz, int audioFormat, int channelCount) {}
 
-    public void onAudioAvailable(String utteranceId, byte[] audio) {
-    }
+    public void onAudioAvailable(String utteranceId, byte[] audio) {}
 
     public void onRangeStart(String utteranceId, int start, int end, int frame) {
         onUtteranceRangeStart(utteranceId, start, end);
     }
 
     @Deprecated
-    public void onUtteranceRangeStart(String utteranceId, int start, int end) {
-    }
+    public void onUtteranceRangeStart(String utteranceId, int start, int end) {}
 
-    static UtteranceProgressListener from(final TextToSpeech.OnUtteranceCompletedListener listener) {
-        return new UtteranceProgressListener() { // from class: android.speech.tts.UtteranceProgressListener.1
+    static UtteranceProgressListener from(
+            final TextToSpeech.OnUtteranceCompletedListener listener) {
+        return new UtteranceProgressListener() { // from class:
+                                                 // android.speech.tts.UtteranceProgressListener.1
             @Override // android.speech.tts.UtteranceProgressListener
             public synchronized void onDone(String utteranceId) {
                 TextToSpeech.OnUtteranceCompletedListener.this.onUtteranceCompleted(utteranceId);
@@ -45,8 +43,7 @@ public abstract class UtteranceProgressListener {
             }
 
             @Override // android.speech.tts.UtteranceProgressListener
-            public void onStart(String utteranceId) {
-            }
+            public void onStart(String utteranceId) {}
 
             @Override // android.speech.tts.UtteranceProgressListener
             public void onStop(String utteranceId, boolean interrupted) {

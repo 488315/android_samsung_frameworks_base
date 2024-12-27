@@ -22,6 +22,8 @@ public final class RuleIndexRange {
     }
 
     public final String toString() {
-        return String.format("Range{%d, %d}", Integer.valueOf(this.mStartIndex), Integer.valueOf(this.mEndIndex));
+        return String.format(
+                "Range{%d, %d}",
+                Integer.valueOf(this.mStartIndex), Integer.valueOf(this.mEndIndex));
     }
 }

@@ -8,6 +8,7 @@ import android.os.ServiceManager;
 import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.accessibility.ProxyManager$$ExternalSyntheticOutline0;
@@ -21,6 +22,7 @@ import com.android.server.am.mars.database.FASTableContract;
 import com.android.server.am.mars.database.MARsVersionManager;
 import com.android.server.am.mars.filter.filter.WidgetPkgFilter;
 import com.android.server.usage.AppStandbyInternal;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -28,14 +30,19 @@ import java.util.Iterator;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public abstract class MARsUtils {
-    public static final boolean IS_SUPPORT_FREEZE_FG_SERVICE_FEATURE = FreecessController.IS_SUPPORT_FREEZE_FG_SERVICE_FEATURE;
+    public static final boolean IS_SUPPORT_FREEZE_FG_SERVICE_FEATURE =
+            FreecessController.IS_SUPPORT_FREEZE_FG_SERVICE_FEATURE;
 
     public static void addFilterDebugInfoToHistory(String str, String str2) {
         boolean z = MARsPolicyManager.MARs_ENABLE;
         MARsPolicyManager mARsPolicyManager = MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE;
         if (mARsPolicyManager.mFilterHistoryBufferArray != null) {
             StringBuilder sb = new StringBuilder();
-            sb.append("[" + MARsPolicyManager.formatDateTimeWithoutYear(System.currentTimeMillis()) + "] ");
+            sb.append(
+                    "["
+                            + MARsPolicyManager.formatDateTimeWithoutYear(
+                                    System.currentTimeMillis())
+                            + "] ");
             sb.append("[" + str + "] ");
             sb.append("[" + str2 + "]\n");
             mARsPolicyManager.mFilterHistoryBufferArray.put(sb.toString());
@@ -52,18 +59,27 @@ public abstract class MARsUtils {
         synchronized (MARsPolicyManager.MARsLock) {
             for (int i2 = 0; i2 < mARsPolicyManager.mMARsRestrictedPackages.mMap.size(); i2++) {
                 try {
-                    SparseArray sparseArray = (SparseArray) mARsPolicyManager.mMARsRestrictedPackages.mMap.valueAt(i2);
+                    SparseArray sparseArray =
+                            (SparseArray)
+                                    mARsPolicyManager.mMARsRestrictedPackages.mMap.valueAt(i2);
                     for (int i3 = 0; i3 < sparseArray.size(); i3++) {
                         MARsPackageInfo mARsPackageInfo = (MARsPackageInfo) sparseArray.valueAt(i3);
                         boolean z2 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-                        FreecessController freecessController = FreecessController.FreecessControllerHolder.INSTANCE;
+                        FreecessController freecessController =
+                                FreecessController.FreecessControllerHolder.INSTANCE;
                         if (freecessController.mIsFreecessEnable) {
-                            if (freecessController.isFreezedPackage(mARsPackageInfo.userId, mARsPackageInfo.name)) {
-                                freecessController.unFreezePackage(mARsPackageInfo.userId, mARsPackageInfo.name, "CancelPolicy");
+                            if (freecessController.isFreezedPackage(
+                                    mARsPackageInfo.userId, mARsPackageInfo.name)) {
+                                freecessController.unFreezePackage(
+                                        mARsPackageInfo.userId,
+                                        mARsPackageInfo.name,
+                                        "CancelPolicy");
                             }
                         }
                         if (mARsPackageInfo.appliedPolicy != null) {
-                            if (!mARsPackageInfo.isDisabled && !MARsPolicyManager.isDisabledByUser(mARsPackageInfo.disableReason)) {
+                            if (!mARsPackageInfo.isDisabled
+                                    && !MARsPolicyManager.isDisabledByUser(
+                                            mARsPackageInfo.disableReason)) {
                                 mARsPackageInfo.appliedPolicy = null;
                                 mARsPackageInfo.curLevel = 0;
                             }
@@ -156,7 +172,8 @@ public abstract class MARsUtils {
 
     public static void setFreezeExcludeList(ArrayList arrayList) {
         boolean z = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-        FreecessController freecessController = FreecessController.FreecessControllerHolder.INSTANCE;
+        FreecessController freecessController =
+                FreecessController.FreecessControllerHolder.INSTANCE;
         synchronized (freecessController.mFreezeExcludePackages) {
             try {
                 ((HashSet) freecessController.mFreezeExcludePackages).clear();
@@ -164,7 +181,8 @@ public abstract class MARsUtils {
                 while (it.hasNext()) {
                     String str = (String) it.next();
                     if (!((HashSet) freecessController.mSsrmAllowPackages).contains(str)) {
-                        ((HashSet) freecessController.mFreezeExcludePackages).add(MARsVersionManager.toNormalText(str));
+                        ((HashSet) freecessController.mFreezeExcludePackages)
+                                .add(MARsVersionManager.toNormalText(str));
                     }
                 }
             } finally {
@@ -174,9 +192,11 @@ public abstract class MARsUtils {
             try {
                 SparseArray sparseArray = freecessController.mFreecessManagedPackages.mUidMap;
                 for (int i = 0; i < sparseArray.size(); i++) {
-                    FreecessPkgStatus freecessPkgStatus = (FreecessPkgStatus) sparseArray.valueAt(i);
+                    FreecessPkgStatus freecessPkgStatus =
+                            (FreecessPkgStatus) sparseArray.valueAt(i);
                     if (freecessPkgStatus != null) {
-                        if (MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.isMARsTarget(freecessPkgStatus.userId, freecessPkgStatus.name)) {
+                        if (MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.isMARsTarget(
+                                freecessPkgStatus.userId, freecessPkgStatus.name)) {
                             freecessPkgStatus.isInAllowList = false;
                             freecessController.updateAllowListForFreecess(freecessPkgStatus);
                         }
@@ -192,26 +212,33 @@ public abstract class MARsUtils {
         MARsPolicyManager mARsPolicyManager = MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE;
         mARsPolicyManager.getClass();
         if (MARsDebugConfig.DEBUG_MARs) {
-            ProxyManager$$ExternalSyntheticOutline0.m(i, "setPackagesUnusedLockingTime hours = ", "MARsPolicyManager");
+            ProxyManager$$ExternalSyntheticOutline0.m(
+                    i, "setPackagesUnusedLockingTime hours = ", "MARsPolicyManager");
         }
         if (i != 1) {
-            mARsPolicyManager.THRESHOLD_POWER_USAGE = mARsPolicyManager.THRESHOLD_POWER_USAGE_BACKUP;
+            mARsPolicyManager.THRESHOLD_POWER_USAGE =
+                    mARsPolicyManager.THRESHOLD_POWER_USAGE_BACKUP;
             mARsPolicyManager.isTimeChangedForDebug = false;
             MARsHandler.MARsHandlerHolder.INSTANCE.sendUpdateDisableMsgToMainHandler(false);
             return;
         }
         if (mARsPolicyManager.mAppStandby == null) {
-            mARsPolicyManager.mAppStandby = (AppStandbyInternal) LocalServices.getService(AppStandbyInternal.class);
+            mARsPolicyManager.mAppStandby =
+                    (AppStandbyInternal) LocalServices.getService(AppStandbyInternal.class);
         }
         if (mARsPolicyManager.mAppStandby != null) {
             synchronized (mARsPolicyManager.mMARsTargetPackages) {
                 for (int i2 = 0; i2 < mARsPolicyManager.mMARsTargetPackages.mMap.size(); i2++) {
                     try {
-                        SparseArray sparseArray = (SparseArray) mARsPolicyManager.mMARsTargetPackages.mMap.valueAt(i2);
+                        SparseArray sparseArray =
+                                (SparseArray)
+                                        mARsPolicyManager.mMARsTargetPackages.mMap.valueAt(i2);
                         for (int i3 = 0; i3 < sparseArray.size(); i3++) {
-                            MARsPackageInfo mARsPackageInfo = (MARsPackageInfo) sparseArray.valueAt(i3);
+                            MARsPackageInfo mARsPackageInfo =
+                                    (MARsPackageInfo) sparseArray.valueAt(i3);
                             if (mARsPackageInfo != null) {
-                                mARsPolicyManager.mAppStandby.restrictApp(mARsPackageInfo.name, mARsPackageInfo.userId, 4);
+                                mARsPolicyManager.mAppStandby.restrictApp(
+                                        mARsPackageInfo.name, mARsPackageInfo.userId, 4);
                             }
                         }
                     } finally {
@@ -222,16 +249,20 @@ public abstract class MARsUtils {
         if (mARsPolicyManager.ENABLE_RESTRICTED_BUCKET) {
             int userId = mARsPolicyManager.mContext.getUserId();
             if (mARsPolicyManager.mAppStandby == null) {
-                mARsPolicyManager.mAppStandby = (AppStandbyInternal) LocalServices.getService(AppStandbyInternal.class);
+                mARsPolicyManager.mAppStandby =
+                        (AppStandbyInternal) LocalServices.getService(AppStandbyInternal.class);
             }
             if (mARsPolicyManager.mAppStandby != null) {
                 ArrayList arrayList = new ArrayList();
                 synchronized (mARsPolicyManager.mMARsTargetPackages) {
                     for (int i4 = 0; i4 < mARsPolicyManager.mMARsTargetPackages.mMap.size(); i4++) {
                         try {
-                            SparseArray sparseArray2 = (SparseArray) mARsPolicyManager.mMARsTargetPackages.mMap.valueAt(i4);
+                            SparseArray sparseArray2 =
+                                    (SparseArray)
+                                            mARsPolicyManager.mMARsTargetPackages.mMap.valueAt(i4);
                             for (int i5 = 0; i5 < sparseArray2.size(); i5++) {
-                                MARsPackageInfo mARsPackageInfo2 = (MARsPackageInfo) sparseArray2.valueAt(i5);
+                                MARsPackageInfo mARsPackageInfo2 =
+                                        (MARsPackageInfo) sparseArray2.valueAt(i5);
                                 if (mARsPackageInfo2 != null) {
                                     arrayList.add(new AppStandbyInfo(mARsPackageInfo2.name, 45));
                                 }
@@ -242,13 +273,15 @@ public abstract class MARsUtils {
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    mARsPolicyManager.mAppStandby.setAppStandbyBucketsForMARs(arrayList, userId, 45, 1792, false, true);
+                    mARsPolicyManager.mAppStandby.setAppStandbyBucketsForMARs(
+                            arrayList, userId, 45, 1792, false, true);
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
             }
         }
-        mARsPolicyManager.addDebugInfoToHistory("DEV", "Auto restriction's battery condition changed !");
+        mARsPolicyManager.addDebugInfoToHistory(
+                "DEV", "Auto restriction's battery condition changed !");
         mARsPolicyManager.THRESHOLD_POWER_USAGE_BACKUP = mARsPolicyManager.THRESHOLD_POWER_USAGE;
         mARsPolicyManager.THRESHOLD_POWER_USAGE = -2.0d;
         mARsPolicyManager.isTimeChangedForDebug = true;
@@ -280,7 +313,8 @@ public abstract class MARsUtils {
             i = mARsPolicyManager.mMARsTargetPackages.totalSize();
         }
         mARsPolicyManager.mNeedtoDisablePackages.clear();
-        IPackageManager asInterface = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
+        IPackageManager asInterface =
+                IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
         ArrayList arrayList5 = new ArrayList();
         ArrayList arrayList6 = new ArrayList();
         if (MARsPolicyManager.isChinaPolicyEnabled()) {
@@ -296,7 +330,8 @@ public abstract class MARsUtils {
         while (i6 < arrayList.size()) {
             FASEntity fASEntity = (FASEntity) arrayList.get(i6);
             MARsPackageInfo mARsPackageInfo2 = new MARsPackageInfo(fASEntity);
-            int convertFASReasonToValue = FASTableContract.convertFASReasonToValue(fASEntity.getStrFasReason());
+            int convertFASReasonToValue =
+                    FASTableContract.convertFASReasonToValue(fASEntity.getStrFasReason());
             try {
                 i4 = Integer.parseInt(fASEntity.getStrMode());
                 i3 = i;
@@ -308,13 +343,18 @@ public abstract class MARsUtils {
             synchronized (MARsPolicyManager.MARsLock) {
                 try {
                     arrayList2 = arrayList4;
-                    mARsPackageInfo = MARsPolicyManager.getMARsPackageInfo(mARsPolicyManager.mMARsTargetPackages, mARsPackageInfo2.name, mARsPackageInfo2.userId);
+                    mARsPackageInfo =
+                            MARsPolicyManager.getMARsPackageInfo(
+                                    mARsPolicyManager.mMARsTargetPackages,
+                                    mARsPackageInfo2.name,
+                                    mARsPackageInfo2.userId);
                 } catch (RemoteException e2) {
                     Slog.e("MARsPolicyManager", "getPkgInfoFromSMToMARs exception:" + e2);
                 } finally {
                 }
                 if (mARsPackageInfo != null) {
-                    if (mARsPackageInfo.isFASEnabled == i4 && mARsPackageInfo.fasType == convertFASReasonToValue) {
+                    if (mARsPackageInfo.isFASEnabled == i4
+                            && mARsPackageInfo.fasType == convertFASReasonToValue) {
                         if (mARsPackageInfo.isDisabled && mARsPackageInfo.disableReason == 0) {
                             mARsPackageInfo.disableReason = 1;
                         }
@@ -325,7 +365,9 @@ public abstract class MARsUtils {
                         mARsPolicyManager.levelChange(32, mARsPackageInfo);
                     } else {
                         mARsPolicyManager.levelChange(256, mARsPackageInfo);
-                        if (mARsPackageInfo.isDisabled || MARsPolicyManager.isDisabledByUser(mARsPackageInfo.disableReason)) {
+                        if (mARsPackageInfo.isDisabled
+                                || MARsPolicyManager.isDisabledByUser(
+                                        mARsPackageInfo.disableReason)) {
                             if (MARsPolicyManager.isDisabledByUser(mARsPackageInfo.disableReason)) {
                                 mARsPackageInfo.disableReason = 0;
                             }
@@ -333,32 +375,46 @@ public abstract class MARsUtils {
                         }
                     }
                 } else {
-                    arrayList6.add(new Pair(mARsPackageInfo2.name, Integer.valueOf(mARsPackageInfo2.uid)));
-                    mARsPackageInfo2.sharedUidName = mARsPolicyManager.getSharedUidName(mARsPackageInfo2.userId, mARsPackageInfo2.name);
+                    arrayList6.add(
+                            new Pair(mARsPackageInfo2.name, Integer.valueOf(mARsPackageInfo2.uid)));
+                    mARsPackageInfo2.sharedUidName =
+                            mARsPolicyManager.getSharedUidName(
+                                    mARsPackageInfo2.userId, mARsPackageInfo2.name);
                     if ((mARsPackageInfo2.packageType & 1) != 0) {
                         mARsPackageInfo2.hasAppIcon = true;
                     }
                     if (asInterface != null) {
-                        if (asInterface.isPackageAutoDisabled(mARsPackageInfo2.name, mARsPackageInfo2.uid)) {
+                        if (asInterface.isPackageAutoDisabled(
+                                mARsPackageInfo2.name, mARsPackageInfo2.uid)) {
                             mARsPackageInfo2.maxLevel = 4;
                             mARsPackageInfo2.curLevel = 4;
                             mARsPackageInfo2.isDisabled = true;
                             mARsPackageInfo2.appliedPolicy = mARsPolicyManager.disablePolicy;
-                            if (!MARsPolicyManager.isDisabledByUser(mARsPackageInfo2.disableReason) && mARsPackageInfo2.disableReason != 16) {
+                            if (!MARsPolicyManager.isDisabledByUser(mARsPackageInfo2.disableReason)
+                                    && mARsPackageInfo2.disableReason != 16) {
                                 mARsPackageInfo2.disableReason = 1;
                                 mARsPackageInfo2.state = 16;
                             }
-                            mARsPolicyManager.mMARsRestrictedPackages.put(mARsPackageInfo2.name, mARsPackageInfo2.userId, mARsPackageInfo2);
+                            mARsPolicyManager.mMARsRestrictedPackages.put(
+                                    mARsPackageInfo2.name,
+                                    mARsPackageInfo2.userId,
+                                    mARsPackageInfo2);
                             mARsPackageInfo2.initOptionFlag();
-                            mARsPolicyManager.mMARsTargetPackages.put(mARsPackageInfo2.name, mARsPackageInfo2.userId, mARsPackageInfo2);
+                            mARsPolicyManager.mMARsTargetPackages.put(
+                                    mARsPackageInfo2.name,
+                                    mARsPackageInfo2.userId,
+                                    mARsPackageInfo2);
                         }
                     }
-                    if (mARsPackageInfo2.maxLevel == 4 && MARsPolicyManager.isDisabledByUser(mARsPackageInfo2.disableReason)) {
+                    if (mARsPackageInfo2.maxLevel == 4
+                            && MARsPolicyManager.isDisabledByUser(mARsPackageInfo2.disableReason)) {
                         mARsPackageInfo2.appliedPolicy = mARsPolicyManager.disablePolicy;
-                        mARsPolicyManager.mMARsRestrictedPackages.put(mARsPackageInfo2.name, mARsPackageInfo2.userId, mARsPackageInfo2);
+                        mARsPolicyManager.mMARsRestrictedPackages.put(
+                                mARsPackageInfo2.name, mARsPackageInfo2.userId, mARsPackageInfo2);
                     }
                     mARsPackageInfo2.initOptionFlag();
-                    mARsPolicyManager.mMARsTargetPackages.put(mARsPackageInfo2.name, mARsPackageInfo2.userId, mARsPackageInfo2);
+                    mARsPolicyManager.mMARsTargetPackages.put(
+                            mARsPackageInfo2.name, mARsPackageInfo2.userId, mARsPackageInfo2);
                 }
             }
             if (MARsPolicyManager.isChinaPolicyEnabled()) {
@@ -411,18 +467,23 @@ public abstract class MARsUtils {
         mARsPolicyManager.deletePkgInfoInMARs(arrayList);
         if (!mARsPolicyManager.mInitDisabledPackage) {
             mARsPolicyManager.mInitDisabledPackage = true;
-            MARsHandler.MARsHandlerHolder.INSTANCE.sendInitDisabledMsgToMainHandler(mARsPolicyManager.mContext.getUserId());
+            MARsHandler.MARsHandlerHolder.INSTANCE.sendInitDisabledMsgToMainHandler(
+                    mARsPolicyManager.mContext.getUserId());
         }
         for (int i10 = 0; i10 < mARsPolicyManager.mNeedtoDisablePackages.size(); i10++) {
             String str3 = (String) ((Pair) mARsPolicyManager.mNeedtoDisablePackages.get(i10)).first;
-            Integer num2 = (Integer) ((Pair) mARsPolicyManager.mNeedtoDisablePackages.get(i10)).second;
+            Integer num2 =
+                    (Integer) ((Pair) mARsPolicyManager.mNeedtoDisablePackages.get(i10)).second;
             arrayList3.add(str3);
             arrayList7.add(num2);
-            mARsPolicyManager.disablePackageForSpecific(num2.intValue(), str3, "added_from_mars_auto_specific");
+            mARsPolicyManager.disablePackageForSpecific(
+                    num2.intValue(), str3, "added_from_mars_auto_specific");
         }
         if (!arrayList3.isEmpty()) {
-            MARsHandler.MARsHandlerHolder.INSTANCE.sendNotifyDeviceCareMsgToMainHandler("deepsleepspecific", arrayList3, arrayList7);
+            MARsHandler.MARsHandlerHolder.INSTANCE.sendNotifyDeviceCareMsgToMainHandler(
+                    "deepsleepspecific", arrayList3, arrayList7);
         }
-        AnyMotionDetector$$ExternalSyntheticOutline0.m(i7, "updateMARsTargetPackages mMARsTargetPackages.size-", "MARsPolicyManager");
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                i7, "updateMARsTargetPackages mMARsTargetPackages.size-", "MARsPolicyManager");
     }
 }

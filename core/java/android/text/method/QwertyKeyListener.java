@@ -5,7 +5,6 @@ import android.text.Editable;
 import android.text.NoCopySpan;
 import android.text.Spannable;
 import android.text.TextUtils;
-import android.text.method.TextKeyListener;
 import android.util.SparseArray;
 import android.view.View;
 
@@ -15,7 +14,8 @@ public class QwertyKeyListener extends BaseKeyListener {
     private TextKeyListener.Capitalize mAutoCap;
     private boolean mAutoText;
     private boolean mFullKeyboard;
-    private static QwertyKeyListener[] sInstance = new QwertyKeyListener[TextKeyListener.Capitalize.values().length * 2];
+    private static QwertyKeyListener[] sInstance =
+            new QwertyKeyListener[TextKeyListener.Capitalize.values().length * 2];
     private static SparseArray<String> PICKER_SETS = new SparseArray<>();
 
     static {
@@ -74,7 +74,8 @@ public class QwertyKeyListener extends BaseKeyListener {
         PICKER_SETS.put(62, "≥»›");
     }
 
-    private QwertyKeyListener(TextKeyListener.Capitalize cap, boolean autoText, boolean fullKeyboard) {
+    private QwertyKeyListener(
+            TextKeyListener.Capitalize cap, boolean autoText, boolean fullKeyboard) {
         this.mAutoCap = cap;
         this.mAutoText = autoText;
         this.mFullKeyboard = fullKeyboard;
@@ -94,7 +95,8 @@ public class QwertyKeyListener extends BaseKeyListener {
 
     public static QwertyKeyListener getInstanceForFullKeyboard() {
         if (sFullKeyboardInstance == null) {
-            sFullKeyboardInstance = new QwertyKeyListener(TextKeyListener.Capitalize.NONE, false, true);
+            sFullKeyboardInstance =
+                    new QwertyKeyListener(TextKeyListener.Capitalize.NONE, false, true);
         }
         return sFullKeyboardInstance;
     }
@@ -105,20 +107,25 @@ public class QwertyKeyListener extends BaseKeyListener {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:163:0x02aa, code lost:
-    
-        if (r25.hasModifiers(2) != false) goto L175;
-     */
-    @Override // android.text.method.BaseKeyListener, android.text.method.MetaKeyKeyListener, android.text.method.KeyListener
+
+       if (r25.hasModifiers(2) != false) goto L175;
+    */
+    @Override // android.text.method.BaseKeyListener, android.text.method.MetaKeyKeyListener,
+              // android.text.method.KeyListener
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean onKeyDown(android.view.View r22, android.text.Editable r23, int r24, android.view.KeyEvent r25) {
+    public boolean onKeyDown(
+            android.view.View r22, android.text.Editable r23, int r24, android.view.KeyEvent r25) {
         /*
             Method dump skipped, instructions count: 847
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.method.QwertyKeyListener.onKeyDown(android.view.View, android.text.Editable, int, android.view.KeyEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.text.method.QwertyKeyListener.onKeyDown(android.view.View,"
+                    + " android.text.Editable, int, android.view.KeyEvent):boolean");
     }
 
     private String getReplacement(CharSequence src, int start, int end, View view) {
@@ -168,7 +175,8 @@ public class QwertyKeyListener extends BaseKeyListener {
         content.setSpan(new Replaced(orig), start, end, 33);
     }
 
-    private boolean showCharacterPicker(View view, Editable content, char c, boolean insert, int count) {
+    private boolean showCharacterPicker(
+            View view, Editable content, char c, boolean insert, int count) {
         String set = PICKER_SETS.get(c);
         if (set == null) {
             return false;

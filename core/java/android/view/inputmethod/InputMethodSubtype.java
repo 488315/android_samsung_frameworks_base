@@ -11,7 +11,9 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Printer;
 import android.util.Slog;
+
 import com.android.internal.inputmethod.SubtypeLocaleUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -24,7 +26,8 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class InputMethodSubtype implements Parcelable {
-    private static final String EXTRA_KEY_UNTRANSLATABLE_STRING_IN_SUBTYPE_NAME = "UntranslatableReplacementStringInSubtypeName";
+    private static final String EXTRA_KEY_UNTRANSLATABLE_STRING_IN_SUBTYPE_NAME =
+            "UntranslatableReplacementStringInSubtypeName";
     private static final String EXTRA_VALUE_KEY_VALUE_SEPARATOR = "=";
     private static final String EXTRA_VALUE_PAIR_SEPARATOR = ",";
     private static final String LANGUAGE_TAG_NONE = "";
@@ -50,19 +53,22 @@ public final class InputMethodSubtype implements Parcelable {
     private final CharSequence mSubtypeNameOverride;
     private final int mSubtypeNameResId;
     private static final String TAG = InputMethodSubtype.class.getSimpleName();
-    public static final Parcelable.Creator<InputMethodSubtype> CREATOR = new Parcelable.Creator<InputMethodSubtype>() { // from class: android.view.inputmethod.InputMethodSubtype.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputMethodSubtype createFromParcel(Parcel source) {
-            return new InputMethodSubtype(source);
-        }
+    public static final Parcelable.Creator<InputMethodSubtype> CREATOR =
+            new Parcelable.Creator<
+                    InputMethodSubtype>() { // from class:
+                                            // android.view.inputmethod.InputMethodSubtype.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputMethodSubtype createFromParcel(Parcel source) {
+                    return new InputMethodSubtype(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputMethodSubtype[] newArray(int size) {
-            return new InputMethodSubtype[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputMethodSubtype[] newArray(int size) {
+                    return new InputMethodSubtype[size];
+                }
+            };
 
     public static class InputMethodSubtypeBuilder {
         private boolean mIsAuxiliary = false;
@@ -84,7 +90,8 @@ public final class InputMethodSubtype implements Parcelable {
             return this;
         }
 
-        public InputMethodSubtypeBuilder setOverridesImplicitlyEnabledSubtype(boolean overridesImplicitlyEnabledSubtype) {
+        public InputMethodSubtypeBuilder setOverridesImplicitlyEnabledSubtype(
+                boolean overridesImplicitlyEnabledSubtype) {
             this.mOverridesImplicitlyEnabledSubtype = overridesImplicitlyEnabledSubtype;
             return this;
         }
@@ -109,7 +116,8 @@ public final class InputMethodSubtype implements Parcelable {
             return this;
         }
 
-        public InputMethodSubtypeBuilder setPhysicalKeyboardHint(ULocale languageTag, String layoutType) {
+        public InputMethodSubtypeBuilder setPhysicalKeyboardHint(
+                ULocale languageTag, String layoutType) {
             Objects.requireNonNull(layoutType, "layoutType cannot be null");
             this.mPkLanguageTag = languageTag == null ? "" : languageTag.toLanguageTag();
             this.mPkLayoutType = layoutType;
@@ -146,7 +154,16 @@ public final class InputMethodSubtype implements Parcelable {
         }
     }
 
-    private static InputMethodSubtypeBuilder getBuilder(int nameId, int iconId, String locale, String mode, String extraValue, boolean isAuxiliary, boolean overridesImplicitlyEnabledSubtype, int id, boolean isAsciiCapable) {
+    private static InputMethodSubtypeBuilder getBuilder(
+            int nameId,
+            int iconId,
+            String locale,
+            String mode,
+            String extraValue,
+            boolean isAuxiliary,
+            boolean overridesImplicitlyEnabledSubtype,
+            int id,
+            boolean isAsciiCapable) {
         InputMethodSubtypeBuilder builder = new InputMethodSubtypeBuilder();
         builder.mSubtypeNameResId = nameId;
         builder.mSubtypeIconResId = iconId;
@@ -161,13 +178,46 @@ public final class InputMethodSubtype implements Parcelable {
     }
 
     @Deprecated
-    public InputMethodSubtype(int nameId, int iconId, String locale, String mode, String extraValue, boolean isAuxiliary, boolean overridesImplicitlyEnabledSubtype) {
-        this(nameId, iconId, locale, mode, extraValue, isAuxiliary, overridesImplicitlyEnabledSubtype, 0);
+    public InputMethodSubtype(
+            int nameId,
+            int iconId,
+            String locale,
+            String mode,
+            String extraValue,
+            boolean isAuxiliary,
+            boolean overridesImplicitlyEnabledSubtype) {
+        this(
+                nameId,
+                iconId,
+                locale,
+                mode,
+                extraValue,
+                isAuxiliary,
+                overridesImplicitlyEnabledSubtype,
+                0);
     }
 
     @Deprecated
-    public InputMethodSubtype(int nameId, int iconId, String locale, String mode, String extraValue, boolean isAuxiliary, boolean overridesImplicitlyEnabledSubtype, int id) {
-        this(getBuilder(nameId, iconId, locale, mode, extraValue, isAuxiliary, overridesImplicitlyEnabledSubtype, id, false));
+    public InputMethodSubtype(
+            int nameId,
+            int iconId,
+            String locale,
+            String mode,
+            String extraValue,
+            boolean isAuxiliary,
+            boolean overridesImplicitlyEnabledSubtype,
+            int id) {
+        this(
+                getBuilder(
+                        nameId,
+                        iconId,
+                        locale,
+                        mode,
+                        extraValue,
+                        isAuxiliary,
+                        overridesImplicitlyEnabledSubtype,
+                        id,
+                        false));
     }
 
     private InputMethodSubtype(InputMethodSubtypeBuilder builder) {
@@ -188,7 +238,14 @@ public final class InputMethodSubtype implements Parcelable {
         if (this.mSubtypeId != 0) {
             this.mSubtypeHashCode = this.mSubtypeId;
         } else {
-            this.mSubtypeHashCode = hashCodeInternal(this.mSubtypeLocale, this.mSubtypeMode, this.mSubtypeExtraValue, this.mIsAuxiliary, this.mOverridesImplicitlyEnabledSubtype, this.mIsAsciiCapable);
+            this.mSubtypeHashCode =
+                    hashCodeInternal(
+                            this.mSubtypeLocale,
+                            this.mSubtypeMode,
+                            this.mSubtypeExtraValue,
+                            this.mIsAuxiliary,
+                            this.mOverridesImplicitlyEnabledSubtype,
+                            this.mIsAsciiCapable);
         }
     }
 
@@ -260,7 +317,8 @@ public final class InputMethodSubtype implements Parcelable {
             if (!TextUtils.isEmpty(this.mSubtypeLanguageTag)) {
                 this.mCachedLocaleObj = Locale.forLanguageTag(this.mSubtypeLanguageTag);
             } else {
-                this.mCachedLocaleObj = SubtypeLocaleUtils.constructLocaleFromString(this.mSubtypeLocale);
+                this.mCachedLocaleObj =
+                        SubtypeLocaleUtils.constructLocaleFromString(this.mSubtypeLocale);
             }
             return this.mCachedLocaleObj;
         }
@@ -311,16 +369,21 @@ public final class InputMethodSubtype implements Parcelable {
         return this.mIsAsciiCapable;
     }
 
-    public CharSequence getDisplayName(Context context, String packageName, ApplicationInfo appInfo) {
+    public CharSequence getDisplayName(
+            Context context, String packageName, ApplicationInfo appInfo) {
         DisplayContext displayContext;
         String replacementString;
         if (this.mSubtypeNameResId == 0) {
             if (TextUtils.isEmpty(this.mSubtypeNameOverride)) {
-                return getLocaleDisplayName(getLocaleFromContext(context), getLocaleObject(), DisplayContext.CAPITALIZATION_FOR_UI_LIST_OR_MENU);
+                return getLocaleDisplayName(
+                        getLocaleFromContext(context),
+                        getLocaleObject(),
+                        DisplayContext.CAPITALIZATION_FOR_UI_LIST_OR_MENU);
             }
             return this.mSubtypeNameOverride;
         }
-        CharSequence subtypeName = context.getPackageManager().getText(packageName, this.mSubtypeNameResId, appInfo);
+        CharSequence subtypeName =
+                context.getPackageManager().getText(packageName, this.mSubtypeNameResId, appInfo);
         if (TextUtils.isEmpty(subtypeName)) {
             return "";
         }
@@ -335,7 +398,9 @@ public final class InputMethodSubtype implements Parcelable {
             } else {
                 displayContext = DisplayContext.CAPITALIZATION_FOR_MIDDLE_OF_SENTENCE;
             }
-            replacementString = getLocaleDisplayName(getLocaleFromContext(context), getLocaleObject(), displayContext);
+            replacementString =
+                    getLocaleDisplayName(
+                            getLocaleFromContext(context), getLocaleObject(), displayContext);
         }
         if (replacementString == null) {
             replacementString = "";
@@ -343,25 +408,31 @@ public final class InputMethodSubtype implements Parcelable {
         try {
             return String.format(subtypeNameString, replacementString);
         } catch (IllegalFormatException e) {
-            Slog.w(TAG, "Found illegal format in subtype name(" + ((Object) subtypeName) + "): " + e);
+            Slog.w(
+                    TAG,
+                    "Found illegal format in subtype name(" + ((Object) subtypeName) + "): " + e);
             return "";
         }
     }
 
     private static Locale getLocaleFromContext(Context context) {
         Configuration configuration;
-        if (context == null || context.getResources() == null || (configuration = context.getResources().getConfiguration()) == null) {
+        if (context == null
+                || context.getResources() == null
+                || (configuration = context.getResources().getConfiguration()) == null) {
             return null;
         }
         return configuration.getLocales().get(0);
     }
 
-    private static String getLocaleDisplayName(Locale displayLocale, Locale localeToDisplay, DisplayContext displayContext) {
+    private static String getLocaleDisplayName(
+            Locale displayLocale, Locale localeToDisplay, DisplayContext displayContext) {
         if (localeToDisplay == null) {
             return "";
         }
         Locale nonNullDisplayLocale = displayLocale != null ? displayLocale : Locale.getDefault();
-        return LocaleDisplayNames.getInstance(nonNullDisplayLocale, displayContext).localeDisplayName(localeToDisplay);
+        return LocaleDisplayNames.getInstance(nonNullDisplayLocale, displayContext)
+                .localeDisplayName(localeToDisplay);
     }
 
     private HashMap<String, String> getExtraValueHashMap() {
@@ -413,7 +484,17 @@ public final class InputMethodSubtype implements Parcelable {
             return false;
         }
         InputMethodSubtype subtype = (InputMethodSubtype) o;
-        return (subtype.mSubtypeId == 0 && this.mSubtypeId == 0) ? subtype.hashCode() == hashCode() && subtype.getLocale().equals(getLocale()) && subtype.getLanguageTag().equals(getLanguageTag()) && subtype.getMode().equals(getMode()) && subtype.getExtraValue().equals(getExtraValue()) && subtype.isAuxiliary() == isAuxiliary() && subtype.overridesImplicitlyEnabledSubtype() == overridesImplicitlyEnabledSubtype() && subtype.isAsciiCapable() == isAsciiCapable() : subtype.hashCode() == hashCode();
+        return (subtype.mSubtypeId == 0 && this.mSubtypeId == 0)
+                ? subtype.hashCode() == hashCode()
+                        && subtype.getLocale().equals(getLocale())
+                        && subtype.getLanguageTag().equals(getLanguageTag())
+                        && subtype.getMode().equals(getMode())
+                        && subtype.getExtraValue().equals(getExtraValue())
+                        && subtype.isAuxiliary() == isAuxiliary()
+                        && subtype.overridesImplicitlyEnabledSubtype()
+                                == overridesImplicitlyEnabledSubtype()
+                        && subtype.isAsciiCapable() == isAsciiCapable()
+                : subtype.hashCode() == hashCode();
     }
 
     @Override // android.os.Parcelable
@@ -440,18 +521,63 @@ public final class InputMethodSubtype implements Parcelable {
     }
 
     void dump(Printer pw, String prefix) {
-        pw.println(prefix + "mSubtypeNameOverride=" + ((Object) this.mSubtypeNameOverride) + " mPkLanguageTag=" + this.mPkLanguageTag + " mPkLayoutType=" + this.mPkLayoutType + " mSubtypeId=" + this.mSubtypeId + " mSubtypeLocale=" + this.mSubtypeLocale + " mSubtypeLanguageTag=" + this.mSubtypeLanguageTag + " mSubtypeMode=" + this.mSubtypeMode + " mIsAuxiliary=" + this.mIsAuxiliary + " mOverridesImplicitlyEnabledSubtype=" + this.mOverridesImplicitlyEnabledSubtype + " mIsAsciiCapable=" + this.mIsAsciiCapable + " mSubtypeHashCode=" + this.mSubtypeHashCode);
+        pw.println(
+                prefix
+                        + "mSubtypeNameOverride="
+                        + ((Object) this.mSubtypeNameOverride)
+                        + " mPkLanguageTag="
+                        + this.mPkLanguageTag
+                        + " mPkLayoutType="
+                        + this.mPkLayoutType
+                        + " mSubtypeId="
+                        + this.mSubtypeId
+                        + " mSubtypeLocale="
+                        + this.mSubtypeLocale
+                        + " mSubtypeLanguageTag="
+                        + this.mSubtypeLanguageTag
+                        + " mSubtypeMode="
+                        + this.mSubtypeMode
+                        + " mIsAuxiliary="
+                        + this.mIsAuxiliary
+                        + " mOverridesImplicitlyEnabledSubtype="
+                        + this.mOverridesImplicitlyEnabledSubtype
+                        + " mIsAsciiCapable="
+                        + this.mIsAsciiCapable
+                        + " mSubtypeHashCode="
+                        + this.mSubtypeHashCode);
     }
 
-    private static int hashCodeInternal(String locale, String mode, String extraValue, boolean isAuxiliary, boolean overridesImplicitlyEnabledSubtype, boolean isAsciiCapable) {
+    private static int hashCodeInternal(
+            String locale,
+            String mode,
+            String extraValue,
+            boolean isAuxiliary,
+            boolean overridesImplicitlyEnabledSubtype,
+            boolean isAsciiCapable) {
         boolean needsToCalculateCompatibleHashCode = !isAsciiCapable;
         if (needsToCalculateCompatibleHashCode) {
-            return Arrays.hashCode(new Object[]{locale, mode, extraValue, Boolean.valueOf(isAuxiliary), Boolean.valueOf(overridesImplicitlyEnabledSubtype)});
+            return Arrays.hashCode(
+                    new Object[] {
+                        locale,
+                        mode,
+                        extraValue,
+                        Boolean.valueOf(isAuxiliary),
+                        Boolean.valueOf(overridesImplicitlyEnabledSubtype)
+                    });
         }
-        return Arrays.hashCode(new Object[]{locale, mode, extraValue, Boolean.valueOf(isAuxiliary), Boolean.valueOf(overridesImplicitlyEnabledSubtype), Boolean.valueOf(isAsciiCapable)});
+        return Arrays.hashCode(
+                new Object[] {
+                    locale,
+                    mode,
+                    extraValue,
+                    Boolean.valueOf(isAuxiliary),
+                    Boolean.valueOf(overridesImplicitlyEnabledSubtype),
+                    Boolean.valueOf(isAsciiCapable)
+                });
     }
 
-    public static List<InputMethodSubtype> sort(InputMethodInfo imi, List<InputMethodSubtype> subtypeList) {
+    public static List<InputMethodSubtype> sort(
+            InputMethodInfo imi, List<InputMethodSubtype> subtypeList) {
         if (imi == null) {
             return subtypeList;
         }

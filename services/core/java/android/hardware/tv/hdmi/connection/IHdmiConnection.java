@@ -5,12 +5,14 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.server.hdmi.HdmiCecController;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public interface IHdmiConnection extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$tv$hdmi$connection$IHdmiConnection".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$tv$hdmi$connection$IHdmiConnection".replace('$', '.');
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IHdmiConnection {
@@ -75,7 +77,8 @@ public interface IHdmiConnection extends IInterface {
                 }
             }
 
-            public final void setCallback(HdmiCecController.HdmiConnectionCallbackAidl hdmiConnectionCallbackAidl) {
+            public final void setCallback(
+                    HdmiCecController.HdmiConnectionCallbackAidl hdmiConnectionCallbackAidl) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {

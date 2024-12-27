@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -31,51 +32,93 @@ public class HeavyWeightSwitcherActivity extends Activity {
     boolean mHasResult;
     String mNewApp;
     IntentSender mStartIntent;
-    private View.OnClickListener mSwitchOldListener = new View.OnClickListener() { // from class: com.android.internal.app.HeavyWeightSwitcherActivity.1
-        @Override // android.view.View.OnClickListener
-        public void onClick(View v) {
-            try {
-                ActivityThread thread = ActivityThread.currentActivityThread();
-                IApplicationThread appThread = thread.getApplicationThread();
-                ActivityTaskManager.getService().moveTaskToFront(appThread, HeavyWeightSwitcherActivity.this.getPackageName(), HeavyWeightSwitcherActivity.this.mCurTask, 0, null);
-            } catch (RemoteException e) {
-            }
-            HeavyWeightSwitcherActivity.this.finish();
-        }
-    };
-    private View.OnClickListener mSwitchNewListener = new View.OnClickListener() { // from class: com.android.internal.app.HeavyWeightSwitcherActivity.2
-        @Override // android.view.View.OnClickListener
-        public void onClick(View v) {
-            try {
-                ActivityManager.getService().finishHeavyWeightApp();
-            } catch (RemoteException e) {
-            }
-            try {
-                if (HeavyWeightSwitcherActivity.this.mHasResult) {
-                    HeavyWeightSwitcherActivity.this.startIntentSenderForResult(HeavyWeightSwitcherActivity.this.mStartIntent, -1, null, 33554432, 33554432, 0);
-                } else {
-                    ActivityOptions activityOptions = ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1);
-                    HeavyWeightSwitcherActivity.this.startIntentSenderForResult(HeavyWeightSwitcherActivity.this.mStartIntent, -1, (Intent) null, 0, 0, 0, activityOptions.toBundle());
+    private View.OnClickListener mSwitchOldListener =
+            new View
+                    .OnClickListener() { // from class:
+                                         // com.android.internal.app.HeavyWeightSwitcherActivity.1
+                @Override // android.view.View.OnClickListener
+                public void onClick(View v) {
+                    try {
+                        ActivityThread thread = ActivityThread.currentActivityThread();
+                        IApplicationThread appThread = thread.getApplicationThread();
+                        ActivityTaskManager.getService()
+                                .moveTaskToFront(
+                                        appThread,
+                                        HeavyWeightSwitcherActivity.this.getPackageName(),
+                                        HeavyWeightSwitcherActivity.this.mCurTask,
+                                        0,
+                                        null);
+                    } catch (RemoteException e) {
+                    }
+                    HeavyWeightSwitcherActivity.this.finish();
                 }
-            } catch (IntentSender.SendIntentException ex) {
-                Log.w("HeavyWeightSwitcherActivity", "Failure starting", ex);
-            }
-            HeavyWeightSwitcherActivity.this.finish();
-        }
-    };
+            };
+    private View.OnClickListener mSwitchNewListener =
+            new View
+                    .OnClickListener() { // from class:
+                                         // com.android.internal.app.HeavyWeightSwitcherActivity.2
+                @Override // android.view.View.OnClickListener
+                public void onClick(View v) {
+                    try {
+                        ActivityManager.getService().finishHeavyWeightApp();
+                    } catch (RemoteException e) {
+                    }
+                    try {
+                        if (HeavyWeightSwitcherActivity.this.mHasResult) {
+                            HeavyWeightSwitcherActivity.this.startIntentSenderForResult(
+                                    HeavyWeightSwitcherActivity.this.mStartIntent,
+                                    -1,
+                                    null,
+                                    33554432,
+                                    33554432,
+                                    0);
+                        } else {
+                            ActivityOptions activityOptions =
+                                    ActivityOptions.makeBasic()
+                                            .setPendingIntentBackgroundActivityStartMode(1);
+                            HeavyWeightSwitcherActivity.this.startIntentSenderForResult(
+                                    HeavyWeightSwitcherActivity.this.mStartIntent,
+                                    -1,
+                                    (Intent) null,
+                                    0,
+                                    0,
+                                    0,
+                                    activityOptions.toBundle());
+                        }
+                    } catch (IntentSender.SendIntentException ex) {
+                        Log.w("HeavyWeightSwitcherActivity", "Failure starting", ex);
+                    }
+                    HeavyWeightSwitcherActivity.this.finish();
+                }
+            };
 
     @Override // android.app.Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(1);
-        this.mStartIntent = (IntentSender) getIntent().getParcelableExtra("intent", IntentSender.class);
+        this.mStartIntent =
+                (IntentSender) getIntent().getParcelableExtra("intent", IntentSender.class);
         this.mHasResult = getIntent().getBooleanExtra(KEY_HAS_RESULT, false);
         this.mCurApp = getIntent().getStringExtra(KEY_CUR_APP);
         this.mCurTask = getIntent().getIntExtra(KEY_CUR_TASK, 0);
         this.mNewApp = getIntent().getStringExtra(KEY_NEW_APP);
         setContentView(R.layout.heavy_weight_switcher);
-        setIconAndText(R.id.old_app_icon, R.id.old_app_action, 0, this.mCurApp, this.mNewApp, R.string.old_app_action, 0);
-        setIconAndText(R.id.new_app_icon, R.id.new_app_action, R.id.new_app_description, this.mNewApp, this.mCurApp, R.string.new_app_action, R.string.new_app_description);
+        setIconAndText(
+                R.id.old_app_icon,
+                R.id.old_app_action,
+                0,
+                this.mCurApp,
+                this.mNewApp,
+                R.string.old_app_action,
+                0);
+        setIconAndText(
+                R.id.new_app_icon,
+                R.id.new_app_action,
+                R.id.new_app_description,
+                this.mNewApp,
+                this.mCurApp,
+                R.string.new_app_action,
+                R.string.new_app_description);
         View button = findViewById(R.id.switch_old);
         button.setOnClickListener(this.mSwitchOldListener);
         View button2 = findViewById(R.id.switch_new);
@@ -92,7 +135,14 @@ public class HeavyWeightSwitcherActivity extends Activity {
         }
     }
 
-    void setIconAndText(int iconId, int actionId, int descriptionId, String packageName, String otherPackageName, int actionStr, int descriptionStr) {
+    void setIconAndText(
+            int iconId,
+            int actionId,
+            int descriptionId,
+            String packageName,
+            String otherPackageName,
+            int actionStr,
+            int descriptionStr) {
         CharSequence appName = packageName;
         Drawable appIcon = null;
         if (packageName != null) {
@@ -109,7 +159,10 @@ public class HeavyWeightSwitcherActivity extends Activity {
             CharSequence otherAppName = otherPackageName;
             if (otherPackageName != null) {
                 try {
-                    otherAppName = getPackageManager().getApplicationInfo(otherPackageName, 0).loadLabel(getPackageManager());
+                    otherAppName =
+                            getPackageManager()
+                                    .getApplicationInfo(otherPackageName, 0)
+                                    .loadLabel(getPackageManager());
                 } catch (PackageManager.NameNotFoundException e2) {
                 }
             }

@@ -5,10 +5,11 @@ import android.content.Context;
 import android.os.IInterface;
 import android.os.RemoteException;
 import android.telephony.ims.aidl.IImsCapabilityCallback;
-import android.telephony.ims.feature.ImsFeature;
 import android.util.Log;
+
 import com.android.ims.internal.IImsFeatureStatusCallback;
 import com.android.internal.telephony.util.RemoteCallbackListExt;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
@@ -18,55 +19,50 @@ import java.util.function.Consumer;
 /* loaded from: classes4.dex */
 public abstract class ImsFeature {
 
-    @SystemApi
-    public static final int CAPABILITY_ERROR_GENERIC = -1;
+    @SystemApi public static final int CAPABILITY_ERROR_GENERIC = -1;
 
-    @SystemApi
-    public static final int CAPABILITY_SUCCESS = 0;
+    @SystemApi public static final int CAPABILITY_SUCCESS = 0;
 
-    @SystemApi
-    public static final int FEATURE_EMERGENCY_MMTEL = 0;
+    @SystemApi public static final int FEATURE_EMERGENCY_MMTEL = 0;
     public static final int FEATURE_INVALID = -1;
     public static final int FEATURE_MAX = 3;
 
-    @SystemApi
-    public static final int FEATURE_MMTEL = 1;
+    @SystemApi public static final int FEATURE_MMTEL = 1;
 
-    @SystemApi
-    public static final int FEATURE_RCS = 2;
+    @SystemApi public static final int FEATURE_RCS = 2;
     private static final String LOG_TAG = "ImsFeature";
 
-    @SystemApi
-    public static final int STATE_INITIALIZING = 1;
+    @SystemApi public static final int STATE_INITIALIZING = 1;
 
-    @SystemApi
-    public static final int STATE_READY = 2;
+    @SystemApi public static final int STATE_READY = 2;
 
-    @SystemApi
-    public static final int STATE_UNAVAILABLE = 0;
+    @SystemApi public static final int STATE_UNAVAILABLE = 0;
     protected Context mContext;
-    public static final Map<Integer, String> FEATURE_LOG_MAP = Map.of(0, "EMERGENCY_MMTEL", 1, "MMTEL", 2, "RCS");
-    public static final Map<Integer, String> STATE_LOG_MAP = Map.of(0, "UNAVAILABLE", 1, "INITIALIZING", 2, "READY");
+    public static final Map<Integer, String> FEATURE_LOG_MAP =
+            Map.of(0, "EMERGENCY_MMTEL", 1, "MMTEL", 2, "RCS");
+    public static final Map<Integer, String> STATE_LOG_MAP =
+            Map.of(0, "UNAVAILABLE", 1, "INITIALIZING", 2, "READY");
     protected final Object mLock = new Object();
-    private final RemoteCallbackListExt<IImsFeatureStatusCallback> mStatusCallbacks = new RemoteCallbackListExt<>();
+    private final RemoteCallbackListExt<IImsFeatureStatusCallback> mStatusCallbacks =
+            new RemoteCallbackListExt<>();
     private int mState = 0;
     private int mSlotId = -1;
-    private final RemoteCallbackListExt<IImsCapabilityCallback> mCapabilityCallbacks = new RemoteCallbackListExt<>();
+    private final RemoteCallbackListExt<IImsCapabilityCallback> mCapabilityCallbacks =
+            new RemoteCallbackListExt<>();
     private Capabilities mCapabilityStatus = new Capabilities();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FeatureType {
-    }
+    public @interface FeatureType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ImsCapabilityError {
-    }
+    public @interface ImsCapabilityError {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ImsState {
-    }
+    public @interface ImsState {}
 
-    public abstract void changeEnabledCapabilities(CapabilityChangeRequest capabilityChangeRequest, CapabilityCallbackProxy capabilityCallbackProxy);
+    public abstract void changeEnabledCapabilities(
+            CapabilityChangeRequest capabilityChangeRequest,
+            CapabilityCallbackProxy capabilityCallbackProxy);
 
     protected abstract IInterface getBinder();
 
@@ -83,14 +79,17 @@ public abstract class ImsFeature {
             this.mCallback = c;
         }
 
-        public void onChangeCapabilityConfigurationError(int capability, int radioTech, int reason) {
+        public void onChangeCapabilityConfigurationError(
+                int capability, int radioTech, int reason) {
             if (this.mCallback == null) {
                 return;
             }
             try {
                 this.mCallback.onChangeCapabilityConfigurationError(capability, radioTech, reason);
             } catch (RemoteException e) {
-                Log.e(ImsFeature.LOG_TAG, "onChangeCapabilityConfigurationError called on dead binder.");
+                Log.e(
+                        ImsFeature.LOG_TAG,
+                        "onChangeCapabilityConfigurationError called on dead binder.");
             }
         }
     }
@@ -201,16 +200,20 @@ public abstract class ImsFeature {
 
     private void notifyFeatureState(final int state) {
         synchronized (this.mStatusCallbacks) {
-            this.mStatusCallbacks.broadcastAction(new Consumer() { // from class: android.telephony.ims.feature.ImsFeature$$ExternalSyntheticLambda1
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ImsFeature.lambda$notifyFeatureState$0(state, (IImsFeatureStatusCallback) obj);
-                }
-            });
+            this.mStatusCallbacks.broadcastAction(
+                    new Consumer() { // from class:
+                                     // android.telephony.ims.feature.ImsFeature$$ExternalSyntheticLambda1
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ImsFeature.lambda$notifyFeatureState$0(
+                                    state, (IImsFeatureStatusCallback) obj);
+                        }
+                    });
         }
     }
 
-    static /* synthetic */ void lambda$notifyFeatureState$0(int state, IImsFeatureStatusCallback c) {
+    static /* synthetic */ void lambda$notifyFeatureState$0(
+            int state, IImsFeatureStatusCallback c) {
         try {
             c.notifyImsFeatureStatus(state);
         } catch (RemoteException e) {
@@ -231,7 +234,8 @@ public abstract class ImsFeature {
         this.mCapabilityCallbacks.unregister(c);
     }
 
-    final void queryCapabilityConfigurationInternal(int capability, int radioTech, IImsCapabilityCallback c) {
+    final void queryCapabilityConfigurationInternal(
+            int capability, int radioTech, IImsCapabilityCallback c) {
         boolean enabled = queryCapabilityConfiguration(capability, radioTech);
         if (c != null) {
             try {
@@ -250,9 +254,11 @@ public abstract class ImsFeature {
         return copy;
     }
 
-    public final void requestChangeEnabledCapabilities(CapabilityChangeRequest request, IImsCapabilityCallback c) {
+    public final void requestChangeEnabledCapabilities(
+            CapabilityChangeRequest request, IImsCapabilityCallback c) {
         if (request == null) {
-            throw new IllegalArgumentException("ImsFeature#requestChangeEnabledCapabilities called with invalid params.");
+            throw new IllegalArgumentException(
+                    "ImsFeature#requestChangeEnabledCapabilities called with invalid params.");
         }
         changeEnabledCapabilities(request, new CapabilityCallbackProxy(c));
     }
@@ -263,18 +269,25 @@ public abstract class ImsFeature {
             this.mCapabilityStatus = caps.copy();
         }
         synchronized (this.mCapabilityCallbacks) {
-            this.mCapabilityCallbacks.broadcastAction(new Consumer() { // from class: android.telephony.ims.feature.ImsFeature$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ImsFeature.lambda$notifyCapabilitiesStatusChanged$1(ImsFeature.Capabilities.this, (IImsCapabilityCallback) obj);
-                }
-            });
+            this.mCapabilityCallbacks.broadcastAction(
+                    new Consumer() { // from class:
+                                     // android.telephony.ims.feature.ImsFeature$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ImsFeature.lambda$notifyCapabilitiesStatusChanged$1(
+                                    ImsFeature.Capabilities.this, (IImsCapabilityCallback) obj);
+                        }
+                    });
         }
     }
 
-    static /* synthetic */ void lambda$notifyCapabilitiesStatusChanged$1(Capabilities caps, IImsCapabilityCallback callback) {
+    static /* synthetic */ void lambda$notifyCapabilitiesStatusChanged$1(
+            Capabilities caps, IImsCapabilityCallback callback) {
         try {
-            Log.d(LOG_TAG, "ImsFeature notifyCapabilitiesStatusChanged Capabilities = " + caps.mCapabilities);
+            Log.d(
+                    LOG_TAG,
+                    "ImsFeature notifyCapabilitiesStatusChanged Capabilities = "
+                            + caps.mCapabilities);
             callback.onCapabilitiesStatusChanged(caps.mCapabilities);
         } catch (RemoteException e) {
             Log.w(LOG_TAG, e + " notifyCapabilitiesStatusChanged() - Skipping callback.");

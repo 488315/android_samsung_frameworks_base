@@ -14,8 +14,9 @@ public interface ISwitchEventChangedListener extends IInterface {
 
     public static class Default implements ISwitchEventChangedListener {
         @Override // android.hardware.input.ISwitchEventChangedListener
-        public void onSwitchEventChanged(int switchValues, int switchMask, int extraValues, int extraMask) throws RemoteException {
-        }
+        public void onSwitchEventChanged(
+                int switchValues, int switchMask, int extraValues, int extraMask)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface ISwitchEventChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISwitchEventChangedListener {
+    public abstract static class Stub extends Binder implements ISwitchEventChangedListener {
         static final int TRANSACTION_onSwitchEventChanged = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface ISwitchEventChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISwitchEventChangedListener.DESCRIPTOR);
             }
@@ -100,7 +102,9 @@ public interface ISwitchEventChangedListener extends IInterface {
             }
 
             @Override // android.hardware.input.ISwitchEventChangedListener
-            public void onSwitchEventChanged(int switchValues, int switchMask, int extraValues, int extraMask) throws RemoteException {
+            public void onSwitchEventChanged(
+                    int switchValues, int switchMask, int extraValues, int extraMask)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISwitchEventChangedListener.DESCRIPTOR);

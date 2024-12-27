@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.pm.Signature;
 import android.os.Binder;
 import android.util.Log;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
+
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +19,10 @@ import java.util.List;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class SamsungHealthService extends Binder {
-    public static final List HEALTH_KEY_LIST = Arrays.asList("14aafbdad4dd99765346a1de191320328465b8420713bc22cc4f8b211b87cd3a", "c88c9048f6d0fe9d8561926240f2ccc1982e24721150929350384659aa54aef6");
+    public static final List HEALTH_KEY_LIST =
+            Arrays.asList(
+                    "14aafbdad4dd99765346a1de191320328465b8420713bc22cc4f8b211b87cd3a",
+                    "c88c9048f6d0fe9d8561926240f2ccc1982e24721150929350384659aa54aef6");
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UpdateReceiver extends BroadcastReceiver {
@@ -27,7 +32,8 @@ public final class SamsungHealthService extends Binder {
             if (intent == null || (action = intent.getAction()) == null) {
                 return;
             }
-            if (action.equals("android.intent.action.PACKAGE_REPLACED") || action.equals("android.intent.action.PACKAGE_ADDED")) {
+            if (action.equals("android.intent.action.PACKAGE_REPLACED")
+                    || action.equals("android.intent.action.PACKAGE_ADDED")) {
                 SamsungHealthService.backgroundAllowlist(context);
             }
         }
@@ -35,7 +41,10 @@ public final class SamsungHealthService extends Binder {
 
     public static void backgroundAllowlist(Context context) {
         try {
-            int i = context.getPackageManager().getApplicationInfo("com.sec.android.app.shealth", 0).uid;
+            int i =
+                    context.getPackageManager()
+                            .getApplicationInfo("com.sec.android.app.shealth", 0)
+                            .uid;
             String num = Integer.toString(i);
             if (i >= 1000 && num != null) {
                 if (!hasValidSignature(context)) {
@@ -47,7 +56,9 @@ public final class SamsungHealthService extends Binder {
                     return;
                 }
             }
-            Log.e("SamsungHealthService", "backgroundAllowlist: bad uid: " + i + ", uidString: " + num);
+            Log.e(
+                    "SamsungHealthService",
+                    "backgroundAllowlist: bad uid: " + i + ", uidString: " + num);
         } catch (Exception e) {
             Log.e("SamsungHealthService", "backgroundAllowlist exception ", e);
         }
@@ -57,7 +68,10 @@ public final class SamsungHealthService extends Binder {
         ArrayList arrayList = new ArrayList();
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            for (Signature signature : context.getPackageManager().getPackageInfo("com.sec.android.app.shealth", 64).signatures) {
+            for (Signature signature :
+                    context.getPackageManager()
+                            .getPackageInfo("com.sec.android.app.shealth", 64)
+                            .signatures) {
                 StringBuilder sb = new StringBuilder();
                 for (byte b : messageDigest.digest(signature.toCharsString().getBytes())) {
                     int i = (b >> 4) & 15;
@@ -68,7 +82,8 @@ public final class SamsungHealthService extends Binder {
                 arrayList.add(sb.toString());
             }
         } catch (Exception e) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "hasValidSignature : ", "SamsungHealthService");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e, "hasValidSignature : ", "SamsungHealthService");
         }
         Iterator it = HEALTH_KEY_LIST.iterator();
         while (it.hasNext()) {

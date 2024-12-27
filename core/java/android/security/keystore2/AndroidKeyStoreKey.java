@@ -3,6 +3,7 @@ package android.security.keystore2;
 import android.security.KeyStoreSecurityLevel;
 import android.system.keystore2.Authorization;
 import android.system.keystore2.KeyDescriptor;
+
 import java.security.Key;
 
 /* loaded from: classes3.dex */
@@ -13,7 +14,12 @@ public class AndroidKeyStoreKey implements Key {
     private final long mKeyId;
     private final KeyStoreSecurityLevel mSecurityLevel;
 
-    public AndroidKeyStoreKey(KeyDescriptor descriptor, long keyId, Authorization[] authorizations, String algorithm, KeyStoreSecurityLevel securityLevel) {
+    public AndroidKeyStoreKey(
+            KeyDescriptor descriptor,
+            long keyId,
+            Authorization[] authorizations,
+            String algorithm,
+            KeyStoreSecurityLevel securityLevel) {
         this.mDescriptor = descriptor;
         this.mKeyId = keyId;
         this.mAuthorizations = authorizations;

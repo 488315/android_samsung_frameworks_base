@@ -1,14 +1,17 @@
 package com.android.server.knox.zt.devicetrust.data;
 
 import android.os.Bundle;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -20,7 +23,8 @@ public final class PktData extends SchedClsData {
     public final int srcPort;
     public final int type;
 
-    public PktData(int i, long j, int i2, int i3, String str, String str2, String str3, int i4, int i5) {
+    public PktData(
+            int i, long j, int i2, int i3, String str, String str2, String str3, int i4, int i5) {
         super(i, j, i2);
         this.type = i3;
         this.fingerprint = str;
@@ -78,9 +82,12 @@ public final class PktData extends SchedClsData {
         int i4 = this.srcPort;
         int i5 = this.dstPort;
         String readExtras = readExtras(true);
-        StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i2, i3, " | uid : ", " | type : ", m);
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, " | fingerprint : ", str, " | saddr : ", str2);
+        StringBuilder m =
+                SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i2, i3, " | uid : ", " | type : ", m);
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                m, " | fingerprint : ", str, " | saddr : ", str2);
         m.append(" | daddr : ");
         m.append(str3);
         m.append(" | sport : ");

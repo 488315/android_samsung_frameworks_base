@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class OptionsCmdId implements Parcelable {
-    public static final Parcelable.Creator<OptionsCmdId> CREATOR = new Parcelable.Creator<OptionsCmdId>() { // from class: com.android.ims.internal.uce.options.OptionsCmdId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OptionsCmdId createFromParcel(Parcel source) {
-            return new OptionsCmdId(source);
-        }
+    public static final Parcelable.Creator<OptionsCmdId> CREATOR =
+            new Parcelable.Creator<
+                    OptionsCmdId>() { // from class:
+                                      // com.android.ims.internal.uce.options.OptionsCmdId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OptionsCmdId createFromParcel(Parcel source) {
+                    return new OptionsCmdId(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OptionsCmdId[] newArray(int size) {
-            return new OptionsCmdId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OptionsCmdId[] newArray(int size) {
+                    return new OptionsCmdId[size];
+                }
+            };
     public static final int UCE_OPTIONS_CMD_GETCONTACTCAP = 2;
     public static final int UCE_OPTIONS_CMD_GETCONTACTLISTCAP = 3;
     public static final int UCE_OPTIONS_CMD_GETMYCDINFO = 0;

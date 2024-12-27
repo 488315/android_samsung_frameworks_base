@@ -12,9 +12,12 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.cocktailbar.utils.CocktailBarConfig;
+
 import com.samsung.android.cocktailbar.Cocktail;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,7 +29,8 @@ public final class CocktailBarSettings {
     public final int mCurrentUserId;
     public String mEnabledCocktailsStrCache;
     public final ContentResolver mResolver;
-    public final TextUtils.SimpleStringSplitter mEnabledCocktailsSplitter = new TextUtils.SimpleStringSplitter(';');
+    public final TextUtils.SimpleStringSplitter mEnabledCocktailsSplitter =
+            new TextUtils.SimpleStringSplitter(';');
     public final HashMap mCocktailMap = new HashMap();
     public ArrayList mEnabledCocktailListCache = new ArrayList();
     public final Handler mHandler = new Handler(Looper.getMainLooper());
@@ -65,8 +69,12 @@ public final class CocktailBarSettings {
     public final String getEnabledCocktailsStr() {
         ContentResolver contentResolver = this.mResolver;
         int i = this.mCurrentUserId;
-        this.mEnabledCocktailsStrCache = Settings.System.getStringForUser(contentResolver, "cocktail_bar_enabled_cocktails", i);
-        Slog.d("CocktailBarSettings", "getEnabledCocktailsStr: " + this.mEnabledCocktailsStrCache + ", " + i);
+        this.mEnabledCocktailsStrCache =
+                Settings.System.getStringForUser(
+                        contentResolver, "cocktail_bar_enabled_cocktails", i);
+        Slog.d(
+                "CocktailBarSettings",
+                "getEnabledCocktailsStr: " + this.mEnabledCocktailsStrCache + ", " + i);
         return this.mEnabledCocktailsStrCache;
     }
 
@@ -79,7 +87,10 @@ public final class CocktailBarSettings {
                     Cocktail cocktail = (Cocktail) sparseArray.valueAt(i);
                     ComponentName provider = cocktail.getProvider();
                     if (provider != null) {
-                        this.mCocktailMap.put(cocktail.getProvider().getClassName(), new CocktailInfo(cocktail.getCocktailId(), provider.getPackageName()));
+                        this.mCocktailMap.put(
+                                cocktail.getProvider().getClassName(),
+                                new CocktailInfo(
+                                        cocktail.getCocktailId(), provider.getPackageName()));
                     }
                 }
             } catch (Throwable th) {
@@ -133,12 +144,15 @@ public final class CocktailBarSettings {
         }
         try {
             String sb2 = sb.toString();
-            Settings.System.putStringForUser(this.mResolver, "cocktail_bar_enabled_cocktails", sb2, i);
+            Settings.System.putStringForUser(
+                    this.mResolver, "cocktail_bar_enabled_cocktails", sb2, i);
             this.mEnabledCocktailsStrCache = sb2;
             Slog.d("CocktailBarSettings", "putEnabledCocktailsStr: " + sb2);
             if (TextUtils.isEmpty(sb.toString())) {
-                Settings.System.putStringForUser(this.mResolver, "previous_enable_list", getEnabledCocktailsStr(), i);
-                Settings.System.putInt(this.mResolver, "previous_enable_id_cnt", getEnableCocktailIds().size());
+                Settings.System.putStringForUser(
+                        this.mResolver, "previous_enable_list", getEnabledCocktailsStr(), i);
+                Settings.System.putInt(
+                        this.mResolver, "previous_enable_id_cnt", getEnableCocktailIds().size());
             }
         } catch (Exception e) {
             Slog.d("CocktailBarSettings", "setEnabledCocktailsLocked: " + e.toString());
@@ -147,14 +161,16 @@ public final class CocktailBarSettings {
 
     public final void updateEnabledCocktailList() {
         if (Process.myPid() != Binder.getCallingPid()) {
-            this.mHandler.post(new Runnable() { // from class: com.android.server.cocktailbar.settings.CocktailBarSettings.1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    synchronized (CocktailBarSettings.this.mCocktailMap) {
-                        CocktailBarSettings.this.updateEnabledCocktailListLocked();
-                    }
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.cocktailbar.settings.CocktailBarSettings.1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            synchronized (CocktailBarSettings.this.mCocktailMap) {
+                                CocktailBarSettings.this.updateEnabledCocktailListLocked();
+                            }
+                        }
+                    });
             return;
         }
         synchronized (this.mCocktailMap) {
@@ -175,9 +191,21 @@ public final class CocktailBarSettings {
             if (((CocktailInfo) this.mCocktailMap.get(next)) != null) {
                 arrayList.add(next);
             } else {
-                String str = (String) CocktailBarConfig.getInstance(this.mContext).mReplacedComponent.get(next);
+                String str =
+                        (String)
+                                CocktailBarConfig.getInstance(this.mContext)
+                                        .mReplacedComponent
+                                        .get(next);
                 CocktailInfo cocktailInfo = (CocktailInfo) this.mCocktailMap.get(str);
-                AnyMotionDetector$$ExternalSyntheticOutline0.m("CocktailBarSettings", InitialConfiguration$$ExternalSyntheticOutline0.m("updateEnabledCocktailListLocked chagned old = ", next, ",new=", str, ",info="), cocktailInfo != null);
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        "CocktailBarSettings",
+                        InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                "updateEnabledCocktailListLocked chagned old = ",
+                                next,
+                                ",new=",
+                                str,
+                                ",info="),
+                        cocktailInfo != null);
                 if (cocktailInfo != null) {
                     arrayList.add(str);
                 }

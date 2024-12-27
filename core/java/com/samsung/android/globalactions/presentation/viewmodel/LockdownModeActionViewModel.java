@@ -11,7 +11,10 @@ public class LockdownModeActionViewModel implements ActionViewModel {
     private final LockPatternUtilsWrapper mLockPatternUtilsWrapper;
     private final SamsungGlobalActionsAnalytics mSAnalytics;
 
-    public LockdownModeActionViewModel(SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics, LockPatternUtilsWrapper lockPatternUtilsWrapper, SamsungGlobalActions globalActions) {
+    public LockdownModeActionViewModel(
+            SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics,
+            LockPatternUtilsWrapper lockPatternUtilsWrapper,
+            SamsungGlobalActions globalActions) {
         this.mSAnalytics = samsungGlobalActionsAnalytics;
         this.mLockPatternUtilsWrapper = lockPatternUtilsWrapper;
         this.mGlobalActions = globalActions;
@@ -29,12 +32,15 @@ public class LockdownModeActionViewModel implements ActionViewModel {
 
     @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
     public void onPress() {
-        this.mSAnalytics.sendEventLog(SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.EID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.DID_LOCK_DOWN, 4L);
+        this.mSAnalytics.sendEventLog(
+                SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS,
+                SamsungGlobalActionsAnalytics.EID_DEVICE_OPTIONS,
+                SamsungGlobalActionsAnalytics.DID_LOCK_DOWN,
+                4L);
         this.mGlobalActions.dismissDialog(true);
         this.mLockPatternUtilsWrapper.lockDownDelayed(500);
     }
 
     @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
-    public void onLongPress() {
-    }
+    public void onLongPress() {}
 }

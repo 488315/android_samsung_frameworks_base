@@ -2,6 +2,7 @@ package android.database.sqlite;
 
 import android.database.DefaultDatabaseErrorHandler;
 import android.util.Log;
+
 import java.io.File;
 
 /* loaded from: classes.dex */

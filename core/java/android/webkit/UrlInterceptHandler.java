@@ -1,6 +1,5 @@
 package android.webkit;
 
-import android.webkit.CacheManager;
 import java.util.Map;
 
 @Deprecated

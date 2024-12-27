@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -59,7 +60,8 @@ public class ButtonBarLayout extends LinearLayout {
         }
         boolean needsRemeasure = false;
         if (!isStacked() && View.MeasureSpec.getMode(widthMeasureSpec) == 1073741824) {
-            initialWidthMeasureSpec = View.MeasureSpec.makeMeasureSpec(widthSize, Integer.MIN_VALUE);
+            initialWidthMeasureSpec =
+                    View.MeasureSpec.makeMeasureSpec(widthSize, Integer.MIN_VALUE);
             needsRemeasure = true;
         } else {
             initialWidthMeasureSpec = widthMeasureSpec;
@@ -84,15 +86,26 @@ public class ButtonBarLayout extends LinearLayout {
         int firstVisible = getNextVisibleChildIndex(0);
         if (firstVisible >= 0) {
             View firstButton = getChildAt(firstVisible);
-            LinearLayout.LayoutParams firstParams = (LinearLayout.LayoutParams) firstButton.getLayoutParams();
-            minHeight = 0 + getPaddingTop() + firstButton.getMeasuredHeight() + firstParams.topMargin + firstParams.bottomMargin;
+            LinearLayout.LayoutParams firstParams =
+                    (LinearLayout.LayoutParams) firstButton.getLayoutParams();
+            minHeight =
+                    0
+                            + getPaddingTop()
+                            + firstButton.getMeasuredHeight()
+                            + firstParams.topMargin
+                            + firstParams.bottomMargin;
             if (isStacked()) {
                 if (this.mIsDeviceDefault) {
                     minHeight += getPaddingBottom();
                 } else {
                     int secondVisible = getNextVisibleChildIndex(firstVisible + 1);
                     if (secondVisible >= 0) {
-                        minHeight = (int) (minHeight + getChildAt(secondVisible).getPaddingTop() + (getResources().getDisplayMetrics().density * 16.0f));
+                        minHeight =
+                                (int)
+                                        (minHeight
+                                                + getChildAt(secondVisible).getPaddingTop()
+                                                + (getResources().getDisplayMetrics().density
+                                                        * 16.0f));
                     }
                 }
             } else {
@@ -107,7 +120,8 @@ public class ButtonBarLayout extends LinearLayout {
     private int getNextVisibleChildIndex(int index) {
         int count = getChildCount();
         for (int i = index; i < count; i++) {
-            if (getChildAt(i).getVisibility() == 0 && (!this.mIsDeviceDefault || (getChildAt(i) instanceof Button))) {
+            if (getChildAt(i).getVisibility() == 0
+                    && (!this.mIsDeviceDefault || (getChildAt(i) instanceof Button))) {
                 return i;
             }
         }
@@ -150,7 +164,10 @@ public class ButtonBarLayout extends LinearLayout {
     private void setDividerVisible(int index) {
         int count = getChildCount();
         for (int i = index; i < count; i++) {
-            if (IS_DIVIDER.equals(getChildAt(i).getTag()) && i + 1 < count && (getChildAt(i + 1) instanceof Button) && getChildAt(i + 1).getVisibility() == 0) {
+            if (IS_DIVIDER.equals(getChildAt(i).getTag())
+                    && i + 1 < count
+                    && (getChildAt(i + 1) instanceof Button)
+                    && getChildAt(i + 1).getVisibility() == 0) {
                 getChildAt(i).setVisibility(0);
             }
         }

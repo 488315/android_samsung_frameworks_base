@@ -2,24 +2,26 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class CellInfoLte extends CellInfo implements Parcelable {
-    public static final Parcelable.Creator<CellInfoLte> CREATOR = new Parcelable.Creator<CellInfoLte>() { // from class: android.telephony.CellInfoLte.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoLte createFromParcel(Parcel in) {
-            in.readInt();
-            return CellInfoLte.createFromParcelBody(in);
-        }
+    public static final Parcelable.Creator<CellInfoLte> CREATOR =
+            new Parcelable.Creator<CellInfoLte>() { // from class: android.telephony.CellInfoLte.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoLte createFromParcel(Parcel in) {
+                    in.readInt();
+                    return CellInfoLte.createFromParcelBody(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoLte[] newArray(int size) {
-            return new CellInfoLte[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoLte[] newArray(int size) {
+                    return new CellInfoLte[size];
+                }
+            };
     private static final boolean DBG = false;
     private static final String LOG_TAG = "CellInfoLte";
     private CellConfigLte mCellConfig;
@@ -39,7 +41,13 @@ public final class CellInfoLte extends CellInfo implements Parcelable {
         this.mCellConfig = new CellConfigLte(ci.mCellConfig);
     }
 
-    public CellInfoLte(int connectionStatus, boolean registered, long timeStamp, CellIdentityLte cellIdentityLte, CellSignalStrengthLte cellSignalStrengthLte, CellConfigLte cellConfig) {
+    public CellInfoLte(
+            int connectionStatus,
+            boolean registered,
+            long timeStamp,
+            CellIdentityLte cellIdentityLte,
+            CellSignalStrengthLte cellSignalStrengthLte,
+            CellConfigLte cellConfig) {
         super(connectionStatus, registered, timeStamp);
         this.mCellIdentityLte = cellIdentityLte;
         this.mCellSignalStrengthLte = cellSignalStrengthLte;
@@ -81,7 +89,11 @@ public final class CellInfoLte extends CellInfo implements Parcelable {
 
     @Override // android.telephony.CellInfo
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(super.hashCode()), Integer.valueOf(this.mCellIdentityLte.hashCode()), Integer.valueOf(this.mCellSignalStrengthLte.hashCode()), Integer.valueOf(this.mCellConfig.hashCode()));
+        return Objects.hash(
+                Integer.valueOf(super.hashCode()),
+                Integer.valueOf(this.mCellIdentityLte.hashCode()),
+                Integer.valueOf(this.mCellSignalStrengthLte.hashCode()),
+                Integer.valueOf(this.mCellConfig.hashCode()));
     }
 
     @Override // android.telephony.CellInfo
@@ -90,7 +102,10 @@ public final class CellInfoLte extends CellInfo implements Parcelable {
             return false;
         }
         CellInfoLte o = (CellInfoLte) other;
-        return super.equals(o) && this.mCellIdentityLte.equals(o.mCellIdentityLte) && this.mCellSignalStrengthLte.equals(o.mCellSignalStrengthLte) && this.mCellConfig.equals(o.mCellConfig);
+        return super.equals(o)
+                && this.mCellIdentityLte.equals(o.mCellIdentityLte)
+                && this.mCellSignalStrengthLte.equals(o.mCellSignalStrengthLte)
+                && this.mCellConfig.equals(o.mCellConfig);
     }
 
     @Override // android.telephony.CellInfo

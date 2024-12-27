@@ -18,7 +18,9 @@ import android.os.TransactionTooLargeException;
 import android.os.WorkSource;
 import android.util.ArraySet;
 import android.util.Pair;
+
 import com.android.internal.os.TimeoutRecord;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -78,12 +80,10 @@ public abstract class ActivityManagerInternal {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MediaProjectionTokenEvent {
-    }
+    public @interface MediaProjectionTokenEvent {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OomAdjReason {
-    }
+    public @interface OomAdjReason {}
 
     public enum ServiceNotificationPolicy {
         NOT_FOREGROUND_SERVICE,
@@ -95,13 +95,16 @@ public abstract class ActivityManagerInternal {
         void notifyActivityDestroyed(IBinder iBinder);
     }
 
-    public abstract void addAppBackgroundRestrictionListener(AppBackgroundRestrictionListener appBackgroundRestrictionListener);
+    public abstract void addAppBackgroundRestrictionListener(
+            AppBackgroundRestrictionListener appBackgroundRestrictionListener);
 
-    public abstract void addBindServiceEventListener(BindServiceEventListener bindServiceEventListener);
+    public abstract void addBindServiceEventListener(
+            BindServiceEventListener bindServiceEventListener);
 
     public abstract void addBroadcastEventListener(BroadcastEventListener broadcastEventListener);
 
-    public abstract void addForegroundServiceStateListener(ForegroundServiceStateListener foregroundServiceStateListener);
+    public abstract void addForegroundServiceStateListener(
+            ForegroundServiceStateListener foregroundServiceStateListener);
 
     public abstract void addPendingTopUid(int i, int i2, IApplicationThread iApplicationThread);
 
@@ -109,7 +112,8 @@ public abstract class ActivityManagerInternal {
 
     public abstract void appNotResponding(String str, int i, TimeoutRecord timeoutRecord);
 
-    public abstract ServiceNotificationPolicy applyForegroundServiceNotification(Notification notification, String str, int i, String str2, int i2);
+    public abstract ServiceNotificationPolicy applyForegroundServiceNotification(
+            Notification notification, String str, int i, String str2, int i2);
 
     public abstract void broadcastCloseSystemDialogs(String str);
 
@@ -117,11 +121,46 @@ public abstract class ActivityManagerInternal {
 
     public abstract void broadcastGlobalConfigurationChanged(int i, boolean z);
 
-    public abstract int broadcastIntent(Intent intent, IIntentReceiver iIntentReceiver, String[] strArr, boolean z, int i, int[] iArr, BiFunction<Integer, Bundle, Bundle> biFunction, Bundle bundle);
+    public abstract int broadcastIntent(
+            Intent intent,
+            IIntentReceiver iIntentReceiver,
+            String[] strArr,
+            boolean z,
+            int i,
+            int[] iArr,
+            BiFunction<Integer, Bundle, Bundle> biFunction,
+            Bundle bundle);
 
-    public abstract int broadcastIntentInPackage(IApplicationThread iApplicationThread, String str, String str2, int i, int i2, int i3, Intent intent, String str3, IApplicationThread iApplicationThread2, IIntentReceiver iIntentReceiver, int i4, String str4, Bundle bundle, String str5, Bundle bundle2, boolean z, boolean z2, int i5, BackgroundStartPrivileges backgroundStartPrivileges, int[] iArr);
+    public abstract int broadcastIntentInPackage(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            int i,
+            int i2,
+            int i3,
+            Intent intent,
+            String str3,
+            IApplicationThread iApplicationThread2,
+            IIntentReceiver iIntentReceiver,
+            int i4,
+            String str4,
+            Bundle bundle,
+            String str5,
+            Bundle bundle2,
+            boolean z,
+            boolean z2,
+            int i5,
+            BackgroundStartPrivileges backgroundStartPrivileges,
+            int[] iArr);
 
-    public abstract int broadcastIntentWithCallback(Intent intent, IIntentReceiver iIntentReceiver, String[] strArr, int i, int[] iArr, BiFunction<Integer, Bundle, Bundle> biFunction, Bundle bundle);
+    public abstract int broadcastIntentWithCallback(
+            Intent intent,
+            IIntentReceiver iIntentReceiver,
+            String[] strArr,
+            int i,
+            int[] iArr,
+            BiFunction<Integer, Bundle, Bundle> biFunction,
+            Bundle bundle);
 
     public abstract boolean canAllowWhileInUsePermissionInFgs(int i, int i2, String str);
 
@@ -141,11 +180,13 @@ public abstract class ActivityManagerInternal {
 
     public abstract void cleanUpServices(int i, ComponentName componentName, Intent intent);
 
-    public abstract boolean clearApplicationUserData(String str, boolean z, boolean z2, IPackageDataObserver iPackageDataObserver, int i);
+    public abstract boolean clearApplicationUserData(
+            String str, boolean z, boolean z2, IPackageDataObserver iPackageDataObserver, int i);
 
     public abstract void clearPendingBackup(int i);
 
-    public abstract void clearPendingIntentAllowBgActivityStarts(IIntentSender iIntentSender, IBinder iBinder);
+    public abstract void clearPendingIntentAllowBgActivityStarts(
+            IIntentSender iIntentSender, IBinder iBinder);
 
     public abstract void deletePendingTopUid(int i, long j);
 
@@ -201,9 +242,11 @@ public abstract class ActivityManagerInternal {
 
     public abstract String getPackageNameByPid(int i);
 
-    public abstract PendingIntent getPendingIntentActivityAsApp(int i, Intent intent, int i2, Bundle bundle, String str, int i3);
+    public abstract PendingIntent getPendingIntentActivityAsApp(
+            int i, Intent intent, int i2, Bundle bundle, String str, int i3);
 
-    public abstract PendingIntent getPendingIntentActivityAsApp(int i, Intent[] intentArr, int i2, Bundle bundle, String str, int i3);
+    public abstract PendingIntent getPendingIntentActivityAsApp(
+            int i, Intent[] intentArr, int i2, Bundle bundle, String str, int i3);
 
     public abstract int getPendingIntentFlags(IIntentSender iIntentSender);
 
@@ -229,7 +272,8 @@ public abstract class ActivityManagerInternal {
 
     public abstract int getUidProcessState(int i);
 
-    public abstract int handleIncomingUser(int i, int i2, int i3, boolean z, int i4, String str, String str2);
+    public abstract int handleIncomingUser(
+            int i, int i2, int i3, boolean z, int i4, String str, String str2);
 
     public abstract boolean hasForegroundServiceNotification(String str, int i, String str2);
 
@@ -245,7 +289,14 @@ public abstract class ActivityManagerInternal {
 
     public abstract long inputDispatchingTimedOut(int i, boolean z, TimeoutRecord timeoutRecord);
 
-    public abstract boolean inputDispatchingTimedOut(Object obj, String str, ApplicationInfo applicationInfo, String str2, Object obj2, boolean z, TimeoutRecord timeoutRecord);
+    public abstract boolean inputDispatchingTimedOut(
+            Object obj,
+            String str,
+            ApplicationInfo applicationInfo,
+            String str2,
+            Object obj2,
+            boolean z,
+            TimeoutRecord timeoutRecord);
 
     public abstract boolean isActivityStartsLoggingEnabled();
 
@@ -275,7 +326,8 @@ public abstract class ActivityManagerInternal {
 
     public abstract boolean isProfileOwner(int i);
 
-    public abstract boolean isRestrictedPackage(ComponentName componentName, String str, int i, String str2, Intent intent, int i2);
+    public abstract boolean isRestrictedPackage(
+            ComponentName componentName, String str, int i, String str2, Intent intent, int i2);
 
     public abstract boolean isRuntimeRestarted();
 
@@ -309,21 +361,26 @@ public abstract class ActivityManagerInternal {
 
     public abstract void monitor();
 
-    public abstract void noteAlarmFinish(PendingIntent pendingIntent, WorkSource workSource, int i, String str);
+    public abstract void noteAlarmFinish(
+            PendingIntent pendingIntent, WorkSource workSource, int i, String str);
 
-    public abstract void noteAlarmStart(PendingIntent pendingIntent, WorkSource workSource, int i, String str);
+    public abstract void noteAlarmStart(
+            PendingIntent pendingIntent, WorkSource workSource, int i, String str);
 
-    public abstract void noteWakeupAlarm(PendingIntent pendingIntent, WorkSource workSource, int i, String str, String str2);
+    public abstract void noteWakeupAlarm(
+            PendingIntent pendingIntent, WorkSource workSource, int i, String str, String str2);
 
     public abstract void notifyMediaProjectionEvent(int i, IBinder iBinder, int i2);
 
     public abstract void notifyNetworkPolicyRulesUpdated(int i, long j);
 
-    public abstract void onForegroundServiceNotificationUpdate(boolean z, Notification notification, int i, String str, int i2);
+    public abstract void onForegroundServiceNotificationUpdate(
+            boolean z, Notification notification, int i, String str, int i2);
 
     public abstract void onPackagePausedBG(String str, String str2, boolean z, int i);
 
-    public abstract void onPackageResumedFG(List<String> list, String str, String str2, boolean z, Intent intent, int i);
+    public abstract void onPackageResumedFG(
+            List<String> list, String str, String str2, boolean z, Intent intent, int i);
 
     public abstract void onUidBlockedReasonsChanged(int i, int i2);
 
@@ -335,7 +392,8 @@ public abstract class ActivityManagerInternal {
 
     public abstract void registerAnrController(AnrController anrController);
 
-    public abstract void registerNetworkPolicyUidObserver(IUidObserver iUidObserver, int i, int i2, String str);
+    public abstract void registerNetworkPolicyUidObserver(
+            IUidObserver iUidObserver, int i, int i2, String str);
 
     public abstract void registerProcessObserver(IProcessObserver iProcessObserver);
 
@@ -351,9 +409,27 @@ public abstract class ActivityManagerInternal {
 
     public abstract void sendForegroundProfileChanged(int i);
 
-    public abstract int sendIntentSender(IIntentSender iIntentSender, IBinder iBinder, int i, Intent intent, String str, IIntentReceiver iIntentReceiver, String str2, Bundle bundle);
+    public abstract int sendIntentSender(
+            IIntentSender iIntentSender,
+            IBinder iBinder,
+            int i,
+            Intent intent,
+            String str,
+            IIntentReceiver iIntentReceiver,
+            String str2,
+            Bundle bundle);
 
-    public abstract int sendIntentSender(IIntentSender iIntentSender, IBinder iBinder, int i, Intent intent, String str, IIntentReceiver iIntentReceiver, String str2, Bundle bundle, int i2, int i3);
+    public abstract int sendIntentSender(
+            IIntentSender iIntentSender,
+            IBinder iBinder,
+            int i,
+            Intent intent,
+            String str,
+            IIntentReceiver iIntentReceiver,
+            String str2,
+            Bundle bundle,
+            int i2,
+            int i3);
 
     public abstract void setBooted(boolean z);
 
@@ -363,7 +439,8 @@ public abstract class ActivityManagerInternal {
 
     public abstract void setCurrentDexMode(int i);
 
-    public abstract void setDebugFlagsForStartingActivity(ActivityInfo activityInfo, int i, ProfilerInfo profilerInfo, Object obj);
+    public abstract void setDebugFlagsForStartingActivity(
+            ActivityInfo activityInfo, int i, ProfilerInfo profilerInfo, Object obj);
 
     public abstract void setDeviceIdleAllowlist(int[] iArr, int[] iArr2);
 
@@ -375,9 +452,11 @@ public abstract class ActivityManagerInternal {
 
     public abstract void setLongLiveProcess(int i);
 
-    public abstract void setPendingIntentAllowBgActivityStarts(IIntentSender iIntentSender, IBinder iBinder, int i);
+    public abstract void setPendingIntentAllowBgActivityStarts(
+            IIntentSender iIntentSender, IBinder iBinder, int i);
 
-    public abstract void setPendingIntentAllowlistDuration(IIntentSender iIntentSender, IBinder iBinder, long j, int i, int i2, String str);
+    public abstract void setPendingIntentAllowlistDuration(
+            IIntentSender iIntentSender, IBinder iBinder, long j, int i, int i2, String str);
 
     public abstract void setProfileOwnerUid(ArraySet<Integer> arraySet);
 
@@ -387,35 +466,65 @@ public abstract class ActivityManagerInternal {
 
     public abstract void setSwitchingToSystemUserMessage(String str);
 
-    public abstract void setVoiceInteractionManagerProvider(VoiceInteractionManagerProvider voiceInteractionManagerProvider);
+    public abstract void setVoiceInteractionManagerProvider(
+            VoiceInteractionManagerProvider voiceInteractionManagerProvider);
 
     public abstract boolean shouldConfirmCredentials(int i);
 
     public abstract boolean shouldDelayHomeLaunch(int i);
 
-    public abstract boolean startForegroundServiceDelegate(ForegroundServiceDelegationOptions foregroundServiceDelegationOptions, ServiceConnection serviceConnection);
+    public abstract boolean startForegroundServiceDelegate(
+            ForegroundServiceDelegationOptions foregroundServiceDelegationOptions,
+            ServiceConnection serviceConnection);
 
-    public abstract boolean startIsolatedProcess(String str, String[] strArr, String str2, String str3, int i, Runnable runnable);
+    public abstract boolean startIsolatedProcess(
+            String str, String[] strArr, String str2, String str3, int i, Runnable runnable);
 
-    public abstract void startProcess(String str, ApplicationInfo applicationInfo, boolean z, boolean z2, String str2, ComponentName componentName);
+    public abstract void startProcess(
+            String str,
+            ApplicationInfo applicationInfo,
+            boolean z,
+            boolean z2,
+            String str2,
+            ComponentName componentName);
 
-    public abstract void startProcess(String str, ApplicationInfo applicationInfo, boolean z, boolean z2, String str2, ComponentName componentName, boolean z3, int i);
+    public abstract void startProcess(
+            String str,
+            ApplicationInfo applicationInfo,
+            boolean z,
+            boolean z2,
+            String str2,
+            ComponentName componentName,
+            boolean z3,
+            int i);
 
     public abstract boolean startProfileEvenWhenDisabled(int i);
 
-    public abstract ComponentName startServiceInPackage(IApplicationThread iApplicationThread, int i, Intent intent, String str, boolean z, String str2, String str3, int i2, BackgroundStartPrivileges backgroundStartPrivileges) throws TransactionTooLargeException;
+    public abstract ComponentName startServiceInPackage(
+            IApplicationThread iApplicationThread,
+            int i,
+            Intent intent,
+            String str,
+            boolean z,
+            String str2,
+            String str3,
+            int i2,
+            BackgroundStartPrivileges backgroundStartPrivileges)
+            throws TransactionTooLargeException;
 
     public abstract boolean startUserInBackground(int i);
 
     public abstract void stopAppForUser(String str, int i);
 
-    public abstract void stopForegroundServiceDelegate(ForegroundServiceDelegationOptions foregroundServiceDelegationOptions);
+    public abstract void stopForegroundServiceDelegate(
+            ForegroundServiceDelegationOptions foregroundServiceDelegationOptions);
 
     public abstract void stopForegroundServiceDelegate(ServiceConnection serviceConnection);
 
     public abstract void tempAllowWhileInUsePermissionInFgs(int i, long j);
 
-    public abstract void tempAllowlistForPendingIntent(int i, int i2, int i3, long j, int i4, int i5, String str);
+    public abstract void tempAllowlistForPendingIntent(
+            int i, int i2, int i3, long j, int i4, int i5, String str);
 
     public abstract void triggerUnsafeIntentStrictMode(int i, int i2, Intent intent);
 
@@ -425,9 +534,22 @@ public abstract class ActivityManagerInternal {
 
     public abstract void unregisterProcessObserver(IProcessObserver iProcessObserver);
 
-    public abstract void updateActivityUsageStats(ComponentName componentName, int i, int i2, IBinder iBinder, ComponentName componentName2, ActivityId activityId);
+    public abstract void updateActivityUsageStats(
+            ComponentName componentName,
+            int i,
+            int i2,
+            IBinder iBinder,
+            ComponentName componentName2,
+            ActivityId activityId);
 
-    public abstract void updateActivityUsageStatsWithIntent(ComponentName componentName, int i, int i2, IBinder iBinder, ComponentName componentName2, ActivityId activityId, Intent intent);
+    public abstract void updateActivityUsageStatsWithIntent(
+            ComponentName componentName,
+            int i,
+            int i2,
+            IBinder iBinder,
+            ComponentName componentName2,
+            ActivityId activityId,
+            Intent intent);
 
     public abstract void updateBackupServicePkg(int i, boolean z);
 
@@ -435,7 +557,8 @@ public abstract class ActivityManagerInternal {
 
     public abstract void updateCpuStats();
 
-    public abstract void updateDeviceIdleTempAllowlist(int[] iArr, int i, boolean z, long j, int i2, int i3, String str, int i4);
+    public abstract void updateDeviceIdleTempAllowlist(
+            int[] iArr, int i, boolean z, long j, int i2, int i3, String str, int i4);
 
     public abstract void updateForegroundTimeIfOnBattery(String str, int i, long j);
 
@@ -444,10 +567,8 @@ public abstract class ActivityManagerInternal {
     public abstract void updateOomLevelsForDisplay(int i);
 
     public interface AppBackgroundRestrictionListener {
-        default void onRestrictionLevelChanged(int uid, String packageName, int newLevel) {
-        }
+        default void onRestrictionLevelChanged(int uid, String packageName, int newLevel) {}
 
-        default void onAutoRestrictedBucketFeatureFlagChanged(boolean autoRestrictedBucket) {
-        }
+        default void onAutoRestrictedBucketFeatureFlagChanged(boolean autoRestrictedBucket) {}
     }
 }

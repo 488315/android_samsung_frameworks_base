@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.os.incremental.IncrementalManager;
 import android.provider.Settings;
 import android.text.TextUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,7 +29,8 @@ public final class F2fsUtils {
 
     static {
         sKernelCompressionAvailable = isFeatureEnabledInKernel(COMPRESSION_FEATURE);
-        if (isFeatureEnabledInKernel(RELOCATION_FEATURE) || isFeatureEnabledInKernel(HEIMDALLFS_FEATURE)) {
+        if (isFeatureEnabledInKernel(RELOCATION_FEATURE)
+                || isFeatureEnabledInKernel(HEIMDALLFS_FEATURE)) {
             sKernelCompressionAvailable = false;
         }
         sUserDataCompressionAvailable = isCompressionEnabledOnUserData();
@@ -39,8 +41,14 @@ public final class F2fsUtils {
         if (!sKernelCompressionAvailable || !sUserDataCompressionAvailable) {
             return;
         }
-        boolean releaseCompressBlocks = Settings.Secure.getInt(resolver, Settings.Secure.RELEASE_COMPRESS_BLOCKS_ON_INSTALL, 1) != 0;
-        if (!releaseCompressBlocks || !isCompressionAllowed(file) || (files = getFilesToRelease(file)) == null || files.length == 0) {
+        boolean releaseCompressBlocks =
+                Settings.Secure.getInt(
+                                resolver, Settings.Secure.RELEASE_COMPRESS_BLOCKS_ON_INSTALL, 1)
+                        != 0;
+        if (!releaseCompressBlocks
+                || !isCompressionAllowed(file)
+                || (files = getFilesToRelease(file)) == null
+                || files.length == 0) {
             return;
         }
         for (int i = files.length - 1; i >= 0; i--) {
@@ -51,7 +59,8 @@ public final class F2fsUtils {
     private static boolean isCompressionAllowed(File file) {
         try {
             String filePath = file.getCanonicalPath();
-            if (IncrementalManager.isIncrementalPath(filePath) || !isChild(sDataDirectory, filePath)) {
+            if (IncrementalManager.isIncrementalPath(filePath)
+                    || !isChild(sDataDirectory, filePath)) {
                 return false;
             }
             return true;
@@ -63,7 +72,9 @@ public final class F2fsUtils {
     private static boolean isChild(File base, String childPath) {
         try {
             File base2 = base.getCanonicalFile();
-            for (File parentFile = new File(childPath).getCanonicalFile(); parentFile != null; parentFile = parentFile.getParentFile()) {
+            for (File parentFile = new File(childPath).getCanonicalFile();
+                    parentFile != null;
+                    parentFile = parentFile.getParentFile()) {
                 if (base2.equals(parentFile)) {
                     return true;
                 }
@@ -89,12 +100,16 @@ public final class F2fsUtils {
     }
 
     private static boolean isCompressionEnabledOnUserData() {
-        if (!sUserDataFeatures.exists() || !sUserDataFeatures.isFile() || !sUserDataFeatures.canRead()) {
+        if (!sUserDataFeatures.exists()
+                || !sUserDataFeatures.isFile()
+                || !sUserDataFeatures.canRead()) {
             return false;
         }
         try {
             List<String> configLines = Files.readAllLines(sUserDataFeatures.toPath());
-            if (configLines == null || configLines.size() > 1 || TextUtils.isEmpty(configLines.get(0))) {
+            if (configLines == null
+                    || configLines.size() > 1
+                    || TextUtils.isEmpty(configLines.get(0))) {
                 return false;
             }
             String[] features = configLines.get(0).split(",");
@@ -131,7 +146,7 @@ public final class F2fsUtils {
             if (!codePath.isFile()) {
                 return null;
             }
-            return new File[]{codePath};
+            return new File[] {codePath};
         }
         if (files.size() == 0) {
             return null;

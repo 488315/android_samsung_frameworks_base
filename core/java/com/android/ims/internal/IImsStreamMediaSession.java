@@ -12,8 +12,7 @@ public interface IImsStreamMediaSession extends IInterface {
 
     public static class Default implements IImsStreamMediaSession {
         @Override // com.android.ims.internal.IImsStreamMediaSession
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IImsStreamMediaSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsStreamMediaSession {
+    public abstract static class Stub extends Binder implements IImsStreamMediaSession {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsStreamMediaSession";
         static final int TRANSACTION_close = 1;
 
@@ -60,7 +59,8 @@ public interface IImsStreamMediaSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

@@ -1,6 +1,7 @@
 package android.text;
 
 import com.android.internal.util.ArrayUtils;
+
 import libcore.util.EmptyArray;
 
 /* loaded from: classes4.dex */

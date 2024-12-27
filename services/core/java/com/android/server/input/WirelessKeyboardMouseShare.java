@@ -20,6 +20,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.os.SomeArgs;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
@@ -29,11 +30,11 @@ import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.DisplayThread;
-import com.android.server.input.ToastDialog;
-import com.android.server.input.WirelessKeyboardMouseShare;
+
 import com.samsung.android.continuity.SemContinuityManager;
 import com.samsung.android.core.CoreSaLogger;
 import com.samsung.android.rune.InputRune;
+
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -133,10 +134,12 @@ public final class WirelessKeyboardMouseShare {
                         bArr[1] = 0;
                         bArr[2] = 0;
                         bArr[3] = 0;
-                        WirelessKeyboardMouseShare.m586$$Nest$mstoreReportLocked(this.this$0, (byte) 2, bArr);
+                        WirelessKeyboardMouseShare.m586$$Nest$mstoreReportLocked(
+                                this.this$0, (byte) 2, bArr);
                         try {
                             WirelessKeyboardMouseShare wirelessKeyboardMouseShare = this.this$0;
-                            wirelessKeyboardMouseShare.mHidDevice.sendReport(wirelessKeyboardMouseShare.mPluggedDevice, 2, this.mBuffer);
+                            wirelessKeyboardMouseShare.mHidDevice.sendReport(
+                                    wirelessKeyboardMouseShare.mPluggedDevice, 2, this.mBuffer);
                         } catch (NullPointerException unused) {
                             Slog.d("WirelessKeyboardMouseShare", "ignore nullpointer exception ");
                         }
@@ -148,7 +151,9 @@ public final class WirelessKeyboardMouseShare {
                             for (int i = 0; i < 8; i++) {
                                 try {
                                     if (this.mBuffer[i] != 0) {
-                                        Slog.d("WirelessKeyboardMouseShare", "Keyboard need clear().");
+                                        Slog.d(
+                                                "WirelessKeyboardMouseShare",
+                                                "Keyboard need clear().");
                                     }
                                 } finally {
                                 }
@@ -158,10 +163,12 @@ public final class WirelessKeyboardMouseShare {
                         for (int i2 = 0; i2 < 8; i2++) {
                             this.mBuffer[i2] = 0;
                         }
-                        WirelessKeyboardMouseShare.m586$$Nest$mstoreReportLocked(this.this$0, (byte) 1, this.mBuffer);
+                        WirelessKeyboardMouseShare.m586$$Nest$mstoreReportLocked(
+                                this.this$0, (byte) 1, this.mBuffer);
                         try {
                             WirelessKeyboardMouseShare wirelessKeyboardMouseShare2 = this.this$0;
-                            wirelessKeyboardMouseShare2.mHidDevice.sendReport(wirelessKeyboardMouseShare2.mPluggedDevice, 1, this.mBuffer);
+                            wirelessKeyboardMouseShare2.mHidDevice.sendReport(
+                                    wirelessKeyboardMouseShare2.mPluggedDevice, 1, this.mBuffer);
                         } catch (NullPointerException unused2) {
                             Slog.d("WirelessKeyboardMouseShare", "ignore nullpointer exception ");
                         }
@@ -213,12 +220,35 @@ public final class WirelessKeyboardMouseShare {
         public final void handleMessage(Message message) {
             switch (message.what) {
                 case 1:
-                    BluetoothHidDeviceAppSdpSettings bluetoothHidDeviceAppSdpSettings = new BluetoothHidDeviceAppSdpSettings("Samsung HID Device", "Samsung HID Keyboard/Mouse", "Samsung", (byte) -64, HidConsts.DESCRIPTOR);
-                    BluetoothHidDeviceAppQosSettings bluetoothHidDeviceAppQosSettings = new BluetoothHidDeviceAppQosSettings(2, 200, 2, 200, 10000, 10000);
-                    BluetoothHidDeviceAppQosSettings bluetoothHidDeviceAppQosSettings2 = new BluetoothHidDeviceAppQosSettings(2, FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, 9, FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, 10000, 10000);
+                    BluetoothHidDeviceAppSdpSettings bluetoothHidDeviceAppSdpSettings =
+                            new BluetoothHidDeviceAppSdpSettings(
+                                    "Samsung HID Device",
+                                    "Samsung HID Keyboard/Mouse",
+                                    "Samsung",
+                                    (byte) -64,
+                                    HidConsts.DESCRIPTOR);
+                    BluetoothHidDeviceAppQosSettings bluetoothHidDeviceAppQosSettings =
+                            new BluetoothHidDeviceAppQosSettings(2, 200, 2, 200, 10000, 10000);
+                    BluetoothHidDeviceAppQosSettings bluetoothHidDeviceAppQosSettings2 =
+                            new BluetoothHidDeviceAppQosSettings(
+                                    2,
+                                    FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                                    9,
+                                    FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                                    10000,
+                                    10000);
                     try {
-                        WirelessKeyboardMouseShare wirelessKeyboardMouseShare = WirelessKeyboardMouseShare.this;
-                        Slog.d("WirelessKeyboardMouseShare", "registerApp()=" + wirelessKeyboardMouseShare.mHidDevice.registerApp(bluetoothHidDeviceAppSdpSettings, bluetoothHidDeviceAppQosSettings, bluetoothHidDeviceAppQosSettings2, wirelessKeyboardMouseShare.mExecutor, wirelessKeyboardMouseShare.mCallback));
+                        WirelessKeyboardMouseShare wirelessKeyboardMouseShare =
+                                WirelessKeyboardMouseShare.this;
+                        Slog.d(
+                                "WirelessKeyboardMouseShare",
+                                "registerApp()="
+                                        + wirelessKeyboardMouseShare.mHidDevice.registerApp(
+                                                bluetoothHidDeviceAppSdpSettings,
+                                                bluetoothHidDeviceAppQosSettings,
+                                                bluetoothHidDeviceAppQosSettings2,
+                                                wirelessKeyboardMouseShare.mExecutor,
+                                                wirelessKeyboardMouseShare.mCallback));
                         return;
                     } catch (Exception unused) {
                         Slog.d("WirelessKeyboardMouseShare", "Can't registerApp");
@@ -230,50 +260,80 @@ public final class WirelessKeyboardMouseShare {
                     return;
                 case 3:
                     byte b = (byte) message.arg1;
-                    ReportData reportData = (ReportData) WirelessKeyboardMouseShare.this.mInputReportCache.get(b);
+                    ReportData reportData =
+                            (ReportData) WirelessKeyboardMouseShare.this.mInputReportCache.get(b);
                     synchronized (WirelessKeyboardMouseShare.this.innerLock) {
                         try {
                             if (reportData != null) {
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare2 = WirelessKeyboardMouseShare.this;
-                                wirelessKeyboardMouseShare2.mHidDevice.replyReport(wirelessKeyboardMouseShare2.mPluggedDevice, (byte) 1, b, reportData.data);
+                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare2 =
+                                        WirelessKeyboardMouseShare.this;
+                                wirelessKeyboardMouseShare2.mHidDevice.replyReport(
+                                        wirelessKeyboardMouseShare2.mPluggedDevice,
+                                        (byte) 1,
+                                        b,
+                                        reportData.data);
                             } else if (b == 1) {
                                 byte[] bArr = new byte[8];
                                 Slog.d("WirelessKeyboardMouseShare", "get_report id for keyboard");
                                 for (int i = 0; i < 8; i++) {
                                     bArr[i] = 0;
                                 }
-                                WirelessKeyboardMouseShare.m586$$Nest$mstoreReportLocked(WirelessKeyboardMouseShare.this, b, bArr);
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare3 = WirelessKeyboardMouseShare.this;
-                                wirelessKeyboardMouseShare3.mHidDevice.replyReport(wirelessKeyboardMouseShare3.mPluggedDevice, (byte) 1, b, bArr);
+                                WirelessKeyboardMouseShare.m586$$Nest$mstoreReportLocked(
+                                        WirelessKeyboardMouseShare.this, b, bArr);
+                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare3 =
+                                        WirelessKeyboardMouseShare.this;
+                                wirelessKeyboardMouseShare3.mHidDevice.replyReport(
+                                        wirelessKeyboardMouseShare3.mPluggedDevice,
+                                        (byte) 1,
+                                        b,
+                                        bArr);
                             } else if (b == 2) {
                                 byte[] bArr2 = new byte[4];
                                 Slog.d("WirelessKeyboardMouseShare", "get_report id for mouse");
                                 for (int i2 = 0; i2 < 4; i2++) {
                                     bArr2[i2] = 0;
                                 }
-                                WirelessKeyboardMouseShare.m586$$Nest$mstoreReportLocked(WirelessKeyboardMouseShare.this, b, bArr2);
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare4 = WirelessKeyboardMouseShare.this;
-                                wirelessKeyboardMouseShare4.mHidDevice.replyReport(wirelessKeyboardMouseShare4.mPluggedDevice, (byte) 1, b, bArr2);
+                                WirelessKeyboardMouseShare.m586$$Nest$mstoreReportLocked(
+                                        WirelessKeyboardMouseShare.this, b, bArr2);
+                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare4 =
+                                        WirelessKeyboardMouseShare.this;
+                                wirelessKeyboardMouseShare4.mHidDevice.replyReport(
+                                        wirelessKeyboardMouseShare4.mPluggedDevice,
+                                        (byte) 1,
+                                        b,
+                                        bArr2);
                             } else {
-                                Slog.d("WirelessKeyboardMouseShare", "Get Report for Invalid report id = " + ((int) b));
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare5 = WirelessKeyboardMouseShare.this;
-                                wirelessKeyboardMouseShare5.mHidDevice.reportError(wirelessKeyboardMouseShare5.mPluggedDevice, (byte) 2);
+                                Slog.d(
+                                        "WirelessKeyboardMouseShare",
+                                        "Get Report for Invalid report id = " + ((int) b));
+                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare5 =
+                                        WirelessKeyboardMouseShare.this;
+                                wirelessKeyboardMouseShare5.mHidDevice.reportError(
+                                        wirelessKeyboardMouseShare5.mPluggedDevice, (byte) 2);
                             }
                         } finally {
                         }
                     }
                     return;
                 case 4:
-                    Slog.d("WirelessKeyboardMouseShare", "MESSAGE_SET_REPORT_RECEIVED for id = " + ((int) ((byte) message.arg1)));
-                    Slog.d("WirelessKeyboardMouseShare", "onSetReport(), sending successful handshake for set report");
-                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare6 = WirelessKeyboardMouseShare.this;
-                    wirelessKeyboardMouseShare6.mHidDevice.reportError(wirelessKeyboardMouseShare6.mPluggedDevice, (byte) 0);
+                    Slog.d(
+                            "WirelessKeyboardMouseShare",
+                            "MESSAGE_SET_REPORT_RECEIVED for id = "
+                                    + ((int) ((byte) message.arg1)));
+                    Slog.d(
+                            "WirelessKeyboardMouseShare",
+                            "onSetReport(), sending successful handshake for set report");
+                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare6 =
+                            WirelessKeyboardMouseShare.this;
+                    wirelessKeyboardMouseShare6.mHidDevice.reportError(
+                            wirelessKeyboardMouseShare6.mPluggedDevice, (byte) 0);
                     return;
                 case 5:
                     Slog.d("WirelessKeyboardMouseShare", "MESSAGE_NEED_TO_INITIALIZING");
                     return;
                 case 6:
-                    WirelessKeyboardMouseShare.this.mInputManager.switchWirelessKeyboardShare(message.arg1 == 1);
+                    WirelessKeyboardMouseShare.this.mInputManager.switchWirelessKeyboardShare(
+                            message.arg1 == 1);
                     return;
                 case 7:
                     WirelessKeyboardMouseShare.this.sendWirelessKeyboardShareStatus();
@@ -284,25 +344,45 @@ public final class WirelessKeyboardMouseShare {
                 case 9:
                     synchronized (WirelessKeyboardMouseShare.this.innerLock) {
                         try {
-                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare7 = WirelessKeyboardMouseShare.this;
-                            if (wirelessKeyboardMouseShare7.mPluggedDevice == null && wirelessKeyboardMouseShare7.isRegistered()) {
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare8 = WirelessKeyboardMouseShare.this;
-                                if (wirelessKeyboardMouseShare8.mHidDevice != null && wirelessKeyboardMouseShare8.mNextConnectedDevice != null && wirelessKeyboardMouseShare8.mRetryNum < 3) {
-                                    Slog.d("WirelessKeyboardMouseShare", "will connect " + WirelessKeyboardMouseShare.this.mNextConnectedDevice.toString() + " " + WirelessKeyboardMouseShare.this.mRetryNum);
-                                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare9 = WirelessKeyboardMouseShare.this;
-                                    wirelessKeyboardMouseShare9.mHidDevice.connect(wirelessKeyboardMouseShare9.mNextConnectedDevice);
+                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare7 =
+                                    WirelessKeyboardMouseShare.this;
+                            if (wirelessKeyboardMouseShare7.mPluggedDevice == null
+                                    && wirelessKeyboardMouseShare7.isRegistered()) {
+                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare8 =
+                                        WirelessKeyboardMouseShare.this;
+                                if (wirelessKeyboardMouseShare8.mHidDevice != null
+                                        && wirelessKeyboardMouseShare8.mNextConnectedDevice != null
+                                        && wirelessKeyboardMouseShare8.mRetryNum < 3) {
+                                    Slog.d(
+                                            "WirelessKeyboardMouseShare",
+                                            "will connect "
+                                                    + WirelessKeyboardMouseShare.this
+                                                            .mNextConnectedDevice.toString()
+                                                    + " "
+                                                    + WirelessKeyboardMouseShare.this.mRetryNum);
+                                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare9 =
+                                            WirelessKeyboardMouseShare.this;
+                                    wirelessKeyboardMouseShare9.mHidDevice.connect(
+                                            wirelessKeyboardMouseShare9.mNextConnectedDevice);
                                     WirelessKeyboardMouseShare.this.mRetryNum = 0;
                                 } else if (wirelessKeyboardMouseShare8.mRetryNum > 2) {
-                                    Slog.d("WirelessKeyboardMouseShare", "retry count : " + WirelessKeyboardMouseShare.this.mRetryNum);
+                                    Slog.d(
+                                            "WirelessKeyboardMouseShare",
+                                            "retry count : "
+                                                    + WirelessKeyboardMouseShare.this.mRetryNum);
                                     WirelessKeyboardMouseShare.this.stopHIDDevice();
                                     WirelessKeyboardMouseShare.this.mRetryNum = 0;
                                 }
                             }
                             WirelessKeyboardMouseShare.this.mRetryNum++;
-                            Slog.d("WirelessKeyboardMouseShare", "retry connect " + WirelessKeyboardMouseShare.this.mRetryNum);
-                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare10 = WirelessKeyboardMouseShare.this;
+                            Slog.d(
+                                    "WirelessKeyboardMouseShare",
+                                    "retry connect " + WirelessKeyboardMouseShare.this.mRetryNum);
+                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare10 =
+                                    WirelessKeyboardMouseShare.this;
                             if (wirelessKeyboardMouseShare10.mRetryNum < 3) {
-                                wirelessKeyboardMouseShare10.sendMessageConnectDeviceLocked(wirelessKeyboardMouseShare10.mNextConnectedDevice);
+                                wirelessKeyboardMouseShare10.sendMessageConnectDeviceLocked(
+                                        wirelessKeyboardMouseShare10.mNextConnectedDevice);
                             } else {
                                 wirelessKeyboardMouseShare10.mRetryNum = 0;
                             }
@@ -313,22 +393,29 @@ public final class WirelessKeyboardMouseShare {
                 case 10:
                     synchronized (WirelessKeyboardMouseShare.this.innerLock) {
                         try {
-                            BluetoothAdapter bluetoothAdapter = WirelessKeyboardMouseShare.this.mAdapter;
+                            BluetoothAdapter bluetoothAdapter =
+                                    WirelessKeyboardMouseShare.this.mAdapter;
                             if (bluetoothAdapter != null && !bluetoothAdapter.isEnabled()) {
-                                Slog.d("WirelessKeyboardMouseShare", "startHIDDeviceByKey need to turn on bt.");
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare11 = WirelessKeyboardMouseShare.this;
+                                Slog.d(
+                                        "WirelessKeyboardMouseShare",
+                                        "startHIDDeviceByKey need to turn on bt.");
+                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare11 =
+                                        WirelessKeyboardMouseShare.this;
                                 wirelessKeyboardMouseShare11.mNeedToTurnOnBT = true;
                                 wirelessKeyboardMouseShare11.mAdapter.enable();
                                 return;
                             }
-                            if (WirelessKeyboardMouseShare.this.isRegistered() && WirelessKeyboardMouseShare.this.getDeviceListSize() == 0) {
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare12 = WirelessKeyboardMouseShare.this;
+                            if (WirelessKeyboardMouseShare.this.isRegistered()
+                                    && WirelessKeyboardMouseShare.this.getDeviceListSize() == 0) {
+                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare12 =
+                                        WirelessKeyboardMouseShare.this;
                                 wirelessKeyboardMouseShare12.mNeedNoti = true;
                                 wirelessKeyboardMouseShare12.sendMessageStatus();
                                 WirelessKeyboardMouseShare.this.sendMessageMCF();
                                 return;
                             }
-                            if (!WirelessKeyboardMouseShare.this.isRegistered() && WirelessKeyboardMouseShare.this.getDeviceListSize() < 3) {
+                            if (!WirelessKeyboardMouseShare.this.isRegistered()
+                                    && WirelessKeyboardMouseShare.this.getDeviceListSize() < 3) {
                                 WirelessKeyboardMouseShare.this.mNeedNotiTablet = true;
                             }
                             WirelessKeyboardMouseShare.this.startHIDDevice();
@@ -339,9 +426,12 @@ public final class WirelessKeyboardMouseShare {
                 case 11:
                     synchronized (WirelessKeyboardMouseShare.this.innerLock) {
                         try {
-                            Slog.d("WirelessKeyboardMouseShare", "unregister by MESSAGE_NEED_HOST_ROLE message");
+                            Slog.d(
+                                    "WirelessKeyboardMouseShare",
+                                    "unregister by MESSAGE_NEED_HOST_ROLE message");
                             if (WirelessKeyboardMouseShare.this.isRegistered()) {
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare13 = WirelessKeyboardMouseShare.this;
+                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare13 =
+                                        WirelessKeyboardMouseShare.this;
                                 if (wirelessKeyboardMouseShare13.mUnregisterWhenConnectionFail) {
                                     wirelessKeyboardMouseShare13.stopHIDDevice();
                                 }
@@ -357,16 +447,28 @@ public final class WirelessKeyboardMouseShare {
     }
 
     /* renamed from: -$$Nest$maddPairedDevicesListLocked, reason: not valid java name */
-    public static int m585$$Nest$maddPairedDevicesListLocked(WirelessKeyboardMouseShare wirelessKeyboardMouseShare, BluetoothDevice bluetoothDevice, int i) {
+    public static int m585$$Nest$maddPairedDevicesListLocked(
+            WirelessKeyboardMouseShare wirelessKeyboardMouseShare,
+            BluetoothDevice bluetoothDevice,
+            int i) {
         int i2 = 0;
         int i3 = 1;
         String str = "";
         while (i3 < 4) {
             BluetoothDevice bluetoothDevice2 = wirelessKeyboardMouseShare.mPairedDevices[i3];
             String address = bluetoothDevice2 != null ? bluetoothDevice2.getAddress() : "";
-            str = i3 == 1 ? address : AnyMotionDetector$$ExternalSyntheticOutline0.m(str, ",", address);
+            str =
+                    i3 == 1
+                            ? address
+                            : AnyMotionDetector$$ExternalSyntheticOutline0.m(str, ",", address);
             if (address.equals(bluetoothDevice.getAddress())) {
-                StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i3, i, "already exist device slot[", "] requested_index=", ", device=");
+                StringBuilder m =
+                        ArrayUtils$$ExternalSyntheticOutline0.m(
+                                i3,
+                                i,
+                                "already exist device slot[",
+                                "] requested_index=",
+                                ", device=");
                 m.append(bluetoothDevice.toString());
                 Slog.d("WirelessKeyboardMouseShare", m.toString());
                 i2 = 1;
@@ -378,27 +480,40 @@ public final class WirelessKeyboardMouseShare {
             return i2;
         }
         if (i > 3 || i == 0) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "cannot add list, index=", "WirelessKeyboardMouseShare");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "cannot add list, index=", "WirelessKeyboardMouseShare");
             return i2;
         }
         BluetoothDevice bluetoothDevice3 = wirelessKeyboardMouseShare.mPairedDevices[i];
         if (bluetoothDevice3 != null) {
-            StringBuilder m2 = BatteryService$$ExternalSyntheticOutline0.m(i, "not empty slot ", " ");
+            StringBuilder m2 =
+                    BatteryService$$ExternalSyntheticOutline0.m(i, "not empty slot ", " ");
             m2.append(bluetoothDevice3.toString());
             Slog.d("WirelessKeyboardMouseShare", m2.toString());
         }
         wirelessKeyboardMouseShare.mPairedDevices[i] = bluetoothDevice;
-        Slog.d("WirelessKeyboardMouseShare", "add paired device list " + wirelessKeyboardMouseShare.getDeviceListSize() + ": " + str + " : " + bluetoothDevice.toString());
+        Slog.d(
+                "WirelessKeyboardMouseShare",
+                "add paired device list "
+                        + wirelessKeyboardMouseShare.getDeviceListSize()
+                        + ": "
+                        + str
+                        + " : "
+                        + bluetoothDevice.toString());
         wirelessKeyboardMouseShare.sendMessageStatus();
         if (InputRune.IFW_WIRELESS_KEYBOARD_SA_LOGGING) {
-            CoreSaLogger.logSettingStatusForBasic("67264", Integer.toString(wirelessKeyboardMouseShare.getDeviceListSize()));
-            CoreSaLogger.logForBasic(wirelessKeyboardMouseShare.REG_ID[i - 1], "1 " + wirelessKeyboardMouseShare.mPairedDevices[i].getName());
+            CoreSaLogger.logSettingStatusForBasic(
+                    "67264", Integer.toString(wirelessKeyboardMouseShare.getDeviceListSize()));
+            CoreSaLogger.logForBasic(
+                    wirelessKeyboardMouseShare.REG_ID[i - 1],
+                    "1 " + wirelessKeyboardMouseShare.mPairedDevices[i].getName());
         }
         return 2;
     }
 
     /* renamed from: -$$Nest$mstoreReportLocked, reason: not valid java name */
-    public static void m586$$Nest$mstoreReportLocked(WirelessKeyboardMouseShare wirelessKeyboardMouseShare, byte b, byte[] bArr) {
+    public static void m586$$Nest$mstoreReportLocked(
+            WirelessKeyboardMouseShare wirelessKeyboardMouseShare, byte b, byte[] bArr) {
         ReportData reportData = (ReportData) wirelessKeyboardMouseShare.mInputReportCache.get(b);
         if (reportData == null) {
             reportData = new ReportData();
@@ -413,319 +528,489 @@ public final class WirelessKeyboardMouseShare {
 
     /* JADX WARN: Type inference failed for: r3v4, types: [com.android.server.input.WirelessKeyboardMouseShare$3] */
     /* JADX WARN: Type inference failed for: r3v5, types: [com.android.server.input.WirelessKeyboardMouseShare$4] */
-    public WirelessKeyboardMouseShare(Context context, InputManagerService inputManagerService, ToastDialog toastDialog, Object obj) {
+    public WirelessKeyboardMouseShare(
+            Context context,
+            InputManagerService inputManagerService,
+            ToastDialog toastDialog,
+            Object obj) {
         this.mAdapter = BluetoothAdapter.getDefaultAdapter();
         this.mInitialized = false;
         BluetoothDevice[] bluetoothDeviceArr = new BluetoothDevice[4];
         this.mPairedDevices = bluetoothDeviceArr;
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.input.WirelessKeyboardMouseShare.2
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                ToastDialog toastDialog2;
-                AlertDialog alertDialog;
-                BluetoothDevice bluetoothDevice;
-                String action = intent.getAction();
-                if (!"android.bluetooth.adapter.action.STATE_CHANGED".equals(action)) {
-                    if (!"android.bluetooth.device.action.PAIRING_REQUEST".equals(action) || (alertDialog = (toastDialog2 = WirelessKeyboardMouseShare.this.mToastDialog).mAlertDialog) == null) {
-                        return;
-                    }
-                    alertDialog.dismiss();
-                    toastDialog2.mAlertDialog = null;
-                    return;
-                }
-                int intExtra = intent.getIntExtra("android.bluetooth.adapter.extra.STATE", Integer.MIN_VALUE);
-                if (!WirelessKeyboardMouseShare.this.mInitialized && BluetoothAdapter.getDefaultAdapter().isEnabled()) {
-                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare = WirelessKeyboardMouseShare.this;
-                    if (wirelessKeyboardMouseShare.mAdapter == null) {
-                        wirelessKeyboardMouseShare.mAdapter = BluetoothAdapter.getDefaultAdapter();
-                    }
-                    Slog.d("WirelessKeyboardMouseShare", "BluetoothAdapter.ACTION_STATE_CHANGED enabled, initailizing");
-                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare2 = WirelessKeyboardMouseShare.this;
-                    String stringForUser = Settings.Secure.getStringForUser(wirelessKeyboardMouseShare2.mContext.getContentResolver(), "wireless_keyboard_setting_repository", 0);
-                    if (!TextUtils.isEmpty(stringForUser)) {
-                        Slog.d("WirelessKeyboardMouseShare", "initializing : " + stringForUser);
-                        String[] split = stringForUser.split("/");
-                        if (!TextUtils.isEmpty(split[2]) || split.length >= 3) {
-                            String[] split2 = split[2].split(",");
-                            for (int i = 1; i < 4 && i < split2.length + 1; i++) {
-                                String str = split2[i - 1];
-                                if (str == "" || TextUtils.isEmpty(str)) {
-                                    wirelessKeyboardMouseShare2.mPairedDevices[i] = null;
-                                } else {
-                                    BluetoothDevice[] bluetoothDeviceArr2 = wirelessKeyboardMouseShare2.mPairedDevices;
-                                    Iterator<BluetoothDevice> it = wirelessKeyboardMouseShare2.mAdapter.getBondedDevices().iterator();
-                                    while (true) {
-                                        if (!it.hasNext()) {
-                                            BinaryTransparencyService$$ExternalSyntheticOutline0.m("not exist bonded device : ", str, "WirelessKeyboardMouseShare");
-                                            bluetoothDevice = null;
-                                            break;
-                                        }
-                                        bluetoothDevice = it.next();
-                                        Slog.d("WirelessKeyboardMouseShare", "bonded bt device : " + bluetoothDevice.toString());
-                                        if (bluetoothDevice.getAddress().equals(str)) {
-                                            break;
-                                        }
-                                    }
-                                    bluetoothDeviceArr2[i] = bluetoothDevice;
-                                }
-                            }
-                        }
-                    }
-                    WirelessKeyboardMouseShare.this.sendMessageStatus();
-                    WirelessKeyboardMouseShare.this.mInitialized = true;
-                }
-                if (intExtra == 12) {
-                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare3 = WirelessKeyboardMouseShare.this;
-                    if (wirelessKeyboardMouseShare3.mNeedToTurnOnBT) {
-                        wirelessKeyboardMouseShare3.mNeedToTurnOnBT = false;
-                        wirelessKeyboardMouseShare3.mNotiTurnOnBT = true;
-                        wirelessKeyboardMouseShare3.startHIDDevice();
-                        WirelessKeyboardMouseShare.this.sendMessageStatus();
-                        return;
-                    }
-                }
-                if (intExtra == 10) {
-                    WirelessKeyboardMouseShare.this.stopHIDDevice();
-                }
-            }
-        };
-        this.mServiceListener = new BluetoothProfile.ServiceListener() { // from class: com.android.server.input.WirelessKeyboardMouseShare.3
-            @Override // android.bluetooth.BluetoothProfile.ServiceListener
-            public final void onServiceConnected(int i, BluetoothProfile bluetoothProfile) {
-                if (i != 19) {
-                    return;
-                }
-                Slog.d("WirelessKeyboardMouseShare", "Profile proxy connected");
-                WirelessKeyboardMouseShare wirelessKeyboardMouseShare = WirelessKeyboardMouseShare.this;
-                wirelessKeyboardMouseShare.mHidDevice = (BluetoothHidDevice) bluetoothProfile;
-                wirelessKeyboardMouseShare.mHandler.obtainMessage(1).sendToTarget();
-            }
-
-            @Override // android.bluetooth.BluetoothProfile.ServiceListener
-            public final void onServiceDisconnected(int i) {
-                if (i != 19) {
-                    return;
-                }
-                Slog.d("WirelessKeyboardMouseShare", "Profile proxy disconnected");
-            }
-        };
-        this.mCallback = new BluetoothHidDevice.Callback() { // from class: com.android.server.input.WirelessKeyboardMouseShare.4
-            @Override // android.bluetooth.BluetoothHidDevice.Callback
-            public final void onAppStatusChanged(BluetoothDevice bluetoothDevice, boolean z) {
-                StringBuilder sb = new StringBuilder("onAppStatusChanged: pluggedDevice=");
-                sb.append(bluetoothDevice == null ? null : bluetoothDevice.toString());
-                sb.append(" registered=");
-                sb.append(z);
-                Slog.d("WirelessKeyboardMouseShare", sb.toString());
-                synchronized (WirelessKeyboardMouseShare.this.innerLock) {
-                    try {
-                        if (z) {
-                            WirelessKeyboardMouseShare.this.mHandler.obtainMessage(5).sendToTarget();
-                        } else {
-                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare = WirelessKeyboardMouseShare.this;
-                            wirelessKeyboardMouseShare.mPluggedDevice = null;
-                            wirelessKeyboardMouseShare.mHandler.obtainMessage(6, wirelessKeyboardMouseShare.setToLocalTablet(true) ? 1 : 0, 0).sendToTarget();
-                        }
-                        WirelessKeyboardMouseShare.this.sendMessageStatus();
-                    } catch (Throwable th) {
-                        throw th;
-                    }
-                }
-            }
-
-            @Override // android.bluetooth.BluetoothHidDevice.Callback
-            public final void onConnectionStateChanged(BluetoothDevice bluetoothDevice, int i) {
-                int i2;
-                StringBuilder sb = new StringBuilder("onConnectionStateChanged: device=");
-                sb.append(bluetoothDevice == null ? null : bluetoothDevice.toString());
-                sb.append(" state=");
-                sb.append(i);
-                Slog.d("WirelessKeyboardMouseShare", sb.toString());
-                synchronized (WirelessKeyboardMouseShare.this.innerLock) {
-                    try {
-                        if (bluetoothDevice == null) {
-                            return;
-                        }
-                        if (i == 2) {
-                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare = WirelessKeyboardMouseShare.this;
-                            int i3 = 4;
-                            if (wirelessKeyboardMouseShare.mAddIndex == 4) {
-                                synchronized (wirelessKeyboardMouseShare.innerLock) {
-                                    int i4 = 1;
-                                    while (true) {
-                                        if (i4 >= 4) {
-                                            break;
-                                        }
-                                        try {
-                                            if (wirelessKeyboardMouseShare.mPairedDevices[i4] == null) {
-                                                i3 = i4;
-                                                break;
-                                            }
-                                            i4++;
-                                        } finally {
-                                        }
-                                    }
-                                }
-                                wirelessKeyboardMouseShare.mAddIndex = i3;
-                            }
-                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare2 = WirelessKeyboardMouseShare.this;
-                            i2 = WirelessKeyboardMouseShare.m585$$Nest$maddPairedDevicesListLocked(wirelessKeyboardMouseShare2, bluetoothDevice, wirelessKeyboardMouseShare2.mAddIndex);
-                            if (i2 == 0) {
-                                WirelessKeyboardMouseShare.this.disconnectBT(bluetoothDevice);
-                                bluetoothDevice.removeBond();
-                                WirelessKeyboardMouseShare.this.sendMessageStatus();
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare3 = WirelessKeyboardMouseShare.this;
-                                if (wirelessKeyboardMouseShare3.existBluetoothDeviceLocked(wirelessKeyboardMouseShare3.mFocusedDevice)) {
-                                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare4 = WirelessKeyboardMouseShare.this;
-                                    wirelessKeyboardMouseShare4.sendMessageConnectDeviceLocked(wirelessKeyboardMouseShare4.mFocusedDevice);
-                                }
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.input.WirelessKeyboardMouseShare.2
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        ToastDialog toastDialog2;
+                        AlertDialog alertDialog;
+                        BluetoothDevice bluetoothDevice;
+                        String action = intent.getAction();
+                        if (!"android.bluetooth.adapter.action.STATE_CHANGED".equals(action)) {
+                            if (!"android.bluetooth.device.action.PAIRING_REQUEST".equals(action)
+                                    || (alertDialog =
+                                                    (toastDialog2 =
+                                                                    WirelessKeyboardMouseShare.this
+                                                                            .mToastDialog)
+                                                            .mAlertDialog)
+                                            == null) {
                                 return;
                             }
-                        } else {
-                            i2 = 0;
+                            alertDialog.dismiss();
+                            toastDialog2.mAlertDialog = null;
+                            return;
                         }
-                        WirelessKeyboardMouseShare wirelessKeyboardMouseShare5 = WirelessKeyboardMouseShare.this;
-                        wirelessKeyboardMouseShare5.mConnectionState = i;
-                        if (i == 2) {
-                            wirelessKeyboardMouseShare5.mHandler.obtainMessage(2).sendToTarget();
-                            if (!bluetoothDevice.equals(WirelessKeyboardMouseShare.this.mPluggedDevice)) {
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare6 = WirelessKeyboardMouseShare.this;
-                                wirelessKeyboardMouseShare6.mPluggedDevice = bluetoothDevice;
-                                wirelessKeyboardMouseShare6.mLastestConnectedName = bluetoothDevice.getName();
-                                Slog.d("WirelessKeyboardMouseShare", "mPluggedDevice is " + bluetoothDevice.toString());
+                        int intExtra =
+                                intent.getIntExtra(
+                                        "android.bluetooth.adapter.extra.STATE", Integer.MIN_VALUE);
+                        if (!WirelessKeyboardMouseShare.this.mInitialized
+                                && BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare =
+                                    WirelessKeyboardMouseShare.this;
+                            if (wirelessKeyboardMouseShare.mAdapter == null) {
+                                wirelessKeyboardMouseShare.mAdapter =
+                                        BluetoothAdapter.getDefaultAdapter();
                             }
-                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare7 = WirelessKeyboardMouseShare.this;
-                            wirelessKeyboardMouseShare7.mFocusedDevice = bluetoothDevice;
-                            wirelessKeyboardMouseShare7.mToLocalTablet = false;
-                            wirelessKeyboardMouseShare7.mHandler.obtainMessage(6, 0, 0).sendToTarget();
-                            WirelessKeyboardMouseShare.this.sendMessageStatus();
-                            if (i2 == 2) {
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare8 = WirelessKeyboardMouseShare.this;
-                                wirelessKeyboardMouseShare8.mFinishNewDevice = true;
-                                wirelessKeyboardMouseShare8.sendMessageMCF();
-                            }
-                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare9 = WirelessKeyboardMouseShare.this;
-                            wirelessKeyboardMouseShare9.mUnregisterWhenConnectionFail = false;
-                            if (wirelessKeyboardMouseShare9.mHandler.hasMessages(11)) {
-                                WirelessKeyboardMouseShare.this.mHandler.removeMessages(11);
-                            }
-                        } else {
-                            if (i == 0) {
-                                if (!wirelessKeyboardMouseShare5.mToLocalTablet) {
-                                    wirelessKeyboardMouseShare5.mKeyboard.clear(false);
-                                    WirelessKeyboardMouseShare.this.mMouse.clear(false);
-                                }
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare10 = WirelessKeyboardMouseShare.this;
-                                if (!wirelessKeyboardMouseShare10.mDisconnectWithoutUnregister) {
-                                    BluetoothDevice bluetoothDevice2 = wirelessKeyboardMouseShare10.mPluggedDevice;
-                                    if (bluetoothDevice2 == null || !bluetoothDevice2.equals(bluetoothDevice)) {
-                                        if (WirelessKeyboardMouseShare.this.mHandler.hasMessages(11)) {
-                                            WirelessKeyboardMouseShare.this.mHandler.removeMessages(11);
+                            Slog.d(
+                                    "WirelessKeyboardMouseShare",
+                                    "BluetoothAdapter.ACTION_STATE_CHANGED enabled, initailizing");
+                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare2 =
+                                    WirelessKeyboardMouseShare.this;
+                            String stringForUser =
+                                    Settings.Secure.getStringForUser(
+                                            wirelessKeyboardMouseShare2.mContext
+                                                    .getContentResolver(),
+                                            "wireless_keyboard_setting_repository",
+                                            0);
+                            if (!TextUtils.isEmpty(stringForUser)) {
+                                Slog.d(
+                                        "WirelessKeyboardMouseShare",
+                                        "initializing : " + stringForUser);
+                                String[] split = stringForUser.split("/");
+                                if (!TextUtils.isEmpty(split[2]) || split.length >= 3) {
+                                    String[] split2 = split[2].split(",");
+                                    for (int i = 1; i < 4 && i < split2.length + 1; i++) {
+                                        String str = split2[i - 1];
+                                        if (str == "" || TextUtils.isEmpty(str)) {
+                                            wirelessKeyboardMouseShare2.mPairedDevices[i] = null;
+                                        } else {
+                                            BluetoothDevice[] bluetoothDeviceArr2 =
+                                                    wirelessKeyboardMouseShare2.mPairedDevices;
+                                            Iterator<BluetoothDevice> it =
+                                                    wirelessKeyboardMouseShare2
+                                                            .mAdapter
+                                                            .getBondedDevices()
+                                                            .iterator();
+                                            while (true) {
+                                                if (!it.hasNext()) {
+                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                            .m(
+                                                                    "not exist bonded device : ",
+                                                                    str,
+                                                                    "WirelessKeyboardMouseShare");
+                                                    bluetoothDevice = null;
+                                                    break;
+                                                }
+                                                bluetoothDevice = it.next();
+                                                Slog.d(
+                                                        "WirelessKeyboardMouseShare",
+                                                        "bonded bt device : "
+                                                                + bluetoothDevice.toString());
+                                                if (bluetoothDevice.getAddress().equals(str)) {
+                                                    break;
+                                                }
+                                            }
+                                            bluetoothDeviceArr2[i] = bluetoothDevice;
                                         }
-                                        WirelessKeyboardMouseShare wirelessKeyboardMouseShare11 = WirelessKeyboardMouseShare.this;
-                                        wirelessKeyboardMouseShare11.mUnregisterWhenConnectionFail = true;
-                                        WirelessKeyboardMouseShare.this.mHandler.sendMessageDelayed(wirelessKeyboardMouseShare11.mHandler.obtainMessage(11), 5000L);
-                                    } else {
-                                        WirelessKeyboardMouseShare.this.stopHIDDevice();
                                     }
                                 }
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare12 = WirelessKeyboardMouseShare.this;
-                                wirelessKeyboardMouseShare12.mDisconnectWithoutUnregister = false;
-                                wirelessKeyboardMouseShare12.mToLocalTablet = true;
-                                wirelessKeyboardMouseShare12.mPluggedDevice = null;
-                                wirelessKeyboardMouseShare12.mHandler.obtainMessage(6, 1, 0).sendToTarget();
-                                WirelessKeyboardMouseShare.this.sendMessageStatus();
                             }
-                            WirelessKeyboardMouseShare.this.getClass();
+                            WirelessKeyboardMouseShare.this.sendMessageStatus();
+                            WirelessKeyboardMouseShare.this.mInitialized = true;
                         }
-                        if (InputRune.IFW_WIRELESS_KEYBOARD_SA_LOGGING && i == 2) {
-                            for (int i5 = 1; i5 <= 3; i5++) {
-                                BluetoothDevice bluetoothDevice3 = WirelessKeyboardMouseShare.this.mPairedDevices[i5];
-                                if (bluetoothDevice3 != null && bluetoothDevice.equals(bluetoothDevice3)) {
-                                    if (((HashMap) WirelessKeyboardMouseShare.this.mLogInfos).get(Integer.valueOf(i5)) == null) {
-                                        ((HashMap) WirelessKeyboardMouseShare.this.mLogInfos).put(Integer.valueOf(i5), 1);
-                                        return;
-                                    }
-                                    ((HashMap) WirelessKeyboardMouseShare.this.mLogInfos).put(Integer.valueOf(i5), Integer.valueOf(((Integer) ((HashMap) WirelessKeyboardMouseShare.this.mLogInfos).get(Integer.valueOf(i5))).intValue() + 1));
+                        if (intExtra == 12) {
+                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare3 =
+                                    WirelessKeyboardMouseShare.this;
+                            if (wirelessKeyboardMouseShare3.mNeedToTurnOnBT) {
+                                wirelessKeyboardMouseShare3.mNeedToTurnOnBT = false;
+                                wirelessKeyboardMouseShare3.mNotiTurnOnBT = true;
+                                wirelessKeyboardMouseShare3.startHIDDevice();
+                                WirelessKeyboardMouseShare.this.sendMessageStatus();
+                                return;
+                            }
+                        }
+                        if (intExtra == 10) {
+                            WirelessKeyboardMouseShare.this.stopHIDDevice();
+                        }
+                    }
+                };
+        this.mServiceListener =
+                new BluetoothProfile
+                        .ServiceListener() { // from class:
+                                             // com.android.server.input.WirelessKeyboardMouseShare.3
+                    @Override // android.bluetooth.BluetoothProfile.ServiceListener
+                    public final void onServiceConnected(int i, BluetoothProfile bluetoothProfile) {
+                        if (i != 19) {
+                            return;
+                        }
+                        Slog.d("WirelessKeyboardMouseShare", "Profile proxy connected");
+                        WirelessKeyboardMouseShare wirelessKeyboardMouseShare =
+                                WirelessKeyboardMouseShare.this;
+                        wirelessKeyboardMouseShare.mHidDevice =
+                                (BluetoothHidDevice) bluetoothProfile;
+                        wirelessKeyboardMouseShare.mHandler.obtainMessage(1).sendToTarget();
+                    }
+
+                    @Override // android.bluetooth.BluetoothProfile.ServiceListener
+                    public final void onServiceDisconnected(int i) {
+                        if (i != 19) {
+                            return;
+                        }
+                        Slog.d("WirelessKeyboardMouseShare", "Profile proxy disconnected");
+                    }
+                };
+        this.mCallback =
+                new BluetoothHidDevice.Callback() { // from class:
+                    // com.android.server.input.WirelessKeyboardMouseShare.4
+                    @Override // android.bluetooth.BluetoothHidDevice.Callback
+                    public final void onAppStatusChanged(
+                            BluetoothDevice bluetoothDevice, boolean z) {
+                        StringBuilder sb = new StringBuilder("onAppStatusChanged: pluggedDevice=");
+                        sb.append(bluetoothDevice == null ? null : bluetoothDevice.toString());
+                        sb.append(" registered=");
+                        sb.append(z);
+                        Slog.d("WirelessKeyboardMouseShare", sb.toString());
+                        synchronized (WirelessKeyboardMouseShare.this.innerLock) {
+                            try {
+                                if (z) {
+                                    WirelessKeyboardMouseShare.this
+                                            .mHandler
+                                            .obtainMessage(5)
+                                            .sendToTarget();
+                                } else {
+                                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare =
+                                            WirelessKeyboardMouseShare.this;
+                                    wirelessKeyboardMouseShare.mPluggedDevice = null;
+                                    wirelessKeyboardMouseShare
+                                            .mHandler
+                                            .obtainMessage(
+                                                    6,
+                                                    wirelessKeyboardMouseShare.setToLocalTablet(
+                                                                    true)
+                                                            ? 1
+                                                            : 0,
+                                                    0)
+                                            .sendToTarget();
+                                }
+                                WirelessKeyboardMouseShare.this.sendMessageStatus();
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                    }
+
+                    @Override // android.bluetooth.BluetoothHidDevice.Callback
+                    public final void onConnectionStateChanged(
+                            BluetoothDevice bluetoothDevice, int i) {
+                        int i2;
+                        StringBuilder sb = new StringBuilder("onConnectionStateChanged: device=");
+                        sb.append(bluetoothDevice == null ? null : bluetoothDevice.toString());
+                        sb.append(" state=");
+                        sb.append(i);
+                        Slog.d("WirelessKeyboardMouseShare", sb.toString());
+                        synchronized (WirelessKeyboardMouseShare.this.innerLock) {
+                            try {
+                                if (bluetoothDevice == null) {
                                     return;
                                 }
+                                if (i == 2) {
+                                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare =
+                                            WirelessKeyboardMouseShare.this;
+                                    int i3 = 4;
+                                    if (wirelessKeyboardMouseShare.mAddIndex == 4) {
+                                        synchronized (wirelessKeyboardMouseShare.innerLock) {
+                                            int i4 = 1;
+                                            while (true) {
+                                                if (i4 >= 4) {
+                                                    break;
+                                                }
+                                                try {
+                                                    if (wirelessKeyboardMouseShare
+                                                                    .mPairedDevices[i4]
+                                                            == null) {
+                                                        i3 = i4;
+                                                        break;
+                                                    }
+                                                    i4++;
+                                                } finally {
+                                                }
+                                            }
+                                        }
+                                        wirelessKeyboardMouseShare.mAddIndex = i3;
+                                    }
+                                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare2 =
+                                            WirelessKeyboardMouseShare.this;
+                                    i2 =
+                                            WirelessKeyboardMouseShare
+                                                    .m585$$Nest$maddPairedDevicesListLocked(
+                                                            wirelessKeyboardMouseShare2,
+                                                            bluetoothDevice,
+                                                            wirelessKeyboardMouseShare2.mAddIndex);
+                                    if (i2 == 0) {
+                                        WirelessKeyboardMouseShare.this.disconnectBT(
+                                                bluetoothDevice);
+                                        bluetoothDevice.removeBond();
+                                        WirelessKeyboardMouseShare.this.sendMessageStatus();
+                                        WirelessKeyboardMouseShare wirelessKeyboardMouseShare3 =
+                                                WirelessKeyboardMouseShare.this;
+                                        if (wirelessKeyboardMouseShare3.existBluetoothDeviceLocked(
+                                                wirelessKeyboardMouseShare3.mFocusedDevice)) {
+                                            WirelessKeyboardMouseShare wirelessKeyboardMouseShare4 =
+                                                    WirelessKeyboardMouseShare.this;
+                                            wirelessKeyboardMouseShare4
+                                                    .sendMessageConnectDeviceLocked(
+                                                            wirelessKeyboardMouseShare4
+                                                                    .mFocusedDevice);
+                                        }
+                                        return;
+                                    }
+                                } else {
+                                    i2 = 0;
+                                }
+                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare5 =
+                                        WirelessKeyboardMouseShare.this;
+                                wirelessKeyboardMouseShare5.mConnectionState = i;
+                                if (i == 2) {
+                                    wirelessKeyboardMouseShare5
+                                            .mHandler
+                                            .obtainMessage(2)
+                                            .sendToTarget();
+                                    if (!bluetoothDevice.equals(
+                                            WirelessKeyboardMouseShare.this.mPluggedDevice)) {
+                                        WirelessKeyboardMouseShare wirelessKeyboardMouseShare6 =
+                                                WirelessKeyboardMouseShare.this;
+                                        wirelessKeyboardMouseShare6.mPluggedDevice =
+                                                bluetoothDevice;
+                                        wirelessKeyboardMouseShare6.mLastestConnectedName =
+                                                bluetoothDevice.getName();
+                                        Slog.d(
+                                                "WirelessKeyboardMouseShare",
+                                                "mPluggedDevice is " + bluetoothDevice.toString());
+                                    }
+                                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare7 =
+                                            WirelessKeyboardMouseShare.this;
+                                    wirelessKeyboardMouseShare7.mFocusedDevice = bluetoothDevice;
+                                    wirelessKeyboardMouseShare7.mToLocalTablet = false;
+                                    wirelessKeyboardMouseShare7
+                                            .mHandler
+                                            .obtainMessage(6, 0, 0)
+                                            .sendToTarget();
+                                    WirelessKeyboardMouseShare.this.sendMessageStatus();
+                                    if (i2 == 2) {
+                                        WirelessKeyboardMouseShare wirelessKeyboardMouseShare8 =
+                                                WirelessKeyboardMouseShare.this;
+                                        wirelessKeyboardMouseShare8.mFinishNewDevice = true;
+                                        wirelessKeyboardMouseShare8.sendMessageMCF();
+                                    }
+                                    WirelessKeyboardMouseShare wirelessKeyboardMouseShare9 =
+                                            WirelessKeyboardMouseShare.this;
+                                    wirelessKeyboardMouseShare9.mUnregisterWhenConnectionFail =
+                                            false;
+                                    if (wirelessKeyboardMouseShare9.mHandler.hasMessages(11)) {
+                                        WirelessKeyboardMouseShare.this.mHandler.removeMessages(11);
+                                    }
+                                } else {
+                                    if (i == 0) {
+                                        if (!wirelessKeyboardMouseShare5.mToLocalTablet) {
+                                            wirelessKeyboardMouseShare5.mKeyboard.clear(false);
+                                            WirelessKeyboardMouseShare.this.mMouse.clear(false);
+                                        }
+                                        WirelessKeyboardMouseShare wirelessKeyboardMouseShare10 =
+                                                WirelessKeyboardMouseShare.this;
+                                        if (!wirelessKeyboardMouseShare10
+                                                .mDisconnectWithoutUnregister) {
+                                            BluetoothDevice bluetoothDevice2 =
+                                                    wirelessKeyboardMouseShare10.mPluggedDevice;
+                                            if (bluetoothDevice2 == null
+                                                    || !bluetoothDevice2.equals(bluetoothDevice)) {
+                                                if (WirelessKeyboardMouseShare.this.mHandler
+                                                        .hasMessages(11)) {
+                                                    WirelessKeyboardMouseShare.this.mHandler
+                                                            .removeMessages(11);
+                                                }
+                                                WirelessKeyboardMouseShare
+                                                        wirelessKeyboardMouseShare11 =
+                                                                WirelessKeyboardMouseShare.this;
+                                                wirelessKeyboardMouseShare11
+                                                                .mUnregisterWhenConnectionFail =
+                                                        true;
+                                                WirelessKeyboardMouseShare.this.mHandler
+                                                        .sendMessageDelayed(
+                                                                wirelessKeyboardMouseShare11
+                                                                        .mHandler.obtainMessage(11),
+                                                                5000L);
+                                            } else {
+                                                WirelessKeyboardMouseShare.this.stopHIDDevice();
+                                            }
+                                        }
+                                        WirelessKeyboardMouseShare wirelessKeyboardMouseShare12 =
+                                                WirelessKeyboardMouseShare.this;
+                                        wirelessKeyboardMouseShare12.mDisconnectWithoutUnregister =
+                                                false;
+                                        wirelessKeyboardMouseShare12.mToLocalTablet = true;
+                                        wirelessKeyboardMouseShare12.mPluggedDevice = null;
+                                        wirelessKeyboardMouseShare12
+                                                .mHandler
+                                                .obtainMessage(6, 1, 0)
+                                                .sendToTarget();
+                                        WirelessKeyboardMouseShare.this.sendMessageStatus();
+                                    }
+                                    WirelessKeyboardMouseShare.this.getClass();
+                                }
+                                if (InputRune.IFW_WIRELESS_KEYBOARD_SA_LOGGING && i == 2) {
+                                    for (int i5 = 1; i5 <= 3; i5++) {
+                                        BluetoothDevice bluetoothDevice3 =
+                                                WirelessKeyboardMouseShare.this.mPairedDevices[i5];
+                                        if (bluetoothDevice3 != null
+                                                && bluetoothDevice.equals(bluetoothDevice3)) {
+                                            if (((HashMap)
+                                                                    WirelessKeyboardMouseShare.this
+                                                                            .mLogInfos)
+                                                            .get(Integer.valueOf(i5))
+                                                    == null) {
+                                                ((HashMap)
+                                                                WirelessKeyboardMouseShare.this
+                                                                        .mLogInfos)
+                                                        .put(Integer.valueOf(i5), 1);
+                                                return;
+                                            }
+                                            ((HashMap) WirelessKeyboardMouseShare.this.mLogInfos)
+                                                    .put(
+                                                            Integer.valueOf(i5),
+                                                            Integer.valueOf(
+                                                                    ((Integer)
+                                                                                            ((HashMap)
+                                                                                                            WirelessKeyboardMouseShare
+                                                                                                                    .this
+                                                                                                                    .mLogInfos)
+                                                                                                    .get(
+                                                                                                            Integer
+                                                                                                                    .valueOf(
+                                                                                                                            i5)))
+                                                                                    .intValue()
+                                                                            + 1));
+                                            return;
+                                        }
+                                    }
+                                }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
 
-            @Override // android.bluetooth.BluetoothHidDevice.Callback
-            public final void onGetReport(BluetoothDevice bluetoothDevice, byte b, byte b2, int i) {
-                if (b == 1) {
-                    WirelessKeyboardMouseShare.this.mHandler.obtainMessage(3, b2, i).sendToTarget();
-                    return;
-                }
-                if (b != 2) {
-                    Log.v("WirelessKeyboardMouseShare", "onGetReport(), unsupported report type = " + ((int) b));
-                    WirelessKeyboardMouseShare.this.mHidDevice.reportError(bluetoothDevice, (byte) 3);
-                    return;
-                }
-                if (b2 != 1) {
-                    Log.v("WirelessKeyboardMouseShare", "onGetReport(), output report for invalid id = " + ((int) b2));
-                    WirelessKeyboardMouseShare.this.mHidDevice.reportError(bluetoothDevice, (byte) 2);
-                    return;
-                }
-                ReportData reportData = (ReportData) WirelessKeyboardMouseShare.this.mOutputReportCache.get(b2);
-                if (reportData != null) {
-                    WirelessKeyboardMouseShare.this.mHidDevice.replyReport(bluetoothDevice, (byte) 2, b2, reportData.data);
-                    return;
-                }
-                byte[] bArr = new byte[8];
-                Log.v("WirelessKeyboardMouseShare", "get_report id for keyboard");
-                for (int i2 = 0; i2 < 8; i2++) {
-                    bArr[i2] = 0;
-                }
-                WirelessKeyboardMouseShare.this.mHidDevice.replyReport(bluetoothDevice, (byte) 2, b2, bArr);
-            }
+                    @Override // android.bluetooth.BluetoothHidDevice.Callback
+                    public final void onGetReport(
+                            BluetoothDevice bluetoothDevice, byte b, byte b2, int i) {
+                        if (b == 1) {
+                            WirelessKeyboardMouseShare.this
+                                    .mHandler
+                                    .obtainMessage(3, b2, i)
+                                    .sendToTarget();
+                            return;
+                        }
+                        if (b != 2) {
+                            Log.v(
+                                    "WirelessKeyboardMouseShare",
+                                    "onGetReport(), unsupported report type = " + ((int) b));
+                            WirelessKeyboardMouseShare.this.mHidDevice.reportError(
+                                    bluetoothDevice, (byte) 3);
+                            return;
+                        }
+                        if (b2 != 1) {
+                            Log.v(
+                                    "WirelessKeyboardMouseShare",
+                                    "onGetReport(), output report for invalid id = " + ((int) b2));
+                            WirelessKeyboardMouseShare.this.mHidDevice.reportError(
+                                    bluetoothDevice, (byte) 2);
+                            return;
+                        }
+                        ReportData reportData =
+                                (ReportData)
+                                        WirelessKeyboardMouseShare.this.mOutputReportCache.get(b2);
+                        if (reportData != null) {
+                            WirelessKeyboardMouseShare.this.mHidDevice.replyReport(
+                                    bluetoothDevice, (byte) 2, b2, reportData.data);
+                            return;
+                        }
+                        byte[] bArr = new byte[8];
+                        Log.v("WirelessKeyboardMouseShare", "get_report id for keyboard");
+                        for (int i2 = 0; i2 < 8; i2++) {
+                            bArr[i2] = 0;
+                        }
+                        WirelessKeyboardMouseShare.this.mHidDevice.replyReport(
+                                bluetoothDevice, (byte) 2, b2, bArr);
+                    }
 
-            @Override // android.bluetooth.BluetoothHidDevice.Callback
-            public final void onInterruptData(BluetoothDevice bluetoothDevice, byte b, byte[] bArr) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(b, "intr data: reportId=", " data=");
-                m.append(Arrays.toString(bArr));
-                Slog.d("WirelessKeyboardMouseShare", m.toString());
-            }
+                    @Override // android.bluetooth.BluetoothHidDevice.Callback
+                    public final void onInterruptData(
+                            BluetoothDevice bluetoothDevice, byte b, byte[] bArr) {
+                        StringBuilder m =
+                                BatteryService$$ExternalSyntheticOutline0.m(
+                                        b, "intr data: reportId=", " data=");
+                        m.append(Arrays.toString(bArr));
+                        Slog.d("WirelessKeyboardMouseShare", m.toString());
+                    }
 
-            @Override // android.bluetooth.BluetoothHidDevice.Callback
-            public final void onSetProtocol(BluetoothDevice bluetoothDevice, byte b) {
-                AnyMotionDetector$$ExternalSyntheticOutline0.m(b, "protocol set to ", "WirelessKeyboardMouseShare");
-                WirelessKeyboardMouseShare.this.getClass();
-            }
+                    @Override // android.bluetooth.BluetoothHidDevice.Callback
+                    public final void onSetProtocol(BluetoothDevice bluetoothDevice, byte b) {
+                        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                                b, "protocol set to ", "WirelessKeyboardMouseShare");
+                        WirelessKeyboardMouseShare.this.getClass();
+                    }
 
-            @Override // android.bluetooth.BluetoothHidDevice.Callback
-            public final void onSetReport(BluetoothDevice bluetoothDevice, byte b, byte b2, byte[] bArr) {
-                if (b != 2) {
-                    Log.v("WirelessKeyboardMouseShare", "onSetReport(), unsupported report type = " + ((int) b));
-                    WirelessKeyboardMouseShare.this.mHidDevice.reportError(bluetoothDevice, (byte) 3);
-                    return;
-                }
-                if (b2 == 1) {
-                    WirelessKeyboardMouseShare.this.mHandler.obtainMessage(4, b2, 0, ByteBuffer.wrap(bArr)).sendToTarget();
-                } else if (b2 != 2) {
-                    WirelessKeyboardMouseShare.this.mHidDevice.reportError(bluetoothDevice, (byte) 2);
-                } else {
-                    Log.v("WirelessKeyboardMouseShare", "onSetReport(), mouse report id, sending successful handshake for set report");
-                    WirelessKeyboardMouseShare.this.mHidDevice.reportError(bluetoothDevice, (byte) 0);
-                }
-            }
+                    @Override // android.bluetooth.BluetoothHidDevice.Callback
+                    public final void onSetReport(
+                            BluetoothDevice bluetoothDevice, byte b, byte b2, byte[] bArr) {
+                        if (b != 2) {
+                            Log.v(
+                                    "WirelessKeyboardMouseShare",
+                                    "onSetReport(), unsupported report type = " + ((int) b));
+                            WirelessKeyboardMouseShare.this.mHidDevice.reportError(
+                                    bluetoothDevice, (byte) 3);
+                            return;
+                        }
+                        if (b2 == 1) {
+                            WirelessKeyboardMouseShare.this
+                                    .mHandler
+                                    .obtainMessage(4, b2, 0, ByteBuffer.wrap(bArr))
+                                    .sendToTarget();
+                        } else if (b2 != 2) {
+                            WirelessKeyboardMouseShare.this.mHidDevice.reportError(
+                                    bluetoothDevice, (byte) 2);
+                        } else {
+                            Log.v(
+                                    "WirelessKeyboardMouseShare",
+                                    "onSetReport(), mouse report id, sending successful handshake"
+                                        + " for set report");
+                            WirelessKeyboardMouseShare.this.mHidDevice.reportError(
+                                    bluetoothDevice, (byte) 0);
+                        }
+                    }
 
-            @Override // android.bluetooth.BluetoothHidDevice.Callback
-            public final void onVirtualCableUnplug(BluetoothDevice bluetoothDevice) {
-                synchronized (WirelessKeyboardMouseShare.this.innerLock) {
-                    WirelessKeyboardMouseShare.this.mPluggedDevice = null;
-                    Slog.d("WirelessKeyboardMouseShare", "onVirtualCableUnplug mPluggedDevice is null");
-                }
-            }
-        };
+                    @Override // android.bluetooth.BluetoothHidDevice.Callback
+                    public final void onVirtualCableUnplug(BluetoothDevice bluetoothDevice) {
+                        synchronized (WirelessKeyboardMouseShare.this.innerLock) {
+                            WirelessKeyboardMouseShare.this.mPluggedDevice = null;
+                            Slog.d(
+                                    "WirelessKeyboardMouseShare",
+                                    "onVirtualCableUnplug mPluggedDevice is null");
+                        }
+                    }
+                };
         this.mContext = context;
-        WirelessKeyboardMouseShareHandler wirelessKeyboardMouseShareHandler = new WirelessKeyboardMouseShareHandler(DisplayThread.get().getLooper());
+        WirelessKeyboardMouseShareHandler wirelessKeyboardMouseShareHandler =
+                new WirelessKeyboardMouseShareHandler(DisplayThread.get().getLooper());
         this.mHandler = wirelessKeyboardMouseShareHandler;
         this.innerLock = obj;
         this.mInputManager = inputManagerService;
@@ -738,7 +1023,13 @@ public final class WirelessKeyboardMouseShare {
         }
         Arrays.fill(bluetoothDeviceArr, (Object) null);
         this.mInitialized = false;
-        context.registerReceiver(broadcastReceiver, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("android.bluetooth.adapter.action.STATE_CHANGED", "android.bluetooth.device.action.PAIRING_REQUEST"), null, wirelessKeyboardMouseShareHandler);
+        context.registerReceiver(
+                broadcastReceiver,
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        "android.bluetooth.adapter.action.STATE_CHANGED",
+                        "android.bluetooth.device.action.PAIRING_REQUEST"),
+                null,
+                wirelessKeyboardMouseShareHandler);
     }
 
     public final boolean addDevice(int i) {
@@ -751,11 +1042,15 @@ public final class WirelessKeyboardMouseShare {
                 }
                 this.mAddIndex = i;
                 if (this.mPairedDevices[i] != null) {
-                    Slog.d("WirelessKeyboardMouseShare", "not empty slot" + i + " " + this.mPairedDevices[i].toString());
+                    Slog.d(
+                            "WirelessKeyboardMouseShare",
+                            "not empty slot" + i + " " + this.mPairedDevices[i].toString());
                     sendMessageStatus();
                     return false;
                 }
-                if (this.mHidDevice != null && (bluetoothDevice = this.mPluggedDevice) != null && bluetoothDevice.isConnected()) {
+                if (this.mHidDevice != null
+                        && (bluetoothDevice = this.mPluggedDevice) != null
+                        && bluetoothDevice.isConnected()) {
                     disconnectBTWithoutUnregister(this.mPluggedDevice);
                 }
                 this.mPairedDevices[i] = null;
@@ -781,8 +1076,10 @@ public final class WirelessKeyboardMouseShare {
         BluetoothDevice bluetoothDevice;
         synchronized (this.innerLock) {
             try {
-                BluetoothDevice findBluetoothDeviceFromString = findBluetoothDeviceFromString(i, str);
-                if (findBluetoothDeviceFromString != null && (bluetoothDevice = this.mPluggedDevice) != null) {
+                BluetoothDevice findBluetoothDeviceFromString =
+                        findBluetoothDeviceFromString(i, str);
+                if (findBluetoothDeviceFromString != null
+                        && (bluetoothDevice = this.mPluggedDevice) != null) {
                     if (findBluetoothDeviceFromString.equals(bluetoothDevice)) {
                         if (this.mHidDevice != null) {
                             disconnectBTWithoutUnregister(this.mPluggedDevice);
@@ -791,7 +1088,8 @@ public final class WirelessKeyboardMouseShare {
                             if (this.mHandler.hasMessages(11)) {
                                 this.mHandler.removeMessages(11);
                             }
-                            this.mHandler.sendMessageDelayed(this.mHandler.obtainMessage(11), 60000L);
+                            this.mHandler.sendMessageDelayed(
+                                    this.mHandler.obtainMessage(11), 60000L);
                         }
                         removePairedDevicesListLocked(i, str);
                         this.mNeedNoti = true;
@@ -799,7 +1097,12 @@ public final class WirelessKeyboardMouseShare {
                         sendMessageStatus();
                         sendMessageMCF();
                     } else {
-                        Slog.d("WirelessKeyboardMouseShare", "warning: request device : " + str + " connected device : " + this.mPluggedDevice.toString());
+                        Slog.d(
+                                "WirelessKeyboardMouseShare",
+                                "warning: request device : "
+                                        + str
+                                        + " connected device : "
+                                        + this.mPluggedDevice.toString());
                     }
                     return;
                 }
@@ -823,7 +1126,9 @@ public final class WirelessKeyboardMouseShare {
                 if (bluetoothHidDevice == null) {
                     Slog.d("WirelessKeyboardMouseShare", "connectByBtDevice mHidDevice is null");
                 } else if (bluetoothDevice == null) {
-                    Slog.d("WirelessKeyboardMouseShare", "connectByBtDevice BluetoothDevice is null");
+                    Slog.d(
+                            "WirelessKeyboardMouseShare",
+                            "connectByBtDevice BluetoothDevice is null");
                 } else {
                     bluetoothHidDevice.connect(bluetoothDevice);
                 }
@@ -862,7 +1167,8 @@ public final class WirelessKeyboardMouseShare {
         }
         for (int i = 1; i < 4; i++) {
             BluetoothDevice bluetoothDevice2 = this.mPairedDevices[i];
-            if (bluetoothDevice2 != null && bluetoothDevice2.getAddress().equals(bluetoothDevice.getAddress())) {
+            if (bluetoothDevice2 != null
+                    && bluetoothDevice2.getAddress().equals(bluetoothDevice.getAddress())) {
                 return true;
             }
         }
@@ -876,7 +1182,8 @@ public final class WirelessKeyboardMouseShare {
         }
         BluetoothDevice bluetoothDevice = this.mPairedDevices[i];
         if (bluetoothDevice != null) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "find device slot[", "] =  ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(i, "find device slot[", "] =  ");
             m.append(bluetoothDevice.toString());
             m.append(" requested device = ");
             m.append(str);
@@ -886,7 +1193,9 @@ public final class WirelessKeyboardMouseShare {
         for (int i2 = 1; i2 < 4; i2++) {
             BluetoothDevice bluetoothDevice2 = this.mPairedDevices[i2];
             if (bluetoothDevice2 != null && bluetoothDevice2.getAddress().equals(str)) {
-                Slog.d("WirelessKeyboardMouseShare", "wrong index=" + i + ", but find device : " + str);
+                Slog.d(
+                        "WirelessKeyboardMouseShare",
+                        "wrong index=" + i + ", but find device : " + str);
                 return bluetoothDevice2;
             }
         }
@@ -985,7 +1294,8 @@ public final class WirelessKeyboardMouseShare {
             }
             m586$$Nest$mstoreReportLocked(wirelessKeyboardMouseShare, (byte) 1, bArr);
             try {
-                wirelessKeyboardMouseShare.mHidDevice.sendReport(wirelessKeyboardMouseShare.mPluggedDevice, 1, bArr);
+                wirelessKeyboardMouseShare.mHidDevice.sendReport(
+                        wirelessKeyboardMouseShare.mPluggedDevice, 1, bArr);
                 return;
             } catch (NullPointerException unused) {
                 Slog.d("WirelessKeyboardMouseShare", "ignore nullpointer exception ");
@@ -1008,7 +1318,8 @@ public final class WirelessKeyboardMouseShare {
         }
         m586$$Nest$mstoreReportLocked(wirelessKeyboardMouseShare2, (byte) 1, bArr2);
         try {
-            wirelessKeyboardMouseShare2.mHidDevice.sendReport(wirelessKeyboardMouseShare2.mPluggedDevice, 1, bArr2);
+            wirelessKeyboardMouseShare2.mHidDevice.sendReport(
+                    wirelessKeyboardMouseShare2.mPluggedDevice, 1, bArr2);
         } catch (NullPointerException unused2) {
             Slog.d("WirelessKeyboardMouseShare", "ignore nullpointer exception ");
         }
@@ -1030,7 +1341,8 @@ public final class WirelessKeyboardMouseShare {
             bArr[2] = 0;
             m586$$Nest$mstoreReportLocked(wirelessKeyboardMouseShare, (byte) 2, bArr);
             try {
-                wirelessKeyboardMouseShare.mHidDevice.sendReport(wirelessKeyboardMouseShare.mPluggedDevice, 2, bArr);
+                wirelessKeyboardMouseShare.mHidDevice.sendReport(
+                        wirelessKeyboardMouseShare.mPluggedDevice, 2, bArr);
                 return;
             } catch (NullPointerException unused) {
                 Slog.d("WirelessKeyboardMouseShare", "ignore nullpointer exception ");
@@ -1048,7 +1360,8 @@ public final class WirelessKeyboardMouseShare {
             bArr2[2] = 0;
             m586$$Nest$mstoreReportLocked(wirelessKeyboardMouseShare2, (byte) 2, bArr2);
             try {
-                wirelessKeyboardMouseShare2.mHidDevice.sendReport(wirelessKeyboardMouseShare2.mPluggedDevice, 2, bArr2);
+                wirelessKeyboardMouseShare2.mHidDevice.sendReport(
+                        wirelessKeyboardMouseShare2.mPluggedDevice, 2, bArr2);
                 return;
             } catch (NullPointerException unused2) {
                 Slog.d("WirelessKeyboardMouseShare", "ignore nullpointer exception ");
@@ -1067,7 +1380,8 @@ public final class WirelessKeyboardMouseShare {
             bArr3[2] = b2;
             m586$$Nest$mstoreReportLocked(wirelessKeyboardMouseShare3, (byte) 2, bArr3);
             try {
-                wirelessKeyboardMouseShare3.mHidDevice.sendReport(wirelessKeyboardMouseShare3.mPluggedDevice, 2, bArr3);
+                wirelessKeyboardMouseShare3.mHidDevice.sendReport(
+                        wirelessKeyboardMouseShare3.mPluggedDevice, 2, bArr3);
                 return;
             } catch (NullPointerException unused3) {
                 Slog.d("WirelessKeyboardMouseShare", "ignore nullpointer exception ");
@@ -1088,7 +1402,8 @@ public final class WirelessKeyboardMouseShare {
         bArr4[3] = b3;
         m586$$Nest$mstoreReportLocked(wirelessKeyboardMouseShare4, (byte) 2, bArr4);
         try {
-            wirelessKeyboardMouseShare4.mHidDevice.sendReport(wirelessKeyboardMouseShare4.mPluggedDevice, 2, bArr4);
+            wirelessKeyboardMouseShare4.mHidDevice.sendReport(
+                    wirelessKeyboardMouseShare4.mPluggedDevice, 2, bArr4);
         } catch (NullPointerException unused4) {
             Slog.d("WirelessKeyboardMouseShare", "ignore nullpointer exception ");
         }
@@ -1124,7 +1439,8 @@ public final class WirelessKeyboardMouseShare {
     public final void removeHIDDevice(int i, String str) {
         synchronized (this.innerLock) {
             try {
-                BluetoothDevice findBluetoothDeviceFromString = findBluetoothDeviceFromString(i, str);
+                BluetoothDevice findBluetoothDeviceFromString =
+                        findBluetoothDeviceFromString(i, str);
                 if (findBluetoothDeviceFromString == null) {
                     sendMessageStatus();
                     Slog.d("WirelessKeyboardMouseShare", "not find device : " + str);
@@ -1132,7 +1448,8 @@ public final class WirelessKeyboardMouseShare {
                 }
                 if (this.mHidDevice != null) {
                     BluetoothDevice bluetoothDevice = this.mPluggedDevice;
-                    if (bluetoothDevice != null && findBluetoothDeviceFromString.equals(bluetoothDevice)) {
+                    if (bluetoothDevice != null
+                            && findBluetoothDeviceFromString.equals(bluetoothDevice)) {
                         disconnectBT(this.mPluggedDevice);
                     }
                     findBluetoothDeviceFromString.removeBond();
@@ -1146,7 +1463,8 @@ public final class WirelessKeyboardMouseShare {
 
     public final void removePairedDevicesListLocked(int i, String str) {
         if (i > 3 || i == 0) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "cannot add list, index=", "WirelessKeyboardMouseShare");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "cannot add list, index=", "WirelessKeyboardMouseShare");
             return;
         }
         BluetoothDevice bluetoothDevice = this.mPairedDevices[i];
@@ -1156,16 +1474,26 @@ public final class WirelessKeyboardMouseShare {
             while (i2 < 4) {
                 BluetoothDevice bluetoothDevice2 = this.mPairedDevices[i2];
                 String address = bluetoothDevice2 != null ? bluetoothDevice2.getAddress() : "";
-                str2 = i2 == 1 ? address : AnyMotionDetector$$ExternalSyntheticOutline0.m(str2, ",", address);
+                str2 =
+                        i2 == 1
+                                ? address
+                                : AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                                        str2, ",", address);
                 if (address.equals(str)) {
-                    BootReceiver$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(i2, i, "exist other slot[", "] requested_index=", ", device="), str, "WirelessKeyboardMouseShare");
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            ArrayUtils$$ExternalSyntheticOutline0.m(
+                                    i2, i, "exist other slot[", "] requested_index=", ", device="),
+                            str,
+                            "WirelessKeyboardMouseShare");
                     this.mPairedDevices[i2] = null;
                     sendMessageStatus();
                     return;
                 }
                 i2++;
             }
-            Slog.d("WirelessKeyboardMouseShare", "fail to remove " + getDeviceListSize() + " : " + str2 + " : " + str);
+            Slog.d(
+                    "WirelessKeyboardMouseShare",
+                    "fail to remove " + getDeviceListSize() + " : " + str2 + " : " + str);
             sendMessageStatus();
             return;
         }
@@ -1177,7 +1505,11 @@ public final class WirelessKeyboardMouseShare {
                 int i3 = i - 1;
                 CoreSaLogger.logForBasic(this.REG_ID[i3], "0 " + bluetoothDevice.getName());
                 if (((HashMap) this.mLogInfos).get(Integer.valueOf(i)) != null) {
-                    CoreSaLogger.logForBasic(this.CONN_ID[i3], ((HashMap) this.mLogInfos).get(Integer.valueOf(i)) + " " + bluetoothDevice.getName());
+                    CoreSaLogger.logForBasic(
+                            this.CONN_ID[i3],
+                            ((HashMap) this.mLogInfos).get(Integer.valueOf(i))
+                                    + " "
+                                    + bluetoothDevice.getName());
                     ((HashMap) this.mLogInfos).remove(Integer.valueOf(i));
                 }
             } catch (NullPointerException unused) {
@@ -1192,7 +1524,8 @@ public final class WirelessKeyboardMouseShare {
         if (wirelessKeyboardMouseShareHandler.hasMessages(9)) {
             return;
         }
-        wirelessKeyboardMouseShareHandler.sendMessageDelayed(wirelessKeyboardMouseShareHandler.obtainMessage(9), 300L);
+        wirelessKeyboardMouseShareHandler.sendMessageDelayed(
+                wirelessKeyboardMouseShareHandler.obtainMessage(9), 300L);
     }
 
     public final void sendMessageMCF() {
@@ -1206,7 +1539,8 @@ public final class WirelessKeyboardMouseShare {
     public final void sendReadyToConnectIntent() {
         synchronized (this.innerLock) {
             try {
-                Intent intent = new Intent("com.samsung.android.input.REMOTE_INPUT_READY_TO_CONNECT");
+                Intent intent =
+                        new Intent("com.samsung.android.input.REMOTE_INPUT_READY_TO_CONNECT");
                 String str = "";
                 if (this.mFinishNewDevice) {
                     this.mToastDialog.mHandler.removeMessages(1);
@@ -1234,7 +1568,12 @@ public final class WirelessKeyboardMouseShare {
                 intent.putExtra("finishNewDevice", this.mFinishNewDevice);
                 intent.addFlags(16777216);
                 this.mContext.sendBroadcast(intent);
-                Slog.d("WirelessKeyboardMouseShare", "mReadyToConnect : " + this.mReadyToConnect + "mFinishNewDevice" + this.mFinishNewDevice);
+                Slog.d(
+                        "WirelessKeyboardMouseShare",
+                        "mReadyToConnect : "
+                                + this.mReadyToConnect
+                                + "mFinishNewDevice"
+                                + this.mFinishNewDevice);
                 this.mFinishNewDevice = false;
             } catch (Throwable th) {
                 throw th;
@@ -1264,7 +1603,8 @@ public final class WirelessKeyboardMouseShare {
                 boolean z = this.mAppRegistered;
                 statusInfo.mConnectionState = i2;
                 String str6 = "null";
-                statusInfo.mPluggedDeviceToString = bluetoothDevice2 == null ? "null" : bluetoothDevice2.getAddress();
+                statusInfo.mPluggedDeviceToString =
+                        bluetoothDevice2 == null ? "null" : bluetoothDevice2.getAddress();
                 if (bluetoothDevice3 != null) {
                     str6 = bluetoothDevice3.getAddress();
                 }
@@ -1275,36 +1615,47 @@ public final class WirelessKeyboardMouseShare {
                 int Equals = this.mStatusInfo.Equals(statusInfo);
                 if (Equals != 0 || this.mNotiTurnOnBT || this.mNeedNoti || this.mNeedNotiTablet) {
                     if ((Equals & 1) != 0) {
-                        this.mInputManager.deliverWirelessKeyboardShareChanged(0, this.mConnectionState == 2 ? "true" : "false", true);
+                        this.mInputManager.deliverWirelessKeyboardShareChanged(
+                                0, this.mConnectionState == 2 ? "true" : "false", true);
                     }
                     int i3 = Equals & 2;
                     if (i3 != 0) {
                         InputManagerService inputManagerService = this.mInputManager;
                         BluetoothDevice bluetoothDevice4 = this.mPluggedDevice;
-                        inputManagerService.deliverWirelessKeyboardShareChanged(1, bluetoothDevice4 == null ? "" : bluetoothDevice4.getAddress(), true);
+                        inputManagerService.deliverWirelessKeyboardShareChanged(
+                                1,
+                                bluetoothDevice4 == null ? "" : bluetoothDevice4.getAddress(),
+                                true);
                     }
                     if ((Equals & 4) != 0) {
                         InputManagerService inputManagerService2 = this.mInputManager;
                         BluetoothDevice bluetoothDevice5 = this.mFocusedDevice;
-                        inputManagerService2.deliverWirelessKeyboardShareChanged(2, bluetoothDevice5 == null ? "" : bluetoothDevice5.getAddress(), true);
+                        inputManagerService2.deliverWirelessKeyboardShareChanged(
+                                2,
+                                bluetoothDevice5 == null ? "" : bluetoothDevice5.getAddress(),
+                                true);
                     }
                     if ((Equals & 8) != 0) {
                         this.mInputManager.deliverWirelessKeyboardShareChanged(3, str5, true);
                     }
                     int i4 = Equals & 16;
                     if (i4 != 0) {
-                        this.mInputManager.deliverWirelessKeyboardShareChanged(4, isToLocalTablet() ? "true" : "false", true);
+                        this.mInputManager.deliverWirelessKeyboardShareChanged(
+                                4, isToLocalTablet() ? "true" : "false", true);
                     }
                     if ((Equals & 32) != 0) {
-                        this.mInputManager.deliverWirelessKeyboardShareChanged(5, this.mAppRegistered ? "true" : "false", true);
+                        this.mInputManager.deliverWirelessKeyboardShareChanged(
+                                5, this.mAppRegistered ? "true" : "false", true);
                     }
                     boolean z2 = this.mNeedNoti;
                     if (z2) {
-                        this.mInputManager.deliverWirelessKeyboardShareChanged(7, z2 ? "true" : "false", true);
+                        this.mInputManager.deliverWirelessKeyboardShareChanged(
+                                7, z2 ? "true" : "false", true);
                     }
                     boolean z3 = this.mNeedNotiTablet;
                     if (z3) {
-                        this.mInputManager.deliverWirelessKeyboardShareChanged(8, z3 ? "true" : "false", true);
+                        this.mInputManager.deliverWirelessKeyboardShareChanged(
+                                8, z3 ? "true" : "false", true);
                     }
                     if (i3 != 0) {
                         if (this.mPluggedDevice != null) {
@@ -1317,7 +1668,8 @@ public final class WirelessKeyboardMouseShare {
                             toastDialog.getClass();
                             SomeArgs obtain = SomeArgs.obtain();
                             obtain.arg1 = string;
-                            ToastDialog.ToastDialogHandler toastDialogHandler = toastDialog.mHandler;
+                            ToastDialog.ToastDialogHandler toastDialogHandler =
+                                    toastDialog.mHandler;
                             toastDialogHandler.removeMessages(2);
                             toastDialogHandler.obtainMessage(2, obtain).sendToTarget();
                         } else {
@@ -1330,7 +1682,8 @@ public final class WirelessKeyboardMouseShare {
                             toastDialog2.getClass();
                             SomeArgs obtain2 = SomeArgs.obtain();
                             obtain2.arg1 = string2;
-                            ToastDialog.ToastDialogHandler toastDialogHandler2 = toastDialog2.mHandler;
+                            ToastDialog.ToastDialogHandler toastDialogHandler2 =
+                                    toastDialog2.mHandler;
                             toastDialogHandler2.removeMessages(3);
                             toastDialogHandler2.obtainMessage(3, obtain2).sendToTarget();
                         }
@@ -1368,7 +1721,9 @@ public final class WirelessKeyboardMouseShare {
                             this.mHandler.removeMessages(11);
                         }
                         this.mHandler.sendMessageDelayed(this.mHandler.obtainMessage(11), 60000L);
-                        SemContinuityManager semContinuityManager = (SemContinuityManager) this.mContext.getSystemService("SemContinuityService");
+                        SemContinuityManager semContinuityManager =
+                                (SemContinuityManager)
+                                        this.mContext.getSystemService("SemContinuityService");
                         if (semContinuityManager == null) {
                             Log.e("WirelessKeyboardMouseShare", "SemContinuityManager is null");
                             nearbyDeviceCount = 0;
@@ -1376,7 +1731,12 @@ public final class WirelessKeyboardMouseShare {
                             nearbyDeviceCount = semContinuityManager.getNearbyDeviceCount(1);
                         }
                         String string5 = this.mContext.getResources().getString(17043622);
-                        String string6 = nearbyDeviceCount == 0 ? this.mContext.getResources().getString(17043623) : this.mContext.getResources().getString(17043620) + "\n" + this.mContext.getResources().getString(17043621);
+                        String string6 =
+                                nearbyDeviceCount == 0
+                                        ? this.mContext.getResources().getString(17043623)
+                                        : this.mContext.getResources().getString(17043620)
+                                                + "\n"
+                                                + this.mContext.getResources().getString(17043621);
                         ToastDialog toastDialog5 = this.mToastDialog;
                         toastDialog5.getClass();
                         SomeArgs obtain5 = SomeArgs.obtain();
@@ -1392,12 +1752,22 @@ public final class WirelessKeyboardMouseShare {
                         statusInfo2.mConnectionState = statusInfo.mConnectionState;
                         statusInfo2.mPluggedDeviceToString = statusInfo.mPluggedDeviceToString;
                         statusInfo2.mFocusedDeviceToString = statusInfo.mFocusedDeviceToString;
-                        statusInfo2.mPluggedDeviceToStringList = statusInfo.mPluggedDeviceToStringList;
+                        statusInfo2.mPluggedDeviceToStringList =
+                                statusInfo.mPluggedDeviceToStringList;
                         statusInfo2.mToLocalTablet = statusInfo.mToLocalTablet;
                         statusInfo2.mAppRegistered = statusInfo.mAppRegistered;
                     }
                     BluetoothDevice bluetoothDevice6 = this.mPluggedDevice;
-                    Slog.d("WirelessKeyboardMouseShare", "List : " + str5 + " p = " + (bluetoothDevice6 == null ? "" : bluetoothDevice6.getAddress()) + ", Noti = " + this.mNeedNoti);
+                    Slog.d(
+                            "WirelessKeyboardMouseShare",
+                            "List : "
+                                    + str5
+                                    + " p = "
+                                    + (bluetoothDevice6 == null
+                                            ? ""
+                                            : bluetoothDevice6.getAddress())
+                                    + ", Noti = "
+                                    + this.mNeedNoti);
                     this.mNotiTurnOnBT = false;
                     this.mNeedNoti = false;
                     this.mNeedNotiTablet = false;
@@ -1419,7 +1789,9 @@ public final class WirelessKeyboardMouseShare {
                 if (this.mHandler.hasMessages(11)) {
                     this.mHandler.removeMessages(11);
                 }
-                Slog.d("WirelessKeyboardMouseShare", "setHostRoleWirelessKeyboardShare : -> Host role(tablet)");
+                Slog.d(
+                        "WirelessKeyboardMouseShare",
+                        "setHostRoleWirelessKeyboardShare : -> Host role(tablet)");
             } catch (Throwable th) {
                 throw th;
             }
@@ -1431,7 +1803,9 @@ public final class WirelessKeyboardMouseShare {
             try {
                 if (this.mPogoConnected != z) {
                     this.mPogoConnected = z;
-                    Slog.d("WirelessKeyboardMouseShare", "setPogoConnected mPogoConnected : " + this.mPogoConnected);
+                    Slog.d(
+                            "WirelessKeyboardMouseShare",
+                            "setPogoConnected mPogoConnected : " + this.mPogoConnected);
                     if (InputRune.IFW_WIRELESS_KEYBOARD_SA_LOGGING) {
                         CoreSaLogger.logSettingStatusForBasic("67260", z ? "1" : "0");
                     }
@@ -1453,11 +1827,15 @@ public final class WirelessKeyboardMouseShare {
             try {
                 boolean z2 = this.mToLocalTablet;
                 if (z2 == z) {
-                    Slog.d("WirelessKeyboardMouseShare", "not changed remote device : ".concat(z2 ? "local tablet" : "remote device"));
+                    Slog.d(
+                            "WirelessKeyboardMouseShare",
+                            "not changed remote device : "
+                                    .concat(z2 ? "local tablet" : "remote device"));
                     return this.mToLocalTablet;
                 }
                 BluetoothDevice bluetoothDevice3 = this.mFocusedDevice;
-                if ((bluetoothDevice3 == null || !existBluetoothDeviceLocked(bluetoothDevice3)) && !z) {
+                if ((bluetoothDevice3 == null || !existBluetoothDeviceLocked(bluetoothDevice3))
+                        && !z) {
                     StringBuilder sb = new StringBuilder("last connected device is ");
                     if (this.mFocusedDevice == null) {
                         str = "null.";
@@ -1478,7 +1856,12 @@ public final class WirelessKeyboardMouseShare {
                         BluetoothDevice bluetoothDevice4 = this.mPairedDevices[i];
                         if (bluetoothDevice4 != null) {
                             this.mFocusedDevice = bluetoothDevice4;
-                            Slog.d("WirelessKeyboardMouseShare", "last connected device must be slot[" + i + "] " + this.mFocusedDevice.toString());
+                            Slog.d(
+                                    "WirelessKeyboardMouseShare",
+                                    "last connected device must be slot["
+                                            + i
+                                            + "] "
+                                            + this.mFocusedDevice.toString());
                             break;
                         }
                         i++;
@@ -1511,7 +1894,9 @@ public final class WirelessKeyboardMouseShare {
         synchronized (this.innerLock) {
             try {
                 if (!this.mPogoConnected) {
-                    Slog.d("WirelessKeyboardMouseShare", "startHIDDevice mPogoConnected : " + this.mPogoConnected);
+                    Slog.d(
+                            "WirelessKeyboardMouseShare",
+                            "startHIDDevice mPogoConnected : " + this.mPogoConnected);
                     return;
                 }
                 if (this.mAdapter == null) {
@@ -1522,7 +1907,9 @@ public final class WirelessKeyboardMouseShare {
                     this.mTabletName = bluetoothAdapter.getName();
                 }
                 registerApp();
-                Slog.d("WirelessKeyboardMouseShare", "startHIDDevice mAppRegistered : " + this.mAppRegistered);
+                Slog.d(
+                        "WirelessKeyboardMouseShare",
+                        "startHIDDevice mAppRegistered : " + this.mAppRegistered);
             } catch (Throwable th) {
                 throw th;
             }
@@ -1532,14 +1919,17 @@ public final class WirelessKeyboardMouseShare {
     public final void stopHIDDevice() {
         synchronized (this.innerLock) {
             unregisterApp();
-            Slog.d("WirelessKeyboardMouseShare", "stopHIDDevice mAppRegistered : " + this.mAppRegistered);
+            Slog.d(
+                    "WirelessKeyboardMouseShare",
+                    "stopHIDDevice mAppRegistered : " + this.mAppRegistered);
         }
     }
 
     public final boolean switchDevice(int i, String str) {
         synchronized (this.innerLock) {
             try {
-                BluetoothDevice findBluetoothDeviceFromString = findBluetoothDeviceFromString(i, str);
+                BluetoothDevice findBluetoothDeviceFromString =
+                        findBluetoothDeviceFromString(i, str);
                 boolean z = i == 0;
                 BluetoothAdapter bluetoothAdapter = this.mAdapter;
                 if (bluetoothAdapter != null && !bluetoothAdapter.isEnabled()) {
@@ -1552,13 +1942,25 @@ public final class WirelessKeyboardMouseShare {
                     return false;
                 }
                 BluetoothDevice bluetoothDevice = this.mPluggedDevice;
-                Slog.d("WirelessKeyboardMouseShare", "switchDevice : " + (bluetoothDevice == null ? "null" : bluetoothDevice.toString()) + " -> " + (findBluetoothDeviceFromString == null ? "null" : findBluetoothDeviceFromString.toString()) + " index:" + i);
+                Slog.d(
+                        "WirelessKeyboardMouseShare",
+                        "switchDevice : "
+                                + (bluetoothDevice == null ? "null" : bluetoothDevice.toString())
+                                + " -> "
+                                + (findBluetoothDeviceFromString == null
+                                        ? "null"
+                                        : findBluetoothDeviceFromString.toString())
+                                + " index:"
+                                + i);
                 if (!z) {
                     if (!isRegistered()) {
                         startHIDDevice();
                     }
                     BluetoothDevice bluetoothDevice2 = this.mPluggedDevice;
-                    if (bluetoothDevice2 != null && bluetoothDevice2.getAddress().equals(findBluetoothDeviceFromString.getAddress())) {
+                    if (bluetoothDevice2 != null
+                            && bluetoothDevice2
+                                    .getAddress()
+                                    .equals(findBluetoothDeviceFromString.getAddress())) {
                         this.mFocusedDevice = findBluetoothDeviceFromString;
                         this.mToLocalTablet = this.mPluggedDevice == null;
                         sendMessageStatus();
@@ -1595,33 +1997,44 @@ public final class WirelessKeyboardMouseShare {
                     }
                     this.mUnregisterWhenConnectionFail = true;
                     this.mHandler.obtainMessage(11).sendToTarget();
-                    Slog.d("WirelessKeyboardMouseShare", "switchRemoteDevice : -> Host role(tablet)");
+                    Slog.d(
+                            "WirelessKeyboardMouseShare",
+                            "switchRemoteDevice : -> Host role(tablet)");
                 } else {
                     BluetoothAdapter bluetoothAdapter = this.mAdapter;
                     if (bluetoothAdapter == null || bluetoothAdapter.isEnabled()) {
-                        this.mHandler.post(new Runnable() { // from class: com.android.server.input.WirelessKeyboardMouseShare$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                WirelessKeyboardMouseShare wirelessKeyboardMouseShare = WirelessKeyboardMouseShare.this;
-                                wirelessKeyboardMouseShare.mUnregisterWhenConnectionFail = true;
-                                WirelessKeyboardMouseShare.WirelessKeyboardMouseShareHandler wirelessKeyboardMouseShareHandler = wirelessKeyboardMouseShare.mHandler;
-                                if (wirelessKeyboardMouseShareHandler.hasMessages(11)) {
-                                    wirelessKeyboardMouseShareHandler.removeMessages(11);
-                                }
-                                Message obtainMessage = wirelessKeyboardMouseShareHandler.obtainMessage(11);
-                                if (!wirelessKeyboardMouseShare.isRegistered()) {
-                                    wirelessKeyboardMouseShare.startHIDDevice();
-                                }
-                                if (wirelessKeyboardMouseShare.getDeviceListSize() == 0) {
-                                    wirelessKeyboardMouseShareHandler.sendMessageDelayed(obtainMessage, 60000L);
-                                    wirelessKeyboardMouseShare.mNeedNoti = true;
-                                    wirelessKeyboardMouseShare.sendMessageMCF();
-                                } else {
-                                    wirelessKeyboardMouseShareHandler.sendMessageDelayed(obtainMessage, 5000L);
-                                }
-                                wirelessKeyboardMouseShare.sendMessageStatus();
-                            }
-                        });
+                        this.mHandler.post(
+                                new Runnable() { // from class:
+                                                 // com.android.server.input.WirelessKeyboardMouseShare$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        WirelessKeyboardMouseShare wirelessKeyboardMouseShare =
+                                                WirelessKeyboardMouseShare.this;
+                                        wirelessKeyboardMouseShare.mUnregisterWhenConnectionFail =
+                                                true;
+                                        WirelessKeyboardMouseShare.WirelessKeyboardMouseShareHandler
+                                                wirelessKeyboardMouseShareHandler =
+                                                        wirelessKeyboardMouseShare.mHandler;
+                                        if (wirelessKeyboardMouseShareHandler.hasMessages(11)) {
+                                            wirelessKeyboardMouseShareHandler.removeMessages(11);
+                                        }
+                                        Message obtainMessage =
+                                                wirelessKeyboardMouseShareHandler.obtainMessage(11);
+                                        if (!wirelessKeyboardMouseShare.isRegistered()) {
+                                            wirelessKeyboardMouseShare.startHIDDevice();
+                                        }
+                                        if (wirelessKeyboardMouseShare.getDeviceListSize() == 0) {
+                                            wirelessKeyboardMouseShareHandler.sendMessageDelayed(
+                                                    obtainMessage, 60000L);
+                                            wirelessKeyboardMouseShare.mNeedNoti = true;
+                                            wirelessKeyboardMouseShare.sendMessageMCF();
+                                        } else {
+                                            wirelessKeyboardMouseShareHandler.sendMessageDelayed(
+                                                    obtainMessage, 5000L);
+                                        }
+                                        wirelessKeyboardMouseShare.sendMessageStatus();
+                                    }
+                                });
                         return setToLocalTablet(false);
                     }
                     Slog.d("WirelessKeyboardMouseShare", "startHIDDeviceByKey need to turn on bt.");
@@ -1638,7 +2051,9 @@ public final class WirelessKeyboardMouseShare {
     public final void unregisterApp() {
         synchronized (this.innerLock) {
             try {
-                Slog.d("WirelessKeyboardMouseShare", "unregisterApp(): mAppRegistered=" + this.mAppRegistered);
+                Slog.d(
+                        "WirelessKeyboardMouseShare",
+                        "unregisterApp(): mAppRegistered=" + this.mAppRegistered);
                 if (this.mHandler.hasMessages(11)) {
                     this.mHandler.removeMessages(11);
                 }
@@ -1669,18 +2084,25 @@ public final class WirelessKeyboardMouseShare {
                     throw th;
                 }
             }
-            this.mInputManager.deliverWirelessKeyboardShareChanged(0, this.mConnectionState == 2 ? "true" : "false", false);
+            this.mInputManager.deliverWirelessKeyboardShareChanged(
+                    0, this.mConnectionState == 2 ? "true" : "false", false);
             InputManagerService inputManagerService = this.mInputManager;
             BluetoothDevice bluetoothDevice2 = this.mPluggedDevice;
-            inputManagerService.deliverWirelessKeyboardShareChanged(1, bluetoothDevice2 == null ? "" : bluetoothDevice2.getAddress(), false);
+            inputManagerService.deliverWirelessKeyboardShareChanged(
+                    1, bluetoothDevice2 == null ? "" : bluetoothDevice2.getAddress(), false);
             InputManagerService inputManagerService2 = this.mInputManager;
             BluetoothDevice bluetoothDevice3 = this.mFocusedDevice;
-            inputManagerService2.deliverWirelessKeyboardShareChanged(2, bluetoothDevice3 == null ? "" : bluetoothDevice3.getAddress(), false);
+            inputManagerService2.deliverWirelessKeyboardShareChanged(
+                    2, bluetoothDevice3 == null ? "" : bluetoothDevice3.getAddress(), false);
             this.mInputManager.deliverWirelessKeyboardShareChanged(3, str, false);
-            this.mInputManager.deliverWirelessKeyboardShareChanged(4, isToLocalTablet() ? "true" : "false", false);
-            this.mInputManager.deliverWirelessKeyboardShareChanged(5, this.mAppRegistered ? "true" : "false", false);
-            this.mInputManager.deliverWirelessKeyboardShareChanged(7, this.mNeedNoti ? "true" : "false", false);
-            this.mInputManager.deliverWirelessKeyboardShareChanged(8, this.mNeedNotiTablet ? "true" : "false", false);
+            this.mInputManager.deliverWirelessKeyboardShareChanged(
+                    4, isToLocalTablet() ? "true" : "false", false);
+            this.mInputManager.deliverWirelessKeyboardShareChanged(
+                    5, this.mAppRegistered ? "true" : "false", false);
+            this.mInputManager.deliverWirelessKeyboardShareChanged(
+                    7, this.mNeedNoti ? "true" : "false", false);
+            this.mInputManager.deliverWirelessKeyboardShareChanged(
+                    8, this.mNeedNotiTablet ? "true" : "false", false);
             Slog.d("WirelessKeyboardMouseShare", "updateWirelessKeyboardShareStatus");
         }
     }

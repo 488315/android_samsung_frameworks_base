@@ -14,8 +14,7 @@ public interface IConversationListener extends IInterface {
 
     public static class Default implements IConversationListener {
         @Override // android.app.people.IConversationListener
-        public void onConversationUpdate(ConversationChannel conversation) throws RemoteException {
-        }
+        public void onConversationUpdate(ConversationChannel conversation) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IConversationListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IConversationListener {
+    public abstract static class Stub extends Binder implements IConversationListener {
         static final int TRANSACTION_onConversationUpdate = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IConversationListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IConversationListener.DESCRIPTOR);
             }
@@ -71,7 +71,8 @@ public interface IConversationListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ConversationChannel _arg0 = (ConversationChannel) data.readTypedObject(ConversationChannel.CREATOR);
+                    ConversationChannel _arg0 =
+                            (ConversationChannel) data.readTypedObject(ConversationChannel.CREATOR);
                     data.enforceNoDataAvail();
                     onConversationUpdate(_arg0);
                     return true;
@@ -97,7 +98,8 @@ public interface IConversationListener extends IInterface {
             }
 
             @Override // android.app.people.IConversationListener
-            public void onConversationUpdate(ConversationChannel conversation) throws RemoteException {
+            public void onConversationUpdate(ConversationChannel conversation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IConversationListener.DESCRIPTOR);

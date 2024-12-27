@@ -14,9 +14,10 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import android.speech.IRecognitionService;
 import android.util.Log;
+
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,34 +39,45 @@ public abstract class RecognitionService extends Service {
     private static final String TAG = "RecognitionService";
     private final Map<IBinder, SessionState> mSessions = new HashMap();
     private final RecognitionServiceBinder mBinder = new RecognitionServiceBinder(this);
-    private final Handler mHandler = new Handler() { // from class: android.speech.RecognitionService.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    StartListeningArgs args = (StartListeningArgs) msg.obj;
-                    RecognitionService.this.dispatchStartListening(args.mIntent, args.mListener, args.mAttributionSource);
-                    break;
-                case 2:
-                    RecognitionService.this.dispatchStopListening((IRecognitionListener) msg.obj);
-                    break;
-                case 3:
-                    RecognitionService.this.dispatchCancel((IRecognitionListener) msg.obj);
-                    break;
-                case 4:
-                    RecognitionService.this.dispatchClearCallback((IRecognitionListener) msg.obj);
-                    break;
-                case 5:
-                    CheckRecognitionSupportArgs checkArgs = (CheckRecognitionSupportArgs) msg.obj;
-                    RecognitionService.this.dispatchCheckRecognitionSupport(checkArgs.mIntent, checkArgs.callback, checkArgs.mAttributionSource);
-                    break;
-                case 6:
-                    ModelDownloadArgs modelDownloadArgs = (ModelDownloadArgs) msg.obj;
-                    RecognitionService.this.dispatchTriggerModelDownload(modelDownloadArgs.mIntent, modelDownloadArgs.mAttributionSource, modelDownloadArgs.mListener);
-                    break;
-            }
-        }
-    };
+    private final Handler mHandler =
+            new Handler() { // from class: android.speech.RecognitionService.1
+                @Override // android.os.Handler
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case 1:
+                            StartListeningArgs args = (StartListeningArgs) msg.obj;
+                            RecognitionService.this.dispatchStartListening(
+                                    args.mIntent, args.mListener, args.mAttributionSource);
+                            break;
+                        case 2:
+                            RecognitionService.this.dispatchStopListening(
+                                    (IRecognitionListener) msg.obj);
+                            break;
+                        case 3:
+                            RecognitionService.this.dispatchCancel((IRecognitionListener) msg.obj);
+                            break;
+                        case 4:
+                            RecognitionService.this.dispatchClearCallback(
+                                    (IRecognitionListener) msg.obj);
+                            break;
+                        case 5:
+                            CheckRecognitionSupportArgs checkArgs =
+                                    (CheckRecognitionSupportArgs) msg.obj;
+                            RecognitionService.this.dispatchCheckRecognitionSupport(
+                                    checkArgs.mIntent,
+                                    checkArgs.callback,
+                                    checkArgs.mAttributionSource);
+                            break;
+                        case 6:
+                            ModelDownloadArgs modelDownloadArgs = (ModelDownloadArgs) msg.obj;
+                            RecognitionService.this.dispatchTriggerModelDownload(
+                                    modelDownloadArgs.mIntent,
+                                    modelDownloadArgs.mAttributionSource,
+                                    modelDownloadArgs.mListener);
+                            break;
+                    }
+                }
+            };
 
     protected abstract void onCancel(Callback callback);
 
@@ -80,7 +92,10 @@ public abstract class RecognitionService extends Service {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void dispatchStartListening(android.content.Intent r7, android.speech.IRecognitionListener r8, android.content.AttributionSource r9) {
+    public void dispatchStartListening(
+            android.content.Intent r7,
+            android.speech.IRecognitionListener r8,
+            android.content.AttributionSource r9) {
         /*
             r6 = this;
             r0 = 0
@@ -157,7 +172,11 @@ public abstract class RecognitionService extends Service {
         L8c:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.speech.RecognitionService.dispatchStartListening(android.content.Intent, android.speech.IRecognitionListener, android.content.AttributionSource):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.speech.RecognitionService.dispatchStartListening(android.content.Intent,"
+                    + " android.speech.IRecognitionListener,"
+                    + " android.content.AttributionSource):void");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -169,7 +188,10 @@ public abstract class RecognitionService extends Service {
             } catch (RemoteException e) {
                 Log.d(TAG, "#onError call from #stopListening failed.");
             }
-            Log.w(TAG, "#stopListening received for a listener which has not started a session - ignoring this call.");
+            Log.w(
+                    TAG,
+                    "#stopListening received for a listener which has not started a session -"
+                        + " ignoring this call.");
             return;
         }
         onStopListening(sessionState.mCallback);
@@ -179,7 +201,10 @@ public abstract class RecognitionService extends Service {
     public void dispatchCancel(IRecognitionListener listener) {
         SessionState sessionState = this.mSessions.get(listener.asBinder());
         if (sessionState == null) {
-            Log.w(TAG, "#cancel received for a listener which has not started a session - ignoring this call.");
+            Log.w(
+                    TAG,
+                    "#cancel received for a listener which has not started a session - ignoring"
+                        + " this call.");
         } else {
             onCancel(sessionState.mCallback);
             dispatchClearCallback(listener);
@@ -196,78 +221,87 @@ public abstract class RecognitionService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void dispatchCheckRecognitionSupport(Intent intent, IRecognitionSupportCallback callback, AttributionSource attributionSource) {
+    public void dispatchCheckRecognitionSupport(
+            Intent intent,
+            IRecognitionSupportCallback callback,
+            AttributionSource attributionSource) {
         onCheckRecognitionSupport(intent, attributionSource, new SupportCallback(callback));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void dispatchTriggerModelDownload(Intent intent, AttributionSource attributionSource, final IModelDownloadListener listener) {
+    public void dispatchTriggerModelDownload(
+            Intent intent,
+            AttributionSource attributionSource,
+            final IModelDownloadListener listener) {
         if (listener == null) {
             onTriggerModelDownload(intent, attributionSource);
         } else {
-            onTriggerModelDownload(intent, attributionSource, new ModelDownloadListener() { // from class: android.speech.RecognitionService.2
-                private final Object mLock = new Object();
-                private boolean mIsTerminated = false;
+            onTriggerModelDownload(
+                    intent,
+                    attributionSource,
+                    new ModelDownloadListener() { // from class: android.speech.RecognitionService.2
+                        private final Object mLock = new Object();
+                        private boolean mIsTerminated = false;
 
-                @Override // android.speech.ModelDownloadListener
-                public void onProgress(int completedPercent) {
-                    synchronized (this.mLock) {
-                        if (this.mIsTerminated) {
-                            return;
+                        @Override // android.speech.ModelDownloadListener
+                        public void onProgress(int completedPercent) {
+                            synchronized (this.mLock) {
+                                if (this.mIsTerminated) {
+                                    return;
+                                }
+                                try {
+                                    listener.onProgress(completedPercent);
+                                } catch (RemoteException e) {
+                                    throw e.rethrowFromSystemServer();
+                                }
+                            }
                         }
-                        try {
-                            listener.onProgress(completedPercent);
-                        } catch (RemoteException e) {
-                            throw e.rethrowFromSystemServer();
-                        }
-                    }
-                }
 
-                @Override // android.speech.ModelDownloadListener
-                public void onSuccess() {
-                    synchronized (this.mLock) {
-                        if (this.mIsTerminated) {
-                            return;
+                        @Override // android.speech.ModelDownloadListener
+                        public void onSuccess() {
+                            synchronized (this.mLock) {
+                                if (this.mIsTerminated) {
+                                    return;
+                                }
+                                this.mIsTerminated = true;
+                                try {
+                                    listener.onSuccess();
+                                } catch (RemoteException e) {
+                                    throw e.rethrowFromSystemServer();
+                                }
+                            }
                         }
-                        this.mIsTerminated = true;
-                        try {
-                            listener.onSuccess();
-                        } catch (RemoteException e) {
-                            throw e.rethrowFromSystemServer();
-                        }
-                    }
-                }
 
-                @Override // android.speech.ModelDownloadListener
-                public void onScheduled() {
-                    synchronized (this.mLock) {
-                        if (this.mIsTerminated) {
-                            return;
+                        @Override // android.speech.ModelDownloadListener
+                        public void onScheduled() {
+                            synchronized (this.mLock) {
+                                if (this.mIsTerminated) {
+                                    return;
+                                }
+                                this.mIsTerminated = true;
+                                try {
+                                    listener.onScheduled();
+                                } catch (RemoteException e) {
+                                    throw e.rethrowFromSystemServer();
+                                }
+                            }
                         }
-                        this.mIsTerminated = true;
-                        try {
-                            listener.onScheduled();
-                        } catch (RemoteException e) {
-                            throw e.rethrowFromSystemServer();
-                        }
-                    }
-                }
 
-                @Override // android.speech.ModelDownloadListener
-                public void onError(int error) {
-                    synchronized (this.mLock) {
-                        if (this.mIsTerminated) {
-                            return;
+                        @Override // android.speech.ModelDownloadListener
+                        public void onError(int error) {
+                            synchronized (this.mLock) {
+                                if (this.mIsTerminated) {
+                                    return;
+                                }
+                                this.mIsTerminated = true;
+                                try {
+                                    listener.onError(error);
+                                } catch (RemoteException e) {
+                                    throw e.rethrowFromSystemServer();
+                                }
+                            }
                         }
-                        this.mIsTerminated = true;
-                        try {
-                            listener.onError(error);
-                        } catch (RemoteException e) {
-                            throw e.rethrowFromSystemServer();
-                        }
-                    }
-                }
-            });
+                    });
         }
     }
 
@@ -276,7 +310,8 @@ public abstract class RecognitionService extends Service {
         public final Intent mIntent;
         public final IRecognitionListener mListener;
 
-        public StartListeningArgs(Intent intent, IRecognitionListener listener, AttributionSource attributionSource) {
+        public StartListeningArgs(
+                Intent intent, IRecognitionListener listener, AttributionSource attributionSource) {
             this.mIntent = intent;
             this.mListener = listener;
             this.mAttributionSource = attributionSource;
@@ -288,7 +323,10 @@ public abstract class RecognitionService extends Service {
         public final AttributionSource mAttributionSource;
         public final Intent mIntent;
 
-        private CheckRecognitionSupportArgs(Intent intent, IRecognitionSupportCallback callback, AttributionSource attributionSource) {
+        private CheckRecognitionSupportArgs(
+                Intent intent,
+                IRecognitionSupportCallback callback,
+                AttributionSource attributionSource) {
             this.mIntent = intent;
             this.callback = callback;
             this.mAttributionSource = attributionSource;
@@ -300,29 +338,39 @@ public abstract class RecognitionService extends Service {
         final Intent mIntent;
         final IModelDownloadListener mListener;
 
-        private ModelDownloadArgs(Intent intent, AttributionSource attributionSource, IModelDownloadListener listener) {
+        private ModelDownloadArgs(
+                Intent intent,
+                AttributionSource attributionSource,
+                IModelDownloadListener listener) {
             this.mIntent = intent;
             this.mAttributionSource = attributionSource;
             this.mListener = listener;
         }
     }
 
-    public void onCheckRecognitionSupport(Intent recognizerIntent, SupportCallback supportCallback) {
+    public void onCheckRecognitionSupport(
+            Intent recognizerIntent, SupportCallback supportCallback) {
         supportCallback.onError(14);
     }
 
-    public void onCheckRecognitionSupport(Intent recognizerIntent, AttributionSource attributionSource, SupportCallback supportCallback) {
+    public void onCheckRecognitionSupport(
+            Intent recognizerIntent,
+            AttributionSource attributionSource,
+            SupportCallback supportCallback) {
         onCheckRecognitionSupport(recognizerIntent, supportCallback);
     }
 
-    public void onTriggerModelDownload(Intent recognizerIntent) {
-    }
+    public void onTriggerModelDownload(Intent recognizerIntent) {}
 
-    public void onTriggerModelDownload(Intent recognizerIntent, AttributionSource attributionSource) {
+    public void onTriggerModelDownload(
+            Intent recognizerIntent, AttributionSource attributionSource) {
         onTriggerModelDownload(recognizerIntent);
     }
 
-    public void onTriggerModelDownload(Intent recognizerIntent, AttributionSource attributionSource, ModelDownloadListener listener) {
+    public void onTriggerModelDownload(
+            Intent recognizerIntent,
+            AttributionSource attributionSource,
+            ModelDownloadListener listener) {
         listener.onError(15);
     }
 
@@ -332,12 +380,17 @@ public abstract class RecognitionService extends Service {
             if (this.mHandler.getLooper().equals(Looper.myLooper())) {
                 handleAttributionContextCreation(contextParams.getNextAttributionSource());
             } else {
-                this.mHandler.sendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.speech.RecognitionService$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        RecognitionService.this.handleAttributionContextCreation((AttributionSource) obj);
-                    }
-                }, contextParams.getNextAttributionSource()));
+                this.mHandler.sendMessage(
+                        PooledLambda.obtainMessage(
+                                new Consumer() { // from class:
+                                                 // android.speech.RecognitionService$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        RecognitionService.this.handleAttributionContextCreation(
+                                                (AttributionSource) obj);
+                                    }
+                                },
+                                contextParams.getNextAttributionSource()));
             }
         }
         return super.createContext(contextParams);
@@ -347,7 +400,8 @@ public abstract class RecognitionService extends Service {
     public void handleAttributionContextCreation(AttributionSource attributionSource) {
         for (SessionState sessionState : this.mSessions.values()) {
             Callback currentCallback = sessionState.mCallback;
-            if (currentCallback != null && currentCallback.mCallingAttributionSource.equals(attributionSource)) {
+            if (currentCallback != null
+                    && currentCallback.mCallingAttributionSource.equals(attributionSource)) {
                 currentCallback.mAttributionContextCreated = true;
             }
         }
@@ -359,8 +413,7 @@ public abstract class RecognitionService extends Service {
         return this.mBinder;
     }
 
-    public void onBindInternal() {
-    }
+    public void onBindInternal() {}
 
     @Override // android.app.Service
     public void onDestroy() {
@@ -449,7 +502,11 @@ public abstract class RecognitionService extends Service {
 
         Context getAttributionContextForCaller() {
             if (this.mAttributionContext == null) {
-                this.mAttributionContext = RecognitionService.this.createContext(new ContextParams.Builder().setNextAttributionSource(this.mCallingAttributionSource).build());
+                this.mAttributionContext =
+                        RecognitionService.this.createContext(
+                                new ContextParams.Builder()
+                                        .setNextAttributionSource(this.mCallingAttributionSource)
+                                        .build());
             }
             return this.mAttributionContext;
         }
@@ -487,12 +544,20 @@ public abstract class RecognitionService extends Service {
         }
 
         @Override // android.speech.IRecognitionService
-        public void startListening(Intent recognizerIntent, IRecognitionListener listener, AttributionSource attributionSource) {
+        public void startListening(
+                Intent recognizerIntent,
+                IRecognitionListener listener,
+                AttributionSource attributionSource) {
             Objects.requireNonNull(attributionSource);
             attributionSource.enforceCallingUid();
             RecognitionService service = this.mServiceRef.get();
             if (service != null) {
-                service.mHandler.sendMessage(Message.obtain(service.mHandler, 1, new StartListeningArgs(recognizerIntent, listener, attributionSource)));
+                service.mHandler.sendMessage(
+                        Message.obtain(
+                                service.mHandler,
+                                1,
+                                new StartListeningArgs(
+                                        recognizerIntent, listener, attributionSource)));
             }
         }
 
@@ -513,18 +578,34 @@ public abstract class RecognitionService extends Service {
         }
 
         @Override // android.speech.IRecognitionService
-        public void checkRecognitionSupport(Intent recognizerIntent, AttributionSource attributionSource, IRecognitionSupportCallback callback) {
+        public void checkRecognitionSupport(
+                Intent recognizerIntent,
+                AttributionSource attributionSource,
+                IRecognitionSupportCallback callback) {
             RecognitionService service = this.mServiceRef.get();
             if (service != null) {
-                service.mHandler.sendMessage(Message.obtain(service.mHandler, 5, new CheckRecognitionSupportArgs(recognizerIntent, callback, attributionSource)));
+                service.mHandler.sendMessage(
+                        Message.obtain(
+                                service.mHandler,
+                                5,
+                                new CheckRecognitionSupportArgs(
+                                        recognizerIntent, callback, attributionSource)));
             }
         }
 
         @Override // android.speech.IRecognitionService
-        public void triggerModelDownload(Intent recognizerIntent, AttributionSource attributionSource, IModelDownloadListener listener) {
+        public void triggerModelDownload(
+                Intent recognizerIntent,
+                AttributionSource attributionSource,
+                IModelDownloadListener listener) {
             RecognitionService service = this.mServiceRef.get();
             if (service != null) {
-                service.mHandler.sendMessage(Message.obtain(service.mHandler, 6, new ModelDownloadArgs(recognizerIntent, attributionSource, listener)));
+                service.mHandler.sendMessage(
+                        Message.obtain(
+                                service.mHandler,
+                                6,
+                                new ModelDownloadArgs(
+                                        recognizerIntent, attributionSource, listener)));
             }
         }
 
@@ -537,14 +618,24 @@ public abstract class RecognitionService extends Service {
         if (sessionState.mCallback.mAttributionContextCreated) {
             return true;
         }
-        if (PermissionChecker.checkPermissionAndStartDataDelivery(this, Manifest.permission.RECORD_AUDIO, sessionState.mCallback.getAttributionContextForCaller().getAttributionSource(), null) == 0) {
+        if (PermissionChecker.checkPermissionAndStartDataDelivery(
+                        this,
+                        Manifest.permission.RECORD_AUDIO,
+                        sessionState
+                                .mCallback
+                                .getAttributionContextForCaller()
+                                .getAttributionSource(),
+                        null)
+                == 0) {
             sessionState.mStartedDataDelivery = true;
         }
         return sessionState.mStartedDataDelivery;
     }
 
     private boolean checkPermissionForPreflightNotHardDenied(AttributionSource attributionSource) {
-        int result = PermissionChecker.checkPermissionForPreflight(this, Manifest.permission.RECORD_AUDIO, attributionSource);
+        int result =
+                PermissionChecker.checkPermissionForPreflight(
+                        this, Manifest.permission.RECORD_AUDIO, attributionSource);
         return result == 0 || result == 1;
     }
 
@@ -552,7 +643,10 @@ public abstract class RecognitionService extends Service {
         if (sessionState.mStartedDataDelivery) {
             sessionState.mStartedDataDelivery = false;
             String op = AppOpsManager.permissionToOp(Manifest.permission.RECORD_AUDIO);
-            PermissionChecker.finishDataDelivery(this, op, sessionState.mCallback.getAttributionContextForCaller().getAttributionSource());
+            PermissionChecker.finishDataDelivery(
+                    this,
+                    op,
+                    sessionState.mCallback.getAttributionContextForCaller().getAttributionSource());
         }
     }
 

@@ -11,8 +11,7 @@ public class CertificateBase extends ASN1Object {
     private CertificateType type;
     private byte[] version;
 
-    protected CertificateBase(ASN1Sequence seq) {
-    }
+    protected CertificateBase(ASN1Sequence seq) {}
 
     public static CertificateBase getInstance(Object o) {
         if (o instanceof ImplicitCertificate) {
@@ -34,7 +33,8 @@ public class CertificateBase extends ASN1Object {
         return null;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector();
         return new DERSequence(v);

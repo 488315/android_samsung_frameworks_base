@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+
 import com.android.server.accessibility.gestures.GestureMatcher;
 import com.android.server.accessibility.gestures.GestureUtils;
 
@@ -18,7 +19,9 @@ public final class SimpleSwipe extends GestureMatcher {
     public SimpleSwipe(Context context) {
         super(102, new Handler(context.getMainLooper()), null);
         this.mSwipeMinDistance = ViewConfiguration.get(context).getScaledTouchSlop();
-        this.mDetectionDurationMillis = context.getResources().getInteger(R.integer.config_zen_repeat_callers_threshold) + ViewConfiguration.getDoubleTapTimeout();
+        this.mDetectionDurationMillis =
+                context.getResources().getInteger(R.integer.config_zen_repeat_callers_threshold)
+                        + ViewConfiguration.getDoubleTapTimeout();
     }
 
     @Override // com.android.server.accessibility.gestures.GestureMatcher
@@ -47,7 +50,8 @@ public final class SimpleSwipe extends GestureMatcher {
     @Override // com.android.server.accessibility.gestures.GestureMatcher
     public final void onMove(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
         MotionEvent motionEvent3 = this.mLastDown;
-        if (motionEvent3 == null || GestureUtils.distance(motionEvent3, motionEvent) <= this.mSwipeMinDistance) {
+        if (motionEvent3 == null
+                || GestureUtils.distance(motionEvent3, motionEvent) <= this.mSwipeMinDistance) {
             return;
         }
         setState(2, motionEvent, motionEvent2, i);
@@ -61,7 +65,8 @@ public final class SimpleSwipe extends GestureMatcher {
     @Override // com.android.server.accessibility.gestures.GestureMatcher
     public final void onUp(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
         MotionEvent motionEvent3 = this.mLastDown;
-        if (motionEvent3 == null || GestureUtils.distance(motionEvent3, motionEvent) <= this.mSwipeMinDistance) {
+        if (motionEvent3 == null
+                || GestureUtils.distance(motionEvent3, motionEvent) <= this.mSwipeMinDistance) {
             setState(3, motionEvent, motionEvent2, i);
         } else {
             setState(2, motionEvent, motionEvent2, i);

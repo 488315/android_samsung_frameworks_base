@@ -1,20 +1,22 @@
 package android.hardware;
 
-import android.hardware.ISensorPrivacyListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface ISensorPrivacyManager extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.ISensorPrivacyManager";
 
-    void addSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener) throws RemoteException;
+    void addSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener)
+            throws RemoteException;
 
-    void addToggleSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener) throws RemoteException;
+    void addToggleSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener)
+            throws RemoteException;
 
     List<String> getCameraPrivacyAllowlist() throws RemoteException;
 
@@ -28,9 +30,11 @@ public interface ISensorPrivacyManager extends IInterface {
 
     boolean isToggleSensorPrivacyEnabled(int i, int i2) throws RemoteException;
 
-    void removeSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener) throws RemoteException;
+    void removeSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener)
+            throws RemoteException;
 
-    void removeToggleSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener) throws RemoteException;
+    void removeToggleSensorPrivacyListener(ISensorPrivacyListener iSensorPrivacyListener)
+            throws RemoteException;
 
     boolean requiresAuthentication() throws RemoteException;
 
@@ -40,19 +44,23 @@ public interface ISensorPrivacyManager extends IInterface {
 
     void setToggleSensorPrivacy(int i, int i2, int i3, boolean z) throws RemoteException;
 
-    void setToggleSensorPrivacyForProfileGroup(int i, int i2, int i3, boolean z) throws RemoteException;
+    void setToggleSensorPrivacyForProfileGroup(int i, int i2, int i3, boolean z)
+            throws RemoteException;
 
-    void setToggleSensorPrivacyForProfileGroupWithConfirmPopup(int i, int i2, int i3, boolean z, int i4) throws RemoteException;
+    void setToggleSensorPrivacyForProfileGroupWithConfirmPopup(
+            int i, int i2, int i3, boolean z, int i4) throws RemoteException;
 
     void setToggleSensorPrivacyState(int i, int i2, int i3, int i4) throws RemoteException;
 
-    void setToggleSensorPrivacyStateForProfileGroup(int i, int i2, int i3, int i4) throws RemoteException;
+    void setToggleSensorPrivacyStateForProfileGroup(int i, int i2, int i3, int i4)
+            throws RemoteException;
 
     void showSensorUseDialog(int i) throws RemoteException;
 
     boolean supportsSensorToggle(int i, int i2) throws RemoteException;
 
-    void suppressToggleSensorPrivacyReminders(int i, int i2, IBinder iBinder, boolean z) throws RemoteException;
+    void suppressToggleSensorPrivacyReminders(int i, int i2, IBinder iBinder, boolean z)
+            throws RemoteException;
 
     public static class Default implements ISensorPrivacyManager {
         @Override // android.hardware.ISensorPrivacyManager
@@ -61,20 +69,20 @@ public interface ISensorPrivacyManager extends IInterface {
         }
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void addSensorPrivacyListener(ISensorPrivacyListener listener) throws RemoteException {
-        }
+        public void addSensorPrivacyListener(ISensorPrivacyListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void addToggleSensorPrivacyListener(ISensorPrivacyListener listener) throws RemoteException {
-        }
+        public void addToggleSensorPrivacyListener(ISensorPrivacyListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void removeSensorPrivacyListener(ISensorPrivacyListener listener) throws RemoteException {
-        }
+        public void removeSensorPrivacyListener(ISensorPrivacyListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void removeToggleSensorPrivacyListener(ISensorPrivacyListener listener) throws RemoteException {
-        }
+        public void removeToggleSensorPrivacyListener(ISensorPrivacyListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
         public boolean isSensorPrivacyEnabled() throws RemoteException {
@@ -87,25 +95,26 @@ public interface ISensorPrivacyManager extends IInterface {
         }
 
         @Override // android.hardware.ISensorPrivacyManager
-        public boolean isToggleSensorPrivacyEnabled(int toggleType, int sensor) throws RemoteException {
+        public boolean isToggleSensorPrivacyEnabled(int toggleType, int sensor)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void setSensorPrivacy(boolean enable) throws RemoteException {
-        }
+        public void setSensorPrivacy(boolean enable) throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void setToggleSensorPrivacy(int userId, int source, int sensor, boolean enable) throws RemoteException {
-        }
+        public void setToggleSensorPrivacy(int userId, int source, int sensor, boolean enable)
+                throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void setToggleSensorPrivacyForProfileGroup(int userId, int source, int sensor, boolean enable) throws RemoteException {
-        }
+        public void setToggleSensorPrivacyForProfileGroup(
+                int userId, int source, int sensor, boolean enable) throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void setToggleSensorPrivacyForProfileGroupWithConfirmPopup(int userId, int source, int sensor, boolean enable, int displayId) throws RemoteException {
-        }
+        public void setToggleSensorPrivacyForProfileGroupWithConfirmPopup(
+                int userId, int source, int sensor, boolean enable, int displayId)
+                throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
         public List<String> getCameraPrivacyAllowlist() throws RemoteException {
@@ -118,12 +127,12 @@ public interface ISensorPrivacyManager extends IInterface {
         }
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void setToggleSensorPrivacyState(int userId, int source, int sensor, int state) throws RemoteException {
-        }
+        public void setToggleSensorPrivacyState(int userId, int source, int sensor, int state)
+                throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void setToggleSensorPrivacyStateForProfileGroup(int userId, int source, int sensor, int state) throws RemoteException {
-        }
+        public void setToggleSensorPrivacyStateForProfileGroup(
+                int userId, int source, int sensor, int state) throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
         public boolean isCameraPrivacyEnabled(String packageName) throws RemoteException {
@@ -131,12 +140,11 @@ public interface ISensorPrivacyManager extends IInterface {
         }
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void setCameraPrivacyAllowlist(List<String> allowlist) throws RemoteException {
-        }
+        public void setCameraPrivacyAllowlist(List<String> allowlist) throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void suppressToggleSensorPrivacyReminders(int userId, int sensor, IBinder token, boolean suppress) throws RemoteException {
-        }
+        public void suppressToggleSensorPrivacyReminders(
+                int userId, int sensor, IBinder token, boolean suppress) throws RemoteException {}
 
         @Override // android.hardware.ISensorPrivacyManager
         public boolean requiresAuthentication() throws RemoteException {
@@ -144,8 +152,7 @@ public interface ISensorPrivacyManager extends IInterface {
         }
 
         @Override // android.hardware.ISensorPrivacyManager
-        public void showSensorUseDialog(int sensor) throws RemoteException {
-        }
+        public void showSensorUseDialog(int sensor) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -153,7 +160,7 @@ public interface ISensorPrivacyManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISensorPrivacyManager {
+    public abstract static class Stub extends Binder implements ISensorPrivacyManager {
         static final int TRANSACTION_addSensorPrivacyListener = 2;
         static final int TRANSACTION_addToggleSensorPrivacyListener = 3;
         static final int TRANSACTION_getCameraPrivacyAllowlist = 13;
@@ -251,7 +258,8 @@ public interface ISensorPrivacyManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISensorPrivacyManager.DESCRIPTOR);
             }
@@ -269,25 +277,29 @@ public interface ISensorPrivacyManager extends IInterface {
                     reply.writeBoolean(_result);
                     return true;
                 case 2:
-                    ISensorPrivacyListener _arg02 = ISensorPrivacyListener.Stub.asInterface(data.readStrongBinder());
+                    ISensorPrivacyListener _arg02 =
+                            ISensorPrivacyListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addSensorPrivacyListener(_arg02);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    ISensorPrivacyListener _arg03 = ISensorPrivacyListener.Stub.asInterface(data.readStrongBinder());
+                    ISensorPrivacyListener _arg03 =
+                            ISensorPrivacyListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addToggleSensorPrivacyListener(_arg03);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    ISensorPrivacyListener _arg04 = ISensorPrivacyListener.Stub.asInterface(data.readStrongBinder());
+                    ISensorPrivacyListener _arg04 =
+                            ISensorPrivacyListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeSensorPrivacyListener(_arg04);
                     reply.writeNoException();
                     return true;
                 case 5:
-                    ISensorPrivacyListener _arg05 = ISensorPrivacyListener.Stub.asInterface(data.readStrongBinder());
+                    ISensorPrivacyListener _arg05 =
+                            ISensorPrivacyListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeToggleSensorPrivacyListener(_arg05);
                     reply.writeNoException();
@@ -343,7 +355,8 @@ public interface ISensorPrivacyManager extends IInterface {
                     boolean _arg33 = data.readBoolean();
                     int _arg4 = data.readInt();
                     data.enforceNoDataAvail();
-                    setToggleSensorPrivacyForProfileGroupWithConfirmPopup(_arg011, _arg15, _arg23, _arg33, _arg4);
+                    setToggleSensorPrivacyForProfileGroupWithConfirmPopup(
+                            _arg011, _arg15, _arg23, _arg33, _arg4);
                     reply.writeNoException();
                     return true;
                 case 13:
@@ -450,7 +463,8 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public void addSensorPrivacyListener(ISensorPrivacyListener listener) throws RemoteException {
+            public void addSensorPrivacyListener(ISensorPrivacyListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -465,7 +479,8 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public void addToggleSensorPrivacyListener(ISensorPrivacyListener listener) throws RemoteException {
+            public void addToggleSensorPrivacyListener(ISensorPrivacyListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -480,7 +495,8 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public void removeSensorPrivacyListener(ISensorPrivacyListener listener) throws RemoteException {
+            public void removeSensorPrivacyListener(ISensorPrivacyListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -495,7 +511,8 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public void removeToggleSensorPrivacyListener(ISensorPrivacyListener listener) throws RemoteException {
+            public void removeToggleSensorPrivacyListener(ISensorPrivacyListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -543,7 +560,8 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public boolean isToggleSensorPrivacyEnabled(int toggleType, int sensor) throws RemoteException {
+            public boolean isToggleSensorPrivacyEnabled(int toggleType, int sensor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -576,7 +594,8 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public void setToggleSensorPrivacy(int userId, int source, int sensor, boolean enable) throws RemoteException {
+            public void setToggleSensorPrivacy(int userId, int source, int sensor, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -594,7 +613,8 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public void setToggleSensorPrivacyForProfileGroup(int userId, int source, int sensor, boolean enable) throws RemoteException {
+            public void setToggleSensorPrivacyForProfileGroup(
+                    int userId, int source, int sensor, boolean enable) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -612,7 +632,9 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public void setToggleSensorPrivacyForProfileGroupWithConfirmPopup(int userId, int source, int sensor, boolean enable, int displayId) throws RemoteException {
+            public void setToggleSensorPrivacyForProfileGroupWithConfirmPopup(
+                    int userId, int source, int sensor, boolean enable, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -647,7 +669,8 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public int getToggleSensorPrivacyState(int toggleType, int sensor) throws RemoteException {
+            public int getToggleSensorPrivacyState(int toggleType, int sensor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -665,7 +688,8 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public void setToggleSensorPrivacyState(int userId, int source, int sensor, int state) throws RemoteException {
+            public void setToggleSensorPrivacyState(int userId, int source, int sensor, int state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -683,7 +707,8 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public void setToggleSensorPrivacyStateForProfileGroup(int userId, int source, int sensor, int state) throws RemoteException {
+            public void setToggleSensorPrivacyStateForProfileGroup(
+                    int userId, int source, int sensor, int state) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -733,7 +758,9 @@ public interface ISensorPrivacyManager extends IInterface {
             }
 
             @Override // android.hardware.ISensorPrivacyManager
-            public void suppressToggleSensorPrivacyReminders(int userId, int sensor, IBinder token, boolean suppress) throws RemoteException {
+            public void suppressToggleSensorPrivacyReminders(
+                    int userId, int sensor, IBinder token, boolean suppress)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

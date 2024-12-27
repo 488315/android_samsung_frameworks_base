@@ -13,7 +13,9 @@ public abstract class Util {
         int length = bArr.length;
         int i = 0;
         while (i < length) {
-            i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%02x", new Object[]{Integer.valueOf(bArr[i] & 255)}, sb, i, 1);
+            i =
+                    MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                            "%02x", new Object[] {Integer.valueOf(bArr[i] & 255)}, sb, i, 1);
         }
         return sb.toString();
     }

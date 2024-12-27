@@ -6,8 +6,7 @@ public interface IRecoverySystemProgressListener extends IInterface {
 
     public static class Default implements IRecoverySystemProgressListener {
         @Override // android.os.IRecoverySystemProgressListener
-        public void onProgress(int progress) throws RemoteException {
-        }
+        public void onProgress(int progress) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -15,7 +14,7 @@ public interface IRecoverySystemProgressListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRecoverySystemProgressListener {
+    public abstract static class Stub extends Binder implements IRecoverySystemProgressListener {
         public static final String DESCRIPTOR = "android.os.IRecoverySystemProgressListener";
         static final int TRANSACTION_onProgress = 1;
 
@@ -54,7 +53,8 @@ public interface IRecoverySystemProgressListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

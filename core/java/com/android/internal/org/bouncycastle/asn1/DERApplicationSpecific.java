@@ -17,8 +17,12 @@ public class DERApplicationSpecific extends ASN1ApplicationSpecific {
         this(true, tag, object);
     }
 
-    public DERApplicationSpecific(boolean constructed, int tag, ASN1Encodable object) throws IOException {
-        super(constructed || object.toASN1Primitive().isConstructed(), tag, getEncoding(constructed, object));
+    public DERApplicationSpecific(boolean constructed, int tag, ASN1Encodable object)
+            throws IOException {
+        super(
+                constructed || object.toASN1Primitive().isConstructed(),
+                tag,
+                getEncoding(constructed, object));
     }
 
     private static byte[] getEncoding(boolean explicit, ASN1Encodable object) throws IOException {
@@ -48,7 +52,8 @@ public class DERApplicationSpecific extends ASN1ApplicationSpecific {
         return bOut.toByteArray();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1ApplicationSpecific, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1ApplicationSpecific,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     void encode(ASN1OutputStream out, boolean withTag) throws IOException {
         int flags = 64;
         if (this.isConstructed) {

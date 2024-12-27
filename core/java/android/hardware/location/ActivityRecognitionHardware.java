@@ -1,16 +1,18 @@
 package android.hardware.location;
 
 import android.content.Context;
-import android.hardware.location.IActivityRecognitionHardware;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.lang.reflect.Array;
 
 /* loaded from: classes2.dex */
 public class ActivityRecognitionHardware extends IActivityRecognitionHardware.Stub {
-    private static final String ENFORCE_HW_PERMISSION_MESSAGE = "Permission 'android.permission.LOCATION_HARDWARE' not granted to access ActivityRecognitionHardware";
+    private static final String ENFORCE_HW_PERMISSION_MESSAGE =
+            "Permission 'android.permission.LOCATION_HARDWARE' not granted to access"
+                    + " ActivityRecognitionHardware";
     private static final int EVENT_TYPE_COUNT = 3;
     private static final int EVENT_TYPE_DISABLED = 0;
     private static final int EVENT_TYPE_ENABLED = 1;
@@ -53,8 +55,7 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
         public long timestamp;
         public int type;
 
-        private Event() {
-        }
+        private Event() {}
     }
 
     private ActivityRecognitionHardware(Context context) {
@@ -62,7 +63,10 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
         this.mContext = context;
         this.mSupportedActivities = fetchSupportedActivities();
         this.mSupportedActivitiesCount = this.mSupportedActivities.length;
-        this.mSupportedActivitiesEnabledEvents = (int[][]) Array.newInstance((Class<?>) Integer.TYPE, this.mSupportedActivitiesCount, 3);
+        this.mSupportedActivitiesEnabledEvents =
+                (int[][])
+                        Array.newInstance(
+                                (Class<?>) Integer.TYPE, this.mSupportedActivitiesCount, 3);
     }
 
     public static ActivityRecognitionHardware getInstance(Context context) {
@@ -151,13 +155,16 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
             return;
         }
         int eventsLength = events.length;
-        ActivityRecognitionEvent[] activityRecognitionEventArray = new ActivityRecognitionEvent[eventsLength];
+        ActivityRecognitionEvent[] activityRecognitionEventArray =
+                new ActivityRecognitionEvent[eventsLength];
         for (int i = 0; i < eventsLength; i++) {
             Event event = events[i];
             String activityName = getActivityName(event.activity);
-            activityRecognitionEventArray[i] = new ActivityRecognitionEvent(activityName, event.type, event.timestamp);
+            activityRecognitionEventArray[i] =
+                    new ActivityRecognitionEvent(activityName, event.type, event.timestamp);
         }
-        ActivityChangedEvent activityChangedEvent = new ActivityChangedEvent(activityRecognitionEventArray);
+        ActivityChangedEvent activityChangedEvent =
+                new ActivityChangedEvent(activityRecognitionEventArray);
         int size = this.mSinks.beginBroadcast();
         for (int i2 = 0; i2 < size; i2++) {
             IActivityRecognitionHardwareSink sink = this.mSinks.getBroadcastItem(i2);
@@ -172,7 +179,11 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
 
     private String getActivityName(int activityType) {
         if (activityType < 0 || activityType >= this.mSupportedActivities.length) {
-            String message = String.format("Invalid ActivityType: %d, SupportedActivities: %d", Integer.valueOf(activityType), Integer.valueOf(this.mSupportedActivities.length));
+            String message =
+                    String.format(
+                            "Invalid ActivityType: %d, SupportedActivities: %d",
+                            Integer.valueOf(activityType),
+                            Integer.valueOf(this.mSupportedActivities.length));
             Log.e(TAG, message);
             return null;
         }
@@ -193,7 +204,8 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
     }
 
     private void checkPermissions() {
-        this.mContext.enforceCallingPermission("android.permission.LOCATION_HARDWARE", ENFORCE_HW_PERMISSION_MESSAGE);
+        this.mContext.enforceCallingPermission(
+                "android.permission.LOCATION_HARDWARE", ENFORCE_HW_PERMISSION_MESSAGE);
     }
 
     private String[] fetchSupportedActivities() {
@@ -205,19 +217,21 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
     }
 
     private class SinkList extends RemoteCallbackList<IActivityRecognitionHardwareSink> {
-        private SinkList() {
-        }
+        private SinkList() {}
 
         @Override // android.os.RemoteCallbackList
         public void onCallbackDied(IActivityRecognitionHardwareSink callback) {
-            int callbackCount = ActivityRecognitionHardware.this.mSinks.getRegisteredCallbackCount();
+            int callbackCount =
+                    ActivityRecognitionHardware.this.mSinks.getRegisteredCallbackCount();
             if (ActivityRecognitionHardware.DEBUG) {
                 Log.d(ActivityRecognitionHardware.TAG, "RegisteredCallbackCount: " + callbackCount);
             }
             if (callbackCount != 0) {
                 return;
             }
-            for (int activity = 0; activity < ActivityRecognitionHardware.this.mSupportedActivitiesCount; activity++) {
+            for (int activity = 0;
+                    activity < ActivityRecognitionHardware.this.mSupportedActivitiesCount;
+                    activity++) {
                 for (int event = 0; event < 3; event++) {
                     disableActivityEventIfEnabled(activity, event);
                 }
@@ -225,12 +239,23 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
         }
 
         private void disableActivityEventIfEnabled(int activityType, int eventType) {
-            if (ActivityRecognitionHardware.this.mSupportedActivitiesEnabledEvents[activityType][eventType] != 1) {
+            if (ActivityRecognitionHardware.this
+                            .mSupportedActivitiesEnabledEvents[activityType][eventType]
+                    != 1) {
                 return;
             }
-            int result = ActivityRecognitionHardware.this.nativeDisableActivityEvent(activityType, eventType);
-            ActivityRecognitionHardware.this.mSupportedActivitiesEnabledEvents[activityType][eventType] = 0;
-            String message = String.format("DisableActivityEvent: activityType=%d, eventType=%d, result=%d", Integer.valueOf(activityType), Integer.valueOf(eventType), Integer.valueOf(result));
+            int result =
+                    ActivityRecognitionHardware.this.nativeDisableActivityEvent(
+                            activityType, eventType);
+            ActivityRecognitionHardware.this
+                            .mSupportedActivitiesEnabledEvents[activityType][eventType] =
+                    0;
+            String message =
+                    String.format(
+                            "DisableActivityEvent: activityType=%d, eventType=%d, result=%d",
+                            Integer.valueOf(activityType),
+                            Integer.valueOf(eventType),
+                            Integer.valueOf(result));
             Log.e(ActivityRecognitionHardware.TAG, message);
         }
     }

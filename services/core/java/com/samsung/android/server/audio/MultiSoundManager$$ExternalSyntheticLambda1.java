@@ -9,7 +9,8 @@ public final /* synthetic */ class MultiSoundManager$$ExternalSyntheticLambda1 i
     public final /* synthetic */ MultiSoundManager f$0;
     public final /* synthetic */ AudioParameter f$1;
 
-    public /* synthetic */ MultiSoundManager$$ExternalSyntheticLambda1(MultiSoundManager multiSoundManager, AudioParameter audioParameter, int i) {
+    public /* synthetic */ MultiSoundManager$$ExternalSyntheticLambda1(
+            MultiSoundManager multiSoundManager, AudioParameter audioParameter, int i) {
         this.$r8$classId = i;
         this.f$0 = multiSoundManager;
         this.f$1 = audioParameter;

@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.evaluate;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -18,12 +19,18 @@ abstract class EvaluatorGroup implements Evaluator {
 
     @Override // com.samsung.android.sume.core.evaluate.Evaluator
     public Class<?> getValueType() {
-        return (Class) this.evaluators.stream().findFirst().map(new Function() { // from class: com.samsung.android.sume.core.evaluate.EvaluatorGroup$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((Evaluator) obj).getValueType();
-            }
-        }).orElse(null);
+        return (Class)
+                this.evaluators.stream()
+                        .findFirst()
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.evaluate.EvaluatorGroup$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return ((Evaluator) obj).getValueType();
+                                    }
+                                })
+                        .orElse(null);
     }
 
     @Override // com.samsung.android.sume.core.evaluate.Evaluator
@@ -109,15 +116,22 @@ abstract class EvaluatorGroup implements Evaluator {
 
     public String toString() {
         String delimiter = this instanceof OrEvaluatorGroup ? " or " : " and ";
-        return (String) this.evaluators.stream().map(new Function() { // from class: com.samsung.android.sume.core.evaluate.EvaluatorGroup$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return EvaluatorGroup.lambda$toString$0((Evaluator) obj);
-            }
-        }).collect(Collectors.joining(delimiter));
+        return (String)
+                this.evaluators.stream()
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.evaluate.EvaluatorGroup$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return EvaluatorGroup.lambda$toString$0((Evaluator) obj);
+                                    }
+                                })
+                        .collect(Collectors.joining(delimiter));
     }
 
     static /* synthetic */ String lambda$toString$0(Evaluator it) {
-        return NavigationBarInflaterView.SIZE_MOD_START + it + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START
+                + it
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

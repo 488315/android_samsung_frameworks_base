@@ -3,7 +3,9 @@ package com.samsung.android.sume.core.types;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +16,7 @@ public abstract class OptionBase implements Parcelable, Serializable {
     private static final String TAG = Def.tagOf((Class<?>) OptionBase.class);
     private final Map<Integer, Object> data = new HashMap();
 
-    protected OptionBase() {
-    }
+    protected OptionBase() {}
 
     protected OptionBase(Parcel in) {
         in.readMap(this.data, null);
@@ -38,7 +39,14 @@ public abstract class OptionBase implements Parcelable, Serializable {
 
     public OptionBase set(int option, Object data) {
         if (this.data.containsKey(Integer.valueOf(option))) {
-            Log.w(TAG, "exist option(" + option + ") value will be overwritten: " + this.data.get(Integer.valueOf(option)) + " -> " + data);
+            Log.w(
+                    TAG,
+                    "exist option("
+                            + option
+                            + ") value will be overwritten: "
+                            + this.data.get(Integer.valueOf(option))
+                            + " -> "
+                            + data);
         }
         this.data.put(Integer.valueOf(option), data);
         return this;

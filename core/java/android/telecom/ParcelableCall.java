@@ -5,62 +5,107 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+
 import com.android.internal.telecom.IVideoProvider;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public final class ParcelableCall implements Parcelable {
-    public static final Parcelable.Creator<ParcelableCall> CREATOR = new Parcelable.Creator<ParcelableCall>() { // from class: android.telecom.ParcelableCall.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableCall createFromParcel(Parcel source) {
-            ClassLoader classLoader = ParcelableCall.class.getClassLoader();
-            String id = source.readString();
-            int state = source.readInt();
-            DisconnectCause disconnectCause = (DisconnectCause) source.readParcelable(classLoader, DisconnectCause.class);
-            ArrayList arrayList = new ArrayList();
-            source.readList(arrayList, classLoader, String.class);
-            int capabilities = source.readInt();
-            int properties = source.readInt();
-            long connectTimeMillis = source.readLong();
-            Uri handle = Uri.CREATOR.createFromParcel(source);
-            int handlePresentation = source.readInt();
-            String callerDisplayName = source.readString();
-            int callerDisplayNamePresentation = source.readInt();
-            GatewayInfo gatewayInfo = (GatewayInfo) source.readParcelable(classLoader, GatewayInfo.class);
-            PhoneAccountHandle accountHandle = (PhoneAccountHandle) source.readParcelable(classLoader, PhoneAccountHandle.class);
-            boolean isVideoCallProviderChanged = source.readByte() == 1;
-            IVideoProvider videoCallProvider = IVideoProvider.Stub.asInterface(source.readStrongBinder());
-            String parentCallId = source.readString();
-            ArrayList arrayList2 = new ArrayList();
-            boolean isVideoCallProviderChanged2 = isVideoCallProviderChanged;
-            source.readList(arrayList2, classLoader, String.class);
-            StatusHints statusHints = (StatusHints) source.readParcelable(classLoader, StatusHints.class);
-            int videoState = source.readInt();
-            ArrayList arrayList3 = new ArrayList();
-            source.readList(arrayList3, classLoader, String.class);
-            Bundle intentExtras = source.readBundle(classLoader);
-            Bundle extras = source.readBundle(classLoader);
-            int supportedAudioRoutes = source.readInt();
-            boolean isRttCallChanged = source.readByte() == 1;
-            ParcelableRttCall rttCall = (ParcelableRttCall) source.readParcelable(classLoader, ParcelableRttCall.class);
-            long creationTimeMillis = source.readLong();
-            int callDirection = source.readInt();
-            int callerNumberVerificationStatus = source.readInt();
-            String contactDisplayName = source.readString();
-            String activeChildCallId = source.readString();
-            Uri contactPhotoUri = (Uri) source.readParcelable(classLoader, Uri.class);
-            return new ParcelableCallBuilder().setId(id).setState(state).setDisconnectCause(disconnectCause).setCannedSmsResponses(arrayList).setCapabilities(capabilities).setProperties(properties).setSupportedAudioRoutes(supportedAudioRoutes).setConnectTimeMillis(connectTimeMillis).setHandle(handle).setHandlePresentation(handlePresentation).setCallerDisplayName(callerDisplayName).setCallerDisplayNamePresentation(callerDisplayNamePresentation).setGatewayInfo(gatewayInfo).setAccountHandle(accountHandle).setIsVideoCallProviderChanged(isVideoCallProviderChanged2).setVideoCallProvider(videoCallProvider).setIsRttCallChanged(isRttCallChanged).setRttCall(rttCall).setParentCallId(parentCallId).setChildCallIds(arrayList2).setStatusHints(statusHints).setVideoState(videoState).setConferenceableCallIds(arrayList3).setIntentExtras(intentExtras).setExtras(extras).setCreationTimeMillis(creationTimeMillis).setCallDirection(callDirection).setCallerNumberVerificationStatus(callerNumberVerificationStatus).setContactDisplayName(contactDisplayName).setActiveChildCallId(activeChildCallId).setContactPhotoUri(contactPhotoUri).createParcelableCall();
-        }
+    public static final Parcelable.Creator<ParcelableCall> CREATOR =
+            new Parcelable.Creator<
+                    ParcelableCall>() { // from class: android.telecom.ParcelableCall.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableCall createFromParcel(Parcel source) {
+                    ClassLoader classLoader = ParcelableCall.class.getClassLoader();
+                    String id = source.readString();
+                    int state = source.readInt();
+                    DisconnectCause disconnectCause =
+                            (DisconnectCause)
+                                    source.readParcelable(classLoader, DisconnectCause.class);
+                    ArrayList arrayList = new ArrayList();
+                    source.readList(arrayList, classLoader, String.class);
+                    int capabilities = source.readInt();
+                    int properties = source.readInt();
+                    long connectTimeMillis = source.readLong();
+                    Uri handle = Uri.CREATOR.createFromParcel(source);
+                    int handlePresentation = source.readInt();
+                    String callerDisplayName = source.readString();
+                    int callerDisplayNamePresentation = source.readInt();
+                    GatewayInfo gatewayInfo =
+                            (GatewayInfo) source.readParcelable(classLoader, GatewayInfo.class);
+                    PhoneAccountHandle accountHandle =
+                            (PhoneAccountHandle)
+                                    source.readParcelable(classLoader, PhoneAccountHandle.class);
+                    boolean isVideoCallProviderChanged = source.readByte() == 1;
+                    IVideoProvider videoCallProvider =
+                            IVideoProvider.Stub.asInterface(source.readStrongBinder());
+                    String parentCallId = source.readString();
+                    ArrayList arrayList2 = new ArrayList();
+                    boolean isVideoCallProviderChanged2 = isVideoCallProviderChanged;
+                    source.readList(arrayList2, classLoader, String.class);
+                    StatusHints statusHints =
+                            (StatusHints) source.readParcelable(classLoader, StatusHints.class);
+                    int videoState = source.readInt();
+                    ArrayList arrayList3 = new ArrayList();
+                    source.readList(arrayList3, classLoader, String.class);
+                    Bundle intentExtras = source.readBundle(classLoader);
+                    Bundle extras = source.readBundle(classLoader);
+                    int supportedAudioRoutes = source.readInt();
+                    boolean isRttCallChanged = source.readByte() == 1;
+                    ParcelableRttCall rttCall =
+                            (ParcelableRttCall)
+                                    source.readParcelable(classLoader, ParcelableRttCall.class);
+                    long creationTimeMillis = source.readLong();
+                    int callDirection = source.readInt();
+                    int callerNumberVerificationStatus = source.readInt();
+                    String contactDisplayName = source.readString();
+                    String activeChildCallId = source.readString();
+                    Uri contactPhotoUri = (Uri) source.readParcelable(classLoader, Uri.class);
+                    return new ParcelableCallBuilder()
+                            .setId(id)
+                            .setState(state)
+                            .setDisconnectCause(disconnectCause)
+                            .setCannedSmsResponses(arrayList)
+                            .setCapabilities(capabilities)
+                            .setProperties(properties)
+                            .setSupportedAudioRoutes(supportedAudioRoutes)
+                            .setConnectTimeMillis(connectTimeMillis)
+                            .setHandle(handle)
+                            .setHandlePresentation(handlePresentation)
+                            .setCallerDisplayName(callerDisplayName)
+                            .setCallerDisplayNamePresentation(callerDisplayNamePresentation)
+                            .setGatewayInfo(gatewayInfo)
+                            .setAccountHandle(accountHandle)
+                            .setIsVideoCallProviderChanged(isVideoCallProviderChanged2)
+                            .setVideoCallProvider(videoCallProvider)
+                            .setIsRttCallChanged(isRttCallChanged)
+                            .setRttCall(rttCall)
+                            .setParentCallId(parentCallId)
+                            .setChildCallIds(arrayList2)
+                            .setStatusHints(statusHints)
+                            .setVideoState(videoState)
+                            .setConferenceableCallIds(arrayList3)
+                            .setIntentExtras(intentExtras)
+                            .setExtras(extras)
+                            .setCreationTimeMillis(creationTimeMillis)
+                            .setCallDirection(callDirection)
+                            .setCallerNumberVerificationStatus(callerNumberVerificationStatus)
+                            .setContactDisplayName(contactDisplayName)
+                            .setActiveChildCallId(activeChildCallId)
+                            .setContactPhotoUri(contactPhotoUri)
+                            .createParcelableCall();
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableCall[] newArray(int size) {
-            return new ParcelableCall[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableCall[] newArray(int size) {
+                    return new ParcelableCall[size];
+                }
+            };
     private final PhoneAccountHandle mAccountHandle;
     private final String mActiveChildCallId;
     private final int mCallDirection;
@@ -182,7 +227,8 @@ public final class ParcelableCall implements Parcelable {
             return this;
         }
 
-        public ParcelableCallBuilder setCallerDisplayNamePresentation(int callerDisplayNamePresentation) {
+        public ParcelableCallBuilder setCallerDisplayNamePresentation(
+                int callerDisplayNamePresentation) {
             this.mCallerDisplayNamePresentation = callerDisplayNamePresentation;
             return this;
         }
@@ -197,7 +243,8 @@ public final class ParcelableCall implements Parcelable {
             return this;
         }
 
-        public ParcelableCallBuilder setIsVideoCallProviderChanged(boolean isVideoCallProviderChanged) {
+        public ParcelableCallBuilder setIsVideoCallProviderChanged(
+                boolean isVideoCallProviderChanged) {
             this.mIsVideoCallProviderChanged = isVideoCallProviderChanged;
             return this;
         }
@@ -262,7 +309,8 @@ public final class ParcelableCall implements Parcelable {
             return this;
         }
 
-        public ParcelableCallBuilder setCallerNumberVerificationStatus(int callerNumberVerificationStatus) {
+        public ParcelableCallBuilder setCallerNumberVerificationStatus(
+                int callerNumberVerificationStatus) {
             this.mCallerNumberVerificationStatus = callerNumberVerificationStatus;
             return this;
         }
@@ -283,7 +331,38 @@ public final class ParcelableCall implements Parcelable {
         }
 
         public ParcelableCall createParcelableCall() {
-            return new ParcelableCall(this.mId, this.mState, this.mDisconnectCause, this.mCannedSmsResponses, this.mCapabilities, this.mProperties, this.mSupportedAudioRoutes, this.mConnectTimeMillis, this.mHandle, this.mHandlePresentation, this.mCallerDisplayName, this.mCallerDisplayNamePresentation, this.mGatewayInfo, this.mAccountHandle, this.mIsVideoCallProviderChanged, this.mVideoCallProvider, this.mIsRttCallChanged, this.mRttCall, this.mParentCallId, this.mChildCallIds, this.mStatusHints, this.mVideoState, this.mConferenceableCallIds, this.mIntentExtras, this.mExtras, this.mCreationTimeMillis, this.mCallDirection, this.mCallerNumberVerificationStatus, this.mContactDisplayName, this.mActiveChildCallId, this.mContactPhotoUri);
+            return new ParcelableCall(
+                    this.mId,
+                    this.mState,
+                    this.mDisconnectCause,
+                    this.mCannedSmsResponses,
+                    this.mCapabilities,
+                    this.mProperties,
+                    this.mSupportedAudioRoutes,
+                    this.mConnectTimeMillis,
+                    this.mHandle,
+                    this.mHandlePresentation,
+                    this.mCallerDisplayName,
+                    this.mCallerDisplayNamePresentation,
+                    this.mGatewayInfo,
+                    this.mAccountHandle,
+                    this.mIsVideoCallProviderChanged,
+                    this.mVideoCallProvider,
+                    this.mIsRttCallChanged,
+                    this.mRttCall,
+                    this.mParentCallId,
+                    this.mChildCallIds,
+                    this.mStatusHints,
+                    this.mVideoState,
+                    this.mConferenceableCallIds,
+                    this.mIntentExtras,
+                    this.mExtras,
+                    this.mCreationTimeMillis,
+                    this.mCallDirection,
+                    this.mCallerNumberVerificationStatus,
+                    this.mContactDisplayName,
+                    this.mActiveChildCallId,
+                    this.mContactPhotoUri);
         }
 
         public static ParcelableCallBuilder fromParcelableCall(ParcelableCall parcelableCall) {
@@ -299,7 +378,8 @@ public final class ParcelableCall implements Parcelable {
             newBuilder.mHandle = parcelableCall.mHandle;
             newBuilder.mHandlePresentation = parcelableCall.mHandlePresentation;
             newBuilder.mCallerDisplayName = parcelableCall.mCallerDisplayName;
-            newBuilder.mCallerDisplayNamePresentation = parcelableCall.mCallerDisplayNamePresentation;
+            newBuilder.mCallerDisplayNamePresentation =
+                    parcelableCall.mCallerDisplayNamePresentation;
             newBuilder.mGatewayInfo = parcelableCall.mGatewayInfo;
             newBuilder.mAccountHandle = parcelableCall.mAccountHandle;
             newBuilder.mIsVideoCallProviderChanged = parcelableCall.mIsVideoCallProviderChanged;
@@ -315,7 +395,8 @@ public final class ParcelableCall implements Parcelable {
             newBuilder.mExtras = parcelableCall.mExtras;
             newBuilder.mCreationTimeMillis = parcelableCall.mCreationTimeMillis;
             newBuilder.mCallDirection = parcelableCall.mCallDirection;
-            newBuilder.mCallerNumberVerificationStatus = parcelableCall.mCallerNumberVerificationStatus;
+            newBuilder.mCallerNumberVerificationStatus =
+                    parcelableCall.mCallerNumberVerificationStatus;
             newBuilder.mContactDisplayName = parcelableCall.mContactDisplayName;
             newBuilder.mActiveChildCallId = parcelableCall.mActiveChildCallId;
             newBuilder.mContactPhotoUri = parcelableCall.mContactPhotoUri;
@@ -323,7 +404,38 @@ public final class ParcelableCall implements Parcelable {
         }
     }
 
-    public ParcelableCall(String id, int state, DisconnectCause disconnectCause, List<String> cannedSmsResponses, int capabilities, int properties, int supportedAudioRoutes, long connectTimeMillis, Uri handle, int handlePresentation, String callerDisplayName, int callerDisplayNamePresentation, GatewayInfo gatewayInfo, PhoneAccountHandle accountHandle, boolean isVideoCallProviderChanged, IVideoProvider videoCallProvider, boolean isRttCallChanged, ParcelableRttCall rttCall, String parentCallId, List<String> childCallIds, StatusHints statusHints, int videoState, List<String> conferenceableCallIds, Bundle intentExtras, Bundle extras, long creationTimeMillis, int callDirection, int callerNumberVerificationStatus, String contactDisplayName, String activeChildCallId, Uri contactPhotoUri) {
+    public ParcelableCall(
+            String id,
+            int state,
+            DisconnectCause disconnectCause,
+            List<String> cannedSmsResponses,
+            int capabilities,
+            int properties,
+            int supportedAudioRoutes,
+            long connectTimeMillis,
+            Uri handle,
+            int handlePresentation,
+            String callerDisplayName,
+            int callerDisplayNamePresentation,
+            GatewayInfo gatewayInfo,
+            PhoneAccountHandle accountHandle,
+            boolean isVideoCallProviderChanged,
+            IVideoProvider videoCallProvider,
+            boolean isRttCallChanged,
+            ParcelableRttCall rttCall,
+            String parentCallId,
+            List<String> childCallIds,
+            StatusHints statusHints,
+            int videoState,
+            List<String> conferenceableCallIds,
+            Bundle intentExtras,
+            Bundle extras,
+            long creationTimeMillis,
+            int callDirection,
+            int callerNumberVerificationStatus,
+            String contactDisplayName,
+            String activeChildCallId,
+            Uri contactPhotoUri) {
         this.mId = id;
         this.mState = state;
         this.mDisconnectCause = disconnectCause;
@@ -416,7 +528,9 @@ public final class ParcelableCall implements Parcelable {
     public VideoCallImpl getVideoCallImpl(String callingPackageName, int targetSdkVersion) {
         if (this.mVideoCall == null && this.mVideoCallProvider != null) {
             try {
-                this.mVideoCall = new VideoCallImpl(this.mVideoCallProvider, callingPackageName, targetSdkVersion);
+                this.mVideoCall =
+                        new VideoCallImpl(
+                                this.mVideoCallProvider, callingPackageName, targetSdkVersion);
             } catch (RemoteException e) {
             }
         }
@@ -512,7 +626,8 @@ public final class ParcelableCall implements Parcelable {
         parcel.writeParcelable(this.mGatewayInfo, 0);
         parcel.writeParcelable(this.mAccountHandle, 0);
         parcel.writeByte(this.mIsVideoCallProviderChanged ? (byte) 1 : (byte) 0);
-        parcel.writeStrongBinder(this.mVideoCallProvider != null ? this.mVideoCallProvider.asBinder() : null);
+        parcel.writeStrongBinder(
+                this.mVideoCallProvider != null ? this.mVideoCallProvider.asBinder() : null);
         parcel.writeString(this.mParentCallId);
         parcel.writeList(this.mChildCallIds);
         parcel.writeParcelable(this.mStatusHints, 0);
@@ -532,6 +647,7 @@ public final class ParcelableCall implements Parcelable {
     }
 
     public String toString() {
-        return String.format("[%s, parent:%s, children:%s]", this.mId, this.mParentCallId, this.mChildCallIds);
+        return String.format(
+                "[%s, parent:%s, children:%s]", this.mId, this.mParentCallId, this.mChildCallIds);
     }
 }

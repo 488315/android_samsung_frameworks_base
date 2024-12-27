@@ -41,7 +41,8 @@ public class HWParamResultData extends HWParamData {
         out.writeString(this.envlogMaps);
     }
 
-    public void setBasicParam(String compID, String compVer, String compManufacture, String hitType, String feature) {
+    public void setBasicParam(
+            String compID, String compVer, String compManufacture, String hitType, String feature) {
         this.compID = compID;
         this.compVer = compVer;
         this.compManufacture = compManufacture;

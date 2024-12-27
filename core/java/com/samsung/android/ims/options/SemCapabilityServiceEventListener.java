@@ -5,37 +5,40 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.samsung.android.ims.util.SemImsUri;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public interface SemCapabilityServiceEventListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.ims.options.SemCapabilityServiceEventListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.ims.options.SemCapabilityServiceEventListener";
 
-    void onCapabilitiesChanged(SemImsUri semImsUri, SemCapabilities semCapabilities) throws RemoteException;
+    void onCapabilitiesChanged(SemImsUri semImsUri, SemCapabilities semCapabilities)
+            throws RemoteException;
 
     void onCapabilityAndAvailabilityPublished(int i) throws RemoteException;
 
-    void onMultipleCapabilitiesChanged(List<SemImsUri> list, List<SemCapabilities> list2) throws RemoteException;
+    void onMultipleCapabilitiesChanged(List<SemImsUri> list, List<SemCapabilities> list2)
+            throws RemoteException;
 
     void onOwnCapabilitiesChanged() throws RemoteException;
 
     public static class Default implements SemCapabilityServiceEventListener {
         @Override // com.samsung.android.ims.options.SemCapabilityServiceEventListener
-        public void onOwnCapabilitiesChanged() throws RemoteException {
-        }
+        public void onOwnCapabilitiesChanged() throws RemoteException {}
 
         @Override // com.samsung.android.ims.options.SemCapabilityServiceEventListener
-        public void onCapabilitiesChanged(SemImsUri uri, SemCapabilities capa) throws RemoteException {
-        }
+        public void onCapabilitiesChanged(SemImsUri uri, SemCapabilities capa)
+                throws RemoteException {}
 
         @Override // com.samsung.android.ims.options.SemCapabilityServiceEventListener
-        public void onMultipleCapabilitiesChanged(List<SemImsUri> uris, List<SemCapabilities> capaList) throws RemoteException {
-        }
+        public void onMultipleCapabilitiesChanged(
+                List<SemImsUri> uris, List<SemCapabilities> capaList) throws RemoteException {}
 
         @Override // com.samsung.android.ims.options.SemCapabilityServiceEventListener
-        public void onCapabilityAndAvailabilityPublished(int errorCode) throws RemoteException {
-        }
+        public void onCapabilityAndAvailabilityPublished(int errorCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -43,7 +46,7 @@ public interface SemCapabilityServiceEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements SemCapabilityServiceEventListener {
+    public abstract static class Stub extends Binder implements SemCapabilityServiceEventListener {
         static final int TRANSACTION_onCapabilitiesChanged = 2;
         static final int TRANSACTION_onCapabilityAndAvailabilityPublished = 4;
         static final int TRANSACTION_onMultipleCapabilitiesChanged = 3;
@@ -90,7 +93,8 @@ public interface SemCapabilityServiceEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(SemCapabilityServiceEventListener.DESCRIPTOR);
             }
@@ -105,14 +109,16 @@ public interface SemCapabilityServiceEventListener extends IInterface {
                     return true;
                 case 2:
                     SemImsUri _arg0 = (SemImsUri) data.readTypedObject(SemImsUri.CREATOR);
-                    SemCapabilities _arg1 = (SemCapabilities) data.readTypedObject(SemCapabilities.CREATOR);
+                    SemCapabilities _arg1 =
+                            (SemCapabilities) data.readTypedObject(SemCapabilities.CREATOR);
                     data.enforceNoDataAvail();
                     onCapabilitiesChanged(_arg0, _arg1);
                     reply.writeNoException();
                     return true;
                 case 3:
                     List<SemImsUri> _arg02 = data.createTypedArrayList(SemImsUri.CREATOR);
-                    List<SemCapabilities> _arg12 = data.createTypedArrayList(SemCapabilities.CREATOR);
+                    List<SemCapabilities> _arg12 =
+                            data.createTypedArrayList(SemCapabilities.CREATOR);
                     data.enforceNoDataAvail();
                     onMultipleCapabilitiesChanged(_arg02, _arg12);
                     reply.writeNoException();
@@ -159,7 +165,8 @@ public interface SemCapabilityServiceEventListener extends IInterface {
             }
 
             @Override // com.samsung.android.ims.options.SemCapabilityServiceEventListener
-            public void onCapabilitiesChanged(SemImsUri uri, SemCapabilities capa) throws RemoteException {
+            public void onCapabilitiesChanged(SemImsUri uri, SemCapabilities capa)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -175,7 +182,8 @@ public interface SemCapabilityServiceEventListener extends IInterface {
             }
 
             @Override // com.samsung.android.ims.options.SemCapabilityServiceEventListener
-            public void onMultipleCapabilitiesChanged(List<SemImsUri> uris, List<SemCapabilities> capaList) throws RemoteException {
+            public void onMultipleCapabilitiesChanged(
+                    List<SemImsUri> uris, List<SemCapabilities> capaList) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

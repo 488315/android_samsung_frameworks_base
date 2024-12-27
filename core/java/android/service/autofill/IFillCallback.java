@@ -18,16 +18,13 @@ public interface IFillCallback extends IInterface {
 
     public static class Default implements IFillCallback {
         @Override // android.service.autofill.IFillCallback
-        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {
-        }
+        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {}
 
         @Override // android.service.autofill.IFillCallback
-        public void onSuccess(FillResponse response) throws RemoteException {
-        }
+        public void onSuccess(FillResponse response) throws RemoteException {}
 
         @Override // android.service.autofill.IFillCallback
-        public void onFailure(int requestId, CharSequence message) throws RemoteException {
-        }
+        public void onFailure(int requestId, CharSequence message) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +32,7 @@ public interface IFillCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFillCallback {
+    public abstract static class Stub extends Binder implements IFillCallback {
         public static final String DESCRIPTOR = "android.service.autofill.IFillCallback";
         static final int TRANSACTION_onCancellable = 1;
         static final int TRANSACTION_onFailure = 3;
@@ -80,7 +77,8 @@ public interface IFillCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -90,7 +88,8 @@ public interface IFillCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ICancellationSignal _arg0 = ICancellationSignal.Stub.asInterface(data.readStrongBinder());
+                    ICancellationSignal _arg0 =
+                            ICancellationSignal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCancellable(_arg0);
                     return true;
@@ -101,7 +100,8 @@ public interface IFillCallback extends IInterface {
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    CharSequence _arg1 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg1 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg03, _arg1);
                     return true;

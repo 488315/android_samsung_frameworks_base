@@ -3,13 +3,16 @@ package com.android.server.locksettings;
 import android.security.keystore.KeyGenParameterSpec;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockscreenCredential;
+
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -61,15 +64,33 @@ public class UnifiedProfilePasswordCache {
                 }
                 String str = "com.android.server.locksettings.unified_profile_cache_v2_" + i;
                 try {
-                    KeyGenerator keyGenerator = KeyGenerator.getInstance("AES", this.mKeyStore.getProvider());
-                    KeyGenParameterSpec.Builder blockModes = new KeyGenParameterSpec.Builder(str, 3).setKeySize(256).setBlockModes("GCM");
+                    KeyGenerator keyGenerator =
+                            KeyGenerator.getInstance("AES", this.mKeyStore.getProvider());
+                    KeyGenParameterSpec.Builder blockModes =
+                            new KeyGenParameterSpec.Builder(str, 3)
+                                    .setKeySize(256)
+                                    .setBlockModes("GCM");
                     byte[] bArr = SyntheticPasswordCrypto.PROTECTOR_SECRET_PERSONALIZATION;
-                    keyGenerator.init(blockModes.setNamespace(103).setEncryptionPaddings("NoPadding").setUserAuthenticationRequired(true).setBoundToSpecificSecureUserId(j).setUserAuthenticationValidityDurationSeconds(CACHE_TIMEOUT_SECONDS).build());
+                    keyGenerator.init(
+                            blockModes
+                                    .setNamespace(103)
+                                    .setEncryptionPaddings("NoPadding")
+                                    .setUserAuthenticationRequired(true)
+                                    .setBoundToSpecificSecureUserId(j)
+                                    .setUserAuthenticationValidityDurationSeconds(
+                                            CACHE_TIMEOUT_SECONDS)
+                                    .build());
                     SecretKey generateKey = keyGenerator.generateKey();
                     try {
                         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
                         cipher.init(1, generateKey);
-                        this.mEncryptedPasswords.put(i, ArrayUtils.concat(new byte[][]{cipher.getIV(), cipher.doFinal(lockscreenCredential.getCredential())}));
+                        this.mEncryptedPasswords.put(
+                                i,
+                                ArrayUtils.concat(
+                                        new byte[][] {
+                                            cipher.getIV(),
+                                            cipher.doFinal(lockscreenCredential.getCredential())
+                                        }));
                     } catch (GeneralSecurityException e) {
                         Slog.d("UnifiedProfilePasswordCache", "Cannot encrypt", e);
                     }

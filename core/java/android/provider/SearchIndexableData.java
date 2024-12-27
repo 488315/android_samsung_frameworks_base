@@ -3,6 +3,7 @@ package android.provider;
 import android.annotation.SystemApi;
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.util.Locale;
 
 @SystemApi
@@ -33,6 +34,30 @@ public abstract class SearchIndexableData {
     }
 
     public String toString() {
-        return "SearchIndexableData[context: " + this.context + ", locale: " + this.locale + ", enabled: " + this.enabled + ", rank: " + this.rank + ", key: " + this.key + ", userId: " + this.userId + ", className: " + this.className + ", packageName: " + this.packageName + ", iconResId: " + this.iconResId + ", intentAction: " + this.intentAction + ", intentTargetPackage: " + this.intentTargetPackage + ", intentTargetClass: " + this.intentTargetClass + NavigationBarInflaterView.SIZE_MOD_END;
+        return "SearchIndexableData[context: "
+                + this.context
+                + ", locale: "
+                + this.locale
+                + ", enabled: "
+                + this.enabled
+                + ", rank: "
+                + this.rank
+                + ", key: "
+                + this.key
+                + ", userId: "
+                + this.userId
+                + ", className: "
+                + this.className
+                + ", packageName: "
+                + this.packageName
+                + ", iconResId: "
+                + this.iconResId
+                + ", intentAction: "
+                + this.intentAction
+                + ", intentTargetPackage: "
+                + this.intentTargetPackage
+                + ", intentTargetClass: "
+                + this.intentTargetClass
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

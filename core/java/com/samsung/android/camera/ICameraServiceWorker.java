@@ -45,12 +45,12 @@ public interface ICameraServiceWorker extends IInterface {
 
     public static class Default implements ICameraServiceWorker {
         @Override // com.samsung.android.camera.ICameraServiceWorker
-        public void pingForUpdate() throws RemoteException {
-        }
+        public void pingForUpdate() throws RemoteException {}
 
         @Override // com.samsung.android.camera.ICameraServiceWorker
-        public void notifyCameraState(String cameraId, int facing, int newCameraState, String clientName, int apiLevel) throws RemoteException {
-        }
+        public void notifyCameraState(
+                String cameraId, int facing, int newCameraState, String clientName, int apiLevel)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.ICameraServiceWorker
         public String queryPackageName(int pid, int uid) throws RemoteException {
@@ -63,26 +63,26 @@ public interface ICameraServiceWorker extends IInterface {
         }
 
         @Override // com.samsung.android.camera.ICameraServiceWorker
-        public void notifyCameraSessionEvent(int eventType, String eventDetail) throws RemoteException {
-        }
+        public void notifyCameraSessionEvent(int eventType, String eventDetail)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.ICameraServiceWorker
-        public void setDeviceOrientationListener(boolean enable) throws RemoteException {
-        }
+        public void setDeviceOrientationListener(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.camera.ICameraServiceWorker
-        public int getDeviceOrientationForDeviceInjector(String packageName, int userId) throws RemoteException {
+        public int getDeviceOrientationForDeviceInjector(String packageName, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.camera.ICameraServiceWorker
-        public boolean getDeviceInjectorOverride(String packageName, int userId) throws RemoteException {
+        public boolean getDeviceInjectorOverride(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.camera.ICameraServiceWorker
-        public void storeLoggingData(int type, String data) throws RemoteException {
-        }
+        public void storeLoggingData(int type, String data) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -90,7 +90,7 @@ public interface ICameraServiceWorker extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICameraServiceWorker {
+    public abstract static class Stub extends Binder implements ICameraServiceWorker {
         static final int TRANSACTION_acquireRequestInjector = 4;
         static final int TRANSACTION_getDeviceInjectorOverride = 8;
         static final int TRANSACTION_getDeviceOrientationForDeviceInjector = 7;
@@ -152,7 +152,8 @@ public interface ICameraServiceWorker extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICameraServiceWorker.DESCRIPTOR);
             }
@@ -253,7 +254,13 @@ public interface ICameraServiceWorker extends IInterface {
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
-            public void notifyCameraState(String cameraId, int facing, int newCameraState, String clientName, int apiLevel) throws RemoteException {
+            public void notifyCameraState(
+                    String cameraId,
+                    int facing,
+                    int newCameraState,
+                    String clientName,
+                    int apiLevel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
@@ -303,7 +310,8 @@ public interface ICameraServiceWorker extends IInterface {
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
-            public void notifyCameraSessionEvent(int eventType, String eventDetail) throws RemoteException {
+            public void notifyCameraSessionEvent(int eventType, String eventDetail)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICameraServiceWorker.DESCRIPTOR);
@@ -331,7 +339,8 @@ public interface ICameraServiceWorker extends IInterface {
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
-            public int getDeviceOrientationForDeviceInjector(String packageName, int userId) throws RemoteException {
+            public int getDeviceOrientationForDeviceInjector(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -349,7 +358,8 @@ public interface ICameraServiceWorker extends IInterface {
             }
 
             @Override // com.samsung.android.camera.ICameraServiceWorker
-            public boolean getDeviceInjectorOverride(String packageName, int userId) throws RemoteException {
+            public boolean getDeviceInjectorOverride(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

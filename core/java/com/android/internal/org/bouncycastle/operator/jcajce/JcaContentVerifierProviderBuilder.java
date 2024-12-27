@@ -19,6 +19,7 @@ import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 import com.android.internal.org.bouncycastle.operator.RawContentVerifier;
 import com.android.internal.org.bouncycastle.operator.RuntimeOperatorException;
 import com.android.internal.org.bouncycastle.util.io.TeeOutputStream;
+
 import java.io.OutputStream;
 import java.security.GeneralSecurityException;
 import java.security.Provider;
@@ -44,14 +45,17 @@ public class JcaContentVerifierProviderBuilder {
         return this;
     }
 
-    public ContentVerifierProvider build(X509CertificateHolder certHolder) throws OperatorCreationException, CertificateException {
+    public ContentVerifierProvider build(X509CertificateHolder certHolder)
+            throws OperatorCreationException, CertificateException {
         return build(this.helper.convertCertificate(certHolder));
     }
 
-    public ContentVerifierProvider build(final X509Certificate certificate) throws OperatorCreationException {
+    public ContentVerifierProvider build(final X509Certificate certificate)
+            throws OperatorCreationException {
         try {
             final X509CertificateHolder certHolder = new JcaX509CertificateHolder(certificate);
-            return new ContentVerifierProvider() { // from class: com.android.internal.org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder.1
+            return new ContentVerifierProvider() { // from class:
+                                                   // com.android.internal.org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder.1
                 @Override // com.android.internal.org.bouncycastle.operator.ContentVerifierProvider
                 public boolean hasAssociatedCertificate() {
                     return true;
@@ -63,18 +67,28 @@ public class JcaContentVerifierProviderBuilder {
                 }
 
                 @Override // com.android.internal.org.bouncycastle.operator.ContentVerifierProvider
-                public ContentVerifier get(AlgorithmIdentifier algorithm) throws OperatorCreationException {
-                    if (algorithm.getAlgorithm().equals((ASN1Primitive) MiscObjectIdentifiers.id_alg_composite)) {
-                        return JcaContentVerifierProviderBuilder.this.createCompositeVerifier(algorithm, certificate.getPublicKey());
+                public ContentVerifier get(AlgorithmIdentifier algorithm)
+                        throws OperatorCreationException {
+                    if (algorithm
+                            .getAlgorithm()
+                            .equals((ASN1Primitive) MiscObjectIdentifiers.id_alg_composite)) {
+                        return JcaContentVerifierProviderBuilder.this.createCompositeVerifier(
+                                algorithm, certificate.getPublicKey());
                     }
                     try {
-                        Signature sig = JcaContentVerifierProviderBuilder.this.helper.createSignature(algorithm);
+                        Signature sig =
+                                JcaContentVerifierProviderBuilder.this.helper.createSignature(
+                                        algorithm);
                         sig.initVerify(certificate.getPublicKey());
-                        Signature rawSig = JcaContentVerifierProviderBuilder.this.createRawSig(algorithm, certificate.getPublicKey());
+                        Signature rawSig =
+                                JcaContentVerifierProviderBuilder.this.createRawSig(
+                                        algorithm, certificate.getPublicKey());
                         if (rawSig != null) {
-                            return JcaContentVerifierProviderBuilder.this.new RawSigVerifier(algorithm, sig, rawSig);
+                            return JcaContentVerifierProviderBuilder.this
+                            .new RawSigVerifier(algorithm, sig, rawSig);
                         }
-                        return JcaContentVerifierProviderBuilder.this.new SigVerifier(algorithm, sig);
+                        return JcaContentVerifierProviderBuilder.this
+                        .new SigVerifier(algorithm, sig);
                     } catch (GeneralSecurityException e) {
                         throw new OperatorCreationException("exception on setup: " + e, e);
                     }
@@ -85,8 +99,10 @@ public class JcaContentVerifierProviderBuilder {
         }
     }
 
-    public ContentVerifierProvider build(final PublicKey publicKey) throws OperatorCreationException {
-        return new ContentVerifierProvider() { // from class: com.android.internal.org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder.2
+    public ContentVerifierProvider build(final PublicKey publicKey)
+            throws OperatorCreationException {
+        return new ContentVerifierProvider() { // from class:
+                                               // com.android.internal.org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder.2
             @Override // com.android.internal.org.bouncycastle.operator.ContentVerifierProvider
             public boolean hasAssociatedCertificate() {
                 return false;
@@ -98,41 +114,57 @@ public class JcaContentVerifierProviderBuilder {
             }
 
             @Override // com.android.internal.org.bouncycastle.operator.ContentVerifierProvider
-            public ContentVerifier get(AlgorithmIdentifier algorithm) throws OperatorCreationException {
-                if (algorithm.getAlgorithm().equals((ASN1Primitive) MiscObjectIdentifiers.id_alg_composite)) {
-                    return JcaContentVerifierProviderBuilder.this.createCompositeVerifier(algorithm, publicKey);
+            public ContentVerifier get(AlgorithmIdentifier algorithm)
+                    throws OperatorCreationException {
+                if (algorithm
+                        .getAlgorithm()
+                        .equals((ASN1Primitive) MiscObjectIdentifiers.id_alg_composite)) {
+                    return JcaContentVerifierProviderBuilder.this.createCompositeVerifier(
+                            algorithm, publicKey);
                 }
                 if (publicKey instanceof CompositePublicKey) {
                     List<PublicKey> keys = ((CompositePublicKey) publicKey).getPublicKeys();
                     for (int i = 0; i != keys.size(); i++) {
                         try {
-                            Signature sig = JcaContentVerifierProviderBuilder.this.createSignature(algorithm, keys.get(i));
-                            Signature rawSig = JcaContentVerifierProviderBuilder.this.createRawSig(algorithm, keys.get(i));
+                            Signature sig =
+                                    JcaContentVerifierProviderBuilder.this.createSignature(
+                                            algorithm, keys.get(i));
+                            Signature rawSig =
+                                    JcaContentVerifierProviderBuilder.this.createRawSig(
+                                            algorithm, keys.get(i));
                             if (rawSig != null) {
-                                return JcaContentVerifierProviderBuilder.this.new RawSigVerifier(algorithm, sig, rawSig);
+                                return JcaContentVerifierProviderBuilder.this
+                                .new RawSigVerifier(algorithm, sig, rawSig);
                             }
-                            return JcaContentVerifierProviderBuilder.this.new SigVerifier(algorithm, sig);
+                            return JcaContentVerifierProviderBuilder.this
+                            .new SigVerifier(algorithm, sig);
                         } catch (OperatorCreationException e) {
                         }
                     }
                     throw new OperatorCreationException("no matching algorithm found for key");
                 }
-                Signature sig2 = JcaContentVerifierProviderBuilder.this.createSignature(algorithm, publicKey);
-                Signature rawSig2 = JcaContentVerifierProviderBuilder.this.createRawSig(algorithm, publicKey);
+                Signature sig2 =
+                        JcaContentVerifierProviderBuilder.this.createSignature(
+                                algorithm, publicKey);
+                Signature rawSig2 =
+                        JcaContentVerifierProviderBuilder.this.createRawSig(algorithm, publicKey);
                 if (rawSig2 != null) {
-                    return JcaContentVerifierProviderBuilder.this.new RawSigVerifier(algorithm, sig2, rawSig2);
+                    return JcaContentVerifierProviderBuilder.this
+                    .new RawSigVerifier(algorithm, sig2, rawSig2);
                 }
                 return JcaContentVerifierProviderBuilder.this.new SigVerifier(algorithm, sig2);
             }
         };
     }
 
-    public ContentVerifierProvider build(SubjectPublicKeyInfo publicKey) throws OperatorCreationException {
+    public ContentVerifierProvider build(SubjectPublicKeyInfo publicKey)
+            throws OperatorCreationException {
         return build(this.helper.convertPublicKey(publicKey));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public ContentVerifier createCompositeVerifier(AlgorithmIdentifier compAlgId, PublicKey publicKey) throws OperatorCreationException {
+    public ContentVerifier createCompositeVerifier(
+            AlgorithmIdentifier compAlgId, PublicKey publicKey) throws OperatorCreationException {
         if (publicKey instanceof CompositePublicKey) {
             List<PublicKey> pubKeys = ((CompositePublicKey) publicKey).getPublicKeys();
             ASN1Sequence keySeq = ASN1Sequence.getInstance(compAlgId.getParameters());
@@ -161,7 +193,8 @@ public class JcaContentVerifierProviderBuilder {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public Signature createSignature(AlgorithmIdentifier algorithm, PublicKey publicKey) throws OperatorCreationException {
+    public Signature createSignature(AlgorithmIdentifier algorithm, PublicKey publicKey)
+            throws OperatorCreationException {
         try {
             Signature sig = this.helper.createSignature(algorithm);
             sig.initVerify(publicKey);
@@ -214,7 +247,8 @@ public class JcaContentVerifierProviderBuilder {
             try {
                 return this.signature.verify(expected);
             } catch (SignatureException e) {
-                throw new RuntimeOperatorException("exception obtaining signature: " + e.getMessage(), e);
+                throw new RuntimeOperatorException(
+                        "exception obtaining signature: " + e.getMessage(), e);
             }
         }
     }
@@ -222,7 +256,8 @@ public class JcaContentVerifierProviderBuilder {
     private class RawSigVerifier extends SigVerifier implements RawContentVerifier {
         private Signature rawSignature;
 
-        RawSigVerifier(AlgorithmIdentifier algorithm, Signature standardSig, Signature rawSignature) {
+        RawSigVerifier(
+                AlgorithmIdentifier algorithm, Signature standardSig, Signature rawSignature) {
             super(algorithm, standardSig);
             this.rawSignature = rawSignature;
         }
@@ -246,7 +281,8 @@ public class JcaContentVerifierProviderBuilder {
                     this.rawSignature.update(digest);
                     return this.rawSignature.verify(expected);
                 } catch (SignatureException e) {
-                    throw new RuntimeOperatorException("exception obtaining raw signature: " + e.getMessage(), e);
+                    throw new RuntimeOperatorException(
+                            "exception obtaining raw signature: " + e.getMessage(), e);
                 }
             } finally {
                 try {
@@ -273,7 +309,9 @@ public class JcaContentVerifierProviderBuilder {
             this.stream = OutputStreamFactory.createStream(sigs[start]);
             for (int i = start + 1; i != sigs.length; i++) {
                 if (sigs[i] != null) {
-                    this.stream = new TeeOutputStream(this.stream, OutputStreamFactory.createStream(sigs[i]));
+                    this.stream =
+                            new TeeOutputStream(
+                                    this.stream, OutputStreamFactory.createStream(sigs[i]));
                 }
             }
         }
@@ -294,13 +332,16 @@ public class JcaContentVerifierProviderBuilder {
                 ASN1Sequence sigSeq = ASN1Sequence.getInstance(expected);
                 boolean failed = false;
                 for (int i = 0; i != sigSeq.size(); i++) {
-                    if (this.sigs[i] != null && !this.sigs[i].verify(DERBitString.getInstance(sigSeq.getObjectAt(i)).getBytes())) {
+                    if (this.sigs[i] != null
+                            && !this.sigs[i].verify(
+                                    DERBitString.getInstance(sigSeq.getObjectAt(i)).getBytes())) {
                         failed = true;
                     }
                 }
                 return !failed;
             } catch (SignatureException e) {
-                throw new RuntimeOperatorException("exception obtaining signature: " + e.getMessage(), e);
+                throw new RuntimeOperatorException(
+                        "exception obtaining signature: " + e.getMessage(), e);
             }
         }
     }

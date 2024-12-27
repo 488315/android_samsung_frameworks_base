@@ -12,7 +12,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.SparseArray;
 import android.view.InputDevice;
-import com.android.server.input.NativeInputManagerService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -22,53 +21,76 @@ public final class KeyboardLedController implements InputManager.InputDeviceList
     public final Handler mHandler;
     public InputManager mInputManager;
     public final SparseArray mKeyboardsWithMicMuteLed = new SparseArray();
-    public final AnonymousClass1 mMicrophoneMuteChangedIntentReceiver = new BroadcastReceiver() { // from class: com.android.server.input.KeyboardLedController.1
-        @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
-            KeyboardLedController.this.mHandler.sendMessage(Message.obtain(KeyboardLedController.this.mHandler, 2));
-        }
-    };
+    public final AnonymousClass1 mMicrophoneMuteChangedIntentReceiver =
+            new BroadcastReceiver() { // from class:
+                                      // com.android.server.input.KeyboardLedController.1
+                @Override // android.content.BroadcastReceiver
+                public final void onReceive(Context context, Intent intent) {
+                    KeyboardLedController.this.mHandler.sendMessage(
+                            Message.obtain(KeyboardLedController.this.mHandler, 2));
+                }
+            };
     public final NativeInputManagerService mNative;
     public SensorPrivacyManager mSensorPrivacyManager;
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.input.KeyboardLedController$1] */
-    public KeyboardLedController(Context context, Looper looper, NativeInputManagerService.NativeImpl nativeImpl) {
+    public KeyboardLedController(
+            Context context, Looper looper, NativeInputManagerService.NativeImpl nativeImpl) {
         this.mContext = context;
         this.mNative = nativeImpl;
-        this.mHandler = new Handler(looper, new Handler.Callback() { // from class: com.android.server.input.KeyboardLedController$$ExternalSyntheticLambda0
-            @Override // android.os.Handler.Callback
-            public final boolean handleMessage(Message message) {
-                KeyboardLedController keyboardLedController = KeyboardLedController.this;
-                keyboardLedController.getClass();
-                int i = message.what;
-                int i2 = 0;
-                if (i == 1) {
-                    int[] iArr = (int[]) message.obj;
-                    int length = iArr.length;
-                    while (i2 < length) {
-                        keyboardLedController.onInputDeviceChanged(iArr[i2]);
-                        i2++;
-                    }
-                    return true;
-                }
-                if (i != 2) {
-                    return false;
-                }
-                int i3 = (keyboardLedController.mAudioManager.isMicrophoneMute() || keyboardLedController.mSensorPrivacyManager.areAnySensorPrivacyTogglesEnabled(1)) ? -1 : 0;
-                while (i2 < keyboardLedController.mKeyboardsWithMicMuteLed.size()) {
-                    InputDevice inputDevice = (InputDevice) keyboardLedController.mKeyboardsWithMicMuteLed.valueAt(i2);
-                    if (inputDevice != null) {
-                        int id = inputDevice.getId();
-                        Light keyboardMicMuteLight = KeyboardLedController.getKeyboardMicMuteLight(inputDevice);
-                        if (keyboardMicMuteLight != null) {
-                            keyboardLedController.mNative.setLightColor(id, keyboardMicMuteLight.getId(), i3);
-                        }
-                    }
-                    i2++;
-                }
-                return true;
-            }
-        });
+        this.mHandler =
+                new Handler(
+                        looper,
+                        new Handler
+                                .Callback() { // from class:
+                                              // com.android.server.input.KeyboardLedController$$ExternalSyntheticLambda0
+                            @Override // android.os.Handler.Callback
+                            public final boolean handleMessage(Message message) {
+                                KeyboardLedController keyboardLedController =
+                                        KeyboardLedController.this;
+                                keyboardLedController.getClass();
+                                int i = message.what;
+                                int i2 = 0;
+                                if (i == 1) {
+                                    int[] iArr = (int[]) message.obj;
+                                    int length = iArr.length;
+                                    while (i2 < length) {
+                                        keyboardLedController.onInputDeviceChanged(iArr[i2]);
+                                        i2++;
+                                    }
+                                    return true;
+                                }
+                                if (i != 2) {
+                                    return false;
+                                }
+                                int i3 =
+                                        (keyboardLedController.mAudioManager.isMicrophoneMute()
+                                                        || keyboardLedController
+                                                                .mSensorPrivacyManager
+                                                                .areAnySensorPrivacyTogglesEnabled(
+                                                                        1))
+                                                ? -1
+                                                : 0;
+                                while (i2 < keyboardLedController.mKeyboardsWithMicMuteLed.size()) {
+                                    InputDevice inputDevice =
+                                            (InputDevice)
+                                                    keyboardLedController.mKeyboardsWithMicMuteLed
+                                                            .valueAt(i2);
+                                    if (inputDevice != null) {
+                                        int id = inputDevice.getId();
+                                        Light keyboardMicMuteLight =
+                                                KeyboardLedController.getKeyboardMicMuteLight(
+                                                        inputDevice);
+                                        if (keyboardMicMuteLight != null) {
+                                            keyboardLedController.mNative.setLightColor(
+                                                    id, keyboardMicMuteLight.getId(), i3);
+                                        }
+                                    }
+                                    i2++;
+                                }
+                                return true;
+                            }
+                        });
     }
 
     public static Light getKeyboardMicMuteLight(InputDevice inputDevice) {

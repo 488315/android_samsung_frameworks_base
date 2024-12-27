@@ -9,20 +9,25 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.ArrayMap;
+
 import com.android.internal.R;
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.widget.MessagingMessage;
+
+import libcore.content.type.MimeMap;
+
 import com.google.android.mms.ContentType;
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.util.Locale;
 import java.util.Objects;
-import libcore.content.type.MimeMap;
 
 /* loaded from: classes5.dex */
 public class MimeIconUtils {
     private static final ArrayMap<String, ContentResolver.MimeTypeInfo> sCache = new ArrayMap<>();
 
-    private static ContentResolver.MimeTypeInfo buildTypeInfo(String mimeType, int iconId, int labelId, int extLabelId) {
+    private static ContentResolver.MimeTypeInfo buildTypeInfo(
+            String mimeType, int iconId, int labelId, int extLabelId) {
         CharSequence label;
         Resources res = Resources.getSystem();
         String ext = MimeMap.getDefault().guessExtensionFromMimeType(mimeType);
@@ -123,7 +128,8 @@ public class MimeIconUtils {
                 c = 65535;
                 break;
             case -1506009513:
-                if (mimeType.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.template")) {
+                if (mimeType.equals(
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.template")) {
                     c = DateFormat.HOUR_OF_DAY;
                     break;
                 }
@@ -249,7 +255,8 @@ public class MimeIconUtils {
                 c = 65535;
                 break;
             case -1073633483:
-                if (mimeType.equals("application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
+                if (mimeType.equals(
+                        "application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
                     c = DateFormat.MINUTE;
                     break;
                 }
@@ -263,7 +270,8 @@ public class MimeIconUtils {
                 c = 65535;
                 break;
             case -1050893613:
-                if (mimeType.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+                if (mimeType.equals(
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
                     c = 'g';
                     break;
                 }
@@ -536,7 +544,8 @@ public class MimeIconUtils {
                 c = 65535;
                 break;
             case 694663701:
-                if (mimeType.equals("application/vnd.openxmlformats-officedocument.presentationml.template")) {
+                if (mimeType.equals(
+                        "application/vnd.openxmlformats-officedocument.presentationml.template")) {
                     c = 'n';
                     break;
                 }
@@ -599,7 +608,8 @@ public class MimeIconUtils {
                 c = 65535;
                 break;
             case 1060806194:
-                if (mimeType.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.template")) {
+                if (mimeType.equals(
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.template")) {
                     c = DateFormat.HOUR;
                     break;
                 }
@@ -725,7 +735,8 @@ public class MimeIconUtils {
                 c = 65535;
                 break;
             case 1577426419:
-                if (mimeType.equals("application/vnd.openxmlformats-officedocument.presentationml.slideshow")) {
+                if (mimeType.equals(
+                        "application/vnd.openxmlformats-officedocument.presentationml.slideshow")) {
                     c = 'o';
                     break;
                 }
@@ -788,7 +799,8 @@ public class MimeIconUtils {
                 c = 65535;
                 break;
             case 1993842850:
-                if (mimeType.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
+                if (mimeType.equals(
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
                     c = 'j';
                     break;
                 }
@@ -829,7 +841,8 @@ public class MimeIconUtils {
         switch (c) {
             case 0:
             case 1:
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_folder, R.string.mime_type_folder, -1);
+                return buildTypeInfo(
+                        mimeType, R.drawable.ic_doc_folder, R.string.mime_type_folder, -1);
             case 2:
                 return buildTypeInfo(mimeType, R.drawable.ic_doc_apk, R.string.mime_type_apk, -1);
             case 3:
@@ -842,7 +855,11 @@ public class MimeIconUtils {
             case '\n':
             case 11:
             case '\f':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_certificate, R.string.mime_type_generic, R.string.mime_type_generic_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_certificate,
+                        R.string.mime_type_generic,
+                        R.string.mime_type_generic_ext);
             case '\r':
             case 14:
             case 15:
@@ -871,7 +888,11 @@ public class MimeIconUtils {
             case '&':
             case '\'':
             case '(':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_codes, R.string.mime_type_document, R.string.mime_type_document_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_codes,
+                        R.string.mime_type_document,
+                        R.string.mime_type_document_ext);
             case ')':
             case '*':
             case '+':
@@ -890,18 +911,34 @@ public class MimeIconUtils {
             case '8':
             case '9':
             case ':':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_compressed, R.string.mime_type_compressed, R.string.mime_type_compressed_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_compressed,
+                        R.string.mime_type_compressed,
+                        R.string.mime_type_compressed_ext);
             case ';':
             case '<':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_contact, R.string.mime_type_generic, R.string.mime_type_generic_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_contact,
+                        R.string.mime_type_generic,
+                        R.string.mime_type_generic_ext);
             case '=':
             case '>':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_event, R.string.mime_type_generic, R.string.mime_type_generic_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_event,
+                        R.string.mime_type_generic,
+                        R.string.mime_type_generic_ext);
             case '?':
             case '@':
             case 'A':
             case 'B':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_font, R.string.mime_type_generic, R.string.mime_type_generic_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_font,
+                        R.string.mime_type_generic,
+                        R.string.mime_type_generic_ext);
             case 'C':
             case 'D':
             case 'E':
@@ -909,16 +946,28 @@ public class MimeIconUtils {
             case 'G':
             case 'H':
             case 'I':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_image, R.string.mime_type_image, R.string.mime_type_image_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_image,
+                        R.string.mime_type_image,
+                        R.string.mime_type_image_ext);
             case 'J':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_pdf, R.string.mime_type_document, R.string.mime_type_document_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_pdf,
+                        R.string.mime_type_document,
+                        R.string.mime_type_document_ext);
             case 'K':
             case 'L':
             case 'M':
             case 'N':
             case 'O':
             case 'P':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_presentation, R.string.mime_type_presentation, R.string.mime_type_presentation_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_presentation,
+                        R.string.mime_type_presentation,
+                        R.string.mime_type_presentation_ext);
             case 'Q':
             case 'R':
             case 'S':
@@ -926,7 +975,11 @@ public class MimeIconUtils {
             case 'U':
             case 'V':
             case 'W':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_spreadsheet, R.string.mime_type_spreadsheet, R.string.mime_type_spreadsheet_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_spreadsheet,
+                        R.string.mime_type_spreadsheet,
+                        R.string.mime_type_spreadsheet_ext);
             case 'X':
             case 'Y':
             case 'Z':
@@ -939,23 +992,43 @@ public class MimeIconUtils {
             case 'a':
             case 'b':
             case 'c':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_document, R.string.mime_type_document, R.string.mime_type_document_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_document,
+                        R.string.mime_type_document,
+                        R.string.mime_type_document_ext);
             case 'd':
             case 'e':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_video, R.string.mime_type_video, R.string.mime_type_video_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_video,
+                        R.string.mime_type_video,
+                        R.string.mime_type_video_ext);
             case 'f':
             case 'g':
             case 'h':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_word, R.string.mime_type_document, R.string.mime_type_document_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_word,
+                        R.string.mime_type_document,
+                        R.string.mime_type_document_ext);
             case 'i':
             case 'j':
             case 'k':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_excel, R.string.mime_type_spreadsheet, R.string.mime_type_spreadsheet_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_excel,
+                        R.string.mime_type_spreadsheet,
+                        R.string.mime_type_spreadsheet_ext);
             case 'l':
             case 'm':
             case 'n':
             case 'o':
-                return buildTypeInfo(mimeType, R.drawable.ic_doc_powerpoint, R.string.mime_type_presentation, R.string.mime_type_presentation_ext);
+                return buildTypeInfo(
+                        mimeType,
+                        R.drawable.ic_doc_powerpoint,
+                        R.string.mime_type_presentation,
+                        R.string.mime_type_presentation_ext);
             default:
                 return buildGenericTypeInfo(mimeType);
         }
@@ -963,23 +1036,44 @@ public class MimeIconUtils {
 
     private static ContentResolver.MimeTypeInfo buildGenericTypeInfo(String mimeType) {
         if (mimeType.startsWith("audio/")) {
-            return buildTypeInfo(mimeType, R.drawable.ic_doc_audio, R.string.mime_type_audio, R.string.mime_type_audio_ext);
+            return buildTypeInfo(
+                    mimeType,
+                    R.drawable.ic_doc_audio,
+                    R.string.mime_type_audio,
+                    R.string.mime_type_audio_ext);
         }
         if (mimeType.startsWith(BnRConstants.VIDEO_DIR_PATH)) {
-            return buildTypeInfo(mimeType, R.drawable.ic_doc_video, R.string.mime_type_video, R.string.mime_type_video_ext);
+            return buildTypeInfo(
+                    mimeType,
+                    R.drawable.ic_doc_video,
+                    R.string.mime_type_video,
+                    R.string.mime_type_video_ext);
         }
         if (mimeType.startsWith(MessagingMessage.IMAGE_MIME_TYPE_PREFIX)) {
-            return buildTypeInfo(mimeType, R.drawable.ic_doc_image, R.string.mime_type_image, R.string.mime_type_image_ext);
+            return buildTypeInfo(
+                    mimeType,
+                    R.drawable.ic_doc_image,
+                    R.string.mime_type_image,
+                    R.string.mime_type_image_ext);
         }
         if (mimeType.startsWith("text/")) {
-            return buildTypeInfo(mimeType, R.drawable.ic_doc_text, R.string.mime_type_document, R.string.mime_type_document_ext);
+            return buildTypeInfo(
+                    mimeType,
+                    R.drawable.ic_doc_text,
+                    R.string.mime_type_document,
+                    R.string.mime_type_document_ext);
         }
         MimeMap mimeMap = MimeMap.getDefault();
-        String bouncedMimeType = mimeMap.guessMimeTypeFromExtension(mimeMap.guessExtensionFromMimeType(mimeType));
+        String bouncedMimeType =
+                mimeMap.guessMimeTypeFromExtension(mimeMap.guessExtensionFromMimeType(mimeType));
         if (bouncedMimeType != null && !Objects.equals(mimeType, bouncedMimeType)) {
             return buildTypeInfo(bouncedMimeType);
         }
-        return buildTypeInfo(mimeType, R.drawable.ic_doc_generic, R.string.mime_type_generic, R.string.mime_type_generic_ext);
+        return buildTypeInfo(
+                mimeType,
+                R.drawable.ic_doc_generic,
+                R.string.mime_type_generic,
+                R.string.mime_type_generic_ext);
     }
 
     public static ContentResolver.MimeTypeInfo getTypeInfo(String mimeType) {

@@ -1,6 +1,7 @@
 package com.android.server.appbinding;
 
 import com.android.server.appbinding.finders.CarrierMessagingClientServiceFinder;
+
 import java.io.PrintWriter;
 import java.util.function.Consumer;
 
@@ -10,7 +11,8 @@ public final /* synthetic */ class AppBindingService$$ExternalSyntheticLambda1 i
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ PrintWriter f$0;
 
-    public /* synthetic */ AppBindingService$$ExternalSyntheticLambda1(int i, PrintWriter printWriter) {
+    public /* synthetic */ AppBindingService$$ExternalSyntheticLambda1(
+            int i, PrintWriter printWriter) {
         this.$r8$classId = i;
         this.f$0 = printWriter;
     }
@@ -19,7 +21,8 @@ public final /* synthetic */ class AppBindingService$$ExternalSyntheticLambda1 i
     public final void accept(Object obj) {
         int i = this.$r8$classId;
         PrintWriter printWriter = this.f$0;
-        CarrierMessagingClientServiceFinder carrierMessagingClientServiceFinder = (CarrierMessagingClientServiceFinder) obj;
+        CarrierMessagingClientServiceFinder carrierMessagingClientServiceFinder =
+                (CarrierMessagingClientServiceFinder) obj;
         switch (i) {
             case 0:
                 carrierMessagingClientServiceFinder.getClass();
@@ -28,24 +31,34 @@ public final /* synthetic */ class AppBindingService$$ExternalSyntheticLambda1 i
                 printWriter.print("[Default SMS app]");
                 printWriter.println();
                 synchronized (carrierMessagingClientServiceFinder.mLock) {
-                    for (int i2 = 0; i2 < carrierMessagingClientServiceFinder.mTargetPackages.size(); i2++) {
+                    for (int i2 = 0;
+                            i2 < carrierMessagingClientServiceFinder.mTargetPackages.size();
+                            i2++) {
                         try {
-                            int keyAt = carrierMessagingClientServiceFinder.mTargetPackages.keyAt(i2);
+                            int keyAt =
+                                    carrierMessagingClientServiceFinder.mTargetPackages.keyAt(i2);
                             printWriter.print("    ");
                             printWriter.print("  User: ");
                             printWriter.print(keyAt);
                             printWriter.println();
                             printWriter.print("    ");
                             printWriter.print("    Package: ");
-                            printWriter.print((String) carrierMessagingClientServiceFinder.mTargetPackages.get(keyAt));
+                            printWriter.print(
+                                    (String)
+                                            carrierMessagingClientServiceFinder.mTargetPackages.get(
+                                                    keyAt));
                             printWriter.println();
                             printWriter.print("    ");
                             printWriter.print("    Service: ");
-                            printWriter.print(carrierMessagingClientServiceFinder.mTargetServices.get(keyAt));
+                            printWriter.print(
+                                    carrierMessagingClientServiceFinder.mTargetServices.get(keyAt));
                             printWriter.println();
                             printWriter.print("    ");
                             printWriter.print("    Message: ");
-                            printWriter.print((String) carrierMessagingClientServiceFinder.mLastMessages.get(keyAt));
+                            printWriter.print(
+                                    (String)
+                                            carrierMessagingClientServiceFinder.mLastMessages.get(
+                                                    keyAt));
                             printWriter.println();
                         } finally {
                         }
@@ -54,19 +67,30 @@ public final /* synthetic */ class AppBindingService$$ExternalSyntheticLambda1 i
                 return;
             default:
                 synchronized (carrierMessagingClientServiceFinder.mLock) {
-                    for (int i3 = 0; i3 < carrierMessagingClientServiceFinder.mTargetPackages.size(); i3++) {
+                    for (int i3 = 0;
+                            i3 < carrierMessagingClientServiceFinder.mTargetPackages.size();
+                            i3++) {
                         try {
-                            int keyAt2 = carrierMessagingClientServiceFinder.mTargetPackages.keyAt(i3);
+                            int keyAt2 =
+                                    carrierMessagingClientServiceFinder.mTargetPackages.keyAt(i3);
                             printWriter.print("finder,");
                             printWriter.print("[Default SMS app]");
                             printWriter.print(",");
                             printWriter.print(keyAt2);
                             printWriter.print(",");
-                            printWriter.print((String) carrierMessagingClientServiceFinder.mTargetPackages.get(keyAt2));
+                            printWriter.print(
+                                    (String)
+                                            carrierMessagingClientServiceFinder.mTargetPackages.get(
+                                                    keyAt2));
                             printWriter.print(",");
-                            printWriter.print(carrierMessagingClientServiceFinder.mTargetServices.get(keyAt2));
+                            printWriter.print(
+                                    carrierMessagingClientServiceFinder.mTargetServices.get(
+                                            keyAt2));
                             printWriter.print(",");
-                            printWriter.print((String) carrierMessagingClientServiceFinder.mLastMessages.get(keyAt2));
+                            printWriter.print(
+                                    (String)
+                                            carrierMessagingClientServiceFinder.mLastMessages.get(
+                                                    keyAt2));
                             printWriter.println();
                         } finally {
                         }

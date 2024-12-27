@@ -2,6 +2,7 @@ package com.android.internal.util;
 
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */

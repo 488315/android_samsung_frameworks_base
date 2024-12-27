@@ -1,6 +1,7 @@
 package com.samsung.android.service.ProtectedATCommand.list;
 
 import android.util.NtpTrustedTime;
+
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -38,9 +39,20 @@ public abstract class ICmdList {
         }
         try {
             if (cmd2.contains(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)) {
-                atCmd = new ATCommands(cmdName, cmd2.toUpperCase().getBytes("UTF-8"), check_data_0_to_9, cmd_type, true);
+                atCmd =
+                        new ATCommands(
+                                cmdName,
+                                cmd2.toUpperCase().getBytes("UTF-8"),
+                                check_data_0_to_9,
+                                cmd_type,
+                                true);
             } else {
-                atCmd = new ATCommands(cmdName, cmd2.toUpperCase().getBytes("UTF-8"), check_data_0_to_9, cmd_type);
+                atCmd =
+                        new ATCommands(
+                                cmdName,
+                                cmd2.toUpperCase().getBytes("UTF-8"),
+                                check_data_0_to_9,
+                                cmd_type);
             }
             this.mCmdList.add(atCmd);
         } catch (Exception e) {

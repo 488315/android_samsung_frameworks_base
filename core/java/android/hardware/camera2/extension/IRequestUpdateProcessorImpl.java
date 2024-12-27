@@ -10,7 +10,8 @@ import android.view.Surface;
 
 /* loaded from: classes2.dex */
 public interface IRequestUpdateProcessorImpl extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.camera2.extension.IRequestUpdateProcessorImpl";
+    public static final String DESCRIPTOR =
+            "android.hardware.camera2.extension.IRequestUpdateProcessorImpl";
 
     void onImageFormatUpdate(int i) throws RemoteException;
 
@@ -18,23 +19,22 @@ public interface IRequestUpdateProcessorImpl extends IInterface {
 
     void onResolutionUpdate(Size size) throws RemoteException;
 
-    CaptureStageImpl process(CameraMetadataNative cameraMetadataNative, int i) throws RemoteException;
+    CaptureStageImpl process(CameraMetadataNative cameraMetadataNative, int i)
+            throws RemoteException;
 
     public static class Default implements IRequestUpdateProcessorImpl {
         @Override // android.hardware.camera2.extension.IRequestUpdateProcessorImpl
-        public void onOutputSurface(Surface surface, int imageFormat) throws RemoteException {
-        }
+        public void onOutputSurface(Surface surface, int imageFormat) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IRequestUpdateProcessorImpl
-        public void onResolutionUpdate(Size size) throws RemoteException {
-        }
+        public void onResolutionUpdate(Size size) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IRequestUpdateProcessorImpl
-        public void onImageFormatUpdate(int imageFormat) throws RemoteException {
-        }
+        public void onImageFormatUpdate(int imageFormat) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IRequestUpdateProcessorImpl
-        public CaptureStageImpl process(CameraMetadataNative result, int sequenceId) throws RemoteException {
+        public CaptureStageImpl process(CameraMetadataNative result, int sequenceId)
+                throws RemoteException {
             return null;
         }
 
@@ -44,7 +44,7 @@ public interface IRequestUpdateProcessorImpl extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRequestUpdateProcessorImpl {
+    public abstract static class Stub extends Binder implements IRequestUpdateProcessorImpl {
         static final int TRANSACTION_onImageFormatUpdate = 3;
         static final int TRANSACTION_onOutputSurface = 1;
         static final int TRANSACTION_onResolutionUpdate = 2;
@@ -91,7 +91,8 @@ public interface IRequestUpdateProcessorImpl extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRequestUpdateProcessorImpl.DESCRIPTOR);
             }
@@ -120,7 +121,9 @@ public interface IRequestUpdateProcessorImpl extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 4:
-                    CameraMetadataNative _arg04 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg04 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     int _arg12 = data.readInt();
                     data.enforceNoDataAvail();
                     CaptureStageImpl _result = process(_arg04, _arg12);
@@ -195,7 +198,8 @@ public interface IRequestUpdateProcessorImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IRequestUpdateProcessorImpl
-            public CaptureStageImpl process(CameraMetadataNative result, int sequenceId) throws RemoteException {
+            public CaptureStageImpl process(CameraMetadataNative result, int sequenceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -204,7 +208,8 @@ public interface IRequestUpdateProcessorImpl extends IInterface {
                     _data.writeInt(sequenceId);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    CaptureStageImpl _result = (CaptureStageImpl) _reply.readTypedObject(CaptureStageImpl.CREATOR);
+                    CaptureStageImpl _result =
+                            (CaptureStageImpl) _reply.readTypedObject(CaptureStageImpl.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

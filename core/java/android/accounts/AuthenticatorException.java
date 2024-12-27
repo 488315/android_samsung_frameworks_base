@@ -2,8 +2,7 @@ package android.accounts;
 
 /* loaded from: classes.dex */
 public class AuthenticatorException extends AccountsException {
-    public AuthenticatorException() {
-    }
+    public AuthenticatorException() {}
 
     public AuthenticatorException(String message) {
         super(message);

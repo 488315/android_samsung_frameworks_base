@@ -11,6 +11,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.cdma.CdmaSmsCbProgramData;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.telephony.GsmAlphabet;
 import com.android.internal.telephony.SmsAddress;
 import com.android.internal.telephony.SmsConstants;
@@ -25,7 +26,9 @@ import com.android.internal.telephony.cdma.sms.UserData;
 import com.android.internal.util.BitwiseInputStream;
 import com.android.internal.util.HexDump;
 import com.android.telephony.Rlog;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -61,8 +64,7 @@ public class SmsMessage extends SmsMessageBase {
     private byte[] mUserDataCtcFota;
     private int status;
 
-    public static class SubmitPdu extends SmsMessageBase.SubmitPduBase {
-    }
+    public static class SubmitPdu extends SmsMessageBase.SubmitPduBase {}
 
     public SmsMessage(SmsAddress addr, SmsEnvelope env) {
         this.mOriginatingAddress = addr;
@@ -70,8 +72,7 @@ public class SmsMessage extends SmsMessageBase {
         createPdu();
     }
 
-    public SmsMessage() {
-    }
+    public SmsMessage() {}
 
     public static SmsMessage createFromPdu(byte[] pdu) {
         return semCreateFromPdu(SmsManager.getDefaultSmsSubscriptionId(), pdu);
@@ -89,7 +90,9 @@ public class SmsMessage extends SmsMessageBase {
             if (msg.mStatusOnIcc != 1 && msg.mStatusOnIcc != 3) {
                 msg.mMti = 1;
                 int size = data[1] & 255;
-                Rlog.d(LOG_TAG, "msg[" + index + "]statusOnIcc: " + msg.mStatusOnIcc + " size:" + size);
+                Rlog.d(
+                        LOG_TAG,
+                        "msg[" + index + "]statusOnIcc: " + msg.mStatusOnIcc + " size:" + size);
                 byte[] pdu = new byte[size];
                 System.arraycopy(data, 2, pdu, 0, size);
                 msg.parsePduFromEfRecord(pdu);
@@ -97,7 +100,9 @@ public class SmsMessage extends SmsMessageBase {
             }
             msg.mMti = 0;
             int size2 = data[1] & 255;
-            Rlog.d(LOG_TAG, "msg[" + index + "]statusOnIcc: " + msg.mStatusOnIcc + " size:" + size2);
+            Rlog.d(
+                    LOG_TAG,
+                    "msg[" + index + "]statusOnIcc: " + msg.mStatusOnIcc + " size:" + size2);
             byte[] pdu2 = new byte[size2];
             System.arraycopy(data, 2, pdu2, 0, size2);
             msg.parsePduFromEfRecord(pdu2);
@@ -113,11 +118,22 @@ public class SmsMessage extends SmsMessageBase {
         return 0;
     }
 
-    public static SubmitPdu getSubmitPdu(String scAddr, String destAddr, String message, boolean statusReportRequested, SmsHeader smsHeader) {
+    public static SubmitPdu getSubmitPdu(
+            String scAddr,
+            String destAddr,
+            String message,
+            boolean statusReportRequested,
+            SmsHeader smsHeader) {
         return getSubmitPdu(scAddr, destAddr, message, statusReportRequested, smsHeader, -1);
     }
 
-    public static SubmitPdu getSubmitPdu(String scAddr, String destAddr, String message, boolean statusReportRequested, SmsHeader smsHeader, int priority) {
+    public static SubmitPdu getSubmitPdu(
+            String scAddr,
+            String destAddr,
+            String message,
+            boolean statusReportRequested,
+            SmsHeader smsHeader,
+            int priority) {
         if (message == null || destAddr == null) {
             return null;
         }
@@ -127,7 +143,12 @@ public class SmsMessage extends SmsMessageBase {
         return privateGetSubmitPdu(destAddr, statusReportRequested, uData, priority);
     }
 
-    public static SubmitPdu getSubmitPdu(String scAddr, String destAddr, int destPort, byte[] data, boolean statusReportRequested) {
+    public static SubmitPdu getSubmitPdu(
+            String scAddr,
+            String destAddr,
+            int destPort,
+            byte[] data,
+            boolean statusReportRequested) {
         SmsHeader.PortAddrs portAddrs = new SmsHeader.PortAddrs();
         portAddrs.destPort = destPort;
         portAddrs.origPort = 0;
@@ -149,11 +170,13 @@ public class SmsMessage extends SmsMessageBase {
         return privateGetSubmitPdu(destAddr, statusReportRequested, uData);
     }
 
-    public static SubmitPdu getSubmitPdu(String destAddr, UserData userData, boolean statusReportRequested) {
+    public static SubmitPdu getSubmitPdu(
+            String destAddr, UserData userData, boolean statusReportRequested) {
         return privateGetSubmitPdu(destAddr, statusReportRequested, userData);
     }
 
-    public static SubmitPdu getSubmitPdu(String destAddr, UserData userData, boolean statusReportRequested, int priority) {
+    public static SubmitPdu getSubmitPdu(
+            String destAddr, UserData userData, boolean statusReportRequested, int priority) {
         return privateGetSubmitPdu(destAddr, statusReportRequested, userData, priority);
     }
 
@@ -187,7 +210,9 @@ public class SmsMessage extends SmsMessageBase {
 
     @Override // com.android.internal.telephony.SmsMessageBase
     public boolean isMwiDontStore() {
-        return this.mBearerData != null && this.mBearerData.numberOfMessages > 0 && this.mBearerData.userData == null;
+        return this.mBearerData != null
+                && this.mBearerData.numberOfMessages > 0
+                && this.mBearerData.userData == null;
     }
 
     @Override // com.android.internal.telephony.SmsMessageBase
@@ -206,7 +231,8 @@ public class SmsMessage extends SmsMessageBase {
         return false;
     }
 
-    public static GsmAlphabet.TextEncodingDetails calculateLength(CharSequence messageBody, boolean use7bitOnly, boolean isEntireMsg) {
+    public static GsmAlphabet.TextEncodingDetails calculateLength(
+            CharSequence messageBody, boolean use7bitOnly, boolean isEntireMsg) {
         return BearerData.calcTextEncodingDetails(messageBody, use7bitOnly, isEntireMsg);
     }
 
@@ -238,12 +264,17 @@ public class SmsMessage extends SmsMessageBase {
             length = dis.readUnsignedByte();
             addr.numberOfDigits = length;
         } catch (IOException ex) {
-            throw new RuntimeException("createFromPdu: conversion from byte array to object failed: " + ex, ex);
+            throw new RuntimeException(
+                    "createFromPdu: conversion from byte array to object failed: " + ex, ex);
         } catch (Exception ex2) {
             Rlog.e(LOG_TAG, "createFromPdu: conversion from byte array to object failed: " + ex2);
         }
         if (length > pdu.length) {
-            throw new RuntimeException("createFromPdu: Invalid pdu, addr.numberOfDigits " + length + " > pdu len " + pdu.length);
+            throw new RuntimeException(
+                    "createFromPdu: Invalid pdu, addr.numberOfDigits "
+                            + length
+                            + " > pdu len "
+                            + pdu.length);
         }
         addr.origBytes = new byte[length];
         dis.read(addr.origBytes, 0, length);
@@ -253,7 +284,11 @@ public class SmsMessage extends SmsMessageBase {
         env.causeCode = dis.readByte();
         int bearerDataLength = dis.readInt();
         if (bearerDataLength > pdu.length) {
-            throw new RuntimeException("createFromPdu: Invalid pdu, bearerDataLength " + bearerDataLength + " > pdu len " + pdu.length);
+            throw new RuntimeException(
+                    "createFromPdu: Invalid pdu, bearerDataLength "
+                            + bearerDataLength
+                            + " > pdu len "
+                            + pdu.length);
         }
         env.bearerData = new byte[bearerDataLength];
         dis.read(env.bearerData, 0, bearerDataLength);
@@ -264,7 +299,8 @@ public class SmsMessage extends SmsMessageBase {
         this.mEnvelope = env;
         this.mPdu = pdu;
         parseSms();
-        if (SmsManager.getDefault().getMnoName().toUpperCase().contains("KDDI") && this.mBearerData.callbackNumber != null) {
+        if (SmsManager.getDefault().getMnoName().toUpperCase().contains("KDDI")
+                && this.mBearerData.callbackNumber != null) {
             this.mOriginatingAddress = this.mBearerData.callbackNumber;
             env.origAddress = this.mBearerData.callbackNumber;
         }
@@ -421,7 +457,10 @@ public class SmsMessage extends SmsMessageBase {
                         break;
                     }
                 default:
-                    throw new Exception("unsupported parameterId (" + parameterId + NavigationBarInflaterView.KEY_CODE_END);
+                    throw new Exception(
+                            "unsupported parameterId ("
+                                    + parameterId
+                                    + NavigationBarInflaterView.KEY_CODE_END);
             }
             Rlog.e(LOG_TAG, "parsePduFromEfRecord: conversion from pdu to SmsMessage failed" + ex);
             this.mEnvelope = env;
@@ -470,7 +509,8 @@ public class SmsMessage extends SmsMessageBase {
             int consumedBits = 5 + 8;
             int remainingBits = userDataLen - consumedBits;
             int dataBits = this.mBearerData.userData.numFields * 8;
-            this.mBearerData.userData.payload = inStream.readByteArray(dataBits < remainingBits ? dataBits : remainingBits);
+            this.mBearerData.userData.payload =
+                    inStream.readByteArray(dataBits < remainingBits ? dataBits : remainingBits);
             this.mUserData = this.mBearerData.userData.payload;
             return true;
         } catch (BitwiseInputStream.AccessException ex) {
@@ -497,7 +537,9 @@ public class SmsMessage extends SmsMessageBase {
             this.mlastByte[1] = BearerData.mlastByte[1];
         }
         if (Rlog.isLoggable(LOGGABLE_TAG, 2)) {
-            Rlog.d(LOG_TAG, "MT raw BearerData = '" + HexDump.toHexString(this.mEnvelope.bearerData) + "'");
+            Rlog.d(
+                    LOG_TAG,
+                    "MT raw BearerData = '" + HexDump.toHexString(this.mEnvelope.bearerData) + "'");
             Rlog.d(LOG_TAG, "MT (decoded) BearerData = " + this.mBearerData);
         }
         this.mMessageRef = this.mBearerData.messageId;
@@ -508,9 +550,12 @@ public class SmsMessage extends SmsMessageBase {
             if (this.mBearerData.userData.msgEncodingSet) {
                 this.mReceivedEncodingType = this.mBearerData.userData.msgEncoding;
             }
-            if (SmsManager.getDefault().getSmsSetting(SmsConstants.SMS_WAP_PUSH_FORMAT_SMS) && this.mEnvelope.teleService == 4098 && this.mBearerData.userData.msgEncoding == 0) {
+            if (SmsManager.getDefault().getSmsSetting(SmsConstants.SMS_WAP_PUSH_FORMAT_SMS)
+                    && this.mEnvelope.teleService == 4098
+                    && this.mBearerData.userData.msgEncoding == 0) {
                 this.mUserDataCtcFota = new byte[this.mUserData.length];
-                System.arraycopy(this.mUserData, 0, this.mUserDataCtcFota, 0, this.mUserData.length);
+                System.arraycopy(
+                        this.mUserData, 0, this.mUserDataCtcFota, 0, this.mUserData.length);
             }
         }
         if (this.mBearerData.callbackNumber != null) {
@@ -528,10 +573,16 @@ public class SmsMessage extends SmsMessageBase {
             if (this.mBearerData.callbackNumber != null) {
                 Rlog.e(LOG_TAG, "SMS callback number: " + this.mBearerData.callbackNumber.address);
                 this.replyAddress = this.mBearerData.callbackNumber;
-                Rlog.e(LOG_TAG, "SMS CALL BACK NUMBER: getDisplayOriginatingAddress(): " + getDisplayOriginatingAddress());
+                Rlog.e(
+                        LOG_TAG,
+                        "SMS CALL BACK NUMBER: getDisplayOriginatingAddress(): "
+                                + getDisplayOriginatingAddress());
             } else {
                 this.replyAddress = null;
-                Rlog.e(LOG_TAG, "SMS CALL BACK NUMBER: null  getDisplayOriginatingAddress(): " + getDisplayOriginatingAddress());
+                Rlog.e(
+                        LOG_TAG,
+                        "SMS CALL BACK NUMBER: null  getDisplayOriginatingAddress(): "
+                                + getDisplayOriginatingAddress());
             }
         }
         if (this.mBearerData.msgCenterTimeStamp != null) {
@@ -543,7 +594,11 @@ public class SmsMessage extends SmsMessageBase {
         }
         if (this.mBearerData.messageType == 4) {
             if (!this.mBearerData.messageStatusSet) {
-                Rlog.d(LOG_TAG, "DELIVERY_ACK message without msgStatus (" + (this.mUserData == null ? "also missing" : "does have") + " userData).");
+                Rlog.d(
+                        LOG_TAG,
+                        "DELIVERY_ACK message without msgStatus ("
+                                + (this.mUserData == null ? "also missing" : "does have")
+                                + " userData).");
                 this.status = 2;
             } else {
                 this.status = this.mBearerData.errorClass << 8;
@@ -589,14 +644,17 @@ public class SmsMessage extends SmsMessageBase {
         addr.address = new String(addr.origBytes);
         if (!TextUtils.isEmpty(idd) && addr.address.startsWith(idd)) {
             addr.address = "+" + addr.address.substring(idd.length());
-        } else if (addr.ton == 1 && !TextUtils.isEmpty(addr.address) && addr.address.charAt(0) != '+') {
+        } else if (addr.ton == 1
+                && !TextUtils.isEmpty(addr.address)
+                && addr.address.charAt(0) != '+') {
             addr.address = "+" + addr.address;
         }
         Rlog.pii(LOG_TAG, " decodeSmsDisplayAddress = " + addr.address);
     }
 
     public SmsCbMessage parseBroadcastSms(String plmn, int slotIndex, int subId) {
-        BearerData bData = BearerData.decode(this.mEnvelope.bearerData, this.mEnvelope.serviceCategory);
+        BearerData bData =
+                BearerData.decode(this.mEnvelope.bearerData, this.mEnvelope.serviceCategory);
         if (bData == null) {
             Rlog.w(LOG_TAG, "BearerData.decode() returned null");
             return null;
@@ -605,10 +663,24 @@ public class SmsMessage extends SmsMessageBase {
             this.mReceivedEncodingType = bData.userData.msgEncoding;
         }
         if (Rlog.isLoggable(LOGGABLE_TAG, 2)) {
-            Rlog.d(LOG_TAG, "MT raw BearerData = " + HexDump.toHexString(this.mEnvelope.bearerData));
+            Rlog.d(
+                    LOG_TAG,
+                    "MT raw BearerData = " + HexDump.toHexString(this.mEnvelope.bearerData));
         }
         SmsCbLocation location = new SmsCbLocation(plmn);
-        return new SmsCbMessage(2, 1, bData.messageId, location, this.mEnvelope.serviceCategory, bData.getLanguage(), bData.userData.payloadStr, bData.priority, null, bData.cmasWarningInfo, slotIndex, subId);
+        return new SmsCbMessage(
+                2,
+                1,
+                bData.messageId,
+                location,
+                this.mEnvelope.serviceCategory,
+                bData.getLanguage(),
+                bData.userData.payloadStr,
+                bData.priority,
+                null,
+                bData.cmasWarningInfo,
+                slotIndex,
+                subId);
     }
 
     public byte[] getEnvelopeBearerData() {
@@ -645,16 +717,20 @@ public class SmsMessage extends SmsMessageBase {
         return msgId;
     }
 
-    private static SubmitPdu privateGetSubmitPdu(String destAddrStr, boolean statusReportRequested, UserData userData) {
+    private static SubmitPdu privateGetSubmitPdu(
+            String destAddrStr, boolean statusReportRequested, UserData userData) {
         return privateGetSubmitPdu(destAddrStr, statusReportRequested, userData, -1);
     }
 
-    private static SubmitPdu privateGetSubmitPdu(String destAddrStr, boolean statusReportRequested, UserData userData, int priority) {
+    private static SubmitPdu privateGetSubmitPdu(
+            String destAddrStr, boolean statusReportRequested, UserData userData, int priority) {
         if (destAddrStr == null || destAddrStr.length() == 0) {
             Log.e(LOG_TAG, "privateGetSubmitPdu - destAddrStr is invalid");
             return null;
         }
-        CdmaSmsAddress destAddr = CdmaSmsAddress.parse(PhoneNumberUtils.cdmaCheckAndProcessPlusCodeForSms(destAddrStr));
+        CdmaSmsAddress destAddr =
+                CdmaSmsAddress.parse(
+                        PhoneNumberUtils.cdmaCheckAndProcessPlusCodeForSms(destAddrStr));
         if (destAddr == null) {
             return null;
         }
@@ -678,7 +754,8 @@ public class SmsMessage extends SmsMessageBase {
             Rlog.d(LOG_TAG, "MO (encoded) BearerData = " + bearerData);
             Rlog.d(LOG_TAG, "MO raw BearerData = '" + HexDump.toHexString(encodedBearerData) + "'");
         }
-        int teleservice = (!bearerData.hasUserDataHeader || userData.msgEncoding == 2) ? 4098 : 4101;
+        int teleservice =
+                (!bearerData.hasUserDataHeader || userData.msgEncoding == 2) ? 4098 : 4101;
         SmsEnvelope envelope = new SmsEnvelope();
         envelope.messageType = 0;
         envelope.teleService = teleservice;
@@ -715,7 +792,9 @@ public class SmsMessage extends SmsMessageBase {
 
     public static SubmitPdu getDeliverPdu(String origAddr, String message, long date) {
         CdmaSmsAddress addr;
-        if (origAddr == null || message == null || (addr = CdmaSmsAddress.parse(origAddr)) == null) {
+        if (origAddr == null
+                || message == null
+                || (addr = CdmaSmsAddress.parse(origAddr)) == null) {
             return null;
         }
         BearerData bearerData = new BearerData();
@@ -835,21 +914,38 @@ public class SmsMessage extends SmsMessageBase {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         output.write(this.mEnvelope.serviceCategory);
         output.write(this.mEnvelope.teleService);
-        output.write(this.mEnvelope.origAddress.origBytes, 0, this.mEnvelope.origAddress.origBytes.length);
-        if (SmsManager.getDefault().getSmsSetting(SmsConstants.SMS_3GPP2_LGT_NETWORK) && this.mEnvelope.teleService == 4098) {
+        output.write(
+                this.mEnvelope.origAddress.origBytes,
+                0,
+                this.mEnvelope.origAddress.origBytes.length);
+        if (SmsManager.getDefault().getSmsSetting(SmsConstants.SMS_3GPP2_LGT_NETWORK)
+                && this.mEnvelope.teleService == 4098) {
             if (this.mBearerData.userData != null) {
-                output.write(this.mBearerData.userData.payload, 0, this.mBearerData.userData.payload.length);
+                output.write(
+                        this.mBearerData.userData.payload,
+                        0,
+                        this.mBearerData.userData.payload.length);
             }
             if (this.mBearerData.msgCenterTimeStamp != null) {
-                output.write(this.mBearerData.msgCenterTimeStamp.toString().getBytes(), 0, this.mBearerData.msgCenterTimeStamp.toString().length());
+                output.write(
+                        this.mBearerData.msgCenterTimeStamp.toString().getBytes(),
+                        0,
+                        this.mBearerData.msgCenterTimeStamp.toString().length());
             }
             if (this.mBearerData.callbackNumber != null) {
-                output.write(this.mBearerData.callbackNumber.toString().getBytes(), 0, this.mBearerData.callbackNumber.toString().length());
+                output.write(
+                        this.mBearerData.callbackNumber.toString().getBytes(),
+                        0,
+                        this.mBearerData.callbackNumber.toString().length());
             }
         } else {
             output.write(this.mEnvelope.bearerData, 0, this.mEnvelope.bearerData.length);
-            if (this.mEnvelope.origSubaddress != null && this.mEnvelope.origSubaddress.origBytes != null) {
-                output.write(this.mEnvelope.origSubaddress.origBytes, 0, this.mEnvelope.origSubaddress.origBytes.length);
+            if (this.mEnvelope.origSubaddress != null
+                    && this.mEnvelope.origSubaddress.origBytes != null) {
+                output.write(
+                        this.mEnvelope.origSubaddress.origBytes,
+                        0,
+                        this.mEnvelope.origSubaddress.origBytes.length);
             }
         }
         return output.toByteArray();
@@ -964,25 +1060,48 @@ public class SmsMessage extends SmsMessageBase {
         return 0;
     }
 
-    public static GsmAlphabet.TextEncodingDetails calculateLengthForEms(CharSequence messageBody, boolean use7bitOnly, boolean isEms) {
+    public static GsmAlphabet.TextEncodingDetails calculateLengthForEms(
+            CharSequence messageBody, boolean use7bitOnly, boolean isEms) {
         return BearerData.calcTextEncodingDetails(messageBody, use7bitOnly, true, isEms);
     }
 
-    public static SubmitPdu getSubmitPdu(int subId, String scAddr, String destAddr, String message, boolean statusReportRequested, SmsHeader smsHeader, String callbackNumber, int priority) {
+    public static SubmitPdu getSubmitPdu(
+            int subId,
+            String scAddr,
+            String destAddr,
+            String message,
+            boolean statusReportRequested,
+            SmsHeader smsHeader,
+            String callbackNumber,
+            int priority) {
         if (message == null || destAddr == null) {
             return null;
         }
         UserData uData = new UserData();
         uData.payloadStr = message;
         uData.userDataHeader = smsHeader;
-        return privateGetSubmitPdu(subId, destAddr, statusReportRequested, uData, callbackNumber, priority);
+        return privateGetSubmitPdu(
+                subId, destAddr, statusReportRequested, uData, callbackNumber, priority);
     }
 
-    public static SubmitPdu getSubmitPdu(int subId, String destAddr, UserData userData, boolean statusReportRequested, String callbackNumber, int priority) {
-        return privateGetSubmitPdu(subId, destAddr, statusReportRequested, userData, callbackNumber, priority);
+    public static SubmitPdu getSubmitPdu(
+            int subId,
+            String destAddr,
+            UserData userData,
+            boolean statusReportRequested,
+            String callbackNumber,
+            int priority) {
+        return privateGetSubmitPdu(
+                subId, destAddr, statusReportRequested, userData, callbackNumber, priority);
     }
 
-    public static SubmitPdu getSubmitPduForAutoLogin(String scAddr, String destAddr, String message, boolean statusReportRequested, SmsHeader smsHeader, int priority) {
+    public static SubmitPdu getSubmitPduForAutoLogin(
+            String scAddr,
+            String destAddr,
+            String message,
+            boolean statusReportRequested,
+            SmsHeader smsHeader,
+            int priority) {
         if (message == null || destAddr == null) {
             return null;
         }
@@ -1026,8 +1145,17 @@ public class SmsMessage extends SmsMessageBase {
         return this.mIsCtcFota;
     }
 
-    private static SubmitPdu privateGetSubmitPdu(int subId, String destAddrStr, boolean statusReportRequested, UserData userData, String callbackNumber, int priority) {
-        CdmaSmsAddress destAddr = CdmaSmsAddress.parse(PhoneNumberUtils.cdmaCheckAndProcessPlusCodeByNumberFormat(destAddrStr, 1, 1));
+    private static SubmitPdu privateGetSubmitPdu(
+            int subId,
+            String destAddrStr,
+            boolean statusReportRequested,
+            UserData userData,
+            String callbackNumber,
+            int priority) {
+        CdmaSmsAddress destAddr =
+                CdmaSmsAddress.parse(
+                        PhoneNumberUtils.cdmaCheckAndProcessPlusCodeByNumberFormat(
+                                destAddrStr, 1, 1));
         if (destAddr == null) {
             return null;
         }
@@ -1050,7 +1178,8 @@ public class SmsMessage extends SmsMessageBase {
             bearerData.priorityIndicatorSet = true;
             bearerData.priority = priority;
         }
-        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId).getSmsSetting(SmsConstants.SMS_3GPP2_LGT_NETWORK)) {
+        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId)
+                .getSmsSetting(SmsConstants.SMS_3GPP2_LGT_NETWORK)) {
             bearerData.languageIndicatorSet = true;
             bearerData.language = 64;
         }
@@ -1059,7 +1188,9 @@ public class SmsMessage extends SmsMessageBase {
         if (Rlog.isLoggable(LOGGABLE_TAG, 2)) {
             Rlog.d(LOG_TAG, "MO (encoded) BearerData = " + bearerData);
             if (encodedBearerData != null) {
-                Rlog.d(LOG_TAG, "MO raw BearerData = '" + HexDump.toHexString(encodedBearerData) + "'");
+                Rlog.d(
+                        LOG_TAG,
+                        "MO raw BearerData = '" + HexDump.toHexString(encodedBearerData) + "'");
             }
         }
         if (encodedBearerData == null) {
@@ -1101,7 +1232,10 @@ public class SmsMessage extends SmsMessageBase {
     }
 
     public static SubmitPdu getDomainChangeNotification(byte type, String doChgAddr) {
-        CdmaSmsAddress destAddr = CdmaSmsAddress.parse(PhoneNumberUtils.cdmaCheckAndProcessPlusCodeByNumberFormat(doChgAddr, 1, 1));
+        CdmaSmsAddress destAddr =
+                CdmaSmsAddress.parse(
+                        PhoneNumberUtils.cdmaCheckAndProcessPlusCodeByNumberFormat(
+                                doChgAddr, 1, 1));
         if (destAddr == null) {
             return null;
         }
@@ -1132,7 +1266,13 @@ public class SmsMessage extends SmsMessageBase {
         int minutes = cal.get(12);
         int seconds = cal.get(13);
         long scTimeMillis2 = months;
-        long UtcTimeStamp = ((years - 1900) * 31556926) + (scTimeMillis2 * 2629743) + (dates * 86400) + (hours * 3600) + (minutes * 60) + seconds;
+        long UtcTimeStamp =
+                ((years - 1900) * 31556926)
+                        + (scTimeMillis2 * 2629743)
+                        + (dates * 86400)
+                        + (hours * 3600)
+                        + (minutes * 60)
+                        + seconds;
         uData.payload[7] = (byte) (UtcTimeStamp & 255);
         uData.payload[6] = (byte) ((UtcTimeStamp >> 8) & 255);
         uData.payload[5] = (byte) ((UtcTimeStamp >> 16) & 255);
@@ -1142,7 +1282,9 @@ public class SmsMessage extends SmsMessageBase {
         if (Log.isLoggable(LOGGABLE_TAG, 2)) {
             Log.d(LOG_TAG, "MO (encoded) BearerData = " + bearerData);
             if (encodedBearerData != null) {
-                Log.d(LOG_TAG, "MO raw BearerData = '" + HexDump.toHexString(encodedBearerData) + "'");
+                Log.d(
+                        LOG_TAG,
+                        "MO raw BearerData = '" + HexDump.toHexString(encodedBearerData) + "'");
             }
         }
         if (encodedBearerData == null) {
@@ -1196,7 +1338,8 @@ public class SmsMessage extends SmsMessageBase {
         }
     }
 
-    public static GsmAlphabet.TextEncodingDetails calculateLengthWithEmail(CharSequence messageBody, boolean use7bitOnly, int maxEmailLen) {
+    public static GsmAlphabet.TextEncodingDetails calculateLengthWithEmail(
+            CharSequence messageBody, boolean use7bitOnly, int maxEmailLen) {
         return BearerData.calcTextEncodingDetailsWithEmail(messageBody, use7bitOnly, maxEmailLen);
     }
 

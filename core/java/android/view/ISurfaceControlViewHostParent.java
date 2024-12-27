@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.view.WindowManager;
 
 /* loaded from: classes4.dex */
 public interface ISurfaceControlViewHostParent extends IInterface {
@@ -17,12 +16,10 @@ public interface ISurfaceControlViewHostParent extends IInterface {
 
     public static class Default implements ISurfaceControlViewHostParent {
         @Override // android.view.ISurfaceControlViewHostParent
-        public void updateParams(WindowManager.LayoutParams[] childAttrs) throws RemoteException {
-        }
+        public void updateParams(WindowManager.LayoutParams[] childAttrs) throws RemoteException {}
 
         @Override // android.view.ISurfaceControlViewHostParent
-        public void forwardBackKeyToParent(KeyEvent keyEvent) throws RemoteException {
-        }
+        public void forwardBackKeyToParent(KeyEvent keyEvent) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +27,7 @@ public interface ISurfaceControlViewHostParent extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISurfaceControlViewHostParent {
+    public abstract static class Stub extends Binder implements ISurfaceControlViewHostParent {
         static final int TRANSACTION_forwardBackKeyToParent = 2;
         static final int TRANSACTION_updateParams = 1;
 
@@ -71,7 +68,8 @@ public interface ISurfaceControlViewHostParent extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISurfaceControlViewHostParent.DESCRIPTOR);
             }
@@ -81,7 +79,9 @@ public interface ISurfaceControlViewHostParent extends IInterface {
             }
             switch (code) {
                 case 1:
-                    WindowManager.LayoutParams[] _arg0 = (WindowManager.LayoutParams[]) data.createTypedArray(WindowManager.LayoutParams.CREATOR);
+                    WindowManager.LayoutParams[] _arg0 =
+                            (WindowManager.LayoutParams[])
+                                    data.createTypedArray(WindowManager.LayoutParams.CREATOR);
                     data.enforceNoDataAvail();
                     updateParams(_arg0);
                     return true;
@@ -112,7 +112,8 @@ public interface ISurfaceControlViewHostParent extends IInterface {
             }
 
             @Override // android.view.ISurfaceControlViewHostParent
-            public void updateParams(WindowManager.LayoutParams[] childAttrs) throws RemoteException {
+            public void updateParams(WindowManager.LayoutParams[] childAttrs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISurfaceControlViewHostParent.DESCRIPTOR);

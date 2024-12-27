@@ -9,14 +9,14 @@ import android.view.MotionEvent;
 
 /* loaded from: classes6.dex */
 public interface IAuthTouchEventListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.knox.zt.usertrust.IAuthTouchEventListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.knox.zt.usertrust.IAuthTouchEventListener";
 
     void onPointerEvent(MotionEvent motionEvent) throws RemoteException;
 
     public static class Default implements IAuthTouchEventListener {
         @Override // com.samsung.android.knox.zt.usertrust.IAuthTouchEventListener
-        public void onPointerEvent(MotionEvent event) throws RemoteException {
-        }
+        public void onPointerEvent(MotionEvent event) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IAuthTouchEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAuthTouchEventListener {
+    public abstract static class Stub extends Binder implements IAuthTouchEventListener {
         static final int TRANSACTION_onPointerEvent = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IAuthTouchEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAuthTouchEventListener.DESCRIPTOR);
             }

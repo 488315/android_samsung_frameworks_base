@@ -19,7 +19,8 @@ public class InterfaceConfigurationParcel implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            InterfaceConfigurationParcel interfaceConfigurationParcel = new InterfaceConfigurationParcel();
+            InterfaceConfigurationParcel interfaceConfigurationParcel =
+                    new InterfaceConfigurationParcel();
             interfaceConfigurationParcel.readFromParcel(parcel);
             return interfaceConfigurationParcel;
         }
@@ -53,13 +54,15 @@ public class InterfaceConfigurationParcel implements Parcelable {
                             if (parcel.dataPosition() - dataPosition < readInt) {
                                 this.flags = parcel.createStringArray();
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                                 parcel.setDataPosition(dataPosition + readInt);
                                 return;
                             }
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");

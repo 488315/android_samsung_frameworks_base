@@ -5,10 +5,12 @@ import android.content.res.ResourceId;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Slog;
+
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -36,23 +38,24 @@ public final class SuspendDialogInfo implements Parcelable {
     private final String mTitle;
     private final int mTitleResId;
     private static final String TAG = SuspendDialogInfo.class.getSimpleName();
-    public static final Parcelable.Creator<SuspendDialogInfo> CREATOR = new Parcelable.Creator<SuspendDialogInfo>() { // from class: android.content.pm.SuspendDialogInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SuspendDialogInfo createFromParcel(Parcel source) {
-            return new SuspendDialogInfo(source);
-        }
+    public static final Parcelable.Creator<SuspendDialogInfo> CREATOR =
+            new Parcelable.Creator<
+                    SuspendDialogInfo>() { // from class: android.content.pm.SuspendDialogInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SuspendDialogInfo createFromParcel(Parcel source) {
+                    return new SuspendDialogInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SuspendDialogInfo[] newArray(int size) {
-            return new SuspendDialogInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SuspendDialogInfo[] newArray(int size) {
+                    return new SuspendDialogInfo[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ButtonAction {
-    }
+    public @interface ButtonAction {}
 
     public int getIconResId() {
         return this.mIconResId;
@@ -146,7 +149,23 @@ public final class SuspendDialogInfo implements Parcelable {
 
     public int hashCode() {
         int hashCode = this.mIconResId;
-        return (((((((((((((hashCode * 31) + this.mTitleResId) * 31) + Objects.hashCode(this.mTitle)) * 31) + this.mNeutralButtonTextResId) * 31) + Objects.hashCode(this.mNeutralButtonText)) * 31) + this.mDialogMessageResId) * 31) + Objects.hashCode(this.mDialogMessage)) * 31) + this.mNeutralButtonAction;
+        return (((((((((((((hashCode * 31) + this.mTitleResId) * 31)
+                                                                                                + Objects
+                                                                                                        .hashCode(
+                                                                                                                this
+                                                                                                                        .mTitle))
+                                                                                        * 31)
+                                                                                + this
+                                                                                        .mNeutralButtonTextResId)
+                                                                        * 31)
+                                                                + Objects.hashCode(
+                                                                        this.mNeutralButtonText))
+                                                        * 31)
+                                                + this.mDialogMessageResId)
+                                        * 31)
+                                + Objects.hashCode(this.mDialogMessage))
+                        * 31)
+                + this.mNeutralButtonAction;
     }
 
     public boolean equals(Object obj) {
@@ -157,7 +176,14 @@ public final class SuspendDialogInfo implements Parcelable {
             return false;
         }
         SuspendDialogInfo otherDialogInfo = (SuspendDialogInfo) obj;
-        return this.mIconResId == otherDialogInfo.mIconResId && this.mTitleResId == otherDialogInfo.mTitleResId && Objects.equals(this.mTitle, otherDialogInfo.mTitle) && this.mDialogMessageResId == otherDialogInfo.mDialogMessageResId && Objects.equals(this.mDialogMessage, otherDialogInfo.mDialogMessage) && this.mNeutralButtonTextResId == otherDialogInfo.mNeutralButtonTextResId && Objects.equals(this.mNeutralButtonText, otherDialogInfo.mNeutralButtonText) && this.mNeutralButtonAction == otherDialogInfo.mNeutralButtonAction;
+        return this.mIconResId == otherDialogInfo.mIconResId
+                && this.mTitleResId == otherDialogInfo.mTitleResId
+                && Objects.equals(this.mTitle, otherDialogInfo.mTitle)
+                && this.mDialogMessageResId == otherDialogInfo.mDialogMessageResId
+                && Objects.equals(this.mDialogMessage, otherDialogInfo.mDialogMessage)
+                && this.mNeutralButtonTextResId == otherDialogInfo.mNeutralButtonTextResId
+                && Objects.equals(this.mNeutralButtonText, otherDialogInfo.mNeutralButtonText)
+                && this.mNeutralButtonAction == otherDialogInfo.mNeutralButtonAction;
     }
 
     public String toString() {
@@ -286,7 +312,8 @@ public final class SuspendDialogInfo implements Parcelable {
         }
 
         public Builder setNeutralButtonText(String neutralButtonText) {
-            Preconditions.checkStringNotEmpty(neutralButtonText, "Button text cannot be null or empty");
+            Preconditions.checkStringNotEmpty(
+                    neutralButtonText, "Button text cannot be null or empty");
             this.mNeutralButtonText = neutralButtonText;
             return this;
         }

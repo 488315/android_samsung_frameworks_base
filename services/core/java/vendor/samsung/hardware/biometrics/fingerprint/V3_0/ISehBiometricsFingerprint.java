@@ -13,6 +13,7 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -32,7 +33,8 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
         public final int authenticate(int i, long j) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32(i);
             HwParcel hwParcel2 = new HwParcel();
@@ -48,7 +50,9 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
 
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
         public final int cancel() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(6, m, hwParcel, 0);
@@ -62,7 +66,9 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
 
         @Override // android.hidl.base.V1_0.IBase
         public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -75,7 +81,9 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
 
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
         public final int enroll(int i, int i2, byte[] bArr) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
             HwBlob hwBlob = new HwBlob(69);
             if (bArr.length != 69) {
                 throw new IllegalArgumentException("Array element is not of the expected length");
@@ -97,7 +105,9 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
 
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
         public final int enumerate() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(7, m, hwParcel, 0);
@@ -115,7 +125,9 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
 
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
         public final long getAuthenticatorId() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(5, m, hwParcel, 0);
@@ -154,7 +166,8 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -231,7 +244,9 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
 
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
         public final int postEnroll() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(4, m, hwParcel, 0);
@@ -245,7 +260,9 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
 
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
         public final long preEnroll() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(2, m, hwParcel, 0);
@@ -260,7 +277,8 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
         public final int remove(int i, int i2) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
             HwParcel hwParcel2 = new HwParcel();
@@ -275,9 +293,11 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
         }
 
         @Override // vendor.samsung.hardware.biometrics.fingerprint.V3_0.ISehBiometricsFingerprint
-        public final void sehRequest(int i, int i2, ArrayList arrayList, sehRequestCallback sehrequestcallback) {
+        public final void sehRequest(
+                int i, int i2, ArrayList arrayList, sehRequestCallback sehrequestcallback) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("vendor.samsung.hardware.biometrics.fingerprint@3.0::ISehBiometricsFingerprint");
+            hwParcel.writeInterfaceToken(
+                    "vendor.samsung.hardware.biometrics.fingerprint@3.0::ISehBiometricsFingerprint");
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
             hwParcel.writeInt8Vector(arrayList);
@@ -295,7 +315,8 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
         public final int setActiveGroup(int i, String str) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
             hwParcel.writeInt32(i);
             hwParcel.writeString(str);
             HwParcel hwParcel2 = new HwParcel();
@@ -322,9 +343,15 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
         }
 
         @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprint
-        public final long setNotify(IBiometricsFingerprintClientCallback iBiometricsFingerprintClientCallback) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
-            m.writeStrongBinder(iBiometricsFingerprintClientCallback == null ? null : iBiometricsFingerprintClientCallback.asBinder());
+        public final long setNotify(
+                IBiometricsFingerprintClientCallback iBiometricsFingerprintClientCallback) {
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint");
+            m.writeStrongBinder(
+                    iBiometricsFingerprintClientCallback == null
+                            ? null
+                            : iBiometricsFingerprintClientCallback.asBinder());
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(1, m, hwParcel, 0);
@@ -340,7 +367,8 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
             try {
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException unused) {
-                return "[class or subclass of vendor.samsung.hardware.biometrics.fingerprint@3.0::ISehBiometricsFingerprint]@Proxy";
+                return "[class or subclass of"
+                           + " vendor.samsung.hardware.biometrics.fingerprint@3.0::ISehBiometricsFingerprint]@Proxy";
             }
         }
 
@@ -356,12 +384,18 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
     }
 
     static ISehBiometricsFingerprint getService() {
-        IHwBinder service = HwBinder.getService("vendor.samsung.hardware.biometrics.fingerprint@3.0::ISehBiometricsFingerprint", "default");
+        IHwBinder service =
+                HwBinder.getService(
+                        "vendor.samsung.hardware.biometrics.fingerprint@3.0::ISehBiometricsFingerprint",
+                        "default");
         if (service == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = service.queryLocalInterface("vendor.samsung.hardware.biometrics.fingerprint@3.0::ISehBiometricsFingerprint");
-        if (queryLocalInterface != null && (queryLocalInterface instanceof ISehBiometricsFingerprint)) {
+        IHwInterface queryLocalInterface =
+                service.queryLocalInterface(
+                        "vendor.samsung.hardware.biometrics.fingerprint@3.0::ISehBiometricsFingerprint");
+        if (queryLocalInterface != null
+                && (queryLocalInterface instanceof ISehBiometricsFingerprint)) {
             return (ISehBiometricsFingerprint) queryLocalInterface;
         }
         Proxy proxy = new Proxy();
@@ -369,7 +403,9 @@ public interface ISehBiometricsFingerprint extends IBiometricsFingerprint {
         try {
             Iterator it = proxy.interfaceChain().iterator();
             while (it.hasNext()) {
-                if (((String) it.next()).equals("vendor.samsung.hardware.biometrics.fingerprint@3.0::ISehBiometricsFingerprint")) {
+                if (((String) it.next())
+                        .equals(
+                                "vendor.samsung.hardware.biometrics.fingerprint@3.0::ISehBiometricsFingerprint")) {
                     return proxy;
                 }
             }

@@ -6,8 +6,10 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.MathUtils;
 import android.util.SparseArray;
+
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.internal.util.Preconditions;
+
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -40,8 +42,7 @@ public class BaseBundle {
     static final class NoImagePreloadHolder {
         public static final Parcel EMPTY_PARCEL = Parcel.obtain();
 
-        NoImagePreloadHolder() {
-        }
+        NoImagePreloadHolder() {}
     }
 
     BaseBundle(ClassLoader loader, int capacity) {
@@ -121,7 +122,8 @@ public class BaseBundle {
                     this.mParcelledByNative = false;
                 } else {
                     parcelledData = Parcel.obtain();
-                    parcelledData.appendFrom(from.mParcelledData, 0, from.mParcelledData.dataSize());
+                    parcelledData.appendFrom(
+                            from.mParcelledData, 0, from.mParcelledData.dataSize());
                     parcelledData.setDataPosition(0);
                     this.mParcelledByNative = from.mParcelledByNative;
                 }
@@ -213,7 +215,8 @@ public class BaseBundle {
                 this.mMap.setValueAt(i, object);
                 this.mLazyValues--;
                 if (this.mOwnsLazyValues) {
-                    Preconditions.checkState(this.mLazyValues >= 0, "Lazy values ref count below 0");
+                    Preconditions.checkState(
+                            this.mLazyValues >= 0, "Lazy values ref count below 0");
                     Parcel parcel = this.mWeakParcelledData.get();
                     if (this.mLazyValues == 0 && parcel != null) {
                         recycleParcel(parcel);
@@ -222,7 +225,10 @@ public class BaseBundle {
                 }
             } catch (BadParcelableException e) {
                 if (sShouldDefuse) {
-                    Log.w(TAG, "Failed to parse item " + this.mMap.keyAt(i) + ", returning null.", e);
+                    Log.w(
+                            TAG,
+                            "Failed to parse item " + this.mMap.keyAt(i) + ", returning null.",
+                            e);
                     return null;
                 }
                 throw e;
@@ -231,7 +237,8 @@ public class BaseBundle {
         return object;
     }
 
-    private void initializeFromParcelLocked(Parcel parcelledData, boolean ownsParcel, boolean parcelledByNative) {
+    private void initializeFromParcelLocked(
+            Parcel parcelledData, boolean ownsParcel, boolean parcelledByNative) {
         ArrayMap<String, Object> map;
         WeakReference<Parcel> weakReference;
         if (isEmptyParcel(parcelledData)) {
@@ -259,7 +266,9 @@ public class BaseBundle {
         int numLazyValues = 0;
         try {
             try {
-                numLazyValues = parcelledData.readArrayMap(map, count, !parcelledByNative, ownsParcel, this.mClassLoader);
+                numLazyValues =
+                        parcelledData.readArrayMap(
+                                map, count, !parcelledByNative, ownsParcel, this.mClassLoader);
                 this.mWeakParcelledData = null;
             } catch (BadParcelableException e) {
                 if (!sShouldDefuse) {
@@ -637,7 +646,8 @@ public class BaseBundle {
         return getBoolean(key, false);
     }
 
-    void typeWarning(String key, Object value, String className, Object defaultValue, RuntimeException e) {
+    void typeWarning(
+            String key, Object value, String className, Object defaultValue, RuntimeException e) {
         StringBuilder sb = new StringBuilder();
         sb.append("Key ");
         sb.append(key);
@@ -865,7 +875,8 @@ public class BaseBundle {
     <T> ArrayList<T> getArrayList(String key, Class<? extends T> clazz) {
         unparcel();
         try {
-            return (ArrayList) getValue(key, ArrayList.class, (Class) Objects.requireNonNull(clazz));
+            return (ArrayList)
+                    getValue(key, ArrayList.class, (Class) Objects.requireNonNull(clazz));
         } catch (BadTypeParcelableException | ClassCastException e) {
             typeWarning(key, "ArrayList<" + clazz.getCanonicalName() + ">", e);
             return null;
@@ -1083,7 +1094,8 @@ public class BaseBundle {
         boolean isJavaBundle = magic == BUNDLE_MAGIC;
         boolean isNativeBundle = magic == BUNDLE_MAGIC_NATIVE;
         if (!isJavaBundle && !isNativeBundle) {
-            throw new IllegalStateException("Bad magic number for Bundle: 0x" + Integer.toHexString(magic));
+            throw new IllegalStateException(
+                    "Bad magic number for Bundle: 0x" + Integer.toHexString(magic));
         }
         if (parcel.hasReadWriteHelper()) {
             synchronized (this) {

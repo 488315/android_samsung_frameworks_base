@@ -8,19 +8,21 @@ import android.system.StructCapUserData;
 import android.system.StructCapUserHeader;
 import android.util.Slog;
 import android.util.TimingsTraceLog;
+
 import dalvik.system.VMRuntime;
+
+import libcore.io.IoUtils;
+
 import java.io.DataOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import libcore.io.IoUtils;
 
 /* loaded from: classes5.dex */
 public class WrapperInit {
     private static final String TAG = "AndroidRuntime";
 
-    private WrapperInit() {
-    }
+    private WrapperInit() {}
 
     public static void main(String[] args) {
         int fdNum = Integer.parseInt(args[0], 10);
@@ -47,7 +49,13 @@ public class WrapperInit {
         r.run();
     }
 
-    public static void execApplication(String invokeWith, String niceName, int targetSdkVersion, String instructionSet, FileDescriptor pipeFd, String[] args) {
+    public static void execApplication(
+            String invokeWith,
+            String niceName,
+            int targetSdkVersion,
+            String instructionSet,
+            FileDescriptor pipeFd,
+            String[] args) {
         String appProcess;
         StringBuilder command = new StringBuilder(invokeWith);
         if (VMRuntime.is64BitInstructionSet(instructionSet)) {
@@ -85,12 +93,18 @@ public class WrapperInit {
     }
 
     private static void preserveCapabilities() {
-        StructCapUserHeader header = new StructCapUserHeader(OsConstants._LINUX_CAPABILITY_VERSION_3, 0);
+        StructCapUserHeader header =
+                new StructCapUserHeader(OsConstants._LINUX_CAPABILITY_VERSION_3, 0);
         try {
             StructCapUserData[] data = Os.capget(header);
-            if (data[0].permitted != data[0].inheritable || data[1].permitted != data[1].inheritable) {
-                data[0] = new StructCapUserData(data[0].effective, data[0].permitted, data[0].permitted);
-                data[1] = new StructCapUserData(data[1].effective, data[1].permitted, data[1].permitted);
+            if (data[0].permitted != data[0].inheritable
+                    || data[1].permitted != data[1].inheritable) {
+                data[0] =
+                        new StructCapUserData(
+                                data[0].effective, data[0].permitted, data[0].permitted);
+                data[1] =
+                        new StructCapUserData(
+                                data[1].effective, data[1].permitted, data[1].permitted);
                 try {
                     Os.capset(header, data);
                 } catch (ErrnoException e) {
@@ -103,7 +117,12 @@ public class WrapperInit {
                 int capMask = OsConstants.CAP_TO_MASK(i);
                 if ((data[dataIndex].inheritable & capMask) != 0) {
                     try {
-                        Os.prctl(OsConstants.PR_CAP_AMBIENT, OsConstants.PR_CAP_AMBIENT_RAISE, i, 0L, 0L);
+                        Os.prctl(
+                                OsConstants.PR_CAP_AMBIENT,
+                                OsConstants.PR_CAP_AMBIENT_RAISE,
+                                i,
+                                0L,
+                                0L);
                     } catch (ErrnoException ex) {
                         Slog.e(TAG, "RuntimeInit: Failed to raise ambient capability " + i, ex);
                     }

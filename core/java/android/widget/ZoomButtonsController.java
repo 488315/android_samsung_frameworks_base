@@ -16,6 +16,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewRootImpl;
 import android.view.WindowManager;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -25,7 +26,8 @@ public class ZoomButtonsController implements View.OnTouchListener {
     private static final int MSG_POST_CONFIGURATION_CHANGED = 2;
     private static final int MSG_POST_SET_VISIBLE = 4;
     private static final String TAG = "ZoomButtonsController";
-    private static final int ZOOM_CONTROLS_TIMEOUT = (int) ViewConfiguration.getZoomControlsTimeout();
+    private static final int ZOOM_CONTROLS_TIMEOUT =
+            (int) ViewConfiguration.getZoomControlsTimeout();
     private static final int ZOOM_CONTROLS_TOUCH_PADDING = 20;
     private OnZoomListener mCallback;
     private final FrameLayout mContainer;
@@ -45,37 +47,43 @@ public class ZoomButtonsController implements View.OnTouchListener {
     private final int[] mTouchTargetWindowLocation = new int[2];
     private final Rect mTempRect = new Rect();
     private final int[] mTempIntArray = new int[2];
-    private final IntentFilter mConfigurationChangedFilter = new IntentFilter(Intent.ACTION_CONFIGURATION_CHANGED);
-    private final BroadcastReceiver mConfigurationChangedReceiver = new BroadcastReceiver() { // from class: android.widget.ZoomButtonsController.1
-        @Override // android.content.BroadcastReceiver
-        public void onReceive(Context context, Intent intent) {
-            if (ZoomButtonsController.this.mIsVisible) {
-                ZoomButtonsController.this.mHandler.removeMessages(2);
-                ZoomButtonsController.this.mHandler.sendEmptyMessage(2);
-            }
-        }
-    };
-    private final Handler mHandler = new Handler() { // from class: android.widget.ZoomButtonsController.2
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 2:
-                    ZoomButtonsController.this.onPostConfigurationChanged();
-                    break;
-                case 3:
-                    ZoomButtonsController.this.setVisible(false);
-                    break;
-                case 4:
-                    if (ZoomButtonsController.this.mOwnerView.getWindowToken() == null) {
-                        Log.e(ZoomButtonsController.TAG, "Cannot make the zoom controller visible if the owner view is not attached to a window.");
-                        break;
-                    } else {
-                        ZoomButtonsController.this.setVisible(true);
-                        break;
+    private final IntentFilter mConfigurationChangedFilter =
+            new IntentFilter(Intent.ACTION_CONFIGURATION_CHANGED);
+    private final BroadcastReceiver mConfigurationChangedReceiver =
+            new BroadcastReceiver() { // from class: android.widget.ZoomButtonsController.1
+                @Override // android.content.BroadcastReceiver
+                public void onReceive(Context context, Intent intent) {
+                    if (ZoomButtonsController.this.mIsVisible) {
+                        ZoomButtonsController.this.mHandler.removeMessages(2);
+                        ZoomButtonsController.this.mHandler.sendEmptyMessage(2);
                     }
-            }
-        }
-    };
+                }
+            };
+    private final Handler mHandler =
+            new Handler() { // from class: android.widget.ZoomButtonsController.2
+                @Override // android.os.Handler
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case 2:
+                            ZoomButtonsController.this.onPostConfigurationChanged();
+                            break;
+                        case 3:
+                            ZoomButtonsController.this.setVisible(false);
+                            break;
+                        case 4:
+                            if (ZoomButtonsController.this.mOwnerView.getWindowToken() == null) {
+                                Log.e(
+                                        ZoomButtonsController.TAG,
+                                        "Cannot make the zoom controller visible if the owner view"
+                                            + " is not attached to a window.");
+                                break;
+                            } else {
+                                ZoomButtonsController.this.setVisible(true);
+                                break;
+                            }
+                    }
+                }
+            };
 
     public interface OnZoomListener {
         void onVisibilityChanged(boolean z);
@@ -85,9 +93,11 @@ public class ZoomButtonsController implements View.OnTouchListener {
 
     public ZoomButtonsController(View ownerView) {
         this.mContext = ownerView.getContext();
-        this.mWindowManager = (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
+        this.mWindowManager =
+                (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
         this.mOwnerView = ownerView;
-        this.mTouchPaddingScaledSq = (int) (this.mContext.getResources().getDisplayMetrics().density * 20.0f);
+        this.mTouchPaddingScaledSq =
+                (int) (this.mContext.getResources().getDisplayMetrics().density * 20.0f);
         this.mTouchPaddingScaledSq *= this.mTouchPaddingScaledSq;
         this.mContainer = createContainer();
     }
@@ -117,27 +127,32 @@ public class ZoomButtonsController implements View.OnTouchListener {
         FrameLayout container = new Container(this.mContext);
         container.setLayoutParams(lp);
         container.setMeasureAllChildren(true);
-        LayoutInflater inflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater =
+                (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.zoom_container, container);
         this.mControls = (ZoomControls) container.findViewById(R.id.zoomControls);
-        this.mControls.setOnZoomInClickListener(new View.OnClickListener() { // from class: android.widget.ZoomButtonsController.3
-            @Override // android.view.View.OnClickListener
-            public void onClick(View v) {
-                ZoomButtonsController.this.dismissControlsDelayed(ZoomButtonsController.ZOOM_CONTROLS_TIMEOUT);
-                if (ZoomButtonsController.this.mCallback != null) {
-                    ZoomButtonsController.this.mCallback.onZoom(true);
-                }
-            }
-        });
-        this.mControls.setOnZoomOutClickListener(new View.OnClickListener() { // from class: android.widget.ZoomButtonsController.4
-            @Override // android.view.View.OnClickListener
-            public void onClick(View v) {
-                ZoomButtonsController.this.dismissControlsDelayed(ZoomButtonsController.ZOOM_CONTROLS_TIMEOUT);
-                if (ZoomButtonsController.this.mCallback != null) {
-                    ZoomButtonsController.this.mCallback.onZoom(false);
-                }
-            }
-        });
+        this.mControls.setOnZoomInClickListener(
+                new View.OnClickListener() { // from class: android.widget.ZoomButtonsController.3
+                    @Override // android.view.View.OnClickListener
+                    public void onClick(View v) {
+                        ZoomButtonsController.this.dismissControlsDelayed(
+                                ZoomButtonsController.ZOOM_CONTROLS_TIMEOUT);
+                        if (ZoomButtonsController.this.mCallback != null) {
+                            ZoomButtonsController.this.mCallback.onZoom(true);
+                        }
+                    }
+                });
+        this.mControls.setOnZoomOutClickListener(
+                new View.OnClickListener() { // from class: android.widget.ZoomButtonsController.4
+                    @Override // android.view.View.OnClickListener
+                    public void onClick(View v) {
+                        ZoomButtonsController.this.dismissControlsDelayed(
+                                ZoomButtonsController.ZOOM_CONTROLS_TIMEOUT);
+                        if (ZoomButtonsController.this.mCallback != null) {
+                            ZoomButtonsController.this.mCallback.onZoom(false);
+                        }
+                    }
+                });
         return container;
     }
 
@@ -193,18 +208,20 @@ public class ZoomButtonsController implements View.OnTouchListener {
             }
             this.mWindowManager.addView(this.mContainer, this.mContainerLayoutParams);
             if (this.mPostedVisibleInitializer == null) {
-                this.mPostedVisibleInitializer = new Runnable() { // from class: android.widget.ZoomButtonsController.5
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        ZoomButtonsController.this.refreshPositioningVariables();
-                        if (ZoomButtonsController.this.mCallback != null) {
-                            ZoomButtonsController.this.mCallback.onVisibilityChanged(true);
-                        }
-                    }
-                };
+                this.mPostedVisibleInitializer =
+                        new Runnable() { // from class: android.widget.ZoomButtonsController.5
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                ZoomButtonsController.this.refreshPositioningVariables();
+                                if (ZoomButtonsController.this.mCallback != null) {
+                                    ZoomButtonsController.this.mCallback.onVisibilityChanged(true);
+                                }
+                            }
+                        };
             }
             this.mHandler.post(this.mPostedVisibleInitializer);
-            this.mContext.registerReceiver(this.mConfigurationChangedReceiver, this.mConfigurationChangedFilter);
+            this.mContext.registerReceiver(
+                    this.mConfigurationChangedReceiver, this.mConfigurationChangedFilter);
             this.mOwnerView.setOnTouchListener(this);
             this.mReleaseTouchListenerOnUp = false;
             return;
@@ -266,7 +283,8 @@ public class ZoomButtonsController implements View.OnTouchListener {
         if (isInterestingKey(keyCode)) {
             if (keyCode == 4) {
                 if (event.getAction() == 0 && event.getRepeatCount() == 0) {
-                    if (this.mOwnerView != null && (ds = this.mOwnerView.getKeyDispatcherState()) != null) {
+                    if (this.mOwnerView != null
+                            && (ds = this.mOwnerView.getKeyDispatcherState()) != null) {
                         ds.startTracking(event, this);
                     }
                     return true;
@@ -334,7 +352,9 @@ public class ZoomButtonsController implements View.OnTouchListener {
         int targetViewRawX = this.mContainerRawLocation[0] + this.mTouchTargetWindowLocation[0];
         int targetViewRawY = this.mContainerRawLocation[1] + this.mTouchTargetWindowLocation[1];
         MotionEvent containerEvent = MotionEvent.obtain(event);
-        containerEvent.offsetLocation(this.mOwnerViewRawLocation[0] - targetViewRawX, this.mOwnerViewRawLocation[1] - targetViewRawY);
+        containerEvent.offsetLocation(
+                this.mOwnerViewRawLocation[0] - targetViewRawX,
+                this.mOwnerViewRawLocation[1] - targetViewRawY);
         float containerX = containerEvent.getX();
         float containerY = containerEvent.getY();
         if (containerX < 0.0f && containerX > -20.0f) {
@@ -374,16 +394,23 @@ public class ZoomButtonsController implements View.OnTouchListener {
                     distanceX = 0;
                 } else {
                     int distanceX2 = frame.left;
-                    distanceX = Math.min(Math.abs(distanceX2 - containerCoordsX), Math.abs(containerCoordsX - frame.right));
+                    distanceX =
+                            Math.min(
+                                    Math.abs(distanceX2 - containerCoordsX),
+                                    Math.abs(containerCoordsX - frame.right));
                 }
                 if (containerCoordsY >= frame.top && containerCoordsY <= frame.bottom) {
                     distanceY = 0;
                 } else {
                     int distanceY2 = frame.top;
-                    distanceY = Math.min(Math.abs(distanceY2 - containerCoordsY), Math.abs(containerCoordsY - frame.bottom));
+                    distanceY =
+                            Math.min(
+                                    Math.abs(distanceY2 - containerCoordsY),
+                                    Math.abs(containerCoordsY - frame.bottom));
                 }
                 int distanceSq = (distanceX * distanceX) + (distanceY * distanceY);
-                if (distanceSq < this.mTouchPaddingScaledSq && distanceSq < closestChildDistanceSq) {
+                if (distanceSq < this.mTouchPaddingScaledSq
+                        && distanceSq < closestChildDistanceSq) {
                     closestChild = child;
                     closestChildDistanceSq = distanceSq;
                 }

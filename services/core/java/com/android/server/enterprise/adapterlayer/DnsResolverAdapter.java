@@ -37,7 +37,8 @@ public final class DnsResolverAdapter {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void runWithExceptionHandling(com.android.server.enterprise.adapterlayer.DnsResolverAdapter.CheckedRemoteRequest r4) {
+    public final void runWithExceptionHandling(
+            com.android.server.enterprise.adapterlayer.DnsResolverAdapter.CheckedRemoteRequest r4) {
         /*
             r3 = this;
             android.net.IDnsResolver r0 = r3.mDnsResolver
@@ -74,6 +75,8 @@ public final class DnsResolverAdapter {
         L3d:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.adapterlayer.DnsResolverAdapter.runWithExceptionHandling(com.android.server.enterprise.adapterlayer.DnsResolverAdapter$CheckedRemoteRequest):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.adapterlayer.DnsResolverAdapter.runWithExceptionHandling(com.android.server.enterprise.adapterlayer.DnsResolverAdapter$CheckedRemoteRequest):void");
     }
 }

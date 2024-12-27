@@ -8,18 +8,22 @@ import android.database.Cursor;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
 import android.os.Bundle;
+
 import com.samsung.android.knox.analytics.database.Contract;
 import com.samsung.android.knox.analytics.model.Event;
 import com.samsung.android.knox.analytics.model.EventList;
+
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.json.JSONException;
 
 /* loaded from: classes6.dex */
 public class KnoxAnalyticsQueryResolver {
-    private static final String TAG = "[KnoxAnalytics] " + KnoxAnalyticsQueryResolver.class.getSimpleName();
+    private static final String TAG =
+            "[KnoxAnalytics] " + KnoxAnalyticsQueryResolver.class.getSimpleName();
 
     public static long addEvent(Context context, long id, String data, int type) {
         Log.d(TAG, "addEvent()");
@@ -51,7 +55,12 @@ public class KnoxAnalyticsQueryResolver {
         Log.d(TAG, "addBulkEvents()");
         ContentResolver contentResolver = context.getContentResolver();
         data.putLong("id", id);
-        Bundle result = contentResolver.call(Contract.CONTENT_URI, Contract.Events.Extra.INSERT_BULK_EVENTS, (String) null, data);
+        Bundle result =
+                contentResolver.call(
+                        Contract.CONTENT_URI,
+                        Contract.Events.Extra.INSERT_BULK_EVENTS,
+                        (String) null,
+                        data);
         long lastId = result.getLong("lastEventId");
         Log.d(TAG, "addBulkEvents(): lastId = " + lastId);
         return lastId;
@@ -60,13 +69,21 @@ public class KnoxAnalyticsQueryResolver {
     public static EventList queryEventChunk(Context ctx) {
         ContentResolver contentResolver = ctx.getContentResolver();
         EventList events = new EventList();
-        Cursor cursor = contentResolver.query(Contract.Events.CONTENT_URI, new String[]{Contract.Events.Projection.CHUNK_SIZE_ONLY_PLAIN_EVENTS}, null, null, null);
+        Cursor cursor =
+                contentResolver.query(
+                        Contract.Events.CONTENT_URI,
+                        new String[] {Contract.Events.Projection.CHUNK_SIZE_ONLY_PLAIN_EVENTS},
+                        null,
+                        null,
+                        null);
         if (cursor != null) {
             try {
                 if (cursor.getCount() > 0) {
                     while (cursor.moveToNext()) {
                         int id = cursor.getInt(cursor.getColumnIndex("id"));
-                        int vid = cursor.getInt(cursor.getColumnIndex(Contract.Events.Field.VERSIONING_ID));
+                        int vid =
+                                cursor.getInt(
+                                        cursor.getColumnIndex(Contract.Events.Field.VERSIONING_ID));
                         int bulk = cursor.getInt(cursor.getColumnIndex("bulk"));
                         String data = cursor.getString(cursor.getColumnIndex("data"));
                         Event event = null;
@@ -111,13 +128,19 @@ public class KnoxAnalyticsQueryResolver {
         ContentValues cv = new ContentValues();
         cv.put("content", result.getContent());
         cv.put(Contract.CompressedEvents.Field.LENGTH, Integer.valueOf(result.getLength()));
-        cv.put(Contract.CompressedEvents.Field.ORIGINAL_LENGTH, Integer.valueOf(result.getOriginalLength()));
+        cv.put(
+                Contract.CompressedEvents.Field.ORIGINAL_LENGTH,
+                Integer.valueOf(result.getOriginalLength()));
         cv.put("bulk", Integer.valueOf(events.getTotalEventsCount()));
         cv.put(Contract.CompressedEvents.Keys.PLAIN_EVENTS_SIZE, Integer.valueOf(events.length()));
         Bundle extras = new Bundle();
         extras.putParcelable(Contract.CompressedEvents.Keys.CV, cv);
         ContentResolver contentResolver = ctx.getContentResolver();
-        return contentResolver.call(Contract.CompressedEvents.CONTENT_URI, Contract.CompressedEvents.METHOD_PERFORM_COMPRESSED_EVENTS_TRANSACTION, (String) null, extras);
+        return contentResolver.call(
+                Contract.CompressedEvents.CONTENT_URI,
+                Contract.CompressedEvents.METHOD_PERFORM_COMPRESSED_EVENTS_TRANSACTION,
+                (String) null,
+                extras);
     }
 
     private static Uri getUriFromType(int type) {
@@ -138,7 +161,9 @@ public class KnoxAnalyticsQueryResolver {
         Log.d(TAG, "getLastEventId()");
         ContentResolver contentResolver = context.getContentResolver();
         try {
-            Cursor cursor = contentResolver.query(Contract.Events.CONTENT_URI, new String[]{"lastEventId"}, null, null);
+            Cursor cursor =
+                    contentResolver.query(
+                            Contract.Events.CONTENT_URI, new String[] {"lastEventId"}, null, null);
             if (cursor != null) {
                 try {
                     if (cursor.getCount() != 0) {
@@ -162,7 +187,10 @@ public class KnoxAnalyticsQueryResolver {
             }
             return -1L;
         } catch (IllegalStateException ex) {
-            Log.e(TAG, "getLastEventId(): ERROR READING CONTENT PROVIDER! " + ex.getLocalizedMessage());
+            Log.e(
+                    TAG,
+                    "getLastEventId(): ERROR READING CONTENT PROVIDER! "
+                            + ex.getLocalizedMessage());
             throw ex;
         }
     }
@@ -171,7 +199,12 @@ public class KnoxAnalyticsQueryResolver {
         Log.d(TAG, "getEventCount()");
         ContentResolver contentResolver = context.getContentResolver();
         try {
-            Cursor cursor = contentResolver.query(Contract.Events.CONTENT_URI, new String[]{Contract.Events.Projection.COUNT_ONLY}, null, null);
+            Cursor cursor =
+                    contentResolver.query(
+                            Contract.Events.CONTENT_URI,
+                            new String[] {Contract.Events.Projection.COUNT_ONLY},
+                            null,
+                            null);
             if (cursor != null) {
                 try {
                     if (cursor.getCount() > 0) {
@@ -191,7 +224,9 @@ public class KnoxAnalyticsQueryResolver {
             }
             return -1L;
         } catch (IllegalStateException ex) {
-            Log.e(TAG, "getEventCount(): ERROR READING CONTENT PROVIDER! " + ex.getLocalizedMessage());
+            Log.e(
+                    TAG,
+                    "getEventCount(): ERROR READING CONTENT PROVIDER! " + ex.getLocalizedMessage());
             return -1L;
         }
     }
@@ -200,17 +235,20 @@ public class KnoxAnalyticsQueryResolver {
         Log.d(TAG, "getFeaturesBlacklist()");
         ContentResolver contentResolver = context.getContentResolver();
         try {
-            Cursor cursor = contentResolver.query(Contract.FeaturesBlacklist.CONTENT_URI, null, null, null);
+            Cursor cursor =
+                    contentResolver.query(Contract.FeaturesBlacklist.CONTENT_URI, null, null, null);
             if (cursor != null) {
                 try {
                     if (cursor.getCount() != 0) {
                         int columnFeature = cursor.getColumnIndex("feature");
                         int columnEvent = cursor.getColumnIndex("event");
-                        ArrayList<BlacklistedFeature> featuresBlacklist = new ArrayList<>(cursor.getCount());
+                        ArrayList<BlacklistedFeature> featuresBlacklist =
+                                new ArrayList<>(cursor.getCount());
                         cursor.moveToFirst();
                         do {
                             String feature = cursor.getString(columnFeature);
-                            List<String> eventList = convertEventToList(cursor.getString(columnEvent));
+                            List<String> eventList =
+                                    convertEventToList(cursor.getString(columnEvent));
                             featuresBlacklist.add(new BlacklistedFeature(feature, eventList));
                         } while (cursor.moveToNext());
                         if (cursor != null) {
@@ -228,7 +266,10 @@ public class KnoxAnalyticsQueryResolver {
             }
             return emptyList;
         } catch (IllegalStateException ex) {
-            Log.e(TAG, "getFeaturesBlacklist(): ERROR READING CONTENT PROVIDER! " + ex.getLocalizedMessage());
+            Log.e(
+                    TAG,
+                    "getFeaturesBlacklist(): ERROR READING CONTENT PROVIDER! "
+                            + ex.getLocalizedMessage());
             return null;
         }
     }
@@ -242,7 +283,9 @@ public class KnoxAnalyticsQueryResolver {
         ContentResolver contentResolver = context.getContentResolver();
         Bundle extras = new Bundle();
         extras.putLong(Contract.DatabaseClean.Extra.TARGET_DB_SIZE, targetDbSize);
-        Bundle result = contentResolver.call(Contract.CONTENT_URI, Contract.DatabaseClean.METHOD, (String) null, extras);
+        Bundle result =
+                contentResolver.call(
+                        Contract.CONTENT_URI, Contract.DatabaseClean.METHOD, (String) null, extras);
         return DatabaseCleanResult.fromBundle(result);
     }
 
@@ -250,7 +293,8 @@ public class KnoxAnalyticsQueryResolver {
         Log.d(TAG, "getVersioningBlob()");
         ContentResolver contentResolver = context.getContentResolver();
         try {
-            Cursor cursor = contentResolver.query(Contract.Versioning.CONTENT_URI, null, null, null);
+            Cursor cursor =
+                    contentResolver.query(Contract.Versioning.CONTENT_URI, null, null, null);
             try {
                 String[] res = {"-1", ""};
                 if (cursor != null && cursor.getCount() != 0) {
@@ -302,7 +346,8 @@ public class KnoxAnalyticsQueryResolver {
         Log.d(TAG, "getDatabaseSize()");
         ContentResolver contentResolver = context.getContentResolver();
         try {
-            Cursor cursor = contentResolver.query(Contract.DatabaseSize.CONTENT_URI, null, null, null);
+            Cursor cursor =
+                    contentResolver.query(Contract.DatabaseSize.CONTENT_URI, null, null, null);
             if (cursor != null) {
                 try {
                     if (cursor.getCount() != 0) {
@@ -326,7 +371,10 @@ public class KnoxAnalyticsQueryResolver {
             }
             return -1L;
         } catch (IllegalStateException ex) {
-            Log.e(TAG, "getDatabaseSize(): ERROR READING CONTENT PROVIDER! " + ex.getLocalizedMessage());
+            Log.e(
+                    TAG,
+                    "getDatabaseSize(): ERROR READING CONTENT PROVIDER! "
+                            + ex.getLocalizedMessage());
             throw ex;
         }
     }
@@ -334,23 +382,35 @@ public class KnoxAnalyticsQueryResolver {
     public static void callNotifyVersioningCompleted(Context context) {
         Log.d(TAG, "callNotifyVersioningCompleted()");
         ContentResolver contentResolver = context.getContentResolver();
-        contentResolver.call(Contract.CONTENT_URI, Contract.Versioning.METHOD_NOTIFY_VERSIONING_COMPLETED, (String) null, (Bundle) null);
+        contentResolver.call(
+                Contract.CONTENT_URI,
+                Contract.Versioning.METHOD_NOTIFY_VERSIONING_COMPLETED,
+                (String) null,
+                (Bundle) null);
     }
 
     public static List<WhitelistedFeature> getFeaturesWhitelist(Context context) {
         Log.d(TAG, "getFeaturesWhitelist()");
         ContentResolver contentResolver = context.getContentResolver();
         try {
-            Cursor cursor = contentResolver.query(Contract.FeaturesWhitelist.CONTENT_URI, null, null, null);
+            Cursor cursor =
+                    contentResolver.query(Contract.FeaturesWhitelist.CONTENT_URI, null, null, null);
             if (cursor != null) {
                 try {
                     if (cursor.getCount() != 0) {
                         int columnFeature = cursor.getColumnIndex("feature");
                         int columnEnableType = cursor.getColumnIndex("enable_type");
-                        ArrayList<WhitelistedFeature> featuresWhitelist = new ArrayList<>(cursor.getCount());
+                        ArrayList<WhitelistedFeature> featuresWhitelist =
+                                new ArrayList<>(cursor.getCount());
                         cursor.moveToFirst();
                         do {
-                            WhitelistedFeature feature = new WhitelistedFeature(cursor.getString(columnFeature), cursor.isNull(columnEnableType) ? null : Integer.valueOf(cursor.getInt(columnEnableType)));
+                            WhitelistedFeature feature =
+                                    new WhitelistedFeature(
+                                            cursor.getString(columnFeature),
+                                            cursor.isNull(columnEnableType)
+                                                    ? null
+                                                    : Integer.valueOf(
+                                                            cursor.getInt(columnEnableType)));
                             featuresWhitelist.add(feature);
                         } while (cursor.moveToNext());
                         if (cursor != null) {
@@ -368,7 +428,10 @@ public class KnoxAnalyticsQueryResolver {
             }
             return emptyList;
         } catch (IllegalStateException ex) {
-            Log.e(TAG, "getFeaturesWhitelist(): ERROR READING CONTENT PROVIDER! " + ex.getLocalizedMessage());
+            Log.e(
+                    TAG,
+                    "getFeaturesWhitelist(): ERROR READING CONTENT PROVIDER! "
+                            + ex.getLocalizedMessage());
             return Collections.emptyList();
         }
     }
@@ -377,7 +440,8 @@ public class KnoxAnalyticsQueryResolver {
         Log.d(TAG, "getB2CFeaturePackages()");
         ContentResolver contentResolver = context.getContentResolver();
         try {
-            Cursor cursor = contentResolver.query(Contract.B2CFeatures.CONTENT_URI, null, null, null);
+            Cursor cursor =
+                    contentResolver.query(Contract.B2CFeatures.CONTENT_URI, null, null, null);
             if (cursor != null) {
                 try {
                     if (cursor.getCount() != 0) {
@@ -403,7 +467,10 @@ public class KnoxAnalyticsQueryResolver {
             }
             return emptyList;
         } catch (IllegalStateException ex) {
-            Log.e(TAG, "getB2CFeaturePackages(): ERROR READING CONTENT PROVIDER! " + ex.getLocalizedMessage());
+            Log.e(
+                    TAG,
+                    "getB2CFeaturePackages(): ERROR READING CONTENT PROVIDER! "
+                            + ex.getLocalizedMessage());
             return Collections.emptyList();
         }
     }
@@ -412,7 +479,8 @@ public class KnoxAnalyticsQueryResolver {
         Log.d(TAG, "getB2CFeatureFeaturesList()");
         ContentResolver contentResolver = context.getContentResolver();
         try {
-            Cursor cursor = contentResolver.query(Contract.B2CFeatures.CONTENT_URI, null, null, null);
+            Cursor cursor =
+                    contentResolver.query(Contract.B2CFeatures.CONTENT_URI, null, null, null);
             if (cursor != null) {
                 try {
                     if (cursor.getCount() != 0) {
@@ -438,7 +506,10 @@ public class KnoxAnalyticsQueryResolver {
             }
             return emptyList;
         } catch (IllegalStateException ex) {
-            Log.e(TAG, "getB2CFeatureFeaturesList(): ERROR READING CONTENT PROVIDER! " + ex.getLocalizedMessage());
+            Log.e(
+                    TAG,
+                    "getB2CFeatureFeaturesList(): ERROR READING CONTENT PROVIDER! "
+                            + ex.getLocalizedMessage());
             return Collections.emptyList();
         }
     }
@@ -447,7 +518,13 @@ public class KnoxAnalyticsQueryResolver {
         Log.d(TAG, "getB2CFeatureFeaturesList()");
         ContentResolver contentResolver = context.getContentResolver();
         try {
-            Cursor cursor = contentResolver.query(Contract.B2CFeatures.CONTENT_URI, new String[]{"feature_name"}, "packageName", new String[]{packageName}, null);
+            Cursor cursor =
+                    contentResolver.query(
+                            Contract.B2CFeatures.CONTENT_URI,
+                            new String[] {"feature_name"},
+                            "packageName",
+                            new String[] {packageName},
+                            null);
             if (cursor != null) {
                 try {
                     if (cursor.getCount() != 0) {
@@ -468,7 +545,10 @@ public class KnoxAnalyticsQueryResolver {
             }
             return null;
         } catch (IllegalStateException ex) {
-            Log.e(TAG, "getB2CFeatureFeaturesList(): ERROR READING CONTENT PROVIDER! " + ex.getLocalizedMessage());
+            Log.e(
+                    TAG,
+                    "getB2CFeatureFeaturesList(): ERROR READING CONTENT PROVIDER! "
+                            + ex.getLocalizedMessage());
             return null;
         }
     }

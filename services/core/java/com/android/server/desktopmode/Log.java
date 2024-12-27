@@ -1,7 +1,9 @@
 package com.android.server.desktopmode;
 
 import android.os.Process;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
+
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -41,12 +43,14 @@ public abstract class Log {
 
         public final void dump(final PrintWriter printWriter) {
             synchronized (this.mLock) {
-                this.mElements.forEach(new Consumer() { // from class: com.android.server.desktopmode.Log$EvictingArrayQueue$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        printWriter.println(obj);
-                    }
-                });
+                this.mElements.forEach(
+                        new Consumer() { // from class:
+                                         // com.android.server.desktopmode.Log$EvictingArrayQueue$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                printWriter.println(obj);
+                            }
+                        });
             }
         }
     }
@@ -59,7 +63,16 @@ public abstract class Log {
     }
 
     public static String buildLogString(char c, String str, String str2) {
-        return String.format(null, "%s %5d %5d %5d %c %s: %s", LocalDateTime.now().format(FORMATTER), Integer.valueOf(Process.myUid()), Integer.valueOf(Process.myPid()), Integer.valueOf(Process.myTid()), Character.valueOf(c), str, str2);
+        return String.format(
+                null,
+                "%s %5d %5d %5d %c %s: %s",
+                LocalDateTime.now().format(FORMATTER),
+                Integer.valueOf(Process.myUid()),
+                Integer.valueOf(Process.myPid()),
+                Integer.valueOf(Process.myTid()),
+                Character.valueOf(c),
+                str,
+                str2);
     }
 
     public static void d(String str, String str2) {

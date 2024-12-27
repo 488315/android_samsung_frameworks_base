@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ICoolingDeviceChangedCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$thermal$ICoolingDeviceChangedCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$thermal$ICoolingDeviceChangedCallback".replace('$', '.');
     public static final String HASH = "2f49c78011338b42b43d5d0e250d9b520850cc1f";
     public static final int VERSION = 2;
 
@@ -20,8 +21,8 @@ public interface ICoolingDeviceChangedCallback extends IInterface {
 
     public static class Default implements ICoolingDeviceChangedCallback {
         @Override // android.hardware.thermal.ICoolingDeviceChangedCallback
-        public void notifyCoolingDeviceChanged(CoolingDevice coolingDevice) throws RemoteException {
-        }
+        public void notifyCoolingDeviceChanged(CoolingDevice coolingDevice)
+                throws RemoteException {}
 
         @Override // android.hardware.thermal.ICoolingDeviceChangedCallback
         public int getInterfaceVersion() {
@@ -39,7 +40,7 @@ public interface ICoolingDeviceChangedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICoolingDeviceChangedCallback {
+    public abstract static class Stub extends Binder implements ICoolingDeviceChangedCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_notifyCoolingDeviceChanged = 1;
@@ -84,7 +85,8 @@ public interface ICoolingDeviceChangedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -105,7 +107,8 @@ public interface ICoolingDeviceChangedCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    CoolingDevice _arg0 = (CoolingDevice) data.readTypedObject(CoolingDevice.CREATOR);
+                    CoolingDevice _arg0 =
+                            (CoolingDevice) data.readTypedObject(CoolingDevice.CREATOR);
                     data.enforceNoDataAvail();
                     notifyCoolingDeviceChanged(_arg0);
                     break;
@@ -132,14 +135,16 @@ public interface ICoolingDeviceChangedCallback extends IInterface {
             }
 
             @Override // android.hardware.thermal.ICoolingDeviceChangedCallback
-            public void notifyCoolingDeviceChanged(CoolingDevice coolingDevice) throws RemoteException {
+            public void notifyCoolingDeviceChanged(CoolingDevice coolingDevice)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(coolingDevice, 0);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method notifyCoolingDeviceChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method notifyCoolingDeviceChanged is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

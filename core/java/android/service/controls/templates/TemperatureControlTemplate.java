@@ -2,7 +2,9 @@ package android.service.controls.templates;
 
 import android.os.Bundle;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -34,14 +36,17 @@ public final class TemperatureControlTemplate extends ControlTemplate {
     private final ControlTemplate mTemplate;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Mode {
-    }
+    public @interface Mode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ModeFlag {
-    }
+    public @interface ModeFlag {}
 
-    public TemperatureControlTemplate(String templateId, ControlTemplate controlTemplate, int currentMode, int currentActiveMode, int modesFlag) {
+    public TemperatureControlTemplate(
+            String templateId,
+            ControlTemplate controlTemplate,
+            int currentMode,
+            int currentActiveMode,
+            int modesFlag) {
         super(templateId);
         Preconditions.checkNotNull(controlTemplate);
         this.mTemplate = controlTemplate;
@@ -59,10 +64,13 @@ public final class TemperatureControlTemplate extends ControlTemplate {
         }
         this.mModes = modesFlag & 62;
         if (this.mCurrentMode != 0 && (modeToFlag[this.mCurrentMode] & this.mModes) == 0) {
-            throw new IllegalArgumentException("Mode " + this.mCurrentMode + " not supported in flag.");
+            throw new IllegalArgumentException(
+                    "Mode " + this.mCurrentMode + " not supported in flag.");
         }
-        if (this.mCurrentActiveMode != 0 && (modeToFlag[this.mCurrentActiveMode] & this.mModes) == 0) {
-            throw new IllegalArgumentException("Mode " + currentActiveMode + " not supported in flag.");
+        if (this.mCurrentActiveMode != 0
+                && (modeToFlag[this.mCurrentActiveMode] & this.mModes) == 0) {
+            throw new IllegalArgumentException(
+                    "Mode " + currentActiveMode + " not supported in flag.");
         }
     }
 

@@ -26,6 +26,7 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
@@ -42,8 +43,10 @@ import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
 import com.android.server.VcnManagementService$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.game.SemGameManager;
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -71,7 +74,8 @@ public abstract class Pageboost {
     public static final int PAGEBOOST_ACTIVE_LAUNCH_TIMEOUT;
     public static boolean PAGEBOOST_DAEMON_ENABLED;
     public static final boolean PAGEBOOST_IGNORE_DRAM_SPECIFICATION;
-    public static final boolean PAGEBOOST_IO_PREFETCH_ENABLED = "true".equals(SystemProperties.get("ro.config.pageboost.io_prefetch.enabled", "true"));
+    public static final boolean PAGEBOOST_IO_PREFETCH_ENABLED =
+            "true".equals(SystemProperties.get("ro.config.pageboost.io_prefetch.enabled", "true"));
     public static boolean PAGEBOOST_KERNEL_ENABLED;
     public static final boolean PAGEBOOST_MINIMIZE;
     public static final boolean PAGEBOOST_VRAMDISK_WITHOUT_PREDICT;
@@ -104,11 +108,13 @@ public abstract class Pageboost {
             try {
                 LocalSocket localSocket = new LocalSocket(3);
                 this.sSocket = localSocket;
-                localSocket.connect(new LocalSocketAddress(str, LocalSocketAddress.Namespace.RESERVED));
+                localSocket.connect(
+                        new LocalSocketAddress(str, LocalSocketAddress.Namespace.RESERVED));
                 this.sOutputStream = this.sSocket.getOutputStream();
             } catch (IOException unused) {
                 boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-                BootReceiver$$ExternalSyntheticOutline0.m("socket open failed for ", str, "Pageboost");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        "socket open failed for ", str, "Pageboost");
                 this.sSocket = null;
             }
         }
@@ -129,7 +135,8 @@ public abstract class Pageboost {
                         this.sSocket.close();
                     } catch (IOException unused2) {
                         boolean z2 = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-                        BootReceiver$$ExternalSyntheticOutline0.m("Error closing socket ", str, "Pageboost");
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                "Error closing socket ", str, "Pageboost");
                     }
                     this.sSocket = null;
                 }
@@ -151,7 +158,8 @@ public abstract class Pageboost {
             boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
             Slog.i("Pageboost", "filemap pid : " + num);
             try {
-                BufferedReader bufferedReader = new BufferedReader(new FileReader("/proc/" + num + "/filemap_list"));
+                BufferedReader bufferedReader =
+                        new BufferedReader(new FileReader("/proc/" + num + "/filemap_list"));
                 try {
                     this.mCorrectness = true;
                     while (true) {
@@ -198,7 +206,11 @@ public abstract class Pageboost {
                     i5 = z ? i5 | (1 << i3) : i5 & (~(1 << i3));
                     i3++;
                 }
-                bArr[i4] = (byte) (i5 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                bArr[i4] =
+                        (byte)
+                                (i5
+                                        & IDnsResolverUnsolicitedEventListener
+                                                .DNS_HEALTH_RESULT_TIMEOUT);
                 i = (i4 + 1) * 8;
             }
             int i6 = i / 8;
@@ -212,12 +224,19 @@ public abstract class Pageboost {
                 for (int i10 = 0; i10 < i8; i10++) {
                     i9 = z ? i9 | (1 << i10) : i9 & (~(1 << i10));
                 }
-                bArr[i7] = (byte) (i9 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                bArr[i7] =
+                        (byte)
+                                (i9
+                                        & IDnsResolverUnsolicitedEventListener
+                                                .DNS_HEALTH_RESULT_TIMEOUT);
             }
         }
 
         public static int readInt(byte[] bArr) {
-            return (bArr[0] & 255) | (bArr[3] << 24) | ((bArr[2] & 255) << 16) | ((bArr[1] & 255) << 8);
+            return (bArr[0] & 255)
+                    | (bArr[3] << 24)
+                    | ((bArr[2] & 255) << 16)
+                    | ((bArr[1] & 255) << 8);
         }
 
         public static boolean write(String str, String str2) {
@@ -254,7 +273,9 @@ public abstract class Pageboost {
                 }
                 try {
                     byte[] readAllBytes = Files.readAllBytes(Paths.get(str, new String[0]));
-                    Slog.i("Pageboost", "IoRecord pid : " + i + ", result_size : " + readAllBytes.length);
+                    Slog.i(
+                            "Pageboost",
+                            "IoRecord pid : " + i + ", result_size : " + readAllBytes.length);
                     long parsingResult = parsingResult(readAllBytes);
                     if (!write(str, "1")) {
                         Slog.e("Pageboost", "iorecord re-init Failed");
@@ -279,7 +300,9 @@ public abstract class Pageboost {
                 Method dump skipped, instructions count: 369
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.Pageboost.IoRecord.parsingResult(byte[]):long");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.Pageboost.IoRecord.parsingResult(byte[]):long");
         }
     }
 
@@ -311,9 +334,13 @@ public abstract class Pageboost {
                             }
                             PageboostAppInfo pageboostAppInfo = (PageboostAppInfo) it2.next();
                             synchronized (pageboostAppList.mPageboostApps) {
-                                contains = pageboostAppList.mPageboostApps.contains(pageboostAppInfo);
+                                contains =
+                                        pageboostAppList.mPageboostApps.contains(pageboostAppInfo);
                             }
-                            if (contains && Pageboost.m203$$Nest$smgetPidFromPackageName(pageboostAppInfo.mName, true) == 0) {
+                            if (contains
+                                    && Pageboost.m203$$Nest$smgetPidFromPackageName(
+                                                    pageboostAppInfo.mName, true)
+                                            == 0) {
                                 pageboostAppList2.add(pageboostAppInfo, false);
                                 break;
                             }
@@ -334,7 +361,8 @@ public abstract class Pageboost {
             while (it.hasNext()) {
                 String str = (String) it.next();
                 if (BatteryService$$ExternalSyntheticOutline0.m45m(str)) {
-                    PinnerService.PinnedFile pinFileInternal = PinnerService.pinFileInternal(Integer.MAX_VALUE, str, false);
+                    PinnerService.PinnedFile pinFileInternal =
+                            PinnerService.pinFileInternal(Integer.MAX_VALUE, str, false);
                     if (pinFileInternal != null) {
                         ((ArrayList) this.mLock).add(pinFileInternal);
                         boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
@@ -342,7 +370,8 @@ public abstract class Pageboost {
                     }
                 } else {
                     boolean z2 = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-                    BootReceiver$$ExternalSyntheticOutline0.m58m("skip pinning: ", str, " does not exist", "Pageboost");
+                    BootReceiver$$ExternalSyntheticOutline0.m58m(
+                            "skip pinning: ", str, " does not exist", "Pageboost");
                 }
             }
         }
@@ -350,13 +379,14 @@ public abstract class Pageboost {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class PageboostAppCapture {
-        public static final int PAGEBOOST_IO_PREFETCH_LEVEL = SystemProperties.getInt("ro.config.pageboost.io_prefetch.level", 3);
+        public static final int PAGEBOOST_IO_PREFETCH_LEVEL =
+                SystemProperties.getInt("ro.config.pageboost.io_prefetch.level", 3);
         public static boolean record_ongoing;
 
         /* JADX WARN: Code restructure failed: missing block: B:64:0x025a, code lost:
-        
-            r7 = 1;
-         */
+
+           r7 = 1;
+        */
         /* JADX WARN: Multi-variable type inference failed */
         /* JADX WARN: Removed duplicated region for block: B:153:0x028b  */
         /* JADX WARN: Removed duplicated region for block: B:156:0x026e A[SYNTHETIC] */
@@ -372,7 +402,10 @@ public abstract class Pageboost {
                 Method dump skipped, instructions count: 825
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.Pageboost.PageboostAppCapture.capture(com.android.server.am.Pageboost$PageboostAppInfo, int):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.Pageboost.PageboostAppCapture.capture(com.android.server.am.Pageboost$PageboostAppInfo,"
+                        + " int):void");
         }
 
         public static void captureFinished(IoRecord ioRecord) {
@@ -406,12 +439,18 @@ public abstract class Pageboost {
                 return false;
             }
             try {
-                RandomAccessFile randomAccessFile = new RandomAccessFile(new File(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "/proc/", "/exe")), "r");
+                RandomAccessFile randomAccessFile =
+                        new RandomAccessFile(
+                                new File(
+                                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                i, "/proc/", "/exe")),
+                                "r");
                 try {
                     byte[] bArr = new byte[6];
                     byte[] bytes = "\u007fELF".getBytes("UTF-8");
                     randomAccessFile.read(bArr);
-                    boolean z2 = Arrays.equals(Arrays.copyOfRange(bArr, 0, 4), bytes) && bArr[4] == 2;
+                    boolean z2 =
+                            Arrays.equals(Arrays.copyOfRange(bArr, 0, 4), bytes) && bArr[4] == 2;
                     randomAccessFile.close();
                     randomAccessFile.close();
                     z = z2;
@@ -427,7 +466,13 @@ public abstract class Pageboost {
 
         public static boolean isCaptureTarget(String str) {
             if (str != null) {
-                return ((!str.startsWith("/data") && !str.startsWith("/system") && !str.startsWith("/product")) || str.startsWith("/data/misc") || str.contains("(deleted")) ? false : true;
+                return ((!str.startsWith("/data")
+                                        && !str.startsWith("/system")
+                                        && !str.startsWith("/product"))
+                                || str.startsWith("/data/misc")
+                                || str.contains("(deleted"))
+                        ? false
+                        : true;
             }
             return false;
         }
@@ -466,7 +511,13 @@ public abstract class Pageboost {
         }
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public /* synthetic */ PageboostAppDBHelper(Context context, String str, SQLiteDatabase.CursorFactory cursorFactory, int i, DatabaseErrorHandler databaseErrorHandler, int i2) {
+        public /* synthetic */ PageboostAppDBHelper(
+                Context context,
+                String str,
+                SQLiteDatabase.CursorFactory cursorFactory,
+                int i,
+                DatabaseErrorHandler databaseErrorHandler,
+                int i2) {
             super(context, str, cursorFactory, i, databaseErrorHandler);
             this.$r8$classId = i2;
         }
@@ -484,7 +535,11 @@ public abstract class Pageboost {
                 e.printStackTrace();
             }
             if (file.exists() && file.length() < 31457280) {
-                String str2 = "CREATE TABLE IF NOT EXISTS " + str + " (FILENAME TEXT, OFFSET INTEGER, SIZE INTEGER, FORVRAMDISK INTEGER, BITMAP BLOB, unique (FILENAME, OFFSET) );";
+                String str2 =
+                        "CREATE TABLE IF NOT EXISTS "
+                                + str
+                                + " (FILENAME TEXT, OFFSET INTEGER, SIZE INTEGER, FORVRAMDISK"
+                                + " INTEGER, BITMAP BLOB, unique (FILENAME, OFFSET) );";
                 boolean z2 = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
                 Slog.i("Pageboost", "db create : " + str2);
                 sQLiteDatabase.execSQL(str2);
@@ -497,7 +552,9 @@ public abstract class Pageboost {
 
         public static void dropTable(SQLiteDatabase sQLiteDatabase, String str) {
             try {
-                sQLiteDatabase.execSQL(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("DROP TABLE IF EXISTS ", str));
+                sQLiteDatabase.execSQL(
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                "DROP TABLE IF EXISTS ", str));
             } catch (Exception e) {
                 boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
                 Slog.e("Pageboost", "drop table failed : " + str);
@@ -505,19 +562,27 @@ public abstract class Pageboost {
             }
         }
 
-        public static void insertTable(SQLiteDatabase sQLiteDatabase, String str, String str2, int i, byte[] bArr, int i2, int i3) {
+        public static void insertTable(
+                SQLiteDatabase sQLiteDatabase,
+                String str,
+                String str2,
+                int i,
+                byte[] bArr,
+                int i2,
+                int i3) {
             if (str == null) {
                 return;
             }
             ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("FILENAME", str2);
-            Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, m, "OFFSET", i2, "SIZE");
+            Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                    i, m, "OFFSET", i2, "SIZE");
             m.put("FORVRAMDISK", Integer.valueOf(i3));
             m.put("BITMAP", bArr);
             sQLiteDatabase.insertWithOnConflict(str, null, m, 4);
         }
 
-        private final void onCreate$com$android$server$am$Pageboost$PageboostFileDBHelper(SQLiteDatabase sQLiteDatabase) {
-        }
+        private final void onCreate$com$android$server$am$Pageboost$PageboostFileDBHelper(
+                SQLiteDatabase sQLiteDatabase) {}
 
         public static ContentValues setContentValue(PageboostAppInfo pageboostAppInfo, int i) {
             ContentValues contentValues = new ContentValues();
@@ -528,7 +593,8 @@ public abstract class Pageboost {
             contentValues.put("ION", Integer.valueOf(pageboostAppInfo.mION));
             contentValues.put("GPU", Integer.valueOf(pageboostAppInfo.mGPU));
             contentValues.put("SIZE_PR", Long.valueOf(pageboostAppInfo.mSizeForPrefetch));
-            contentValues.put("SIZE_MAP_PR", Long.valueOf(pageboostAppInfo.mMapCaptureSizeForPrefetch));
+            contentValues.put(
+                    "SIZE_MAP_PR", Long.valueOf(pageboostAppInfo.mMapCaptureSizeForPrefetch));
             contentValues.put("SCORE", Integer.valueOf(pageboostAppInfo.mScore));
             contentValues.put("EXEC_CNT", Integer.valueOf(pageboostAppInfo.mExecCnt));
             contentValues.put("ACC_ETIME", Long.valueOf(pageboostAppInfo.mAccExecTime));
@@ -538,16 +604,26 @@ public abstract class Pageboost {
             return contentValues;
         }
 
-        public static void storeApp(SQLiteDatabase sQLiteDatabase, PageboostAppList pageboostAppList, PageboostAppInfo pageboostAppInfo) {
+        public static void storeApp(
+                SQLiteDatabase sQLiteDatabase,
+                PageboostAppList pageboostAppList,
+                PageboostAppInfo pageboostAppInfo) {
             if (pageboostAppList == null || pageboostAppInfo == null) {
                 return;
             }
             synchronized (pageboostAppList.mPageboostApps) {
                 try {
                     ContentValues contentValue = setContentValue(pageboostAppInfo, 0);
-                    long update = sQLiteDatabase.update("AppLRU", contentValue, "APPNAME = ?", new String[]{pageboostAppInfo.mName});
+                    long update =
+                            sQLiteDatabase.update(
+                                    "AppLRU",
+                                    contentValue,
+                                    "APPNAME = ?",
+                                    new String[] {pageboostAppInfo.mName});
                     if (update == 0) {
-                        update = sQLiteDatabase.insertWithOnConflict("AppLRU", null, contentValue, 4);
+                        update =
+                                sQLiteDatabase.insertWithOnConflict(
+                                        "AppLRU", null, contentValue, 4);
                     }
                     boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
                     Slog.i("Pageboost", "db update :" + pageboostAppInfo.mName + " ret " + update);
@@ -557,7 +633,8 @@ public abstract class Pageboost {
             }
         }
 
-        public static void storeAppLRU(SQLiteDatabase sQLiteDatabase, PageboostAppList pageboostAppList) {
+        public static void storeAppLRU(
+                SQLiteDatabase sQLiteDatabase, PageboostAppList pageboostAppList) {
             try {
                 long delete = sQLiteDatabase.delete("AppLRU", "1", null);
                 boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
@@ -572,9 +649,13 @@ public abstract class Pageboost {
                         while (it.hasNext()) {
                             PageboostAppInfo pageboostAppInfo = (PageboostAppInfo) it.next();
                             int i2 = i + 1;
-                            long replace = sQLiteDatabase.replace("AppLRU", null, setContentValue(pageboostAppInfo, i));
+                            long replace =
+                                    sQLiteDatabase.replace(
+                                            "AppLRU", null, setContentValue(pageboostAppInfo, i));
                             boolean z2 = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-                            Slog.i("Pageboost", "db insert :" + pageboostAppInfo.mName + " ret " + replace);
+                            Slog.i(
+                                    "Pageboost",
+                                    "db insert :" + pageboostAppInfo.mName + " ret " + replace);
                             i = i2;
                         }
                     } finally {
@@ -591,7 +672,12 @@ public abstract class Pageboost {
             switch (this.$r8$classId) {
                 case 0:
                     try {
-                        sQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS AppLRU (ID INTEGER, APPNAME TEXT NOT NULL UNIQUE, CAPTURED INTEGER, ANON INTEGER, ION INTEGER, GPU INTEGER, SIZE_PR INTEGER, SIZE_MAP_PR INTEGER, SCORE INTEGER, EXEC_CNT INTEGER, ACC_ETIME INTEGER, PREFETCH_CNT INTEGER, HIT_CNT INTEGER, APK_PATH TEXT NOT NULL );");
+                        sQLiteDatabase.execSQL(
+                                "CREATE TABLE IF NOT EXISTS AppLRU (ID INTEGER, APPNAME TEXT NOT"
+                                    + " NULL UNIQUE, CAPTURED INTEGER, ANON INTEGER, ION INTEGER,"
+                                    + " GPU INTEGER, SIZE_PR INTEGER, SIZE_MAP_PR INTEGER, SCORE"
+                                    + " INTEGER, EXEC_CNT INTEGER, ACC_ETIME INTEGER, PREFETCH_CNT"
+                                    + " INTEGER, HIT_CNT INTEGER, APK_PATH TEXT NOT NULL );");
                         boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
                         Slog.i("Pageboost", "AppDB table creation done");
                         break;
@@ -626,12 +712,19 @@ public abstract class Pageboost {
                         break;
                     } catch (Exception e) {
                         boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-                        Slog.e("Pageboost", "failed to upgrade or downgrade AppDB table : from " + i + " to " + i2);
+                        Slog.e(
+                                "Pageboost",
+                                "failed to upgrade or downgrade AppDB table : from "
+                                        + i
+                                        + " to "
+                                        + i2);
                         e.printStackTrace();
                         return;
                     }
                 default:
-                    Cursor rawQuery = sQLiteDatabase.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+                    Cursor rawQuery =
+                            sQLiteDatabase.rawQuery(
+                                    "SELECT name FROM sqlite_master WHERE type='table'", null);
                     ArrayList arrayList = new ArrayList();
                     if (rawQuery != null) {
                         while (rawQuery.moveToNext()) {
@@ -695,7 +788,20 @@ public abstract class Pageboost {
             this.mIsGameApp = z;
         }
 
-        public PageboostAppInfo(String str, int i, int i2, int i3, int i4, long j, long j2, int i5, int i6, long j3, int i7, int i8, String str2) {
+        public PageboostAppInfo(
+                String str,
+                int i,
+                int i2,
+                int i3,
+                int i4,
+                long j,
+                long j2,
+                int i5,
+                int i6,
+                long j3,
+                int i7,
+                int i8,
+                String str2) {
             boolean z = false;
             this.mPid = 0;
             this.mProcStatusPid = 0;
@@ -725,7 +831,9 @@ public abstract class Pageboost {
             }
             this.mIsGameApp = z;
             boolean z2 = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-            StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i5, "appinfo : ", str, " ", " ");
+            StringBuilder m =
+                    StorageManagerService$$ExternalSyntheticOutline0.m(
+                            i5, "appinfo : ", str, " ", " ");
             ServiceKeeper$$ExternalSyntheticOutline0.m(i6, i7, " ", " ", m);
             SystemServiceManager$$ExternalSyntheticOutline0.m(m, i8, "Pageboost");
         }
@@ -734,19 +842,26 @@ public abstract class Pageboost {
             String str = this.mNameTrimmed;
             if (str.length() >= 256) {
                 boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-                BootReceiver$$ExternalSyntheticOutline0.m("Abort alp due to long package name : ", str, "Pageboost");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        "Abort alp due to long package name : ", str, "Pageboost");
                 return false;
             }
             int i = this.mProcStatus;
             String str2 = this.mName;
             if (i == 2) {
                 boolean z2 = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-                SystemServiceManager$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("alp skip : ", str2, " , "), this.mProcStatus, "Pageboost");
+                SystemServiceManager$$ExternalSyntheticOutline0.m(
+                        DumpUtils$$ExternalSyntheticOutline0.m("alp skip : ", str2, " , "),
+                        this.mProcStatus,
+                        "Pageboost");
                 return false;
             }
             Vramdisk.executeCmd(4, str);
             boolean z3 = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-            SystemServiceManager$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("alp for : ", str2, " , "), this.mProcStatus, "Pageboost");
+            SystemServiceManager$$ExternalSyntheticOutline0.m(
+                    DumpUtils$$ExternalSyntheticOutline0.m("alp for : ", str2, " , "),
+                    this.mProcStatus,
+                    "Pageboost");
             return true;
         }
 
@@ -754,7 +869,8 @@ public abstract class Pageboost {
             String str = this.mNameTrimmed;
             if (str.length() >= 256) {
                 boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-                BootReceiver$$ExternalSyntheticOutline0.m("Abort IoPrefetch due to long package name : ", str, "Pageboost");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        "Abort IoPrefetch due to long package name : ", str, "Pageboost");
                 return false;
             }
             if (this.mCaptured <= 0) {
@@ -762,14 +878,15 @@ public abstract class Pageboost {
             }
             Vramdisk.executeCmd(1, str);
             boolean z2 = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("IO Prefetch for : "), this.mName, "Pageboost");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("IO Prefetch for : "), this.mName, "Pageboost");
             return true;
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:35:0x007f, code lost:
-        
-            if (r10.mName.equals(r2.split("[^\\p{Alnum}\\.]+", 2)[0]) != false) goto L67;
-         */
+
+           if (r10.mName.equals(r2.split("[^\\p{Alnum}\\.]+", 2)[0]) != false) goto L67;
+        */
         /* JADX WARN: Removed duplicated region for block: B:28:0x0053  */
         /* JADX WARN: Removed duplicated region for block: B:39:? A[RETURN, SYNTHETIC] */
         /*
@@ -885,13 +1002,17 @@ public abstract class Pageboost {
             La1:
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.Pageboost.PageboostAppInfo.getIoinfo(long[]):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.Pageboost.PageboostAppInfo.getIoinfo(long[]):void");
         }
 
         public final void initAalPrefetchList() {
             LinkedList dalvikcacheFileList;
             File[] listFiles;
-            if (Pageboost.PAGEBOOST_ACTIVE_LAUNCH_ENABLED && PageboostAppDBHelper.createTable(Pageboost.mFileDB, this.mNameTrimmed) != null) {
+            if (Pageboost.PAGEBOOST_ACTIVE_LAUNCH_ENABLED
+                    && PageboostAppDBHelper.createTable(Pageboost.mFileDB, this.mNameTrimmed)
+                            != null) {
                 try {
                     String str = this.mApkPath;
                     File parentFile = new File(str).getParentFile();
@@ -909,7 +1030,14 @@ public abstract class Pageboost {
                             if (file.exists() && (listFiles = file.listFiles()) != null) {
                                 for (File file2 : listFiles) {
                                     if (file2.isFile()) {
-                                        PageboostAppDBHelper.insertTable(Pageboost.mFileDB, this.mNameTrimmed, file2.getPath(), -1, null, 0, 2);
+                                        PageboostAppDBHelper.insertTable(
+                                                Pageboost.mFileDB,
+                                                this.mNameTrimmed,
+                                                file2.getPath(),
+                                                -1,
+                                                null,
+                                                0,
+                                                2);
                                     }
                                 }
                                 z2 = true;
@@ -920,10 +1048,19 @@ public abstract class Pageboost {
                     if (z) {
                         return;
                     }
-                    if ((str.startsWith("/system/") || str.startsWith("/product/")) && (dalvikcacheFileList = Vramdisk.getDalvikcacheFileList(str)) != null) {
+                    if ((str.startsWith("/system/") || str.startsWith("/product/"))
+                            && (dalvikcacheFileList = Vramdisk.getDalvikcacheFileList(str))
+                                    != null) {
                         Iterator it = dalvikcacheFileList.iterator();
                         while (it.hasNext()) {
-                            PageboostAppDBHelper.insertTable(Pageboost.mFileDB, this.mNameTrimmed, ((File) it.next()).getPath(), -1, null, 0, 2);
+                            PageboostAppDBHelper.insertTable(
+                                    Pageboost.mFileDB,
+                                    this.mNameTrimmed,
+                                    ((File) it.next()).getPath(),
+                                    -1,
+                                    null,
+                                    0,
+                                    2);
                         }
                     }
                 } catch (Exception e) {
@@ -937,7 +1074,9 @@ public abstract class Pageboost {
             if (str == null) {
                 return false;
             }
-            return str.startsWith("/data/") || this.mApkPath.startsWith("/system/") || this.mApkPath.startsWith("/product/");
+            return str.startsWith("/data/")
+                    || this.mApkPath.startsWith("/system/")
+                    || this.mApkPath.startsWith("/product/");
         }
 
         public final void setApkPath(String str) {
@@ -948,14 +1087,25 @@ public abstract class Pageboost {
             String str2 = this.mName;
             if (equals) {
                 boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-                DeviceIdleController$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("Reuse the dbinfo for this app info : ", str2, " "), this.mApkPath, "Pageboost");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "Reuse the dbinfo for this app info : ", str2, " "),
+                        this.mApkPath,
+                        "Pageboost");
                 return;
             }
             boolean z2 = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-            DeviceIdleController$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("Reset this app info : ", str2, " "), this.mApkPath, "Pageboost");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    DumpUtils$$ExternalSyntheticOutline0.m("Reset this app info : ", str2, " "),
+                    this.mApkPath,
+                    "Pageboost");
             this.mApkPath = str;
             if (!isApkPathCorrect()) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("app not in internal storage : ", str2, " "), this.mApkPath, "Pageboost");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "app not in internal storage : ", str2, " "),
+                        this.mApkPath,
+                        "Pageboost");
             } else {
                 PageboostAppDBHelper.dropTable(Pageboost.mFileDB, this.mNameTrimmed);
                 initAalPrefetchList();
@@ -981,7 +1131,13 @@ public abstract class Pageboost {
             m8.append(this.mSizeForPrefetch);
             StringBuilder m9 = Preconditions$$ExternalSyntheticOutline0.m(m8.toString(), " ");
             m9.append(this.mMapCaptureSizeForPrefetch);
-            StringBuilder m10 = Preconditions$$ExternalSyntheticOutline0.m(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(m9.toString(), " 0"), " 0"), " ");
+            StringBuilder m10 =
+                    Preconditions$$ExternalSyntheticOutline0.m(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                                            m9.toString(), " 0"),
+                                    " 0"),
+                            " ");
             m10.append(this.mScore);
             StringBuilder m11 = Preconditions$$ExternalSyntheticOutline0.m(m10.toString(), " ");
             m11.append(this.mExecCnt);
@@ -1095,7 +1251,8 @@ public abstract class Pageboost {
                         }
                         return;
                     case 3:
-                        if (Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED && !Pageboost.PAGEBOOST_VRAMDISK_WITHOUT_PREDICT) {
+                        if (Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED
+                                && !Pageboost.PAGEBOOST_VRAMDISK_WITHOUT_PREDICT) {
                             PageboostAppList pageboostAppList = (PageboostAppList) message.obj;
                             Slog.i("Pageboost", "Launcher Page Up");
                             if (Pageboost.mPredictor != null) {
@@ -1109,14 +1266,25 @@ public abstract class Pageboost {
                         Pageboost.m204$$Nest$smrealupdatePackages();
                         return;
                     case 5:
-                        if (Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED && Pageboost.mGlobalAppLRU != null && (m203$$Nest$smgetPidFromPackageName = Pageboost.m203$$Nest$smgetPidFromPackageName((str = (String) message.obj), true)) > 0) {
-                            PageboostAppInfo pageboostApp2 = Pageboost.mGlobalAppLRU.getPageboostApp(str);
+                        if (Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED
+                                && Pageboost.mGlobalAppLRU != null
+                                && (m203$$Nest$smgetPidFromPackageName =
+                                                Pageboost.m203$$Nest$smgetPidFromPackageName(
+                                                        (str = (String) message.obj), true))
+                                        > 0) {
+                            PageboostAppInfo pageboostApp2 =
+                                    Pageboost.mGlobalAppLRU.getPageboostApp(str);
                             boolean z2 = PageboostAppCapture.record_ongoing;
-                            if (pageboostApp2 == null || pageboostApp2.mProcStatus == 2 || !pageboostApp2.isApkPathCorrect() || pageboostApp2.mCaptured >= PageboostAppCapture.PAGEBOOST_IO_PREFETCH_LEVEL) {
+                            if (pageboostApp2 == null
+                                    || pageboostApp2.mProcStatus == 2
+                                    || !pageboostApp2.isApkPathCorrect()
+                                    || pageboostApp2.mCaptured
+                                            >= PageboostAppCapture.PAGEBOOST_IO_PREFETCH_LEVEL) {
                                 return;
                             }
                             Slog.i("Pageboost", "capturing App IO");
-                            PageboostAppCapture.capture(pageboostApp2, m203$$Nest$smgetPidFromPackageName);
+                            PageboostAppCapture.capture(
+                                    pageboostApp2, m203$$Nest$smgetPidFromPackageName);
                             return;
                         }
                         return;
@@ -1166,15 +1334,22 @@ public abstract class Pageboost {
                         String string = data3.getString("pkg");
                         Slog.i("Pageboost", "Launcher App Execution");
                         if (Pageboost.mPredictor != null) {
-                            PageboostAppInfo pageboostApp3 = Pageboost.mGlobalAppLRU.getPageboostApp(string);
+                            PageboostAppInfo pageboostApp3 =
+                                    Pageboost.mGlobalAppLRU.getPageboostApp(string);
                             if (pageboostApp3 != null) {
                                 PageboostAppList pageboostAppList2 = Pageboost.mGlobalAppLRU;
                                 synchronized (pageboostAppList2.mPageboostApps) {
                                     remove = pageboostAppList2.mPageboostApps.remove(pageboostApp3);
                                 }
                                 if (remove) {
-                                    if (pageboostApp3.mProcStatus == 0 && i == (m203$$Nest$smgetPidFromPackageName2 = Pageboost.m203$$Nest$smgetPidFromPackageName(string, false))) {
-                                        pageboostApp3.mProcStatusPid = m203$$Nest$smgetPidFromPackageName2;
+                                    if (pageboostApp3.mProcStatus == 0
+                                            && i
+                                                    == (m203$$Nest$smgetPidFromPackageName2 =
+                                                            Pageboost
+                                                                    .m203$$Nest$smgetPidFromPackageName(
+                                                                            string, false))) {
+                                        pageboostApp3.mProcStatusPid =
+                                                m203$$Nest$smgetPidFromPackageName2;
                                         pageboostApp3.mProcStatus = 2;
                                     }
                                     if (pageboostApp3.mProcStatus == 1) {
@@ -1215,7 +1390,8 @@ public abstract class Pageboost {
                         }
                         if (pageboostAppInfo != null) {
                             if (i2 > 0) {
-                                Vramdisk.add("AppEntry," + string + "," + i2 + "," + z + "," + str4);
+                                Vramdisk.add(
+                                        "AppEntry," + string + "," + i2 + "," + z + "," + str4);
                                 return;
                             }
                             if (i2 == 0) {
@@ -1237,7 +1413,11 @@ public abstract class Pageboost {
                         String str5 = (String) message.obj;
                         PageboostAppInfo pageboostApp4 = pageboostAppList3.getPageboostApp(str5);
                         boolean z3 = PageboostAppCapture.record_ongoing;
-                        if (pageboostApp4 == null || pageboostApp4.mProcStatus == 2 || !pageboostApp4.isApkPathCorrect() || pageboostApp4.mCaptured >= PageboostAppCapture.PAGEBOOST_IO_PREFETCH_LEVEL) {
+                        if (pageboostApp4 == null
+                                || pageboostApp4.mProcStatus == 2
+                                || !pageboostApp4.isApkPathCorrect()
+                                || pageboostApp4.mCaptured
+                                        >= PageboostAppCapture.PAGEBOOST_IO_PREFETCH_LEVEL) {
                             return;
                         }
                         int i4 = pageboostApp4.mProcStatusPid;
@@ -1267,7 +1447,8 @@ public abstract class Pageboost {
                         PageboostAppCapture.captureFinished(ioRecord);
                         PageboostAppInfo pageboostAppInfo2 = ioRecord.mApp;
                         if (pageboostAppInfo2 != null) {
-                            PageboostAppDBHelper.storeApp(Pageboost.mAppDB, Pageboost.mGlobalAppLRU, pageboostAppInfo2);
+                            PageboostAppDBHelper.storeApp(
+                                    Pageboost.mAppDB, Pageboost.mGlobalAppLRU, pageboostAppInfo2);
                             return;
                         }
                         return;
@@ -1279,7 +1460,8 @@ public abstract class Pageboost {
                         int i6 = data4.getInt(Constants.JSON_CLIENT_DATA_STATUS);
                         int i7 = data4.getInt("pid");
                         String string2 = data4.getString("pkg");
-                        PageboostAppInfo pageboostApp5 = Pageboost.mGlobalAppLRU.getPageboostApp(string2);
+                        PageboostAppInfo pageboostApp5 =
+                                Pageboost.mGlobalAppLRU.getPageboostApp(string2);
                         if (pageboostApp5 != null) {
                             if (i6 != 1) {
                                 if (i6 == 2 && pageboostApp5.mProcStatusPid == i7) {
@@ -1289,7 +1471,11 @@ public abstract class Pageboost {
                                 }
                                 return;
                             }
-                            if (pageboostApp5.mProcStatusPid != 0 && (m203$$Nest$smgetPidFromPackageName3 = Pageboost.m203$$Nest$smgetPidFromPackageName(string2, false)) != 0) {
+                            if (pageboostApp5.mProcStatusPid != 0
+                                    && (m203$$Nest$smgetPidFromPackageName3 =
+                                                    Pageboost.m203$$Nest$smgetPidFromPackageName(
+                                                            string2, false))
+                                            != 0) {
                                 i7 = m203$$Nest$smgetPidFromPackageName3;
                             }
                             if (pageboostApp5.mProcStatusPid != i7) {
@@ -1302,7 +1488,11 @@ public abstract class Pageboost {
                         return;
                     case 17:
                         PageboostAppList pageboostAppList4 = Pageboost.mGlobalAppLRU;
-                        if (pageboostAppList4 == null || (pageboostApp = pageboostAppList4.getPageboostApp((String) message.obj)) == null) {
+                        if (pageboostAppList4 == null
+                                || (pageboostApp =
+                                                pageboostAppList4.getPageboostApp(
+                                                        (String) message.obj))
+                                        == null) {
                             return;
                         }
                         if (pageboostApp.mAnon + pageboostApp.mION + pageboostApp.mGPU == 0) {
@@ -1357,10 +1547,12 @@ public abstract class Pageboost {
                 }
             } catch (Exception unused) {
                 boolean z7 = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-                VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("failed to handleMessage "), message.what, "Pageboost");
+                VaultKeeperService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("failed to handleMessage "), message.what, "Pageboost");
             }
             boolean z72 = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-            VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("failed to handleMessage "), message.what, "Pageboost");
+            VaultKeeperService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("failed to handleMessage "), message.what, "Pageboost");
         }
     }
 
@@ -1376,11 +1568,14 @@ public abstract class Pageboost {
             LRUPolicy lRUPolicy = mAppSelection;
             synchronized (lRUPolicy.mLock) {
                 try {
-                    PageboostAppList pageboostAppList = (PageboostAppList) lRUPolicy.mRecentPrefetchList;
+                    PageboostAppList pageboostAppList =
+                            (PageboostAppList) lRUPolicy.mRecentPrefetchList;
                     if (pageboostAppList != null) {
                         synchronized (pageboostAppList.mPageboostApps) {
                             try {
-                                Iterator it = ((PageboostAppList) lRUPolicy.mRecentPrefetchList).mPageboostApps.iterator();
+                                Iterator it =
+                                        ((PageboostAppList) lRUPolicy.mRecentPrefetchList)
+                                                .mPageboostApps.iterator();
                                 while (true) {
                                     if (!it.hasNext()) {
                                         break;
@@ -1424,7 +1619,10 @@ public abstract class Pageboost {
                         if (pageboostAppInfo2.execute()) {
                             str = str + pageboostAppInfo2.mName + ",";
                         }
-                        int i2 = pageboostAppInfo2.mAnon + pageboostAppInfo2.mION + pageboostAppInfo2.mGPU;
+                        int i2 =
+                                pageboostAppInfo2.mAnon
+                                        + pageboostAppInfo2.mION
+                                        + pageboostAppInfo2.mGPU;
                         if (i2 >= i) {
                             pageboostAppInfo = pageboostAppInfo2;
                             i = i2;
@@ -1451,7 +1649,8 @@ public abstract class Pageboost {
 
         public static void add(String str) {
             synchronized (sLock$1) {
-                String str2 = new SimpleDateFormat("MM-dd HH:mm:ss.SSS").format(new Date()) + " " + str;
+                String str2 =
+                        new SimpleDateFormat("MM-dd HH:mm:ss.SSS").format(new Date()) + " " + str;
                 String[] strArr = array;
                 int i = cur_idx;
                 cur_idx = i + 1;
@@ -1466,7 +1665,8 @@ public abstract class Pageboost {
             }
             Debug.MemoryInfo memoryInfo = new Debug.MemoryInfo();
             Debug.getMemoryInfo(i, memoryInfo);
-            int totalSwappedOutPss = memoryInfo.getTotalSwappedOutPss() + memoryInfo.getTotalPrivateDirty();
+            int totalSwappedOutPss =
+                    memoryInfo.getTotalSwappedOutPss() + memoryInfo.getTotalPrivateDirty();
             if (totalSwappedOutPss <= 0) {
                 return;
             }
@@ -1476,7 +1676,9 @@ public abstract class Pageboost {
             pageboostAppInfo.mION = otherPrivate;
             pageboostAppInfo.mGPU = otherPrivate2;
             boolean z = Pageboost.PAGEBOOST_IO_PREFETCH_ENABLED;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(totalSwappedOutPss, otherPrivate, "memUsage collected : ", " ", " ");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            totalSwappedOutPss, otherPrivate, "memUsage collected : ", " ", " ");
             m.append(otherPrivate2);
             m.append(" for ");
             m.append(pageboostAppInfo.mName);
@@ -1614,7 +1816,9 @@ public abstract class Pageboost {
             L69:
                 return r1
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.Pageboost.Vramdisk.getString():java.util.LinkedList");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.Pageboost.Vramdisk.getString():java.util.LinkedList");
         }
 
         public static void print(PrintWriter printWriter) {
@@ -1643,14 +1847,19 @@ public abstract class Pageboost {
         pageboostAppInfo.mInstalled = 1;
         try {
             Context context = mContext;
-            if (context != null && (str2 = context.getPackageManager().getApplicationInfo(str, 0).sourceDir) != null) {
+            if (context != null
+                    && (str2 = context.getPackageManager().getApplicationInfo(str, 0).sourceDir)
+                            != null) {
                 pageboostAppInfo.setApkPath(str2);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         mGlobalAppLRU.add(pageboostAppInfo, false);
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("add app to global @ runtime: "), pageboostAppInfo.mName, "Pageboost");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("add app to global @ runtime: "),
+                pageboostAppInfo.mName,
+                "Pageboost");
     }
 
     /* renamed from: -$$Nest$smdelayedInitPageboost, reason: not valid java name */
@@ -1661,14 +1870,21 @@ public abstract class Pageboost {
                 Slog.i("Pageboost", "io_record_control file exists: kernel support = true");
             } else {
                 PAGEBOOST_KERNEL_ENABLED = false;
-                Slog.i("Pageboost", "io_record_control file does not exist: kernel support = false");
+                Slog.i(
+                        "Pageboost",
+                        "io_record_control file does not exist: kernel support = false");
             }
         } catch (Exception unused) {
             Slog.e("Pageboost", "io_record_control file open failed");
         }
-        Slog.i("Pageboost", "checkPageboostKernelSupport: " + Boolean.toString(PAGEBOOST_KERNEL_ENABLED));
-        PAGEBOOST_DAEMON_ENABLED = INetd.IF_FLAG_RUNNING.equals(SystemProperties.get("init.svc.pageboostd", ""));
-        Slog.i("Pageboost", "checkPageboostDaemonSupport: " + Boolean.toString(PAGEBOOST_DAEMON_ENABLED));
+        Slog.i(
+                "Pageboost",
+                "checkPageboostKernelSupport: " + Boolean.toString(PAGEBOOST_KERNEL_ENABLED));
+        PAGEBOOST_DAEMON_ENABLED =
+                INetd.IF_FLAG_RUNNING.equals(SystemProperties.get("init.svc.pageboostd", ""));
+        Slog.i(
+                "Pageboost",
+                "checkPageboostDaemonSupport: " + Boolean.toString(PAGEBOOST_DAEMON_ENABLED));
         if (isPageboostMinimized()) {
             Slog.i("Pageboost", "abort delayedInitPageboost");
             return;
@@ -1681,16 +1897,30 @@ public abstract class Pageboost {
             Slog.e("Pageboost", "Pageboost Delayed Init Failed");
             return;
         }
-        IntentFilter m = VcnManagementService$$ExternalSyntheticOutline0.m("com.sec.android.launcher.action.RUN_APP", "com.android.server.am.ACTION_PAGEBOOST", "com.android.server.am.ACTION_VRAMDISK_PREFETCH", "com.sec.android.intent.action.HQM_UPDATE_REQ", "android.intent.action.ACTION_SHUTDOWN");
+        IntentFilter m =
+                VcnManagementService$$ExternalSyntheticOutline0.m(
+                        "com.sec.android.launcher.action.RUN_APP",
+                        "com.android.server.am.ACTION_PAGEBOOST",
+                        "com.android.server.am.ACTION_VRAMDISK_PREFETCH",
+                        "com.sec.android.intent.action.HQM_UPDATE_REQ",
+                        "android.intent.action.ACTION_SHUTDOWN");
         m.addAction("android.intent.action.REBOOT");
         m.addAction("android.intent.action.USER_UNLOCKED");
-        mContext.registerReceiver(mReceiver, m, "com.android.server.am.permission.PAGEBOOST", null, 2);
+        mContext.registerReceiver(
+                mReceiver, m, "com.android.server.am.permission.PAGEBOOST", null, 2);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
         intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
         intentFilter.addDataScheme("package");
         mContext.registerReceiver(mPackageReceiver, intentFilter);
-        PageboostAppDBHelper pageboostAppDBHelper = new PageboostAppDBHelper(mContext, "/data/misc/pageboost/pageboost_file_db.db", null, 3, new PageboostAppDBHelper.AppDBErrorHandler(1), 1);
+        PageboostAppDBHelper pageboostAppDBHelper =
+                new PageboostAppDBHelper(
+                        mContext,
+                        "/data/misc/pageboost/pageboost_file_db.db",
+                        null,
+                        3,
+                        new PageboostAppDBHelper.AppDBErrorHandler(1),
+                        1);
         mFileDBHelper = pageboostAppDBHelper;
         pageboostAppDBHelper.setWriteAheadLoggingEnabled(true);
         try {
@@ -1708,7 +1938,8 @@ public abstract class Pageboost {
                 z = true;
             }
         } catch (Exception e2) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception for fileDB "), "Pageboost");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("Exception for fileDB "), "Pageboost");
         }
         SQLiteDatabase sQLiteDatabase = mFileDB;
         if (sQLiteDatabase != null) {
@@ -1724,7 +1955,14 @@ public abstract class Pageboost {
             Slog.e("Pageboost", "delete app db and open");
             deleteDB("/data/misc/pageboost/pageboost_app_db.db");
         }
-        PageboostAppDBHelper pageboostAppDBHelper2 = new PageboostAppDBHelper(mContext, "/data/misc/pageboost/pageboost_app_db.db", null, 7, new PageboostAppDBHelper.AppDBErrorHandler(0), 0);
+        PageboostAppDBHelper pageboostAppDBHelper2 =
+                new PageboostAppDBHelper(
+                        mContext,
+                        "/data/misc/pageboost/pageboost_app_db.db",
+                        null,
+                        7,
+                        new PageboostAppDBHelper.AppDBErrorHandler(0),
+                        0);
         mAppDBHelper = pageboostAppDBHelper2;
         try {
             mAppDB = pageboostAppDBHelper2.getWritableDatabase();
@@ -1740,7 +1978,8 @@ public abstract class Pageboost {
                 mAppDB = mAppDBHelper.getWritableDatabase();
             }
         } catch (Exception e5) {
-            NandswapManager$$ExternalSyntheticOutline0.m(e5, new StringBuilder("Exception for appDB "), "Pageboost");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    e5, new StringBuilder("Exception for appDB "), "Pageboost");
         }
         mZygote64FileMap = getFileMapFromCmd("zygote64");
         mZygoteFileMap = getFileMapFromCmd("zygote");
@@ -1761,7 +2000,13 @@ public abstract class Pageboost {
         ActivityManagerService.boostPriorityForLockedSection();
         synchronized (activityManagerService) {
             try {
-                sparseArray = (SparseArray) mActivityManagerService.mProcessList.mProcessNames.getMap().get(str);
+                sparseArray =
+                        (SparseArray)
+                                mActivityManagerService
+                                        .mProcessList
+                                        .mProcessNames
+                                        .getMap()
+                                        .get(str);
             } catch (Throwable th) {
                 ActivityManagerService.resetPriorityAfterLockedSection();
                 throw th;
@@ -1770,7 +2015,9 @@ public abstract class Pageboost {
                 for (int size = sparseArray.size() - 1; size >= 0; size--) {
                     ProcessRecord processRecord = (ProcessRecord) sparseArray.valueAt(size);
                     if (z) {
-                        if (processRecord != null && processRecord.mThread != null && !"cch-empty".equals(processRecord.mState.mAdjType)) {
+                        if (processRecord != null
+                                && processRecord.mThread != null
+                                && !"cch-empty".equals(processRecord.mState.mAdjType)) {
                             i = processRecord.mPid;
                             break;
                         }
@@ -1811,7 +2058,22 @@ public abstract class Pageboost {
         if (query != null) {
             while (query.moveToNext()) {
                 try {
-                    pageboostAppList.add(new PageboostAppInfo(query.getString(query.getColumnIndexOrThrow("APPNAME")), query.getInt(query.getColumnIndexOrThrow("CAPTURED")), query.getInt(query.getColumnIndexOrThrow("ANON")), query.getInt(query.getColumnIndexOrThrow("ION")), query.getInt(query.getColumnIndexOrThrow("GPU")), query.getLong(query.getColumnIndexOrThrow("SIZE_PR")), query.getLong(query.getColumnIndexOrThrow("SIZE_MAP_PR")), query.getInt(query.getColumnIndexOrThrow("SCORE")), query.getInt(query.getColumnIndexOrThrow("EXEC_CNT")), query.getLong(query.getColumnIndexOrThrow("ACC_ETIME")), query.getInt(query.getColumnIndexOrThrow("PREFETCH_CNT")), query.getInt(query.getColumnIndexOrThrow("HIT_CNT")), query.getString(query.getColumnIndexOrThrow("APK_PATH"))), false);
+                    pageboostAppList.add(
+                            new PageboostAppInfo(
+                                    query.getString(query.getColumnIndexOrThrow("APPNAME")),
+                                    query.getInt(query.getColumnIndexOrThrow("CAPTURED")),
+                                    query.getInt(query.getColumnIndexOrThrow("ANON")),
+                                    query.getInt(query.getColumnIndexOrThrow("ION")),
+                                    query.getInt(query.getColumnIndexOrThrow("GPU")),
+                                    query.getLong(query.getColumnIndexOrThrow("SIZE_PR")),
+                                    query.getLong(query.getColumnIndexOrThrow("SIZE_MAP_PR")),
+                                    query.getInt(query.getColumnIndexOrThrow("SCORE")),
+                                    query.getInt(query.getColumnIndexOrThrow("EXEC_CNT")),
+                                    query.getLong(query.getColumnIndexOrThrow("ACC_ETIME")),
+                                    query.getInt(query.getColumnIndexOrThrow("PREFETCH_CNT")),
+                                    query.getInt(query.getColumnIndexOrThrow("HIT_CNT")),
+                                    query.getString(query.getColumnIndexOrThrow("APK_PATH"))),
+                            false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1820,12 +2082,18 @@ public abstract class Pageboost {
         }
         for (ApplicationInfo applicationInfo : packageManager.getInstalledApplications(128)) {
             if (packageManager.getLaunchIntentForPackage(applicationInfo.packageName) != null) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("pkg info : "), applicationInfo.packageName, "Pageboost");
-                PageboostAppInfo pageboostApp = pageboostAppList.getPageboostApp(applicationInfo.packageName);
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("pkg info : "), applicationInfo.packageName, "Pageboost");
+                PageboostAppInfo pageboostApp =
+                        pageboostAppList.getPageboostApp(applicationInfo.packageName);
                 if (pageboostApp == null) {
-                    PageboostAppInfo pageboostAppInfo = new PageboostAppInfo(applicationInfo.packageName);
+                    PageboostAppInfo pageboostAppInfo =
+                            new PageboostAppInfo(applicationInfo.packageName);
                     pageboostAppList.add(pageboostAppInfo, false);
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("add app to global : "), applicationInfo.packageName, "Pageboost");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("add app to global : "),
+                            applicationInfo.packageName,
+                            "Pageboost");
                     String str = applicationInfo.sourceDir;
                     if (str != null) {
                         pageboostAppInfo.setApkPath(str);
@@ -1847,7 +2115,9 @@ public abstract class Pageboost {
                     PageboostAppInfo pageboostAppInfo2 = (PageboostAppInfo) it.next();
                     if (pageboostAppInfo2.mInstalled == 0) {
                         it.remove();
-                        Slog.i("Pageboost", "remove not installed app : " + pageboostAppInfo2.mName);
+                        Slog.i(
+                                "Pageboost",
+                                "remove not installed app : " + pageboostAppInfo2.mName);
                     }
                 }
             } catch (Throwable th) {
@@ -1875,7 +2145,9 @@ public abstract class Pageboost {
                         PageboostAppInfo pageboostAppInfo2 = (PageboostAppInfo) it.next();
                         if (str.equals(pageboostAppInfo2.mName)) {
                             it.remove();
-                            Slog.i("Pageboost", "remove app @ runtime : " + pageboostAppInfo2.mName);
+                            Slog.i(
+                                    "Pageboost",
+                                    "remove app @ runtime : " + pageboostAppInfo2.mName);
                             pageboostAppInfo = pageboostAppInfo2;
                             break;
                         }
@@ -1899,7 +2171,8 @@ public abstract class Pageboost {
             Method dump skipped, instructions count: 292
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.Pageboost.<clinit>():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.am.Pageboost.<clinit>():void");
     }
 
     public static void deleteDB(String str) {
@@ -1913,7 +2186,13 @@ public abstract class Pageboost {
     public static void dumpInfo(PrintWriter printWriter, String[] strArr) {
         try {
             if (isPageboostMinimized()) {
-                printWriter.println("minimized: " + Boolean.toString(PAGEBOOST_MINIMIZE) + ", kernel support: " + Boolean.toString(PAGEBOOST_KERNEL_ENABLED) + ", daemon support: " + Boolean.toString(PAGEBOOST_DAEMON_ENABLED));
+                printWriter.println(
+                        "minimized: "
+                                + Boolean.toString(PAGEBOOST_MINIMIZE)
+                                + ", kernel support: "
+                                + Boolean.toString(PAGEBOOST_KERNEL_ENABLED)
+                                + ", daemon support: "
+                                + Boolean.toString(PAGEBOOST_DAEMON_ENABLED));
                 return;
             }
             if (printWriter != null && mGlobalAppLRU != null) {
@@ -1924,9 +2203,13 @@ public abstract class Pageboost {
                         return;
                     }
                     int i = PageboostAppDBHelper.$r8$clinit;
-                    Slog.i("Pageboost", "db clear : ret " + sQLiteDatabase.delete("AppLRU", "1", null));
+                    Slog.i(
+                            "Pageboost",
+                            "db clear : ret " + sQLiteDatabase.delete("AppLRU", "1", null));
                     printWriter.println("DB is purged. Please type 'adb reboot'");
-                    printWriter.println("(!CAUTION: Do not reboot using 'power key'. Unless DB will be restored)");
+                    printWriter.println(
+                            "(!CAUTION: Do not reboot using 'power key'. Unless DB will be"
+                                + " restored)");
                     return;
                 }
                 if (strArr.length <= 2 || !"heimdall".equals(strArr[1])) {
@@ -1936,9 +2219,12 @@ public abstract class Pageboost {
                     printWriter.println("ignore dram spec: " + PAGEBOOST_IGNORE_DRAM_SPECIFICATION);
                     printWriter.println("prefetch enabled: " + PAGEBOOST_IO_PREFETCH_ENABLED);
                     printWriter.println("alp enabled: " + PAGEBOOST_ACTIVE_LAUNCH_ENABLED);
-                    printWriter.println("prefetch level: " + PageboostAppCapture.PAGEBOOST_IO_PREFETCH_LEVEL);
+                    printWriter.println(
+                            "prefetch level: " + PageboostAppCapture.PAGEBOOST_IO_PREFETCH_LEVEL);
                     printWriter.println("prefetch app count: 1");
-                    printWriter.println("vramdisk enabled: (config) false (decision_by_dram) " + Vramdisk.ENABLED);
+                    printWriter.println(
+                            "vramdisk enabled: (config) false (decision_by_dram) "
+                                    + Vramdisk.ENABLED);
                     printWriter.println("memprep enabled: false");
                     printWriter.println("");
                     printWriter.println("- Pageboost AppLRU Info");
@@ -1968,7 +2254,7 @@ public abstract class Pageboost {
     }
 
     public static FileMapList getFileMapFromCmd(String str) {
-        int[] pidsForCommands = Process.getPidsForCommands(new String[]{str});
+        int[] pidsForCommands = Process.getPidsForCommands(new String[] {str});
         if (pidsForCommands == null || pidsForCommands.length <= 0) {
             return null;
         }
@@ -1976,12 +2262,18 @@ public abstract class Pageboost {
     }
 
     public static boolean isPageboostMinimized() {
-        return (!PAGEBOOST_MINIMIZE && PAGEBOOST_KERNEL_ENABLED && PAGEBOOST_DAEMON_ENABLED) ? false : true;
+        return (!PAGEBOOST_MINIMIZE && PAGEBOOST_KERNEL_ENABLED && PAGEBOOST_DAEMON_ENABLED)
+                ? false
+                : true;
     }
 
     public static void onAppLaunch(Intent intent) {
         try {
-            if (!isPageboostMinimized() && intent != null && "android.intent.action.MAIN".equals(intent.getAction()) && intent.hasCategory("android.intent.category.LAUNCHER") && intent.getComponent() != null) {
+            if (!isPageboostMinimized()
+                    && intent != null
+                    && "android.intent.action.MAIN".equals(intent.getAction())
+                    && intent.hasCategory("android.intent.category.LAUNCHER")
+                    && intent.getComponent() != null) {
                 String packageName = intent.getComponent().getPackageName();
                 Slog.i("Pageboost", "onAppLaunch : " + packageName);
                 if (packageName == null) {

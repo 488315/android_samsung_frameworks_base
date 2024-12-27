@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class ForegroundAppEnergyInfo implements Parcelable {
@@ -11,19 +10,21 @@ public final class ForegroundAppEnergyInfo implements Parcelable {
     private long mStartTime;
     private int mUid;
     private static final String TAG = ForegroundAppEnergyInfo.class.getSimpleName();
-    public static final Parcelable.Creator<ForegroundAppEnergyInfo> CREATOR = new Parcelable.Creator<ForegroundAppEnergyInfo>() { // from class: android.os.ForegroundAppEnergyInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ForegroundAppEnergyInfo createFromParcel(Parcel in) {
-            return new ForegroundAppEnergyInfo(in);
-        }
+    public static final Parcelable.Creator<ForegroundAppEnergyInfo> CREATOR =
+            new Parcelable.Creator<
+                    ForegroundAppEnergyInfo>() { // from class: android.os.ForegroundAppEnergyInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ForegroundAppEnergyInfo createFromParcel(Parcel in) {
+                    return new ForegroundAppEnergyInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ForegroundAppEnergyInfo[] newArray(int size) {
-            return new ForegroundAppEnergyInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ForegroundAppEnergyInfo[] newArray(int size) {
+                    return new ForegroundAppEnergyInfo[size];
+                }
+            };
 
     public ForegroundAppEnergyInfo() {
         initialize();
@@ -34,7 +35,13 @@ public final class ForegroundAppEnergyInfo implements Parcelable {
         readFromParcel(in);
     }
 
-    public ForegroundAppEnergyInfo(int uid, long startTime, long endTime, long duration, int displayPowerUah, int batteryDischargeUah) {
+    public ForegroundAppEnergyInfo(
+            int uid,
+            long startTime,
+            long endTime,
+            long duration,
+            int displayPowerUah,
+            int batteryDischargeUah) {
         this.mUid = uid;
         this.mStartTime = startTime;
         this.mEndTime = endTime;

@@ -4,6 +4,7 @@ import android.os.RemoteException;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.security.InvalidKeyException;
@@ -46,7 +47,7 @@ public class UcmKeyStoreSignatureSpi extends SignatureSpi {
 
     @Override // java.security.SignatureSpi
     public void engineUpdate(byte input) throws SignatureException {
-        engineUpdateInternal(new byte[]{input}, 0, 1);
+        engineUpdateInternal(new byte[] {input}, 0, 1);
     }
 
     @Override // java.security.SignatureSpi
@@ -128,7 +129,9 @@ public class UcmKeyStoreSignatureSpi extends SignatureSpi {
             throw new SignatureException("failed to connect ucm service");
         }
         try {
-            byte[] output = lService.ucmSign(this.mKey.getAlias(), this.mStream.toByteArray(), this.mAlgorithm);
+            byte[] output =
+                    lService.ucmSign(
+                            this.mKey.getAlias(), this.mStream.toByteArray(), this.mAlgorithm);
             if (output == null) {
                 throw new SignatureException("output is null");
             }

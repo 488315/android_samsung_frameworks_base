@@ -102,6 +102,5 @@ public final class PreciseDisconnectCause {
     public static final int UNOBTAINABLE_NUMBER = 1;
     public static final int USER_NOT_MEMBER_OF_CUG = 87;
 
-    private PreciseDisconnectCause() {
-    }
+    private PreciseDisconnectCause() {}
 }

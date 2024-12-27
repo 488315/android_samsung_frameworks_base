@@ -4,10 +4,12 @@ import android.content.ComponentName;
 import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.ProxyManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.am.AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,11 +23,20 @@ public abstract class AbstractPerUserSystemService {
     public final String mTag = getClass().getSimpleName();
     public final int mUserId;
 
-    public AbstractPerUserSystemService(AbstractMasterSystemService abstractMasterSystemService, Object obj, int i) {
+    public AbstractPerUserSystemService(
+            AbstractMasterSystemService abstractMasterSystemService, Object obj, int i) {
         this.mMaster = abstractMasterSystemService;
         this.mLock = obj;
         this.mUserId = i;
-        this.mSetupComplete = "1".equals(Settings.Secure.getStringForUser(abstractMasterSystemService.getContext().getContentResolver(), "user_setup_complete", i));
+        this.mSetupComplete =
+                "1"
+                        .equals(
+                                Settings.Secure.getStringForUser(
+                                        abstractMasterSystemService
+                                                .getContext()
+                                                .getContentResolver(),
+                                        "user_setup_complete",
+                                        i));
     }
 
     public void dumpLocked(PrintWriter printWriter) {
@@ -40,7 +51,8 @@ public abstract class AbstractPerUserSystemService {
             printWriter.print("    ");
             printWriter.print("Target SDK: ");
             ServiceInfo serviceInfo = this.mServiceInfo;
-            printWriter.println(serviceInfo == null ? 0 : serviceInfo.applicationInfo.targetSdkVersion);
+            printWriter.println(
+                    serviceInfo == null ? 0 : serviceInfo.applicationInfo.targetSdkVersion);
         }
         AbstractMasterSystemService abstractMasterSystemService = this.mMaster;
         if (abstractMasterSystemService.mServiceNameResolver != null) {
@@ -51,7 +63,8 @@ public abstract class AbstractPerUserSystemService {
         }
         printWriter.print("    ");
         printWriter.print("Disabled by UserManager: ");
-        AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "    ", "Setup complete: ", this.mDisabled);
+        AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                printWriter, "    ", "Setup complete: ", this.mDisabled);
         printWriter.println(this.mSetupComplete);
         if (this.mServiceInfo != null) {
             printWriter.print("    ");
@@ -180,7 +193,9 @@ public abstract class AbstractPerUserSystemService {
             monitor-exit(r5)     // Catch: java.lang.Throwable -> L38
             throw r12
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.infra.AbstractPerUserSystemService.getServiceComponent(java.lang.String):android.content.ComponentName");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.infra.AbstractPerUserSystemService.getServiceComponent(java.lang.String):android.content.ComponentName");
     }
 
     public final ComponentName getServiceComponentName() {
@@ -197,7 +212,10 @@ public abstract class AbstractPerUserSystemService {
         if (serviceInfo == null) {
             return null;
         }
-        return serviceInfo.loadSafeLabel(this.mMaster.getContext().getPackageManager(), FullScreenMagnificationGestureHandler.MAX_SCALE, 5);
+        return serviceInfo.loadSafeLabel(
+                this.mMaster.getContext().getPackageManager(),
+                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                5);
     }
 
     public final String getServicePackageName() {
@@ -220,8 +238,7 @@ public abstract class AbstractPerUserSystemService {
         return -1;
     }
 
-    public void handlePackageUpdateLocked(String str) {
-    }
+    public void handlePackageUpdateLocked(String str) {}
 
     public final boolean isEnabledLocked() {
         return (!this.mSetupComplete || this.mServiceInfo == null || this.mDisabled) ? false : true;
@@ -247,16 +264,28 @@ public abstract class AbstractPerUserSystemService {
             sb.append("): wasEnabled=");
             sb.append(isEnabledLocked);
             sb.append(", mSetupComplete=");
-            BatteryService$$ExternalSyntheticOutline0.m(sb, this.mSetupComplete, ", disabled=", z, ", mDisabled=");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    sb, this.mSetupComplete, ", disabled=", z, ", mDisabled=");
             ProxyManager$$ExternalSyntheticOutline0.m(str, sb, this.mDisabled);
         }
-        this.mSetupComplete = "1".equals(Settings.Secure.getStringForUser(abstractMasterSystemService.getContext().getContentResolver(), "user_setup_complete", i));
+        this.mSetupComplete =
+                "1"
+                        .equals(
+                                Settings.Secure.getStringForUser(
+                                        abstractMasterSystemService
+                                                .getContext()
+                                                .getContentResolver(),
+                                        "user_setup_complete",
+                                        i));
         this.mDisabled = z;
-        ServiceNameBaseResolver serviceNameBaseResolver = abstractMasterSystemService.mServiceNameResolver;
+        ServiceNameBaseResolver serviceNameBaseResolver =
+                abstractMasterSystemService.mServiceNameResolver;
         if (serviceNameBaseResolver == null || !serviceNameBaseResolver.mIsMultiple) {
             updateServiceInfoLocked();
         } else if (abstractMasterSystemService.debug) {
-            Slog.d(str, "Should not end up in updateLocked when isConfiguredInMultipleMode is true");
+            Slog.d(
+                    str,
+                    "Should not end up in updateLocked when isConfiguredInMultipleMode is true");
         }
         return isEnabledLocked != isEnabledLocked();
     }
@@ -267,7 +296,7 @@ public abstract class AbstractPerUserSystemService {
             return null;
         }
         if (!serviceNameBaseResolver.mIsMultiple) {
-            return new ComponentName[]{getServiceComponent(getComponentNameLocked())};
+            return new ComponentName[] {getServiceComponent(getComponentNameLocked())};
         }
         String[] serviceNameList = serviceNameBaseResolver.getServiceNameList(this.mUserId);
         if (serviceNameList == null) {

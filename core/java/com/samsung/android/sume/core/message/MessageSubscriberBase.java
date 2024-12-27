@@ -2,7 +2,9 @@ package com.samsung.android.sume.core.message;
 
 import android.util.Log;
 import android.view.contentprotection.ContentProtectionEventProcessor$$ExternalSyntheticLambda8;
+
 import com.samsung.android.sume.core.Def;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -52,26 +54,45 @@ public abstract class MessageSubscriberBase implements MessageSubscriber {
     public void onMessageReceived(final Message message) {
         int code = message.getCode();
         if (Message.isError(code)) {
-            this.errorListener.forEach(new Consumer() { // from class: com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((MessageConsumer) obj).onMessageReceived(Message.this);
-                }
-            });
+            this.errorListener.forEach(
+                    new Consumer() { // from class:
+                                     // com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ((MessageConsumer) obj).onMessageReceived(Message.this);
+                        }
+                    });
         } else {
-            Stream.concat((Stream) Optional.ofNullable(this.messageConsumers.get(Integer.valueOf(code))).map(new ContentProtectionEventProcessor$$ExternalSyntheticLambda8()).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda1
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    Stream of;
-                    of = Stream.of((Object[]) new MessageConsumer[0]);
-                    return of;
-                }
-            }), this.eventListener.stream()).forEach(new Consumer() { // from class: com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda2
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((MessageConsumer) obj).onMessageReceived(Message.this);
-                }
-            });
+            Stream.concat(
+                            (Stream)
+                                    Optional.ofNullable(
+                                                    this.messageConsumers.get(
+                                                            Integer.valueOf(code)))
+                                            .map(
+                                                    new ContentProtectionEventProcessor$$ExternalSyntheticLambda8())
+                                            .orElseGet(
+                                                    new Supplier() { // from class:
+                                                                     // com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda1
+                                                        @Override // java.util.function.Supplier
+                                                        public final Object get() {
+                                                            Stream of;
+                                                            of =
+                                                                    Stream.of(
+                                                                            (Object[])
+                                                                                    new MessageConsumer
+                                                                                            [0]);
+                                                            return of;
+                                                        }
+                                                    }),
+                            this.eventListener.stream())
+                    .forEach(
+                            new Consumer() { // from class:
+                                             // com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda2
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    ((MessageConsumer) obj).onMessageReceived(Message.this);
+                                }
+                            });
         }
     }
 
@@ -99,12 +120,14 @@ public abstract class MessageSubscriberBase implements MessageSubscriber {
 
     @Override // com.samsung.android.sume.core.message.MessageSubscriber
     public void removeMessageConsumer(final MessageConsumer messageConsumer) {
-        this.messageConsumers.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda3
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                ((List) obj2).remove(MessageConsumer.this);
-            }
-        });
+        this.messageConsumers.forEach(
+                new BiConsumer() { // from class:
+                                   // com.samsung.android.sume.core.message.MessageSubscriberBase$$ExternalSyntheticLambda3
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        ((List) obj2).remove(MessageConsumer.this);
+                    }
+                });
     }
 
     protected void release() {

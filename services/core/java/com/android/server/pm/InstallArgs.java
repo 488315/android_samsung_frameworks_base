@@ -3,7 +3,9 @@ package com.android.server.pm;
 import android.content.pm.IPackageInstallObserver2;
 import android.content.pm.SigningDetails;
 import android.util.ArrayMap;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.File;
 import java.util.List;
 
@@ -33,7 +35,28 @@ public final class InstallArgs {
     public final String mTraceMethod;
     public final String mVolumeUuid;
 
-    public InstallArgs(OriginInfo originInfo, MoveInfo moveInfo, IPackageInstallObserver2 iPackageInstallObserver2, int i, int i2, InstallSource installSource, String str, String str2, ArrayMap arrayMap, List list, int i3, String str3, int i4, SigningDetails signingDetails, int i5, int i6, boolean z, int i7, int i8, boolean z2, String str4) {
+    public InstallArgs(
+            OriginInfo originInfo,
+            MoveInfo moveInfo,
+            IPackageInstallObserver2 iPackageInstallObserver2,
+            int i,
+            int i2,
+            InstallSource installSource,
+            String str,
+            String str2,
+            ArrayMap arrayMap,
+            List list,
+            int i3,
+            String str3,
+            int i4,
+            SigningDetails signingDetails,
+            int i5,
+            int i6,
+            boolean z,
+            int i7,
+            int i8,
+            boolean z2,
+            String str4) {
         this.mOriginInfo = originInfo;
         this.mMoveInfo = moveInfo;
         this.mInstallFlags = i;

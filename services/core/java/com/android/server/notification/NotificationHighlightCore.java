@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.ArrayMap;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -30,7 +31,8 @@ public final class NotificationHighlightCore {
         new ArrayList();
         new ArrayList();
         this.mNotificationClassifier = null;
-        this.PRIVACY_CONVERSATION_URI = Settings.System.getUriFor("noti_intelligence_priority_conversation");
+        this.PRIVACY_CONVERSATION_URI =
+                Settings.System.getUriFor("noti_intelligence_priority_conversation");
         this.AUTO_GROUPING_URI = Settings.System.getUriFor("noti_auto_more_grouping");
         this.mPrivacyConverstionEnabled = false;
         this.mAutoGroupingEnabled = false;

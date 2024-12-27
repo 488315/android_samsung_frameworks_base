@@ -9,9 +9,11 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -31,7 +33,8 @@ public final class ShortcutLauncher extends ShortcutPackageItem {
         this.mOwnerUserId = i;
     }
 
-    public static ShortcutLauncher loadFromFile(File file, ShortcutUser shortcutUser, int i, boolean z) {
+    public static ShortcutLauncher loadFromFile(
+            File file, ShortcutUser shortcutUser, int i, boolean z) {
         int depth;
         String name;
         ResilientAtomicFile resilientFile = ShortcutPackageItem.getResilientFile(file);
@@ -86,9 +89,19 @@ public final class ShortcutLauncher extends ShortcutPackageItem {
         }
     }
 
-    public static ShortcutLauncher loadFromXml(TypedXmlPullParser typedXmlPullParser, ShortcutUser shortcutUser, int i, boolean z) {
+    public static ShortcutLauncher loadFromXml(
+            TypedXmlPullParser typedXmlPullParser, ShortcutUser shortcutUser, int i, boolean z) {
         AtomicBoolean atomicBoolean = ShortcutService.sIsEmergencyMode;
-        ShortcutLauncher shortcutLauncher = new ShortcutLauncher(shortcutUser, i, typedXmlPullParser.getAttributeValue((String) null, "package-name"), z ? i : (int) ShortcutService.parseLongAttribute(typedXmlPullParser, "launcher-user", i));
+        ShortcutLauncher shortcutLauncher =
+                new ShortcutLauncher(
+                        shortcutUser,
+                        i,
+                        typedXmlPullParser.getAttributeValue((String) null, "package-name"),
+                        z
+                                ? i
+                                : (int)
+                                        ShortcutService.parseLongAttribute(
+                                                typedXmlPullParser, "launcher-user", i));
         int depth = typedXmlPullParser.getDepth();
         ArraySet arraySet = null;
         while (true) {
@@ -104,11 +117,18 @@ public final class ShortcutLauncher extends ShortcutPackageItem {
                     if (name.equals("package-info")) {
                         shortcutLauncher.mPackageInfo.loadFromXml(typedXmlPullParser, z);
                     } else if (name.equals("package")) {
-                        String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "package-name");
-                        int parseLongAttribute = z ? i : (int) ShortcutService.parseLongAttribute(typedXmlPullParser, "package-user", i);
+                        String attributeValue =
+                                typedXmlPullParser.getAttributeValue((String) null, "package-name");
+                        int parseLongAttribute =
+                                z
+                                        ? i
+                                        : (int)
+                                                ShortcutService.parseLongAttribute(
+                                                        typedXmlPullParser, "package-user", i);
                         ArraySet arraySet2 = new ArraySet();
                         synchronized (shortcutLauncher.mPackageItemLock) {
-                            shortcutLauncher.mPinnedShortcuts.put(UserPackage.of(parseLongAttribute, attributeValue), arraySet2);
+                            shortcutLauncher.mPinnedShortcuts.put(
+                                    UserPackage.of(parseLongAttribute, attributeValue), arraySet2);
                         }
                         arraySet = arraySet2;
                     }
@@ -119,7 +139,8 @@ public final class ShortcutLauncher extends ShortcutPackageItem {
                         if (arraySet == null) {
                             Slog.w("ShortcutService", "pin in invalid place");
                         } else {
-                            arraySet.add(typedXmlPullParser.getAttributeValue((String) null, "value"));
+                            arraySet.add(
+                                    typedXmlPullParser.getAttributeValue((String) null, "value"));
                         }
                     }
                 }
@@ -154,7 +175,8 @@ public final class ShortcutLauncher extends ShortcutPackageItem {
         String str = this.mPackageName;
         PackageInfo packageInfo = shortcutService.getPackageInfo(str, i, true);
         if (packageInfo == null) {
-            HeimdAllFsService$$ExternalSyntheticOutline0.m("Package not found: ", str, "ShortcutService");
+            HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                    "Package not found: ", str, "ShortcutService");
             return;
         }
         ShortcutPackageInfo shortcutPackageInfo = this.mPackageInfo;
@@ -183,17 +205,26 @@ public final class ShortcutLauncher extends ShortcutPackageItem {
     @Override // com.android.server.pm.ShortcutPackageItem
     public final File getShortcutPackageItemFile() {
         ShortcutUser shortcutUser = this.mShortcutUser;
-        File file = new File(shortcutUser.mService.injectUserDataPath(shortcutUser.mUserId), "launchers");
+        File file =
+                new File(
+                        shortcutUser.mService.injectUserDataPath(shortcutUser.mUserId),
+                        "launchers");
         StringBuilder sb = new StringBuilder();
         sb.append(this.mPackageName);
-        return new File(file, AmFmBandRange$$ExternalSyntheticOutline0.m(this.mPackageUserId, sb, ".xml"));
+        return new File(
+                file, AmFmBandRange$$ExternalSyntheticOutline0.m(this.mPackageUserId, sb, ".xml"));
     }
 
     public final boolean hasPinned(ShortcutInfo shortcutInfo) {
         boolean z;
         synchronized (this.mPackageItemLock) {
             try {
-                ArraySet arraySet = (ArraySet) this.mPinnedShortcuts.get(UserPackage.of(shortcutInfo.getUserId(), shortcutInfo.getPackage()));
+                ArraySet arraySet =
+                        (ArraySet)
+                                this.mPinnedShortcuts.get(
+                                        UserPackage.of(
+                                                shortcutInfo.getUserId(),
+                                                shortcutInfo.getPackage()));
                 z = arraySet != null && arraySet.contains(shortcutInfo.getId());
             } finally {
             }
@@ -210,7 +241,9 @@ public final class ShortcutLauncher extends ShortcutPackageItem {
                 this.mPinnedShortcuts.clear();
             }
             for (int size = arrayList.size() - 1; size >= 0; size--) {
-                ShortcutPackage packageShortcutsIfExists = this.mShortcutUser.getPackageShortcutsIfExists(((UserPackage) arrayList.get(size)).packageName);
+                ShortcutPackage packageShortcutsIfExists =
+                        this.mShortcutUser.getPackageShortcutsIfExists(
+                                ((UserPackage) arrayList.get(size)).packageName);
                 if (packageShortcutsIfExists != null) {
                     packageShortcutsIfExists.refreshPinnedFlags();
                 }
@@ -219,7 +252,8 @@ public final class ShortcutLauncher extends ShortcutPackageItem {
     }
 
     public final void pinShortcuts(int i, String str, boolean z, List list) {
-        ShortcutPackage packageShortcutsIfExists = this.mShortcutUser.getPackageShortcutsIfExists(str);
+        ShortcutPackage packageShortcutsIfExists =
+                this.mShortcutUser.getPackageShortcutsIfExists(str);
         if (packageShortcutsIfExists == null) {
             return;
         }
@@ -236,7 +270,10 @@ public final class ShortcutLauncher extends ShortcutPackageItem {
                 String str2 = (String) list.get(i2);
                 ShortcutInfo findShortcutById = packageShortcutsIfExists.findShortcutById(str2);
                 if (findShortcutById != null) {
-                    if (findShortcutById.isDynamic() || findShortcutById.isLongLived() || findShortcutById.isManifestShortcut() || z) {
+                    if (findShortcutById.isDynamic()
+                            || findShortcutById.isLongLived()
+                            || findShortcutById.isManifestShortcut()
+                            || z) {
                         arraySet2.add(str2);
                     } else {
                         arraySet.add(str2);
@@ -266,7 +303,9 @@ public final class ShortcutLauncher extends ShortcutPackageItem {
     @Override // com.android.server.pm.ShortcutPackageItem
     public final void saveToXml(TypedXmlSerializer typedXmlSerializer, boolean z) {
         ArrayMap arrayMap;
-        if (this.mShortcutUser.mService.mSmartSwitchBackupAllowed.get() || !z || this.mPackageInfo.mBackupAllowed) {
+        if (this.mShortcutUser.mService.mSmartSwitchBackupAllowed.get()
+                || !z
+                || this.mPackageInfo.mBackupAllowed) {
             synchronized (this.mPackageItemLock) {
                 arrayMap = new ArrayMap(this.mPinnedShortcuts);
             }
@@ -282,8 +321,10 @@ public final class ShortcutLauncher extends ShortcutPackageItem {
                 UserPackage userPackage = (UserPackage) arrayMap.keyAt(i);
                 if (!z || userPackage.userId == this.mOwnerUserId) {
                     typedXmlSerializer.startTag((String) null, "package");
-                    ShortcutService.writeAttr(typedXmlSerializer, "package-name", userPackage.packageName);
-                    ShortcutService.writeAttr(typedXmlSerializer, "package-user", userPackage.userId);
+                    ShortcutService.writeAttr(
+                            typedXmlSerializer, "package-name", userPackage.packageName);
+                    ShortcutService.writeAttr(
+                            typedXmlSerializer, "package-user", userPackage.userId);
                     ArraySet arraySet = (ArraySet) arrayMap.valueAt(i);
                     int size2 = arraySet.size();
                     for (int i2 = 0; i2 < size2; i2++) {

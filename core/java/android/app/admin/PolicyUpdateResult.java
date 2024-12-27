@@ -14,8 +14,7 @@ public final class PolicyUpdateResult {
     private final int mResultCode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResultCode {
-    }
+    public @interface ResultCode {}
 
     public PolicyUpdateResult(int resultCode) {
         this.mResultCode = resultCode;

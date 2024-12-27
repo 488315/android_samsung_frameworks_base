@@ -1,24 +1,26 @@
 package android.content.type;
 
+import libcore.content.type.MimeMap;
+
 import java.io.InputStream;
 import java.util.function.Function;
-import libcore.content.type.MimeMap;
 
 /* loaded from: classes.dex */
 public class DefaultMimeMapFactory {
-    private DefaultMimeMapFactory() {
-    }
+    private DefaultMimeMapFactory() {}
 
     public static MimeMap create() {
         final Class c = DefaultMimeMapFactory.class;
-        return create(new Function() { // from class: android.content.type.DefaultMimeMapFactory$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                InputStream resourceAsStream;
-                resourceAsStream = c.getResourceAsStream("/res/" + ((String) obj));
-                return resourceAsStream;
-            }
-        });
+        return create(
+                new Function() { // from class:
+                    // android.content.type.DefaultMimeMapFactory$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        InputStream resourceAsStream;
+                        resourceAsStream = c.getResourceAsStream("/res/" + ((String) obj));
+                        return resourceAsStream;
+                    }
+                });
     }
 
     public static MimeMap create(Function<String, InputStream> resourceSupplier) {
@@ -30,14 +32,17 @@ public class DefaultMimeMapFactory {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:22:0x0077, code lost:
-    
-        throw new java.lang.IllegalArgumentException("Malformed line: " + r3);
-     */
+
+       throw new java.lang.IllegalArgumentException("Malformed line: " + r3);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static void parseTypes(libcore.content.type.MimeMap.Builder r10, java.util.function.Function<java.lang.String, java.io.InputStream> r11, java.lang.String r12) {
+    private static void parseTypes(
+            libcore.content.type.MimeMap.Builder r10,
+            java.util.function.Function<java.lang.String, java.io.InputStream> r11,
+            java.lang.String r12) {
         /*
             java.lang.Object r0 = r11.apply(r12)     // Catch: java.lang.Throwable -> L98
             java.io.InputStream r0 = (java.io.InputStream) r0     // Catch: java.lang.Throwable -> L98
@@ -125,6 +130,9 @@ public class DefaultMimeMapFactory {
             r1.<init>(r2, r0)
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.type.DefaultMimeMapFactory.parseTypes(libcore.content.type.MimeMap$Builder, java.util.function.Function, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.content.type.DefaultMimeMapFactory.parseTypes(libcore.content.type.MimeMap$Builder,"
+                    + " java.util.function.Function, java.lang.String):void");
     }
 }

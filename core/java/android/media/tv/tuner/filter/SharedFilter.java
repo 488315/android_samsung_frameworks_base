@@ -2,6 +2,7 @@ package android.media.tv.tuner.filter;
 
 import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -20,8 +21,7 @@ public final class SharedFilter implements AutoCloseable {
     private boolean mIsAccessible = true;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+    public @interface Status {}
 
     private native int nativeFlushSharedFilter();
 
@@ -48,12 +48,14 @@ public final class SharedFilter implements AutoCloseable {
         }
         synchronized (this.mCallbackLock) {
             if (this.mCallback != null && this.mExecutor != null) {
-                this.mExecutor.execute(new Runnable() { // from class: android.media.tv.tuner.filter.SharedFilter$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SharedFilter.this.lambda$onFilterStatus$0(status);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.media.tv.tuner.filter.SharedFilter$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SharedFilter.this.lambda$onFilterStatus$0(status);
+                            }
+                        });
             }
         }
     }
@@ -76,12 +78,14 @@ public final class SharedFilter implements AutoCloseable {
                     }
                 }
             } else {
-                this.mExecutor.execute(new Runnable() { // from class: android.media.tv.tuner.filter.SharedFilter$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SharedFilter.this.lambda$onFilterEvent$1(events);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.media.tv.tuner.filter.SharedFilter$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SharedFilter.this.lambda$onFilterEvent$1(events);
+                            }
+                        });
             }
         }
     }

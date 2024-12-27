@@ -3,24 +3,27 @@ package android.os.vibrator;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.VibratorInfo;
+
 import com.samsung.android.vibrator.SemHapticFeedbackConstants;
 
 /* loaded from: classes3.dex */
 public final class SemHapticSegment extends VibrationEffectSegment {
-    public static final Parcelable.Creator<SemHapticSegment> CREATOR = new Parcelable.Creator<SemHapticSegment>() { // from class: android.os.vibrator.SemHapticSegment.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemHapticSegment createFromParcel(Parcel in) {
-            in.readInt();
-            return new SemHapticSegment(in);
-        }
+    public static final Parcelable.Creator<SemHapticSegment> CREATOR =
+            new Parcelable.Creator<
+                    SemHapticSegment>() { // from class: android.os.vibrator.SemHapticSegment.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemHapticSegment createFromParcel(Parcel in) {
+                    in.readInt();
+                    return new SemHapticSegment(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemHapticSegment[] newArray(int size) {
-            return new SemHapticSegment[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemHapticSegment[] newArray(int size) {
+                    return new SemHapticSegment[size];
+                }
+            };
     private int mMagnitude;
     private int mType;
 
@@ -80,7 +83,9 @@ public final class SemHapticSegment extends VibrationEffectSegment {
 
     @Override // android.os.vibrator.VibrationEffectSegment
     public String toDebugString() {
-        return String.format("SemHaptic: mType=%d, mMagnitude=%d", Integer.valueOf(this.mType), Integer.valueOf(this.mMagnitude));
+        return String.format(
+                "SemHaptic: mType=%d, mMagnitude=%d",
+                Integer.valueOf(this.mType), Integer.valueOf(this.mMagnitude));
     }
 
     public int hashCode() {

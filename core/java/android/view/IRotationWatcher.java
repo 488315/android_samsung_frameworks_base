@@ -12,8 +12,7 @@ public interface IRotationWatcher extends IInterface {
 
     public static class Default implements IRotationWatcher {
         @Override // android.view.IRotationWatcher
-        public void onRotationChanged(int rotation) throws RemoteException {
-        }
+        public void onRotationChanged(int rotation) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IRotationWatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRotationWatcher {
+    public abstract static class Stub extends Binder implements IRotationWatcher {
         public static final String DESCRIPTOR = "android.view.IRotationWatcher";
         static final int TRANSACTION_onRotationChanged = 1;
 
@@ -60,7 +59,8 @@ public interface IRotationWatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

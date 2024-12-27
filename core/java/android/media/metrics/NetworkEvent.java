@@ -3,25 +3,28 @@ package android.media.metrics;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class NetworkEvent extends Event implements Parcelable {
-    public static final Parcelable.Creator<NetworkEvent> CREATOR = new Parcelable.Creator<NetworkEvent>() { // from class: android.media.metrics.NetworkEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkEvent[] newArray(int size) {
-            return new NetworkEvent[size];
-        }
+    public static final Parcelable.Creator<NetworkEvent> CREATOR =
+            new Parcelable.Creator<
+                    NetworkEvent>() { // from class: android.media.metrics.NetworkEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkEvent[] newArray(int size) {
+                    return new NetworkEvent[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkEvent createFromParcel(Parcel in) {
-            return new NetworkEvent(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkEvent createFromParcel(Parcel in) {
+                    return new NetworkEvent(in);
+                }
+            };
     public static final int NETWORK_TYPE_2G = 4;
     public static final int NETWORK_TYPE_3G = 5;
     public static final int NETWORK_TYPE_4G = 6;
@@ -36,8 +39,7 @@ public final class NetworkEvent extends Event implements Parcelable {
     private final long mTimeSinceCreatedMillis;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NetworkType {
-    }
+    public @interface NetworkType {}
 
     public static String networkTypeToString(int value) {
         switch (value) {
@@ -87,7 +89,11 @@ public final class NetworkEvent extends Event implements Parcelable {
     }
 
     public String toString() {
-        return "NetworkEvent { networkType = " + this.mNetworkType + ", timeSinceCreatedMillis = " + this.mTimeSinceCreatedMillis + " }";
+        return "NetworkEvent { networkType = "
+                + this.mNetworkType
+                + ", timeSinceCreatedMillis = "
+                + this.mTimeSinceCreatedMillis
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -98,14 +104,16 @@ public final class NetworkEvent extends Event implements Parcelable {
             return false;
         }
         NetworkEvent that = (NetworkEvent) o;
-        if (this.mNetworkType == that.mNetworkType && this.mTimeSinceCreatedMillis == that.mTimeSinceCreatedMillis) {
+        if (this.mNetworkType == that.mNetworkType
+                && this.mTimeSinceCreatedMillis == that.mTimeSinceCreatedMillis) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mNetworkType), Long.valueOf(this.mTimeSinceCreatedMillis));
+        return Objects.hash(
+                Integer.valueOf(this.mNetworkType), Long.valueOf(this.mTimeSinceCreatedMillis));
     }
 
     @Override // android.os.Parcelable
@@ -150,7 +158,9 @@ public final class NetworkEvent extends Event implements Parcelable {
         }
 
         public NetworkEvent build() {
-            NetworkEvent o = new NetworkEvent(this.mNetworkType, this.mTimeSinceCreatedMillis, this.mMetricsBundle);
+            NetworkEvent o =
+                    new NetworkEvent(
+                            this.mNetworkType, this.mTimeSinceCreatedMillis, this.mMetricsBundle);
             return o;
         }
     }

@@ -9,8 +9,7 @@ public class Constants {
         public static final int NONE = 0;
         public static final int NUM_DATA_ROLES = 3;
 
-        public PortDataRole() {
-        }
+        public PortDataRole() {}
     }
 
     public final class PortPowerRole {
@@ -19,8 +18,7 @@ public class Constants {
         public static final int SINK = 2;
         public static final int SOURCE = 1;
 
-        public PortPowerRole() {
-        }
+        public PortPowerRole() {}
     }
 
     public final class PortMode {
@@ -30,7 +28,6 @@ public class Constants {
         public static final int NUM_MODES = 4;
         public static final int UFP = 1;
 
-        public PortMode() {
-        }
+        public PortMode() {}
     }
 }

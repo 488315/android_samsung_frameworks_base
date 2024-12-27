@@ -3,25 +3,27 @@ package android.blockchain;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 /* loaded from: classes.dex */
 public class CertInfo implements Parcelable {
-    public static final Parcelable.Creator<CertInfo> CREATOR = new Parcelable.Creator<CertInfo>() { // from class: android.blockchain.CertInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CertInfo createFromParcel(Parcel in) {
-            return new CertInfo(in);
-        }
+    public static final Parcelable.Creator<CertInfo> CREATOR =
+            new Parcelable.Creator<CertInfo>() { // from class: android.blockchain.CertInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CertInfo createFromParcel(Parcel in) {
+                    return new CertInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CertInfo[] newArray(int size) {
-            return new CertInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CertInfo[] newArray(int size) {
+                    return new CertInfo[size];
+                }
+            };
     private static final String TAG = "CertInfo";
     public Map<String, byte[]> mCerts;
 

@@ -2,7 +2,9 @@ package android.filterfw.core;
 
 import android.media.MediaMetrics;
 import android.util.Log;
+
 import dalvik.system.PathClassLoader;
+
 import java.lang.reflect.Constructor;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -60,7 +62,9 @@ public class FilterFactory {
                     Log.v(TAG, "Trying " + packageName + MediaMetrics.SEPARATOR + className);
                 }
                 synchronized (mClassLoaderGuard) {
-                    filterClass = mCurrentClassLoader.loadClass(packageName + MediaMetrics.SEPARATOR + className);
+                    filterClass =
+                            mCurrentClassLoader.loadClass(
+                                    packageName + MediaMetrics.SEPARATOR + className);
                 }
             } catch (ClassNotFoundException e) {
             }
@@ -76,7 +80,10 @@ public class FilterFactory {
 
     public Filter createFilterByClass(Class filterClass, String filterName) {
         if (!Filter.class.isAssignableFrom(filterClass)) {
-            throw new IllegalArgumentException("Attempting to allocate class '" + filterClass + "' which is not a subclass of Filter!");
+            throw new IllegalArgumentException(
+                    "Attempting to allocate class '"
+                            + filterClass
+                            + "' which is not a subclass of Filter!");
         }
         try {
             Constructor filterConstructor = filterClass.getConstructor(String.class);
@@ -86,11 +93,15 @@ public class FilterFactory {
             } catch (Throwable th) {
             }
             if (filter == null) {
-                throw new IllegalArgumentException("Could not construct the filter '" + filterName + "'!");
+                throw new IllegalArgumentException(
+                        "Could not construct the filter '" + filterName + "'!");
             }
             return filter;
         } catch (NoSuchMethodException e) {
-            throw new IllegalArgumentException("The filter class '" + filterClass + "' does not have a constructor of the form <init>(String name)!");
+            throw new IllegalArgumentException(
+                    "The filter class '"
+                            + filterClass
+                            + "' does not have a constructor of the form <init>(String name)!");
         }
     }
 }

@@ -6,6 +6,7 @@ import android.hardware.broadcastradio.DabTableEntry$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
@@ -61,16 +62,19 @@ public class DhcpLeaseParcelable implements Parcelable {
                                 if (parcel.dataPosition() - dataPosition < readInt) {
                                     this.hostname = parcel.readString();
                                     if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                     parcel.setDataPosition(dataPosition + readInt);
                                     return;
                                 }
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -98,10 +102,25 @@ public class DhcpLeaseParcelable implements Parcelable {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         stringJoiner.add("clientId: " + Arrays.toString(this.clientId));
         stringJoiner.add("hwAddr: " + Arrays.toString(this.hwAddr));
-        StringBuilder m = AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("netAddr: "), this.netAddr, stringJoiner, "prefixLength: "), this.prefixLength, stringJoiner, "expTime: ");
+        StringBuilder m =
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("netAddr: "),
+                                this.netAddr,
+                                stringJoiner,
+                                "prefixLength: "),
+                        this.prefixLength,
+                        stringJoiner,
+                        "expTime: ");
         m.append(this.expTime);
         stringJoiner.add(m.toString());
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, DabTableEntry$$ExternalSyntheticOutline0.m(this.hostname, "DhcpLeaseParcelable", new StringBuilder("hostname: "), stringJoiner));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                DabTableEntry$$ExternalSyntheticOutline0.m(
+                        this.hostname,
+                        "DhcpLeaseParcelable",
+                        new StringBuilder("hostname: "),
+                        stringJoiner));
     }
 
     @Override // android.os.Parcelable
@@ -116,6 +135,7 @@ public class DhcpLeaseParcelable implements Parcelable {
         parcel.writeString(this.hostname);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

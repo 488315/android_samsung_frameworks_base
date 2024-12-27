@@ -1,6 +1,7 @@
 package android.os;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -33,12 +34,10 @@ public final class BugreportParams {
     private final int mMode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BugreportFlag {
-    }
+    public @interface BugreportFlag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BugreportMode {
-    }
+    public @interface BugreportMode {}
 
     public BugreportParams(int mode) {
         this.mMode = mode;

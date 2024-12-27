@@ -8,6 +8,7 @@ import android.hardware.display.DisplayManager;
 import android.os.UserHandle;
 import android.telecom.TelecomManager;
 import android.view.Display;
+
 import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.util.SamsungGlobalActionsAnalytics;
 import com.samsung.android.globalactions.util.SystemController;
@@ -15,7 +16,8 @@ import com.samsung.android.view.SemWindowManager;
 
 /* loaded from: classes6.dex */
 public class MedicalInfoActionViewModel implements ActionViewModel {
-    public static final String DISPLAY_CATEGORY_BUILTIN = "com.samsung.android.hardware.display.category.BUILTIN";
+    public static final String DISPLAY_CATEGORY_BUILTIN =
+            "com.samsung.android.hardware.display.category.BUILTIN";
     private final Context mContext;
     private final SamsungGlobalActions mGlobalActions;
     private ActionInfo mInfo;
@@ -23,7 +25,11 @@ public class MedicalInfoActionViewModel implements ActionViewModel {
     private final SystemController mSystemController;
     private final TelecomManager mTelecomManager;
 
-    public MedicalInfoActionViewModel(Context context, SamsungGlobalActions globalActions, SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics, SystemController systemController) {
+    public MedicalInfoActionViewModel(
+            Context context,
+            SamsungGlobalActions globalActions,
+            SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics,
+            SystemController systemController) {
         this.mContext = context;
         this.mSAnalytics = samsungGlobalActionsAnalytics;
         this.mSystemController = systemController;
@@ -46,8 +52,10 @@ public class MedicalInfoActionViewModel implements ActionViewModel {
         if (this.mTelecomManager == null) {
             return;
         }
-        DisplayManager dm = (DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE);
-        Display[] displays = dm.getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
+        DisplayManager dm =
+                (DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE);
+        Display[] displays =
+                dm.getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
         Display display = displays[0];
         int length = displays.length;
         int i = 0;
@@ -69,17 +77,26 @@ public class MedicalInfoActionViewModel implements ActionViewModel {
             int displayId = 0;
             if (SemWindowManager.getInstance().isFolded()) {
                 displayId = display.getDisplayId();
-                medicalinfoIntent.setAction("com.samsung.android.app.telephonyui.action.OPEN_EMERGENCY_DIALER_COVER_SCREEN");
+                medicalinfoIntent.setAction(
+                        "com.samsung.android.app.telephonyui.action.OPEN_EMERGENCY_DIALER_COVER_SCREEN");
                 medicalinfoIntent.putExtra("launchMedicalInfo", true);
             } else {
-                medicalinfoIntent.setAction("com.samsung.android.app.telephonyui.action.OPEN_MEDICAL_INFO");
+                medicalinfoIntent.setAction(
+                        "com.samsung.android.app.telephonyui.action.OPEN_MEDICAL_INFO");
             }
             medicalinfoIntent.addFlags(268468224);
             medicalinfoIntent.putExtra("from_global_action", true);
             options.setLaunchDisplayId(displayId);
-            this.mContext.startActivityAsUser(medicalinfoIntent, options.toBundle(), new UserHandle(ActivityManager.getCurrentUser()));
+            this.mContext.startActivityAsUser(
+                    medicalinfoIntent,
+                    options.toBundle(),
+                    new UserHandle(ActivityManager.getCurrentUser()));
         }
         this.mGlobalActions.dismissDialog(true);
-        this.mSAnalytics.sendEventLog(SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.EID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.DID_EMERGENCY_SOS, 9L);
+        this.mSAnalytics.sendEventLog(
+                SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS,
+                SamsungGlobalActionsAnalytics.EID_DEVICE_OPTIONS,
+                SamsungGlobalActionsAnalytics.DID_EMERGENCY_SOS,
+                9L);
     }
 }

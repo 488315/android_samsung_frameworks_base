@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioModemIndication extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$modem$IRadioModemIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$modem$IRadioModemIndication".replace('$', '.');
     public static final String HASH = "8586a5528f0085c15cff4b6628f1b8153aca29ad";
     public static final int VERSION = 3;
 
@@ -30,28 +31,24 @@ public interface IRadioModemIndication extends IInterface {
 
     public static class Default implements IRadioModemIndication {
         @Override // android.hardware.radio.modem.IRadioModemIndication
-        public void hardwareConfigChanged(int type, HardwareConfig[] configs) throws RemoteException {
-        }
+        public void hardwareConfigChanged(int type, HardwareConfig[] configs)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemIndication
-        public void modemReset(int type, String reason) throws RemoteException {
-        }
+        public void modemReset(int type, String reason) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemIndication
-        public void radioCapabilityIndication(int type, RadioCapability rc) throws RemoteException {
-        }
+        public void radioCapabilityIndication(int type, RadioCapability rc)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemIndication
-        public void radioStateChanged(int type, int radioState) throws RemoteException {
-        }
+        public void radioStateChanged(int type, int radioState) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemIndication
-        public void rilConnected(int type) throws RemoteException {
-        }
+        public void rilConnected(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemIndication
-        public void onImeiMappingChanged(int type, ImeiInfo imeiInfo) throws RemoteException {
-        }
+        public void onImeiMappingChanged(int type, ImeiInfo imeiInfo) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemIndication
         public int getInterfaceVersion() {
@@ -69,7 +66,7 @@ public interface IRadioModemIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioModemIndication {
+    public abstract static class Stub extends Binder implements IRadioModemIndication {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_hardwareConfigChanged = 1;
@@ -101,7 +98,8 @@ public interface IRadioModemIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -123,7 +121,8 @@ public interface IRadioModemIndication extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    HardwareConfig[] _arg1 = (HardwareConfig[]) data.createTypedArray(HardwareConfig.CREATOR);
+                    HardwareConfig[] _arg1 =
+                            (HardwareConfig[]) data.createTypedArray(HardwareConfig.CREATOR);
                     data.enforceNoDataAvail();
                     hardwareConfigChanged(_arg0, _arg1);
                     return true;
@@ -135,7 +134,8 @@ public interface IRadioModemIndication extends IInterface {
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    RadioCapability _arg13 = (RadioCapability) data.readTypedObject(RadioCapability.CREATOR);
+                    RadioCapability _arg13 =
+                            (RadioCapability) data.readTypedObject(RadioCapability.CREATOR);
                     data.enforceNoDataAvail();
                     radioCapabilityIndication(_arg03, _arg13);
                     return true;
@@ -180,7 +180,8 @@ public interface IRadioModemIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModemIndication
-            public void hardwareConfigChanged(int type, HardwareConfig[] configs) throws RemoteException {
+            public void hardwareConfigChanged(int type, HardwareConfig[] configs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -212,7 +213,8 @@ public interface IRadioModemIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModemIndication
-            public void radioCapabilityIndication(int type, RadioCapability rc) throws RemoteException {
+            public void radioCapabilityIndication(int type, RadioCapability rc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -220,7 +222,8 @@ public interface IRadioModemIndication extends IInterface {
                     _data.writeTypedObject(rc, 0);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method radioCapabilityIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method radioCapabilityIndication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

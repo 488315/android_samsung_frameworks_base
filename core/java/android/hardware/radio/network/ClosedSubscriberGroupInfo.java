@@ -3,26 +3,29 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class ClosedSubscriberGroupInfo implements Parcelable {
-    public static final Parcelable.Creator<ClosedSubscriberGroupInfo> CREATOR = new Parcelable.Creator<ClosedSubscriberGroupInfo>() { // from class: android.hardware.radio.network.ClosedSubscriberGroupInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClosedSubscriberGroupInfo createFromParcel(Parcel _aidl_source) {
-            ClosedSubscriberGroupInfo _aidl_out = new ClosedSubscriberGroupInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ClosedSubscriberGroupInfo> CREATOR =
+            new Parcelable.Creator<ClosedSubscriberGroupInfo>() { // from class:
+                // android.hardware.radio.network.ClosedSubscriberGroupInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClosedSubscriberGroupInfo createFromParcel(Parcel _aidl_source) {
+                    ClosedSubscriberGroupInfo _aidl_out = new ClosedSubscriberGroupInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClosedSubscriberGroupInfo[] newArray(int _aidl_size) {
-            return new ClosedSubscriberGroupInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClosedSubscriberGroupInfo[] newArray(int _aidl_size) {
+                    return new ClosedSubscriberGroupInfo[_aidl_size];
+                }
+            };
     public String homeNodebName;
     public boolean csgIndication = false;
     public int csgIdentity = 0;

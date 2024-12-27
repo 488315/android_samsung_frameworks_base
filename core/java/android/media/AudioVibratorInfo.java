@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AudioVibratorInfo implements Parcelable {
-    public static final Parcelable.Creator<AudioVibratorInfo> CREATOR = new Parcelable.Creator<AudioVibratorInfo>() { // from class: android.media.AudioVibratorInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioVibratorInfo createFromParcel(Parcel _aidl_source) {
-            AudioVibratorInfo _aidl_out = new AudioVibratorInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioVibratorInfo> CREATOR =
+            new Parcelable.Creator<
+                    AudioVibratorInfo>() { // from class: android.media.AudioVibratorInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioVibratorInfo createFromParcel(Parcel _aidl_source) {
+                    AudioVibratorInfo _aidl_out = new AudioVibratorInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioVibratorInfo[] newArray(int _aidl_size) {
-            return new AudioVibratorInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioVibratorInfo[] newArray(int _aidl_size) {
+                    return new AudioVibratorInfo[_aidl_size];
+                }
+            };
     public int id = 0;
     public float resonantFrequency = 0.0f;
     public float qFactor = 0.0f;

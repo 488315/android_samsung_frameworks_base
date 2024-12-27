@@ -2,7 +2,9 @@ package com.android.server.biometrics.sensors.fingerprint;
 
 import android.hardware.fingerprint.IFingerprintClientActiveCallback;
 import android.os.RemoteException;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -30,11 +32,15 @@ public final class GestureAvailabilityDispatcher {
             }
         }
         if (z3 != z2) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m("GestureAvailabilityTracker", new StringBuilder("Notifying gesture availability, active="), this.mIsActive);
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    "GestureAvailabilityTracker",
+                    new StringBuilder("Notifying gesture availability, active="),
+                    this.mIsActive);
             this.mIsActive = z2;
             Iterator it2 = this.mClientActiveCallbacks.iterator();
             while (it2.hasNext()) {
-                IFingerprintClientActiveCallback iFingerprintClientActiveCallback = (IFingerprintClientActiveCallback) it2.next();
+                IFingerprintClientActiveCallback iFingerprintClientActiveCallback =
+                        (IFingerprintClientActiveCallback) it2.next();
                 try {
                     iFingerprintClientActiveCallback.onClientActiveChanged(z2);
                 } catch (RemoteException unused) {

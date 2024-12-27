@@ -11,6 +11,7 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml;
+
 import com.samsung.android.audio.SoundTheme;
 import com.samsung.android.wallpaper.Rune;
 import com.samsung.android.wallpaper.colortheme.ColorPaletteCreator5;
@@ -24,6 +25,12 @@ import com.samsung.android.wallpaper.legibilitycolors.LegibilityLogic;
 import com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor;
 import com.samsung.android.wallpaper.legibilitycolors.utils.IUXColorUtils;
 import com.samsung.android.wallpaper.legibilitycolors.utils.image.BitmapHelper;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,29 +45,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-import org.xmlpull.v1.XmlSerializer;
 
 /* loaded from: classes.dex */
 public class SemWallpaperColors implements Parcelable, Cloneable {
     public static final int COMPARE_ADAPTIVE_CONTRAST = 2;
     public static final int COMPARE_COLOR = 0;
     public static final int COMPARE_SHADOW = 1;
-    public static final Parcelable.Creator<SemWallpaperColors> CREATOR = new Parcelable.Creator<SemWallpaperColors>() { // from class: android.app.SemWallpaperColors.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWallpaperColors createFromParcel(Parcel in) {
-            return new SemWallpaperColors(in);
-        }
+    public static final Parcelable.Creator<SemWallpaperColors> CREATOR =
+            new Parcelable.Creator<
+                    SemWallpaperColors>() { // from class: android.app.SemWallpaperColors.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWallpaperColors createFromParcel(Parcel in) {
+                    return new SemWallpaperColors(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWallpaperColors[] newArray(int size) {
-            return new SemWallpaperColors[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWallpaperColors[] newArray(int size) {
+                    return new SemWallpaperColors[size];
+                }
+            };
     private static final boolean DEBUG = false;
     private static final int DEVICE_VERSION = 22;
     public static final int FONT_COLOR_BLACK = 1;
@@ -130,7 +135,8 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         return LegibilityDefinition.VERSION;
     }
 
-    public static SemWallpaperColors fromBitmap(Context context, Bitmap bitmap, Rect[] rects, boolean includeDefaultArea) {
+    public static SemWallpaperColors fromBitmap(
+            Context context, Bitmap bitmap, Rect[] rects, boolean includeDefaultArea) {
         int which = 0;
         if (includeDefaultArea) {
             which = 2;
@@ -138,24 +144,36 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         return fromBitmap(context, bitmap, which, false, rects);
     }
 
-    public static SemWallpaperColors fromBitmap(Context context, Bitmap bitmap, int which, boolean landscape, Rect[] rects) {
+    public static SemWallpaperColors fromBitmap(
+            Context context, Bitmap bitmap, int which, boolean landscape, Rect[] rects) {
         return fromBitmap(context, bitmap, which, landscape ? 90 : 0, rects);
     }
 
-    public static SemWallpaperColors fromBitmap(Context context, Bitmap bitmap, int which, int rotation, Rect[] rects) {
+    public static SemWallpaperColors fromBitmap(
+            Context context, Bitmap bitmap, int which, int rotation, Rect[] rects) {
         return new SemWallpaperColors(context, bitmap, which, rotation, rects, null);
     }
 
-    public static SemWallpaperColors fromBitmap(Context context, Bitmap bitmap, int which, int rotation, Rect[] rects, WallpaperColorOverrideAreas baseOverrideColorArea) {
+    public static SemWallpaperColors fromBitmap(
+            Context context,
+            Bitmap bitmap,
+            int which,
+            int rotation,
+            Rect[] rects,
+            WallpaperColorOverrideAreas baseOverrideColorArea) {
         Log.d(TAG, "fromBitmap " + which);
         if (rects != null) {
             for (Rect rect : rects) {
-                if (rect.left < 0 || rect.top < 0 || rect.right > bitmap.getWidth() || rect.bottom > bitmap.getHeight()) {
+                if (rect.left < 0
+                        || rect.top < 0
+                        || rect.right > bitmap.getWidth()
+                        || rect.bottom > bitmap.getHeight()) {
                     throw new IllegalArgumentException("illegal argument " + rect);
                 }
             }
         }
-        return new SemWallpaperColors(context, bitmap, which, rotation, rects, baseOverrideColorArea);
+        return new SemWallpaperColors(
+                context, bitmap, which, rotation, rects, baseOverrideColorArea);
     }
 
     public static SemWallpaperColors fromXml(String xml) {
@@ -350,11 +368,18 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         }
     }
 
-    private SemWallpaperColors(Context context, Bitmap bitmap, int which, int rotation, Rect[] rects) {
+    private SemWallpaperColors(
+            Context context, Bitmap bitmap, int which, int rotation, Rect[] rects) {
         this(context, bitmap, which, rotation, rects, null);
     }
 
-    private SemWallpaperColors(Context context, Bitmap bitmap, int which, int rotation, Rect[] rects, WallpaperColorOverrideAreas baseOverrideColorArea) {
+    private SemWallpaperColors(
+            Context context,
+            Bitmap bitmap,
+            int which,
+            int rotation,
+            Rect[] rects,
+            WallpaperColorOverrideAreas baseOverrideColorArea) {
         int[][] colorWeightList;
         this.mWhich = 0;
         this.mCurrentResolution = null;
@@ -368,7 +393,7 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         try {
             if (isHome(which) || isLock(which)) {
                 if (isLock(which)) {
-                    colorWeightList = new int[][]{new int[]{1, 2}};
+                    colorWeightList = new int[][] {new int[] {1, 2}};
                 } else {
                     colorWeightList = new int[0][];
                 }
@@ -406,7 +431,11 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         init(context, which, rotation, null);
     }
 
-    private void init(Context context, int which, int rotation, WallpaperColorOverrideAreas baseOverrideColorArea) {
+    private void init(
+            Context context,
+            int which,
+            int rotation,
+            WallpaperColorOverrideAreas baseOverrideColorArea) {
         this.mContext = context;
         this.mWhich = which;
         this.mArea = new SemWallpaperColorsArea(context, which, rotation, baseOverrideColorArea);
@@ -470,7 +499,8 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         Log.e(TAG, "calc, invalid type " + type);
     }
 
-    private void calcInternal(Bitmap bitmap, boolean defaultArea, WallpaperColorsData data, Item major) {
+    private void calcInternal(
+            Bitmap bitmap, boolean defaultArea, WallpaperColorsData data, Item major) {
         if (data.getItem() != null) {
             return;
         }
@@ -478,10 +508,20 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         if (defaultArea) {
             rect = this.mArea.get(data.getInternalKey(), bitmap.getWidth(), bitmap.getHeight());
         }
-        if (rect.left >= 0 && rect.top >= 0 && rect.right - rect.left > 0 && rect.bottom - rect.top > 0) {
-            Bitmap cropBitmap = Bitmap.createBitmap(bitmap, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top);
+        if (rect.left >= 0
+                && rect.top >= 0
+                && rect.right - rect.left > 0
+                && rect.bottom - rect.top > 0) {
+            Bitmap cropBitmap =
+                    Bitmap.createBitmap(
+                            bitmap,
+                            rect.left,
+                            rect.top,
+                            rect.right - rect.left,
+                            rect.bottom - rect.top);
             boolean z = false;
-            if (!isWatchFaceLargeDisplay(this.mWhich) && (isWatchFaceDisplay(this.mWhich) || isVirtualDisplay(this.mWhich))) {
+            if (!isWatchFaceLargeDisplay(this.mWhich)
+                    && (isWatchFaceDisplay(this.mWhich) || isVirtualDisplay(this.mWhich))) {
                 data.setItem(fromBitmapInternal(cropBitmap, major, false));
                 return;
             }
@@ -497,21 +537,37 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         float opacityMax;
         float sizeMin;
         float sizeMin2;
-        Log.d(TAG, "fromBitmap " + bitmap.getWidth() + ", " + bitmap.getHeight() + ", major = " + major + ", indicator = " + indicator);
+        Log.d(
+                TAG,
+                "fromBitmap "
+                        + bitmap.getWidth()
+                        + ", "
+                        + bitmap.getHeight()
+                        + ", major = "
+                        + major
+                        + ", indicator = "
+                        + indicator);
         if (!indicator) {
-            float descalingValue = BitmapHelper.fineScaleValueBySquareRootSize(bitmap.getWidth(), bitmap.getHeight(), 100);
+            float descalingValue =
+                    BitmapHelper.fineScaleValueBySquareRootSize(
+                            bitmap.getWidth(), bitmap.getHeight(), 100);
             int scaledWidth = (int) (bitmap.getWidth() * descalingValue);
             int scaledHeight = (int) (bitmap.getHeight() * descalingValue);
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight, false);
+            Bitmap scaledBitmap =
+                    Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight, false);
             LegibilityLogic.LegibilityResult majorLegibilityResult = null;
             if (major != null) {
-                LegibilityDefinition.ColorType majorColorType = LegibilityDefinition.ColorType.LIGHT;
+                LegibilityDefinition.ColorType majorColorType =
+                        LegibilityDefinition.ColorType.LIGHT;
                 if (major.getFontColor() == 1) {
                     majorColorType = LegibilityDefinition.ColorType.DARK;
                 }
-                majorLegibilityResult = new LegibilityLogic.LegibilityResult(majorColorType, major.getHSV());
+                majorLegibilityResult =
+                        new LegibilityLogic.LegibilityResult(majorColorType, major.getHSV());
             }
-            LegibilityLogic.LegibilityResult legibilityResult = LegibilityLogic.calculateTotalLegibilityResult(scaledBitmap, majorLegibilityResult, 0);
+            LegibilityLogic.LegibilityResult legibilityResult =
+                    LegibilityLogic.calculateTotalLegibilityResult(
+                            scaledBitmap, majorLegibilityResult, 0);
             int colorType = 0;
             if (legibilityResult.contentsColorType == LegibilityDefinition.ColorType.DARK) {
                 colorType = 1;
@@ -544,26 +600,67 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
                     sizeMin2 = 6.0f;
                 }
             }
-            Log.d(TAG, "resolution = " + currentResolution + "size min = " + sizeMin + ", max = " + sizeMin2 + ", opacity min = " + opacityMin + ", max = " + opacityMax);
-            float size = LegibilityLogic.getInterpolatedShadowSize(legibilityResult.adaptiveShadowData, sizeMin, sizeMin2);
-            float opacity = LegibilityLogic.getInterpolatedShadowOpacity(legibilityResult.adaptiveShadowData, opacityMin, opacityMax);
-            Log.d(TAG, "colorType=" + colorType + ", rgb=" + colorRgb + ", shadowData=" + size + "/" + opacity + " avgHSV= " + Arrays.toString(legibilityResult.avgHSV));
-            Item item = new Item(colorType, colorRgb, size, opacity, legibilityResult.avgHSV, legibilityResult);
+            Log.d(
+                    TAG,
+                    "resolution = "
+                            + currentResolution
+                            + "size min = "
+                            + sizeMin
+                            + ", max = "
+                            + sizeMin2
+                            + ", opacity min = "
+                            + opacityMin
+                            + ", max = "
+                            + opacityMax);
+            float size =
+                    LegibilityLogic.getInterpolatedShadowSize(
+                            legibilityResult.adaptiveShadowData, sizeMin, sizeMin2);
+            float opacity =
+                    LegibilityLogic.getInterpolatedShadowOpacity(
+                            legibilityResult.adaptiveShadowData, opacityMin, opacityMax);
+            Log.d(
+                    TAG,
+                    "colorType="
+                            + colorType
+                            + ", rgb="
+                            + colorRgb
+                            + ", shadowData="
+                            + size
+                            + "/"
+                            + opacity
+                            + " avgHSV= "
+                            + Arrays.toString(legibilityResult.avgHSV));
+            Item item =
+                    new Item(
+                            colorType,
+                            colorRgb,
+                            size,
+                            opacity,
+                            legibilityResult.avgHSV,
+                            legibilityResult);
             scaledBitmap.recycle();
             return item;
         }
         Bitmap leftIndicator = getLeftIndicator(bitmap);
         Bitmap rightIndicator = getRightIndicator(bitmap);
         if (leftIndicator != null && rightIndicator != null) {
-            float descalingValue2 = BitmapHelper.fineScaleValueBySquareRootSize(leftIndicator.getWidth(), leftIndicator.getHeight(), 100);
+            float descalingValue2 =
+                    BitmapHelper.fineScaleValueBySquareRootSize(
+                            leftIndicator.getWidth(), leftIndicator.getHeight(), 100);
             int scaledWidth2 = (int) (leftIndicator.getWidth() * descalingValue2);
             int scaledHeight2 = (int) (leftIndicator.getHeight() * descalingValue2);
-            Bitmap leftIndicator2 = Bitmap.createScaledBitmap(leftIndicator, scaledWidth2, scaledHeight2, false);
-            float descalingValue3 = BitmapHelper.fineScaleValueBySquareRootSize(rightIndicator.getWidth(), rightIndicator.getHeight(), 100);
+            Bitmap leftIndicator2 =
+                    Bitmap.createScaledBitmap(leftIndicator, scaledWidth2, scaledHeight2, false);
+            float descalingValue3 =
+                    BitmapHelper.fineScaleValueBySquareRootSize(
+                            rightIndicator.getWidth(), rightIndicator.getHeight(), 100);
             int scaledWidth3 = (int) (rightIndicator.getWidth() * descalingValue3);
             int scaledHeight3 = (int) (rightIndicator.getHeight() * descalingValue3);
-            Bitmap rightIndicator2 = Bitmap.createScaledBitmap(rightIndicator, scaledWidth3, scaledHeight3, false);
-            LegibilityColorByHSV.EdgeCaseResultForIndicator indicatorLegibilityResult = LegibilityColorByHSV.calcurateIndicatorLegibility(getIndicatorPixels(leftIndicator2, rightIndicator2));
+            Bitmap rightIndicator2 =
+                    Bitmap.createScaledBitmap(rightIndicator, scaledWidth3, scaledHeight3, false);
+            LegibilityColorByHSV.EdgeCaseResultForIndicator indicatorLegibilityResult =
+                    LegibilityColorByHSV.calcurateIndicatorLegibility(
+                            getIndicatorPixels(leftIndicator2, rightIndicator2));
             int colorType2 = 0;
             if (indicatorLegibilityResult.colorType == LegibilityDefinition.ColorType.DARK) {
                 colorType2 = 1;
@@ -571,12 +668,17 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
                 colorType2 = 2;
             }
             int colorRgb2 = indicatorLegibilityResult.color;
-            LegibilityLogic.LegibilityResult leftLegibilityResult = LegibilityLogic.calculateTotalLegibilityResult(leftIndicator2, null, indicatorLegibilityResult.colorType, 0);
-            LegibilityLogic.LegibilityResult rightLegibilityResult = LegibilityLogic.calculateTotalLegibilityResult(rightIndicator2, null, indicatorLegibilityResult.colorType, 0);
+            LegibilityLogic.LegibilityResult leftLegibilityResult =
+                    LegibilityLogic.calculateTotalLegibilityResult(
+                            leftIndicator2, null, indicatorLegibilityResult.colorType, 0);
+            LegibilityLogic.LegibilityResult rightLegibilityResult =
+                    LegibilityLogic.calculateTotalLegibilityResult(
+                            rightIndicator2, null, indicatorLegibilityResult.colorType, 0);
             leftIndicator2.recycle();
             rightIndicator2.recycle();
             Log.d(TAG, "edgeCase " + colorType2 + ", " + Integer.toHexString(colorRgb2));
-            Item item2 = new Item(colorType2, colorRgb2, leftLegibilityResult, rightLegibilityResult);
+            Item item2 =
+                    new Item(colorType2, colorRgb2, leftLegibilityResult, rightLegibilityResult);
             return item2;
         }
         Log.e(TAG, "fromBitmap indicator left/right bitmap == null");
@@ -584,11 +686,29 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
     }
 
     private int[] getIndicatorPixels(Bitmap leftIndicator, Bitmap rightIndicator) {
-        int[] indicatorPixels = new int[(leftIndicator.getWidth() * leftIndicator.getHeight()) + (rightIndicator.getWidth() * rightIndicator.getHeight())];
+        int[] indicatorPixels =
+                new int
+                        [(leftIndicator.getWidth() * leftIndicator.getHeight())
+                                + (rightIndicator.getWidth() * rightIndicator.getHeight())];
         int[] leftIndicatorPixels = new int[leftIndicator.getWidth() * leftIndicator.getHeight()];
-        int[] rightIndicatorPixels = new int[rightIndicator.getWidth() * rightIndicator.getHeight()];
-        leftIndicator.getPixels(leftIndicatorPixels, 0, leftIndicator.getWidth(), 0, 0, leftIndicator.getWidth(), leftIndicator.getHeight());
-        rightIndicator.getPixels(rightIndicatorPixels, 0, rightIndicator.getWidth(), 0, 0, rightIndicator.getWidth(), rightIndicator.getHeight());
+        int[] rightIndicatorPixels =
+                new int[rightIndicator.getWidth() * rightIndicator.getHeight()];
+        leftIndicator.getPixels(
+                leftIndicatorPixels,
+                0,
+                leftIndicator.getWidth(),
+                0,
+                0,
+                leftIndicator.getWidth(),
+                leftIndicator.getHeight());
+        rightIndicator.getPixels(
+                rightIndicatorPixels,
+                0,
+                rightIndicator.getWidth(),
+                0,
+                0,
+                rightIndicator.getWidth(),
+                rightIndicator.getHeight());
         for (int i = 0; i < leftIndicatorPixels.length; i++) {
             indicatorPixels[i] = leftIndicatorPixels[i];
         }
@@ -621,7 +741,8 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
 
     private void calcAdaptiveDim() {
         Item item;
-        if (isHome(this.mWhich) && (isWatchFaceDisplay(this.mWhich) || isVirtualDisplay(this.mWhich))) {
+        if (isHome(this.mWhich)
+                && (isWatchFaceDisplay(this.mWhich) || isVirtualDisplay(this.mWhich))) {
             Log.d(TAG, "calcAdaptiveDim: Cover wallpaper, return");
             return;
         }
@@ -633,7 +754,10 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         Iterator<WallpaperColorsData> it = this.mDataList.iterator();
         while (it.hasNext()) {
             WallpaperColorsData data = it.next();
-            if (data != null && data.getInternalKey() != 7 && data.getInternalKey() != 5 && (item = data.getItem()) != null) {
+            if (data != null
+                    && data.getInternalKey() != 7
+                    && data.getInternalKey() != 5
+                    && (item = data.getItem()) != null) {
                 if (data.getInternalKey() == 0) {
                     resultList.add(item.getLeftLegibilityResult());
                     resultList.add(item.getRightLegibilityResult());
@@ -643,11 +767,19 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             }
         }
         if (resultList.size() > 0) {
-            LegibilityLogic.LegibilityResult[] resultArray = new LegibilityLogic.LegibilityResult[resultList.size()];
-            LegibilityAutoDim.AutoDimResult autoDimResult = LegibilityAutoDim.calculateAdaptiveDim((LegibilityLogic.LegibilityResult[]) resultList.toArray(resultArray));
+            LegibilityLogic.LegibilityResult[] resultArray =
+                    new LegibilityLogic.LegibilityResult[resultList.size()];
+            LegibilityAutoDim.AutoDimResult autoDimResult =
+                    LegibilityAutoDim.calculateAdaptiveDim(
+                            (LegibilityLogic.LegibilityResult[]) resultList.toArray(resultArray));
             this.mAdaptiveDimOpacity = autoDimResult.opacity;
             this.mAdaptiveDimColor = autoDimResult.color;
-            Log.d(TAG, "calcAdaptiveDim, " + this.mAdaptiveDimOpacity + ", " + Integer.toHexString(this.mAdaptiveDimColor));
+            Log.d(
+                    TAG,
+                    "calcAdaptiveDim, "
+                            + this.mAdaptiveDimOpacity
+                            + ", "
+                            + Integer.toHexString(this.mAdaptiveDimColor));
         }
     }
 
@@ -805,7 +937,10 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
     }
 
     private static int[] stringToIntArray(String string) {
-        String[] strings = string.replace(NavigationBarInflaterView.SIZE_MOD_START, "").replace(NavigationBarInflaterView.SIZE_MOD_END, "").split(", ");
+        String[] strings =
+                string.replace(NavigationBarInflaterView.SIZE_MOD_START, "")
+                        .replace(NavigationBarInflaterView.SIZE_MOD_END, "")
+                        .split(", ");
         int[] result = new int[strings.length];
         for (int i = 0; i < result.length; i++) {
             result[i] = Integer.parseInt(strings[i]);
@@ -1017,10 +1152,20 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         StringBuilder result = new StringBuilder();
         result.append("[version:22");
         result.append(", which:" + this.mWhich);
-        result.append(", adaptive dim:" + this.mAdaptiveDimOpacity + "/" + Integer.toHexString(this.mAdaptiveDimColor));
-        result.append(", darkmode dim:" + this.mDarkModeDimOpacity + NavigationBarInflaterView.SIZE_MOD_END);
+        result.append(
+                ", adaptive dim:"
+                        + this.mAdaptiveDimOpacity
+                        + "/"
+                        + Integer.toHexString(this.mAdaptiveDimColor));
+        result.append(
+                ", darkmode dim:"
+                        + this.mDarkModeDimOpacity
+                        + NavigationBarInflaterView.SIZE_MOD_END);
         if (this.mSeedColors != null && this.mSeedColors.length > 0) {
-            result.append("\n\t[SeedColors, " + Arrays.toString(this.mSeedColors) + NavigationBarInflaterView.SIZE_MOD_END);
+            result.append(
+                    "\n\t[SeedColors, "
+                            + Arrays.toString(this.mSeedColors)
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         }
         Iterator<WallpaperColorsData> it = this.mDataList.iterator();
         while (it.hasNext()) {
@@ -1028,7 +1173,14 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             Rect rect = data.getRect();
             Item item = data.getItem();
             String name = SemWallpaperColorsArea.name(data.getInternalKey());
-            result.append("\n\t[" + name + ", " + rect + ":" + item + NavigationBarInflaterView.SIZE_MOD_END);
+            result.append(
+                    "\n\t["
+                            + name
+                            + ", "
+                            + rect
+                            + ":"
+                            + item
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         }
         return result.toString();
     }
@@ -1048,7 +1200,11 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
                     Rect rect = data.getRect();
                     Item item = data.getItem();
                     if (item != null) {
-                        stringBuilder.append(rect + NavigationBarInflaterView.SIZE_MOD_START + item.getFontColor() + "] ");
+                        stringBuilder.append(
+                                rect
+                                        + NavigationBarInflaterView.SIZE_MOD_START
+                                        + item.getFontColor()
+                                        + "] ");
                     }
                 }
             }
@@ -1065,7 +1221,11 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
                         stringBuilder.append(", ");
                     }
                     String name = SemWallpaperColorsArea.name(data2.getInternalKey());
-                    stringBuilder.append(name + NavigationBarInflaterView.SIZE_MOD_START + item2.getFontColor() + NavigationBarInflaterView.SIZE_MOD_END);
+                    stringBuilder.append(
+                            name
+                                    + NavigationBarInflaterView.SIZE_MOD_START
+                                    + item2.getFontColor()
+                                    + NavigationBarInflaterView.SIZE_MOD_END);
                 }
             }
         }
@@ -1161,7 +1321,9 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
                 }
             }
             if (this.mColorTableList.size() >= 1) {
-                Log.d(TAG, "getColorThemeColor mColorTableList size : " + this.mColorTableList.size());
+                Log.d(
+                        TAG,
+                        "getColorThemeColor mColorTableList size : " + this.mColorTableList.size());
             } else {
                 Log.e(TAG, "getColorThemeColor: Error while generating color palette.");
                 return getItemFontColor(key);
@@ -1213,7 +1375,14 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             }
         }
         if (retData != null && retData.getItem() != null) {
-            Log.d(TAG, "getColorThemeColor :" + retData.getExternalKey() + ", " + retData.getItem().mFontColor + ", " + retColor);
+            Log.d(
+                    TAG,
+                    "getColorThemeColor :"
+                            + retData.getExternalKey()
+                            + ", "
+                            + retData.getItem().mFontColor
+                            + ", "
+                            + retColor);
         } else {
             Log.d(TAG, "getColorThemeColor retColor:" + retColor);
         }
@@ -1228,7 +1397,9 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
     }
 
     private boolean isWatchFaceDisplay(int which) {
-        if (Rune.SUPPORT_SUB_DISPLAY_MODE && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE && (which & 16) == 16) {
+        if (Rune.SUPPORT_SUB_DISPLAY_MODE
+                && Rune.SUPPORT_COVER_DISPLAY_WATCHFACE
+                && (which & 16) == 16) {
             return true;
         }
         return false;
@@ -1309,7 +1480,11 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             this.mShadowOpacity = shadowOpacity;
         }
 
-        public Item(int fontColor, int fontColorRgb, LegibilityLogic.LegibilityResult leftLegibilityResult, LegibilityLogic.LegibilityResult rightLegibilityResult) {
+        public Item(
+                int fontColor,
+                int fontColorRgb,
+                LegibilityLogic.LegibilityResult leftLegibilityResult,
+                LegibilityLogic.LegibilityResult rightLegibilityResult) {
             this.mHSV = new float[3];
             this.mLegibilityResult = null;
             this.mLeftLegibilityResult = null;
@@ -1322,7 +1497,13 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             this.mRightLegibilityResult = rightLegibilityResult;
         }
 
-        public Item(int fontColor, int fontColorRgb, float shadowSize, float shadowOpacity, float[] hsv, LegibilityLogic.LegibilityResult legibilityResult) {
+        public Item(
+                int fontColor,
+                int fontColorRgb,
+                float shadowSize,
+                float shadowOpacity,
+                float[] hsv,
+                LegibilityLogic.LegibilityResult legibilityResult) {
             this.mHSV = new float[3];
             this.mLegibilityResult = null;
             this.mLeftLegibilityResult = null;
@@ -1384,7 +1565,7 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             if (this.mHSV == null || 3 != this.mHSV.length) {
                 return null;
             }
-            return new float[]{this.mHSV[0], this.mHSV[1], this.mHSV[2]};
+            return new float[] {this.mHSV[0], this.mHSV[1], this.mHSV[2]};
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1407,7 +1588,10 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
                 return false;
             }
             Item item = (Item) obj;
-            if (item.mFontColor != this.mFontColor || item.mFontColorRgb != this.mFontColorRgb || Math.abs(item.mShadowSize - this.mShadowSize) >= 1.0f || Math.abs(item.mShadowOpacity - this.mShadowOpacity) >= 0.01f) {
+            if (item.mFontColor != this.mFontColor
+                    || item.mFontColorRgb != this.mFontColorRgb
+                    || Math.abs(item.mShadowSize - this.mShadowSize) >= 1.0f
+                    || Math.abs(item.mShadowOpacity - this.mShadowOpacity) >= 0.01f) {
                 return false;
             }
             return true;
@@ -1420,20 +1604,17 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
             }
             switch (compareType) {
                 case 0:
-                    if (item.mFontColor != this.mFontColor) {
-                    }
+                    if (item.mFontColor != this.mFontColor) {}
                     break;
                 case 1:
-                    if (Math.abs(item.mShadowSize - this.mShadowSize) < 1.0f && Math.abs(item.mShadowOpacity - this.mShadowOpacity) < 0.01f) {
-                    }
+                    if (Math.abs(item.mShadowSize - this.mShadowSize) < 1.0f
+                            && Math.abs(item.mShadowOpacity - this.mShadowOpacity) < 0.01f) {}
                     break;
                 case 2:
-                    if (item.mFontColorRgb != this.mFontColorRgb) {
-                    }
+                    if (item.mFontColorRgb != this.mFontColorRgb) {}
                     break;
                 default:
-                    if (item.mFontColor != this.mFontColor) {
-                    }
+                    if (item.mFontColor != this.mFontColor) {}
                     break;
             }
             return false;
@@ -1444,15 +1625,32 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
         }
 
         public String toString() {
-            String result = "" + this.mFontColor + "/" + Integer.toHexString(this.mFontColorRgb) + "/" + this.mShadowSize + "/" + this.mShadowOpacity;
+            String result =
+                    ""
+                            + this.mFontColor
+                            + "/"
+                            + Integer.toHexString(this.mFontColorRgb)
+                            + "/"
+                            + this.mShadowSize
+                            + "/"
+                            + this.mShadowOpacity;
             if (this.mHSV != null) {
                 result = result + ", " + this.mHSV[0] + "/" + this.mHSV[1] + "/" + this.mHSV[2];
             }
             if (this.mLeftLegibilityResult != null) {
-                result = result + ", " + this.mLeftLegibilityResult.contentsColorType + "/" + Integer.toHexString(this.mLeftLegibilityResult.contentsColor);
+                result =
+                        result
+                                + ", "
+                                + this.mLeftLegibilityResult.contentsColorType
+                                + "/"
+                                + Integer.toHexString(this.mLeftLegibilityResult.contentsColor);
             }
             if (this.mRightLegibilityResult != null) {
-                return result + ", " + this.mRightLegibilityResult.contentsColorType + "/" + Integer.toHexString(this.mRightLegibilityResult.contentsColor);
+                return result
+                        + ", "
+                        + this.mRightLegibilityResult.contentsColorType
+                        + "/"
+                        + Integer.toHexString(this.mRightLegibilityResult.contentsColor);
             }
             return result;
         }
@@ -1508,7 +1706,16 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
 
         public SemWallpaperColors build() {
             Item item = new Item(this.mColorType, this.mShadowSize, this.mShadowOpacity);
-            Log.d(SemWallpaperColors.TAG, "build() mColorType: " + this.mColorType + ", mWhich: " + this.mWhich + ", item: " + item.toString() + "mBitmap:" + this.mBitmap);
+            Log.d(
+                    SemWallpaperColors.TAG,
+                    "build() mColorType: "
+                            + this.mColorType
+                            + ", mWhich: "
+                            + this.mWhich
+                            + ", item: "
+                            + item.toString()
+                            + "mBitmap:"
+                            + this.mBitmap);
             return new SemWallpaperColors(this.mWhich, item, this.mBitmap);
         }
     }

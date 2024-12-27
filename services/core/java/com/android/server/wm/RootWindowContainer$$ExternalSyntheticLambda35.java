@@ -4,11 +4,13 @@ import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.util.Slog;
 import android.window.TaskFragmentAnimationParams;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda35 implements Consumer {
+public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda35
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
 
     public /* synthetic */ RootWindowContainer$$ExternalSyntheticLambda35(int i) {
@@ -25,15 +27,19 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda3
                     int i2 = windowState.mOwnerUid;
                     String str = windowState.mAttrs.packageName;
                     if (!windowState.mAppOpVisibility) {
-                        int startOpNoThrow = windowState.mWmService.mAppOps.startOpNoThrow(i, i2, str, true, null, "attempt-to-be-visible");
+                        int startOpNoThrow =
+                                windowState.mWmService.mAppOps.startOpNoThrow(
+                                        i, i2, str, true, null, "attempt-to-be-visible");
                         if (startOpNoThrow == 0 || startOpNoThrow == 3) {
                             windowState.setAppOpVisibilityLw(true);
                             break;
                         }
                     } else {
-                        int checkOpNoThrow = windowState.mWmService.mAppOps.checkOpNoThrow(i, i2, str);
+                        int checkOpNoThrow =
+                                windowState.mWmService.mAppOps.checkOpNoThrow(i, i2, str);
                         if (checkOpNoThrow != 0 && checkOpNoThrow != 3) {
-                            windowState.mWmService.mAppOps.finishOp(windowState.mAppOp, i2, str, (String) null);
+                            windowState.mWmService.mAppOps.finishOp(
+                                    windowState.mAppOp, i2, str, (String) null);
                             windowState.setAppOpVisibilityLw(false);
                             break;
                         }
@@ -56,7 +62,9 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda3
             case 4:
                 TaskFragment taskFragment = (TaskFragment) obj;
                 if (taskFragment.mPausingActivity != null) {
-                    Slog.d("ActivityTaskManager", "awakeFromSleeping: previously pausing activity didn't pause");
+                    Slog.d(
+                            "ActivityTaskManager",
+                            "awakeFromSleeping: previously pausing activity didn't pause");
                     taskFragment.mPausingActivity.activityPaused(true);
                     break;
                 }

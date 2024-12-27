@@ -15,10 +15,12 @@ import android.view.Window;
 import android.view.WindowCallbackWrapper;
 import android.widget.SpinnerAdapter;
 import android.widget.Toolbar;
+
 import com.android.internal.view.menu.MenuBuilder;
 import com.android.internal.view.menu.MenuPresenter;
 import com.android.internal.widget.DecorToolbar;
 import com.android.internal.widget.ToolbarWidgetWrapper;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
@@ -28,19 +30,24 @@ public class ToolbarActionBar extends ActionBar {
     private boolean mMenuCallbackSet;
     private boolean mToolbarMenuPrepared;
     private Window.Callback mWindowCallback;
-    private ArrayList<ActionBar.OnMenuVisibilityListener> mMenuVisibilityListeners = new ArrayList<>();
-    private final Runnable mMenuInvalidator = new Runnable() { // from class: com.android.internal.app.ToolbarActionBar.1
-        @Override // java.lang.Runnable
-        public void run() {
-            ToolbarActionBar.this.populateOptionsMenu();
-        }
-    };
-    private final Toolbar.OnMenuItemClickListener mMenuClicker = new Toolbar.OnMenuItemClickListener() { // from class: com.android.internal.app.ToolbarActionBar.2
-        @Override // android.widget.Toolbar.OnMenuItemClickListener
-        public boolean onMenuItemClick(MenuItem item) {
-            return ToolbarActionBar.this.mWindowCallback.onMenuItemSelected(0, item);
-        }
-    };
+    private ArrayList<ActionBar.OnMenuVisibilityListener> mMenuVisibilityListeners =
+            new ArrayList<>();
+    private final Runnable mMenuInvalidator =
+            new Runnable() { // from class: com.android.internal.app.ToolbarActionBar.1
+                @Override // java.lang.Runnable
+                public void run() {
+                    ToolbarActionBar.this.populateOptionsMenu();
+                }
+            };
+    private final Toolbar.OnMenuItemClickListener mMenuClicker =
+            new Toolbar
+                    .OnMenuItemClickListener() { // from class:
+                                                 // com.android.internal.app.ToolbarActionBar.2
+                @Override // android.widget.Toolbar.OnMenuItemClickListener
+                public boolean onMenuItemClick(MenuItem item) {
+                    return ToolbarActionBar.this.mWindowCallback.onMenuItemSelected(0, item);
+                }
+            };
 
     public ToolbarActionBar(Toolbar toolbar, CharSequence title, Window.Callback windowCallback) {
         this.mDecorToolbar = new ToolbarWidgetWrapper(toolbar, false);
@@ -94,16 +101,13 @@ public class ToolbarActionBar extends ActionBar {
     }
 
     @Override // android.app.ActionBar
-    public void setStackedBackgroundDrawable(Drawable d) {
-    }
+    public void setStackedBackgroundDrawable(Drawable d) {}
 
     @Override // android.app.ActionBar
-    public void setSplitBackgroundDrawable(Drawable d) {
-    }
+    public void setSplitBackgroundDrawable(Drawable d) {}
 
     @Override // android.app.ActionBar
-    public void setHomeButtonEnabled(boolean enabled) {
-    }
+    public void setHomeButtonEnabled(boolean enabled) {}
 
     @Override // android.app.ActionBar
     public void setElevation(float elevation) {
@@ -141,8 +145,7 @@ public class ToolbarActionBar extends ActionBar {
     }
 
     @Override // android.app.ActionBar
-    public void setDefaultDisplayHomeAsUpEnabled(boolean enabled) {
-    }
+    public void setDefaultDisplayHomeAsUpEnabled(boolean enabled) {}
 
     @Override // android.app.ActionBar
     public void setHomeActionContentDescription(int resId) {
@@ -150,8 +153,7 @@ public class ToolbarActionBar extends ActionBar {
     }
 
     @Override // android.app.ActionBar
-    public void setShowHideAnimationEnabled(boolean enabled) {
-    }
+    public void setShowHideAnimationEnabled(boolean enabled) {}
 
     @Override // android.app.ActionBar
     public void onConfigurationChanged(Configuration config) {
@@ -164,7 +166,8 @@ public class ToolbarActionBar extends ActionBar {
     }
 
     @Override // android.app.ActionBar
-    public void setListNavigationCallbacks(SpinnerAdapter adapter, ActionBar.OnNavigationListener callback) {
+    public void setListNavigationCallbacks(
+            SpinnerAdapter adapter, ActionBar.OnNavigationListener callback) {
         this.mDecorToolbar.setDropdownParams(adapter, new NavItemSelectedListener(callback));
     }
 
@@ -175,7 +178,8 @@ public class ToolbarActionBar extends ActionBar {
                 this.mDecorToolbar.setDropdownSelectedPosition(position);
                 return;
             default:
-                throw new IllegalStateException("setSelectedNavigationIndex not valid for current navigation mode");
+                throw new IllegalStateException(
+                        "setSelectedNavigationIndex not valid for current navigation mode");
         }
     }
 
@@ -196,7 +200,8 @@ public class ToolbarActionBar extends ActionBar {
 
     @Override // android.app.ActionBar
     public void setTitle(int resId) {
-        this.mDecorToolbar.setTitle(resId != 0 ? this.mDecorToolbar.getContext().getText(resId) : null);
+        this.mDecorToolbar.setTitle(
+                resId != 0 ? this.mDecorToolbar.getContext().getText(resId) : null);
     }
 
     @Override // android.app.ActionBar
@@ -211,7 +216,8 @@ public class ToolbarActionBar extends ActionBar {
 
     @Override // android.app.ActionBar
     public void setSubtitle(int resId) {
-        this.mDecorToolbar.setSubtitle(resId != 0 ? this.mDecorToolbar.getContext().getText(resId) : null);
+        this.mDecorToolbar.setSubtitle(
+                resId != 0 ? this.mDecorToolbar.getContext().getText(resId) : null);
     }
 
     @Override // android.app.ActionBar
@@ -397,7 +403,8 @@ public class ToolbarActionBar extends ActionBar {
     void populateOptionsMenu() {
         byte b = 0;
         if (!this.mMenuCallbackSet) {
-            this.mDecorToolbar.setMenuCallbacks(new ActionMenuPresenterCallback(), new MenuBuilderCallback());
+            this.mDecorToolbar.setMenuCallbacks(
+                    new ActionMenuPresenterCallback(), new MenuBuilderCallback());
             this.mMenuCallbackSet = true;
         }
         Menu menu = this.mDecorToolbar.getMenu();
@@ -407,7 +414,8 @@ public class ToolbarActionBar extends ActionBar {
         }
         try {
             menu.clear();
-            if (!this.mWindowCallback.onCreatePanelMenu(0, menu) || !this.mWindowCallback.onPreparePanel(0, null, menu)) {
+            if (!this.mWindowCallback.onCreatePanelMenu(0, menu)
+                    || !this.mWindowCallback.onPreparePanel(0, null, menu)) {
                 menu.clear();
             }
         } finally {
@@ -490,8 +498,7 @@ public class ToolbarActionBar extends ActionBar {
     private final class ActionMenuPresenterCallback implements MenuPresenter.Callback {
         private boolean mClosingActionMenu;
 
-        private ActionMenuPresenterCallback() {
-        }
+        private ActionMenuPresenterCallback() {}
 
         @Override // com.android.internal.view.menu.MenuPresenter.Callback
         public boolean onOpenSubMenu(MenuBuilder subMenu) {
@@ -517,8 +524,7 @@ public class ToolbarActionBar extends ActionBar {
     }
 
     private final class MenuBuilderCallback implements MenuBuilder.Callback {
-        private MenuBuilderCallback() {
-        }
+        private MenuBuilderCallback() {}
 
         @Override // com.android.internal.view.menu.MenuBuilder.Callback
         public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {

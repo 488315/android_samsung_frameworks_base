@@ -7,8 +7,11 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.permission.PermissionManager;
 import android.util.Log;
+
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.wifi.SemWifiManager;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -35,26 +38,48 @@ public final class WifiManagerAdapter {
     public static List getConfiguredNetworks() {
         try {
             List privilegedConfiguredNetworks = mWifiManager.getPrivilegedConfiguredNetworks();
-            return privilegedConfiguredNetworks == null ? Collections.emptyList() : privilegedConfiguredNetworks;
+            return privilegedConfiguredNetworks == null
+                    ? Collections.emptyList()
+                    : privilegedConfiguredNetworks;
         } catch (Exception e) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("getConfiguredNetworks - failed to get networks "), "WifiManagerAdapter");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("getConfiguredNetworks - failed to get networks "),
+                    "WifiManagerAdapter");
             return null;
         }
     }
 
-    public static WifiManager retrieveWifiManagerObjectWithAttributionSource(Context context, String str, int i) {
+    public static WifiManager retrieveWifiManagerObjectWithAttributionSource(
+            Context context, String str, int i) {
         if (i != 1000) {
-            context = mContext.createContext(new ContextParams.Builder().setNextAttributionSource(((PermissionManager) mContext.getSystemService(PermissionManager.class)).registerAttributionSource(new AttributionSource.Builder(i).setPackageName(str).build())).build());
+            context =
+                    mContext.createContext(
+                            new ContextParams.Builder()
+                                    .setNextAttributionSource(
+                                            ((PermissionManager)
+                                                            mContext.getSystemService(
+                                                                    PermissionManager.class))
+                                                    .registerAttributionSource(
+                                                            new AttributionSource.Builder(i)
+                                                                    .setPackageName(str)
+                                                                    .build()))
+                                    .build());
         }
         return (WifiManager) context.getSystemService(WifiManager.class);
     }
 
     public static int save(WifiConfiguration wifiConfiguration, int i, String str) {
         try {
-            WifiManager retrieveWifiManagerObjectWithAttributionSource = retrieveWifiManagerObjectWithAttributionSource(mContext, str, i);
-            return wifiConfiguration.networkId == -1 ? retrieveWifiManagerObjectWithAttributionSource.addNetwork(wifiConfiguration) : retrieveWifiManagerObjectWithAttributionSource.updateNetwork(wifiConfiguration);
+            WifiManager retrieveWifiManagerObjectWithAttributionSource =
+                    retrieveWifiManagerObjectWithAttributionSource(mContext, str, i);
+            return wifiConfiguration.networkId == -1
+                    ? retrieveWifiManagerObjectWithAttributionSource.addNetwork(wifiConfiguration)
+                    : retrieveWifiManagerObjectWithAttributionSource.updateNetwork(
+                            wifiConfiguration);
         } catch (Exception e) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("save - "), "WifiManagerAdapter");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("save - "), "WifiManagerAdapter");
             return -1;
         }
     }

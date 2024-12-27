@@ -16,13 +16,9 @@ import android.text.format.DateFormat;
 import android.util.CloseGuard;
 import android.util.Log;
 import android.util.SparseArray;
-import com.samsung.android.wifi.ISemAbTestConfigurationUpdateObserver;
-import com.samsung.android.wifi.ISemWifiApClientListUpdateCallback;
-import com.samsung.android.wifi.ISemWifiApClientUpdateCallback;
-import com.samsung.android.wifi.ISemWifiApDataUsageCallback;
-import com.samsung.android.wifi.ISemWifiApSmartCallback;
-import com.samsung.android.wifi.SemTasPolicyListener;
-import com.samsung.android.wifi.SemWifiManager;
+
+import org.json.JSONObject;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.Reference;
@@ -33,21 +29,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executor;
-import org.json.JSONObject;
 
 /* loaded from: classes6.dex */
 public class SemWifiManager {
-    public static final String ACTION_AUTO_WIFI_BUBBLE_TIP = "com.samsung.android.wifi.ACTION_AUTO_WIFI_BUBBLE_TIP";
-    public static final String ACTION_AUTO_WIFI_SCAN_STATE_CHANGED = "com.samsung.android.wifi.AUTO_WIFI_SCAN_STATE_CHANGED";
-    public static final String ACTION_DIAGNOSIS_RESULT_AVAILABLE = "com.samsung.android.net.wifi.wifiguider.DIAGNOSIS_RESULT_AVAILABLE";
-    public static final String ACTION_ISSUE_DETECTED = "com.samsung.android.net.wifi.ISSUE_DETECTED";
-    public static final String ACTION_NETWORK_CONNECT_FAILED = "com.samsung.android.net.wifi.NETWORK_CONNECT_FAILED";
+    public static final String ACTION_AUTO_WIFI_BUBBLE_TIP =
+            "com.samsung.android.wifi.ACTION_AUTO_WIFI_BUBBLE_TIP";
+    public static final String ACTION_AUTO_WIFI_SCAN_STATE_CHANGED =
+            "com.samsung.android.wifi.AUTO_WIFI_SCAN_STATE_CHANGED";
+    public static final String ACTION_DIAGNOSIS_RESULT_AVAILABLE =
+            "com.samsung.android.net.wifi.wifiguider.DIAGNOSIS_RESULT_AVAILABLE";
+    public static final String ACTION_ISSUE_DETECTED =
+            "com.samsung.android.net.wifi.ISSUE_DETECTED";
+    public static final String ACTION_NETWORK_CONNECT_FAILED =
+            "com.samsung.android.net.wifi.NETWORK_CONNECT_FAILED";
 
     @Deprecated(forRemoval = false, since = "16.0")
-    public static final String ACTION_WIFI_AP_STATE_CHANGED = "android.net.wifi.WIFI_AP_STATE_CHANGED";
+    public static final String ACTION_WIFI_AP_STATE_CHANGED =
+            "android.net.wifi.WIFI_AP_STATE_CHANGED";
 
     @Deprecated(forRemoval = false, since = "16.0")
-    public static final String ACTION_WIFI_AP_STA_STATE_CHANGED = "com.samsung.android.net.wifi.WIFI_AP_STA_STATE_CHANGED";
+    public static final String ACTION_WIFI_AP_STA_STATE_CHANGED =
+            "com.samsung.android.net.wifi.WIFI_AP_STA_STATE_CHANGED";
+
     public static final int BAND_2GHZ = 2;
     public static final int BAND_5GHZ = 5;
     public static final int BAND_6GHZ = 6;
@@ -76,6 +79,7 @@ public class SemWifiManager {
 
     @Deprecated(forRemoval = false, since = "16.0")
     public static final String EXTRA_WIFI_AP_STA_COUNT = "STA_COUNT";
+
     public static final int HOTSPOT_MODE_MIMO = 1;
     public static final int HOTSPOT_MODE_SISO = 2;
     public static final int INTERWORKING_DISABLED_BY_DEVICE = 2;
@@ -111,7 +115,8 @@ public class SemWifiManager {
     public static final int TEST_MODULE_ID_SCPM_MONITOR = 4;
     public static final int TEST_MODULE_ID_SILENT_ROAMING_TEST = 5;
     public static final int TEST_MODULE_ID_WLAN_AUTO_TEST = 3;
-    public static final String WIFI_AP_DRIVER_STATE_HANGED = "com.samsung.android.net.wifi.WIFI_AP_DRIVER_STATE_HANGED";
+    public static final String WIFI_AP_DRIVER_STATE_HANGED =
+            "com.samsung.android.net.wifi.WIFI_AP_DRIVER_STATE_HANGED";
 
     @Deprecated(forRemoval = false, since = "16.0")
     public static final int WIFI_AP_STATE_DISABLED = 11;
@@ -127,32 +132,42 @@ public class SemWifiManager {
 
     @Deprecated(forRemoval = false, since = "16.0")
     public static final int WIFI_AP_STATE_FAILED = 14;
-    public static final String WIFI_AP_STA_DHCPACK_EVENT = "com.samsung.android.net.wifi.WIFI_AP_STA_DHCPACK_EVENT";
-    public static final String WIFI_CONNECTIVITY_HIDE_ICON_ACTION = "com.sec.android.WIFI_ICON_HIDE_ACTION";
-    public static final String WIFI_CONNECTIVITY_TEST_REPORT_ACTION = "com.sec.android.WIFI_CONNECTIVITY_ACTION";
-    public static final String WIFI_DIALOG_CANCEL_ACTION = "com.samsung.android.net.wifi.WIFI_DIALOG_CANCEL_ACTION";
+
+    public static final String WIFI_AP_STA_DHCPACK_EVENT =
+            "com.samsung.android.net.wifi.WIFI_AP_STA_DHCPACK_EVENT";
+    public static final String WIFI_CONNECTIVITY_HIDE_ICON_ACTION =
+            "com.sec.android.WIFI_ICON_HIDE_ACTION";
+    public static final String WIFI_CONNECTIVITY_TEST_REPORT_ACTION =
+            "com.sec.android.WIFI_CONNECTIVITY_ACTION";
+    public static final String WIFI_DIALOG_CANCEL_ACTION =
+            "com.samsung.android.net.wifi.WIFI_DIALOG_CANCEL_ACTION";
     public static final int WIFI_DIALOG_ENABLING_HOTSPOT = 2;
-    public static final String WIFI_TCP_MONITOR_ACTION_SETTINGS = "com.samsung.android.net.wifi.WIFI_TCP_MONITOR_ACTION_SETTINGS";
-    public static final String WIFI_TCP_MONITOR_ACTION_USE_MOBILE_DATA = "com.samsung.android.net.wifi.TCP_MONITOR_ACTION_USE_MOBILE_DATA";
-    public static final String WIFI_TCP_MONITOR_DELETE_NOTIFICATION = "com.samsung.android.net.wifi.WIFI_TCP_MONITOR_DELETE_NOTIFICATION";
-    public static final String WIFI_TCP_MONITOR_SWITCHABLE_APP_LIST_CHANGED = "com.samsung.android.net.wifi.WIFI_TCP_MONITOR_SWITCHABLE_APP_LIST_CHANGED";
-    public static final String WIFI_WCM_CONFIGURATION_CHANGED = "com.sec.android.WIFI_WCM_CONFIGURATION_CHANGED";
+    public static final String WIFI_TCP_MONITOR_ACTION_SETTINGS =
+            "com.samsung.android.net.wifi.WIFI_TCP_MONITOR_ACTION_SETTINGS";
+    public static final String WIFI_TCP_MONITOR_ACTION_USE_MOBILE_DATA =
+            "com.samsung.android.net.wifi.TCP_MONITOR_ACTION_USE_MOBILE_DATA";
+    public static final String WIFI_TCP_MONITOR_DELETE_NOTIFICATION =
+            "com.samsung.android.net.wifi.WIFI_TCP_MONITOR_DELETE_NOTIFICATION";
+    public static final String WIFI_TCP_MONITOR_SWITCHABLE_APP_LIST_CHANGED =
+            "com.samsung.android.net.wifi.WIFI_TCP_MONITOR_SWITCHABLE_APP_LIST_CHANGED";
+    public static final String WIFI_WCM_CONFIGURATION_CHANGED =
+            "com.sec.android.WIFI_WCM_CONFIGURATION_CHANGED";
     public static final int WIFI_WCM_ICON_INVALID_FORCED = 0;
     public static final int WIFI_WCM_ICON_NOT_FORCED = -1;
     public static final int WIFI_WCM_ICON_VALID_FORCED = 1;
-    public static final String WIFI_WCM_STATE_CHANGED_ACTION = "com.sec.android.WIFI_WCM_STATE_CHANGED_ACTION";
+    public static final String WIFI_WCM_STATE_CHANGED_ACTION =
+            "com.sec.android.WIFI_WCM_STATE_CHANGED_ACTION";
     private final Context mContext;
     private final ISemWifiManager mService;
     public static final boolean MHSDBG = SemWifiApCust.DBG;
-    private static final SparseArray<ISemAbTestConfigurationUpdateObserver> sSemAbTestConfigurationUpdateObserverMap = new SparseArray<>();
+    private static final SparseArray<ISemAbTestConfigurationUpdateObserver>
+            sSemAbTestConfigurationUpdateObserverMap = new SparseArray<>();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BandType {
-    }
+    public @interface BandType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface HotspotAntennaMode {
-    }
+    public @interface HotspotAntennaMode {}
 
     public static class IWC {
         public static final int BNR_ENABLE_SWITCH_TO_MOBILE_AFTER_RESTORE = 4;
@@ -162,13 +177,11 @@ public class SemWifiManager {
         public static final int BNR_SWITCH_TO_MOBILE_AGG = 2;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface IwcSettingType {
-        }
+        public @interface IwcSettingType {}
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OptimizerMode {
-    }
+    public @interface OptimizerMode {}
 
     public static class SemWifiApLogger {
         public static final String HOTSPOT_LAB_PATH = "/data/misc/wifi_hostapd/hotspotLabs.txt";
@@ -218,16 +231,21 @@ public class SemWifiManager {
         public static final String KEY_UPSTREAM_TYPE_CHANGED = "Upstream type changed =";
         public static final String PATTERN_SEPARATOR = ",, ";
         public static final String PATTERN_SEPARATOR_EVENT_CONTENTS = "===>>>";
-        public static final String SETTINGS_SECURE_KEY_CLOUD_BACKUP_RESTORING = "wifi_ap_settings_cloud_backup_restoring";
-        public static final String SETTINGS_SECURE_KEY_SMART_SWITCH_RESTORING = "wifi_ap_settings_smart_switch_restoring";
+        public static final String SETTINGS_SECURE_KEY_CLOUD_BACKUP_RESTORING =
+                "wifi_ap_settings_cloud_backup_restoring";
+        public static final String SETTINGS_SECURE_KEY_SMART_SWITCH_RESTORING =
+                "wifi_ap_settings_smart_switch_restoring";
         public static final String TAG_D = "[D]";
         public static final String TAG_E = "[E]";
         public static final String TAG_I = "[I]";
-        public static final String TAG_WIFI_AP_LAB_CHANNEL_SWITCH_EVENT = "#tag_wifi_ap_lab_channel_switch_event#";
+        public static final String TAG_WIFI_AP_LAB_CHANNEL_SWITCH_EVENT =
+                "#tag_wifi_ap_lab_channel_switch_event#";
         public static final String TAG_WIFI_AP_LAB_CLIENT_EVENT = "#tag_wifi_ap_lab_client_event#";
         public static final String TAG_WIFI_AP_LAB_CONFIG_EVENT = "#tag_wifi_ap_lab_config_event#";
-        public static final String TAG_WIFI_AP_LAB_HOTSPOT_CONNECTION_EVENT = "#tag_wifi_ap_lab_hotspot_connection_event#";
-        public static final String TAG_WIFI_AP_LAB_HOTSPOT_SPEED_EVENT = "#tag_wifi_ap_lab_hotspot_speed_event#";
+        public static final String TAG_WIFI_AP_LAB_HOTSPOT_CONNECTION_EVENT =
+                "#tag_wifi_ap_lab_hotspot_connection_event#";
+        public static final String TAG_WIFI_AP_LAB_HOTSPOT_SPEED_EVENT =
+                "#tag_wifi_ap_lab_hotspot_speed_event#";
         public static final String VALUE_AUTO_HOTSPOT = "Auto Hotspot";
         public static final String VALUE_CELLULAR = "Cellular";
         public static final String VALUE_CLIENT_DISCONNECTED = "Client disconnected";
@@ -238,7 +256,8 @@ public class SemWifiManager {
         public static final String VALUE_NORMAL = "Normal";
         public static final String VALUE_NO_UPSTREAM = "No upstream";
         public static final String VALUE_OTP = "Otp";
-        public static final String VALUE_OVERALL_CLIENTS_SETTINGS_UPDATED = "Overall clients settings updated";
+        public static final String VALUE_OVERALL_CLIENTS_SETTINGS_UPDATED =
+                "Overall clients settings updated";
         public static final String VALUE_WIFI = "Wi-Fi";
         public static final String VALUE_WIFI_CONNECTED = "Wi-Fi network connected";
         public static final String VALUE_WIFI_DISCONNECTED = "Wi-Fi network disconnected";
@@ -247,16 +266,13 @@ public class SemWifiManager {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TasPolicy {
-    }
+    public @interface TasPolicy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TestModuleId {
-    }
+    public @interface TestModuleId {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WifiUwbCoexStatusCode {
-    }
+    public @interface WifiUwbCoexStatusCode {}
 
     public SemWifiManager(Context context, ISemWifiManager service, Looper ignore) {
         this.mContext = context;
@@ -335,9 +351,18 @@ public class SemWifiManager {
         }
     }
 
-    public boolean connectToSmartMHS(String addr, int type, int mhidden, int mSecurity, String mhs_mac, String user_name, int ver, boolean wifiprofileshare) {
+    public boolean connectToSmartMHS(
+            String addr,
+            int type,
+            int mhidden,
+            int mSecurity,
+            String mhs_mac,
+            String user_name,
+            int ver,
+            boolean wifiprofileshare) {
         try {
-            return this.mService.connectToSmartMHS(addr, type, mhidden, mSecurity, mhs_mac, user_name, ver, wifiprofileshare);
+            return this.mService.connectToSmartMHS(
+                    addr, type, mhidden, mSecurity, mhs_mac, user_name, ver, wifiprofileshare);
         } catch (RemoteException e) {
             return false;
         }
@@ -443,7 +468,8 @@ public class SemWifiManager {
         }
     }
 
-    public boolean connectToSmartD2DClient(String bleaddr, String client_mac, SemWifiApSmartCallback callback) {
+    public boolean connectToSmartD2DClient(
+            String bleaddr, String client_mac, SemWifiApSmartCallback callback) {
         try {
             SemWifiApSmartCallback.SemWifiApSmartCallbackProxy proxy = callback.getProxy();
             proxy.initProxy(this.mContext.getMainExecutor(), callback);
@@ -461,8 +487,9 @@ public class SemWifiManager {
         }
     }
 
-    public static abstract class SemWifiApSmartCallback {
-        private final SemWifiApSmartCallbackProxy mSemWifiApSmartCallbackProxy = new SemWifiApSmartCallbackProxy();
+    public abstract static class SemWifiApSmartCallback {
+        private final SemWifiApSmartCallbackProxy mSemWifiApSmartCallbackProxy =
+                new SemWifiApSmartCallbackProxy();
 
         public abstract void onStateChanged(int i, String str);
 
@@ -476,8 +503,7 @@ public class SemWifiManager {
             private Executor mExecutor = null;
             private SemWifiApSmartCallback mCallback = null;
 
-            SemWifiApSmartCallbackProxy() {
-            }
+            SemWifiApSmartCallbackProxy() {}
 
             void initProxy(Executor executor, SemWifiApSmartCallback callback) {
                 synchronized (this.mLock) {
@@ -494,10 +520,13 @@ public class SemWifiManager {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiApSmartCallback
-            public void onStateChanged(final int state, final String mhsMac) throws RemoteException {
+            public void onStateChanged(final int state, final String mhsMac)
+                    throws RemoteException {
                 Executor executor;
                 final SemWifiApSmartCallback callback;
-                Log.v(SemWifiManager.TAG, "SemWifiApSmartCallbackProxy: onStateChanged: state=" + state);
+                Log.v(
+                        SemWifiManager.TAG,
+                        "SemWifiApSmartCallbackProxy: onStateChanged: state=" + state);
                 synchronized (this.mLock) {
                     executor = this.mExecutor;
                     callback = this.mCallback;
@@ -506,18 +535,23 @@ public class SemWifiManager {
                     return;
                 }
                 Binder.clearCallingIdentity();
-                executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$SemWifiApSmartCallback$SemWifiApSmartCallbackProxy$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SemWifiManager.SemWifiApSmartCallback.this.onStateChanged(state, mhsMac);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.wifi.SemWifiManager$SemWifiApSmartCallback$SemWifiApSmartCallbackProxy$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemWifiManager.SemWifiApSmartCallback.this.onStateChanged(
+                                        state, mhsMac);
+                            }
+                        });
             }
         }
     }
 
-    public static abstract class SemWifiApClientListUpdateCallback {
-        private final SemWifiApClientListUpdateCallbackProxy mSemWifiApClientListUpdateCallbackProxy = new SemWifiApClientListUpdateCallbackProxy();
+    public abstract static class SemWifiApClientListUpdateCallback {
+        private final SemWifiApClientListUpdateCallbackProxy
+                mSemWifiApClientListUpdateCallbackProxy =
+                        new SemWifiApClientListUpdateCallbackProxy();
 
         public abstract void onClientListUpdated(List<SemWifiApClientDetails> list, long j);
 
@@ -528,13 +562,13 @@ public class SemWifiManager {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        static class SemWifiApClientListUpdateCallbackProxy extends ISemWifiApClientListUpdateCallback.Stub {
+        static class SemWifiApClientListUpdateCallbackProxy
+                extends ISemWifiApClientListUpdateCallback.Stub {
             private final Object mLock = new Object();
             private Executor mExecutor = null;
             private SemWifiApClientListUpdateCallback mCallback = null;
 
-            SemWifiApClientListUpdateCallbackProxy() {
-            }
+            SemWifiApClientListUpdateCallbackProxy() {}
 
             void initProxy(Executor executor, SemWifiApClientListUpdateCallback callback) {
                 synchronized (this.mLock) {
@@ -551,10 +585,18 @@ public class SemWifiManager {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiApClientListUpdateCallback
-            public void onClientListUpdated(final List<SemWifiApClientDetails> clientsList, final long totalDataUsageInBytes) throws RemoteException {
+            public void onClientListUpdated(
+                    final List<SemWifiApClientDetails> clientsList,
+                    final long totalDataUsageInBytes)
+                    throws RemoteException {
                 Executor executor;
                 final SemWifiApClientListUpdateCallback callback;
-                Log.v(SemWifiManager.TAG, "onClientListUpdated: " + clientsList.toString() + ", totalDatausage = " + totalDataUsageInBytes);
+                Log.v(
+                        SemWifiManager.TAG,
+                        "onClientListUpdated: "
+                                + clientsList.toString()
+                                + ", totalDatausage = "
+                                + totalDataUsageInBytes);
                 synchronized (this.mLock) {
                     executor = this.mExecutor;
                     callback = this.mCallback;
@@ -563,19 +605,25 @@ public class SemWifiManager {
                     return;
                 }
                 Binder.clearCallingIdentity();
-                executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$SemWifiApClientListUpdateCallback$SemWifiApClientListUpdateCallbackProxy$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SemWifiManager.SemWifiApClientListUpdateCallback.this.onClientListUpdated(clientsList, totalDataUsageInBytes);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.wifi.SemWifiManager$SemWifiApClientListUpdateCallback$SemWifiApClientListUpdateCallbackProxy$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemWifiManager.SemWifiApClientListUpdateCallback.this
+                                        .onClientListUpdated(clientsList, totalDataUsageInBytes);
+                            }
+                        });
             }
 
             @Override // com.samsung.android.wifi.ISemWifiApClientListUpdateCallback
-            public void onOverallDataLimitChanged(final long dataLimitInBytes) throws RemoteException {
+            public void onOverallDataLimitChanged(final long dataLimitInBytes)
+                    throws RemoteException {
                 Executor executor;
                 final SemWifiApClientListUpdateCallback callback;
-                Log.v(SemWifiManager.TAG, "onOverallDataLimitChanged: datalimit = " + dataLimitInBytes);
+                Log.v(
+                        SemWifiManager.TAG,
+                        "onOverallDataLimitChanged: datalimit = " + dataLimitInBytes);
                 synchronized (this.mLock) {
                     executor = this.mExecutor;
                     callback = this.mCallback;
@@ -584,18 +632,22 @@ public class SemWifiManager {
                     return;
                 }
                 Binder.clearCallingIdentity();
-                executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$SemWifiApClientListUpdateCallback$SemWifiApClientListUpdateCallbackProxy$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SemWifiManager.SemWifiApClientListUpdateCallback.this.onOverallDataLimitChanged(dataLimitInBytes);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.wifi.SemWifiManager$SemWifiApClientListUpdateCallback$SemWifiApClientListUpdateCallbackProxy$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemWifiManager.SemWifiApClientListUpdateCallback.this
+                                        .onOverallDataLimitChanged(dataLimitInBytes);
+                            }
+                        });
             }
         }
     }
 
-    public static abstract class SemWifiApClientUpdateCallback {
-        private final SemWifiApClientUpdateCallbackProxy mSemWifiApClientUpdateCallbackProxy = new SemWifiApClientUpdateCallbackProxy();
+    public abstract static class SemWifiApClientUpdateCallback {
+        private final SemWifiApClientUpdateCallbackProxy mSemWifiApClientUpdateCallbackProxy =
+                new SemWifiApClientUpdateCallbackProxy();
 
         public abstract void onClientUpdated(SemWifiApClientDetails semWifiApClientDetails);
 
@@ -604,13 +656,13 @@ public class SemWifiManager {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        static class SemWifiApClientUpdateCallbackProxy extends ISemWifiApClientUpdateCallback.Stub {
+        static class SemWifiApClientUpdateCallbackProxy
+                extends ISemWifiApClientUpdateCallback.Stub {
             private final Object mLock = new Object();
             private Executor mExecutor = null;
             private SemWifiApClientUpdateCallback mCallback = null;
 
-            SemWifiApClientUpdateCallbackProxy() {
-            }
+            SemWifiApClientUpdateCallbackProxy() {}
 
             void initProxy(Executor executor, SemWifiApClientUpdateCallback callback) {
                 synchronized (this.mLock) {
@@ -627,7 +679,8 @@ public class SemWifiManager {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiApClientUpdateCallback
-            public void onClientUpdated(final SemWifiApClientDetails clientDetails) throws RemoteException {
+            public void onClientUpdated(final SemWifiApClientDetails clientDetails)
+                    throws RemoteException {
                 Executor executor;
                 final SemWifiApClientUpdateCallback callback;
                 Log.v(SemWifiManager.TAG, "onClientUpdated: " + clientDetails.toString());
@@ -639,12 +692,15 @@ public class SemWifiManager {
                     return;
                 }
                 Binder.clearCallingIdentity();
-                executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$SemWifiApClientUpdateCallback$SemWifiApClientUpdateCallbackProxy$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SemWifiManager.SemWifiApClientUpdateCallback.this.onClientUpdated(clientDetails);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.wifi.SemWifiManager$SemWifiApClientUpdateCallback$SemWifiApClientUpdateCallbackProxy$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemWifiManager.SemWifiApClientUpdateCallback.this.onClientUpdated(
+                                        clientDetails);
+                            }
+                        });
             }
         }
     }
@@ -703,7 +759,12 @@ public class SemWifiManager {
         if (callback == null) {
             throw new IllegalArgumentException("callback cannot be null");
         }
-        Log.v(TAG, "unregisterWifiApSmartCallback: callback=" + callback + "callid : " + callback.hashCode());
+        Log.v(
+                TAG,
+                "unregisterWifiApSmartCallback: callback="
+                        + callback
+                        + "callid : "
+                        + callback.hashCode());
         SemWifiApSmartCallback.SemWifiApSmartCallbackProxy proxy = callback.getProxy();
         try {
             try {
@@ -756,9 +817,17 @@ public class SemWifiManager {
         }
     }
 
-    public int connectToMcfMHS(String addr, int type, int mhidden, int mSecurity, String mhs_mac, String Username, int ver) {
+    public int connectToMcfMHS(
+            String addr,
+            int type,
+            int mhidden,
+            int mSecurity,
+            String mhs_mac,
+            String Username,
+            int ver) {
         try {
-            return this.mService.connectToMcfMHS(addr, type, mhidden, mSecurity, mhs_mac, Username, ver);
+            return this.mService.connectToMcfMHS(
+                    addr, type, mhidden, mSecurity, mhs_mac, Username, ver);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -796,9 +865,11 @@ public class SemWifiManager {
         }
     }
 
-    public int autohotspotWifiScanConnect(String ssid, String password, String bssid, int hideSSID, int mhsFreq, int security) {
+    public int autohotspotWifiScanConnect(
+            String ssid, String password, String bssid, int hideSSID, int mhsFreq, int security) {
         try {
-            return this.mService.autohotspotWifiScanConnect(ssid, password, bssid, hideSSID, mhsFreq, security);
+            return this.mService.autohotspotWifiScanConnect(
+                    ssid, password, bssid, hideSSID, mhsFreq, security);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -844,17 +915,21 @@ public class SemWifiManager {
         }
     }
 
-    public List<SemWifiApClientDetails> getTopHotspotClientsToday(int topConnectedAndDisconnected, int maxListLength) {
+    public List<SemWifiApClientDetails> getTopHotspotClientsToday(
+            int topConnectedAndDisconnected, int maxListLength) {
         try {
-            return this.mService.getTopHotspotClientsToday(topConnectedAndDisconnected, maxListLength);
+            return this.mService.getTopHotspotClientsToday(
+                    topConnectedAndDisconnected, maxListLength);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public String getTopHotspotClientsTodayAsString(int topConnectedAndDisconnected, int maxListLength) {
+    public String getTopHotspotClientsTodayAsString(
+            int topConnectedAndDisconnected, int maxListLength) {
         try {
-            return this.mService.getTopHotspotClientsTodayAsString(topConnectedAndDisconnected, maxListLength);
+            return this.mService.getTopHotspotClientsTodayAsString(
+                    topConnectedAndDisconnected, maxListLength);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -932,9 +1007,11 @@ public class SemWifiManager {
         }
     }
 
-    public List<String> getTotalAndTop3ClientsDataUsageBetweenGivenDates(long timestampInMilliSecsDate1, long timestampInMilliSecsDate2) {
+    public List<String> getTotalAndTop3ClientsDataUsageBetweenGivenDates(
+            long timestampInMilliSecsDate1, long timestampInMilliSecsDate2) {
         try {
-            return this.mService.getTotalAndTop3ClientsDataUsageBetweenGivenDates(timestampInMilliSecsDate1, timestampInMilliSecsDate2);
+            return this.mService.getTotalAndTop3ClientsDataUsageBetweenGivenDates(
+                    timestampInMilliSecsDate1, timestampInMilliSecsDate2);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -988,19 +1065,30 @@ public class SemWifiManager {
         }
     }
 
-    public void registerClientListDataUsageCallback(SemWifiApClientListUpdateCallback callback, Executor executor, int topConnectedAndDisconnected, int maxListLength) {
+    public void registerClientListDataUsageCallback(
+            SemWifiApClientListUpdateCallback callback,
+            Executor executor,
+            int topConnectedAndDisconnected,
+            int maxListLength) {
         if (callback == null) {
             throw new IllegalArgumentException("callback cannot be null");
         }
         if (executor == null) {
             throw new IllegalArgumentException("executor cannot be null");
         }
-        Log.v(TAG, "registerClientListDataUsageCallback: callback=" + callback + ", executor=" + executor);
-        SemWifiApClientListUpdateCallback.SemWifiApClientListUpdateCallbackProxy proxy = callback.getProxy();
+        Log.v(
+                TAG,
+                "registerClientListDataUsageCallback: callback="
+                        + callback
+                        + ", executor="
+                        + executor);
+        SemWifiApClientListUpdateCallback.SemWifiApClientListUpdateCallbackProxy proxy =
+                callback.getProxy();
         proxy.initProxy(executor, callback);
         Binder binder = new Binder();
         try {
-            this.mService.registerClientListDataUsageCallback(binder, proxy, callback.hashCode(), topConnectedAndDisconnected, maxListLength);
+            this.mService.registerClientListDataUsageCallback(
+                    binder, proxy, callback.hashCode(), topConnectedAndDisconnected, maxListLength);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1010,8 +1098,14 @@ public class SemWifiManager {
         if (callback == null) {
             throw new IllegalArgumentException("callback cannot be null");
         }
-        Log.v(TAG, "unregisterClientListDataUsageCallback: callback=" + callback + "callid : " + callback.hashCode());
-        SemWifiApClientListUpdateCallback.SemWifiApClientListUpdateCallbackProxy proxy = callback.getProxy();
+        Log.v(
+                TAG,
+                "unregisterClientListDataUsageCallback: callback="
+                        + callback
+                        + "callid : "
+                        + callback.hashCode());
+        SemWifiApClientListUpdateCallback.SemWifiApClientListUpdateCallbackProxy proxy =
+                callback.getProxy();
         try {
             try {
                 this.mService.unregisterClientListDataUsageCallback(callback.hashCode());
@@ -1023,19 +1117,24 @@ public class SemWifiManager {
         }
     }
 
-    public void registerClientDataUsageCallback(SemWifiApClientUpdateCallback callback, Executor executor, String clientMac) {
+    public void registerClientDataUsageCallback(
+            SemWifiApClientUpdateCallback callback, Executor executor, String clientMac) {
         if (callback == null) {
             throw new IllegalArgumentException("callback cannot be null");
         }
         if (executor == null) {
             throw new IllegalArgumentException("executor cannot be null");
         }
-        Log.v(TAG, "registerClientDataUsageCallback: callback=" + callback + ", executor=" + executor);
-        SemWifiApClientUpdateCallback.SemWifiApClientUpdateCallbackProxy proxy = callback.getProxy();
+        Log.v(
+                TAG,
+                "registerClientDataUsageCallback: callback=" + callback + ", executor=" + executor);
+        SemWifiApClientUpdateCallback.SemWifiApClientUpdateCallbackProxy proxy =
+                callback.getProxy();
         proxy.initProxy(executor, callback);
         Binder binder = new Binder();
         try {
-            this.mService.registerClientDataUsageCallback(binder, proxy, callback.hashCode(), clientMac);
+            this.mService.registerClientDataUsageCallback(
+                    binder, proxy, callback.hashCode(), clientMac);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1045,8 +1144,14 @@ public class SemWifiManager {
         if (callback == null) {
             throw new IllegalArgumentException("callback cannot be null");
         }
-        Log.v(TAG, "unregisterClientDataUsageCallback: callback=" + callback + "callid : " + callback.hashCode());
-        SemWifiApClientUpdateCallback.SemWifiApClientUpdateCallbackProxy proxy = callback.getProxy();
+        Log.v(
+                TAG,
+                "unregisterClientDataUsageCallback: callback="
+                        + callback
+                        + "callid : "
+                        + callback.hashCode());
+        SemWifiApClientUpdateCallback.SemWifiApClientUpdateCallbackProxy proxy =
+                callback.getProxy();
         try {
             try {
                 this.mService.unregisterClientDataUsageCallback(callback.hashCode());
@@ -1058,8 +1163,9 @@ public class SemWifiManager {
         }
     }
 
-    public static abstract class SemWifiApDataUsageListener {
-        private final SemWifiApDataUsageClient mSemWifiApDataUsageClient = new SemWifiApDataUsageClient();
+    public abstract static class SemWifiApDataUsageListener {
+        private final SemWifiApDataUsageClient mSemWifiApDataUsageClient =
+                new SemWifiApDataUsageClient();
 
         public abstract void onDataUsageChanged(String str);
 
@@ -1073,8 +1179,7 @@ public class SemWifiManager {
             private Executor mExecutor = null;
             private SemWifiApDataUsageListener mListener = null;
 
-            SemWifiApDataUsageClient() {
-            }
+            SemWifiApDataUsageClient() {}
 
             void init(Executor executor, SemWifiApDataUsageListener listener) {
                 synchronized (this.mLock) {
@@ -1103,24 +1208,33 @@ public class SemWifiManager {
                     return;
                 }
                 Binder.clearCallingIdentity();
-                executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$SemWifiApDataUsageListener$SemWifiApDataUsageClient$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SemWifiManager.SemWifiApDataUsageListener.this.onDataUsageChanged(value);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.wifi.SemWifiManager$SemWifiApDataUsageListener$SemWifiApDataUsageClient$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemWifiManager.SemWifiApDataUsageListener.this.onDataUsageChanged(
+                                        value);
+                            }
+                        });
             }
         }
     }
 
-    public void registerWifiApDataUsageListener(SemWifiApDataUsageListener listener, Executor executor) {
+    public void registerWifiApDataUsageListener(
+            SemWifiApDataUsageListener listener, Executor executor) {
         if (listener == null) {
             throw new IllegalArgumentException("listener cannot be null");
         }
         if (executor == null) {
             throw new IllegalArgumentException("executor cannot be null");
         }
-        Log.v(TAG, "registerApDataUsageChangedListener: listener=" + listener + ", executor=" + executor);
+        Log.v(
+                TAG,
+                "registerApDataUsageChangedListener: listener="
+                        + listener
+                        + ", executor="
+                        + executor);
         SemWifiApDataUsageListener.SemWifiApDataUsageClient client = listener.getClient();
         client.init(executor, listener);
         Binder binder = new Binder();
@@ -1135,7 +1249,12 @@ public class SemWifiManager {
         if (listener == null) {
             throw new IllegalArgumentException("listener cannot be null");
         }
-        Log.v(TAG, "unRegisterWifiApDataUsageListener: listener=" + listener + "callid : " + listener.hashCode());
+        Log.v(
+                TAG,
+                "unRegisterWifiApDataUsageListener: listener="
+                        + listener
+                        + "callid : "
+                        + listener.hashCode());
         SemWifiApDataUsageListener.SemWifiApDataUsageClient client = listener.getClient();
         try {
             try {
@@ -1229,9 +1348,11 @@ public class SemWifiManager {
         }
     }
 
-    public void launchWifiApWarningForMcfMHS(int wifiap_band, int wifiap_set_security, boolean wifiap_security) {
+    public void launchWifiApWarningForMcfMHS(
+            int wifiap_band, int wifiap_set_security, boolean wifiap_security) {
         try {
-            this.mService.launchWifiApWarningForMcfMHS(wifiap_band, wifiap_set_security, wifiap_security);
+            this.mService.launchWifiApWarningForMcfMHS(
+                    wifiap_band, wifiap_set_security, wifiap_security);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1333,7 +1454,8 @@ public class SemWifiManager {
         }
     }
 
-    public boolean setLocalOnlyHotspotEnabled(boolean enabled, String ssid, String password, int band) {
+    public boolean setLocalOnlyHotspotEnabled(
+            boolean enabled, String ssid, String password, int band) {
         Log.i(TAG, " setLocalOnlyHotspotEnabled : " + enabled);
         try {
             return this.mService.setLocalOnlyHotspotEnabled(enabled, ssid, password, band);
@@ -1365,9 +1487,31 @@ public class SemWifiManager {
         StackTraceElement callerElement = e.getStackTrace()[3];
         CharSequence dateTime = DateFormat.format("yy/MM/dd kk:mm:ss ", System.currentTimeMillis());
         if (MHSDBG) {
-            args.putString("extra_log", ((Object) dateTime) + apiSignature + " setwifiap " + packageName + NavigationBarInflaterView.SIZE_MOD_START + callerElement.getFileName() + ":" + callerElement.getMethodName() + "():" + callerElement.getLineNumber() + "]\n");
+            args.putString(
+                    "extra_log",
+                    ((Object) dateTime)
+                            + apiSignature
+                            + " setwifiap "
+                            + packageName
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + callerElement.getFileName()
+                            + ":"
+                            + callerElement.getMethodName()
+                            + "():"
+                            + callerElement.getLineNumber()
+                            + "]\n");
         } else {
-            args.putString("extra_log", ((Object) dateTime) + apiSignature + " setwifiap " + packageName + NavigationBarInflaterView.SIZE_MOD_START + callerElement.getFileName() + ":" + callerElement.getLineNumber() + "]\n");
+            args.putString(
+                    "extra_log",
+                    ((Object) dateTime)
+                            + apiSignature
+                            + " setwifiap "
+                            + packageName
+                            + NavigationBarInflaterView.SIZE_MOD_START
+                            + callerElement.getFileName()
+                            + ":"
+                            + callerElement.getLineNumber()
+                            + "]\n");
         }
         reportHotspotDumpLogs(args.getString("extra_log"));
     }
@@ -1637,7 +1781,8 @@ public class SemWifiManager {
         }
     }
 
-    public int manageWifiApMacAclList(String name, String mac, int add_or_delete, int allow_or_deny) {
+    public int manageWifiApMacAclList(
+            String name, String mac, int add_or_delete, int allow_or_deny) {
         try {
             return this.mService.manageWifiApMacAclList(name, mac, add_or_delete, allow_or_deny);
         } catch (RemoteException e) {
@@ -1993,7 +2138,8 @@ public class SemWifiManager {
 
     public List<SemWifiConfiguration> getConfiguredNetworks() {
         try {
-            ParceledListSlice<SemWifiConfiguration> parceledList = this.mService.getConfiguredNetworks();
+            ParceledListSlice<SemWifiConfiguration> parceledList =
+                    this.mService.getConfiguredNetworks();
             if (parceledList == null) {
                 return Collections.emptyList();
             }
@@ -2110,7 +2256,8 @@ public class SemWifiManager {
 
     public void registerPasswordCallback(String bssid, ISemSharedPasswordCallback callback) {
         if (TextUtils.isEmpty(bssid) || callback == null) {
-            throw new IllegalArgumentException("request AP's bssid or callback should not be empty");
+            throw new IllegalArgumentException(
+                    "request AP's bssid or callback should not be empty");
         }
         try {
             this.mService.registerPasswordCallback(bssid, callback);
@@ -2274,7 +2421,11 @@ public class SemWifiManager {
         }
     }
 
-    public void setEasySetupScanSettings(List<String> ssids, PendingIntent pendingIntentForIdlePopup, PendingIntent pendingIntentForSettings, int minRssi) {
+    public void setEasySetupScanSettings(
+            List<String> ssids,
+            PendingIntent pendingIntentForIdlePopup,
+            PendingIntent pendingIntentForSettings,
+            int minRssi) {
         if (ssids == null) {
             return;
         }
@@ -2290,7 +2441,10 @@ public class SemWifiManager {
         }
     }
 
-    public void setEasySetupScanSettings(List<String> ssids, PendingIntent pendingIntentForIdlePopup, PendingIntent pendingIntentForSettings) {
+    public void setEasySetupScanSettings(
+            List<String> ssids,
+            PendingIntent pendingIntentForIdlePopup,
+            PendingIntent pendingIntentForSettings) {
         setEasySetupScanSettings(ssids, pendingIntentForIdlePopup, pendingIntentForSettings, -55);
     }
 
@@ -2534,9 +2688,11 @@ public class SemWifiManager {
         }
     }
 
-    public boolean sendVendorSpecificActionFrame(String bssid, int channel, int dwellTime, String frameBody) {
+    public boolean sendVendorSpecificActionFrame(
+            String bssid, int channel, int dwellTime, String frameBody) {
         try {
-            return this.mService.sendVendorSpecificActionFrame(bssid, channel, dwellTime, frameBody);
+            return this.mService.sendVendorSpecificActionFrame(
+                    bssid, channel, dwellTime, frameBody);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -2921,9 +3077,19 @@ public class SemWifiManager {
         }
     }
 
-    public boolean linkQosQuery(long payloadBytes, long desiredLatencyMs, long desiredThroughputMbps, int queryType, Long timeWindowMs) {
+    public boolean linkQosQuery(
+            long payloadBytes,
+            long desiredLatencyMs,
+            long desiredThroughputMbps,
+            int queryType,
+            Long timeWindowMs) {
         try {
-            return this.mService.linkQosQuery(payloadBytes, desiredLatencyMs, desiredThroughputMbps, queryType, timeWindowMs.longValue());
+            return this.mService.linkQosQuery(
+                    payloadBytes,
+                    desiredLatencyMs,
+                    desiredThroughputMbps,
+                    queryType,
+                    timeWindowMs.longValue());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -2937,9 +3103,11 @@ public class SemWifiManager {
         }
     }
 
-    public void setWifiAiServiceNsdResult(int[] nsdResult, int[] l1ConvSerPredArr, int[] l2ConvSerPredArr, String[] convArr) {
+    public void setWifiAiServiceNsdResult(
+            int[] nsdResult, int[] l1ConvSerPredArr, int[] l2ConvSerPredArr, String[] convArr) {
         try {
-            this.mService.setWifiAiServiceNsdResult(nsdResult, l1ConvSerPredArr, l2ConvSerPredArr, convArr);
+            this.mService.setWifiAiServiceNsdResult(
+                    nsdResult, l1ConvSerPredArr, l2ConvSerPredArr, convArr);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -3277,7 +3445,7 @@ public class SemWifiManager {
         }
     }
 
-    public static abstract class TasPolicyListener {
+    public abstract static class TasPolicyListener {
         private final TasPolicyListenerProxy mProxy = new TasPolicyListenerProxy();
 
         public abstract void onTasPolicyChanged(int i, int i2);
@@ -3292,8 +3460,7 @@ public class SemWifiManager {
             private final Object mLock = new Object();
             private Executor mExecutor = null;
 
-            TasPolicyListenerProxy() {
-            }
+            TasPolicyListenerProxy() {}
 
             void initProxy(Executor executor, TasPolicyListener listener) {
                 synchronized (this.mLock) {
@@ -3310,7 +3477,8 @@ public class SemWifiManager {
             }
 
             @Override // com.samsung.android.wifi.SemTasPolicyListener
-            public void onTasPolicyChanged(final int newTasPolicy, final int windowSize) throws RemoteException {
+            public void onTasPolicyChanged(final int newTasPolicy, final int windowSize)
+                    throws RemoteException {
                 final TasPolicyListener listener;
                 Executor executor;
                 synchronized (this.mLock) {
@@ -3321,12 +3489,15 @@ public class SemWifiManager {
                     return;
                 }
                 Binder.clearCallingIdentity();
-                executor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$TasPolicyListener$TasPolicyListenerProxy$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SemWifiManager.TasPolicyListener.this.onTasPolicyChanged(newTasPolicy, windowSize);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.wifi.SemWifiManager$TasPolicyListener$TasPolicyListenerProxy$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemWifiManager.TasPolicyListener.this.onTasPolicyChanged(
+                                        newTasPolicy, windowSize);
+                            }
+                        });
             }
         }
     }
@@ -3372,11 +3543,9 @@ public class SemWifiManager {
     }
 
     public static class AbTestConfigUpdateObserver {
-        public void onRegistered(AbTestConfigSubscription subscription) {
-        }
+        public void onRegistered(AbTestConfigSubscription subscription) {}
 
-        public void onUpdated(SemAbTestConfiguration config) {
-        }
+        public void onUpdated(SemAbTestConfiguration config) {}
     }
 
     public class AbTestConfigSubscription implements AutoCloseable {
@@ -3399,7 +3568,8 @@ public class SemWifiManager {
                     synchronized (this.mLock) {
                         if (!this.mClosed) {
                             this.mClosed = true;
-                            SemWifiManager.this.unregisterAbTestConfigUpdateObserver(this.mObserver);
+                            SemWifiManager.this.unregisterAbTestConfigUpdateObserver(
+                                    this.mObserver);
                             this.mCloseGuard.close();
                         }
                     }
@@ -3423,19 +3593,27 @@ public class SemWifiManager {
         }
 
         public String toString() {
-            return "AbTestConfigSubscription{mObserver=" + this.mObserver + ", mModule='" + this.mModule + DateFormat.QUOTE + '}';
+            return "AbTestConfigSubscription{mObserver="
+                    + this.mObserver
+                    + ", mModule='"
+                    + this.mModule
+                    + DateFormat.QUOTE
+                    + '}';
         }
     }
 
-    public void registerAbTestConfigUpdateObserver(AbTestConfigUpdateObserver observer, String module) {
+    public void registerAbTestConfigUpdateObserver(
+            AbTestConfigUpdateObserver observer, String module) {
         if (observer == null) {
             throw new IllegalArgumentException("observer cannot be null");
         }
         Executor executor = this.mContext.getMainExecutor();
         synchronized (sSemAbTestConfigurationUpdateObserverMap) {
-            AbTestConfigUpdateObserverProxy abtestConfigObserverProxy = new AbTestConfigUpdateObserverProxy(this, executor, observer, module);
+            AbTestConfigUpdateObserverProxy abtestConfigObserverProxy =
+                    new AbTestConfigUpdateObserverProxy(this, executor, observer, module);
             try {
-                sSemAbTestConfigurationUpdateObserverMap.put(System.identityHashCode(observer), abtestConfigObserverProxy);
+                sSemAbTestConfigurationUpdateObserverMap.put(
+                        System.identityHashCode(observer), abtestConfigObserverProxy);
                 this.mService.registerAbTestConfigUpdateObserver(abtestConfigObserverProxy, module);
                 abtestConfigObserverProxy.registered();
             } catch (RemoteException e) {
@@ -3455,7 +3633,8 @@ public class SemWifiManager {
                 return;
             }
             try {
-                this.mService.unregisterAbTestConfigUpdateObserver(sSemAbTestConfigurationUpdateObserverMap.get(callbackIdentifier));
+                this.mService.unregisterAbTestConfigUpdateObserver(
+                        sSemAbTestConfigurationUpdateObserverMap.get(callbackIdentifier));
                 sSemAbTestConfigurationUpdateObserverMap.remove(callbackIdentifier);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
@@ -3496,13 +3675,18 @@ public class SemWifiManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    static class AbTestConfigUpdateObserverProxy extends ISemAbTestConfigurationUpdateObserver.Stub {
+    static class AbTestConfigUpdateObserverProxy
+            extends ISemAbTestConfigurationUpdateObserver.Stub {
         private final Executor mExecutor;
         private final String mModule;
         private final AbTestConfigUpdateObserver mObserver;
         private final WeakReference<SemWifiManager> mWifiManager;
 
-        AbTestConfigUpdateObserverProxy(SemWifiManager manager, Executor executor, AbTestConfigUpdateObserver observer, String module) {
+        AbTestConfigUpdateObserverProxy(
+                SemWifiManager manager,
+                Executor executor,
+                AbTestConfigUpdateObserver observer,
+                String module) {
             this.mWifiManager = new WeakReference<>(manager);
             this.mExecutor = executor;
             this.mObserver = observer;
@@ -3514,33 +3698,41 @@ public class SemWifiManager {
             if (manager == null) {
                 return;
             }
-            this.mExecutor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$AbTestConfigUpdateObserverProxy$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SemWifiManager.AbTestConfigUpdateObserverProxy.this.lambda$registered$0(manager);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // com.samsung.android.wifi.SemWifiManager$AbTestConfigUpdateObserverProxy$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SemWifiManager.AbTestConfigUpdateObserverProxy.this.lambda$registered$0(
+                                    manager);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$registered$0(SemWifiManager manager) {
             AbTestConfigUpdateObserver abTestConfigUpdateObserver = this.mObserver;
             Objects.requireNonNull(manager);
-            abTestConfigUpdateObserver.onRegistered(manager.new AbTestConfigSubscription(this.mObserver, this.mModule));
+            abTestConfigUpdateObserver.onRegistered(
+                    manager.new AbTestConfigSubscription(this.mObserver, this.mModule));
         }
 
         @Override // com.samsung.android.wifi.ISemAbTestConfigurationUpdateObserver
         public void notifyAbTestConfigUpdate(final SemAbTestConfiguration config) {
-            this.mExecutor.execute(new Runnable() { // from class: com.samsung.android.wifi.SemWifiManager$AbTestConfigUpdateObserverProxy$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SemWifiManager.AbTestConfigUpdateObserverProxy.this.lambda$notifyAbTestConfigUpdate$1(config);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // com.samsung.android.wifi.SemWifiManager$AbTestConfigUpdateObserverProxy$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SemWifiManager.AbTestConfigUpdateObserverProxy.this
+                                    .lambda$notifyAbTestConfigUpdate$1(config);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$notifyAbTestConfigUpdate$1(SemAbTestConfiguration config) {
+        public /* synthetic */ void lambda$notifyAbTestConfigUpdate$1(
+                SemAbTestConfiguration config) {
             this.mObserver.onUpdated(config);
         }
     }

@@ -88,7 +88,8 @@ public class DrmEventService extends Service {
                 String action = (String) msg.obj;
                 Log.i(DrmEventService.TAG, "action event :" + action);
                 if (action != null) {
-                    if (action.equalsIgnoreCase("START_RESOURCE_HELPER") && DrmEventService.this.rchelp == null) {
+                    if (action.equalsIgnoreCase("START_RESOURCE_HELPER")
+                            && DrmEventService.this.rchelp == null) {
                         DrmEventService.this.rchelp = new DrmMediaResourceHelper();
                         return;
                     }

@@ -30,8 +30,7 @@ public interface ISemWifiAwareManager extends IInterface {
 
     public static class Default implements ISemWifiAwareManager {
         @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
-        public void setClusterMergingEnabled(boolean enable) throws RemoteException {
-        }
+        public void setClusterMergingEnabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
         public int isPreEnabled() throws RemoteException {
@@ -39,8 +38,7 @@ public interface ISemWifiAwareManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
-        public void setNanCommand(int cmdId, byte[] cmd) throws RemoteException {
-        }
+        public void setNanCommand(int cmdId, byte[] cmd) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.aware.ISemWifiAwareManager
         public boolean isVendorNanServiceAvailable() throws RemoteException {
@@ -78,7 +76,7 @@ public interface ISemWifiAwareManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemWifiAwareManager {
+    public abstract static class Stub extends Binder implements ISemWifiAwareManager {
         static final int TRANSACTION_getMaxNdpCountForAwareP2p = 8;
         static final int TRANSACTION_getMaxNdpCountForAwareSoftAp = 9;
         static final int TRANSACTION_getStdPlusFeature = 5;
@@ -140,7 +138,8 @@ public interface ISemWifiAwareManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemWifiAwareManager.DESCRIPTOR);
             }

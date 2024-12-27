@@ -4,6 +4,7 @@ import android.text.format.DateFormat;
 import android.util.Range;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;
+
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -27,91 +28,276 @@ public final class EventIndex {
     public final Object mLock;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class Injector {
-    }
+    class Injector {}
 
     static {
         final int i = 0;
         final int i2 = 1;
         final int i3 = 2;
         final int i4 = 3;
-        TIME_SLOT_FACTORIES = Collections.unmodifiableList(Arrays.asList(new Function() { // from class: com.android.server.people.data.EventIndex$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Long l = (Long) obj;
-                switch (i) {
-                    case 0:
-                        LocalDateTime truncatedTo = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.DAYS);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(truncatedTo)), Long.valueOf(EventIndex.toEpochMilli(truncatedTo.plusDays(1L))));
-                    case 1:
-                        LocalDateTime minusHours = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.HOURS).minusHours(EventIndex.toLocalDateTime(r2).getHour() % 4);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(minusHours)), Long.valueOf(EventIndex.toEpochMilli(minusHours.plusHours(4L))));
-                    case 2:
-                        LocalDateTime truncatedTo2 = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.HOURS);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(truncatedTo2)), Long.valueOf(EventIndex.toEpochMilli(truncatedTo2.plusHours(1L))));
-                    default:
-                        LocalDateTime minusMinutes = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.MINUTES).minusMinutes(EventIndex.toLocalDateTime(r2).getMinute() % 2);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(minusMinutes)), Long.valueOf(EventIndex.toEpochMilli(minusMinutes.plusMinutes(2L))));
-                }
-            }
-        }, new Function() { // from class: com.android.server.people.data.EventIndex$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Long l = (Long) obj;
-                switch (i2) {
-                    case 0:
-                        LocalDateTime truncatedTo = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.DAYS);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(truncatedTo)), Long.valueOf(EventIndex.toEpochMilli(truncatedTo.plusDays(1L))));
-                    case 1:
-                        LocalDateTime minusHours = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.HOURS).minusHours(EventIndex.toLocalDateTime(r2).getHour() % 4);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(minusHours)), Long.valueOf(EventIndex.toEpochMilli(minusHours.plusHours(4L))));
-                    case 2:
-                        LocalDateTime truncatedTo2 = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.HOURS);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(truncatedTo2)), Long.valueOf(EventIndex.toEpochMilli(truncatedTo2.plusHours(1L))));
-                    default:
-                        LocalDateTime minusMinutes = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.MINUTES).minusMinutes(EventIndex.toLocalDateTime(r2).getMinute() % 2);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(minusMinutes)), Long.valueOf(EventIndex.toEpochMilli(minusMinutes.plusMinutes(2L))));
-                }
-            }
-        }, new Function() { // from class: com.android.server.people.data.EventIndex$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Long l = (Long) obj;
-                switch (i3) {
-                    case 0:
-                        LocalDateTime truncatedTo = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.DAYS);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(truncatedTo)), Long.valueOf(EventIndex.toEpochMilli(truncatedTo.plusDays(1L))));
-                    case 1:
-                        LocalDateTime minusHours = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.HOURS).minusHours(EventIndex.toLocalDateTime(r2).getHour() % 4);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(minusHours)), Long.valueOf(EventIndex.toEpochMilli(minusHours.plusHours(4L))));
-                    case 2:
-                        LocalDateTime truncatedTo2 = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.HOURS);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(truncatedTo2)), Long.valueOf(EventIndex.toEpochMilli(truncatedTo2.plusHours(1L))));
-                    default:
-                        LocalDateTime minusMinutes = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.MINUTES).minusMinutes(EventIndex.toLocalDateTime(r2).getMinute() % 2);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(minusMinutes)), Long.valueOf(EventIndex.toEpochMilli(minusMinutes.plusMinutes(2L))));
-                }
-            }
-        }, new Function() { // from class: com.android.server.people.data.EventIndex$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Long l = (Long) obj;
-                switch (i4) {
-                    case 0:
-                        LocalDateTime truncatedTo = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.DAYS);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(truncatedTo)), Long.valueOf(EventIndex.toEpochMilli(truncatedTo.plusDays(1L))));
-                    case 1:
-                        LocalDateTime minusHours = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.HOURS).minusHours(EventIndex.toLocalDateTime(r2).getHour() % 4);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(minusHours)), Long.valueOf(EventIndex.toEpochMilli(minusHours.plusHours(4L))));
-                    case 2:
-                        LocalDateTime truncatedTo2 = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.HOURS);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(truncatedTo2)), Long.valueOf(EventIndex.toEpochMilli(truncatedTo2.plusHours(1L))));
-                    default:
-                        LocalDateTime minusMinutes = EventIndex.toLocalDateTime(l.longValue()).truncatedTo(ChronoUnit.MINUTES).minusMinutes(EventIndex.toLocalDateTime(r2).getMinute() % 2);
-                        return Range.create(Long.valueOf(EventIndex.toEpochMilli(minusMinutes)), Long.valueOf(EventIndex.toEpochMilli(minusMinutes.plusMinutes(2L))));
-                }
-            }
-        }));
+        TIME_SLOT_FACTORIES =
+                Collections.unmodifiableList(
+                        Arrays.asList(
+                                new Function() { // from class:
+                                                 // com.android.server.people.data.EventIndex$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        Long l = (Long) obj;
+                                        switch (i) {
+                                            case 0:
+                                                LocalDateTime truncatedTo =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.DAYS);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo.plusDays(1L))));
+                                            case 1:
+                                                LocalDateTime minusHours =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.HOURS)
+                                                                .minusHours(
+                                                                        EventIndex.toLocalDateTime(
+                                                                                                r2)
+                                                                                        .getHour()
+                                                                                % 4);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusHours)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusHours.plusHours(4L))));
+                                            case 2:
+                                                LocalDateTime truncatedTo2 =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.HOURS);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo2)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo2.plusHours(
+                                                                                1L))));
+                                            default:
+                                                LocalDateTime minusMinutes =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.MINUTES)
+                                                                .minusMinutes(
+                                                                        EventIndex.toLocalDateTime(
+                                                                                                r2)
+                                                                                        .getMinute()
+                                                                                % 2);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusMinutes)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusMinutes.plusMinutes(
+                                                                                2L))));
+                                        }
+                                    }
+                                },
+                                new Function() { // from class:
+                                                 // com.android.server.people.data.EventIndex$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        Long l = (Long) obj;
+                                        switch (i2) {
+                                            case 0:
+                                                LocalDateTime truncatedTo =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.DAYS);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo.plusDays(1L))));
+                                            case 1:
+                                                LocalDateTime minusHours =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.HOURS)
+                                                                .minusHours(
+                                                                        EventIndex.toLocalDateTime(
+                                                                                                r2)
+                                                                                        .getHour()
+                                                                                % 4);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusHours)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusHours.plusHours(4L))));
+                                            case 2:
+                                                LocalDateTime truncatedTo2 =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.HOURS);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo2)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo2.plusHours(
+                                                                                1L))));
+                                            default:
+                                                LocalDateTime minusMinutes =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.MINUTES)
+                                                                .minusMinutes(
+                                                                        EventIndex.toLocalDateTime(
+                                                                                                r2)
+                                                                                        .getMinute()
+                                                                                % 2);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusMinutes)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusMinutes.plusMinutes(
+                                                                                2L))));
+                                        }
+                                    }
+                                },
+                                new Function() { // from class:
+                                                 // com.android.server.people.data.EventIndex$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        Long l = (Long) obj;
+                                        switch (i3) {
+                                            case 0:
+                                                LocalDateTime truncatedTo =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.DAYS);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo.plusDays(1L))));
+                                            case 1:
+                                                LocalDateTime minusHours =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.HOURS)
+                                                                .minusHours(
+                                                                        EventIndex.toLocalDateTime(
+                                                                                                r2)
+                                                                                        .getHour()
+                                                                                % 4);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusHours)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusHours.plusHours(4L))));
+                                            case 2:
+                                                LocalDateTime truncatedTo2 =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.HOURS);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo2)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo2.plusHours(
+                                                                                1L))));
+                                            default:
+                                                LocalDateTime minusMinutes =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.MINUTES)
+                                                                .minusMinutes(
+                                                                        EventIndex.toLocalDateTime(
+                                                                                                r2)
+                                                                                        .getMinute()
+                                                                                % 2);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusMinutes)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusMinutes.plusMinutes(
+                                                                                2L))));
+                                        }
+                                    }
+                                },
+                                new Function() { // from class:
+                                                 // com.android.server.people.data.EventIndex$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        Long l = (Long) obj;
+                                        switch (i4) {
+                                            case 0:
+                                                LocalDateTime truncatedTo =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.DAYS);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo.plusDays(1L))));
+                                            case 1:
+                                                LocalDateTime minusHours =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.HOURS)
+                                                                .minusHours(
+                                                                        EventIndex.toLocalDateTime(
+                                                                                                r2)
+                                                                                        .getHour()
+                                                                                % 4);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusHours)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusHours.plusHours(4L))));
+                                            case 2:
+                                                LocalDateTime truncatedTo2 =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.HOURS);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo2)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        truncatedTo2.plusHours(
+                                                                                1L))));
+                                            default:
+                                                LocalDateTime minusMinutes =
+                                                        EventIndex.toLocalDateTime(l.longValue())
+                                                                .truncatedTo(ChronoUnit.MINUTES)
+                                                                .minusMinutes(
+                                                                        EventIndex.toLocalDateTime(
+                                                                                                r2)
+                                                                                        .getMinute()
+                                                                                % 2);
+                                                return Range.create(
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusMinutes)),
+                                                        Long.valueOf(
+                                                                EventIndex.toEpochMilli(
+                                                                        minusMinutes.plusMinutes(
+                                                                                2L))));
+                                        }
+                                    }
+                                }));
     }
 
     public EventIndex() {
@@ -120,7 +306,7 @@ public final class EventIndex {
 
     /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
     public EventIndex(Injector injector) {
-        this(injector, new long[]{0, 0, 0, 0}, System.currentTimeMillis());
+        this(injector, new long[] {0, 0, 0, 0}, System.currentTimeMillis());
         injector.getClass();
     }
 
@@ -165,7 +351,8 @@ public final class EventIndex {
             if (range.contains(range2)) {
                 arrayList.add(range2);
                 i++;
-            } else if (((Long) range.getLower()).longValue() < ((Long) range2.getLower()).longValue()) {
+            } else if (((Long) range.getLower()).longValue()
+                    < ((Long) range2.getLower()).longValue()) {
                 arrayList.add(range2);
             } else {
                 arrayList.add(range);
@@ -187,7 +374,10 @@ public final class EventIndex {
     public static int diffTimeSlots(int i, long j, long j2) {
         Function function = (Function) TIME_SLOT_FACTORIES.get(i);
         Range range = (Range) function.apply(Long.valueOf(j));
-        return (int) ((((Long) ((Range) function.apply(Long.valueOf(j2))).getLower()).longValue() - ((Long) range.getLower()).longValue()) / getDuration(range));
+        return (int)
+                ((((Long) ((Range) function.apply(Long.valueOf(j2))).getLower()).longValue()
+                                - ((Long) range.getLower()).longValue())
+                        / getDuration(range));
     }
 
     public static long getDuration(Range range) {
@@ -204,7 +394,9 @@ public final class EventIndex {
                 jArr[i] = protoInputStream.readLong(2211908157441L);
                 i++;
             } else if (fieldNumber != 2) {
-                Slog.e("EventIndex", "Could not read undefined field: " + protoInputStream.getFieldNumber());
+                Slog.e(
+                        "EventIndex",
+                        "Could not read undefined field: " + protoInputStream.getFieldNumber());
             } else {
                 j = protoInputStream.readLong(1112396529666L);
             }
@@ -251,7 +443,8 @@ public final class EventIndex {
             return false;
         }
         EventIndex eventIndex = (EventIndex) obj;
-        return this.mLastUpdatedTime == eventIndex.mLastUpdatedTime && Arrays.equals(this.mEventBitmaps, eventIndex.mEventBitmaps);
+        return this.mLastUpdatedTime == eventIndex.mLastUpdatedTime
+                && Arrays.equals(this.mEventBitmaps, eventIndex.mEventBitmaps);
     }
 
     public final List getActiveTimeSlots() {
@@ -271,7 +464,10 @@ public final class EventIndex {
 
     public final List getActiveTimeSlotsForType(int i) {
         long j = this.mEventBitmaps[i];
-        Range range = (Range) ((Function) TIME_SLOT_FACTORIES.get(i)).apply(Long.valueOf(this.mLastUpdatedTime));
+        Range range =
+                (Range)
+                        ((Function) TIME_SLOT_FACTORIES.get(i))
+                                .apply(Long.valueOf(this.mLastUpdatedTime));
         long longValue = ((Long) range.getLower()).longValue();
         long duration = getDuration(range);
         ArrayList arrayList = new ArrayList();
@@ -282,7 +478,8 @@ public final class EventIndex {
                 j >>>= numberOfTrailingZeros;
             }
             if (j != 0) {
-                arrayList.add(Range.create(Long.valueOf(longValue), Long.valueOf(longValue + duration)));
+                arrayList.add(
+                        Range.create(Long.valueOf(longValue), Long.valueOf(longValue + duration)));
                 longValue -= duration;
                 j >>>= 1;
             }
@@ -291,7 +488,9 @@ public final class EventIndex {
     }
 
     public final int hashCode() {
-        return Objects.hash(Long.valueOf(this.mLastUpdatedTime), Integer.valueOf(Arrays.hashCode(this.mEventBitmaps)));
+        return Objects.hash(
+                Long.valueOf(this.mLastUpdatedTime),
+                Integer.valueOf(Arrays.hashCode(this.mEventBitmaps)));
     }
 
     public final boolean isEmpty() {

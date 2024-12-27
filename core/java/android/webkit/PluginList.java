@@ -1,6 +1,7 @@
 package android.webkit;
 
 import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +11,7 @@ public class PluginList {
     private ArrayList<Plugin> mPlugins = new ArrayList<>();
 
     @Deprecated
-    public PluginList() {
-    }
+    public PluginList() {}
 
     @Deprecated
     public synchronized List getList() {

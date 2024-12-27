@@ -4,6 +4,7 @@ import android.net.ipsec.ike.ChildSaProposal;
 import android.util.ArrayMap;
 import android.util.Pair;
 import android.util.Slog;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -49,7 +50,8 @@ public abstract class MtuUtils {
         int i5 = 0;
         while (it.hasNext()) {
             ChildSaProposal childSaProposal = (ChildSaProposal) it.next();
-            Iterator<Pair<Integer, Integer>> it2 = childSaProposal.getEncryptionAlgorithms().iterator();
+            Iterator<Pair<Integer, Integer>> it2 =
+                    childSaProposal.getEncryptionAlgorithms().iterator();
             while (it2.hasNext()) {
                 Integer num = (Integer) it2.next().first;
                 int intValue = num.intValue();

@@ -8,19 +8,22 @@ import android.text.ParcelableSpan;
 
 /* loaded from: classes4.dex */
 public class AccessibilityReplacementSpan extends ReplacementSpan implements ParcelableSpan {
-    public static final Parcelable.Creator<AccessibilityReplacementSpan> CREATOR = new Parcelable.Creator<AccessibilityReplacementSpan>() { // from class: android.text.style.AccessibilityReplacementSpan.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessibilityReplacementSpan createFromParcel(Parcel parcel) {
-            return new AccessibilityReplacementSpan(parcel);
-        }
+    public static final Parcelable.Creator<AccessibilityReplacementSpan> CREATOR =
+            new Parcelable.Creator<
+                    AccessibilityReplacementSpan>() { // from class:
+                                                      // android.text.style.AccessibilityReplacementSpan.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessibilityReplacementSpan createFromParcel(Parcel parcel) {
+                    return new AccessibilityReplacementSpan(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessibilityReplacementSpan[] newArray(int size) {
-            return new AccessibilityReplacementSpan[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessibilityReplacementSpan[] newArray(int size) {
+                    return new AccessibilityReplacementSpan[size];
+                }
+            };
 
     public AccessibilityReplacementSpan(CharSequence contentDescription) {
         setContentDescription(contentDescription);
@@ -57,11 +60,20 @@ public class AccessibilityReplacementSpan extends ReplacementSpan implements Par
     }
 
     @Override // android.text.style.ReplacementSpan
-    public int getSize(Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fm) {
+    public int getSize(
+            Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fm) {
         return 0;
     }
 
     @Override // android.text.style.ReplacementSpan
-    public void draw(Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, Paint paint) {
-    }
+    public void draw(
+            Canvas canvas,
+            CharSequence text,
+            int start,
+            int end,
+            float x,
+            int top,
+            int y,
+            int bottom,
+            Paint paint) {}
 }

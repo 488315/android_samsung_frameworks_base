@@ -10,8 +10,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.TtmlUtils;
 import android.provider.Telephony;
-import android.text.Html;
-import android.text.Layout;
 import android.text.style.AlignmentSpan;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.BulletSpan;
@@ -27,15 +25,10 @@ import android.text.style.SuperscriptSpan;
 import android.text.style.TypefaceSpan;
 import android.text.style.URLSpan;
 import android.text.style.UnderlineSpan;
+
 import com.android.internal.R;
 import com.android.internal.util.XmlUtils;
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 import org.ccil.cowan.tagsoup.Parser;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
@@ -43,6 +36,14 @@ import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /* compiled from: Html.java */
 /* loaded from: classes4.dex */
@@ -86,19 +87,26 @@ class HtmlToSpannedConverter implements ContentHandler {
 
     private static Pattern getBackgroundColorPattern() {
         if (sBackgroundColorPattern == null) {
-            sBackgroundColorPattern = Pattern.compile("(?:\\s+|\\A)background(?:-color)?\\s*:\\s*(\\S*)\\b");
+            sBackgroundColorPattern =
+                    Pattern.compile("(?:\\s+|\\A)background(?:-color)?\\s*:\\s*(\\S*)\\b");
         }
         return sBackgroundColorPattern;
     }
 
     private static Pattern getTextDecorationPattern() {
         if (sTextDecorationPattern == null) {
-            sTextDecorationPattern = Pattern.compile("(?:\\s+|\\A)text-decoration\\s*:\\s*(\\S*)\\b");
+            sTextDecorationPattern =
+                    Pattern.compile("(?:\\s+|\\A)text-decoration\\s*:\\s*(\\S*)\\b");
         }
         return sTextDecorationPattern;
     }
 
-    public HtmlToSpannedConverter(String source, Html.ImageGetter imageGetter, Html.TagHandler tagHandler, Parser parser, int flags) {
+    public HtmlToSpannedConverter(
+            String source,
+            Html.ImageGetter imageGetter,
+            Html.TagHandler tagHandler,
+            Parser parser,
+            int flags) {
         this.mSource = source;
         this.mImageGetter = imageGetter;
         this.mTagHandler = tagHandler;
@@ -110,11 +118,15 @@ class HtmlToSpannedConverter implements ContentHandler {
         this.mReader.setContentHandler(this);
         try {
             this.mReader.parse(new InputSource(new StringReader(this.mSource)));
-            Object[] obj = this.mSpannableStringBuilder.getSpans(0, this.mSpannableStringBuilder.length(), ParagraphStyle.class);
+            Object[] obj =
+                    this.mSpannableStringBuilder.getSpans(
+                            0, this.mSpannableStringBuilder.length(), ParagraphStyle.class);
             for (int i = 0; i < obj.length; i++) {
                 int start = this.mSpannableStringBuilder.getSpanStart(obj[i]);
                 int end = this.mSpannableStringBuilder.getSpanEnd(obj[i]);
-                if (end - 2 >= 0 && this.mSpannableStringBuilder.charAt(end - 1) == '\n' && this.mSpannableStringBuilder.charAt(end - 2) == '\n') {
+                if (end - 2 >= 0
+                        && this.mSpannableStringBuilder.charAt(end - 1) == '\n'
+                        && this.mSpannableStringBuilder.charAt(end - 2) == '\n') {
                     end--;
                 }
                 if (end == start) {
@@ -240,7 +252,10 @@ class HtmlToSpannedConverter implements ContentHandler {
                 start(this.mSpannableStringBuilder, new Sub());
                 return;
             }
-            if (str.length() == 2 && Character.toLowerCase(str.charAt(0)) == 'h' && str.charAt(1) >= '1' && str.charAt(1) <= '6') {
+            if (str.length() == 2
+                    && Character.toLowerCase(str.charAt(0)) == 'h'
+                    && str.charAt(1) >= '1'
+                    && str.charAt(1) <= '6') {
                 startHeading(this.mSpannableStringBuilder, attributes, str.charAt(1) - '1');
             } else if (str.equalsIgnoreCase("img")) {
                 startImg(this.mSpannableStringBuilder, attributes, this.mImageGetter);
@@ -278,13 +293,15 @@ class HtmlToSpannedConverter implements ContentHandler {
         }
         if (tag.equalsIgnoreCase("strong")) {
             Application application = ActivityThread.currentApplication();
-            int fontWeightAdjustment = application.getResources().getConfiguration().fontWeightAdjustment;
+            int fontWeightAdjustment =
+                    application.getResources().getConfiguration().fontWeightAdjustment;
             end(this.mSpannableStringBuilder, Bold.class, new StyleSpan(1, fontWeightAdjustment));
             return;
         }
         if (tag.equalsIgnoreCase(XmlTags.TAG_BLOB)) {
             Application application2 = ActivityThread.currentApplication();
-            int fontWeightAdjustment2 = application2.getResources().getConfiguration().fontWeightAdjustment;
+            int fontWeightAdjustment2 =
+                    application2.getResources().getConfiguration().fontWeightAdjustment;
             end(this.mSpannableStringBuilder, Bold.class, new StyleSpan(1, fontWeightAdjustment2));
             return;
         }
@@ -352,7 +369,10 @@ class HtmlToSpannedConverter implements ContentHandler {
             end(this.mSpannableStringBuilder, Sub.class, new SubscriptSpan());
             return;
         }
-        if (tag.length() == 2 && Character.toLowerCase(tag.charAt(0)) == 'h' && tag.charAt(1) >= '1' && tag.charAt(1) <= '6') {
+        if (tag.length() == 2
+                && Character.toLowerCase(tag.charAt(0)) == 'h'
+                && tag.charAt(1) >= '1'
+                && tag.charAt(1) <= '6') {
             endHeading(this.mSpannableStringBuilder);
         } else if (this.mTagHandler != null) {
             this.mTagHandler.handleTag(false, tag, this.mSpannableStringBuilder, this.mReader);
@@ -473,8 +493,13 @@ class HtmlToSpannedConverter implements ContentHandler {
         Heading h = (Heading) getLast(text, Heading.class);
         if (h != null) {
             Application application = ActivityThread.currentApplication();
-            int fontWeightAdjustment = application.getResources().getConfiguration().fontWeightAdjustment;
-            setSpanFromMark(text, h, new RelativeSizeSpan(HEADING_SIZES[h.mLevel]), new StyleSpan(1, fontWeightAdjustment));
+            int fontWeightAdjustment =
+                    application.getResources().getConfiguration().fontWeightAdjustment;
+            setSpanFromMark(
+                    text,
+                    h,
+                    new RelativeSizeSpan(HEADING_SIZES[h.mLevel]),
+                    new StyleSpan(1, fontWeightAdjustment));
         }
         endBlockElement(text);
     }
@@ -601,7 +626,8 @@ class HtmlToSpannedConverter implements ContentHandler {
 
     private int getHtmlColor(String color) {
         Integer i;
-        if ((this.mFlags & 256) == 256 && (i = sColorMap.get(color.toLowerCase(Locale.US))) != null) {
+        if ((this.mFlags & 256) == 256
+                && (i = sColorMap.get(color.toLowerCase(Locale.US))) != null) {
             return i.intValue();
         }
         if (Character.isLetter(color.charAt(0))) {
@@ -619,27 +645,23 @@ class HtmlToSpannedConverter implements ContentHandler {
     }
 
     @Override // org.xml.sax.ContentHandler
-    public void setDocumentLocator(Locator locator) {
-    }
+    public void setDocumentLocator(Locator locator) {}
 
     @Override // org.xml.sax.ContentHandler
-    public void startDocument() throws SAXException {
-    }
+    public void startDocument() throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void endDocument() throws SAXException {
-    }
+    public void endDocument() throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void startPrefixMapping(String prefix, String uri) throws SAXException {
-    }
+    public void startPrefixMapping(String prefix, String uri) throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void endPrefixMapping(String prefix) throws SAXException {
-    }
+    public void endPrefixMapping(String prefix) throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String qName, Attributes attributes)
+            throws SAXException {
         handleStartTag(localName, attributes);
     }
 
@@ -677,81 +699,67 @@ class HtmlToSpannedConverter implements ContentHandler {
     }
 
     @Override // org.xml.sax.ContentHandler
-    public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
-    }
+    public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void processingInstruction(String target, String data) throws SAXException {
-    }
+    public void processingInstruction(String target, String data) throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void skippedEntity(String name) throws SAXException {
-    }
+    public void skippedEntity(String name) throws SAXException {}
 
     /* compiled from: Html.java */
     private static class Bold {
-        private Bold() {
-        }
+        private Bold() {}
     }
 
     /* compiled from: Html.java */
     private static class Italic {
-        private Italic() {
-        }
+        private Italic() {}
     }
 
     /* compiled from: Html.java */
     private static class Underline {
-        private Underline() {
-        }
+        private Underline() {}
     }
 
     /* compiled from: Html.java */
     private static class Strikethrough {
-        private Strikethrough() {
-        }
+        private Strikethrough() {}
     }
 
     /* compiled from: Html.java */
     private static class Big {
-        private Big() {
-        }
+        private Big() {}
     }
 
     /* compiled from: Html.java */
     private static class Small {
-        private Small() {
-        }
+        private Small() {}
     }
 
     /* compiled from: Html.java */
     private static class Monospace {
-        private Monospace() {
-        }
+        private Monospace() {}
     }
 
     /* compiled from: Html.java */
     private static class Blockquote {
-        private Blockquote() {
-        }
+        private Blockquote() {}
     }
 
     /* compiled from: Html.java */
     private static class Super {
-        private Super() {
-        }
+        private Super() {}
     }
 
     /* compiled from: Html.java */
     private static class Sub {
-        private Sub() {
-        }
+        private Sub() {}
     }
 
     /* compiled from: Html.java */
     private static class Bullet {
-        private Bullet() {
-        }
+        private Bullet() {}
     }
 
     /* compiled from: Html.java */

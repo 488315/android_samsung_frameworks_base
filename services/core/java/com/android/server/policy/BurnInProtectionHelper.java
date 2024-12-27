@@ -13,13 +13,18 @@ import android.hardware.display.DisplayManagerInternal;
 import android.os.SystemClock;
 import android.view.Display;
 import android.view.animation.LinearInterpolator;
+
 import com.android.server.LocalServices;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.concurrent.TimeUnit;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class BurnInProtectionHelper implements DisplayManager.DisplayListener, Animator.AnimatorListener, ValueAnimator.AnimatorUpdateListener {
+public final class BurnInProtectionHelper
+        implements DisplayManager.DisplayListener,
+                Animator.AnimatorListener,
+                ValueAnimator.AnimatorUpdateListener {
     public static final long BURNIN_PROTECTION_FIRST_WAKEUP_INTERVAL_MS;
     public static final long BURNIN_PROTECTION_MINIMAL_INTERVAL_MS;
     public static final long BURNIN_PROTECTION_SUBSEQUENT_WAKEUP_INTERVAL_MS;
@@ -51,12 +56,14 @@ public final class BurnInProtectionHelper implements DisplayManager.DisplayListe
     }
 
     public BurnInProtectionHelper(Context context, int i, int i2, int i3, int i4, int i5) {
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.policy.BurnInProtectionHelper.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                BurnInProtectionHelper.this.updateBurnInProtection();
-            }
-        };
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.policy.BurnInProtectionHelper.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        BurnInProtectionHelper.this.updateBurnInProtection();
+                    }
+                };
         this.mMinHorizontalBurnInOffset = i;
         this.mMaxHorizontalBurnInOffset = i2;
         this.mMinVerticalBurnInOffset = i3;
@@ -66,9 +73,12 @@ public final class BurnInProtectionHelper implements DisplayManager.DisplayListe
         } else {
             this.mBurnInRadiusMaxSquared = -1;
         }
-        this.mDisplayManagerInternal = (DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class);
+        this.mDisplayManagerInternal =
+                (DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class);
         this.mAlarmManager = (AlarmManager) context.getSystemService("alarm");
-        context.registerReceiver(broadcastReceiver, new IntentFilter("android.internal.policy.action.BURN_IN_PROTECTION"));
+        context.registerReceiver(
+                broadcastReceiver,
+                new IntentFilter("android.internal.policy.action.BURN_IN_PROTECTION"));
         Intent intent = new Intent("android.internal.policy.action.BURN_IN_PROTECTION");
         intent.setPackage(context.getPackageName());
         intent.setFlags(1073741824);
@@ -76,7 +86,8 @@ public final class BurnInProtectionHelper implements DisplayManager.DisplayListe
         DisplayManager displayManager = (DisplayManager) context.getSystemService("display");
         this.mDisplay = displayManager.getDisplay(0);
         displayManager.registerDisplayListener(this, null);
-        ValueAnimator ofFloat = ValueAnimator.ofFloat(1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE);
+        ValueAnimator ofFloat =
+                ValueAnimator.ofFloat(1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE);
         this.mCenteringAnimator = ofFloat;
         ofFloat.setDuration(100L);
         ofFloat.setInterpolator(new LinearInterpolator());
@@ -85,8 +96,7 @@ public final class BurnInProtectionHelper implements DisplayManager.DisplayListe
     }
 
     @Override // android.animation.Animator.AnimatorListener
-    public final void onAnimationCancel(Animator animator) {
-    }
+    public final void onAnimationCancel(Animator animator) {}
 
     @Override // android.animation.Animator.AnimatorListener
     public final void onAnimationEnd(Animator animator) {
@@ -99,12 +109,10 @@ public final class BurnInProtectionHelper implements DisplayManager.DisplayListe
     }
 
     @Override // android.animation.Animator.AnimatorListener
-    public final void onAnimationRepeat(Animator animator) {
-    }
+    public final void onAnimationRepeat(Animator animator) {}
 
     @Override // android.animation.Animator.AnimatorListener
-    public final void onAnimationStart(Animator animator) {
-    }
+    public final void onAnimationStart(Animator animator) {}
 
     @Override // android.animation.ValueAnimator.AnimatorUpdateListener
     public final void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -112,17 +120,21 @@ public final class BurnInProtectionHelper implements DisplayManager.DisplayListe
             return;
         }
         float floatValue = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-        this.mDisplayManagerInternal.setDisplayOffsets(this.mDisplay.getDisplayId(), (int) (this.mAppliedBurnInXOffset * floatValue), (int) (this.mAppliedBurnInYOffset * floatValue));
+        this.mDisplayManagerInternal.setDisplayOffsets(
+                this.mDisplay.getDisplayId(),
+                (int) (this.mAppliedBurnInXOffset * floatValue),
+                (int) (this.mAppliedBurnInYOffset * floatValue));
     }
 
     @Override // android.hardware.display.DisplayManager.DisplayListener
-    public final void onDisplayAdded(int i) {
-    }
+    public final void onDisplayAdded(int i) {}
 
     @Override // android.hardware.display.DisplayManager.DisplayListener
     public final void onDisplayChanged(int i) {
         if (i == this.mDisplay.getDisplayId()) {
-            if (this.mDisplay.getState() != 3 && this.mDisplay.getState() != 4 && this.mDisplay.getState() != 6) {
+            if (this.mDisplay.getState() != 3
+                    && this.mDisplay.getState() != 4
+                    && this.mDisplay.getState() != 6) {
                 if (this.mBurnInProtectionActive) {
                     this.mBurnInProtectionActive = false;
                     updateBurnInProtection();
@@ -141,8 +153,7 @@ public final class BurnInProtectionHelper implements DisplayManager.DisplayListe
     }
 
     @Override // android.hardware.display.DisplayManager.DisplayListener
-    public final void onDisplayRemoved(int i) {
-    }
+    public final void onDisplayRemoved(int i) {}
 
     public final void updateBurnInProtection() {
         int i;
@@ -154,7 +165,10 @@ public final class BurnInProtectionHelper implements DisplayManager.DisplayListe
             return;
         }
         boolean z = this.mFirstUpdate;
-        long j = z ? BURNIN_PROTECTION_FIRST_WAKEUP_INTERVAL_MS : BURNIN_PROTECTION_SUBSEQUENT_WAKEUP_INTERVAL_MS;
+        long j =
+                z
+                        ? BURNIN_PROTECTION_FIRST_WAKEUP_INTERVAL_MS
+                        : BURNIN_PROTECTION_SUBSEQUENT_WAKEUP_INTERVAL_MS;
         if (z) {
             this.mFirstUpdate = false;
         } else {
@@ -184,11 +198,15 @@ public final class BurnInProtectionHelper implements DisplayManager.DisplayListe
             } while ((i3 * i3) + (i2 * i2) > i);
             this.mAppliedBurnInXOffset = this.mLastBurnInXOffset;
             this.mAppliedBurnInYOffset = this.mLastBurnInYOffset;
-            this.mDisplayManagerInternal.setDisplayOffsets(this.mDisplay.getDisplayId(), this.mLastBurnInXOffset, this.mLastBurnInYOffset);
+            this.mDisplayManagerInternal.setDisplayOffsets(
+                    this.mDisplay.getDisplayId(), this.mLastBurnInXOffset, this.mLastBurnInYOffset);
         }
         long currentTimeMillis = System.currentTimeMillis();
         long elapsedRealtime = SystemClock.elapsedRealtime();
         long j2 = BURNIN_PROTECTION_MINIMAL_INTERVAL_MS + currentTimeMillis;
-        this.mAlarmManager.setExact(3, (((j2 - (j2 % j)) + j) - currentTimeMillis) + elapsedRealtime, this.mBurnInProtectionIntent);
+        this.mAlarmManager.setExact(
+                3,
+                (((j2 - (j2 % j)) + j) - currentTimeMillis) + elapsedRealtime,
+                this.mBurnInProtectionIntent);
     }
 }

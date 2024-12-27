@@ -2,24 +2,28 @@ package com.android.internal.compat;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.HashSet;
 import java.util.Set;
 
 /* loaded from: classes5.dex */
 public final class CompatibilityOverridesToRemoveConfig implements Parcelable {
-    public static final Parcelable.Creator<CompatibilityOverridesToRemoveConfig> CREATOR = new Parcelable.Creator<CompatibilityOverridesToRemoveConfig>() { // from class: com.android.internal.compat.CompatibilityOverridesToRemoveConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatibilityOverridesToRemoveConfig createFromParcel(Parcel in) {
-            return new CompatibilityOverridesToRemoveConfig(in);
-        }
+    public static final Parcelable.Creator<CompatibilityOverridesToRemoveConfig> CREATOR =
+            new Parcelable.Creator<
+                    CompatibilityOverridesToRemoveConfig>() { // from class:
+                                                              // com.android.internal.compat.CompatibilityOverridesToRemoveConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatibilityOverridesToRemoveConfig createFromParcel(Parcel in) {
+                    return new CompatibilityOverridesToRemoveConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatibilityOverridesToRemoveConfig[] newArray(int size) {
-            return new CompatibilityOverridesToRemoveConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatibilityOverridesToRemoveConfig[] newArray(int size) {
+                    return new CompatibilityOverridesToRemoveConfig[size];
+                }
+            };
     public final Set<Long> changeIds;
 
     public CompatibilityOverridesToRemoveConfig(Set<Long> changeIds) {

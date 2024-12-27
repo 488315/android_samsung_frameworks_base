@@ -11,7 +11,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.service.notification.IConditionProvider;
 import android.util.Log;
 
 @Deprecated
@@ -22,15 +21,23 @@ public abstract class ConditionProviderService extends Service {
     public static final String EXTRA_RULE_ID = "android.service.notification.extra.RULE_ID";
 
     @Deprecated
-    public static final String META_DATA_CONFIGURATION_ACTIVITY = "android.service.zen.automatic.configurationActivity";
+    public static final String META_DATA_CONFIGURATION_ACTIVITY =
+            "android.service.zen.automatic.configurationActivity";
 
     @Deprecated
-    public static final String META_DATA_RULE_INSTANCE_LIMIT = "android.service.zen.automatic.ruleInstanceLimit";
+    public static final String META_DATA_RULE_INSTANCE_LIMIT =
+            "android.service.zen.automatic.ruleInstanceLimit";
 
     @Deprecated
     public static final String META_DATA_RULE_TYPE = "android.service.zen.automatic.ruleType";
-    public static final String SERVICE_INTERFACE = "android.service.notification.ConditionProviderService";
-    private final String TAG = ConditionProviderService.class.getSimpleName() + NavigationBarInflaterView.SIZE_MOD_START + getClass().getSimpleName() + NavigationBarInflaterView.SIZE_MOD_END;
+
+    public static final String SERVICE_INTERFACE =
+            "android.service.notification.ConditionProviderService";
+    private final String TAG =
+            ConditionProviderService.class.getSimpleName()
+                    + NavigationBarInflaterView.SIZE_MOD_START
+                    + getClass().getSimpleName()
+                    + NavigationBarInflaterView.SIZE_MOD_END;
     private final H mHandler = new H();
     boolean mIsConnected;
     private INotificationManager mNoMan;
@@ -42,18 +49,20 @@ public abstract class ConditionProviderService extends Service {
 
     public abstract void onUnsubscribe(Uri uri);
 
-    public void onRequestConditions(int relevance) {
-    }
+    public void onRequestConditions(int relevance) {}
 
     private final INotificationManager getNotificationInterface() {
         if (this.mNoMan == null) {
-            this.mNoMan = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
+            this.mNoMan =
+                    INotificationManager.Stub.asInterface(
+                            ServiceManager.getService("notification"));
         }
         return this.mNoMan;
     }
 
     public static final void requestRebind(ComponentName componentName) {
-        INotificationManager noMan = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
+        INotificationManager noMan =
+                INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
         try {
             noMan.requestBindProvider(componentName);
         } catch (RemoteException ex) {
@@ -85,7 +94,8 @@ public abstract class ConditionProviderService extends Service {
             return;
         }
         try {
-            getNotificationInterface().notifyConditions(getPackageName(), this.mProvider, conditions);
+            getNotificationInterface()
+                    .notifyConditions(getPackageName(), this.mProvider, conditions);
         } catch (RemoteException ex) {
             Log.v(this.TAG, "Unable to contact notification manager", ex);
         }
@@ -107,8 +117,7 @@ public abstract class ConditionProviderService extends Service {
     }
 
     private final class Provider extends IConditionProvider.Stub {
-        private Provider() {
-        }
+        private Provider() {}
 
         @Override // android.service.notification.IConditionProvider
         public void onConnected() {
@@ -132,8 +141,7 @@ public abstract class ConditionProviderService extends Service {
         private static final int ON_SUBSCRIBE = 3;
         private static final int ON_UNSUBSCRIBE = 4;
 
-        private H() {
-        }
+        private H() {}
 
         @Override // android.os.Handler
         public void handleMessage(Message msg) {

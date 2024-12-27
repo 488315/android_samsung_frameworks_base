@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.graphics.RenderNode;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -45,12 +46,13 @@ public class ViewPropertyAnimator {
     private ValueAnimator.AnimatorUpdateListener mUpdateListener = null;
     private AnimatorEventListener mAnimatorEventListener = new AnimatorEventListener();
     ArrayList<NameValuesHolder> mPendingAnimations = new ArrayList<>();
-    private Runnable mAnimationStarter = new Runnable() { // from class: android.view.ViewPropertyAnimator.1
-        @Override // java.lang.Runnable
-        public void run() {
-            ViewPropertyAnimator.this.startAnimation();
-        }
-    };
+    private Runnable mAnimationStarter =
+            new Runnable() { // from class: android.view.ViewPropertyAnimator.1
+                @Override // java.lang.Runnable
+                public void run() {
+                    ViewPropertyAnimator.this.startAnimation();
+                }
+            };
     private HashMap<Animator, PropertyBundle> mAnimatorMap = new HashMap<>();
 
     private static class PropertyBundle {
@@ -98,7 +100,8 @@ public class ViewPropertyAnimator {
 
     public ViewPropertyAnimator setDuration(long duration) {
         if (duration < 0) {
-            throw new IllegalArgumentException("Animators cannot have negative duration: " + duration);
+            throw new IllegalArgumentException(
+                    "Animators cannot have negative duration: " + duration);
         }
         this.mDurationSet = true;
         this.mDuration = duration;
@@ -124,7 +127,8 @@ public class ViewPropertyAnimator {
 
     public ViewPropertyAnimator setStartDelay(long startDelay) {
         if (startDelay < 0) {
-            throw new IllegalArgumentException("Animators cannot have negative start delay: " + startDelay);
+            throw new IllegalArgumentException(
+                    "Animators cannot have negative start delay: " + startDelay);
         }
         this.mStartDelaySet = true;
         this.mStartDelay = startDelay;
@@ -172,7 +176,8 @@ public class ViewPropertyAnimator {
 
     public void cancel() {
         if (this.mAnimatorMap.size() > 0) {
-            HashMap<Animator, PropertyBundle> mAnimatorMapCopy = (HashMap) this.mAnimatorMap.clone();
+            HashMap<Animator, PropertyBundle> mAnimatorMapCopy =
+                    (HashMap) this.mAnimatorMap.clone();
             Set<Animator> animatorSet = mAnimatorMapCopy.keySet();
             for (Animator runningAnim : animatorSet) {
                 runningAnim.cancel();
@@ -307,22 +312,24 @@ public class ViewPropertyAnimator {
     }
 
     public ViewPropertyAnimator withLayer() {
-        this.mPendingSetupAction = new Runnable() { // from class: android.view.ViewPropertyAnimator.2
-            @Override // java.lang.Runnable
-            public void run() {
-                ViewPropertyAnimator.this.mView.setLayerType(2, null);
-                if (ViewPropertyAnimator.this.mView.isAttachedToWindow()) {
-                    ViewPropertyAnimator.this.mView.buildLayer();
-                }
-            }
-        };
+        this.mPendingSetupAction =
+                new Runnable() { // from class: android.view.ViewPropertyAnimator.2
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        ViewPropertyAnimator.this.mView.setLayerType(2, null);
+                        if (ViewPropertyAnimator.this.mView.isAttachedToWindow()) {
+                            ViewPropertyAnimator.this.mView.buildLayer();
+                        }
+                    }
+                };
         final int currentLayerType = this.mView.getLayerType();
-        this.mPendingCleanupAction = new Runnable() { // from class: android.view.ViewPropertyAnimator.3
-            @Override // java.lang.Runnable
-            public void run() {
-                ViewPropertyAnimator.this.mView.setLayerType(currentLayerType, null);
-            }
-        };
+        this.mPendingCleanupAction =
+                new Runnable() { // from class: android.view.ViewPropertyAnimator.3
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        ViewPropertyAnimator.this.mView.setLayerType(currentLayerType, null);
+                    }
+                };
         if (this.mAnimatorSetupMap == null) {
             this.mAnimatorSetupMap = new HashMap<>();
         }
@@ -349,7 +356,12 @@ public class ViewPropertyAnimator {
     }
 
     boolean hasActions() {
-        return (this.mPendingSetupAction == null && this.mPendingCleanupAction == null && this.mPendingOnStartAction == null && this.mPendingOnEndAction == null) ? false : true;
+        return (this.mPendingSetupAction == null
+                        && this.mPendingCleanupAction == null
+                        && this.mPendingOnStartAction == null
+                        && this.mPendingOnEndAction == null)
+                ? false
+                : true;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -508,9 +520,9 @@ public class ViewPropertyAnimator {
         }
     }
 
-    private class AnimatorEventListener implements Animator.AnimatorListener, ValueAnimator.AnimatorUpdateListener {
-        private AnimatorEventListener() {
-        }
+    private class AnimatorEventListener
+            implements Animator.AnimatorListener, ValueAnimator.AnimatorUpdateListener {
+        private AnimatorEventListener() {}
 
         @Override // android.animation.Animator.AnimatorListener
         public void onAnimationStart(Animator animation) {
@@ -522,7 +534,8 @@ public class ViewPropertyAnimator {
                 ViewPropertyAnimator.this.mAnimatorSetupMap.remove(animation);
             }
             if (ViewPropertyAnimator.this.mAnimatorOnStartMap != null) {
-                Runnable r2 = (Runnable) ViewPropertyAnimator.this.mAnimatorOnStartMap.get(animation);
+                Runnable r2 =
+                        (Runnable) ViewPropertyAnimator.this.mAnimatorOnStartMap.get(animation);
                 if (r2 != null) {
                     r2.run();
                 }
@@ -554,7 +567,8 @@ public class ViewPropertyAnimator {
         public void onAnimationEnd(Animator animation) {
             ViewPropertyAnimator.this.mView.setHasTransientState(false);
             if (ViewPropertyAnimator.this.mAnimatorCleanupMap != null) {
-                Runnable r = (Runnable) ViewPropertyAnimator.this.mAnimatorCleanupMap.get(animation);
+                Runnable r =
+                        (Runnable) ViewPropertyAnimator.this.mAnimatorCleanupMap.get(animation);
                 if (r != null) {
                     r.run();
                 }
@@ -575,7 +589,8 @@ public class ViewPropertyAnimator {
 
         @Override // android.animation.ValueAnimator.AnimatorUpdateListener
         public void onAnimationUpdate(ValueAnimator animation) {
-            PropertyBundle propertyBundle = (PropertyBundle) ViewPropertyAnimator.this.mAnimatorMap.get(animation);
+            PropertyBundle propertyBundle =
+                    (PropertyBundle) ViewPropertyAnimator.this.mAnimatorMap.get(animation);
             if (propertyBundle == null) {
                 return;
             }
@@ -596,7 +611,8 @@ public class ViewPropertyAnimator {
                     NameValuesHolder values = valueList.get(i);
                     float value = values.mFromValue + (values.mDeltaValue * fraction);
                     if (values.mNameConstant == 2048) {
-                        alphaHandled = ViewPropertyAnimator.this.mView.setAlphaNoInvalidation(value);
+                        alphaHandled =
+                                ViewPropertyAnimator.this.mView.setAlphaNoInvalidation(value);
                     } else {
                         ViewPropertyAnimator.this.setValue(values.mNameConstant, value);
                     }

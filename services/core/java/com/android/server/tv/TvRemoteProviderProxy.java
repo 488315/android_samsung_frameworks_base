@@ -41,7 +41,9 @@ public final class TvRemoteProviderProxy implements ServiceConnection {
         Intent intent = new Intent("com.android.media.tv.remoteprovider.TvRemoteProvider");
         intent.setComponent(this.mComponentName);
         try {
-            boolean bindServiceAsUser = this.mContext.bindServiceAsUser(intent, this, 67108865, new UserHandle(this.mUserId));
+            boolean bindServiceAsUser =
+                    this.mContext.bindServiceAsUser(
+                            intent, this, 67108865, new UserHandle(this.mUserId));
             this.mBound = bindServiceAsUser;
             if (!z || bindServiceAsUser) {
                 return;
@@ -66,9 +68,12 @@ public final class TvRemoteProviderProxy implements ServiceConnection {
             return;
         }
         try {
-            asInterface.setRemoteServiceInputSink(new TvRemoteServiceInput(this.mLock, asInterface));
+            asInterface.setRemoteServiceInputSink(
+                    new TvRemoteServiceInput(this.mLock, asInterface));
         } catch (RemoteException unused) {
-            Slog.e("TvRemoteProviderProxy", this + ": Failed remote call to setRemoteServiceInputSink");
+            Slog.e(
+                    "TvRemoteProviderProxy",
+                    this + ": Failed remote call to setRemoteServiceInputSink");
         }
     }
 

@@ -10,6 +10,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -24,10 +25,14 @@ import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public class KeyphraseEnrollmentInfo {
-    public static final String ACTION_MANAGE_VOICE_KEYPHRASES = "com.android.intent.action.MANAGE_VOICE_KEYPHRASES";
-    public static final String EXTRA_VOICE_KEYPHRASE_ACTION = "com.android.intent.extra.VOICE_KEYPHRASE_ACTION";
-    public static final String EXTRA_VOICE_KEYPHRASE_HINT_TEXT = "com.android.intent.extra.VOICE_KEYPHRASE_HINT_TEXT";
-    public static final String EXTRA_VOICE_KEYPHRASE_LOCALE = "com.android.intent.extra.VOICE_KEYPHRASE_LOCALE";
+    public static final String ACTION_MANAGE_VOICE_KEYPHRASES =
+            "com.android.intent.action.MANAGE_VOICE_KEYPHRASES";
+    public static final String EXTRA_VOICE_KEYPHRASE_ACTION =
+            "com.android.intent.extra.VOICE_KEYPHRASE_ACTION";
+    public static final String EXTRA_VOICE_KEYPHRASE_HINT_TEXT =
+            "com.android.intent.extra.VOICE_KEYPHRASE_HINT_TEXT";
+    public static final String EXTRA_VOICE_KEYPHRASE_LOCALE =
+            "com.android.intent.extra.VOICE_KEYPHRASE_LOCALE";
     public static final int MANAGE_ACTION_ENROLL = 0;
     public static final int MANAGE_ACTION_RE_ENROLL = 1;
     public static final int MANAGE_ACTION_UN_ENROLL = 2;
@@ -38,12 +43,12 @@ public class KeyphraseEnrollmentInfo {
     private String mParseError;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ManageActions {
-    }
+    public @interface ManageActions {}
 
     public KeyphraseEnrollmentInfo(PackageManager pm) {
         Objects.requireNonNull(pm);
-        List<ResolveInfo> ris = pm.queryIntentServices(new Intent(ACTION_MANAGE_VOICE_KEYPHRASES), 65536);
+        List<ResolveInfo> ris =
+                pm.queryIntentServices(new Intent(ACTION_MANAGE_VOICE_KEYPHRASES), 65536);
         if (ris == null || ris.isEmpty()) {
             this.mParseError = "No enrollment applications found";
             this.mKeyphrasePackageMap = Collections.emptyMap();
@@ -60,13 +65,16 @@ public class KeyphraseEnrollmentInfo {
                 } else if (!Manifest.permission.MANAGE_VOICE_KEYPHRASES.equals(ai.permission)) {
                     Slog.w(TAG, ai.packageName + " does not require MANAGE_VOICE_KEYPHRASES");
                 } else {
-                    KeyphraseMetadata metadata = getKeyphraseMetadataFromApplicationInfo(pm, ai, parseErrors);
+                    KeyphraseMetadata metadata =
+                            getKeyphraseMetadataFromApplicationInfo(pm, ai, parseErrors);
                     if (metadata != null) {
                         this.mKeyphrasePackageMap.put(metadata, ai.packageName);
                     }
                 }
             } catch (PackageManager.NameNotFoundException e) {
-                String error = "error parsing voice enrollment meta-data for " + ri.serviceInfo.packageName;
+                String error =
+                        "error parsing voice enrollment meta-data for "
+                                + ri.serviceInfo.packageName;
                 parseErrors.add(error + ": " + e);
                 Slog.w(TAG, error, e);
             }
@@ -76,7 +84,9 @@ public class KeyphraseEnrollmentInfo {
             Slog.w(TAG, "No suitable enrollment application found");
             this.mKeyphrases = null;
         } else {
-            this.mKeyphrases = (KeyphraseMetadata[]) this.mKeyphrasePackageMap.keySet().toArray(new KeyphraseMetadata[0]);
+            this.mKeyphrases =
+                    (KeyphraseMetadata[])
+                            this.mKeyphrasePackageMap.keySet().toArray(new KeyphraseMetadata[0]);
         }
         if (!parseErrors.isEmpty()) {
             this.mParseError = TextUtils.join("\n", parseErrors);
@@ -84,26 +94,29 @@ public class KeyphraseEnrollmentInfo {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:24:0x007e, code lost:
-    
-        if (r1 != null) goto L23;
-     */
+
+       if (r1 != null) goto L23;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0080, code lost:
-    
-        r1.close();
-     */
+
+       r1.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x00bb, code lost:
-    
-        return r3;
-     */
+
+       return r3;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x00b8, code lost:
-    
-        if (0 == 0) goto L30;
-     */
+
+       if (0 == 0) goto L30;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.hardware.soundtrigger.KeyphraseMetadata getKeyphraseMetadataFromApplicationInfo(android.content.pm.PackageManager r12, android.content.pm.ApplicationInfo r13, java.util.List<java.lang.String> r14) {
+    private android.hardware.soundtrigger.KeyphraseMetadata getKeyphraseMetadataFromApplicationInfo(
+            android.content.pm.PackageManager r12,
+            android.content.pm.ApplicationInfo r13,
+            java.util.List<java.lang.String> r14) {
         /*
             r11 = this;
             java.lang.String r0 = "KeyphraseEnrollmentInfo"
@@ -195,10 +208,15 @@ public class KeyphraseEnrollmentInfo {
         Lc1:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.hardware.soundtrigger.KeyphraseEnrollmentInfo.getKeyphraseMetadataFromApplicationInfo(android.content.pm.PackageManager, android.content.pm.ApplicationInfo, java.util.List):android.hardware.soundtrigger.KeyphraseMetadata");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.hardware.soundtrigger.KeyphraseEnrollmentInfo.getKeyphraseMetadataFromApplicationInfo(android.content.pm.PackageManager,"
+                    + " android.content.pm.ApplicationInfo,"
+                    + " java.util.List):android.hardware.soundtrigger.KeyphraseMetadata");
     }
 
-    private KeyphraseMetadata getKeyphraseFromTypedArray(TypedArray array, String packageName, List<String> parseErrors) {
+    private KeyphraseMetadata getKeyphraseFromTypedArray(
+            TypedArray array, String packageName, List<String> parseErrors) {
         int searchKeyphraseId = array.getInt(0, -1);
         if (searchKeyphraseId <= 0) {
             String error = "No valid searchKeyphraseId specified in meta-data for " + packageName;
@@ -215,7 +233,9 @@ public class KeyphraseEnrollmentInfo {
         }
         String searchKeyphraseSupportedLocales = array.getString(2);
         if (searchKeyphraseSupportedLocales == null) {
-            String error3 = "No valid searchKeyphraseSupportedLocales specified in meta-data for " + packageName;
+            String error3 =
+                    "No valid searchKeyphraseSupportedLocales specified in meta-data for "
+                            + packageName;
             parseErrors.add(error3);
             Slog.w(TAG, error3);
             return null;
@@ -228,7 +248,9 @@ public class KeyphraseEnrollmentInfo {
                     locales.add(Locale.forLanguageTag(s));
                 }
             } catch (Exception e) {
-                String error4 = "Error reading searchKeyphraseSupportedLocales from meta-data for " + packageName;
+                String error4 =
+                        "Error reading searchKeyphraseSupportedLocales from meta-data for "
+                                + packageName;
                 parseErrors.add(error4);
                 Slog.w(TAG, error4);
                 return null;
@@ -236,7 +258,9 @@ public class KeyphraseEnrollmentInfo {
         }
         int recognitionModes = array.getInt(3, -1);
         if (recognitionModes < 0) {
-            String error5 = "No valid searchKeyphraseRecognitionFlags specified in meta-data for " + packageName;
+            String error5 =
+                    "No valid searchKeyphraseRecognitionFlags specified in meta-data for "
+                            + packageName;
             parseErrors.add(error5);
             Slog.w(TAG, error5);
             return null;
@@ -261,7 +285,11 @@ public class KeyphraseEnrollmentInfo {
         }
         KeyphraseMetadata keyphraseMetadata = getKeyphraseMetadata(keyphrase, locale);
         if (keyphraseMetadata != null) {
-            return new Intent(ACTION_MANAGE_VOICE_KEYPHRASES).setPackage(this.mKeyphrasePackageMap.get(keyphraseMetadata)).putExtra(EXTRA_VOICE_KEYPHRASE_HINT_TEXT, keyphrase).putExtra(EXTRA_VOICE_KEYPHRASE_LOCALE, locale.toLanguageTag()).putExtra(EXTRA_VOICE_KEYPHRASE_ACTION, action);
+            return new Intent(ACTION_MANAGE_VOICE_KEYPHRASES)
+                    .setPackage(this.mKeyphrasePackageMap.get(keyphraseMetadata))
+                    .putExtra(EXTRA_VOICE_KEYPHRASE_HINT_TEXT, keyphrase)
+                    .putExtra(EXTRA_VOICE_KEYPHRASE_LOCALE, locale.toLanguageTag())
+                    .putExtra(EXTRA_VOICE_KEYPHRASE_ACTION, action);
         }
         return null;
     }
@@ -271,16 +299,26 @@ public class KeyphraseEnrollmentInfo {
         Objects.requireNonNull(locale);
         if (this.mKeyphrases != null && this.mKeyphrases.length > 0) {
             for (KeyphraseMetadata keyphraseMetadata : this.mKeyphrases) {
-                if (keyphraseMetadata.supportsPhrase(keyphrase) && keyphraseMetadata.supportsLocale(locale)) {
+                if (keyphraseMetadata.supportsPhrase(keyphrase)
+                        && keyphraseMetadata.supportsLocale(locale)) {
                     return keyphraseMetadata;
                 }
             }
         }
-        Slog.w(TAG, "No enrollment application supports the given keyphrase/locale: '" + keyphrase + "'/" + locale);
+        Slog.w(
+                TAG,
+                "No enrollment application supports the given keyphrase/locale: '"
+                        + keyphrase
+                        + "'/"
+                        + locale);
         return null;
     }
 
     public String toString() {
-        return "KeyphraseEnrollmentInfo [KeyphrasePackageMap=" + this.mKeyphrasePackageMap.toString() + ", ParseError=" + this.mParseError + NavigationBarInflaterView.SIZE_MOD_END;
+        return "KeyphraseEnrollmentInfo [KeyphrasePackageMap="
+                + this.mKeyphrasePackageMap.toString()
+                + ", ParseError="
+                + this.mParseError
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

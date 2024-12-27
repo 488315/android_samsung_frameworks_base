@@ -3,6 +3,7 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
@@ -10,21 +11,23 @@ public class KeepaliveStatus implements Parcelable {
     public static final int CODE_ACTIVE = 0;
     public static final int CODE_INACTIVE = 1;
     public static final int CODE_PENDING = 2;
-    public static final Parcelable.Creator<KeepaliveStatus> CREATOR = new Parcelable.Creator<KeepaliveStatus>() { // from class: android.hardware.radio.data.KeepaliveStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeepaliveStatus createFromParcel(Parcel _aidl_source) {
-            KeepaliveStatus _aidl_out = new KeepaliveStatus();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<KeepaliveStatus> CREATOR =
+            new Parcelable.Creator<KeepaliveStatus>() { // from class:
+                // android.hardware.radio.data.KeepaliveStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeepaliveStatus createFromParcel(Parcel _aidl_source) {
+                    KeepaliveStatus _aidl_out = new KeepaliveStatus();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeepaliveStatus[] newArray(int _aidl_size) {
-            return new KeepaliveStatus[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeepaliveStatus[] newArray(int _aidl_size) {
+                    return new KeepaliveStatus[_aidl_size];
+                }
+            };
     public int sessionHandle = 0;
     public int code = 0;
 

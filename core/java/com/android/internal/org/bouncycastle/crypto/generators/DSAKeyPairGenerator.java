@@ -10,6 +10,7 @@ import com.android.internal.org.bouncycastle.crypto.params.DSAPrivateKeyParamete
 import com.android.internal.org.bouncycastle.crypto.params.DSAPublicKeyParameters;
 import com.android.internal.org.bouncycastle.math.ec.WNafUtil;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -28,7 +29,9 @@ public class DSAKeyPairGenerator implements AsymmetricCipherKeyPairGenerator {
         DSAParameters dsaParams = this.param.getParameters();
         BigInteger x = generatePrivateKey(dsaParams.getQ(), this.param.getRandom());
         BigInteger y = calculatePublicKey(dsaParams.getP(), dsaParams.getG(), x);
-        return new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new DSAPublicKeyParameters(y, dsaParams), (AsymmetricKeyParameter) new DSAPrivateKeyParameters(x, dsaParams));
+        return new AsymmetricCipherKeyPair(
+                (AsymmetricKeyParameter) new DSAPublicKeyParameters(y, dsaParams),
+                (AsymmetricKeyParameter) new DSAPrivateKeyParameters(x, dsaParams));
     }
 
     private static BigInteger generatePrivateKey(BigInteger q, SecureRandom random) {

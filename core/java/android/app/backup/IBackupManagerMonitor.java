@@ -13,8 +13,7 @@ public interface IBackupManagerMonitor extends IInterface {
 
     public static class Default implements IBackupManagerMonitor {
         @Override // android.app.backup.IBackupManagerMonitor
-        public void onEvent(Bundle event) throws RemoteException {
-        }
+        public void onEvent(Bundle event) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +21,7 @@ public interface IBackupManagerMonitor extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBackupManagerMonitor {
+    public abstract static class Stub extends Binder implements IBackupManagerMonitor {
         public static final String DESCRIPTOR = "android.app.backup.IBackupManagerMonitor";
         static final int TRANSACTION_onEvent = 1;
 
@@ -61,7 +60,8 @@ public interface IBackupManagerMonitor extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

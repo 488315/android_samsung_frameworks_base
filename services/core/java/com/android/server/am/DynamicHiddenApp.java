@@ -5,17 +5,19 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
-import com.android.server.am.BGProtectManager;
 import com.android.server.bgslotmanager.BGSlotManager;
 import com.android.server.bgslotmanager.BgAppPropManager;
 import com.android.server.bgslotmanager.CameraKillModeManager;
 import com.android.server.bgslotmanager.CustomEFKManager;
 import com.android.server.bgslotmanager.MemInfoGetter;
+
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.io.PrintWriter;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -62,11 +64,16 @@ public final class DynamicHiddenApp {
     public final CustomEFKManager mCustomEFKManager;
     public final MemInfoGetter mInfo;
     public ProcessList mProcessList;
-    public static float mLMKScale = Float.parseFloat(BgAppPropManager.getSlmkPropertyString("dha_lmk_scale", "-1"));
-    public static String mLMKArray = BgAppPropManager.getSlmkPropertyString("dha_lmk_array", "none");
-    public static boolean PICKED_ADJ_ENABLE = BgAppPropManager.getSlmkPropertyBool("enable_picked_adj", "true");
-    public static final boolean BORA_POLICY_ENABLE = BgAppPropManager.getSlmkPropertyBool("bora_policy_enable", "false");
-    public static boolean sHH_AMSExceptionEnable = BgAppPropManager.getSlmkPropertyBool("hh_ams_exception", "false");
+    public static float mLMKScale =
+            Float.parseFloat(BgAppPropManager.getSlmkPropertyString("dha_lmk_scale", "-1"));
+    public static String mLMKArray =
+            BgAppPropManager.getSlmkPropertyString("dha_lmk_array", "none");
+    public static boolean PICKED_ADJ_ENABLE =
+            BgAppPropManager.getSlmkPropertyBool("enable_picked_adj", "true");
+    public static final boolean BORA_POLICY_ENABLE =
+            BgAppPropManager.getSlmkPropertyBool("bora_policy_enable", "false");
+    public static boolean sHH_AMSExceptionEnable =
+            BgAppPropManager.getSlmkPropertyBool("hh_ams_exception", "false");
     public static final Base64.Decoder sPkgDecoder = Base64.getDecoder();
     public static final ArrayList alliedProtectedProcList = new ArrayList();
 
@@ -103,20 +110,25 @@ public final class DynamicHiddenApp {
         BgAppPropManager.getSlmkPropertyBool("kill_heaviest_task", "true");
         Boolean.parseBoolean(SystemProperties.get("ro.config.low_ram", "false"));
         BgAppPropManager.getSlmkPropertyInt("kill_timeout_ms", "100");
-        LMK_USE_MINFREE_LEVELS = BgAppPropManager.getSlmkPropertyBool("use_minfree_levels", "false");
+        LMK_USE_MINFREE_LEVELS =
+                BgAppPropManager.getSlmkPropertyBool("use_minfree_levels", "false");
         LMK_ENABLE_USERSPACE_LMK = true;
         LMK_ENABLE_REENTRY_LMK = true;
         BgAppPropManager.getSlmkPropertyBool("enable_cmarbinfree_sub", "true");
-        LMK_ENABLE_UPGRADE_CRIADJ = BgAppPropManager.getSlmkPropertyBool("enable_upgrade_criadj", "false");
+        LMK_ENABLE_UPGRADE_CRIADJ =
+                BgAppPropManager.getSlmkPropertyBool("enable_upgrade_criadj", "false");
         LMK_FREELIMIT_ENABLE = BgAppPropManager.getSlmkPropertyBool("freelimit_enable", "true");
         LMK_LOW_MEM_KEEP_ENABLE = true;
-        LMK_FREELIMIT_VAL = BgAppPropManager.getSlmkPropertyInt("freelimit_val", Constants.OTP_BIT_KG_COMPLETED);
+        LMK_FREELIMIT_VAL =
+                BgAppPropManager.getSlmkPropertyInt(
+                        "freelimit_val", Constants.OTP_BIT_KG_COMPLETED);
         LMK_CUSTOM_SW_LIMIT = BgAppPropManager.getSlmkPropertyInt("custom_sw_limit", "500");
         LMK_CUSTOM_TM_LIMIT = BgAppPropManager.getSlmkPropertyInt("custom_tm_limit", "1000");
         BgAppPropManager.getSlmkPropertyInt("psi_low", "70");
         LMK_PSI_MEDIUM_TH = BgAppPropManager.getSlmkPropertyInt("psi_medium", "70");
         LMK_PSI_CRITICAL_TH = BgAppPropManager.getSlmkPropertyInt("psi_critical", "120");
-        LMKD_REENTRY_MODE_ENABLE = BgAppPropManager.getSlmkPropertyBool("reentry_mode_enable", "true");
+        LMKD_REENTRY_MODE_ENABLE =
+                BgAppPropManager.getSlmkPropertyBool("reentry_mode_enable", "true");
         reentryMap = new HashMap();
         reentryCount = 0;
         lastTime = 0L;
@@ -128,7 +140,8 @@ public final class DynamicHiddenApp {
         customEFKManager.addBonusEFK = BgAppPropManager.getSlmkPropertyInt("add_bonusEFK", "-1");
         customEFKManager.v_BonusEFK = BgAppPropManager.getSlmkPropertyInt("v_bonusEFK", "0");
         customEFKManager.origin_EFK = -1;
-        customEFKManager.v_bonusEFKWhileBoot = BgAppPropManager.getSlmkPropertyInt("v_BootEFK", "204800");
+        customEFKManager.v_bonusEFKWhileBoot =
+                BgAppPropManager.getSlmkPropertyInt("v_BootEFK", "204800");
         customEFKManager.vDecreaseEFK = BgAppPropManager.getSlmkPropertyInt("v_decrease_EFK", "0");
         int slmkPropertyInt = BgAppPropManager.getSlmkPropertyInt("tm_decrease_EFK", "1000");
         customEFKManager.vDecreaseEFKTime = slmkPropertyInt;
@@ -144,18 +157,29 @@ public final class DynamicHiddenApp {
         this.mBGSlotManager = new BGSlotManager(memInfoGetter);
         BGProtectManager bGProtectManager = new BGProtectManager();
         SystemProperties.get("ro.board.platform", "");
-        bGProtectManager.removeContactExceptList = BgAppPropManager.getSlmkPropertyBool("remove_contact_except_list", "false");
-        bGProtectManager.mDhaKeepEmptyEnable = BgAppPropManager.getSlmkPropertyInt("dha_pallowlist_enable", "1");
-        bGProtectManager.mDhaKeepEmptyEnableKnox = BgAppPropManager.getSlmkPropertyInt("dha_knox_plist_enable", "0");
-        bGProtectManager.AMSExceptionProviderUpgradeAdjEnable = BgAppPropManager.getSlmkPropertyBool("provider_upgrade_adj", "false");
-        bGProtectManager.mKnoxAMSExceptionEnable = BgAppPropManager.getSlmkPropertyBool("ams_knoxexpt_enable", "true");
-        bGProtectManager.DIALER_EXCEPTION_TH = BgAppPropManager.getSlmkPropertyInt("dha_dialer_except_th", "3072");
-        bGProtectManager.CLEANUP_WEBVIEW_ENABLE = BgAppPropManager.getSlmkPropertyBool("cleanup_webview_enable", "false");
-        bGProtectManager.PICKED_ADJ_TIME_LIMIT = BgAppPropManager.getSlmkPropertyInt("picked_adj_tm", "1800000");
+        bGProtectManager.removeContactExceptList =
+                BgAppPropManager.getSlmkPropertyBool("remove_contact_except_list", "false");
+        bGProtectManager.mDhaKeepEmptyEnable =
+                BgAppPropManager.getSlmkPropertyInt("dha_pallowlist_enable", "1");
+        bGProtectManager.mDhaKeepEmptyEnableKnox =
+                BgAppPropManager.getSlmkPropertyInt("dha_knox_plist_enable", "0");
+        bGProtectManager.AMSExceptionProviderUpgradeAdjEnable =
+                BgAppPropManager.getSlmkPropertyBool("provider_upgrade_adj", "false");
+        bGProtectManager.mKnoxAMSExceptionEnable =
+                BgAppPropManager.getSlmkPropertyBool("ams_knoxexpt_enable", "true");
+        bGProtectManager.DIALER_EXCEPTION_TH =
+                BgAppPropManager.getSlmkPropertyInt("dha_dialer_except_th", "3072");
+        bGProtectManager.CLEANUP_WEBVIEW_ENABLE =
+                BgAppPropManager.getSlmkPropertyBool("cleanup_webview_enable", "false");
+        bGProtectManager.PICKED_ADJ_TIME_LIMIT =
+                BgAppPropManager.getSlmkPropertyInt("picked_adj_tm", "1800000");
         bGProtectManager.PICKED_ADJ_EXCEPT = new ArrayList();
-        bGProtectManager.NEVERKILL_SQETOOL_ENABLE = BgAppPropManager.getSlmkPropertyBool("neverkill_sqetool_enable", "true");
-        bGProtectManager.BOOTING_EMPTY_KILL_SKIP_ENABLE = BgAppPropManager.getSlmkPropertyBool("beks_enable", "false");
-        bGProtectManager.recentActivityProcessLimit = BgAppPropManager.getSlmkPropertyInt("bora_cached_num", "3");
+        bGProtectManager.NEVERKILL_SQETOOL_ENABLE =
+                BgAppPropManager.getSlmkPropertyBool("neverkill_sqetool_enable", "true");
+        bGProtectManager.BOOTING_EMPTY_KILL_SKIP_ENABLE =
+                BgAppPropManager.getSlmkPropertyBool("beks_enable", "false");
+        bGProtectManager.recentActivityProcessLimit =
+                BgAppPropManager.getSlmkPropertyInt("bora_cached_num", "3");
         bGProtectManager.recentActivityProcessList = new ArrayList();
         bGProtectManager.NapProcessSlotDefault = null;
         bGProtectManager.NapProcessSlotLimit = 1;
@@ -218,23 +242,105 @@ public final class DynamicHiddenApp {
         BgAppPropManager bgAppPropManager = this.mBgAppPropManager;
         if (bgAppPropManager != null) {
             bgAppPropManager.getClass();
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  DHA_CACHE_MIN: "), BGSlotManager.MIN_CACHED_APPS, printWriter, "  DHA_CACHE_MAX: "), BGSlotManager.MAX_CACHED_APPS, printWriter, "  DHA_EMPTY_MIN: "), BGSlotManager.MIN_EMPTY_APPS, printWriter, "  DHA_EMPTY_MAX: "), BGSlotManager.MAX_EMPTY_APPS, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("  DHA_CACHE_MIN: "),
+                                            BGSlotManager.MIN_CACHED_APPS,
+                                            printWriter,
+                                            "  DHA_CACHE_MAX: "),
+                                    BGSlotManager.MAX_CACHED_APPS,
+                                    printWriter,
+                                    "  DHA_EMPTY_MIN: "),
+                            BGSlotManager.MIN_EMPTY_APPS,
+                            printWriter,
+                            "  DHA_EMPTY_MAX: "),
+                    BGSlotManager.MAX_EMPTY_APPS,
+                    printWriter);
             DynamicHiddenApp dynamicHiddenApp = bgAppPropManager.mDynamicHiddenApp;
             if (dynamicHiddenApp.mConstants != null) {
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  AMC_CUR_MAX_CACHED: "), dynamicHiddenApp.mConstants.CUR_MAX_CACHED_PROCESSES, printWriter, "  AMC_CUR_MAX_EMPTY: "), dynamicHiddenApp.mConstants.CUR_MAX_EMPTY_PROCESSES, printWriter);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("  AMC_CUR_MAX_CACHED: "),
+                                dynamicHiddenApp.mConstants.CUR_MAX_CACHED_PROCESSES,
+                                printWriter,
+                                "  AMC_CUR_MAX_EMPTY: "),
+                        dynamicHiddenApp.mConstants.CUR_MAX_EMPTY_PROCESSES,
+                        printWriter);
             }
             printWriter.println();
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  LMKD_enable_userspace_lmk "), LMK_ENABLE_USERSPACE_LMK, printWriter, "  LMKD_use_minfree_levels "), LMK_USE_MINFREE_LEVELS, printWriter, "  LMKD_enable_upgrade_criadj "), LMK_ENABLE_UPGRADE_CRIADJ, printWriter, "  LMKD_freelimit_enable "), LMK_FREELIMIT_ENABLE, printWriter, "  LMKD_freelimit_val "), LMK_FREELIMIT_VAL, printWriter, "  LMKD_upgrade_pressure "), LMK_UPGRADE_PRESSURE, printWriter, "  LMKD_custom_sw_limit "), LMK_CUSTOM_SW_LIMIT, printWriter, "  LMKD_custom_tm_limit "), LMK_CUSTOM_TM_LIMIT, printWriter, "  LMKD_psi_medium_th "), LMK_PSI_MEDIUM_TH, printWriter, "  LMKD_psi_critical_th "), LMK_PSI_CRITICAL_TH, printWriter, "  LMKD_use_lowmem_keep_except "), LMK_LOW_MEM_KEEP_ENABLE, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                            .m(
+                                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                            .m(
+                                                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                                            .m(
+                                                                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                                                            .m(
+                                                                                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                                                                            .m(
+                                                                                                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                                                                                            .m(
+                                                                                                                                                    new StringBuilder(
+                                                                                                                                                            "  LMKD_enable_userspace_lmk"
+                                                                                                                                                                + " "),
+                                                                                                                                                    LMK_ENABLE_USERSPACE_LMK,
+                                                                                                                                                    printWriter,
+                                                                                                                                                    "  LMKD_use_minfree_levels"
+                                                                                                                                                        + " "),
+                                                                                                                                    LMK_USE_MINFREE_LEVELS,
+                                                                                                                                    printWriter,
+                                                                                                                                    "  LMKD_enable_upgrade_criadj"
+                                                                                                                                        + " "),
+                                                                                                                    LMK_ENABLE_UPGRADE_CRIADJ,
+                                                                                                                    printWriter,
+                                                                                                                    "  LMKD_freelimit_enable"
+                                                                                                                        + " "),
+                                                                                                    LMK_FREELIMIT_ENABLE,
+                                                                                                    printWriter,
+                                                                                                    "  LMKD_freelimit_val"
+                                                                                                        + " "),
+                                                                                    LMK_FREELIMIT_VAL,
+                                                                                    printWriter,
+                                                                                    "  LMKD_upgrade_pressure"
+                                                                                        + " "),
+                                                                    LMK_UPGRADE_PRESSURE,
+                                                                    printWriter,
+                                                                    "  LMKD_custom_sw_limit "),
+                                                    LMK_CUSTOM_SW_LIMIT,
+                                                    printWriter,
+                                                    "  LMKD_custom_tm_limit "),
+                                            LMK_CUSTOM_TM_LIMIT,
+                                            printWriter,
+                                            "  LMKD_psi_medium_th "),
+                                    LMK_PSI_MEDIUM_TH,
+                                    printWriter,
+                                    "  LMKD_psi_critical_th "),
+                            LMK_PSI_CRITICAL_TH,
+                            printWriter,
+                            "  LMKD_use_lowmem_keep_except "),
+                    LMK_LOW_MEM_KEEP_ENABLE,
+                    printWriter);
             ActivityManagerService activityManagerService = dynamicHiddenApp.mAm;
             if (activityManagerService != null) {
-                CachedAppOptimizer cachedAppOptimizer = activityManagerService.mOomAdjuster.mCachedAppOptimizer;
+                CachedAppOptimizer cachedAppOptimizer =
+                        activityManagerService.mOomAdjuster.mCachedAppOptimizer;
                 printWriter.println("  APPCOMPACTOR_ENABLE false");
             }
             printWriter.println();
         }
     }
 
-    public final void initDynamicHiddenApp(ActivityManagerService activityManagerService, ProcessList processList, ActivityManagerConstants activityManagerConstants) {
+    public final void initDynamicHiddenApp(
+            ActivityManagerService activityManagerService,
+            ProcessList processList,
+            ActivityManagerConstants activityManagerConstants) {
         if (DhaClassLazyHolder.isinitClass) {
             return;
         }
@@ -255,7 +361,8 @@ public final class DynamicHiddenApp {
         if (z) {
             BGSlotManager.MAX_CACHED_APPS = 512 - bGSlotManager.CHN_REDUCE_CACHED;
             BGProtectManager.dha_keepempty_key = BGProtectManager.dha_keepempty_chn_key;
-            DeviceIdleController$$ExternalSyntheticOutline0.m("is china model : ", "DynamicHiddenApp_BGSlotManager", z);
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    "is china model : ", "DynamicHiddenApp_BGSlotManager", z);
         }
         if (mTotalMemMb > 6144) {
             int i = BGSlotManager.MAX_EMPTY_APPS;
@@ -304,7 +411,9 @@ public final class DynamicHiddenApp {
                 processRecord.dhaKeepEmptyFlag = 1;
                 return;
             }
-            if (bGProtectManager.mDhaKeepEmptyEnableKnox == 1 && isDhaKeepEmptyProcess == 2 && SemPersonaManager.isKnoxId(processRecord.userId)) {
+            if (bGProtectManager.mDhaKeepEmptyEnableKnox == 1
+                    && isDhaKeepEmptyProcess == 2
+                    && SemPersonaManager.isKnoxId(processRecord.userId)) {
                 processRecord.dhaKeepEmptyFlag = 2;
                 return;
             }
@@ -320,7 +429,10 @@ public final class DynamicHiddenApp {
             }
         }
         HashMap hashMap2 = BGProtectManager.dha_amsexcept_map;
-        int intValue = (hashMap2 == null || !hashMap2.containsKey(str)) ? -1 : ((Integer) hashMap2.get(str)).intValue();
+        int intValue =
+                (hashMap2 == null || !hashMap2.containsKey(str))
+                        ? -1
+                        : ((Integer) hashMap2.get(str)).intValue();
         if (intValue != -1) {
             processRecord.isAMSException = true;
             processRecord.AMSExceptionFlag = intValue;
@@ -328,7 +440,9 @@ public final class DynamicHiddenApp {
         }
         int isWebviewProcess = BGProtectManager.isWebviewProcess(processRecord);
         if (isWebviewProcess == -1) {
-            if (BGProtectManager.mCameraGuardEnable && (hashMap = BGProtectManager.dha_cameraguard_map) != null && hashMap.containsKey(str)) {
+            if (BGProtectManager.mCameraGuardEnable
+                    && (hashMap = BGProtectManager.dha_cameraguard_map) != null
+                    && hashMap.containsKey(str)) {
                 processRecord.AMSExceptionFlag = BGProtectManager.exceptFlag.CAMERAGUARD.getValue();
                 return;
             }
@@ -360,6 +474,8 @@ public final class DynamicHiddenApp {
             Method dump skipped, instructions count: 525
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.DynamicHiddenApp.setCustomADJAndGetProcState(com.android.server.am.ProcessRecord):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.DynamicHiddenApp.setCustomADJAndGetProcState(com.android.server.am.ProcessRecord):int");
     }
 }

@@ -13,7 +13,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -24,8 +23,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.R;
 import com.android.internal.util.CharSequences;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -125,7 +126,9 @@ public class Preference implements Comparable<Preference> {
         this.mCategoryBGColor = 0;
         this.mWhere = 0;
         this.mContext = context;
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Preference, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.Preference, defStyleAttr, defStyleRes);
         for (int i = a.getIndexCount() - 1; i >= 0; i--) {
             int attr = a.getIndex(i);
             switch (attr) {
@@ -203,14 +206,20 @@ public class Preference implements Comparable<Preference> {
         if (this.mIsDeviceDefault) {
             context.getTheme().resolveAttribute(16842808, outValue, true);
             if (outValue.resourceId > 0) {
-                this.mTextColorSecondary = context.getResources().getColorStateList(outValue.resourceId);
+                this.mTextColorSecondary =
+                        context.getResources().getColorStateList(outValue.resourceId);
             }
-            this.mColorPrimaryDark = context.getResources().getColorStateList(R.color.tw_secondary_text_user_setting_value_material_light, context.getTheme());
+            this.mColorPrimaryDark =
+                    context.getResources()
+                            .getColorStateList(
+                                    R.color.tw_secondary_text_user_setting_value_material_light,
+                                    context.getTheme());
         }
         Activity activity = getActivityContext(getContext());
         if (activity != null && (ai = activity.getActivityInfo()) != null && ai.metaData != null) {
             String data = ai.metaData.getString(SAMSUNG_BASIC_INTERACTION_METADATA_NAME);
-            if (!SAMSUNG_BASIC_INTERACTION_METADATA_VALUE_SEP10.equals(data) && !SAMSUNG_BASIC_INTERACTION_METADATA_VALUE_SEP11.equals(data)) {
+            if (!SAMSUNG_BASIC_INTERACTION_METADATA_VALUE_SEP10.equals(data)
+                    && !SAMSUNG_BASIC_INTERACTION_METADATA_VALUE_SEP11.equals(data)) {
                 z3 = false;
             }
             this.mIsMetaDataInActivity = z3;
@@ -301,15 +310,21 @@ public class Preference implements Comparable<Preference> {
             convertView = onCreateView(parent);
         }
         onBindView(convertView);
-        if (this.mIsDeviceDefault && (this instanceof PreferenceCategory) && (convertView instanceof TextView)) {
+        if (this.mIsDeviceDefault
+                && (this instanceof PreferenceCategory)
+                && (convertView instanceof TextView)) {
             TextView tempConvertView = (TextView) convertView;
-            convertView.setContentDescription(tempConvertView.getText().toString() + ", " + this.mContext.getString(R.string.tw_preferencecategory_added_title));
+            convertView.setContentDescription(
+                    tempConvertView.getText().toString()
+                            + ", "
+                            + this.mContext.getString(R.string.tw_preferencecategory_added_title));
         }
         return convertView;
     }
 
     protected View onCreateView(ViewGroup parent) {
-        LayoutInflater layoutInflater = (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater =
+                (LayoutInflater) this.mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = layoutInflater.inflate(this.mLayoutResId, parent, false);
         ViewGroup widgetFrame = (ViewGroup) layout.findViewById(16908312);
         if (widgetFrame != null) {
@@ -362,7 +377,8 @@ public class Preference implements Comparable<Preference> {
             if (!TextUtils.isEmpty(summary)) {
                 summaryView.lambda$setTextAsync$0(summary);
                 if (this.mIsDeviceDefault) {
-                    if (semGetSummaryColorToColorPrimaryDark() || (this instanceof ListPreference)) {
+                    if (semGetSummaryColorToColorPrimaryDark()
+                            || (this instanceof ListPreference)) {
                         summaryView.setTextColor(this.mColorPrimaryDark);
                     } else if (this.mTextColorSecondary != null) {
                         summaryView.setTextColor(this.mTextColorSecondary);
@@ -432,7 +448,8 @@ public class Preference implements Comparable<Preference> {
     }
 
     public void setTitle(CharSequence title) {
-        if ((title == null && this.mTitle != null) || (title != null && !title.equals(this.mTitle))) {
+        if ((title == null && this.mTitle != null)
+                || (title != null && !title.equals(this.mTitle))) {
             this.mTitleRes = 0;
             this.mTitle = title;
             notifyChanged();
@@ -478,7 +495,8 @@ public class Preference implements Comparable<Preference> {
     }
 
     public void setSummary(CharSequence summary) {
-        if ((summary == null && this.mSummary != null) || (summary != null && !summary.equals(this.mSummary))) {
+        if ((summary == null && this.mSummary != null)
+                || (summary != null && !summary.equals(this.mSummary))) {
             this.mSummary = summary;
             notifyChanged();
         }
@@ -552,8 +570,7 @@ public class Preference implements Comparable<Preference> {
         return this.mId;
     }
 
-    protected void onClick() {
-    }
+    protected void onClick() {}
 
     public void setKey(String key) {
         this.mKey = key;
@@ -590,10 +607,12 @@ public class Preference implements Comparable<Preference> {
     }
 
     protected boolean callChangeListener(Object newValue) {
-        return this.mOnChangeListener == null || this.mOnChangeListener.onPreferenceChange(this, newValue);
+        return this.mOnChangeListener == null
+                || this.mOnChangeListener.onPreferenceChange(this, newValue);
     }
 
-    public void setOnPreferenceChangeListener(OnPreferenceChangeListener onPreferenceChangeListener) {
+    public void setOnPreferenceChangeListener(
+            OnPreferenceChangeListener onPreferenceChangeListener) {
         this.mOnChangeListener = onPreferenceChangeListener;
     }
 
@@ -619,8 +638,11 @@ public class Preference implements Comparable<Preference> {
         }
         PreferenceManager preferenceManager = getPreferenceManager();
         if (preferenceManager != null) {
-            PreferenceManager.OnPreferenceTreeClickListener listener = preferenceManager.getOnPreferenceTreeClickListener();
-            if (preferenceScreen != null && listener != null && listener.onPreferenceTreeClick(preferenceScreen, this)) {
+            PreferenceManager.OnPreferenceTreeClickListener listener =
+                    preferenceManager.getOnPreferenceTreeClickListener();
+            if (preferenceScreen != null
+                    && listener != null
+                    && listener.onPreferenceTreeClick(preferenceScreen, this)) {
                 return;
             }
         }
@@ -719,12 +741,20 @@ public class Preference implements Comparable<Preference> {
             preference.registerDependent(this);
             return;
         }
-        throw new IllegalStateException("Dependency \"" + this.mDependencyKey + "\" not found for preference \"" + this.mKey + "\" (title: \"" + ((Object) this.mTitle) + "\"");
+        throw new IllegalStateException(
+                "Dependency \""
+                        + this.mDependencyKey
+                        + "\" not found for preference \""
+                        + this.mKey
+                        + "\" (title: \""
+                        + ((Object) this.mTitle)
+                        + "\"");
     }
 
     private void unregisterDependency() {
         Preference oldDependency;
-        if (this.mDependencyKey != null && (oldDependency = findPreferenceInHierarchy(this.mDependencyKey)) != null) {
+        if (this.mDependencyKey != null
+                && (oldDependency = findPreferenceInHierarchy(this.mDependencyKey)) != null) {
             oldDependency.unregisterDependent(this);
         }
     }
@@ -819,8 +849,7 @@ public class Preference implements Comparable<Preference> {
         onSetInitialValue(true, null);
     }
 
-    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
-    }
+    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {}
 
     private void tryCommit(SharedPreferences.Editor editor) {
         if (this.mPreferenceManager.shouldCommit()) {
@@ -858,7 +887,9 @@ public class Preference implements Comparable<Preference> {
         if (dataStore != null) {
             return dataStore.getString(this.mKey, defaultReturnValue);
         }
-        return this.mPreferenceManager.getSharedPreferences().getString(this.mKey, defaultReturnValue);
+        return this.mPreferenceManager
+                .getSharedPreferences()
+                .getString(this.mKey, defaultReturnValue);
     }
 
     public boolean persistStringSet(Set<String> values) {
@@ -887,7 +918,9 @@ public class Preference implements Comparable<Preference> {
         if (dataStore != null) {
             return dataStore.getStringSet(this.mKey, defaultReturnValue);
         }
-        return this.mPreferenceManager.getSharedPreferences().getStringSet(this.mKey, defaultReturnValue);
+        return this.mPreferenceManager
+                .getSharedPreferences()
+                .getStringSet(this.mKey, defaultReturnValue);
     }
 
     protected boolean persistInt(int value) {
@@ -945,7 +978,9 @@ public class Preference implements Comparable<Preference> {
         if (dataStore != null) {
             return dataStore.getFloat(this.mKey, defaultReturnValue);
         }
-        return this.mPreferenceManager.getSharedPreferences().getFloat(this.mKey, defaultReturnValue);
+        return this.mPreferenceManager
+                .getSharedPreferences()
+                .getFloat(this.mKey, defaultReturnValue);
     }
 
     protected boolean persistLong(long value) {
@@ -974,7 +1009,9 @@ public class Preference implements Comparable<Preference> {
         if (dataStore != null) {
             return dataStore.getLong(this.mKey, defaultReturnValue);
         }
-        return this.mPreferenceManager.getSharedPreferences().getLong(this.mKey, defaultReturnValue);
+        return this.mPreferenceManager
+                .getSharedPreferences()
+                .getLong(this.mKey, defaultReturnValue);
     }
 
     protected boolean persistBoolean(boolean value) {
@@ -1003,7 +1040,9 @@ public class Preference implements Comparable<Preference> {
         if (dataStore != null) {
             return dataStore.getBoolean(this.mKey, defaultReturnValue);
         }
-        return this.mPreferenceManager.getSharedPreferences().getBoolean(this.mKey, defaultReturnValue);
+        return this.mPreferenceManager
+                .getSharedPreferences()
+                .getBoolean(this.mKey, defaultReturnValue);
     }
 
     public String toString() {
@@ -1035,7 +1074,8 @@ public class Preference implements Comparable<Preference> {
             this.mBaseMethodCalled = false;
             Parcelable state = onSaveInstanceState();
             if (!this.mBaseMethodCalled) {
-                throw new IllegalStateException("Derived class did not call super.onSaveInstanceState()");
+                throw new IllegalStateException(
+                        "Derived class did not call super.onSaveInstanceState()");
             }
             if (state != null) {
                 container.putParcelable(this.mKey, state);
@@ -1058,7 +1098,8 @@ public class Preference implements Comparable<Preference> {
             this.mBaseMethodCalled = false;
             onRestoreInstanceState(state);
             if (!this.mBaseMethodCalled) {
-                throw new IllegalStateException("Derived class did not call super.onRestoreInstanceState()");
+                throw new IllegalStateException(
+                        "Derived class did not call super.onRestoreInstanceState()");
             }
         }
     }
@@ -1072,19 +1113,22 @@ public class Preference implements Comparable<Preference> {
 
     @Deprecated
     public static class BaseSavedState extends AbsSavedState {
-        public static final Parcelable.Creator<BaseSavedState> CREATOR = new Parcelable.Creator<BaseSavedState>() { // from class: android.preference.Preference.BaseSavedState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BaseSavedState createFromParcel(Parcel in) {
-                return new BaseSavedState(in);
-            }
+        public static final Parcelable.Creator<BaseSavedState> CREATOR =
+                new Parcelable.Creator<
+                        BaseSavedState>() { // from class:
+                                            // android.preference.Preference.BaseSavedState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BaseSavedState createFromParcel(Parcel in) {
+                        return new BaseSavedState(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BaseSavedState[] newArray(int size) {
-                return new BaseSavedState[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BaseSavedState[] newArray(int size) {
+                        return new BaseSavedState[size];
+                    }
+                };
 
         public BaseSavedState(Parcel source) {
             super(source);
@@ -1096,7 +1140,8 @@ public class Preference implements Comparable<Preference> {
     }
 
     public void setTitleDescription(CharSequence titleDescription) {
-        if ((titleDescription == null && this.mTitleDescription != null) || (titleDescription != null && !titleDescription.equals(this.mTitle))) {
+        if ((titleDescription == null && this.mTitleDescription != null)
+                || (titleDescription != null && !titleDescription.equals(this.mTitle))) {
             this.mTitleDescription = titleDescription;
             notifyChanged();
         }
@@ -1143,7 +1188,10 @@ public class Preference implements Comparable<Preference> {
             if (tempContext instanceof Activity) {
                 activity = (Activity) tempContext;
             } else {
-                tempContext = tempContext instanceof ContextWrapper ? ((ContextWrapper) tempContext).getBaseContext() : null;
+                tempContext =
+                        tempContext instanceof ContextWrapper
+                                ? ((ContextWrapper) tempContext).getBaseContext()
+                                : null;
             }
         }
         return activity;

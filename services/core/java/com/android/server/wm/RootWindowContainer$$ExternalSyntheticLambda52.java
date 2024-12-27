@@ -1,18 +1,19 @@
 package com.android.server.wm;
 
-import com.android.server.wm.ActivityRecord;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda52 implements Consumer {
+public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda52
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ String f$0;
     public final /* synthetic */ int f$1;
     public final /* synthetic */ AtomicReference f$2;
 
-    public /* synthetic */ RootWindowContainer$$ExternalSyntheticLambda52(String str, int i, AtomicReference atomicReference, int i2) {
+    public /* synthetic */ RootWindowContainer$$ExternalSyntheticLambda52(
+            String str, int i, AtomicReference atomicReference, int i2) {
         this.$r8$classId = i2;
         this.f$0 = str;
         this.f$1 = i;
@@ -27,7 +28,9 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda5
                 int i = this.f$1;
                 AtomicReference atomicReference = this.f$2;
                 ActivityRecord activityRecord = (ActivityRecord) obj;
-                if (activityRecord.packageName.equals(str) && activityRecord.mUserId == i && !activityRecord.isState(ActivityRecord.State.FINISHING)) {
+                if (activityRecord.packageName.equals(str)
+                        && activityRecord.mUserId == i
+                        && !activityRecord.isState(ActivityRecord.State.FINISHING)) {
                     atomicReference.set(activityRecord);
                     break;
                 }
@@ -36,7 +39,10 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda5
                 String str2 = this.f$0;
                 int i2 = this.f$1;
                 AtomicReference atomicReference2 = this.f$2;
-                ((Task) obj).forAllActivities(new RootWindowContainer$$ExternalSyntheticLambda52(str2, i2, atomicReference2, 0));
+                ((Task) obj)
+                        .forAllActivities(
+                                new RootWindowContainer$$ExternalSyntheticLambda52(
+                                        str2, i2, atomicReference2, 0));
                 break;
         }
     }

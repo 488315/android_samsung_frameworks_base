@@ -3,6 +3,7 @@ package android.content;
 import android.annotation.SystemApi;
 import android.os.Environment;
 import android.os.UserHandle;
+
 import java.io.File;
 import java.util.Objects;
 
@@ -22,14 +23,21 @@ public class ApexEnvironment {
     }
 
     public File getDeviceProtectedDataDir() {
-        return Environment.buildPath(Environment.getDataMiscDirectory(), APEX_DATA, this.mApexModuleName);
+        return Environment.buildPath(
+                Environment.getDataMiscDirectory(), APEX_DATA, this.mApexModuleName);
     }
 
     public File getDeviceProtectedDataDirForUser(UserHandle user) {
-        return Environment.buildPath(Environment.getDataMiscDeDirectory(user.getIdentifier()), APEX_DATA, this.mApexModuleName);
+        return Environment.buildPath(
+                Environment.getDataMiscDeDirectory(user.getIdentifier()),
+                APEX_DATA,
+                this.mApexModuleName);
     }
 
     public File getCredentialProtectedDataDirForUser(UserHandle user) {
-        return Environment.buildPath(Environment.getDataMiscCeDirectory(user.getIdentifier()), APEX_DATA, this.mApexModuleName);
+        return Environment.buildPath(
+                Environment.getDataMiscCeDirectory(user.getIdentifier()),
+                APEX_DATA,
+                this.mApexModuleName);
     }
 }

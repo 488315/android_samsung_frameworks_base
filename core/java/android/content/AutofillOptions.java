@@ -9,6 +9,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.autofill.AutofillManager;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes.dex */
@@ -20,32 +21,35 @@ public final class AutofillOptions implements Parcelable {
     public final int loggingLevel;
     public ArraySet<ComponentName> whitelistedActivitiesForAugmentedAutofill;
     private static final String TAG = AutofillOptions.class.getSimpleName();
-    public static final Parcelable.Creator<AutofillOptions> CREATOR = new Parcelable.Creator<AutofillOptions>() { // from class: android.content.AutofillOptions.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AutofillOptions createFromParcel(Parcel parcel) {
-            int loggingLevel = parcel.readInt();
-            boolean compatMode = parcel.readBoolean();
-            AutofillOptions options = new AutofillOptions(loggingLevel, compatMode);
-            options.augmentedAutofillEnabled = parcel.readBoolean();
-            options.whitelistedActivitiesForAugmentedAutofill = parcel.readArraySet(null);
-            options.appDisabledExpiration = parcel.readLong();
-            int size = parcel.readInt();
-            if (size > 0) {
-                options.disabledActivities = new ArrayMap<>();
-                for (int i = 0; i < size; i++) {
-                    options.disabledActivities.put(parcel.readString(), Long.valueOf(parcel.readLong()));
+    public static final Parcelable.Creator<AutofillOptions> CREATOR =
+            new Parcelable.Creator<
+                    AutofillOptions>() { // from class: android.content.AutofillOptions.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AutofillOptions createFromParcel(Parcel parcel) {
+                    int loggingLevel = parcel.readInt();
+                    boolean compatMode = parcel.readBoolean();
+                    AutofillOptions options = new AutofillOptions(loggingLevel, compatMode);
+                    options.augmentedAutofillEnabled = parcel.readBoolean();
+                    options.whitelistedActivitiesForAugmentedAutofill = parcel.readArraySet(null);
+                    options.appDisabledExpiration = parcel.readLong();
+                    int size = parcel.readInt();
+                    if (size > 0) {
+                        options.disabledActivities = new ArrayMap<>();
+                        for (int i = 0; i < size; i++) {
+                            options.disabledActivities.put(
+                                    parcel.readString(), Long.valueOf(parcel.readLong()));
+                        }
+                    }
+                    return options;
                 }
-            }
-            return options;
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AutofillOptions[] newArray(int size) {
-            return new AutofillOptions[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AutofillOptions[] newArray(int size) {
+                    return new AutofillOptions[size];
+                }
+            };
 
     public AutofillOptions(int loggingLevel, boolean compatModeEnabled) {
         this.loggingLevel = loggingLevel;
@@ -54,11 +58,13 @@ public final class AutofillOptions implements Parcelable {
 
     public boolean isAugmentedAutofillEnabled(Context context) {
         AutofillManager.AutofillClient autofillClient;
-        if (!this.augmentedAutofillEnabled || (autofillClient = context.getAutofillClient()) == null) {
+        if (!this.augmentedAutofillEnabled
+                || (autofillClient = context.getAutofillClient()) == null) {
             return false;
         }
         ComponentName component = autofillClient.autofillClientGetComponentName();
-        return this.whitelistedActivitiesForAugmentedAutofill == null || this.whitelistedActivitiesForAugmentedAutofill.contains(component);
+        return this.whitelistedActivitiesForAugmentedAutofill == null
+                || this.whitelistedActivitiesForAugmentedAutofill.contains(component);
     }
 
     public boolean isAutofillDisabledLocked(ComponentName componentName) {
@@ -68,7 +74,8 @@ public final class AutofillOptions implements Parcelable {
         if (this.appDisabledExpiration >= elapsedTime) {
             return true;
         }
-        if (this.disabledActivities != null && (expiration = this.disabledActivities.get(component)) != null) {
+        if (this.disabledActivities != null
+                && (expiration = this.disabledActivities.get(component)) != null) {
             if (expiration.longValue() >= elapsedTime) {
                 return true;
             }
@@ -95,7 +102,15 @@ public final class AutofillOptions implements Parcelable {
     }
 
     public String toString() {
-        return "AutofillOptions [loggingLevel=" + this.loggingLevel + ", compatMode=" + this.compatModeEnabled + ", augmentedAutofillEnabled=" + this.augmentedAutofillEnabled + ", appDisabledExpiration=" + this.appDisabledExpiration + NavigationBarInflaterView.SIZE_MOD_END;
+        return "AutofillOptions [loggingLevel="
+                + this.loggingLevel
+                + ", compatMode="
+                + this.compatModeEnabled
+                + ", augmentedAutofillEnabled="
+                + this.augmentedAutofillEnabled
+                + ", appDisabledExpiration="
+                + this.appDisabledExpiration
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public void dumpShort(PrintWriter pw) {

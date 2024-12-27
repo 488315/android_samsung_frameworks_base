@@ -55,7 +55,8 @@ public interface IProfCollectd extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface("com.android.server.profcollect.IProfCollectd");
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface("com.android.server.profcollect.IProfCollectd");
             if (queryLocalInterface != null && (queryLocalInterface instanceof IProfCollectd)) {
                 return (IProfCollectd) queryLocalInterface;
             }

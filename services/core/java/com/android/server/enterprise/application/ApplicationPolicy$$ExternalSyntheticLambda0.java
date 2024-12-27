@@ -1,6 +1,5 @@
 package com.android.server.enterprise.application;
 
-import com.android.server.enterprise.application.ApplicationPolicy;
 import java.util.Map;
 import java.util.TreeSet;
 import java.util.concurrent.CompletableFuture;
@@ -23,7 +22,10 @@ public final /* synthetic */ class ApplicationPolicy$$ExternalSyntheticLambda0 i
         Object obj2 = this.f$0;
         switch (i) {
             case 0:
-                ((Map) obj2).put(((ApplicationPolicy.AppControlStateEnum) obj).getAdminMapKey(), new TreeSet());
+                ((Map) obj2)
+                        .put(
+                                ((ApplicationPolicy.AppControlStateEnum) obj).getAdminMapKey(),
+                                new TreeSet());
                 break;
             default:
                 CompletableFuture completableFuture = (CompletableFuture) obj2;

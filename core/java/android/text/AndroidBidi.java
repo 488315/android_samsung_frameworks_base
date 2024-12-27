@@ -1,7 +1,6 @@
 package android.text;
 
 import android.icu.text.Bidi;
-import android.text.Layout;
 
 /* loaded from: classes4.dex */
 public class AndroidBidi {
@@ -41,7 +40,8 @@ public class AndroidBidi {
         return (result & 1) == 0 ? 1 : -1;
     }
 
-    public static Layout.Directions directions(int dir, byte[] levels, int lstart, char[] chars, int cstart, int len) {
+    public static Layout.Directions directions(
+            int dir, byte[] levels, int lstart, char[] chars, int cstart, int len) {
         boolean swap;
         if (len == 0) {
             return Layout.DIRS_ALL_LEFT_TO_RIGHT;

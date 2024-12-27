@@ -3,25 +3,28 @@ package android.hardware.radio;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class RadioResponseInfoModem implements Parcelable {
-    public static final Parcelable.Creator<RadioResponseInfoModem> CREATOR = new Parcelable.Creator<RadioResponseInfoModem>() { // from class: android.hardware.radio.RadioResponseInfoModem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioResponseInfoModem createFromParcel(Parcel _aidl_source) {
-            RadioResponseInfoModem _aidl_out = new RadioResponseInfoModem();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RadioResponseInfoModem> CREATOR =
+            new Parcelable.Creator<RadioResponseInfoModem>() { // from class:
+                // android.hardware.radio.RadioResponseInfoModem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioResponseInfoModem createFromParcel(Parcel _aidl_source) {
+                    RadioResponseInfoModem _aidl_out = new RadioResponseInfoModem();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioResponseInfoModem[] newArray(int _aidl_size) {
-            return new RadioResponseInfoModem[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioResponseInfoModem[] newArray(int _aidl_size) {
+                    return new RadioResponseInfoModem[_aidl_size];
+                }
+            };
     public int error;
     public int type;
     public int serial = 0;

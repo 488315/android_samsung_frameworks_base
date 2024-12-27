@@ -1,6 +1,5 @@
 package android.app.usage;
 
-import android.app.usage.UsageEvents;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 
@@ -38,5 +37,6 @@ public abstract class UsageStatsManagerInternal {
 
     public abstract void reportNotificationUpdated(String str, UserHandle userHandle, long j);
 
-    public abstract void reportUserInteractionEvent(String str, int i, PersistableBundle persistableBundle);
+    public abstract void reportUserInteractionEvent(
+            String str, int i, PersistableBundle persistableBundle);
 }

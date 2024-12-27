@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+
 import dalvik.system.VMRuntime;
+
 import java.io.File;
 
 /* loaded from: classes6.dex */
@@ -13,11 +15,15 @@ public class AbiAppHelper {
     private boolean is32bitAppRunningInAbi64;
 
     public AbiAppHelper() {
-        this.is32bitAppRunningInAbi64 = Build.SUPPORTED_64_BIT_ABIS.length > 0 && !VMRuntime.getRuntime().is64Bit();
+        this.is32bitAppRunningInAbi64 =
+                Build.SUPPORTED_64_BIT_ABIS.length > 0 && !VMRuntime.getRuntime().is64Bit();
     }
 
     public boolean canAccessApkFile(ApplicationInfo callerInfo, ApplicationInfo targetInfo) {
-        if (!this.is32bitAppRunningInAbi64 || callerInfo == null || targetInfo == null || targetInfo.isSystemApp()) {
+        if (!this.is32bitAppRunningInAbi64
+                || callerInfo == null
+                || targetInfo == null
+                || targetInfo.isSystemApp()) {
             return true;
         }
         String apkPath = targetInfo.getBaseCodePath();
@@ -30,7 +36,8 @@ public class AbiAppHelper {
         return lowerThan2gb;
     }
 
-    public boolean canAccessApkFile(Context context, ApplicationInfo targetAppInfo, String packageName) {
+    public boolean canAccessApkFile(
+            Context context, ApplicationInfo targetAppInfo, String packageName) {
         if (targetAppInfo == null) {
             try {
                 targetAppInfo = context.getPackageManager().getApplicationInfo(packageName, 1024);

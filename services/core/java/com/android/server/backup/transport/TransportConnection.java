@@ -14,12 +14,15 @@ import android.os.UserHandle;
 import android.text.format.DateFormat;
 import android.util.ArrayMap;
 import android.util.EventLog;
+
 import com.android.internal.backup.IBackupTransport;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import dalvik.system.CloseGuard;
+
 import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
@@ -55,14 +58,16 @@ public final class TransportConnection {
         public final Context mContext;
         public final WeakReference mTransportClientRef;
 
-        public TransportConnectionMonitor(Context context, TransportConnection transportConnection) {
+        public TransportConnectionMonitor(
+                Context context, TransportConnection transportConnection) {
             this.mContext = context;
             this.mTransportClientRef = new WeakReference(transportConnection);
         }
 
         @Override // android.content.ServiceConnection
         public final void onBindingDied(ComponentName componentName) {
-            TransportConnection transportConnection = (TransportConnection) this.mTransportClientRef.get();
+            TransportConnection transportConnection =
+                    (TransportConnection) this.mTransportClientRef.get();
             if (transportConnection == null) {
                 referenceLost("TransportConnection.onBindingDied()");
                 return;
@@ -93,13 +98,15 @@ public final class TransportConnection {
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            TransportConnection transportConnection = (TransportConnection) this.mTransportClientRef.get();
+            TransportConnection transportConnection =
+                    (TransportConnection) this.mTransportClientRef.get();
             if (transportConnection == null) {
                 referenceLost("TransportConnection.onServiceConnected()");
                 return;
             }
             Binder.allowBlocking(iBinder);
-            BackupTransportClient backupTransportClient = new BackupTransportClient(IBackupTransport.Stub.asInterface(iBinder));
+            BackupTransportClient backupTransportClient =
+                    new BackupTransportClient(IBackupTransport.Stub.asInterface(iBinder));
             synchronized (transportConnection.mStateLock) {
                 try {
                     transportConnection.checkStateIntegrityLocked();
@@ -116,7 +123,8 @@ public final class TransportConnection {
 
         @Override // android.content.ServiceConnection
         public final void onServiceDisconnected(ComponentName componentName) {
-            TransportConnection transportConnection = (TransportConnection) this.mTransportClientRef.get();
+            TransportConnection transportConnection =
+                    (TransportConnection) this.mTransportClientRef.get();
             if (transportConnection == null) {
                 referenceLost("TransportConnection.onServiceDisconnected()");
                 return;
@@ -131,7 +139,10 @@ public final class TransportConnection {
                     try {
                         transportConnection.mContext.unbindService(transportConnection.mConnection);
                     } catch (IllegalArgumentException e) {
-                        transportConnection.log(5, "Exception trying to unbind onServiceDisconnected(): " + e.getMessage());
+                        transportConnection.log(
+                                5,
+                                "Exception trying to unbind onServiceDisconnected(): "
+                                        + e.getMessage());
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -142,16 +153,29 @@ public final class TransportConnection {
         public final void referenceLost(String str) {
             try {
                 this.mContext.unbindService(this);
-                TransportUtils.log(4, TransportConnection.TAG, str.concat(" called but TransportClient reference has been GC'ed"));
+                TransportUtils.log(
+                        4,
+                        TransportConnection.TAG,
+                        str.concat(" called but TransportClient reference has been GC'ed"));
             } catch (IllegalArgumentException e) {
-                StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m(str, " called but unbindService failed: ");
+                StringBuilder m =
+                        Preconditions$$ExternalSyntheticOutline0.m(
+                                str, " called but unbindService failed: ");
                 m.append(e.getMessage());
                 TransportUtils.log(5, TransportConnection.TAG, m.toString());
             }
         }
     }
 
-    public TransportConnection(int i, Context context, TransportStats transportStats, Intent intent, ComponentName componentName, String str, String str2, Handler handler) {
+    public TransportConnection(
+            int i,
+            Context context,
+            TransportStats transportStats,
+            Intent intent,
+            ComponentName componentName,
+            String str,
+            String str2,
+            Handler handler) {
         CloseGuard closeGuard = CloseGuard.get();
         this.mCloseGuard = closeGuard;
         this.mLogBuffer = new LinkedList();
@@ -166,12 +190,22 @@ public final class TransportConnection {
         this.mCreatorLogString = str2;
         this.mListenerHandler = handler;
         this.mConnection = new TransportConnectionMonitor(context, this);
-        this.mPrefixForLog = componentName.getShortClassName().replaceFirst(".*\\.", "") + "#" + str + ":";
+        this.mPrefixForLog =
+                componentName.getShortClassName().replaceFirst(".*\\.", "") + "#" + str + ":";
         closeGuard.open("markAsDisposed");
     }
 
     public static String stateToString(int i) {
-        return i != 0 ? i != 1 ? i != 2 ? i != 3 ? BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "<UNKNOWN = ", ">") : "CONNECTED" : "BOUND_AND_CONNECTING" : "IDLE" : "UNUSABLE";
+        return i != 0
+                ? i != 1
+                        ? i != 2
+                                ? i != 3
+                                        ? BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                i, "<UNKNOWN = ", ">")
+                                        : "CONNECTED"
+                                : "BOUND_AND_CONNECTING"
+                        : "IDLE"
+                : "UNUSABLE";
     }
 
     public final void checkState(boolean z, String str) {
@@ -184,28 +218,39 @@ public final class TransportConnection {
     public final void checkStateIntegrityLocked() {
         int i = this.mState;
         if (i == 0) {
-            checkState(((ArrayMap) this.mListeners).isEmpty(), "Unexpected listeners when state = UNUSABLE");
-            checkState(this.mTransport == null, "Transport expected to be null when state = UNUSABLE");
+            checkState(
+                    ((ArrayMap) this.mListeners).isEmpty(),
+                    "Unexpected listeners when state = UNUSABLE");
+            checkState(
+                    this.mTransport == null, "Transport expected to be null when state = UNUSABLE");
         } else if (i != 1) {
             if (i == 2) {
-                checkState(this.mTransport == null, "Transport expected to be null when state = BOUND_AND_CONNECTING");
+                checkState(
+                        this.mTransport == null,
+                        "Transport expected to be null when state = BOUND_AND_CONNECTING");
                 return;
             }
             if (i == 3) {
-                checkState(((ArrayMap) this.mListeners).isEmpty(), "Unexpected listeners when state = CONNECTED");
-                checkState(this.mTransport != null, "Transport expected to be non-null when state = CONNECTED");
+                checkState(
+                        ((ArrayMap) this.mListeners).isEmpty(),
+                        "Unexpected listeners when state = CONNECTED");
+                checkState(
+                        this.mTransport != null,
+                        "Transport expected to be non-null when state = CONNECTED");
                 return;
             } else {
                 checkState(false, "Unexpected state = " + stateToString(this.mState));
                 return;
             }
         }
-        checkState(((ArrayMap) this.mListeners).isEmpty(), "Unexpected listeners when state = IDLE");
+        checkState(
+                ((ArrayMap) this.mListeners).isEmpty(), "Unexpected listeners when state = IDLE");
         checkState(this.mTransport == null, "Transport expected to be null when state = IDLE");
     }
 
     public final BackupTransportClient connect(String str) {
-        Preconditions.checkState(!Looper.getMainLooper().isCurrentThread(), "Can't call connect() on main thread");
+        Preconditions.checkState(
+                !Looper.getMainLooper().isCurrentThread(), "Can't call connect() on main thread");
         BackupTransportClient backupTransportClient = this.mTransport;
         if (backupTransportClient != null) {
             log(3, str, "Sync connect: reusing transport");
@@ -218,7 +263,10 @@ public final class TransportConnection {
                     return null;
                 }
                 CompletableFuture completableFuture = new CompletableFuture();
-                TransportConnection$$ExternalSyntheticLambda1 transportConnection$$ExternalSyntheticLambda1 = new TransportConnection$$ExternalSyntheticLambda1(completableFuture);
+                TransportConnection$$ExternalSyntheticLambda1
+                        transportConnection$$ExternalSyntheticLambda1 =
+                                new TransportConnection$$ExternalSyntheticLambda1(
+                                        completableFuture);
                 long elapsedRealtime = SystemClock.elapsedRealtime();
                 log(3, str, "Sync connect: calling async");
                 synchronized (this.mStateLock) {
@@ -227,36 +275,51 @@ public final class TransportConnection {
                         int i = this.mState;
                         if (i == 0) {
                             log(5, str, "Async connect: UNUSABLE client");
-                            notifyListener(transportConnection$$ExternalSyntheticLambda1, null, str);
+                            notifyListener(
+                                    transportConnection$$ExternalSyntheticLambda1, null, str);
                         } else if (i != 1) {
                             if (i == 2) {
                                 log(3, str, "Async connect: already connecting, adding listener");
-                                ((ArrayMap) this.mListeners).put(transportConnection$$ExternalSyntheticLambda1, str);
+                                ((ArrayMap) this.mListeners)
+                                        .put(transportConnection$$ExternalSyntheticLambda1, str);
                             } else if (i == 3) {
                                 log(3, str, "Async connect: reusing transport");
-                                notifyListener(transportConnection$$ExternalSyntheticLambda1, this.mTransport, str);
+                                notifyListener(
+                                        transportConnection$$ExternalSyntheticLambda1,
+                                        this.mTransport,
+                                        str);
                             }
-                        } else if (this.mContext.bindServiceAsUser(this.mBindIntent, this.mConnection, 1, UserHandle.of(this.mUserId))) {
+                        } else if (this.mContext.bindServiceAsUser(
+                                this.mBindIntent,
+                                this.mConnection,
+                                1,
+                                UserHandle.of(this.mUserId))) {
                             log(3, str, "Async connect: service bound, connecting");
                             setStateLocked(2, null);
-                            ((ArrayMap) this.mListeners).put(transportConnection$$ExternalSyntheticLambda1, str);
+                            ((ArrayMap) this.mListeners)
+                                    .put(transportConnection$$ExternalSyntheticLambda1, str);
                         } else {
                             log(6, "Async connect: bindService returned false");
                             this.mContext.unbindService(this.mConnection);
-                            notifyListener(transportConnection$$ExternalSyntheticLambda1, null, str);
+                            notifyListener(
+                                    transportConnection$$ExternalSyntheticLambda1, null, str);
                         }
                     } finally {
                     }
                 }
                 try {
-                    BackupTransportClient backupTransportClient2 = (BackupTransportClient) completableFuture.get();
+                    BackupTransportClient backupTransportClient2 =
+                            (BackupTransportClient) completableFuture.get();
                     long elapsedRealtime2 = SystemClock.elapsedRealtime() - elapsedRealtime;
-                    this.mTransportStats.registerConnectionTime(this.mTransportComponent, elapsedRealtime2);
+                    this.mTransportStats.registerConnectionTime(
+                            this.mTransportComponent, elapsedRealtime2);
                     Locale locale = Locale.US;
                     log(3, str, "Connect took " + elapsedRealtime2 + " ms");
                     return backupTransportClient2;
                 } catch (InterruptedException | ExecutionException e) {
-                    StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m(e.getClass().getSimpleName(), " while waiting for transport: ");
+                    StringBuilder m =
+                            Preconditions$$ExternalSyntheticOutline0.m(
+                                    e.getClass().getSimpleName(), " while waiting for transport: ");
                     m.append(e.getMessage());
                     log(6, str, m.toString());
                     return null;
@@ -279,7 +342,12 @@ public final class TransportConnection {
         synchronized (this.mStateLock) {
             this.mCloseGuard.warnIfOpen();
             if (this.mState >= 2) {
-                log(6, "TransportClient.finalize()", "Dangling TransportClient created in [" + this.mCreatorLogString + "] being GC'ed. Left bound, unbinding...");
+                log(
+                        6,
+                        "TransportClient.finalize()",
+                        "Dangling TransportClient created in ["
+                                + this.mCreatorLogString
+                                + "] being GC'ed. Left bound, unbinding...");
                 try {
                     unbind("TransportClient.finalize()");
                 } catch (IllegalStateException unused) {
@@ -307,29 +375,50 @@ public final class TransportConnection {
         saveLogEntry(TransportUtils.formatMessage(null, str, str2));
     }
 
-    public final void notifyListener(final TransportConnection$$ExternalSyntheticLambda1 transportConnection$$ExternalSyntheticLambda1, final BackupTransportClient backupTransportClient, String str) {
-        log(4, BootReceiver$$ExternalSyntheticOutline0.m("Notifying [", str, "] transport = ", backupTransportClient != null ? "BackupTransportClient" : "null"));
-        this.mListenerHandler.post(new Runnable() { // from class: com.android.server.backup.transport.TransportConnection$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                TransportConnection transportConnection = TransportConnection.this;
-                TransportConnection$$ExternalSyntheticLambda1 transportConnection$$ExternalSyntheticLambda12 = transportConnection$$ExternalSyntheticLambda1;
-                BackupTransportClient backupTransportClient2 = backupTransportClient;
-                transportConnection.getClass();
-                transportConnection$$ExternalSyntheticLambda12.f$0.complete(backupTransportClient2);
-            }
-        });
+    public final void notifyListener(
+            final TransportConnection$$ExternalSyntheticLambda1
+                    transportConnection$$ExternalSyntheticLambda1,
+            final BackupTransportClient backupTransportClient,
+            String str) {
+        log(
+                4,
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        "Notifying [",
+                        str,
+                        "] transport = ",
+                        backupTransportClient != null ? "BackupTransportClient" : "null"));
+        this.mListenerHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.backup.transport.TransportConnection$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        TransportConnection transportConnection = TransportConnection.this;
+                        TransportConnection$$ExternalSyntheticLambda1
+                                transportConnection$$ExternalSyntheticLambda12 =
+                                        transportConnection$$ExternalSyntheticLambda1;
+                        BackupTransportClient backupTransportClient2 = backupTransportClient;
+                        transportConnection.getClass();
+                        transportConnection$$ExternalSyntheticLambda12.f$0.complete(
+                                backupTransportClient2);
+                    }
+                });
     }
 
     public final void notifyListenersAndClearLocked(BackupTransportClient backupTransportClient) {
         for (Map.Entry entry : ((ArrayMap) this.mListeners).entrySet()) {
-            notifyListener((TransportConnection$$ExternalSyntheticLambda1) entry.getKey(), backupTransportClient, (String) entry.getValue());
+            notifyListener(
+                    (TransportConnection$$ExternalSyntheticLambda1) entry.getKey(),
+                    backupTransportClient,
+                    (String) entry.getValue());
         }
         ((ArrayMap) this.mListeners).clear();
     }
 
     public final void saveLogEntry(String str) {
-        String str2 = ((Object) DateFormat.format("yyyy-MM-dd HH:mm:ss", System.currentTimeMillis())) + " " + str;
+        String str2 =
+                ((Object) DateFormat.format("yyyy-MM-dd HH:mm:ss", System.currentTimeMillis()))
+                        + " "
+                        + str;
         synchronized (this.mLogBufferLock) {
             try {
                 if (((LinkedList) this.mLogBuffer).size() == 5) {

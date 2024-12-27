@@ -7,7 +7,9 @@ import android.os.Handler;
 import android.os.SystemProperties;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+
 import com.android.internal.R;
+
 import dalvik.system.CloseGuard;
 
 /* loaded from: classes4.dex */
@@ -77,10 +79,10 @@ public abstract class Animation implements Cloneable {
     }
 
     private static class NoImagePreloadHolder {
-        public static final boolean USE_CLOSEGUARD = SystemProperties.getBoolean("log.closeguard.Animation", false);
+        public static final boolean USE_CLOSEGUARD =
+                SystemProperties.getBoolean("log.closeguard.Animation", false);
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     public Animation() {
@@ -111,7 +113,7 @@ public abstract class Animation implements Cloneable {
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
-    @Override // 
+    @Override //
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
     public Animation mo5909clone() throws CloneNotSupportedException {
         Animation animation = (Animation) super.clone();
@@ -163,24 +165,27 @@ public abstract class Animation implements Cloneable {
 
     public void setListenerHandler(Handler handler) {
         if (this.mListenerHandler == null) {
-            this.mOnStart = new Runnable() { // from class: android.view.animation.Animation.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    Animation.this.dispatchAnimationStart();
-                }
-            };
-            this.mOnRepeat = new Runnable() { // from class: android.view.animation.Animation.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    Animation.this.dispatchAnimationRepeat();
-                }
-            };
-            this.mOnEnd = new Runnable() { // from class: android.view.animation.Animation.3
-                @Override // java.lang.Runnable
-                public void run() {
-                    Animation.this.dispatchAnimationEnd();
-                }
-            };
+            this.mOnStart =
+                    new Runnable() { // from class: android.view.animation.Animation.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            Animation.this.dispatchAnimationStart();
+                        }
+                    };
+            this.mOnRepeat =
+                    new Runnable() { // from class: android.view.animation.Animation.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            Animation.this.dispatchAnimationRepeat();
+                        }
+                    };
+            this.mOnEnd =
+                    new Runnable() { // from class: android.view.animation.Animation.3
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            Animation.this.dispatchAnimationEnd();
+                        }
+                    };
         }
         this.mListenerHandler = handler;
     }
@@ -219,7 +224,9 @@ public abstract class Animation implements Cloneable {
         if (this.mDuration <= 0) {
             this.mDuration = 0L;
             this.mRepeatCount = 0;
-        } else if (this.mRepeatCount < 0 || this.mRepeatCount > durationMillis || this.mRepeatCount * dur > durationMillis) {
+        } else if (this.mRepeatCount < 0
+                || this.mRepeatCount > durationMillis
+                || this.mRepeatCount * dur > durationMillis) {
             this.mRepeatCount = ((int) (durationMillis / dur)) - 1;
             if (this.mRepeatCount < 0) {
                 this.mRepeatCount = 0;
@@ -281,16 +288,14 @@ public abstract class Animation implements Cloneable {
     }
 
     @Deprecated
-    public void setBackgroundColor(int bg) {
-    }
+    public void setBackgroundColor(int bg) {}
 
     protected float getScaleFactor() {
         return this.mScaleFactor;
     }
 
     @Deprecated
-    public void setDetachWallpaper(boolean detachWallpaper) {
-    }
+    public void setDetachWallpaper(boolean detachWallpaper) {}
 
     public void setShowWallpaper(boolean showWallpaper) {
         this.mShowWallpaper = showWallpaper;
@@ -422,7 +427,8 @@ public abstract class Animation implements Cloneable {
         if (!this.mFillEnabled) {
             normalizedTime = Math.max(Math.min(normalizedTime, 1.0f), 0.0f);
         }
-        if ((normalizedTime >= 0.0f || this.mFillBefore) && (normalizedTime <= 1.0f || this.mFillAfter)) {
+        if ((normalizedTime >= 0.0f || this.mFillBefore)
+                && (normalizedTime <= 1.0f || this.mFillAfter)) {
             if (!this.mStarted) {
                 fireAnimationStart();
                 this.mStarted = true;
@@ -516,7 +522,8 @@ public abstract class Animation implements Cloneable {
         }
     }
 
-    public boolean getTransformation(long currentTime, Transformation outTransformation, float scale) {
+    public boolean getTransformation(
+            long currentTime, Transformation outTransformation, float scale) {
         this.mScaleFactor = scale;
         return getTransformation(currentTime, outTransformation);
     }
@@ -529,8 +536,7 @@ public abstract class Animation implements Cloneable {
         return this.mEnded;
     }
 
-    protected void applyTransformation(float interpolatedTime, Transformation t) {
-    }
+    protected void applyTransformation(float interpolatedTime, Transformation t) {}
 
     protected float resolveSize(int type, float value, int size, int parentSize) {
         switch (type) {
@@ -545,7 +551,13 @@ public abstract class Animation implements Cloneable {
         }
     }
 
-    public void getInvalidateRegion(int left, int top, int right, int bottom, RectF invalidate, Transformation transformation) {
+    public void getInvalidateRegion(
+            int left,
+            int top,
+            int right,
+            int bottom,
+            RectF invalidate,
+            Transformation transformation) {
         RectF tempRegion = this.mRegion;
         RectF previousRegion = this.mPreviousRegion;
         invalidate.set(left, top, right, bottom);
@@ -589,8 +601,7 @@ public abstract class Animation implements Cloneable {
         public int type;
         public float value;
 
-        protected Description() {
-        }
+        protected Description() {}
 
         static Description parseValue(TypedValue value, Context context) {
             Description d = new Description();
@@ -615,7 +626,9 @@ public abstract class Animation implements Cloneable {
                 }
                 if (value.type == 5) {
                     d.type = 0;
-                    d.value = TypedValue.complexToDimension(value.data, context.getResources().getDisplayMetrics());
+                    d.value =
+                            TypedValue.complexToDimension(
+                                    value.data, context.getResources().getDisplayMetrics());
                     return d;
                 }
             }

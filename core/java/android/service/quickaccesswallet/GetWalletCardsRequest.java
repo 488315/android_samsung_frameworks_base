@@ -5,23 +5,27 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class GetWalletCardsRequest implements Parcelable {
-    public static final Parcelable.Creator<GetWalletCardsRequest> CREATOR = new Parcelable.Creator<GetWalletCardsRequest>() { // from class: android.service.quickaccesswallet.GetWalletCardsRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetWalletCardsRequest createFromParcel(Parcel source) {
-            int cardWidthPx = source.readInt();
-            int cardHeightPx = source.readInt();
-            int iconSizePx = source.readInt();
-            int maxCards = source.readInt();
-            return new GetWalletCardsRequest(cardWidthPx, cardHeightPx, iconSizePx, maxCards);
-        }
+    public static final Parcelable.Creator<GetWalletCardsRequest> CREATOR =
+            new Parcelable.Creator<
+                    GetWalletCardsRequest>() { // from class:
+                                               // android.service.quickaccesswallet.GetWalletCardsRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetWalletCardsRequest createFromParcel(Parcel source) {
+                    int cardWidthPx = source.readInt();
+                    int cardHeightPx = source.readInt();
+                    int iconSizePx = source.readInt();
+                    int maxCards = source.readInt();
+                    return new GetWalletCardsRequest(
+                            cardWidthPx, cardHeightPx, iconSizePx, maxCards);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetWalletCardsRequest[] newArray(int size) {
-            return new GetWalletCardsRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetWalletCardsRequest[] newArray(int size) {
+                    return new GetWalletCardsRequest[size];
+                }
+            };
     private final int mCardHeightPx;
     private final int mCardWidthPx;
     private final int mIconSizePx;

@@ -1,6 +1,5 @@
 package android.hardware.soundtrigger;
 
-import android.hardware.soundtrigger.SoundTrigger;
 import android.media.permission.ClearCallingIdentityContext;
 import android.media.permission.Identity;
 import android.media.permission.SafeCloseable;
@@ -17,6 +16,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.io.IOException;
 
 /* loaded from: classes2.dex */
@@ -30,13 +30,20 @@ public class SoundTriggerModule {
     private int mId;
     private ISoundTriggerModule mService;
 
-    public SoundTriggerModule(ISoundTriggerMiddlewareService service, int moduleId, SoundTrigger.StatusListener listener, Looper looper, Identity originatorIdentity) {
+    public SoundTriggerModule(
+            ISoundTriggerMiddlewareService service,
+            int moduleId,
+            SoundTrigger.StatusListener listener,
+            Looper looper,
+            Identity originatorIdentity) {
         this.mId = moduleId;
         this.mEventHandlerDelegate = new EventHandlerDelegate(listener, looper);
         try {
             SafeCloseable ignored = ClearCallingIdentityContext.create();
             try {
-                this.mService = service.attachAsOriginator(moduleId, originatorIdentity, this.mEventHandlerDelegate);
+                this.mService =
+                        service.attachAsOriginator(
+                                moduleId, originatorIdentity, this.mEventHandlerDelegate);
                 if (ignored != null) {
                     ignored.close();
                 }
@@ -48,13 +55,26 @@ public class SoundTriggerModule {
         }
     }
 
-    public SoundTriggerModule(ISoundTriggerMiddlewareService service, int moduleId, SoundTrigger.StatusListener listener, Looper looper, Identity middlemanIdentity, Identity originatorIdentity, boolean isTrusted) {
+    public SoundTriggerModule(
+            ISoundTriggerMiddlewareService service,
+            int moduleId,
+            SoundTrigger.StatusListener listener,
+            Looper looper,
+            Identity middlemanIdentity,
+            Identity originatorIdentity,
+            boolean isTrusted) {
         this.mId = moduleId;
         this.mEventHandlerDelegate = new EventHandlerDelegate(listener, looper);
         try {
             SafeCloseable ignored = ClearCallingIdentityContext.create();
             try {
-                this.mService = service.attachAsMiddleman(moduleId, middlemanIdentity, originatorIdentity, this.mEventHandlerDelegate, isTrusted);
+                this.mService =
+                        service.attachAsMiddleman(
+                                moduleId,
+                                middlemanIdentity,
+                                originatorIdentity,
+                                this.mEventHandlerDelegate,
+                                isTrusted);
                 if (ignored != null) {
                     ignored.close();
                 }
@@ -87,7 +107,9 @@ public class SoundTriggerModule {
     public synchronized int loadSoundModel(SoundTrigger.SoundModel model, int[] soundModelHandle) {
         try {
             if (model instanceof SoundTrigger.GenericSoundModel) {
-                SoundModel aidlModel = ConversionUtil.api2aidlGenericSoundModel((SoundTrigger.GenericSoundModel) model);
+                SoundModel aidlModel =
+                        ConversionUtil.api2aidlGenericSoundModel(
+                                (SoundTrigger.GenericSoundModel) model);
                 try {
                     soundModelHandle[0] = this.mService.loadModel(aidlModel);
                     return 0;
@@ -102,7 +124,9 @@ public class SoundTriggerModule {
                 }
             }
             if (model instanceof SoundTrigger.KeyphraseSoundModel) {
-                PhraseSoundModel aidlModel2 = ConversionUtil.api2aidlPhraseSoundModel((SoundTrigger.KeyphraseSoundModel) model);
+                PhraseSoundModel aidlModel2 =
+                        ConversionUtil.api2aidlPhraseSoundModel(
+                                (SoundTrigger.KeyphraseSoundModel) model);
                 try {
                     soundModelHandle[0] = this.mService.loadPhraseModel(aidlModel2);
                     return 0;
@@ -133,17 +157,21 @@ public class SoundTriggerModule {
     }
 
     @Deprecated
-    public synchronized int startRecognition(int soundModelHandle, SoundTrigger.RecognitionConfig config) {
+    public synchronized int startRecognition(
+            int soundModelHandle, SoundTrigger.RecognitionConfig config) {
         try {
-            this.mService.startRecognition(soundModelHandle, ConversionUtil.api2aidlRecognitionConfig(config));
+            this.mService.startRecognition(
+                    soundModelHandle, ConversionUtil.api2aidlRecognitionConfig(config));
         } catch (Exception e) {
             return SoundTrigger.handleException(e);
         }
         return 0;
     }
 
-    public synchronized IBinder startRecognitionWithToken(int soundModelHandle, SoundTrigger.RecognitionConfig config) throws RemoteException {
-        return this.mService.startRecognition(soundModelHandle, ConversionUtil.api2aidlRecognitionConfig(config));
+    public synchronized IBinder startRecognitionWithToken(
+            int soundModelHandle, SoundTrigger.RecognitionConfig config) throws RemoteException {
+        return this.mService.startRecognition(
+                soundModelHandle, ConversionUtil.api2aidlRecognitionConfig(config));
     }
 
     @Deprecated
@@ -167,7 +195,8 @@ public class SoundTriggerModule {
 
     public synchronized int setParameter(int soundModelHandle, int modelParam, int value) {
         try {
-            this.mService.setModelParameter(soundModelHandle, ConversionUtil.api2aidlModelParameter(modelParam), value);
+            this.mService.setModelParameter(
+                    soundModelHandle, ConversionUtil.api2aidlModelParameter(modelParam), value);
         } catch (Exception e) {
             return SoundTrigger.handleException(e);
         }
@@ -179,54 +208,73 @@ public class SoundTriggerModule {
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
-        return this.mService.getModelParameter(soundModelHandle, ConversionUtil.api2aidlModelParameter(modelParam));
+        return this.mService.getModelParameter(
+                soundModelHandle, ConversionUtil.api2aidlModelParameter(modelParam));
     }
 
-    public synchronized SoundTrigger.ModelParamRange queryParameter(int soundModelHandle, int modelParam) {
+    public synchronized SoundTrigger.ModelParamRange queryParameter(
+            int soundModelHandle, int modelParam) {
         try {
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
-        return ConversionUtil.aidl2apiModelParameterRange(this.mService.queryModelParameterSupport(soundModelHandle, ConversionUtil.api2aidlModelParameter(modelParam)));
+        return ConversionUtil.aidl2apiModelParameterRange(
+                this.mService.queryModelParameterSupport(
+                        soundModelHandle, ConversionUtil.api2aidlModelParameter(modelParam)));
     }
 
-    private class EventHandlerDelegate extends ISoundTriggerCallback.Stub implements IBinder.DeathRecipient {
+    private class EventHandlerDelegate extends ISoundTriggerCallback.Stub
+            implements IBinder.DeathRecipient {
         private final Handler mHandler;
 
         EventHandlerDelegate(final SoundTrigger.StatusListener listener, Looper looper) {
-            this.mHandler = new Handler(looper) { // from class: android.hardware.soundtrigger.SoundTriggerModule.EventHandlerDelegate.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    switch (msg.what) {
-                        case 1:
-                            listener.onRecognition((SoundTrigger.RecognitionEvent) msg.obj);
-                            break;
-                        case 2:
-                            listener.onServiceDied();
-                            break;
-                        case 3:
-                            listener.onResourcesAvailable();
-                            break;
-                        case 4:
-                            listener.onModelUnloaded(((Integer) msg.obj).intValue());
-                            break;
-                        default:
-                            Log.e(SoundTriggerModule.TAG, "Unknown message: " + msg.toString());
-                            break;
-                    }
-                }
-            };
+            this.mHandler =
+                    new Handler(looper) { // from class:
+                        // android.hardware.soundtrigger.SoundTriggerModule.EventHandlerDelegate.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            switch (msg.what) {
+                                case 1:
+                                    listener.onRecognition((SoundTrigger.RecognitionEvent) msg.obj);
+                                    break;
+                                case 2:
+                                    listener.onServiceDied();
+                                    break;
+                                case 3:
+                                    listener.onResourcesAvailable();
+                                    break;
+                                case 4:
+                                    listener.onModelUnloaded(((Integer) msg.obj).intValue());
+                                    break;
+                                default:
+                                    Log.e(
+                                            SoundTriggerModule.TAG,
+                                            "Unknown message: " + msg.toString());
+                                    break;
+                            }
+                        }
+                    };
         }
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerCallback
-        public synchronized void onRecognition(int handle, RecognitionEventSys event, int captureSession) throws RemoteException {
-            Message m = this.mHandler.obtainMessage(1, ConversionUtil.aidl2apiRecognitionEvent(handle, captureSession, event));
+        public synchronized void onRecognition(
+                int handle, RecognitionEventSys event, int captureSession) throws RemoteException {
+            Message m =
+                    this.mHandler.obtainMessage(
+                            1,
+                            ConversionUtil.aidl2apiRecognitionEvent(handle, captureSession, event));
             this.mHandler.sendMessage(m);
         }
 
         @Override // android.media.soundtrigger_middleware.ISoundTriggerCallback
-        public synchronized void onPhraseRecognition(int handle, PhraseRecognitionEventSys event, int captureSession) throws RemoteException {
-            Message m = this.mHandler.obtainMessage(1, ConversionUtil.aidl2apiPhraseRecognitionEvent(handle, captureSession, event));
+        public synchronized void onPhraseRecognition(
+                int handle, PhraseRecognitionEventSys event, int captureSession)
+                throws RemoteException {
+            Message m =
+                    this.mHandler.obtainMessage(
+                            1,
+                            ConversionUtil.aidl2apiPhraseRecognitionEvent(
+                                    handle, captureSession, event));
             this.mHandler.sendMessage(m);
         }
 

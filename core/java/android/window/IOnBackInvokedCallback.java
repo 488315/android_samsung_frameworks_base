@@ -22,24 +22,19 @@ public interface IOnBackInvokedCallback extends IInterface {
 
     public static class Default implements IOnBackInvokedCallback {
         @Override // android.window.IOnBackInvokedCallback
-        public void onBackStarted(BackMotionEvent backMotionEvent) throws RemoteException {
-        }
+        public void onBackStarted(BackMotionEvent backMotionEvent) throws RemoteException {}
 
         @Override // android.window.IOnBackInvokedCallback
-        public void onBackProgressed(BackMotionEvent backMotionEvent) throws RemoteException {
-        }
+        public void onBackProgressed(BackMotionEvent backMotionEvent) throws RemoteException {}
 
         @Override // android.window.IOnBackInvokedCallback
-        public void onBackCancelled() throws RemoteException {
-        }
+        public void onBackCancelled() throws RemoteException {}
 
         @Override // android.window.IOnBackInvokedCallback
-        public void onBackInvoked() throws RemoteException {
-        }
+        public void onBackInvoked() throws RemoteException {}
 
         @Override // android.window.IOnBackInvokedCallback
-        public void setTriggerBack(boolean triggerBack) throws RemoteException {
-        }
+        public void setTriggerBack(boolean triggerBack) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +42,7 @@ public interface IOnBackInvokedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnBackInvokedCallback {
+    public abstract static class Stub extends Binder implements IOnBackInvokedCallback {
         static final int TRANSACTION_onBackCancelled = 3;
         static final int TRANSACTION_onBackInvoked = 4;
         static final int TRANSACTION_onBackProgressed = 2;
@@ -97,7 +92,8 @@ public interface IOnBackInvokedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOnBackInvokedCallback.DESCRIPTOR);
             }
@@ -107,12 +103,14 @@ public interface IOnBackInvokedCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    BackMotionEvent _arg0 = (BackMotionEvent) data.readTypedObject(BackMotionEvent.CREATOR);
+                    BackMotionEvent _arg0 =
+                            (BackMotionEvent) data.readTypedObject(BackMotionEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onBackStarted(_arg0);
                     return true;
                 case 2:
-                    BackMotionEvent _arg02 = (BackMotionEvent) data.readTypedObject(BackMotionEvent.CREATOR);
+                    BackMotionEvent _arg02 =
+                            (BackMotionEvent) data.readTypedObject(BackMotionEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onBackProgressed(_arg02);
                     return true;

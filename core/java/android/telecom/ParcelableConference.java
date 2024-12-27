@@ -4,46 +4,74 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telecom.IVideoProvider;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public final class ParcelableConference implements Parcelable {
-    public static final Parcelable.Creator<ParcelableConference> CREATOR = new Parcelable.Creator<ParcelableConference>() { // from class: android.telecom.ParcelableConference.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableConference createFromParcel(Parcel source) {
-            ClassLoader classLoader = ParcelableConference.class.getClassLoader();
-            PhoneAccountHandle phoneAccount = (PhoneAccountHandle) source.readParcelable(classLoader, PhoneAccountHandle.class);
-            int state = source.readInt();
-            int capabilities = source.readInt();
-            ArrayList arrayList = new ArrayList(2);
-            source.readList(arrayList, classLoader, String.class);
-            long connectTimeMillis = source.readLong();
-            IVideoProvider videoCallProvider = IVideoProvider.Stub.asInterface(source.readStrongBinder());
-            int videoState = source.readInt();
-            StatusHints statusHints = (StatusHints) source.readParcelable(classLoader, StatusHints.class);
-            Bundle extras = source.readBundle(classLoader);
-            int properties = source.readInt();
-            long connectElapsedTimeMillis = source.readLong();
-            Uri address = (Uri) source.readParcelable(classLoader, Uri.class);
-            int addressPresentation = source.readInt();
-            String callerDisplayName = source.readString();
-            int callerDisplayNamePresentation = source.readInt();
-            DisconnectCause disconnectCause = (DisconnectCause) source.readParcelable(classLoader, DisconnectCause.class);
-            boolean isRingbackRequested = source.readInt() == 1;
-            int callDirection = source.readInt();
-            return new ParcelableConference(phoneAccount, state, capabilities, properties, arrayList, videoCallProvider, videoState, connectTimeMillis, connectElapsedTimeMillis, statusHints, extras, address, addressPresentation, callerDisplayName, callerDisplayNamePresentation, disconnectCause, isRingbackRequested, callDirection);
-        }
+    public static final Parcelable.Creator<ParcelableConference> CREATOR =
+            new Parcelable.Creator<
+                    ParcelableConference>() { // from class: android.telecom.ParcelableConference.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableConference createFromParcel(Parcel source) {
+                    ClassLoader classLoader = ParcelableConference.class.getClassLoader();
+                    PhoneAccountHandle phoneAccount =
+                            (PhoneAccountHandle)
+                                    source.readParcelable(classLoader, PhoneAccountHandle.class);
+                    int state = source.readInt();
+                    int capabilities = source.readInt();
+                    ArrayList arrayList = new ArrayList(2);
+                    source.readList(arrayList, classLoader, String.class);
+                    long connectTimeMillis = source.readLong();
+                    IVideoProvider videoCallProvider =
+                            IVideoProvider.Stub.asInterface(source.readStrongBinder());
+                    int videoState = source.readInt();
+                    StatusHints statusHints =
+                            (StatusHints) source.readParcelable(classLoader, StatusHints.class);
+                    Bundle extras = source.readBundle(classLoader);
+                    int properties = source.readInt();
+                    long connectElapsedTimeMillis = source.readLong();
+                    Uri address = (Uri) source.readParcelable(classLoader, Uri.class);
+                    int addressPresentation = source.readInt();
+                    String callerDisplayName = source.readString();
+                    int callerDisplayNamePresentation = source.readInt();
+                    DisconnectCause disconnectCause =
+                            (DisconnectCause)
+                                    source.readParcelable(classLoader, DisconnectCause.class);
+                    boolean isRingbackRequested = source.readInt() == 1;
+                    int callDirection = source.readInt();
+                    return new ParcelableConference(
+                            phoneAccount,
+                            state,
+                            capabilities,
+                            properties,
+                            arrayList,
+                            videoCallProvider,
+                            videoState,
+                            connectTimeMillis,
+                            connectElapsedTimeMillis,
+                            statusHints,
+                            extras,
+                            address,
+                            addressPresentation,
+                            callerDisplayName,
+                            callerDisplayNamePresentation,
+                            disconnectCause,
+                            isRingbackRequested,
+                            callDirection);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableConference[] newArray(int size) {
-            return new ParcelableConference[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableConference[] newArray(int size) {
+                    return new ParcelableConference[size];
+                }
+            };
     private final Uri mAddress;
     private final int mAddressPresentation;
     private final int mCallDirection;
@@ -98,7 +126,8 @@ public final class ParcelableConference implements Parcelable {
             return this;
         }
 
-        public Builder setCallerDisplayName(String callerDisplayName, int callerDisplayNamePresentation) {
+        public Builder setCallerDisplayName(
+                String callerDisplayName, int callerDisplayNamePresentation) {
             this.mCallerDisplayName = callerDisplayName;
             this.mCallerDisplayNamePresentation = callerDisplayNamePresentation;
             return this;
@@ -153,11 +182,47 @@ public final class ParcelableConference implements Parcelable {
         }
 
         public ParcelableConference build() {
-            return new ParcelableConference(this.mPhoneAccount, this.mState, this.mConnectionCapabilities, this.mConnectionProperties, this.mConnectionIds, this.mVideoProvider, this.mVideoState, this.mConnectTimeMillis, this.mConnectElapsedTimeMillis, this.mStatusHints, this.mExtras, this.mAddress, this.mAddressPresentation, this.mCallerDisplayName, this.mCallerDisplayNamePresentation, this.mDisconnectCause, this.mRingbackRequested, this.mCallDirection);
+            return new ParcelableConference(
+                    this.mPhoneAccount,
+                    this.mState,
+                    this.mConnectionCapabilities,
+                    this.mConnectionProperties,
+                    this.mConnectionIds,
+                    this.mVideoProvider,
+                    this.mVideoState,
+                    this.mConnectTimeMillis,
+                    this.mConnectElapsedTimeMillis,
+                    this.mStatusHints,
+                    this.mExtras,
+                    this.mAddress,
+                    this.mAddressPresentation,
+                    this.mCallerDisplayName,
+                    this.mCallerDisplayNamePresentation,
+                    this.mDisconnectCause,
+                    this.mRingbackRequested,
+                    this.mCallDirection);
         }
     }
 
-    private ParcelableConference(PhoneAccountHandle phoneAccount, int state, int connectionCapabilities, int connectionProperties, List<String> connectionIds, IVideoProvider videoProvider, int videoState, long connectTimeMillis, long connectElapsedTimeMillis, StatusHints statusHints, Bundle extras, Uri address, int addressPresentation, String callerDisplayName, int callerDisplayNamePresentation, DisconnectCause disconnectCause, boolean ringbackRequested, int callDirection) {
+    private ParcelableConference(
+            PhoneAccountHandle phoneAccount,
+            int state,
+            int connectionCapabilities,
+            int connectionProperties,
+            List<String> connectionIds,
+            IVideoProvider videoProvider,
+            int videoState,
+            long connectTimeMillis,
+            long connectElapsedTimeMillis,
+            StatusHints statusHints,
+            Bundle extras,
+            Uri address,
+            int addressPresentation,
+            String callerDisplayName,
+            int callerDisplayNamePresentation,
+            DisconnectCause disconnectCause,
+            boolean ringbackRequested,
+            int callDirection) {
         this.mPhoneAccount = phoneAccount;
         this.mState = state;
         this.mConnectionCapabilities = connectionCapabilities;
@@ -179,7 +244,30 @@ public final class ParcelableConference implements Parcelable {
     }
 
     public String toString() {
-        return new StringBuffer().append("account: ").append(this.mPhoneAccount).append(", state: ").append(Connection.stateToString(this.mState)).append(", capabilities: ").append(Connection.capabilitiesToString(this.mConnectionCapabilities)).append(", properties: ").append(Connection.propertiesToString(this.mConnectionProperties)).append(", connectTime: ").append(this.mConnectTimeMillis).append(", children: ").append(this.mConnectionIds).append(", VideoState: ").append(this.mVideoState).append(", VideoProvider: ").append(this.mVideoProvider).append(", isRingbackRequested: ").append(this.mRingbackRequested).append(", disconnectCause: ").append(this.mDisconnectCause).append(", callDirection: ").append(this.mCallDirection).toString();
+        return new StringBuffer()
+                .append("account: ")
+                .append(this.mPhoneAccount)
+                .append(", state: ")
+                .append(Connection.stateToString(this.mState))
+                .append(", capabilities: ")
+                .append(Connection.capabilitiesToString(this.mConnectionCapabilities))
+                .append(", properties: ")
+                .append(Connection.propertiesToString(this.mConnectionProperties))
+                .append(", connectTime: ")
+                .append(this.mConnectTimeMillis)
+                .append(", children: ")
+                .append(this.mConnectionIds)
+                .append(", VideoState: ")
+                .append(this.mVideoState)
+                .append(", VideoProvider: ")
+                .append(this.mVideoProvider)
+                .append(", isRingbackRequested: ")
+                .append(this.mRingbackRequested)
+                .append(", disconnectCause: ")
+                .append(this.mDisconnectCause)
+                .append(", callDirection: ")
+                .append(this.mCallDirection)
+                .toString();
     }
 
     public PhoneAccountHandle getPhoneAccount() {
@@ -266,7 +354,8 @@ public final class ParcelableConference implements Parcelable {
         parcel.writeInt(this.mConnectionCapabilities);
         parcel.writeList(this.mConnectionIds);
         parcel.writeLong(this.mConnectTimeMillis);
-        parcel.writeStrongBinder(this.mVideoProvider != null ? this.mVideoProvider.asBinder() : null);
+        parcel.writeStrongBinder(
+                this.mVideoProvider != null ? this.mVideoProvider.asBinder() : null);
         parcel.writeInt(this.mVideoState);
         parcel.writeParcelable(this.mStatusHints, 0);
         parcel.writeBundle(this.mExtras);

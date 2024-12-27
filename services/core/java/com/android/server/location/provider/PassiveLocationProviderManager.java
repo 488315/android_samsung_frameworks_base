@@ -1,7 +1,9 @@
 package com.android.server.location.provider;
 
 import android.location.provider.ProviderRequest;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Collection;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -12,7 +14,8 @@ public final class PassiveLocationProviderManager extends LocationProviderManage
         return 0L;
     }
 
-    @Override // com.android.server.location.provider.LocationProviderManager, com.android.server.location.listeners.ListenerMultiplexer
+    @Override // com.android.server.location.provider.LocationProviderManager,
+              // com.android.server.location.listeners.ListenerMultiplexer
     public final String getServiceState() {
         ProviderRequest providerRequest;
         MockableLocationProvider mockableLocationProvider = this.mProvider;
@@ -22,7 +25,8 @@ public final class PassiveLocationProviderManager extends LocationProviderManage
         return providerRequest.isActive() ? "registered" : "unregistered";
     }
 
-    @Override // com.android.server.location.provider.LocationProviderManager, com.android.server.location.listeners.ListenerMultiplexer
+    @Override // com.android.server.location.provider.LocationProviderManager,
+              // com.android.server.location.listeners.ListenerMultiplexer
     public final ProviderRequest mergeRegistrations(Collection collection) {
         return new ProviderRequest.Builder().setIntervalMillis(0L).build();
     }

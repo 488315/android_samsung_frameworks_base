@@ -7,6 +7,7 @@ import android.util.MutableLong;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
 import android.util.proto.ProtoUtils;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,12 +31,14 @@ public final class AppTimeTracker {
         for (int i = 0; i < this.mPackageTimes.size(); i++) {
             long start2 = protoOutputStream.start(2246267895811L);
             protoOutputStream.write(1138166333441L, (String) this.mPackageTimes.keyAt(i));
-            protoOutputStream.write(1112396529666L, ((MutableLong) this.mPackageTimes.valueAt(i)).value);
+            protoOutputStream.write(
+                    1112396529666L, ((MutableLong) this.mPackageTimes.valueAt(i)).value);
             protoOutputStream.end(start2);
         }
         long j = this.mStartedTime;
         if (j != 0) {
-            ProtoUtils.toDuration(protoOutputStream, 1146756268036L, j, SystemClock.elapsedRealtime());
+            ProtoUtils.toDuration(
+                    protoOutputStream, 1146756268036L, j, SystemClock.elapsedRealtime());
             protoOutputStream.write(1138166333445L, this.mStartedPackage);
         }
         protoOutputStream.end(start);
@@ -59,7 +62,8 @@ public final class AppTimeTracker {
             printWriter.print("mPackageTime:");
             printWriter.print((String) this.mPackageTimes.keyAt(i));
             printWriter.print("=");
-            TimeUtils.formatDuration(((MutableLong) this.mPackageTimes.valueAt(i)).value, printWriter);
+            TimeUtils.formatDuration(
+                    ((MutableLong) this.mPackageTimes.valueAt(i)).value, printWriter);
             printWriter.println();
         }
         if (!z || this.mStartedTime == 0) {

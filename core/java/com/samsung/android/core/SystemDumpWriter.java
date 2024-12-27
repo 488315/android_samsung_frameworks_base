@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.os.SystemClock;
 import android.telecom.Logging.Session;
 import android.util.Slog;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,7 +28,8 @@ public class SystemDumpWriter implements AutoCloseable {
     private String mFileTitle;
     private File mOutputFile;
     private String mTag = "SystemDumpWriter_";
-    private SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault());
+    private SimpleDateFormat mFormat =
+            new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss", Locale.getDefault());
     private final LinkedList<String> mDumpRequests = new LinkedList<>();
 
     public SystemDumpWriter(String tag, boolean savedFileNameDate) {
@@ -67,7 +69,12 @@ public class SystemDumpWriter implements AutoCloseable {
                         fos.write(10);
                         fos.write(10);
                     }
-                    String startContent = tag + " #" + sTagCountMap.get(tag) + " " + this.mFormat.format(new Date());
+                    String startContent =
+                            tag
+                                    + " #"
+                                    + sTagCountMap.get(tag)
+                                    + " "
+                                    + this.mFormat.format(new Date());
                     fos.write(startContent);
                     fos.close();
                 } catch (IOException e) {
@@ -95,12 +102,13 @@ public class SystemDumpWriter implements AutoCloseable {
     public void close() throws Exception {
         long creationStartTime = SystemClock.uptimeMillis();
         try {
-            FileOutputStream out = new FileOutputStream(this.mOutputFile, this.mOutputFile.exists());
+            FileOutputStream out =
+                    new FileOutputStream(this.mOutputFile, this.mOutputFile.exists());
             try {
                 Iterator<String> it = this.mDumpRequests.iterator();
                 while (it.hasNext()) {
                     String service = it.next();
-                    Debug.dumpService(service, out.getFD(), new String[]{"-a"});
+                    Debug.dumpService(service, out.getFD(), new String[] {"-a"});
                 }
                 Slog.d(this.mTag, "Successful to save dumpsys to " + this.mFileTitle);
                 out.close();
@@ -109,7 +117,9 @@ public class SystemDumpWriter implements AutoCloseable {
         } catch (IOException e) {
             Slog.e(this.mTag, "close exception, " + e);
         }
-        Slog.d(this.mTag, "save dumpsys, duration=" + (SystemClock.uptimeMillis() - creationStartTime));
+        Slog.d(
+                this.mTag,
+                "save dumpsys, duration=" + (SystemClock.uptimeMillis() - creationStartTime));
     }
 
     public static void saveDumpsysFiles(String tag, boolean savedFileNameDate) {

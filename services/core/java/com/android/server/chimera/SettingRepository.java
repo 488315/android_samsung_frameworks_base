@@ -3,10 +3,13 @@ package com.android.server.chimera;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.SystemProperties;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.ExplicitHealthCheckController$$ExternalSyntheticOutline0;
 import com.android.server.am.MARsPolicyManager;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,7 +23,8 @@ public final class SettingRepository {
     public boolean mIsDynamicTargetFreeEnabled;
     public int mLastCachedMax;
     public final SystemRepository mSystemRepository;
-    public boolean mQuickReclaimEnable = SystemProperties.getBoolean("ro.slmk.chimera.quickreclaim_enable", false);
+    public boolean mQuickReclaimEnable =
+            SystemProperties.getBoolean("ro.slmk.chimera.quickreclaim_enable", false);
     public boolean mIsPSITrackerEnable = true;
     public boolean mIsAppCacheReclaimEnable = false;
     public boolean mIsFastMadviseEnable = false;
@@ -35,16 +39,21 @@ public final class SettingRepository {
         this.mDefaultCachedMax = parseInt;
         this.mLastCachedMax = parseInt;
         systemRepository.getClass();
-        boolean equals = SystemProperties.get("ro.slmk.use_bg_keeping_policy", "false").equals("true");
+        boolean equals =
+                SystemProperties.get("ro.slmk.use_bg_keeping_policy", "false").equals("true");
         this.mIsConservativeMode = equals;
         this.mIsDefaultConservativeMode = equals;
     }
 
     public final void enableCustomMode(boolean z, boolean z2) {
         this.mSystemRepository.getClass();
-        if ("true".equals(SystemProperties.get("persist.config.chimera.enable", "false").split(",")[0])) {
+        if ("true"
+                .equals(
+                        SystemProperties.get("persist.config.chimera.enable", "false")
+                                .split(",")[0])) {
             if (z) {
-                SystemProperties.set("persist.config.chimera.enable", "true,".concat(z2 ? "CC" : "CA"));
+                SystemProperties.set(
+                        "persist.config.chimera.enable", "true,".concat(z2 ? "CC" : "CA"));
             } else {
                 SystemProperties.set("persist.config.chimera.enable", "true");
             }
@@ -58,14 +67,16 @@ public final class SettingRepository {
         String str = SystemProperties.get("persist.config.chimera.enable", "false");
         this.mIsCustomMode = false;
         this.mIsConservativeMode = this.mIsDefaultConservativeMode;
-        this.mIsAppCacheReclaimEnable = BatteryService$$ExternalSyntheticOutline0.m45m("/proc/proc_caches_reclaim");
+        this.mIsAppCacheReclaimEnable =
+                BatteryService$$ExternalSyntheticOutline0.m45m("/proc/proc_caches_reclaim");
         this.mIsFastMadviseEnable = CoreRune.FAST_MADVISE_ENABLED;
         boolean z = MARsPolicyManager.MARs_ENABLE;
         MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.getClass();
         this.mIsSubProcEnable = MARsPolicyManager.isChinaPolicyEnabled();
         String[] split = str.split(",");
         boolean z2 = this.mIsConservativeMode;
-        List<PackageInfo> installedPackages = systemRepository.mContext.getPackageManager().getInstalledPackages(0);
+        List<PackageInfo> installedPackages =
+                systemRepository.mContext.getPackageManager().getInstalledPackages(0);
         if (installedPackages != null) {
             Iterator<PackageInfo> it = installedPackages.iterator();
             while (it.hasNext()) {
@@ -87,7 +98,10 @@ public final class SettingRepository {
                         }
                     }
                     if (this.mLastCachedMax != i || z2 != this.mIsConservativeMode) {
-                        Intent m = ExplicitHealthCheckController$$ExternalSyntheticOutline0.m("com.android.server.am.BROADCAST_SET_LMKD_PARAMETER_INTENT", "android");
+                        Intent m =
+                                ExplicitHealthCheckController$$ExternalSyntheticOutline0.m(
+                                        "com.android.server.am.BROADCAST_SET_LMKD_PARAMETER_INTENT",
+                                        "android");
                         if (this.mLastCachedMax != i) {
                             m.putExtra("ro.slmk.dha_cached_max", Integer.toString(i));
                             this.mLastCachedMax = i;
@@ -98,7 +112,9 @@ public final class SettingRepository {
                         }
                         systemRepository.mContext.sendBroadcast(m);
                     }
-                    this.mIsPSITrackerEnable = Boolean.parseBoolean(SystemProperties.get("ro.slmk.psitracker_enable", "true"));
+                    this.mIsPSITrackerEnable =
+                            Boolean.parseBoolean(
+                                    SystemProperties.get("ro.slmk.psitracker_enable", "true"));
                     return;
                 }
             }

@@ -11,6 +11,7 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -29,7 +30,9 @@ public interface IBootControl extends IBase {
 
         @Override // android.hidl.base.V1_0.IBase
         public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -46,7 +49,9 @@ public interface IBootControl extends IBase {
 
         @Override // android.hardware.boot.V1_0.IBootControl
         public final int getCurrentSlot() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.boot@1.0::IBootControl");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.boot@1.0::IBootControl");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(2, m, hwParcel, 0);
@@ -85,7 +90,8 @@ public interface IBootControl extends IBase {
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -187,11 +193,13 @@ public interface IBootControl extends IBase {
     }
 
     static IBootControl getService() {
-        IHwBinder service = HwBinder.getService("android.hardware.boot@1.0::IBootControl", "default", true);
+        IHwBinder service =
+                HwBinder.getService("android.hardware.boot@1.0::IBootControl", "default", true);
         if (service == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = service.queryLocalInterface("android.hardware.boot@1.0::IBootControl");
+        IHwInterface queryLocalInterface =
+                service.queryLocalInterface("android.hardware.boot@1.0::IBootControl");
         if (queryLocalInterface != null && (queryLocalInterface instanceof IBootControl)) {
             return (IBootControl) queryLocalInterface;
         }

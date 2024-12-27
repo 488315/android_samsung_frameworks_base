@@ -55,6 +55,5 @@ abstract class RippleComponent {
         }
     }
 
-    protected void onTargetRadiusChanged(float targetRadius) {
-    }
+    protected void onTargetRadiusChanged(float targetRadius) {}
 }

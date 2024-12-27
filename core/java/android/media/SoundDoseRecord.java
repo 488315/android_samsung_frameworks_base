@@ -3,25 +3,28 @@ package android.media;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SoundDoseRecord implements Parcelable {
-    public static final Parcelable.Creator<SoundDoseRecord> CREATOR = new Parcelable.Creator<SoundDoseRecord>() { // from class: android.media.SoundDoseRecord.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SoundDoseRecord createFromParcel(Parcel _aidl_source) {
-            SoundDoseRecord _aidl_out = new SoundDoseRecord();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SoundDoseRecord> CREATOR =
+            new Parcelable.Creator<
+                    SoundDoseRecord>() { // from class: android.media.SoundDoseRecord.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SoundDoseRecord createFromParcel(Parcel _aidl_source) {
+                    SoundDoseRecord _aidl_out = new SoundDoseRecord();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SoundDoseRecord[] newArray(int _aidl_size) {
-            return new SoundDoseRecord[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SoundDoseRecord[] newArray(int _aidl_size) {
+                    return new SoundDoseRecord[_aidl_size];
+                }
+            };
     public long timestamp = 0;
     public int duration = 0;
     public float value = 0.0f;

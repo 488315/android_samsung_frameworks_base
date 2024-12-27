@@ -2,13 +2,14 @@ package android.app.ambientcontext;
 
 import android.annotation.NonNull;
 import android.annotation.SystemApi;
-import android.app.ambientcontext.AmbientContextEvent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.util.ArraySet;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -17,33 +18,40 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes.dex */
 public final class AmbientContextEventRequest implements Parcelable {
-    public static final Parcelable.Creator<AmbientContextEventRequest> CREATOR = new Parcelable.Creator<AmbientContextEventRequest>() { // from class: android.app.ambientcontext.AmbientContextEventRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AmbientContextEventRequest[] newArray(int size) {
-            return new AmbientContextEventRequest[size];
-        }
+    public static final Parcelable.Creator<AmbientContextEventRequest> CREATOR =
+            new Parcelable.Creator<AmbientContextEventRequest>() { // from class:
+                // android.app.ambientcontext.AmbientContextEventRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AmbientContextEventRequest[] newArray(int size) {
+                    return new AmbientContextEventRequest[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AmbientContextEventRequest createFromParcel(Parcel in) {
-            return new AmbientContextEventRequest(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AmbientContextEventRequest createFromParcel(Parcel in) {
+                    return new AmbientContextEventRequest(in);
+                }
+            };
     private final Set<Integer> mEventTypes;
     private final PersistableBundle mOptions;
 
     private AmbientContextEventRequest(Set<Integer> eventTypes, PersistableBundle options) {
         this.mEventTypes = eventTypes;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEventTypes);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEventTypes);
         Preconditions.checkArgument(!eventTypes.isEmpty(), "eventTypes cannot be empty");
         Iterator<Integer> it = eventTypes.iterator();
         while (it.hasNext()) {
             int eventType = it.next().intValue();
-            AnnotationValidations.validate((Class<? extends Annotation>) AmbientContextEvent.EventCode.class, (Annotation) null, eventType);
+            AnnotationValidations.validate(
+                    (Class<? extends Annotation>) AmbientContextEvent.EventCode.class,
+                    (Annotation) null,
+                    eventType);
         }
         this.mOptions = options;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mOptions);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mOptions);
     }
 
     public Set<Integer> getEventTypes() {
@@ -55,7 +63,11 @@ public final class AmbientContextEventRequest implements Parcelable {
     }
 
     public String toString() {
-        return "AmbientContextEventRequest { eventTypes = " + this.mEventTypes + ", options = " + this.mOptions + " }";
+        return "AmbientContextEventRequest { eventTypes = "
+                + this.mEventTypes
+                + ", options = "
+                + this.mOptions
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -71,17 +83,23 @@ public final class AmbientContextEventRequest implements Parcelable {
 
     private AmbientContextEventRequest(Parcel in) {
         Set<Integer> eventTypes = in.readArraySet(Integer.class.getClassLoader());
-        PersistableBundle options = (PersistableBundle) in.readTypedObject(PersistableBundle.CREATOR);
+        PersistableBundle options =
+                (PersistableBundle) in.readTypedObject(PersistableBundle.CREATOR);
         this.mEventTypes = eventTypes;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEventTypes);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mEventTypes);
         Preconditions.checkArgument(!eventTypes.isEmpty(), "eventTypes cannot be empty");
         Iterator<Integer> it = eventTypes.iterator();
         while (it.hasNext()) {
             int eventType = it.next().intValue();
-            AnnotationValidations.validate((Class<? extends Annotation>) AmbientContextEvent.EventCode.class, (Annotation) null, eventType);
+            AnnotationValidations.validate(
+                    (Class<? extends Annotation>) AmbientContextEvent.EventCode.class,
+                    (Annotation) null,
+                    eventType);
         }
         this.mOptions = options;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mOptions);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mOptions);
     }
 
     public static final class Builder {
@@ -115,13 +133,15 @@ public final class AmbientContextEventRequest implements Parcelable {
             if ((this.mBuilderFieldsSet & 2) == 0) {
                 this.mOptions = new PersistableBundle();
             }
-            AmbientContextEventRequest o = new AmbientContextEventRequest(this.mEventTypes, this.mOptions);
+            AmbientContextEventRequest o =
+                    new AmbientContextEventRequest(this.mEventTypes, this.mOptions);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 4) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }

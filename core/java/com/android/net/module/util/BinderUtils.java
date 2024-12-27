@@ -15,7 +15,8 @@ public class BinderUtils {
         T get() throws Exception;
     }
 
-    public static final <T extends Exception> void withCleanCallingIdentity(ThrowingRunnable<T> action) throws Exception {
+    public static final <T extends Exception> void withCleanCallingIdentity(
+            ThrowingRunnable<T> action) throws Exception {
         long callingIdentity = Binder.clearCallingIdentity();
         try {
             action.run();
@@ -24,7 +25,8 @@ public class BinderUtils {
         }
     }
 
-    public static final <T, E extends Exception> T withCleanCallingIdentity(ThrowingSupplier<T, E> action) throws Exception {
+    public static final <T, E extends Exception> T withCleanCallingIdentity(
+            ThrowingSupplier<T, E> action) throws Exception {
         long callingIdentity = Binder.clearCallingIdentity();
         try {
             return action.get();

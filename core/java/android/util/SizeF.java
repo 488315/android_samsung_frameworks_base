@@ -2,25 +2,27 @@ package android.util;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes4.dex */
 public final class SizeF implements Parcelable {
-    public static final Parcelable.Creator<SizeF> CREATOR = new Parcelable.Creator<SizeF>() { // from class: android.util.SizeF.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SizeF createFromParcel(Parcel in) {
-            float width = in.readFloat();
-            float height = in.readFloat();
-            return new SizeF(width, height);
-        }
+    public static final Parcelable.Creator<SizeF> CREATOR =
+            new Parcelable.Creator<SizeF>() { // from class: android.util.SizeF.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SizeF createFromParcel(Parcel in) {
+                    float width = in.readFloat();
+                    float height = in.readFloat();
+                    return new SizeF(width, height);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SizeF[] newArray(int size) {
-            return new SizeF[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SizeF[] newArray(int size) {
+                    return new SizeF[size];
+                }
+            };
     private final float mHeight;
     private final float mWidth;
 
@@ -73,7 +75,9 @@ public final class SizeF implements Parcelable {
             throw e;
         }
         try {
-            return new SizeF(Float.parseFloat(string.substring(0, sep_ix)), Float.parseFloat(string.substring(sep_ix + 1)));
+            return new SizeF(
+                    Float.parseFloat(string.substring(0, sep_ix)),
+                    Float.parseFloat(string.substring(sep_ix + 1)));
         } catch (NumberFormatException e2) {
             throw invalidSizeF(string);
         } catch (IllegalArgumentException e3) {

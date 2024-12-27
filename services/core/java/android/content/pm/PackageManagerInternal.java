@@ -4,12 +4,14 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.ArrayMap;
+
 import com.android.server.pm.LauncherAppsService;
 import com.android.server.pm.PackageList;
 import com.android.server.pm.permission.LegacyPermissionSettings;
 import com.android.server.pm.permission.PermissionManagerServiceImpl$$ExternalSyntheticLambda10;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageStateInternal;
+
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -22,11 +24,9 @@ public abstract class PackageManagerInternal {
     public interface PackageListObserver {
         void onPackageAdded(String str, int i);
 
-        default void onPackageChanged(int i, String str) {
-        }
+        default void onPackageChanged(int i, String str) {}
 
-        default void onPackageRemoved(String str, int i) {
-        }
+        default void onPackageRemoved(String str, int i) {}
     }
 
     public abstract boolean canAccessComponent(int i, int i2, ComponentName componentName);
@@ -39,7 +39,9 @@ public abstract class PackageManagerInternal {
 
     public abstract void forEachPackage(Consumer consumer);
 
-    public abstract void forEachPackageSetting(PermissionManagerServiceImpl$$ExternalSyntheticLambda10 permissionManagerServiceImpl$$ExternalSyntheticLambda10);
+    public abstract void forEachPackageSetting(
+            PermissionManagerServiceImpl$$ExternalSyntheticLambda10
+                    permissionManagerServiceImpl$$ExternalSyntheticLambda10);
 
     public abstract void forEachPackageState(Consumer consumer);
 
@@ -71,7 +73,8 @@ public abstract class PackageManagerInternal {
 
     public abstract String[] getSharedUserPackagesForPackage(int i, String str);
 
-    public abstract SuspendDialogInfo getSuspendedDialogInfo(String str, UserPackage userPackage, int i);
+    public abstract SuspendDialogInfo getSuspendedDialogInfo(
+            String str, UserPackage userPackage, int i);
 
     public abstract Bundle getSuspendedPackageLauncherExtras(int i, String str);
 
@@ -79,7 +82,8 @@ public abstract class PackageManagerInternal {
 
     public abstract int getUidTargetSdkVersion(int i);
 
-    public abstract void grantImplicitAccess(int i, Intent intent, int i2, int i3, boolean z, boolean z2);
+    public abstract void grantImplicitAccess(
+            int i, Intent intent, int i2, int i3, boolean z, boolean z2);
 
     public abstract boolean hasInstantApplicationMetadata(int i, String str);
 
@@ -107,7 +111,11 @@ public abstract class PackageManagerInternal {
 
     public abstract void reconcileAppsData(int i, int i2, boolean z);
 
-    public abstract boolean registerInstalledLoadingProgressCallback(String str, LauncherAppsService.LauncherAppsImpl.PackageLoadingProgressCallback packageLoadingProgressCallback, int i);
+    public abstract boolean registerInstalledLoadingProgressCallback(
+            String str,
+            LauncherAppsService.LauncherAppsImpl.PackageLoadingProgressCallback
+                    packageLoadingProgressCallback,
+            int i);
 
     public abstract void removeIsolatedUid(int i);
 

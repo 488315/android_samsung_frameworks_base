@@ -1,7 +1,5 @@
 package android.hardware.biometrics.face;
 
-import android.hardware.biometrics.face.ISession;
-import android.hardware.biometrics.face.ISessionCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IFace extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$biometrics$face$IFace".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$biometrics$face$IFace".replace('$', '.');
     public static final String HASH = "c43fbb9be4a662cc9ace640dba21cccdb84c6c21";
     public static final int VERSION = 4;
 
@@ -29,7 +28,8 @@ public interface IFace extends IInterface {
         }
 
         @Override // android.hardware.biometrics.face.IFace
-        public ISession createSession(int sensorId, int userId, ISessionCallback cb) throws RemoteException {
+        public ISession createSession(int sensorId, int userId, ISessionCallback cb)
+                throws RemoteException {
             return null;
         }
 
@@ -49,7 +49,7 @@ public interface IFace extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFace {
+    public abstract static class Stub extends Binder implements IFace {
         static final int TRANSACTION_createSession = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -97,7 +97,8 @@ public interface IFace extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -125,7 +126,8 @@ public interface IFace extends IInterface {
                 case 2:
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
-                    ISessionCallback _arg2 = ISessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ISessionCallback _arg2 =
+                            ISessionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     ISession _result2 = createSession(_arg0, _arg1, _arg2);
                     reply.writeNoException();
@@ -165,7 +167,8 @@ public interface IFace extends IInterface {
                         throw new RemoteException("Method getSensorProps is unimplemented.");
                     }
                     _reply.readException();
-                    SensorProps[] _result = (SensorProps[]) _reply.createTypedArray(SensorProps.CREATOR);
+                    SensorProps[] _result =
+                            (SensorProps[]) _reply.createTypedArray(SensorProps.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -174,7 +177,8 @@ public interface IFace extends IInterface {
             }
 
             @Override // android.hardware.biometrics.face.IFace
-            public ISession createSession(int sensorId, int userId, ISessionCallback cb) throws RemoteException {
+            public ISession createSession(int sensorId, int userId, ISessionCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

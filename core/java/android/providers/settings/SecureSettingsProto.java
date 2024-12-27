@@ -117,7 +117,8 @@ public final class SecureSettingsProto {
         public static final long ACCESSIBILITY_MAGNIFICATION_FOLLOW_TYPING_ENABLED = 1146756268075L;
         public static final long ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED = 1146756268082L;
         public static final long ACCESSIBILITY_MAGNIFICATION_MODE = 1146756268066L;
-        public static final long ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED = 1146756268085L;
+        public static final long ACCESSIBILITY_MAGNIFICATION_TWO_FINGER_TRIPLE_TAP_ENABLED =
+                1146756268085L;
         public static final long ACCESSIBILITY_PINCH_TO_ZOOM_ANYWHERE_ENABLED = 1146756268087L;
         public static final long ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED = 1146756268088L;
         public static final long AUTOCLICK_DELAY = 1146756268036L;
@@ -163,23 +164,20 @@ public final class SecureSettingsProto {
         public static final long TOUCH_EXPLORATION_ENABLED = 1146756268062L;
         public static final long TOUCH_EXPLORATION_GRANTED_ACCESSIBILITY_SERVICES = 1146756268063L;
 
-        public Accessibility() {
-        }
+        public Accessibility() {}
     }
 
     public final class AdaptiveSleep {
         public static final long ENABLED = 1146756268033L;
 
-        public AdaptiveSleep() {
-        }
+        public AdaptiveSleep() {}
     }
 
     public final class AlwaysOnVpn {
         public static final long APP = 1146756268033L;
         public static final long LOCKDOWN = 1146756268034L;
 
-        public AlwaysOnVpn() {
-        }
+        public AlwaysOnVpn() {}
     }
 
     public final class Assist {
@@ -199,16 +197,14 @@ public final class SecureSettingsProto {
         public static final long TOUCH_GESTURE_ENABLED = 1146756268042L;
         public static final long VISUAL_QUERY_ACCESSIBILITY_DETECTION_ENABLED = 1146756268046L;
 
-        public Assist() {
-        }
+        public Assist() {}
     }
 
     public final class AssistHandles {
         public static final long LEARNING_EVENT_COUNT = 1146756268034L;
         public static final long LEARNING_TIME_ELAPSED_MILLIS = 1146756268033L;
 
-        public AssistHandles() {
-        }
+        public AssistHandles() {}
     }
 
     public final class Autofill {
@@ -221,8 +217,7 @@ public final class SecureSettingsProto {
         public static final long USER_DATA_MAX_VALUE_LENGTH = 1146756268038L;
         public static final long USER_DATA_MIN_VALUE_LENGTH = 1146756268039L;
 
-        public Autofill() {
-        }
+        public Autofill() {}
     }
 
     public final class AutomaticStorageManager {
@@ -232,8 +227,7 @@ public final class SecureSettingsProto {
         public static final long LAST_RUN = 1146756268036L;
         public static final long TURNED_OFF_BY_POLICY = 1146756268037L;
 
-        public AutomaticStorageManager() {
-        }
+        public AutomaticStorageManager() {}
     }
 
     public final class Backup {
@@ -245,8 +239,7 @@ public final class SecureSettingsProto {
         public static final long PROVISIONED = 1146756268035L;
         public static final long TRANSPORT = 1146756268036L;
 
-        public Backup() {
-        }
+        public Backup() {}
     }
 
     public final class Camera {
@@ -255,36 +248,31 @@ public final class SecureSettingsProto {
         public static final long GESTURE_DISABLED = 1146756268033L;
         public static final long LIFT_TRIGGER_ENABLED = 1146756268036L;
 
-        public Camera() {
-        }
+        public Camera() {}
     }
 
     public final class Clipboard {
         public static final long SHOW_ACCESS_NOTIFICATIONS = 1146756268033L;
 
-        public Clipboard() {
-        }
+        public Clipboard() {}
     }
 
     public final class Controls {
         public static final long ENABLED = 1146756268033L;
 
-        public Controls() {
-        }
+        public Controls() {}
     }
 
     public final class DateTime {
         public static final long LOCATION_TIME_ZONE_DETECTION_ENABLED = 1146756268033L;
 
-        public DateTime() {
-        }
+        public DateTime() {}
     }
 
     public final class Display {
         public static final long SCREEN_RESOLUTION_MODE = 1146756268033L;
 
-        public Display() {
-        }
+        public Display() {}
     }
 
     public final class Doze {
@@ -296,24 +284,21 @@ public final class SecureSettingsProto {
         public static final long PULSE_ON_TAP = 1146756268038L;
         public static final long SUPPRESS = 1146756268039L;
 
-        public Doze() {
-        }
+        public Doze() {}
     }
 
     public final class EmergencyResponse {
         public static final long EMERGENCY_GESTURE_ENABLED = 1146756268035L;
         public static final long EMERGENCY_GESTURE_SOUND_ENABLED = 1146756268036L;
 
-        public EmergencyResponse() {
-        }
+        public EmergencyResponse() {}
     }
 
     public final class EvenDimmer {
         public static final long EVEN_DIMMER_ACTIVATED = 1146756268033L;
         public static final long EVEN_DIMMER_MIN_NITS = 1146756268034L;
 
-        public EvenDimmer() {
-        }
+        public EvenDimmer() {}
     }
 
     public final class Gesture {
@@ -331,24 +316,21 @@ public final class SecureSettingsProto {
         public static final long SKIP_ENABLED = 1146756268040L;
         public static final long SKIP_TOUCH_COUNT = 1146756268044L;
 
-        public Gesture() {
-        }
+        public Gesture() {}
     }
 
     public final class GestureNavigation {
         public static final long BACK_GESTURE_INSET_SCALE_LEFT = 1146756268033L;
         public static final long BACK_GESTURE_INSET_SCALE_RIGHT = 1146756268034L;
 
-        public GestureNavigation() {
-        }
+        public GestureNavigation() {}
     }
 
     public final class Incall {
         public static final long BACK_BUTTON_BEHAVIOR = 1146756268034L;
         public static final long POWER_BUTTON_BEHAVIOR = 1146756268033L;
 
-        public Incall() {
-        }
+        public Incall() {}
     }
 
     public final class InputMethods {
@@ -361,31 +343,27 @@ public final class SecureSettingsProto {
         public static final long SHOW_IME_WITH_HARD_KEYBOARD = 1146756268039L;
         public static final long SUBTYPE_HISTORY = 1146756268037L;
 
-        public InputMethods() {
-        }
+        public InputMethods() {}
     }
 
     public final class Launcher {
         public static final long SWIPE_UP_TO_SWITCH_APPS_ENABLED = 1146756268033L;
 
-        public Launcher() {
-        }
+        public Launcher() {}
     }
 
     public final class Location {
         public static final long CHANGER = 1146756268034L;
         public static final long MODE = 1146756268033L;
 
-        public Location() {
-        }
+        public Location() {}
     }
 
     public final class LocationAccessCheck {
         public static final long DELAY_MILLIS = 1146756268034L;
         public static final long INTERVAL_MILLIS = 1146756268033L;
 
-        public LocationAccessCheck() {
-        }
+        public LocationAccessCheck() {}
     }
 
     public final class LockScreen {
@@ -394,15 +372,13 @@ public final class SecureSettingsProto {
         public static final long LOCK_AFTER_TIMEOUT = 1146756268033L;
         public static final long SHOW_NOTIFICATIONS = 1146756268036L;
 
-        public LockScreen() {
-        }
+        public LockScreen() {}
     }
 
     public final class ManagedProfile {
         public static final long CONTACT_REMOTE_SEARCH = 1146756268033L;
 
-        public ManagedProfile() {
-        }
+        public ManagedProfile() {}
     }
 
     public final class Mount {
@@ -411,16 +387,14 @@ public final class SecureSettingsProto {
         public static final long UMS_NOTIFY_ENABLED = 1146756268036L;
         public static final long UMS_PROMPT = 1146756268035L;
 
-        public Mount() {
-        }
+        public Mount() {}
     }
 
     public final class NavBar {
         public static final long NAV_BAR_FORCE_VISIBLE = 1146756268033L;
         public static final long NAV_BAR_KIDS_MODE = 1146756268034L;
 
-        public NavBar() {
-        }
+        public NavBar() {}
     }
 
     public final class NfcPayment {
@@ -428,8 +402,7 @@ public final class SecureSettingsProto {
         public static final long FOREGROUND = 1146756268034L;
         public static final long PAYMENT_SERVICE_SEARCH_URI = 1146756268035L;
 
-        public NfcPayment() {
-        }
+        public NfcPayment() {}
     }
 
     public final class NightDisplay {
@@ -440,8 +413,7 @@ public final class SecureSettingsProto {
         public static final long CUSTOM_START_TIME = 1146756268036L;
         public static final long LAST_ACTIVATED_TIME = 1146756268038L;
 
-        public NightDisplay() {
-        }
+        public NightDisplay() {}
     }
 
     public final class Notification {
@@ -453,8 +425,7 @@ public final class SecureSettingsProto {
         public static final long IN_CALL_NOTIFICATION_ENABLED = 1146756268038L;
         public static final long SHOW_NOTE_ABOUT_NOTIFICATION_HIDING = 1146756268037L;
 
-        public Notification() {
-        }
+        public Notification() {}
     }
 
     public final class OneHanded {
@@ -463,16 +434,14 @@ public final class SecureSettingsProto {
         public static final long ONE_HANDED_MODE_TIMEOUT = 1146756268034L;
         public static final long TAPS_APP_TO_EXIT = 1146756268035L;
 
-        public OneHanded() {
-        }
+        public OneHanded() {}
     }
 
     public final class PackageVerifier {
         public static final long STATE = 1146756268034L;
         public static final long USER_CONSENT = 1146756268033L;
 
-        public PackageVerifier() {
-        }
+        public PackageVerifier() {}
     }
 
     public final class ParentalControl {
@@ -480,22 +449,19 @@ public final class SecureSettingsProto {
         public static final long LAST_UPDATE = 1146756268034L;
         public static final long REDIRECT_URL = 1146756268035L;
 
-        public ParentalControl() {
-        }
+        public ParentalControl() {}
     }
 
     public final class PowerMenuPrivacy {
         public static final long SHOW = 1146756268033L;
 
-        public PowerMenuPrivacy() {
-        }
+        public PowerMenuPrivacy() {}
     }
 
     public final class ExtraLowPowerMode {
         public static final long EXTRA_AUTOMATIC_POWER_SAVE_MODE = 1146756268033L;
 
-        public ExtraLowPowerMode() {
-        }
+        public ExtraLowPowerMode() {}
     }
 
     public final class PrintService {
@@ -503,16 +469,14 @@ public final class SecureSettingsProto {
         public static final long ENABLED_PRINT_SERVICES = 1146756268035L;
         public static final long SEARCH_URI = 1146756268033L;
 
-        public PrintService() {
-        }
+        public PrintService() {}
     }
 
     public final class QuickSettings {
         public static final long AUTO_ADDED_TILES = 1146756268034L;
         public static final long TILES = 1146756268033L;
 
-        public QuickSettings() {
-        }
+        public QuickSettings() {}
     }
 
     public final class ReduceBrightColors {
@@ -520,16 +484,14 @@ public final class SecureSettingsProto {
         public static final long LEVEL = 1146756268034L;
         public static final long PERSIST_ACROSS_REBOOTS = 1146756268035L;
 
-        public ReduceBrightColors() {
-        }
+        public ReduceBrightColors() {}
     }
 
     public final class Rotation {
         public static final long NUM_ROTATION_SUGGESTIONS_ACCEPTED = 1146756268034L;
         public static final long SHOW_ROTATION_SUGGESTIONS = 1146756268033L;
 
-        public Rotation() {
-        }
+        public Rotation() {}
     }
 
     public final class Screensaver {
@@ -539,8 +501,7 @@ public final class SecureSettingsProto {
         public static final long DEFAULT_COMPONENT = 1146756268037L;
         public static final long ENABLED = 1146756268033L;
 
-        public Screensaver() {
-        }
+        public Screensaver() {}
     }
 
     public final class Search {
@@ -564,15 +525,13 @@ public final class SecureSettingsProto {
         public static final long THREAD_KEEPALIVE_SECONDS = 1146756268050L;
         public static final long WEB_RESULTS_OVERRIDE_LIMIT = 1146756268037L;
 
-        public Search() {
-        }
+        public Search() {}
     }
 
     public final class CameraAutorotate {
         public static final long ENABLED = 1146756268033L;
 
-        public CameraAutorotate() {
-        }
+        public CameraAutorotate() {}
     }
 
     public final class SpellChecker {
@@ -580,16 +539,14 @@ public final class SecureSettingsProto {
         public static final long SELECTED = 1146756268034L;
         public static final long SELECTED_SUBTYPE = 1146756268035L;
 
-        public SpellChecker() {
-        }
+        public SpellChecker() {}
     }
 
     public final class Sounds {
         public static final long CHARGING_SOUNDS_ENABLED = 1146756268033L;
         public static final long CHARGING_VIBRATION_ENABLED = 1146756268034L;
 
-        public Sounds() {
-        }
+        public Sounds() {}
     }
 
     public final class TrackpadGesture {
@@ -599,8 +556,7 @@ public final class SecureSettingsProto {
         public static final long TRACKPAD_GESTURE_OVERVIEW_ENABLED = 1146756268035L;
         public static final long TRACKPAD_GESTURE_QUICK_SWITCH_ENABLED = 1146756268037L;
 
-        public TrackpadGesture() {
-        }
+        public TrackpadGesture() {}
     }
 
     public final class Tts {
@@ -610,16 +566,14 @@ public final class SecureSettingsProto {
         public static final long DEFAULT_SYNTH = 1146756268035L;
         public static final long ENABLED_PLUGINS = 1146756268037L;
 
-        public Tts() {
-        }
+        public Tts() {}
     }
 
     public final class Tty {
         public static final long PREFERRED_TTY_MODE = 1146756268034L;
         public static final long TTY_MODE_ENABLED = 1146756268033L;
 
-        public Tty() {
-        }
+        public Tty() {}
     }
 
     public final class Tv {
@@ -627,32 +581,28 @@ public final class SecureSettingsProto {
         public static final long INPUT_HIDDEN_INPUTS = 1146756268034L;
         public static final long USER_SETUP_COMPLETE = 1146756268033L;
 
-        public Tv() {
-        }
+        public Tv() {}
     }
 
     public final class Voice {
         public static final long INTERACTION_SERVICE = 1146756268033L;
         public static final long RECOGNITION_SERVICE = 1146756268034L;
 
-        public Voice() {
-        }
+        public Voice() {}
     }
 
     public final class Volume {
         public static final long HUSH_GESTURE = 1146756268033L;
         public static final long UNSAFE_VOLUME_MUSIC_ACTIVE_MS = 1146756268034L;
 
-        public Volume() {
-        }
+        public Volume() {}
     }
 
     public final class Vr {
         public static final long DISPLAY_MODE = 1146756268033L;
         public static final long ENABLED_LISTENERS = 1146756268034L;
 
-        public Vr() {
-        }
+        public Vr() {}
     }
 
     public final class Zen {
@@ -662,7 +612,6 @@ public final class SecureSettingsProto {
         public static final long SHOW_ZEN_SETTINGS_SUGGESTION = 1146756268035L;
         public static final long SHOW_ZEN_UPGRADE_NOTIFICATION = 1146756268034L;
 
-        public Zen() {
-        }
+        public Zen() {}
     }
 }

@@ -10,6 +10,7 @@ import com.android.internal.org.bouncycastle.jcajce.util.BCJcaJceHelper;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.internal.org.bouncycastle.jce.exception.ExtCertPathValidatorException;
 import com.android.internal.org.bouncycastle.x509.ExtendedPKIXParameters;
+
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.PublicKey;
@@ -49,12 +50,12 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
     private static class NoPreloadHolder {
         private static final CertBlocklist blocklist = new CertBlocklist();
 
-        private NoPreloadHolder() {
-        }
+        private NoPreloadHolder() {}
     }
 
     @Override // java.security.cert.CertPathValidatorSpi
-    public CertPathValidatorResult engineValidate(CertPath certPath, CertPathParameters params) throws CertPathValidatorException, InvalidAlgorithmParameterException {
+    public CertPathValidatorResult engineValidate(CertPath certPath, CertPathParameters params)
+            throws CertPathValidatorException, InvalidAlgorithmParameterException {
         PKIXExtendedParameters paramsPKIX;
         List certs;
         CertPath certPath2;
@@ -78,7 +79,8 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
         PKIXCertPathValidatorSpi pKIXCertPathValidatorSpi = this;
         CertPath certPath4 = certPath;
         if (params instanceof PKIXParameters) {
-            PKIXExtendedParameters.Builder paramsPKIXBldr = new PKIXExtendedParameters.Builder((PKIXParameters) params);
+            PKIXExtendedParameters.Builder paramsPKIXBldr =
+                    new PKIXExtendedParameters.Builder((PKIXParameters) params);
             if (params instanceof ExtendedPKIXParameters) {
                 ExtendedPKIXParameters extPKIX = (ExtendedPKIXParameters) params;
                 paramsPKIXBldr.setUseDeltasEnabled(extPKIX.isUseDeltasEnabled());
@@ -90,17 +92,20 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
             paramsPKIX = ((PKIXExtendedBuilderParameters) params).getBaseParameters();
         } else {
             if (!(params instanceof PKIXExtendedParameters)) {
-                throw new InvalidAlgorithmParameterException("Parameters must be a " + PKIXParameters.class.getName() + " instance.");
+                throw new InvalidAlgorithmParameterException(
+                        "Parameters must be a " + PKIXParameters.class.getName() + " instance.");
             }
             paramsPKIX = (PKIXExtendedParameters) params;
         }
         if (paramsPKIX.getTrustAnchors() == null) {
-            throw new InvalidAlgorithmParameterException("trustAnchors is null, this is not allowed for certification path validation.");
+            throw new InvalidAlgorithmParameterException(
+                    "trustAnchors is null, this is not allowed for certification path validation.");
         }
         List certs2 = certPath.getCertificates();
         int i = certs2.size();
         if (certs2.isEmpty()) {
-            throw new CertPathValidatorException("Certification path is empty.", null, certPath4, -1);
+            throw new CertPathValidatorException(
+                    "Certification path is empty.", null, certPath4, -1);
         }
         X509Certificate cert = (X509Certificate) certs2.get(0);
         if (cert != null) {
@@ -116,19 +121,35 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
         Date validityDate = CertPathValidatorUtilities.getValidityDate(paramsPKIX, currentDate);
         Set userInitialPolicySet = paramsPKIX.getInitialPolicies();
         try {
-            TrustAnchor trust = CertPathValidatorUtilities.findTrustAnchor((X509Certificate) certs2.get(certs2.size() - 1), paramsPKIX.getTrustAnchors(), paramsPKIX.getSigProvider());
+            TrustAnchor trust =
+                    CertPathValidatorUtilities.findTrustAnchor(
+                            (X509Certificate) certs2.get(certs2.size() - 1),
+                            paramsPKIX.getTrustAnchors(),
+                            paramsPKIX.getSigProvider());
             if (trust != null) {
                 checkCertificate(trust.getTrustedCert());
-                PKIXExtendedParameters paramsPKIX3 = new PKIXExtendedParameters.Builder(paramsPKIX).setTrustAnchor(trust).build();
+                PKIXExtendedParameters paramsPKIX3 =
+                        new PKIXExtendedParameters.Builder(paramsPKIX)
+                                .setTrustAnchor(trust)
+                                .build();
                 List[] policyNodes2 = new ArrayList[i + 1];
                 for (int j = 0; j < policyNodes2.length; j++) {
                     policyNodes2[j] = new ArrayList();
                 }
                 Set policySet = new HashSet();
                 policySet.add(RFC3280CertPathUtilities.ANY_POLICY);
-                PKIXPolicyNode validPolicyTree2 = new PKIXPolicyNode(new ArrayList(), 0, policySet, null, new HashSet(), RFC3280CertPathUtilities.ANY_POLICY, false);
+                PKIXPolicyNode validPolicyTree2 =
+                        new PKIXPolicyNode(
+                                new ArrayList(),
+                                0,
+                                policySet,
+                                null,
+                                new HashSet(),
+                                RFC3280CertPathUtilities.ANY_POLICY,
+                                false);
                 policyNodes2[0].add(validPolicyTree2);
-                PKIXNameConstraintValidator nameConstraintValidator2 = new PKIXNameConstraintValidator();
+                PKIXNameConstraintValidator nameConstraintValidator2 =
+                        new PKIXNameConstraintValidator();
                 Set acceptablePolicies = new HashSet();
                 PKIXNameConstraintValidator nameConstraintValidator3 = nameConstraintValidator2;
                 if (paramsPKIX3.isExplicitPolicyRequired()) {
@@ -154,7 +175,11 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
                     } catch (RuntimeException e2) {
                         ex = e2;
                         certPath3 = certPath4;
-                        throw new ExtCertPathValidatorException("Subject of trust anchor could not be (re)encoded.", ex, certPath3, -1);
+                        throw new ExtCertPathValidatorException(
+                                "Subject of trust anchor could not be (re)encoded.",
+                                ex,
+                                certPath3,
+                                -1);
                     }
                 } else {
                     try {
@@ -163,15 +188,28 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
                     } catch (RuntimeException e3) {
                         ex = e3;
                         certPath3 = certPath4;
-                        throw new ExtCertPathValidatorException("Subject of trust anchor could not be (re)encoded.", ex, certPath3, -1);
+                        throw new ExtCertPathValidatorException(
+                                "Subject of trust anchor could not be (re)encoded.",
+                                ex,
+                                certPath3,
+                                -1);
                     }
                 }
                 try {
-                    AlgorithmIdentifier workingAlgId = CertPathValidatorUtilities.getAlgorithmIdentifier(workingPublicKey);
+                    AlgorithmIdentifier workingAlgId =
+                            CertPathValidatorUtilities.getAlgorithmIdentifier(workingPublicKey);
                     workingAlgId.getAlgorithm();
                     workingAlgId.getParameters();
-                    if (paramsPKIX3.getTargetConstraints() != null && !paramsPKIX3.getTargetConstraints().match((Certificate) certs2.get(0))) {
-                        throw new ExtCertPathValidatorException("Target certificate in certification path does not match targetConstraints.", null, certPath4, 0);
+                    if (paramsPKIX3.getTargetConstraints() != null
+                            && !paramsPKIX3
+                                    .getTargetConstraints()
+                                    .match((Certificate) certs2.get(0))) {
+                        throw new ExtCertPathValidatorException(
+                                "Target certificate in certification path does not match"
+                                    + " targetConstraints.",
+                                null,
+                                certPath4,
+                                0);
                     }
                     List pathCheckers2 = paramsPKIX3.getCertPathCheckers();
                     Iterator certIter = pathCheckers2.iterator();
@@ -179,7 +217,8 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
                         ((PKIXCertPathChecker) certIter.next()).init(false);
                     }
                     if (paramsPKIX3.isRevocationEnabled()) {
-                        revocationChecker = new ProvCrlRevocationChecker(pKIXCertPathValidatorSpi.helper);
+                        revocationChecker =
+                                new ProvCrlRevocationChecker(pKIXCertPathValidatorSpi.helper);
                     } else {
                         revocationChecker = null;
                     }
@@ -197,10 +236,12 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
                     while (index >= 0) {
                         if (NoPreloadHolder.blocklist.isPublicKeyBlockListed(workingPublicKey3)) {
                             CertPath certPath5 = certPath4;
-                            String message2 = "Certificate revocation of public key " + workingPublicKey3;
+                            String message2 =
+                                    "Certificate revocation of public key " + workingPublicKey3;
                             System.out.println(message2);
                             AnnotatedException e4 = new AnnotatedException(message2);
-                            throw new CertPathValidatorException(e4.getMessage(), e4, certPath5, index);
+                            throw new CertPathValidatorException(
+                                    e4.getMessage(), e4, certPath5, index);
                         }
                         int i2 = i - index;
                         X509Certificate cert3 = (X509Certificate) certs2.get(index);
@@ -215,16 +256,42 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
                             TrustAnchor trust2 = trust;
                             List pathCheckers3 = pathCheckers2;
                             Date currentDate2 = currentDate;
-                            RFC3280CertPathUtilities.processCertA(certPath, paramsPKIX3, validityDate, revocationChecker, index2, workingPublicKey3, verificationAlreadyPerformed, workingIssuerName2, sign2);
-                            PKIXNameConstraintValidator nameConstraintValidator4 = nameConstraintValidator3;
-                            RFC3280CertPathUtilities.processCertBC(certPath4, index2, nameConstraintValidator4, pKIXCertPathValidatorSpi.isForCRLCheck);
+                            RFC3280CertPathUtilities.processCertA(
+                                    certPath,
+                                    paramsPKIX3,
+                                    validityDate,
+                                    revocationChecker,
+                                    index2,
+                                    workingPublicKey3,
+                                    verificationAlreadyPerformed,
+                                    workingIssuerName2,
+                                    sign2);
+                            PKIXNameConstraintValidator nameConstraintValidator4 =
+                                    nameConstraintValidator3;
+                            RFC3280CertPathUtilities.processCertBC(
+                                    certPath4,
+                                    index2,
+                                    nameConstraintValidator4,
+                                    pKIXCertPathValidatorSpi.isForCRLCheck);
                             int n = i;
                             List certs3 = certs2;
                             CertPath certPath6 = certPath4;
                             PublicKey workingPublicKey4 = workingPublicKey3;
                             Set acceptablePolicies3 = acceptablePolicies2;
-                            PKIXPolicyNode validPolicyTree4 = RFC3280CertPathUtilities.processCertE(certPath6, index2, RFC3280CertPathUtilities.processCertD(certPath, index2, acceptablePolicies3, validPolicyTree3, policyNodes3, inhibitAnyPolicy4, pKIXCertPathValidatorSpi.isForCRLCheck));
-                            RFC3280CertPathUtilities.processCertF(certPath6, index2, validPolicyTree4, explicitPolicy3);
+                            PKIXPolicyNode validPolicyTree4 =
+                                    RFC3280CertPathUtilities.processCertE(
+                                            certPath6,
+                                            index2,
+                                            RFC3280CertPathUtilities.processCertD(
+                                                    certPath,
+                                                    index2,
+                                                    acceptablePolicies3,
+                                                    validPolicyTree3,
+                                                    policyNodes3,
+                                                    inhibitAnyPolicy4,
+                                                    pKIXCertPathValidatorSpi.isForCRLCheck));
+                            RFC3280CertPathUtilities.processCertF(
+                                    certPath6, index2, validPolicyTree4, explicitPolicy3);
                             if (i2 == n) {
                                 nameConstraintValidator = nameConstraintValidator4;
                                 inhibitAnyPolicy2 = inhibitAnyPolicy4;
@@ -242,51 +309,95 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
                                         policyNodes = policyNodes3;
                                         pathCheckers = pathCheckers3;
                                     } else {
-                                        throw new CertPathValidatorException("Version 1 certificates can't be used as CA ones.", null, certPath6, index2);
+                                        throw new CertPathValidatorException(
+                                                "Version 1 certificates can't be used as CA ones.",
+                                                null,
+                                                certPath6,
+                                                index2);
                                     }
                                 }
                                 RFC3280CertPathUtilities.prepareNextCertA(certPath6, index2);
                                 int policyMapping4 = policyMapping3;
                                 policyNodes = policyNodes3;
-                                PKIXPolicyNode validPolicyTree5 = RFC3280CertPathUtilities.prepareCertB(certPath6, index2, policyNodes, validPolicyTree4, policyMapping4);
-                                RFC3280CertPathUtilities.prepareNextCertG(certPath6, index2, nameConstraintValidator4);
-                                int explicitPolicy4 = RFC3280CertPathUtilities.prepareNextCertH1(certPath6, index2, explicitPolicy3);
-                                int policyMapping5 = RFC3280CertPathUtilities.prepareNextCertH2(certPath6, index2, policyMapping4);
-                                int inhibitAnyPolicy5 = RFC3280CertPathUtilities.prepareNextCertH3(certPath6, index2, inhibitAnyPolicy4);
-                                int explicitPolicy5 = RFC3280CertPathUtilities.prepareNextCertI1(certPath6, index2, explicitPolicy4);
-                                int policyMapping6 = RFC3280CertPathUtilities.prepareNextCertI2(certPath6, index2, policyMapping5);
-                                int inhibitAnyPolicy6 = RFC3280CertPathUtilities.prepareNextCertJ(certPath6, index2, inhibitAnyPolicy5);
+                                PKIXPolicyNode validPolicyTree5 =
+                                        RFC3280CertPathUtilities.prepareCertB(
+                                                certPath6,
+                                                index2,
+                                                policyNodes,
+                                                validPolicyTree4,
+                                                policyMapping4);
+                                RFC3280CertPathUtilities.prepareNextCertG(
+                                        certPath6, index2, nameConstraintValidator4);
+                                int explicitPolicy4 =
+                                        RFC3280CertPathUtilities.prepareNextCertH1(
+                                                certPath6, index2, explicitPolicy3);
+                                int policyMapping5 =
+                                        RFC3280CertPathUtilities.prepareNextCertH2(
+                                                certPath6, index2, policyMapping4);
+                                int inhibitAnyPolicy5 =
+                                        RFC3280CertPathUtilities.prepareNextCertH3(
+                                                certPath6, index2, inhibitAnyPolicy4);
+                                int explicitPolicy5 =
+                                        RFC3280CertPathUtilities.prepareNextCertI1(
+                                                certPath6, index2, explicitPolicy4);
+                                int policyMapping6 =
+                                        RFC3280CertPathUtilities.prepareNextCertI2(
+                                                certPath6, index2, policyMapping5);
+                                int inhibitAnyPolicy6 =
+                                        RFC3280CertPathUtilities.prepareNextCertJ(
+                                                certPath6, index2, inhibitAnyPolicy5);
                                 RFC3280CertPathUtilities.prepareNextCertK(certPath6, index2);
                                 nameConstraintValidator = nameConstraintValidator4;
-                                int maxPathLength3 = RFC3280CertPathUtilities.prepareNextCertM(certPath6, index2, RFC3280CertPathUtilities.prepareNextCertL(certPath6, index2, maxPathLength2));
+                                int maxPathLength3 =
+                                        RFC3280CertPathUtilities.prepareNextCertM(
+                                                certPath6,
+                                                index2,
+                                                RFC3280CertPathUtilities.prepareNextCertL(
+                                                        certPath6, index2, maxPathLength2));
                                 RFC3280CertPathUtilities.prepareNextCertN(certPath6, index2);
                                 Set criticalExtensions3 = cert3.getCriticalExtensionOIDs();
                                 if (criticalExtensions3 != null) {
                                     validPolicyTree = validPolicyTree5;
                                     Set criticalExtensions4 = new HashSet(criticalExtensions3);
                                     criticalExtensions4.remove(RFC3280CertPathUtilities.KEY_USAGE);
-                                    criticalExtensions4.remove(RFC3280CertPathUtilities.CERTIFICATE_POLICIES);
-                                    criticalExtensions4.remove(RFC3280CertPathUtilities.POLICY_MAPPINGS);
-                                    criticalExtensions4.remove(RFC3280CertPathUtilities.INHIBIT_ANY_POLICY);
-                                    criticalExtensions4.remove(RFC3280CertPathUtilities.ISSUING_DISTRIBUTION_POINT);
-                                    criticalExtensions4.remove(RFC3280CertPathUtilities.DELTA_CRL_INDICATOR);
-                                    criticalExtensions4.remove(RFC3280CertPathUtilities.POLICY_CONSTRAINTS);
-                                    criticalExtensions4.remove(RFC3280CertPathUtilities.BASIC_CONSTRAINTS);
-                                    criticalExtensions4.remove(RFC3280CertPathUtilities.SUBJECT_ALTERNATIVE_NAME);
-                                    criticalExtensions4.remove(RFC3280CertPathUtilities.NAME_CONSTRAINTS);
+                                    criticalExtensions4.remove(
+                                            RFC3280CertPathUtilities.CERTIFICATE_POLICIES);
+                                    criticalExtensions4.remove(
+                                            RFC3280CertPathUtilities.POLICY_MAPPINGS);
+                                    criticalExtensions4.remove(
+                                            RFC3280CertPathUtilities.INHIBIT_ANY_POLICY);
+                                    criticalExtensions4.remove(
+                                            RFC3280CertPathUtilities.ISSUING_DISTRIBUTION_POINT);
+                                    criticalExtensions4.remove(
+                                            RFC3280CertPathUtilities.DELTA_CRL_INDICATOR);
+                                    criticalExtensions4.remove(
+                                            RFC3280CertPathUtilities.POLICY_CONSTRAINTS);
+                                    criticalExtensions4.remove(
+                                            RFC3280CertPathUtilities.BASIC_CONSTRAINTS);
+                                    criticalExtensions4.remove(
+                                            RFC3280CertPathUtilities.SUBJECT_ALTERNATIVE_NAME);
+                                    criticalExtensions4.remove(
+                                            RFC3280CertPathUtilities.NAME_CONSTRAINTS);
                                     criticalExtensions2 = criticalExtensions4;
                                 } else {
                                     validPolicyTree = validPolicyTree5;
                                     criticalExtensions2 = new HashSet();
                                 }
                                 pathCheckers = pathCheckers3;
-                                RFC3280CertPathUtilities.prepareNextCertO(certPath6, index2, criticalExtensions2, pathCheckers);
+                                RFC3280CertPathUtilities.prepareNextCertO(
+                                        certPath6, index2, criticalExtensions2, pathCheckers);
                                 sign2 = cert3;
                                 workingIssuerName2 = PrincipalUtils.getSubjectPrincipal(sign2);
                                 try {
                                     try {
-                                        workingPublicKey2 = CertPathValidatorUtilities.getNextWorkingKey(certPath.getCertificates(), index2, pKIXCertPathValidatorSpi.helper);
-                                        AlgorithmIdentifier workingAlgId2 = CertPathValidatorUtilities.getAlgorithmIdentifier(workingPublicKey2);
+                                        workingPublicKey2 =
+                                                CertPathValidatorUtilities.getNextWorkingKey(
+                                                        certPath.getCertificates(),
+                                                        index2,
+                                                        pKIXCertPathValidatorSpi.helper);
+                                        AlgorithmIdentifier workingAlgId2 =
+                                                CertPathValidatorUtilities.getAlgorithmIdentifier(
+                                                        workingPublicKey2);
                                         workingAlgId2.getAlgorithm();
                                         workingAlgId2.getParameters();
                                         inhibitAnyPolicy3 = inhibitAnyPolicy6;
@@ -311,7 +422,11 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
                                         pKIXCertPathValidatorSpi = this;
                                     } catch (CertPathValidatorException e5) {
                                         e = e5;
-                                        throw new CertPathValidatorException("Next working key could not be retrieved.", e, certPath6, index2);
+                                        throw new CertPathValidatorException(
+                                                "Next working key could not be retrieved.",
+                                                e,
+                                                certPath6,
+                                                index2);
                                     }
                                 } catch (CertPathValidatorException e6) {
                                     e = e6;
@@ -339,7 +454,8 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
                             index = maxPathLength42;
                             pKIXCertPathValidatorSpi = this;
                         } catch (AnnotatedException e7) {
-                            throw new CertPathValidatorException(e7.getMessage(), e7.getUnderlyingException(), certPath4, index);
+                            throw new CertPathValidatorException(
+                                    e7.getMessage(), e7.getUnderlyingException(), certPath4, index);
                         }
                     }
                     int index3 = index;
@@ -348,7 +464,11 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
                     List pathCheckers4 = pathCheckers2;
                     List[] policyNodes4 = policyNodes2;
                     Set acceptablePolicies4 = acceptablePolicies2;
-                    int explicitPolicy6 = RFC3280CertPathUtilities.wrapupCertB(certPath7, index3 + 1, RFC3280CertPathUtilities.wrapupCertA(explicitPolicy2, cert2));
+                    int explicitPolicy6 =
+                            RFC3280CertPathUtilities.wrapupCertB(
+                                    certPath7,
+                                    index3 + 1,
+                                    RFC3280CertPathUtilities.wrapupCertA(explicitPolicy2, cert2));
                     Set criticalExtensions5 = cert2.getCriticalExtensionOIDs();
                     if (criticalExtensions5 != null) {
                         Set criticalExtensions6 = new HashSet(criticalExtensions5);
@@ -356,35 +476,55 @@ public class PKIXCertPathValidatorSpi extends CertPathValidatorSpi {
                         criticalExtensions6.remove(RFC3280CertPathUtilities.CERTIFICATE_POLICIES);
                         criticalExtensions6.remove(RFC3280CertPathUtilities.POLICY_MAPPINGS);
                         criticalExtensions6.remove(RFC3280CertPathUtilities.INHIBIT_ANY_POLICY);
-                        criticalExtensions6.remove(RFC3280CertPathUtilities.ISSUING_DISTRIBUTION_POINT);
+                        criticalExtensions6.remove(
+                                RFC3280CertPathUtilities.ISSUING_DISTRIBUTION_POINT);
                         criticalExtensions6.remove(RFC3280CertPathUtilities.DELTA_CRL_INDICATOR);
                         criticalExtensions6.remove(RFC3280CertPathUtilities.POLICY_CONSTRAINTS);
                         criticalExtensions6.remove(RFC3280CertPathUtilities.BASIC_CONSTRAINTS);
-                        criticalExtensions6.remove(RFC3280CertPathUtilities.SUBJECT_ALTERNATIVE_NAME);
+                        criticalExtensions6.remove(
+                                RFC3280CertPathUtilities.SUBJECT_ALTERNATIVE_NAME);
                         criticalExtensions6.remove(RFC3280CertPathUtilities.NAME_CONSTRAINTS);
-                        criticalExtensions6.remove(RFC3280CertPathUtilities.CRL_DISTRIBUTION_POINTS);
+                        criticalExtensions6.remove(
+                                RFC3280CertPathUtilities.CRL_DISTRIBUTION_POINTS);
                         criticalExtensions6.remove(Extension.extendedKeyUsage.getId());
                         criticalExtensions = criticalExtensions6;
                     } else {
                         criticalExtensions = new HashSet();
                     }
-                    RFC3280CertPathUtilities.wrapupCertF(certPath7, index3 + 1, pathCheckers4, criticalExtensions);
-                    PKIXPolicyNode intersection = RFC3280CertPathUtilities.wrapupCertG(certPath, paramsPKIX3, userInitialPolicySet, index3 + 1, policyNodes4, validPolicyTree3, acceptablePolicies4);
+                    RFC3280CertPathUtilities.wrapupCertF(
+                            certPath7, index3 + 1, pathCheckers4, criticalExtensions);
+                    PKIXPolicyNode intersection =
+                            RFC3280CertPathUtilities.wrapupCertG(
+                                    certPath,
+                                    paramsPKIX3,
+                                    userInitialPolicySet,
+                                    index3 + 1,
+                                    policyNodes4,
+                                    validPolicyTree3,
+                                    acceptablePolicies4);
                     if (explicitPolicy6 > 0 || intersection != null) {
-                        return new PKIXCertPathValidatorResult(trust3, intersection, cert2.getPublicKey());
+                        return new PKIXCertPathValidatorResult(
+                                trust3, intersection, cert2.getPublicKey());
                     }
-                    throw new CertPathValidatorException("Path processing failed on policy.", null, certPath7, index3);
+                    throw new CertPathValidatorException(
+                            "Path processing failed on policy.", null, certPath7, index3);
                 } catch (CertPathValidatorException e8) {
-                    throw new ExtCertPathValidatorException("Algorithm identifier of public key of trust anchor could not be read.", e8, certPath4, -1);
+                    throw new ExtCertPathValidatorException(
+                            "Algorithm identifier of public key of trust anchor could not be read.",
+                            e8,
+                            certPath4,
+                            -1);
                 }
             }
             certs = certs2;
             certPath2 = certPath4;
             try {
-                throw new CertPathValidatorException("Trust anchor for certification path not found.", null, certPath2, -1);
+                throw new CertPathValidatorException(
+                        "Trust anchor for certification path not found.", null, certPath2, -1);
             } catch (AnnotatedException e9) {
                 e = e9;
-                throw new CertPathValidatorException(e.getMessage(), e.getUnderlyingException(), certPath2, certs.size() - 1);
+                throw new CertPathValidatorException(
+                        e.getMessage(), e.getUnderlyingException(), certPath2, certs.size() - 1);
             }
         } catch (AnnotatedException e10) {
             e = e10;

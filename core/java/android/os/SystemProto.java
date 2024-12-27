@@ -43,8 +43,7 @@ public final class SystemProto {
         public static final long TOTAL_REALTIME_MS = 1112396529667L;
         public static final long TOTAL_UPTIME_MS = 1112396529668L;
 
-        public Battery() {
-        }
+        public Battery() {}
     }
 
     public final class BatteryDischarge {
@@ -59,8 +58,7 @@ public final class SystemProto {
         public static final long TOTAL_MAH_SCREEN_OFF = 1112396529671L;
         public static final long UPPER_BOUND_SINCE_CHARGE = 1120986464258L;
 
-        public BatteryDischarge() {
-        }
+        public BatteryDischarge() {}
     }
 
     public final class BatteryLevelStep {
@@ -82,8 +80,7 @@ public final class SystemProto {
         public static final int PSM_OFF = 2;
         public static final int PSM_ON = 1;
 
-        public BatteryLevelStep() {
-        }
+        public BatteryLevelStep() {}
     }
 
     public final class DataConnection {
@@ -91,8 +88,7 @@ public final class SystemProto {
         public static final long NAME = 1159641169921L;
         public static final long TOTAL = 1146756268035L;
 
-        public DataConnection() {
-        }
+        public DataConnection() {}
     }
 
     public final class GlobalNetwork {
@@ -107,24 +103,21 @@ public final class SystemProto {
         public static final long WIFI_PACKETS_RX = 1112396529671L;
         public static final long WIFI_PACKETS_TX = 1112396529672L;
 
-        public GlobalNetwork() {
-        }
+        public GlobalNetwork() {}
     }
 
     public final class GlobalWifi {
         public static final long ON_DURATION_MS = 1112396529665L;
         public static final long RUNNING_DURATION_MS = 1112396529666L;
 
-        public GlobalWifi() {
-        }
+        public GlobalWifi() {}
     }
 
     public final class KernelWakelock {
         public static final long NAME = 1138166333441L;
         public static final long TOTAL = 1146756268034L;
 
-        public KernelWakelock() {
-        }
+        public KernelWakelock() {}
     }
 
     public final class Misc {
@@ -150,16 +143,14 @@ public final class SystemProto {
         public static final long PHONE_ON_DURATION_MS = 1112396529666L;
         public static final long SCREEN_ON_DURATION_MS = 1112396529665L;
 
-        public Misc() {
-        }
+        public Misc() {}
     }
 
     public final class PhoneSignalStrength {
         public static final long NAME = 1159641169921L;
         public static final long TOTAL = 1146756268034L;
 
-        public PhoneSignalStrength() {
-        }
+        public PhoneSignalStrength() {}
     }
 
     public final class PowerUseItem {
@@ -184,8 +175,7 @@ public final class SystemProto {
         public static final int USER = 8;
         public static final int WIFI = 4;
 
-        public PowerUseItem() {
-        }
+        public PowerUseItem() {}
     }
 
     public final class PowerUseSummary {
@@ -194,8 +184,7 @@ public final class SystemProto {
         public static final long MAX_DRAINED_POWER_MAH = 1103806595076L;
         public static final long MIN_DRAINED_POWER_MAH = 1103806595075L;
 
-        public PowerUseSummary() {
-        }
+        public PowerUseSummary() {}
     }
 
     public final class ResourcePowerManager {
@@ -203,8 +192,7 @@ public final class SystemProto {
         public static final long SCREEN_OFF = 1146756268035L;
         public static final long TOTAL = 1146756268034L;
 
-        public ResourcePowerManager() {
-        }
+        public ResourcePowerManager() {}
     }
 
     public final class ScreenBrightness {
@@ -216,24 +204,21 @@ public final class SystemProto {
         public static final long NAME = 1159641169921L;
         public static final long TOTAL = 1146756268034L;
 
-        public ScreenBrightness() {
-        }
+        public ScreenBrightness() {}
     }
 
     public final class WakeupReason {
         public static final long NAME = 1138166333441L;
         public static final long TOTAL = 1146756268034L;
 
-        public WakeupReason() {
-        }
+        public WakeupReason() {}
     }
 
     public final class WifiMulticastWakelockTotal {
         public static final long COUNT = 1120986464258L;
         public static final long DURATION_MS = 1112396529665L;
 
-        public WifiMulticastWakelockTotal() {
-        }
+        public WifiMulticastWakelockTotal() {}
     }
 
     public final class WifiSignalStrength {
@@ -245,8 +230,7 @@ public final class SystemProto {
         public static final int POOR = 1;
         public static final long TOTAL = 1146756268034L;
 
-        public WifiSignalStrength() {
-        }
+        public WifiSignalStrength() {}
     }
 
     public final class WifiState {
@@ -261,8 +245,7 @@ public final class SystemProto {
         public static final int SOFT_AP = 7;
         public static final long TOTAL = 1146756268034L;
 
-        public WifiState() {
-        }
+        public WifiState() {}
     }
 
     public final class WifiSupplicantState {
@@ -282,7 +265,6 @@ public final class SystemProto {
         public static final long TOTAL = 1146756268034L;
         public static final int UNINITIALIZED = 12;
 
-        public WifiSupplicantState() {
-        }
+        public WifiSupplicantState() {}
     }
 }

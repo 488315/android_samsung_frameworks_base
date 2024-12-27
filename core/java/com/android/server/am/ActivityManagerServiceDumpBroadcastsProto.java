@@ -12,7 +12,6 @@ public final class ActivityManagerServiceDumpBroadcastsProto {
         public static final long HANDLER = 1138166333441L;
         public static final long LOOPER = 1146756268034L;
 
-        public MainHandler() {
-        }
+        public MainHandler() {}
     }
 }

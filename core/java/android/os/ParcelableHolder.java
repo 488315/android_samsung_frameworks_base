@@ -1,27 +1,28 @@
 package android.os;
 
 import android.annotation.SystemApi;
-import android.os.Parcelable;
 import android.util.MathUtils;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class ParcelableHolder implements Parcelable {
-    public static final Parcelable.Creator<ParcelableHolder> CREATOR = new Parcelable.Creator<ParcelableHolder>() { // from class: android.os.ParcelableHolder.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableHolder createFromParcel(Parcel parcel) {
-            ParcelableHolder parcelable = new ParcelableHolder();
-            parcelable.readFromParcel(parcel);
-            return parcelable;
-        }
+    public static final Parcelable.Creator<ParcelableHolder> CREATOR =
+            new Parcelable.Creator<
+                    ParcelableHolder>() { // from class: android.os.ParcelableHolder.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableHolder createFromParcel(Parcel parcel) {
+                    ParcelableHolder parcelable = new ParcelableHolder();
+                    parcelable.readFromParcel(parcel);
+                    return parcelable;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableHolder[] newArray(int size) {
-            return new ParcelableHolder[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableHolder[] newArray(int size) {
+                    return new ParcelableHolder[size];
+                }
+            };
     private Parcel mParcel;
     private Parcelable mParcelable;
     private int mStability;
@@ -42,7 +43,12 @@ public final class ParcelableHolder implements Parcelable {
 
     public void setParcelable(Parcelable p) {
         if (p != null && getStability() > p.getStability()) {
-            throw new BadParcelableException("A ParcelableHolder can only hold things at its stability or higher. The ParcelableHolder's stability is " + getStability() + ", but the parcelable's stability is " + p.getStability());
+            throw new BadParcelableException(
+                    "A ParcelableHolder can only hold things at its stability or higher. The"
+                        + " ParcelableHolder's stability is "
+                            + getStability()
+                            + ", but the parcelable's stability is "
+                            + p.getStability());
         }
         this.mParcelable = p;
         if (this.mParcel != null) {
@@ -54,14 +60,22 @@ public final class ParcelableHolder implements Parcelable {
     public <T extends Parcelable> T getParcelable(Class<T> cls) {
         if (this.mParcel == null) {
             if (this.mParcelable != null && !cls.isInstance(this.mParcelable)) {
-                throw new BadParcelableException("The ParcelableHolder has " + this.mParcelable.getClass().getName() + ", but the requested type is " + cls.getName());
+                throw new BadParcelableException(
+                        "The ParcelableHolder has "
+                                + this.mParcelable.getClass().getName()
+                                + ", but the requested type is "
+                                + cls.getName());
             }
             return (T) this.mParcelable;
         }
         this.mParcel.setDataPosition(0);
         T t = (T) this.mParcel.readParcelable(cls.getClassLoader());
         if (t != null && !cls.isInstance(t)) {
-            throw new BadParcelableException("The ParcelableHolder has " + t.getClass().getName() + ", but the requested type is " + cls.getName());
+            throw new BadParcelableException(
+                    "The ParcelableHolder has "
+                            + t.getClass().getName()
+                            + ", but the requested type is "
+                            + cls.getName());
         }
         this.mParcelable = t;
         this.mParcel.recycle();
@@ -72,7 +86,8 @@ public final class ParcelableHolder implements Parcelable {
     public void readFromParcel(Parcel parcel) {
         int wireStability = parcel.readInt();
         if (this.mStability != wireStability) {
-            throw new IllegalArgumentException("Expected stability " + this.mStability + " but got " + wireStability);
+            throw new IllegalArgumentException(
+                    "Expected stability " + this.mStability + " but got " + wireStability);
         }
         this.mParcelable = null;
         int dataSize = parcel.readInt();

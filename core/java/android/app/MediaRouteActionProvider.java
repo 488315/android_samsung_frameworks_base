@@ -7,6 +7,7 @@ import android.view.ActionProvider;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes.dex */
@@ -58,7 +59,11 @@ public class MediaRouteActionProvider extends ActionProvider {
     @Override // android.view.ActionProvider
     public View onCreateActionView(MenuItem item) {
         if (this.mButton != null) {
-            Log.e(TAG, "onCreateActionView: this ActionProvider is already associated with a menu item. Don't reuse MediaRouteActionProvider instances! Abandoning the old one...");
+            Log.e(
+                    TAG,
+                    "onCreateActionView: this ActionProvider is already associated with a menu"
+                        + " item. Don't reuse MediaRouteActionProvider instances! Abandoning the"
+                        + " old one...");
         }
         this.mButton = new MediaRouteButton(this.mContext);
         this.mButton.setRouteTypes(this.mRouteTypes);

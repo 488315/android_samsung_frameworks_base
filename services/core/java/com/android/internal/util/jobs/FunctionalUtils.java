@@ -2,7 +2,7 @@ package com.android.internal.util.jobs;
 
 import android.os.RemoteException;
 import android.util.ExceptionUtils;
-import com.android.internal.util.jobs.FunctionalUtils;
+
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -141,8 +141,7 @@ public class FunctionalUtils {
         Object getOrThrow() throws Exception;
     }
 
-    private FunctionalUtils() {
-    }
+    private FunctionalUtils() {}
 
     public static String getLambdaName(Object obj) {
         int indexOf;
@@ -159,21 +158,26 @@ public class FunctionalUtils {
         return obj2.substring(0, indexOf2) + obj2.substring(i, indexOf3) + "$Lambda";
     }
 
-    public static Runnable handleExceptions(final ThrowingRunnable throwingRunnable, final Consumer consumer) {
-        return new Runnable() { // from class: com.android.internal.util.jobs.FunctionalUtils$$ExternalSyntheticLambda0
+    public static Runnable handleExceptions(
+            final ThrowingRunnable throwingRunnable, final Consumer consumer) {
+        return new Runnable() { // from class:
+                                // com.android.internal.util.jobs.FunctionalUtils$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
-                FunctionalUtils.lambda$handleExceptions$0(FunctionalUtils.ThrowingRunnable.this, consumer);
+                FunctionalUtils.lambda$handleExceptions$0(
+                        FunctionalUtils.ThrowingRunnable.this, consumer);
             }
         };
     }
 
-    public static Consumer ignoreRemoteException(RemoteExceptionIgnoringConsumer remoteExceptionIgnoringConsumer) {
+    public static Consumer ignoreRemoteException(
+            RemoteExceptionIgnoringConsumer remoteExceptionIgnoringConsumer) {
         return remoteExceptionIgnoringConsumer;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static /* synthetic */ void lambda$handleExceptions$0(ThrowingRunnable throwingRunnable, Consumer consumer) {
+    public static /* synthetic */ void lambda$handleExceptions$0(
+            ThrowingRunnable throwingRunnable, Consumer consumer) {
         try {
             throwingRunnable.run();
         } catch (Throwable th) {

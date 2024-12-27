@@ -4,8 +4,10 @@ import android.os.FileUtils;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import dalvik.system.BaseDexClassLoader;
 import dalvik.system.VMRuntime;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -19,8 +21,7 @@ class DexLoadReporter implements BaseDexClassLoader.Reporter {
     private static final String TAG = "DexLoadReporter";
     private final Set<String> mDataDirs = new HashSet();
 
-    private DexLoadReporter() {
-    }
+    private DexLoadReporter() {}
 
     static DexLoadReporter getInstance() {
         return INSTANCE;
@@ -46,7 +47,11 @@ class DexLoadReporter implements BaseDexClassLoader.Reporter {
     private void notifyPackageManager(Map<String, String> classLoaderContextMap) {
         String packageName = ActivityThread.currentPackageName();
         try {
-            ActivityThread.getPackageManager().notifyDexLoad(packageName, classLoaderContextMap, VMRuntime.getRuntime().vmInstructionSet());
+            ActivityThread.getPackageManager()
+                    .notifyDexLoad(
+                            packageName,
+                            classLoaderContextMap,
+                            VMRuntime.getRuntime().vmInstructionSet());
         } catch (RemoteException re) {
             Slog.e(TAG, "Failed to notify PM about dex load for package " + packageName, re);
         }
@@ -71,7 +76,8 @@ class DexLoadReporter implements BaseDexClassLoader.Reporter {
         }
         File dexPathFile = new File(dexPath);
         File secondaryProfileDir = new File(dexPathFile.getParent(), "oat");
-        File secondaryCurProfile = new File(secondaryProfileDir, dexPathFile.getName() + ".cur.prof");
+        File secondaryCurProfile =
+                new File(secondaryProfileDir, dexPathFile.getName() + ".cur.prof");
         File secondaryRefProfile = new File(secondaryProfileDir, dexPathFile.getName() + ".prof");
         if (!secondaryProfileDir.exists() && !secondaryProfileDir.mkdir()) {
             Slog.e(TAG, "Could not create the profile directory: " + secondaryCurProfile);
@@ -79,9 +85,19 @@ class DexLoadReporter implements BaseDexClassLoader.Reporter {
         }
         try {
             secondaryCurProfile.createNewFile();
-            VMRuntime.registerAppInfo(ActivityThread.currentPackageName(), secondaryCurProfile.getPath(), secondaryRefProfile.getPath(), new String[]{dexPath}, 4);
+            VMRuntime.registerAppInfo(
+                    ActivityThread.currentPackageName(),
+                    secondaryCurProfile.getPath(),
+                    secondaryRefProfile.getPath(),
+                    new String[] {dexPath},
+                    4);
         } catch (IOException ex) {
-            Slog.e(TAG, "Failed to create profile for secondary dex " + dexPath + ":" + ex.getMessage());
+            Slog.e(
+                    TAG,
+                    "Failed to create profile for secondary dex "
+                            + dexPath
+                            + ":"
+                            + ex.getMessage());
         }
     }
 

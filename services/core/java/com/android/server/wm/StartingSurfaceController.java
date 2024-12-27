@@ -3,6 +3,7 @@ package com.android.server.wm;
 import android.app.ActivityOptions;
 import android.util.Slog;
 import android.window.ITaskOrganizer;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,7 +23,10 @@ public final class StartingSurfaceController {
         public final ActivityRecord mPrev;
         public final ActivityRecord mSource;
 
-        public DeferringStartingWindowRecord(ActivityRecord activityRecord, ActivityRecord activityRecord2, ActivityRecord activityRecord3) {
+        public DeferringStartingWindowRecord(
+                ActivityRecord activityRecord,
+                ActivityRecord activityRecord2,
+                ActivityRecord activityRecord3) {
             this.mDeferring = activityRecord;
             this.mPrev = activityRecord2;
             this.mSource = activityRecord3;
@@ -42,7 +46,8 @@ public final class StartingSurfaceController {
 
     public StartingSurfaceController(WindowManagerService windowManagerService) {
         this.mService = windowManagerService;
-        this.mSplashScreenExceptionsList = new SplashScreenExceptionList(windowManagerService.mContext.getMainExecutor());
+        this.mSplashScreenExceptionsList =
+                new SplashScreenExceptionList(windowManagerService.mContext.getMainExecutor());
     }
 
     public final void endDeferAddStartingWindow(ActivityOptions activityOptions) {
@@ -53,12 +58,25 @@ public final class StartingSurfaceController {
             if (size < 0) {
                 break;
             }
-            DeferringStartingWindowRecord deferringStartingWindowRecord = (DeferringStartingWindowRecord) this.mDeferringAddStartActivities.get(size);
+            DeferringStartingWindowRecord deferringStartingWindowRecord =
+                    (DeferringStartingWindowRecord) this.mDeferringAddStartActivities.get(size);
             ActivityRecord activityRecord = deferringStartingWindowRecord.mDeferring;
             if (activityRecord.task == null) {
-                Slog.e("WindowManager", "No task exists: " + activityRecord.shortComponentName + " parent: " + activityRecord.getParent());
+                Slog.e(
+                        "WindowManager",
+                        "No task exists: "
+                                + activityRecord.shortComponentName
+                                + " parent: "
+                                + activityRecord.getParent());
             } else {
-                activityRecord.showStartingWindow(deferringStartingWindowRecord.mPrev, this.mInitNewTask, this.mInitTaskSwitch, this.mInitProcessRunning, true, deferringStartingWindowRecord.mSource, activityOptions);
+                activityRecord.showStartingWindow(
+                        deferringStartingWindowRecord.mPrev,
+                        this.mInitNewTask,
+                        this.mInitTaskSwitch,
+                        this.mInitProcessRunning,
+                        true,
+                        deferringStartingWindowRecord.mSource,
+                        activityOptions);
                 if (activityRecord.mStartingData != null) {
                     break;
                 }

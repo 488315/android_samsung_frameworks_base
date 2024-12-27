@@ -7,6 +7,7 @@ import com.samsung.android.lib.dexcontrol.fancontrol.fanmode.NormalMode;
 import com.samsung.android.lib.dexcontrol.fancontrol.fanmode.SystemRequestMode;
 import com.samsung.android.lib.dexcontrol.model.common.FanControlModel;
 import com.samsung.android.lib.dexcontrol.utils.SLog;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -64,7 +65,7 @@ public final class DexFanControlManager {
             FanHoldingMode = fanModeEnum3;
             FanModeEnum fanModeEnum4 = new FanModeEnum("SystemRequestMode", 3);
             SystemRequestMode = fanModeEnum4;
-            $VALUES = new FanModeEnum[]{fanModeEnum, fanModeEnum2, fanModeEnum3, fanModeEnum4};
+            $VALUES = new FanModeEnum[] {fanModeEnum, fanModeEnum2, fanModeEnum3, fanModeEnum4};
         }
 
         public static FanModeEnum valueOf(String str) {
@@ -126,7 +127,10 @@ public final class DexFanControlManager {
                     dexFanHoldingTimerTask.mSetUpdate = true;
                     dexFanHoldingTimerTask.cancel();
                     getFanHoldingTimerTaskList().remove(dexFanHoldingTimerTask);
-                    SLog.d("DexFanControlManager", "checkAndUpdateFanHoldingTask after remove : " + getFanHoldingRequestCount());
+                    SLog.d(
+                            "DexFanControlManager",
+                            "checkAndUpdateFanHoldingTask after remove : "
+                                    + getFanHoldingRequestCount());
                     break;
                 }
             }
@@ -139,12 +143,17 @@ public final class DexFanControlManager {
         }
         this.mTimer.schedule(dexFanHoldingTimerTask2, i);
         controlFanLevel();
-        SLog.d("DexFanControlManager", "addFanHoldingTimerTask currentFanHoldingCount : " + getFanHoldingTimerTaskList().size());
+        SLog.d(
+                "DexFanControlManager",
+                "addFanHoldingTimerTask currentFanHoldingCount : "
+                        + getFanHoldingTimerTaskList().size());
     }
 
     public final void controlFanLevel() {
         FAN_LEVEL currentFanLevel = getCurrentFanMode().getCurrentFanLevel();
-        SLog.i("DexFanControlManager", "controlFanLevel : " + getCurrentFanMode() + " , " + currentFanLevel);
+        SLog.i(
+                "DexFanControlManager",
+                "controlFanLevel : " + getCurrentFanMode() + " , " + currentFanLevel);
         this.mCurrentFanLevel = currentFanLevel;
         FanControlModel.AnonymousClass1 anonymousClass1 = this.mIDexFanControlListener;
         if (anonymousClass1 != null) {

@@ -31,7 +31,8 @@ public interface IEArc extends IInterface {
                     obtain.writeInterfaceToken(IEArc.DESCRIPTOR);
                     obtain.writeInt(i);
                     if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method getLastReportedAudioCapabilities is unimplemented.");
+                        throw new RemoteException(
+                                "Method getLastReportedAudioCapabilities is unimplemented.");
                     }
                     obtain2.readException();
                     return obtain2.createByteArray();

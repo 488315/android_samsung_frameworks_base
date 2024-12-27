@@ -12,8 +12,7 @@ public interface IRemoteAnimationFinishedCallback extends IInterface {
 
     public static class Default implements IRemoteAnimationFinishedCallback {
         @Override // android.view.IRemoteAnimationFinishedCallback
-        public void onAnimationFinished() throws RemoteException {
-        }
+        public void onAnimationFinished() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IRemoteAnimationFinishedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteAnimationFinishedCallback {
+    public abstract static class Stub extends Binder implements IRemoteAnimationFinishedCallback {
         public static final String DESCRIPTOR = "android.view.IRemoteAnimationFinishedCallback";
         static final int TRANSACTION_onAnimationFinished = 1;
 
@@ -60,7 +59,8 @@ public interface IRemoteAnimationFinishedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

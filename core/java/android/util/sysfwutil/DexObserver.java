@@ -2,6 +2,7 @@ package android.util.sysfwutil;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.UEventObserver;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,17 +23,19 @@ public class DexObserver {
     private final Object mDexStateLock = new Object();
     private final BlockingDeque<DexConnectionListener> mListeners = new LinkedBlockingDeque();
     private boolean mTestModeOn = false;
-    private final UEventObserver mDexUEventObserver = new UEventObserver() { // from class: android.util.sysfwutil.DexObserver.1
-        @Override // android.os.UEventObserver
-        public void onUEvent(UEventObserver.UEvent event) {
-            try {
-                Slog.d(DexObserver.TAG, "UEventObserver, event : " + event);
-                DexObserver.this.setDexState(Integer.parseInt(event.get("SWITCH_STATE")), event);
-            } catch (NumberFormatException e) {
-                Slog.e(DexObserver.TAG, "Could not parse switch state from event " + event);
-            }
-        }
-    };
+    private final UEventObserver mDexUEventObserver =
+            new UEventObserver() { // from class: android.util.sysfwutil.DexObserver.1
+                @Override // android.os.UEventObserver
+                public void onUEvent(UEventObserver.UEvent event) {
+                    try {
+                        Slog.d(DexObserver.TAG, "UEventObserver, event : " + event);
+                        DexObserver.this.setDexState(
+                                Integer.parseInt(event.get("SWITCH_STATE")), event);
+                    } catch (NumberFormatException e) {
+                        Slog.e(DexObserver.TAG, "Could not parse switch state from event " + event);
+                    }
+                }
+            };
 
     public DexObserver() {
         Slog.d(TAG, "Started" + (this.mTestModeOn ? " TestModeOn" : ""));
@@ -110,7 +113,13 @@ public class DexObserver {
             }
             if (mVIDPID != null && mUsbType != null) {
                 if (this.mTestModeOn) {
-                    Slog.d(TAG, "checkDexStatebySysfs() USBPD_IDS[" + mVIDPID + "], USBPD_TYPE[" + mUsbType + NavigationBarInflaterView.SIZE_MOD_END);
+                    Slog.d(
+                            TAG,
+                            "checkDexStatebySysfs() USBPD_IDS["
+                                    + mVIDPID
+                                    + "], USBPD_TYPE["
+                                    + mUsbType
+                                    + NavigationBarInflaterView.SIZE_MOD_END);
                 }
             } else {
                 Slog.d(TAG, "checkDexStatebySysfs() USBPD_IDS or USBPD_TYPE is NULL!!");
@@ -153,7 +162,12 @@ public class DexObserver {
             Slog.d(TAG, "setDexMode() : delay --");
         }
         synchronized (this.mDexStateLock) {
-            Slog.d(TAG, "setDexMode() : mDexMode " + this.mDexMode + " mSemiDexMode " + this.mSemiDexMode);
+            Slog.d(
+                    TAG,
+                    "setDexMode() : mDexMode "
+                            + this.mDexMode
+                            + " mSemiDexMode "
+                            + this.mSemiDexMode);
             if (this.mDexMode || this.mSemiDexMode) {
                 new Thread("notifyListeners") { // from class: android.util.sysfwutil.DexObserver.2
                     @Override // java.lang.Thread, java.lang.Runnable

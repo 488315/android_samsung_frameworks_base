@@ -2,6 +2,7 @@ package com.android.server;
 
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.text.format.Time;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -73,7 +74,9 @@ public final class SKLogger {
                 try {
                     if (this.printWriter == null) {
                         this.fileOutputStream = new FileOutputStream(this.newLogFile, true);
-                        this.printWriter = new PrintWriter(this.fileOutputStream, false, StandardCharsets.UTF_8);
+                        this.printWriter =
+                                new PrintWriter(
+                                        this.fileOutputStream, false, StandardCharsets.UTF_8);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -84,7 +87,8 @@ public final class SKLogger {
                 file.setWritable(true, true);
                 try {
                     this.fileOutputStream = new FileOutputStream(this.newLogFile);
-                    this.printWriter = new PrintWriter(this.fileOutputStream, false, StandardCharsets.UTF_8);
+                    this.printWriter =
+                            new PrintWriter(this.fileOutputStream, false, StandardCharsets.UTF_8);
                 } catch (Exception e2) {
                     e2.printStackTrace();
                 }
@@ -135,7 +139,9 @@ public final class SKLogger {
         Time time = new Time();
         time.set(System.currentTimeMillis());
         time.format("%d.%m.%Y %H:%M:%S");
-        String m$1 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(time.format("%d.%m.%Y %H:%M:%S") + " " + str + " ", str2);
+        String m$1 =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                        time.format("%d.%m.%Y %H:%M:%S") + " " + str + " ", str2);
         synchronized (mSKLogger) {
             mLogger.log(Level.SEVERE, m$1);
         }
@@ -145,7 +151,13 @@ public final class SKLogger {
         Time time = new Time();
         time.set(System.currentTimeMillis());
         time.format("%d.%m.%Y %H:%M:%S");
-        StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m(AnyMotionDetector$$ExternalSyntheticOutline0.m(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(time.format("%d.%m.%Y %H:%M:%S"), " ServiceKeeper "), str, "\n"));
+        StringBuilder m =
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                                        time.format("%d.%m.%Y %H:%M:%S"), " ServiceKeeper "),
+                                str,
+                                "\n"));
         String str2 = "";
         Throwable th2 = th;
         while (true) {

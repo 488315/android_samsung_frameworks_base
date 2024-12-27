@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -19,16 +20,13 @@ public interface ILogcatManagerService extends IInterface {
 
     public static class Default implements ILogcatManagerService {
         @Override // android.os.logcat.ILogcatManagerService
-        public void startThread(int uid, int gid, int pid, int fd) throws RemoteException {
-        }
+        public void startThread(int uid, int gid, int pid, int fd) throws RemoteException {}
 
         @Override // android.os.logcat.ILogcatManagerService
-        public void finishThread(int uid, int gid, int pid, int fd) throws RemoteException {
-        }
+        public void finishThread(int uid, int gid, int pid, int fd) throws RemoteException {}
 
         @Override // android.os.logcat.ILogcatManagerService
-        public void onKnoxSecurityLogEvent(int tag, List<String> payloads) throws RemoteException {
-        }
+        public void onKnoxSecurityLogEvent(int tag, List<String> payloads) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +34,7 @@ public interface ILogcatManagerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILogcatManagerService {
+    public abstract static class Stub extends Binder implements ILogcatManagerService {
         static final int TRANSACTION_finishThread = 2;
         static final int TRANSACTION_onKnoxSecurityLogEvent = 3;
         static final int TRANSACTION_startThread = 1;
@@ -80,7 +78,8 @@ public interface ILogcatManagerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ILogcatManagerService.DESCRIPTOR);
             }
@@ -163,7 +162,8 @@ public interface ILogcatManagerService extends IInterface {
             }
 
             @Override // android.os.logcat.ILogcatManagerService
-            public void onKnoxSecurityLogEvent(int tag, List<String> payloads) throws RemoteException {
+            public void onKnoxSecurityLogEvent(int tag, List<String> payloads)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ILogcatManagerService.DESCRIPTOR);

@@ -3,6 +3,7 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -16,17 +17,18 @@ public final class CallQuality implements Parcelable {
     public static final int CALL_QUALITY_GOOD = 1;
     public static final int CALL_QUALITY_NOT_AVAILABLE = 5;
     public static final int CALL_QUALITY_POOR = 3;
-    public static final Parcelable.Creator<CallQuality> CREATOR = new Parcelable.Creator() { // from class: android.telephony.CallQuality.1
-        @Override // android.os.Parcelable.Creator
-        public CallQuality createFromParcel(Parcel in) {
-            return new CallQuality(in);
-        }
+    public static final Parcelable.Creator<CallQuality> CREATOR =
+            new Parcelable.Creator() { // from class: android.telephony.CallQuality.1
+                @Override // android.os.Parcelable.Creator
+                public CallQuality createFromParcel(Parcel in) {
+                    return new CallQuality(in);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public CallQuality[] newArray(int size) {
-            return new CallQuality[size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public CallQuality[] newArray(int size) {
+                    return new CallQuality[size];
+                }
+            };
     private int mAverageRelativeJitter;
     private int mAverageRoundTripTime;
     private int mCallDuration;
@@ -50,8 +52,7 @@ public final class CallQuality implements Parcelable {
     private int mUplinkCallQualityLevel;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CallQualityLevel {
-    }
+    public @interface CallQualityLevel {}
 
     public CallQuality(Parcel in) {
         this.mDownlinkCallQualityLevel = in.readInt();
@@ -77,14 +78,52 @@ public final class CallQuality implements Parcelable {
         this.mNumRtpDuplicatePackets = in.readInt();
     }
 
-    public CallQuality() {
+    public CallQuality() {}
+
+    public CallQuality(
+            int downlinkCallQualityLevel,
+            int uplinkCallQualityLevel,
+            int callDuration,
+            int numRtpPacketsTransmitted,
+            int numRtpPacketsReceived,
+            int numRtpPacketsTransmittedLost,
+            int numRtpPacketsNotReceived,
+            int averageRelativeJitter,
+            int maxRelativeJitter,
+            int averageRoundTripTime,
+            int codecType) {
+        this(
+                downlinkCallQualityLevel,
+                uplinkCallQualityLevel,
+                callDuration,
+                numRtpPacketsTransmitted,
+                numRtpPacketsReceived,
+                numRtpPacketsTransmittedLost,
+                numRtpPacketsNotReceived,
+                averageRelativeJitter,
+                maxRelativeJitter,
+                averageRoundTripTime,
+                codecType,
+                false,
+                false,
+                false);
     }
 
-    public CallQuality(int downlinkCallQualityLevel, int uplinkCallQualityLevel, int callDuration, int numRtpPacketsTransmitted, int numRtpPacketsReceived, int numRtpPacketsTransmittedLost, int numRtpPacketsNotReceived, int averageRelativeJitter, int maxRelativeJitter, int averageRoundTripTime, int codecType) {
-        this(downlinkCallQualityLevel, uplinkCallQualityLevel, callDuration, numRtpPacketsTransmitted, numRtpPacketsReceived, numRtpPacketsTransmittedLost, numRtpPacketsNotReceived, averageRelativeJitter, maxRelativeJitter, averageRoundTripTime, codecType, false, false, false);
-    }
-
-    public CallQuality(int downlinkCallQualityLevel, int uplinkCallQualityLevel, int callDuration, int numRtpPacketsTransmitted, int numRtpPacketsReceived, int numRtpPacketsTransmittedLost, int numRtpPacketsNotReceived, int averageRelativeJitter, int maxRelativeJitter, int averageRoundTripTime, int codecType, boolean rtpInactivityDetected, boolean rxSilenceDetected, boolean txSilenceDetected) {
+    public CallQuality(
+            int downlinkCallQualityLevel,
+            int uplinkCallQualityLevel,
+            int callDuration,
+            int numRtpPacketsTransmitted,
+            int numRtpPacketsReceived,
+            int numRtpPacketsTransmittedLost,
+            int numRtpPacketsNotReceived,
+            int averageRelativeJitter,
+            int maxRelativeJitter,
+            int averageRoundTripTime,
+            int codecType,
+            boolean rtpInactivityDetected,
+            boolean rxSilenceDetected,
+            boolean txSilenceDetected) {
         this.mDownlinkCallQualityLevel = downlinkCallQualityLevel;
         this.mUplinkCallQualityLevel = uplinkCallQualityLevel;
         this.mCallDuration = callDuration;
@@ -186,11 +225,74 @@ public final class CallQuality implements Parcelable {
     }
 
     public String toString() {
-        return "CallQuality: {downlinkCallQualityLevel=" + this.mDownlinkCallQualityLevel + " uplinkCallQualityLevel=" + this.mUplinkCallQualityLevel + " callDuration=" + this.mCallDuration + " numRtpPacketsTransmitted=" + this.mNumRtpPacketsTransmitted + " numRtpPacketsReceived=" + this.mNumRtpPacketsReceived + " numRtpPacketsTransmittedLost=" + this.mNumRtpPacketsTransmittedLost + " numRtpPacketsNotReceived=" + this.mNumRtpPacketsNotReceived + " averageRelativeJitter=" + this.mAverageRelativeJitter + " maxRelativeJitter=" + this.mMaxRelativeJitter + " averageRoundTripTime=" + this.mAverageRoundTripTime + " codecType=" + this.mCodecType + " rtpInactivityDetected=" + this.mRtpInactivityDetected + " txSilenceDetected=" + this.mTxSilenceDetected + " rxSilenceDetected=" + this.mRxSilenceDetected + " numVoiceFrames=" + this.mNumVoiceFrames + " numNoDataFrames=" + this.mNumNoDataFrames + " numDroppedRtpPackets=" + this.mNumDroppedRtpPackets + " minPlayoutDelayMillis=" + this.mMinPlayoutDelayMillis + " maxPlayoutDelayMillis=" + this.mMaxPlayoutDelayMillis + " numRtpSidPacketsReceived=" + this.mNumRtpSidPacketsReceived + " numRtpDuplicatePackets=" + this.mNumRtpDuplicatePackets + "}";
+        return "CallQuality: {downlinkCallQualityLevel="
+                + this.mDownlinkCallQualityLevel
+                + " uplinkCallQualityLevel="
+                + this.mUplinkCallQualityLevel
+                + " callDuration="
+                + this.mCallDuration
+                + " numRtpPacketsTransmitted="
+                + this.mNumRtpPacketsTransmitted
+                + " numRtpPacketsReceived="
+                + this.mNumRtpPacketsReceived
+                + " numRtpPacketsTransmittedLost="
+                + this.mNumRtpPacketsTransmittedLost
+                + " numRtpPacketsNotReceived="
+                + this.mNumRtpPacketsNotReceived
+                + " averageRelativeJitter="
+                + this.mAverageRelativeJitter
+                + " maxRelativeJitter="
+                + this.mMaxRelativeJitter
+                + " averageRoundTripTime="
+                + this.mAverageRoundTripTime
+                + " codecType="
+                + this.mCodecType
+                + " rtpInactivityDetected="
+                + this.mRtpInactivityDetected
+                + " txSilenceDetected="
+                + this.mTxSilenceDetected
+                + " rxSilenceDetected="
+                + this.mRxSilenceDetected
+                + " numVoiceFrames="
+                + this.mNumVoiceFrames
+                + " numNoDataFrames="
+                + this.mNumNoDataFrames
+                + " numDroppedRtpPackets="
+                + this.mNumDroppedRtpPackets
+                + " minPlayoutDelayMillis="
+                + this.mMinPlayoutDelayMillis
+                + " maxPlayoutDelayMillis="
+                + this.mMaxPlayoutDelayMillis
+                + " numRtpSidPacketsReceived="
+                + this.mNumRtpSidPacketsReceived
+                + " numRtpDuplicatePackets="
+                + this.mNumRtpDuplicatePackets
+                + "}";
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mDownlinkCallQualityLevel), Integer.valueOf(this.mUplinkCallQualityLevel), Integer.valueOf(this.mCallDuration), Integer.valueOf(this.mNumRtpPacketsTransmitted), Integer.valueOf(this.mNumRtpPacketsReceived), Integer.valueOf(this.mNumRtpPacketsTransmittedLost), Integer.valueOf(this.mNumRtpPacketsNotReceived), Integer.valueOf(this.mAverageRelativeJitter), Integer.valueOf(this.mMaxRelativeJitter), Integer.valueOf(this.mAverageRoundTripTime), Integer.valueOf(this.mCodecType), Boolean.valueOf(this.mRtpInactivityDetected), Boolean.valueOf(this.mRxSilenceDetected), Boolean.valueOf(this.mTxSilenceDetected), Integer.valueOf(this.mNumVoiceFrames), Integer.valueOf(this.mNumNoDataFrames), Integer.valueOf(this.mNumDroppedRtpPackets), Long.valueOf(this.mMinPlayoutDelayMillis), Long.valueOf(this.mMaxPlayoutDelayMillis), Integer.valueOf(this.mNumRtpSidPacketsReceived), Integer.valueOf(this.mNumRtpDuplicatePackets));
+        return Objects.hash(
+                Integer.valueOf(this.mDownlinkCallQualityLevel),
+                Integer.valueOf(this.mUplinkCallQualityLevel),
+                Integer.valueOf(this.mCallDuration),
+                Integer.valueOf(this.mNumRtpPacketsTransmitted),
+                Integer.valueOf(this.mNumRtpPacketsReceived),
+                Integer.valueOf(this.mNumRtpPacketsTransmittedLost),
+                Integer.valueOf(this.mNumRtpPacketsNotReceived),
+                Integer.valueOf(this.mAverageRelativeJitter),
+                Integer.valueOf(this.mMaxRelativeJitter),
+                Integer.valueOf(this.mAverageRoundTripTime),
+                Integer.valueOf(this.mCodecType),
+                Boolean.valueOf(this.mRtpInactivityDetected),
+                Boolean.valueOf(this.mRxSilenceDetected),
+                Boolean.valueOf(this.mTxSilenceDetected),
+                Integer.valueOf(this.mNumVoiceFrames),
+                Integer.valueOf(this.mNumNoDataFrames),
+                Integer.valueOf(this.mNumDroppedRtpPackets),
+                Long.valueOf(this.mMinPlayoutDelayMillis),
+                Long.valueOf(this.mMaxPlayoutDelayMillis),
+                Integer.valueOf(this.mNumRtpSidPacketsReceived),
+                Integer.valueOf(this.mNumRtpDuplicatePackets));
     }
 
     public boolean equals(Object o) {
@@ -201,7 +303,27 @@ public final class CallQuality implements Parcelable {
             return true;
         }
         CallQuality s = (CallQuality) o;
-        if (this.mDownlinkCallQualityLevel != s.mDownlinkCallQualityLevel || this.mUplinkCallQualityLevel != s.mUplinkCallQualityLevel || this.mCallDuration != s.mCallDuration || this.mNumRtpPacketsTransmitted != s.mNumRtpPacketsTransmitted || this.mNumRtpPacketsReceived != s.mNumRtpPacketsReceived || this.mNumRtpPacketsTransmittedLost != s.mNumRtpPacketsTransmittedLost || this.mNumRtpPacketsNotReceived != s.mNumRtpPacketsNotReceived || this.mAverageRelativeJitter != s.mAverageRelativeJitter || this.mMaxRelativeJitter != s.mMaxRelativeJitter || this.mAverageRoundTripTime != s.mAverageRoundTripTime || this.mCodecType != s.mCodecType || this.mRtpInactivityDetected != s.mRtpInactivityDetected || this.mRxSilenceDetected != s.mRxSilenceDetected || this.mTxSilenceDetected != s.mTxSilenceDetected || this.mNumVoiceFrames != s.mNumVoiceFrames || this.mNumNoDataFrames != s.mNumNoDataFrames || this.mNumDroppedRtpPackets != s.mNumDroppedRtpPackets || this.mMinPlayoutDelayMillis != s.mMinPlayoutDelayMillis || this.mMaxPlayoutDelayMillis != s.mMaxPlayoutDelayMillis || this.mNumRtpSidPacketsReceived != s.mNumRtpSidPacketsReceived || this.mNumRtpDuplicatePackets != s.mNumRtpDuplicatePackets) {
+        if (this.mDownlinkCallQualityLevel != s.mDownlinkCallQualityLevel
+                || this.mUplinkCallQualityLevel != s.mUplinkCallQualityLevel
+                || this.mCallDuration != s.mCallDuration
+                || this.mNumRtpPacketsTransmitted != s.mNumRtpPacketsTransmitted
+                || this.mNumRtpPacketsReceived != s.mNumRtpPacketsReceived
+                || this.mNumRtpPacketsTransmittedLost != s.mNumRtpPacketsTransmittedLost
+                || this.mNumRtpPacketsNotReceived != s.mNumRtpPacketsNotReceived
+                || this.mAverageRelativeJitter != s.mAverageRelativeJitter
+                || this.mMaxRelativeJitter != s.mMaxRelativeJitter
+                || this.mAverageRoundTripTime != s.mAverageRoundTripTime
+                || this.mCodecType != s.mCodecType
+                || this.mRtpInactivityDetected != s.mRtpInactivityDetected
+                || this.mRxSilenceDetected != s.mRxSilenceDetected
+                || this.mTxSilenceDetected != s.mTxSilenceDetected
+                || this.mNumVoiceFrames != s.mNumVoiceFrames
+                || this.mNumNoDataFrames != s.mNumNoDataFrames
+                || this.mNumDroppedRtpPackets != s.mNumDroppedRtpPackets
+                || this.mMinPlayoutDelayMillis != s.mMinPlayoutDelayMillis
+                || this.mMaxPlayoutDelayMillis != s.mMaxPlayoutDelayMillis
+                || this.mNumRtpSidPacketsReceived != s.mNumRtpSidPacketsReceived
+                || this.mNumRtpDuplicatePackets != s.mNumRtpDuplicatePackets) {
             return false;
         }
         return true;

@@ -3,6 +3,7 @@ package com.sec.android.iaft;
 import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,7 +21,8 @@ public class IAFDSocketFdServer {
     private static final String HOTFIX_END = "resourcesapybhotfixczfileend";
     private static final String HOTFIX_START = "resourcesapybhotfixczfilestart";
     static final String IAFDDBPATH_DEENCRYPT = "/iafd/db/";
-    static final String IAFDPKEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCwaCLv6RvwU8gyFSbynkiPI1Yjb4O3PjCoTQOJadMly1MfePjpFFddlbHnEhyXZqK5znGPNCa/+grdCBV6bbdVf1DTjzcrleKeD6LwC5cioMMjtu91MqrZwDSyAvi6cpdiskEJ/ht+lDJGTdE5bpxJl5tQyy+HrXQk2wJFp3fTWwIDAQAB";
+    static final String IAFDPKEY =
+            "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCwaCLv6RvwU8gyFSbynkiPI1Yjb4O3PjCoTQOJadMly1MfePjpFFddlbHnEhyXZqK5znGPNCa/+grdCBV6bbdVf1DTjzcrleKeD6LwC5cioMMjtu91MqrZwDSyAvi6cpdiskEJ/ht+lDJGTdE5bpxJl5tQyy+HrXQk2wJFp3fTWwIDAQAB";
     static final String IAFD_ABSOLUTEPATH = "/data/user/0/com.sec.android.iaft";
     private static final int NAME_POS = 1;
     private static final String TAG = "IAFDGetHotfixDataService";
@@ -35,16 +37,17 @@ public class IAFDSocketFdServer {
 
     public void getDataFromClient(final String hotFixData) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(new Runnable() { // from class: com.sec.android.iaft.IAFDSocketFdServer.1
-            @Override // java.lang.Runnable
-            public void run() {
-                try {
-                    IAFDSocketFdServer.this.saveFile(hotFixData);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        executor.submit(
+                new Runnable() { // from class: com.sec.android.iaft.IAFDSocketFdServer.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        try {
+                            IAFDSocketFdServer.this.saveFile(hotFixData);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
         executor.shutdown();
     }
 
@@ -63,10 +66,20 @@ public class IAFDSocketFdServer {
                     String fileName = item[1];
                     String ciphertext = item[2];
                     if (fileName.contains(ENCRYPT_HOTFIX_DEX_SUFFIX)) {
-                        f2h.makeHexStringToFile(IAFD_ABSOLUTEPATH + DEXPATH_DEENCRYPT, ciphertext, fileName + ENCRYPT_HOTFIX_SUFFIX);
+                        f2h.makeHexStringToFile(
+                                IAFD_ABSOLUTEPATH + DEXPATH_DEENCRYPT,
+                                ciphertext,
+                                fileName + ENCRYPT_HOTFIX_SUFFIX);
                     } else {
                         byte[] bs = f2h.makeHexStringToBytes(ciphertext);
-                        IAFDRSAUtils.decryptBytesToFile(bs, IAFDPKEY, IAFD_ABSOLUTEPATH + IAFDDBPATH_DEENCRYPT + fileName + ENCRYPT_HOTFIX_SUFFIX + DECRYPT_HOTFIX_SUFFIX);
+                        IAFDRSAUtils.decryptBytesToFile(
+                                bs,
+                                IAFDPKEY,
+                                IAFD_ABSOLUTEPATH
+                                        + IAFDDBPATH_DEENCRYPT
+                                        + fileName
+                                        + ENCRYPT_HOTFIX_SUFFIX
+                                        + DECRYPT_HOTFIX_SUFFIX);
                         if (fileName.contains("iafddbhotfix_db")) {
                             isIAFDDBHOTFIX_UPDATE = true;
                         } else if (fileName.contains("ardbhotfix_db")) {

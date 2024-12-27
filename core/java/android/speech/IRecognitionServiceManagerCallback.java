@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.speech.IRecognitionService;
 
 /* loaded from: classes3.dex */
 public interface IRecognitionServiceManagerCallback extends IInterface {
@@ -17,12 +16,10 @@ public interface IRecognitionServiceManagerCallback extends IInterface {
 
     public static class Default implements IRecognitionServiceManagerCallback {
         @Override // android.speech.IRecognitionServiceManagerCallback
-        public void onSuccess(IRecognitionService service) throws RemoteException {
-        }
+        public void onSuccess(IRecognitionService service) throws RemoteException {}
 
         @Override // android.speech.IRecognitionServiceManagerCallback
-        public void onError(int errorCode) throws RemoteException {
-        }
+        public void onError(int errorCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +27,7 @@ public interface IRecognitionServiceManagerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRecognitionServiceManagerCallback {
+    public abstract static class Stub extends Binder implements IRecognitionServiceManagerCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -71,7 +68,8 @@ public interface IRecognitionServiceManagerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRecognitionServiceManagerCallback.DESCRIPTOR);
             }
@@ -81,7 +79,8 @@ public interface IRecognitionServiceManagerCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IRecognitionService _arg0 = IRecognitionService.Stub.asInterface(data.readStrongBinder());
+                    IRecognitionService _arg0 =
+                            IRecognitionService.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onSuccess(_arg0);
                     return true;

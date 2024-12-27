@@ -3,12 +3,15 @@ package com.android.server.enterprise.certificate;
 import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOutline0;
 import android.os.Environment;
 import android.util.Log;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.adapter.AdapterRegistry;
 import com.android.server.enterprise.adapter.IPersonaManagerAdapter;
 import com.android.server.enterprise.adapterlayer.PersonaManagerAdapter;
 import com.android.server.enterprise.utils.Utils;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,6 +32,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import javax.security.auth.x500.X500Principal;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -51,10 +55,14 @@ public final class EdmKeyStore {
         StringBuilder sb = new StringBuilder();
         sb.append(Environment.getDataSystemDirectory());
         String str = File.separator;
-        TRUSTED_KEYSTORE_PATH = AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, str, "enterprise_cacerts.bks");
-        UNTRUSTED_KEYSTORE_PATH = Environment.getDataSystemDirectory() + str + "enterprise_untrustedcerts.bks";
-        USER_KEYSTORE_PATH = Environment.getDataSystemDirectory() + str + "enterprise_usercerts.bks";
-        NATIVE_KEYSTORE_PATH = Environment.getDataSystemDirectory() + str + "enterprise_nativecerts.bks";
+        TRUSTED_KEYSTORE_PATH =
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, str, "enterprise_cacerts.bks");
+        UNTRUSTED_KEYSTORE_PATH =
+                Environment.getDataSystemDirectory() + str + "enterprise_untrustedcerts.bks";
+        USER_KEYSTORE_PATH =
+                Environment.getDataSystemDirectory() + str + "enterprise_usercerts.bks";
+        NATIVE_KEYSTORE_PATH =
+                Environment.getDataSystemDirectory() + str + "enterprise_nativecerts.bks";
     }
 
     /* JADX WARN: Removed duplicated region for block: B:34:0x0078 A[Catch: all -> 0x005b, TRY_ENTER, TryCatch #8 {, blocks: (B:12:0x0056, B:13:0x0059, B:34:0x0078, B:35:0x007b), top: B:4:0x0010 }] */
@@ -157,7 +165,10 @@ public final class EdmKeyStore {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L5b
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.certificate.EdmKeyStore.<init>(java.lang.String, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.certificate.EdmKeyStore.<init>(java.lang.String,"
+                    + " int):void");
     }
 
     public static String addUserIdToAlias(int i, String str) {
@@ -168,7 +179,11 @@ public final class EdmKeyStore {
         int i;
         try {
             byte[] digest = MessageDigest.getInstance("SHA1").digest(x500Principal.getEncoded());
-            int i2 = ((digest[3] & 255) << 24) | (digest[0] & 255) | ((digest[1] & 255) << 8) | ((digest[2] & 255) << 16);
+            int i2 =
+                    ((digest[3] & 255) << 24)
+                            | (digest[0] & 255)
+                            | ((digest[1] & 255) << 8)
+                            | ((digest[2] & 255) << 16);
             char[] cArr = new char[8];
             int i3 = 8;
             while (true) {
@@ -184,11 +199,15 @@ public final class EdmKeyStore {
         }
     }
 
-    public static List generateAllAliasesForUser(CertificateCache certificateCache, X500Principal x500Principal, int i, int i2) {
+    public static List generateAllAliasesForUser(
+            CertificateCache certificateCache, X500Principal x500Principal, int i, int i2) {
         ArrayList arrayList = new ArrayList();
         String generateAlias = generateAlias(x500Principal);
         arrayList.add(addUserIdToAlias(i, generateAlias));
-        ((PersonaManagerAdapter) ((IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class))).getClass();
+        ((PersonaManagerAdapter)
+                        ((IPersonaManagerAdapter)
+                                AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class)))
+                .getClass();
         if (SemPersonaManager.isKnoxId(i)) {
             if (isFromContainerOwner(certificateCache, generateAlias, i2)) {
                 arrayList.add(addUserIdToAlias(0, generateAlias));
@@ -249,25 +268,35 @@ public final class EdmKeyStore {
         }
     }
 
-    public static boolean isFromContainerOwner(CertificateCache certificateCache, String str, int i) {
+    public static boolean isFromContainerOwner(
+            CertificateCache certificateCache, String str, int i) {
         boolean contains;
         synchronized (certificateCache) {
             if (((HashMap) certificateCache.mCache).containsKey(0)) {
                 Map map = (Map) ((HashMap) certificateCache.mCache).get(0);
-                contains = map.containsKey(str) ? ((List) map.get(str)).contains(Integer.valueOf(i)) : false;
+                contains =
+                        map.containsKey(str)
+                                ? ((List) map.get(str)).contains(Integer.valueOf(i))
+                                : false;
             }
         }
         return contains;
     }
 
     public static boolean isSelfSigned(X509Certificate x509Certificate) {
-        if (!x509Certificate.getSubjectX500Principal().equals(x509Certificate.getIssuerX500Principal())) {
+        if (!x509Certificate
+                .getSubjectX500Principal()
+                .equals(x509Certificate.getIssuerX500Principal())) {
             return false;
         }
         try {
             x509Certificate.verify(x509Certificate.getPublicKey());
             return true;
-        } catch (InvalidKeyException | NoSuchAlgorithmException | NoSuchProviderException | SignatureException | CertificateException e) {
+        } catch (InvalidKeyException
+                | NoSuchAlgorithmException
+                | NoSuchProviderException
+                | SignatureException
+                | CertificateException e) {
             Log.i("EdmKeyStore", "Verifying self-signed certificate: " + e.getMessage());
             return false;
         }
@@ -306,61 +335,61 @@ public final class EdmKeyStore {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:35:0x004f, code lost:
-    
-        r4 = ((java.util.ArrayList) generateAllAliasesForUser(r10, r11.getIssuerX500Principal(), r12, r13)).iterator();
-     */
+
+       r4 = ((java.util.ArrayList) generateAllAliasesForUser(r10, r11.getIssuerX500Principal(), r12, r13)).iterator();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0061, code lost:
-    
-        if (r4.hasNext() == false) goto L73;
-     */
+
+       if (r4.hasNext() == false) goto L73;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0063, code lost:
-    
-        r5 = (java.security.cert.X509Certificate) r8.mKeyStore.getCertificate((java.lang.String) r4.next());
-     */
+
+       r5 = (java.security.cert.X509Certificate) r8.mKeyStore.getCertificate((java.lang.String) r4.next());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x0071, code lost:
-    
-        if (r5 == null) goto L76;
-     */
+
+       if (r5 == null) goto L76;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x0073, code lost:
-    
-        r11.verify(r5.getPublicKey());
-     */
+
+       r11.verify(r5.getPublicKey());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:42:0x007a, code lost:
-    
-        r6 = true;
-     */
+
+       r6 = true;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:48:0x007c, code lost:
-    
-        r6 = false;
-     */
+
+       r6 = false;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:51:0x0080, code lost:
-    
-        r4 = ((java.util.ArrayList) getAliasesForUser(r10, r12, r13)).iterator();
-     */
+
+       r4 = ((java.util.ArrayList) getAliasesForUser(r10, r12, r13)).iterator();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:53:0x008e, code lost:
-    
-        if (r4.hasNext() == false) goto L78;
-     */
+
+       if (r4.hasNext() == false) goto L78;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:54:0x0090, code lost:
-    
-        r5 = (java.security.cert.X509Certificate) r8.mKeyStore.getCertificate((java.lang.String) r4.next());
-     */
+
+       r5 = (java.security.cert.X509Certificate) r8.mKeyStore.getCertificate((java.lang.String) r4.next());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:55:0x009e, code lost:
-    
-        if (r5 == null) goto L82;
-     */
+
+       if (r5 == null) goto L82;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:57:0x00a0, code lost:
-    
-        r11.verify(r5.getPublicKey());
-     */
+
+       r11.verify(r5.getPublicKey());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x00a7, code lost:
-    
-        r6 = true;
-     */
+
+       r6 = true;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:70:0x00a9, code lost:
-    
-        r6 = false;
-     */
+
+       r6 = false;
+    */
     /* JADX WARN: Removed duplicated region for block: B:19:0x00d4 A[RETURN] */
     /* JADX WARN: Removed duplicated region for block: B:21:0x00d5  */
     /* JADX WARN: Removed duplicated region for block: B:63:0x00d2 A[SYNTHETIC] */
@@ -369,7 +398,12 @@ public final class EdmKeyStore {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean containsCertificateOrChain(android.content.Context r9, com.android.server.enterprise.certificate.CertificateCache r10, java.security.cert.X509Certificate r11, int r12, int r13) {
+    public final boolean containsCertificateOrChain(
+            android.content.Context r9,
+            com.android.server.enterprise.certificate.CertificateCache r10,
+            java.security.cert.X509Certificate r11,
+            int r12,
+            int r13) {
         /*
             r8 = this;
             r0 = 0
@@ -491,7 +525,11 @@ public final class EdmKeyStore {
         Lf1:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.certificate.EdmKeyStore.containsCertificateOrChain(android.content.Context, com.android.server.enterprise.certificate.CertificateCache, java.security.cert.X509Certificate, int, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.certificate.EdmKeyStore.containsCertificateOrChain(android.content.Context,"
+                    + " com.android.server.enterprise.certificate.CertificateCache,"
+                    + " java.security.cert.X509Certificate, int, int):boolean");
     }
 
     public final void dump(PrintWriter printWriter, String str) {
@@ -529,7 +567,10 @@ public final class EdmKeyStore {
 
     public final List getAliasesForUser(CertificateCache certificateCache, int i, int i2) {
         ArrayList arrayList = new ArrayList();
-        ((PersonaManagerAdapter) ((IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class))).getClass();
+        ((PersonaManagerAdapter)
+                        ((IPersonaManagerAdapter)
+                                AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class)))
+                .getClass();
         boolean isKnoxId = SemPersonaManager.isKnoxId(i);
         try {
             Enumeration<String> aliases = this.mKeyStore.aliases();
@@ -559,7 +600,9 @@ public final class EdmKeyStore {
             try {
                 synchronized (this.mKeyStoreLock) {
                     try {
-                        X509Certificate x509Certificate = (X509Certificate) this.mKeyStore.getCertificate(addUserIdToAlias(i, str));
+                        X509Certificate x509Certificate =
+                                (X509Certificate)
+                                        this.mKeyStore.getCertificate(addUserIdToAlias(i, str));
                         if (x509Certificate != null) {
                             hashMap.put(str, x509Certificate);
                         }
@@ -581,7 +624,8 @@ public final class EdmKeyStore {
                 synchronized (this.mKeyStoreLock) {
                     try {
                         String addUserIdToAlias = addUserIdToAlias(i, (String) entry.getKey());
-                        this.mKeyStore.setCertificateEntry(addUserIdToAlias, (Certificate) entry.getValue());
+                        this.mKeyStore.setCertificateEntry(
+                                addUserIdToAlias, (Certificate) entry.getValue());
                         if (this.mKeyStore.isCertificateEntry(addUserIdToAlias)) {
                             arrayList.add((String) entry.getKey());
                         }
@@ -597,9 +641,9 @@ public final class EdmKeyStore {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:8:0x000f, code lost:
-    
-        if (r1 != 3) goto L25;
-     */
+
+       if (r1 != 3) goto L25;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -654,7 +698,9 @@ public final class EdmKeyStore {
             r4.saveKeyStore()
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.certificate.EdmKeyStore.performKeystoreUpgrade():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.certificate.EdmKeyStore.performKeystoreUpgrade():void");
     }
 
     public final void removeCertificates(int i, List list) {

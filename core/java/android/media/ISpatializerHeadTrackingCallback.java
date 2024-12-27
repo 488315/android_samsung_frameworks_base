@@ -16,12 +16,10 @@ public interface ISpatializerHeadTrackingCallback extends IInterface {
 
     public static class Default implements ISpatializerHeadTrackingCallback {
         @Override // android.media.ISpatializerHeadTrackingCallback
-        public void onHeadTrackingModeChanged(byte mode) throws RemoteException {
-        }
+        public void onHeadTrackingModeChanged(byte mode) throws RemoteException {}
 
         @Override // android.media.ISpatializerHeadTrackingCallback
-        public void onHeadToSoundStagePoseUpdated(float[] headToStage) throws RemoteException {
-        }
+        public void onHeadToSoundStagePoseUpdated(float[] headToStage) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ISpatializerHeadTrackingCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpatializerHeadTrackingCallback {
+    public abstract static class Stub extends Binder implements ISpatializerHeadTrackingCallback {
         static final int TRANSACTION_onHeadToSoundStagePoseUpdated = 2;
         static final int TRANSACTION_onHeadTrackingModeChanged = 1;
 
@@ -54,7 +52,8 @@ public interface ISpatializerHeadTrackingCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISpatializerHeadTrackingCallback.DESCRIPTOR);
             }

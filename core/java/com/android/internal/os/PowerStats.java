@@ -11,10 +11,13 @@ import android.text.format.DateFormat;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.content.NativeLibraryHelper;
-import com.android.internal.os.BatteryStatsHistory;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +25,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public final class PowerStats {
@@ -35,13 +37,16 @@ public final class PowerStats {
     public final Descriptor descriptor;
     public long durationMs;
     public long[] stats;
-    private static final BatteryStatsHistory.VarintParceler VARINT_PARCELER = new BatteryStatsHistory.VarintParceler();
+    private static final BatteryStatsHistory.VarintParceler VARINT_PARCELER =
+            new BatteryStatsHistory.VarintParceler();
     private static final int PARCEL_FORMAT_VERSION_SHIFT = Integer.numberOfTrailingZeros(255);
     private static final int STATS_ARRAY_LENGTH_SHIFT = Integer.numberOfTrailingZeros(65280);
     public static final int MAX_STATS_ARRAY_LENGTH = (1 << Integer.bitCount(65280)) - 1;
-    private static final int STATE_STATS_ARRAY_LENGTH_SHIFT = Integer.numberOfTrailingZeros(16711680);
+    private static final int STATE_STATS_ARRAY_LENGTH_SHIFT =
+            Integer.numberOfTrailingZeros(16711680);
     public static final int MAX_STATE_STATS_ARRAY_LENGTH = (1 << Integer.bitCount(16711680)) - 1;
-    private static final int UID_STATS_ARRAY_LENGTH_SHIFT = Integer.numberOfTrailingZeros(-16777216);
+    private static final int UID_STATS_ARRAY_LENGTH_SHIFT =
+            Integer.numberOfTrailingZeros(-16777216);
     public static final int MAX_UID_STATS_ARRAY_LENGTH = (1 << Integer.bitCount(-16777216)) - 1;
     public final SparseArray<long[]> stateStats = new SparseArray<>();
     public final SparseArray<long[]> uidStats = new SparseArray<>();
@@ -71,19 +76,44 @@ public final class PowerStats {
         public final int statsArrayLength;
         public final int uidStatsArrayLength;
 
-        public Descriptor(int powerComponentId, int statsArrayLength, SparseArray<String> stateLabels, int stateStatsArrayLength, int uidStatsArrayLength, PersistableBundle extras) {
-            this(powerComponentId, BatteryConsumer.powerComponentIdToString(powerComponentId), statsArrayLength, stateLabels, stateStatsArrayLength, uidStatsArrayLength, extras);
+        public Descriptor(
+                int powerComponentId,
+                int statsArrayLength,
+                SparseArray<String> stateLabels,
+                int stateStatsArrayLength,
+                int uidStatsArrayLength,
+                PersistableBundle extras) {
+            this(
+                    powerComponentId,
+                    BatteryConsumer.powerComponentIdToString(powerComponentId),
+                    statsArrayLength,
+                    stateLabels,
+                    stateStatsArrayLength,
+                    uidStatsArrayLength,
+                    extras);
         }
 
-        public Descriptor(int customPowerComponentId, String name, int statsArrayLength, SparseArray<String> stateLabels, int stateStatsArrayLength, int uidStatsArrayLength, PersistableBundle extras) {
+        public Descriptor(
+                int customPowerComponentId,
+                String name,
+                int statsArrayLength,
+                SparseArray<String> stateLabels,
+                int stateStatsArrayLength,
+                int uidStatsArrayLength,
+                PersistableBundle extras) {
             if (statsArrayLength > PowerStats.MAX_STATS_ARRAY_LENGTH) {
-                throw new IllegalArgumentException("statsArrayLength is too high. Max = " + PowerStats.MAX_STATS_ARRAY_LENGTH);
+                throw new IllegalArgumentException(
+                        "statsArrayLength is too high. Max = " + PowerStats.MAX_STATS_ARRAY_LENGTH);
             }
             if (stateStatsArrayLength > PowerStats.MAX_STATE_STATS_ARRAY_LENGTH) {
-                throw new IllegalArgumentException("stateStatsArrayLength is too high. Max = " + PowerStats.MAX_STATE_STATS_ARRAY_LENGTH);
+                throw new IllegalArgumentException(
+                        "stateStatsArrayLength is too high. Max = "
+                                + PowerStats.MAX_STATE_STATS_ARRAY_LENGTH);
             }
             if (uidStatsArrayLength > PowerStats.MAX_UID_STATS_ARRAY_LENGTH) {
-                throw new IllegalArgumentException("uidStatsArrayLength is too high. Max = " + PowerStats.MAX_UID_STATS_ARRAY_LENGTH);
+                throw new IllegalArgumentException(
+                        "uidStatsArrayLength is too high. Max = "
+                                + PowerStats.MAX_UID_STATS_ARRAY_LENGTH);
             }
             this.powerComponentId = customPowerComponentId;
             this.name = name;
@@ -96,21 +126,24 @@ public final class PowerStats {
 
         public PowerStatsFormatter getDeviceStatsFormatter() {
             if (this.mDeviceStatsFormatter == null) {
-                this.mDeviceStatsFormatter = new PowerStatsFormatter(this.extras.getString(EXTRA_DEVICE_STATS_FORMAT));
+                this.mDeviceStatsFormatter =
+                        new PowerStatsFormatter(this.extras.getString(EXTRA_DEVICE_STATS_FORMAT));
             }
             return this.mDeviceStatsFormatter;
         }
 
         public PowerStatsFormatter getStateStatsFormatter() {
             if (this.mStateStatsFormatter == null) {
-                this.mStateStatsFormatter = new PowerStatsFormatter(this.extras.getString(EXTRA_STATE_STATS_FORMAT));
+                this.mStateStatsFormatter =
+                        new PowerStatsFormatter(this.extras.getString(EXTRA_STATE_STATS_FORMAT));
             }
             return this.mStateStatsFormatter;
         }
 
         public PowerStatsFormatter getUidStatsFormatter() {
             if (this.mUidStatsFormatter == null) {
-                this.mUidStatsFormatter = new PowerStatsFormatter(this.extras.getString(EXTRA_UID_STATS_FORMAT));
+                this.mUidStatsFormatter =
+                        new PowerStatsFormatter(this.extras.getString(EXTRA_UID_STATS_FORMAT));
             }
             return this.mUidStatsFormatter;
         }
@@ -124,7 +157,15 @@ public final class PowerStats {
         }
 
         public void writeSummaryToParcel(Parcel parcel) {
-            int firstWord = ((2 << PowerStats.PARCEL_FORMAT_VERSION_SHIFT) & 255) | ((this.statsArrayLength << PowerStats.STATS_ARRAY_LENGTH_SHIFT) & 65280) | ((this.stateStatsArrayLength << PowerStats.STATE_STATS_ARRAY_LENGTH_SHIFT) & 16711680) | ((this.uidStatsArrayLength << PowerStats.UID_STATS_ARRAY_LENGTH_SHIFT) & (-16777216));
+            int firstWord =
+                    ((2 << PowerStats.PARCEL_FORMAT_VERSION_SHIFT) & 255)
+                            | ((this.statsArrayLength << PowerStats.STATS_ARRAY_LENGTH_SHIFT)
+                                    & 65280)
+                            | ((this.stateStatsArrayLength
+                                            << PowerStats.STATE_STATS_ARRAY_LENGTH_SHIFT)
+                                    & 16711680)
+                            | ((this.uidStatsArrayLength << PowerStats.UID_STATS_ARRAY_LENGTH_SHIFT)
+                                    & (-16777216));
             parcel.writeInt(firstWord);
             parcel.writeInt(this.powerComponentId);
             parcel.writeString(this.name);
@@ -141,12 +182,19 @@ public final class PowerStats {
             int firstWord = parcel.readInt();
             int version = (firstWord & 255) >>> PowerStats.PARCEL_FORMAT_VERSION_SHIFT;
             if (version != 2) {
-                Slog.w(PowerStats.TAG, "Cannot read PowerStats from Parcel - the parcel format version has changed from " + version + " to 2");
+                Slog.w(
+                        PowerStats.TAG,
+                        "Cannot read PowerStats from Parcel - the parcel format version has changed"
+                            + " from "
+                                + version
+                                + " to 2");
                 return null;
             }
             int statsArrayLength = (65280 & firstWord) >>> PowerStats.STATS_ARRAY_LENGTH_SHIFT;
-            int stateStatsArrayLength = (16711680 & firstWord) >>> PowerStats.STATE_STATS_ARRAY_LENGTH_SHIFT;
-            int uidStatsArrayLength = ((-16777216) & firstWord) >>> PowerStats.UID_STATS_ARRAY_LENGTH_SHIFT;
+            int stateStatsArrayLength =
+                    (16711680 & firstWord) >>> PowerStats.STATE_STATS_ARRAY_LENGTH_SHIFT;
+            int uidStatsArrayLength =
+                    ((-16777216) & firstWord) >>> PowerStats.UID_STATS_ARRAY_LENGTH_SHIFT;
             int powerComponentId = parcel.readInt();
             String name = parcel.readString();
             int stateLabelCount = parcel.readInt();
@@ -157,7 +205,14 @@ public final class PowerStats {
                 stateLabels.put(key, label);
             }
             PersistableBundle extras = parcel.readPersistableBundle();
-            return new Descriptor(powerComponentId, name, statsArrayLength, stateLabels, stateStatsArrayLength, uidStatsArrayLength, extras);
+            return new Descriptor(
+                    powerComponentId,
+                    name,
+                    statsArrayLength,
+                    stateLabels,
+                    stateStatsArrayLength,
+                    uidStatsArrayLength,
+                    extras);
         }
 
         public boolean equals(Object o) {
@@ -168,7 +223,14 @@ public final class PowerStats {
                 return false;
             }
             Descriptor that = (Descriptor) o;
-            return this.powerComponentId == that.powerComponentId && this.statsArrayLength == that.statsArrayLength && this.stateLabels.contentEquals(that.stateLabels) && this.stateStatsArrayLength == that.stateStatsArrayLength && this.uidStatsArrayLength == that.uidStatsArrayLength && Objects.equals(this.name, that.name) && this.extras.size() == that.extras.size() && Bundle.kindofEquals(this.extras, that.extras);
+            return this.powerComponentId == that.powerComponentId
+                    && this.statsArrayLength == that.statsArrayLength
+                    && this.stateLabels.contentEquals(that.stateLabels)
+                    && this.stateStatsArrayLength == that.stateStatsArrayLength
+                    && this.uidStatsArrayLength == that.uidStatsArrayLength
+                    && Objects.equals(this.name, that.name)
+                    && this.extras.size() == that.extras.size()
+                    && Bundle.kindofEquals(this.extras, that.extras);
         }
 
         public void writeXml(TypedXmlSerializer serializer) throws IOException {
@@ -176,8 +238,10 @@ public final class PowerStats {
             serializer.attributeInt(null, "id", this.powerComponentId);
             serializer.attribute(null, "name", this.name);
             serializer.attributeInt(null, XML_ATTR_STATS_ARRAY_LENGTH, this.statsArrayLength);
-            serializer.attributeInt(null, XML_ATTR_STATE_STATS_ARRAY_LENGTH, this.stateStatsArrayLength);
-            serializer.attributeInt(null, XML_ATTR_UID_STATS_ARRAY_LENGTH, this.uidStatsArrayLength);
+            serializer.attributeInt(
+                    null, XML_ATTR_STATE_STATS_ARRAY_LENGTH, this.stateStatsArrayLength);
+            serializer.attributeInt(
+                    null, XML_ATTR_UID_STATS_ARRAY_LENGTH, this.uidStatsArrayLength);
             for (int i = this.stateLabels.size() - 1; i >= 0; i--) {
                 serializer.startTag(null, "state");
                 serializer.attributeInt(null, "key", this.stateLabels.keyAt(i));
@@ -194,7 +258,8 @@ public final class PowerStats {
             }
         }
 
-        public static Descriptor createFromXml(TypedXmlPullParser parser) throws XmlPullParserException, IOException {
+        public static Descriptor createFromXml(TypedXmlPullParser parser)
+                throws XmlPullParserException, IOException {
             int powerComponentId = -1;
             String name = null;
             int statsArrayLength = 0;
@@ -204,15 +269,21 @@ public final class PowerStats {
             PersistableBundle extras = null;
             int eventType = parser.getEventType();
             while (true) {
-                if (eventType != 1 && (eventType != 3 || !parser.getName().equals(XML_TAG_DESCRIPTOR))) {
+                if (eventType != 1
+                        && (eventType != 3 || !parser.getName().equals(XML_TAG_DESCRIPTOR))) {
                     if (eventType == 2) {
                         switch (parser.getName()) {
                             case "descriptor":
                                 powerComponentId = parser.getAttributeInt(null, "id");
                                 name = parser.getAttributeValue(null, "name");
-                                statsArrayLength = parser.getAttributeInt(null, XML_ATTR_STATS_ARRAY_LENGTH);
-                                int stateStatsArrayLength2 = parser.getAttributeInt(null, XML_ATTR_STATE_STATS_ARRAY_LENGTH);
-                                int uidStatsArrayLength2 = parser.getAttributeInt(null, XML_ATTR_UID_STATS_ARRAY_LENGTH);
+                                statsArrayLength =
+                                        parser.getAttributeInt(null, XML_ATTR_STATS_ARRAY_LENGTH);
+                                int stateStatsArrayLength2 =
+                                        parser.getAttributeInt(
+                                                null, XML_ATTR_STATE_STATS_ARRAY_LENGTH);
+                                int uidStatsArrayLength2 =
+                                        parser.getAttributeInt(
+                                                null, XML_ATTR_UID_STATS_ARRAY_LENGTH);
                                 stateStatsArrayLength = stateStatsArrayLength2;
                                 uidStatsArrayLength = uidStatsArrayLength2;
                                 break;
@@ -233,10 +304,23 @@ public final class PowerStats {
                 return null;
             }
             if (powerComponentId >= 1000) {
-                return new Descriptor(powerComponentId, name, statsArrayLength, stateLabels, stateStatsArrayLength, uidStatsArrayLength, extras);
+                return new Descriptor(
+                        powerComponentId,
+                        name,
+                        statsArrayLength,
+                        stateLabels,
+                        stateStatsArrayLength,
+                        uidStatsArrayLength,
+                        extras);
             }
             if (powerComponentId < 19) {
-                return new Descriptor(powerComponentId, statsArrayLength, stateLabels, stateStatsArrayLength, uidStatsArrayLength, extras);
+                return new Descriptor(
+                        powerComponentId,
+                        statsArrayLength,
+                        stateLabels,
+                        stateStatsArrayLength,
+                        uidStatsArrayLength,
+                        extras);
             }
             Slog.e(PowerStats.TAG, "Unrecognized power component: " + powerComponentId);
             return null;
@@ -250,7 +334,22 @@ public final class PowerStats {
             if (this.extras != null) {
                 this.extras.size();
             }
-            return "PowerStats.Descriptor{powerComponentId=" + this.powerComponentId + ", name='" + this.name + DateFormat.QUOTE + ", statsArrayLength=" + this.statsArrayLength + ", stateStatsArrayLength=" + this.stateStatsArrayLength + ", stateLabels=" + this.stateLabels + ", uidStatsArrayLength=" + this.uidStatsArrayLength + ", extras=" + this.extras + '}';
+            return "PowerStats.Descriptor{powerComponentId="
+                    + this.powerComponentId
+                    + ", name='"
+                    + this.name
+                    + DateFormat.QUOTE
+                    + ", statsArrayLength="
+                    + this.statsArrayLength
+                    + ", stateStatsArrayLength="
+                    + this.stateStatsArrayLength
+                    + ", stateLabels="
+                    + this.stateLabels
+                    + ", uidStatsArrayLength="
+                    + this.uidStatsArrayLength
+                    + ", extras="
+                    + this.extras
+                    + '}';
         }
     }
 
@@ -312,7 +411,11 @@ public final class PowerStats {
                 Slog.e(TAG, "Unsupported PowerStats for power component ID: " + powerComponentId);
                 if (endPos > parcel.dataPosition()) {
                     if (endPos >= parcel.dataSize()) {
-                        throw new IndexOutOfBoundsException("PowerStats end position: " + endPos + " is outside the parcel bounds: " + parcel.dataSize());
+                        throw new IndexOutOfBoundsException(
+                                "PowerStats end position: "
+                                        + endPos
+                                        + " is outside the parcel bounds: "
+                                        + parcel.dataSize());
                     }
                     parcel.setDataPosition(endPos);
                 }
@@ -342,18 +445,31 @@ public final class PowerStats {
             if (i3 == endPos) {
                 if (endPos > parcel.dataPosition()) {
                     if (endPos >= parcel.dataSize()) {
-                        throw new IndexOutOfBoundsException("PowerStats end position: " + endPos + " is outside the parcel bounds: " + parcel.dataSize());
+                        throw new IndexOutOfBoundsException(
+                                "PowerStats end position: "
+                                        + endPos
+                                        + " is outside the parcel bounds: "
+                                        + parcel.dataSize());
                     }
                     parcel.setDataPosition(endPos);
                 }
                 return stats;
             }
-            Slog.e(TAG, "Corrupted PowerStats parcel. Expected length: " + length + ", actual length: " + (parcel.dataPosition() - startPos));
+            Slog.e(
+                    TAG,
+                    "Corrupted PowerStats parcel. Expected length: "
+                            + length
+                            + ", actual length: "
+                            + (parcel.dataPosition() - startPos));
             if (endPos <= parcel.dataPosition()) {
                 return null;
             }
             if (endPos >= parcel.dataSize()) {
-                throw new IndexOutOfBoundsException("PowerStats end position: " + endPos + " is outside the parcel bounds: " + parcel.dataSize());
+                throw new IndexOutOfBoundsException(
+                        "PowerStats end position: "
+                                + endPos
+                                + " is outside the parcel bounds: "
+                                + parcel.dataSize());
             }
             parcel.setDataPosition(endPos);
             return null;
@@ -361,7 +477,11 @@ public final class PowerStats {
             th = th2;
             if (endPos > parcel.dataPosition()) {
                 if (endPos >= parcel.dataSize()) {
-                    throw new IndexOutOfBoundsException("PowerStats end position: " + endPos + " is outside the parcel bounds: " + parcel.dataSize());
+                    throw new IndexOutOfBoundsException(
+                            "PowerStats end position: "
+                                    + endPos
+                                    + " is outside the parcel bounds: "
+                                    + parcel.dataSize());
                 }
                 parcel.setDataPosition(endPos);
             }
@@ -386,7 +506,10 @@ public final class PowerStats {
         }
         PowerStatsFormatter uidStatsFormatter = this.descriptor.getUidStatsFormatter();
         for (int i2 = 0; i2 < this.uidStats.size(); i2++) {
-            sb.append(uidPrefix).append(UserHandle.formatUid(this.uidStats.keyAt(i2))).append(": ").append(uidStatsFormatter.format(this.uidStats.valueAt(i2)));
+            sb.append(uidPrefix)
+                    .append(UserHandle.formatUid(this.uidStats.keyAt(i2)))
+                    .append(": ")
+                    .append(uidStatsFormatter.format(this.uidStats.valueAt(i2)));
         }
         return sb.toString();
     }
@@ -428,7 +551,8 @@ public final class PowerStats {
 
     public static class PowerStatsFormatter {
         private static final double NANO_TO_MILLI_MULTIPLIER = 1.0E-6d;
-        private static final Pattern SECTION_PATTERN = Pattern.compile("([^:]+):(\\d+)(\\[(?<L>\\d+)])?(?<F>\\S*)\\s*");
+        private static final Pattern SECTION_PATTERN =
+                Pattern.compile("([^:]+):(\\d+)(\\[(?<L>\\d+)])?(?<F>\\S*)\\s*");
         private final List<Section> mSections;
 
         private static class Section {
@@ -438,8 +562,7 @@ public final class PowerStats {
             public int position;
             public boolean typePower;
 
-            private Section() {
-            }
+            private Section() {}
         }
 
         public PowerStatsFormatter(String format) {
@@ -482,7 +605,9 @@ public final class PowerStats {
                                 section.typePower = true;
                                 break;
                             default:
-                                Slog.e(PowerStats.TAG, "Unsupported format option '" + flag + "' in " + format);
+                                Slog.e(
+                                        PowerStats.TAG,
+                                        "Unsupported format option '" + flag + "' in " + format);
                                 break;
                         }
                     }
@@ -515,8 +640,7 @@ public final class PowerStats {
                                 break;
                             }
                         }
-                        if (!nonZero) {
-                        }
+                        if (!nonZero) {}
                     }
                     boolean nonZero2 = sb.isEmpty();
                     if (!nonZero2) {
@@ -531,7 +655,10 @@ public final class PowerStats {
                             sb.append(", ");
                         }
                         if (section.typePower) {
-                            sb.append(BatteryStats.formatCharge(stats[section.position + offset2] * NANO_TO_MILLI_MULTIPLIER));
+                            sb.append(
+                                    BatteryStats.formatCharge(
+                                            stats[section.position + offset2]
+                                                    * NANO_TO_MILLI_MULTIPLIER));
                         } else {
                             sb.append(stats[section.position + offset2]);
                         }

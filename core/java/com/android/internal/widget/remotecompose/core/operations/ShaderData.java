@@ -5,6 +5,7 @@ import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.VariableSupport;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,12 @@ public class ShaderData implements Operation, VariableSupport {
     HashMap<String, int[]> mUniformIntMap;
     HashMap<String, float[]> mUniformRawFloatMap;
 
-    public ShaderData(int shaderID, int shaderTextId, HashMap<String, float[]> floatMap, HashMap<String, int[]> intMap, HashMap<String, Integer> bitmapMap) {
+    public ShaderData(
+            int shaderID,
+            int shaderTextId,
+            HashMap<String, float[]> floatMap,
+            HashMap<String, int[]> intMap,
+            HashMap<String, Integer> bitmapMap) {
         this.mUniformRawFloatMap = null;
         this.mUniformFloatMap = null;
         this.mUniformIntMap = null;
@@ -54,7 +60,9 @@ public class ShaderData implements Operation, VariableSupport {
     }
 
     public String[] getUniformFloatNames() {
-        return this.mUniformFloatMap == null ? new String[0] : (String[]) this.mUniformFloatMap.keySet().toArray(new String[0]);
+        return this.mUniformFloatMap == null
+                ? new String[0]
+                : (String[]) this.mUniformFloatMap.keySet().toArray(new String[0]);
     }
 
     public float[] getUniformFloats(String name) {
@@ -62,7 +70,9 @@ public class ShaderData implements Operation, VariableSupport {
     }
 
     public String[] getUniformIntegerNames() {
-        return this.mUniformIntMap == null ? new String[0] : (String[]) this.mUniformIntMap.keySet().toArray(new String[0]);
+        return this.mUniformIntMap == null
+                ? new String[0]
+                : (String[]) this.mUniformIntMap.keySet().toArray(new String[0]);
     }
 
     public int[] getUniformInts(String name) {
@@ -70,7 +80,9 @@ public class ShaderData implements Operation, VariableSupport {
     }
 
     public String[] getUniformBitmapNames() {
-        return this.mUniformBitmapMap == null ? new String[0] : (String[]) this.mUniformBitmapMap.keySet().toArray(new String[0]);
+        return this.mUniformBitmapMap == null
+                ? new String[0]
+                : (String[]) this.mUniformBitmapMap.keySet().toArray(new String[0]);
     }
 
     public int getUniformBitmapId(String name) {
@@ -79,7 +91,13 @@ public class ShaderData implements Operation, VariableSupport {
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
     public void write(WireBuffer buffer) {
-        COMPANION.apply(buffer, this.mShaderID, this.mShaderTextId, this.mUniformFloatMap, this.mUniformIntMap, this.mUniformBitmapMap);
+        COMPANION.apply(
+                buffer,
+                this.mShaderID,
+                this.mShaderTextId,
+                this.mUniformFloatMap,
+                this.mUniformIntMap,
+                this.mUniformBitmapMap);
     }
 
     public String toString() {
@@ -116,8 +134,7 @@ public class ShaderData implements Operation, VariableSupport {
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public String name() {
@@ -129,7 +146,13 @@ public class ShaderData implements Operation, VariableSupport {
             return 45;
         }
 
-        public void apply(WireBuffer buffer, int shaderID, int shaderTextId, HashMap<String, float[]> floatMap, HashMap<String, int[]> intMap, HashMap<String, Integer> bitmapMap) {
+        public void apply(
+                WireBuffer buffer,
+                int shaderID,
+                int shaderTextId,
+                HashMap<String, float[]> floatMap,
+                HashMap<String, int[]> intMap,
+                HashMap<String, Integer> bitmapMap) {
             buffer.start(45);
             buffer.writeInt(shaderID);
             buffer.writeInt(shaderTextId);

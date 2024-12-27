@@ -2,11 +2,11 @@ package android.net;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.net.IPacProxyInstalledListener;
-import android.net.PacProxyManager;
 import android.os.Binder;
 import android.os.RemoteException;
+
 import com.android.internal.util.FunctionalUtils;
+
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.Executor;
@@ -15,7 +15,8 @@ import java.util.concurrent.Executor;
 /* loaded from: classes3.dex */
 public class PacProxyManager {
     private final Context mContext;
-    private final HashMap<PacProxyInstalledListener, PacProxyInstalledListenerProxy> mListenerMap = new HashMap<>();
+    private final HashMap<PacProxyInstalledListener, PacProxyInstalledListenerProxy> mListenerMap =
+            new HashMap<>();
     private final IPacProxyManager mService;
 
     public interface PacProxyInstalledListener {
@@ -28,10 +29,12 @@ public class PacProxyManager {
         this.mService = service;
     }
 
-    public void addPacProxyInstalledListener(Executor executor, PacProxyInstalledListener listener) {
+    public void addPacProxyInstalledListener(
+            Executor executor, PacProxyInstalledListener listener) {
         try {
             synchronized (this.mListenerMap) {
-                PacProxyInstalledListenerProxy listenerProxy = new PacProxyInstalledListenerProxy(executor, listener);
+                PacProxyInstalledListenerProxy listenerProxy =
+                        new PacProxyInstalledListenerProxy(executor, listener);
                 if (this.mListenerMap.putIfAbsent(listener, listenerProxy) != null) {
                     throw new IllegalStateException("Listener is already added.");
                 }
@@ -75,22 +78,30 @@ public class PacProxyManager {
 
         @Override // android.net.IPacProxyInstalledListener
         public void onPacProxyInstalled(final Network network, final ProxyInfo proxy) {
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.net.PacProxyManager$PacProxyInstalledListenerProxy$$ExternalSyntheticLambda1
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    PacProxyManager.PacProxyInstalledListenerProxy.this.lambda$onPacProxyInstalled$1(network, proxy);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.net.PacProxyManager$PacProxyInstalledListenerProxy$$ExternalSyntheticLambda1
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            PacProxyManager.PacProxyInstalledListenerProxy.this
+                                    .lambda$onPacProxyInstalled$1(network, proxy);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onPacProxyInstalled$1(final Network network, final ProxyInfo proxy) throws Exception {
-            this.mExecutor.execute(new Runnable() { // from class: android.net.PacProxyManager$PacProxyInstalledListenerProxy$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    PacProxyManager.PacProxyInstalledListenerProxy.this.lambda$onPacProxyInstalled$0(network, proxy);
-                }
-            });
+        public /* synthetic */ void lambda$onPacProxyInstalled$1(
+                final Network network, final ProxyInfo proxy) throws Exception {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.net.PacProxyManager$PacProxyInstalledListenerProxy$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            PacProxyManager.PacProxyInstalledListenerProxy.this
+                                    .lambda$onPacProxyInstalled$0(network, proxy);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */

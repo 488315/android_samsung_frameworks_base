@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.ims.internal.uce.common.StatusCode;
 
 /* loaded from: classes5.dex */
@@ -19,32 +20,31 @@ public interface IOptionsListener extends IInterface {
 
     void serviceUnavailable(StatusCode statusCode) throws RemoteException;
 
-    void sipResponseReceived(String str, OptionsSipResponse optionsSipResponse, OptionsCapInfo optionsCapInfo) throws RemoteException;
+    void sipResponseReceived(
+            String str, OptionsSipResponse optionsSipResponse, OptionsCapInfo optionsCapInfo)
+            throws RemoteException;
 
     public static class Default implements IOptionsListener {
         @Override // com.android.ims.internal.uce.options.IOptionsListener
-        public void getVersionCb(String version) throws RemoteException {
-        }
+        public void getVersionCb(String version) throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.options.IOptionsListener
-        public void serviceAvailable(StatusCode statusCode) throws RemoteException {
-        }
+        public void serviceAvailable(StatusCode statusCode) throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.options.IOptionsListener
-        public void serviceUnavailable(StatusCode statusCode) throws RemoteException {
-        }
+        public void serviceUnavailable(StatusCode statusCode) throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.options.IOptionsListener
-        public void sipResponseReceived(String uri, OptionsSipResponse sipResponse, OptionsCapInfo capInfo) throws RemoteException {
-        }
+        public void sipResponseReceived(
+                String uri, OptionsSipResponse sipResponse, OptionsCapInfo capInfo)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.options.IOptionsListener
-        public void cmdStatus(OptionsCmdStatus cmdStatus) throws RemoteException {
-        }
+        public void cmdStatus(OptionsCmdStatus cmdStatus) throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.options.IOptionsListener
-        public void incomingOptions(String uri, OptionsCapInfo capInfo, int tID) throws RemoteException {
-        }
+        public void incomingOptions(String uri, OptionsCapInfo capInfo, int tID)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -52,8 +52,9 @@ public interface IOptionsListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOptionsListener {
-        public static final String DESCRIPTOR = "com.android.ims.internal.uce.options.IOptionsListener";
+    public abstract static class Stub extends Binder implements IOptionsListener {
+        public static final String DESCRIPTOR =
+                "com.android.ims.internal.uce.options.IOptionsListener";
         static final int TRANSACTION_cmdStatus = 5;
         static final int TRANSACTION_getVersionCb = 1;
         static final int TRANSACTION_incomingOptions = 6;
@@ -106,7 +107,8 @@ public interface IOptionsListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -135,21 +137,25 @@ public interface IOptionsListener extends IInterface {
                     return true;
                 case 4:
                     String _arg04 = data.readString();
-                    OptionsSipResponse _arg1 = (OptionsSipResponse) data.readTypedObject(OptionsSipResponse.CREATOR);
-                    OptionsCapInfo _arg2 = (OptionsCapInfo) data.readTypedObject(OptionsCapInfo.CREATOR);
+                    OptionsSipResponse _arg1 =
+                            (OptionsSipResponse) data.readTypedObject(OptionsSipResponse.CREATOR);
+                    OptionsCapInfo _arg2 =
+                            (OptionsCapInfo) data.readTypedObject(OptionsCapInfo.CREATOR);
                     data.enforceNoDataAvail();
                     sipResponseReceived(_arg04, _arg1, _arg2);
                     reply.writeNoException();
                     return true;
                 case 5:
-                    OptionsCmdStatus _arg05 = (OptionsCmdStatus) data.readTypedObject(OptionsCmdStatus.CREATOR);
+                    OptionsCmdStatus _arg05 =
+                            (OptionsCmdStatus) data.readTypedObject(OptionsCmdStatus.CREATOR);
                     data.enforceNoDataAvail();
                     cmdStatus(_arg05);
                     reply.writeNoException();
                     return true;
                 case 6:
                     String _arg06 = data.readString();
-                    OptionsCapInfo _arg12 = (OptionsCapInfo) data.readTypedObject(OptionsCapInfo.CREATOR);
+                    OptionsCapInfo _arg12 =
+                            (OptionsCapInfo) data.readTypedObject(OptionsCapInfo.CREATOR);
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
                     incomingOptions(_arg06, _arg12, _arg22);
@@ -222,7 +228,9 @@ public interface IOptionsListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsListener
-            public void sipResponseReceived(String uri, OptionsSipResponse sipResponse, OptionsCapInfo capInfo) throws RemoteException {
+            public void sipResponseReceived(
+                    String uri, OptionsSipResponse sipResponse, OptionsCapInfo capInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -254,7 +262,8 @@ public interface IOptionsListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsListener
-            public void incomingOptions(String uri, OptionsCapInfo capInfo, int tID) throws RemoteException {
+            public void incomingOptions(String uri, OptionsCapInfo capInfo, int tID)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

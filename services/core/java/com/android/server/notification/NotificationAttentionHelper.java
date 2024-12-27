@@ -29,15 +29,16 @@ import android.util.Pair;
 import android.util.Slog;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
+
 import com.android.internal.config.sysui.SystemUiSystemPropertiesFlags;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.lights.LightsManager;
 import com.android.server.lights.LogicalLight;
-import com.android.server.notification.NotificationManagerService;
-import com.android.server.notification.NotificationRecord;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
 import com.samsung.android.sepunion.SemGoodCatchManager;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -86,8 +87,14 @@ public final class NotificationAttentionHelper {
     public VibratorHelper mVibratorHelper;
     public final ZenModeHelper mZenModeHelper;
     public static final boolean DEBUG = Log.isLoggable("NotifAttentionHelper", 3);
-    public static final boolean DEBUG_INTERRUPTIVENESS = SystemProperties.getBoolean("debug.notification.interruptiveness", false);
-    static final Set NOTIFICATION_AVALANCHE_TRIGGER_INTENTS = Set.of("android.intent.action.AIRPLANE_MODE", "android.intent.action.BOOT_COMPLETED", "android.intent.action.USER_SWITCHED", "android.intent.action.MANAGED_PROFILE_AVAILABLE");
+    public static final boolean DEBUG_INTERRUPTIVENESS =
+            SystemProperties.getBoolean("debug.notification.interruptiveness", false);
+    static final Set NOTIFICATION_AVALANCHE_TRIGGER_INTENTS =
+            Set.of(
+                    "android.intent.action.AIRPLANE_MODE",
+                    "android.intent.action.BOOT_COMPLETED",
+                    "android.intent.action.USER_SWITCHED",
+                    "android.intent.action.MANAGED_PROFILE_AVAILABLE");
     public final ArrayList mLights = new ArrayList();
     public boolean mInCallStateOffHook = false;
     public boolean mScreenOn = true;
@@ -99,12 +106,12 @@ public final class NotificationAttentionHelper {
     public boolean mGoodCatchNotiMutedOn = false;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    abstract class PolitenessStrategy {
-    }
+    abstract class PolitenessStrategy {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class SettingsObserver extends ContentObserver {
-        public static final Uri NOTIFICATION_LIGHT_PULSE_URI = Settings.System.getUriFor("led_indicator_missed_event");
+        public static final Uri NOTIFICATION_LIGHT_PULSE_URI =
+                Settings.System.getUriFor("led_indicator_missed_event");
 
         static {
             Settings.System.getUriFor("notification_cooldown_enabled");
@@ -119,8 +126,16 @@ public final class NotificationAttentionHelper {
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
             if (NOTIFICATION_LIGHT_PULSE_URI.equals(uri)) {
-                boolean z2 = Settings.System.getIntForUser(NotificationAttentionHelper.this.mContext.getContentResolver(), "led_indicator_missed_event", 0, -2) != 0;
-                NotificationAttentionHelper notificationAttentionHelper = NotificationAttentionHelper.this;
+                boolean z2 =
+                        Settings.System.getIntForUser(
+                                        NotificationAttentionHelper.this.mContext
+                                                .getContentResolver(),
+                                        "led_indicator_missed_event",
+                                        0,
+                                        -2)
+                                != 0;
+                NotificationAttentionHelper notificationAttentionHelper =
+                        NotificationAttentionHelper.this;
                 if (notificationAttentionHelper.mNotificationPulseEnabled != z2) {
                     notificationAttentionHelper.mNotificationPulseEnabled = z2;
                     notificationAttentionHelper.updateLightsLocked();
@@ -143,138 +158,198 @@ public final class NotificationAttentionHelper {
 
     static {
         Boolean bool = Boolean.FALSE;
-        NOTIFICATION_AVALANCHE_TRIGGER_EXTRAS = Map.of("android.intent.action.AIRPLANE_MODE", new Pair(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, bool), "android.intent.action.MANAGED_PROFILE_AVAILABLE", new Pair("android.intent.extra.QUIET_MODE", bool));
+        NOTIFICATION_AVALANCHE_TRIGGER_EXTRAS =
+                Map.of(
+                        "android.intent.action.AIRPLANE_MODE",
+                        new Pair(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, bool),
+                        "android.intent.action.MANAGED_PROFILE_AVAILABLE",
+                        new Pair("android.intent.extra.QUIET_MODE", bool));
     }
 
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.notification.NotificationAttentionHelper$1] */
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.notification.NotificationAttentionHelper$1] */
     /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.notification.NotificationAttentionHelper$5] */
-    public NotificationAttentionHelper(Context context, LightsManager lightsManager, AccessibilityManager accessibilityManager, PackageManager packageManager, UserManager userManager, NotificationUsageStats notificationUsageStats, NotificationManagerService.AnonymousClass2 anonymousClass2, ZenModeHelper zenModeHelper, SystemUiSystemPropertiesFlags.FlagResolver flagResolver, PreferencesHelper preferencesHelper, Handler handler) {
+    public NotificationAttentionHelper(
+            Context context,
+            LightsManager lightsManager,
+            AccessibilityManager accessibilityManager,
+            PackageManager packageManager,
+            UserManager userManager,
+            NotificationUsageStats notificationUsageStats,
+            NotificationManagerService.AnonymousClass2 anonymousClass2,
+            ZenModeHelper zenModeHelper,
+            SystemUiSystemPropertiesFlags.FlagResolver flagResolver,
+            PreferencesHelper preferencesHelper,
+            Handler handler) {
         final int i = 0;
-        this.mAudioGoodCatchStateListener = new SemGoodCatchManager.OnStateChangeListener(this) { // from class: com.android.server.notification.NotificationAttentionHelper.1
-            public final /* synthetic */ NotificationAttentionHelper this$0;
+        this.mAudioGoodCatchStateListener =
+                new SemGoodCatchManager.OnStateChangeListener(
+                        this) { // from class:
+                                // com.android.server.notification.NotificationAttentionHelper.1
+                    public final /* synthetic */ NotificationAttentionHelper this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            public final void onStart(String str) {
-                switch (i) {
-                    case 0:
-                        DualAppManagerService$$ExternalSyntheticOutline0.m("onStart(), ", str, "NotifAttentionHelper");
-                        this.this$0.mGoodCatchSoundPlayedOn = true;
-                        break;
-                    default:
-                        Log.d("NotifAttentionHelper", "onStart(), " + str);
-                        if ("noti_muted".equals(str)) {
-                            this.this$0.mGoodCatchNotiMutedOn = true;
-                            break;
+                    public final void onStart(String str) {
+                        switch (i) {
+                            case 0:
+                                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                        "onStart(), ", str, "NotifAttentionHelper");
+                                this.this$0.mGoodCatchSoundPlayedOn = true;
+                                break;
+                            default:
+                                Log.d("NotifAttentionHelper", "onStart(), " + str);
+                                if ("noti_muted".equals(str)) {
+                                    this.this$0.mGoodCatchNotiMutedOn = true;
+                                    break;
+                                }
+                                break;
                         }
-                        break;
-                }
-            }
+                    }
 
-            public final void onStop(String str) {
-                switch (i) {
-                    case 0:
-                        DualAppManagerService$$ExternalSyntheticOutline0.m("onStop(),", str, "NotifAttentionHelper");
-                        this.this$0.mGoodCatchSoundPlayedOn = false;
-                        break;
-                    default:
-                        Log.d("NotifAttentionHelper", "onStop()," + str);
-                        if ("noti_muted".equals(str)) {
-                            this.this$0.mGoodCatchNotiMutedOn = false;
-                            break;
+                    public final void onStop(String str) {
+                        switch (i) {
+                            case 0:
+                                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                        "onStop(),", str, "NotifAttentionHelper");
+                                this.this$0.mGoodCatchSoundPlayedOn = false;
+                                break;
+                            default:
+                                Log.d("NotifAttentionHelper", "onStop()," + str);
+                                if ("noti_muted".equals(str)) {
+                                    this.this$0.mGoodCatchNotiMutedOn = false;
+                                    break;
+                                }
+                                break;
                         }
-                        break;
-                }
-            }
-        };
+                    }
+                };
         final int i2 = 1;
-        this.mNotiGoodCatchStateListener = new SemGoodCatchManager.OnStateChangeListener(this) { // from class: com.android.server.notification.NotificationAttentionHelper.1
-            public final /* synthetic */ NotificationAttentionHelper this$0;
+        this.mNotiGoodCatchStateListener =
+                new SemGoodCatchManager.OnStateChangeListener(
+                        this) { // from class:
+                                // com.android.server.notification.NotificationAttentionHelper.1
+                    public final /* synthetic */ NotificationAttentionHelper this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            public final void onStart(String str) {
-                switch (i2) {
-                    case 0:
-                        DualAppManagerService$$ExternalSyntheticOutline0.m("onStart(), ", str, "NotifAttentionHelper");
-                        this.this$0.mGoodCatchSoundPlayedOn = true;
-                        break;
-                    default:
-                        Log.d("NotifAttentionHelper", "onStart(), " + str);
-                        if ("noti_muted".equals(str)) {
-                            this.this$0.mGoodCatchNotiMutedOn = true;
-                            break;
+                    public final void onStart(String str) {
+                        switch (i2) {
+                            case 0:
+                                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                        "onStart(), ", str, "NotifAttentionHelper");
+                                this.this$0.mGoodCatchSoundPlayedOn = true;
+                                break;
+                            default:
+                                Log.d("NotifAttentionHelper", "onStart(), " + str);
+                                if ("noti_muted".equals(str)) {
+                                    this.this$0.mGoodCatchNotiMutedOn = true;
+                                    break;
+                                }
+                                break;
                         }
-                        break;
-                }
-            }
+                    }
 
-            public final void onStop(String str) {
-                switch (i2) {
-                    case 0:
-                        DualAppManagerService$$ExternalSyntheticOutline0.m("onStop(),", str, "NotifAttentionHelper");
-                        this.this$0.mGoodCatchSoundPlayedOn = false;
-                        break;
-                    default:
-                        Log.d("NotifAttentionHelper", "onStop()," + str);
-                        if ("noti_muted".equals(str)) {
-                            this.this$0.mGoodCatchNotiMutedOn = false;
-                            break;
+                    public final void onStop(String str) {
+                        switch (i2) {
+                            case 0:
+                                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                        "onStop(),", str, "NotifAttentionHelper");
+                                this.this$0.mGoodCatchSoundPlayedOn = false;
+                                break;
+                            default:
+                                Log.d("NotifAttentionHelper", "onStop()," + str);
+                                if ("noti_muted".equals(str)) {
+                                    this.this$0.mGoodCatchNotiMutedOn = false;
+                                    break;
+                                }
+                                break;
                         }
-                        break;
-                }
-            }
-        };
+                    }
+                };
         new ArrayList();
-        this.mIntentReceiver = new BroadcastReceiver() { // from class: com.android.server.notification.NotificationAttentionHelper.5
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                String action = intent.getAction();
-                if (action.equals("android.intent.action.SCREEN_ON")) {
-                    NotificationAttentionHelper notificationAttentionHelper = NotificationAttentionHelper.this;
-                    notificationAttentionHelper.mScreenOn = true;
-                    notificationAttentionHelper.updateLightsLocked();
-                } else if (action.equals("android.intent.action.SCREEN_OFF")) {
-                    NotificationAttentionHelper notificationAttentionHelper2 = NotificationAttentionHelper.this;
-                    notificationAttentionHelper2.mScreenOn = false;
-                    notificationAttentionHelper2.mUserPresent = false;
-                    notificationAttentionHelper2.updateLightsLocked();
-                } else if (action.equals("android.intent.action.PHONE_STATE")) {
-                    NotificationAttentionHelper.this.mInCallStateOffHook = TelephonyManager.EXTRA_STATE_OFFHOOK.equals(intent.getStringExtra(LauncherConfigurationInternal.KEY_STATE_BOOLEAN));
-                    NotificationAttentionHelper.this.updateLightsLocked();
-                } else if (action.equals("android.intent.action.USER_PRESENT")) {
-                    NotificationAttentionHelper notificationAttentionHelper3 = NotificationAttentionHelper.this;
-                    notificationAttentionHelper3.mUserPresent = true;
-                    LogicalLight logicalLight = notificationAttentionHelper3.mNotificationLight;
-                    if (logicalLight != null) {
-                        logicalLight.turnOff();
+        this.mIntentReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.notification.NotificationAttentionHelper.5
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        if (action.equals("android.intent.action.SCREEN_ON")) {
+                            NotificationAttentionHelper notificationAttentionHelper =
+                                    NotificationAttentionHelper.this;
+                            notificationAttentionHelper.mScreenOn = true;
+                            notificationAttentionHelper.updateLightsLocked();
+                        } else if (action.equals("android.intent.action.SCREEN_OFF")) {
+                            NotificationAttentionHelper notificationAttentionHelper2 =
+                                    NotificationAttentionHelper.this;
+                            notificationAttentionHelper2.mScreenOn = false;
+                            notificationAttentionHelper2.mUserPresent = false;
+                            notificationAttentionHelper2.updateLightsLocked();
+                        } else if (action.equals("android.intent.action.PHONE_STATE")) {
+                            NotificationAttentionHelper.this.mInCallStateOffHook =
+                                    TelephonyManager.EXTRA_STATE_OFFHOOK.equals(
+                                            intent.getStringExtra(
+                                                    LauncherConfigurationInternal
+                                                            .KEY_STATE_BOOLEAN));
+                            NotificationAttentionHelper.this.updateLightsLocked();
+                        } else if (action.equals("android.intent.action.USER_PRESENT")) {
+                            NotificationAttentionHelper notificationAttentionHelper3 =
+                                    NotificationAttentionHelper.this;
+                            notificationAttentionHelper3.mUserPresent = true;
+                            LogicalLight logicalLight =
+                                    notificationAttentionHelper3.mNotificationLight;
+                            if (logicalLight != null) {
+                                logicalLight.turnOff();
+                            }
+                        } else if (action.equals("android.intent.action.USER_ADDED")
+                                || action.equals("android.intent.action.USER_REMOVED")
+                                || action.equals("android.intent.action.USER_SWITCHED")
+                                || action.equals("android.intent.action.USER_UNLOCKED")) {
+                            NotificationAttentionHelper.this.loadUserSettings();
+                        } else if ("com.android.server.sepunion.semgoodcatchservice.GOOD_CATCH_STATE_CHANGED"
+                                .equals(action)) {
+                            NotificationAttentionHelper notificationAttentionHelper4 =
+                                    NotificationAttentionHelper.this;
+                            if (notificationAttentionHelper4.mNotiSemGoodCatchManager == null) {
+                                NotificationAttentionHelper notificationAttentionHelper5 =
+                                        NotificationAttentionHelper.this;
+                                notificationAttentionHelper4.mNotiSemGoodCatchManager =
+                                        new SemGoodCatchManager(
+                                                notificationAttentionHelper5.mContext,
+                                                "NotificationManagerService",
+                                                new String[] {"noti_muted"},
+                                                notificationAttentionHelper5
+                                                        .mNotiGoodCatchStateListener);
+                                Log.d(
+                                        "NotifAttentionHelper",
+                                        "mNotiSemGoodCatchManager is created");
+                            }
+                            if (NotificationAttentionHelper.mSemAudioGoodCatchManager == null) {
+                                NotificationAttentionHelper notificationAttentionHelper6 =
+                                        NotificationAttentionHelper.this;
+                                NotificationAttentionHelper.mSemAudioGoodCatchManager =
+                                        new SemGoodCatchManager(
+                                                notificationAttentionHelper6.mContext,
+                                                "NotificationManagerService",
+                                                new String[] {"playback"},
+                                                notificationAttentionHelper6
+                                                        .mAudioGoodCatchStateListener);
+                                Log.d(
+                                        "NotifAttentionHelper",
+                                        "SemAudioGoodCatchManager is created");
+                            }
+                        }
+                        Flags.crossAppPoliteNotifications();
                     }
-                } else if (action.equals("android.intent.action.USER_ADDED") || action.equals("android.intent.action.USER_REMOVED") || action.equals("android.intent.action.USER_SWITCHED") || action.equals("android.intent.action.USER_UNLOCKED")) {
-                    NotificationAttentionHelper.this.loadUserSettings();
-                } else if ("com.android.server.sepunion.semgoodcatchservice.GOOD_CATCH_STATE_CHANGED".equals(action)) {
-                    NotificationAttentionHelper notificationAttentionHelper4 = NotificationAttentionHelper.this;
-                    if (notificationAttentionHelper4.mNotiSemGoodCatchManager == null) {
-                        NotificationAttentionHelper notificationAttentionHelper5 = NotificationAttentionHelper.this;
-                        notificationAttentionHelper4.mNotiSemGoodCatchManager = new SemGoodCatchManager(notificationAttentionHelper5.mContext, "NotificationManagerService", new String[]{"noti_muted"}, notificationAttentionHelper5.mNotiGoodCatchStateListener);
-                        Log.d("NotifAttentionHelper", "mNotiSemGoodCatchManager is created");
-                    }
-                    if (NotificationAttentionHelper.mSemAudioGoodCatchManager == null) {
-                        NotificationAttentionHelper notificationAttentionHelper6 = NotificationAttentionHelper.this;
-                        NotificationAttentionHelper.mSemAudioGoodCatchManager = new SemGoodCatchManager(notificationAttentionHelper6.mContext, "NotificationManagerService", new String[]{"playback"}, notificationAttentionHelper6.mAudioGoodCatchStateListener);
-                        Log.d("NotifAttentionHelper", "SemAudioGoodCatchManager is created");
-                    }
-                }
-                Flags.crossAppPoliteNotifications();
-            }
-        };
+                };
         this.mContext = context;
         this.mPackageManager = packageManager;
-        this.mTelephonyManager = (TelephonyManager) context.getSystemService(TelephonyManager.class);
+        this.mTelephonyManager =
+                (TelephonyManager) context.getSystemService(TelephonyManager.class);
         this.mAccessibilityManager = accessibilityManager;
         this.mNMP = anonymousClass2;
         this.mUsageStats = notificationUsageStats;
@@ -291,8 +366,11 @@ public final class NotificationAttentionHelper {
         if (Settings.Global.getInt(context.getContentResolver(), "device_provisioned", 0) == 0) {
             this.mDisableNotificationEffects = true;
         }
-        this.mInCallNotificationUri = Uri.parse("file://" + resources.getString(R.string.elapsed_time_short_format_mm_ss));
-        this.mInCallNotificationAudioAttributes = new AudioAttributes.Builder().setContentType(4).setUsage(2).build();
+        this.mInCallNotificationUri =
+                Uri.parse(
+                        "file://" + resources.getString(R.string.elapsed_time_short_format_mm_ss));
+        this.mInCallNotificationAudioAttributes =
+                new AudioAttributes.Builder().setContentType(4).setUsage(2).build();
         this.mInCallNotificationVolume = resources.getFloat(R.dimen.config_qsTileStrokeWidthActive);
         Flags.politeNotifications();
         this.mSettingsObserver = new SettingsObserver();
@@ -300,15 +378,25 @@ public final class NotificationAttentionHelper {
     }
 
     public static String callStateToString(int i) {
-        return i != 0 ? i != 1 ? i != 2 ? VibrationParam$1$$ExternalSyntheticOutline0.m(i, "CALL_STATE_UNKNOWN_") : "CALL_STATE_OFFHOOK" : "CALL_STATE_RINGING" : "CALL_STATE_IDLE";
+        return i != 0
+                ? i != 1
+                        ? i != 2
+                                ? VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                        i, "CALL_STATE_UNKNOWN_")
+                                : "CALL_STATE_OFFHOOK"
+                        : "CALL_STATE_RINGING"
+                : "CALL_STATE_IDLE";
     }
 
-    public static boolean isNotificationForCurrentUser(NotificationRecord notificationRecord, Signals signals) {
+    public static boolean isNotificationForCurrentUser(
+            NotificationRecord notificationRecord, Signals signals) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             int currentUser = ActivityManager.getCurrentUser();
             Binder.restoreCallingIdentity(clearCallingIdentity);
-            return notificationRecord.sbn.getUserId() == -1 || notificationRecord.sbn.getUserId() == currentUser || signals.isCurrentProfile;
+            return notificationRecord.sbn.getUserId() == -1
+                    || notificationRecord.sbn.getUserId() == currentUser
+                    || signals.isCurrentProfile;
         } catch (Throwable th) {
             Binder.restoreCallingIdentity(clearCallingIdentity);
             throw th;
@@ -316,13 +404,13 @@ public final class NotificationAttentionHelper {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:352:0x01ec, code lost:
-    
-        if (isInsistentUpdate(r33) == false) goto L160;
-     */
+
+       if (isInsistentUpdate(r33) == false) goto L160;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:523:0x01e6, code lost:
-    
-        if ((r3.sbn.getNotification().flags & 4) != 0) goto L128;
-     */
+
+       if ((r3.sbn.getNotification().flags & 4) != 0) goto L128;
+    */
     /* JADX WARN: Removed duplicated region for block: B:115:0x062c  */
     /* JADX WARN: Removed duplicated region for block: B:118:0x0632  */
     /* JADX WARN: Removed duplicated region for block: B:137:0x0682  */
@@ -356,12 +444,17 @@ public final class NotificationAttentionHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int buzzBeepBlinkLocked(final com.android.server.notification.NotificationRecord r33, com.android.server.notification.NotificationAttentionHelper.Signals r34) {
+    public int buzzBeepBlinkLocked(
+            final com.android.server.notification.NotificationRecord r33,
+            com.android.server.notification.NotificationAttentionHelper.Signals r34) {
         /*
             Method dump skipped, instructions count: 2288
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.NotificationAttentionHelper.buzzBeepBlinkLocked(com.android.server.notification.NotificationRecord, com.android.server.notification.NotificationAttentionHelper$Signals):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.NotificationAttentionHelper.buzzBeepBlinkLocked(com.android.server.notification.NotificationRecord,"
+                    + " com.android.server.notification.NotificationAttentionHelper$Signals):int");
     }
 
     public final void clearEffectsLocked(String str) {
@@ -425,7 +518,8 @@ public final class NotificationAttentionHelper {
         if ((i & 1) != 0) {
             return "listenerHints";
         }
-        if (notificationRecord != null && (audioAttributes = notificationRecord.mAttributes) != null) {
+        if (notificationRecord != null
+                && (audioAttributes = notificationRecord.mAttributes) != null) {
             if ((i & 2) != 0 && audioAttributes.getUsage() != 6) {
                 return "listenerNoti";
             }
@@ -452,7 +546,10 @@ public final class NotificationAttentionHelper {
         printWriter.print("    ");
         printWriter.println("  mSystemReady=" + this.mSystemReady);
         printWriter.print("    ");
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  mNotificationPulseEnabled="), this.mNotificationPulseEnabled, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("  mNotificationPulseEnabled="),
+                this.mNotificationPulseEnabled,
+                printWriter);
         int size = this.mLights.size();
         if (size > 0) {
             printWriter.print("    ");
@@ -479,16 +576,27 @@ public final class NotificationAttentionHelper {
 
     public final boolean isInCall() {
         int modeInternal;
-        return this.mInCallStateOffHook || (modeInternal = this.mAudioManager.getModeInternal()) == 2 || modeInternal == 3;
+        return this.mInCallStateOffHook
+                || (modeInternal = this.mAudioManager.getModeInternal()) == 2
+                || modeInternal == 3;
     }
 
     public final boolean isInsistentUpdate(NotificationRecord notificationRecord) {
         NotificationRecord notificationByKey;
-        if (Objects.equals(notificationRecord.sbn.getKey(), this.mSoundNotificationKey) || Objects.equals(notificationRecord.sbn.getKey(), this.mVibrateNotificationKey)) {
+        if (Objects.equals(notificationRecord.sbn.getKey(), this.mSoundNotificationKey)
+                || Objects.equals(notificationRecord.sbn.getKey(), this.mVibrateNotificationKey)) {
             String str = this.mSoundNotificationKey;
             NotificationManagerService.AnonymousClass2 anonymousClass2 = this.mNMP;
             NotificationRecord notificationByKey2 = anonymousClass2.getNotificationByKey(str);
-            if ((notificationByKey2 != null && notificationByKey2.mAttributes.getUsage() == 6 && (notificationByKey2.sbn.getNotification().flags & 4) != 0) || ((notificationByKey = anonymousClass2.getNotificationByKey(this.mVibrateNotificationKey)) != null && notificationByKey.mAttributes.getUsage() == 6 && (notificationByKey.sbn.getNotification().flags & 4) != 0)) {
+            if ((notificationByKey2 != null
+                            && notificationByKey2.mAttributes.getUsage() == 6
+                            && (notificationByKey2.sbn.getNotification().flags & 4) != 0)
+                    || ((notificationByKey =
+                                            anonymousClass2.getNotificationByKey(
+                                                    this.mVibrateNotificationKey))
+                                    != null
+                            && notificationByKey.mAttributes.getUsage() == 6
+                            && (notificationByKey.sbn.getNotification().flags & 4) != 0)) {
                 return true;
             }
         }
@@ -496,7 +604,13 @@ public final class NotificationAttentionHelper {
     }
 
     public final void loadUserSettings() {
-        boolean z = Settings.System.getIntForUser(this.mContext.getContentResolver(), "notification_light_pulse", 0, -2) != 0;
+        boolean z =
+                Settings.System.getIntForUser(
+                                this.mContext.getContentResolver(),
+                                "notification_light_pulse",
+                                0,
+                                -2)
+                        != 0;
         if (this.mNotificationPulseEnabled != z) {
             this.mNotificationPulseEnabled = z;
             updateLightsLocked();
@@ -568,8 +682,7 @@ public final class NotificationAttentionHelper {
         this.mSystemReady = z;
     }
 
-    public void setUserPresent(boolean z) {
-    }
+    public void setUserPresent(boolean z) {}
 
     public void setVibratorHelper(VibratorHelper vibratorHelper) {
         this.mVibratorHelper = vibratorHelper;
@@ -601,13 +714,15 @@ public final class NotificationAttentionHelper {
         this.mNotificationLight.setFlashing(light.color, 1, light.onMs, light.offMs);
     }
 
-    public final void vibrate(NotificationRecord notificationRecord, VibrationEffect vibrationEffect, boolean z) {
+    public final void vibrate(
+            NotificationRecord notificationRecord, VibrationEffect vibrationEffect, boolean z) {
         StringBuilder sb = new StringBuilder("Notification (");
         sb.append(notificationRecord.sbn.getOpPkg());
         sb.append(" ");
         sb.append(notificationRecord.sbn.getUid());
         sb.append(") ");
         sb.append(z ? "(Delayed)" : "");
-        this.mVibratorHelper.vibrate(vibrationEffect, notificationRecord.mAttributes, sb.toString());
+        this.mVibratorHelper.vibrate(
+                vibrationEffect, notificationRecord.mAttributes, sb.toString());
     }
 }

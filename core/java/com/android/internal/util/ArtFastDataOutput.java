@@ -1,8 +1,11 @@
 package com.android.internal.util;
 
 import android.util.CharsetUtils;
+
 import com.android.modules.utils.FastDataOutput;
+
 import dalvik.system.VMRuntime;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.atomic.AtomicReference;
@@ -45,7 +48,9 @@ public class ArtFastDataOutput extends FastDataOutput {
         if (this.mBufferCap - this.mBufferPos < s.length() + 2) {
             drain();
         }
-        int len = CharsetUtils.toModifiedUtf8Bytes(s, this.mBufferPtr, this.mBufferPos + 2, this.mBufferCap);
+        int len =
+                CharsetUtils.toModifiedUtf8Bytes(
+                        s, this.mBufferPtr, this.mBufferPos + 2, this.mBufferCap);
         if (Math.abs(len) > 65535) {
             throw new IOException("Modified UTF-8 length too large: " + len);
         }

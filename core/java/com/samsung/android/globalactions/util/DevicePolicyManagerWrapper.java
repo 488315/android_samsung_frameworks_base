@@ -8,11 +8,13 @@ public class DevicePolicyManagerWrapper {
     private final DevicePolicyManager mDevicePolicyManager;
 
     public DevicePolicyManagerWrapper(Context mContext) {
-        this.mDevicePolicyManager = (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        this.mDevicePolicyManager =
+                (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
     }
 
     boolean isEncryptionStatusActive() {
-        return this.mDevicePolicyManager.getStorageEncryptionStatus() == 3 || this.mDevicePolicyManager.getStorageEncryptionStatus() == 5;
+        return this.mDevicePolicyManager.getStorageEncryptionStatus() == 3
+                || this.mDevicePolicyManager.getStorageEncryptionStatus() == 5;
     }
 
     boolean isLogoutEnabled() {

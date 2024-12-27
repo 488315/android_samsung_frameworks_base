@@ -1,18 +1,22 @@
 package com.android.server.blob;
 
 import android.os.UserHandle;
-import com.android.server.blob.BlobMetadata;
+
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BlobStoreManagerService$BlobStorageStatsAugmenter$$ExternalSyntheticLambda2 implements Consumer {
+public final /* synthetic */
+class BlobStoreManagerService$BlobStorageStatsAugmenter$$ExternalSyntheticLambda2
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
     public final /* synthetic */ AtomicLong f$1;
 
-    public /* synthetic */ BlobStoreManagerService$BlobStorageStatsAugmenter$$ExternalSyntheticLambda2(Object obj, AtomicLong atomicLong, int i) {
+    public /* synthetic */
+    BlobStoreManagerService$BlobStorageStatsAugmenter$$ExternalSyntheticLambda2(
+            Object obj, AtomicLong atomicLong, int i) {
         this.$r8$classId = i;
         this.f$0 = obj;
         this.f$1 = atomicLong;
@@ -39,7 +43,10 @@ public final /* synthetic */ class BlobStoreManagerService$BlobStorageStatsAugme
                     try {
                         int size = blobMetadata.mLeasees.size();
                         for (int i = 0; i < size; i++) {
-                            if (identifier != UserHandle.getUserId(((BlobMetadata.Leasee) blobMetadata.mLeasees.valueAt(i)).uid)) {
+                            if (identifier
+                                    != UserHandle.getUserId(
+                                            ((BlobMetadata.Leasee) blobMetadata.mLeasees.valueAt(i))
+                                                    .uid)) {
                                 return;
                             }
                         }

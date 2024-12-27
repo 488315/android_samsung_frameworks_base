@@ -5,6 +5,7 @@ import android.graphics.Insets;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.WindowMetrics;
+
 import com.android.internal.R;
 
 /* loaded from: classes6.dex */
@@ -22,13 +23,16 @@ public class WindowManagerUtils {
     }
 
     private Insets getWindowInsets(Context context, int typeMask) {
-        WindowManager windowManager = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        WindowManager windowManager =
+                (WindowManager)
+                        context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
         WindowMetrics metrics = windowManager.getCurrentWindowMetrics();
         return metrics.getWindowInsets().getInsets(typeMask);
     }
 
     public int getNavBarPosition() {
-        int navigationBarHeight = this.mContext.getResources().getDimensionPixelSize(R.dimen.navigation_bar_height);
+        int navigationBarHeight =
+                this.mContext.getResources().getDimensionPixelSize(R.dimen.navigation_bar_height);
         Insets insets = getWindowInsets(this.mContext, WindowInsets.Type.navigationBars());
         if (insets.left >= navigationBarHeight) {
             return 1;

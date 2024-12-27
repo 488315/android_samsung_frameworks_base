@@ -14,6 +14,7 @@ import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,11 +41,16 @@ public final class GentleUpdateHelper {
         public final long mFinishTime;
         public final List packageNames;
 
-        public PendingInstallConstraintsCheck(List list, PackageInstaller.InstallConstraints installConstraints, CompletableFuture completableFuture, long j) {
+        public PendingInstallConstraintsCheck(
+                List list,
+                PackageInstaller.InstallConstraints installConstraints,
+                CompletableFuture completableFuture,
+                long j) {
             this.packageNames = list;
             this.constraints = installConstraints;
             this.future = completableFuture;
-            this.mFinishTime = SystemClock.elapsedRealtime() + Math.max(0L, Math.min(604800000L, j));
+            this.mFinishTime =
+                    SystemClock.elapsedRealtime() + Math.max(0L, Math.min(604800000L, j));
         }
     }
 
@@ -55,8 +61,12 @@ public final class GentleUpdateHelper {
         @Override // android.app.job.JobService
         public final boolean onStartJob(JobParameters jobParameters) {
             try {
-                GentleUpdateHelper gentleUpdateHelper = ActivityThread.getPackageManager().getPackageInstaller().mGentleUpdateHelper;
-                gentleUpdateHelper.mHandler.post(new GentleUpdateHelper$$ExternalSyntheticLambda0(1, gentleUpdateHelper));
+                GentleUpdateHelper gentleUpdateHelper =
+                        ActivityThread.getPackageManager()
+                                .getPackageInstaller()
+                                .mGentleUpdateHelper;
+                gentleUpdateHelper.mHandler.post(
+                        new GentleUpdateHelper$$ExternalSyntheticLambda0(1, gentleUpdateHelper));
                 return false;
             } catch (Exception e) {
                 Slog.e("GentleUpdateHelper", "Failed to get PackageInstallerService", e);
@@ -70,10 +80,15 @@ public final class GentleUpdateHelper {
         }
     }
 
-    public static void $r8$lambda$JQiy908NuzFx59XC1nxYVaiXKqM(GentleUpdateHelper gentleUpdateHelper, int i, int i2) {
+    public static void $r8$lambda$JQiy908NuzFx59XC1nxYVaiXKqM(
+            GentleUpdateHelper gentleUpdateHelper, int i, int i2) {
         gentleUpdateHelper.getClass();
         try {
-            gentleUpdateHelper.mHandler.post(new GentleUpdateHelper$$ExternalSyntheticLambda3(gentleUpdateHelper, ActivityThread.getPackageManager().getNameForUid(i), i2));
+            gentleUpdateHelper.mHandler.post(
+                    new GentleUpdateHelper$$ExternalSyntheticLambda3(
+                            gentleUpdateHelper,
+                            ActivityThread.getPackageManager().getNameForUid(i),
+                            i2));
         } catch (RemoteException unused) {
         }
     }
@@ -85,25 +100,25 @@ public final class GentleUpdateHelper {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:102:0x0151, code lost:
-    
-        if (r9 != false) goto L86;
-     */
+
+       if (r9 != false) goto L86;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:111:0x014d, code lost:
-    
-        if (r9 != 3) goto L83;
-     */
+
+       if (r9 != 3) goto L83;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x00d7, code lost:
-    
-        r11 = true;
-     */
+
+       r11 = true;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:59:0x00e7, code lost:
-    
-        if (r11 == false) goto L56;
-     */
+
+       if (r11 == false) goto L56;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:91:0x0119, code lost:
-    
-        if (r11 == false) goto L69;
-     */
+
+       if (r11 == false) goto L69;
+    */
     /* JADX WARN: Removed duplicated region for block: B:10:0x0159  */
     /* JADX WARN: Removed duplicated region for block: B:52:0x00c2  */
     /* JADX WARN: Removed duplicated region for block: B:63:0x00d7 A[EDGE_INSN: B:63:0x00d7->B:58:0x00d7 BREAK  A[LOOP:1: B:31:0x0059->B:60:?], SYNTHETIC] */
@@ -111,19 +126,25 @@ public final class GentleUpdateHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean processPendingCheck(com.android.server.pm.GentleUpdateHelper.PendingInstallConstraintsCheck r10, boolean r11) {
+    public final boolean processPendingCheck(
+            com.android.server.pm.GentleUpdateHelper.PendingInstallConstraintsCheck r10,
+            boolean r11) {
         /*
             Method dump skipped, instructions count: 371
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.GentleUpdateHelper.processPendingCheck(com.android.server.pm.GentleUpdateHelper$PendingInstallConstraintsCheck, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.GentleUpdateHelper.processPendingCheck(com.android.server.pm.GentleUpdateHelper$PendingInstallConstraintsCheck,"
+                    + " boolean):boolean");
     }
 
     public final void runIdleJob() {
         this.mHasPendingIdleJob = false;
         int size = this.mPendingChecks.size();
         for (int i = 0; i < size; i++) {
-            PendingInstallConstraintsCheck pendingInstallConstraintsCheck = (PendingInstallConstraintsCheck) this.mPendingChecks.remove();
+            PendingInstallConstraintsCheck pendingInstallConstraintsCheck =
+                    (PendingInstallConstraintsCheck) this.mPendingChecks.remove();
             if (!processPendingCheck(pendingInstallConstraintsCheck, true)) {
                 this.mPendingChecks.add(pendingInstallConstraintsCheck);
             }
@@ -146,7 +167,15 @@ public final class GentleUpdateHelper {
                 return;
             }
             this.mHasPendingIdleJob = true;
-            ((JobScheduler) this.mContext.getSystemService(JobScheduler.class)).schedule(new JobInfo.Builder(235306967, new ComponentName(this.mContext.getPackageName(), Service.class.getName())).setRequiresDeviceIdle(true).build());
+            ((JobScheduler) this.mContext.getSystemService(JobScheduler.class))
+                    .schedule(
+                            new JobInfo.Builder(
+                                            235306967,
+                                            new ComponentName(
+                                                    this.mContext.getPackageName(),
+                                                    Service.class.getName()))
+                                    .setRequiresDeviceIdle(true)
+                                    .build());
         }
     }
 }

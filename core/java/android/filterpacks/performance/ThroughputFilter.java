@@ -15,6 +15,7 @@ public class ThroughputFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "period")
     private int mPeriod;
+
     private int mPeriodFrameCount;
     private int mTotalFrameCount;
 
@@ -59,7 +60,12 @@ public class ThroughputFilter extends Filter {
         if (curTime - this.mLastTime >= this.mPeriod * 1000) {
             FrameFormat inputFormat = input.getFormat();
             int pixelCount = inputFormat.getWidth() * inputFormat.getHeight();
-            Throughput throughput = new Throughput(this.mTotalFrameCount, this.mPeriodFrameCount, this.mPeriod, pixelCount);
+            Throughput throughput =
+                    new Throughput(
+                            this.mTotalFrameCount,
+                            this.mPeriodFrameCount,
+                            this.mPeriod,
+                            pixelCount);
             Frame throughputFrame = context.getFrameManager().newFrame(this.mOutputFormat);
             throughputFrame.setObjectValue(throughput);
             pushOutput("throughput", throughputFrame);

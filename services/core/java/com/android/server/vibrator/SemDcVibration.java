@@ -12,10 +12,13 @@ public final class SemDcVibration extends SemVibration {
         if (!commonValidation()) {
             return null;
         }
-        CombinedVibration createParallel = CombinedVibration.createParallel(VibrationEffect.createOneShot(this.mMagnitude, -1));
+        CombinedVibration createParallel =
+                CombinedVibration.createParallel(
+                        VibrationEffect.createOneShot(this.mMagnitude, -1));
         IBinder iBinder = this.mToken;
         this.mVibratorHelper.getPatternFrequencyByIndex(this.mIndex);
-        return new HalVibration(iBinder, createParallel, -1L, this.mMagnitude, null, null, getCallerInfo());
+        return new HalVibration(
+                iBinder, createParallel, -1L, this.mMagnitude, null, null, getCallerInfo());
     }
 
     public final String toString() {

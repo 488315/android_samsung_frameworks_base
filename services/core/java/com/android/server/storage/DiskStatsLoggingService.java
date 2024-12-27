@@ -12,6 +12,7 @@ import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.provider.Settings;
+
 import java.io.File;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +20,8 @@ import java.util.concurrent.TimeUnit;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public class DiskStatsLoggingService extends JobService {
-    public static final ComponentName sDiskStatsLoggingService = new ComponentName("android", DiskStatsLoggingService.class.getName());
+    public static final ComponentName sDiskStatsLoggingService =
+            new ComponentName("android", DiskStatsLoggingService.class.getName());
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class LogRunnable implements Runnable {
@@ -143,7 +145,9 @@ public class DiskStatsLoggingService extends JobService {
             La1:
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.storage.DiskStatsLoggingService.LogRunnable.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.storage.DiskStatsLoggingService.LogRunnable.run():void");
         }
     }
 
@@ -155,22 +159,28 @@ public class DiskStatsLoggingService extends JobService {
     public final boolean onStartJob(JobParameters jobParameters) {
         File path;
         BatteryManager batteryManager = (BatteryManager) getSystemService("batterymanager");
-        if (!(batteryManager != null ? batteryManager.isCharging() : false) || !isDumpsysTaskEnabled(getContentResolver())) {
+        if (!(batteryManager != null ? batteryManager.isCharging() : false)
+                || !isDumpsysTaskEnabled(getContentResolver())) {
             jobFinished(jobParameters, true);
             return false;
         }
-        VolumeInfo primaryStorageCurrentVolume = getPackageManager().getPrimaryStorageCurrentVolume();
+        VolumeInfo primaryStorageCurrentVolume =
+                getPackageManager().getPrimaryStorageCurrentVolume();
         if (primaryStorageCurrentVolume == null) {
             return false;
         }
         AppCollector appCollector = new AppCollector(this, primaryStorageCurrentVolume);
-        Environment.UserEnvironment userEnvironment = new Environment.UserEnvironment(UserHandle.myUserId());
+        Environment.UserEnvironment userEnvironment =
+                new Environment.UserEnvironment(UserHandle.myUserId());
         LogRunnable logRunnable = new LogRunnable();
-        logRunnable.mDownloadsDirectory = userEnvironment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        logRunnable.mDownloadsDirectory =
+                userEnvironment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         Map map = FileCollector.EXTENSION_MAP;
-        VolumeInfo primaryStorageCurrentVolume2 = getPackageManager().getPrimaryStorageCurrentVolume();
+        VolumeInfo primaryStorageCurrentVolume2 =
+                getPackageManager().getPrimaryStorageCurrentVolume();
         StorageManager storageManager = (StorageManager) getSystemService("storage");
-        VolumeInfo findEmulatedForPrivate = storageManager.findEmulatedForPrivate(primaryStorageCurrentVolume2);
+        VolumeInfo findEmulatedForPrivate =
+                storageManager.findEmulatedForPrivate(primaryStorageCurrentVolume2);
         long j = 0;
         if (findEmulatedForPrivate != null && (path = findEmulatedForPrivate.getPath()) != null) {
             long primaryStorageSize = storageManager.getPrimaryStorageSize() - path.getTotalSpace();

@@ -4,6 +4,7 @@ import android.companion.virtualcamera.SupportedStreamConfiguration$$ExternalSyn
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -71,7 +72,10 @@ public final class DabTableEntry implements Parcelable {
             return false;
         }
         DabTableEntry dabTableEntry = (DabTableEntry) obj;
-        return Objects.deepEquals(this.label, dabTableEntry.label) && Objects.deepEquals(Integer.valueOf(this.frequencyKhz), Integer.valueOf(dabTableEntry.frequencyKhz));
+        return Objects.deepEquals(this.label, dabTableEntry.label)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.frequencyKhz),
+                        Integer.valueOf(dabTableEntry.frequencyKhz));
     }
 
     public final int getStability() {
@@ -79,12 +83,23 @@ public final class DabTableEntry implements Parcelable {
     }
 
     public final int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.label, Integer.valueOf(this.frequencyKhz)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(this.label, Integer.valueOf(this.frequencyKhz)).toArray());
     }
 
     public final String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmBandRange$$ExternalSyntheticOutline0.m(DabTableEntry$$ExternalSyntheticOutline0.m(this.label, "frequencyKhz: ", new StringBuilder("label: "), stringJoiner), this.frequencyKhz, stringJoiner, "DabTableEntry"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                this.label,
+                                "frequencyKhz: ",
+                                new StringBuilder("label: "),
+                                stringJoiner),
+                        this.frequencyKhz,
+                        stringJoiner,
+                        "DabTableEntry"));
     }
 
     @Override // android.os.Parcelable
@@ -92,7 +107,9 @@ public final class DabTableEntry implements Parcelable {
         int dataPosition = parcel.dataPosition();
         parcel.writeInt(0);
         parcel.writeString(this.label);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.frequencyKhz, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.frequencyKhz, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

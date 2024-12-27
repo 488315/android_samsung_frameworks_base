@@ -3,12 +3,14 @@ package vendor.samsung.hardware.radio.V2_1;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 /* loaded from: classes6.dex */
 public final class SehCardStatus {
-    public vendor.samsung.hardware.radio.V2_0.SehCardStatus base = new vendor.samsung.hardware.radio.V2_0.SehCardStatus();
+    public vendor.samsung.hardware.radio.V2_0.SehCardStatus base =
+            new vendor.samsung.hardware.radio.V2_0.SehCardStatus();
     public String eid = new String();
 
     public final boolean equals(Object otherObject) {
@@ -19,14 +21,17 @@ public final class SehCardStatus {
             return false;
         }
         SehCardStatus other = (SehCardStatus) otherObject;
-        if (HidlSupport.deepEquals(this.base, other.base) && HidlSupport.deepEquals(this.eid, other.eid)) {
+        if (HidlSupport.deepEquals(this.base, other.base)
+                && HidlSupport.deepEquals(this.eid, other.eid)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.base)), Integer.valueOf(HidlSupport.deepHashCode(this.eid)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.base)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.eid)));
     }
 
     public final String toString() {
@@ -42,7 +47,8 @@ public final class SehCardStatus {
         ArrayList<SehCardStatus> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 96, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 96, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SehCardStatus _hidl_vec_element = new SehCardStatus();
@@ -52,10 +58,12 @@ public final class SehCardStatus {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.base.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 0);
         this.eid = _hidl_blob.getString(_hidl_offset + 80);
-        parcel.readEmbeddedBuffer(this.eid.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 80 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.eid.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 80 + 0, false);
     }
 
     public final void writeToParcel(HwParcel parcel) {
@@ -64,7 +72,8 @@ public final class SehCardStatus {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<SehCardStatus> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<SehCardStatus> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

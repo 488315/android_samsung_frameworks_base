@@ -1,5 +1,7 @@
 package android.util.jar;
 
+import libcore.io.Streams;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -12,7 +14,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.jar.Attributes;
-import libcore.io.Streams;
 
 /* loaded from: classes4.dex */
 public class StrictJarManifest implements Cloneable {
@@ -101,7 +102,9 @@ public class StrictJarManifest implements Cloneable {
     }
 
     public boolean equals(Object o) {
-        if (o == null || o.getClass() != getClass() || !this.mainAttributes.equals(((StrictJarManifest) o).mainAttributes)) {
+        if (o == null
+                || o.getClass() != getClass()
+                || !this.mainAttributes.equals(((StrictJarManifest) o).mainAttributes)) {
             return false;
         }
         return getEntries().equals(((StrictJarManifest) o).getEntries());
@@ -151,7 +154,13 @@ public class StrictJarManifest implements Cloneable {
         }
     }
 
-    private static void writeEntry(OutputStream os, Attributes.Name name, String value, CharsetEncoder encoder, ByteBuffer bBuf) throws IOException {
+    private static void writeEntry(
+            OutputStream os,
+            Attributes.Name name,
+            String value,
+            CharsetEncoder encoder,
+            ByteBuffer bBuf)
+            throws IOException {
         String nameString = name.toString();
         os.write(nameString.getBytes(StandardCharsets.US_ASCII));
         os.write(VALUE_SEPARATOR);

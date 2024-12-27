@@ -9,6 +9,7 @@ import android.util.Log;
 import android.webkit.WebViewFactory;
 import android.webkit.WebViewFactoryProvider;
 import android.webkit.WebViewLibraryLoader;
+
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -18,15 +19,14 @@ import java.lang.reflect.Method;
 class WebViewZygoteInit {
     public static final String TAG = "WebViewZygoteInit";
 
-    WebViewZygoteInit() {
-    }
+    WebViewZygoteInit() {}
 
     private static class WebViewZygoteServer extends ZygoteServer {
-        private WebViewZygoteServer() {
-        }
+        private WebViewZygoteServer() {}
 
         @Override // com.android.internal.os.ZygoteServer
-        protected ZygoteConnection createNewConnection(LocalSocket socket, String abiList) throws IOException {
+        protected ZygoteConnection createNewConnection(LocalSocket socket, String abiList)
+                throws IOException {
             return new WebViewZygoteConnection(socket, abiList);
         }
     }
@@ -37,8 +37,7 @@ class WebViewZygoteInit {
         }
 
         @Override // com.android.internal.os.ZygoteConnection
-        protected void preload() {
-        }
+        protected void preload() {}
 
         @Override // com.android.internal.os.ZygoteConnection
         protected boolean isPreloadComplete() {
@@ -52,7 +51,9 @@ class WebViewZygoteInit {
 
         @Override // com.android.internal.os.ZygoteConnection
         protected void handlePreloadApp(ApplicationInfo appInfo) {
-            Log.i(WebViewZygoteInit.TAG, "Beginning application preload for " + appInfo.packageName);
+            Log.i(
+                    WebViewZygoteInit.TAG,
+                    "Beginning application preload for " + appInfo.packageName);
             LoadedApk loadedApk = new LoadedApk(null, appInfo, null, null, false, true, false);
             ClassLoader loader = loadedApk.getClassLoader();
             doPreload(loader, WebViewFactory.getWebViewLibrary(appInfo));
@@ -61,9 +62,12 @@ class WebViewZygoteInit {
         }
 
         @Override // com.android.internal.os.ZygoteConnection
-        protected void handlePreloadPackage(String packagePath, String libsPath, String libFileName, String cacheKey) {
+        protected void handlePreloadPackage(
+                String packagePath, String libsPath, String libFileName, String cacheKey) {
             Log.i(WebViewZygoteInit.TAG, "Beginning package preload");
-            ClassLoader loader = ApplicationLoaders.getDefault().createAndCacheWebViewClassLoader(packagePath, libsPath, cacheKey);
+            ClassLoader loader =
+                    ApplicationLoaders.getDefault()
+                            .createAndCacheWebViewClassLoader(packagePath, libsPath, cacheKey);
             String[] packageList = TextUtils.split(packagePath, File.pathSeparator);
             for (String packageEntry : packageList) {
                 Zygote.nativeAllowFileAcrossFork(packageEntry);
@@ -77,13 +81,21 @@ class WebViewZygoteInit {
             boolean preloadSucceeded = false;
             int i = 1;
             try {
-                Class<WebViewFactoryProvider> providerClass = WebViewFactory.getWebViewProviderClass(loader);
+                Class<WebViewFactoryProvider> providerClass =
+                        WebViewFactory.getWebViewProviderClass(loader);
                 Method preloadInZygote = providerClass.getMethod("preloadInZygote", new Class[0]);
                 preloadInZygote.setAccessible(true);
                 if (preloadInZygote.getReturnType() != Boolean.TYPE) {
-                    Log.e(WebViewZygoteInit.TAG, "Unexpected return type: preloadInZygote must return boolean");
+                    Log.e(
+                            WebViewZygoteInit.TAG,
+                            "Unexpected return type: preloadInZygote must return boolean");
                 } else {
-                    preloadSucceeded = ((Boolean) providerClass.getMethod("preloadInZygote", new Class[0]).invoke(null, new Object[0])).booleanValue();
+                    preloadSucceeded =
+                            ((Boolean)
+                                            providerClass
+                                                    .getMethod("preloadInZygote", new Class[0])
+                                                    .invoke(null, new Object[0]))
+                                    .booleanValue();
                     if (!preloadSucceeded) {
                         Log.e(WebViewZygoteInit.TAG, "preloadInZygote returned false");
                     }

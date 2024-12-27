@@ -2,6 +2,7 @@ package com.samsung.android.globalactions.presentation.view;
 
 import android.app.Dialog;
 import android.content.Context;
+
 import com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter;
 import com.samsung.android.globalactions.presentation.features.FeatureFactory;
 import com.samsung.android.globalactions.util.ConditionChecker;
@@ -25,7 +26,18 @@ public class ContentViewFactory implements ContentViewFactoryBase {
     private final ToastController mToastController;
     private final WindowManagerUtils mWindowManagerUtil;
 
-    public ContentViewFactory(Context context, ExtendableGlobalActionsView dialogBaseView, FeatureFactory featureFactory, ConditionChecker conditionChecker, WindowManagerUtils windowManagerUtil, ResourceFactory resourceFactory, LogWrapper logWrapper, HandlerUtil handlerUtil, ToastController toastController, SamsungGlobalActionsPresenter presenter, boolean fromSystemServer) {
+    public ContentViewFactory(
+            Context context,
+            ExtendableGlobalActionsView dialogBaseView,
+            FeatureFactory featureFactory,
+            ConditionChecker conditionChecker,
+            WindowManagerUtils windowManagerUtil,
+            ResourceFactory resourceFactory,
+            LogWrapper logWrapper,
+            HandlerUtil handlerUtil,
+            ToastController toastController,
+            SamsungGlobalActionsPresenter presenter,
+            boolean fromSystemServer) {
         this.mContext = context;
         this.mParentView = dialogBaseView;
         this.mFeatureFactory = featureFactory;
@@ -41,8 +53,19 @@ public class ContentViewFactory implements ContentViewFactoryBase {
 
     @Override // com.samsung.android.globalactions.presentation.view.ContentViewFactoryBase
     public ContentView createContentView(Dialog dialog) {
-        boolean clearCoverClosed = this.mConditionChecker.isEnabled(SystemConditions.IS_CLEAR_COVER_CLOSED);
-        ContentView contentView = new GlobalActionsContentView(this.mContext, this.mParentView, this.mFeatureFactory, this.mConditionChecker, this.mWindowManagerUtil, this.mResourceFactory, this.mLogWrapper, dialog, clearCoverClosed);
+        boolean clearCoverClosed =
+                this.mConditionChecker.isEnabled(SystemConditions.IS_CLEAR_COVER_CLOSED);
+        ContentView contentView =
+                new GlobalActionsContentView(
+                        this.mContext,
+                        this.mParentView,
+                        this.mFeatureFactory,
+                        this.mConditionChecker,
+                        this.mWindowManagerUtil,
+                        this.mResourceFactory,
+                        this.mLogWrapper,
+                        dialog,
+                        clearCoverClosed);
         return contentView;
     }
 }

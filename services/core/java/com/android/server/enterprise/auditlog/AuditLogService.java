@@ -21,6 +21,7 @@ import android.os.storage.StorageVolume;
 import android.os.storage.VolumeInfo;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.server.VcnManagementService$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.EnterpriseServiceCallback;
@@ -28,10 +29,10 @@ import com.android.server.enterprise.adapter.AdapterRegistry;
 import com.android.server.enterprise.adapter.IPersonaManagerAdapter;
 import com.android.server.enterprise.adapterlayer.PackageManagerAdapter;
 import com.android.server.enterprise.adapterlayer.PersonaManagerAdapter;
-import com.android.server.enterprise.auditlog.LogWritter;
 import com.android.server.enterprise.common.EnterprisePermissionChecker;
 import com.android.server.enterprise.storage.EdmStorageProvider;
 import com.android.server.enterprise.utils.Utils;
+
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.EnterpriseDeviceManager;
@@ -40,6 +41,7 @@ import com.samsung.android.knox.analytics.activation.DevicePolicyListener;
 import com.samsung.android.knox.deviceinfo.DeviceInventory;
 import com.samsung.android.knox.log.AuditLogRulesInfo;
 import com.samsung.android.knox.log.IAuditLog;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,7 +58,15 @@ import java.util.regex.PatternSyntaxException;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class AuditLogService extends IAuditLog.Stub implements EnterpriseServiceCallback {
-    public static final String[] swComponentWhitelist = {"KeyStore", "AndroidKeyStoreSpi", "PKIXRevocationChecker", "CertPathValidator", "ecryptfs", "fscrypt", "AndroidKeyStoreMaintenance"};
+    public static final String[] swComponentWhitelist = {
+        "KeyStore",
+        "AndroidKeyStoreSpi",
+        "PKIXRevocationChecker",
+        "CertPathValidator",
+        "ecryptfs",
+        "fscrypt",
+        "AndroidKeyStoreMaintenance"
+    };
     public final AnonymousClass1 mBroadcastReceiver;
     public final ContentValues mContainerOwnerCache;
     public final Context mContext;
@@ -86,195 +96,373 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.enterprise.auditlog.AuditLogService$1] */
     public AuditLogService(Injector injector) {
         final int i = 0;
-        this.mRemovableMediaBroadcastReceiver = new BroadcastReceiver(this) { // from class: com.android.server.enterprise.auditlog.AuditLogService.1
-            public final /* synthetic */ AuditLogService this$0;
+        this.mRemovableMediaBroadcastReceiver =
+                new BroadcastReceiver(this) { // from class:
+                    // com.android.server.enterprise.auditlog.AuditLogService.1
+                    public final /* synthetic */ AuditLogService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            public void logRemovableMediaEvents(Intent intent, String str) {
-                StorageVolume storageVolume;
-                Bundle extras = intent.getExtras();
-                if (extras == null || (storageVolume = (StorageVolume) extras.getParcelable("android.os.storage.extra.STORAGE_VOLUME")) == null || storageVolume.getUuid() == null) {
-                    return;
-                }
-                for (VolumeInfo volumeInfo : ((StorageManager) this.this$0.mInjector.mContext.getSystemService("storage")).getVolumes()) {
-                    if (volumeInfo.getDisk() != null && volumeInfo.getFsUuid() != null && volumeInfo.getFsUuid().equals(storageVolume.getUuid())) {
-                        if (volumeInfo.getDisk().isSd()) {
-                            this.this$0.redactedAuditLogger(null, 5, 2, true, Process.myPid(), "AuditLogService", "Removable Media Event: External SD Card ".concat(str), null);
+                    public void logRemovableMediaEvents(Intent intent, String str) {
+                        StorageVolume storageVolume;
+                        Bundle extras = intent.getExtras();
+                        if (extras == null
+                                || (storageVolume =
+                                                (StorageVolume)
+                                                        extras.getParcelable(
+                                                                "android.os.storage.extra.STORAGE_VOLUME"))
+                                        == null
+                                || storageVolume.getUuid() == null) {
+                            return;
                         }
-                        if (volumeInfo.getDisk().isUsb()) {
-                            this.this$0.redactedAuditLogger(null, 5, 2, true, Process.myPid(), "AuditLogService", "Removable Media Event: USB HOST MEMORY ".concat(str), null);
+                        for (VolumeInfo volumeInfo :
+                                ((StorageManager)
+                                                this.this$0.mInjector.mContext.getSystemService(
+                                                        "storage"))
+                                        .getVolumes()) {
+                            if (volumeInfo.getDisk() != null
+                                    && volumeInfo.getFsUuid() != null
+                                    && volumeInfo.getFsUuid().equals(storageVolume.getUuid())) {
+                                if (volumeInfo.getDisk().isSd()) {
+                                    this.this$0.redactedAuditLogger(
+                                            null,
+                                            5,
+                                            2,
+                                            true,
+                                            Process.myPid(),
+                                            "AuditLogService",
+                                            "Removable Media Event: External SD Card ".concat(str),
+                                            null);
+                                }
+                                if (volumeInfo.getDisk().isUsb()) {
+                                    this.this$0.redactedAuditLogger(
+                                            null,
+                                            5,
+                                            2,
+                                            true,
+                                            Process.myPid(),
+                                            "AuditLogService",
+                                            "Removable Media Event: USB HOST MEMORY ".concat(str),
+                                            null);
+                                }
+                            }
                         }
                     }
-                }
-            }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context, Intent intent) {
-                int identifier;
-                switch (i) {
-                    case 0:
-                        if (intent.getAction().equals("android.intent.action.MEDIA_MOUNTED")) {
-                            logRemovableMediaEvents(intent, "Mounted");
-                            return;
-                        } else {
-                            if (intent.getAction().equals("android.intent.action.MEDIA_UNMOUNTED")) {
-                                logRemovableMediaEvents(intent, "Unmounted");
-                                return;
-                            }
-                            return;
-                        }
-                    default:
-                        if (intent.getAction().equals("android.intent.action.ACTION_SHUTDOWN") || intent.getAction().equals("android.intent.action.REBOOT")) {
-                            synchronized (this.this$0.mLinkedHashMap) {
-                                try {
-                                    Iterator it = this.this$0.mLinkedHashMap.values().iterator();
-                                    while (it.hasNext()) {
-                                        LogWritter logWritter = ((Admin) it.next()).mLogWritter;
-                                        LogWritter.LooperThread looperThread = logWritter.mLooperThread;
-                                        looperThread.mHandler.removeCallbacks(looperThread);
-                                        logWritter.mCircularBuffer.closeFile();
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context, Intent intent) {
+                        int identifier;
+                        switch (i) {
+                            case 0:
+                                if (intent.getAction()
+                                        .equals("android.intent.action.MEDIA_MOUNTED")) {
+                                    logRemovableMediaEvents(intent, "Mounted");
+                                    return;
+                                } else {
+                                    if (intent.getAction()
+                                            .equals("android.intent.action.MEDIA_UNMOUNTED")) {
+                                        logRemovableMediaEvents(intent, "Unmounted");
+                                        return;
                                     }
-                                } finally {
-                                }
-                            }
-                            return;
-                        }
-                        if (intent.getAction().equals("android.intent.action.LOCKED_BOOT_COMPLETED")) {
-                            Log.d("AuditLogService", "ACTION_LOCKED_BOOT_COMPLETED");
-                            this.this$0.mIsBootCompleted = true;
-                            synchronized (this.this$0.mLinkedHashMap) {
-                                try {
-                                    Iterator it2 = this.this$0.mLinkedHashMap.values().iterator();
-                                    while (it2.hasNext()) {
-                                        ((Admin) it2.next()).setBootCompleted(true);
-                                    }
-                                } finally {
-                                }
-                            }
-                            return;
-                        }
-                        if (intent.getAction().equals("android.intent.action.TIME_SET")) {
-                            this.this$0.redactedAuditLogger(null, 5, 2, true, Process.myPid(), "AuditLogService", String.format("The device time has been changed. Current Time = %d", Long.valueOf(System.currentTimeMillis())), null);
-                            return;
-                        }
-                        if (intent.getAction().equals(DevicePolicyListener.ACTION_PROFILE_OWNER_ADDED)) {
-                            UserHandle userHandle = (UserHandle) intent.getExtra("android.intent.extra.USER");
-                            identifier = userHandle != null ? userHandle.getIdentifier() : 0;
-                            this.this$0.redactedAuditLogger(null, 5, 2, true, Process.myPid(), "AuditLogService", identifier > 0 ? String.format("Managed Profile has been created successfully - user %d", Integer.valueOf(identifier)) : "Managed Profile has been created successfully", null);
-                            return;
-                        } else {
-                            if (intent.getAction().equals(DevicePolicyListener.ACTION_PROFILE_OWNER_REMOVED)) {
-                                UserHandle userHandle2 = (UserHandle) intent.getExtra("android.intent.extra.USER");
-                                identifier = userHandle2 != null ? userHandle2.getIdentifier() : 0;
-                                if (identifier > 0) {
-                                    this.this$0.redactedAuditLogger(null, 5, 2, true, Process.myPid(), "AuditLogService", String.format("Managed Profile has been removed - user %d", Integer.valueOf(identifier)), null);
                                     return;
                                 }
-                                return;
-                            }
-                            return;
+                            default:
+                                if (intent.getAction()
+                                                .equals("android.intent.action.ACTION_SHUTDOWN")
+                                        || intent.getAction()
+                                                .equals("android.intent.action.REBOOT")) {
+                                    synchronized (this.this$0.mLinkedHashMap) {
+                                        try {
+                                            Iterator it =
+                                                    this.this$0.mLinkedHashMap.values().iterator();
+                                            while (it.hasNext()) {
+                                                LogWritter logWritter =
+                                                        ((Admin) it.next()).mLogWritter;
+                                                LogWritter.LooperThread looperThread =
+                                                        logWritter.mLooperThread;
+                                                looperThread.mHandler.removeCallbacks(looperThread);
+                                                logWritter.mCircularBuffer.closeFile();
+                                            }
+                                        } finally {
+                                        }
+                                    }
+                                    return;
+                                }
+                                if (intent.getAction()
+                                        .equals("android.intent.action.LOCKED_BOOT_COMPLETED")) {
+                                    Log.d("AuditLogService", "ACTION_LOCKED_BOOT_COMPLETED");
+                                    this.this$0.mIsBootCompleted = true;
+                                    synchronized (this.this$0.mLinkedHashMap) {
+                                        try {
+                                            Iterator it2 =
+                                                    this.this$0.mLinkedHashMap.values().iterator();
+                                            while (it2.hasNext()) {
+                                                ((Admin) it2.next()).setBootCompleted(true);
+                                            }
+                                        } finally {
+                                        }
+                                    }
+                                    return;
+                                }
+                                if (intent.getAction().equals("android.intent.action.TIME_SET")) {
+                                    this.this$0.redactedAuditLogger(
+                                            null,
+                                            5,
+                                            2,
+                                            true,
+                                            Process.myPid(),
+                                            "AuditLogService",
+                                            String.format(
+                                                    "The device time has been changed. Current Time"
+                                                        + " = %d",
+                                                    Long.valueOf(System.currentTimeMillis())),
+                                            null);
+                                    return;
+                                }
+                                if (intent.getAction()
+                                        .equals(DevicePolicyListener.ACTION_PROFILE_OWNER_ADDED)) {
+                                    UserHandle userHandle =
+                                            (UserHandle)
+                                                    intent.getExtra("android.intent.extra.USER");
+                                    identifier =
+                                            userHandle != null ? userHandle.getIdentifier() : 0;
+                                    this.this$0.redactedAuditLogger(
+                                            null,
+                                            5,
+                                            2,
+                                            true,
+                                            Process.myPid(),
+                                            "AuditLogService",
+                                            identifier > 0
+                                                    ? String.format(
+                                                            "Managed Profile has been created"
+                                                                + " successfully - user %d",
+                                                            Integer.valueOf(identifier))
+                                                    : "Managed Profile has been created"
+                                                          + " successfully",
+                                            null);
+                                    return;
+                                } else {
+                                    if (intent.getAction()
+                                            .equals(
+                                                    DevicePolicyListener
+                                                            .ACTION_PROFILE_OWNER_REMOVED)) {
+                                        UserHandle userHandle2 =
+                                                (UserHandle)
+                                                        intent.getExtra(
+                                                                "android.intent.extra.USER");
+                                        identifier =
+                                                userHandle2 != null
+                                                        ? userHandle2.getIdentifier()
+                                                        : 0;
+                                        if (identifier > 0) {
+                                            this.this$0.redactedAuditLogger(
+                                                    null,
+                                                    5,
+                                                    2,
+                                                    true,
+                                                    Process.myPid(),
+                                                    "AuditLogService",
+                                                    String.format(
+                                                            "Managed Profile has been removed -"
+                                                                + " user %d",
+                                                            Integer.valueOf(identifier)),
+                                                    null);
+                                            return;
+                                        }
+                                        return;
+                                    }
+                                    return;
+                                }
                         }
-                }
-            }
-        };
+                    }
+                };
         final int i2 = 1;
-        this.mBroadcastReceiver = new BroadcastReceiver(this) { // from class: com.android.server.enterprise.auditlog.AuditLogService.1
-            public final /* synthetic */ AuditLogService this$0;
+        this.mBroadcastReceiver =
+                new BroadcastReceiver(this) { // from class:
+                    // com.android.server.enterprise.auditlog.AuditLogService.1
+                    public final /* synthetic */ AuditLogService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            public void logRemovableMediaEvents(Intent intent, String str) {
-                StorageVolume storageVolume;
-                Bundle extras = intent.getExtras();
-                if (extras == null || (storageVolume = (StorageVolume) extras.getParcelable("android.os.storage.extra.STORAGE_VOLUME")) == null || storageVolume.getUuid() == null) {
-                    return;
-                }
-                for (VolumeInfo volumeInfo : ((StorageManager) this.this$0.mInjector.mContext.getSystemService("storage")).getVolumes()) {
-                    if (volumeInfo.getDisk() != null && volumeInfo.getFsUuid() != null && volumeInfo.getFsUuid().equals(storageVolume.getUuid())) {
-                        if (volumeInfo.getDisk().isSd()) {
-                            this.this$0.redactedAuditLogger(null, 5, 2, true, Process.myPid(), "AuditLogService", "Removable Media Event: External SD Card ".concat(str), null);
+                    public void logRemovableMediaEvents(Intent intent, String str) {
+                        StorageVolume storageVolume;
+                        Bundle extras = intent.getExtras();
+                        if (extras == null
+                                || (storageVolume =
+                                                (StorageVolume)
+                                                        extras.getParcelable(
+                                                                "android.os.storage.extra.STORAGE_VOLUME"))
+                                        == null
+                                || storageVolume.getUuid() == null) {
+                            return;
                         }
-                        if (volumeInfo.getDisk().isUsb()) {
-                            this.this$0.redactedAuditLogger(null, 5, 2, true, Process.myPid(), "AuditLogService", "Removable Media Event: USB HOST MEMORY ".concat(str), null);
+                        for (VolumeInfo volumeInfo :
+                                ((StorageManager)
+                                                this.this$0.mInjector.mContext.getSystemService(
+                                                        "storage"))
+                                        .getVolumes()) {
+                            if (volumeInfo.getDisk() != null
+                                    && volumeInfo.getFsUuid() != null
+                                    && volumeInfo.getFsUuid().equals(storageVolume.getUuid())) {
+                                if (volumeInfo.getDisk().isSd()) {
+                                    this.this$0.redactedAuditLogger(
+                                            null,
+                                            5,
+                                            2,
+                                            true,
+                                            Process.myPid(),
+                                            "AuditLogService",
+                                            "Removable Media Event: External SD Card ".concat(str),
+                                            null);
+                                }
+                                if (volumeInfo.getDisk().isUsb()) {
+                                    this.this$0.redactedAuditLogger(
+                                            null,
+                                            5,
+                                            2,
+                                            true,
+                                            Process.myPid(),
+                                            "AuditLogService",
+                                            "Removable Media Event: USB HOST MEMORY ".concat(str),
+                                            null);
+                                }
+                            }
                         }
                     }
-                }
-            }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context, Intent intent) {
-                int identifier;
-                switch (i2) {
-                    case 0:
-                        if (intent.getAction().equals("android.intent.action.MEDIA_MOUNTED")) {
-                            logRemovableMediaEvents(intent, "Mounted");
-                            return;
-                        } else {
-                            if (intent.getAction().equals("android.intent.action.MEDIA_UNMOUNTED")) {
-                                logRemovableMediaEvents(intent, "Unmounted");
-                                return;
-                            }
-                            return;
-                        }
-                    default:
-                        if (intent.getAction().equals("android.intent.action.ACTION_SHUTDOWN") || intent.getAction().equals("android.intent.action.REBOOT")) {
-                            synchronized (this.this$0.mLinkedHashMap) {
-                                try {
-                                    Iterator it = this.this$0.mLinkedHashMap.values().iterator();
-                                    while (it.hasNext()) {
-                                        LogWritter logWritter = ((Admin) it.next()).mLogWritter;
-                                        LogWritter.LooperThread looperThread = logWritter.mLooperThread;
-                                        looperThread.mHandler.removeCallbacks(looperThread);
-                                        logWritter.mCircularBuffer.closeFile();
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context, Intent intent) {
+                        int identifier;
+                        switch (i2) {
+                            case 0:
+                                if (intent.getAction()
+                                        .equals("android.intent.action.MEDIA_MOUNTED")) {
+                                    logRemovableMediaEvents(intent, "Mounted");
+                                    return;
+                                } else {
+                                    if (intent.getAction()
+                                            .equals("android.intent.action.MEDIA_UNMOUNTED")) {
+                                        logRemovableMediaEvents(intent, "Unmounted");
+                                        return;
                                     }
-                                } finally {
-                                }
-                            }
-                            return;
-                        }
-                        if (intent.getAction().equals("android.intent.action.LOCKED_BOOT_COMPLETED")) {
-                            Log.d("AuditLogService", "ACTION_LOCKED_BOOT_COMPLETED");
-                            this.this$0.mIsBootCompleted = true;
-                            synchronized (this.this$0.mLinkedHashMap) {
-                                try {
-                                    Iterator it2 = this.this$0.mLinkedHashMap.values().iterator();
-                                    while (it2.hasNext()) {
-                                        ((Admin) it2.next()).setBootCompleted(true);
-                                    }
-                                } finally {
-                                }
-                            }
-                            return;
-                        }
-                        if (intent.getAction().equals("android.intent.action.TIME_SET")) {
-                            this.this$0.redactedAuditLogger(null, 5, 2, true, Process.myPid(), "AuditLogService", String.format("The device time has been changed. Current Time = %d", Long.valueOf(System.currentTimeMillis())), null);
-                            return;
-                        }
-                        if (intent.getAction().equals(DevicePolicyListener.ACTION_PROFILE_OWNER_ADDED)) {
-                            UserHandle userHandle = (UserHandle) intent.getExtra("android.intent.extra.USER");
-                            identifier = userHandle != null ? userHandle.getIdentifier() : 0;
-                            this.this$0.redactedAuditLogger(null, 5, 2, true, Process.myPid(), "AuditLogService", identifier > 0 ? String.format("Managed Profile has been created successfully - user %d", Integer.valueOf(identifier)) : "Managed Profile has been created successfully", null);
-                            return;
-                        } else {
-                            if (intent.getAction().equals(DevicePolicyListener.ACTION_PROFILE_OWNER_REMOVED)) {
-                                UserHandle userHandle2 = (UserHandle) intent.getExtra("android.intent.extra.USER");
-                                identifier = userHandle2 != null ? userHandle2.getIdentifier() : 0;
-                                if (identifier > 0) {
-                                    this.this$0.redactedAuditLogger(null, 5, 2, true, Process.myPid(), "AuditLogService", String.format("Managed Profile has been removed - user %d", Integer.valueOf(identifier)), null);
                                     return;
                                 }
-                                return;
-                            }
-                            return;
+                            default:
+                                if (intent.getAction()
+                                                .equals("android.intent.action.ACTION_SHUTDOWN")
+                                        || intent.getAction()
+                                                .equals("android.intent.action.REBOOT")) {
+                                    synchronized (this.this$0.mLinkedHashMap) {
+                                        try {
+                                            Iterator it =
+                                                    this.this$0.mLinkedHashMap.values().iterator();
+                                            while (it.hasNext()) {
+                                                LogWritter logWritter =
+                                                        ((Admin) it.next()).mLogWritter;
+                                                LogWritter.LooperThread looperThread =
+                                                        logWritter.mLooperThread;
+                                                looperThread.mHandler.removeCallbacks(looperThread);
+                                                logWritter.mCircularBuffer.closeFile();
+                                            }
+                                        } finally {
+                                        }
+                                    }
+                                    return;
+                                }
+                                if (intent.getAction()
+                                        .equals("android.intent.action.LOCKED_BOOT_COMPLETED")) {
+                                    Log.d("AuditLogService", "ACTION_LOCKED_BOOT_COMPLETED");
+                                    this.this$0.mIsBootCompleted = true;
+                                    synchronized (this.this$0.mLinkedHashMap) {
+                                        try {
+                                            Iterator it2 =
+                                                    this.this$0.mLinkedHashMap.values().iterator();
+                                            while (it2.hasNext()) {
+                                                ((Admin) it2.next()).setBootCompleted(true);
+                                            }
+                                        } finally {
+                                        }
+                                    }
+                                    return;
+                                }
+                                if (intent.getAction().equals("android.intent.action.TIME_SET")) {
+                                    this.this$0.redactedAuditLogger(
+                                            null,
+                                            5,
+                                            2,
+                                            true,
+                                            Process.myPid(),
+                                            "AuditLogService",
+                                            String.format(
+                                                    "The device time has been changed. Current Time"
+                                                        + " = %d",
+                                                    Long.valueOf(System.currentTimeMillis())),
+                                            null);
+                                    return;
+                                }
+                                if (intent.getAction()
+                                        .equals(DevicePolicyListener.ACTION_PROFILE_OWNER_ADDED)) {
+                                    UserHandle userHandle =
+                                            (UserHandle)
+                                                    intent.getExtra("android.intent.extra.USER");
+                                    identifier =
+                                            userHandle != null ? userHandle.getIdentifier() : 0;
+                                    this.this$0.redactedAuditLogger(
+                                            null,
+                                            5,
+                                            2,
+                                            true,
+                                            Process.myPid(),
+                                            "AuditLogService",
+                                            identifier > 0
+                                                    ? String.format(
+                                                            "Managed Profile has been created"
+                                                                + " successfully - user %d",
+                                                            Integer.valueOf(identifier))
+                                                    : "Managed Profile has been created"
+                                                          + " successfully",
+                                            null);
+                                    return;
+                                } else {
+                                    if (intent.getAction()
+                                            .equals(
+                                                    DevicePolicyListener
+                                                            .ACTION_PROFILE_OWNER_REMOVED)) {
+                                        UserHandle userHandle2 =
+                                                (UserHandle)
+                                                        intent.getExtra(
+                                                                "android.intent.extra.USER");
+                                        identifier =
+                                                userHandle2 != null
+                                                        ? userHandle2.getIdentifier()
+                                                        : 0;
+                                        if (identifier > 0) {
+                                            this.this$0.redactedAuditLogger(
+                                                    null,
+                                                    5,
+                                                    2,
+                                                    true,
+                                                    Process.myPid(),
+                                                    "AuditLogService",
+                                                    String.format(
+                                                            "Managed Profile has been removed -"
+                                                                + " user %d",
+                                                            Integer.valueOf(identifier)),
+                                                    null);
+                                            return;
+                                        }
+                                        return;
+                                    }
+                                    return;
+                                }
                         }
-                }
-            }
-        };
+                    }
+                };
         this.mInjector = injector;
         Context context = injector.mContext;
         Objects.requireNonNull(context);
@@ -290,7 +478,8 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
             Integer valueOf = Integer.valueOf(contentValues.getAsString("adminUid"));
             int intValue = valueOf.intValue();
             if (contentValues.get("auditLogEnabled").equals("true")) {
-                Admin admin = new Admin(this.mContext, getAdminPackageNameForUid(intValue), intValue);
+                Admin admin =
+                        new Admin(this.mContext, getAdminPackageNameForUid(intValue), intValue);
                 Integer asInteger = contentValues.getAsInteger("auditCriticalSize");
                 if (asInteger != null) {
                     float intValue2 = asInteger.intValue();
@@ -326,22 +515,34 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         synchronized (informFailure) {
             informFailure.mContext = context2;
         }
-        IntentFilter m = VcnManagementService$$ExternalSyntheticOutline0.m("android.intent.action.ACTION_SHUTDOWN", "android.intent.action.LOCKED_BOOT_COMPLETED", "android.intent.action.REBOOT", "android.intent.action.TIME_SET", DevicePolicyListener.ACTION_PROFILE_OWNER_ADDED);
+        IntentFilter m =
+                VcnManagementService$$ExternalSyntheticOutline0.m(
+                        "android.intent.action.ACTION_SHUTDOWN",
+                        "android.intent.action.LOCKED_BOOT_COMPLETED",
+                        "android.intent.action.REBOOT",
+                        "android.intent.action.TIME_SET",
+                        DevicePolicyListener.ACTION_PROFILE_OWNER_ADDED);
         m.addAction(DevicePolicyListener.ACTION_PROFILE_OWNER_REMOVED);
         this.mContext.registerReceiver(this.mBroadcastReceiver, m, 2);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.MEDIA_MOUNTED");
         intentFilter.addAction("android.intent.action.MEDIA_UNMOUNTED");
         intentFilter.addDataScheme("file");
-        this.mContext.registerReceiverAsUser(this.mRemovableMediaBroadcastReceiver, UserHandle.SYSTEM, intentFilter, null, null);
+        this.mContext.registerReceiverAsUser(
+                this.mRemovableMediaBroadcastReceiver, UserHandle.SYSTEM, intentFilter, null, null);
         Context context3 = this.mContext;
         char[] cArr = Utils.HEX_DIGITS;
         int callingUid = Binder.getCallingUid();
         String str = "com.android.mms";
-        String string = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_MESSAGE_CONFIG_PACKAGE_NAME", "com.android.mms");
+        String string =
+                SemFloatingFeature.getInstance()
+                        .getString(
+                                "SEC_FLOATING_FEATURE_MESSAGE_CONFIG_PACKAGE_NAME",
+                                "com.android.mms");
         if (!"com.android.mms".equals(string)) {
             try {
-                PackageManagerAdapter packageManagerAdapter = PackageManagerAdapter.getInstance(context3);
+                PackageManagerAdapter packageManagerAdapter =
+                        PackageManagerAdapter.getInstance(context3);
                 int userId = UserHandle.getUserId(callingUid);
                 packageManagerAdapter.getClass();
                 PackageManagerAdapter.getPackageInfo(0, userId, string);
@@ -398,23 +599,31 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         return auditLogRulesInfo;
     }
 
-    public static boolean filterLoggingMessage(AuditLogRulesInfo auditLogRulesInfo, int i, boolean z, int i2, int i3) {
+    public static boolean filterLoggingMessage(
+            AuditLogRulesInfo auditLogRulesInfo, int i, boolean z, int i2, int i3) {
         if (i > auditLogRulesInfo.getSeverityRule()) {
             return false;
         }
-        if (auditLogRulesInfo.getOutcomeRule() != 2 && ((!z || auditLogRulesInfo.getOutcomeRule() != 1) && (z || auditLogRulesInfo.getOutcomeRule() != 0))) {
+        if (auditLogRulesInfo.getOutcomeRule() != 2
+                && ((!z || auditLogRulesInfo.getOutcomeRule() != 1)
+                        && (z || auditLogRulesInfo.getOutcomeRule() != 0))) {
             return false;
         }
-        if (auditLogRulesInfo.getGroupsRule() == null || auditLogRulesInfo.getGroupsRule().isEmpty() || auditLogRulesInfo.getGroupsRule().contains(Integer.valueOf(i2))) {
-            return auditLogRulesInfo.getUsersRule() == null || auditLogRulesInfo.getUsersRule().isEmpty() || auditLogRulesInfo.getUsersRule().contains(Integer.valueOf(i3)) || i3 == -1;
+        if (auditLogRulesInfo.getGroupsRule() == null
+                || auditLogRulesInfo.getGroupsRule().isEmpty()
+                || auditLogRulesInfo.getGroupsRule().contains(Integer.valueOf(i2))) {
+            return auditLogRulesInfo.getUsersRule() == null
+                    || auditLogRulesInfo.getUsersRule().isEmpty()
+                    || auditLogRulesInfo.getUsersRule().contains(Integer.valueOf(i3))
+                    || i3 == -1;
         }
         return false;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:26:0x0082, code lost:
-    
-        if (r3 != null) goto L15;
-     */
+
+       if (r3 != null) goto L15;
+    */
     /* JADX WARN: Removed duplicated region for block: B:31:0x008c  */
     /* JADX WARN: Removed duplicated region for block: B:33:0x0091  */
     /* JADX WARN: Removed duplicated region for block: B:35:0x0096  */
@@ -523,11 +732,14 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         L99:
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.auditlog.AuditLogService.getProcessName$1(int):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.auditlog.AuditLogService.getProcessName$1(int):java.lang.String");
     }
 
     public static boolean isBuildUserShip() {
-        return SystemProperties.get("ro.build.type", "user").equals("user") && SystemProperties.get("ro.product_ship", "true").equals("true");
+        return SystemProperties.get("ro.build.type", "user").equals("user")
+                && SystemProperties.get("ro.product_ship", "true").equals("true");
     }
 
     public final String appendLogMessageWithCallingUser(String str) {
@@ -551,44 +763,70 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         return sb.toString();
     }
 
-    public final void auditLogger(ContextInfo contextInfo, int i, int i2, boolean z, int i3, String str, String str2) {
+    public final void auditLogger(
+            ContextInfo contextInfo, int i, int i2, boolean z, int i3, String str, String str2) {
         redactedAuditLogger(contextInfo, i, i2, z, i3, str, str2, null);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:40:0x009f, code lost:
-    
-        if (com.samsung.android.knox.SemPersonaManager.isKnoxId(r7) != false) goto L47;
-     */
+
+       if (com.samsung.android.knox.SemPersonaManager.isKnoxId(r7) != false) goto L47;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:75:0x0074, code lost:
-    
-        if (r23 != null) goto L37;
-     */
+
+       if (r23 != null) goto L37;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void auditLoggerInternal(com.samsung.android.knox.ContextInfo r16, int r17, int r18, boolean r19, int r20, java.lang.String r21, java.lang.String r22, java.lang.String r23, int r24) {
+    public final void auditLoggerInternal(
+            com.samsung.android.knox.ContextInfo r16,
+            int r17,
+            int r18,
+            boolean r19,
+            int r20,
+            java.lang.String r21,
+            java.lang.String r22,
+            java.lang.String r23,
+            int r24) {
         /*
             Method dump skipped, instructions count: 329
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.auditlog.AuditLogService.auditLoggerInternal(com.samsung.android.knox.ContextInfo, int, int, boolean, int, java.lang.String, java.lang.String, java.lang.String, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.auditlog.AuditLogService.auditLoggerInternal(com.samsung.android.knox.ContextInfo,"
+                    + " int, int, boolean, int, java.lang.String, java.lang.String,"
+                    + " java.lang.String, int):void");
     }
 
     public final boolean checkAuditLogEnforce() {
         int callingUid = Binder.getCallingUid();
         String nameForUid = this.mContext.getPackageManager().getNameForUid(callingUid);
-        if (!this.mMessagePackage.equals(nameForUid) && callingUid != 1999 && this.mContext.checkCallingOrSelfPermission("com.samsung.android.knox.permission.KNOX_AUDIT_LOG") != 0) {
+        if (!this.mMessagePackage.equals(nameForUid)
+                && callingUid != 1999
+                && this.mContext.checkCallingOrSelfPermission(
+                                "com.samsung.android.knox.permission.KNOX_AUDIT_LOG")
+                        != 0) {
             try {
                 Context context = this.mContext;
                 if (EnterprisePermissionChecker.sInstance == null) {
-                    EnterprisePermissionChecker enterprisePermissionChecker = new EnterprisePermissionChecker();
+                    EnterprisePermissionChecker enterprisePermissionChecker =
+                            new EnterprisePermissionChecker();
                     enterprisePermissionChecker.mContext = context;
                     EnterprisePermissionChecker.sInstance = enterprisePermissionChecker;
                 }
                 EnterprisePermissionChecker.sInstance.enforceAuthorization();
             } catch (SecurityException unused) {
-                Log.w("AuditLogService", AccountManagerService$$ExternalSyntheticOutline0.m(callingUid, "Caller (uid = ", ", package = ", nameForUid, ") does not have Knox audit log permission"));
+                Log.w(
+                        "AuditLogService",
+                        AccountManagerService$$ExternalSyntheticOutline0.m(
+                                callingUid,
+                                "Caller (uid = ",
+                                ", package = ",
+                                nameForUid,
+                                ") does not have Knox audit log permission"));
                 return false;
             }
         }
@@ -597,11 +835,16 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
 
     public final boolean checkOwnContainerOrSelf(int i, int i2) {
         Integer asInteger;
-        ((PersonaManagerAdapter) ((IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class))).getClass();
+        ((PersonaManagerAdapter)
+                        ((IPersonaManagerAdapter)
+                                AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class)))
+                .getClass();
         if (!SemPersonaManager.isKnoxId(i)) {
             return false;
         }
-        if (this.mContainerOwnerCache.containsKey(String.valueOf(i)) && (asInteger = this.mContainerOwnerCache.getAsInteger(String.valueOf(i))) != null) {
+        if (this.mContainerOwnerCache.containsKey(String.valueOf(i))
+                && (asInteger = this.mContainerOwnerCache.getAsInteger(String.valueOf(i)))
+                        != null) {
             if (asInteger.intValue() == i2) {
                 return true;
             }
@@ -617,7 +860,8 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         if (mUMContainerOwnerUid == i2) {
             return true;
         }
-        return UserHandle.getAppId(mUMContainerOwnerUid) == UserHandle.getAppId(i2) && i == UserHandle.getUserId(i2);
+        return UserHandle.getAppId(mUMContainerOwnerUid) == UserHandle.getAppId(i2)
+                && i == UserHandle.getUserId(i2);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:20:0x006f  */
@@ -691,12 +935,20 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         L83:
             return r10
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.auditlog.AuditLogService.disableAuditLog(com.samsung.android.knox.ContextInfo):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.auditlog.AuditLogService.disableAuditLog(com.samsung.android.knox.ContextInfo):boolean");
     }
 
-    public final synchronized boolean dumpLogFile(ContextInfo contextInfo, long j, long j2, String str, ParcelFileDescriptor parcelFileDescriptor) {
+    public final synchronized boolean dumpLogFile(
+            ContextInfo contextInfo,
+            long j,
+            long j2,
+            String str,
+            ParcelFileDescriptor parcelFileDescriptor) {
         if (parcelFileDescriptor != null) {
-            if (parcelFileDescriptor.getFileDescriptor() != null && parcelFileDescriptor.getFileDescriptor().valid()) {
+            if (parcelFileDescriptor.getFileDescriptor() != null
+                    && parcelFileDescriptor.getFileDescriptor().valid()) {
                 if (parcelFileDescriptor.canDetectErrors()) {
                     try {
                         Log.v("AuditLogService", "check error");
@@ -708,7 +960,12 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
                 }
                 try {
                     new SecurityManager().checkWrite(parcelFileDescriptor.getFileDescriptor());
-                    Admin admin = (Admin) this.mLinkedHashMap.get(Integer.valueOf(enforceAuditLogPermission(contextInfo).mCallerUid));
+                    Admin admin =
+                            (Admin)
+                                    this.mLinkedHashMap.get(
+                                            Integer.valueOf(
+                                                    enforceAuditLogPermission(contextInfo)
+                                                            .mCallerUid));
                     if (admin == null || admin.mIsDumping) {
                         return false;
                     }
@@ -846,11 +1103,18 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         Ld3:
             return r10
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.auditlog.AuditLogService.enableAuditLog(com.samsung.android.knox.ContextInfo):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.auditlog.AuditLogService.enableAuditLog(com.samsung.android.knox.ContextInfo):boolean");
     }
 
     public final ContextInfo enforceAuditLogPermission(ContextInfo contextInfo) {
-        return getEDM$1$1().enforceActiveAdminPermissionByContext(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_AUDIT_LOG")));
+        return getEDM$1$1()
+                .enforceActiveAdminPermissionByContext(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.samsung.android.knox.permission.KNOX_AUDIT_LOG")));
     }
 
     public final String getAdminPackageNameForUid(int i) {
@@ -859,7 +1123,9 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
             return "com.sec.enterprise.knox.cloudmdm.smdms";
         }
         String packageNameForUid = this.mEdmStorageProvider.getPackageNameForUid(i);
-        return packageNameForUid == null ? this.mContext.getPackageManager().getNameForUid(i) : packageNameForUid;
+        return packageNameForUid == null
+                ? this.mContext.getPackageManager().getNameForUid(i)
+                : packageNameForUid;
     }
 
     public final AuditLogRulesInfo getAuditLogRules(ContextInfo contextInfo) {
@@ -869,7 +1135,10 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
     }
 
     public final int getCriticalLogSize(ContextInfo contextInfo) {
-        Admin admin = (Admin) this.mLinkedHashMap.get(Integer.valueOf(enforceAuditLogPermission(contextInfo).mCallerUid));
+        Admin admin =
+                (Admin)
+                        this.mLinkedHashMap.get(
+                                Integer.valueOf(enforceAuditLogPermission(contextInfo).mCallerUid));
         if (admin != null) {
             return (int) admin.mLogWritter.mCircularBuffer.mAdminCriticalSize;
         }
@@ -877,12 +1146,18 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
     }
 
     public final int getCurrentLogFileSize(ContextInfo contextInfo) {
-        Admin admin = (Admin) this.mLinkedHashMap.get(Integer.valueOf(enforceAuditLogPermission(contextInfo).mCallerUid));
+        Admin admin =
+                (Admin)
+                        this.mLinkedHashMap.get(
+                                Integer.valueOf(enforceAuditLogPermission(contextInfo).mCallerUid));
         if (admin == null) {
             return 0;
         }
         CircularBuffer circularBuffer = admin.mLogWritter.mCircularBuffer;
-        int i = (int) ((circularBuffer.mCircularBufferSize * 100) / circularBuffer.mBufferLimitSize);
+        int i =
+                (int)
+                        ((circularBuffer.mCircularBufferSize * 100)
+                                / circularBuffer.mBufferLimitSize);
         if (i > 100) {
             return 100;
         }
@@ -892,7 +1167,9 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
     public final List getDeviceInfo() {
         String str;
         DeviceInventory deviceInventory = getEDM$1$1().getDeviceInventory();
-        ArrayList m = PortStatus_1_1$$ExternalSyntheticOutline0.m(" -----------------------------------------\n");
+        ArrayList m =
+                PortStatus_1_1$$ExternalSyntheticOutline0.m(
+                        " -----------------------------------------\n");
         m.add("OEM: " + Build.MANUFACTURER);
         m.add("DEVICE: " + Build.MODEL);
         m.add("PLATFORM: " + Build.VERSION.RELEASE);
@@ -939,7 +1216,10 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
     }
 
     public final int getMaximumLogSize(ContextInfo contextInfo) {
-        Admin admin = (Admin) this.mLinkedHashMap.get(Integer.valueOf(enforceAuditLogPermission(contextInfo).mCallerUid));
+        Admin admin =
+                (Admin)
+                        this.mLinkedHashMap.get(
+                                Integer.valueOf(enforceAuditLogPermission(contextInfo).mCallerUid));
         if (admin != null) {
             return (int) admin.mLogWritter.mCircularBuffer.mAdminMaximumSize;
         }
@@ -950,12 +1230,17 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         AuditLogRulesInfo auditLogRulesInfo = new AuditLogRulesInfo();
         ContentValues contentValues = new ContentValues();
         contentValues.put("adminUid", Integer.valueOf(i));
-        ArrayList arrayList = (ArrayList) this.mEdmStorageProvider.getValues("AUDITLOG", null, contentValues);
-        return !arrayList.isEmpty() ? extractRulesFromCv((ContentValues) arrayList.get(0)) : auditLogRulesInfo;
+        ArrayList arrayList =
+                (ArrayList) this.mEdmStorageProvider.getValues("AUDITLOG", null, contentValues);
+        return !arrayList.isEmpty()
+                ? extractRulesFromCv((ContentValues) arrayList.get(0))
+                : auditLogRulesInfo;
     }
 
     public final boolean isAuditLogEnabled(ContextInfo contextInfo) {
-        return this.mLinkedHashMap.get(Integer.valueOf(enforceAuditLogPermission(contextInfo).mCallerUid)) != null;
+        return this.mLinkedHashMap.get(
+                        Integer.valueOf(enforceAuditLogPermission(contextInfo).mCallerUid))
+                != null;
     }
 
     public final boolean isAuditLogEnabledAsUser(int i) {
@@ -966,7 +1251,11 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
             if (i == -1) {
                 return true;
             }
-            ((PersonaManagerAdapter) ((IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class))).getClass();
+            ((PersonaManagerAdapter)
+                            ((IPersonaManagerAdapter)
+                                    AdapterRegistry.mAdapterHandles.get(
+                                            IPersonaManagerAdapter.class)))
+                    .getClass();
             if (SemPersonaManager.isKnoxId(i)) {
                 if (checkOwnContainerOrSelf(i, intValue)) {
                     return true;
@@ -998,21 +1287,23 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void logEventAsUser(java.lang.String r20, int r21, int r22, int r23, java.util.List r24) {
+    public final void logEventAsUser(
+            java.lang.String r20, int r21, int r22, int r23, java.util.List r24) {
         /*
             Method dump skipped, instructions count: 874
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.auditlog.AuditLogService.logEventAsUser(java.lang.String, int, int, int, java.util.List):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.auditlog.AuditLogService.logEventAsUser(java.lang.String,"
+                    + " int, int, int, java.util.List):void");
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     public final void onAdminRemoved(int i) {
@@ -1048,20 +1339,45 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         }
     }
 
-    public final void redactedAuditLogger(ContextInfo contextInfo, int i, int i2, boolean z, int i3, String str, String str2, String str3) {
+    public final void redactedAuditLogger(
+            ContextInfo contextInfo,
+            int i,
+            int i2,
+            boolean z,
+            int i3,
+            String str,
+            String str2,
+            String str3) {
         if (checkAuditLogEnforce()) {
             auditLoggerInternal(contextInfo, i, i2, z, i3, str, str2, str3, -1);
         }
     }
 
-    public final boolean redactedAuditLoggerAsUser(ContextInfo contextInfo, int i, int i2, boolean z, int i3, String str, String str2, String str3, int i4) {
+    public final boolean redactedAuditLoggerAsUser(
+            ContextInfo contextInfo,
+            int i,
+            int i2,
+            boolean z,
+            int i3,
+            String str,
+            String str2,
+            String str3,
+            int i4) {
         String str4;
         if (!checkAuditLogEnforce()) {
             return false;
         }
         Matcher matcher = this.mPattern.matcher(str2);
         if (matcher.find()) {
-            str4 = matcher.replaceFirst("$1 " + this.mContext.getPackageManager().getNameForUid(UserHandle.getAppId(Integer.parseInt(matcher.group(2)))) + " $3");
+            str4 =
+                    matcher.replaceFirst(
+                            "$1 "
+                                    + this.mContext
+                                            .getPackageManager()
+                                            .getNameForUid(
+                                                    UserHandle.getAppId(
+                                                            Integer.parseInt(matcher.group(2))))
+                                    + " $3");
         } else {
             str4 = str2;
         }
@@ -1069,10 +1385,15 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         return true;
     }
 
-    public final boolean setAuditLogRules(ContextInfo contextInfo, AuditLogRulesInfo auditLogRulesInfo) {
+    public final boolean setAuditLogRules(
+            ContextInfo contextInfo, AuditLogRulesInfo auditLogRulesInfo) {
         ContextInfo enforceAuditLogPermission = enforceAuditLogPermission(contextInfo);
         int i = enforceAuditLogPermission.mCallerUid;
-        if (auditLogRulesInfo == null || auditLogRulesInfo.getSeverityRule() > 5 || auditLogRulesInfo.getSeverityRule() < 1 || auditLogRulesInfo.getOutcomeRule() < 0 || auditLogRulesInfo.getOutcomeRule() > 2) {
+        if (auditLogRulesInfo == null
+                || auditLogRulesInfo.getSeverityRule() > 5
+                || auditLogRulesInfo.getSeverityRule() < 1
+                || auditLogRulesInfo.getOutcomeRule() < 0
+                || auditLogRulesInfo.getOutcomeRule() > 2) {
             return false;
         }
         Admin admin = (Admin) this.mLinkedHashMap.get(Integer.valueOf(i));
@@ -1081,34 +1402,50 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
             contentValues.put("auditLogEnabled", String.valueOf(true));
         }
         StringBuilder sb = new StringBuilder();
-        if (auditLogRulesInfo.getGroupsRule() != null && !auditLogRulesInfo.getGroupsRule().isEmpty()) {
+        if (auditLogRulesInfo.getGroupsRule() != null
+                && !auditLogRulesInfo.getGroupsRule().isEmpty()) {
             Iterator it = auditLogRulesInfo.getGroupsRule().iterator();
             while (it.hasNext()) {
                 sb.append(((Integer) it.next()).toString() + ",");
             }
         }
         StringBuilder sb2 = new StringBuilder();
-        if (auditLogRulesInfo.getUsersRule() != null && !auditLogRulesInfo.getUsersRule().isEmpty()) {
+        if (auditLogRulesInfo.getUsersRule() != null
+                && !auditLogRulesInfo.getUsersRule().isEmpty()) {
             Iterator it2 = auditLogRulesInfo.getUsersRule().iterator();
             while (it2.hasNext()) {
                 sb2.append(((Integer) it2.next()).toString() + ",");
             }
         }
-        contentValues.put("auditLogRuleOutcome", Integer.valueOf(auditLogRulesInfo.getOutcomeRule()));
-        contentValues.put("auditLogRuleSeverity", Integer.valueOf(auditLogRulesInfo.getSeverityRule()));
+        contentValues.put(
+                "auditLogRuleOutcome", Integer.valueOf(auditLogRulesInfo.getOutcomeRule()));
+        contentValues.put(
+                "auditLogRuleSeverity", Integer.valueOf(auditLogRulesInfo.getSeverityRule()));
         contentValues.put("auditLogRuleGroups", sb.toString());
         contentValues.put("auditLogRuleUsers", sb2.toString());
         ContentValues contentValues2 = new ContentValues();
         contentValues2.put("adminUid", Integer.valueOf(i));
         boolean put = this.mEdmStorageProvider.put("AUDITLOG", contentValues, contentValues2);
         if (!put) {
-            InformFailure.getInstance().broadcastFailure("Cannot set filter on Database", admin != null ? admin.mPackageName : "");
+            InformFailure.getInstance()
+                    .broadcastFailure(
+                            "Cannot set filter on Database",
+                            admin != null ? admin.mPackageName : "");
         }
         if (admin != null) {
             admin.mAuditLogRulesInfo = auditLogRulesInfo;
         }
         if (put) {
-            redactedAuditLoggerAsUser(enforceAuditLogPermission, 5, 2, true, Process.myPid(), "AuditLogService", "AuditLog filter rules has changed.", null, UserHandle.getUserId(i));
+            redactedAuditLoggerAsUser(
+                    enforceAuditLogPermission,
+                    5,
+                    2,
+                    true,
+                    Process.myPid(),
+                    "AuditLogService",
+                    "AuditLog filter rules has changed.",
+                    null,
+                    UserHandle.getUserId(i));
         }
         return put;
     }
@@ -1117,10 +1454,13 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
         StatFs statFs = new StatFs(Environment.getDataDirectory().getPath());
         long availableBlocks = ((statFs.getAvailableBlocks() * statFs.getBlockSize()) * 5) / 100;
         if (availableBlocks < 10485760 || availableBlocks > 52428800) {
-            if (availableBlocks >= 52428800 && this.mEdmStorageProvider.putLong(i, "AUDITLOG", 52428800L, "auditLogBufferSize")) {
+            if (availableBlocks >= 52428800
+                    && this.mEdmStorageProvider.putLong(
+                            i, "AUDITLOG", 52428800L, "auditLogBufferSize")) {
                 return 52428800L;
             }
-        } else if (this.mEdmStorageProvider.putLong(i, "AUDITLOG", availableBlocks, "auditLogBufferSize")) {
+        } else if (this.mEdmStorageProvider.putLong(
+                i, "AUDITLOG", availableBlocks, "auditLogBufferSize")) {
             return availableBlocks;
         }
         return -1L;
@@ -1133,9 +1473,12 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
             int i2 = enforceAuditLogPermission.mCallerUid;
             Admin admin = (Admin) this.mLinkedHashMap.get(Integer.valueOf(i2));
             if (admin != null) {
-                boolean putInt = this.mEdmStorageProvider.putInt(i2, 0, i, "AUDITLOG", "auditCriticalSize");
+                boolean putInt =
+                        this.mEdmStorageProvider.putInt(i2, 0, i, "AUDITLOG", "auditCriticalSize");
                 if (!putInt) {
-                    InformFailure.getInstance().broadcastFailure("Cannot set critcal log size on Databank", admin.mPackageName);
+                    InformFailure.getInstance()
+                            .broadcastFailure(
+                                    "Cannot set critcal log size on Databank", admin.mPackageName);
                 }
                 CircularBuffer circularBuffer = admin.mLogWritter.mCircularBuffer;
                 circularBuffer.mAdminCriticalSize = i;
@@ -1143,7 +1486,17 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
                 z = putInt;
             }
             if (z) {
-                redactedAuditLoggerAsUser(enforceAuditLogPermission, 5, 2, true, Process.myPid(), "AuditLogService", String.format("AuditLog critical size has changed to %d", Integer.valueOf(i)), null, UserHandle.getUserId(i2));
+                redactedAuditLoggerAsUser(
+                        enforceAuditLogPermission,
+                        5,
+                        2,
+                        true,
+                        Process.myPid(),
+                        "AuditLogService",
+                        String.format(
+                                "AuditLog critical size has changed to %d", Integer.valueOf(i)),
+                        null,
+                        UserHandle.getUserId(i2));
             }
         }
         return z;
@@ -1156,9 +1509,12 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
             int i2 = enforceAuditLogPermission.mCallerUid;
             Admin admin = (Admin) this.mLinkedHashMap.get(Integer.valueOf(i2));
             if (admin != null) {
-                boolean putInt = this.mEdmStorageProvider.putInt(i2, 0, i, "AUDITLOG", "auditMaximumSize");
+                boolean putInt =
+                        this.mEdmStorageProvider.putInt(i2, 0, i, "AUDITLOG", "auditMaximumSize");
                 if (!putInt) {
-                    InformFailure.getInstance().broadcastFailure("Cannot set maximum log size on databank", admin.mPackageName);
+                    InformFailure.getInstance()
+                            .broadcastFailure(
+                                    "Cannot set maximum log size on databank", admin.mPackageName);
                 }
                 CircularBuffer circularBuffer = admin.mLogWritter.mCircularBuffer;
                 circularBuffer.mAdminMaximumSize = i;
@@ -1166,13 +1522,22 @@ public final class AuditLogService extends IAuditLog.Stub implements EnterpriseS
                 z = putInt;
             }
             if (z) {
-                redactedAuditLoggerAsUser(enforceAuditLogPermission, 5, 2, true, Process.myPid(), "AuditLogService", String.format("AuditLog maximum size has changed to %d", Integer.valueOf(i)), null, UserHandle.getUserId(i2));
+                redactedAuditLoggerAsUser(
+                        enforceAuditLogPermission,
+                        5,
+                        2,
+                        true,
+                        Process.myPid(),
+                        "AuditLogService",
+                        String.format(
+                                "AuditLog maximum size has changed to %d", Integer.valueOf(i)),
+                        null,
+                        UserHandle.getUserId(i2));
             }
         }
         return z;
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void systemReady() {
-    }
+    public final void systemReady() {}
 }

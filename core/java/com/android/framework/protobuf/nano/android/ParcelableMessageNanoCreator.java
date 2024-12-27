@@ -3,13 +3,16 @@ package com.android.framework.protobuf.nano.android;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 
 /* loaded from: classes3.dex */
-public final class ParcelableMessageNanoCreator<T extends MessageNano> implements Parcelable.Creator<T> {
+public final class ParcelableMessageNanoCreator<T extends MessageNano>
+        implements Parcelable.Creator<T> {
     private static final String TAG = "PMNCreator";
     private final Class<T> mClazz;
 
@@ -25,7 +28,9 @@ public final class ParcelableMessageNanoCreator<T extends MessageNano> implement
         byte[] data = in.createByteArray();
         T proto = null;
         try {
-            Class<?> clazz = Class.forName(className, false, getClass().getClassLoader()).asSubclass(MessageNano.class);
+            Class<?> clazz =
+                    Class.forName(className, false, getClass().getClassLoader())
+                            .asSubclass(MessageNano.class);
             Object instance = clazz.getConstructor(new Class[0]).newInstance(new Object[0]);
             proto = (MessageNano) instance;
             MessageNano.mergeFrom(proto, data);
@@ -56,7 +61,8 @@ public final class ParcelableMessageNanoCreator<T extends MessageNano> implement
         return (T[]) ((MessageNano[]) Array.newInstance((Class<?>) this.mClazz, i));
     }
 
-    static <T extends MessageNano> void writeToParcel(Class<T> clazz, MessageNano message, Parcel out) {
+    static <T extends MessageNano> void writeToParcel(
+            Class<T> clazz, MessageNano message, Parcel out) {
         out.writeString(clazz.getName());
         out.writeByteArray(MessageNano.toByteArray(message));
     }

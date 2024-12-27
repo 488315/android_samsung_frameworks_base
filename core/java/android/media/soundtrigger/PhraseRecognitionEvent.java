@@ -3,27 +3,30 @@ package android.media.soundtrigger;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class PhraseRecognitionEvent implements Parcelable {
-    public static final Parcelable.Creator<PhraseRecognitionEvent> CREATOR = new Parcelable.Creator<PhraseRecognitionEvent>() { // from class: android.media.soundtrigger.PhraseRecognitionEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhraseRecognitionEvent createFromParcel(Parcel _aidl_source) {
-            PhraseRecognitionEvent _aidl_out = new PhraseRecognitionEvent();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<PhraseRecognitionEvent> CREATOR =
+            new Parcelable.Creator<PhraseRecognitionEvent>() { // from class:
+                // android.media.soundtrigger.PhraseRecognitionEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhraseRecognitionEvent createFromParcel(Parcel _aidl_source) {
+                    PhraseRecognitionEvent _aidl_out = new PhraseRecognitionEvent();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhraseRecognitionEvent[] newArray(int _aidl_size) {
-            return new PhraseRecognitionEvent[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhraseRecognitionEvent[] newArray(int _aidl_size) {
+                    return new PhraseRecognitionEvent[_aidl_size];
+                }
+            };
     public RecognitionEvent common;
     public PhraseRecognitionExtra[] phraseExtras;
 
@@ -65,7 +68,9 @@ public class PhraseRecognitionEvent implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.phraseExtras = (PhraseRecognitionExtra[]) _aidl_parcel.createTypedArray(PhraseRecognitionExtra.CREATOR);
+                this.phraseExtras =
+                        (PhraseRecognitionExtra[])
+                                _aidl_parcel.createTypedArray(PhraseRecognitionExtra.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -95,7 +100,8 @@ public class PhraseRecognitionEvent implements Parcelable {
             return false;
         }
         PhraseRecognitionEvent that = (PhraseRecognitionEvent) other;
-        if (Objects.deepEquals(this.common, that.common) && Objects.deepEquals(this.phraseExtras, that.phraseExtras)) {
+        if (Objects.deepEquals(this.common, that.common)
+                && Objects.deepEquals(this.phraseExtras, that.phraseExtras)) {
             return true;
         }
         return false;

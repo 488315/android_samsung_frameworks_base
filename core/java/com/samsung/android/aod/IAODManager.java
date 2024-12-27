@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -39,7 +40,9 @@ public interface IAODManager extends IInterface {
 
     int setLiveClockImage(int i, int i2, byte[] bArr, String str) throws RemoteException;
 
-    int setLiveClockInfo(int i, long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8) throws RemoteException;
+    int setLiveClockInfo(
+            int i, long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8)
+            throws RemoteException;
 
     void setLiveClockNeedle(byte[] bArr) throws RemoteException;
 
@@ -51,7 +54,8 @@ public interface IAODManager extends IInterface {
 
     void updateAODTspRect(int i, int i2, int i3, int i4, String str) throws RemoteException;
 
-    void writeAODCommand(String str, String str2, String str3, String str4, String str5) throws RemoteException;
+    void writeAODCommand(String str, String str2, String str3, String str4, String str5)
+            throws RemoteException;
 
     public static class Default implements IAODManager {
         @Override // com.samsung.android.aod.IAODManager
@@ -60,29 +64,38 @@ public interface IAODManager extends IInterface {
         }
 
         @Override // com.samsung.android.aod.IAODManager
-        public void updateAODTspRect(int width, int height, int x, int y, String packageName) throws RemoteException {
-        }
+        public void updateAODTspRect(int width, int height, int x, int y, String packageName)
+                throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
-        public void updateAODNotiTspRect(int width, int height, int x, int y, String packageName) throws RemoteException {
-        }
+        public void updateAODNotiTspRect(int width, int height, int x, int y, String packageName)
+                throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
-        public void writeAODCommand(String location, String cmd, String arg1, String arg2, String arg3) throws RemoteException {
-        }
+        public void writeAODCommand(
+                String location, String cmd, String arg1, String arg2, String arg3)
+                throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
-        public void addLogText(List<String> logs) throws RemoteException {
-        }
+        public void addLogText(List<String> logs) throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
-        public int setLiveClockInfo(int type, long en, long interval, long hour, long min, long second, long ms, long pos_x, long pos_y) throws RemoteException {
+        public int setLiveClockInfo(
+                int type,
+                long en,
+                long interval,
+                long hour,
+                long min,
+                long second,
+                long ms,
+                long pos_x,
+                long pos_y)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.aod.IAODManager
-        public void setLiveClockNeedle(byte[] img_buf) throws RemoteException {
-        }
+        public void setLiveClockNeedle(byte[] img_buf) throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
         public String getActiveImageInfo() throws RemoteException {
@@ -90,36 +103,29 @@ public interface IAODManager extends IInterface {
         }
 
         @Override // com.samsung.android.aod.IAODManager
-        public void readyToScreenTurningOn() throws RemoteException {
-        }
+        public void readyToScreenTurningOn() throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
-        public void registerAODListener(IBinder binder) throws RemoteException {
-        }
+        public void registerAODListener(IBinder binder) throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
-        public void unregisterAODListener(IBinder binder) throws RemoteException {
-        }
+        public void unregisterAODListener(IBinder binder) throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
-        public void registerAODDozeCallback(IBinder binder) throws RemoteException {
-        }
+        public void registerAODDozeCallback(IBinder binder) throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
-        public void unregisterAODDozeCallback(IBinder binder) throws RemoteException {
-        }
+        public void unregisterAODDozeCallback(IBinder binder) throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
-        public void acquireDoze(IBinder binder, String tag, String packageName) throws RemoteException {
-        }
+        public void acquireDoze(IBinder binder, String tag, String packageName)
+                throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
-        public void releaseDoze(IBinder binder) throws RemoteException {
-        }
+        public void releaseDoze(IBinder binder) throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
-        public void requestAODToast(String packageName, AODToast toast) throws RemoteException {
-        }
+        public void requestAODToast(String packageName, AODToast toast) throws RemoteException {}
 
         @Override // com.samsung.android.aod.IAODManager
         public boolean isSViewCoverBrightnessHigh() throws RemoteException {
@@ -127,12 +133,14 @@ public interface IAODManager extends IInterface {
         }
 
         @Override // com.samsung.android.aod.IAODManager
-        public int setLiveClockImage(int nodeType, int clockType, byte[] img_buf, String info) throws RemoteException {
+        public int setLiveClockImage(int nodeType, int clockType, byte[] img_buf, String info)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.aod.IAODManager
-        public int setLiveClockCommand(int nodeType, int cmd, int dataSize, int[] dataArray) throws RemoteException {
+        public int setLiveClockCommand(int nodeType, int cmd, int dataSize, int[] dataArray)
+                throws RemoteException {
             return 0;
         }
 
@@ -142,8 +150,7 @@ public interface IAODManager extends IInterface {
         }
 
         @Override // com.samsung.android.aod.IAODManager
-        public void setGripData(String cmd) throws RemoteException {
-        }
+        public void setGripData(String cmd) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -151,7 +158,7 @@ public interface IAODManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAODManager {
+    public abstract static class Stub extends Binder implements IAODManager {
         static final int TRANSACTION_acquireDoze = 14;
         static final int TRANSACTION_addLogText = 5;
         static final int TRANSACTION_getActiveImageInfo = 8;
@@ -249,7 +256,8 @@ public interface IAODManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAODManager.DESCRIPTOR);
             }
@@ -310,7 +318,10 @@ public interface IAODManager extends IInterface {
                     long _arg7 = data.readLong();
                     long _arg8 = data.readLong();
                     data.enforceNoDataAvail();
-                    int _result2 = setLiveClockInfo(_arg05, _arg14, _arg24, _arg34, _arg44, _arg5, _arg6, _arg7, _arg8);
+                    int _result2 =
+                            setLiveClockInfo(
+                                    _arg05, _arg14, _arg24, _arg34, _arg44, _arg5, _arg6, _arg7,
+                                    _arg8);
                     reply.writeNoException();
                     reply.writeInt(_result2);
                     return true;
@@ -450,7 +461,8 @@ public interface IAODManager extends IInterface {
             }
 
             @Override // com.samsung.android.aod.IAODManager
-            public void updateAODTspRect(int width, int height, int x, int y, String packageName) throws RemoteException {
+            public void updateAODTspRect(int width, int height, int x, int y, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -469,7 +481,9 @@ public interface IAODManager extends IInterface {
             }
 
             @Override // com.samsung.android.aod.IAODManager
-            public void updateAODNotiTspRect(int width, int height, int x, int y, String packageName) throws RemoteException {
+            public void updateAODNotiTspRect(
+                    int width, int height, int x, int y, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -488,7 +502,9 @@ public interface IAODManager extends IInterface {
             }
 
             @Override // com.samsung.android.aod.IAODManager
-            public void writeAODCommand(String location, String cmd, String arg1, String arg2, String arg3) throws RemoteException {
+            public void writeAODCommand(
+                    String location, String cmd, String arg1, String arg2, String arg3)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -522,7 +538,17 @@ public interface IAODManager extends IInterface {
             }
 
             @Override // com.samsung.android.aod.IAODManager
-            public int setLiveClockInfo(int type, long en, long interval, long hour, long min, long second, long ms, long pos_x, long pos_y) throws RemoteException {
+            public int setLiveClockInfo(
+                    int type,
+                    long en,
+                    long interval,
+                    long hour,
+                    long min,
+                    long second,
+                    long ms,
+                    long pos_x,
+                    long pos_y)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -692,7 +718,8 @@ public interface IAODManager extends IInterface {
             }
 
             @Override // com.samsung.android.aod.IAODManager
-            public void acquireDoze(IBinder binder, String tag, String packageName) throws RemoteException {
+            public void acquireDoze(IBinder binder, String tag, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -756,7 +783,8 @@ public interface IAODManager extends IInterface {
             }
 
             @Override // com.samsung.android.aod.IAODManager
-            public int setLiveClockImage(int nodeType, int clockType, byte[] img_buf, String info) throws RemoteException {
+            public int setLiveClockImage(int nodeType, int clockType, byte[] img_buf, String info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -776,7 +804,8 @@ public interface IAODManager extends IInterface {
             }
 
             @Override // com.samsung.android.aod.IAODManager
-            public int setLiveClockCommand(int nodeType, int cmd, int dataSize, int[] dataArray) throws RemoteException {
+            public int setLiveClockCommand(int nodeType, int cmd, int dataSize, int[] dataArray)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

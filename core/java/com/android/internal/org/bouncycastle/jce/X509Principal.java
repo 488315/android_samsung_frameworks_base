@@ -5,6 +5,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.asn1.x509.X509Name;
+
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Hashtable;
@@ -61,7 +62,8 @@ public class X509Principal extends X509Name implements Principal {
         return toString();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.util.Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.util.Encodable
     public byte[] getEncoded() {
         try {
             return getEncoded(ASN1Encoding.DER);

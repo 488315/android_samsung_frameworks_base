@@ -1,8 +1,9 @@
 package com.samsung.android.sume.core.filter;
 
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
-import com.samsung.android.sume.core.filter.MediaFilterRetriever;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -23,7 +24,8 @@ public final class MediaFilterRetriever {
         boolean predicate(MediaFilter mediaFilter);
     }
 
-    public MediaFilterRetriever addPredicateHandler(Predictor predictor, PredicateHandler predicateHandler) {
+    public MediaFilterRetriever addPredicateHandler(
+            Predictor predictor, PredicateHandler predicateHandler) {
         this.predictorMap.put(predictor, predicateHandler);
         return this;
     }
@@ -35,18 +37,28 @@ public final class MediaFilterRetriever {
 
     public void retrieve(final DecorateFilter decorateFilter, final MediaFilter parent) {
         Log.d(TAG, "retrieve DecorateFilter: " + decorateFilter);
-        this.predictorMap.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                MediaFilterRetriever.lambda$retrieve$0(DecorateFilter.this, parent, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
-            }
-        });
+        this.predictorMap.forEach(
+                new BiConsumer() { // from class:
+                                   // com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda0
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        MediaFilterRetriever.lambda$retrieve$0(
+                                DecorateFilter.this,
+                                parent,
+                                (MediaFilterRetriever.Predictor) obj,
+                                (MediaFilterRetriever.PredicateHandler) obj2);
+                    }
+                });
         if (decorateFilter.getSuccessorFilter() != null) {
             decorateFilter.getSuccessorFilter().accept(this, decorateFilter);
         }
     }
 
-    static /* synthetic */ void lambda$retrieve$0(DecorateFilter decorateFilter, MediaFilter parent, Predictor predictor, PredicateHandler predicateHandler) {
+    static /* synthetic */ void lambda$retrieve$0(
+            DecorateFilter decorateFilter,
+            MediaFilter parent,
+            Predictor predictor,
+            PredicateHandler predicateHandler) {
         if (predictor.predicate(decorateFilter)) {
             predicateHandler.onPredicate(decorateFilter, parent);
         }
@@ -54,12 +66,18 @@ public final class MediaFilterRetriever {
 
     public void retrieve(final ImgpDecorateFilter imgpDecorateFilter, final MediaFilter parent) {
         Log.d(TAG, "retrieve ImgpDecorateFilter: " + imgpDecorateFilter);
-        this.predictorMap.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda4
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                MediaFilterRetriever.lambda$retrieve$1(ImgpDecorateFilter.this, parent, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
-            }
-        });
+        this.predictorMap.forEach(
+                new BiConsumer() { // from class:
+                                   // com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda4
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        MediaFilterRetriever.lambda$retrieve$1(
+                                ImgpDecorateFilter.this,
+                                parent,
+                                (MediaFilterRetriever.Predictor) obj,
+                                (MediaFilterRetriever.PredicateHandler) obj2);
+                    }
+                });
         if (imgpDecorateFilter.getPreFilter() != null) {
             imgpDecorateFilter.getPreFilter().accept(this, imgpDecorateFilter);
         }
@@ -71,7 +89,11 @@ public final class MediaFilterRetriever {
         }
     }
 
-    static /* synthetic */ void lambda$retrieve$1(ImgpDecorateFilter imgpDecorateFilter, MediaFilter parent, Predictor predictor, PredicateHandler predicateHandler) {
+    static /* synthetic */ void lambda$retrieve$1(
+            ImgpDecorateFilter imgpDecorateFilter,
+            MediaFilter parent,
+            Predictor predictor,
+            PredicateHandler predicateHandler) {
         if (predictor.predicate(imgpDecorateFilter)) {
             predicateHandler.onPredicate(imgpDecorateFilter, parent);
         }
@@ -79,12 +101,16 @@ public final class MediaFilterRetriever {
 
     public void retrieve(final MediaFilterGroup filterGroup, MediaFilter parent) {
         Log.d(TAG, "retrieve MediaFilterGroup: " + filterGroup);
-        filterGroup.stream().forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda3
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                MediaFilterRetriever.this.m9139xba46685a(filterGroup, (MediaFilter) obj);
-            }
-        });
+        filterGroup.stream()
+                .forEach(
+                        new Consumer() { // from class:
+                                         // com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda3
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                MediaFilterRetriever.this.m9139xba46685a(
+                                        filterGroup, (MediaFilter) obj);
+                            }
+                        });
     }
 
     /* renamed from: lambda$retrieve$2$com-samsung-android-sume-core-filter-MediaFilterRetriever, reason: not valid java name */
@@ -92,17 +118,28 @@ public final class MediaFilterRetriever {
         it.accept(this, filterGroup);
     }
 
-    public void retrieve(final MediaFilterPlaceHolder mediaFilterPlaceHolder, final MediaFilter parent) {
+    public void retrieve(
+            final MediaFilterPlaceHolder mediaFilterPlaceHolder, final MediaFilter parent) {
         Log.d(TAG, "retrieve MediaFilterPlaceHolder: " + mediaFilterPlaceHolder);
-        this.predictorMap.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda1
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                MediaFilterRetriever.lambda$retrieve$3(MediaFilterPlaceHolder.this, parent, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
-            }
-        });
+        this.predictorMap.forEach(
+                new BiConsumer() { // from class:
+                                   // com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda1
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        MediaFilterRetriever.lambda$retrieve$3(
+                                MediaFilterPlaceHolder.this,
+                                parent,
+                                (MediaFilterRetriever.Predictor) obj,
+                                (MediaFilterRetriever.PredicateHandler) obj2);
+                    }
+                });
     }
 
-    static /* synthetic */ void lambda$retrieve$3(MediaFilterPlaceHolder mediaFilterPlaceHolder, MediaFilter parent, Predictor predictor, PredicateHandler predicateHandler) {
+    static /* synthetic */ void lambda$retrieve$3(
+            MediaFilterPlaceHolder mediaFilterPlaceHolder,
+            MediaFilter parent,
+            Predictor predictor,
+            PredicateHandler predicateHandler) {
         if (predictor.predicate(mediaFilterPlaceHolder)) {
             predicateHandler.onPredicate(mediaFilterPlaceHolder, parent);
         }
@@ -123,16 +160,26 @@ public final class MediaFilterRetriever {
             retrieve((MediaFilterPlaceHolder) mediaFilter, parent);
         } else {
             Log.d(TAG, "retrieve MediaFilter: " + mediaFilter);
-            this.predictorMap.forEach(new BiConsumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda2
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    MediaFilterRetriever.lambda$retrieve$4(MediaFilter.this, parent, (MediaFilterRetriever.Predictor) obj, (MediaFilterRetriever.PredicateHandler) obj2);
-                }
-            });
+            this.predictorMap.forEach(
+                    new BiConsumer() { // from class:
+                                       // com.samsung.android.sume.core.filter.MediaFilterRetriever$$ExternalSyntheticLambda2
+                        @Override // java.util.function.BiConsumer
+                        public final void accept(Object obj, Object obj2) {
+                            MediaFilterRetriever.lambda$retrieve$4(
+                                    MediaFilter.this,
+                                    parent,
+                                    (MediaFilterRetriever.Predictor) obj,
+                                    (MediaFilterRetriever.PredicateHandler) obj2);
+                        }
+                    });
         }
     }
 
-    static /* synthetic */ void lambda$retrieve$4(MediaFilter mediaFilter, MediaFilter parent, Predictor predictor, PredicateHandler predicateHandler) {
+    static /* synthetic */ void lambda$retrieve$4(
+            MediaFilter mediaFilter,
+            MediaFilter parent,
+            Predictor predictor,
+            PredicateHandler predicateHandler) {
         if (predictor.predicate(mediaFilter)) {
             predicateHandler.onPredicate(mediaFilter, parent);
         }

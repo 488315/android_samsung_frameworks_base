@@ -1,6 +1,7 @@
 package com.android.server.hdmi;
 
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -25,7 +26,20 @@ public final class HdmiCecPowerStatusController {
                 int i2 = this.mPowerStatus;
                 Iterator it = ((ArrayList) hdmiControlService.getAllCecLocalDevices()).iterator();
                 while (it.hasNext()) {
-                    hdmiControlService.sendCecCommand(HdmiCecMessage.build(((HdmiCecLocalDevice) it.next()).getDeviceInfo().getLogicalAddress(), 15, 144, new byte[]{(byte) (i2 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT)}), null);
+                    hdmiControlService.sendCecCommand(
+                            HdmiCecMessage.build(
+                                    ((HdmiCecLocalDevice) it.next())
+                                            .getDeviceInfo()
+                                            .getLogicalAddress(),
+                                    15,
+                                    144,
+                                    new byte[] {
+                                        (byte)
+                                                (i2
+                                                        & IDnsResolverUnsolicitedEventListener
+                                                                .DNS_HEALTH_RESULT_TIMEOUT)
+                                    }),
+                            null);
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.android.server.pm;
 
 import android.os.UserHandle;
+
 import com.android.internal.pm.parsing.pkg.ParsedPackage;
 import com.android.server.pm.pkg.AndroidPackage;
 
@@ -22,13 +23,27 @@ final class ScanRequest {
     public final SharedUserSetting mSharedUserSetting;
     public final UserHandle mUser;
 
-    public ScanRequest(ParsedPackage parsedPackage, SharedUserSetting sharedUserSetting, AndroidPackage androidPackage, PackageSetting packageSetting, SharedUserSetting sharedUserSetting2, PackageSetting packageSetting2, PackageSetting packageSetting3, String str, int i, int i2, boolean z, UserHandle userHandle, String str2) {
+    public ScanRequest(
+            ParsedPackage parsedPackage,
+            SharedUserSetting sharedUserSetting,
+            AndroidPackage androidPackage,
+            PackageSetting packageSetting,
+            SharedUserSetting sharedUserSetting2,
+            PackageSetting packageSetting2,
+            PackageSetting packageSetting3,
+            String str,
+            int i,
+            int i2,
+            boolean z,
+            UserHandle userHandle,
+            String str2) {
         this.mParsedPackage = parsedPackage;
         this.mOldPkg = androidPackage;
         this.mPkgSetting = packageSetting;
         this.mOldSharedUserSetting = sharedUserSetting;
         this.mSharedUserSetting = sharedUserSetting2;
-        this.mOldPkgSetting = packageSetting == null ? null : new PackageSetting(packageSetting, false);
+        this.mOldPkgSetting =
+                packageSetting == null ? null : new PackageSetting(packageSetting, false);
         this.mDisabledPkgSetting = packageSetting2;
         this.mOriginalPkgSetting = packageSetting3;
         this.mRealPkgName = str;

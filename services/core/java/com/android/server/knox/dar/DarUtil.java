@@ -5,13 +5,23 @@ import android.net.INetd;
 import android.os.Binder;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.android.server.input.KeyboardMetricsCollector;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public abstract class DarUtil {
     public static String credentialTypeToString(int i) {
-        return i != -1 ? i != 1 ? i != 3 ? i != 4 ? VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown ") : "Password" : "Pin" : "Pattern" : KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG;
+        return i != -1
+                ? i != 1
+                        ? i != 3
+                                ? i != 4
+                                        ? VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                                i, "Unknown ")
+                                        : "Password"
+                                : "Pin"
+                        : "Pattern"
+                : KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG;
     }
 
     public static boolean isDaemonRunning() {
@@ -40,9 +50,9 @@ public abstract class DarUtil {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:20:0x002e, code lost:
-    
-        if (com.samsung.android.knox.SemPersonaManager.isDoEnabled(0) != false) goto L16;
-     */
+
+       if (com.samsung.android.knox.SemPersonaManager.isDoEnabled(0) != false) goto L16;
+    */
     /* JADX WARN: Removed duplicated region for block: B:13:0x0033  */
     /* JADX WARN: Removed duplicated region for block: B:16:0x0040  */
     /*
@@ -89,6 +99,8 @@ public abstract class DarUtil {
         L4d:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.dar.DarUtil.isEnterpriseUser(android.content.pm.UserInfo):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.knox.dar.DarUtil.isEnterpriseUser(android.content.pm.UserInfo):boolean");
     }
 }

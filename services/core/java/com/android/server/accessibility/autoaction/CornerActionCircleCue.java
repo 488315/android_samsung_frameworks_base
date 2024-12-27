@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -49,7 +50,9 @@ public final class CornerActionCircleCue {
             layoutParams.gravity = 51;
             layoutParams.samsungFlags |= 131072;
             layoutParams.layoutInDisplayCutoutMode = 1;
-            View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.decor_caption, (ViewGroup) null);
+            View inflate =
+                    LayoutInflater.from(this.mContext)
+                            .inflate(R.layout.decor_caption, (ViewGroup) null);
             this.mView = inflate;
             inflate.bringToFront();
             this.mView.invalidate();
@@ -77,7 +80,12 @@ public final class CornerActionCircleCue {
             this.mView.measure(0, 0);
             this.mWidth = this.mView.getMeasuredWidth();
             this.mWindowManager.addView(this.mView, this.mParams);
-            this.mNavigationBarHeight = this.mContext.getResources().getBoolean(R.bool.config_sms_decode_gsm_8bit_data) ? this.mContext.getResources().getDimensionPixelSize(R.dimen.resolver_max_collapsed_height) : 0;
+            this.mNavigationBarHeight =
+                    this.mContext.getResources().getBoolean(R.bool.config_sms_decode_gsm_8bit_data)
+                            ? this.mContext
+                                    .getResources()
+                                    .getDimensionPixelSize(R.dimen.resolver_max_collapsed_height)
+                            : 0;
         }
     }
 

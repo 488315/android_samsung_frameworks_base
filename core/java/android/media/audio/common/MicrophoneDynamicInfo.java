@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class MicrophoneDynamicInfo implements Parcelable {
-    public static final Parcelable.Creator<MicrophoneDynamicInfo> CREATOR = new Parcelable.Creator<MicrophoneDynamicInfo>() { // from class: android.media.audio.common.MicrophoneDynamicInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MicrophoneDynamicInfo createFromParcel(Parcel _aidl_source) {
-            MicrophoneDynamicInfo _aidl_out = new MicrophoneDynamicInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<MicrophoneDynamicInfo> CREATOR =
+            new Parcelable.Creator<MicrophoneDynamicInfo>() { // from class:
+                // android.media.audio.common.MicrophoneDynamicInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MicrophoneDynamicInfo createFromParcel(Parcel _aidl_source) {
+                    MicrophoneDynamicInfo _aidl_out = new MicrophoneDynamicInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MicrophoneDynamicInfo[] newArray(int _aidl_size) {
-            return new MicrophoneDynamicInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MicrophoneDynamicInfo[] newArray(int _aidl_size) {
+                    return new MicrophoneDynamicInfo[_aidl_size];
+                }
+            };
     public int[] channelMapping;
     public String id;
 
@@ -101,7 +104,8 @@ public class MicrophoneDynamicInfo implements Parcelable {
             return false;
         }
         MicrophoneDynamicInfo that = (MicrophoneDynamicInfo) other;
-        if (Objects.deepEquals(this.id, that.id) && Objects.deepEquals(this.channelMapping, that.channelMapping)) {
+        if (Objects.deepEquals(this.id, that.id)
+                && Objects.deepEquals(this.channelMapping, that.channelMapping)) {
             return true;
         }
         return false;

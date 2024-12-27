@@ -2,6 +2,7 @@ package android.renderscript;
 
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+
 import java.io.File;
 import java.io.InputStream;
 
@@ -100,7 +101,9 @@ public class FileA3D extends BaseObj {
         String[] names = new String[numFileEntries];
         this.mRS.nFileA3DGetIndexEntries(getID(this.mRS), numFileEntries, ids, names);
         for (int i = 0; i < numFileEntries; i++) {
-            this.mFileEntries[i] = new IndexEntry(this.mRS, i, getID(this.mRS), names[i], EntryType.toEntryType(ids[i]));
+            this.mFileEntries[i] =
+                    new IndexEntry(
+                            this.mRS, i, getID(this.mRS), names[i], EntryType.toEntryType(ids[i]));
         }
     }
 

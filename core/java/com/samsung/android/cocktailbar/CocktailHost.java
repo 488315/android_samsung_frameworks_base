@@ -12,8 +12,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Slog;
 import android.widget.RemoteViews;
-import com.samsung.android.cocktailbar.ICocktailBarService;
-import com.samsung.android.cocktailbar.ICocktailHost;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes5.dex */
@@ -112,7 +111,8 @@ public class CocktailHost {
         }
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void partiallyUpdateHelpView(int cocktailId, RemoteViews helpView, int userId) throws RemoteException {
+        public void partiallyUpdateHelpView(int cocktailId, RemoteViews helpView, int userId)
+                throws RemoteException {
             Handler handler = this.mWeakHandler.get();
             if (handler == null) {
                 return;
@@ -230,7 +230,9 @@ public class CocktailHost {
         }
 
         @Override // com.samsung.android.cocktailbar.ICocktailHost
-        public void setPullToRefresh(int cocktailId, int viewId, PendingIntent pendingIntent, int userId) throws RemoteException {
+        public void setPullToRefresh(
+                int cocktailId, int viewId, PendingIntent pendingIntent, int userId)
+                throws RemoteException {
             Handler handler = this.mWeakHandler.get();
             if (handler == null) {
                 return;
@@ -282,7 +284,8 @@ public class CocktailHost {
                     CocktailHost.this.updateCocktail(msg.arg1, (Cocktail) msg.obj, msg.arg2);
                     break;
                 case 2:
-                    CocktailHost.this.partiallyUpdateCocktail(msg.arg1, (RemoteViews) msg.obj, msg.arg2);
+                    CocktailHost.this.partiallyUpdateCocktail(
+                            msg.arg1, (RemoteViews) msg.obj, msg.arg2);
                     break;
                 case 3:
                     CocktailHost.this.removeCocktail(msg.arg1, msg.arg2);
@@ -291,10 +294,12 @@ public class CocktailHost {
                     CocktailHost.this.showCocktail(msg.arg1, msg.arg2);
                     break;
                 case 5:
-                    CocktailHost.this.closeCocktail(msg.arg1, msg.arg2, ((Integer) msg.obj).intValue());
+                    CocktailHost.this.closeCocktail(
+                            msg.arg1, msg.arg2, ((Integer) msg.obj).intValue());
                     break;
                 case 6:
-                    CocktailHost.this.viewDataChanged(msg.arg1, msg.arg2, ((Integer) msg.obj).intValue());
+                    CocktailHost.this.viewDataChanged(
+                            msg.arg1, msg.arg2, ((Integer) msg.obj).intValue());
                     break;
                 case 7:
                     CocktailHost.this.updateToolLauncher(msg.arg1);
@@ -312,13 +317,15 @@ public class CocktailHost {
                     CocktailHost.this.setPullToRefresh(msg.arg1, msg.arg2, (PendingIntent) msg.obj);
                     break;
                 case 14:
-                    CocktailHost.this.partiallyUpdateHelpView(msg.arg1, (RemoteViews) msg.obj, msg.arg2);
+                    CocktailHost.this.partiallyUpdateHelpView(
+                            msg.arg1, (RemoteViews) msg.obj, msg.arg2);
                     break;
                 case 100:
                     CocktailHost.this.notifyKeyguardState(msg.arg1, msg.arg2);
                     break;
                 case 101:
-                    CocktailHost.this.notifyWakeUpState(msg.arg1, msg.arg2, ((Integer) msg.obj).intValue());
+                    CocktailHost.this.notifyWakeUpState(
+                            msg.arg1, msg.arg2, ((Integer) msg.obj).intValue());
                     break;
                 case 102:
                     CocktailHost.this.changeVisibleEdgeService(msg.arg1, msg.arg2);
@@ -353,7 +360,8 @@ public class CocktailHost {
         bindService(0);
     }
 
-    public CocktailHost(Context context, int category, ICallbackListener callbackListener, Looper looper) {
+    public CocktailHost(
+            Context context, int category, ICallbackListener callbackListener, Looper looper) {
         this.mListeningCategory = 0;
         this.mContextOpPackageName = context.getOpPackageName();
         this.mCallbackListener = callbackListener;
@@ -371,7 +379,8 @@ public class CocktailHost {
             }
             try {
                 if (sService != null) {
-                    sService.setCocktailHostCallbacks(this.mCallbacks, this.mContextOpPackageName, category);
+                    sService.setCocktailHostCallbacks(
+                            this.mCallbacks, this.mContextOpPackageName, category);
                 } else {
                     Slog.d(TAG, "bindService: can not get ICocktailBarService");
                 }
@@ -382,7 +391,8 @@ public class CocktailHost {
 
     public void startListening() {
         try {
-            sService.startListening(this.mCallbacks, this.mContextOpPackageName, this.mListeningCategory);
+            sService.startListening(
+                    this.mCallbacks, this.mContextOpPackageName, this.mListeningCategory);
         } catch (RemoteException e) {
             throw new RuntimeException("system server dead?", e);
         }

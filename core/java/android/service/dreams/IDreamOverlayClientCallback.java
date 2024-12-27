@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.dreams.IDreamOverlayClient;
 
 /* loaded from: classes3.dex */
 public interface IDreamOverlayClientCallback extends IInterface {
@@ -15,8 +14,7 @@ public interface IDreamOverlayClientCallback extends IInterface {
 
     public static class Default implements IDreamOverlayClientCallback {
         @Override // android.service.dreams.IDreamOverlayClientCallback
-        public void onDreamOverlayClient(IDreamOverlayClient client) throws RemoteException {
-        }
+        public void onDreamOverlayClient(IDreamOverlayClient client) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +22,7 @@ public interface IDreamOverlayClientCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDreamOverlayClientCallback {
+    public abstract static class Stub extends Binder implements IDreamOverlayClientCallback {
         static final int TRANSACTION_onDreamOverlayClient = 1;
 
         public Stub() {
@@ -62,7 +60,8 @@ public interface IDreamOverlayClientCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDreamOverlayClientCallback.DESCRIPTOR);
             }
@@ -72,7 +71,8 @@ public interface IDreamOverlayClientCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IDreamOverlayClient _arg0 = IDreamOverlayClient.Stub.asInterface(data.readStrongBinder());
+                    IDreamOverlayClient _arg0 =
+                            IDreamOverlayClient.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onDreamOverlayClient(_arg0);
                     reply.writeNoException();

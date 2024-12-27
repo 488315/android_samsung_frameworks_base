@@ -5,14 +5,16 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.telephony.data.IQualifiedNetworksServiceCallback;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface IQualifiedNetworksService extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.data.IQualifiedNetworksService";
 
-    void createNetworkAvailabilityProvider(int i, IQualifiedNetworksServiceCallback iQualifiedNetworksServiceCallback) throws RemoteException;
+    void createNetworkAvailabilityProvider(
+            int i, IQualifiedNetworksServiceCallback iQualifiedNetworksServiceCallback)
+            throws RemoteException;
 
     void removeNetworkAvailabilityProvider(int i) throws RemoteException;
 
@@ -22,20 +24,19 @@ public interface IQualifiedNetworksService extends IInterface {
 
     public static class Default implements IQualifiedNetworksService {
         @Override // android.telephony.data.IQualifiedNetworksService
-        public void createNetworkAvailabilityProvider(int slotId, IQualifiedNetworksServiceCallback callback) throws RemoteException {
-        }
+        public void createNetworkAvailabilityProvider(
+                int slotId, IQualifiedNetworksServiceCallback callback) throws RemoteException {}
 
         @Override // android.telephony.data.IQualifiedNetworksService
-        public void removeNetworkAvailabilityProvider(int slotId) throws RemoteException {
-        }
+        public void removeNetworkAvailabilityProvider(int slotId) throws RemoteException {}
 
         @Override // android.telephony.data.IQualifiedNetworksService
-        public void reportThrottleStatusChanged(int slotId, List<ThrottleStatus> statuses) throws RemoteException {
-        }
+        public void reportThrottleStatusChanged(int slotId, List<ThrottleStatus> statuses)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IQualifiedNetworksService
-        public void reportEmergencyDataNetworkPreferredTransportChanged(int slotId, int transportType) throws RemoteException {
-        }
+        public void reportEmergencyDataNetworkPreferredTransportChanged(
+                int slotId, int transportType) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -43,7 +44,7 @@ public interface IQualifiedNetworksService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IQualifiedNetworksService {
+    public abstract static class Stub extends Binder implements IQualifiedNetworksService {
         static final int TRANSACTION_createNetworkAvailabilityProvider = 1;
         static final int TRANSACTION_removeNetworkAvailabilityProvider = 2;
         static final int TRANSACTION_reportEmergencyDataNetworkPreferredTransportChanged = 4;
@@ -90,7 +91,8 @@ public interface IQualifiedNetworksService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IQualifiedNetworksService.DESCRIPTOR);
             }
@@ -101,7 +103,9 @@ public interface IQualifiedNetworksService extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    IQualifiedNetworksServiceCallback _arg1 = IQualifiedNetworksServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IQualifiedNetworksServiceCallback _arg1 =
+                            IQualifiedNetworksServiceCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     createNetworkAvailabilityProvider(_arg0, _arg1);
                     return true;
@@ -144,7 +148,8 @@ public interface IQualifiedNetworksService extends IInterface {
             }
 
             @Override // android.telephony.data.IQualifiedNetworksService
-            public void createNetworkAvailabilityProvider(int slotId, IQualifiedNetworksServiceCallback callback) throws RemoteException {
+            public void createNetworkAvailabilityProvider(
+                    int slotId, IQualifiedNetworksServiceCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IQualifiedNetworksService.DESCRIPTOR);
@@ -169,7 +174,8 @@ public interface IQualifiedNetworksService extends IInterface {
             }
 
             @Override // android.telephony.data.IQualifiedNetworksService
-            public void reportThrottleStatusChanged(int slotId, List<ThrottleStatus> statuses) throws RemoteException {
+            public void reportThrottleStatusChanged(int slotId, List<ThrottleStatus> statuses)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IQualifiedNetworksService.DESCRIPTOR);
@@ -182,7 +188,8 @@ public interface IQualifiedNetworksService extends IInterface {
             }
 
             @Override // android.telephony.data.IQualifiedNetworksService
-            public void reportEmergencyDataNetworkPreferredTransportChanged(int slotId, int transportType) throws RemoteException {
+            public void reportEmergencyDataNetworkPreferredTransportChanged(
+                    int slotId, int transportType) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IQualifiedNetworksService.DESCRIPTOR);

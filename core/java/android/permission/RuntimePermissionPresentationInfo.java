@@ -3,32 +3,38 @@ package android.permission;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class RuntimePermissionPresentationInfo implements Parcelable {
-    public static final Parcelable.Creator<RuntimePermissionPresentationInfo> CREATOR = new Parcelable.Creator<RuntimePermissionPresentationInfo>() { // from class: android.permission.RuntimePermissionPresentationInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RuntimePermissionPresentationInfo createFromParcel(Parcel source) {
-            CharSequence label = source.readCharSequence();
-            int flags = source.readInt();
-            return new RuntimePermissionPresentationInfo(label, (flags & 1) != 0, (flags & 2) != 0);
-        }
+    public static final Parcelable.Creator<RuntimePermissionPresentationInfo> CREATOR =
+            new Parcelable.Creator<
+                    RuntimePermissionPresentationInfo>() { // from class:
+                                                           // android.permission.RuntimePermissionPresentationInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RuntimePermissionPresentationInfo createFromParcel(Parcel source) {
+                    CharSequence label = source.readCharSequence();
+                    int flags = source.readInt();
+                    return new RuntimePermissionPresentationInfo(
+                            label, (flags & 1) != 0, (flags & 2) != 0);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RuntimePermissionPresentationInfo[] newArray(int size) {
-            return new RuntimePermissionPresentationInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RuntimePermissionPresentationInfo[] newArray(int size) {
+                    return new RuntimePermissionPresentationInfo[size];
+                }
+            };
     private static final int FLAG_GRANTED = 1;
     private static final int FLAG_STANDARD = 2;
     private final int mFlags;
     private final CharSequence mLabel;
 
-    public RuntimePermissionPresentationInfo(CharSequence label, boolean granted, boolean standard) {
+    public RuntimePermissionPresentationInfo(
+            CharSequence label, boolean granted, boolean standard) {
         Preconditions.checkNotNull(label);
         this.mLabel = label;
         int flags = granted ? 0 | 1 : 0;

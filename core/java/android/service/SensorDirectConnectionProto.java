@@ -11,7 +11,6 @@ public final class SensorDirectConnectionProto {
         public static final long RATE = 1120986464258L;
         public static final long SENSOR = 1120986464257L;
 
-        public SensorProto() {
-        }
+        public SensorProto() {}
     }
 }

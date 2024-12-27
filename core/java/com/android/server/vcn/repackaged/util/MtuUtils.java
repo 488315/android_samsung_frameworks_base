@@ -4,6 +4,7 @@ import android.net.ipsec.ike.ChildSaProposal;
 import android.util.ArrayMap;
 import android.util.Pair;
 import android.util.Slog;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -41,7 +42,8 @@ public class MtuUtils {
         AUTHCRYPT_ALGORITHM_OVERHEAD = Collections.unmodifiableMap(map3);
     }
 
-    public static int getMtu(List<ChildSaProposal> childProposals, int maxMtu, int underlyingMtu, boolean isIpv4) {
+    public static int getMtu(
+            List<ChildSaProposal> childProposals, int maxMtu, int underlyingMtu, boolean isIpv4) {
         if (underlyingMtu <= 0) {
             return 1280;
         }
@@ -52,9 +54,17 @@ public class MtuUtils {
             for (Pair<Integer, Integer> encryptionAlgoPair : proposal.getEncryptionAlgorithms()) {
                 int algo = encryptionAlgoPair.first.intValue();
                 if (AUTHCRYPT_ALGORITHM_OVERHEAD.containsKey(Integer.valueOf(algo))) {
-                    maxAuthCryptOverhead = Math.max(maxAuthCryptOverhead, AUTHCRYPT_ALGORITHM_OVERHEAD.get(Integer.valueOf(algo)).intValue());
+                    maxAuthCryptOverhead =
+                            Math.max(
+                                    maxAuthCryptOverhead,
+                                    AUTHCRYPT_ALGORITHM_OVERHEAD
+                                            .get(Integer.valueOf(algo))
+                                            .intValue());
                 } else if (CRYPT_ALGORITHM_OVERHEAD.containsKey(Integer.valueOf(algo))) {
-                    maxCryptOverhead = Math.max(maxCryptOverhead, CRYPT_ALGORITHM_OVERHEAD.get(Integer.valueOf(algo)).intValue());
+                    maxCryptOverhead =
+                            Math.max(
+                                    maxCryptOverhead,
+                                    CRYPT_ALGORITHM_OVERHEAD.get(Integer.valueOf(algo)).intValue());
                 } else {
                     Slog.wtf(TAG, "Unknown encryption algorithm requested: " + algo);
                     return 1280;
@@ -64,7 +74,10 @@ public class MtuUtils {
             while (it.hasNext()) {
                 int algo2 = it.next().intValue();
                 if (AUTH_ALGORITHM_OVERHEAD.containsKey(Integer.valueOf(algo2))) {
-                    maxAuthOverhead = Math.max(maxAuthOverhead, AUTH_ALGORITHM_OVERHEAD.get(Integer.valueOf(algo2)).intValue());
+                    maxAuthOverhead =
+                            Math.max(
+                                    maxAuthOverhead,
+                                    AUTH_ALGORITHM_OVERHEAD.get(Integer.valueOf(algo2)).intValue());
                 } else {
                     Slog.wtf(TAG, "Unknown integrity algorithm requested: " + algo2);
                     return 1280;
@@ -73,7 +86,8 @@ public class MtuUtils {
         }
         int genericEspOverheadMax = isIpv4 ? 78 : 50;
         int combinedModeMtu = (underlyingMtu - maxAuthCryptOverhead) - genericEspOverheadMax;
-        int normalModeMtu = ((underlyingMtu - maxCryptOverhead) - maxAuthOverhead) - genericEspOverheadMax;
+        int normalModeMtu =
+                ((underlyingMtu - maxCryptOverhead) - maxAuthOverhead) - genericEspOverheadMax;
         return Math.min(Math.min(maxMtu, combinedModeMtu), normalModeMtu);
     }
 }

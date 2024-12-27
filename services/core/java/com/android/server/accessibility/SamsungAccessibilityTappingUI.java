@@ -31,7 +31,9 @@ public final class SamsungAccessibilityTappingUI {
         this.navigationBarHeight = 0;
         this.mContext = context;
         if (context != null) {
-            this.size = context.getResources().getDimensionPixelSize(R.dimen.config_inCallNotificationVolume);
+            this.size =
+                    context.getResources()
+                            .getDimensionPixelSize(R.dimen.config_inCallNotificationVolume);
             float f = this.mContext.getDisplay().getDisplayId() == 2 ? 0.5f : 1.0f;
             WindowManager windowManager = (WindowManager) this.mContext.getSystemService("window");
             this.mWindowManager = windowManager;
@@ -46,7 +48,9 @@ public final class SamsungAccessibilityTappingUI {
             layoutParams.gravity = 51;
             layoutParams.samsungFlags |= 131072;
             layoutParams.layoutInDisplayCutoutMode = 1;
-            View inflate = LayoutInflater.from(this.mContext).inflate(R.layout.decor_caption, (ViewGroup) null);
+            View inflate =
+                    LayoutInflater.from(this.mContext)
+                            .inflate(R.layout.decor_caption, (ViewGroup) null);
             this.view = inflate;
             inflate.bringToFront();
             this.view.invalidate();
@@ -64,7 +68,12 @@ public final class SamsungAccessibilityTappingUI {
             this.mTapImageView.setScaleX(f);
             this.mTapImageView.setScaleY(f);
             this.mWindowManager.addView(this.view, this.mParams);
-            this.navigationBarHeight = this.mContext.getResources().getBoolean(R.bool.config_sms_decode_gsm_8bit_data) ? this.mContext.getResources().getDimensionPixelSize(R.dimen.resolver_max_collapsed_height) : 0;
+            this.navigationBarHeight =
+                    this.mContext.getResources().getBoolean(R.bool.config_sms_decode_gsm_8bit_data)
+                            ? this.mContext
+                                    .getResources()
+                                    .getDimensionPixelSize(R.dimen.resolver_max_collapsed_height)
+                            : 0;
         }
     }
 

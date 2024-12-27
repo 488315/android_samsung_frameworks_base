@@ -3,9 +3,11 @@ package com.samsung.android.sume.core.descriptor;
 import android.media.MediaFormat;
 import android.util.Pair;
 import android.view.Surface;
+
 import com.samsung.android.sume.core.filter.DecoderFilter;
 import com.samsung.android.sume.core.filter.EncoderFilter;
 import com.samsung.android.sume.core.types.MediaType;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,7 +44,8 @@ public class CodecDescriptor extends MFDescriptorBase {
         this.data.put(key, value);
     }
 
-    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase, com.samsung.android.sume.core.descriptor.MFDescriptor
+    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase,
+              // com.samsung.android.sume.core.descriptor.MFDescriptor
     public String getFilterId() {
         switch (this.mediaType) {
             case COMPRESSED_AUDIO:

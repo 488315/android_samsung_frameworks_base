@@ -2,6 +2,7 @@ package com.samsung.android.cocktailbar;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+
 import java.io.File;
 
 /* loaded from: classes5.dex */
@@ -24,7 +25,8 @@ public class CocktailBarFeatures {
             try {
                 sCocktailFeature = verifyCocktailFeature(pm, 1, "com.sec.feature.cocktailbar");
                 if (sCocktailFeature == 0) {
-                    sCocktailFeature = verifyCocktailFeature(pm, 2, PackageManager.SEM_FEATURE_COCKTAIL_PANEL);
+                    sCocktailFeature =
+                            verifyCocktailFeature(pm, 2, PackageManager.SEM_FEATURE_COCKTAIL_PANEL);
                 }
             } catch (Exception e) {
             }

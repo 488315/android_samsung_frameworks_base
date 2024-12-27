@@ -1,7 +1,6 @@
 package android.app;
 
 import android.annotation.SystemApi;
-import android.app.IInstantAppResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.InstantAppRequestInfo;
@@ -18,7 +17,9 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.os.SomeArgs;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -33,17 +34,23 @@ public abstract class InstantAppResolverService extends Service {
     Handler mHandler;
 
     @Deprecated
-    public void onGetInstantAppResolveInfo(int[] digestPrefix, String token, InstantAppResolutionCallback callback) {
+    public void onGetInstantAppResolveInfo(
+            int[] digestPrefix, String token, InstantAppResolutionCallback callback) {
         throw new IllegalStateException("Must define onGetInstantAppResolveInfo");
     }
 
     @Deprecated
-    public void onGetInstantAppIntentFilter(int[] digestPrefix, String token, InstantAppResolutionCallback callback) {
+    public void onGetInstantAppIntentFilter(
+            int[] digestPrefix, String token, InstantAppResolutionCallback callback) {
         throw new IllegalStateException("Must define onGetInstantAppIntentFilter");
     }
 
     @Deprecated
-    public void onGetInstantAppResolveInfo(Intent sanitizedIntent, int[] hostDigestPrefix, String token, InstantAppResolutionCallback callback) {
+    public void onGetInstantAppResolveInfo(
+            Intent sanitizedIntent,
+            int[] hostDigestPrefix,
+            String token,
+            InstantAppResolutionCallback callback) {
         if (sanitizedIntent.isWebIntent()) {
             onGetInstantAppResolveInfo(hostDigestPrefix, token, callback);
         } else {
@@ -52,7 +59,11 @@ public abstract class InstantAppResolverService extends Service {
     }
 
     @Deprecated
-    public void onGetInstantAppIntentFilter(Intent sanitizedIntent, int[] hostDigestPrefix, String token, InstantAppResolutionCallback callback) {
+    public void onGetInstantAppIntentFilter(
+            Intent sanitizedIntent,
+            int[] hostDigestPrefix,
+            String token,
+            InstantAppResolutionCallback callback) {
         Log.e(TAG, "New onGetInstantAppIntentFilter is not overridden");
         if (sanitizedIntent.isWebIntent()) {
             onGetInstantAppIntentFilter(hostDigestPrefix, token, callback);
@@ -62,21 +73,43 @@ public abstract class InstantAppResolverService extends Service {
     }
 
     @Deprecated
-    public void onGetInstantAppResolveInfo(Intent sanitizedIntent, int[] hostDigestPrefix, UserHandle userHandle, String token, InstantAppResolutionCallback callback) {
+    public void onGetInstantAppResolveInfo(
+            Intent sanitizedIntent,
+            int[] hostDigestPrefix,
+            UserHandle userHandle,
+            String token,
+            InstantAppResolutionCallback callback) {
         onGetInstantAppResolveInfo(sanitizedIntent, hostDigestPrefix, token, callback);
     }
 
     @Deprecated
-    public void onGetInstantAppIntentFilter(Intent sanitizedIntent, int[] hostDigestPrefix, UserHandle userHandle, String token, InstantAppResolutionCallback callback) {
+    public void onGetInstantAppIntentFilter(
+            Intent sanitizedIntent,
+            int[] hostDigestPrefix,
+            UserHandle userHandle,
+            String token,
+            InstantAppResolutionCallback callback) {
         onGetInstantAppIntentFilter(sanitizedIntent, hostDigestPrefix, token, callback);
     }
 
-    public void onGetInstantAppResolveInfo(InstantAppRequestInfo request, InstantAppResolutionCallback callback) {
-        onGetInstantAppResolveInfo(request.getIntent(), request.getHostDigestPrefix(), request.getUserHandle(), request.getToken(), callback);
+    public void onGetInstantAppResolveInfo(
+            InstantAppRequestInfo request, InstantAppResolutionCallback callback) {
+        onGetInstantAppResolveInfo(
+                request.getIntent(),
+                request.getHostDigestPrefix(),
+                request.getUserHandle(),
+                request.getToken(),
+                callback);
     }
 
-    public void onGetInstantAppIntentFilter(InstantAppRequestInfo request, InstantAppResolutionCallback callback) {
-        onGetInstantAppIntentFilter(request.getIntent(), request.getHostDigestPrefix(), request.getUserHandle(), request.getToken(), callback);
+    public void onGetInstantAppIntentFilter(
+            InstantAppRequestInfo request, InstantAppResolutionCallback callback) {
+        onGetInstantAppIntentFilter(
+                request.getIntent(),
+                request.getHostDigestPrefix(),
+                request.getUserHandle(),
+                request.getToken(),
+                callback);
     }
 
     Looper getLooper() {
@@ -91,22 +124,36 @@ public abstract class InstantAppResolverService extends Service {
 
     @Override // android.app.Service
     public final IBinder onBind(Intent intent) {
-        return new IInstantAppResolver.Stub() { // from class: android.app.InstantAppResolverService.1
+        return new IInstantAppResolver
+                .Stub() { // from class: android.app.InstantAppResolverService.1
             @Override // android.app.IInstantAppResolver
-            public void getInstantAppResolveInfoList(InstantAppRequestInfo request, int sequence, IRemoteCallback callback) {
+            public void getInstantAppResolveInfoList(
+                    InstantAppRequestInfo request, int sequence, IRemoteCallback callback) {
                 if (InstantAppResolverService.DEBUG_INSTANT) {
-                    Slog.v(InstantAppResolverService.TAG, NavigationBarInflaterView.SIZE_MOD_START + request.getToken() + "] Phase1 called; posting");
+                    Slog.v(
+                            InstantAppResolverService.TAG,
+                            NavigationBarInflaterView.SIZE_MOD_START
+                                    + request.getToken()
+                                    + "] Phase1 called; posting");
                 }
                 SomeArgs args = SomeArgs.obtain();
                 args.arg1 = request;
                 args.arg2 = callback;
-                InstantAppResolverService.this.mHandler.obtainMessage(1, sequence, 0, args).sendToTarget();
+                InstantAppResolverService.this
+                        .mHandler
+                        .obtainMessage(1, sequence, 0, args)
+                        .sendToTarget();
             }
 
             @Override // android.app.IInstantAppResolver
-            public void getInstantAppIntentFilterList(InstantAppRequestInfo request, IRemoteCallback callback) {
+            public void getInstantAppIntentFilterList(
+                    InstantAppRequestInfo request, IRemoteCallback callback) {
                 if (InstantAppResolverService.DEBUG_INSTANT) {
-                    Slog.v(InstantAppResolverService.TAG, NavigationBarInflaterView.SIZE_MOD_START + request.getToken() + "] Phase2 called; posting");
+                    Slog.v(
+                            InstantAppResolverService.TAG,
+                            NavigationBarInflaterView.SIZE_MOD_START
+                                    + request.getToken()
+                                    + "] Phase2 called; posting");
                 }
                 SomeArgs args = SomeArgs.obtain();
                 args.arg1 = request;
@@ -155,9 +202,17 @@ public abstract class InstantAppResolverService extends Service {
                     args.recycle();
                     int sequence = message.arg1;
                     if (InstantAppResolverService.DEBUG_INSTANT) {
-                        Slog.d(InstantAppResolverService.TAG, NavigationBarInflaterView.SIZE_MOD_START + request.getToken() + "] Phase1 request; prefix: " + Arrays.toString(request.getHostDigestPrefix()) + ", userId: " + request.getUserHandle().getIdentifier());
+                        Slog.d(
+                                InstantAppResolverService.TAG,
+                                NavigationBarInflaterView.SIZE_MOD_START
+                                        + request.getToken()
+                                        + "] Phase1 request; prefix: "
+                                        + Arrays.toString(request.getHostDigestPrefix())
+                                        + ", userId: "
+                                        + request.getUserHandle().getIdentifier());
                     }
-                    InstantAppResolverService.this.onGetInstantAppResolveInfo(request, new InstantAppResolutionCallback(sequence, callback));
+                    InstantAppResolverService.this.onGetInstantAppResolveInfo(
+                            request, new InstantAppResolutionCallback(sequence, callback));
                     return;
                 case 2:
                     SomeArgs args2 = (SomeArgs) message.obj;
@@ -165,9 +220,17 @@ public abstract class InstantAppResolverService extends Service {
                     IRemoteCallback callback2 = (IRemoteCallback) args2.arg2;
                     args2.recycle();
                     if (InstantAppResolverService.DEBUG_INSTANT) {
-                        Slog.d(InstantAppResolverService.TAG, NavigationBarInflaterView.SIZE_MOD_START + request2.getToken() + "] Phase2 request; prefix: " + Arrays.toString(request2.getHostDigestPrefix()) + ", userId: " + request2.getUserHandle().getIdentifier());
+                        Slog.d(
+                                InstantAppResolverService.TAG,
+                                NavigationBarInflaterView.SIZE_MOD_START
+                                        + request2.getToken()
+                                        + "] Phase2 request; prefix: "
+                                        + Arrays.toString(request2.getHostDigestPrefix())
+                                        + ", userId: "
+                                        + request2.getUserHandle().getIdentifier());
                     }
-                    InstantAppResolverService.this.onGetInstantAppIntentFilter(request2, new InstantAppResolutionCallback(-1, callback2));
+                    InstantAppResolverService.this.onGetInstantAppIntentFilter(
+                            request2, new InstantAppResolutionCallback(-1, callback2));
                     return;
                 default:
                     throw new IllegalArgumentException("Unknown message: " + action);

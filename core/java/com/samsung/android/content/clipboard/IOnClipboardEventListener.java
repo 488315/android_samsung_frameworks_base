@@ -5,11 +5,13 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.samsung.android.content.clipboard.data.SemClipData;
 
 /* loaded from: classes5.dex */
 public interface IOnClipboardEventListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.content.clipboard.IOnClipboardEventListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.content.clipboard.IOnClipboardEventListener";
 
     void onClipboardEvent(int i, SemClipData semClipData) throws RemoteException;
 
@@ -17,12 +19,10 @@ public interface IOnClipboardEventListener extends IInterface {
 
     public static class Default implements IOnClipboardEventListener {
         @Override // com.samsung.android.content.clipboard.IOnClipboardEventListener
-        public void onClipboardEvent(int event, SemClipData data) throws RemoteException {
-        }
+        public void onClipboardEvent(int event, SemClipData data) throws RemoteException {}
 
         @Override // com.samsung.android.content.clipboard.IOnClipboardEventListener
-        public void onUpdateFilter(int filter) throws RemoteException {
-        }
+        public void onUpdateFilter(int filter) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface IOnClipboardEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnClipboardEventListener {
+    public abstract static class Stub extends Binder implements IOnClipboardEventListener {
         static final int TRANSACTION_onClipboardEvent = 1;
         static final int TRANSACTION_onUpdateFilter = 2;
 
@@ -71,7 +71,8 @@ public interface IOnClipboardEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOnClipboardEventListener.DESCRIPTOR);
             }

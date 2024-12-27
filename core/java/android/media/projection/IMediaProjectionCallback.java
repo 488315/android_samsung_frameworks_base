@@ -16,16 +16,13 @@ public interface IMediaProjectionCallback extends IInterface {
 
     public static class Default implements IMediaProjectionCallback {
         @Override // android.media.projection.IMediaProjectionCallback
-        public void onStop() throws RemoteException {
-        }
+        public void onStop() throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionCallback
-        public void onCapturedContentResize(int width, int height) throws RemoteException {
-        }
+        public void onCapturedContentResize(int width, int height) throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionCallback
-        public void onCapturedContentVisibilityChanged(boolean isVisible) throws RemoteException {
-        }
+        public void onCapturedContentVisibilityChanged(boolean isVisible) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +30,7 @@ public interface IMediaProjectionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaProjectionCallback {
+    public abstract static class Stub extends Binder implements IMediaProjectionCallback {
         public static final String DESCRIPTOR = "android.media.projection.IMediaProjectionCallback";
         static final int TRANSACTION_onCapturedContentResize = 2;
         static final int TRANSACTION_onCapturedContentVisibilityChanged = 3;
@@ -78,7 +75,8 @@ public interface IMediaProjectionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -147,7 +145,8 @@ public interface IMediaProjectionCallback extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionCallback
-            public void onCapturedContentVisibilityChanged(boolean isVisible) throws RemoteException {
+            public void onCapturedContentVisibilityChanged(boolean isVisible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

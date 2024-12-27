@@ -1,7 +1,6 @@
 package android.media.tv.tuner.filter;
 
 import android.annotation.SystemApi;
-import android.media.tv.tuner.filter.SectionSettings;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -10,7 +9,14 @@ public class SectionSettingsWithTableInfo extends SectionSettings {
     private final int mTableId;
     private final int mVersion;
 
-    private SectionSettingsWithTableInfo(int mainType, boolean isCheckCrc, boolean isRepeat, boolean isRaw, int bitWidthOfLengthField, int tableId, int version) {
+    private SectionSettingsWithTableInfo(
+            int mainType,
+            boolean isCheckCrc,
+            boolean isRepeat,
+            boolean isRaw,
+            int bitWidthOfLengthField,
+            int tableId,
+            int version) {
         super(mainType, isCheckCrc, isRepeat, isRaw, bitWidthOfLengthField);
         this.mTableId = tableId;
         this.mVersion = version;
@@ -48,7 +54,14 @@ public class SectionSettingsWithTableInfo extends SectionSettings {
         }
 
         public SectionSettingsWithTableInfo build() {
-            return new SectionSettingsWithTableInfo(this.mMainType, this.mCrcEnabled, this.mIsRepeat, this.mIsRaw, this.mBitWidthOfLengthField, this.mTableId, this.mVersion);
+            return new SectionSettingsWithTableInfo(
+                    this.mMainType,
+                    this.mCrcEnabled,
+                    this.mIsRepeat,
+                    this.mIsRaw,
+                    this.mBitWidthOfLengthField,
+                    this.mTableId,
+                    this.mVersion);
         }
 
         /* JADX INFO: Access modifiers changed from: package-private */

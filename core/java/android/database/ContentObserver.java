@@ -2,11 +2,11 @@ package android.database;
 
 import android.annotation.SystemApi;
 import android.app.compat.CompatChanges;
-import android.database.IContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Process;
 import android.os.UserHandle;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.Executor;
@@ -57,8 +57,7 @@ public abstract class ContentObserver {
         return false;
     }
 
-    public void onChange(boolean selfChange) {
-    }
+    public void onChange(boolean selfChange) {}
 
     public void onChange(boolean selfChange, Uri uri) {
         onChange(selfChange);
@@ -112,33 +111,45 @@ public abstract class ContentObserver {
         dispatchChange(selfChange, uris, flags, UserHandle.getCallingUserId());
     }
 
-    public final void dispatchChange(final boolean selfChange, final Collection<Uri> uris, final int flags, final int userId) {
+    public final void dispatchChange(
+            final boolean selfChange,
+            final Collection<Uri> uris,
+            final int flags,
+            final int userId) {
         if (this.mExecutor != null) {
-            this.mExecutor.execute(new Runnable() { // from class: android.database.ContentObserver$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ContentObserver.this.lambda$dispatchChange$0(selfChange, uris, flags, userId);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.database.ContentObserver$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ContentObserver.this.lambda$dispatchChange$0(
+                                    selfChange, uris, flags, userId);
+                        }
+                    });
         } else if (this.mHandler != null) {
-            this.mHandler.post(new Runnable() { // from class: android.database.ContentObserver$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ContentObserver.this.lambda$dispatchChange$1(selfChange, uris, flags, userId);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                        // android.database.ContentObserver$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ContentObserver.this.lambda$dispatchChange$1(
+                                    selfChange, uris, flags, userId);
+                        }
+                    });
         } else {
             onChange(selfChange, uris, flags, userId);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$dispatchChange$0(boolean selfChange, Collection uris, int flags, int userId) {
+    public /* synthetic */ void lambda$dispatchChange$0(
+            boolean selfChange, Collection uris, int flags, int userId) {
         onChange(selfChange, (Collection<Uri>) uris, flags, userId);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$dispatchChange$1(boolean selfChange, Collection uris, int flags, int userId) {
+    public /* synthetic */ void lambda$dispatchChange$1(
+            boolean selfChange, Collection uris, int flags, int userId) {
         onChange(selfChange, (Collection<Uri>) uris, flags, userId);
     }
 
@@ -151,7 +162,7 @@ public abstract class ContentObserver {
 
         @Override // android.database.IContentObserver
         public void onChange(boolean selfChange, Uri uri, int userId) {
-            onChangeEtc(selfChange, new Uri[]{uri}, 0, userId);
+            onChangeEtc(selfChange, new Uri[] {uri}, 0, userId);
         }
 
         @Override // android.database.IContentObserver

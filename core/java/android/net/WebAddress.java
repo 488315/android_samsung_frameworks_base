@@ -2,6 +2,7 @@ package android.net;
 
 import android.annotation.SystemApi;
 import android.content.IntentFilter;
+
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +15,12 @@ public class WebAddress {
     static final int MATCH_GROUP_PATH = 5;
     static final int MATCH_GROUP_PORT = 4;
     static final int MATCH_GROUP_SCHEME = 1;
-    static Pattern sAddressPattern = Pattern.compile("(?:(http|https|file)\\:\\/\\/)?(?:([-A-Za-z0-9$_.+!*'(),;?&=]+(?:\\:[-A-Za-z0-9$_.+!*'(),;?&=]+)?)@)?([a-zA-Z0-9 -\ud7ff豈-\ufdcfﷰ-\uffef%_-][a-zA-Z0-9 -\ud7ff豈-\ufdcfﷰ-\uffef%_\\.-]*|\\[[0-9a-fA-F:\\.]+\\])?(?:\\:([0-9]*))?(\\/?[^#]*)?.*", 2);
+    static Pattern sAddressPattern =
+            Pattern.compile(
+                    "(?:(http|https|file)\\:\\/\\/)?(?:([-A-Za-z0-9$_.+!*'(),;?&=]+(?:\\:[-A-Za-z0-9$_.+!*'(),;?&=]+)?)@)?([a-zA-Z0-9"
+                        + " -\ud7ff豈-\ufdcfﷰ-\uffef%_-][a-zA-Z0-9"
+                        + " -\ud7ff豈-\ufdcfﷰ-\uffef%_\\.-]*|\\[[0-9a-fA-F:\\.]+\\])?(?:\\:([0-9]*))?(\\/?[^#]*)?.*",
+                    2);
     private String mAuthInfo;
     private String mHost;
     private String mPath;
@@ -82,7 +88,8 @@ public class WebAddress {
 
     public String toString() {
         String port = "";
-        if ((this.mPort != 443 && this.mScheme.equals(IntentFilter.SCHEME_HTTPS)) || (this.mPort != 80 && this.mScheme.equals(IntentFilter.SCHEME_HTTP))) {
+        if ((this.mPort != 443 && this.mScheme.equals(IntentFilter.SCHEME_HTTPS))
+                || (this.mPort != 80 && this.mScheme.equals(IntentFilter.SCHEME_HTTP))) {
             port = ":" + Integer.toString(this.mPort);
         }
         String authInfo = "";

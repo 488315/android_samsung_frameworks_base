@@ -16,6 +16,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.Time;
 import com.android.internal.org.bouncycastle.operator.ContentVerifier;
 import com.android.internal.org.bouncycastle.operator.ContentVerifierProvider;
 import com.android.internal.org.bouncycastle.util.Encodable;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,7 +56,13 @@ public class X509CRLHolder implements Encodable, Serializable {
 
     private static boolean isIndirectCRL(Extensions extensions) {
         Extension ext;
-        return (extensions == null || (ext = extensions.getExtension(Extension.issuingDistributionPoint)) == null || !IssuingDistributionPoint.getInstance(ext.getParsedValue()).isIndirectCRL()) ? false : true;
+        return (extensions == null
+                        || (ext = extensions.getExtension(Extension.issuingDistributionPoint))
+                                == null
+                        || !IssuingDistributionPoint.getInstance(ext.getParsedValue())
+                                .isIndirectCRL())
+                ? false
+                : true;
     }
 
     public X509CRLHolder(byte[] crlEncoding) throws IOException {
@@ -107,7 +114,11 @@ public class X509CRLHolder implements Encodable, Serializable {
             if (entry.getUserCertificate().hasValue(serialNumber)) {
                 return new X509CRLEntryHolder(entry, this.isIndirect, currentCA);
             }
-            if (this.isIndirect && entry.hasExtensions() && (currentCaName = entry.getExtensions().getExtension(Extension.certificateIssuer)) != null) {
+            if (this.isIndirect
+                    && entry.hasExtensions()
+                    && (currentCaName =
+                                    entry.getExtensions().getExtension(Extension.certificateIssuer))
+                            != null) {
                 currentCA = GeneralNames.getInstance(currentCaName.getParsedValue());
             }
         }

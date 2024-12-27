@@ -1,10 +1,11 @@
 package android.net.vcn.persistablebundleutils;
 
 import android.net.ipsec.ike.SaProposal;
-import android.net.vcn.persistablebundleutils.SaProposalUtilsBase;
 import android.os.PersistableBundle;
 import android.util.Pair;
+
 import com.android.server.vcn.repackaged.util.PersistableBundleUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,8 +17,7 @@ abstract class SaProposalUtilsBase {
     static final String ENCRYPT_ALGO_KEY = "ENCRYPT_ALGO_KEY";
     static final String INTEGRITY_ALGO_KEY = "INTEGRITY_ALGO_KEY";
 
-    SaProposalUtilsBase() {
-    }
+    SaProposalUtilsBase() {}
 
     static class EncryptionAlgoKeyLenPair {
         private static final String ALGO_KEY = "ALGO_KEY";
@@ -48,32 +48,49 @@ abstract class SaProposalUtilsBase {
         PersistableBundle result = new PersistableBundle();
         List<EncryptionAlgoKeyLenPair> encryptAlgoKeyLenPairs = new ArrayList<>();
         for (Pair<Integer, Integer> pair : proposal.getEncryptionAlgorithms()) {
-            encryptAlgoKeyLenPairs.add(new EncryptionAlgoKeyLenPair(pair.first.intValue(), pair.second.intValue()));
+            encryptAlgoKeyLenPairs.add(
+                    new EncryptionAlgoKeyLenPair(pair.first.intValue(), pair.second.intValue()));
         }
-        PersistableBundle encryptionBundle = PersistableBundleUtils.fromList(encryptAlgoKeyLenPairs, new PersistableBundleUtils.Serializer() { // from class: android.net.vcn.persistablebundleutils.SaProposalUtilsBase$$ExternalSyntheticLambda0
-            @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
-            public final PersistableBundle toPersistableBundle(Object obj) {
-                return ((SaProposalUtilsBase.EncryptionAlgoKeyLenPair) obj).toPersistableBundle();
-            }
-        });
+        PersistableBundle encryptionBundle =
+                PersistableBundleUtils.fromList(
+                        encryptAlgoKeyLenPairs,
+                        new PersistableBundleUtils
+                                .Serializer() { // from class:
+                                                // android.net.vcn.persistablebundleutils.SaProposalUtilsBase$$ExternalSyntheticLambda0
+                            @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
+                            public final PersistableBundle toPersistableBundle(Object obj) {
+                                return ((SaProposalUtilsBase.EncryptionAlgoKeyLenPair) obj)
+                                        .toPersistableBundle();
+                            }
+                        });
         result.putPersistableBundle(ENCRYPT_ALGO_KEY, encryptionBundle);
-        int[] integrityAlgoIdArray = proposal.getIntegrityAlgorithms().stream().mapToInt(new ToIntFunction() { // from class: android.net.vcn.persistablebundleutils.SaProposalUtilsBase$$ExternalSyntheticLambda1
-            @Override // java.util.function.ToIntFunction
-            public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
-            }
-        }).toArray();
+        int[] integrityAlgoIdArray =
+                proposal.getIntegrityAlgorithms().stream()
+                        .mapToInt(
+                                new ToIntFunction() { // from class:
+                                                      // android.net.vcn.persistablebundleutils.SaProposalUtilsBase$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.ToIntFunction
+                                    public final int applyAsInt(Object obj) {
+                                        int intValue;
+                                        intValue = ((Integer) obj).intValue();
+                                        return intValue;
+                                    }
+                                })
+                        .toArray();
         result.putIntArray(INTEGRITY_ALGO_KEY, integrityAlgoIdArray);
-        int[] dhGroupArray = proposal.getDhGroups().stream().mapToInt(new ToIntFunction() { // from class: android.net.vcn.persistablebundleutils.SaProposalUtilsBase$$ExternalSyntheticLambda2
-            @Override // java.util.function.ToIntFunction
-            public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
-            }
-        }).toArray();
+        int[] dhGroupArray =
+                proposal.getDhGroups().stream()
+                        .mapToInt(
+                                new ToIntFunction() { // from class:
+                                                      // android.net.vcn.persistablebundleutils.SaProposalUtilsBase$$ExternalSyntheticLambda2
+                                    @Override // java.util.function.ToIntFunction
+                                    public final int applyAsInt(Object obj) {
+                                        int intValue;
+                                        intValue = ((Integer) obj).intValue();
+                                        return intValue;
+                                    }
+                                })
+                        .toArray();
         result.putIntArray(DH_GROUP_KEY, dhGroupArray);
         return result;
     }

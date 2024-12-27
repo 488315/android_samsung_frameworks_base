@@ -9,43 +9,31 @@ import android.os.RemoteException;
 /* loaded from: classes2.dex */
 public class MediaScanner implements AutoCloseable {
 
-    @Deprecated
-    private static final String[] FILES_PRESCAN_PROJECTION = new String[0];
+    @Deprecated private static final String[] FILES_PRESCAN_PROJECTION = new String[0];
 
-    @Deprecated
-    private final Uri mAudioUri;
+    @Deprecated private final Uri mAudioUri;
 
-    @Deprecated
-    private final MyMediaScannerClient mClient = new MyMediaScannerClient();
+    @Deprecated private final MyMediaScannerClient mClient = new MyMediaScannerClient();
 
-    @Deprecated
-    private final Context mContext;
+    @Deprecated private final Context mContext;
 
-    @Deprecated
-    private String mDefaultAlarmAlertFilename;
+    @Deprecated private String mDefaultAlarmAlertFilename;
 
-    @Deprecated
-    private String mDefaultNotificationFilename;
+    @Deprecated private String mDefaultNotificationFilename;
 
-    @Deprecated
-    private String mDefaultRingtoneFilename;
+    @Deprecated private String mDefaultRingtoneFilename;
 
-    @Deprecated
-    private final Uri mFilesUri;
+    @Deprecated private final Uri mFilesUri;
 
-    @Deprecated
-    private MediaInserter mMediaInserter;
+    @Deprecated private MediaInserter mMediaInserter;
 
-    @Deprecated
-    private final String mPackageName;
+    @Deprecated private final String mPackageName;
 
     private static class FileEntry {
 
-        @Deprecated
-        boolean mLastModifiedChanged;
+        @Deprecated boolean mLastModifiedChanged;
 
-        @Deprecated
-        long mRowId;
+        @Deprecated long mRowId;
 
         @Deprecated
         FileEntry(long rowId, String path, long lastModified, int format) {
@@ -65,38 +53,51 @@ public class MediaScanner implements AutoCloseable {
 
     private class MyMediaScannerClient implements MediaScannerClient {
 
-        @Deprecated
-        private int mFileType;
+        @Deprecated private int mFileType;
 
-        @Deprecated
-        private boolean mIsDrm;
+        @Deprecated private boolean mIsDrm;
 
-        @Deprecated
-        private String mMimeType;
+        @Deprecated private String mMimeType;
 
-        @Deprecated
-        private boolean mNoMedia;
+        @Deprecated private boolean mNoMedia;
 
-        @Deprecated
-        private String mPath;
+        @Deprecated private String mPath;
 
         public MyMediaScannerClient() {
             throw new UnsupportedOperationException();
         }
 
         @Deprecated
-        public FileEntry beginFile(String path, String mimeType, long lastModified, long fileSize, boolean isDirectory, boolean noMedia) {
+        public FileEntry beginFile(
+                String path,
+                String mimeType,
+                long lastModified,
+                long fileSize,
+                boolean isDirectory,
+                boolean noMedia) {
             throw new UnsupportedOperationException();
         }
 
         @Override // android.media.MediaScannerClient
         @Deprecated
-        public void scanFile(String path, long lastModified, long fileSize, boolean isDirectory, boolean noMedia) {
+        public void scanFile(
+                String path,
+                long lastModified,
+                long fileSize,
+                boolean isDirectory,
+                boolean noMedia) {
             throw new UnsupportedOperationException();
         }
 
         @Deprecated
-        public Uri doScanFile(String path, String mimeType, long lastModified, long fileSize, boolean isDirectory, boolean scanAlways, boolean noMedia) {
+        public Uri doScanFile(
+                String path,
+                String mimeType,
+                long lastModified,
+                long fileSize,
+                boolean isDirectory,
+                boolean scanAlways,
+                boolean noMedia) {
             throw new UnsupportedOperationException();
         }
 
@@ -118,7 +119,15 @@ public class MediaScanner implements AutoCloseable {
         }
 
         @Deprecated
-        private Uri endFile(FileEntry entry, boolean ringtones, boolean notifications, boolean alarms, boolean podcasts, boolean audiobooks, boolean music) throws RemoteException {
+        private Uri endFile(
+                FileEntry entry,
+                boolean ringtones,
+                boolean notifications,
+                boolean alarms,
+                boolean podcasts,
+                boolean audiobooks,
+                boolean music)
+                throws RemoteException {
             throw new UnsupportedOperationException();
         }
 

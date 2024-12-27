@@ -3,15 +3,16 @@ package android.os;
 import android.annotation.SystemApi;
 import android.app.ActivityManager;
 import android.content.Context;
-import android.os.BugreportManager;
-import android.os.IDumpstateListener;
 import android.widget.Toast;
+
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
+
+import libcore.io.IoUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
-import libcore.io.IoUtils;
 
 /* loaded from: classes3.dex */
 public final class BugreportManager {
@@ -24,7 +25,7 @@ public final class BugreportManager {
         this.mBinder = binder;
     }
 
-    public static abstract class BugreportCallback {
+    public abstract static class BugreportCallback {
         public static final int BUGREPORT_ERROR_ANOTHER_REPORT_IN_PROGRESS = 5;
         public static final int BUGREPORT_ERROR_INVALID_INPUT = 1;
         public static final int BUGREPORT_ERROR_NO_BUGREPORT_TO_RETRIEVE = 6;
@@ -33,24 +34,18 @@ public final class BugreportManager {
         public static final int BUGREPORT_ERROR_USER_DENIED_CONSENT = 3;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface BugreportErrorCode {
-        }
+        public @interface BugreportErrorCode {}
 
-        public void onProgress(float progress) {
-        }
+        public void onProgress(float progress) {}
 
-        public void onError(int errorCode) {
-        }
+        public void onError(int errorCode) {}
 
-        public void onFinished() {
-        }
+        public void onFinished() {}
 
         @SystemApi
-        public void onFinished(String bugreportFile) {
-        }
+        public void onFinished(String bugreportFile) {}
 
-        public void onEarlyReportFinished() {
-        }
+        public void onEarlyReportFinished() {}
     }
 
     @SystemApi
@@ -64,33 +59,33 @@ public final class BugreportManager {
 
     /* JADX WARN: Can't wrap try/catch for region: R(12:2|3|(1:5)(1:33)|(8:9|(2:11|12)(1:31)|13|14|15|(1:20)|17|18)|32|(0)(0)|13|14|15|(0)|17|18) */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x0070, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x008f, code lost:
-    
-        throw r0.rethrowFromSystemServer();
-     */
+
+       throw r0.rethrowFromSystemServer();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x006e, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x0079, code lost:
-    
-        android.util.Log.wtf(android.os.BugreportManager.TAG, "Not able to find /dev/null file: ", r0);
-     */
+
+       android.util.Log.wtf(android.os.BugreportManager.TAG, "Not able to find /dev/null file: ", r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x0081, code lost:
-    
-        libcore.io.IoUtils.closeQuietly(r20);
-     */
+
+       libcore.io.IoUtils.closeQuietly(r20);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0084, code lost:
-    
-        if (r8 == null) goto L47;
-     */
+
+       if (r8 == null) goto L47;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:?, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Removed duplicated region for block: B:11:0x0026 A[Catch: all -> 0x0072, FileNotFoundException -> 0x0076, RemoteException -> 0x0088, TRY_LEAVE, TryCatch #4 {RemoteException -> 0x0088, FileNotFoundException -> 0x0076, all -> 0x0072, blocks: (B:3:0x0002, B:11:0x0026), top: B:2:0x0002 }] */
     /* JADX WARN: Removed duplicated region for block: B:20:0x0087 A[ORIG_RETURN, RETURN] */
     /* JADX WARN: Removed duplicated region for block: B:31:0x0035  */
@@ -100,7 +95,12 @@ public final class BugreportManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void startBugreport(android.os.ParcelFileDescriptor r20, android.os.ParcelFileDescriptor r21, android.os.BugreportParams r22, java.util.concurrent.Executor r23, android.os.BugreportManager.BugreportCallback r24) {
+    public void startBugreport(
+            android.os.ParcelFileDescriptor r20,
+            android.os.ParcelFileDescriptor r21,
+            android.os.BugreportParams r22,
+            java.util.concurrent.Executor r23,
+            android.os.BugreportManager.BugreportCallback r24) {
         /*
             r19 = this;
             r7 = r19
@@ -198,19 +198,37 @@ public final class BugreportManager {
         L99:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.BugreportManager.startBugreport(android.os.ParcelFileDescriptor, android.os.ParcelFileDescriptor, android.os.BugreportParams, java.util.concurrent.Executor, android.os.BugreportManager$BugreportCallback):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.os.BugreportManager.startBugreport(android.os.ParcelFileDescriptor,"
+                    + " android.os.ParcelFileDescriptor, android.os.BugreportParams,"
+                    + " java.util.concurrent.Executor,"
+                    + " android.os.BugreportManager$BugreportCallback):void");
     }
 
     @SystemApi
-    public void retrieveBugreport(String bugreportFile, ParcelFileDescriptor bugreportFd, Executor executor, BugreportCallback callback) {
+    public void retrieveBugreport(
+            String bugreportFile,
+            ParcelFileDescriptor bugreportFd,
+            Executor executor,
+            BugreportCallback callback) {
         try {
             try {
                 Preconditions.checkNotNull(bugreportFile);
                 Preconditions.checkNotNull(bugreportFd);
                 Preconditions.checkNotNull(executor);
                 Preconditions.checkNotNull(callback);
-                DumpstateListener dsListener = new DumpstateListener(executor, callback, false, false);
-                this.mBinder.retrieveBugreport(Binder.getCallingUid(), this.mContext.getOpPackageName(), this.mContext.getUserId(), bugreportFd.getFileDescriptor(), bugreportFile, false, false, dsListener);
+                DumpstateListener dsListener =
+                        new DumpstateListener(executor, callback, false, false);
+                this.mBinder.retrieveBugreport(
+                        Binder.getCallingUid(),
+                        this.mContext.getOpPackageName(),
+                        this.mContext.getUserId(),
+                        bugreportFd.getFileDescriptor(),
+                        bugreportFile,
+                        false,
+                        false,
+                        dsListener);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -219,7 +237,8 @@ public final class BugreportManager {
         }
     }
 
-    public void startConnectivityBugreport(ParcelFileDescriptor bugreportFd, Executor executor, BugreportCallback callback) {
+    public void startConnectivityBugreport(
+            ParcelFileDescriptor bugreportFd, Executor executor, BugreportCallback callback) {
         startBugreport(bugreportFd, null, new BugreportParams(4), executor, callback);
     }
 
@@ -232,7 +251,8 @@ public final class BugreportManager {
     }
 
     @SystemApi
-    public void requestBugreport(BugreportParams params, CharSequence shareTitle, CharSequence shareDescription) {
+    public void requestBugreport(
+            BugreportParams params, CharSequence shareTitle, CharSequence shareDescription) {
         String title;
         String description = null;
         if (shareTitle == null) {
@@ -247,7 +267,8 @@ public final class BugreportManager {
         if (shareDescription != null) {
             description = shareDescription.toString();
         }
-        ActivityManager.getService().requestBugReportWithDescription(title, description, params.getMode());
+        ActivityManager.getService()
+                .requestBugReportWithDescription(title, description, params.getMode());
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -257,7 +278,11 @@ public final class BugreportManager {
         private final boolean mIsConsentDeferred;
         private final boolean mIsScreenshotRequested;
 
-        DumpstateListener(Executor executor, BugreportCallback callback, boolean isScreenshotRequested, boolean isConsentDeferred) {
+        DumpstateListener(
+                Executor executor,
+                BugreportCallback callback,
+                boolean isScreenshotRequested,
+                boolean isConsentDeferred) {
             this.mExecutor = executor;
             this.mCallback = callback;
             this.mIsScreenshotRequested = isScreenshotRequested;
@@ -268,12 +293,15 @@ public final class BugreportManager {
         public void onProgress(final int progress) throws RemoteException {
             long identity = Binder.clearCallingIdentity();
             try {
-                this.mExecutor.execute(new Runnable() { // from class: android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        BugreportManager.DumpstateListener.this.lambda$onProgress$0(progress);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                BugreportManager.DumpstateListener.this.lambda$onProgress$0(
+                                        progress);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
@@ -288,12 +316,14 @@ public final class BugreportManager {
         public void onError(final int errorCode) throws RemoteException {
             long identity = Binder.clearCallingIdentity();
             try {
-                this.mExecutor.execute(new Runnable() { // from class: android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        BugreportManager.DumpstateListener.this.lambda$onError$1(errorCode);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                BugreportManager.DumpstateListener.this.lambda$onError$1(errorCode);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
@@ -309,19 +339,24 @@ public final class BugreportManager {
             long identity = Binder.clearCallingIdentity();
             try {
                 if (this.mIsConsentDeferred) {
-                    this.mExecutor.execute(new Runnable() { // from class: android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda2
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            BugreportManager.DumpstateListener.this.lambda$onFinished$2(bugreportFile);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda2
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    BugreportManager.DumpstateListener.this.lambda$onFinished$2(
+                                            bugreportFile);
+                                }
+                            });
                 } else {
-                    this.mExecutor.execute(new Runnable() { // from class: android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda3
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            BugreportManager.DumpstateListener.this.lambda$onFinished$3();
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda3
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    BugreportManager.DumpstateListener.this.lambda$onFinished$3();
+                                }
+                            });
                 }
             } finally {
                 Binder.restoreCallingIdentity(identity);
@@ -344,12 +379,15 @@ public final class BugreportManager {
                 return;
             }
             Handler mainThreadHandler = new Handler(Looper.getMainLooper());
-            mainThreadHandler.post(new Runnable() { // from class: android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    BugreportManager.DumpstateListener.this.lambda$onScreenshotTaken$4(success);
-                }
-            });
+            mainThreadHandler.post(
+                    new Runnable() { // from class:
+                                     // android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            BugreportManager.DumpstateListener.this.lambda$onScreenshotTaken$4(
+                                    success);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -367,12 +405,15 @@ public final class BugreportManager {
         public void onUiIntensiveBugreportDumpsFinished() throws RemoteException {
             long identity = Binder.clearCallingIdentity();
             try {
-                this.mExecutor.execute(new Runnable() { // from class: android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda4
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        BugreportManager.DumpstateListener.this.lambda$onUiIntensiveBugreportDumpsFinished$5();
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.os.BugreportManager$DumpstateListener$$ExternalSyntheticLambda4
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                BugreportManager.DumpstateListener.this
+                                        .lambda$onUiIntensiveBugreportDumpsFinished$5();
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }

@@ -1,6 +1,7 @@
 package com.samsung.android.allshare.media;
 
 import android.net.Uri;
+
 import com.samsung.android.allshare.Device;
 import com.samsung.android.allshare.ERROR;
 import com.samsung.android.allshare.Item;
@@ -52,7 +53,8 @@ public abstract class ImageViewer extends Device {
 
     public abstract void setEventListener(IImageViewerEventListener iImageViewerEventListener);
 
-    public abstract void setResponseListener(IImageViewerResponseListener iImageViewerResponseListener);
+    public abstract void setResponseListener(
+            IImageViewerResponseListener iImageViewerResponseListener);
 
     public abstract void show(Item item, ContentInfo contentInfo);
 
@@ -60,8 +62,7 @@ public abstract class ImageViewer extends Device {
 
     public abstract void zoom(int i, int i2, int i3, int i4);
 
-    protected ImageViewer() {
-    }
+    protected ImageViewer() {}
 
     public enum ImageViewerState {
         STOPPED("STOPPED"),

@@ -2,12 +2,14 @@ package com.samsung.android.service.ProtectedATCommand.list;
 
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import java.nio.charset.StandardCharsets;
 
 /* loaded from: classes6.dex */
 public class ATCommands {
     static final String TAG = "ATCommands";
-    private static final boolean mIsTestBinary = "eng".equals(SystemProperties.get("ro.build.type"));
+    private static final boolean mIsTestBinary =
+            "eng".equals(SystemProperties.get("ro.build.type"));
     private ATCommandAttribute mAttribute;
     private byte[] mCmds;
     private boolean mFlags;
@@ -162,7 +164,8 @@ public class ATCommands {
                 e.printStackTrace();
             }
             if (raw_c1[i].equals("*")) {
-                if ((this.mFlags || cmd1.getFlags()) && Integer.valueOf(raw_c2[i]).intValue() >= 0) {
+                if ((this.mFlags || cmd1.getFlags())
+                        && Integer.valueOf(raw_c2[i]).intValue() >= 0) {
                     if (Integer.valueOf(raw_c2[i]).intValue() <= 9) {
                         return false;
                     }

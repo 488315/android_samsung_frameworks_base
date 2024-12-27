@@ -5,8 +5,10 @@ import android.os.Debug;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.io.File;
 
 /* loaded from: classes6.dex */
@@ -52,7 +54,11 @@ public class SemWifiApCust {
         if (mSalescode.equals("TMK") || mSalescode.equals("ASR") || mSalescode.equals("TMB")) {
             return "NEWCO";
         }
-        return mSalescode.equals("USC") ? "USC" : (mSalescode.equals("VZW") || mSalescode.equals("VPP")) ? "VZW" : SemInputDeviceManager.MOTION_CONTROL_TYPE_ALL;
+        return mSalescode.equals("USC")
+                ? "USC"
+                : (mSalescode.equals("VZW") || mSalescode.equals("VPP"))
+                        ? "VZW"
+                        : SemInputDeviceManager.MOTION_CONTROL_TYPE_ALL;
     }
 
     public static String readSalesCode() {
@@ -73,7 +79,10 @@ public class SemWifiApCust {
             Log.d(TAG, "isProvisioningNeeded: false, isTablet: true, operator:" + mSalescode);
             return false;
         }
-        String[] provisioningSalesCodes = {"VZW", "ATT", "AIO", "XAR", "TFV", "TFA", "TFN", "LLA", "DSA", "APP", "XAA", "VPP", "SBM"};
+        String[] provisioningSalesCodes = {
+            "VZW", "ATT", "AIO", "XAR", "TFV", "TFA", "TFN", "LLA", "DSA", "APP", "XAA", "VPP",
+            "SBM"
+        };
         for (String str : provisioningSalesCodes) {
             if (str.equals(mSalescode)) {
                 Log.d(TAG, "isProvisioningNeeded: true, operator:" + mSalescode);
@@ -101,49 +110,73 @@ public class SemWifiApCust {
         File file2 = new File("/data/misc/wifi_hostapd/testconf/all");
         if (file2.exists()) {
             mMHSCustomer = "all";
-            Log.d(TAG, "/data/misc/wifi_hostapd/testconf/all is exist! temp mMHSCustomer: " + mMHSCustomer);
+            Log.d(
+                    TAG,
+                    "/data/misc/wifi_hostapd/testconf/all is exist! temp mMHSCustomer: "
+                            + mMHSCustomer);
             return;
         }
         File file3 = new File("/data/misc/wifi_hostapd/testconf/tmo");
         if (file3.exists()) {
             mMHSCustomer = "TMO";
-            Log.d(TAG, "/data/misc/wifi_hostapd/testconf/tmo is exist! temp mMHSCustomer: " + mMHSCustomer);
+            Log.d(
+                    TAG,
+                    "/data/misc/wifi_hostapd/testconf/tmo is exist! temp mMHSCustomer: "
+                            + mMHSCustomer);
             return;
         }
         File file4 = new File("/data/misc/wifi_hostapd/testconf/att");
         if (file4.exists()) {
             mMHSCustomer = "ATT";
-            Log.d(TAG, "/data/misc/wifi_hostapd/testconf/att is exist! temp mMHSCustomer: " + mMHSCustomer);
+            Log.d(
+                    TAG,
+                    "/data/misc/wifi_hostapd/testconf/att is exist! temp mMHSCustomer: "
+                            + mMHSCustomer);
             return;
         }
         File file5 = new File("/data/misc/wifi_hostapd/testconf/spr");
         if (file5.exists()) {
             mMHSCustomer = "SPRINT";
-            Log.d(TAG, "/data/misc/wifi_hostapd/testconf/spr is exist! temp mMHSCustomer: " + mMHSCustomer);
+            Log.d(
+                    TAG,
+                    "/data/misc/wifi_hostapd/testconf/spr is exist! temp mMHSCustomer: "
+                            + mMHSCustomer);
             return;
         }
         File file6 = new File("/data/misc/wifi_hostapd/testconf/lgt");
         if (file6.exists()) {
             mMHSCustomer = "LGT";
-            Log.d(TAG, "/data/misc/wifi_hostapd/testconf/lgt is exist! temp mMHSCustomer: " + mMHSCustomer);
+            Log.d(
+                    TAG,
+                    "/data/misc/wifi_hostapd/testconf/lgt is exist! temp mMHSCustomer: "
+                            + mMHSCustomer);
             return;
         }
         File file7 = new File("/data/misc/wifi_hostapd/testconf/newco");
         if (file7.exists()) {
             mMHSCustomer = "NEWCO";
-            Log.d(TAG, "/data/misc/wifi_hostapd/testconf/newco is exist! temp mMHSCustomer: " + mMHSCustomer);
+            Log.d(
+                    TAG,
+                    "/data/misc/wifi_hostapd/testconf/newco is exist! temp mMHSCustomer: "
+                            + mMHSCustomer);
             return;
         }
         File file8 = new File("/data/misc/wifi_hostapd/testconf/usc");
         if (file8.exists()) {
             mMHSCustomer = "USC";
-            Log.d(TAG, "/data/misc/wifi_hostapd/testconf/usc is exist! temp mMHSCustomer: " + mMHSCustomer);
+            Log.d(
+                    TAG,
+                    "/data/misc/wifi_hostapd/testconf/usc is exist! temp mMHSCustomer: "
+                            + mMHSCustomer);
             return;
         }
         File file9 = new File("/data/misc/wifi_hostapd/testconf/vzw");
         if (file9.exists()) {
             mMHSCustomer = "VZW";
-            Log.d(TAG, "/data/misc/wifi_hostapd/testconf/vzw is exist! temp mMHSCustomer: " + mMHSCustomer);
+            Log.d(
+                    TAG,
+                    "/data/misc/wifi_hostapd/testconf/vzw is exist! temp mMHSCustomer: "
+                            + mMHSCustomer);
         }
     }
 }

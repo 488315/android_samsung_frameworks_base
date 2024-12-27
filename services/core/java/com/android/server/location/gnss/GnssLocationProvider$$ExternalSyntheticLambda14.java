@@ -4,9 +4,10 @@ import android.location.GnssStatus;
 import android.os.RemoteException;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticOutline0;
-import com.android.server.location.gnss.GnssMetrics;
 import com.android.server.location.gnss.sec.SLocationProxy;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,12 +15,14 @@ import java.util.HashSet;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class GnssLocationProvider$$ExternalSyntheticLambda14 implements Runnable {
+public final /* synthetic */ class GnssLocationProvider$$ExternalSyntheticLambda14
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ GnssLocationProvider f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ GnssLocationProvider$$ExternalSyntheticLambda14(GnssLocationProvider gnssLocationProvider, Object obj, int i) {
+    public /* synthetic */ GnssLocationProvider$$ExternalSyntheticLambda14(
+            GnssLocationProvider gnssLocationProvider, Object obj, int i) {
         this.$r8$classId = i;
         this.f$0 = gnssLocationProvider;
         this.f$1 = obj;
@@ -49,7 +52,8 @@ public final /* synthetic */ class GnssLocationProvider$$ExternalSyntheticLambda
                             }
                             double d2 = d / 4.0d;
                             gnssMetrics.mTopFourAverageCn0StatisticsL5.addItem(d2);
-                            gnssMetrics.mL5TopFourAverageCn0DbmHzReportsStatistics.addItem(d2 * 1000.0d);
+                            gnssMetrics.mL5TopFourAverageCn0DbmHzReportsStatistics.addItem(
+                                    d2 * 1000.0d);
                         }
                     }
                 }
@@ -75,7 +79,8 @@ public final /* synthetic */ class GnssLocationProvider$$ExternalSyntheticLambda
                             }
                             double d4 = d3 / 4.0d;
                             gnssMetrics.mTopFourAverageCn0Statistics.addItem(d4);
-                            gnssMetrics.mTopFourAverageCn0DbmHzReportsStatistics.addItem(d4 * 1000.0d);
+                            gnssMetrics.mTopFourAverageCn0DbmHzReportsStatistics.addItem(
+                                    d4 * 1000.0d);
                         }
                     }
                 }
@@ -88,7 +93,10 @@ public final /* synthetic */ class GnssLocationProvider$$ExternalSyntheticLambda
                 int i6 = 0;
                 for (int i7 = 0; i7 < gnssStatus.getSatelliteCount(); i7++) {
                     if (gnssStatus.usedInFix(i7)) {
-                        hashSet.add(new Pair(Integer.valueOf(gnssStatus.getConstellationType(i7)), Integer.valueOf(gnssStatus.getSvid(i7))));
+                        hashSet.add(
+                                new Pair(
+                                        Integer.valueOf(gnssStatus.getConstellationType(i7)),
+                                        Integer.valueOf(gnssStatus.getSvid(i7))));
                         i4++;
                         if (gnssStatus.getCn0DbHz(i7) > i6) {
                             i6 = (int) gnssStatus.getCn0DbHz(i7);
@@ -97,7 +105,11 @@ public final /* synthetic */ class GnssLocationProvider$$ExternalSyntheticLambda
                         int constellationType = gnssStatus.getConstellationType(i7);
                         boolean[] zArr = gnssMetrics.mConstellationTypes;
                         if (constellationType >= zArr.length) {
-                            AudioDeviceInventory$$ExternalSyntheticOutline0.m(constellationType, "Constellation type ", " is not valid.", "GnssMetrics");
+                            AudioDeviceInventory$$ExternalSyntheticOutline0.m(
+                                    constellationType,
+                                    "Constellation type ",
+                                    " is not valid.",
+                                    "GnssMetrics");
                         } else {
                             zArr[constellationType] = true;
                         }
@@ -107,9 +119,12 @@ public final /* synthetic */ class GnssLocationProvider$$ExternalSyntheticLambda
                     i5 /= i4;
                 }
                 gnssLocationProvider.handleReportSvStatusSec(gnssStatus);
-                GnssManagerService$$ExternalSyntheticLambda0 gnssManagerService$$ExternalSyntheticLambda0 = gnssLocationProvider.mSvCallback;
+                GnssManagerService$$ExternalSyntheticLambda0
+                        gnssManagerService$$ExternalSyntheticLambda0 =
+                                gnssLocationProvider.mSvCallback;
                 if (gnssManagerService$$ExternalSyntheticLambda0 != null) {
-                    SLocationProxy sLocationProxy = gnssManagerService$$ExternalSyntheticLambda0.f$0;
+                    SLocationProxy sLocationProxy =
+                            gnssManagerService$$ExternalSyntheticLambda0.f$0;
                     if (sLocationProxy.mSLocationService != null) {
                         int satelliteCount3 = gnssStatus.getSatelliteCount();
                         int[] iArr = new int[satelliteCount3];
@@ -127,7 +142,8 @@ public final /* synthetic */ class GnssLocationProvider$$ExternalSyntheticLambda
                             fArr6[i8] = gnssStatus.getBasebandCn0DbHz(i8);
                         }
                         try {
-                            sLocationProxy.mSLocationService.onSvStatusChanged(satelliteCount3, iArr, fArr2, fArr3, fArr4, fArr5, fArr6);
+                            sLocationProxy.mSLocationService.onSvStatusChanged(
+                                    satelliteCount3, iArr, fArr2, fArr3, fArr4, fArr5, fArr6);
                         } catch (RemoteException e) {
                             Log.e("SLocationProxy", e.toString());
                         }

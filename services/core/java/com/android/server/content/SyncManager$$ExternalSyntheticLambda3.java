@@ -7,7 +7,8 @@ public final /* synthetic */ class SyncManager$$ExternalSyntheticLambda3 impleme
     public final /* synthetic */ SyncManager f$0;
     public final /* synthetic */ int f$1;
 
-    public /* synthetic */ SyncManager$$ExternalSyntheticLambda3(SyncManager syncManager, int i, int i2) {
+    public /* synthetic */ SyncManager$$ExternalSyntheticLambda3(
+            SyncManager syncManager, int i, int i2) {
         this.$r8$classId = i2;
         this.f$0 = syncManager;
         this.f$1 = i;

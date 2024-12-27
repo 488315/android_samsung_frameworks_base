@@ -6,27 +6,31 @@ import android.os.Parcelable;
 import android.os.UserHandle;
 import android.util.DebugUtils;
 import android.util.TimeUtils;
+
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.internal.util.Preconditions;
+
 import java.io.File;
 import java.util.Locale;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public class VolumeRecord implements Parcelable {
-    public static final Parcelable.Creator<VolumeRecord> CREATOR = new Parcelable.Creator<VolumeRecord>() { // from class: android.os.storage.VolumeRecord.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VolumeRecord createFromParcel(Parcel in) {
-            return new VolumeRecord(in);
-        }
+    public static final Parcelable.Creator<VolumeRecord> CREATOR =
+            new Parcelable.Creator<
+                    VolumeRecord>() { // from class: android.os.storage.VolumeRecord.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VolumeRecord createFromParcel(Parcel in) {
+                    return new VolumeRecord(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VolumeRecord[] newArray(int size) {
-            return new VolumeRecord[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VolumeRecord[] newArray(int size) {
+                    return new VolumeRecord[size];
+                }
+            };
     public static final String EXTRA_FS_UUID = "android.os.storage.extra.FS_UUID";
     public static final int USER_FLAG_INITED = 1;
     public static final int USER_FLAG_SNOOZED = 2;
@@ -90,7 +94,21 @@ public class VolumeRecord implements Parcelable {
         File internalPath = new File("/dev/null");
         UserHandle user = new UserHandle(-10000);
         String description = this.nickname;
-        return new StorageVolume(id, userPath, internalPath, description == null ? context.getString(17039374) : description, false, true, false, false, false, 0L, user, null, this.fsUuid, "unknown");
+        return new StorageVolume(
+                id,
+                userPath,
+                internalPath,
+                description == null ? context.getString(17039374) : description,
+                false,
+                true,
+                false,
+                false,
+                false,
+                0L,
+                user,
+                null,
+                this.fsUuid,
+                "unknown");
     }
 
     public void dump(IndentingPrintWriter pw) {
@@ -101,7 +119,9 @@ public class VolumeRecord implements Parcelable {
         pw.printPair("partGuid", this.partGuid);
         pw.println();
         pw.printPair("nickname", this.nickname);
-        pw.printPair("userFlags", DebugUtils.flagsToString(VolumeRecord.class, "USER_FLAG_", this.userFlags));
+        pw.printPair(
+                "userFlags",
+                DebugUtils.flagsToString(VolumeRecord.class, "USER_FLAG_", this.userFlags));
         pw.println();
         pw.printPair("createdMillis", TimeUtils.formatForLogging(this.createdMillis));
         pw.printPair("lastSeenMillis", TimeUtils.formatForLogging(this.lastSeenMillis));

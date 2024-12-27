@@ -6,12 +6,12 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import vendor.samsung.hardware.biometrics.face.ISehSession;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public interface ISehFace extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$biometrics$face$ISehFace".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$biometrics$face$ISehFace".replace('$', '.');
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements ISehFace {
@@ -27,7 +27,8 @@ public interface ISehFace extends IInterface {
                 return this.mRemote;
             }
 
-            public final ISehSession createSession(int i, int i2, ISessionCallback iSessionCallback) {
+            public final ISehSession createSession(
+                    int i, int i2, ISessionCallback iSessionCallback) {
                 ISehSession iSehSession;
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
@@ -45,8 +46,10 @@ public interface ISehFace extends IInterface {
                     if (readStrongBinder == null) {
                         iSehSession = null;
                     } else {
-                        IInterface queryLocalInterface = readStrongBinder.queryLocalInterface(ISehSession.DESCRIPTOR);
-                        if (queryLocalInterface == null || !(queryLocalInterface instanceof ISehSession)) {
+                        IInterface queryLocalInterface =
+                                readStrongBinder.queryLocalInterface(ISehSession.DESCRIPTOR);
+                        if (queryLocalInterface == null
+                                || !(queryLocalInterface instanceof ISehSession)) {
                             ISehSession.Stub.Proxy proxy = new ISehSession.Stub.Proxy();
                             proxy.mRemote = readStrongBinder;
                             iSehSession = proxy;

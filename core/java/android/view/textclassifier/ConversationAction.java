@@ -4,25 +4,29 @@ import android.app.RemoteAction;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class ConversationAction implements Parcelable {
-    public static final Parcelable.Creator<ConversationAction> CREATOR = new Parcelable.Creator<ConversationAction>() { // from class: android.view.textclassifier.ConversationAction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConversationAction createFromParcel(Parcel in) {
-            return new ConversationAction(in);
-        }
+    public static final Parcelable.Creator<ConversationAction> CREATOR =
+            new Parcelable.Creator<
+                    ConversationAction>() { // from class:
+                                            // android.view.textclassifier.ConversationAction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConversationAction createFromParcel(Parcel in) {
+                    return new ConversationAction(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConversationAction[] newArray(int size) {
-            return new ConversationAction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConversationAction[] newArray(int size) {
+                    return new ConversationAction[size];
+                }
+            };
     public static final String TYPE_ADD_CONTACT = "add_contact";
     public static final String TYPE_CALL_PHONE = "call_phone";
     public static final String TYPE_COPY = "copy";
@@ -42,10 +46,10 @@ public final class ConversationAction implements Parcelable {
     private final String mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ActionType {
-    }
+    public @interface ActionType {}
 
-    private ConversationAction(String type, RemoteAction action, CharSequence textReply, float score, Bundle extras) {
+    private ConversationAction(
+            String type, RemoteAction action, CharSequence textReply, float score, Bundle extras) {
         this.mType = (String) Objects.requireNonNull(type);
         this.mAction = action;
         this.mTextReply = textReply;
@@ -96,7 +100,11 @@ public final class ConversationAction implements Parcelable {
     }
 
     public Builder toBuilder() {
-        return new Builder(this.mType).setTextReply(this.mTextReply).setAction(this.mAction).setConfidenceScore(this.mScore).setExtras(this.mExtras);
+        return new Builder(this.mType)
+                .setTextReply(this.mTextReply)
+                .setAction(this.mAction)
+                .setConfidenceScore(this.mScore)
+                .setExtras(this.mExtras);
     }
 
     public static final class Builder {
@@ -131,7 +139,12 @@ public final class ConversationAction implements Parcelable {
         }
 
         public ConversationAction build() {
-            return new ConversationAction(this.mType, this.mAction, this.mTextReply, this.mScore, this.mExtras == null ? Bundle.EMPTY : this.mExtras);
+            return new ConversationAction(
+                    this.mType,
+                    this.mAction,
+                    this.mTextReply,
+                    this.mScore,
+                    this.mExtras == null ? Bundle.EMPTY : this.mExtras);
         }
     }
 }

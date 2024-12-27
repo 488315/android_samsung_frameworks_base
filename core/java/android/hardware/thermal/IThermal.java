@@ -1,7 +1,5 @@
 package android.hardware.thermal;
 
-import android.hardware.thermal.ICoolingDeviceChangedCallback;
-import android.hardware.thermal.IThermalChangedCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -30,15 +28,21 @@ public interface IThermal extends IInterface {
 
     Temperature[] getTemperaturesWithType(int i) throws RemoteException;
 
-    void registerCoolingDeviceChangedCallbackWithType(ICoolingDeviceChangedCallback iCoolingDeviceChangedCallback, int i) throws RemoteException;
+    void registerCoolingDeviceChangedCallbackWithType(
+            ICoolingDeviceChangedCallback iCoolingDeviceChangedCallback, int i)
+            throws RemoteException;
 
-    void registerThermalChangedCallback(IThermalChangedCallback iThermalChangedCallback) throws RemoteException;
+    void registerThermalChangedCallback(IThermalChangedCallback iThermalChangedCallback)
+            throws RemoteException;
 
-    void registerThermalChangedCallbackWithType(IThermalChangedCallback iThermalChangedCallback, int i) throws RemoteException;
+    void registerThermalChangedCallbackWithType(
+            IThermalChangedCallback iThermalChangedCallback, int i) throws RemoteException;
 
-    void unregisterCoolingDeviceChangedCallback(ICoolingDeviceChangedCallback iCoolingDeviceChangedCallback) throws RemoteException;
+    void unregisterCoolingDeviceChangedCallback(
+            ICoolingDeviceChangedCallback iCoolingDeviceChangedCallback) throws RemoteException;
 
-    void unregisterThermalChangedCallback(IThermalChangedCallback iThermalChangedCallback) throws RemoteException;
+    void unregisterThermalChangedCallback(IThermalChangedCallback iThermalChangedCallback)
+            throws RemoteException;
 
     public static class Default implements IThermal {
         @Override // android.hardware.thermal.IThermal
@@ -67,29 +71,30 @@ public interface IThermal extends IInterface {
         }
 
         @Override // android.hardware.thermal.IThermal
-        public TemperatureThreshold[] getTemperatureThresholdsWithType(int type) throws RemoteException {
+        public TemperatureThreshold[] getTemperatureThresholdsWithType(int type)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.thermal.IThermal
-        public void registerThermalChangedCallback(IThermalChangedCallback callback) throws RemoteException {
-        }
+        public void registerThermalChangedCallback(IThermalChangedCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.thermal.IThermal
-        public void registerThermalChangedCallbackWithType(IThermalChangedCallback callback, int type) throws RemoteException {
-        }
+        public void registerThermalChangedCallbackWithType(
+                IThermalChangedCallback callback, int type) throws RemoteException {}
 
         @Override // android.hardware.thermal.IThermal
-        public void unregisterThermalChangedCallback(IThermalChangedCallback callback) throws RemoteException {
-        }
+        public void unregisterThermalChangedCallback(IThermalChangedCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.thermal.IThermal
-        public void registerCoolingDeviceChangedCallbackWithType(ICoolingDeviceChangedCallback callback, int type) throws RemoteException {
-        }
+        public void registerCoolingDeviceChangedCallbackWithType(
+                ICoolingDeviceChangedCallback callback, int type) throws RemoteException {}
 
         @Override // android.hardware.thermal.IThermal
-        public void unregisterCoolingDeviceChangedCallback(ICoolingDeviceChangedCallback callback) throws RemoteException {
-        }
+        public void unregisterCoolingDeviceChangedCallback(ICoolingDeviceChangedCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.thermal.IThermal
         public int getInterfaceVersion() {
@@ -107,7 +112,7 @@ public interface IThermal extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IThermal {
+    public abstract static class Stub extends Binder implements IThermal {
         static final int TRANSACTION_getCoolingDevices = 1;
         static final int TRANSACTION_getCoolingDevicesWithType = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -182,7 +187,8 @@ public interface IThermal extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -239,33 +245,38 @@ public interface IThermal extends IInterface {
                     reply.writeTypedArray(_result6, 1);
                     return true;
                 case 7:
-                    IThermalChangedCallback _arg04 = IThermalChangedCallback.Stub.asInterface(data.readStrongBinder());
+                    IThermalChangedCallback _arg04 =
+                            IThermalChangedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerThermalChangedCallback(_arg04);
                     reply.writeNoException();
                     return true;
                 case 8:
-                    IThermalChangedCallback _arg05 = IThermalChangedCallback.Stub.asInterface(data.readStrongBinder());
+                    IThermalChangedCallback _arg05 =
+                            IThermalChangedCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     registerThermalChangedCallbackWithType(_arg05, _arg1);
                     reply.writeNoException();
                     return true;
                 case 9:
-                    IThermalChangedCallback _arg06 = IThermalChangedCallback.Stub.asInterface(data.readStrongBinder());
+                    IThermalChangedCallback _arg06 =
+                            IThermalChangedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterThermalChangedCallback(_arg06);
                     reply.writeNoException();
                     return true;
                 case 10:
-                    ICoolingDeviceChangedCallback _arg07 = ICoolingDeviceChangedCallback.Stub.asInterface(data.readStrongBinder());
+                    ICoolingDeviceChangedCallback _arg07 =
+                            ICoolingDeviceChangedCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg12 = data.readInt();
                     data.enforceNoDataAvail();
                     registerCoolingDeviceChangedCallbackWithType(_arg07, _arg12);
                     reply.writeNoException();
                     return true;
                 case 11:
-                    ICoolingDeviceChangedCallback _arg08 = ICoolingDeviceChangedCallback.Stub.asInterface(data.readStrongBinder());
+                    ICoolingDeviceChangedCallback _arg08 =
+                            ICoolingDeviceChangedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCoolingDeviceChangedCallback(_arg08);
                     reply.writeNoException();
@@ -304,7 +315,8 @@ public interface IThermal extends IInterface {
                         throw new RemoteException("Method getCoolingDevices is unimplemented.");
                     }
                     _reply.readException();
-                    CoolingDevice[] _result = (CoolingDevice[]) _reply.createTypedArray(CoolingDevice.CREATOR);
+                    CoolingDevice[] _result =
+                            (CoolingDevice[]) _reply.createTypedArray(CoolingDevice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -321,10 +333,12 @@ public interface IThermal extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(2, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getCoolingDevicesWithType is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCoolingDevicesWithType is unimplemented.");
                     }
                     _reply.readException();
-                    CoolingDevice[] _result = (CoolingDevice[]) _reply.createTypedArray(CoolingDevice.CREATOR);
+                    CoolingDevice[] _result =
+                            (CoolingDevice[]) _reply.createTypedArray(CoolingDevice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -343,7 +357,8 @@ public interface IThermal extends IInterface {
                         throw new RemoteException("Method getTemperatures is unimplemented.");
                     }
                     _reply.readException();
-                    Temperature[] _result = (Temperature[]) _reply.createTypedArray(Temperature.CREATOR);
+                    Temperature[] _result =
+                            (Temperature[]) _reply.createTypedArray(Temperature.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -360,10 +375,12 @@ public interface IThermal extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(4, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getTemperaturesWithType is unimplemented.");
+                        throw new RemoteException(
+                                "Method getTemperaturesWithType is unimplemented.");
                     }
                     _reply.readException();
-                    Temperature[] _result = (Temperature[]) _reply.createTypedArray(Temperature.CREATOR);
+                    Temperature[] _result =
+                            (Temperature[]) _reply.createTypedArray(Temperature.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -379,10 +396,13 @@ public interface IThermal extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(5, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getTemperatureThresholds is unimplemented.");
+                        throw new RemoteException(
+                                "Method getTemperatureThresholds is unimplemented.");
                     }
                     _reply.readException();
-                    TemperatureThreshold[] _result = (TemperatureThreshold[]) _reply.createTypedArray(TemperatureThreshold.CREATOR);
+                    TemperatureThreshold[] _result =
+                            (TemperatureThreshold[])
+                                    _reply.createTypedArray(TemperatureThreshold.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -391,7 +411,8 @@ public interface IThermal extends IInterface {
             }
 
             @Override // android.hardware.thermal.IThermal
-            public TemperatureThreshold[] getTemperatureThresholdsWithType(int type) throws RemoteException {
+            public TemperatureThreshold[] getTemperatureThresholdsWithType(int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -399,10 +420,13 @@ public interface IThermal extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(6, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getTemperatureThresholdsWithType is unimplemented.");
+                        throw new RemoteException(
+                                "Method getTemperatureThresholdsWithType is unimplemented.");
                     }
                     _reply.readException();
-                    TemperatureThreshold[] _result = (TemperatureThreshold[]) _reply.createTypedArray(TemperatureThreshold.CREATOR);
+                    TemperatureThreshold[] _result =
+                            (TemperatureThreshold[])
+                                    _reply.createTypedArray(TemperatureThreshold.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -411,7 +435,8 @@ public interface IThermal extends IInterface {
             }
 
             @Override // android.hardware.thermal.IThermal
-            public void registerThermalChangedCallback(IThermalChangedCallback callback) throws RemoteException {
+            public void registerThermalChangedCallback(IThermalChangedCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -419,7 +444,8 @@ public interface IThermal extends IInterface {
                     _data.writeStrongInterface(callback);
                     boolean _status = this.mRemote.transact(7, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method registerThermalChangedCallback is unimplemented.");
+                        throw new RemoteException(
+                                "Method registerThermalChangedCallback is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -429,7 +455,8 @@ public interface IThermal extends IInterface {
             }
 
             @Override // android.hardware.thermal.IThermal
-            public void registerThermalChangedCallbackWithType(IThermalChangedCallback callback, int type) throws RemoteException {
+            public void registerThermalChangedCallbackWithType(
+                    IThermalChangedCallback callback, int type) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -438,7 +465,8 @@ public interface IThermal extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(8, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method registerThermalChangedCallbackWithType is unimplemented.");
+                        throw new RemoteException(
+                                "Method registerThermalChangedCallbackWithType is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -448,7 +476,8 @@ public interface IThermal extends IInterface {
             }
 
             @Override // android.hardware.thermal.IThermal
-            public void unregisterThermalChangedCallback(IThermalChangedCallback callback) throws RemoteException {
+            public void unregisterThermalChangedCallback(IThermalChangedCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -456,7 +485,8 @@ public interface IThermal extends IInterface {
                     _data.writeStrongInterface(callback);
                     boolean _status = this.mRemote.transact(9, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method unregisterThermalChangedCallback is unimplemented.");
+                        throw new RemoteException(
+                                "Method unregisterThermalChangedCallback is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -466,7 +496,8 @@ public interface IThermal extends IInterface {
             }
 
             @Override // android.hardware.thermal.IThermal
-            public void registerCoolingDeviceChangedCallbackWithType(ICoolingDeviceChangedCallback callback, int type) throws RemoteException {
+            public void registerCoolingDeviceChangedCallbackWithType(
+                    ICoolingDeviceChangedCallback callback, int type) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -475,7 +506,9 @@ public interface IThermal extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(10, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method registerCoolingDeviceChangedCallbackWithType is unimplemented.");
+                        throw new RemoteException(
+                                "Method registerCoolingDeviceChangedCallbackWithType is"
+                                        + " unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -485,7 +518,8 @@ public interface IThermal extends IInterface {
             }
 
             @Override // android.hardware.thermal.IThermal
-            public void unregisterCoolingDeviceChangedCallback(ICoolingDeviceChangedCallback callback) throws RemoteException {
+            public void unregisterCoolingDeviceChangedCallback(
+                    ICoolingDeviceChangedCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -493,7 +527,8 @@ public interface IThermal extends IInterface {
                     _data.writeStrongInterface(callback);
                     boolean _status = this.mRemote.transact(11, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method unregisterCoolingDeviceChangedCallback is unimplemented.");
+                        throw new RemoteException(
+                                "Method unregisterCoolingDeviceChangedCallback is unimplemented.");
                     }
                     _reply.readException();
                 } finally {

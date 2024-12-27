@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -11,19 +12,22 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class CapabilityChangeRequest implements Parcelable {
-    public static final Parcelable.Creator<CapabilityChangeRequest> CREATOR = new Parcelable.Creator<CapabilityChangeRequest>() { // from class: android.telephony.ims.feature.CapabilityChangeRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CapabilityChangeRequest createFromParcel(Parcel in) {
-            return new CapabilityChangeRequest(in);
-        }
+    public static final Parcelable.Creator<CapabilityChangeRequest> CREATOR =
+            new Parcelable.Creator<
+                    CapabilityChangeRequest>() { // from class:
+                                                 // android.telephony.ims.feature.CapabilityChangeRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CapabilityChangeRequest createFromParcel(Parcel in) {
+                    return new CapabilityChangeRequest(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CapabilityChangeRequest[] newArray(int size) {
-            return new CapabilityChangeRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CapabilityChangeRequest[] newArray(int size) {
+                    return new CapabilityChangeRequest[size];
+                }
+            };
     private final Set<CapabilityPair> mCapabilitiesToDisable;
     private final Set<CapabilityPair> mCapabilitiesToEnable;
 
@@ -61,7 +65,11 @@ public final class CapabilityChangeRequest implements Parcelable {
         }
 
         public String toString() {
-            return "CapabilityPair{mCapability=" + this.mCapability + ", radioTech=" + this.radioTech + '}';
+            return "CapabilityPair{mCapability="
+                    + this.mCapability
+                    + ", radioTech="
+                    + this.radioTech
+                    + '}';
         }
     }
 
@@ -128,7 +136,11 @@ public final class CapabilityChangeRequest implements Parcelable {
     }
 
     public String toString() {
-        return "CapabilityChangeRequest{mCapabilitiesToEnable=" + this.mCapabilitiesToEnable + ", mCapabilitiesToDisable=" + this.mCapabilitiesToDisable + '}';
+        return "CapabilityChangeRequest{mCapabilitiesToEnable="
+                + this.mCapabilitiesToEnable
+                + ", mCapabilitiesToDisable="
+                + this.mCapabilitiesToDisable
+                + '}';
     }
 
     public boolean equals(Object o) {

@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
@@ -15,12 +16,11 @@ public interface IContextHubTransactionCallback extends IInterface {
 
     public static class Default implements IContextHubTransactionCallback {
         @Override // android.hardware.location.IContextHubTransactionCallback
-        public void onQueryResponse(int result, List<NanoAppState> nanoappList) throws RemoteException {
-        }
+        public void onQueryResponse(int result, List<NanoAppState> nanoappList)
+                throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubTransactionCallback
-        public void onTransactionComplete(int result) throws RemoteException {
-        }
+        public void onTransactionComplete(int result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,8 +28,9 @@ public interface IContextHubTransactionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContextHubTransactionCallback {
-        public static final String DESCRIPTOR = "android.hardware.location.IContextHubTransactionCallback";
+    public abstract static class Stub extends Binder implements IContextHubTransactionCallback {
+        public static final String DESCRIPTOR =
+                "android.hardware.location.IContextHubTransactionCallback";
         static final int TRANSACTION_onQueryResponse = 1;
         static final int TRANSACTION_onTransactionComplete = 2;
 
@@ -70,7 +71,8 @@ public interface IContextHubTransactionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -112,7 +114,8 @@ public interface IContextHubTransactionCallback extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubTransactionCallback
-            public void onQueryResponse(int result, List<NanoAppState> nanoappList) throws RemoteException {
+            public void onQueryResponse(int result, List<NanoAppState> nanoappList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

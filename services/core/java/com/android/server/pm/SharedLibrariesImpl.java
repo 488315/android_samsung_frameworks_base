@@ -13,6 +13,7 @@ import android.util.ArraySet;
 import android.util.PackageUtils;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags;
 import com.android.internal.pm.parsing.pkg.AndroidPackageInternal;
 import com.android.internal.pm.parsing.pkg.ParsedPackage;
@@ -30,6 +31,9 @@ import com.android.server.utils.WatchableImpl;
 import com.android.server.utils.WatchedArrayMap;
 import com.android.server.utils.WatchedLongSparseArray;
 import com.android.server.utils.Watcher;
+
+import libcore.util.HexEncoding;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +43,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
-import libcore.util.HexEncoding;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -60,27 +63,40 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
     public final class AnonymousClass2 extends SnapshotCache {
         @Override // com.android.server.utils.SnapshotCache
         public final Object createSnapshot() {
-            SharedLibrariesImpl sharedLibrariesImpl = new SharedLibrariesImpl((SharedLibrariesImpl) this.mSource);
+            SharedLibrariesImpl sharedLibrariesImpl =
+                    new SharedLibrariesImpl((SharedLibrariesImpl) this.mSource);
             sharedLibrariesImpl.mWatchable.seal();
             return sharedLibrariesImpl;
         }
     }
 
-    public SharedLibrariesImpl(PackageManagerService packageManagerService, PackageManagerServiceInjector packageManagerServiceInjector) {
+    public SharedLibrariesImpl(
+            PackageManagerService packageManagerService,
+            PackageManagerServiceInjector packageManagerServiceInjector) {
         Watcher watcher = new Watcher() { // from class: com.android.server.pm.SharedLibrariesImpl.1
-            @Override // com.android.server.utils.Watcher
-            public final void onChange(Watchable watchable) {
-                SharedLibrariesImpl.this.dispatchChange(watchable);
-            }
-        };
+                    @Override // com.android.server.utils.Watcher
+                    public final void onChange(Watchable watchable) {
+                        SharedLibrariesImpl.this.dispatchChange(watchable);
+                    }
+                };
         this.mPm = packageManagerService;
         this.mInjector = packageManagerServiceInjector;
         WatchedArrayMap watchedArrayMap = new WatchedArrayMap(0);
         this.mSharedLibraries = watchedArrayMap;
-        this.mSharedLibrariesSnapshot = new SnapshotCache.Auto(watchedArrayMap, watchedArrayMap, "SharedLibrariesImpl.mSharedLibraries", 0);
+        this.mSharedLibrariesSnapshot =
+                new SnapshotCache.Auto(
+                        watchedArrayMap,
+                        watchedArrayMap,
+                        "SharedLibrariesImpl.mSharedLibraries",
+                        0);
         WatchedArrayMap watchedArrayMap2 = new WatchedArrayMap(0);
         this.mStaticLibsByDeclaringPackage = watchedArrayMap2;
-        this.mStaticLibsByDeclaringPackageSnapshot = new SnapshotCache.Auto(watchedArrayMap2, watchedArrayMap2, "SharedLibrariesImpl.mStaticLibsByDeclaringPackage", 0);
+        this.mStaticLibsByDeclaringPackageSnapshot =
+                new SnapshotCache.Auto(
+                        watchedArrayMap2,
+                        watchedArrayMap2,
+                        "SharedLibrariesImpl.mStaticLibsByDeclaringPackage",
+                        0);
         watchedArrayMap.registerObserver(watcher);
         watchedArrayMap2.registerObserver(watcher);
         Watchable.verifyWatchedAttributes(this, watcher, false);
@@ -96,9 +112,12 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         };
         this.mPm = sharedLibrariesImpl.mPm;
         this.mInjector = sharedLibrariesImpl.mInjector;
-        this.mSharedLibraries = (WatchedArrayMap) sharedLibrariesImpl.mSharedLibrariesSnapshot.snapshot();
+        this.mSharedLibraries =
+                (WatchedArrayMap) sharedLibrariesImpl.mSharedLibrariesSnapshot.snapshot();
         this.mSharedLibrariesSnapshot = new SnapshotCache.Auto();
-        this.mStaticLibsByDeclaringPackage = (WatchedArrayMap) sharedLibrariesImpl.mStaticLibsByDeclaringPackageSnapshot.snapshot();
+        this.mStaticLibsByDeclaringPackage =
+                (WatchedArrayMap)
+                        sharedLibrariesImpl.mStaticLibsByDeclaringPackageSnapshot.snapshot();
         this.mStaticLibsByDeclaringPackageSnapshot = new SnapshotCache.Auto();
         this.mSnapshot = new SnapshotCache.Auto();
     }
@@ -116,17 +135,35 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         return false;
     }
 
-    public final void addBuiltInSharedLibraryLPw(SystemConfig.SharedLibraryEntry sharedLibraryEntry) {
+    public final void addBuiltInSharedLibraryLPw(
+            SystemConfig.SharedLibraryEntry sharedLibraryEntry) {
         if (getSharedLibraryInfo(-1L, sharedLibraryEntry.name) != null) {
             return;
         }
-        commitSharedLibraryInfoLPw(new SharedLibraryInfo(sharedLibraryEntry.filename, null, null, sharedLibraryEntry.name, -1L, 0, new VersionedPackage("android", 0L), null, null, sharedLibraryEntry.isNative));
+        commitSharedLibraryInfoLPw(
+                new SharedLibraryInfo(
+                        sharedLibraryEntry.filename,
+                        null,
+                        null,
+                        sharedLibraryEntry.name,
+                        -1L,
+                        0,
+                        new VersionedPackage("android", 0L),
+                        null,
+                        null,
+                        sharedLibraryEntry.isNative));
     }
 
-    public final void applyDefiningSharedLibraryUpdateLPr(AndroidPackage androidPackage, SharedLibraryInfo sharedLibraryInfo, BiConsumer biConsumer) {
+    public final void applyDefiningSharedLibraryUpdateLPr(
+            AndroidPackage androidPackage,
+            SharedLibraryInfo sharedLibraryInfo,
+            BiConsumer biConsumer) {
         if (AndroidPackageUtils.isLibrary(androidPackage)) {
             if (androidPackage.getSdkLibraryName() != null) {
-                SharedLibraryInfo sharedLibraryInfo2 = getSharedLibraryInfo(androidPackage.getSdkLibVersionMajor(), androidPackage.getSdkLibraryName());
+                SharedLibraryInfo sharedLibraryInfo2 =
+                        getSharedLibraryInfo(
+                                androidPackage.getSdkLibVersionMajor(),
+                                androidPackage.getSdkLibraryName());
                 if (sharedLibraryInfo2 != null) {
                     biConsumer.accept(sharedLibraryInfo2, sharedLibraryInfo);
                     return;
@@ -134,7 +171,10 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                 return;
             }
             if (androidPackage.getStaticSharedLibraryName() != null) {
-                SharedLibraryInfo sharedLibraryInfo3 = getSharedLibraryInfo(androidPackage.getStaticSharedLibraryVersion(), androidPackage.getStaticSharedLibraryName());
+                SharedLibraryInfo sharedLibraryInfo3 =
+                        getSharedLibraryInfo(
+                                androidPackage.getStaticSharedLibraryVersion(),
+                                androidPackage.getStaticSharedLibraryName());
                 if (sharedLibraryInfo3 != null) {
                     biConsumer.accept(sharedLibraryInfo3, sharedLibraryInfo);
                     return;
@@ -143,7 +183,8 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
             }
             Iterator it = androidPackage.getLibraryNames().iterator();
             while (it.hasNext()) {
-                SharedLibraryInfo sharedLibraryInfo4 = getSharedLibraryInfo(-1L, (String) it.next());
+                SharedLibraryInfo sharedLibraryInfo4 =
+                        getSharedLibraryInfo(-1L, (String) it.next());
                 if (sharedLibraryInfo4 != null) {
                     biConsumer.accept(sharedLibraryInfo4, sharedLibraryInfo);
                 }
@@ -151,18 +192,57 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         }
     }
 
-    public final ArrayList collectSharedLibraryInfos(AndroidPackage androidPackage, Map map, Map map2) {
+    public final ArrayList collectSharedLibraryInfos(
+            AndroidPackage androidPackage, Map map, Map map2) {
         boolean z;
         if (androidPackage == null) {
             return null;
         }
         PlatformCompat compatibility = this.mInjector.getCompatibility();
-        ArrayList collectSharedLibraryInfos = androidPackage.getUsesLibraries().isEmpty() ? null : collectSharedLibraryInfos(androidPackage.getUsesLibraries(), null, null, null, androidPackage.getPackageName(), "shared", true, androidPackage.getTargetSdkVersion(), null, map, map2);
+        ArrayList collectSharedLibraryInfos =
+                androidPackage.getUsesLibraries().isEmpty()
+                        ? null
+                        : collectSharedLibraryInfos(
+                                androidPackage.getUsesLibraries(),
+                                null,
+                                null,
+                                null,
+                                androidPackage.getPackageName(),
+                                "shared",
+                                true,
+                                androidPackage.getTargetSdkVersion(),
+                                null,
+                                map,
+                                map2);
         if (!androidPackage.getUsesStaticLibraries().isEmpty()) {
-            collectSharedLibraryInfos = collectSharedLibraryInfos(androidPackage.getUsesStaticLibraries(), androidPackage.getUsesStaticLibrariesVersions(), androidPackage.getUsesStaticLibrariesCertDigests(), null, androidPackage.getPackageName(), "static shared", true, androidPackage.getTargetSdkVersion(), collectSharedLibraryInfos, map, map2);
+            collectSharedLibraryInfos =
+                    collectSharedLibraryInfos(
+                            androidPackage.getUsesStaticLibraries(),
+                            androidPackage.getUsesStaticLibrariesVersions(),
+                            androidPackage.getUsesStaticLibrariesCertDigests(),
+                            null,
+                            androidPackage.getPackageName(),
+                            "static shared",
+                            true,
+                            androidPackage.getTargetSdkVersion(),
+                            collectSharedLibraryInfos,
+                            map,
+                            map2);
         }
         if (!androidPackage.getUsesOptionalLibraries().isEmpty()) {
-            collectSharedLibraryInfos = collectSharedLibraryInfos(androidPackage.getUsesOptionalLibraries(), null, null, null, androidPackage.getPackageName(), "shared", false, androidPackage.getTargetSdkVersion(), collectSharedLibraryInfos, map, map2);
+            collectSharedLibraryInfos =
+                    collectSharedLibraryInfos(
+                            androidPackage.getUsesOptionalLibraries(),
+                            null,
+                            null,
+                            null,
+                            androidPackage.getPackageName(),
+                            "shared",
+                            false,
+                            androidPackage.getTargetSdkVersion(),
+                            collectSharedLibraryInfos,
+                            map,
+                            map2);
         }
         String packageName = androidPackage.getPackageName();
         int targetSdkVersion = androidPackage.getTargetSdkVersion();
@@ -176,20 +256,66 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         }
         if (z) {
             if (!androidPackage.getUsesNativeLibraries().isEmpty()) {
-                collectSharedLibraryInfos = collectSharedLibraryInfos(androidPackage.getUsesNativeLibraries(), null, null, null, androidPackage.getPackageName(), "native shared", true, androidPackage.getTargetSdkVersion(), collectSharedLibraryInfos, map, map2);
+                collectSharedLibraryInfos =
+                        collectSharedLibraryInfos(
+                                androidPackage.getUsesNativeLibraries(),
+                                null,
+                                null,
+                                null,
+                                androidPackage.getPackageName(),
+                                "native shared",
+                                true,
+                                androidPackage.getTargetSdkVersion(),
+                                collectSharedLibraryInfos,
+                                map,
+                                map2);
             }
             if (!androidPackage.getUsesOptionalNativeLibraries().isEmpty()) {
-                collectSharedLibraryInfos = collectSharedLibraryInfos(androidPackage.getUsesOptionalNativeLibraries(), null, null, null, androidPackage.getPackageName(), "native shared", false, androidPackage.getTargetSdkVersion(), collectSharedLibraryInfos, map, map2);
+                collectSharedLibraryInfos =
+                        collectSharedLibraryInfos(
+                                androidPackage.getUsesOptionalNativeLibraries(),
+                                null,
+                                null,
+                                null,
+                                androidPackage.getPackageName(),
+                                "native shared",
+                                false,
+                                androidPackage.getTargetSdkVersion(),
+                                collectSharedLibraryInfos,
+                                map,
+                                map2);
             }
         }
         if (androidPackage.getUsesSdkLibraries().isEmpty()) {
             return collectSharedLibraryInfos;
         }
-        return collectSharedLibraryInfos(androidPackage.getUsesSdkLibraries(), androidPackage.getUsesSdkLibrariesVersionsMajor(), androidPackage.getUsesSdkLibrariesCertDigests(), androidPackage.getUsesSdkLibrariesOptional(), androidPackage.getPackageName(), "sdk", !Flags.sdkLibIndependence(), androidPackage.getTargetSdkVersion(), collectSharedLibraryInfos, map, map2);
+        return collectSharedLibraryInfos(
+                androidPackage.getUsesSdkLibraries(),
+                androidPackage.getUsesSdkLibrariesVersionsMajor(),
+                androidPackage.getUsesSdkLibrariesCertDigests(),
+                androidPackage.getUsesSdkLibrariesOptional(),
+                androidPackage.getPackageName(),
+                "sdk",
+                !Flags.sdkLibIndependence(),
+                androidPackage.getTargetSdkVersion(),
+                collectSharedLibraryInfos,
+                map,
+                map2);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final ArrayList collectSharedLibraryInfos(List list, long[] jArr, String[][] strArr, boolean[] zArr, String str, String str2, boolean z, int i, ArrayList arrayList, Map map, Map map2) {
+    public final ArrayList collectSharedLibraryInfos(
+            List list,
+            long[] jArr,
+            String[][] strArr,
+            boolean[] zArr,
+            String str,
+            String str2,
+            boolean z,
+            int i,
+            ArrayList arrayList,
+            Map map,
+            Map map2) {
         SharedLibraryInfo sharedLibraryInfo;
         char c;
         int i2;
@@ -208,13 +334,20 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                 try {
                     WatchedArrayMap watchedArrayMap = this.mSharedLibraries;
                     if (map2 != null) {
-                        WatchedLongSparseArray watchedLongSparseArray = (WatchedLongSparseArray) ((ArrayMap) map2).get(str3);
-                        sharedLibraryInfo = watchedLongSparseArray != null ? (SharedLibraryInfo) watchedLongSparseArray.mStorage.get(j) : null;
-                        if (sharedLibraryInfo != null) {
-                        }
+                        WatchedLongSparseArray watchedLongSparseArray =
+                                (WatchedLongSparseArray) ((ArrayMap) map2).get(str3);
+                        sharedLibraryInfo =
+                                watchedLongSparseArray != null
+                                        ? (SharedLibraryInfo) watchedLongSparseArray.mStorage.get(j)
+                                        : null;
+                        if (sharedLibraryInfo != null) {}
                     }
-                    WatchedLongSparseArray watchedLongSparseArray2 = (WatchedLongSparseArray) watchedArrayMap.mStorage.get(str3);
-                    sharedLibraryInfo = watchedLongSparseArray2 == null ? null : (SharedLibraryInfo) watchedLongSparseArray2.mStorage.get(j);
+                    WatchedLongSparseArray watchedLongSparseArray2 =
+                            (WatchedLongSparseArray) watchedArrayMap.mStorage.get(str3);
+                    sharedLibraryInfo =
+                            watchedLongSparseArray2 == null
+                                    ? null
+                                    : (SharedLibraryInfo) watchedLongSparseArray2.mStorage.get(j);
                 } catch (Throwable th) {
                     boolean z3 = PackageManagerService.DEBUG_COMPRESSION;
                     throw th;
@@ -225,49 +358,100 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                     c = c2;
                 } else {
                     if (sharedLibraryInfo.getLongVersion() != jArr[i4]) {
-                        StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("Package ", str, " requires unavailable ", str2, " library ");
+                        StringBuilder m =
+                                InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                        "Package ",
+                                        str,
+                                        " requires unavailable ",
+                                        str2,
+                                        " library ");
                         m.append(str3);
                         m.append(" version ");
                         m.append(sharedLibraryInfo.getLongVersion());
                         m.append("; failing!");
                         throw new PackageManagerException(-9, m.toString());
                     }
-                    AndroidPackage androidPackage = (AndroidPackage) map.get(sharedLibraryInfo.getPackageName());
-                    SigningDetails signingDetails = androidPackage != null ? androidPackage.getSigningDetails() : null;
+                    AndroidPackage androidPackage =
+                            (AndroidPackage) map.get(sharedLibraryInfo.getPackageName());
+                    SigningDetails signingDetails =
+                            androidPackage != null ? androidPackage.getSigningDetails() : null;
                     if (signingDetails == null) {
-                        throw new PackageManagerException(-9, XmlUtils$$ExternalSyntheticOutline0.m("Package ", str, " requires unavailable ", str2, " library; failing!"));
+                        throw new PackageManagerException(
+                                -9,
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        "Package ",
+                                        str,
+                                        " requires unavailable ",
+                                        str2,
+                                        " library; failing!"));
                     }
                     String[] strArr2 = strArr[i4];
                     if (strArr2.length > i3) {
                         if (i >= 27) {
-                            computeSignaturesSha256Digests = PackageUtils.computeSignaturesSha256Digests(signingDetails.getSignatures());
+                            computeSignaturesSha256Digests =
+                                    PackageUtils.computeSignaturesSha256Digests(
+                                            signingDetails.getSignatures());
                         } else {
                             Signature[] signatureArr = new Signature[i3];
                             signatureArr[c2] = signingDetails.getSignatures()[c2];
-                            computeSignaturesSha256Digests = PackageUtils.computeSignaturesSha256Digests(signatureArr);
+                            computeSignaturesSha256Digests =
+                                    PackageUtils.computeSignaturesSha256Digests(signatureArr);
                         }
                         if (strArr2.length != computeSignaturesSha256Digests.length) {
-                            throw new PackageManagerException(-9, XmlUtils$$ExternalSyntheticOutline0.m("Package ", str, " requires differently signed ", str2, " library; failing!"));
+                            throw new PackageManagerException(
+                                    -9,
+                                    XmlUtils$$ExternalSyntheticOutline0.m(
+                                            "Package ",
+                                            str,
+                                            " requires differently signed ",
+                                            str2,
+                                            " library; failing!"));
                         }
                         Arrays.sort(computeSignaturesSha256Digests);
                         Arrays.sort(strArr2);
                         int length = computeSignaturesSha256Digests.length;
                         for (int i5 = 0; i5 < length; i5++) {
                             if (!computeSignaturesSha256Digests[i5].equalsIgnoreCase(strArr2[i5])) {
-                                throw new PackageManagerException(-9, XmlUtils$$ExternalSyntheticOutline0.m("Package ", str, " requires differently signed ", str2, " library; failing!"));
+                                throw new PackageManagerException(
+                                        -9,
+                                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                                "Package ",
+                                                str,
+                                                " requires differently signed ",
+                                                str2,
+                                                " library; failing!"));
                             }
                         }
                         c = 0;
                     } else {
                         boolean z4 = c2;
                         try {
-                            boolean hasSha256Certificate = signingDetails.hasSha256Certificate(HexEncoding.decode(strArr2[z4 ? 1 : 0], z4));
+                            boolean hasSha256Certificate =
+                                    signingDetails.hasSha256Certificate(
+                                            HexEncoding.decode(strArr2[z4 ? 1 : 0], z4));
                             c = z4;
                             if (!hasSha256Certificate) {
-                                throw new PackageManagerException(-9, XmlUtils$$ExternalSyntheticOutline0.m("Package ", str, " requires differently signed ", str2, " library; failing!"));
+                                throw new PackageManagerException(
+                                        -9,
+                                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                                "Package ",
+                                                str,
+                                                " requires differently signed ",
+                                                str2,
+                                                " library; failing!"));
                             }
                         } catch (IllegalArgumentException unused) {
-                            throw new PackageManagerException(-130, AudioOffloadInfo$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("Package ", str, " declares bad certificate digest for ", str2, " library "), str3, "; failing!"));
+                            throw new PackageManagerException(
+                                    -130,
+                                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                            InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                                    "Package ",
+                                                    str,
+                                                    " declares bad certificate digest for ",
+                                                    str2,
+                                                    " library "),
+                                            str3,
+                                            "; failing!"));
                         }
                     }
                 }
@@ -278,7 +462,17 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                 i2 = 1;
             } else {
                 if (z || !(!"sdk".equals(str2) || zArr == null || zArr[i4])) {
-                    throw new PackageManagerException(-9, AudioOffloadInfo$$ExternalSyntheticOutline0.m(InitialConfiguration$$ExternalSyntheticOutline0.m("Package ", str, " requires unavailable ", str2, " library "), str3, "; failing!"));
+                    throw new PackageManagerException(
+                            -9,
+                            AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                    InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                            "Package ",
+                                            str,
+                                            " requires unavailable ",
+                                            str2,
+                                            " library "),
+                                    str3,
+                                    "; failing!"));
                 }
                 char c3 = c2;
                 i2 = i3;
@@ -292,7 +486,12 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         return arrayList2;
     }
 
-    public final ArrayList commitSharedLibraryChanges(AndroidPackage androidPackage, PackageSetting packageSetting, List list, Map map, int i) {
+    public final ArrayList commitSharedLibraryChanges(
+            AndroidPackage androidPackage,
+            PackageSetting packageSetting,
+            List list,
+            Map map,
+            int i) {
         if (ArrayUtils.isEmpty(list)) {
             return null;
         }
@@ -313,7 +512,8 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                     boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
                     return null;
                 }
-                ArrayList updateAllSharedLibrariesLPw = updateAllSharedLibrariesLPw(androidPackage, packageSetting, map);
+                ArrayList updateAllSharedLibrariesLPw =
+                        updateAllSharedLibrariesLPw(androidPackage, packageSetting, map);
                 boolean z3 = PackageManagerService.DEBUG_COMPRESSION;
                 return updateAllSharedLibrariesLPw;
             } catch (Throwable th) {
@@ -327,7 +527,8 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
     public void commitSharedLibraryInfoLPw(SharedLibraryInfo sharedLibraryInfo) {
         String name = sharedLibraryInfo.getName();
         WatchedArrayMap watchedArrayMap = this.mSharedLibraries;
-        WatchedLongSparseArray watchedLongSparseArray = (WatchedLongSparseArray) watchedArrayMap.mStorage.get(name);
+        WatchedLongSparseArray watchedLongSparseArray =
+                (WatchedLongSparseArray) watchedArrayMap.mStorage.get(name);
         WatchedLongSparseArray watchedLongSparseArray2 = watchedLongSparseArray;
         if (watchedLongSparseArray == null) {
             WatchedLongSparseArray watchedLongSparseArray3 = new WatchedLongSparseArray();
@@ -341,7 +542,9 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         long longVersion = sharedLibraryInfo.getLongVersion();
         Object obj = watchedLongSparseArray2.mStorage.get(longVersion);
         watchedLongSparseArray2.mStorage.put(longVersion, sharedLibraryInfo);
-        if (watchedLongSparseArray2.mWatching && (obj instanceof Watchable) && watchedLongSparseArray2.mStorage.indexOfValue(obj) == -1) {
+        if (watchedLongSparseArray2.mWatching
+                && (obj instanceof Watchable)
+                && watchedLongSparseArray2.mStorage.indexOfValue(obj) == -1) {
             ((Watchable) obj).unregisterObserver(watchedLongSparseArray2.mObserver);
         }
         if (watchedLongSparseArray2.mWatching && (sharedLibraryInfo instanceof Watchable)) {
@@ -355,24 +558,34 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         this.mWatchable.dispatchChange(watchable);
     }
 
-    public final void executeSharedLibrariesUpdateLPw(AndroidPackage androidPackage, PackageSetting packageSetting, AndroidPackage androidPackage2, PackageSetting packageSetting2, ArrayList arrayList, int[] iArr) {
+    public final void executeSharedLibrariesUpdateLPw(
+            AndroidPackage androidPackage,
+            PackageSetting packageSetting,
+            AndroidPackage androidPackage2,
+            PackageSetting packageSetting2,
+            ArrayList arrayList,
+            int[] iArr) {
         PackageManagerService packageManagerService;
         final int i = 0;
-        applyDefiningSharedLibraryUpdateLPr(androidPackage, null, new BiConsumer() { // from class: com.android.server.pm.SharedLibrariesImpl$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                SharedLibraryInfo sharedLibraryInfo = (SharedLibraryInfo) obj;
-                SharedLibraryInfo sharedLibraryInfo2 = (SharedLibraryInfo) obj2;
-                switch (i) {
-                    case 0:
-                        sharedLibraryInfo.clearDependencies();
-                        break;
-                    default:
-                        sharedLibraryInfo.addDependency(sharedLibraryInfo2);
-                        break;
-                }
-            }
-        });
+        applyDefiningSharedLibraryUpdateLPr(
+                androidPackage,
+                null,
+                new BiConsumer() { // from class:
+                                   // com.android.server.pm.SharedLibrariesImpl$$ExternalSyntheticLambda0
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        SharedLibraryInfo sharedLibraryInfo = (SharedLibraryInfo) obj;
+                        SharedLibraryInfo sharedLibraryInfo2 = (SharedLibraryInfo) obj2;
+                        switch (i) {
+                            case 0:
+                                sharedLibraryInfo.clearDependencies();
+                                break;
+                            default:
+                                sharedLibraryInfo.addDependency(sharedLibraryInfo2);
+                                break;
+                        }
+                    }
+                });
         if (arrayList == null) {
             PackageStateUnserialized packageStateUnserialized = packageSetting.pkgState;
             packageStateUnserialized.setUsesLibraryInfos(Collections.emptyList());
@@ -393,30 +606,47 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
             if (sharedLibraryInfo.getPath() != null) {
                 linkedHashSet.add(sharedLibraryInfo.getPath());
             } else {
-                AndroidPackage androidPackage3 = (AndroidPackage) packageManagerService.mPackages.mStorage.get(sharedLibraryInfo.getPackageName());
-                PackageSetting packageLPr = packageManagerService.mSettings.getPackageLPr(sharedLibraryInfo.getPackageName());
-                if (androidPackage2 != null && androidPackage2.getPackageName().equals(sharedLibraryInfo.getPackageName()) && (androidPackage3 == null || androidPackage3.getPackageName().equals(androidPackage2.getPackageName()))) {
+                AndroidPackage androidPackage3 =
+                        (AndroidPackage)
+                                packageManagerService.mPackages.mStorage.get(
+                                        sharedLibraryInfo.getPackageName());
+                PackageSetting packageLPr =
+                        packageManagerService.mSettings.getPackageLPr(
+                                sharedLibraryInfo.getPackageName());
+                if (androidPackage2 != null
+                        && androidPackage2
+                                .getPackageName()
+                                .equals(sharedLibraryInfo.getPackageName())
+                        && (androidPackage3 == null
+                                || androidPackage3
+                                        .getPackageName()
+                                        .equals(androidPackage2.getPackageName()))) {
                     androidPackage3 = androidPackage2;
                     packageLPr = packageSetting2;
                 }
                 if (androidPackage3 != null) {
                     linkedHashSet.addAll(AndroidPackageUtils.getAllCodePaths(androidPackage3));
                     final int i2 = 1;
-                    applyDefiningSharedLibraryUpdateLPr(androidPackage, sharedLibraryInfo, new BiConsumer() { // from class: com.android.server.pm.SharedLibrariesImpl$$ExternalSyntheticLambda0
-                        @Override // java.util.function.BiConsumer
-                        public final void accept(Object obj, Object obj2) {
-                            SharedLibraryInfo sharedLibraryInfo2 = (SharedLibraryInfo) obj;
-                            SharedLibraryInfo sharedLibraryInfo22 = (SharedLibraryInfo) obj2;
-                            switch (i2) {
-                                case 0:
-                                    sharedLibraryInfo2.clearDependencies();
-                                    break;
-                                default:
-                                    sharedLibraryInfo2.addDependency(sharedLibraryInfo22);
-                                    break;
-                            }
-                        }
-                    });
+                    applyDefiningSharedLibraryUpdateLPr(
+                            androidPackage,
+                            sharedLibraryInfo,
+                            new BiConsumer() { // from class:
+                                               // com.android.server.pm.SharedLibrariesImpl$$ExternalSyntheticLambda0
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    SharedLibraryInfo sharedLibraryInfo2 = (SharedLibraryInfo) obj;
+                                    SharedLibraryInfo sharedLibraryInfo22 =
+                                            (SharedLibraryInfo) obj2;
+                                    switch (i2) {
+                                        case 0:
+                                            sharedLibraryInfo2.clearDependencies();
+                                            break;
+                                        default:
+                                            sharedLibraryInfo2.addDependency(sharedLibraryInfo22);
+                                            break;
+                                    }
+                                }
+                            });
                     if (packageLPr != null) {
                         linkedHashSet.addAll(packageLPr.pkgState.usesLibraryFiles);
                     }
@@ -424,7 +654,8 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
             }
         }
         List usesLibraryFiles = packageSetting.getUsesLibraryFiles();
-        if (usesLibraryFiles.size() != linkedHashSet.size() || !usesLibraryFiles.containsAll(linkedHashSet)) {
+        if (usesLibraryFiles.size() != linkedHashSet.size()
+                || !usesLibraryFiles.containsAll(linkedHashSet)) {
             ArrayList arrayList2 = new ArrayList(linkedHashSet);
             PackageStateUnserialized packageStateUnserialized2 = packageSetting.pkgState;
             packageStateUnserialized2.usesLibraryFiles = arrayList2;
@@ -443,7 +674,9 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         while (it2.hasNext()) {
             SharedLibraryInfo sharedLibraryInfo2 = (SharedLibraryInfo) it2.next();
             if (sharedLibraryInfo2.isStatic()) {
-                PackageSetting packageLPr2 = packageManagerService.mSettings.getPackageLPr(sharedLibraryInfo2.getPackageName());
+                PackageSetting packageLPr2 =
+                        packageManagerService.mSettings.getPackageLPr(
+                                sharedLibraryInfo2.getPackageName());
                 if (packageLPr2 == null) {
                     Slog.wtf("PackageManager", "Shared lib without setting: " + sharedLibraryInfo2);
                 } else {
@@ -481,11 +714,14 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
             return Collections.singletonList(installRequest.mScanResult.mStaticSharedLibraryInfo);
         }
         boolean z = false;
-        boolean z2 = installRequest.getScannedPackageSetting() != null && installRequest.getScannedPackageSetting().isSystem();
+        boolean z2 =
+                installRequest.getScannedPackageSetting() != null
+                        && installRequest.getScannedPackageSetting().isSystem();
         if (parsedPackage != null && z2) {
             installRequest.assertScanResultExists();
             if (installRequest.mScanResult.mDynamicSharedLibraryInfos != null) {
-                if (installRequest.getScannedPackageSetting() != null && installRequest.getScannedPackageSetting().pkgState.updatedSystemApp) {
+                if (installRequest.getScannedPackageSetting() != null
+                        && installRequest.getScannedPackageSetting().pkgState.updatedSystemApp) {
                     z = true;
                 }
                 if (z) {
@@ -500,14 +736,23 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                 } else {
                     packageSetting = null;
                 }
-                if (z && ((androidPackageInternal = packageSetting.pkg) == null || androidPackageInternal.getLibraryNames() == null)) {
-                    Slog.w("PackageManager", "Package " + parsedPackage.getPackageName() + " declares libraries that are not declared on the system image; skipping");
+                if (z
+                        && ((androidPackageInternal = packageSetting.pkg) == null
+                                || androidPackageInternal.getLibraryNames() == null)) {
+                    Slog.w(
+                            "PackageManager",
+                            "Package "
+                                    + parsedPackage.getPackageName()
+                                    + " declares libraries that are not declared on the system"
+                                    + " image; skipping");
                     return null;
                 }
                 installRequest.assertScanResultExists();
-                arrayList = new ArrayList(installRequest.mScanResult.mDynamicSharedLibraryInfos.size());
+                arrayList =
+                        new ArrayList(installRequest.mScanResult.mDynamicSharedLibraryInfos.size());
                 installRequest.assertScanResultExists();
-                for (SharedLibraryInfo sharedLibraryInfo : installRequest.mScanResult.mDynamicSharedLibraryInfos) {
+                for (SharedLibraryInfo sharedLibraryInfo :
+                        installRequest.mScanResult.mDynamicSharedLibraryInfos) {
                     String name = sharedLibraryInfo.getName();
                     if (!z || packageSetting.pkg.getLibraryNames().contains(name)) {
                         PackageManagerTracedLock packageManagerTracedLock = this.mPm.mLock;
@@ -515,7 +760,13 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                         synchronized (packageManagerTracedLock) {
                             try {
                                 if (getSharedLibraryInfo(-1L, name) != null) {
-                                    Slog.w("PackageManager", "Package " + parsedPackage.getPackageName() + " declares library " + name + " that already exists; skipping");
+                                    Slog.w(
+                                            "PackageManager",
+                                            "Package "
+                                                    + parsedPackage.getPackageName()
+                                                    + " declares library "
+                                                    + name
+                                                    + " that already exists; skipping");
                                 } else {
                                     arrayList.add(sharedLibraryInfo);
                                 }
@@ -525,7 +776,13 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                             }
                         }
                     } else {
-                        Slog.w("PackageManager", "Package " + parsedPackage.getPackageName() + " declares library " + name + " that is not declared on system image; skipping");
+                        Slog.w(
+                                "PackageManager",
+                                "Package "
+                                        + parsedPackage.getPackageName()
+                                        + " declares library "
+                                        + name
+                                        + " that is not declared on system image; skipping");
                     }
                 }
             }
@@ -533,13 +790,15 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         return arrayList;
     }
 
-    public final SharedLibraryInfo getLatestStaticSharedLibraVersion(AndroidPackage androidPackage) {
+    public final SharedLibraryInfo getLatestStaticSharedLibraVersion(
+            AndroidPackage androidPackage) {
         SharedLibraryInfo latestStaticSharedLibraVersionLPr;
         PackageManagerTracedLock packageManagerTracedLock = this.mPm.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
             try {
-                latestStaticSharedLibraVersionLPr = getLatestStaticSharedLibraVersionLPr(androidPackage);
+                latestStaticSharedLibraVersionLPr =
+                        getLatestStaticSharedLibraVersionLPr(androidPackage);
             } catch (Throwable th) {
                 boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
                 throw th;
@@ -548,8 +807,12 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         return latestStaticSharedLibraVersionLPr;
     }
 
-    public final SharedLibraryInfo getLatestStaticSharedLibraVersionLPr(AndroidPackage androidPackage) {
-        WatchedLongSparseArray watchedLongSparseArray = (WatchedLongSparseArray) this.mSharedLibraries.mStorage.get(androidPackage.getStaticSharedLibraryName());
+    public final SharedLibraryInfo getLatestStaticSharedLibraVersionLPr(
+            AndroidPackage androidPackage) {
+        WatchedLongSparseArray watchedLongSparseArray =
+                (WatchedLongSparseArray)
+                        this.mSharedLibraries.mStorage.get(
+                                androidPackage.getStaticSharedLibraryName());
         if (watchedLongSparseArray == null) {
             return null;
         }
@@ -572,7 +835,8 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
     }
 
     public final SharedLibraryInfo getSharedLibraryInfo(long j, String str) {
-        WatchedLongSparseArray watchedLongSparseArray = (WatchedLongSparseArray) this.mSharedLibraries.mStorage.get(str);
+        WatchedLongSparseArray watchedLongSparseArray =
+                (WatchedLongSparseArray) this.mSharedLibraries.mStorage.get(str);
         if (watchedLongSparseArray == null) {
             return null;
         }
@@ -585,7 +849,8 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
             try {
-                watchedLongSparseArray = (WatchedLongSparseArray) this.mSharedLibraries.mStorage.get(str);
+                watchedLongSparseArray =
+                        (WatchedLongSparseArray) this.mSharedLibraries.mStorage.get(str);
             } catch (Throwable th) {
                 boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
                 throw th;
@@ -602,29 +867,50 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
     public final boolean pruneUnusedStaticSharedLibraries(Computer computer, long j, long j2) {
         int i;
         PackageSetting packageStateInternal;
-        File findPathForUuid = ((StorageManager) this.mInjector.mGetSystemServiceProducer.produce(StorageManager.class)).findPathForUuid(StorageManager.UUID_PRIVATE_INTERNAL);
+        File findPathForUuid =
+                ((StorageManager)
+                                this.mInjector.mGetSystemServiceProducer.produce(
+                                        StorageManager.class))
+                        .findPathForUuid(StorageManager.UUID_PRIVATE_INTERNAL);
         ArrayList arrayList = new ArrayList();
         long currentTimeMillis = System.currentTimeMillis();
         WatchedArrayMap sharedLibraries = computer.getSharedLibraries();
         int size = sharedLibraries.mStorage.size();
         int i2 = 0;
         while (i2 < size) {
-            WatchedLongSparseArray watchedLongSparseArray = (WatchedLongSparseArray) sharedLibraries.mStorage.valueAt(i2);
+            WatchedLongSparseArray watchedLongSparseArray =
+                    (WatchedLongSparseArray) sharedLibraries.mStorage.valueAt(i2);
             if (watchedLongSparseArray != null) {
                 int size2 = watchedLongSparseArray.mStorage.size();
                 int i3 = 0;
                 while (i3 < size2) {
-                    SharedLibraryInfo sharedLibraryInfo = (SharedLibraryInfo) watchedLongSparseArray.mStorage.valueAt(i3);
+                    SharedLibraryInfo sharedLibraryInfo =
+                            (SharedLibraryInfo) watchedLongSparseArray.mStorage.valueAt(i3);
                     VersionedPackage declaringPackage = sharedLibraryInfo.getDeclaringPackage();
                     if (sharedLibraryInfo.isStatic()) {
                         i = i2;
-                        packageStateInternal = computer.getPackageStateInternal(computer.resolveInternalPackageName(declaringPackage.getLongVersionCode(), declaringPackage.getPackageName()));
+                        packageStateInternal =
+                                computer.getPackageStateInternal(
+                                        computer.resolveInternalPackageName(
+                                                declaringPackage.getLongVersionCode(),
+                                                declaringPackage.getPackageName()));
                     } else {
                         i = i2;
-                        packageStateInternal = sharedLibraryInfo.isSdk() ? computer.getPackageStateInternal(declaringPackage.getPackageName()) : null;
+                        packageStateInternal =
+                                sharedLibraryInfo.isSdk()
+                                        ? computer.getPackageStateInternal(
+                                                declaringPackage.getPackageName())
+                                        : null;
                     }
-                    if (packageStateInternal != null && currentTimeMillis - packageStateInternal.lastUpdateTime >= j2 && !packageStateInternal.isSystem()) {
-                        arrayList.add(new VersionedPackage(packageStateInternal.pkg.getPackageName(), sharedLibraryInfo.getDeclaringPackage().getLongVersionCode()));
+                    if (packageStateInternal != null
+                            && currentTimeMillis - packageStateInternal.lastUpdateTime >= j2
+                            && !packageStateInternal.isSystem()) {
+                        arrayList.add(
+                                new VersionedPackage(
+                                        packageStateInternal.pkg.getPackageName(),
+                                        sharedLibraryInfo
+                                                .getDeclaringPackage()
+                                                .getLongVersionCode()));
                     }
                     i3++;
                     i2 = i;
@@ -635,7 +921,14 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         int size3 = arrayList.size();
         for (int i4 = 0; i4 < size3; i4++) {
             VersionedPackage versionedPackage = (VersionedPackage) arrayList.get(i4);
-            if (this.mDeletePackageHelper.deletePackageX(0, 2, versionedPackage.getLongVersionCode(), versionedPackage.getPackageName(), true) == 1 && findPathForUuid.getUsableSpace() >= j) {
+            if (this.mDeletePackageHelper.deletePackageX(
+                                    0,
+                                    2,
+                                    versionedPackage.getLongVersionCode(),
+                                    versionedPackage.getPackageName(),
+                                    true)
+                            == 1
+                    && findPathForUuid.getUsableSpace() >= j) {
                 return true;
             }
         }
@@ -653,7 +946,8 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
             try {
-                WatchedLongSparseArray watchedLongSparseArray = (WatchedLongSparseArray) this.mSharedLibraries.mStorage.get(str);
+                WatchedLongSparseArray watchedLongSparseArray =
+                        (WatchedLongSparseArray) this.mSharedLibraries.mStorage.get(str);
                 if (watchedLongSparseArray == null) {
                     return;
                 }
@@ -661,7 +955,8 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                 if (indexOfKey < 0) {
                     return;
                 }
-                SharedLibraryInfo sharedLibraryInfo = (SharedLibraryInfo) watchedLongSparseArray.mStorage.valueAt(indexOfKey);
+                SharedLibraryInfo sharedLibraryInfo =
+                        (SharedLibraryInfo) watchedLongSparseArray.mStorage.valueAt(indexOfKey);
                 Computer snapshotComputer = this.mPm.snapshotComputer();
                 int[] userIds = this.mPm.mUserManager.getUserIds();
                 int length = userIds.length;
@@ -669,14 +964,23 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                 while (i2 < length) {
                     int i3 = userIds[i2];
                     int i4 = i2;
-                    List list = (List) snapshotComputer.getPackagesUsingSharedLibrary(sharedLibraryInfo, 0L, 1000, i3).first;
+                    List list =
+                            (List)
+                                    snapshotComputer.getPackagesUsingSharedLibrary(
+                                                    sharedLibraryInfo, 0L, 1000, i3)
+                                            .first;
                     if (list != null) {
                         Iterator it = list.iterator();
                         while (it.hasNext()) {
-                            PackageSetting packageLPr = this.mPm.mSettings.getPackageLPr(((VersionedPackage) it.next()).getPackageName());
+                            PackageSetting packageLPr =
+                                    this.mPm.mSettings.getPackageLPr(
+                                            ((VersionedPackage) it.next()).getPackageName());
                             if (packageLPr != null) {
                                 i = i3;
-                                packageLPr.modifyUserState(i).setSharedLibraryOverlayPaths(sharedLibraryInfo.getName(), null);
+                                packageLPr
+                                        .modifyUserState(i)
+                                        .setSharedLibraryOverlayPaths(
+                                                sharedLibraryInfo.getName(), null);
                                 packageLPr.onChanged$2();
                             } else {
                                 i = i3;
@@ -688,14 +992,17 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                 }
                 Object obj = watchedLongSparseArray.mStorage.get(j, null);
                 watchedLongSparseArray.mStorage.delete(j);
-                if (watchedLongSparseArray.mWatching && (obj instanceof Watchable) && watchedLongSparseArray.mStorage.indexOfValue(obj) == -1) {
+                if (watchedLongSparseArray.mWatching
+                        && (obj instanceof Watchable)
+                        && watchedLongSparseArray.mStorage.indexOfValue(obj) == -1) {
                     ((Watchable) obj).unregisterObserver(watchedLongSparseArray.mObserver);
                 }
                 watchedLongSparseArray.dispatchChange(watchedLongSparseArray);
                 if (watchedLongSparseArray.mStorage.size() <= 0) {
                     this.mSharedLibraries.remove(str);
                     if (sharedLibraryInfo.getType() == 2) {
-                        this.mStaticLibsByDeclaringPackage.remove(sharedLibraryInfo.getDeclaringPackage().getPackageName());
+                        this.mStaticLibsByDeclaringPackage.remove(
+                                sharedLibraryInfo.getDeclaringPackage().getPackageName());
                     }
                 }
                 boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
@@ -716,7 +1023,8 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         this.mWatchable.unregisterObserver(watcher);
     }
 
-    public final ArrayList updateAllSharedLibrariesLPw(AndroidPackage androidPackage, PackageSetting packageSetting, Map map) {
+    public final ArrayList updateAllSharedLibrariesLPw(
+            AndroidPackage androidPackage, PackageSetting packageSetting, Map map) {
         ArrayList arrayList;
         ArraySet arraySet;
         ArrayList arrayList2;
@@ -736,10 +1044,27 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
             AndroidPackage androidPackage2 = pair != null ? (AndroidPackage) pair.first : null;
             PackageSetting packageSetting2 = pair != null ? (PackageSetting) pair.second : null;
             PackageManagerService packageManagerService = this.mPm;
-            for (int size = packageManagerService.mPackages.mStorage.size() - 1; size >= 0; size--) {
-                AndroidPackage androidPackage3 = (AndroidPackage) packageManagerService.mPackages.mStorage.valueAt(size);
-                PackageSetting packageLPr = packageManagerService.mSettings.getPackageLPr(androidPackage3.getPackageName());
-                if (androidPackage2 == null || hasString(androidPackage3.getUsesLibraries(), androidPackage2.getLibraryNames()) || hasString(androidPackage3.getUsesOptionalLibraries(), androidPackage2.getLibraryNames()) || ArrayUtils.contains(androidPackage3.getUsesStaticLibraries(), androidPackage2.getStaticSharedLibraryName()) || ArrayUtils.contains(androidPackage3.getUsesSdkLibraries(), androidPackage2.getSdkLibraryName())) {
+            for (int size = packageManagerService.mPackages.mStorage.size() - 1;
+                    size >= 0;
+                    size--) {
+                AndroidPackage androidPackage3 =
+                        (AndroidPackage) packageManagerService.mPackages.mStorage.valueAt(size);
+                PackageSetting packageLPr =
+                        packageManagerService.mSettings.getPackageLPr(
+                                androidPackage3.getPackageName());
+                if (androidPackage2 == null
+                        || hasString(
+                                androidPackage3.getUsesLibraries(),
+                                androidPackage2.getLibraryNames())
+                        || hasString(
+                                androidPackage3.getUsesOptionalLibraries(),
+                                androidPackage2.getLibraryNames())
+                        || ArrayUtils.contains(
+                                androidPackage3.getUsesStaticLibraries(),
+                                androidPackage2.getStaticSharedLibraryName())
+                        || ArrayUtils.contains(
+                                androidPackage3.getUsesSdkLibraries(),
+                                androidPackage2.getSdkLibraryName())) {
                     if (arrayList == null) {
                         arrayList = new ArrayList();
                     }
@@ -756,21 +1081,32 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
                     }
                     ArraySet arraySet2 = arraySet;
                     try {
-                        updateSharedLibraries(androidPackage3, packageLPr, androidPackage2, packageSetting2, map);
+                        updateSharedLibraries(
+                                androidPackage3, packageLPr, androidPackage2, packageSetting2, map);
                     } catch (PackageManagerException e) {
                         boolean isSystem = packageLPr.isSystem();
                         PackageStateUnserialized packageStateUnserialized = packageLPr.pkgState;
                         if (!isSystem || packageStateUnserialized.updatedSystemApp) {
                             boolean z = packageStateUnserialized.updatedSystemApp;
-                            PackageManagerTracedLock packageManagerTracedLock = packageManagerService.mInstallLock;
+                            PackageManagerTracedLock packageManagerTracedLock =
+                                    packageManagerService.mInstallLock;
                             packageManagerTracedLock.mLock.lock();
                             try {
-                                this.mDeletePackageHelper.deletePackageLIF(androidPackage3.getPackageName(), null, true, packageManagerService.mUserManager.getUserIds(), z ? 1 : 0, new PackageRemovedInfo(), true);
+                                this.mDeletePackageHelper.deletePackageLIF(
+                                        androidPackage3.getPackageName(),
+                                        null,
+                                        true,
+                                        packageManagerService.mUserManager.getUserIds(),
+                                        z ? 1 : 0,
+                                        new PackageRemovedInfo(),
+                                        true);
                                 packageManagerTracedLock.close();
                             } finally {
                             }
                         }
-                        Slog.e("PackageManager", "updateAllSharedLibrariesLPw failed: " + e.getMessage());
+                        Slog.e(
+                                "PackageManager",
+                                "updateAllSharedLibrariesLPw failed: " + e.getMessage());
                     }
                     arraySet = arraySet2;
                     arrayList = arrayList4;
@@ -783,13 +1119,24 @@ public final class SharedLibrariesImpl implements Watchable, Snappable {
         return arrayList;
     }
 
-    public final void updateSharedLibraries(AndroidPackage androidPackage, PackageSetting packageSetting, AndroidPackage androidPackage2, PackageSetting packageSetting2, Map map) {
+    public final void updateSharedLibraries(
+            AndroidPackage androidPackage,
+            PackageSetting packageSetting,
+            AndroidPackage androidPackage2,
+            PackageSetting packageSetting2,
+            Map map) {
         ArrayList collectSharedLibraryInfos = collectSharedLibraryInfos(androidPackage, map, null);
         PackageManagerTracedLock packageManagerTracedLock = this.mPm.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
             try {
-                executeSharedLibrariesUpdateLPw(androidPackage, packageSetting, androidPackage2, packageSetting2, collectSharedLibraryInfos, this.mPm.mUserManager.getUserIds());
+                executeSharedLibrariesUpdateLPw(
+                        androidPackage,
+                        packageSetting,
+                        androidPackage2,
+                        packageSetting2,
+                        collectSharedLibraryInfos,
+                        this.mPm.mUserManager.getUserIds());
             } catch (Throwable th) {
                 boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
                 throw th;

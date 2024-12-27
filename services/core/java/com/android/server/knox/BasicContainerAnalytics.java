@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.analytics.KnoxAnalyticsData;
 
@@ -19,14 +21,16 @@ public final class BasicContainerAnalytics {
     public static final int CONTAINER_DO = 4;
     public static final int CONTAINER_WPCOD = 8;
 
-    public BasicContainerAnalytics(Context context, IKnoxAnalyticsContainerImpl iKnoxAnalyticsContainerImpl) {
+    public BasicContainerAnalytics(
+            Context context, IKnoxAnalyticsContainerImpl iKnoxAnalyticsContainerImpl) {
         this.ifKnoxAnalyticsContainer = iKnoxAnalyticsContainerImpl;
         this.context = context;
     }
 
     public final int getContainerType(int i) {
         if (!this.ifKnoxAnalyticsContainer.isLoggingAllowedForUser(i)) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "userId = ", " is not an enterprise user.", "BasicContainerAnalytics");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i, "userId = ", " is not an enterprise user.", "BasicContainerAnalytics");
             return -1;
         }
         boolean z = false;
@@ -36,8 +40,12 @@ public final class BasicContainerAnalytics {
         }
         try {
             boolean z2 = true;
-            boolean z3 = Settings.Secure.getInt(this.context.getContentResolver(), "user_setup_complete", 0) != 0;
-            if ("true".equals(SystemProperties.get("ro.organization_owned")) && !SemPersonaManager.isDoEnabled(0)) {
+            boolean z3 =
+                    Settings.Secure.getInt(
+                                    this.context.getContentResolver(), "user_setup_complete", 0)
+                            != 0;
+            if ("true".equals(SystemProperties.get("ro.organization_owned"))
+                    && !SemPersonaManager.isDoEnabled(0)) {
                 z = true;
             }
             if (z || !SemPersonaManager.isKnoxId(i) || z3) {
@@ -61,9 +69,24 @@ public final class BasicContainerAnalytics {
             bundle.putString("pV", IKnoxAnalyticsContainerImpl.getPackageInfo(i2, str).versionName);
             String profileOwnerPackage = iKnoxAnalyticsContainerImpl.getProfileOwnerPackage(i2);
             String deviceOwnerPackage = IKnoxAnalyticsContainerImpl.getDeviceOwnerPackage();
-            boolean hasKnoxPermission = profileOwnerPackage != null ? IKnoxAnalyticsContainerImpl.hasKnoxPermission(profileOwnerPackage) : 1;
-            boolean hasKnoxPermission2 = deviceOwnerPackage != null ? IKnoxAnalyticsContainerImpl.hasKnoxPermission(deviceOwnerPackage) : 1;
-            Log.d("IFKnoxAnalyticsContainer", "[" + profileOwnerPackage + "] = " + hasKnoxPermission + " , [" + deviceOwnerPackage + "] : " + deviceOwnerPackage);
+            boolean hasKnoxPermission =
+                    profileOwnerPackage != null
+                            ? IKnoxAnalyticsContainerImpl.hasKnoxPermission(profileOwnerPackage)
+                            : 1;
+            boolean hasKnoxPermission2 =
+                    deviceOwnerPackage != null
+                            ? IKnoxAnalyticsContainerImpl.hasKnoxPermission(deviceOwnerPackage)
+                            : 1;
+            Log.d(
+                    "IFKnoxAnalyticsContainer",
+                    "["
+                            + profileOwnerPackage
+                            + "] = "
+                            + hasKnoxPermission
+                            + " , ["
+                            + deviceOwnerPackage
+                            + "] : "
+                            + deviceOwnerPackage);
             bundle.putInt("cM", hasKnoxPermission & hasKnoxPermission2);
             logEvent(bundle, "ACTIVITY_STAMP");
         }

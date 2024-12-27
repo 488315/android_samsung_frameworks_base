@@ -1,6 +1,7 @@
 package android.text.method;
 
 import com.android.internal.util.ArrayUtils;
+
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Locale;
@@ -13,7 +14,10 @@ public class DateKeyListener extends NumberKeyListener {
     private static final String[] SKELETONS = {"yMd", "yM", "Md"};
 
     @Deprecated
-    public static final char[] CHARACTERS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '/', '-', '.'};
+    public static final char[] CHARACTERS = {
+        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '/', '-', '.'
+    };
+
     private static final Object sLock = new Object();
     private static final HashMap<Locale, DateKeyListener> sInstanceCache = new HashMap<>();
 
@@ -37,7 +41,10 @@ public class DateKeyListener extends NumberKeyListener {
 
     public DateKeyListener(Locale locale) {
         LinkedHashSet<Character> chars = new LinkedHashSet<>();
-        boolean success = NumberKeyListener.addDigits(chars, locale) && NumberKeyListener.addFormatCharsFromSkeletons(chars, locale, SKELETONS, SYMBOLS_TO_IGNORE);
+        boolean success =
+                NumberKeyListener.addDigits(chars, locale)
+                        && NumberKeyListener.addFormatCharsFromSkeletons(
+                                chars, locale, SKELETONS, SYMBOLS_TO_IGNORE);
         if (success) {
             this.mCharacters = NumberKeyListener.collectionToArray(chars);
             this.mNeedsAdvancedInput = true ^ ArrayUtils.containsAll(CHARACTERS, this.mCharacters);

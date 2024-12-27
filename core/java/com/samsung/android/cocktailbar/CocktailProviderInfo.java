@@ -12,6 +12,7 @@ import android.os.Parcelable;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -21,8 +22,7 @@ public class CocktailProviderInfo implements Parcelable {
     private static final String COCKTAIL_CATEGORY = "category";
     public static final int COCKTAIL_CATEGORY_CONTEXTUAL = 65536;
 
-    @Deprecated
-    public static final int COCKTAIL_CATEGORY_EXPRESS_ME = 64;
+    @Deprecated public static final int COCKTAIL_CATEGORY_EXPRESS_ME = 64;
     public static final int COCKTAIL_CATEGORY_FEEDS = 256;
     public static final int COCKTAIL_CATEGORY_HOME_SCREEN = 8;
     public static final int COCKTAIL_CATEGORY_INVALID = -1;
@@ -49,19 +49,22 @@ public class CocktailProviderInfo implements Parcelable {
     private static final String COCKTAIL_PULL_TO_REFRESH = "pullToRefresh";
     private static final String COCKTAIL_UPDATE_TIME = "updatePeriodMillis";
     private static final String COCKTAIL_WHISPER = "whisper";
-    public static final Parcelable.Creator<CocktailProviderInfo> CREATOR = new Parcelable.Creator<CocktailProviderInfo>() { // from class: com.samsung.android.cocktailbar.CocktailProviderInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CocktailProviderInfo createFromParcel(Parcel in) {
-            return new CocktailProviderInfo(in);
-        }
+    public static final Parcelable.Creator<CocktailProviderInfo> CREATOR =
+            new Parcelable.Creator<
+                    CocktailProviderInfo>() { // from class:
+                                              // com.samsung.android.cocktailbar.CocktailProviderInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CocktailProviderInfo createFromParcel(Parcel in) {
+                    return new CocktailProviderInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CocktailProviderInfo[] newArray(int size) {
-            return new CocktailProviderInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CocktailProviderInfo[] newArray(int size) {
+                    return new CocktailProviderInfo[size];
+                }
+            };
     private static final String TAG = "CocktailProviderInfo";
     private static final int VAL_DEFAULT_COCKTAIL_WIDTH = 160;
     private static final String XMLVAL_CONTEXTUAL = "contextual";
@@ -98,16 +101,27 @@ public class CocktailProviderInfo implements Parcelable {
         this.permitVisibilityChanged = false;
     }
 
-    public static CocktailProviderInfo create(Context context, ResolveInfo ri, ComponentName cn, XmlResourceParser xml, int configuredCategoryFilter, int version) {
+    public static CocktailProviderInfo create(
+            Context context,
+            ResolveInfo ri,
+            ComponentName cn,
+            XmlResourceParser xml,
+            int configuredCategoryFilter,
+            int version) {
         CocktailProviderInfo pInfo;
         PackageManager pkgMgr = context.getPackageManager();
         long identity = Binder.clearCallingIdentity();
         try {
             try {
-                Resources resources = pkgMgr.getResourcesForApplicationAsUser(cn.getPackageName(), UserHandle.getUserId(ri.activityInfo.applicationInfo.uid));
+                Resources resources =
+                        pkgMgr.getResourcesForApplicationAsUser(
+                                cn.getPackageName(),
+                                UserHandle.getUserId(ri.activityInfo.applicationInfo.uid));
                 Binder.restoreCallingIdentity(identity);
                 try {
-                    pInfo = new CocktailProviderInfo(context, pkgMgr, resources, cn, xml, ri, version);
+                    pInfo =
+                            new CocktailProviderInfo(
+                                    context, pkgMgr, resources, cn, xml, ri, version);
                 } catch (Resources.NotFoundException e) {
                 } catch (IllegalArgumentException e2) {
                 }
@@ -148,7 +162,15 @@ public class CocktailProviderInfo implements Parcelable {
         }
     }
 
-    private CocktailProviderInfo(Context context, PackageManager pkgMgr, Resources res, ComponentName provider, XmlResourceParser xml, ResolveInfo info, int version) throws Resources.NotFoundException, IllegalArgumentException {
+    private CocktailProviderInfo(
+            Context context,
+            PackageManager pkgMgr,
+            Resources res,
+            ComponentName provider,
+            XmlResourceParser xml,
+            ResolveInfo info,
+            int version)
+            throws Resources.NotFoundException, IllegalArgumentException {
         this.permitVisibilityChanged = false;
         this.provider = provider;
         this.icon = xml.getAttributeResourceValue(null, "icon", 0);
@@ -158,7 +180,8 @@ public class CocktailProviderInfo implements Parcelable {
         if (TextUtils.isEmpty(category)) {
             this.category = 1;
         } else {
-            TextUtils.SimpleStringSplitter categorySplitter = new TextUtils.SimpleStringSplitter('|');
+            TextUtils.SimpleStringSplitter categorySplitter =
+                    new TextUtils.SimpleStringSplitter('|');
             categorySplitter.setString(category);
             while (categorySplitter.hasNext()) {
                 String c = categorySplitter.next().trim();
@@ -166,7 +189,9 @@ public class CocktailProviderInfo implements Parcelable {
                 boolean isBreak = false;
                 switch (categoryId) {
                     case -1:
-                        Log.e(TAG, "Provider: " + provider + " specified an invalid catetory of " + c);
+                        Log.e(
+                                TAG,
+                                "Provider: " + provider + " specified an invalid catetory of " + c);
                         this.category = -1;
                         return;
                     case 4:
@@ -184,8 +209,7 @@ public class CocktailProviderInfo implements Parcelable {
                         this.category |= categoryId;
                         break;
                 }
-                if (isBreak) {
-                }
+                if (isBreak) {}
             }
         }
         if (version > 1) {
@@ -202,7 +226,8 @@ public class CocktailProviderInfo implements Parcelable {
         this.privateMode = loadXmlString(xml, res, COCKTAIL_PRIVATE_MODE, null);
         this.previewImage = xml.getAttributeResourceValue(null, COCKTAIL_PREVIEW_IMAGE, 0);
         this.updatePeriodMillis = loadXmlInt(xml, res, COCKTAIL_UPDATE_TIME, 0);
-        this.permitVisibilityChanged = loadXmlBoolean(xml, res, COCKTAIL_PERMIT_VISIBILITY_CHANGED, false);
+        this.permitVisibilityChanged =
+                loadXmlBoolean(xml, res, COCKTAIL_PERMIT_VISIBILITY_CHANGED, false);
         this.pullToRefresh = loadXmlBoolean(xml, res, COCKTAIL_PULL_TO_REFRESH, false);
         String configureClassName = loadXmlString(xml, res, COCKTAIL_CONFIGURE, null);
         if (configureClassName != null) {
@@ -214,7 +239,8 @@ public class CocktailProviderInfo implements Parcelable {
         }
     }
 
-    private static boolean enforceValidCategory(int configuredCategoryFilter, CocktailProviderInfo pInfo) {
+    private static boolean enforceValidCategory(
+            int configuredCategoryFilter, CocktailProviderInfo pInfo) {
         if (configuredCategoryFilter != 0) {
             return pInfo.privateMode == null && (pInfo.category & configuredCategoryFilter) != 0;
         }
@@ -360,7 +386,8 @@ public class CocktailProviderInfo implements Parcelable {
         }
     }
 
-    private int loadXmlInt(XmlResourceParser parser, Resources pkgRes, String attrName, int defaultValue) {
+    private int loadXmlInt(
+            XmlResourceParser parser, Resources pkgRes, String attrName, int defaultValue) {
         int refId = parser.getAttributeResourceValue(null, attrName, 0);
         if (refId != 0) {
             try {
@@ -374,7 +401,8 @@ public class CocktailProviderInfo implements Parcelable {
         return value2;
     }
 
-    private String loadXmlString(XmlResourceParser parser, Resources pkgRes, String attrName, String defaultValue) {
+    private String loadXmlString(
+            XmlResourceParser parser, Resources pkgRes, String attrName, String defaultValue) {
         int refId = parser.getAttributeResourceValue(null, attrName, 0);
         if (refId != 0) {
             try {
@@ -390,7 +418,8 @@ public class CocktailProviderInfo implements Parcelable {
         return value;
     }
 
-    private boolean loadXmlBoolean(XmlResourceParser parser, Resources pkgRes, String attrName, boolean defaultValue) {
+    private boolean loadXmlBoolean(
+            XmlResourceParser parser, Resources pkgRes, String attrName, boolean defaultValue) {
         int refId = parser.getAttributeResourceValue(null, attrName, 0);
         if (refId != 0) {
             try {
@@ -404,7 +433,8 @@ public class CocktailProviderInfo implements Parcelable {
         return value2;
     }
 
-    private int loadXmlDimension(XmlResourceParser parser, Resources pkgRes, String attrName, int defaultValue) {
+    private int loadXmlDimension(
+            XmlResourceParser parser, Resources pkgRes, String attrName, int defaultValue) {
         int refId = parser.getAttributeResourceValue(null, attrName, 0);
         if (refId != 0) {
             try {

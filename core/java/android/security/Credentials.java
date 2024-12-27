@@ -3,6 +3,7 @@ package android.security;
 import com.android.internal.org.bouncycastle.util.io.pem.PemObject;
 import com.android.internal.org.bouncycastle.util.io.pem.PemReader;
 import com.android.internal.org.bouncycastle.util.io.pem.PemWriter;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -23,11 +24,9 @@ import java.util.List;
 public class Credentials {
     public static final String ACTION_MANAGE_CREDENTIALS = "android.security.MANAGE_CREDENTIALS";
 
-    @Deprecated
-    public static final String APP_SOURCE_CERTIFICATE = "FSV_";
+    @Deprecated public static final String APP_SOURCE_CERTIFICATE = "FSV_";
 
-    @Deprecated
-    public static final String CA_CERTIFICATE = "CACERT_";
+    @Deprecated public static final String CA_CERTIFICATE = "CACERT_";
     public static final String CERTIFICATE_USAGE_APP_SOURCE = "appsrc";
     public static final String CERTIFICATE_USAGE_CA = "ca";
     public static final String CERTIFICATE_USAGE_USER = "user";
@@ -50,18 +49,16 @@ public class Credentials {
     private static final String LOGTAG = "Credentials";
     public static final String PLATFORM_VPN = "PLATFORM_VPN_";
 
-    @Deprecated
-    public static final String USER_CERTIFICATE = "USRCERT_";
+    @Deprecated public static final String USER_CERTIFICATE = "USRCERT_";
 
-    @Deprecated
-    public static final String USER_PRIVATE_KEY = "USRPKEY_";
+    @Deprecated public static final String USER_PRIVATE_KEY = "USRPKEY_";
 
-    @Deprecated
-    public static final String USER_SECRET_KEY = "USRSKEY_";
+    @Deprecated public static final String USER_SECRET_KEY = "USRSKEY_";
     public static final String VPN = "VPN_";
     public static final String WIFI = "WIFI_";
 
-    public static byte[] convertToPem(Certificate... objects) throws IOException, CertificateEncodingException {
+    public static byte[] convertToPem(Certificate... objects)
+            throws IOException, CertificateEncodingException {
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         Writer writer = new OutputStreamWriter(bao, StandardCharsets.US_ASCII);
         PemWriter pw = new PemWriter(writer);
@@ -72,7 +69,8 @@ public class Credentials {
         return bao.toByteArray();
     }
 
-    public static List<X509Certificate> convertFromPem(byte[] bytes) throws IOException, CertificateException {
+    public static List<X509Certificate> convertFromPem(byte[] bytes)
+            throws IOException, CertificateException {
         ByteArrayInputStream bai = new ByteArrayInputStream(bytes);
         Reader reader = new InputStreamReader(bai, StandardCharsets.US_ASCII);
         PemReader pr = new PemReader(reader);
@@ -83,7 +81,8 @@ public class Credentials {
                 PemObject o = pr.readPemObject();
                 if (o != null) {
                     if (o.getType().equals("CERTIFICATE")) {
-                        Certificate c = cf.generateCertificate(new ByteArrayInputStream(o.getContent()));
+                        Certificate c =
+                                cf.generateCertificate(new ByteArrayInputStream(o.getContent()));
                         result.add((X509Certificate) c);
                     } else {
                         throw new IllegalArgumentException("Unknown type " + o.getType());

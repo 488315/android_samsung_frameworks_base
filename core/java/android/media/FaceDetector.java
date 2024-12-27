@@ -63,8 +63,7 @@ public class FaceDetector {
             throw new IllegalArgumentException();
         }
 
-        private Face() {
-        }
+        private Face() {}
     }
 
     public FaceDetector(int width, int height, int maxFaces) {

@@ -66,7 +66,10 @@ public class ProgressReporter {
             if (this.mState != 1) {
                 throw new IllegalStateException("Must be started to change progress");
             }
-            this.mProgress = this.mSegmentRange[0] + MathUtils.constrain((this.mSegmentRange[1] * n) / m, 0, this.mSegmentRange[1]);
+            this.mProgress =
+                    this.mSegmentRange[0]
+                            + MathUtils.constrain(
+                                    (this.mSegmentRange[1] * n) / m, 0, this.mSegmentRange[1]);
             if (title != null) {
                 this.mExtras.putCharSequence(Intent.EXTRA_TITLE, title);
             }
@@ -78,7 +81,7 @@ public class ProgressReporter {
         int[] lastRange;
         synchronized (this) {
             lastRange = this.mSegmentRange;
-            this.mSegmentRange = new int[]{this.mProgress, (this.mSegmentRange[1] * size) / 100};
+            this.mSegmentRange = new int[] {this.mProgress, (this.mSegmentRange[1] * size) / 100};
         }
         return lastRange;
     }

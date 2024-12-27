@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -19,8 +20,7 @@ public class Fade extends Visibility {
     public static final int OUT = 2;
     static final String PROPNAME_TRANSITION_ALPHA = "android:fade:transitionAlpha";
 
-    public Fade() {
-    }
+    public Fade() {}
 
     public Fade(int fadingMode) {
         setMode(fadingMode);
@@ -37,7 +37,9 @@ public class Fade extends Visibility {
     @Override // android.transition.Visibility, android.transition.Transition
     public void captureStartValues(TransitionValues transitionValues) {
         super.captureStartValues(transitionValues);
-        transitionValues.values.put(PROPNAME_TRANSITION_ALPHA, Float.valueOf(transitionValues.view.getTransitionAlpha()));
+        transitionValues.values.put(
+                PROPNAME_TRANSITION_ALPHA,
+                Float.valueOf(transitionValues.view.getTransitionAlpha()));
     }
 
     private Animator createAnimation(final View view, float startAlpha, float endAlpha) {
@@ -51,21 +53,32 @@ public class Fade extends Visibility {
         }
         FadeAnimatorListener listener = new FadeAnimatorListener(view);
         anim.addListener(listener);
-        addListener(new TransitionListenerAdapter() { // from class: android.transition.Fade.1
-            @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
-            public void onTransitionEnd(Transition transition) {
-                view.setTransitionAlpha(1.0f);
-                transition.removeListener(this);
-            }
-        });
+        addListener(
+                new TransitionListenerAdapter() { // from class: android.transition.Fade.1
+                    @Override // android.transition.TransitionListenerAdapter,
+                              // android.transition.Transition.TransitionListener
+                    public void onTransitionEnd(Transition transition) {
+                        view.setTransitionAlpha(1.0f);
+                        transition.removeListener(this);
+                    }
+                });
         return anim;
     }
 
     @Override // android.transition.Visibility
-    public Animator onAppear(ViewGroup sceneRoot, View view, TransitionValues startValues, TransitionValues endValues) {
+    public Animator onAppear(
+            ViewGroup sceneRoot,
+            View view,
+            TransitionValues startValues,
+            TransitionValues endValues) {
         if (DBG) {
             View startView = startValues != null ? startValues.view : null;
-            Log.d(LOG_TAG, "Fade.onAppear: startView, startVis, endView, endVis = " + startView + ", " + view);
+            Log.d(
+                    LOG_TAG,
+                    "Fade.onAppear: startView, startVis, endView, endVis = "
+                            + startView
+                            + ", "
+                            + view);
         }
         float startAlpha = getStartAlpha(startValues, 0.0f);
         if (startAlpha == 1.0f) {
@@ -75,14 +88,20 @@ public class Fade extends Visibility {
     }
 
     @Override // android.transition.Visibility
-    public Animator onDisappear(ViewGroup sceneRoot, View view, TransitionValues startValues, TransitionValues endValues) {
+    public Animator onDisappear(
+            ViewGroup sceneRoot,
+            View view,
+            TransitionValues startValues,
+            TransitionValues endValues) {
         float startAlpha = getStartAlpha(startValues, 1.0f);
         return createAnimation(view, startAlpha, 0.0f);
     }
 
     private static float getStartAlpha(TransitionValues startValues, float fallbackValue) {
         Float startAlphaFloat;
-        if (startValues == null || (startAlphaFloat = (Float) startValues.values.get(PROPNAME_TRANSITION_ALPHA)) == null) {
+        if (startValues == null
+                || (startAlphaFloat = (Float) startValues.values.get(PROPNAME_TRANSITION_ALPHA))
+                        == null) {
             return fallbackValue;
         }
         float startAlpha = startAlphaFloat.floatValue();
@@ -97,7 +116,8 @@ public class Fade extends Visibility {
             this.mView = view;
         }
 
-        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+        @Override // android.animation.AnimatorListenerAdapter,
+                  // android.animation.Animator.AnimatorListener
         public void onAnimationStart(Animator animator) {
             if (this.mView.hasOverlappingRendering() && this.mView.getLayerType() == 0) {
                 this.mLayerTypeChanged = true;
@@ -105,7 +125,8 @@ public class Fade extends Visibility {
             }
         }
 
-        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+        @Override // android.animation.AnimatorListenerAdapter,
+                  // android.animation.Animator.AnimatorListener
         public void onAnimationEnd(Animator animator) {
             this.mView.setTransitionAlpha(1.0f);
             if (this.mLayerTypeChanged) {

@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.IActivityManager;
 import android.content.Intent;
 import android.os.IBinder;
 
@@ -23,11 +22,13 @@ public abstract class ActivityManagerNative {
         broadcastStickyIntent(intent, permission, -1, userId);
     }
 
-    public static void broadcastStickyIntent(Intent intent, String permission, int appOp, int userId) {
+    public static void broadcastStickyIntent(
+            Intent intent, String permission, int appOp, int userId) {
         ActivityManager.broadcastStickyIntent(intent, appOp, userId);
     }
 
-    public static void noteWakeupAlarm(PendingIntent ps, int sourceUid, String sourcePkg, String tag) {
+    public static void noteWakeupAlarm(
+            PendingIntent ps, int sourceUid, String sourcePkg, String tag) {
         ActivityManager.noteWakeupAlarm(ps, null, sourceUid, sourcePkg, tag);
     }
 

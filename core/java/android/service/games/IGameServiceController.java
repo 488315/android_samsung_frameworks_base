@@ -17,8 +17,7 @@ public interface IGameServiceController extends IInterface {
 
     public static class Default implements IGameServiceController {
         @Override // android.service.games.IGameServiceController
-        public void createGameSession(int taskId) throws RemoteException {
-        }
+        public void createGameSession(int taskId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -26,7 +25,7 @@ public interface IGameServiceController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGameServiceController {
+    public abstract static class Stub extends Binder implements IGameServiceController {
         static final int TRANSACTION_createGameSession = 1;
         private final PermissionEnforcer mEnforcer;
 
@@ -40,7 +39,9 @@ public interface IGameServiceController extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IGameServiceController asInterface(IBinder obj) {
@@ -74,7 +75,8 @@ public interface IGameServiceController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGameServiceController.DESCRIPTOR);
             }
@@ -123,7 +125,8 @@ public interface IGameServiceController extends IInterface {
         }
 
         protected void createGameSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_GAME_ACTIVITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_GAME_ACTIVITY, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

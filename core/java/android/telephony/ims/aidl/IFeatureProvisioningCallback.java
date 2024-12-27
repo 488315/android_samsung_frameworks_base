@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface IFeatureProvisioningCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.ims.aidl.IFeatureProvisioningCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.ims.aidl.IFeatureProvisioningCallback";
 
     void onFeatureProvisioningChanged(int i, int i2, boolean z) throws RemoteException;
 
@@ -16,12 +17,12 @@ public interface IFeatureProvisioningCallback extends IInterface {
 
     public static class Default implements IFeatureProvisioningCallback {
         @Override // android.telephony.ims.aidl.IFeatureProvisioningCallback
-        public void onFeatureProvisioningChanged(int capability, int tech, boolean isProvisioned) throws RemoteException {
-        }
+        public void onFeatureProvisioningChanged(int capability, int tech, boolean isProvisioned)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IFeatureProvisioningCallback
-        public void onRcsFeatureProvisioningChanged(int capability, int tech, boolean isProvisioned) throws RemoteException {
-        }
+        public void onRcsFeatureProvisioningChanged(int capability, int tech, boolean isProvisioned)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +30,7 @@ public interface IFeatureProvisioningCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFeatureProvisioningCallback {
+    public abstract static class Stub extends Binder implements IFeatureProvisioningCallback {
         static final int TRANSACTION_onFeatureProvisioningChanged = 1;
         static final int TRANSACTION_onRcsFeatureProvisioningChanged = 2;
 
@@ -70,7 +71,8 @@ public interface IFeatureProvisioningCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFeatureProvisioningCallback.DESCRIPTOR);
             }
@@ -115,7 +117,8 @@ public interface IFeatureProvisioningCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IFeatureProvisioningCallback
-            public void onFeatureProvisioningChanged(int capability, int tech, boolean isProvisioned) throws RemoteException {
+            public void onFeatureProvisioningChanged(
+                    int capability, int tech, boolean isProvisioned) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFeatureProvisioningCallback.DESCRIPTOR);
@@ -129,7 +132,8 @@ public interface IFeatureProvisioningCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IFeatureProvisioningCallback
-            public void onRcsFeatureProvisioningChanged(int capability, int tech, boolean isProvisioned) throws RemoteException {
+            public void onRcsFeatureProvisioningChanged(
+                    int capability, int tech, boolean isProvisioned) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFeatureProvisioningCallback.DESCRIPTOR);

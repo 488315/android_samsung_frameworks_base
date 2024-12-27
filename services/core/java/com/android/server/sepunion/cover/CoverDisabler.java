@@ -8,7 +8,9 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.RemoteException;
+
 import com.samsung.android.sepunion.Log;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -45,8 +47,7 @@ public final class CoverDisabler {
         public String pkg;
         public IBinder token;
 
-        public DisableRecord() {
-        }
+        public DisableRecord() {}
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
@@ -71,7 +72,9 @@ public final class CoverDisabler {
         if (iBinder == null || str == null) {
             return false;
         }
-        Log.d("CoverManager_CoverDisabler", "disableCoverManagerLocked : disable=" + z + " pkg=" + str + " token=" + iBinder);
+        Log.d(
+                "CoverManager_CoverDisabler",
+                "disableCoverManagerLocked : disable=" + z + " pkg=" + str + " token=" + iBinder);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             manageDisableListLocked(z, iBinder, str);

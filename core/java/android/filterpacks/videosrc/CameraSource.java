@@ -14,6 +14,7 @@ import android.hardware.Camera;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.opengl.Matrix;
 import android.util.Log;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -22,22 +23,35 @@ public class CameraSource extends Filter {
     private static final int NEWFRAME_TIMEOUT = 100;
     private static final int NEWFRAME_TIMEOUT_REPEAT = 10;
     private static final String TAG = "CameraSource";
-    private static final String mFrameShader = "#extension GL_OES_EGL_image_external : require\nprecision mediump float;\nuniform samplerExternalOES tex_sampler_0;\nvarying vec2 v_texcoord;\nvoid main() {\n  gl_FragColor = texture2D(tex_sampler_0, v_texcoord);\n}\n";
-    private static final float[] mSourceCoords = {0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f};
+    private static final String mFrameShader =
+            "#extension GL_OES_EGL_image_external : require\n"
+                    + "precision mediump float;\n"
+                    + "uniform samplerExternalOES tex_sampler_0;\n"
+                    + "varying vec2 v_texcoord;\n"
+                    + "void main() {\n"
+                    + "  gl_FragColor = texture2D(tex_sampler_0, v_texcoord);\n"
+                    + "}\n";
+    private static final float[] mSourceCoords = {
+        0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+        1.0f
+    };
     private Camera mCamera;
     private GLFrame mCameraFrame;
 
     @GenerateFieldPort(hasDefault = true, name = "id")
     private int mCameraId;
+
     private Camera.Parameters mCameraParameters;
     private float[] mCameraTransform;
 
     @GenerateFieldPort(hasDefault = true, name = "framerate")
     private int mFps;
+
     private ShaderProgram mFrameExtractor;
 
     @GenerateFieldPort(hasDefault = true, name = "height")
     private int mHeight;
+
     private final boolean mLogVerbose;
     private float[] mMappedCoords;
     private boolean mNewFrameAvailable;
@@ -49,6 +63,7 @@ public class CameraSource extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "width")
     private int mWidth;
+
     private SurfaceTexture.OnFrameAvailableListener onCameraFrameAvailableListener;
 
     public CameraSource(String name) {
@@ -58,18 +73,20 @@ public class CameraSource extends Filter {
         this.mHeight = 240;
         this.mFps = 30;
         this.mWaitForNewFrame = true;
-        this.onCameraFrameAvailableListener = new SurfaceTexture.OnFrameAvailableListener() { // from class: android.filterpacks.videosrc.CameraSource.1
-            @Override // android.graphics.SurfaceTexture.OnFrameAvailableListener
-            public void onFrameAvailable(SurfaceTexture surfaceTexture) {
-                if (CameraSource.this.mLogVerbose) {
-                    Log.v(CameraSource.TAG, "New frame from camera");
-                }
-                synchronized (CameraSource.this) {
-                    CameraSource.this.mNewFrameAvailable = true;
-                    CameraSource.this.notify();
-                }
-            }
-        };
+        this.onCameraFrameAvailableListener =
+                new SurfaceTexture.OnFrameAvailableListener() { // from class:
+                    // android.filterpacks.videosrc.CameraSource.1
+                    @Override // android.graphics.SurfaceTexture.OnFrameAvailableListener
+                    public void onFrameAvailable(SurfaceTexture surfaceTexture) {
+                        if (CameraSource.this.mLogVerbose) {
+                            Log.v(CameraSource.TAG, "New frame from camera");
+                        }
+                        synchronized (CameraSource.this) {
+                            CameraSource.this.mNewFrameAvailable = true;
+                            CameraSource.this.notify();
+                        }
+                    }
+                };
         this.mCameraTransform = new float[16];
         this.mMappedCoords = new float[16];
         this.mLogVerbose = Log.isLoggable(TAG, 2);
@@ -101,7 +118,8 @@ public class CameraSource extends Filter {
         getCameraParameters();
         this.mCamera.setParameters(this.mCameraParameters);
         createFormats();
-        this.mCameraFrame = (GLFrame) context.getFrameManager().newBoundFrame(this.mOutputFormat, 104, 0L);
+        this.mCameraFrame =
+                (GLFrame) context.getFrameManager().newBoundFrame(this.mOutputFormat, 104, 0L);
         this.mSurfaceTexture = new SurfaceTexture(this.mCameraFrame.getTextureId());
         try {
             this.mCamera.setPreviewTexture(this.mSurfaceTexture);
@@ -109,7 +127,8 @@ public class CameraSource extends Filter {
             this.mNewFrameAvailable = false;
             this.mCamera.startPreview();
         } catch (IOException e) {
-            throw new RuntimeException("Could not bind camera surface texture: " + e.getMessage() + "!");
+            throw new RuntimeException(
+                    "Could not bind camera surface texture: " + e.getMessage() + "!");
         }
     }
 
@@ -143,7 +162,15 @@ public class CameraSource extends Filter {
         }
         this.mSurfaceTexture.getTransformMatrix(this.mCameraTransform);
         Matrix.multiplyMM(this.mMappedCoords, 0, this.mCameraTransform, 0, mSourceCoords, 0);
-        this.mFrameExtractor.setSourceRegion(this.mMappedCoords[0], this.mMappedCoords[1], this.mMappedCoords[4], this.mMappedCoords[5], this.mMappedCoords[8], this.mMappedCoords[9], this.mMappedCoords[12], this.mMappedCoords[13]);
+        this.mFrameExtractor.setSourceRegion(
+                this.mMappedCoords[0],
+                this.mMappedCoords[1],
+                this.mMappedCoords[4],
+                this.mMappedCoords[5],
+                this.mMappedCoords[8],
+                this.mMappedCoords[9],
+                this.mMappedCoords[12],
+                this.mMappedCoords[13]);
         Frame output = context.getFrameManager().newFrame(this.mOutputFormat);
         this.mFrameExtractor.process(this.mCameraFrame, output);
         long timestamp = this.mSurfaceTexture.getTimestamp();
@@ -223,7 +250,10 @@ public class CameraSource extends Filter {
         int smallestWidth = previewSizes.get(0).width;
         int smallestHeight = previewSizes.get(0).height;
         for (Camera.Size size : previewSizes) {
-            if (size.width <= width && size.height <= height && size.width >= closestWidth && size.height >= closestHeight) {
+            if (size.width <= width
+                    && size.height <= height
+                    && size.width >= closestWidth
+                    && size.height >= closestHeight) {
                 closestWidth = size.width;
                 closestHeight = size.height;
             }
@@ -237,7 +267,17 @@ public class CameraSource extends Filter {
             closestHeight = smallestHeight;
         }
         if (this.mLogVerbose) {
-            Log.v(TAG, "Requested resolution: (" + width + ", " + height + "). Closest match: (" + closestWidth + ", " + closestHeight + ").");
+            Log.v(
+                    TAG,
+                    "Requested resolution: ("
+                            + width
+                            + ", "
+                            + height
+                            + "). Closest match: ("
+                            + closestWidth
+                            + ", "
+                            + closestHeight
+                            + ").");
         }
         int[] closestSize = {closestWidth, closestHeight};
         return closestSize;
@@ -247,12 +287,23 @@ public class CameraSource extends Filter {
         List<int[]> supportedFpsRanges = params.getSupportedPreviewFpsRange();
         int[] closestRange = supportedFpsRanges.get(0);
         for (int[] range : supportedFpsRanges) {
-            if (range[0] < fps * 1000 && range[1] > fps * 1000 && range[0] > closestRange[0] && range[1] < closestRange[1]) {
+            if (range[0] < fps * 1000
+                    && range[1] > fps * 1000
+                    && range[0] > closestRange[0]
+                    && range[1] < closestRange[1]) {
                 closestRange = range;
             }
         }
         if (this.mLogVerbose) {
-            Log.v(TAG, "Requested fps: " + fps + ".Closest frame rate range: [" + (closestRange[0] / 1000.0d) + "," + (closestRange[1] / 1000.0d) + NavigationBarInflaterView.SIZE_MOD_END);
+            Log.v(
+                    TAG,
+                    "Requested fps: "
+                            + fps
+                            + ".Closest frame rate range: ["
+                            + (closestRange[0] / 1000.0d)
+                            + ","
+                            + (closestRange[1] / 1000.0d)
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         }
         return closestRange;
     }

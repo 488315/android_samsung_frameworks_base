@@ -7,6 +7,7 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.Settings;
+
 import java.util.Collection;
 
 /* loaded from: classes5.dex */
@@ -25,7 +26,8 @@ public class ForceShowNavBarSettingsObserver extends ContentObserver {
 
     public void register() {
         ContentResolver r = this.mContext.getContentResolver();
-        r.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.NAV_BAR_FORCE_VISIBLE), false, this, -1);
+        r.registerContentObserver(
+                Settings.Secure.getUriFor(Settings.Secure.NAV_BAR_FORCE_VISIBLE), false, this, -1);
     }
 
     public void unregister() {
@@ -40,6 +42,11 @@ public class ForceShowNavBarSettingsObserver extends ContentObserver {
     }
 
     public boolean isEnabled() {
-        return Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.NAV_BAR_FORCE_VISIBLE, 0, -2) == 1;
+        return Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.NAV_BAR_FORCE_VISIBLE,
+                        0,
+                        -2)
+                == 1;
     }
 }

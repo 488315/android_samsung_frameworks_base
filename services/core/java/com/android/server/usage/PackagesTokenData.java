@@ -5,6 +5,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -53,7 +54,9 @@ public final class PackagesTokenData {
         if (str.equals(str2)) {
             return 0;
         }
-        int intValue = ((Integer) ((ArrayMap) this.packagesToTokensMap.get(str)).getOrDefault(str2, -1)).intValue();
+        int intValue =
+                ((Integer) ((ArrayMap) this.packagesToTokensMap.get(str)).getOrDefault(str2, -1))
+                        .intValue();
         if (intValue != -1) {
             return intValue;
         }

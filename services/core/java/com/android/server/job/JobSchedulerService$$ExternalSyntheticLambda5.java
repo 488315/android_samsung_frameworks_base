@@ -1,12 +1,15 @@
 package com.android.server.job;
 
 import android.os.UserHandle;
+
 import com.android.server.job.controllers.JobStatus;
+
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class JobSchedulerService$$ExternalSyntheticLambda5 implements Predicate {
+public final /* synthetic */ class JobSchedulerService$$ExternalSyntheticLambda5
+        implements Predicate {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ int f$0;
 
@@ -22,16 +25,18 @@ public final /* synthetic */ class JobSchedulerService$$ExternalSyntheticLambda5
         JobStatus jobStatus = (JobStatus) obj;
         switch (i) {
             case 0:
-                if (i2 == -1 || UserHandle.getAppId(jobStatus.callingUid) == i2 || UserHandle.getAppId(jobStatus.sourceUid) == i2) {
-                }
+                if (i2 == -1
+                        || UserHandle.getAppId(jobStatus.callingUid) == i2
+                        || UserHandle.getAppId(jobStatus.sourceUid) == i2) {}
                 break;
             case 1:
-                if (i2 == -1 || UserHandle.getAppId(jobStatus.callingUid) == i2 || UserHandle.getAppId(jobStatus.sourceUid) == i2) {
-                }
+                if (i2 == -1
+                        || UserHandle.getAppId(jobStatus.callingUid) == i2
+                        || UserHandle.getAppId(jobStatus.sourceUid) == i2) {}
                 break;
             default:
-                if (UserHandle.getUserId(jobStatus.callingUid) == i2 || jobStatus.sourceUserId == i2) {
-                }
+                if (UserHandle.getUserId(jobStatus.callingUid) == i2
+                        || jobStatus.sourceUserId == i2) {}
                 break;
         }
         return true;

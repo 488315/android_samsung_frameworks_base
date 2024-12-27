@@ -4,8 +4,10 @@ import android.icu.util.Calendar;
 import android.os.Debug;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,7 +26,18 @@ public abstract class Log {
     public static void addLogString(String str, String str2) {
         ArrayList historyList = getHistoryList(str);
         Calendar calendar = Calendar.getInstance();
-        historyList.add(0, String.format(Locale.US, "[%02d-%02d %02d:%02d:%02d.%03d] %s", Integer.valueOf(calendar.get(2) + 1), Integer.valueOf(calendar.get(5)), Integer.valueOf(calendar.get(11)), Integer.valueOf(calendar.get(12)), Integer.valueOf(calendar.get(13)), Integer.valueOf(calendar.get(14)), str2));
+        historyList.add(
+                0,
+                String.format(
+                        Locale.US,
+                        "[%02d-%02d %02d:%02d:%02d.%03d] %s",
+                        Integer.valueOf(calendar.get(2) + 1),
+                        Integer.valueOf(calendar.get(5)),
+                        Integer.valueOf(calendar.get(11)),
+                        Integer.valueOf(calendar.get(12)),
+                        Integer.valueOf(calendar.get(13)),
+                        Integer.valueOf(calendar.get(14)),
+                        str2));
         int size = historyList.size();
         if (size > MAX_DUMP_SIZE) {
             while (true) {
@@ -55,14 +68,16 @@ public abstract class Log {
         printWriter.println("[Event history]");
         Iterator it = getHistoryList(str).iterator();
         while (it.hasNext()) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(printWriter, "    ", (String) it.next());
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(
+                    printWriter, "    ", (String) it.next());
         }
         printWriter.println("[End of event history]");
         printWriter.println("[State log]");
         int size = mStateLogMap.size();
         for (int i = 0; i < size; i++) {
             SparseArray sparseArray = mStateLogMap;
-            printWriter.println("    " + sparseArray.keyAt(i) + " " + ((String) sparseArray.valueAt(i)));
+            printWriter.println(
+                    "    " + sparseArray.keyAt(i) + " " + ((String) sparseArray.valueAt(i)));
         }
     }
 

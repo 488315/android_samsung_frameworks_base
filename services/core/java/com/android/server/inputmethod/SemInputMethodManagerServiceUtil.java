@@ -11,14 +11,16 @@ public final class SemInputMethodManagerServiceUtil {
     public final InputMethodManagerService mService;
     public boolean mSpenLastUsed;
 
-    public SemInputMethodManagerServiceUtil(Context context, InputMethodManagerService inputMethodManagerService) {
+    public SemInputMethodManagerServiceUtil(
+            Context context, InputMethodManagerService inputMethodManagerService) {
         this.mContext = context;
         this.mService = inputMethodManagerService;
     }
 
     public final boolean isKeyguardLocked() {
         if (this.mKeyguardManager == null) {
-            this.mKeyguardManager = (KeyguardManager) this.mContext.getSystemService(KeyguardManager.class);
+            this.mKeyguardManager =
+                    (KeyguardManager) this.mContext.getSystemService(KeyguardManager.class);
         }
         KeyguardManager keyguardManager = this.mKeyguardManager;
         return keyguardManager != null && keyguardManager.isKeyguardLocked();

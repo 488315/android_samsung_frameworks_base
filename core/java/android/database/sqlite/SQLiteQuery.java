@@ -20,7 +20,17 @@ public final class SQLiteQuery extends SQLiteProgram {
             window.acquireReference();
             try {
                 try {
-                    int numRows = getSession().executeForCursorWindow(getSql(), getBindArgs(), window, startPos, requiredPos, countAllRows, getConnectionFlags(), this.mCancellationSignal);
+                    int numRows =
+                            getSession()
+                                    .executeForCursorWindow(
+                                            getSql(),
+                                            getBindArgs(),
+                                            window,
+                                            startPos,
+                                            requiredPos,
+                                            countAllRows,
+                                            getConnectionFlags(),
+                                            this.mCancellationSignal);
                     if (countAllRows && window.getFilledRows() == numRows) {
                         getDatabase().tryWalBackgroundCheckpoint();
                     }

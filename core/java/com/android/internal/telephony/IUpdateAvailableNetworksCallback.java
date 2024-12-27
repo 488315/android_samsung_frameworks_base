@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IUpdateAvailableNetworksCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.IUpdateAvailableNetworksCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.IUpdateAvailableNetworksCallback";
 
     void onComplete(int i) throws RemoteException;
 
     public static class Default implements IUpdateAvailableNetworksCallback {
         @Override // com.android.internal.telephony.IUpdateAvailableNetworksCallback
-        public void onComplete(int result) throws RemoteException {
-        }
+        public void onComplete(int result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IUpdateAvailableNetworksCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUpdateAvailableNetworksCallback {
+    public abstract static class Stub extends Binder implements IUpdateAvailableNetworksCallback {
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IUpdateAvailableNetworksCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUpdateAvailableNetworksCallback.DESCRIPTOR);
             }

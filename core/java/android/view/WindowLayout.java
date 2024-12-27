@@ -4,9 +4,8 @@ import android.app.WindowConfiguration;
 import android.graphics.Insets;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.view.WindowInsets;
-import android.view.WindowManager;
 import android.window.ClientWindowFrames;
+
 import com.samsung.android.multiwindow.MultiWindowCoreState;
 
 /* loaded from: classes4.dex */
@@ -21,11 +20,43 @@ public class WindowLayout {
     private final Rect mTempDisplayCutoutSafeExceptMaybeBarsRect = new Rect();
     private final Rect mTempRect = new Rect();
 
-    public void computeFrames(WindowManager.LayoutParams attrs, InsetsState state, Rect displayCutoutSafe, Rect windowBounds, int windowingMode, int requestedWidth, int requestedHeight, int requestedVisibleTypes, float compatScale, ClientWindowFrames frames) {
-        computeFrames(attrs, state, displayCutoutSafe, windowBounds, windowingMode, requestedWidth, requestedHeight, requestedVisibleTypes, compatScale, frames, 0);
+    public void computeFrames(
+            WindowManager.LayoutParams attrs,
+            InsetsState state,
+            Rect displayCutoutSafe,
+            Rect windowBounds,
+            int windowingMode,
+            int requestedWidth,
+            int requestedHeight,
+            int requestedVisibleTypes,
+            float compatScale,
+            ClientWindowFrames frames) {
+        computeFrames(
+                attrs,
+                state,
+                displayCutoutSafe,
+                windowBounds,
+                windowingMode,
+                requestedWidth,
+                requestedHeight,
+                requestedVisibleTypes,
+                compatScale,
+                frames,
+                0);
     }
 
-    public void computeFrames(WindowManager.LayoutParams attrs, InsetsState state, Rect displayCutoutSafe, Rect windowBounds, int windowingMode, int requestedWidth, int requestedHeight, int requestedVisibleTypes, float compatScale, ClientWindowFrames frames, int stageType) {
+    public void computeFrames(
+            WindowManager.LayoutParams attrs,
+            InsetsState state,
+            Rect displayCutoutSafe,
+            Rect windowBounds,
+            int windowingMode,
+            int requestedWidth,
+            int requestedHeight,
+            int requestedVisibleTypes,
+            float compatScale,
+            ClientWindowFrames frames,
+            int stageType) {
         Rect outFrame;
         int left;
         int type;
@@ -48,7 +79,11 @@ public class WindowLayout {
         Rect outDisplayFrame = frames.displayFrame;
         Rect outParentFrame = frames.parentFrame;
         Rect outFrame3 = frames.frame;
-        Insets insets = state.calculateInsets(windowBounds, attrs.getFitInsetsTypes(), attrs.isFitInsetsIgnoringVisibility());
+        Insets insets =
+                state.calculateInsets(
+                        windowBounds,
+                        attrs.getFitInsetsTypes(),
+                        attrs.isFitInsetsIgnoringVisibility());
         int sides = attrs.getFitInsetsSides();
         if ((sides & 1) != 0) {
             outFrame = outFrame3;
@@ -75,7 +110,8 @@ public class WindowLayout {
         outDisplayFrame.set(i, i2, i3, right2 - sides2);
         if (attachedWindowFrame == null) {
             outParentFrame.set(outDisplayFrame);
-            if ((1073741824 & pfl2) != 0 && (source = state.peekSource(InsetsSource.ID_IME)) != null) {
+            if ((1073741824 & pfl2) != 0
+                    && (source = state.peekSource(InsetsSource.ID_IME)) != null) {
                 outParentFrame.inset(source.calculateInsets(outParentFrame, false));
             }
         } else {
@@ -95,7 +131,8 @@ public class WindowLayout {
             int pfl3 = WindowInsets.Type.statusBars();
             Insets statusBarsInsets = state.calculateInsets(displayFrame, pfl3, true);
             if (statusBarsInsets.top > 0 && displayCutoutSafeExceptMaybeBars.top > 0) {
-                displayCutoutSafeExceptMaybeBars.top = Math.max(statusBarsInsets.top, displayCutoutSafeExceptMaybeBars.top);
+                displayCutoutSafeExceptMaybeBars.top =
+                        Math.max(statusBarsInsets.top, displayCutoutSafeExceptMaybeBars.top);
             }
             if (cutoutMode == 1) {
                 if (displayFrame.width() < displayFrame.height()) {
@@ -109,7 +146,11 @@ public class WindowLayout {
             boolean layoutInsetDecor = (attrs.flags & 65536) != 0;
             if (layoutInScreen && layoutInsetDecor) {
                 if (cutoutMode == 0 || cutoutMode == 1) {
-                    Insets systemBarsInsets = state.calculateInsets(displayFrame, WindowInsets.Type.systemBars(), requestedVisibleTypes);
+                    Insets systemBarsInsets =
+                            state.calculateInsets(
+                                    displayFrame,
+                                    WindowInsets.Type.systemBars(),
+                                    requestedVisibleTypes);
                     if (systemBarsInsets.left >= cutout.getSafeInsetLeft()) {
                         displayCutoutSafeExceptMaybeBars.left = -100000;
                     }
@@ -125,11 +166,17 @@ public class WindowLayout {
                 }
             }
             pfl = type;
-            if (pfl == 2011 && displayCutoutSafeExceptMaybeBars.bottom != 100000 && state.calculateInsets(displayFrame, WindowInsets.Type.navigationBars(), true).bottom > 0) {
+            if (pfl == 2011
+                    && displayCutoutSafeExceptMaybeBars.bottom != 100000
+                    && state.calculateInsets(displayFrame, WindowInsets.Type.navigationBars(), true)
+                                    .bottom
+                            > 0) {
                 displayCutoutSafeExceptMaybeBars.bottom = 100000;
             }
-            boolean attachedInParent = (attachedWindowFrame == null || layoutInScreen) ? false : true;
-            boolean floatingInScreenWindow = (attrs.isFullscreen() || !layoutInScreen || pfl == 1) ? false : true;
+            boolean attachedInParent =
+                    (attachedWindowFrame == null || layoutInScreen) ? false : true;
+            boolean floatingInScreenWindow =
+                    (attrs.isFullscreen() || !layoutInScreen || pfl == 1) ? false : true;
             if (!attachedInParent && !floatingInScreenWindow) {
                 this.mTempRect.set(outParentFrame);
                 outParentFrame.intersectUnchecked(displayCutoutSafeExceptMaybeBars);
@@ -216,7 +263,14 @@ public class WindowLayout {
         } else {
             inMultiWindowMode = true;
         }
-        Gravity.apply(attrs.gravity, w, rw2, outParentFrame, (int) ((attrs.horizontalMargin * pw) + x), (int) ((attrs.verticalMargin * ph) + y), outFrame);
+        Gravity.apply(
+                attrs.gravity,
+                w,
+                rw2,
+                outParentFrame,
+                (int) ((attrs.horizontalMargin * pw) + x),
+                (int) ((attrs.verticalMargin * ph) + y),
+                outFrame);
         if (!inMultiWindowMode) {
             outFrame2 = outFrame;
         } else {
@@ -228,7 +282,8 @@ public class WindowLayout {
         }
     }
 
-    public static void extendFrameByCutout(Rect displayCutoutSafe, Rect displayFrame, Rect inOutFrame, Rect tempRect) {
+    public static void extendFrameByCutout(
+            Rect displayCutoutSafe, Rect displayFrame, Rect inOutFrame, Rect tempRect) {
         if (displayCutoutSafe.contains(inOutFrame)) {
             return;
         }
@@ -239,7 +294,14 @@ public class WindowLayout {
         }
     }
 
-    public static void computeSurfaceSize(WindowManager.LayoutParams attrs, Rect maxBounds, int requestedWidth, int requestedHeight, Rect winFrame, boolean dragResizing, Point outSurfaceSize) {
+    public static void computeSurfaceSize(
+            WindowManager.LayoutParams attrs,
+            Rect maxBounds,
+            int requestedWidth,
+            int requestedHeight,
+            Rect winFrame,
+            boolean dragResizing,
+            Point outSurfaceSize) {
         int width;
         int height;
         if ((attrs.flags & 16384) != 0) {
@@ -259,13 +321,17 @@ public class WindowLayout {
             height = 1;
         }
         Rect surfaceInsets = attrs.surfaceInsets;
-        outSurfaceSize.set(width + surfaceInsets.left + surfaceInsets.right, height + surfaceInsets.top + surfaceInsets.bottom);
+        outSurfaceSize.set(
+                width + surfaceInsets.left + surfaceInsets.right,
+                height + surfaceInsets.top + surfaceInsets.bottom);
     }
 
-    private static boolean ignoreCutoutMode(WindowManager.LayoutParams attrs, int windowingMode, int stageType) {
+    private static boolean ignoreCutoutMode(
+            WindowManager.LayoutParams attrs, int windowingMode, int stageType) {
         if (windowingMode == 5 || windowingMode == 2) {
             return true;
         }
-        return MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED && WindowConfiguration.isSplitScreenWindowingMode(stageType);
+        return MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED
+                && WindowConfiguration.isSplitScreenWindowingMode(stageType);
     }
 }

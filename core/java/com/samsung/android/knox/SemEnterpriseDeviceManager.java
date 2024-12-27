@@ -11,8 +11,7 @@ public class SemEnterpriseDeviceManager {
     private static String TAG = "SemEnterpriseDeviceManager";
     private static SemEnterpriseDeviceManager mSemEnterpriseDeviceManager = null;
 
-    private SemEnterpriseDeviceManager() {
-    }
+    private SemEnterpriseDeviceManager() {}
 
     public static synchronized SemEnterpriseDeviceManager getInstance(Context context) {
         SemEnterpriseDeviceManager semEnterpriseDeviceManager;

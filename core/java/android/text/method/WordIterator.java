@@ -8,6 +8,7 @@ import android.mtp.MtpConstants;
 import android.text.CharSequenceCharacterIterator;
 import android.text.Selection;
 import android.text.TextUtils;
+
 import java.util.Locale;
 
 /* loaded from: classes4.dex */
@@ -35,7 +36,8 @@ public class WordIterator implements Selection.PositionIterator {
             this.mCharSeq = charSequence;
             this.mStart = Math.max(0, start - 50);
             this.mEnd = Math.min(charSequence.length(), end + 50);
-            this.mIterator.setText(new CharSequenceCharacterIterator(charSequence, this.mStart, this.mEnd));
+            this.mIterator.setText(
+                    new CharSequenceCharacterIterator(charSequence, this.mStart, this.mEnd));
             return;
         }
         throw new IndexOutOfBoundsException("input indexes are outside the CharSequence");
@@ -99,7 +101,8 @@ public class WordIterator implements Selection.PositionIterator {
     private int getBeginning(int offset, boolean getPrevWordBeginningOnTwoWordsBoundary) {
         checkOffsetIsValid(offset);
         if (isOnLetterOrDigit(offset)) {
-            if (this.mIterator.isBoundary(offset) && (!isAfterLetterOrDigit(offset) || !getPrevWordBeginningOnTwoWordsBoundary)) {
+            if (this.mIterator.isBoundary(offset)
+                    && (!isAfterLetterOrDigit(offset) || !getPrevWordBeginningOnTwoWordsBoundary)) {
                 return offset;
             }
             return this.mIterator.preceding(offset);
@@ -113,7 +116,8 @@ public class WordIterator implements Selection.PositionIterator {
     private int getEnd(int offset, boolean getNextWordEndOnTwoWordBoundary) {
         checkOffsetIsValid(offset);
         if (isAfterLetterOrDigit(offset)) {
-            if (this.mIterator.isBoundary(offset) && (!isOnLetterOrDigit(offset) || !getNextWordEndOnTwoWordBoundary)) {
+            if (this.mIterator.isBoundary(offset)
+                    && (!isOnLetterOrDigit(offset) || !getNextWordEndOnTwoWordBoundary)) {
                 return offset;
             }
             return this.mIterator.following(offset);
@@ -157,7 +161,9 @@ public class WordIterator implements Selection.PositionIterator {
     }
 
     public static boolean isMidWordPunctuation(Locale locale, int codePoint) {
-        int wb = UCharacter.getIntPropertyValue(codePoint, MtpConstants.OPERATION_GET_DEVICE_PROP_DESC);
+        int wb =
+                UCharacter.getIntPropertyValue(
+                        codePoint, MtpConstants.OPERATION_GET_DEVICE_PROP_DESC);
         return wb == 4 || wb == 11 || wb == 15;
     }
 
@@ -187,7 +193,14 @@ public class WordIterator implements Selection.PositionIterator {
 
     private void checkOffsetIsValid(int offset) {
         if (this.mStart > offset || offset > this.mEnd) {
-            throw new IllegalArgumentException("Invalid offset: " + offset + ". Valid range is [" + this.mStart + ", " + this.mEnd + NavigationBarInflaterView.SIZE_MOD_END);
+            throw new IllegalArgumentException(
+                    "Invalid offset: "
+                            + offset
+                            + ". Valid range is ["
+                            + this.mStart
+                            + ", "
+                            + this.mEnd
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         }
     }
 }

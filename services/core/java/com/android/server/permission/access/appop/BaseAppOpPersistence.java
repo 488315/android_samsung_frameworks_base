@@ -10,26 +10,28 @@ import com.android.server.permission.access.immutable.IndexedMap;
 /* loaded from: classes2.dex */
 public abstract class BaseAppOpPersistence {
     /* JADX WARN: Code restructure failed: missing block: B:47:0x0099, code lost:
-    
-        r0 = r9.next();
-     */
+
+       r0 = r9.next();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:48:0x009d, code lost:
-    
-        if (r0 == 1) goto L61;
-     */
+
+       if (r0 == 1) goto L61;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:49:0x009f, code lost:
-    
-        if (r0 == 2) goto L62;
-     */
+
+       if (r0 == 2) goto L62;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:50:0x00a1, code lost:
-    
-        if (r0 == 3) goto L63;
-     */
+
+       if (r0 == 3) goto L63;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void parseAppOps(com.android.modules.utils.BinaryXmlPullParser r9, com.android.server.permission.access.immutable.MutableIndexedMap r10) {
+    public static void parseAppOps(
+            com.android.modules.utils.BinaryXmlPullParser r9,
+            com.android.server.permission.access.immutable.MutableIndexedMap r10) {
         /*
             int r0 = r9.getEventType()
             java.lang.String r1 = "Unexpected event type "
@@ -127,10 +129,14 @@ public abstract class BaseAppOpPersistence {
         Lc7:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.permission.access.appop.BaseAppOpPersistence.parseAppOps(com.android.modules.utils.BinaryXmlPullParser, com.android.server.permission.access.immutable.MutableIndexedMap):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.permission.access.appop.BaseAppOpPersistence.parseAppOps(com.android.modules.utils.BinaryXmlPullParser,"
+                    + " com.android.server.permission.access.immutable.MutableIndexedMap):void");
     }
 
-    public static void serializeAppOps(BinaryXmlSerializer binaryXmlSerializer, IndexedMap indexedMap) {
+    public static void serializeAppOps(
+            BinaryXmlSerializer binaryXmlSerializer, IndexedMap indexedMap) {
         int size = indexedMap.map.size();
         for (int i = 0; i < size; i++) {
             Object keyAt = indexedMap.map.keyAt(i);
@@ -142,7 +148,9 @@ public abstract class BaseAppOpPersistence {
         }
     }
 
-    public abstract void parseUserState(BinaryXmlPullParser binaryXmlPullParser, MutableAccessState mutableAccessState, int i);
+    public abstract void parseUserState(
+            BinaryXmlPullParser binaryXmlPullParser, MutableAccessState mutableAccessState, int i);
 
-    public abstract void serializeUserState(BinaryXmlSerializer binaryXmlSerializer, AccessState accessState, int i);
+    public abstract void serializeUserState(
+            BinaryXmlSerializer binaryXmlSerializer, AccessState accessState, int i);
 }

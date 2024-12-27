@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class OptionsSipResponse implements Parcelable {
-    public static final Parcelable.Creator<OptionsSipResponse> CREATOR = new Parcelable.Creator<OptionsSipResponse>() { // from class: com.android.ims.internal.uce.options.OptionsSipResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OptionsSipResponse createFromParcel(Parcel source) {
-            return new OptionsSipResponse(source);
-        }
+    public static final Parcelable.Creator<OptionsSipResponse> CREATOR =
+            new Parcelable.Creator<
+                    OptionsSipResponse>() { // from class:
+                                            // com.android.ims.internal.uce.options.OptionsSipResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OptionsSipResponse createFromParcel(Parcel source) {
+                    return new OptionsSipResponse(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OptionsSipResponse[] newArray(int size) {
-            return new OptionsSipResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OptionsSipResponse[] newArray(int size) {
+                    return new OptionsSipResponse[size];
+                }
+            };
     private OptionsCmdId mCmdId;
     private String mReasonHeader;
     private String mReasonPhrase;
@@ -110,7 +113,10 @@ public class OptionsSipResponse implements Parcelable {
         this.mRequestId = source.readInt();
         this.mSipResponseCode = source.readInt();
         this.mReasonPhrase = source.readString();
-        this.mCmdId = (OptionsCmdId) source.readParcelable(OptionsCmdId.class.getClassLoader(), OptionsCmdId.class);
+        this.mCmdId =
+                (OptionsCmdId)
+                        source.readParcelable(
+                                OptionsCmdId.class.getClassLoader(), OptionsCmdId.class);
         this.mRetryAfter = source.readInt();
         this.mReasonHeader = source.readString();
     }

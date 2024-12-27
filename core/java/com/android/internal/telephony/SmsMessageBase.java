@@ -9,10 +9,10 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.Patterns;
-import com.android.internal.telephony.GsmAlphabet;
-import com.android.internal.telephony.SmsConstants;
+
 import com.android.internal.telephony.cdma.sms.SmsEnvelope;
 import com.android.telephony.Rlog;
+
 import java.util.Arrays;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -46,15 +46,40 @@ public abstract class SmsMessageBase {
     protected SmsHeader mUserDataHeader;
     protected byte[] mlastByte;
     protected SmsAddress replyAddress;
-    public static final Pattern NAME_ADDR_EMAIL_PATTERN = Pattern.compile("\\s*(\"[^\"]*\"|[^<>\"]+)\\s*<([^<>]+)>\\s*");
+    public static final Pattern NAME_ADDR_EMAIL_PATTERN =
+            Pattern.compile("\\s*(\"[^\"]*\"|[^<>\"]+)\\s*<([^<>]+)>\\s*");
     private static int mSubId = SubscriptionManager.getDefaultSmsSubscriptionId();
-    private static final char[] voiceMailText = {49352, 47196, 50868, ' ', 51020, 49457, 47700, 51068, 51060, ' ', 46020, 52265, 54664, 49845, 45768, 45796, '.', 53685, 54868, 53412, 47484, ' ', 45572, 47476, 47732, ' ', 51088, 46041, 50672, 44208, 46121, 45768, 45796, '.'};
+    private static final char[] voiceMailText = {
+        49352, 47196, 50868, ' ', 51020, 49457, 47700, 51068, 51060, ' ', 46020, 52265, 54664,
+        49845, 45768, 45796, '.', 53685, 54868, 53412, 47484, ' ', 45572, 47476, 47732, ' ', 51088,
+        46041, 50672, 44208, 46121, 45768, 45796, '.'
+    };
     private static final char[] pagingText = {'[', 54840, 52636, 47700, 49884, 51648, ']'};
-    private static final char[] thirdPartyText = {'[', 50808, 48512, 49324, 50629, 51088, ' ', 50672, 44208, ']'};
+    private static final char[] thirdPartyText = {
+        '[', 50808, 48512, 49324, 50629, 51088, ' ', 50672, 44208, ']'
+    };
     private static final char[] webText = {'[', 50937, 49436, 54609, ' ', 50672, 44208, ']'};
-    private static final char[] dataText = {'[', DateFormat.STANDALONE_MONTH, 'G', ' ', 'U', '+', ' ', 47924, 49440, 51064, 53552, 45367, ']'};
-    private static final char[] lguText = {'[', DateFormat.STANDALONE_MONTH, 'G', ' ', 'U', '+', ' ', 50504, 45236, ']'};
-    private static final char[] connectText = {50672, 44208, ' ', 54616, 49884, 44192, 49845, 45768, 44620, '?'};
+    private static final char[] dataText = {
+        '[',
+        DateFormat.STANDALONE_MONTH,
+        'G',
+        ' ',
+        'U',
+        '+',
+        ' ',
+        47924,
+        49440,
+        51064,
+        53552,
+        45367,
+        ']'
+    };
+    private static final char[] lguText = {
+        '[', DateFormat.STANDALONE_MONTH, 'G', ' ', 'U', '+', ' ', 50504, 45236, ']'
+    };
+    private static final char[] connectText = {
+        50672, 44208, ' ', 54616, 49884, 44192, 49845, 45768, 44620, '?'
+    };
     protected int mReceivedEncodingType = 0;
     protected int mStatusOnIcc = -1;
     protected int mIndexOnIcc = -1;
@@ -88,12 +113,15 @@ public abstract class SmsMessageBase {
 
     public abstract boolean isStatusReportMessage();
 
-    public static abstract class SubmitPduBase {
+    public abstract static class SubmitPduBase {
         public byte[] encodedMessage;
         public byte[] encodedScAddress;
 
         public String toString() {
-            return "SubmitPdu: encodedScAddress = " + Arrays.toString(this.encodedScAddress) + ", encodedMessage = " + Arrays.toString(this.encodedMessage);
+            return "SubmitPdu: encodedScAddress = "
+                    + Arrays.toString(this.encodedScAddress)
+                    + ", encodedMessage = "
+                    + Arrays.toString(this.encodedMessage);
         }
     }
 
@@ -112,9 +140,16 @@ public abstract class SmsMessageBase {
         if (this.mIsEmail) {
             return this.mEmailFrom;
         }
-        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, mSubId).getSmsSetting(SmsConstants.SMS_SUPPORT_REPLY_ADDRESS)) {
-            String simOperator = TelephonyManager.getTelephonyProperty(SubscriptionManager.getPhoneId(mSubId), TelephonyProperties.PROPERTY_ICC_OPERATOR_NUMERIC, "00000");
-            if (simOperator == null || simOperator.startsWith("450") || simOperator.startsWith("001")) {
+        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, mSubId)
+                .getSmsSetting(SmsConstants.SMS_SUPPORT_REPLY_ADDRESS)) {
+            String simOperator =
+                    TelephonyManager.getTelephonyProperty(
+                            SubscriptionManager.getPhoneId(mSubId),
+                            TelephonyProperties.PROPERTY_ICC_OPERATOR_NUMERIC,
+                            "00000");
+            if (simOperator == null
+                    || simOperator.startsWith("450")
+                    || simOperator.startsWith("001")) {
                 return getReplyAddress();
             }
             return getOriginatingAddress();
@@ -175,9 +210,14 @@ public abstract class SmsMessageBase {
 
     protected void parseMessageBody() {
         if (this.mOriginatingAddress != null && this.mOriginatingAddress.couldBeEmailGateway()) {
-            if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, mSubId).getMnoName().toUpperCase().contains("ETISALAT_AE")) {
+            if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, mSubId)
+                    .getMnoName()
+                    .toUpperCase()
+                    .contains("ETISALAT_AE")) {
                 Rlog.d(LOG_TAG, "Ignore e-mail gateway for Etisalat_AE");
-            } else if (this.mUserDataHeader != null && this.mUserDataHeader.concatRef != null && this.mUserDataHeader.concatRef.seqNumber != 1) {
+            } else if (this.mUserDataHeader != null
+                    && this.mUserDataHeader.concatRef != null
+                    && this.mUserDataHeader.concatRef.seqNumber != 1) {
                 Rlog.d(LOG_TAG, "Concatnated message and not the first page. no e-mail gateway");
             } else {
                 extractEmailAddressFromMessageBody();
@@ -208,13 +248,18 @@ public abstract class SmsMessageBase {
             return;
         }
         this.mEmailFrom = parts[0];
-        if (!SmsManager.getSmsManagerForContextAndSubscriptionId(null, mSubId).getSmsSetting(SmsConstants.SMS_SUPPORT_REPLY_ADDRESS)) {
+        if (!SmsManager.getSmsManagerForContextAndSubscriptionId(null, mSubId)
+                .getSmsSetting(SmsConstants.SMS_SUPPORT_REPLY_ADDRESS)) {
             int len = this.mEmailFrom.length();
             int firstAt = this.mEmailFrom.indexOf(64);
             int lastAt = this.mEmailFrom.lastIndexOf(64);
             int firstDot = this.mEmailFrom.indexOf(46, lastAt + 1);
             int lastDot = this.mEmailFrom.lastIndexOf(46);
-            if (firstAt > 0 && firstAt == lastAt && lastAt + 1 < firstDot && firstDot <= lastDot && lastDot < len - 1) {
+            if (firstAt > 0
+                    && firstAt == lastAt
+                    && lastAt + 1 < firstDot
+                    && firstDot <= lastDot
+                    && lastDot < len - 1) {
                 this.mEmailBody = parts[1];
                 this.mIsEmail = true;
                 return;
@@ -226,9 +271,9 @@ public abstract class SmsMessageBase {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:18:?, code lost:
-    
-        return r3;
-     */
+
+       return r3;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -300,7 +345,10 @@ public abstract class SmsMessageBase {
         La3:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.SmsMessageBase.findNextUnicodePosition(int, int, java.lang.CharSequence):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.telephony.SmsMessageBase.findNextUnicodePosition(int,"
+                    + " int, java.lang.CharSequence):int");
     }
 
     private static boolean isRegionalIndicatorSymbol(int codePoint) {
@@ -322,11 +370,24 @@ public abstract class SmsMessageBase {
             while (pos < msgBody.length()) {
                 int nextPos = findNextUnicodePosition(pos, maxUserDataBytesWithHeader, msgBody);
                 if (nextPos == msgBody.length()) {
-                    ted.codeUnitsRemaining = ((maxUserDataBytesWithHeader / 2) + pos) - msgBody.length();
+                    ted.codeUnitsRemaining =
+                            ((maxUserDataBytesWithHeader / 2) + pos) - msgBody.length();
                 }
                 if (nextPos <= pos || nextPos > msgBody.length()) {
-                    Log.e(LOG_TAG, "findNextUnicodePosition() isn`t working.(" + pos + " >= " + nextPos + " or " + nextPos + " >= " + msgBody.length() + NavigationBarInflaterView.KEY_CODE_END);
-                    msgCount = ((maxUserDataBytesWithHeader - 1) + octets) / maxUserDataBytesWithHeader;
+                    Log.e(
+                            LOG_TAG,
+                            "findNextUnicodePosition() isn`t working.("
+                                    + pos
+                                    + " >= "
+                                    + nextPos
+                                    + " or "
+                                    + nextPos
+                                    + " >= "
+                                    + msgBody.length()
+                                    + NavigationBarInflaterView.KEY_CODE_END);
+                    msgCount =
+                            ((maxUserDataBytesWithHeader - 1) + octets)
+                                    / maxUserDataBytesWithHeader;
                     ted.codeUnitsRemaining = ((msgCount * maxUserDataBytesWithHeader) - octets) / 2;
                     break;
                 }
@@ -503,7 +564,12 @@ public abstract class SmsMessageBase {
         switch (tid) {
             case SmsEnvelope.TELESERVICE_LGT_WAP_URL_NOTI_49166 /* 49166 */:
             case SmsEnvelope.TELESERVICE_LGT_WEB_THIRD_49763 /* 49763 */:
-                this.mMessageBody = String.valueOf(thirdPartyText) + "\n" + destBody + "\n" + String.valueOf(connectText);
+                this.mMessageBody =
+                        String.valueOf(thirdPartyText)
+                                + "\n"
+                                + destBody
+                                + "\n"
+                                + String.valueOf(connectText);
                 break;
             case SmsEnvelope.TELESERVICE_LGT_WAP_URL_NOTI_49167 /* 49167 */:
                 this.mMessageBody = String.valueOf(dataText) + "\n" + destBody;
@@ -513,14 +579,20 @@ public abstract class SmsMessageBase {
                 break;
             case SmsEnvelope.TELESERVICE_LGT_WEB_LGT_49765 /* 49765 */:
             case SmsEnvelope.TELESERVICE_LGT_WEB_CP_49767 /* 49767 */:
-                this.mMessageBody = String.valueOf(webText) + "\n" + destBody + "\n" + String.valueOf(connectText);
+                this.mMessageBody =
+                        String.valueOf(webText)
+                                + "\n"
+                                + destBody
+                                + "\n"
+                                + String.valueOf(connectText);
                 break;
         }
     }
 
     private void parseLGTSharingNoti() {
         String destBody = "";
-        StringTokenizer tokenizer = new StringTokenizer(this.mMessageBody, String.valueOf((char) 29));
+        StringTokenizer tokenizer =
+                new StringTokenizer(this.mMessageBody, String.valueOf((char) 29));
         int i = 0;
         while (tokenizer.hasMoreTokens()) {
             String token = tokenizer.nextToken().trim();

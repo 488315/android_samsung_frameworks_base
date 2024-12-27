@@ -3,7 +3,6 @@ package android.content.pm;
 import android.app.SemAppIconSolution;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.drawable.AdaptiveIconDrawable;
@@ -13,16 +12,21 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags;
+
 import com.samsung.android.core.pm.PmUtils;
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.rune.PMRune;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class LauncherActivityInfo {
     private static final String TAG = "LauncherActivityInfo";
-    private static final UnicodeSet TRIMMABLE_CHARACTERS = new UnicodeSet("[[:White_Space:][:Default_Ignorable_Code_Point:][:gc=Cc:]]", false).freeze();
+    private static final UnicodeSet TRIMMABLE_CHARACTERS =
+            new UnicodeSet("[[:White_Space:][:Default_Ignorable_Code_Point:][:gc=Cc:]]", false)
+                    .freeze();
     private Context mContext;
     private final LauncherActivityInfoInternal mInternal;
     private final PackageManager mPm;
@@ -72,7 +76,8 @@ public class LauncherActivityInfo {
         Drawable icon = null;
         if (density != 0 && iconRes != 0 && !getActivityInfo().isArchived) {
             try {
-                Resources resources = this.mPm.getResourcesForApplication(getActivityInfo().applicationInfo);
+                Resources resources =
+                        this.mPm.getResourcesForApplication(getActivityInfo().applicationInfo);
                 icon = resources.getDrawableForDensity(iconRes, density);
             } catch (PackageManager.NameNotFoundException | Resources.NotFoundException e) {
             }
@@ -88,10 +93,15 @@ public class LauncherActivityInfo {
         Drawable icon = null;
         if (iconRes != 0) {
             try {
-                Resources resources = this.mPm.getResourcesForApplication(getActivityInfo().applicationInfo);
+                Resources resources =
+                        this.mPm.getResourcesForApplication(getActivityInfo().applicationInfo);
                 icon = resources.getDrawable(iconRes, null);
             } catch (Exception e) {
-                Log.i(TAG, "Failed to get original icon from resources: " + getActivityInfo().packageName, e);
+                Log.i(
+                        TAG,
+                        "Failed to get original icon from resources: "
+                                + getActivityInfo().packageName,
+                        e);
             }
             if (icon != null) {
                 if (icon instanceof AdaptiveIconDrawable) {
@@ -155,7 +165,7 @@ public class LauncherActivityInfo {
         int trimCount = 0;
         int[] codePoints = sequence.codePoints().toArray();
         for (int i : codePoints) {
-            String ch = new String(new int[]{i}, 0, 1);
+            String ch = new String(new int[] {i}, 0, 1);
             if (!isTrimmable(paint, ch)) {
                 break;
             }
@@ -176,7 +186,7 @@ public class LauncherActivityInfo {
         int trimCount = 0;
         int[] codePoints = sequence.codePoints().toArray();
         for (int i = codePoints.length - 1; i >= 0; i--) {
-            String ch = new String(new int[]{codePoints[i]}, 0, 1);
+            String ch = new String(new int[] {codePoints[i]}, 0, 1);
             if (!isTrimmable(paint, ch)) {
                 break;
             }
@@ -208,7 +218,11 @@ public class LauncherActivityInfo {
         boolean z = true;
         if (PmUtils.supportLiveIcon(activityInfo.applicationInfo, this.mContext)) {
             Log.i(TAG, "Trying to load live icon for " + pkgName);
-            originalIcon = this.mContext.getPackageManager().loadUnbadgedItemIcon(activityInfo, activityInfo.applicationInfo, true, 48);
+            originalIcon =
+                    this.mContext
+                            .getPackageManager()
+                            .loadUnbadgedItemIcon(
+                                    activityInfo, activityInfo.applicationInfo, true, 48);
         }
         if (originalIcon == null) {
             originalIcon = getIcon(density, useThemeIcon);
@@ -216,13 +230,28 @@ public class LauncherActivityInfo {
                 z = false;
             }
             boolean isDefaultIcon = z;
-            if (!useThemeIcon && !isDefaultIcon && (this.mPm.semCheckComponentMetadataForIconTray(pkgName, activityInfo.name) || this.mPm.semShouldPackIntoIconTray(pkgName))) {
-                originalIcon = this.mPm.semGetDrawableForIconTray(originalIcon, 48, pkgName, density);
+            if (!useThemeIcon
+                    && !isDefaultIcon
+                    && (this.mPm.semCheckComponentMetadataForIconTray(pkgName, activityInfo.name)
+                            || this.mPm.semShouldPackIntoIconTray(pkgName))) {
+                originalIcon =
+                        this.mPm.semGetDrawableForIconTray(originalIcon, 48, pkgName, density);
             }
         }
         Drawable badgedIcon = getBadgedIconIfNeed(originalIcon);
         if (badgedIcon != null) {
-            Log.i(TAG, "packageName: " + pkgName + ", useThemeIcon: " + useThemeIcon + ", height: " + badgedIcon.getIntrinsicHeight() + ", width: " + badgedIcon.getIntrinsicWidth() + ", density: " + density);
+            Log.i(
+                    TAG,
+                    "packageName: "
+                            + pkgName
+                            + ", useThemeIcon: "
+                            + useThemeIcon
+                            + ", height: "
+                            + badgedIcon.getIntrinsicHeight()
+                            + ", width: "
+                            + badgedIcon.getIntrinsicWidth()
+                            + ", density: "
+                            + density);
         }
         return badgedIcon;
     }
@@ -231,13 +260,21 @@ public class LauncherActivityInfo {
         if (originalIcon == null) {
             return null;
         }
-        if (PMRune.PM_BADGE_ON_MONETIZED_APP_SUPPORTED && this.mPm.shouldAppSupportBadgeIcon(this.mInternal.getActivityInfo().packageName, this.mInternal.getUser().getIdentifier())) {
+        if (PMRune.PM_BADGE_ON_MONETIZED_APP_SUPPORTED
+                && this.mPm.shouldAppSupportBadgeIcon(
+                        this.mInternal.getActivityInfo().packageName,
+                        this.mInternal.getUser().getIdentifier())) {
             originalIcon = this.mPm.getMonetizeBadgedIcon(originalIcon);
         }
         return this.mPm.getUserBadgedIcon(originalIcon, this.mInternal.getUser());
     }
 
     private boolean useThemeIcon() {
-        return (SemAppIconSolution.getInstance(this.mContext).isAppIconThemePackageSet() || Settings.System.getString(this.mContext.getContentResolver(), Settings.System.SEM_CURRENT_APP_ICON_PACKAGE) != null) && !DesktopModeFeature.isDesktopMode(this.mContext);
+        return (SemAppIconSolution.getInstance(this.mContext).isAppIconThemePackageSet()
+                        || Settings.System.getString(
+                                        this.mContext.getContentResolver(),
+                                        Settings.System.SEM_CURRENT_APP_ICON_PACKAGE)
+                                != null)
+                && !DesktopModeFeature.isDesktopMode(this.mContext);
     }
 }

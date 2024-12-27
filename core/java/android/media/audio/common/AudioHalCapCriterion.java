@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioHalCapCriterion implements Parcelable {
-    public static final Parcelable.Creator<AudioHalCapCriterion> CREATOR = new Parcelable.Creator<AudioHalCapCriterion>() { // from class: android.media.audio.common.AudioHalCapCriterion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalCapCriterion createFromParcel(Parcel _aidl_source) {
-            AudioHalCapCriterion _aidl_out = new AudioHalCapCriterion();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioHalCapCriterion> CREATOR =
+            new Parcelable.Creator<AudioHalCapCriterion>() { // from class:
+                // android.media.audio.common.AudioHalCapCriterion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalCapCriterion createFromParcel(Parcel _aidl_source) {
+                    AudioHalCapCriterion _aidl_out = new AudioHalCapCriterion();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalCapCriterion[] newArray(int _aidl_size) {
-            return new AudioHalCapCriterion[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalCapCriterion[] newArray(int _aidl_size) {
+                    return new AudioHalCapCriterion[_aidl_size];
+                }
+            };
     public String criterionTypeName;
     public String defaultLiteralValue;
     public String name;
@@ -106,14 +109,18 @@ public class AudioHalCapCriterion implements Parcelable {
             return false;
         }
         AudioHalCapCriterion that = (AudioHalCapCriterion) other;
-        if (Objects.deepEquals(this.name, that.name) && Objects.deepEquals(this.criterionTypeName, that.criterionTypeName) && Objects.deepEquals(this.defaultLiteralValue, that.defaultLiteralValue)) {
+        if (Objects.deepEquals(this.name, that.name)
+                && Objects.deepEquals(this.criterionTypeName, that.criterionTypeName)
+                && Objects.deepEquals(this.defaultLiteralValue, that.defaultLiteralValue)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.name, this.criterionTypeName, this.defaultLiteralValue).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(this.name, this.criterionTypeName, this.defaultLiteralValue)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

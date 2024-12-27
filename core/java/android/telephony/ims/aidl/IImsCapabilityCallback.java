@@ -18,16 +18,15 @@ public interface IImsCapabilityCallback extends IInterface {
 
     public static class Default implements IImsCapabilityCallback {
         @Override // android.telephony.ims.aidl.IImsCapabilityCallback
-        public void onQueryCapabilityConfiguration(int capability, int radioTech, boolean enabled) throws RemoteException {
-        }
+        public void onQueryCapabilityConfiguration(int capability, int radioTech, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCapabilityCallback
-        public void onChangeCapabilityConfigurationError(int capability, int radioTech, int reason) throws RemoteException {
-        }
+        public void onChangeCapabilityConfigurationError(int capability, int radioTech, int reason)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsCapabilityCallback
-        public void onCapabilitiesStatusChanged(int config) throws RemoteException {
-        }
+        public void onCapabilitiesStatusChanged(int config) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +34,7 @@ public interface IImsCapabilityCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsCapabilityCallback {
+    public abstract static class Stub extends Binder implements IImsCapabilityCallback {
         static final int TRANSACTION_onCapabilitiesStatusChanged = 3;
         static final int TRANSACTION_onChangeCapabilityConfigurationError = 2;
         static final int TRANSACTION_onQueryCapabilityConfiguration = 1;
@@ -79,7 +78,8 @@ public interface IImsCapabilityCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsCapabilityCallback.DESCRIPTOR);
             }
@@ -129,7 +129,8 @@ public interface IImsCapabilityCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCapabilityCallback
-            public void onQueryCapabilityConfiguration(int capability, int radioTech, boolean enabled) throws RemoteException {
+            public void onQueryCapabilityConfiguration(
+                    int capability, int radioTech, boolean enabled) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsCapabilityCallback.DESCRIPTOR);
@@ -143,7 +144,8 @@ public interface IImsCapabilityCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsCapabilityCallback
-            public void onChangeCapabilityConfigurationError(int capability, int radioTech, int reason) throws RemoteException {
+            public void onChangeCapabilityConfigurationError(
+                    int capability, int radioTech, int reason) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsCapabilityCallback.DESCRIPTOR);

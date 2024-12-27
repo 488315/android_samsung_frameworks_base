@@ -16,7 +16,8 @@ public class AudioRegion {
         this.endTime = endTime;
     }
 
-    public AudioRegion(long startTime, long endTime, float volume, long fadeInDuration, long fadeOutDuration) {
+    public AudioRegion(
+            long startTime, long endTime, float volume, long fadeInDuration, long fadeOutDuration) {
         this.fadeInDuration = 0L;
         this.fadeOutDuration = 0L;
         this.volume = 100.0f;
@@ -29,7 +30,12 @@ public class AudioRegion {
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
     public AudioRegion m9383clone() {
-        return new AudioRegion(this.startTime, this.endTime, this.volume, this.fadeInDuration, this.fadeOutDuration);
+        return new AudioRegion(
+                this.startTime,
+                this.endTime,
+                this.volume,
+                this.fadeInDuration,
+                this.fadeOutDuration);
     }
 
     public long getStartTime() {

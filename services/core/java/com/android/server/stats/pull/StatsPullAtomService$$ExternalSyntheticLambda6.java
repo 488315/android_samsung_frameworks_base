@@ -4,16 +4,19 @@ import android.os.IBinder;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class StatsPullAtomService$$ExternalSyntheticLambda6 implements IBinder.DeathRecipient {
+public final /* synthetic */ class StatsPullAtomService$$ExternalSyntheticLambda6
+        implements IBinder.DeathRecipient {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ StatsPullAtomService f$0;
 
-    public /* synthetic */ StatsPullAtomService$$ExternalSyntheticLambda6(StatsPullAtomService statsPullAtomService, int i) {
+    public /* synthetic */ StatsPullAtomService$$ExternalSyntheticLambda6(
+            StatsPullAtomService statsPullAtomService, int i) {
         this.$r8$classId = i;
         this.f$0 = statsPullAtomService;
     }
 
-    private final void binderDied$com$android$server$stats$pull$StatsPullAtomService$$ExternalSyntheticLambda7() {
+    private final void
+            binderDied$com$android$server$stats$pull$StatsPullAtomService$$ExternalSyntheticLambda7() {
         StatsPullAtomService statsPullAtomService = this.f$0;
         synchronized (statsPullAtomService.mThermalLock) {
             statsPullAtomService.mThermalService = null;

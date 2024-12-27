@@ -5,24 +5,29 @@ import android.annotation.NonNull;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 
 /* loaded from: classes4.dex */
 public final class VerifiedDisplayHash implements Parcelable {
-    public static final Parcelable.Creator<VerifiedDisplayHash> CREATOR = new Parcelable.Creator<VerifiedDisplayHash>() { // from class: android.view.displayhash.VerifiedDisplayHash.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerifiedDisplayHash[] newArray(int size) {
-            return new VerifiedDisplayHash[size];
-        }
+    public static final Parcelable.Creator<VerifiedDisplayHash> CREATOR =
+            new Parcelable.Creator<
+                    VerifiedDisplayHash>() { // from class:
+                                             // android.view.displayhash.VerifiedDisplayHash.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerifiedDisplayHash[] newArray(int size) {
+                    return new VerifiedDisplayHash[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerifiedDisplayHash createFromParcel(Parcel in) {
-            return new VerifiedDisplayHash(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerifiedDisplayHash createFromParcel(Parcel in) {
+                    return new VerifiedDisplayHash(in);
+                }
+            };
     private final Rect mBoundsInWindow;
     private final String mHashAlgorithm;
     private final byte[] mImageHash;
@@ -54,15 +59,22 @@ public final class VerifiedDisplayHash implements Parcelable {
         }
     }
 
-    public VerifiedDisplayHash(long timeMillis, Rect boundsInWindow, String hashAlgorithm, byte[] imageHash) {
+    public VerifiedDisplayHash(
+            long timeMillis, Rect boundsInWindow, String hashAlgorithm, byte[] imageHash) {
         this.mTimeMillis = timeMillis;
-        AnnotationValidations.validate((Class<? extends Annotation>) CurrentTimeMillisLong.class, (Annotation) null, this.mTimeMillis);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) CurrentTimeMillisLong.class,
+                (Annotation) null,
+                this.mTimeMillis);
         this.mBoundsInWindow = boundsInWindow;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBoundsInWindow);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBoundsInWindow);
         this.mHashAlgorithm = hashAlgorithm;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHashAlgorithm);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHashAlgorithm);
         this.mImageHash = imageHash;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mImageHash);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mImageHash);
     }
 
     public long getTimeMillis() {
@@ -82,7 +94,15 @@ public final class VerifiedDisplayHash implements Parcelable {
     }
 
     public String toString() {
-        return "VerifiedDisplayHash { timeMillis = " + this.mTimeMillis + ", boundsInWindow = " + this.mBoundsInWindow + ", hashAlgorithm = " + this.mHashAlgorithm + ", imageHash = " + imageHashToString() + " }";
+        return "VerifiedDisplayHash { timeMillis = "
+                + this.mTimeMillis
+                + ", boundsInWindow = "
+                + this.mBoundsInWindow
+                + ", hashAlgorithm = "
+                + this.mHashAlgorithm
+                + ", imageHash = "
+                + imageHashToString()
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -104,16 +124,21 @@ public final class VerifiedDisplayHash implements Parcelable {
         String hashAlgorithm = in.readString();
         byte[] imageHash = in.createByteArray();
         this.mTimeMillis = timeMillis;
-        AnnotationValidations.validate((Class<? extends Annotation>) CurrentTimeMillisLong.class, (Annotation) null, this.mTimeMillis);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) CurrentTimeMillisLong.class,
+                (Annotation) null,
+                this.mTimeMillis);
         this.mBoundsInWindow = boundsInWindow;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBoundsInWindow);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBoundsInWindow);
         this.mHashAlgorithm = hashAlgorithm;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHashAlgorithm);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHashAlgorithm);
         this.mImageHash = imageHash;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mImageHash);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mImageHash);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

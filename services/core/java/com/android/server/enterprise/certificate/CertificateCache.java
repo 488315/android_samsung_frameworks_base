@@ -1,12 +1,15 @@
 package com.android.server.enterprise.certificate;
 
 import android.content.Context;
+
 import com.android.server.enterprise.adapter.AdapterRegistry;
 import com.android.server.enterprise.adapter.IPersonaManagerAdapter;
 import com.android.server.enterprise.adapterlayer.PersonaManagerAdapter;
 import com.android.server.enterprise.storage.EdmStorageProvider;
 import com.android.server.enterprise.utils.CertificateUtil;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,7 +64,8 @@ public final class CertificateCache {
                         ((HashMap) this.mCache).put(num, hashMap);
                     }
                 }
-                CertificatePolicy.sendCertificatePolicyCacheUpdateCommand(this.mContext, "CERTIFICATE_TRUSTED_UNTRUSTED");
+                CertificatePolicy.sendCertificatePolicyCacheUpdateCommand(
+                        this.mContext, "CERTIFICATE_TRUSTED_UNTRUSTED");
             }
         } catch (Throwable th) {
             throw th;
@@ -123,7 +127,9 @@ public final class CertificateCache {
             Iterator it = ((ArrayList) this.mUtils.getAllUsersId()).iterator();
             while (it.hasNext()) {
                 Integer num = (Integer) it.next();
-                IPersonaManagerAdapter iPersonaManagerAdapter = (IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class);
+                IPersonaManagerAdapter iPersonaManagerAdapter =
+                        (IPersonaManagerAdapter)
+                                AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class);
                 int intValue = num.intValue();
                 ((PersonaManagerAdapter) iPersonaManagerAdapter).getClass();
                 if (!SemPersonaManager.isKnoxId(intValue)) {

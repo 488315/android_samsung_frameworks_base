@@ -36,6 +36,5 @@ public interface GlobalActionsAnimator {
 
     void startShowSafeModeAnimation();
 
-    default void startToastAnimation() {
-    }
+    default void startToastAnimation() {}
 }

@@ -3,23 +3,27 @@ package vendor.samsung.hardware.radio.satellite;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehSatSignalStrength implements Parcelable {
-    public static final Parcelable.Creator<SehSatSignalStrength> CREATOR = new Parcelable.Creator<SehSatSignalStrength>() { // from class: vendor.samsung.hardware.radio.satellite.SehSatSignalStrength.1
-        @Override // android.os.Parcelable.Creator
-        public SehSatSignalStrength createFromParcel(Parcel _aidl_source) {
-            SehSatSignalStrength _aidl_out = new SehSatSignalStrength();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehSatSignalStrength> CREATOR =
+            new Parcelable.Creator<
+                    SehSatSignalStrength>() { // from class:
+                                              // vendor.samsung.hardware.radio.satellite.SehSatSignalStrength.1
+                @Override // android.os.Parcelable.Creator
+                public SehSatSignalStrength createFromParcel(Parcel _aidl_source) {
+                    SehSatSignalStrength _aidl_out = new SehSatSignalStrength();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehSatSignalStrength[] newArray(int _aidl_size) {
-            return new SehSatSignalStrength[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehSatSignalStrength[] newArray(int _aidl_size) {
+                    return new SehSatSignalStrength[_aidl_size];
+                }
+            };
     public int rssi = 0;
     public int snr = 0;
     public int tx_target = 0;

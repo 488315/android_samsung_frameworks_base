@@ -81,8 +81,12 @@ public class EventScheduler {
         synchronized (lock) {
             FastEventQueue list = this.mEventBuffer.get(Long.valueOf(event.getTimestamp()));
             if (list == null) {
-                long lowestTime = this.mEventBuffer.isEmpty() ? Long.MAX_VALUE : this.mEventBuffer.firstKey().longValue();
-                this.mEventBuffer.put(Long.valueOf(event.getTimestamp()), new FastEventQueue(event));
+                long lowestTime =
+                        this.mEventBuffer.isEmpty()
+                                ? Long.MAX_VALUE
+                                : this.mEventBuffer.firstKey().longValue();
+                this.mEventBuffer.put(
+                        Long.valueOf(event.getTimestamp()), new FastEventQueue(event));
                 if (event.getTimestamp() < lowestTime) {
                     lock.notify();
                 }

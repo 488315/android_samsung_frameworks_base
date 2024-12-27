@@ -7,12 +7,13 @@ import java.util.ArrayList;
 public final class WatchedArrayList extends WatchableImpl implements Snappable {
     public final ArrayList mStorage;
     public volatile boolean mWatching = false;
-    public final AnonymousClass1 mObserver = new Watcher() { // from class: com.android.server.utils.WatchedArrayList.1
-        @Override // com.android.server.utils.Watcher
-        public final void onChange(Watchable watchable) {
-            WatchedArrayList.this.dispatchChange(watchable);
-        }
-    };
+    public final AnonymousClass1 mObserver =
+            new Watcher() { // from class: com.android.server.utils.WatchedArrayList.1
+                @Override // com.android.server.utils.Watcher
+                public final void onChange(Watchable watchable) {
+                    WatchedArrayList.this.dispatchChange(watchable);
+                }
+            };
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedArrayList$1] */
     public WatchedArrayList(int i) {

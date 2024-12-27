@@ -12,7 +12,8 @@ public class MMUIRecognizer {
 
     public native int SASRClose();
 
-    public native int SASRDoRecognition(float[] fArr, String[] strArr, String str, short[] sArr, String[] strArr2);
+    public native int SASRDoRecognition(
+            float[] fArr, String[] strArr, String str, short[] sArr, String[] strArr2);
 
     public native int SASRInit(String str);
 

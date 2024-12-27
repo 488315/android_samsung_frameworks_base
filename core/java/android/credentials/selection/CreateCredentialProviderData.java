@@ -3,36 +3,42 @@ package android.credentials.selection;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes.dex */
 public final class CreateCredentialProviderData extends ProviderData implements Parcelable {
-    public static final Parcelable.Creator<CreateCredentialProviderData> CREATOR = new Parcelable.Creator<CreateCredentialProviderData>() { // from class: android.credentials.selection.CreateCredentialProviderData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateCredentialProviderData createFromParcel(Parcel in) {
-            return new CreateCredentialProviderData(in);
-        }
+    public static final Parcelable.Creator<CreateCredentialProviderData> CREATOR =
+            new Parcelable.Creator<CreateCredentialProviderData>() { // from class:
+                // android.credentials.selection.CreateCredentialProviderData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateCredentialProviderData createFromParcel(Parcel in) {
+                    return new CreateCredentialProviderData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateCredentialProviderData[] newArray(int size) {
-            return new CreateCredentialProviderData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateCredentialProviderData[] newArray(int size) {
+                    return new CreateCredentialProviderData[size];
+                }
+            };
     private final Entry mRemoteEntry;
     private final List<Entry> mSaveEntries;
 
-    public CreateCredentialProviderData(String providerFlattenedComponentName, List<Entry> saveEntries, Entry remoteEntry) {
+    public CreateCredentialProviderData(
+            String providerFlattenedComponentName, List<Entry> saveEntries, Entry remoteEntry) {
         super(providerFlattenedComponentName);
         this.mSaveEntries = new ArrayList(saveEntries);
         this.mRemoteEntry = remoteEntry;
     }
 
     public CreateCredentialProviderInfo toCreateCredentialProviderInfo() {
-        return new CreateCredentialProviderInfo(getProviderFlattenedComponentName(), this.mSaveEntries, this.mRemoteEntry);
+        return new CreateCredentialProviderInfo(
+                getProviderFlattenedComponentName(), this.mSaveEntries, this.mRemoteEntry);
     }
 
     public List<Entry> getSaveEntries() {
@@ -48,7 +54,8 @@ public final class CreateCredentialProviderData extends ProviderData implements 
         ArrayList arrayList = new ArrayList();
         in.readTypedList(arrayList, Entry.CREATOR);
         this.mSaveEntries = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSaveEntries);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSaveEntries);
         Entry remoteEntry = (Entry) in.readTypedObject(Entry.CREATOR);
         this.mRemoteEntry = remoteEntry;
     }
@@ -85,7 +92,8 @@ public final class CreateCredentialProviderData extends ProviderData implements 
         }
 
         public CreateCredentialProviderData build() {
-            return new CreateCredentialProviderData(this.mProviderFlattenedComponentName, this.mSaveEntries, this.mRemoteEntry);
+            return new CreateCredentialProviderData(
+                    this.mProviderFlattenedComponentName, this.mSaveEntries, this.mRemoteEntry);
         }
     }
 }

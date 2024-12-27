@@ -8,7 +8,9 @@ import android.content.IntentFilter;
 import android.os.Binder;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.samsung.android.knox.analytics.activation.DevicePolicyListener;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -33,7 +35,9 @@ public final class DeviceProfileListener extends BroadcastReceiver {
         long clearCallingIdentity;
         final int i = 1;
         final int i2 = 0;
-        Log.d("[EnterpriseLicenseService] DeviceProfileListener", "onReceive(" + intent.getAction() + ")");
+        Log.d(
+                "[EnterpriseLicenseService] DeviceProfileListener",
+                "onReceive(" + intent.getAction() + ")");
         String action = intent.getAction();
         action.getClass();
         switch (action.hashCode()) {
@@ -68,15 +72,21 @@ public final class DeviceProfileListener extends BroadcastReceiver {
                 Log.d("[EnterpriseLicenseService] DeviceProfileListener", "notifyUserRemoved()");
                 Iterator it = ((ArrayList) this.mObservers).iterator();
                 while (it.hasNext()) {
-                    final EnterpriseLicenseService enterpriseLicenseService = (EnterpriseLicenseService) ((IDeviceProfileObserver) it.next());
+                    final EnterpriseLicenseService enterpriseLicenseService =
+                            (EnterpriseLicenseService) ((IDeviceProfileObserver) it.next());
                     enterpriseLicenseService.getClass();
                     Log.d("EnterpriseLicenseService", "onUserRemoved " + intExtra);
                     enterpriseLicenseService.enforcePermission$1();
-                    Log.d("EnterpriseLicenseService", "revokeKnoxPermissionFromUninstalledPackages");
+                    Log.d(
+                            "EnterpriseLicenseService",
+                            "revokeKnoxPermissionFromUninstalledPackages");
                     enterpriseLicenseService.enforcePermission$1();
                     Log.d("EnterpriseLicenseService", "getPackageNameFromAllActivations");
                     ArrayList arrayList = new ArrayList();
-                    ArrayList arrayList2 = (ArrayList) EnterpriseLicenseService.mEdmStorageProvider.getValues("LICENSE", new String[]{"pkgName"}, null);
+                    ArrayList arrayList2 =
+                            (ArrayList)
+                                    EnterpriseLicenseService.mEdmStorageProvider.getValues(
+                                            "LICENSE", new String[] {"pkgName"}, null);
                     if (!arrayList2.isEmpty()) {
                         Iterator it2 = arrayList2.iterator();
                         while (it2.hasNext()) {
@@ -91,65 +101,87 @@ public final class DeviceProfileListener extends BroadcastReceiver {
                     while (it3.hasNext()) {
                         String str = (String) it3.next();
                         if (!enterpriseLicenseService.isPackageInstalled(str)) {
-                            Log.d("EnterpriseLicenseService", "revoking permissions from uninstalled package: " + str);
+                            Log.d(
+                                    "EnterpriseLicenseService",
+                                    "revoking permissions from uninstalled package: " + str);
                             enterpriseLicenseService.resetLicenseByAdmin(str);
                         }
                     }
                     clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        new Thread(new Runnable() { // from class: com.android.server.enterprise.license.EnterpriseLicenseService$$ExternalSyntheticLambda1
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                int i3 = i2;
-                                EnterpriseLicenseService enterpriseLicenseService2 = enterpriseLicenseService;
-                                switch (i3) {
-                                    case 0:
-                                        enterpriseLicenseService2.callLicenseAgent("ProfileOwnerRemoved", null, null);
-                                        break;
-                                    default:
-                                        enterpriseLicenseService2.callLicenseAgent("DeviceOwnerRemoved", null, null);
-                                        break;
-                                }
-                            }
-                        }).start();
+                        new Thread(
+                                        new Runnable() { // from class:
+                                                         // com.android.server.enterprise.license.EnterpriseLicenseService$$ExternalSyntheticLambda1
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                int i3 = i2;
+                                                EnterpriseLicenseService enterpriseLicenseService2 =
+                                                        enterpriseLicenseService;
+                                                switch (i3) {
+                                                    case 0:
+                                                        enterpriseLicenseService2.callLicenseAgent(
+                                                                "ProfileOwnerRemoved", null, null);
+                                                        break;
+                                                    default:
+                                                        enterpriseLicenseService2.callLicenseAgent(
+                                                                "DeviceOwnerRemoved", null, null);
+                                                        break;
+                                                }
+                                            }
+                                        })
+                                .start();
                     } finally {
                     }
                 }
                 return;
             case 1:
-                String stringExtra = intent.getStringExtra(DevicePolicyListener.EXTRA_DO_PO_PACKAGE_NAME);
+                String stringExtra =
+                        intent.getStringExtra(DevicePolicyListener.EXTRA_DO_PO_PACKAGE_NAME);
                 if (intent.getBooleanExtra(DevicePolicyListener.EXTRA_DO_CHANGED_STATUS, false)) {
-                    Log.d("[EnterpriseLicenseService] DeviceProfileListener", "notifyDeviceOwnerAdded()");
+                    Log.d(
+                            "[EnterpriseLicenseService] DeviceProfileListener",
+                            "notifyDeviceOwnerAdded()");
                     Iterator it4 = ((ArrayList) this.mObservers).iterator();
                     while (it4.hasNext()) {
-                        ((EnterpriseLicenseService) ((IDeviceProfileObserver) it4.next())).getClass();
+                        ((EnterpriseLicenseService) ((IDeviceProfileObserver) it4.next()))
+                                .getClass();
                         Log.d("EnterpriseLicenseService", "onDeviceOwnerAdded " + stringExtra);
                     }
                     return;
                 }
-                Log.d("[EnterpriseLicenseService] DeviceProfileListener", "notifyDeviceOwnerRemoved()");
+                Log.d(
+                        "[EnterpriseLicenseService] DeviceProfileListener",
+                        "notifyDeviceOwnerRemoved()");
                 Iterator it5 = ((ArrayList) this.mObservers).iterator();
                 while (it5.hasNext()) {
-                    final EnterpriseLicenseService enterpriseLicenseService2 = (EnterpriseLicenseService) ((IDeviceProfileObserver) it5.next());
+                    final EnterpriseLicenseService enterpriseLicenseService2 =
+                            (EnterpriseLicenseService) ((IDeviceProfileObserver) it5.next());
                     enterpriseLicenseService2.getClass();
                     Log.d("EnterpriseLicenseService", "onDeviceOwnerRemoved " + stringExtra);
                     clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        new Thread(new Runnable() { // from class: com.android.server.enterprise.license.EnterpriseLicenseService$$ExternalSyntheticLambda1
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                int i3 = i;
-                                EnterpriseLicenseService enterpriseLicenseService22 = enterpriseLicenseService2;
-                                switch (i3) {
-                                    case 0:
-                                        enterpriseLicenseService22.callLicenseAgent("ProfileOwnerRemoved", null, null);
-                                        break;
-                                    default:
-                                        enterpriseLicenseService22.callLicenseAgent("DeviceOwnerRemoved", null, null);
-                                        break;
-                                }
-                            }
-                        }).start();
+                        new Thread(
+                                        new Runnable() { // from class:
+                                                         // com.android.server.enterprise.license.EnterpriseLicenseService$$ExternalSyntheticLambda1
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                int i3 = i;
+                                                EnterpriseLicenseService
+                                                        enterpriseLicenseService22 =
+                                                                enterpriseLicenseService2;
+                                                switch (i3) {
+                                                    case 0:
+                                                        enterpriseLicenseService22.callLicenseAgent(
+                                                                "ProfileOwnerRemoved", null, null);
+                                                        break;
+                                                    default:
+                                                        enterpriseLicenseService22.callLicenseAgent(
+                                                                "DeviceOwnerRemoved", null, null);
+                                                        break;
+                                                }
+                                            }
+                                        })
+                                .start();
                     } finally {
                     }
                 }

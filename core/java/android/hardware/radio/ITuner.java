@@ -1,15 +1,13 @@
 package android.hardware.radio;
 
 import android.graphics.Bitmap;
-import android.hardware.radio.ITuner;
-import android.hardware.radio.ProgramList;
-import android.hardware.radio.RadioManager;
 import android.media.tv.interactive.TvInteractiveAppService;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,8 +59,7 @@ public interface ITuner extends IInterface {
 
     public static class Default implements ITuner {
         @Override // android.hardware.radio.ITuner
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.radio.ITuner
         public boolean isClosed() throws RemoteException {
@@ -70,8 +67,7 @@ public interface ITuner extends IInterface {
         }
 
         @Override // android.hardware.radio.ITuner
-        public void setConfiguration(RadioManager.BandConfig config) throws RemoteException {
-        }
+        public void setConfiguration(RadioManager.BandConfig config) throws RemoteException {}
 
         @Override // android.hardware.radio.ITuner
         public RadioManager.BandConfig getConfiguration() throws RemoteException {
@@ -79,8 +75,7 @@ public interface ITuner extends IInterface {
         }
 
         @Override // android.hardware.radio.ITuner
-        public void setMuted(boolean mute) throws RemoteException {
-        }
+        public void setMuted(boolean mute) throws RemoteException {}
 
         @Override // android.hardware.radio.ITuner
         public boolean isMuted() throws RemoteException {
@@ -88,24 +83,19 @@ public interface ITuner extends IInterface {
         }
 
         @Override // android.hardware.radio.ITuner
-        public void step(boolean directionDown, boolean skipSubChannel) throws RemoteException {
-        }
+        public void step(boolean directionDown, boolean skipSubChannel) throws RemoteException {}
 
         @Override // android.hardware.radio.ITuner
-        public void seek(boolean directionDown, boolean skipSubChannel) throws RemoteException {
-        }
+        public void seek(boolean directionDown, boolean skipSubChannel) throws RemoteException {}
 
         @Override // android.hardware.radio.ITuner
-        public void tune(ProgramSelector selector) throws RemoteException {
-        }
+        public void tune(ProgramSelector selector) throws RemoteException {}
 
         @Override // android.hardware.radio.ITuner
-        public void cancel() throws RemoteException {
-        }
+        public void cancel() throws RemoteException {}
 
         @Override // android.hardware.radio.ITuner
-        public void cancelAnnouncement() throws RemoteException {
-        }
+        public void cancelAnnouncement() throws RemoteException {}
 
         @Override // android.hardware.radio.ITuner
         public Bitmap getImage(int id) throws RemoteException {
@@ -118,12 +108,10 @@ public interface ITuner extends IInterface {
         }
 
         @Override // android.hardware.radio.ITuner
-        public void startProgramListUpdates(ProgramList.Filter filter) throws RemoteException {
-        }
+        public void startProgramListUpdates(ProgramList.Filter filter) throws RemoteException {}
 
         @Override // android.hardware.radio.ITuner
-        public void stopProgramListUpdates() throws RemoteException {
-        }
+        public void stopProgramListUpdates() throws RemoteException {}
 
         @Override // android.hardware.radio.ITuner
         public boolean isConfigFlagSupported(int flag) throws RemoteException {
@@ -136,11 +124,11 @@ public interface ITuner extends IInterface {
         }
 
         @Override // android.hardware.radio.ITuner
-        public void setConfigFlag(int flag, boolean value) throws RemoteException {
-        }
+        public void setConfigFlag(int flag, boolean value) throws RemoteException {}
 
         @Override // android.hardware.radio.ITuner
-        public Map<String, String> setParameters(Map<String, String> parameters) throws RemoteException {
+        public Map<String, String> setParameters(Map<String, String> parameters)
+                throws RemoteException {
             return null;
         }
 
@@ -155,7 +143,7 @@ public interface ITuner extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITuner {
+    public abstract static class Stub extends Binder implements ITuner {
         public static final String DESCRIPTOR = "android.hardware.radio.ITuner";
         static final int TRANSACTION_cancel = 10;
         static final int TRANSACTION_cancelAnnouncement = 11;
@@ -251,7 +239,8 @@ public interface ITuner extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, final Parcel data, final Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, final Parcel data, final Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -270,7 +259,9 @@ public interface ITuner extends IInterface {
                     reply.writeBoolean(_result);
                     return true;
                 case 3:
-                    RadioManager.BandConfig _arg0 = (RadioManager.BandConfig) data.readTypedObject(RadioManager.BandConfig.CREATOR);
+                    RadioManager.BandConfig _arg0 =
+                            (RadioManager.BandConfig)
+                                    data.readTypedObject(RadioManager.BandConfig.CREATOR);
                     data.enforceNoDataAvail();
                     setConfiguration(_arg0);
                     reply.writeNoException();
@@ -306,7 +297,8 @@ public interface ITuner extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 9:
-                    ProgramSelector _arg05 = (ProgramSelector) data.readTypedObject(ProgramSelector.CREATOR);
+                    ProgramSelector _arg05 =
+                            (ProgramSelector) data.readTypedObject(ProgramSelector.CREATOR);
                     data.enforceNoDataAvail();
                     tune(_arg05);
                     reply.writeNoException();
@@ -332,7 +324,8 @@ public interface ITuner extends IInterface {
                     reply.writeBoolean(_result5);
                     return true;
                 case 14:
-                    ProgramList.Filter _arg07 = (ProgramList.Filter) data.readTypedObject(ProgramList.Filter.CREATOR);
+                    ProgramList.Filter _arg07 =
+                            (ProgramList.Filter) data.readTypedObject(ProgramList.Filter.CREATOR);
                     data.enforceNoDataAvail();
                     startProgramListUpdates(_arg07);
                     reply.writeNoException();
@@ -365,12 +358,16 @@ public interface ITuner extends IInterface {
                 case 19:
                     int N = data.readInt();
                     final Map<String, String> _arg011 = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.hardware.radio.ITuner$Stub$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            ITuner.Stub.lambda$onTransact$0(Parcel.this, _arg011, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.hardware.radio.ITuner$Stub$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            ITuner.Stub.lambda$onTransact$0(
+                                                    Parcel.this, _arg011, i);
+                                        }
+                                    });
                     data.enforceNoDataAvail();
                     Map<String, String> _result8 = setParameters(_arg011);
                     reply.writeNoException();
@@ -378,12 +375,15 @@ public interface ITuner extends IInterface {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result8.size());
-                        _result8.forEach(new BiConsumer() { // from class: android.hardware.radio.ITuner$Stub$$ExternalSyntheticLambda1
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                ITuner.Stub.lambda$onTransact$1(Parcel.this, (String) obj, (String) obj2);
-                            }
-                        });
+                        _result8.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.hardware.radio.ITuner$Stub$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        ITuner.Stub.lambda$onTransact$1(
+                                                Parcel.this, (String) obj, (String) obj2);
+                                    }
+                                });
                     }
                     return true;
                 case 20:
@@ -395,12 +395,15 @@ public interface ITuner extends IInterface {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result9.size());
-                        _result9.forEach(new BiConsumer() { // from class: android.hardware.radio.ITuner$Stub$$ExternalSyntheticLambda2
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                ITuner.Stub.lambda$onTransact$2(Parcel.this, (String) obj, (String) obj2);
-                            }
-                        });
+                        _result9.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.hardware.radio.ITuner$Stub$$ExternalSyntheticLambda2
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        ITuner.Stub.lambda$onTransact$2(
+                                                Parcel.this, (String) obj, (String) obj2);
+                                    }
+                                });
                     }
                     return true;
                 default:
@@ -494,7 +497,9 @@ public interface ITuner extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    RadioManager.BandConfig _result = (RadioManager.BandConfig) _reply.readTypedObject(RadioManager.BandConfig.CREATOR);
+                    RadioManager.BandConfig _result =
+                            (RadioManager.BandConfig)
+                                    _reply.readTypedObject(RadioManager.BandConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -721,7 +726,8 @@ public interface ITuner extends IInterface {
             }
 
             @Override // android.hardware.radio.ITuner
-            public Map<String, String> setParameters(Map<String, String> parameters) throws RemoteException {
+            public Map<String, String> setParameters(Map<String, String> parameters)
+                    throws RemoteException {
                 final Parcel _data = Parcel.obtain(asBinder());
                 final Parcel _reply = Parcel.obtain();
                 try {
@@ -730,23 +736,30 @@ public interface ITuner extends IInterface {
                         _data.writeInt(-1);
                     } else {
                         _data.writeInt(parameters.size());
-                        parameters.forEach(new BiConsumer() { // from class: android.hardware.radio.ITuner$Stub$Proxy$$ExternalSyntheticLambda1
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                ITuner.Stub.Proxy.lambda$setParameters$0(Parcel.this, (String) obj, (String) obj2);
-                            }
-                        });
+                        parameters.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.hardware.radio.ITuner$Stub$Proxy$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        ITuner.Stub.Proxy.lambda$setParameters$0(
+                                                Parcel.this, (String) obj, (String) obj2);
+                                    }
+                                });
                     }
                     this.mRemote.transact(19, _data, _reply, 0);
                     _reply.readException();
                     int N = _reply.readInt();
                     final Map<String, String> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.hardware.radio.ITuner$Stub$Proxy$$ExternalSyntheticLambda2
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            ITuner.Stub.Proxy.lambda$setParameters$1(Parcel.this, _result, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.hardware.radio.ITuner$Stub$Proxy$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            ITuner.Stub.Proxy.lambda$setParameters$1(
+                                                    Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -776,12 +789,16 @@ public interface ITuner extends IInterface {
                     _reply.readException();
                     int N = _reply.readInt();
                     final Map<String, String> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.hardware.radio.ITuner$Stub$Proxy$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            ITuner.Stub.Proxy.lambda$getParameters$2(Parcel.this, _result, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.hardware.radio.ITuner$Stub$Proxy$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            ITuner.Stub.Proxy.lambda$getParameters$2(
+                                                    Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();

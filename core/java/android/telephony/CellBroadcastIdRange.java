@@ -4,34 +4,39 @@ import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class CellBroadcastIdRange implements Parcelable {
-    public static final Parcelable.Creator<CellBroadcastIdRange> CREATOR = new Parcelable.Creator<CellBroadcastIdRange>() { // from class: android.telephony.CellBroadcastIdRange.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellBroadcastIdRange createFromParcel(Parcel in) {
-            int startId = in.readInt();
-            int endId = in.readInt();
-            int type = in.readInt();
-            boolean isEnabled = in.readBoolean();
-            return new CellBroadcastIdRange(startId, endId, type, isEnabled);
-        }
+    public static final Parcelable.Creator<CellBroadcastIdRange> CREATOR =
+            new Parcelable.Creator<
+                    CellBroadcastIdRange>() { // from class:
+                                              // android.telephony.CellBroadcastIdRange.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellBroadcastIdRange createFromParcel(Parcel in) {
+                    int startId = in.readInt();
+                    int endId = in.readInt();
+                    int type = in.readInt();
+                    boolean isEnabled = in.readBoolean();
+                    return new CellBroadcastIdRange(startId, endId, type, isEnabled);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellBroadcastIdRange[] newArray(int size) {
-            return new CellBroadcastIdRange[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellBroadcastIdRange[] newArray(int size) {
+                    return new CellBroadcastIdRange[size];
+                }
+            };
     private int mEndId;
     private boolean mIsEnabled;
     private int mStartId;
     private int mType;
 
-    public CellBroadcastIdRange(int startId, int endId, int type, boolean isEnabled) throws IllegalArgumentException {
+    public CellBroadcastIdRange(int startId, int endId, int type, boolean isEnabled)
+            throws IllegalArgumentException {
         if (startId < 0 || endId < 0 || startId > 65535 || endId > 65535) {
             throw new IllegalArgumentException("invalid id");
         }
@@ -74,7 +79,11 @@ public final class CellBroadcastIdRange implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mStartId), Integer.valueOf(this.mEndId), Integer.valueOf(this.mType), Boolean.valueOf(this.mIsEnabled));
+        return Objects.hash(
+                Integer.valueOf(this.mStartId),
+                Integer.valueOf(this.mEndId),
+                Integer.valueOf(this.mType),
+                Boolean.valueOf(this.mIsEnabled));
     }
 
     public boolean equals(Object obj) {
@@ -82,10 +91,21 @@ public final class CellBroadcastIdRange implements Parcelable {
             return false;
         }
         CellBroadcastIdRange other = (CellBroadcastIdRange) obj;
-        return this.mStartId == other.mStartId && this.mEndId == other.mEndId && this.mType == other.mType && this.mIsEnabled == other.mIsEnabled;
+        return this.mStartId == other.mStartId
+                && this.mEndId == other.mEndId
+                && this.mType == other.mType
+                && this.mIsEnabled == other.mIsEnabled;
     }
 
     public String toString() {
-        return "CellBroadcastIdRange[" + this.mStartId + ", " + this.mEndId + ", " + this.mType + ", " + this.mIsEnabled + NavigationBarInflaterView.SIZE_MOD_END;
+        return "CellBroadcastIdRange["
+                + this.mStartId
+                + ", "
+                + this.mEndId
+                + ", "
+                + this.mType
+                + ", "
+                + this.mIsEnabled
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

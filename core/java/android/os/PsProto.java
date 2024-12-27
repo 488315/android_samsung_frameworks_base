@@ -42,7 +42,6 @@ public final class PsProto {
         public static final long VSZ = 1120986464262L;
         public static final long WCHAN = 1138166333448L;
 
-        public Process() {
-        }
+        public Process() {}
     }
 }

@@ -6,7 +6,9 @@ import android.hardware.lights.LightState;
 import android.hardware.lights.LightsManager;
 import android.hardware.lights.LightsRequest;
 import android.util.CloseGuard;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.ref.Reference;
 import java.util.List;
 
@@ -45,7 +47,8 @@ class InputDeviceLightsManager extends LightsManager {
         throw new UnsupportedOperationException();
     }
 
-    public final class InputDeviceLightsSession extends LightsManager.LightsSession implements AutoCloseable {
+    public final class InputDeviceLightsSession extends LightsManager.LightsSession
+            implements AutoCloseable {
         private final CloseGuard mCloseGuard;
         private boolean mClosed;
 
@@ -59,13 +62,15 @@ class InputDeviceLightsManager extends LightsManager {
         public void requestLights(LightsRequest request) {
             Preconditions.checkNotNull(request);
             Preconditions.checkArgument(!this.mClosed);
-            InputDeviceLightsManager.this.mGlobal.requestLights(InputDeviceLightsManager.this.mDeviceId, request, getToken());
+            InputDeviceLightsManager.this.mGlobal.requestLights(
+                    InputDeviceLightsManager.this.mDeviceId, request, getToken());
         }
 
         @Override // android.hardware.lights.LightsManager.LightsSession, java.lang.AutoCloseable
         public void close() {
             if (!this.mClosed) {
-                InputDeviceLightsManager.this.mGlobal.closeLightSession(InputDeviceLightsManager.this.mDeviceId, getToken());
+                InputDeviceLightsManager.this.mGlobal.closeLightSession(
+                        InputDeviceLightsManager.this.mDeviceId, getToken());
                 this.mClosed = true;
                 this.mCloseGuard.close();
             }

@@ -3,6 +3,7 @@ package com.android.server.enterprise.vpn.knoxvpn;
 import android.os.Binder;
 import android.security.LegacyVpnProfileStore;
 import android.util.Log;
+
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,7 +18,9 @@ public final class KnoxVpnCredentialHandler {
                 LegacyVpnProfileStore.remove(str);
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("KnoxVpnCredentialHandler", "Exception occured while trying to delete the info from keystore");
+                Log.d(
+                        "KnoxVpnCredentialHandler",
+                        "Exception occured while trying to delete the info from keystore");
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -40,7 +43,9 @@ public final class KnoxVpnCredentialHandler {
     }
 
     public static String retrieveCredentialsFromKeystore(String str) {
-        Log.d("KnoxVpnCredentialHandler", "retrieveCredentialsFromKeystore alias retrieved is " + str);
+        Log.d(
+                "KnoxVpnCredentialHandler",
+                "retrieveCredentialsFromKeystore alias retrieved is " + str);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         String str2 = null;
         try {
@@ -50,10 +55,15 @@ public final class KnoxVpnCredentialHandler {
                     str2 = new String(bArr);
                 }
             } catch (Exception e) {
-                Log.d("KnoxVpnCredentialHandler", "Exception occured while trying to retrieve the info from keystore");
+                Log.d(
+                        "KnoxVpnCredentialHandler",
+                        "Exception occured while trying to retrieve the info from keystore");
                 e.printStackTrace();
             }
-            DualAppManagerService$$ExternalSyntheticOutline0.m("retrieveCredentialsFromKeystore key retrieved is ", str2, "KnoxVpnCredentialHandler");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "retrieveCredentialsFromKeystore key retrieved is ",
+                    str2,
+                    "KnoxVpnCredentialHandler");
             return str2;
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -69,10 +79,19 @@ public final class KnoxVpnCredentialHandler {
                 try {
                     z = LegacyVpnProfileStore.put(str, bytes);
                 } catch (Exception e) {
-                    Log.e("KnoxVpnCredentialHandler", "Exception occured while trying to store the info inside keystore");
+                    Log.e(
+                            "KnoxVpnCredentialHandler",
+                            "Exception occured while trying to store the info inside keystore");
                     e.printStackTrace();
                 }
-                Log.d("KnoxVpnCredentialHandler", "storeCredentialsInKeystore status key is " + z + " for alias " + str + " for key " + str2);
+                Log.d(
+                        "KnoxVpnCredentialHandler",
+                        "storeCredentialsInKeystore status key is "
+                                + z
+                                + " for alias "
+                                + str
+                                + " for key "
+                                + str2);
             }
             return z;
         } finally {

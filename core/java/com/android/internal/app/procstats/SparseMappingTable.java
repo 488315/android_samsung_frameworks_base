@@ -4,9 +4,12 @@ import android.os.Build;
 import android.os.Parcel;
 import android.util.EventLog;
 import android.util.Slog;
+
 import com.android.internal.util.GrowingArrayUtils;
-import java.util.ArrayList;
+
 import libcore.util.EmptyArray;
+
+import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
 public class SparseMappingTable {
@@ -41,11 +44,20 @@ public class SparseMappingTable {
             int N = copyFrom.getKeyCount();
             for (int i = 0; i < N; i++) {
                 int theirKey = copyFrom.getKeyAt(i);
-                long[] theirLongs = (long[]) copyFrom.mParent.mLongs.get(SparseMappingTable.getArrayFromKey(theirKey));
+                long[] theirLongs =
+                        (long[])
+                                copyFrom.mParent.mLongs.get(
+                                        SparseMappingTable.getArrayFromKey(theirKey));
                 byte id = SparseMappingTable.getIdFromKey(theirKey);
                 int myKey = getOrAddKey(id, valueCount);
-                long[] myLongs = (long[]) this.mParent.mLongs.get(SparseMappingTable.getArrayFromKey(myKey));
-                System.arraycopy(theirLongs, SparseMappingTable.getIndexFromKey(theirKey), myLongs, SparseMappingTable.getIndexFromKey(myKey), valueCount);
+                long[] myLongs =
+                        (long[]) this.mParent.mLongs.get(SparseMappingTable.getArrayFromKey(myKey));
+                System.arraycopy(
+                        theirLongs,
+                        SparseMappingTable.getIndexFromKey(theirKey),
+                        myLongs,
+                        SparseMappingTable.getIndexFromKey(myKey),
+                        valueCount);
             }
         }
 
@@ -66,7 +78,12 @@ public class SparseMappingTable {
             }
             int key = (whichArray << 8) | (this.mParent.mNextIndex << 16) | (id << 0);
             this.mParent.mNextIndex += count;
-            this.mTable = GrowingArrayUtils.insert(this.mTable != null ? this.mTable : EmptyArray.INT, this.mSize, ~idx, key);
+            this.mTable =
+                    GrowingArrayUtils.insert(
+                            this.mTable != null ? this.mTable : EmptyArray.INT,
+                            this.mSize,
+                            ~idx,
+                            key);
             this.mSize++;
             return key;
         }
@@ -87,10 +104,18 @@ public class SparseMappingTable {
         public long getValue(int key, int index) {
             assertConsistency();
             try {
-                long[] array = (long[]) this.mParent.mLongs.get(SparseMappingTable.getArrayFromKey(key));
+                long[] array =
+                        (long[]) this.mParent.mLongs.get(SparseMappingTable.getArrayFromKey(key));
                 return array[SparseMappingTable.getIndexFromKey(key) + index];
             } catch (IndexOutOfBoundsException ex) {
-                SparseMappingTable.logOrThrow("key=0x" + Integer.toHexString(key) + " index=" + index + " -- " + dumpInternalState(), ex);
+                SparseMappingTable.logOrThrow(
+                        "key=0x"
+                                + Integer.toHexString(key)
+                                + " index="
+                                + index
+                                + " -- "
+                                + dumpInternalState(),
+                        ex);
                 return 0L;
             }
         }
@@ -107,10 +132,22 @@ public class SparseMappingTable {
             }
             int key = this.mTable[idx];
             try {
-                long[] array = (long[]) this.mParent.mLongs.get(SparseMappingTable.getArrayFromKey(key));
+                long[] array =
+                        (long[]) this.mParent.mLongs.get(SparseMappingTable.getArrayFromKey(key));
                 return array[SparseMappingTable.getIndexFromKey(key) + index];
             } catch (IndexOutOfBoundsException ex) {
-                SparseMappingTable.logOrThrow("id=0x" + Integer.toHexString(id) + " idx=" + idx + " key=0x" + Integer.toHexString(key) + " index=" + index + " -- " + dumpInternalState(), ex);
+                SparseMappingTable.logOrThrow(
+                        "id=0x"
+                                + Integer.toHexString(id)
+                                + " idx="
+                                + idx
+                                + " key=0x"
+                                + Integer.toHexString(key)
+                                + " index="
+                                + index
+                                + " -- "
+                                + dumpInternalState(),
+                        ex);
                 return 0L;
             }
         }
@@ -127,14 +164,32 @@ public class SparseMappingTable {
         public void setValue(int key, int index, long value) {
             assertConsistency();
             if (value < 0) {
-                SparseMappingTable.logOrThrow("can't store negative values key=0x" + Integer.toHexString(key) + " index=" + index + " value=" + value + " -- " + dumpInternalState());
+                SparseMappingTable.logOrThrow(
+                        "can't store negative values key=0x"
+                                + Integer.toHexString(key)
+                                + " index="
+                                + index
+                                + " value="
+                                + value
+                                + " -- "
+                                + dumpInternalState());
                 return;
             }
             try {
-                long[] array = (long[]) this.mParent.mLongs.get(SparseMappingTable.getArrayFromKey(key));
+                long[] array =
+                        (long[]) this.mParent.mLongs.get(SparseMappingTable.getArrayFromKey(key));
                 array[SparseMappingTable.getIndexFromKey(key) + index] = value;
             } catch (IndexOutOfBoundsException ex) {
-                SparseMappingTable.logOrThrow("key=0x" + Integer.toHexString(key) + " index=" + index + " value=" + value + " -- " + dumpInternalState(), ex);
+                SparseMappingTable.logOrThrow(
+                        "key=0x"
+                                + Integer.toHexString(key)
+                                + " index="
+                                + index
+                                + " value="
+                                + value
+                                + " -- "
+                                + dumpInternalState(),
+                        ex);
             }
         }
 
@@ -179,8 +234,7 @@ public class SparseMappingTable {
             return this.mTable[i];
         }
 
-        private void assertConsistency() {
-        }
+        private void assertConsistency() {}
 
         private int binarySearch(byte id) {
             int lo = 0;
@@ -209,7 +263,9 @@ public class SparseMappingTable {
                 int index = SparseMappingTable.getIndexFromKey(key);
                 if (arrayIndex >= longsSize || index >= longs.get(arrayIndex).length) {
                     if (log) {
-                        Slog.w(SparseMappingTable.TAG, "Invalid stats at index " + i + " -- " + dumpInternalState());
+                        Slog.w(
+                                SparseMappingTable.TAG,
+                                "Invalid stats at index " + i + " -- " + dumpInternalState());
                         return false;
                     }
                     return false;
@@ -294,7 +350,11 @@ public class SparseMappingTable {
         }
         if (N > 0 && this.mLongs.get(N - 1).length != this.mNextIndex) {
             EventLog.writeEvent(1397638484, "73252178", -1, "");
-            throw new IllegalStateException("Expected array of length " + this.mNextIndex + " but was " + this.mLongs.get(N - 1).length);
+            throw new IllegalStateException(
+                    "Expected array of length "
+                            + this.mNextIndex
+                            + " but was "
+                            + this.mLongs.get(N - 1).length);
         }
     }
 
@@ -313,7 +373,13 @@ public class SparseMappingTable {
             for (int i = 0; i < N; i++) {
                 long[] array = this.mLongs.get(i);
                 for (int j = 0; j < array.length && (i != N - 1 || j != this.mNextIndex); j++) {
-                    sb.append(String.format(" %4d %d 0x%016x %-19d\n", Integer.valueOf(i), Integer.valueOf(j), Long.valueOf(array[j]), Long.valueOf(array[j])));
+                    sb.append(
+                            String.format(
+                                    " %4d %d 0x%016x %-19d\n",
+                                    Integer.valueOf(i),
+                                    Integer.valueOf(j),
+                                    Long.valueOf(array[j]),
+                                    Long.valueOf(array[j])));
                 }
             }
         }

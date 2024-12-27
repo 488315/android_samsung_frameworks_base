@@ -19,7 +19,8 @@ public class CaptureFrameTask {
         SUPERHDR_FRAME
     }
 
-    public CaptureFrameTask(Item item, int outputWidth, int outputHeight, CaptureFrameTaskListener listener) {
+    public CaptureFrameTask(
+            Item item, int outputWidth, int outputHeight, CaptureFrameTaskListener listener) {
         this.outputWidth = 0;
         this.outputHeight = 0;
         this.outputCenterX = 0;
@@ -42,7 +43,12 @@ public class CaptureFrameTask {
         this.captureType = CaptureType.ORIGINAL_FRAME;
     }
 
-    public CaptureFrameTask(Item item, int outputWidth, int outputHeight, CaptureType captureType, CaptureFrameTaskListener listener) {
+    public CaptureFrameTask(
+            Item item,
+            int outputWidth,
+            int outputHeight,
+            CaptureType captureType,
+            CaptureFrameTaskListener listener) {
         this.outputWidth = 0;
         this.outputHeight = 0;
         this.outputCenterX = 0;
@@ -54,7 +60,13 @@ public class CaptureFrameTask {
         this.captureType = captureType;
     }
 
-    public CaptureFrameTask(int outputWidth, int outputHeight, int outputCenterX, int outputCenterY, CaptureType captureType, CaptureFrameTaskListener listener) {
+    public CaptureFrameTask(
+            int outputWidth,
+            int outputHeight,
+            int outputCenterX,
+            int outputCenterY,
+            CaptureType captureType,
+            CaptureFrameTaskListener listener) {
         this.outputWidth = 0;
         this.outputHeight = 0;
         this.outputCenterX = 0;

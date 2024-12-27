@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class StatusCode implements Parcelable {
-    public static final Parcelable.Creator<StatusCode> CREATOR = new Parcelable.Creator<StatusCode>() { // from class: com.android.ims.internal.uce.common.StatusCode.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatusCode createFromParcel(Parcel source) {
-            return new StatusCode(source);
-        }
+    public static final Parcelable.Creator<StatusCode> CREATOR =
+            new Parcelable.Creator<
+                    StatusCode>() { // from class: com.android.ims.internal.uce.common.StatusCode.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatusCode createFromParcel(Parcel source) {
+                    return new StatusCode(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatusCode[] newArray(int size) {
-            return new StatusCode[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatusCode[] newArray(int size) {
+                    return new StatusCode[size];
+                }
+            };
     public static final int UCE_FAILURE = 1;
     public static final int UCE_FETCH_ERROR = 6;
     public static final int UCE_INSUFFICIENT_MEMORY = 8;

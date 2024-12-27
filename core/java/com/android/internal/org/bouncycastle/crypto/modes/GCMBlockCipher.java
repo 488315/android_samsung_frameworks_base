@@ -69,7 +69,8 @@ public class GCMBlockCipher implements AEADBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public void init(boolean forEncryption, CipherParameters params) throws IllegalArgumentException {
+    public void init(boolean forEncryption, CipherParameters params)
+            throws IllegalArgumentException {
         byte[] newNonce;
         KeyParameter keyParam;
         this.forEncryption = forEncryption;
@@ -253,7 +254,8 @@ public class GCMBlockCipher implements AEADBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int processBytes(byte[] in, int inOff, int len, byte[] out, int outOff) throws DataLengthException {
+    public int processBytes(byte[] in, int inOff, int len, byte[] out, int outOff)
+            throws DataLengthException {
         checkStatus();
         if (getTotalInputSizeAfterNewInput(len) > MAX_INPUT_SIZE) {
             throw new DataLengthException("Input exceeded 68719476704 bytes");
@@ -311,7 +313,8 @@ public class GCMBlockCipher implements AEADBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int doFinal(byte[] out, int outOff) throws IllegalStateException, InvalidCipherTextException {
+    public int doFinal(byte[] out, int outOff)
+            throws IllegalStateException, InvalidCipherTextException {
         checkStatus();
         if (this.totalLength == 0) {
             initCipher();

@@ -4,7 +4,6 @@ import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.View;
-import com.samsung.android.animation.SemSweepListAnimator;
 
 /* loaded from: classes5.dex */
 abstract class SemAbsSweepAnimationFilter {
@@ -24,12 +23,16 @@ abstract class SemAbsSweepAnimationFilter {
 
     abstract float getEndXOfActionUpAnimator();
 
-    abstract void initAnimationFilter(View view, float f, int i, SemSweepListAnimator.OnSweepListener onSweepListener, SemSweepListAnimator.SweepConfiguration sweepConfiguration);
+    abstract void initAnimationFilter(
+            View view,
+            float f,
+            int i,
+            SemSweepListAnimator.OnSweepListener onSweepListener,
+            SemSweepListAnimator.SweepConfiguration sweepConfiguration);
 
     abstract void setForegroundView(View view);
 
-    SemAbsSweepAnimationFilter() {
-    }
+    SemAbsSweepAnimationFilter() {}
 
     public boolean isAnimationBack() {
         return this.mIsAnimationBack;

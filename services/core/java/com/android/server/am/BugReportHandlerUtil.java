@@ -27,10 +27,14 @@ public abstract class BugReportHandlerUtil {
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             if (getResultCode() == -1) {
-                BugReportHandlerUtil.launchBugReportHandlerApp(context, this.handlerApp, this.handlerUser);
+                BugReportHandlerUtil.launchBugReportHandlerApp(
+                        context, this.handlerApp, this.handlerUser);
             } else {
-                Slog.w("ActivityManager", "Request bug report because no response from handler app.");
-                ((BugreportManager) context.getSystemService(BugreportManager.class)).requestBugreport(new BugreportParams(1), null, null);
+                Slog.w(
+                        "ActivityManager",
+                        "Request bug report because no response from handler app.");
+                ((BugreportManager) context.getSystemService(BugreportManager.class))
+                        .requestBugreport(new BugreportParams(1), null, null);
             }
         }
     }
@@ -46,7 +50,8 @@ public abstract class BugReportHandlerUtil {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                context.sendBroadcastAsUser(intent, UserHandle.of(i), "android.permission.DUMP", makeBasic.toBundle());
+                context.sendBroadcastAsUser(
+                        intent, UserHandle.of(i), "android.permission.DUMP", makeBasic.toBundle());
             } catch (RuntimeException e) {
                 Slog.e("ActivityManager", "Error while trying to launch bugreport handler app.", e);
             }

@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IKnoxAnalyticsProxy extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.knox.knoxanalyticsproxy.IKnoxAnalyticsProxy";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.knox.knoxanalyticsproxy.IKnoxAnalyticsProxy";
 
     void log(KnoxAnalyticsData knoxAnalyticsData) throws RemoteException;
 
     public static class Default implements IKnoxAnalyticsProxy {
         @Override // com.samsung.android.knox.knoxanalyticsproxy.IKnoxAnalyticsProxy
-        public void log(KnoxAnalyticsData data) throws RemoteException {
-        }
+        public void log(KnoxAnalyticsData data) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IKnoxAnalyticsProxy extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKnoxAnalyticsProxy {
+    public abstract static class Stub extends Binder implements IKnoxAnalyticsProxy {
         static final int TRANSACTION_log = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IKnoxAnalyticsProxy extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKnoxAnalyticsProxy.DESCRIPTOR);
             }
@@ -71,7 +72,8 @@ public interface IKnoxAnalyticsProxy extends IInterface {
             }
             switch (code) {
                 case 1:
-                    KnoxAnalyticsData _arg0 = (KnoxAnalyticsData) data.readTypedObject(KnoxAnalyticsData.CREATOR);
+                    KnoxAnalyticsData _arg0 =
+                            (KnoxAnalyticsData) data.readTypedObject(KnoxAnalyticsData.CREATOR);
                     data.enforceNoDataAvail();
                     log(_arg0);
                     reply.writeNoException();

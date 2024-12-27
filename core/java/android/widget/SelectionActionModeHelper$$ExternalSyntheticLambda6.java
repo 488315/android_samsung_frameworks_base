@@ -1,11 +1,11 @@
 package android.widget;
 
-import android.widget.SelectionActionModeHelper;
 import java.util.function.Supplier;
 
 /* compiled from: D8$$SyntheticClass */
 /* loaded from: classes4.dex */
-public final /* synthetic */ class SelectionActionModeHelper$$ExternalSyntheticLambda6 implements Supplier {
+public final /* synthetic */ class SelectionActionModeHelper$$ExternalSyntheticLambda6
+        implements Supplier {
     public final /* synthetic */ SelectionActionModeHelper.TextClassificationHelper f$0;
 
     @Override // java.util.function.Supplier

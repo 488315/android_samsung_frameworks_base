@@ -3,11 +3,6 @@ package android.companion;
 import android.Manifest;
 import android.app.ActivityThread;
 import android.app.PendingIntent;
-import android.companion.IAssociationRequestCallback;
-import android.companion.IOnAssociationsChangedListener;
-import android.companion.IOnMessageReceivedListener;
-import android.companion.IOnTransportsChangedListener;
-import android.companion.ISystemDataTransferCallback;
 import android.companion.datatransfer.PermissionSyncRequest;
 import android.content.ComponentName;
 import android.os.Binder;
@@ -17,25 +12,38 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface ICompanionDeviceManager extends IInterface {
-    void addOnAssociationsChangedListener(IOnAssociationsChangedListener iOnAssociationsChangedListener, int i) throws RemoteException;
+    void addOnAssociationsChangedListener(
+            IOnAssociationsChangedListener iOnAssociationsChangedListener, int i)
+            throws RemoteException;
 
-    void addOnMessageReceivedListener(int i, IOnMessageReceivedListener iOnMessageReceivedListener) throws RemoteException;
+    void addOnMessageReceivedListener(int i, IOnMessageReceivedListener iOnMessageReceivedListener)
+            throws RemoteException;
 
-    void addOnTransportsChangedListener(IOnTransportsChangedListener iOnTransportsChangedListener) throws RemoteException;
+    void addOnTransportsChangedListener(IOnTransportsChangedListener iOnTransportsChangedListener)
+            throws RemoteException;
 
     void applyRestoredPayload(byte[] bArr, int i) throws RemoteException;
 
-    void associate(AssociationRequest associationRequest, IAssociationRequestCallback iAssociationRequestCallback, String str, int i) throws RemoteException;
+    void associate(
+            AssociationRequest associationRequest,
+            IAssociationRequestCallback iAssociationRequestCallback,
+            String str,
+            int i)
+            throws RemoteException;
 
-    void attachSystemDataTransport(String str, int i, int i2, ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
+    void attachSystemDataTransport(
+            String str, int i, int i2, ParcelFileDescriptor parcelFileDescriptor)
+            throws RemoteException;
 
     PendingIntent buildAssociationCancellationIntent(String str, int i) throws RemoteException;
 
-    PendingIntent buildPermissionTransferUserConsentIntent(String str, int i, int i2) throws RemoteException;
+    PendingIntent buildPermissionTransferUserConsentIntent(String str, int i, int i2)
+            throws RemoteException;
 
     boolean canPairWithoutPrompt(String str, String str2, int i) throws RemoteException;
 
@@ -70,7 +78,8 @@ public interface ICompanionDeviceManager extends IInterface {
 
     boolean isCompanionApplicationBound(String str, int i) throws RemoteException;
 
-    boolean isDeviceAssociatedForWifiConnection(String str, String str2, int i) throws RemoteException;
+    boolean isDeviceAssociatedForWifiConnection(String str, String str2, int i)
+            throws RemoteException;
 
     boolean isPermissionTransferUserConsented(String str, int i, int i2) throws RemoteException;
 
@@ -87,31 +96,47 @@ public interface ICompanionDeviceManager extends IInterface {
 
     boolean removeBond(int i, String str, int i2) throws RemoteException;
 
-    void removeOnAssociationsChangedListener(IOnAssociationsChangedListener iOnAssociationsChangedListener, int i) throws RemoteException;
+    void removeOnAssociationsChangedListener(
+            IOnAssociationsChangedListener iOnAssociationsChangedListener, int i)
+            throws RemoteException;
 
-    void removeOnMessageReceivedListener(int i, IOnMessageReceivedListener iOnMessageReceivedListener) throws RemoteException;
+    void removeOnMessageReceivedListener(
+            int i, IOnMessageReceivedListener iOnMessageReceivedListener) throws RemoteException;
 
-    void removeOnTransportsChangedListener(IOnTransportsChangedListener iOnTransportsChangedListener) throws RemoteException;
+    void removeOnTransportsChangedListener(
+            IOnTransportsChangedListener iOnTransportsChangedListener) throws RemoteException;
 
-    PendingIntent requestNotificationAccess(ComponentName componentName, int i) throws RemoteException;
+    PendingIntent requestNotificationAccess(ComponentName componentName, int i)
+            throws RemoteException;
 
     void sendMessage(int i, byte[] bArr, int[] iArr) throws RemoteException;
 
     void setAssociationTag(int i, String str) throws RemoteException;
 
-    void startObservingDevicePresence(ObservingDevicePresenceRequest observingDevicePresenceRequest, String str, int i) throws RemoteException;
+    void startObservingDevicePresence(
+            ObservingDevicePresenceRequest observingDevicePresenceRequest, String str, int i)
+            throws RemoteException;
 
-    void startSystemDataTransfer(String str, int i, int i2, ISystemDataTransferCallback iSystemDataTransferCallback) throws RemoteException;
+    void startSystemDataTransfer(
+            String str, int i, int i2, ISystemDataTransferCallback iSystemDataTransferCallback)
+            throws RemoteException;
 
-    void stopObservingDevicePresence(ObservingDevicePresenceRequest observingDevicePresenceRequest, String str, int i) throws RemoteException;
+    void stopObservingDevicePresence(
+            ObservingDevicePresenceRequest observingDevicePresenceRequest, String str, int i)
+            throws RemoteException;
 
     public static class Default implements ICompanionDeviceManager {
         @Override // android.companion.ICompanionDeviceManager
-        public void associate(AssociationRequest request, IAssociationRequestCallback callback, String callingPackage, int userId) throws RemoteException {
-        }
+        public void associate(
+                AssociationRequest request,
+                IAssociationRequestCallback callback,
+                String callingPackage,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public List<AssociationInfo> getAssociations(String callingPackage, int userId) throws RemoteException {
+        public List<AssociationInfo> getAssociations(String callingPackage, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -121,12 +146,11 @@ public interface ICompanionDeviceManager extends IInterface {
         }
 
         @Override // android.companion.ICompanionDeviceManager
-        public void legacyDisassociate(String deviceMacAddress, String callingPackage, int userId) throws RemoteException {
-        }
+        public void legacyDisassociate(String deviceMacAddress, String callingPackage, int userId)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void disassociate(int associationId) throws RemoteException {
-        }
+        public void disassociate(int associationId) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
         public boolean hasNotificationAccess(ComponentName component) throws RemoteException {
@@ -134,140 +158,147 @@ public interface ICompanionDeviceManager extends IInterface {
         }
 
         @Override // android.companion.ICompanionDeviceManager
-        public PendingIntent requestNotificationAccess(ComponentName component, int userId) throws RemoteException {
+        public PendingIntent requestNotificationAccess(ComponentName component, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.companion.ICompanionDeviceManager
-        public boolean isDeviceAssociatedForWifiConnection(String packageName, String macAddress, int userId) throws RemoteException {
+        public boolean isDeviceAssociatedForWifiConnection(
+                String packageName, String macAddress, int userId) throws RemoteException {
             return false;
         }
 
         @Override // android.companion.ICompanionDeviceManager
-        public void legacyStartObservingDevicePresence(String deviceAddress, String callingPackage, int userId) throws RemoteException {
-        }
+        public void legacyStartObservingDevicePresence(
+                String deviceAddress, String callingPackage, int userId) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void legacyStopObservingDevicePresence(String deviceAddress, String callingPackage, int userId) throws RemoteException {
-        }
+        public void legacyStopObservingDevicePresence(
+                String deviceAddress, String callingPackage, int userId) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void startObservingDevicePresence(ObservingDevicePresenceRequest request, String packageName, int userId) throws RemoteException {
-        }
+        public void startObservingDevicePresence(
+                ObservingDevicePresenceRequest request, String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void stopObservingDevicePresence(ObservingDevicePresenceRequest request, String packageName, int userId) throws RemoteException {
-        }
+        public void stopObservingDevicePresence(
+                ObservingDevicePresenceRequest request, String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public boolean canPairWithoutPrompt(String packageName, String deviceMacAddress, int userId) throws RemoteException {
+        public boolean canPairWithoutPrompt(String packageName, String deviceMacAddress, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.companion.ICompanionDeviceManager
-        public void createAssociation(String packageName, String macAddress, int userId, byte[] certificate) throws RemoteException {
-        }
+        public void createAssociation(
+                String packageName, String macAddress, int userId, byte[] certificate)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void addOnAssociationsChangedListener(IOnAssociationsChangedListener listener, int userId) throws RemoteException {
-        }
+        public void addOnAssociationsChangedListener(
+                IOnAssociationsChangedListener listener, int userId) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void removeOnAssociationsChangedListener(IOnAssociationsChangedListener listener, int userId) throws RemoteException {
-        }
+        public void removeOnAssociationsChangedListener(
+                IOnAssociationsChangedListener listener, int userId) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void addOnTransportsChangedListener(IOnTransportsChangedListener listener) throws RemoteException {
-        }
+        public void addOnTransportsChangedListener(IOnTransportsChangedListener listener)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void removeOnTransportsChangedListener(IOnTransportsChangedListener listener) throws RemoteException {
-        }
+        public void removeOnTransportsChangedListener(IOnTransportsChangedListener listener)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void sendMessage(int messageType, byte[] data, int[] associationIds) throws RemoteException {
-        }
+        public void sendMessage(int messageType, byte[] data, int[] associationIds)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void addOnMessageReceivedListener(int messageType, IOnMessageReceivedListener listener) throws RemoteException {
-        }
+        public void addOnMessageReceivedListener(
+                int messageType, IOnMessageReceivedListener listener) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void removeOnMessageReceivedListener(int messageType, IOnMessageReceivedListener listener) throws RemoteException {
-        }
+        public void removeOnMessageReceivedListener(
+                int messageType, IOnMessageReceivedListener listener) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void notifySelfManagedDeviceAppeared(int associationId) throws RemoteException {
-        }
+        public void notifySelfManagedDeviceAppeared(int associationId) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void notifySelfManagedDeviceDisappeared(int associationId) throws RemoteException {
-        }
+        public void notifySelfManagedDeviceDisappeared(int associationId) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public PendingIntent buildPermissionTransferUserConsentIntent(String callingPackage, int userId, int associationId) throws RemoteException {
+        public PendingIntent buildPermissionTransferUserConsentIntent(
+                String callingPackage, int userId, int associationId) throws RemoteException {
             return null;
         }
 
         @Override // android.companion.ICompanionDeviceManager
-        public boolean isPermissionTransferUserConsented(String callingPackage, int userId, int associationId) throws RemoteException {
+        public boolean isPermissionTransferUserConsented(
+                String callingPackage, int userId, int associationId) throws RemoteException {
             return false;
         }
 
         @Override // android.companion.ICompanionDeviceManager
-        public void startSystemDataTransfer(String packageName, int userId, int associationId, ISystemDataTransferCallback callback) throws RemoteException {
-        }
+        public void startSystemDataTransfer(
+                String packageName,
+                int userId,
+                int associationId,
+                ISystemDataTransferCallback callback)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void attachSystemDataTransport(String packageName, int userId, int associationId, ParcelFileDescriptor fd) throws RemoteException {
-        }
+        public void attachSystemDataTransport(
+                String packageName, int userId, int associationId, ParcelFileDescriptor fd)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void detachSystemDataTransport(String packageName, int userId, int associationId) throws RemoteException {
-        }
+        public void detachSystemDataTransport(String packageName, int userId, int associationId)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public boolean isCompanionApplicationBound(String packageName, int userId) throws RemoteException {
+        public boolean isCompanionApplicationBound(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.companion.ICompanionDeviceManager
-        public PendingIntent buildAssociationCancellationIntent(String callingPackage, int userId) throws RemoteException {
+        public PendingIntent buildAssociationCancellationIntent(String callingPackage, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.companion.ICompanionDeviceManager
-        public void enableSystemDataSync(int associationId, int flags) throws RemoteException {
-        }
+        public void enableSystemDataSync(int associationId, int flags) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void disableSystemDataSync(int associationId, int flags) throws RemoteException {
-        }
+        public void disableSystemDataSync(int associationId, int flags) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void enablePermissionsSync(int associationId) throws RemoteException {
-        }
+        public void enablePermissionsSync(int associationId) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void disablePermissionsSync(int associationId) throws RemoteException {
-        }
+        public void disablePermissionsSync(int associationId) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public PermissionSyncRequest getPermissionSyncRequest(int associationId) throws RemoteException {
+        public PermissionSyncRequest getPermissionSyncRequest(int associationId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.companion.ICompanionDeviceManager
-        public void enableSecureTransport(boolean enabled) throws RemoteException {
-        }
+        public void enableSecureTransport(boolean enabled) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void setAssociationTag(int associationId, String tag) throws RemoteException {
-        }
+        public void setAssociationTag(int associationId, String tag) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public void clearAssociationTag(int associationId) throws RemoteException {
-        }
+        public void clearAssociationTag(int associationId) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
         public byte[] getBackupPayload(int userId) throws RemoteException {
@@ -275,11 +306,11 @@ public interface ICompanionDeviceManager extends IInterface {
         }
 
         @Override // android.companion.ICompanionDeviceManager
-        public void applyRestoredPayload(byte[] payload, int userId) throws RemoteException {
-        }
+        public void applyRestoredPayload(byte[] payload, int userId) throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceManager
-        public boolean removeBond(int associationId, String packageName, int userId) throws RemoteException {
+        public boolean removeBond(int associationId, String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -289,7 +320,7 @@ public interface ICompanionDeviceManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICompanionDeviceManager {
+    public abstract static class Stub extends Binder implements ICompanionDeviceManager {
         public static final String DESCRIPTOR = "android.companion.ICompanionDeviceManager";
         static final int TRANSACTION_addOnAssociationsChangedListener = 15;
         static final int TRANSACTION_addOnMessageReceivedListener = 20;
@@ -344,7 +375,9 @@ public interface ICompanionDeviceManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static ICompanionDeviceManager asInterface(IBinder obj) {
@@ -458,7 +491,8 @@ public interface ICompanionDeviceManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -468,8 +502,10 @@ public interface ICompanionDeviceManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AssociationRequest _arg0 = (AssociationRequest) data.readTypedObject(AssociationRequest.CREATOR);
-                    IAssociationRequestCallback _arg1 = IAssociationRequestCallback.Stub.asInterface(data.readStrongBinder());
+                    AssociationRequest _arg0 =
+                            (AssociationRequest) data.readTypedObject(AssociationRequest.CREATOR);
+                    IAssociationRequestCallback _arg1 =
+                            IAssociationRequestCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg2 = data.readString();
                     int _arg3 = data.readInt();
                     data.enforceNoDataAvail();
@@ -506,14 +542,16 @@ public interface ICompanionDeviceManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 6:
-                    ComponentName _arg06 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg06 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result3 = hasNotificationAccess(_arg06);
                     reply.writeNoException();
                     reply.writeBoolean(_result3);
                     return true;
                 case 7:
-                    ComponentName _arg07 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg07 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg14 = data.readInt();
                     data.enforceNoDataAvail();
                     PendingIntent _result4 = requestNotificationAccess(_arg07, _arg14);
@@ -546,7 +584,9 @@ public interface ICompanionDeviceManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 11:
-                    ObservingDevicePresenceRequest _arg011 = (ObservingDevicePresenceRequest) data.readTypedObject(ObservingDevicePresenceRequest.CREATOR);
+                    ObservingDevicePresenceRequest _arg011 =
+                            (ObservingDevicePresenceRequest)
+                                    data.readTypedObject(ObservingDevicePresenceRequest.CREATOR);
                     String _arg18 = data.readString();
                     int _arg26 = data.readInt();
                     data.enforceNoDataAvail();
@@ -554,7 +594,9 @@ public interface ICompanionDeviceManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 12:
-                    ObservingDevicePresenceRequest _arg012 = (ObservingDevicePresenceRequest) data.readTypedObject(ObservingDevicePresenceRequest.CREATOR);
+                    ObservingDevicePresenceRequest _arg012 =
+                            (ObservingDevicePresenceRequest)
+                                    data.readTypedObject(ObservingDevicePresenceRequest.CREATOR);
                     String _arg19 = data.readString();
                     int _arg27 = data.readInt();
                     data.enforceNoDataAvail();
@@ -580,27 +622,33 @@ public interface ICompanionDeviceManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 15:
-                    IOnAssociationsChangedListener _arg015 = IOnAssociationsChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnAssociationsChangedListener _arg015 =
+                            IOnAssociationsChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg112 = data.readInt();
                     data.enforceNoDataAvail();
                     addOnAssociationsChangedListener(_arg015, _arg112);
                     reply.writeNoException();
                     return true;
                 case 16:
-                    IOnAssociationsChangedListener _arg016 = IOnAssociationsChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnAssociationsChangedListener _arg016 =
+                            IOnAssociationsChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg113 = data.readInt();
                     data.enforceNoDataAvail();
                     removeOnAssociationsChangedListener(_arg016, _arg113);
                     reply.writeNoException();
                     return true;
                 case 17:
-                    IOnTransportsChangedListener _arg017 = IOnTransportsChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnTransportsChangedListener _arg017 =
+                            IOnTransportsChangedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addOnTransportsChangedListener(_arg017);
                     reply.writeNoException();
                     return true;
                 case 18:
-                    IOnTransportsChangedListener _arg018 = IOnTransportsChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnTransportsChangedListener _arg018 =
+                            IOnTransportsChangedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeOnTransportsChangedListener(_arg018);
                     reply.writeNoException();
@@ -615,14 +663,16 @@ public interface ICompanionDeviceManager extends IInterface {
                     return true;
                 case 20:
                     int _arg020 = data.readInt();
-                    IOnMessageReceivedListener _arg115 = IOnMessageReceivedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnMessageReceivedListener _arg115 =
+                            IOnMessageReceivedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addOnMessageReceivedListener(_arg020, _arg115);
                     reply.writeNoException();
                     return true;
                 case 21:
                     int _arg021 = data.readInt();
-                    IOnMessageReceivedListener _arg116 = IOnMessageReceivedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnMessageReceivedListener _arg116 =
+                            IOnMessageReceivedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeOnMessageReceivedListener(_arg021, _arg116);
                     reply.writeNoException();
@@ -644,7 +694,8 @@ public interface ICompanionDeviceManager extends IInterface {
                     int _arg117 = data.readInt();
                     int _arg211 = data.readInt();
                     data.enforceNoDataAvail();
-                    PendingIntent _result7 = buildPermissionTransferUserConsentIntent(_arg024, _arg117, _arg211);
+                    PendingIntent _result7 =
+                            buildPermissionTransferUserConsentIntent(_arg024, _arg117, _arg211);
                     reply.writeNoException();
                     reply.writeTypedObject(_result7, 1);
                     return true;
@@ -661,7 +712,8 @@ public interface ICompanionDeviceManager extends IInterface {
                     String _arg026 = data.readString();
                     int _arg119 = data.readInt();
                     int _arg213 = data.readInt();
-                    ISystemDataTransferCallback _arg33 = ISystemDataTransferCallback.Stub.asInterface(data.readStrongBinder());
+                    ISystemDataTransferCallback _arg33 =
+                            ISystemDataTransferCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startSystemDataTransfer(_arg026, _arg119, _arg213, _arg33);
                     reply.writeNoException();
@@ -670,7 +722,9 @@ public interface ICompanionDeviceManager extends IInterface {
                     String _arg027 = data.readString();
                     int _arg120 = data.readInt();
                     int _arg214 = data.readInt();
-                    ParcelFileDescriptor _arg34 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg34 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     attachSystemDataTransport(_arg027, _arg120, _arg214, _arg34);
                     reply.writeNoException();
@@ -796,7 +850,12 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void associate(AssociationRequest request, IAssociationRequestCallback callback, String callingPackage, int userId) throws RemoteException {
+            public void associate(
+                    AssociationRequest request,
+                    IAssociationRequestCallback callback,
+                    String callingPackage,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -814,7 +873,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public List<AssociationInfo> getAssociations(String callingPackage, int userId) throws RemoteException {
+            public List<AssociationInfo> getAssociations(String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -823,7 +883,8 @@ public interface ICompanionDeviceManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    List<AssociationInfo> _result = _reply.createTypedArrayList(AssociationInfo.CREATOR);
+                    List<AssociationInfo> _result =
+                            _reply.createTypedArrayList(AssociationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -832,7 +893,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public List<AssociationInfo> getAllAssociationsForUser(int userId) throws RemoteException {
+            public List<AssociationInfo> getAllAssociationsForUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -840,7 +902,8 @@ public interface ICompanionDeviceManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    List<AssociationInfo> _result = _reply.createTypedArrayList(AssociationInfo.CREATOR);
+                    List<AssociationInfo> _result =
+                            _reply.createTypedArrayList(AssociationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -849,7 +912,9 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void legacyDisassociate(String deviceMacAddress, String callingPackage, int userId) throws RemoteException {
+            public void legacyDisassociate(
+                    String deviceMacAddress, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -898,7 +963,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public PendingIntent requestNotificationAccess(ComponentName component, int userId) throws RemoteException {
+            public PendingIntent requestNotificationAccess(ComponentName component, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -907,7 +973,8 @@ public interface ICompanionDeviceManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    PendingIntent _result = (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _result =
+                            (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -916,7 +983,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public boolean isDeviceAssociatedForWifiConnection(String packageName, String macAddress, int userId) throws RemoteException {
+            public boolean isDeviceAssociatedForWifiConnection(
+                    String packageName, String macAddress, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -935,7 +1003,9 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void legacyStartObservingDevicePresence(String deviceAddress, String callingPackage, int userId) throws RemoteException {
+            public void legacyStartObservingDevicePresence(
+                    String deviceAddress, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -952,7 +1022,9 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void legacyStopObservingDevicePresence(String deviceAddress, String callingPackage, int userId) throws RemoteException {
+            public void legacyStopObservingDevicePresence(
+                    String deviceAddress, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -969,7 +1041,9 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void startObservingDevicePresence(ObservingDevicePresenceRequest request, String packageName, int userId) throws RemoteException {
+            public void startObservingDevicePresence(
+                    ObservingDevicePresenceRequest request, String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -986,7 +1060,9 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void stopObservingDevicePresence(ObservingDevicePresenceRequest request, String packageName, int userId) throws RemoteException {
+            public void stopObservingDevicePresence(
+                    ObservingDevicePresenceRequest request, String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1003,7 +1079,9 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public boolean canPairWithoutPrompt(String packageName, String deviceMacAddress, int userId) throws RemoteException {
+            public boolean canPairWithoutPrompt(
+                    String packageName, String deviceMacAddress, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1022,7 +1100,9 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void createAssociation(String packageName, String macAddress, int userId, byte[] certificate) throws RemoteException {
+            public void createAssociation(
+                    String packageName, String macAddress, int userId, byte[] certificate)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1040,7 +1120,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void addOnAssociationsChangedListener(IOnAssociationsChangedListener listener, int userId) throws RemoteException {
+            public void addOnAssociationsChangedListener(
+                    IOnAssociationsChangedListener listener, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1056,7 +1137,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void removeOnAssociationsChangedListener(IOnAssociationsChangedListener listener, int userId) throws RemoteException {
+            public void removeOnAssociationsChangedListener(
+                    IOnAssociationsChangedListener listener, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1072,7 +1154,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void addOnTransportsChangedListener(IOnTransportsChangedListener listener) throws RemoteException {
+            public void addOnTransportsChangedListener(IOnTransportsChangedListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1087,7 +1170,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void removeOnTransportsChangedListener(IOnTransportsChangedListener listener) throws RemoteException {
+            public void removeOnTransportsChangedListener(IOnTransportsChangedListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1102,7 +1186,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void sendMessage(int messageType, byte[] data, int[] associationIds) throws RemoteException {
+            public void sendMessage(int messageType, byte[] data, int[] associationIds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1119,7 +1204,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void addOnMessageReceivedListener(int messageType, IOnMessageReceivedListener listener) throws RemoteException {
+            public void addOnMessageReceivedListener(
+                    int messageType, IOnMessageReceivedListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1135,7 +1221,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void removeOnMessageReceivedListener(int messageType, IOnMessageReceivedListener listener) throws RemoteException {
+            public void removeOnMessageReceivedListener(
+                    int messageType, IOnMessageReceivedListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1166,7 +1253,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void notifySelfManagedDeviceDisappeared(int associationId) throws RemoteException {
+            public void notifySelfManagedDeviceDisappeared(int associationId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1181,7 +1269,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public PendingIntent buildPermissionTransferUserConsentIntent(String callingPackage, int userId, int associationId) throws RemoteException {
+            public PendingIntent buildPermissionTransferUserConsentIntent(
+                    String callingPackage, int userId, int associationId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1191,7 +1280,8 @@ public interface ICompanionDeviceManager extends IInterface {
                     _data.writeInt(associationId);
                     this.mRemote.transact(24, _data, _reply, 0);
                     _reply.readException();
-                    PendingIntent _result = (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _result =
+                            (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1200,7 +1290,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public boolean isPermissionTransferUserConsented(String callingPackage, int userId, int associationId) throws RemoteException {
+            public boolean isPermissionTransferUserConsented(
+                    String callingPackage, int userId, int associationId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1219,7 +1310,12 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void startSystemDataTransfer(String packageName, int userId, int associationId, ISystemDataTransferCallback callback) throws RemoteException {
+            public void startSystemDataTransfer(
+                    String packageName,
+                    int userId,
+                    int associationId,
+                    ISystemDataTransferCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1237,7 +1333,9 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void attachSystemDataTransport(String packageName, int userId, int associationId, ParcelFileDescriptor fd) throws RemoteException {
+            public void attachSystemDataTransport(
+                    String packageName, int userId, int associationId, ParcelFileDescriptor fd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1255,7 +1353,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public void detachSystemDataTransport(String packageName, int userId, int associationId) throws RemoteException {
+            public void detachSystemDataTransport(String packageName, int userId, int associationId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1272,7 +1371,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public boolean isCompanionApplicationBound(String packageName, int userId) throws RemoteException {
+            public boolean isCompanionApplicationBound(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1290,7 +1390,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public PendingIntent buildAssociationCancellationIntent(String callingPackage, int userId) throws RemoteException {
+            public PendingIntent buildAssociationCancellationIntent(
+                    String callingPackage, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1299,7 +1400,8 @@ public interface ICompanionDeviceManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(30, _data, _reply, 0);
                     _reply.readException();
-                    PendingIntent _result = (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _result =
+                            (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1370,7 +1472,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public PermissionSyncRequest getPermissionSyncRequest(int associationId) throws RemoteException {
+            public PermissionSyncRequest getPermissionSyncRequest(int associationId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1378,7 +1481,9 @@ public interface ICompanionDeviceManager extends IInterface {
                     _data.writeInt(associationId);
                     this.mRemote.transact(35, _data, _reply, 0);
                     _reply.readException();
-                    PermissionSyncRequest _result = (PermissionSyncRequest) _reply.readTypedObject(PermissionSyncRequest.CREATOR);
+                    PermissionSyncRequest _result =
+                            (PermissionSyncRequest)
+                                    _reply.readTypedObject(PermissionSyncRequest.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1466,7 +1571,8 @@ public interface ICompanionDeviceManager extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceManager
-            public boolean removeBond(int associationId, String packageName, int userId) throws RemoteException {
+            public boolean removeBond(int associationId, String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1486,83 +1592,130 @@ public interface ICompanionDeviceManager extends IInterface {
         }
 
         protected void getAllAssociationsForUser_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_COMPANION_DEVICES, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_COMPANION_DEVICES, getCallingPid(), getCallingUid());
         }
 
-        protected void isDeviceAssociatedForWifiConnection_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_COMPANION_DEVICES, getCallingPid(), getCallingUid());
+        protected void isDeviceAssociatedForWifiConnection_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_COMPANION_DEVICES, getCallingPid(), getCallingUid());
         }
 
-        protected void legacyStartObservingDevicePresence_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE, getCallingPid(), getCallingUid());
+        protected void legacyStartObservingDevicePresence_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void legacyStopObservingDevicePresence_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE, getCallingPid(), getCallingUid());
+        protected void legacyStopObservingDevicePresence_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void startObservingDevicePresence_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void stopObservingDevicePresence_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void createAssociation_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ASSOCIATE_COMPANION_DEVICES, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ASSOCIATE_COMPANION_DEVICES,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void addOnAssociationsChangedListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_COMPANION_DEVICES, getCallingPid(), getCallingUid());
+        protected void addOnAssociationsChangedListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_COMPANION_DEVICES, getCallingPid(), getCallingUid());
         }
 
-        protected void removeOnAssociationsChangedListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_COMPANION_DEVICES, getCallingPid(), getCallingUid());
+        protected void removeOnAssociationsChangedListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_COMPANION_DEVICES, getCallingPid(), getCallingUid());
         }
 
         protected void addOnTransportsChangedListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_COMPANION_TRANSPORTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_COMPANION_TRANSPORTS, getCallingPid(), getCallingUid());
         }
 
-        protected void removeOnTransportsChangedListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_COMPANION_TRANSPORTS, getCallingPid(), getCallingUid());
+        protected void removeOnTransportsChangedListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_COMPANION_TRANSPORTS, getCallingPid(), getCallingUid());
         }
 
         protected void sendMessage_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_COMPANION_TRANSPORTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_COMPANION_TRANSPORTS, getCallingPid(), getCallingUid());
         }
 
         protected void addOnMessageReceivedListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_COMPANION_TRANSPORTS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_COMPANION_TRANSPORTS, getCallingPid(), getCallingUid());
         }
 
-        protected void removeOnMessageReceivedListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_COMPANION_TRANSPORTS, getCallingPid(), getCallingUid());
+        protected void removeOnMessageReceivedListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_COMPANION_TRANSPORTS, getCallingPid(), getCallingUid());
         }
 
-        protected void notifySelfManagedDeviceAppeared_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.REQUEST_COMPANION_SELF_MANAGED, getCallingPid(), getCallingUid());
+        protected void notifySelfManagedDeviceAppeared_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.REQUEST_COMPANION_SELF_MANAGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void notifySelfManagedDeviceDisappeared_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.REQUEST_COMPANION_SELF_MANAGED, getCallingPid(), getCallingUid());
+        protected void notifySelfManagedDeviceDisappeared_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.REQUEST_COMPANION_SELF_MANAGED,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void attachSystemDataTransport_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DELIVER_COMPANION_MESSAGES, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DELIVER_COMPANION_MESSAGES,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void detachSystemDataTransport_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DELIVER_COMPANION_MESSAGES, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DELIVER_COMPANION_MESSAGES,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void enableSecureTransport_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_COMPANION_DEVICES, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_COMPANION_DEVICES, getCallingPid(), getCallingUid());
         }
 
         protected void removeBond_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.BLUETOOTH_CONNECT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.BLUETOOTH_CONNECT, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

@@ -13,6 +13,7 @@ import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.AppSchedulingModuleThread;
 import com.android.server.VcnManagementService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.ProxyManager$$ExternalSyntheticOutline0;
@@ -20,6 +21,7 @@ import com.android.server.backup.BackupManagerConstants;
 import com.android.server.job.JobSchedulerService;
 import com.android.server.job.JobSchedulerService$Constants$$ExternalSyntheticOutline0;
 import com.android.server.job.controllers.IdleController;
+
 import java.io.PrintWriter;
 import java.util.Set;
 
@@ -28,7 +30,8 @@ import java.util.Set;
 public final class DeviceIdlenessTracker extends BroadcastReceiver implements IdlenessTracker {
     public static final boolean DEBUG;
     static final String KEY_INACTIVITY_IDLE_THRESHOLD_MS = "ic_dit_inactivity_idle_threshold_ms";
-    static final String KEY_INACTIVITY_STABLE_POWER_IDLE_THRESHOLD_MS = "ic_dit_inactivity_idle_stable_power_threshold_ms";
+    static final String KEY_INACTIVITY_STABLE_POWER_IDLE_THRESHOLD_MS =
+            "ic_dit_inactivity_idle_stable_power_threshold_ms";
     public AlarmManager mAlarm;
     public boolean mDockIdle;
     public boolean mIdle;
@@ -41,35 +44,45 @@ public final class DeviceIdlenessTracker extends BroadcastReceiver implements Id
     public boolean mProjectionActive;
     public long mIdlenessCheckScheduledElapsed = -1;
     public long mIdleStartElapsed = Long.MAX_VALUE;
-    public final DeviceIdlenessTracker$$ExternalSyntheticLambda0 mOnProjectionStateChangedListener = new UiModeManager.OnProjectionStateChangedListener() { // from class: com.android.server.job.controllers.idle.DeviceIdlenessTracker$$ExternalSyntheticLambda0
-        public final void onProjectionStateChanged(int i, Set set) {
-            DeviceIdlenessTracker deviceIdlenessTracker = DeviceIdlenessTracker.this;
-            deviceIdlenessTracker.getClass();
-            boolean z = i != 0;
-            if (deviceIdlenessTracker.mProjectionActive == z) {
-                return;
-            }
-            if (DeviceIdlenessTracker.DEBUG) {
-                Slog.v("JobScheduler.DeviceIdlenessTracker", "Projection state changed: " + z);
-            }
-            deviceIdlenessTracker.mProjectionActive = z;
-            if (z) {
-                deviceIdlenessTracker.exitIdle();
-            } else {
-                deviceIdlenessTracker.maybeScheduleIdlenessCheck("Projection ended");
-            }
-        }
-    };
-    public final DeviceIdlenessTracker$$ExternalSyntheticLambda1 mIdleAlarmListener = new AlarmManager.OnAlarmListener() { // from class: com.android.server.job.controllers.idle.DeviceIdlenessTracker$$ExternalSyntheticLambda1
-        @Override // android.app.AlarmManager.OnAlarmListener
-        public final void onAlarm() {
-            DeviceIdlenessTracker.this.handleIdleTrigger();
-        }
-    };
+    public final DeviceIdlenessTracker$$ExternalSyntheticLambda0 mOnProjectionStateChangedListener =
+            new UiModeManager
+                    .OnProjectionStateChangedListener() { // from class:
+                                                          // com.android.server.job.controllers.idle.DeviceIdlenessTracker$$ExternalSyntheticLambda0
+                public final void onProjectionStateChanged(int i, Set set) {
+                    DeviceIdlenessTracker deviceIdlenessTracker = DeviceIdlenessTracker.this;
+                    deviceIdlenessTracker.getClass();
+                    boolean z = i != 0;
+                    if (deviceIdlenessTracker.mProjectionActive == z) {
+                        return;
+                    }
+                    if (DeviceIdlenessTracker.DEBUG) {
+                        Slog.v(
+                                "JobScheduler.DeviceIdlenessTracker",
+                                "Projection state changed: " + z);
+                    }
+                    deviceIdlenessTracker.mProjectionActive = z;
+                    if (z) {
+                        deviceIdlenessTracker.exitIdle();
+                    } else {
+                        deviceIdlenessTracker.maybeScheduleIdlenessCheck("Projection ended");
+                    }
+                }
+            };
+    public final DeviceIdlenessTracker$$ExternalSyntheticLambda1 mIdleAlarmListener =
+            new AlarmManager
+                    .OnAlarmListener() { // from class:
+                                         // com.android.server.job.controllers.idle.DeviceIdlenessTracker$$ExternalSyntheticLambda1
+                @Override // android.app.AlarmManager.OnAlarmListener
+                public final void onAlarm() {
+                    DeviceIdlenessTracker.this.handleIdleTrigger();
+                }
+            };
     public boolean mScreenOn = true;
 
     static {
-        DEBUG = JobSchedulerService.DEBUG || Log.isLoggable("JobScheduler.DeviceIdlenessTracker", 3);
+        DEBUG =
+                JobSchedulerService.DEBUG
+                        || Log.isLoggable("JobScheduler.DeviceIdlenessTracker", 3);
     }
 
     @Override // com.android.server.job.controllers.idle.IdlenessTracker
@@ -106,9 +119,17 @@ public final class DeviceIdlenessTracker extends BroadcastReceiver implements Id
     public final void dumpConstants(IndentingPrintWriter indentingPrintWriter) {
         indentingPrintWriter.println("DeviceIdlenessTracker:");
         indentingPrintWriter.increaseIndent();
-        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(this.mInactivityIdleThreshold, indentingPrintWriter, KEY_INACTIVITY_IDLE_THRESHOLD_MS);
-        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(this.mInactivityStablePowerIdleThreshold, indentingPrintWriter, KEY_INACTIVITY_STABLE_POWER_IDLE_THRESHOLD_MS);
-        indentingPrintWriter.print("ic_dit_idle_window_slop_ms", Long.valueOf(this.mIdleWindowSlop)).println();
+        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(
+                this.mInactivityIdleThreshold,
+                indentingPrintWriter,
+                KEY_INACTIVITY_IDLE_THRESHOLD_MS);
+        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(
+                this.mInactivityStablePowerIdleThreshold,
+                indentingPrintWriter,
+                KEY_INACTIVITY_STABLE_POWER_IDLE_THRESHOLD_MS);
+        indentingPrintWriter
+                .print("ic_dit_idle_window_slop_ms", Long.valueOf(this.mIdleWindowSlop))
+                .println();
         indentingPrintWriter.decreaseIndent();
     }
 
@@ -135,12 +156,14 @@ public final class DeviceIdlenessTracker extends BroadcastReceiver implements Id
             return;
         }
         if (DEBUG) {
-            StringBuilder sb2 = new StringBuilder("TRIGGER_IDLE received but not changing state; idle=");
+            StringBuilder sb2 =
+                    new StringBuilder("TRIGGER_IDLE received but not changing state; idle=");
             sb2.append(this.mIdle);
             sb2.append(" screen=");
             sb2.append(this.mScreenOn);
             sb2.append(" projection=");
-            ProxyManager$$ExternalSyntheticOutline0.m("JobScheduler.DeviceIdlenessTracker", sb2, this.mProjectionActive);
+            ProxyManager$$ExternalSyntheticOutline0.m(
+                    "JobScheduler.DeviceIdlenessTracker", sb2, this.mProjectionActive);
         }
     }
 
@@ -152,7 +175,9 @@ public final class DeviceIdlenessTracker extends BroadcastReceiver implements Id
     public final void maybeScheduleIdlenessCheck(String str) {
         if (this.mIdle) {
             if (DEBUG) {
-                Slog.w("JobScheduler.DeviceIdlenessTracker", "Already idle. Redundant reason=".concat(str));
+                Slog.w(
+                        "JobScheduler.DeviceIdlenessTracker",
+                        "Already idle. Redundant reason=".concat(str));
                 return;
             }
             return;
@@ -160,13 +185,20 @@ public final class DeviceIdlenessTracker extends BroadcastReceiver implements Id
         if ((!this.mScreenOn || this.mDockIdle) && !this.mProjectionActive) {
             JobSchedulerService.sElapsedRealtimeClock.getClass();
             long elapsedRealtime = SystemClock.elapsedRealtime();
-            long j = this.mIsStablePower ? this.mInactivityStablePowerIdleThreshold : this.mInactivityIdleThreshold;
+            long j =
+                    this.mIsStablePower
+                            ? this.mInactivityStablePowerIdleThreshold
+                            : this.mInactivityIdleThreshold;
             long j2 = this.mIdlenessCheckScheduledElapsed;
             if (j2 < 0) {
                 this.mIdlenessCheckScheduledElapsed = elapsedRealtime;
             } else if (j2 + j <= elapsedRealtime) {
                 if (DEBUG) {
-                    Slog.v("JobScheduler.DeviceIdlenessTracker", "Previous idle check @ " + this.mIdlenessCheckScheduledElapsed + " allows device to be idle now");
+                    Slog.v(
+                            "JobScheduler.DeviceIdlenessTracker",
+                            "Previous idle check @ "
+                                    + this.mIdlenessCheckScheduledElapsed
+                                    + " allows device to be idle now");
                 }
                 handleIdleTrigger();
                 return;
@@ -181,9 +213,24 @@ public final class DeviceIdlenessTracker extends BroadcastReceiver implements Id
             }
             this.mIdleStartElapsed = j3;
             if (DEBUG) {
-                Slog.v("JobScheduler.DeviceIdlenessTracker", "Scheduling idle : " + str + " now:" + elapsedRealtime + " checkElapsed=" + this.mIdlenessCheckScheduledElapsed + " when=" + this.mIdleStartElapsed);
+                Slog.v(
+                        "JobScheduler.DeviceIdlenessTracker",
+                        "Scheduling idle : "
+                                + str
+                                + " now:"
+                                + elapsedRealtime
+                                + " checkElapsed="
+                                + this.mIdlenessCheckScheduledElapsed
+                                + " when="
+                                + this.mIdleStartElapsed);
             }
-            this.mAlarm.setWindow(2, this.mIdleStartElapsed, this.mIdleWindowSlop, "JS idleness", AppSchedulingModuleThread.getExecutor(), this.mIdleAlarmListener);
+            this.mAlarm.setWindow(
+                    2,
+                    this.mIdleStartElapsed,
+                    this.mIdleWindowSlop,
+                    "JS idleness",
+                    AppSchedulingModuleThread.getExecutor(),
+                    this.mIdleAlarmListener);
         }
     }
 
@@ -340,37 +387,74 @@ public final class DeviceIdlenessTracker extends BroadcastReceiver implements Id
         Lb1:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.controllers.idle.DeviceIdlenessTracker.onReceive(android.content.Context, android.content.Intent):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.job.controllers.idle.DeviceIdlenessTracker.onReceive(android.content.Context,"
+                    + " android.content.Intent):void");
     }
 
     @Override // com.android.server.job.controllers.idle.IdlenessTracker
     public final void processConstant(DeviceConfig.Properties properties, String str) {
         switch (str) {
             case "ic_dit_idle_window_slop_ms":
-                this.mIdleWindowSlop = Math.max(60000L, Math.min(900000L, properties.getLong(str, this.mIdleWindowSlop)));
+                this.mIdleWindowSlop =
+                        Math.max(
+                                60000L,
+                                Math.min(900000L, properties.getLong(str, this.mIdleWindowSlop)));
                 break;
             case "ic_dit_inactivity_idle_threshold_ms":
-                this.mInactivityIdleThreshold = Math.max(60000L, Math.min(BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS, properties.getLong(str, this.mInactivityIdleThreshold)));
+                this.mInactivityIdleThreshold =
+                        Math.max(
+                                60000L,
+                                Math.min(
+                                        BackupManagerConstants
+                                                .DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS,
+                                        properties.getLong(str, this.mInactivityIdleThreshold)));
                 break;
             case "ic_dit_inactivity_idle_stable_power_threshold_ms":
-                this.mInactivityStablePowerIdleThreshold = Math.max(60000L, Math.min(BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS, properties.getLong(str, this.mInactivityStablePowerIdleThreshold)));
+                this.mInactivityStablePowerIdleThreshold =
+                        Math.max(
+                                60000L,
+                                Math.min(
+                                        BackupManagerConstants
+                                                .DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS,
+                                        properties.getLong(
+                                                str, this.mInactivityStablePowerIdleThreshold)));
                 break;
         }
     }
 
     @Override // com.android.server.job.controllers.idle.IdlenessTracker
-    public final void startTracking(Context context, JobSchedulerService jobSchedulerService, IdleController idleController) {
+    public final void startTracking(
+            Context context,
+            JobSchedulerService jobSchedulerService,
+            IdleController idleController) {
         this.mIdleListener = idleController;
-        this.mInactivityIdleThreshold = context.getResources().getInteger(R.integer.config_mediaOutputSwitchDialogVersion);
-        this.mInactivityStablePowerIdleThreshold = context.getResources().getInteger(R.integer.config_mediaRouter_builtInSpeakerSuitability);
-        this.mIdleWindowSlop = context.getResources().getInteger(R.integer.config_mdc_initial_max_retry);
+        this.mInactivityIdleThreshold =
+                context.getResources().getInteger(R.integer.config_mediaOutputSwitchDialogVersion);
+        this.mInactivityStablePowerIdleThreshold =
+                context.getResources()
+                        .getInteger(R.integer.config_mediaRouter_builtInSpeakerSuitability);
+        this.mIdleWindowSlop =
+                context.getResources().getInteger(R.integer.config_mdc_initial_max_retry);
         this.mAlarm = (AlarmManager) context.getSystemService("alarm");
         this.mPowerManager = (PowerManager) context.getSystemService(PowerManager.class);
-        IntentFilter m = VcnManagementService$$ExternalSyntheticOutline0.m("android.intent.action.SCREEN_ON", "android.intent.action.SCREEN_OFF", "android.intent.action.DREAMING_STARTED", "android.intent.action.DREAMING_STOPPED", "com.android.server.ACTION_TRIGGER_IDLE");
+        IntentFilter m =
+                VcnManagementService$$ExternalSyntheticOutline0.m(
+                        "android.intent.action.SCREEN_ON",
+                        "android.intent.action.SCREEN_OFF",
+                        "android.intent.action.DREAMING_STARTED",
+                        "android.intent.action.DREAMING_STOPPED",
+                        "com.android.server.ACTION_TRIGGER_IDLE");
         m.addAction("android.intent.action.DOCK_IDLE");
         m.addAction("android.intent.action.DOCK_ACTIVE");
         context.registerReceiver(this, m, null, AppSchedulingModuleThread.getHandler());
-        ((UiModeManager) context.getSystemService(UiModeManager.class)).addOnProjectionStateChangedListener(-1, AppSchedulingModuleThread.getExecutor(), this.mOnProjectionStateChangedListener);
-        this.mIsStablePower = jobSchedulerService.isBatteryCharging() && jobSchedulerService.isBatteryNotLow();
+        ((UiModeManager) context.getSystemService(UiModeManager.class))
+                .addOnProjectionStateChangedListener(
+                        -1,
+                        AppSchedulingModuleThread.getExecutor(),
+                        this.mOnProjectionStateChangedListener);
+        this.mIsStablePower =
+                jobSchedulerService.isBatteryCharging() && jobSchedulerService.isBatteryNotLow();
     }
 }

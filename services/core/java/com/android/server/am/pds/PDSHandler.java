@@ -15,12 +15,15 @@ import android.os.UserHandle;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.SystemUpdateManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.PDSController;
 import com.android.server.am.mars.database.FASDataManager;
 import com.android.server.am.mars.database.FASEntity;
 import com.android.server.am.mars.database.FASTableContract;
+
 import com.samsung.android.sdhms.SemAppRestrictionManager;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -93,8 +96,10 @@ public final class PDSHandler {
                         }
                         PDSPkgMap pDSPkgMap = pDSController2.mPDSTargetPackages;
                         pDSPkgMap.mMap.clear();
-                        ArrayList fASDataFromDB = FASDataManager.FASDataManagerHolder.INSTANCE.getFASDataFromDB();
-                        for (SemAppRestrictionManager.AppRestrictionInfo appRestrictionInfo : pDSController2.mPDSTargetlist) {
+                        ArrayList fASDataFromDB =
+                                FASDataManager.FASDataManagerHolder.INSTANCE.getFASDataFromDB();
+                        for (SemAppRestrictionManager.AppRestrictionInfo appRestrictionInfo :
+                                pDSController2.mPDSTargetlist) {
                             int i10 = i6;
                             while (true) {
                                 if (i10 >= fASDataFromDB.size()) {
@@ -104,13 +109,22 @@ public final class PDSHandler {
                                 FASEntity fASEntity = (FASEntity) fASDataFromDB.get(i10);
                                 PDSPackageInfo pDSPackageInfo3 = new PDSPackageInfo();
                                 String strPkgName = fASEntity.getStrPkgName();
-                                int convertFASReasonToValue = FASTableContract.convertFASReasonToValue(fASEntity.getStrFasReason());
+                                int convertFASReasonToValue =
+                                        FASTableContract.convertFASReasonToValue(
+                                                fASEntity.getStrFasReason());
                                 int i11 = -1;
                                 try {
-                                    int parseInt = fASEntity.getStrUid() != null ? Integer.parseInt(fASEntity.getStrUid()) : -1;
+                                    int parseInt =
+                                            fASEntity.getStrUid() != null
+                                                    ? Integer.parseInt(fASEntity.getStrUid())
+                                                    : -1;
                                     try {
                                         i11 = UserHandle.getUserId(parseInt);
-                                        long parseLong = fASEntity.getStrDisableResetTime() != null ? Long.parseLong(fASEntity.getStrDisableResetTime()) : 0L;
+                                        long parseLong =
+                                                fASEntity.getStrDisableResetTime() != null
+                                                        ? Long.parseLong(
+                                                                fASEntity.getStrDisableResetTime())
+                                                        : 0L;
                                         arrayList = fASDataFromDB;
                                         i3 = i11;
                                         j = parseLong;
@@ -119,7 +133,9 @@ public final class PDSHandler {
                                         numberFormatException = e2;
                                         i2 = i11;
                                         i11 = parseInt;
-                                        Log.e("PDSPackageInfo", "NumberFormatException !" + numberFormatException);
+                                        Log.e(
+                                                "PDSPackageInfo",
+                                                "NumberFormatException !" + numberFormatException);
                                         i3 = i2;
                                         arrayList = fASDataFromDB;
                                         i4 = i11;
@@ -129,8 +145,9 @@ public final class PDSHandler {
                                         pDSPackageInfo3.userId = i3;
                                         pDSPackageInfo3.fasType = convertFASReasonToValue;
                                         pDSPackageInfo3.disableResetTime = j;
-                                        if (appRestrictionInfo.getPackageName().equals(strPkgName)) {
-                                        }
+                                        if (appRestrictionInfo
+                                                .getPackageName()
+                                                .equals(strPkgName)) {}
                                         i10++;
                                         fASDataFromDB = arrayList;
                                     }
@@ -143,12 +160,14 @@ public final class PDSHandler {
                                 pDSPackageInfo3.userId = i3;
                                 pDSPackageInfo3.fasType = convertFASReasonToValue;
                                 pDSPackageInfo3.disableResetTime = j;
-                                if (appRestrictionInfo.getPackageName().equals(strPkgName) || appRestrictionInfo.getUid() != i4) {
+                                if (appRestrictionInfo.getPackageName().equals(strPkgName)
+                                        || appRestrictionInfo.getUid() != i4) {
                                     i10++;
                                     fASDataFromDB = arrayList;
                                 } else {
                                     String packageName = appRestrictionInfo.getPackageName();
-                                    SparseArray sparseArray = (SparseArray) pDSPkgMap.mMap.get(packageName);
+                                    SparseArray sparseArray =
+                                            (SparseArray) pDSPkgMap.mMap.get(packageName);
                                     if (sparseArray == null) {
                                         sparseArray = new SparseArray(2);
                                         pDSPkgMap.mMap.put(packageName, sparseArray);
@@ -167,8 +186,13 @@ public final class PDSHandler {
                                     if (pDSPkgMap2 == null || pDSPkgMap2.totalSize() == 0) {
                                         pDSPackageInfo = null;
                                     } else {
-                                        SparseArray sparseArray2 = (SparseArray) pDSPkgMap2.mMap.get(str);
-                                        pDSPackageInfo = (PDSPackageInfo) (sparseArray2 == null ? null : sparseArray2.get(i9));
+                                        SparseArray sparseArray2 =
+                                                (SparseArray) pDSPkgMap2.mMap.get(str);
+                                        pDSPackageInfo =
+                                                (PDSPackageInfo)
+                                                        (sparseArray2 == null
+                                                                ? null
+                                                                : sparseArray2.get(i9));
                                     }
                                     if (pDSPackageInfo != null) {
                                         if (i8 == 5) {
@@ -214,7 +238,11 @@ public final class PDSHandler {
                                 pDSPackageInfo2 = null;
                             } else {
                                 SparseArray sparseArray3 = (SparseArray) pDSPkgMap3.mMap.get(str2);
-                                pDSPackageInfo2 = (PDSPackageInfo) (sparseArray3 == null ? null : sparseArray3.get(i14));
+                                pDSPackageInfo2 =
+                                        (PDSPackageInfo)
+                                                (sparseArray3 == null
+                                                        ? null
+                                                        : sparseArray3.get(i14));
                             }
                             if (pDSPackageInfo2 != null) {
                                 PDSController.Policy policy = pDSPackageInfo2.appliedPolicy;
@@ -230,15 +258,24 @@ public final class PDSHandler {
                                 }
                                 if (pDSPackageInfo2.appliedPolicy == null) {
                                     try {
-                                        packageManager.setPackageStoppedState(pDSPackageInfo2.name, false, pDSPackageInfo2.userId);
+                                        packageManager.setPackageStoppedState(
+                                                pDSPackageInfo2.name,
+                                                false,
+                                                pDSPackageInfo2.userId);
                                     } catch (RemoteException unused) {
                                     } catch (IllegalArgumentException e4) {
-                                        Slog.w("PDSController", "Failed trying to stop package " + pDSPackageInfo2.name + ": " + e4);
+                                        Slog.w(
+                                                "PDSController",
+                                                "Failed trying to stop package "
+                                                        + pDSPackageInfo2.name
+                                                        + ": "
+                                                        + e4);
                                     }
                                     PDSPkgMap pDSPkgMap4 = pDSController3.mPDSRestrictedPackages;
                                     String str3 = pDSPackageInfo2.name;
                                     int i16 = pDSPackageInfo2.userId;
-                                    SparseArray sparseArray4 = (SparseArray) pDSPkgMap4.mMap.get(str3);
+                                    SparseArray sparseArray4 =
+                                            (SparseArray) pDSPkgMap4.mMap.get(str3);
                                     if (sparseArray4 != null) {
                                         sparseArray4.removeReturnOld(i16);
                                         if (sparseArray4.size() == 0) {
@@ -262,9 +299,12 @@ public final class PDSHandler {
             synchronized (PDSController.PDSLock) {
                 for (int i17 = 0; i17 < pDSController4.mPDSRestrictedPackages.mMap.size(); i17++) {
                     try {
-                        SparseArray sparseArray5 = (SparseArray) pDSController4.mPDSRestrictedPackages.mMap.valueAt(i17);
+                        SparseArray sparseArray5 =
+                                (SparseArray)
+                                        pDSController4.mPDSRestrictedPackages.mMap.valueAt(i17);
                         for (int i18 = 0; i18 < sparseArray5.size(); i18++) {
-                            PDSPackageInfo pDSPackageInfo4 = (PDSPackageInfo) sparseArray5.valueAt(i18);
+                            PDSPackageInfo pDSPackageInfo4 =
+                                    (PDSPackageInfo) sparseArray5.valueAt(i18);
                             PDSController.Policy policy2 = pDSPackageInfo4.appliedPolicy;
                             if (policy2 != null && policy2.num == i13) {
                                 pDSPackageInfo4.curLevel = 0;
@@ -287,10 +327,13 @@ public final class PDSHandler {
             for (int i19 = 0; i19 < arrayList2.size(); i19++) {
                 PDSPackageInfo pDSPackageInfo5 = (PDSPackageInfo) arrayList2.get(i19);
                 try {
-                    packageManager2.setPackageStoppedState(pDSPackageInfo5.name, false, pDSPackageInfo5.userId);
+                    packageManager2.setPackageStoppedState(
+                            pDSPackageInfo5.name, false, pDSPackageInfo5.userId);
                 } catch (RemoteException unused2) {
                 } catch (IllegalArgumentException e5) {
-                    Slog.w("PDSController", "Failed trying to stop package " + pDSPackageInfo5.name + ": " + e5);
+                    Slog.w(
+                            "PDSController",
+                            "Failed trying to stop package " + pDSPackageInfo5.name + ": " + e5);
                 }
                 PDSPkgMap pDSPkgMap5 = pDSController4.mPDSRestrictedPackages;
                 String str4 = pDSPackageInfo5.name;
@@ -351,7 +394,8 @@ public final class PDSHandler {
         this.mMainHandler.sendMessageDelayed(obtainMessage, j);
     }
 
-    public final void sendRunPolicySpecificPkgMsgToMainHandler(int i, int i2, String str, ArrayList arrayList) {
+    public final void sendRunPolicySpecificPkgMsgToMainHandler(
+            int i, int i2, String str, ArrayList arrayList) {
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("packageList", arrayList);
         bundle.putInt("policy-num", i);

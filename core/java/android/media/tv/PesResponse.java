@@ -5,20 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class PesResponse extends BroadcastInfoResponse implements Parcelable {
-    public static final Parcelable.Creator<PesResponse> CREATOR = new Parcelable.Creator<PesResponse>() { // from class: android.media.tv.PesResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PesResponse createFromParcel(Parcel source) {
-            source.readInt();
-            return PesResponse.createFromParcelBody(source);
-        }
+    public static final Parcelable.Creator<PesResponse> CREATOR =
+            new Parcelable.Creator<PesResponse>() { // from class: android.media.tv.PesResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PesResponse createFromParcel(Parcel source) {
+                    source.readInt();
+                    return PesResponse.createFromParcelBody(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PesResponse[] newArray(int size) {
-            return new PesResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PesResponse[] newArray(int size) {
+                    return new PesResponse[size];
+                }
+            };
     private static final int RESPONSE_TYPE = 4;
     private final String mSharedFilterToken;
 

@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.widget.IUpdateVerifierCallback;
 
 /* loaded from: classes5.dex */
 public interface IUpdateVerifierInterface extends IInterface {
@@ -17,24 +16,24 @@ public interface IUpdateVerifierInterface extends IInterface {
 
     void updateVerifierWithType(byte[] bArr, byte[] bArr2, int i) throws RemoteException;
 
-    void updateVerifierWithWk(byte[] bArr, byte[] bArr2, byte[] bArr3, int i) throws RemoteException;
+    void updateVerifierWithWk(byte[] bArr, byte[] bArr2, byte[] bArr3, int i)
+            throws RemoteException;
 
     public static class Default implements IUpdateVerifierInterface {
         @Override // com.android.internal.widget.IUpdateVerifierInterface
-        public void requestSaGuid(IUpdateVerifierCallback iUpdateVerifierCallback) throws RemoteException {
-        }
+        public void requestSaGuid(IUpdateVerifierCallback iUpdateVerifierCallback)
+                throws RemoteException {}
 
         @Override // com.android.internal.widget.IUpdateVerifierInterface
-        public void updateVerifier(byte[] verifier, byte[] salt) throws RemoteException {
-        }
+        public void updateVerifier(byte[] verifier, byte[] salt) throws RemoteException {}
 
         @Override // com.android.internal.widget.IUpdateVerifierInterface
-        public void updateVerifierWithType(byte[] verifier, byte[] salt, int verifierType) throws RemoteException {
-        }
+        public void updateVerifierWithType(byte[] verifier, byte[] salt, int verifierType)
+                throws RemoteException {}
 
         @Override // com.android.internal.widget.IUpdateVerifierInterface
-        public void updateVerifierWithWk(byte[] verifier, byte[] salt, byte[] wk, int verifierType) throws RemoteException {
-        }
+        public void updateVerifierWithWk(byte[] verifier, byte[] salt, byte[] wk, int verifierType)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +41,7 @@ public interface IUpdateVerifierInterface extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUpdateVerifierInterface {
+    public abstract static class Stub extends Binder implements IUpdateVerifierInterface {
         static final int TRANSACTION_requestSaGuid = 1;
         static final int TRANSACTION_updateVerifier = 2;
         static final int TRANSACTION_updateVerifierWithType = 3;
@@ -89,7 +88,8 @@ public interface IUpdateVerifierInterface extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUpdateVerifierInterface.DESCRIPTOR);
             }
@@ -99,7 +99,8 @@ public interface IUpdateVerifierInterface extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IUpdateVerifierCallback _arg0 = IUpdateVerifierCallback.Stub.asInterface(data.readStrongBinder());
+                    IUpdateVerifierCallback _arg0 =
+                            IUpdateVerifierCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestSaGuid(_arg0);
                     return true;
@@ -146,7 +147,8 @@ public interface IUpdateVerifierInterface extends IInterface {
             }
 
             @Override // com.android.internal.widget.IUpdateVerifierInterface
-            public void requestSaGuid(IUpdateVerifierCallback iUpdateVerifierCallback) throws RemoteException {
+            public void requestSaGuid(IUpdateVerifierCallback iUpdateVerifierCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IUpdateVerifierInterface.DESCRIPTOR);
@@ -171,7 +173,8 @@ public interface IUpdateVerifierInterface extends IInterface {
             }
 
             @Override // com.android.internal.widget.IUpdateVerifierInterface
-            public void updateVerifierWithType(byte[] verifier, byte[] salt, int verifierType) throws RemoteException {
+            public void updateVerifierWithType(byte[] verifier, byte[] salt, int verifierType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IUpdateVerifierInterface.DESCRIPTOR);
@@ -185,7 +188,9 @@ public interface IUpdateVerifierInterface extends IInterface {
             }
 
             @Override // com.android.internal.widget.IUpdateVerifierInterface
-            public void updateVerifierWithWk(byte[] verifier, byte[] salt, byte[] wk, int verifierType) throws RemoteException {
+            public void updateVerifierWithWk(
+                    byte[] verifier, byte[] salt, byte[] wk, int verifierType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IUpdateVerifierInterface.DESCRIPTOR);

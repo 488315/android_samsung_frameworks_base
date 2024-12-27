@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jce.provider;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encoding;
 import com.android.internal.org.bouncycastle.asn1.ASN1Integer;
@@ -29,6 +30,7 @@ import com.android.internal.org.bouncycastle.jce.spec.ECNamedCurveSpec;
 import com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec;
 import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -39,7 +41,11 @@ import java.security.spec.EllipticCurve;
 import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
-public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.bouncycastle.jce.interfaces.ECPrivateKey, PKCS12BagAttributeCarrier, ECPointEncoder {
+public class JCEECPrivateKey
+        implements ECPrivateKey,
+                com.android.internal.org.bouncycastle.jce.interfaces.ECPrivateKey,
+                PKCS12BagAttributeCarrier,
+                ECPointEncoder {
     private String algorithm;
     private PKCS12BagAttributeCarrierImpl attrCarrier;
     private BigInteger d;
@@ -93,7 +99,11 @@ public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.b
         this.publicKey = key.publicKey;
     }
 
-    public JCEECPrivateKey(String algorithm, ECPrivateKeyParameters params, JCEECPublicKey pubKey, ECParameterSpec spec) {
+    public JCEECPrivateKey(
+            String algorithm,
+            ECPrivateKeyParameters params,
+            JCEECPublicKey pubKey,
+            ECParameterSpec spec) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
         this.algorithm = algorithm;
@@ -101,14 +111,23 @@ public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.b
         if (spec == null) {
             ECDomainParameters dp = params.getParameters();
             EllipticCurve ellipticCurve = EC5Util.convertCurve(dp.getCurve(), dp.getSeed());
-            this.ecSpec = new ECParameterSpec(ellipticCurve, EC5Util.convertPoint(dp.getG()), dp.getN(), dp.getH().intValue());
+            this.ecSpec =
+                    new ECParameterSpec(
+                            ellipticCurve,
+                            EC5Util.convertPoint(dp.getG()),
+                            dp.getN(),
+                            dp.getH().intValue());
         } else {
             this.ecSpec = spec;
         }
         this.publicKey = getPublicKeyDetails(pubKey);
     }
 
-    public JCEECPrivateKey(String algorithm, ECPrivateKeyParameters params, JCEECPublicKey pubKey, com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec spec) {
+    public JCEECPrivateKey(
+            String algorithm,
+            ECPrivateKeyParameters params,
+            JCEECPublicKey pubKey,
+            com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec spec) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
         this.algorithm = algorithm;
@@ -116,10 +135,20 @@ public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.b
         if (spec == null) {
             ECDomainParameters dp = params.getParameters();
             EllipticCurve ellipticCurve = EC5Util.convertCurve(dp.getCurve(), dp.getSeed());
-            this.ecSpec = new ECParameterSpec(ellipticCurve, EC5Util.convertPoint(dp.getG()), dp.getN(), dp.getH().intValue());
+            this.ecSpec =
+                    new ECParameterSpec(
+                            ellipticCurve,
+                            EC5Util.convertPoint(dp.getG()),
+                            dp.getN(),
+                            dp.getH().intValue());
         } else {
             EllipticCurve ellipticCurve2 = EC5Util.convertCurve(spec.getCurve(), spec.getSeed());
-            this.ecSpec = new ECParameterSpec(ellipticCurve2, EC5Util.convertPoint(spec.getG()), spec.getN(), spec.getH().intValue());
+            this.ecSpec =
+                    new ECParameterSpec(
+                            ellipticCurve2,
+                            EC5Util.convertPoint(spec.getG()),
+                            spec.getN(),
+                            spec.getH().intValue());
         }
         this.publicKey = getPublicKeyDetails(pubKey);
     }
@@ -139,18 +168,30 @@ public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.b
     }
 
     private void populateFromPrivKeyInfo(PrivateKeyInfo info) throws IOException {
-        X962Parameters params = X962Parameters.getInstance(info.getPrivateKeyAlgorithm().getParameters());
+        X962Parameters params =
+                X962Parameters.getInstance(info.getPrivateKeyAlgorithm().getParameters());
         if (params.isNamedCurve()) {
             ASN1ObjectIdentifier oid = ASN1ObjectIdentifier.getInstance(params.getParameters());
             X9ECParameters ecP = ECUtil.getNamedCurveByOid(oid);
             EllipticCurve ellipticCurve = EC5Util.convertCurve(ecP.getCurve(), ecP.getSeed());
-            this.ecSpec = new ECNamedCurveSpec(ECUtil.getCurveName(oid), ellipticCurve, EC5Util.convertPoint(ecP.getG()), ecP.getN(), ecP.getH());
+            this.ecSpec =
+                    new ECNamedCurveSpec(
+                            ECUtil.getCurveName(oid),
+                            ellipticCurve,
+                            EC5Util.convertPoint(ecP.getG()),
+                            ecP.getN(),
+                            ecP.getH());
         } else if (params.isImplicitlyCA()) {
             this.ecSpec = null;
         } else {
             X9ECParameters ecP2 = X9ECParameters.getInstance(params.getParameters());
             EllipticCurve ellipticCurve2 = EC5Util.convertCurve(ecP2.getCurve(), ecP2.getSeed());
-            this.ecSpec = new ECParameterSpec(ellipticCurve2, EC5Util.convertPoint(ecP2.getG()), ecP2.getN(), ecP2.getH().intValue());
+            this.ecSpec =
+                    new ECParameterSpec(
+                            ellipticCurve2,
+                            EC5Util.convertPoint(ecP2.getG()),
+                            ecP2.getN(),
+                            ecP2.getH().intValue());
         }
         ASN1Encodable privKey = info.parsePrivateKey();
         if (privKey instanceof ASN1Integer) {
@@ -178,7 +219,8 @@ public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.b
         X962Parameters params;
         ECPrivateKeyStructure keyStructure;
         if (this.ecSpec instanceof ECNamedCurveSpec) {
-            ASN1ObjectIdentifier curveOid = ECUtil.getNamedCurveOid(((ECNamedCurveSpec) this.ecSpec).getName());
+            ASN1ObjectIdentifier curveOid =
+                    ECUtil.getNamedCurveOid(((ECNamedCurveSpec) this.ecSpec).getName());
             if (curveOid == null) {
                 curveOid = new ASN1ObjectIdentifier(((ECNamedCurveSpec) this.ecSpec).getName());
             }
@@ -187,7 +229,15 @@ public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.b
             params = new X962Parameters((ASN1Null) DERNull.INSTANCE);
         } else {
             ECCurve curve = EC5Util.convertCurve(this.ecSpec.getCurve());
-            X9ECParameters ecP = new X9ECParameters(curve, new X9ECPoint(EC5Util.convertPoint(curve, this.ecSpec.getGenerator()), this.withCompression), this.ecSpec.getOrder(), BigInteger.valueOf(this.ecSpec.getCofactor()), this.ecSpec.getCurve().getSeed());
+            X9ECParameters ecP =
+                    new X9ECParameters(
+                            curve,
+                            new X9ECPoint(
+                                    EC5Util.convertPoint(curve, this.ecSpec.getGenerator()),
+                                    this.withCompression),
+                            this.ecSpec.getOrder(),
+                            BigInteger.valueOf(this.ecSpec.getCofactor()),
+                            this.ecSpec.getCurve().getSeed());
             params = new X962Parameters(ecP);
         }
         if (this.publicKey != null) {
@@ -196,7 +246,11 @@ public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.b
             keyStructure = new ECPrivateKeyStructure(getS(), params);
         }
         try {
-            PrivateKeyInfo info = new PrivateKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.id_ecPublicKey, params.toASN1Primitive()), keyStructure.toASN1Primitive());
+            PrivateKeyInfo info =
+                    new PrivateKeyInfo(
+                            new AlgorithmIdentifier(
+                                    X9ObjectIdentifiers.id_ecPublicKey, params.toASN1Primitive()),
+                            keyStructure.toASN1Primitive());
             return info.getEncoded(ASN1Encoding.DER);
         } catch (IOException e) {
             return null;
@@ -275,7 +329,8 @@ public class JCEECPrivateKey implements ECPrivateKey, com.android.internal.org.b
 
     private DERBitString getPublicKeyDetails(JCEECPublicKey pub) {
         try {
-            SubjectPublicKeyInfo info = SubjectPublicKeyInfo.getInstance(ASN1Primitive.fromByteArray(pub.getEncoded()));
+            SubjectPublicKeyInfo info =
+                    SubjectPublicKeyInfo.getInstance(ASN1Primitive.fromByteArray(pub.getEncoded()));
             return info.getPublicKeyData();
         } catch (IOException e) {
             return null;

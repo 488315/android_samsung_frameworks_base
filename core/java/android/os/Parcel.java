@@ -3,7 +3,6 @@ package android.os;
 import android.app.AppOpsManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.wifi.WifiMigration;
-import android.os.Parcelable;
 import android.sec.enterprise.proxy.EnterpriseProxyConstants;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -18,10 +17,15 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Preconditions;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
+
+import libcore.util.SneakyThrow;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
@@ -44,7 +48,6 @@ import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.IntFunction;
-import libcore.util.SneakyThrow;
 
 /* loaded from: classes3.dex */
 public final class Parcel {
@@ -128,27 +131,30 @@ public final class Parcel {
     private static final Object sPoolSync = new Object();
     private static int sOwnedPoolSize = 0;
     private static int sHolderPoolSize = 0;
-    public static final Parcelable.Creator<String> STRING_CREATOR = new Parcelable.Creator<String>() { // from class: android.os.Parcel.1
-        @Override // android.os.Parcelable.Creator
-        public String createFromParcel(Parcel source) {
-            return source.readString();
-        }
+    public static final Parcelable.Creator<String> STRING_CREATOR =
+            new Parcelable.Creator<String>() { // from class: android.os.Parcel.1
+                @Override // android.os.Parcelable.Creator
+                public String createFromParcel(Parcel source) {
+                    return source.readString();
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public String[] newArray(int size) {
-            return new String[size];
-        }
-    };
-    private static final HashMap<ClassLoader, HashMap<String, Parcelable.Creator<?>>> mCreators = new HashMap<>();
-    private static final HashMap<ClassLoader, HashMap<String, Pair<Parcelable.Creator<?>, Class<?>>>> sPairedCreators = new HashMap<>();
+                @Override // android.os.Parcelable.Creator
+                public String[] newArray(int size) {
+                    return new String[size];
+                }
+            };
+    private static final HashMap<ClassLoader, HashMap<String, Parcelable.Creator<?>>> mCreators =
+            new HashMap<>();
+    private static final HashMap<
+                    ClassLoader, HashMap<String, Pair<Parcelable.Creator<?>, Class<?>>>>
+            sPairedCreators = new HashMap<>();
     private boolean mRecycled = false;
     private String interfaceName = null;
     private ReadWriteHelper mReadWriteHelper = ReadWriteHelper.DEFAULT;
     private boolean mAllowSquashing = false;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ParcelFlags {
-    }
+    public @interface ParcelFlags {}
 
     public interface SquashReadHelper<T> {
         T readRawParceled(Parcel parcel);
@@ -342,7 +348,12 @@ public final class Parcel {
 
     public final void recycle() {
         if (this.mRecycled) {
-            Log.wtf(TAG, "Recycle called on unowned Parcel. (recycle twice?) Here: " + Log.getStackTraceString(new Throwable()) + " Original recycle call (if DEBUG_RECYCLE): ", this.mStack);
+            Log.wtf(
+                    TAG,
+                    "Recycle called on unowned Parcel. (recycle twice?) Here: "
+                            + Log.getStackTraceString(new Throwable())
+                            + " Original recycle call (if DEBUG_RECYCLE): ",
+                    this.mStack);
             return;
         }
         this.mRecycled = true;
@@ -373,7 +384,9 @@ public final class Parcel {
     }
 
     public boolean hasReadWriteHelper() {
-        return (this.mReadWriteHelper == null || this.mReadWriteHelper == ReadWriteHelper.DEFAULT) ? false : true;
+        return (this.mReadWriteHelper == null || this.mReadWriteHelper == ReadWriteHelper.DEFAULT)
+                ? false
+                : true;
     }
 
     public final void markSensitive() {
@@ -482,12 +495,25 @@ public final class Parcel {
         if (this.mClassCookies != null) {
             Object removedCookie = this.mClassCookies.remove(clz);
             if (removedCookie != expectedCookie) {
-                Log.wtf(TAG, "Expected to remove " + expectedCookie + " (with key=" + clz + ") but instead removed " + removedCookie);
+                Log.wtf(
+                        TAG,
+                        "Expected to remove "
+                                + expectedCookie
+                                + " (with key="
+                                + clz
+                                + ") but instead removed "
+                                + removedCookie);
                 return;
             }
             return;
         }
-        Log.wtf(TAG, "Expected to remove " + expectedCookie + " (with key=" + clz + ") but no cookies were present");
+        Log.wtf(
+                TAG,
+                "Expected to remove "
+                        + expectedCookie
+                        + " (with key="
+                        + clz
+                        + ") but no cookies were present");
     }
 
     public boolean hasClassCookie(Class clz) {
@@ -776,7 +802,8 @@ public final class Parcel {
         writeArrayMapInternal(val);
     }
 
-    public <T extends Parcelable> void writeTypedArrayMap(ArrayMap<String, T> val, int parcelableFlags) {
+    public <T extends Parcelable> void writeTypedArrayMap(
+            ArrayMap<String, T> val, int parcelableFlags) {
         if (val == null) {
             writeInt(-1);
             return;
@@ -928,7 +955,10 @@ public final class Parcel {
             }
         } catch (ArithmeticException e) {
             Log.e(TAG, "ArithmeticException occurred while multiplying dimensions " + e);
-            BadParcelableException badParcelableException = new BadParcelableException("Estimated array length is too large. Array Dimensions:" + Arrays.toString(dimensions));
+            BadParcelableException badParcelableException =
+                    new BadParcelableException(
+                            "Estimated array length is too large. Array Dimensions:"
+                                    + Arrays.toString(dimensions));
             SneakyThrow.sneakyThrow(badParcelableException);
         }
         ensureWithinMemoryLimit(typeSize, totalObjects);
@@ -939,14 +969,35 @@ public final class Parcel {
         try {
             estimatedAllocationSize = Math.multiplyExact(typeSize, length);
         } catch (ArithmeticException e) {
-            Log.e(TAG, "ArithmeticException occurred while multiplying values " + typeSize + " and " + length + " Exception: " + e);
-            BadParcelableException badParcelableException = new BadParcelableException("Estimated allocation size is too large. typeSize: " + typeSize + " length: " + length);
+            Log.e(
+                    TAG,
+                    "ArithmeticException occurred while multiplying values "
+                            + typeSize
+                            + " and "
+                            + length
+                            + " Exception: "
+                            + e);
+            BadParcelableException badParcelableException =
+                    new BadParcelableException(
+                            "Estimated allocation size is too large. typeSize: "
+                                    + typeSize
+                                    + " length: "
+                                    + length);
             SneakyThrow.sneakyThrow(badParcelableException);
         }
         boolean isInBinderTransaction = Binder.isDirectlyHandlingTransaction();
         if (isInBinderTransaction && estimatedAllocationSize > 1000000) {
-            Log.e(TAG, "Trying to Allocate " + estimatedAllocationSize + " memory, In Binder Transaction : " + isInBinderTransaction);
-            BadParcelableException e2 = new BadParcelableException("Allocation of size " + estimatedAllocationSize + " is above allowed limit of 1MB");
+            Log.e(
+                    TAG,
+                    "Trying to Allocate "
+                            + estimatedAllocationSize
+                            + " memory, In Binder Transaction : "
+                            + isInBinderTransaction);
+            BadParcelableException e2 =
+                    new BadParcelableException(
+                            "Allocation of size "
+                                    + estimatedAllocationSize
+                                    + " is above allowed limit of 1MB");
             SneakyThrow.sneakyThrow(e2);
         }
     }
@@ -1347,7 +1398,8 @@ public final class Parcel {
         throw new RuntimeException("bad array lengths");
     }
 
-    public final <T extends IInterface> T[] createInterfaceArray(IntFunction<T[]> newArray, Function<IBinder, T> asInterface) {
+    public final <T extends IInterface> T[] createInterfaceArray(
+            IntFunction<T[]> newArray, Function<IBinder, T> asInterface) {
         int N = readInt();
         ensureWithinMemoryLimit(1, N);
         if (N >= 0) {
@@ -1360,7 +1412,8 @@ public final class Parcel {
         return null;
     }
 
-    public final <T extends IInterface> void readInterfaceArray(T[] val, Function<IBinder, T> asInterface) {
+    public final <T extends IInterface> void readInterfaceArray(
+            T[] val, Function<IBinder, T> asInterface) {
         int N = readInt();
         if (N == val.length) {
             for (int i = 0; i < N; i++) {
@@ -1375,7 +1428,8 @@ public final class Parcel {
         writeTypedList(val, 0);
     }
 
-    public final <T extends Parcelable> void writeTypedSparseArray(SparseArray<T> val, int parcelableFlags) {
+    public final <T extends Parcelable> void writeTypedSparseArray(
+            SparseArray<T> val, int parcelableFlags) {
         if (val == null) {
             writeInt(-1);
             return;
@@ -1478,9 +1532,11 @@ public final class Parcel {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private <T> void writeFixedArrayInternal(T t, int parcelableFlags, int index, int[] dimensions) {
+    private <T> void writeFixedArrayInternal(
+            T t, int parcelableFlags, int index, int[] dimensions) {
         if (index >= dimensions.length) {
-            throw new BadParcelableException("Array has more dimensions than expected: " + dimensions.length);
+            throw new BadParcelableException(
+                    "Array has more dimensions than expected: " + dimensions.length);
         }
         int length = dimensions[index];
         if (t == 0) {
@@ -1490,11 +1546,13 @@ public final class Parcel {
             throw new BadParcelableException("Not an array: " + t);
         }
         if (Array.getLength(t) != length) {
-            throw new BadParcelableException("bad length: expected " + length + ", but got " + Array.getLength(t));
+            throw new BadParcelableException(
+                    "bad length: expected " + length + ", but got " + Array.getLength(t));
         }
         Class<?> componentType = t.getClass().getComponentType();
         if (!componentType.isArray() && index + 1 != dimensions.length) {
-            throw new BadParcelableException("Array has fewer dimensions than expected: " + dimensions.length);
+            throw new BadParcelableException(
+                    "Array has fewer dimensions than expected: " + dimensions.length);
         }
         if (componentType == Boolean.TYPE) {
             writeBooleanArray((boolean[]) t);
@@ -1862,7 +1920,12 @@ public final class Parcel {
             for (int i = 0; i < this.mReadSquashableParcelables.size(); i++) {
                 sb.append(this.mReadSquashableParcelables.keyAt(i)).append(' ');
             }
-            Slog.wtfStack(TAG, "Map doesn't contain offset " + firstAbsolutePos + " : contains=" + sb.toString());
+            Slog.wtfStack(
+                    TAG,
+                    "Map doesn't contain offset "
+                            + firstAbsolutePos
+                            + " : contains="
+                            + sb.toString());
         }
         return t;
     }
@@ -1881,7 +1944,11 @@ public final class Parcel {
             oos.close();
             writeByteArray(baos.toByteArray());
         } catch (IOException ioe) {
-            throw new BadParcelableException("Parcelable encountered IOException writing serializable object (name = " + name + NavigationBarInflaterView.KEY_CODE_END, ioe);
+            throw new BadParcelableException(
+                    "Parcelable encountered IOException writing serializable object (name = "
+                            + name
+                            + NavigationBarInflaterView.KEY_CODE_END,
+                    ioe);
         }
     }
 
@@ -1934,7 +2001,8 @@ public final class Parcel {
     }
 
     public static int getExceptionCode(Throwable e) {
-        if ((e instanceof Parcelable) && e.getClass().getClassLoader() == Parcelable.class.getClassLoader()) {
+        if ((e instanceof Parcelable)
+                && e.getClass().getClassLoader() == Parcelable.class.getClassLoader()) {
             return -9;
         }
         if (e instanceof SecurityException) {
@@ -2034,7 +2102,9 @@ public final class Parcel {
         }
         Exception e = createException(code, msg);
         if (remoteStackTrace != null) {
-            RemoteException cause = new RemoteException("Remote stack trace:\n" + remoteStackTrace, null, false, false);
+            RemoteException cause =
+                    new RemoteException(
+                            "Remote stack trace:\n" + remoteStackTrace, null, false, false);
             ExceptionUtils.appendCause(e, cause);
         }
         SneakyThrow.sneakyThrow(e);
@@ -2052,7 +2122,8 @@ public final class Parcel {
         switch (code) {
             case -9:
                 if (readInt() > 0) {
-                    return (Exception) readParcelable(Parcelable.class.getClassLoader(), Exception.class);
+                    return (Exception)
+                            readParcelable(Parcelable.class.getClassLoader(), Exception.class);
                 }
                 return new RuntimeException(msg + " [missing Parcelable]");
             case -8:
@@ -2177,7 +2248,11 @@ public final class Parcel {
         readMapInternal(outVal, loader, null, null);
     }
 
-    public <K, V> void readMap(Map<? super K, ? super V> outVal, ClassLoader loader, Class<K> clazzKey, Class<V> clazzValue) {
+    public <K, V> void readMap(
+            Map<? super K, ? super V> outVal,
+            ClassLoader loader,
+            Class<K> clazzKey,
+            Class<V> clazzValue) {
         Objects.requireNonNull(clazzKey);
         Objects.requireNonNull(clazzValue);
         readMapInternal(outVal, loader, clazzKey, clazzValue);
@@ -2200,7 +2275,8 @@ public final class Parcel {
         return readHashMapInternal(loader, null, null);
     }
 
-    public <K, V> HashMap<K, V> readHashMap(ClassLoader loader, Class<? extends K> clazzKey, Class<? extends V> clazzValue) {
+    public <K, V> HashMap<K, V> readHashMap(
+            ClassLoader loader, Class<? extends K> clazzKey, Class<? extends V> clazzValue) {
         Objects.requireNonNull(clazzKey);
         Objects.requireNonNull(clazzValue);
         return readHashMapInternal(loader, clazzKey, clazzValue);
@@ -2349,7 +2425,8 @@ public final class Parcel {
             return null;
         }
         ensureWithinMemoryLimit(1, readInt);
-        EnterpriseProxyConstants.AnonymousClass1 anonymousClass1 = (ArrayList<T>) new ArrayList(readInt);
+        EnterpriseProxyConstants.AnonymousClass1 anonymousClass1 =
+                (ArrayList<T>) new ArrayList(readInt);
         while (readInt > 0) {
             anonymousClass1.add(readTypedObject(creator));
             readInt--;
@@ -2376,7 +2453,8 @@ public final class Parcel {
         }
     }
 
-    public final <T extends Parcelable> SparseArray<T> createTypedSparseArray(Parcelable.Creator<T> creator) {
+    public final <T extends Parcelable> SparseArray<T> createTypedSparseArray(
+            Parcelable.Creator<T> creator) {
         int readInt = readInt();
         if (readInt < 0) {
             return null;
@@ -2390,7 +2468,8 @@ public final class Parcel {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public final <T extends Parcelable> ArrayMap<String, T> createTypedArrayMap(Parcelable.Creator<T> creator) {
+    public final <T extends Parcelable> ArrayMap<String, T> createTypedArrayMap(
+            Parcelable.Creator<T> creator) {
         int readInt = readInt();
         if (readInt < 0) {
             return null;
@@ -2431,7 +2510,8 @@ public final class Parcel {
         return l;
     }
 
-    public final <T extends IInterface> ArrayList<T> createInterfaceArrayList(Function<IBinder, T> asInterface) {
+    public final <T extends IInterface> ArrayList<T> createInterfaceArrayList(
+            Function<IBinder, T> asInterface) {
         int N = readInt();
         if (N < 0) {
             return null;
@@ -2481,7 +2561,8 @@ public final class Parcel {
         }
     }
 
-    public final <T extends IInterface> void readInterfaceList(List<T> list, Function<IBinder, T> asInterface) {
+    public final <T extends IInterface> void readInterfaceList(
+            List<T> list, Function<IBinder, T> asInterface) {
         int M = list.size();
         int N = readInt();
         int i = 0;
@@ -2511,7 +2592,8 @@ public final class Parcel {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    private <T> List<T> readParcelableListInternal(List<T> list, ClassLoader cl, Class<? extends T> clazz) {
+    private <T> List<T> readParcelableListInternal(
+            List<T> list, ClassLoader cl, Class<? extends T> clazz) {
         int n = readInt();
         if (n == -1) {
             list.clear();
@@ -2609,7 +2691,8 @@ public final class Parcel {
         if (componentType.isArray()) {
             int length = readInt();
             if (length != Array.getLength(t)) {
-                throw new BadParcelableException("Bad length: expected " + Array.getLength(t) + ", but got " + length);
+                throw new BadParcelableException(
+                        "Bad length: expected " + Array.getLength(t) + ", but got " + length);
             }
             for (int i = 0; i < length; i++) {
                 readFixedArray(Array.get(t, i));
@@ -2629,7 +2712,8 @@ public final class Parcel {
         if (componentType.isArray()) {
             int length = readInt();
             if (length != Array.getLength(t)) {
-                throw new BadParcelableException("Bad length: expected " + Array.getLength(t) + ", but got " + length);
+                throw new BadParcelableException(
+                        "Bad length: expected " + Array.getLength(t) + ", but got " + length);
             }
             for (int i = 0; i < length; i++) {
                 readFixedArray((Parcel) Array.get(t, i), (Function) asInterface);
@@ -2649,7 +2733,8 @@ public final class Parcel {
         if (componentType.isArray()) {
             int length = readInt();
             if (length != Array.getLength(t)) {
-                throw new BadParcelableException("Bad length: expected " + Array.getLength(t) + ", but got " + length);
+                throw new BadParcelableException(
+                        "Bad length: expected " + Array.getLength(t) + ", but got " + length);
             }
             for (int i = 0; i < length; i++) {
                 readFixedArray((Parcel) Array.get(t, i), (Parcelable.Creator) c);
@@ -2665,12 +2750,14 @@ public final class Parcel {
         }
         for (int i = 0; i < numDimension; i++) {
             if (!cls.isArray()) {
-                throw new BadParcelableException("Array has fewer dimensions than expected: " + numDimension);
+                throw new BadParcelableException(
+                        "Array has fewer dimensions than expected: " + numDimension);
             }
             cls = cls.getComponentType();
         }
         if (cls.isArray()) {
-            throw new BadParcelableException("Array has more dimensions than expected: " + numDimension);
+            throw new BadParcelableException(
+                    "Array has more dimensions than expected: " + numDimension);
         }
     }
 
@@ -2702,7 +2789,8 @@ public final class Parcel {
                     return null;
                 }
                 if (readInt != iArr[0]) {
-                    throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + readInt);
+                    throw new BadParcelableException(
+                            "Bad length: expected " + iArr[0] + ", but got " + readInt);
                 }
                 Class<?> componentType2 = componentType.getComponentType();
                 while (componentType2.isArray()) {
@@ -2720,22 +2808,31 @@ public final class Parcel {
         if (t == null || Array.getLength(t) == iArr[0]) {
             return t;
         }
-        throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + Array.getLength(t));
+        throw new BadParcelableException(
+                "Bad length: expected " + iArr[0] + ", but got " + Array.getLength(t));
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public <T, S extends IInterface> T createFixedArray(Class<T> cls, Function<IBinder, S> function, int... iArr) {
+    public <T, S extends IInterface> T createFixedArray(
+            Class<T> cls, Function<IBinder, S> function, int... iArr) {
         ensureClassHasExpectedDimensions(cls, iArr.length);
         final Class<?> componentType = cls.getComponentType();
         if (IInterface.class.isAssignableFrom(componentType)) {
-            T t = (T) createInterfaceArray(new IntFunction() { // from class: android.os.Parcel$$ExternalSyntheticLambda0
-                @Override // java.util.function.IntFunction
-                public final Object apply(int i) {
-                    return Parcel.lambda$createFixedArray$0(componentType, i);
-                }
-            }, function);
+            T t =
+                    (T)
+                            createInterfaceArray(
+                                    new IntFunction() { // from class:
+                                                        // android.os.Parcel$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntFunction
+                                        public final Object apply(int i) {
+                                            return Parcel.lambda$createFixedArray$0(
+                                                    componentType, i);
+                                        }
+                                    },
+                                    function);
             if (t != null && Array.getLength(t) != iArr[0]) {
-                throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + Array.getLength(t));
+                throw new BadParcelableException(
+                        "Bad length: expected " + iArr[0] + ", but got " + Array.getLength(t));
             }
             return t;
         }
@@ -2745,7 +2842,8 @@ public final class Parcel {
                 return null;
             }
             if (readInt != iArr[0]) {
-                throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + readInt);
+                throw new BadParcelableException(
+                        "Bad length: expected " + iArr[0] + ", but got " + readInt);
             }
             Class<?> componentType2 = componentType.getComponentType();
             while (componentType2.isArray()) {
@@ -2766,13 +2864,15 @@ public final class Parcel {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public <T, S extends Parcelable> T createFixedArray(Class<T> cls, Parcelable.Creator<S> creator, int... iArr) {
+    public <T, S extends Parcelable> T createFixedArray(
+            Class<T> cls, Parcelable.Creator<S> creator, int... iArr) {
         ensureClassHasExpectedDimensions(cls, iArr.length);
         Class<?> componentType = cls.getComponentType();
         if (Parcelable.class.isAssignableFrom(componentType)) {
             T t = (T) createTypedArray(creator);
             if (t != null && Array.getLength(t) != iArr[0]) {
-                throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + Array.getLength(t));
+                throw new BadParcelableException(
+                        "Bad length: expected " + iArr[0] + ", but got " + Array.getLength(t));
             }
             return t;
         }
@@ -2782,7 +2882,8 @@ public final class Parcel {
                 return null;
             }
             if (readInt != iArr[0]) {
-                throw new BadParcelableException("Bad length: expected " + iArr[0] + ", but got " + readInt);
+                throw new BadParcelableException(
+                        "Bad length: expected " + iArr[0] + ", but got " + readInt);
             }
             Class<?> componentType2 = componentType.getComponentType();
             while (componentType2.isArray()) {
@@ -2823,7 +2924,17 @@ public final class Parcel {
             T t = (T) readValue(readInt, classLoader, cls, clsArr);
             int dataPosition2 = dataPosition() - dataPosition;
             if (dataPosition2 != readInt2) {
-                Slog.wtfStack(TAG, "Unparcelling of " + t + " of type " + valueTypeToString(readInt) + "  consumed " + dataPosition2 + " bytes, but " + readInt2 + " expected.");
+                Slog.wtfStack(
+                        TAG,
+                        "Unparcelling of "
+                                + t
+                                + " of type "
+                                + valueTypeToString(readInt)
+                                + "  consumed "
+                                + dataPosition2
+                                + " bytes, but "
+                                + readInt2
+                                + " expected.");
                 return t;
             }
             return t;
@@ -2912,7 +3023,13 @@ public final class Parcel {
 
         public String toString() {
             if (this.mSource != null) {
-                return "Supplier{" + Parcel.valueTypeToString(this.mType) + "@" + this.mPosition + "+" + this.mLength + '}';
+                return "Supplier{"
+                        + Parcel.valueTypeToString(this.mType)
+                        + "@"
+                        + this.mPosition
+                        + "+"
+                        + this.mLength
+                        + '}';
             }
             return "Supplier{" + this.mObject + "}";
         }
@@ -2933,14 +3050,22 @@ public final class Parcel {
             if (source == null) {
                 return Objects.equals(this.mObject, value.mObject);
             }
-            if (Objects.equals(this.mLoader, value.mLoader) && this.mType == value.mType && this.mLength == value.mLength) {
-                return Parcel.compareData(source, this.mPosition, otherSource, value.mPosition, this.mLength);
+            if (Objects.equals(this.mLoader, value.mLoader)
+                    && this.mType == value.mType
+                    && this.mLength == value.mLength) {
+                return Parcel.compareData(
+                        source, this.mPosition, otherSource, value.mPosition, this.mLength);
             }
             return false;
         }
 
         public int hashCode() {
-            return Objects.hash(Boolean.valueOf(this.mSource == null), this.mObject, this.mLoader, Integer.valueOf(this.mType), Integer.valueOf(this.mLength));
+            return Objects.hash(
+                    Boolean.valueOf(this.mSource == null),
+                    this.mObject,
+                    this.mLoader,
+                    Integer.valueOf(this.mType),
+                    Integer.valueOf(this.mLength));
         }
     }
 
@@ -2997,7 +3122,10 @@ public final class Parcel {
                 break;
             case 12:
                 checkTypeToUnparcel(cls, SparseArray.class);
-                t = (T) readSparseArrayInternal(classLoader, (Class) ArrayUtils.getOrNull(clsArr, 0));
+                t =
+                        (T)
+                                readSparseArrayInternal(
+                                        classLoader, (Class) ArrayUtils.getOrNull(clsArr, 0));
                 break;
             case 13:
                 t = (T) createByteArray();
@@ -3064,12 +3192,23 @@ public final class Parcel {
                 t = (T) createFloatArray();
                 break;
             default:
-                throw new BadParcelableException("Parcel " + this + ": Unmarshalling unknown type code " + i + " at offset " + (dataPosition() - 4));
+                throw new BadParcelableException(
+                        "Parcel "
+                                + this
+                                + ": Unmarshalling unknown type code "
+                                + i
+                                + " at offset "
+                                + (dataPosition() - 4));
         }
         if (t == null || cls == null || cls.isInstance(t)) {
             return t;
         }
-        throw new BadTypeParcelableException("Unparcelled object " + t + " is not an instance of required class " + cls.getName() + " provided in the parameter");
+        throw new BadTypeParcelableException(
+                "Unparcelled object "
+                        + t
+                        + " is not an instance of required class "
+                        + cls.getName()
+                        + " provided in the parameter");
     }
 
     private boolean isLengthPrefixed(int type) {
@@ -3087,11 +3226,15 @@ public final class Parcel {
         }
     }
 
-    private void checkArrayTypeToUnparcel(Class<?> requiredArrayType, Class<?> componentTypeToUnparcel) {
+    private void checkArrayTypeToUnparcel(
+            Class<?> requiredArrayType, Class<?> componentTypeToUnparcel) {
         if (requiredArrayType != null) {
             Class<?> requiredComponentType = requiredArrayType.getComponentType();
             if (requiredComponentType == null) {
-                throw new BadTypeParcelableException("About to unparcel an array but type " + requiredArrayType.getCanonicalName() + " required by caller is not an array.");
+                throw new BadTypeParcelableException(
+                        "About to unparcel an array but type "
+                                + requiredArrayType.getCanonicalName()
+                                + " required by caller is not an array.");
             }
             checkTypeToUnparcel(requiredComponentType, componentTypeToUnparcel);
         }
@@ -3099,7 +3242,12 @@ public final class Parcel {
 
     private void checkTypeToUnparcel(Class<?> requiredType, Class<?> typeToUnparcel) {
         if (requiredType != null && !requiredType.isAssignableFrom(typeToUnparcel)) {
-            throw new BadTypeParcelableException("About to unparcel a " + typeToUnparcel.getCanonicalName() + ", which is not a subtype of type " + requiredType.getCanonicalName() + " required by caller.");
+            throw new BadTypeParcelableException(
+                    "About to unparcel a "
+                            + typeToUnparcel.getCanonicalName()
+                            + ", which is not a subtype of type "
+                            + requiredType.getCanonicalName()
+                            + " required by caller.");
         }
     }
 
@@ -3114,19 +3262,24 @@ public final class Parcel {
     }
 
     private <T> T readParcelableInternal(ClassLoader classLoader, Class<T> cls) {
-        Parcelable.Creator<T> readParcelableCreatorInternal = readParcelableCreatorInternal(classLoader, cls);
+        Parcelable.Creator<T> readParcelableCreatorInternal =
+                readParcelableCreatorInternal(classLoader, cls);
         if (readParcelableCreatorInternal == null) {
             return null;
         }
         if (readParcelableCreatorInternal instanceof Parcelable.ClassLoaderCreator) {
-            return (T) ((Parcelable.ClassLoaderCreator) readParcelableCreatorInternal).createFromParcel(this, classLoader);
+            return (T)
+                    ((Parcelable.ClassLoaderCreator) readParcelableCreatorInternal)
+                            .createFromParcel(this, classLoader);
         }
         return readParcelableCreatorInternal.createFromParcel(this);
     }
 
-    public final <T extends Parcelable> T readCreator(Parcelable.Creator<?> creator, ClassLoader loader) {
+    public final <T extends Parcelable> T readCreator(
+            Parcelable.Creator<?> creator, ClassLoader loader) {
         if (creator instanceof Parcelable.ClassLoaderCreator) {
-            Parcelable.ClassLoaderCreator<?> classLoaderCreator = (Parcelable.ClassLoaderCreator) creator;
+            Parcelable.ClassLoaderCreator<?> classLoaderCreator =
+                    (Parcelable.ClassLoaderCreator) creator;
             return (T) classLoaderCreator.createFromParcel(this, loader);
         }
         return (T) creator.createFromParcel(this);
@@ -3142,7 +3295,8 @@ public final class Parcel {
         return readParcelableCreatorInternal(loader, clazz);
     }
 
-    private <T> Parcelable.Creator<T> readParcelableCreatorInternal(ClassLoader loader, Class<T> clazz) {
+    private <T> Parcelable.Creator<T> readParcelableCreatorInternal(
+            ClassLoader loader, Class<T> clazz) {
         Pair<Parcelable.Creator<?>, Class<?>> creatorAndParcelableClass;
         ClassLoader parcelableClassLoader;
         String name = readString();
@@ -3150,7 +3304,8 @@ public final class Parcel {
             return null;
         }
         synchronized (sPairedCreators) {
-            HashMap<String, Pair<Parcelable.Creator<?>, Class<?>>> map = sPairedCreators.get(loader);
+            HashMap<String, Pair<Parcelable.Creator<?>, Class<?>>> map =
+                    sPairedCreators.get(loader);
             if (map == null) {
                 sPairedCreators.put(loader, new HashMap<>());
                 mCreators.put(loader, new HashMap<>());
@@ -3164,7 +3319,12 @@ public final class Parcel {
             Parcelable.Creator<T> creator = (Parcelable.Creator) creatorAndParcelableClass.first;
             Class<?> parcelableClass = creatorAndParcelableClass.second;
             if (clazz != null && !clazz.isAssignableFrom(parcelableClass)) {
-                throw new BadTypeParcelableException("Parcelable creator " + name + " is not a subclass of required class " + clazz.getName() + " provided in the parameter");
+                throw new BadTypeParcelableException(
+                        "Parcelable creator "
+                                + name
+                                + " is not a subclass of required class "
+                                + clazz.getName()
+                                + " provided in the parameter");
             }
             return creator;
         }
@@ -3175,32 +3335,52 @@ public final class Parcel {
                 parcelableClassLoader = getClass().getClassLoader();
             } catch (ClassNotFoundException e) {
                 Log.e(TAG, "Class not found when unmarshalling: " + name, e);
-                throw new BadParcelableException("ClassNotFoundException when unmarshalling: " + name, e);
+                throw new BadParcelableException(
+                        "ClassNotFoundException when unmarshalling: " + name, e);
             } catch (IllegalAccessException e2) {
                 Log.e(TAG, "Illegal access when unmarshalling: " + name, e2);
-                throw new BadParcelableException("IllegalAccessException when unmarshalling: " + name, e2);
+                throw new BadParcelableException(
+                        "IllegalAccessException when unmarshalling: " + name, e2);
             } catch (NoSuchFieldException e3) {
-                throw new BadParcelableException("Parcelable protocol requires a Parcelable.Creator object called CREATOR on class " + name, e3);
+                throw new BadParcelableException(
+                        "Parcelable protocol requires a Parcelable.Creator object called CREATOR on"
+                            + " class "
+                                + name,
+                        e3);
             }
         }
         Class<?> parcelableClass2 = Class.forName(name, false, parcelableClassLoader);
         if (!Parcelable.class.isAssignableFrom(parcelableClass2)) {
-            throw new BadParcelableException("Parcelable protocol requires subclassing from Parcelable on class " + name);
+            throw new BadParcelableException(
+                    "Parcelable protocol requires subclassing from Parcelable on class " + name);
         }
         if (clazz != null && !clazz.isAssignableFrom(parcelableClass2)) {
-            throw new BadTypeParcelableException("Parcelable creator " + name + " is not a subclass of required class " + clazz.getName() + " provided in the parameter");
+            throw new BadTypeParcelableException(
+                    "Parcelable creator "
+                            + name
+                            + " is not a subclass of required class "
+                            + clazz.getName()
+                            + " provided in the parameter");
         }
         Field f = parcelableClass2.getField("CREATOR");
         if ((f.getModifiers() & 8) == 0) {
-            throw new BadParcelableException("Parcelable protocol requires the CREATOR object to be static on class " + name);
+            throw new BadParcelableException(
+                    "Parcelable protocol requires the CREATOR object to be static on class "
+                            + name);
         }
         Class<?> creatorType = f.getType();
         if (!Parcelable.Creator.class.isAssignableFrom(creatorType)) {
-            throw new BadParcelableException("Parcelable protocol requires a Parcelable.Creator object called CREATOR on class " + name);
+            throw new BadParcelableException(
+                    "Parcelable protocol requires a Parcelable.Creator object called CREATOR on"
+                        + " class "
+                            + name);
         }
         Parcelable.Creator<T> creator2 = (Parcelable.Creator) f.get(null);
         if (creator2 == null) {
-            throw new BadParcelableException("Parcelable protocol requires a non-null Parcelable.Creator object called CREATOR on class " + name);
+            throw new BadParcelableException(
+                    "Parcelable protocol requires a non-null Parcelable.Creator object called"
+                        + " CREATOR on class "
+                            + name);
         }
         synchronized (sPairedCreators) {
             sPairedCreators.get(loader).put(name, Pair.create(creator2, parcelableClass2));
@@ -3225,7 +3405,12 @@ public final class Parcel {
             return null;
         }
         ensureWithinMemoryLimit(1, readInt);
-        T[] tArr = (T[]) ((Object[]) (cls == null ? new Parcelable[readInt] : Array.newInstance((Class<?>) cls, readInt)));
+        T[] tArr =
+                (T[])
+                        ((Object[])
+                                (cls == null
+                                        ? new Parcelable[readInt]
+                                        : Array.newInstance((Class<?>) cls, readInt)));
         for (int i = 0; i < readInt; i++) {
             tArr[i] = readParcelableInternal(classLoader, cls);
         }
@@ -3239,7 +3424,9 @@ public final class Parcel {
 
     public <T> T readSerializable(ClassLoader classLoader, Class<T> cls) {
         Objects.requireNonNull(cls);
-        return (T) readSerializableInternal(classLoader == null ? getClass().getClassLoader() : classLoader, cls);
+        return (T)
+                readSerializableInternal(
+                        classLoader == null ? getClass().getClassLoader() : classLoader, cls);
     }
 
     private <T> T readSerializableInternal(final ClassLoader classLoader, Class<T> cls) {
@@ -3251,27 +3438,52 @@ public final class Parcel {
             try {
                 Class<?> cls2 = Class.forName(readString, false, classLoader);
                 if (!cls.isAssignableFrom(cls2)) {
-                    throw new BadTypeParcelableException("Serializable object " + cls2.getName() + " is not a subclass of required class " + cls.getName() + " provided in the parameter");
+                    throw new BadTypeParcelableException(
+                            "Serializable object "
+                                    + cls2.getName()
+                                    + " is not a subclass of required class "
+                                    + cls.getName()
+                                    + " provided in the parameter");
                 }
             } catch (IOException e) {
-                throw new BadParcelableException("Parcelable encountered IOException reading a Serializable object (name = " + readString + NavigationBarInflaterView.KEY_CODE_END, e);
+                throw new BadParcelableException(
+                        "Parcelable encountered IOException reading a Serializable object (name = "
+                                + readString
+                                + NavigationBarInflaterView.KEY_CODE_END,
+                        e);
             } catch (ClassNotFoundException e2) {
-                throw new BadParcelableException("Parcelable encountered ClassNotFoundException reading a Serializable object (name = " + readString + NavigationBarInflaterView.KEY_CODE_END, e2);
+                throw new BadParcelableException(
+                        "Parcelable encountered ClassNotFoundException reading a Serializable"
+                            + " object (name = "
+                                + readString
+                                + NavigationBarInflaterView.KEY_CODE_END,
+                        e2);
             }
         }
-        T t = (T) new ObjectInputStream(new ByteArrayInputStream(createByteArray())) { // from class: android.os.Parcel.2
-            @Override // java.io.ObjectInputStream
-            protected Class<?> resolveClass(ObjectStreamClass osClass) throws IOException, ClassNotFoundException {
-                if (classLoader != null) {
-                    Class<?> c = Class.forName(osClass.getName(), false, classLoader);
-                    return (Class) Objects.requireNonNull(c);
-                }
-                Class<?> c2 = super.resolveClass(osClass);
-                return c2;
-            }
-        }.readObject();
+        T t =
+                (T)
+                        new ObjectInputStream(
+                                new ByteArrayInputStream(
+                                        createByteArray())) { // from class: android.os.Parcel.2
+                            @Override // java.io.ObjectInputStream
+                            protected Class<?> resolveClass(ObjectStreamClass osClass)
+                                    throws IOException, ClassNotFoundException {
+                                if (classLoader != null) {
+                                    Class<?> c =
+                                            Class.forName(osClass.getName(), false, classLoader);
+                                    return (Class) Objects.requireNonNull(c);
+                                }
+                                Class<?> c2 = super.resolveClass(osClass);
+                                return c2;
+                            }
+                        }.readObject();
         if (cls != null && classLoader == null && !cls.isAssignableFrom(t.getClass())) {
-            throw new BadTypeParcelableException("Serializable object " + t.getClass().getName() + " is not a subclass of required class " + cls.getName() + " provided in the parameter");
+            throw new BadTypeParcelableException(
+                    "Serializable object "
+                            + t.getClass().getName()
+                            + " is not a subclass of required class "
+                            + cls.getName()
+                            + " provided in the parameter");
         }
         return t;
     }
@@ -3340,7 +3552,8 @@ public final class Parcel {
         readMapInternal(outVal, n, loader, null, null);
     }
 
-    private <K, V> HashMap<K, V> readHashMapInternal(ClassLoader loader, Class<? extends K> clazzKey, Class<? extends V> clazzValue) {
+    private <K, V> HashMap<K, V> readHashMapInternal(
+            ClassLoader loader, Class<? extends K> clazzKey, Class<? extends V> clazzValue) {
         int n = readInt();
         if (n < 0) {
             return null;
@@ -3350,23 +3563,40 @@ public final class Parcel {
         return map;
     }
 
-    private <K, V> void readMapInternal(Map<? super K, ? super V> outVal, ClassLoader loader, Class<K> clazzKey, Class<V> clazzValue) {
+    private <K, V> void readMapInternal(
+            Map<? super K, ? super V> outVal,
+            ClassLoader loader,
+            Class<K> clazzKey,
+            Class<V> clazzValue) {
         int n = readInt();
         readMapInternal(outVal, n, loader, clazzKey, clazzValue);
     }
 
-    private <K, V> void readMapInternal(Map<? super K, ? super V> map, int i, ClassLoader classLoader, Class<K> cls, Class<V> cls2) {
+    private <K, V> void readMapInternal(
+            Map<? super K, ? super V> map,
+            int i,
+            ClassLoader classLoader,
+            Class<K> cls,
+            Class<V> cls2) {
         while (i > 0) {
-            map.put((Object) readValue(classLoader, cls, new Class[0]), (Object) readValue(classLoader, cls2, new Class[0]));
+            map.put(
+                    (Object) readValue(classLoader, cls, new Class[0]),
+                    (Object) readValue(classLoader, cls2, new Class[0]));
             i--;
         }
     }
 
-    private void readArrayMapInternal(ArrayMap<? super String, Object> outVal, int size, ClassLoader loader) {
+    private void readArrayMapInternal(
+            ArrayMap<? super String, Object> outVal, int size, ClassLoader loader) {
         readArrayMap(outVal, size, true, false, loader);
     }
 
-    int readArrayMap(ArrayMap<? super String, Object> map, int size, boolean sorted, boolean lazy, ClassLoader loader) {
+    int readArrayMap(
+            ArrayMap<? super String, Object> map,
+            int size,
+            boolean sorted,
+            boolean lazy,
+            ClassLoader loader) {
         int lazyValues = 0;
         while (size > 0) {
             String key = readString();
@@ -3412,7 +3642,8 @@ public final class Parcel {
         readListInternal(outVal, n, loader, null);
     }
 
-    private <T> void readListInternal(List<? super T> list, int i, ClassLoader classLoader, Class<T> cls) {
+    private <T> void readListInternal(
+            List<? super T> list, int i, ClassLoader classLoader, Class<T> cls) {
         while (i > 0) {
             list.add((Object) readValue(classLoader, cls, new Class[0]));
             i--;
@@ -3442,7 +3673,12 @@ public final class Parcel {
         if (readInt < 0) {
             return null;
         }
-        T[] tArr = (T[]) ((Object[]) (cls == null ? new Object[readInt] : Array.newInstance((Class<?>) cls, readInt)));
+        T[] tArr =
+                (T[])
+                        ((Object[])
+                                (cls == null
+                                        ? new Object[readInt]
+                                        : Array.newInstance((Class<?>) cls, readInt)));
         for (int i = 0; i < readInt; i++) {
             tArr[i] = readValue(classLoader, cls, new Class[0]);
         }
@@ -3458,7 +3694,8 @@ public final class Parcel {
         }
     }
 
-    private <T> SparseArray<T> readSparseArrayInternal(ClassLoader classLoader, Class<? extends T> cls) {
+    private <T> SparseArray<T> readSparseArrayInternal(
+            ClassLoader classLoader, Class<? extends T> cls) {
         int readInt = readInt();
         if (readInt < 0) {
             return null;

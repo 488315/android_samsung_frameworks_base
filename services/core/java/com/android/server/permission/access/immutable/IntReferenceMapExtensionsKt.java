@@ -8,7 +8,8 @@ public abstract class IntReferenceMapExtensionsKt {
         mutableIntReferenceMap.array.size();
     }
 
-    public static final void set(MutableIntReferenceMap mutableIntReferenceMap, int i, Immutable immutable) {
+    public static final void set(
+            MutableIntReferenceMap mutableIntReferenceMap, int i, Immutable immutable) {
         mutableIntReferenceMap.array.put(i, new MutableReference(immutable, immutable));
     }
 }

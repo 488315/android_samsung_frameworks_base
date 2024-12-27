@@ -7,11 +7,13 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface IAudioConfigChangedCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.companion.virtual.audio.IAudioConfigChangedCallback";
+    public static final String DESCRIPTOR =
+            "android.companion.virtual.audio.IAudioConfigChangedCallback";
 
     void onPlaybackConfigChanged(List<AudioPlaybackConfiguration> list) throws RemoteException;
 
@@ -19,12 +21,12 @@ public interface IAudioConfigChangedCallback extends IInterface {
 
     public static class Default implements IAudioConfigChangedCallback {
         @Override // android.companion.virtual.audio.IAudioConfigChangedCallback
-        public void onPlaybackConfigChanged(List<AudioPlaybackConfiguration> configs) throws RemoteException {
-        }
+        public void onPlaybackConfigChanged(List<AudioPlaybackConfiguration> configs)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.audio.IAudioConfigChangedCallback
-        public void onRecordingConfigChanged(List<AudioRecordingConfiguration> configs) throws RemoteException {
-        }
+        public void onRecordingConfigChanged(List<AudioRecordingConfiguration> configs)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -32,7 +34,7 @@ public interface IAudioConfigChangedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAudioConfigChangedCallback {
+    public abstract static class Stub extends Binder implements IAudioConfigChangedCallback {
         static final int TRANSACTION_onPlaybackConfigChanged = 1;
         static final int TRANSACTION_onRecordingConfigChanged = 2;
 
@@ -73,7 +75,8 @@ public interface IAudioConfigChangedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAudioConfigChangedCallback.DESCRIPTOR);
             }
@@ -83,12 +86,14 @@ public interface IAudioConfigChangedCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<AudioPlaybackConfiguration> _arg0 = data.createTypedArrayList(AudioPlaybackConfiguration.CREATOR);
+                    List<AudioPlaybackConfiguration> _arg0 =
+                            data.createTypedArrayList(AudioPlaybackConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     onPlaybackConfigChanged(_arg0);
                     return true;
                 case 2:
-                    List<AudioRecordingConfiguration> _arg02 = data.createTypedArrayList(AudioRecordingConfiguration.CREATOR);
+                    List<AudioRecordingConfiguration> _arg02 =
+                            data.createTypedArrayList(AudioRecordingConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     onRecordingConfigChanged(_arg02);
                     return true;
@@ -114,7 +119,8 @@ public interface IAudioConfigChangedCallback extends IInterface {
             }
 
             @Override // android.companion.virtual.audio.IAudioConfigChangedCallback
-            public void onPlaybackConfigChanged(List<AudioPlaybackConfiguration> configs) throws RemoteException {
+            public void onPlaybackConfigChanged(List<AudioPlaybackConfiguration> configs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAudioConfigChangedCallback.DESCRIPTOR);
@@ -126,7 +132,8 @@ public interface IAudioConfigChangedCallback extends IInterface {
             }
 
             @Override // android.companion.virtual.audio.IAudioConfigChangedCallback
-            public void onRecordingConfigChanged(List<AudioRecordingConfiguration> configs) throws RemoteException {
+            public void onRecordingConfigChanged(List<AudioRecordingConfiguration> configs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAudioConfigChangedCallback.DESCRIPTOR);

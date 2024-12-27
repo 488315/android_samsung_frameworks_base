@@ -14,32 +14,45 @@ public interface ISkpmService extends IInterface {
 
     int SkpmReadInjectedKeyUID(byte b, byte b2, String str, byte[] bArr) throws RemoteException;
 
-    int SkpmServiceCreateGetKeySession(byte b, String str, byte[] bArr, byte b2) throws RemoteException;
+    int SkpmServiceCreateGetKeySession(byte b, String str, byte[] bArr, byte b2)
+            throws RemoteException;
 
     int SkpmServiceInjectedKeyVerification(byte b, byte b2, String str) throws RemoteException;
 
-    int SkpmServiceKeyInjection(byte b, byte b2, String str, byte[] bArr, byte b3) throws RemoteException;
+    int SkpmServiceKeyInjection(byte b, byte b2, String str, byte[] bArr, byte b3)
+            throws RemoteException;
 
     int SkpmServiceReleaseGetKeySession() throws RemoteException;
 
     public static class Default implements ISkpmService {
         @Override // com.skms.android.agent.ISkpmService
-        public int SkpmServiceKeyInjection(byte injection_type, byte key_type, String key_name, byte[] key_data, byte encoding_type) throws RemoteException {
+        public int SkpmServiceKeyInjection(
+                byte injection_type,
+                byte key_type,
+                String key_name,
+                byte[] key_data,
+                byte encoding_type)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.skms.android.agent.ISkpmService
-        public int SkpmServiceInjectedKeyVerification(byte injection_type, byte key_type, String key_name) throws RemoteException {
+        public int SkpmServiceInjectedKeyVerification(
+                byte injection_type, byte key_type, String key_name) throws RemoteException {
             return 0;
         }
 
         @Override // com.skms.android.agent.ISkpmService
-        public int SkpmReadInjectedKeyUID(byte injection_type, byte key_type, String key_name, byte[] uid) throws RemoteException {
+        public int SkpmReadInjectedKeyUID(
+                byte injection_type, byte key_type, String key_name, byte[] uid)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.skms.android.agent.ISkpmService
-        public int SkpmServiceCreateGetKeySession(byte key_type, String key_name, byte[] key_blob, byte encoding_type) throws RemoteException {
+        public int SkpmServiceCreateGetKeySession(
+                byte key_type, String key_name, byte[] key_blob, byte encoding_type)
+                throws RemoteException {
             return 0;
         }
 
@@ -49,7 +62,8 @@ public interface ISkpmService extends IInterface {
         }
 
         @Override // com.skms.android.agent.ISkpmService
-        public int SkpmChangeOtaServer(String server_address, String server_port) throws RemoteException {
+        public int SkpmChangeOtaServer(String server_address, String server_port)
+                throws RemoteException {
             return 0;
         }
 
@@ -59,7 +73,7 @@ public interface ISkpmService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISkpmService {
+    public abstract static class Stub extends Binder implements ISkpmService {
         static final int TRANSACTION_SkpmChangeOtaServer = 6;
         static final int TRANSACTION_SkpmReadInjectedKeyUID = 3;
         static final int TRANSACTION_SkpmServiceCreateGetKeySession = 4;
@@ -112,7 +126,8 @@ public interface ISkpmService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISkpmService.DESCRIPTOR);
             }
@@ -198,7 +213,13 @@ public interface ISkpmService extends IInterface {
             }
 
             @Override // com.skms.android.agent.ISkpmService
-            public int SkpmServiceKeyInjection(byte injection_type, byte key_type, String key_name, byte[] key_data, byte encoding_type) throws RemoteException {
+            public int SkpmServiceKeyInjection(
+                    byte injection_type,
+                    byte key_type,
+                    String key_name,
+                    byte[] key_data,
+                    byte encoding_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -219,7 +240,8 @@ public interface ISkpmService extends IInterface {
             }
 
             @Override // com.skms.android.agent.ISkpmService
-            public int SkpmServiceInjectedKeyVerification(byte injection_type, byte key_type, String key_name) throws RemoteException {
+            public int SkpmServiceInjectedKeyVerification(
+                    byte injection_type, byte key_type, String key_name) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -238,7 +260,9 @@ public interface ISkpmService extends IInterface {
             }
 
             @Override // com.skms.android.agent.ISkpmService
-            public int SkpmReadInjectedKeyUID(byte injection_type, byte key_type, String key_name, byte[] uid) throws RemoteException {
+            public int SkpmReadInjectedKeyUID(
+                    byte injection_type, byte key_type, String key_name, byte[] uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -259,7 +283,9 @@ public interface ISkpmService extends IInterface {
             }
 
             @Override // com.skms.android.agent.ISkpmService
-            public int SkpmServiceCreateGetKeySession(byte key_type, String key_name, byte[] key_blob, byte encoding_type) throws RemoteException {
+            public int SkpmServiceCreateGetKeySession(
+                    byte key_type, String key_name, byte[] key_blob, byte encoding_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -296,7 +322,8 @@ public interface ISkpmService extends IInterface {
             }
 
             @Override // com.skms.android.agent.ISkpmService
-            public int SkpmChangeOtaServer(String server_address, String server_port) throws RemoteException {
+            public int SkpmChangeOtaServer(String server_address, String server_port)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

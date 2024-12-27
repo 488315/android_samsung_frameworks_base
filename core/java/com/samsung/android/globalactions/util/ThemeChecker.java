@@ -19,7 +19,8 @@ public class ThemeChecker {
         BLACK
     }
 
-    public ThemeChecker(Context context, ScreenCaptureUtil screenCaptureUtil, LogWrapper logWrapper) {
+    public ThemeChecker(
+            Context context, ScreenCaptureUtil screenCaptureUtil, LogWrapper logWrapper) {
         this.mContext = context;
         this.mScreenCaptureUtil = screenCaptureUtil;
         this.mLogWrapper = logWrapper;
@@ -31,7 +32,14 @@ public class ThemeChecker {
             Rect targetRegion = new Rect(0, 0, currentBG.getWidth(), currentBG.getHeight());
             float[] colorHSV = getColorHSV(currentBG, targetRegion);
             if (colorHSV != null) {
-                this.mLogWrapper.v(TAG, "Whole Area Hue=" + colorHSV[0] + ", Saturation=" + colorHSV[1] + ", Brightness=" + colorHSV[2]);
+                this.mLogWrapper.v(
+                        TAG,
+                        "Whole Area Hue="
+                                + colorHSV[0]
+                                + ", Saturation="
+                                + colorHSV[1]
+                                + ", Brightness="
+                                + colorHSV[2]);
                 if (colorHSV[1] < 0.3f && colorHSV[2] >= 0.88f) {
                     this.mState = State.WHITE;
                 } else {

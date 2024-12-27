@@ -12,11 +12,13 @@ import android.view.RemotableViewMethod;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 import android.widget.flags.Flags;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
 /* loaded from: classes5.dex */
-public class BigPictureNotificationImageView extends ImageView implements NotificationDrawableConsumer {
+public class BigPictureNotificationImageView extends ImageView
+        implements NotificationDrawableConsumer {
     private static final String TAG = BigPictureNotificationImageView.class.getSimpleName();
     private NotificationIconManager mIconManager;
     private final int mMaximumDrawableHeight;
@@ -34,11 +36,22 @@ public class BigPictureNotificationImageView extends ImageView implements Notifi
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public BigPictureNotificationImageView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public BigPictureNotificationImageView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         boolean isLowRam = ActivityManager.isLowRamDeviceStatic();
-        this.mMaximumDrawableWidth = context.getResources().getDimensionPixelSize(isLowRam ? R.dimen.notification_big_picture_max_width_low_ram : R.dimen.notification_big_picture_max_width);
-        this.mMaximumDrawableHeight = context.getResources().getDimensionPixelSize(isLowRam ? R.dimen.notification_big_picture_max_height_low_ram : R.dimen.notification_big_picture_max_height);
+        this.mMaximumDrawableWidth =
+                context.getResources()
+                        .getDimensionPixelSize(
+                                isLowRam
+                                        ? R.dimen.notification_big_picture_max_width_low_ram
+                                        : R.dimen.notification_big_picture_max_width);
+        this.mMaximumDrawableHeight =
+                context.getResources()
+                        .getDimensionPixelSize(
+                                isLowRam
+                                        ? R.dimen.notification_big_picture_max_height_low_ram
+                                        : R.dimen.notification_big_picture_max_height);
     }
 
     public void setIconManager(NotificationIconManager iconManager) {
@@ -54,7 +67,8 @@ public class BigPictureNotificationImageView extends ImageView implements Notifi
     @Override // android.widget.ImageView
     public Runnable setImageURIAsync(Uri uri) {
         final Drawable drawable = loadImage(uri);
-        return new Runnable() { // from class: com.android.internal.widget.BigPictureNotificationImageView$$ExternalSyntheticLambda0
+        return new Runnable() { // from class:
+                                // com.android.internal.widget.BigPictureNotificationImageView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
                 BigPictureNotificationImageView.this.lambda$setImageURIAsync$0(drawable);
@@ -78,7 +92,8 @@ public class BigPictureNotificationImageView extends ImageView implements Notifi
             return this.mIconManager.updateIcon(this, icon);
         }
         final Drawable drawable = loadImage(icon);
-        return new Runnable() { // from class: com.android.internal.widget.BigPictureNotificationImageView$$ExternalSyntheticLambda1
+        return new Runnable() { // from class:
+                                // com.android.internal.widget.BigPictureNotificationImageView$$ExternalSyntheticLambda1
             @Override // java.lang.Runnable
             public final void run() {
                 BigPictureNotificationImageView.this.lambda$setImageIconAsync$1(drawable);
@@ -107,7 +122,8 @@ public class BigPictureNotificationImageView extends ImageView implements Notifi
         if (uri == null) {
             return null;
         }
-        return LocalImageResolver.resolveImage(uri, this.mContext, this.mMaximumDrawableWidth, this.mMaximumDrawableHeight);
+        return LocalImageResolver.resolveImage(
+                uri, this.mContext, this.mMaximumDrawableWidth, this.mMaximumDrawableHeight);
     }
 
     private Drawable loadImage(Icon icon) {
@@ -116,9 +132,19 @@ public class BigPictureNotificationImageView extends ImageView implements Notifi
             return null;
         }
         if ((icon.getType() == 1 || icon.getType() == 5) && icon.getBitmap() != null) {
-            drawable = LocalImageResolver.resolveImage(icon, this.mContext, icon.getBitmap().getWidth(), icon.getBitmap().getHeight());
+            drawable =
+                    LocalImageResolver.resolveImage(
+                            icon,
+                            this.mContext,
+                            icon.getBitmap().getWidth(),
+                            icon.getBitmap().getHeight());
         } else {
-            drawable = LocalImageResolver.resolveImage(icon, this.mContext, this.mMaximumDrawableWidth, this.mMaximumDrawableHeight);
+            drawable =
+                    LocalImageResolver.resolveImage(
+                            icon,
+                            this.mContext,
+                            this.mMaximumDrawableWidth,
+                            this.mMaximumDrawableHeight);
         }
         if (drawable != null) {
             return drawable;

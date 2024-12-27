@@ -2,6 +2,7 @@ package com.android.server.cocktailbar.utils;
 
 import android.icu.text.SimpleDateFormat;
 import android.util.LruCache;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -38,7 +39,8 @@ public final class ServiceImplCommandLogger {
                 }
                 StringBuffer stringBuffer = new StringBuffer();
                 try {
-                    stringBuffer.append(new SimpleDateFormat("MM-dd HH:mm:ss.SSS").format(new Date()));
+                    stringBuffer.append(
+                            new SimpleDateFormat("MM-dd HH:mm:ss.SSS").format(new Date()));
                 } catch (Exception e) {
                     e.printStackTrace();
                     stringBuffer.append(System.currentTimeMillis());

@@ -5,9 +5,10 @@ import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.util.ArraySet;
 import android.util.Pair;
+
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
-import com.android.server.power.PowerManagerService;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,12 +23,17 @@ public final class AmbientDisplaySuppressionController {
     public IStatusBarService mStatusBarService;
     public final Set mSuppressionTokens = Collections.synchronizedSet(new ArraySet());
 
-    public AmbientDisplaySuppressionController(PowerManagerService.AnonymousClass1 anonymousClass1) {
+    public AmbientDisplaySuppressionController(
+            PowerManagerService.AnonymousClass1 anonymousClass1) {
         this.mCallback = anonymousClass1;
     }
 
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "AmbientDisplaySuppressionController:", " ambientDisplaySuppressed=");
+        StringBuilder m$1 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                        printWriter,
+                        "AmbientDisplaySuppressionController:",
+                        " ambientDisplaySuppressed=");
         m$1.append(isSuppressed());
         printWriter.println(m$1.toString());
         printWriter.println(" mSuppressionTokens=" + this.mSuppressionTokens);
@@ -69,7 +75,16 @@ public final class AmbientDisplaySuppressionController {
             synchronized (PowerManagerService.this.mLock) {
                 PowerManagerService powerManagerService = PowerManagerService.this;
                 if (powerManagerService.mDreamsDisabledByAmbientModeSuppressionConfig) {
-                    if (!isSuppressed2 && powerManagerService.mIsPowered && powerManagerService.mDreamsSupportedConfig && powerManagerService.mDreamsEnabledSetting && ((powerManagerService.mDreamsActivateOnSleepSetting || (powerManagerService.mDreamsActivateOnDockSetting && powerManagerService.mDockState != 0)) && powerManagerService.isItBedTimeYetLocked((PowerGroup) powerManagerService.mPowerGroups.get(0)))) {
+                    if (!isSuppressed2
+                            && powerManagerService.mIsPowered
+                            && powerManagerService.mDreamsSupportedConfig
+                            && powerManagerService.mDreamsEnabledSetting
+                            && ((powerManagerService.mDreamsActivateOnSleepSetting
+                                            || (powerManagerService.mDreamsActivateOnDockSetting
+                                                    && powerManagerService.mDockState != 0))
+                                    && powerManagerService.isItBedTimeYetLocked(
+                                            (PowerGroup)
+                                                    powerManagerService.mPowerGroups.get(0)))) {
                         powerManagerService.napInternal(1000, SystemClock.uptimeMillis(), true);
                     } else if (isSuppressed2) {
                         powerManagerService.mDirty |= 32;
@@ -83,7 +98,9 @@ public final class AmbientDisplaySuppressionController {
                 try {
                     synchronized (this) {
                         if (this.mStatusBarService == null) {
-                            this.mStatusBarService = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
+                            this.mStatusBarService =
+                                    IStatusBarService.Stub.asInterface(
+                                            ServiceManager.getService("statusbar"));
                         }
                         iStatusBarService = this.mStatusBarService;
                     }
@@ -94,7 +111,8 @@ public final class AmbientDisplaySuppressionController {
                 }
             }
         } catch (RemoteException e) {
-            android.util.Slog.e("AmbientDisplaySuppressionController", "Failed to suppress ambient display", e);
+            android.util.Slog.e(
+                    "AmbientDisplaySuppressionController", "Failed to suppress ambient display", e);
         }
     }
 }

@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class MQDescriptor<T, Flavor> implements Parcelable {
-    public static final Parcelable.Creator<MQDescriptor> CREATOR = new Parcelable.Creator<MQDescriptor>() { // from class: android.hardware.common.fmq.MQDescriptor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MQDescriptor createFromParcel(Parcel _aidl_source) {
-            MQDescriptor _aidl_out = new MQDescriptor();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<MQDescriptor> CREATOR =
+            new Parcelable.Creator<
+                    MQDescriptor>() { // from class: android.hardware.common.fmq.MQDescriptor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MQDescriptor createFromParcel(Parcel _aidl_source) {
+                    MQDescriptor _aidl_out = new MQDescriptor();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MQDescriptor[] newArray(int _aidl_size) {
-            return new MQDescriptor[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MQDescriptor[] newArray(int _aidl_size) {
+                    return new MQDescriptor[_aidl_size];
+                }
+            };
     public GrantorDescriptor[] grantors;
     public NativeHandle handle;
     public int quantum = 0;
@@ -60,7 +62,8 @@ public class MQDescriptor<T, Flavor> implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.grantors = (GrantorDescriptor[]) _aidl_parcel.createTypedArray(GrantorDescriptor.CREATOR);
+            this.grantors =
+                    (GrantorDescriptor[]) _aidl_parcel.createTypedArray(GrantorDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

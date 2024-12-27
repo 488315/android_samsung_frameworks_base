@@ -32,6 +32,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
+
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
@@ -52,6 +53,7 @@ import com.android.server.enterprise.storage.SettingNotFoundException;
 import com.android.server.enterprise.utils.KpuHelper;
 import com.android.server.enterprise.utils.Utils;
 import com.android.server.wm.ActivityTaskManagerInternal;
+
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.feature.SemFloatingFeature;
@@ -62,6 +64,7 @@ import com.samsung.android.knox.kiosk.IKioskMode;
 import com.samsung.android.knox.kiosk.KioskMode;
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.multiwindow.MultiWindowManager;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -75,7 +78,8 @@ import java.util.Set;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class KioskModeService extends IKioskMode.Stub implements EnterpriseServiceCallback, KeyCodeRestrictionCallback {
+public final class KioskModeService extends IKioskMode.Stub
+        implements EnterpriseServiceCallback, KeyCodeRestrictionCallback {
     public static final boolean SUPPORT_EDGE_MUM;
     public static Object mLock;
     public final ApplicationPolicy mAppPolicy;
@@ -92,18 +96,25 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     public final Map mPolicyDefinitions;
     public final AnonymousClass2 mReceiver;
     public UserManager mUserManager;
-    public static final String ACTION_REFRESH_HWKEY_INTERNAL = KioskMode.ACTION_REFRESH_HWKEY_INTERNAL;
-    public static final String[] TASKMANAGER_PKGS = {"com.sec.android.app.controlpanel", "com.sec.android.app.taskmanager"};
+    public static final String ACTION_REFRESH_HWKEY_INTERNAL =
+            KioskMode.ACTION_REFRESH_HWKEY_INTERNAL;
+    public static final String[] TASKMANAGER_PKGS = {
+        "com.sec.android.app.controlpanel", "com.sec.android.app.taskmanager"
+    };
     public static volatile Map packageRemoveIntentReceiver = null;
     public static volatile Map terminateIntentReceiver = null;
     public static boolean mProcessing = false;
     public final IBinder mToken = new Binder();
     public final String mKey = "key_knoxcustommanagerservice_kiosk";
-    public final AnonymousClass1 blocker = new SemDesktopModeManager.DesktopModeBlocker() { // from class: com.android.server.enterprise.kioskmode.KioskModeService.1
-        public final String onBlocked() {
-            return KioskModeService.this.mContext.getString(R.string.heavy_weight_switcher_text);
-        }
-    };
+    public final AnonymousClass1 blocker =
+            new SemDesktopModeManager
+                    .DesktopModeBlocker() { // from class:
+                                            // com.android.server.enterprise.kioskmode.KioskModeService.1
+                public final String onBlocked() {
+                    return KioskModeService.this.mContext.getString(
+                            R.string.heavy_weight_switcher_text);
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.kioskmode.KioskModeService$2, reason: invalid class name */
@@ -120,11 +131,16 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         public final void onReceive(Context context, Intent intent) {
             switch (this.$r8$classId) {
                 case 0:
-                    if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL".equals(intent.getAction())) {
-                        int intExtra = intent.getIntExtra("com.samsung.android.knox.intent.extra.USER_ID_INTERNAL", 0);
+                    if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"
+                            .equals(intent.getAction())) {
+                        int intExtra =
+                                intent.getIntExtra(
+                                        "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL",
+                                        0);
                         KioskModeService kioskModeService = this.this$0;
                         kioskModeService.applyHideSystemBarSystemUI(intExtra);
-                        kioskModeService.setKioskModeEnabledSystemUI(intExtra, kioskModeService.isKioskModeEnabledAsUser(intExtra));
+                        kioskModeService.setKioskModeEnabledSystemUI(
+                                intExtra, kioskModeService.isKioskModeEnabledAsUser(intExtra));
                         break;
                     }
                     break;
@@ -132,21 +148,34 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                     String schemeSpecificPart = intent.getData().getSchemeSpecificPart();
                     int intExtra2 = intent.getIntExtra("android.intent.extra.user_handle", -10000);
                     if (intExtra2 != -10000) {
-                        String kioskHomePackageAsUser = this.this$0.getKioskHomePackageAsUser(intExtra2);
-                        if (kioskHomePackageAsUser != null && kioskHomePackageAsUser.equals(schemeSpecificPart)) {
+                        String kioskHomePackageAsUser =
+                                this.this$0.getKioskHomePackageAsUser(intExtra2);
+                        if (kioskHomePackageAsUser != null
+                                && kioskHomePackageAsUser.equals(schemeSpecificPart)) {
                             try {
-                                if (AppGlobals.getPackageManager().getApplicationInfo(kioskHomePackageAsUser, 128L, intExtra2) == null) {
-                                    Log.e("KioskModeService", kioskHomePackageAsUser + " is not installed at userId : " + intExtra2);
+                                if (AppGlobals.getPackageManager()
+                                                .getApplicationInfo(
+                                                        kioskHomePackageAsUser, 128L, intExtra2)
+                                        == null) {
+                                    Log.e(
+                                            "KioskModeService",
+                                            kioskHomePackageAsUser
+                                                    + " is not installed at userId : "
+                                                    + intExtra2);
                                     this.this$0.forceTerminateKiosk(intExtra2);
                                     break;
                                 }
                             } catch (Exception unused) {
                             }
-                            if (!this.this$0.mAppPolicy.getApplicationStateEnabledAsUser(kioskHomePackageAsUser, false, intExtra2)) {
-                                Log.e("KioskModeService", kioskHomePackageAsUser.concat(" is disabled by admin"));
+                            if (!this.this$0.mAppPolicy.getApplicationStateEnabledAsUser(
+                                    kioskHomePackageAsUser, false, intExtra2)) {
+                                Log.e(
+                                        "KioskModeService",
+                                        kioskHomePackageAsUser.concat(" is disabled by admin"));
                                 this.this$0.forceTerminateKiosk(intExtra2);
                                 break;
-                            } else if (!kioskHomePackageAsUser.equals(this.this$0.getDefaultHomeScreen(intExtra2))) {
+                            } else if (!kioskHomePackageAsUser.equals(
+                                    this.this$0.getDefaultHomeScreen(intExtra2))) {
                                 this.this$0.forceTerminateKiosk(intExtra2);
                                 break;
                             }
@@ -162,27 +191,41 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                         Log.e("KioskModeService", "can't get user id");
                     }
                     if (this.this$0.isKioskModeEnabledAsUser(intExtra3)) {
-                        String kioskHomePackageAsUser2 = this.this$0.getKioskHomePackageAsUser(intExtra3);
+                        String kioskHomePackageAsUser2 =
+                                this.this$0.getKioskHomePackageAsUser(intExtra3);
                         try {
-                            if (AppGlobals.getPackageManager().getApplicationInfo(kioskHomePackageAsUser2, 128L, intExtra3) == null) {
-                                Log.e("KioskModeService", kioskHomePackageAsUser2 + " is not installed at userId : " + intExtra3);
+                            if (AppGlobals.getPackageManager()
+                                            .getApplicationInfo(
+                                                    kioskHomePackageAsUser2, 128L, intExtra3)
+                                    == null) {
+                                Log.e(
+                                        "KioskModeService",
+                                        kioskHomePackageAsUser2
+                                                + " is not installed at userId : "
+                                                + intExtra3);
                                 this.this$0.forceTerminateKiosk(intExtra3);
                                 break;
                             }
                         } catch (Exception unused2) {
                         }
-                        if (!this.this$0.mAppPolicy.getApplicationStateEnabledAsUser(kioskHomePackageAsUser2, false, intExtra3)) {
-                            Log.e("KioskModeService", kioskHomePackageAsUser2 + " is disabled by admin");
+                        if (!this.this$0.mAppPolicy.getApplicationStateEnabledAsUser(
+                                kioskHomePackageAsUser2, false, intExtra3)) {
+                            Log.e(
+                                    "KioskModeService",
+                                    kioskHomePackageAsUser2 + " is disabled by admin");
                             this.this$0.forceTerminateKiosk(intExtra3);
                             break;
-                        } else if (kioskHomePackageAsUser2 != null && !kioskHomePackageAsUser2.equals(this.this$0.getDefaultHomeScreen(intExtra3))) {
+                        } else if (kioskHomePackageAsUser2 != null
+                                && !kioskHomePackageAsUser2.equals(
+                                        this.this$0.getDefaultHomeScreen(intExtra3))) {
                             this.this$0.forceTerminateKiosk(intExtra3);
                             break;
                         }
                     }
                     break;
                 default:
-                    this.this$0.applyMultiWindowPolicy(intent.getIntExtra("android.intent.extra.user_handle", 0), false);
+                    this.this$0.applyMultiWindowPolicy(
+                            intent.getIntExtra("android.intent.extra.user_handle", 0), false);
                     break;
             }
         }
@@ -206,7 +249,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                         return;
                     }
                     KioskModeService.mProcessing = true;
-                    KioskModeService.this._disableKioskMode(new ContextInfo(message.getData().getInt("adminuid")), 2);
+                    KioskModeService.this._disableKioskMode(
+                            new ContextInfo(message.getData().getInt("adminuid")), 2);
                     KioskModeService.mProcessing = false;
                     return;
                 }
@@ -224,16 +268,24 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                         clearCallingIdentity = Binder.clearCallingIdentity();
                         i = contextInfo.mCallerUid;
                         Log.d("KioskModeService", " _enableKioskMode");
-                        if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_NFC_HW_KEYBOARD")) {
+                        if (SemFloatingFeature.getInstance()
+                                .getBoolean(
+                                        "SEC_FLOATING_FEATURE_COMMON_SUPPORT_NFC_HW_KEYBOARD")) {
                             Log.d("KioskModeService", " support HW keyboard ");
                             try {
-                                Configuration configuration = kioskModeService.mContext.getResources().getConfiguration();
-                                if (configuration != null && configuration.semMobileKeyboardCovered == 1) {
-                                    Log.e("KioskModeService", "Kiosk Mode - mobile keypad enabled::: return false");
+                                Configuration configuration =
+                                        kioskModeService.mContext.getResources().getConfiguration();
+                                if (configuration != null
+                                        && configuration.semMobileKeyboardCovered == 1) {
+                                    Log.e(
+                                            "KioskModeService",
+                                            "Kiosk Mode - mobile keypad enabled::: return false");
                                     kioskModeService.broadcastKioskResult(i, 1, -2000);
                                 }
                             } catch (Exception unused) {
-                                Log.d("KioskModeService", "_enableKioskMode :: NoSuchFieldException");
+                                Log.d(
+                                        "KioskModeService",
+                                        "_enableKioskMode :: NoSuchFieldException");
                             }
                         }
                     } finally {
@@ -242,19 +294,30 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                         Log.e("KioskModeService", "Kiosk Mode already enabled");
                         kioskModeService.broadcastKioskResult(i, 1, -1);
                     } else {
-                        String defaultHomeScreen = kioskModeService.getDefaultHomeScreen(callingOrCurrentUserId);
+                        String defaultHomeScreen =
+                                kioskModeService.getDefaultHomeScreen(callingOrCurrentUserId);
                         int initKioskMode = kioskModeService.initKioskMode(contextInfo, string);
                         Log.d("KioskModeService", "Kiosk  result   " + initKioskMode);
                         if (initKioskMode != 0) {
                             Log.e("KioskModeService", "Kiosk Mode App not validated");
                             kioskModeService.broadcastKioskResult(i, 1, initKioskMode);
-                        } else if (kioskModeService.setDefaultHomeScreen(callingOrCurrentUserId, defaultHomeScreen, string)) {
-                            Settings.System.putInt(kioskModeService.mContext.getContentResolver(), "toolbox_onoff", 0);
+                        } else if (kioskModeService.setDefaultHomeScreen(
+                                callingOrCurrentUserId, defaultHomeScreen, string)) {
+                            Settings.System.putInt(
+                                    kioskModeService.mContext.getContentResolver(),
+                                    "toolbox_onoff",
+                                    0);
                             kioskModeService.updateDB(i, string, defaultHomeScreen, true);
                             try {
-                                ((ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class)).clearHomeStack(0);
+                                ((ActivityTaskManagerInternal)
+                                                LocalServices.getService(
+                                                        ActivityTaskManagerInternal.class))
+                                        .clearHomeStack(0);
                             } catch (Exception e) {
-                                Log.w("KioskModeService", "Remote exception calling clearHomeStack", e);
+                                Log.w(
+                                        "KioskModeService",
+                                        "Remote exception calling clearHomeStack",
+                                        e);
                             }
                             kioskModeService.launchHomeActivity(callingOrCurrentUserId);
                             kioskModeService.registerPackageRemoveReceiver(callingOrCurrentUserId);
@@ -266,7 +329,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                                     break;
                                 }
                                 try {
-                                    ActivityManagerNative.getDefault().getRecentTasks(10, 0, callingOrCurrentUserId);
+                                    ActivityManagerNative.getDefault()
+                                            .getRecentTasks(10, 0, callingOrCurrentUserId);
                                 } catch (Exception e2) {
                                     e2.printStackTrace();
                                 }
@@ -275,22 +339,30 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                             KioskModeService.wipeRecentTasks(callingOrCurrentUserId);
                             kioskModeService.launchHomeActivity(callingOrCurrentUserId);
                             if (kioskModeService.mUserManager == null) {
-                                kioskModeService.mUserManager = (UserManager) kioskModeService.mContext.getSystemService("user");
+                                kioskModeService.mUserManager =
+                                        (UserManager)
+                                                kioskModeService.mContext.getSystemService("user");
                             }
                             List users = kioskModeService.mUserManager.getUsers();
                             if (users != null && !users.isEmpty()) {
                                 Iterator it = users.iterator();
                                 while (it.hasNext()) {
-                                    int identifier = ((UserInfo) it.next()).getUserHandle().getIdentifier();
+                                    int identifier =
+                                            ((UserInfo) it.next()).getUserHandle().getIdentifier();
                                     if (identifier != callingOrCurrentUserId) {
                                         KioskModeService.wipeRecentTasks(identifier);
                                     }
                                 }
                             }
                             try {
-                                IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.checkService("statusbar"));
+                                IStatusBarService asInterface =
+                                        IStatusBarService.Stub.asInterface(
+                                                ServiceManager.checkService("statusbar"));
                                 if (asInterface != null) {
-                                    asInterface.disable(33554432, kioskModeService.mToken, kioskModeService.mKey);
+                                    asInterface.disable(
+                                            33554432,
+                                            kioskModeService.mToken,
+                                            kioskModeService.mKey);
                                 }
                             } catch (Exception e3) {
                                 Log.e("KioskModeService", "Failed to disable Google assistant", e3);
@@ -300,16 +372,22 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                             Log.e("KioskModeService", "Cannot find HOME activity");
                             ApplicationPolicy applicationPolicy = kioskModeService.mAppPolicy;
                             if (applicationPolicy != null) {
-                                applicationPolicy.setApplicationUninstallationDisabledBySystem(i, string, false);
-                                kioskModeService.mAppPolicy.setApplicationInstallationDisabledBySystem(i, string, false);
-                                kioskModeService.mAppPolicy.removePackagesFromClearDataBlackList(contextInfo, new ArrayList(Arrays.asList(string)));
+                                applicationPolicy.setApplicationUninstallationDisabledBySystem(
+                                        i, string, false);
+                                kioskModeService.mAppPolicy
+                                        .setApplicationInstallationDisabledBySystem(
+                                                i, string, false);
+                                kioskModeService.mAppPolicy.removePackagesFromClearDataBlackList(
+                                        contextInfo, new ArrayList(Arrays.asList(string)));
                             }
                             kioskModeService.cleanUpKioskMode(contextInfo, string);
                             kioskModeService.broadcastKioskResult(i, 1, -2000);
                         }
                     }
                     Binder.restoreCallingIdentity(clearCallingIdentity);
-                    kioskModeService.setKioskModeEnabledSystemUI(callingOrCurrentUserId, kioskModeService.isKioskModeEnabledAsUser(callingOrCurrentUserId));
+                    kioskModeService.setKioskModeEnabledSystemUI(
+                            callingOrCurrentUserId,
+                            kioskModeService.isKioskModeEnabledAsUser(callingOrCurrentUserId));
                     KioskModeService.mProcessing = false;
                 }
                 KioskModeService.mProcessing = false;
@@ -321,8 +399,7 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     public final class KioskModeCache {
         public Map mBlockedHwKeys = null;
 
-        public KioskModeCache() {
-        }
+        public KioskModeCache() {}
 
         public final void updateCache() {
             boolean z = this.mBlockedHwKeys != null;
@@ -394,50 +471,70 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         this.mHandlerThread = handlerThread;
         handlerThread.start();
         this.mHandler = new KioskHandler(this.mHandlerThread.getLooper());
-        this.mAppPolicy = (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
+        this.mAppPolicy =
+                (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
         if (mLock == null) {
             mLock = new Object();
         }
         this.mUserManager = (UserManager) context.getSystemService("user");
         packageRemoveIntentReceiver = new HashMap();
         terminateIntentReceiver = new HashMap();
-        context.registerReceiver(anonymousClass2, new IntentFilter("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"), 2);
+        context.registerReceiver(
+                anonymousClass2,
+                new IntentFilter(
+                        "com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"),
+                2);
         this.mMultiWindowManager = new MultiWindowManager();
-        SemDesktopModeManager semDesktopModeManager = (SemDesktopModeManager) context.getSystemService("desktopmode");
+        SemDesktopModeManager semDesktopModeManager =
+                (SemDesktopModeManager) context.getSystemService("desktopmode");
         if (semDesktopModeManager != null) {
-            semDesktopModeManager.registerListener(new SemDesktopModeManager.DesktopModeListener() { // from class: com.android.server.enterprise.kioskmode.KioskModeService.3
-                public final void onDesktopModeStateChanged(SemDesktopModeState semDesktopModeState) {
-                    if (semDesktopModeState.state == 20 && semDesktopModeState.enabled == 3) {
-                        Log.d("KioskModeService", "listner - Dex Enabling");
-                        if (KioskModeService.this.isKioskModeEnabledAsUser(0)) {
-                            KioskModeService kioskModeService = KioskModeService.this;
-                            kioskModeService.getClass();
-                            long clearCallingIdentity = Binder.clearCallingIdentity();
-                            try {
-                                ((SemDesktopModeManager) kioskModeService.mContext.getApplicationContext().getSystemService("desktopmode")).registerBlocker(kioskModeService.blocker);
-                                Log.d("KioskModeService", "registerDexBlocker was registered");
-                            } catch (Exception unused) {
-                                Log.d("KioskModeService", "registerDexBlocker was failed");
+            semDesktopModeManager.registerListener(
+                    new SemDesktopModeManager
+                            .DesktopModeListener() { // from class:
+                                                     // com.android.server.enterprise.kioskmode.KioskModeService.3
+                        public final void onDesktopModeStateChanged(
+                                SemDesktopModeState semDesktopModeState) {
+                            if (semDesktopModeState.state == 20
+                                    && semDesktopModeState.enabled == 3) {
+                                Log.d("KioskModeService", "listner - Dex Enabling");
+                                if (KioskModeService.this.isKioskModeEnabledAsUser(0)) {
+                                    KioskModeService kioskModeService = KioskModeService.this;
+                                    kioskModeService.getClass();
+                                    long clearCallingIdentity = Binder.clearCallingIdentity();
+                                    try {
+                                        ((SemDesktopModeManager)
+                                                        kioskModeService
+                                                                .mContext
+                                                                .getApplicationContext()
+                                                                .getSystemService("desktopmode"))
+                                                .registerBlocker(kioskModeService.blocker);
+                                        Log.d(
+                                                "KioskModeService",
+                                                "registerDexBlocker was registered");
+                                    } catch (Exception unused) {
+                                        Log.d("KioskModeService", "registerDexBlocker was failed");
+                                    }
+                                    Binder.restoreCallingIdentity(clearCallingIdentity);
+                                }
                             }
-                            Binder.restoreCallingIdentity(clearCallingIdentity);
                         }
-                    }
-                }
-            });
+                    });
         }
-        this.mPolicyDefinitions = new HashMap() { // from class: com.android.server.enterprise.kioskmode.KioskModeService.4
-            {
-                put("systemBarEnabled", new PolicyDefinition(3, 0, "false"));
-                put("statusBarHidden", new PolicyDefinition(1, 0, "false"));
-                put("navigationBarHidden", new PolicyDefinition(2, 0, "false"));
-                String str = KioskModeService.ACTION_REFRESH_HWKEY_INTERNAL;
-                put("multiWindowEnabled", new PolicyDefinition(-1, 1, "true"));
-                put("taskManagerEnabled", new PolicyDefinition(-1, 1, "true"));
-                put("kioskModeAirCommandAllowed", new PolicyDefinition(-1, 1, "true"));
-                put("kioskModeAirViewAllowed", new PolicyDefinition(-1, 1, "true"));
-                put("edgeScreenBlockedFunctions", new PolicyDefinition(31, 0, "true"));
-            }
-        };
+        this.mPolicyDefinitions =
+                new HashMap() { // from class:
+                                // com.android.server.enterprise.kioskmode.KioskModeService.4
+                    {
+                        put("systemBarEnabled", new PolicyDefinition(3, 0, "false"));
+                        put("statusBarHidden", new PolicyDefinition(1, 0, "false"));
+                        put("navigationBarHidden", new PolicyDefinition(2, 0, "false"));
+                        String str = KioskModeService.ACTION_REFRESH_HWKEY_INTERNAL;
+                        put("multiWindowEnabled", new PolicyDefinition(-1, 1, "true"));
+                        put("taskManagerEnabled", new PolicyDefinition(-1, 1, "true"));
+                        put("kioskModeAirCommandAllowed", new PolicyDefinition(-1, 1, "true"));
+                        put("kioskModeAirViewAllowed", new PolicyDefinition(-1, 1, "true"));
+                        put("edgeScreenBlockedFunctions", new PolicyDefinition(31, 0, "true"));
+                    }
+                };
     }
 
     public static boolean wipeRecentTasks(int i) {
@@ -474,13 +571,21 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                 } else {
                     unregisterTerminationReceiver(callingOrCurrentUserId);
                     unregisterPackageRemoveReceiver(callingOrCurrentUserId);
-                    final String string = this.mEdmStorageProvider.getString(i2, 0, "KIOSKMODE", "kioskModeKioskPackage");
-                    String string2 = this.mEdmStorageProvider.getString(i2, 0, "KIOSKMODE", "kioskModeDefaultPackage");
+                    final String string =
+                            this.mEdmStorageProvider.getString(
+                                    i2, 0, "KIOSKMODE", "kioskModeKioskPackage");
+                    String string2 =
+                            this.mEdmStorageProvider.getString(
+                                    i2, 0, "KIOSKMODE", "kioskModeDefaultPackage");
                     updateDB(i2, null, null, false);
                     setDefaultHomeScreen(callingOrCurrentUserId, string, string2);
                     long clearCallingIdentity2 = Binder.clearCallingIdentity();
                     try {
-                        ((SemDesktopModeManager) this.mContext.getApplicationContext().getSystemService("desktopmode")).unregisterBlocker(this.blocker);
+                        ((SemDesktopModeManager)
+                                        this.mContext
+                                                .getApplicationContext()
+                                                .getSystemService("desktopmode"))
+                                .unregisterBlocker(this.blocker);
                         Log.d("KioskModeService", "registerDexBlocker was unregistered");
                     } catch (Exception unused) {
                         Log.d("KioskModeService", "unRegisterDexBlocker was failed");
@@ -488,12 +593,17 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                     Binder.restoreCallingIdentity(clearCallingIdentity2);
                     ApplicationPolicy applicationPolicy = this.mAppPolicy;
                     if (applicationPolicy != null) {
-                        applicationPolicy.setApplicationUninstallationDisabledBySystem(i2, string, false);
-                        this.mAppPolicy.setApplicationInstallationDisabledBySystem(i2, string, false);
-                        this.mAppPolicy.removePackagesFromClearDataBlackList(contextInfo, new ArrayList(Arrays.asList(string)));
+                        applicationPolicy.setApplicationUninstallationDisabledBySystem(
+                                i2, string, false);
+                        this.mAppPolicy.setApplicationInstallationDisabledBySystem(
+                                i2, string, false);
+                        this.mAppPolicy.removePackagesFromClearDataBlackList(
+                                contextInfo, new ArrayList(Arrays.asList(string)));
                     }
                     try {
-                        IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.checkService("statusbar"));
+                        IStatusBarService asInterface =
+                                IStatusBarService.Stub.asInterface(
+                                        ServiceManager.checkService("statusbar"));
                         if (asInterface != null) {
                             asInterface.disable(0, this.mToken, this.mKey);
                         }
@@ -501,20 +611,27 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                         Log.e("KioskModeService", "Failed to enable Google assistant", e);
                     }
                     if (z) {
-                        new Thread(new Runnable() { // from class: com.android.server.enterprise.kioskmode.KioskModeService.5
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                KioskModeService.this.cleanUpKioskMode(contextInfo, string);
-                                KioskModeService kioskModeService = KioskModeService.this;
-                                int i3 = callingOrCurrentUserId;
-                                kioskModeService.getClass();
-                                KioskModeService.wipeRecentTasks(i3);
-                                KioskModeService.this.launchHomeActivity(callingOrCurrentUserId);
-                                KioskModeService.this.broadcastKioskResult(i2, i, 0);
-                                Binder.restoreCallingIdentity(clearCallingIdentity);
-                                KioskModeService.mProcessing = false;
-                            }
-                        }).start();
+                        new Thread(
+                                        new Runnable() { // from class:
+                                                         // com.android.server.enterprise.kioskmode.KioskModeService.5
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                KioskModeService.this.cleanUpKioskMode(
+                                                        contextInfo, string);
+                                                KioskModeService kioskModeService =
+                                                        KioskModeService.this;
+                                                int i3 = callingOrCurrentUserId;
+                                                kioskModeService.getClass();
+                                                KioskModeService.wipeRecentTasks(i3);
+                                                KioskModeService.this.launchHomeActivity(
+                                                        callingOrCurrentUserId);
+                                                KioskModeService.this.broadcastKioskResult(
+                                                        i2, i, 0);
+                                                Binder.restoreCallingIdentity(clearCallingIdentity);
+                                                KioskModeService.mProcessing = false;
+                                            }
+                                        })
+                                .start();
                         return;
                     }
                     cleanUpKioskMode(contextInfo, string);
@@ -523,7 +640,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                     broadcastKioskResult(i2, i, 0);
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
-                setKioskModeEnabledSystemUI(callingOrCurrentUserId, isKioskModeEnabledAsUser(callingOrCurrentUserId));
+                setKioskModeEnabledSystemUI(
+                        callingOrCurrentUserId, isKioskModeEnabledAsUser(callingOrCurrentUserId));
                 mProcessing = false;
             } catch (Throwable th) {
                 throw th;
@@ -533,64 +651,130 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
 
     public final boolean allowAirCommandMode(ContextInfo contextInfo, boolean z) {
         boolean z2;
-        ContextInfo enforceOwnerOnlyAndKioskModePermission = enforceOwnerOnlyAndKioskModePermission(contextInfo);
-        int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndKioskModePermission);
+        ContextInfo enforceOwnerOnlyAndKioskModePermission =
+                enforceOwnerOnlyAndKioskModePermission(contextInfo);
+        int callingOrCurrentUserId =
+                Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndKioskModePermission);
         try {
-            z2 = this.mEdmStorageProvider.getBoolean(enforceOwnerOnlyAndKioskModePermission.mCallerUid, 0, "KIOSKMODE", "kioskModeAirCommandAllowed");
+            z2 =
+                    this.mEdmStorageProvider.getBoolean(
+                            enforceOwnerOnlyAndKioskModePermission.mCallerUid,
+                            0,
+                            "KIOSKMODE",
+                            "kioskModeAirCommandAllowed");
         } catch (Exception unused) {
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m(new StringBuilder("allowAirCommandMode() : fail to get admin policy value = "), enforceOwnerOnlyAndKioskModePermission.mCallerUid, "KioskModeService");
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("allowAirCommandMode() : fail to get admin policy value = "),
+                    enforceOwnerOnlyAndKioskModePermission.mCallerUid,
+                    "KioskModeService");
             z2 = true;
         }
-        Log.i("KioskModeService", "allowAirCommandMode() : " + z + ", userId = " + callingOrCurrentUserId);
-        boolean putBoolean = this.mEdmStorageProvider.putBoolean("KIOSKMODE", enforceOwnerOnlyAndKioskModePermission.mCallerUid, z, 0, "kioskModeAirCommandAllowed");
+        Log.i(
+                "KioskModeService",
+                "allowAirCommandMode() : " + z + ", userId = " + callingOrCurrentUserId);
+        boolean putBoolean =
+                this.mEdmStorageProvider.putBoolean(
+                        "KIOSKMODE",
+                        enforceOwnerOnlyAndKioskModePermission.mCallerUid,
+                        z,
+                        0,
+                        "kioskModeAirCommandAllowed");
         if (putBoolean) {
             if (isAirCommandModeAllowed(enforceOwnerOnlyAndKioskModePermission)) {
                 putBoolean = setAirCommandOn(callingOrCurrentUserId, true);
             } else {
                 boolean airCommandOn = setAirCommandOn(callingOrCurrentUserId, false);
                 if (airCommandOn) {
-                    if (PenDetachmentOption.values()[Settings.System.getIntForUser(this.mContext.getContentResolver(), "pen_detachment_option", 0, callingOrCurrentUserId)].equals(PenDetachmentOption.AIR_COMMAND)) {
+                    if (PenDetachmentOption.values()[
+                            Settings.System.getIntForUser(
+                                    this.mContext.getContentResolver(),
+                                    "pen_detachment_option",
+                                    0,
+                                    callingOrCurrentUserId)]
+                            .equals(PenDetachmentOption.AIR_COMMAND)) {
                         long clearCallingIdentity = Binder.clearCallingIdentity();
-                        Settings.System.putIntForUser(this.mContext.getContentResolver(), "pen_detachment_option", 0, callingOrCurrentUserId);
+                        Settings.System.putIntForUser(
+                                this.mContext.getContentResolver(),
+                                "pen_detachment_option",
+                                0,
+                                callingOrCurrentUserId);
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     }
                 }
                 putBoolean = airCommandOn;
             }
             if (!putBoolean) {
-                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("allowAirCommandMode() : restore policy because fail to update aircommand setting. = ", "KioskModeService", this.mEdmStorageProvider.putBoolean("KIOSKMODE", enforceOwnerOnlyAndKioskModePermission.mCallerUid, z2, 0, "kioskModeAirCommandAllowed"));
+                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                        "allowAirCommandMode() : restore policy because fail to update aircommand"
+                            + " setting. = ",
+                        "KioskModeService",
+                        this.mEdmStorageProvider.putBoolean(
+                                "KIOSKMODE",
+                                enforceOwnerOnlyAndKioskModePermission.mCallerUid,
+                                z2,
+                                0,
+                                "kioskModeAirCommandAllowed"));
             }
         } else {
             Log.i("KioskModeService", "allowAirCommandMode() : failed to update policy. ");
         }
-        logToKnoxsdkFile$1(enforceOwnerOnlyAndKioskModePermission.mCallerUid, "allowAirCommandMode", Boolean.toString(z), Boolean.valueOf(putBoolean));
+        logToKnoxsdkFile$1(
+                enforceOwnerOnlyAndKioskModePermission.mCallerUid,
+                "allowAirCommandMode",
+                Boolean.toString(z),
+                Boolean.valueOf(putBoolean));
         return putBoolean;
     }
 
     public final boolean allowAirViewMode(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndKioskModePermission = enforceOwnerOnlyAndKioskModePermission(contextInfo);
-        int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndKioskModePermission);
+        ContextInfo enforceOwnerOnlyAndKioskModePermission =
+                enforceOwnerOnlyAndKioskModePermission(contextInfo);
+        int callingOrCurrentUserId =
+                Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndKioskModePermission);
         if (!z && isAirViewModeAllowed(enforceOwnerOnlyAndKioskModePermission)) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
-            Settings.System.putIntForUser(this.mContext.getContentResolver(), "air_view_master_onoff", 0, callingOrCurrentUserId);
+            Settings.System.putIntForUser(
+                    this.mContext.getContentResolver(),
+                    "air_view_master_onoff",
+                    0,
+                    callingOrCurrentUserId);
             Binder.restoreCallingIdentity(clearCallingIdentity);
             long clearCallingIdentity2 = Binder.clearCallingIdentity();
-            Settings.System.putIntForUser(this.mContext.getContentResolver(), "finger_air_view", 0, callingOrCurrentUserId);
+            Settings.System.putIntForUser(
+                    this.mContext.getContentResolver(),
+                    "finger_air_view",
+                    0,
+                    callingOrCurrentUserId);
             Binder.restoreCallingIdentity(clearCallingIdentity2);
             long clearCallingIdentity3 = Binder.clearCallingIdentity();
-            Settings.System.putIntForUser(this.mContext.getContentResolver(), "finger_air_view_information_preview", 0, callingOrCurrentUserId);
+            Settings.System.putIntForUser(
+                    this.mContext.getContentResolver(),
+                    "finger_air_view_information_preview",
+                    0,
+                    callingOrCurrentUserId);
             Binder.restoreCallingIdentity(clearCallingIdentity3);
             long clearCallingIdentity4 = Binder.clearCallingIdentity();
-            Settings.System.putIntForUser(this.mContext.getContentResolver(), "pen_hovering", 0, callingOrCurrentUserId);
+            Settings.System.putIntForUser(
+                    this.mContext.getContentResolver(), "pen_hovering", 0, callingOrCurrentUserId);
             Binder.restoreCallingIdentity(clearCallingIdentity4);
         }
-        logToKnoxsdkFile$1(enforceOwnerOnlyAndKioskModePermission.mCallerUid, "allowAirViewMode", Boolean.toString(z), null);
-        return this.mEdmStorageProvider.putBoolean("KIOSKMODE", enforceOwnerOnlyAndKioskModePermission.mCallerUid, z, 0, "kioskModeAirViewAllowed");
+        logToKnoxsdkFile$1(
+                enforceOwnerOnlyAndKioskModePermission.mCallerUid,
+                "allowAirViewMode",
+                Boolean.toString(z),
+                null);
+        return this.mEdmStorageProvider.putBoolean(
+                "KIOSKMODE",
+                enforceOwnerOnlyAndKioskModePermission.mCallerUid,
+                z,
+                0,
+                "kioskModeAirViewAllowed");
     }
 
     public final boolean allowEdgeScreen(ContextInfo contextInfo, int i, boolean z) {
         boolean z2;
-        ContextInfo enforceOwnerOnlyAndKioskModePermission = enforceOwnerOnlyAndKioskModePermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndKioskModePermission =
+                enforceOwnerOnlyAndKioskModePermission(contextInfo);
         int i2 = 0;
         if (i != 31) {
             return false;
@@ -601,7 +785,11 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                 if (SUPPORT_EDGE_MUM) {
                     Iterator it = this.mUserManager.getUsers().iterator();
                     while (it.hasNext()) {
-                        Settings.Secure.putIntForUser(this.mContext.getContentResolver(), "edge_enable", 0, ((UserInfo) it.next()).getUserHandle().getIdentifier());
+                        Settings.Secure.putIntForUser(
+                                this.mContext.getContentResolver(),
+                                "edge_enable",
+                                0,
+                                ((UserInfo) it.next()).getUserHandle().getIdentifier());
                     }
                 } else {
                     Settings.Global.putInt(this.mContext.getContentResolver(), "edge_enable", 0);
@@ -636,15 +824,30 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             resetEdgeScreenSetting("task_edge");
         }
         try {
-            i2 = this.mEdmStorageProvider.getInt(enforceOwnerOnlyAndKioskModePermission.mCallerUid, 0, "KIOSKMODE", "edgeScreenBlockedFunctions");
+            i2 =
+                    this.mEdmStorageProvider.getInt(
+                            enforceOwnerOnlyAndKioskModePermission.mCallerUid,
+                            0,
+                            "KIOSKMODE",
+                            "edgeScreenBlockedFunctions");
         } catch (SettingNotFoundException unused) {
             Log.e("KioskModeService", "getBlockedEdgeScreen() failed");
         }
-        boolean putInt = this.mEdmStorageProvider.putInt(enforceOwnerOnlyAndKioskModePermission.mCallerUid, 0, z ? i2 & (~i) : i2 | i, "KIOSKMODE", "edgeScreenBlockedFunctions");
+        boolean putInt =
+                this.mEdmStorageProvider.putInt(
+                        enforceOwnerOnlyAndKioskModePermission.mCallerUid,
+                        0,
+                        z ? i2 & (~i) : i2 | i,
+                        "KIOSKMODE",
+                        "edgeScreenBlockedFunctions");
         if (putInt && i3 > 0 && z && !z2 && isEdgeScreenFunctionalityAllowed(4)) {
             broadcastBlockedEdgeScreenIntent(true);
         }
-        logToKnoxsdkFile$1(enforceOwnerOnlyAndKioskModePermission.mCallerUid, "allowEdgeScreen", Integer.toString(i) + " " + Boolean.toString(z), Boolean.valueOf(putInt));
+        logToKnoxsdkFile$1(
+                enforceOwnerOnlyAndKioskModePermission.mCallerUid,
+                "allowEdgeScreen",
+                Integer.toString(i) + " " + Boolean.toString(z),
+                Boolean.valueOf(putInt));
         return putInt;
     }
 
@@ -701,12 +904,19 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             iArr2[i3] = intValue2;
             KeyCodeMediatorImpl keyCodeMediatorImpl = this.mKeyCodeMediator;
             if (keyCodeMediatorImpl == null) {
-                Log.e("KioskModeService", "mKeyCodeMediator must not be null! This will cause problems on hardware key restriction.");
+                Log.e(
+                        "KioskModeService",
+                        "mKeyCodeMediator must not be null! This will cause problems on hardware"
+                            + " key restriction.");
             } else {
                 keyCodeMediatorImpl.update(intValue2);
             }
         }
-        logToKnoxsdkFile$1(enforceKioskModePermission.mCallerUid, "allowHardwareKeys", Boolean.toString(z), null);
+        logToKnoxsdkFile$1(
+                enforceKioskModePermission.mCallerUid,
+                "allowHardwareKeys",
+                Boolean.toString(z),
+                null);
         return iArr2;
     }
 
@@ -714,27 +924,56 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         boolean z2;
         ContextInfo enforceKioskModePermission = enforceKioskModePermission(contextInfo);
         int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceKioskModePermission);
-        Log.i("KioskModeService", "allowMultiWindowMode() : " + z + ", userId = " + callingOrCurrentUserId);
+        Log.i(
+                "KioskModeService",
+                "allowMultiWindowMode() : " + z + ", userId = " + callingOrCurrentUserId);
         if (callingOrCurrentUserId != 0) {
             Log.i("KioskModeService", "allowMultiWindowMode() failed. Caller is not owner");
             return false;
         }
         try {
-            z2 = this.mEdmStorageProvider.getBoolean(enforceKioskModePermission.mCallerUid, 0, "KIOSKMODE", "multiWindowEnabled");
+            z2 =
+                    this.mEdmStorageProvider.getBoolean(
+                            enforceKioskModePermission.mCallerUid,
+                            0,
+                            "KIOSKMODE",
+                            "multiWindowEnabled");
         } catch (Exception unused) {
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m(new StringBuilder("allowMultiWindowMode() : fail to get admin policy value = "), enforceKioskModePermission.mCallerUid, "KioskModeService");
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("allowMultiWindowMode() : fail to get admin policy value = "),
+                    enforceKioskModePermission.mCallerUid,
+                    "KioskModeService");
             z2 = true;
         }
-        boolean putBoolean = this.mEdmStorageProvider.putBoolean("KIOSKMODE", enforceKioskModePermission.mCallerUid, z, 0, "multiWindowEnabled");
+        boolean putBoolean =
+                this.mEdmStorageProvider.putBoolean(
+                        "KIOSKMODE",
+                        enforceKioskModePermission.mCallerUid,
+                        z,
+                        0,
+                        "multiWindowEnabled");
         if (putBoolean) {
             putBoolean = applyMultiWindowPolicy(callingOrCurrentUserId, true);
             if (!putBoolean) {
-                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("allowMultiWindowMode() : restore policy because fail to update multiwindow setting. = ", "KioskModeService", this.mEdmStorageProvider.putBoolean("KIOSKMODE", enforceKioskModePermission.mCallerUid, z2, 0, "multiWindowEnabled"));
+                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                        "allowMultiWindowMode() : restore policy because fail to update multiwindow"
+                            + " setting. = ",
+                        "KioskModeService",
+                        this.mEdmStorageProvider.putBoolean(
+                                "KIOSKMODE",
+                                enforceKioskModePermission.mCallerUid,
+                                z2,
+                                0,
+                                "multiWindowEnabled"));
             }
         } else {
             Log.i("KioskModeService", "allowMultiWindowMode() : failed to update policy. ");
         }
-        logToKnoxsdkFile$1(enforceKioskModePermission.mCallerUid, "allowMultiWindowMode", Boolean.toString(z), Boolean.valueOf(putBoolean));
+        logToKnoxsdkFile$1(
+                enforceKioskModePermission.mCallerUid,
+                "allowMultiWindowMode",
+                Boolean.toString(z),
+                Boolean.valueOf(putBoolean));
         return putBoolean;
     }
 
@@ -746,7 +985,12 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         long clearCallingIdentity = Binder.clearCallingIdentity();
         Context createContextAsUser = Utils.createContextAsUser(this.mContext, "android", 0, i);
         boolean z2 = true;
-        if (createContextAsUser != null && (installedApplications = createContextAsUser.getPackageManager().getInstalledApplications(512)) != null) {
+        if (createContextAsUser != null
+                && (installedApplications =
+                                createContextAsUser
+                                        .getPackageManager()
+                                        .getInstalledApplications(512))
+                        != null) {
             boolean z3 = false;
             for (ApplicationInfo applicationInfo : installedApplications) {
                 String[] strArr = TASKMANAGER_PKGS;
@@ -769,7 +1013,9 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             z2 = z3;
         }
         if (!z2) {
-            Log.v("KioskModeService", "allowTaskManager() - Task Manager is not available in this device");
+            Log.v(
+                    "KioskModeService",
+                    "allowTaskManager() - Task Manager is not available in this device");
             return false;
         }
         if (callingOrCurrentUserId != 0) {
@@ -780,18 +1026,37 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
-                    ActivityManagerNative.getDefault().forceStopPackage(KioskMode.CONTROL_PANEL_PKGNAME, callingOrCurrentUserId);
-                    ActivityManagerNative.getDefault().forceStopPackage(KioskMode.TASK_MANAGER_PKGNAME, callingOrCurrentUserId);
-                    ActivityManagerNative.getDefault().forceStopPackage(KioskMode.MINI_TASK_MANAGER_PKGNAME, callingOrCurrentUserId);
+                    ActivityManagerNative.getDefault()
+                            .forceStopPackage(
+                                    KioskMode.CONTROL_PANEL_PKGNAME, callingOrCurrentUserId);
+                    ActivityManagerNative.getDefault()
+                            .forceStopPackage(
+                                    KioskMode.TASK_MANAGER_PKGNAME, callingOrCurrentUserId);
+                    ActivityManagerNative.getDefault()
+                            .forceStopPackage(
+                                    KioskMode.MINI_TASK_MANAGER_PKGNAME, callingOrCurrentUserId);
                 } catch (Exception e) {
-                    Log.e("KioskModeService", "allowTaskManager() failed to force stopping packages", e);
+                    Log.e(
+                            "KioskModeService",
+                            "allowTaskManager() failed to force stopping packages",
+                            e);
                 }
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         }
-        boolean putBoolean = this.mEdmStorageProvider.putBoolean("KIOSKMODE", enforceKioskModePermission.mCallerUid, z, 0, "taskManagerEnabled");
-        logToKnoxsdkFile$1(enforceKioskModePermission.mCallerUid, "allowTaskManager", Boolean.toString(z), Boolean.valueOf(putBoolean));
+        boolean putBoolean =
+                this.mEdmStorageProvider.putBoolean(
+                        "KIOSKMODE",
+                        enforceKioskModePermission.mCallerUid,
+                        z,
+                        0,
+                        "taskManagerEnabled");
+        logToKnoxsdkFile$1(
+                enforceKioskModePermission.mCallerUid,
+                "allowTaskManager",
+                Boolean.toString(z),
+                Boolean.valueOf(putBoolean));
         return putBoolean;
     }
 
@@ -840,25 +1105,42 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         try {
             try {
             } catch (Exception e) {
-                Log.d("KioskModeService", "applyMultiWindowPolicy() : Failed to update multi window policy", e);
+                Log.d(
+                        "KioskModeService",
+                        "applyMultiWindowPolicy() : Failed to update multi window policy",
+                        e);
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 z2 = false;
             }
             if (isMultiWindowModeAllowedAsUser) {
                 if (z) {
-                    this.mMultiWindowManager.setMultiWindowEnabledForUser("com.android.server.enterprise.kioskmode", "enable", true, i);
+                    this.mMultiWindowManager.setMultiWindowEnabledForUser(
+                            "com.android.server.enterprise.kioskmode", "enable", true, i);
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
-                StringBuilder m = FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("applyMultiWindowPolicy() : ret = ", z2, ", allowed = ", isMultiWindowModeAllowedAsUser, ", userId = ");
+                StringBuilder m =
+                        FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                                "applyMultiWindowPolicy() : ret = ",
+                                z2,
+                                ", allowed = ",
+                                isMultiWindowModeAllowedAsUser,
+                                ", userId = ");
                 m.append(i);
                 m.append(" ,isCalledAdmin=");
                 m.append(z);
                 Log.i("KioskModeService", m.toString());
                 return z2;
             }
-            this.mMultiWindowManager.setMultiWindowEnabledForUser("com.android.server.enterprise.kioskmode", "disable", false, i);
+            this.mMultiWindowManager.setMultiWindowEnabledForUser(
+                    "com.android.server.enterprise.kioskmode", "disable", false, i);
             Binder.restoreCallingIdentity(clearCallingIdentity);
-            StringBuilder m2 = FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("applyMultiWindowPolicy() : ret = ", z2, ", allowed = ", isMultiWindowModeAllowedAsUser, ", userId = ");
+            StringBuilder m2 =
+                    FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                            "applyMultiWindowPolicy() : ret = ",
+                            z2,
+                            ", allowed = ",
+                            isMultiWindowModeAllowedAsUser,
+                            ", userId = ");
             m2.append(i);
             m2.append(" ,isCalledAdmin=");
             m2.append(z);
@@ -873,9 +1155,12 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     public final void broadcastBlockedEdgeScreenIntent(boolean z) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            Intent intent = new Intent("com.samsung.android.knox.intent.action.INFORMATION_STREAM_INTERNAL");
+            Intent intent =
+                    new Intent(
+                            "com.samsung.android.knox.intent.action.INFORMATION_STREAM_INTERNAL");
             intent.putExtra("com.samsung.android.knox.intent.extra.BLOCKED_STATUS", !z);
-            this.mContext.sendBroadcast(intent, "com.samsung.android.knox.permission.KNOX_KIOSK_MODE");
+            this.mContext.sendBroadcast(
+                    intent, "com.samsung.android.knox.permission.KNOX_KIOSK_MODE");
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -884,7 +1169,10 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     public final void broadcastKioskResult(int i, int i2, int i3) {
         Intent intent;
         int appId = UserHandle.getAppId(i);
-        String nameForUid = (appId == 1000 || (appId >= 10000 && appId <= 19999)) ? this.mPm.getNameForUid(i) : "com.sec.enterprise.knox.cloudmdm.smdms";
+        String nameForUid =
+                (appId == 1000 || (appId >= 10000 && appId <= 19999))
+                        ? this.mPm.getNameForUid(i)
+                        : "com.sec.enterprise.knox.cloudmdm.smdms";
         if (nameForUid == null) {
             return;
         }
@@ -909,13 +1197,19 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         long clearCallingIdentity = Binder.clearCallingIdentity();
         Context context = this.mContext;
         UserHandle userHandle = UserHandle.ALL;
-        context.sendBroadcastAsUser(intent, userHandle, "com.samsung.android.knox.permission.KNOX_KIOSK_MODE");
+        context.sendBroadcastAsUser(
+                intent, userHandle, "com.samsung.android.knox.permission.KNOX_KIOSK_MODE");
         try {
             String kpuPackageName = KpuHelper.getInstance(this.mContext).getKpuPackageName();
             Intent intent2 = new Intent(intent);
-            intent2.putExtra("com.samsung.android.knox.intent.extra.ADMIN_UID", this.mContext.getPackageManager().getPackageUidAsUser(kpuPackageName, UserHandle.getCallingUserId()));
+            intent2.putExtra(
+                    "com.samsung.android.knox.intent.extra.ADMIN_UID",
+                    this.mContext
+                            .getPackageManager()
+                            .getPackageUidAsUser(kpuPackageName, UserHandle.getCallingUserId()));
             intent2.setPackage(kpuPackageName);
-            this.mContext.sendBroadcastAsUser(intent2, userHandle, "com.samsung.android.knox.permission.KNOX_KIOSK_MODE");
+            this.mContext.sendBroadcastAsUser(
+                    intent2, userHandle, "com.samsung.android.knox.permission.KNOX_KIOSK_MODE");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -931,7 +1225,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             if (Binder.getCallingPid() != ApplicationPolicy.MY_PID) {
                 throw new SecurityException("Process should have system uid");
             }
-            applicationPolicy._uninstallApplicationInternal(i, UserHandle.getUserId(i), "com.sec.android.kiosk", false);
+            applicationPolicy._uninstallApplicationInternal(
+                    i, UserHandle.getUserId(i), "com.sec.android.kiosk", false);
         }
         Binder.restoreCallingIdentity(clearCallingIdentity);
     }
@@ -942,7 +1237,9 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceKioskModePermission);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            z = SystemUIAdapter.getInstance(this.mContext).clearAllNotificationsAsUser(callingOrCurrentUserId);
+            z =
+                    SystemUIAdapter.getInstance(this.mContext)
+                            .clearAllNotificationsAsUser(callingOrCurrentUserId);
             Binder.restoreCallingIdentity(clearCallingIdentity);
         } catch (Exception unused) {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -951,18 +1248,21 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             Binder.restoreCallingIdentity(clearCallingIdentity);
             throw th;
         }
-        logToKnoxsdkFile$1(enforceKioskModePermission.mCallerUid, "clearAllNotifications", null, null);
+        logToKnoxsdkFile$1(
+                enforceKioskModePermission.mCallerUid, "clearAllNotifications", null, null);
         return z;
     }
 
     public final void disableKioskMode(ContextInfo contextInfo) {
         Log.d("KioskModeService", "disableKioskMode");
-        ContextInfo enforceOwnerOnlyAndKioskModePermission = enforceOwnerOnlyAndKioskModePermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndKioskModePermission =
+                enforceOwnerOnlyAndKioskModePermission(contextInfo);
         if (mProcessing) {
             broadcastKioskResult(enforceOwnerOnlyAndKioskModePermission.mCallerUid, 2, -4);
             return;
         }
-        logToKnoxsdkFile$1(enforceOwnerOnlyAndKioskModePermission.mCallerUid, "disableKioskMode", null, null);
+        logToKnoxsdkFile$1(
+                enforceOwnerOnlyAndKioskModePermission.mCallerUid, "disableKioskMode", null, null);
         Message obtainMessage = this.mHandler.obtainMessage(2);
         Bundle bundle = new Bundle();
         bundle.putInt("adminuid", enforceOwnerOnlyAndKioskModePermission.mCallerUid);
@@ -970,7 +1270,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         this.mHandler.sendMessage(obtainMessage);
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
             printWriter.println("Permission Denial: can't dump KioskModeService");
             return;
@@ -987,7 +1288,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                     m.append("BlockedKeyList for userId ");
                     m.append(num);
                     m.append(" {");
-                    Iterator it = ((Set) ((HashMap) kioskModeCache.mBlockedHwKeys).get(num)).iterator();
+                    Iterator it =
+                            ((Set) ((HashMap) kioskModeCache.mBlockedHwKeys).get(num)).iterator();
                     while (it.hasNext()) {
                         m.append((String) it.next());
                         if (it.hasNext()) {
@@ -1000,21 +1302,48 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             }
         }
         printWriter.write(m.toString());
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("KioskMode Enabled : "), mProcessing ? true : isKioskModeEnabled(new ContextInfo(Binder.getCallingUid())), printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("KioskMode Enabled : "),
+                mProcessing ? true : isKioskModeEnabled(new ContextInfo(Binder.getCallingUid())),
+                printWriter);
         if (mProcessing) {
             printWriter.println("\tKiosk Mode is busy on processing.");
         }
-        ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("KIOSKMODE", null, null, new String[]{"adminUid", "systemBarEnabled", "multiWindowEnabled", "taskManagerEnabled", "kioskModeAirCommandAllowed", "kioskModeAirViewAllowed", "edgeScreenBlockedFunctions"});
-        StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "[userId = 0]", "\tSystem Bar Hidden = ");
+        ArrayList dataByFields =
+                this.mEdmStorageProvider.getDataByFields(
+                        "KIOSKMODE",
+                        null,
+                        null,
+                        new String[] {
+                            "adminUid",
+                            "systemBarEnabled",
+                            "multiWindowEnabled",
+                            "taskManagerEnabled",
+                            "kioskModeAirCommandAllowed",
+                            "kioskModeAirViewAllowed",
+                            "edgeScreenBlockedFunctions"
+                        });
+        StringBuilder m$1 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                        printWriter, "[userId = 0]", "\tSystem Bar Hidden = ");
         m$1.append(dumpMaskedPolicy("systemBarEnabled", dataByFields));
         printWriter.println(m$1.toString());
-        printWriter.println("\tStatus Bar Hidden = " + dumpMaskedPolicy("statusBarHidden", dataByFields));
-        printWriter.println("\tNavigation Bar Hidden = " + dumpMaskedPolicy("navigationBarHidden", dataByFields));
-        printWriter.println("\tMultiWindow Allow = " + dumpPolicy("multiWindowEnabled", dataByFields));
-        printWriter.println("\tTaskManager Allow = " + dumpPolicy("taskManagerEnabled", dataByFields));
-        printWriter.println("\tAirCommand Allow = " + dumpPolicy("kioskModeAirCommandAllowed", dataByFields));
-        printWriter.println("\tAirView Allow = " + dumpPolicy("kioskModeAirViewAllowed", dataByFields));
-        printWriter.println("\tEdgeScreenFunctions Allow = " + dumpMaskedPolicy("edgeScreenBlockedFunctions", dataByFields));
+        printWriter.println(
+                "\tStatus Bar Hidden = " + dumpMaskedPolicy("statusBarHidden", dataByFields));
+        printWriter.println(
+                "\tNavigation Bar Hidden = "
+                        + dumpMaskedPolicy("navigationBarHidden", dataByFields));
+        printWriter.println(
+                "\tMultiWindow Allow = " + dumpPolicy("multiWindowEnabled", dataByFields));
+        printWriter.println(
+                "\tTaskManager Allow = " + dumpPolicy("taskManagerEnabled", dataByFields));
+        printWriter.println(
+                "\tAirCommand Allow = " + dumpPolicy("kioskModeAirCommandAllowed", dataByFields));
+        printWriter.println(
+                "\tAirView Allow = " + dumpPolicy("kioskModeAirViewAllowed", dataByFields));
+        printWriter.println(
+                "\tEdgeScreenFunctions Allow = "
+                        + dumpMaskedPolicy("edgeScreenBlockedFunctions", dataByFields));
     }
 
     public final String dumpMaskedPolicy(String str, ArrayList arrayList) {
@@ -1036,7 +1365,9 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             return ((PolicyDefinition) ((HashMap) this.mPolicyDefinitions).get(str)).defaultMessage;
         }
         sb.insert(0, " Enforced [ ");
-        sb.insert(0, ((PolicyDefinition) ((HashMap) this.mPolicyDefinitions).get(str)).enforcedMessage);
+        sb.insert(
+                0,
+                ((PolicyDefinition) ((HashMap) this.mPolicyDefinitions).get(str)).enforcedMessage);
         sb.append("]");
         return sb.toString();
     }
@@ -1057,14 +1388,17 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             return ((PolicyDefinition) ((HashMap) this.mPolicyDefinitions).get(str)).defaultMessage;
         }
         sb.insert(0, " Enforced [ ");
-        sb.insert(0, ((PolicyDefinition) ((HashMap) this.mPolicyDefinitions).get(str)).enforcedMessage);
+        sb.insert(
+                0,
+                ((PolicyDefinition) ((HashMap) this.mPolicyDefinitions).get(str)).enforcedMessage);
         sb.append("]");
         return sb.toString();
     }
 
     public final void enableKioskMode(ContextInfo contextInfo, String str) {
         Log.d("KioskModeService", "enableKioskMode");
-        ContextInfo enforceOwnerOnlyAndKioskModePermission = enforceOwnerOnlyAndKioskModePermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndKioskModePermission =
+                enforceOwnerOnlyAndKioskModePermission(contextInfo);
         if (Utils.isDexActivated(this.mContext)) {
             Log.d("KioskModeService", "enableKioskMode was failed due to DeX mode");
             return;
@@ -1073,7 +1407,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             broadcastKioskResult(enforceOwnerOnlyAndKioskModePermission.mCallerUid, 1, -4);
             return;
         }
-        logToKnoxsdkFile$1(enforceOwnerOnlyAndKioskModePermission.mCallerUid, "enableKioskMode", str, null);
+        logToKnoxsdkFile$1(
+                enforceOwnerOnlyAndKioskModePermission.mCallerUid, "enableKioskMode", str, null);
         Message obtainMessage = this.mHandler.obtainMessage(1);
         Bundle m142m = AccountManagerService$$ExternalSyntheticOutline0.m142m("package", str);
         m142m.putInt("adminuid", enforceOwnerOnlyAndKioskModePermission.mCallerUid);
@@ -1085,25 +1420,39 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        return this.mEDM.enforceActiveAdminPermissionByContext(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_KIOSK_MODE")));
+        return this.mEDM.enforceActiveAdminPermissionByContext(
+                contextInfo,
+                new ArrayList(
+                        Arrays.asList("com.samsung.android.knox.permission.KNOX_KIOSK_MODE")));
     }
 
     public final ContextInfo enforceOwnerOnlyAndKioskModePermission(ContextInfo contextInfo) {
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        return this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_KIOSK_MODE")));
+        return this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(
+                contextInfo,
+                new ArrayList(
+                        Arrays.asList("com.samsung.android.knox.permission.KNOX_KIOSK_MODE")));
     }
 
     public final void forceTerminateKiosk(int i) {
         int activeKioskAdmin = getActiveKioskAdmin(i);
-        Log.d("KioskModeService", "forceTerminateKiosk() - uid : " + activeKioskAdmin + " /userId : " + i);
+        Log.d(
+                "KioskModeService",
+                "forceTerminateKiosk() - uid : " + activeKioskAdmin + " /userId : " + i);
         _disableKioskMode(new ContextInfo(activeKioskAdmin), 3);
     }
 
     public final int getActiveKioskAdmin(int i) {
         try {
-            ArrayList arrayList = (ArrayList) this.mEdmStorageProvider.getValuesListAsUser(0, i, "KIOSKMODE", new String[]{"kioskModeEnabled", "adminUid"});
+            ArrayList arrayList =
+                    (ArrayList)
+                            this.mEdmStorageProvider.getValuesListAsUser(
+                                    0,
+                                    i,
+                                    "KIOSKMODE",
+                                    new String[] {"kioskModeEnabled", "adminUid"});
             if (!arrayList.isEmpty()) {
                 Iterator it = arrayList.iterator();
                 while (it.hasNext()) {
@@ -1116,7 +1465,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "getActiveKioskAdmin() failed for user : ", "KioskModeService");
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                i, "getActiveKioskAdmin() failed for user : ", "KioskModeService");
         return -1;
     }
 
@@ -1143,7 +1493,9 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         Iterator it = users.iterator();
         while (it.hasNext()) {
             int identifier = ((UserInfo) it.next()).getUserHandle().getIdentifier();
-            List stringListAsUser = this.mEdmStorageProvider.getStringListAsUser(identifier, "KIOSKMODE", "blockedHwKeyList");
+            List stringListAsUser =
+                    this.mEdmStorageProvider.getStringListAsUser(
+                            identifier, "KIOSKMODE", "blockedHwKeyList");
             HashSet hashSet = new HashSet();
             Iterator it2 = ((ArrayList) stringListAsUser).iterator();
             while (it2.hasNext()) {
@@ -1158,7 +1510,10 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
 
     public final int getBlockedEdgeScreen(ContextInfo contextInfo) {
         int i = 0;
-        Iterator it = this.mEdmStorageProvider.getIntListAsUser(0, 0, "KIOSKMODE", "edgeScreenBlockedFunctions").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getIntListAsUser(0, 0, "KIOSKMODE", "edgeScreenBlockedFunctions")
+                        .iterator();
         while (it.hasNext()) {
             i |= ((Integer) it.next()).intValue();
         }
@@ -1185,10 +1540,13 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         Intent intent = new Intent("android.intent.action.MAIN");
         intent.addCategory("android.intent.category.HOME");
         intent.addCategory("android.intent.category.DEFAULT");
-        ResolveInfo resolveActivityAsUser = this.mPm.resolveActivityAsUser(intent, EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT, i);
+        ResolveInfo resolveActivityAsUser =
+                this.mPm.resolveActivityAsUser(
+                        intent, EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT, i);
         if (resolveActivityAsUser != null) {
             ActivityInfo activityInfo = resolveActivityAsUser.activityInfo;
-            componentName = new ComponentName(activityInfo.applicationInfo.packageName, activityInfo.name);
+            componentName =
+                    new ComponentName(activityInfo.applicationInfo.packageName, activityInfo.name);
         } else {
             componentName = null;
         }
@@ -1216,10 +1574,13 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         intent.addCategory("android.intent.category.HOME");
         intent.addCategory("android.intent.category.DEFAULT");
         long clearCallingIdentity = Binder.clearCallingIdentity();
-        List queryIntentActivitiesAsUser = this.mPm.queryIntentActivitiesAsUser(intent, EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT, i);
+        List queryIntentActivitiesAsUser =
+                this.mPm.queryIntentActivitiesAsUser(
+                        intent, EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT, i);
         Binder.restoreCallingIdentity(clearCallingIdentity);
         for (int i2 = 0; i2 < queryIntentActivitiesAsUser.size(); i2++) {
-            if (str.equals(((ResolveInfo) queryIntentActivitiesAsUser.get(i2)).activityInfo.packageName)) {
+            if (str.equals(
+                    ((ResolveInfo) queryIntentActivitiesAsUser.get(i2)).activityInfo.packageName)) {
                 return ((ResolveInfo) queryIntentActivitiesAsUser.get(i2)).activityInfo.name;
             }
         }
@@ -1237,7 +1598,13 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
 
     public final String getKioskHomePackageAsUser(int i) {
         try {
-            ArrayList arrayList = (ArrayList) this.mEdmStorageProvider.getValuesListAsUser(0, i, "KIOSKMODE", new String[]{"kioskModeEnabled", "kioskModeKioskPackage"});
+            ArrayList arrayList =
+                    (ArrayList)
+                            this.mEdmStorageProvider.getValuesListAsUser(
+                                    0,
+                                    i,
+                                    "KIOSKMODE",
+                                    new String[] {"kioskModeEnabled", "kioskModeKioskPackage"});
             if (arrayList.isEmpty()) {
                 return null;
             }
@@ -1251,7 +1618,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             }
             return null;
         } catch (Exception unused) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "getKioskHomePackageAsUser() failed user : ", "KioskModeService");
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    i, "getKioskHomePackageAsUser() failed user : ", "KioskModeService");
             return null;
         }
     }
@@ -1279,7 +1647,9 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             if (nameForUid.equals("android.uid.systemui")) {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 int currentUser = ActivityManager.getCurrentUser();
-                Log.d("KioskModeService", "System UI : " + contextInfo.mCallerUid + " / userId : " + currentUser);
+                Log.d(
+                        "KioskModeService",
+                        "System UI : " + contextInfo.mCallerUid + " / userId : " + currentUser);
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return currentUser;
             }
@@ -1300,7 +1670,9 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             i = this.mEdmStorageProvider.getInt(i2, 0, "KIOSKMODE", "systemBarEnabled");
         } catch (SettingNotFoundException unused) {
         }
-        boolean putInt = this.mEdmStorageProvider.putInt(i2, 0, z ? i | 2 : i & (-3), "KIOSKMODE", "systemBarEnabled");
+        boolean putInt =
+                this.mEdmStorageProvider.putInt(
+                        i2, 0, z ? i | 2 : i & (-3), "KIOSKMODE", "systemBarEnabled");
         boolean isNavigationBarHidden = isNavigationBarHidden();
         if (putInt) {
             applyHideNavigationBarSystemUI(callingOrCurrentUserId, isNavigationBarHidden);
@@ -1321,7 +1693,9 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             i = this.mEdmStorageProvider.getInt(i2, 0, "KIOSKMODE", "systemBarEnabled");
         } catch (SettingNotFoundException unused) {
         }
-        boolean putInt = this.mEdmStorageProvider.putInt(i2, 0, z ? 1 | i : i & (-2), "KIOSKMODE", "systemBarEnabled");
+        boolean putInt =
+                this.mEdmStorageProvider.putInt(
+                        i2, 0, z ? 1 | i : i & (-2), "KIOSKMODE", "systemBarEnabled");
         boolean isStatusBarHiddenAsUser = isStatusBarHiddenAsUser(callingOrCurrentUserId);
         if (putInt) {
             applyHideStatusBarSystemUI(callingOrCurrentUserId, isStatusBarHiddenAsUser);
@@ -1342,7 +1716,9 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             i = this.mEdmStorageProvider.getInt(i2, 0, "KIOSKMODE", "systemBarEnabled");
         } catch (SettingNotFoundException unused) {
         }
-        boolean putInt = this.mEdmStorageProvider.putInt(i2, 0, z ? i | 3 : i & (-4), "KIOSKMODE", "systemBarEnabled");
+        boolean putInt =
+                this.mEdmStorageProvider.putInt(
+                        i2, 0, z ? i | 3 : i & (-4), "KIOSKMODE", "systemBarEnabled");
         if (putInt) {
             applyHideSystemBarSystemUI(callingOrCurrentUserId);
         }
@@ -1385,11 +1761,17 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             Method dump skipped, instructions count: 466
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.kioskmode.KioskModeService.initKioskMode(com.samsung.android.knox.ContextInfo, java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.kioskmode.KioskModeService.initKioskMode(com.samsung.android.knox.ContextInfo,"
+                    + " java.lang.String):int");
     }
 
     public final boolean isAirCommandModeAllowed(ContextInfo contextInfo) {
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "KIOSKMODE", "kioskModeAirCommandAllowed").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "KIOSKMODE", "kioskModeAirCommandAllowed")
+                        .iterator();
         while (it.hasNext()) {
             boolean booleanValue = ((Boolean) it.next()).booleanValue();
             if (!booleanValue) {
@@ -1400,7 +1782,10 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     }
 
     public final boolean isAirViewModeAllowed(ContextInfo contextInfo) {
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "KIOSKMODE", "kioskModeAirViewAllowed").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "KIOSKMODE", "kioskModeAirViewAllowed")
+                        .iterator();
         while (it.hasNext()) {
             boolean booleanValue = ((Boolean) it.next()).booleanValue();
             if (!booleanValue) {
@@ -1426,7 +1811,9 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         boolean z2 = true;
         try {
             Map map = this.mCache.mBlockedHwKeys;
-            if (map != null && map.get(0) != null && ((Set) this.mCache.mBlockedHwKeys.get(0)).contains(String.valueOf(i))) {
+            if (map != null
+                    && map.get(0) != null
+                    && ((Set) this.mCache.mBlockedHwKeys.get(0)).contains(String.valueOf(i))) {
                 z2 = false;
             }
             if (z && !z2) {
@@ -1449,7 +1836,10 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     public final boolean isKioskModeEnabled(ContextInfo contextInfo) {
         boolean z = false;
         try {
-            ArrayList arrayList = (ArrayList) this.mEdmStorageProvider.getValuesListAsUser(0, 0, "KIOSKMODE", new String[]{"kioskModeEnabled"});
+            ArrayList arrayList =
+                    (ArrayList)
+                            this.mEdmStorageProvider.getValuesListAsUser(
+                                    0, 0, "KIOSKMODE", new String[] {"kioskModeEnabled"});
             if (arrayList.isEmpty()) {
                 Log.e("KioskModeService", "There's no matched data");
             } else {
@@ -1457,7 +1847,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                 boolean z2 = false;
                 while (it.hasNext()) {
                     try {
-                        Integer asInteger = ((ContentValues) it.next()).getAsInteger("kioskModeEnabled");
+                        Integer asInteger =
+                                ((ContentValues) it.next()).getAsInteger("kioskModeEnabled");
                         if (asInteger != null) {
                             z2 = asInteger.intValue() == 1;
                             if (z2) {
@@ -1480,7 +1871,10 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     public final boolean isKioskModeEnabledAsUser(int i) {
         boolean z = false;
         try {
-            ArrayList arrayList = (ArrayList) this.mEdmStorageProvider.getValuesListAsUser(0, i, "KIOSKMODE", new String[]{"kioskModeEnabled"});
+            ArrayList arrayList =
+                    (ArrayList)
+                            this.mEdmStorageProvider.getValuesListAsUser(
+                                    0, i, "KIOSKMODE", new String[] {"kioskModeEnabled"});
             if (arrayList.isEmpty()) {
                 Log.e("KioskModeService", "There's no matched data");
             } else {
@@ -1488,7 +1882,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                 boolean z2 = false;
                 while (it.hasNext()) {
                     try {
-                        Integer asInteger = ((ContentValues) it.next()).getAsInteger("kioskModeEnabled");
+                        Integer asInteger =
+                                ((ContentValues) it.next()).getAsInteger("kioskModeEnabled");
                         if (asInteger != null) {
                             z2 = asInteger.intValue() == 1;
                             if (z2) {
@@ -1509,7 +1904,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     }
 
     public final boolean isMultiWindowModeAllowed(ContextInfo contextInfo, boolean z) {
-        boolean isMultiWindowModeAllowedAsUser = isMultiWindowModeAllowedAsUser(getUserIdByPackageNameOrUid(contextInfo));
+        boolean isMultiWindowModeAllowedAsUser =
+                isMultiWindowModeAllowedAsUser(getUserIdByPackageNameOrUid(contextInfo));
         if (z && !isMultiWindowModeAllowedAsUser) {
             RestrictionToastManager.show(R.string.restr_pin_enter_new_pin);
         }
@@ -1517,7 +1913,10 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     }
 
     public final boolean isMultiWindowModeAllowedAsUser(int i) {
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "KIOSKMODE", "multiWindowEnabled").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "KIOSKMODE", "multiWindowEnabled")
+                        .iterator();
         boolean z = true;
         while (it.hasNext()) {
             if (!((Boolean) it.next()).booleanValue()) {
@@ -1528,7 +1927,10 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     }
 
     public final boolean isNavigationBarHidden() {
-        Iterator it = this.mEdmStorageProvider.getIntListAsUser(0, 0, "KIOSKMODE", "systemBarEnabled").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getIntListAsUser(0, 0, "KIOSKMODE", "systemBarEnabled")
+                        .iterator();
         while (it.hasNext()) {
             if ((((Integer) it.next()).intValue() & 2) != 0) {
                 return true;
@@ -1546,7 +1948,10 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     }
 
     public final boolean isStatusBarHiddenAsUser(int i) {
-        Iterator it = this.mEdmStorageProvider.getIntListAsUser(0, 0, "KIOSKMODE", "systemBarEnabled").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getIntListAsUser(0, 0, "KIOSKMODE", "systemBarEnabled")
+                        .iterator();
         while (it.hasNext()) {
             if ((((Integer) it.next()).intValue() & 1) != 0) {
                 return true;
@@ -1556,7 +1961,10 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     }
 
     public final boolean isSystemBarHidden() {
-        Iterator it = this.mEdmStorageProvider.getIntListAsUser(0, 0, "KIOSKMODE", "systemBarEnabled").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getIntListAsUser(0, 0, "KIOSKMODE", "systemBarEnabled")
+                        .iterator();
         while (it.hasNext()) {
             int intValue = ((Integer) it.next()).intValue();
             if ((intValue & 1) != 0 && (intValue & 2) != 0) {
@@ -1575,7 +1983,10 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     }
 
     public final boolean isTaskManagerAllowedAsUser(boolean z, int i) {
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "KIOSKMODE", "taskManagerEnabled").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "KIOSKMODE", "taskManagerEnabled")
+                        .iterator();
         boolean z2 = true;
         while (it.hasNext()) {
             if (!((Boolean) it.next()).booleanValue()) {
@@ -1602,7 +2013,11 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     public final void logToKnoxsdkFile$1(int i, String str, String str2, Boolean bool) {
         StringBuilder sb = new StringBuilder();
         try {
-            sb.append("callerId: " + i + ", callerPkgName: " + this.mContext.getPackageManager().getNameForUid(i));
+            sb.append(
+                    "callerId: "
+                            + i
+                            + ", callerPkgName: "
+                            + this.mContext.getPackageManager().getNameForUid(i));
             sb.append(", api: ".concat(str));
             if (str2 != null) {
                 sb.append(", param: ".concat(str2));
@@ -1611,25 +2026,25 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                 sb.append(", result: " + bool);
             }
         } catch (Exception e) {
-            KnoxsdkFileLog.d("KioskModeService", "logToKnoxsdkFile failed due to unexpected exception", e);
+            KnoxsdkFileLog.d(
+                    "KioskModeService", "logToKnoxsdkFile failed due to unexpected exception", e);
         }
         KnoxsdkFileLog.d("KioskModeService", sb.toString());
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     public final void onAdminRemoved(int i) {
         int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(new ContextInfo(i, 0));
         if (callingOrCurrentUserId == ActivityManager.getCurrentUser()) {
             applyHideSystemBarSystemUI(callingOrCurrentUserId);
-            setKioskModeEnabledSystemUI(callingOrCurrentUserId, isKioskModeEnabledAsUser(callingOrCurrentUserId));
+            setKioskModeEnabledSystemUI(
+                    callingOrCurrentUserId, isKioskModeEnabledAsUser(callingOrCurrentUserId));
         }
         this.mCache.updateCache();
         applyMultiWindowPolicy(callingOrCurrentUserId, true);
@@ -1646,7 +2061,13 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             allowAirCommandMode(contextInfo, true);
         }
         if (callingOrCurrentUserId == 0) {
-            Iterator it = ((ArrayList) this.mEdmStorageProvider.getValues("KIOSKMODE", new String[]{"adminUid", "edgeScreenBlockedFunctions"}, null)).iterator();
+            Iterator it =
+                    ((ArrayList)
+                                    this.mEdmStorageProvider.getValues(
+                                            "KIOSKMODE",
+                                            new String[] {"adminUid", "edgeScreenBlockedFunctions"},
+                                            null))
+                            .iterator();
             boolean z = false;
             boolean z2 = false;
             while (it.hasNext()) {
@@ -1667,7 +2088,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
                 broadcastBlockedEdgeScreenIntent(true);
             }
         }
-        if (isKioskModeEnabledAsUser(callingOrCurrentUserId) && i == getActiveKioskAdmin(callingOrCurrentUserId)) {
+        if (isKioskModeEnabledAsUser(callingOrCurrentUserId)
+                && i == getActiveKioskAdmin(callingOrCurrentUserId)) {
             forceTerminateKiosk(callingOrCurrentUserId);
         }
     }
@@ -1681,7 +2103,12 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             intentFilter.addAction("android.intent.action.PACKAGE_CHANGED");
             intentFilter.addDataScheme("package");
             AnonymousClass2 anonymousClass2 = new AnonymousClass2(this, 1);
-            this.mContext.registerReceiverAsUser(anonymousClass2, new UserHandle(i), intentFilter, "com.samsung.android.knox.permission.KNOX_KIOSK_MODE_INTERNAL", null);
+            this.mContext.registerReceiverAsUser(
+                    anonymousClass2,
+                    new UserHandle(i),
+                    intentFilter,
+                    "com.samsung.android.knox.permission.KNOX_KIOSK_MODE_INTERNAL",
+                    null);
             ((HashMap) packageRemoveIntentReceiver).put(Integer.valueOf(i), anonymousClass2);
         } catch (Exception unused) {
             Log.e("KioskModeService", "Cannot register packageRemoveIntentReceiver");
@@ -1693,10 +2120,18 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             if (((HashMap) terminateIntentReceiver).containsKey(Integer.valueOf(i))) {
                 return;
             }
-            IntentFilter intentFilter = new IntentFilter("com.samsung.android.knox.intent.action.TERMINATE_KIOSK_INTERNAL");
+            IntentFilter intentFilter =
+                    new IntentFilter(
+                            "com.samsung.android.knox.intent.action.TERMINATE_KIOSK_INTERNAL");
             AnonymousClass2 anonymousClass2 = new AnonymousClass2(this, 2);
             ((HashMap) terminateIntentReceiver).put(Integer.valueOf(i), anonymousClass2);
-            this.mContext.registerReceiverAsUser(anonymousClass2, new UserHandle(i), intentFilter, "com.samsung.android.knox.permission.KNOX_KIOSK_MODE_INTERNAL", null, 2);
+            this.mContext.registerReceiverAsUser(
+                    anonymousClass2,
+                    new UserHandle(i),
+                    intentFilter,
+                    "com.samsung.android.knox.permission.KNOX_KIOSK_MODE_INTERNAL",
+                    null,
+                    2);
         } catch (Exception unused) {
             Log.e("KioskModeService", "Cannot register terminateIntentReceiver");
         }
@@ -1721,7 +2156,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         while (it.hasNext()) {
             sb.append(((String) it.next()) + ",");
         }
-        return this.mEdmStorageProvider.putString(i, 0, "KIOSKMODE", "blockedHwKeyList", sb.toString());
+        return this.mEdmStorageProvider.putString(
+                i, 0, "KIOSKMODE", "blockedHwKeyList", sb.toString());
     }
 
     public final boolean setAirCommandOn(int i, boolean z) {
@@ -1729,9 +2165,17 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                z2 = Settings.System.putIntForUser(this.mContext.getContentResolver(), "air_button_onoff", z ? 1 : 0, i);
+                z2 =
+                        Settings.System.putIntForUser(
+                                this.mContext.getContentResolver(),
+                                "air_button_onoff",
+                                z ? 1 : 0,
+                                i);
             } catch (Exception e) {
-                Log.i("KioskModeService", "setAirCommandOn() : failed to update setting value .", e);
+                Log.i(
+                        "KioskModeService",
+                        "setAirCommandOn() : failed to update setting value .",
+                        e);
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 z2 = false;
             }
@@ -1746,17 +2190,17 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
 
     /* JADX WARN: Can't wrap try/catch for region: R(10:(2:23|24)|(7:26|27|(1:40)(1:30)|31|32|33|34)|41|27|(0)|40|31|32|33|34) */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0050, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0051, code lost:
-    
-        android.os.Binder.restoreCallingIdentity(r12);
-     */
+
+       android.os.Binder.restoreCallingIdentity(r12);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x0054, code lost:
-    
-        throw r0;
-     */
+
+       throw r0;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1868,7 +2312,10 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         Ld0:
             return r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.kioskmode.KioskModeService.setDefaultHomeScreen(int, java.lang.String, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.kioskmode.KioskModeService.setDefaultHomeScreen(int,"
+                    + " java.lang.String, java.lang.String):boolean");
     }
 
     public final void setKioskModeEnabledSystemUI(int i, boolean z) {
@@ -1900,7 +2347,9 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             if (isKioskModeEnabledAsUser(identifier)) {
                 String kioskHomePackageAsUser = getKioskHomePackageAsUser(identifier);
                 String defaultHomeScreen = getDefaultHomeScreen(identifier);
-                if (kioskHomePackageAsUser != null && defaultHomeScreen != null && !kioskHomePackageAsUser.equals(defaultHomeScreen)) {
+                if (kioskHomePackageAsUser != null
+                        && defaultHomeScreen != null
+                        && !kioskHomePackageAsUser.equals(defaultHomeScreen)) {
                     setDefaultHomeScreen(identifier, defaultHomeScreen, kioskHomePackageAsUser);
                 }
                 registerPackageRemoveReceiver(identifier);
@@ -1910,7 +2359,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
         try {
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction("android.intent.action.USER_SWITCHED");
-            this.mContext.registerReceiver(new AnonymousClass2(this, 3), intentFilter, null, null, 2);
+            this.mContext.registerReceiver(
+                    new AnonymousClass2(this, 3), intentFilter, null, null, 2);
         } catch (Exception unused) {
             Log.e("KioskModeService", "Cannot register registerSwitchingUserReceiver");
         }
@@ -1943,7 +2393,9 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             Log.e("KioskModeService", "There's no matched key");
             return;
         }
-        this.mContext.unregisterReceiver((BroadcastReceiver) ((HashMap) packageRemoveIntentReceiver).get(Integer.valueOf(i)));
+        this.mContext.unregisterReceiver(
+                (BroadcastReceiver)
+                        ((HashMap) packageRemoveIntentReceiver).get(Integer.valueOf(i)));
         ((HashMap) packageRemoveIntentReceiver).remove(Integer.valueOf(i));
     }
 
@@ -1952,7 +2404,8 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
             Log.e("KioskModeService", "There's no matched key");
             return;
         }
-        this.mContext.unregisterReceiver((BroadcastReceiver) ((HashMap) terminateIntentReceiver).get(Integer.valueOf(i)));
+        this.mContext.unregisterReceiver(
+                (BroadcastReceiver) ((HashMap) terminateIntentReceiver).get(Integer.valueOf(i)));
         ((HashMap) terminateIntentReceiver).remove(Integer.valueOf(i));
     }
 
@@ -1963,6 +2416,7 @@ public final class KioskModeService extends IKioskMode.Stub implements Enterpris
     }
 
     public final boolean wipeRecentTasks(ContextInfo contextInfo) {
-        return wipeRecentTasks(Utils.getCallingOrCurrentUserId(enforceKioskModePermission(contextInfo)));
+        return wipeRecentTasks(
+                Utils.getCallingOrCurrentUserId(enforceKioskModePermission(contextInfo)));
     }
 }

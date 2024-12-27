@@ -3,8 +3,10 @@ package com.android.server.pm;
 import android.content.pm.Signature;
 import android.content.pm.SigningDetails;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.pm.pkg.AndroidPackage;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,7 +29,9 @@ public final class Policy {
 
         public final void addSignature(String str) {
             if (str == null) {
-                throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Invalid signature value ", str));
+                throw new IllegalArgumentException(
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                "Invalid signature value ", str));
             }
             ((HashSet) this.mCerts).add(new Signature(str));
         }
@@ -41,7 +45,10 @@ public final class Policy {
 
     public final String getMatchedSeInfo(AndroidPackage androidPackage) {
         Signature[] signatureArr = (Signature[]) this.mCerts.toArray(new Signature[0]);
-        if (androidPackage.getSigningDetails() != SigningDetails.UNKNOWN && !Signature.areExactMatch(androidPackage.getSigningDetails(), signatureArr) && (signatureArr.length > 1 || !androidPackage.getSigningDetails().hasCertificate(signatureArr[0]))) {
+        if (androidPackage.getSigningDetails() != SigningDetails.UNKNOWN
+                && !Signature.areExactMatch(androidPackage.getSigningDetails(), signatureArr)
+                && (signatureArr.length > 1
+                        || !androidPackage.getSigningDetails().hasCertificate(signatureArr[0]))) {
             return null;
         }
         String str = (String) this.mPkgMap.get(androidPackage.getPackageName());

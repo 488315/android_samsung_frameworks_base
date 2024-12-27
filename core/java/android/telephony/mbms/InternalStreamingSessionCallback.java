@@ -2,7 +2,7 @@ package android.telephony.mbms;
 
 import android.os.Binder;
 import android.os.RemoteException;
-import android.telephony.mbms.IMbmsStreamingSessionCallback;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -12,7 +12,8 @@ public class InternalStreamingSessionCallback extends IMbmsStreamingSessionCallb
     private final Executor mExecutor;
     private volatile boolean mIsStopped = false;
 
-    public InternalStreamingSessionCallback(MbmsStreamingSessionCallback appCallback, Executor executor) {
+    public InternalStreamingSessionCallback(
+            MbmsStreamingSessionCallback appCallback, Executor executor) {
         this.mAppCallback = appCallback;
         this.mExecutor = executor;
     }
@@ -24,30 +25,37 @@ public class InternalStreamingSessionCallback extends IMbmsStreamingSessionCallb
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingSessionCallback.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalStreamingSessionCallback.this.mAppCallback.onError(errorCode, message);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalStreamingSessionCallback.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalStreamingSessionCallback.this.mAppCallback.onError(
+                                    errorCode, message);
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }
     }
 
     @Override // android.telephony.mbms.IMbmsStreamingSessionCallback
-    public void onStreamingServicesUpdated(final List<StreamingServiceInfo> services) throws RemoteException {
+    public void onStreamingServicesUpdated(final List<StreamingServiceInfo> services)
+            throws RemoteException {
         if (this.mIsStopped) {
             return;
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingSessionCallback.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalStreamingSessionCallback.this.mAppCallback.onStreamingServicesUpdated(services);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalStreamingSessionCallback.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalStreamingSessionCallback.this.mAppCallback
+                                    .onStreamingServicesUpdated(services);
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }
@@ -60,12 +68,14 @@ public class InternalStreamingSessionCallback extends IMbmsStreamingSessionCallb
         }
         long token = Binder.clearCallingIdentity();
         try {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.mbms.InternalStreamingSessionCallback.3
-                @Override // java.lang.Runnable
-                public void run() {
-                    InternalStreamingSessionCallback.this.mAppCallback.onMiddlewareReady();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.mbms.InternalStreamingSessionCallback.3
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            InternalStreamingSessionCallback.this.mAppCallback.onMiddlewareReady();
+                        }
+                    });
         } finally {
             Binder.restoreCallingIdentity(token);
         }

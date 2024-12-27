@@ -3,7 +3,7 @@ package com.samsung.android.knox.dar;
 import android.os.Binder;
 import android.os.ServiceManager;
 import android.util.Log;
-import com.samsung.android.knox.dar.IDarManagerService;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,8 @@ public class VirtualLockUtils {
 
     private Optional<IDarManagerService> getDarManagerService() {
         if (this.mDarManagerService == null) {
-            IDarManagerService service = IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
+            IDarManagerService service =
+                    IDarManagerService.Stub.asInterface(ServiceManager.getService("dar"));
             this.mDarManagerService = service;
         }
         IDarManagerService service2 = this.mDarManagerService;
@@ -35,12 +36,20 @@ public class VirtualLockUtils {
     }
 
     public int reserveUserIdForSystem() {
-        return ((Integer) getDarManagerService().map(new Function() { // from class: com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda6
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return VirtualLockUtils.lambda$reserveUserIdForSystem$0((IDarManagerService) obj);
-            }
-        }).orElse(-10000)).intValue();
+        return ((Integer)
+                        getDarManagerService()
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda6
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return VirtualLockUtils
+                                                        .lambda$reserveUserIdForSystem$0(
+                                                                (IDarManagerService) obj);
+                                            }
+                                        })
+                                .orElse(-10000))
+                .intValue();
     }
 
     static /* synthetic */ Integer lambda$reserveUserIdForSystem$0(IDarManagerService s) {
@@ -54,12 +63,20 @@ public class VirtualLockUtils {
     }
 
     public int getReservedUserIdForSystem() {
-        return ((Integer) getDarManagerService().map(new Function() { // from class: com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda3
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return VirtualLockUtils.lambda$getReservedUserIdForSystem$1((IDarManagerService) obj);
-            }
-        }).orElse(-10000)).intValue();
+        return ((Integer)
+                        getDarManagerService()
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda3
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return VirtualLockUtils
+                                                        .lambda$getReservedUserIdForSystem$1(
+                                                                (IDarManagerService) obj);
+                                            }
+                                        })
+                                .orElse(-10000))
+                .intValue();
     }
 
     static /* synthetic */ Integer lambda$getReservedUserIdForSystem$1(IDarManagerService s) {
@@ -73,12 +90,19 @@ public class VirtualLockUtils {
     }
 
     public int getAvailableUserId() {
-        return ((Integer) getDarManagerService().map(new Function() { // from class: com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return VirtualLockUtils.lambda$getAvailableUserId$2((IDarManagerService) obj);
-            }
-        }).orElse(-10000)).intValue();
+        return ((Integer)
+                        getDarManagerService()
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return VirtualLockUtils.lambda$getAvailableUserId$2(
+                                                        (IDarManagerService) obj);
+                                            }
+                                        })
+                                .orElse(-10000))
+                .intValue();
     }
 
     static /* synthetic */ Integer lambda$getAvailableUserId$2(IDarManagerService s) {
@@ -134,17 +158,28 @@ public class VirtualLockUtils {
 
     public boolean setResetPasswordToken(final byte[] token, final int userId) {
         if (isVirtualUserId(userId)) {
-            return ((Boolean) getDarManagerService().map(new Function() { // from class: com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda5
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return VirtualLockUtils.lambda$setResetPasswordToken$3(token, userId, (IDarManagerService) obj);
-                }
-            }).orElse(false)).booleanValue();
+            return ((Boolean)
+                            getDarManagerService()
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda5
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return VirtualLockUtils
+                                                            .lambda$setResetPasswordToken$3(
+                                                                    token,
+                                                                    userId,
+                                                                    (IDarManagerService) obj);
+                                                }
+                                            })
+                                    .orElse(false))
+                    .booleanValue();
         }
         return false;
     }
 
-    static /* synthetic */ Boolean lambda$setResetPasswordToken$3(byte[] token, int userId, IDarManagerService s) {
+    static /* synthetic */ Boolean lambda$setResetPasswordToken$3(
+            byte[] token, int userId, IDarManagerService s) {
         try {
             return Boolean.valueOf(s.setResetPasswordToken(token, userId));
         } catch (Exception e) {
@@ -156,17 +191,27 @@ public class VirtualLockUtils {
 
     public boolean clearResetPasswordToken(final int userId) {
         if (isVirtualUserId(userId)) {
-            return ((Boolean) getDarManagerService().map(new Function() { // from class: com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda2
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return VirtualLockUtils.lambda$clearResetPasswordToken$4(userId, (IDarManagerService) obj);
-                }
-            }).orElse(false)).booleanValue();
+            return ((Boolean)
+                            getDarManagerService()
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda2
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return VirtualLockUtils
+                                                            .lambda$clearResetPasswordToken$4(
+                                                                    userId,
+                                                                    (IDarManagerService) obj);
+                                                }
+                                            })
+                                    .orElse(false))
+                    .booleanValue();
         }
         return false;
     }
 
-    static /* synthetic */ Boolean lambda$clearResetPasswordToken$4(int userId, IDarManagerService s) {
+    static /* synthetic */ Boolean lambda$clearResetPasswordToken$4(
+            int userId, IDarManagerService s) {
         try {
             return Boolean.valueOf(s.clearResetPasswordToken(userId));
         } catch (Exception e) {
@@ -178,17 +223,27 @@ public class VirtualLockUtils {
 
     public boolean isResetPasswordTokenActive(final int userId) {
         if (isVirtualUserId(userId)) {
-            return ((Boolean) getDarManagerService().map(new Function() { // from class: com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return VirtualLockUtils.lambda$isResetPasswordTokenActive$5(userId, (IDarManagerService) obj);
-                }
-            }).orElse(false)).booleanValue();
+            return ((Boolean)
+                            getDarManagerService()
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return VirtualLockUtils
+                                                            .lambda$isResetPasswordTokenActive$5(
+                                                                    userId,
+                                                                    (IDarManagerService) obj);
+                                                }
+                                            })
+                                    .orElse(false))
+                    .booleanValue();
         }
         return false;
     }
 
-    static /* synthetic */ Boolean lambda$isResetPasswordTokenActive$5(int userId, IDarManagerService s) {
+    static /* synthetic */ Boolean lambda$isResetPasswordTokenActive$5(
+            int userId, IDarManagerService s) {
         try {
             return Boolean.valueOf(s.isResetPasswordTokenActive(userId));
         } catch (Exception e) {
@@ -198,19 +253,32 @@ public class VirtualLockUtils {
         }
     }
 
-    public boolean resetPasswordWithToken(final String password, final byte[] token, final int userId) {
+    public boolean resetPasswordWithToken(
+            final String password, final byte[] token, final int userId) {
         if (isVirtualUserId(userId)) {
-            return ((Boolean) getDarManagerService().map(new Function() { // from class: com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda4
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return VirtualLockUtils.lambda$resetPasswordWithToken$6(password, token, userId, (IDarManagerService) obj);
-                }
-            }).orElse(false)).booleanValue();
+            return ((Boolean)
+                            getDarManagerService()
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.knox.dar.VirtualLockUtils$$ExternalSyntheticLambda4
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return VirtualLockUtils
+                                                            .lambda$resetPasswordWithToken$6(
+                                                                    password,
+                                                                    token,
+                                                                    userId,
+                                                                    (IDarManagerService) obj);
+                                                }
+                                            })
+                                    .orElse(false))
+                    .booleanValue();
         }
         return false;
     }
 
-    static /* synthetic */ Boolean lambda$resetPasswordWithToken$6(String password, byte[] token, int userId, IDarManagerService s) {
+    static /* synthetic */ Boolean lambda$resetPasswordWithToken$6(
+            String password, byte[] token, int userId, IDarManagerService s) {
         try {
             return Boolean.valueOf(s.resetPasswordWithToken(password, token, userId));
         } catch (Exception e) {

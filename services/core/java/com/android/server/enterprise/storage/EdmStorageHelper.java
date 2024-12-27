@@ -10,11 +10,14 @@ import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOut
 import android.os.Build;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.DropBoxManagerService$EntryFile$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.custom.utils.KnoxsdkFileLog;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -49,13 +52,23 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
                 if (EdmStorageHelper.m528$$Nest$smpreTableUpdate(this.val$db, table)) {
                     return;
                 }
-                ArrayList m525$$Nest$smgetMissingColumns = EdmStorageHelper.m525$$Nest$smgetMissingColumns(this.val$db, str, table);
+                ArrayList m525$$Nest$smgetMissingColumns =
+                        EdmStorageHelper.m525$$Nest$smgetMissingColumns(this.val$db, str, table);
                 Iterator it = m525$$Nest$smgetMissingColumns.iterator();
                 while (it.hasNext()) {
                     Column column = (Column) it.next();
-                    this.val$db.execSQL("ALTER TABLE " + str + " ADD COLUMN " + column.getSQLDeclaration() + ";");
+                    this.val$db.execSQL(
+                            "ALTER TABLE "
+                                    + str
+                                    + " ADD COLUMN "
+                                    + column.getSQLDeclaration()
+                                    + ";");
                 }
-                Log.d("EdmStorageHelper", String.format("onTableFound Altered Table %s with Columns %d", str, Integer.valueOf(m525$$Nest$smgetMissingColumns.size())));
+                Log.d(
+                        "EdmStorageHelper",
+                        String.format(
+                                "onTableFound Altered Table %s with Columns %d",
+                                str, Integer.valueOf(m525$$Nest$smgetMissingColumns.size())));
             } catch (Exception e) {
                 Log.w("EdmStorageHelper", "Table " + str + " creation/update EX:", e);
             }
@@ -63,7 +76,8 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
     }
 
     /* renamed from: -$$Nest$smgetMissingColumns, reason: not valid java name */
-    public static ArrayList m525$$Nest$smgetMissingColumns(SQLiteDatabase sQLiteDatabase, String str, Table table) {
+    public static ArrayList m525$$Nest$smgetMissingColumns(
+            SQLiteDatabase sQLiteDatabase, String str, Table table) {
         Cursor cursor = null;
         try {
             cursor = sQLiteDatabase.rawQuery("SELECT * FROM " + str + " LIMIT 1", null);
@@ -87,9 +101,11 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
     }
 
     /* renamed from: -$$Nest$sminsertIntoEntAppMgmtTable, reason: not valid java name */
-    public static void m526$$Nest$sminsertIntoEntAppMgmtTable(SQLiteDatabase sQLiteDatabase, String str, byte[] bArr, byte[] bArr2) {
+    public static void m526$$Nest$sminsertIntoEntAppMgmtTable(
+            SQLiteDatabase sQLiteDatabase, String str, byte[] bArr, byte[] bArr2) {
         try {
-            SQLiteStatement compileStatement = sQLiteDatabase.compileStatement("INSERT INTO ENT_APP_MGMT_RT VALUES (?,?,?)");
+            SQLiteStatement compileStatement =
+                    sQLiteDatabase.compileStatement("INSERT INTO ENT_APP_MGMT_RT VALUES (?,?,?)");
             try {
                 compileStatement.bindString(1, str);
                 compileStatement.bindBlob(2, bArr);
@@ -99,7 +115,8 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
             } finally {
             }
         } catch (Exception e) {
-            KnoxsdkFileLog.e("EdmStorageHelper", "Error inserting package into database: " + e.getMessage());
+            KnoxsdkFileLog.e(
+                    "EdmStorageHelper", "Error inserting package into database: " + e.getMessage());
         }
     }
 
@@ -108,18 +125,29 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
         String str = table.mTableName;
         if (str.compareToIgnoreCase("ADMIN_INFO") == 0) {
             try {
-                sQLiteDatabase.execSQL("INSERT INTO ADMIN_INFO VALUES (0, 'SYSTEM-LEVEL-ADMIN', 0, 0);");
-                sQLiteDatabase.execSQL("INSERT INTO ADMIN_INFO VALUES (1000, 'KNOX-CUSTOM', 0, 0);");
+                sQLiteDatabase.execSQL(
+                        "INSERT INTO ADMIN_INFO VALUES (0, 'SYSTEM-LEVEL-ADMIN', 0, 0);");
+                sQLiteDatabase.execSQL(
+                        "INSERT INTO ADMIN_INFO VALUES (1000, 'KNOX-CUSTOM', 0, 0);");
                 if (isTableExists(sQLiteDatabase, "ADMIN")) {
-                    sQLiteDatabase.execSQL("INSERT INTO ADMIN_INFO(adminUid,adminName,canRemove) SELECT * from ADMIN WHERE adminUid!=1000;");
-                    Log.d("EdmStorageHelper", "In postAdminInfoTableCreate - Start adding KnoxCustomManagerService.DB_UID to ADMIN table...");
+                    sQLiteDatabase.execSQL(
+                            "INSERT INTO ADMIN_INFO(adminUid,adminName,canRemove) SELECT * from"
+                                + " ADMIN WHERE adminUid!=1000;");
+                    Log.d(
+                            "EdmStorageHelper",
+                            "In postAdminInfoTableCreate - Start adding"
+                                + " KnoxCustomManagerService.DB_UID to ADMIN table...");
                     sQLiteDatabase.execSQL("INSERT INTO ADMIN VALUES (1000,1000,0);");
-                    Log.d("EdmStorageHelper", "In postAdminInfoTableCreate - Finished adding KnoxCustomManagerService.DB_UID to ADMIN table");
+                    Log.d(
+                            "EdmStorageHelper",
+                            "In postAdminInfoTableCreate - Finished adding"
+                                + " KnoxCustomManagerService.DB_UID to ADMIN table");
                     return;
                 }
                 return;
             } catch (Exception e) {
-                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "ADMIN_INFO postAdminInfoTableCreate failed  EX: ", "EdmStorageHelper");
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        e, "ADMIN_INFO postAdminInfoTableCreate failed  EX: ", "EdmStorageHelper");
                 return;
             }
         }
@@ -128,7 +156,8 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
                 sQLiteDatabase.execSQL("INSERT INTO CONTAINER(containerID,adminUid) VALUES (0,0);");
                 return;
             } catch (Exception e2) {
-                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e2, "CONTAINER postContainerTableCreate failed  EX: ", "EdmStorageHelper");
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        e2, "CONTAINER postContainerTableCreate failed  EX: ", "EdmStorageHelper");
                 return;
             }
         }
@@ -145,7 +174,10 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
                 Log.d("EdmStorageHelper", "Finished initialising KNOX_CUSTOM table");
                 return;
             } catch (Exception e3) {
-                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e3, "ADMIN_INFO postKnoxCustomTableCreate failed  EX: ", "EdmStorageHelper");
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        e3,
+                        "ADMIN_INFO postKnoxCustomTableCreate failed  EX: ",
+                        "EdmStorageHelper");
                 return;
             }
         }
@@ -153,18 +185,30 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
             KnoxsdkFileLog.d("EdmStorageHelper", "postEntAppMgntRtTableCreate()");
             try {
                 ArrayList arrayList = new ArrayList();
-                arrayList.add("E4:15:1E:38:2B:51:07:8C:AA:2E:3E:0C:71:9A:95:DF:17:72:E4:CA:F1:94:96:26:48:33:AB:66:1D:86:12:65");
-                arrayList.add("F7:8E:EE:60:32:9A:02:EA:D2:BE:02:06:96:0E:6E:01:8F:FF:FA:5C:AC:FD:0E:0D:76:A2:1A:62:29:0C:A9:35");
+                arrayList.add(
+                        "E4:15:1E:38:2B:51:07:8C:AA:2E:3E:0C:71:9A:95:DF:17:72:E4:CA:F1:94:96:26:48:33:AB:66:1D:86:12:65");
+                arrayList.add(
+                        "F7:8E:EE:60:32:9A:02:EA:D2:BE:02:06:96:0E:6E:01:8F:FF:FA:5C:AC:FD:0E:0D:76:A2:1A:62:29:0C:A9:35");
                 ArrayList arrayList2 = new ArrayList();
                 arrayList2.add("com.samsung.android.knox.permission.KNOX_CCM_KEYSTORE");
-                m526$$Nest$sminsertIntoEntAppMgmtTable(sQLiteDatabase, "com.microsoft.windowsintune.companyportal", serializeObject(arrayList), serializeObject(arrayList2));
+                m526$$Nest$sminsertIntoEntAppMgmtTable(
+                        sQLiteDatabase,
+                        "com.microsoft.windowsintune.companyportal",
+                        serializeObject(arrayList),
+                        serializeObject(arrayList2));
                 ArrayList arrayList3 = new ArrayList();
-                arrayList3.add("F7:8E:EE:60:32:9A:02:EA:D2:BE:02:06:96:0E:6E:01:8F:FF:FA:5C:AC:FD:0E:0D:76:A2:1A:62:29:0C:A9:35");
+                arrayList3.add(
+                        "F7:8E:EE:60:32:9A:02:EA:D2:BE:02:06:96:0E:6E:01:8F:FF:FA:5C:AC:FD:0E:0D:76:A2:1A:62:29:0C:A9:35");
                 ArrayList arrayList4 = new ArrayList();
                 arrayList4.add("com.samsung.android.knox.permission.KNOX_CCM_KEYSTORE");
-                m526$$Nest$sminsertIntoEntAppMgmtTable(sQLiteDatabase, "com.microsoft.mdm.testappclient", serializeObject(arrayList3), serializeObject(arrayList4));
+                m526$$Nest$sminsertIntoEntAppMgmtTable(
+                        sQLiteDatabase,
+                        "com.microsoft.mdm.testappclient",
+                        serializeObject(arrayList3),
+                        serializeObject(arrayList4));
                 ArrayList arrayList5 = new ArrayList();
-                arrayList5.add("A4:0D:A8:0A:59:D1:70:CA:A9:50:CF:15:C1:8C:45:4D:47:A3:9B:26:98:9D:8B:64:0E:CD:74:5B:A7:1B:F5:DC");
+                arrayList5.add(
+                        "A4:0D:A8:0A:59:D1:70:CA:A9:50:CF:15:C1:8C:45:4D:47:A3:9B:26:98:9D:8B:64:0E:CD:74:5B:A7:1B:F5:DC");
                 ArrayList arrayList6 = new ArrayList();
                 arrayList6.add("com.samsung.android.knox.permission.KNOX_CCM_KEYSTORE");
                 byte[] serializeObject = serializeObject(arrayList5);
@@ -172,11 +216,21 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
                 String str2 = Build.TYPE;
                 str2.getClass();
                 if (str2.equals("eng") || str2.equals("userdebug")) {
-                    m526$$Nest$sminsertIntoEntAppMgmtTable(sQLiteDatabase, "com.samsung.edmtest", serializeObject, serializeObject2);
-                    m526$$Nest$sminsertIntoEntAppMgmtTable(sQLiteDatabase, "om.samsung.android.knox.zt.sdk.consumer", serializeObject, serializeObject2);
+                    m526$$Nest$sminsertIntoEntAppMgmtTable(
+                            sQLiteDatabase,
+                            "com.samsung.edmtest",
+                            serializeObject,
+                            serializeObject2);
+                    m526$$Nest$sminsertIntoEntAppMgmtTable(
+                            sQLiteDatabase,
+                            "om.samsung.android.knox.zt.sdk.consumer",
+                            serializeObject,
+                            serializeObject2);
                 }
             } catch (Exception e4) {
-                KnoxsdkFileLog.e("EdmStorageHelper", "ENT_APP_MGMT_RT postEntAppMgntRtTableCreate failed  EX: " + e4);
+                KnoxsdkFileLog.e(
+                        "EdmStorageHelper",
+                        "ENT_APP_MGMT_RT postEntAppMgntRtTableCreate failed  EX: " + e4);
             }
         }
     }
@@ -191,10 +245,19 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
         if (str.compareToIgnoreCase("ADMIN") == 0) {
             try {
                 sQLiteDatabase.execSQL("DROP TRIGGER ADMIN_INFO_ONINSERT");
-                sQLiteDatabase.execSQL("CREATE TRIGGER ADMIN_INFO_ONINSERT  AFTER INSERT  ON ADMIN_INFO BEGIN INSERT INTO ADMIN VALUES (NEW.adminUid,NEW.adminUid,0, NEW.adminUid/100000); END;");
-                sQLiteDatabase.execSQL("CREATE TRIGGER IF NOT EXISTS ADMIN_INFO_ONUPDATE  UPDATE  OF adminUid ON ADMIN_INFO BEGIN UPDATE ADMIN SET adminUid = NEW.adminUid WHERE adminUid = OLD.adminUid; END;");
+                sQLiteDatabase.execSQL(
+                        "CREATE TRIGGER ADMIN_INFO_ONINSERT  AFTER INSERT  ON ADMIN_INFO BEGIN"
+                            + " INSERT INTO ADMIN VALUES (NEW.adminUid,NEW.adminUid,0,"
+                            + " NEW.adminUid/100000); END;");
+                sQLiteDatabase.execSQL(
+                        "CREATE TRIGGER IF NOT EXISTS ADMIN_INFO_ONUPDATE  UPDATE  OF adminUid ON"
+                            + " ADMIN_INFO BEGIN UPDATE ADMIN SET adminUid = NEW.adminUid WHERE"
+                            + " adminUid = OLD.adminUid; END;");
             } catch (Exception e) {
-                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "ADMIN_INFOUpdate of ADMIN_INFO_ONINSERT trigger has failed : ", "EdmStorageHelper");
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        e,
+                        "ADMIN_INFOUpdate of ADMIN_INFO_ONINSERT trigger has failed : ",
+                        "EdmStorageHelper");
             }
             try {
                 try {
@@ -217,7 +280,8 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
                 sQLiteDatabase.setForeignKeyConstraintsEnabled(true);
             }
         }
-        if (str.compareToIgnoreCase("generic") != 0 && str.compareToIgnoreCase("WebFilterLogTable") != 0) {
+        if (str.compareToIgnoreCase("generic") != 0
+                && str.compareToIgnoreCase("WebFilterLogTable") != 0) {
             int compareToIgnoreCase = str.compareToIgnoreCase("EnterpriseIslFpTable");
             String str2 = table.mTableName;
             if (compareToIgnoreCase == 0) {
@@ -236,12 +300,21 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
                     }
                     Log.e("EdmStorageHelper", "Upgrading " + str2 + " Table");
                     String str3 = str2 + "_temp";
-                    sQLiteDatabase.execSQL("CREATE TABLE " + str3 + " AS SELECT * FROM " + str2 + ";");
+                    sQLiteDatabase.execSQL(
+                            "CREATE TABLE " + str3 + " AS SELECT * FROM " + str2 + ";");
                     StringBuilder sb = new StringBuilder("DROP TABLE ");
                     sb.append(str2);
                     sQLiteDatabase.execSQL(sb.toString());
                     createTable(sQLiteDatabase, table);
-                    sQLiteDatabase.execSQL("INSERT INTO " + str2 + " (adminUid,fpBaseLined,packageName,fpCurrent,fpDirty,fpNewRow) SELECT adminUid,fpBaseLined,packageName,fpCurrent,fpDirty,fpNewRow from " + str3 + ";");
+                    sQLiteDatabase.execSQL(
+                            "INSERT INTO "
+                                    + str2
+                                    + " (adminUid,fpBaseLined,packageName,fpCurrent,fpDirty,fpNewRow)"
+                                    + " SELECT"
+                                    + " adminUid,fpBaseLined,packageName,fpCurrent,fpDirty,fpNewRow"
+                                    + " from "
+                                    + str3
+                                    + ";");
                     StringBuilder sb2 = new StringBuilder("DROP TABLE ");
                     sb2.append(str3);
                     sQLiteDatabase.execSQL(sb2.toString());
@@ -272,12 +345,18 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
                     }
                     Log.w("EdmStorageHelper", "Upgrading " + str2 + " Table");
                     String str4 = str2 + "_temp";
-                    sQLiteDatabase.execSQL("CREATE TABLE " + str4 + " AS SELECT * FROM " + str2 + ";");
+                    sQLiteDatabase.execSQL(
+                            "CREATE TABLE " + str4 + " AS SELECT * FROM " + str2 + ";");
                     StringBuilder sb3 = new StringBuilder("DROP TABLE ");
                     sb3.append(str2);
                     sQLiteDatabase.execSQL(sb3.toString());
                     createTable(sQLiteDatabase, table);
-                    sQLiteDatabase.execSQL("INSERT INTO " + str2 + "( adminUid,name,propertyName,propertyValue)  SELECT * FROM " + str4 + ";");
+                    sQLiteDatabase.execSQL(
+                            "INSERT INTO "
+                                    + str2
+                                    + "( adminUid,name,propertyName,propertyValue)  SELECT * FROM "
+                                    + str4
+                                    + ";");
                     StringBuilder sb4 = new StringBuilder("DROP TABLE ");
                     sb4.append(str4);
                     sQLiteDatabase.execSQL(sb4.toString());
@@ -341,54 +420,97 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
             m.append(", ");
             str5 = m.toString();
         }
-        String m2 = BootReceiver$$ExternalSyntheticOutline0.m("CREATE TABLE ", str3, " (", str5.length() > 0 ? DropBoxManagerService$EntryFile$$ExternalSyntheticOutline0.m(2, 0, str5) : "");
+        String m2 =
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        "CREATE TABLE ",
+                        str3,
+                        " (",
+                        str5.length() > 0
+                                ? DropBoxManagerService$EntryFile$$ExternalSyntheticOutline0.m(
+                                        2, 0, str5)
+                                : "");
         Iterator it2 = table.mColumns.iterator();
         while (it2.hasNext()) {
             Column column2 = (Column) it2.next();
             if (column2.mIsPrimaryKey) {
-                str4 = AudioOffloadInfo$$ExternalSyntheticOutline0.m(BootReceiver$$ExternalSyntheticOutline0.m(str4), column2.mColumnName, ", ");
+                str4 =
+                        AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                BootReceiver$$ExternalSyntheticOutline0.m(str4),
+                                column2.mColumnName,
+                                ", ");
             }
         }
-        String m3 = str4.length() > 0 ? DropBoxManagerService$EntryFile$$ExternalSyntheticOutline0.m(2, 0, str4) : null;
+        String m3 =
+                str4.length() > 0
+                        ? DropBoxManagerService$EntryFile$$ExternalSyntheticOutline0.m(2, 0, str4)
+                        : null;
         if (m3 != null) {
             m2 = m2 + ", PRIMARY KEY (" + m3 + ")";
         }
         String str6 = table.mForeignReferTable;
-        if (str6 != null && (str = table.mForeignReferKey) != null && (str2 = table.mForeignKeyName) != null) {
+        if (str6 != null
+                && (str = table.mForeignReferKey) != null
+                && (str2 = table.mForeignKeyName) != null) {
             StringBuilder sb = new StringBuilder();
             sb.append(m2);
             sb.append(" FOREIGN KEY (");
             sb.append(str2);
             sb.append(") REFERENCES ");
             sb.append(str6);
-            m2 = BootReceiver$$ExternalSyntheticOutline0.m(sb, "(", str, ") ON DELETE CASCADE ON UPDATE CASCADE");
+            m2 =
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            sb, "(", str, ") ON DELETE CASCADE ON UPDATE CASCADE");
         }
         sQLiteDatabase.execSQL(m2.concat(");"));
-        Log.d("EdmStorageHelper", String.format("onTableFound Created Table %s with Columns %d", table.mTableName, Integer.valueOf(table.mColumns.size())));
+        Log.d(
+                "EdmStorageHelper",
+                String.format(
+                        "onTableFound Created Table %s with Columns %d",
+                        table.mTableName, Integer.valueOf(table.mColumns.size())));
     }
 
     public static void doCreationOrUpdatePostCommands(SQLiteDatabase sQLiteDatabase) {
         try {
-            sQLiteDatabase.execSQL("CREATE TRIGGER IF NOT EXISTS webFilterLoggingPolicy_TbSize  AFTER INSERT  ON WebFilterLogTable WHEN (SELECT COUNT(*) FROM WebFilterLogTable) > 1000  BEGIN  DELETE FROM WebFilterLogTable WHERE id = (SELECT id FROM WebFilterLogTable ORDER BY id LIMIT 1); END;  END;");
+            sQLiteDatabase.execSQL(
+                    "CREATE TRIGGER IF NOT EXISTS webFilterLoggingPolicy_TbSize  AFTER INSERT  ON"
+                        + " WebFilterLogTable WHEN (SELECT COUNT(*) FROM WebFilterLogTable) > 1000 "
+                        + " BEGIN  DELETE FROM WebFilterLogTable WHERE id = (SELECT id FROM"
+                        + " WebFilterLogTable ORDER BY id LIMIT 1); END;  END;");
         } catch (Exception e) {
             Log.d("EdmStorageHelper", "doCreationOrUpdatePostCommands EX1:", e);
         }
         try {
-            sQLiteDatabase.execSQL("CREATE TRIGGER IF NOT EXISTS bluetoothLoggingPolicy_TbSize  AFTER INSERT  ON BluetoothLogTable WHEN (SELECT COUNT(*) FROM BluetoothLogTable) > 1000  BEGIN  DELETE FROM BluetoothLogTable WHERE id = (SELECT id FROM BluetoothLogTable ORDER BY id LIMIT 1); END;  END;");
+            sQLiteDatabase.execSQL(
+                    "CREATE TRIGGER IF NOT EXISTS bluetoothLoggingPolicy_TbSize  AFTER INSERT  ON"
+                        + " BluetoothLogTable WHEN (SELECT COUNT(*) FROM BluetoothLogTable) > 1000 "
+                        + " BEGIN  DELETE FROM BluetoothLogTable WHERE id = (SELECT id FROM"
+                        + " BluetoothLogTable ORDER BY id LIMIT 1); END;  END;");
         } catch (Exception e2) {
             Log.d("EdmStorageHelper", "doCreationOrUpdatePostCommands EX2:", e2);
         }
         try {
-            sQLiteDatabase.execSQL("INSERT INTO EnumLSOItemTypes(Item_Type, Item_Description) VALUES (1, 'SpaceView');");
-            sQLiteDatabase.execSQL("INSERT INTO EnumLSOItemTypes(Item_Type, Item_Description) VALUES (2, 'TextView');");
-            sQLiteDatabase.execSQL("INSERT INTO EnumLSOItemTypes(Item_Type, Item_Description) VALUES (3, 'ImageView');");
-            sQLiteDatabase.execSQL("INSERT INTO EnumLSOItemTypes(Item_Type, Item_Description) VALUES (4, 'ContainerView');");
-            sQLiteDatabase.execSQL("INSERT INTO EnumLSOItemTypes(Item_Type, Item_Description) VALUES (5, 'CustomWidget');");
+            sQLiteDatabase.execSQL(
+                    "INSERT INTO EnumLSOItemTypes(Item_Type, Item_Description) VALUES (1,"
+                        + " 'SpaceView');");
+            sQLiteDatabase.execSQL(
+                    "INSERT INTO EnumLSOItemTypes(Item_Type, Item_Description) VALUES (2,"
+                        + " 'TextView');");
+            sQLiteDatabase.execSQL(
+                    "INSERT INTO EnumLSOItemTypes(Item_Type, Item_Description) VALUES (3,"
+                        + " 'ImageView');");
+            sQLiteDatabase.execSQL(
+                    "INSERT INTO EnumLSOItemTypes(Item_Type, Item_Description) VALUES (4,"
+                        + " 'ContainerView');");
+            sQLiteDatabase.execSQL(
+                    "INSERT INTO EnumLSOItemTypes(Item_Type, Item_Description) VALUES (5,"
+                        + " 'CustomWidget');");
         } catch (Exception unused) {
         }
         try {
-            sQLiteDatabase.execSQL("INSERT INTO EnumLSOOrientation(Id, Description ) VALUES (0, 'VERTICAL');");
-            sQLiteDatabase.execSQL("INSERT INTO EnumLSOOrientation(Id, Description ) VALUES (1, 'HORIZONTAL');");
+            sQLiteDatabase.execSQL(
+                    "INSERT INTO EnumLSOOrientation(Id, Description ) VALUES (0, 'VERTICAL');");
+            sQLiteDatabase.execSQL(
+                    "INSERT INTO EnumLSOOrientation(Id, Description ) VALUES (1, 'HORIZONTAL');");
         } catch (Exception unused2) {
         }
         Cursor cursor = null;
@@ -397,15 +519,22 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
             if (str.equalsIgnoreCase("unknown")) {
                 str = null;
             }
-            sQLiteDatabase.execSQL(String.format("INSERT INTO generic VALUES ('PlatformSoftwareVersion', '%s', %d);", str, 0));
+            sQLiteDatabase.execSQL(
+                    String.format(
+                            "INSERT INTO generic VALUES ('PlatformSoftwareVersion', '%s', %d);",
+                            str, 0));
         } catch (Exception unused3) {
         }
         try {
             if (isTableExists(sQLiteDatabase, "APPLICATION_SIGNATURE")) {
                 try {
-                    Cursor query = sQLiteDatabase.query("APPLICATION_SIGNATURE", null, null, null, null, null, null);
+                    Cursor query =
+                            sQLiteDatabase.query(
+                                    "APPLICATION_SIGNATURE", null, null, null, null, null, null);
                     try {
-                        Log.d("EdmStorageHelper", "APPLICATION_SIGNATURE Current Count : " + query.getCount());
+                        Log.d(
+                                "EdmStorageHelper",
+                                "APPLICATION_SIGNATURE Current Count : " + query.getCount());
                         while (query.moveToNext()) {
                             int i = query.getInt(query.getColumnIndex("adminUid"));
                             String string = query.getString(query.getColumnIndex("signature"));
@@ -432,16 +561,21 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
         } catch (Exception unused4) {
         }
         try {
-            sQLiteDatabase.execSQL("CREATE TRIGGER IF NOT EXISTS  domainFilterReportTableCircularBuffer  AFTER INSERT  ON DomainFilterReportTable WHEN (SELECT COUNT(*) FROM DomainFilterReportTable) > 1000 BEGIN  DELETE FROM DomainFilterReportTable WHERE id = (SELECT id FROM DomainFilterReportTable ORDER BY id LIMIT 1); END;  END;");
+            sQLiteDatabase.execSQL(
+                    "CREATE TRIGGER IF NOT EXISTS  domainFilterReportTableCircularBuffer  AFTER"
+                        + " INSERT  ON DomainFilterReportTable WHEN (SELECT COUNT(*) FROM"
+                        + " DomainFilterReportTable) > 1000 BEGIN  DELETE FROM"
+                        + " DomainFilterReportTable WHERE id = (SELECT id FROM"
+                        + " DomainFilterReportTable ORDER BY id LIMIT 1); END;  END;");
         } catch (Exception e3) {
             Log.d("EdmStorageHelper", "doCreationOrUpdatePostCommands EX1:", e3);
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:9:0x002f, code lost:
-    
-        if (r2 == null) goto L10;
-     */
+
+       if (r2 == null) goto L10;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -480,7 +614,9 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
         L38:
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.storage.EdmStorageHelper.getCount(android.database.sqlite.SQLiteDatabase):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.storage.EdmStorageHelper.getCount(android.database.sqlite.SQLiteDatabase):int");
     }
 
     public static ContentValues getTableColumns(SQLiteDatabase sQLiteDatabase, String str) {
@@ -489,7 +625,11 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
         Cursor cursor = null;
         try {
             try {
-                rawQuery = sQLiteDatabase.rawQuery(XmlUtils$$ExternalSyntheticOutline0.m("PRAGMA table_info(", str, ")"), null);
+                rawQuery =
+                        sQLiteDatabase.rawQuery(
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        "PRAGMA table_info(", str, ")"),
+                                null);
             } catch (Throwable th) {
                 th = th;
             }
@@ -535,7 +675,8 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    public static boolean insertDomainListData(SQLiteDatabase sQLiteDatabase, int i, String str, List list, String str2) {
+    public static boolean insertDomainListData(
+            SQLiteDatabase sQLiteDatabase, int i, String str, List list, String str2) {
         if (list != null) {
             try {
                 if (!list.isEmpty()) {
@@ -578,20 +719,35 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
 
     public static void postAdminTableCreate(SQLiteDatabase sQLiteDatabase) {
         try {
-            sQLiteDatabase.execSQL("CREATE TRIGGER ADMIN_INFO_ONINSERT  AFTER INSERT  ON ADMIN_INFO BEGIN INSERT INTO ADMIN VALUES (NEW.adminUid,NEW.adminUid,0, NEW.adminUid/100000); END;");
+            sQLiteDatabase.execSQL(
+                    "CREATE TRIGGER ADMIN_INFO_ONINSERT  AFTER INSERT  ON ADMIN_INFO BEGIN INSERT"
+                        + " INTO ADMIN VALUES (NEW.adminUid,NEW.adminUid,0, NEW.adminUid/100000);"
+                        + " END;");
             if (getCount(sQLiteDatabase) > 0) {
-                sQLiteDatabase.execSQL("INSERT INTO ADMIN SELECT adminUid,adminUid,0,adminUid/100000 FROM ADMIN_INFO WHERE adminUid!=0;");
+                sQLiteDatabase.execSQL(
+                        "INSERT INTO ADMIN SELECT adminUid,adminUid,0,adminUid/100000 FROM"
+                            + " ADMIN_INFO WHERE adminUid!=0;");
             }
-            sQLiteDatabase.execSQL("CREATE TRIGGER ADMIN_INFO_ONUPDATE  UPDATE  OF adminUid ON ADMIN_INFO BEGIN UPDATE ADMIN SET adminUid = NEW.adminUid WHERE adminUid = OLD.adminUid; END;");
+            sQLiteDatabase.execSQL(
+                    "CREATE TRIGGER ADMIN_INFO_ONUPDATE  UPDATE  OF adminUid ON ADMIN_INFO BEGIN"
+                        + " UPDATE ADMIN SET adminUid = NEW.adminUid WHERE adminUid = OLD.adminUid;"
+                        + " END;");
             try {
-                Log.d("EdmStorageHelper", "Start adding KnoxCustomManagerService.DB_UID to ADMIN table...");
+                Log.d(
+                        "EdmStorageHelper",
+                        "Start adding KnoxCustomManagerService.DB_UID to ADMIN table...");
                 sQLiteDatabase.execSQL("INSERT INTO ADMIN VALUES (1000,1000,0);");
-                Log.d("EdmStorageHelper", "Finished adding KnoxCustomManagerService.DB_UID to ADMIN table");
+                Log.d(
+                        "EdmStorageHelper",
+                        "Finished adding KnoxCustomManagerService.DB_UID to ADMIN table");
             } catch (Exception unused) {
-                Log.d("EdmStorageHelper", "KnoxCustomManagerService.DB_UID already exists in ADMIN table");
+                Log.d(
+                        "EdmStorageHelper",
+                        "KnoxCustomManagerService.DB_UID already exists in ADMIN table");
             }
         } catch (Exception e) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "ADMIN_INFO postAdminTableCreate failed  EX: ", "EdmStorageHelper");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e, "ADMIN_INFO postAdminTableCreate failed  EX: ", "EdmStorageHelper");
         }
     }
 
@@ -599,7 +755,8 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             try {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+                ObjectOutputStream objectOutputStream =
+                        new ObjectOutputStream(byteArrayOutputStream);
                 try {
                     objectOutputStream.writeObject(obj);
                     byte[] byteArray = byteArrayOutputStream.toByteArray();
@@ -617,17 +774,17 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0045, code lost:
-    
-        if (r0 == null) goto L12;
-     */
+
+       if (r0 == null) goto L12;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:6:0x0048, code lost:
-    
-        android.util.Log.d("EdmStorageHelper", "doTableCreationOrUpdate Done + " + java.lang.System.currentTimeMillis());
-     */
+
+       android.util.Log.d("EdmStorageHelper", "doTableCreationOrUpdate Done + " + java.lang.System.currentTimeMillis());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:7:0x005e, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -682,7 +839,9 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
         L64:
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.storage.EdmStorageHelper.doTablesCreationOrUpdate(android.database.sqlite.SQLiteDatabase):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.storage.EdmStorageHelper.doTablesCreationOrUpdate(android.database.sqlite.SQLiteDatabase):void");
     }
 
     @Override // android.database.sqlite.SQLiteOpenHelper
@@ -706,9 +865,9 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:37:0x00bd, code lost:
-    
-        if (r2 != null) goto L34;
-     */
+
+       if (r2 != null) goto L34;
+    */
     @Override // android.database.sqlite.SQLiteOpenHelper
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -719,6 +878,9 @@ public final class EdmStorageHelper extends SQLiteOpenHelper {
             Method dump skipped, instructions count: 249
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.storage.EdmStorageHelper.onUpgrade(android.database.sqlite.SQLiteDatabase, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.storage.EdmStorageHelper.onUpgrade(android.database.sqlite.SQLiteDatabase,"
+                    + " int, int):void");
     }
 }

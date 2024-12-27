@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.am.MARsPolicyManager;
@@ -15,7 +16,9 @@ import com.android.server.am.mars.MARsDebugConfig;
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.filter.IFilter;
 import com.android.server.audio.AudioService;
+
 import com.samsung.android.server.audio.SemAudioServiceInternal;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -68,8 +71,7 @@ public final class ActiveMusicRecordFilter implements IFilter {
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void deInit() {
-    }
+    public final void deInit() {}
 
     @Override // com.android.server.am.mars.filter.IFilter
     public final int filter(int i, int i2, int i3, String str) {
@@ -82,18 +84,25 @@ public final class ActiveMusicRecordFilter implements IFilter {
             if (this.mAudioManager == null) {
                 Slog.w("ActiveMusicRecordFilter", "audio Manager is null");
             } else {
-                FutureTask futureTask = new FutureTask(new Callable() { // from class: com.android.server.am.mars.filter.filter.ActiveMusicRecordFilter$$ExternalSyntheticLambda1
-                    @Override // java.util.concurrent.Callable
-                    public final Object call() {
-                        return Boolean.valueOf(ActiveMusicRecordFilter.this.mAudioManager.semIsFmRadioActive());
-                    }
-                });
+                FutureTask futureTask =
+                        new FutureTask(
+                                new Callable() { // from class:
+                                                 // com.android.server.am.mars.filter.filter.ActiveMusicRecordFilter$$ExternalSyntheticLambda1
+                                    @Override // java.util.concurrent.Callable
+                                    public final Object call() {
+                                        return Boolean.valueOf(
+                                                ActiveMusicRecordFilter.this.mAudioManager
+                                                        .semIsFmRadioActive());
+                                    }
+                                });
                 this.threadPool.execute(futureTask);
                 try {
                     z = ((Boolean) futureTask.get(1L, TimeUnit.SECONDS)).booleanValue();
                 } catch (Exception e) {
                     if (e instanceof TimeoutException) {
-                        Slog.w("ActiveMusicRecordFilter", "1 second timeout executing semIsFmRadioActive");
+                        Slog.w(
+                                "ActiveMusicRecordFilter",
+                                "1 second timeout executing semIsFmRadioActive");
                     }
                     futureTask.cancel(false);
                     e.printStackTrace();
@@ -102,18 +111,24 @@ public final class ActiveMusicRecordFilter implements IFilter {
             return z ? 7 : 0;
         }
         if (MARsDebugConfig.DEBUG_MARs) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i2, "filter uid:", "mSlientAudioApp: ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i2, "filter uid:", "mSlientAudioApp: ");
             m.append(this.mSlientAudioApp.toString());
             Slog.d("ActiveMusicRecordFilter", m.toString());
         }
         boolean z2 = MARsPolicyManager.MARs_ENABLE;
         MARsPolicyManager mARsPolicyManager = MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE;
         mARsPolicyManager.getClass();
-        if (MARsPolicyManager.isChinaPolicyEnabled() && i3 != 11 && this.mSlientAudioApp.contains(Integer.valueOf(i2))) {
+        if (MARsPolicyManager.isChinaPolicyEnabled()
+                && i3 != 11
+                && this.mSlientAudioApp.contains(Integer.valueOf(i2))) {
             return 0;
         }
         long elapsedRealtime = SystemClock.elapsedRealtime();
-        if (((MARsUtils.getScreenOnState() && (i3 == 4 || i3 == 15)) || (i3 == 18 && !this.mIsUsingAudioList)) && isUsingAudio(i2, str)) {
+        if (((MARsUtils.getScreenOnState() && (i3 == 4 || i3 == 15))
+                        || (i3 == 18 && !this.mIsUsingAudioList))
+                && isUsingAudio(i2, str)) {
             synchronized (this.mActiveMusicRecordPkgs) {
                 this.mActiveMusicRecordPkgs.put(Integer.valueOf(i2), Long.valueOf(elapsedRealtime));
             }
@@ -156,7 +171,9 @@ public final class ActiveMusicRecordFilter implements IFilter {
         List<Integer> arrayList;
         int clientUid;
         if (this.mLocalAudioService == null) {
-            this.mLocalAudioService = (SemAudioServiceInternal) LocalServices.getService(SemAudioServiceInternal.class);
+            this.mLocalAudioService =
+                    (SemAudioServiceInternal)
+                            LocalServices.getService(SemAudioServiceInternal.class);
         }
         SemAudioServiceInternal semAudioServiceInternal = this.mLocalAudioService;
         if (semAudioServiceInternal != null) {
@@ -165,14 +182,26 @@ public final class ActiveMusicRecordFilter implements IFilter {
                 arrayList = Collections.emptyList();
             } else {
                 ArraySet arraySet = new ArraySet();
-                Iterator it = ((ArrayList) audioService.mPlaybackMonitor.getActivePlaybackConfigurations(true)).iterator();
+                Iterator it =
+                        ((ArrayList)
+                                        audioService.mPlaybackMonitor
+                                                .getActivePlaybackConfigurations(true))
+                                .iterator();
                 while (it.hasNext()) {
-                    AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) it.next();
-                    if (audioPlaybackConfiguration != null && (clientUid = audioPlaybackConfiguration.getClientUid()) > 10000 && (audioPlaybackConfiguration.getPlayerType() == 3 || audioPlaybackConfiguration.getPlayerState() == 2)) {
+                    AudioPlaybackConfiguration audioPlaybackConfiguration =
+                            (AudioPlaybackConfiguration) it.next();
+                    if (audioPlaybackConfiguration != null
+                            && (clientUid = audioPlaybackConfiguration.getClientUid()) > 10000
+                            && (audioPlaybackConfiguration.getPlayerType() == 3
+                                    || audioPlaybackConfiguration.getPlayerState() == 2)) {
                         arraySet.add(Integer.valueOf(clientUid));
                     }
                 }
-                Iterator it2 = audioService.mRecordMonitor.getActiveRecordingConfigurations(true).iterator();
+                Iterator it2 =
+                        audioService
+                                .mRecordMonitor
+                                .getActiveRecordingConfigurations(true)
+                                .iterator();
                 while (it2.hasNext()) {
                     int clientUid2 = ((AudioRecordingConfiguration) it2.next()).getClientUid();
                     if (clientUid2 > 10000) {
@@ -200,16 +229,26 @@ public final class ActiveMusicRecordFilter implements IFilter {
     public final void init(Context context) {
         Context context2;
         this.mContext = context;
-        this.threadPool = Executors.newFixedThreadPool(4, new ThreadFactory() { // from class: com.android.server.am.mars.filter.filter.ActiveMusicRecordFilter.1
-            public final AtomicInteger counter = new AtomicInteger();
+        this.threadPool =
+                Executors.newFixedThreadPool(
+                        4,
+                        new ThreadFactory() { // from class:
+                                              // com.android.server.am.mars.filter.filter.ActiveMusicRecordFilter.1
+                            public final AtomicInteger counter = new AtomicInteger();
 
-            @Override // java.util.concurrent.ThreadFactory
-            public final Thread newThread(Runnable runnable) {
-                return new Thread(runnable, String.format("freecess-%d", Integer.valueOf(this.counter.incrementAndGet())));
-            }
-        });
+                            @Override // java.util.concurrent.ThreadFactory
+                            public final Thread newThread(Runnable runnable) {
+                                return new Thread(
+                                        runnable,
+                                        String.format(
+                                                "freecess-%d",
+                                                Integer.valueOf(this.counter.incrementAndGet())));
+                            }
+                        });
         if (this.mLocalAudioService == null) {
-            this.mLocalAudioService = (SemAudioServiceInternal) LocalServices.getService(SemAudioServiceInternal.class);
+            this.mLocalAudioService =
+                    (SemAudioServiceInternal)
+                            LocalServices.getService(SemAudioServiceInternal.class);
         }
         if (this.mAudioManager != null || (context2 = this.mContext) == null) {
             return;
@@ -222,12 +261,17 @@ public final class ActiveMusicRecordFilter implements IFilter {
             Slog.w("ActiveMusicRecordFilter", "audio Manager is null");
             return true;
         }
-        FutureTask futureTask = new FutureTask(new Callable() { // from class: com.android.server.am.mars.filter.filter.ActiveMusicRecordFilter$$ExternalSyntheticLambda0
-            @Override // java.util.concurrent.Callable
-            public final Object call() {
-                return Boolean.valueOf(ActiveMusicRecordFilter.this.mAudioManager.isUsingAudio(str, i));
-            }
-        });
+        FutureTask futureTask =
+                new FutureTask(
+                        new Callable() { // from class:
+                                         // com.android.server.am.mars.filter.filter.ActiveMusicRecordFilter$$ExternalSyntheticLambda0
+                            @Override // java.util.concurrent.Callable
+                            public final Object call() {
+                                return Boolean.valueOf(
+                                        ActiveMusicRecordFilter.this.mAudioManager.isUsingAudio(
+                                                str, i));
+                            }
+                        });
         this.threadPool.execute(futureTask);
         try {
             return ((Boolean) futureTask.get(1L, TimeUnit.SECONDS)).booleanValue();

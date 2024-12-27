@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class FaceDataFrame implements Parcelable {
-    public static final Parcelable.Creator<FaceDataFrame> CREATOR = new Parcelable.Creator<FaceDataFrame>() { // from class: android.hardware.face.FaceDataFrame.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceDataFrame createFromParcel(Parcel source) {
-            return new FaceDataFrame(source);
-        }
+    public static final Parcelable.Creator<FaceDataFrame> CREATOR =
+            new Parcelable.Creator<
+                    FaceDataFrame>() { // from class: android.hardware.face.FaceDataFrame.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceDataFrame createFromParcel(Parcel source) {
+                    return new FaceDataFrame(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceDataFrame[] newArray(int size) {
-            return new FaceDataFrame[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceDataFrame[] newArray(int size) {
+                    return new FaceDataFrame[size];
+                }
+            };
     private final int mAcquiredInfo;
     private final float mDistance;
     private final boolean mIsCancellable;
@@ -25,7 +27,13 @@ public final class FaceDataFrame implements Parcelable {
     private final float mTilt;
     private final int mVendorCode;
 
-    public FaceDataFrame(int acquiredInfo, int vendorCode, float pan, float tilt, float distance, boolean isCancellable) {
+    public FaceDataFrame(
+            int acquiredInfo,
+            int vendorCode,
+            float pan,
+            float tilt,
+            float distance,
+            boolean isCancellable) {
         this.mAcquiredInfo = acquiredInfo;
         this.mVendorCode = vendorCode;
         this.mPan = pan;

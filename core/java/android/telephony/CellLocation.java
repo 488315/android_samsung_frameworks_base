@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.telephony.cdma.CdmaCellLocation;
 import android.telephony.gsm.GsmCellLocation;
+
 import com.android.internal.telephony.ITelephony;
 
 @Deprecated
@@ -24,7 +25,11 @@ public abstract class CellLocation {
             return;
         }
         try {
-            ITelephony phone = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+            ITelephony phone =
+                    ITelephony.Stub.asInterface(
+                            TelephonyFrameworkInitializer.getTelephonyServiceManager()
+                                    .getTelephonyServiceRegisterer()
+                                    .get());
             if (phone != null) {
                 phone.updateServiceLocationWithPackageName(appContext.getOpPackageName());
             }

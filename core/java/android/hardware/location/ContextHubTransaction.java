@@ -5,6 +5,7 @@ import android.chre.flags.Flags;
 import android.hardware.display.SemWifiDisplayParameter;
 import android.os.Handler;
 import android.os.HandlerExecutor;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -46,12 +47,10 @@ public class ContextHubTransaction<T> {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Result {
-    }
+    public @interface Result {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     public static class Response<R> {
         private R mContents;
@@ -100,7 +99,8 @@ public class ContextHubTransaction<T> {
         return this.mTransactionType;
     }
 
-    public Response<T> waitForResponse(long timeout, TimeUnit unit) throws InterruptedException, TimeoutException {
+    public Response<T> waitForResponse(long timeout, TimeUnit unit)
+            throws InterruptedException, TimeoutException {
         boolean success = this.mDoneSignal.await(timeout, unit);
         if (!success) {
             throw new TimeoutException("Timed out while waiting for transaction");
@@ -113,17 +113,20 @@ public class ContextHubTransaction<T> {
             Objects.requireNonNull(listener, "OnCompleteListener cannot be null");
             Objects.requireNonNull(executor, "Executor cannot be null");
             if (this.mListener != null) {
-                throw new IllegalStateException("Cannot set ContextHubTransaction listener multiple times");
+                throw new IllegalStateException(
+                        "Cannot set ContextHubTransaction listener multiple times");
             }
             this.mListener = listener;
             this.mExecutor = executor;
             if (this.mDoneSignal.getCount() == 0) {
-                this.mExecutor.execute(new Runnable() { // from class: android.hardware.location.ContextHubTransaction$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ContextHubTransaction.this.lambda$setOnCompleteListener$0();
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.hardware.location.ContextHubTransaction$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ContextHubTransaction.this.lambda$setOnCompleteListener$0();
+                            }
+                        });
             }
         }
     }
@@ -141,18 +144,21 @@ public class ContextHubTransaction<T> {
         synchronized (this) {
             Objects.requireNonNull(response, "Response cannot be null");
             if (this.mIsResponseSet) {
-                throw new IllegalStateException("Cannot set response of ContextHubTransaction multiple times");
+                throw new IllegalStateException(
+                        "Cannot set response of ContextHubTransaction multiple times");
             }
             this.mResponse = response;
             this.mIsResponseSet = true;
             this.mDoneSignal.countDown();
             if (this.mListener != null) {
-                this.mExecutor.execute(new Runnable() { // from class: android.hardware.location.ContextHubTransaction$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ContextHubTransaction.this.lambda$setResponse$1();
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.hardware.location.ContextHubTransaction$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ContextHubTransaction.this.lambda$setResponse$1();
+                            }
+                        });
             }
         }
     }

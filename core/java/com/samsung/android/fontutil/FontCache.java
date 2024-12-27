@@ -2,6 +2,7 @@ package com.samsung.android.fontutil;
 
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+
 import java.util.Hashtable;
 
 /* loaded from: classes6.dex */

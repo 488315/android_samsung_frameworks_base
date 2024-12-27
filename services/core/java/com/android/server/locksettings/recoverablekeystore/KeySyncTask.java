@@ -6,10 +6,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.security.Scrypt;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.audio.AudioService$$ExternalSyntheticOutline0;
 import com.android.server.locksettings.recoverablekeystore.storage.RecoverableKeyStoreDb;
 import com.android.server.locksettings.recoverablekeystore.storage.RecoverySnapshotStorage;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -24,6 +26,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
@@ -46,7 +49,17 @@ public final class KeySyncTask implements Runnable {
     public final TestOnlyInsecureCertificateHelper mTestOnlyInsecureCertificateHelper;
     public final int mUserId;
 
-    public KeySyncTask(RecoverableKeyStoreDb recoverableKeyStoreDb, RecoverySnapshotStorage recoverySnapshotStorage, RecoverySnapshotListenersStorage recoverySnapshotListenersStorage, int i, int i2, byte[] bArr, boolean z, PlatformKeyManager platformKeyManager, TestOnlyInsecureCertificateHelper testOnlyInsecureCertificateHelper, Scrypt scrypt) {
+    public KeySyncTask(
+            RecoverableKeyStoreDb recoverableKeyStoreDb,
+            RecoverySnapshotStorage recoverySnapshotStorage,
+            RecoverySnapshotListenersStorage recoverySnapshotListenersStorage,
+            int i,
+            int i2,
+            byte[] bArr,
+            boolean z,
+            PlatformKeyManager platformKeyManager,
+            TestOnlyInsecureCertificateHelper testOnlyInsecureCertificateHelper,
+            Scrypt scrypt) {
         this.mSnapshotListenersStorage = recoverySnapshotListenersStorage;
         this.mRecoverableKeyStoreDb = recoverableKeyStoreDb;
         this.mUserId = i;
@@ -102,7 +115,9 @@ public final class KeySyncTask implements Runnable {
             PlatformKeyManager.ensureDecryptionKeyIsValid(i2, decryptKeyInternal);
         } catch (UnrecoverableKeyException unused) {
             Locale locale = Locale.US;
-            Log.i("PlatformKeyManager", "Regenerating permanently invalid Platform key for user " + i2 + ".");
+            Log.i(
+                    "PlatformKeyManager",
+                    "Regenerating permanently invalid Platform key for user " + i2 + ".");
             platformKeyManager.regenerate(i2);
             decryptKeyInternal = platformKeyManager.getDecryptKeyInternal(i2);
         }
@@ -117,7 +132,9 @@ public final class KeySyncTask implements Runnable {
             WrappedKey wrappedKey = (WrappedKey) hashMap2.get(str);
             if (wrappedKey.mPlatformKeyGenerationId != i4) {
                 Locale locale2 = Locale.US;
-                StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("WrappedKey with alias '", str, "' was wrapped with platform key ");
+                StringBuilder m =
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "WrappedKey with alias '", str, "' was wrapped with platform key ");
                 m.append(wrappedKey.mPlatformKeyGenerationId);
                 m.append(", not platform key ");
                 m.append(i4);
@@ -125,7 +142,11 @@ public final class KeySyncTask implements Runnable {
             }
             cipher.init(4, decryptKeyInternal.mKey, new GCMParameterSpec(128, wrappedKey.mNonce));
             try {
-                hashMap.put(str, Pair.create((SecretKey) cipher.unwrap(wrappedKey.mKeyMaterial, "AES", 3), wrappedKey.mKeyMetadata));
+                hashMap.put(
+                        str,
+                        Pair.create(
+                                (SecretKey) cipher.unwrap(wrappedKey.mKeyMaterial, "AES", 3),
+                                wrappedKey.mKeyMetadata));
             } catch (InvalidKeyException | NoSuchAlgorithmException e) {
                 Locale locale3 = Locale.US;
                 Log.e("WrappedKey", "Error unwrapping recoverable key with alias '" + str + "'", e);
@@ -142,7 +163,9 @@ public final class KeySyncTask implements Runnable {
         } else {
             valueOf = Long.valueOf(l != null ? 1 + l.longValue() : 1L);
         }
-        if (this.mRecoverableKeyStoreDb.setLong(this.mUserId, i, valueOf.longValue(), "snapshot_version") >= 0) {
+        if (this.mRecoverableKeyStoreDb.setLong(
+                        this.mUserId, i, valueOf.longValue(), "snapshot_version")
+                >= 0) {
             return valueOf.intValue();
         }
         Log.e("KeySyncTask", "Failed to set the snapshot version in the local DB.");
@@ -177,15 +200,21 @@ public final class KeySyncTask implements Runnable {
     }
 
     public final void syncKeys() {
-        if (this.mCredentialUpdated && this.mRecoverableKeyStoreDb.getBadRemoteGuessCounter(this.mUserId) != 0) {
+        if (this.mCredentialUpdated
+                && this.mRecoverableKeyStoreDb.getBadRemoteGuessCounter(this.mUserId) != 0) {
             this.mRecoverableKeyStoreDb.setBadRemoteGuessCounter(this.mUserId, 0);
         }
-        int platformKeyGenerationId = this.mPlatformKeyManager.mDatabase.getPlatformKeyGenerationId(this.mUserId);
+        int platformKeyGenerationId =
+                this.mPlatformKeyManager.mDatabase.getPlatformKeyGenerationId(this.mUserId);
         int i = this.mCredentialType;
         if (i == -1) {
-            AudioService$$ExternalSyntheticOutline0.m(new StringBuilder("Credentials are not set for user "), this.mUserId, "KeySyncTask");
+            AudioService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Credentials are not set for user "),
+                    this.mUserId,
+                    "KeySyncTask");
             if (platformKeyGenerationId < 1001000) {
-                this.mPlatformKeyManager.invalidatePlatformKey(this.mUserId, platformKeyGenerationId);
+                this.mPlatformKeyManager.invalidatePlatformKey(
+                        this.mUserId, platformKeyGenerationId);
                 return;
             }
             return;
@@ -198,19 +227,29 @@ public final class KeySyncTask implements Runnable {
             if (platformKeyGenerationId < 1001000) {
                 RecoverableKeyStoreDb recoverableKeyStoreDb = this.mRecoverableKeyStoreDb;
                 int i2 = this.mUserId;
-                SQLiteDatabase writableDatabase = recoverableKeyStoreDb.mKeyStoreDbHelper.getWritableDatabase();
+                SQLiteDatabase writableDatabase =
+                        recoverableKeyStoreDb.mKeyStoreDbHelper.getWritableDatabase();
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("recovery_status", (Integer) 3);
-                writableDatabase.update("keys", contentValues, "user_id = ?", new String[]{String.valueOf(i2)});
+                writableDatabase.update(
+                        "keys", contentValues, "user_id = ?", new String[] {String.valueOf(i2)});
                 return;
             }
             return;
         }
-        if (((KeyguardManager) this.mPlatformKeyManager.mContext.getSystemService(KeyguardManager.class)).isDeviceLocked(this.mUserId) && this.mUserId == 0) {
-            AudioService$$ExternalSyntheticOutline0.m(new StringBuilder("Can't sync keys for locked user "), this.mUserId, "KeySyncTask");
+        if (((KeyguardManager)
+                                this.mPlatformKeyManager.mContext.getSystemService(
+                                        KeyguardManager.class))
+                        .isDeviceLocked(this.mUserId)
+                && this.mUserId == 0) {
+            AudioService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Can't sync keys for locked user "),
+                    this.mUserId,
+                    "KeySyncTask");
             return;
         }
-        ArrayList arrayList = (ArrayList) this.mRecoverableKeyStoreDb.getRecoveryAgents(this.mUserId);
+        ArrayList arrayList =
+                (ArrayList) this.mRecoverableKeyStoreDb.getRecoveryAgents(this.mUserId);
         Iterator it = arrayList.iterator();
         while (it.hasNext()) {
             int intValue = ((Integer) it.next()).intValue();
@@ -221,14 +260,17 @@ public final class KeySyncTask implements Runnable {
             }
         }
         if (arrayList.isEmpty()) {
-            AudioService$$ExternalSyntheticOutline0.m(new StringBuilder("No recovery agent initialized for user "), this.mUserId, "KeySyncTask");
+            AudioService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("No recovery agent initialized for user "),
+                    this.mUserId,
+                    "KeySyncTask");
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:198:0x0045, code lost:
-    
-        if (r0.longValue() != 0) goto L14;
-     */
+
+       if (r0.longValue() != 0) goto L14;
+    */
     /* JADX WARN: Removed duplicated region for block: B:154:0x0154  */
     /* JADX WARN: Removed duplicated region for block: B:167:0x0112 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:177:0x00ce  */
@@ -244,6 +286,8 @@ public final class KeySyncTask implements Runnable {
             Method dump skipped, instructions count: 1233
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.locksettings.recoverablekeystore.KeySyncTask.syncKeysForAgent(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.locksettings.recoverablekeystore.KeySyncTask.syncKeysForAgent(int):void");
     }
 }

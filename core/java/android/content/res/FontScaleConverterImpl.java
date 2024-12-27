@@ -1,6 +1,7 @@
 package android.content.res;
 
 import android.util.MathUtils;
+
 import java.util.Arrays;
 
 /* loaded from: classes.dex */
@@ -26,7 +27,8 @@ public class FontScaleConverterImpl implements FontScaleConverter {
         return lookupAndInterpolate(sp, this.mFromSpValues, this.mToDpValues);
     }
 
-    private static float lookupAndInterpolate(float sourceValue, float[] sourceValues, float[] targetValues) {
+    private static float lookupAndInterpolate(
+            float sourceValue, float[] sourceValues, float[] targetValues) {
         float startSp;
         float endSp;
         float startDp;
@@ -69,7 +71,8 @@ public class FontScaleConverterImpl implements FontScaleConverter {
             return false;
         }
         FontScaleConverterImpl that = (FontScaleConverterImpl) o;
-        if (Arrays.equals(this.mFromSpValues, that.mFromSpValues) && Arrays.equals(this.mToDpValues, that.mToDpValues)) {
+        if (Arrays.equals(this.mFromSpValues, that.mFromSpValues)
+                && Arrays.equals(this.mToDpValues, that.mToDpValues)) {
             return true;
         }
         return false;
@@ -81,6 +84,10 @@ public class FontScaleConverterImpl implements FontScaleConverter {
     }
 
     public String toString() {
-        return "FontScaleConverter{fromSpValues=" + Arrays.toString(this.mFromSpValues) + ", toDpValues=" + Arrays.toString(this.mToDpValues) + '}';
+        return "FontScaleConverter{fromSpValues="
+                + Arrays.toString(this.mFromSpValues)
+                + ", toDpValues="
+                + Arrays.toString(this.mToDpValues)
+                + '}';
     }
 }

@@ -7,8 +7,7 @@ public class Long3 {
     public long y;
     public long z;
 
-    public Long3() {
-    }
+    public Long3() {}
 
     public Long3(long i) {
         this.z = i;

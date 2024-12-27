@@ -1,6 +1,7 @@
 package com.android.server.am.mars.netlink;
 
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
+
 import java.nio.ByteBuffer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -42,11 +43,15 @@ public final class StructFreeCessMsg {
     }
 
     public final String toString() {
-        StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m("struct.type = " + this.type, "struct.mode = ");
+        StringBuilder m =
+                Preconditions$$ExternalSyntheticOutline0.m(
+                        "struct.type = " + this.type, "struct.mode = ");
         m.append(this.mod);
-        StringBuilder m2 = Preconditions$$ExternalSyntheticOutline0.m(m.toString(), "struct.src_portid = ");
+        StringBuilder m2 =
+                Preconditions$$ExternalSyntheticOutline0.m(m.toString(), "struct.src_portid = ");
         m2.append(this.src_portid);
-        StringBuilder m3 = Preconditions$$ExternalSyntheticOutline0.m(m2.toString(), "struct.dst_portid = ");
+        StringBuilder m3 =
+                Preconditions$$ExternalSyntheticOutline0.m(m2.toString(), "struct.dst_portid = ");
         m3.append(this.dst_portid);
         return m3.toString();
     }

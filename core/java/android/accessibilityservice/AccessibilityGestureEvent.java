@@ -5,6 +5,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.MotionEvent;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -14,26 +15,27 @@ import java.util.function.Function;
 
 /* loaded from: classes.dex */
 public final class AccessibilityGestureEvent implements Parcelable {
-    public static final Parcelable.Creator<AccessibilityGestureEvent> CREATOR = new Parcelable.Creator<AccessibilityGestureEvent>() { // from class: android.accessibilityservice.AccessibilityGestureEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessibilityGestureEvent createFromParcel(Parcel parcel) {
-            return new AccessibilityGestureEvent(parcel);
-        }
+    public static final Parcelable.Creator<AccessibilityGestureEvent> CREATOR =
+            new Parcelable.Creator<AccessibilityGestureEvent>() { // from class:
+                // android.accessibilityservice.AccessibilityGestureEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessibilityGestureEvent createFromParcel(Parcel parcel) {
+                    return new AccessibilityGestureEvent(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessibilityGestureEvent[] newArray(int size) {
-            return new AccessibilityGestureEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessibilityGestureEvent[] newArray(int size) {
+                    return new AccessibilityGestureEvent[size];
+                }
+            };
     private final int mDisplayId;
     private final int mGestureId;
     private List<MotionEvent> mMotionEvents;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GestureId {
-    }
+    public @interface GestureId {}
 
     public AccessibilityGestureEvent(int gestureId, int displayId, List<MotionEvent> motionEvents) {
         this.mMotionEvents = new ArrayList();
@@ -50,7 +52,9 @@ public final class AccessibilityGestureEvent implements Parcelable {
         this.mMotionEvents = new ArrayList();
         this.mGestureId = parcel.readInt();
         this.mDisplayId = parcel.readInt();
-        ParceledListSlice<MotionEvent> slice = (ParceledListSlice) parcel.readParcelable(getClass().getClassLoader(), ParceledListSlice.class);
+        ParceledListSlice<MotionEvent> slice =
+                (ParceledListSlice)
+                        parcel.readParcelable(getClass().getClassLoader(), ParceledListSlice.class);
         this.mMotionEvents = slice.getList();
     }
 
@@ -67,21 +71,30 @@ public final class AccessibilityGestureEvent implements Parcelable {
     }
 
     public AccessibilityGestureEvent copyForAsync() {
-        return new AccessibilityGestureEvent(this.mGestureId, this.mDisplayId, this.mMotionEvents.stream().map(new Function() { // from class: android.accessibilityservice.AccessibilityGestureEvent$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((MotionEvent) obj).copy();
-            }
-        }).toList());
+        return new AccessibilityGestureEvent(
+                this.mGestureId,
+                this.mDisplayId,
+                this.mMotionEvents.stream()
+                        .map(
+                                new Function() { // from class:
+                                    // android.accessibilityservice.AccessibilityGestureEvent$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return ((MotionEvent) obj).copy();
+                                    }
+                                })
+                        .toList());
     }
 
     public void recycle() {
-        this.mMotionEvents.forEach(new Consumer() { // from class: android.accessibilityservice.AccessibilityGestureEvent$$ExternalSyntheticLambda1
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((MotionEvent) obj).recycle();
-            }
-        });
+        this.mMotionEvents.forEach(
+                new Consumer() { // from class:
+                    // android.accessibilityservice.AccessibilityGestureEvent$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        ((MotionEvent) obj).recycle();
+                    }
+                });
         this.mMotionEvents.clear();
     }
 

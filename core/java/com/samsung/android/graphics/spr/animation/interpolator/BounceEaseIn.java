@@ -6,11 +6,9 @@ import android.view.animation.Interpolator;
 
 /* loaded from: classes6.dex */
 public class BounceEaseIn implements Interpolator {
-    public BounceEaseIn() {
-    }
+    public BounceEaseIn() {}
 
-    public BounceEaseIn(Context context, AttributeSet attrs) {
-    }
+    public BounceEaseIn(Context context, AttributeSet attrs) {}
 
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float t) {

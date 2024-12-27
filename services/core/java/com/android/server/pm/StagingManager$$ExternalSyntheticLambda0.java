@@ -1,8 +1,7 @@
 package com.android.server.pm;
 
-import com.android.server.pm.PackageInstallerSession;
-import com.android.server.pm.StagingManager;
 import com.android.server.rollback.WatchdogRollbackLogger;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,7 +25,10 @@ public final /* synthetic */ class StagingManager$$ExternalSyntheticLambda0 impl
                 synchronized (stagingManager.mFailedPackageNames) {
                     try {
                         if (!((ArrayList) stagingManager.mFailedPackageNames).isEmpty()) {
-                            WatchdogRollbackLogger.logApexdRevert(stagingManager.mContext, stagingManager.mFailedPackageNames, stagingManager.mNativeFailureReason);
+                            WatchdogRollbackLogger.logApexdRevert(
+                                    stagingManager.mContext,
+                                    stagingManager.mFailedPackageNames,
+                                    stagingManager.mNativeFailureReason);
                         }
                     } catch (Throwable th) {
                         throw th;
@@ -34,7 +36,8 @@ public final /* synthetic */ class StagingManager$$ExternalSyntheticLambda0 impl
                 }
                 return;
             default:
-                ((PackageInstallerSession.StagedSession) ((StagingManager.StagedSession) obj)).verifySession();
+                ((PackageInstallerSession.StagedSession) ((StagingManager.StagedSession) obj))
+                        .verifySession();
                 return;
         }
     }

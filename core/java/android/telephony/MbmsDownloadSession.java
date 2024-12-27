@@ -20,6 +20,7 @@ import android.telephony.mbms.MbmsTempFileProvider;
 import android.telephony.mbms.MbmsUtils;
 import android.telephony.mbms.vendor.IMbmsDownloadService;
 import android.util.Log;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Retention;
@@ -36,15 +37,21 @@ import java.util.concurrent.atomic.AtomicReference;
 public class MbmsDownloadSession implements AutoCloseable {
     public static final String DEFAULT_TOP_LEVEL_TEMP_DIRECTORY = "androidMbmsTempFileRoot";
     private static final String DESTINATION_SANITY_CHECK_FILE_NAME = "destinationSanityCheckFile";
-    public static final String EXTRA_MBMS_COMPLETED_FILE_URI = "android.telephony.extra.MBMS_COMPLETED_FILE_URI";
-    public static final String EXTRA_MBMS_DOWNLOAD_REQUEST = "android.telephony.extra.MBMS_DOWNLOAD_REQUEST";
-    public static final String EXTRA_MBMS_DOWNLOAD_RESULT = "android.telephony.extra.MBMS_DOWNLOAD_RESULT";
+    public static final String EXTRA_MBMS_COMPLETED_FILE_URI =
+            "android.telephony.extra.MBMS_COMPLETED_FILE_URI";
+    public static final String EXTRA_MBMS_DOWNLOAD_REQUEST =
+            "android.telephony.extra.MBMS_DOWNLOAD_REQUEST";
+    public static final String EXTRA_MBMS_DOWNLOAD_RESULT =
+            "android.telephony.extra.MBMS_DOWNLOAD_RESULT";
     public static final String EXTRA_MBMS_FILE_INFO = "android.telephony.extra.MBMS_FILE_INFO";
     private static final int MAX_SERVICE_ANNOUNCEMENT_SIZE = 10240;
 
     @SystemApi
-    public static final String MBMS_DOWNLOAD_SERVICE_ACTION = "android.telephony.action.EmbmsDownload";
-    public static final String MBMS_DOWNLOAD_SERVICE_OVERRIDE_METADATA = "mbms-download-service-override";
+    public static final String MBMS_DOWNLOAD_SERVICE_ACTION =
+            "android.telephony.action.EmbmsDownload";
+
+    public static final String MBMS_DOWNLOAD_SERVICE_OVERRIDE_METADATA =
+            "mbms-download-service-override";
     public static final int RESULT_CANCELLED = 2;
     public static final int RESULT_DOWNLOAD_FAILURE = 6;
     public static final int RESULT_EXPIRED = 3;
@@ -64,49 +71,61 @@ public class MbmsDownloadSession implements AutoCloseable {
     private int mSubscriptionId;
     private static final String LOG_TAG = MbmsDownloadSession.class.getSimpleName();
     private static AtomicBoolean sIsInitialized = new AtomicBoolean(false);
-    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() { // from class: android.telephony.MbmsDownloadSession.1
-        @Override // android.os.IBinder.DeathRecipient
-        public void binderDied() {
-            MbmsDownloadSession.this.sendErrorToApp(3, "Received death notification");
-        }
-    };
+    private IBinder.DeathRecipient mDeathRecipient =
+            new IBinder.DeathRecipient() { // from class: android.telephony.MbmsDownloadSession.1
+                @Override // android.os.IBinder.DeathRecipient
+                public void binderDied() {
+                    MbmsDownloadSession.this.sendErrorToApp(3, "Received death notification");
+                }
+            };
     private AtomicReference<IMbmsDownloadService> mService = new AtomicReference<>(null);
-    private final Map<DownloadStatusListener, InternalDownloadStatusListener> mInternalDownloadStatusListeners = new HashMap();
-    private final Map<DownloadProgressListener, InternalDownloadProgressListener> mInternalDownloadProgressListeners = new HashMap();
+    private final Map<DownloadStatusListener, InternalDownloadStatusListener>
+            mInternalDownloadStatusListeners = new HashMap();
+    private final Map<DownloadProgressListener, InternalDownloadProgressListener>
+            mInternalDownloadProgressListeners = new HashMap();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DownloadResultCode {
-    }
+    public @interface DownloadResultCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DownloadStatus {
-    }
+    public @interface DownloadStatus {}
 
-    private MbmsDownloadSession(Context context, Executor executor, int subscriptionId, MbmsDownloadSessionCallback callback) {
+    private MbmsDownloadSession(
+            Context context,
+            Executor executor,
+            int subscriptionId,
+            MbmsDownloadSessionCallback callback) {
         this.mSubscriptionId = -1;
         this.mContext = context;
         this.mSubscriptionId = subscriptionId;
         this.mInternalCallback = new InternalDownloadSessionCallback(callback, executor);
     }
 
-    public static MbmsDownloadSession create(Context context, Executor executor, MbmsDownloadSessionCallback callback) {
+    public static MbmsDownloadSession create(
+            Context context, Executor executor, MbmsDownloadSessionCallback callback) {
         return create(context, executor, SubscriptionManager.getDefaultSubscriptionId(), callback);
     }
 
-    public static MbmsDownloadSession create(Context context, Executor executor, int subscriptionId, final MbmsDownloadSessionCallback callback) {
+    public static MbmsDownloadSession create(
+            Context context,
+            Executor executor,
+            int subscriptionId,
+            final MbmsDownloadSessionCallback callback) {
         if (!sIsInitialized.compareAndSet(false, true)) {
             throw new IllegalStateException("Cannot have two active instances");
         }
-        MbmsDownloadSession session = new MbmsDownloadSession(context, executor, subscriptionId, callback);
+        MbmsDownloadSession session =
+                new MbmsDownloadSession(context, executor, subscriptionId, callback);
         final int result = session.bindAndInitialize();
         if (result != 0) {
             sIsInitialized.set(false);
-            executor.execute(new Runnable() { // from class: android.telephony.MbmsDownloadSession.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    MbmsDownloadSessionCallback.this.onError(result, null);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class: android.telephony.MbmsDownloadSession.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            MbmsDownloadSessionCallback.this.onError(result, null);
+                        }
+                    });
             return null;
         }
         return session;
@@ -117,56 +136,77 @@ public class MbmsDownloadSession implements AutoCloseable {
     }
 
     private int bindAndInitialize() {
-        this.mServiceConnection = new ServiceConnection() { // from class: android.telephony.MbmsDownloadSession.3
-            @Override // android.content.ServiceConnection
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                IMbmsDownloadService downloadService = IMbmsDownloadService.Stub.asInterface(service);
-                try {
-                    int result = downloadService.initialize(MbmsDownloadSession.this.mSubscriptionId, MbmsDownloadSession.this.mInternalCallback);
-                    if (result == -1) {
-                        MbmsDownloadSession.this.close();
-                        throw new IllegalStateException("Middleware must not return an unknown error code");
-                    }
-                    if (result == 0) {
+        this.mServiceConnection =
+                new ServiceConnection() { // from class: android.telephony.MbmsDownloadSession.3
+                    @Override // android.content.ServiceConnection
+                    public void onServiceConnected(ComponentName name, IBinder service) {
+                        IMbmsDownloadService downloadService =
+                                IMbmsDownloadService.Stub.asInterface(service);
                         try {
-                            downloadService.asBinder().linkToDeath(MbmsDownloadSession.this.mDeathRecipient, 0);
-                            MbmsDownloadSession.this.mService.set(downloadService);
-                            return;
-                        } catch (RemoteException e) {
-                            MbmsDownloadSession.this.sendErrorToApp(3, "Middleware lost during initialization");
+                            int result =
+                                    downloadService.initialize(
+                                            MbmsDownloadSession.this.mSubscriptionId,
+                                            MbmsDownloadSession.this.mInternalCallback);
+                            if (result == -1) {
+                                MbmsDownloadSession.this.close();
+                                throw new IllegalStateException(
+                                        "Middleware must not return an unknown error code");
+                            }
+                            if (result == 0) {
+                                try {
+                                    downloadService
+                                            .asBinder()
+                                            .linkToDeath(
+                                                    MbmsDownloadSession.this.mDeathRecipient, 0);
+                                    MbmsDownloadSession.this.mService.set(downloadService);
+                                    return;
+                                } catch (RemoteException e) {
+                                    MbmsDownloadSession.this.sendErrorToApp(
+                                            3, "Middleware lost during initialization");
+                                    MbmsDownloadSession.sIsInitialized.set(false);
+                                    return;
+                                }
+                            }
+                            MbmsDownloadSession.this.sendErrorToApp(
+                                    result, "Error returned during initialization");
                             MbmsDownloadSession.sIsInitialized.set(false);
-                            return;
+                        } catch (RemoteException e2) {
+                            Log.e(
+                                    MbmsDownloadSession.LOG_TAG,
+                                    "Service died before initialization");
+                            MbmsDownloadSession.sIsInitialized.set(false);
+                        } catch (RuntimeException e3) {
+                            Log.e(
+                                    MbmsDownloadSession.LOG_TAG,
+                                    "Runtime exception during initialization");
+                            MbmsDownloadSession.this.sendErrorToApp(103, e3.toString());
+                            MbmsDownloadSession.sIsInitialized.set(false);
                         }
                     }
-                    MbmsDownloadSession.this.sendErrorToApp(result, "Error returned during initialization");
-                    MbmsDownloadSession.sIsInitialized.set(false);
-                } catch (RemoteException e2) {
-                    Log.e(MbmsDownloadSession.LOG_TAG, "Service died before initialization");
-                    MbmsDownloadSession.sIsInitialized.set(false);
-                } catch (RuntimeException e3) {
-                    Log.e(MbmsDownloadSession.LOG_TAG, "Runtime exception during initialization");
-                    MbmsDownloadSession.this.sendErrorToApp(103, e3.toString());
-                    MbmsDownloadSession.sIsInitialized.set(false);
-                }
-            }
 
-            @Override // android.content.ServiceConnection
-            public void onServiceDisconnected(ComponentName name) {
-                Log.w(MbmsDownloadSession.LOG_TAG, "bindAndInitialize: Remote service disconnected");
-                MbmsDownloadSession.sIsInitialized.set(false);
-                MbmsDownloadSession.this.mService.set(null);
-            }
+                    @Override // android.content.ServiceConnection
+                    public void onServiceDisconnected(ComponentName name) {
+                        Log.w(
+                                MbmsDownloadSession.LOG_TAG,
+                                "bindAndInitialize: Remote service disconnected");
+                        MbmsDownloadSession.sIsInitialized.set(false);
+                        MbmsDownloadSession.this.mService.set(null);
+                    }
 
-            @Override // android.content.ServiceConnection
-            public void onNullBinding(ComponentName name) {
-                Log.w(MbmsDownloadSession.LOG_TAG, "bindAndInitialize: Remote service returned null");
-                MbmsDownloadSession.this.sendErrorToApp(3, "Middleware service binding returned null");
-                MbmsDownloadSession.sIsInitialized.set(false);
-                MbmsDownloadSession.this.mService.set(null);
-                MbmsDownloadSession.this.mContext.unbindService(this);
-            }
-        };
-        return MbmsUtils.startBinding(this.mContext, MBMS_DOWNLOAD_SERVICE_ACTION, this.mServiceConnection);
+                    @Override // android.content.ServiceConnection
+                    public void onNullBinding(ComponentName name) {
+                        Log.w(
+                                MbmsDownloadSession.LOG_TAG,
+                                "bindAndInitialize: Remote service returned null");
+                        MbmsDownloadSession.this.sendErrorToApp(
+                                3, "Middleware service binding returned null");
+                        MbmsDownloadSession.sIsInitialized.set(false);
+                        MbmsDownloadSession.this.mService.set(null);
+                        MbmsDownloadSession.this.mContext.unbindService(this);
+                    }
+                };
+        return MbmsUtils.startBinding(
+                this.mContext, MBMS_DOWNLOAD_SERVICE_ACTION, this.mServiceConnection);
     }
 
     public void requestUpdateFileServices(List<String> classList) {
@@ -175,7 +215,8 @@ public class MbmsDownloadSession implements AutoCloseable {
             throw new IllegalStateException("Middleware not yet bound");
         }
         try {
-            int returnCode = downloadService.requestUpdateFileServices(this.mSubscriptionId, classList);
+            int returnCode =
+                    downloadService.requestUpdateFileServices(this.mSubscriptionId, classList);
             if (returnCode == -1) {
                 close();
                 throw new IllegalStateException("Middleware must not return an unknown error code");
@@ -226,14 +267,21 @@ public class MbmsDownloadSession implements AutoCloseable {
             try {
                 String filePath = tempFileRootDirectory.getCanonicalPath();
                 try {
-                    int result = downloadService.setTempFileRootDirectory(this.mSubscriptionId, filePath);
+                    int result =
+                            downloadService.setTempFileRootDirectory(
+                                    this.mSubscriptionId, filePath);
                     if (result == -1) {
                         close();
-                        throw new IllegalStateException("Middleware must not return an unknown error code");
+                        throw new IllegalStateException(
+                                "Middleware must not return an unknown error code");
                     }
                     if (result == 0) {
-                        SharedPreferences prefs = this.mContext.getSharedPreferences(MbmsTempFileProvider.TEMP_FILE_ROOT_PREF_FILE_NAME, 0);
-                        prefs.edit().putString(MbmsTempFileProvider.TEMP_FILE_ROOT_PREF_NAME, filePath).apply();
+                        SharedPreferences prefs =
+                                this.mContext.getSharedPreferences(
+                                        MbmsTempFileProvider.TEMP_FILE_ROOT_PREF_FILE_NAME, 0);
+                        prefs.edit()
+                                .putString(MbmsTempFileProvider.TEMP_FILE_ROOT_PREF_NAME, filePath)
+                                .apply();
                     } else {
                         sendErrorToApp(result, null);
                     }
@@ -243,7 +291,8 @@ public class MbmsDownloadSession implements AutoCloseable {
                     sendErrorToApp(3, null);
                 }
             } catch (IOException e2) {
-                throw new IllegalArgumentException("Unable to canonicalize the provided path: " + e2);
+                throw new IllegalArgumentException(
+                        "Unable to canonicalize the provided path: " + e2);
             }
         } catch (IOException e3) {
             throw new IllegalStateException("Got IOException checking directory sanity");
@@ -270,7 +319,9 @@ public class MbmsDownloadSession implements AutoCloseable {
     }
 
     public File getTempFileRootDirectory() {
-        SharedPreferences prefs = this.mContext.getSharedPreferences(MbmsTempFileProvider.TEMP_FILE_ROOT_PREF_FILE_NAME, 0);
+        SharedPreferences prefs =
+                this.mContext.getSharedPreferences(
+                        MbmsTempFileProvider.TEMP_FILE_ROOT_PREF_FILE_NAME, 0);
         String path = prefs.getString(MbmsTempFileProvider.TEMP_FILE_ROOT_PREF_NAME, null);
         if (path != null) {
             return new File(path);
@@ -283,9 +334,12 @@ public class MbmsDownloadSession implements AutoCloseable {
         if (downloadService == null) {
             throw new IllegalStateException("Middleware not yet bound");
         }
-        SharedPreferences prefs = this.mContext.getSharedPreferences(MbmsTempFileProvider.TEMP_FILE_ROOT_PREF_FILE_NAME, 0);
+        SharedPreferences prefs =
+                this.mContext.getSharedPreferences(
+                        MbmsTempFileProvider.TEMP_FILE_ROOT_PREF_FILE_NAME, 0);
         if (prefs.getString(MbmsTempFileProvider.TEMP_FILE_ROOT_PREF_NAME, null) == null) {
-            File tempRootDirectory = new File(this.mContext.getFilesDir(), DEFAULT_TOP_LEVEL_TEMP_DIRECTORY);
+            File tempRootDirectory =
+                    new File(this.mContext.getFilesDir(), DEFAULT_TOP_LEVEL_TEMP_DIRECTORY);
             tempRootDirectory.mkdirs();
             setTempFileRootDirectory(tempRootDirectory);
         }
@@ -297,7 +351,8 @@ public class MbmsDownloadSession implements AutoCloseable {
             } else {
                 if (result == -1) {
                     close();
-                    throw new IllegalStateException("Middleware must not return an unknown error code");
+                    throw new IllegalStateException(
+                            "Middleware must not return an unknown error code");
                 }
                 sendErrorToApp(result, null);
             }
@@ -323,12 +378,14 @@ public class MbmsDownloadSession implements AutoCloseable {
         }
     }
 
-    public void addStatusListener(DownloadRequest request, Executor executor, DownloadStatusListener listener) {
+    public void addStatusListener(
+            DownloadRequest request, Executor executor, DownloadStatusListener listener) {
         IMbmsDownloadService downloadService = this.mService.get();
         if (downloadService == null) {
             throw new IllegalStateException("Middleware not yet bound");
         }
-        InternalDownloadStatusListener internalListener = new InternalDownloadStatusListener(listener, executor);
+        InternalDownloadStatusListener internalListener =
+                new InternalDownloadStatusListener(listener, executor);
         try {
             int result = downloadService.addStatusListener(request, internalListener);
             if (result == -1) {
@@ -356,7 +413,8 @@ public class MbmsDownloadSession implements AutoCloseable {
             if (downloadService == null) {
                 throw new IllegalStateException("Middleware not yet bound");
             }
-            InternalDownloadStatusListener internalListener = this.mInternalDownloadStatusListeners.get(listener);
+            InternalDownloadStatusListener internalListener =
+                    this.mInternalDownloadStatusListeners.get(listener);
             if (internalListener == null) {
                 throw new IllegalArgumentException("Provided listener was never registered");
             }
@@ -364,10 +422,12 @@ public class MbmsDownloadSession implements AutoCloseable {
                 int result = downloadService.removeStatusListener(request, internalListener);
                 if (result == -1) {
                     close();
-                    throw new IllegalStateException("Middleware must not return an unknown error code");
+                    throw new IllegalStateException(
+                            "Middleware must not return an unknown error code");
                 }
                 if (result == 0) {
-                    InternalDownloadStatusListener internalCallback = this.mInternalDownloadStatusListeners.remove(listener);
+                    InternalDownloadStatusListener internalCallback =
+                            this.mInternalDownloadStatusListeners.remove(listener);
                     if (internalCallback != null) {
                         internalCallback.stop();
                         return;
@@ -378,7 +438,8 @@ public class MbmsDownloadSession implements AutoCloseable {
                     throw new IllegalArgumentException("Unknown download request.");
                 }
                 sendErrorToApp(result, null);
-                InternalDownloadStatusListener internalCallback2 = this.mInternalDownloadStatusListeners.remove(listener);
+                InternalDownloadStatusListener internalCallback2 =
+                        this.mInternalDownloadStatusListeners.remove(listener);
                 if (internalCallback2 != null) {
                     internalCallback2.stop();
                 }
@@ -386,13 +447,15 @@ public class MbmsDownloadSession implements AutoCloseable {
                 this.mService.set(null);
                 sIsInitialized.set(false);
                 sendErrorToApp(3, null);
-                InternalDownloadStatusListener internalCallback3 = this.mInternalDownloadStatusListeners.remove(listener);
+                InternalDownloadStatusListener internalCallback3 =
+                        this.mInternalDownloadStatusListeners.remove(listener);
                 if (internalCallback3 != null) {
                     internalCallback3.stop();
                 }
             }
         } catch (Throwable th) {
-            InternalDownloadStatusListener internalCallback4 = this.mInternalDownloadStatusListeners.remove(listener);
+            InternalDownloadStatusListener internalCallback4 =
+                    this.mInternalDownloadStatusListeners.remove(listener);
             if (internalCallback4 != null) {
                 internalCallback4.stop();
             }
@@ -400,12 +463,14 @@ public class MbmsDownloadSession implements AutoCloseable {
         }
     }
 
-    public void addProgressListener(DownloadRequest request, Executor executor, DownloadProgressListener listener) {
+    public void addProgressListener(
+            DownloadRequest request, Executor executor, DownloadProgressListener listener) {
         IMbmsDownloadService downloadService = this.mService.get();
         if (downloadService == null) {
             throw new IllegalStateException("Middleware not yet bound");
         }
-        InternalDownloadProgressListener internalListener = new InternalDownloadProgressListener(listener, executor);
+        InternalDownloadProgressListener internalListener =
+                new InternalDownloadProgressListener(listener, executor);
         try {
             int result = downloadService.addProgressListener(request, internalListener);
             if (result == -1) {
@@ -433,7 +498,8 @@ public class MbmsDownloadSession implements AutoCloseable {
             if (downloadService == null) {
                 throw new IllegalStateException("Middleware not yet bound");
             }
-            InternalDownloadProgressListener internalListener = this.mInternalDownloadProgressListeners.get(listener);
+            InternalDownloadProgressListener internalListener =
+                    this.mInternalDownloadProgressListeners.get(listener);
             if (internalListener == null) {
                 throw new IllegalArgumentException("Provided listener was never registered");
             }
@@ -441,10 +507,12 @@ public class MbmsDownloadSession implements AutoCloseable {
                 int result = downloadService.removeProgressListener(request, internalListener);
                 if (result == -1) {
                     close();
-                    throw new IllegalStateException("Middleware must not return an unknown error code");
+                    throw new IllegalStateException(
+                            "Middleware must not return an unknown error code");
                 }
                 if (result == 0) {
-                    InternalDownloadProgressListener internalCallback = this.mInternalDownloadProgressListeners.remove(listener);
+                    InternalDownloadProgressListener internalCallback =
+                            this.mInternalDownloadProgressListeners.remove(listener);
                     if (internalCallback != null) {
                         internalCallback.stop();
                         return;
@@ -455,7 +523,8 @@ public class MbmsDownloadSession implements AutoCloseable {
                     throw new IllegalArgumentException("Unknown download request.");
                 }
                 sendErrorToApp(result, null);
-                InternalDownloadProgressListener internalCallback2 = this.mInternalDownloadProgressListeners.remove(listener);
+                InternalDownloadProgressListener internalCallback2 =
+                        this.mInternalDownloadProgressListeners.remove(listener);
                 if (internalCallback2 != null) {
                     internalCallback2.stop();
                 }
@@ -463,13 +532,15 @@ public class MbmsDownloadSession implements AutoCloseable {
                 this.mService.set(null);
                 sIsInitialized.set(false);
                 sendErrorToApp(3, null);
-                InternalDownloadProgressListener internalCallback3 = this.mInternalDownloadProgressListeners.remove(listener);
+                InternalDownloadProgressListener internalCallback3 =
+                        this.mInternalDownloadProgressListeners.remove(listener);
                 if (internalCallback3 != null) {
                     internalCallback3.stop();
                 }
             }
         } catch (Throwable th) {
-            InternalDownloadProgressListener internalCallback4 = this.mInternalDownloadProgressListeners.remove(listener);
+            InternalDownloadProgressListener internalCallback4 =
+                    this.mInternalDownloadProgressListeners.remove(listener);
             if (internalCallback4 != null) {
                 internalCallback4.stop();
             }
@@ -585,10 +656,20 @@ public class MbmsDownloadSession implements AutoCloseable {
         }
         try {
             if (!token.createNewFile()) {
-                throw new RuntimeException("Failed to create download token for request " + request + ". Token location is " + token.getPath());
+                throw new RuntimeException(
+                        "Failed to create download token for request "
+                                + request
+                                + ". Token location is "
+                                + token.getPath());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to create download token for request " + request + " due to IOException " + e + ". Attempted to write to " + token.getPath());
+            throw new RuntimeException(
+                    "Failed to create download token for request "
+                            + request
+                            + " due to IOException "
+                            + e
+                            + ". Attempted to write to "
+                            + token.getPath());
         }
     }
 
@@ -606,18 +687,25 @@ public class MbmsDownloadSession implements AutoCloseable {
         if (!downloadRequestDestination.isDirectory()) {
             throw new IllegalArgumentException("The destination path must be a directory");
         }
-        File testFile = new File(MbmsTempFileProvider.getEmbmsTempFileDir(this.mContext), DESTINATION_SANITY_CHECK_FILE_NAME);
-        File testFileDestination = new File(downloadRequestDestination, DESTINATION_SANITY_CHECK_FILE_NAME);
+        File testFile =
+                new File(
+                        MbmsTempFileProvider.getEmbmsTempFileDir(this.mContext),
+                        DESTINATION_SANITY_CHECK_FILE_NAME);
+        File testFileDestination =
+                new File(downloadRequestDestination, DESTINATION_SANITY_CHECK_FILE_NAME);
         try {
             try {
                 if (!testFile.exists()) {
                     testFile.createNewFile();
                 }
                 if (!testFile.renameTo(testFileDestination)) {
-                    throw new IllegalArgumentException("Destination provided in the download request is invalid -- files in the temp file directory cannot be directly moved there.");
+                    throw new IllegalArgumentException(
+                            "Destination provided in the download request is invalid -- files in"
+                                + " the temp file directory cannot be directly moved there.");
                 }
             } catch (IOException e) {
-                throw new IllegalStateException("Got IOException while testing out the destination: " + e);
+                throw new IllegalStateException(
+                        "Got IOException while testing out the destination: " + e);
             }
         } finally {
             testFile.delete();
@@ -626,8 +714,10 @@ public class MbmsDownloadSession implements AutoCloseable {
     }
 
     private File getDownloadRequestTokenPath(DownloadRequest request) {
-        File tempFileLocation = MbmsUtils.getEmbmsTempFileDirForService(this.mContext, request.getFileServiceId());
-        String downloadTokenFileName = request.getHash() + MbmsDownloadReceiver.DOWNLOAD_TOKEN_SUFFIX;
+        File tempFileLocation =
+                MbmsUtils.getEmbmsTempFileDirForService(this.mContext, request.getFileServiceId());
+        String downloadTokenFileName =
+                request.getHash() + MbmsDownloadReceiver.DOWNLOAD_TOKEN_SUFFIX;
         return new File(tempFileLocation, downloadTokenFileName);
     }
 

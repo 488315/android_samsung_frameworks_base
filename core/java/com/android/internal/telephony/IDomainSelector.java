@@ -13,16 +13,16 @@ public interface IDomainSelector extends IInterface {
 
     void finishSelection() throws RemoteException;
 
-    void reselectDomain(DomainSelectionService.SelectionAttributes selectionAttributes) throws RemoteException;
+    void reselectDomain(DomainSelectionService.SelectionAttributes selectionAttributes)
+            throws RemoteException;
 
     public static class Default implements IDomainSelector {
         @Override // com.android.internal.telephony.IDomainSelector
-        public void reselectDomain(DomainSelectionService.SelectionAttributes attr) throws RemoteException {
-        }
+        public void reselectDomain(DomainSelectionService.SelectionAttributes attr)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IDomainSelector
-        public void finishSelection() throws RemoteException {
-        }
+        public void finishSelection() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface IDomainSelector extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDomainSelector {
+    public abstract static class Stub extends Binder implements IDomainSelector {
         static final int TRANSACTION_finishSelection = 2;
         static final int TRANSACTION_reselectDomain = 1;
 
@@ -71,7 +71,8 @@ public interface IDomainSelector extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDomainSelector.DESCRIPTOR);
             }
@@ -81,7 +82,10 @@ public interface IDomainSelector extends IInterface {
             }
             switch (code) {
                 case 1:
-                    DomainSelectionService.SelectionAttributes _arg0 = (DomainSelectionService.SelectionAttributes) data.readTypedObject(DomainSelectionService.SelectionAttributes.CREATOR);
+                    DomainSelectionService.SelectionAttributes _arg0 =
+                            (DomainSelectionService.SelectionAttributes)
+                                    data.readTypedObject(
+                                            DomainSelectionService.SelectionAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     reselectDomain(_arg0);
                     return true;
@@ -110,7 +114,8 @@ public interface IDomainSelector extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IDomainSelector
-            public void reselectDomain(DomainSelectionService.SelectionAttributes attr) throws RemoteException {
+            public void reselectDomain(DomainSelectionService.SelectionAttributes attr)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDomainSelector.DESCRIPTOR);

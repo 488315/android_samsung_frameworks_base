@@ -7,6 +7,7 @@ import android.print.PrinterId;
 import android.print.PrinterInfo;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -182,8 +183,10 @@ public abstract class PrinterDiscoverySession {
         this.mLastSentPrinters = null;
     }
 
-    public void onRequestCustomPrinterIcon(PrinterId printerId, CancellationSignal cancellationSignal, CustomPrinterIconCallback callback) {
-    }
+    public void onRequestCustomPrinterIcon(
+            PrinterId printerId,
+            CancellationSignal cancellationSignal,
+            CustomPrinterIconCallback callback) {}
 
     public final List<PrinterId> getTrackedPrinters() {
         PrintService.throwIfNotCalledOnMainThread();
@@ -228,7 +231,9 @@ public abstract class PrinterDiscoverySession {
     }
 
     void startPrinterStateTracking(PrinterId printerId) {
-        if (!this.mIsDestroyed && this.mObserver != null && !this.mTrackedPrinters.contains(printerId)) {
+        if (!this.mIsDestroyed
+                && this.mObserver != null
+                && !this.mTrackedPrinters.contains(printerId)) {
             this.mTrackedPrinters.add(printerId);
             onStartPrinterStateTracking(printerId);
         }
@@ -236,13 +241,16 @@ public abstract class PrinterDiscoverySession {
 
     void requestCustomPrinterIcon(PrinterId printerId) {
         if (!this.mIsDestroyed && this.mObserver != null) {
-            CustomPrinterIconCallback callback = new CustomPrinterIconCallback(printerId, this.mObserver);
+            CustomPrinterIconCallback callback =
+                    new CustomPrinterIconCallback(printerId, this.mObserver);
             onRequestCustomPrinterIcon(printerId, new CancellationSignal(), callback);
         }
     }
 
     void stopPrinterStateTracking(PrinterId printerId) {
-        if (!this.mIsDestroyed && this.mObserver != null && this.mTrackedPrinters.remove(printerId)) {
+        if (!this.mIsDestroyed
+                && this.mObserver != null
+                && this.mTrackedPrinters.remove(printerId)) {
             onStopPrinterStateTracking(printerId);
         }
     }

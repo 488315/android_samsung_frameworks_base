@@ -12,8 +12,7 @@ public interface IActivityRecognitionHardwareSink extends IInterface {
 
     public static class Default implements IActivityRecognitionHardwareSink {
         @Override // android.hardware.location.IActivityRecognitionHardwareSink
-        public void onActivityChanged(ActivityChangedEvent event) throws RemoteException {
-        }
+        public void onActivityChanged(ActivityChangedEvent event) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +20,9 @@ public interface IActivityRecognitionHardwareSink extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IActivityRecognitionHardwareSink {
-        public static final String DESCRIPTOR = "android.hardware.location.IActivityRecognitionHardwareSink";
+    public abstract static class Stub extends Binder implements IActivityRecognitionHardwareSink {
+        public static final String DESCRIPTOR =
+                "android.hardware.location.IActivityRecognitionHardwareSink";
         static final int TRANSACTION_onActivityChanged = 1;
 
         public Stub() {
@@ -60,7 +60,8 @@ public interface IActivityRecognitionHardwareSink extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +71,9 @@ public interface IActivityRecognitionHardwareSink extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ActivityChangedEvent _arg0 = (ActivityChangedEvent) data.readTypedObject(ActivityChangedEvent.CREATOR);
+                    ActivityChangedEvent _arg0 =
+                            (ActivityChangedEvent)
+                                    data.readTypedObject(ActivityChangedEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onActivityChanged(_arg0);
                     reply.writeNoException();

@@ -3,6 +3,7 @@ package com.android.server.am.mars.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Slog;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,9 +27,9 @@ public final class FASDataManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:18:0x003c, code lost:
-    
-        if (r1 == null) goto L17;
-     */
+
+       if (r1 == null) goto L17;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -82,13 +83,15 @@ public final class FASDataManager {
         L47:
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.mars.database.FASDataManager.checkDisableReasonColumnExist():java.lang.Boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.mars.database.FASDataManager.checkDisableReasonColumnExist():java.lang.Boolean");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:18:0x003c, code lost:
-    
-        if (r1 == null) goto L17;
-     */
+
+       if (r1 == null) goto L17;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -142,14 +145,30 @@ public final class FASDataManager {
         L47:
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.mars.database.FASDataManager.checkPreBatteryUsageColumnExist():java.lang.Boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.mars.database.FASDataManager.checkPreBatteryUsageColumnExist():java.lang.Boolean");
     }
 
     public final ArrayList getFASDataFromDB() {
         Cursor cursor;
         FASEntity build;
         try {
-            cursor = this.context.getContentResolver().query(FASTableContract.SMART_MGR_FORCED_APP_STANDBY_URI, (checkDisableReasonColumnExist().booleanValue() && checkPreBatteryUsageColumnExist().booleanValue()) ? FASTableContract.FASQueryProjectionV3 : checkPreBatteryUsageColumnExist().booleanValue() ? FASTableContract.FASQueryProjectionV2 : FASTableContract.FASQueryProjectionV1, null, null, null);
+            cursor =
+                    this.context
+                            .getContentResolver()
+                            .query(
+                                    FASTableContract.SMART_MGR_FORCED_APP_STANDBY_URI,
+                                    (checkDisableReasonColumnExist().booleanValue()
+                                                    && checkPreBatteryUsageColumnExist()
+                                                            .booleanValue())
+                                            ? FASTableContract.FASQueryProjectionV3
+                                            : checkPreBatteryUsageColumnExist().booleanValue()
+                                                    ? FASTableContract.FASQueryProjectionV2
+                                                    : FASTableContract.FASQueryProjectionV1,
+                                    null,
+                                    null,
+                                    null);
         } catch (Exception e) {
             Slog.e("FASDataManager", "Exception with contentResolver : " + e.getMessage());
             e.printStackTrace();
@@ -162,7 +181,8 @@ public final class FASDataManager {
         ArrayList arrayList = new ArrayList();
         while (cursor.moveToNext()) {
             if (cursor.getString(0) != null) {
-                if (checkDisableReasonColumnExist().booleanValue() && checkPreBatteryUsageColumnExist().booleanValue()) {
+                if (checkDisableReasonColumnExist().booleanValue()
+                        && checkPreBatteryUsageColumnExist().booleanValue()) {
                     FASEntityBuilder fASEntityBuilder = new FASEntityBuilder();
                     fASEntityBuilder.strPkgName = cursor.getString(0);
                     fASEntityBuilder.strUid = cursor.getString(1);

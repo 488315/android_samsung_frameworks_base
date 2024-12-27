@@ -2,6 +2,7 @@ package android.renderscript;
 
 import android.content.Context;
 import android.util.SparseArray;
+
 import java.io.UnsupportedEncodingException;
 
 @Deprecated
@@ -105,14 +106,17 @@ public class Script extends BaseObj {
         forEach(slot, ain, aout, v, (LaunchOptions) null);
     }
 
-    protected void forEach(int slot, Allocation ain, Allocation aout, FieldPacker v, LaunchOptions sc) {
+    protected void forEach(
+            int slot, Allocation ain, Allocation aout, FieldPacker v, LaunchOptions sc) {
         byte[] params;
         int[] limits;
         this.mRS.validate();
         this.mRS.validateObject(ain);
         this.mRS.validateObject(aout);
         if (ain == null && aout == null && sc == null) {
-            throw new RSIllegalArgumentException("At least one of input allocation, output allocation, or LaunchOptions is required to be non-null.");
+            throw new RSIllegalArgumentException(
+                    "At least one of input allocation, output allocation, or LaunchOptions is"
+                        + " required to be non-null.");
         }
         long[] in_ids = null;
         if (ain != null) {
@@ -142,7 +146,8 @@ public class Script extends BaseObj {
         forEach(slot, ains, aout, v, (LaunchOptions) null);
     }
 
-    protected void forEach(int slot, Allocation[] ains, Allocation aout, FieldPacker v, LaunchOptions sc) {
+    protected void forEach(
+            int slot, Allocation[] ains, Allocation aout, FieldPacker v, LaunchOptions sc) {
         long[] in_ids;
         long out_id;
         byte[] params;
@@ -155,7 +160,8 @@ public class Script extends BaseObj {
         }
         this.mRS.validateObject(aout);
         if (ains == null && aout == null) {
-            throw new RSIllegalArgumentException("At least one of ain or aout is required to be non-null.");
+            throw new RSIllegalArgumentException(
+                    "At least one of ain or aout is required to be non-null.");
         }
         if (ains != null) {
             in_ids = new long[ains.length];
@@ -232,7 +238,8 @@ public class Script extends BaseObj {
         if (context.getApplicationInfo().targetSdkVersion >= 20) {
             Type t = va.mType;
             if (t.hasMipmaps() || t.hasFaces() || t.getY() != 0 || t.getZ() != 0) {
-                throw new RSIllegalArgumentException("API 20+ only allows simple 1D allocations to be used with bind.");
+                throw new RSIllegalArgumentException(
+                        "API 20+ only allows simple 1D allocations to be used with bind.");
             }
         }
         this.mRS.nScriptBindAllocation(getID(this.mRS), va.getID(this.mRS), slot);
@@ -325,8 +332,7 @@ public class Script extends BaseObj {
             this.mAllocation = Allocation.createSized(rs, this.mElement, dimx, usages | 1);
         }
 
-        protected FieldBase() {
-        }
+        protected FieldBase() {}
 
         public Element getElement() {
             return this.mElement;
@@ -340,8 +346,7 @@ public class Script extends BaseObj {
             return this.mAllocation;
         }
 
-        public void updateAllocation() {
-        }
+        public void updateAllocation() {}
     }
 
     public static final class LaunchOptions {

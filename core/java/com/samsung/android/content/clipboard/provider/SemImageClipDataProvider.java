@@ -15,14 +15,18 @@ import android.os.Binder;
 import android.os.ParcelFileDescriptor;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.google.android.mms.ContentType;
+
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 /* loaded from: classes5.dex */
 public class SemImageClipDataProvider extends ContentProvider {
     static final String AUTHORITY = "com.samsung.android.content.clipboard";
-    static final String CREATE_TABLE = " CREATE TABLE ClipboardImageTable (id INTEGER PRIMARY KEY AUTOINCREMENT,  _data TEXT NOT NULL);";
+    static final String CREATE_TABLE =
+            " CREATE TABLE ClipboardImageTable (id INTEGER PRIMARY KEY AUTOINCREMENT,  _data TEXT"
+                + " NOT NULL);";
     public static final String DATA = "_data";
     static final String DATABASE_NAME = "clipboardimage.db";
     static final int DATABASE_VERSION = 1;
@@ -45,7 +49,11 @@ public class SemImageClipDataProvider extends ContentProvider {
 
     private static class DBHelper extends SQLiteOpenHelper {
         public DBHelper(Context context) {
-            super(context, SemImageClipDataProvider.DATABASE_NAME, (SQLiteDatabase.CursorFactory) null, 1);
+            super(
+                    context,
+                    SemImageClipDataProvider.DATABASE_NAME,
+                    (SQLiteDatabase.CursorFactory) null,
+                    1);
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
@@ -55,7 +63,13 @@ public class SemImageClipDataProvider extends ContentProvider {
 
         @Override // android.database.sqlite.SQLiteOpenHelper
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            Log.w(DBHelper.class.getName(), "Upgrading database from version " + oldVersion + " to " + newVersion + ". Old data will be destroyed");
+            Log.w(
+                    DBHelper.class.getName(),
+                    "Upgrading database from version "
+                            + oldVersion
+                            + " to "
+                            + newVersion
+                            + ". Old data will be destroyed");
             db.execSQL("DROP TABLE IF EXISTS ClipboardImageTable");
             onCreate(db);
         }
@@ -70,7 +84,12 @@ public class SemImageClipDataProvider extends ContentProvider {
     }
 
     @Override // android.content.ContentProvider
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(
+            Uri uri,
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(TABLE_NAME);
         switch (uriMatcher.match(uri)) {
@@ -83,7 +102,9 @@ public class SemImageClipDataProvider extends ContentProvider {
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
-        Cursor cursor = queryBuilder.query(this.database, projection, selection, selectionArgs, null, null, "_data");
+        Cursor cursor =
+                queryBuilder.query(
+                        this.database, projection, selection, selectionArgs, null, null, "_data");
         if (cursor != null) {
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
         }
@@ -93,7 +114,12 @@ public class SemImageClipDataProvider extends ContentProvider {
     @Override // android.content.ContentProvider
     public Uri insert(Uri uri, ContentValues values) {
         if (Binder.getCallingUid() != 1000) {
-            Log.e(TAG, "SecurityException when insert in SemClipboardProvider. blocked package : " + getContext().getPackageManager().getNameForUid(Binder.getCallingUid()));
+            Log.e(
+                    TAG,
+                    "SecurityException when insert in SemClipboardProvider. blocked package : "
+                            + getContext()
+                                    .getPackageManager()
+                                    .getNameForUid(Binder.getCallingUid()));
             return null;
         }
         long row = this.database.replace(TABLE_NAME, "", values);
@@ -109,7 +135,12 @@ public class SemImageClipDataProvider extends ContentProvider {
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         int count;
         if (Binder.getCallingUid() != 1000) {
-            Log.e(TAG, "SecurityException when update in SemClipboardProvider. blocked package : " + getContext().getPackageManager().getNameForUid(Binder.getCallingUid()));
+            Log.e(
+                    TAG,
+                    "SecurityException when update in SemClipboardProvider. blocked package : "
+                            + getContext()
+                                    .getPackageManager()
+                                    .getNameForUid(Binder.getCallingUid()));
             return 0;
         }
         switch (uriMatcher.match(uri)) {
@@ -117,7 +148,16 @@ public class SemImageClipDataProvider extends ContentProvider {
                 count = this.database.update(TABLE_NAME, values, selection, selectionArgs);
                 break;
             case 2:
-                count = this.database.update(TABLE_NAME, values, "id = " + uri.getLastPathSegment() + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
+                count =
+                        this.database.update(
+                                TABLE_NAME,
+                                values,
+                                "id = "
+                                        + uri.getLastPathSegment()
+                                        + (!TextUtils.isEmpty(selection)
+                                                ? " AND (" + selection + ')'
+                                                : ""),
+                                selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported URI " + uri);
@@ -130,7 +170,12 @@ public class SemImageClipDataProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         int count;
         if (Binder.getCallingUid() != 1000) {
-            Log.e(TAG, "SecurityException when delete in SemClipboardProvider. blocked package : " + getContext().getPackageManager().getNameForUid(Binder.getCallingUid()));
+            Log.e(
+                    TAG,
+                    "SecurityException when delete in SemClipboardProvider. blocked package : "
+                            + getContext()
+                                    .getPackageManager()
+                                    .getNameForUid(Binder.getCallingUid()));
             return 0;
         }
         switch (uriMatcher.match(uri)) {
@@ -139,7 +184,15 @@ public class SemImageClipDataProvider extends ContentProvider {
                 break;
             case 2:
                 String id = uri.getLastPathSegment();
-                count = this.database.delete(TABLE_NAME, "id = " + id + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
+                count =
+                        this.database.delete(
+                                TABLE_NAME,
+                                "id = "
+                                        + id
+                                        + (!TextUtils.isEmpty(selection)
+                                                ? " AND (" + selection + ')'
+                                                : ""),
+                                selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported URI " + uri);

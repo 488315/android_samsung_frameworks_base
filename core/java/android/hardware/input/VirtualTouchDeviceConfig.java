@@ -1,6 +1,5 @@
 package android.hardware.input;
 
-import android.hardware.input.VirtualInputDeviceConfig;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 
@@ -42,13 +41,20 @@ abstract class VirtualTouchDeviceConfig extends VirtualInputDeviceConfig {
         return " width=" + this.mWidth + " height=" + this.mHeight;
     }
 
-    static abstract class Builder<T extends Builder<T>> extends VirtualInputDeviceConfig.Builder<T> {
+    abstract static class Builder<T extends Builder<T>>
+            extends VirtualInputDeviceConfig.Builder<T> {
         private final int mHeight;
         private final int mWidth;
 
         Builder(int touchDeviceWidth, int touchDeviceHeight) {
             if (touchDeviceHeight <= 0 || touchDeviceWidth <= 0) {
-                throw new IllegalArgumentException("Cannot create a virtual touch-based device, dimensions must be positive. Got: (" + touchDeviceHeight + ", " + touchDeviceWidth + NavigationBarInflaterView.KEY_CODE_END);
+                throw new IllegalArgumentException(
+                        "Cannot create a virtual touch-based device, dimensions must be positive."
+                                + " Got: ("
+                                + touchDeviceHeight
+                                + ", "
+                                + touchDeviceWidth
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
             this.mHeight = touchDeviceHeight;
             this.mWidth = touchDeviceWidth;

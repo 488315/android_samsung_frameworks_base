@@ -1,6 +1,5 @@
 package android.accounts;
 
-import android.accounts.IAccountManager;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,7 +8,9 @@ import android.os.ServiceManager;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.transition.EpicenterTranslateClipReveal;
+
 import java.util.Set;
 
 /* loaded from: classes.dex */
@@ -20,19 +21,20 @@ public class Account implements Parcelable {
     public final String name;
     public final String type;
     private static final Set<Account> sAccessedAccounts = new ArraySet();
-    public static final Parcelable.Creator<Account> CREATOR = new Parcelable.Creator<Account>() { // from class: android.accounts.Account.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Account createFromParcel(Parcel source) {
-            return new Account(source);
-        }
+    public static final Parcelable.Creator<Account> CREATOR =
+            new Parcelable.Creator<Account>() { // from class: android.accounts.Account.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Account createFromParcel(Parcel source) {
+                    return new Account(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Account[] newArray(int size) {
-            return new Account[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Account[] newArray(int size) {
+                    return new Account[size];
+                }
+            };
 
     public boolean equals(Object o) {
         if (o == this) {
@@ -91,15 +93,15 @@ public class Account implements Parcelable {
 
     private static void onAccountAccessed(String accessId) {
         try {
-            IAccountManager accountManager = IAccountManager.Stub.asInterface(ServiceManager.getService("account"));
+            IAccountManager accountManager =
+                    IAccountManager.Stub.asInterface(ServiceManager.getService("account"));
             accountManager.onAccountAccessed(accessId);
         } catch (RemoteException e) {
             Log.e(TAG, "Error noting account access", e);
         }
     }
 
-    private static void onAccountAccessed$ravenwood(String accessId) {
-    }
+    private static void onAccountAccessed$ravenwood(String accessId) {}
 
     public String getAccessId() {
         return this.accessId;
@@ -123,7 +125,8 @@ public class Account implements Parcelable {
 
     public String toSafeString() {
         if (this.mSafeName == null) {
-            this.mSafeName = toSafeName(this.name, EpicenterTranslateClipReveal.StateProperty.TARGET_X);
+            this.mSafeName =
+                    toSafeName(this.name, EpicenterTranslateClipReveal.StateProperty.TARGET_X);
         }
         return "Account {name=" + this.mSafeName + ", type=" + this.type + "}";
     }

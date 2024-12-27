@@ -37,8 +37,7 @@ public final class ServiceRecordProto {
         public static final long RES_DIR = 1138166333442L;
         public static final long TARGET_SDK_VERSION = 1120986464260L;
 
-        public AppInfo() {
-        }
+        public AppInfo() {}
     }
 
     public final class Foreground {
@@ -46,8 +45,7 @@ public final class ServiceRecordProto {
         public static final long ID = 1120986464257L;
         public static final long NOTIFICATION = 1146756268034L;
 
-        public Foreground() {
-        }
+        public Foreground() {}
     }
 
     public final class Start {
@@ -58,8 +56,7 @@ public final class ServiceRecordProto {
         public static final long START_REQUESTED = 1133871366145L;
         public static final long STOP_IF_KILLED = 1133871366147L;
 
-        public Start() {
-        }
+        public Start() {}
     }
 
     public final class ExecuteNesting {
@@ -67,8 +64,7 @@ public final class ServiceRecordProto {
         public static final long EXECUTE_NESTING = 1120986464257L;
         public static final long EXECUTING_START = 1146756268035L;
 
-        public ExecuteNesting() {
-        }
+        public ExecuteNesting() {}
     }
 
     public final class Crash {
@@ -77,8 +73,7 @@ public final class ServiceRecordProto {
         public static final long RESTART_COUNT = 1120986464257L;
         public static final long RESTART_DELAY = 1146756268034L;
 
-        public Crash() {
-        }
+        public Crash() {}
     }
 
     public final class StartItem {
@@ -90,8 +85,7 @@ public final class ServiceRecordProto {
         public static final long NEEDED_GRANTS = 1146756268038L;
         public static final long URI_PERMISSIONS = 1146756268039L;
 
-        public StartItem() {
-        }
+        public StartItem() {}
     }
 
     public final class ShortFgsInfo {
@@ -102,7 +96,6 @@ public final class ServiceRecordProto {
         public static final long START_TIME = 1112396529665L;
         public static final long TIMEOUT_TIME = 1112396529668L;
 
-        public ShortFgsInfo() {
-        }
+        public ShortFgsInfo() {}
     }
 }

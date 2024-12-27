@@ -18,7 +18,11 @@ final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
     private final Handler mHandler;
     private final GetWalletCardsRequest mRequest;
 
-    GetWalletCardsCallbackImpl(GetWalletCardsRequest request, IQuickAccessWalletServiceCallbacks callback, Handler handler, Context context) {
+    GetWalletCardsCallbackImpl(
+            GetWalletCardsRequest request,
+            IQuickAccessWalletServiceCallbacks callback,
+            Handler handler,
+            Context context) {
         this.mRequest = request;
         this.mCallback = callback;
         this.mHandler = handler;
@@ -28,23 +32,29 @@ final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
     @Override // android.service.quickaccesswallet.GetWalletCardsCallback
     public void onSuccess(final GetWalletCardsResponse response) {
         if (isValidResponse(response)) {
-            if (!this.mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WALLET_LOCATION_BASED_SUGGESTIONS)) {
+            if (!this.mContext
+                    .getPackageManager()
+                    .hasSystemFeature(PackageManager.FEATURE_WALLET_LOCATION_BASED_SUGGESTIONS)) {
                 removeLocationsFromResponse(response);
             }
-            this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.GetWalletCardsCallbackImpl$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    GetWalletCardsCallbackImpl.this.lambda$onSuccess$0(response);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.service.quickaccesswallet.GetWalletCardsCallbackImpl$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            GetWalletCardsCallbackImpl.this.lambda$onSuccess$0(response);
+                        }
+                    });
         } else {
             Log.w(TAG, "Invalid GetWalletCards response");
-            this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.GetWalletCardsCallbackImpl$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    GetWalletCardsCallbackImpl.this.lambda$onSuccess$1();
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.service.quickaccesswallet.GetWalletCardsCallbackImpl$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            GetWalletCardsCallbackImpl.this.lambda$onSuccess$1();
+                        }
+                    });
         }
     }
 
@@ -55,12 +65,14 @@ final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
 
     @Override // android.service.quickaccesswallet.GetWalletCardsCallback
     public void onFailure(final GetWalletCardsError error) {
-        this.mHandler.post(new Runnable() { // from class: android.service.quickaccesswallet.GetWalletCardsCallbackImpl$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                GetWalletCardsCallbackImpl.this.lambda$onFailure$2(error);
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.service.quickaccesswallet.GetWalletCardsCallbackImpl$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        GetWalletCardsCallbackImpl.this.lambda$onFailure$2(error);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -106,7 +118,8 @@ final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
             Log.w(TAG, "Invalid response: selectedIndex is negative");
             return false;
         }
-        if (!response.getWalletCards().isEmpty() && response.getSelectedIndex() >= response.getWalletCards().size()) {
+        if (!response.getWalletCards().isEmpty()
+                && response.getSelectedIndex() >= response.getWalletCards().size()) {
             Log.w(TAG, "Invalid response: selectedIndex out of bounds");
             return false;
         }
@@ -128,7 +141,8 @@ final class GetWalletCardsCallbackImpl implements GetWalletCardsCallback {
                 Log.w(TAG, "Invalid response: cardImage is null");
                 return false;
             }
-            if (cardImage.getType() == 1 && cardImage.getBitmap().getConfig() != Bitmap.Config.HARDWARE) {
+            if (cardImage.getType() == 1
+                    && cardImage.getBitmap().getConfig() != Bitmap.Config.HARDWARE) {
                 Log.w(TAG, "Invalid response: cardImage bitmaps must be hardware bitmaps");
                 return false;
             }

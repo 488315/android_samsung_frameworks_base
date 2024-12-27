@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import javax.crypto.interfaces.PBEKey;
 
 /* loaded from: classes5.dex */
@@ -14,7 +15,11 @@ public class PKCS12KeyWithParameters extends PKCS12Key implements PBEKey {
         this.iterationCount = iterationCount;
     }
 
-    public PKCS12KeyWithParameters(char[] password, boolean useWrongZeroLengthConversion, byte[] salt, int iterationCount) {
+    public PKCS12KeyWithParameters(
+            char[] password,
+            boolean useWrongZeroLengthConversion,
+            byte[] salt,
+            int iterationCount) {
         super(password, useWrongZeroLengthConversion);
         this.salt = Arrays.clone(salt);
         this.iterationCount = iterationCount;

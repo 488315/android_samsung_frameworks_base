@@ -50,7 +50,8 @@ public class ToRGBAFilter extends Filter {
                     return;
                 case 2:
                 default:
-                    throw new RuntimeException("Unsupported BytesPerPixel: " + this.mInputBPP + "!");
+                    throw new RuntimeException(
+                            "Unsupported BytesPerPixel: " + this.mInputBPP + "!");
                 case 3:
                     this.mProgram = new NativeProgram("filterpack_imageproc", "rgb_to_rgba");
                     return;

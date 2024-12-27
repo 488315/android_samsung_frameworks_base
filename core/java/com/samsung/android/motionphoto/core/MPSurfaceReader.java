@@ -8,7 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.Surface;
-import com.samsung.android.motionphoto.core.MPSurfaceReader;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
@@ -61,7 +61,15 @@ public class MPSurfaceReader implements AutoCloseable {
     }
 
     private MPSurfaceReader(int width, int height, int format, int maxImages, long usage) {
-        Log.d(TAG, String.format("MPSurfaceReader: w=%d, h=%d, fmt=0x%x, maxImages=%d, usg=0x%x", Integer.valueOf(width), Integer.valueOf(height), Integer.valueOf(format), Integer.valueOf(maxImages), Long.valueOf(usage)));
+        Log.d(
+                TAG,
+                String.format(
+                        "MPSurfaceReader: w=%d, h=%d, fmt=0x%x, maxImages=%d, usg=0x%x",
+                        Integer.valueOf(width),
+                        Integer.valueOf(height),
+                        Integer.valueOf(format),
+                        Integer.valueOf(maxImages),
+                        Long.valueOf(usage)));
         this.width = width;
         this.height = height;
         this.format = format;
@@ -81,7 +89,8 @@ public class MPSurfaceReader implements AutoCloseable {
             if (listener != null) {
                 Looper looper = handler != null ? handler.getLooper() : Looper.myLooper();
                 if (looper == null) {
-                    throw new IllegalArgumentException("handler is null but the current thread is not a looper");
+                    throw new IllegalArgumentException(
+                            "handler is null but the current thread is not a looper");
                 }
                 if (this.listenerHandler == null || this.listenerHandler.getLooper() != looper) {
                     this.listenerHandler = Handler.createAsync(looper);
@@ -157,18 +166,27 @@ public class MPSurfaceReader implements AutoCloseable {
             switch (status) {
                 case 0:
                 case 1:
-                    executor.execute(new Runnable() { // from class: com.samsung.android.motionphoto.core.MPSurfaceReader$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            MPSurfaceReader.OnImageAvailableListener.this.onImageAvailable(image);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // com.samsung.android.motionphoto.core.MPSurfaceReader$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    MPSurfaceReader.OnImageAvailableListener.this.onImageAvailable(
+                                            image);
+                                }
+                            });
                     return;
                 case 2:
-                    Log.w(TAG, String.format("maxImages (%d) has already been acquired, call #close before acquiring more.", Integer.valueOf(sr.maxImages)));
+                    Log.w(
+                            TAG,
+                            String.format(
+                                    "maxImages (%d) has already been acquired, call #close before"
+                                        + " acquiring more.",
+                                    Integer.valueOf(sr.maxImages)));
                     return;
                 default:
-                    throw new AssertionError("Unknown MPSurfaceReader_nativeImageSetup return code " + status);
+                    throw new AssertionError(
+                            "Unknown MPSurfaceReader_nativeImageSetup return code " + status);
             }
         }
     }
@@ -232,7 +250,16 @@ public class MPSurfaceReader implements AutoCloseable {
         }
 
         public String toString() {
-            return "MPSurfaceImage=: buffer=" + bufferToString() + ": timestamp=" + this.timestamp + ": dataSpace=" + this.dataSpace + ": format=" + this.format + ": fd=" + this.fd;
+            return "MPSurfaceImage=: buffer="
+                    + bufferToString()
+                    + ": timestamp="
+                    + this.timestamp
+                    + ": dataSpace="
+                    + this.dataSpace
+                    + ": format="
+                    + this.format
+                    + ": fd="
+                    + this.fd;
         }
 
         public int getFormat() {
@@ -300,7 +327,13 @@ public class MPSurfaceReader implements AutoCloseable {
                 return "n/a";
             }
             String id = Long.toHexString(this.buffer.getId());
-            return String.format(HardwareBuffer.class.getSimpleName() + "@%d[#0x%s: w=%d, h=%d, fmt=%d]", Integer.valueOf(this.buffer.hashCode()), id, Integer.valueOf(this.buffer.getWidth()), Integer.valueOf(this.buffer.getHeight()), Integer.valueOf(this.buffer.getFormat()));
+            return String.format(
+                    HardwareBuffer.class.getSimpleName() + "@%d[#0x%s: w=%d, h=%d, fmt=%d]",
+                    Integer.valueOf(this.buffer.hashCode()),
+                    id,
+                    Integer.valueOf(this.buffer.getWidth()),
+                    Integer.valueOf(this.buffer.getHeight()),
+                    Integer.valueOf(this.buffer.getFormat()));
         }
     }
 }

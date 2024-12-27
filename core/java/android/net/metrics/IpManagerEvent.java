@@ -1,11 +1,12 @@
 package android.net.metrics;
 
 import android.annotation.SystemApi;
-import android.net.metrics.IpConnectivityLog;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseArray;
+
 import com.android.internal.util.MessageUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -14,19 +15,21 @@ import java.lang.annotation.RetentionPolicy;
 /* loaded from: classes3.dex */
 public final class IpManagerEvent implements IpConnectivityLog.Event {
     public static final int COMPLETE_LIFECYCLE = 3;
-    public static final Parcelable.Creator<IpManagerEvent> CREATOR = new Parcelable.Creator<IpManagerEvent>() { // from class: android.net.metrics.IpManagerEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IpManagerEvent createFromParcel(Parcel in) {
-            return new IpManagerEvent(in);
-        }
+    public static final Parcelable.Creator<IpManagerEvent> CREATOR =
+            new Parcelable.Creator<
+                    IpManagerEvent>() { // from class: android.net.metrics.IpManagerEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IpManagerEvent createFromParcel(Parcel in) {
+                    return new IpManagerEvent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IpManagerEvent[] newArray(int size) {
-            return new IpManagerEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IpManagerEvent[] newArray(int size) {
+                    return new IpManagerEvent[size];
+                }
+            };
     public static final int ERROR_INTERFACE_NOT_FOUND = 8;
     public static final int ERROR_INVALID_PROVISIONING = 7;
     public static final int ERROR_STARTING_IPREACHABILITYMONITOR = 6;
@@ -38,8 +41,7 @@ public final class IpManagerEvent implements IpConnectivityLog.Event {
     public final int eventType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EventType {
-    }
+    public @interface EventType {}
 
     public IpManagerEvent(int eventType, long duration) {
         this.eventType = eventType;
@@ -63,7 +65,9 @@ public final class IpManagerEvent implements IpConnectivityLog.Event {
     }
 
     public String toString() {
-        return String.format("IpManagerEvent(%s, %dms)", Decoder.constants.get(this.eventType), Long.valueOf(this.durationMs));
+        return String.format(
+                "IpManagerEvent(%s, %dms)",
+                Decoder.constants.get(this.eventType), Long.valueOf(this.durationMs));
     }
 
     public boolean equals(Object obj) {
@@ -75,9 +79,11 @@ public final class IpManagerEvent implements IpConnectivityLog.Event {
     }
 
     static final class Decoder {
-        static final SparseArray<String> constants = MessageUtils.findMessageNames(new Class[]{IpManagerEvent.class}, new String[]{"PROVISIONING_", "COMPLETE_", "ERROR_"});
+        static final SparseArray<String> constants =
+                MessageUtils.findMessageNames(
+                        new Class[] {IpManagerEvent.class},
+                        new String[] {"PROVISIONING_", "COMPLETE_", "ERROR_"});
 
-        Decoder() {
-        }
+        Decoder() {}
     }
 }

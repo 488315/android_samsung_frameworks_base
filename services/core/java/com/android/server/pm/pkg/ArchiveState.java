@@ -4,7 +4,9 @@ import android.annotation.CurrentTimeMillisLong;
 import android.annotation.NonNull;
 import android.content.ComponentName;
 import android.hardware.audio.common.V2_0.AudioConfig$$ExternalSyntheticOutline0;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.nio.file.Path;
 import java.util.List;
@@ -41,15 +43,33 @@ public final class ArchiveState {
                 return false;
             }
             ArchiveActivityInfo archiveActivityInfo = (ArchiveActivityInfo) obj;
-            return Objects.equals(this.mTitle, archiveActivityInfo.mTitle) && Objects.equals(this.mOriginalComponentName, archiveActivityInfo.mOriginalComponentName) && Objects.equals(this.mIconBitmap, archiveActivityInfo.mIconBitmap) && Objects.equals(this.mMonochromeIconBitmap, archiveActivityInfo.mMonochromeIconBitmap);
+            return Objects.equals(this.mTitle, archiveActivityInfo.mTitle)
+                    && Objects.equals(
+                            this.mOriginalComponentName, archiveActivityInfo.mOriginalComponentName)
+                    && Objects.equals(this.mIconBitmap, archiveActivityInfo.mIconBitmap)
+                    && Objects.equals(
+                            this.mMonochromeIconBitmap, archiveActivityInfo.mMonochromeIconBitmap);
         }
 
         public final int hashCode() {
-            return Objects.hashCode(this.mMonochromeIconBitmap) + ((Objects.hashCode(this.mIconBitmap) + ((Objects.hashCode(this.mOriginalComponentName) + ((Objects.hashCode(this.mTitle) + 31) * 31)) * 31)) * 31);
+            return Objects.hashCode(this.mMonochromeIconBitmap)
+                    + ((Objects.hashCode(this.mIconBitmap)
+                                    + ((Objects.hashCode(this.mOriginalComponentName)
+                                                    + ((Objects.hashCode(this.mTitle) + 31) * 31))
+                                            * 31))
+                            * 31);
         }
 
         public final String toString() {
-            return "ArchiveActivityInfo { title = " + this.mTitle + ", originalComponentName = " + this.mOriginalComponentName + ", iconBitmap = " + this.mIconBitmap + ", monochromeIconBitmap = " + this.mMonochromeIconBitmap + " }";
+            return "ArchiveActivityInfo { title = "
+                    + this.mTitle
+                    + ", originalComponentName = "
+                    + this.mOriginalComponentName
+                    + ", iconBitmap = "
+                    + this.mIconBitmap
+                    + ", monochromeIconBitmap = "
+                    + this.mMonochromeIconBitmap
+                    + " }";
         }
     }
 
@@ -74,11 +94,16 @@ public final class ArchiveState {
             return false;
         }
         ArchiveState archiveState = (ArchiveState) obj;
-        return Objects.equals(this.mActivityInfos, archiveState.mActivityInfos) && Objects.equals(this.mInstallerTitle, archiveState.mInstallerTitle) && this.mArchiveTimeMillis == archiveState.mArchiveTimeMillis;
+        return Objects.equals(this.mActivityInfos, archiveState.mActivityInfos)
+                && Objects.equals(this.mInstallerTitle, archiveState.mInstallerTitle)
+                && this.mArchiveTimeMillis == archiveState.mArchiveTimeMillis;
     }
 
     public final int hashCode() {
-        return Long.hashCode(this.mArchiveTimeMillis) + ((Objects.hashCode(this.mInstallerTitle) + ((Objects.hashCode(this.mActivityInfos) + 31) * 31)) * 31);
+        return Long.hashCode(this.mArchiveTimeMillis)
+                + ((Objects.hashCode(this.mInstallerTitle)
+                                + ((Objects.hashCode(this.mActivityInfos) + 31) * 31))
+                        * 31);
     }
 
     public final String toString() {

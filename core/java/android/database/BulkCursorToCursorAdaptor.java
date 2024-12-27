@@ -1,6 +1,5 @@
 package android.database;
 
-import android.database.AbstractCursor;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
@@ -11,7 +10,8 @@ public final class BulkCursorToCursorAdaptor extends AbstractWindowedCursor {
     private IBulkCursor mBulkCursor;
     private String[] mColumns;
     private int mCount;
-    private AbstractCursor.SelfContentObserver mObserverBridge = new AbstractCursor.SelfContentObserver(this);
+    private AbstractCursor.SelfContentObserver mObserverBridge =
+            new AbstractCursor.SelfContentObserver(this);
     private boolean mWantsAllOnMoveCalls;
 
     public void initialize(BulkCursorDescriptor d) {
@@ -88,7 +88,9 @@ public final class BulkCursorToCursorAdaptor extends AbstractWindowedCursor {
             android.util.Log.e(r2, r3)
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.database.BulkCursorToCursorAdaptor.onMove(int, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.database.BulkCursorToCursorAdaptor.onMove(int,"
+                        + " int):boolean");
     }
 
     @Override // android.database.AbstractCursor, android.database.Cursor
@@ -103,7 +105,8 @@ public final class BulkCursorToCursorAdaptor extends AbstractWindowedCursor {
         }
     }
 
-    @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable, java.lang.AutoCloseable
+    @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable,
+    // java.lang.AutoCloseable
     public void close() {
         super.close();
         if (this.mBulkCursor != null) {

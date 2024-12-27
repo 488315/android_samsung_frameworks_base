@@ -1,6 +1,7 @@
 package android.sysprop;
 
 import android.os.SystemProperties;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,8 +12,7 @@ import java.util.function.Function;
 
 /* loaded from: classes3.dex */
 public final class CrashRecoveryProperties {
-    private CrashRecoveryProperties() {
-    }
+    private CrashRecoveryProperties() {}
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Boolean tryParseBoolean(String str) {
@@ -185,7 +185,8 @@ public final class CrashRecoveryProperties {
         return joiner.toString();
     }
 
-    private static <T extends Enum<T>> String formatEnumList(List<T> list, Function<T, String> elementFormatter) {
+    private static <T extends Enum<T>> String formatEnumList(
+            List<T> list, Function<T, String> elementFormatter) {
         StringJoiner joiner = new StringJoiner(",");
         Iterator<T> it = list.iterator();
         while (it.hasNext()) {
@@ -201,7 +202,8 @@ public final class CrashRecoveryProperties {
     }
 
     public static void lastFactoryResetTimeMs(Long value) {
-        SystemProperties.set("persist.crashrecovery.last_factory_reset", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "persist.crashrecovery.last_factory_reset", value == null ? "" : value.toString());
     }
 
     public static Optional<Long> rescueBootStart() {
@@ -210,7 +212,8 @@ public final class CrashRecoveryProperties {
     }
 
     public static void rescueBootStart(Long value) {
-        SystemProperties.set("crashrecovery.rescue_boot_start", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "crashrecovery.rescue_boot_start", value == null ? "" : value.toString());
     }
 
     public static Optional<Integer> rescueBootCount() {
@@ -219,7 +222,8 @@ public final class CrashRecoveryProperties {
     }
 
     public static void rescueBootCount(Integer value) {
-        SystemProperties.set("crashrecovery.rescue_boot_count", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "crashrecovery.rescue_boot_count", value == null ? "" : value.toString());
     }
 
     public static Optional<Long> bootMitigationStart() {
@@ -228,7 +232,8 @@ public final class CrashRecoveryProperties {
     }
 
     public static void bootMitigationStart(Long value) {
-        SystemProperties.set("crashrecovery.boot_mitigation_start", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "crashrecovery.boot_mitigation_start", value == null ? "" : value.toString());
     }
 
     public static Optional<Integer> bootMitigationCount() {
@@ -237,7 +242,8 @@ public final class CrashRecoveryProperties {
     }
 
     public static void bootMitigationCount(Integer value) {
-        SystemProperties.set("crashrecovery.boot_mitigation_count", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "crashrecovery.boot_mitigation_count", value == null ? "" : value.toString());
     }
 
     public static Optional<Boolean> attemptingReboot() {
@@ -246,7 +252,8 @@ public final class CrashRecoveryProperties {
     }
 
     public static void attemptingReboot(Boolean value) {
-        SystemProperties.set("crashrecovery.attempting_reboot", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "crashrecovery.attempting_reboot", value == null ? "" : value.toString());
     }
 
     public static Optional<Boolean> attemptingFactoryReset() {
@@ -255,7 +262,8 @@ public final class CrashRecoveryProperties {
     }
 
     public static void attemptingFactoryReset(Boolean value) {
-        SystemProperties.set("crashrecovery.attempting_factory_reset", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "crashrecovery.attempting_factory_reset", value == null ? "" : value.toString());
     }
 
     public static Optional<Integer> maxRescueLevelAttempted() {
@@ -264,7 +272,8 @@ public final class CrashRecoveryProperties {
     }
 
     public static void maxRescueLevelAttempted(Integer value) {
-        SystemProperties.set("crashrecovery.max_rescue_level_attempted", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "crashrecovery.max_rescue_level_attempted", value == null ? "" : value.toString());
     }
 
     public static Optional<Boolean> enableRescueParty() {
@@ -273,6 +282,7 @@ public final class CrashRecoveryProperties {
     }
 
     public static void enableRescueParty(Boolean value) {
-        SystemProperties.set("persist.crashrecovery.enable_rescue", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "persist.crashrecovery.enable_rescue", value == null ? "" : value.toString());
     }
 }

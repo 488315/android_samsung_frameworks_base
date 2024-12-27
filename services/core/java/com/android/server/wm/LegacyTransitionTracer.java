@@ -6,9 +6,9 @@ import android.os.SystemClock;
 import android.os.Trace;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.TraceBuffer;
-import com.android.server.wm.Transition;
-import com.android.server.wm.TransitionController;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,7 +34,8 @@ public final class LegacyTransitionTracer implements TransitionTracer {
         }
     }
 
-    public final void dumpTransitionTargetsToProto(ProtoOutputStream protoOutputStream, Transition transition, ArrayList arrayList) {
+    public final void dumpTransitionTargetsToProto(
+            ProtoOutputStream protoOutputStream, Transition transition, ArrayList arrayList) {
         Trace.beginSection("TransitionTracer#dumpTransitionTargetsToProto");
         if (this.mActiveTracingEnabled) {
             protoOutputStream.write(1120986464257L, transition.mSyncId);
@@ -44,12 +45,16 @@ public final class LegacyTransitionTracer implements TransitionTracer {
         for (int i = 0; i < arrayList.size(); i++) {
             long start = protoOutputStream.start(2246267895816L);
             Transition.ChangeInfo changeInfo = (Transition.ChangeInfo) arrayList.get(i);
-            int layerId = changeInfo.mContainer.mSurfaceControl.isValid() ? changeInfo.mContainer.mSurfaceControl.getLayerId() : -1;
+            int layerId =
+                    changeInfo.mContainer.mSurfaceControl.isValid()
+                            ? changeInfo.mContainer.mSurfaceControl.getLayerId()
+                            : -1;
             protoOutputStream.write(1120986464257L, changeInfo.mReadyMode);
             protoOutputStream.write(1120986464260L, changeInfo.mReadyFlags);
             protoOutputStream.write(1120986464258L, layerId);
             if (this.mActiveTracingEnabled) {
-                protoOutputStream.write(1120986464259L, System.identityHashCode(changeInfo.mContainer));
+                protoOutputStream.write(
+                        1120986464259L, System.identityHashCode(changeInfo.mContainer));
             }
             protoOutputStream.end(start);
         }
@@ -134,7 +139,8 @@ public final class LegacyTransitionTracer implements TransitionTracer {
         }
         Trace.beginSection("TransitionTracer#saveForBugreport");
         synchronized (this.mEnabledLock) {
-            writeTraceToFileLocked(new File("/data/misc/wmtrace/wm_transition_trace.winscope"), printWriter);
+            writeTraceToFileLocked(
+                    new File("/data/misc/wmtrace/wm_transition_trace.winscope"), printWriter);
         }
         Trace.endSection();
     }
@@ -186,8 +192,15 @@ public final class LegacyTransitionTracer implements TransitionTracer {
         try {
             ProtoOutputStream protoOutputStream = new ProtoOutputStream(64);
             protoOutputStream.write(1125281431553L, 4990904633914184276L);
-            protoOutputStream.write(1125281431555L, TimeUnit.MILLISECONDS.toNanos(System.currentTimeMillis()) - SystemClock.elapsedRealtimeNanos());
-            String str = "Writing file to " + file.getAbsolutePath() + " from process " + Process.myPid();
+            protoOutputStream.write(
+                    1125281431555L,
+                    TimeUnit.MILLISECONDS.toNanos(System.currentTimeMillis())
+                            - SystemClock.elapsedRealtimeNanos());
+            String str =
+                    "Writing file to "
+                            + file.getAbsolutePath()
+                            + " from process "
+                            + Process.myPid();
             Log.i("TransitionTracer", str);
             if (printWriter != null) {
                 printWriter.println(str);

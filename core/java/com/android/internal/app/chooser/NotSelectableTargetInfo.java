@@ -7,7 +7,9 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.service.chooser.ChooserTarget;
+
 import com.android.internal.app.ResolverActivity;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */

@@ -1,6 +1,5 @@
 package android.hardware.soundtrigger;
 
-import android.hardware.soundtrigger.SoundTrigger;
 import android.media.permission.Identity;
 import android.os.Binder;
 import android.os.Handler;
@@ -9,12 +8,15 @@ import android.os.Handler;
 public class SoundTriggerModuleWrapper {
     private SoundTriggerModule instance;
 
-    public SoundTriggerModuleWrapper(int moduleId, SoundTrigger.StatusListener listener, Handler handler) {
+    public SoundTriggerModuleWrapper(
+            int moduleId, SoundTrigger.StatusListener listener, Handler handler) {
         this.instance = null;
         Identity originatorIdentity = new Identity();
         originatorIdentity.pid = Binder.getCallingPid();
         originatorIdentity.uid = Binder.getCallingUid();
-        this.instance = SoundTrigger.attachModuleAsOriginator(moduleId, listener, handler, originatorIdentity);
+        this.instance =
+                SoundTrigger.attachModuleAsOriginator(
+                        moduleId, listener, handler, originatorIdentity);
     }
 
     public void detach() {

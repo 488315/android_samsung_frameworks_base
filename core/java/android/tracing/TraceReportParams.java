@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class TraceReportParams implements Parcelable {
-    public static final Parcelable.Creator<TraceReportParams> CREATOR = new Parcelable.Creator<TraceReportParams>() { // from class: android.tracing.TraceReportParams.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TraceReportParams createFromParcel(Parcel _aidl_source) {
-            TraceReportParams _aidl_out = new TraceReportParams();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<TraceReportParams> CREATOR =
+            new Parcelable.Creator<
+                    TraceReportParams>() { // from class: android.tracing.TraceReportParams.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TraceReportParams createFromParcel(Parcel _aidl_source) {
+                    TraceReportParams _aidl_out = new TraceReportParams();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TraceReportParams[] newArray(int _aidl_size) {
-            return new TraceReportParams[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TraceReportParams[] newArray(int _aidl_size) {
+                    return new TraceReportParams[_aidl_size];
+                }
+            };
     public ParcelFileDescriptor fd;
     public String reporterClassName;
     public String reporterPackageName;
@@ -75,7 +77,9 @@ public class TraceReportParams implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.fd = (ParcelFileDescriptor) _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+            this.fd =
+                    (ParcelFileDescriptor)
+                            _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

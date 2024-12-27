@@ -1,11 +1,11 @@
 package android.app;
 
-import android.app.LoaderManager;
 import android.content.Loader;
 import android.os.Bundle;
 import android.util.DebugUtils;
 import android.util.Log;
 import android.util.SparseArray;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.reflect.Modifier;
@@ -25,7 +25,9 @@ class LoaderManagerImpl extends LoaderManager {
     final SparseArray<LoaderInfo> mInactiveLoaders = new SparseArray<>(0);
 
     /* compiled from: LoaderManager.java */
-    final class LoaderInfo implements Loader.OnLoadCompleteListener<Object>, Loader.OnLoadCanceledListener<Object> {
+    final class LoaderInfo
+            implements Loader.OnLoadCompleteListener<Object>,
+                    Loader.OnLoadCanceledListener<Object> {
         final Bundle mArgs;
         LoaderManager.LoaderCallbacks<Object> mCallbacks;
         Object mData;
@@ -63,8 +65,12 @@ class LoaderManagerImpl extends LoaderManager {
                 this.mLoader = this.mCallbacks.onCreateLoader(this.mId, this.mArgs);
             }
             if (this.mLoader != null) {
-                if (this.mLoader.getClass().isMemberClass() && !Modifier.isStatic(this.mLoader.getClass().getModifiers())) {
-                    throw new IllegalArgumentException("Object returned from onCreateLoader must not be a non-static inner member class: " + this.mLoader);
+                if (this.mLoader.getClass().isMemberClass()
+                        && !Modifier.isStatic(this.mLoader.getClass().getModifiers())) {
+                    throw new IllegalArgumentException(
+                            "Object returned from onCreateLoader must not be a non-static inner"
+                                    + " member class: "
+                                    + this.mLoader);
                 }
                 if (!this.mListenerRegistered) {
                     this.mLoader.registerListener(this.mId, this);
@@ -149,14 +155,17 @@ class LoaderManagerImpl extends LoaderManager {
                 }
                 String lastBecause = null;
                 if (LoaderManagerImpl.this.mHost != null) {
-                    lastBecause = LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause;
-                    LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause = "onLoaderReset";
+                    lastBecause =
+                            LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause;
+                    LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause =
+                            "onLoaderReset";
                 }
                 try {
                     this.mCallbacks.onLoaderReset(this.mLoader);
                 } finally {
                     if (LoaderManagerImpl.this.mHost != null) {
-                        LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause = lastBecause;
+                        LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause =
+                                lastBecause;
                     }
                 }
             }
@@ -249,7 +258,8 @@ class LoaderManagerImpl extends LoaderManager {
                 info.destroy();
                 LoaderManagerImpl.this.mInactiveLoaders.remove(this.mId);
             }
-            if (LoaderManagerImpl.this.mHost != null && !LoaderManagerImpl.this.hasRunningLoaders()) {
+            if (LoaderManagerImpl.this.mHost != null
+                    && !LoaderManagerImpl.this.hasRunningLoaders()) {
                 LoaderManagerImpl.this.mHost.mFragmentManager.startPendingDeferredFragments();
             }
         }
@@ -258,18 +268,23 @@ class LoaderManagerImpl extends LoaderManager {
             if (this.mCallbacks != null) {
                 String lastBecause = null;
                 if (LoaderManagerImpl.this.mHost != null) {
-                    lastBecause = LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause;
-                    LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause = "onLoadFinished";
+                    lastBecause =
+                            LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause;
+                    LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause =
+                            "onLoadFinished";
                 }
                 try {
                     if (LoaderManagerImpl.DEBUG) {
-                        Log.v(LoaderManagerImpl.TAG, "  onLoadFinished in " + loader + ": " + loader.dataToString(data));
+                        Log.v(
+                                LoaderManagerImpl.TAG,
+                                "  onLoadFinished in " + loader + ": " + loader.dataToString(data));
                     }
                     this.mCallbacks.onLoadFinished(loader, data);
                     this.mDeliveredData = true;
                 } finally {
                     if (LoaderManagerImpl.this.mHost != null) {
-                        LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause = lastBecause;
+                        LoaderManagerImpl.this.mHost.mFragmentManager.mNoTransactionsBecause =
+                                lastBecause;
                     }
                 }
             }
@@ -351,14 +366,16 @@ class LoaderManagerImpl extends LoaderManager {
         return this.mHost;
     }
 
-    private LoaderInfo createLoader(int id, Bundle args, LoaderManager.LoaderCallbacks<Object> callback) {
+    private LoaderInfo createLoader(
+            int id, Bundle args, LoaderManager.LoaderCallbacks<Object> callback) {
         LoaderInfo info = new LoaderInfo(id, args, callback);
         Loader<Object> loader = callback.onCreateLoader(id, args);
         info.mLoader = loader;
         return info;
     }
 
-    private LoaderInfo createAndInstallLoader(int id, Bundle args, LoaderManager.LoaderCallbacks<Object> callback) {
+    private LoaderInfo createAndInstallLoader(
+            int id, Bundle args, LoaderManager.LoaderCallbacks<Object> callback) {
         try {
             this.mCreatingLoader = true;
             LoaderInfo info = createLoader(id, args, callback);
@@ -377,7 +394,8 @@ class LoaderManagerImpl extends LoaderManager {
     }
 
     @Override // android.app.LoaderManager
-    public <D> Loader<D> initLoader(int i, Bundle bundle, LoaderManager.LoaderCallbacks<D> loaderCallbacks) {
+    public <D> Loader<D> initLoader(
+            int i, Bundle bundle, LoaderManager.LoaderCallbacks<D> loaderCallbacks) {
         if (this.mCreatingLoader) {
             throw new IllegalStateException("Called while creating a loader");
         }
@@ -403,7 +421,8 @@ class LoaderManagerImpl extends LoaderManager {
     }
 
     @Override // android.app.LoaderManager
-    public <D> Loader<D> restartLoader(int i, Bundle bundle, LoaderManager.LoaderCallbacks<D> loaderCallbacks) {
+    public <D> Loader<D> restartLoader(
+            int i, Bundle bundle, LoaderManager.LoaderCallbacks<D> loaderCallbacks) {
         if (this.mCreatingLoader) {
             throw new IllegalStateException("Called while creating a loader");
         }

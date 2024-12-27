@@ -1,7 +1,9 @@
 package com.samsung.telephony;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.telephony.Rlog;
+
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -24,7 +26,8 @@ public class SemNetworkQualityInfo {
         if ("1".equals(type)) {
             return ((Integer) this.map.get(keyLowercase)).intValue();
         }
-        String msg = "getIntValue Wrong Type of key [" + key + NavigationBarInflaterView.SIZE_MOD_END;
+        String msg =
+                "getIntValue Wrong Type of key [" + key + NavigationBarInflaterView.SIZE_MOD_END;
         throw new IllegalArgumentException(msg);
     }
 
@@ -37,7 +40,8 @@ public class SemNetworkQualityInfo {
         if (FLOAT_TYPE.equals(type)) {
             return ((Float) this.map.get(keyLowercase)).floatValue();
         }
-        String msg = "getFloatValue Wrong Type of key [" + key + NavigationBarInflaterView.SIZE_MOD_END;
+        String msg =
+                "getFloatValue Wrong Type of key [" + key + NavigationBarInflaterView.SIZE_MOD_END;
         throw new IllegalArgumentException(msg);
     }
 
@@ -50,7 +54,8 @@ public class SemNetworkQualityInfo {
         if (STRING_TYPE.equals(type)) {
             return (String) this.map.get(keyLowercase);
         }
-        String msg = "getStringValue Wrong Type of key [" + key + NavigationBarInflaterView.SIZE_MOD_END;
+        String msg =
+                "getStringValue Wrong Type of key [" + key + NavigationBarInflaterView.SIZE_MOD_END;
         throw new IllegalArgumentException(msg);
     }
 
@@ -63,7 +68,8 @@ public class SemNetworkQualityInfo {
         if (LONG_TYPE.equals(type)) {
             return ((Long) this.map.get(keyLowercase)).longValue();
         }
-        String msg = "getLongValue Wrong Type of key [" + key + NavigationBarInflaterView.SIZE_MOD_END;
+        String msg =
+                "getLongValue Wrong Type of key [" + key + NavigationBarInflaterView.SIZE_MOD_END;
         throw new IllegalArgumentException(msg);
     }
 
@@ -90,7 +96,11 @@ public class SemNetworkQualityInfo {
                 this.map.put(keyLowercase, Long.valueOf(Long.parseLong(val)));
                 this.typeMap.put(keyLowercase, LONG_TYPE);
             } else {
-                Rlog.d(LOG_TAG, "getMobileQualityInfo Wrong Type[" + type_t + NavigationBarInflaterView.SIZE_MOD_END);
+                Rlog.d(
+                        LOG_TAG,
+                        "getMobileQualityInfo Wrong Type["
+                                + type_t
+                                + NavigationBarInflaterView.SIZE_MOD_END);
             }
         }
     }

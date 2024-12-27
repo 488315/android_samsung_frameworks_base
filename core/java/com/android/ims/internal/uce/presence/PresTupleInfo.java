@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class PresTupleInfo implements Parcelable {
-    public static final Parcelable.Creator<PresTupleInfo> CREATOR = new Parcelable.Creator<PresTupleInfo>() { // from class: com.android.ims.internal.uce.presence.PresTupleInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresTupleInfo createFromParcel(Parcel source) {
-            return new PresTupleInfo(source);
-        }
+    public static final Parcelable.Creator<PresTupleInfo> CREATOR =
+            new Parcelable.Creator<
+                    PresTupleInfo>() { // from class:
+                                       // com.android.ims.internal.uce.presence.PresTupleInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresTupleInfo createFromParcel(Parcel source) {
+                    return new PresTupleInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresTupleInfo[] newArray(int size) {
-            return new PresTupleInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresTupleInfo[] newArray(int size) {
+                    return new PresTupleInfo[size];
+                }
+            };
     private String mContactUri;
     private String mFeatureTag;
     private String mTimestamp;

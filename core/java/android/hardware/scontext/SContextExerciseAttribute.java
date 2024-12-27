@@ -2,6 +2,7 @@ package android.hardware.scontext;
 
 import android.os.Bundle;
 import android.util.Log;
+
 import java.util.ArrayList;
 
 @Deprecated
@@ -14,17 +15,18 @@ public class SContextExerciseAttribute extends SContextAttribute {
     private static int REQUIRED_DATA_PEDOMETER = 4;
 
     SContextExerciseAttribute() {
-        this.mRequiredDataType = new int[]{1};
+        this.mRequiredDataType = new int[] {1};
         setAttribute();
     }
 
     public SContextExerciseAttribute(int[] requiredDataType) {
-        this.mRequiredDataType = new int[]{1};
+        this.mRequiredDataType = new int[] {1};
         this.mRequiredDataType = requiredDataType;
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < this.mRequiredDataType.length; i++) {

@@ -2,7 +2,6 @@ package android.text;
 
 import android.graphics.TemporaryBuffer;
 import android.graphics.text.GraphemeBreak;
-import android.text.AutoGrowArray;
 
 /* loaded from: classes4.dex */
 public class GraphemeClusterSegmentFinder extends SegmentFinder {
@@ -58,7 +57,9 @@ public class GraphemeClusterSegmentFinder extends SegmentFinder {
     @Override // android.text.SegmentFinder
     public int previousEndBoundary(int offset) {
         int boundary;
-        if (offset == 0 || (boundary = previousBoundary(offset)) == -1 || previousBoundary(boundary) == -1) {
+        if (offset == 0
+                || (boundary = previousBoundary(offset)) == -1
+                || previousBoundary(boundary) == -1) {
             return -1;
         }
         return boundary;
@@ -67,7 +68,9 @@ public class GraphemeClusterSegmentFinder extends SegmentFinder {
     @Override // android.text.SegmentFinder
     public int nextStartBoundary(int offset) {
         int boundary;
-        if (offset == this.mIsGraphemeBreak.length || (boundary = nextBoundary(offset)) == -1 || nextBoundary(boundary) == -1) {
+        if (offset == this.mIsGraphemeBreak.length
+                || (boundary = nextBoundary(offset)) == -1
+                || nextBoundary(boundary) == -1) {
             return -1;
         }
         return boundary;

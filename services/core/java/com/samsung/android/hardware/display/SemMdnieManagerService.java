@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Slog;
 import android.view.Display;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
@@ -25,10 +26,11 @@ import com.android.server.ServiceKeeper$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.ProcessList$$ExternalSyntheticOutline0;
+
 import com.samsung.android.displayaiqe.DisplayAiqeManager;
 import com.samsung.android.displaysolution.SemDisplaySolutionManager;
 import com.samsung.android.feature.SemFloatingFeature;
-import com.samsung.android.hardware.display.ISemMdnieManager;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -82,8 +84,7 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenWatchingReceiver extends BroadcastReceiver {
-        public ScreenWatchingReceiver() {
-        }
+        public ScreenWatchingReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -100,53 +101,95 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
                     return;
                 }
             }
-            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("BOOT_ON - mDNIe ScreenMode : "), SemMdnieManagerService.this.mScreenMode, "SemMdnieManagerService");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("BOOT_ON - mDNIe ScreenMode : "),
+                    SemMdnieManagerService.this.mScreenMode,
+                    "SemMdnieManagerService");
             SemMdnieManagerService semMdnieManagerService = SemMdnieManagerService.this;
-            semMdnieManagerService.mScreenModeSetting = Settings.System.getIntForUser(semMdnieManagerService.mContext.getContentResolver(), "screen_mode_setting", 4, -2);
+            semMdnieManagerService.mScreenModeSetting =
+                    Settings.System.getIntForUser(
+                            semMdnieManagerService.mContext.getContentResolver(),
+                            "screen_mode_setting",
+                            4,
+                            -2);
             SemMdnieManagerService semMdnieManagerService2 = SemMdnieManagerService.this;
             if (semMdnieManagerService2.mScreenModeSetting != 3) {
                 semMdnieManagerService2.mScreenMode = 4;
-            } else if (SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_WIDE_COLOR_GAMUT", false)) {
+            } else if (SemFloatingFeature.getInstance()
+                    .getBoolean("SEC_FLOATING_FEATURE_LCD_SUPPORT_WIDE_COLOR_GAMUT", false)) {
                 SemMdnieManagerService.this.mScreenMode = 0;
             } else {
                 SemMdnieManagerService.this.mScreenMode = 2;
             }
             SemMdnieManagerService semMdnieManagerService3 = SemMdnieManagerService.this;
-            if ((semMdnieManagerService3.mSupportScreenMode || semMdnieManagerService3.mSupportScreeenReadingMode) && semMdnieManagerService3.checkScreenMode(semMdnieManagerService3.mScreenMode)) {
+            if ((semMdnieManagerService3.mSupportScreenMode
+                            || semMdnieManagerService3.mSupportScreeenReadingMode)
+                    && semMdnieManagerService3.checkScreenMode(
+                            semMdnieManagerService3.mScreenMode)) {
                 synchronized (SemMdnieManagerService.this.mLock) {
                     try {
-                        SemMdnieManagerService semMdnieManagerService4 = SemMdnieManagerService.this;
+                        SemMdnieManagerService semMdnieManagerService4 =
+                                SemMdnieManagerService.this;
                         if (semMdnieManagerService4.mSupportAPmDNIe) {
-                            Slog.i("SemMdnieManagerService", "AP setScreenMode : " + SemMdnieManagerService.this.mScreenMode);
-                            SemMdnieManagerService semMdnieManagerService5 = SemMdnieManagerService.this;
-                            semMdnieManagerService5.mDisplayAiqeManager.setScreenMode(semMdnieManagerService5.mScreenMode);
+                            Slog.i(
+                                    "SemMdnieManagerService",
+                                    "AP setScreenMode : "
+                                            + SemMdnieManagerService.this.mScreenMode);
+                            SemMdnieManagerService semMdnieManagerService5 =
+                                    SemMdnieManagerService.this;
+                            semMdnieManagerService5.mDisplayAiqeManager.setScreenMode(
+                                    semMdnieManagerService5.mScreenMode);
                             if (new File("/sys/class/sensors/light_sensor/screen_mode").exists()) {
-                                SemMdnieManagerService.sysfsWrite(SemMdnieManagerService.this.mScreenMode, "/sys/class/sensors/light_sensor/screen_mode");
+                                SemMdnieManagerService.sysfsWrite(
+                                        SemMdnieManagerService.this.mScreenMode,
+                                        "/sys/class/sensors/light_sensor/screen_mode");
                             }
                         } else {
-                            SemMdnieManagerService.sysfsWrite(semMdnieManagerService4.mScreenMode, "/sys/class/mdnie/mdnie/mode");
+                            SemMdnieManagerService.sysfsWrite(
+                                    semMdnieManagerService4.mScreenMode,
+                                    "/sys/class/mdnie/mdnie/mode");
                             if (new File("/sys/class/mdnie/mdnie1/mode").exists()) {
-                                SemMdnieManagerService.sysfsWrite(SemMdnieManagerService.this.mScreenMode, "/sys/class/mdnie/mdnie1/mode");
+                                SemMdnieManagerService.sysfsWrite(
+                                        SemMdnieManagerService.this.mScreenMode,
+                                        "/sys/class/mdnie/mdnie1/mode");
                             }
-                            Slog.i("SemMdnieManagerService", "DDI setScreenMode : " + SemMdnieManagerService.this.mScreenMode);
+                            Slog.i(
+                                    "SemMdnieManagerService",
+                                    "DDI setScreenMode : "
+                                            + SemMdnieManagerService.this.mScreenMode);
                         }
                     } finally {
                     }
                 }
             }
-            if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDNESS", 0) > 0) {
+            if (SemFloatingFeature.getInstance()
+                            .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDNESS", 0)
+                    > 0) {
                 if (SemMdnieManagerService.this.mSupportAPmDNIe) {
-                    SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("AP setVividnessMode : "), SemMdnieManagerService.this.mVividnessIndex, "SemMdnieManagerService");
+                    SystemServiceManager$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("AP setVividnessMode : "),
+                            SemMdnieManagerService.this.mVividnessIndex,
+                            "SemMdnieManagerService");
                     SemMdnieManagerService semMdnieManagerService6 = SemMdnieManagerService.this;
-                    semMdnieManagerService6.mDisplayAiqeManager.setVividnessMode(semMdnieManagerService6.mVividnessIndex);
+                    semMdnieManagerService6.mDisplayAiqeManager.setVividnessMode(
+                            semMdnieManagerService6.mVividnessIndex);
                 } else {
-                    if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie/vividness")) {
-                        SemMdnieManagerService.sysfsWrite(SemMdnieManagerService.this.mVividnessIndex, "/sys/class/mdnie/mdnie/vividness");
+                    if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                            "/sys/class/mdnie/mdnie/vividness")) {
+                        SemMdnieManagerService.sysfsWrite(
+                                SemMdnieManagerService.this.mVividnessIndex,
+                                "/sys/class/mdnie/mdnie/vividness");
                     }
-                    if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/vividness")) {
-                        SemMdnieManagerService.sysfsWrite(SemMdnieManagerService.this.mVividnessIndex, "/sys/class/mdnie/mdnie1/vividness");
+                    if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                            "/sys/class/mdnie/mdnie1/vividness")) {
+                        SemMdnieManagerService.sysfsWrite(
+                                SemMdnieManagerService.this.mVividnessIndex,
+                                "/sys/class/mdnie/mdnie1/vividness");
                     }
-                    SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("DDI setVividnessMode : "), SemMdnieManagerService.this.mVividnessIndex, "SemMdnieManagerService");
+                    SystemServiceManager$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("DDI setVividnessMode : "),
+                            SemMdnieManagerService.this.mVividnessIndex,
+                            "SemMdnieManagerService");
                 }
             }
         }
@@ -174,50 +217,78 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
             if (SemMdnieManagerService.this.FP_FEATURE_SENSOR_IS_OPTICAL.contains("optical")) {
                 if (this.VIVIDNESS_STATE_URI.equals(uri)) {
                     Slog.i("SemMdnieManagerService", "VIVIDNESS_STATE_URI onChange");
-                    if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDNESS", 0) > 0) {
+                    if (SemFloatingFeature.getInstance()
+                                    .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDNESS", 0)
+                            > 0) {
                         SemMdnieManagerService.this.setting_is_changed();
                         if (SemMdnieManagerService.this.mSupportAPmDNIe) {
-                            SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("AP setVividnessMode : "), SemMdnieManagerService.this.mVividnessIndex, "SemMdnieManagerService");
-                            SemMdnieManagerService semMdnieManagerService = SemMdnieManagerService.this;
-                            semMdnieManagerService.mDisplayAiqeManager.setVividnessMode(semMdnieManagerService.mVividnessIndex);
+                            SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("AP setVividnessMode : "),
+                                    SemMdnieManagerService.this.mVividnessIndex,
+                                    "SemMdnieManagerService");
+                            SemMdnieManagerService semMdnieManagerService =
+                                    SemMdnieManagerService.this;
+                            semMdnieManagerService.mDisplayAiqeManager.setVividnessMode(
+                                    semMdnieManagerService.mVividnessIndex);
                         } else {
-                            if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie/vividness")) {
-                                SemMdnieManagerService.sysfsWrite(SemMdnieManagerService.this.mVividnessIndex, "/sys/class/mdnie/mdnie/vividness");
+                            if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                                    "/sys/class/mdnie/mdnie/vividness")) {
+                                SemMdnieManagerService.sysfsWrite(
+                                        SemMdnieManagerService.this.mVividnessIndex,
+                                        "/sys/class/mdnie/mdnie/vividness");
                             }
-                            if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/vividness")) {
-                                SemMdnieManagerService.sysfsWrite(SemMdnieManagerService.this.mVividnessIndex, "/sys/class/mdnie/mdnie1/vividness");
+                            if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                                    "/sys/class/mdnie/mdnie1/vividness")) {
+                                SemMdnieManagerService.sysfsWrite(
+                                        SemMdnieManagerService.this.mVividnessIndex,
+                                        "/sys/class/mdnie/mdnie1/vividness");
                             }
-                            SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("DDI setVividnessMode : "), SemMdnieManagerService.this.mVividnessIndex, "SemMdnieManagerService");
+                            SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("DDI setVividnessMode : "),
+                                    SemMdnieManagerService.this.mVividnessIndex,
+                                    "SemMdnieManagerService");
                         }
                     }
                 }
                 SemMdnieManagerService.this.setting_is_changed();
                 return;
             }
-            SemMdnieManagerService.this.mAlwaysOnDisplayEnabled = Settings.System.getIntForUser(this.resolver, "aod_show_state", 0, -2) == 1;
+            SemMdnieManagerService.this.mAlwaysOnDisplayEnabled =
+                    Settings.System.getIntForUser(this.resolver, "aod_show_state", 0, -2) == 1;
             if (this.AOD_SHOW_STATE_URI.equals(uri)) {
-                StringBuilder sb = new StringBuilder("AOD_SHOW_STATE_SETTINGS onChange. mAlwaysOnDisplayEnabled : ");
+                StringBuilder sb =
+                        new StringBuilder(
+                                "AOD_SHOW_STATE_SETTINGS onChange. mAlwaysOnDisplayEnabled : ");
                 sb.append(SemMdnieManagerService.this.mAlwaysOnDisplayEnabled);
                 sb.append(" , mDisplayOn : ");
                 sb.append(SemMdnieManagerService.this.mDisplayOn);
                 sb.append(" , mDisplayState : ");
-                SystemServiceManager$$ExternalSyntheticOutline0.m(sb, SemMdnieManagerService.this.mDisplayState, "SemMdnieManagerService");
+                SystemServiceManager$$ExternalSyntheticOutline0.m(
+                        sb, SemMdnieManagerService.this.mDisplayState, "SemMdnieManagerService");
                 SemMdnieManagerService semMdnieManagerService2 = SemMdnieManagerService.this;
                 if (semMdnieManagerService2.mAlwaysOnDisplayEnabled) {
-                    semMdnieManagerService2.setNightDimOffMode(semMdnieManagerService2.mNightModeIndex, semMdnieManagerService2.mNightMode);
+                    semMdnieManagerService2.setNightDimOffMode(
+                            semMdnieManagerService2.mNightModeIndex,
+                            semMdnieManagerService2.mNightMode);
                     return;
                 }
                 if (semMdnieManagerService2.mDisplayOn) {
-                    semMdnieManagerService2.setNightMode(semMdnieManagerService2.mNightMode, semMdnieManagerService2.mNightModeIndex);
+                    semMdnieManagerService2.setNightMode(
+                            semMdnieManagerService2.mNightMode,
+                            semMdnieManagerService2.mNightModeIndex);
                     return;
                 }
                 int i = semMdnieManagerService2.mDisplayState;
                 if (i == 1) {
-                    semMdnieManagerService2.setNightDimOffMode(semMdnieManagerService2.mNightModeIndex, semMdnieManagerService2.mNightMode);
+                    semMdnieManagerService2.setNightDimOffMode(
+                            semMdnieManagerService2.mNightModeIndex,
+                            semMdnieManagerService2.mNightMode);
                     return;
                 } else {
                     if (i == 2) {
-                        semMdnieManagerService2.setNightMode(semMdnieManagerService2.mNightMode, semMdnieManagerService2.mNightModeIndex);
+                        semMdnieManagerService2.setNightMode(
+                                semMdnieManagerService2.mNightMode,
+                                semMdnieManagerService2.mNightModeIndex);
                         return;
                     }
                     return;
@@ -226,7 +297,9 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
             if (this.NIGHT_DIM_URI.equals(uri)) {
                 Slog.i("SemMdnieManagerService", "BLUE_LIGHT_FILTER_NIGHT_DIM onChange");
                 SemMdnieManagerService semMdnieManagerService3 = SemMdnieManagerService.this;
-                semMdnieManagerService3.setNightMode(semMdnieManagerService3.mNightMode, semMdnieManagerService3.mNightModeIndex);
+                semMdnieManagerService3.setNightMode(
+                        semMdnieManagerService3.mNightMode,
+                        semMdnieManagerService3.mNightModeIndex);
                 return;
             }
             if (!this.EAD_ENABLED_URI.equals(uri)) {
@@ -235,21 +308,37 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
                     return;
                 }
                 Slog.i("SemMdnieManagerService", "VIVIDNESS_STATE_URI onChange");
-                if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDNESS", 0) > 0) {
+                if (SemFloatingFeature.getInstance()
+                                .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_VIVIDNESS", 0)
+                        > 0) {
                     SemMdnieManagerService.this.setting_is_changed();
                     if (SemMdnieManagerService.this.mSupportAPmDNIe) {
-                        SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("AP setVividnessMode : "), SemMdnieManagerService.this.mVividnessIndex, "SemMdnieManagerService");
-                        SemMdnieManagerService semMdnieManagerService4 = SemMdnieManagerService.this;
-                        semMdnieManagerService4.mDisplayAiqeManager.setVividnessMode(semMdnieManagerService4.mVividnessIndex);
+                        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("AP setVividnessMode : "),
+                                SemMdnieManagerService.this.mVividnessIndex,
+                                "SemMdnieManagerService");
+                        SemMdnieManagerService semMdnieManagerService4 =
+                                SemMdnieManagerService.this;
+                        semMdnieManagerService4.mDisplayAiqeManager.setVividnessMode(
+                                semMdnieManagerService4.mVividnessIndex);
                         return;
                     } else {
-                        if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie/vividness")) {
-                            SemMdnieManagerService.sysfsWrite(SemMdnieManagerService.this.mVividnessIndex, "/sys/class/mdnie/mdnie/vividness");
+                        if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                                "/sys/class/mdnie/mdnie/vividness")) {
+                            SemMdnieManagerService.sysfsWrite(
+                                    SemMdnieManagerService.this.mVividnessIndex,
+                                    "/sys/class/mdnie/mdnie/vividness");
                         }
-                        if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/vividness")) {
-                            SemMdnieManagerService.sysfsWrite(SemMdnieManagerService.this.mVividnessIndex, "/sys/class/mdnie/mdnie1/vividness");
+                        if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                                "/sys/class/mdnie/mdnie1/vividness")) {
+                            SemMdnieManagerService.sysfsWrite(
+                                    SemMdnieManagerService.this.mVividnessIndex,
+                                    "/sys/class/mdnie/mdnie1/vividness");
                         }
-                        SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("DDI setVividnessMode : "), SemMdnieManagerService.this.mVividnessIndex, "SemMdnieManagerService");
+                        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("DDI setVividnessMode : "),
+                                SemMdnieManagerService.this.mVividnessIndex,
+                                "SemMdnieManagerService");
                         return;
                     }
                 }
@@ -259,17 +348,52 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
             SemMdnieManagerService semMdnieManagerService5 = SemMdnieManagerService.this;
             if (semMdnieManagerService5.mEnvironmentAdaptiveDisplaySupported) {
                 if (semMdnieManagerService5.mSupportAPmDNIe) {
-                    Slog.i("SemMdnieManagerService", "AP setEnvironmentAdaptiveDisplayMode : " + Settings.System.getIntForUser(SemMdnieManagerService.this.mContext.getContentResolver(), "ead_enabled", 0, -2));
+                    Slog.i(
+                            "SemMdnieManagerService",
+                            "AP setEnvironmentAdaptiveDisplayMode : "
+                                    + Settings.System.getIntForUser(
+                                            SemMdnieManagerService.this.mContext
+                                                    .getContentResolver(),
+                                            "ead_enabled",
+                                            0,
+                                            -2));
                     SemMdnieManagerService semMdnieManagerService6 = SemMdnieManagerService.this;
-                    semMdnieManagerService6.mDisplayAiqeManager.setEnvironmentAdaptiveDisplayMode(Settings.System.getIntForUser(semMdnieManagerService6.mContext.getContentResolver(), "ead_enabled", 0, -2));
+                    semMdnieManagerService6.mDisplayAiqeManager.setEnvironmentAdaptiveDisplayMode(
+                            Settings.System.getIntForUser(
+                                    semMdnieManagerService6.mContext.getContentResolver(),
+                                    "ead_enabled",
+                                    0,
+                                    -2));
                 } else {
-                    if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie/adaptive_mode")) {
-                        SemMdnieManagerService.sysfsWrite(Settings.System.getIntForUser(SemMdnieManagerService.this.mContext.getContentResolver(), "ead_enabled", 0, -2), "/sys/class/mdnie/mdnie/adaptive_mode");
+                    if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                            "/sys/class/mdnie/mdnie/adaptive_mode")) {
+                        SemMdnieManagerService.sysfsWrite(
+                                Settings.System.getIntForUser(
+                                        SemMdnieManagerService.this.mContext.getContentResolver(),
+                                        "ead_enabled",
+                                        0,
+                                        -2),
+                                "/sys/class/mdnie/mdnie/adaptive_mode");
                     }
-                    if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/adaptive_mode")) {
-                        SemMdnieManagerService.sysfsWrite(Settings.System.getIntForUser(SemMdnieManagerService.this.mContext.getContentResolver(), "ead_enabled", 0, -2), "/sys/class/mdnie/mdnie1/adaptive_mode");
+                    if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                            "/sys/class/mdnie/mdnie1/adaptive_mode")) {
+                        SemMdnieManagerService.sysfsWrite(
+                                Settings.System.getIntForUser(
+                                        SemMdnieManagerService.this.mContext.getContentResolver(),
+                                        "ead_enabled",
+                                        0,
+                                        -2),
+                                "/sys/class/mdnie/mdnie1/adaptive_mode");
                     }
-                    Slog.i("SemMdnieManagerService", "DDI setEnvironmentAdaptiveDisplayMode : " + Settings.System.getIntForUser(SemMdnieManagerService.this.mContext.getContentResolver(), "ead_enabled", 0, -2));
+                    Slog.i(
+                            "SemMdnieManagerService",
+                            "DDI setEnvironmentAdaptiveDisplayMode : "
+                                    + Settings.System.getIntForUser(
+                                            SemMdnieManagerService.this.mContext
+                                                    .getContentResolver(),
+                                            "ead_enabled",
+                                            0,
+                                            -2));
                 }
                 SemMdnieManagerService.this.setting_is_changed();
             }
@@ -286,7 +410,9 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
         this.mLock = new Object();
         int intValue = Integer.valueOf("65303").intValue();
         this.MDNIE_SUPPORT_FUNCTION = intValue;
-        this.FP_FEATURE_SENSOR_IS_OPTICAL = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_BIOAUTH_CONFIG_FINGERPRINT_FEATURES");
+        this.FP_FEATURE_SENSOR_IS_OPTICAL =
+                SemFloatingFeature.getInstance()
+                        .getString("SEC_FLOATING_FEATURE_BIOAUTH_CONFIG_FINGERPRINT_FEATURES");
         this.mSupportAPmDNIe = false;
         this.mSupportContentMode = false;
         this.mSupportContentModeGame = false;
@@ -316,68 +442,136 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
         this.mNightModeIndex = 0;
         this.mVividnessIndex = 0;
         this.NIGHT_MODE_MAX_INDEX = 0;
-        this.mPresetAdjustWhiteRGB = new int[][][]{new int[][]{new int[]{0, -6, -20}, new int[]{0, -3, -10}, new int[]{0, 0, 0}, new int[]{-7, -5, 0}, new int[]{-14, -10, 0}}, new int[][]{new int[]{0, -3, -20}, new int[]{0, 0, -10}, new int[]{-3, 0, -3}, new int[]{-7, -2, 0}, new int[]{-14, -7, 0}}, new int[][]{new int[]{0, 0, -20}, new int[]{-3, 0, -13}, new int[]{-6, 0, -6}, new int[]{-8, 0, -1}, new int[]{-14, -4, 0}}, new int[][]{new int[]{-3, 0, -23}, new int[]{-6, 0, -16}, new int[]{-9, 0, -9}, new int[]{-11, 0, -4}, new int[]{-14, -1, 0}}, new int[][]{new int[]{-6, 0, -26}, new int[]{-9, 0, -19}, new int[]{-12, 0, -12}, new int[]{-14, 0, -7}, new int[]{-16, 0, -2}}};
-        DisplayManager.DisplayListener displayListener = new DisplayManager.DisplayListener() { // from class: com.samsung.android.hardware.display.SemMdnieManagerService.1
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayAdded(int i) {
-            }
-
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayChanged(int i) {
-                Display display;
-                boolean isBlueLightFilterScheduledTime;
-                ContentResolver contentResolver = SemMdnieManagerService.this.mContext.getContentResolver();
-                SemMdnieManagerService semMdnieManagerService = SemMdnieManagerService.this;
-                if (semMdnieManagerService.mDisplayManager == null || semMdnieManagerService.FP_FEATURE_SENSOR_IS_OPTICAL.contains("optical") || (display = SemMdnieManagerService.this.mDisplayManager.getDisplay(i)) == null || i != 0) {
-                    return;
-                }
-                SemMdnieManagerService.this.mDisplayState = display.getState();
-                SemMdnieManagerService semMdnieManagerService2 = SemMdnieManagerService.this;
-                int i2 = semMdnieManagerService2.mDisplayState;
-                if (i2 == 3 || i2 == 4 || i2 == 1) {
-                    semMdnieManagerService2.mDisplayState = 1;
-                } else {
-                    semMdnieManagerService2.mDisplayState = 2;
-                }
-                int i3 = semMdnieManagerService2.mDisplayState;
-                if (i3 != semMdnieManagerService2.mDisplayStatePrev) {
-                    semMdnieManagerService2.mDisplayStatePrev = i3;
-                    StringBuilder sb = new StringBuilder("DisplayListener onDisplayChanged. mAlwaysOnDisplayEnabled : ");
-                    sb.append(SemMdnieManagerService.this.mAlwaysOnDisplayEnabled);
-                    sb.append(" , mDisplayOn : ");
-                    sb.append(SemMdnieManagerService.this.mDisplayOn);
-                    sb.append(" , mDisplayState : ");
-                    sb.append(SemMdnieManagerService.this.mDisplayState);
-                    sb.append(" , mWorkBlueFilter : ");
-                    sb.append(SemMdnieManagerService.this.mWorkBlueFilter);
-                    sb.append(" , mNightModeBlock : ");
-                    HeimdAllFsService$$ExternalSyntheticOutline0.m("SemMdnieManagerService", sb, SemMdnieManagerService.this.mNightModeBlock);
-                    SemDisplaySolutionManager semDisplaySolutionManager = (SemDisplaySolutionManager) SemMdnieManagerService.this.mContext.getSystemService("DisplaySolution");
-                    if (semDisplaySolutionManager == null) {
-                        Slog.d("SemMdnieManagerService", "SemDisplaySolutionManager is null");
-                        isBlueLightFilterScheduledTime = true;
-                    } else {
-                        isBlueLightFilterScheduledTime = semDisplaySolutionManager.isBlueLightFilterScheduledTime();
+        this.mPresetAdjustWhiteRGB =
+                new int[][][] {
+                    new int[][] {
+                        new int[] {0, -6, -20},
+                        new int[] {0, -3, -10},
+                        new int[] {0, 0, 0},
+                        new int[] {-7, -5, 0},
+                        new int[] {-14, -10, 0}
+                    },
+                    new int[][] {
+                        new int[] {0, -3, -20},
+                        new int[] {0, 0, -10},
+                        new int[] {-3, 0, -3},
+                        new int[] {-7, -2, 0},
+                        new int[] {-14, -7, 0}
+                    },
+                    new int[][] {
+                        new int[] {0, 0, -20},
+                        new int[] {-3, 0, -13},
+                        new int[] {-6, 0, -6},
+                        new int[] {-8, 0, -1},
+                        new int[] {-14, -4, 0}
+                    },
+                    new int[][] {
+                        new int[] {-3, 0, -23},
+                        new int[] {-6, 0, -16},
+                        new int[] {-9, 0, -9},
+                        new int[] {-11, 0, -4},
+                        new int[] {-14, -1, 0}
+                    },
+                    new int[][] {
+                        new int[] {-6, 0, -26},
+                        new int[] {-9, 0, -19},
+                        new int[] {-12, 0, -12},
+                        new int[] {-14, 0, -7},
+                        new int[] {-16, 0, -2}
                     }
-                    if (!SemMdnieManagerService.this.mNightMode && isBlueLightFilterScheduledTime && Settings.System.getIntForUser(contentResolver, "blue_light_filter", 0, -2) == 1) {
-                        SemMdnieManagerService semMdnieManagerService3 = SemMdnieManagerService.this;
-                        if (!semMdnieManagerService3.mNightModeBlock) {
-                            semMdnieManagerService3.mNightMode = true;
+                };
+        DisplayManager.DisplayListener displayListener =
+                new DisplayManager.DisplayListener() { // from class:
+                    // com.samsung.android.hardware.display.SemMdnieManagerService.1
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayAdded(int i) {}
+
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayChanged(int i) {
+                        Display display;
+                        boolean isBlueLightFilterScheduledTime;
+                        ContentResolver contentResolver =
+                                SemMdnieManagerService.this.mContext.getContentResolver();
+                        SemMdnieManagerService semMdnieManagerService = SemMdnieManagerService.this;
+                        if (semMdnieManagerService.mDisplayManager == null
+                                || semMdnieManagerService.FP_FEATURE_SENSOR_IS_OPTICAL.contains(
+                                        "optical")
+                                || (display =
+                                                SemMdnieManagerService.this.mDisplayManager
+                                                        .getDisplay(i))
+                                        == null
+                                || i != 0) {
+                            return;
+                        }
+                        SemMdnieManagerService.this.mDisplayState = display.getState();
+                        SemMdnieManagerService semMdnieManagerService2 =
+                                SemMdnieManagerService.this;
+                        int i2 = semMdnieManagerService2.mDisplayState;
+                        if (i2 == 3 || i2 == 4 || i2 == 1) {
+                            semMdnieManagerService2.mDisplayState = 1;
+                        } else {
+                            semMdnieManagerService2.mDisplayState = 2;
+                        }
+                        int i3 = semMdnieManagerService2.mDisplayState;
+                        if (i3 != semMdnieManagerService2.mDisplayStatePrev) {
+                            semMdnieManagerService2.mDisplayStatePrev = i3;
+                            StringBuilder sb =
+                                    new StringBuilder(
+                                            "DisplayListener onDisplayChanged."
+                                                + " mAlwaysOnDisplayEnabled : ");
+                            sb.append(SemMdnieManagerService.this.mAlwaysOnDisplayEnabled);
+                            sb.append(" , mDisplayOn : ");
+                            sb.append(SemMdnieManagerService.this.mDisplayOn);
+                            sb.append(" , mDisplayState : ");
+                            sb.append(SemMdnieManagerService.this.mDisplayState);
+                            sb.append(" , mWorkBlueFilter : ");
+                            sb.append(SemMdnieManagerService.this.mWorkBlueFilter);
+                            sb.append(" , mNightModeBlock : ");
+                            HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                                    "SemMdnieManagerService",
+                                    sb,
+                                    SemMdnieManagerService.this.mNightModeBlock);
+                            SemDisplaySolutionManager semDisplaySolutionManager =
+                                    (SemDisplaySolutionManager)
+                                            SemMdnieManagerService.this.mContext.getSystemService(
+                                                    "DisplaySolution");
+                            if (semDisplaySolutionManager == null) {
+                                Slog.d(
+                                        "SemMdnieManagerService",
+                                        "SemDisplaySolutionManager is null");
+                                isBlueLightFilterScheduledTime = true;
+                            } else {
+                                isBlueLightFilterScheduledTime =
+                                        semDisplaySolutionManager.isBlueLightFilterScheduledTime();
+                            }
+                            if (!SemMdnieManagerService.this.mNightMode
+                                    && isBlueLightFilterScheduledTime
+                                    && Settings.System.getIntForUser(
+                                                    contentResolver, "blue_light_filter", 0, -2)
+                                            == 1) {
+                                SemMdnieManagerService semMdnieManagerService3 =
+                                        SemMdnieManagerService.this;
+                                if (!semMdnieManagerService3.mNightModeBlock) {
+                                    semMdnieManagerService3.mNightMode = true;
+                                }
+                            }
+                            SemMdnieManagerService semMdnieManagerService4 =
+                                    SemMdnieManagerService.this;
+                            if (semMdnieManagerService4.mDisplayState == 1) {
+                                semMdnieManagerService4.setNightDimOffMode(
+                                        semMdnieManagerService4.mNightModeIndex,
+                                        semMdnieManagerService4.mNightMode);
+                            } else {
+                                semMdnieManagerService4.setNightMode(
+                                        semMdnieManagerService4.mNightMode,
+                                        semMdnieManagerService4.mNightModeIndex);
+                            }
                         }
                     }
-                    SemMdnieManagerService semMdnieManagerService4 = SemMdnieManagerService.this;
-                    if (semMdnieManagerService4.mDisplayState == 1) {
-                        semMdnieManagerService4.setNightDimOffMode(semMdnieManagerService4.mNightModeIndex, semMdnieManagerService4.mNightMode);
-                    } else {
-                        semMdnieManagerService4.setNightMode(semMdnieManagerService4.mNightMode, semMdnieManagerService4.mNightModeIndex);
-                    }
-                }
-            }
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayRemoved(int i) {
-            }
-        };
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayRemoved(int i) {}
+                };
         this.mContext = context;
         ContentResolver contentResolver = context.getContentResolver();
         SettingsObserver settingsObserver = new SettingsObserver();
@@ -390,19 +584,47 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
         this.mSupportLightNotificationMode = (intValue & 32768) != 0;
         this.mMdnieWhiteRGBSupported = true;
         this.mEnvironmentAdaptiveDisplaySupported = true;
-        if (!"DDI".equals(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_LCD_CONFIG_HW_MDNIE"))) {
+        if (!"DDI"
+                .equals(
+                        SemFloatingFeature.getInstance()
+                                .getString("SEC_FLOATING_FEATURE_LCD_CONFIG_HW_MDNIE"))) {
             this.mSupportAPmDNIe = true;
         }
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_mode_setting"), false, settingsObserver, -2);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("screen_mode_automatic_setting"), false, settingsObserver, -2);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("sec_display_temperature_red"), false, settingsObserver, -2);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("sec_display_temperature_green"), false, settingsObserver, -2);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("sec_display_temperature_blue"), false, settingsObserver, -2);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("sec_display_preset_index"), false, settingsObserver, 0);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("vividness_intensity"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("blue_light_filter_night_dim"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("aod_show_state"), false, settingsObserver, -1);
-        contentResolver.registerContentObserver(Settings.System.getUriFor("ead_enabled"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_mode_setting"), false, settingsObserver, -2);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("screen_mode_automatic_setting"),
+                false,
+                settingsObserver,
+                -2);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("sec_display_temperature_red"),
+                false,
+                settingsObserver,
+                -2);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("sec_display_temperature_green"),
+                false,
+                settingsObserver,
+                -2);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("sec_display_temperature_blue"),
+                false,
+                settingsObserver,
+                -2);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("sec_display_preset_index"), false, settingsObserver, 0);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("vividness_intensity"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("blue_light_filter_night_dim"),
+                false,
+                settingsObserver,
+                -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("aod_show_state"), false, settingsObserver, -1);
+        contentResolver.registerContentObserver(
+                Settings.System.getUriFor("ead_enabled"), false, settingsObserver, -1);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.BOOT_COMPLETED");
         intentFilter.addAction("android.intent.action.SCREEN_ON");
@@ -411,16 +633,21 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
         if (!FactoryTest.isFactoryBinary()) {
             context.registerReceiver(new ScreenWatchingReceiver(), intentFilter);
         }
-        if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_SUPPORT_BLUE_FILTER_ADAPTIVE_MODE", 0) > 0) {
+        if (SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_LCD_SUPPORT_BLUE_FILTER_ADAPTIVE_MODE", 0)
+                > 0) {
             z = true;
             this.mAdaptiveBlueLightFilterSupported = true;
         } else {
             z = true;
         }
-        if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_NIGHT_DIM", 0) > 0) {
+        if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_NIGHT_DIM", 0)
+                > 0) {
             this.mNightDimSupported = z;
         }
-        if (SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_NATURAL_MODE_TYPE", 0) == z) {
+        if (SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_LCD_CONFIG_NATURAL_MODE_TYPE", 0)
+                == z) {
             this.mNaturalGammaScreenModeSupported = z;
         }
         boolean z2 = this.mAdaptiveBlueLightFilterSupported;
@@ -431,7 +658,9 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
         } else {
             this.NIGHT_MODE_MAX_INDEX = 102;
         }
-        Slog.d("SemMdnieManagerService", "SemMdnieMdnieManager Night mode Index : " + this.NIGHT_MODE_MAX_INDEX);
+        Slog.d(
+                "SemMdnieManagerService",
+                "SemMdnieMdnieManager Night mode Index : " + this.NIGHT_MODE_MAX_INDEX);
         boolean z3 = context.getResources().getBoolean(R.bool.config_LTE_eri_for_network_name);
         this.mUseAfterimageCompensationServiceConfig = z3;
         if (z3 && !FactoryTest.isFactoryBinary()) {
@@ -439,12 +668,14 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
         }
         try {
             if (this.mDisplayManager == null) {
-                DisplayManager displayManager = (DisplayManager) context.getSystemService("display");
+                DisplayManager displayManager =
+                        (DisplayManager) context.getSystemService("display");
                 this.mDisplayManager = displayManager;
                 displayManager.registerDisplayListener(displayListener, null);
             }
             if (this.mDisplayAiqeManager == null) {
-                this.mDisplayAiqeManager = (DisplayAiqeManager) context.getSystemService("display_aiqe");
+                this.mDisplayAiqeManager =
+                        (DisplayAiqeManager) context.getSystemService("display_aiqe");
             }
         } catch (Exception unused) {
             Slog.d("SemMdnieManagerService", "failed to registerProcessObserver");
@@ -459,8 +690,14 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
                 this.mDisplayAiqeManager.setNaturalMode("DM");
             }
             if (this.mEnvironmentAdaptiveDisplaySupported) {
-                Slog.i("SemMdnieManagerService", "AP setEnvironmentAdaptiveDisplayMode : " + Settings.System.getIntForUser(this.mContext.getContentResolver(), "ead_enabled", 0, -2));
-                this.mDisplayAiqeManager.setEnvironmentAdaptiveDisplayMode(Settings.System.getIntForUser(this.mContext.getContentResolver(), "ead_enabled", 0, -2));
+                Slog.i(
+                        "SemMdnieManagerService",
+                        "AP setEnvironmentAdaptiveDisplayMode : "
+                                + Settings.System.getIntForUser(
+                                        this.mContext.getContentResolver(), "ead_enabled", 0, -2));
+                this.mDisplayAiqeManager.setEnvironmentAdaptiveDisplayMode(
+                        Settings.System.getIntForUser(
+                                this.mContext.getContentResolver(), "ead_enabled", 0, -2));
             }
         }
         if (FactoryTest.isFactoryBinary()) {
@@ -468,16 +705,25 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
                 Slog.i("SemMdnieManagerService", "AP setByPassMode : true");
                 this.mDisplayAiqeManager.setByPassMode(true);
             } else {
-                if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie/bypass")) {
+                if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                        "/sys/class/mdnie/mdnie/bypass")) {
                     sysfsWrite(1, "/sys/class/mdnie/mdnie/bypass");
                 }
-                if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/bypass")) {
+                if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                        "/sys/class/mdnie/mdnie1/bypass")) {
                     sysfsWrite(1, "/sys/class/mdnie/mdnie1/bypass");
                 }
                 Slog.i("SemMdnieManagerService", "DDI setByPassMode : true");
             }
         }
-        Slog.d("SemMdnieManagerService", "mMdnieWhiteRGBSupported - " + this.mMdnieWhiteRGBSupported + ", S_EAD - " + this.mEnvironmentAdaptiveDisplaySupported + ", SemMdnieMdnieManager AFC config : " + this.mUseAfterimageCompensationServiceConfig);
+        Slog.d(
+                "SemMdnieManagerService",
+                "mMdnieWhiteRGBSupported - "
+                        + this.mMdnieWhiteRGBSupported
+                        + ", S_EAD - "
+                        + this.mEnvironmentAdaptiveDisplaySupported
+                        + ", SemMdnieMdnieManager AFC config : "
+                        + this.mUseAfterimageCompensationServiceConfig);
         Slog.i("SemMdnieManagerService", "SemMdnieMdnieManagerService Init Success");
     }
 
@@ -618,7 +864,8 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     }
 
     public final boolean afpcDataApply() {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "afpcDataApply");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "afpcDataApply");
         Slog.d("SemMdnieManagerService", "afpcDataApply");
         AfterimageCompensationService afterimageCompensationService = this.afterimageCompensation;
         if (afterimageCompensationService != null) {
@@ -628,7 +875,8 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     }
 
     public final boolean afpcDataOff() {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "afpcDataOff");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "afpcDataOff");
         Slog.d("SemMdnieManagerService", "afpcDataOff");
         AfterimageCompensationService afterimageCompensationService = this.afterimageCompensation;
         if (afterimageCompensationService != null) {
@@ -647,7 +895,8 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     }
 
     public final boolean afpcDataWrite() {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "afpcDataWrite");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "afpcDataWrite");
         Slog.d("SemMdnieManagerService", "afpcDataWrite");
         AfterimageCompensationService afterimageCompensationService = this.afterimageCompensation;
         if (afterimageCompensationService != null) {
@@ -657,7 +906,8 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     }
 
     public final boolean afpcWorkOff() {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "afpcWorkOff");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "afpcWorkOff");
         Slog.d("SemMdnieManagerService", "afpcWorkOff");
         AfterimageCompensationService afterimageCompensationService = this.afterimageCompensation;
         if (afterimageCompensationService == null) {
@@ -671,7 +921,13 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
 
     public final boolean checkScreenMode(int i) {
         boolean z = false;
-        if (this.mSupportScreenMode && (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || (i == 5 && this.mSupportScreeenReadingMode))) {
+        if (this.mSupportScreenMode
+                && (i == 0
+                        || i == 1
+                        || i == 2
+                        || i == 3
+                        || i == 4
+                        || (i == 5 && this.mSupportScreeenReadingMode))) {
             z = true;
         }
         if (this.mSupportScreeenReadingMode) {
@@ -686,12 +942,14 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     }
 
     public final boolean disableNightMode() {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "disableNightMode");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "disableNightMode");
         return setNightMode(false, this.mNightModeIndex);
     }
 
     public final boolean enableNightMode(int i) {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "enableNightMode");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "enableNightMode");
         return setNightMode(true, i);
     }
 
@@ -700,13 +958,20 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     }
 
     public final boolean getNightModeBlock() {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "getNightModeBlock");
-        HeimdAllFsService$$ExternalSyntheticOutline0.m("SemMdnieManagerService", new StringBuilder("getNightModeBlock : "), this.mWorkBlueFilter);
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "getNightModeBlock");
+        HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                "SemMdnieManagerService",
+                new StringBuilder("getNightModeBlock : "),
+                this.mWorkBlueFilter);
         return this.mWorkBlueFilter;
     }
 
     public final int getNightModeStep() {
-        HeimdAllFsService$$ExternalSyntheticOutline0.m("SemMdnieManagerService", new StringBuilder("getNightModeStep : "), this.mWorkBlueFilter);
+        HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                "SemMdnieManagerService",
+                new StringBuilder("getNightModeStep : "),
+                this.mWorkBlueFilter);
         return this.mBlueFilterIndex;
     }
 
@@ -715,7 +980,13 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     }
 
     public final int[] getSupportedContentMode() {
-        Slog.i("SemMdnieManagerService", "MDNIE_SUPPORT_FUNCTION (" + this.MDNIE_SUPPORT_FUNCTION + "), mSupportContentMode (" + this.mSupportContentMode + ")");
+        Slog.i(
+                "SemMdnieManagerService",
+                "MDNIE_SUPPORT_FUNCTION ("
+                        + this.MDNIE_SUPPORT_FUNCTION
+                        + "), mSupportContentMode ("
+                        + this.mSupportContentMode
+                        + ")");
         boolean z = this.mSupportContentMode;
         int[] iArr = new int[z ? 6 : 0];
         if (z) {
@@ -731,7 +1002,11 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
 
     public final int[] getSupportedScreenMode() {
         boolean z = this.mSupportScreenMode;
-        int[] iArr = new int[z ? this.mSupportScreeenReadingMode ? 5 : 4 : this.mSupportScreeenReadingMode ? 2 : 0];
+        int[] iArr =
+                new int
+                        [z
+                                ? this.mSupportScreeenReadingMode ? 5 : 4
+                                : this.mSupportScreeenReadingMode ? 2 : 0];
         if (z) {
             iArr[0] = 0;
             iArr[1] = 1;
@@ -761,8 +1036,11 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
 
     public final boolean setColorFadeNightDim(boolean z) {
         ContentResolver contentResolver = this.mContext.getContentResolver();
-        this.mBlueLightFilterEnabled = Settings.System.getIntForUser(contentResolver, "blue_light_filter", 0, -2) == 1;
-        boolean z2 = Settings.System.getIntForUser(contentResolver, "blue_light_filter_night_dim", 0, -2) == 1;
+        this.mBlueLightFilterEnabled =
+                Settings.System.getIntForUser(contentResolver, "blue_light_filter", 0, -2) == 1;
+        boolean z2 =
+                Settings.System.getIntForUser(contentResolver, "blue_light_filter_night_dim", 0, -2)
+                        == 1;
         this.mNightDimModeEnabled = z2;
         if (this.mBlueLightFilterEnabled && z2) {
             Slog.i("SemMdnieManagerService", "setColorFadeNightDim");
@@ -782,8 +1060,14 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
         }
         synchronized (this.mLock) {
             try {
-                String str = Integer.toString(z ? 1 : 0) + " " + Integer.toString(i) + " " + Integer.toString(i2);
-                if (sysfsWriteSting("/sys/class/mdnie/mdnie/color_lens", str) && new File("/sys/class/mdnie/mdnie1/color_lens").exists()) {
+                String str =
+                        Integer.toString(z ? 1 : 0)
+                                + " "
+                                + Integer.toString(i)
+                                + " "
+                                + Integer.toString(i2);
+                if (sysfsWriteSting("/sys/class/mdnie/mdnie/color_lens", str)
+                        && new File("/sys/class/mdnie/mdnie1/color_lens").exists()) {
                     sysfsWriteSting("/sys/class/mdnie/mdnie1/color_lens", str);
                 }
                 Slog.i("SemMdnieManagerService", "setColorVision : " + z + " - " + i + " - " + i2);
@@ -846,7 +1130,15 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
                         Slog.i("SemMdnieManagerService", "AP setEadMode : index(" + i + ")");
                     } else if (new File("/sys/class/mdnie/mdnie/whiteRGB").exists()) {
                         sysfsWrite_AdaptiveArray("/sys/class/mdnie/mdnie/whiteRGB", iArr);
-                        Slog.i("SemMdnieManagerService", "DDI setEadMode : arr(" + iArr[0] + "," + iArr[1] + "," + iArr[2] + ")");
+                        Slog.i(
+                                "SemMdnieManagerService",
+                                "DDI setEadMode : arr("
+                                        + iArr[0]
+                                        + ","
+                                        + iArr[1]
+                                        + ","
+                                        + iArr[2]
+                                        + ")");
                     }
                 } finally {
                 }
@@ -862,7 +1154,15 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
                         Slog.i("SemMdnieManagerService", "AP setEadModeSub : index(" + i + ")");
                     } else if (new File("/sys/class/mdnie/mdnie1/whiteRGB").exists()) {
                         sysfsWrite_AdaptiveArray("/sys/class/mdnie/mdnie1/whiteRGB", iArr);
-                        Slog.i("SemMdnieManagerService", "DDI setEadModeSub : arr(" + iArr[0] + "," + iArr[1] + "," + iArr[2] + ")");
+                        Slog.i(
+                                "SemMdnieManagerService",
+                                "DDI setEadModeSub : arr("
+                                        + iArr[0]
+                                        + ","
+                                        + iArr[1]
+                                        + ","
+                                        + iArr[2]
+                                        + ")");
                     }
                 } finally {
                 }
@@ -892,7 +1192,14 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
         synchronized (this.mLock) {
             try {
                 if (this.mSupportAPmDNIe) {
-                    Slog.i("SemMdnieManagerService", "AP setHighBrightnessMode id(" + i + ") lux : " + i2 + ", index : " + i3);
+                    Slog.i(
+                            "SemMdnieManagerService",
+                            "AP setHighBrightnessMode id("
+                                    + i
+                                    + ") lux : "
+                                    + i2
+                                    + ", index : "
+                                    + i3);
                     this.mDisplayAiqeManager.setHighBrightnessMode(i3);
                 } else {
                     if (i == 0) {
@@ -900,7 +1207,14 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
                     } else if (i == 1) {
                         sysfsWrite(i2, "/sys/class/lcd/panel1/lux");
                     }
-                    Slog.i("SemMdnieManagerService", "DDI setHighBrightnessMode id(" + i + ") lux : " + i2 + ", index : " + i3);
+                    Slog.i(
+                            "SemMdnieManagerService",
+                            "DDI setHighBrightnessMode id("
+                                    + i
+                                    + ") lux : "
+                                    + i2
+                                    + ", index : "
+                                    + i3);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -951,7 +1265,13 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     public final boolean setNightDimOffMode(int i, boolean z) {
         String str;
         int i2;
-        boolean z2 = Settings.System.getIntForUser(this.mContext.getContentResolver(), "blue_light_filter_night_dim", 0, -2) == 1;
+        boolean z2 =
+                Settings.System.getIntForUser(
+                                this.mContext.getContentResolver(),
+                                "blue_light_filter_night_dim",
+                                0,
+                                -2)
+                        == 1;
         this.mNightDimModeEnabled = z2;
         if (z2) {
             StringBuilder sb = new StringBuilder();
@@ -963,7 +1283,10 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
             str = Integer.toString(z ? 1 : 0) + " " + Integer.toString(i);
             i2 = i;
         }
-        if (!this.mSupportBlueFilter || !this.mWorkBlueFilter || i < 0 || i > this.NIGHT_MODE_MAX_INDEX) {
+        if (!this.mSupportBlueFilter
+                || !this.mWorkBlueFilter
+                || i < 0
+                || i > this.NIGHT_MODE_MAX_INDEX) {
             return false;
         }
         synchronized (this.mLock) {
@@ -975,7 +1298,15 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
                     if (new File("/sys/class/mdnie/mdnie1/night_mode").exists()) {
                         sysfsWriteSting("/sys/class/mdnie/mdnie1/night_mode", str);
                     }
-                    Slog.i("SemMdnieManagerService", "DDI setNightDimOffMode : " + z + ", index : " + i + ", str : (" + str + ")");
+                    Slog.i(
+                            "SemMdnieManagerService",
+                            "DDI setNightDimOffMode : "
+                                    + z
+                                    + ", index : "
+                                    + i
+                                    + ", str : ("
+                                    + str
+                                    + ")");
                 }
                 this.mNightMode = z;
                 this.mNightModeIndex = i;
@@ -990,7 +1321,9 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
         String str;
         int i2;
         ContentResolver contentResolver = this.mContext.getContentResolver();
-        this.mNightDimModeEnabled = Settings.System.getIntForUser(contentResolver, "blue_light_filter_night_dim", 0, -2) == 1;
+        this.mNightDimModeEnabled =
+                Settings.System.getIntForUser(contentResolver, "blue_light_filter_night_dim", 0, -2)
+                        == 1;
         boolean z2 = Settings.System.getIntForUser(contentResolver, "aod_show_state", 0, -2) == 1;
         this.mAlwaysOnDisplayEnabled = z2;
         if (!this.mNightDimModeEnabled) {
@@ -1009,7 +1342,10 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
             i2 = i + 204;
             str = ProcessList$$ExternalSyntheticOutline0.m(sb2, i2);
         }
-        if (!this.mSupportBlueFilter || !this.mWorkBlueFilter || i < 0 || i > this.NIGHT_MODE_MAX_INDEX) {
+        if (!this.mSupportBlueFilter
+                || !this.mWorkBlueFilter
+                || i < 0
+                || i > this.NIGHT_MODE_MAX_INDEX) {
             return false;
         }
         synchronized (this.mLock) {
@@ -1021,7 +1357,9 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
                     if (new File("/sys/class/mdnie/mdnie1/night_mode").exists()) {
                         sysfsWriteSting("/sys/class/mdnie/mdnie1/night_mode", str);
                     }
-                    Slog.i("SemMdnieManagerService", "DDI setNightMode : " + z + ", index : " + i + ", str : (" + str + ")");
+                    Slog.i(
+                            "SemMdnieManagerService",
+                            "DDI setNightMode : " + z + ", index : " + i + ", str : (" + str + ")");
                 }
                 this.mNightMode = z;
                 this.mNightModeIndex = i;
@@ -1034,7 +1372,8 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
 
     public final boolean setNightModeBlock(boolean z) {
         this.mNightModeBlock = true;
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setNightModeBlock");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setNightModeBlock");
         Slog.i("SemMdnieManagerService", "setNightModeBlock : " + this.mWorkBlueFilter + " - " + z);
         if (!z) {
             disableNightMode();
@@ -1045,7 +1384,8 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     }
 
     public final boolean setNightModeStep(int i) {
-        HermesService$3$$ExternalSyntheticOutline0.m(i, "setNightModeStep : ", "SemMdnieManagerService");
+        HermesService$3$$ExternalSyntheticOutline0.m(
+                i, "setNightModeStep : ", "SemMdnieManagerService");
         this.mBlueFilterIndex = i;
         return true;
     }
@@ -1079,24 +1419,67 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     public final boolean setWhiteRGB(int i, int i2, int i3, int i4, int i5, int i6) {
         StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "setWhiteRGB(", ",", ",");
         ServiceKeeper$$ExternalSyntheticOutline0.m(i3, i4, ",", ",", m);
-        Slog.i("SemMdnieManagerService", ActivityManagerService$$ExternalSyntheticOutline0.m(i5, i6, ",", ")", m));
-        if (!this.mEnvironmentAdaptiveDisplaySupported || !this.mEnvironmentAdaptiveDisplayEnabled) {
+        Slog.i(
+                "SemMdnieManagerService",
+                ActivityManagerService$$ExternalSyntheticOutline0.m(i5, i6, ",", ")", m));
+        if (!this.mEnvironmentAdaptiveDisplaySupported
+                || !this.mEnvironmentAdaptiveDisplayEnabled) {
             return false;
         }
         synchronized (this.mLock) {
             try {
                 if (this.mSupportAPmDNIe) {
-                    Slog.i("SemMdnieManagerService", "AP setWhiteBalanceMode : Main RGB offset (" + i + "," + i2 + "," + i3 + ") , Sub RGB offset (" + i4 + "," + i5 + "," + i6 + ")");
+                    Slog.i(
+                            "SemMdnieManagerService",
+                            "AP setWhiteBalanceMode : Main RGB offset ("
+                                    + i
+                                    + ","
+                                    + i2
+                                    + ","
+                                    + i3
+                                    + ") , Sub RGB offset ("
+                                    + i4
+                                    + ","
+                                    + i5
+                                    + ","
+                                    + i6
+                                    + ")");
                     this.mDisplayAiqeManager.setWhiteBalanceMode(i, i2, i3, i4, i5, i6);
                     return false;
                 }
                 if (new File("/sys/class/mdnie/mdnie/whiteRGB").exists()) {
-                    sysfsWriteSting("/sys/class/mdnie/mdnie/whiteRGB", Integer.toString(i) + " " + Integer.toString(i2) + " " + Integer.toString(i3));
+                    sysfsWriteSting(
+                            "/sys/class/mdnie/mdnie/whiteRGB",
+                            Integer.toString(i)
+                                    + " "
+                                    + Integer.toString(i2)
+                                    + " "
+                                    + Integer.toString(i3));
                 }
                 if (new File("/sys/class/mdnie/mdnie1/whiteRGB").exists()) {
-                    sysfsWriteSting("/sys/class/mdnie/mdnie1/whiteRGB", Integer.toString(i4) + " " + Integer.toString(i5) + " " + Integer.toString(i6));
+                    sysfsWriteSting(
+                            "/sys/class/mdnie/mdnie1/whiteRGB",
+                            Integer.toString(i4)
+                                    + " "
+                                    + Integer.toString(i5)
+                                    + " "
+                                    + Integer.toString(i6));
                 }
-                Slog.i("SemMdnieManagerService", "DDI setWhiteBalanceMode : Main RGB offset (" + i + "," + i2 + "," + i3 + ") , Sub RGB offset (" + i4 + "," + i5 + "," + i6 + ")");
+                Slog.i(
+                        "SemMdnieManagerService",
+                        "DDI setWhiteBalanceMode : Main RGB offset ("
+                                + i
+                                + ","
+                                + i2
+                                + ","
+                                + i3
+                                + ") , Sub RGB offset ("
+                                + i4
+                                + ","
+                                + i5
+                                + ","
+                                + i6
+                                + ")");
                 return true;
             } finally {
             }
@@ -1104,7 +1487,8 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     }
 
     public final boolean setmDNIeAccessibilityMode(int i, boolean z) {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setmDNIeAccessibilityMode");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setmDNIeAccessibilityMode");
         Slog.i("SemMdnieManagerService", "setmDNIeAccessibilityMode(" + i + ", " + z + ")");
         if (this.mCurtainModeIsRunning) {
             return false;
@@ -1112,7 +1496,8 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
         if (i == 10) {
             return sysfsWrite(z ? 1 : 0, "/sys/class/backlight/panel/weakness_hbm_comp");
         }
-        if (!BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/accessibility")) {
+        if (!BatteryService$$ExternalSyntheticOutline0.m45m(
+                "/sys/class/mdnie/mdnie1/accessibility")) {
             if (!z) {
                 i = 0;
             }
@@ -1128,14 +1513,16 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     }
 
     public final boolean setmDNIeColorBlind(boolean z, int[] iArr) {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setmDNIeColorBlind");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setmDNIeColorBlind");
         StringBuilder sb = new StringBuilder("setmDNIeColorBlind (");
         sb.append(z);
         DeviceIdleController$$ExternalSyntheticOutline0.m(sb, ")", "SemMdnieManagerService");
         if (this.mCurtainModeIsRunning) {
             return false;
         }
-        if (!BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/accessibility")) {
+        if (!BatteryService$$ExternalSyntheticOutline0.m45m(
+                "/sys/class/mdnie/mdnie1/accessibility")) {
             return sysfsWrite_CB(z ? 2 : 0, "/sys/class/mdnie/mdnie/accessibility", iArr);
         }
         if (sysfsWrite_CB(z ? 2 : 0, "/sys/class/mdnie/mdnie/accessibility", iArr)) {
@@ -1145,36 +1532,45 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
     }
 
     public final boolean setmDNIeEmergencyMode(boolean z) {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setmDNIeEmergencyMode");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setmDNIeEmergencyMode");
         StringBuilder sb = new StringBuilder("setmDNIeEmergencyMode (");
         sb.append(z);
         DeviceIdleController$$ExternalSyntheticOutline0.m(sb, ")", "SemMdnieManagerService");
         boolean sysfsWrite = sysfsWrite(z ? 4 : 0, "/sys/class/mdnie/mdnie/accessibility");
-        if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/accessibility")) {
+        if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                "/sys/class/mdnie/mdnie1/accessibility")) {
             return sysfsWrite & sysfsWrite(z ? 4 : 0, "/sys/class/mdnie/mdnie1/accessibility");
         }
         return sysfsWrite;
     }
 
     public final boolean setmDNIeNegative(boolean z) {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setmDNIeNegative");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setmDNIeNegative");
         StringBuilder sb = new StringBuilder("setmDNIeNegative (");
         sb.append(z);
         DeviceIdleController$$ExternalSyntheticOutline0.m(sb, ")", "SemMdnieManagerService");
         if (this.mCurtainModeIsRunning) {
             return false;
         }
-        return BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/accessibility") ? sysfsWrite(z ? 1 : 0, "/sys/class/mdnie/mdnie/accessibility") && sysfsWrite(z ? 1 : 0, "/sys/class/mdnie/mdnie1/accessibility") : sysfsWrite(z ? 1 : 0, "/sys/class/mdnie/mdnie/accessibility");
+        return BatteryService$$ExternalSyntheticOutline0.m45m(
+                        "/sys/class/mdnie/mdnie1/accessibility")
+                ? sysfsWrite(z ? 1 : 0, "/sys/class/mdnie/mdnie/accessibility")
+                        && sysfsWrite(z ? 1 : 0, "/sys/class/mdnie/mdnie1/accessibility")
+                : sysfsWrite(z ? 1 : 0, "/sys/class/mdnie/mdnie/accessibility");
     }
 
     public final boolean setmDNIeScreenCurtain(boolean z) {
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setmDNIeScreenCurtain");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.CHANGE_DISPLAY_COLOR", "setmDNIeScreenCurtain");
         StringBuilder sb = new StringBuilder("setmDNIeScreenCurtain (");
         sb.append(z);
         DeviceIdleController$$ExternalSyntheticOutline0.m(sb, ")", "SemMdnieManagerService");
         this.mCurtainModeIsRunning = z;
         boolean sysfsWrite = sysfsWrite(z ? 3 : 0, "/sys/class/mdnie/mdnie/accessibility");
-        if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/accessibility")) {
+        if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                "/sys/class/mdnie/mdnie1/accessibility")) {
             return sysfsWrite & sysfsWrite(z ? 3 : 0, "/sys/class/mdnie/mdnie1/accessibility");
         }
         return sysfsWrite;
@@ -1187,19 +1583,35 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
         int i4;
         int i5;
         int i6 = 0;
-        int intForUser = Settings.System.getIntForUser(this.mContext.getContentResolver(), "sec_display_temperature_red", 0, -2);
-        int intForUser2 = Settings.System.getIntForUser(this.mContext.getContentResolver(), "sec_display_temperature_green", 0, -2);
-        int intForUser3 = Settings.System.getIntForUser(this.mContext.getContentResolver(), "sec_display_temperature_blue", 0, -2);
-        int intForUser4 = Settings.System.getIntForUser(this.mContext.getContentResolver(), "sec_display_preset_index", 2, 0);
-        this.mScreenModeSetting = Settings.System.getIntForUser(this.mContext.getContentResolver(), "screen_mode_setting", 4, -2);
-        this.mEnvironmentAdaptiveDisplayEnabled = Settings.System.getIntForUser(this.mContext.getContentResolver(), "ead_enabled", 0, -2) == 1;
-        this.mVividnessIndex = Settings.System.getIntForUser(this.mContext.getContentResolver(), "vividness_intensity", 0, 0);
+        int intForUser =
+                Settings.System.getIntForUser(
+                        this.mContext.getContentResolver(), "sec_display_temperature_red", 0, -2);
+        int intForUser2 =
+                Settings.System.getIntForUser(
+                        this.mContext.getContentResolver(), "sec_display_temperature_green", 0, -2);
+        int intForUser3 =
+                Settings.System.getIntForUser(
+                        this.mContext.getContentResolver(), "sec_display_temperature_blue", 0, -2);
+        int intForUser4 =
+                Settings.System.getIntForUser(
+                        this.mContext.getContentResolver(), "sec_display_preset_index", 2, 0);
+        this.mScreenModeSetting =
+                Settings.System.getIntForUser(
+                        this.mContext.getContentResolver(), "screen_mode_setting", 4, -2);
+        this.mEnvironmentAdaptiveDisplayEnabled =
+                Settings.System.getIntForUser(
+                                this.mContext.getContentResolver(), "ead_enabled", 0, -2)
+                        == 1;
+        this.mVividnessIndex =
+                Settings.System.getIntForUser(
+                        this.mContext.getContentResolver(), "vividness_intensity", 0, 0);
         StringBuilder sb = new StringBuilder("setting_is_changed - Screen Mode : ");
         sb.append(this.mScreenModeSetting);
         sb.append(" , mMdnieWhiteRGBSupported : ");
         sb.append(this.mMdnieWhiteRGBSupported);
         sb.append(" , mEnvironmentAdaptiveDisplayEnabled : ");
-        HeimdAllFsService$$ExternalSyntheticOutline0.m("SemMdnieManagerService", sb, this.mEnvironmentAdaptiveDisplayEnabled);
+        HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                "SemMdnieManagerService", sb, this.mEnvironmentAdaptiveDisplayEnabled);
         if (this.mEnvironmentAdaptiveDisplayEnabled) {
             return;
         }
@@ -1209,20 +1621,38 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
                 return;
             }
             if (this.mSupportAPmDNIe) {
-                Slog.i("SemMdnieManagerService", "AP setWhiteBalanceMode : Main RGB offset (0,0,0) , Sub RGB offset (0,0,0)");
+                Slog.i(
+                        "SemMdnieManagerService",
+                        "AP setWhiteBalanceMode : Main RGB offset (0,0,0) , Sub RGB offset"
+                            + " (0,0,0)");
                 this.mDisplayAiqeManager.setWhiteBalanceMode(0, 0, 0, 0, 0, 0);
                 return;
             }
             if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie/whiteRGB")) {
                 sysfsWriteSting("/sys/class/mdnie/mdnie/whiteRGB", "0 0 0");
             }
-            if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/whiteRGB")) {
+            if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                    "/sys/class/mdnie/mdnie1/whiteRGB")) {
                 sysfsWriteSting("/sys/class/mdnie/mdnie1/whiteRGB", "0 0 0");
             }
-            Slog.i("SemMdnieManagerService", "DDI setWhiteBalanceMode : Main RGB offset (0,0,0) , Sub RGB offset (0,0,0)");
+            Slog.i(
+                    "SemMdnieManagerService",
+                    "DDI setWhiteBalanceMode : Main RGB offset (0,0,0) , Sub RGB offset (0,0,0)");
             return;
         }
-        Slog.i("SemMdnieManagerService", ActivityManagerService$$ExternalSyntheticOutline0.m(intForUser2, intForUser3, "), B(", ")", ArrayUtils$$ExternalSyntheticOutline0.m(intForUser4, intForUser, "setting_is_changed - white balance(", "), R(", "), G(")));
+        Slog.i(
+                "SemMdnieManagerService",
+                ActivityManagerService$$ExternalSyntheticOutline0.m(
+                        intForUser2,
+                        intForUser3,
+                        "), B(",
+                        ")",
+                        ArrayUtils$$ExternalSyntheticOutline0.m(
+                                intForUser4,
+                                intForUser,
+                                "setting_is_changed - white balance(",
+                                "), R(",
+                                "), G(")));
         if (intForUser4 < 0 || intForUser4 >= 5) {
             i = 0;
             i2 = 0;
@@ -1242,33 +1672,50 @@ public class SemMdnieManagerService extends ISemMdnieManager.Stub {
             i = i7 + intForUser;
             i6 = i9;
         }
-        if (i5 > 0 || i5 < -250 || i6 > 0 || i6 < -250 || i4 > 0 || i4 < -250 || i > 0 || i < -250 || i2 > 0 || i2 < -250 || i3 > 0 || i3 < -250) {
+        if (i5 > 0 || i5 < -250 || i6 > 0 || i6 < -250 || i4 > 0 || i4 < -250 || i > 0 || i < -250
+                || i2 > 0 || i2 < -250 || i3 > 0 || i3 < -250) {
             return;
         }
         if (this.mSupportAPmDNIe) {
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i5, i6, "AP setWhiteBalanceMode : Main RGB offset (", ",", ",");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i5, i6, "AP setWhiteBalanceMode : Main RGB offset (", ",", ",");
             ServiceKeeper$$ExternalSyntheticOutline0.m(i4, i, ") , Sub RGB offset (", ",", m);
-            Slog.i("SemMdnieManagerService", ActivityManagerService$$ExternalSyntheticOutline0.m(i2, i3, ",", ")", m));
+            Slog.i(
+                    "SemMdnieManagerService",
+                    ActivityManagerService$$ExternalSyntheticOutline0.m(i2, i3, ",", ")", m));
             this.mDisplayAiqeManager.setWhiteBalanceMode(i5, i6, i4, i, i2, i3);
             return;
         }
         if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie/whiteRGB")) {
-            sysfsWriteSting("/sys/class/mdnie/mdnie/whiteRGB", Integer.toString(i5) + " " + Integer.toString(i6) + " " + Integer.toString(i4));
+            sysfsWriteSting(
+                    "/sys/class/mdnie/mdnie/whiteRGB",
+                    Integer.toString(i5) + " " + Integer.toString(i6) + " " + Integer.toString(i4));
         }
         if (BatteryService$$ExternalSyntheticOutline0.m45m("/sys/class/mdnie/mdnie1/whiteRGB")) {
-            sysfsWriteSting("/sys/class/mdnie/mdnie1/whiteRGB", Integer.toString(i) + " " + Integer.toString(i2) + " " + Integer.toString(i3));
+            sysfsWriteSting(
+                    "/sys/class/mdnie/mdnie1/whiteRGB",
+                    Integer.toString(i) + " " + Integer.toString(i2) + " " + Integer.toString(i3));
         }
-        StringBuilder m2 = ArrayUtils$$ExternalSyntheticOutline0.m(i5, i6, "DDI setWhiteBalanceMode : Main RGB offset (", ",", ",");
+        StringBuilder m2 =
+                ArrayUtils$$ExternalSyntheticOutline0.m(
+                        i5, i6, "DDI setWhiteBalanceMode : Main RGB offset (", ",", ",");
         ServiceKeeper$$ExternalSyntheticOutline0.m(i4, i, ") , Sub RGB offset (", ",", m2);
-        Slog.i("SemMdnieManagerService", ActivityManagerService$$ExternalSyntheticOutline0.m(i2, i3, ",", ")", m2));
+        Slog.i(
+                "SemMdnieManagerService",
+                ActivityManagerService$$ExternalSyntheticOutline0.m(i2, i3, ",", ")", m2));
     }
 
     public final void updateAlwaysOnDisplay(boolean z, int i) {
         synchronized (this.mLock) {
             if (z) {
                 try {
-                    AfterimageCompensationService afterimageCompensationService = this.afterimageCompensation;
-                    if (afterimageCompensationService != null && afterimageCompensationService.AfcStateCondition && afterimageCompensationService.mAfcType >= 10 && z) {
+                    AfterimageCompensationService afterimageCompensationService =
+                            this.afterimageCompensation;
+                    if (afterimageCompensationService != null
+                            && afterimageCompensationService.AfcStateCondition
+                            && afterimageCompensationService.mAfcType >= 10
+                            && z) {
                         afterimageCompensationService.AfcThreadAODCondition = z;
                         afterimageCompensationService.AodBrightness = i;
                         Thread thread = afterimageCompensationService.mAfcThread;

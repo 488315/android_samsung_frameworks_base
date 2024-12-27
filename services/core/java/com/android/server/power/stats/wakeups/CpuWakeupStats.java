@@ -16,8 +16,10 @@ import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
 import android.util.SparseLongArray;
 import android.util.TimeUtils;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.IntPair;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -44,10 +46,13 @@ public final class CpuWakeupStats {
         public volatile long WAKEUP_MATCHING_WINDOW_MS;
         public volatile long WAKEUP_STATS_RETENTION_MS;
         public volatile long WAKING_ACTIVITY_RETENTION_MS;
-        public static final String[] PROPERTY_NAMES = {"wakeup_stats_retention_ms", "wakeup_matching_window_ms", "waking_activity_retention_ms"};
+        public static final String[] PROPERTY_NAMES = {
+            "wakeup_stats_retention_ms", "wakeup_matching_window_ms", "waking_activity_retention_ms"
+        };
         public static final long DEFAULT_WAKEUP_STATS_RETENTION_MS = TimeUnit.DAYS.toMillis(3);
         public static final long DEFAULT_WAKEUP_MATCHING_WINDOW_MS = TimeUnit.SECONDS.toMillis(1);
-        public static final long DEFAULT_WAKING_ACTIVITY_RETENTION_MS = TimeUnit.MINUTES.toMillis(5);
+        public static final long DEFAULT_WAKING_ACTIVITY_RETENTION_MS =
+                TimeUnit.MINUTES.toMillis(5);
 
         public final void dump(IndentingPrintWriter indentingPrintWriter) {
             indentingPrintWriter.println("Config:");
@@ -72,13 +77,22 @@ public final class CpuWakeupStats {
                 if (str != null) {
                     switch (str) {
                         case "wakeup_matching_window_ms":
-                            this.WAKEUP_MATCHING_WINDOW_MS = properties.getLong("wakeup_matching_window_ms", DEFAULT_WAKEUP_MATCHING_WINDOW_MS);
+                            this.WAKEUP_MATCHING_WINDOW_MS =
+                                    properties.getLong(
+                                            "wakeup_matching_window_ms",
+                                            DEFAULT_WAKEUP_MATCHING_WINDOW_MS);
                             break;
                         case "wakeup_stats_retention_ms":
-                            this.WAKEUP_STATS_RETENTION_MS = properties.getLong("wakeup_stats_retention_ms", DEFAULT_WAKEUP_STATS_RETENTION_MS);
+                            this.WAKEUP_STATS_RETENTION_MS =
+                                    properties.getLong(
+                                            "wakeup_stats_retention_ms",
+                                            DEFAULT_WAKEUP_STATS_RETENTION_MS);
                             break;
                         case "waking_activity_retention_ms":
-                            this.WAKING_ACTIVITY_RETENTION_MS = properties.getLong("waking_activity_retention_ms", DEFAULT_WAKING_ACTIVITY_RETENTION_MS);
+                            this.WAKING_ACTIVITY_RETENTION_MS =
+                                    properties.getLong(
+                                            "waking_activity_retention_ms",
+                                            DEFAULT_WAKING_ACTIVITY_RETENTION_MS);
                             break;
                     }
                 }
@@ -222,7 +236,10 @@ public final class CpuWakeupStats {
                         }
                         i6 = i8;
                     } catch (NumberFormatException e) {
-                        Slog.e("CpuWakeupStats.Wakeup", "Exception while parsing device names from part: ".concat(str2), e);
+                        Slog.e(
+                                "CpuWakeupStats.Wakeup",
+                                "Exception while parsing device names from part: ".concat(str2),
+                                e);
                     }
                 }
                 i5++;
@@ -246,7 +263,17 @@ public final class CpuWakeupStats {
         }
 
         public final String toString() {
-            return "Wakeup{mType=" + this.mType + ", mElapsedMillis=" + this.mElapsedMillis + ", mUptimeMillis=" + this.mUptimeMillis + ", mDevices=" + Arrays.toString(this.mDevices) + ", mResponsibleSubsystems=" + this.mResponsibleSubsystems + '}';
+            return "Wakeup{mType="
+                    + this.mType
+                    + ", mElapsedMillis="
+                    + this.mElapsedMillis
+                    + ", mUptimeMillis="
+                    + this.mUptimeMillis
+                    + ", mDevices="
+                    + Arrays.toString(this.mDevices)
+                    + ", mResponsibleSubsystems="
+                    + this.mResponsibleSubsystems
+                    + '}';
         }
     }
 
@@ -255,7 +282,8 @@ public final class CpuWakeupStats {
         public final LongSupplier mRetentionSupplier;
         final SparseArray mWakingActivity = new SparseArray();
 
-        public WakingActivityHistory(CpuWakeupStats$$ExternalSyntheticLambda0 cpuWakeupStats$$ExternalSyntheticLambda0) {
+        public WakingActivityHistory(
+                CpuWakeupStats$$ExternalSyntheticLambda0 cpuWakeupStats$$ExternalSyntheticLambda0) {
             this.mRetentionSupplier = cpuWakeupStats$$ExternalSyntheticLambda0;
         }
 
@@ -263,20 +291,29 @@ public final class CpuWakeupStats {
             indentingPrintWriter.println("Recent waking activity:");
             indentingPrintWriter.increaseIndent();
             for (int i = 0; i < this.mWakingActivity.size(); i++) {
-                indentingPrintWriter.println("Subsystem " + CpuWakeupStats.subsystemToString(this.mWakingActivity.keyAt(i)) + ":");
+                indentingPrintWriter.println(
+                        "Subsystem "
+                                + CpuWakeupStats.subsystemToString(this.mWakingActivity.keyAt(i))
+                                + ":");
                 LongSparseArray longSparseArray = (LongSparseArray) this.mWakingActivity.valueAt(i);
                 if (longSparseArray != null) {
                     indentingPrintWriter.increaseIndent();
                     for (int size = longSparseArray.size() - 1; size >= 0; size--) {
-                        TimeUtils.formatDuration(longSparseArray.keyAt(size), j, indentingPrintWriter);
-                        SparseIntArray sparseIntArray = (SparseIntArray) longSparseArray.valueAt(size);
+                        TimeUtils.formatDuration(
+                                longSparseArray.keyAt(size), j, indentingPrintWriter);
+                        SparseIntArray sparseIntArray =
+                                (SparseIntArray) longSparseArray.valueAt(size);
                         if (sparseIntArray == null) {
                             indentingPrintWriter.println();
                         } else {
                             indentingPrintWriter.print(": ");
                             for (int i2 = 0; i2 < sparseIntArray.size(); i2++) {
-                                UserHandle.formatUid(indentingPrintWriter, sparseIntArray.keyAt(i2));
-                                indentingPrintWriter.print(" [" + ActivityManager.procStateToString(sparseIntArray.valueAt(i2)));
+                                UserHandle.formatUid(
+                                        indentingPrintWriter, sparseIntArray.keyAt(i2));
+                                indentingPrintWriter.print(
+                                        " ["
+                                                + ActivityManager.procStateToString(
+                                                        sparseIntArray.valueAt(i2)));
                                 indentingPrintWriter.print("], ");
                             }
                             indentingPrintWriter.println();
@@ -308,7 +345,11 @@ public final class CpuWakeupStats {
                     }
                 }
             }
-            for (int lastIndexOnOrBefore = longSparseArray.lastIndexOnOrBefore(j - this.mRetentionSupplier.getAsLong()); lastIndexOnOrBefore >= 0; lastIndexOnOrBefore--) {
+            for (int lastIndexOnOrBefore =
+                            longSparseArray.lastIndexOnOrBefore(
+                                    j - this.mRetentionSupplier.getAsLong());
+                    lastIndexOnOrBefore >= 0;
+                    lastIndexOnOrBefore--) {
                 longSparseArray.removeAt(lastIndexOnOrBefore);
             }
         }
@@ -358,7 +399,10 @@ public final class CpuWakeupStats {
                 if (indexOfKey >= 0) {
                     irqDeviceMap = (IrqDeviceMap) longSparseArray2.valueAt(indexOfKey);
                 } else {
-                    IrqDeviceMap irqDeviceMap2 = new IrqDeviceMap(context.getResources().getXml(R.xml.password_kbd_qwerty_shifted));
+                    IrqDeviceMap irqDeviceMap2 =
+                            new IrqDeviceMap(
+                                    context.getResources()
+                                            .getXml(R.xml.password_kbd_qwerty_shifted));
                     synchronized (IrqDeviceMap.class) {
                         longSparseArray2.put(j, irqDeviceMap2);
                     }
@@ -368,23 +412,35 @@ public final class CpuWakeupStats {
             }
         }
         this.mIrqDeviceMap = irqDeviceMap;
-        this.mRecentWakingActivity = new WakingActivityHistory(new LongSupplier() { // from class: com.android.server.power.stats.wakeups.CpuWakeupStats$$ExternalSyntheticLambda0
-            @Override // java.util.function.LongSupplier
-            public final long getAsLong() {
-                return CpuWakeupStats.this.mConfig.WAKING_ACTIVITY_RETENTION_MS;
-            }
-        });
+        this.mRecentWakingActivity =
+                new WakingActivityHistory(
+                        new LongSupplier() { // from class:
+                                             // com.android.server.power.stats.wakeups.CpuWakeupStats$$ExternalSyntheticLambda0
+                            @Override // java.util.function.LongSupplier
+                            public final long getAsLong() {
+                                return CpuWakeupStats.this.mConfig.WAKING_ACTIVITY_RETENTION_MS;
+                            }
+                        });
         this.mHandler = handler;
     }
 
     public static String subsystemToString(int i) {
-        return i != -1 ? i != 1 ? i != 2 ? i != 3 ? i != 4 ? i != 5 ? "N/A" : "Cellular_data" : "Sensor" : "Sound_trigger" : "Wifi" : "Alarm" : "Unknown";
+        return i != -1
+                ? i != 1
+                        ? i != 2
+                                ? i != 3
+                                        ? i != 4 ? i != 5 ? "N/A" : "Cellular_data" : "Sensor"
+                                        : "Sound_trigger"
+                                : "Wifi"
+                        : "Alarm"
+                : "Unknown";
     }
 
     public final synchronized void attemptAttributionFor(Wakeup wakeup) {
         try {
             SparseBooleanArray sparseBooleanArray = wakeup.mResponsibleSubsystems;
-            SparseArray sparseArray = (SparseArray) this.mWakeupAttribution.get(wakeup.mElapsedMillis);
+            SparseArray sparseArray =
+                    (SparseArray) this.mWakeupAttribution.get(wakeup.mElapsedMillis);
             if (sparseArray == null) {
                 sparseArray = new SparseArray();
                 this.mWakeupAttribution.put(wakeup.mElapsedMillis, sparseArray);
@@ -393,14 +449,16 @@ public final class CpuWakeupStats {
             for (int i = 0; i < sparseBooleanArray.size(); i++) {
                 int keyAt = sparseBooleanArray.keyAt(i);
                 long j2 = wakeup.mElapsedMillis;
-                sparseArray.put(keyAt, this.mRecentWakingActivity.removeBetween(keyAt, j2 - j, j2 + j));
+                sparseArray.put(
+                        keyAt, this.mRecentWakingActivity.removeBetween(keyAt, j2 - j, j2 + j));
             }
         } catch (Throwable th) {
             throw th;
         }
     }
 
-    public final synchronized boolean attemptAttributionWith(int i, long j, SparseIntArray sparseIntArray) {
+    public final synchronized boolean attemptAttributionWith(
+            int i, long j, SparseIntArray sparseIntArray) {
         try {
             long j2 = this.mConfig.WAKEUP_MATCHING_WINDOW_MS;
             int firstIndexOnOrAfter = this.mWakeupEvents.firstIndexOnOrAfter(j - j2);
@@ -411,7 +469,8 @@ public final class CpuWakeupStats {
                 }
                 Wakeup wakeup = (Wakeup) this.mWakeupEvents.valueAt(firstIndexOnOrAfter);
                 if (wakeup.mResponsibleSubsystems.get(i)) {
-                    SparseArray sparseArray = (SparseArray) this.mWakeupAttribution.get(wakeup.mElapsedMillis);
+                    SparseArray sparseArray =
+                            (SparseArray) this.mWakeupAttribution.get(wakeup.mElapsedMillis);
                     if (sparseArray == null) {
                         sparseArray = new SparseArray();
                         this.mWakeupAttribution.put(wakeup.mElapsedMillis, sparseArray);
@@ -421,7 +480,8 @@ public final class CpuWakeupStats {
                         sparseArray.put(i, sparseIntArray.clone());
                     } else {
                         for (int i2 = 0; i2 < sparseIntArray.size(); i2++) {
-                            sparseIntArray2.put(sparseIntArray.keyAt(i2), sparseIntArray.valueAt(i2));
+                            sparseIntArray2.put(
+                                    sparseIntArray.keyAt(i2), sparseIntArray.valueAt(i2));
                         }
                     }
                     return true;
@@ -443,14 +503,16 @@ public final class CpuWakeupStats {
             indentingPrintWriter.println();
             this.mRecentWakingActivity.dump(indentingPrintWriter, j);
             indentingPrintWriter.println();
-            indentingPrintWriter.println("Current proc-state map (" + this.mUidProcStates.size() + "):");
+            indentingPrintWriter.println(
+                    "Current proc-state map (" + this.mUidProcStates.size() + "):");
             indentingPrintWriter.increaseIndent();
             for (int i = 0; i < this.mUidProcStates.size(); i++) {
                 if (i > 0) {
                     indentingPrintWriter.print(", ");
                 }
                 UserHandle.formatUid(indentingPrintWriter, this.mUidProcStates.keyAt(i));
-                indentingPrintWriter.print(":" + ActivityManager.procStateToString(this.mUidProcStates.valueAt(i)));
+                indentingPrintWriter.print(
+                        ":" + ActivityManager.procStateToString(this.mUidProcStates.valueAt(i)));
             }
             indentingPrintWriter.println();
             indentingPrintWriter.decreaseIndent();
@@ -465,7 +527,8 @@ public final class CpuWakeupStats {
                 Wakeup wakeup = (Wakeup) this.mWakeupEvents.valueAt(size);
                 indentingPrintWriter.println(wakeup);
                 indentingPrintWriter.print("Attribution: ");
-                SparseArray sparseArray = (SparseArray) this.mWakeupAttribution.get(wakeup.mElapsedMillis);
+                SparseArray sparseArray =
+                        (SparseArray) this.mWakeupAttribution.get(wakeup.mElapsedMillis);
                 if (sparseArray == null) {
                     indentingPrintWriter.println("N/A");
                 } else {
@@ -484,8 +547,12 @@ public final class CpuWakeupStats {
                                 if (i3 > 0) {
                                     indentingPrintWriter.print(", ");
                                 }
-                                UserHandle.formatUid(indentingPrintWriter, sparseIntArray.keyAt(i3));
-                                indentingPrintWriter.print(" " + ActivityManager.procStateToString(sparseIntArray.valueAt(i3)));
+                                UserHandle.formatUid(
+                                        indentingPrintWriter, sparseIntArray.keyAt(i3));
+                                indentingPrintWriter.print(
+                                        " "
+                                                + ActivityManager.procStateToString(
+                                                        sparseIntArray.valueAt(i3)));
                             }
                             first++;
                         }
@@ -500,10 +567,12 @@ public final class CpuWakeupStats {
             indentingPrintWriter.println("Attribution stats:");
             indentingPrintWriter.increaseIndent();
             for (int i4 = 0; i4 < sparseLongArray.size(); i4++) {
-                indentingPrintWriter.print("Subsystem " + subsystemToString(sparseLongArray.keyAt(i4)));
+                indentingPrintWriter.print(
+                        "Subsystem " + subsystemToString(sparseLongArray.keyAt(i4)));
                 indentingPrintWriter.print(": ");
                 long valueAt = sparseLongArray.valueAt(i4);
-                indentingPrintWriter.println(IntPair.first(valueAt) + "/" + IntPair.second(valueAt));
+                indentingPrintWriter.println(
+                        IntPair.first(valueAt) + "/" + IntPair.second(valueAt));
             }
             indentingPrintWriter.println("Total: " + this.mWakeupEvents.size());
             indentingPrintWriter.decreaseIndent();
@@ -523,32 +592,41 @@ public final class CpuWakeupStats {
             this.mWakeupEvents.put(j, parseWakeup);
             attemptAttributionFor(parseWakeup);
             long j3 = j - this.mConfig.WAKEUP_STATS_RETENTION_MS;
-            for (int lastIndexOnOrBefore = this.mWakeupEvents.lastIndexOnOrBefore(j3); lastIndexOnOrBefore >= 0; lastIndexOnOrBefore--) {
+            for (int lastIndexOnOrBefore = this.mWakeupEvents.lastIndexOnOrBefore(j3);
+                    lastIndexOnOrBefore >= 0;
+                    lastIndexOnOrBefore--) {
                 this.mWakeupEvents.removeAt(lastIndexOnOrBefore);
             }
-            for (int lastIndexOnOrBefore2 = this.mWakeupAttribution.lastIndexOnOrBefore(j3); lastIndexOnOrBefore2 >= 0; lastIndexOnOrBefore2--) {
+            for (int lastIndexOnOrBefore2 = this.mWakeupAttribution.lastIndexOnOrBefore(j3);
+                    lastIndexOnOrBefore2 >= 0;
+                    lastIndexOnOrBefore2--) {
                 this.mWakeupAttribution.removeAt(lastIndexOnOrBefore2);
             }
-            this.mHandler.postDelayed(new Runnable() { // from class: com.android.server.power.stats.wakeups.CpuWakeupStats$$ExternalSyntheticLambda1
-                /* JADX WARN: Removed duplicated region for block: B:30:0x00a9  */
-                /* JADX WARN: Removed duplicated region for block: B:33:0x00b2  */
-                /* JADX WARN: Removed duplicated region for block: B:43:0x00d4  */
-                /* JADX WARN: Removed duplicated region for block: B:48:0x0104 A[SYNTHETIC] */
-                /* JADX WARN: Removed duplicated region for block: B:51:0x00c3  */
-                /* JADX WARN: Removed duplicated region for block: B:53:0x00af  */
-                @Override // java.lang.Runnable
-                /*
-                    Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
-                */
-                public final void run() {
-                    /*
-                        Method dump skipped, instructions count: 282
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.wakeups.CpuWakeupStats$$ExternalSyntheticLambda1.run():void");
-                }
-            }, WAKEUP_WRITE_DELAY_MS);
+            this.mHandler.postDelayed(
+                    new Runnable() { // from class:
+                        // com.android.server.power.stats.wakeups.CpuWakeupStats$$ExternalSyntheticLambda1
+                        /* JADX WARN: Removed duplicated region for block: B:30:0x00a9  */
+                        /* JADX WARN: Removed duplicated region for block: B:33:0x00b2  */
+                        /* JADX WARN: Removed duplicated region for block: B:43:0x00d4  */
+                        /* JADX WARN: Removed duplicated region for block: B:48:0x0104 A[SYNTHETIC] */
+                        /* JADX WARN: Removed duplicated region for block: B:51:0x00c3  */
+                        /* JADX WARN: Removed duplicated region for block: B:53:0x00af  */
+                        @Override // java.lang.Runnable
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                            To view partially-correct code enable 'Show inconsistent code' option in preferences
+                        */
+                        public final void run() {
+                            /*
+                                Method dump skipped, instructions count: 282
+                                To view this dump change 'Code comments level' option to 'DEBUG'
+                            */
+                            throw new UnsupportedOperationException(
+                                    "Method not decompiled:"
+                                        + " com.android.server.power.stats.wakeups.CpuWakeupStats$$ExternalSyntheticLambda1.run():void");
+                        }
+                    },
+                    WAKEUP_WRITE_DELAY_MS);
         } catch (Throwable th) {
             throw th;
         }
@@ -576,6 +654,7 @@ public final class CpuWakeupStats {
         HandlerExecutor handlerExecutor = new HandlerExecutor(this.mHandler);
         config.getClass();
         DeviceConfig.addOnPropertiesChangedListener("battery_stats", handlerExecutor, config);
-        config.onPropertiesChanged(DeviceConfig.getProperties("battery_stats", Config.PROPERTY_NAMES));
+        config.onPropertiesChanged(
+                DeviceConfig.getProperties("battery_stats", Config.PROPERTY_NAMES));
     }
 }

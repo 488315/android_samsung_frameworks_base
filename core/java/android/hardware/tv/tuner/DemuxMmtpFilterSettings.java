@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class DemuxMmtpFilterSettings implements Parcelable {
-    public static final Parcelable.Creator<DemuxMmtpFilterSettings> CREATOR = new Parcelable.Creator<DemuxMmtpFilterSettings>() { // from class: android.hardware.tv.tuner.DemuxMmtpFilterSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxMmtpFilterSettings createFromParcel(Parcel _aidl_source) {
-            DemuxMmtpFilterSettings _aidl_out = new DemuxMmtpFilterSettings();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DemuxMmtpFilterSettings> CREATOR =
+            new Parcelable.Creator<DemuxMmtpFilterSettings>() { // from class:
+                // android.hardware.tv.tuner.DemuxMmtpFilterSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxMmtpFilterSettings createFromParcel(Parcel _aidl_source) {
+                    DemuxMmtpFilterSettings _aidl_out = new DemuxMmtpFilterSettings();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxMmtpFilterSettings[] newArray(int _aidl_size) {
-            return new DemuxMmtpFilterSettings[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxMmtpFilterSettings[] newArray(int _aidl_size) {
+                    return new DemuxMmtpFilterSettings[_aidl_size];
+                }
+            };
     public DemuxMmtpFilterSettingsFilterSettings filterSettings;
     public int mmtpPid = 0;
 
@@ -62,7 +64,10 @@ public class DemuxMmtpFilterSettings implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.filterSettings = (DemuxMmtpFilterSettingsFilterSettings) _aidl_parcel.readTypedObject(DemuxMmtpFilterSettingsFilterSettings.CREATOR);
+                this.filterSettings =
+                        (DemuxMmtpFilterSettingsFilterSettings)
+                                _aidl_parcel.readTypedObject(
+                                        DemuxMmtpFilterSettingsFilterSettings.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

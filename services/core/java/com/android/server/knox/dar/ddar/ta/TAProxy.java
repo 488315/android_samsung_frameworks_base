@@ -6,14 +6,18 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.ParcelFileDescriptor;
 import android.os.ServiceManager;
+
 import com.android.server.UserspaceRebootLogger$$ExternalSyntheticOutline0;
 import com.android.server.knox.dar.ddar.DDLog;
+
 import com.samsung.android.knox.dar.ddar.proxy.IProxyAgentService;
+
+import vendor.samsung.hardware.tlc.ddar.ISehDdar;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import vendor.samsung.hardware.tlc.ddar.ISehDdar;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -36,12 +40,14 @@ public final class TAProxy extends IProxyAgentService {
         boolean z = false;
         DDLog.d("TAProxy", "loadTARequest called", new Object[0]);
         int i = bundle.getInt("TA_ID");
-        ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) bundle.getParcelable("TA_FD");
+        ParcelFileDescriptor parcelFileDescriptor =
+                (ParcelFileDescriptor) bundle.getParcelable("TA_FD");
         long j = bundle.getLong("TA_FD_OFFSET");
         long j2 = bundle.getLong("TA_FD_SIZE");
         DDLog.d("TAProxy", "TAProxy::loadTA", new Object[0]);
         int fd = parcelFileDescriptor != null ? parcelFileDescriptor.getFd() : -1;
-        StringBuilder m = UserspaceRebootLogger$$ExternalSyntheticOutline0.m(fd, "TA fd=", j, " offset=");
+        StringBuilder m =
+                UserspaceRebootLogger$$ExternalSyntheticOutline0.m(fd, "TA fd=", j, " offset=");
         m.append(" size=");
         m.append(j2);
         DDLog.d("TAProxy", m.toString(), new Object[0]);
@@ -80,9 +86,9 @@ public final class TAProxy extends IProxyAgentService {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:33:0x006c, code lost:
-    
-        if (r7.equals("SETUP_TA") != false) goto L25;
-     */
+
+       if (r7.equals("SETUP_TA") != false) goto L25;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -189,7 +195,9 @@ public final class TAProxy extends IProxyAgentService {
             r5.<init>(r6)
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.dar.ddar.ta.TAProxy.onMessage(int, java.lang.String, android.os.Bundle):android.os.Bundle");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.knox.dar.ddar.ta.TAProxy.onMessage(int,"
+                    + " java.lang.String, android.os.Bundle):android.os.Bundle");
     }
 
     public final Bundle processCommandRequest(Bundle bundle) {
@@ -197,9 +205,23 @@ public final class TAProxy extends IProxyAgentService {
         int i = bundle.getInt("TA_ID");
         Bundle bundle2 = new Bundle();
         TACommandRequest tACommandRequest = new TACommandRequest();
-        tACommandRequest.init(bundle.getInt("TA_VERSION"), bundle.getByteArray("TA_MAGICNUM"), bundle.getInt("TA_CMD_ID"), bundle.getByteArray("TA_CMD_DATA"));
-        DDLog.d("TAProxy", "TAProxy::processTACommand: request = " + tACommandRequest + "; request.mCommandId = " + tACommandRequest.mCommandId + "; this.mTAId = " + i, new Object[0]);
-        TACommandResponse processTACommand = ((TAInfo) ((HashMap) this.mTAMap).get(Integer.valueOf(i))).ta.processTACommand(tACommandRequest);
+        tACommandRequest.init(
+                bundle.getInt("TA_VERSION"),
+                bundle.getByteArray("TA_MAGICNUM"),
+                bundle.getInt("TA_CMD_ID"),
+                bundle.getByteArray("TA_CMD_DATA"));
+        DDLog.d(
+                "TAProxy",
+                "TAProxy::processTACommand: request = "
+                        + tACommandRequest
+                        + "; request.mCommandId = "
+                        + tACommandRequest.mCommandId
+                        + "; this.mTAId = "
+                        + i,
+                new Object[0]);
+        TACommandResponse processTACommand =
+                ((TAInfo) ((HashMap) this.mTAMap).get(Integer.valueOf(i)))
+                        .ta.processTACommand(tACommandRequest);
         if (processTACommand != null) {
             bundle2.putInt("TA_RESP_CODE", processTACommand.mResponseCode);
             bundle2.putString("TA_ERROR_MSG", processTACommand.mErrorMsg);
@@ -228,7 +250,11 @@ public final class TAProxy extends IProxyAgentService {
                 String str3 = tAInfo.taProcessName;
                 int i5 = tAInfo.maxSendCmdSize;
                 TZNative tZNative = new TZNative();
-                DDLog.d("DualDAR:TZNative", VibrationParam$1$$ExternalSyntheticOutline0.m(i4, "TZNative constructor: taId = "), new Object[0]);
+                DDLog.d(
+                        "DualDAR:TZNative",
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                i4, "TZNative constructor: taId = "),
+                        new Object[0]);
                 tZNative.mTAId = i4;
                 tZNative.mDDARTZNativePtr_ = 0L;
                 tZNative.mSendBufSize = i5;
@@ -262,7 +288,11 @@ public final class TAProxy extends IProxyAgentService {
                 tZNative.mDDARTZNativePtr_ = 0L;
                 DDLog.d("DualDAR:TZNative", "TZNative::unloadTA called", new Object[0]);
             }
-            DDLog.e("DualDAR:TZNative", "TZNative::unloadTA called for TA that is not loaded. Call Ignored: ta loaded: " + tZNative.mIsLoaded, new Object[0]);
+            DDLog.e(
+                    "DualDAR:TZNative",
+                    "TZNative::unloadTA called for TA that is not loaded. Call Ignored: ta loaded: "
+                            + tZNative.mIsLoaded,
+                    new Object[0]);
         }
         ((HashMap) this.mTAMap).remove(Integer.valueOf(i));
         if (((HashMap) this.mTAMap).size() <= 0) {
@@ -273,8 +303,13 @@ public final class TAProxy extends IProxyAgentService {
     public final void updateServiceHolder(boolean z) {
         try {
             if (Integer.parseInt("34") >= 34) {
-                boolean isDeclared = ServiceManager.isDeclared("vendor.samsung.hardware.tlc.ddar.ISehDdar/default");
-                DDLog.d("TAProxy", "updateServiceHolder: " + isDeclared + ", " + z + ", " + this.iSehDdar, new Object[0]);
+                boolean isDeclared =
+                        ServiceManager.isDeclared(
+                                "vendor.samsung.hardware.tlc.ddar.ISehDdar/default");
+                DDLog.d(
+                        "TAProxy",
+                        "updateServiceHolder: " + isDeclared + ", " + z + ", " + this.iSehDdar,
+                        new Object[0]);
                 if (isDeclared) {
                     ISehDdar iSehDdar = null;
                     if (!z) {
@@ -283,11 +318,15 @@ public final class TAProxy extends IProxyAgentService {
                     }
                     ISehDdar iSehDdar2 = this.iSehDdar;
                     if (iSehDdar2 == null) {
-                        IBinder waitForService = ServiceManager.waitForService("vendor.samsung.hardware.tlc.ddar.ISehDdar/default");
+                        IBinder waitForService =
+                                ServiceManager.waitForService(
+                                        "vendor.samsung.hardware.tlc.ddar.ISehDdar/default");
                         int i = ISehDdar.Stub.$r8$clinit;
                         if (waitForService != null) {
-                            IInterface queryLocalInterface = waitForService.queryLocalInterface(ISehDdar.DESCRIPTOR);
-                            if (queryLocalInterface == null || !(queryLocalInterface instanceof ISehDdar)) {
+                            IInterface queryLocalInterface =
+                                    waitForService.queryLocalInterface(ISehDdar.DESCRIPTOR);
+                            if (queryLocalInterface == null
+                                    || !(queryLocalInterface instanceof ISehDdar)) {
                                 ISehDdar.Stub.Proxy proxy = new ISehDdar.Stub.Proxy();
                                 proxy.mRemote = waitForService;
                                 iSehDdar = proxy;

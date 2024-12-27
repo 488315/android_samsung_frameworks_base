@@ -5,8 +5,7 @@ import android.database.sqlite.SQLiteDump;
 
 /* loaded from: classes.dex */
 public class InvalidDatabaseErrorHandler extends ErrorHandler {
-    public InvalidDatabaseErrorHandler() {
-    }
+    public InvalidDatabaseErrorHandler() {}
 
     public InvalidDatabaseErrorHandler(SQLiteDump dump) {
         this.mDbDump = dump;

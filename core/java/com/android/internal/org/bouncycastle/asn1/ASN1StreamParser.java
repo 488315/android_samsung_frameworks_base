@@ -35,7 +35,8 @@ public class ASN1StreamParser {
             case 17:
                 return new BERSetParser(this);
             default:
-                throw new ASN1Exception("unknown BER object encountered: 0x" + Integer.toHexString(tagValue));
+                throw new ASN1Exception(
+                        "unknown BER object encountered: 0x" + Integer.toHexString(tagValue));
         }
     }
 
@@ -60,9 +61,11 @@ public class ASN1StreamParser {
             case 4:
                 return new DEROctetStringParser((DefiniteLengthInputStream) this._in);
             case 16:
-                throw new ASN1Exception("sets must use constructed encoding (see X.690 8.11.1/8.12.1)");
+                throw new ASN1Exception(
+                        "sets must use constructed encoding (see X.690 8.11.1/8.12.1)");
             case 17:
-                throw new ASN1Exception("sequences must use constructed encoding (see X.690 8.9.1/8.10.1)");
+                throw new ASN1Exception(
+                        "sequences must use constructed encoding (see X.690 8.9.1/8.10.1)");
         }
         throw new ASN1Exception("implicit tagging not implemented");
     }
@@ -93,12 +96,17 @@ public class ASN1StreamParser {
         set00Check(false);
         int tagNo = ASN1InputStream.readTagNumber(this._in, tag);
         boolean isConstructed = (tag & 32) != 0;
-        int length = ASN1InputStream.readLength(this._in, this._limit, tagNo == 4 || tagNo == 16 || tagNo == 17 || tagNo == 8);
+        int length =
+                ASN1InputStream.readLength(
+                        this._in,
+                        this._limit,
+                        tagNo == 4 || tagNo == 16 || tagNo == 17 || tagNo == 8);
         if (length < 0) {
             if (!isConstructed) {
                 throw new IOException("indefinite-length primitive encoding encountered");
             }
-            IndefiniteLengthInputStream indIn = new IndefiniteLengthInputStream(this._in, this._limit);
+            IndefiniteLengthInputStream indIn =
+                    new IndefiniteLengthInputStream(this._in, this._limit);
             ASN1StreamParser sp = new ASN1StreamParser(indIn, this._limit);
             if ((tag & 64) != 0) {
                 return new BERApplicationSpecificParser(tagNo, sp);
@@ -108,7 +116,8 @@ public class ASN1StreamParser {
             }
             return sp.readIndef(tagNo);
         }
-        DefiniteLengthInputStream defIn = new DefiniteLengthInputStream(this._in, length, this._limit);
+        DefiniteLengthInputStream defIn =
+                new DefiniteLengthInputStream(this._in, length, this._limit);
         if ((tag & 64) != 0) {
             return new DLApplicationSpecific(isConstructed, tagNo, defIn.toByteArray());
         }

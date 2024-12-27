@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.ByteString;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InvalidObjectException;
@@ -27,7 +26,8 @@ final class NioByteString extends ByteString.LeafByteString {
     }
 
     private void readObject(ObjectInputStream in) throws IOException {
-        throw new InvalidObjectException("NioByteString instances are not to be serialized directly");
+        throw new InvalidObjectException(
+                "NioByteString instances are not to be serialized directly");
     }
 
     @Override // com.android.framework.protobuf.ByteString
@@ -64,7 +64,8 @@ final class NioByteString extends ByteString.LeafByteString {
     }
 
     @Override // com.android.framework.protobuf.ByteString
-    protected void copyToInternal(byte[] target, int sourceOffset, int targetOffset, int numberToCopy) {
+    protected void copyToInternal(
+            byte[] target, int sourceOffset, int targetOffset, int numberToCopy) {
         ByteBuffer slice = this.buffer.slice();
         slice.position(sourceOffset);
         slice.get(target, targetOffset, numberToCopy);
@@ -229,8 +230,13 @@ final class NioByteString extends ByteString.LeafByteString {
     }
 
     private ByteBuffer slice(int beginIndex, int endIndex) {
-        if (beginIndex < this.buffer.position() || endIndex > this.buffer.limit() || beginIndex > endIndex) {
-            throw new IllegalArgumentException(String.format("Invalid indices [%d, %d]", Integer.valueOf(beginIndex), Integer.valueOf(endIndex)));
+        if (beginIndex < this.buffer.position()
+                || endIndex > this.buffer.limit()
+                || beginIndex > endIndex) {
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Invalid indices [%d, %d]",
+                            Integer.valueOf(beginIndex), Integer.valueOf(endIndex)));
         }
         ByteBuffer slice = this.buffer.slice();
         slice.position(beginIndex - this.buffer.position());

@@ -3,6 +3,7 @@ package android.service.notification;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -14,19 +15,33 @@ import java.util.Set;
 
 /* loaded from: classes3.dex */
 public final class ZenDeviceEffects implements Parcelable {
-    public static final Parcelable.Creator<ZenDeviceEffects> CREATOR = new Parcelable.Creator<ZenDeviceEffects>() { // from class: android.service.notification.ZenDeviceEffects.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ZenDeviceEffects createFromParcel(Parcel in) {
-            return new ZenDeviceEffects(in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean(), Set.of(in.readArray(String.class.getClassLoader(), String.class)));
-        }
+    public static final Parcelable.Creator<ZenDeviceEffects> CREATOR =
+            new Parcelable.Creator<
+                    ZenDeviceEffects>() { // from class:
+                                          // android.service.notification.ZenDeviceEffects.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ZenDeviceEffects createFromParcel(Parcel in) {
+                    return new ZenDeviceEffects(
+                            in.readBoolean(),
+                            in.readBoolean(),
+                            in.readBoolean(),
+                            in.readBoolean(),
+                            in.readBoolean(),
+                            in.readBoolean(),
+                            in.readBoolean(),
+                            in.readBoolean(),
+                            in.readBoolean(),
+                            in.readBoolean(),
+                            Set.of(in.readArray(String.class.getClassLoader(), String.class)));
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ZenDeviceEffects[] newArray(int size) {
-            return new ZenDeviceEffects[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ZenDeviceEffects[] newArray(int size) {
+                    return new ZenDeviceEffects[size];
+                }
+            };
     public static final int FIELD_DIM_WALLPAPER = 4;
     public static final int FIELD_DISABLE_AUTO_BRIGHTNESS = 16;
     public static final int FIELD_DISABLE_TAP_TO_WAKE = 32;
@@ -52,10 +67,20 @@ public final class ZenDeviceEffects implements Parcelable {
     private final boolean mSuppressAmbientDisplay;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ModifiableField {
-    }
+    public @interface ModifiableField {}
 
-    private ZenDeviceEffects(boolean grayscale, boolean suppressAmbientDisplay, boolean dimWallpaper, boolean nightMode, boolean disableAutoBrightness, boolean disableTapToWake, boolean disableTiltToWake, boolean disableTouch, boolean minimizeRadioUsage, boolean maximizeDoze, Set<String> extraEffects) {
+    private ZenDeviceEffects(
+            boolean grayscale,
+            boolean suppressAmbientDisplay,
+            boolean dimWallpaper,
+            boolean nightMode,
+            boolean disableAutoBrightness,
+            boolean disableTapToWake,
+            boolean disableTiltToWake,
+            boolean disableTouch,
+            boolean minimizeRadioUsage,
+            boolean maximizeDoze,
+            Set<String> extraEffects) {
         this.mGrayscale = grayscale;
         this.mSuppressAmbientDisplay = suppressAmbientDisplay;
         this.mDimWallpaper = dimWallpaper;
@@ -75,7 +100,8 @@ public final class ZenDeviceEffects implements Parcelable {
             extraEffectsLength += extraEffect.length();
         }
         if (extraEffectsLength > 2000) {
-            throw new IllegalArgumentException("Total size of extra effects must be at most 2000 characters");
+            throw new IllegalArgumentException(
+                    "Total size of extra effects must be at most 2000 characters");
         }
     }
 
@@ -87,11 +113,32 @@ public final class ZenDeviceEffects implements Parcelable {
         if (obj == this) {
             return true;
         }
-        return this.mGrayscale == that.mGrayscale && this.mSuppressAmbientDisplay == that.mSuppressAmbientDisplay && this.mDimWallpaper == that.mDimWallpaper && this.mNightMode == that.mNightMode && this.mDisableAutoBrightness == that.mDisableAutoBrightness && this.mDisableTapToWake == that.mDisableTapToWake && this.mDisableTiltToWake == that.mDisableTiltToWake && this.mDisableTouch == that.mDisableTouch && this.mMinimizeRadioUsage == that.mMinimizeRadioUsage && this.mMaximizeDoze == that.mMaximizeDoze && Objects.equals(this.mExtraEffects, that.mExtraEffects);
+        return this.mGrayscale == that.mGrayscale
+                && this.mSuppressAmbientDisplay == that.mSuppressAmbientDisplay
+                && this.mDimWallpaper == that.mDimWallpaper
+                && this.mNightMode == that.mNightMode
+                && this.mDisableAutoBrightness == that.mDisableAutoBrightness
+                && this.mDisableTapToWake == that.mDisableTapToWake
+                && this.mDisableTiltToWake == that.mDisableTiltToWake
+                && this.mDisableTouch == that.mDisableTouch
+                && this.mMinimizeRadioUsage == that.mMinimizeRadioUsage
+                && this.mMaximizeDoze == that.mMaximizeDoze
+                && Objects.equals(this.mExtraEffects, that.mExtraEffects);
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mGrayscale), Boolean.valueOf(this.mSuppressAmbientDisplay), Boolean.valueOf(this.mDimWallpaper), Boolean.valueOf(this.mNightMode), Boolean.valueOf(this.mDisableAutoBrightness), Boolean.valueOf(this.mDisableTapToWake), Boolean.valueOf(this.mDisableTiltToWake), Boolean.valueOf(this.mDisableTouch), Boolean.valueOf(this.mMinimizeRadioUsage), Boolean.valueOf(this.mMaximizeDoze), this.mExtraEffects);
+        return Objects.hash(
+                Boolean.valueOf(this.mGrayscale),
+                Boolean.valueOf(this.mSuppressAmbientDisplay),
+                Boolean.valueOf(this.mDimWallpaper),
+                Boolean.valueOf(this.mNightMode),
+                Boolean.valueOf(this.mDisableAutoBrightness),
+                Boolean.valueOf(this.mDisableTapToWake),
+                Boolean.valueOf(this.mDisableTiltToWake),
+                Boolean.valueOf(this.mDisableTouch),
+                Boolean.valueOf(this.mMinimizeRadioUsage),
+                Boolean.valueOf(this.mMaximizeDoze),
+                this.mExtraEffects);
     }
 
     public String toString() {
@@ -127,9 +174,14 @@ public final class ZenDeviceEffects implements Parcelable {
             effects.add("maximizeDoze");
         }
         if (this.mExtraEffects.size() > 0) {
-            effects.add("extraEffects=[" + String.join(",", this.mExtraEffects) + NavigationBarInflaterView.SIZE_MOD_END);
+            effects.add(
+                    "extraEffects=["
+                            + String.join(",", this.mExtraEffects)
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + String.join(", ", effects) + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START
+                + String.join(", ", effects)
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public static String fieldsToString(int bitmask) {
@@ -215,7 +267,17 @@ public final class ZenDeviceEffects implements Parcelable {
     }
 
     public boolean hasEffects() {
-        return this.mGrayscale || this.mSuppressAmbientDisplay || this.mDimWallpaper || this.mNightMode || this.mDisableAutoBrightness || this.mDisableTapToWake || this.mDisableTiltToWake || this.mDisableTouch || this.mMinimizeRadioUsage || this.mMaximizeDoze || this.mExtraEffects.size() > 0;
+        return this.mGrayscale
+                || this.mSuppressAmbientDisplay
+                || this.mDimWallpaper
+                || this.mNightMode
+                || this.mDisableAutoBrightness
+                || this.mDisableTapToWake
+                || this.mDisableTiltToWake
+                || this.mDisableTouch
+                || this.mMinimizeRadioUsage
+                || this.mMaximizeDoze
+                || this.mExtraEffects.size() > 0;
     }
 
     @Override // android.os.Parcelable
@@ -251,8 +313,7 @@ public final class ZenDeviceEffects implements Parcelable {
         private boolean mNightMode;
         private boolean mSuppressAmbientDisplay;
 
-        public Builder() {
-        }
+        public Builder() {}
 
         public Builder(ZenDeviceEffects zenDeviceEffects) {
             this.mGrayscale = zenDeviceEffects.shouldDisplayGrayscale();
@@ -374,7 +435,18 @@ public final class ZenDeviceEffects implements Parcelable {
         }
 
         public ZenDeviceEffects build() {
-            return new ZenDeviceEffects(this.mGrayscale, this.mSuppressAmbientDisplay, this.mDimWallpaper, this.mNightMode, this.mDisableAutoBrightness, this.mDisableTapToWake, this.mDisableTiltToWake, this.mDisableTouch, this.mMinimizeRadioUsage, this.mMaximizeDoze, this.mExtraEffects);
+            return new ZenDeviceEffects(
+                    this.mGrayscale,
+                    this.mSuppressAmbientDisplay,
+                    this.mDimWallpaper,
+                    this.mNightMode,
+                    this.mDisableAutoBrightness,
+                    this.mDisableTapToWake,
+                    this.mDisableTiltToWake,
+                    this.mDisableTouch,
+                    this.mMinimizeRadioUsage,
+                    this.mMaximizeDoze,
+                    this.mExtraEffects);
         }
     }
 }

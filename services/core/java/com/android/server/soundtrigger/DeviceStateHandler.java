@@ -1,7 +1,9 @@
 package com.android.server.soundtrigger;
 
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
+
 import com.android.server.utils.EventLogger;
+
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
@@ -86,13 +88,19 @@ public final class DeviceStateHandler {
         public static final SoundTriggerDeviceState ENABLE;
 
         static {
-            SoundTriggerDeviceState soundTriggerDeviceState = new SoundTriggerDeviceState("DISABLE", 0);
+            SoundTriggerDeviceState soundTriggerDeviceState =
+                    new SoundTriggerDeviceState("DISABLE", 0);
             DISABLE = soundTriggerDeviceState;
-            SoundTriggerDeviceState soundTriggerDeviceState2 = new SoundTriggerDeviceState("CRITICAL", 1);
+            SoundTriggerDeviceState soundTriggerDeviceState2 =
+                    new SoundTriggerDeviceState("CRITICAL", 1);
             CRITICAL = soundTriggerDeviceState2;
-            SoundTriggerDeviceState soundTriggerDeviceState3 = new SoundTriggerDeviceState("ENABLE", 2);
+            SoundTriggerDeviceState soundTriggerDeviceState3 =
+                    new SoundTriggerDeviceState("ENABLE", 2);
             ENABLE = soundTriggerDeviceState3;
-            $VALUES = new SoundTriggerDeviceState[]{soundTriggerDeviceState, soundTriggerDeviceState2, soundTriggerDeviceState3};
+            $VALUES =
+                    new SoundTriggerDeviceState[] {
+                        soundTriggerDeviceState, soundTriggerDeviceState2, soundTriggerDeviceState3
+                    };
         }
 
         public static SoundTriggerDeviceState valueOf(String str) {
@@ -116,7 +124,15 @@ public final class DeviceStateHandler {
         public final String eventToString() {
             StringBuilder sb = new StringBuilder("SoundTriggerPowerChange: ");
             int i = this.mSoundTriggerPowerState;
-            sb.append(i != 0 ? i != 1 ? i != 2 ? VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown power state: ") : "All disabled" : "Critical only" : "All enabled");
+            sb.append(
+                    i != 0
+                            ? i != 1
+                                    ? i != 2
+                                            ? VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                                    i, "Unknown power state: ")
+                                            : "All disabled"
+                                    : "Critical only"
+                            : "All enabled");
             return sb.toString();
         }
     }
@@ -137,10 +153,12 @@ public final class DeviceStateHandler {
             } else if (i == 1) {
                 soundTriggerDeviceState = SoundTriggerDeviceState.CRITICAL;
             } else if (i != 2) {
-                throw new IllegalStateException("Received unexpected power state code" + this.mSoundTriggerPowerSaveMode);
+                throw new IllegalStateException(
+                        "Received unexpected power state code" + this.mSoundTriggerPowerSaveMode);
             }
         }
-        if (this.mPhoneStateChangePendingNotify != null || this.mSoundTriggerDeviceState == soundTriggerDeviceState) {
+        if (this.mPhoneStateChangePendingNotify != null
+                || this.mSoundTriggerDeviceState == soundTriggerDeviceState) {
             return;
         }
         this.mSoundTriggerDeviceState = soundTriggerDeviceState;
@@ -148,7 +166,12 @@ public final class DeviceStateHandler {
         SoundTriggerDeviceState soundTriggerDeviceState2 = this.mSoundTriggerDeviceState;
         Iterator it = this.mCallbackSet.iterator();
         while (it.hasNext()) {
-            this.mCallbackExecutor.execute(new DeviceStateHandler$$ExternalSyntheticLambda0((SoundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1) it.next(), soundTriggerDeviceState2, 0));
+            this.mCallbackExecutor.execute(
+                    new DeviceStateHandler$$ExternalSyntheticLambda0(
+                            (SoundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1)
+                                    it.next(),
+                            soundTriggerDeviceState2,
+                            0));
         }
     }
 
@@ -169,19 +192,28 @@ public final class DeviceStateHandler {
                 if (z) {
                     evaluateStateChange();
                 } else {
-                    NotificationTask notificationTask2 = new NotificationTask(new Runnable() { // from class: com.android.server.soundtrigger.DeviceStateHandler.1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            synchronized (DeviceStateHandler.this.mLock) {
-                                DeviceStateHandler deviceStateHandler = DeviceStateHandler.this;
-                                NotificationTask notificationTask3 = deviceStateHandler.mPhoneStateChangePendingNotify;
-                                if (notificationTask3 != null && notificationTask3.mRunnable == this) {
-                                    deviceStateHandler.mPhoneStateChangePendingNotify = null;
-                                    deviceStateHandler.evaluateStateChange();
-                                }
-                            }
-                        }
-                    });
+                    NotificationTask notificationTask2 =
+                            new NotificationTask(
+                                    new Runnable() { // from class:
+                                                     // com.android.server.soundtrigger.DeviceStateHandler.1
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            synchronized (DeviceStateHandler.this.mLock) {
+                                                DeviceStateHandler deviceStateHandler =
+                                                        DeviceStateHandler.this;
+                                                NotificationTask notificationTask3 =
+                                                        deviceStateHandler
+                                                                .mPhoneStateChangePendingNotify;
+                                                if (notificationTask3 != null
+                                                        && notificationTask3.mRunnable == this) {
+                                                    deviceStateHandler
+                                                                    .mPhoneStateChangePendingNotify =
+                                                            null;
+                                                    deviceStateHandler.evaluateStateChange();
+                                                }
+                                            }
+                                        }
+                                    });
                     this.mPhoneStateChangePendingNotify = notificationTask2;
                     this.mDelayedNotificationExecutor.execute(notificationTask2);
                 }
@@ -206,12 +238,19 @@ public final class DeviceStateHandler {
         }
     }
 
-    public final void registerListener(SoundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1 soundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1) {
+    public final void registerListener(
+            SoundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1
+                    soundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1) {
         SoundTriggerDeviceState soundTriggerDeviceState;
         synchronized (this.mLock) {
             soundTriggerDeviceState = this.mSoundTriggerDeviceState;
         }
-        this.mCallbackExecutor.execute(new DeviceStateHandler$$ExternalSyntheticLambda0(soundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1, soundTriggerDeviceState, 1));
-        this.mCallbackSet.add(soundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1);
+        this.mCallbackExecutor.execute(
+                new DeviceStateHandler$$ExternalSyntheticLambda0(
+                        soundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1,
+                        soundTriggerDeviceState,
+                        1));
+        this.mCallbackSet.add(
+                soundTriggerService$SoundTriggerSessionStub$$ExternalSyntheticLambda1);
     }
 }

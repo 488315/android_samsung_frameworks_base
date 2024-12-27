@@ -16,14 +16,18 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.server.SystemService;
+
 import com.ibm.icu.impl.CalendarAstronomer;
+
 import java.util.Objects;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class TwilightService extends SystemService implements AlarmManager.OnAlarmListener, Handler.Callback, LocationListener {
+public final class TwilightService extends SystemService
+        implements AlarmManager.OnAlarmListener, Handler.Callback, LocationListener {
     public AlarmManager mAlarmManager;
     public boolean mBootCompleted;
     public final Handler mHandler;
@@ -37,8 +41,7 @@ public final class TwilightService extends SystemService implements AlarmManager
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.twilight.TwilightService$1, reason: invalid class name */
     public final class AnonymousClass1 implements TwilightManager {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         public final TwilightState getLastTwilightState() {
             TwilightState twilightState;
@@ -138,19 +141,24 @@ public final class TwilightService extends SystemService implements AlarmManager
     @Override // android.location.LocationListener
     public final void onLocationChanged(Location location) {
         if (location != null) {
-            Slog.d("TwilightService", "onLocationChanged: provider=" + location.getProvider() + " accuracy=" + location.getAccuracy() + " time=" + location.getTime());
+            Slog.d(
+                    "TwilightService",
+                    "onLocationChanged: provider="
+                            + location.getProvider()
+                            + " accuracy="
+                            + location.getAccuracy()
+                            + " time="
+                            + location.getTime());
             this.mLastLocation = location;
             updateTwilightState();
         }
     }
 
     @Override // android.location.LocationListener
-    public final void onProviderDisabled(String str) {
-    }
+    public final void onProviderDisabled(String str) {}
 
     @Override // android.location.LocationListener
-    public final void onProviderEnabled(String str) {
-    }
+    public final void onProviderEnabled(String str) {}
 
     @Override // com.android.server.SystemService
     public final void onStart() {
@@ -158,38 +166,50 @@ public final class TwilightService extends SystemService implements AlarmManager
     }
 
     @Override // android.location.LocationListener
-    public final void onStatusChanged(String str, int i, Bundle bundle) {
-    }
+    public final void onStatusChanged(String str, int i, Bundle bundle) {}
 
     /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.twilight.TwilightService$2] */
     public final void startListening() {
         Slog.d("TwilightService", "startListening");
-        this.mLocationManager.requestLocationUpdates((LocationRequest) null, this, Looper.getMainLooper());
+        this.mLocationManager.requestLocationUpdates(
+                (LocationRequest) null, this, Looper.getMainLooper());
         if (this.mLocationManager.getLastLocation() == null) {
             if (this.mLocationManager.isProviderEnabled("network")) {
-                this.mLocationManager.getCurrentLocation("network", null, getContext().getMainExecutor(), new Consumer() { // from class: com.android.server.twilight.TwilightService$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        TwilightService.this.onLocationChanged((Location) obj);
-                    }
-                });
+                this.mLocationManager.getCurrentLocation(
+                        "network",
+                        null,
+                        getContext().getMainExecutor(),
+                        new Consumer() { // from class:
+                                         // com.android.server.twilight.TwilightService$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                TwilightService.this.onLocationChanged((Location) obj);
+                            }
+                        });
             } else if (this.mLocationManager.isProviderEnabled("gps")) {
-                this.mLocationManager.getCurrentLocation("gps", null, getContext().getMainExecutor(), new Consumer() { // from class: com.android.server.twilight.TwilightService$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        TwilightService.this.onLocationChanged((Location) obj);
-                    }
-                });
+                this.mLocationManager.getCurrentLocation(
+                        "gps",
+                        null,
+                        getContext().getMainExecutor(),
+                        new Consumer() { // from class:
+                                         // com.android.server.twilight.TwilightService$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                TwilightService.this.onLocationChanged((Location) obj);
+                            }
+                        });
             }
         }
         if (this.mTimeChangedReceiver == null) {
-            this.mTimeChangedReceiver = new BroadcastReceiver() { // from class: com.android.server.twilight.TwilightService.2
-                @Override // android.content.BroadcastReceiver
-                public final void onReceive(Context context, Intent intent) {
-                    Slog.d("TwilightService", "onReceive: " + intent);
-                    TwilightService.this.updateTwilightState();
-                }
-            };
+            this.mTimeChangedReceiver =
+                    new BroadcastReceiver() { // from class:
+                                              // com.android.server.twilight.TwilightService.2
+                        @Override // android.content.BroadcastReceiver
+                        public final void onReceive(Context context, Intent intent) {
+                            Slog.d("TwilightService", "onReceive: " + intent);
+                            TwilightService.this.updateTwilightState();
+                        }
+                    };
             IntentFilter intentFilter = new IntentFilter("android.intent.action.TIME_SET");
             intentFilter.addAction("android.intent.action.TIMEZONE_CHANGED");
             getContext().registerReceiver(this.mTimeChangedReceiver, intentFilter);
@@ -218,9 +238,18 @@ public final class TwilightService extends SystemService implements AlarmManager
             calendarAstronomer.eclipObliquity = Double.MIN_VALUE;
             calendarAstronomer.siderealT0 = Double.MIN_VALUE;
             calendarAstronomer.time = currentTimeMillis2;
-            double normalize = CalendarAstronomer.normalize((longitude * 0.017453292519943295d) + 3.141592653589793d, 6.283185307179586d) - 3.141592653589793d;
-            calendarAstronomer.fLatitude = CalendarAstronomer.normalize((latitude * 0.017453292519943295d) + 3.141592653589793d, 6.283185307179586d) - 3.141592653589793d;
-            calendarAstronomer.fGmtOffset = (long) (((normalize * 24.0d) * 3600000.0d) / 6.283185307179586d);
+            double normalize =
+                    CalendarAstronomer.normalize(
+                                    (longitude * 0.017453292519943295d) + 3.141592653589793d,
+                                    6.283185307179586d)
+                            - 3.141592653589793d;
+            calendarAstronomer.fLatitude =
+                    CalendarAstronomer.normalize(
+                                    (latitude * 0.017453292519943295d) + 3.141592653589793d,
+                                    6.283185307179586d)
+                            - 3.141592653589793d;
+            calendarAstronomer.fGmtOffset =
+                    (long) (((normalize * 24.0d) * 3600000.0d) / 6.283185307179586d);
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(currentTimeMillis);
             calendar.set(11, 12);
@@ -246,13 +275,18 @@ public final class TwilightService extends SystemService implements AlarmManager
                 if (!Objects.equals(this.mLastTwilightState, twilightState)) {
                     this.mLastTwilightState = twilightState;
                     for (int size = this.mListeners.size() - 1; size >= 0; size--) {
-                        final TwilightListener twilightListener = (TwilightListener) this.mListeners.keyAt(size);
-                        ((Handler) this.mListeners.valueAt(size)).post(new Runnable() { // from class: com.android.server.twilight.TwilightService$$ExternalSyntheticLambda1
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                TwilightListener.this.onTwilightStateChanged(twilightState);
-                            }
-                        });
+                        final TwilightListener twilightListener =
+                                (TwilightListener) this.mListeners.keyAt(size);
+                        ((Handler) this.mListeners.valueAt(size))
+                                .post(
+                                        new Runnable() { // from class:
+                                                         // com.android.server.twilight.TwilightService$$ExternalSyntheticLambda1
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                TwilightListener.this.onTwilightStateChanged(
+                                                        twilightState);
+                                            }
+                                        });
                     }
                 }
             } catch (Throwable th) {
@@ -260,7 +294,14 @@ public final class TwilightService extends SystemService implements AlarmManager
             }
         }
         if (twilightState != null) {
-            this.mAlarmManager.setExact(1, twilightState.isNight() ? twilightState.mSunriseTimeMillis : twilightState.mSunsetTimeMillis, "TwilightService", this, this.mHandler);
+            this.mAlarmManager.setExact(
+                    1,
+                    twilightState.isNight()
+                            ? twilightState.mSunriseTimeMillis
+                            : twilightState.mSunsetTimeMillis,
+                    "TwilightService",
+                    this,
+                    this.mHandler);
         }
     }
 }

@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Debug;
 import android.util.Log;
 import android.util.TypedValue;
+
 import com.android.internal.R;
 
 /* loaded from: classes6.dex */
@@ -14,15 +15,20 @@ public class SemViewUtils {
 
     @Deprecated
     public static Path getSmoothCornerRectPath(float rad, float width, float height) {
-        Log.w(TAG, "This method is deprecated. Use getSmoothCornerRectPath(float, float, float, float, float) instead.");
+        Log.w(
+                TAG,
+                "This method is deprecated. Use getSmoothCornerRectPath(float, float, float, float,"
+                    + " float) instead.");
         return getSmoothCornerRectPath(rad, 0.0f, 0.0f, width, height);
     }
 
-    public static Path getSmoothCornerRectPath(float rad, float posX, float posY, float width, float height) {
+    public static Path getSmoothCornerRectPath(
+            float rad, float posX, float posY, float width, float height) {
         return getSmoothCornerRectPath(null, rad, posX, posY, width, height);
     }
 
-    public static Path getSmoothCornerRectPath(Path path, float rad, float posX, float posY, float width, float height) {
+    public static Path getSmoothCornerRectPath(
+            Path path, float rad, float posX, float posY, float width, float height) {
         Path path2;
         Path path3;
         float vertexRatio;
@@ -56,30 +62,127 @@ public class SemViewUtils {
                     controlRatio = 1.0f;
                 }
                 path2.moveTo((width / 2.0f) + posX, posY);
-                path2.lineTo(Math.max(width / 2.0f, width - (((rad2 / 100.0f) * 128.19f) * vertexRatio)) + posX, posY);
-                path2.cubicTo((posX + width) - (((rad2 / 100.0f) * 83.62f) * controlRatio), posY, (posX + width) - ((rad2 / 100.0f) * 67.45f), posY + ((rad2 / 100.0f) * 4.64f), (posX + width) - ((rad2 / 100.0f) * 51.16f), posY + ((rad2 / 100.0f) * 13.36f));
+                path2.lineTo(
+                        Math.max(width / 2.0f, width - (((rad2 / 100.0f) * 128.19f) * vertexRatio))
+                                + posX,
+                        posY);
+                path2.cubicTo(
+                        (posX + width) - (((rad2 / 100.0f) * 83.62f) * controlRatio),
+                        posY,
+                        (posX + width) - ((rad2 / 100.0f) * 67.45f),
+                        posY + ((rad2 / 100.0f) * 4.64f),
+                        (posX + width) - ((rad2 / 100.0f) * 51.16f),
+                        posY + ((rad2 / 100.0f) * 13.36f));
                 Path path4 = path2;
-                path2.cubicTo((posX + width) - ((rad2 / 100.0f) * 34.86f), posY + ((rad2 / 100.0f) * 22.07f), (posX + width) - ((rad2 / 100.0f) * 22.07f), ((rad2 / 100.0f) * 34.86f) + posY, (posX + width) - ((rad2 / 100.0f) * 13.36f), posY + ((rad2 / 100.0f) * 51.16f));
-                path4.cubicTo((posX + width) - ((rad2 / 100.0f) * 4.64f), posY + ((rad2 / 100.0f) * 67.45f), posX + width, posY + ((rad2 / 100.0f) * 83.62f * controlRatio), posX + width, posY + Math.min(height / 2.0f, (rad2 / 100.0f) * 128.19f * vertexRatio));
-                path4.lineTo(posX + width, Math.max(height / 2.0f, height - (((rad2 / 100.0f) * 128.19f) * vertexRatio)) + posY);
-                path4.cubicTo(posX + width, (posY + height) - (((rad2 / 100.0f) * 83.62f) * controlRatio), (posX + width) - ((rad2 / 100.0f) * 4.64f), (posY + height) - ((rad2 / 100.0f) * 67.45f), (posX + width) - ((rad2 / 100.0f) * 13.36f), (posY + height) - ((rad2 / 100.0f) * 51.16f));
-                path4.cubicTo((posX + width) - ((rad2 / 100.0f) * 22.07f), (posY + height) - ((rad2 / 100.0f) * 34.86f), (posX + width) - ((rad2 / 100.0f) * 34.86f), (posY + height) - ((rad2 / 100.0f) * 22.07f), (posX + width) - ((rad2 / 100.0f) * 51.16f), (posY + height) - ((rad2 / 100.0f) * 13.36f));
-                path4.cubicTo((posX + width) - ((rad2 / 100.0f) * 67.45f), (posY + height) - ((rad2 / 100.0f) * 4.64f), (posX + width) - (((rad2 / 100.0f) * 83.62f) * controlRatio), posY + height, posX + Math.max(width / 2.0f, width - (((rad2 / 100.0f) * 128.19f) * vertexRatio)), posY + height);
-                path4.lineTo(Math.min(width / 2.0f, (rad2 / 100.0f) * 128.19f * vertexRatio) + posX, posY + height);
-                path4.cubicTo(posX + ((rad2 / 100.0f) * 83.62f * controlRatio), posY + height, posX + ((rad2 / 100.0f) * 67.45f), (posY + height) - ((rad2 / 100.0f) * 4.64f), posX + ((rad2 / 100.0f) * 51.16f), (posY + height) - ((rad2 / 100.0f) * 13.36f));
-                path4.cubicTo(posX + ((rad2 / 100.0f) * 34.86f), (posY + height) - ((rad2 / 100.0f) * 22.07f), posX + ((rad2 / 100.0f) * 22.07f), (posY + height) - ((rad2 / 100.0f) * 34.86f), posX + ((rad2 / 100.0f) * 13.36f), (posY + height) - ((rad2 / 100.0f) * 51.16f));
-                path4.cubicTo(posX + ((rad2 / 100.0f) * 4.64f), (posY + height) - ((rad2 / 100.0f) * 67.45f), posX, (posY + height) - (((rad2 / 100.0f) * 83.62f) * controlRatio), posX, posY + Math.max(height / 2.0f, height - (((rad2 / 100.0f) * 128.19f) * vertexRatio)));
-                path4.lineTo(posX, Math.min(height / 2.0f, (rad2 / 100.0f) * 128.19f * vertexRatio) + posY);
-                path4.cubicTo(posX, posY + ((rad2 / 100.0f) * 83.62f * controlRatio), posX + ((rad2 / 100.0f) * 4.64f), posY + ((rad2 / 100.0f) * 67.45f), posX + ((rad2 / 100.0f) * 13.36f), posY + ((rad2 / 100.0f) * 51.16f));
-                path4.cubicTo(posX + ((rad2 / 100.0f) * 22.07f), posY + ((rad2 / 100.0f) * 34.86f), posX + ((rad2 / 100.0f) * 34.86f), ((rad2 / 100.0f) * 22.07f) + posY, posX + ((rad2 / 100.0f) * 51.16f), posY + ((rad2 / 100.0f) * 13.36f));
-                path4.cubicTo(posX + ((rad2 / 100.0f) * 67.45f), posY + ((rad2 / 100.0f) * 4.64f), posX + ((rad2 / 100.0f) * 83.62f * controlRatio), posY, posX + Math.min(width / 2.0f, (rad2 / 100.0f) * 128.19f * vertexRatio), posY);
+                path2.cubicTo(
+                        (posX + width) - ((rad2 / 100.0f) * 34.86f),
+                        posY + ((rad2 / 100.0f) * 22.07f),
+                        (posX + width) - ((rad2 / 100.0f) * 22.07f),
+                        ((rad2 / 100.0f) * 34.86f) + posY,
+                        (posX + width) - ((rad2 / 100.0f) * 13.36f),
+                        posY + ((rad2 / 100.0f) * 51.16f));
+                path4.cubicTo(
+                        (posX + width) - ((rad2 / 100.0f) * 4.64f),
+                        posY + ((rad2 / 100.0f) * 67.45f),
+                        posX + width,
+                        posY + ((rad2 / 100.0f) * 83.62f * controlRatio),
+                        posX + width,
+                        posY + Math.min(height / 2.0f, (rad2 / 100.0f) * 128.19f * vertexRatio));
+                path4.lineTo(
+                        posX + width,
+                        Math.max(
+                                        height / 2.0f,
+                                        height - (((rad2 / 100.0f) * 128.19f) * vertexRatio))
+                                + posY);
+                path4.cubicTo(
+                        posX + width,
+                        (posY + height) - (((rad2 / 100.0f) * 83.62f) * controlRatio),
+                        (posX + width) - ((rad2 / 100.0f) * 4.64f),
+                        (posY + height) - ((rad2 / 100.0f) * 67.45f),
+                        (posX + width) - ((rad2 / 100.0f) * 13.36f),
+                        (posY + height) - ((rad2 / 100.0f) * 51.16f));
+                path4.cubicTo(
+                        (posX + width) - ((rad2 / 100.0f) * 22.07f),
+                        (posY + height) - ((rad2 / 100.0f) * 34.86f),
+                        (posX + width) - ((rad2 / 100.0f) * 34.86f),
+                        (posY + height) - ((rad2 / 100.0f) * 22.07f),
+                        (posX + width) - ((rad2 / 100.0f) * 51.16f),
+                        (posY + height) - ((rad2 / 100.0f) * 13.36f));
+                path4.cubicTo(
+                        (posX + width) - ((rad2 / 100.0f) * 67.45f),
+                        (posY + height) - ((rad2 / 100.0f) * 4.64f),
+                        (posX + width) - (((rad2 / 100.0f) * 83.62f) * controlRatio),
+                        posY + height,
+                        posX
+                                + Math.max(
+                                        width / 2.0f,
+                                        width - (((rad2 / 100.0f) * 128.19f) * vertexRatio)),
+                        posY + height);
+                path4.lineTo(
+                        Math.min(width / 2.0f, (rad2 / 100.0f) * 128.19f * vertexRatio) + posX,
+                        posY + height);
+                path4.cubicTo(
+                        posX + ((rad2 / 100.0f) * 83.62f * controlRatio),
+                        posY + height,
+                        posX + ((rad2 / 100.0f) * 67.45f),
+                        (posY + height) - ((rad2 / 100.0f) * 4.64f),
+                        posX + ((rad2 / 100.0f) * 51.16f),
+                        (posY + height) - ((rad2 / 100.0f) * 13.36f));
+                path4.cubicTo(
+                        posX + ((rad2 / 100.0f) * 34.86f),
+                        (posY + height) - ((rad2 / 100.0f) * 22.07f),
+                        posX + ((rad2 / 100.0f) * 22.07f),
+                        (posY + height) - ((rad2 / 100.0f) * 34.86f),
+                        posX + ((rad2 / 100.0f) * 13.36f),
+                        (posY + height) - ((rad2 / 100.0f) * 51.16f));
+                path4.cubicTo(
+                        posX + ((rad2 / 100.0f) * 4.64f),
+                        (posY + height) - ((rad2 / 100.0f) * 67.45f),
+                        posX,
+                        (posY + height) - (((rad2 / 100.0f) * 83.62f) * controlRatio),
+                        posX,
+                        posY
+                                + Math.max(
+                                        height / 2.0f,
+                                        height - (((rad2 / 100.0f) * 128.19f) * vertexRatio)));
+                path4.lineTo(
+                        posX,
+                        Math.min(height / 2.0f, (rad2 / 100.0f) * 128.19f * vertexRatio) + posY);
+                path4.cubicTo(
+                        posX,
+                        posY + ((rad2 / 100.0f) * 83.62f * controlRatio),
+                        posX + ((rad2 / 100.0f) * 4.64f),
+                        posY + ((rad2 / 100.0f) * 67.45f),
+                        posX + ((rad2 / 100.0f) * 13.36f),
+                        posY + ((rad2 / 100.0f) * 51.16f));
+                path4.cubicTo(
+                        posX + ((rad2 / 100.0f) * 22.07f),
+                        posY + ((rad2 / 100.0f) * 34.86f),
+                        posX + ((rad2 / 100.0f) * 34.86f),
+                        ((rad2 / 100.0f) * 22.07f) + posY,
+                        posX + ((rad2 / 100.0f) * 51.16f),
+                        posY + ((rad2 / 100.0f) * 13.36f));
+                path4.cubicTo(
+                        posX + ((rad2 / 100.0f) * 67.45f),
+                        posY + ((rad2 / 100.0f) * 4.64f),
+                        posX + ((rad2 / 100.0f) * 83.62f * controlRatio),
+                        posY,
+                        posX + Math.min(width / 2.0f, (rad2 / 100.0f) * 128.19f * vertexRatio),
+                        posY);
                 path4.close();
                 return path4;
             }
             path3 = path2;
         }
         if (!Build.IS_USER) {
-            Log.w(TAG, "IllegalArguments : width=" + width + ", height=" + height + ", Callers=" + Debug.getCallers(10));
+            Log.w(
+                    TAG,
+                    "IllegalArguments : width="
+                            + width
+                            + ", height="
+                            + height
+                            + ", Callers="
+                            + Debug.getCallers(10));
         }
         return path3;
     }

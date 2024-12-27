@@ -14,8 +14,7 @@ public interface IProximityUpdateCallback extends IInterface {
 
     public static class Default implements IProximityUpdateCallback {
         @Override // android.service.attention.IProximityUpdateCallback
-        public void onProximityUpdate(double distance) throws RemoteException {
-        }
+        public void onProximityUpdate(double distance) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IProximityUpdateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProximityUpdateCallback {
+    public abstract static class Stub extends Binder implements IProximityUpdateCallback {
         static final int TRANSACTION_onProximityUpdate = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IProximityUpdateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IProximityUpdateCallback.DESCRIPTOR);
             }

@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.smartface.ISmartFaceClient;
 
 /* loaded from: classes6.dex */
 public interface ISmartFaceService extends IInterface {
@@ -18,7 +17,8 @@ public interface ISmartFaceService extends IInterface {
 
     void registerAsync(ISmartFaceClient iSmartFaceClient, int i) throws RemoteException;
 
-    void setValue(ISmartFaceClient iSmartFaceClient, String str, String str2) throws RemoteException;
+    void setValue(ISmartFaceClient iSmartFaceClient, String str, String str2)
+            throws RemoteException;
 
     void unregister(ISmartFaceClient iSmartFaceClient) throws RemoteException;
 
@@ -31,20 +31,18 @@ public interface ISmartFaceService extends IInterface {
         }
 
         @Override // com.samsung.android.smartface.ISmartFaceService
-        public void unregister(ISmartFaceClient client) throws RemoteException {
-        }
+        public void unregister(ISmartFaceClient client) throws RemoteException {}
 
         @Override // com.samsung.android.smartface.ISmartFaceService
-        public void registerAsync(ISmartFaceClient client, int serviceType) throws RemoteException {
-        }
+        public void registerAsync(ISmartFaceClient client, int serviceType)
+                throws RemoteException {}
 
         @Override // com.samsung.android.smartface.ISmartFaceService
-        public void unregisterAsync(ISmartFaceClient client) throws RemoteException {
-        }
+        public void unregisterAsync(ISmartFaceClient client) throws RemoteException {}
 
         @Override // com.samsung.android.smartface.ISmartFaceService
-        public void setValue(ISmartFaceClient client, String key, String value) throws RemoteException {
-        }
+        public void setValue(ISmartFaceClient client, String key, String value)
+                throws RemoteException {}
 
         @Override // com.samsung.android.smartface.ISmartFaceService
         public int getSupportedServices() throws RemoteException {
@@ -57,7 +55,7 @@ public interface ISmartFaceService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISmartFaceService {
+    public abstract static class Stub extends Binder implements ISmartFaceService {
         static final int TRANSACTION_getSupportedServices = 6;
         static final int TRANSACTION_register = 1;
         static final int TRANSACTION_registerAsync = 3;
@@ -110,7 +108,8 @@ public interface ISmartFaceService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISmartFaceService.DESCRIPTOR);
             }
@@ -120,7 +119,8 @@ public interface ISmartFaceService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ISmartFaceClient _arg0 = ISmartFaceClient.Stub.asInterface(data.readStrongBinder());
+                    ISmartFaceClient _arg0 =
+                            ISmartFaceClient.Stub.asInterface(data.readStrongBinder());
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result = register(_arg0, _arg1);
@@ -128,24 +128,28 @@ public interface ISmartFaceService extends IInterface {
                     reply.writeBoolean(_result);
                     return true;
                 case 2:
-                    ISmartFaceClient _arg02 = ISmartFaceClient.Stub.asInterface(data.readStrongBinder());
+                    ISmartFaceClient _arg02 =
+                            ISmartFaceClient.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregister(_arg02);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    ISmartFaceClient _arg03 = ISmartFaceClient.Stub.asInterface(data.readStrongBinder());
+                    ISmartFaceClient _arg03 =
+                            ISmartFaceClient.Stub.asInterface(data.readStrongBinder());
                     int _arg12 = data.readInt();
                     data.enforceNoDataAvail();
                     registerAsync(_arg03, _arg12);
                     return true;
                 case 4:
-                    ISmartFaceClient _arg04 = ISmartFaceClient.Stub.asInterface(data.readStrongBinder());
+                    ISmartFaceClient _arg04 =
+                            ISmartFaceClient.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterAsync(_arg04);
                     return true;
                 case 5:
-                    ISmartFaceClient _arg05 = ISmartFaceClient.Stub.asInterface(data.readStrongBinder());
+                    ISmartFaceClient _arg05 =
+                            ISmartFaceClient.Stub.asInterface(data.readStrongBinder());
                     String _arg13 = data.readString();
                     String _arg2 = data.readString();
                     data.enforceNoDataAvail();
@@ -179,7 +183,8 @@ public interface ISmartFaceService extends IInterface {
             }
 
             @Override // com.samsung.android.smartface.ISmartFaceService
-            public boolean register(ISmartFaceClient client, int serviceType) throws RemoteException {
+            public boolean register(ISmartFaceClient client, int serviceType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -212,7 +217,8 @@ public interface ISmartFaceService extends IInterface {
             }
 
             @Override // com.samsung.android.smartface.ISmartFaceService
-            public void registerAsync(ISmartFaceClient client, int serviceType) throws RemoteException {
+            public void registerAsync(ISmartFaceClient client, int serviceType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISmartFaceService.DESCRIPTOR);
@@ -237,7 +243,8 @@ public interface ISmartFaceService extends IInterface {
             }
 
             @Override // com.samsung.android.smartface.ISmartFaceService
-            public void setValue(ISmartFaceClient client, String key, String value) throws RemoteException {
+            public void setValue(ISmartFaceClient client, String key, String value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

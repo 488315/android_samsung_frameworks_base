@@ -6,7 +6,9 @@ import android.util.ArrayMap;
 import android.util.AtomicFile;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.server.SystemServiceManager;
+
 import java.io.File;
 import java.util.Map;
 
@@ -22,7 +24,9 @@ public final class AppOpMigrationHelperImpl {
         int size = sparseIntArray.size();
         ArrayMap arrayMap = new ArrayMap(size);
         for (int i = 0; i < size; i++) {
-            arrayMap.put(AppOpsManager.opToPublicName(sparseIntArray.keyAt(i)), Integer.valueOf(sparseIntArray.valueAt(i)));
+            arrayMap.put(
+                    AppOpsManager.opToPublicName(sparseIntArray.keyAt(i)),
+                    Integer.valueOf(sparseIntArray.valueAt(i)));
         }
         return arrayMap;
     }
@@ -31,8 +35,7 @@ public final class AppOpMigrationHelperImpl {
         synchronized (this.mLock) {
             try {
                 if (this.mAppIdAppOpModes != null) {
-                    if (this.mPackageAppOpModes == null) {
-                    }
+                    if (this.mPackageAppOpModes == null) {}
                 }
                 readLegacyAppOpState();
             } catch (Throwable th) {
@@ -43,7 +46,8 @@ public final class AppOpMigrationHelperImpl {
     }
 
     public final void readLegacyAppOpState() {
-        AtomicFile atomicFile = new AtomicFile(new File(SystemServiceManager.ensureSystemDir(), "appops.xml"));
+        AtomicFile atomicFile =
+                new AtomicFile(new File(SystemServiceManager.ensureSystemDir(), "appops.xml"));
         SparseArray sparseArray = new SparseArray();
         SparseArray sparseArray2 = new SparseArray();
         int readState = LegacyAppOpStateParser.readState(atomicFile, sparseArray, sparseArray2);
@@ -64,7 +68,9 @@ public final class AppOpMigrationHelperImpl {
                 map = new ArrayMap();
                 sparseArray3.put(userId, map);
             }
-            map.put(Integer.valueOf(UserHandle.getAppId(keyAt)), getAppOpModesForOpName((SparseIntArray) sparseArray.valueAt(i)));
+            map.put(
+                    Integer.valueOf(UserHandle.getAppId(keyAt)),
+                    getAppOpModesForOpName((SparseIntArray) sparseArray.valueAt(i)));
         }
         this.mAppIdAppOpModes = sparseArray3;
         SparseArray sparseArray4 = new SparseArray();
@@ -79,7 +85,9 @@ public final class AppOpMigrationHelperImpl {
             ArrayMap arrayMap = (ArrayMap) sparseArray2.valueAt(i2);
             int size3 = arrayMap.size();
             for (int i3 = 0; i3 < size3; i3++) {
-                map2.put((String) arrayMap.keyAt(i3), getAppOpModesForOpName((SparseIntArray) arrayMap.valueAt(i3)));
+                map2.put(
+                        (String) arrayMap.keyAt(i3),
+                        getAppOpModesForOpName((SparseIntArray) arrayMap.valueAt(i3)));
             }
         }
         this.mPackageAppOpModes = sparseArray4;

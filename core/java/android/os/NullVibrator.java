@@ -4,8 +4,7 @@ package android.os;
 public class NullVibrator extends Vibrator {
     private static final NullVibrator sInstance = new NullVibrator();
 
-    private NullVibrator() {
-    }
+    private NullVibrator() {}
 
     public static NullVibrator getInstance() {
         return sInstance;
@@ -27,14 +26,16 @@ public class NullVibrator extends Vibrator {
     }
 
     @Override // android.os.Vibrator
-    public void vibrate(int uid, String opPkg, VibrationEffect effect, String reason, VibrationAttributes attributes) {
-    }
+    public void vibrate(
+            int uid,
+            String opPkg,
+            VibrationEffect effect,
+            String reason,
+            VibrationAttributes attributes) {}
 
     @Override // android.os.Vibrator
-    public void cancel() {
-    }
+    public void cancel() {}
 
     @Override // android.os.Vibrator
-    public void cancel(int usageFilter) {
-    }
+    public void cancel(int usageFilter) {}
 }

@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.SemSystemProperties;
 import android.os.UserHandle;
+
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
+
 import com.samsung.android.server.continuity.sem.SemWrapper;
+
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -35,19 +38,29 @@ public abstract class Utils {
             if (str != null) {
                 str = str.toUpperCase(Locale.ENGLISH);
             }
-            String substring = (str == null || str.length() <= 5 || !str.startsWith("UTC")) ? null : str.substring(4);
-            if (substring == null || !(substring.startsWith("LEMAN") || substring.startsWith("LASSEN") || substring.startsWith("NEUS"))) {
+            String substring =
+                    (str == null || str.length() <= 5 || !str.startsWith("UTC"))
+                            ? null
+                            : str.substring(4);
+            if (substring == null
+                    || !(substring.startsWith("LEMAN")
+                            || substring.startsWith("LASSEN")
+                            || substring.startsWith("NEUS"))) {
                 mIsHighPowerConsumptionChipset = 0;
             } else {
                 mIsHighPowerConsumptionChipset = 1;
             }
         }
-        GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("isHighPowerConsumptionChipset : "), mIsHighPowerConsumptionChipset, "[MCF_DS_SYS]_Utils");
+        GestureWakeup$$ExternalSyntheticOutline0.m(
+                new StringBuilder("isHighPowerConsumptionChipset : "),
+                mIsHighPowerConsumptionChipset,
+                "[MCF_DS_SYS]_Utils");
         return mIsHighPowerConsumptionChipset == 1;
     }
 
     public static boolean isPackageInstalled(Context context, String str) {
-        Iterator<ApplicationInfo> it = context.getPackageManager().getInstalledApplications(128).iterator();
+        Iterator<ApplicationInfo> it =
+                context.getPackageManager().getInstalledApplications(128).iterator();
         while (it.hasNext()) {
             if (str.equals(it.next().packageName)) {
                 return true;
@@ -76,7 +89,11 @@ public abstract class Utils {
         if (DEBUG) {
             return str;
         }
-        if (!(str.isEmpty() ? false : Pattern.compile("^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$").matcher(str).find())) {
+        if (!(str.isEmpty()
+                ? false
+                : Pattern.compile("^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$")
+                        .matcher(str)
+                        .find())) {
             return str;
         }
         return "($m)" + str.substring(9, 14);

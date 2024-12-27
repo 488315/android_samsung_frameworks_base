@@ -70,7 +70,12 @@ public class DrmInfoRequest {
     }
 
     boolean isValid() {
-        return (this.mMimeType == null || this.mMimeType.equals("") || this.mRequestInformation == null || !isValidType(this.mInfoType)) ? false : true;
+        return (this.mMimeType == null
+                        || this.mMimeType.equals("")
+                        || this.mRequestInformation == null
+                        || !isValidType(this.mInfoType))
+                ? false
+                : true;
     }
 
     static boolean isValidType(int infoType) {

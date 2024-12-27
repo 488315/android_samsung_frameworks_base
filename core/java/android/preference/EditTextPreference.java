@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.preference.Preference;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowInsets;
 import android.widget.EditText;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -22,7 +22,8 @@ public class EditTextPreference extends DialogPreference {
     private String mText;
     private boolean mTextSet;
 
-    public EditTextPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public EditTextPreference(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mEditText = new EditText(context, attrs);
         this.mEditText.setId(16908291);
@@ -142,19 +143,22 @@ public class EditTextPreference extends DialogPreference {
     }
 
     private static class SavedState extends Preference.BaseSavedState {
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: android.preference.EditTextPreference.SavedState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<
+                        SavedState>() { // from class:
+                                        // android.preference.EditTextPreference.SavedState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
         String text;
 
         public SavedState(Parcel source) {

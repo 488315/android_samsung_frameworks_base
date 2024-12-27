@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class OutputConfigId implements Parcelable {
-    public static final Parcelable.Creator<OutputConfigId> CREATOR = new Parcelable.Creator<OutputConfigId>() { // from class: android.hardware.camera2.extension.OutputConfigId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OutputConfigId createFromParcel(Parcel _aidl_source) {
-            OutputConfigId _aidl_out = new OutputConfigId();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<OutputConfigId> CREATOR =
+            new Parcelable.Creator<OutputConfigId>() { // from class:
+                // android.hardware.camera2.extension.OutputConfigId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OutputConfigId createFromParcel(Parcel _aidl_source) {
+                    OutputConfigId _aidl_out = new OutputConfigId();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OutputConfigId[] newArray(int _aidl_size) {
-            return new OutputConfigId[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OutputConfigId[] newArray(int _aidl_size) {
+                    return new OutputConfigId[_aidl_size];
+                }
+            };
     public int id = 0;
 
     @Override // android.os.Parcelable

@@ -11,7 +11,9 @@ import android.os.UserManager;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +21,8 @@ import java.util.Set;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class CameraAccessController extends CameraManager.AvailabilityCallback implements AutoCloseable {
+public final class CameraAccessController extends CameraManager.AvailabilityCallback
+        implements AutoCloseable {
     public final VirtualDeviceManagerService$$ExternalSyntheticLambda2 mBlockedCallback;
     public final CameraManager mCameraManager;
     public final Context mContext;
@@ -44,7 +47,11 @@ public final class CameraAccessController extends CameraManager.AvailabilityCall
         public Set packageUids;
     }
 
-    public CameraAccessController(Context context, VirtualDeviceManagerInternal virtualDeviceManagerInternal, VirtualDeviceManagerService$$ExternalSyntheticLambda2 virtualDeviceManagerService$$ExternalSyntheticLambda2) {
+    public CameraAccessController(
+            Context context,
+            VirtualDeviceManagerInternal virtualDeviceManagerInternal,
+            VirtualDeviceManagerService$$ExternalSyntheticLambda2
+                    virtualDeviceManagerService$$ExternalSyntheticLambda2) {
         this.mContext = context;
         this.mVirtualDeviceManagerInternal = virtualDeviceManagerInternal;
         this.mBlockedCallback = virtualDeviceManagerService$$ExternalSyntheticLambda2;
@@ -59,9 +66,13 @@ public final class CameraAccessController extends CameraManager.AvailabilityCall
             try {
                 int i = this.mObserverCount;
                 if (i < 0) {
-                    Slog.wtf("CameraAccessController", "Unexpected negative mObserverCount: " + this.mObserverCount);
+                    Slog.wtf(
+                            "CameraAccessController",
+                            "Unexpected negative mObserverCount: " + this.mObserverCount);
                 } else if (i > 0) {
-                    Slog.w("CameraAccessController", "Unexpected close with observers remaining: " + this.mObserverCount);
+                    Slog.w(
+                            "CameraAccessController",
+                            "Unexpected close with observers remaining: " + this.mObserverCount);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -75,8 +86,11 @@ public final class CameraAccessController extends CameraManager.AvailabilityCall
             try {
                 this.mAppsToBlockOnVirtualDevice.remove(str);
                 for (int size = this.mPackageToSessionData.size() - 1; size >= 0; size--) {
-                    InjectionSessionData injectionSessionData = (InjectionSessionData) this.mPackageToSessionData.valueAt(size);
-                    CameraInjectionSession cameraInjectionSession = (CameraInjectionSession) injectionSessionData.cameraIdToSession.get(str);
+                    InjectionSessionData injectionSessionData =
+                            (InjectionSessionData) this.mPackageToSessionData.valueAt(size);
+                    CameraInjectionSession cameraInjectionSession =
+                            (CameraInjectionSession)
+                                    injectionSessionData.cameraIdToSession.get(str);
                     if (cameraInjectionSession != null) {
                         cameraInjectionSession.close();
                         injectionSessionData.cameraIdToSession.remove(str);
@@ -95,15 +109,26 @@ public final class CameraAccessController extends CameraManager.AvailabilityCall
         int i;
         synchronized (this.mLock) {
             try {
-                InjectionSessionData injectionSessionData = (InjectionSessionData) this.mPackageToSessionData.get(str2);
+                InjectionSessionData injectionSessionData =
+                        (InjectionSessionData) this.mPackageToSessionData.get(str2);
                 List aliveUsers = this.mUserManager.getAliveUsers();
                 ArraySet arraySet = new ArraySet();
                 Iterator it = aliveUsers.iterator();
                 while (it.hasNext()) {
                     try {
-                        i = this.mPackageManager.getApplicationInfoAsUser(str2, 1, ((UserInfo) it.next()).getUserHandle().getIdentifier()).uid;
+                        i =
+                                this.mPackageManager.getApplicationInfoAsUser(
+                                                str2,
+                                                1,
+                                                ((UserInfo) it.next())
+                                                        .getUserHandle()
+                                                        .getIdentifier())
+                                        .uid;
                     } catch (PackageManager.NameNotFoundException e) {
-                        Slog.w("CameraAccessController", "queryUidFromPackageName - unknown package " + str2, e);
+                        Slog.w(
+                                "CameraAccessController",
+                                "queryUidFromPackageName - unknown package " + str2,
+                                e);
                         i = -1;
                     }
                     if (this.mVirtualDeviceManagerInternal.isAppRunningOnAnyVirtualDevice(i)) {
@@ -126,7 +151,11 @@ public final class CameraAccessController extends CameraManager.AvailabilityCall
                 openCameraInfo.packageName = str2;
                 openCameraInfo.packageUids = arraySet;
                 this.mAppsToBlockOnVirtualDevice.put(str, openCameraInfo);
-                CameraInjectionSession cameraInjectionSession = injectionSessionData != null ? (CameraInjectionSession) injectionSessionData.cameraIdToSession.get(str) : null;
+                CameraInjectionSession cameraInjectionSession =
+                        injectionSessionData != null
+                                ? (CameraInjectionSession)
+                                        injectionSessionData.cameraIdToSession.get(str)
+                                : null;
                 if (cameraInjectionSession != null) {
                     cameraInjectionSession.close();
                     injectionSessionData.cameraIdToSession.remove(str);
@@ -142,60 +171,116 @@ public final class CameraAccessController extends CameraManager.AvailabilityCall
 
     public final void startBlocking(final String str, final String str2) {
         try {
-            Slog.d("CameraAccessController", "startBlocking() cameraId: " + str2 + " packageName: " + str);
-            this.mCameraManager.injectCamera(str, str2, "", this.mContext.getMainExecutor(), new CameraInjectionSession.InjectionStatusCallback() { // from class: com.android.server.companion.virtual.CameraAccessController.1
-                public final void onInjectionError(int i) {
-                    CameraAccessController cameraAccessController = CameraAccessController.this;
-                    String str3 = str2;
-                    String str4 = str;
-                    if (i != 2) {
-                        cameraAccessController.getClass();
-                        Slog.e("CameraAccessController", "Unexpected injection error code:" + i + " for camera:" + str3 + " and package:" + str4);
-                        return;
-                    }
-                    synchronized (cameraAccessController.mLock) {
-                        try {
-                            InjectionSessionData injectionSessionData = (InjectionSessionData) cameraAccessController.mPackageToSessionData.get(str4);
-                            if (injectionSessionData != null) {
-                                VirtualDeviceManagerService$$ExternalSyntheticLambda2 virtualDeviceManagerService$$ExternalSyntheticLambda2 = cameraAccessController.mBlockedCallback;
-                                int i2 = injectionSessionData.appUid;
-                                VirtualDeviceManagerService virtualDeviceManagerService = virtualDeviceManagerService$$ExternalSyntheticLambda2.f$0;
-                                ArrayList virtualDevicesSnapshot = virtualDeviceManagerService.getVirtualDevicesSnapshot();
-                                for (int i3 = 0; i3 < virtualDevicesSnapshot.size(); i3++) {
-                                    VirtualDeviceImpl virtualDeviceImpl = (VirtualDeviceImpl) virtualDevicesSnapshot.get(i3);
-                                    virtualDeviceImpl.showToastWhereUidIsRunning(i2, virtualDeviceManagerService.getContext().getString(17043437, virtualDeviceImpl.mAssociationInfo.getDisplayName()), Looper.myLooper());
-                                }
-                            }
-                        } catch (Throwable th) {
-                            throw th;
-                        }
-                    }
-                }
-
-                public final void onInjectionSucceeded(CameraInjectionSession cameraInjectionSession) {
-                    CameraAccessController cameraAccessController = CameraAccessController.this;
-                    String str3 = str2;
-                    String str4 = str;
-                    synchronized (cameraAccessController.mLock) {
-                        try {
-                            InjectionSessionData injectionSessionData = (InjectionSessionData) cameraAccessController.mPackageToSessionData.get(str4);
-                            if (injectionSessionData == null) {
-                                Slog.e("CameraAccessController", "onInjectionSucceeded didn't find expected entry for package " + str4);
-                                cameraInjectionSession.close();
+            Slog.d(
+                    "CameraAccessController",
+                    "startBlocking() cameraId: " + str2 + " packageName: " + str);
+            this.mCameraManager.injectCamera(
+                    str,
+                    str2,
+                    "",
+                    this.mContext.getMainExecutor(),
+                    new CameraInjectionSession.InjectionStatusCallback() { // from class:
+                        // com.android.server.companion.virtual.CameraAccessController.1
+                        public final void onInjectionError(int i) {
+                            CameraAccessController cameraAccessController =
+                                    CameraAccessController.this;
+                            String str3 = str2;
+                            String str4 = str;
+                            if (i != 2) {
+                                cameraAccessController.getClass();
+                                Slog.e(
+                                        "CameraAccessController",
+                                        "Unexpected injection error code:"
+                                                + i
+                                                + " for camera:"
+                                                + str3
+                                                + " and package:"
+                                                + str4);
                                 return;
                             }
-                            CameraInjectionSession cameraInjectionSession2 = (CameraInjectionSession) injectionSessionData.cameraIdToSession.put(str3, cameraInjectionSession);
-                            if (cameraInjectionSession2 != null) {
-                                Slog.e("CameraAccessController", "onInjectionSucceeded found unexpected existing session for camera " + str3);
-                                cameraInjectionSession2.close();
+                            synchronized (cameraAccessController.mLock) {
+                                try {
+                                    InjectionSessionData injectionSessionData =
+                                            (InjectionSessionData)
+                                                    cameraAccessController.mPackageToSessionData
+                                                            .get(str4);
+                                    if (injectionSessionData != null) {
+                                        VirtualDeviceManagerService$$ExternalSyntheticLambda2
+                                                virtualDeviceManagerService$$ExternalSyntheticLambda2 =
+                                                        cameraAccessController.mBlockedCallback;
+                                        int i2 = injectionSessionData.appUid;
+                                        VirtualDeviceManagerService virtualDeviceManagerService =
+                                                virtualDeviceManagerService$$ExternalSyntheticLambda2
+                                                        .f$0;
+                                        ArrayList virtualDevicesSnapshot =
+                                                virtualDeviceManagerService
+                                                        .getVirtualDevicesSnapshot();
+                                        for (int i3 = 0; i3 < virtualDevicesSnapshot.size(); i3++) {
+                                            VirtualDeviceImpl virtualDeviceImpl =
+                                                    (VirtualDeviceImpl)
+                                                            virtualDevicesSnapshot.get(i3);
+                                            virtualDeviceImpl.showToastWhereUidIsRunning(
+                                                    i2,
+                                                    virtualDeviceManagerService
+                                                            .getContext()
+                                                            .getString(
+                                                                    17043437,
+                                                                    virtualDeviceImpl
+                                                                            .mAssociationInfo
+                                                                            .getDisplayName()),
+                                                    Looper.myLooper());
+                                        }
+                                    }
+                                } catch (Throwable th) {
+                                    throw th;
+                                }
                             }
-                        } finally {
                         }
-                    }
-                }
-            });
+
+                        public final void onInjectionSucceeded(
+                                CameraInjectionSession cameraInjectionSession) {
+                            CameraAccessController cameraAccessController =
+                                    CameraAccessController.this;
+                            String str3 = str2;
+                            String str4 = str;
+                            synchronized (cameraAccessController.mLock) {
+                                try {
+                                    InjectionSessionData injectionSessionData =
+                                            (InjectionSessionData)
+                                                    cameraAccessController.mPackageToSessionData
+                                                            .get(str4);
+                                    if (injectionSessionData == null) {
+                                        Slog.e(
+                                                "CameraAccessController",
+                                                "onInjectionSucceeded didn't find expected entry"
+                                                    + " for package "
+                                                        + str4);
+                                        cameraInjectionSession.close();
+                                        return;
+                                    }
+                                    CameraInjectionSession cameraInjectionSession2 =
+                                            (CameraInjectionSession)
+                                                    injectionSessionData.cameraIdToSession.put(
+                                                            str3, cameraInjectionSession);
+                                    if (cameraInjectionSession2 != null) {
+                                        Slog.e(
+                                                "CameraAccessController",
+                                                "onInjectionSucceeded found unexpected existing"
+                                                    + " session for camera "
+                                                        + str3);
+                                        cameraInjectionSession2.close();
+                                    }
+                                } finally {
+                                }
+                            }
+                        }
+                    });
         } catch (CameraAccessException e) {
-            Slog.e("CameraAccessController", BootReceiver$$ExternalSyntheticOutline0.m("Failed to injectCamera for cameraId:", str2, " package:", str), e);
+            Slog.e(
+                    "CameraAccessController",
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            "Failed to injectCamera for cameraId:", str2, " package:", str),
+                    e);
         }
     }
 }

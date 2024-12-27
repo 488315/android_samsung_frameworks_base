@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AudioTimestampInternal implements Parcelable {
-    public static final Parcelable.Creator<AudioTimestampInternal> CREATOR = new Parcelable.Creator<AudioTimestampInternal>() { // from class: android.media.AudioTimestampInternal.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioTimestampInternal createFromParcel(Parcel _aidl_source) {
-            AudioTimestampInternal _aidl_out = new AudioTimestampInternal();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioTimestampInternal> CREATOR =
+            new Parcelable.Creator<AudioTimestampInternal>() { // from class:
+                // android.media.AudioTimestampInternal.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioTimestampInternal createFromParcel(Parcel _aidl_source) {
+                    AudioTimestampInternal _aidl_out = new AudioTimestampInternal();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioTimestampInternal[] newArray(int _aidl_size) {
-            return new AudioTimestampInternal[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioTimestampInternal[] newArray(int _aidl_size) {
+                    return new AudioTimestampInternal[_aidl_size];
+                }
+            };
     public long position = 0;
     public long sec = 0;
     public int nsec = 0;

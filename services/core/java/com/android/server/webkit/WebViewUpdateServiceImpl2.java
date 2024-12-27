@@ -18,10 +18,12 @@ import android.webkit.UserPackage;
 import android.webkit.WebViewFactory;
 import android.webkit.WebViewProviderInfo;
 import android.webkit.WebViewZygote;
+
 import com.android.modules.expresslog.Counter;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.PinnerService$$ExternalSyntheticOutline0;
 import com.android.server.ProfileService$1$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -100,16 +102,29 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
                     return;
                 }
                 this.mAttemptedToRepairBefore = true;
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("No provider available for all users, trying to install and enable "), this.mDefaultProvider.packageName, "WebViewUpdateServiceImpl2");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder(
+                                "No provider available for all users, trying to install and"
+                                    + " enable "),
+                        this.mDefaultProvider.packageName,
+                        "WebViewUpdateServiceImpl2");
                 SystemImpl systemImpl = this.mSystemInterface;
                 Context context = this.mContext;
                 String str = this.mDefaultProvider.packageName;
                 systemImpl.getClass();
-                Iterator it = ((UserManager) context.getSystemService(UserManager.class)).getUsers().iterator();
+                Iterator it =
+                        ((UserManager) context.getSystemService(UserManager.class))
+                                .getUsers()
+                                .iterator();
                 while (it.hasNext()) {
-                    AppGlobals.getInitialApplication().createContextAsUser(UserHandle.of(((UserInfo) it.next()).id), 0).getPackageManager().getPackageInstaller().installExistingPackage(str, 0, null);
+                    AppGlobals.getInitialApplication()
+                            .createContextAsUser(UserHandle.of(((UserInfo) it.next()).id), 0)
+                            .getPackageManager()
+                            .getPackageInstaller()
+                            .installExistingPackage(str, 0, null);
                 }
-                this.mSystemInterface.enablePackageForAllUsers(this.mContext, this.mDefaultProvider.packageName);
+                this.mSystemInterface.enablePackageForAllUsers(
+                        this.mContext, this.mDefaultProvider.packageName);
             } catch (Throwable th) {
                 throw th;
             }
@@ -144,18 +159,66 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
         for (WebViewProviderInfo webViewProviderInfo : webViewProviderInfoArr) {
             Context context = this.mContext;
             systemImpl.getClass();
-            PackageInfo packageInfo = ((UserPackage) UserPackage.getPackageInfosAllUsers(context, webViewProviderInfo.packageName, 272630976).get(0)).getPackageInfo();
+            PackageInfo packageInfo =
+                    ((UserPackage)
+                                    UserPackage.getPackageInfosAllUsers(
+                                                    context,
+                                                    webViewProviderInfo.packageName,
+                                                    272630976)
+                                            .get(0))
+                            .getPackageInfo();
             if (packageInfo == null) {
-                printWriter.println(TextUtils.formatSimple("    %s is NOT installed.", new Object[]{webViewProviderInfo.packageName}));
+                printWriter.println(
+                        TextUtils.formatSimple(
+                                "    %s is NOT installed.",
+                                new Object[] {webViewProviderInfo.packageName}));
             } else {
                 int validityResult = validityResult(webViewProviderInfo, packageInfo);
-                String formatSimple = TextUtils.formatSimple("versionName: %s, versionCode: %d, targetSdkVersion: %d", new Object[]{packageInfo.versionName, Long.valueOf(packageInfo.getLongVersionCode()), Integer.valueOf(packageInfo.applicationInfo.targetSdkVersion)});
+                String formatSimple =
+                        TextUtils.formatSimple(
+                                "versionName: %s, versionCode: %d, targetSdkVersion: %d",
+                                new Object[] {
+                                    packageInfo.versionName,
+                                    Long.valueOf(packageInfo.getLongVersionCode()),
+                                    Integer.valueOf(packageInfo.applicationInfo.targetSdkVersion)
+                                });
                 if (validityResult == 0) {
                     Context context2 = this.mContext;
                     systemImpl.getClass();
-                    printWriter.println(TextUtils.formatSimple("    Valid package %s (%s) is %s installed/enabled for all users", new Object[]{packageInfo.packageName, formatSimple, isInstalledAndEnabledForAllUsers(UserPackage.getPackageInfosAllUsers(context2, webViewProviderInfo.packageName, 272630976)) ? "" : "NOT"}));
+                    printWriter.println(
+                            TextUtils.formatSimple(
+                                    "    Valid package %s (%s) is %s installed/enabled for all"
+                                        + " users",
+                                    new Object[] {
+                                        packageInfo.packageName,
+                                        formatSimple,
+                                        isInstalledAndEnabledForAllUsers(
+                                                        UserPackage.getPackageInfosAllUsers(
+                                                                context2,
+                                                                webViewProviderInfo.packageName,
+                                                                272630976))
+                                                ? ""
+                                                : "NOT"
+                                    }));
                 } else {
-                    printWriter.println(TextUtils.formatSimple("    Invalid package %s (%s), reason: %s", new Object[]{packageInfo.packageName, formatSimple, validityResult != 1 ? validityResult != 2 ? validityResult != 3 ? validityResult != 4 ? "Unexcepted validity-reason" : "No WebView-library manifest flag" : "Incorrect signature" : "Version code too low" : "SDK version too low"}));
+                    printWriter.println(
+                            TextUtils.formatSimple(
+                                    "    Invalid package %s (%s), reason: %s",
+                                    new Object[] {
+                                        packageInfo.packageName,
+                                        formatSimple,
+                                        validityResult != 1
+                                                ? validityResult != 2
+                                                        ? validityResult != 3
+                                                                ? validityResult != 4
+                                                                        ? "Unexcepted"
+                                                                              + " validity-reason"
+                                                                        : "No WebView-library"
+                                                                              + " manifest flag"
+                                                                : "Incorrect signature"
+                                                        : "Version code too low"
+                                                : "SDK version too low"
+                                    }));
                 }
             }
         }
@@ -170,17 +233,45 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
                 if (packageInfo == null) {
                     printWriter.println("  Current WebView package is null");
                 } else {
-                    printWriter.println(TextUtils.formatSimple("  Current WebView package (name, version): (%s, %s)", new Object[]{packageInfo.packageName, packageInfo.versionName}));
+                    printWriter.println(
+                            TextUtils.formatSimple(
+                                    "  Current WebView package (name, version): (%s, %s)",
+                                    new Object[] {
+                                        packageInfo.packageName, packageInfo.versionName
+                                    }));
                 }
-                printWriter.println(TextUtils.formatSimple("  Minimum targetSdkVersion: %d", new Object[]{33}));
-                printWriter.println(TextUtils.formatSimple("  Minimum WebView version code: %d", new Object[]{Long.valueOf(this.mMinimumVersionCode)}));
-                printWriter.println(TextUtils.formatSimple("  Number of relros started: %d", new Object[]{Integer.valueOf(this.mNumRelroCreationsStarted)}));
-                printWriter.println(TextUtils.formatSimple("  Number of relros finished: %d", new Object[]{Integer.valueOf(this.mNumRelroCreationsFinished)}));
-                printWriter.println(TextUtils.formatSimple("  WebView package dirty: %b", new Object[]{Boolean.valueOf(this.mWebViewPackageDirty)}));
-                printWriter.println(TextUtils.formatSimple("  Any WebView package installed: %b", new Object[]{Boolean.valueOf(this.mAnyWebViewInstalled)}));
+                printWriter.println(
+                        TextUtils.formatSimple(
+                                "  Minimum targetSdkVersion: %d", new Object[] {33}));
+                printWriter.println(
+                        TextUtils.formatSimple(
+                                "  Minimum WebView version code: %d",
+                                new Object[] {Long.valueOf(this.mMinimumVersionCode)}));
+                printWriter.println(
+                        TextUtils.formatSimple(
+                                "  Number of relros started: %d",
+                                new Object[] {Integer.valueOf(this.mNumRelroCreationsStarted)}));
+                printWriter.println(
+                        TextUtils.formatSimple(
+                                "  Number of relros finished: %d",
+                                new Object[] {Integer.valueOf(this.mNumRelroCreationsFinished)}));
+                printWriter.println(
+                        TextUtils.formatSimple(
+                                "  WebView package dirty: %b",
+                                new Object[] {Boolean.valueOf(this.mWebViewPackageDirty)}));
+                printWriter.println(
+                        TextUtils.formatSimple(
+                                "  Any WebView package installed: %b",
+                                new Object[] {Boolean.valueOf(this.mAnyWebViewInstalled)}));
                 try {
                     PackageInfo findPreferredWebViewPackage = findPreferredWebViewPackage();
-                    printWriter.println(TextUtils.formatSimple("  Preferred WebView package (name, version): (%s, %s)", new Object[]{findPreferredWebViewPackage.packageName, findPreferredWebViewPackage.versionName}));
+                    printWriter.println(
+                            TextUtils.formatSimple(
+                                    "  Preferred WebView package (name, version): (%s, %s)",
+                                    new Object[] {
+                                        findPreferredWebViewPackage.packageName,
+                                        findPreferredWebViewPackage.versionName
+                                    }));
                 } catch (WebViewPackageMissingException unused) {
                     printWriter.println("  Preferred WebView package: none");
                 }
@@ -193,7 +284,8 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
 
     @Override // com.android.server.webkit.WebViewUpdateServiceInterface
     public final void enableMultiProcess(boolean z) {
-        throw new IllegalStateException("enableMultiProcess shouldn't be called if update_service_v2 flag is set.");
+        throw new IllegalStateException(
+                "enableMultiProcess shouldn't be called if update_service_v2 flag is set.");
     }
 
     public final PackageInfo findPreferredWebViewPackage() {
@@ -219,22 +311,33 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
         }
         if (webViewProviderInfo != null) {
             try {
-                PackageInfo packageInfoForProvider2 = systemImpl.getPackageInfoForProvider(webViewProviderInfo);
+                PackageInfo packageInfoForProvider2 =
+                        systemImpl.getPackageInfoForProvider(webViewProviderInfo);
                 if (validityResult(webViewProviderInfo, packageInfoForProvider2) == 0) {
                     Context context2 = this.mContext;
                     systemImpl.getClass();
-                    if (isInstalledAndEnabledForAllUsers(UserPackage.getPackageInfosAllUsers(context2, webViewProviderInfo.packageName, 272630976))) {
+                    if (isInstalledAndEnabledForAllUsers(
+                            UserPackage.getPackageInfosAllUsers(
+                                    context2, webViewProviderInfo.packageName, 272630976))) {
                         return packageInfoForProvider2;
                     }
                 }
             } catch (PackageManager.NameNotFoundException unused) {
-                PinnerService$$ExternalSyntheticOutline0.m("User chosen WebView package (", string, ") not found", "WebViewUpdateServiceImpl2");
+                PinnerService$$ExternalSyntheticOutline0.m(
+                        "User chosen WebView package (",
+                        string,
+                        ") not found",
+                        "WebViewUpdateServiceImpl2");
             }
         }
         try {
             packageInfoForProvider = systemImpl.getPackageInfoForProvider(this.mDefaultProvider);
         } catch (PackageManager.NameNotFoundException unused2) {
-            ProfileService$1$$ExternalSyntheticOutline0.m(new StringBuilder("Default WebView package ("), this.mDefaultProvider.packageName, ") not found", "WebViewUpdateServiceImpl2");
+            ProfileService$1$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Default WebView package ("),
+                    this.mDefaultProvider.packageName,
+                    ") not found",
+                    "WebViewUpdateServiceImpl2");
         }
         if (validityResult(this.mDefaultProvider, packageInfoForProvider) == 0) {
             return packageInfoForProvider;
@@ -266,14 +369,20 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
         ArrayList arrayList = new ArrayList();
         for (int i = 0; i < webViewProviderInfoArr.length; i++) {
             try {
-                if (validityResult(webViewProviderInfoArr[i], systemImpl.getPackageInfoForProvider(webViewProviderInfoArr[i])) == 0) {
+                if (validityResult(
+                                webViewProviderInfoArr[i],
+                                systemImpl.getPackageInfoForProvider(webViewProviderInfoArr[i]))
+                        == 0) {
                     arrayList.add(new ProviderAndPackageInfo(webViewProviderInfoArr[i]));
                 }
             } catch (PackageManager.NameNotFoundException unused) {
             }
         }
-        ProviderAndPackageInfo[] providerAndPackageInfoArr = (ProviderAndPackageInfo[]) arrayList.toArray(new ProviderAndPackageInfo[arrayList.size()]);
-        WebViewProviderInfo[] webViewProviderInfoArr2 = new WebViewProviderInfo[providerAndPackageInfoArr.length];
+        ProviderAndPackageInfo[] providerAndPackageInfoArr =
+                (ProviderAndPackageInfo[])
+                        arrayList.toArray(new ProviderAndPackageInfo[arrayList.size()]);
+        WebViewProviderInfo[] webViewProviderInfoArr2 =
+                new WebViewProviderInfo[providerAndPackageInfoArr.length];
         for (int i2 = 0; i2 < providerAndPackageInfoArr.length; i2++) {
             webViewProviderInfoArr2[i2] = providerAndPackageInfoArr[i2].provider;
         }
@@ -300,7 +409,8 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
 
     @Override // com.android.server.webkit.WebViewUpdateServiceInterface
     public final boolean isMultiProcessEnabled() {
-        throw new IllegalStateException("isMultiProcessEnabled shouldn't be called if update_service_v2 flag is set.");
+        throw new IllegalStateException(
+                "isMultiProcessEnabled shouldn't be called if update_service_v2 flag is set.");
     }
 
     @Override // com.android.server.webkit.WebViewUpdateServiceInterface
@@ -321,10 +431,12 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
                     this.mNumRelroCreationsStarted = Integer.MAX_VALUE;
                     this.mNumRelroCreationsFinished = 0;
                     this.mSystemInterface.getClass();
-                    this.mNumRelroCreationsStarted = WebViewFactory.onWebViewProviderChanged(packageInfo);
+                    this.mNumRelroCreationsStarted =
+                            WebViewFactory.onWebViewProviderChanged(packageInfo);
                     Counter.logIncrement("webview.value_on_webview_provider_changed_counter");
                     if (packageInfo.packageName.equals(this.mDefaultProvider.packageName)) {
-                        Counter.logIncrement("webview.value_on_webview_provider_changed_with_default_package_counter");
+                        Counter.logIncrement(
+                                "webview.value_on_webview_provider_changed_with_default_package_counter");
                     }
                     checkIfRelrosDoneLocked();
                 } else {
@@ -334,28 +446,31 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
                 throw th;
             }
         }
-        AsyncTask.THREAD_POOL_EXECUTOR.execute(new Runnable() { // from class: com.android.server.webkit.WebViewUpdateServiceImpl2$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                WebViewUpdateServiceImpl2 webViewUpdateServiceImpl2 = WebViewUpdateServiceImpl2.this;
-                webViewUpdateServiceImpl2.waitForAndGetProvider();
-                webViewUpdateServiceImpl2.mSystemInterface.getClass();
-                WebViewZygote.getProcess();
-            }
-        });
+        AsyncTask.THREAD_POOL_EXECUTOR.execute(
+                new Runnable() { // from class:
+                                 // com.android.server.webkit.WebViewUpdateServiceImpl2$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        WebViewUpdateServiceImpl2 webViewUpdateServiceImpl2 =
+                                WebViewUpdateServiceImpl2.this;
+                        webViewUpdateServiceImpl2.waitForAndGetProvider();
+                        webViewUpdateServiceImpl2.mSystemInterface.getClass();
+                        WebViewZygote.getProcess();
+                    }
+                });
     }
 
     /* JADX WARN: Can't wrap try/catch for region: R(9:9|(5:10|11|(1:13)(1:47)|15|16)|(2:20|(6:22|23|24|(1:26)|28|29))|44|23|24|(0)|28|29) */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0052, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x0053, code lost:
-    
-        r7 = r3;
-        r3 = r2;
-        r2 = r7;
-     */
+
+       r7 = r3;
+       r3 = r2;
+       r2 = r7;
+    */
     /* JADX WARN: Removed duplicated region for block: B:26:0x004e A[Catch: all -> 0x0022, WebViewPackageMissingException -> 0x0052, TRY_LEAVE, TryCatch #0 {, blocks: (B:11:0x0017, B:13:0x001f, B:16:0x002a, B:18:0x0034, B:20:0x003c, B:24:0x0046, B:26:0x004e, B:28:0x0071, B:29:0x0075, B:42:0x0056), top: B:10:0x0017 }] */
     /* JADX WARN: Removed duplicated region for block: B:31:0x0078 A[ADDED_TO_REGION] */
     /* JADX WARN: Removed duplicated region for block: B:35:0x0083  */
@@ -463,7 +578,9 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
         L8d:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.webkit.WebViewUpdateServiceImpl2.packageStateChanged(java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.webkit.WebViewUpdateServiceImpl2.packageStateChanged(java.lang.String):void");
     }
 
     @Override // com.android.server.webkit.WebViewUpdateServiceInterface
@@ -477,9 +594,12 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
                     SystemImpl systemImpl = this.mSystemInterface;
                     Context context = this.mContext;
                     systemImpl.getClass();
-                    String string = Settings.Global.getString(context.getContentResolver(), "webview_provider");
+                    String string =
+                            Settings.Global.getString(
+                                    context.getContentResolver(), "webview_provider");
                     if (string != null && !string.equals(this.mCurrentWebViewPackage.packageName)) {
-                        this.mSystemInterface.updateUserSetting(this.mContext, this.mCurrentWebViewPackage.packageName);
+                        this.mSystemInterface.updateUserSetting(
+                                this.mContext, this.mCurrentWebViewPackage.packageName);
                     }
                     onWebViewProviderChanged(this.mCurrentWebViewPackage);
                 } catch (Throwable th) {
@@ -490,9 +610,15 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
                 attemptRepair();
             }
         } catch (WebViewPackageMissingException e) {
-            Slog.e("WebViewUpdateServiceImpl2", "Could not find valid WebView package to create relro with", e);
+            Slog.e(
+                    "WebViewUpdateServiceImpl2",
+                    "Could not find valid WebView package to create relro with",
+                    e);
         } catch (Throwable th2) {
-            Slog.wtf("WebViewUpdateServiceImpl2", "error preparing webview provider from system server", th2);
+            Slog.wtf(
+                    "WebViewUpdateServiceImpl2",
+                    "error preparing webview provider from system server",
+                    th2);
         }
     }
 
@@ -510,7 +636,9 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
         Context context = this.mContext;
         WebViewProviderInfo webViewProviderInfo = this.mDefaultProvider;
         this.mSystemInterface.getClass();
-        return !isInstalledAndEnabledForAllUsers(UserPackage.getPackageInfosAllUsers(context, webViewProviderInfo.packageName, 272630976));
+        return !isInstalledAndEnabledForAllUsers(
+                UserPackage.getPackageInfosAllUsers(
+                        context, webViewProviderInfo.packageName, 272630976));
     }
 
     /* JADX WARN: Removed duplicated region for block: B:14:0x002c A[Catch: all -> 0x0011, TRY_ENTER, TryCatch #0 {, blocks: (B:4:0x0005, B:6:0x0009, B:8:0x0013, B:10:0x001a, B:14:0x002c, B:16:0x0031, B:17:0x0035, B:29:0x0048, B:30:0x005b), top: B:3:0x0005, inners: #1 }] */
@@ -584,10 +712,13 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
             monitor-exit(r1)     // Catch: java.lang.Throwable -> L11
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.webkit.WebViewUpdateServiceImpl2.updateCurrentWebViewPackage(java.lang.String):android.content.pm.PackageInfo");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.webkit.WebViewUpdateServiceImpl2.updateCurrentWebViewPackage(java.lang.String):android.content.pm.PackageInfo");
     }
 
-    public final int validityResult(WebViewProviderInfo webViewProviderInfo, PackageInfo packageInfo) {
+    public final int validityResult(
+            WebViewProviderInfo webViewProviderInfo, PackageInfo packageInfo) {
         int i;
         if (!UserPackage.hasCorrectTargetSdkVersion(packageInfo)) {
             return 1;
@@ -602,7 +733,11 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
                     try {
                         String str = webViewProviderInfo2.packageName;
                         systemImpl.getClass();
-                        long longVersionCode2 = AppGlobals.getInitialApplication().getPackageManager().getPackageInfo(str, 2097152).getLongVersionCode();
+                        long longVersionCode2 =
+                                AppGlobals.getInitialApplication()
+                                        .getPackageManager()
+                                        .getPackageInfo(str, 2097152)
+                                        .getLongVersionCode();
                         if (j2 < 0 || longVersionCode2 < j2) {
                             j2 = longVersionCode2;
                         }
@@ -626,8 +761,7 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
             }
             for (Signature signature : webViewProviderInfo.signatures) {
                 i = 0;
-                if (!signature.equals(packageInfo.signatures[0])) {
-                }
+                if (!signature.equals(packageInfo.signatures[0])) {}
             }
             return 3;
         }
@@ -639,9 +773,9 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:9:0x001c, code lost:
-    
-        if (r11.mAnyWebViewInstalled != false) goto L10;
-     */
+
+       if (r11.mAnyWebViewInstalled != false) goto L10;
+    */
     /* JADX WARN: Removed duplicated region for block: B:12:0x0023 A[Catch: all -> 0x0035, TRY_LEAVE, TryCatch #0 {, blocks: (B:4:0x000e, B:6:0x0014, B:8:0x001a, B:12:0x0023, B:16:0x002d, B:17:0x0037, B:19:0x003b, B:21:0x0041, B:26:0x0046, B:29:0x0083, B:36:0x004b, B:39:0x0051), top: B:3:0x000e }] */
     /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:23:0x0045 -> B:10:0x001e). Please report as a decompilation issue!!! */
     /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:40:0x0020 -> B:11:0x0021). Please report as a decompilation issue!!! */
@@ -742,6 +876,8 @@ public final class WebViewUpdateServiceImpl2 implements WebViewUpdateServiceInte
             monitor-exit(r4)     // Catch: java.lang.Throwable -> L35
             throw r11
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.webkit.WebViewUpdateServiceImpl2.waitForAndGetProvider():android.webkit.WebViewProviderResponse");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.webkit.WebViewUpdateServiceImpl2.waitForAndGetProvider():android.webkit.WebViewProviderResponse");
     }
 }

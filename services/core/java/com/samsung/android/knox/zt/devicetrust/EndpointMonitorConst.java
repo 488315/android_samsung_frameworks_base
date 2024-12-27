@@ -166,7 +166,11 @@ public final class EndpointMonitorConst {
     }
 
     public static String translateClass(int i) {
-        return i != 1 ? i != 2 ? BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "Unknown(", ")") : "Domain Access" : "File Access";
+        return i != 1
+                ? i != 2
+                        ? BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "Unknown(", ")")
+                        : "Domain Access"
+                : "File Access";
     }
 
     public static String translateEvent(int i) {
@@ -227,13 +231,23 @@ public final class EndpointMonitorConst {
                     case 213:
                         return "f2fs_datawrite_end";
                     default:
-                        return BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "Unknown(", ")");
+                        return BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i, "Unknown(", ")");
                 }
         }
     }
 
     public static String translateSystem(int i) {
-        return i != 1 ? i != 2 ? i != 3 ? i != 4 ? BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "Unknown(", ")") : "sched" : "sock" : "f2fs" : "raw_syscalls";
+        return i != 1
+                ? i != 2
+                        ? i != 3
+                                ? i != 4
+                                        ? BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                i, "Unknown(", ")")
+                                        : "sched"
+                                : "sock"
+                        : "f2fs"
+                : "raw_syscalls";
     }
 
     public static boolean validateMode(int i) {

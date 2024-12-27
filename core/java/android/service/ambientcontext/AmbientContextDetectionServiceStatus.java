@@ -5,33 +5,42 @@ import android.annotation.SystemApi;
 import android.app.ambientcontext.AmbientContextManager;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class AmbientContextDetectionServiceStatus implements Parcelable {
-    public static final Parcelable.Creator<AmbientContextDetectionServiceStatus> CREATOR = new Parcelable.Creator<AmbientContextDetectionServiceStatus>() { // from class: android.service.ambientcontext.AmbientContextDetectionServiceStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AmbientContextDetectionServiceStatus[] newArray(int size) {
-            return new AmbientContextDetectionServiceStatus[size];
-        }
+    public static final Parcelable.Creator<AmbientContextDetectionServiceStatus> CREATOR =
+            new Parcelable.Creator<
+                    AmbientContextDetectionServiceStatus>() { // from class:
+                                                              // android.service.ambientcontext.AmbientContextDetectionServiceStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AmbientContextDetectionServiceStatus[] newArray(int size) {
+                    return new AmbientContextDetectionServiceStatus[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AmbientContextDetectionServiceStatus createFromParcel(Parcel in) {
-            return new AmbientContextDetectionServiceStatus(in);
-        }
-    };
-    public static final String STATUS_RESPONSE_BUNDLE_KEY = "android.app.ambientcontext.AmbientContextServiceStatusBundleKey";
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AmbientContextDetectionServiceStatus createFromParcel(Parcel in) {
+                    return new AmbientContextDetectionServiceStatus(in);
+                }
+            };
+    public static final String STATUS_RESPONSE_BUNDLE_KEY =
+            "android.app.ambientcontext.AmbientContextServiceStatusBundleKey";
     private final String mPackageName;
     private final int mStatusCode;
 
     AmbientContextDetectionServiceStatus(int statusCode, String packageName) {
         this.mStatusCode = statusCode;
-        AnnotationValidations.validate((Class<? extends Annotation>) AmbientContextManager.StatusCode.class, (Annotation) null, this.mStatusCode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) AmbientContextManager.StatusCode.class,
+                (Annotation) null,
+                this.mStatusCode);
         this.mPackageName = packageName;
     }
 
@@ -44,7 +53,11 @@ public final class AmbientContextDetectionServiceStatus implements Parcelable {
     }
 
     public String toString() {
-        return "AmbientContextDetectionServiceStatus { statusCode = " + this.mStatusCode + ", packageName = " + this.mPackageName + " }";
+        return "AmbientContextDetectionServiceStatus { statusCode = "
+                + this.mStatusCode
+                + ", packageName = "
+                + this.mPackageName
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -64,9 +77,13 @@ public final class AmbientContextDetectionServiceStatus implements Parcelable {
         int statusCode = in.readInt();
         String packageName = in.readString();
         this.mStatusCode = statusCode;
-        AnnotationValidations.validate((Class<? extends Annotation>) AmbientContextManager.StatusCode.class, (Annotation) null, this.mStatusCode);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) AmbientContextManager.StatusCode.class,
+                (Annotation) null,
+                this.mStatusCode);
         this.mPackageName = packageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
     }
 
     public static final class Builder {
@@ -92,13 +109,15 @@ public final class AmbientContextDetectionServiceStatus implements Parcelable {
             if ((this.mBuilderFieldsSet & 1) == 0) {
                 this.mStatusCode = 0;
             }
-            AmbientContextDetectionServiceStatus o = new AmbientContextDetectionServiceStatus(this.mStatusCode, this.mPackageName);
+            AmbientContextDetectionServiceStatus o =
+                    new AmbientContextDetectionServiceStatus(this.mStatusCode, this.mPackageName);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 2) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }

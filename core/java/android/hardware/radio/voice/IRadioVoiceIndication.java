@@ -8,21 +8,25 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioVoiceIndication extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$voice$IRadioVoiceIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$voice$IRadioVoiceIndication".replace('$', '.');
     public static final String HASH = "78fb79bcb32590a868b3eb7affb39ab90e4ca782";
     public static final int VERSION = 3;
 
-    void callRing(int i, boolean z, CdmaSignalInfoRecord cdmaSignalInfoRecord) throws RemoteException;
+    void callRing(int i, boolean z, CdmaSignalInfoRecord cdmaSignalInfoRecord)
+            throws RemoteException;
 
     void callStateChanged(int i) throws RemoteException;
 
     void cdmaCallWaiting(int i, CdmaCallWaiting cdmaCallWaiting) throws RemoteException;
 
-    void cdmaInfoRec(int i, CdmaInformationRecord[] cdmaInformationRecordArr) throws RemoteException;
+    void cdmaInfoRec(int i, CdmaInformationRecord[] cdmaInformationRecordArr)
+            throws RemoteException;
 
     void cdmaOtaProvisionStatus(int i, int i2) throws RemoteException;
 
-    void currentEmergencyNumberList(int i, EmergencyNumber[] emergencyNumberArr) throws RemoteException;
+    void currentEmergencyNumberList(int i, EmergencyNumber[] emergencyNumberArr)
+            throws RemoteException;
 
     void enterEmergencyCallbackMode(int i) throws RemoteException;
 
@@ -34,7 +38,8 @@ public interface IRadioVoiceIndication extends IInterface {
 
     void indicateRingbackTone(int i, boolean z) throws RemoteException;
 
-    void onSupplementaryServiceIndication(int i, StkCcUnsolSsResult stkCcUnsolSsResult) throws RemoteException;
+    void onSupplementaryServiceIndication(int i, StkCcUnsolSsResult stkCcUnsolSsResult)
+            throws RemoteException;
 
     void onUssd(int i, int i2, String str) throws RemoteException;
 
@@ -48,64 +53,53 @@ public interface IRadioVoiceIndication extends IInterface {
 
     public static class Default implements IRadioVoiceIndication {
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void callRing(int type, boolean isGsm, CdmaSignalInfoRecord record) throws RemoteException {
-        }
+        public void callRing(int type, boolean isGsm, CdmaSignalInfoRecord record)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void callStateChanged(int type) throws RemoteException {
-        }
+        public void callStateChanged(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void cdmaCallWaiting(int type, CdmaCallWaiting callWaitingRecord) throws RemoteException {
-        }
+        public void cdmaCallWaiting(int type, CdmaCallWaiting callWaitingRecord)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void cdmaInfoRec(int type, CdmaInformationRecord[] records) throws RemoteException {
-        }
+        public void cdmaInfoRec(int type, CdmaInformationRecord[] records) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void cdmaOtaProvisionStatus(int type, int status) throws RemoteException {
-        }
+        public void cdmaOtaProvisionStatus(int type, int status) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void currentEmergencyNumberList(int type, EmergencyNumber[] emergencyNumberList) throws RemoteException {
-        }
+        public void currentEmergencyNumberList(int type, EmergencyNumber[] emergencyNumberList)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void enterEmergencyCallbackMode(int type) throws RemoteException {
-        }
+        public void enterEmergencyCallbackMode(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void exitEmergencyCallbackMode(int type) throws RemoteException {
-        }
+        public void exitEmergencyCallbackMode(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void indicateRingbackTone(int type, boolean start) throws RemoteException {
-        }
+        public void indicateRingbackTone(int type, boolean start) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void onSupplementaryServiceIndication(int type, StkCcUnsolSsResult ss) throws RemoteException {
-        }
+        public void onSupplementaryServiceIndication(int type, StkCcUnsolSsResult ss)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void onUssd(int type, int modeType, String msg) throws RemoteException {
-        }
+        public void onUssd(int type, int modeType, String msg) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void resendIncallMute(int type) throws RemoteException {
-        }
+        public void resendIncallMute(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void srvccStateNotify(int type, int state) throws RemoteException {
-        }
+        public void srvccStateNotify(int type, int state) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void stkCallControlAlphaNotify(int type, String alpha) throws RemoteException {
-        }
+        public void stkCallControlAlphaNotify(int type, String alpha) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
-        public void stkCallSetup(int type, long timeout) throws RemoteException {
-        }
+        public void stkCallSetup(int type, long timeout) throws RemoteException {}
 
         @Override // android.hardware.radio.voice.IRadioVoiceIndication
         public int getInterfaceVersion() {
@@ -123,7 +117,7 @@ public interface IRadioVoiceIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioVoiceIndication {
+    public abstract static class Stub extends Binder implements IRadioVoiceIndication {
         static final int TRANSACTION_callRing = 1;
         static final int TRANSACTION_callStateChanged = 2;
         static final int TRANSACTION_cdmaCallWaiting = 3;
@@ -164,7 +158,8 @@ public interface IRadioVoiceIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -187,7 +182,9 @@ public interface IRadioVoiceIndication extends IInterface {
                 case 1:
                     int _arg0 = data.readInt();
                     boolean _arg1 = data.readBoolean();
-                    CdmaSignalInfoRecord _arg2 = (CdmaSignalInfoRecord) data.readTypedObject(CdmaSignalInfoRecord.CREATOR);
+                    CdmaSignalInfoRecord _arg2 =
+                            (CdmaSignalInfoRecord)
+                                    data.readTypedObject(CdmaSignalInfoRecord.CREATOR);
                     data.enforceNoDataAvail();
                     callRing(_arg0, _arg1, _arg2);
                     return true;
@@ -198,13 +195,16 @@ public interface IRadioVoiceIndication extends IInterface {
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    CdmaCallWaiting _arg12 = (CdmaCallWaiting) data.readTypedObject(CdmaCallWaiting.CREATOR);
+                    CdmaCallWaiting _arg12 =
+                            (CdmaCallWaiting) data.readTypedObject(CdmaCallWaiting.CREATOR);
                     data.enforceNoDataAvail();
                     cdmaCallWaiting(_arg03, _arg12);
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    CdmaInformationRecord[] _arg13 = (CdmaInformationRecord[]) data.createTypedArray(CdmaInformationRecord.CREATOR);
+                    CdmaInformationRecord[] _arg13 =
+                            (CdmaInformationRecord[])
+                                    data.createTypedArray(CdmaInformationRecord.CREATOR);
                     data.enforceNoDataAvail();
                     cdmaInfoRec(_arg04, _arg13);
                     return true;
@@ -216,7 +216,8 @@ public interface IRadioVoiceIndication extends IInterface {
                     return true;
                 case 6:
                     int _arg06 = data.readInt();
-                    EmergencyNumber[] _arg15 = (EmergencyNumber[]) data.createTypedArray(EmergencyNumber.CREATOR);
+                    EmergencyNumber[] _arg15 =
+                            (EmergencyNumber[]) data.createTypedArray(EmergencyNumber.CREATOR);
                     data.enforceNoDataAvail();
                     currentEmergencyNumberList(_arg06, _arg15);
                     return true;
@@ -238,7 +239,8 @@ public interface IRadioVoiceIndication extends IInterface {
                     return true;
                 case 10:
                     int _arg010 = data.readInt();
-                    StkCcUnsolSsResult _arg17 = (StkCcUnsolSsResult) data.readTypedObject(StkCcUnsolSsResult.CREATOR);
+                    StkCcUnsolSsResult _arg17 =
+                            (StkCcUnsolSsResult) data.readTypedObject(StkCcUnsolSsResult.CREATOR);
                     data.enforceNoDataAvail();
                     onSupplementaryServiceIndication(_arg010, _arg17);
                     return true;
@@ -296,7 +298,8 @@ public interface IRadioVoiceIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceIndication
-            public void callRing(int type, boolean isGsm, CdmaSignalInfoRecord record) throws RemoteException {
+            public void callRing(int type, boolean isGsm, CdmaSignalInfoRecord record)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -328,7 +331,8 @@ public interface IRadioVoiceIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceIndication
-            public void cdmaCallWaiting(int type, CdmaCallWaiting callWaitingRecord) throws RemoteException {
+            public void cdmaCallWaiting(int type, CdmaCallWaiting callWaitingRecord)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -344,7 +348,8 @@ public interface IRadioVoiceIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceIndication
-            public void cdmaInfoRec(int type, CdmaInformationRecord[] records) throws RemoteException {
+            public void cdmaInfoRec(int type, CdmaInformationRecord[] records)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -368,7 +373,8 @@ public interface IRadioVoiceIndication extends IInterface {
                     _data.writeInt(status);
                     boolean _status = this.mRemote.transact(5, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method cdmaOtaProvisionStatus is unimplemented.");
+                        throw new RemoteException(
+                                "Method cdmaOtaProvisionStatus is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -376,7 +382,8 @@ public interface IRadioVoiceIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceIndication
-            public void currentEmergencyNumberList(int type, EmergencyNumber[] emergencyNumberList) throws RemoteException {
+            public void currentEmergencyNumberList(int type, EmergencyNumber[] emergencyNumberList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -384,7 +391,8 @@ public interface IRadioVoiceIndication extends IInterface {
                     _data.writeTypedArray(emergencyNumberList, 0);
                     boolean _status = this.mRemote.transact(6, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method currentEmergencyNumberList is unimplemented.");
+                        throw new RemoteException(
+                                "Method currentEmergencyNumberList is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -399,7 +407,8 @@ public interface IRadioVoiceIndication extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(7, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method enterEmergencyCallbackMode is unimplemented.");
+                        throw new RemoteException(
+                                "Method enterEmergencyCallbackMode is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -414,7 +423,8 @@ public interface IRadioVoiceIndication extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(8, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method exitEmergencyCallbackMode is unimplemented.");
+                        throw new RemoteException(
+                                "Method exitEmergencyCallbackMode is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -438,7 +448,8 @@ public interface IRadioVoiceIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.voice.IRadioVoiceIndication
-            public void onSupplementaryServiceIndication(int type, StkCcUnsolSsResult ss) throws RemoteException {
+            public void onSupplementaryServiceIndication(int type, StkCcUnsolSsResult ss)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -446,7 +457,8 @@ public interface IRadioVoiceIndication extends IInterface {
                     _data.writeTypedObject(ss, 0);
                     boolean _status = this.mRemote.transact(10, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method onSupplementaryServiceIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method onSupplementaryServiceIndication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -510,7 +522,8 @@ public interface IRadioVoiceIndication extends IInterface {
                     _data.writeString(alpha);
                     boolean _status = this.mRemote.transact(14, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method stkCallControlAlphaNotify is unimplemented.");
+                        throw new RemoteException(
+                                "Method stkCallControlAlphaNotify is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

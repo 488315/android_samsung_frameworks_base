@@ -55,7 +55,31 @@ public final class RawPortInfo implements Parcelable {
             int[] createIntArray = parcel.createIntArray();
             int readInt10 = parcel.readInt();
             int readInt11 = parcel.readInt();
-            return new RawPortInfo(readString, readInt, readInt2, readInt3, z, readInt4, z2, readInt5, z3, readBoolean, readInt6, readBoolean2, readInt7, readInt8, readBoolean3, readInt9, readBoolean4, createIntArray, readInt10, readInt11, (readInt11 & 1) != 0 ? (DisplayPortAltModeInfo) DisplayPortAltModeInfo.CREATOR.createFromParcel(parcel) : null);
+            return new RawPortInfo(
+                    readString,
+                    readInt,
+                    readInt2,
+                    readInt3,
+                    z,
+                    readInt4,
+                    z2,
+                    readInt5,
+                    z3,
+                    readBoolean,
+                    readInt6,
+                    readBoolean2,
+                    readInt7,
+                    readInt8,
+                    readBoolean3,
+                    readInt9,
+                    readBoolean4,
+                    createIntArray,
+                    readInt10,
+                    readInt11,
+                    (readInt11 & 1) != 0
+                            ? (DisplayPortAltModeInfo)
+                                    DisplayPortAltModeInfo.CREATOR.createFromParcel(parcel)
+                            : null);
         }
 
         @Override // android.os.Parcelable.Creator
@@ -64,7 +88,28 @@ public final class RawPortInfo implements Parcelable {
         }
     }
 
-    public RawPortInfo(String str, int i, int i2, int i3, boolean z, int i4, boolean z2, int i5, boolean z3, boolean z4, int i6, boolean z5, int i7, int i8, boolean z6, int i9, boolean z7, int[] iArr, int i10, int i11, DisplayPortAltModeInfo displayPortAltModeInfo) {
+    public RawPortInfo(
+            String str,
+            int i,
+            int i2,
+            int i3,
+            boolean z,
+            int i4,
+            boolean z2,
+            int i5,
+            boolean z3,
+            boolean z4,
+            int i6,
+            boolean z5,
+            int i7,
+            int i8,
+            boolean z6,
+            int i9,
+            boolean z7,
+            int[] iArr,
+            int i10,
+            int i11,
+            DisplayPortAltModeInfo displayPortAltModeInfo) {
         this.portId = str;
         this.supportedModes = i;
         this.supportedContaminantProtectionModes = i2;

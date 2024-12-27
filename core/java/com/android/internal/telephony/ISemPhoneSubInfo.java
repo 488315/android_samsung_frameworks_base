@@ -71,7 +71,8 @@ public interface ISemPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemPhoneSubInfo
-        public boolean changeDRX(int drxLibraryType, int cycle, int duration) throws RemoteException {
+        public boolean changeDRX(int drxLibraryType, int cycle, int duration)
+                throws RemoteException {
             return false;
         }
 
@@ -146,7 +147,8 @@ public interface ISemPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemPhoneSubInfo
-        public String getSubscriberIdForUiccAppType(int subId, int appType, String callingPackage) throws RemoteException {
+        public String getSubscriberIdForUiccAppType(int subId, int appType, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
@@ -156,7 +158,8 @@ public interface ISemPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemPhoneSubInfo
-        public byte[] getPsismscWithPhoneId(int phoneId, String callingPackage) throws RemoteException {
+        public byte[] getPsismscWithPhoneId(int phoneId, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
@@ -186,7 +189,8 @@ public interface ISemPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemPhoneSubInfo
-        public String getGroupIdLevel2ForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getGroupIdLevel2ForSubscriber(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
@@ -196,8 +200,8 @@ public interface ISemPhoneSubInfo extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISemPhoneSubInfo
-        public void clearMwiNotificationAndVoicemailCount(int phoneId, String callingPackage) throws RemoteException {
-        }
+        public void clearMwiNotificationAndVoicemailCount(int phoneId, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -205,7 +209,7 @@ public interface ISemPhoneSubInfo extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemPhoneSubInfo {
+    public abstract static class Stub extends Binder implements ISemPhoneSubInfo {
         static final int TRANSACTION_changeDRX = 2;
         static final int TRANSACTION_changeDRXForKodiak = 12;
         static final int TRANSACTION_clearMwiNotificationAndVoicemailCount = 27;
@@ -321,7 +325,8 @@ public interface ISemPhoneSubInfo extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemPhoneSubInfo.DESCRIPTOR);
             }
@@ -552,7 +557,8 @@ public interface ISemPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemPhoneSubInfo
-            public boolean changeDRX(int drxLibraryType, int cycle, int duration) throws RemoteException {
+            public boolean changeDRX(int drxLibraryType, int cycle, int duration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -804,7 +810,8 @@ public interface ISemPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemPhoneSubInfo
-            public String getSubscriberIdForUiccAppType(int subId, int appType, String callingPackage) throws RemoteException {
+            public String getSubscriberIdForUiccAppType(
+                    int subId, int appType, String callingPackage) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -840,7 +847,8 @@ public interface ISemPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemPhoneSubInfo
-            public byte[] getPsismscWithPhoneId(int phoneId, String callingPackage) throws RemoteException {
+            public byte[] getPsismscWithPhoneId(int phoneId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -942,7 +950,9 @@ public interface ISemPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemPhoneSubInfo
-            public String getGroupIdLevel2ForSubscriber(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getGroupIdLevel2ForSubscriber(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -961,7 +971,8 @@ public interface ISemPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemPhoneSubInfo
-            public boolean setDefaultSmsApplicationByForce(String packageName) throws RemoteException {
+            public boolean setDefaultSmsApplicationByForce(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -978,7 +989,8 @@ public interface ISemPhoneSubInfo extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISemPhoneSubInfo
-            public void clearMwiNotificationAndVoicemailCount(int phoneId, String callingPackage) throws RemoteException {
+            public void clearMwiNotificationAndVoicemailCount(int phoneId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -27,8 +27,7 @@ public final class Space extends View {
     }
 
     @Override // android.view.View
-    public void draw(Canvas canvas) {
-    }
+    public void draw(Canvas canvas) {}
 
     private static int getDefaultSize2(int size, int measureSpec) {
         int specMode = View.MeasureSpec.getMode(measureSpec);
@@ -48,6 +47,8 @@ public final class Space extends View {
 
     @Override // android.view.View
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(getDefaultSize2(getSuggestedMinimumWidth(), widthMeasureSpec), getDefaultSize2(getSuggestedMinimumHeight(), heightMeasureSpec));
+        setMeasuredDimension(
+                getDefaultSize2(getSuggestedMinimumWidth(), widthMeasureSpec),
+                getDefaultSize2(getSuggestedMinimumHeight(), heightMeasureSpec));
     }
 }

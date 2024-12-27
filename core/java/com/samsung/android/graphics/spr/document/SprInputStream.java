@@ -1,6 +1,7 @@
 package com.samsung.android.graphics.spr.document;
 
 import com.samsung.android.graphics.spr.document.shape.SprObjectBase;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;

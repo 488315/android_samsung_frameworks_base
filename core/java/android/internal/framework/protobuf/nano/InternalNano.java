@@ -1,7 +1,7 @@
 package android.internal.framework.protobuf.nano;
 
 import android.hardware.scontext.SContextConstants;
-import android.internal.framework.protobuf.nano.MapFactories;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -31,8 +31,7 @@ public final class InternalNano {
     static final Charset ISO_8859_1 = Charset.forName("ISO-8859-1");
     public static final Object LAZY_INIT_LOCK = new Object();
 
-    private InternalNano() {
-    }
+    private InternalNano() {}
 
     public static String stringDefaultValue(String bytes) {
         return new String(bytes.getBytes(ISO_8859_1), UTF_8);
@@ -245,9 +244,19 @@ public final class InternalNano {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public static final <K, V> Map<K, V> mergeMapEntry(CodedInputByteBufferNano codedInputByteBufferNano, Map<K, V> map, MapFactories.MapFactory mapFactory, int i, int i2, V v, int i3, int i4) throws IOException {
+    public static final <K, V> Map<K, V> mergeMapEntry(
+            CodedInputByteBufferNano codedInputByteBufferNano,
+            Map<K, V> map,
+            MapFactories.MapFactory mapFactory,
+            int i,
+            int i2,
+            V v,
+            int i3,
+            int i4)
+            throws IOException {
         Map<K, V> forMap = mapFactory.forMap(map);
-        int pushLimit = codedInputByteBufferNano.pushLimit(codedInputByteBufferNano.readRawVarint32());
+        int pushLimit =
+                codedInputByteBufferNano.pushLimit(codedInputByteBufferNano.readRawVarint32());
         Object obj = null;
         while (true) {
             int readTag = codedInputByteBufferNano.readTag();
@@ -278,14 +287,18 @@ public final class InternalNano {
         return forMap;
     }
 
-    public static <K, V> void serializeMapField(CodedOutputByteBufferNano output, Map<K, V> map, int number, int keyType, int valueType) throws IOException {
+    public static <K, V> void serializeMapField(
+            CodedOutputByteBufferNano output, Map<K, V> map, int number, int keyType, int valueType)
+            throws IOException {
         for (Map.Entry<K, V> entry : map.entrySet()) {
             K key = entry.getKey();
             V value = entry.getValue();
             if (key == null || value == null) {
                 throw new IllegalStateException("keys and values in maps cannot be null");
             }
-            int entrySize = CodedOutputByteBufferNano.computeFieldSize(1, keyType, key) + CodedOutputByteBufferNano.computeFieldSize(2, valueType, value);
+            int entrySize =
+                    CodedOutputByteBufferNano.computeFieldSize(1, keyType, key)
+                            + CodedOutputByteBufferNano.computeFieldSize(2, valueType, value);
             output.writeTag(number, 2);
             output.writeRawVarint32(entrySize);
             output.writeField(1, keyType, key);
@@ -293,7 +306,8 @@ public final class InternalNano {
         }
     }
 
-    public static <K, V> int computeMapFieldSize(Map<K, V> map, int number, int keyType, int valueType) {
+    public static <K, V> int computeMapFieldSize(
+            Map<K, V> map, int number, int keyType, int valueType) {
         int size = 0;
         int tagSize = CodedOutputByteBufferNano.computeTagSize(number);
         for (Map.Entry<K, V> entry : map.entrySet()) {
@@ -302,8 +316,13 @@ public final class InternalNano {
             if (key == null || value == null) {
                 throw new IllegalStateException("keys and values in maps cannot be null");
             }
-            int entrySize = CodedOutputByteBufferNano.computeFieldSize(1, keyType, key) + CodedOutputByteBufferNano.computeFieldSize(2, valueType, value);
-            size += tagSize + entrySize + CodedOutputByteBufferNano.computeRawVarint32Size(entrySize);
+            int entrySize =
+                    CodedOutputByteBufferNano.computeFieldSize(1, keyType, key)
+                            + CodedOutputByteBufferNano.computeFieldSize(2, valueType, value);
+            size +=
+                    tagSize
+                            + entrySize
+                            + CodedOutputByteBufferNano.computeRawVarint32Size(entrySize);
         }
         return size;
     }
@@ -328,7 +347,8 @@ public final class InternalNano {
             return false;
         }
         for (Map.Entry<K, V> entry : a.entrySet()) {
-            if (!b.containsKey(entry.getKey()) || !equalsMapValue(entry.getValue(), b.get(entry.getKey()))) {
+            if (!b.containsKey(entry.getKey())
+                    || !equalsMapValue(entry.getValue(), b.get(entry.getKey()))) {
                 return false;
             }
         }
@@ -363,7 +383,8 @@ public final class InternalNano {
         return o.hashCode();
     }
 
-    public static void cloneUnknownFieldData(ExtendableMessageNano original, ExtendableMessageNano cloned) {
+    public static void cloneUnknownFieldData(
+            ExtendableMessageNano original, ExtendableMessageNano cloned) {
         if (original.unknownFieldData != null) {
             cloned.unknownFieldData = original.unknownFieldData.m2103clone();
         }

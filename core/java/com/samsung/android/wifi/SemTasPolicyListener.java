@@ -14,8 +14,7 @@ public interface SemTasPolicyListener extends IInterface {
 
     public static class Default implements SemTasPolicyListener {
         @Override // com.samsung.android.wifi.SemTasPolicyListener
-        public void onTasPolicyChanged(int newTasPolicy, int windowSize) throws RemoteException {
-        }
+        public void onTasPolicyChanged(int newTasPolicy, int windowSize) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface SemTasPolicyListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements SemTasPolicyListener {
+    public abstract static class Stub extends Binder implements SemTasPolicyListener {
         static final int TRANSACTION_onTasPolicyChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface SemTasPolicyListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(SemTasPolicyListener.DESCRIPTOR);
             }
@@ -98,7 +98,8 @@ public interface SemTasPolicyListener extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.SemTasPolicyListener
-            public void onTasPolicyChanged(int newTasPolicy, int windowSize) throws RemoteException {
+            public void onTasPolicyChanged(int newTasPolicy, int windowSize)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(SemTasPolicyListener.DESCRIPTOR);

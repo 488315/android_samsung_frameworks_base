@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class SmsCbLocation implements Parcelable {
-    public static final Parcelable.Creator<SmsCbLocation> CREATOR = new Parcelable.Creator<SmsCbLocation>() { // from class: android.telephony.SmsCbLocation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmsCbLocation createFromParcel(Parcel in) {
-            return new SmsCbLocation(in);
-        }
+    public static final Parcelable.Creator<SmsCbLocation> CREATOR =
+            new Parcelable.Creator<
+                    SmsCbLocation>() { // from class: android.telephony.SmsCbLocation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmsCbLocation createFromParcel(Parcel in) {
+                    return new SmsCbLocation(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmsCbLocation[] newArray(int size) {
-            return new SmsCbLocation[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmsCbLocation[] newArray(int size) {
+                    return new SmsCbLocation[size];
+                }
+            };
     private final int mCid;
     private final int mLac;
     private final String mPlmn;

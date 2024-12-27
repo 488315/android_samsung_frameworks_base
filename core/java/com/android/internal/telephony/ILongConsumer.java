@@ -14,8 +14,7 @@ public interface ILongConsumer extends IInterface {
 
     public static class Default implements ILongConsumer {
         @Override // com.android.internal.telephony.ILongConsumer
-        public void accept(long result) throws RemoteException {
-        }
+        public void accept(long result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface ILongConsumer extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILongConsumer {
+    public abstract static class Stub extends Binder implements ILongConsumer {
         static final int TRANSACTION_accept = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface ILongConsumer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ILongConsumer.DESCRIPTOR);
             }

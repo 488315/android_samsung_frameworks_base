@@ -3,7 +3,9 @@ package com.samsung.android.wallpaper.legibilitycolors.utils.image;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.text.Spanned;
+
 import com.android.internal.graphics.ColorUtils;
+
 import com.samsung.android.wallpaper.legibilitycolors.utils.IUXColorUtils;
 
 /* loaded from: classes6.dex */
@@ -18,7 +20,8 @@ public class BitmapImageProcessing {
         this.mImageHeight = bitmap.getHeight();
         this.mConfig = bitmap.getConfig();
         this.mPixels = new int[this.mImageWidth * this.mImageHeight];
-        bitmap.getPixels(this.mPixels, 0, this.mImageWidth, 0, 0, this.mImageWidth, this.mImageHeight);
+        bitmap.getPixels(
+                this.mPixels, 0, this.mImageWidth, 0, 0, this.mImageWidth, this.mImageHeight);
     }
 
     public BitmapImageProcessing(int[] pixels, int width, int height, Bitmap.Config config) {
@@ -49,8 +52,10 @@ public class BitmapImageProcessing {
     }
 
     public Bitmap createBitmapFromCurrent() {
-        Bitmap convertedBitmap = Bitmap.createBitmap(this.mImageWidth, this.mImageHeight, this.mConfig);
-        convertedBitmap.setPixels(this.mPixels, 0, this.mImageWidth, 0, 0, this.mImageWidth, this.mImageHeight);
+        Bitmap convertedBitmap =
+                Bitmap.createBitmap(this.mImageWidth, this.mImageHeight, this.mConfig);
+        convertedBitmap.setPixels(
+                this.mPixels, 0, this.mImageWidth, 0, 0, this.mImageWidth, this.mImageHeight);
         return convertedBitmap;
     }
 

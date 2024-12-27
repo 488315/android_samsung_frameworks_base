@@ -6,21 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AudioRoute implements Parcelable {
-    public static final Parcelable.Creator<AudioRoute> CREATOR = new Parcelable.Creator<AudioRoute>() { // from class: android.media.AudioRoute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioRoute createFromParcel(Parcel _aidl_source) {
-            AudioRoute _aidl_out = new AudioRoute();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioRoute> CREATOR =
+            new Parcelable.Creator<AudioRoute>() { // from class: android.media.AudioRoute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioRoute createFromParcel(Parcel _aidl_source) {
+                    AudioRoute _aidl_out = new AudioRoute();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioRoute[] newArray(int _aidl_size) {
-            return new AudioRoute[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioRoute[] newArray(int _aidl_size) {
+                    return new AudioRoute[_aidl_size];
+                }
+            };
     public int[] sourcePortIds;
     public int sinkPortId = 0;
     public boolean isExclusive = false;

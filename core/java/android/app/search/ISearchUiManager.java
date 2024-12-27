@@ -1,6 +1,5 @@
 package android.app.search;
 
-import android.app.search.ISearchCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -11,42 +10,51 @@ import android.os.RemoteException;
 public interface ISearchUiManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.search.ISearchUiManager";
 
-    void createSearchSession(SearchContext searchContext, SearchSessionId searchSessionId, IBinder iBinder) throws RemoteException;
+    void createSearchSession(
+            SearchContext searchContext, SearchSessionId searchSessionId, IBinder iBinder)
+            throws RemoteException;
 
     void destroySearchSession(SearchSessionId searchSessionId) throws RemoteException;
 
-    void notifyEvent(SearchSessionId searchSessionId, Query query, SearchTargetEvent searchTargetEvent) throws RemoteException;
+    void notifyEvent(
+            SearchSessionId searchSessionId, Query query, SearchTargetEvent searchTargetEvent)
+            throws RemoteException;
 
-    void query(SearchSessionId searchSessionId, Query query, ISearchCallback iSearchCallback) throws RemoteException;
+    void query(SearchSessionId searchSessionId, Query query, ISearchCallback iSearchCallback)
+            throws RemoteException;
 
-    void registerEmptyQueryResultUpdateCallback(SearchSessionId searchSessionId, ISearchCallback iSearchCallback) throws RemoteException;
+    void registerEmptyQueryResultUpdateCallback(
+            SearchSessionId searchSessionId, ISearchCallback iSearchCallback)
+            throws RemoteException;
 
-    void unregisterEmptyQueryResultUpdateCallback(SearchSessionId searchSessionId, ISearchCallback iSearchCallback) throws RemoteException;
+    void unregisterEmptyQueryResultUpdateCallback(
+            SearchSessionId searchSessionId, ISearchCallback iSearchCallback)
+            throws RemoteException;
 
     public static class Default implements ISearchUiManager {
         @Override // android.app.search.ISearchUiManager
-        public void createSearchSession(SearchContext context, SearchSessionId sessionId, IBinder token) throws RemoteException {
-        }
+        public void createSearchSession(
+                SearchContext context, SearchSessionId sessionId, IBinder token)
+                throws RemoteException {}
 
         @Override // android.app.search.ISearchUiManager
-        public void query(SearchSessionId sessionId, Query input, ISearchCallback callback) throws RemoteException {
-        }
+        public void query(SearchSessionId sessionId, Query input, ISearchCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.search.ISearchUiManager
-        public void notifyEvent(SearchSessionId sessionId, Query input, SearchTargetEvent event) throws RemoteException {
-        }
+        public void notifyEvent(SearchSessionId sessionId, Query input, SearchTargetEvent event)
+                throws RemoteException {}
 
         @Override // android.app.search.ISearchUiManager
-        public void registerEmptyQueryResultUpdateCallback(SearchSessionId sessionId, ISearchCallback callback) throws RemoteException {
-        }
+        public void registerEmptyQueryResultUpdateCallback(
+                SearchSessionId sessionId, ISearchCallback callback) throws RemoteException {}
 
         @Override // android.app.search.ISearchUiManager
-        public void unregisterEmptyQueryResultUpdateCallback(SearchSessionId sessionId, ISearchCallback callback) throws RemoteException {
-        }
+        public void unregisterEmptyQueryResultUpdateCallback(
+                SearchSessionId sessionId, ISearchCallback callback) throws RemoteException {}
 
         @Override // android.app.search.ISearchUiManager
-        public void destroySearchSession(SearchSessionId sessionId) throws RemoteException {
-        }
+        public void destroySearchSession(SearchSessionId sessionId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -54,7 +62,7 @@ public interface ISearchUiManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISearchUiManager {
+    public abstract static class Stub extends Binder implements ISearchUiManager {
         static final int TRANSACTION_createSearchSession = 1;
         static final int TRANSACTION_destroySearchSession = 6;
         static final int TRANSACTION_notifyEvent = 3;
@@ -107,7 +115,8 @@ public interface ISearchUiManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISearchUiManager.DESCRIPTOR);
             }
@@ -117,45 +126,56 @@ public interface ISearchUiManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SearchContext _arg0 = (SearchContext) data.readTypedObject(SearchContext.CREATOR);
-                    SearchSessionId _arg1 = (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
+                    SearchContext _arg0 =
+                            (SearchContext) data.readTypedObject(SearchContext.CREATOR);
+                    SearchSessionId _arg1 =
+                            (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
                     IBinder _arg2 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     createSearchSession(_arg0, _arg1, _arg2);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    SearchSessionId _arg02 = (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
+                    SearchSessionId _arg02 =
+                            (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
                     Query _arg12 = (Query) data.readTypedObject(Query.CREATOR);
-                    ISearchCallback _arg22 = ISearchCallback.Stub.asInterface(data.readStrongBinder());
+                    ISearchCallback _arg22 =
+                            ISearchCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     query(_arg02, _arg12, _arg22);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    SearchSessionId _arg03 = (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
+                    SearchSessionId _arg03 =
+                            (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
                     Query _arg13 = (Query) data.readTypedObject(Query.CREATOR);
-                    SearchTargetEvent _arg23 = (SearchTargetEvent) data.readTypedObject(SearchTargetEvent.CREATOR);
+                    SearchTargetEvent _arg23 =
+                            (SearchTargetEvent) data.readTypedObject(SearchTargetEvent.CREATOR);
                     data.enforceNoDataAvail();
                     notifyEvent(_arg03, _arg13, _arg23);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    SearchSessionId _arg04 = (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
-                    ISearchCallback _arg14 = ISearchCallback.Stub.asInterface(data.readStrongBinder());
+                    SearchSessionId _arg04 =
+                            (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
+                    ISearchCallback _arg14 =
+                            ISearchCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerEmptyQueryResultUpdateCallback(_arg04, _arg14);
                     reply.writeNoException();
                     return true;
                 case 5:
-                    SearchSessionId _arg05 = (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
-                    ISearchCallback _arg15 = ISearchCallback.Stub.asInterface(data.readStrongBinder());
+                    SearchSessionId _arg05 =
+                            (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
+                    ISearchCallback _arg15 =
+                            ISearchCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterEmptyQueryResultUpdateCallback(_arg05, _arg15);
                     reply.writeNoException();
                     return true;
                 case 6:
-                    SearchSessionId _arg06 = (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
+                    SearchSessionId _arg06 =
+                            (SearchSessionId) data.readTypedObject(SearchSessionId.CREATOR);
                     data.enforceNoDataAvail();
                     destroySearchSession(_arg06);
                     reply.writeNoException();
@@ -182,7 +202,9 @@ public interface ISearchUiManager extends IInterface {
             }
 
             @Override // android.app.search.ISearchUiManager
-            public void createSearchSession(SearchContext context, SearchSessionId sessionId, IBinder token) throws RemoteException {
+            public void createSearchSession(
+                    SearchContext context, SearchSessionId sessionId, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -199,7 +221,8 @@ public interface ISearchUiManager extends IInterface {
             }
 
             @Override // android.app.search.ISearchUiManager
-            public void query(SearchSessionId sessionId, Query input, ISearchCallback callback) throws RemoteException {
+            public void query(SearchSessionId sessionId, Query input, ISearchCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -216,7 +239,8 @@ public interface ISearchUiManager extends IInterface {
             }
 
             @Override // android.app.search.ISearchUiManager
-            public void notifyEvent(SearchSessionId sessionId, Query input, SearchTargetEvent event) throws RemoteException {
+            public void notifyEvent(SearchSessionId sessionId, Query input, SearchTargetEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -233,7 +257,8 @@ public interface ISearchUiManager extends IInterface {
             }
 
             @Override // android.app.search.ISearchUiManager
-            public void registerEmptyQueryResultUpdateCallback(SearchSessionId sessionId, ISearchCallback callback) throws RemoteException {
+            public void registerEmptyQueryResultUpdateCallback(
+                    SearchSessionId sessionId, ISearchCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -249,7 +274,8 @@ public interface ISearchUiManager extends IInterface {
             }
 
             @Override // android.app.search.ISearchUiManager
-            public void unregisterEmptyQueryResultUpdateCallback(SearchSessionId sessionId, ISearchCallback callback) throws RemoteException {
+            public void unregisterEmptyQueryResultUpdateCallback(
+                    SearchSessionId sessionId, ISearchCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

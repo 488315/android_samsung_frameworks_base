@@ -3,26 +3,32 @@ package android.telecom;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class BluetoothCallQualityReport implements Parcelable {
-    public static final Parcelable.Creator<BluetoothCallQualityReport> CREATOR = new Parcelable.Creator<BluetoothCallQualityReport>() { // from class: android.telecom.BluetoothCallQualityReport.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BluetoothCallQualityReport createFromParcel(Parcel in) {
-            return new BluetoothCallQualityReport(in);
-        }
+    public static final Parcelable.Creator<BluetoothCallQualityReport> CREATOR =
+            new Parcelable.Creator<
+                    BluetoothCallQualityReport>() { // from class:
+                                                    // android.telecom.BluetoothCallQualityReport.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BluetoothCallQualityReport createFromParcel(Parcel in) {
+                    return new BluetoothCallQualityReport(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BluetoothCallQualityReport[] newArray(int size) {
-            return new BluetoothCallQualityReport[size];
-        }
-    };
-    public static final String EVENT_BLUETOOTH_CALL_QUALITY_REPORT = "android.telecom.event.BLUETOOTH_CALL_QUALITY_REPORT";
-    public static final String EXTRA_BLUETOOTH_CALL_QUALITY_REPORT = "android.telecom.extra.BLUETOOTH_CALL_QUALITY_REPORT";
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BluetoothCallQualityReport[] newArray(int size) {
+                    return new BluetoothCallQualityReport[size];
+                }
+            };
+    public static final String EVENT_BLUETOOTH_CALL_QUALITY_REPORT =
+            "android.telecom.event.BLUETOOTH_CALL_QUALITY_REPORT";
+    public static final String EXTRA_BLUETOOTH_CALL_QUALITY_REPORT =
+            "android.telecom.extra.BLUETOOTH_CALL_QUALITY_REPORT";
     private final boolean mChoppyVoice;
     private final int mNegativeAcknowledgementCount;
     private final int mPacketsNotReceivedCount;
@@ -83,14 +89,27 @@ public final class BluetoothCallQualityReport implements Parcelable {
             return false;
         }
         BluetoothCallQualityReport that = (BluetoothCallQualityReport) o;
-        if (this.mSentTimestampMillis == that.mSentTimestampMillis && this.mChoppyVoice == that.mChoppyVoice && this.mRssiDbm == that.mRssiDbm && this.mSnrDb == that.mSnrDb && this.mRetransmittedPacketsCount == that.mRetransmittedPacketsCount && this.mPacketsNotReceivedCount == that.mPacketsNotReceivedCount && this.mNegativeAcknowledgementCount == that.mNegativeAcknowledgementCount) {
+        if (this.mSentTimestampMillis == that.mSentTimestampMillis
+                && this.mChoppyVoice == that.mChoppyVoice
+                && this.mRssiDbm == that.mRssiDbm
+                && this.mSnrDb == that.mSnrDb
+                && this.mRetransmittedPacketsCount == that.mRetransmittedPacketsCount
+                && this.mPacketsNotReceivedCount == that.mPacketsNotReceivedCount
+                && this.mNegativeAcknowledgementCount == that.mNegativeAcknowledgementCount) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Long.valueOf(this.mSentTimestampMillis), Boolean.valueOf(this.mChoppyVoice), Integer.valueOf(this.mRssiDbm), Integer.valueOf(this.mSnrDb), Integer.valueOf(this.mRetransmittedPacketsCount), Integer.valueOf(this.mPacketsNotReceivedCount), Integer.valueOf(this.mNegativeAcknowledgementCount));
+        return Objects.hash(
+                Long.valueOf(this.mSentTimestampMillis),
+                Boolean.valueOf(this.mChoppyVoice),
+                Integer.valueOf(this.mRssiDbm),
+                Integer.valueOf(this.mSnrDb),
+                Integer.valueOf(this.mRetransmittedPacketsCount),
+                Integer.valueOf(this.mPacketsNotReceivedCount),
+                Integer.valueOf(this.mNegativeAcknowledgementCount));
     }
 
     public static final class Builder {

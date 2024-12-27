@@ -11,12 +11,16 @@ import android.view.SurfaceControl;
 public interface IRemoteTransitionFinishedCallback extends IInterface {
     public static final String DESCRIPTOR = "android.window.IRemoteTransitionFinishedCallback";
 
-    void onTransitionFinished(WindowContainerTransaction windowContainerTransaction, SurfaceControl.Transaction transaction) throws RemoteException;
+    void onTransitionFinished(
+            WindowContainerTransaction windowContainerTransaction,
+            SurfaceControl.Transaction transaction)
+            throws RemoteException;
 
     public static class Default implements IRemoteTransitionFinishedCallback {
         @Override // android.window.IRemoteTransitionFinishedCallback
-        public void onTransitionFinished(WindowContainerTransaction wct, SurfaceControl.Transaction sct) throws RemoteException {
-        }
+        public void onTransitionFinished(
+                WindowContainerTransaction wct, SurfaceControl.Transaction sct)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +28,7 @@ public interface IRemoteTransitionFinishedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteTransitionFinishedCallback {
+    public abstract static class Stub extends Binder implements IRemoteTransitionFinishedCallback {
         static final int TRANSACTION_onTransitionFinished = 1;
 
         public Stub() {
@@ -62,7 +66,8 @@ public interface IRemoteTransitionFinishedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteTransitionFinishedCallback.DESCRIPTOR);
             }
@@ -72,8 +77,12 @@ public interface IRemoteTransitionFinishedCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    WindowContainerTransaction _arg0 = (WindowContainerTransaction) data.readTypedObject(WindowContainerTransaction.CREATOR);
-                    SurfaceControl.Transaction _arg1 = (SurfaceControl.Transaction) data.readTypedObject(SurfaceControl.Transaction.CREATOR);
+                    WindowContainerTransaction _arg0 =
+                            (WindowContainerTransaction)
+                                    data.readTypedObject(WindowContainerTransaction.CREATOR);
+                    SurfaceControl.Transaction _arg1 =
+                            (SurfaceControl.Transaction)
+                                    data.readTypedObject(SurfaceControl.Transaction.CREATOR);
                     data.enforceNoDataAvail();
                     onTransitionFinished(_arg0, _arg1);
                     reply.writeNoException();
@@ -100,7 +109,9 @@ public interface IRemoteTransitionFinishedCallback extends IInterface {
             }
 
             @Override // android.window.IRemoteTransitionFinishedCallback
-            public void onTransitionFinished(WindowContainerTransaction wct, SurfaceControl.Transaction sct) throws RemoteException {
+            public void onTransitionFinished(
+                    WindowContainerTransaction wct, SurfaceControl.Transaction sct)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

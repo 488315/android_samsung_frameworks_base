@@ -15,10 +15,12 @@ public class DLBitString extends ASN1BitString {
             try {
                 return (ASN1BitString) fromByteArray((byte[]) obj);
             } catch (Exception e) {
-                throw new IllegalArgumentException("encoding error in getInstance: " + e.toString());
+                throw new IllegalArgumentException(
+                        "encoding error in getInstance: " + e.toString());
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public static ASN1BitString getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -59,12 +61,14 @@ public class DLBitString extends ASN1BitString {
         return StreamUtil.calculateBodyLength(this.data.length + 1) + 1 + this.data.length + 1;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1BitString, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1BitString,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     void encode(ASN1OutputStream out, boolean withTag) throws IOException {
         out.writeEncoded(withTag, 3, (byte) this.padBits, this.data);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1BitString, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1BitString,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDLObject() {
         return this;
     }

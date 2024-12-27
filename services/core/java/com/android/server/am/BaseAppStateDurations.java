@@ -3,7 +3,7 @@ package com.android.server.am;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.util.TimeUtils;
-import com.android.server.am.BaseAppStateDurationsTracker;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -14,13 +14,18 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
         BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent;
         BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent2;
         long j;
-        if (linkedList2 == null || linkedList2.size() == 0 || linkedList == null || linkedList.size() == 0) {
+        if (linkedList2 == null
+                || linkedList2.size() == 0
+                || linkedList == null
+                || linkedList.size() == 0) {
             return linkedList;
         }
         Iterator it = linkedList.iterator();
         Iterator it2 = linkedList2.iterator();
-        BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent3 = (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
-        BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent4 = (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
+        BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent3 =
+                (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
+        BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent4 =
+                (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
         LinkedList linkedList3 = new LinkedList();
         long j2 = baseAppStateTimeEvents$BaseTimeEvent3.mTimestamp;
         long j3 = baseAppStateTimeEvents$BaseTimeEvent4.mTimestamp;
@@ -36,20 +41,23 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
                 z = !z;
                 z2 = !z2;
                 if (it.hasNext()) {
-                    baseAppStateTimeEvents$BaseTimeEvent2 = (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
+                    baseAppStateTimeEvents$BaseTimeEvent2 =
+                            (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
                     j = baseAppStateTimeEvents$BaseTimeEvent2.mTimestamp;
                 } else {
                     baseAppStateTimeEvents$BaseTimeEvent2 = baseAppStateTimeEvents$BaseTimeEvent3;
                     j = Long.MAX_VALUE;
                 }
                 if (it2.hasNext()) {
-                    baseAppStateTimeEvents$BaseTimeEvent4 = (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
+                    baseAppStateTimeEvents$BaseTimeEvent4 =
+                            (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
                     j4 = baseAppStateTimeEvents$BaseTimeEvent4.mTimestamp;
                 }
             } else if (j2 < j3) {
                 z = !z;
                 if (it.hasNext()) {
-                    baseAppStateTimeEvents$BaseTimeEvent2 = (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
+                    baseAppStateTimeEvents$BaseTimeEvent2 =
+                            (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
                     j4 = baseAppStateTimeEvents$BaseTimeEvent2.mTimestamp;
                 } else {
                     baseAppStateTimeEvents$BaseTimeEvent2 = baseAppStateTimeEvents$BaseTimeEvent3;
@@ -59,7 +67,8 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
             } else {
                 z2 = !z2;
                 if (it2.hasNext()) {
-                    baseAppStateTimeEvents$BaseTimeEvent = (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
+                    baseAppStateTimeEvents$BaseTimeEvent =
+                            (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
                     j4 = baseAppStateTimeEvents$BaseTimeEvent.mTimestamp;
                 } else {
                     baseAppStateTimeEvents$BaseTimeEvent = baseAppStateTimeEvents$BaseTimeEvent4;
@@ -71,7 +80,9 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
                 j = j5;
             }
             if (z3 != (z && !z2)) {
-                linkedList3.add((BaseAppStateTimeEvents$BaseTimeEvent) baseAppStateTimeEvents$BaseTimeEvent3.clone());
+                linkedList3.add(
+                        (BaseAppStateTimeEvents$BaseTimeEvent)
+                                baseAppStateTimeEvents$BaseTimeEvent3.clone());
             }
             baseAppStateTimeEvents$BaseTimeEvent3 = baseAppStateTimeEvents$BaseTimeEvent2;
             j2 = j;
@@ -92,8 +103,10 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
         }
         Iterator it = linkedList.iterator();
         Iterator it2 = linkedList2.iterator();
-        BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent3 = (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
-        BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent4 = (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
+        BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent3 =
+                (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
+        BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent4 =
+                (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
         LinkedList linkedList3 = new LinkedList();
         long j2 = baseAppStateTimeEvents$BaseTimeEvent3.mTimestamp;
         long j3 = baseAppStateTimeEvents$BaseTimeEvent4.mTimestamp;
@@ -110,20 +123,23 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
                 z = !z;
                 z2 = !z2;
                 if (it.hasNext()) {
-                    baseAppStateTimeEvents$BaseTimeEvent2 = (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
+                    baseAppStateTimeEvents$BaseTimeEvent2 =
+                            (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
                     j = baseAppStateTimeEvents$BaseTimeEvent2.mTimestamp;
                 } else {
                     baseAppStateTimeEvents$BaseTimeEvent2 = baseAppStateTimeEvents$BaseTimeEvent3;
                     j = Long.MAX_VALUE;
                 }
                 if (it2.hasNext()) {
-                    baseAppStateTimeEvents$BaseTimeEvent4 = (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
+                    baseAppStateTimeEvents$BaseTimeEvent4 =
+                            (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
                     j4 = baseAppStateTimeEvents$BaseTimeEvent4.mTimestamp;
                 }
             } else if (j2 < j3) {
                 z = !z;
                 if (it.hasNext()) {
-                    baseAppStateTimeEvents$BaseTimeEvent2 = (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
+                    baseAppStateTimeEvents$BaseTimeEvent2 =
+                            (BaseAppStateTimeEvents$BaseTimeEvent) it.next();
                     j4 = baseAppStateTimeEvents$BaseTimeEvent2.mTimestamp;
                 } else {
                     baseAppStateTimeEvents$BaseTimeEvent2 = baseAppStateTimeEvents$BaseTimeEvent3;
@@ -133,7 +149,8 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
             } else {
                 z2 = !z2;
                 if (it2.hasNext()) {
-                    baseAppStateTimeEvents$BaseTimeEvent = (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
+                    baseAppStateTimeEvents$BaseTimeEvent =
+                            (BaseAppStateTimeEvents$BaseTimeEvent) it2.next();
                     j4 = baseAppStateTimeEvents$BaseTimeEvent.mTimestamp;
                 } else {
                     baseAppStateTimeEvents$BaseTimeEvent = baseAppStateTimeEvents$BaseTimeEvent4;
@@ -148,7 +165,9 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
                 z3 = false;
             }
             if (z4 != z3) {
-                linkedList3.add((BaseAppStateTimeEvents$BaseTimeEvent) baseAppStateTimeEvents$BaseTimeEvent3.clone());
+                linkedList3.add(
+                        (BaseAppStateTimeEvents$BaseTimeEvent)
+                                baseAppStateTimeEvents$BaseTimeEvent3.clone());
             }
             baseAppStateTimeEvents$BaseTimeEvent3 = baseAppStateTimeEvents$BaseTimeEvent2;
             j2 = j;
@@ -156,7 +175,10 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
         }
     }
 
-    public final void addEvent(boolean z, BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent, int i) {
+    public final void addEvent(
+            boolean z,
+            BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent,
+            int i) {
         LinkedList[] linkedListArr = this.mEvents;
         if (linkedListArr[i] == null) {
             linkedListArr[i] = new LinkedList();
@@ -200,7 +222,8 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
         return linkedList != null && (linkedList.size() & 1) == 1;
     }
 
-    public final void subtract(BaseAppStateDurationsTracker.UidStateDurations uidStateDurations, int i) {
+    public final void subtract(
+            BaseAppStateDurationsTracker.UidStateDurations uidStateDurations, int i) {
         LinkedList linkedList;
         LinkedList linkedList2;
         LinkedList[] linkedListArr = this.mEvents;
@@ -216,7 +239,13 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
 
     @Override // com.android.server.am.BaseAppStateEvents
     public final String toString() {
-        return this.mPackageName + "/" + UserHandle.formatUid(this.mUid) + " isActive[0]=" + isActive(0) + " totalDurations[0]=" + getTotalDurationsSince(0, getEarliest(0L), SystemClock.elapsedRealtime());
+        return this.mPackageName
+                + "/"
+                + UserHandle.formatUid(this.mUid)
+                + " isActive[0]="
+                + isActive(0)
+                + " totalDurations[0]="
+                + getTotalDurationsSince(0, getEarliest(0L), SystemClock.elapsedRealtime());
     }
 
     @Override // com.android.server.am.BaseAppStateEvents
@@ -238,7 +267,12 @@ public abstract class BaseAppStateDurations extends BaseAppStateEvents {
             }
         }
         if (linkedList.size() == 1) {
-            ((BaseAppStateTimeEvents$BaseTimeEvent) linkedList.get(0)).trimTo(Math.max(j, ((BaseAppStateTimeEvents$BaseTimeEvent) linkedList.peek()).mTimestamp));
+            ((BaseAppStateTimeEvents$BaseTimeEvent) linkedList.get(0))
+                    .trimTo(
+                            Math.max(
+                                    j,
+                                    ((BaseAppStateTimeEvents$BaseTimeEvent) linkedList.peek())
+                                            .mTimestamp));
         }
     }
 }

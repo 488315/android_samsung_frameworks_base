@@ -1,29 +1,30 @@
 package android.os;
 
-import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public final class Temperature implements Parcelable {
-    public static final Parcelable.Creator<Temperature> CREATOR = new Parcelable.Creator<Temperature>() { // from class: android.os.Temperature.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Temperature createFromParcel(Parcel p) {
-            float value = p.readFloat();
-            int type = p.readInt();
-            String name = p.readString();
-            int status = p.readInt();
-            return new Temperature(value, type, name, status);
-        }
+    public static final Parcelable.Creator<Temperature> CREATOR =
+            new Parcelable.Creator<Temperature>() { // from class: android.os.Temperature.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Temperature createFromParcel(Parcel p) {
+                    float value = p.readFloat();
+                    int type = p.readInt();
+                    String name = p.readString();
+                    int status = p.readInt();
+                    return new Temperature(value, type, name, status);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Temperature[] newArray(int size) {
-            return new Temperature[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Temperature[] newArray(int size) {
+                    return new Temperature[size];
+                }
+            };
     public static final int THROTTLING_CRITICAL = 4;
     public static final int THROTTLING_EMERGENCY = 5;
     public static final int THROTTLING_LIGHT = 1;
@@ -58,12 +59,10 @@ public final class Temperature implements Parcelable {
     private final float mValue;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ThrottlingStatus {
-    }
+    public @interface ThrottlingStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     public static boolean isValidType(int type) {
         return type >= -1 && type <= 19;
@@ -99,12 +98,21 @@ public final class Temperature implements Parcelable {
     }
 
     public String toString() {
-        return "Temperature{mValue=" + this.mValue + ", mType=" + this.mType + ", mName=" + this.mName + ", mStatus=" + this.mStatus + "}";
+        return "Temperature{mValue="
+                + this.mValue
+                + ", mType="
+                + this.mType
+                + ", mName="
+                + this.mName
+                + ", mStatus="
+                + this.mStatus
+                + "}";
     }
 
     public int hashCode() {
         int hash = this.mName.hashCode();
-        return (((((hash * 31) + Float.hashCode(this.mValue)) * 31) + this.mType) * 31) + this.mStatus;
+        return (((((hash * 31) + Float.hashCode(this.mValue)) * 31) + this.mType) * 31)
+                + this.mStatus;
     }
 
     public boolean equals(Object o) {
@@ -112,7 +120,10 @@ public final class Temperature implements Parcelable {
             return false;
         }
         Temperature other = (Temperature) o;
-        return other.mValue == this.mValue && other.mType == this.mType && other.mName.equals(this.mName) && other.mStatus == this.mStatus;
+        return other.mValue == this.mValue
+                && other.mType == this.mType
+                && other.mName.equals(this.mName)
+                && other.mStatus == this.mStatus;
     }
 
     @Override // android.os.Parcelable

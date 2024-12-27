@@ -2,7 +2,6 @@ package android.media.tv;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.media.tv.TvInputManager;
 import android.media.tv.interactive.TvInteractiveAppView;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
+
 import java.util.ArrayDeque;
 import java.util.Objects;
 import java.util.Queue;
@@ -32,7 +32,8 @@ public class TvRecordingClient {
     private TvInteractiveAppView mTvIAppView;
     private final TvInputManager mTvInputManager;
 
-    public TvRecordingClient(Context context, String tag, RecordingCallback callback, Handler handler) {
+    public TvRecordingClient(
+            Context context, String tag, RecordingCallback callback, Handler handler) {
         this.mCallback = callback;
         this.mHandler = handler == null ? new Handler(Looper.getMainLooper()) : handler;
         this.mTvInputManager = (TvInputManager) context.getSystemService(Context.TV_INPUT_SERVICE);
@@ -40,7 +41,8 @@ public class TvRecordingClient {
 
     public void setTvInteractiveAppView(TvInteractiveAppView view, String recordingId) {
         if (view != null && recordingId == null) {
-            throw new IllegalArgumentException("null recordingId is not allowed only when the view is not null");
+            throw new IllegalArgumentException(
+                    "null recordingId is not allowed only when the view is not null");
         }
         if (view == null && recordingId != null) {
             throw new IllegalArgumentException("recordingId should be null when the view is null");
@@ -60,7 +62,8 @@ public class TvRecordingClient {
         if (this.mIsRecordingStarted && !this.mIsPaused) {
             throw new IllegalStateException("tune failed - recording already started");
         }
-        if (this.mSessionCallback != null && TextUtils.equals(this.mSessionCallback.mInputId, inputId)) {
+        if (this.mSessionCallback != null
+                && TextUtils.equals(this.mSessionCallback.mInputId, inputId)) {
             if (this.mSession != null) {
                 this.mSessionCallback.mChannelUri = channelUri;
                 this.mSession.tune(channelUri, params);
@@ -77,7 +80,8 @@ public class TvRecordingClient {
         resetInternal();
         this.mSessionCallback = new MySessionCallback(inputId, channelUri, params);
         if (this.mTvInputManager != null) {
-            this.mTvInputManager.createRecordingSession(inputId, this.mSessionCallback, this.mHandler);
+            this.mTvInputManager.createRecordingSession(
+                    inputId, this.mSessionCallback, this.mHandler);
         }
     }
 
@@ -104,7 +108,8 @@ public class TvRecordingClient {
 
     public void startRecording(Uri programUri, Bundle params) {
         if (this.mIsRecordingStopping || !this.mIsTuned || this.mIsPaused) {
-            throw new IllegalStateException("startRecording failed -recording not yet stopped or not yet tuned or paused");
+            throw new IllegalStateException(
+                    "startRecording failed -recording not yet stopped or not yet tuned or paused");
         }
         if (this.mIsRecordingStarted) {
             Log.w(TAG, "startRecording failed - recording already started");
@@ -133,11 +138,13 @@ public class TvRecordingClient {
 
     public void pauseRecording(Bundle params) {
         if (!this.mIsRecordingStarted || this.mIsRecordingStopping) {
-            throw new IllegalStateException("pauseRecording failed - recording not yet started or stopping");
+            throw new IllegalStateException(
+                    "pauseRecording failed - recording not yet started or stopping");
         }
         TvInputInfo info = this.mTvInputManager.getTvInputInfo(this.mSessionCallback.mInputId);
         if (info == null || !info.canPauseRecording()) {
-            throw new UnsupportedOperationException("pauseRecording failed - operation not supported");
+            throw new UnsupportedOperationException(
+                    "pauseRecording failed - operation not supported");
         }
         if (this.mIsPaused) {
             Log.w(TAG, "pauseRecording failed - recording already paused");
@@ -154,7 +161,9 @@ public class TvRecordingClient {
 
     public void resumeRecording(Bundle params) {
         if (!this.mIsRecordingStarted || this.mIsRecordingStopping || !this.mIsTuned) {
-            throw new IllegalStateException("resumeRecording failed - recording not yet started or stopping or not yet tuned");
+            throw new IllegalStateException(
+                    "resumeRecording failed - recording not yet started or stopping or not yet"
+                        + " tuned");
         }
         if (!this.mIsPaused) {
             Log.w(TAG, "resumeRecording failed - recording not yet paused");
@@ -172,7 +181,11 @@ public class TvRecordingClient {
         if (this.mSession != null) {
             this.mSession.sendAppPrivateCommand(action, data);
         } else {
-            Log.w(TAG, "sendAppPrivateCommand - session not yet created (action \"" + action + "\" pending)");
+            Log.w(
+                    TAG,
+                    "sendAppPrivateCommand - session not yet created (action \""
+                            + action
+                            + "\" pending)");
             this.mPendingAppPrivateCommands.add(Pair.create(action, data));
         }
     }
@@ -181,25 +194,19 @@ public class TvRecordingClient {
         return this.mSessionCallback;
     }
 
-    public static abstract class RecordingCallback {
-        public void onConnectionFailed(String inputId) {
-        }
+    public abstract static class RecordingCallback {
+        public void onConnectionFailed(String inputId) {}
 
-        public void onDisconnected(String inputId) {
-        }
+        public void onDisconnected(String inputId) {}
 
-        public void onTuned(Uri channelUri) {
-        }
+        public void onTuned(Uri channelUri) {}
 
-        public void onRecordingStopped(Uri recordedProgramUri) {
-        }
+        public void onRecordingStopped(Uri recordedProgramUri) {}
 
-        public void onError(int error) {
-        }
+        public void onError(int error) {}
 
         @SystemApi
-        public void onEvent(String inputId, String eventType, Bundle eventArgs) {
-        }
+        public void onEvent(String inputId, String eventType, Bundle eventArgs) {}
     }
 
     private class MySessionCallback extends TvInputManager.SessionCallback {
@@ -225,8 +232,10 @@ public class TvRecordingClient {
             }
             TvRecordingClient.this.mSession = session;
             if (session != null) {
-                for (Pair<String, Bundle> command : TvRecordingClient.this.mPendingAppPrivateCommands) {
-                    TvRecordingClient.this.mSession.sendAppPrivateCommand(command.first, command.second);
+                for (Pair<String, Bundle> command :
+                        TvRecordingClient.this.mPendingAppPrivateCommands) {
+                    TvRecordingClient.this.mSession.sendAppPrivateCommand(
+                            command.first, command.second);
                 }
                 TvRecordingClient.this.mPendingAppPrivateCommands.clear();
                 TvRecordingClient.this.mSession.tune(this.mChannelUri, this.mConnectionParams);
@@ -237,7 +246,8 @@ public class TvRecordingClient {
                 TvRecordingClient.this.mCallback.onConnectionFailed(this.mInputId);
             }
             if (TvRecordingClient.this.mTvIAppView != null) {
-                TvRecordingClient.this.mTvIAppView.notifyRecordingConnectionFailed(TvRecordingClient.this.mRecordingId, this.mInputId);
+                TvRecordingClient.this.mTvIAppView.notifyRecordingConnectionFailed(
+                        TvRecordingClient.this.mRecordingId, this.mInputId);
             }
         }
 
@@ -248,7 +258,9 @@ public class TvRecordingClient {
                 return;
             }
             if (TvRecordingClient.this.mIsTuned || !Objects.equals(this.mChannelUri, channelUri)) {
-                Log.w(TvRecordingClient.TAG, "onTuned - already tuned or not yet tuned to last channel");
+                Log.w(
+                        TvRecordingClient.TAG,
+                        "onTuned - already tuned or not yet tuned to last channel");
                 return;
             }
             TvRecordingClient.this.mIsTuned = true;
@@ -256,7 +268,8 @@ public class TvRecordingClient {
                 TvRecordingClient.this.mCallback.onTuned(channelUri);
             }
             if (TvRecordingClient.this.mTvIAppView != null) {
-                TvRecordingClient.this.mTvIAppView.notifyRecordingTuned(TvRecordingClient.this.mRecordingId, channelUri);
+                TvRecordingClient.this.mTvIAppView.notifyRecordingTuned(
+                        TvRecordingClient.this.mRecordingId, channelUri);
             }
         }
 
@@ -276,7 +289,8 @@ public class TvRecordingClient {
                 TvRecordingClient.this.mCallback.onDisconnected(this.mInputId);
             }
             if (TvRecordingClient.this.mTvIAppView != null) {
-                TvRecordingClient.this.mTvIAppView.notifyRecordingDisconnected(TvRecordingClient.this.mRecordingId, this.mInputId);
+                TvRecordingClient.this.mTvIAppView.notifyRecordingDisconnected(
+                        TvRecordingClient.this.mRecordingId, this.mInputId);
             }
         }
 
@@ -297,7 +311,8 @@ public class TvRecordingClient {
                 TvRecordingClient.this.mCallback.onRecordingStopped(recordedProgramUri);
             }
             if (TvRecordingClient.this.mTvIAppView != null) {
-                TvRecordingClient.this.mTvIAppView.notifyRecordingStopped(TvRecordingClient.this.mRecordingId);
+                TvRecordingClient.this.mTvIAppView.notifyRecordingStopped(
+                        TvRecordingClient.this.mRecordingId);
             }
         }
 
@@ -311,12 +326,14 @@ public class TvRecordingClient {
                 TvRecordingClient.this.mCallback.onError(error);
             }
             if (TvRecordingClient.this.mTvIAppView != null) {
-                TvRecordingClient.this.mTvIAppView.notifyRecordingError(TvRecordingClient.this.mRecordingId, error);
+                TvRecordingClient.this.mTvIAppView.notifyRecordingError(
+                        TvRecordingClient.this.mRecordingId, error);
             }
         }
 
         @Override // android.media.tv.TvInputManager.SessionCallback
-        public void onSessionEvent(TvInputManager.Session session, String eventType, Bundle eventArgs) {
+        public void onSessionEvent(
+                TvInputManager.Session session, String eventType, Bundle eventArgs) {
             if (this != TvRecordingClient.this.mSessionCallback) {
                 Log.w(TvRecordingClient.TAG, "onSessionEvent - session not created");
             } else if (TvRecordingClient.this.mCallback != null) {

@@ -5,7 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.game.IGameManagerCallback;
+
 import java.util.List;
 import java.util.Map;
 
@@ -96,12 +96,14 @@ public interface IGameManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.game.IGameManagerService
-        public boolean setPackageConfigurations(List<SemPackageConfiguration> packageConfigurations) throws RemoteException {
+        public boolean setPackageConfigurations(List<SemPackageConfiguration> packageConfigurations)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.game.IGameManagerService
-        public boolean setPerformanceMode(int tunePerformanceMode, String callerPackageName) throws RemoteException {
+        public boolean setPerformanceMode(int tunePerformanceMode, String callerPackageName)
+                throws RemoteException {
             return false;
         }
 
@@ -121,11 +123,11 @@ public interface IGameManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.game.IGameManagerService
-        public void syncGameList(Map pkgMap) throws RemoteException {
-        }
+        public void syncGameList(Map pkgMap) throws RemoteException {}
 
         @Override // com.samsung.android.game.IGameManagerService
-        public SemPackageConfiguration getPackageConfiguration(String packageName) throws RemoteException {
+        public SemPackageConfiguration getPackageConfiguration(String packageName)
+                throws RemoteException {
             return null;
         }
 
@@ -135,8 +137,7 @@ public interface IGameManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.game.IGameManagerService
-        public void notifyAppCreated(String packageName, int userId) throws RemoteException {
-        }
+        public void notifyAppCreated(String packageName, int userId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -144,7 +145,7 @@ public interface IGameManagerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGameManagerService {
+    public abstract static class Stub extends Binder implements IGameManagerService {
         static final int TRANSACTION_disableVrrControl = 13;
         static final int TRANSACTION_enableVrrControl = 14;
         static final int TRANSACTION_getForegroundApp = 3;
@@ -233,7 +234,8 @@ public interface IGameManagerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGameManagerService.DESCRIPTOR);
             }
@@ -265,14 +267,16 @@ public interface IGameManagerService extends IInterface {
                     reply.writeStringList(_result4);
                     return true;
                 case 5:
-                    IGameManagerCallback _arg02 = IGameManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IGameManagerCallback _arg02 =
+                            IGameManagerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result5 = registerCallback(_arg02);
                     reply.writeNoException();
                     reply.writeBoolean(_result5);
                     return true;
                 case 6:
-                    IGameManagerCallback _arg03 = IGameManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IGameManagerCallback _arg03 =
+                            IGameManagerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result6 = unregisterCallback(_arg03);
                     reply.writeNoException();
@@ -297,7 +301,8 @@ public interface IGameManagerService extends IInterface {
                     reply.writeString(_result9);
                     return true;
                 case 10:
-                    List<SemPackageConfiguration> _arg05 = data.createTypedArrayList(SemPackageConfiguration.CREATOR);
+                    List<SemPackageConfiguration> _arg05 =
+                            data.createTypedArrayList(SemPackageConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result10 = setPackageConfigurations(_arg05);
                     reply.writeNoException();
@@ -463,7 +468,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.game.IGameManagerService
-            public boolean unregisterCallback(IGameManagerCallback callback) throws RemoteException {
+            public boolean unregisterCallback(IGameManagerCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -530,7 +536,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.game.IGameManagerService
-            public boolean setPackageConfigurations(List<SemPackageConfiguration> packageConfigurations) throws RemoteException {
+            public boolean setPackageConfigurations(
+                    List<SemPackageConfiguration> packageConfigurations) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -547,7 +554,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.game.IGameManagerService
-            public boolean setPerformanceMode(int tunePerformanceMode, String callerPackageName) throws RemoteException {
+            public boolean setPerformanceMode(int tunePerformanceMode, String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -565,7 +573,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.game.IGameManagerService
-            public boolean setTargetFrameRate(IBinder surfaceFlinger, int fps) throws RemoteException {
+            public boolean setTargetFrameRate(IBinder surfaceFlinger, int fps)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -632,7 +641,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.game.IGameManagerService
-            public SemPackageConfiguration getPackageConfiguration(String packageName) throws RemoteException {
+            public SemPackageConfiguration getPackageConfiguration(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -640,7 +650,9 @@ public interface IGameManagerService extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    SemPackageConfiguration _result = (SemPackageConfiguration) _reply.readTypedObject(SemPackageConfiguration.CREATOR);
+                    SemPackageConfiguration _result =
+                            (SemPackageConfiguration)
+                                    _reply.readTypedObject(SemPackageConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -656,7 +668,8 @@ public interface IGameManagerService extends IInterface {
                     _data.writeInterfaceToken(IGameManagerService.DESCRIPTOR);
                     this.mRemote.transact(17, _data, _reply, 0);
                     _reply.readException();
-                    List<SemPackageConfiguration> _result = _reply.createTypedArrayList(SemPackageConfiguration.CREATOR);
+                    List<SemPackageConfiguration> _result =
+                            _reply.createTypedArrayList(SemPackageConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

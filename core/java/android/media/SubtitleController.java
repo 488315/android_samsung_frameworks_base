@@ -1,11 +1,11 @@
 package android.media;
 
 import android.content.Context;
-import android.media.SubtitleTrack;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.view.accessibility.CaptioningManager;
+
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Vector;
@@ -23,37 +23,40 @@ public class SubtitleController {
     private Listener mListener;
     private SubtitleTrack mSelectedTrack;
     private MediaTimeProvider mTimeProvider;
-    private final Handler.Callback mCallback = new Handler.Callback() { // from class: android.media.SubtitleController.1
-        @Override // android.os.Handler.Callback
-        public boolean handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    SubtitleController.this.doShow();
-                    break;
-                case 2:
-                    SubtitleController.this.doHide();
-                    break;
-                case 3:
-                    SubtitleController.this.doSelectTrack((SubtitleTrack) msg.obj);
-                    break;
-                case 4:
-                    SubtitleController.this.doSelectDefaultTrack();
-                    break;
-            }
-            return true;
-        }
-    };
-    private CaptioningManager.CaptioningChangeListener mCaptioningChangeListener = new CaptioningManager.CaptioningChangeListener() { // from class: android.media.SubtitleController.2
-        @Override // android.view.accessibility.CaptioningManager.CaptioningChangeListener
-        public void onEnabledChanged(boolean enabled) {
-            SubtitleController.this.selectDefaultTrack();
-        }
+    private final Handler.Callback mCallback =
+            new Handler.Callback() { // from class: android.media.SubtitleController.1
+                @Override // android.os.Handler.Callback
+                public boolean handleMessage(Message msg) {
+                    switch (msg.what) {
+                        case 1:
+                            SubtitleController.this.doShow();
+                            break;
+                        case 2:
+                            SubtitleController.this.doHide();
+                            break;
+                        case 3:
+                            SubtitleController.this.doSelectTrack((SubtitleTrack) msg.obj);
+                            break;
+                        case 4:
+                            SubtitleController.this.doSelectDefaultTrack();
+                            break;
+                    }
+                    return true;
+                }
+            };
+    private CaptioningManager.CaptioningChangeListener mCaptioningChangeListener =
+            new CaptioningManager
+                    .CaptioningChangeListener() { // from class: android.media.SubtitleController.2
+                @Override // android.view.accessibility.CaptioningManager.CaptioningChangeListener
+                public void onEnabledChanged(boolean enabled) {
+                    SubtitleController.this.selectDefaultTrack();
+                }
 
-        @Override // android.view.accessibility.CaptioningManager.CaptioningChangeListener
-        public void onLocaleChanged(Locale locale) {
-            SubtitleController.this.selectDefaultTrack();
-        }
-    };
+                @Override // android.view.accessibility.CaptioningManager.CaptioningChangeListener
+                public void onLocaleChanged(Locale locale) {
+                    SubtitleController.this.selectDefaultTrack();
+                }
+            };
     private boolean mTrackIsExplicit = false;
     private boolean mVisibilityIsExplicit = false;
     private Vector<Renderer> mRenderers = new Vector<>();
@@ -70,7 +73,7 @@ public class SubtitleController {
         void onSubtitleTrackSelected(SubtitleTrack subtitleTrack);
     }
 
-    public static abstract class Renderer {
+    public abstract static class Renderer {
         public abstract SubtitleTrack createTrack(MediaFormat mediaFormat);
 
         public abstract boolean supports(MediaFormat mediaFormat);
@@ -79,7 +82,8 @@ public class SubtitleController {
     public SubtitleController(Context context, MediaTimeProvider timeProvider, Listener listener) {
         this.mTimeProvider = timeProvider;
         this.mListener = listener;
-        this.mCaptioningManager = (CaptioningManager) context.getSystemService(Context.CAPTIONING_SERVICE);
+        this.mCaptioningManager =
+                (CaptioningManager) context.getSystemService(Context.CAPTIONING_SERVICE);
     }
 
     protected void finalize() throws Throwable {
@@ -153,7 +157,9 @@ public class SubtitleController {
             Method dump skipped, instructions count: 198
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.SubtitleController.getDefaultTrack():android.media.SubtitleTrack");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.media.SubtitleController.getDefaultTrack():android.media.SubtitleTrack");
     }
 
     public void selectDefaultTrack() {
@@ -164,7 +170,12 @@ public class SubtitleController {
     public void doSelectDefaultTrack() {
         if (this.mTrackIsExplicit) {
             if (!this.mVisibilityIsExplicit) {
-                if (this.mCaptioningManager.isEnabled() || (this.mSelectedTrack != null && this.mSelectedTrack.getFormat().getInteger(MediaFormat.KEY_IS_FORCED_SUBTITLE, 0) != 0)) {
+                if (this.mCaptioningManager.isEnabled()
+                        || (this.mSelectedTrack != null
+                                && this.mSelectedTrack
+                                                .getFormat()
+                                                .getInteger(MediaFormat.KEY_IS_FORCED_SUBTITLE, 0)
+                                        != 0)) {
                     show();
                 } else if (this.mSelectedTrack != null && this.mSelectedTrack.getTrackType() == 4) {
                     hide();
@@ -213,7 +224,8 @@ public class SubtitleController {
                 if (renderer.supports(format) && (track = renderer.createTrack(format)) != null) {
                     synchronized (this.mTracks) {
                         if (this.mTracks.size() == 0) {
-                            this.mCaptioningManager.addCaptioningChangeListener(this.mCaptioningChangeListener);
+                            this.mCaptioningManager.addCaptioningChangeListener(
+                                    this.mCaptioningChangeListener);
                         }
                         this.mTracks.add(track);
                     }
@@ -288,8 +300,7 @@ public class SubtitleController {
         }
     }
 
-    private void checkAnchorLooper() {
-    }
+    private void checkAnchorLooper() {}
 
     private void processOnAnchor(Message m) {
         if (Looper.myLooper() == this.mHandler.getLooper()) {

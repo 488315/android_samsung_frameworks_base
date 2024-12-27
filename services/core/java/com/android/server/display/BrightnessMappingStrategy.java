@@ -11,6 +11,7 @@ import android.util.MathUtils;
 import android.util.Pair;
 import android.util.Slog;
 import android.util.Spline;
+
 import com.android.internal.display.BrightnessSynchronizer;
 import com.android.internal.util.Preconditions;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -19,11 +20,11 @@ import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.am.KillPolicyManager$$ExternalSyntheticOutline0;
 import com.android.server.chimera.AggressivePolicyHandler$$ExternalSyntheticOutline0;
-import com.android.server.display.BrightnessMappingStrategy;
 import com.android.server.display.config.DisplayBrightnessMappingConfig;
 import com.android.server.display.config.EvenDimmerBrightnessData;
 import com.android.server.display.utils.Plog$SystemPlog;
 import com.android.server.power.PowerManagerUtil;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,12 +60,26 @@ public abstract class BrightnessMappingStrategy {
         public final List mPreviousBrightnessSplines = new ArrayList();
         public final LongArray mBrightnessSplineChangeTimes = new LongArray();
 
-        public PhysicalMappingStrategy(BrightnessConfiguration brightnessConfiguration, float[] fArr, float[] fArr2, float f, int i) {
-            Preconditions.checkArgument((fArr.length == 0 || fArr2.length == 0) ? false : true, "Nits and brightness arrays must not be empty!");
-            Preconditions.checkArgument(fArr.length == fArr2.length, "Nits and brightness arrays must be the same length!");
+        public PhysicalMappingStrategy(
+                BrightnessConfiguration brightnessConfiguration,
+                float[] fArr,
+                float[] fArr2,
+                float f,
+                int i) {
+            Preconditions.checkArgument(
+                    (fArr.length == 0 || fArr2.length == 0) ? false : true,
+                    "Nits and brightness arrays must not be empty!");
+            Preconditions.checkArgument(
+                    fArr.length == fArr2.length,
+                    "Nits and brightness arrays must be the same length!");
             Objects.requireNonNull(brightnessConfiguration);
-            Preconditions.checkArrayElementsInRange(fArr, FullScreenMagnificationGestureHandler.MAX_SCALE, Float.MAX_VALUE, "nits");
-            Preconditions.checkArrayElementsInRange(fArr2, FullScreenMagnificationGestureHandler.MAX_SCALE, BrightnessMappingStrategy.sScreenExtendedBrightnessRangeMaximum / 255.0f, "brightness");
+            Preconditions.checkArrayElementsInRange(
+                    fArr, FullScreenMagnificationGestureHandler.MAX_SCALE, Float.MAX_VALUE, "nits");
+            Preconditions.checkArrayElementsInRange(
+                    fArr2,
+                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                    BrightnessMappingStrategy.sScreenExtendedBrightnessRangeMaximum / 255.0f,
+                    "brightness");
             this.mMode = i;
             this.mMaxGamma = f;
             this.mAutoBrightnessAdjustment = FullScreenMagnificationGestureHandler.MAX_SCALE;
@@ -85,12 +100,17 @@ public abstract class BrightnessMappingStrategy {
 
         @Override // com.android.server.display.BrightnessMappingStrategy
         public final void addUserDataPoint(float f, float f2) {
-            if (!(Float.compare(f, FullScreenMagnificationGestureHandler.MAX_SCALE) >= 0 && (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM || Float.compare(f, (float) PowerManagerUtil.HBM_LUX) < 0))) {
+            if (!(Float.compare(f, FullScreenMagnificationGestureHandler.MAX_SCALE) >= 0
+                    && (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM
+                            || Float.compare(f, (float) PowerManagerUtil.HBM_LUX) < 0))) {
                 Slog.e("BrightnessMappingStrategy", "addUserDataPoint: invalid user lux: " + f);
                 return;
             }
             Pair curve = this.mConfig.getCurve();
-            float interpolate = this.mAdjustedNitsToBrightnessSpline.interpolate(Spline.createSpline((float[]) curve.first, (float[]) curve.second).interpolate(f));
+            float interpolate =
+                    this.mAdjustedNitsToBrightnessSpline.interpolate(
+                            Spline.createSpline((float[]) curve.first, (float[]) curve.second)
+                                    .interpolate(f));
             if (this.mLoggingEnabled) {
                 Slog.d("BrightnessMappingStrategy", "addUserDataPoint: (" + f + "," + f2 + ")");
                 Plog$SystemPlog plog$SystemPlog = BrightnessMappingStrategy.PLOG;
@@ -98,9 +118,15 @@ public abstract class BrightnessMappingStrategy {
                 plog$SystemPlog.logPoint("user data point", f, f2);
                 plog$SystemPlog.logPoint("current brightness", f, interpolate);
             }
-            float inferAutoBrightnessAdjustment = inferAutoBrightnessAdjustment(this.mMaxGamma, f2, interpolate);
+            float inferAutoBrightnessAdjustment =
+                    inferAutoBrightnessAdjustment(this.mMaxGamma, f2, interpolate);
             if (this.mLoggingEnabled) {
-                Slog.d("BrightnessMappingStrategy", "addUserDataPoint: " + this.mAutoBrightnessAdjustment + " => " + inferAutoBrightnessAdjustment);
+                Slog.d(
+                        "BrightnessMappingStrategy",
+                        "addUserDataPoint: "
+                                + this.mAutoBrightnessAdjustment
+                                + " => "
+                                + inferAutoBrightnessAdjustment);
             }
             this.mAutoBrightnessAdjustment = inferAutoBrightnessAdjustment;
             this.mUserOffsetManager.addPoint(f, f2, interpolate);
@@ -118,7 +144,9 @@ public abstract class BrightnessMappingStrategy {
             UserOffsetManager userOffsetManager = this.mUserOffsetManager;
             if (userOffsetManager.hasUserDataPoints()) {
                 if (this.mLoggingEnabled) {
-                    Slog.d("BrightnessMappingStrategy", "clearUserDataPoints: " + this.mAutoBrightnessAdjustment + " => 0");
+                    Slog.d(
+                            "BrightnessMappingStrategy",
+                            "clearUserDataPoints: " + this.mAutoBrightnessAdjustment + " => 0");
                     BrightnessMappingStrategy.PLOG.start("clear user data points");
                 }
                 this.mAutoBrightnessAdjustment = FullScreenMagnificationGestureHandler.MAX_SCALE;
@@ -175,7 +203,9 @@ public abstract class BrightnessMappingStrategy {
                 fArr11[i6] = this.mBrightnessToAdjustedNitsSpline.interpolate(fArr10[i6]);
             }
             this.mBrightnessSpline = Spline.createSpline(fArr9, fArr11);
-            Slog.d("BrightnessMappingStrategy", "computeSpline: mBrightnessSpline: " + this.mBrightnessSpline);
+            Slog.d(
+                    "BrightnessMappingStrategy",
+                    "computeSpline: mBrightnessSpline: " + this.mBrightnessSpline);
         }
 
         @Override // com.android.server.display.BrightnessMappingStrategy
@@ -185,7 +215,11 @@ public abstract class BrightnessMappingStrategy {
 
         @Override // com.android.server.display.BrightnessMappingStrategy
         public final int convertToBrightness(float f) {
-            return MathUtils.constrain(BrightnessSynchronizer.brightnessFloatToInt(this.mNitsToBrightnessSpline.interpolate(f)), 0, BrightnessMappingStrategy.sScreenExtendedBrightnessRangeMaximum);
+            return MathUtils.constrain(
+                    BrightnessSynchronizer.brightnessFloatToInt(
+                            this.mNitsToBrightnessSpline.interpolate(f)),
+                    0,
+                    BrightnessMappingStrategy.sScreenExtendedBrightnessRangeMaximum);
         }
 
         @Override // com.android.server.display.BrightnessMappingStrategy
@@ -195,24 +229,43 @@ public abstract class BrightnessMappingStrategy {
 
         @Override // com.android.server.display.BrightnessMappingStrategy
         public final void dump(PrintWriter printWriter) {
-            StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "PhysicalMappingStrategy", "  mConfig=");
+            StringBuilder m$1 =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                            printWriter, "PhysicalMappingStrategy", "  mConfig=");
             m$1.append(this.mConfig);
             printWriter.println(m$1.toString());
             printWriter.println("  mBrightnessSpline=" + this.mBrightnessSpline);
-            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(KillPolicyManager$$ExternalSyntheticOutline0.m(new StringBuilder("  mMaxGamma="), this.mMaxGamma, printWriter, "  mAutoBrightnessAdjustment="), this.mAutoBrightnessAdjustment, printWriter);
+            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(
+                    KillPolicyManager$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("  mMaxGamma="),
+                            this.mMaxGamma,
+                            printWriter,
+                            "  mAutoBrightnessAdjustment="),
+                    this.mAutoBrightnessAdjustment,
+                    printWriter);
             this.mUserOffsetManager.dump(printWriter);
             printWriter.println("  mDefaultConfig=" + this.mDefaultConfig);
             printWriter.println("  mBrightnessRangeAdjustmentApplied=false");
             printWriter.println("  shortTermModelTimeout=" + getShortTermModelTimeout());
             printWriter.println("  Previous short-term models (oldest to newest): ");
             for (int i = 0; i < ((ArrayList) this.mPreviousBrightnessSplines).size(); i++) {
-                printWriter.println("  Computed at " + FORMAT.format(new Date(this.mBrightnessSplineChangeTimes.get(i))) + ": ");
+                printWriter.println(
+                        "  Computed at "
+                                + FORMAT.format(new Date(this.mBrightnessSplineChangeTimes.get(i)))
+                                + ": ");
             }
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "  Difference between current config and default: ", "  SEC_FEATURE_SUPPORT_LEGACY_PERFORMANCE_MODE="), PowerManagerUtil.SEC_FEATURE_SUPPORT_LEGACY_PERFORMANCE_MODE, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                            printWriter,
+                            "  Difference between current config and default: ",
+                            "  SEC_FEATURE_SUPPORT_LEGACY_PERFORMANCE_MODE="),
+                    PowerManagerUtil.SEC_FEATURE_SUPPORT_LEGACY_PERFORMANCE_MODE,
+                    printWriter);
         }
 
         @Override // com.android.server.display.BrightnessMappingStrategy
-        public final BrightnessConfiguration getAppliedBackupConfig(BrightnessConfiguration brightnessConfiguration) {
+        public final BrightnessConfiguration getAppliedBackupConfig(
+                BrightnessConfiguration brightnessConfiguration) {
             Pair curve = this.mConfig.getCurve();
             float[] fArr = (float[]) curve.first;
             Object obj = curve.second;
@@ -221,22 +274,28 @@ public abstract class BrightnessMappingStrategy {
             float[] fArr2 = (float[]) curve2.first;
             float[] fArr3 = (float[]) curve2.second;
             Spline createSpline = Spline.createSpline(fArr2, fArr3);
-            if (Float.compare(fArr[0], FullScreenMagnificationGestureHandler.MAX_SCALE) == 0 && Float.compare(fArr2[0], FullScreenMagnificationGestureHandler.MAX_SCALE) == 0 && Float.compare(copyOf[0], fArr3[0]) > 0) {
-                Slog.d("BrightnessMappingStrategy", "default brightness is higher than backup brightness");
+            if (Float.compare(fArr[0], FullScreenMagnificationGestureHandler.MAX_SCALE) == 0
+                    && Float.compare(fArr2[0], FullScreenMagnificationGestureHandler.MAX_SCALE) == 0
+                    && Float.compare(copyOf[0], fArr3[0]) > 0) {
+                Slog.d(
+                        "BrightnessMappingStrategy",
+                        "default brightness is higher than backup brightness");
                 return null;
             }
             for (int i = 0; Float.compare(fArr[i], 30.0f) < 0; i++) {
                 copyOf[i] = createSpline.interpolate(fArr[i]);
             }
             for (int i2 = 1; i2 < fArr.length; i2++) {
-                if (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM || Float.compare(fArr[i2], PowerManagerUtil.HBM_LUX) < 0) {
+                if (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM
+                        || Float.compare(fArr[i2], PowerManagerUtil.HBM_LUX) < 0) {
                     int i3 = i2 - 1;
                     if (Float.compare(copyOf[i3], copyOf[i2]) > 0) {
                         copyOf[i2] = copyOf[i3];
                     }
                 }
             }
-            BrightnessConfiguration.Builder builder = new BrightnessConfiguration.Builder(fArr, copyOf);
+            BrightnessConfiguration.Builder builder =
+                    new BrightnessConfiguration.Builder(fArr, copyOf);
             builder.setDescription(brightnessConfiguration.getDescription());
             return builder.build();
         }
@@ -249,17 +308,23 @@ public abstract class BrightnessMappingStrategy {
         public final float getBrightness(float f, String str, int i, Spline spline) {
             BrightnessCorrection correctionByCategory;
             BrightnessCorrection correctionByPackageName;
-            float interpolate = this.mAdjustedNitsToBrightnessSpline.interpolate(spline.interpolate(f));
+            float interpolate =
+                    this.mAdjustedNitsToBrightnessSpline.interpolate(spline.interpolate(f));
             if (this.mUserOffsetManager.hasUserDataPoints()) {
                 if (this.mLoggingEnabled) {
                     Slog.d("BrightnessMappingStrategy", "user point set, correction not applied");
                 }
-            } else if (str != null && (correctionByPackageName = this.mConfig.getCorrectionByPackageName(str)) != null) {
+            } else if (str != null
+                    && (correctionByPackageName = this.mConfig.getCorrectionByPackageName(str))
+                            != null) {
                 interpolate = correctionByPackageName.apply(interpolate);
-            } else if (i != -1 && (correctionByCategory = this.mConfig.getCorrectionByCategory(i)) != null) {
+            } else if (i != -1
+                    && (correctionByCategory = this.mConfig.getCorrectionByCategory(i)) != null) {
                 interpolate = correctionByCategory.apply(interpolate);
             }
-            if (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM || Float.compare(interpolate, 1.0f) <= 0 || Float.compare(f, PowerManagerUtil.HBM_LUX) >= 0) {
+            if (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM
+                    || Float.compare(interpolate, 1.0f) <= 0
+                    || Float.compare(f, PowerManagerUtil.HBM_LUX) >= 0) {
                 return interpolate;
             }
             return 1.0f;
@@ -306,7 +371,9 @@ public abstract class BrightnessMappingStrategy {
 
         @Override // com.android.server.display.BrightnessMappingStrategy
         public final long getShortTermModelTimeout() {
-            return this.mConfig.getShortTermModelTimeoutMillis() >= 0 ? this.mConfig.getShortTermModelTimeoutMillis() : this.mDefaultConfig.getShortTermModelTimeoutMillis();
+            return this.mConfig.getShortTermModelTimeoutMillis() >= 0
+                    ? this.mConfig.getShortTermModelTimeoutMillis()
+                    : this.mDefaultConfig.getShortTermModelTimeoutMillis();
         }
 
         @Override // com.android.server.display.BrightnessMappingStrategy
@@ -327,7 +394,12 @@ public abstract class BrightnessMappingStrategy {
                 return false;
             }
             if (this.mLoggingEnabled) {
-                Slog.d("BrightnessMappingStrategy", "setAutoBrightnessAdjustment: " + this.mAutoBrightnessAdjustment + " => " + constrain);
+                Slog.d(
+                        "BrightnessMappingStrategy",
+                        "setAutoBrightnessAdjustment: "
+                                + this.mAutoBrightnessAdjustment
+                                + " => "
+                                + constrain);
                 BrightnessMappingStrategy.PLOG.start("auto-brightness adjustment");
             }
             this.mAutoBrightnessAdjustment = constrain;
@@ -336,7 +408,8 @@ public abstract class BrightnessMappingStrategy {
         }
 
         @Override // com.android.server.display.BrightnessMappingStrategy
-        public final boolean setBrightnessConfiguration(BrightnessConfiguration brightnessConfiguration) {
+        public final boolean setBrightnessConfiguration(
+                BrightnessConfiguration brightnessConfiguration) {
             if (brightnessConfiguration == null) {
                 brightnessConfiguration = this.mDefaultConfig;
             }
@@ -363,10 +436,19 @@ public abstract class BrightnessMappingStrategy {
         public Spline mSpline;
 
         public SimpleMappingStrategy(float[] fArr, float[] fArr2, float f, int i) {
-            Preconditions.checkArgument((fArr.length == 0 || fArr2.length == 0) ? false : true, "Lux and brightness arrays must not be empty!");
-            Preconditions.checkArgument(fArr.length == fArr2.length, "Lux and brightness arrays must be the same length!");
-            Preconditions.checkArrayElementsInRange(fArr, FullScreenMagnificationGestureHandler.MAX_SCALE, Float.MAX_VALUE, "lux");
-            Preconditions.checkArrayElementsInRange(fArr2, FullScreenMagnificationGestureHandler.MAX_SCALE, 2.14748365E9f, "brightness");
+            Preconditions.checkArgument(
+                    (fArr.length == 0 || fArr2.length == 0) ? false : true,
+                    "Lux and brightness arrays must not be empty!");
+            Preconditions.checkArgument(
+                    fArr.length == fArr2.length,
+                    "Lux and brightness arrays must be the same length!");
+            Preconditions.checkArrayElementsInRange(
+                    fArr, FullScreenMagnificationGestureHandler.MAX_SCALE, Float.MAX_VALUE, "lux");
+            Preconditions.checkArrayElementsInRange(
+                    fArr2,
+                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                    2.14748365E9f,
+                    "brightness");
             int length = fArr2.length;
             this.mLux = new float[length];
             this.mBrightness = new float[length];
@@ -386,7 +468,9 @@ public abstract class BrightnessMappingStrategy {
 
         @Override // com.android.server.display.BrightnessMappingStrategy
         public final void addUserDataPoint(float f, float f2) {
-            if (!(Float.compare(f, FullScreenMagnificationGestureHandler.MAX_SCALE) >= 0 && (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM || Float.compare(f, (float) PowerManagerUtil.HBM_LUX) < 0))) {
+            if (!(Float.compare(f, FullScreenMagnificationGestureHandler.MAX_SCALE) >= 0
+                    && (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM
+                            || Float.compare(f, (float) PowerManagerUtil.HBM_LUX) < 0))) {
                 Slog.e("BrightnessMappingStrategy", "addUserDataPoint: invalid user lux: " + f);
                 return;
             }
@@ -398,9 +482,15 @@ public abstract class BrightnessMappingStrategy {
                 plog$SystemPlog.logPoint("user data point", f, f2);
                 plog$SystemPlog.logPoint("current brightness", f, interpolate);
             }
-            float inferAutoBrightnessAdjustment = inferAutoBrightnessAdjustment(this.mMaxGamma, f2, interpolate);
+            float inferAutoBrightnessAdjustment =
+                    inferAutoBrightnessAdjustment(this.mMaxGamma, f2, interpolate);
             if (this.mLoggingEnabled) {
-                Slog.d("BrightnessMappingStrategy", "addUserDataPoint: " + this.mAutoBrightnessAdjustment + " => " + inferAutoBrightnessAdjustment);
+                Slog.d(
+                        "BrightnessMappingStrategy",
+                        "addUserDataPoint: "
+                                + this.mAutoBrightnessAdjustment
+                                + " => "
+                                + inferAutoBrightnessAdjustment);
             }
             this.mAutoBrightnessAdjustment = inferAutoBrightnessAdjustment;
             this.mUserOffsetManager.addPoint(f, f2, interpolate);
@@ -412,7 +502,9 @@ public abstract class BrightnessMappingStrategy {
             UserOffsetManager userOffsetManager = this.mUserOffsetManager;
             if (userOffsetManager.hasUserDataPoints()) {
                 if (this.mLoggingEnabled) {
-                    Slog.d("BrightnessMappingStrategy", "clearUserDataPoints: " + this.mAutoBrightnessAdjustment + " => 0");
+                    Slog.d(
+                            "BrightnessMappingStrategy",
+                            "clearUserDataPoints: " + this.mAutoBrightnessAdjustment + " => 0");
                     BrightnessMappingStrategy.PLOG.start("clear user data points");
                 }
                 this.mAutoBrightnessAdjustment = FullScreenMagnificationGestureHandler.MAX_SCALE;
@@ -423,7 +515,10 @@ public abstract class BrightnessMappingStrategy {
 
         public final void computeSpline$1() {
             Pair offsetAdjustedCurve = getOffsetAdjustedCurve(this.mLux, this.mBrightness);
-            this.mSpline = Spline.createSpline((float[]) offsetAdjustedCurve.first, (float[]) offsetAdjustedCurve.second);
+            this.mSpline =
+                    Spline.createSpline(
+                            (float[]) offsetAdjustedCurve.first,
+                            (float[]) offsetAdjustedCurve.second);
         }
 
         @Override // com.android.server.display.BrightnessMappingStrategy
@@ -443,15 +538,25 @@ public abstract class BrightnessMappingStrategy {
 
         @Override // com.android.server.display.BrightnessMappingStrategy
         public final void dump(PrintWriter printWriter) {
-            StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "SimpleMappingStrategy", "  mSpline=");
+            StringBuilder m$1 =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                            printWriter, "SimpleMappingStrategy", "  mSpline=");
             m$1.append(this.mSpline);
             printWriter.println(m$1.toString());
-            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(KillPolicyManager$$ExternalSyntheticOutline0.m(new StringBuilder("  mMaxGamma="), this.mMaxGamma, printWriter, "  mAutoBrightnessAdjustment="), this.mAutoBrightnessAdjustment, printWriter);
+            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(
+                    KillPolicyManager$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("  mMaxGamma="),
+                            this.mMaxGamma,
+                            printWriter,
+                            "  mAutoBrightnessAdjustment="),
+                    this.mAutoBrightnessAdjustment,
+                    printWriter);
             this.mUserOffsetManager.dump(printWriter);
         }
 
         @Override // com.android.server.display.BrightnessMappingStrategy
-        public final BrightnessConfiguration getAppliedBackupConfig(BrightnessConfiguration brightnessConfiguration) {
+        public final BrightnessConfiguration getAppliedBackupConfig(
+                BrightnessConfiguration brightnessConfiguration) {
             return null;
         }
 
@@ -463,7 +568,9 @@ public abstract class BrightnessMappingStrategy {
         @Override // com.android.server.display.BrightnessMappingStrategy
         public final float getBrightness(String str, float f, int i) {
             float interpolate = this.mSpline.interpolate(f);
-            if (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM || Float.compare(interpolate, 1.0f) <= 0 || Float.compare(f, PowerManagerUtil.HBM_LUX) >= 0) {
+            if (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM
+                    || Float.compare(interpolate, 1.0f) <= 0
+                    || Float.compare(f, PowerManagerUtil.HBM_LUX) >= 0) {
                 return interpolate;
             }
             return 1.0f;
@@ -521,7 +628,12 @@ public abstract class BrightnessMappingStrategy {
                 return false;
             }
             if (this.mLoggingEnabled) {
-                Slog.d("BrightnessMappingStrategy", "setAutoBrightnessAdjustment: " + this.mAutoBrightnessAdjustment + " => " + constrain);
+                Slog.d(
+                        "BrightnessMappingStrategy",
+                        "setAutoBrightnessAdjustment: "
+                                + this.mAutoBrightnessAdjustment
+                                + " => "
+                                + constrain);
                 BrightnessMappingStrategy.PLOG.start("auto-brightness adjustment");
             }
             this.mAutoBrightnessAdjustment = constrain;
@@ -530,7 +642,8 @@ public abstract class BrightnessMappingStrategy {
         }
 
         @Override // com.android.server.display.BrightnessMappingStrategy
-        public final boolean setBrightnessConfiguration(BrightnessConfiguration brightnessConfiguration) {
+        public final boolean setBrightnessConfiguration(
+                BrightnessConfiguration brightnessConfiguration) {
             return false;
         }
     }
@@ -568,7 +681,14 @@ public abstract class BrightnessMappingStrategy {
             }
 
             public final String toString() {
-                return String.format("%5.1f -> %5.1f (%+6.1f) @ %6.1f < %6.1f < %6.1f", Float.valueOf((this.mBrightness - this.mBrightnessOffset) * 255.0f), Float.valueOf(this.mBrightness * 255.0f), Float.valueOf(this.mBrightnessOffset * 255.0f), Float.valueOf(this.mLowerBoundary), Float.valueOf(this.mLux), Float.valueOf(this.mUpperBoundary));
+                return String.format(
+                        "%5.1f -> %5.1f (%+6.1f) @ %6.1f < %6.1f < %6.1f",
+                        Float.valueOf((this.mBrightness - this.mBrightnessOffset) * 255.0f),
+                        Float.valueOf(this.mBrightness * 255.0f),
+                        Float.valueOf(this.mBrightnessOffset * 255.0f),
+                        Float.valueOf(this.mLowerBoundary),
+                        Float.valueOf(this.mLux),
+                        Float.valueOf(this.mUpperBoundary));
             }
         }
 
@@ -589,16 +709,26 @@ public abstract class BrightnessMappingStrategy {
             synchronized (this) {
                 try {
                     final UserPoint userPoint = new UserPoint(f, f2, f3);
-                    this.mUserPoints.removeIf(new Predicate() { // from class: com.android.server.display.BrightnessMappingStrategy$UserOffsetManager$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Predicate
-                        public final boolean test(Object obj) {
-                            return BrightnessMappingStrategy.UserOffsetManager.UserPoint.this.isInSameBoundary(((BrightnessMappingStrategy.UserOffsetManager.UserPoint) obj).mLux);
-                        }
-                    });
+                    this.mUserPoints.removeIf(
+                            new Predicate() { // from class:
+                                              // com.android.server.display.BrightnessMappingStrategy$UserOffsetManager$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    return BrightnessMappingStrategy.UserOffsetManager.UserPoint
+                                            .this
+                                            .isInSameBoundary(
+                                                    ((BrightnessMappingStrategy.UserOffsetManager
+                                                                            .UserPoint)
+                                                                    obj)
+                                                            .mLux);
+                                }
+                            });
                     this.mUserPoints.add(userPoint);
                     this.mLastAddedLux = f;
                     for (int i = 0; i < this.mUserPoints.size(); i++) {
-                        Slog.d("BrightnessMappingStrategy", "addUserDataPoint: [" + i + "] " + this.mUserPoints.get(i));
+                        Slog.d(
+                                "BrightnessMappingStrategy",
+                                "addUserDataPoint: [" + i + "] " + this.mUserPoints.get(i));
                     }
                     updateCurve();
                 } catch (Throwable th) {
@@ -614,7 +744,8 @@ public abstract class BrightnessMappingStrategy {
                         Plog$SystemPlog plog$SystemPlog = BrightnessMappingStrategy.PLOG;
                         plog$SystemPlog.start("clear user offset curve");
                         Pair pair = this.mCurve;
-                        plog$SystemPlog.logCurve("offset curve", (float[]) pair.first, (float[]) pair.second);
+                        plog$SystemPlog.logCurve(
+                                "offset curve", (float[]) pair.first, (float[]) pair.second);
                     }
                     this.mCurve = null;
                     this.mUserPoints.clear();
@@ -641,12 +772,14 @@ public abstract class BrightnessMappingStrategy {
                 printWriter.println(sb.toString());
             }
             for (int i2 = 0; i2 < this.mUserPoints.size(); i2++) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i2, "  mUserPoints[", "] ");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(i2, "  mUserPoints[", "] ");
                 m.append(this.mUserPoints.get(i2));
                 printWriter.println(m.toString());
             }
             printWriter.println();
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  sDebugLogging: "), sDebugLogging, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("  sDebugLogging: "), sDebugLogging, printWriter);
         }
 
         public final Pair getCurve() {
@@ -658,7 +791,10 @@ public abstract class BrightnessMappingStrategy {
                         Object obj = pair2.first;
                         float[] copyOf = Arrays.copyOf((float[]) obj, ((float[]) obj).length);
                         Object obj2 = this.mCurve.second;
-                        pair = Pair.create(copyOf, Arrays.copyOf((float[]) obj2, ((float[]) obj2).length));
+                        pair =
+                                Pair.create(
+                                        copyOf,
+                                        Arrays.copyOf((float[]) obj2, ((float[]) obj2).length));
                     } else {
                         pair = null;
                     }
@@ -685,13 +821,17 @@ public abstract class BrightnessMappingStrategy {
             int size = arrayList.size();
             for (int i = 0; i < size; i++) {
                 UserPoint userPoint = (UserPoint) arrayList.get(i);
-                if (i <= 0 || !((UserPoint) arrayList.get(i - 1)).isInSameBoundary(userPoint.mLowerBoundary)) {
+                if (i <= 0
+                        || !((UserPoint) arrayList.get(i - 1))
+                                .isInSameBoundary(userPoint.mLowerBoundary)) {
                     arrayList2.add(Float.valueOf(userPoint.mLowerBoundary));
                     arrayList3.add(Float.valueOf(FullScreenMagnificationGestureHandler.MAX_SCALE));
                 }
                 arrayList2.add(Float.valueOf(userPoint.mLux));
                 arrayList3.add(Float.valueOf(userPoint.mBrightnessOffset));
-                if (i >= size - 1 || !((UserPoint) arrayList.get(i + 1)).isInSameBoundary(userPoint.mUpperBoundary)) {
+                if (i >= size - 1
+                        || !((UserPoint) arrayList.get(i + 1))
+                                .isInSameBoundary(userPoint.mUpperBoundary)) {
                     arrayList2.add(Float.valueOf(userPoint.mUpperBoundary));
                     arrayList3.add(Float.valueOf(FullScreenMagnificationGestureHandler.MAX_SCALE));
                 }
@@ -700,7 +840,10 @@ public abstract class BrightnessMappingStrategy {
             float[] convertFloatArrayListToArray2 = convertFloatArrayListToArray(arrayList3);
             this.mCurve = Pair.create(convertFloatArrayListToArray, convertFloatArrayListToArray2);
             if (sDebugLogging) {
-                BrightnessMappingStrategy.PLOG.logCurve("offset curve", convertFloatArrayListToArray, convertFloatArrayListToArray2);
+                BrightnessMappingStrategy.PLOG.logCurve(
+                        "offset curve",
+                        convertFloatArrayListToArray,
+                        convertFloatArrayListToArray2);
             }
         }
     }
@@ -714,21 +857,34 @@ public abstract class BrightnessMappingStrategy {
         this.mUserOffsetManager = userOffsetManager;
     }
 
-    public static BrightnessMappingStrategy create(Context context, DisplayDeviceConfig displayDeviceConfig, int i) {
+    public static BrightnessMappingStrategy create(
+            Context context, DisplayDeviceConfig displayDeviceConfig, int i) {
         float[] autoBrightnessBrighteningLevelsLux;
         float[] autoBrightnessBrighteningLevels;
         float[] fArr;
-        int intForUser = Settings.System.getIntForUser(context.getContentResolver(), "screen_brightness_for_als", 2, -2);
+        int intForUser =
+                Settings.System.getIntForUser(
+                        context.getContentResolver(), "screen_brightness_for_als", 2, -2);
         if (i == 0) {
-            DisplayBrightnessMappingConfig displayBrightnessMappingConfig = displayDeviceConfig.mDisplayBrightnessMapping;
-            float[] fArr2 = displayBrightnessMappingConfig == null ? null : displayBrightnessMappingConfig.mBrightnessLevelsNits;
-            autoBrightnessBrighteningLevelsLux = displayDeviceConfig.getAutoBrightnessBrighteningLevelsLux(i, intForUser);
+            DisplayBrightnessMappingConfig displayBrightnessMappingConfig =
+                    displayDeviceConfig.mDisplayBrightnessMapping;
+            float[] fArr2 =
+                    displayBrightnessMappingConfig == null
+                            ? null
+                            : displayBrightnessMappingConfig.mBrightnessLevelsNits;
+            autoBrightnessBrighteningLevelsLux =
+                    displayDeviceConfig.getAutoBrightnessBrighteningLevelsLux(i, intForUser);
             float[] fArr3 = fArr2;
-            autoBrightnessBrighteningLevels = displayDeviceConfig.getAutoBrightnessBrighteningLevels(i, intForUser);
+            autoBrightnessBrighteningLevels =
+                    displayDeviceConfig.getAutoBrightnessBrighteningLevels(i, intForUser);
             fArr = fArr3;
         } else if (i == 1) {
-            fArr = getFloatArray(context.getResources().obtainTypedArray(R.array.config_minimumBrightnessCurveNits));
-            int[] intArray = context.getResources().getIntArray(R.array.config_network_type_tcp_buffers);
+            fArr =
+                    getFloatArray(
+                            context.getResources()
+                                    .obtainTypedArray(R.array.config_minimumBrightnessCurveNits));
+            int[] intArray =
+                    context.getResources().getIntArray(R.array.config_network_type_tcp_buffers);
             autoBrightnessBrighteningLevelsLux = new float[intArray.length + 1];
             int i2 = 0;
             while (i2 < intArray.length) {
@@ -742,29 +898,54 @@ public abstract class BrightnessMappingStrategy {
             autoBrightnessBrighteningLevels = null;
             autoBrightnessBrighteningLevelsLux = null;
         } else {
-            autoBrightnessBrighteningLevelsLux = displayDeviceConfig.getAutoBrightnessBrighteningLevelsLux(i, intForUser);
-            autoBrightnessBrighteningLevels = displayDeviceConfig.getAutoBrightnessBrighteningLevels(i, intForUser);
+            autoBrightnessBrighteningLevelsLux =
+                    displayDeviceConfig.getAutoBrightnessBrighteningLevelsLux(i, intForUser);
+            autoBrightnessBrighteningLevels =
+                    displayDeviceConfig.getAutoBrightnessBrighteningLevels(i, intForUser);
             fArr = null;
         }
-        float fraction = context.getResources().getFraction(R.fraction.config_autoBrightnessAdjustmentMaxGamma, 1, 1);
-        EvenDimmerBrightnessData evenDimmerBrightnessData = displayDeviceConfig.mEvenDimmerBrightnessData;
-        float[] fArr4 = evenDimmerBrightnessData != null ? evenDimmerBrightnessData.mNits : displayDeviceConfig.mNits;
-        float[] fArr5 = evenDimmerBrightnessData != null ? evenDimmerBrightnessData.mBrightness : displayDeviceConfig.mBrightness;
-        sScreenExtendedBrightnessRangeMaximum = context.getResources().getInteger(R.integer.config_vibratorControlServiceDumpSizeLimit);
-        if (!isValidMapping(fArr4, fArr5) || !isValidMapping(autoBrightnessBrighteningLevelsLux, fArr)) {
-            if (!isValidMapping(autoBrightnessBrighteningLevelsLux, autoBrightnessBrighteningLevels)) {
+        float fraction =
+                context.getResources()
+                        .getFraction(R.fraction.config_autoBrightnessAdjustmentMaxGamma, 1, 1);
+        EvenDimmerBrightnessData evenDimmerBrightnessData =
+                displayDeviceConfig.mEvenDimmerBrightnessData;
+        float[] fArr4 =
+                evenDimmerBrightnessData != null
+                        ? evenDimmerBrightnessData.mNits
+                        : displayDeviceConfig.mNits;
+        float[] fArr5 =
+                evenDimmerBrightnessData != null
+                        ? evenDimmerBrightnessData.mBrightness
+                        : displayDeviceConfig.mBrightness;
+        sScreenExtendedBrightnessRangeMaximum =
+                context.getResources()
+                        .getInteger(R.integer.config_vibratorControlServiceDumpSizeLimit);
+        if (!isValidMapping(fArr4, fArr5)
+                || !isValidMapping(autoBrightnessBrighteningLevelsLux, fArr)) {
+            if (!isValidMapping(
+                    autoBrightnessBrighteningLevelsLux, autoBrightnessBrighteningLevels)) {
                 return null;
             }
             Slog.d("BrightnessMappingStrategy", "Use SimpleMappingStrategy");
-            return new SimpleMappingStrategy(autoBrightnessBrighteningLevelsLux, autoBrightnessBrighteningLevels, fraction, i);
+            return new SimpleMappingStrategy(
+                    autoBrightnessBrighteningLevelsLux,
+                    autoBrightnessBrighteningLevels,
+                    fraction,
+                    i);
         }
         Slog.d("BrightnessMappingStrategy", "Use PhysicalMappingStrategy");
         if (PowerManagerUtil.SEC_FEATURE_SUPPORT_LEGACY_PERFORMANCE_MODE) {
-            for (int i4 = 0; i4 < fArr.length && (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM || autoBrightnessBrighteningLevelsLux[i4] < PowerManagerUtil.HBM_LUX); i4++) {
+            for (int i4 = 0;
+                    i4 < fArr.length
+                            && (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM
+                                    || autoBrightnessBrighteningLevelsLux[i4]
+                                            < PowerManagerUtil.HBM_LUX);
+                    i4++) {
                 fArr[i4] = fArr[i4] * 0.885f;
             }
         }
-        BrightnessConfiguration.Builder builder = new BrightnessConfiguration.Builder(autoBrightnessBrighteningLevelsLux, fArr);
+        BrightnessConfiguration.Builder builder =
+                new BrightnessConfiguration.Builder(autoBrightnessBrighteningLevelsLux, fArr);
         builder.setShortTermModelTimeoutMillis(600000L);
         builder.setShortTermModelLowerLuxMultiplier(0.6f);
         builder.setShortTermModelUpperLuxMultiplier(0.6f);
@@ -794,20 +975,37 @@ public abstract class BrightnessMappingStrategy {
             StringBuilder sb2 = new StringBuilder("x.length: ");
             sb2.append(fArr.length);
             sb2.append(" y.length: ");
-            DeviceIdleController$$ExternalSyntheticOutline0.m(sb2, fArr2.length, "BrightnessMappingStrategy");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    sb2, fArr2.length, "BrightnessMappingStrategy");
             return false;
         }
         int length = fArr.length;
         float f = fArr[0];
         float f2 = fArr2[0];
-        if (f < FullScreenMagnificationGestureHandler.MAX_SCALE || f2 < FullScreenMagnificationGestureHandler.MAX_SCALE || Float.isNaN(f) || Float.isNaN(f2)) {
+        if (f < FullScreenMagnificationGestureHandler.MAX_SCALE
+                || f2 < FullScreenMagnificationGestureHandler.MAX_SCALE
+                || Float.isNaN(f)
+                || Float.isNaN(f2)) {
             Slog.d("BrightnessMappingStrategy", "prevX: " + f + " prevY: " + f2);
             return false;
         }
         for (int i = 1; i < length; i++) {
             float f3 = fArr[i];
             if (f >= f3 || f2 > fArr2[i]) {
-                Slog.d("BrightnessMappingStrategy", "prevX: " + f + " x[" + i + "]: " + fArr[i] + " prevY: " + f2 + " y[" + i + "]: " + fArr2[i]);
+                Slog.d(
+                        "BrightnessMappingStrategy",
+                        "prevX: "
+                                + f
+                                + " x["
+                                + i
+                                + "]: "
+                                + fArr[i]
+                                + " prevY: "
+                                + f2
+                                + " y["
+                                + i
+                                + "]: "
+                                + fArr2[i]);
                 return false;
             }
             if (Float.isNaN(f3) || Float.isNaN(fArr2[i])) {
@@ -845,7 +1043,8 @@ public abstract class BrightnessMappingStrategy {
 
     public abstract void dump(PrintWriter printWriter);
 
-    public abstract BrightnessConfiguration getAppliedBackupConfig(BrightnessConfiguration brightnessConfiguration);
+    public abstract BrightnessConfiguration getAppliedBackupConfig(
+            BrightnessConfiguration brightnessConfiguration);
 
     public abstract float getAutoBrightnessAdjustment();
 
@@ -872,12 +1071,15 @@ public abstract class BrightnessMappingStrategy {
             PLOG.logCurve("curve before adjust offset", fArr, copyOf);
         }
         if (this.mUserOffsetManager.hasUserDataPoints()) {
-            Spline createSpline = Spline.createSpline(Arrays.copyOf(fArr, fArr.length), Arrays.copyOf(copyOf, copyOf.length));
+            Spline createSpline =
+                    Spline.createSpline(
+                            Arrays.copyOf(fArr, fArr.length), Arrays.copyOf(copyOf, copyOf.length));
             float[] copyOf2 = Arrays.copyOf(copyOf, copyOf.length);
             Pair curve = this.mUserOffsetManager.getCurve();
             int i = 0;
             if (curve != null) {
-                Spline createLinearSpline = Spline.createLinearSpline((float[]) curve.first, (float[]) curve.second);
+                Spline createLinearSpline =
+                        Spline.createLinearSpline((float[]) curve.first, (float[]) curve.second);
                 for (int i2 = 0; i2 < copyOf2.length; i2++) {
                     float f2 = copyOf2[i2];
                     if (f2 > 1.0f) {
@@ -900,7 +1102,9 @@ public abstract class BrightnessMappingStrategy {
                 float[] fArr6 = (float[]) curve2.second;
                 for (int i3 = 0; i3 < fArr5.length; i3++) {
                     float f3 = fArr5[i3];
-                    if (FullScreenMagnificationGestureHandler.MAX_SCALE <= f3 && (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM || f3 < PowerManagerUtil.HBM_LUX)) {
+                    if (FullScreenMagnificationGestureHandler.MAX_SCALE <= f3
+                            && (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM
+                                    || f3 < PowerManagerUtil.HBM_LUX)) {
                         float interpolate2 = createSpline.interpolate(f3) + fArr6[i3];
                         float[] fArr7 = (float[]) create.first;
                         float[] fArr8 = (float[]) create.second;
@@ -966,7 +1170,8 @@ public abstract class BrightnessMappingStrategy {
                 while (i6 < fArr10.length) {
                     float f6 = fArr10[i6];
                     float f7 = fArr11[i6];
-                    if (PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM && f6 >= PowerManagerUtil.HBM_LUX) {
+                    if (PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM
+                            && f6 >= PowerManagerUtil.HBM_LUX) {
                         break;
                     }
                     float max = Math.max(f7, permissibleMinimumRatio(f6, f4) * f5);
@@ -1033,7 +1238,16 @@ public abstract class BrightnessMappingStrategy {
             sb.append(" == ");
             sb.append(f5);
             Slog.d("BrightnessMappingStrategy", sb.toString());
-            Slog.d("BrightnessMappingStrategy", "inferAutoBrightnessAdjustment: " + f3 + "^" + f5 + "=" + MathUtils.pow(f3, f5) + " == " + f2);
+            Slog.d(
+                    "BrightnessMappingStrategy",
+                    "inferAutoBrightnessAdjustment: "
+                            + f3
+                            + "^"
+                            + f5
+                            + "="
+                            + MathUtils.pow(f3, f5)
+                            + " == "
+                            + f2);
         }
         return constrain;
     }
@@ -1042,5 +1256,6 @@ public abstract class BrightnessMappingStrategy {
 
     public abstract boolean setAutoBrightnessAdjustment(float f);
 
-    public abstract boolean setBrightnessConfiguration(BrightnessConfiguration brightnessConfiguration);
+    public abstract boolean setBrightnessConfiguration(
+            BrightnessConfiguration brightnessConfiguration);
 }

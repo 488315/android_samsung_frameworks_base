@@ -9,10 +9,11 @@ import android.os.IBinder;
 import android.os.OutcomeReceiver;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
-import android.telecom.Connection;
+
 import com.android.internal.telecom.IConnectionServiceAdapter;
 import com.android.internal.telecom.IVideoProvider;
 import com.android.internal.telecom.RemoteServiceCallback;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -22,10 +23,10 @@ import java.util.concurrent.Executor;
 
 /* loaded from: classes3.dex */
 final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
-    private final Set<IConnectionServiceAdapter> mAdapters = Collections.newSetFromMap(new ConcurrentHashMap(8, 0.9f, 1));
+    private final Set<IConnectionServiceAdapter> mAdapters =
+            Collections.newSetFromMap(new ConcurrentHashMap(8, 0.9f, 1));
 
-    ConnectionServiceAdapter() {
-    }
+    ConnectionServiceAdapter() {}
 
     void addAdapter(IConnectionServiceAdapter adapter) {
         for (IConnectionServiceAdapter it : this.mAdapters) {
@@ -66,19 +67,23 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
         }
     }
 
-    void handleCreateConnectionComplete(String id, ConnectionRequest request, ParcelableConnection connection) {
+    void handleCreateConnectionComplete(
+            String id, ConnectionRequest request, ParcelableConnection connection) {
         for (IConnectionServiceAdapter adapter : this.mAdapters) {
             try {
-                adapter.handleCreateConnectionComplete(id, request, connection, Log.getExternalSession());
+                adapter.handleCreateConnectionComplete(
+                        id, request, connection, Log.getExternalSession());
             } catch (RemoteException e) {
             }
         }
     }
 
-    void handleCreateConferenceComplete(String id, ConnectionRequest request, ParcelableConference conference) {
+    void handleCreateConferenceComplete(
+            String id, ConnectionRequest request, ParcelableConference conference) {
         for (IConnectionServiceAdapter adapter : this.mAdapters) {
             try {
-                adapter.handleCreateConferenceComplete(id, request, conference, Log.getExternalSession());
+                adapter.handleCreateConferenceComplete(
+                        id, request, conference, Log.getExternalSession());
             } catch (RemoteException e) {
             }
         }
@@ -233,7 +238,11 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
     void queryRemoteConnectionServices(RemoteServiceCallback callback, String callingPackage) {
         if (this.mAdapters.size() == 1) {
             try {
-                this.mAdapters.iterator().next().queryRemoteConnectionServices(callback, callingPackage, Log.getExternalSession());
+                this.mAdapters
+                        .iterator()
+                        .next()
+                        .queryRemoteConnectionServices(
+                                callback, callingPackage, Log.getExternalSession());
                 return;
             } catch (RemoteException e) {
                 Log.e(this, e, "Exception trying to query for remote CSs", new Object[0]);
@@ -292,7 +301,8 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
     void setCallerDisplayName(String callId, String callerDisplayName, int presentation) {
         for (IConnectionServiceAdapter adapter : this.mAdapters) {
             try {
-                adapter.setCallerDisplayName(callId, callerDisplayName, presentation, Log.getExternalSession());
+                adapter.setCallerDisplayName(
+                        callId, callerDisplayName, presentation, Log.getExternalSession());
             } catch (RemoteException e) {
             }
         }
@@ -312,7 +322,8 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
         Log.v(this, "setConferenceableConnections: %s, %s", callId, conferenceableCallIds);
         for (IConnectionServiceAdapter adapter : this.mAdapters) {
             try {
-                adapter.setConferenceableConnections(callId, conferenceableCallIds, Log.getExternalSession());
+                adapter.setConferenceableConnections(
+                        callId, conferenceableCallIds, Log.getExternalSession());
             } catch (RemoteException e) {
             }
         }
@@ -385,20 +396,34 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
     }
 
     void setAudioRoute(String callId, int audioRoute, String bluetoothAddress) {
-        Log.v(this, "setAudioRoute: %s %s %s", callId, CallAudioState.audioRouteToString(audioRoute), bluetoothAddress);
+        Log.v(
+                this,
+                "setAudioRoute: %s %s %s",
+                callId,
+                CallAudioState.audioRouteToString(audioRoute),
+                bluetoothAddress);
         for (IConnectionServiceAdapter adapter : this.mAdapters) {
             try {
-                adapter.setAudioRoute(callId, audioRoute, bluetoothAddress, Log.getExternalSession());
+                adapter.setAudioRoute(
+                        callId, audioRoute, bluetoothAddress, Log.getExternalSession());
             } catch (RemoteException e) {
             }
         }
     }
 
-    void requestCallEndpointChange(String callId, CallEndpoint endpoint, Executor executor, OutcomeReceiver<Void, CallEndpointException> callback) {
+    void requestCallEndpointChange(
+            String callId,
+            CallEndpoint endpoint,
+            Executor executor,
+            OutcomeReceiver<Void, CallEndpointException> callback) {
         Log.v(this, "requestCallEndpointChange", new Object[0]);
         for (IConnectionServiceAdapter adapter : this.mAdapters) {
             try {
-                adapter.requestCallEndpointChange(callId, endpoint, new AnonymousClass1(null, executor, callback), Log.getExternalSession());
+                adapter.requestCallEndpointChange(
+                        callId,
+                        endpoint,
+                        new AnonymousClass1(null, executor, callback),
+                        Log.getExternalSession());
             } catch (RemoteException e) {
                 Log.d(this, "Remote exception calling requestCallEndpointChange", new Object[0]);
             }
@@ -425,21 +450,29 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
                 if (resultCode == 0) {
                     Executor executor = this.val$executor;
                     final OutcomeReceiver outcomeReceiver = this.val$callback;
-                    executor.execute(new Runnable() { // from class: android.telecom.ConnectionServiceAdapter$1$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            OutcomeReceiver.this.onResult(null);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // android.telecom.ConnectionServiceAdapter$1$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    OutcomeReceiver.this.onResult(null);
+                                }
+                            });
                 } else {
                     Executor executor2 = this.val$executor;
                     final OutcomeReceiver outcomeReceiver2 = this.val$callback;
-                    executor2.execute(new Runnable() { // from class: android.telecom.ConnectionServiceAdapter$1$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            OutcomeReceiver.this.onError((CallEndpointException) result.getParcelable(CallEndpointException.CHANGE_ERROR, CallEndpointException.class));
-                        }
-                    });
+                    executor2.execute(
+                            new Runnable() { // from class:
+                                             // android.telecom.ConnectionServiceAdapter$1$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    OutcomeReceiver.this.onError(
+                                            (CallEndpointException)
+                                                    result.getParcelable(
+                                                            CallEndpointException.CHANGE_ERROR,
+                                                            CallEndpointException.class));
+                                }
+                            });
                 }
             } finally {
                 Binder.restoreCallingIdentity(identity);
@@ -536,19 +569,32 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
         }
     }
 
-    void queryLocation(String callId, long timeoutMillis, String provider, Executor executor, final OutcomeReceiver<Location, QueryLocationException> callback) {
+    void queryLocation(
+            String callId,
+            long timeoutMillis,
+            String provider,
+            Executor executor,
+            final OutcomeReceiver<Location, QueryLocationException> callback) {
         Log.v(this, "queryLocation: %s %d", callId, Long.valueOf(timeoutMillis));
         for (IConnectionServiceAdapter adapter : this.mAdapters) {
             try {
-                adapter.queryLocation(callId, timeoutMillis, provider, new AnonymousClass2(null, executor, callback), Log.getExternalSession());
+                adapter.queryLocation(
+                        callId,
+                        timeoutMillis,
+                        provider,
+                        new AnonymousClass2(null, executor, callback),
+                        Log.getExternalSession());
             } catch (RemoteException e) {
                 Log.d(this, "queryLocation: Exception e : " + e, new Object[0]);
-                executor.execute(new Runnable() { // from class: android.telecom.ConnectionServiceAdapter$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        OutcomeReceiver.this.onError(new QueryLocationException(e.getMessage(), 5));
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telecom.ConnectionServiceAdapter$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                OutcomeReceiver.this.onError(
+                                        new QueryLocationException(e.getMessage(), 5));
+                            }
+                        });
             }
         }
     }
@@ -571,21 +617,33 @@ final class ConnectionServiceAdapter implements IBinder.DeathRecipient {
             if (resultCode == 1) {
                 Executor executor = this.val$executor;
                 final OutcomeReceiver outcomeReceiver = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telecom.ConnectionServiceAdapter$2$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        OutcomeReceiver.this.onResult((Location) result.getParcelable(Connection.EXTRA_KEY_QUERY_LOCATION, Location.class));
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telecom.ConnectionServiceAdapter$2$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                OutcomeReceiver.this.onResult(
+                                        (Location)
+                                                result.getParcelable(
+                                                        Connection.EXTRA_KEY_QUERY_LOCATION,
+                                                        Location.class));
+                            }
+                        });
             } else {
                 Executor executor2 = this.val$executor;
                 final OutcomeReceiver outcomeReceiver2 = this.val$callback;
-                executor2.execute(new Runnable() { // from class: android.telecom.ConnectionServiceAdapter$2$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        OutcomeReceiver.this.onError((QueryLocationException) result.getParcelable(QueryLocationException.QUERY_LOCATION_ERROR, QueryLocationException.class));
-                    }
-                });
+                executor2.execute(
+                        new Runnable() { // from class:
+                                         // android.telecom.ConnectionServiceAdapter$2$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                OutcomeReceiver.this.onError(
+                                        (QueryLocationException)
+                                                result.getParcelable(
+                                                        QueryLocationException.QUERY_LOCATION_ERROR,
+                                                        QueryLocationException.class));
+                            }
+                        });
             }
         }
     }

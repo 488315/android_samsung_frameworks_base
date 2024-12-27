@@ -9,7 +9,8 @@ import android.telephony.ims.SipMessage;
 
 /* loaded from: classes4.dex */
 public interface ISipDelegateMessageCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.ims.aidl.ISipDelegateMessageCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.ims.aidl.ISipDelegateMessageCallback";
 
     void onMessageReceived(SipMessage sipMessage) throws RemoteException;
 
@@ -19,16 +20,14 @@ public interface ISipDelegateMessageCallback extends IInterface {
 
     public static class Default implements ISipDelegateMessageCallback {
         @Override // android.telephony.ims.aidl.ISipDelegateMessageCallback
-        public void onMessageReceived(SipMessage message) throws RemoteException {
-        }
+        public void onMessageReceived(SipMessage message) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISipDelegateMessageCallback
-        public void onMessageSent(String viaTransactionId) throws RemoteException {
-        }
+        public void onMessageSent(String viaTransactionId) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISipDelegateMessageCallback
-        public void onMessageSendFailure(String viaTransactionId, int reason) throws RemoteException {
-        }
+        public void onMessageSendFailure(String viaTransactionId, int reason)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +35,7 @@ public interface ISipDelegateMessageCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISipDelegateMessageCallback {
+    public abstract static class Stub extends Binder implements ISipDelegateMessageCallback {
         static final int TRANSACTION_onMessageReceived = 1;
         static final int TRANSACTION_onMessageSendFailure = 3;
         static final int TRANSACTION_onMessageSent = 2;
@@ -80,7 +79,8 @@ public interface ISipDelegateMessageCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISipDelegateMessageCallback.DESCRIPTOR);
             }
@@ -151,7 +151,8 @@ public interface ISipDelegateMessageCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegateMessageCallback
-            public void onMessageSendFailure(String viaTransactionId, int reason) throws RemoteException {
+            public void onMessageSendFailure(String viaTransactionId, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISipDelegateMessageCallback.DESCRIPTOR);

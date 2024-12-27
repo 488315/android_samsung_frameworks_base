@@ -1,14 +1,17 @@
 package com.android.server.knox.zt.devicetrust.data;
 
 import android.os.Bundle;
+
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -74,8 +77,10 @@ public final class AppDyingData extends EndpointData {
         int i3 = this.uid;
         String str = this.procName;
         long j2 = this.cpuTime;
-        StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i2, i3, " | pid : ", " | uid : ", m);
+        StringBuilder m =
+                SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i2, i3, " | pid : ", " | uid : ", m);
         RCPManagerService$$ExternalSyntheticOutline0.m$1(m, " | procName : ", str, " | cpuTime : ");
         m.append(j2);
         return m.toString();

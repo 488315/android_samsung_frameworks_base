@@ -1,6 +1,7 @@
 package com.android.server.wm;
 
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -27,7 +28,9 @@ public final class RemoteAppController implements IController {
 
     @Override // com.android.server.wm.IController
     public final void dumpLocked(PrintWriter printWriter) {
-        StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "[RemoteAppController]", "  isRemoteAppDisplayRunning=");
+        StringBuilder m$1 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                        printWriter, "[RemoteAppController]", "  isRemoteAppDisplayRunning=");
         m$1.append(isRemoteAppDisplayRunningLocked());
         printWriter.println(m$1.toString());
         synchronized (this.mLock) {
@@ -36,20 +39,32 @@ public final class RemoteAppController implements IController {
     }
 
     @Override // com.android.server.wm.IController
-    public final void initialize() {
-    }
+    public final void initialize() {}
 
     /* JADX WARN: Removed duplicated region for block: B:19:0x0078  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean interceptStartActivityLocked(com.android.server.wm.ActivityRecord r18, com.android.server.wm.Task r19, com.android.server.wm.ActivityRecord r20, android.app.ActivityOptions r21, int r22, com.android.server.uri.NeededUriGrants r23, java.lang.String r24, com.android.server.wm.ActivityStarter.Request r25) {
+    public final boolean interceptStartActivityLocked(
+            com.android.server.wm.ActivityRecord r18,
+            com.android.server.wm.Task r19,
+            com.android.server.wm.ActivityRecord r20,
+            android.app.ActivityOptions r21,
+            int r22,
+            com.android.server.uri.NeededUriGrants r23,
+            java.lang.String r24,
+            com.android.server.wm.ActivityStarter.Request r25) {
         /*
             Method dump skipped, instructions count: 266
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.RemoteAppController.interceptStartActivityLocked(com.android.server.wm.ActivityRecord, com.android.server.wm.Task, com.android.server.wm.ActivityRecord, android.app.ActivityOptions, int, com.android.server.uri.NeededUriGrants, java.lang.String, com.android.server.wm.ActivityStarter$Request):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.RemoteAppController.interceptStartActivityLocked(com.android.server.wm.ActivityRecord,"
+                    + " com.android.server.wm.Task, com.android.server.wm.ActivityRecord,"
+                    + " android.app.ActivityOptions, int, com.android.server.uri.NeededUriGrants,"
+                    + " java.lang.String, com.android.server.wm.ActivityStarter$Request):boolean");
     }
 
     public final boolean isRemoteAppDisplayLocked(int i) {
@@ -76,7 +91,18 @@ public final class RemoteAppController implements IController {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean notifyStartActivityInterceptedLocked(android.content.Intent r15, android.app.ActivityOptions r16, android.content.pm.ActivityInfo r17, int r18, boolean r19, android.app.ActivityManager.RunningTaskInfo r20, com.android.server.wm.ActivityRecord r21, com.android.server.uri.NeededUriGrants r22, int r23, int r24, com.android.server.wm.ActivityStarter.Request r25) {
+    public final boolean notifyStartActivityInterceptedLocked(
+            android.content.Intent r15,
+            android.app.ActivityOptions r16,
+            android.content.pm.ActivityInfo r17,
+            int r18,
+            boolean r19,
+            android.app.ActivityManager.RunningTaskInfo r20,
+            com.android.server.wm.ActivityRecord r21,
+            com.android.server.uri.NeededUriGrants r22,
+            int r23,
+            int r24,
+            com.android.server.wm.ActivityStarter.Request r25) {
         /*
             r14 = this;
             r0 = r14
@@ -147,7 +173,14 @@ public final class RemoteAppController implements IController {
             monitor-exit(r1)     // Catch: java.lang.Throwable -> L6d
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.RemoteAppController.notifyStartActivityInterceptedLocked(android.content.Intent, android.app.ActivityOptions, android.content.pm.ActivityInfo, int, boolean, android.app.ActivityManager$RunningTaskInfo, com.android.server.wm.ActivityRecord, com.android.server.uri.NeededUriGrants, int, int, com.android.server.wm.ActivityStarter$Request):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.RemoteAppController.notifyStartActivityInterceptedLocked(android.content.Intent,"
+                    + " android.app.ActivityOptions, android.content.pm.ActivityInfo, int, boolean,"
+                    + " android.app.ActivityManager$RunningTaskInfo,"
+                    + " com.android.server.wm.ActivityRecord,"
+                    + " com.android.server.uri.NeededUriGrants, int, int,"
+                    + " com.android.server.wm.ActivityStarter$Request):boolean");
     }
 
     @Override // com.android.server.wm.IController

@@ -14,7 +14,9 @@ public interface IRollbackManager extends IInterface {
 
     void blockRollbackManager(long j) throws RemoteException;
 
-    void commitRollback(int i, ParceledListSlice parceledListSlice, String str, IntentSender intentSender) throws RemoteException;
+    void commitRollback(
+            int i, ParceledListSlice parceledListSlice, String str, IntentSender intentSender)
+            throws RemoteException;
 
     void expireRollbackForPackage(String str) throws RemoteException;
 
@@ -26,7 +28,8 @@ public interface IRollbackManager extends IInterface {
 
     void reloadPersistedData() throws RemoteException;
 
-    void snapshotAndRestoreUserData(String str, int[] iArr, int i, long j, String str2, int i2) throws RemoteException;
+    void snapshotAndRestoreUserData(String str, int[] iArr, int i, long j, String str2, int i2)
+            throws RemoteException;
 
     public static class Default implements IRollbackManager {
         @Override // android.content.rollback.IRollbackManager
@@ -40,20 +43,28 @@ public interface IRollbackManager extends IInterface {
         }
 
         @Override // android.content.rollback.IRollbackManager
-        public void commitRollback(int rollbackId, ParceledListSlice causePackages, String callerPackageName, IntentSender statusReceiver) throws RemoteException {
-        }
+        public void commitRollback(
+                int rollbackId,
+                ParceledListSlice causePackages,
+                String callerPackageName,
+                IntentSender statusReceiver)
+                throws RemoteException {}
 
         @Override // android.content.rollback.IRollbackManager
-        public void snapshotAndRestoreUserData(String packageName, int[] userIds, int appId, long ceDataInode, String seInfo, int token) throws RemoteException {
-        }
+        public void snapshotAndRestoreUserData(
+                String packageName,
+                int[] userIds,
+                int appId,
+                long ceDataInode,
+                String seInfo,
+                int token)
+                throws RemoteException {}
 
         @Override // android.content.rollback.IRollbackManager
-        public void reloadPersistedData() throws RemoteException {
-        }
+        public void reloadPersistedData() throws RemoteException {}
 
         @Override // android.content.rollback.IRollbackManager
-        public void expireRollbackForPackage(String packageName) throws RemoteException {
-        }
+        public void expireRollbackForPackage(String packageName) throws RemoteException {}
 
         @Override // android.content.rollback.IRollbackManager
         public int notifyStagedSession(int sessionId) throws RemoteException {
@@ -61,8 +72,7 @@ public interface IRollbackManager extends IInterface {
         }
 
         @Override // android.content.rollback.IRollbackManager
-        public void blockRollbackManager(long millis) throws RemoteException {
-        }
+        public void blockRollbackManager(long millis) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -70,7 +80,7 @@ public interface IRollbackManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRollbackManager {
+    public abstract static class Stub extends Binder implements IRollbackManager {
         static final int TRANSACTION_blockRollbackManager = 8;
         static final int TRANSACTION_commitRollback = 3;
         static final int TRANSACTION_expireRollbackForPackage = 6;
@@ -129,7 +139,8 @@ public interface IRollbackManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRollbackManager.DESCRIPTOR);
             }
@@ -150,7 +161,8 @@ public interface IRollbackManager extends IInterface {
                     return true;
                 case 3:
                     int _arg0 = data.readInt();
-                    ParceledListSlice _arg1 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg1 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     String _arg2 = data.readString();
                     IntentSender _arg3 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     data.enforceNoDataAvail();
@@ -220,7 +232,8 @@ public interface IRollbackManager extends IInterface {
                     _data.writeInterfaceToken(IRollbackManager.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -236,7 +249,8 @@ public interface IRollbackManager extends IInterface {
                     _data.writeInterfaceToken(IRollbackManager.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -245,7 +259,12 @@ public interface IRollbackManager extends IInterface {
             }
 
             @Override // android.content.rollback.IRollbackManager
-            public void commitRollback(int rollbackId, ParceledListSlice causePackages, String callerPackageName, IntentSender statusReceiver) throws RemoteException {
+            public void commitRollback(
+                    int rollbackId,
+                    ParceledListSlice causePackages,
+                    String callerPackageName,
+                    IntentSender statusReceiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -263,7 +282,14 @@ public interface IRollbackManager extends IInterface {
             }
 
             @Override // android.content.rollback.IRollbackManager
-            public void snapshotAndRestoreUserData(String packageName, int[] userIds, int appId, long ceDataInode, String seInfo, int token) throws RemoteException {
+            public void snapshotAndRestoreUserData(
+                    String packageName,
+                    int[] userIds,
+                    int appId,
+                    long ceDataInode,
+                    String seInfo,
+                    int token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

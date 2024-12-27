@@ -15,10 +15,15 @@ public class CaptureFailure {
     private final boolean mWasImageCaptured;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FailureReason {
-    }
+    public @interface FailureReason {}
 
-    public CaptureFailure(CaptureRequest request, int reason, boolean wasImageCaptured, int sequenceId, long frameNumber, String errorPhysicalCameraId) {
+    public CaptureFailure(
+            CaptureRequest request,
+            int reason,
+            boolean wasImageCaptured,
+            int sequenceId,
+            long frameNumber,
+            String errorPhysicalCameraId) {
         this.mRequest = request;
         this.mReason = reason;
         this.mWasImageCaptured = wasImageCaptured;

@@ -13,7 +13,8 @@ public class PKCS12StoreParameter implements KeyStore.LoadStoreParameter {
         this(out, password, false);
     }
 
-    public PKCS12StoreParameter(OutputStream out, KeyStore.ProtectionParameter protectionParameter) {
+    public PKCS12StoreParameter(
+            OutputStream out, KeyStore.ProtectionParameter protectionParameter) {
         this(out, protectionParameter, false);
     }
 
@@ -21,7 +22,10 @@ public class PKCS12StoreParameter implements KeyStore.LoadStoreParameter {
         this(out, new KeyStore.PasswordProtection(password), forDEREncoding);
     }
 
-    public PKCS12StoreParameter(OutputStream out, KeyStore.ProtectionParameter protectionParameter, boolean forDEREncoding) {
+    public PKCS12StoreParameter(
+            OutputStream out,
+            KeyStore.ProtectionParameter protectionParameter,
+            boolean forDEREncoding) {
         this.out = out;
         this.protectionParameter = protectionParameter;
         this.forDEREncoding = forDEREncoding;

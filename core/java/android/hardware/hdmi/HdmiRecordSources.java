@@ -45,11 +45,10 @@ public final class HdmiRecordSources {
         int toByteArray(byte[] bArr, int i);
     }
 
-    private HdmiRecordSources() {
-    }
+    private HdmiRecordSources() {}
 
     @SystemApi
-    public static abstract class RecordSource {
+    public abstract static class RecordSource {
         final int mExtraDataSize;
         final int mSourceType;
 
@@ -106,7 +105,8 @@ public final class HdmiRecordSources {
 
         @Override // android.hardware.hdmi.HdmiRecordSources.DigitalServiceIdentification
         public int toByteArray(byte[] data, int index) {
-            return HdmiRecordSources.threeFieldsToSixBytes(this.mTransportStreamId, this.mServiceId, this.mOriginalNetworkId, data, index);
+            return HdmiRecordSources.threeFieldsToSixBytes(
+                    this.mTransportStreamId, this.mServiceId, this.mOriginalNetworkId, data, index);
         }
     }
 
@@ -121,7 +121,8 @@ public final class HdmiRecordSources {
 
         @Override // android.hardware.hdmi.HdmiRecordSources.DigitalServiceIdentification
         public int toByteArray(byte[] data, int index) {
-            return HdmiRecordSources.threeFieldsToSixBytes(this.mTransportStreamId, this.mProgramNumber, 0, data, index);
+            return HdmiRecordSources.threeFieldsToSixBytes(
+                    this.mTransportStreamId, this.mProgramNumber, 0, data, index);
         }
     }
 
@@ -138,7 +139,8 @@ public final class HdmiRecordSources {
 
         @Override // android.hardware.hdmi.HdmiRecordSources.DigitalServiceIdentification
         public int toByteArray(byte[] data, int index) {
-            return HdmiRecordSources.threeFieldsToSixBytes(this.mTransportStreamId, this.mServiceId, this.mOriginalNetworkId, data, index);
+            return HdmiRecordSources.threeFieldsToSixBytes(
+                    this.mTransportStreamId, this.mServiceId, this.mOriginalNetworkId, data, index);
         }
     }
 
@@ -155,7 +157,10 @@ public final class HdmiRecordSources {
 
         /* JADX INFO: Access modifiers changed from: private */
         public int toByteArray(byte[] data, int index) {
-            data[index] = (byte) ((this.mChannelNumberFormat << 2) | ((this.mMajorChannelNumber >>> 8) & 3));
+            data[index] =
+                    (byte)
+                            ((this.mChannelNumberFormat << 2)
+                                    | ((this.mMajorChannelNumber >>> 8) & 3));
             data[index + 1] = (byte) (this.mMajorChannelNumber & 255);
             HdmiRecordSources.shortToByteArray((short) this.mMinorChannelNumber, data, index + 2);
             return 4;
@@ -186,7 +191,8 @@ public final class HdmiRecordSources {
         }
     }
 
-    public static DigitalServiceSource ofDigitalChannelId(int broadcastSystem, DigitalChannelData data) {
+    public static DigitalServiceSource ofDigitalChannelId(
+            int broadcastSystem, DigitalChannelData data) {
         if (data == null) {
             throw new IllegalArgumentException("data should not be null.");
         }
@@ -207,7 +213,8 @@ public final class HdmiRecordSources {
                 return new DigitalServiceSource(1, broadcastSystem, data);
             default:
                 Log.w(TAG, "Invalid broadcast type:" + broadcastSystem);
-                throw new IllegalArgumentException("Invalid broadcast system value:" + broadcastSystem);
+                throw new IllegalArgumentException(
+                        "Invalid broadcast system value:" + broadcastSystem);
         }
     }
 
@@ -269,7 +276,10 @@ public final class HdmiRecordSources {
         private final DigitalServiceIdentification mIdentification;
         private final int mIdentificationMethod;
 
-        private DigitalServiceSource(int identificatinoMethod, int broadcastSystem, DigitalServiceIdentification identification) {
+        private DigitalServiceSource(
+                int identificatinoMethod,
+                int broadcastSystem,
+                DigitalServiceIdentification identification) {
             super(2, 7);
             this.mIdentificationMethod = identificatinoMethod;
             this.mBroadcastSystem = broadcastSystem;
@@ -278,20 +288,23 @@ public final class HdmiRecordSources {
 
         @Override // android.hardware.hdmi.HdmiRecordSources.RecordSource
         int extraParamToByteArray(byte[] data, int index) {
-            data[index] = (byte) ((this.mIdentificationMethod << 7) | (this.mBroadcastSystem & 127));
+            data[index] =
+                    (byte) ((this.mIdentificationMethod << 7) | (this.mBroadcastSystem & 127));
             this.mIdentification.toByteArray(data, index + 1);
             return 7;
         }
     }
 
-    public static AnalogueServiceSource ofAnalogue(int broadcastType, int frequency, int broadcastSystem) {
+    public static AnalogueServiceSource ofAnalogue(
+            int broadcastType, int frequency, int broadcastSystem) {
         if (broadcastType < 0 || broadcastType > 2) {
             Log.w(TAG, "Invalid Broadcast type:" + broadcastType);
             throw new IllegalArgumentException("Invalid Broadcast type:" + broadcastType);
         }
         if (frequency < 0 || frequency > 65535) {
             Log.w(TAG, "Invalid frequency value[0x0000-0xFFFF]:" + frequency);
-            throw new IllegalArgumentException("Invalid frequency value[0x0000-0xFFFF]:" + frequency);
+            throw new IllegalArgumentException(
+                    "Invalid frequency value[0x0000-0xFFFF]:" + frequency);
         }
         if (broadcastSystem < 0 || broadcastSystem > 31) {
             Log.w(TAG, "Invalid Broadcast system:" + broadcastSystem);
@@ -374,7 +387,8 @@ public final class HdmiRecordSources {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static int threeFieldsToSixBytes(int first, int second, int third, byte[] data, int index) {
+    public static int threeFieldsToSixBytes(
+            int first, int second, int third, byte[] data, int index) {
         shortToByteArray((short) first, data, index);
         shortToByteArray((short) second, data, index + 2);
         shortToByteArray((short) third, data, index + 4);

@@ -49,8 +49,7 @@ public class GLEnvironment {
         nativeAllocate();
     }
 
-    private GLEnvironment(NativeAllocatorTag tag) {
-    }
+    private GLEnvironment(NativeAllocatorTag tag) {}
 
     public synchronized void tearDown() {
         if (this.glEnvId != -1) {
@@ -131,7 +130,8 @@ public class GLEnvironment {
     public int registerSurfaceFromMediaRecorder(MediaRecorder mediaRecorder) {
         int result = nativeAddSurfaceFromMediaRecorder(mediaRecorder);
         if (result < 0) {
-            throw new RuntimeException("Error registering surface from MediaRecorder" + mediaRecorder + "!");
+            throw new RuntimeException(
+                    "Error registering surface from MediaRecorder" + mediaRecorder + "!");
         }
         return result;
     }

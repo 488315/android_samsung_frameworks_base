@@ -6,7 +6,9 @@ import android.os.SystemClock;
 import android.telecom.Logging.Session;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+
 import com.samsung.android.audio.SoundTheme;
+
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,19 +41,22 @@ public class SemWifiApClientDetails implements Parcelable, Comparable<SemWifiApC
     protected long mClientTimeLimitInMilliSec;
     protected long mClientUsedMobileData;
     public static String DEFAULT_CONNECTED_IP = "x.x.x.x";
-    public static final Parcelable.Creator<SemWifiApClientDetails> CREATOR = new Parcelable.Creator<SemWifiApClientDetails>() { // from class: com.samsung.android.wifi.SemWifiApClientDetails.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiApClientDetails createFromParcel(Parcel source) {
-            return new SemWifiApClientDetails(source);
-        }
+    public static final Parcelable.Creator<SemWifiApClientDetails> CREATOR =
+            new Parcelable.Creator<
+                    SemWifiApClientDetails>() { // from class:
+                                                // com.samsung.android.wifi.SemWifiApClientDetails.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiApClientDetails createFromParcel(Parcel source) {
+                    return new SemWifiApClientDetails(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiApClientDetails[] newArray(int size) {
-            return new SemWifiApClientDetails[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiApClientDetails[] newArray(int size) {
+                    return new SemWifiApClientDetails[size];
+                }
+            };
 
     public enum DeviceNameType {
         DEFAULT(SoundTheme.Default),
@@ -100,7 +105,20 @@ public class SemWifiApClientDetails implements Parcelable, Comparable<SemWifiApC
         }
     }
 
-    public SemWifiApClientDetails(String mac, String name, String editedName, String nsdName, String ip, int deviceType, long dataLimit, long timeLimit, long currentDayUsedMobileDataUsage, long currentDayUsedTimeUsage, boolean isConnected, boolean isAutoHotspotClient, boolean isGuestClient) {
+    public SemWifiApClientDetails(
+            String mac,
+            String name,
+            String editedName,
+            String nsdName,
+            String ip,
+            int deviceType,
+            long dataLimit,
+            long timeLimit,
+            long currentDayUsedMobileDataUsage,
+            long currentDayUsedTimeUsage,
+            boolean isConnected,
+            boolean isAutoHotspotClient,
+            boolean isGuestClient) {
         this.mClientMac = mac;
         this.mClientName = name;
         this.mClientEditedName = editedName;
@@ -137,11 +155,13 @@ public class SemWifiApClientDetails implements Parcelable, Comparable<SemWifiApC
         this.mClientTimeLimitInMilliSec = clientDetails.mClientTimeLimitInMilliSec;
         this.mClientIsDataPausedFromUi = clientDetails.mClientIsDataPausedFromUi;
         this.mClientIsDataPauseByTimeLimit = clientDetails.mClientIsDataPauseByTimeLimit;
-        this.mClientCurrentDayActiveSessionMobileData = clientDetails.mClientCurrentDayActiveSessionMobileData;
+        this.mClientCurrentDayActiveSessionMobileData =
+                clientDetails.mClientCurrentDayActiveSessionMobileData;
         this.mClientActiveSessionMobileData = clientDetails.mClientActiveSessionMobileData;
         this.mClientUsedMobileData = clientDetails.mClientUsedMobileData;
         this.mClientIsConnected = clientDetails.mClientIsConnected;
-        this.mClientCurrentDayIntermediateTimeStamp = clientDetails.mClientCurrentDayIntermediateTimeStamp;
+        this.mClientCurrentDayIntermediateTimeStamp =
+                clientDetails.mClientCurrentDayIntermediateTimeStamp;
         this.mClientCurrentDayUsedTotalTime = clientDetails.mClientCurrentDayUsedTotalTime;
         this.mClientRecentConnectionTimeStamp = clientDetails.mClientRecentConnectionTimeStamp;
         this.mClientLastElapsedTime = clientDetails.mClientLastElapsedTime;
@@ -237,7 +257,53 @@ public class SemWifiApClientDetails implements Parcelable, Comparable<SemWifiApC
     }
 
     public String toString() {
-        return "{name=" + this.mClientName + ", editedName=" + getTruncatedEditedNameForLog() + ", nsdName = " + this.mClientNsdName + ", IP='" + getTruncatedIpAddress(this.mClientIpAddress) + DateFormat.QUOTE + "  Type=" + DeviceType.getDeviceTypeAsString(this.mClientDeviceType) + ", MAC=" + getTruncatedMAC(this.mClientMac) + ", D.T.=" + this.mClientDataLimitInBytes + ", T.L.=" + this.mClientTimeLimitInMilliSec + ", isConn='" + this.mClientIsConnected + DateFormat.QUOTE + ", connDuration='" + getClientActiveSessionDuration() + DateFormat.QUOTE + ", pausedFromUi='" + this.mClientIsDataPausedFromUi + DateFormat.QUOTE + ", pausedByTimer=" + this.mClientIsDataPauseByTimeLimit + "', activeSessionData=" + this.mClientActiveSessionMobileData + "', todayData=" + getClientTodayTotalMobileDataUsage() + "', todayTime=" + getClientTodayTotalTime() + "', RtPackets='" + this.mClientRealTimePackets + DateFormat.QUOTE + ", RtBytes='" + this.mClientRealTimeBytes + DateFormat.QUOTE + ", guestSta='" + this.mClientIsGuestDevice + DateFormat.QUOTE + ", autoHotspotSta='" + this.mClientIsAutoHotspotDevice + DateFormat.QUOTE + "}\n";
+        return "{name="
+                + this.mClientName
+                + ", editedName="
+                + getTruncatedEditedNameForLog()
+                + ", nsdName = "
+                + this.mClientNsdName
+                + ", IP='"
+                + getTruncatedIpAddress(this.mClientIpAddress)
+                + DateFormat.QUOTE
+                + "  Type="
+                + DeviceType.getDeviceTypeAsString(this.mClientDeviceType)
+                + ", MAC="
+                + getTruncatedMAC(this.mClientMac)
+                + ", D.T.="
+                + this.mClientDataLimitInBytes
+                + ", T.L.="
+                + this.mClientTimeLimitInMilliSec
+                + ", isConn='"
+                + this.mClientIsConnected
+                + DateFormat.QUOTE
+                + ", connDuration='"
+                + getClientActiveSessionDuration()
+                + DateFormat.QUOTE
+                + ", pausedFromUi='"
+                + this.mClientIsDataPausedFromUi
+                + DateFormat.QUOTE
+                + ", pausedByTimer="
+                + this.mClientIsDataPauseByTimeLimit
+                + "', activeSessionData="
+                + this.mClientActiveSessionMobileData
+                + "', todayData="
+                + getClientTodayTotalMobileDataUsage()
+                + "', todayTime="
+                + getClientTodayTotalTime()
+                + "', RtPackets='"
+                + this.mClientRealTimePackets
+                + DateFormat.QUOTE
+                + ", RtBytes='"
+                + this.mClientRealTimeBytes
+                + DateFormat.QUOTE
+                + ", guestSta='"
+                + this.mClientIsGuestDevice
+                + DateFormat.QUOTE
+                + ", autoHotspotSta='"
+                + this.mClientIsAutoHotspotDevice
+                + DateFormat.QUOTE
+                + "}\n";
     }
 
     private static String getTruncatedIpAddress(String ipAdd) {
@@ -250,7 +316,8 @@ public class SemWifiApClientDetails implements Parcelable, Comparable<SemWifiApC
         StringBuffer trunIp = new StringBuffer();
         int dotCount = 0;
         int index = 0;
-        while (index < ipAdd.length() && (ipAdd.charAt(index) != '.' || (dotCount = dotCount + 1) != 2)) {
+        while (index < ipAdd.length()
+                && (ipAdd.charAt(index) != '.' || (dotCount = dotCount + 1) != 2)) {
             trunIp.append("*");
             index++;
         }
@@ -342,7 +409,9 @@ public class SemWifiApClientDetails implements Parcelable, Comparable<SemWifiApC
     }
 
     public boolean isClientDataPausedByDataLimit() {
-        return this.isCellularStream && this.mClientDataLimitInBytes > 0 && getClientTodayTotalMobileDataUsage() >= this.mClientDataLimitInBytes;
+        return this.isCellularStream
+                && this.mClientDataLimitInBytes > 0
+                && getClientTodayTotalMobileDataUsage() >= this.mClientDataLimitInBytes;
     }
 
     public boolean isClientDataPauseByTimeLimit() {
@@ -350,7 +419,9 @@ public class SemWifiApClientDetails implements Parcelable, Comparable<SemWifiApC
     }
 
     public boolean isClientInternetPaused() {
-        return isClientDataPausedByDataLimit() || isClientDataPauseByTimeLimit() || isClientDataPausedByUser();
+        return isClientDataPausedByDataLimit()
+                || isClientDataPauseByTimeLimit()
+                || isClientDataPausedByUser();
     }
 
     private long getClientTodayCounterTotalTime() {

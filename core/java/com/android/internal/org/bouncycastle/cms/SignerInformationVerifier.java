@@ -16,7 +16,11 @@ public class SignerInformationVerifier {
     private CMSSignatureAlgorithmNameGenerator sigNameGenerator;
     private ContentVerifierProvider verifierProvider;
 
-    public SignerInformationVerifier(CMSSignatureAlgorithmNameGenerator sigNameGenerator, SignatureAlgorithmIdentifierFinder sigAlgorithmFinder, ContentVerifierProvider verifierProvider, DigestCalculatorProvider digestProvider) {
+    public SignerInformationVerifier(
+            CMSSignatureAlgorithmNameGenerator sigNameGenerator,
+            SignatureAlgorithmIdentifierFinder sigAlgorithmFinder,
+            ContentVerifierProvider verifierProvider,
+            DigestCalculatorProvider digestProvider) {
         this.sigNameGenerator = sigNameGenerator;
         this.sigAlgorithmFinder = sigAlgorithmFinder;
         this.verifierProvider = verifierProvider;
@@ -31,13 +35,19 @@ public class SignerInformationVerifier {
         return this.verifierProvider.getAssociatedCertificate();
     }
 
-    public ContentVerifier getContentVerifier(AlgorithmIdentifier signingAlgorithm, AlgorithmIdentifier digestAlgorithm) throws OperatorCreationException {
-        String signatureName = this.sigNameGenerator.getSignatureName(digestAlgorithm, signingAlgorithm);
+    public ContentVerifier getContentVerifier(
+            AlgorithmIdentifier signingAlgorithm, AlgorithmIdentifier digestAlgorithm)
+            throws OperatorCreationException {
+        String signatureName =
+                this.sigNameGenerator.getSignatureName(digestAlgorithm, signingAlgorithm);
         AlgorithmIdentifier baseAlgID = this.sigAlgorithmFinder.find(signatureName);
-        return this.verifierProvider.get(new AlgorithmIdentifier(baseAlgID.getAlgorithm(), signingAlgorithm.getParameters()));
+        return this.verifierProvider.get(
+                new AlgorithmIdentifier(
+                        baseAlgID.getAlgorithm(), signingAlgorithm.getParameters()));
     }
 
-    public DigestCalculator getDigestCalculator(AlgorithmIdentifier algorithmIdentifier) throws OperatorCreationException {
+    public DigestCalculator getDigestCalculator(AlgorithmIdentifier algorithmIdentifier)
+            throws OperatorCreationException {
         return this.digestProvider.get(algorithmIdentifier);
     }
 }

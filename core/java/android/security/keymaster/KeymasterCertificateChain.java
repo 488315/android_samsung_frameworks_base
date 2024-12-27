@@ -2,24 +2,28 @@ package android.security.keymaster;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public class KeymasterCertificateChain implements Parcelable {
-    public static final Parcelable.Creator<KeymasterCertificateChain> CREATOR = new Parcelable.Creator<KeymasterCertificateChain>() { // from class: android.security.keymaster.KeymasterCertificateChain.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeymasterCertificateChain createFromParcel(Parcel in) {
-            return new KeymasterCertificateChain(in);
-        }
+    public static final Parcelable.Creator<KeymasterCertificateChain> CREATOR =
+            new Parcelable.Creator<
+                    KeymasterCertificateChain>() { // from class:
+                                                   // android.security.keymaster.KeymasterCertificateChain.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeymasterCertificateChain createFromParcel(Parcel in) {
+                    return new KeymasterCertificateChain(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeymasterCertificateChain[] newArray(int size) {
-            return new KeymasterCertificateChain[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeymasterCertificateChain[] newArray(int size) {
+                    return new KeymasterCertificateChain[size];
+                }
+            };
     private List<byte[]> mCertificates;
 
     public KeymasterCertificateChain() {

@@ -1,13 +1,16 @@
 package android.audio.policy.configuration.V7_0;
 
 import android.provider.Telephony;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class Profile {
@@ -98,7 +101,8 @@ public class Profile {
         this.encapsulationType = encapsulationType;
     }
 
-    static Profile read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Profile read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         Profile _instance = new Profile();
         String _raw = _parser.getAttributeValue(null, "name");
         if (_raw != null) {

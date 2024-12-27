@@ -8,6 +8,7 @@ import android.view.animation.CycleInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
+
 import com.samsung.android.graphics.spr.animation.interpolator.BackEaseIn;
 import com.samsung.android.graphics.spr.animation.interpolator.BackEaseInOut;
 import com.samsung.android.graphics.spr.animation.interpolator.BackEaseOut;
@@ -49,6 +50,7 @@ import com.samsung.android.graphics.spr.animation.interpolator.SineInOut80;
 import com.samsung.android.graphics.spr.animation.interpolator.SineInOut90;
 import com.samsung.android.graphics.spr.animation.interpolator.SineOut33;
 import com.samsung.android.graphics.spr.document.SprInputStream;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -163,7 +165,8 @@ public abstract class SprAnimatorBase extends ValueAnimator implements Cloneable
         } else if (this.mInterpolatorType >= 22 && this.mInterpolatorType <= 23) {
             this.mInterpolatorAmplitude = ByteBuffer.wrap(data).getFloat();
             this.mInterpolatorPeriod = ByteBuffer.wrap(data).getFloat();
-            setInterpolatorElastic(this.mInterpolatorType, this.mInterpolatorAmplitude, this.mInterpolatorPeriod);
+            setInterpolatorElastic(
+                    this.mInterpolatorType, this.mInterpolatorAmplitude, this.mInterpolatorPeriod);
         } else {
             setInterpolator(this.mInterpolatorType);
         }
@@ -247,7 +250,8 @@ public abstract class SprAnimatorBase extends ValueAnimator implements Cloneable
             case 2:
             case 6:
             default:
-                throw new RuntimeException("Unexpected interpolatorType : " + ((int) interpolatorType));
+                throw new RuntimeException(
+                        "Unexpected interpolatorType : " + ((int) interpolatorType));
             case 3:
                 setInterpolator(new AnticipateInterpolator());
                 break;
@@ -398,7 +402,8 @@ public abstract class SprAnimatorBase extends ValueAnimator implements Cloneable
                 this.mInterpolatorCycle = interpolatorCycle;
                 return;
             default:
-                throw new RuntimeException("Unexpected interpolatorType : " + ((int) interpolatorType));
+                throw new RuntimeException(
+                        "Unexpected interpolatorType : " + ((int) interpolatorType));
         }
     }
 
@@ -414,7 +419,8 @@ public abstract class SprAnimatorBase extends ValueAnimator implements Cloneable
                 setInterpolator(new BackEaseInOut(overshot));
                 break;
             default:
-                throw new RuntimeException("Unexpected interpolatorType : " + ((int) interpolatorType));
+                throw new RuntimeException(
+                        "Unexpected interpolatorType : " + ((int) interpolatorType));
         }
         this.mInterpolatorType = interpolatorType;
         this.mInterpolatorOvershot = overshot;
@@ -432,7 +438,8 @@ public abstract class SprAnimatorBase extends ValueAnimator implements Cloneable
                 setInterpolator(new ElasticEaseInOut(amplitude, period));
                 break;
             default:
-                throw new RuntimeException("Unexpected interpolatorType : " + ((int) interpolatorType));
+                throw new RuntimeException(
+                        "Unexpected interpolatorType : " + ((int) interpolatorType));
         }
         this.mInterpolatorType = interpolatorType;
         this.mInterpolatorAmplitude = amplitude;

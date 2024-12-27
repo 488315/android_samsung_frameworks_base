@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.util.ArrayMap;
 import android.util.Base64;
+
 import java.io.PrintWriter;
 import java.util.function.BiConsumer;
 
@@ -39,7 +40,11 @@ public final class ContentDispatcher {
                     if (pdfInfo != null) {
                         printWriter.println("  TaskId: " + intValue);
                         printWriter.println("    viewer: " + pdfInfo.mPackageName);
-                        printWriter.println("    content: " + Base64.encodeToString(pdfInfo.mIntent.getData().toString().getBytes(), 2));
+                        printWriter.println(
+                                "    content: "
+                                        + Base64.encodeToString(
+                                                pdfInfo.mIntent.getData().toString().getBytes(),
+                                                2));
                     }
                 }
                 printWriter.println();

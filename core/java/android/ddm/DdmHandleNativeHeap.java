@@ -1,6 +1,7 @@
 package android.ddm;
 
 import android.util.Log;
+
 import org.apache.harmony.dalvik.ddmc.Chunk;
 import org.apache.harmony.dalvik.ddmc.ChunkHandler;
 import org.apache.harmony.dalvik.ddmc.DdmServer;
@@ -12,18 +13,15 @@ public class DdmHandleNativeHeap extends DdmHandle {
 
     private native byte[] getLeakInfo();
 
-    private DdmHandleNativeHeap() {
-    }
+    private DdmHandleNativeHeap() {}
 
     public static void register() {
         DdmServer.registerHandler(CHUNK_NHGT, mInstance);
     }
 
-    public void onConnected() {
-    }
+    public void onConnected() {}
 
-    public void onDisconnected() {
-    }
+    public void onDisconnected() {}
 
     public Chunk handleChunk(Chunk request) {
         Log.i("ddm-nativeheap", "Handling " + name(request.type) + " chunk");

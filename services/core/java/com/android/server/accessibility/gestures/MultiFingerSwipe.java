@@ -8,9 +8,10 @@ import android.util.DisplayMetrics;
 import android.util.Slog;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
-import com.android.server.accessibility.gestures.GestureMatcher;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -29,7 +30,12 @@ public final class MultiFingerSwipe extends GestureMatcher {
     public boolean mTargetFingerCountReached;
     public final int mTouchSlop;
 
-    public MultiFingerSwipe(Context context, int i, int i2, int i3, GestureMatcher.StateChangeListener stateChangeListener) {
+    public MultiFingerSwipe(
+            Context context,
+            int i,
+            int i2,
+            int i3,
+            GestureMatcher.StateChangeListener stateChangeListener) {
         super(i3, new Handler(context.getMainLooper()), stateChangeListener);
         this.mTargetFingerCountReached = false;
         this.mTargetFingerCount = i;
@@ -48,11 +54,19 @@ public final class MultiFingerSwipe extends GestureMatcher {
     }
 
     public static String directionToString(int i) {
-        return i != 0 ? i != 1 ? i != 2 ? i != 3 ? "Unknown Direction" : INetd.IF_STATE_DOWN : INetd.IF_STATE_UP : "right" : "left";
+        return i != 0
+                ? i != 1
+                        ? i != 2
+                                ? i != 3 ? "Unknown Direction" : INetd.IF_STATE_DOWN
+                                : INetd.IF_STATE_UP
+                        : "right"
+                : "left";
     }
 
     public static int toDirection(float f, float f2) {
-        return Math.abs(f) > Math.abs(f2) ? f < FullScreenMagnificationGestureHandler.MAX_SCALE ? 0 : 1 : f2 < FullScreenMagnificationGestureHandler.MAX_SCALE ? 2 : 3;
+        return Math.abs(f) > Math.abs(f2)
+                ? f < FullScreenMagnificationGestureHandler.MAX_SCALE ? 0 : 1
+                : f2 < FullScreenMagnificationGestureHandler.MAX_SCALE ? 2 : 3;
     }
 
     @Override // com.android.server.accessibility.gestures.GestureMatcher
@@ -115,7 +129,8 @@ public final class MultiFingerSwipe extends GestureMatcher {
         }
         float x = motionEvent2.getX(actionIndex);
         float y = motionEvent2.getY(actionIndex);
-        if (x < FullScreenMagnificationGestureHandler.MAX_SCALE || y < FullScreenMagnificationGestureHandler.MAX_SCALE) {
+        if (x < FullScreenMagnificationGestureHandler.MAX_SCALE
+                || y < FullScreenMagnificationGestureHandler.MAX_SCALE) {
             setState(3, motionEvent, motionEvent2, i);
             return;
         }
@@ -128,13 +143,13 @@ public final class MultiFingerSwipe extends GestureMatcher {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:58:0x0120, code lost:
-    
-        setState(3, r18, r19, r20);
-     */
+
+       setState(3, r18, r19, r20);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:59:0x0123, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     @Override // com.android.server.accessibility.gestures.GestureMatcher
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -145,7 +160,10 @@ public final class MultiFingerSwipe extends GestureMatcher {
             Method dump skipped, instructions count: 292
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.gestures.MultiFingerSwipe.onMove(android.view.MotionEvent, android.view.MotionEvent, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.gestures.MultiFingerSwipe.onMove(android.view.MotionEvent,"
+                    + " android.view.MotionEvent, int):void");
     }
 
     @Override // com.android.server.accessibility.gestures.GestureMatcher
@@ -184,7 +202,8 @@ public final class MultiFingerSwipe extends GestureMatcher {
         }
         float x = motionEvent2.getX(actionIndex);
         float y = motionEvent2.getY(actionIndex);
-        if (x < FullScreenMagnificationGestureHandler.MAX_SCALE || y < FullScreenMagnificationGestureHandler.MAX_SCALE) {
+        if (x < FullScreenMagnificationGestureHandler.MAX_SCALE
+                || y < FullScreenMagnificationGestureHandler.MAX_SCALE) {
             setState(3, motionEvent, motionEvent2, i);
             return;
         }
@@ -216,7 +235,8 @@ public final class MultiFingerSwipe extends GestureMatcher {
         }
         float x = motionEvent2.getX(actionIndex);
         float y = motionEvent2.getY(actionIndex);
-        if (x < FullScreenMagnificationGestureHandler.MAX_SCALE || y < FullScreenMagnificationGestureHandler.MAX_SCALE) {
+        if (x < FullScreenMagnificationGestureHandler.MAX_SCALE
+                || y < FullScreenMagnificationGestureHandler.MAX_SCALE) {
             setState(3, motionEvent, motionEvent2, i);
             return;
         }
@@ -235,14 +255,16 @@ public final class MultiFingerSwipe extends GestureMatcher {
         }
         this.mCurrentFingerCount = 0;
         int actionIndex = GestureUtils.getActionIndex(motionEvent);
-        int binarySearch = Arrays.binarySearch(this.mPointerIds, motionEvent.getPointerId(actionIndex));
+        int binarySearch =
+                Arrays.binarySearch(this.mPointerIds, motionEvent.getPointerId(actionIndex));
         if (binarySearch < 0) {
             setState(3, motionEvent, motionEvent2, i);
             return;
         }
         float x = motionEvent2.getX(actionIndex);
         float y = motionEvent2.getY(actionIndex);
-        if (x < FullScreenMagnificationGestureHandler.MAX_SCALE || y < FullScreenMagnificationGestureHandler.MAX_SCALE) {
+        if (x < FullScreenMagnificationGestureHandler.MAX_SCALE
+                || y < FullScreenMagnificationGestureHandler.MAX_SCALE) {
             setState(3, motionEvent, motionEvent2, i);
             return;
         }
@@ -254,7 +276,8 @@ public final class MultiFingerSwipe extends GestureMatcher {
         for (int i2 = 0; i2 < this.mTargetFingerCount; i2++) {
             boolean z = TouchExplorer.DEBUG;
             if (z) {
-                AnyMotionDetector$$ExternalSyntheticOutline0.m(i2, "Recognizing finger: ", getGestureName());
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        i2, "Recognizing finger: ", getGestureName());
             }
             if (this.mStrokeBuffers[i2].size() < 2) {
                 Slog.d(getGestureName(), "Too few points.");
@@ -275,7 +298,12 @@ public final class MultiFingerSwipe extends GestureMatcher {
                 int i4 = this.mDirection;
                 if (direction != i4) {
                     if (TouchExplorer.DEBUG) {
-                        Slog.d(getGestureName(), "Found direction " + directionToString(direction) + " when expecting " + directionToString(i4));
+                        Slog.d(
+                                getGestureName(),
+                                "Found direction "
+                                        + directionToString(direction)
+                                        + " when expecting "
+                                        + directionToString(i4));
                     }
                     setState(3, motionEvent, motionEvent2, i);
                     return;

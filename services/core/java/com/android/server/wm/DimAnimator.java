@@ -17,14 +17,18 @@ public final class DimAnimator {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:46:0x0058, code lost:
-    
-        if (r5 != false) goto L39;
-     */
+
+       if (r5 != false) goto L39;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean canCreateDimAnimationLayer(int r4, boolean r5, android.view.WindowManager.LayoutParams r6, android.window.TransitionInfo.Change r7) {
+    public final boolean canCreateDimAnimationLayer(
+            int r4,
+            boolean r5,
+            android.view.WindowManager.LayoutParams r6,
+            android.window.TransitionInfo.Change r7) {
         /*
             r3 = this;
             com.android.server.wm.WindowContainer r3 = r3.mContainer
@@ -100,7 +104,11 @@ public final class DimAnimator {
         L74:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DimAnimator.canCreateDimAnimationLayer(int, boolean, android.view.WindowManager$LayoutParams, android.window.TransitionInfo$Change):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DimAnimator.canCreateDimAnimationLayer(int, boolean,"
+                    + " android.view.WindowManager$LayoutParams,"
+                    + " android.window.TransitionInfo$Change):boolean");
     }
 
     public void createDimAnimationLayer(int i) {
@@ -108,7 +116,14 @@ public final class DimAnimator {
         if (this.mDimAnimationLayer == null) {
             this.mTransitType = i;
             WindowContainer windowContainer = this.mContainer;
-            this.mDimAnimationLayer = windowContainer.makeChildSurface(null).setName("DimAnimationLayer for " + windowContainer.getName()).setColorLayer().setParent(windowContainer.getDisplayContent().getSurfaceControl()).setCallsite("WindowContainer#createAnimatingDimLayer").build();
+            this.mDimAnimationLayer =
+                    windowContainer
+                            .makeChildSurface(null)
+                            .setName("DimAnimationLayer for " + windowContainer.getName())
+                            .setColorLayer()
+                            .setParent(windowContainer.getDisplayContent().getSurfaceControl())
+                            .setCallsite("WindowContainer#createAnimatingDimLayer")
+                            .build();
         }
     }
 
@@ -118,13 +133,16 @@ public final class DimAnimator {
             return;
         }
         WindowContainer windowContainer = this.mContainer;
-        windowContainer.mWmService.mSurfaceAnimationRunner.onAnimationCancelled(this.mDimAnimationLayer);
+        windowContainer.mWmService.mSurfaceAnimationRunner.onAnimationCancelled(
+                this.mDimAnimationLayer);
         windowContainer.getSyncTransaction().reparent(this.mDimAnimationLayer, null);
         this.mDimAnimationLayer = null;
         this.mTransitType = 0;
         windowContainer.scheduleAnimation();
         if ((i & 2) != 0) {
-            for (WindowContainer parent = windowContainer.getParent(); parent != null; parent = parent.getParent()) {
+            for (WindowContainer parent = windowContainer.getParent();
+                    parent != null;
+                    parent = parent.getParent()) {
                 parent.mDimAnimator.finishDimAnimation(2);
             }
         }

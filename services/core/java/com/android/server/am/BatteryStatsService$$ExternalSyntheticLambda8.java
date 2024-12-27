@@ -4,7 +4,8 @@ import com.android.server.power.stats.BatteryStatsImpl;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ String f$1;
@@ -12,7 +13,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
     public final /* synthetic */ long f$3;
     public final /* synthetic */ long f$4;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda8(BatteryStatsService batteryStatsService, int i, String str, long j, long j2, int i2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda8(
+            BatteryStatsService batteryStatsService, int i, String str, long j, long j2, int i2) {
         this.$r8$classId = i2;
         this.f$0 = batteryStatsService;
         this.f$2 = i;
@@ -21,7 +23,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
         this.f$4 = j2;
     }
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda8(BatteryStatsService batteryStatsService, String str, int i, long j, long j2, int i2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda8(
+            BatteryStatsService batteryStatsService, String str, int i, long j, long j2, int i2) {
         this.$r8$classId = i2;
         this.f$0 = batteryStatsService;
         this.f$1 = str;
@@ -52,9 +55,16 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
             batteryStatsImpl.getClass();
             String encodingPersonalInformation = BatteryStatsImpl.encodingPersonalInformation(str);
             int mapUid = batteryStatsImpl.mapUid(i);
-            ((BatteryStatsImpl.DualTimer) batteryStatsImpl.getUidStatsLocked(mapUid, j, j2).mSyncStats.startObject(j, encodingPersonalInformation)).startRunningLocked(j);
-            if (batteryStatsImpl.mActiveEvents.updateState(32772, encodingPersonalInformation, mapUid, 0)) {
-                batteryStatsImpl.mHistory.recordEvent(j, j2, 32772, encodingPersonalInformation, mapUid);
+            ((BatteryStatsImpl.DualTimer)
+                            batteryStatsImpl
+                                    .getUidStatsLocked(mapUid, j, j2)
+                                    .mSyncStats
+                                    .startObject(j, encodingPersonalInformation))
+                    .startRunningLocked(j);
+            if (batteryStatsImpl.mActiveEvents.updateState(
+                    32772, encodingPersonalInformation, mapUid, 0)) {
+                batteryStatsImpl.mHistory.recordEvent(
+                        j, j2, 32772, encodingPersonalInformation, mapUid);
             }
         }
     }
@@ -70,12 +80,19 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
             batteryStatsImpl.getClass();
             String encodingPersonalInformation = BatteryStatsImpl.encodingPersonalInformation(str);
             int mapUid = batteryStatsImpl.mapUid(i);
-            BatteryStatsImpl.DualTimer dualTimer = (BatteryStatsImpl.DualTimer) batteryStatsImpl.getUidStatsLocked(mapUid, j, j2).mSyncStats.stopObject(j, encodingPersonalInformation);
+            BatteryStatsImpl.DualTimer dualTimer =
+                    (BatteryStatsImpl.DualTimer)
+                            batteryStatsImpl
+                                    .getUidStatsLocked(mapUid, j, j2)
+                                    .mSyncStats
+                                    .stopObject(j, encodingPersonalInformation);
             if (dualTimer != null) {
                 dualTimer.stopRunningLocked(j);
             }
-            if (batteryStatsImpl.mActiveEvents.updateState(16388, encodingPersonalInformation, mapUid, 0)) {
-                batteryStatsImpl.mHistory.recordEvent(j, j2, 16388, encodingPersonalInformation, mapUid);
+            if (batteryStatsImpl.mActiveEvents.updateState(
+                    16388, encodingPersonalInformation, mapUid, 0)) {
+                batteryStatsImpl.mHistory.recordEvent(
+                        j, j2, 16388, encodingPersonalInformation, mapUid);
             }
         }
     }
@@ -91,9 +108,16 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
             batteryStatsImpl.getClass();
             String encodingPersonalInformation = BatteryStatsImpl.encodingPersonalInformation(str);
             int mapUid = batteryStatsImpl.mapUid(i);
-            ((BatteryStatsImpl.DualTimer) batteryStatsImpl.getUidStatsLocked(mapUid, j, j2).mJobStats.startObject(j, encodingPersonalInformation)).startRunningLocked(j);
-            if (batteryStatsImpl.mActiveEvents.updateState(32774, encodingPersonalInformation, mapUid, 0)) {
-                batteryStatsImpl.mHistory.recordEvent(j, j2, 32774, encodingPersonalInformation, mapUid);
+            ((BatteryStatsImpl.DualTimer)
+                            batteryStatsImpl
+                                    .getUidStatsLocked(mapUid, j, j2)
+                                    .mJobStats
+                                    .startObject(j, encodingPersonalInformation))
+                    .startRunningLocked(j);
+            if (batteryStatsImpl.mActiveEvents.updateState(
+                    32774, encodingPersonalInformation, mapUid, 0)) {
+                batteryStatsImpl.mHistory.recordEvent(
+                        j, j2, 32774, encodingPersonalInformation, mapUid);
             }
         }
     }
@@ -108,9 +132,13 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
             BatteryStatsImpl batteryStatsImpl = batteryStatsService.mStats;
             int mapUid = batteryStatsImpl.mapUid(i);
             if (batteryStatsImpl.mOnBattery) {
-                batteryStatsImpl.getUidStatsLocked(mapUid, j, j2).getProcessStatsLocked(str).mStarts++;
+                batteryStatsImpl
+                        .getUidStatsLocked(mapUid, j, j2)
+                        .getProcessStatsLocked(str)
+                        .mStarts++;
             }
-            if (batteryStatsImpl.mActiveEvents.updateState(32769, str, mapUid, 0) && batteryStatsImpl.mRecordAllHistory) {
+            if (batteryStatsImpl.mActiveEvents.updateState(32769, str, mapUid, 0)
+                    && batteryStatsImpl.mRecordAllHistory) {
                 batteryStatsImpl.mHistory.recordEvent(j, j2, 32769, str, mapUid);
             }
         }
@@ -141,7 +169,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
                 synchronized (batteryStatsService.mStats) {
                     BatteryStatsImpl batteryStatsImpl = batteryStatsService.mStats;
                     int mapUid = batteryStatsImpl.mapUid(i);
-                    if (batteryStatsImpl.mActiveEvents.updateState(16385, str, mapUid, 0) && batteryStatsImpl.mRecordAllHistory) {
+                    if (batteryStatsImpl.mActiveEvents.updateState(16385, str, mapUid, 0)
+                            && batteryStatsImpl.mRecordAllHistory) {
                         batteryStatsImpl.mHistory.recordEvent(j, j2, 16385, str, mapUid);
                     }
                 }
@@ -156,7 +185,10 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
                     BatteryStatsImpl batteryStatsImpl2 = batteryStatsService2.mStats;
                     int mapUid2 = batteryStatsImpl2.mapUid(i2);
                     if (batteryStatsImpl2.mOnBattery) {
-                        batteryStatsImpl2.getUidStatsLocked(mapUid2, j3, j4).getProcessStatsLocked(str2).mNumCrashes++;
+                        batteryStatsImpl2
+                                .getUidStatsLocked(mapUid2, j3, j4)
+                                .getProcessStatsLocked(str2)
+                                .mNumCrashes++;
                     }
                 }
                 return;
@@ -170,7 +202,10 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
                     BatteryStatsImpl batteryStatsImpl3 = batteryStatsService3.mStats;
                     int mapUid3 = batteryStatsImpl3.mapUid(i3);
                     if (batteryStatsImpl3.mOnBattery) {
-                        batteryStatsImpl3.getUidStatsLocked(mapUid3, j5, j6).getProcessStatsLocked(str3).mNumAnrs++;
+                        batteryStatsImpl3
+                                .getUidStatsLocked(mapUid3, j5, j6)
+                                .getProcessStatsLocked(str3)
+                                .mNumAnrs++;
                     }
                 }
                 return;
@@ -203,9 +238,12 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda8
                     batteryStatsImpl4.getClass();
                     String str5 = i4 + " " + str4;
                     if (!batteryStatsImpl4.mScreenWakeStats.containsKey(str5)) {
-                        batteryStatsImpl4.mScreenWakeStats.put(str5, new BatteryStatsImpl.Counter(batteryStatsImpl4.mOnBatteryTimeBase));
+                        batteryStatsImpl4.mScreenWakeStats.put(
+                                str5,
+                                new BatteryStatsImpl.Counter(batteryStatsImpl4.mOnBatteryTimeBase));
                     }
-                    ((BatteryStatsImpl.Counter) batteryStatsImpl4.mScreenWakeStats.get(str5)).addAtomic(1);
+                    ((BatteryStatsImpl.Counter) batteryStatsImpl4.mScreenWakeStats.get(str5))
+                            .addAtomic(1);
                     batteryStatsImpl4.mHistory.recordEvent(j7, j8, 18, str4, i4);
                 }
                 return;

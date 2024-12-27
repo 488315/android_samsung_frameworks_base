@@ -2,23 +2,27 @@ package com.android.ims.internal.uce.presence;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.ims.internal.uce.common.StatusCode;
 
 /* loaded from: classes5.dex */
 public class PresCmdStatus implements Parcelable {
-    public static final Parcelable.Creator<PresCmdStatus> CREATOR = new Parcelable.Creator<PresCmdStatus>() { // from class: com.android.ims.internal.uce.presence.PresCmdStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresCmdStatus createFromParcel(Parcel source) {
-            return new PresCmdStatus(source);
-        }
+    public static final Parcelable.Creator<PresCmdStatus> CREATOR =
+            new Parcelable.Creator<
+                    PresCmdStatus>() { // from class:
+                                       // com.android.ims.internal.uce.presence.PresCmdStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresCmdStatus createFromParcel(Parcel source) {
+                    return new PresCmdStatus(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresCmdStatus[] newArray(int size) {
-            return new PresCmdStatus[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresCmdStatus[] newArray(int size) {
+                    return new PresCmdStatus[size];
+                }
+            };
     private PresCmdId mCmdId;
     private int mRequestId;
     private StatusCode mStatus;
@@ -84,7 +88,11 @@ public class PresCmdStatus implements Parcelable {
     public void readFromParcel(Parcel source) {
         this.mUserData = source.readInt();
         this.mRequestId = source.readInt();
-        this.mCmdId = (PresCmdId) source.readParcelable(PresCmdId.class.getClassLoader(), PresCmdId.class);
-        this.mStatus = (StatusCode) source.readParcelable(StatusCode.class.getClassLoader(), StatusCode.class);
+        this.mCmdId =
+                (PresCmdId)
+                        source.readParcelable(PresCmdId.class.getClassLoader(), PresCmdId.class);
+        this.mStatus =
+                (StatusCode)
+                        source.readParcelable(StatusCode.class.getClassLoader(), StatusCode.class);
     }
 }

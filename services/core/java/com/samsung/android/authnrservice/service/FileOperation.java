@@ -2,6 +2,7 @@ package com.samsung.android.authnrservice.service;
 
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.util.Base64;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -64,11 +65,12 @@ public final class FileOperation {
             }
             Arrays.sort(strArr);
         } else {
-            strArr = new String[]{str};
+            strArr = new String[] {str};
         }
         String trim = str2.trim();
         for (String str3 : strArr) {
-            File file2 = new File(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, str3));
+            File file2 =
+                    new File(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, str3));
             if (file2.isDirectory()) {
                 List filesRec = getFilesRec(file2.getPath(), trim);
                 if (((ArrayList) filesRec).size() > 0) {

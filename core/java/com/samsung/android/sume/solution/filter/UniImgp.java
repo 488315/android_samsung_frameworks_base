@@ -2,6 +2,7 @@ package com.samsung.android.sume.solution.filter;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.samsung.android.sume.core.descriptor.ImgpDescriptor;
 import com.samsung.android.sume.core.filter.ImgpFilter;
 import com.samsung.android.sume.core.filter.factory.MediaFilterFactory;
@@ -13,6 +14,7 @@ import com.samsung.android.sume.core.plugin.SimgpPlugin;
 import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.ImgpType;
 import com.samsung.android.sume.core.types.OptionBase;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -45,35 +47,34 @@ public class UniImgp {
     private Option option;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InterpolationType {
-    }
+    public @interface InterpolationType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OptionType {
-    }
+    public @interface OptionType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface QualityMetricType {
-    }
+    public @interface QualityMetricType {}
 
     public static class Option extends OptionBase {
-        public static final Parcelable.Creator<Option> CREATOR = new Parcelable.Creator<Option>() { // from class: com.samsung.android.sume.solution.filter.UniImgp.Option.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Option createFromParcel(Parcel in) {
-                return new Option(in);
-            }
+        public static final Parcelable.Creator<Option> CREATOR =
+                new Parcelable.Creator<
+                        Option>() { // from class:
+                                    // com.samsung.android.sume.solution.filter.UniImgp.Option.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Option createFromParcel(Parcel in) {
+                        return new Option(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Option[] newArray(int size) {
-                return new Option[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Option[] newArray(int size) {
+                        return new Option[size];
+                    }
+                };
         private transient PluginStore pluginStore;
 
-        public Option() {
-        }
+        public Option() {}
 
         public Option(Parcel in) {
             super(in);
@@ -125,13 +126,15 @@ public class UniImgp {
         }
 
         public Option setPluginOrder(ImgpPlugin.Type... pluginOrder) {
-            Map<ImgpType, List<ImgpPlugin.Type>> pluginOrderMap = contains(2002) ? (Map) get(2002) : new HashMap<>();
+            Map<ImgpType, List<ImgpPlugin.Type>> pluginOrderMap =
+                    contains(2002) ? (Map) get(2002) : new HashMap<>();
             pluginOrderMap.put(ImgpType.ANY, Arrays.asList(pluginOrder));
             return (Option) set(2002, pluginOrderMap);
         }
 
         public Option setPluginOrder(ImgpType type, ImgpPlugin.Type... pluginOrder) {
-            Map<ImgpType, List<ImgpPlugin.Type>> pluginOrderMap = contains(2002) ? (Map) get(2002) : new HashMap<>();
+            Map<ImgpType, List<ImgpPlugin.Type>> pluginOrderMap =
+                    contains(2002) ? (Map) get(2002) : new HashMap<>();
             pluginOrderMap.put(type, Arrays.asList(pluginOrder));
             return (Option) set(2002, pluginOrderMap);
         }
@@ -174,13 +177,21 @@ public class UniImgp {
 
     private UniImgp() {
         this.option = null;
-        this.factory = new MediaFilterFactory.Builder().addPluginStore(getGlobalStore()).addDefaultCreators().build();
+        this.factory =
+                new MediaFilterFactory.Builder()
+                        .addPluginStore(getGlobalStore())
+                        .addDefaultCreators()
+                        .build();
     }
 
     private UniImgp(Option option) {
         this.option = null;
         MediaFilterFactory.Builder builder = new MediaFilterFactory.Builder();
-        builder.addPluginStore((PluginStore) Optional.ofNullable(option.getPluginStore()).orElse(getGlobalStore())).addDefaultCreators();
+        builder.addPluginStore(
+                        (PluginStore)
+                                Optional.ofNullable(option.getPluginStore())
+                                        .orElse(getGlobalStore()))
+                .addDefaultCreators();
         this.option = option;
         this.factory = builder.build();
     }
@@ -199,7 +210,8 @@ public class UniImgp {
         MediaFormat persistentInputFormat = this.option.getPersistentInputFormat();
         MediaFormat persistentOutputFormat = this.option.getPersistentOutputFormat();
         ColorFormat preferredColorFormat = this.option.getPreferredColorFormat();
-        return new NativeImgpFilterAdapter(persistentInputFormat, persistentOutputFormat, preferredColorFormat);
+        return new NativeImgpFilterAdapter(
+                persistentInputFormat, persistentOutputFormat, preferredColorFormat);
     }
 
     public <T extends ImgpType> Operator newOperator(T type) {

@@ -11,7 +11,6 @@ public final class SyncStatisticsProto {
         public static final long SUCCESS_COUNT = 1120986464258L;
         public static final long SUCCESS_TIME = 1112396529667L;
 
-        public DayStats() {
-        }
+        public DayStats() {}
     }
 }

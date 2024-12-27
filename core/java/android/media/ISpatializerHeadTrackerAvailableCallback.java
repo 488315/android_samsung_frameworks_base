@@ -8,14 +8,15 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISpatializerHeadTrackerAvailableCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.media.ISpatializerHeadTrackerAvailableCallback";
+    public static final String DESCRIPTOR =
+            "android.media.ISpatializerHeadTrackerAvailableCallback";
 
     void dispatchSpatializerHeadTrackerAvailable(boolean z) throws RemoteException;
 
     public static class Default implements ISpatializerHeadTrackerAvailableCallback {
         @Override // android.media.ISpatializerHeadTrackerAvailableCallback
-        public void dispatchSpatializerHeadTrackerAvailable(boolean available) throws RemoteException {
-        }
+        public void dispatchSpatializerHeadTrackerAvailable(boolean available)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,8 @@ public interface ISpatializerHeadTrackerAvailableCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpatializerHeadTrackerAvailableCallback {
+    public abstract static class Stub extends Binder
+            implements ISpatializerHeadTrackerAvailableCallback {
         static final int TRANSACTION_dispatchSpatializerHeadTrackerAvailable = 1;
 
         public Stub() {
@@ -34,7 +36,8 @@ public interface ISpatializerHeadTrackerAvailableCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(ISpatializerHeadTrackerAvailableCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(ISpatializerHeadTrackerAvailableCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof ISpatializerHeadTrackerAvailableCallback)) {
                 return (ISpatializerHeadTrackerAvailableCallback) iin;
             }
@@ -61,7 +64,8 @@ public interface ISpatializerHeadTrackerAvailableCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISpatializerHeadTrackerAvailableCallback.DESCRIPTOR);
             }
@@ -97,7 +101,8 @@ public interface ISpatializerHeadTrackerAvailableCallback extends IInterface {
             }
 
             @Override // android.media.ISpatializerHeadTrackerAvailableCallback
-            public void dispatchSpatializerHeadTrackerAvailable(boolean available) throws RemoteException {
+            public void dispatchSpatializerHeadTrackerAvailable(boolean available)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISpatializerHeadTrackerAvailableCallback.DESCRIPTOR);

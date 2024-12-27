@@ -2,7 +2,7 @@ package com.android.server.ibs.sqd;
 
 import android.net.Uri;
 import android.util.Slog;
-import com.android.server.ibs.sqd.IbsQuickDim;
+
 import java.io.PrintWriter;
 import java.util.function.Consumer;
 
@@ -32,7 +32,8 @@ public final /* synthetic */ class IbsQuickDim$$ExternalSyntheticLambda1 impleme
                     IbsQuickDim ibsQuickDim = intentReceiver.this$0;
                     ibsQuickDim.getClass();
                     Slog.d("IbsQuickDim", "handlePkgRemoved");
-                    ibsQuickDim.mQkDimHandler.post(new IbsQuickDim$$ExternalSyntheticLambda0(ibsQuickDim, 2));
+                    ibsQuickDim.mQkDimHandler.post(
+                            new IbsQuickDim$$ExternalSyntheticLambda0(ibsQuickDim, 2));
                     break;
                 }
                 break;

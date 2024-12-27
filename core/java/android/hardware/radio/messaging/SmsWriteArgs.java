@@ -3,26 +3,29 @@ package android.hardware.radio.messaging;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SmsWriteArgs implements Parcelable {
-    public static final Parcelable.Creator<SmsWriteArgs> CREATOR = new Parcelable.Creator<SmsWriteArgs>() { // from class: android.hardware.radio.messaging.SmsWriteArgs.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmsWriteArgs createFromParcel(Parcel _aidl_source) {
-            SmsWriteArgs _aidl_out = new SmsWriteArgs();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SmsWriteArgs> CREATOR =
+            new Parcelable.Creator<
+                    SmsWriteArgs>() { // from class: android.hardware.radio.messaging.SmsWriteArgs.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmsWriteArgs createFromParcel(Parcel _aidl_source) {
+                    SmsWriteArgs _aidl_out = new SmsWriteArgs();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmsWriteArgs[] newArray(int _aidl_size) {
-            return new SmsWriteArgs[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmsWriteArgs[] newArray(int _aidl_size) {
+                    return new SmsWriteArgs[_aidl_size];
+                }
+            };
     public static final int STATUS_REC_READ = 1;
     public static final int STATUS_REC_UNREAD = 0;
     public static final int STATUS_STO_SENT = 3;

@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto.macs;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 import com.android.internal.org.bouncycastle.crypto.Digest;
 import com.android.internal.org.bouncycastle.crypto.ExtendedDigest;
@@ -8,6 +9,7 @@ import com.android.internal.org.bouncycastle.crypto.Mac;
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.internal.org.bouncycastle.util.Integers;
 import com.android.internal.org.bouncycastle.util.Memoable;
+
 import java.util.Hashtable;
 
 /* loaded from: classes5.dex */
@@ -38,7 +40,8 @@ public class HMac implements Mac {
         }
         Integer b = (Integer) blockLengths.get(digest.getAlgorithmName());
         if (b == null) {
-            throw new IllegalArgumentException("unknown digest passed: " + digest.getAlgorithmName());
+            throw new IllegalArgumentException(
+                    "unknown digest passed: " + digest.getAlgorithmName());
         }
         return b.intValue();
     }

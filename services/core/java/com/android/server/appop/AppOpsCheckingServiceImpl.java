@@ -15,12 +15,13 @@ import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
 import android.util.Xml;
+
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.LocalServices;
-import com.android.server.appop.AppOpsService;
 import com.android.server.pm.UserManagerInternal;
 import com.android.server.pm.permission.PermissionManagerService;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,23 +43,26 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
     public final SparseArray mUserPackageModes = new SparseArray();
     public final LegacyAppOpStateParser mAppOpsStateParser = new LegacyAppOpStateParser();
     public final List mModeChangedListeners = new ArrayList();
-    public final AnonymousClass1 mWriteRunner = new Runnable() { // from class: com.android.server.appop.AppOpsCheckingServiceImpl.1
-        @Override // java.lang.Runnable
-        public final void run() {
-            synchronized (AppOpsCheckingServiceImpl.this.mLock) {
-                AppOpsCheckingServiceImpl appOpsCheckingServiceImpl = AppOpsCheckingServiceImpl.this;
-                appOpsCheckingServiceImpl.mWriteScheduled = false;
-                appOpsCheckingServiceImpl.mFastWriteScheduled = false;
-                new AsyncTask() { // from class: com.android.server.appop.AppOpsCheckingServiceImpl.1.1
-                    @Override // android.os.AsyncTask
-                    public final Object doInBackground(Object[] objArr) {
-                        AppOpsCheckingServiceImpl.this.writeState();
-                        return null;
+    public final AnonymousClass1 mWriteRunner =
+            new Runnable() { // from class: com.android.server.appop.AppOpsCheckingServiceImpl.1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    synchronized (AppOpsCheckingServiceImpl.this.mLock) {
+                        AppOpsCheckingServiceImpl appOpsCheckingServiceImpl =
+                                AppOpsCheckingServiceImpl.this;
+                        appOpsCheckingServiceImpl.mWriteScheduled = false;
+                        appOpsCheckingServiceImpl.mFastWriteScheduled = false;
+                        new AsyncTask() { // from class:
+                                          // com.android.server.appop.AppOpsCheckingServiceImpl.1.1
+                            @Override // android.os.AsyncTask
+                            public final Object doInBackground(Object[] objArr) {
+                                AppOpsCheckingServiceImpl.this.writeState();
+                                return null;
+                            }
+                        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null);
                     }
-                }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null);
-            }
-        }
-    };
+                }
+            };
 
     /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.appop.AppOpsCheckingServiceImpl$1] */
     public AppOpsCheckingServiceImpl(File file, Object obj, Handler handler, Context context) {
@@ -69,7 +73,8 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
     }
 
     @Override // com.android.server.appop.AppOpsCheckingServiceInterface
-    public final boolean addAppOpsModeChangedListener(AppOpsService.AnonymousClass2 anonymousClass2) {
+    public final boolean addAppOpsModeChangedListener(
+            AppOpsService.AnonymousClass2 anonymousClass2) {
         boolean add;
         synchronized (this.mLock) {
             add = ((ArrayList) this.mModeChangedListeners).add(anonymousClass2);
@@ -192,7 +197,10 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
                     ArrayMap arrayMap = (ArrayMap) this.mUserPackageModes.valueAt(i);
                     for (int i2 = 0; i2 < arrayMap.size(); i2++) {
                         if (((SparseIntArray) arrayMap.valueAt(i2)).size() > 0) {
-                            arrayList.add(UserPackage.of(this.mUserPackageModes.keyAt(i), (String) arrayMap.keyAt(i2)));
+                            arrayList.add(
+                                    UserPackage.of(
+                                            this.mUserPackageModes.keyAt(i),
+                                            (String) arrayMap.keyAt(i2)));
                         }
                     }
                 } catch (Throwable th) {
@@ -243,7 +251,8 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
                 SparseArray sparseArray = this.mUidModes;
                 SparseArray sparseArray2 = this.mUserPackageModes;
                 legacyAppOpStateParser.getClass();
-                this.mVersionAtBoot = LegacyAppOpStateParser.readState(atomicFile, sparseArray, sparseArray2);
+                this.mVersionAtBoot =
+                        LegacyAppOpStateParser.readState(atomicFile, sparseArray, sparseArray2);
             }
         }
     }
@@ -283,17 +292,29 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
     }
 
     public void resetUseFullScreenIntentLocked() {
-        PermissionManagerService.PermissionManagerServiceInternalImpl permissionManagerServiceInternalImpl = (PermissionManagerService.PermissionManagerServiceInternalImpl) LocalServices.getService(PermissionManagerService.PermissionManagerServiceInternalImpl.class);
-        UserManagerInternal userManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
-        PackageManagerInternal packageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
-        PermissionManager permissionManager = (PermissionManager) this.mContext.getSystemService(PermissionManager.class);
+        PermissionManagerService.PermissionManagerServiceInternalImpl
+                permissionManagerServiceInternalImpl =
+                        (PermissionManagerService.PermissionManagerServiceInternalImpl)
+                                LocalServices.getService(
+                                        PermissionManagerService
+                                                .PermissionManagerServiceInternalImpl.class);
+        UserManagerInternal userManagerInternal =
+                (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+        PackageManagerInternal packageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        PermissionManager permissionManager =
+                (PermissionManager) this.mContext.getSystemService(PermissionManager.class);
         String opToPermission = AppOpsManager.opToPermission(133);
-        String[] appOpPermissionPackages = PermissionManagerService.this.mPermissionManagerServiceImpl.getAppOpPermissionPackages(opToPermission);
+        String[] appOpPermissionPackages =
+                PermissionManagerService.this.mPermissionManagerServiceImpl
+                        .getAppOpPermissionPackages(opToPermission);
         int[] userIds = userManagerInternal.getUserIds();
         for (String str : appOpPermissionPackages) {
             for (int i : userIds) {
                 int packageUid = packageManagerInternal.getPackageUid(str, 0L, i);
-                if ((permissionManager.getPermissionFlags(str, opToPermission, UserHandle.of(i)) & 1) == 0) {
+                if ((permissionManager.getPermissionFlags(str, opToPermission, UserHandle.of(i))
+                                & 1)
+                        == 0) {
                     setUidMode(packageUid, 133, AppOpsManager.opToDefaultMode(133));
                 }
             }
@@ -323,7 +344,12 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
                     arrayMap = new ArrayMap();
                     this.mUserPackageModes.put(i3, arrayMap);
                 }
-                if (i2 == ((arrayMap == null || (sparseIntArray = (SparseIntArray) arrayMap.get(str)) == null) ? opToDefaultMode : sparseIntArray.get(i, opToDefaultMode))) {
+                if (i2
+                        == ((arrayMap == null
+                                        || (sparseIntArray = (SparseIntArray) arrayMap.get(str))
+                                                == null)
+                                ? opToDefaultMode
+                                : sparseIntArray.get(i, opToDefaultMode))) {
                     return;
                 }
                 if (i2 == opToDefaultMode) {
@@ -349,7 +375,14 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
                 ArrayList arrayList = new ArrayList(this.mModeChangedListeners);
                 for (int i4 = 0; i4 < arrayList.size(); i4++) {
                     AppOpsService appOpsService = AppOpsService.this;
-                    appOpsService.mHandler.sendMessage(PooledLambda.obtainMessage(new AppOpsService$$ExternalSyntheticLambda15(1), appOpsService, str, Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3)));
+                    appOpsService.mHandler.sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new AppOpsService$$ExternalSyntheticLambda15(1),
+                                    appOpsService,
+                                    str,
+                                    Integer.valueOf(i),
+                                    Integer.valueOf(i2),
+                                    Integer.valueOf(i3)));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -363,7 +396,10 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
         synchronized (this.mLock) {
             try {
                 SparseIntArray sparseIntArray = (SparseIntArray) this.mUidModes.get(i, null);
-                if (i3 == (sparseIntArray != null ? sparseIntArray.get(i2, opToDefaultMode) : opToDefaultMode)) {
+                if (i3
+                        == (sparseIntArray != null
+                                ? sparseIntArray.get(i2, opToDefaultMode)
+                                : opToDefaultMode)) {
                     return false;
                 }
                 if (i3 == opToDefaultMode) {
@@ -381,7 +417,8 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
                 scheduleFastWriteLocked();
                 ArrayList arrayList = new ArrayList(this.mModeChangedListeners);
                 for (int i4 = 0; i4 < arrayList.size(); i4++) {
-                    ((AppOpsService.AnonymousClass2) arrayList.get(i4)).onUidModeChanged(i, i2, "default:0");
+                    ((AppOpsService.AnonymousClass2) arrayList.get(i4))
+                            .onUidModeChanged(i, i2, "default:0");
                 }
                 return true;
             } catch (Throwable th) {
@@ -416,7 +453,9 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
         synchronized (this.mLock) {
             int i = this.mVersionAtBoot;
             if (i != -2 && i < 4) {
-                Slog.d("LegacyAppOpsServiceInterfaceImpl", "Upgrading app-ops xml from version " + i + " to 4");
+                Slog.d(
+                        "LegacyAppOpsServiceInterfaceImpl",
+                        "Upgrading app-ops xml from version " + i + " to 4");
                 if (i == -1) {
                     upgradeRunAnyInBackgroundLocked();
                 } else if (i != 1) {
@@ -457,15 +496,25 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
     }
 
     public void upgradeScheduleExactAlarmLocked() {
-        PermissionManagerService.PermissionManagerServiceInternalImpl permissionManagerServiceInternalImpl = (PermissionManagerService.PermissionManagerServiceInternalImpl) LocalServices.getService(PermissionManagerService.PermissionManagerServiceInternalImpl.class);
-        UserManagerInternal userManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
-        PackageManagerInternal packageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
-        String[] appOpPermissionPackages = PermissionManagerService.this.mPermissionManagerServiceImpl.getAppOpPermissionPackages(AppOpsManager.opToPermission(107));
+        PermissionManagerService.PermissionManagerServiceInternalImpl
+                permissionManagerServiceInternalImpl =
+                        (PermissionManagerService.PermissionManagerServiceInternalImpl)
+                                LocalServices.getService(
+                                        PermissionManagerService
+                                                .PermissionManagerServiceInternalImpl.class);
+        UserManagerInternal userManagerInternal =
+                (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+        PackageManagerInternal packageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        String[] appOpPermissionPackages =
+                PermissionManagerService.this.mPermissionManagerServiceImpl
+                        .getAppOpPermissionPackages(AppOpsManager.opToPermission(107));
         int[] userIds = userManagerInternal.getUserIds();
         for (String str : appOpPermissionPackages) {
             for (int i : userIds) {
                 int packageUid = packageManagerInternal.getPackageUid(str, 0L, i);
-                if (getUidMode(packageUid, 107, "default:0") == AppOpsManager.opToDefaultMode(107)) {
+                if (getUidMode(packageUid, 107, "default:0")
+                        == AppOpsManager.opToDefaultMode(107)) {
                     setUidMode(packageUid, 107, 0);
                 }
             }
@@ -491,17 +540,22 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
                             try {
                                 size = this.mUidModes.size();
                                 for (int i = 0; i < size; i++) {
-                                    sparseArray.put(this.mUidModes.keyAt(i), ((SparseIntArray) this.mUidModes.valueAt(i)).clone());
+                                    sparseArray.put(
+                                            this.mUidModes.keyAt(i),
+                                            ((SparseIntArray) this.mUidModes.valueAt(i)).clone());
                                 }
                                 size2 = this.mUserPackageModes.size();
                                 for (int i2 = 0; i2 < size2; i2++) {
                                     int keyAt = this.mUserPackageModes.keyAt(i2);
-                                    ArrayMap arrayMap = (ArrayMap) this.mUserPackageModes.valueAt(i2);
+                                    ArrayMap arrayMap =
+                                            (ArrayMap) this.mUserPackageModes.valueAt(i2);
                                     ArrayMap arrayMap2 = new ArrayMap();
                                     sparseArray2.put(keyAt, arrayMap2);
                                     int size3 = arrayMap.size();
                                     for (int i3 = 0; i3 < size3; i3++) {
-                                        arrayMap2.put((String) arrayMap.keyAt(i3), ((SparseIntArray) arrayMap.valueAt(i3)).clone());
+                                        arrayMap2.put(
+                                                (String) arrayMap.keyAt(i3),
+                                                ((SparseIntArray) arrayMap.valueAt(i3)).clone());
                                     }
                                 }
                             } finally {
@@ -509,7 +563,8 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
                         }
                         for (int i4 = 0; i4 < size; i4++) {
                             int keyAt2 = sparseArray.keyAt(i4);
-                            SparseIntArray sparseIntArray = (SparseIntArray) sparseArray.valueAt(i4);
+                            SparseIntArray sparseIntArray =
+                                    (SparseIntArray) sparseArray.valueAt(i4);
                             resolveSerializer.startTag((String) null, "uid");
                             resolveSerializer.attributeInt((String) null, "n", keyAt2);
                             int size4 = sparseIntArray.size();
@@ -532,7 +587,8 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
                             int i7 = 0;
                             while (i7 < size5) {
                                 String str = (String) arrayMap3.keyAt(i7);
-                                SparseIntArray sparseIntArray2 = (SparseIntArray) arrayMap3.valueAt(i7);
+                                SparseIntArray sparseIntArray2 =
+                                        (SparseIntArray) arrayMap3.valueAt(i7);
                                 resolveSerializer.startTag((String) null, "pkg");
                                 resolveSerializer.attribute((String) null, "n", str);
                                 int size6 = sparseIntArray2.size();
@@ -557,7 +613,10 @@ public final class AppOpsCheckingServiceImpl implements AppOpsCheckingServiceInt
                         resolveSerializer.endDocument();
                         this.mFile.finishWrite(startWrite);
                     } catch (IOException e) {
-                        Slog.w("LegacyAppOpsServiceInterfaceImpl", "Failed to write state, restoring backup.", e);
+                        Slog.w(
+                                "LegacyAppOpsServiceInterfaceImpl",
+                                "Failed to write state, restoring backup.",
+                                e);
                         this.mFile.failWrite(startWrite);
                     }
                 } catch (IOException e2) {

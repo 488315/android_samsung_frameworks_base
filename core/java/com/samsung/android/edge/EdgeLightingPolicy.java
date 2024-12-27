@@ -2,24 +2,28 @@ package com.samsung.android.edge;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /* loaded from: classes6.dex */
 public final class EdgeLightingPolicy implements Parcelable {
-    public static final Parcelable.Creator<EdgeLightingPolicy> CREATOR = new Parcelable.Creator<EdgeLightingPolicy>() { // from class: com.samsung.android.edge.EdgeLightingPolicy.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EdgeLightingPolicy createFromParcel(Parcel source) {
-            return new EdgeLightingPolicy(source);
-        }
+    public static final Parcelable.Creator<EdgeLightingPolicy> CREATOR =
+            new Parcelable.Creator<
+                    EdgeLightingPolicy>() { // from class:
+                                            // com.samsung.android.edge.EdgeLightingPolicy.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EdgeLightingPolicy createFromParcel(Parcel source) {
+                    return new EdgeLightingPolicy(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EdgeLightingPolicy[] newArray(int size) {
-            return new EdgeLightingPolicy[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EdgeLightingPolicy[] newArray(int size) {
+                    return new EdgeLightingPolicy[size];
+                }
+            };
     public static final int TYPE_EXCLUDE_BLACK_LIST = 4;
     public static final int TYPE_EXCLUDE_SYSTEM_APP = 2;
     public static final int TYPE_INCLUDE_ALL_APP = 1;
@@ -68,7 +72,8 @@ public final class EdgeLightingPolicy implements Parcelable {
     }
 
     public String toString() {
-        String str = "EdgeLightingPolicy{Type = " + this.mType + ", version = " + this.mVersion + "}";
+        String str =
+                "EdgeLightingPolicy{Type = " + this.mType + ", version = " + this.mVersion + "}";
         Iterator<EdgeLightingPolicyInfo> it = this.mPolicyInfoList.iterator();
         while (it.hasNext()) {
             EdgeLightingPolicyInfo info = it.next();

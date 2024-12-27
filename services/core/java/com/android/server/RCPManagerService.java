@@ -18,6 +18,7 @@ import android.os.UserManager;
 import android.util.Log;
 import android.util.Slog;
 import android.view.KeyEvent;
+
 import com.android.internal.inputmethod.IRemoteInputConnection;
 import com.android.internal.inputmethod.InputConnectionCommandHeader;
 import com.android.server.bridge.BridgeProxy;
@@ -26,9 +27,11 @@ import com.android.server.input.InputManagerService;
 import com.android.server.inputmethod.InputMethodManagerService;
 import com.android.server.knox.dar.EnterprisePartitionManager;
 import com.android.server.pm.Installer;
+
 import com.samsung.android.knox.ISemRemoteContentManager;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -51,72 +54,94 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
     public boolean mIsInitialized = false;
     public InputManagerService mInputManagerService = null;
     public Handler mBridgeHandler = null;
-    public final AnonymousClass1 mContainerstateReceiver = new ContainerStateReceiver() { // from class: com.android.server.RCPManagerService.1
-        public final void onContainerCreated(Context context, int i, Bundle bundle) {
-            try {
-                RCPManagerService.this.scanAndStartBridgeProxy(i);
-            } catch (Exception e) {
-                Context context2 = RCPManagerService.sContext;
-                Log.d("RCPManagerService", "Exception", e);
-            }
-        }
-
-        public final void onContainerRemoved(Context context, int i, Bundle bundle) {
-            RCPManagerService.checkCallerPermissionFor("onRemovePersona");
-            Log.d("RCPManagerService", " onRemovePersona called for  " + i);
-            RCPManagerService.this.deleteAllPersonaData(i);
-        }
-
-        public final void onContainerReset(Context context, int i, Bundle bundle) {
-            RCPManagerService.checkCallerPermissionFor("onResetPersona");
-            Log.d("RCPManagerService", " onResetPersona called for  " + i);
-            RCPManagerService.this.deleteAllPersonaData(i);
-        }
-
-        public final void onContainerRunning(Context context, int i, Bundle bundle) {
-            RCPManagerService.checkCallerPermissionFor("onPersonaActive");
-            Log.d("RCPManagerService", " onPersonaActive called for  " + i);
-        }
-    };
-    public final AnonymousClass2 mBridgeRunnable = new Runnable() { // from class: com.android.server.RCPManagerService.2
-        @Override // java.lang.Runnable
-        public final void run() {
-            ArrayList<UserInfo> arrayList;
-            try {
-                long elapsedRealtime = SystemClock.elapsedRealtime();
-                long j = elapsedRealtime / 1000;
-                Context context = RCPManagerService.sContext;
-                Log.d("RCPManagerService", " RCPManagerService elapsedRealtime in milliseconds: " + elapsedRealtime + " , inSeconds : " + j + " , inMinutes : " + (j / 60));
-                RCPManagerService.this.scanAndStartBridgeProxy(0);
-                List<UserInfo> users = RCPManagerService.this.mUm.getUsers(true);
-                if (users == null || users.size() <= 0) {
-                    arrayList = null;
-                } else {
-                    arrayList = new ArrayList();
-                    for (UserInfo userInfo : users) {
-                        if (userInfo.isManagedProfile()) {
-                            arrayList.add(userInfo);
-                        }
+    public final AnonymousClass1 mContainerstateReceiver =
+            new ContainerStateReceiver() { // from class: com.android.server.RCPManagerService.1
+                public final void onContainerCreated(Context context, int i, Bundle bundle) {
+                    try {
+                        RCPManagerService.this.scanAndStartBridgeProxy(i);
+                    } catch (Exception e) {
+                        Context context2 = RCPManagerService.sContext;
+                        Log.d("RCPManagerService", "Exception", e);
                     }
                 }
-                if (arrayList == null || arrayList.size() <= 0) {
-                    Context context2 = RCPManagerService.sContext;
-                    Log.d("RCPManagerService", "RCPManagerService :  PersonaInfoList is null or empty ");
-                    return;
+
+                public final void onContainerRemoved(Context context, int i, Bundle bundle) {
+                    RCPManagerService.checkCallerPermissionFor("onRemovePersona");
+                    Log.d("RCPManagerService", " onRemovePersona called for  " + i);
+                    RCPManagerService.this.deleteAllPersonaData(i);
                 }
-                Context context3 = RCPManagerService.sContext;
-                Log.d("RCPManagerService", "RCPManagerService : No of Personas = " + arrayList.size());
-                for (UserInfo userInfo2 : arrayList) {
-                    Context context4 = RCPManagerService.sContext;
-                    Log.d("RCPManagerService", "RCPManagerService : scanAndStartBridgeProxy called for PersonaId : " + userInfo2.id);
-                    RCPManagerService.this.scanAndStartBridgeProxy(userInfo2.id);
+
+                public final void onContainerReset(Context context, int i, Bundle bundle) {
+                    RCPManagerService.checkCallerPermissionFor("onResetPersona");
+                    Log.d("RCPManagerService", " onResetPersona called for  " + i);
+                    RCPManagerService.this.deleteAllPersonaData(i);
                 }
-            } catch (Exception e) {
-                Context context5 = RCPManagerService.sContext;
-                RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder(" RCPManagerService : Exception while scanAndStartBridgeProxy() for users "), "RCPManagerService");
-            }
-        }
-    };
+
+                public final void onContainerRunning(Context context, int i, Bundle bundle) {
+                    RCPManagerService.checkCallerPermissionFor("onPersonaActive");
+                    Log.d("RCPManagerService", " onPersonaActive called for  " + i);
+                }
+            };
+    public final AnonymousClass2 mBridgeRunnable =
+            new Runnable() { // from class: com.android.server.RCPManagerService.2
+                @Override // java.lang.Runnable
+                public final void run() {
+                    ArrayList<UserInfo> arrayList;
+                    try {
+                        long elapsedRealtime = SystemClock.elapsedRealtime();
+                        long j = elapsedRealtime / 1000;
+                        Context context = RCPManagerService.sContext;
+                        Log.d(
+                                "RCPManagerService",
+                                " RCPManagerService elapsedRealtime in milliseconds: "
+                                        + elapsedRealtime
+                                        + " , inSeconds : "
+                                        + j
+                                        + " , inMinutes : "
+                                        + (j / 60));
+                        RCPManagerService.this.scanAndStartBridgeProxy(0);
+                        List<UserInfo> users = RCPManagerService.this.mUm.getUsers(true);
+                        if (users == null || users.size() <= 0) {
+                            arrayList = null;
+                        } else {
+                            arrayList = new ArrayList();
+                            for (UserInfo userInfo : users) {
+                                if (userInfo.isManagedProfile()) {
+                                    arrayList.add(userInfo);
+                                }
+                            }
+                        }
+                        if (arrayList == null || arrayList.size() <= 0) {
+                            Context context2 = RCPManagerService.sContext;
+                            Log.d(
+                                    "RCPManagerService",
+                                    "RCPManagerService :  PersonaInfoList is null or empty ");
+                            return;
+                        }
+                        Context context3 = RCPManagerService.sContext;
+                        Log.d(
+                                "RCPManagerService",
+                                "RCPManagerService : No of Personas = " + arrayList.size());
+                        for (UserInfo userInfo2 : arrayList) {
+                            Context context4 = RCPManagerService.sContext;
+                            Log.d(
+                                    "RCPManagerService",
+                                    "RCPManagerService : scanAndStartBridgeProxy called for"
+                                        + " PersonaId : "
+                                            + userInfo2.id);
+                            RCPManagerService.this.scanAndStartBridgeProxy(userInfo2.id);
+                        }
+                    } catch (Exception e) {
+                        Context context5 = RCPManagerService.sContext;
+                        RCPManagerService$$ExternalSyntheticOutline0.m(
+                                e,
+                                new StringBuilder(
+                                        " RCPManagerService : Exception while"
+                                            + " scanAndStartBridgeProxy() for users "),
+                                "RCPManagerService");
+                    }
+                }
+            };
 
     /* JADX WARN: Type inference failed for: r0v6, types: [com.android.server.RCPManagerService$1] */
     /* JADX WARN: Type inference failed for: r0v7, types: [com.android.server.RCPManagerService$2] */
@@ -132,10 +157,24 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
     }
 
     public static void checkCallerPermissionFor(String str) {
-        if (ServiceKeeper.isAuthorized(Binder.getCallingPid(), Binder.getCallingUid(), sContext, "RCPManagerService", str) == 0) {
+        if (ServiceKeeper.isAuthorized(
+                        Binder.getCallingPid(),
+                        Binder.getCallingUid(),
+                        sContext,
+                        "RCPManagerService",
+                        str)
+                == 0) {
             return;
         }
-        SecurityException securityException = new SecurityException("Security Exception Occurred while pid[" + Binder.getCallingPid() + "] with uid[" + Binder.getCallingUid() + "] trying to access methodName [" + str + "] in [RCPManagerService] service");
+        SecurityException securityException =
+                new SecurityException(
+                        "Security Exception Occurred while pid["
+                                + Binder.getCallingPid()
+                                + "] with uid["
+                                + Binder.getCallingUid()
+                                + "] trying to access methodName ["
+                                + str
+                                + "] in [RCPManagerService] service");
         securityException.printStackTrace();
         throw securityException;
     }
@@ -144,7 +183,9 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         if (str == null) {
             return false;
         }
-        if (str.startsWith("/data/data") || str.startsWith("/data/user") || str.startsWith("/data/user_de")) {
+        if (str.startsWith("/data/data")
+                || str.startsWith("/data/user")
+                || str.startsWith("/data/user_de")) {
             Log.d("RCPManagerService", "package path detected: ".concat(str));
             return true;
         }
@@ -156,25 +197,35 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         try {
             if (bundle.containsKey("commitText")) {
                 CharSequence charSequence = bundle.getCharSequence("commitText");
-                IRemoteInputConnection iRemoteInputConnection = InputMethodManagerService.mCurInputConnectionForKnox;
+                IRemoteInputConnection iRemoteInputConnection =
+                        InputMethodManagerService.mCurInputConnectionForKnox;
                 if (iRemoteInputConnection != null) {
                     try {
-                        iRemoteInputConnection.commitText(new InputConnectionCommandHeader(9999), charSequence, 1);
+                        iRemoteInputConnection.commitText(
+                                new InputConnectionCommandHeader(9999), charSequence, 1);
                     } catch (RemoteException e) {
-                        Slog.w("InputMethodManagerService", "commitText failed due to remote exception", e);
+                        Slog.w(
+                                "InputMethodManagerService",
+                                "commitText failed due to remote exception",
+                                e);
                     }
                 }
             }
             if (bundle.containsKey("keyEvent")) {
                 KeyEvent keyEvent = (KeyEvent) bundle.getParcelable("keyEvent");
-                IRemoteInputConnection iRemoteInputConnection2 = InputMethodManagerService.mCurInputConnectionForKnox;
+                IRemoteInputConnection iRemoteInputConnection2 =
+                        InputMethodManagerService.mCurInputConnectionForKnox;
                 if (iRemoteInputConnection2 == null) {
                     return;
                 }
                 try {
-                    iRemoteInputConnection2.sendKeyEvent(new InputConnectionCommandHeader(9999), keyEvent);
+                    iRemoteInputConnection2.sendKeyEvent(
+                            new InputConnectionCommandHeader(9999), keyEvent);
                 } catch (RemoteException e2) {
-                    Slog.w("InputMethodManagerService", "sendKeyEvent failed due to remote exception", e2);
+                    Slog.w(
+                            "InputMethodManagerService",
+                            "sendKeyEvent failed due to remote exception",
+                            e2);
                 }
             }
         } catch (Exception e3) {
@@ -191,7 +242,8 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         checkCallerPermissionFor("cancelCopyChunks");
         Log.d("RCPManagerService", "P_OS_RCP cancelCopyChunks");
         Log.d("RCPManagerService", "cancelCopyChunks() sessionId=" + j);
-        EnterprisePartitionManager enterprisePartitionManager = EnterprisePartitionManager.getInstance(this.mContext);
+        EnterprisePartitionManager enterprisePartitionManager =
+                EnterprisePartitionManager.getInstance(this.mContext);
         enterprisePartitionManager.checkCallerPermissionFor("cancelCopyChunks");
         String str = (String) enterprisePartitionManager.mSessionIdDstPath.get(Long.valueOf(j));
         if (EnterprisePartitionManager.mPackageTasker == null || str == null || str.isEmpty()) {
@@ -221,7 +273,8 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         }
     }
 
-    public final int copyChunks(int i, String str, int i2, String str2, long j, int i3, long j2, boolean z) {
+    public final int copyChunks(
+            int i, String str, int i2, String str2, long j, int i3, long j2, boolean z) {
         String str3;
         EnterprisePartitionManager enterprisePartitionManager;
         int copyKnoxChunks;
@@ -245,24 +298,32 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         sb.append(i3);
         BootReceiver$$ExternalSyntheticOutline0.m(sb, "; sessionId=", j2, "; deleteSrc=");
         RCPManagerService$$ExternalSyntheticOutline0.m("RCPManagerService", sb, z);
-        EnterprisePartitionManager enterprisePartitionManager2 = EnterprisePartitionManager.getInstance(this.mContext);
+        EnterprisePartitionManager enterprisePartitionManager2 =
+                EnterprisePartitionManager.getInstance(this.mContext);
         enterprisePartitionManager2.checkCallerPermissionFor("copyChunks");
         if (EnterprisePartitionManager.mPackageTasker == null) {
             return -19;
         }
-        if (str4 == null || str.isEmpty() || str2 == null || str2.isEmpty() || !enterprisePartitionManager2.isUserUnlocked(i) || !enterprisePartitionManager2.isUserUnlocked(i2)) {
+        if (str4 == null
+                || str.isEmpty()
+                || str2 == null
+                || str2.isEmpty()
+                || !enterprisePartitionManager2.isUserUnlocked(i)
+                || !enterprisePartitionManager2.isUserUnlocked(i2)) {
             return -2;
         }
         if (i != 0 && str4.startsWith("/storage/emulated")) {
             str4 = str4.replaceFirst("/storage", "/mnt/user/" + i);
-            DualAppManagerService$$ExternalSyntheticOutline0.m("srcRealPath : ", str4, "EnterprisePartitionManager");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "srcRealPath : ", str4, "EnterprisePartitionManager");
         }
         String str5 = str4;
         if (i2 == 0 || !str2.startsWith("/storage/emulated")) {
             str3 = str2;
         } else {
             String replaceFirst = str2.replaceFirst("/storage", "/mnt/user/" + i2);
-            DualAppManagerService$$ExternalSyntheticOutline0.m("dstRealPath : ", replaceFirst, "EnterprisePartitionManager");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "dstRealPath : ", replaceFirst, "EnterprisePartitionManager");
             str3 = replaceFirst;
         }
         if (!enterprisePartitionManager2.mSessionIdDstPath.containsKey(Long.valueOf(j2))) {
@@ -277,7 +338,9 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
                     if (installer.checkBeforeRemote()) {
                         try {
                             enterprisePartitionManager = enterprisePartitionManager2;
-                            copyKnoxChunks = installer.mInstalld.copyKnoxChunks(str5, i, str3, i2, i5, j, j3, j2);
+                            copyKnoxChunks =
+                                    installer.mInstalld.copyKnoxChunks(
+                                            str5, i, str3, i2, i5, j, j3, j2);
                         } catch (Exception e) {
                             Installer.InstallerException.from(e);
                             throw null;
@@ -324,11 +387,23 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
             return -1;
         }
         checkCallerPermissionFor("copyFile");
-        Log.d("RCPManagerService", "copyFile() srcContainerId=" + i + "; srcFilePath=" + str + "; destContainerId=" + i2 + "; destFilePath=" + str2);
+        Log.d(
+                "RCPManagerService",
+                "copyFile() srcContainerId="
+                        + i
+                        + "; srcFilePath="
+                        + str
+                        + "; destContainerId="
+                        + i2
+                        + "; destFilePath="
+                        + str2);
         int callingPid = Binder.getCallingPid();
-        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = ((ActivityManager) this.mContext.getSystemService("activity")).getRunningAppProcesses();
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses =
+                ((ActivityManager) this.mContext.getSystemService("activity"))
+                        .getRunningAppProcesses();
         if (runningAppProcesses != null && !runningAppProcesses.isEmpty()) {
-            for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : runningAppProcesses) {
+            for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo :
+                    runningAppProcesses) {
                 if (runningAppProcessInfo.pid == callingPid) {
                     str3 = runningAppProcessInfo.processName;
                     break;
@@ -339,13 +414,15 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         if ("com.samsung.android.bbc.bbcagent".equals(str3)) {
             if (initService()) {
                 Log.d("RCPManagerService", "copyPackageData");
-                return EnterprisePartitionManager.getInstance(this.mContext).copy(i, i2, 3, str, str2);
+                return EnterprisePartitionManager.getInstance(this.mContext)
+                        .copy(i, i2, 3, str, str2);
             }
             Log.e("RCPManagerService", "failed to copyPackageData");
             return -1;
         }
         if (!isPackageDataRelatedPath(str) && !isPackageDataRelatedPath(str2)) {
-            EnterprisePartitionManager enterprisePartitionManager = EnterprisePartitionManager.getInstance(this.mContext);
+            EnterprisePartitionManager enterprisePartitionManager =
+                    EnterprisePartitionManager.getInstance(this.mContext);
             enterprisePartitionManager.checkCallerPermissionFor("copy");
             return enterprisePartitionManager.copy(i, i2, 1, str, str2);
         }
@@ -360,7 +437,8 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
 
     public final void deleteAllPersonaData(int i) {
         if (this.KNOX_DEBUG) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "----- unregisterBridgeProxy : for user - ", " -----", "RCPManagerService");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i, "----- unregisterBridgeProxy : for user - ", " -----", "RCPManagerService");
         }
         if (((BridgeProxy) this.mBridgeProxyAliveList.get(Integer.valueOf(i))) != null) {
             Log.d("BridgeProxy", "----- stop called -----");
@@ -377,7 +455,8 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         }
         checkCallerPermissionFor("deleteFile");
         Log.d("RCPManagerService", "deleteFile() containerId=" + i + "; path=" + str);
-        EnterprisePartitionManager.getInstance(this.mContext).checkCallerPermissionFor("deleteFile");
+        EnterprisePartitionManager.getInstance(this.mContext)
+                .checkCallerPermissionFor("deleteFile");
         if (EnterprisePartitionManager.mPackageTasker != null && str != null && !str.isEmpty()) {
             synchronized (EnterprisePartitionManager.mInstallLock) {
                 try {
@@ -397,10 +476,16 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         return z;
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         Log.d("RCPManagerService", "RCP DumpState Started");
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
-            printWriter.println("Permission Denial: can't dump RCPManagerService from from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid() + " without permission android.permission.DUMP");
+            printWriter.println(
+                    "Permission Denial: can't dump RCPManagerService from from pid="
+                            + Binder.getCallingPid()
+                            + ", uid="
+                            + Binder.getCallingUid()
+                            + " without permission android.permission.DUMP");
             return;
         }
         List users = this.mUm.getUsers(false);
@@ -424,9 +509,17 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
                 int i = ((UserInfo) it.next()).id;
                 boolean isKnoxId = SemPersonaManager.isKnoxId(i);
                 boolean isUserRunning = this.mUm.isUserRunning(new UserHandle(i));
-                printWriter.println("PersonaId : " + i + " , isKnoxId : " + isKnoxId + " , isUserRunning : " + isUserRunning);
-                if (!SemPersonaManager.isSecureFolderId(i) && (i == 0 || (isKnoxId && isUserRunning))) {
-                    printWriter.println("++++++++++++++++FileOpsTable of " + i + "++++++++++++++++");
+                printWriter.println(
+                        "PersonaId : "
+                                + i
+                                + " , isKnoxId : "
+                                + isKnoxId
+                                + " , isUserRunning : "
+                                + isUserRunning);
+                if (!SemPersonaManager.isSecureFolderId(i)
+                        && (i == 0 || (isKnoxId && isUserRunning))) {
+                    printWriter.println(
+                            "++++++++++++++++FileOpsTable of " + i + "++++++++++++++++");
                     rCPDumpState2.dumpStateFileOpsTable(i, printWriter);
                 }
             }
@@ -451,7 +544,8 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
                         return null;
                     }
                     if ("updateKnoxCaptureFilter".equals(string)) {
-                        this.mInputManagerService = (InputManagerService) ServiceManager.getService("input");
+                        this.mInputManagerService =
+                                (InputManagerService) ServiceManager.getService("input");
                         if (bundle.getBoolean("add", false)) {
                             this.mInputManagerService.setInputFilter(this.knoxCaptureInputFilter);
                         } else {
@@ -461,29 +555,41 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
                     }
                     if ("updateInputDeviceId".equals(string)) {
                         if (bundle.getBoolean("add", false)) {
-                            KnoxCaptureInputFilter knoxCaptureInputFilter = this.knoxCaptureInputFilter;
+                            KnoxCaptureInputFilter knoxCaptureInputFilter =
+                                    this.knoxCaptureInputFilter;
                             int i2 = bundle.getInt("deviceId", 0);
                             if (KnoxCaptureInputFilter.DEBUG) {
                                 knoxCaptureInputFilter.getClass();
-                                AnyMotionDetector$$ExternalSyntheticOutline0.m(i2, "markInputDeviceAsScanner, inputDevice: ", "KnoxCaptureInputFilter");
+                                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                                        i2,
+                                        "markInputDeviceAsScanner, inputDevice: ",
+                                        "KnoxCaptureInputFilter");
                             }
-                            if (!((HashSet) knoxCaptureInputFilter.scannerDevices).contains(Integer.valueOf(i2))) {
-                                ((HashSet) knoxCaptureInputFilter.scannerDevices).add(Integer.valueOf(i2));
+                            if (!((HashSet) knoxCaptureInputFilter.scannerDevices)
+                                    .contains(Integer.valueOf(i2))) {
+                                ((HashSet) knoxCaptureInputFilter.scannerDevices)
+                                        .add(Integer.valueOf(i2));
                             }
                         } else {
-                            KnoxCaptureInputFilter knoxCaptureInputFilter2 = this.knoxCaptureInputFilter;
+                            KnoxCaptureInputFilter knoxCaptureInputFilter2 =
+                                    this.knoxCaptureInputFilter;
                             int i3 = bundle.getInt("deviceId", 0);
                             if (KnoxCaptureInputFilter.DEBUG) {
                                 knoxCaptureInputFilter2.getClass();
-                                Slog.d("KnoxCaptureInputFilter", "unmarkInputDeviceAsScanner, inputDevice: " + i3);
+                                Slog.d(
+                                        "KnoxCaptureInputFilter",
+                                        "unmarkInputDeviceAsScanner, inputDevice: " + i3);
                             }
-                            ((HashSet) knoxCaptureInputFilter2.scannerDevices).remove(Integer.valueOf(i3));
+                            ((HashSet) knoxCaptureInputFilter2.scannerDevices)
+                                    .remove(Integer.valueOf(i3));
                         }
                         return null;
                     }
                 }
             }
-            Log.d("RCPManagerService", "ERROR | exchange Data | from " + str + ", to user id : " + i);
+            Log.d(
+                    "RCPManagerService",
+                    "ERROR | exchange Data | from " + str + ", to user id : " + i);
             return null;
         }
         Log.d("RCPManagerService", "exchangeData() return false for input param is not valid" + i);
@@ -506,14 +612,16 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         StringBuilder sb = new StringBuilder("getFileInfo() containerId=");
         sb.append(i);
         RCPManagerService$$ExternalSyntheticOutline0.m(sb, "; path=", str, "RCPManagerService");
-        EnterprisePartitionManager.getInstance(this.mContext).checkCallerPermissionFor("getFileInfo");
+        EnterprisePartitionManager.getInstance(this.mContext)
+                .checkCallerPermissionFor("getFileInfo");
         Bundle bundle = new Bundle();
         if (EnterprisePartitionManager.mPackageTasker == null || str == null || str.isEmpty()) {
             bundle.putInt(KnoxCustomManagerService.SPCM_KEY_RESULT, -2);
         } else {
             if (i != 0 && str.startsWith("/storage/emulated")) {
                 str = str.replaceFirst("/storage", "/mnt/user/" + i);
-                DualAppManagerService$$ExternalSyntheticOutline0.m("getFileInfo - realath : ", str, "EnterprisePartitionManager");
+                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                        "getFileInfo - realath : ", str, "EnterprisePartitionManager");
             }
             synchronized (EnterprisePartitionManager.mInstallLock) {
                 jArr = null;
@@ -528,7 +636,7 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
                                 throw null;
                             }
                         } else {
-                            knoxFileInfo = new long[]{-1};
+                            knoxFileInfo = new long[] {-1};
                         }
                         jArr = knoxFileInfo;
                         i2 = (int) jArr[0];
@@ -605,7 +713,9 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         if (this.mRCPInterfaceMap.get(valueOf) != null) {
             return (IRCPInterface) this.mRCPInterfaceMap.get(valueOf);
         }
-        Log.d("RCPManagerService", "getRCPInterfaceMap.get(userId) is null. Calling scanAndStartBridgeProxy");
+        Log.d(
+                "RCPManagerService",
+                "getRCPInterfaceMap.get(userId) is null. Calling scanAndStartBridgeProxy");
         try {
             scanAndStartBridgeProxy(callingUserId);
         } catch (Exception e) {
@@ -624,7 +734,9 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
             Method dump skipped, instructions count: 275
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.RCPManagerService.initService():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.RCPManagerService.initService():boolean");
     }
 
     public final boolean isFileExist(String str, int i) {
@@ -640,11 +752,13 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         StringBuilder sb = new StringBuilder("isFileExist() containerId=");
         sb.append(i);
         RCPManagerService$$ExternalSyntheticOutline0.m(sb, "; path=", str, "RCPManagerService");
-        EnterprisePartitionManager.getInstance(this.mContext).checkCallerPermissionFor("isFileExist");
+        EnterprisePartitionManager.getInstance(this.mContext)
+                .checkCallerPermissionFor("isFileExist");
         if (EnterprisePartitionManager.mPackageTasker != null && str != null && !str.isEmpty()) {
             if (i != 0 && str.startsWith("/storage/emulated")) {
                 str = str.replaceFirst("/storage", "/mnt/user/" + i);
-                DualAppManagerService$$ExternalSyntheticOutline0.m("getFileInfo - realath : ", str, "EnterprisePartitionManager");
+                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                        "getFileInfo - realath : ", str, "EnterprisePartitionManager");
             }
             synchronized (EnterprisePartitionManager.mInstallLock) {
                 try {
@@ -658,7 +772,7 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
                                 throw null;
                             }
                         } else {
-                            knoxFileInfo = new long[]{-1};
+                            knoxFileInfo = new long[] {-1};
                         }
                         if (knoxFileInfo[0] != 0) {
                             z = false;
@@ -688,14 +802,21 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         sb.append(str);
         sb.append("; destContainerId=");
         sb.append(i2);
-        RCPManagerService$$ExternalSyntheticOutline0.m(sb, "; destFilePath=", str2, "RCPManagerService");
-        EnterprisePartitionManager enterprisePartitionManager = EnterprisePartitionManager.getInstance(this.mContext);
+        RCPManagerService$$ExternalSyntheticOutline0.m(
+                sb, "; destFilePath=", str2, "RCPManagerService");
+        EnterprisePartitionManager enterprisePartitionManager =
+                EnterprisePartitionManager.getInstance(this.mContext);
         enterprisePartitionManager.checkCallerPermissionFor("move");
         enterprisePartitionManager.checkCallerPermissionFor("move");
         if (EnterprisePartitionManager.mPackageTasker == null) {
             return -19;
         }
-        if (str == null || str.isEmpty() || str2 == null || str2.isEmpty() || !enterprisePartitionManager.isUserUnlocked(i) || !enterprisePartitionManager.isUserUnlocked(i2)) {
+        if (str == null
+                || str.isEmpty()
+                || str2 == null
+                || str2.isEmpty()
+                || !enterprisePartitionManager.isUserUnlocked(i)
+                || !enterprisePartitionManager.isUserUnlocked(i2)) {
             return -2;
         }
         synchronized (EnterprisePartitionManager.mInstallLock) {
@@ -742,7 +863,9 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
         }
         IRCPInterface rCPInterface = getRCPInterface();
         if (rCPInterface != null) {
-            Log.d("RCPManagerService", "moveFilesForAppEx moveFiles(>500) getRCPInterface not NULL ");
+            Log.d(
+                    "RCPManagerService",
+                    "moveFilesForAppEx moveFiles(>500) getRCPInterface not NULL ");
             return rCPInterface.moveUnlimitedFilesForApp(i, uri, i2, i3);
         }
         Log.d("RCPManagerService", "moveFiles(>500) getRCPInterface NULL ");
@@ -764,7 +887,8 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
 
     public final void scanAndStartBridgeProxy(int i) {
         if (this.KNOX_DEBUG) {
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, " scanAndStartBridgeProxy called for ", "RCPManagerService");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    i, " scanAndStartBridgeProxy called for ", "RCPManagerService");
         }
         SemPersonaManager semPersonaManager = this.mPm;
         if (semPersonaManager == null || !semPersonaManager.exists(i)) {
@@ -773,25 +897,40 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
                 List users = this.mUm.getUsers(true);
                 if (users == null || users.size() == 0) {
                     if (this.KNOX_DEBUG) {
-                        NetworkScoreService$$ExternalSyntheticOutline0.m(i, "scanAndStartBridgeProxy: NOT starting Bridge Proxy for user = ", "; because it doesn't have personas or it is a guest!", "RCPManagerService");
+                        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                                i,
+                                "scanAndStartBridgeProxy: NOT starting Bridge Proxy for user = ",
+                                "; because it doesn't have personas or it is a guest!",
+                                "RCPManagerService");
                         return;
                     }
                     return;
                 } else if (this.KNOX_DEBUG) {
-                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "scanAndStartBridgeProxy : starting BridgeProxy for owner - ", "RCPManagerService");
+                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                            i,
+                            "scanAndStartBridgeProxy : starting BridgeProxy for owner - ",
+                            "RCPManagerService");
                 }
             } else if (this.KNOX_DEBUG) {
-                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "scanAndStartBridgeProxy : starting BridgeProxy for persona - ", "RCPManagerService");
+                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                        i,
+                        "scanAndStartBridgeProxy : starting BridgeProxy for persona - ",
+                        "RCPManagerService");
             }
         } else if (this.KNOX_DEBUG) {
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "scanAndStartBridgeProxy : starting BridgeProxy for persona - ", "RCPManagerService");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    i,
+                    "scanAndStartBridgeProxy : starting BridgeProxy for persona - ",
+                    "RCPManagerService");
         }
         try {
             synchronized (this.mBridgeProxyAliveList) {
                 try {
                     if (this.mBridgeProxyAliveList.containsKey(Integer.valueOf(i))) {
                         if (this.KNOX_DEBUG) {
-                            Log.d("RCPManagerService", " Returning...BridgeProxy already active for user - " + i);
+                            Log.d(
+                                    "RCPManagerService",
+                                    " Returning...BridgeProxy already active for user - " + i);
                         }
                         return;
                     }
@@ -799,7 +938,9 @@ public final class RCPManagerService extends ISemRemoteContentManager.Stub {
                     bridgeProxy.start(this.mContext);
                     this.mBridgeProxyAliveList.put(Integer.valueOf(i), bridgeProxy);
                     if (this.KNOX_DEBUG) {
-                        Log.d("RCPManagerService", "bindToBridgeProxy : started BridgeProxy for user - " + i);
+                        Log.d(
+                                "RCPManagerService",
+                                "bindToBridgeProxy : started BridgeProxy for user - " + i);
                     }
                 } finally {
                 }

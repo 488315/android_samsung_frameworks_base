@@ -20,6 +20,7 @@ import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.io.Streams;
 import com.android.internal.org.bouncycastle.util.io.TeeOutputStream;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -46,6 +47,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
+
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
@@ -102,7 +104,8 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
             this.certChain = certChain;
         }
 
-        StoreEntry(String alias, Key key, char[] password, Certificate[] certChain) throws Exception {
+        StoreEntry(String alias, Key key, char[] password, Certificate[] certChain)
+                throws Exception {
             this.date = new Date();
             this.type = 4;
             this.alias = alias;
@@ -115,7 +118,9 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
             dOut.writeInt(salt.length);
             dOut.write(salt);
             dOut.writeInt(iterationCount);
-            Cipher cipher = BcKeyStoreSpi.this.makePBECipher(BcKeyStoreSpi.KEY_CIPHER, 1, password, salt, iterationCount);
+            Cipher cipher =
+                    BcKeyStoreSpi.this.makePBECipher(
+                            BcKeyStoreSpi.KEY_CIPHER, 1, password, salt, iterationCount);
             CipherOutputStream cOut = new CipherOutputStream(dOut, cipher);
             DataOutputStream dOut2 = new DataOutputStream(cOut);
             BcKeyStoreSpi.this.encodeKey(key, dOut2);
@@ -152,7 +157,8 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
             return this.obj;
         }
 
-        Object getObject(char[] password) throws NoSuchAlgorithmException, UnrecoverableKeyException {
+        Object getObject(char[] password)
+                throws NoSuchAlgorithmException, UnrecoverableKeyException {
             Key k;
             if ((password == null || password.length == 0) && (this.obj instanceof Key)) {
                 return this.obj;
@@ -163,7 +169,9 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
                 try {
                     byte[] salt = new byte[dIn.readInt()];
                     dIn.readFully(salt);
-                    Cipher cipher = BcKeyStoreSpi.this.makePBECipher(BcKeyStoreSpi.KEY_CIPHER, 2, password, salt, dIn.readInt());
+                    Cipher cipher =
+                            BcKeyStoreSpi.this.makePBECipher(
+                                    BcKeyStoreSpi.KEY_CIPHER, 2, password, salt, dIn.readInt());
                     CipherInputStream cIn = new CipherInputStream(dIn, cipher);
                     try {
                         return BcKeyStoreSpi.this.decodeKey(new DataInputStream(cIn));
@@ -173,7 +181,13 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
                         byte[] salt2 = new byte[dIn2.readInt()];
                         dIn2.readFully(salt2);
                         int iterationCount = dIn2.readInt();
-                        Cipher cipher2 = BcKeyStoreSpi.this.makePBECipher("BrokenPBEWithSHAAnd3-KeyTripleDES-CBC", 2, password, salt2, iterationCount);
+                        Cipher cipher2 =
+                                BcKeyStoreSpi.this.makePBECipher(
+                                        "BrokenPBEWithSHAAnd3-KeyTripleDES-CBC",
+                                        2,
+                                        password,
+                                        salt2,
+                                        iterationCount);
                         CipherInputStream cIn2 = new CipherInputStream(dIn2, cipher2);
                         try {
                             k = BcKeyStoreSpi.this.decodeKey(new DataInputStream(cIn2));
@@ -183,7 +197,13 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
                             salt2 = new byte[dIn3.readInt()];
                             dIn3.readFully(salt2);
                             iterationCount = dIn3.readInt();
-                            Cipher cipher3 = BcKeyStoreSpi.this.makePBECipher("OldPBEWithSHAAnd3-KeyTripleDES-CBC", 2, password, salt2, iterationCount);
+                            Cipher cipher3 =
+                                    BcKeyStoreSpi.this.makePBECipher(
+                                            "OldPBEWithSHAAnd3-KeyTripleDES-CBC",
+                                            2,
+                                            password,
+                                            salt2,
+                                            iterationCount);
                             CipherInputStream cIn3 = new CipherInputStream(dIn3, cipher3);
                             k = BcKeyStoreSpi.this.decodeKey(new DataInputStream(cIn3));
                         }
@@ -195,7 +215,13 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
                         dOut.writeInt(salt2.length);
                         dOut.write(salt2);
                         dOut.writeInt(iterationCount);
-                        Cipher out = BcKeyStoreSpi.this.makePBECipher(BcKeyStoreSpi.KEY_CIPHER, 1, password, salt2, iterationCount);
+                        Cipher out =
+                                BcKeyStoreSpi.this.makePBECipher(
+                                        BcKeyStoreSpi.KEY_CIPHER,
+                                        1,
+                                        password,
+                                        salt2,
+                                        iterationCount);
                         CipherOutputStream cOut = new CipherOutputStream(dOut, out);
                         DataOutputStream dOut2 = new DataOutputStream(cOut);
                         BcKeyStoreSpi.this.encodeKey(k, dOut2);
@@ -295,7 +321,9 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
         }
     }
 
-    protected Cipher makePBECipher(String algorithm, int mode, char[] password, byte[] salt, int iterationCount) throws IOException {
+    protected Cipher makePBECipher(
+            String algorithm, int mode, char[] password, byte[] salt, int iterationCount)
+            throws IOException {
         try {
             PBEKeySpec pbeSpec = new PBEKeySpec(password);
             SecretKeyFactory keyFact = this.helper.createSecretKeyFactory(algorithm);
@@ -387,7 +415,8 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
     }
 
     @Override // java.security.KeyStoreSpi
-    public Key engineGetKey(String alias, char[] password) throws NoSuchAlgorithmException, UnrecoverableKeyException {
+    public Key engineGetKey(String alias, char[] password)
+            throws NoSuchAlgorithmException, UnrecoverableKeyException {
         StoreEntry entry = (StoreEntry) this.table.get(alias);
         if (entry == null || entry.getType() == 1) {
             return null;
@@ -417,12 +446,14 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineSetKeyEntry(String alias, byte[] key, Certificate[] chain) throws KeyStoreException {
+    public void engineSetKeyEntry(String alias, byte[] key, Certificate[] chain)
+            throws KeyStoreException {
         this.table.put(alias, new StoreEntry(alias, key, chain));
     }
 
     @Override // java.security.KeyStoreSpi
-    public void engineSetKeyEntry(String alias, Key key, char[] password, Certificate[] chain) throws KeyStoreException {
+    public void engineSetKeyEntry(String alias, Key key, char[] password, Certificate[] chain)
+            throws KeyStoreException {
         if ((key instanceof PrivateKey) && chain == null) {
             throw new KeyStoreException("no certificate chain for private key");
         }
@@ -660,7 +691,8 @@ public class BcKeyStoreSpi extends KeyStoreSpi implements BCKeyStore {
             dOut.writeInt(salt.length);
             dOut.write(salt);
             dOut.writeInt(iterationCount);
-            Cipher cipher = makePBECipher(BcKeyStoreSpi.STORE_CIPHER, 1, password, salt, iterationCount);
+            Cipher cipher =
+                    makePBECipher(BcKeyStoreSpi.STORE_CIPHER, 1, password, salt, iterationCount);
             CipherOutputStream cOut = new CipherOutputStream(dOut, cipher);
             DigestOutputStream dgOut = new DigestOutputStream(new SHA1Digest());
             saveStore(new TeeOutputStream(cOut, dgOut));

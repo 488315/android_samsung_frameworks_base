@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IRemoteAppModeListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.remoteappmode.IRemoteAppModeListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.remoteappmode.IRemoteAppModeListener";
 
     void onRemoteAppModeStateChanged(boolean z) throws RemoteException;
 
     public static class Default implements IRemoteAppModeListener {
         @Override // com.samsung.android.remoteappmode.IRemoteAppModeListener
-        public void onRemoteAppModeStateChanged(boolean isEnabled) throws RemoteException {
-        }
+        public void onRemoteAppModeStateChanged(boolean isEnabled) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IRemoteAppModeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteAppModeListener {
+    public abstract static class Stub extends Binder implements IRemoteAppModeListener {
         static final int TRANSACTION_onRemoteAppModeStateChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IRemoteAppModeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteAppModeListener.DESCRIPTOR);
             }

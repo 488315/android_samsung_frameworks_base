@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextCurrentStatusForPositioning extends SContextEventContext {
-    public static final Parcelable.Creator<SContextCurrentStatusForPositioning> CREATOR = new Parcelable.Creator<SContextCurrentStatusForPositioning>() { // from class: android.hardware.scontext.SContextCurrentStatusForPositioning.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextCurrentStatusForPositioning createFromParcel(Parcel in) {
-            return new SContextCurrentStatusForPositioning(in);
-        }
+    public static final Parcelable.Creator<SContextCurrentStatusForPositioning> CREATOR =
+            new Parcelable.Creator<SContextCurrentStatusForPositioning>() { // from class:
+                // android.hardware.scontext.SContextCurrentStatusForPositioning.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextCurrentStatusForPositioning createFromParcel(Parcel in) {
+                    return new SContextCurrentStatusForPositioning(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextCurrentStatusForPositioning[] newArray(int size) {
-            return new SContextCurrentStatusForPositioning[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextCurrentStatusForPositioning[] newArray(int size) {
+                    return new SContextCurrentStatusForPositioning[size];
+                }
+            };
     private Bundle mContext;
 
     SContextCurrentStatusForPositioning() {

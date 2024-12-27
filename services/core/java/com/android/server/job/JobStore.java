@@ -16,6 +16,7 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.SystemConfigFileCommitEventLogger;
+
 import com.android.internal.util.jobs.ArrayUtils;
 import com.android.internal.util.jobs.BitUtils;
 import com.android.modules.expresslog.Histogram;
@@ -23,8 +24,10 @@ import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.AppSchedulingModuleThread;
 import com.android.server.IoThread;
-import com.android.server.job.JobSchedulerInternal;
 import com.android.server.job.controllers.JobStatus;
+
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,7 +39,6 @@ import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
-import org.xmlpull.v1.XmlSerializer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -60,25 +62,29 @@ public final class JobStore {
     public static final boolean DEBUG = JobSchedulerService.DEBUG;
     public static final Pattern SPLIT_FILE_PATTERN = Pattern.compile("^jobs_\\d+.xml$");
     public static final Object sSingletonLock = new Object();
-    public static final Histogram sScheduledJob30MinHighWaterMarkLogger = new Histogram("job_scheduler.value_hist_scheduled_job_30_min_high_water_mark", new Histogram.ScaledRangeOptions(15, 1, 99.0f, 1.5f));
+    public static final Histogram sScheduledJob30MinHighWaterMarkLogger =
+            new Histogram(
+                    "job_scheduler.value_hist_scheduled_job_30_min_high_water_mark",
+                    new Histogram.ScaledRangeOptions(15, 1, 99.0f, 1.5f));
     public final SparseBooleanArray mPendingJobWriteUids = new SparseBooleanArray();
     public final Handler mIoHandler = IoThread.getHandler();
     public boolean mUseSplitFiles = true;
-    public final JobSchedulerInternal.JobStorePersistStats mPersistInfo = new JobSchedulerInternal.JobStorePersistStats();
+    public final JobSchedulerInternal.JobStorePersistStats mPersistInfo =
+            new JobSchedulerInternal.JobStorePersistStats();
     public int mCurrentJobSetSize = 0;
     public int mScheduledJob30MinHighWaterMark = 0;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.job.JobStore$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // java.lang.Runnable
         public final void run() {
             AppSchedulingModuleThread.getHandler().removeCallbacks(this);
             synchronized (JobStore.this.mLock) {
-                JobStore.sScheduledJob30MinHighWaterMarkLogger.logSample(JobStore.this.mScheduledJob30MinHighWaterMark);
+                JobStore.sScheduledJob30MinHighWaterMarkLogger.logSample(
+                        JobStore.this.mScheduledJob30MinHighWaterMark);
                 JobStore jobStore = JobStore.this;
                 jobStore.mScheduledJob30MinHighWaterMark = jobStore.mJobSet.size();
             }
@@ -102,7 +108,8 @@ public final class JobStore {
             public static void m622$$Nest$mprepare(CopyConsumer copyConsumer) {
                 JobStore jobStore = JobStore.this;
                 int i = 0;
-                copyConsumer.mCopyAllJobs = !jobStore.mUseSplitFiles || jobStore.mPendingJobWriteUids.get(-1);
+                copyConsumer.mCopyAllJobs =
+                        !jobStore.mUseSplitFiles || jobStore.mPendingJobWriteUids.get(-1);
                 JobStore jobStore2 = JobStore.this;
                 if (!jobStore2.mUseSplitFiles) {
                     copyConsumer.mJobStoreCopy.put(-1, new ArrayList());
@@ -110,7 +117,8 @@ public final class JobStore {
                 }
                 if (!jobStore2.mPendingJobWriteUids.get(-1)) {
                     while (i < JobStore.this.mPendingJobWriteUids.size()) {
-                        copyConsumer.mJobStoreCopy.put(JobStore.this.mPendingJobWriteUids.keyAt(i), new ArrayList());
+                        copyConsumer.mJobStoreCopy.put(
+                                JobStore.this.mPendingJobWriteUids.keyAt(i), new ArrayList());
                         i++;
                     }
                     return;
@@ -123,9 +131,11 @@ public final class JobStore {
                     }
                     int length = listFiles.length;
                     while (i < length) {
-                        int extractUidFromJobFileName = JobStore.extractUidFromJobFileName(listFiles[i]);
+                        int extractUidFromJobFileName =
+                                JobStore.extractUidFromJobFileName(listFiles[i]);
                         if (extractUidFromJobFileName != -2) {
-                            copyConsumer.mJobStoreCopy.put(extractUidFromJobFileName, new ArrayList());
+                            copyConsumer.mJobStoreCopy.put(
+                                    extractUidFromJobFileName, new ArrayList());
                         }
                         i++;
                     }
@@ -134,8 +144,7 @@ public final class JobStore {
                 }
             }
 
-            public CopyConsumer() {
-            }
+            public CopyConsumer() {}
 
             @Override // java.util.function.Consumer
             public final void accept(Object obj) {
@@ -149,10 +158,30 @@ public final class JobStore {
                             this.mJobStoreCopy.put(i, list);
                         }
                         List list2 = list;
-                        JobStatus jobStatus2 = new JobStatus(jobStatus.job, jobStatus.callingUid, jobStatus.sourcePackageName, jobStatus.sourceUserId, jobStatus.standbyBucket, jobStatus.mNamespace, jobStatus.sourceTag, jobStatus.numFailures, jobStatus.mNumSystemStops, jobStatus.earliestRunTimeElapsedMillis, jobStatus.latestRunTimeElapsedMillis, jobStatus.mLastSuccessfulRunTime, jobStatus.mLastFailedRunTime, jobStatus.mCumulativeExecutionTimeMs, jobStatus.mInternalFlags, jobStatus.mDynamicConstraints);
+                        JobStatus jobStatus2 =
+                                new JobStatus(
+                                        jobStatus.job,
+                                        jobStatus.callingUid,
+                                        jobStatus.sourcePackageName,
+                                        jobStatus.sourceUserId,
+                                        jobStatus.standbyBucket,
+                                        jobStatus.mNamespace,
+                                        jobStatus.sourceTag,
+                                        jobStatus.numFailures,
+                                        jobStatus.mNumSystemStops,
+                                        jobStatus.earliestRunTimeElapsedMillis,
+                                        jobStatus.latestRunTimeElapsedMillis,
+                                        jobStatus.mLastSuccessfulRunTime,
+                                        jobStatus.mLastFailedRunTime,
+                                        jobStatus.mCumulativeExecutionTimeMs,
+                                        jobStatus.mInternalFlags,
+                                        jobStatus.mDynamicConstraints);
                         jobStatus2.mPersistedUtcTimes = jobStatus.mPersistedUtcTimes;
                         if (jobStatus.mPersistedUtcTimes != null && JobStatus.DEBUG) {
-                            Slog.i("JobScheduler.JobStatus", "Cloning job with persisted run times", new RuntimeException("here"));
+                            Slog.i(
+                                    "JobScheduler.JobStatus",
+                                    "Cloning job with persisted run times",
+                                    new RuntimeException("here"));
                         }
                         ArrayList arrayList = jobStatus.executingWork;
                         if (arrayList != null && arrayList.size() > 0) {
@@ -168,13 +197,16 @@ public final class JobStore {
             }
         }
 
-        public AnonymousClass2() {
-        }
+        public AnonymousClass2() {}
 
-        public static void addAttributesToJobTag(TypedXmlSerializer typedXmlSerializer, JobStatus jobStatus) {
-            typedXmlSerializer.attribute((String) null, "jobid", Integer.toString(jobStatus.job.getId()));
-            typedXmlSerializer.attribute((String) null, "package", jobStatus.job.getService().getPackageName());
-            typedXmlSerializer.attribute((String) null, "class", jobStatus.job.getService().getClassName());
+        public static void addAttributesToJobTag(
+                TypedXmlSerializer typedXmlSerializer, JobStatus jobStatus) {
+            typedXmlSerializer.attribute(
+                    (String) null, "jobid", Integer.toString(jobStatus.job.getId()));
+            typedXmlSerializer.attribute(
+                    (String) null, "package", jobStatus.job.getService().getPackageName());
+            typedXmlSerializer.attribute(
+                    (String) null, "class", jobStatus.job.getService().getClassName());
             String str = jobStatus.sourcePackageName;
             if (str != null) {
                 typedXmlSerializer.attribute((String) null, "sourcePackageName", str);
@@ -187,18 +219,30 @@ public final class JobStore {
             if (str3 != null) {
                 typedXmlSerializer.attribute((String) null, "sourceTag", str3);
             }
-            typedXmlSerializer.attribute((String) null, "sourceUserId", String.valueOf(jobStatus.sourceUserId));
-            typedXmlSerializer.attribute((String) null, "uid", Integer.toString(jobStatus.callingUid));
-            typedXmlSerializer.attribute((String) null, "bias", String.valueOf(jobStatus.job.getBias()));
-            typedXmlSerializer.attribute((String) null, "priority", String.valueOf(jobStatus.job.getPriority()));
-            typedXmlSerializer.attribute((String) null, "flags", String.valueOf(jobStatus.job.getFlags()));
+            typedXmlSerializer.attribute(
+                    (String) null, "sourceUserId", String.valueOf(jobStatus.sourceUserId));
+            typedXmlSerializer.attribute(
+                    (String) null, "uid", Integer.toString(jobStatus.callingUid));
+            typedXmlSerializer.attribute(
+                    (String) null, "bias", String.valueOf(jobStatus.job.getBias()));
+            typedXmlSerializer.attribute(
+                    (String) null, "priority", String.valueOf(jobStatus.job.getPriority()));
+            typedXmlSerializer.attribute(
+                    (String) null, "flags", String.valueOf(jobStatus.job.getFlags()));
             int i = jobStatus.mInternalFlags;
             if (i != 0) {
                 typedXmlSerializer.attribute((String) null, "internalFlags", String.valueOf(i));
             }
-            typedXmlSerializer.attribute((String) null, "lastSuccessfulRunTime", String.valueOf(jobStatus.mLastSuccessfulRunTime));
-            typedXmlSerializer.attribute((String) null, "lastFailedRunTime", String.valueOf(jobStatus.mLastFailedRunTime));
-            typedXmlSerializer.attributeLong((String) null, "cumulativeExecutionTime", jobStatus.mCumulativeExecutionTimeMs);
+            typedXmlSerializer.attribute(
+                    (String) null,
+                    "lastSuccessfulRunTime",
+                    String.valueOf(jobStatus.mLastSuccessfulRunTime));
+            typedXmlSerializer.attribute(
+                    (String) null,
+                    "lastFailedRunTime",
+                    String.valueOf(jobStatus.mLastFailedRunTime));
+            typedXmlSerializer.attributeLong(
+                    (String) null, "cumulativeExecutionTime", jobStatus.mCumulativeExecutionTimeMs);
         }
 
         public static PersistableBundle deepCopyBundle(int i, PersistableBundle persistableBundle) {
@@ -209,28 +253,48 @@ public final class JobStore {
             for (String str : persistableBundle.keySet()) {
                 Object obj = persistableBundle2.get(str);
                 if (obj instanceof PersistableBundle) {
-                    persistableBundle2.putPersistableBundle(str, deepCopyBundle(i - 1, (PersistableBundle) obj));
+                    persistableBundle2.putPersistableBundle(
+                            str, deepCopyBundle(i - 1, (PersistableBundle) obj));
                 }
             }
             return persistableBundle2;
         }
 
-        public static void writeConstraintsToXml(TypedXmlSerializer typedXmlSerializer, JobStatus jobStatus) {
+        public static void writeConstraintsToXml(
+                TypedXmlSerializer typedXmlSerializer, JobStatus jobStatus) {
             typedXmlSerializer.startTag((String) null, "constraints");
             JobInfo jobInfo = jobStatus.job;
             if (jobStatus.hasConnectivityConstraint()) {
                 NetworkRequest requiredNetwork = jobStatus.job.getRequiredNetwork();
-                typedXmlSerializer.attribute((String) null, "net-capabilities-csv", JobStore.intArrayToString(requiredNetwork.getCapabilities()));
-                typedXmlSerializer.attribute((String) null, "net-forbidden-capabilities-csv", JobStore.intArrayToString(requiredNetwork.getForbiddenCapabilities()));
-                typedXmlSerializer.attribute((String) null, "net-transport-types-csv", JobStore.intArrayToString(requiredNetwork.getTransportTypes()));
+                typedXmlSerializer.attribute(
+                        (String) null,
+                        "net-capabilities-csv",
+                        JobStore.intArrayToString(requiredNetwork.getCapabilities()));
+                typedXmlSerializer.attribute(
+                        (String) null,
+                        "net-forbidden-capabilities-csv",
+                        JobStore.intArrayToString(requiredNetwork.getForbiddenCapabilities()));
+                typedXmlSerializer.attribute(
+                        (String) null,
+                        "net-transport-types-csv",
+                        JobStore.intArrayToString(requiredNetwork.getTransportTypes()));
                 if (jobInfo.getEstimatedNetworkDownloadBytes() != -1) {
-                    typedXmlSerializer.attributeLong((String) null, "estimated-download-bytes", jobInfo.getEstimatedNetworkDownloadBytes());
+                    typedXmlSerializer.attributeLong(
+                            (String) null,
+                            "estimated-download-bytes",
+                            jobInfo.getEstimatedNetworkDownloadBytes());
                 }
                 if (jobInfo.getEstimatedNetworkUploadBytes() != -1) {
-                    typedXmlSerializer.attributeLong((String) null, "estimated-upload-bytes", jobInfo.getEstimatedNetworkUploadBytes());
+                    typedXmlSerializer.attributeLong(
+                            (String) null,
+                            "estimated-upload-bytes",
+                            jobInfo.getEstimatedNetworkUploadBytes());
                 }
                 if (jobInfo.getMinimumNetworkChunkBytes() != -1) {
-                    typedXmlSerializer.attributeLong((String) null, "minimum-network-chunk-bytes", jobInfo.getMinimumNetworkChunkBytes());
+                    typedXmlSerializer.attributeLong(
+                            (String) null,
+                            "minimum-network-chunk-bytes",
+                            jobInfo.getMinimumNetworkChunkBytes());
                 }
             }
             if (jobInfo.isRequireDeviceIdle()) {
@@ -240,15 +304,18 @@ public final class JobStore {
                 typedXmlSerializer.attribute((String) null, "charging", Boolean.toString(true));
             }
             if (jobInfo.isRequireBatteryNotLow()) {
-                typedXmlSerializer.attribute((String) null, "battery-not-low", Boolean.toString(true));
+                typedXmlSerializer.attribute(
+                        (String) null, "battery-not-low", Boolean.toString(true));
             }
             if (jobInfo.isRequireStorageNotLow()) {
-                typedXmlSerializer.attribute((String) null, "storage-not-low", Boolean.toString(true));
+                typedXmlSerializer.attribute(
+                        (String) null, "storage-not-low", Boolean.toString(true));
             }
             typedXmlSerializer.endTag((String) null, "constraints");
         }
 
-        public static void writeDebugInfoToXml(TypedXmlSerializer typedXmlSerializer, JobStatus jobStatus) {
+        public static void writeDebugInfoToXml(
+                TypedXmlSerializer typedXmlSerializer, JobStatus jobStatus) {
             ArraySet debugTagsArraySet = jobStatus.job.getDebugTagsArraySet();
             int size = debugTagsArraySet.size();
             String traceTag = jobStatus.job.getTraceTag();
@@ -261,13 +328,15 @@ public final class JobStore {
             }
             for (int i = 0; i < size; i++) {
                 typedXmlSerializer.startTag((String) null, "debug-tag");
-                typedXmlSerializer.attribute((String) null, "tag", (String) debugTagsArraySet.valueAt(i));
+                typedXmlSerializer.attribute(
+                        (String) null, "tag", (String) debugTagsArraySet.valueAt(i));
                 typedXmlSerializer.endTag((String) null, "debug-tag");
             }
             typedXmlSerializer.endTag((String) null, "debug-info");
         }
 
-        public static void writeExecutionCriteriaToXml(XmlSerializer xmlSerializer, JobStatus jobStatus) {
+        public static void writeExecutionCriteriaToXml(
+                XmlSerializer xmlSerializer, JobStatus jobStatus) {
             JobInfo jobInfo = jobStatus.job;
             if (jobInfo.isPeriodic()) {
                 xmlSerializer.startTag(null, "periodic");
@@ -284,14 +353,31 @@ public final class JobStore {
             JobSchedulerService.sElapsedRealtimeClock.getClass();
             long elapsedRealtime = SystemClock.elapsedRealtime();
             if (jobStatus.hasConstraint(1073741824)) {
-                xmlSerializer.attribute(null, "deadline", Long.toString(pair == null ? (jobStatus.latestRunTimeElapsedMillis - elapsedRealtime) + millis : ((Long) pair.second).longValue()));
+                xmlSerializer.attribute(
+                        null,
+                        "deadline",
+                        Long.toString(
+                                pair == null
+                                        ? (jobStatus.latestRunTimeElapsedMillis - elapsedRealtime)
+                                                + millis
+                                        : ((Long) pair.second).longValue()));
             }
             if (jobStatus.hasConstraint(Integer.MIN_VALUE)) {
-                xmlSerializer.attribute(null, "delay", Long.toString(pair == null ? (jobStatus.earliestRunTimeElapsedMillis - elapsedRealtime) + millis : ((Long) pair.first).longValue()));
+                xmlSerializer.attribute(
+                        null,
+                        "delay",
+                        Long.toString(
+                                pair == null
+                                        ? (jobStatus.earliestRunTimeElapsedMillis - elapsedRealtime)
+                                                + millis
+                                        : ((Long) pair.first).longValue()));
             }
-            if (jobStatus.job.getInitialBackoffMillis() != 30000 || jobStatus.job.getBackoffPolicy() != 1) {
-                xmlSerializer.attribute(null, "backoff-policy", Integer.toString(jobInfo.getBackoffPolicy()));
-                xmlSerializer.attribute(null, "initial-backoff", Long.toString(jobInfo.getInitialBackoffMillis()));
+            if (jobStatus.job.getInitialBackoffMillis() != 30000
+                    || jobStatus.job.getBackoffPolicy() != 1) {
+                xmlSerializer.attribute(
+                        null, "backoff-policy", Integer.toString(jobInfo.getBackoffPolicy()));
+                xmlSerializer.attribute(
+                        null, "initial-backoff", Long.toString(jobInfo.getInitialBackoffMillis()));
             }
             if (jobInfo.isPeriodic()) {
                 xmlSerializer.endTag(null, "periodic");
@@ -300,7 +386,8 @@ public final class JobStore {
             }
         }
 
-        public static void writeJobWorkItemListToXml(TypedXmlSerializer typedXmlSerializer, List list) {
+        public static void writeJobWorkItemListToXml(
+                TypedXmlSerializer typedXmlSerializer, List list) {
             if (list == null) {
                 return;
             }
@@ -309,18 +396,30 @@ public final class JobStore {
                 JobWorkItem jobWorkItem = (JobWorkItem) list.get(i);
                 if (jobWorkItem.getGrants() == null) {
                     if (jobWorkItem.getIntent() != null) {
-                        Slog.wtf("JobStore", "Encountered JobWorkItem with Intent in persisting list");
+                        Slog.wtf(
+                                "JobStore",
+                                "Encountered JobWorkItem with Intent in persisting list");
                     } else {
                         typedXmlSerializer.startTag((String) null, "job-work-item");
-                        typedXmlSerializer.attributeInt((String) null, "delivery-count", jobWorkItem.getDeliveryCount());
+                        typedXmlSerializer.attributeInt(
+                                (String) null, "delivery-count", jobWorkItem.getDeliveryCount());
                         if (jobWorkItem.getEstimatedNetworkDownloadBytes() != -1) {
-                            typedXmlSerializer.attributeLong((String) null, "estimated-download-bytes", jobWorkItem.getEstimatedNetworkDownloadBytes());
+                            typedXmlSerializer.attributeLong(
+                                    (String) null,
+                                    "estimated-download-bytes",
+                                    jobWorkItem.getEstimatedNetworkDownloadBytes());
                         }
                         if (jobWorkItem.getEstimatedNetworkUploadBytes() != -1) {
-                            typedXmlSerializer.attributeLong((String) null, "estimated-upload-bytes", jobWorkItem.getEstimatedNetworkUploadBytes());
+                            typedXmlSerializer.attributeLong(
+                                    (String) null,
+                                    "estimated-upload-bytes",
+                                    jobWorkItem.getEstimatedNetworkUploadBytes());
                         }
                         if (jobWorkItem.getMinimumNetworkChunkBytes() != -1) {
-                            typedXmlSerializer.attributeLong((String) null, "minimum-network-chunk-bytes", jobWorkItem.getMinimumNetworkChunkBytes());
+                            typedXmlSerializer.attributeLong(
+                                    (String) null,
+                                    "minimum-network-chunk-bytes",
+                                    jobWorkItem.getMinimumNetworkChunkBytes());
                         }
                         PersistableBundle extras = jobWorkItem.getExtras();
                         typedXmlSerializer.startTag(null, "extras");
@@ -346,7 +445,9 @@ public final class JobStore {
                 Method dump skipped, instructions count: 789
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.JobStore.AnonymousClass2.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.job.JobStore.AnonymousClass2.run():void");
         }
     }
 
@@ -372,7 +473,12 @@ public final class JobStore {
             boolean add = arraySet.add(jobStatus);
             boolean add2 = arraySet2.add(jobStatus);
             if (add != add2) {
-                Slog.wtf("JobStore", "mJobs and mJobsPerSourceUid mismatch; caller= " + add + " source= " + add2);
+                Slog.wtf(
+                        "JobStore",
+                        "mJobs and mJobsPerSourceUid mismatch; caller= "
+                                + add
+                                + " source= "
+                                + add2);
             }
             return add || add2;
         }
@@ -469,17 +575,26 @@ public final class JobStore {
             this.mCompletionLatch = countDownLatch;
         }
 
-        public static void buildConstraintsFromXml(JobInfo.Builder builder, TypedXmlPullParser typedXmlPullParser) {
+        public static void buildConstraintsFromXml(
+                JobInfo.Builder builder, TypedXmlPullParser typedXmlPullParser) {
             String attributeValue;
             String attributeValue2;
             String attributeValue3;
-            String attributeValue4 = typedXmlPullParser.getAttributeValue((String) null, "net-capabilities-csv");
-            String attributeValue5 = typedXmlPullParser.getAttributeValue((String) null, "net-forbidden-capabilities-csv");
-            String attributeValue6 = typedXmlPullParser.getAttributeValue((String) null, "net-transport-types-csv");
+            String attributeValue4 =
+                    typedXmlPullParser.getAttributeValue((String) null, "net-capabilities-csv");
+            String attributeValue5 =
+                    typedXmlPullParser.getAttributeValue(
+                            (String) null, "net-forbidden-capabilities-csv");
+            String attributeValue6 =
+                    typedXmlPullParser.getAttributeValue((String) null, "net-transport-types-csv");
             if (attributeValue4 == null || attributeValue6 == null) {
-                attributeValue = typedXmlPullParser.getAttributeValue((String) null, "net-capabilities");
-                attributeValue2 = typedXmlPullParser.getAttributeValue((String) null, "net-unwanted-capabilities");
-                attributeValue3 = typedXmlPullParser.getAttributeValue((String) null, "net-transport-types");
+                attributeValue =
+                        typedXmlPullParser.getAttributeValue((String) null, "net-capabilities");
+                attributeValue2 =
+                        typedXmlPullParser.getAttributeValue(
+                                (String) null, "net-unwanted-capabilities");
+                attributeValue3 =
+                        typedXmlPullParser.getAttributeValue((String) null, "net-transport-types");
             } else {
                 attributeValue = null;
                 attributeValue2 = null;
@@ -487,7 +602,8 @@ public final class JobStore {
             }
             int i = 0;
             if (attributeValue4 != null && attributeValue6 != null) {
-                NetworkRequest.Builder clearCapabilities = new NetworkRequest.Builder().clearCapabilities();
+                NetworkRequest.Builder clearCapabilities =
+                        new NetworkRequest.Builder().clearCapabilities();
                 for (int i2 : JobStore.stringToIntArray(attributeValue4)) {
                     clearCapabilities.addCapability(i2);
                 }
@@ -500,7 +616,15 @@ public final class JobStore {
                     clearCapabilities.addTransportType(stringToIntArray[i]);
                     i++;
                 }
-                builder.setRequiredNetwork(clearCapabilities.build()).setEstimatedNetworkBytes(typedXmlPullParser.getAttributeLong((String) null, "estimated-download-bytes", -1L), typedXmlPullParser.getAttributeLong((String) null, "estimated-upload-bytes", -1L)).setMinimumNetworkChunkBytes(typedXmlPullParser.getAttributeLong((String) null, "minimum-network-chunk-bytes", -1L));
+                builder.setRequiredNetwork(clearCapabilities.build())
+                        .setEstimatedNetworkBytes(
+                                typedXmlPullParser.getAttributeLong(
+                                        (String) null, "estimated-download-bytes", -1L),
+                                typedXmlPullParser.getAttributeLong(
+                                        (String) null, "estimated-upload-bytes", -1L))
+                        .setMinimumNetworkChunkBytes(
+                                typedXmlPullParser.getAttributeLong(
+                                        (String) null, "minimum-network-chunk-bytes", -1L));
             } else if (attributeValue == null || attributeValue3 == null) {
                 if (typedXmlPullParser.getAttributeValue((String) null, "connectivity") != null) {
                     builder.setRequiredNetworkType(1);
@@ -515,7 +639,8 @@ public final class JobStore {
                     builder.setRequiredNetworkType(3);
                 }
             } else {
-                NetworkRequest.Builder clearCapabilities2 = new NetworkRequest.Builder().clearCapabilities();
+                NetworkRequest.Builder clearCapabilities2 =
+                        new NetworkRequest.Builder().clearCapabilities();
                 int[] unpackBits = BitUtils.unpackBits(Long.parseLong(attributeValue));
                 for (int i4 : unpackBits) {
                     if (i4 <= 25) {
@@ -564,17 +689,30 @@ public final class JobStore {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static java.util.List readJobMapImpl(long r38, java.io.InputStream r40, boolean r41) {
+        public static java.util.List readJobMapImpl(
+                long r38, java.io.InputStream r40, boolean r41) {
             /*
                 Method dump skipped, instructions count: 1282
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.JobStore.ReadJobMapFromDiskRunnable.readJobMapImpl(long, java.io.InputStream, boolean):java.util.List");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.job.JobStore.ReadJobMapFromDiskRunnable.readJobMapImpl(long,"
+                        + " java.io.InputStream, boolean):java.util.List");
         }
 
         public static JobWorkItem readJobWorkItemFromXml(TypedXmlPullParser typedXmlPullParser) {
             JobWorkItem.Builder builder = new JobWorkItem.Builder();
-            builder.setDeliveryCount(typedXmlPullParser.getAttributeInt((String) null, "delivery-count")).setEstimatedNetworkBytes(typedXmlPullParser.getAttributeLong((String) null, "estimated-download-bytes", -1L), typedXmlPullParser.getAttributeLong((String) null, "estimated-upload-bytes", -1L)).setMinimumNetworkChunkBytes(typedXmlPullParser.getAttributeLong((String) null, "minimum-network-chunk-bytes", -1L));
+            builder.setDeliveryCount(
+                            typedXmlPullParser.getAttributeInt((String) null, "delivery-count"))
+                    .setEstimatedNetworkBytes(
+                            typedXmlPullParser.getAttributeLong(
+                                    (String) null, "estimated-download-bytes", -1L),
+                            typedXmlPullParser.getAttributeLong(
+                                    (String) null, "estimated-upload-bytes", -1L))
+                    .setMinimumNetworkChunkBytes(
+                            typedXmlPullParser.getAttributeLong(
+                                    (String) null, "minimum-network-chunk-bytes", -1L));
             typedXmlPullParser.next();
             try {
                 builder.setExtras(PersistableBundle.restoreFromXml(typedXmlPullParser));
@@ -591,9 +729,9 @@ public final class JobStore {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:68:0x018d, code lost:
-        
-            if (r14.getName().startsWith(com.android.server.job.JobStore.JOB_FILE_SPLIT_PREFIX) == false) goto L85;
-         */
+
+           if (r14.getName().startsWith(com.android.server.job.JobStore.JOB_FILE_SPLIT_PREFIX) == false) goto L85;
+        */
         /* JADX WARN: Removed duplicated region for block: B:67:0x0182 A[Catch: all -> 0x006c, TryCatch #7 {all -> 0x006c, blocks: (B:14:0x003c, B:16:0x0045, B:18:0x0054, B:22:0x01a1, B:23:0x006f, B:25:0x007b, B:61:0x0123, B:87:0x0120, B:103:0x010b, B:65:0x017b, B:67:0x0182, B:73:0x0191, B:79:0x012d, B:64:0x013e, B:77:0x0161, B:114:0x01a9, B:116:0x01b3, B:117:0x01b9), top: B:13:0x003c }] */
         /* JADX WARN: Removed duplicated region for block: B:73:0x0191 A[Catch: all -> 0x006c, TryCatch #7 {all -> 0x006c, blocks: (B:14:0x003c, B:16:0x0045, B:18:0x0054, B:22:0x01a1, B:23:0x006f, B:25:0x007b, B:61:0x0123, B:87:0x0120, B:103:0x010b, B:65:0x017b, B:67:0x0182, B:73:0x0191, B:79:0x012d, B:64:0x013e, B:77:0x0161, B:114:0x01a9, B:116:0x01b3, B:117:0x01b9), top: B:13:0x003c }] */
         /* JADX WARN: Removed duplicated region for block: B:81:0x011a A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -607,7 +745,9 @@ public final class JobStore {
                 Method dump skipped, instructions count: 514
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.JobStore.ReadJobMapFromDiskRunnable.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.job.JobStore.ReadJobMapFromDiskRunnable.run():void");
         }
     }
 
@@ -620,12 +760,15 @@ public final class JobStore {
         File file2 = new File(new File(file, "system"), "job");
         this.mJobFileDirectory = file2;
         file2.mkdirs();
-        SystemConfigFileCommitEventLogger systemConfigFileCommitEventLogger = new SystemConfigFileCommitEventLogger("jobs");
+        SystemConfigFileCommitEventLogger systemConfigFileCommitEventLogger =
+                new SystemConfigFileCommitEventLogger("jobs");
         this.mEventLogger = systemConfigFileCommitEventLogger;
-        AtomicFile atomicFile = new AtomicFile(new File(file2, "jobs.xml"), systemConfigFileCommitEventLogger);
+        AtomicFile atomicFile =
+                new AtomicFile(new File(file2, "jobs.xml"), systemConfigFileCommitEventLogger);
         this.mJobsFile = atomicFile;
         this.mJobSet = new JobSet();
-        long lastModifiedTime = atomicFile.exists() ? atomicFile.getLastModifiedTime() : file2.lastModified();
+        long lastModifiedTime =
+                atomicFile.exists() ? atomicFile.getLastModifiedTime() : file2.lastModified();
         this.mXmlTimestamp = lastModifiedTime;
         this.mRtcGood = JobSchedulerService.sSystemClock.millis() > lastModifiedTime;
         AppSchedulingModuleThread.getHandler().postDelayed(anonymousClass1, 1800000L);
@@ -633,7 +776,15 @@ public final class JobStore {
 
     public static Pair convertRtcBoundsToElapsed(Pair pair, long j) {
         long millis = JobSchedulerService.sSystemClock.millis();
-        return Pair.create(Long.valueOf(((Long) pair.first).longValue() > 0 ? Math.max(((Long) pair.first).longValue() - millis, 0L) + j : 0L), Long.valueOf(((Long) pair.second).longValue() < Long.MAX_VALUE ? Math.max(((Long) pair.second).longValue() - millis, 0L) + j : Long.MAX_VALUE));
+        return Pair.create(
+                Long.valueOf(
+                        ((Long) pair.first).longValue() > 0
+                                ? Math.max(((Long) pair.first).longValue() - millis, 0L) + j
+                                : 0L),
+                Long.valueOf(
+                        ((Long) pair.second).longValue() < Long.MAX_VALUE
+                                ? Math.max(((Long) pair.second).longValue() - millis, 0L) + j
+                                : Long.MAX_VALUE));
     }
 
     public static int extractUidFromJobFileName(File file) {
@@ -802,33 +953,39 @@ public final class JobStore {
         jobSet.getClass();
         final int i = 0;
         final int i2 = 1;
-        Predicate or = new Predicate() { // from class: com.android.server.job.JobStore$JobSet$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                int i3 = i;
-                int[] iArr2 = iArr;
-                JobStatus jobStatus = (JobStatus) obj;
-                switch (i3) {
-                    case 0:
-                        return !ArrayUtils.contains(iArr2, jobStatus.sourceUserId);
-                    default:
-                        return !ArrayUtils.contains(iArr2, UserHandle.getUserId(jobStatus.callingUid));
-                }
-            }
-        }.or(new Predicate() { // from class: com.android.server.job.JobStore$JobSet$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                int i3 = i2;
-                int[] iArr2 = iArr;
-                JobStatus jobStatus = (JobStatus) obj;
-                switch (i3) {
-                    case 0:
-                        return !ArrayUtils.contains(iArr2, jobStatus.sourceUserId);
-                    default:
-                        return !ArrayUtils.contains(iArr2, UserHandle.getUserId(jobStatus.callingUid));
-                }
-            }
-        });
+        Predicate or =
+                new Predicate() { // from class:
+                                  // com.android.server.job.JobStore$JobSet$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        int i3 = i;
+                        int[] iArr2 = iArr;
+                        JobStatus jobStatus = (JobStatus) obj;
+                        switch (i3) {
+                            case 0:
+                                return !ArrayUtils.contains(iArr2, jobStatus.sourceUserId);
+                            default:
+                                return !ArrayUtils.contains(
+                                        iArr2, UserHandle.getUserId(jobStatus.callingUid));
+                        }
+                    }
+                }.or(
+                        new Predicate() { // from class:
+                                          // com.android.server.job.JobStore$JobSet$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                int i3 = i2;
+                                int[] iArr2 = iArr;
+                                JobStatus jobStatus = (JobStatus) obj;
+                                switch (i3) {
+                                    case 0:
+                                        return !ArrayUtils.contains(iArr2, jobStatus.sourceUserId);
+                                    default:
+                                        return !ArrayUtils.contains(
+                                                iArr2, UserHandle.getUserId(jobStatus.callingUid));
+                                }
+                            }
+                        });
         for (int size = jobSet.mJobs.size() - 1; size >= 0; size--) {
             ArraySet arraySet = (ArraySet) jobSet.mJobs.valueAt(size);
             arraySet.removeIf(or);

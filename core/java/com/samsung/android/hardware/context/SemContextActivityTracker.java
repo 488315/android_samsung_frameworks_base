@@ -9,19 +9,22 @@ public class SemContextActivityTracker extends SemContextEventContext {
     public static final int ACCURACY_HIGH = 2;
     public static final int ACCURACY_LOW = 0;
     public static final int ACCURACY_MID = 1;
-    public static final Parcelable.Creator<SemContextActivityTracker> CREATOR = new Parcelable.Creator<SemContextActivityTracker>() { // from class: com.samsung.android.hardware.context.SemContextActivityTracker.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityTracker createFromParcel(Parcel in) {
-            return new SemContextActivityTracker(in);
-        }
+    public static final Parcelable.Creator<SemContextActivityTracker> CREATOR =
+            new Parcelable.Creator<
+                    SemContextActivityTracker>() { // from class:
+                                                   // com.samsung.android.hardware.context.SemContextActivityTracker.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityTracker createFromParcel(Parcel in) {
+                    return new SemContextActivityTracker(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityTracker[] newArray(int size) {
-            return new SemContextActivityTracker[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityTracker[] newArray(int size) {
+                    return new SemContextActivityTracker[size];
+                }
+            };
     public static final int STATUS_BIKE = 5;
     public static final int STATUS_RUN = 3;
     public static final int STATUS_STATIONARY = 1;

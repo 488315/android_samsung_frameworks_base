@@ -11,8 +11,10 @@ import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.samsung.android.common.AsProperty;
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -27,8 +29,7 @@ public class Environment {
     private static final long DEFAULT_SCOPED_STORAGE = 149924527;
     public static String DIRECTORY_ALARMS = null;
 
-    @Deprecated
-    public static final String DIRECTORY_ANDROID = "Android";
+    @Deprecated public static final String DIRECTORY_ANDROID = "Android";
     public static String DIRECTORY_AUDIOBOOKS = null;
     public static String DIRECTORY_DCIM = null;
     public static String DIRECTORY_DOCUMENTS = null;
@@ -101,7 +102,8 @@ public class Environment {
     private static final String ENV_PRODUCT_ROOT = "PRODUCT_ROOT";
     private static final File DIR_PRODUCT_ROOT = getDirectory(ENV_PRODUCT_ROOT, "/product");
     private static final String ENV_SYSTEM_EXT_ROOT = "SYSTEM_EXT_ROOT";
-    private static final File DIR_SYSTEM_EXT_ROOT = getDirectory(ENV_SYSTEM_EXT_ROOT, "/system_ext");
+    private static final File DIR_SYSTEM_EXT_ROOT =
+            getDirectory(ENV_SYSTEM_EXT_ROOT, "/system_ext");
     private static final String ENV_APEX_ROOT = "APEX_ROOT";
     private static final File DIR_APEX_ROOT = getDirectory(ENV_APEX_ROOT, "/apex");
 
@@ -120,7 +122,21 @@ public class Environment {
         DIRECTORY_SCREENSHOTS = "Screenshots";
         DIRECTORY_AUDIOBOOKS = "Audiobooks";
         DIRECTORY_RECORDINGS = "Recordings";
-        STANDARD_DIRECTORIES = new String[]{DIRECTORY_MUSIC, DIRECTORY_PODCASTS, DIRECTORY_RINGTONES, DIRECTORY_ALARMS, DIRECTORY_NOTIFICATIONS, DIRECTORY_PICTURES, DIRECTORY_MOVIES, DIRECTORY_DOWNLOADS, DIRECTORY_DCIM, DIRECTORY_DOCUMENTS, DIRECTORY_AUDIOBOOKS, DIRECTORY_RECORDINGS};
+        STANDARD_DIRECTORIES =
+                new String[] {
+                    DIRECTORY_MUSIC,
+                    DIRECTORY_PODCASTS,
+                    DIRECTORY_RINGTONES,
+                    DIRECTORY_ALARMS,
+                    DIRECTORY_NOTIFICATIONS,
+                    DIRECTORY_PICTURES,
+                    DIRECTORY_MOVIES,
+                    DIRECTORY_DOWNLOADS,
+                    DIRECTORY_DCIM,
+                    DIRECTORY_DOCUMENTS,
+                    DIRECTORY_AUDIOBOOKS,
+                    DIRECTORY_RECORDINGS
+                };
     }
 
     public static void initForCurrentUser() {
@@ -169,7 +185,8 @@ public class Environment {
         }
 
         public File[] buildExternalStorageAppMediaDirs(String packageName) {
-            return Environment.buildPaths(getExternalDirs(), "Android", Environment.DIR_MEDIA, packageName);
+            return Environment.buildPaths(
+                    getExternalDirs(), "Android", Environment.DIR_MEDIA, packageName);
         }
 
         public File[] buildExternalStorageAppObbDirs(String packageName) {
@@ -177,11 +194,13 @@ public class Environment {
         }
 
         public File[] buildExternalStorageAppFilesDirs(String packageName) {
-            return Environment.buildPaths(getExternalDirs(), "Android", "data", packageName, Environment.DIR_FILES);
+            return Environment.buildPaths(
+                    getExternalDirs(), "Android", "data", packageName, Environment.DIR_FILES);
         }
 
         public File[] buildExternalStorageAppCacheDirs(String packageName) {
-            return Environment.buildPaths(getExternalDirs(), "Android", "data", packageName, Environment.DIR_CACHE);
+            return Environment.buildPaths(
+                    getExternalDirs(), "Android", "data", packageName, Environment.DIR_CACHE);
         }
     }
 
@@ -235,7 +254,8 @@ public class Environment {
 
     @Deprecated
     public static File getUserConfigDirectory(int userId) {
-        return new File(new File(new File(getDataDirectory(), "misc"), "user"), Integer.toString(userId));
+        return new File(
+                new File(new File(getDataDirectory(), "misc"), "user"), Integer.toString(userId));
     }
 
     public static File getDataDirectory() {
@@ -301,8 +321,10 @@ public class Environment {
         return buildPath(getDataDirectory(volumeUuid), "misc_ce", String.valueOf(userId));
     }
 
-    public static File getDataMiscCeSharedSdkSandboxDirectory(String volumeUuid, int userId, String packageName) {
-        return buildPath(getDataMiscCeDirectory(volumeUuid, userId), "sdksandbox", packageName, "shared");
+    public static File getDataMiscCeSharedSdkSandboxDirectory(
+            String volumeUuid, int userId, String packageName) {
+        return buildPath(
+                getDataMiscCeDirectory(volumeUuid, userId), "sdksandbox", packageName, "shared");
     }
 
     public static File getDataMiscDeDirectory(int userId) {
@@ -313,8 +335,10 @@ public class Environment {
         return buildPath(getDataDirectory(volumeUuid), "misc_de", String.valueOf(userId));
     }
 
-    public static File getDataMiscDeSharedSdkSandboxDirectory(String volumeUuid, int userId, String packageName) {
-        return buildPath(getDataMiscDeDirectory(volumeUuid, userId), "sdksandbox", packageName, "shared");
+    public static File getDataMiscDeSharedSdkSandboxDirectory(
+            String volumeUuid, int userId, String packageName) {
+        return buildPath(
+                getDataMiscDeDirectory(volumeUuid, userId), "sdksandbox", packageName, "shared");
     }
 
     private static File getDataProfilesDeDirectory(int userId) {
@@ -353,12 +377,14 @@ public class Environment {
         return new File(getDataUserCeDirectory(volumeUuid), String.valueOf(userId));
     }
 
-    public static File getDataUserCePackageDirectory(String volumeUuid, int userId, String packageName) {
+    public static File getDataUserCePackageDirectory(
+            String volumeUuid, int userId, String packageName) {
         return new File(getDataUserCeDirectory(volumeUuid, userId), packageName);
     }
 
     @SystemApi
-    public static File getDataCePackageDirectoryForUser(UUID storageUuid, UserHandle user, String packageName) {
+    public static File getDataCePackageDirectoryForUser(
+            UUID storageUuid, UserHandle user, String packageName) {
         String volumeUuid = StorageManager.convert(storageUuid);
         return getDataUserCePackageDirectory(volumeUuid, user.getIdentifier(), packageName);
     }
@@ -371,12 +397,14 @@ public class Environment {
         return new File(getDataUserDeDirectory(volumeUuid), String.valueOf(userId));
     }
 
-    public static File getDataUserDePackageDirectory(String volumeUuid, int userId, String packageName) {
+    public static File getDataUserDePackageDirectory(
+            String volumeUuid, int userId, String packageName) {
         return new File(getDataUserDeDirectory(volumeUuid, userId), packageName);
     }
 
     @SystemApi
-    public static File getDataDePackageDirectoryForUser(UUID storageUuid, UserHandle user, String packageName) {
+    public static File getDataDePackageDirectoryForUser(
+            UUID storageUuid, UserHandle user, String packageName) {
         String volumeUuid = StorageManager.convert(storageUuid);
         return getDataUserDePackageDirectory(volumeUuid, user.getIdentifier(), packageName);
     }
@@ -517,7 +545,12 @@ public class Environment {
             return false;
         }
         String name = file.getName().toLowerCase();
-        return (name.endsWith(".exe") || name.equals("autorun.inf") || name.equals("launchpad.zip") || name.equals(".nomedia")) ? false : true;
+        return (name.endsWith(".exe")
+                        || name.equals("autorun.inf")
+                        || name.equals("launchpad.zip")
+                        || name.equals(".nomedia"))
+                ? false
+                : true;
     }
 
     public static File getExternalStoragePublicDirectory(String type) {
@@ -634,7 +667,9 @@ public class Environment {
         }
         String packageName = AppGlobals.getInitialPackage();
         try {
-            PackageManager.Property noAppStorageProp = packageManager.getProperty(PackageManager.PROPERTY_NO_APP_DATA_STORAGE, packageName);
+            PackageManager.Property noAppStorageProp =
+                    packageManager.getProperty(
+                            PackageManager.PROPERTY_NO_APP_DATA_STORAGE, packageName);
             if (noAppStorageProp != null) {
                 if (noAppStorageProp.getBoolean()) {
                     return false;
@@ -643,7 +678,8 @@ public class Environment {
         } catch (PackageManager.NameNotFoundException e) {
         }
         boolean defaultScopedStorage = Compatibility.isChangeEnabled(DEFAULT_SCOPED_STORAGE);
-        boolean forceEnableScopedStorage = Compatibility.isChangeEnabled(FORCE_ENABLE_SCOPED_STORAGE);
+        boolean forceEnableScopedStorage =
+                Compatibility.isChangeEnabled(FORCE_ENABLE_SCOPED_STORAGE);
         if (isScopedStorageEnforced(defaultScopedStorage, forceEnableScopedStorage)) {
             return false;
         }
@@ -652,14 +688,17 @@ public class Environment {
         }
         AppOpsManager appOps = (AppOpsManager) context.getSystemService(AppOpsManager.class);
         String opPackageName = context.getOpPackageName();
-        return appOps.noteOpNoThrow(87, uid, opPackageName) == 0 || appOps.noteOpNoThrow(99, uid, opPackageName) == 0;
+        return appOps.noteOpNoThrow(87, uid, opPackageName) == 0
+                || appOps.noteOpNoThrow(99, uid, opPackageName) == 0;
     }
 
-    private static boolean isScopedStorageEnforced(boolean defaultScopedStorage, boolean forceEnableScopedStorage) {
+    private static boolean isScopedStorageEnforced(
+            boolean defaultScopedStorage, boolean forceEnableScopedStorage) {
         return defaultScopedStorage && forceEnableScopedStorage;
     }
 
-    private static boolean isScopedStorageDisabled(boolean defaultScopedStorage, boolean forceEnableScopedStorage) {
+    private static boolean isScopedStorageDisabled(
+            boolean defaultScopedStorage, boolean forceEnableScopedStorage) {
         return (defaultScopedStorage || forceEnableScopedStorage) ? false : true;
     }
 
@@ -681,7 +720,9 @@ public class Environment {
             case 2:
                 return false;
             case 3:
-                return context.checkPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE, Process.myPid(), uid) == 0;
+                return context.checkPermission(
+                                Manifest.permission.MANAGE_EXTERNAL_STORAGE, Process.myPid(), uid)
+                        == 0;
             default:
                 throw new IllegalStateException("Unknown AppOpsManager mode " + opMode);
         }
@@ -703,7 +744,10 @@ public class Environment {
 
     private static void throwIfUserRequired() {
         if (sUserRequired) {
-            Log.wtf(TAG, "Path requests must specify a user by using UserEnvironment", new Throwable());
+            Log.wtf(
+                    TAG,
+                    "Path requests must specify a user by using UserEnvironment",
+                    new Throwable());
         }
     }
 

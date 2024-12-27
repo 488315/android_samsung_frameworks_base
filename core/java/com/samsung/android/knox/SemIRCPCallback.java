@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -21,20 +22,19 @@ public interface SemIRCPCallback extends IInterface {
 
     public static class Default implements SemIRCPCallback {
         @Override // com.samsung.android.knox.SemIRCPCallback
-        public void onComplete(List<String> srcPathsOrig, int destinationUserId, int successCnt) throws RemoteException {
-        }
+        public void onComplete(List<String> srcPathsOrig, int destinationUserId, int successCnt)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.SemIRCPCallback
-        public void onDone(String srcPathsOrig, int destinationUserId) throws RemoteException {
-        }
+        public void onDone(String srcPathsOrig, int destinationUserId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.SemIRCPCallback
-        public void onFail(String srcPathsOrig, int destinationUserId, int errorCode) throws RemoteException {
-        }
+        public void onFail(String srcPathsOrig, int destinationUserId, int errorCode)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.SemIRCPCallback
-        public void onProgress(String srcPathsOrig, int destinationUserId, int progress) throws RemoteException {
-        }
+        public void onProgress(String srcPathsOrig, int destinationUserId, int progress)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +42,7 @@ public interface SemIRCPCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements SemIRCPCallback {
+    public abstract static class Stub extends Binder implements SemIRCPCallback {
         static final int TRANSACTION_onComplete = 1;
         static final int TRANSACTION_onDone = 2;
         static final int TRANSACTION_onFail = 3;
@@ -89,7 +89,8 @@ public interface SemIRCPCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(SemIRCPCallback.DESCRIPTOR);
             }
@@ -151,7 +152,8 @@ public interface SemIRCPCallback extends IInterface {
             }
 
             @Override // com.samsung.android.knox.SemIRCPCallback
-            public void onComplete(List<String> srcPathsOrig, int destinationUserId, int successCnt) throws RemoteException {
+            public void onComplete(List<String> srcPathsOrig, int destinationUserId, int successCnt)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -184,7 +186,8 @@ public interface SemIRCPCallback extends IInterface {
             }
 
             @Override // com.samsung.android.knox.SemIRCPCallback
-            public void onFail(String srcPathsOrig, int destinationUserId, int errorCode) throws RemoteException {
+            public void onFail(String srcPathsOrig, int destinationUserId, int errorCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -201,7 +204,8 @@ public interface SemIRCPCallback extends IInterface {
             }
 
             @Override // com.samsung.android.knox.SemIRCPCallback
-            public void onProgress(String srcPathsOrig, int destinationUserId, int progress) throws RemoteException {
+            public void onProgress(String srcPathsOrig, int destinationUserId, int progress)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

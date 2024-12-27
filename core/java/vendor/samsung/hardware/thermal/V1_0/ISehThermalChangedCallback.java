@@ -10,9 +10,12 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -20,7 +23,8 @@ import java.util.Objects;
 
 /* loaded from: classes6.dex */
 public interface ISehThermalChangedCallback extends IBase {
-    public static final String kInterfaceName = "vendor.samsung.hardware.thermal@1.0::ISehThermalChangedCallback";
+    public static final String kInterfaceName =
+            "vendor.samsung.hardware.thermal@1.0::ISehThermalChangedCallback";
 
     @Override // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
     IHwBinder asBinder();
@@ -86,7 +90,8 @@ public interface ISehThermalChangedCallback extends IBase {
         return asInterface(iface.asBinder());
     }
 
-    static ISehThermalChangedCallback getService(String serviceName, boolean retry) throws RemoteException {
+    static ISehThermalChangedCallback getService(String serviceName, boolean retry)
+            throws RemoteException {
         return asInterface(HwBinder.getService(kInterfaceName, serviceName, retry));
     }
 
@@ -111,7 +116,8 @@ public interface ISehThermalChangedCallback extends IBase {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -120,7 +126,8 @@ public interface ISehThermalChangedCallback extends IBase {
             try {
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException e) {
-                return "[class or subclass of vendor.samsung.hardware.thermal@1.0::ISehThermalChangedCallback]@Proxy";
+                return "[class or subclass of"
+                           + " vendor.samsung.hardware.thermal@1.0::ISehThermalChangedCallback]@Proxy";
             }
         }
 
@@ -133,7 +140,8 @@ public interface ISehThermalChangedCallback extends IBase {
         }
 
         @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback
-        public void notifyTemperatures(ArrayList<SehTemperature> temperatures) throws RemoteException {
+        public void notifyTemperatures(ArrayList<SehTemperature> temperatures)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISehThermalChangedCallback.kInterfaceName);
             SehTemperature.writeVectorToParcel(_hidl_request, temperatures);
@@ -146,7 +154,8 @@ public interface ISehThermalChangedCallback extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -162,7 +171,8 @@ public interface ISehThermalChangedCallback extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -178,7 +188,8 @@ public interface ISehThermalChangedCallback extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -194,7 +205,8 @@ public interface ISehThermalChangedCallback extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -206,7 +218,9 @@ public interface ISehThermalChangedCallback extends IBase {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -220,7 +234,8 @@ public interface ISehThermalChangedCallback extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -233,12 +248,15 @@ public interface ISehThermalChangedCallback extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -252,7 +270,8 @@ public interface ISehThermalChangedCallback extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -269,7 +288,8 @@ public interface ISehThermalChangedCallback extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -282,51 +302,128 @@ public interface ISehThermalChangedCallback extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements ISehThermalChangedCallback {
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements ISehThermalChangedCallback {
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(ISehThermalChangedCallback.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(ISehThermalChangedCallback.kInterfaceName, IBase.kInterfaceName));
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return ISehThermalChangedCallback.kInterfaceName;
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{53, 11, -38, 81, 71, -84, 0, 71, 54, 1, 51, -73, -1, 122, -34, -46, -91, 70, -52, MidiConstants.STATUS_CHANNEL_PRESSURE, 106, 24, -98, -117, -79, -104, 113, 8, 56, SprAttributeBase.TYPE_SHADOW, -78, 102}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                53,
+                                11,
+                                -38,
+                                81,
+                                71,
+                                -84,
+                                0,
+                                71,
+                                54,
+                                1,
+                                51,
+                                -73,
+                                -1,
+                                122,
+                                -34,
+                                -46,
+                                -91,
+                                70,
+                                -52,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                106,
+                                24,
+                                -98,
+                                -117,
+                                -79,
+                                -104,
+                                113,
+                                8,
+                                56,
+                                SprAttributeBase.TYPE_SHADOW,
+                                -78,
+                                102
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+                  // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -335,12 +432,14 @@ public interface ISehThermalChangedCallback extends IBase {
             return info;
         }
 
-        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.thermal.V1_0.ISehThermalChangedCallback,
+                  // android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+                  // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -362,11 +461,14 @@ public interface ISehThermalChangedCallback extends IBase {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(ISehThermalChangedCallback.kInterfaceName);
-                    ArrayList<SehTemperature> temperatures = SehTemperature.readVectorFromParcel(_hidl_request);
+                    ArrayList<SehTemperature> temperatures =
+                            SehTemperature.readVectorFromParcel(_hidl_request);
                     notifyTemperatures(temperatures);
                     return;
                 case 256067662:
@@ -404,7 +506,8 @@ public interface ISehThermalChangedCallback extends IBase {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

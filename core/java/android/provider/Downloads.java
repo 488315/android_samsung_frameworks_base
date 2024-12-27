@@ -12,14 +12,16 @@ public final class Downloads {
     public static final String DIR_TYPE = "dir_type";
     public static final String EXTRA_IDS = "ids";
     public static final String EXTRA_MIME_TYPES = "mime_types";
-    private static final String QUERY_WHERE_CLAUSE = "notificationpackage=? AND notificationclass=?";
+    private static final String QUERY_WHERE_CLAUSE =
+            "notificationpackage=? AND notificationclass=?";
 
-    private Downloads() {
-    }
+    private Downloads() {}
 
     public static final class Impl implements BaseColumns {
-        public static final String ACTION_DOWNLOAD_COMPLETED = "android.intent.action.DOWNLOAD_COMPLETED";
-        public static final String ACTION_NOTIFICATION_CLICKED = "android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED";
+        public static final String ACTION_DOWNLOAD_COMPLETED =
+                "android.intent.action.DOWNLOAD_COMPLETED";
+        public static final String ACTION_NOTIFICATION_CLICKED =
+                "android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED";
         public static final String AUTHORITY = "downloads";
         public static final int CD_METHOD_DIRECT = 0;
         public static final int CD_METHOD_DIRECT_ROAP = 2;
@@ -78,7 +80,8 @@ public final class Downloads {
         public static final String COLUMN_ALLOW_ROAMING = "allow_roaming";
         public static final String COLUMN_ALLOW_WRITE = "allow_write";
         public static final String COLUMN_APP_DATA = "entity";
-        public static final String COLUMN_BYPASS_RECOMMENDED_SIZE_LIMIT = "bypass_recommended_size_limit";
+        public static final String COLUMN_BYPASS_RECOMMENDED_SIZE_LIMIT =
+                "bypass_recommended_size_limit";
         public static final String COLUMN_CONTROL = "control";
         public static final String COLUMN_COOKIE_DATA = "cookiedata";
         public static final String COLUMN_CURRENT_BYTES = "current_bytes";
@@ -134,8 +137,7 @@ public final class Downloads {
         public static final int DESTINATION_FILE_URI = 4;
         public static final int DESTINATION_NON_DOWNLOADMANAGER_DOWNLOAD = 6;
 
-        @Deprecated
-        public static final int DESTINATION_SYSTEMCACHE_PARTITION = 5;
+        @Deprecated public static final int DESTINATION_SYSTEMCACHE_PARTITION = 5;
         public static final int FLAG_REQUIRES_CHARGING = 1;
         public static final int FLAG_REQUIRES_DEVICE_IDLE = 2;
         public static final int LAST_UPDATESRC_DONT_NOTIFY_DOWNLOADSVC = 1;
@@ -145,17 +147,21 @@ public final class Downloads {
         public static final int MEDIA_SCANNED = 1;
         public static final int MIN_ARTIFICIAL_ERROR_STATUS = 488;
         public static final String PERMISSION_ACCESS = "android.permission.ACCESS_DOWNLOAD_MANAGER";
-        public static final String PERMISSION_ACCESS_ADVANCED = "android.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED";
-        public static final String PERMISSION_ACCESS_ALL = "android.permission.ACCESS_ALL_DOWNLOADS";
+        public static final String PERMISSION_ACCESS_ADVANCED =
+                "android.permission.ACCESS_DOWNLOAD_MANAGER_ADVANCED";
+        public static final String PERMISSION_ACCESS_ALL =
+                "android.permission.ACCESS_ALL_DOWNLOADS";
         public static final String PERMISSION_CACHE = "android.permission.ACCESS_CACHE_FILESYSTEM";
-        public static final String PERMISSION_CACHE_NON_PURGEABLE = "android.permission.DOWNLOAD_CACHE_NON_PURGEABLE";
-        public static final String PERMISSION_NO_NOTIFICATION = "android.permission.DOWNLOAD_WITHOUT_NOTIFICATION";
-        public static final String PERMISSION_SEND_INTENTS = "android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS";
+        public static final String PERMISSION_CACHE_NON_PURGEABLE =
+                "android.permission.DOWNLOAD_CACHE_NON_PURGEABLE";
+        public static final String PERMISSION_NO_NOTIFICATION =
+                "android.permission.DOWNLOAD_WITHOUT_NOTIFICATION";
+        public static final String PERMISSION_SEND_INTENTS =
+                "android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS";
         public static final String PUBLICLY_ACCESSIBLE_DOWNLOADS_URI_SEGMENT = "public_downloads";
         public static final int STATUS_BAD_REQUEST = 400;
 
-        @Deprecated
-        public static final int STATUS_BLOCKED = 498;
+        @Deprecated public static final int STATUS_BLOCKED = 498;
         public static final int STATUS_CANCELED = 490;
         public static final int STATUS_CANNOT_RESUME = 489;
         public static final int STATUS_DEVICE_NOT_FOUND_ERROR = 199;
@@ -186,8 +192,10 @@ public final class Downloads {
         public static final String _DATA = "_data";
         public static final String _ID = "_id";
         public static final Uri CONTENT_URI = Uri.parse("content://downloads/my_downloads");
-        public static final Uri ALL_DOWNLOADS_CONTENT_URI = Uri.parse("content://downloads/all_downloads");
-        public static final Uri PUBLICLY_ACCESSIBLE_DOWNLOADS_URI = Uri.parse("content://downloads/public_downloads");
+        public static final Uri ALL_DOWNLOADS_CONTENT_URI =
+                Uri.parse("content://downloads/all_downloads");
+        public static final Uri PUBLICLY_ACCESSIBLE_DOWNLOADS_URI =
+                Uri.parse("content://downloads/public_downloads");
         public static final Uri CONTENT_CDURI = Uri.parse("content://sisodownloads/sisodownloads");
 
         public static class RequestHeaders {
@@ -199,8 +207,7 @@ public final class Downloads {
             public static final String URI_SEGMENT = "headers";
         }
 
-        private Impl() {
-        }
+        private Impl() {}
 
         public static boolean isStatusInformational(int status) {
             return status >= 100 && status < 200;
@@ -298,7 +305,12 @@ public final class Downloads {
         }
     }
 
-    public static final void removeAllDownloadsByPackage(Context context, String notification_package, String notification_class) {
-        context.getContentResolver().delete(Impl.CONTENT_URI, QUERY_WHERE_CLAUSE, new String[]{notification_package, notification_class});
+    public static final void removeAllDownloadsByPackage(
+            Context context, String notification_package, String notification_class) {
+        context.getContentResolver()
+                .delete(
+                        Impl.CONTENT_URI,
+                        QUERY_WHERE_CLAUSE,
+                        new String[] {notification_package, notification_class});
     }
 }

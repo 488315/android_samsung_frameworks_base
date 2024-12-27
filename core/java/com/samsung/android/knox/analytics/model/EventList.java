@@ -1,8 +1,9 @@
 package com.samsung.android.knox.analytics.model;
 
-import java.nio.charset.StandardCharsets;
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.nio.charset.StandardCharsets;
 
 /* loaded from: classes6.dex */
 public class EventList extends JSONArray {

@@ -1,6 +1,5 @@
 package android.app.slice;
 
-import android.app.slice.ISliceManager;
 import android.content.ContentProviderClient;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -19,7 +18,9 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,21 +32,28 @@ import java.util.Set;
 @Deprecated
 /* loaded from: classes.dex */
 public class SliceManager {
-    public static final String ACTION_REQUEST_SLICE_PERMISSION = "com.android.intent.action.REQUEST_SLICE_PERMISSION";
+    public static final String ACTION_REQUEST_SLICE_PERMISSION =
+            "com.android.intent.action.REQUEST_SLICE_PERMISSION";
     public static final String CATEGORY_SLICE = "android.app.slice.category.SLICE";
     public static final String SLICE_METADATA_KEY = "android.metadata.SLICE_URI";
     private static final String TAG = "SliceManager";
     private final Context mContext;
     private final IBinder mToken = new Binder();
-    private final ISliceManager mService = ISliceManager.Stub.asInterface(ServiceManager.getServiceOrThrow("slice"));
+    private final ISliceManager mService =
+            ISliceManager.Stub.asInterface(ServiceManager.getServiceOrThrow("slice"));
 
-    public SliceManager(Context context, Handler handler) throws ServiceManager.ServiceNotFoundException {
+    public SliceManager(Context context, Handler handler)
+            throws ServiceManager.ServiceNotFoundException {
         this.mContext = context;
     }
 
     public void pinSlice(Uri uri, Set<SliceSpec> specs) {
         try {
-            this.mService.pinSlice(this.mContext.getPackageName(), uri, (SliceSpec[]) specs.toArray(new SliceSpec[specs.size()]), this.mToken);
+            this.mService.pinSlice(
+                    this.mContext.getPackageName(),
+                    uri,
+                    (SliceSpec[]) specs.toArray(new SliceSpec[specs.size()]),
+                    this.mToken);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -69,7 +77,9 @@ public class SliceManager {
 
     public Set<SliceSpec> getPinnedSpecs(Uri uri) {
         try {
-            return new ArraySet(Arrays.asList(this.mService.getPinnedSpecs(uri, this.mContext.getPackageName())));
+            return new ArraySet(
+                    Arrays.asList(
+                            this.mService.getPinnedSpecs(uri, this.mContext.getPackageName())));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -104,7 +114,8 @@ public class SliceManager {
         Bundle extras = new Bundle();
         extras.putParcelable("slice_uri", uri);
         Bundle res = provider.call(SliceProvider.METHOD_GET_DESCENDANTS, null, extras);
-        ArrayList parcelableArrayList = res.getParcelableArrayList(SliceProvider.EXTRA_SLICE_DESCENDANTS, Uri.class);
+        ArrayList parcelableArrayList =
+                res.getParcelableArrayList(SliceProvider.EXTRA_SLICE_DESCENDANTS, Uri.class);
         if (provider != null) {
             provider.close();
         }
@@ -126,7 +137,8 @@ public class SliceManager {
                 }
                 Bundle extras = new Bundle();
                 extras.putParcelable("slice_uri", uri);
-                extras.putParcelableArrayList(SliceProvider.EXTRA_SUPPORTED_SPECS, new ArrayList<>(supportedSpecs));
+                extras.putParcelableArrayList(
+                        SliceProvider.EXTRA_SUPPORTED_SPECS, new ArrayList<>(supportedSpecs));
                 Bundle res = provider.call(SliceProvider.METHOD_SLICE, null, extras);
                 Bundle.setDefusable(res, true);
                 if (res == null) {
@@ -194,7 +206,8 @@ public class SliceManager {
         if (!queryIntent.hasCategory(CATEGORY_SLICE)) {
             queryIntent.addCategory(CATEGORY_SLICE);
         }
-        List<ResolveInfo> providers = this.mContext.getPackageManager().queryIntentContentProviders(queryIntent, 0);
+        List<ResolveInfo> providers =
+                this.mContext.getPackageManager().queryIntentContentProviders(queryIntent, 0);
         if (providers == null || providers.isEmpty()) {
             return null;
         }
@@ -203,13 +216,23 @@ public class SliceManager {
 
     private Uri resolveStatic(Intent intent, ContentResolver resolver) {
         Objects.requireNonNull(intent, "intent");
-        Preconditions.checkArgument((intent.getComponent() == null && intent.getPackage() == null && intent.getData() == null) ? false : true, "Slice intent must be explicit %s", intent);
+        Preconditions.checkArgument(
+                (intent.getComponent() == null
+                                && intent.getPackage() == null
+                                && intent.getData() == null)
+                        ? false
+                        : true,
+                "Slice intent must be explicit %s",
+                intent);
         Uri intentData = intent.getData();
         if (intentData != null && SliceProvider.SLICE_TYPE.equals(resolver.getType(intentData))) {
             return intentData;
         }
         ResolveInfo resolve = this.mContext.getPackageManager().resolveActivity(intent, 128);
-        if (resolve != null && resolve.activityInfo != null && resolve.activityInfo.metaData != null && resolve.activityInfo.metaData.containsKey(SLICE_METADATA_KEY)) {
+        if (resolve != null
+                && resolve.activityInfo != null
+                && resolve.activityInfo.metaData != null
+                && resolve.activityInfo.metaData.containsKey(SLICE_METADATA_KEY)) {
             return Uri.parse(resolve.activityInfo.metaData.getString(SLICE_METADATA_KEY));
         }
         return null;
@@ -217,7 +240,14 @@ public class SliceManager {
 
     public Slice bindSlice(Intent intent, Set<SliceSpec> supportedSpecs) {
         Objects.requireNonNull(intent, "intent");
-        Preconditions.checkArgument((intent.getComponent() == null && intent.getPackage() == null && intent.getData() == null) ? false : true, "Slice intent must be explicit %s", intent);
+        Preconditions.checkArgument(
+                (intent.getComponent() == null
+                                && intent.getPackage() == null
+                                && intent.getData() == null)
+                        ? false
+                        : true,
+                "Slice intent must be explicit %s",
+                intent);
         ContentResolver resolver = this.mContext.getContentResolver();
         Uri staticUri = resolveStatic(intent, resolver);
         if (staticUri != null) {
@@ -240,7 +270,8 @@ public class SliceManager {
                 }
                 Bundle extras = new Bundle();
                 extras.putParcelable(SliceProvider.EXTRA_INTENT, intent);
-                extras.putParcelableArrayList(SliceProvider.EXTRA_SUPPORTED_SPECS, new ArrayList<>(supportedSpecs));
+                extras.putParcelableArrayList(
+                        SliceProvider.EXTRA_SUPPORTED_SPECS, new ArrayList<>(supportedSpecs));
                 Bundle res = provider.call(SliceProvider.METHOD_MAP_INTENT, null, extras);
                 if (res == null) {
                     if (provider != null) {
@@ -262,7 +293,8 @@ public class SliceManager {
 
     public int checkSlicePermission(Uri uri, int pid, int uid) {
         try {
-            return this.mService.checkSlicePermission(uri, this.mContext.getPackageName(), pid, uid, null);
+            return this.mService.checkSlicePermission(
+                    uri, this.mContext.getPackageName(), pid, uid, null);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -289,9 +321,16 @@ public class SliceManager {
             if (UserHandle.isSameApp(uid, Process.myUid())) {
                 return;
             }
-            int result = this.mService.checkSlicePermission(uri, this.mContext.getPackageName(), pid, uid, autoGrantPermissions);
+            int result =
+                    this.mService.checkSlicePermission(
+                            uri, this.mContext.getPackageName(), pid, uid, autoGrantPermissions);
             if (result == -1) {
-                throw new SecurityException("User " + uid + " does not have slice permission for " + uri + MediaMetrics.SEPARATOR);
+                throw new SecurityException(
+                        "User "
+                                + uid
+                                + " does not have slice permission for "
+                                + uri
+                                + MediaMetrics.SEPARATOR);
             }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -300,7 +339,8 @@ public class SliceManager {
 
     public void grantPermissionFromUser(Uri uri, String pkg, boolean allSlices) {
         try {
-            this.mService.grantPermissionFromUser(uri, pkg, this.mContext.getPackageName(), allSlices);
+            this.mService.grantPermissionFromUser(
+                    uri, pkg, this.mContext.getPackageName(), allSlices);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

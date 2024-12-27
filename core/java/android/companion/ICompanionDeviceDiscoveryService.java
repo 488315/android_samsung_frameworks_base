@@ -1,27 +1,35 @@
 package android.companion;
 
-import android.companion.IAssociationRequestCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes.dex */
 public interface ICompanionDeviceDiscoveryService extends IInterface {
     void onAssociationCreated() throws RemoteException;
 
-    void startDiscovery(AssociationRequest associationRequest, String str, IAssociationRequestCallback iAssociationRequestCallback, AndroidFuture<String> androidFuture) throws RemoteException;
+    void startDiscovery(
+            AssociationRequest associationRequest,
+            String str,
+            IAssociationRequestCallback iAssociationRequestCallback,
+            AndroidFuture<String> androidFuture)
+            throws RemoteException;
 
     public static class Default implements ICompanionDeviceDiscoveryService {
         @Override // android.companion.ICompanionDeviceDiscoveryService
-        public void startDiscovery(AssociationRequest request, String callingPackage, IAssociationRequestCallback applicationCallback, AndroidFuture<String> serviceCallback) throws RemoteException {
-        }
+        public void startDiscovery(
+                AssociationRequest request,
+                String callingPackage,
+                IAssociationRequestCallback applicationCallback,
+                AndroidFuture<String> serviceCallback)
+                throws RemoteException {}
 
         @Override // android.companion.ICompanionDeviceDiscoveryService
-        public void onAssociationCreated() throws RemoteException {
-        }
+        public void onAssociationCreated() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,8 +37,9 @@ public interface ICompanionDeviceDiscoveryService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICompanionDeviceDiscoveryService {
-        public static final String DESCRIPTOR = "android.companion.ICompanionDeviceDiscoveryService";
+    public abstract static class Stub extends Binder implements ICompanionDeviceDiscoveryService {
+        public static final String DESCRIPTOR =
+                "android.companion.ICompanionDeviceDiscoveryService";
         static final int TRANSACTION_onAssociationCreated = 2;
         static final int TRANSACTION_startDiscovery = 1;
 
@@ -71,7 +80,8 @@ public interface ICompanionDeviceDiscoveryService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -81,10 +91,13 @@ public interface ICompanionDeviceDiscoveryService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AssociationRequest _arg0 = (AssociationRequest) data.readTypedObject(AssociationRequest.CREATOR);
+                    AssociationRequest _arg0 =
+                            (AssociationRequest) data.readTypedObject(AssociationRequest.CREATOR);
                     String _arg1 = data.readString();
-                    IAssociationRequestCallback _arg2 = IAssociationRequestCallback.Stub.asInterface(data.readStrongBinder());
-                    AndroidFuture<String> _arg3 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    IAssociationRequestCallback _arg2 =
+                            IAssociationRequestCallback.Stub.asInterface(data.readStrongBinder());
+                    AndroidFuture<String> _arg3 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     startDiscovery(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -113,7 +126,12 @@ public interface ICompanionDeviceDiscoveryService extends IInterface {
             }
 
             @Override // android.companion.ICompanionDeviceDiscoveryService
-            public void startDiscovery(AssociationRequest request, String callingPackage, IAssociationRequestCallback applicationCallback, AndroidFuture<String> serviceCallback) throws RemoteException {
+            public void startDiscovery(
+                    AssociationRequest request,
+                    String callingPackage,
+                    IAssociationRequestCallback applicationCallback,
+                    AndroidFuture<String> serviceCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

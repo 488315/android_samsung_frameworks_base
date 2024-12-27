@@ -1,7 +1,9 @@
 package com.android.server.display;
 
 import android.os.IBinder;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -9,7 +11,8 @@ import java.util.Objects;
 public abstract class DisplayControl {
     public static IBinder createVirtualDisplay(String str, boolean z) {
         Objects.requireNonNull(str, "name must not be null");
-        return nativeCreateVirtualDisplay(str, z, "", FullScreenMagnificationGestureHandler.MAX_SCALE);
+        return nativeCreateVirtualDisplay(
+                str, z, "", FullScreenMagnificationGestureHandler.MAX_SCALE);
     }
 
     public static IBinder createVirtualDisplay(String str, boolean z, String str2, float f) {
@@ -45,7 +48,8 @@ public abstract class DisplayControl {
         return nativeGetSupportedHdrOutputTypes();
     }
 
-    private static native IBinder nativeCreateVirtualDisplay(String str, boolean z, String str2, float f);
+    private static native IBinder nativeCreateVirtualDisplay(
+            String str, boolean z, String str2, float f);
 
     private static native void nativeDestroyVirtualDisplay(IBinder iBinder);
 

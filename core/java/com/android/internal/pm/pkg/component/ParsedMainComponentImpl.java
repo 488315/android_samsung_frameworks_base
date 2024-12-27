@@ -3,24 +3,30 @@ package com.android.internal.pm.pkg.component;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.pm.parsing.pkg.PackageImpl;
+
 import libcore.util.EmptyArray;
 
 /* loaded from: classes5.dex */
-public class ParsedMainComponentImpl extends ParsedComponentImpl implements ParsedMainComponent, Parcelable {
-    public static final Parcelable.Creator<ParsedMainComponentImpl> CREATOR = new Parcelable.Creator<ParsedMainComponentImpl>() { // from class: com.android.internal.pm.pkg.component.ParsedMainComponentImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedMainComponentImpl createFromParcel(Parcel source) {
-            return new ParsedMainComponentImpl(source);
-        }
+public class ParsedMainComponentImpl extends ParsedComponentImpl
+        implements ParsedMainComponent, Parcelable {
+    public static final Parcelable.Creator<ParsedMainComponentImpl> CREATOR =
+            new Parcelable.Creator<
+                    ParsedMainComponentImpl>() { // from class:
+                                                 // com.android.internal.pm.pkg.component.ParsedMainComponentImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedMainComponentImpl createFromParcel(Parcel source) {
+                    return new ParsedMainComponentImpl(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedMainComponentImpl[] newArray(int size) {
-            return new ParsedMainComponentImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedMainComponentImpl[] newArray(int size) {
+                    return new ParsedMainComponentImpl[size];
+                }
+            };
     private String[] attributionTags;
     private boolean directBootAware;
     private boolean enabled;
@@ -89,7 +95,14 @@ public class ParsedMainComponentImpl extends ParsedComponentImpl implements Pars
         this.attributionTags = in.createString8Array();
     }
 
-    public ParsedMainComponentImpl(String processName, boolean directBootAware, boolean enabled, boolean exported, int order, String splitName, String[] attributionTags) {
+    public ParsedMainComponentImpl(
+            String processName,
+            boolean directBootAware,
+            boolean enabled,
+            boolean exported,
+            int order,
+            String splitName,
+            String[] attributionTags) {
         this.enabled = true;
         this.processName = processName;
         this.directBootAware = directBootAware;
@@ -161,6 +174,5 @@ public class ParsedMainComponentImpl extends ParsedComponentImpl implements Pars
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

@@ -12,7 +12,9 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.text.TextUtils;
+
 import com.android.internal.R;
+
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.URI;
@@ -43,13 +45,15 @@ public abstract class NtpTrustedTime implements TrustedTime {
 
     public abstract boolean isNetworkConnected(Network network);
 
-    public abstract TimeResult queryNtpServer(Network network, URI uri, java.time.Duration duration);
+    public abstract TimeResult queryNtpServer(
+            Network network, URI uri, java.time.Duration duration);
 
     public static final class NtpConfig {
         private final List<URI> mServerUris;
         private final java.time.Duration mTimeout;
 
-        public NtpConfig(List<URI> serverUris, java.time.Duration timeout) throws IllegalArgumentException {
+        public NtpConfig(List<URI> serverUris, java.time.Duration timeout)
+                throws IllegalArgumentException {
             Objects.requireNonNull(serverUris);
             if (serverUris.isEmpty()) {
                 throw new IllegalArgumentException("Server URIs is empty");
@@ -57,7 +61,9 @@ public abstract class NtpTrustedTime implements TrustedTime {
             List<URI> validatedServerUris = new ArrayList<>();
             for (URI serverUri : serverUris) {
                 try {
-                    URI validatedServerUri = NtpTrustedTime.validateNtpServerUri((URI) Objects.requireNonNull(serverUri));
+                    URI validatedServerUri =
+                            NtpTrustedTime.validateNtpServerUri(
+                                    (URI) Objects.requireNonNull(serverUri));
                     validatedServerUris.add(validatedServerUri);
                 } catch (URISyntaxException e) {
                     throw new IllegalArgumentException("Bad server URI", e);
@@ -79,7 +85,11 @@ public abstract class NtpTrustedTime implements TrustedTime {
         }
 
         public String toString() {
-            return "NtpConnectionInfo{mServerUris=" + this.mServerUris + ", mTimeout=" + this.mTimeout + '}';
+            return "NtpConnectionInfo{mServerUris="
+                    + this.mServerUris
+                    + ", mTimeout="
+                    + this.mTimeout
+                    + '}';
         }
     }
 
@@ -89,11 +99,16 @@ public abstract class NtpTrustedTime implements TrustedTime {
         private final int mUncertaintyMillis;
         private final long mUnixEpochTimeMillis;
 
-        public TimeResult(long unixEpochTimeMillis, long elapsedRealtimeMillis, int uncertaintyMillis, InetSocketAddress ntpServerSocketAddress) {
+        public TimeResult(
+                long unixEpochTimeMillis,
+                long elapsedRealtimeMillis,
+                int uncertaintyMillis,
+                InetSocketAddress ntpServerSocketAddress) {
             this.mUnixEpochTimeMillis = unixEpochTimeMillis;
             this.mElapsedRealtimeMillis = elapsedRealtimeMillis;
             this.mUncertaintyMillis = uncertaintyMillis;
-            this.mNtpServerSocketAddress = (InetSocketAddress) Objects.requireNonNull(ntpServerSocketAddress);
+            this.mNtpServerSocketAddress =
+                    (InetSocketAddress) Objects.requireNonNull(ntpServerSocketAddress);
         }
 
         public long getTimeMillis() {
@@ -128,20 +143,34 @@ public abstract class NtpTrustedTime implements TrustedTime {
                 return false;
             }
             TimeResult that = (TimeResult) o;
-            return this.mUnixEpochTimeMillis == that.mUnixEpochTimeMillis && this.mElapsedRealtimeMillis == that.mElapsedRealtimeMillis && this.mUncertaintyMillis == that.mUncertaintyMillis && this.mNtpServerSocketAddress.equals(that.mNtpServerSocketAddress);
+            return this.mUnixEpochTimeMillis == that.mUnixEpochTimeMillis
+                    && this.mElapsedRealtimeMillis == that.mElapsedRealtimeMillis
+                    && this.mUncertaintyMillis == that.mUncertaintyMillis
+                    && this.mNtpServerSocketAddress.equals(that.mNtpServerSocketAddress);
         }
 
         public int hashCode() {
-            return Objects.hash(Long.valueOf(this.mUnixEpochTimeMillis), Long.valueOf(this.mElapsedRealtimeMillis), Integer.valueOf(this.mUncertaintyMillis), this.mNtpServerSocketAddress);
+            return Objects.hash(
+                    Long.valueOf(this.mUnixEpochTimeMillis),
+                    Long.valueOf(this.mElapsedRealtimeMillis),
+                    Integer.valueOf(this.mUncertaintyMillis),
+                    this.mNtpServerSocketAddress);
         }
 
         public String toString() {
-            return "TimeResult{unixEpochTime=" + Instant.ofEpochMilli(this.mUnixEpochTimeMillis) + ", elapsedRealtime=" + java.time.Duration.ofMillis(this.mElapsedRealtimeMillis) + ", mUncertaintyMillis=" + this.mUncertaintyMillis + ", mNtpServerSocketAddress=" + this.mNtpServerSocketAddress + '}';
+            return "TimeResult{unixEpochTime="
+                    + Instant.ofEpochMilli(this.mUnixEpochTimeMillis)
+                    + ", elapsedRealtime="
+                    + java.time.Duration.ofMillis(this.mElapsedRealtimeMillis)
+                    + ", mUncertaintyMillis="
+                    + this.mUncertaintyMillis
+                    + ", mNtpServerSocketAddress="
+                    + this.mNtpServerSocketAddress
+                    + '}';
         }
     }
 
-    protected NtpTrustedTime() {
-    }
+    protected NtpTrustedTime() {}
 
     public static synchronized NtpTrustedTime getInstance(Context context) {
         NtpTrustedTime ntpTrustedTime;
@@ -190,7 +219,11 @@ public abstract class NtpTrustedTime implements TrustedTime {
         }
         String labTest = SystemProperties.get("persist.ril.ntptrustedtime");
         if ("off".equals(labTest)) {
-            Log.d(TAG, "forceRefresh: persist.ril.ntptrustedtime (" + labTest + NavigationBarInflaterView.KEY_CODE_END);
+            Log.d(
+                    TAG,
+                    "forceRefresh: persist.ril.ntptrustedtime ("
+                            + labTest
+                            + NavigationBarInflaterView.KEY_CODE_END);
             return false;
         }
         NtpConfig ntpConfig = getNtpConfig();
@@ -198,7 +231,9 @@ public abstract class NtpTrustedTime implements TrustedTime {
             Log.d(TAG, "forceRefreshLocked: invalid server config");
             return false;
         }
-        Log.d(TAG, "forceRefreshLocked: NTP request network=" + network + " ntpConfig=" + ntpConfig);
+        Log.d(
+                TAG,
+                "forceRefreshLocked: NTP request network=" + network + " ntpConfig=" + ntpConfig);
         List<URI> unorderedServerUris = ntpConfig.getServerUris();
         List<URI> orderedServerUris = new ArrayList<>();
         for (URI serverUri : unorderedServerUris) {
@@ -350,7 +385,9 @@ public abstract class NtpTrustedTime implements TrustedTime {
         TimeResult timeResult = this.mTimeResult;
         pw.println("mTimeResult=" + timeResult);
         if (timeResult != null) {
-            pw.println("mTimeResult.getAgeMillis()=" + java.time.Duration.ofMillis(timeResult.getAgeMillis()));
+            pw.println(
+                    "mTimeResult.getAgeMillis()="
+                            + java.time.Duration.ofMillis(timeResult.getAgeMillis()));
         }
     }
 
@@ -368,7 +405,8 @@ public abstract class NtpTrustedTime implements TrustedTime {
             List<URI> ntpServerUris;
             ContentResolver resolver = this.mContext.getContentResolver();
             Resources res = this.mContext.getResources();
-            String serverGlobalSetting = Settings.Global.getString(resolver, Settings.Global.NTP_SERVER);
+            String serverGlobalSetting =
+                    Settings.Global.getString(resolver, Settings.Global.NTP_SERVER);
             List<URI> settingsServerUris = parseNtpServerSetting(serverGlobalSetting);
             if (settingsServerUris != null) {
                 ntpServerUris = settingsServerUris;
@@ -402,7 +440,10 @@ public abstract class NtpTrustedTime implements TrustedTime {
                 }
             }
             int defaultTimeoutMillis = res.getInteger(R.integer.config_ntpTimeout);
-            java.time.Duration timeout = java.time.Duration.ofMillis(Settings.Global.getInt(resolver, Settings.Global.NTP_TIMEOUT, defaultTimeoutMillis));
+            java.time.Duration timeout =
+                    java.time.Duration.ofMillis(
+                            Settings.Global.getInt(
+                                    resolver, Settings.Global.NTP_TIMEOUT, defaultTimeoutMillis));
             if (ntpServerUris == null) {
                 return null;
             }
@@ -434,7 +475,9 @@ public abstract class NtpTrustedTime implements TrustedTime {
 
         private synchronized ConnectivityManager getConnectivityManager() {
             if (this.mConnectivityManager == null) {
-                this.mConnectivityManager = (ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class);
+                this.mConnectivityManager =
+                        (ConnectivityManager)
+                                this.mContext.getSystemService(ConnectivityManager.class);
             }
             if (this.mConnectivityManager == null) {
                 Log.d(NtpTrustedTime.TAG, "getConnectivityManager: no ConnectivityManager");
@@ -443,7 +486,8 @@ public abstract class NtpTrustedTime implements TrustedTime {
         }
 
         @Override // android.util.NtpTrustedTime
-        public TimeResult queryNtpServer(Network network, URI ntpServerUri, java.time.Duration timeout) {
+        public TimeResult queryNtpServer(
+                Network network, URI ntpServerUri, java.time.Duration timeout) {
             SntpClient client = new SntpClient();
             String serverName = ntpServerUri.getHost();
             int port = ntpServerUri.getPort() == -1 ? 123 : ntpServerUri.getPort();
@@ -451,7 +495,11 @@ public abstract class NtpTrustedTime implements TrustedTime {
             if (client.requestTime(serverName, port, timeoutMillis, network)) {
                 int ntpUncertaintyMillis = saturatedCast(client.getRoundTripTime() / 2);
                 InetSocketAddress ntpServerSocketAddress = client.getServerSocketAddress();
-                return new TimeResult(client.getNtpTime(), client.getNtpTimeReference(), ntpUncertaintyMillis, ntpServerSocketAddress);
+                return new TimeResult(
+                        client.getNtpTime(),
+                        client.getNtpTimeReference(),
+                        ntpUncertaintyMillis,
+                        ntpServerSocketAddress);
             }
             return null;
         }

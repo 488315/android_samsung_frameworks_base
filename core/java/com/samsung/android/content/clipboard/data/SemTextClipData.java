@@ -51,7 +51,10 @@ public class SemTextClipData extends SemClipData {
                 this.mText = this.mValue;
             }
             int numNewLine = 0;
-            for (int i = 1; i <= this.mText.length() - 1 && this.mText.charAt(this.mText.length() - i) == '\n'; i++) {
+            for (int i = 1;
+                    i <= this.mText.length() - 1
+                            && this.mText.charAt(this.mText.length() - i) == '\n';
+                    i++) {
                 numNewLine++;
             }
             int i2 = this.mNumberOfTrailingWhiteLines;
@@ -68,7 +71,10 @@ public class SemTextClipData extends SemClipData {
         if (this.mText != null) {
             if (this.mText instanceof Spanned) {
                 this.mNumberOfTrailingWhiteLines = 0;
-                for (int i = 1; i <= this.mText.length() - 1 && this.mText.charAt(this.mText.length() - i) == '\n'; i++) {
+                for (int i = 1;
+                        i <= this.mText.length() - 1
+                                && this.mText.charAt(this.mText.length() - i) == '\n';
+                        i++) {
                     this.mNumberOfTrailingWhiteLines++;
                 }
                 this.mValue = Html.toHtml((Spanned) this.mText);
@@ -167,14 +173,11 @@ public class SemTextClipData extends SemClipData {
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void convertForRemote() {
-    }
+    public void convertForRemote() {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void insertContentUri(Context context, String path) {
-    }
+    public void insertContentUri(Context context, String path) {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void deleteContentUri(Context context, String path) {
-    }
+    public void deleteContentUri(Context context, String path) {}
 }

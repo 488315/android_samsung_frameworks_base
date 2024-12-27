@@ -12,7 +12,8 @@ public interface WindowManagerPolicyConstants {
     public static final int APPLICATION_MEDIA_SUBLAYER = -2;
     public static final int APPLICATION_PANEL_SUBLAYER = 1;
     public static final int APPLICATION_SUB_PANEL_SUBLAYER = 2;
-    public static final String EXTRA_FROM_BRIGHTNESS_KEY = "android.intent.extra.FROM_BRIGHTNESS_KEY";
+    public static final String EXTRA_FROM_BRIGHTNESS_KEY =
+            "android.intent.extra.FROM_BRIGHTNESS_KEY";
     public static final String EXTRA_FROM_HOME_KEY = "android.intent.extra.FROM_HOME_KEY";
     public static final String EXTRA_HDMI_PLUGGED_STATE = "state";
     public static final String EXTRA_START_REASON = "android.intent.extra.EXTRA_START_REASON";
@@ -38,11 +39,14 @@ public interface WindowManagerPolicyConstants {
     public static final int NAV_BAR_INVALID = -1;
     public static final int NAV_BAR_LEFT = 1;
     public static final int NAV_BAR_MODE_2BUTTON = 1;
-    public static final String NAV_BAR_MODE_2BUTTON_OVERLAY = "com.android.internal.systemui.navbar.twobutton";
+    public static final String NAV_BAR_MODE_2BUTTON_OVERLAY =
+            "com.android.internal.systemui.navbar.twobutton";
     public static final int NAV_BAR_MODE_3BUTTON = 0;
-    public static final String NAV_BAR_MODE_3BUTTON_OVERLAY = "com.android.internal.systemui.navbar.threebutton";
+    public static final String NAV_BAR_MODE_3BUTTON_OVERLAY =
+            "com.android.internal.systemui.navbar.threebutton";
     public static final int NAV_BAR_MODE_GESTURAL = 2;
-    public static final String NAV_BAR_MODE_GESTURAL_OVERLAY = "com.android.internal.systemui.navbar.gestural";
+    public static final String NAV_BAR_MODE_GESTURAL_OVERLAY =
+            "com.android.internal.systemui.navbar.gestural";
     public static final int NAV_BAR_RIGHT = 2;
     public static final int NAV_BAR_TOP = 8;
     public static final int OFF_BECAUSE_OF_ADMIN = 1;
@@ -65,12 +69,10 @@ public interface WindowManagerPolicyConstants {
     public static final int WINDOW_LAYER_MULTIPLIER = 5;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OffReason {
-    }
+    public @interface OffReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OnReason {
-    }
+    public @interface OnReason {}
 
     public interface PointerEventListener {
         void onPointerEvent(MotionEvent motionEvent);

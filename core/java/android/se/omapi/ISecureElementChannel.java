@@ -29,8 +29,7 @@ public interface ISecureElementChannel extends IInterface {
 
     public static class Default implements ISecureElementChannel {
         @Override // android.se.omapi.ISecureElementChannel
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.se.omapi.ISecureElementChannel
         public boolean isClosed() throws RemoteException {
@@ -73,8 +72,9 @@ public interface ISecureElementChannel extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISecureElementChannel {
-        public static final String DESCRIPTOR = "android$se$omapi$ISecureElementChannel".replace('$', '.');
+    public abstract static class Stub extends Binder implements ISecureElementChannel {
+        public static final String DESCRIPTOR =
+                "android$se$omapi$ISecureElementChannel".replace('$', '.');
         static final int TRANSACTION_close = 1;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -106,7 +106,8 @@ public interface ISecureElementChannel extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);

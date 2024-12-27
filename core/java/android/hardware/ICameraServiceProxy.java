@@ -16,25 +16,27 @@ public interface ICameraServiceProxy extends IInterface {
 
     void notifyCameraState(CameraSessionStats cameraSessionStats) throws RemoteException;
 
-    void notifyFeatureCombinationStats(CameraFeatureCombinationStats cameraFeatureCombinationStats) throws RemoteException;
+    void notifyFeatureCombinationStats(CameraFeatureCombinationStats cameraFeatureCombinationStats)
+            throws RemoteException;
 
     void pingForUserUpdate() throws RemoteException;
 
     public static class Default implements ICameraServiceProxy {
         @Override // android.hardware.ICameraServiceProxy
-        public void pingForUserUpdate() throws RemoteException {
-        }
+        public void pingForUserUpdate() throws RemoteException {}
 
         @Override // android.hardware.ICameraServiceProxy
-        public void notifyCameraState(CameraSessionStats cameraSessionStats) throws RemoteException {
-        }
+        public void notifyCameraState(CameraSessionStats cameraSessionStats)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraServiceProxy
-        public void notifyFeatureCombinationStats(CameraFeatureCombinationStats cameraFeatureCombinationStats) throws RemoteException {
-        }
+        public void notifyFeatureCombinationStats(
+                CameraFeatureCombinationStats cameraFeatureCombinationStats)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraServiceProxy
-        public int getRotateAndCropOverride(String packageName, int lensFacing, int userId) throws RemoteException {
+        public int getRotateAndCropOverride(String packageName, int lensFacing, int userId)
+                throws RemoteException {
             return 0;
         }
 
@@ -54,7 +56,7 @@ public interface ICameraServiceProxy extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICameraServiceProxy {
+    public abstract static class Stub extends Binder implements ICameraServiceProxy {
         public static final String DESCRIPTOR = "android.hardware.ICameraServiceProxy";
         static final int TRANSACTION_getAutoframingOverride = 5;
         static final int TRANSACTION_getRotateAndCropOverride = 4;
@@ -108,7 +110,8 @@ public interface ICameraServiceProxy extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -121,12 +124,15 @@ public interface ICameraServiceProxy extends IInterface {
                     pingForUserUpdate();
                     return true;
                 case 2:
-                    CameraSessionStats _arg0 = (CameraSessionStats) data.readTypedObject(CameraSessionStats.CREATOR);
+                    CameraSessionStats _arg0 =
+                            (CameraSessionStats) data.readTypedObject(CameraSessionStats.CREATOR);
                     data.enforceNoDataAvail();
                     notifyCameraState(_arg0);
                     return true;
                 case 3:
-                    CameraFeatureCombinationStats _arg02 = (CameraFeatureCombinationStats) data.readTypedObject(CameraFeatureCombinationStats.CREATOR);
+                    CameraFeatureCombinationStats _arg02 =
+                            (CameraFeatureCombinationStats)
+                                    data.readTypedObject(CameraFeatureCombinationStats.CREATOR);
                     data.enforceNoDataAvail();
                     notifyFeatureCombinationStats(_arg02);
                     return true;
@@ -186,7 +192,8 @@ public interface ICameraServiceProxy extends IInterface {
             }
 
             @Override // android.hardware.ICameraServiceProxy
-            public void notifyCameraState(CameraSessionStats cameraSessionStats) throws RemoteException {
+            public void notifyCameraState(CameraSessionStats cameraSessionStats)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -198,7 +205,9 @@ public interface ICameraServiceProxy extends IInterface {
             }
 
             @Override // android.hardware.ICameraServiceProxy
-            public void notifyFeatureCombinationStats(CameraFeatureCombinationStats cameraFeatureCombinationStats) throws RemoteException {
+            public void notifyFeatureCombinationStats(
+                    CameraFeatureCombinationStats cameraFeatureCombinationStats)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -210,7 +219,8 @@ public interface ICameraServiceProxy extends IInterface {
             }
 
             @Override // android.hardware.ICameraServiceProxy
-            public int getRotateAndCropOverride(String packageName, int lensFacing, int userId) throws RemoteException {
+            public int getRotateAndCropOverride(String packageName, int lensFacing, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

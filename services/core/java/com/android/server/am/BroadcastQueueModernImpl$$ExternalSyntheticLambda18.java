@@ -1,16 +1,20 @@
 package com.android.server.am;
 
 import android.os.BundleMerger;
-import com.android.server.am.BroadcastProcessQueue;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BroadcastQueueModernImpl$$ExternalSyntheticLambda18 implements BroadcastProcessQueue.BroadcastConsumer, BroadcastProcessQueue.BroadcastPredicate {
+public final /* synthetic */ class BroadcastQueueModernImpl$$ExternalSyntheticLambda18
+        implements BroadcastProcessQueue.BroadcastConsumer,
+                BroadcastProcessQueue.BroadcastPredicate {
     public final /* synthetic */ BroadcastQueueModernImpl f$0;
     public final /* synthetic */ BroadcastRecord f$1;
     public final /* synthetic */ Object f$2;
 
-    public /* synthetic */ BroadcastQueueModernImpl$$ExternalSyntheticLambda18(BroadcastQueueModernImpl broadcastQueueModernImpl, BroadcastRecord broadcastRecord, Object obj) {
+    public /* synthetic */ BroadcastQueueModernImpl$$ExternalSyntheticLambda18(
+            BroadcastQueueModernImpl broadcastQueueModernImpl,
+            BroadcastRecord broadcastRecord,
+            Object obj) {
         this.f$0 = broadcastQueueModernImpl;
         this.f$1 = broadcastRecord;
         this.f$2 = obj;
@@ -37,6 +41,9 @@ public final /* synthetic */ class BroadcastQueueModernImpl$$ExternalSyntheticLa
             Method dump skipped, instructions count: 228
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.BroadcastQueueModernImpl$$ExternalSyntheticLambda18.test(com.android.server.am.BroadcastRecord, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.BroadcastQueueModernImpl$$ExternalSyntheticLambda18.test(com.android.server.am.BroadcastRecord,"
+                    + " int):boolean");
     }
 }

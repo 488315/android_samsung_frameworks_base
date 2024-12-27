@@ -1,8 +1,9 @@
 package android.media;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.media.MediaCodec;
+
 import dalvik.system.CloseGuard;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -23,8 +24,7 @@ public final class MediaMuxer {
     private int mLastTrackIndex = -1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Format {
-    }
+    public @interface Format {}
 
     private static native int nativeAddTrack(long j, String[] strArr, Object[] objArr);
 
@@ -34,13 +34,15 @@ public final class MediaMuxer {
 
     private static native void nativeSetOrientationHint(long j, int i);
 
-    private static native long nativeSetup(FileDescriptor fileDescriptor, int i) throws IllegalArgumentException, IOException;
+    private static native long nativeSetup(FileDescriptor fileDescriptor, int i)
+            throws IllegalArgumentException, IOException;
 
     private static native void nativeStart(long j);
 
     private static native void nativeStop(long j);
 
-    private static native void nativeWriteSampleData(long j, int i, ByteBuffer byteBuffer, int i2, int i3, long j2, int i4);
+    private static native void nativeWriteSampleData(
+            long j, int i, ByteBuffer byteBuffer, int i2, int i3, long j2, int i4);
 
     static {
         System.loadLibrary("media_jni");
@@ -55,8 +57,7 @@ public final class MediaMuxer {
         public static final int MUXER_OUTPUT_OGG = 4;
         public static final int MUXER_OUTPUT_WEBM = 1;
 
-        private OutputFormat() {
-        }
+        private OutputFormat() {}
     }
 
     private String convertMuxerStateCodeToString(int aState) {
@@ -114,7 +115,10 @@ public final class MediaMuxer {
             nativeSetOrientationHint(this.mNativeObject, degrees);
             return;
         }
-        throw new IllegalStateException("Can't set rotation degrees due to wrong state(" + convertMuxerStateCodeToString(this.mState) + NavigationBarInflaterView.KEY_CODE_END);
+        throw new IllegalStateException(
+                "Can't set rotation degrees due to wrong state("
+                        + convertMuxerStateCodeToString(this.mState)
+                        + NavigationBarInflaterView.KEY_CODE_END);
     }
 
     public void setLocation(float latitude, float longitude) {
@@ -132,7 +136,10 @@ public final class MediaMuxer {
             nativeSetLocation(this.mNativeObject, latitudex10000, longitudex10000);
             return;
         }
-        throw new IllegalStateException("Can't set location due to wrong state(" + convertMuxerStateCodeToString(this.mState) + NavigationBarInflaterView.KEY_CODE_END);
+        throw new IllegalStateException(
+                "Can't set location due to wrong state("
+                        + convertMuxerStateCodeToString(this.mState)
+                        + NavigationBarInflaterView.KEY_CODE_END);
     }
 
     public void start() {
@@ -144,7 +151,10 @@ public final class MediaMuxer {
             this.mState = 1;
             return;
         }
-        throw new IllegalStateException("Can't start due to wrong state(" + convertMuxerStateCodeToString(this.mState) + NavigationBarInflaterView.KEY_CODE_END);
+        throw new IllegalStateException(
+                "Can't start due to wrong state("
+                        + convertMuxerStateCodeToString(this.mState)
+                        + NavigationBarInflaterView.KEY_CODE_END);
     }
 
     public void stop() {
@@ -160,7 +170,10 @@ public final class MediaMuxer {
                 this.mState = 2;
             }
         }
-        throw new IllegalStateException("Can't stop due to wrong state(" + convertMuxerStateCodeToString(this.mState) + NavigationBarInflaterView.KEY_CODE_END);
+        throw new IllegalStateException(
+                "Can't stop due to wrong state("
+                        + convertMuxerStateCodeToString(this.mState)
+                        + NavigationBarInflaterView.KEY_CODE_END);
     }
 
     protected void finalize() throws Throwable {
@@ -208,7 +221,8 @@ public final class MediaMuxer {
         throw new IllegalArgumentException("format must not be empty.");
     }
 
-    public void writeSampleData(int trackIndex, ByteBuffer byteBuf, MediaCodec.BufferInfo bufferInfo) {
+    public void writeSampleData(
+            int trackIndex, ByteBuffer byteBuf, MediaCodec.BufferInfo bufferInfo) {
         if (trackIndex < 0 || trackIndex > this.mLastTrackIndex) {
             throw new IllegalArgumentException("trackIndex is invalid");
         }
@@ -218,8 +232,11 @@ public final class MediaMuxer {
         if (bufferInfo == null) {
             throw new IllegalArgumentException("bufferInfo must not be null");
         }
-        if (bufferInfo.size < 0 || bufferInfo.offset < 0 || bufferInfo.offset + bufferInfo.size > byteBuf.capacity()) {
-            throw new IllegalArgumentException("bufferInfo must specify a valid buffer offset and size");
+        if (bufferInfo.size < 0
+                || bufferInfo.offset < 0
+                || bufferInfo.offset + bufferInfo.size > byteBuf.capacity()) {
+            throw new IllegalArgumentException(
+                    "bufferInfo must specify a valid buffer offset and size");
         }
         if (this.mNativeObject == 0) {
             throw new IllegalStateException("Muxer has been released!");
@@ -227,7 +244,14 @@ public final class MediaMuxer {
         if (this.mState != 1) {
             throw new IllegalStateException("Can't write, muxer is not started");
         }
-        nativeWriteSampleData(this.mNativeObject, trackIndex, byteBuf, bufferInfo.offset, bufferInfo.size, bufferInfo.presentationTimeUs, bufferInfo.flags);
+        nativeWriteSampleData(
+                this.mNativeObject,
+                trackIndex,
+                byteBuf,
+                bufferInfo.offset,
+                bufferInfo.size,
+                bufferInfo.presentationTimeUs,
+                bufferInfo.flags);
     }
 
     public void release() {

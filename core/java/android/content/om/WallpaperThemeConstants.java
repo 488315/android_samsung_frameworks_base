@@ -1,6 +1,7 @@
 package android.content.om;
 
 import com.android.internal.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -150,15 +151,19 @@ public final class WallpaperThemeConstants {
     public static final int PALETTE_INDEX_VOICE_REC_1 = 8;
     public static final int PALETTE_INDEX_WIDGET_BG_CONTENTS = 7;
     public static final String PATH_FOVERLAY_SEMWT = "/data/resource-cache/android-SemWT";
-    public static final String PATH_FOVERLAY_SEMWT_G = "/data/resource-cache/android-SemWT_G_MonetPalette";
+    public static final String PATH_FOVERLAY_SEMWT_G =
+            "/data/resource-cache/android-SemWT_G_MonetPalette";
     public static final String PROP_WALLPAPERTHEME_DUMP_ON = "debug.wallpaper.theme.dump.on";
     public static final String PROP_WALLPAPERTHEME_SEQ = "debug.wallpaper.theme.seq";
     public static final String RESID_TABLE_PATH = "/data/overlays/wallpapertheme/";
     public static final int RES_METADATA_SESL = 18284657;
-    public static final String SETTING_NAME_THEMEPARK_SINGLETHEME_STATE = "themepark_singletheme_state";
+    public static final String SETTING_NAME_THEMEPARK_SINGLETHEME_STATE =
+            "themepark_singletheme_state";
     public static final String SETTING_NAME_WALLPAPERTHEME_COLOR = "wallpapertheme_color";
-    public static final String SETTING_NAME_WALLPAPERTHEME_COLOR_FOR_G = "wallpapertheme_color_for_g";
-    public static final String SETTING_NAME_WALLPAPERTHEME_COLOR_ISGRAY = "wallpapertheme_color_isgray";
+    public static final String SETTING_NAME_WALLPAPERTHEME_COLOR_FOR_G =
+            "wallpapertheme_color_for_g";
+    public static final String SETTING_NAME_WALLPAPERTHEME_COLOR_ISGRAY =
+            "wallpapertheme_color_isgray";
     public static final String SETTING_NAME_WALLPAPERTHEME_STATE = "wallpapertheme_state";
     public static final int SIZE_COLORTYPE = 5;
     public static final int SIZE_LUMINANCE = 13;
@@ -173,6 +178,99 @@ public final class WallpaperThemeConstants {
     public static final String THEMING_META = "theming-meta";
     public static final String THEMING_TEMPLATE = "theming-templates";
     public static final String WALLPAPERTHEME_NOT_SUPPORT = "NOT_SUPPORT_COLORTHEME";
-    public static final int[] RES_METADATA_LIST = {R.xml.meta_001_common, R.xml.meta_004_notification_panel, R.xml.meta_007_1_dynamic_lockscreen, R.xml.meta_007_2_clockpack, R.xml.meta_007_lock_screen, R.xml.meta_008_1_home_screen, R.xml.meta_008_3_home_screen_overlay, R.xml.meta_009_1_settings_search, R.xml.meta_009_2_settings_vpn_dialog, R.xml.meta_009_3_settings_privacy, R.xml.meta_009_settings, R.xml.meta_010_smart_manager, R.xml.meta_012_contacts, R.xml.meta_013_messages, R.xml.meta_014_clock_package, R.xml.meta_015_calculator, R.xml.meta_016_1_s_planner_opencalendar, R.xml.meta_016_s_planner, R.xml.meta_017_my_files, R.xml.meta_021_gallery, R.xml.meta_024_font, R.xml.meta_026_phone, R.xml.meta_029_weather_and_clock_widget, R.xml.meta_033_recents, R.xml.meta_035_multi_sim, R.xml.meta_036_call_settings, R.xml.meta_037_adapt_sound, R.xml.meta_038_1_bluetooth_share, R.xml.meta_038_bluetooth, R.xml.meta_039_safety_assistance, R.xml.meta_040_1_wifi_direct, R.xml.meta_040_wifi, R.xml.meta_042_fota, R.xml.meta_044_1_appsedge, R.xml.meta_044_2_taskedge, R.xml.meta_044_3_peopleedge, R.xml.meta_044_4_tools, R.xml.meta_044_edge, R.xml.meta_045_accessibility, R.xml.meta_047_ringtonepicker, R.xml.meta_048_scloud, R.xml.meta_050_air_command, R.xml.meta_054_call, R.xml.meta_055_aod, R.xml.meta_060_dual_messenger, R.xml.meta_061_s_finder, R.xml.meta_062_reminder, R.xml.meta_063_workspace, R.xml.meta_064_secure_folder, R.xml.meta_065_secure_wifi, R.xml.meta_067_digital_wellbeing, R.xml.meta_068_separate_app_sound, R.xml.meta_070_samsung_galaxy_friends, R.xml.meta_071_sound_quality_and_effects, R.xml.meta_072_tag_basic, R.xml.meta_073_screen_capture, R.xml.meta_075_honeyboard, R.xml.meta_076_fmm, R.xml.meta_078_icecone, R.xml.meta_079_biometrics, R.xml.meta_080_secsoundpicker, R.xml.meta_081_nearby_scanning, R.xml.meta_082_wallpaper_settings, R.xml.meta_084_cmc, R.xml.meta_085_samsung_dex_basic, R.xml.meta_085_1_samsung_dex_setting, R.xml.meta_085_2_samsung_dex_cdd_popup, R.xml.meta_086_physical_keyboard, R.xml.meta_089_devices_panel, R.xml.meta_090_unihal_settings, R.xml.meta_092_tips, R.xml.meta_093_samsungpass, R.xml.meta_102_1_phone_kr, R.xml.meta_102_phone_cn, R.xml.meta_127_block_calls_msgs_cn, R.xml.meta_137_wifi_calling_settings_na, R.xml.meta_138_advanced_calling_na, R.xml.meta_143_voice_call_kr, R.xml.meta_147_smart_manager_cn, R.xml.meta_148_messsage_orc_cn, R.xml.meta_149_calculator_cn, R.xml.meta_150_messages_announcement_message, R.xml.meta_151_clock_package_jp, R.xml.meta_153_clock_package_cn, R.xml.meta_154_bixby_touch_cn, R.xml.meta_155_messages_India, R.xml.meta_156_messages_kr, R.xml.meta_204_media_panel, R.xml.meta_207_multi_window, R.xml.meta_213_volume_popup, R.xml.meta_998_sesl_app};
-    public static ArrayList<String> colorThemingDisableList = new ArrayList<>(Arrays.asList(new String[0]));
+    public static final int[] RES_METADATA_LIST = {
+        R.xml.meta_001_common,
+        R.xml.meta_004_notification_panel,
+        R.xml.meta_007_1_dynamic_lockscreen,
+        R.xml.meta_007_2_clockpack,
+        R.xml.meta_007_lock_screen,
+        R.xml.meta_008_1_home_screen,
+        R.xml.meta_008_3_home_screen_overlay,
+        R.xml.meta_009_1_settings_search,
+        R.xml.meta_009_2_settings_vpn_dialog,
+        R.xml.meta_009_3_settings_privacy,
+        R.xml.meta_009_settings,
+        R.xml.meta_010_smart_manager,
+        R.xml.meta_012_contacts,
+        R.xml.meta_013_messages,
+        R.xml.meta_014_clock_package,
+        R.xml.meta_015_calculator,
+        R.xml.meta_016_1_s_planner_opencalendar,
+        R.xml.meta_016_s_planner,
+        R.xml.meta_017_my_files,
+        R.xml.meta_021_gallery,
+        R.xml.meta_024_font,
+        R.xml.meta_026_phone,
+        R.xml.meta_029_weather_and_clock_widget,
+        R.xml.meta_033_recents,
+        R.xml.meta_035_multi_sim,
+        R.xml.meta_036_call_settings,
+        R.xml.meta_037_adapt_sound,
+        R.xml.meta_038_1_bluetooth_share,
+        R.xml.meta_038_bluetooth,
+        R.xml.meta_039_safety_assistance,
+        R.xml.meta_040_1_wifi_direct,
+        R.xml.meta_040_wifi,
+        R.xml.meta_042_fota,
+        R.xml.meta_044_1_appsedge,
+        R.xml.meta_044_2_taskedge,
+        R.xml.meta_044_3_peopleedge,
+        R.xml.meta_044_4_tools,
+        R.xml.meta_044_edge,
+        R.xml.meta_045_accessibility,
+        R.xml.meta_047_ringtonepicker,
+        R.xml.meta_048_scloud,
+        R.xml.meta_050_air_command,
+        R.xml.meta_054_call,
+        R.xml.meta_055_aod,
+        R.xml.meta_060_dual_messenger,
+        R.xml.meta_061_s_finder,
+        R.xml.meta_062_reminder,
+        R.xml.meta_063_workspace,
+        R.xml.meta_064_secure_folder,
+        R.xml.meta_065_secure_wifi,
+        R.xml.meta_067_digital_wellbeing,
+        R.xml.meta_068_separate_app_sound,
+        R.xml.meta_070_samsung_galaxy_friends,
+        R.xml.meta_071_sound_quality_and_effects,
+        R.xml.meta_072_tag_basic,
+        R.xml.meta_073_screen_capture,
+        R.xml.meta_075_honeyboard,
+        R.xml.meta_076_fmm,
+        R.xml.meta_078_icecone,
+        R.xml.meta_079_biometrics,
+        R.xml.meta_080_secsoundpicker,
+        R.xml.meta_081_nearby_scanning,
+        R.xml.meta_082_wallpaper_settings,
+        R.xml.meta_084_cmc,
+        R.xml.meta_085_samsung_dex_basic,
+        R.xml.meta_085_1_samsung_dex_setting,
+        R.xml.meta_085_2_samsung_dex_cdd_popup,
+        R.xml.meta_086_physical_keyboard,
+        R.xml.meta_089_devices_panel,
+        R.xml.meta_090_unihal_settings,
+        R.xml.meta_092_tips,
+        R.xml.meta_093_samsungpass,
+        R.xml.meta_102_1_phone_kr,
+        R.xml.meta_102_phone_cn,
+        R.xml.meta_127_block_calls_msgs_cn,
+        R.xml.meta_137_wifi_calling_settings_na,
+        R.xml.meta_138_advanced_calling_na,
+        R.xml.meta_143_voice_call_kr,
+        R.xml.meta_147_smart_manager_cn,
+        R.xml.meta_148_messsage_orc_cn,
+        R.xml.meta_149_calculator_cn,
+        R.xml.meta_150_messages_announcement_message,
+        R.xml.meta_151_clock_package_jp,
+        R.xml.meta_153_clock_package_cn,
+        R.xml.meta_154_bixby_touch_cn,
+        R.xml.meta_155_messages_India,
+        R.xml.meta_156_messages_kr,
+        R.xml.meta_204_media_panel,
+        R.xml.meta_207_multi_window,
+        R.xml.meta_213_volume_popup,
+        R.xml.meta_998_sesl_app
+    };
+    public static ArrayList<String> colorThemingDisableList =
+            new ArrayList<>(Arrays.asList(new String[0]));
 }

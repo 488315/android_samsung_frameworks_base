@@ -25,11 +25,15 @@ public class LinkMovementMethod extends ScrollingMovementMethod {
     }
 
     @Override // android.text.method.BaseMovementMethod
-    protected boolean handleMovementKey(TextView widget, Spannable buffer, int keyCode, int movementMetaState, KeyEvent event) {
+    protected boolean handleMovementKey(
+            TextView widget, Spannable buffer, int keyCode, int movementMetaState, KeyEvent event) {
         switch (keyCode) {
             case 23:
             case 66:
-                if (KeyEvent.metaStateHasNoModifiers(movementMetaState) && event.getAction() == 0 && event.getRepeatCount() == 0 && action(1, widget, buffer)) {
+                if (KeyEvent.metaStateHasNoModifiers(movementMetaState)
+                        && event.getAction() == 0
+                        && event.getRepeatCount() == 0
+                        && action(1, widget, buffer)) {
                     return true;
                 }
                 break;
@@ -82,7 +86,8 @@ public class LinkMovementMethod extends ScrollingMovementMethod {
         int lineBot = layout.getLineForVertical(areaBot2);
         int first = layout.getLineStart(lineTop);
         int last = layout.getLineEnd(lineBot);
-        ClickableSpan[] candidates = (ClickableSpan[]) buffer.getSpans(first, last, ClickableSpan.class);
+        ClickableSpan[] candidates =
+                (ClickableSpan[]) buffer.getSpans(first, last, ClickableSpan.class);
         int a = Selection.getSelectionStart(buffer);
         int b = Selection.getSelectionEnd(buffer);
         int selStart = Math.min(a, b);
@@ -103,7 +108,9 @@ public class LinkMovementMethod extends ScrollingMovementMethod {
         switch (what) {
             case 1:
                 if (selStart != selEnd) {
-                    ClickableSpan[] links = (ClickableSpan[]) buffer.getSpans(selStart, selEnd, ClickableSpan.class);
+                    ClickableSpan[] links =
+                            (ClickableSpan[])
+                                    buffer.getSpans(selStart, selEnd, ClickableSpan.class);
                     if (links.length == 1) {
                         ClickableSpan link = links[0];
                         if (link instanceof TextLinks.TextLinkSpan) {
@@ -164,7 +171,8 @@ public class LinkMovementMethod extends ScrollingMovementMethod {
         return false;
     }
 
-    @Override // android.text.method.ScrollingMovementMethod, android.text.method.BaseMovementMethod, android.text.method.MovementMethod
+    @Override // android.text.method.ScrollingMovementMethod,
+              // android.text.method.BaseMovementMethod, android.text.method.MovementMethod
     public boolean onTouchEvent(TextView widget, Spannable buffer, MotionEvent event) {
         ClickableSpan[] links;
         int action = event.getAction();
@@ -199,7 +207,8 @@ public class LinkMovementMethod extends ScrollingMovementMethod {
                     if (widget.getContext().getApplicationInfo().targetSdkVersion >= 28) {
                         widget.hideFloatingToolbar(200);
                     }
-                    Selection.setSelection(buffer, buffer.getSpanStart(link), buffer.getSpanEnd(link));
+                    Selection.setSelection(
+                            buffer, buffer.getSpanStart(link), buffer.getSpanEnd(link));
                 }
                 return true;
             }
@@ -214,7 +223,8 @@ public class LinkMovementMethod extends ScrollingMovementMethod {
         text.removeSpan(FROM_BELOW);
     }
 
-    @Override // android.text.method.ScrollingMovementMethod, android.text.method.BaseMovementMethod, android.text.method.MovementMethod
+    @Override // android.text.method.ScrollingMovementMethod,
+              // android.text.method.BaseMovementMethod, android.text.method.MovementMethod
     public void onTakeFocus(TextView view, Spannable text, int dir) {
         Selection.removeSelection(text);
         if ((dir & 1) != 0) {

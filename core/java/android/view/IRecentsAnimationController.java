@@ -8,6 +8,7 @@ import android.os.RemoteException;
 import android.window.PictureInPictureSurfaceTransaction;
 import android.window.TaskSnapshot;
 import android.window.WindowAnimationState;
+
 import com.android.internal.os.IResultReceiver;
 
 /* loaded from: classes4.dex */
@@ -20,7 +21,10 @@ public interface IRecentsAnimationController extends IInterface {
 
     void finish(boolean z, boolean z2, IResultReceiver iResultReceiver) throws RemoteException;
 
-    void handOffAnimation(RemoteAnimationTarget[] remoteAnimationTargetArr, WindowAnimationState[] windowAnimationStateArr) throws RemoteException;
+    void handOffAnimation(
+            RemoteAnimationTarget[] remoteAnimationTargetArr,
+            WindowAnimationState[] windowAnimationStateArr)
+            throws RemoteException;
 
     boolean removeTask(int i) throws RemoteException;
 
@@ -30,7 +34,11 @@ public interface IRecentsAnimationController extends IInterface {
 
     void setDeferCancelUntilNextTransition(boolean z, boolean z2) throws RemoteException;
 
-    void setFinishTaskTransaction(int i, PictureInPictureSurfaceTransaction pictureInPictureSurfaceTransaction, SurfaceControl surfaceControl) throws RemoteException;
+    void setFinishTaskTransaction(
+            int i,
+            PictureInPictureSurfaceTransaction pictureInPictureSurfaceTransaction,
+            SurfaceControl surfaceControl)
+            throws RemoteException;
 
     void setInputConsumerEnabled(boolean z) throws RemoteException;
 
@@ -45,36 +53,37 @@ public interface IRecentsAnimationController extends IInterface {
         }
 
         @Override // android.view.IRecentsAnimationController
-        public void setFinishTaskTransaction(int taskId, PictureInPictureSurfaceTransaction finishTransaction, SurfaceControl overlay) throws RemoteException {
-        }
+        public void setFinishTaskTransaction(
+                int taskId,
+                PictureInPictureSurfaceTransaction finishTransaction,
+                SurfaceControl overlay)
+                throws RemoteException {}
 
         @Override // android.view.IRecentsAnimationController
-        public void finish(boolean moveHomeToTop, boolean sendUserLeaveHint, IResultReceiver finishCb) throws RemoteException {
-        }
+        public void finish(
+                boolean moveHomeToTop, boolean sendUserLeaveHint, IResultReceiver finishCb)
+                throws RemoteException {}
 
         @Override // android.view.IRecentsAnimationController
-        public void setInputConsumerEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setInputConsumerEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.view.IRecentsAnimationController
-        public void setAnimationTargetsBehindSystemBars(boolean behindSystemBars) throws RemoteException {
-        }
+        public void setAnimationTargetsBehindSystemBars(boolean behindSystemBars)
+                throws RemoteException {}
 
         @Override // android.view.IRecentsAnimationController
-        public void cleanupScreenshot() throws RemoteException {
-        }
+        public void cleanupScreenshot() throws RemoteException {}
 
         @Override // android.view.IRecentsAnimationController
-        public void setDeferCancelUntilNextTransition(boolean defer, boolean screenshot) throws RemoteException {
-        }
+        public void setDeferCancelUntilNextTransition(boolean defer, boolean screenshot)
+                throws RemoteException {}
 
         @Override // android.view.IRecentsAnimationController
-        public void setWillFinishToHome(boolean willFinishToHome) throws RemoteException {
-        }
+        public void setWillFinishToHome(boolean willFinishToHome) throws RemoteException {}
 
         @Override // android.view.IRecentsAnimationController
-        public void setWillForceFinishToHome(boolean willForceFinishToHome) throws RemoteException {
-        }
+        public void setWillForceFinishToHome(boolean willForceFinishToHome)
+                throws RemoteException {}
 
         @Override // android.view.IRecentsAnimationController
         public boolean removeTask(int taskId) throws RemoteException {
@@ -82,16 +91,14 @@ public interface IRecentsAnimationController extends IInterface {
         }
 
         @Override // android.view.IRecentsAnimationController
-        public void detachNavigationBarFromApp(boolean moveHomeToTop) throws RemoteException {
-        }
+        public void detachNavigationBarFromApp(boolean moveHomeToTop) throws RemoteException {}
 
         @Override // android.view.IRecentsAnimationController
-        public void animateNavigationBarToApp(long duration) throws RemoteException {
-        }
+        public void animateNavigationBarToApp(long duration) throws RemoteException {}
 
         @Override // android.view.IRecentsAnimationController
-        public void handOffAnimation(RemoteAnimationTarget[] targets, WindowAnimationState[] states) throws RemoteException {
-        }
+        public void handOffAnimation(RemoteAnimationTarget[] targets, WindowAnimationState[] states)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -99,7 +106,7 @@ public interface IRecentsAnimationController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRecentsAnimationController {
+    public abstract static class Stub extends Binder implements IRecentsAnimationController {
         public static final String DESCRIPTOR = "android.view.IRecentsAnimationController";
         static final int TRANSACTION_animateNavigationBarToApp = 12;
         static final int TRANSACTION_cleanupScreenshot = 6;
@@ -174,7 +181,8 @@ public interface IRecentsAnimationController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -192,8 +200,12 @@ public interface IRecentsAnimationController extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    PictureInPictureSurfaceTransaction _arg1 = (PictureInPictureSurfaceTransaction) data.readTypedObject(PictureInPictureSurfaceTransaction.CREATOR);
-                    SurfaceControl _arg2 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    PictureInPictureSurfaceTransaction _arg1 =
+                            (PictureInPictureSurfaceTransaction)
+                                    data.readTypedObject(
+                                            PictureInPictureSurfaceTransaction.CREATOR);
+                    SurfaceControl _arg2 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     data.enforceNoDataAvail();
                     setFinishTaskTransaction(_arg02, _arg1, _arg2);
                     reply.writeNoException();
@@ -201,7 +213,8 @@ public interface IRecentsAnimationController extends IInterface {
                 case 3:
                     boolean _arg03 = data.readBoolean();
                     boolean _arg12 = data.readBoolean();
-                    IResultReceiver _arg22 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg22 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     finish(_arg03, _arg12, _arg22);
                     reply.writeNoException();
@@ -261,8 +274,12 @@ public interface IRecentsAnimationController extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 13:
-                    RemoteAnimationTarget[] _arg012 = (RemoteAnimationTarget[]) data.createTypedArray(RemoteAnimationTarget.CREATOR);
-                    WindowAnimationState[] _arg14 = (WindowAnimationState[]) data.createTypedArray(WindowAnimationState.CREATOR);
+                    RemoteAnimationTarget[] _arg012 =
+                            (RemoteAnimationTarget[])
+                                    data.createTypedArray(RemoteAnimationTarget.CREATOR);
+                    WindowAnimationState[] _arg14 =
+                            (WindowAnimationState[])
+                                    data.createTypedArray(WindowAnimationState.CREATOR);
                     data.enforceNoDataAvail();
                     handOffAnimation(_arg012, _arg14);
                     return true;
@@ -296,7 +313,8 @@ public interface IRecentsAnimationController extends IInterface {
                     _data.writeInt(taskId);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    TaskSnapshot _result = (TaskSnapshot) _reply.readTypedObject(TaskSnapshot.CREATOR);
+                    TaskSnapshot _result =
+                            (TaskSnapshot) _reply.readTypedObject(TaskSnapshot.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -305,7 +323,11 @@ public interface IRecentsAnimationController extends IInterface {
             }
 
             @Override // android.view.IRecentsAnimationController
-            public void setFinishTaskTransaction(int taskId, PictureInPictureSurfaceTransaction finishTransaction, SurfaceControl overlay) throws RemoteException {
+            public void setFinishTaskTransaction(
+                    int taskId,
+                    PictureInPictureSurfaceTransaction finishTransaction,
+                    SurfaceControl overlay)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -322,7 +344,9 @@ public interface IRecentsAnimationController extends IInterface {
             }
 
             @Override // android.view.IRecentsAnimationController
-            public void finish(boolean moveHomeToTop, boolean sendUserLeaveHint, IResultReceiver finishCb) throws RemoteException {
+            public void finish(
+                    boolean moveHomeToTop, boolean sendUserLeaveHint, IResultReceiver finishCb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -354,7 +378,8 @@ public interface IRecentsAnimationController extends IInterface {
             }
 
             @Override // android.view.IRecentsAnimationController
-            public void setAnimationTargetsBehindSystemBars(boolean behindSystemBars) throws RemoteException {
+            public void setAnimationTargetsBehindSystemBars(boolean behindSystemBars)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -383,7 +408,8 @@ public interface IRecentsAnimationController extends IInterface {
             }
 
             @Override // android.view.IRecentsAnimationController
-            public void setDeferCancelUntilNextTransition(boolean defer, boolean screenshot) throws RemoteException {
+            public void setDeferCancelUntilNextTransition(boolean defer, boolean screenshot)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -414,7 +440,8 @@ public interface IRecentsAnimationController extends IInterface {
             }
 
             @Override // android.view.IRecentsAnimationController
-            public void setWillForceFinishToHome(boolean willForceFinishToHome) throws RemoteException {
+            public void setWillForceFinishToHome(boolean willForceFinishToHome)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -476,7 +503,9 @@ public interface IRecentsAnimationController extends IInterface {
             }
 
             @Override // android.view.IRecentsAnimationController
-            public void handOffAnimation(RemoteAnimationTarget[] targets, WindowAnimationState[] states) throws RemoteException {
+            public void handOffAnimation(
+                    RemoteAnimationTarget[] targets, WindowAnimationState[] states)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -3,31 +3,36 @@ package android.speech;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class AlternativeSpans implements Parcelable {
-    public static final Parcelable.Creator<AlternativeSpans> CREATOR = new Parcelable.Creator<AlternativeSpans>() { // from class: android.speech.AlternativeSpans.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AlternativeSpans[] newArray(int size) {
-            return new AlternativeSpans[size];
-        }
+    public static final Parcelable.Creator<AlternativeSpans> CREATOR =
+            new Parcelable.Creator<
+                    AlternativeSpans>() { // from class: android.speech.AlternativeSpans.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AlternativeSpans[] newArray(int size) {
+                    return new AlternativeSpans[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AlternativeSpans createFromParcel(Parcel in) {
-            return new AlternativeSpans(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AlternativeSpans createFromParcel(Parcel in) {
+                    return new AlternativeSpans(in);
+                }
+            };
     private final List<AlternativeSpan> mSpans;
 
     public AlternativeSpans(List<AlternativeSpan> spans) {
         this.mSpans = spans;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSpans);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSpans);
     }
 
     public List<AlternativeSpan> getSpans() {
@@ -66,12 +71,13 @@ public final class AlternativeSpans implements Parcelable {
 
     AlternativeSpans(Parcel in) {
         ArrayList arrayList = new ArrayList();
-        in.readParcelableList(arrayList, AlternativeSpan.class.getClassLoader(), AlternativeSpan.class);
+        in.readParcelableList(
+                arrayList, AlternativeSpan.class.getClassLoader(), AlternativeSpan.class);
         this.mSpans = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSpans);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSpans);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

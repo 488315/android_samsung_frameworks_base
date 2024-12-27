@@ -1,28 +1,30 @@
 package android.hardware.input;
 
 import android.annotation.SystemApi;
-import android.hardware.input.VirtualInputDeviceConfig;
 import android.icu.util.ULocale;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public final class VirtualKeyboardConfig extends VirtualInputDeviceConfig implements Parcelable {
-    public static final Parcelable.Creator<VirtualKeyboardConfig> CREATOR = new Parcelable.Creator<VirtualKeyboardConfig>() { // from class: android.hardware.input.VirtualKeyboardConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualKeyboardConfig createFromParcel(Parcel in) {
-            return new VirtualKeyboardConfig(in);
-        }
+    public static final Parcelable.Creator<VirtualKeyboardConfig> CREATOR =
+            new Parcelable.Creator<VirtualKeyboardConfig>() { // from class:
+                // android.hardware.input.VirtualKeyboardConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualKeyboardConfig createFromParcel(Parcel in) {
+                    return new VirtualKeyboardConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualKeyboardConfig[] newArray(int size) {
-            return new VirtualKeyboardConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualKeyboardConfig[] newArray(int size) {
+                    return new VirtualKeyboardConfig[size];
+                }
+            };
     public static final String DEFAULT_LANGUAGE_TAG = "en-Latn-US";
     public static final String DEFAULT_LAYOUT_TYPE = "qwerty";
     private final String mLanguageTag;

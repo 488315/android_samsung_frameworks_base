@@ -4,8 +4,6 @@ import android.Manifest;
 import android.app.ActivityThread;
 import android.app.PendingIntent;
 import android.content.ComponentName;
-import android.hardware.usb.IDisplayPortAltModeInfoListener;
-import android.hardware.usb.IUsbOperationInternal;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -15,23 +13,31 @@ import android.os.ParcelFileDescriptor;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IUsbManager extends IInterface {
-    void addAccessoryPackagesToPreferenceDenied(UsbAccessory usbAccessory, String[] strArr, UserHandle userHandle) throws RemoteException;
+    void addAccessoryPackagesToPreferenceDenied(
+            UsbAccessory usbAccessory, String[] strArr, UserHandle userHandle)
+            throws RemoteException;
 
-    void addDevicePackagesToPreferenceDenied(UsbDevice usbDevice, String[] strArr, UserHandle userHandle) throws RemoteException;
+    void addDevicePackagesToPreferenceDenied(
+            UsbDevice usbDevice, String[] strArr, UserHandle userHandle) throws RemoteException;
 
     void clearDefaults(String str, int i) throws RemoteException;
 
     void enableContaminantDetection(String str, boolean z) throws RemoteException;
 
-    void enableLimitPowerTransfer(String str, boolean z, int i, IUsbOperationInternal iUsbOperationInternal) throws RemoteException;
+    void enableLimitPowerTransfer(
+            String str, boolean z, int i, IUsbOperationInternal iUsbOperationInternal)
+            throws RemoteException;
 
-    boolean enableUsbData(String str, boolean z, int i, IUsbOperationInternal iUsbOperationInternal) throws RemoteException;
+    boolean enableUsbData(String str, boolean z, int i, IUsbOperationInternal iUsbOperationInternal)
+            throws RemoteException;
 
-    void enableUsbDataWhileDocked(String str, int i, IUsbOperationInternal iUsbOperationInternal) throws RemoteException;
+    void enableUsbDataWhileDocked(String str, int i, IUsbOperationInternal iUsbOperationInternal)
+            throws RemoteException;
 
     ParcelFileDescriptor getControlFd(long j) throws RemoteException;
 
@@ -59,13 +65,15 @@ public interface IUsbManager extends IInterface {
 
     boolean hasAccessoryPermission(UsbAccessory usbAccessory) throws RemoteException;
 
-    boolean hasAccessoryPermissionWithIdentity(UsbAccessory usbAccessory, int i, int i2) throws RemoteException;
+    boolean hasAccessoryPermissionWithIdentity(UsbAccessory usbAccessory, int i, int i2)
+            throws RemoteException;
 
     boolean hasDefaults(String str, int i) throws RemoteException;
 
     boolean hasDevicePermission(UsbDevice usbDevice, String str) throws RemoteException;
 
-    boolean hasDevicePermissionWithIdentity(UsbDevice usbDevice, String str, int i, int i2) throws RemoteException;
+    boolean hasDevicePermissionWithIdentity(UsbDevice usbDevice, String str, int i, int i2)
+            throws RemoteException;
 
     boolean isFunctionEnabled(String str) throws RemoteException;
 
@@ -79,19 +87,27 @@ public interface IUsbManager extends IInterface {
 
     ParcelFileDescriptor openDevice(String str, String str2) throws RemoteException;
 
-    boolean registerForDisplayPortEvents(IDisplayPortAltModeInfoListener iDisplayPortAltModeInfoListener) throws RemoteException;
+    boolean registerForDisplayPortEvents(
+            IDisplayPortAltModeInfoListener iDisplayPortAltModeInfoListener) throws RemoteException;
 
-    void removeAccessoryPackagesFromPreferenceDenied(UsbAccessory usbAccessory, String[] strArr, UserHandle userHandle) throws RemoteException;
+    void removeAccessoryPackagesFromPreferenceDenied(
+            UsbAccessory usbAccessory, String[] strArr, UserHandle userHandle)
+            throws RemoteException;
 
-    void removeDevicePackagesFromPreferenceDenied(UsbDevice usbDevice, String[] strArr, UserHandle userHandle) throws RemoteException;
+    void removeDevicePackagesFromPreferenceDenied(
+            UsbDevice usbDevice, String[] strArr, UserHandle userHandle) throws RemoteException;
 
-    void requestAccessoryPermission(UsbAccessory usbAccessory, String str, PendingIntent pendingIntent) throws RemoteException;
+    void requestAccessoryPermission(
+            UsbAccessory usbAccessory, String str, PendingIntent pendingIntent)
+            throws RemoteException;
 
-    void requestDevicePermission(UsbDevice usbDevice, String str, PendingIntent pendingIntent) throws RemoteException;
+    void requestDevicePermission(UsbDevice usbDevice, String str, PendingIntent pendingIntent)
+            throws RemoteException;
 
     void resetUsbGadget() throws RemoteException;
 
-    void resetUsbPort(String str, int i, IUsbOperationInternal iUsbOperationInternal) throws RemoteException;
+    void resetUsbPort(String str, int i, IUsbOperationInternal iUsbOperationInternal)
+            throws RemoteException;
 
     int restrictUsbHostInterface(boolean z, String str) throws RemoteException;
 
@@ -107,7 +123,9 @@ public interface IUsbManager extends IInterface {
 
     void setAccessoryPackage(UsbAccessory usbAccessory, String str, int i) throws RemoteException;
 
-    void setAccessoryPersistentPermission(UsbAccessory usbAccessory, int i, UserHandle userHandle, boolean z) throws RemoteException;
+    void setAccessoryPersistentPermission(
+            UsbAccessory usbAccessory, int i, UserHandle userHandle, boolean z)
+            throws RemoteException;
 
     void setCurrentFunction(String str, boolean z, int i) throws RemoteException;
 
@@ -115,7 +133,8 @@ public interface IUsbManager extends IInterface {
 
     void setDevicePackage(UsbDevice usbDevice, String str, int i) throws RemoteException;
 
-    void setDevicePersistentPermission(UsbDevice usbDevice, int i, UserHandle userHandle, boolean z) throws RemoteException;
+    void setDevicePersistentPermission(UsbDevice usbDevice, int i, UserHandle userHandle, boolean z)
+            throws RemoteException;
 
     void setPortRoles(String str, int i, int i2) throws RemoteException;
 
@@ -125,15 +144,16 @@ public interface IUsbManager extends IInterface {
 
     void setUsbHiddenMenuState(boolean z) throws RemoteException;
 
-    void unregisterForDisplayPortEvents(IDisplayPortAltModeInfoListener iDisplayPortAltModeInfoListener) throws RemoteException;
+    void unregisterForDisplayPortEvents(
+            IDisplayPortAltModeInfoListener iDisplayPortAltModeInfoListener) throws RemoteException;
 
     public static class Default implements IUsbManager {
         @Override // android.hardware.usb.IUsbManager
-        public void getDeviceList(Bundle devices) throws RemoteException {
-        }
+        public void getDeviceList(Bundle devices) throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public ParcelFileDescriptor openDevice(String deviceName, String packageName) throws RemoteException {
+        public ParcelFileDescriptor openDevice(String deviceName, String packageName)
+                throws RemoteException {
             return null;
         }
 
@@ -148,44 +168,50 @@ public interface IUsbManager extends IInterface {
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public void setDevicePackage(UsbDevice device, String packageName, int userId) throws RemoteException {
-        }
+        public void setDevicePackage(UsbDevice device, String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void setAccessoryPackage(UsbAccessory accessory, String packageName, int userId) throws RemoteException {
-        }
+        public void setAccessoryPackage(UsbAccessory accessory, String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void addDevicePackagesToPreferenceDenied(UsbDevice device, String[] packageNames, UserHandle user) throws RemoteException {
-        }
+        public void addDevicePackagesToPreferenceDenied(
+                UsbDevice device, String[] packageNames, UserHandle user) throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void addAccessoryPackagesToPreferenceDenied(UsbAccessory accessory, String[] packageNames, UserHandle user) throws RemoteException {
-        }
+        public void addAccessoryPackagesToPreferenceDenied(
+                UsbAccessory accessory, String[] packageNames, UserHandle user)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void removeDevicePackagesFromPreferenceDenied(UsbDevice device, String[] packageNames, UserHandle user) throws RemoteException {
-        }
+        public void removeDevicePackagesFromPreferenceDenied(
+                UsbDevice device, String[] packageNames, UserHandle user) throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void removeAccessoryPackagesFromPreferenceDenied(UsbAccessory device, String[] packageNames, UserHandle user) throws RemoteException {
-        }
+        public void removeAccessoryPackagesFromPreferenceDenied(
+                UsbAccessory device, String[] packageNames, UserHandle user)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void setDevicePersistentPermission(UsbDevice device, int uid, UserHandle user, boolean shouldBeGranted) throws RemoteException {
-        }
+        public void setDevicePersistentPermission(
+                UsbDevice device, int uid, UserHandle user, boolean shouldBeGranted)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void setAccessoryPersistentPermission(UsbAccessory accessory, int uid, UserHandle user, boolean shouldBeGranted) throws RemoteException {
-        }
+        public void setAccessoryPersistentPermission(
+                UsbAccessory accessory, int uid, UserHandle user, boolean shouldBeGranted)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public boolean hasDevicePermission(UsbDevice device, String packageName) throws RemoteException {
+        public boolean hasDevicePermission(UsbDevice device, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public boolean hasDevicePermissionWithIdentity(UsbDevice device, String packageName, int pid, int uid) throws RemoteException {
+        public boolean hasDevicePermissionWithIdentity(
+                UsbDevice device, String packageName, int pid, int uid) throws RemoteException {
             return false;
         }
 
@@ -195,25 +221,26 @@ public interface IUsbManager extends IInterface {
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public boolean hasAccessoryPermissionWithIdentity(UsbAccessory accessory, int pid, int uid) throws RemoteException {
+        public boolean hasAccessoryPermissionWithIdentity(UsbAccessory accessory, int pid, int uid)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public void requestDevicePermission(UsbDevice device, String packageName, PendingIntent pi) throws RemoteException {
-        }
+        public void requestDevicePermission(UsbDevice device, String packageName, PendingIntent pi)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void requestAccessoryPermission(UsbAccessory accessory, String packageName, PendingIntent pi) throws RemoteException {
-        }
+        public void requestAccessoryPermission(
+                UsbAccessory accessory, String packageName, PendingIntent pi)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void grantDevicePermission(UsbDevice device, int uid) throws RemoteException {
-        }
+        public void grantDevicePermission(UsbDevice device, int uid) throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void grantAccessoryPermission(UsbAccessory accessory, int uid) throws RemoteException {
-        }
+        public void grantAccessoryPermission(UsbAccessory accessory, int uid)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
         public boolean hasDefaults(String packageName, int userId) throws RemoteException {
@@ -221,8 +248,7 @@ public interface IUsbManager extends IInterface {
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public void clearDefaults(String packageName, int userId) throws RemoteException {
-        }
+        public void clearDefaults(String packageName, int userId) throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
         public boolean isFunctionEnabled(String function) throws RemoteException {
@@ -230,12 +256,11 @@ public interface IUsbManager extends IInterface {
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public void setCurrentFunctions(long functions, int operationId) throws RemoteException {
-        }
+        public void setCurrentFunctions(long functions, int operationId) throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void setCurrentFunction(String function, boolean usbDataUnlocked, int operationId) throws RemoteException {
-        }
+        public void setCurrentFunction(String function, boolean usbDataUnlocked, int operationId)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
         public long getCurrentFunctions() throws RemoteException {
@@ -253,8 +278,7 @@ public interface IUsbManager extends IInterface {
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public void setScreenUnlockedFunctions(long functions) throws RemoteException {
-        }
+        public void setScreenUnlockedFunctions(long functions) throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
         public long getScreenUnlockedFunctions() throws RemoteException {
@@ -262,21 +286,23 @@ public interface IUsbManager extends IInterface {
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public void resetUsbGadget() throws RemoteException {
-        }
+        public void resetUsbGadget() throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void resetUsbPort(String portId, int operationId, IUsbOperationInternal callback) throws RemoteException {
-        }
+        public void resetUsbPort(String portId, int operationId, IUsbOperationInternal callback)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public boolean enableUsbData(String portId, boolean enable, int operationId, IUsbOperationInternal callback) throws RemoteException {
+        public boolean enableUsbData(
+                String portId, boolean enable, int operationId, IUsbOperationInternal callback)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public void enableUsbDataWhileDocked(String portId, int operationId, IUsbOperationInternal callback) throws RemoteException {
-        }
+        public void enableUsbDataWhileDocked(
+                String portId, int operationId, IUsbOperationInternal callback)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
         public int getUsbHalVersion() throws RemoteException {
@@ -304,29 +330,31 @@ public interface IUsbManager extends IInterface {
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public void setPortRoles(String portId, int powerRole, int dataRole) throws RemoteException {
-        }
+        public void setPortRoles(String portId, int powerRole, int dataRole)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void enableLimitPowerTransfer(String portId, boolean limit, int operationId, IUsbOperationInternal callback) throws RemoteException {
-        }
+        public void enableLimitPowerTransfer(
+                String portId, boolean limit, int operationId, IUsbOperationInternal callback)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void enableContaminantDetection(String portId, boolean enable) throws RemoteException {
-        }
+        public void enableContaminantDetection(String portId, boolean enable)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void setUsbDeviceConnectionHandler(ComponentName usbDeviceConnectionHandler) throws RemoteException {
-        }
+        public void setUsbDeviceConnectionHandler(ComponentName usbDeviceConnectionHandler)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public boolean registerForDisplayPortEvents(IDisplayPortAltModeInfoListener listener) throws RemoteException {
+        public boolean registerForDisplayPortEvents(IDisplayPortAltModeInfoListener listener)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public void unregisterForDisplayPortEvents(IDisplayPortAltModeInfoListener listener) throws RemoteException {
-        }
+        public void unregisterForDisplayPortEvents(IDisplayPortAltModeInfoListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
         public boolean isUsbBlocked() throws RemoteException {
@@ -339,25 +367,23 @@ public interface IUsbManager extends IInterface {
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public int restrictUsbHostInterface(boolean enable, String strWhiteList) throws RemoteException {
+        public int restrictUsbHostInterface(boolean enable, String strWhiteList)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.usb.IUsbManager
-        public void setUsbHiddenMenuState(boolean HiddenMenuEnable) throws RemoteException {
-        }
+        public void setUsbHiddenMenuState(boolean HiddenMenuEnable) throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void semSetMode(int usbMode) throws RemoteException {
-        }
+        public void semSetMode(int usbMode) throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void semSetDevicePackage(UsbDevice device, String packageName, int userId) throws RemoteException {
-        }
+        public void semSetDevicePackage(UsbDevice device, String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
-        public void semGrantDevicePermission(UsbDevice device, int uid) throws RemoteException {
-        }
+        public void semGrantDevicePermission(UsbDevice device, int uid) throws RemoteException {}
 
         @Override // android.hardware.usb.IUsbManager
         public int semGetPowerRoleStatus() throws RemoteException {
@@ -375,7 +401,7 @@ public interface IUsbManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUsbManager {
+    public abstract static class Stub extends Binder implements IUsbManager {
         public static final String DESCRIPTOR = "android.hardware.usb.IUsbManager";
         static final int TRANSACTION_addAccessoryPackagesToPreferenceDenied = 8;
         static final int TRANSACTION_addDevicePackagesToPreferenceDenied = 7;
@@ -443,7 +469,9 @@ public interface IUsbManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IUsbManager asInterface(IBinder obj) {
@@ -583,7 +611,8 @@ public interface IUsbManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -677,7 +706,8 @@ public interface IUsbManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 12:
-                    UsbAccessory _arg011 = (UsbAccessory) data.readTypedObject(UsbAccessory.CREATOR);
+                    UsbAccessory _arg011 =
+                            (UsbAccessory) data.readTypedObject(UsbAccessory.CREATOR);
                     int _arg19 = data.readInt();
                     UserHandle _arg28 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     boolean _arg32 = data.readBoolean();
@@ -699,38 +729,45 @@ public interface IUsbManager extends IInterface {
                     int _arg29 = data.readInt();
                     int _arg33 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result5 = hasDevicePermissionWithIdentity(_arg013, _arg111, _arg29, _arg33);
+                    boolean _result5 =
+                            hasDevicePermissionWithIdentity(_arg013, _arg111, _arg29, _arg33);
                     reply.writeNoException();
                     reply.writeBoolean(_result5);
                     return true;
                 case 15:
-                    UsbAccessory _arg014 = (UsbAccessory) data.readTypedObject(UsbAccessory.CREATOR);
+                    UsbAccessory _arg014 =
+                            (UsbAccessory) data.readTypedObject(UsbAccessory.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result6 = hasAccessoryPermission(_arg014);
                     reply.writeNoException();
                     reply.writeBoolean(_result6);
                     return true;
                 case 16:
-                    UsbAccessory _arg015 = (UsbAccessory) data.readTypedObject(UsbAccessory.CREATOR);
+                    UsbAccessory _arg015 =
+                            (UsbAccessory) data.readTypedObject(UsbAccessory.CREATOR);
                     int _arg112 = data.readInt();
                     int _arg210 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result7 = hasAccessoryPermissionWithIdentity(_arg015, _arg112, _arg210);
+                    boolean _result7 =
+                            hasAccessoryPermissionWithIdentity(_arg015, _arg112, _arg210);
                     reply.writeNoException();
                     reply.writeBoolean(_result7);
                     return true;
                 case 17:
                     UsbDevice _arg016 = (UsbDevice) data.readTypedObject(UsbDevice.CREATOR);
                     String _arg113 = data.readString();
-                    PendingIntent _arg211 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg211 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     requestDevicePermission(_arg016, _arg113, _arg211);
                     reply.writeNoException();
                     return true;
                 case 18:
-                    UsbAccessory _arg017 = (UsbAccessory) data.readTypedObject(UsbAccessory.CREATOR);
+                    UsbAccessory _arg017 =
+                            (UsbAccessory) data.readTypedObject(UsbAccessory.CREATOR);
                     String _arg114 = data.readString();
-                    PendingIntent _arg212 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg212 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     requestAccessoryPermission(_arg017, _arg114, _arg212);
                     reply.writeNoException();
@@ -743,7 +780,8 @@ public interface IUsbManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 20:
-                    UsbAccessory _arg019 = (UsbAccessory) data.readTypedObject(UsbAccessory.CREATOR);
+                    UsbAccessory _arg019 =
+                            (UsbAccessory) data.readTypedObject(UsbAccessory.CREATOR);
                     int _arg116 = data.readInt();
                     data.enforceNoDataAvail();
                     grantAccessoryPermission(_arg019, _arg116);
@@ -819,7 +857,8 @@ public interface IUsbManager extends IInterface {
                 case 32:
                     String _arg026 = data.readString();
                     int _arg121 = data.readInt();
-                    IUsbOperationInternal _arg214 = IUsbOperationInternal.Stub.asInterface(data.readStrongBinder());
+                    IUsbOperationInternal _arg214 =
+                            IUsbOperationInternal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     resetUsbPort(_arg026, _arg121, _arg214);
                     reply.writeNoException();
@@ -828,7 +867,8 @@ public interface IUsbManager extends IInterface {
                     String _arg027 = data.readString();
                     boolean _arg122 = data.readBoolean();
                     int _arg215 = data.readInt();
-                    IUsbOperationInternal _arg34 = IUsbOperationInternal.Stub.asInterface(data.readStrongBinder());
+                    IUsbOperationInternal _arg34 =
+                            IUsbOperationInternal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result14 = enableUsbData(_arg027, _arg122, _arg215, _arg34);
                     reply.writeNoException();
@@ -837,7 +877,8 @@ public interface IUsbManager extends IInterface {
                 case 34:
                     String _arg028 = data.readString();
                     int _arg123 = data.readInt();
-                    IUsbOperationInternal _arg216 = IUsbOperationInternal.Stub.asInterface(data.readStrongBinder());
+                    IUsbOperationInternal _arg216 =
+                            IUsbOperationInternal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     enableUsbDataWhileDocked(_arg028, _arg123, _arg216);
                     reply.writeNoException();
@@ -885,7 +926,8 @@ public interface IUsbManager extends IInterface {
                     String _arg033 = data.readString();
                     boolean _arg125 = data.readBoolean();
                     int _arg218 = data.readInt();
-                    IUsbOperationInternal _arg35 = IUsbOperationInternal.Stub.asInterface(data.readStrongBinder());
+                    IUsbOperationInternal _arg35 =
+                            IUsbOperationInternal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     enableLimitPowerTransfer(_arg033, _arg125, _arg218, _arg35);
                     reply.writeNoException();
@@ -898,20 +940,25 @@ public interface IUsbManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 43:
-                    ComponentName _arg035 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg035 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     setUsbDeviceConnectionHandler(_arg035);
                     reply.writeNoException();
                     return true;
                 case 44:
-                    IDisplayPortAltModeInfoListener _arg036 = IDisplayPortAltModeInfoListener.Stub.asInterface(data.readStrongBinder());
+                    IDisplayPortAltModeInfoListener _arg036 =
+                            IDisplayPortAltModeInfoListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result20 = registerForDisplayPortEvents(_arg036);
                     reply.writeNoException();
                     reply.writeBoolean(_result20);
                     return true;
                 case 45:
-                    IDisplayPortAltModeInfoListener _arg037 = IDisplayPortAltModeInfoListener.Stub.asInterface(data.readStrongBinder());
+                    IDisplayPortAltModeInfoListener _arg037 =
+                            IDisplayPortAltModeInfoListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterForDisplayPortEvents(_arg037);
                     reply.writeNoException();
@@ -1010,7 +1057,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public ParcelFileDescriptor openDevice(String deviceName, String packageName) throws RemoteException {
+            public ParcelFileDescriptor openDevice(String deviceName, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1019,7 +1067,9 @@ public interface IUsbManager extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1035,7 +1085,8 @@ public interface IUsbManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    UsbAccessory _result = (UsbAccessory) _reply.readTypedObject(UsbAccessory.CREATOR);
+                    UsbAccessory _result =
+                            (UsbAccessory) _reply.readTypedObject(UsbAccessory.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1044,7 +1095,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public ParcelFileDescriptor openAccessory(UsbAccessory accessory) throws RemoteException {
+            public ParcelFileDescriptor openAccessory(UsbAccessory accessory)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1052,7 +1104,9 @@ public interface IUsbManager extends IInterface {
                     _data.writeTypedObject(accessory, 0);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1061,7 +1115,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void setDevicePackage(UsbDevice device, String packageName, int userId) throws RemoteException {
+            public void setDevicePackage(UsbDevice device, String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1078,7 +1133,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void setAccessoryPackage(UsbAccessory accessory, String packageName, int userId) throws RemoteException {
+            public void setAccessoryPackage(UsbAccessory accessory, String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1095,7 +1151,9 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void addDevicePackagesToPreferenceDenied(UsbDevice device, String[] packageNames, UserHandle user) throws RemoteException {
+            public void addDevicePackagesToPreferenceDenied(
+                    UsbDevice device, String[] packageNames, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1112,7 +1170,9 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void addAccessoryPackagesToPreferenceDenied(UsbAccessory accessory, String[] packageNames, UserHandle user) throws RemoteException {
+            public void addAccessoryPackagesToPreferenceDenied(
+                    UsbAccessory accessory, String[] packageNames, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1129,7 +1189,9 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void removeDevicePackagesFromPreferenceDenied(UsbDevice device, String[] packageNames, UserHandle user) throws RemoteException {
+            public void removeDevicePackagesFromPreferenceDenied(
+                    UsbDevice device, String[] packageNames, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1146,7 +1208,9 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void removeAccessoryPackagesFromPreferenceDenied(UsbAccessory device, String[] packageNames, UserHandle user) throws RemoteException {
+            public void removeAccessoryPackagesFromPreferenceDenied(
+                    UsbAccessory device, String[] packageNames, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1163,7 +1227,9 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void setDevicePersistentPermission(UsbDevice device, int uid, UserHandle user, boolean shouldBeGranted) throws RemoteException {
+            public void setDevicePersistentPermission(
+                    UsbDevice device, int uid, UserHandle user, boolean shouldBeGranted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1181,7 +1247,9 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void setAccessoryPersistentPermission(UsbAccessory accessory, int uid, UserHandle user, boolean shouldBeGranted) throws RemoteException {
+            public void setAccessoryPersistentPermission(
+                    UsbAccessory accessory, int uid, UserHandle user, boolean shouldBeGranted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1199,7 +1267,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public boolean hasDevicePermission(UsbDevice device, String packageName) throws RemoteException {
+            public boolean hasDevicePermission(UsbDevice device, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1217,7 +1286,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public boolean hasDevicePermissionWithIdentity(UsbDevice device, String packageName, int pid, int uid) throws RemoteException {
+            public boolean hasDevicePermissionWithIdentity(
+                    UsbDevice device, String packageName, int pid, int uid) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1254,7 +1324,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public boolean hasAccessoryPermissionWithIdentity(UsbAccessory accessory, int pid, int uid) throws RemoteException {
+            public boolean hasAccessoryPermissionWithIdentity(
+                    UsbAccessory accessory, int pid, int uid) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1273,7 +1344,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void requestDevicePermission(UsbDevice device, String packageName, PendingIntent pi) throws RemoteException {
+            public void requestDevicePermission(
+                    UsbDevice device, String packageName, PendingIntent pi) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1290,7 +1362,9 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void requestAccessoryPermission(UsbAccessory accessory, String packageName, PendingIntent pi) throws RemoteException {
+            public void requestAccessoryPermission(
+                    UsbAccessory accessory, String packageName, PendingIntent pi)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1323,7 +1397,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void grantAccessoryPermission(UsbAccessory accessory, int uid) throws RemoteException {
+            public void grantAccessoryPermission(UsbAccessory accessory, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1390,7 +1465,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void setCurrentFunctions(long functions, int operationId) throws RemoteException {
+            public void setCurrentFunctions(long functions, int operationId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1406,7 +1482,9 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void setCurrentFunction(String function, boolean usbDataUnlocked, int operationId) throws RemoteException {
+            public void setCurrentFunction(
+                    String function, boolean usbDataUnlocked, int operationId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1516,7 +1594,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void resetUsbPort(String portId, int operationId, IUsbOperationInternal callback) throws RemoteException {
+            public void resetUsbPort(String portId, int operationId, IUsbOperationInternal callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1533,7 +1612,9 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public boolean enableUsbData(String portId, boolean enable, int operationId, IUsbOperationInternal callback) throws RemoteException {
+            public boolean enableUsbData(
+                    String portId, boolean enable, int operationId, IUsbOperationInternal callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1553,7 +1634,9 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void enableUsbDataWhileDocked(String portId, int operationId, IUsbOperationInternal callback) throws RemoteException {
+            public void enableUsbDataWhileDocked(
+                    String portId, int operationId, IUsbOperationInternal callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1594,7 +1677,9 @@ public interface IUsbManager extends IInterface {
                     _data.writeLong(function);
                     this.mRemote.transact(36, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1610,7 +1695,8 @@ public interface IUsbManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(37, _data, _reply, 0);
                     _reply.readException();
-                    List<ParcelableUsbPort> _result = _reply.createTypedArrayList(ParcelableUsbPort.CREATOR);
+                    List<ParcelableUsbPort> _result =
+                            _reply.createTypedArrayList(ParcelableUsbPort.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1627,7 +1713,8 @@ public interface IUsbManager extends IInterface {
                     _data.writeString(portId);
                     this.mRemote.transact(38, _data, _reply, 0);
                     _reply.readException();
-                    UsbPortStatus _result = (UsbPortStatus) _reply.readTypedObject(UsbPortStatus.CREATOR);
+                    UsbPortStatus _result =
+                            (UsbPortStatus) _reply.readTypedObject(UsbPortStatus.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1653,7 +1740,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void setPortRoles(String portId, int powerRole, int dataRole) throws RemoteException {
+            public void setPortRoles(String portId, int powerRole, int dataRole)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1670,7 +1758,9 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void enableLimitPowerTransfer(String portId, boolean limit, int operationId, IUsbOperationInternal callback) throws RemoteException {
+            public void enableLimitPowerTransfer(
+                    String portId, boolean limit, int operationId, IUsbOperationInternal callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1688,7 +1778,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void enableContaminantDetection(String portId, boolean enable) throws RemoteException {
+            public void enableContaminantDetection(String portId, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1704,7 +1795,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void setUsbDeviceConnectionHandler(ComponentName usbDeviceConnectionHandler) throws RemoteException {
+            public void setUsbDeviceConnectionHandler(ComponentName usbDeviceConnectionHandler)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1719,7 +1811,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public boolean registerForDisplayPortEvents(IDisplayPortAltModeInfoListener listener) throws RemoteException {
+            public boolean registerForDisplayPortEvents(IDisplayPortAltModeInfoListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1736,7 +1829,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void unregisterForDisplayPortEvents(IDisplayPortAltModeInfoListener listener) throws RemoteException {
+            public void unregisterForDisplayPortEvents(IDisplayPortAltModeInfoListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1783,7 +1877,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public int restrictUsbHostInterface(boolean enable, String strWhiteList) throws RemoteException {
+            public int restrictUsbHostInterface(boolean enable, String strWhiteList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1831,7 +1926,8 @@ public interface IUsbManager extends IInterface {
             }
 
             @Override // android.hardware.usb.IUsbManager
-            public void semSetDevicePackage(UsbDevice device, String packageName, int userId) throws RemoteException {
+            public void semSetDevicePackage(UsbDevice device, String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1896,68 +1992,86 @@ public interface IUsbManager extends IInterface {
             }
         }
 
-        protected void hasDevicePermissionWithIdentity_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+        protected void hasDevicePermissionWithIdentity_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
-        protected void hasAccessoryPermissionWithIdentity_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+        protected void hasAccessoryPermissionWithIdentity_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void grantDevicePermission_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void grantAccessoryPermission_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void setCurrentFunctions_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void getCurrentFunctions_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void getCurrentUsbSpeed_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void getGadgetHalVersion_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void setScreenUnlockedFunctions_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void getScreenUnlockedFunctions_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void resetUsbGadget_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void getUsbHalVersion_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void getControlFd_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_MTP, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_MTP, getCallingPid(), getCallingUid());
         }
 
         protected void getPorts_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void isModeChangeSupported_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         protected void setUsbDeviceConnectionHandler_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USB, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

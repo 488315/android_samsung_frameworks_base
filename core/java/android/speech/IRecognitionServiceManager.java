@@ -6,24 +6,31 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.speech.IRecognitionServiceManagerCallback;
 
 /* loaded from: classes3.dex */
 public interface IRecognitionServiceManager extends IInterface {
     public static final String DESCRIPTOR = "android.speech.IRecognitionServiceManager";
 
-    void createSession(ComponentName componentName, IBinder iBinder, boolean z, IRecognitionServiceManagerCallback iRecognitionServiceManagerCallback) throws RemoteException;
+    void createSession(
+            ComponentName componentName,
+            IBinder iBinder,
+            boolean z,
+            IRecognitionServiceManagerCallback iRecognitionServiceManagerCallback)
+            throws RemoteException;
 
     void setTemporaryComponent(ComponentName componentName) throws RemoteException;
 
     public static class Default implements IRecognitionServiceManager {
         @Override // android.speech.IRecognitionServiceManager
-        public void createSession(ComponentName componentName, IBinder clientToken, boolean onDevice, IRecognitionServiceManagerCallback callback) throws RemoteException {
-        }
+        public void createSession(
+                ComponentName componentName,
+                IBinder clientToken,
+                boolean onDevice,
+                IRecognitionServiceManagerCallback callback)
+                throws RemoteException {}
 
         @Override // android.speech.IRecognitionServiceManager
-        public void setTemporaryComponent(ComponentName componentName) throws RemoteException {
-        }
+        public void setTemporaryComponent(ComponentName componentName) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -31,7 +38,7 @@ public interface IRecognitionServiceManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRecognitionServiceManager {
+    public abstract static class Stub extends Binder implements IRecognitionServiceManager {
         static final int TRANSACTION_createSession = 1;
         static final int TRANSACTION_setTemporaryComponent = 2;
 
@@ -72,7 +79,8 @@ public interface IRecognitionServiceManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRecognitionServiceManager.DESCRIPTOR);
             }
@@ -82,15 +90,19 @@ public interface IRecognitionServiceManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     IBinder _arg1 = data.readStrongBinder();
                     boolean _arg2 = data.readBoolean();
-                    IRecognitionServiceManagerCallback _arg3 = IRecognitionServiceManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IRecognitionServiceManagerCallback _arg3 =
+                            IRecognitionServiceManagerCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     createSession(_arg0, _arg1, _arg2, _arg3);
                     return true;
                 case 2:
-                    ComponentName _arg02 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg02 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     setTemporaryComponent(_arg02);
                     return true;
@@ -116,7 +128,12 @@ public interface IRecognitionServiceManager extends IInterface {
             }
 
             @Override // android.speech.IRecognitionServiceManager
-            public void createSession(ComponentName componentName, IBinder clientToken, boolean onDevice, IRecognitionServiceManagerCallback callback) throws RemoteException {
+            public void createSession(
+                    ComponentName componentName,
+                    IBinder clientToken,
+                    boolean onDevice,
+                    IRecognitionServiceManagerCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRecognitionServiceManager.DESCRIPTOR);

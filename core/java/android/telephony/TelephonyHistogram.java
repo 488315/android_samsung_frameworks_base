@@ -3,25 +3,28 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class TelephonyHistogram implements Parcelable {
     private static final int ABSENT = 0;
-    public static final Parcelable.Creator<TelephonyHistogram> CREATOR = new Parcelable.Creator<TelephonyHistogram>() { // from class: android.telephony.TelephonyHistogram.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelephonyHistogram createFromParcel(Parcel in) {
-            return new TelephonyHistogram(in);
-        }
+    public static final Parcelable.Creator<TelephonyHistogram> CREATOR =
+            new Parcelable.Creator<
+                    TelephonyHistogram>() { // from class: android.telephony.TelephonyHistogram.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelephonyHistogram createFromParcel(Parcel in) {
+                    return new TelephonyHistogram(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelephonyHistogram[] newArray(int size) {
-            return new TelephonyHistogram[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelephonyHistogram[] newArray(int size) {
+                    return new TelephonyHistogram[size];
+                }
+            };
     private static final int PRESENT = 1;
     private static final int RANGE_CALCULATION_COUNT = 10;
     public static final int TELEPHONY_CATEGORY_RIL = 1;
@@ -140,7 +143,9 @@ public final class TelephonyHistogram implements Parcelable {
 
     private void calculateBucketEndPoints(int[] bucketEndPoints) {
         for (int i = 1; i < this.mBucketCount; i++) {
-            int endPt = this.mMinTimeMs + (((this.mMaxTimeMs - this.mMinTimeMs) * i) / this.mBucketCount);
+            int endPt =
+                    this.mMinTimeMs
+                            + (((this.mMaxTimeMs - this.mMinTimeMs) * i) / this.mBucketCount);
             bucketEndPoints[i - 1] = endPt;
         }
     }
@@ -179,7 +184,8 @@ public final class TelephonyHistogram implements Parcelable {
             this.mInitialTimings[this.mSampleCount - 1] = time;
             calculateBucketEndPoints(this.mBucketEndPoints);
             for (int j = 0; j < 10; j++) {
-                addToBucketCounter(this.mBucketEndPoints, this.mBucketCounters, this.mInitialTimings[j]);
+                addToBucketCounter(
+                        this.mBucketEndPoints, this.mBucketCounters, this.mInitialTimings[j]);
             }
             this.mInitialTimings = null;
             return;
@@ -188,7 +194,17 @@ public final class TelephonyHistogram implements Parcelable {
     }
 
     public String toString() {
-        String basic = " Histogram id = " + this.mId + " Time(ms): min = " + this.mMinTimeMs + " max = " + this.mMaxTimeMs + " avg = " + this.mAverageTimeMs + " Count = " + this.mSampleCount;
+        String basic =
+                " Histogram id = "
+                        + this.mId
+                        + " Time(ms): min = "
+                        + this.mMinTimeMs
+                        + " max = "
+                        + this.mMaxTimeMs
+                        + " avg = "
+                        + this.mAverageTimeMs
+                        + " Count = "
+                        + this.mSampleCount;
         if (this.mSampleCount < 10) {
             return basic;
         }

@@ -12,11 +12,13 @@ import android.os.Parcelable;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.android.os.SemCompanionDeviceBatteryInfo;
-import com.samsung.android.server.battery.DeviceBatteryInfoService;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +39,9 @@ public final class DeviceBatteryInfoService {
     public final List mRegisteredPackage = new ArrayList();
     public BluetoothDeviceBatteryManager mBluetoothDeviceBatteryManager = null;
     public WatchBatteryManager mWatchBatteryManager = null;
-    public final String[] mRequirePermissions = {"android.permission.BLUETOOTH_CONNECT", "com.samsung.android.permission.SEM_BATTERY_INFO"};
+    public final String[] mRequirePermissions = {
+        "android.permission.BLUETOOTH_CONNECT", "com.samsung.android.permission.SEM_BATTERY_INFO"
+    };
     public final Object mBatteryInfosLock = new Object();
     public AnonymousClass3 mDeviceNameObserver = null;
     public ActivityManagerInternal mActivityManagerInternal = null;
@@ -52,7 +56,8 @@ public final class DeviceBatteryInfoService {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ DeviceBatteryInfoService this$0;
 
-        public /* synthetic */ AnonymousClass1(DeviceBatteryInfoService deviceBatteryInfoService, int i) {
+        public /* synthetic */ AnonymousClass1(
+                DeviceBatteryInfoService deviceBatteryInfoService, int i) {
             this.$r8$classId = i;
             this.this$0 = deviceBatteryInfoService;
         }
@@ -72,18 +77,29 @@ public final class DeviceBatteryInfoService {
                         }
                         if ("android.intent.action.BATTERY_CHANGED".equals(action)) {
                             int intExtra = intent.getIntExtra("level", -1);
-                            int intExtra2 = intent.getIntExtra(Constants.JSON_CLIENT_DATA_STATUS, -1);
+                            int intExtra2 =
+                                    intent.getIntExtra(Constants.JSON_CLIENT_DATA_STATUS, -1);
                             Slog.i("DeviceBatteryInfoService", "phone battery level: " + intExtra);
-                            Slog.i("DeviceBatteryInfoService", "phone battery status: " + intExtra2);
+                            Slog.i(
+                                    "DeviceBatteryInfoService",
+                                    "phone battery status: " + intExtra2);
                             DeviceBatteryInfoService deviceBatteryInfoService2 = this.this$0;
-                            SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo = deviceBatteryInfoService2.mPhoneBatteryInfo;
+                            SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo =
+                                    deviceBatteryInfoService2.mPhoneBatteryInfo;
                             if (semCompanionDeviceBatteryInfo != null) {
-                                if (semCompanionDeviceBatteryInfo.getBatteryLevel() != intExtra || this.this$0.mPhoneBatteryInfo.getBatteryStatus() != intExtra2) {
+                                if (semCompanionDeviceBatteryInfo.getBatteryLevel() != intExtra
+                                        || this.this$0.mPhoneBatteryInfo.getBatteryStatus()
+                                                != intExtra2) {
                                     this.this$0.mPhoneBatteryInfo.setBatteryLevel(intExtra);
-                                    Slog.d("DeviceBatteryInfoService", "setBatteryStatus : " + intExtra2);
+                                    Slog.d(
+                                            "DeviceBatteryInfoService",
+                                            "setBatteryStatus : " + intExtra2);
                                     this.this$0.mPhoneBatteryInfo.setBatteryStatus(intExtra2);
-                                    DeviceBatteryInfoService deviceBatteryInfoService3 = this.this$0;
-                                    deviceBatteryInfoService3.sendBroadcast("com.samsung.battery.ACTION_BATTERY_INFO_CHANGED", deviceBatteryInfoService3.mPhoneBatteryInfo);
+                                    DeviceBatteryInfoService deviceBatteryInfoService3 =
+                                            this.this$0;
+                                    deviceBatteryInfoService3.sendBroadcast(
+                                            "com.samsung.battery.ACTION_BATTERY_INFO_CHANGED",
+                                            deviceBatteryInfoService3.mPhoneBatteryInfo);
                                     break;
                                 }
                             } else {
@@ -92,7 +108,8 @@ public final class DeviceBatteryInfoService {
                             }
                         }
                     } catch (Exception e) {
-                        BootReceiver$$ExternalSyntheticOutline0.m(e, "exception occurred : ", "DeviceBatteryInfoService");
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                e, "exception occurred : ", "DeviceBatteryInfoService");
                         return;
                     }
                     break;
@@ -102,19 +119,28 @@ public final class DeviceBatteryInfoService {
                         Slog.i("DeviceBatteryInfoService", "action: " + action2);
                         String schemeSpecificPart = intent.getData().getSchemeSpecificPart();
                         if (this.this$0.packageAddressMap.containsKey(schemeSpecificPart)) {
-                            String str = (String) this.this$0.packageAddressMap.get(schemeSpecificPart);
+                            String str =
+                                    (String) this.this$0.packageAddressMap.get(schemeSpecificPart);
                             if ("android.intent.action.PACKAGE_REMOVED".equals(action2)) {
                                 this.this$0.removeInfoOnPackageChange(schemeSpecificPart, str);
                             } else if ("android.intent.action.PACKAGE_CHANGED".equals(action2)) {
-                                int applicationEnabledSetting = AppGlobals.getPackageManager().getApplicationEnabledSetting(schemeSpecificPart, intent.getIntExtra("android.intent.extra.user_handle", 0));
-                                if (applicationEnabledSetting != 0 && applicationEnabledSetting != 1) {
+                                int applicationEnabledSetting =
+                                        AppGlobals.getPackageManager()
+                                                .getApplicationEnabledSetting(
+                                                        schemeSpecificPart,
+                                                        intent.getIntExtra(
+                                                                "android.intent.extra.user_handle",
+                                                                0));
+                                if (applicationEnabledSetting != 0
+                                        && applicationEnabledSetting != 1) {
                                     this.this$0.removeInfoOnPackageChange(schemeSpecificPart, str);
                                 }
                             }
                         }
                         break;
                     } catch (Exception e2) {
-                        BootReceiver$$ExternalSyntheticOutline0.m(e2, "Exception occurred : ", "DeviceBatteryInfoService");
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                e2, "Exception occurred : ", "DeviceBatteryInfoService");
                         return;
                     }
                     break;
@@ -124,71 +150,101 @@ public final class DeviceBatteryInfoService {
                         Slog.i("DeviceBatteryInfoService", "action: " + action3);
                         if ("android.intent.action.SCREEN_ON".equals(action3)) {
                             final int i = 0;
-                            this.this$0.mHandler.post(new Runnable(this) { // from class: com.samsung.android.server.battery.DeviceBatteryInfoService$4$$ExternalSyntheticLambda0
-                                public final /* synthetic */ DeviceBatteryInfoService.AnonymousClass1 f$0;
+                            this.this$0.mHandler.post(
+                                    new Runnable(
+                                            this) { // from class:
+                                                    // com.samsung.android.server.battery.DeviceBatteryInfoService$4$$ExternalSyntheticLambda0
+                                        public final /* synthetic */ DeviceBatteryInfoService
+                                                        .AnonymousClass1
+                                                f$0;
 
-                                {
-                                    this.f$0 = this;
-                                }
+                                        {
+                                            this.f$0 = this;
+                                        }
 
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    int i2 = i;
-                                    DeviceBatteryInfoService.AnonymousClass1 anonymousClass1 = this.f$0;
-                                    anonymousClass1.getClass();
-                                    switch (i2) {
-                                        case 0:
-                                            Slog.i("DeviceBatteryInfoService", "screen on");
-                                            anonymousClass1.this$0.mWatchBatteryManager.displayStateChanged(true);
-                                            break;
-                                        default:
-                                            Slog.i("DeviceBatteryInfoService", "screen off");
-                                            anonymousClass1.this$0.mWatchBatteryManager.displayStateChanged(false);
-                                            break;
-                                    }
-                                }
-                            });
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            int i2 = i;
+                                            DeviceBatteryInfoService.AnonymousClass1
+                                                    anonymousClass1 = this.f$0;
+                                            anonymousClass1.getClass();
+                                            switch (i2) {
+                                                case 0:
+                                                    Slog.i("DeviceBatteryInfoService", "screen on");
+                                                    anonymousClass1.this$0.mWatchBatteryManager
+                                                            .displayStateChanged(true);
+                                                    break;
+                                                default:
+                                                    Slog.i(
+                                                            "DeviceBatteryInfoService",
+                                                            "screen off");
+                                                    anonymousClass1.this$0.mWatchBatteryManager
+                                                            .displayStateChanged(false);
+                                                    break;
+                                            }
+                                        }
+                                    });
                         } else if ("android.intent.action.SCREEN_OFF".equals(action3)) {
                             final int i2 = 1;
-                            this.this$0.mHandler.post(new Runnable(this) { // from class: com.samsung.android.server.battery.DeviceBatteryInfoService$4$$ExternalSyntheticLambda0
-                                public final /* synthetic */ DeviceBatteryInfoService.AnonymousClass1 f$0;
+                            this.this$0.mHandler.post(
+                                    new Runnable(
+                                            this) { // from class:
+                                                    // com.samsung.android.server.battery.DeviceBatteryInfoService$4$$ExternalSyntheticLambda0
+                                        public final /* synthetic */ DeviceBatteryInfoService
+                                                        .AnonymousClass1
+                                                f$0;
 
-                                {
-                                    this.f$0 = this;
-                                }
+                                        {
+                                            this.f$0 = this;
+                                        }
 
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    int i22 = i2;
-                                    DeviceBatteryInfoService.AnonymousClass1 anonymousClass1 = this.f$0;
-                                    anonymousClass1.getClass();
-                                    switch (i22) {
-                                        case 0:
-                                            Slog.i("DeviceBatteryInfoService", "screen on");
-                                            anonymousClass1.this$0.mWatchBatteryManager.displayStateChanged(true);
-                                            break;
-                                        default:
-                                            Slog.i("DeviceBatteryInfoService", "screen off");
-                                            anonymousClass1.this$0.mWatchBatteryManager.displayStateChanged(false);
-                                            break;
-                                    }
-                                }
-                            });
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            int i22 = i2;
+                                            DeviceBatteryInfoService.AnonymousClass1
+                                                    anonymousClass1 = this.f$0;
+                                            anonymousClass1.getClass();
+                                            switch (i22) {
+                                                case 0:
+                                                    Slog.i("DeviceBatteryInfoService", "screen on");
+                                                    anonymousClass1.this$0.mWatchBatteryManager
+                                                            .displayStateChanged(true);
+                                                    break;
+                                                default:
+                                                    Slog.i(
+                                                            "DeviceBatteryInfoService",
+                                                            "screen off");
+                                                    anonymousClass1.this$0.mWatchBatteryManager
+                                                            .displayStateChanged(false);
+                                                    break;
+                                            }
+                                        }
+                                    });
                         }
                         break;
                     } catch (Exception e3) {
-                        BootReceiver$$ExternalSyntheticOutline0.m(e3, "exception occurred : ", "DeviceBatteryInfoService");
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                e3, "exception occurred : ", "DeviceBatteryInfoService");
                         return;
                     }
             }
         }
     }
 
-    public static void printBatteryInfo(SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo) {
-        Slog.i("DeviceBatteryInfoService", "Name : " + semCompanionDeviceBatteryInfo.getDeviceName() + " / BatteryLevel : " + semCompanionDeviceBatteryInfo.getBatteryLevel() + " / Status : " + semCompanionDeviceBatteryInfo.getBatteryStatus());
+    public static void printBatteryInfo(
+            SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo) {
+        Slog.i(
+                "DeviceBatteryInfoService",
+                "Name : "
+                        + semCompanionDeviceBatteryInfo.getDeviceName()
+                        + " / BatteryLevel : "
+                        + semCompanionDeviceBatteryInfo.getBatteryLevel()
+                        + " / Status : "
+                        + semCompanionDeviceBatteryInfo.getBatteryStatus());
     }
 
-    public final void addBatteryInfo(String str, SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo) {
+    public final void addBatteryInfo(
+            String str, SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo) {
         if (str == null) {
             Slog.i("DeviceBatteryInfoService", "addBatteryInfo : address is null");
             return;
@@ -196,17 +252,22 @@ public final class DeviceBatteryInfoService {
         synchronized (this.mBatteryInfosLock) {
             this.mBatteryInfos.put(str, semCompanionDeviceBatteryInfo);
         }
-        sendBroadcast("com.samsung.battery.ACTION_BATTERY_INFO_ADDED", semCompanionDeviceBatteryInfo);
+        sendBroadcast(
+                "com.samsung.battery.ACTION_BATTERY_INFO_ADDED", semCompanionDeviceBatteryInfo);
     }
 
     public final void addPhoneBatteryInfo() {
         Slog.i("DeviceBatteryInfoService", "addPhoneBatteryInfo");
         try {
-            String string = Settings.Global.getString(this.mContext.getContentResolver(), "device_name");
-            Intent registerReceiver = this.mContext.registerReceiver(null, new IntentFilter("android.intent.action.BATTERY_CHANGED"));
+            String string =
+                    Settings.Global.getString(this.mContext.getContentResolver(), "device_name");
+            Intent registerReceiver =
+                    this.mContext.registerReceiver(
+                            null, new IntentFilter("android.intent.action.BATTERY_CHANGED"));
             int intExtra = registerReceiver.getIntExtra("level", -1);
             int intExtra2 = registerReceiver.getIntExtra(Constants.JSON_CLIENT_DATA_STATUS, -1);
-            SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo = new SemCompanionDeviceBatteryInfo();
+            SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo =
+                    new SemCompanionDeviceBatteryInfo();
             semCompanionDeviceBatteryInfo.setAddress("00:00:00:00:00:00");
             semCompanionDeviceBatteryInfo.setDeviceName(string);
             semCompanionDeviceBatteryInfo.setDeviceType(2);
@@ -217,7 +278,8 @@ public final class DeviceBatteryInfoService {
                 this.mBatteryInfos.put("00:00:00:00:00:00", semCompanionDeviceBatteryInfo);
             }
         } catch (Exception e) {
-            BootReceiver$$ExternalSyntheticOutline0.m(e, "exception occurred : ", "DeviceBatteryInfoService");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    e, "exception occurred : ", "DeviceBatteryInfoService");
         }
     }
 
@@ -240,28 +302,40 @@ public final class DeviceBatteryInfoService {
             try {
                 HashMap hashMap = this.mBatteryInfos;
                 if (hashMap != null && hashMap.size() > 0) {
-                    this.mBatteryInfos.forEach(new BiConsumer() { // from class: com.samsung.android.server.battery.DeviceBatteryInfoService$$ExternalSyntheticLambda2
-                        @Override // java.util.function.BiConsumer
-                        public final void accept(Object obj, Object obj2) {
-                            PrintWriter printWriter2 = printWriter;
-                            SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo = (SemCompanionDeviceBatteryInfo) obj2;
-                            StringBuilder sb = new StringBuilder("    [ ");
-                            sb.append(DeviceBatteryInfoUtil.getAddressForLog(semCompanionDeviceBatteryInfo.getAddress()));
-                            sb.append(", ");
-                            sb.append(semCompanionDeviceBatteryInfo.getDeviceType());
-                            sb.append(", ");
-                            sb.append(semCompanionDeviceBatteryInfo.getBatteryLevel());
-                            sb.append(", ");
-                            sb.append(semCompanionDeviceBatteryInfo.getExtraBatteryLevelLeft());
-                            sb.append(", ");
-                            sb.append(semCompanionDeviceBatteryInfo.getExtraBatteryLevelRight());
-                            sb.append(", ");
-                            sb.append(semCompanionDeviceBatteryInfo.getExtraBatteryLevelCradle());
-                            sb.append(", ");
-                            sb.append(semCompanionDeviceBatteryInfo.getBatteryStatus());
-                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, " ]", printWriter2);
-                        }
-                    });
+                    this.mBatteryInfos.forEach(
+                            new BiConsumer() { // from class:
+                                               // com.samsung.android.server.battery.DeviceBatteryInfoService$$ExternalSyntheticLambda2
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    PrintWriter printWriter2 = printWriter;
+                                    SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo =
+                                            (SemCompanionDeviceBatteryInfo) obj2;
+                                    StringBuilder sb = new StringBuilder("    [ ");
+                                    sb.append(
+                                            DeviceBatteryInfoUtil.getAddressForLog(
+                                                    semCompanionDeviceBatteryInfo.getAddress()));
+                                    sb.append(", ");
+                                    sb.append(semCompanionDeviceBatteryInfo.getDeviceType());
+                                    sb.append(", ");
+                                    sb.append(semCompanionDeviceBatteryInfo.getBatteryLevel());
+                                    sb.append(", ");
+                                    sb.append(
+                                            semCompanionDeviceBatteryInfo
+                                                    .getExtraBatteryLevelLeft());
+                                    sb.append(", ");
+                                    sb.append(
+                                            semCompanionDeviceBatteryInfo
+                                                    .getExtraBatteryLevelRight());
+                                    sb.append(", ");
+                                    sb.append(
+                                            semCompanionDeviceBatteryInfo
+                                                    .getExtraBatteryLevelCradle());
+                                    sb.append(", ");
+                                    sb.append(semCompanionDeviceBatteryInfo.getBatteryStatus());
+                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                            sb, " ]", printWriter2);
+                                }
+                            });
                 }
             } catch (Throwable th) {
                 throw th;
@@ -282,9 +356,12 @@ public final class DeviceBatteryInfoService {
             Slog.i("DeviceBatteryInfoService", "getDeviceBatteryInfo : address is null");
             return null;
         }
-        Slog.i("DeviceBatteryInfoService", "semGetBatteryInfo() : " + DeviceBatteryInfoUtil.getAddressForLog(str));
+        Slog.i(
+                "DeviceBatteryInfoService",
+                "semGetBatteryInfo() : " + DeviceBatteryInfoUtil.getAddressForLog(str));
         synchronized (this.mBatteryInfosLock) {
-            semCompanionDeviceBatteryInfo = (SemCompanionDeviceBatteryInfo) this.mBatteryInfos.get(str);
+            semCompanionDeviceBatteryInfo =
+                    (SemCompanionDeviceBatteryInfo) this.mBatteryInfos.get(str);
         }
         return semCompanionDeviceBatteryInfo;
     }
@@ -298,7 +375,8 @@ public final class DeviceBatteryInfoService {
         }
         synchronized (this.mBatteryInfosLock) {
             try {
-                semCompanionDeviceBatteryInfo = (SemCompanionDeviceBatteryInfo) this.mBatteryInfos.get(str);
+                semCompanionDeviceBatteryInfo =
+                        (SemCompanionDeviceBatteryInfo) this.mBatteryInfos.get(str);
                 if (this.mBatteryInfos.containsKey(str)) {
                     this.mBatteryInfos.remove(str);
                     z = true;
@@ -310,7 +388,9 @@ public final class DeviceBatteryInfoService {
             }
         }
         if (z) {
-            sendBroadcast("com.samsung.battery.ACTION_BATTERY_INFO_REMOVED", semCompanionDeviceBatteryInfo);
+            sendBroadcast(
+                    "com.samsung.battery.ACTION_BATTERY_INFO_REMOVED",
+                    semCompanionDeviceBatteryInfo);
         }
     }
 
@@ -320,32 +400,42 @@ public final class DeviceBatteryInfoService {
             throw new IllegalArgumentException();
         }
         if (containsBatteryInfo(str2)) {
-            this.mHandler.post(new DeviceBatteryInfoService$$ExternalSyntheticLambda5(this, str2, str, 1));
+            this.mHandler.post(
+                    new DeviceBatteryInfoService$$ExternalSyntheticLambda5(this, str2, str, 1));
         } else {
             Slog.i("DeviceBatteryInfoService", "device is not exist");
         }
     }
 
     public final void requirePermissions() {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.BLUETOOTH_CONNECT", "Permission Require");
-        this.mContext.enforceCallingOrSelfPermission("com.samsung.android.permission.SEM_BATTERY_INFO", "Permission Require");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BLUETOOTH_CONNECT", "Permission Require");
+        this.mContext.enforceCallingOrSelfPermission(
+                "com.samsung.android.permission.SEM_BATTERY_INFO", "Permission Require");
     }
 
-    public final void sendBroadcast(String str, SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo) {
+    public final void sendBroadcast(
+            String str, SemCompanionDeviceBatteryInfo semCompanionDeviceBatteryInfo) {
         Iterator it = ((ArrayList) this.mRegisteredPackage).iterator();
         while (it.hasNext()) {
             String str2 = (String) it.next();
             try {
                 Intent intent = new Intent(str);
                 intent.setPackage(str2);
-                intent.putExtra("com.samsung.battery.EXTRA_BATTERY_INFO", (Parcelable) semCompanionDeviceBatteryInfo);
+                intent.putExtra(
+                        "com.samsung.battery.EXTRA_BATTERY_INFO",
+                        (Parcelable) semCompanionDeviceBatteryInfo);
                 intent.addFlags(16777216);
                 intent.addFlags(268435456);
-                this.mContext.sendBroadcastAsUserMultiplePermissions(intent, UserHandle.CURRENT, this.mRequirePermissions);
-                Slog.i("DeviceBatteryInfoService", "sendBroadcast : action : " + str + " / package : " + str2);
+                this.mContext.sendBroadcastAsUserMultiplePermissions(
+                        intent, UserHandle.CURRENT, this.mRequirePermissions);
+                Slog.i(
+                        "DeviceBatteryInfoService",
+                        "sendBroadcast : action : " + str + " / package : " + str2);
                 printBatteryInfo(semCompanionDeviceBatteryInfo);
             } catch (Exception e) {
-                BootReceiver$$ExternalSyntheticOutline0.m(e, "Exception occurred : ", "DeviceBatteryInfoService");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        e, "Exception occurred : ", "DeviceBatteryInfoService");
             }
         }
     }

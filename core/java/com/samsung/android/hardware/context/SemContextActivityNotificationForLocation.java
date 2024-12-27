@@ -9,19 +9,22 @@ public class SemContextActivityNotificationForLocation extends SemContextEventCo
     public static final int ACCURACY_HIGH = 2;
     public static final int ACCURACY_LOW = 0;
     public static final int ACCURACY_MID = 1;
-    public static final Parcelable.Creator<SemContextActivityNotificationForLocation> CREATOR = new Parcelable.Creator<SemContextActivityNotificationForLocation>() { // from class: com.samsung.android.hardware.context.SemContextActivityNotificationForLocation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityNotificationForLocation createFromParcel(Parcel in) {
-            return new SemContextActivityNotificationForLocation(in);
-        }
+    public static final Parcelable.Creator<SemContextActivityNotificationForLocation> CREATOR =
+            new Parcelable.Creator<
+                    SemContextActivityNotificationForLocation>() { // from class:
+                                                                   // com.samsung.android.hardware.context.SemContextActivityNotificationForLocation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityNotificationForLocation createFromParcel(Parcel in) {
+                    return new SemContextActivityNotificationForLocation(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityNotificationForLocation[] newArray(int size) {
-            return new SemContextActivityNotificationForLocation[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityNotificationForLocation[] newArray(int size) {
+                    return new SemContextActivityNotificationForLocation[size];
+                }
+            };
     public static final int STATUS_CYCLE = 5;
     public static final int STATUS_MOVEMENT = 30;
     public static final int STATUS_RUN = 3;

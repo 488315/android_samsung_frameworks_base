@@ -16,12 +16,14 @@ public interface ISurfaceSyncGroup extends IInterface {
 
     public static class Default implements ISurfaceSyncGroup {
         @Override // android.window.ISurfaceSyncGroup
-        public boolean onAddedToSyncGroup(IBinder parentSyncGroupToken, boolean parentSyncGroupMerge) throws RemoteException {
+        public boolean onAddedToSyncGroup(
+                IBinder parentSyncGroupToken, boolean parentSyncGroupMerge) throws RemoteException {
             return false;
         }
 
         @Override // android.window.ISurfaceSyncGroup
-        public boolean addToSync(ISurfaceSyncGroup surfaceSyncGroup, boolean parentSyncGroupMerge) throws RemoteException {
+        public boolean addToSync(ISurfaceSyncGroup surfaceSyncGroup, boolean parentSyncGroupMerge)
+                throws RemoteException {
             return false;
         }
 
@@ -31,7 +33,7 @@ public interface ISurfaceSyncGroup extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISurfaceSyncGroup {
+    public abstract static class Stub extends Binder implements ISurfaceSyncGroup {
         static final int TRANSACTION_addToSync = 2;
         static final int TRANSACTION_onAddedToSyncGroup = 1;
 
@@ -72,7 +74,8 @@ public interface ISurfaceSyncGroup extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISurfaceSyncGroup.DESCRIPTOR);
             }
@@ -119,7 +122,9 @@ public interface ISurfaceSyncGroup extends IInterface {
             }
 
             @Override // android.window.ISurfaceSyncGroup
-            public boolean onAddedToSyncGroup(IBinder parentSyncGroupToken, boolean parentSyncGroupMerge) throws RemoteException {
+            public boolean onAddedToSyncGroup(
+                    IBinder parentSyncGroupToken, boolean parentSyncGroupMerge)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -137,7 +142,9 @@ public interface ISurfaceSyncGroup extends IInterface {
             }
 
             @Override // android.window.ISurfaceSyncGroup
-            public boolean addToSync(ISurfaceSyncGroup surfaceSyncGroup, boolean parentSyncGroupMerge) throws RemoteException {
+            public boolean addToSync(
+                    ISurfaceSyncGroup surfaceSyncGroup, boolean parentSyncGroupMerge)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

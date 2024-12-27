@@ -4,6 +4,7 @@ import android.filterfw.core.Filter;
 import android.filterfw.core.FilterFactory;
 import android.filterfw.core.FilterFunction;
 import android.filterfw.core.Frame;
+
 import com.samsung.epic.Request;
 
 /* loaded from: classes2.dex */
@@ -13,7 +14,13 @@ public class SingleFilterEffect extends FilterEffect {
     protected String mOutputName;
     private Request mScenario;
 
-    public SingleFilterEffect(EffectContext context, String name, Class filterClass, String inputName, String outputName, Object... finalParameters) {
+    public SingleFilterEffect(
+            EffectContext context,
+            String name,
+            Class filterClass,
+            String inputName,
+            String outputName,
+            Object... finalParameters) {
         super(context, name);
         this.mInputName = inputName;
         this.mOutputName = outputName;

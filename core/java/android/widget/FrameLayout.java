@@ -15,8 +15,9 @@ import android.view.ViewHierarchyEncoder;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
+
 import java.util.ArrayList;
 
 @RemoteViews.RemoteView
@@ -36,6 +37,7 @@ public class FrameLayout extends ViewGroup {
 
     @ViewDebug.ExportedProperty(category = "padding")
     private int mForegroundPaddingTop;
+
     private final ArrayList<View> mMatchParentChildren;
 
     @ViewDebug.ExportedProperty(category = "measurement")
@@ -45,7 +47,8 @@ public class FrameLayout extends ViewGroup {
         public static final int UNSPECIFIED_GRAVITY = -1;
         public int gravity;
 
-        public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<LayoutParams> {
+        public final class InspectionCompanion
+                implements android.view.inspector.InspectionCompanion<LayoutParams> {
             private int mLayout_gravityId;
             private boolean mPropertiesMapped = false;
 
@@ -100,7 +103,8 @@ public class FrameLayout extends ViewGroup {
         }
     }
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<FrameLayout> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<FrameLayout> {
         private int mMeasureAllChildrenId;
         private boolean mPropertiesMapped = false;
 
@@ -145,8 +149,11 @@ public class FrameLayout extends ViewGroup {
         this.mForegroundPaddingRight = 0;
         this.mForegroundPaddingBottom = 0;
         this.mMatchParentChildren = new ArrayList<>(1);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.FrameLayout, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.FrameLayout, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.FrameLayout, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.FrameLayout, attrs, a, defStyleAttr, defStyleRes);
         if (a.getBoolean(0, false)) {
             setMeasureAllChildren(true);
         }
@@ -184,19 +191,27 @@ public class FrameLayout extends ViewGroup {
     }
 
     int getPaddingLeftWithForeground() {
-        return isForegroundInsidePadding() ? Math.max(this.mPaddingLeft, this.mForegroundPaddingLeft) : this.mPaddingLeft + this.mForegroundPaddingLeft;
+        return isForegroundInsidePadding()
+                ? Math.max(this.mPaddingLeft, this.mForegroundPaddingLeft)
+                : this.mPaddingLeft + this.mForegroundPaddingLeft;
     }
 
     int getPaddingRightWithForeground() {
-        return isForegroundInsidePadding() ? Math.max(this.mPaddingRight, this.mForegroundPaddingRight) : this.mPaddingRight + this.mForegroundPaddingRight;
+        return isForegroundInsidePadding()
+                ? Math.max(this.mPaddingRight, this.mForegroundPaddingRight)
+                : this.mPaddingRight + this.mForegroundPaddingRight;
     }
 
     private int getPaddingTopWithForeground() {
-        return isForegroundInsidePadding() ? Math.max(this.mPaddingTop, this.mForegroundPaddingTop) : this.mPaddingTop + this.mForegroundPaddingTop;
+        return isForegroundInsidePadding()
+                ? Math.max(this.mPaddingTop, this.mForegroundPaddingTop)
+                : this.mPaddingTop + this.mForegroundPaddingTop;
     }
 
     private int getPaddingBottomWithForeground() {
-        return isForegroundInsidePadding() ? Math.max(this.mPaddingBottom, this.mForegroundPaddingBottom) : this.mPaddingBottom + this.mForegroundPaddingBottom;
+        return isForegroundInsidePadding()
+                ? Math.max(this.mPaddingBottom, this.mForegroundPaddingBottom)
+                : this.mPaddingBottom + this.mForegroundPaddingBottom;
     }
 
     @Override // android.view.View
@@ -205,7 +220,11 @@ public class FrameLayout extends ViewGroup {
         int height;
         int i;
         int count = getChildCount();
-        boolean measureMatchParentChildren = (View.MeasureSpec.getMode(widthMeasureSpec) == 1073741824 && View.MeasureSpec.getMode(heightMeasureSpec) == 1073741824) ? false : true;
+        boolean measureMatchParentChildren =
+                (View.MeasureSpec.getMode(widthMeasureSpec) == 1073741824
+                                && View.MeasureSpec.getMode(heightMeasureSpec) == 1073741824)
+                        ? false
+                        : true;
         this.mMatchParentChildren.clear();
         int maxHeight = 0;
         int maxWidth = 0;
@@ -217,8 +236,14 @@ public class FrameLayout extends ViewGroup {
                 i = i2;
                 measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0);
                 LayoutParams lp = (LayoutParams) child.getLayoutParams();
-                int maxWidth2 = Math.max(maxWidth, child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin);
-                int maxHeight2 = Math.max(maxHeight, child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin);
+                int maxWidth2 =
+                        Math.max(
+                                maxWidth,
+                                child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin);
+                int maxHeight2 =
+                        Math.max(
+                                maxHeight,
+                                child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin);
                 int childState2 = combineMeasuredStates(childState, child.getMeasuredState());
                 if (measureMatchParentChildren && (lp.width == -1 || lp.height == -1)) {
                     this.mMatchParentChildren.add(child);
@@ -234,31 +259,65 @@ public class FrameLayout extends ViewGroup {
         int i3 = -1;
         int childState3 = childState;
         int maxWidth3 = maxWidth + getPaddingLeftWithForeground() + getPaddingRightWithForeground();
-        int maxHeight3 = Math.max(maxHeight + getPaddingTopWithForeground() + getPaddingBottomWithForeground(), getSuggestedMinimumHeight());
+        int maxHeight3 =
+                Math.max(
+                        maxHeight
+                                + getPaddingTopWithForeground()
+                                + getPaddingBottomWithForeground(),
+                        getSuggestedMinimumHeight());
         int maxWidth4 = Math.max(maxWidth3, getSuggestedMinimumWidth());
         Drawable drawable = getForeground();
         if (drawable != null) {
             maxHeight3 = Math.max(maxHeight3, drawable.getMinimumHeight());
             maxWidth4 = Math.max(maxWidth4, drawable.getMinimumWidth());
         }
-        setMeasuredDimension(resolveSizeAndState(maxWidth4, widthMeasureSpec, childState3), resolveSizeAndState(maxHeight3, heightMeasureSpec, childState3 << 16));
+        setMeasuredDimension(
+                resolveSizeAndState(maxWidth4, widthMeasureSpec, childState3),
+                resolveSizeAndState(maxHeight3, heightMeasureSpec, childState3 << 16));
         int count2 = this.mMatchParentChildren.size();
         if (count2 > 1) {
             int i4 = 0;
             while (i4 < count2) {
                 View child2 = this.mMatchParentChildren.get(i4);
-                ViewGroup.MarginLayoutParams lp2 = (ViewGroup.MarginLayoutParams) child2.getLayoutParams();
+                ViewGroup.MarginLayoutParams lp2 =
+                        (ViewGroup.MarginLayoutParams) child2.getLayoutParams();
                 if (lp2.width == i3) {
-                    int width2 = Math.max(0, (((getMeasuredWidth() - getPaddingLeftWithForeground()) - getPaddingRightWithForeground()) - lp2.leftMargin) - lp2.rightMargin);
+                    int width2 =
+                            Math.max(
+                                    0,
+                                    (((getMeasuredWidth() - getPaddingLeftWithForeground())
+                                                            - getPaddingRightWithForeground())
+                                                    - lp2.leftMargin)
+                                            - lp2.rightMargin);
                     width = View.MeasureSpec.makeMeasureSpec(width2, 1073741824);
                 } else {
-                    width = getChildMeasureSpec(widthMeasureSpec, getPaddingLeftWithForeground() + getPaddingRightWithForeground() + lp2.leftMargin + lp2.rightMargin, lp2.width);
+                    width =
+                            getChildMeasureSpec(
+                                    widthMeasureSpec,
+                                    getPaddingLeftWithForeground()
+                                            + getPaddingRightWithForeground()
+                                            + lp2.leftMargin
+                                            + lp2.rightMargin,
+                                    lp2.width);
                 }
                 if (lp2.height == i3) {
-                    int height2 = Math.max(0, (((getMeasuredHeight() - getPaddingTopWithForeground()) - getPaddingBottomWithForeground()) - lp2.topMargin) - lp2.bottomMargin);
+                    int height2 =
+                            Math.max(
+                                    0,
+                                    (((getMeasuredHeight() - getPaddingTopWithForeground())
+                                                            - getPaddingBottomWithForeground())
+                                                    - lp2.topMargin)
+                                            - lp2.bottomMargin);
                     height = View.MeasureSpec.makeMeasureSpec(height2, 1073741824);
                 } else {
-                    height = getChildMeasureSpec(heightMeasureSpec, getPaddingTopWithForeground() + getPaddingBottomWithForeground() + lp2.topMargin + lp2.bottomMargin, lp2.height);
+                    height =
+                            getChildMeasureSpec(
+                                    heightMeasureSpec,
+                                    getPaddingTopWithForeground()
+                                            + getPaddingBottomWithForeground()
+                                            + lp2.topMargin
+                                            + lp2.bottomMargin,
+                                    lp2.height);
                 }
                 child2.measure(width, height);
                 i4++;
@@ -305,7 +364,9 @@ public class FrameLayout extends ViewGroup {
                     case 1:
                         count = count2;
                         int count3 = parentRight2 - parentLeft2;
-                        childLeft = ((((count3 - width) / 2) + parentLeft2) + lp.leftMargin) - lp.rightMargin;
+                        childLeft =
+                                ((((count3 - width) / 2) + parentLeft2) + lp.leftMargin)
+                                        - lp.rightMargin;
                         break;
                     case 5:
                         if (forceLeftGravity) {
@@ -326,7 +387,10 @@ public class FrameLayout extends ViewGroup {
                 switch (verticalGravity) {
                     case 16:
                         parentLeft = parentLeft2;
-                        childTop = (((((parentBottom - parentTop) - height) / 2) + parentTop) + lp.topMargin) - lp.bottomMargin;
+                        childTop =
+                                (((((parentBottom - parentTop) - height) / 2) + parentTop)
+                                                + lp.topMargin)
+                                        - lp.bottomMargin;
                         break;
                     case 48:
                         parentLeft = parentLeft2;

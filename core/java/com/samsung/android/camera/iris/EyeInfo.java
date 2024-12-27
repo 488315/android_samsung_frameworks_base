@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public final class EyeInfo implements Parcelable {
-    public static final Parcelable.Creator<EyeInfo> CREATOR = new Parcelable.Creator<EyeInfo>() { // from class: com.samsung.android.camera.iris.EyeInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EyeInfo createFromParcel(Parcel in) {
-            return new EyeInfo(in);
-        }
+    public static final Parcelable.Creator<EyeInfo> CREATOR =
+            new Parcelable.Creator<
+                    EyeInfo>() { // from class: com.samsung.android.camera.iris.EyeInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EyeInfo createFromParcel(Parcel in) {
+                    return new EyeInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EyeInfo[] newArray(int size) {
-            return new EyeInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EyeInfo[] newArray(int size) {
+                    return new EyeInfo[size];
+                }
+            };
     public static final int DISTANCE_CLOSE = 1;
     public static final int DISTANCE_FAR = 4;
     public static final int DISTANCE_GOOD = 0;
@@ -77,7 +79,11 @@ public final class EyeInfo implements Parcelable {
         public int mMsgId = -1;
     }
 
-    public EyeInfo(PupilInfo[] pupilInfo, ReflectionInfo[] reflectionInfo, int acquireInfo, int reflectionNum) {
+    public EyeInfo(
+            PupilInfo[] pupilInfo,
+            ReflectionInfo[] reflectionInfo,
+            int acquireInfo,
+            int reflectionNum) {
         this.mPupilInfo = null;
         this.mReflectionInfo = null;
         this.mAcquireInfo = -1;

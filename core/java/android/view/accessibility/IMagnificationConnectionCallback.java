@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface IMagnificationConnectionCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.view.accessibility.IMagnificationConnectionCallback";
+    public static final String DESCRIPTOR =
+            "android.view.accessibility.IMagnificationConnectionCallback";
 
     void onAccessibilityActionPerformed(int i) throws RemoteException;
 
@@ -25,28 +26,26 @@ public interface IMagnificationConnectionCallback extends IInterface {
 
     public static class Default implements IMagnificationConnectionCallback {
         @Override // android.view.accessibility.IMagnificationConnectionCallback
-        public void onWindowMagnifierBoundsChanged(int displayId, Rect bounds) throws RemoteException {
-        }
+        public void onWindowMagnifierBoundsChanged(int displayId, Rect bounds)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IMagnificationConnectionCallback
-        public void onChangeMagnificationMode(int displayId, int magnificationMode) throws RemoteException {
-        }
+        public void onChangeMagnificationMode(int displayId, int magnificationMode)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IMagnificationConnectionCallback
-        public void onSourceBoundsChanged(int displayId, Rect sourceBounds) throws RemoteException {
-        }
+        public void onSourceBoundsChanged(int displayId, Rect sourceBounds)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IMagnificationConnectionCallback
-        public void onPerformScaleAction(int displayId, float scale, boolean updatePersistence) throws RemoteException {
-        }
+        public void onPerformScaleAction(int displayId, float scale, boolean updatePersistence)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IMagnificationConnectionCallback
-        public void onAccessibilityActionPerformed(int displayId) throws RemoteException {
-        }
+        public void onAccessibilityActionPerformed(int displayId) throws RemoteException {}
 
         @Override // android.view.accessibility.IMagnificationConnectionCallback
-        public void onMove(int displayId) throws RemoteException {
-        }
+        public void onMove(int displayId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -54,7 +53,7 @@ public interface IMagnificationConnectionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMagnificationConnectionCallback {
+    public abstract static class Stub extends Binder implements IMagnificationConnectionCallback {
         static final int TRANSACTION_onAccessibilityActionPerformed = 5;
         static final int TRANSACTION_onChangeMagnificationMode = 2;
         static final int TRANSACTION_onMove = 6;
@@ -107,7 +106,8 @@ public interface IMagnificationConnectionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMagnificationConnectionCallback.DESCRIPTOR);
             }
@@ -173,7 +173,8 @@ public interface IMagnificationConnectionCallback extends IInterface {
             }
 
             @Override // android.view.accessibility.IMagnificationConnectionCallback
-            public void onWindowMagnifierBoundsChanged(int displayId, Rect bounds) throws RemoteException {
+            public void onWindowMagnifierBoundsChanged(int displayId, Rect bounds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMagnificationConnectionCallback.DESCRIPTOR);
@@ -186,7 +187,8 @@ public interface IMagnificationConnectionCallback extends IInterface {
             }
 
             @Override // android.view.accessibility.IMagnificationConnectionCallback
-            public void onChangeMagnificationMode(int displayId, int magnificationMode) throws RemoteException {
+            public void onChangeMagnificationMode(int displayId, int magnificationMode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMagnificationConnectionCallback.DESCRIPTOR);
@@ -199,7 +201,8 @@ public interface IMagnificationConnectionCallback extends IInterface {
             }
 
             @Override // android.view.accessibility.IMagnificationConnectionCallback
-            public void onSourceBoundsChanged(int displayId, Rect sourceBounds) throws RemoteException {
+            public void onSourceBoundsChanged(int displayId, Rect sourceBounds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMagnificationConnectionCallback.DESCRIPTOR);
@@ -212,7 +215,8 @@ public interface IMagnificationConnectionCallback extends IInterface {
             }
 
             @Override // android.view.accessibility.IMagnificationConnectionCallback
-            public void onPerformScaleAction(int displayId, float scale, boolean updatePersistence) throws RemoteException {
+            public void onPerformScaleAction(int displayId, float scale, boolean updatePersistence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMagnificationConnectionCallback.DESCRIPTOR);

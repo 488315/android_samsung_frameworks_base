@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.jce.provider;
 
 import com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationChecker;
 import com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationCheckerParameters;
+
 import java.security.cert.CertPathValidatorException;
 import java.security.cert.Certificate;
 import java.security.cert.PKIXCertPathChecker;
@@ -15,11 +16,11 @@ class WrappedRevocationChecker implements PKIXCertRevocationChecker {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationChecker
-    public void setParameter(String name, Object value) {
-    }
+    public void setParameter(String name, Object value) {}
 
     @Override // com.android.internal.org.bouncycastle.jcajce.PKIXCertRevocationChecker
-    public void initialize(PKIXCertRevocationCheckerParameters params) throws CertPathValidatorException {
+    public void initialize(PKIXCertRevocationCheckerParameters params)
+            throws CertPathValidatorException {
         this.checker.init(false);
     }
 

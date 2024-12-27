@@ -45,8 +45,7 @@ public final class MemInfoDumpProto {
         public static final long TOTAL_HEAP = 1146756268039L;
         public static final long UNKNOWN_HEAP = 1146756268038L;
 
-        public ProcessMemory() {
-        }
+        public ProcessMemory() {}
 
         public final class MemoryInfo {
             public static final long CLEAN_PSS_KB = 1120986464259L;
@@ -60,8 +59,7 @@ public final class MemInfoDumpProto {
             public static final long TOTAL_PSS_KB = 1120986464258L;
             public static final long TOTAL_RSS_KB = 1120986464266L;
 
-            public MemoryInfo() {
-            }
+            public MemoryInfo() {}
         }
 
         public final class HeapInfo {
@@ -70,8 +68,7 @@ public final class MemInfoDumpProto {
             public static final long HEAP_SIZE_KB = 1120986464258L;
             public static final long MEM_INFO = 1146756268033L;
 
-            public HeapInfo() {
-            }
+            public HeapInfo() {}
         }
 
         public final class AppSummary {
@@ -91,8 +88,7 @@ public final class MemInfoDumpProto {
             public static final long TOTAL_SWAP_PSS = 1120986464264L;
             public static final long UNKNOWN_RSS_KB = 1120986464271L;
 
-            public AppSummary() {
-            }
+            public AppSummary() {}
         }
     }
 
@@ -103,8 +99,7 @@ public final class MemInfoDumpProto {
         public static final long SQL = 1146756268035L;
         public static final long UNREACHABLE_MEMORY = 1138166333445L;
 
-        public AppData() {
-        }
+        public AppData() {}
 
         public final class ObjectStats {
             public static final long ACTIVITY_INSTANCE_COUNT = 1120986464260L;
@@ -121,8 +116,7 @@ public final class MemInfoDumpProto {
             public static final long VIEW_ROOT_INSTANCE_COUNT = 1120986464258L;
             public static final long WEBVIEW_INSTANCE_COUNT = 1120986464269L;
 
-            public ObjectStats() {
-            }
+            public ObjectStats() {}
         }
 
         public final class SqlStats {
@@ -131,8 +125,7 @@ public final class MemInfoDumpProto {
             public static final long MEMORY_USED_KB = 1120986464257L;
             public static final long PAGECACHE_OVERFLOW_KB = 1120986464258L;
 
-            public SqlStats() {
-            }
+            public SqlStats() {}
 
             public final class Database {
                 public static final long CACHE = 1138166333445L;
@@ -144,8 +137,7 @@ public final class MemInfoDumpProto {
                 public static final long NAME = 1138166333441L;
                 public static final long PAGE_SIZE = 1120986464258L;
 
-                public Database() {
-                }
+                public Database() {}
             }
         }
     }
@@ -161,7 +153,6 @@ public final class MemInfoDumpProto {
         public static final long SWAP_PSS_KB = 1112396529671L;
         public static final long TAG = 1138166333441L;
 
-        public MemItem() {
-        }
+        public MemItem() {}
     }
 }

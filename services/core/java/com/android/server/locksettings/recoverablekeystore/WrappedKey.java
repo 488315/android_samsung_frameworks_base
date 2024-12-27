@@ -3,6 +3,7 @@ package com.android.server.locksettings.recoverablekeystore;
 import java.security.InvalidKeyException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -25,24 +26,34 @@ public final class WrappedKey {
         this.mRecoveryStatus = i2;
     }
 
-    public static WrappedKey fromSecretKey(PlatformEncryptionKey platformEncryptionKey, SecretKey secretKey, byte[] bArr) {
+    public static WrappedKey fromSecretKey(
+            PlatformEncryptionKey platformEncryptionKey, SecretKey secretKey, byte[] bArr) {
         if (secretKey.getEncoded() == null) {
-            throw new InvalidKeyException("key does not expose encoded material. It cannot be wrapped.");
+            throw new InvalidKeyException(
+                    "key does not expose encoded material. It cannot be wrapped.");
         }
         try {
             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
             cipher.init(3, platformEncryptionKey.mKey);
             try {
-                return new WrappedKey(cipher.getIV(), cipher.wrap(secretKey), bArr, platformEncryptionKey.mGenerationId, 1);
+                return new WrappedKey(
+                        cipher.getIV(),
+                        cipher.wrap(secretKey),
+                        bArr,
+                        platformEncryptionKey.mGenerationId,
+                        1);
             } catch (IllegalBlockSizeException e) {
                 Throwable cause = e.getCause();
                 if (cause instanceof KeyStoreException) {
                     throw ((KeyStoreException) cause);
                 }
-                throw new RuntimeException("IllegalBlockSizeException should not be thrown by AES/GCM/NoPadding mode.", e);
+                throw new RuntimeException(
+                        "IllegalBlockSizeException should not be thrown by AES/GCM/NoPadding mode.",
+                        e);
             }
         } catch (NoSuchAlgorithmException | NoSuchPaddingException unused) {
-            throw new RuntimeException("Android does not support AES/GCM/NoPadding. This should never happen.");
+            throw new RuntimeException(
+                    "Android does not support AES/GCM/NoPadding. This should never happen.");
         }
     }
 }

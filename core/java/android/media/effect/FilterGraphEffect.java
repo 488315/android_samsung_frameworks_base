@@ -17,7 +17,13 @@ public class FilterGraphEffect extends FilterEffect {
     protected GraphRunner mRunner;
     protected Class mSchedulerClass;
 
-    public FilterGraphEffect(EffectContext context, String name, String graphString, String inputName, String outputName, Class scheduler) {
+    public FilterGraphEffect(
+            EffectContext context,
+            String name,
+            String graphString,
+            String inputName,
+            String outputName,
+            Class scheduler) {
         super(context, name);
         this.mInputName = inputName;
         this.mOutputName = outputName;
@@ -63,8 +69,7 @@ public class FilterGraphEffect extends FilterEffect {
     }
 
     @Override // android.media.effect.Effect
-    public void setParameter(String parameterKey, Object value) {
-    }
+    public void setParameter(String parameterKey, Object value) {}
 
     @Override // android.media.effect.Effect
     public void release() {

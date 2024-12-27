@@ -5,7 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.core.IFoldStarCallback;
+
 import java.util.Map;
 
 /* loaded from: classes6.dex */
@@ -43,46 +43,47 @@ public interface IFoldStarManager extends IInterface {
 
     public static class Default implements IFoldStarManager {
         @Override // com.samsung.android.core.IFoldStarManager
-        public void registerFoldStarCallback(IFoldStarCallback callback) throws RemoteException {
-        }
+        public void registerFoldStarCallback(IFoldStarCallback callback) throws RemoteException {}
 
         @Override // com.samsung.android.core.IFoldStarManager
-        public void unregisterFoldStarCallback(IFoldStarCallback callback) throws RemoteException {
-        }
+        public void unregisterFoldStarCallback(IFoldStarCallback callback) throws RemoteException {}
 
         @Override // com.samsung.android.core.IFoldStarManager
-        public void setDisplayCompatPackages(int userId, Map requestedPackages, boolean replaceAll) throws RemoteException {
-        }
+        public void setDisplayCompatPackages(int userId, Map requestedPackages, boolean replaceAll)
+                throws RemoteException {}
 
         @Override // com.samsung.android.core.IFoldStarManager
-        public Map getDisplayCompatPackages(int userId, int option, Map requestedPackages) throws RemoteException {
+        public Map getDisplayCompatPackages(int userId, int option, Map requestedPackages)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.core.IFoldStarManager
-        public void setFixedAspectRatioPackages(int userId, Map requestedPackages, boolean replaceAll) throws RemoteException {
-        }
+        public void setFixedAspectRatioPackages(
+                int userId, Map requestedPackages, boolean replaceAll) throws RemoteException {}
 
         @Override // com.samsung.android.core.IFoldStarManager
-        public Map getFixedAspectRatioPackages(int userId, int option, Map requestedPackages) throws RemoteException {
+        public Map getFixedAspectRatioPackages(int userId, int option, Map requestedPackages)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.core.IFoldStarManager
-        public void setAllAppContinuityMode(int userId, boolean allAppContinuityModeOn) throws RemoteException {
-        }
+        public void setAllAppContinuityMode(int userId, boolean allAppContinuityModeOn)
+                throws RemoteException {}
 
         @Override // com.samsung.android.core.IFoldStarManager
-        public void setFrontScreenOnWhenAppContinuityMode(boolean frontScreenOn) throws RemoteException {
-        }
+        public void setFrontScreenOnWhenAppContinuityMode(boolean frontScreenOn)
+                throws RemoteException {}
 
         @Override // com.samsung.android.core.IFoldStarManager
-        public void initAppContinuityValueWhenReset(boolean allAppContinuityModeOn, boolean frontScreenOn) throws RemoteException {
-        }
+        public void initAppContinuityValueWhenReset(
+                boolean allAppContinuityModeOn, boolean frontScreenOn) throws RemoteException {}
 
         @Override // com.samsung.android.core.IFoldStarManager
-        public void setAppContinuityMode(String packageName, int userId, boolean applyAppContinuityMode) throws RemoteException {
-        }
+        public void setAppContinuityMode(
+                String packageName, int userId, boolean applyAppContinuityMode)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -90,7 +91,7 @@ public interface IFoldStarManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFoldStarManager {
+    public abstract static class Stub extends Binder implements IFoldStarManager {
         static final int TRANSACTION_getDisplayCompatPackages = 102;
         static final int TRANSACTION_getFixedAspectRatioPackages = 202;
         static final int TRANSACTION_initAppContinuityValueWhenReset = 303;
@@ -155,7 +156,8 @@ public interface IFoldStarManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFoldStarManager.DESCRIPTOR);
             }
@@ -165,13 +167,15 @@ public interface IFoldStarManager extends IInterface {
             }
             switch (code) {
                 case 8:
-                    IFoldStarCallback _arg0 = IFoldStarCallback.Stub.asInterface(data.readStrongBinder());
+                    IFoldStarCallback _arg0 =
+                            IFoldStarCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerFoldStarCallback(_arg0);
                     reply.writeNoException();
                     return true;
                 case 9:
-                    IFoldStarCallback _arg02 = IFoldStarCallback.Stub.asInterface(data.readStrongBinder());
+                    IFoldStarCallback _arg02 =
+                            IFoldStarCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterFoldStarCallback(_arg02);
                     reply.writeNoException();
@@ -264,7 +268,8 @@ public interface IFoldStarManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
-            public void registerFoldStarCallback(IFoldStarCallback callback) throws RemoteException {
+            public void registerFoldStarCallback(IFoldStarCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -279,7 +284,8 @@ public interface IFoldStarManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
-            public void unregisterFoldStarCallback(IFoldStarCallback callback) throws RemoteException {
+            public void unregisterFoldStarCallback(IFoldStarCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -294,7 +300,8 @@ public interface IFoldStarManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
-            public void setDisplayCompatPackages(int userId, Map requestedPackages, boolean replaceAll) throws RemoteException {
+            public void setDisplayCompatPackages(
+                    int userId, Map requestedPackages, boolean replaceAll) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -311,7 +318,8 @@ public interface IFoldStarManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
-            public Map getDisplayCompatPackages(int userId, int option, Map requestedPackages) throws RemoteException {
+            public Map getDisplayCompatPackages(int userId, int option, Map requestedPackages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -331,7 +339,8 @@ public interface IFoldStarManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
-            public void setFixedAspectRatioPackages(int userId, Map requestedPackages, boolean replaceAll) throws RemoteException {
+            public void setFixedAspectRatioPackages(
+                    int userId, Map requestedPackages, boolean replaceAll) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -348,7 +357,8 @@ public interface IFoldStarManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
-            public Map getFixedAspectRatioPackages(int userId, int option, Map requestedPackages) throws RemoteException {
+            public Map getFixedAspectRatioPackages(int userId, int option, Map requestedPackages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -368,7 +378,8 @@ public interface IFoldStarManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
-            public void setAllAppContinuityMode(int userId, boolean allAppContinuityModeOn) throws RemoteException {
+            public void setAllAppContinuityMode(int userId, boolean allAppContinuityModeOn)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -384,7 +395,8 @@ public interface IFoldStarManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
-            public void setFrontScreenOnWhenAppContinuityMode(boolean frontScreenOn) throws RemoteException {
+            public void setFrontScreenOnWhenAppContinuityMode(boolean frontScreenOn)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -399,7 +411,8 @@ public interface IFoldStarManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
-            public void initAppContinuityValueWhenReset(boolean allAppContinuityModeOn, boolean frontScreenOn) throws RemoteException {
+            public void initAppContinuityValueWhenReset(
+                    boolean allAppContinuityModeOn, boolean frontScreenOn) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -415,7 +428,9 @@ public interface IFoldStarManager extends IInterface {
             }
 
             @Override // com.samsung.android.core.IFoldStarManager
-            public void setAppContinuityMode(String packageName, int userId, boolean applyAppContinuityMode) throws RemoteException {
+            public void setAppContinuityMode(
+                    String packageName, int userId, boolean applyAppContinuityMode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

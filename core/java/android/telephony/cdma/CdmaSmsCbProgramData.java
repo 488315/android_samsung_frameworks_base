@@ -3,6 +3,7 @@ package android.telephony.cdma;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -27,19 +28,22 @@ public final class CdmaSmsCbProgramData implements Parcelable {
     public static final int CATEGORY_CMAS_PRESIDENTIAL_LEVEL_ALERT = 4096;
     public static final int CATEGORY_CMAS_SEVERE_THREAT = 4098;
     public static final int CATEGORY_CMAS_TEST_MESSAGE = 4100;
-    public static final Parcelable.Creator<CdmaSmsCbProgramData> CREATOR = new Parcelable.Creator<CdmaSmsCbProgramData>() { // from class: android.telephony.cdma.CdmaSmsCbProgramData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSmsCbProgramData createFromParcel(Parcel in) {
-            return new CdmaSmsCbProgramData(in);
-        }
+    public static final Parcelable.Creator<CdmaSmsCbProgramData> CREATOR =
+            new Parcelable.Creator<
+                    CdmaSmsCbProgramData>() { // from class:
+                                              // android.telephony.cdma.CdmaSmsCbProgramData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSmsCbProgramData createFromParcel(Parcel in) {
+                    return new CdmaSmsCbProgramData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSmsCbProgramData[] newArray(int size) {
-            return new CdmaSmsCbProgramData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSmsCbProgramData[] newArray(int size) {
+                    return new CdmaSmsCbProgramData[size];
+                }
+            };
     public static final int OPERATION_ADD_CATEGORY = 1;
     public static final int OPERATION_CLEAR_CATEGORIES = 2;
     public static final int OPERATION_DELETE_CATEGORY = 0;
@@ -51,14 +55,18 @@ public final class CdmaSmsCbProgramData implements Parcelable {
     private final int mOperation;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Category {
-    }
+    public @interface Category {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Operation {
-    }
+    public @interface Operation {}
 
-    public CdmaSmsCbProgramData(int operation, int category, int language, int maxMessages, int alertOption, String categoryName) {
+    public CdmaSmsCbProgramData(
+            int operation,
+            int category,
+            int language,
+            int maxMessages,
+            int alertOption,
+            String categoryName) {
         this.mOperation = operation;
         this.mCategory = category;
         this.mLanguage = language;
@@ -111,7 +119,19 @@ public final class CdmaSmsCbProgramData implements Parcelable {
     }
 
     public String toString() {
-        return "CdmaSmsCbProgramData{operation=" + this.mOperation + ", category=" + this.mCategory + ", language=" + this.mLanguage + ", max messages=" + this.mMaxMessages + ", alert option=" + this.mAlertOption + ", category name=" + this.mCategoryName + '}';
+        return "CdmaSmsCbProgramData{operation="
+                + this.mOperation
+                + ", category="
+                + this.mCategory
+                + ", language="
+                + this.mLanguage
+                + ", max messages="
+                + this.mMaxMessages
+                + ", alert option="
+                + this.mAlertOption
+                + ", category name="
+                + this.mCategoryName
+                + '}';
     }
 
     @Override // android.os.Parcelable

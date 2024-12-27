@@ -3,25 +3,28 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CdmaLineControlInfoRecord implements Parcelable {
-    public static final Parcelable.Creator<CdmaLineControlInfoRecord> CREATOR = new Parcelable.Creator<CdmaLineControlInfoRecord>() { // from class: android.hardware.radio.voice.CdmaLineControlInfoRecord.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaLineControlInfoRecord createFromParcel(Parcel _aidl_source) {
-            CdmaLineControlInfoRecord _aidl_out = new CdmaLineControlInfoRecord();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CdmaLineControlInfoRecord> CREATOR =
+            new Parcelable.Creator<CdmaLineControlInfoRecord>() { // from class:
+                // android.hardware.radio.voice.CdmaLineControlInfoRecord.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaLineControlInfoRecord createFromParcel(Parcel _aidl_source) {
+                    CdmaLineControlInfoRecord _aidl_out = new CdmaLineControlInfoRecord();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaLineControlInfoRecord[] newArray(int _aidl_size) {
-            return new CdmaLineControlInfoRecord[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaLineControlInfoRecord[] newArray(int _aidl_size) {
+                    return new CdmaLineControlInfoRecord[_aidl_size];
+                }
+            };
     public byte lineCtrlPolarityIncluded = 0;
     public byte lineCtrlToggle = 0;
     public byte lineCtrlReverse = 0;

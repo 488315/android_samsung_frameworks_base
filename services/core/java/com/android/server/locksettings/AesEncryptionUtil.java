@@ -1,6 +1,7 @@
 package com.android.server.locksettings;
 
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,6 +10,7 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -23,13 +25,16 @@ public abstract class AesEncryptionUtil {
         Objects.requireNonNull(secretKey);
         int readInt = dataInputStream.readInt();
         if (readInt < 0 || readInt > 32) {
-            throw new IOException(VibrationParam$1$$ExternalSyntheticOutline0.m(readInt, "IV out of range: "));
+            throw new IOException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(readInt, "IV out of range: "));
         }
         byte[] bArr = new byte[readInt];
         dataInputStream.readFully(bArr);
         int readInt2 = dataInputStream.readInt();
         if (readInt2 < 0) {
-            throw new IOException(VibrationParam$1$$ExternalSyntheticOutline0.m(readInt2, "Invalid cipher text size: "));
+            throw new IOException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(
+                            readInt2, "Invalid cipher text size: "));
         }
         byte[] bArr2 = new byte[readInt2];
         dataInputStream.readFully(bArr2);
@@ -37,7 +42,12 @@ public abstract class AesEncryptionUtil {
             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
             cipher.init(2, secretKey, new GCMParameterSpec(128, bArr));
             return cipher.doFinal(bArr2);
-        } catch (InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+        } catch (InvalidAlgorithmParameterException
+                | InvalidKeyException
+                | NoSuchAlgorithmException
+                | BadPaddingException
+                | IllegalBlockSizeException
+                | NoSuchPaddingException e) {
             throw new IOException("Could not decrypt cipher text", e);
         }
     }
@@ -57,7 +67,11 @@ public abstract class AesEncryptionUtil {
             dataOutputStream.writeInt(doFinal.length);
             dataOutputStream.write(doFinal);
             return byteArrayOutputStream.toByteArray();
-        } catch (InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+        } catch (InvalidKeyException
+                | NoSuchAlgorithmException
+                | BadPaddingException
+                | IllegalBlockSizeException
+                | NoSuchPaddingException e) {
             throw new IOException("Could not encrypt input data", e);
         }
     }

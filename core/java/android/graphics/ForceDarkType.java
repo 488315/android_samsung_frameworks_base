@@ -10,6 +10,5 @@ public class ForceDarkType {
     public static final int NONE = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ForceDarkTypeDef {
-    }
+    public @interface ForceDarkTypeDef {}
 }

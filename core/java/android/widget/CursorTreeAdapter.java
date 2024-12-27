@@ -8,10 +8,10 @@ import android.os.Handler;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorFilter;
 
 /* loaded from: classes4.dex */
-public abstract class CursorTreeAdapter extends BaseExpandableListAdapter implements Filterable, CursorFilter.CursorFilterClient {
+public abstract class CursorTreeAdapter extends BaseExpandableListAdapter
+        implements Filterable, CursorFilter.CursorFilterClient {
     private boolean mAutoRequery;
     SparseArray<MyCursorHelper> mChildrenCursorHelpers;
     private Context mContext;
@@ -26,9 +26,11 @@ public abstract class CursorTreeAdapter extends BaseExpandableListAdapter implem
 
     protected abstract Cursor getChildrenCursor(Cursor cursor);
 
-    protected abstract View newChildView(Context context, Cursor cursor, boolean z, ViewGroup viewGroup);
+    protected abstract View newChildView(
+            Context context, Cursor cursor, boolean z, ViewGroup viewGroup);
 
-    protected abstract View newGroupView(Context context, Cursor cursor, boolean z, ViewGroup viewGroup);
+    protected abstract View newGroupView(
+            Context context, Cursor cursor, boolean z, ViewGroup viewGroup);
 
     public CursorTreeAdapter(Cursor cursor, Context context) {
         init(cursor, context, true);
@@ -103,7 +105,8 @@ public abstract class CursorTreeAdapter extends BaseExpandableListAdapter implem
     }
 
     @Override // android.widget.ExpandableListAdapter
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+    public View getGroupView(
+            int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         View v;
         Cursor cursor = this.mGroupCursorHelper.moveTo(groupPosition);
         if (cursor == null) {
@@ -119,7 +122,12 @@ public abstract class CursorTreeAdapter extends BaseExpandableListAdapter implem
     }
 
     @Override // android.widget.ExpandableListAdapter
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(
+            int groupPosition,
+            int childPosition,
+            boolean isLastChild,
+            View convertView,
+            ViewGroup parent) {
         View v;
         MyCursorHelper cursorHelper = getChildrenCursorHelper(groupPosition, true);
         Cursor cursor = cursorHelper.moveTo(childPosition);
@@ -310,15 +318,16 @@ public abstract class CursorTreeAdapter extends BaseExpandableListAdapter implem
 
             @Override // android.database.ContentObserver
             public void onChange(boolean selfChange) {
-                if (CursorTreeAdapter.this.mAutoRequery && MyCursorHelper.this.mCursor != null && !MyCursorHelper.this.mCursor.isClosed()) {
+                if (CursorTreeAdapter.this.mAutoRequery
+                        && MyCursorHelper.this.mCursor != null
+                        && !MyCursorHelper.this.mCursor.isClosed()) {
                     MyCursorHelper.this.mDataValid = MyCursorHelper.this.mCursor.requery();
                 }
             }
         }
 
         private class MyDataSetObserver extends DataSetObserver {
-            private MyDataSetObserver() {
-            }
+            private MyDataSetObserver() {}
 
             @Override // android.database.DataSetObserver
             public void onChanged() {

@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class EnhancedAttestationResult implements Parcelable {
-    public static final Parcelable.Creator<EnhancedAttestationResult> CREATOR = new Parcelable.Creator<EnhancedAttestationResult>() { // from class: com.samsung.android.knox.tima.attestation.EnhancedAttestationResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnhancedAttestationResult createFromParcel(Parcel source) {
-            return new EnhancedAttestationResult(source);
-        }
+    public static final Parcelable.Creator<EnhancedAttestationResult> CREATOR =
+            new Parcelable.Creator<
+                    EnhancedAttestationResult>() { // from class:
+                                                   // com.samsung.android.knox.tima.attestation.EnhancedAttestationResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnhancedAttestationResult createFromParcel(Parcel source) {
+                    return new EnhancedAttestationResult(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnhancedAttestationResult[] newArray(int size) {
-            return new EnhancedAttestationResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnhancedAttestationResult[] newArray(int size) {
+                    return new EnhancedAttestationResult[size];
+                }
+            };
     static final String DATA_FIELD_BLOB = "dataFieldBlob";
     static final String DATA_FIELD_SERVER_RESPONSE_ID = "serverResponseId";
     static final String DATA_FIELD_SERVER_RESPONSE_RAW_DATA = "serverResponseRawData";
@@ -47,8 +50,7 @@ public class EnhancedAttestationResult implements Parcelable {
     private int errorCode;
     private String reason;
 
-    public EnhancedAttestationResult() {
-    }
+    public EnhancedAttestationResult() {}
 
     private EnhancedAttestationResult(Parcel in) {
         readFromParcel(in);

@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -30,7 +32,8 @@ public class JsDialogHelper {
     private final int mType;
     private final String mUrl;
 
-    public JsDialogHelper(JsPromptResult result, int type, String defaultValue, String message, String url) {
+    public JsDialogHelper(
+            JsPromptResult result, int type, String defaultValue, String message, String url) {
         this.mResult = result;
         this.mDefaultValue = defaultValue;
         this.mMessage = message;
@@ -53,7 +56,8 @@ public class JsDialogHelper {
             case 2:
                 return client.onJsConfirm(webView, this.mUrl, this.mMessage, this.mResult);
             case 3:
-                return client.onJsPrompt(webView, this.mUrl, this.mMessage, this.mDefaultValue, this.mResult);
+                return client.onJsPrompt(
+                        webView, this.mUrl, this.mMessage, this.mDefaultValue, this.mResult);
             case 4:
                 return client.onJsBeforeUnload(webView, this.mUrl, this.mMessage, this.mResult);
             default:
@@ -102,9 +106,9 @@ public class JsDialogHelper {
         builder.show();
     }
 
-    private class CancelListener implements DialogInterface.OnCancelListener, DialogInterface.OnClickListener {
-        private CancelListener() {
-        }
+    private class CancelListener
+            implements DialogInterface.OnCancelListener, DialogInterface.OnClickListener {
+        private CancelListener() {}
 
         @Override // android.content.DialogInterface.OnCancelListener
         public void onCancel(DialogInterface dialog) {
@@ -142,7 +146,10 @@ public class JsDialogHelper {
         }
         try {
             URL alertUrl = new URL(this.mUrl);
-            String title3 = context.getString(R.string.js_dialog_title, alertUrl.getProtocol() + "://" + alertUrl.getHost());
+            String title3 =
+                    context.getString(
+                            R.string.js_dialog_title,
+                            alertUrl.getProtocol() + "://" + alertUrl.getHost());
             return title3;
         } catch (MalformedURLException e) {
             return title;

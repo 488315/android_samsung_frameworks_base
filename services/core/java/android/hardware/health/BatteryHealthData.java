@@ -42,13 +42,16 @@ public final class BatteryHealthData implements Parcelable {
                                 if (parcel.dataPosition() - dataPosition < readInt) {
                                     batteryHealthData.batteryPartStatus = parcel.readInt();
                                     if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -93,7 +96,9 @@ public final class BatteryHealthData implements Parcelable {
         parcel.writeLong(this.batteryFirstUsageSeconds);
         parcel.writeLong(this.batteryStateOfHealth);
         parcel.writeString(this.batterySerialNumber);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.batteryPartStatus, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.batteryPartStatus, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

@@ -6,7 +6,8 @@ public abstract class DreamManagerInternal {
 
     public abstract boolean isDreaming();
 
-    public abstract void registerDreamManagerStateListener(DreamManagerStateListener dreamManagerStateListener);
+    public abstract void registerDreamManagerStateListener(
+            DreamManagerStateListener dreamManagerStateListener);
 
     public abstract void requestDream();
 
@@ -14,16 +15,14 @@ public abstract class DreamManagerInternal {
 
     public abstract void stopDream(boolean z, String str);
 
-    public abstract void unregisterDreamManagerStateListener(DreamManagerStateListener dreamManagerStateListener);
+    public abstract void unregisterDreamManagerStateListener(
+            DreamManagerStateListener dreamManagerStateListener);
 
     public interface DreamManagerStateListener {
-        default void onKeepDreamingWhenUnpluggingChanged(boolean keepDreaming) {
-        }
+        default void onKeepDreamingWhenUnpluggingChanged(boolean keepDreaming) {}
 
-        default void onDreamingStarted() {
-        }
+        default void onDreamingStarted() {}
 
-        default void onDreamingStopped() {
-        }
+        default void onDreamingStopped() {}
     }
 }

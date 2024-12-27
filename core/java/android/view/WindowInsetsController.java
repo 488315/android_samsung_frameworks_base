@@ -2,6 +2,7 @@ package android.view;
 
 import android.os.CancellationSignal;
 import android.view.animation.Interpolator;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -21,28 +22,30 @@ public interface WindowInsetsController {
     public static final int APPEARANCE_TRANSPARENT_CAPTION_BAR_BACKGROUND = 128;
     public static final int BEHAVIOR_DEFAULT = 1;
 
-    @Deprecated
-    public static final int BEHAVIOR_SHOW_BARS_BY_SWIPE = 1;
+    @Deprecated public static final int BEHAVIOR_SHOW_BARS_BY_SWIPE = 1;
 
-    @Deprecated
-    public static final int BEHAVIOR_SHOW_BARS_BY_TOUCH = 0;
+    @Deprecated public static final int BEHAVIOR_SHOW_BARS_BY_TOUCH = 0;
     public static final int BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE = 2;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Appearance {
-    }
+    public @interface Appearance {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Behavior {
-    }
+    public @interface Behavior {}
 
     public interface OnControllableInsetsChangedListener {
         void onControllableInsetsChanged(WindowInsetsController windowInsetsController, int i);
     }
 
-    void addOnControllableInsetsChangedListener(OnControllableInsetsChangedListener onControllableInsetsChangedListener);
+    void addOnControllableInsetsChangedListener(
+            OnControllableInsetsChangedListener onControllableInsetsChangedListener);
 
-    void controlWindowInsetsAnimation(int i, long j, Interpolator interpolator, CancellationSignal cancellationSignal, WindowInsetsAnimationControlListener windowInsetsAnimationControlListener);
+    void controlWindowInsetsAnimation(
+            int i,
+            long j,
+            Interpolator interpolator,
+            CancellationSignal cancellationSignal,
+            WindowInsetsAnimationControlListener windowInsetsAnimationControlListener);
 
     int getRequestedVisibleTypes();
 
@@ -54,7 +57,8 @@ public interface WindowInsetsController {
 
     void hide(int i);
 
-    void removeOnControllableInsetsChangedListener(OnControllableInsetsChangedListener onControllableInsetsChangedListener);
+    void removeOnControllableInsetsChangedListener(
+            OnControllableInsetsChangedListener onControllableInsetsChangedListener);
 
     void setAnimationsDisabled(boolean z);
 
@@ -64,10 +68,10 @@ public interface WindowInsetsController {
 
     void setSystemBarsBehavior(int i);
 
-    void setSystemDrivenInsetsAnimationLoggingListener(WindowInsetsAnimationControlListener windowInsetsAnimationControlListener);
+    void setSystemDrivenInsetsAnimationLoggingListener(
+            WindowInsetsAnimationControlListener windowInsetsAnimationControlListener);
 
     void show(int i);
 
-    default void setImeCaptionBarInsetsHeight(int height) {
-    }
+    default void setImeCaptionBarInsetsHeight(int height) {}
 }

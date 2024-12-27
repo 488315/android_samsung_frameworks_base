@@ -7,6 +7,7 @@ import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.AppSchedulingModuleThread;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0;
@@ -29,7 +30,8 @@ public final class BatteryController extends RestrictingController {
         DEBUG = JobSchedulerService.DEBUG || Log.isLoggable("JobScheduler.Battery", 3);
     }
 
-    public BatteryController(JobSchedulerService jobSchedulerService, FlexibilityController flexibilityController) {
+    public BatteryController(
+            JobSchedulerService jobSchedulerService, FlexibilityController flexibilityController) {
         super(jobSchedulerService);
         this.mTrackedTasks = new ArraySet();
         this.mTopStartedJobs = new ArraySet();
@@ -40,10 +42,19 @@ public final class BatteryController extends RestrictingController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(IndentingPrintWriter indentingPrintWriter, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            IndentingPrintWriter indentingPrintWriter,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         StringBuilder sb = new StringBuilder("Stable power: ");
         JobSchedulerService jobSchedulerService = this.mService;
-        StringBuilder m = DesktopModeService$$ExternalSyntheticOutline0.m(sb, jobSchedulerService.isBatteryCharging() && jobSchedulerService.isBatteryNotLow(), indentingPrintWriter, "Not low: ");
+        StringBuilder m =
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        sb,
+                        jobSchedulerService.isBatteryCharging()
+                                && jobSchedulerService.isBatteryNotLow(),
+                        indentingPrintWriter,
+                        "Not low: ");
         m.append(jobSchedulerService.isBatteryNotLow());
         indentingPrintWriter.println(m.toString());
         for (int i = 0; i < this.mTrackedTasks.size(); i++) {
@@ -59,11 +70,16 @@ public final class BatteryController extends RestrictingController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(ProtoOutputStream protoOutputStream, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            ProtoOutputStream protoOutputStream,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         long start = protoOutputStream.start(2246267895812L);
         long start2 = protoOutputStream.start(1146756268034L);
         JobSchedulerService jobSchedulerService = this.mService;
-        protoOutputStream.write(1133871366145L, jobSchedulerService.isBatteryCharging() && jobSchedulerService.isBatteryNotLow());
+        protoOutputStream.write(
+                1133871366145L,
+                jobSchedulerService.isBatteryCharging() && jobSchedulerService.isBatteryNotLow());
         protoOutputStream.write(1133871366146L, jobSchedulerService.isBatteryNotLow());
         for (int i = 0; i < this.mTrackedTasks.size(); i++) {
             JobStatus jobStatus = (JobStatus) this.mTrackedTasks.valueAt(i);
@@ -89,10 +105,15 @@ public final class BatteryController extends RestrictingController {
     public final void maybeReportNewChargingStateLocked() {
         JobSchedulerService jobSchedulerService = this.mService;
         boolean isPowerConnected = jobSchedulerService.isPowerConnected();
-        boolean z = jobSchedulerService.isBatteryCharging() && jobSchedulerService.isBatteryNotLow();
+        boolean z =
+                jobSchedulerService.isBatteryCharging() && jobSchedulerService.isBatteryNotLow();
         boolean isBatteryNotLow = jobSchedulerService.isBatteryNotLow();
         if (DEBUG) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m("JobScheduler.Battery", FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("maybeReportNewChargingStateLocked: ", isPowerConnected, "/", z, "/"), isBatteryNotLow);
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    "JobScheduler.Battery",
+                    FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                            "maybeReportNewChargingStateLocked: ", isPowerConnected, "/", z, "/"),
+                    isBatteryNotLow);
         }
         Boolean bool = this.mLastReportedStatsdStablePower;
         if (bool == null || bool.booleanValue() != z) {
@@ -113,7 +134,9 @@ public final class BatteryController extends RestrictingController {
         for (int size = this.mTrackedTasks.size() - 1; size >= 0; size--) {
             JobStatus jobStatus = (JobStatus) this.mTrackedTasks.valueAt(size);
             if (jobStatus.hasConstraint(1)) {
-                if ((jobSchedulerService.getUidBias(jobStatus.sourceUid) == 40 || this.mTopStartedJobs.contains(jobStatus)) && jobStatus.getEffectivePriority() >= 300) {
+                if ((jobSchedulerService.getUidBias(jobStatus.sourceUid) == 40
+                                || this.mTopStartedJobs.contains(jobStatus))
+                        && jobStatus.getEffectivePriority() >= 300) {
                     if (jobStatus.setConstraintSatisfied(1, elapsedRealtime, isPowerConnected)) {
                         this.mChangedJobs.add(jobStatus);
                     }
@@ -121,7 +144,8 @@ public final class BatteryController extends RestrictingController {
                     this.mChangedJobs.add(jobStatus);
                 }
             }
-            if (jobStatus.hasConstraint(2) && jobStatus.setConstraintSatisfied(2, elapsedRealtime, isBatteryNotLow)) {
+            if (jobStatus.hasConstraint(2)
+                    && jobStatus.setConstraintSatisfied(2, elapsedRealtime, isBatteryNotLow)) {
                 this.mChangedJobs.add(jobStatus);
             }
         }
@@ -144,13 +168,20 @@ public final class BatteryController extends RestrictingController {
             boolean hasConstraint = jobStatus.hasConstraint(1);
             JobSchedulerService jobSchedulerService = this.mService;
             if (hasConstraint) {
-                if (jobSchedulerService.getUidBias(jobStatus.sourceUid) == 40 || this.mTopStartedJobs.contains(jobStatus)) {
-                    jobStatus.setConstraintSatisfied(1, elapsedRealtime, jobSchedulerService.isPowerConnected());
+                if (jobSchedulerService.getUidBias(jobStatus.sourceUid) == 40
+                        || this.mTopStartedJobs.contains(jobStatus)) {
+                    jobStatus.setConstraintSatisfied(
+                            1, elapsedRealtime, jobSchedulerService.isPowerConnected());
                 } else {
-                    jobStatus.setConstraintSatisfied(1, elapsedRealtime, jobSchedulerService.isBatteryCharging() && jobSchedulerService.isBatteryNotLow());
+                    jobStatus.setConstraintSatisfied(
+                            1,
+                            elapsedRealtime,
+                            jobSchedulerService.isBatteryCharging()
+                                    && jobSchedulerService.isBatteryNotLow());
                 }
             }
-            jobStatus.setConstraintSatisfied(2, elapsedRealtime, jobSchedulerService.isBatteryNotLow());
+            jobStatus.setConstraintSatisfied(
+                    2, elapsedRealtime, jobSchedulerService.isBatteryNotLow());
         }
     }
 
@@ -164,15 +195,18 @@ public final class BatteryController extends RestrictingController {
 
     @Override // com.android.server.job.controllers.StateController
     public final void onBatteryStateChangedLocked() {
-        AppSchedulingModuleThread.getHandler().post(new Runnable() { // from class: com.android.server.job.controllers.BatteryController$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                BatteryController batteryController = BatteryController.this;
-                synchronized (batteryController.mLock) {
-                    batteryController.maybeReportNewChargingStateLocked();
-                }
-            }
-        });
+        AppSchedulingModuleThread.getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.job.controllers.BatteryController$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                BatteryController batteryController = BatteryController.this;
+                                synchronized (batteryController.mLock) {
+                                    batteryController.maybeReportNewChargingStateLocked();
+                                }
+                            }
+                        });
     }
 
     @Override // com.android.server.job.controllers.StateController
@@ -191,7 +225,9 @@ public final class BatteryController extends RestrictingController {
             }
             if (this.mService.getUidBias(jobStatus.sourceUid) == 40) {
                 if (z) {
-                    Slog.d("JobScheduler.Battery", jobStatus.toShortString() + " is top started job");
+                    Slog.d(
+                            "JobScheduler.Battery",
+                            jobStatus.toShortString() + " is top started job");
                 }
                 this.mTopStartedJobs.add(jobStatus);
             }

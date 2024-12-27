@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.util.Log;
+
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.plm.context.ProcessContext;
 
@@ -20,8 +21,7 @@ public final class BindServiceImpl {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.plm.impl.BindServiceImpl$1, reason: invalid class name */
     public final class AnonymousClass1 {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
     }
 
     public BindServiceImpl(Context context, ProcessContext processContext) {
@@ -33,7 +33,12 @@ public final class BindServiceImpl {
         if (this.mConnectionHelper == null) {
             Context context = this.mContext;
             ProcessContext processContext = this.mProcessContext;
-            this.mConnectionHelper = new ConnectionHelper(context, processContext.getPackageName(), processContext.getServiceName(), new AnonymousClass1());
+            this.mConnectionHelper =
+                    new ConnectionHelper(
+                            context,
+                            processContext.getPackageName(),
+                            processContext.getServiceName(),
+                            new AnonymousClass1());
         }
         return this.mConnectionHelper;
     }
@@ -46,14 +51,18 @@ public final class BindServiceImpl {
                 StringBuilder sb = new StringBuilder("found package ");
                 sb.append(str);
                 sb.append(" ");
-                sb.append(packageManager.getApplicationEnabledSetting(str) == 1 ? "enabled" : "disabled");
+                sb.append(
+                        packageManager.getApplicationEnabledSetting(str) == 1
+                                ? "enabled"
+                                : "disabled");
                 Log.i("Utils", sb.toString());
                 return true;
             }
         } catch (Throwable th) {
             Log.e("Utils", th.toString());
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("failed to find package ", str, "Utils");
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "failed to find package ", str, "Utils");
         return false;
     }
 
@@ -153,6 +162,8 @@ public final class BindServiceImpl {
             r9.post(r0)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.plm.impl.BindServiceImpl.start():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.plm.impl.BindServiceImpl.start():boolean");
     }
 }

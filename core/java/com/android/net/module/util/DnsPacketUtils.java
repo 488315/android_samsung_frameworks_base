@@ -5,7 +5,7 @@ import android.net.InetAddresses;
 import android.net.ParseException;
 import android.text.TextUtils;
 import android.util.Patterns;
-import com.android.net.module.util.DnsPacket;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.BufferUnderflowException;
@@ -31,7 +31,8 @@ public final class DnsPacketUtils {
                 if (b2 <= 32 || b2 >= 127) {
                     sb.append('\\');
                     sByteFormat.format(b2, sb, sPos);
-                } else if (b2 == 34 || b2 == 46 || b2 == 59 || b2 == 92 || b2 == 40 || b2 == 41 || b2 == 64 || b2 == 36) {
+                } else if (b2 == 34 || b2 == 46 || b2 == 59 || b2 == 92 || b2 == 40 || b2 == 41
+                        || b2 == 64 || b2 == 36) {
                     sb.append('\\');
                     sb.append((char) b2);
                 } else {
@@ -62,14 +63,22 @@ public final class DnsPacketUtils {
         }
 
         public static boolean isHostName(String hostName) {
-            return (hostName == null || !Patterns.DOMAIN_NAME.matcher(hostName).matches() || InetAddresses.isNumericAddress(hostName)) ? false : true;
+            return (hostName == null
+                            || !Patterns.DOMAIN_NAME.matcher(hostName).matches()
+                            || InetAddresses.isNumericAddress(hostName))
+                    ? false
+                    : true;
         }
 
-        public static String parseName(ByteBuffer buf, int depth, boolean isNameCompressionSupported) throws BufferUnderflowException, DnsPacket.ParseException {
+        public static String parseName(
+                ByteBuffer buf, int depth, boolean isNameCompressionSupported)
+                throws BufferUnderflowException, DnsPacket.ParseException {
             return parseName(buf, depth, 128, isNameCompressionSupported);
         }
 
-        public static String parseName(ByteBuffer buf, int depth, int maxLabelCount, boolean isNameCompressionSupported) throws BufferUnderflowException, DnsPacket.ParseException {
+        public static String parseName(
+                ByteBuffer buf, int depth, int maxLabelCount, boolean isNameCompressionSupported)
+                throws BufferUnderflowException, DnsPacket.ParseException {
             if (depth > maxLabelCount) {
                 throw new DnsPacket.ParseException("Failed to parse name, too many labels");
             }
@@ -85,10 +94,12 @@ public final class DnsPacketUtils {
                 int offset = ((len & (-193)) << 8) + Byte.toUnsignedInt(buf.get());
                 int oldPos = buf.position();
                 if (offset >= oldPos - 2) {
-                    throw new DnsPacket.ParseException("Parse compression name fail, invalid compression");
+                    throw new DnsPacket.ParseException(
+                            "Parse compression name fail, invalid compression");
                 }
                 buf.position(offset);
-                String pointed = parseName(buf, depth + 1, maxLabelCount, isNameCompressionSupported);
+                String pointed =
+                        parseName(buf, depth + 1, maxLabelCount, isNameCompressionSupported);
                 buf.position(oldPos);
                 return pointed;
             }
@@ -102,10 +113,8 @@ public final class DnsPacketUtils {
             return TextUtils.isEmpty(tail) ? head : head + MediaMetrics.SEPARATOR + tail;
         }
 
-        private DnsRecordParser() {
-        }
+        private DnsRecordParser() {}
     }
 
-    private DnsPacketUtils() {
-    }
+    private DnsPacketUtils() {}
 }

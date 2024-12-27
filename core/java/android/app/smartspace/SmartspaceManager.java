@@ -2,6 +2,7 @@ package android.app.smartspace;
 
 import android.annotation.SystemApi;
 import android.content.Context;
+
 import java.util.Objects;
 
 @SystemApi

@@ -1,13 +1,15 @@
 package android.tracing.perfetto;
 
-import android.tracing.perfetto.DataSourceInstance;
 import android.util.proto.ProtoOutputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes4.dex */
-public class TracingContext<DataSourceInstanceType extends DataSourceInstance, TlsStateType, IncrementalStateType> {
-    private final DataSource<DataSourceInstanceType, TlsStateType, IncrementalStateType> mDataSource;
+public class TracingContext<
+        DataSourceInstanceType extends DataSourceInstance, TlsStateType, IncrementalStateType> {
+    private final DataSource<DataSourceInstanceType, TlsStateType, IncrementalStateType>
+            mDataSource;
     private final int mInstanceIndex;
     private final List<ProtoOutputStream> mTracePackets = new ArrayList();
 
@@ -19,7 +21,9 @@ public class TracingContext<DataSourceInstanceType extends DataSourceInstance, T
 
     private static native void nativeSetIncrementalState(long j, Object obj);
 
-    TracingContext(DataSource<DataSourceInstanceType, TlsStateType, IncrementalStateType> dataSource, int instanceIndex) {
+    TracingContext(
+            DataSource<DataSourceInstanceType, TlsStateType, IncrementalStateType> dataSource,
+            int instanceIndex) {
         this.mDataSource = dataSource;
         this.mInstanceIndex = instanceIndex;
     }
@@ -33,7 +37,9 @@ public class TracingContext<DataSourceInstanceType extends DataSourceInstance, T
     public TlsStateType getCustomTlsState() {
         TlsStateType tlsstatetype = (TlsStateType) nativeGetCustomTls(this.mDataSource.mNativeObj);
         if (tlsstatetype == null) {
-            TlsStateType createTlsState = this.mDataSource.createTlsState(new CreateTlsStateArgs<>(this.mDataSource, this.mInstanceIndex));
+            TlsStateType createTlsState =
+                    this.mDataSource.createTlsState(
+                            new CreateTlsStateArgs<>(this.mDataSource, this.mInstanceIndex));
             nativeSetCustomTls(this.mDataSource.mNativeObj, createTlsState);
             return createTlsState;
         }
@@ -41,9 +47,13 @@ public class TracingContext<DataSourceInstanceType extends DataSourceInstance, T
     }
 
     public IncrementalStateType getIncrementalState() {
-        IncrementalStateType incrementalstatetype = (IncrementalStateType) nativeGetIncrementalState(this.mDataSource.mNativeObj);
+        IncrementalStateType incrementalstatetype =
+                (IncrementalStateType) nativeGetIncrementalState(this.mDataSource.mNativeObj);
         if (incrementalstatetype == null) {
-            IncrementalStateType createIncrementalState = this.mDataSource.createIncrementalState(new CreateIncrementalStateArgs<>(this.mDataSource, this.mInstanceIndex));
+            IncrementalStateType createIncrementalState =
+                    this.mDataSource.createIncrementalState(
+                            new CreateIncrementalStateArgs<>(
+                                    this.mDataSource, this.mInstanceIndex));
             nativeSetIncrementalState(this.mDataSource.mNativeObj, createIncrementalState);
             return createIncrementalState;
         }

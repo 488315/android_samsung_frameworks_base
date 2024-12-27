@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.security.GateKeeper;
+
 import java.io.ByteArrayInputStream;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
@@ -20,7 +21,8 @@ class CredstoreWritableIdentityCredential extends WritableIdentityCredential {
     private String mCredentialName;
     private String mDocType;
 
-    CredstoreWritableIdentityCredential(Context context, String credentialName, String docType, IWritableCredential binder) {
+    CredstoreWritableIdentityCredential(
+            Context context, String credentialName, String docType, IWritableCredential binder) {
         this.mContext = context;
         this.mDocType = docType;
         this.mCredentialName = credentialName;
@@ -46,7 +48,8 @@ class CredstoreWritableIdentityCredential extends WritableIdentityCredential {
         } catch (RemoteException e2) {
             throw new RuntimeException("Unexpected RemoteException ", e2);
         } catch (ServiceSpecificException e3) {
-            throw new RuntimeException("Unexpected ServiceSpecificException with code " + e3.errorCode, e3);
+            throw new RuntimeException(
+                    "Unexpected ServiceSpecificException with code " + e3.errorCode, e3);
         }
     }
 
@@ -60,18 +63,25 @@ class CredstoreWritableIdentityCredential extends WritableIdentityCredential {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    static byte[] personalize(android.security.identity.IWritableCredential r22, android.security.identity.PersonalizationData r23) {
+    static byte[] personalize(
+            android.security.identity.IWritableCredential r22,
+            android.security.identity.PersonalizationData r23) {
         /*
             Method dump skipped, instructions count: 343
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.security.identity.CredstoreWritableIdentityCredential.personalize(android.security.identity.IWritableCredential, android.security.identity.PersonalizationData):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.security.identity.CredstoreWritableIdentityCredential.personalize(android.security.identity.IWritableCredential,"
+                    + " android.security.identity.PersonalizationData):byte[]");
     }
 
     private static long getRootSid() {
         long rootSid = GateKeeper.getSecureUserId();
         if (rootSid == 0) {
-            throw new IllegalStateException("Secure lock screen must be enabled to create credentials requiring user authentication");
+            throw new IllegalStateException(
+                    "Secure lock screen must be enabled to create credentials requiring user"
+                        + " authentication");
         }
         return rootSid;
     }

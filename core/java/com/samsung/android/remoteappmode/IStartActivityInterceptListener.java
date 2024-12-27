@@ -11,14 +11,32 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IStartActivityInterceptListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.remoteappmode.IStartActivityInterceptListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.remoteappmode.IStartActivityInterceptListener";
 
-    void onStartActivityIntercepted(Intent intent, Bundle bundle, ActivityInfo activityInfo, int i, boolean z, int i2, int i3, int i4) throws RemoteException;
+    void onStartActivityIntercepted(
+            Intent intent,
+            Bundle bundle,
+            ActivityInfo activityInfo,
+            int i,
+            boolean z,
+            int i2,
+            int i3,
+            int i4)
+            throws RemoteException;
 
     public static class Default implements IStartActivityInterceptListener {
         @Override // com.samsung.android.remoteappmode.IStartActivityInterceptListener
-        public void onStartActivityIntercepted(Intent intent, Bundle activityOptionsBundle, ActivityInfo activityInfo, int interceptedDisplayId, boolean isVisibleTask, int runningTaskId, int runningTaskDisplayId, int interceptReason) throws RemoteException {
-        }
+        public void onStartActivityIntercepted(
+                Intent intent,
+                Bundle activityOptionsBundle,
+                ActivityInfo activityInfo,
+                int interceptedDisplayId,
+                boolean isVisibleTask,
+                int runningTaskId,
+                int runningTaskDisplayId,
+                int interceptReason)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -26,7 +44,7 @@ public interface IStartActivityInterceptListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStartActivityInterceptListener {
+    public abstract static class Stub extends Binder implements IStartActivityInterceptListener {
         static final int TRANSACTION_onStartActivityIntercepted = 1;
 
         public Stub() {
@@ -64,7 +82,8 @@ public interface IStartActivityInterceptListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IStartActivityInterceptListener.DESCRIPTOR);
             }
@@ -83,7 +102,8 @@ public interface IStartActivityInterceptListener extends IInterface {
                     int _arg6 = data.readInt();
                     int _arg7 = data.readInt();
                     data.enforceNoDataAvail();
-                    onStartActivityIntercepted(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
+                    onStartActivityIntercepted(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
                     return true;
                 default:
                     return super.onTransact(code, data, reply, flags);
@@ -107,7 +127,16 @@ public interface IStartActivityInterceptListener extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IStartActivityInterceptListener
-            public void onStartActivityIntercepted(Intent intent, Bundle activityOptionsBundle, ActivityInfo activityInfo, int interceptedDisplayId, boolean isVisibleTask, int runningTaskId, int runningTaskDisplayId, int interceptReason) throws RemoteException {
+            public void onStartActivityIntercepted(
+                    Intent intent,
+                    Bundle activityOptionsBundle,
+                    ActivityInfo activityInfo,
+                    int interceptedDisplayId,
+                    boolean isVisibleTask,
+                    int runningTaskId,
+                    int runningTaskDisplayId,
+                    int interceptReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IStartActivityInterceptListener.DESCRIPTOR);

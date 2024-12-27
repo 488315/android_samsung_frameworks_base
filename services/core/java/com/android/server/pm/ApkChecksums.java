@@ -26,10 +26,15 @@ import android.util.apk.ByteBufferFactory;
 import android.util.apk.SignatureInfo;
 import android.util.apk.SignatureNotFoundException;
 import android.util.apk.VerityBuilder;
+
 import com.android.internal.security.VerityUtils;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.backup.BackupManagerConstants;
 import com.android.server.pm.pkg.AndroidPackage;
+
+import sun.security.pkcs.PKCS7;
+import sun.security.pkcs.SignerInfo;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -55,8 +60,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import sun.security.pkcs.PKCS7;
-import sun.security.pkcs.SignerInfo;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -83,7 +86,8 @@ public abstract class ApkChecksums {
             Object produce();
         }
 
-        public Injector(Producer producer, Producer producer2, Producer producer3, Producer producer4) {
+        public Injector(
+                Producer producer, Producer producer2, Producer producer3, Producer producer4) {
             this.mContext = producer;
             this.mHandlerProducer = producer2;
             this.mIncrementalManagerProducer = producer3;
@@ -101,7 +105,9 @@ public abstract class ApkChecksums {
 
     public static String buildDigestsPathForApk(String str) {
         if (!ApkLiteParseUtils.isApkPath(str)) {
-            throw new IllegalStateException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Code path is not an apk ", str));
+            throw new IllegalStateException(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            "Code path is not an apk ", str));
         }
         return str.substring(0, str.length() - 4) + ".digests";
     }
@@ -144,7 +150,10 @@ public abstract class ApkChecksums {
             } finally {
             }
         } catch (IOException e) {
-            Slog.e("ApkChecksums", "Error reading " + file.getAbsolutePath() + " to compute hash.", e);
+            Slog.e(
+                    "ApkChecksums",
+                    "Error reading " + file.getAbsolutePath() + " to compute hash.",
+                    e);
         } catch (NoSuchAlgorithmException e2) {
             Slog.e("ApkChecksums", "Device does not support MessageDigest algorithm", e2);
         }
@@ -164,7 +173,14 @@ public abstract class ApkChecksums {
         return arraySet;
     }
 
-    public static void getAvailableApkChecksums(String str, File file, int i, String str2, Certificate[] certificateArr, Map map, Injector injector) {
+    public static void getAvailableApkChecksums(
+            String str,
+            File file,
+            int i,
+            String str2,
+            Certificate[] certificateArr,
+            Map map,
+            Injector injector) {
         Map map2;
         ArrayMap arrayMap;
         byte[] bArr;
@@ -179,11 +195,21 @@ public abstract class ApkChecksums {
         if (file.exists()) {
             String absolutePath = file.getAbsolutePath();
             if (isRequired(1, i, map)) {
-                if (!VerityUtils.hasFsverity(absolutePath) || (fsverityDigest = VerityUtils.getFsverityDigest(absolutePath)) == null) {
+                if (!VerityUtils.hasFsverity(absolutePath)
+                        || (fsverityDigest = VerityUtils.getFsverityDigest(absolutePath)) == null) {
                     try {
-                        byte[] bArr3 = (byte[]) ApkSignatureSchemeV4Verifier.extractCertificates(absolutePath).contentDigests.getOrDefault(3, null);
+                        byte[] bArr3 =
+                                (byte[])
+                                        ApkSignatureSchemeV4Verifier.extractCertificates(
+                                                        absolutePath)
+                                                .contentDigests
+                                                .getOrDefault(3, null);
                         if (bArr3 != null) {
-                            apkChecksum = new ApkChecksum(str, 1, verityHashForFile(new File(absolutePath), bArr3));
+                            apkChecksum =
+                                    new ApkChecksum(
+                                            str,
+                                            1,
+                                            verityHashForFile(new File(absolutePath), bArr3));
                         }
                     } catch (SignatureNotFoundException unused) {
                     } catch (SecurityException | SignatureException e) {
@@ -198,14 +224,23 @@ public abstract class ApkChecksums {
                 }
             }
             if (isRequired(32, i, map) || isRequired(64, i, map)) {
-                ParseResult verifySignaturesInternal = ApkSignatureVerifier.verifySignaturesInternal(ParseTypeImpl.forDefaultParsing(), absolutePath, 2, false);
+                ParseResult verifySignaturesInternal =
+                        ApkSignatureVerifier.verifySignaturesInternal(
+                                ParseTypeImpl.forDefaultParsing(), absolutePath, 2, false);
                 if (verifySignaturesInternal.isError()) {
-                    if (!(verifySignaturesInternal.getException() instanceof SignatureNotFoundException)) {
-                        Slog.e("ApkChecksums", "Signature verification error", verifySignaturesInternal.getException());
+                    if (!(verifySignaturesInternal.getException()
+                            instanceof SignatureNotFoundException)) {
+                        Slog.e(
+                                "ApkChecksums",
+                                "Signature verification error",
+                                verifySignaturesInternal.getException());
                     }
                     map2 = null;
                 } else {
-                    map2 = ((ApkSignatureVerifier.SigningDetailsWithDigests) verifySignaturesInternal.getResult()).contentDigests;
+                    map2 =
+                            ((ApkSignatureVerifier.SigningDetailsWithDigests)
+                                            verifySignaturesInternal.getResult())
+                                    .contentDigests;
                 }
                 if (map2 == null) {
                     arrayMap = null;
@@ -233,14 +268,18 @@ public abstract class ApkChecksums {
                 if (file2 == null) {
                     return;
                 }
-                File file3 = new File(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(file2.getAbsolutePath(), ".signature"));
+                File file3 =
+                        new File(
+                                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                                        file2.getAbsolutePath(), ".signature"));
                 if (!file3.exists()) {
                     file3 = null;
                 }
                 try {
                     Checksum[] readChecksums = readChecksums(file2);
                     if (file3 != null) {
-                        Certificate[] verifySignature = verifySignature(readChecksums, Files.readAllBytes(file3.toPath()));
+                        Certificate[] verifySignature =
+                                verifySignature(readChecksums, Files.readAllBytes(file3.toPath()));
                         if (verifySignature != null && verifySignature.length != 0) {
                             signatures = new Signature[verifySignature.length];
                             int length = verifySignature.length;
@@ -252,15 +291,19 @@ public abstract class ApkChecksums {
                         Slog.e("ApkChecksums", "Error validating signature");
                         return;
                     }
-                    AndroidPackage androidPackage = injector.getPackageManagerInternal().getPackage(str2);
+                    AndroidPackage androidPackage =
+                            injector.getPackageManagerInternal().getPackage(str2);
                     if (androidPackage == null) {
                         Slog.e("ApkChecksums", "Installer package not found.");
                         return;
                     } else {
                         signatures = androidPackage.getSigningDetails().getSignatures();
-                        pastSigningCertificates = androidPackage.getSigningDetails().getPastSigningCertificates();
+                        pastSigningCertificates =
+                                androidPackage.getSigningDetails().getPastSigningCertificates();
                     }
-                    if (signatures != null && signatures.length != 0 && (signature = signatures[0]) != null) {
+                    if (signatures != null
+                            && signatures.length != 0
+                            && (signature = signatures[0]) != null) {
                         byte[] byteArray = signature.toByteArray();
                         Set convertToSet = convertToSet(certificateArr);
                         if (convertToSet != null && !((ArraySet) convertToSet).isEmpty()) {
@@ -297,14 +340,26 @@ public abstract class ApkChecksums {
                             }
                         }
                         for (Checksum checksum : readChecksums) {
-                            ApkChecksum apkChecksum2 = (ApkChecksum) ((ArrayMap) map).get(Integer.valueOf(checksum.getType()));
-                            if (apkChecksum2 != null && !Arrays.equals(apkChecksum2.getValue(), checksum.getValue())) {
-                                throw new InvalidParameterException("System digest " + checksum.getType() + " mismatch, can't bind installer-provided digests to the APK.");
+                            ApkChecksum apkChecksum2 =
+                                    (ApkChecksum)
+                                            ((ArrayMap) map)
+                                                    .get(Integer.valueOf(checksum.getType()));
+                            if (apkChecksum2 != null
+                                    && !Arrays.equals(
+                                            apkChecksum2.getValue(), checksum.getValue())) {
+                                throw new InvalidParameterException(
+                                        "System digest "
+                                                + checksum.getType()
+                                                + " mismatch, can't bind installer-provided digests"
+                                                + " to the APK.");
                             }
                         }
                         for (Checksum checksum2 : readChecksums) {
                             if (isRequired(checksum2.getType(), i, map)) {
-                                ((ArrayMap) map).put(Integer.valueOf(checksum2.getType()), new ApkChecksum(str, checksum2, str2, byteArray));
+                                ((ArrayMap) map)
+                                        .put(
+                                                Integer.valueOf(checksum2.getType()),
+                                                new ApkChecksum(str, checksum2, str2, byteArray));
                             }
                         }
                         return;
@@ -312,8 +367,13 @@ public abstract class ApkChecksums {
                     Slog.e("ApkChecksums", "Can't obtain certificates.");
                 } catch (IOException e2) {
                     Slog.e("ApkChecksums", "Error reading .digests or .signature", e2);
-                } catch (InvalidParameterException | NoSuchAlgorithmException | SignatureException e3) {
-                    Slog.e("ApkChecksums", "Error validating digests. Invalid digests will be removed", e3);
+                } catch (InvalidParameterException
+                        | NoSuchAlgorithmException
+                        | SignatureException e3) {
+                    Slog.e(
+                            "ApkChecksums",
+                            "Error validating digests. Invalid digests will be removed",
+                            e3);
                     try {
                         Files.deleteIfExists(file2.toPath());
                         if (file3 != null) {
@@ -328,7 +388,14 @@ public abstract class ApkChecksums {
         }
     }
 
-    public static void getChecksums(List list, int i, int i2, String str, Certificate[] certificateArr, IOnChecksumsReadyListener iOnChecksumsReadyListener, Injector injector) {
+    public static void getChecksums(
+            List list,
+            int i,
+            int i2,
+            String str,
+            Certificate[] certificateArr,
+            IOnChecksumsReadyListener iOnChecksumsReadyListener,
+            Injector injector) {
         ArrayList arrayList = (ArrayList) list;
         ArrayList arrayList2 = new ArrayList(arrayList.size());
         int size = arrayList.size();
@@ -338,12 +405,19 @@ public abstract class ApkChecksums {
             ArrayMap arrayMap = new ArrayMap();
             arrayList2.add(arrayMap);
             try {
-                getAvailableApkChecksums(str2, file, i | i2, str, certificateArr, arrayMap, injector);
+                getAvailableApkChecksums(
+                        str2, file, i | i2, str, certificateArr, arrayMap, injector);
             } catch (Throwable th) {
                 Slog.e("ApkChecksums", "Preferred checksum calculation error", th);
             }
         }
-        processRequiredChecksums(list, arrayList2, i2, iOnChecksumsReadyListener, injector, SystemClock.uptimeMillis());
+        processRequiredChecksums(
+                list,
+                arrayList2,
+                i2,
+                iOnChecksumsReadyListener,
+                injector,
+                SystemClock.uptimeMillis());
     }
 
     public static void getRequiredApkChecksums(String str, File file, int i, Map map) {
@@ -351,7 +425,17 @@ public abstract class ApkChecksums {
         SignatureInfo signatureInfo = null;
         if (isRequired(1, i, map)) {
             try {
-                map.put(1, new ApkChecksum(str, 1, verityHashForFile(file, VerityBuilder.generateFsVerityRootHash(absolutePath, (byte[]) null, new AnonymousClass1()))));
+                map.put(
+                        1,
+                        new ApkChecksum(
+                                str,
+                                1,
+                                verityHashForFile(
+                                        file,
+                                        VerityBuilder.generateFsVerityRootHash(
+                                                absolutePath,
+                                                (byte[]) null,
+                                                new AnonymousClass1()))));
             } catch (IOException | DigestException | NoSuchAlgorithmException e) {
                 Slog.e("ApkChecksums", "Error calculating WHOLE_MERKLE_ROOT_4K_SHA256", e);
             }
@@ -368,7 +452,8 @@ public abstract class ApkChecksums {
                 try {
                     try {
                         try {
-                            signatureInfo = ApkSignatureSchemeV3Verifier.findSignature(randomAccessFile);
+                            signatureInfo =
+                                    ApkSignatureSchemeV3Verifier.findSignature(randomAccessFile);
                         } catch (SignatureNotFoundException unused) {
                         }
                     } catch (Throwable th) {
@@ -383,16 +468,22 @@ public abstract class ApkChecksums {
                     signatureInfo = ApkSignatureSchemeV2Verifier.findSignature(randomAccessFile);
                 }
                 if (signatureInfo == null) {
-                    Slog.e("ApkChecksums", "V2/V3 signatures not found in " + file.getAbsolutePath());
+                    Slog.e(
+                            "ApkChecksums",
+                            "V2/V3 signatures not found in " + file.getAbsolutePath());
                 } else {
-                    int[] iArr = (z && z2) ? new int[]{1, 2} : z ? new int[]{1} : new int[]{2};
-                    byte[][] computeContentDigestsPer1MbChunk = ApkSigningBlockUtils.computeContentDigestsPer1MbChunk(iArr, randomAccessFile.getFD(), signatureInfo);
+                    int[] iArr = (z && z2) ? new int[] {1, 2} : z ? new int[] {1} : new int[] {2};
+                    byte[][] computeContentDigestsPer1MbChunk =
+                            ApkSigningBlockUtils.computeContentDigestsPer1MbChunk(
+                                    iArr, randomAccessFile.getFD(), signatureInfo);
                     int length = iArr.length;
                     for (int i2 = 0; i2 < length; i2++) {
                         int i3 = iArr[i2];
                         int i4 = i3 != 1 ? i3 != 2 ? -1 : 64 : 32;
                         if (i4 != -1) {
-                            map.put(Integer.valueOf(i4), new ApkChecksum(str, i4, computeContentDigestsPer1MbChunk[i2]));
+                            map.put(
+                                    Integer.valueOf(i4),
+                                    new ApkChecksum(str, i4, computeContentDigestsPer1MbChunk[i2]));
                         }
                     }
                 }
@@ -408,14 +499,21 @@ public abstract class ApkChecksums {
     }
 
     public static boolean needToWait(File file, int i, Map map, Injector injector) {
-        if (!isRequired(1, i, map) && !isRequired(2, i, map) && !isRequired(4, i, map) && !isRequired(8, i, map) && !isRequired(16, i, map) && !isRequired(32, i, map) && !isRequired(64, i, map)) {
+        if (!isRequired(1, i, map)
+                && !isRequired(2, i, map)
+                && !isRequired(4, i, map)
+                && !isRequired(8, i, map)
+                && !isRequired(16, i, map)
+                && !isRequired(32, i, map)
+                && !isRequired(64, i, map)) {
             return false;
         }
         String absolutePath = file.getAbsolutePath();
         if (!IncrementalManager.isIncrementalPath(absolutePath)) {
             return false;
         }
-        IncrementalManager incrementalManager = (IncrementalManager) injector.mIncrementalManagerProducer.produce();
+        IncrementalManager incrementalManager =
+                (IncrementalManager) injector.mIncrementalManagerProducer.produce();
         if (incrementalManager == null) {
             Slog.e("ApkChecksums", "IncrementalManager is missing.");
             return false;
@@ -423,17 +521,28 @@ public abstract class ApkChecksums {
         if (incrementalManager.openStorage(absolutePath) != null) {
             return !r4.isFileFullyLoaded(absolutePath);
         }
-        BootReceiver$$ExternalSyntheticOutline0.m("IncrementalStorage is missing for a path on IncFs: ", absolutePath, "ApkChecksums");
+        BootReceiver$$ExternalSyntheticOutline0.m(
+                "IncrementalStorage is missing for a path on IncFs: ",
+                absolutePath,
+                "ApkChecksums");
         return false;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r10v6 */
-    public static void processRequiredChecksums(final List list, final List list2, final int i, final IOnChecksumsReadyListener iOnChecksumsReadyListener, final Injector injector, final long j) {
+    public static void processRequiredChecksums(
+            final List list,
+            final List list2,
+            final int i,
+            final IOnChecksumsReadyListener iOnChecksumsReadyListener,
+            final Injector injector,
+            final long j) {
         String str;
         boolean z;
         Injector injector2 = injector;
-        boolean z2 = SystemClock.uptimeMillis() - j >= BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
+        boolean z2 =
+                SystemClock.uptimeMillis() - j
+                        >= BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = (ArrayList) list;
         int size = arrayList2.size();
@@ -450,12 +559,21 @@ public abstract class ApkChecksums {
                         Handler handler = (Handler) injector2.mHandlerProducer.produce();
                         injector2 = "ApkChecksums";
                         z = z2;
-                        handler.postDelayed(new Runnable() { // from class: com.android.server.pm.ApkChecksums$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                ApkChecksums.processRequiredChecksums(list, list2, i, iOnChecksumsReadyListener, injector, j);
-                            }
-                        }, 1000L);
+                        handler.postDelayed(
+                                new Runnable() { // from class:
+                                                 // com.android.server.pm.ApkChecksums$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        ApkChecksums.processRequiredChecksums(
+                                                list,
+                                                list2,
+                                                i,
+                                                iOnChecksumsReadyListener,
+                                                injector,
+                                                j);
+                                    }
+                                },
+                                1000L);
                         return;
                     }
                     try {
@@ -501,7 +619,8 @@ public abstract class ApkChecksums {
                     } catch (EOFException unused) {
                     }
                 }
-                Checksum[] checksumArr = (Checksum[]) arrayList.toArray(new Checksum[arrayList.size()]);
+                Checksum[] checksumArr =
+                        (Checksum[]) arrayList.toArray(new Checksum[arrayList.size()]);
                 dataInputStream.close();
                 fileInputStream.close();
                 return checksumArr;
@@ -539,7 +658,8 @@ public abstract class ApkChecksums {
             for (SignerInfo signerInfo : verify) {
                 ArrayList certificateChain = signerInfo.getCertificateChain(pkcs7);
                 if (certificateChain == null) {
-                    throw new SignatureException("Verification passed, but certification chain is empty.");
+                    throw new SignatureException(
+                            "Verification passed, but certification chain is empty.");
                 }
                 arrayList.addAll(certificateChain);
             }

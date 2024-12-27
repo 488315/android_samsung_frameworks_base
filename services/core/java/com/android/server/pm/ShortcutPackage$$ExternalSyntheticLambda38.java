@@ -3,6 +3,7 @@ package com.android.server.pm;
 import android.app.appsearch.GenericDocument;
 import android.content.pm.ShortcutInfo;
 import android.util.ArrayMap;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -28,7 +29,8 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda38 im
             case 1:
                 return (ShortcutInfo) ((ArrayMap) obj2).get((String) obj);
             default:
-                return ShortcutInfo.createFromGenericDocument(ShortcutPackage.this.mShortcutUser.mUserId, (GenericDocument) obj);
+                return ShortcutInfo.createFromGenericDocument(
+                        ShortcutPackage.this.mShortcutUser.mUserId, (GenericDocument) obj);
         }
     }
 }

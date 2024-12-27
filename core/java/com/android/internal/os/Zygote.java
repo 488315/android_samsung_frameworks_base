@@ -19,17 +19,21 @@ import android.system.Os;
 import android.system.OsConstants;
 import android.util.Log;
 import android.view.InputDevice;
+
 import com.android.internal.compat.IPlatformCompat;
 import com.android.internal.net.NetworkUtilsInternal;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
 import dalvik.system.ZygoteHooks;
+
+import libcore.io.IoUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import libcore.io.IoUtils;
 
 /* loaded from: classes5.dex */
 public final class Zygote {
@@ -98,8 +102,10 @@ public final class Zygote {
     public static final int USE_APP_IMAGE_STARTUP_CACHE = 65536;
     public static final int API_ENFORCEMENT_POLICY_SHIFT = Integer.numberOfTrailingZeros(12288);
     static final int[][] INT_ARRAY_2D = (int[][]) Array.newInstance((Class<?>) Integer.TYPE, 0, 0);
-    private static final boolean ENABLE_JDWP = SystemProperties.get("persist.debug.dalvik.vm.jdwp.enabled").equals("1");
-    private static final boolean ENABLE_PTRACE = SystemProperties.get("persist.debug.ptrace.enabled").equals("1");
+    private static final boolean ENABLE_JDWP =
+            SystemProperties.get("persist.debug.dalvik.vm.jdwp.enabled").equals("1");
+    private static final boolean ENABLE_PTRACE =
+            SystemProperties.get("persist.debug.ptrace.enabled").equals("1");
 
     @CriticalNative
     private static native void nativeAddUsapTableEntry(int i, int i2);
@@ -116,11 +122,31 @@ public final class Zygote {
 
     private static native void nativeEmptyUsapPool();
 
-    private static native int nativeForkAndSpecialize(int i, int i2, int[] iArr, int i3, int[][] iArr2, int i4, String str, String str2, int[] iArr3, int[] iArr4, boolean z, String str3, String str4, boolean z2, String[] strArr, String[] strArr2, boolean z3, boolean z4, boolean z5);
+    private static native int nativeForkAndSpecialize(
+            int i,
+            int i2,
+            int[] iArr,
+            int i3,
+            int[][] iArr2,
+            int i4,
+            String str,
+            String str2,
+            int[] iArr3,
+            int[] iArr4,
+            boolean z,
+            String str3,
+            String str4,
+            boolean z2,
+            String[] strArr,
+            String[] strArr2,
+            boolean z3,
+            boolean z4,
+            boolean z5);
 
     private static native int nativeForkApp(int i, int i2, int[] iArr, boolean z, boolean z2);
 
-    private static native int nativeForkSystemServer(int i, int i2, int[] iArr, int i3, int[][] iArr2, long j, long j2);
+    private static native int nativeForkSystemServer(
+            int i, int i2, int[] iArr, int i3, int[][] iArr2, long j, long j2);
 
     private static native int[] nativeGetUsapPipeFDs();
 
@@ -142,7 +168,24 @@ public final class Zygote {
     @CriticalNative
     private static native boolean nativeRemoveUsapTableEntry(int i);
 
-    private static native void nativeSpecializeAppProcess(int i, int i2, int[] iArr, int i3, int[][] iArr2, int i4, String str, String str2, boolean z, String str3, String str4, boolean z2, String[] strArr, String[] strArr2, boolean z3, boolean z4, boolean z5);
+    private static native void nativeSpecializeAppProcess(
+            int i,
+            int i2,
+            int[] iArr,
+            int i3,
+            int[][] iArr2,
+            int i4,
+            String str,
+            String str2,
+            boolean z,
+            String str3,
+            String str4,
+            boolean z2,
+            String[] strArr,
+            String[] strArr2,
+            boolean z3,
+            boolean z4,
+            boolean z5);
 
     public static native boolean nativeSupportsMemoryTagging();
 
@@ -150,8 +193,7 @@ public final class Zygote {
 
     private static native void nativeUnblockSigTerm();
 
-    private Zygote() {
-    }
+    private Zygote() {}
 
     private static boolean containsInetGid(int[] gids) {
         for (int i : gids) {
@@ -162,9 +204,48 @@ public final class Zygote {
         return false;
     }
 
-    static int forkAndSpecialize(int uid, int gid, int[] gids, int runtimeFlags, int[][] rlimits, int mountExternal, String seInfo, String niceName, int[] fdsToClose, int[] fdsToIgnore, boolean startChildZygote, String instructionSet, String appDataDir, boolean isTopApp, String[] pkgDataInfoList, String[] allowlistedDataInfoList, boolean bindMountAppDataDirs, boolean bindMountAppStorageDirs, boolean bindMountSyspropOverrides) {
+    static int forkAndSpecialize(
+            int uid,
+            int gid,
+            int[] gids,
+            int runtimeFlags,
+            int[][] rlimits,
+            int mountExternal,
+            String seInfo,
+            String niceName,
+            int[] fdsToClose,
+            int[] fdsToIgnore,
+            boolean startChildZygote,
+            String instructionSet,
+            String appDataDir,
+            boolean isTopApp,
+            String[] pkgDataInfoList,
+            String[] allowlistedDataInfoList,
+            boolean bindMountAppDataDirs,
+            boolean bindMountAppStorageDirs,
+            boolean bindMountSyspropOverrides) {
         ZygoteHooks.preFork();
-        int pid = nativeForkAndSpecialize(uid, gid, gids, runtimeFlags, rlimits, mountExternal, seInfo, niceName, fdsToClose, fdsToIgnore, startChildZygote, instructionSet, appDataDir, isTopApp, pkgDataInfoList, allowlistedDataInfoList, bindMountAppDataDirs, bindMountAppStorageDirs, bindMountSyspropOverrides);
+        int pid =
+                nativeForkAndSpecialize(
+                        uid,
+                        gid,
+                        gids,
+                        runtimeFlags,
+                        rlimits,
+                        mountExternal,
+                        seInfo,
+                        niceName,
+                        fdsToClose,
+                        fdsToIgnore,
+                        startChildZygote,
+                        instructionSet,
+                        appDataDir,
+                        isTopApp,
+                        pkgDataInfoList,
+                        allowlistedDataInfoList,
+                        bindMountAppDataDirs,
+                        bindMountAppStorageDirs,
+                        bindMountSyspropOverrides);
         if (pid == 0) {
             Trace.traceBegin(64L, "PostFork");
             if (gids != null && gids.length > 0) {
@@ -176,8 +257,42 @@ public final class Zygote {
         return pid;
     }
 
-    private static void specializeAppProcess(int uid, int gid, int[] gids, int runtimeFlags, int[][] rlimits, int mountExternal, String seInfo, String niceName, boolean startChildZygote, String instructionSet, String appDataDir, boolean isTopApp, String[] pkgDataInfoList, String[] allowlistedDataInfoList, boolean bindMountAppDataDirs, boolean bindMountAppStorageDirs, boolean bindMountSyspropOverrides) {
-        nativeSpecializeAppProcess(uid, gid, gids, runtimeFlags, rlimits, mountExternal, seInfo, niceName, startChildZygote, instructionSet, appDataDir, isTopApp, pkgDataInfoList, allowlistedDataInfoList, bindMountAppDataDirs, bindMountAppStorageDirs, bindMountSyspropOverrides);
+    private static void specializeAppProcess(
+            int uid,
+            int gid,
+            int[] gids,
+            int runtimeFlags,
+            int[][] rlimits,
+            int mountExternal,
+            String seInfo,
+            String niceName,
+            boolean startChildZygote,
+            String instructionSet,
+            String appDataDir,
+            boolean isTopApp,
+            String[] pkgDataInfoList,
+            String[] allowlistedDataInfoList,
+            boolean bindMountAppDataDirs,
+            boolean bindMountAppStorageDirs,
+            boolean bindMountSyspropOverrides) {
+        nativeSpecializeAppProcess(
+                uid,
+                gid,
+                gids,
+                runtimeFlags,
+                rlimits,
+                mountExternal,
+                seInfo,
+                niceName,
+                startChildZygote,
+                instructionSet,
+                appDataDir,
+                isTopApp,
+                pkgDataInfoList,
+                allowlistedDataInfoList,
+                bindMountAppDataDirs,
+                bindMountAppStorageDirs,
+                bindMountSyspropOverrides);
         Trace.traceBegin(64L, "PostFork");
         if (gids != null && gids.length > 0) {
             NetworkUtilsInternal.setAllowNetworkingForProcess(containsInetGid(gids));
@@ -186,9 +301,24 @@ public final class Zygote {
         ZygoteHooks.postForkCommon();
     }
 
-    static int forkSystemServer(int uid, int gid, int[] gids, int runtimeFlags, int[][] rlimits, long permittedCapabilities, long effectiveCapabilities) {
+    static int forkSystemServer(
+            int uid,
+            int gid,
+            int[] gids,
+            int runtimeFlags,
+            int[][] rlimits,
+            long permittedCapabilities,
+            long effectiveCapabilities) {
         ZygoteHooks.preFork();
-        int pid = nativeForkSystemServer(uid, gid, gids, runtimeFlags, rlimits, permittedCapabilities, effectiveCapabilities);
+        int pid =
+                nativeForkSystemServer(
+                        uid,
+                        gid,
+                        gids,
+                        runtimeFlags,
+                        rlimits,
+                        permittedCapabilities,
+                        effectiveCapabilities);
         Thread.currentThread().setPriority(5);
         ZygoteHooks.postForkCommon();
         return pid;
@@ -213,15 +343,28 @@ public final class Zygote {
     }
 
     public static String getConfigurationProperty(String propertyName, String defaultValue) {
-        return SystemProperties.get(String.join(MediaMetrics.SEPARATOR, ZygoteConfig.PROPERTY_PREFIX_DEVICE_CONFIG, "runtime_native", propertyName), defaultValue);
+        return SystemProperties.get(
+                String.join(
+                        MediaMetrics.SEPARATOR,
+                        ZygoteConfig.PROPERTY_PREFIX_DEVICE_CONFIG,
+                        "runtime_native",
+                        propertyName),
+                defaultValue);
     }
 
     static void emptyUsapPool() {
         nativeEmptyUsapPool();
     }
 
-    public static boolean getConfigurationPropertyBoolean(String propertyName, Boolean defaultValue) {
-        return SystemProperties.getBoolean(String.join(MediaMetrics.SEPARATOR, ZygoteConfig.PROPERTY_PREFIX_DEVICE_CONFIG, "runtime_native", propertyName), defaultValue.booleanValue());
+    public static boolean getConfigurationPropertyBoolean(
+            String propertyName, Boolean defaultValue) {
+        return SystemProperties.getBoolean(
+                String.join(
+                        MediaMetrics.SEPARATOR,
+                        ZygoteConfig.PROPERTY_PREFIX_DEVICE_CONFIG,
+                        "runtime_native",
+                        propertyName),
+                defaultValue.booleanValue());
     }
 
     static int getUsapPoolCount() {
@@ -234,12 +377,19 @@ public final class Zygote {
         return fd;
     }
 
-    static Runnable forkUsap(LocalServerSocket usapPoolSocket, int[] sessionSocketRawFDs, boolean isPriorityFork) {
+    static Runnable forkUsap(
+            LocalServerSocket usapPoolSocket, int[] sessionSocketRawFDs, boolean isPriorityFork) {
         try {
             FileDescriptor[] pipeFDs = Os.pipe2(OsConstants.O_CLOEXEC);
             FileDescriptor readFD = pipeFDs[0];
             FileDescriptor writeFD = pipeFDs[1];
-            int pid = nativeForkApp(readFD.getInt$(), writeFD.getInt$(), sessionSocketRawFDs, false, isPriorityFork);
+            int pid =
+                    nativeForkApp(
+                            readFD.getInt$(),
+                            writeFD.getInt$(),
+                            sessionSocketRawFDs,
+                            false,
+                            isPriorityFork);
             if (pid == 0) {
                 IoUtils.closeQuietly(readFD);
                 return childMain(null, usapPoolSocket, writeFD);
@@ -255,15 +405,24 @@ public final class Zygote {
         }
     }
 
-    static Runnable forkSimpleApps(ZygoteCommandBuffer argBuffer, FileDescriptor zygoteSocket, int expectedUid, int minUid, String firstNiceName) {
-        boolean in_child = argBuffer.forkRepeatedly(zygoteSocket, expectedUid, minUid, firstNiceName);
+    static Runnable forkSimpleApps(
+            ZygoteCommandBuffer argBuffer,
+            FileDescriptor zygoteSocket,
+            int expectedUid,
+            int minUid,
+            String firstNiceName) {
+        boolean in_child =
+                argBuffer.forkRepeatedly(zygoteSocket, expectedUid, minUid, firstNiceName);
         if (!in_child) {
             return null;
         }
         return childMain(argBuffer, null, null);
     }
 
-    private static Runnable childMain(ZygoteCommandBuffer argBuffer, LocalServerSocket usapPoolSocket, FileDescriptor writePipe) {
+    private static Runnable childMain(
+            ZygoteCommandBuffer argBuffer,
+            LocalServerSocket usapPoolSocket,
+            FileDescriptor writePipe) {
         ZygoteArguments args;
         int[][] rlimits;
         int pid = Process.myPid();
@@ -330,7 +489,9 @@ public final class Zygote {
                             throw new RuntimeException(ex3);
                         }
                     } catch (IOException ioEx) {
-                        Log.e("USAP", "Failed to write response to session socket: " + ioEx.getMessage());
+                        Log.e(
+                                "USAP",
+                                "Failed to write response to session socket: " + ioEx.getMessage());
                         throw new RuntimeException(ioEx);
                     }
                 }
@@ -343,7 +504,13 @@ public final class Zygote {
                             outputStream.flush();
                             Os.write(writePipe, buffer.toByteArray(), 0, buffer.size());
                         } catch (Exception ex4) {
-                            Log.e("USAP", String.format("Failed to write PID (%d) to pipe (%d): %s", Integer.valueOf(pid), Integer.valueOf(writePipe.getInt$()), ex4.getMessage()));
+                            Log.e(
+                                    "USAP",
+                                    String.format(
+                                            "Failed to write PID (%d) to pipe (%d): %s",
+                                            Integer.valueOf(pid),
+                                            Integer.valueOf(writePipe.getInt$()),
+                                            ex4.getMessage()));
                             throw new RuntimeException(ex4);
                         }
                     }
@@ -356,10 +523,32 @@ public final class Zygote {
                         th = th3;
                     }
                     try {
-                        specializeAppProcess(args.mUid, args.mGid, args.mGids, args.mRuntimeFlags, rlimits, args.mMountExternal, args.mSeInfo, args.mNiceName, args.mStartChildZygote, args.mInstructionSet, args.mAppDataDir, args.mIsTopApp, args.mPkgDataInfoList, args.mAllowlistedDataInfoList, args.mBindMountAppDataDirs, args.mBindMountAppStorageDirs, args.mBindMountSyspropOverrides);
+                        specializeAppProcess(
+                                args.mUid,
+                                args.mGid,
+                                args.mGids,
+                                args.mRuntimeFlags,
+                                rlimits,
+                                args.mMountExternal,
+                                args.mSeInfo,
+                                args.mNiceName,
+                                args.mStartChildZygote,
+                                args.mInstructionSet,
+                                args.mAppDataDir,
+                                args.mIsTopApp,
+                                args.mPkgDataInfoList,
+                                args.mAllowlistedDataInfoList,
+                                args.mBindMountAppDataDirs,
+                                args.mBindMountAppStorageDirs,
+                                args.mBindMountSyspropOverrides);
                         setAppProcessName(args, TAG);
                         Trace.traceEnd(64L);
-                        Runnable zygoteInit = ZygoteInit.zygoteInit(args.mTargetSdkVersion, args.mDisabledCompatChanges, args.mRemainingArgs, null);
+                        Runnable zygoteInit =
+                                ZygoteInit.zygoteInit(
+                                        args.mTargetSdkVersion,
+                                        args.mDisabledCompatChanges,
+                                        args.mRemainingArgs,
+                                        null);
                         unblockSigTerm();
                         return zygoteInit;
                     } catch (Throwable th4) {
@@ -428,19 +617,26 @@ public final class Zygote {
             throw new IllegalArgumentException("Invalid command to USAP: --start-child-zygote");
         }
         if (args.mApiDenylistExemptions != null) {
-            throw new IllegalArgumentException("Invalid command to USAP: --set-api-denylist-exemptions");
+            throw new IllegalArgumentException(
+                    "Invalid command to USAP: --set-api-denylist-exemptions");
         }
         if (args.mHiddenApiAccessLogSampleRate != -1) {
-            throw new IllegalArgumentException("Invalid command to USAP: --hidden-api-log-sampling-rate=");
+            throw new IllegalArgumentException(
+                    "Invalid command to USAP: --hidden-api-log-sampling-rate=");
         }
         if (args.mHiddenApiAccessStatslogSampleRate != -1) {
-            throw new IllegalArgumentException("Invalid command to USAP: --hidden-api-statslog-sampling-rate=");
+            throw new IllegalArgumentException(
+                    "Invalid command to USAP: --hidden-api-statslog-sampling-rate=");
         }
         if (args.mInvokeWith != null) {
             throw new IllegalArgumentException("Invalid command to USAP: --invoke-with");
         }
         if (args.mPermittedCapabilities != 0 || args.mEffectiveCapabilities != 0) {
-            throw new ZygoteSecurityException("Client may not specify capabilities: permitted=0x" + Long.toHexString(args.mPermittedCapabilities) + ", effective=0x" + Long.toHexString(args.mEffectiveCapabilities));
+            throw new ZygoteSecurityException(
+                    "Client may not specify capabilities: permitted=0x"
+                            + Long.toHexString(args.mPermittedCapabilities)
+                            + ", effective=0x"
+                            + Long.toHexString(args.mEffectiveCapabilities));
         }
     }
 
@@ -456,7 +652,8 @@ public final class Zygote {
         return (peer.getUid() == 1000 && FactoryTest.getMode() == 0) ? 1000 : 0;
     }
 
-    static void applyUidSecurityPolicy(ZygoteArguments args, Credentials peer) throws ZygoteSecurityException {
+    static void applyUidSecurityPolicy(ZygoteArguments args, Credentials peer)
+            throws ZygoteSecurityException {
         if (args.mUidSpecified && args.mUid < minChildUid(peer)) {
             throw new ZygoteSecurityException("System UID may not launch process with UID < 1000");
         }
@@ -480,16 +677,24 @@ public final class Zygote {
         }
     }
 
-    static void applyInvokeWithSecurityPolicy(ZygoteArguments args, Credentials peer) throws ZygoteSecurityException {
+    static void applyInvokeWithSecurityPolicy(ZygoteArguments args, Credentials peer)
+            throws ZygoteSecurityException {
         int peerUid = peer.getUid();
-        if (args.mInvokeWith != null && peerUid != 0 && (args.mRuntimeFlags & InputDevice.SOURCE_HDMI) == 0) {
-            throw new ZygoteSecurityException("Peer is permitted to specify an explicit invoke-with wrapper command only for debuggable applications.");
+        if (args.mInvokeWith != null
+                && peerUid != 0
+                && (args.mRuntimeFlags & InputDevice.SOURCE_HDMI) == 0) {
+            throw new ZygoteSecurityException(
+                    "Peer is permitted to specify an explicit invoke-with wrapper command only for"
+                        + " debuggable applications.");
         }
     }
 
     public static String getWrapProperty(String appName) {
         String propertyValue;
-        if (appName == null || appName.isEmpty() || (propertyValue = SystemProperties.get("wrap." + appName)) == null || propertyValue.isEmpty()) {
+        if (appName == null
+                || appName.isEmpty()
+                || (propertyValue = SystemProperties.get("wrap." + appName)) == null
+                || propertyValue.isEmpty()) {
             return null;
         }
         return propertyValue;
@@ -511,7 +716,8 @@ public final class Zygote {
                 fd.setInt$(fileDesc);
                 return new LocalServerSocket(fd);
             } catch (IOException ex) {
-                throw new RuntimeException("Error building socket from file descriptor: " + fileDesc, ex);
+                throw new RuntimeException(
+                        "Error building socket from file descriptor: " + fileDesc, ex);
             }
         } catch (RuntimeException ex2) {
             throw new RuntimeException("Socket unset or invalid: " + fullSocketName, ex2);
@@ -522,7 +728,8 @@ public final class Zygote {
         ZygoteHooks.postForkSystemServer(runtimeFlags);
     }
 
-    private static void callPostForkChildHooks(int runtimeFlags, boolean isSystemServer, boolean isZygote, String instructionSet) {
+    private static void callPostForkChildHooks(
+            int runtimeFlags, boolean isSystemServer, boolean isZygote, String instructionSet) {
         ZygoteHooks.postForkChild(runtimeFlags, isSystemServer, isZygote, instructionSet);
     }
 
@@ -552,7 +759,8 @@ public final class Zygote {
         }
     }
 
-    private static boolean isCompatChangeEnabled(long change, ApplicationInfo info, IPlatformCompat platformCompat, int enabledAfter) {
+    private static boolean isCompatChangeEnabled(
+            long change, ApplicationInfo info, IPlatformCompat platformCompat, int enabledAfter) {
         if (platformCompat != null) {
             try {
                 return platformCompat.isChangeEnabled(change, info);
@@ -562,7 +770,8 @@ public final class Zygote {
         return enabledAfter > 0 && info.targetSdkVersion > enabledAfter;
     }
 
-    private static int getRequestedMemtagLevel(ApplicationInfo info, ProcessInfo processInfo, IPlatformCompat platformCompat) {
+    private static int getRequestedMemtagLevel(
+            ApplicationInfo info, ProcessInfo processInfo, IPlatformCompat platformCompat) {
         String appOverride = SystemProperties.get("persist.arm64.memtag.app." + info.packageName);
         if ("sync".equals(appOverride)) {
             return 1572864;
@@ -593,12 +802,15 @@ public final class Zygote {
             if ("async".equals(defaultLevel)) {
                 return 1048576;
             }
-            return isCompatChangeEnabled(NATIVE_HEAP_POINTER_TAGGING, info, platformCompat, 29) ? 524288 : 0;
+            return isCompatChangeEnabled(NATIVE_HEAP_POINTER_TAGGING, info, platformCompat, 29)
+                    ? 524288
+                    : 0;
         }
         return memtagModeToZygoteMemtagLevel(processInfo.memtagMode);
     }
 
-    private static int decideTaggingLevel(ApplicationInfo info, ProcessInfo processInfo, IPlatformCompat platformCompat) {
+    private static int decideTaggingLevel(
+            ApplicationInfo info, ProcessInfo processInfo, IPlatformCompat platformCompat) {
         int level = getRequestedMemtagLevel(info, processInfo, platformCompat);
         if (nativeSupportsMemoryTagging()) {
             if (level == 524288) {
@@ -612,7 +824,8 @@ public final class Zygote {
             level = 0;
         }
         if (level == 1048576) {
-            if ((Build.IS_USERDEBUG || Build.IS_ENG) && "sync".equals(SystemProperties.get("persist.arm64.memtag.default"))) {
+            if ((Build.IS_USERDEBUG || Build.IS_ENG)
+                    && "sync".equals(SystemProperties.get("persist.arm64.memtag.default"))) {
                 return 1572864;
             }
             return level;
@@ -620,7 +833,8 @@ public final class Zygote {
         return level;
     }
 
-    private static int decideGwpAsanLevel(ApplicationInfo info, ProcessInfo processInfo, IPlatformCompat platformCompat) {
+    private static int decideGwpAsanLevel(
+            ApplicationInfo info, ProcessInfo processInfo, IPlatformCompat platformCompat) {
         if (processInfo != null && processInfo.gwpAsanMode != -1) {
             return processInfo.gwpAsanMode == 1 ? 4194304 : 0;
         }
@@ -636,11 +850,20 @@ public final class Zygote {
         return 6291456;
     }
 
-    private static boolean enableNativeHeapZeroInit(ApplicationInfo info, ProcessInfo processInfo, IPlatformCompat platformCompat) {
-        return (processInfo == null || processInfo.nativeHeapZeroInitialized == -1) ? info.getNativeHeapZeroInitialized() != -1 ? info.getNativeHeapZeroInitialized() == 1 : isCompatChangeEnabled(NATIVE_HEAP_ZERO_INIT, info, platformCompat, 0) : processInfo.nativeHeapZeroInitialized == 1;
+    private static boolean enableNativeHeapZeroInit(
+            ApplicationInfo info, ProcessInfo processInfo, IPlatformCompat platformCompat) {
+        return (processInfo == null || processInfo.nativeHeapZeroInitialized == -1)
+                ? info.getNativeHeapZeroInitialized() != -1
+                        ? info.getNativeHeapZeroInitialized() == 1
+                        : isCompatChangeEnabled(NATIVE_HEAP_ZERO_INIT, info, platformCompat, 0)
+                : processInfo.nativeHeapZeroInitialized == 1;
     }
 
-    public static int getMemorySafetyRuntimeFlags(ApplicationInfo info, ProcessInfo processInfo, String instructionSet, IPlatformCompat platformCompat) {
+    public static int getMemorySafetyRuntimeFlags(
+            ApplicationInfo info,
+            ProcessInfo processInfo,
+            String instructionSet,
+            IPlatformCompat platformCompat) {
         int runtimeFlags = decideGwpAsanLevel(info, processInfo, platformCompat);
         if (instructionSet == null || instructionSet.equals("arm64")) {
             runtimeFlags |= decideTaggingLevel(info, processInfo, platformCompat);
@@ -651,10 +874,15 @@ public final class Zygote {
         return runtimeFlags;
     }
 
-    public static int getMemorySafetyRuntimeFlagsForSecondaryZygote(ApplicationInfo info, ProcessInfo processInfo) {
-        IPlatformCompat platformCompat = IPlatformCompat.Stub.asInterface(ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
+    public static int getMemorySafetyRuntimeFlagsForSecondaryZygote(
+            ApplicationInfo info, ProcessInfo processInfo) {
+        IPlatformCompat platformCompat =
+                IPlatformCompat.Stub.asInterface(
+                        ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
         int runtimeFlags = getMemorySafetyRuntimeFlags(info, processInfo, null, platformCompat);
-        if ((1572864 & runtimeFlags) == 524288 && isCompatChangeEnabled(NATIVE_HEAP_POINTER_TAGGING_SECONDARY_ZYGOTE, info, platformCompat, 31)) {
+        if ((1572864 & runtimeFlags) == 524288
+                && isCompatChangeEnabled(
+                        NATIVE_HEAP_POINTER_TAGGING_SECONDARY_ZYGOTE, info, platformCompat, 31)) {
             return (runtimeFlags & (-1572865)) | 0;
         }
         return runtimeFlags;

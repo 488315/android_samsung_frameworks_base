@@ -1,6 +1,7 @@
 package com.google.android.mms.pdu;
 
 import android.util.Log;
+
 import com.google.android.mms.ContentType;
 import com.google.android.mms.InvalidHeaderValueException;
 
@@ -26,7 +27,9 @@ public class SendReq extends MultimediaMessagePdu {
         return transactionId.getBytes();
     }
 
-    public SendReq(byte[] contentType, EncodedStringValue from, int mmsVersion, byte[] transactionId) throws InvalidHeaderValueException {
+    public SendReq(
+            byte[] contentType, EncodedStringValue from, int mmsVersion, byte[] transactionId)
+            throws InvalidHeaderValueException {
         setMessageType(128);
         setContentType(contentType);
         setFrom(from);

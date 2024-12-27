@@ -10,7 +10,8 @@ public class SemStreamEventCallback extends AudioTrack.StreamEventCallback {
     public long mNativeCallbackPtr;
     public long mUserDataPtr;
 
-    private static native void native_stream_event_onStreamDataRequest(long j, long j2, long j3, int i);
+    private static native void native_stream_event_onStreamDataRequest(
+            long j, long j2, long j3, int i);
 
     private static native void native_stream_event_onStreamPresentationEnd(long j, long j2);
 
@@ -39,6 +40,7 @@ public class SemStreamEventCallback extends AudioTrack.StreamEventCallback {
 
     @Override // android.media.AudioTrack.StreamEventCallback
     public void onDataRequest(AudioTrack track, int size) {
-        native_stream_event_onStreamDataRequest(this.mAJavaAudioTrackPtr, this.mNativeCallbackPtr, this.mUserDataPtr, size);
+        native_stream_event_onStreamDataRequest(
+                this.mAJavaAudioTrackPtr, this.mNativeCallbackPtr, this.mUserDataPtr, size);
     }
 }

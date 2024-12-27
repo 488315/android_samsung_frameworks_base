@@ -1,13 +1,13 @@
 package android.os;
 
 import android.content.Context;
-import android.os.SystemVibrator;
-import android.os.Vibrator;
 import android.os.vibrator.VibratorInfoFactory;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.samsung.android.vibrator.VibrationDebugInfo;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.Executor;
@@ -18,7 +18,8 @@ public class SystemVibrator extends Vibrator {
     private final ArrayList<MultiVibratorStateListener> mBrokenListeners;
     private final Context mContext;
     private final Object mLock;
-    private final ArrayMap<Vibrator.OnVibratorStateChangedListener, MultiVibratorStateListener> mRegisteredListeners;
+    private final ArrayMap<Vibrator.OnVibratorStateChangedListener, MultiVibratorStateListener>
+            mRegisteredListeners;
     private int mSupportedPatternCounts;
     private int mSupportedVibrationType;
     private VibratorInfo mVibratorInfo;
@@ -32,7 +33,8 @@ public class SystemVibrator extends Vibrator {
         this.mSupportedVibrationType = -1;
         this.mSupportedPatternCounts = -1;
         this.mContext = context;
-        this.mVibratorManager = (VibratorManager) this.mContext.getSystemService(VibratorManager.class);
+        this.mVibratorManager =
+                (VibratorManager) this.mContext.getSystemService(VibratorManager.class);
     }
 
     @Override // android.os.Vibrator
@@ -55,7 +57,11 @@ public class SystemVibrator extends Vibrator {
             for (int i = 0; i < vibratorIds.length; i++) {
                 Vibrator vibrator = this.mVibratorManager.getVibrator(vibratorIds[i]);
                 if (vibrator instanceof NullVibrator) {
-                    Log.w(TAG, "Vibrator manager service not ready; Info not yet available for vibrator: " + vibratorIds[i]);
+                    Log.w(
+                            TAG,
+                            "Vibrator manager service not ready; Info not yet available for"
+                                + " vibrator: "
+                                    + vibratorIds[i]);
                     return VibratorInfo.EMPTY_VIBRATOR_INFO;
                 }
                 vibratorInfos[i] = vibrator.getInfo();
@@ -100,7 +106,8 @@ public class SystemVibrator extends Vibrator {
     }
 
     @Override // android.os.Vibrator
-    public void addVibratorStateListener(Executor executor, Vibrator.OnVibratorStateChangedListener listener) {
+    public void addVibratorStateListener(
+            Executor executor, Vibrator.OnVibratorStateChangedListener listener) {
         Objects.requireNonNull(listener);
         Objects.requireNonNull(executor);
         if (this.mVibratorManager == null) {
@@ -120,7 +127,8 @@ public class SystemVibrator extends Vibrator {
                     tryUnregisterBrokenListeners();
                     return;
                 }
-                MultiVibratorStateListener delegate2 = new MultiVibratorStateListener(executor, listener);
+                MultiVibratorStateListener delegate2 =
+                        new MultiVibratorStateListener(executor, listener);
                 delegate2.register(this.mVibratorManager);
                 this.mRegisteredListeners.put(listener, delegate2);
                 MultiVibratorStateListener delegate3 = null;
@@ -165,17 +173,28 @@ public class SystemVibrator extends Vibrator {
     }
 
     @Override // android.os.Vibrator
-    public boolean setAlwaysOnEffect(int uid, String opPkg, int alwaysOnId, VibrationEffect effect, VibrationAttributes attrs) {
+    public boolean setAlwaysOnEffect(
+            int uid,
+            String opPkg,
+            int alwaysOnId,
+            VibrationEffect effect,
+            VibrationAttributes attrs) {
         if (this.mVibratorManager == null) {
             Log.w(TAG, "Failed to set always-on effect; no vibrator manager.");
             return false;
         }
         CombinedVibration combinedEffect = CombinedVibration.createParallel(effect);
-        return this.mVibratorManager.setAlwaysOnEffect(uid, opPkg, alwaysOnId, combinedEffect, attrs);
+        return this.mVibratorManager.setAlwaysOnEffect(
+                uid, opPkg, alwaysOnId, combinedEffect, attrs);
     }
 
     @Override // android.os.Vibrator
-    public void vibrate(int uid, String opPkg, VibrationEffect effect, String reason, VibrationAttributes attributes) {
+    public void vibrate(
+            int uid,
+            String opPkg,
+            VibrationEffect effect,
+            String reason,
+            VibrationAttributes attributes) {
         if (this.mVibratorManager == null) {
             Log.w(TAG, "Failed to vibrate; no vibrator manager.");
         } else {
@@ -185,7 +204,8 @@ public class SystemVibrator extends Vibrator {
     }
 
     @Override // android.os.Vibrator
-    public void performHapticFeedback(int constant, boolean always, String reason, boolean fromIme) {
+    public void performHapticFeedback(
+            int constant, boolean always, String reason, boolean fromIme) {
         if (this.mVibratorManager == null) {
             Log.w(TAG, "Failed to perform haptic feedback; no vibrator manager.");
         } else {
@@ -229,7 +249,8 @@ public class SystemVibrator extends Vibrator {
         }
     }
 
-    private static class SingleVibratorStateListener implements Vibrator.OnVibratorStateChangedListener {
+    private static class SingleVibratorStateListener
+            implements Vibrator.OnVibratorStateChangedListener {
         private final MultiVibratorStateListener mAllVibratorsListener;
         private final int mVibratorIdx;
 
@@ -250,9 +271,11 @@ public class SystemVibrator extends Vibrator {
         private int mInitializedMask;
         private int mVibratingMask;
         private final Object mLock = new Object();
-        private final SparseArray<SingleVibratorStateListener> mVibratorListeners = new SparseArray<>();
+        private final SparseArray<SingleVibratorStateListener> mVibratorListeners =
+                new SparseArray<>();
 
-        public MultiVibratorStateListener(Executor executor, Vibrator.OnVibratorStateChangedListener listener) {
+        public MultiVibratorStateListener(
+                Executor executor, Vibrator.OnVibratorStateChangedListener listener) {
             this.mExecutor = executor;
             this.mDelegate = listener;
         }
@@ -272,13 +295,19 @@ public class SystemVibrator extends Vibrator {
                     int vibratorId = vibratorIds[i];
                     SingleVibratorStateListener listener = new SingleVibratorStateListener(this, i);
                     try {
-                        vibratorManager.getVibrator(vibratorId).addVibratorStateListener(this.mExecutor, listener);
+                        vibratorManager
+                                .getVibrator(vibratorId)
+                                .addVibratorStateListener(this.mExecutor, listener);
                         this.mVibratorListeners.put(vibratorId, listener);
                     } catch (RuntimeException e) {
                         try {
                             unregister(vibratorManager);
                         } catch (RuntimeException e1) {
-                            Log.w(SystemVibrator.TAG, "Failed to unregister listener while recovering from a failed register call", e1);
+                            Log.w(
+                                    SystemVibrator.TAG,
+                                    "Failed to unregister listener while recovering from a failed"
+                                        + " register call",
+                                    e1);
                         }
                         throw e;
                     }
@@ -294,7 +323,9 @@ public class SystemVibrator extends Vibrator {
                     if (i >= 0) {
                         int vibratorId = this.mVibratorListeners.keyAt(i);
                         SingleVibratorStateListener listener = this.mVibratorListeners.valueAt(i);
-                        vibratorManager.getVibrator(vibratorId).removeVibratorStateListener(listener);
+                        vibratorManager
+                                .getVibrator(vibratorId)
+                                .removeVibratorStateListener(listener);
                         this.mVibratorListeners.removeAt(i);
                     }
                 }
@@ -302,12 +333,15 @@ public class SystemVibrator extends Vibrator {
         }
 
         public void onVibrating(final int vibratorIdx, final boolean vibrating) {
-            this.mExecutor.execute(new Runnable() { // from class: android.os.SystemVibrator$MultiVibratorStateListener$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SystemVibrator.MultiVibratorStateListener.this.lambda$onVibrating$0(vibratorIdx, vibrating);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.os.SystemVibrator$MultiVibratorStateListener$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SystemVibrator.MultiVibratorStateListener.this.lambda$onVibrating$0(
+                                    vibratorIdx, vibrating);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */

@@ -12,7 +12,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.telephony.IBootstrapAuthenticationCallback;
-import android.telephony.gba.IGbaService;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -47,7 +46,13 @@ public class GbaService extends Service {
                     synchronized (GbaService.this.mCallbacks) {
                         GbaService.this.mCallbacks.put(req.getToken(), req.getCallback());
                     }
-                    GbaService.this.onAuthenticationRequest(req.getSubId(), req.getToken(), req.getAppType(), req.getNafUrl(), req.getSecurityProtocol(), req.isForceBootStrapping());
+                    GbaService.this.onAuthenticationRequest(
+                            req.getSubId(),
+                            req.getToken(),
+                            req.getAppType(),
+                            req.getNafUrl(),
+                            req.getSecurityProtocol(),
+                            req.isForceBootStrapping());
                     return;
                 default:
                     return;
@@ -55,11 +60,18 @@ public class GbaService extends Service {
         }
     }
 
-    public void onAuthenticationRequest(int subscriptionId, int token, int appType, Uri nafUrl, byte[] securityProtocol, boolean forceBootStrapping) {
+    public void onAuthenticationRequest(
+            int subscriptionId,
+            int token,
+            int appType,
+            Uri nafUrl,
+            byte[] securityProtocol,
+            boolean forceBootStrapping) {
         reportAuthenticationFailure(token, 1);
     }
 
-    public final void reportKeysAvailable(int token, byte[] gbaKey, String transactionId) throws RuntimeException {
+    public final void reportKeysAvailable(int token, byte[] gbaKey, String transactionId)
+            throws RuntimeException {
         IBootstrapAuthenticationCallback cb;
         synchronized (this.mCallbacks) {
             cb = this.mCallbacks.get(token);
@@ -105,8 +117,7 @@ public class GbaService extends Service {
     }
 
     private class IGbaServiceWrapper extends IGbaService.Stub {
-        private IGbaServiceWrapper() {
-        }
+        private IGbaServiceWrapper() {}
 
         @Override // android.telephony.gba.IGbaService
         public void authenticationRequest(GbaAuthRequest request) {

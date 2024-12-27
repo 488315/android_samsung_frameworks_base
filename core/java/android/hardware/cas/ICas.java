@@ -42,8 +42,7 @@ public interface ICas extends IInterface {
 
     public static class Default implements ICas {
         @Override // android.hardware.cas.ICas
-        public void closeSession(byte[] sessionId) throws RemoteException {
-        }
+        public void closeSession(byte[] sessionId) throws RemoteException {}
 
         @Override // android.hardware.cas.ICas
         public byte[] openSessionDefault() throws RemoteException {
@@ -56,40 +55,34 @@ public interface ICas extends IInterface {
         }
 
         @Override // android.hardware.cas.ICas
-        public void processEcm(byte[] sessionId, byte[] ecm) throws RemoteException {
-        }
+        public void processEcm(byte[] sessionId, byte[] ecm) throws RemoteException {}
 
         @Override // android.hardware.cas.ICas
-        public void processEmm(byte[] emm) throws RemoteException {
-        }
+        public void processEmm(byte[] emm) throws RemoteException {}
 
         @Override // android.hardware.cas.ICas
-        public void provision(String provisionString) throws RemoteException {
-        }
+        public void provision(String provisionString) throws RemoteException {}
 
         @Override // android.hardware.cas.ICas
-        public void refreshEntitlements(int refreshType, byte[] refreshData) throws RemoteException {
-        }
+        public void refreshEntitlements(int refreshType, byte[] refreshData)
+                throws RemoteException {}
 
         @Override // android.hardware.cas.ICas
-        public void release() throws RemoteException {
-        }
+        public void release() throws RemoteException {}
 
         @Override // android.hardware.cas.ICas
-        public void sendEvent(int event, int arg, byte[] eventData) throws RemoteException {
-        }
+        public void sendEvent(int event, int arg, byte[] eventData) throws RemoteException {}
 
         @Override // android.hardware.cas.ICas
-        public void sendSessionEvent(byte[] sessionId, int event, int arg, byte[] eventData) throws RemoteException {
-        }
+        public void sendSessionEvent(byte[] sessionId, int event, int arg, byte[] eventData)
+                throws RemoteException {}
 
         @Override // android.hardware.cas.ICas
-        public void setPrivateData(byte[] pvtData) throws RemoteException {
-        }
+        public void setPrivateData(byte[] pvtData) throws RemoteException {}
 
         @Override // android.hardware.cas.ICas
-        public void setSessionPrivateData(byte[] sessionId, byte[] pvtData) throws RemoteException {
-        }
+        public void setSessionPrivateData(byte[] sessionId, byte[] pvtData)
+                throws RemoteException {}
 
         @Override // android.hardware.cas.ICas
         public int getInterfaceVersion() {
@@ -107,7 +100,7 @@ public interface ICas extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICas {
+    public abstract static class Stub extends Binder implements ICas {
         static final int TRANSACTION_closeSession = 1;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -145,7 +138,8 @@ public interface ICas extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -381,7 +375,8 @@ public interface ICas extends IInterface {
             }
 
             @Override // android.hardware.cas.ICas
-            public void refreshEntitlements(int refreshType, byte[] refreshData) throws RemoteException {
+            public void refreshEntitlements(int refreshType, byte[] refreshData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -437,7 +432,8 @@ public interface ICas extends IInterface {
             }
 
             @Override // android.hardware.cas.ICas
-            public void sendSessionEvent(byte[] sessionId, int event, int arg, byte[] eventData) throws RemoteException {
+            public void sendSessionEvent(byte[] sessionId, int event, int arg, byte[] eventData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -476,7 +472,8 @@ public interface ICas extends IInterface {
             }
 
             @Override // android.hardware.cas.ICas
-            public void setSessionPrivateData(byte[] sessionId, byte[] pvtData) throws RemoteException {
+            public void setSessionPrivateData(byte[] sessionId, byte[] pvtData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

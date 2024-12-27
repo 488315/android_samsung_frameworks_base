@@ -10,13 +10,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.SurfaceControl;
-import android.window.ScreenCapture;
+
 import com.android.window.flags.Flags;
+
+import libcore.util.NativeAllocationRegistry;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.ObjIntConsumer;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes4.dex */
 public class ScreenCapture {
@@ -28,10 +31,12 @@ public class ScreenCapture {
 
     private static native int nativeCaptureDisplay(DisplayCaptureArgs displayCaptureArgs, long j);
 
-    private static native int nativeCaptureLayers(LayerCaptureArgs layerCaptureArgs, long j, boolean z);
+    private static native int nativeCaptureLayers(
+            LayerCaptureArgs layerCaptureArgs, long j, boolean z);
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static native long nativeCreateScreenCaptureListener(ObjIntConsumer<ScreenshotHardwareBuffer> objIntConsumer);
+    public static native long nativeCreateScreenCaptureListener(
+            ObjIntConsumer<ScreenshotHardwareBuffer> objIntConsumer);
 
     /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeReadListenerFromParcel(Parcel parcel);
@@ -39,7 +44,8 @@ public class ScreenCapture {
     /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeWriteListenerToParcel(long j, Parcel parcel);
 
-    public static int captureDisplay(DisplayCaptureArgs captureArgs, ScreenCaptureListener captureListener) {
+    public static int captureDisplay(
+            DisplayCaptureArgs captureArgs, ScreenCaptureListener captureListener) {
         return nativeCaptureDisplay(captureArgs, captureListener.mNativeObject);
     }
 
@@ -56,18 +62,27 @@ public class ScreenCapture {
         }
     }
 
-    public static ScreenshotHardwareBuffer captureLayers(SurfaceControl layer, Rect sourceCrop, float frameScale) {
+    public static ScreenshotHardwareBuffer captureLayers(
+            SurfaceControl layer, Rect sourceCrop, float frameScale) {
         return captureLayers(layer, sourceCrop, frameScale, 1);
     }
 
-    public static ScreenshotHardwareBuffer captureLayers(SurfaceControl layer, Rect sourceCrop, float frameScale, int format) {
-        LayerCaptureArgs captureArgs = new LayerCaptureArgs.Builder(layer).setSourceCrop(sourceCrop).setFrameScale(frameScale).setPixelFormat(format).build();
+    public static ScreenshotHardwareBuffer captureLayers(
+            SurfaceControl layer, Rect sourceCrop, float frameScale, int format) {
+        LayerCaptureArgs captureArgs =
+                new LayerCaptureArgs.Builder(layer)
+                        .setSourceCrop(sourceCrop)
+                        .setFrameScale(frameScale)
+                        .setPixelFormat(format)
+                        .build();
         return captureLayers(captureArgs);
     }
 
     public static ScreenshotHardwareBuffer captureLayers(LayerCaptureArgs captureArgs) {
         SynchronousScreenCaptureListener syncScreenCapture = createSyncCaptureListener();
-        int status = nativeCaptureLayers(captureArgs, syncScreenCapture.mNativeObject, Flags.syncScreenCapture());
+        int status =
+                nativeCaptureLayers(
+                        captureArgs, syncScreenCapture.mNativeObject, Flags.syncScreenCapture());
         if (status != 0) {
             return null;
         }
@@ -78,16 +93,36 @@ public class ScreenCapture {
         }
     }
 
-    public static ScreenshotHardwareBuffer captureLayersExcluding(SurfaceControl layer, Rect sourceCrop, float frameScale, int format, SurfaceControl[] exclude) {
+    public static ScreenshotHardwareBuffer captureLayersExcluding(
+            SurfaceControl layer,
+            Rect sourceCrop,
+            float frameScale,
+            int format,
+            SurfaceControl[] exclude) {
         return captureLayersExcluding(layer, sourceCrop, frameScale, format, exclude, false);
     }
 
-    public static ScreenshotHardwareBuffer captureLayersExcluding(SurfaceControl layer, Rect sourceCrop, float frameScale, int format, SurfaceControl[] exclude, boolean captureSecureLayers) {
-        LayerCaptureArgs captureArgs = new LayerCaptureArgs.Builder(layer).setSourceCrop(sourceCrop).setFrameScale(frameScale).setPixelFormat(format).setExcludeLayers(exclude).setIsScreenShotBySystem(CoreRune.FW_SCREENSHOT_FOR_HDR).setCaptureSecureLayers(captureSecureLayers).build();
+    public static ScreenshotHardwareBuffer captureLayersExcluding(
+            SurfaceControl layer,
+            Rect sourceCrop,
+            float frameScale,
+            int format,
+            SurfaceControl[] exclude,
+            boolean captureSecureLayers) {
+        LayerCaptureArgs captureArgs =
+                new LayerCaptureArgs.Builder(layer)
+                        .setSourceCrop(sourceCrop)
+                        .setFrameScale(frameScale)
+                        .setPixelFormat(format)
+                        .setExcludeLayers(exclude)
+                        .setIsScreenShotBySystem(CoreRune.FW_SCREENSHOT_FOR_HDR)
+                        .setCaptureSecureLayers(captureSecureLayers)
+                        .build();
         return captureLayers(captureArgs);
     }
 
-    public static int captureLayers(LayerCaptureArgs captureArgs, ScreenCaptureListener captureListener) {
+    public static int captureLayers(
+            LayerCaptureArgs captureArgs, ScreenCaptureListener captureListener) {
         return nativeCaptureLayers(captureArgs, captureListener.mNativeObject, false);
     }
 
@@ -97,16 +132,28 @@ public class ScreenCapture {
         private final boolean mContainsSecureLayers;
         private final HardwareBuffer mHardwareBuffer;
 
-        public ScreenshotHardwareBuffer(HardwareBuffer hardwareBuffer, ColorSpace colorSpace, boolean containsSecureLayers, boolean containsHdrLayers) {
+        public ScreenshotHardwareBuffer(
+                HardwareBuffer hardwareBuffer,
+                ColorSpace colorSpace,
+                boolean containsSecureLayers,
+                boolean containsHdrLayers) {
             this.mHardwareBuffer = hardwareBuffer;
             this.mColorSpace = colorSpace;
             this.mContainsSecureLayers = containsSecureLayers;
             this.mContainsHdrLayers = containsHdrLayers;
         }
 
-        private static ScreenshotHardwareBuffer createFromNative(HardwareBuffer hardwareBuffer, int dataspace, boolean containsSecureLayers, boolean containsHdrLayers) {
+        private static ScreenshotHardwareBuffer createFromNative(
+                HardwareBuffer hardwareBuffer,
+                int dataspace,
+                boolean containsSecureLayers,
+                boolean containsHdrLayers) {
             ColorSpace colorSpace = ColorSpace.getFromDataSpace(dataspace);
-            return new ScreenshotHardwareBuffer(hardwareBuffer, colorSpace != null ? colorSpace : ColorSpace.get(ColorSpace.Named.SRGB), containsSecureLayers, containsHdrLayers);
+            return new ScreenshotHardwareBuffer(
+                    hardwareBuffer,
+                    colorSpace != null ? colorSpace : ColorSpace.get(ColorSpace.Named.SRGB),
+                    containsSecureLayers,
+                    containsHdrLayers);
         }
 
         public ColorSpace getColorSpace() {
@@ -135,19 +182,21 @@ public class ScreenCapture {
     }
 
     public static class CaptureArgs implements Parcelable {
-        public static final Parcelable.Creator<CaptureArgs> CREATOR = new Parcelable.Creator<CaptureArgs>() { // from class: android.window.ScreenCapture.CaptureArgs.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public CaptureArgs createFromParcel(Parcel in) {
-                return new CaptureArgs(in);
-            }
+        public static final Parcelable.Creator<CaptureArgs> CREATOR =
+                new Parcelable.Creator<
+                        CaptureArgs>() { // from class: android.window.ScreenCapture.CaptureArgs.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public CaptureArgs createFromParcel(Parcel in) {
+                        return new CaptureArgs(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public CaptureArgs[] newArray(int size) {
-                return new CaptureArgs[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public CaptureArgs[] newArray(int size) {
+                        return new CaptureArgs[size];
+                    }
+                };
         public final boolean mAllowProtected;
         public final boolean mCaptureSecureLayers;
         final SurfaceControl[] mExcludeLayers;
@@ -295,7 +344,9 @@ public class ScreenCapture {
 
             public T setIsScreenShotBySystem(boolean isScreenShotBySystem) {
                 this.mIsScreenShotBySystem = isScreenShotBySystem;
-                Log.d(ScreenCapture.TAG, "[Capture_TEST] : setIsScreenShotBySystem " + isScreenShotBySystem);
+                Log.d(
+                        ScreenCapture.TAG,
+                        "[Capture_TEST] : setIsScreenShotBySystem " + isScreenShotBySystem);
                 return getThis();
             }
 
@@ -362,7 +413,8 @@ public class ScreenCapture {
             @Override // android.window.ScreenCapture.CaptureArgs.Builder
             public DisplayCaptureArgs build() {
                 if (this.mDisplayToken == null) {
-                    throw new IllegalStateException("Can't take screenshot with null display token");
+                    throw new IllegalStateException(
+                            "Can't take screenshot with null display token");
                 }
                 return new DisplayCaptureArgs(this);
             }
@@ -459,20 +511,26 @@ public class ScreenCapture {
 
     public static class ScreenCaptureListener implements Parcelable {
         final long mNativeObject;
-        private static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(ScreenCaptureListener.class.getClassLoader(), ScreenCapture.getNativeListenerFinalizer());
-        public static final Parcelable.Creator<ScreenCaptureListener> CREATOR = new Parcelable.Creator<ScreenCaptureListener>() { // from class: android.window.ScreenCapture.ScreenCaptureListener.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ScreenCaptureListener createFromParcel(Parcel in) {
-                return new ScreenCaptureListener(in);
-            }
+        private static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        ScreenCaptureListener.class.getClassLoader(),
+                        ScreenCapture.getNativeListenerFinalizer());
+        public static final Parcelable.Creator<ScreenCaptureListener> CREATOR =
+                new Parcelable.Creator<
+                        ScreenCaptureListener>() { // from class:
+                                                   // android.window.ScreenCapture.ScreenCaptureListener.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ScreenCaptureListener createFromParcel(Parcel in) {
+                        return new ScreenCaptureListener(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ScreenCaptureListener[] newArray(int size) {
-                return new ScreenCaptureListener[0];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ScreenCaptureListener[] newArray(int size) {
+                        return new ScreenCaptureListener[0];
+                    }
+                };
 
         public ScreenCaptureListener(ObjIntConsumer<ScreenshotHardwareBuffer> consumer) {
             this.mNativeObject = ScreenCapture.nativeCreateScreenCaptureListener(consumer);
@@ -507,13 +565,17 @@ public class ScreenCapture {
     public static SynchronousScreenCaptureListener createSyncCaptureListener() {
         final ScreenshotHardwareBuffer[] bufferRef = new ScreenshotHardwareBuffer[1];
         final CountDownLatch latch = new CountDownLatch(1);
-        final ObjIntConsumer<ScreenshotHardwareBuffer> consumer = new ObjIntConsumer() { // from class: android.window.ScreenCapture$$ExternalSyntheticLambda0
-            @Override // java.util.function.ObjIntConsumer
-            public final void accept(Object obj, int i) {
-                ScreenCapture.lambda$createSyncCaptureListener$0(bufferRef, latch, (ScreenCapture.ScreenshotHardwareBuffer) obj, i);
-            }
-        };
-        return new SynchronousScreenCaptureListener(consumer) { // from class: android.window.ScreenCapture.1
+        final ObjIntConsumer<ScreenshotHardwareBuffer> consumer =
+                new ObjIntConsumer() { // from class:
+                                       // android.window.ScreenCapture$$ExternalSyntheticLambda0
+                    @Override // java.util.function.ObjIntConsumer
+                    public final void accept(Object obj, int i) {
+                        ScreenCapture.lambda$createSyncCaptureListener$0(
+                                bufferRef, latch, (ScreenCapture.ScreenshotHardwareBuffer) obj, i);
+                    }
+                };
+        return new SynchronousScreenCaptureListener(
+                consumer) { // from class: android.window.ScreenCapture.1
             private ObjIntConsumer<ScreenshotHardwareBuffer> mConsumer;
 
             {
@@ -536,7 +598,11 @@ public class ScreenCapture {
         };
     }
 
-    static /* synthetic */ void lambda$createSyncCaptureListener$0(ScreenshotHardwareBuffer[] bufferRef, CountDownLatch latch, ScreenshotHardwareBuffer buffer, int status) {
+    static /* synthetic */ void lambda$createSyncCaptureListener$0(
+            ScreenshotHardwareBuffer[] bufferRef,
+            CountDownLatch latch,
+            ScreenshotHardwareBuffer buffer,
+            int status) {
         if (status != 0) {
             bufferRef[0] = null;
             Log.e(TAG, "Failed to generate screen capture. Error code: " + status);
@@ -546,7 +612,7 @@ public class ScreenCapture {
         latch.countDown();
     }
 
-    public static abstract class SynchronousScreenCaptureListener extends ScreenCaptureListener {
+    public abstract static class SynchronousScreenCaptureListener extends ScreenCaptureListener {
         public abstract ScreenshotHardwareBuffer getBuffer();
 
         SynchronousScreenCaptureListener(ObjIntConsumer<ScreenshotHardwareBuffer> consumer) {

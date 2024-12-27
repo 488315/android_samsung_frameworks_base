@@ -2,6 +2,7 @@ package android.app.ondeviceintelligence;
 
 import android.annotation.SystemApi;
 import android.os.PersistableBundle;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 
@@ -29,8 +30,7 @@ public class OnDeviceIntelligenceException extends Exception {
     private final PersistableBundle mErrorParams;
 
     @Target({ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
-    @interface OnDeviceIntelligenceError {
-    }
+    @interface OnDeviceIntelligenceError {}
 
     public int getErrorCode() {
         return this.mErrorCode;
@@ -40,7 +40,8 @@ public class OnDeviceIntelligenceException extends Exception {
         return this.mErrorParams;
     }
 
-    public OnDeviceIntelligenceException(int errorCode, String errorMessage, PersistableBundle errorParams) {
+    public OnDeviceIntelligenceException(
+            int errorCode, String errorMessage, PersistableBundle errorParams) {
         super(errorMessage);
         this.mErrorCode = errorCode;
         this.mErrorParams = errorParams;

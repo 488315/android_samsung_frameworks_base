@@ -3,10 +3,13 @@ package com.samsung.android.server.packagefeature.core;
 import android.content.Context;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.Environment;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
+
 import com.samsung.android.server.packagefeature.PackageFeatureGroup;
 import com.samsung.android.server.util.CoreEncryptor;
 import com.samsung.android.server.util.CoreLogger;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -34,11 +37,16 @@ public final class PackageFeatureGroupDataUtilWithEncryption {
 
     static {
         String path = Environment.getDataDirectory().getPath();
-        LEGACY_DIR_PATH = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(path, "/system/packageconfiguration/");
-        DIR_PATH = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(path, "/system/packagefeature_cache/");
+        LEGACY_DIR_PATH =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                        path, "/system/packageconfiguration/");
+        DIR_PATH =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                        path, "/system/packagefeature_cache/");
     }
 
-    public PackageFeatureGroupDataUtilWithEncryption(Context context, CoreLogger coreLogger, PackageFeatureGroup packageFeatureGroup) {
+    public PackageFeatureGroupDataUtilWithEncryption(
+            Context context, CoreLogger coreLogger, PackageFeatureGroup packageFeatureGroup) {
         this.mContext = context;
         this.mLogger = coreLogger;
         this.mGroup = packageFeatureGroup;
@@ -91,7 +99,8 @@ public final class PackageFeatureGroupDataUtilWithEncryption {
                 logFailed("decrypt", null);
                 throw new Exception("decrypt");
             }
-            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+            ByteArrayInputStream byteArrayInputStream =
+                    new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
             try {
                 ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
                 try {
@@ -114,25 +123,47 @@ public final class PackageFeatureGroupDataUtilWithEncryption {
         }
     }
 
-    public final PackageFeatureGroupData loadFromReader(int i, Reader reader, String str, boolean z) {
+    public final PackageFeatureGroupData loadFromReader(
+            int i, Reader reader, String str, boolean z) {
         try {
-            PackageFeatureGroupDataUtil$GroupDataReader packageFeatureGroupDataUtil$GroupDataReader = new PackageFeatureGroupDataUtil$GroupDataReader();
+            PackageFeatureGroupDataUtil$GroupDataReader
+                    packageFeatureGroupDataUtil$GroupDataReader =
+                            new PackageFeatureGroupDataUtil$GroupDataReader();
             boolean z2 = true;
             packageFeatureGroupDataUtil$GroupDataReader.mLineCount = 1;
-            packageFeatureGroupDataUtil$GroupDataReader.mBufferedReader = new BufferedReader(reader);
+            packageFeatureGroupDataUtil$GroupDataReader.mBufferedReader =
+                    new BufferedReader(reader);
             try {
                 packageFeatureGroupDataUtil$GroupDataReader.open(z);
                 int i2 = packageFeatureGroupDataUtil$GroupDataReader.mVersion;
                 CoreLogger coreLogger = this.mLogger;
                 PackageFeatureGroup packageFeatureGroup = this.mGroup;
                 if ((z || i != i2) && i >= i2) {
-                    coreLogger.log(3, "Skip " + str + ", GroupName=" + packageFeatureGroup.mName + ", currentVersion=" + i + ", readerVersion=" + i2, null);
+                    coreLogger.log(
+                            3,
+                            "Skip "
+                                    + str
+                                    + ", GroupName="
+                                    + packageFeatureGroup.mName
+                                    + ", currentVersion="
+                                    + i
+                                    + ", readerVersion="
+                                    + i2,
+                            null);
                     packageFeatureGroupDataUtil$GroupDataReader.close();
                     return null;
                 }
                 try {
-                    PackageFeatureGroupData packageFeatureGroupDataInner = packageFeatureGroupDataUtil$GroupDataReader.getPackageFeatureGroupDataInner();
-                    String str2 = str + "(" + i2 + "," + packageFeatureGroupDataUtil$GroupDataReader.mLineCount + ")";
+                    PackageFeatureGroupData packageFeatureGroupDataInner =
+                            packageFeatureGroupDataUtil$GroupDataReader
+                                    .getPackageFeatureGroupDataInner();
+                    String str2 =
+                            str
+                                    + "("
+                                    + i2
+                                    + ","
+                                    + packageFeatureGroupDataUtil$GroupDataReader.mLineCount
+                                    + ")";
                     if (packageFeatureGroupDataInner == null) {
                         logFailed(str2, null);
                         if (this.mConsumerForFailed != null) {
@@ -141,9 +172,20 @@ public final class PackageFeatureGroupDataUtilWithEncryption {
                             if (i3 > 3) {
                                 z2 = false;
                             }
-                            coreLogger.log(3, "Failed groupName=" + packageFeatureGroup.mName + ", retry=" + z2 + "(" + this.mRetryByFailed + "), fromRawResource=" + z, null);
+                            coreLogger.log(
+                                    3,
+                                    "Failed groupName="
+                                            + packageFeatureGroup.mName
+                                            + ", retry="
+                                            + z2
+                                            + "("
+                                            + this.mRetryByFailed
+                                            + "), fromRawResource="
+                                            + z,
+                                    null);
                             if (z2) {
-                                this.mConsumerForFailed.accept(packageFeatureGroup.mName, 10800000L);
+                                this.mConsumerForFailed.accept(
+                                        packageFeatureGroup.mName, 10800000L);
                             }
                         }
                     } else {
@@ -172,7 +214,8 @@ public final class PackageFeatureGroupDataUtilWithEncryption {
     }
 
     public final void logSucceeded(String str) {
-        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Succeeded to ", str, ", GroupName=");
+        StringBuilder m =
+                DumpUtils$$ExternalSyntheticOutline0.m("Succeeded to ", str, ", GroupName=");
         m.append(this.mGroup.mName);
         this.mLogger.log(3, m.toString(), null);
     }
@@ -196,14 +239,16 @@ public final class PackageFeatureGroupDataUtilWithEncryption {
         }
     }
 
-    public final void saveToFileOutputStream(PackageFeatureGroupData packageFeatureGroupData, FileOutputStream fileOutputStream) {
+    public final void saveToFileOutputStream(
+            PackageFeatureGroupData packageFeatureGroupData, FileOutputStream fileOutputStream) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
             try {
                 objectOutputStream.writeObject(packageFeatureGroupData);
                 objectOutputStream.flush();
-                ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+                ByteArrayInputStream byteArrayInputStream =
+                        new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
                 try {
                     if (!this.mEncryptor.encrypt(byteArrayInputStream, fileOutputStream)) {
                         logFailed("encrypt", null);

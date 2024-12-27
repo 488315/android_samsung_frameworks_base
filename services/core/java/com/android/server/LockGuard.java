@@ -26,7 +26,12 @@ public abstract class LockGuard {
         }
         LockInfo lockInfo2 = new LockInfo();
         lockInfo2.children = new ArraySet(0, true);
-        lockInfo2.label = "0x" + Integer.toHexString(System.identityHashCode(obj)) + " [" + new Throwable().getStackTrace()[2].toString() + "]";
+        lockInfo2.label =
+                "0x"
+                        + Integer.toHexString(System.identityHashCode(obj))
+                        + " ["
+                        + new Throwable().getStackTrace()[2].toString()
+                        + "]";
         arrayMap.put(obj, lockInfo2);
         return lockInfo2;
     }
@@ -37,17 +42,26 @@ public abstract class LockGuard {
             Object obj = objArr[i2];
             if (obj != null && Thread.holdsLock(obj)) {
                 Object obj2 = objArr[i];
-                String str = "Calling thread " + Thread.currentThread().getName() + " is holding " + lockToString(i2) + " while trying to acquire " + lockToString(i);
+                String str =
+                        "Calling thread "
+                                + Thread.currentThread().getName()
+                                + " is holding "
+                                + lockToString(i2)
+                                + " while trying to acquire "
+                                + lockToString(i);
                 if (obj2 == null || !findOrCreateLockInfo(obj2).doWtf) {
                     Slog.w("LockGuard", str, new Throwable());
                 } else {
                     final RuntimeException runtimeException = new RuntimeException(str);
-                    new Thread(new Runnable() { // from class: com.android.server.LockGuard$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            Slog.wtf("LockGuard", runtimeException);
-                        }
-                    }).start();
+                    new Thread(
+                                    new Runnable() { // from class:
+                                                     // com.android.server.LockGuard$$ExternalSyntheticLambda0
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            Slog.wtf("LockGuard", runtimeException);
+                                        }
+                                    })
+                            .start();
                 }
             }
         }

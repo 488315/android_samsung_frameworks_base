@@ -16,12 +16,10 @@ public interface IInputMonitorHost extends IInterface {
 
     public static class Default implements IInputMonitorHost {
         @Override // android.view.IInputMonitorHost
-        public void pilferPointers() throws RemoteException {
-        }
+        public void pilferPointers() throws RemoteException {}
 
         @Override // android.view.IInputMonitorHost
-        public void dispose() throws RemoteException {
-        }
+        public void dispose() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IInputMonitorHost extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputMonitorHost {
+    public abstract static class Stub extends Binder implements IInputMonitorHost {
         static final int TRANSACTION_dispose = 2;
         static final int TRANSACTION_pilferPointers = 1;
 
@@ -70,7 +68,8 @@ public interface IInputMonitorHost extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInputMonitorHost.DESCRIPTOR);
             }

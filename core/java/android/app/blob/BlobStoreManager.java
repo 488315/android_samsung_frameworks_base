@@ -1,6 +1,5 @@
 package android.app.blob;
 
-import android.app.blob.IBlobCommitCallback;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.LimitExceededException;
@@ -9,7 +8,9 @@ import android.os.ParcelableException;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
@@ -47,7 +48,8 @@ public class BlobStoreManager {
 
     public Session openSession(long sessionId) throws IOException {
         try {
-            return new Session(this.mService.openSession(sessionId, this.mContext.getOpPackageName()));
+            return new Session(
+                    this.mService.openSession(sessionId, this.mContext.getOpPackageName()));
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
             throw new RuntimeException(e);
@@ -78,9 +80,16 @@ public class BlobStoreManager {
         }
     }
 
-    public void acquireLease(BlobHandle blobHandle, int descriptionResId, long leaseExpiryTimeMillis) throws IOException {
+    public void acquireLease(
+            BlobHandle blobHandle, int descriptionResId, long leaseExpiryTimeMillis)
+            throws IOException {
         try {
-            this.mService.acquireLease(blobHandle, descriptionResId, null, leaseExpiryTimeMillis, this.mContext.getOpPackageName());
+            this.mService.acquireLease(
+                    blobHandle,
+                    descriptionResId,
+                    null,
+                    leaseExpiryTimeMillis,
+                    this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
             e.maybeRethrow(LimitExceededException.class);
@@ -90,9 +99,16 @@ public class BlobStoreManager {
         }
     }
 
-    public void acquireLease(BlobHandle blobHandle, CharSequence description, long leaseExpiryTimeMillis) throws IOException {
+    public void acquireLease(
+            BlobHandle blobHandle, CharSequence description, long leaseExpiryTimeMillis)
+            throws IOException {
         try {
-            this.mService.acquireLease(blobHandle, -1, description, leaseExpiryTimeMillis, this.mContext.getOpPackageName());
+            this.mService.acquireLease(
+                    blobHandle,
+                    -1,
+                    description,
+                    leaseExpiryTimeMillis,
+                    this.mContext.getOpPackageName());
         } catch (ParcelableException e) {
             e.maybeRethrow(IOException.class);
             e.maybeRethrow(LimitExceededException.class);
@@ -143,12 +159,15 @@ public class BlobStoreManager {
     public void waitForIdle(long timeoutMillis) throws InterruptedException, TimeoutException {
         try {
             final CountDownLatch countDownLatch = new CountDownLatch(1);
-            this.mService.waitForIdle(new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: android.app.blob.BlobStoreManager$$ExternalSyntheticLambda0
-                @Override // android.os.RemoteCallback.OnResultListener
-                public final void onResult(Bundle bundle) {
-                    countDownLatch.countDown();
-                }
-            }));
+            this.mService.waitForIdle(
+                    new RemoteCallback(
+                            new RemoteCallback.OnResultListener() { // from class:
+                                // android.app.blob.BlobStoreManager$$ExternalSyntheticLambda0
+                                @Override // android.os.RemoteCallback.OnResultListener
+                                public final void onResult(Bundle bundle) {
+                                    countDownLatch.countDown();
+                                }
+                            }));
             if (!countDownLatch.await(timeoutMillis, TimeUnit.MILLISECONDS)) {
                 throw new TimeoutException("Timed out waiting for service to become idle");
             }
@@ -210,7 +229,8 @@ public class BlobStoreManager {
             this.mSession = session;
         }
 
-        public ParcelFileDescriptor openWrite(long offsetBytes, long lengthBytes) throws IOException {
+        public ParcelFileDescriptor openWrite(long offsetBytes, long lengthBytes)
+                throws IOException {
             try {
                 ParcelFileDescriptor pfd = this.mSession.openWrite(offsetBytes, lengthBytes);
                 pfd.seekTo(offsetBytes);
@@ -280,7 +300,8 @@ public class BlobStoreManager {
             }
         }
 
-        public boolean isPackageAccessAllowed(String packageName, byte[] certificate) throws IOException {
+        public boolean isPackageAccessAllowed(String packageName, byte[] certificate)
+                throws IOException {
             try {
                 return this.mSession.isPackageAccessAllowed(packageName, certificate);
             } catch (ParcelableException e) {
@@ -335,19 +356,28 @@ public class BlobStoreManager {
             }
         }
 
-        public void commit(final Executor executor, final Consumer<Integer> resultCallback) throws IOException {
+        public void commit(final Executor executor, final Consumer<Integer> resultCallback)
+                throws IOException {
             try {
-                this.mSession.commit(new IBlobCommitCallback.Stub() { // from class: android.app.blob.BlobStoreManager.Session.1
-                    @Override // android.app.blob.IBlobCommitCallback
-                    public void onResult(int result) {
-                        executor.execute(PooledLambda.obtainRunnable(new BiConsumer() { // from class: android.app.blob.BlobStoreManager$Session$1$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                ((Consumer) obj).accept((Integer) obj2);
+                this.mSession.commit(
+                        new IBlobCommitCallback
+                                .Stub() { // from class: android.app.blob.BlobStoreManager.Session.1
+                            @Override // android.app.blob.IBlobCommitCallback
+                            public void onResult(int result) {
+                                executor.execute(
+                                        PooledLambda.obtainRunnable(
+                                                new BiConsumer() { // from class:
+                                                    // android.app.blob.BlobStoreManager$Session$1$$ExternalSyntheticLambda0
+                                                    @Override // java.util.function.BiConsumer
+                                                    public final void accept(
+                                                            Object obj, Object obj2) {
+                                                        ((Consumer) obj).accept((Integer) obj2);
+                                                    }
+                                                },
+                                                resultCallback,
+                                                Integer.valueOf(result)));
                             }
-                        }, resultCallback, Integer.valueOf(result)));
-                    }
-                });
+                        });
             } catch (ParcelableException e) {
                 e.maybeRethrow(IOException.class);
                 throw new RuntimeException(e);

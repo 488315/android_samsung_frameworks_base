@@ -1,12 +1,15 @@
 package com.android.server.am;
 
 import android.os.WorkSource;
+
 import com.android.server.power.stats.BatteryStatsImpl;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda46 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda46
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ String f$1;
@@ -15,7 +18,14 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda4
     public final /* synthetic */ long f$4;
     public final /* synthetic */ long f$5;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda46(int i, long j, long j2, WorkSource workSource, BatteryStatsService batteryStatsService, String str, String str2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda46(
+            int i,
+            long j,
+            long j2,
+            WorkSource workSource,
+            BatteryStatsService batteryStatsService,
+            String str,
+            String str2) {
         this.$r8$classId = i;
         this.f$0 = batteryStatsService;
         this.f$1 = str;
@@ -41,7 +51,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda4
                     int size = workSource.size();
                     int i = 0;
                     while (i < size) {
-                        batteryStatsImpl.noteLongPartialWakeLockStartInternal(batteryStatsImpl.mapUid(workSource.getUid(i)), str, str2, j, j2);
+                        batteryStatsImpl.noteLongPartialWakeLockStartInternal(
+                                batteryStatsImpl.mapUid(workSource.getUid(i)), str, str2, j, j2);
                         i++;
                         j2 = j2;
                     }
@@ -49,7 +60,12 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda4
                     List workChains = workSource.getWorkChains();
                     if (workChains != null) {
                         for (int i2 = 0; i2 < workChains.size(); i2++) {
-                            batteryStatsImpl.noteLongPartialWakeLockStartInternal(((WorkSource.WorkChain) workChains.get(i2)).getAttributionUid(), str, str2, j, j3);
+                            batteryStatsImpl.noteLongPartialWakeLockStartInternal(
+                                    ((WorkSource.WorkChain) workChains.get(i2)).getAttributionUid(),
+                                    str,
+                                    str2,
+                                    j,
+                                    j3);
                         }
                     }
                 }
@@ -67,7 +83,12 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda4
                     int size2 = workSource2.size();
                     int i3 = 0;
                     while (i3 < size2) {
-                        batteryStatsImpl2.noteLongPartialWakeLockFinishInternal(batteryStatsImpl2.mapUid(workSource2.getUid(i3)), str3, str4, j4, j5);
+                        batteryStatsImpl2.noteLongPartialWakeLockFinishInternal(
+                                batteryStatsImpl2.mapUid(workSource2.getUid(i3)),
+                                str3,
+                                str4,
+                                j4,
+                                j5);
                         i3++;
                         j5 = j5;
                     }
@@ -75,7 +96,13 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda4
                     List workChains2 = workSource2.getWorkChains();
                     if (workChains2 != null) {
                         for (int i4 = 0; i4 < workChains2.size(); i4++) {
-                            batteryStatsImpl2.noteLongPartialWakeLockFinishInternal(((WorkSource.WorkChain) workChains2.get(i4)).getAttributionUid(), str3, str4, j4, j6);
+                            batteryStatsImpl2.noteLongPartialWakeLockFinishInternal(
+                                    ((WorkSource.WorkChain) workChains2.get(i4))
+                                            .getAttributionUid(),
+                                    str3,
+                                    str4,
+                                    j4,
+                                    j6);
                         }
                     }
                 }

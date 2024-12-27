@@ -39,6 +39,7 @@ import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.config.sysui.SystemUiSystemPropertiesFlags;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.notification.SystemNotificationChannels;
@@ -51,9 +52,10 @@ import com.android.server.LocalServices;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerConstants$$ExternalSyntheticOutline0;
-import com.android.server.notification.ManagedServices;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.PrintWriter;
 import java.time.Clock;
 import java.time.Duration;
@@ -101,16 +103,13 @@ public final class ZenModeHelper {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Callback {
-        public void onAutomaticRuleStatusChanged(int i, int i2, String str, String str2) {
-        }
+        public void onAutomaticRuleStatusChanged(int i, int i2, String str, String str2) {}
 
         public abstract void onConfigChanged();
 
-        public void onConsolidatedPolicyChanged(NotificationManager.Policy policy) {
-        }
+        public void onConsolidatedPolicyChanged(NotificationManager.Policy policy) {}
 
-        public void onPolicyChanged(NotificationManager.Policy policy) {
-        }
+        public void onPolicyChanged(NotificationManager.Policy policy) {}
 
         public abstract void onZenModeChanged();
     }
@@ -147,7 +146,8 @@ public final class ZenModeHelper {
             }
             boolean booleanValue = ((Boolean) message.obj).booleanValue();
             zenModeHelper.getClass();
-            AudioManagerInternal audioManagerInternal = (AudioManagerInternal) LocalServices.getService(AudioManagerInternal.class);
+            AudioManagerInternal audioManagerInternal =
+                    (AudioManagerInternal) LocalServices.getService(AudioManagerInternal.class);
             if (audioManagerInternal != null) {
                 audioManagerInternal.updateRingerModeAffectedStreamsInternal();
             }
@@ -167,8 +167,7 @@ public final class ZenModeHelper {
         public int mPreviousZenType = -1;
         public long mTypeLogTimeMs = 0;
 
-        public Metrics() {
-        }
+        public Metrics() {}
 
         public final void emit() {
             H h = ZenModeHelper.this.mHandler;
@@ -182,7 +181,8 @@ public final class ZenModeHelper {
             ZenModeHelper zenModeHelper = ZenModeHelper.this;
             if (i3 != zenModeHelper.mZenMode || j > 60000) {
                 if (i3 != -1) {
-                    MetricsLogger.count(zenModeHelper.mContext, "dnd_mode_" + this.mPreviousZenMode, (int) j);
+                    MetricsLogger.count(
+                            zenModeHelper.mContext, "dnd_mode_" + this.mPreviousZenMode, (int) j);
                 }
                 this.mPreviousZenMode = zenModeHelper.mZenMode;
                 this.mModeLogTimeMs = elapsedRealtime;
@@ -194,7 +194,8 @@ public final class ZenModeHelper {
                     int i4 = this.mNumZenRules;
                     if (i4 != size || elapsedRealtime2 > 60000) {
                         if (i4 != -1) {
-                            MetricsLogger.count(ZenModeHelper.this.mContext, "dnd_rule_count", size - i4);
+                            MetricsLogger.count(
+                                    ZenModeHelper.this.mContext, "dnd_rule_count", size - i4);
                         }
                         this.mNumZenRules = size;
                         this.mRuleCountLogTime = elapsedRealtime2;
@@ -215,7 +216,10 @@ public final class ZenModeHelper {
                     int i5 = this.mPreviousZenType;
                     if (i2 != i5 || j2 > 60000) {
                         if (i5 != -1) {
-                            MetricsLogger.count(zenModeHelper2.mContext, "dnd_type_" + this.mPreviousZenType, (int) j2);
+                            MetricsLogger.count(
+                                    zenModeHelper2.mContext,
+                                    "dnd_type_" + this.mPreviousZenType,
+                                    (int) j2);
                         }
                         this.mTypeLogTimeMs = elapsedRealtime3;
                         this.mPreviousZenType = i2;
@@ -246,7 +250,8 @@ public final class ZenModeHelper {
             throw null;
         }
 
-        public final int onSetRingerModeExternal(int i, int i2, String str, int i3, VolumePolicy volumePolicy) {
+        public final int onSetRingerModeExternal(
+                int i, int i2, String str, int i3, VolumePolicy volumePolicy) {
             int i4;
             boolean z = i != i2;
             if (i2 != 0) {
@@ -276,7 +281,8 @@ public final class ZenModeHelper {
             return i4;
         }
 
-        public final int onSetRingerModeInternal(int i, int i2, String str, int i3, VolumePolicy volumePolicy) {
+        public final int onSetRingerModeInternal(
+                int i, int i2, String str, int i3, VolumePolicy volumePolicy) {
             throw null;
         }
 
@@ -302,7 +308,9 @@ public final class ZenModeHelper {
         public final void update(Uri uri) {
             if (this.ZEN_MODE.equals(uri)) {
                 ZenModeHelper zenModeHelper = ZenModeHelper.this;
-                if (zenModeHelper.mZenMode != Settings.Global.getInt(zenModeHelper.mContext.getContentResolver(), "zen_mode", 0)) {
+                if (zenModeHelper.mZenMode
+                        != Settings.Global.getInt(
+                                zenModeHelper.mContext.getContentResolver(), "zen_mode", 0)) {
                     if (ZenModeHelper.DEBUG) {
                         Log.d("ZenModeHelper", "Fixing zen mode setting");
                     }
@@ -319,12 +327,24 @@ public final class ZenModeHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public ZenModeHelper(android.content.Context r5, android.os.Looper r6, java.time.Clock r7, com.android.server.notification.ConditionProviders r8, com.android.internal.config.sysui.SystemUiSystemPropertiesFlags.FlagResolver r9, com.android.server.notification.ZenModeEventLogger r10) {
+    public ZenModeHelper(
+            android.content.Context r5,
+            android.os.Looper r6,
+            java.time.Clock r7,
+            com.android.server.notification.ConditionProviders r8,
+            com.android.internal.config.sysui.SystemUiSystemPropertiesFlags.FlagResolver r9,
+            com.android.server.notification.ZenModeEventLogger r10) {
         /*
             Method dump skipped, instructions count: 315
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.ZenModeHelper.<init>(android.content.Context, android.os.Looper, java.time.Clock, com.android.server.notification.ConditionProviders, com.android.internal.config.sysui.SystemUiSystemPropertiesFlags$FlagResolver, com.android.server.notification.ZenModeEventLogger):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.ZenModeHelper.<init>(android.content.Context,"
+                    + " android.os.Looper, java.time.Clock,"
+                    + " com.android.server.notification.ConditionProviders,"
+                    + " com.android.internal.config.sysui.SystemUiSystemPropertiesFlags$FlagResolver,"
+                    + " com.android.server.notification.ZenModeEventLogger):void");
     }
 
     public static String implicitRuleId(String str) {
@@ -333,7 +353,11 @@ public final class ZenModeHelper {
 
     public static void requirePublicOrigin(int i, String str) {
         if (android.app.Flags.modesApi()) {
-            Preconditions.checkArgument(i == 4 || i == 5 || i == 3, "Expected one of UPDATE_ORIGIN_APP, UPDATE_ORIGIN_SYSTEM_OR_SYSTEMUI, or UPDATE_ORIGIN_USER for %s, but received '%s'.", new Object[]{str, Integer.valueOf(i)});
+            Preconditions.checkArgument(
+                    i == 4 || i == 5 || i == 3,
+                    "Expected one of UPDATE_ORIGIN_APP, UPDATE_ORIGIN_SYSTEM_OR_SYSTEMUI, or"
+                        + " UPDATE_ORIGIN_USER for %s, but received '%s'.",
+                    new Object[] {str, Integer.valueOf(i)});
         }
     }
 
@@ -351,14 +375,25 @@ public final class ZenModeHelper {
         }
     }
 
-    public final void applyCustomPolicy(ZenPolicy zenPolicy, ZenModeConfig.ZenRule zenRule, boolean z) {
+    public final void applyCustomPolicy(
+            ZenPolicy zenPolicy, ZenModeConfig.ZenRule zenRule, boolean z) {
         int i = zenRule.zenMode;
         if (i == 2) {
-            zenPolicy.apply(new ZenPolicy.Builder().disallowAllSounds().allowPriorityChannels(false).build());
+            zenPolicy.apply(
+                    new ZenPolicy.Builder()
+                            .disallowAllSounds()
+                            .allowPriorityChannels(false)
+                            .build());
             return;
         }
         if (i == 3) {
-            zenPolicy.apply(new ZenPolicy.Builder().disallowAllSounds().allowAlarms(true).allowMedia(true).allowPriorityChannels(false).build());
+            zenPolicy.apply(
+                    new ZenPolicy.Builder()
+                            .disallowAllSounds()
+                            .allowAlarms(true)
+                            .allowMedia(true)
+                            .allowPriorityChannels(false)
+                            .build());
             return;
         }
         ZenPolicy zenPolicy2 = zenRule.zenPolicy;
@@ -374,11 +409,15 @@ public final class ZenModeHelper {
             zenPolicy.apply(this.mConfig.getZenPolicy());
             return;
         }
-        Log.wtf("ZenModeHelper", "active automatic rule found with no specified policy: " + zenRule);
-        zenPolicy.apply((android.app.Flags.modesUi() ? this.mDefaultConfig : this.mConfig).getZenPolicy());
+        Log.wtf(
+                "ZenModeHelper",
+                "active automatic rule found with no specified policy: " + zenRule);
+        zenPolicy.apply(
+                (android.app.Flags.modesUi() ? this.mDefaultConfig : this.mConfig).getZenPolicy());
     }
 
-    public final void applyGlobalPolicyAsImplicitZenRule(String str, int i, NotificationManager.Policy policy) {
+    public final void applyGlobalPolicyAsImplicitZenRule(
+            String str, int i, NotificationManager.Policy policy) {
         boolean z;
         if (!android.app.Flags.modesApi()) {
             Log.wtf("ZenModeHelper", "applyGlobalPolicyAsImplicitZenRule called with flag off!");
@@ -391,7 +430,8 @@ public final class ZenModeHelper {
                     return;
                 }
                 ZenModeConfig copy = zenModeConfig.copy();
-                ZenModeConfig.ZenRule zenRule = (ZenModeConfig.ZenRule) copy.automaticRules.get(implicitRuleId(str));
+                ZenModeConfig.ZenRule zenRule =
+                        (ZenModeConfig.ZenRule) copy.automaticRules.get(implicitRuleId(str));
                 if (zenRule == null) {
                     zenRule = newImplicitZenRule(str);
                     z = true;
@@ -401,9 +441,13 @@ public final class ZenModeHelper {
                     z = false;
                 }
                 if (zenRule.zenPolicyUserModifiedFields == 0) {
-                    ZenPolicy notificationPolicyToZenPolicy = ZenAdapters.notificationPolicyToZenPolicy(policy);
+                    ZenPolicy notificationPolicyToZenPolicy =
+                            ZenAdapters.notificationPolicyToZenPolicy(policy);
                     if (z) {
-                        notificationPolicyToZenPolicy = this.mConfig.getZenPolicy().overwrittenWith(notificationPolicyToZenPolicy);
+                        notificationPolicyToZenPolicy =
+                                this.mConfig
+                                        .getZenPolicy()
+                                        .overwrittenWith(notificationPolicyToZenPolicy);
                     }
                     updatePolicy(zenRule, notificationPolicyToZenPolicy, false, z);
                     setConfigLocked(copy, 4, "applyGlobalPolicyAsImplicitZenRule", null, true, i);
@@ -426,7 +470,8 @@ public final class ZenModeHelper {
                     return;
                 }
                 ZenModeConfig copy = zenModeConfig.copy();
-                ZenModeConfig.ZenRule zenRule = (ZenModeConfig.ZenRule) copy.automaticRules.get(implicitRuleId(str));
+                ZenModeConfig.ZenRule zenRule =
+                        (ZenModeConfig.ZenRule) copy.automaticRules.get(implicitRuleId(str));
                 if (i2 != 0) {
                     if (zenRule == null) {
                         zenRule = newImplicitZenRule(str);
@@ -437,10 +482,18 @@ public final class ZenModeHelper {
                         zenRule.zenMode = i2;
                     }
                     zenRule.snoozing = false;
-                    zenRule.condition = new Condition(zenRule.conditionId, this.mContext.getString(17043667), 1);
+                    zenRule.condition =
+                            new Condition(
+                                    zenRule.conditionId, this.mContext.getString(17043667), 1);
                     setConfigLocked(copy, 4, "applyGlobalZenModeAsImplicitZenRule", null, true, i);
                 } else if (zenRule != null) {
-                    setAutomaticZenRuleStateLocked(copy, Collections.singletonList(zenRule), new Condition(zenRule.conditionId, this.mContext.getString(17043668), 0), 4, i);
+                    setAutomaticZenRuleStateLocked(
+                            copy,
+                            Collections.singletonList(zenRule),
+                            new Condition(
+                                    zenRule.conditionId, this.mContext.getString(17043668), 0),
+                            4,
+                            i);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -454,7 +507,9 @@ public final class ZenModeHelper {
         boolean z2 = i == 1;
         boolean z3 = i == 2;
         boolean z4 = i == 3;
-        boolean z5 = this.mConsolidatedPolicy.allowCalls() || this.mConsolidatedPolicy.getExceptionContacts().size() > 0;
+        boolean z5 =
+                this.mConsolidatedPolicy.allowCalls()
+                        || this.mConsolidatedPolicy.getExceptionContacts().size() > 0;
         boolean allowRepeatCallers = this.mConsolidatedPolicy.allowRepeatCallers();
         boolean allowSystem = this.mConsolidatedPolicy.allowSystem();
         boolean allowMedia = this.mConsolidatedPolicy.allowMedia();
@@ -465,7 +520,8 @@ public final class ZenModeHelper {
         boolean z8 = z2 && !allowAlarms;
         boolean z9 = z2 && !allowMedia;
         boolean z10 = z4 || (z2 && !allowSystem);
-        boolean z11 = z3 || (z2 && ZenModeConfig.areAllZenBehaviorSoundsMuted(this.mConsolidatedPolicy));
+        boolean z11 =
+                z3 || (z2 && ZenModeConfig.areAllZenBehaviorSoundsMuted(this.mConsolidatedPolicy));
         int[] array = AudioAttributes.SDK_USAGES.toArray();
         int length = array.length;
         int i2 = 0;
@@ -503,7 +559,8 @@ public final class ZenModeHelper {
     public void applyRestrictions(boolean z, boolean z2, int i, int i2) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            this.mAppOps.setRestriction(i2, i, z2 ? 1 : 0, z ? this.mPriorityOnlyDndExemptPackages : null);
+            this.mAppOps.setRestriction(
+                    i2, i, z2 ? 1 : 0, z ? this.mPriorityOnlyDndExemptPackages : null);
             Binder.restoreCallingIdentity(clearCallingIdentity);
         } catch (Throwable th) {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -524,7 +581,9 @@ public final class ZenModeHelper {
                 ringerModeInternal = 0;
             }
         } else if (ringerModeInternal == 0) {
-            ringerModeInternal = Settings.Global.getInt(this.mContext.getContentResolver(), "zen_mode_ringer_level", 2);
+            ringerModeInternal =
+                    Settings.Global.getInt(
+                            this.mContext.getContentResolver(), "zen_mode_ringer_level", 2);
             setPreviousRingerModeSetting(null);
         }
         if (ringerModeInternal != -1) {
@@ -534,7 +593,10 @@ public final class ZenModeHelper {
 
     public final boolean canManageAutomaticZenRule(ZenModeConfig.ZenRule zenRule) {
         int callingUid = Binder.getCallingUid();
-        if (callingUid == 0 || callingUid == 1000 || this.mContext.checkCallingPermission("android.permission.MANAGE_NOTIFICATIONS") == 0) {
+        if (callingUid == 0
+                || callingUid == 1000
+                || this.mContext.checkCallingPermission("android.permission.MANAGE_NOTIFICATIONS")
+                        == 0) {
             return true;
         }
         String[] packagesForUid = this.mPm.getPackagesForUid(Binder.getCallingUid());
@@ -557,9 +619,10 @@ public final class ZenModeHelper {
                 if (android.app.Flags.modesApi()) {
                     deleteRulesWithoutOwner(copy.deletedRules);
                     for (int size = copy.deletedRules.size() - 1; size >= 0; size--) {
-                        Instant instant = ((ZenModeConfig.ZenRule) copy.deletedRules.valueAt(size)).deletionInstant;
-                        if (instant != null && !instant.isBefore(minus)) {
-                        }
+                        Instant instant =
+                                ((ZenModeConfig.ZenRule) copy.deletedRules.valueAt(size))
+                                        .deletionInstant;
+                        if (instant != null && !instant.isBefore(minus)) {}
                         copy.deletedRules.removeAt(size);
                     }
                 }
@@ -577,8 +640,11 @@ public final class ZenModeHelper {
         int i2;
         int i3;
         Bundle bundle = new Bundle();
-        bundle.putString("android.substName", this.mContext.getResources().getString(R.string.mediasize_na_ansi_f));
-        if (NotificationManager.Policy.areAllVisualEffectsSuppressed(this.mConsolidatedPolicy.copy().suppressedVisualEffects)) {
+        bundle.putString(
+                "android.substName",
+                this.mContext.getResources().getString(R.string.mediasize_na_ansi_f));
+        if (NotificationManager.Policy.areAllVisualEffectsSuppressed(
+                this.mConsolidatedPolicy.copy().suppressedVisualEffects)) {
             i = 17043679;
             i2 = 17043678;
             i3 = R.drawable.ic_find_next_material;
@@ -587,11 +653,29 @@ public final class ZenModeHelper {
             i2 = 17043676;
             i3 = R.drawable.jog_tab_left_confirm_red;
         }
-        return new Notification.Builder(this.mContext, SystemNotificationChannels.DO_NOT_DISTURB).setAutoCancel(true).setSmallIcon(R.drawable.ic_vibrate_small).setLargeIcon(Icon.createWithResource(this.mContext, i3)).setContentTitle(this.mContext.getResources().getString(i)).setContentText(this.mContext.getResources().getString(i2)).setContentIntent(PendingIntent.getActivity(this.mContext, 0, BatteryService$$ExternalSyntheticOutline0.m(268468224, "android.settings.ZEN_MODE_ONBOARDING"), 201326592)).setAutoCancel(true).setLocalOnly(true).addExtras(bundle).setStyle(new Notification.BigTextStyle()).build();
+        return new Notification.Builder(this.mContext, SystemNotificationChannels.DO_NOT_DISTURB)
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_vibrate_small)
+                .setLargeIcon(Icon.createWithResource(this.mContext, i3))
+                .setContentTitle(this.mContext.getResources().getString(i))
+                .setContentText(this.mContext.getResources().getString(i2))
+                .setContentIntent(
+                        PendingIntent.getActivity(
+                                this.mContext,
+                                0,
+                                BatteryService$$ExternalSyntheticOutline0.m(
+                                        268468224, "android.settings.ZEN_MODE_ONBOARDING"),
+                                201326592))
+                .setAutoCancel(true)
+                .setLocalOnly(true)
+                .addExtras(bundle)
+                .setStyle(new Notification.BigTextStyle())
+                .build();
     }
 
     public final void deleteRulesWithoutOwner(ArrayMap arrayMap) {
-        long millis = android.app.Flags.modesApi() ? this.mClock.millis() : System.currentTimeMillis();
+        long millis =
+                android.app.Flags.modesApi() ? this.mClock.millis() : System.currentTimeMillis();
         if (arrayMap != null) {
             for (int size = arrayMap.size() - 1; size >= 0; size--) {
                 ZenModeConfig.ZenRule zenRule = (ZenModeConfig.ZenRule) arrayMap.valueAt(size);
@@ -625,10 +709,26 @@ public final class ZenModeHelper {
             if (resourceName == null || resourceName.length() <= 1000) {
                 return resourceName;
             }
-            Slog.e("ZenModeHelper", "Resource name for ID=" + i + " in package " + str + " is too long (" + resourceName.length() + "); ignoring it");
+            Slog.e(
+                    "ZenModeHelper",
+                    "Resource name for ID="
+                            + i
+                            + " in package "
+                            + str
+                            + " is too long ("
+                            + resourceName.length()
+                            + "); ignoring it");
             return null;
         } catch (PackageManager.NameNotFoundException | Resources.NotFoundException unused) {
-            Slog.e("ZenModeHelper", AccountManagerService$$ExternalSyntheticOutline0.m(i, "Resource name for ID=", " not found in package ", str, ". Resource IDs may change when the application is upgraded, and the system may not be able to find the correct resource."));
+            Slog.e(
+                    "ZenModeHelper",
+                    AccountManagerService$$ExternalSyntheticOutline0.m(
+                            i,
+                            "Resource name for ID=",
+                            " not found in package ",
+                            str,
+                            ". Resource IDs may change when the application is upgraded, and the"
+                                + " system may not be able to find the correct resource."));
             return null;
         }
     }
@@ -643,7 +743,10 @@ public final class ZenModeHelper {
                     zenRule.dumpDebug(protoOutputStream, 2246267895810L);
                 }
                 for (ZenModeConfig.ZenRule zenRule2 : this.mConfig.automaticRules.values()) {
-                    if (zenRule2.enabled && (condition = zenRule2.condition) != null && condition.state == 1 && !zenRule2.snoozing) {
+                    if (zenRule2.enabled
+                            && (condition = zenRule2.condition) != null
+                            && condition.state == 1
+                            && !zenRule2.snoozing) {
                         zenRule2.dumpDebug(protoOutputStream, 2246267895810L);
                     }
                 }
@@ -689,7 +792,8 @@ public final class ZenModeHelper {
         }
         printWriter.print("    ");
         printWriter.print("mSuppressedEffects=");
-        ActivityManagerConstants$$ExternalSyntheticOutline0.m(this.mSuppressedEffects, printWriter, "    ", "mPriorityOnlyDndExemptPackages=");
+        ActivityManagerConstants$$ExternalSyntheticOutline0.m(
+                this.mSuppressedEffects, printWriter, "    ", "mPriorityOnlyDndExemptPackages=");
         printWriter.println("");
         for (i = 0; i < this.mPriorityOnlyDndExemptPackages.length; i++) {
             printWriter.print("    ");
@@ -736,7 +840,10 @@ public final class ZenModeHelper {
                         if (zenRule.isAutomaticActive()) {
                             int i5 = zenRule.zenMode;
                             char c = 2;
-                            char c2 = i5 != 1 ? i5 != 2 ? i5 != 3 ? (char) 0 : (char) 2 : (char) 3 : (char) 1;
+                            char c2 =
+                                    i5 != 1
+                                            ? i5 != 2 ? i5 != 3 ? (char) 0 : (char) 2 : (char) 3
+                                            : (char) 1;
                             if (i4 == 1) {
                                 c = 1;
                             } else if (i4 == 2) {
@@ -745,8 +852,15 @@ public final class ZenModeHelper {
                                 c = 0;
                             }
                             if (c2 > c) {
-                                if (Settings.Secure.getInt(this.mContext.getContentResolver(), "zen_settings_suggestion_viewed", 1) == 0) {
-                                    Settings.Secure.putInt(this.mContext.getContentResolver(), "show_zen_settings_suggestion", 1);
+                                if (Settings.Secure.getInt(
+                                                this.mContext.getContentResolver(),
+                                                "zen_settings_suggestion_viewed",
+                                                1)
+                                        == 0) {
+                                    Settings.Secure.putInt(
+                                            this.mContext.getContentResolver(),
+                                            "show_zen_settings_suggestion",
+                                            1);
                                 }
                                 i4 = zenRule.zenMode;
                             }
@@ -782,10 +896,14 @@ public final class ZenModeHelper {
             try {
                 arrayList = null;
                 for (ZenModeConfig.ZenRule zenRule : this.mConfig.automaticRules.values()) {
-                    if (zenRule.isAutomaticActive() && zenRule.pkg.equals(KnoxCustomManagerService.SETTING_PKG_NAME) && (zenPolicy = zenRule.zenPolicy) != null) {
+                    if (zenRule.isAutomaticActive()
+                            && zenRule.pkg.equals(KnoxCustomManagerService.SETTING_PKG_NAME)
+                            && (zenPolicy = zenRule.zenPolicy) != null) {
                         arrayList = zenPolicy.getAppsToBypassDnd();
                         if (DEBUG) {
-                            Log.d("ZenModeHelper", "BixbyRoutine Mode apps=" + arrayList.toString());
+                            Log.d(
+                                    "ZenModeHelper",
+                                    "BixbyRoutine Mode apps=" + arrayList.toString());
                         }
                     }
                 }
@@ -812,8 +930,8 @@ public final class ZenModeHelper {
         synchronized (this.mConfigLock) {
             try {
                 for (ZenModeConfig.ZenRule zenRule : this.mConfig.automaticRules.values()) {
-                    if (!componentName.equals(zenRule.component) && !componentName.equals(zenRule.configurationActivity)) {
-                    }
+                    if (!componentName.equals(zenRule.component)
+                            && !componentName.equals(zenRule.configurationActivity)) {}
                     i++;
                 }
             } catch (Throwable th) {
@@ -831,7 +949,8 @@ public final class ZenModeHelper {
         NotificationManager.Policy notificationPolicy;
         synchronized (this.mConfigLock) {
             ZenModeConfig zenModeConfig = this.mConfig;
-            notificationPolicy = zenModeConfig == null ? null : zenModeConfig.toNotificationPolicy();
+            notificationPolicy =
+                    zenModeConfig == null ? null : zenModeConfig.toNotificationPolicy();
         }
         return notificationPolicy;
     }
@@ -868,7 +987,10 @@ public final class ZenModeHelper {
         }
         synchronized (this.mConfigsArrayLock) {
             try {
-                copy = this.mConfigs.get(i) != null ? ((ZenModeConfig) this.mConfigs.get(i)).copy() : null;
+                copy =
+                        this.mConfigs.get(i) != null
+                                ? ((ZenModeConfig) this.mConfigs.get(i)).copy()
+                                : null;
             } catch (Throwable th) {
                 throw th;
             }
@@ -887,9 +1009,14 @@ public final class ZenModeHelper {
         cleanUpZenRules();
     }
 
-    public final void maybePreserveRemovedRule(ZenModeConfig zenModeConfig, ZenModeConfig.ZenRule zenRule, int i) {
+    public final void maybePreserveRemovedRule(
+            ZenModeConfig zenModeConfig, ZenModeConfig.ZenRule zenRule, int i) {
         String deletedRuleKey;
-        if (!android.app.Flags.modesApi() || i != 4 || zenRule.canBeUpdatedByApp() || "android".equals(zenRule.pkg) || (deletedRuleKey = ZenModeConfig.deletedRuleKey(zenRule)) == null) {
+        if (!android.app.Flags.modesApi()
+                || i != 4
+                || zenRule.canBeUpdatedByApp()
+                || "android".equals(zenRule.pkg)
+                || (deletedRuleKey = ZenModeConfig.deletedRuleKey(zenRule)) == null) {
             return;
         }
         ZenModeConfig.ZenRule copy = zenRule.copy();
@@ -904,26 +1031,40 @@ public final class ZenModeHelper {
         zenRule.id = implicitRuleId(str);
         zenRule.pkg = str;
         zenRule.creationTime = this.mClock.millis();
-        Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: com.android.server.notification.ZenModeHelper$$ExternalSyntheticLambda0
-            public final void runOrThrow() {
-                ZenModeHelper zenModeHelper = ZenModeHelper.this;
-                String str2 = str;
-                ZenModeConfig.ZenRule zenRule2 = zenRule;
-                zenModeHelper.getClass();
-                try {
-                    ApplicationInfo applicationInfo = zenModeHelper.mPm.getApplicationInfo(str2, 0);
-                    zenRule2.name = applicationInfo.loadLabel(zenModeHelper.mPm).toString();
-                    zenRule2.iconResName = zenModeHelper.drawableResIdToResName(applicationInfo.icon, str2);
-                } catch (PackageManager.NameNotFoundException unused) {
-                    Log.w("ZenModeHelper", "Package not found for creating implicit zen rule");
-                    zenRule2.name = "Unknown";
-                }
-            }
-        });
+        Binder.withCleanCallingIdentity(
+                new FunctionalUtils
+                        .ThrowingRunnable() { // from class:
+                                              // com.android.server.notification.ZenModeHelper$$ExternalSyntheticLambda0
+                    public final void runOrThrow() {
+                        ZenModeHelper zenModeHelper = ZenModeHelper.this;
+                        String str2 = str;
+                        ZenModeConfig.ZenRule zenRule2 = zenRule;
+                        zenModeHelper.getClass();
+                        try {
+                            ApplicationInfo applicationInfo =
+                                    zenModeHelper.mPm.getApplicationInfo(str2, 0);
+                            zenRule2.name = applicationInfo.loadLabel(zenModeHelper.mPm).toString();
+                            zenRule2.iconResName =
+                                    zenModeHelper.drawableResIdToResName(
+                                            applicationInfo.icon, str2);
+                        } catch (PackageManager.NameNotFoundException unused) {
+                            Log.w(
+                                    "ZenModeHelper",
+                                    "Package not found for creating implicit zen rule");
+                            zenRule2.name = "Unknown";
+                        }
+                    }
+                });
         zenRule.type = 0;
         zenRule.triggerDescription = this.mContext.getString(17043669, zenRule.name);
         zenRule.condition = null;
-        zenRule.conditionId = new Uri.Builder().scheme("condition").authority("android").appendPath("implicit").appendPath(str).build();
+        zenRule.conditionId =
+                new Uri.Builder()
+                        .scheme("condition")
+                        .authority("android")
+                        .appendPath("implicit")
+                        .appendPath(str)
+                        .build();
         zenRule.enabled = true;
         zenRule.modified = false;
         zenRule.component = null;
@@ -931,7 +1072,12 @@ public final class ZenModeHelper {
         return zenRule;
     }
 
-    public final boolean populateZenRule(String str, AutomaticZenRule automaticZenRule, ZenModeConfig.ZenRule zenRule, int i, boolean z) {
+    public final boolean populateZenRule(
+            String str,
+            AutomaticZenRule automaticZenRule,
+            ZenModeConfig.ZenRule zenRule,
+            int i,
+            boolean z) {
         boolean z2;
         Uri uri;
         Condition condition;
@@ -952,7 +1098,9 @@ public final class ZenModeHelper {
             zenRule.enabled = automaticZenRule.isEnabled();
             zenRule.modified = automaticZenRule.isModified();
             zenRule.zenPolicy = automaticZenRule.getZenPolicy();
-            zenRule.zenMode = NotificationManager.zenModeFromInterruptionFilter(automaticZenRule.getInterruptionFilter(), 0);
+            zenRule.zenMode =
+                    NotificationManager.zenModeFromInterruptionFilter(
+                            automaticZenRule.getInterruptionFilter(), 0);
             zenRule.configurationActivity = automaticZenRule.getConfigurationActivity();
             return true;
         }
@@ -969,7 +1117,14 @@ public final class ZenModeHelper {
             zenRule.conditionId = automaticZenRule.getConditionId();
             z2 = true;
         }
-        if (!android.app.Flags.modesApi() || !android.app.Flags.modesUi() || z || i != 3 || zenRule.enabled != automaticZenRule.isEnabled() || (uri = zenRule.conditionId) == null || (condition = zenRule.condition) == null || !uri.equals(condition.id)) {
+        if (!android.app.Flags.modesApi()
+                || !android.app.Flags.modesUi()
+                || z
+                || i != 3
+                || zenRule.enabled != automaticZenRule.isEnabled()
+                || (uri = zenRule.conditionId) == null
+                || (condition = zenRule.condition) == null
+                || !uri.equals(condition.id)) {
             zenRule.condition = null;
         }
         if (zenRule.enabled != automaticZenRule.isEnabled()) {
@@ -977,7 +1132,8 @@ public final class ZenModeHelper {
             zenRule.snoozing = false;
             z2 = true;
         }
-        if (!Objects.equals(zenRule.configurationActivity, automaticZenRule.getConfigurationActivity())) {
+        if (!Objects.equals(
+                zenRule.configurationActivity, automaticZenRule.getConfigurationActivity())) {
             zenRule.configurationActivity = automaticZenRule.getConfigurationActivity();
             z2 = true;
         }
@@ -986,7 +1142,8 @@ public final class ZenModeHelper {
             z2 = true;
         }
         if (!android.app.Flags.modesUi()) {
-            String drawableResIdToResName = drawableResIdToResName(automaticZenRule.getIconResId(), zenRule.pkg);
+            String drawableResIdToResName =
+                    drawableResIdToResName(automaticZenRule.getIconResId(), zenRule.pkg);
             if (!Objects.equals(zenRule.iconResName, drawableResIdToResName)) {
                 zenRule.iconResName = drawableResIdToResName;
                 z2 = true;
@@ -1013,7 +1170,9 @@ public final class ZenModeHelper {
         if (z4 && !TextUtils.equals(str2, automaticZenRule.getName())) {
             zenRule.userModifiedFields |= 1;
         }
-        int zenModeFromInterruptionFilter = NotificationManager.zenModeFromInterruptionFilter(automaticZenRule.getInterruptionFilter(), 0);
+        int zenModeFromInterruptionFilter =
+                NotificationManager.zenModeFromInterruptionFilter(
+                        automaticZenRule.getInterruptionFilter(), 0);
         if (zenRule.zenMode != zenModeFromInterruptionFilter) {
             zenRule.zenMode = zenModeFromInterruptionFilter;
             if (z4) {
@@ -1022,7 +1181,8 @@ public final class ZenModeHelper {
             z2 = true;
         }
         if (android.app.Flags.modesUi()) {
-            String drawableResIdToResName2 = drawableResIdToResName(automaticZenRule.getIconResId(), zenRule.pkg);
+            String drawableResIdToResName2 =
+                    drawableResIdToResName(automaticZenRule.getIconResId(), zenRule.pkg);
             if (!Objects.equals(zenRule.iconResName, drawableResIdToResName2)) {
                 zenRule.iconResName = drawableResIdToResName2;
                 if (z4) {
@@ -1040,15 +1200,30 @@ public final class ZenModeHelper {
                 zenDeviceEffects = new ZenDeviceEffects.Builder().build();
             }
             if (z5) {
-                deviceEffects = new ZenDeviceEffects.Builder(deviceEffects).setShouldDisableAutoBrightness(zenDeviceEffects.shouldDisableAutoBrightness()).setShouldDisableTapToWake(zenDeviceEffects.shouldDisableTapToWake()).setShouldDisableTiltToWake(zenDeviceEffects.shouldDisableTiltToWake()).setShouldDisableTouch(zenDeviceEffects.shouldDisableTouch()).setShouldMinimizeRadioUsage(zenDeviceEffects.shouldMinimizeRadioUsage()).setShouldMaximizeDoze(zenDeviceEffects.shouldMaximizeDoze()).setExtraEffects(zenDeviceEffects.getExtraEffects()).build();
+                deviceEffects =
+                        new ZenDeviceEffects.Builder(deviceEffects)
+                                .setShouldDisableAutoBrightness(
+                                        zenDeviceEffects.shouldDisableAutoBrightness())
+                                .setShouldDisableTapToWake(
+                                        zenDeviceEffects.shouldDisableTapToWake())
+                                .setShouldDisableTiltToWake(
+                                        zenDeviceEffects.shouldDisableTiltToWake())
+                                .setShouldDisableTouch(zenDeviceEffects.shouldDisableTouch())
+                                .setShouldMinimizeRadioUsage(
+                                        zenDeviceEffects.shouldMinimizeRadioUsage())
+                                .setShouldMaximizeDoze(zenDeviceEffects.shouldMaximizeDoze())
+                                .setExtraEffects(zenDeviceEffects.getExtraEffects())
+                                .build();
             }
             zenRule.zenDeviceEffects = deviceEffects;
             if (z4) {
                 int i2 = zenRule.zenDeviceEffectsUserModifiedFields;
-                if (zenDeviceEffects.shouldDisplayGrayscale() != deviceEffects.shouldDisplayGrayscale()) {
+                if (zenDeviceEffects.shouldDisplayGrayscale()
+                        != deviceEffects.shouldDisplayGrayscale()) {
                     i2 |= 1;
                 }
-                if (zenDeviceEffects.shouldSuppressAmbientDisplay() != deviceEffects.shouldSuppressAmbientDisplay()) {
+                if (zenDeviceEffects.shouldSuppressAmbientDisplay()
+                        != deviceEffects.shouldSuppressAmbientDisplay()) {
                     i2 |= 2;
                 }
                 if (zenDeviceEffects.shouldDimWallpaper() != deviceEffects.shouldDimWallpaper()) {
@@ -1057,25 +1232,30 @@ public final class ZenModeHelper {
                 if (zenDeviceEffects.shouldUseNightMode() != deviceEffects.shouldUseNightMode()) {
                     i2 |= 8;
                 }
-                if (zenDeviceEffects.shouldDisableAutoBrightness() != deviceEffects.shouldDisableAutoBrightness()) {
+                if (zenDeviceEffects.shouldDisableAutoBrightness()
+                        != deviceEffects.shouldDisableAutoBrightness()) {
                     i2 |= 16;
                 }
-                if (zenDeviceEffects.shouldDisableTapToWake() != deviceEffects.shouldDisableTapToWake()) {
+                if (zenDeviceEffects.shouldDisableTapToWake()
+                        != deviceEffects.shouldDisableTapToWake()) {
                     i2 |= 32;
                 }
-                if (zenDeviceEffects.shouldDisableTiltToWake() != deviceEffects.shouldDisableTiltToWake()) {
+                if (zenDeviceEffects.shouldDisableTiltToWake()
+                        != deviceEffects.shouldDisableTiltToWake()) {
                     i2 |= 64;
                 }
                 if (zenDeviceEffects.shouldDisableTouch() != deviceEffects.shouldDisableTouch()) {
                     i2 |= 128;
                 }
-                if (zenDeviceEffects.shouldMinimizeRadioUsage() != deviceEffects.shouldMinimizeRadioUsage()) {
+                if (zenDeviceEffects.shouldMinimizeRadioUsage()
+                        != deviceEffects.shouldMinimizeRadioUsage()) {
                     i2 |= 256;
                 }
                 if (zenDeviceEffects.shouldMaximizeDoze() != deviceEffects.shouldMaximizeDoze()) {
                     i2 |= 512;
                 }
-                if (!Objects.equals(zenDeviceEffects.getExtraEffects(), deviceEffects.getExtraEffects())) {
+                if (!Objects.equals(
+                        zenDeviceEffects.getExtraEffects(), deviceEffects.getExtraEffects())) {
                     i2 |= 1024;
                 }
                 zenRule.zenDeviceEffectsUserModifiedFields = i2;
@@ -1085,7 +1265,8 @@ public final class ZenModeHelper {
         return updatePolicy | z3;
     }
 
-    public final void ruleToProtoLocked(int i, ZenModeConfig.ZenRule zenRule, boolean z, List list) {
+    public final void ruleToProtoLocked(
+            int i, ZenModeConfig.ZenRule zenRule, boolean z, List list) {
         int intValue;
         String str = zenRule.id;
         if (str == null) {
@@ -1120,16 +1301,31 @@ public final class ZenModeHelper {
             String m = VpnManagerService$$ExternalSyntheticOutline0.m(i, pkg, "|");
             if (this.mRulesUidCache.get(m) == null) {
                 try {
-                    this.mRulesUidCache.put(m, Integer.valueOf(this.mPm.getPackageUidAsUser(pkg, i)));
+                    this.mRulesUidCache.put(
+                            m, Integer.valueOf(this.mPm.getPackageUidAsUser(pkg, i)));
                 } catch (PackageManager.NameNotFoundException unused) {
                 }
             }
             intValue = ((Integer) this.mRulesUidCache.getOrDefault(m, -1)).intValue();
         }
-        list.add(FrameworkStatsLog.buildStatsEvent(FrameworkStatsLog.DND_MODE_RULE, i, z2, false, i4, str3, intValue, bArr2, zenRule.userModifiedFields, zenRule.zenPolicyUserModifiedFields, zenRule.zenDeviceEffectsUserModifiedFields, i3));
+        list.add(
+                FrameworkStatsLog.buildStatsEvent(
+                        FrameworkStatsLog.DND_MODE_RULE,
+                        i,
+                        z2,
+                        false,
+                        i4,
+                        str3,
+                        intValue,
+                        bArr2,
+                        zenRule.userModifiedFields,
+                        zenRule.zenPolicyUserModifiedFields,
+                        zenRule.zenDeviceEffectsUserModifiedFields,
+                        i3));
     }
 
-    public final void setAutomaticZenRuleStateLocked(ZenModeConfig zenModeConfig, List list, Condition condition, int i, int i2) {
+    public final void setAutomaticZenRuleStateLocked(
+            ZenModeConfig zenModeConfig, List list, Condition condition, int i, int i2) {
         if (list == null || list.isEmpty()) {
             return;
         }
@@ -1150,7 +1346,13 @@ public final class ZenModeHelper {
         }
     }
 
-    public final boolean setConfigLocked(ZenModeConfig zenModeConfig, int i, String str, ComponentName componentName, boolean z, int i2) {
+    public final boolean setConfigLocked(
+            ZenModeConfig zenModeConfig,
+            int i,
+            String str,
+            ComponentName componentName,
+            boolean z,
+            int i2) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (zenModeConfig != null) {
@@ -1160,7 +1362,9 @@ public final class ZenModeHelper {
                             this.mConfigs.put(zenModeConfig.user, zenModeConfig);
                         }
                         if (DEBUG) {
-                            Log.d("ZenModeHelper", "setConfigLocked: store config for user " + zenModeConfig.user);
+                            Log.d(
+                                    "ZenModeHelper",
+                                    "setConfigLocked: store config for user " + zenModeConfig.user);
                         }
                         return true;
                     }
@@ -1173,7 +1377,8 @@ public final class ZenModeHelper {
                         Log.d("ZenModeHelper", "setConfigLocked reason=" + str, new Throwable());
                     }
                     ZenLog.traceConfig(str, componentName, this.mConfig, zenModeConfig, i2);
-                    NotificationManager.Policy notificationPolicy = zenModeConfig.toNotificationPolicy();
+                    NotificationManager.Policy notificationPolicy =
+                            zenModeConfig.toNotificationPolicy();
                     ZenModeConfig zenModeConfig2 = this.mConfig;
                     if (zenModeConfig2 != null) {
                         policy = zenModeConfig2.toNotificationPolicy();
@@ -1206,7 +1411,15 @@ public final class ZenModeHelper {
                 if (this.mConfig != null) {
                     if (Settings.Global.isValidZenMode(i)) {
                         if (DEBUG) {
-                            Log.d("ZenModeHelper", "setManualZenMode " + Settings.Global.zenModeToString(i) + " conditionId=" + uri + " reason=" + str + " setRingerMode=true");
+                            Log.d(
+                                    "ZenModeHelper",
+                                    "setManualZenMode "
+                                            + Settings.Global.zenModeToString(i)
+                                            + " conditionId="
+                                            + uri
+                                            + " reason="
+                                            + str
+                                            + " setRingerMode=true");
                         }
                         ZenModeConfig copy = this.mConfig.copy();
                         if (android.app.Flags.modesUi()) {
@@ -1218,9 +1431,15 @@ public final class ZenModeHelper {
                             zenRule.conditionId = uri;
                             zenRule.pkg = "android";
                             zenRule.zenMode = i;
-                            zenRule.condition = new Condition(copy.manualRule.conditionId, "", i == 0 ? 0 : 1, i2 == 3 ? 1 : 0);
+                            zenRule.condition =
+                                    new Condition(
+                                            copy.manualRule.conditionId,
+                                            "",
+                                            i == 0 ? 0 : 1,
+                                            i2 == 3 ? 1 : 0);
                             if (i == 0 && i2 != 3) {
-                                for (ZenModeConfig.ZenRule zenRule2 : copy.automaticRules.values()) {
+                                for (ZenModeConfig.ZenRule zenRule2 :
+                                        copy.automaticRules.values()) {
                                     if (zenRule2.isAutomaticActive()) {
                                         zenRule2.snoozing = true;
                                     }
@@ -1250,7 +1469,8 @@ public final class ZenModeHelper {
             } finally {
             }
         }
-        Settings.Secure.putInt(this.mContext.getContentResolver(), "show_zen_settings_suggestion", 0);
+        Settings.Secure.putInt(
+                this.mContext.getContentResolver(), "show_zen_settings_suggestion", 0);
     }
 
     public final void setNotificationPolicy(NotificationManager.Policy policy, int i, int i2) {
@@ -1265,12 +1485,18 @@ public final class ZenModeHelper {
                 if (!android.app.Flags.modesApi() || android.app.Flags.modesUi()) {
                     copy.applyNotificationPolicy(policy);
                 } else {
-                    ZenPolicy notificationPolicyToZenPolicy = ZenAdapters.notificationPolicyToZenPolicy(copy.toNotificationPolicy());
-                    ZenPolicy notificationPolicyToZenPolicy2 = ZenAdapters.notificationPolicyToZenPolicy(policy);
+                    ZenPolicy notificationPolicyToZenPolicy =
+                            ZenAdapters.notificationPolicyToZenPolicy(copy.toNotificationPolicy());
+                    ZenPolicy notificationPolicyToZenPolicy2 =
+                            ZenAdapters.notificationPolicyToZenPolicy(policy);
                     copy.applyNotificationPolicy(policy);
                     if (!notificationPolicyToZenPolicy.equals(notificationPolicyToZenPolicy2)) {
                         for (ZenModeConfig.ZenRule zenRule : copy.automaticRules.values()) {
-                            if (!SystemZenRules.isSystemOwnedRule(zenRule) && zenRule.zenMode == 1 && ((zenPolicy = zenRule.zenPolicy) == null || zenPolicy.equals(notificationPolicyToZenPolicy) || zenRule.zenPolicy.equals(getDefaultZenPolicy()))) {
+                            if (!SystemZenRules.isSystemOwnedRule(zenRule)
+                                    && zenRule.zenMode == 1
+                                    && ((zenPolicy = zenRule.zenPolicy) == null
+                                            || zenPolicy.equals(notificationPolicyToZenPolicy)
+                                            || zenRule.zenPolicy.equals(getDefaultZenPolicy()))) {
                                 zenRule.zenPolicy = notificationPolicyToZenPolicy2;
                             }
                         }
@@ -1284,19 +1510,24 @@ public final class ZenModeHelper {
     }
 
     public final void setPreviousRingerModeSetting(Integer num) {
-        Settings.Global.putString(this.mContext.getContentResolver(), "zen_mode_ringer_level", num == null ? null : Integer.toString(num.intValue()));
+        Settings.Global.putString(
+                this.mContext.getContentResolver(),
+                "zen_mode_ringer_level",
+                num == null ? null : Integer.toString(num.intValue()));
     }
 
     public void setZenModeSetting(int i) {
         Settings.Global.putInt(this.mContext.getContentResolver(), "zen_mode", i);
-        ZenLog.traceSetZenMode(Settings.Global.getInt(this.mContext.getContentResolver(), "zen_mode", -1), "updated setting");
+        ZenLog.traceSetZenMode(
+                Settings.Global.getInt(this.mContext.getContentResolver(), "zen_mode", -1),
+                "updated setting");
         showZenUpgradeNotification(i);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:8:0x0032, code lost:
-    
-        if (android.provider.Settings.Secure.getInt(r5.mContext.getContentResolver(), "zen_settings_updated", 0) != 1) goto L12;
-     */
+
+       if (android.provider.Settings.Secure.getInt(r5.mContext.getContentResolver(), "zen_settings_updated", 0) != 1) goto L12;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1345,7 +1576,9 @@ public final class ZenModeHelper {
         L59:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.ZenModeHelper.showZenUpgradeNotification(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.ZenModeHelper.showZenUpgradeNotification(int):void");
     }
 
     public final String toString() {
@@ -1376,7 +1609,8 @@ public final class ZenModeHelper {
                         }
                     }
                 }
-                NotificationManager.Policy notificationPolicy = this.mConfig.toNotificationPolicy(zenPolicy);
+                NotificationManager.Policy notificationPolicy =
+                        this.mConfig.toNotificationPolicy(zenPolicy);
                 if (!Objects.equals(this.mConsolidatedPolicy, notificationPolicy)) {
                     this.mConsolidatedPolicy = notificationPolicy;
                     Iterator it = this.mCallbacks.iterator();
@@ -1421,12 +1655,20 @@ public final class ZenModeHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateConfigAndZenModeLocked(android.service.notification.ZenModeConfig r28, int r29, java.lang.String r30, boolean r31, int r32) {
+    public final void updateConfigAndZenModeLocked(
+            android.service.notification.ZenModeConfig r28,
+            int r29,
+            java.lang.String r30,
+            boolean r31,
+            int r32) {
         /*
             Method dump skipped, instructions count: 1230
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.ZenModeHelper.updateConfigAndZenModeLocked(android.service.notification.ZenModeConfig, int, java.lang.String, boolean, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.ZenModeHelper.updateConfigAndZenModeLocked(android.service.notification.ZenModeConfig,"
+                    + " int, java.lang.String, boolean, int):void");
     }
 
     public final void updateDefaultConfigAutomaticRules() {
@@ -1442,53 +1684,68 @@ public final class ZenModeHelper {
         }
     }
 
-    public final boolean updatePolicy(ZenModeConfig.ZenRule zenRule, ZenPolicy zenPolicy, boolean z, boolean z2) {
+    public final boolean updatePolicy(
+            ZenModeConfig.ZenRule zenRule, ZenPolicy zenPolicy, boolean z, boolean z2) {
         if (zenPolicy == null) {
             if (!z2) {
                 return false;
             }
-            zenRule.zenPolicy = (android.app.Flags.modesUi() ? this.mDefaultConfig : this.mConfig).getZenPolicy();
+            zenRule.zenPolicy =
+                    (android.app.Flags.modesUi() ? this.mDefaultConfig : this.mConfig)
+                            .getZenPolicy();
             return true;
         }
         ZenPolicy zenPolicy2 = zenRule.zenPolicy;
         if (zenPolicy2 == null) {
-            zenPolicy2 = (android.app.Flags.modesUi() ? this.mDefaultConfig : this.mConfig).getZenPolicy();
+            zenPolicy2 =
+                    (android.app.Flags.modesUi() ? this.mDefaultConfig : this.mConfig)
+                            .getZenPolicy();
         }
         ZenPolicy overwrittenWith = zenPolicy2.overwrittenWith(zenPolicy);
         zenRule.zenPolicy = overwrittenWith;
         if (z) {
             int i = zenRule.zenPolicyUserModifiedFields;
-            if (zenPolicy2.getPriorityMessageSenders() != overwrittenWith.getPriorityMessageSenders()) {
+            if (zenPolicy2.getPriorityMessageSenders()
+                    != overwrittenWith.getPriorityMessageSenders()) {
                 i |= 1;
             }
             if (zenPolicy2.getPriorityCallSenders() != overwrittenWith.getPriorityCallSenders()) {
                 i |= 2;
             }
-            if (zenPolicy2.getPriorityConversationSenders() != overwrittenWith.getPriorityConversationSenders()) {
+            if (zenPolicy2.getPriorityConversationSenders()
+                    != overwrittenWith.getPriorityConversationSenders()) {
                 i |= 4;
             }
-            if (zenPolicy2.getPriorityChannelsAllowed() != overwrittenWith.getPriorityChannelsAllowed()) {
+            if (zenPolicy2.getPriorityChannelsAllowed()
+                    != overwrittenWith.getPriorityChannelsAllowed()) {
                 i |= 8;
             }
-            if (zenPolicy2.getPriorityCategoryReminders() != overwrittenWith.getPriorityCategoryReminders()) {
+            if (zenPolicy2.getPriorityCategoryReminders()
+                    != overwrittenWith.getPriorityCategoryReminders()) {
                 i |= 16;
             }
-            if (zenPolicy2.getPriorityCategoryEvents() != overwrittenWith.getPriorityCategoryEvents()) {
+            if (zenPolicy2.getPriorityCategoryEvents()
+                    != overwrittenWith.getPriorityCategoryEvents()) {
                 i |= 32;
             }
-            if (zenPolicy2.getPriorityCategoryRepeatCallers() != overwrittenWith.getPriorityCategoryRepeatCallers()) {
+            if (zenPolicy2.getPriorityCategoryRepeatCallers()
+                    != overwrittenWith.getPriorityCategoryRepeatCallers()) {
                 i |= 64;
             }
-            if (zenPolicy2.getPriorityCategoryAlarms() != overwrittenWith.getPriorityCategoryAlarms()) {
+            if (zenPolicy2.getPriorityCategoryAlarms()
+                    != overwrittenWith.getPriorityCategoryAlarms()) {
                 i |= 128;
             }
-            if (zenPolicy2.getPriorityCategoryMedia() != overwrittenWith.getPriorityCategoryMedia()) {
+            if (zenPolicy2.getPriorityCategoryMedia()
+                    != overwrittenWith.getPriorityCategoryMedia()) {
                 i |= 256;
             }
-            if (zenPolicy2.getPriorityCategorySystem() != overwrittenWith.getPriorityCategorySystem()) {
+            if (zenPolicy2.getPriorityCategorySystem()
+                    != overwrittenWith.getPriorityCategorySystem()) {
                 i |= 512;
             }
-            if (zenPolicy2.getVisualEffectFullScreenIntent() != overwrittenWith.getVisualEffectFullScreenIntent()) {
+            if (zenPolicy2.getVisualEffectFullScreenIntent()
+                    != overwrittenWith.getVisualEffectFullScreenIntent()) {
                 i |= 1024;
             }
             if (zenPolicy2.getVisualEffectLights() != overwrittenWith.getVisualEffectLights()) {
@@ -1497,7 +1754,8 @@ public final class ZenModeHelper {
             if (zenPolicy2.getVisualEffectPeek() != overwrittenWith.getVisualEffectPeek()) {
                 i |= 4096;
             }
-            if (zenPolicy2.getVisualEffectStatusBar() != overwrittenWith.getVisualEffectStatusBar()) {
+            if (zenPolicy2.getVisualEffectStatusBar()
+                    != overwrittenWith.getVisualEffectStatusBar()) {
                 i |= 8192;
             }
             if (zenPolicy2.getVisualEffectBadge() != overwrittenWith.getVisualEffectBadge()) {
@@ -1506,7 +1764,8 @@ public final class ZenModeHelper {
             if (zenPolicy2.getVisualEffectAmbient() != overwrittenWith.getVisualEffectAmbient()) {
                 i |= 32768;
             }
-            if (zenPolicy2.getVisualEffectNotificationList() != overwrittenWith.getVisualEffectNotificationList()) {
+            if (zenPolicy2.getVisualEffectNotificationList()
+                    != overwrittenWith.getVisualEffectNotificationList()) {
                 i |= EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT;
             }
             zenRule.zenPolicyUserModifiedFields = i;
@@ -1516,11 +1775,24 @@ public final class ZenModeHelper {
 
     public final AutomaticZenRule zenRuleToAutomaticZenRule(ZenModeConfig.ZenRule zenRule) {
         if (!android.app.Flags.modesApi()) {
-            AutomaticZenRule automaticZenRule = new AutomaticZenRule(zenRule.name, zenRule.component, zenRule.configurationActivity, zenRule.conditionId, zenRule.zenPolicy, NotificationManager.zenModeToInterruptionFilter(zenRule.zenMode), zenRule.enabled, zenRule.creationTime);
+            AutomaticZenRule automaticZenRule =
+                    new AutomaticZenRule(
+                            zenRule.name,
+                            zenRule.component,
+                            zenRule.configurationActivity,
+                            zenRule.conditionId,
+                            zenRule.zenPolicy,
+                            NotificationManager.zenModeToInterruptionFilter(zenRule.zenMode),
+                            zenRule.enabled,
+                            zenRule.creationTime);
             automaticZenRule.setPackageName(zenRule.pkg);
             return automaticZenRule;
         }
-        AutomaticZenRule.Builder creationTime = new AutomaticZenRule.Builder(zenRule.name, zenRule.conditionId).setManualInvocationAllowed(zenRule.allowManualInvocation).setPackage(zenRule.pkg).setCreationTime(zenRule.creationTime);
+        AutomaticZenRule.Builder creationTime =
+                new AutomaticZenRule.Builder(zenRule.name, zenRule.conditionId)
+                        .setManualInvocationAllowed(zenRule.allowManualInvocation)
+                        .setPackage(zenRule.pkg)
+                        .setCreationTime(zenRule.creationTime);
         String str = zenRule.pkg;
         String str2 = zenRule.iconResName;
         int i = 0;
@@ -1531,6 +1803,17 @@ public final class ZenModeHelper {
                 Slog.w("ZenModeHelper", "cannot load rule icon for pkg", e);
             }
         }
-        return creationTime.setIconResId(i).setType(zenRule.type).setZenPolicy(zenRule.zenPolicy).setDeviceEffects(zenRule.zenDeviceEffects).setEnabled(zenRule.enabled).setInterruptionFilter(NotificationManager.zenModeToInterruptionFilter(zenRule.zenMode)).setOwner(zenRule.component).setConfigurationActivity(zenRule.configurationActivity).setTriggerDescription(zenRule.triggerDescription).build();
+        return creationTime
+                .setIconResId(i)
+                .setType(zenRule.type)
+                .setZenPolicy(zenRule.zenPolicy)
+                .setDeviceEffects(zenRule.zenDeviceEffects)
+                .setEnabled(zenRule.enabled)
+                .setInterruptionFilter(
+                        NotificationManager.zenModeToInterruptionFilter(zenRule.zenMode))
+                .setOwner(zenRule.component)
+                .setConfigurationActivity(zenRule.configurationActivity)
+                .setTriggerDescription(zenRule.triggerDescription)
+                .build();
     }
 }

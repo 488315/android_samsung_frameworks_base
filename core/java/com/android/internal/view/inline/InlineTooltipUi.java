@@ -16,6 +16,7 @@ import android.view.autofill.Helper;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.inline.InlineContentView;
+
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 
@@ -32,29 +33,47 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
     private boolean mDelayShowAtStart = true;
     private boolean mDelaying = false;
     private final Rect mTmpRect = new Rect();
-    private final View.OnAttachStateChangeListener mAnchorOnAttachStateChangeListener = new View.OnAttachStateChangeListener() { // from class: com.android.internal.view.inline.InlineTooltipUi.1
-        @Override // android.view.View.OnAttachStateChangeListener
-        public void onViewAttachedToWindow(View v) {
-        }
+    private final View.OnAttachStateChangeListener mAnchorOnAttachStateChangeListener =
+            new View
+                    .OnAttachStateChangeListener() { // from class:
+                                                     // com.android.internal.view.inline.InlineTooltipUi.1
+                @Override // android.view.View.OnAttachStateChangeListener
+                public void onViewAttachedToWindow(View v) {}
 
-        @Override // android.view.View.OnAttachStateChangeListener
-        public void onViewDetachedFromWindow(View v) {
-            InlineTooltipUi.this.mHasEverDetached = true;
-            InlineTooltipUi.this.dismiss();
-        }
-    };
-    private final View.OnLayoutChangeListener mAnchoredOnLayoutChangeListener = new View.OnLayoutChangeListener() { // from class: com.android.internal.view.inline.InlineTooltipUi.2
-        int mHeight;
+                @Override // android.view.View.OnAttachStateChangeListener
+                public void onViewDetachedFromWindow(View v) {
+                    InlineTooltipUi.this.mHasEverDetached = true;
+                    InlineTooltipUi.this.dismiss();
+                }
+            };
+    private final View.OnLayoutChangeListener mAnchoredOnLayoutChangeListener =
+            new View
+                    .OnLayoutChangeListener() { // from class:
+                                                // com.android.internal.view.inline.InlineTooltipUi.2
+                int mHeight;
 
-        @Override // android.view.View.OnLayoutChangeListener
-        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-            if (!InlineTooltipUi.this.mHasEverDetached && this.mHeight != bottom - top) {
-                this.mHeight = bottom - top;
-                InlineTooltipUi.this.adjustPosition();
-            }
-        }
-    };
-    private int mShowDelayConfigMs = DeviceConfig.getInt(Context.AUTOFILL_MANAGER_SERVICE, AutofillFeatureFlags.DEVICE_CONFIG_AUTOFILL_TOOLTIP_SHOW_UP_DELAY, 250);
+                @Override // android.view.View.OnLayoutChangeListener
+                public void onLayoutChange(
+                        View v,
+                        int left,
+                        int top,
+                        int right,
+                        int bottom,
+                        int oldLeft,
+                        int oldTop,
+                        int oldRight,
+                        int oldBottom) {
+                    if (!InlineTooltipUi.this.mHasEverDetached && this.mHeight != bottom - top) {
+                        this.mHeight = bottom - top;
+                        InlineTooltipUi.this.adjustPosition();
+                    }
+                }
+            };
+    private int mShowDelayConfigMs =
+            DeviceConfig.getInt(
+                    Context.AUTOFILL_MANAGER_SERVICE,
+                    AutofillFeatureFlags.DEVICE_CONFIG_AUTOFILL_TOOLTIP_SHOW_UP_DELAY,
+                    250);
 
     public InlineTooltipUi(Context context) {
         this.mContentContainer = new LinearLayout(new ContextWrapper(context));
@@ -108,7 +127,11 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
             }
             int delayTimeMs = this.mShowDelayConfigMs;
             try {
-                float scale = WindowManager.fixScale(Settings.Global.getFloat(anchor.getContext().getContentResolver(), "animator_duration_scale"));
+                float scale =
+                        WindowManager.fixScale(
+                                Settings.Global.getFloat(
+                                        anchor.getContext().getContentResolver(),
+                                        "animator_duration_scale"));
                 delayTimeMs = (int) (delayTimeMs * scale);
             } catch (Settings.SettingNotFoundException e) {
             }
@@ -149,8 +172,18 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
     }
 
     @Override // android.widget.PopupWindow
-    protected boolean findDropDownPosition(View anchor, WindowManager.LayoutParams outParams, int xOffset, int yOffset, int width, int height, int gravity, boolean allowScroll) {
-        boolean isAbove = super.findDropDownPosition(anchor, outParams, xOffset, yOffset, width, height, gravity, allowScroll);
+    protected boolean findDropDownPosition(
+            View anchor,
+            WindowManager.LayoutParams outParams,
+            int xOffset,
+            int yOffset,
+            int width,
+            int height,
+            int gravity,
+            boolean allowScroll) {
+        boolean isAbove =
+                super.findDropDownPosition(
+                        anchor, outParams, xOffset, yOffset, width, height, gravity, allowScroll);
         Object parent = anchor.getParent();
         if (parent instanceof View) {
             Rect r = this.mTmpRect;
@@ -183,7 +216,16 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
         attachToAnchor(anchor, xoff, yoff, gravity);
         WindowManager.LayoutParams p = createPopupLayoutParams(anchor.getWindowToken());
         this.mWindowLayoutParams = p;
-        boolean aboveAnchor = findDropDownPosition(anchor, p, xoff, yoff, p.width, p.height, gravity, getAllowScrollingAnchorParent());
+        boolean aboveAnchor =
+                findDropDownPosition(
+                        anchor,
+                        p,
+                        xoff,
+                        yoff,
+                        p.width,
+                        p.height,
+                        gravity,
+                        getAllowScrollingAnchorParent());
         updateAboveAnchor(aboveAnchor);
         p.accessibilityIdOfAnchor = anchor.getAccessibilityViewId();
         p.packageName = anchor.getContext().getPackageName();
@@ -241,7 +283,8 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
                 }
                 params.flags = 40;
                 params.privateFlags |= 4194304;
-                this.mContentContainer.addOnLayoutChangeListener(this.mAnchoredOnLayoutChangeListener);
+                this.mContentContainer.addOnLayoutChangeListener(
+                        this.mAnchoredOnLayoutChangeListener);
                 this.mWm.addView(this.mContentContainer, params);
                 this.mShowing = true;
                 return;
@@ -260,7 +303,8 @@ public final class InlineTooltipUi extends PopupWindow implements AutoCloseable 
                 if (Helper.sVerbose) {
                     Slog.v(TAG, "hide()");
                 }
-                this.mContentContainer.removeOnLayoutChangeListener(this.mAnchoredOnLayoutChangeListener);
+                this.mContentContainer.removeOnLayoutChangeListener(
+                        this.mAnchoredOnLayoutChangeListener);
                 this.mWm.removeView(this.mContentContainer);
                 this.mShowing = false;
             }

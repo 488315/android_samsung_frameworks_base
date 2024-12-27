@@ -5,25 +5,27 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteCallback;
-import android.window.IOnBackInvokedCallback;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes4.dex */
 public final class BackNavigationInfo implements Parcelable {
-    public static final Parcelable.Creator<BackNavigationInfo> CREATOR = new Parcelable.Creator<BackNavigationInfo>() { // from class: android.window.BackNavigationInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BackNavigationInfo createFromParcel(Parcel in) {
-            return new BackNavigationInfo(in);
-        }
+    public static final Parcelable.Creator<BackNavigationInfo> CREATOR =
+            new Parcelable.Creator<
+                    BackNavigationInfo>() { // from class: android.window.BackNavigationInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BackNavigationInfo createFromParcel(Parcel in) {
+                    return new BackNavigationInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BackNavigationInfo[] newArray(int size) {
-            return new BackNavigationInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BackNavigationInfo[] newArray(int size) {
+                    return new BackNavigationInfo[size];
+                }
+            };
     public static final String KEY_GESTURE_FINISHED = "GestureFinished";
     public static final String KEY_NAVIGATION_FINISHED = "NavigationFinished";
     public static final int TYPE_CALLBACK = 4;
@@ -43,10 +45,18 @@ public final class BackNavigationInfo implements Parcelable {
     private final int mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BackTargetType {
-    }
+    public @interface BackTargetType {}
 
-    private BackNavigationInfo(int type, RemoteCallback onBackNavigationDone, IOnBackInvokedCallback onBackInvokedCallback, boolean isPrepareRemoteAnimation, boolean isAnimationCallback, CustomAnimationInfo customAnimationInfo, int letterboxColor, Rect touchableRegion, boolean appProgressGenerationAllowed) {
+    private BackNavigationInfo(
+            int type,
+            RemoteCallback onBackNavigationDone,
+            IOnBackInvokedCallback onBackInvokedCallback,
+            boolean isPrepareRemoteAnimation,
+            boolean isAnimationCallback,
+            CustomAnimationInfo customAnimationInfo,
+            int letterboxColor,
+            Rect touchableRegion,
+            boolean appProgressGenerationAllowed) {
         this.mType = type;
         this.mOnBackNavigationDone = onBackNavigationDone;
         this.mOnBackInvokedCallback = onBackInvokedCallback;
@@ -61,10 +71,12 @@ public final class BackNavigationInfo implements Parcelable {
     private BackNavigationInfo(Parcel in) {
         this.mType = in.readInt();
         this.mOnBackNavigationDone = (RemoteCallback) in.readTypedObject(RemoteCallback.CREATOR);
-        this.mOnBackInvokedCallback = IOnBackInvokedCallback.Stub.asInterface(in.readStrongBinder());
+        this.mOnBackInvokedCallback =
+                IOnBackInvokedCallback.Stub.asInterface(in.readStrongBinder());
         this.mPrepareRemoteAnimation = in.readBoolean();
         this.mAnimationCallback = in.readBoolean();
-        this.mCustomAnimationInfo = (CustomAnimationInfo) in.readTypedObject(CustomAnimationInfo.CREATOR);
+        this.mCustomAnimationInfo =
+                (CustomAnimationInfo) in.readTypedObject(CustomAnimationInfo.CREATOR);
         this.mLetterboxColor = in.readInt();
         this.mTouchableRegion = (Rect) in.readTypedObject(Rect.CREATOR);
         this.mAppProgressGenerationAllowed = in.readBoolean();
@@ -137,7 +149,21 @@ public final class BackNavigationInfo implements Parcelable {
     }
 
     public String toString() {
-        return "BackNavigationInfo{mType=" + typeToString(this.mType) + " (" + this.mType + "), mOnBackNavigationDone=" + this.mOnBackNavigationDone + ", mOnBackInvokedCallback=" + this.mOnBackInvokedCallback + ", mPrepareRemoteAnimation=" + this.mPrepareRemoteAnimation + ", mAnimationCallback=" + this.mAnimationCallback + ", mCustomizeAnimationInfo=" + this.mCustomAnimationInfo + '}';
+        return "BackNavigationInfo{mType="
+                + typeToString(this.mType)
+                + " ("
+                + this.mType
+                + "), mOnBackNavigationDone="
+                + this.mOnBackNavigationDone
+                + ", mOnBackInvokedCallback="
+                + this.mOnBackInvokedCallback
+                + ", mPrepareRemoteAnimation="
+                + this.mPrepareRemoteAnimation
+                + ", mAnimationCallback="
+                + this.mAnimationCallback
+                + ", mCustomizeAnimationInfo="
+                + this.mCustomAnimationInfo
+                + '}';
     }
 
     public static String typeToString(int type) {
@@ -160,19 +186,22 @@ public final class BackNavigationInfo implements Parcelable {
     }
 
     public static final class CustomAnimationInfo implements Parcelable {
-        public static final Parcelable.Creator<CustomAnimationInfo> CREATOR = new Parcelable.Creator<CustomAnimationInfo>() { // from class: android.window.BackNavigationInfo.CustomAnimationInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public CustomAnimationInfo createFromParcel(Parcel in) {
-                return new CustomAnimationInfo(in);
-            }
+        public static final Parcelable.Creator<CustomAnimationInfo> CREATOR =
+                new Parcelable.Creator<
+                        CustomAnimationInfo>() { // from class:
+                                                 // android.window.BackNavigationInfo.CustomAnimationInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public CustomAnimationInfo createFromParcel(Parcel in) {
+                        return new CustomAnimationInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public CustomAnimationInfo[] newArray(int size) {
-                return new CustomAnimationInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public CustomAnimationInfo[] newArray(int size) {
+                        return new CustomAnimationInfo[size];
+                    }
+                };
         private int mCustomBackground;
         private int mCustomEnterAnim;
         private int mCustomExitAnim;
@@ -269,7 +298,8 @@ public final class BackNavigationInfo implements Parcelable {
             return this;
         }
 
-        public Builder setCustomAnimation(String packageName, int enterResId, int exitResId, int backgroundColor) {
+        public Builder setCustomAnimation(
+                String packageName, int enterResId, int exitResId, int backgroundColor) {
             if (this.mCustomAnimationInfo == null) {
                 this.mCustomAnimationInfo = new CustomAnimationInfo(packageName);
             }
@@ -300,7 +330,16 @@ public final class BackNavigationInfo implements Parcelable {
         }
 
         public BackNavigationInfo build() {
-            return new BackNavigationInfo(this.mType, this.mOnBackNavigationDone, this.mOnBackInvokedCallback, this.mPrepareRemoteAnimation, this.mAnimationCallback, this.mCustomAnimationInfo, this.mLetterboxColor, this.mTouchableRegion, this.mAppProgressGenerationAllowed);
+            return new BackNavigationInfo(
+                    this.mType,
+                    this.mOnBackNavigationDone,
+                    this.mOnBackInvokedCallback,
+                    this.mPrepareRemoteAnimation,
+                    this.mAnimationCallback,
+                    this.mCustomAnimationInfo,
+                    this.mLetterboxColor,
+                    this.mTouchableRegion,
+                    this.mAppProgressGenerationAllowed);
         }
     }
 }

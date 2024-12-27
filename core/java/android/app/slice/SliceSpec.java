@@ -6,19 +6,20 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes.dex */
 public final class SliceSpec implements Parcelable {
-    public static final Parcelable.Creator<SliceSpec> CREATOR = new Parcelable.Creator<SliceSpec>() { // from class: android.app.slice.SliceSpec.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SliceSpec createFromParcel(Parcel source) {
-            return new SliceSpec(source);
-        }
+    public static final Parcelable.Creator<SliceSpec> CREATOR =
+            new Parcelable.Creator<SliceSpec>() { // from class: android.app.slice.SliceSpec.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SliceSpec createFromParcel(Parcel source) {
+                    return new SliceSpec(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SliceSpec[] newArray(int size) {
-            return new SliceSpec[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SliceSpec[] newArray(int size) {
+                    return new SliceSpec[size];
+                }
+            };
     private final int mRevision;
     private final String mType;
 

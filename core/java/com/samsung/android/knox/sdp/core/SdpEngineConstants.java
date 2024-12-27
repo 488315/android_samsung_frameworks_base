@@ -9,9 +9,12 @@ public class SdpEngineConstants {
     }
 
     public interface Intent {
-        public static final String ACTION_SDP_STATE_CHANGED = "com.samsung.android.knox.intent.action.SDP_STATE_CHANGED";
-        public static final String EXTRA_SDP_ENGINE_ID = "com.samsung.android.knox.intent.extra.SDP_ENGINE_ID";
-        public static final String EXTRA_SDP_ENGINE_STATE = "com.samsung.android.knox.intent.extra.SDP_ENGINE_STATE";
+        public static final String ACTION_SDP_STATE_CHANGED =
+                "com.samsung.android.knox.intent.action.SDP_STATE_CHANGED";
+        public static final String EXTRA_SDP_ENGINE_ID =
+                "com.samsung.android.knox.intent.extra.SDP_ENGINE_ID";
+        public static final String EXTRA_SDP_ENGINE_STATE =
+                "com.samsung.android.knox.intent.extra.SDP_ENGINE_STATE";
     }
 
     public interface State {
@@ -25,6 +28,5 @@ public class SdpEngineConstants {
         public static final int SDP_ENGINE_INVALID = -1;
     }
 
-    private SdpEngineConstants() {
-    }
+    private SdpEngineConstants() {}
 }

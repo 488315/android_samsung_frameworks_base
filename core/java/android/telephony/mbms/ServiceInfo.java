@@ -1,6 +1,7 @@
 package android.telephony.mbms;
 
 import android.os.Parcel;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -23,8 +24,19 @@ public class ServiceInfo {
     private final Date sessionEndTime;
     private final Date sessionStartTime;
 
-    public ServiceInfo(Map<Locale, String> newNames, String newClassName, List<Locale> newLocales, String newServiceId, Date start, Date end) {
-        if (newNames == null || newClassName == null || newLocales == null || newServiceId == null || start == null || end == null) {
+    public ServiceInfo(
+            Map<Locale, String> newNames,
+            String newClassName,
+            List<Locale> newLocales,
+            String newServiceId,
+            Date start,
+            Date end) {
+        if (newNames == null
+                || newClassName == null
+                || newLocales == null
+                || newServiceId == null
+                || start == null
+                || end == null) {
             throw new IllegalArgumentException("Bad ServiceInfo construction");
         }
         if (newNames.size() > 1000) {
@@ -53,7 +65,8 @@ public class ServiceInfo {
             if (mapCount <= 0) {
                 break;
             }
-            Locale locale = (Locale) in.readSerializable(Locale.class.getClassLoader(), Locale.class);
+            Locale locale =
+                    (Locale) in.readSerializable(Locale.class.getClassLoader(), Locale.class);
             String name = in.readString();
             this.names.put(locale, name);
             mapCount = mapCount2;
@@ -67,13 +80,16 @@ public class ServiceInfo {
         while (true) {
             int localesCount2 = localesCount - 1;
             if (localesCount > 0) {
-                Locale l = (Locale) in.readSerializable(Locale.class.getClassLoader(), Locale.class);
+                Locale l =
+                        (Locale) in.readSerializable(Locale.class.getClassLoader(), Locale.class);
                 this.locales.add(l);
                 localesCount = localesCount2;
             } else {
                 this.serviceId = in.readString();
-                this.sessionStartTime = (Date) in.readSerializable(Date.class.getClassLoader(), Date.class);
-                this.sessionEndTime = (Date) in.readSerializable(Date.class.getClassLoader(), Date.class);
+                this.sessionStartTime =
+                        (Date) in.readSerializable(Date.class.getClassLoader(), Date.class);
+                this.sessionEndTime =
+                        (Date) in.readSerializable(Date.class.getClassLoader(), Date.class);
                 return;
             }
         }
@@ -137,13 +153,24 @@ public class ServiceInfo {
             return false;
         }
         ServiceInfo that = (ServiceInfo) o;
-        if (Objects.equals(this.names, that.names) && Objects.equals(this.className, that.className) && Objects.equals(this.locales, that.locales) && Objects.equals(this.serviceId, that.serviceId) && Objects.equals(this.sessionStartTime, that.sessionStartTime) && Objects.equals(this.sessionEndTime, that.sessionEndTime)) {
+        if (Objects.equals(this.names, that.names)
+                && Objects.equals(this.className, that.className)
+                && Objects.equals(this.locales, that.locales)
+                && Objects.equals(this.serviceId, that.serviceId)
+                && Objects.equals(this.sessionStartTime, that.sessionStartTime)
+                && Objects.equals(this.sessionEndTime, that.sessionEndTime)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.names, this.className, this.locales, this.serviceId, this.sessionStartTime, this.sessionEndTime);
+        return Objects.hash(
+                this.names,
+                this.className,
+                this.locales,
+                this.serviceId,
+                this.sessionStartTime,
+                this.sessionEndTime);
     }
 }

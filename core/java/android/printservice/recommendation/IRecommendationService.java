@@ -5,16 +5,16 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.printservice.recommendation.IRecommendationServiceCallbacks;
 
 /* loaded from: classes3.dex */
 public interface IRecommendationService extends IInterface {
-    void registerCallbacks(IRecommendationServiceCallbacks iRecommendationServiceCallbacks) throws RemoteException;
+    void registerCallbacks(IRecommendationServiceCallbacks iRecommendationServiceCallbacks)
+            throws RemoteException;
 
     public static class Default implements IRecommendationService {
         @Override // android.printservice.recommendation.IRecommendationService
-        public void registerCallbacks(IRecommendationServiceCallbacks callbacks) throws RemoteException {
-        }
+        public void registerCallbacks(IRecommendationServiceCallbacks callbacks)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,8 +22,9 @@ public interface IRecommendationService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRecommendationService {
-        public static final String DESCRIPTOR = "android.printservice.recommendation.IRecommendationService";
+    public abstract static class Stub extends Binder implements IRecommendationService {
+        public static final String DESCRIPTOR =
+                "android.printservice.recommendation.IRecommendationService";
         static final int TRANSACTION_registerCallbacks = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface IRecommendationService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -71,7 +73,9 @@ public interface IRecommendationService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IRecommendationServiceCallbacks _arg0 = IRecommendationServiceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IRecommendationServiceCallbacks _arg0 =
+                            IRecommendationServiceCallbacks.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallbacks(_arg0);
                     return true;
@@ -97,7 +101,8 @@ public interface IRecommendationService extends IInterface {
             }
 
             @Override // android.printservice.recommendation.IRecommendationService
-            public void registerCallbacks(IRecommendationServiceCallbacks callbacks) throws RemoteException {
+            public void registerCallbacks(IRecommendationServiceCallbacks callbacks)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

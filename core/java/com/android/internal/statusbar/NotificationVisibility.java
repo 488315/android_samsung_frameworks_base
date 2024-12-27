@@ -14,19 +14,22 @@ public class NotificationVisibility implements Parcelable {
     public int rank;
     public boolean visible;
     private static int sNexrId = 0;
-    public static final Parcelable.Creator<NotificationVisibility> CREATOR = new Parcelable.Creator<NotificationVisibility>() { // from class: com.android.internal.statusbar.NotificationVisibility.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationVisibility createFromParcel(Parcel parcel) {
-            return NotificationVisibility.obtain(parcel);
-        }
+    public static final Parcelable.Creator<NotificationVisibility> CREATOR =
+            new Parcelable.Creator<
+                    NotificationVisibility>() { // from class:
+                                                // com.android.internal.statusbar.NotificationVisibility.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationVisibility createFromParcel(Parcel parcel) {
+                    return NotificationVisibility.obtain(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationVisibility[] newArray(int size) {
-            return new NotificationVisibility[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationVisibility[] newArray(int size) {
+                    return new NotificationVisibility[size];
+                }
+            };
 
     public enum NotificationLocation {
         LOCATION_UNKNOWN(0),
@@ -55,7 +58,8 @@ public class NotificationVisibility implements Parcelable {
         this.id = i;
     }
 
-    private NotificationVisibility(String key, int rank, int count, boolean visible, NotificationLocation location) {
+    private NotificationVisibility(
+            String key, int rank, int count, boolean visible, NotificationLocation location) {
         this();
         this.key = key;
         this.rank = rank;
@@ -65,7 +69,18 @@ public class NotificationVisibility implements Parcelable {
     }
 
     public String toString() {
-        return "NotificationVisibility(id=" + this.id + " key=" + this.key + " rank=" + this.rank + " count=" + this.count + (this.visible ? " visible" : "") + " location=" + this.location.name() + " )";
+        return "NotificationVisibility(id="
+                + this.id
+                + " key="
+                + this.key
+                + " rank="
+                + this.rank
+                + " count="
+                + this.count
+                + (this.visible ? " visible" : "")
+                + " location="
+                + this.location.name()
+                + " )";
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
@@ -114,7 +129,8 @@ public class NotificationVisibility implements Parcelable {
         return obtain(key, rank, count, visible, NotificationLocation.LOCATION_UNKNOWN);
     }
 
-    public static NotificationVisibility obtain(String key, int rank, int count, boolean visible, NotificationLocation location) {
+    public static NotificationVisibility obtain(
+            String key, int rank, int count, boolean visible, NotificationLocation location) {
         NotificationVisibility vo = obtain();
         vo.key = key;
         vo.rank = rank;
@@ -135,6 +151,5 @@ public class NotificationVisibility implements Parcelable {
         return new NotificationVisibility();
     }
 
-    public void recycle() {
-    }
+    public void recycle() {}
 }

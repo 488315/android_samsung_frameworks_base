@@ -1,6 +1,7 @@
 package android.os;
 
 import com.google.android.collect.Maps;
+
 import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 
@@ -10,14 +11,15 @@ public class SystemService {
     private static Object sPropertyLock = new Object();
 
     static {
-        SystemProperties.addChangeCallback(new Runnable() { // from class: android.os.SystemService.1
-            @Override // java.lang.Runnable
-            public void run() {
-                synchronized (SystemService.sPropertyLock) {
-                    SystemService.sPropertyLock.notifyAll();
-                }
-            }
-        });
+        SystemProperties.addChangeCallback(
+                new Runnable() { // from class: android.os.SystemService.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        synchronized (SystemService.sPropertyLock) {
+                            SystemService.sPropertyLock.notifyAll();
+                        }
+                    }
+                });
     }
 
     public enum State {
@@ -60,7 +62,8 @@ public class SystemService {
         return State.RUNNING.equals(getState(service));
     }
 
-    public static void waitForState(String service, State state, long timeoutMillis) throws TimeoutException {
+    public static void waitForState(String service, State state, long timeoutMillis)
+            throws TimeoutException {
         long endMillis = SystemClock.elapsedRealtime() + timeoutMillis;
         while (true) {
             synchronized (sPropertyLock) {
@@ -69,7 +72,15 @@ public class SystemService {
                     return;
                 }
                 if (SystemClock.elapsedRealtime() >= endMillis) {
-                    throw new TimeoutException("Service " + service + " currently " + currentState + "; waited " + timeoutMillis + "ms for " + state);
+                    throw new TimeoutException(
+                            "Service "
+                                    + service
+                                    + " currently "
+                                    + currentState
+                                    + "; waited "
+                                    + timeoutMillis
+                                    + "ms for "
+                                    + state);
                 }
                 try {
                     sPropertyLock.wait(timeoutMillis);

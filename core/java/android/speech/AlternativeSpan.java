@@ -3,42 +3,53 @@ package android.speech;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class AlternativeSpan implements Parcelable {
-    public static final Parcelable.Creator<AlternativeSpan> CREATOR = new Parcelable.Creator<AlternativeSpan>() { // from class: android.speech.AlternativeSpan.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AlternativeSpan[] newArray(int size) {
-            return new AlternativeSpan[size];
-        }
+    public static final Parcelable.Creator<AlternativeSpan> CREATOR =
+            new Parcelable.Creator<
+                    AlternativeSpan>() { // from class: android.speech.AlternativeSpan.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AlternativeSpan[] newArray(int size) {
+                    return new AlternativeSpan[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AlternativeSpan createFromParcel(Parcel in) {
-            return new AlternativeSpan(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AlternativeSpan createFromParcel(Parcel in) {
+                    return new AlternativeSpan(in);
+                }
+            };
     private final List<String> mAlternatives;
     private final int mEndPosition;
     private final int mStartPosition;
 
     private void onConstructed() {
-        Preconditions.checkArgumentNonnegative(this.mStartPosition, "The range start must be non-negative.");
-        Preconditions.checkArgument(this.mStartPosition < this.mEndPosition, "Illegal range [%d, %d), must be start < end.", Integer.valueOf(this.mStartPosition), Integer.valueOf(this.mEndPosition));
-        Preconditions.checkCollectionNotEmpty(this.mAlternatives, "List of alternative strings must not be empty.");
+        Preconditions.checkArgumentNonnegative(
+                this.mStartPosition, "The range start must be non-negative.");
+        Preconditions.checkArgument(
+                this.mStartPosition < this.mEndPosition,
+                "Illegal range [%d, %d), must be start < end.",
+                Integer.valueOf(this.mStartPosition),
+                Integer.valueOf(this.mEndPosition));
+        Preconditions.checkCollectionNotEmpty(
+                this.mAlternatives, "List of alternative strings must not be empty.");
     }
 
     public AlternativeSpan(int startPosition, int endPosition, List<String> alternatives) {
         this.mStartPosition = startPosition;
         this.mEndPosition = endPosition;
         this.mAlternatives = alternatives;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAlternatives);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAlternatives);
         onConstructed();
     }
 
@@ -55,7 +66,13 @@ public final class AlternativeSpan implements Parcelable {
     }
 
     public String toString() {
-        return "AlternativeSpan { startPosition = " + this.mStartPosition + ", endPosition = " + this.mEndPosition + ", alternatives = " + this.mAlternatives + " }";
+        return "AlternativeSpan { startPosition = "
+                + this.mStartPosition
+                + ", endPosition = "
+                + this.mEndPosition
+                + ", alternatives = "
+                + this.mAlternatives
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -66,7 +83,9 @@ public final class AlternativeSpan implements Parcelable {
             return false;
         }
         AlternativeSpan that = (AlternativeSpan) o;
-        if (this.mStartPosition == that.mStartPosition && this.mEndPosition == that.mEndPosition && Objects.equals(this.mAlternatives, that.mAlternatives)) {
+        if (this.mStartPosition == that.mStartPosition
+                && this.mEndPosition == that.mEndPosition
+                && Objects.equals(this.mAlternatives, that.mAlternatives)) {
             return true;
         }
         return false;
@@ -97,11 +116,11 @@ public final class AlternativeSpan implements Parcelable {
         this.mStartPosition = startPosition;
         this.mEndPosition = endPosition;
         this.mAlternatives = alternatives;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAlternatives);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAlternatives);
         onConstructed();
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

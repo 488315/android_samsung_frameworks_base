@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -15,13 +16,17 @@ public interface ISemMobileWipsPacketSender extends IInterface {
 
     List<String> sendArp(int i, byte[] bArr, byte[] bArr2, String str) throws RemoteException;
 
-    List<String> sendArpToSniffing(int i, byte[] bArr, byte[] bArr2, String str) throws RemoteException;
+    List<String> sendArpToSniffing(int i, byte[] bArr, byte[] bArr2, String str)
+            throws RemoteException;
 
     int sendDhcp(int i, byte[] bArr, int i2, String str) throws RemoteException;
 
-    byte[] sendDns(long[] jArr, byte[] bArr, byte[] bArr2, byte[] bArr3, String str, boolean z) throws RemoteException;
+    byte[] sendDns(long[] jArr, byte[] bArr, byte[] bArr2, byte[] bArr3, String str, boolean z)
+            throws RemoteException;
 
-    boolean sendDnsQueries(long[] jArr, byte[] bArr, byte[] bArr2, String str, List<String> list, int i) throws RemoteException;
+    boolean sendDnsQueries(
+            long[] jArr, byte[] bArr, byte[] bArr2, String str, List<String> list, int i)
+            throws RemoteException;
 
     List<String> sendIcmp(int i, byte[] bArr, byte[] bArr2, String str) throws RemoteException;
 
@@ -29,42 +34,65 @@ public interface ISemMobileWipsPacketSender extends IInterface {
 
     public static class Default implements ISemMobileWipsPacketSender {
         @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-        public List<String> sendArp(int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac) throws RemoteException {
+        public List<String> sendArp(int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-        public List<String> sendArpToSniffing(int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac) throws RemoteException {
+        public List<String> sendArpToSniffing(
+                int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-        public List<String> sendIcmp(int timeoutMillis, byte[] gateway, byte[] myAddr, String dstMac) throws RemoteException {
+        public List<String> sendIcmp(
+                int timeoutMillis, byte[] gateway, byte[] myAddr, String dstMac)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-        public int sendDhcp(int timeoutMillis, byte[] myAddr, int equalOption, String equalString) throws RemoteException {
+        public int sendDhcp(int timeoutMillis, byte[] myAddr, int equalOption, String equalString)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-        public byte[] sendDns(long[] timeoutMillis, byte[] srcAddr, byte[] dstAddr, byte[] dnsMessage, String dstMac, boolean isUDP) throws RemoteException {
+        public byte[] sendDns(
+                long[] timeoutMillis,
+                byte[] srcAddr,
+                byte[] dstAddr,
+                byte[] dnsMessage,
+                String dstMac,
+                boolean isUDP)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-        public boolean sendDnsQueries(long[] timeoutMillis, byte[] srcAddr, byte[] dstAddr, String dstMac, List<String> dnsMessages, int tcpIndex) throws RemoteException {
+        public boolean sendDnsQueries(
+                long[] timeoutMillis,
+                byte[] srcAddr,
+                byte[] dstAddr,
+                String dstMac,
+                List<String> dnsMessages,
+                int tcpIndex)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-        public boolean sendTcp(int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac) throws RemoteException {
+        public boolean sendTcp(int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-        public boolean pingTcp(byte[] srcAddr, byte[] dstAddr, int dstPort, int ttl, int timeoutMillis) throws RemoteException {
+        public boolean pingTcp(
+                byte[] srcAddr, byte[] dstAddr, int dstPort, int ttl, int timeoutMillis)
+                throws RemoteException {
             return false;
         }
 
@@ -74,7 +102,7 @@ public interface ISemMobileWipsPacketSender extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemMobileWipsPacketSender {
+    public abstract static class Stub extends Binder implements ISemMobileWipsPacketSender {
         static final int TRANSACTION_pingTcp = 8;
         static final int TRANSACTION_sendArp = 1;
         static final int TRANSACTION_sendArpToSniffing = 2;
@@ -133,7 +161,8 @@ public interface ISemMobileWipsPacketSender extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemMobileWipsPacketSender.DESCRIPTOR);
             }
@@ -202,7 +231,8 @@ public interface ISemMobileWipsPacketSender extends IInterface {
                     List<String> _arg42 = data.createStringArrayList();
                     int _arg52 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result6 = sendDnsQueries(_arg06, _arg16, _arg26, _arg36, _arg42, _arg52);
+                    boolean _result6 =
+                            sendDnsQueries(_arg06, _arg16, _arg26, _arg36, _arg42, _arg52);
                     reply.writeNoException();
                     reply.writeBoolean(_result6);
                     return true;
@@ -249,7 +279,9 @@ public interface ISemMobileWipsPacketSender extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-            public List<String> sendArp(int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac) throws RemoteException {
+            public List<String> sendArp(
+                    int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -269,7 +301,9 @@ public interface ISemMobileWipsPacketSender extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-            public List<String> sendArpToSniffing(int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac) throws RemoteException {
+            public List<String> sendArpToSniffing(
+                    int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -289,7 +323,9 @@ public interface ISemMobileWipsPacketSender extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-            public List<String> sendIcmp(int timeoutMillis, byte[] gateway, byte[] myAddr, String dstMac) throws RemoteException {
+            public List<String> sendIcmp(
+                    int timeoutMillis, byte[] gateway, byte[] myAddr, String dstMac)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -309,7 +345,9 @@ public interface ISemMobileWipsPacketSender extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-            public int sendDhcp(int timeoutMillis, byte[] myAddr, int equalOption, String equalString) throws RemoteException {
+            public int sendDhcp(
+                    int timeoutMillis, byte[] myAddr, int equalOption, String equalString)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -329,7 +367,14 @@ public interface ISemMobileWipsPacketSender extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-            public byte[] sendDns(long[] timeoutMillis, byte[] srcAddr, byte[] dstAddr, byte[] dnsMessage, String dstMac, boolean isUDP) throws RemoteException {
+            public byte[] sendDns(
+                    long[] timeoutMillis,
+                    byte[] srcAddr,
+                    byte[] dstAddr,
+                    byte[] dnsMessage,
+                    String dstMac,
+                    boolean isUDP)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -351,7 +396,14 @@ public interface ISemMobileWipsPacketSender extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-            public boolean sendDnsQueries(long[] timeoutMillis, byte[] srcAddr, byte[] dstAddr, String dstMac, List<String> dnsMessages, int tcpIndex) throws RemoteException {
+            public boolean sendDnsQueries(
+                    long[] timeoutMillis,
+                    byte[] srcAddr,
+                    byte[] dstAddr,
+                    String dstMac,
+                    List<String> dnsMessages,
+                    int tcpIndex)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -373,7 +425,8 @@ public interface ISemMobileWipsPacketSender extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-            public boolean sendTcp(int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac) throws RemoteException {
+            public boolean sendTcp(int timeoutMillis, byte[] gateway, byte[] myAddr, String myMac)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -393,7 +446,9 @@ public interface ISemMobileWipsPacketSender extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemMobileWipsPacketSender
-            public boolean pingTcp(byte[] srcAddr, byte[] dstAddr, int dstPort, int ttl, int timeoutMillis) throws RemoteException {
+            public boolean pingTcp(
+                    byte[] srcAddr, byte[] dstAddr, int dstPort, int ttl, int timeoutMillis)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

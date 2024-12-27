@@ -1,6 +1,7 @@
 package com.samsung.android.server.dynamicfeature;
 
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,7 +22,9 @@ public final class Butler {
                         ((Consumer) this.featureHandlers.get(dFeature.name)).accept(dFeature);
                     }
                 } catch (Exception e) {
-                    Slog.e("dynamicfeature_Butler", "processNewFeature : " + dFeature.value + "/" + e.getMessage());
+                    Slog.e(
+                            "dynamicfeature_Butler",
+                            "processNewFeature : " + dFeature.value + "/" + e.getMessage());
                 }
             }
         }

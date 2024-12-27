@@ -1,6 +1,5 @@
 package android.content;
 
-import android.content.IIntentReceiver;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -10,12 +9,27 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IIntentSender extends IInterface {
-    void send(int i, Intent intent, String str, IBinder iBinder, IIntentReceiver iIntentReceiver, String str2, Bundle bundle) throws RemoteException;
+    void send(
+            int i,
+            Intent intent,
+            String str,
+            IBinder iBinder,
+            IIntentReceiver iIntentReceiver,
+            String str2,
+            Bundle bundle)
+            throws RemoteException;
 
     public static class Default implements IIntentSender {
         @Override // android.content.IIntentSender
-        public void send(int code, Intent intent, String resolvedType, IBinder whitelistToken, IIntentReceiver finishedReceiver, String requiredPermission, Bundle options) throws RemoteException {
-        }
+        public void send(
+                int code,
+                Intent intent,
+                String resolvedType,
+                IBinder whitelistToken,
+                IIntentReceiver finishedReceiver,
+                String requiredPermission,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +37,7 @@ public interface IIntentSender extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIntentSender {
+    public abstract static class Stub extends Binder implements IIntentSender {
         public static final String DESCRIPTOR = "android.content.IIntentSender";
         static final int TRANSACTION_send = 1;
 
@@ -62,7 +76,8 @@ public interface IIntentSender extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -76,7 +91,8 @@ public interface IIntentSender extends IInterface {
                     Intent _arg1 = (Intent) data.readTypedObject(Intent.CREATOR);
                     String _arg2 = data.readString();
                     IBinder _arg3 = data.readStrongBinder();
-                    IIntentReceiver _arg4 = IIntentReceiver.Stub.asInterface(data.readStrongBinder());
+                    IIntentReceiver _arg4 =
+                            IIntentReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg5 = data.readString();
                     Bundle _arg6 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
@@ -104,7 +120,15 @@ public interface IIntentSender extends IInterface {
             }
 
             @Override // android.content.IIntentSender
-            public void send(int code, Intent intent, String resolvedType, IBinder whitelistToken, IIntentReceiver finishedReceiver, String requiredPermission, Bundle options) throws RemoteException {
+            public void send(
+                    int code,
+                    Intent intent,
+                    String resolvedType,
+                    IBinder whitelistToken,
+                    IIntentReceiver finishedReceiver,
+                    String requiredPermission,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -27,13 +27,16 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.KnoxCaptureInputFilter$$ExternalSyntheticOutline0;
 import com.android.server.notification.edgelighting.policy.EdgeLightingPolicyRepository;
+
 import com.samsung.android.cover.CoverManager;
 import com.samsung.android.edge.EdgeLightingPolicyInfo;
 import com.samsung.android.feature.SemFloatingFeature;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,7 +84,8 @@ public final class EdgeLightingPolicyManager {
         public final /* synthetic */ EdgeLightingPolicyManager this$0;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public /* synthetic */ AnonymousClass1(EdgeLightingPolicyManager edgeLightingPolicyManager, Handler handler, int i) {
+        public /* synthetic */ AnonymousClass1(
+                EdgeLightingPolicyManager edgeLightingPolicyManager, Handler handler, int i) {
             super(handler);
             this.$r8$classId = i;
             this.this$0 = edgeLightingPolicyManager;
@@ -95,7 +99,9 @@ public final class EdgeLightingPolicyManager {
                     boolean z2 = !edgeLightingPolicyManager.mDisableNotificationAlerts;
                     edgeLightingPolicyManager.mUseHeadsUp = z2;
                     boolean z3 = EdgeLightingPolicyManager.DEBUG;
-                    Log.d("EdgeLightingPolicyManager", "heads up is ".concat(z2 ? "enabled" : "disabled"));
+                    Log.d(
+                            "EdgeLightingPolicyManager",
+                            "heads up is ".concat(z2 ? "enabled" : "disabled"));
                     break;
                 default:
                     super.onChange(z);
@@ -117,7 +123,15 @@ public final class EdgeLightingPolicyManager {
                         String str = "false";
                         bundle.putString("def", "false");
                         try {
-                            Bundle call = edgeLightingPolicyManager.mContext.getContentResolver().call(EdgeLightingPolicyManager.DESKTOP_SETTINGS_URI, "getSettings", (String) null, bundle);
+                            Bundle call =
+                                    edgeLightingPolicyManager
+                                            .mContext
+                                            .getContentResolver()
+                                            .call(
+                                                    EdgeLightingPolicyManager.DESKTOP_SETTINGS_URI,
+                                                    "getSettings",
+                                                    (String) null,
+                                                    bundle);
                             if (call != null) {
                                 str = call.getString(lastPathSegment);
                             }
@@ -141,13 +155,15 @@ public final class EdgeLightingPolicyManager {
         public IBinder token;
         public int what;
 
-        public DisableRecord() {
-        }
+        public DisableRecord() {}
 
         @Override // android.os.IBinder.DeathRecipient
         public final void binderDied() {
             boolean z = EdgeLightingPolicyManager.DEBUG;
-            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("binder died for packageName = "), this.packageName, "EdgeLightingPolicyManager");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("binder died for packageName = "),
+                    this.packageName,
+                    "EdgeLightingPolicyManager");
             EdgeLightingPolicyManager edgeLightingPolicyManager = EdgeLightingPolicyManager.this;
             String str = this.packageName;
             IBinder iBinder = this.token;
@@ -167,7 +183,8 @@ public final class EdgeLightingPolicyManager {
             if (this.mChildMap.size() <= 0) {
                 return null;
             }
-            Map.Entry entry = (Map.Entry) new ArrayList(this.mChildMap.entrySet()).get(r0.size() - 1);
+            Map.Entry entry =
+                    (Map.Entry) new ArrayList(this.mChildMap.entrySet()).get(r0.size() - 1);
             boolean z = EdgeLightingPolicyManager.DEBUG;
             Slog.d("EdgeLightingPolicyManager.NotificationGroup", " last child " + entry);
             return (NotificationData) entry.getValue();
@@ -178,7 +195,9 @@ public final class EdgeLightingPolicyManager {
                 try {
                     if (this.mChildMap.containsKey(str)) {
                         boolean z = EdgeLightingPolicyManager.DEBUG;
-                        Slog.d("EdgeLightingPolicyManager.NotificationGroup", "Remove previous child data. " + str);
+                        Slog.d(
+                                "EdgeLightingPolicyManager.NotificationGroup",
+                                "Remove previous child data. " + str);
                         this.mChildMap.remove(str);
                     }
                     this.mChildMap.put(str, notificationData);
@@ -197,7 +216,12 @@ public final class EdgeLightingPolicyManager {
                 synchronized (this.mChildMap) {
                     try {
                         for (Map.Entry entry : this.mChildMap.entrySet()) {
-                            sb.append("key = " + ((String) entry.getKey()) + " , value = " + entry.getValue() + ",");
+                            sb.append(
+                                    "key = "
+                                            + ((String) entry.getKey())
+                                            + " , value = "
+                                            + entry.getValue()
+                                            + ",");
                         }
                     } catch (Throwable th) {
                         throw th;
@@ -215,7 +239,9 @@ public final class EdgeLightingPolicyManager {
         public long mTime;
 
         public final String toString() {
-            return " NotificationData { tag= " + this.mNotificationInfo.getString("noti_tag") + " } ";
+            return " NotificationData { tag= "
+                    + this.mNotificationInfo.getString("noti_tag")
+                    + " } ";
         }
     }
 
@@ -232,10 +258,17 @@ public final class EdgeLightingPolicyManager {
                             boolean z = EdgeLightingPolicyManager.DEBUG;
                             sb.append("EdgeLightingPolicyManager");
                             sb.append(".NotificationGroup");
-                            Slog.d(sb.toString(), "group key = " + ((String) entry.getKey()) + " ,value= " + entry.getValue());
+                            Slog.d(
+                                    sb.toString(),
+                                    "group key = "
+                                            + ((String) entry.getKey())
+                                            + " ,value= "
+                                            + entry.getValue());
                         }
                     } else {
-                        Slog.d("EdgeLightingPolicyManager.NotificationGroup", "group notification count : " + this.mGroupMap.size());
+                        Slog.d(
+                                "EdgeLightingPolicyManager.NotificationGroup",
+                                "group notification count : " + this.mGroupMap.size());
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -243,23 +276,43 @@ public final class EdgeLightingPolicyManager {
             }
         }
 
-        public final void updateNotificationData(StatusBarNotification statusBarNotification, NotificationData notificationData) {
+        public final void updateNotificationData(
+                StatusBarNotification statusBarNotification, NotificationData notificationData) {
             NotificationData notificationData2;
             synchronized (this.mGroupMap) {
-                if (statusBarNotification.getNotification().isGroupSummary() && notificationData.mNotificationInfo.getBoolean("isHeadup", false)) {
+                if (statusBarNotification.getNotification().isGroupSummary()
+                        && notificationData.mNotificationInfo.getBoolean("isHeadup", false)) {
                     boolean z = EdgeLightingPolicyManager.DEBUG;
-                    Slog.d("EdgeLightingPolicyManager.NotificationGroup", "updateNotificationData replace :" + statusBarNotification.getGroupKey() + ", group  size=" + this.mGroupMap.size());
-                    GroupNotificationData groupNotificationData = (GroupNotificationData) this.mGroupMap.get(statusBarNotification.getGroupKey());
+                    Slog.d(
+                            "EdgeLightingPolicyManager.NotificationGroup",
+                            "updateNotificationData replace :"
+                                    + statusBarNotification.getGroupKey()
+                                    + ", group  size="
+                                    + this.mGroupMap.size());
+                    GroupNotificationData groupNotificationData =
+                            (GroupNotificationData)
+                                    this.mGroupMap.get(statusBarNotification.getGroupKey());
                     if (groupNotificationData != null) {
                         String key = statusBarNotification.getKey();
                         synchronized (groupNotificationData.mChildMap) {
-                            notificationData2 = (NotificationData) groupNotificationData.mChildMap.get(key);
+                            notificationData2 =
+                                    (NotificationData) groupNotificationData.mChildMap.get(key);
                         }
                         if (notificationData2 != null) {
-                            notificationData.mNotificationInfo.putCharSequence("tickerText", notificationData2.mNotificationInfo.getCharSequence("tickerText"));
-                            notificationData.mNotificationInfo.putCharSequence("titleText", notificationData2.mNotificationInfo.getCharSequence("titleText"));
-                            notificationData.mNotificationInfo.putCharSequence("text", notificationData2.mNotificationInfo.getCharSequence("text"));
-                            notificationData.mNotificationInfo.putCharSequence("subText", notificationData2.mNotificationInfo.getCharSequence("subText"));
+                            notificationData.mNotificationInfo.putCharSequence(
+                                    "tickerText",
+                                    notificationData2.mNotificationInfo.getCharSequence(
+                                            "tickerText"));
+                            notificationData.mNotificationInfo.putCharSequence(
+                                    "titleText",
+                                    notificationData2.mNotificationInfo.getCharSequence(
+                                            "titleText"));
+                            notificationData.mNotificationInfo.putCharSequence(
+                                    "text",
+                                    notificationData2.mNotificationInfo.getCharSequence("text"));
+                            notificationData.mNotificationInfo.putCharSequence(
+                                    "subText",
+                                    notificationData2.mNotificationInfo.getCharSequence("subText"));
                         }
                     } else {
                         groupNotificationData = new GroupNotificationData();
@@ -267,14 +320,17 @@ public final class EdgeLightingPolicyManager {
                     groupNotificationData.mSumaaryNotification = notificationData;
                     this.mGroupMap.put(statusBarNotification.getGroupKey(), groupNotificationData);
                 } else {
-                    GroupNotificationData groupNotificationData2 = (GroupNotificationData) this.mGroupMap.get(statusBarNotification.getGroupKey());
+                    GroupNotificationData groupNotificationData2 =
+                            (GroupNotificationData)
+                                    this.mGroupMap.get(statusBarNotification.getGroupKey());
                     if (groupNotificationData2 == null) {
                         groupNotificationData2 = new GroupNotificationData();
                     }
                     if (statusBarNotification.getNotification().isGroupSummary()) {
                         groupNotificationData2.mSumaaryNotification = notificationData;
                     } else {
-                        groupNotificationData2.putChild(statusBarNotification.getKey(), notificationData);
+                        groupNotificationData2.putChild(
+                                statusBarNotification.getKey(), notificationData);
                     }
                     this.mGroupMap.put(statusBarNotification.getGroupKey(), groupNotificationData2);
                     dump();
@@ -284,8 +340,18 @@ public final class EdgeLightingPolicyManager {
     }
 
     static {
-        EMERGENCY_MODE_ENABLED = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE") || SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_ULTRA_POWER_SAVING") || SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_BATTERY_CONVERSING");
-        DESKTOP_SETTINGS_URI = Uri.parse("content://com.sec.android.desktopmode.uiservice.SettingsProvider/settings");
+        EMERGENCY_MODE_ENABLED =
+                SemFloatingFeature.getInstance()
+                                .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_SAFETYCARE")
+                        || SemFloatingFeature.getInstance()
+                                .getBoolean(
+                                        "SEC_FLOATING_FEATURE_COMMON_SUPPORT_ULTRA_POWER_SAVING")
+                        || SemFloatingFeature.getInstance()
+                                .getBoolean(
+                                        "SEC_FLOATING_FEATURE_COMMON_SUPPORT_BATTERY_CONVERSING");
+        DESKTOP_SETTINGS_URI =
+                Uri.parse(
+                        "content://com.sec.android.desktopmode.uiservice.SettingsProvider/settings");
     }
 
     public EdgeLightingPolicyManager(Context context) {
@@ -298,26 +364,37 @@ public final class EdgeLightingPolicyManager {
         AnonymousClass1 anonymousClass1 = new AnonymousClass1(this, handler, 0);
         this.mHeadsUpObserver = anonymousClass1;
         AnonymousClass1 anonymousClass12 = new AnonymousClass1(this, handler, 1);
-        IVrStateCallbacks.Stub stub = new IVrStateCallbacks.Stub() { // from class: com.android.server.notification.edgelighting.EdgeLightingPolicyManager.3
-            public final void onVrStateChanged(boolean z) {
-                EdgeLightingPolicyManager.this.mVrMode = z;
-            }
-        };
+        IVrStateCallbacks.Stub stub =
+                new IVrStateCallbacks
+                        .Stub() { // from class:
+                                  // com.android.server.notification.edgelighting.EdgeLightingPolicyManager.3
+                    public final void onVrStateChanged(boolean z) {
+                        EdgeLightingPolicyManager.this.mVrMode = z;
+                    }
+                };
         this.mContext = context;
         this.mPackageManager = context.getPackageManager();
         this.mWhitePolicy = new EdgeLightingPolicyRepository();
         this.mBlackPolicy = new EdgeLightingPolicyRepository();
         anonymousClass1.onChange(true);
-        context.getContentResolver().registerContentObserver(Settings.Global.getUriFor("heads_up_notifications_enabled"), true, anonymousClass1);
+        context.getContentResolver()
+                .registerContentObserver(
+                        Settings.Global.getUriFor("heads_up_notifications_enabled"),
+                        true,
+                        anonymousClass1);
         anonymousClass12.onChange(true);
-        context.getContentResolver().registerContentObserver(DESKTOP_SETTINGS_URI, true, anonymousClass12);
+        context.getContentResolver()
+                .registerContentObserver(DESKTOP_SETTINGS_URI, true, anonymousClass12);
         this.mNm = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
-        IVrManager asInterface = IVrManager.Stub.asInterface(ServiceManager.getService("vrmanager"));
+        IVrManager asInterface =
+                IVrManager.Stub.asInterface(ServiceManager.getService("vrmanager"));
         if (asInterface != null) {
             try {
                 asInterface.registerListener(stub);
             } catch (RemoteException e) {
-                Slog.e("EdgeLightingPolicyManager", "Failed to register VR mode state listener: " + e);
+                Slog.e(
+                        "EdgeLightingPolicyManager",
+                        "Failed to register VR mode state listener: " + e);
             }
         }
     }
@@ -326,16 +403,24 @@ public final class EdgeLightingPolicyManager {
         if (bundle == null) {
             return true;
         }
-        return TextUtils.isEmpty(bundle.getCharSequence("tickerText", null)) && TextUtils.isEmpty(bundle.getCharSequence("titleText", null)) && TextUtils.isEmpty(bundle.getCharSequence("text", null)) && TextUtils.isEmpty(bundle.getCharSequence("subText", null));
+        return TextUtils.isEmpty(bundle.getCharSequence("tickerText", null))
+                && TextUtils.isEmpty(bundle.getCharSequence("titleText", null))
+                && TextUtils.isEmpty(bundle.getCharSequence("text", null))
+                && TextUtils.isEmpty(bundle.getCharSequence("subText", null));
     }
 
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        printWriter.println("-EdgeLightingPolicy start : type = " + this.mPolicyType + ", version = " + this.mPolicyVersion);
+        printWriter.println(
+                "-EdgeLightingPolicy start : type = "
+                        + this.mPolicyType
+                        + ", version = "
+                        + this.mPolicyVersion);
         if (EdgeLightingHistory.IS_DEV_DEBUG || DEBUG) {
             synchronized (this.mNotificationMap) {
                 try {
                     for (Map.Entry entry : this.mNotificationMap.entrySet()) {
-                        printWriter.println("  " + ((String) entry.getKey()) + ":" + entry.getValue());
+                        printWriter.println(
+                                "  " + ((String) entry.getKey()) + ":" + entry.getValue());
                     }
                     printWriter.println("");
                 } finally {
@@ -347,7 +432,11 @@ public final class EdgeLightingPolicyManager {
                 Iterator it = this.mDisableRecords.iterator();
                 while (it.hasNext()) {
                     DisableRecord disableRecord = (DisableRecord) it.next();
-                    printWriter.println("  [DisableRecord] : " + disableRecord.packageName + " " + disableRecord.what);
+                    printWriter.println(
+                            "  [DisableRecord] : "
+                                    + disableRecord.packageName
+                                    + " "
+                                    + disableRecord.what);
                 }
                 printWriter.println("");
             } finally {
@@ -357,7 +446,11 @@ public final class EdgeLightingPolicyManager {
             try {
                 int size = this.mDisabledPackages.size();
                 for (int i = 0; i < size; i++) {
-                    printWriter.println("  [DisabledPackages] : type " + this.mDisabledPackages.keyAt(i) + " " + ((ArraySet) this.mDisabledPackages.valueAt(i)).toString());
+                    printWriter.println(
+                            "  [DisabledPackages] : type "
+                                    + this.mDisabledPackages.keyAt(i)
+                                    + " "
+                                    + ((ArraySet) this.mDisabledPackages.valueAt(i)).toString());
                 }
                 printWriter.println("");
             } finally {
@@ -379,7 +472,10 @@ public final class EdgeLightingPolicyManager {
         EdgeLightingPolicyInfo policyInfoWithPackageName2;
         EdgeLightingPolicyRepository edgeLightingPolicyRepository = this.mWhitePolicy;
         EdgeLightingPolicyInfo edgeLightingPolicyInfo = null;
-        EdgeLightingPolicyInfo policyInfoWithPackageName3 = (edgeLightingPolicyRepository == null || edgeLightingPolicyRepository.size() < 1) ? null : edgeLightingPolicyRepository.getPolicyInfoWithPackageName(str);
+        EdgeLightingPolicyInfo policyInfoWithPackageName3 =
+                (edgeLightingPolicyRepository == null || edgeLightingPolicyRepository.size() < 1)
+                        ? null
+                        : edgeLightingPolicyRepository.getPolicyInfoWithPackageName(str);
         boolean z3 = EdgeLightingHistory.IS_DEV_DEBUG;
         boolean z4 = DEBUG;
         if (z3 || z4) {
@@ -392,30 +488,43 @@ public final class EdgeLightingPolicyManager {
             stringBuffer.append(" , userId=");
             stringBuffer.append(i2);
             stringBuffer.append(" , infoRange=");
-            stringBuffer.append(policyInfoWithPackageName3 != null ? policyInfoWithPackageName3.range : 0);
+            stringBuffer.append(
+                    policyInfoWithPackageName3 != null ? policyInfoWithPackageName3.range : 0);
             stringBuffer.append(" , infoCategory=");
-            stringBuffer.append(policyInfoWithPackageName3 != null ? policyInfoWithPackageName3.category : 0);
+            stringBuffer.append(
+                    policyInfoWithPackageName3 != null ? policyInfoWithPackageName3.category : 0);
             Slog.d("EdgeLightingPolicyManager", stringBuffer.toString());
         }
         if ((65280 & i) != 0) {
-            return (policyInfoWithPackageName3 == null || (policyInfoWithPackageName3.range & i) == 0) ? false : true;
+            return (policyInfoWithPackageName3 == null
+                            || (policyInfoWithPackageName3.range & i) == 0)
+                    ? false
+                    : true;
         }
         if (z || (this.mPolicyType & 1) != 0) {
             Intent intent = new Intent("android.intent.action.MAIN");
             intent.addCategory("android.intent.category.LAUNCHER");
             intent.setPackage(str);
-            List queryIntentActivitiesAsUser = this.mPackageManager.queryIntentActivitiesAsUser(intent, 0, i2);
+            List queryIntentActivitiesAsUser =
+                    this.mPackageManager.queryIntentActivitiesAsUser(intent, 0, i2);
             z2 = queryIntentActivitiesAsUser != null && queryIntentActivitiesAsUser.size() > 0;
-            if (z2 && policyInfoWithPackageName3 != null && (policyInfoWithPackageName3.range & i) == 0) {
+            if (z2
+                    && policyInfoWithPackageName3 != null
+                    && (policyInfoWithPackageName3.range & i) == 0) {
                 z2 = false;
             }
         } else {
-            if (edgeLightingPolicyRepository.size() < 1 || (policyInfoWithPackageName2 = edgeLightingPolicyRepository.getPolicyInfoWithPackageName(str)) == null || (policyInfoWithPackageName2.range & i) == 0) {
+            if (edgeLightingPolicyRepository.size() < 1
+                    || (policyInfoWithPackageName2 =
+                                    edgeLightingPolicyRepository.getPolicyInfoWithPackageName(str))
+                            == null
+                    || (policyInfoWithPackageName2.range & i) == 0) {
                 policyInfoWithPackageName2 = null;
             }
             z2 = policyInfoWithPackageName2 != null;
             if (z3 || z4) {
-                StringBuffer stringBuffer2 = new StringBuffer("isAcceptableApplication: getAcceptablePolicy ");
+                StringBuffer stringBuffer2 =
+                        new StringBuffer("isAcceptableApplication: getAcceptablePolicy ");
                 stringBuffer2.append(z2);
                 Slog.d("EdgeLightingPolicyManager", stringBuffer2.toString());
             }
@@ -424,38 +533,60 @@ public final class EdgeLightingPolicyManager {
             try {
                 applicationInfo = this.mPackageManager.getApplicationInfo(str, 0);
             } catch (PackageManager.NameNotFoundException unused) {
-                BootReceiver$$ExternalSyntheticOutline0.m("getApplicationInfo : packageName = ", str, "EdgeLightingPolicyManager");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        "getApplicationInfo : packageName = ", str, "EdgeLightingPolicyManager");
                 applicationInfo = null;
             }
-            z2 = (applicationInfo == null || applicationInfo.isSystemApp() || applicationInfo.isUpdatedSystemApp()) ? false : true;
+            z2 =
+                    (applicationInfo == null
+                                    || applicationInfo.isSystemApp()
+                                    || applicationInfo.isUpdatedSystemApp())
+                            ? false
+                            : true;
         }
         try {
-            i3 = i2 < 0 ? this.mPackageManager.getPackageUidAsUser(str, 0, this.mUserId) : this.mPackageManager.getPackageUidAsUser(str, 0, i2);
+            i3 =
+                    i2 < 0
+                            ? this.mPackageManager.getPackageUidAsUser(str, 0, this.mUserId)
+                            : this.mPackageManager.getPackageUidAsUser(str, 0, i2);
         } catch (Exception e) {
-            KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(e, "getPackageUidAsUser failed - ", "EdgeLightingPolicyManager");
+            KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(
+                    e, "getPackageUidAsUser failed - ", "EdgeLightingPolicyManager");
             i3 = 0;
         }
         if ((i & 1) != 0) {
             try {
                 if (this.mNm == null) {
-                    this.mNm = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
+                    this.mNm =
+                            INotificationManager.Stub.asInterface(
+                                    ServiceManager.getService("notification"));
                 }
                 INotificationManager iNotificationManager = this.mNm;
                 if (iNotificationManager != null) {
                     z2 = iNotificationManager.isEdgeLightingAllowed(str, i3);
                 }
                 if (EdgeLightingHistory.IS_DEV_DEBUG || z4) {
-                    Slog.d("EdgeLightingPolicyManager", "isAcceptableApplication - accept rechecked by isEdgeLightingAllowed = " + z2 + " uid = " + i3);
+                    Slog.d(
+                            "EdgeLightingPolicyManager",
+                            "isAcceptableApplication - accept rechecked by isEdgeLightingAllowed = "
+                                    + z2
+                                    + " uid = "
+                                    + i3);
                 }
             } catch (Exception e2) {
-                KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(e2, "isEdgeLightingAllowed failed - ", "EdgeLightingPolicyManager");
+                KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(
+                        e2, "isEdgeLightingAllowed failed - ", "EdgeLightingPolicyManager");
             }
         }
         if (!z2 || (this.mPolicyType & 4) == 0) {
             return z2;
         }
         EdgeLightingPolicyRepository edgeLightingPolicyRepository2 = this.mBlackPolicy;
-        if (edgeLightingPolicyRepository2.size() >= 1 && (policyInfoWithPackageName = edgeLightingPolicyRepository2.getPolicyInfoWithPackageName(str)) != null && (i & policyInfoWithPackageName.range) != 0) {
+        if (edgeLightingPolicyRepository2.size() >= 1
+                && (policyInfoWithPackageName =
+                                edgeLightingPolicyRepository2.getPolicyInfoWithPackageName(str))
+                        != null
+                && (i & policyInfoWithPackageName.range) != 0) {
             edgeLightingPolicyInfo = policyInfoWithPackageName;
         }
         boolean z5 = edgeLightingPolicyInfo == null;
@@ -466,14 +597,18 @@ public final class EdgeLightingPolicyManager {
                     iNotificationManager2.setAllowEdgeLighting(str, i3, false);
                 }
                 if (EdgeLightingHistory.IS_DEV_DEBUG || z4) {
-                    Slog.d("EdgeLightingPolicyManager", "Block list app so setAllowEdgeLighting to false");
+                    Slog.d(
+                            "EdgeLightingPolicyManager",
+                            "Block list app so setAllowEdgeLighting to false");
                 }
             } catch (Exception e3) {
-                KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(e3, "setAllowEdgeLighting failed - ", "EdgeLightingPolicyManager");
+                KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(
+                        e3, "setAllowEdgeLighting failed - ", "EdgeLightingPolicyManager");
             }
         }
         if (EdgeLightingHistory.IS_DEV_DEBUG || z4) {
-            StringBuffer stringBuffer3 = new StringBuffer("isAcceptableApplication: getRejectablePolicy ");
+            StringBuffer stringBuffer3 =
+                    new StringBuffer("isAcceptableApplication: getRejectablePolicy ");
             stringBuffer3.append(z5);
             Slog.d("EdgeLightingPolicyManager", stringBuffer3.toString());
         }
@@ -600,7 +735,9 @@ public final class EdgeLightingPolicyManager {
         L91:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.edgelighting.EdgeLightingPolicyManager.isEdgeLightingRestricted(int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.edgelighting.EdgeLightingPolicyManager.isEdgeLightingRestricted(int):boolean");
     }
 
     public final boolean isHUNPeeked() {
@@ -645,7 +782,9 @@ public final class EdgeLightingPolicyManager {
                 iBinder.linkToDeath(disableRecord, 0);
                 this.mDisableRecords.add(disableRecord);
             } catch (RemoteException e) {
-                Slog.d("EdgeLightingPolicyManager", "manageDisableRecoredLocked : " + e.getMessage());
+                Slog.d(
+                        "EdgeLightingPolicyManager",
+                        "manageDisableRecoredLocked : " + e.getMessage());
                 return;
             }
         }
@@ -654,7 +793,13 @@ public final class EdgeLightingPolicyManager {
         disableRecord.packageName = str;
     }
 
-    public final Bundle putNotification(StatusBarNotification statusBarNotification, boolean z, boolean z2, int i, boolean z3, boolean z4) {
+    public final Bundle putNotification(
+            StatusBarNotification statusBarNotification,
+            boolean z,
+            boolean z2,
+            int i,
+            boolean z3,
+            boolean z4) {
         CharSequence charSequence;
         CharSequence charSequence2;
         Boolean bool;
@@ -667,7 +812,10 @@ public final class EdgeLightingPolicyManager {
             return null;
         }
         Bundle bundle2 = statusBarNotification.getNotification().extras;
-        CharSequence charSequence5 = statusBarNotification.getNotification().tickerText != null ? statusBarNotification.getNotification().tickerText : null;
+        CharSequence charSequence5 =
+                statusBarNotification.getNotification().tickerText != null
+                        ? statusBarNotification.getNotification().tickerText
+                        : null;
         Icon smallIcon = statusBarNotification.getNotification().getSmallIcon();
         String groupKey = statusBarNotification.getGroupKey();
         Boolean bool2 = Boolean.FALSE;
@@ -703,7 +851,8 @@ public final class EdgeLightingPolicyManager {
                     Iterator it = this.mNotificationMap.entrySet().iterator();
                     while (it.hasNext()) {
                         CharSequence charSequence7 = charSequence5;
-                        if (((NotificationData) ((Map.Entry) it.next()).getValue()).mTime + 10000 < currentTimeMillis) {
+                        if (((NotificationData) ((Map.Entry) it.next()).getValue()).mTime + 10000
+                                < currentTimeMillis) {
                             it.remove();
                         }
                         charSequence5 = charSequence7;
@@ -715,7 +864,12 @@ public final class EdgeLightingPolicyManager {
         }
         synchronized (this.mNotificationMap) {
             int i2 = statusBarNotification.getNotification().ledARGB;
-            if (i2 == 0 && (notificationData = (NotificationData) this.mNotificationMap.get(statusBarNotification.getPackageName())) != null) {
+            if (i2 == 0
+                    && (notificationData =
+                                    (NotificationData)
+                                            this.mNotificationMap.get(
+                                                    statusBarNotification.getPackageName()))
+                            != null) {
                 i2 = notificationData.mNotificationInfo.getInt("color", 0);
             }
             int i3 = i2;
@@ -723,13 +877,22 @@ public final class EdgeLightingPolicyManager {
             try {
                 INotificationManager iNotificationManager = this.mNm;
                 if (iNotificationManager == null) {
-                    Slog.d("EdgeLightingPolicyManager", "INotificationManager is null in putNotification, try reload");
-                    this.mNm = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
+                    Slog.d(
+                            "EdgeLightingPolicyManager",
+                            "INotificationManager is null in putNotification, try reload");
+                    this.mNm =
+                            INotificationManager.Stub.asInterface(
+                                    ServiceManager.getService("notification"));
                 } else {
-                    i4 = iNotificationManager.getLockScreenNotificationVisibilityForPackage(statusBarNotification.getPackageName(), statusBarNotification.getUid());
+                    i4 =
+                            iNotificationManager.getLockScreenNotificationVisibilityForPackage(
+                                    statusBarNotification.getPackageName(),
+                                    statusBarNotification.getUid());
                 }
             } catch (RemoteException e) {
-                Slog.d("EdgeLightingPolicyManager", "getLockScreenNotificationVisibilityForPackage failed - " + e);
+                Slog.d(
+                        "EdgeLightingPolicyManager",
+                        "getLockScreenNotificationVisibilityForPackage failed - " + e);
             }
             long currentTimeMillis2 = System.currentTimeMillis();
             bundle = new Bundle();
@@ -745,20 +908,28 @@ public final class EdgeLightingPolicyManager {
             bundle.putInt("notification_color", statusBarNotification.getNotification().color);
             bundle.putInt("priority", statusBarNotification.getNotification().priority);
             ComponentName componentName = this.mResumedComponent;
-            bundle.putString("component", componentName != null ? componentName.flattenToString() : null);
+            bundle.putString(
+                    "component", componentName != null ? componentName.flattenToString() : null);
             bundle.putLong("component_time", this.mResumedComponentTime);
             bundle.putString("group_key", groupKey);
-            bundle.putParcelable("content_intent", statusBarNotification.getNotification().contentIntent);
+            bundle.putParcelable(
+                    "content_intent", statusBarNotification.getNotification().contentIntent);
             bundle.putInt("user_id", statusBarNotification.getUser().getIdentifier());
             bundle.putString("noti_key", statusBarNotification.getKey());
             bundle.putInt("noti_id", statusBarNotification.getId());
             bundle.putString("noti_tag", statusBarNotification.getTag());
             bundle.putInt("noti_visiblity", i);
             bundle.putInt("package_visiblity", i4);
-            bundle.putBoolean("alert_group", statusBarNotification.isGroup() && statusBarNotification.getNotification().suppressAlertingDueToGrouping());
+            bundle.putBoolean(
+                    "alert_group",
+                    statusBarNotification.isGroup()
+                            && statusBarNotification
+                                    .getNotification()
+                                    .suppressAlertingDueToGrouping());
             bundle.putCharSequence("category", statusBarNotification.getNotification().category);
             bundle.putBoolean("audible_alert", z3);
-            bundle.putCharSequence("channel_id", statusBarNotification.getNotification().getChannelId());
+            bundle.putCharSequence(
+                    "channel_id", statusBarNotification.getNotification().getChannelId());
             bundle.putBoolean("bubble", z4);
             bundle.putBoolean("show_small_icon", bool.booleanValue());
             if (statusBarNotification.getNotification().actions != null) {
@@ -772,42 +943,84 @@ public final class EdgeLightingPolicyManager {
             notificationData2.mTime = currentTimeMillis2;
             notificationData2.mNotificationInfo = bundle;
             if (groupKey != null) {
-                this.mNotificationGroup.updateNotificationData(statusBarNotification, notificationData2);
+                this.mNotificationGroup.updateNotificationData(
+                        statusBarNotification, notificationData2);
             }
             if (statusBarNotification.getNotification().isGroupSummary()) {
                 NotificationGroup notificationGroup = this.mNotificationGroup;
                 String groupKey2 = statusBarNotification.getGroupKey();
                 synchronized (notificationGroup.mGroupMap) {
-                    groupNotificationData = (GroupNotificationData) notificationGroup.mGroupMap.get(groupKey2);
+                    groupNotificationData =
+                            (GroupNotificationData) notificationGroup.mGroupMap.get(groupKey2);
                 }
                 if (groupNotificationData != null && groupNotificationData.getLastChild() != null) {
                     StringBuilder sb2 = new StringBuilder();
                     sb2.append(bundle.getCharSequence("tickerText"));
                     sb2.append(" -> ");
-                    sb2.append(groupNotificationData.getLastChild().mNotificationInfo.getCharSequence("tickerText"));
+                    sb2.append(
+                            groupNotificationData
+                                    .getLastChild()
+                                    .mNotificationInfo
+                                    .getCharSequence("tickerText"));
                     sb2.append(" , ");
-                    bundle.putCharSequence("tickerText", groupNotificationData.getLastChild().mNotificationInfo.getCharSequence("tickerText"));
+                    bundle.putCharSequence(
+                            "tickerText",
+                            groupNotificationData
+                                    .getLastChild()
+                                    .mNotificationInfo
+                                    .getCharSequence("tickerText"));
                     sb2.append(bundle.getCharSequence("titleText"));
                     sb2.append(" -> ");
-                    sb2.append(groupNotificationData.getLastChild().mNotificationInfo.getCharSequence("titleText"));
+                    sb2.append(
+                            groupNotificationData
+                                    .getLastChild()
+                                    .mNotificationInfo
+                                    .getCharSequence("titleText"));
                     sb2.append(" , ");
-                    bundle.putCharSequence("titleText", groupNotificationData.getLastChild().mNotificationInfo.getCharSequence("titleText"));
+                    bundle.putCharSequence(
+                            "titleText",
+                            groupNotificationData
+                                    .getLastChild()
+                                    .mNotificationInfo
+                                    .getCharSequence("titleText"));
                     sb2.append(bundle.getCharSequence("text"));
                     sb2.append(" -> ");
-                    sb2.append(groupNotificationData.getLastChild().mNotificationInfo.getCharSequence("text"));
+                    sb2.append(
+                            groupNotificationData
+                                    .getLastChild()
+                                    .mNotificationInfo
+                                    .getCharSequence("text"));
                     sb2.append(" , ");
-                    bundle.putCharSequence("text", groupNotificationData.getLastChild().mNotificationInfo.getCharSequence("text"));
+                    bundle.putCharSequence(
+                            "text",
+                            groupNotificationData
+                                    .getLastChild()
+                                    .mNotificationInfo
+                                    .getCharSequence("text"));
                     sb2.append(bundle.getCharSequence("subText"));
                     sb2.append(" -> ");
-                    sb2.append(groupNotificationData.getLastChild().mNotificationInfo.getCharSequence("subText"));
-                    bundle.putCharSequence("subText", groupNotificationData.getLastChild().mNotificationInfo.getCharSequence("subText"));
+                    sb2.append(
+                            groupNotificationData
+                                    .getLastChild()
+                                    .mNotificationInfo
+                                    .getCharSequence("subText"));
+                    bundle.putCharSequence(
+                            "subText",
+                            groupNotificationData
+                                    .getLastChild()
+                                    .mNotificationInfo
+                                    .getCharSequence("subText"));
                     if (DEBUG) {
-                        Slog.i("EdgeLightingPolicyManager", " Summary notification display. Change text " + sb2.toString());
+                        Slog.i(
+                                "EdgeLightingPolicyManager",
+                                " Summary notification display. Change text " + sb2.toString());
                     }
                 }
             }
-            if (!statusBarNotification.isGroup() && !statusBarNotification.getNotification().suppressAlertingDueToGrouping()) {
-                this.mNotificationMap.put(statusBarNotification.getPackageName(), notificationData2);
+            if (!statusBarNotification.isGroup()
+                    && !statusBarNotification.getNotification().suppressAlertingDueToGrouping()) {
+                this.mNotificationMap.put(
+                        statusBarNotification.getPackageName(), notificationData2);
             }
         }
         return bundle;

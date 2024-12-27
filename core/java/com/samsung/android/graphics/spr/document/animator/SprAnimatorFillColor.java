@@ -1,8 +1,9 @@
 package com.samsung.android.graphics.spr.document.animator;
 
 import android.animation.ArgbEvaluator;
+
 import com.samsung.android.graphics.spr.document.SprInputStream;
-import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 

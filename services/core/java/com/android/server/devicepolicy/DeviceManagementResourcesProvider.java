@@ -5,16 +5,20 @@ import android.os.Environment;
 import android.util.AtomicFile;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import libcore.io.IoUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -26,8 +30,7 @@ public final class DeviceManagementResourcesProvider {
     public final Map mUpdatedStrings;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class Injector {
-    }
+    public final class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ResourcesReaderWriter {
@@ -61,7 +64,9 @@ public final class DeviceManagementResourcesProvider {
                             String name = resolvePullParser.getName();
                             if (i == 1) {
                                 if (!"root".equals(name)) {
-                                    Log.e("DevicePolicyManagerService", "Invalid root tag: " + name);
+                                    Log.e(
+                                            "DevicePolicyManagerService",
+                                            "Invalid root tag: " + name);
                                     return;
                                 }
                             } else if (!readInner(resolvePullParser, i, name)) {
@@ -81,14 +86,15 @@ public final class DeviceManagementResourcesProvider {
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:25:0x0023, code lost:
-        
-            if (r10.equals("drawable-style-entry") == false) goto L7;
-         */
+
+           if (r10.equals("drawable-style-entry") == false) goto L7;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final boolean readInner(com.android.modules.utils.TypedXmlPullParser r8, int r9, java.lang.String r10) {
+        public final boolean readInner(
+                com.android.modules.utils.TypedXmlPullParser r8, int r9, java.lang.String r10) {
             /*
                 r7 = this;
                 r0 = 0
@@ -214,18 +220,26 @@ public final class DeviceManagementResourcesProvider {
             Led:
                 return r2
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.devicepolicy.DeviceManagementResourcesProvider.ResourcesReaderWriter.readInner(com.android.modules.utils.TypedXmlPullParser, int, java.lang.String):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.devicepolicy.DeviceManagementResourcesProvider.ResourcesReaderWriter.readInner(com.android.modules.utils.TypedXmlPullParser,"
+                        + " int, java.lang.String):boolean");
         }
 
         public final void writeInner(TypedXmlSerializer typedXmlSerializer) {
-            DeviceManagementResourcesProvider deviceManagementResourcesProvider = DeviceManagementResourcesProvider.this;
+            DeviceManagementResourcesProvider deviceManagementResourcesProvider =
+                    DeviceManagementResourcesProvider.this;
             Map map = deviceManagementResourcesProvider.mUpdatedDrawablesForStyle;
             if (map != null && !((HashMap) map).isEmpty()) {
-                for (Map.Entry entry : ((HashMap) deviceManagementResourcesProvider.mUpdatedDrawablesForStyle).entrySet()) {
+                for (Map.Entry entry :
+                        ((HashMap) deviceManagementResourcesProvider.mUpdatedDrawablesForStyle)
+                                .entrySet()) {
                     for (Map.Entry entry2 : ((Map) entry.getValue()).entrySet()) {
                         typedXmlSerializer.startTag((String) null, "drawable-style-entry");
-                        typedXmlSerializer.attribute((String) null, "drawable-id", (String) entry.getKey());
-                        typedXmlSerializer.attribute((String) null, "drawable-style", (String) entry2.getKey());
+                        typedXmlSerializer.attribute(
+                                (String) null, "drawable-id", (String) entry.getKey());
+                        typedXmlSerializer.attribute(
+                                (String) null, "drawable-style", (String) entry2.getKey());
                         ((ParcelableResource) entry2.getValue()).writeToXmlFile(typedXmlSerializer);
                         typedXmlSerializer.endTag((String) null, "drawable-style-entry");
                     }
@@ -233,14 +247,20 @@ public final class DeviceManagementResourcesProvider {
             }
             Map map2 = deviceManagementResourcesProvider.mUpdatedDrawablesForSource;
             if (map2 != null && !((HashMap) map2).isEmpty()) {
-                for (Map.Entry entry3 : ((HashMap) deviceManagementResourcesProvider.mUpdatedDrawablesForSource).entrySet()) {
+                for (Map.Entry entry3 :
+                        ((HashMap) deviceManagementResourcesProvider.mUpdatedDrawablesForSource)
+                                .entrySet()) {
                     for (Map.Entry entry4 : ((Map) entry3.getValue()).entrySet()) {
                         for (Map.Entry entry5 : ((Map) entry4.getValue()).entrySet()) {
                             typedXmlSerializer.startTag((String) null, "drawable-source-entry");
-                            typedXmlSerializer.attribute((String) null, "drawable-id", (String) entry3.getKey());
-                            typedXmlSerializer.attribute((String) null, "drawable-source", (String) entry4.getKey());
-                            typedXmlSerializer.attribute((String) null, "drawable-style", (String) entry5.getKey());
-                            ((ParcelableResource) entry5.getValue()).writeToXmlFile(typedXmlSerializer);
+                            typedXmlSerializer.attribute(
+                                    (String) null, "drawable-id", (String) entry3.getKey());
+                            typedXmlSerializer.attribute(
+                                    (String) null, "drawable-source", (String) entry4.getKey());
+                            typedXmlSerializer.attribute(
+                                    (String) null, "drawable-style", (String) entry5.getKey());
+                            ((ParcelableResource) entry5.getValue())
+                                    .writeToXmlFile(typedXmlSerializer);
                             typedXmlSerializer.endTag((String) null, "drawable-source-entry");
                         }
                     }
@@ -250,7 +270,8 @@ public final class DeviceManagementResourcesProvider {
             if (map3 == null || ((HashMap) map3).isEmpty()) {
                 return;
             }
-            for (Map.Entry entry6 : ((HashMap) deviceManagementResourcesProvider.mUpdatedStrings).entrySet()) {
+            for (Map.Entry entry6 :
+                    ((HashMap) deviceManagementResourcesProvider.mUpdatedStrings).entrySet()) {
                 typedXmlSerializer.startTag((String) null, "string-entry");
                 typedXmlSerializer.attribute((String) null, "source-id", (String) entry6.getKey());
                 ((ParcelableResource) entry6.getValue()).writeToXmlFile(typedXmlSerializer);
@@ -268,9 +289,13 @@ public final class DeviceManagementResourcesProvider {
         this.mInjector = injector;
     }
 
-    public final ParcelableResource getDrawableForSourceLocked(String str, String str2, String str3) {
-        if (((HashMap) this.mUpdatedDrawablesForSource).containsKey(str) && ((Map) ((HashMap) this.mUpdatedDrawablesForSource).get(str)).containsKey(str3)) {
-            return (ParcelableResource) ((Map) ((Map) ((HashMap) this.mUpdatedDrawablesForSource).get(str)).get(str3)).get(str2);
+    public final ParcelableResource getDrawableForSourceLocked(
+            String str, String str2, String str3) {
+        if (((HashMap) this.mUpdatedDrawablesForSource).containsKey(str)
+                && ((Map) ((HashMap) this.mUpdatedDrawablesForSource).get(str)).containsKey(str3)) {
+            return (ParcelableResource)
+                    ((Map) ((Map) ((HashMap) this.mUpdatedDrawablesForSource).get(str)).get(str3))
+                            .get(str2);
         }
         return null;
     }

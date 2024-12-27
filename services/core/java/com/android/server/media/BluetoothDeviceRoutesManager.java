@@ -11,9 +11,9 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+
 import com.android.media.flags.Flags;
-import com.android.server.media.BluetoothDeviceRoutesManager;
-import com.android.server.media.BluetoothRouteController;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -29,8 +29,10 @@ public final class BluetoothDeviceRoutesManager {
     public final Context mContext;
     public final Handler mHandler;
     public final BluetoothRouteController.BluetoothRoutesUpdatedListener mListener;
-    public final DeviceStateChangedReceiver mAdapterStateChangedReceiver = new DeviceStateChangedReceiver(this, 1);
-    public final DeviceStateChangedReceiver mDeviceStateChangedReceiver = new DeviceStateChangedReceiver(this, 0);
+    public final DeviceStateChangedReceiver mAdapterStateChangedReceiver =
+            new DeviceStateChangedReceiver(this, 1);
+    public final DeviceStateChangedReceiver mDeviceStateChangedReceiver =
+            new DeviceStateChangedReceiver(this, 0);
     public Map mAddressToBondedDevice = new HashMap();
     public final Map mBluetoothRoutes = new HashMap();
 
@@ -46,7 +48,8 @@ public final class BluetoothDeviceRoutesManager {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ BluetoothDeviceRoutesManager this$0;
 
-        public /* synthetic */ DeviceStateChangedReceiver(BluetoothDeviceRoutesManager bluetoothDeviceRoutesManager, int i) {
+        public /* synthetic */ DeviceStateChangedReceiver(
+                BluetoothDeviceRoutesManager bluetoothDeviceRoutesManager, int i) {
             this.$r8$classId = i;
             this.this$0 = bluetoothDeviceRoutesManager;
         }
@@ -67,30 +70,49 @@ public final class BluetoothDeviceRoutesManager {
                                 this.this$0.mListener.onBluetoothRoutesUpdated();
                                 break;
                             } else {
-                                this.this$0.mHandler.post(new Runnable() { // from class: com.android.server.media.BluetoothDeviceRoutesManager$DeviceStateChangedReceiver$$ExternalSyntheticLambda0
-                                    @Override // java.lang.Runnable
-                                    public final void run() {
-                                        BluetoothDeviceRoutesManager.DeviceStateChangedReceiver deviceStateChangedReceiver = BluetoothDeviceRoutesManager.DeviceStateChangedReceiver.this;
-                                        deviceStateChangedReceiver.this$0.updateBluetoothRoutes();
-                                        deviceStateChangedReceiver.this$0.mListener.onBluetoothRoutesUpdated();
-                                    }
-                                });
+                                this.this$0.mHandler.post(
+                                        new Runnable() { // from class:
+                                                         // com.android.server.media.BluetoothDeviceRoutesManager$DeviceStateChangedReceiver$$ExternalSyntheticLambda0
+                                            @Override // java.lang.Runnable
+                                            public final void run() {
+                                                BluetoothDeviceRoutesManager
+                                                                .DeviceStateChangedReceiver
+                                                        deviceStateChangedReceiver =
+                                                                BluetoothDeviceRoutesManager
+                                                                        .DeviceStateChangedReceiver
+                                                                        .this;
+                                                deviceStateChangedReceiver.this$0
+                                                        .updateBluetoothRoutes();
+                                                deviceStateChangedReceiver.this$0.mListener
+                                                        .onBluetoothRoutesUpdated();
+                                            }
+                                        });
                                 break;
                             }
                     }
                 default:
-                    final int intExtra = intent.getIntExtra("android.bluetooth.adapter.extra.STATE", -1);
+                    final int intExtra =
+                            intent.getIntExtra("android.bluetooth.adapter.extra.STATE", -1);
                     if (!Flags.enableMr2ServiceNonMainBgThread()) {
-                        BluetoothDeviceRoutesManager.m646$$Nest$mhandleBluetoothAdapterStateChange(this.this$0, intExtra);
+                        BluetoothDeviceRoutesManager.m646$$Nest$mhandleBluetoothAdapterStateChange(
+                                this.this$0, intExtra);
                         break;
                     } else {
-                        this.this$0.mHandler.post(new Runnable() { // from class: com.android.server.media.BluetoothDeviceRoutesManager$AdapterStateChangedReceiver$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                BluetoothDeviceRoutesManager.DeviceStateChangedReceiver deviceStateChangedReceiver = BluetoothDeviceRoutesManager.DeviceStateChangedReceiver.this;
-                                BluetoothDeviceRoutesManager.m646$$Nest$mhandleBluetoothAdapterStateChange(deviceStateChangedReceiver.this$0, intExtra);
-                            }
-                        });
+                        this.this$0.mHandler.post(
+                                new Runnable() { // from class:
+                                                 // com.android.server.media.BluetoothDeviceRoutesManager$AdapterStateChangedReceiver$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        BluetoothDeviceRoutesManager.DeviceStateChangedReceiver
+                                                deviceStateChangedReceiver =
+                                                        BluetoothDeviceRoutesManager
+                                                                .DeviceStateChangedReceiver.this;
+                                        BluetoothDeviceRoutesManager
+                                                .m646$$Nest$mhandleBluetoothAdapterStateChange(
+                                                        deviceStateChangedReceiver.this$0,
+                                                        intExtra);
+                                    }
+                                });
                         break;
                     }
             }
@@ -98,7 +120,8 @@ public final class BluetoothDeviceRoutesManager {
     }
 
     /* renamed from: -$$Nest$mhandleBluetoothAdapterStateChange, reason: not valid java name */
-    public static void m646$$Nest$mhandleBluetoothAdapterStateChange(BluetoothDeviceRoutesManager bluetoothDeviceRoutesManager, int i) {
+    public static void m646$$Nest$mhandleBluetoothAdapterStateChange(
+            BluetoothDeviceRoutesManager bluetoothDeviceRoutesManager, int i) {
         boolean z;
         bluetoothDeviceRoutesManager.getClass();
         if (i == 10 || i == 13) {
@@ -117,7 +140,13 @@ public final class BluetoothDeviceRoutesManager {
         }
     }
 
-    public BluetoothDeviceRoutesManager(Context context, Handler handler, BluetoothAdapter bluetoothAdapter, BluetoothProfileMonitor bluetoothProfileMonitor, BluetoothRouteController.BluetoothRoutesUpdatedListener bluetoothRoutesUpdatedListener) {
+    public BluetoothDeviceRoutesManager(
+            Context context,
+            Handler handler,
+            BluetoothAdapter bluetoothAdapter,
+            BluetoothProfileMonitor bluetoothProfileMonitor,
+            BluetoothRouteController.BluetoothRoutesUpdatedListener
+                    bluetoothRoutesUpdatedListener) {
         Objects.requireNonNull(context);
         this.mContext = context;
         this.mHandler = handler;
@@ -134,7 +163,10 @@ public final class BluetoothDeviceRoutesManager {
         bluetoothRouteInfo.mBtDevice = bluetoothDevice;
         String deviceName = getDeviceName(bluetoothDevice);
         BluetoothProfileMonitor bluetoothProfileMonitor = this.mBluetoothProfileMonitor;
-        int i = bluetoothProfileMonitor.isProfileSupported(bluetoothDevice, 22) ? 26 : bluetoothProfileMonitor.isProfileSupported(bluetoothDevice, 21) ? 23 : 8;
+        int i =
+                bluetoothProfileMonitor.isProfileSupported(bluetoothDevice, 22)
+                        ? 26
+                        : bluetoothProfileMonitor.isProfileSupported(bluetoothDevice, 21) ? 23 : 8;
         String routeIdForType = getRouteIdForType(bluetoothDevice, i);
         SparseBooleanArray sparseBooleanArray = new SparseBooleanArray();
         if (bluetoothProfileMonitor.isProfileSupported(bluetoothDevice, 2)) {
@@ -147,13 +179,30 @@ public final class BluetoothDeviceRoutesManager {
             sparseBooleanArray.put(22, true);
         }
         bluetoothRouteInfo.mConnectedProfiles = sparseBooleanArray;
-        bluetoothRouteInfo.mRoute = new MediaRoute2Info.Builder(routeIdForType, deviceName).addFeature("android.media.route.feature.LIVE_AUDIO").addFeature("android.media.route.feature.LOCAL_PLAYBACK").setConnectionState(0).setDescription(this.mContext.getResources().getText(R.string.config_defaultWellbeingPackage).toString()).setType(i).setAddress(bluetoothDevice.getAddress()).build();
+        bluetoothRouteInfo.mRoute =
+                new MediaRoute2Info.Builder(routeIdForType, deviceName)
+                        .addFeature("android.media.route.feature.LIVE_AUDIO")
+                        .addFeature("android.media.route.feature.LOCAL_PLAYBACK")
+                        .setConnectionState(0)
+                        .setDescription(
+                                this.mContext
+                                        .getResources()
+                                        .getText(R.string.config_defaultWellbeingPackage)
+                                        .toString())
+                        .setType(i)
+                        .setAddress(bluetoothDevice.getAddress())
+                        .build();
         return bluetoothRouteInfo;
     }
 
     public final String getDeviceName(BluetoothDevice bluetoothDevice) {
-        String alias = Flags.enableUseOfBluetoothDeviceGetAliasForMr2infoGetName() ? bluetoothDevice.getAlias() : bluetoothDevice.getName();
-        return TextUtils.isEmpty(alias) ? this.mContext.getResources().getText(R.string.unknownName).toString() : alias;
+        String alias =
+                Flags.enableUseOfBluetoothDeviceGetAliasForMr2infoGetName()
+                        ? bluetoothDevice.getAlias()
+                        : bluetoothDevice.getName();
+        return TextUtils.isEmpty(alias)
+                ? this.mContext.getResources().getText(R.string.unknownName).toString()
+                : alias;
     }
 
     public final String getRouteIdForType(BluetoothDevice bluetoothDevice, int i) {
@@ -176,12 +225,20 @@ public final class BluetoothDeviceRoutesManager {
                     Log.w("MR2SystemProvider", "BluetoothAdapter.getBondedDevices returned null.");
                     return;
                 }
-                this.mAddressToBondedDevice = (Map) bondedDevices.stream().collect(Collectors.toMap(new BluetoothDeviceRoutesManager$$ExternalSyntheticLambda0(), Function.identity()));
+                this.mAddressToBondedDevice =
+                        (Map)
+                                bondedDevices.stream()
+                                        .collect(
+                                                Collectors.toMap(
+                                                        new BluetoothDeviceRoutesManager$$ExternalSyntheticLambda0(),
+                                                        Function.identity()));
                 for (BluetoothDevice bluetoothDevice : bondedDevices) {
                     if (bluetoothDevice.isConnected()) {
-                        BluetoothRouteInfo createBluetoothRoute = createBluetoothRoute(bluetoothDevice);
+                        BluetoothRouteInfo createBluetoothRoute =
+                                createBluetoothRoute(bluetoothDevice);
                         if (createBluetoothRoute.mConnectedProfiles.size() > 0) {
-                            ((HashMap) this.mBluetoothRoutes).put(bluetoothDevice.getAddress(), createBluetoothRoute);
+                            ((HashMap) this.mBluetoothRoutes)
+                                    .put(bluetoothDevice.getAddress(), createBluetoothRoute);
                         }
                     }
                 }

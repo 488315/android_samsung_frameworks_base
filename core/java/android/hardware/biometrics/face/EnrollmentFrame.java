@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class EnrollmentFrame implements Parcelable {
-    public static final Parcelable.Creator<EnrollmentFrame> CREATOR = new Parcelable.Creator<EnrollmentFrame>() { // from class: android.hardware.biometrics.face.EnrollmentFrame.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnrollmentFrame createFromParcel(Parcel _aidl_source) {
-            EnrollmentFrame _aidl_out = new EnrollmentFrame();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<EnrollmentFrame> CREATOR =
+            new Parcelable.Creator<EnrollmentFrame>() { // from class:
+                // android.hardware.biometrics.face.EnrollmentFrame.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnrollmentFrame createFromParcel(Parcel _aidl_source) {
+                    EnrollmentFrame _aidl_out = new EnrollmentFrame();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnrollmentFrame[] newArray(int _aidl_size) {
-            return new EnrollmentFrame[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnrollmentFrame[] newArray(int _aidl_size) {
+                    return new EnrollmentFrame[_aidl_size];
+                }
+            };
     public Cell cell;
     public BaseFrame data;
     public byte stage = 0;

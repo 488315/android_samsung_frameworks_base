@@ -14,13 +14,12 @@ import android.service.credentials.BeginGetCredentialRequest;
 import android.service.credentials.CallingAppInfo;
 import android.service.credentials.PermissionUtils;
 import android.util.Slog;
+
 import com.android.internal.util.FunctionalUtils;
 import com.android.server.PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0;
-import com.android.server.credentials.CredentialManagerUi;
-import com.android.server.credentials.ProviderGetSession;
-import com.android.server.credentials.ProviderSession;
 import com.android.server.credentials.metrics.ProviderStatusForMetrics;
 import com.android.server.credentials.metrics.RequestSessionMetric;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,7 +31,8 @@ import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public class GetRequestSession extends RequestSession implements ProviderSession.ProviderInternalCallback {
+public class GetRequestSession extends RequestSession
+        implements ProviderSession.ProviderInternalCallback {
     public final Set mPrimaryProviders;
 
     /* JADX WARN: Illegal instructions before constructor call */
@@ -40,7 +40,19 @@ public class GetRequestSession extends RequestSession implements ProviderSession
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public GetRequestSession(android.content.Context r17, com.android.server.credentials.CredentialManagerService.SessionManager r18, java.lang.Object r19, int r20, int r21, android.credentials.IGetCredentialCallback r22, android.credentials.GetCredentialRequest r23, android.service.credentials.CallingAppInfo r24, java.util.Set r25, java.util.Set r26, android.os.CancellationSignal r27, long r28) {
+    public GetRequestSession(
+            android.content.Context r17,
+            com.android.server.credentials.CredentialManagerService.SessionManager r18,
+            java.lang.Object r19,
+            int r20,
+            int r21,
+            android.credentials.IGetCredentialCallback r22,
+            android.credentials.GetCredentialRequest r23,
+            android.service.credentials.CallingAppInfo r24,
+            java.util.Set r25,
+            java.util.Set r26,
+            android.os.CancellationSignal r27,
+            long r28) {
         /*
             r16 = this;
             r15 = r16
@@ -84,58 +96,112 @@ public class GetRequestSession extends RequestSession implements ProviderSession
             r15.mPrimaryProviders = r0
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.credentials.GetRequestSession.<init>(android.content.Context, com.android.server.credentials.CredentialManagerService$SessionManager, java.lang.Object, int, int, android.credentials.IGetCredentialCallback, android.credentials.GetCredentialRequest, android.service.credentials.CallingAppInfo, java.util.Set, java.util.Set, android.os.CancellationSignal, long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.credentials.GetRequestSession.<init>(android.content.Context,"
+                    + " com.android.server.credentials.CredentialManagerService$SessionManager,"
+                    + " java.lang.Object, int, int, android.credentials.IGetCredentialCallback,"
+                    + " android.credentials.GetCredentialRequest,"
+                    + " android.service.credentials.CallingAppInfo, java.util.Set, java.util.Set,"
+                    + " android.os.CancellationSignal, long):void");
     }
 
     public final void handleEmptyAuthenticationSelection(final ComponentName componentName) {
-        ((ConcurrentHashMap) this.mProviders).keySet().forEach(new Consumer() { // from class: com.android.server.credentials.GetRequestSession$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                GetRequestSession getRequestSession = GetRequestSession.this;
-                ComponentName componentName2 = componentName;
-                ProviderGetSession providerGetSession = (ProviderGetSession) ((ConcurrentHashMap) getRequestSession.mProviders).get((String) obj);
-                if (providerGetSession.mComponentName.equals(componentName2)) {
-                    return;
-                }
-                providerGetSession.mProviderResponseDataHandler.updatePreviousMostRecentAuthEntry();
-            }
-        });
+        ((ConcurrentHashMap) this.mProviders)
+                .keySet()
+                .forEach(
+                        new Consumer() { // from class:
+                                         // com.android.server.credentials.GetRequestSession$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                GetRequestSession getRequestSession = GetRequestSession.this;
+                                ComponentName componentName2 = componentName;
+                                ProviderGetSession providerGetSession =
+                                        (ProviderGetSession)
+                                                ((ConcurrentHashMap) getRequestSession.mProviders)
+                                                        .get((String) obj);
+                                if (providerGetSession.mComponentName.equals(componentName2)) {
+                                    return;
+                                }
+                                providerGetSession.mProviderResponseDataHandler
+                                        .updatePreviousMostRecentAuthEntry();
+                            }
+                        });
         getProviderDataAndInitiateUi();
         Iterator it = ((ConcurrentHashMap) this.mProviders).keySet().iterator();
         while (it.hasNext()) {
-            ProviderGetSession.ProviderResponseDataHandler providerResponseDataHandler = ((ProviderGetSession) ((ConcurrentHashMap) this.mProviders).get((String) it.next())).mProviderResponseDataHandler;
-            if (!((HashMap) providerResponseDataHandler.mUiCredentialEntries).isEmpty() || providerResponseDataHandler.mUiRemoteEntry != null || !((HashMap) providerResponseDataHandler.mUiAuthenticationEntries).values().stream().allMatch(new ProviderGetSession$$ExternalSyntheticLambda1(0))) {
+            ProviderGetSession.ProviderResponseDataHandler providerResponseDataHandler =
+                    ((ProviderGetSession)
+                                    ((ConcurrentHashMap) this.mProviders).get((String) it.next()))
+                            .mProviderResponseDataHandler;
+            if (!((HashMap) providerResponseDataHandler.mUiCredentialEntries).isEmpty()
+                    || providerResponseDataHandler.mUiRemoteEntry != null
+                    || !((HashMap) providerResponseDataHandler.mUiAuthenticationEntries)
+                            .values().stream()
+                                    .allMatch(
+                                            new ProviderGetSession$$ExternalSyntheticLambda1(0))) {
                 return;
             }
         }
-        this.mRequestSessionMetric.collectFrameworkException("android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL");
-        respondToClientWithErrorAndFinish("android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL", "No credentials available");
+        this.mRequestSessionMetric.collectFrameworkException(
+                "android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL");
+        respondToClientWithErrorAndFinish(
+                "android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL",
+                "No credentials available");
     }
 
     @Override // com.android.server.credentials.RequestSession
-    public final ProviderSession initiateProviderSession(CredentialProviderInfo credentialProviderInfo, RemoteCredentialService remoteCredentialService) {
+    public final ProviderSession initiateProviderSession(
+            CredentialProviderInfo credentialProviderInfo,
+            RemoteCredentialService remoteCredentialService) {
         ProviderGetSession providerGetSession;
         Context context = this.mContext;
         List capabilities = credentialProviderInfo.getCapabilities();
         GetCredentialRequest getCredentialRequest = (GetCredentialRequest) this.mClientRequest;
-        GetCredentialRequest filterOptions = ProviderGetSession.filterOptions(capabilities, getCredentialRequest, credentialProviderInfo, this.mHybridService);
+        GetCredentialRequest filterOptions =
+                ProviderGetSession.filterOptions(
+                        capabilities,
+                        getCredentialRequest,
+                        credentialProviderInfo,
+                        this.mHybridService);
         if (filterOptions != null) {
             HashMap hashMap = new HashMap();
             CallingAppInfo callingAppInfo = this.mClientAppInfo;
-            boolean alwaysSendAppInfoToProvider = getCredentialRequest.alwaysSendAppInfoToProvider();
+            boolean alwaysSendAppInfoToProvider =
+                    getCredentialRequest.alwaysSendAppInfoToProvider();
             BeginGetCredentialRequest.Builder builder = new BeginGetCredentialRequest.Builder();
-            filterOptions.getCredentialOptions().forEach(new ProviderGetSession$$ExternalSyntheticLambda0(builder, hashMap));
+            filterOptions
+                    .getCredentialOptions()
+                    .forEach(new ProviderGetSession$$ExternalSyntheticLambda0(builder, hashMap));
             if (alwaysSendAppInfoToProvider) {
                 builder.setCallingAppInfo(callingAppInfo);
             }
-            providerGetSession = new ProviderGetSession(context, credentialProviderInfo, this, this.mUserId, remoteCredentialService, builder.build(), filterOptions, this.mClientAppInfo, hashMap, this.mHybridService);
+            providerGetSession =
+                    new ProviderGetSession(
+                            context,
+                            credentialProviderInfo,
+                            this,
+                            this.mUserId,
+                            remoteCredentialService,
+                            builder.build(),
+                            filterOptions,
+                            this.mClientAppInfo,
+                            hashMap,
+                            this.mHybridService);
         } else {
-            Slog.i("CredentialManager", "Unable to create provider session for: " + credentialProviderInfo.getComponentName());
+            Slog.i(
+                    "CredentialManager",
+                    "Unable to create provider session for: "
+                            + credentialProviderInfo.getComponentName());
             providerGetSession = null;
         }
         if (providerGetSession != null) {
-            Slog.i("CredentialManager", "Provider session created and being added for: " + credentialProviderInfo.getComponentName());
-            ((ConcurrentHashMap) this.mProviders).put(providerGetSession.mComponentName.flattenToString(), providerGetSession);
+            Slog.i(
+                    "CredentialManager",
+                    "Provider session created and being added for: "
+                            + credentialProviderInfo.getComponentName());
+            ((ConcurrentHashMap) this.mProviders)
+                    .put(providerGetSession.mComponentName.flattenToString(), providerGetSession);
         }
         return providerGetSession;
     }
@@ -156,65 +222,112 @@ public class GetRequestSession extends RequestSession implements ProviderSession
         RequestSessionMetric requestSessionMetric = this.mRequestSessionMetric;
         requestSessionMetric.getClass();
         try {
-            requestSessionMetric.mChosenProviderFinalPhaseMetric.mUiCallStartTimeNanoseconds = nanoTime;
+            requestSessionMetric.mChosenProviderFinalPhaseMetric.mUiCallStartTimeNanoseconds =
+                    nanoTime;
         } catch (Exception e) {
-            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(e, "Unexpected error collecting ui start metric: ", "RequestSessionMetric");
+            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(
+                    e, "Unexpected error collecting ui start metric: ", "RequestSessionMetric");
         }
         this.mCredentialManagerUi.mStatus = CredentialManagerUi.UiStatus.USER_INTERACTION;
-        Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: com.android.server.credentials.GetRequestSession$$ExternalSyntheticLambda1
-            public final void runOrThrow() {
-                GetRequestSession getRequestSession = GetRequestSession.this;
-                ArrayList arrayList2 = arrayList;
-                CredentialManagerUi credentialManagerUi = getRequestSession.mCredentialManagerUi;
-                RequestSessionMetric requestSessionMetric2 = getRequestSession.mRequestSessionMetric;
-                try {
-                    ArrayList arrayList3 = new ArrayList();
-                    Iterator it = getRequestSession.mPrimaryProviders.iterator();
-                    while (it.hasNext()) {
-                        arrayList3.add(((ComponentName) it.next()).flattenToString());
-                    }
-                    PendingIntent pendingIntent = getRequestSession.mPendingIntent;
-                    if (pendingIntent != null) {
+        Binder.withCleanCallingIdentity(
+                new FunctionalUtils.ThrowingRunnable() { // from class:
+                    // com.android.server.credentials.GetRequestSession$$ExternalSyntheticLambda1
+                    public final void runOrThrow() {
+                        GetRequestSession getRequestSession = GetRequestSession.this;
+                        ArrayList arrayList2 = arrayList;
+                        CredentialManagerUi credentialManagerUi =
+                                getRequestSession.mCredentialManagerUi;
+                        RequestSessionMetric requestSessionMetric2 =
+                                getRequestSession.mRequestSessionMetric;
                         try {
-                            pendingIntent.cancel();
-                            getRequestSession.mPendingIntent = null;
-                        } catch (Exception e2) {
-                            Slog.e("CredentialManager", "Unable to cancel existing pending intent", e2);
+                            ArrayList arrayList3 = new ArrayList();
+                            Iterator it = getRequestSession.mPrimaryProviders.iterator();
+                            while (it.hasNext()) {
+                                arrayList3.add(((ComponentName) it.next()).flattenToString());
+                            }
+                            PendingIntent pendingIntent = getRequestSession.mPendingIntent;
+                            if (pendingIntent != null) {
+                                try {
+                                    pendingIntent.cancel();
+                                    getRequestSession.mPendingIntent = null;
+                                } catch (Exception e2) {
+                                    Slog.e(
+                                            "CredentialManager",
+                                            "Unable to cancel existing pending intent",
+                                            e2);
+                                }
+                            }
+                            PendingIntent createPendingIntent =
+                                    credentialManagerUi.createPendingIntent(
+                                            RequestInfo.newGetRequestInfo(
+                                                    getRequestSession.mRequestId,
+                                                    (GetCredentialRequest)
+                                                            getRequestSession.mClientRequest,
+                                                    getRequestSession.mClientAppInfo
+                                                            .getPackageName(),
+                                                    PermissionUtils.hasPermission(
+                                                            getRequestSession.mContext,
+                                                            getRequestSession.mClientAppInfo
+                                                                    .getPackageName(),
+                                                            "android.permission.CREDENTIAL_MANAGER_SET_ALLOWED_PROVIDERS"),
+                                                    arrayList3,
+                                                    false),
+                                            arrayList2,
+                                            requestSessionMetric2);
+                            getRequestSession.mPendingIntent = createPendingIntent;
+                            ((IGetCredentialCallback) getRequestSession.mClientCallback)
+                                    .onPendingIntent(createPendingIntent);
+                        } catch (RemoteException unused) {
+                            requestSessionMetric2.getClass();
+                            try {
+                                requestSessionMetric2.mChosenProviderFinalPhaseMetric.mUiReturned =
+                                        false;
+                            } catch (Exception e3) {
+                                PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(
+                                        e3,
+                                        "Unexpected error collecting ui end time metric: ",
+                                        "RequestSessionMetric");
+                            }
+                            credentialManagerUi.mStatus = CredentialManagerUi.UiStatus.TERMINATED;
+                            requestSessionMetric2.collectFrameworkException(
+                                    "android.credentials.GetCredentialException.TYPE_UNKNOWN");
+                            getRequestSession.respondToClientWithErrorAndFinish(
+                                    "android.credentials.GetCredentialException.TYPE_UNKNOWN",
+                                    "Unable to instantiate selector");
                         }
                     }
-                    PendingIntent createPendingIntent = credentialManagerUi.createPendingIntent(RequestInfo.newGetRequestInfo(getRequestSession.mRequestId, (GetCredentialRequest) getRequestSession.mClientRequest, getRequestSession.mClientAppInfo.getPackageName(), PermissionUtils.hasPermission(getRequestSession.mContext, getRequestSession.mClientAppInfo.getPackageName(), "android.permission.CREDENTIAL_MANAGER_SET_ALLOWED_PROVIDERS"), arrayList3, false), arrayList2, requestSessionMetric2);
-                    getRequestSession.mPendingIntent = createPendingIntent;
-                    ((IGetCredentialCallback) getRequestSession.mClientCallback).onPendingIntent(createPendingIntent);
-                } catch (RemoteException unused) {
-                    requestSessionMetric2.getClass();
-                    try {
-                        requestSessionMetric2.mChosenProviderFinalPhaseMetric.mUiReturned = false;
-                    } catch (Exception e3) {
-                        PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(e3, "Unexpected error collecting ui end time metric: ", "RequestSessionMetric");
-                    }
-                    credentialManagerUi.mStatus = CredentialManagerUi.UiStatus.TERMINATED;
-                    requestSessionMetric2.collectFrameworkException("android.credentials.GetCredentialException.TYPE_UNKNOWN");
-                    getRequestSession.respondToClientWithErrorAndFinish("android.credentials.GetCredentialException.TYPE_UNKNOWN", "Unable to instantiate selector");
-                }
-            }
-        });
+                });
     }
 
     @Override // com.android.server.credentials.ProviderSession.ProviderInternalCallback
-    public final void onFinalResponseReceived(ComponentName componentName, GetCredentialResponse getCredentialResponse) {
-        Slog.i("CredentialManager", "onFinalResponseReceived from: " + componentName.flattenToString());
+    public final void onFinalResponseReceived(
+            ComponentName componentName, GetCredentialResponse getCredentialResponse) {
+        Slog.i(
+                "CredentialManager",
+                "onFinalResponseReceived from: " + componentName.flattenToString());
         long nanoTime = System.nanoTime();
         RequestSessionMetric requestSessionMetric = this.mRequestSessionMetric;
         requestSessionMetric.collectUiResponseData(nanoTime);
         Map map = this.mProviders;
         requestSessionMetric.updateMetricsOnResponseReceived(map, componentName);
-        requestSessionMetric.collectChosenProviderStatus(ProviderStatusForMetrics.FINAL_SUCCESS.getMetricCode());
+        requestSessionMetric.collectChosenProviderStatus(
+                ProviderStatusForMetrics.FINAL_SUCCESS.getMetricCode());
         respondToClientWithResponseAndFinish(getCredentialResponse);
     }
 
     @Override // com.android.server.credentials.ProviderSession.ProviderInternalCallback
-    public void onProviderStatusChanged(ProviderSession.Status status, ComponentName componentName, ProviderSession.CredentialsSource credentialsSource) {
-        Slog.i("CredentialManager", "Status changed for: " + componentName + ", with status: " + status + ", and source: " + credentialsSource);
+    public void onProviderStatusChanged(
+            ProviderSession.Status status,
+            ComponentName componentName,
+            ProviderSession.CredentialsSource credentialsSource) {
+        Slog.i(
+                "CredentialManager",
+                "Status changed for: "
+                        + componentName
+                        + ", with status: "
+                        + status
+                        + ", and source: "
+                        + credentialsSource);
         if (status == ProviderSession.Status.NO_CREDENTIALS_FROM_AUTH_ENTRY) {
             handleEmptyAuthenticationSelection(componentName);
             return;
@@ -226,8 +339,11 @@ public class GetRequestSession extends RequestSession implements ProviderSession
             Slog.i("CredentialManager", "Provider status changed - ui invocation is needed");
             getProviderDataAndInitiateUi();
         } else {
-            this.mRequestSessionMetric.collectFrameworkException("android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL");
-            respondToClientWithErrorAndFinish("android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL", "No credentials available");
+            this.mRequestSessionMetric.collectFrameworkException(
+                    "android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL");
+            respondToClientWithErrorAndFinish(
+                    "android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL",
+                    "No credentials available");
         }
     }
 
@@ -248,7 +364,10 @@ public class GetRequestSession extends RequestSession implements ProviderSession
 
     @Override // com.android.server.credentials.RequestSession
     public final void onUiSelectorInvocationFailure() {
-        this.mRequestSessionMetric.collectFrameworkException("android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL");
-        respondToClientWithErrorAndFinish("android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL", "No credentials available.");
+        this.mRequestSessionMetric.collectFrameworkException(
+                "android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL");
+        respondToClientWithErrorAndFinish(
+                "android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL",
+                "No credentials available.");
     }
 }

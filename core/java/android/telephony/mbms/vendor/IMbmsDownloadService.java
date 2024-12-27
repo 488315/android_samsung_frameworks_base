@@ -11,15 +11,20 @@ import android.telephony.mbms.FileInfo;
 import android.telephony.mbms.IDownloadProgressListener;
 import android.telephony.mbms.IDownloadStatusListener;
 import android.telephony.mbms.IMbmsDownloadSessionCallback;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface IMbmsDownloadService extends IInterface {
-    int addProgressListener(DownloadRequest downloadRequest, IDownloadProgressListener iDownloadProgressListener) throws RemoteException;
+    int addProgressListener(
+            DownloadRequest downloadRequest, IDownloadProgressListener iDownloadProgressListener)
+            throws RemoteException;
 
     int addServiceAnnouncement(int i, byte[] bArr) throws RemoteException;
 
-    int addStatusListener(DownloadRequest downloadRequest, IDownloadStatusListener iDownloadStatusListener) throws RemoteException;
+    int addStatusListener(
+            DownloadRequest downloadRequest, IDownloadStatusListener iDownloadStatusListener)
+            throws RemoteException;
 
     int cancelDownload(DownloadRequest downloadRequest) throws RemoteException;
 
@@ -27,15 +32,21 @@ public interface IMbmsDownloadService extends IInterface {
 
     int download(DownloadRequest downloadRequest) throws RemoteException;
 
-    int initialize(int i, IMbmsDownloadSessionCallback iMbmsDownloadSessionCallback) throws RemoteException;
+    int initialize(int i, IMbmsDownloadSessionCallback iMbmsDownloadSessionCallback)
+            throws RemoteException;
 
     List<DownloadRequest> listPendingDownloads(int i) throws RemoteException;
 
-    int removeProgressListener(DownloadRequest downloadRequest, IDownloadProgressListener iDownloadProgressListener) throws RemoteException;
+    int removeProgressListener(
+            DownloadRequest downloadRequest, IDownloadProgressListener iDownloadProgressListener)
+            throws RemoteException;
 
-    int removeStatusListener(DownloadRequest downloadRequest, IDownloadStatusListener iDownloadStatusListener) throws RemoteException;
+    int removeStatusListener(
+            DownloadRequest downloadRequest, IDownloadStatusListener iDownloadStatusListener)
+            throws RemoteException;
 
-    int requestDownloadState(DownloadRequest downloadRequest, FileInfo fileInfo) throws RemoteException;
+    int requestDownloadState(DownloadRequest downloadRequest, FileInfo fileInfo)
+            throws RemoteException;
 
     int requestUpdateFileServices(int i, List<String> list) throws RemoteException;
 
@@ -45,17 +56,20 @@ public interface IMbmsDownloadService extends IInterface {
 
     public static class Default implements IMbmsDownloadService {
         @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-        public int initialize(int subId, IMbmsDownloadSessionCallback listener) throws RemoteException {
+        public int initialize(int subId, IMbmsDownloadSessionCallback listener)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-        public int requestUpdateFileServices(int subId, List<String> serviceClasses) throws RemoteException {
+        public int requestUpdateFileServices(int subId, List<String> serviceClasses)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-        public int setTempFileRootDirectory(int subId, String rootDirectoryPath) throws RemoteException {
+        public int setTempFileRootDirectory(int subId, String rootDirectoryPath)
+                throws RemoteException {
             return 0;
         }
 
@@ -70,27 +84,36 @@ public interface IMbmsDownloadService extends IInterface {
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-        public int addStatusListener(DownloadRequest downloadRequest, IDownloadStatusListener listener) throws RemoteException {
+        public int addStatusListener(
+                DownloadRequest downloadRequest, IDownloadStatusListener listener)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-        public int removeStatusListener(DownloadRequest downloadRequest, IDownloadStatusListener listener) throws RemoteException {
+        public int removeStatusListener(
+                DownloadRequest downloadRequest, IDownloadStatusListener listener)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-        public int addProgressListener(DownloadRequest downloadRequest, IDownloadProgressListener listener) throws RemoteException {
+        public int addProgressListener(
+                DownloadRequest downloadRequest, IDownloadProgressListener listener)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-        public int removeProgressListener(DownloadRequest downloadRequest, IDownloadProgressListener listener) throws RemoteException {
+        public int removeProgressListener(
+                DownloadRequest downloadRequest, IDownloadProgressListener listener)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-        public List<DownloadRequest> listPendingDownloads(int subscriptionId) throws RemoteException {
+        public List<DownloadRequest> listPendingDownloads(int subscriptionId)
+                throws RemoteException {
             return null;
         }
 
@@ -100,7 +123,8 @@ public interface IMbmsDownloadService extends IInterface {
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-        public int requestDownloadState(DownloadRequest downloadRequest, FileInfo fileInfo) throws RemoteException {
+        public int requestDownloadState(DownloadRequest downloadRequest, FileInfo fileInfo)
+                throws RemoteException {
             return 0;
         }
 
@@ -110,8 +134,7 @@ public interface IMbmsDownloadService extends IInterface {
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-        public void dispose(int subId) throws RemoteException {
-        }
+        public void dispose(int subId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -119,8 +142,9 @@ public interface IMbmsDownloadService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMbmsDownloadService {
-        public static final String DESCRIPTOR = "android.telephony.mbms.vendor.IMbmsDownloadService";
+    public abstract static class Stub extends Binder implements IMbmsDownloadService {
+        public static final String DESCRIPTOR =
+                "android.telephony.mbms.vendor.IMbmsDownloadService";
         static final int TRANSACTION_addProgressListener = 8;
         static final int TRANSACTION_addServiceAnnouncement = 4;
         static final int TRANSACTION_addStatusListener = 6;
@@ -197,7 +221,8 @@ public interface IMbmsDownloadService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -208,7 +233,8 @@ public interface IMbmsDownloadService extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    IMbmsDownloadSessionCallback _arg1 = IMbmsDownloadSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    IMbmsDownloadSessionCallback _arg1 =
+                            IMbmsDownloadSessionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result = initialize(_arg0, _arg1);
                     reply.writeNoException();
@@ -239,39 +265,48 @@ public interface IMbmsDownloadService extends IInterface {
                     reply.writeInt(_result4);
                     return true;
                 case 5:
-                    DownloadRequest _arg05 = (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
+                    DownloadRequest _arg05 =
+                            (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
                     data.enforceNoDataAvail();
                     int _result5 = download(_arg05);
                     reply.writeNoException();
                     reply.writeInt(_result5);
                     return true;
                 case 6:
-                    DownloadRequest _arg06 = (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
-                    IDownloadStatusListener _arg15 = IDownloadStatusListener.Stub.asInterface(data.readStrongBinder());
+                    DownloadRequest _arg06 =
+                            (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
+                    IDownloadStatusListener _arg15 =
+                            IDownloadStatusListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result6 = addStatusListener(_arg06, _arg15);
                     reply.writeNoException();
                     reply.writeInt(_result6);
                     return true;
                 case 7:
-                    DownloadRequest _arg07 = (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
-                    IDownloadStatusListener _arg16 = IDownloadStatusListener.Stub.asInterface(data.readStrongBinder());
+                    DownloadRequest _arg07 =
+                            (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
+                    IDownloadStatusListener _arg16 =
+                            IDownloadStatusListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result7 = removeStatusListener(_arg07, _arg16);
                     reply.writeNoException();
                     reply.writeInt(_result7);
                     return true;
                 case 8:
-                    DownloadRequest _arg08 = (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
-                    IDownloadProgressListener _arg17 = IDownloadProgressListener.Stub.asInterface(data.readStrongBinder());
+                    DownloadRequest _arg08 =
+                            (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
+                    IDownloadProgressListener _arg17 =
+                            IDownloadProgressListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result8 = addProgressListener(_arg08, _arg17);
                     reply.writeNoException();
                     reply.writeInt(_result8);
                     return true;
                 case 9:
-                    DownloadRequest _arg09 = (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
-                    IDownloadProgressListener _arg18 = IDownloadProgressListener.Stub.asInterface(data.readStrongBinder());
+                    DownloadRequest _arg09 =
+                            (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
+                    IDownloadProgressListener _arg18 =
+                            IDownloadProgressListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result9 = removeProgressListener(_arg09, _arg18);
                     reply.writeNoException();
@@ -285,14 +320,16 @@ public interface IMbmsDownloadService extends IInterface {
                     reply.writeTypedList(_result10, 1);
                     return true;
                 case 11:
-                    DownloadRequest _arg011 = (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
+                    DownloadRequest _arg011 =
+                            (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
                     data.enforceNoDataAvail();
                     int _result11 = cancelDownload(_arg011);
                     reply.writeNoException();
                     reply.writeInt(_result11);
                     return true;
                 case 12:
-                    DownloadRequest _arg012 = (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
+                    DownloadRequest _arg012 =
+                            (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
                     FileInfo _arg19 = (FileInfo) data.readTypedObject(FileInfo.CREATOR);
                     data.enforceNoDataAvail();
                     int _result12 = requestDownloadState(_arg012, _arg19);
@@ -300,7 +337,8 @@ public interface IMbmsDownloadService extends IInterface {
                     reply.writeInt(_result12);
                     return true;
                 case 13:
-                    DownloadRequest _arg013 = (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
+                    DownloadRequest _arg013 =
+                            (DownloadRequest) data.readTypedObject(DownloadRequest.CREATOR);
                     data.enforceNoDataAvail();
                     int _result13 = resetDownloadKnowledge(_arg013);
                     reply.writeNoException();
@@ -334,7 +372,8 @@ public interface IMbmsDownloadService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-            public int initialize(int subId, IMbmsDownloadSessionCallback listener) throws RemoteException {
+            public int initialize(int subId, IMbmsDownloadSessionCallback listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -352,7 +391,8 @@ public interface IMbmsDownloadService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-            public int requestUpdateFileServices(int subId, List<String> serviceClasses) throws RemoteException {
+            public int requestUpdateFileServices(int subId, List<String> serviceClasses)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -370,7 +410,8 @@ public interface IMbmsDownloadService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-            public int setTempFileRootDirectory(int subId, String rootDirectoryPath) throws RemoteException {
+            public int setTempFileRootDirectory(int subId, String rootDirectoryPath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -423,7 +464,9 @@ public interface IMbmsDownloadService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-            public int addStatusListener(DownloadRequest downloadRequest, IDownloadStatusListener listener) throws RemoteException {
+            public int addStatusListener(
+                    DownloadRequest downloadRequest, IDownloadStatusListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -441,7 +484,9 @@ public interface IMbmsDownloadService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-            public int removeStatusListener(DownloadRequest downloadRequest, IDownloadStatusListener listener) throws RemoteException {
+            public int removeStatusListener(
+                    DownloadRequest downloadRequest, IDownloadStatusListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -459,7 +504,9 @@ public interface IMbmsDownloadService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-            public int addProgressListener(DownloadRequest downloadRequest, IDownloadProgressListener listener) throws RemoteException {
+            public int addProgressListener(
+                    DownloadRequest downloadRequest, IDownloadProgressListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -477,7 +524,9 @@ public interface IMbmsDownloadService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-            public int removeProgressListener(DownloadRequest downloadRequest, IDownloadProgressListener listener) throws RemoteException {
+            public int removeProgressListener(
+                    DownloadRequest downloadRequest, IDownloadProgressListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -495,7 +544,8 @@ public interface IMbmsDownloadService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-            public List<DownloadRequest> listPendingDownloads(int subscriptionId) throws RemoteException {
+            public List<DownloadRequest> listPendingDownloads(int subscriptionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -503,7 +553,8 @@ public interface IMbmsDownloadService extends IInterface {
                     _data.writeInt(subscriptionId);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    List<DownloadRequest> _result = _reply.createTypedArrayList(DownloadRequest.CREATOR);
+                    List<DownloadRequest> _result =
+                            _reply.createTypedArrayList(DownloadRequest.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -529,7 +580,8 @@ public interface IMbmsDownloadService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-            public int requestDownloadState(DownloadRequest downloadRequest, FileInfo fileInfo) throws RemoteException {
+            public int requestDownloadState(DownloadRequest downloadRequest, FileInfo fileInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -547,7 +599,8 @@ public interface IMbmsDownloadService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsDownloadService
-            public int resetDownloadKnowledge(DownloadRequest downloadRequest) throws RemoteException {
+            public int resetDownloadKnowledge(DownloadRequest downloadRequest)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

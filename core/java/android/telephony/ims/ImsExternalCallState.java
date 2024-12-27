@@ -4,7 +4,9 @@ import android.annotation.SystemApi;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.telephony.Rlog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -13,19 +15,22 @@ import java.lang.annotation.RetentionPolicy;
 public final class ImsExternalCallState implements Parcelable {
     public static final int CALL_STATE_CONFIRMED = 1;
     public static final int CALL_STATE_TERMINATED = 2;
-    public static final Parcelable.Creator<ImsExternalCallState> CREATOR = new Parcelable.Creator<ImsExternalCallState>() { // from class: android.telephony.ims.ImsExternalCallState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsExternalCallState createFromParcel(Parcel in) {
-            return new ImsExternalCallState(in);
-        }
+    public static final Parcelable.Creator<ImsExternalCallState> CREATOR =
+            new Parcelable.Creator<
+                    ImsExternalCallState>() { // from class:
+                                              // android.telephony.ims.ImsExternalCallState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsExternalCallState createFromParcel(Parcel in) {
+                    return new ImsExternalCallState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsExternalCallState[] newArray(int size) {
-            return new ImsExternalCallState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsExternalCallState[] newArray(int size) {
+                    return new ImsExternalCallState[size];
+                }
+            };
     private static final String TAG = "ImsExternalCallState";
     private Uri mAddress;
     private int mCallId;
@@ -36,17 +41,20 @@ public final class ImsExternalCallState implements Parcelable {
     private Uri mLocalAddress;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ExternalCallState {
-    }
+    public @interface ExternalCallState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ExternalCallType {
-    }
+    public @interface ExternalCallType {}
 
-    public ImsExternalCallState() {
-    }
+    public ImsExternalCallState() {}
 
-    public ImsExternalCallState(int callId, Uri address, boolean isPullable, int callState, int callType, boolean isCallheld) {
+    public ImsExternalCallState(
+            int callId,
+            Uri address,
+            boolean isPullable,
+            int callState,
+            int callType,
+            boolean isCallheld) {
         this.mCallId = callId;
         this.mAddress = address;
         this.mIsPullable = isPullable;
@@ -56,7 +64,14 @@ public final class ImsExternalCallState implements Parcelable {
         Rlog.d(TAG, "ImsExternalCallState = " + this);
     }
 
-    public ImsExternalCallState(int callId, Uri address, Uri localAddress, boolean isPullable, int callState, int callType, boolean isCallheld) {
+    public ImsExternalCallState(
+            int callId,
+            Uri address,
+            Uri localAddress,
+            boolean isPullable,
+            int callState,
+            int callType,
+            boolean isCallheld) {
         this.mCallId = callId;
         this.mAddress = address;
         this.mLocalAddress = localAddress;
@@ -67,7 +82,14 @@ public final class ImsExternalCallState implements Parcelable {
         Rlog.d(TAG, "ImsExternalCallState = " + this);
     }
 
-    public ImsExternalCallState(String callId, Uri address, Uri localAddress, boolean isPullable, int callState, int callType, boolean isCallheld) {
+    public ImsExternalCallState(
+            String callId,
+            Uri address,
+            Uri localAddress,
+            boolean isPullable,
+            int callState,
+            int callType,
+            boolean isCallheld) {
         this.mCallId = getIdForString(callId);
         this.mAddress = address;
         this.mLocalAddress = localAddress;
@@ -136,7 +158,21 @@ public final class ImsExternalCallState implements Parcelable {
     }
 
     public String toString() {
-        return "ImsExternalCallState { mCallId = " + this.mCallId + ", mAddress = " + Rlog.pii(TAG, this.mAddress) + ", mLocalAddress = " + Rlog.pii(TAG, this.mLocalAddress) + ", mIsPullable = " + this.mIsPullable + ", mCallState = " + this.mCallState + ", mCallType = " + this.mCallType + ", mIsHeld = " + this.mIsHeld + "}";
+        return "ImsExternalCallState { mCallId = "
+                + this.mCallId
+                + ", mAddress = "
+                + Rlog.pii(TAG, this.mAddress)
+                + ", mLocalAddress = "
+                + Rlog.pii(TAG, this.mLocalAddress)
+                + ", mIsPullable = "
+                + this.mIsPullable
+                + ", mCallState = "
+                + this.mCallState
+                + ", mCallType = "
+                + this.mCallType
+                + ", mIsHeld = "
+                + this.mIsHeld
+                + "}";
     }
 
     private int getIdForString(String idString) {

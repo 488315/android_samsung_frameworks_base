@@ -7,25 +7,29 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.telecom.Logging.Session;
-import java.util.Arrays;
+
 import libcore.util.HexEncoding;
+
+import java.util.Arrays;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public final class NanoAppMessage implements Parcelable {
-    public static final Parcelable.Creator<NanoAppMessage> CREATOR = new Parcelable.Creator<NanoAppMessage>() { // from class: android.hardware.location.NanoAppMessage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppMessage createFromParcel(Parcel in) {
-            return new NanoAppMessage(in);
-        }
+    public static final Parcelable.Creator<NanoAppMessage> CREATOR =
+            new Parcelable.Creator<
+                    NanoAppMessage>() { // from class: android.hardware.location.NanoAppMessage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppMessage createFromParcel(Parcel in) {
+                    return new NanoAppMessage(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppMessage[] newArray(int size) {
-            return new NanoAppMessage[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppMessage[] newArray(int size) {
+                    return new NanoAppMessage[size];
+                }
+            };
     private static final int DEBUG_LOG_NUM_BYTES = 16;
     private boolean mIsBroadcasted;
     private boolean mIsReliable;
@@ -34,7 +38,13 @@ public final class NanoAppMessage implements Parcelable {
     private int mMessageType;
     private long mNanoAppId;
 
-    private NanoAppMessage(long nanoAppId, int messageType, byte[] messageBody, boolean broadcasted, boolean isReliable, int messageSequenceNumber) {
+    private NanoAppMessage(
+            long nanoAppId,
+            int messageType,
+            byte[] messageBody,
+            boolean broadcasted,
+            boolean isReliable,
+            int messageSequenceNumber) {
         this.mNanoAppId = nanoAppId;
         this.mMessageType = messageType;
         this.mMessageBody = messageBody;
@@ -43,16 +53,30 @@ public final class NanoAppMessage implements Parcelable {
         this.mMessageSequenceNumber = messageSequenceNumber;
     }
 
-    public static NanoAppMessage createMessageToNanoApp(long targetNanoAppId, int messageType, byte[] messageBody) {
+    public static NanoAppMessage createMessageToNanoApp(
+            long targetNanoAppId, int messageType, byte[] messageBody) {
         return new NanoAppMessage(targetNanoAppId, messageType, messageBody, false, false, 0);
     }
 
-    public static NanoAppMessage createMessageFromNanoApp(long sourceNanoAppId, int messageType, byte[] messageBody, boolean broadcasted) {
+    public static NanoAppMessage createMessageFromNanoApp(
+            long sourceNanoAppId, int messageType, byte[] messageBody, boolean broadcasted) {
         return new NanoAppMessage(sourceNanoAppId, messageType, messageBody, broadcasted, false, 0);
     }
 
-    public static NanoAppMessage createMessageFromNanoApp(long sourceNanoAppId, int messageType, byte[] messageBody, boolean broadcasted, boolean isReliable, int messageSequenceNumber) {
-        return new NanoAppMessage(sourceNanoAppId, messageType, messageBody, broadcasted, isReliable, messageSequenceNumber);
+    public static NanoAppMessage createMessageFromNanoApp(
+            long sourceNanoAppId,
+            int messageType,
+            byte[] messageBody,
+            boolean broadcasted,
+            boolean isReliable,
+            int messageSequenceNumber) {
+        return new NanoAppMessage(
+                sourceNanoAppId,
+                messageType,
+                messageBody,
+                broadcasted,
+                isReliable,
+                messageSequenceNumber);
     }
 
     public long getNanoAppId() {
@@ -116,7 +140,22 @@ public final class NanoAppMessage implements Parcelable {
 
     public String toString() {
         int length = this.mMessageBody.length;
-        String ret = "NanoAppMessage[type = " + this.mMessageType + ", length = " + this.mMessageBody.length + " bytes, " + (this.mIsBroadcasted ? HdmiControlManager.POWER_CONTROL_MODE_BROADCAST : "unicast") + ", nanoapp = 0x" + Long.toHexString(this.mNanoAppId) + ", isReliable = " + (this.mIsReliable ? "true" : "false") + ", messageSequenceNumber = " + this.mMessageSequenceNumber + "](";
+        String ret =
+                "NanoAppMessage[type = "
+                        + this.mMessageType
+                        + ", length = "
+                        + this.mMessageBody.length
+                        + " bytes, "
+                        + (this.mIsBroadcasted
+                                ? HdmiControlManager.POWER_CONTROL_MODE_BROADCAST
+                                : "unicast")
+                        + ", nanoapp = 0x"
+                        + Long.toHexString(this.mNanoAppId)
+                        + ", isReliable = "
+                        + (this.mIsReliable ? "true" : "false")
+                        + ", messageSequenceNumber = "
+                        + this.mMessageSequenceNumber
+                        + "](";
         if (length > 0) {
             ret = ret + "data = 0x";
         }
@@ -141,7 +180,14 @@ public final class NanoAppMessage implements Parcelable {
             return false;
         }
         NanoAppMessage other = (NanoAppMessage) object;
-        if (other.getNanoAppId() != this.mNanoAppId || other.getMessageType() != this.mMessageType || other.isBroadcastMessage() != this.mIsBroadcasted || !Arrays.equals(other.getMessageBody(), this.mMessageBody) || ((Flags.reliableMessage() && other.isReliable() != this.mIsReliable) || (Flags.reliableMessage() && other.getMessageSequenceNumber() != this.mMessageSequenceNumber))) {
+        if (other.getNanoAppId() != this.mNanoAppId
+                || other.getMessageType() != this.mMessageType
+                || other.isBroadcastMessage() != this.mIsBroadcasted
+                || !Arrays.equals(other.getMessageBody(), this.mMessageBody)
+                || ((Flags.reliableMessage() && other.isReliable() != this.mIsReliable)
+                        || (Flags.reliableMessage()
+                                && other.getMessageSequenceNumber()
+                                        != this.mMessageSequenceNumber))) {
             z = false;
         }
         boolean isEqual = z;

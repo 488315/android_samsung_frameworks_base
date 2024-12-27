@@ -6,9 +6,11 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -17,7 +19,8 @@ public interface IVpnManager extends IInterface {
 
     boolean addVpnAddress(String str, int i) throws RemoteException;
 
-    void applyBlockingRulesToUidRange(String str, int i, boolean z, String str2) throws RemoteException;
+    void applyBlockingRulesToUidRange(String str, int i, boolean z, String str2)
+            throws RemoteException;
 
     boolean checkIfLocalProxyPortExists(int i) throws RemoteException;
 
@@ -99,7 +102,8 @@ public interface IVpnManager extends IInterface {
 
     void resetUidListInNetworkCapabilities(String str, int i, String str2) throws RemoteException;
 
-    boolean setAlwaysOnVpnPackage(int i, String str, boolean z, List<String> list) throws RemoteException;
+    boolean setAlwaysOnVpnPackage(int i, String str, boolean z, List<String> list)
+            throws RemoteException;
 
     boolean setAppExclusionList(int i, String str, List<String> list) throws RemoteException;
 
@@ -117,27 +121,32 @@ public interface IVpnManager extends IInterface {
 
     void updateEnterpriseVpn(String str, int i, boolean z) throws RemoteException;
 
-    void updateLocalProxyInfo(String str, int i, String str2, ProxyInfo proxyInfo) throws RemoteException;
+    void updateLocalProxyInfo(String str, int i, String str2, ProxyInfo proxyInfo)
+            throws RemoteException;
 
     boolean updateLockdownVpn() throws RemoteException;
 
     void updateNotificationIcon(int i) throws RemoteException;
 
-    void updateUidRangesToPerAppVpn(String str, int i, boolean z, int[] iArr, String str2) throws RemoteException;
+    void updateUidRangesToPerAppVpn(String str, int i, boolean z, int[] iArr, String str2)
+            throws RemoteException;
 
-    void updateUidRangesToUserVpn(String str, int i, boolean z, int i2, String str2) throws RemoteException;
+    void updateUidRangesToUserVpn(String str, int i, boolean z, int i2, String str2)
+            throws RemoteException;
 
-    void updateUidRangesToUserVpnWithBlackList(String str, int i, int i2, int[] iArr, String str2) throws RemoteException;
+    void updateUidRangesToUserVpnWithBlackList(String str, int i, int i2, int[] iArr, String str2)
+            throws RemoteException;
 
     public static class Default implements IVpnManager {
         @Override // android.net.IVpnManager
-        public boolean prepareVpn(String oldPackage, String newPackage, int userId) throws RemoteException {
+        public boolean prepareVpn(String oldPackage, String newPackage, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.net.IVpnManager
-        public void setVpnPackageAuthorization(String packageName, int userId, int vpnType) throws RemoteException {
-        }
+        public void setVpnPackageAuthorization(String packageName, int userId, int vpnType)
+                throws RemoteException {}
 
         @Override // android.net.IVpnManager
         public ParcelFileDescriptor establishVpn(VpnConfig config) throws RemoteException {
@@ -160,13 +169,13 @@ public interface IVpnManager extends IInterface {
         }
 
         @Override // android.net.IVpnManager
-        public boolean provisionVpnProfile(VpnProfile profile, String packageName) throws RemoteException {
+        public boolean provisionVpnProfile(VpnProfile profile, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.net.IVpnManager
-        public void deleteVpnProfile(String packageName) throws RemoteException {
-        }
+        public void deleteVpnProfile(String packageName) throws RemoteException {}
 
         @Override // android.net.IVpnManager
         public String startVpnProfile(String packageName) throws RemoteException {
@@ -174,31 +183,36 @@ public interface IVpnManager extends IInterface {
         }
 
         @Override // android.net.IVpnManager
-        public void stopVpnProfile(String packageName) throws RemoteException {
-        }
+        public void stopVpnProfile(String packageName) throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public VpnProfileState getProvisionedVpnProfileState(String packageName) throws RemoteException {
+        public VpnProfileState getProvisionedVpnProfileState(String packageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.net.IVpnManager
-        public boolean setAppExclusionList(int userId, String vpnPackage, List<String> excludedApps) throws RemoteException {
+        public boolean setAppExclusionList(int userId, String vpnPackage, List<String> excludedApps)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.net.IVpnManager
-        public List<String> getAppExclusionList(int userId, String vpnPackage) throws RemoteException {
+        public List<String> getAppExclusionList(int userId, String vpnPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.net.IVpnManager
-        public boolean isAlwaysOnVpnPackageSupported(int userId, String packageName) throws RemoteException {
+        public boolean isAlwaysOnVpnPackageSupported(int userId, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.net.IVpnManager
-        public boolean setAlwaysOnVpnPackage(int userId, String packageName, boolean lockdown, List<String> lockdownAllowlist) throws RemoteException {
+        public boolean setAlwaysOnVpnPackage(
+                int userId, String packageName, boolean lockdown, List<String> lockdownAllowlist)
+                throws RemoteException {
             return false;
         }
 
@@ -228,8 +242,7 @@ public interface IVpnManager extends IInterface {
         }
 
         @Override // android.net.IVpnManager
-        public void startLegacyVpn(VpnProfile profile) throws RemoteException {
-        }
+        public void startLegacyVpn(VpnProfile profile) throws RemoteException {}
 
         @Override // android.net.IVpnManager
         public LegacyVpnInfo getLegacyVpnInfo(int userId) throws RemoteException {
@@ -267,8 +280,7 @@ public interface IVpnManager extends IInterface {
         }
 
         @Override // android.net.IVpnManager
-        public void factoryReset() throws RemoteException {
-        }
+        public void factoryReset() throws RemoteException {}
 
         @Override // android.net.IVpnManager
         public boolean getChainingEnabledForProfile(int callingUid) throws RemoteException {
@@ -281,7 +293,8 @@ public interface IVpnManager extends IInterface {
         }
 
         @Override // android.net.IVpnManager
-        public int[] getKnoxVpnZtnaProxyInfoForUid(int uid, String packageName) throws RemoteException {
+        public int[] getKnoxVpnZtnaProxyInfoForUid(int uid, String packageName)
+                throws RemoteException {
             return null;
         }
 
@@ -311,62 +324,75 @@ public interface IVpnManager extends IInterface {
         }
 
         @Override // android.net.IVpnManager
-        public void resetUidListInNetworkCapabilities(String profileName, int vpnClientLoc, String packageName) throws RemoteException {
-        }
+        public void resetUidListInNetworkCapabilities(
+                String profileName, int vpnClientLoc, String packageName) throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public void updateLocalProxyInfo(String profileName, int vpnClientLoc, String packageName, ProxyInfo proxyInfo) throws RemoteException {
-        }
+        public void updateLocalProxyInfo(
+                String profileName, int vpnClientLoc, String packageName, ProxyInfo proxyInfo)
+                throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public void applyBlockingRulesToUidRange(String profileName, int vpnClientLoc, boolean block, String packageName) throws RemoteException {
-        }
+        public void applyBlockingRulesToUidRange(
+                String profileName, int vpnClientLoc, boolean block, String packageName)
+                throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public boolean prepareEnterpriseVpnExt(String profileName, boolean isMetaEnabled) throws RemoteException {
+        public boolean prepareEnterpriseVpnExt(String profileName, boolean isMetaEnabled)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.net.IVpnManager
-        public boolean disconnectKnoxVpn(String profileName, int callingUid) throws RemoteException {
+        public boolean disconnectKnoxVpn(String profileName, int callingUid)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.net.IVpnManager
-        public void updateEnterpriseVpn(String profileName, int domain, boolean flag) throws RemoteException {
-        }
+        public void updateEnterpriseVpn(String profileName, int domain, boolean flag)
+                throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public void updateNotificationIcon(int userId) throws RemoteException {
-        }
+        public void updateNotificationIcon(int userId) throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public void createEnterpriseVpnInstance(String packageName, String profileName, int vpnClientLoc, int chainingValue) throws RemoteException {
-        }
+        public void createEnterpriseVpnInstance(
+                String packageName, String profileName, int vpnClientLoc, int chainingValue)
+                throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public void removeEnterpriseVpnInstance(String packageName, String profileName, int vpnClientLoc) throws RemoteException {
-        }
+        public void removeEnterpriseVpnInstance(
+                String packageName, String profileName, int vpnClientLoc) throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public void updateUidRangesToPerAppVpn(String profileName, int vpnClientLoc, boolean insert, int[] uidList, String packageName) throws RemoteException {
-        }
+        public void updateUidRangesToPerAppVpn(
+                String profileName,
+                int vpnClientLoc,
+                boolean insert,
+                int[] uidList,
+                String packageName)
+                throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public void updateUidRangesToUserVpn(String profileName, int vpnClientLoc, boolean insert, int userId, String packageName) throws RemoteException {
-        }
+        public void updateUidRangesToUserVpn(
+                String profileName,
+                int vpnClientLoc,
+                boolean insert,
+                int userId,
+                String packageName)
+                throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public void updateUidRangesToUserVpnWithBlackList(String profileName, int vpnClientLoc, int userId, int[] uidList, String packageName) throws RemoteException {
-        }
+        public void updateUidRangesToUserVpnWithBlackList(
+                String profileName, int vpnClientLoc, int userId, int[] uidList, String packageName)
+                throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public void registerSystemDefaultNetworkCallback() throws RemoteException {
-        }
+        public void registerSystemDefaultNetworkCallback() throws RemoteException {}
 
         @Override // android.net.IVpnManager
-        public void unregisterSystemDefaultNetworkCallback() throws RemoteException {
-        }
+        public void unregisterSystemDefaultNetworkCallback() throws RemoteException {}
 
         @Override // android.net.IVpnManager
         public int getNetIdforActiveDefaultInterface() throws RemoteException {
@@ -384,7 +410,8 @@ public interface IVpnManager extends IInterface {
         }
 
         @Override // android.net.IVpnManager
-        public int getKnoxNwFilterHttpProxyPort(int userId, String packageName) throws RemoteException {
+        public int getKnoxNwFilterHttpProxyPort(int userId, String packageName)
+                throws RemoteException {
             return 0;
         }
 
@@ -404,7 +431,7 @@ public interface IVpnManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVpnManager {
+    public abstract static class Stub extends Binder implements IVpnManager {
         static final int TRANSACTION_addVpnAddress = 4;
         static final int TRANSACTION_applyBlockingRulesToUidRange = 40;
         static final int TRANSACTION_checkIfLocalProxyPortExists = 34;
@@ -610,7 +637,8 @@ public interface IVpnManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVpnManager.DESCRIPTOR);
             }
@@ -981,7 +1009,8 @@ public interface IVpnManager extends IInterface {
                     int[] _arg37 = data.createIntArray();
                     String _arg43 = data.readString();
                     data.enforceNoDataAvail();
-                    updateUidRangesToUserVpnWithBlackList(_arg045, _arg122, _arg213, _arg37, _arg43);
+                    updateUidRangesToUserVpnWithBlackList(
+                            _arg045, _arg122, _arg213, _arg37, _arg43);
                     reply.writeNoException();
                     return true;
                 case 50:
@@ -1051,7 +1080,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public boolean prepareVpn(String oldPackage, String newPackage, int userId) throws RemoteException {
+            public boolean prepareVpn(String oldPackage, String newPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1070,7 +1100,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public void setVpnPackageAuthorization(String packageName, int userId, int vpnType) throws RemoteException {
+            public void setVpnPackageAuthorization(String packageName, int userId, int vpnType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1095,7 +1126,9 @@ public interface IVpnManager extends IInterface {
                     _data.writeTypedObject(config, 0);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1122,7 +1155,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public boolean removeVpnAddress(String address, int prefixLength) throws RemoteException {
+            public boolean removeVpnAddress(String address, int prefixLength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1157,7 +1191,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public boolean provisionVpnProfile(VpnProfile profile, String packageName) throws RemoteException {
+            public boolean provisionVpnProfile(VpnProfile profile, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1222,7 +1257,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public VpnProfileState getProvisionedVpnProfileState(String packageName) throws RemoteException {
+            public VpnProfileState getProvisionedVpnProfileState(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1230,7 +1266,8 @@ public interface IVpnManager extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    VpnProfileState _result = (VpnProfileState) _reply.readTypedObject(VpnProfileState.CREATOR);
+                    VpnProfileState _result =
+                            (VpnProfileState) _reply.readTypedObject(VpnProfileState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1239,7 +1276,9 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public boolean setAppExclusionList(int userId, String vpnPackage, List<String> excludedApps) throws RemoteException {
+            public boolean setAppExclusionList(
+                    int userId, String vpnPackage, List<String> excludedApps)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1258,7 +1297,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public List<String> getAppExclusionList(int userId, String vpnPackage) throws RemoteException {
+            public List<String> getAppExclusionList(int userId, String vpnPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1276,7 +1316,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public boolean isAlwaysOnVpnPackageSupported(int userId, String packageName) throws RemoteException {
+            public boolean isAlwaysOnVpnPackageSupported(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1294,7 +1335,12 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public boolean setAlwaysOnVpnPackage(int userId, String packageName, boolean lockdown, List<String> lockdownAllowlist) throws RemoteException {
+            public boolean setAlwaysOnVpnPackage(
+                    int userId,
+                    String packageName,
+                    boolean lockdown,
+                    List<String> lockdownAllowlist)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1420,7 +1466,8 @@ public interface IVpnManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(22, _data, _reply, 0);
                     _reply.readException();
-                    LegacyVpnInfo _result = (LegacyVpnInfo) _reply.readTypedObject(LegacyVpnInfo.CREATOR);
+                    LegacyVpnInfo _result =
+                            (LegacyVpnInfo) _reply.readTypedObject(LegacyVpnInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1579,7 +1626,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public int[] getKnoxVpnZtnaProxyInfoForUid(int uid, String packageName) throws RemoteException {
+            public int[] getKnoxVpnZtnaProxyInfoForUid(int uid, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1648,7 +1696,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public String[] getDnsServerListForInterface(String interfaceName) throws RemoteException {
+            public String[] getDnsServerListForInterface(String interfaceName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1682,7 +1731,9 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public void resetUidListInNetworkCapabilities(String profileName, int vpnClientLoc, String packageName) throws RemoteException {
+            public void resetUidListInNetworkCapabilities(
+                    String profileName, int vpnClientLoc, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1699,7 +1750,9 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public void updateLocalProxyInfo(String profileName, int vpnClientLoc, String packageName, ProxyInfo proxyInfo) throws RemoteException {
+            public void updateLocalProxyInfo(
+                    String profileName, int vpnClientLoc, String packageName, ProxyInfo proxyInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1717,7 +1770,9 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public void applyBlockingRulesToUidRange(String profileName, int vpnClientLoc, boolean block, String packageName) throws RemoteException {
+            public void applyBlockingRulesToUidRange(
+                    String profileName, int vpnClientLoc, boolean block, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1735,7 +1790,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public boolean prepareEnterpriseVpnExt(String profileName, boolean isMetaEnabled) throws RemoteException {
+            public boolean prepareEnterpriseVpnExt(String profileName, boolean isMetaEnabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1753,7 +1809,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public boolean disconnectKnoxVpn(String profileName, int callingUid) throws RemoteException {
+            public boolean disconnectKnoxVpn(String profileName, int callingUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1771,7 +1828,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public void updateEnterpriseVpn(String profileName, int domain, boolean flag) throws RemoteException {
+            public void updateEnterpriseVpn(String profileName, int domain, boolean flag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1803,7 +1861,9 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public void createEnterpriseVpnInstance(String packageName, String profileName, int vpnClientLoc, int chainingValue) throws RemoteException {
+            public void createEnterpriseVpnInstance(
+                    String packageName, String profileName, int vpnClientLoc, int chainingValue)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1821,7 +1881,9 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public void removeEnterpriseVpnInstance(String packageName, String profileName, int vpnClientLoc) throws RemoteException {
+            public void removeEnterpriseVpnInstance(
+                    String packageName, String profileName, int vpnClientLoc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1838,7 +1900,13 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public void updateUidRangesToPerAppVpn(String profileName, int vpnClientLoc, boolean insert, int[] uidList, String packageName) throws RemoteException {
+            public void updateUidRangesToPerAppVpn(
+                    String profileName,
+                    int vpnClientLoc,
+                    boolean insert,
+                    int[] uidList,
+                    String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1857,7 +1925,13 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public void updateUidRangesToUserVpn(String profileName, int vpnClientLoc, boolean insert, int userId, String packageName) throws RemoteException {
+            public void updateUidRangesToUserVpn(
+                    String profileName,
+                    int vpnClientLoc,
+                    boolean insert,
+                    int userId,
+                    String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1876,7 +1950,13 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public void updateUidRangesToUserVpnWithBlackList(String profileName, int vpnClientLoc, int userId, int[] uidList, String packageName) throws RemoteException {
+            public void updateUidRangesToUserVpnWithBlackList(
+                    String profileName,
+                    int vpnClientLoc,
+                    int userId,
+                    int[] uidList,
+                    String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1971,7 +2051,8 @@ public interface IVpnManager extends IInterface {
             }
 
             @Override // android.net.IVpnManager
-            public int getKnoxNwFilterHttpProxyPort(int userId, String packageName) throws RemoteException {
+            public int getKnoxNwFilterHttpProxyPort(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

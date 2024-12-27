@@ -1,6 +1,5 @@
 package android.renderscript;
 
-import android.renderscript.Type;
 
 @Deprecated
 /* loaded from: classes3.dex */
@@ -22,7 +21,8 @@ public class AllocationAdapter extends Allocation {
         int tz = this.mAdaptedAllocation.mType.getZ();
         for (int ct = 0; ct < lod; ct++) {
             if (tx == 1 && ty == 1 && tz == 1) {
-                throw new RSIllegalArgumentException("Attempting to set lod (" + lod + ") out of range.");
+                throw new RSIllegalArgumentException(
+                        "Attempting to set lod (" + lod + ") out of range.");
             }
             if (tx > 1) {
                 tx >>= 1;
@@ -58,12 +58,23 @@ public class AllocationAdapter extends Allocation {
                 a4 = this.mSelectedArray[3];
             }
         }
-        this.mRS.nAllocationAdapterOffset(getID(this.mRS), this.mSelectedX, this.mSelectedY, this.mSelectedZ, this.mSelectedLOD, this.mSelectedFace.mID, a1, a2, a3, a4);
+        this.mRS.nAllocationAdapterOffset(
+                getID(this.mRS),
+                this.mSelectedX,
+                this.mSelectedY,
+                this.mSelectedZ,
+                this.mSelectedLOD,
+                this.mSelectedFace.mID,
+                a1,
+                a2,
+                a3,
+                a4);
     }
 
     public void setLOD(int lod) {
         if (!this.mAdaptedAllocation.getType().hasMipmaps()) {
-            throw new RSInvalidStateException("Cannot set LOD when the allocation type does not include mipmaps.");
+            throw new RSInvalidStateException(
+                    "Cannot set LOD when the allocation type does not include mipmaps.");
         }
         if (this.mWindow.hasMipmaps()) {
             throw new RSInvalidStateException("Cannot set LOD when the adapter includes mipmaps.");
@@ -75,7 +86,8 @@ public class AllocationAdapter extends Allocation {
 
     public void setFace(Type.CubemapFace cf) {
         if (!this.mAdaptedAllocation.getType().hasFaces()) {
-            throw new RSInvalidStateException("Cannot set Face when the allocation type does not include faces.");
+            throw new RSInvalidStateException(
+                    "Cannot set Face when the allocation type does not include faces.");
         }
         if (this.mWindow.hasFaces()) {
             throw new RSInvalidStateException("Cannot set face when the adapter includes faces.");
@@ -95,7 +107,8 @@ public class AllocationAdapter extends Allocation {
             throw new RSInvalidStateException("Cannot set X when the adapter includes X.");
         }
         if (this.mWindow.getX() + x >= this.mAdaptedAllocation.getType().getX()) {
-            throw new RSInvalidStateException("Cannot set (X + window) which would be larger than dimension of allocation.");
+            throw new RSInvalidStateException(
+                    "Cannot set (X + window) which would be larger than dimension of allocation.");
         }
         this.mSelectedX = x;
         updateOffsets();
@@ -103,7 +116,8 @@ public class AllocationAdapter extends Allocation {
 
     public void setY(int y) {
         if (this.mAdaptedAllocation.getType().getY() == 0) {
-            throw new RSInvalidStateException("Cannot set Y when the allocation type does not include Y dim.");
+            throw new RSInvalidStateException(
+                    "Cannot set Y when the allocation type does not include Y dim.");
         }
         if (this.mAdaptedAllocation.getType().getY() <= y) {
             throw new RSInvalidStateException("Cannot set Y greater than dimension of allocation.");
@@ -112,7 +126,8 @@ public class AllocationAdapter extends Allocation {
             throw new RSInvalidStateException("Cannot set Y when the adapter includes Y.");
         }
         if (this.mWindow.getY() + y >= this.mAdaptedAllocation.getType().getY()) {
-            throw new RSInvalidStateException("Cannot set (Y + window) which would be larger than dimension of allocation.");
+            throw new RSInvalidStateException(
+                    "Cannot set (Y + window) which would be larger than dimension of allocation.");
         }
         this.mSelectedY = y;
         updateOffsets();
@@ -120,7 +135,8 @@ public class AllocationAdapter extends Allocation {
 
     public void setZ(int z) {
         if (this.mAdaptedAllocation.getType().getZ() == 0) {
-            throw new RSInvalidStateException("Cannot set Z when the allocation type does not include Z dim.");
+            throw new RSInvalidStateException(
+                    "Cannot set Z when the allocation type does not include Z dim.");
         }
         if (this.mAdaptedAllocation.getType().getZ() <= z) {
             throw new RSInvalidStateException("Cannot set Z greater than dimension of allocation.");
@@ -129,7 +145,8 @@ public class AllocationAdapter extends Allocation {
             throw new RSInvalidStateException("Cannot set Z when the adapter includes Z.");
         }
         if (this.mWindow.getZ() + z >= this.mAdaptedAllocation.getType().getZ()) {
-            throw new RSInvalidStateException("Cannot set (Z + window) which would be larger than dimension of allocation.");
+            throw new RSInvalidStateException(
+                    "Cannot set (Z + window) which would be larger than dimension of allocation.");
         }
         this.mSelectedZ = z;
         updateOffsets();
@@ -137,16 +154,23 @@ public class AllocationAdapter extends Allocation {
 
     public void setArray(int arrayNum, int arrayVal) {
         if (this.mAdaptedAllocation.getType().getArray(arrayNum) == 0) {
-            throw new RSInvalidStateException("Cannot set arrayNum when the allocation type does not include arrayNum dim.");
+            throw new RSInvalidStateException(
+                    "Cannot set arrayNum when the allocation type does not include arrayNum dim.");
         }
         if (this.mAdaptedAllocation.getType().getArray(arrayNum) <= arrayVal) {
-            throw new RSInvalidStateException("Cannot set arrayNum greater than dimension of allocation.");
+            throw new RSInvalidStateException(
+                    "Cannot set arrayNum greater than dimension of allocation.");
         }
-        if (this.mWindow.getArray(arrayNum) == this.mAdaptedAllocation.getType().getArray(arrayNum)) {
-            throw new RSInvalidStateException("Cannot set arrayNum when the adapter includes arrayNum.");
+        if (this.mWindow.getArray(arrayNum)
+                == this.mAdaptedAllocation.getType().getArray(arrayNum)) {
+            throw new RSInvalidStateException(
+                    "Cannot set arrayNum when the adapter includes arrayNum.");
         }
-        if (this.mWindow.getArray(arrayNum) + arrayVal >= this.mAdaptedAllocation.getType().getArray(arrayNum)) {
-            throw new RSInvalidStateException("Cannot set (arrayNum + window) which would be larger than dimension of allocation.");
+        if (this.mWindow.getArray(arrayNum) + arrayVal
+                >= this.mAdaptedAllocation.getType().getArray(arrayNum)) {
+            throw new RSInvalidStateException(
+                    "Cannot set (arrayNum + window) which would be larger than dimension of"
+                        + " allocation.");
         }
         this.mSelectedArray[arrayNum] = arrayVal;
         updateOffsets();
@@ -173,16 +197,22 @@ public class AllocationAdapter extends Allocation {
             throw new RSInvalidStateException("Element must match Allocation type.");
         }
         if (t.hasFaces() || t.hasMipmaps()) {
-            throw new RSInvalidStateException("Adapters do not support window types with Mipmaps or Faces.");
+            throw new RSInvalidStateException(
+                    "Adapters do not support window types with Mipmaps or Faces.");
         }
         Type at = a.getType();
-        if (t.getX() > at.getX() || t.getY() > at.getY() || t.getZ() > at.getZ() || t.getArrayCount() > at.getArrayCount()) {
-            throw new RSInvalidStateException("Type cannot have dimension larger than the source allocation.");
+        if (t.getX() > at.getX()
+                || t.getY() > at.getY()
+                || t.getZ() > at.getZ()
+                || t.getArrayCount() > at.getArrayCount()) {
+            throw new RSInvalidStateException(
+                    "Type cannot have dimension larger than the source allocation.");
         }
         if (t.getArrayCount() > 0) {
             for (int i = 0; i < t.getArray(i); i++) {
                 if (t.getArray(i) > at.getArray(i)) {
-                    throw new RSInvalidStateException("Type cannot have dimension larger than the source allocation.");
+                    throw new RSInvalidStateException(
+                            "Type cannot have dimension larger than the source allocation.");
                 }
             }
         }

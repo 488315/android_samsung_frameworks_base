@@ -2,28 +2,32 @@ package com.android.modules.utils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Collections;
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public class StringParceledListSlice extends BaseParceledListSlice<String> {
-    public static final Parcelable.ClassLoaderCreator<StringParceledListSlice> CREATOR = new Parcelable.ClassLoaderCreator<StringParceledListSlice>() { // from class: com.android.modules.utils.StringParceledListSlice.1
-        @Override // android.os.Parcelable.Creator
-        public StringParceledListSlice createFromParcel(Parcel parcel) {
-            return new StringParceledListSlice(parcel, null);
-        }
+    public static final Parcelable.ClassLoaderCreator<StringParceledListSlice> CREATOR =
+            new Parcelable.ClassLoaderCreator<
+                    StringParceledListSlice>() { // from class:
+                                                 // com.android.modules.utils.StringParceledListSlice.1
+                @Override // android.os.Parcelable.Creator
+                public StringParceledListSlice createFromParcel(Parcel parcel) {
+                    return new StringParceledListSlice(parcel, null);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.ClassLoaderCreator
-        public StringParceledListSlice createFromParcel(Parcel in, ClassLoader loader) {
-            return new StringParceledListSlice(in, loader);
-        }
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.ClassLoaderCreator
+                public StringParceledListSlice createFromParcel(Parcel in, ClassLoader loader) {
+                    return new StringParceledListSlice(in, loader);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public StringParceledListSlice[] newArray(int size) {
-            return new StringParceledListSlice[size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public StringParceledListSlice[] newArray(int size) {
+                    return new StringParceledListSlice[size];
+                }
+            };
 
     @Override // com.android.modules.utils.BaseParceledListSlice
     public /* bridge */ /* synthetic */ List<String> getList() {
@@ -65,8 +69,7 @@ public class StringParceledListSlice extends BaseParceledListSlice<String> {
 
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // com.android.modules.utils.BaseParceledListSlice
-    public void writeParcelableCreator(String parcelable, Parcel dest) {
-    }
+    public void writeParcelableCreator(String parcelable, Parcel dest) {}
 
     @Override // com.android.modules.utils.BaseParceledListSlice
     protected Parcelable.Creator<?> readParcelableCreator(Parcel from, ClassLoader loader) {

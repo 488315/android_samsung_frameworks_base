@@ -11,11 +11,14 @@ import android.os.HandlerExecutor;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.server.audio.AudioService;
+
 import com.samsung.android.hardware.context.SemContext;
 import com.samsung.android.hardware.context.SemContextEvent;
 import com.samsung.android.hardware.context.SemContextListener;
 import com.samsung.android.hardware.context.SemContextManager;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -24,7 +27,8 @@ import java.util.stream.Stream;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class SensorHandleThread extends Thread implements SensorEventListener, SemContextListener {
+public final class SensorHandleThread extends Thread
+        implements SensorEventListener, SemContextListener {
     public static final Set sBluetoothCommunicationDevices;
     public final AudioService mAudioService;
     public boolean mDevicePositionChangedDuringRingtone;
@@ -65,7 +69,8 @@ public final class SensorHandleThread extends Thread implements SensorEventListe
         this.mProximitySensor = sensorManager.getDefaultSensor(8);
         this.mJdmFlatMotionSensor = sensorManager.getDefaultSensor(65737);
         if (context.getPackageManager().hasSystemFeature("com.sec.feature.sensorhub")) {
-            SemContextManager semContextManager = (SemContextManager) context.getSystemService("scontext");
+            SemContextManager semContextManager =
+                    (SemContextManager) context.getSystemService("scontext");
             this.mSemContextManager = semContextManager;
             if (semContextManager != null) {
                 boolean isAvailableService = semContextManager.isAvailableService(22);
@@ -79,8 +84,7 @@ public final class SensorHandleThread extends Thread implements SensorEventListe
     }
 
     @Override // android.hardware.SensorEventListener
-    public final void onAccuracyChanged(Sensor sensor, int i) {
-    }
+    public final void onAccuracyChanged(Sensor sensor, int i) {}
 
     public final void onSemContextChanged(SemContextEvent semContextEvent) {
         Set set;
@@ -123,7 +127,8 @@ public final class SensorHandleThread extends Thread implements SensorEventListe
         synchronized (this) {
             try {
                 if (this.mAudioService.getMode() > 1) {
-                    if (sensorEvent.values[0] != 0.0d || "GAMEVOIP".equals(this.mAudioService.mAppMode)) {
+                    if (sensorEvent.values[0] != 0.0d
+                            || "GAMEVOIP".equals(this.mAudioService.mAppMode)) {
                         this.mIsClosed = false;
                     } else {
                         this.mIsClosed = true;
@@ -141,7 +146,8 @@ public final class SensorHandleThread extends Thread implements SensorEventListe
         if (this.mDevicePositionChangedDuringRingtone || (set = this.mMusicDevices) == null) {
             return;
         }
-        if ((set.contains(2) || this.mAudioService.mMode.get() > 1) && TextUtils.equals("jdm", "in_house")) {
+        if ((set.contains(2) || this.mAudioService.mMode.get() > 1)
+                && TextUtils.equals("jdm", "in_house")) {
             float f = sensorEvent.values[0];
             if (f == 1.0f) {
                 AudioSystem.setParameters("l_hw_flat_motion_state=1");
@@ -173,20 +179,25 @@ public final class SensorHandleThread extends Thread implements SensorEventListe
             anyMatch = stream.anyMatch(new SensorHandleThread$$ExternalSyntheticLambda2(set2));
         }
         if (anyMatch) {
-            Log.d("AS.SensorHandleThread", "start fail by bluetooth communication device connection");
+            Log.d(
+                    "AS.SensorHandleThread",
+                    "start fail by bluetooth communication device connection");
         } else {
             if (this.mIsProximateRegistered) {
                 return;
             }
             this.mIsProximateRegistered = true;
-            this.mSensorManager.registerListener(this, this.mProximitySensor, 3, this.mSensorHandler);
+            this.mSensorManager.registerListener(
+                    this, this.mProximitySensor, 3, this.mSensorHandler);
         }
     }
 
     public final void startSensor() {
         Executor handlerExecutor = new HandlerExecutor(this.mSensorHandler);
-        this.mAudioService.registerCurrentDeviceChangedCallback(0, this.voiceCallback, handlerExecutor);
-        this.mAudioService.registerCurrentDeviceChangedCallback(3, this.mediaCallback, handlerExecutor);
+        this.mAudioService.registerCurrentDeviceChangedCallback(
+                0, this.voiceCallback, handlerExecutor);
+        this.mAudioService.registerCurrentDeviceChangedCallback(
+                3, this.mediaCallback, handlerExecutor);
         startProximate();
         synchronized (this) {
             try {

@@ -7,6 +7,7 @@ import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.util.AttributeSet;
 import android.util.PathParser;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */

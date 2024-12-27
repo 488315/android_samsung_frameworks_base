@@ -25,6 +25,5 @@ public interface ExtendableGlobalActionsView {
 
     void updateViewList();
 
-    default void setCoverSecureConfirmState(boolean state) {
-    }
+    default void setCoverSecureConfirmState(boolean state) {}
 }

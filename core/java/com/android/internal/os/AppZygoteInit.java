@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.pm.ApplicationInfo;
 import android.net.LocalSocket;
 import android.util.Log;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -15,15 +16,14 @@ class AppZygoteInit {
     public static final String TAG = "AppZygoteInit";
     private static ZygoteServer sServer;
 
-    AppZygoteInit() {
-    }
+    AppZygoteInit() {}
 
     private static class AppZygoteServer extends ZygoteServer {
-        private AppZygoteServer() {
-        }
+        private AppZygoteServer() {}
 
         @Override // com.android.internal.os.ZygoteServer
-        protected ZygoteConnection createNewConnection(LocalSocket socket, String abiList) throws IOException {
+        protected ZygoteConnection createNewConnection(LocalSocket socket, String abiList)
+                throws IOException {
             return new AppZygoteConnection(socket, abiList);
         }
     }
@@ -34,8 +34,7 @@ class AppZygoteInit {
         }
 
         @Override // com.android.internal.os.ZygoteConnection
-        protected void preload() {
-        }
+        protected void preload() {}
 
         @Override // com.android.internal.os.ZygoteConnection
         protected boolean isPreloadComplete() {
@@ -57,19 +56,29 @@ class AppZygoteInit {
             int i = 1;
             if (appInfo.zygotePreloadName != null) {
                 try {
-                    ComponentName preloadName = ComponentName.createRelative(appInfo.packageName, appInfo.zygotePreloadName);
+                    ComponentName preloadName =
+                            ComponentName.createRelative(
+                                    appInfo.packageName, appInfo.zygotePreloadName);
                     Class<?> cl = Class.forName(preloadName.getClassName(), true, loader);
                     if (!ZygotePreload.class.isAssignableFrom(cl)) {
-                        Log.e(AppZygoteInit.TAG, preloadName.getClassName() + " does not implement " + ZygotePreload.class.getName());
+                        Log.e(
+                                AppZygoteInit.TAG,
+                                preloadName.getClassName()
+                                        + " does not implement "
+                                        + ZygotePreload.class.getName());
                     } else {
                         Constructor<?> ctor = cl.getConstructor(new Class[0]);
-                        ZygotePreload preloadObject = (ZygotePreload) ctor.newInstance(new Object[0]);
+                        ZygotePreload preloadObject =
+                                (ZygotePreload) ctor.newInstance(new Object[0]);
                         Zygote.markOpenedFilesBeforePreload();
                         preloadObject.doPreload(appInfo);
                         Zygote.allowFilesOpenedByPreload();
                     }
                 } catch (ReflectiveOperationException e) {
-                    Log.e(AppZygoteInit.TAG, "AppZygote application preload failed for " + appInfo.zygotePreloadName, e);
+                    Log.e(
+                            AppZygoteInit.TAG,
+                            "AppZygote application preload failed for " + appInfo.zygotePreloadName,
+                            e);
                 }
             } else {
                 Log.i(AppZygoteInit.TAG, "No zygotePreloadName attribute specified.");

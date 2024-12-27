@@ -1,6 +1,7 @@
 package android.util.apk;
 
 import android.util.Pair;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
@@ -17,10 +18,10 @@ abstract class ZipUtils {
     private static final int ZIP_EOCD_REC_MIN_SIZE = 22;
     private static final int ZIP_EOCD_REC_SIG = 101010256;
 
-    private ZipUtils() {
-    }
+    private ZipUtils() {}
 
-    static Pair<ByteBuffer, Long> findZipEndOfCentralDirectoryRecord(RandomAccessFile zip) throws IOException {
+    static Pair<ByteBuffer, Long> findZipEndOfCentralDirectoryRecord(RandomAccessFile zip)
+            throws IOException {
         long fileSize = zip.getChannel().size();
         if (fileSize < 22) {
             return null;
@@ -32,7 +33,8 @@ abstract class ZipUtils {
         return findZipEndOfCentralDirectoryRecord(zip, 65535);
     }
 
-    private static Pair<ByteBuffer, Long> findZipEndOfCentralDirectoryRecord(RandomAccessFile zip, int maxCommentSize) throws IOException {
+    private static Pair<ByteBuffer, Long> findZipEndOfCentralDirectoryRecord(
+            RandomAccessFile zip, int maxCommentSize) throws IOException {
         if (maxCommentSize < 0 || maxCommentSize > 65535) {
             throw new IllegalArgumentException("maxCommentSize: " + maxCommentSize);
         }
@@ -63,7 +65,9 @@ abstract class ZipUtils {
         }
         int maxCommentLength = Math.min(archiveSize - 22, 65535);
         int eocdWithEmptyCommentStartPosition = archiveSize - 22;
-        for (int expectedCommentLength = 0; expectedCommentLength <= maxCommentLength; expectedCommentLength++) {
+        for (int expectedCommentLength = 0;
+                expectedCommentLength <= maxCommentLength;
+                expectedCommentLength++) {
             int eocdStartPos = eocdWithEmptyCommentStartPosition - expectedCommentLength;
             if (zipContents.getInt(eocdStartPos) == ZIP_EOCD_REC_SIG) {
                 int actualCommentLength = getUnsignedInt16(zipContents, eocdStartPos + 20);
@@ -75,7 +79,8 @@ abstract class ZipUtils {
         return -1;
     }
 
-    public static final boolean isZip64EndOfCentralDirectoryLocatorPresent(RandomAccessFile zip, long zipEndOfCentralDirectoryPosition) throws IOException {
+    public static final boolean isZip64EndOfCentralDirectoryLocatorPresent(
+            RandomAccessFile zip, long zipEndOfCentralDirectoryPosition) throws IOException {
         long locatorPosition = zipEndOfCentralDirectoryPosition - 20;
         if (locatorPosition < 0) {
             return false;
@@ -89,9 +94,11 @@ abstract class ZipUtils {
         return getUnsignedInt32(zipEndOfCentralDirectory, zipEndOfCentralDirectory.position() + 16);
     }
 
-    public static void setZipEocdCentralDirectoryOffset(ByteBuffer zipEndOfCentralDirectory, long offset) {
+    public static void setZipEocdCentralDirectoryOffset(
+            ByteBuffer zipEndOfCentralDirectory, long offset) {
         assertByteOrderLittleEndian(zipEndOfCentralDirectory);
-        setUnsignedInt32(zipEndOfCentralDirectory, zipEndOfCentralDirectory.position() + 16, offset);
+        setUnsignedInt32(
+                zipEndOfCentralDirectory, zipEndOfCentralDirectory.position() + 16, offset);
     }
 
     public static long getZipEocdCentralDirectorySizeBytes(ByteBuffer zipEndOfCentralDirectory) {

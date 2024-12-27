@@ -10,6 +10,7 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.net.IOemNetd;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
@@ -17,9 +18,8 @@ import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.ProcessList$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.container.KnoxMUMContainerPolicy$$ExternalSyntheticOutline0;
-import com.android.server.enterprise.firewall.FirewallDefinitions;
-import com.android.server.enterprise.firewall.IptablesCommandBuilder;
 import com.android.server.enterprise.storage.EdmStorageProvider;
+
 import com.samsung.android.knox.AppIdentity;
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.net.firewall.DomainFilterRule;
@@ -28,6 +28,7 @@ import com.samsung.android.knox.net.firewall.FirewallResponse;
 import com.samsung.android.knox.net.firewall.FirewallRule;
 import com.samsung.android.knox.net.firewall.FirewallRuleValidator;
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -52,8 +53,10 @@ public final class FirewallRulesApplier {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.enterprise.firewall.FirewallRulesApplier$1, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass1 {
-        public static final /* synthetic */ int[] $SwitchMap$com$android$server$enterprise$firewall$FirewallDefinitions$Table;
-        public static final /* synthetic */ int[] $SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType;
+        public static final /* synthetic */ int[]
+                $SwitchMap$com$android$server$enterprise$firewall$FirewallDefinitions$Table;
+        public static final /* synthetic */ int[]
+                $SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType;
 
         static {
             int[] iArr = new int[FirewallRule.RuleType.values().length];
@@ -63,15 +66,21 @@ public final class FirewallRulesApplier {
             } catch (NoSuchFieldError unused) {
             }
             try {
-                $SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType[FirewallRule.RuleType.DENY.ordinal()] = 2;
+                $SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType[
+                                FirewallRule.RuleType.DENY.ordinal()] =
+                        2;
             } catch (NoSuchFieldError unused2) {
             }
             try {
-                $SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType[FirewallRule.RuleType.REDIRECT.ordinal()] = 3;
+                $SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType[
+                                FirewallRule.RuleType.REDIRECT.ordinal()] =
+                        3;
             } catch (NoSuchFieldError unused3) {
             }
             try {
-                $SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType[FirewallRule.RuleType.REDIRECT_EXCEPTION.ordinal()] = 4;
+                $SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType[
+                                FirewallRule.RuleType.REDIRECT_EXCEPTION.ordinal()] =
+                        4;
             } catch (NoSuchFieldError unused4) {
             }
             int[] iArr2 = new int[FirewallDefinitions.Table.values().length];
@@ -93,12 +102,13 @@ public final class FirewallRulesApplier {
         public final Object mDomainFilterChainsCacheLock = new Object();
         public int mAppChainsCounter = 0;
 
-        public DomainFilterApplicationChainsManager() {
-        }
+        public DomainFilterApplicationChainsManager() {}
 
         public final void clearChainsForUserId(Integer num) {
             if (((HashMap) this.mDomainFilterChainsCache).containsKey(num)) {
-                ArrayList arrayList = new ArrayList((Collection) ((HashMap) this.mDomainFilterChainsCache).get(num));
+                ArrayList arrayList =
+                        new ArrayList(
+                                (Collection) ((HashMap) this.mDomainFilterChainsCache).get(num));
                 if (arrayList.isEmpty()) {
                     return;
                 }
@@ -110,29 +120,50 @@ public final class FirewallRulesApplier {
         }
 
         public final boolean removeChainForApplication(String str, Integer num, Integer num2) {
-            if (!(((HashMap) this.mDomainFilterChainsCache).containsKey(num2) && ((List) ((HashMap) this.mDomainFilterChainsCache).get(num2)).contains(num))) {
+            if (!(((HashMap) this.mDomainFilterChainsCache).containsKey(num2)
+                    && ((List) ((HashMap) this.mDomainFilterChainsCache).get(num2))
+                            .contains(num))) {
                 return true;
             }
             boolean z = this.mAppChainsCounter == 1;
             int intValue = num.intValue();
             int intValue2 = num2.intValue();
             ArrayList arrayList = new ArrayList();
-            String domainFilterChainNameForApp = IptablesCommandBuilder.getDomainFilterChainNameForApp(str, num, num2, true);
-            String domainFilterChainNameForApp2 = IptablesCommandBuilder.getDomainFilterChainNameForApp(str, num, num2, false);
-            String domainFilterBaseChainNameForUser = IptablesCommandBuilder.getDomainFilterBaseChainNameForUser(intValue2, true);
-            String domainFilterBaseChainNameForUser2 = IptablesCommandBuilder.getDomainFilterBaseChainNameForUser(intValue2, false);
-            String appOrUserUid = intValue == -1 ? FirewallUtils.getAppOrUserUid("*", intValue2, -1, true) : ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -m owner --uid-owner "), intValue);
+            String domainFilterChainNameForApp =
+                    IptablesCommandBuilder.getDomainFilterChainNameForApp(str, num, num2, true);
+            String domainFilterChainNameForApp2 =
+                    IptablesCommandBuilder.getDomainFilterChainNameForApp(str, num, num2, false);
+            String domainFilterBaseChainNameForUser =
+                    IptablesCommandBuilder.getDomainFilterBaseChainNameForUser(intValue2, true);
+            String domainFilterBaseChainNameForUser2 =
+                    IptablesCommandBuilder.getDomainFilterBaseChainNameForUser(intValue2, false);
+            String appOrUserUid =
+                    intValue == -1
+                            ? FirewallUtils.getAppOrUserUid("*", intValue2, -1, true)
+                            : ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder(" -m owner --uid-owner "), intValue);
             arrayList.add("*filter");
             if (z) {
                 arrayList.add(":" + domainFilterChainNameForApp + " -");
             }
             arrayList.add(":" + domainFilterChainNameForApp2 + " -");
             if (z) {
-                arrayList.add("-D " + domainFilterBaseChainNameForUser + " -j " + domainFilterChainNameForApp);
+                arrayList.add(
+                        "-D "
+                                + domainFilterBaseChainNameForUser
+                                + " -j "
+                                + domainFilterChainNameForApp);
             }
-            arrayList.add(XmlUtils$$ExternalSyntheticOutline0.m("-D ", domainFilterBaseChainNameForUser2, appOrUserUid, " -j ", domainFilterChainNameForApp2));
+            arrayList.add(
+                    XmlUtils$$ExternalSyntheticOutline0.m(
+                            "-D ",
+                            domainFilterBaseChainNameForUser2,
+                            appOrUserUid,
+                            " -j ",
+                            domainFilterChainNameForApp2));
             if (intValue != -1 && !"*".equals(str)) {
-                arrayList.add("-D " + domainFilterBaseChainNameForUser2 + appOrUserUid + " -j RETURN ");
+                arrayList.add(
+                        "-D " + domainFilterBaseChainNameForUser2 + appOrUserUid + " -j RETURN ");
             }
             if (z) {
                 arrayList.add("-X " + domainFilterChainNameForApp);
@@ -142,8 +173,10 @@ public final class FirewallRulesApplier {
             if (z) {
                 FirewallRulesApplier.this.mShouldAddAcceptRuleToInput = true;
             }
-            if (!FirewallRulesApplier.this.executeCmdIptablesV4AndV6(arrayList, FirewallDefinitions.Table.FILTER)) {
-                StorageManagerService$$ExternalSyntheticOutline0.m("Failed to remove chain for ", str, "FirewallRulesApplier");
+            if (!FirewallRulesApplier.this.executeCmdIptablesV4AndV6(
+                    arrayList, FirewallDefinitions.Table.FILTER)) {
+                StorageManagerService$$ExternalSyntheticOutline0.m(
+                        "Failed to remove chain for ", str, "FirewallRulesApplier");
                 return false;
             }
             synchronized (this.mDomainFilterChainsCacheLock) {
@@ -194,24 +227,36 @@ public final class FirewallRulesApplier {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.knox.net.firewall.FirewallResponse addDomainRules(com.samsung.android.knox.ContextInfo r20, java.util.List r21) {
+    public final com.samsung.android.knox.net.firewall.FirewallResponse addDomainRules(
+            com.samsung.android.knox.ContextInfo r20, java.util.List r21) {
         /*
             Method dump skipped, instructions count: 813
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.firewall.FirewallRulesApplier.addDomainRules(com.samsung.android.knox.ContextInfo, java.util.List):com.samsung.android.knox.net.firewall.FirewallResponse");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.firewall.FirewallRulesApplier.addDomainRules(com.samsung.android.knox.ContextInfo,"
+                    + " java.util.List):com.samsung.android.knox.net.firewall.FirewallResponse");
     }
 
-    public final synchronized void addOrRemoveExemptRules(FirewallExemption firewallExemption, boolean z, ContextInfo contextInfo) {
+    public final synchronized void addOrRemoveExemptRules(
+            FirewallExemption firewallExemption, boolean z, ContextInfo contextInfo) {
         try {
             ArrayList arrayList = new ArrayList();
             arrayList.add("*filter");
-            arrayList.addAll(IptablesCommandBuilder.createAllowOrDenyCommands(firewallExemption.mExemptionRule, contextInfo, z ? "-A" : "-D", FirewallRule.RuleType.ALLOW));
+            arrayList.addAll(
+                    IptablesCommandBuilder.createAllowOrDenyCommands(
+                            firewallExemption.mExemptionRule,
+                            contextInfo,
+                            z ? "-A" : "-D",
+                            FirewallRule.RuleType.ALLOW));
             arrayList.add("COMMIT\n");
             if ("*".equals(firewallExemption.mExemptionRule.getIpAddress())) {
                 executeCmdIptablesV4AndV6(arrayList, FirewallDefinitions.Table.FILTER);
             } else {
-                runShellCommand(firewallExemption.mExemptionRule.getAddressType(), String.join("\n", arrayList));
+                runShellCommand(
+                        firewallExemption.mExemptionRule.getAddressType(),
+                        String.join("\n", arrayList));
             }
         } catch (Throwable th) {
             throw th;
@@ -233,9 +278,11 @@ public final class FirewallRulesApplier {
                 return;
             }
         }
-        runShellCommand(4, String.join("\n", IptablesCommandBuilder.createIcmpAllowRuleCommands(4, z)));
+        runShellCommand(
+                4, String.join("\n", IptablesCommandBuilder.createIcmpAllowRuleCommands(4, z)));
         if (FirewallUtils.isIpv6SupportedForTable(FirewallDefinitions.Table.FILTER)) {
-            runShellCommand(6, String.join("\n", IptablesCommandBuilder.createIcmpAllowRuleCommands(6, z)));
+            runShellCommand(
+                    6, String.join("\n", IptablesCommandBuilder.createIcmpAllowRuleCommands(6, z)));
         }
     }
 
@@ -246,8 +293,14 @@ public final class FirewallRulesApplier {
         this.mFirewallService.getClass();
         FirewallRule createDenyAllRule = Firewall.createDenyAllRule(addressType, true);
         createDenyAllRule.setPortNumber("53");
-        createDenyAllRule.setApplication("*".equals(appIdentity.getPackageName()) ? new AppIdentity("*", (String) null) : appIdentity);
-        Log.d("Firewall", "createPort53DenyRule(): package = ".concat(String.valueOf(createDenyAllRule.getPackageName())));
+        createDenyAllRule.setApplication(
+                "*".equals(appIdentity.getPackageName())
+                        ? new AppIdentity("*", (String) null)
+                        : appIdentity);
+        Log.d(
+                "Firewall",
+                "createPort53DenyRule(): package = "
+                        .concat(String.valueOf(createDenyAllRule.getPackageName())));
         if ("*".equals(appIdentity.getPackageName())) {
             ArrayList arrayList3 = new ArrayList();
             String str = z ? "-A" : "-D";
@@ -255,17 +308,27 @@ public final class FirewallRulesApplier {
             FirewallRule firewallRule = new FirewallRule(ruleType, addressType);
             firewallRule.setDirection(Firewall.Direction.OUTPUT);
             firewallRule.setApplication(new AppIdentity("dns_tether", (String) null));
-            Iterator it = ((ArrayList) IptablesCommandBuilder.createAllowOrDenyCommands(firewallRule, contextInfo, str, ruleType)).iterator();
+            Iterator it =
+                    ((ArrayList)
+                                    IptablesCommandBuilder.createAllowOrDenyCommands(
+                                            firewallRule, contextInfo, str, ruleType))
+                            .iterator();
             while (it.hasNext()) {
-                arrayList3.add(((String) it.next()).replaceAll("firewall_allow-output", "block_port53-output"));
+                arrayList3.add(
+                        ((String) it.next())
+                                .replaceAll("firewall_allow-output", "block_port53-output"));
             }
             arrayList.addAll(arrayList3);
         }
-        List createAllowOrDenyCommands = IptablesCommandBuilder.createAllowOrDenyCommands(createDenyAllRule, contextInfo, "-A", createDenyAllRule.getRuleType());
+        List createAllowOrDenyCommands =
+                IptablesCommandBuilder.createAllowOrDenyCommands(
+                        createDenyAllRule, contextInfo, "-A", createDenyAllRule.getRuleType());
         ArrayList arrayList4 = new ArrayList();
         Iterator it2 = ((ArrayList) createAllowOrDenyCommands).iterator();
         while (it2.hasNext()) {
-            arrayList4.add(((String) it2.next()).replaceAll("firewall_deny-output", "block_port53-output"));
+            arrayList4.add(
+                    ((String) it2.next())
+                            .replaceAll("firewall_deny-output", "block_port53-output"));
         }
         arrayList2.addAll(arrayList4);
         if (!z) {
@@ -277,10 +340,13 @@ public final class FirewallRulesApplier {
             arrayList2 = arrayList5;
         }
         arrayList.addAll(arrayList2);
-        return runShellCommand(Firewall.AddressType.IPV6, String.join("\n", arrayList)) & completeCommandAndExecute(arrayList, FirewallDefinitions.Table.FILTER, Firewall.AddressType.IPV4);
+        return runShellCommand(Firewall.AddressType.IPV6, String.join("\n", arrayList))
+                & completeCommandAndExecute(
+                        arrayList, FirewallDefinitions.Table.FILTER, Firewall.AddressType.IPV4);
     }
 
-    public final boolean completeCommandAndExecute(List list, FirewallDefinitions.Table table, Firewall.AddressType addressType) {
+    public final boolean completeCommandAndExecute(
+            List list, FirewallDefinitions.Table table, Firewall.AddressType addressType) {
         if (list == null) {
             Log.e("FirewallRulesApplier", "Command list is null");
             return false;
@@ -347,19 +413,33 @@ public final class FirewallRulesApplier {
         return mergeAndExecuteCmdIptablesV4AndV6(m, arrayList2);
     }
 
-    public final FirewallResponse disableIpTablesRule(FirewallRule firewallRule, ContextInfo contextInfo, boolean z) {
-        FirewallResponse validateFirewallRule = FirewallRuleValidator.validateFirewallRule(firewallRule);
+    public final FirewallResponse disableIpTablesRule(
+            FirewallRule firewallRule, ContextInfo contextInfo, boolean z) {
+        FirewallResponse validateFirewallRule =
+                FirewallRuleValidator.validateFirewallRule(firewallRule);
         if (validateFirewallRule.getResult().equals(FirewallResponse.Result.FAILED)) {
             return validateFirewallRule;
         }
-        boolean completeCommandAndExecute = completeCommandAndExecute(IptablesCommandBuilder.getIptablesCommand(firewallRule, contextInfo, "-D"), FirewallUtils.getTableByRuletype(firewallRule.getRuleType()), firewallRule.getAddressType());
+        boolean completeCommandAndExecute =
+                completeCommandAndExecute(
+                        IptablesCommandBuilder.getIptablesCommand(firewallRule, contextInfo, "-D"),
+                        FirewallUtils.getTableByRuletype(firewallRule.getRuleType()),
+                        firewallRule.getAddressType());
         if (z && completeCommandAndExecute) {
             updateStatusOnDB(firewallRule, FirewallRule.Status.DISABLED, contextInfo);
         }
-        return new FirewallResponse(FirewallResponse.Result.SUCCESS, FirewallResponse.ErrorCode.NO_ERROR, "The rule was successfully disabled.");
+        return new FirewallResponse(
+                FirewallResponse.Result.SUCCESS,
+                FirewallResponse.ErrorCode.NO_ERROR,
+                "The rule was successfully disabled.");
     }
 
-    public final FirewallResponse[] enableOrDisableIptablesRule(FirewallRule[] firewallRuleArr, boolean z, ContextInfo contextInfo, boolean z2, boolean z3) {
+    public final FirewallResponse[] enableOrDisableIptablesRule(
+            FirewallRule[] firewallRuleArr,
+            boolean z,
+            ContextInfo contextInfo,
+            boolean z2,
+            boolean z3) {
         boolean z4;
         int i = contextInfo.mCallerUid;
         int length = firewallRuleArr.length;
@@ -372,36 +452,63 @@ public final class FirewallRulesApplier {
         for (int i2 = 0; i2 < length; i2++) {
             FirewallRule firewallRule = firewallRuleArr[i2];
             if (firewallRule == null) {
-                firewallResponseArr[i2] = new FirewallResponse(FirewallResponse.Result.FAILED, FirewallResponse.ErrorCode.OPERATION_NOT_PERMITTED_ERROR, "Rule is null.");
+                firewallResponseArr[i2] =
+                        new FirewallResponse(
+                                FirewallResponse.Result.FAILED,
+                                FirewallResponse.ErrorCode.OPERATION_NOT_PERMITTED_ERROR,
+                                "Rule is null.");
             } else if (z3) {
-                FirewallResponse validateFirewallRule = FirewallRuleValidator.validateFirewallRule(firewallRule);
+                FirewallResponse validateFirewallRule =
+                        FirewallRuleValidator.validateFirewallRule(firewallRule);
                 FirewallResponse.Result result = validateFirewallRule.getResult();
                 FirewallResponse.Result result2 = FirewallResponse.Result.FAILED;
                 if (result.equals(result2)) {
                     firewallResponseArr[i2] = validateFirewallRule;
-                } else if (z || !z2 || !FirewallUtils.isRuleEnabled(firewallRuleArr[i2], i, this.mEdmStorageProvider) || i == 1000) {
+                } else if (z
+                        || !z2
+                        || !FirewallUtils.isRuleEnabled(
+                                firewallRuleArr[i2], i, this.mEdmStorageProvider)
+                        || i == 1000) {
                     Firewall.AddressType addressType = firewallRuleArr[i2].getAddressType();
-                    FirewallDefinitions.Table tableByRuletype = FirewallUtils.getTableByRuletype(firewallRuleArr[i2].getRuleType());
+                    FirewallDefinitions.Table tableByRuletype =
+                            FirewallUtils.getTableByRuletype(firewallRuleArr[i2].getRuleType());
                     if (!Firewall.AddressType.IPV6.equals(addressType)) {
                         int ordinal = tableByRuletype.ordinal();
                         if (ordinal == 0) {
-                            arrayList.addAll(IptablesCommandBuilder.getIptablesCommand(firewallRuleArr[i2], contextInfo, "-A"));
+                            arrayList.addAll(
+                                    IptablesCommandBuilder.getIptablesCommand(
+                                            firewallRuleArr[i2], contextInfo, "-A"));
                         } else if (ordinal == 1) {
-                            arrayList3.addAll(IptablesCommandBuilder.getIptablesCommand(firewallRuleArr[i2], contextInfo, "-A"));
+                            arrayList3.addAll(
+                                    IptablesCommandBuilder.getIptablesCommand(
+                                            firewallRuleArr[i2], contextInfo, "-A"));
                         }
                     } else if (FirewallUtils.isIpv6SupportedForTable(tableByRuletype)) {
                         int ordinal2 = tableByRuletype.ordinal();
                         if (ordinal2 == 0) {
-                            arrayList2.addAll(IptablesCommandBuilder.getIptablesCommand(firewallRuleArr[i2], contextInfo, "-A"));
+                            arrayList2.addAll(
+                                    IptablesCommandBuilder.getIptablesCommand(
+                                            firewallRuleArr[i2], contextInfo, "-A"));
                         } else if (ordinal2 == 1) {
-                            arrayList4.addAll(IptablesCommandBuilder.getIptablesCommand(firewallRuleArr[i2], contextInfo, "-A"));
+                            arrayList4.addAll(
+                                    IptablesCommandBuilder.getIptablesCommand(
+                                            firewallRuleArr[i2], contextInfo, "-A"));
                         }
                     } else {
-                        firewallResponseArr[i2] = new FirewallResponse(result2, FirewallResponse.ErrorCode.IPV6_NOT_SUPPORTED_ERROR, "This device does not have IPv6 support for this type of rule.");
+                        firewallResponseArr[i2] =
+                                new FirewallResponse(
+                                        result2,
+                                        FirewallResponse.ErrorCode.IPV6_NOT_SUPPORTED_ERROR,
+                                        "This device does not have IPv6 support for this type of"
+                                            + " rule.");
                     }
                     bitSet.set(i2);
                 } else {
-                    firewallResponseArr[i2] = new FirewallResponse(result2, FirewallResponse.ErrorCode.OPERATION_NOT_PERMITTED_ERROR, "The specified rule is already enabled.");
+                    firewallResponseArr[i2] =
+                            new FirewallResponse(
+                                    result2,
+                                    FirewallResponse.ErrorCode.OPERATION_NOT_PERMITTED_ERROR,
+                                    "The specified rule is already enabled.");
                 }
             } else {
                 firewallResponseArr[i2] = disableIpTablesRule(firewallRule, contextInfo, true);
@@ -441,20 +548,39 @@ public final class FirewallRulesApplier {
         for (int i3 = 0; i3 < length; i3++) {
             if (bitSet.get(i3)) {
                 if (!z2) {
-                    firewallResponseArr[i3] = new FirewallResponse(FirewallResponse.Result.SUCCESS, FirewallResponse.ErrorCode.NO_ERROR, "The rule was successfully enabled.");
+                    firewallResponseArr[i3] =
+                            new FirewallResponse(
+                                    FirewallResponse.Result.SUCCESS,
+                                    FirewallResponse.ErrorCode.NO_ERROR,
+                                    "The rule was successfully enabled.");
                 } else if (z4) {
                     FirewallRule firewallRule2 = firewallRuleArr[i3];
                     FirewallRule.Status status = FirewallRule.Status.ENABLED;
                     updateStatusOnDB(firewallRule2, status, contextInfo);
                     firewallRuleArr[i3].setStatus(status);
-                    if ((FirewallRule.RuleType.ALLOW == firewallRuleArr[i3].getRuleType() || FirewallRule.RuleType.DENY == firewallRuleArr[i3].getRuleType()) && Firewall.Direction.ALL.equals(firewallRuleArr[i3].getDirection())) {
-                        firewallResponseArr[i3] = new FirewallResponse(FirewallResponse.Result.SUCCESS, FirewallResponse.ErrorCode.INPUT_CHAIN_NOT_SUPPORTED_ERROR, "Rule not applied to INPUT chain for Direction.All.");
+                    if ((FirewallRule.RuleType.ALLOW == firewallRuleArr[i3].getRuleType()
+                                    || FirewallRule.RuleType.DENY
+                                            == firewallRuleArr[i3].getRuleType())
+                            && Firewall.Direction.ALL.equals(firewallRuleArr[i3].getDirection())) {
+                        firewallResponseArr[i3] =
+                                new FirewallResponse(
+                                        FirewallResponse.Result.SUCCESS,
+                                        FirewallResponse.ErrorCode.INPUT_CHAIN_NOT_SUPPORTED_ERROR,
+                                        "Rule not applied to INPUT chain for Direction.All.");
                     } else {
-                        firewallResponseArr[i3] = new FirewallResponse(FirewallResponse.Result.SUCCESS, FirewallResponse.ErrorCode.NO_ERROR, "The rule was successfully enabled.");
+                        firewallResponseArr[i3] =
+                                new FirewallResponse(
+                                        FirewallResponse.Result.SUCCESS,
+                                        FirewallResponse.ErrorCode.NO_ERROR,
+                                        "The rule was successfully enabled.");
                     }
                 } else {
                     disableIpTablesRule(firewallRuleArr[i3], contextInfo, true);
-                    firewallResponseArr[i3] = new FirewallResponse(FirewallResponse.Result.FAILED, FirewallResponse.ErrorCode.UNEXPECTED_ERROR, "Failed to enable rule.");
+                    firewallResponseArr[i3] =
+                            new FirewallResponse(
+                                    FirewallResponse.Result.FAILED,
+                                    FirewallResponse.ErrorCode.UNEXPECTED_ERROR,
+                                    "Failed to enable rule.");
                 }
             }
         }
@@ -462,7 +588,8 @@ public final class FirewallRulesApplier {
     }
 
     public final boolean executeCmdIptablesV4AndV6(List list, FirewallDefinitions.Table table) {
-        return runShellCommand(FirewallUtils.isIpv6SupportedForTable(table) ? 46 : 4, String.join("\n", list));
+        return runShellCommand(
+                FirewallUtils.isIpv6SupportedForTable(table) ? 46 : 4, String.join("\n", list));
     }
 
     public final boolean flushAllChains(Integer num) {
@@ -491,7 +618,10 @@ public final class FirewallRulesApplier {
     public final boolean flushChain(FirewallRule.RuleType ruleType, Integer num) {
         ArrayList arrayList = new ArrayList();
         String num2 = num.intValue() == 0 ? "" : num.toString();
-        int i = IptablesCommandBuilder.AnonymousClass1.$SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType[ruleType.ordinal()];
+        int i =
+                IptablesCommandBuilder.AnonymousClass1
+                        .$SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType[
+                        ruleType.ordinal()];
         if (i == 1) {
             arrayList.add("*filter");
             arrayList.add(":firewall_allow-input -");
@@ -517,17 +647,27 @@ public final class FirewallRulesApplier {
         this.mDomainFilterAppChainsMngr.clearChainsForUserId(num);
         ArrayList arrayList = new ArrayList();
         int intValue = num.intValue();
-        arrayList.add(":" + ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("block_port53-output", intValue == 0 ? "" : Integer.toString(intValue)) + " -");
-        return runShellCommand(Firewall.AddressType.IPV6, String.join("\n", arrayList)) & completeCommandAndExecute(arrayList, FirewallDefinitions.Table.FILTER, Firewall.AddressType.IPV4);
+        arrayList.add(
+                ":"
+                        + ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                "block_port53-output",
+                                intValue == 0 ? "" : Integer.toString(intValue))
+                        + " -");
+        return runShellCommand(Firewall.AddressType.IPV6, String.join("\n", arrayList))
+                & completeCommandAndExecute(
+                        arrayList, FirewallDefinitions.Table.FILTER, Firewall.AddressType.IPV4);
     }
 
     public final boolean flushDomainChains(Integer num, boolean z) {
-        DomainFilterApplicationChainsManager domainFilterApplicationChainsManager = this.mDomainFilterAppChainsMngr;
+        DomainFilterApplicationChainsManager domainFilterApplicationChainsManager =
+                this.mDomainFilterAppChainsMngr;
         domainFilterApplicationChainsManager.clearChainsForUserId(num);
         boolean z2 = domainFilterApplicationChainsManager.mAppChainsCounter == 0;
         ArrayList arrayList = new ArrayList();
-        String domainFilterBaseChainNameForUser = IptablesCommandBuilder.getDomainFilterBaseChainNameForUser(num.intValue(), true);
-        String domainFilterBaseChainNameForUser2 = IptablesCommandBuilder.getDomainFilterBaseChainNameForUser(num.intValue(), false);
+        String domainFilterBaseChainNameForUser =
+                IptablesCommandBuilder.getDomainFilterBaseChainNameForUser(num.intValue(), true);
+        String domainFilterBaseChainNameForUser2 =
+                IptablesCommandBuilder.getDomainFilterBaseChainNameForUser(num.intValue(), false);
         if (z2) {
             arrayList.add(":" + domainFilterBaseChainNameForUser + " -");
         }
@@ -545,12 +685,18 @@ public final class FirewallRulesApplier {
         if (z2) {
             this.mShouldAddAcceptRuleToInput = true;
         }
-        return runShellCommand(Firewall.AddressType.IPV6, String.join("\n", arrayList)) & completeCommandAndExecute(arrayList, FirewallDefinitions.Table.FILTER, Firewall.AddressType.IPV4);
+        return runShellCommand(Firewall.AddressType.IPV6, String.join("\n", arrayList))
+                & completeCommandAndExecute(
+                        arrayList, FirewallDefinitions.Table.FILTER, Firewall.AddressType.IPV4);
     }
 
     public final ArrayList getAllAdmins() {
         ArrayList arrayList = new ArrayList();
-        Iterator it = ((ArrayList) this.mEdmStorageProvider.getValues("ADMIN", new String[]{"adminUid"}, new ContentValues())).iterator();
+        Iterator it =
+                ((ArrayList)
+                                this.mEdmStorageProvider.getValues(
+                                        "ADMIN", new String[] {"adminUid"}, new ContentValues()))
+                        .iterator();
         while (it.hasNext()) {
             arrayList.add(((ContentValues) it.next()).getAsInteger("adminUid"));
         }
@@ -584,7 +730,10 @@ public final class FirewallRulesApplier {
             try {
                 this.mOemNetdService = IOemNetd.Stub.asInterface(iNetd.getOemNetd());
             } catch (RemoteException e) {
-                ActivityManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed to get OemNetd listener "), "FirewallRulesApplier");
+                ActivityManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("Failed to get OemNetd listener "),
+                        "FirewallRulesApplier");
             }
         }
         return this.mOemNetdService;
@@ -592,14 +741,19 @@ public final class FirewallRulesApplier {
 
     public final boolean hasDenyRuleInDatabase(int i, String str) {
         ContentValues contentValues = new ContentValues();
-        KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(i, contentValues, "adminUid", "packageName", str);
+        KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(
+                i, contentValues, "adminUid", "packageName", str);
         EdmStorageProvider edmStorageProvider = this.mEdmStorageProvider;
-        ArrayList arrayList = (ArrayList) edmStorageProvider.getValues("DomainFilterTable", null, contentValues);
+        ArrayList arrayList =
+                (ArrayList) edmStorageProvider.getValues("DomainFilterTable", null, contentValues);
         if (arrayList.isEmpty() || arrayList.get(0) == null) {
             Log.d("FirewallRulesApplier", "hasDenyRuleInDatabase(): false");
             return false;
         }
-        if (!((ArrayList) FirewallUtils.getListFromDb((ContentValues) arrayList.get(0), "blacklist", edmStorageProvider)).isEmpty()) {
+        if (!((ArrayList)
+                        FirewallUtils.getListFromDb(
+                                (ContentValues) arrayList.get(0), "blacklist", edmStorageProvider))
+                .isEmpty()) {
             return true;
         }
         Log.d("FirewallRulesApplier", "hasDenyRuleInDatabase(): false");
@@ -617,7 +771,9 @@ public final class FirewallRulesApplier {
         if (FirewallUtils.isIpv6SupportedForTable(FirewallDefinitions.Table.NAT)) {
             sb.append(join2);
         }
-        return !sb.toString().isEmpty() ? runShellCommand & runShellCommand(6, sb.toString()) : runShellCommand;
+        return !sb.toString().isEmpty()
+                ? runShellCommand & runShellCommand(6, sb.toString())
+                : runShellCommand;
     }
 
     public final void reloadDomainFilterOnIptablesRules() {
@@ -627,7 +783,8 @@ public final class FirewallRulesApplier {
             int intValue = ((Integer) it.next()).intValue();
             ContextInfo contextInfo = new ContextInfo(intValue);
             Firewall firewall = this.mFirewallService;
-            List<DomainFilterRule> domainFilterRules = firewall.getDomainFilterRules(contextInfo, null, -1);
+            List<DomainFilterRule> domainFilterRules =
+                    firewall.getDomainFilterRules(contextInfo, null, -1);
             if (firewall.isDomainFilterOnIptablesEnabled(contextInfo)) {
                 addDomainRules(contextInfo, domainFilterRules);
                 z = true;
@@ -636,10 +793,14 @@ public final class FirewallRulesApplier {
             for (DomainFilterRule domainFilterRule : domainFilterRules) {
                 String packageName = domainFilterRule.getApplication().getPackageName();
                 String signature = domainFilterRule.getApplication().getSignature();
-                if (hasDenyRuleInDatabase(intValue, packageName) && !arrayList.contains(packageName)) {
+                if (hasDenyRuleInDatabase(intValue, packageName)
+                        && !arrayList.contains(packageName)) {
                     arrayList.add(packageName);
                     if (blockPort53(new AppIdentity(packageName, signature), contextInfo, true)) {
-                        DualAppManagerService$$ExternalSyntheticOutline0.m("blockPort53() - port53 rule added successfully. Package: ", packageName, "FirewallRulesApplier");
+                        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                "blockPort53() - port53 rule added successfully. Package: ",
+                                packageName,
+                                "FirewallRulesApplier");
                     }
                 }
             }
@@ -659,19 +820,30 @@ public final class FirewallRulesApplier {
                 Firewall firewall = this.mFirewallService;
                 FirewallRule[] rules = firewall.getRules(contextInfo, 15, null);
                 for (FirewallRule firewallRule : rules) {
-                    if (FirewallUtils.verifyPackageName(UserHandle.getUserId(contextInfo.mCallerUid), firewallRule.getApplication().getPackageName())) {
+                    if (FirewallUtils.verifyPackageName(
+                            UserHandle.getUserId(contextInfo.mCallerUid),
+                            firewallRule.getApplication().getPackageName())) {
                         if (!FirewallRule.Status.DISABLED.equals(firewallRule.getStatus())) {
-                            FirewallResponse firewallResponse = enableOrDisableIptablesRule(new FirewallRule[]{firewallRule}, true, contextInfo, true, true)[0];
+                            FirewallResponse firewallResponse =
+                                    enableOrDisableIptablesRule(
+                                            new FirewallRule[] {firewallRule},
+                                            true,
+                                            contextInfo,
+                                            true,
+                                            true)[0];
                         }
                         if (Firewall.shouldApplyIcmpAllowRule(firewallRule)) {
                             addOrRemoveIcmpAllowRule(true);
                         }
                     } else {
-                        Log.i("FirewallRulesApplier", "reloadIptablesRules() - Package not installed");
+                        Log.i(
+                                "FirewallRulesApplier",
+                                "reloadIptablesRules() - Package not installed");
                     }
                 }
                 if (Firewall.shouldApplyExemptRules(rules)) {
-                    firewall.applyExemptRules(contextInfo, UserHandle.getUserId(contextInfo.mCallerUid));
+                    firewall.applyExemptRules(
+                            contextInfo, UserHandle.getUserId(contextInfo.mCallerUid));
                 }
             }
         }
@@ -686,12 +858,17 @@ public final class FirewallRulesApplier {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.knox.net.firewall.FirewallResponse removeDomainRules(com.samsung.android.knox.ContextInfo r10, java.util.List r11, java.util.List r12) {
+    public final com.samsung.android.knox.net.firewall.FirewallResponse removeDomainRules(
+            com.samsung.android.knox.ContextInfo r10, java.util.List r11, java.util.List r12) {
         /*
             Method dump skipped, instructions count: 268
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.firewall.FirewallRulesApplier.removeDomainRules(com.samsung.android.knox.ContextInfo, java.util.List, java.util.List):com.samsung.android.knox.net.firewall.FirewallResponse");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.firewall.FirewallRulesApplier.removeDomainRules(com.samsung.android.knox.ContextInfo,"
+                    + " java.util.List,"
+                    + " java.util.List):com.samsung.android.knox.net.firewall.FirewallResponse");
     }
 
     public final void removeIptablesChains(Integer num) {
@@ -754,7 +931,12 @@ public final class FirewallRulesApplier {
             str2 = runKnoxFirewallRulesCommand;
             Log.d("FirewallRulesApplier", "Run cmd: ".concat(str2));
             if (runKnoxFirewallRulesCommand != null && !runKnoxFirewallRulesCommand.isEmpty()) {
-                Log.e("FirewallRulesApplier", "Failed to run command. Result=" + runKnoxFirewallRulesCommand + "\ncommand=" + str);
+                Log.e(
+                        "FirewallRulesApplier",
+                        "Failed to run command. Result="
+                                + runKnoxFirewallRulesCommand
+                                + "\ncommand="
+                                + str);
                 return false;
             }
             return true;
@@ -762,13 +944,19 @@ public final class FirewallRulesApplier {
         str2 = "OK";
         Log.d("FirewallRulesApplier", "Run cmd: ".concat(str2));
         if (runKnoxFirewallRulesCommand != null) {
-            Log.e("FirewallRulesApplier", "Failed to run command. Result=" + runKnoxFirewallRulesCommand + "\ncommand=" + str);
+            Log.e(
+                    "FirewallRulesApplier",
+                    "Failed to run command. Result="
+                            + runKnoxFirewallRulesCommand
+                            + "\ncommand="
+                            + str);
             return false;
         }
         return true;
     }
 
-    public final synchronized boolean runShellCommand(Firewall.AddressType addressType, String str) {
+    public final synchronized boolean runShellCommand(
+            Firewall.AddressType addressType, String str) {
         return runShellCommand(Firewall.AddressType.IPV4.equals(addressType) ? 4 : 6, str);
     }
 
@@ -804,7 +992,8 @@ public final class FirewallRulesApplier {
         }
     }
 
-    public final void updateStatusOnDB(FirewallRule firewallRule, FirewallRule.Status status, ContextInfo contextInfo) {
+    public final void updateStatusOnDB(
+            FirewallRule firewallRule, FirewallRule.Status status, ContextInfo contextInfo) {
         ContentValues contentValues = new ContentValues();
         int i = contextInfo.mCallerUid;
         if (i != 1000) {
@@ -813,7 +1002,10 @@ public final class FirewallRulesApplier {
         ContentValues contentValues2 = new ContentValues();
         contentValues2.put(Constants.JSON_CLIENT_DATA_STATUS, status.toString());
         contentValues.put("ruleType", firewallRule.getRuleType().name());
-        int i2 = AnonymousClass1.$SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType[firewallRule.getRuleType().ordinal()];
+        int i2 =
+                AnonymousClass1
+                        .$SwitchMap$com$samsung$android$knox$net$firewall$FirewallRule$RuleType[
+                        firewallRule.getRuleType().ordinal()];
         EdmStorageProvider edmStorageProvider = this.mEdmStorageProvider;
         if (i2 == 1) {
             contentValues.put("ipAddress", firewallRule.getIpAddress());

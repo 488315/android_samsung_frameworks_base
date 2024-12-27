@@ -7,26 +7,28 @@ import android.os.Parcelable;
 public class SemCertByte implements Parcelable {
 
     @Deprecated(forRemoval = true, since = "16.0")
-    public static final Parcelable.Creator<SemCertByte> CREATOR = new Parcelable.Creator<SemCertByte>() { // from class: com.samsung.android.knox.util.SemCertByte.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemCertByte createFromParcel(Parcel source) {
-            return new SemCertByte(source);
-        }
+    public static final Parcelable.Creator<SemCertByte> CREATOR =
+            new Parcelable.Creator<
+                    SemCertByte>() { // from class: com.samsung.android.knox.util.SemCertByte.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemCertByte createFromParcel(Parcel source) {
+                    return new SemCertByte(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemCertByte[] newArray(int size) {
-            return null;
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemCertByte[] newArray(int size) {
+                    return null;
+                }
+            };
+
     public byte[] caCertBytes;
     public int caSize;
     public byte[] certBytes;
     public int certsize;
 
-    public SemCertByte() {
-    }
+    public SemCertByte() {}
 
     public SemCertByte(Parcel source) {
         this.certsize = source.readInt();

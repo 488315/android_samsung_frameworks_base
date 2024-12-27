@@ -4,9 +4,11 @@ import android.hardware.biometrics.face.V1_0.OptionalBool$$ExternalSyntheticOutl
 import android.util.Slog;
 import android.util.SparseArray;
 import android.view.Display;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.display.mode.SupportedRefreshRatesVote;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -57,9 +59,15 @@ public final class VoteSummary {
             this.height = -1;
             int i3 = 0;
             for (Display.Mode mode2 : modeArr) {
-                if (mode2.getPhysicalWidth() <= i && mode2.getPhysicalHeight() <= i2 && mode2.getPhysicalWidth() >= this.minWidth && mode2.getPhysicalHeight() >= this.minHeight && mode2.getRefreshRate() >= this.minPhysicalRefreshRate - 0.01f && mode2.getRefreshRate() <= this.maxPhysicalRefreshRate + 0.01f) {
+                if (mode2.getPhysicalWidth() <= i
+                        && mode2.getPhysicalHeight() <= i2
+                        && mode2.getPhysicalWidth() >= this.minWidth
+                        && mode2.getPhysicalHeight() >= this.minHeight
+                        && mode2.getRefreshRate() >= this.minPhysicalRefreshRate - 0.01f
+                        && mode2.getRefreshRate() <= this.maxPhysicalRefreshRate + 0.01f) {
                     int physicalWidth = mode2.getPhysicalWidth() * mode2.getPhysicalHeight();
-                    if (physicalWidth > i3 || (mode2.getPhysicalWidth() == i && mode2.getPhysicalHeight() == i2)) {
+                    if (physicalWidth > i3
+                            || (mode2.getPhysicalWidth() == i && mode2.getPhysicalHeight() == i2)) {
                         this.width = mode2.getPhysicalWidth();
                         this.height = mode2.getPhysicalHeight();
                         i3 = physicalWidth;
@@ -81,7 +89,14 @@ public final class VoteSummary {
             }
         }
         if (this.mLoggingEnabled) {
-            Slog.i("VoteSummary", "applyVotes for range [" + Vote.priorityToString(i) + ", " + Vote.priorityToString(i2) + "]: " + this);
+            Slog.i(
+                    "VoteSummary",
+                    "applyVotes for range ["
+                            + Vote.priorityToString(i)
+                            + ", "
+                            + Vote.priorityToString(i2)
+                            + "]: "
+                            + this);
         }
     }
 
@@ -117,60 +132,140 @@ public final class VoteSummary {
                 Iterator it = ((HashSet) this.requestedRefreshRates).iterator();
                 while (it.hasNext()) {
                     Float f3 = (Float) it.next();
-                    if (f3.floatValue() < this.minRenderFrameRate || f3.floatValue() > this.maxRenderFrameRate) {
+                    if (f3.floatValue() < this.minRenderFrameRate
+                            || f3.floatValue() > this.maxRenderFrameRate) {
                         if (z) {
-                            Slog.w("VoteSummary", "Requested refreshRate is outside frame rate range: requestedRefreshRates=" + this.requestedRefreshRates + ", requestedRefreshRate=" + f3 + ", minRenderFrameRate=" + this.minRenderFrameRate + ", maxRenderFrameRate=" + this.maxRenderFrameRate);
+                            Slog.w(
+                                    "VoteSummary",
+                                    "Requested refreshRate is outside frame rate range:"
+                                        + " requestedRefreshRates="
+                                            + this.requestedRefreshRates
+                                            + ", requestedRefreshRate="
+                                            + f3
+                                            + ", minRenderFrameRate="
+                                            + this.minRenderFrameRate
+                                            + ", maxRenderFrameRate="
+                                            + this.maxRenderFrameRate);
                         }
                     }
                 }
                 ArrayList arrayList = new ArrayList();
-                boolean z3 = this.appRequestBaseModeRefreshRate > FullScreenMagnificationGestureHandler.MAX_SCALE;
+                boolean z3 =
+                        this.appRequestBaseModeRefreshRate
+                                > FullScreenMagnificationGestureHandler.MAX_SCALE;
                 for (Display.Mode mode : modeArr) {
                     List list2 = this.supportedRefreshRates;
                     if (list2 != null && z2) {
                         Iterator it2 = ((ArrayList) list2).iterator();
                         while (it2.hasNext()) {
-                            SupportedRefreshRatesVote.RefreshRates refreshRates = (SupportedRefreshRatesVote.RefreshRates) it2.next();
-                            if (!equalsWithinFloatTolerance(mode.getRefreshRate(), refreshRates.mPeakRefreshRate) || !equalsWithinFloatTolerance(mode.getVsyncRate(), refreshRates.mVsyncRate)) {
-                            }
+                            SupportedRefreshRatesVote.RefreshRates refreshRates =
+                                    (SupportedRefreshRatesVote.RefreshRates) it2.next();
+                            if (!equalsWithinFloatTolerance(
+                                            mode.getRefreshRate(), refreshRates.mPeakRefreshRate)
+                                    || !equalsWithinFloatTolerance(
+                                            mode.getVsyncRate(), refreshRates.mVsyncRate)) {}
                         }
                         if (z) {
-                            Slog.w("VoteSummary", "Discarding mode " + mode.getModeId() + ", supportedRefreshRates not found: mode.refreshRate=" + mode.getRefreshRate() + ", mode.vsyncRate=" + mode.getVsyncRate() + ", supportedRefreshRates=" + this.supportedRefreshRates);
+                            Slog.w(
+                                    "VoteSummary",
+                                    "Discarding mode "
+                                            + mode.getModeId()
+                                            + ", supportedRefreshRates not found: mode.refreshRate="
+                                            + mode.getRefreshRate()
+                                            + ", mode.vsyncRate="
+                                            + mode.getVsyncRate()
+                                            + ", supportedRefreshRates="
+                                            + this.supportedRefreshRates);
                         }
                         c = 55050;
                     }
                     List list3 = this.supportedModeIds;
                     if (list3 == null || !z2 || list3.contains(Integer.valueOf(mode.getModeId()))) {
-                        if (mode.getPhysicalWidth() == this.width && mode.getPhysicalHeight() == this.height) {
+                        if (mode.getPhysicalWidth() == this.width
+                                && mode.getPhysicalHeight() == this.height) {
                             float refreshRate = mode.getRefreshRate();
                             c = 55050;
-                            if (refreshRate >= this.minPhysicalRefreshRate - 0.01f && refreshRate <= this.maxPhysicalRefreshRate + 0.01f) {
+                            if (refreshRate >= this.minPhysicalRefreshRate - 0.01f
+                                    && refreshRate <= this.maxPhysicalRefreshRate + 0.01f) {
                                 float refreshRate2 = mode.getRefreshRate();
-                                if (this.mSupportsFrameRateOverride || (refreshRate2 >= this.minRenderFrameRate - 0.01f && refreshRate2 <= this.maxRenderFrameRate + 0.01f)) {
+                                if (this.mSupportsFrameRateOverride
+                                        || (refreshRate2 >= this.minRenderFrameRate - 0.01f
+                                                && refreshRate2
+                                                        <= this.maxRenderFrameRate + 0.01f)) {
                                     float refreshRate3 = mode.getRefreshRate();
                                     if (isRenderRateAchievable(refreshRate3)) {
                                         arrayList.add(mode);
-                                        if (equalsWithinFloatTolerance(mode.getRefreshRate(), this.appRequestBaseModeRefreshRate)) {
+                                        if (equalsWithinFloatTolerance(
+                                                mode.getRefreshRate(),
+                                                this.appRequestBaseModeRefreshRate)) {
                                             z3 = false;
                                         }
                                     } else if (z) {
-                                        Slog.w("VoteSummary", "Discarding mode " + mode.getModeId() + ", outside frame rate bounds: minRenderFrameRate=" + this.minRenderFrameRate + ", maxRenderFrameRate=" + this.maxRenderFrameRate + ", modePhysicalRefreshRate=" + refreshRate3);
+                                        Slog.w(
+                                                "VoteSummary",
+                                                "Discarding mode "
+                                                        + mode.getModeId()
+                                                        + ", outside frame rate bounds:"
+                                                        + " minRenderFrameRate="
+                                                        + this.minRenderFrameRate
+                                                        + ", maxRenderFrameRate="
+                                                        + this.maxRenderFrameRate
+                                                        + ", modePhysicalRefreshRate="
+                                                        + refreshRate3);
                                     }
                                 } else if (z) {
-                                    Slog.w("VoteSummary", "Discarding mode " + mode.getModeId() + ", outside render rate bounds: minRenderFrameRate=" + this.minRenderFrameRate + ", maxRenderFrameRate=" + this.maxRenderFrameRate + ", modeRefreshRate=" + refreshRate2);
+                                    Slog.w(
+                                            "VoteSummary",
+                                            "Discarding mode "
+                                                    + mode.getModeId()
+                                                    + ", outside render rate bounds:"
+                                                    + " minRenderFrameRate="
+                                                    + this.minRenderFrameRate
+                                                    + ", maxRenderFrameRate="
+                                                    + this.maxRenderFrameRate
+                                                    + ", modeRefreshRate="
+                                                    + refreshRate2);
                                 }
                             } else if (z) {
-                                Slog.w("VoteSummary", "Discarding mode " + mode.getModeId() + ", outside refresh rate bounds: minPhysicalRefreshRate=" + this.minPhysicalRefreshRate + ", maxPhysicalRefreshRate=" + this.maxPhysicalRefreshRate + ", modeRefreshRate=" + refreshRate);
+                                Slog.w(
+                                        "VoteSummary",
+                                        "Discarding mode "
+                                                + mode.getModeId()
+                                                + ", outside refresh rate bounds:"
+                                                + " minPhysicalRefreshRate="
+                                                + this.minPhysicalRefreshRate
+                                                + ", maxPhysicalRefreshRate="
+                                                + this.maxPhysicalRefreshRate
+                                                + ", modeRefreshRate="
+                                                + refreshRate);
                             }
                         } else {
                             c = 55050;
                             if (z) {
-                                Slog.w("VoteSummary", "Discarding mode " + mode.getModeId() + ", wrong size: desiredWidth=" + this.width + ": desiredHeight=" + this.height + ": actualWidth=" + mode.getPhysicalWidth() + ": actualHeight=" + mode.getPhysicalHeight());
+                                Slog.w(
+                                        "VoteSummary",
+                                        "Discarding mode "
+                                                + mode.getModeId()
+                                                + ", wrong size: desiredWidth="
+                                                + this.width
+                                                + ": desiredHeight="
+                                                + this.height
+                                                + ": actualWidth="
+                                                + mode.getPhysicalWidth()
+                                                + ": actualHeight="
+                                                + mode.getPhysicalHeight());
                             }
                         }
                     } else {
                         if (z) {
-                            Slog.w("VoteSummary", "Discarding mode " + mode.getModeId() + ", supportedMode not found: mode.modeId=" + mode.getModeId() + ", supportedModeIds=" + this.supportedModeIds);
+                            Slog.w(
+                                    "VoteSummary",
+                                    "Discarding mode "
+                                            + mode.getModeId()
+                                            + ", supportedMode not found: mode.modeId="
+                                            + mode.getModeId()
+                                            + ", supportedModeIds="
+                                            + this.supportedModeIds);
                         }
                         c = 55050;
                     }
@@ -181,18 +276,27 @@ public final class VoteSummary {
                 Slog.w("VoteSummary", "Vote summary resulted in empty set (empty supportedModes)");
             }
         } else if (z) {
-            Slog.w("VoteSummary", "Vote summary resulted in empty set (invalid frame rate range): minRenderFrameRate=" + this.minRenderFrameRate + ", maxRenderFrameRate=" + this.maxRenderFrameRate);
+            Slog.w(
+                    "VoteSummary",
+                    "Vote summary resulted in empty set (invalid frame rate range):"
+                        + " minRenderFrameRate="
+                            + this.minRenderFrameRate
+                            + ", maxRenderFrameRate="
+                            + this.maxRenderFrameRate);
         }
         return new ArrayList();
     }
 
     public final boolean isRenderRateAchievable(float f) {
-        return f / ((float) ((int) Math.ceil((double) ((f / this.maxRenderFrameRate) - 0.01f)))) >= this.minRenderFrameRate - 0.01f;
+        return f / ((float) ((int) Math.ceil((double) ((f / this.maxRenderFrameRate) - 0.01f))))
+                >= this.minRenderFrameRate - 0.01f;
     }
 
     public final void limitRefreshRanges(VoteSummary voteSummary) {
-        this.minPhysicalRefreshRate = Math.min(this.minPhysicalRefreshRate, voteSummary.minPhysicalRefreshRate);
-        this.maxPhysicalRefreshRate = Math.max(this.maxPhysicalRefreshRate, voteSummary.maxPhysicalRefreshRate);
+        this.minPhysicalRefreshRate =
+                Math.min(this.minPhysicalRefreshRate, voteSummary.minPhysicalRefreshRate);
+        this.maxPhysicalRefreshRate =
+                Math.max(this.maxPhysicalRefreshRate, voteSummary.maxPhysicalRefreshRate);
         this.minRenderFrameRate = Math.min(this.minRenderFrameRate, voteSummary.minRenderFrameRate);
         this.maxRenderFrameRate = Math.max(this.maxRenderFrameRate, voteSummary.maxRenderFrameRate);
         if (this.mLoggingEnabled) {
@@ -224,8 +328,18 @@ public final class VoteSummary {
         if (f <= FullScreenMagnificationGestureHandler.MAX_SCALE) {
             f = mode.getRefreshRate();
         }
-        if (CoreRune.FW_VRR_POLICY && !CoreRune.FW_VRR_SEAMLESS && i == 0 && !list.isEmpty() && this.appRequestBaseModeRefreshRate == FullScreenMagnificationGestureHandler.MAX_SCALE) {
-            f = ((Display.Mode) list.stream().max(new VoteSummary$$ExternalSyntheticLambda0()).get()).getRefreshRate();
+        if (CoreRune.FW_VRR_POLICY
+                && !CoreRune.FW_VRR_SEAMLESS
+                && i == 0
+                && !list.isEmpty()
+                && this.appRequestBaseModeRefreshRate
+                        == FullScreenMagnificationGestureHandler.MAX_SCALE) {
+            f =
+                    ((Display.Mode)
+                                    list.stream()
+                                            .max(new VoteSummary$$ExternalSyntheticLambda0())
+                                            .get())
+                            .getRefreshRate();
         }
         Iterator it = list.iterator();
         while (it.hasNext()) {

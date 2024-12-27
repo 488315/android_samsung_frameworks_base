@@ -4,12 +4,13 @@ import android.content.pm.ASKSManager;
 import android.content.pm.ApplicationInfo;
 import android.net.LocalSocket;
 import android.net.LocalSocketAddress;
-import android.os.Process;
 import android.util.Log;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.internal.os.Zygote;
 import com.android.internal.os.ZygoteConfig;
+
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -26,7 +27,18 @@ import java.util.UUID;
 
 /* loaded from: classes3.dex */
 public class ZygoteProcess {
-    private static final String[] INVALID_USAP_FLAGS = {"--query-abi-list", "--get-pid", "--preload-default", "--preload-package", "--preload-app", "--start-child-zygote", "--set-api-denylist-exemptions", "--hidden-api-log-sampling-rate", "--hidden-api-statslog-sampling-rate", "--invoke-with"};
+    private static final String[] INVALID_USAP_FLAGS = {
+        "--query-abi-list",
+        "--get-pid",
+        "--preload-default",
+        "--preload-package",
+        "--preload-app",
+        "--start-child-zygote",
+        "--set-api-denylist-exemptions",
+        "--hidden-api-log-sampling-rate",
+        "--hidden-api-statslog-sampling-rate",
+        "--invoke-with"
+    };
     private static final String LOG_TAG = "ZygoteProcess";
     private static final int ZYGOTE_CONNECT_RETRY_DELAY_MS = 50;
     private static final int ZYGOTE_CONNECT_TIMEOUT_MS = 60000;
@@ -52,14 +64,25 @@ public class ZygoteProcess {
         this.mUsapPoolEnabled = false;
         this.mIsFirstPropCheck = true;
         this.mLastPropCheckTimestamp = 0L;
-        this.mZygoteSocketAddress = new LocalSocketAddress(Zygote.PRIMARY_SOCKET_NAME, LocalSocketAddress.Namespace.RESERVED);
-        this.mZygoteSecondarySocketAddress = new LocalSocketAddress(Zygote.SECONDARY_SOCKET_NAME, LocalSocketAddress.Namespace.RESERVED);
-        this.mUsapPoolSocketAddress = new LocalSocketAddress(Zygote.USAP_POOL_PRIMARY_SOCKET_NAME, LocalSocketAddress.Namespace.RESERVED);
-        this.mUsapPoolSecondarySocketAddress = new LocalSocketAddress(Zygote.USAP_POOL_SECONDARY_SOCKET_NAME, LocalSocketAddress.Namespace.RESERVED);
+        this.mZygoteSocketAddress =
+                new LocalSocketAddress(
+                        Zygote.PRIMARY_SOCKET_NAME, LocalSocketAddress.Namespace.RESERVED);
+        this.mZygoteSecondarySocketAddress =
+                new LocalSocketAddress(
+                        Zygote.SECONDARY_SOCKET_NAME, LocalSocketAddress.Namespace.RESERVED);
+        this.mUsapPoolSocketAddress =
+                new LocalSocketAddress(
+                        Zygote.USAP_POOL_PRIMARY_SOCKET_NAME,
+                        LocalSocketAddress.Namespace.RESERVED);
+        this.mUsapPoolSecondarySocketAddress =
+                new LocalSocketAddress(
+                        Zygote.USAP_POOL_SECONDARY_SOCKET_NAME,
+                        LocalSocketAddress.Namespace.RESERVED);
         this.mUsapPoolSupported = true;
     }
 
-    public ZygoteProcess(LocalSocketAddress primarySocketAddress, LocalSocketAddress secondarySocketAddress) {
+    public ZygoteProcess(
+            LocalSocketAddress primarySocketAddress, LocalSocketAddress secondarySocketAddress) {
         this.mLock = new Object();
         this.mApiDenylistExemptions = Collections.emptyList();
         this.mUsapPoolEnabled = false;
@@ -85,7 +108,13 @@ public class ZygoteProcess {
         private final LocalSocket mZygoteSessionSocket;
         final LocalSocketAddress mZygoteSocketAddress;
 
-        private ZygoteState(LocalSocketAddress zygoteSocketAddress, LocalSocketAddress usapSocketAddress, LocalSocket zygoteSessionSocket, DataInputStream zygoteInputStream, BufferedWriter zygoteOutputWriter, List<String> abiList) {
+        private ZygoteState(
+                LocalSocketAddress zygoteSocketAddress,
+                LocalSocketAddress usapSocketAddress,
+                LocalSocket zygoteSessionSocket,
+                DataInputStream zygoteInputStream,
+                BufferedWriter zygoteOutputWriter,
+                List<String> abiList) {
             this.mZygoteSocketAddress = zygoteSocketAddress;
             this.mUsapSocketAddress = usapSocketAddress;
             this.mZygoteSessionSocket = zygoteSessionSocket;
@@ -94,16 +123,27 @@ public class ZygoteProcess {
             this.mAbiList = abiList;
         }
 
-        static ZygoteState connect(LocalSocketAddress zygoteSocketAddress, LocalSocketAddress usapSocketAddress) throws IOException {
+        static ZygoteState connect(
+                LocalSocketAddress zygoteSocketAddress, LocalSocketAddress usapSocketAddress)
+                throws IOException {
             LocalSocket zygoteSessionSocket = new LocalSocket();
             if (zygoteSocketAddress == null) {
                 throw new IllegalArgumentException("zygoteSocketAddress can't be null");
             }
             try {
                 zygoteSessionSocket.connect(zygoteSocketAddress);
-                DataInputStream zygoteInputStream = new DataInputStream(zygoteSessionSocket.getInputStream());
-                BufferedWriter zygoteOutputWriter = new BufferedWriter(new OutputStreamWriter(zygoteSessionSocket.getOutputStream()), 256);
-                return new ZygoteState(zygoteSocketAddress, usapSocketAddress, zygoteSessionSocket, zygoteInputStream, zygoteOutputWriter, ZygoteProcess.getAbiList(zygoteOutputWriter, zygoteInputStream));
+                DataInputStream zygoteInputStream =
+                        new DataInputStream(zygoteSessionSocket.getInputStream());
+                BufferedWriter zygoteOutputWriter =
+                        new BufferedWriter(
+                                new OutputStreamWriter(zygoteSessionSocket.getOutputStream()), 256);
+                return new ZygoteState(
+                        zygoteSocketAddress,
+                        usapSocketAddress,
+                        zygoteSessionSocket,
+                        zygoteInputStream,
+                        zygoteOutputWriter,
+                        ZygoteProcess.getAbiList(zygoteOutputWriter, zygoteInputStream));
             } catch (IOException ex) {
                 try {
                     zygoteSessionSocket.close();
@@ -138,12 +178,59 @@ public class ZygoteProcess {
         }
     }
 
-    public final Process.ProcessStartResult start(String processClass, String niceName, int uid, int gid, int[] gids, int runtimeFlags, int mountExternal, int targetSdkVersion, String seInfo, String abi, String instructionSet, String appDataDir, String invokeWith, String packageName, int zygotePolicyFlags, boolean isTopApp, long[] disabledCompatChanges, Map<String, Pair<String, Long>> pkgDataInfoMap, Map<String, Pair<String, Long>> allowlistedDataInfoList, boolean bindMountAppsData, boolean bindMountAppStorageDirs, boolean bindOverrideSysprops, String[] zygoteArgs) {
+    public final Process.ProcessStartResult start(
+            String processClass,
+            String niceName,
+            int uid,
+            int gid,
+            int[] gids,
+            int runtimeFlags,
+            int mountExternal,
+            int targetSdkVersion,
+            String seInfo,
+            String abi,
+            String instructionSet,
+            String appDataDir,
+            String invokeWith,
+            String packageName,
+            int zygotePolicyFlags,
+            boolean isTopApp,
+            long[] disabledCompatChanges,
+            Map<String, Pair<String, Long>> pkgDataInfoMap,
+            Map<String, Pair<String, Long>> allowlistedDataInfoList,
+            boolean bindMountAppsData,
+            boolean bindMountAppStorageDirs,
+            boolean bindOverrideSysprops,
+            String[] zygoteArgs) {
         if (fetchUsapPoolEnabledPropWithMinInterval()) {
             informZygotesOfUsapPoolStatus();
         }
         try {
-            return startViaZygote(processClass, niceName, uid, gid, gids, runtimeFlags, mountExternal, targetSdkVersion, seInfo, abi, instructionSet, appDataDir, invokeWith, false, packageName, zygotePolicyFlags, isTopApp, disabledCompatChanges, pkgDataInfoMap, allowlistedDataInfoList, bindMountAppsData, bindMountAppStorageDirs, bindOverrideSysprops, zygoteArgs);
+            return startViaZygote(
+                    processClass,
+                    niceName,
+                    uid,
+                    gid,
+                    gids,
+                    runtimeFlags,
+                    mountExternal,
+                    targetSdkVersion,
+                    seInfo,
+                    abi,
+                    instructionSet,
+                    appDataDir,
+                    invokeWith,
+                    false,
+                    packageName,
+                    zygotePolicyFlags,
+                    isTopApp,
+                    disabledCompatChanges,
+                    pkgDataInfoMap,
+                    allowlistedDataInfoList,
+                    bindMountAppsData,
+                    bindMountAppStorageDirs,
+                    bindOverrideSysprops,
+                    zygoteArgs);
         } catch (ZygoteStartFailedEx ex) {
             Log.e(LOG_TAG, "Starting VM process through Zygote failed");
             throw new RuntimeException("Starting VM process through Zygote failed", ex);
@@ -151,7 +238,8 @@ public class ZygoteProcess {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static List<String> getAbiList(BufferedWriter writer, DataInputStream inputStream) throws IOException {
+    public static List<String> getAbiList(BufferedWriter writer, DataInputStream inputStream)
+            throws IOException {
         writer.write("1");
         writer.newLine();
         writer.write("--query-abi-list");
@@ -164,7 +252,9 @@ public class ZygoteProcess {
         return Arrays.asList(rawList.split(","));
     }
 
-    private Process.ProcessStartResult zygoteSendArgsAndGetResult(ZygoteState zygoteState, int zygotePolicyFlags, ArrayList<String> args) throws ZygoteStartFailedEx {
+    private Process.ProcessStartResult zygoteSendArgsAndGetResult(
+            ZygoteState zygoteState, int zygotePolicyFlags, ArrayList<String> args)
+            throws ZygoteStartFailedEx {
         Iterator<String> it = args.iterator();
         while (it.hasNext()) {
             String arg = it.next();
@@ -183,13 +273,16 @@ public class ZygoteProcess {
             try {
                 return attemptUsapSendArgsAndGetResult(zygoteState, msgStr);
             } catch (IOException ex) {
-                Log.e(LOG_TAG, "IO Exception while communicating with USAP pool - " + ex.getMessage());
+                Log.e(
+                        LOG_TAG,
+                        "IO Exception while communicating with USAP pool - " + ex.getMessage());
             }
         }
         return attemptZygoteSendArgsAndGetResult(zygoteState, msgStr);
     }
 
-    private Process.ProcessStartResult attemptZygoteSendArgsAndGetResult(ZygoteState zygoteState, String msgStr) throws ZygoteStartFailedEx {
+    private Process.ProcessStartResult attemptZygoteSendArgsAndGetResult(
+            ZygoteState zygoteState, String msgStr) throws ZygoteStartFailedEx {
         try {
             BufferedWriter zygoteWriter = zygoteState.mZygoteOutputWriter;
             DataInputStream zygoteInputStream = zygoteState.mZygoteInputStream;
@@ -209,10 +302,13 @@ public class ZygoteProcess {
         }
     }
 
-    private Process.ProcessStartResult attemptUsapSendArgsAndGetResult(ZygoteState zygoteState, String msgStr) throws ZygoteStartFailedEx, IOException {
+    private Process.ProcessStartResult attemptUsapSendArgsAndGetResult(
+            ZygoteState zygoteState, String msgStr) throws ZygoteStartFailedEx, IOException {
         LocalSocket usapSessionSocket = zygoteState.getUsapSessionSocket();
         try {
-            BufferedWriter usapWriter = new BufferedWriter(new OutputStreamWriter(usapSessionSocket.getOutputStream()), 256);
+            BufferedWriter usapWriter =
+                    new BufferedWriter(
+                            new OutputStreamWriter(usapSessionSocket.getOutputStream()), 256);
             DataInputStream usapReader = new DataInputStream(usapSessionSocket.getInputStream());
             usapWriter.write(msgStr);
             usapWriter.flush();
@@ -239,7 +335,10 @@ public class ZygoteProcess {
     }
 
     private boolean shouldAttemptUsapLaunch(int zygotePolicyFlags, ArrayList<String> args) {
-        return this.mUsapPoolSupported && this.mUsapPoolEnabled && policySpecifiesUsapPoolLaunch(zygotePolicyFlags) && commandSupportedByUsap(args);
+        return this.mUsapPoolSupported
+                && this.mUsapPoolEnabled
+                && policySpecifiesUsapPoolLaunch(zygotePolicyFlags)
+                && commandSupportedByUsap(args);
     }
 
     private static boolean policySpecifiesUsapPoolLaunch(int zygotePolicyFlags) {
@@ -255,14 +354,40 @@ public class ZygoteProcess {
                     return false;
                 }
             }
-            if (flag.startsWith("--nice-name=") && Zygote.getWrapProperty(flag.substring(12)) != null) {
+            if (flag.startsWith("--nice-name=")
+                    && Zygote.getWrapProperty(flag.substring(12)) != null) {
                 return false;
             }
         }
         return true;
     }
 
-    private Process.ProcessStartResult startViaZygote(String processClass, String niceName, int uid, int gid, int[] gids, int runtimeFlags, int mountExternal, int targetSdkVersion, String seInfo, String abi, String instructionSet, String appDataDir, String invokeWith, boolean startChildZygote, String packageName, int zygotePolicyFlags, boolean isTopApp, long[] disabledCompatChanges, Map<String, Pair<String, Long>> pkgDataInfoMap, Map<String, Pair<String, Long>> allowlistedDataInfoList, boolean bindMountAppsData, boolean bindMountAppStorageDirs, boolean bindMountOverrideSysprops, String[] extraArgs) throws ZygoteStartFailedEx {
+    private Process.ProcessStartResult startViaZygote(
+            String processClass,
+            String niceName,
+            int uid,
+            int gid,
+            int[] gids,
+            int runtimeFlags,
+            int mountExternal,
+            int targetSdkVersion,
+            String seInfo,
+            String abi,
+            String instructionSet,
+            String appDataDir,
+            String invokeWith,
+            boolean startChildZygote,
+            String packageName,
+            int zygotePolicyFlags,
+            boolean isTopApp,
+            long[] disabledCompatChanges,
+            Map<String, Pair<String, Long>> pkgDataInfoMap,
+            Map<String, Pair<String, Long>> allowlistedDataInfoList,
+            boolean bindMountAppsData,
+            boolean bindMountAppStorageDirs,
+            boolean bindMountOverrideSysprops,
+            String[] extraArgs)
+            throws ZygoteStartFailedEx {
         byte[] aasaSeInfo;
         int sz;
         ArrayList<String> argsForZygote = new ArrayList<>();
@@ -347,7 +472,8 @@ public class ZygoteProcess {
             sb3.append(Zygote.ALLOWLISTED_DATA_INFO_MAP);
             sb3.append("=");
             boolean started2 = false;
-            for (Map.Entry<String, Pair<String, Long>> entry2 : allowlistedDataInfoList.entrySet()) {
+            for (Map.Entry<String, Pair<String, Long>> entry2 :
+                    allowlistedDataInfoList.entrySet()) {
                 if (started2) {
                     sb3.append(',');
                 }
@@ -388,8 +514,10 @@ public class ZygoteProcess {
         synchronized (this.mLock) {
             try {
                 try {
-                    if (ASKSManager.hasBlockPolicy() && ASKSManager.isBlockTarget(uid, packageName)) {
-                        throw new ZygoteStartFailedEx("should be blocked by signaficant reasons - " + packageName);
+                    if (ASKSManager.hasBlockPolicy()
+                            && ASKSManager.isBlockTarget(uid, packageName)) {
+                        throw new ZygoteStartFailedEx(
+                                "should be blocked by signaficant reasons - " + packageName);
                     }
                     if (ASKSManager.isRestrictedTarget(niceName, ASKSManager.TYPE_DENY)) {
                         try {
@@ -398,7 +526,8 @@ public class ZygoteProcess {
                             aasaSeInfo = null;
                         }
                         if (aasaSeInfo != null && "aasa_blocked".equals(new String(aasaSeInfo))) {
-                            throw new ZygoteStartFailedEx("should be restricted by signaficant reasons - " + packageName);
+                            throw new ZygoteStartFailedEx(
+                                    "should be restricted by signaficant reasons - " + packageName);
                         }
                     }
                 } catch (Throwable th) {
@@ -408,7 +537,9 @@ public class ZygoteProcess {
                 th = th2;
             }
             try {
-                Process.ProcessStartResult result = zygoteSendArgsAndGetResult(openZygoteSocketIfNeeded(abi), zygotePolicyFlags, argsForZygote);
+                Process.ProcessStartResult result =
+                        zygoteSendArgsAndGetResult(
+                                openZygoteSocketIfNeeded(abi), zygotePolicyFlags, argsForZygote);
                 if (ASKSManager.isRestrictedTarget(niceName, ASKSManager.TYPE_REVOKE)) {
                     ASKSManager.addPackageWithPid(result.pid, niceName);
                 }
@@ -549,7 +680,8 @@ public class ZygoteProcess {
             }
         }
         try {
-            state.mZygoteOutputWriter.write(Integer.toString(this.mApiDenylistExemptions.size() + 1));
+            state.mZygoteOutputWriter.write(
+                    Integer.toString(this.mApiDenylistExemptions.size() + 1));
             state.mZygoteOutputWriter.newLine();
             state.mZygoteOutputWriter.write("--set-api-denylist-exemptions");
             state.mZygoteOutputWriter.newLine();
@@ -577,7 +709,8 @@ public class ZygoteProcess {
         try {
             state.mZygoteOutputWriter.write(Integer.toString(1));
             state.mZygoteOutputWriter.newLine();
-            state.mZygoteOutputWriter.write("--hidden-api-log-sampling-rate=" + this.mHiddenApiAccessLogSampleRate);
+            state.mZygoteOutputWriter.write(
+                    "--hidden-api-log-sampling-rate=" + this.mHiddenApiAccessLogSampleRate);
             state.mZygoteOutputWriter.newLine();
             state.mZygoteOutputWriter.flush();
             int status = state.mZygoteInputStream.readInt();
@@ -596,12 +729,16 @@ public class ZygoteProcess {
         try {
             state.mZygoteOutputWriter.write(Integer.toString(1));
             state.mZygoteOutputWriter.newLine();
-            state.mZygoteOutputWriter.write("--hidden-api-statslog-sampling-rate=" + this.mHiddenApiAccessStatslogSampleRate);
+            state.mZygoteOutputWriter.write(
+                    "--hidden-api-statslog-sampling-rate="
+                            + this.mHiddenApiAccessStatslogSampleRate);
             state.mZygoteOutputWriter.newLine();
             state.mZygoteOutputWriter.flush();
             int status = state.mZygoteInputStream.readInt();
             if (status != 0) {
-                Slog.e(LOG_TAG, "Failed to set hidden API statslog sampling rate; status " + status);
+                Slog.e(
+                        LOG_TAG,
+                        "Failed to set hidden API statslog sampling rate; status " + status);
             }
         } catch (IOException ioe) {
             Slog.e(LOG_TAG, "Failed to set hidden API statslog sampling rate", ioe);
@@ -610,7 +747,8 @@ public class ZygoteProcess {
 
     private void attemptConnectionToPrimaryZygote() throws IOException {
         if (this.primaryZygoteState == null || this.primaryZygoteState.isClosed()) {
-            this.primaryZygoteState = ZygoteState.connect(this.mZygoteSocketAddress, this.mUsapPoolSocketAddress);
+            this.primaryZygoteState =
+                    ZygoteState.connect(this.mZygoteSocketAddress, this.mUsapPoolSocketAddress);
             maybeSetApiDenylistExemptions(this.primaryZygoteState, false);
             maybeSetHiddenApiAccessLogSampleRate(this.primaryZygoteState);
         }
@@ -618,7 +756,10 @@ public class ZygoteProcess {
 
     private void attemptConnectionToSecondaryZygote() throws IOException {
         if (this.secondaryZygoteState == null || this.secondaryZygoteState.isClosed()) {
-            this.secondaryZygoteState = ZygoteState.connect(this.mZygoteSecondarySocketAddress, this.mUsapPoolSecondarySocketAddress);
+            this.secondaryZygoteState =
+                    ZygoteState.connect(
+                            this.mZygoteSecondarySocketAddress,
+                            this.mUsapPoolSecondarySocketAddress);
             maybeSetApiDenylistExemptions(this.secondaryZygoteState, false);
             maybeSetHiddenApiAccessLogSampleRate(this.secondaryZygoteState);
         }
@@ -642,7 +783,8 @@ public class ZygoteProcess {
         }
     }
 
-    public boolean preloadApp(ApplicationInfo appInfo, String abi) throws ZygoteStartFailedEx, IOException {
+    public boolean preloadApp(ApplicationInfo appInfo, String abi)
+            throws ZygoteStartFailedEx, IOException {
         boolean z;
         synchronized (this.mLock) {
             ZygoteState state = openZygoteSocketIfNeeded(abi);
@@ -662,7 +804,9 @@ public class ZygoteProcess {
         return z;
     }
 
-    public boolean preloadPackageForAbi(String packagePath, String libsPath, String libFileName, String cacheKey, String abi) throws ZygoteStartFailedEx, IOException {
+    public boolean preloadPackageForAbi(
+            String packagePath, String libsPath, String libFileName, String cacheKey, String abi)
+            throws ZygoteStartFailedEx, IOException {
         boolean z;
         synchronized (this.mLock) {
             ZygoteState state = openZygoteSocketIfNeeded(abi);
@@ -699,7 +843,8 @@ public class ZygoteProcess {
     }
 
     public static void waitForConnectionToZygote(String zygoteSocketName) {
-        LocalSocketAddress zygoteSocketAddress = new LocalSocketAddress(zygoteSocketName, LocalSocketAddress.Namespace.RESERVED);
+        LocalSocketAddress zygoteSocketAddress =
+                new LocalSocketAddress(zygoteSocketName, LocalSocketAddress.Namespace.RESERVED);
         waitForConnectionToZygote(zygoteSocketAddress);
     }
 
@@ -710,14 +855,18 @@ public class ZygoteProcess {
                 zs.close();
                 return;
             } catch (IOException ioe) {
-                Log.w(LOG_TAG, "Got error connecting to zygote, retrying. msg= " + ioe.getMessage());
+                Log.w(
+                        LOG_TAG,
+                        "Got error connecting to zygote, retrying. msg= " + ioe.getMessage());
                 try {
                     Thread.sleep(50L);
                 } catch (InterruptedException e) {
                 }
             }
         }
-        Slog.wtf(LOG_TAG, "Failed to connect to Zygote through socket " + zygoteSocketAddress.getName());
+        Slog.wtf(
+                LOG_TAG,
+                "Failed to connect to Zygote through socket " + zygoteSocketAddress.getName());
     }
 
     private void informZygotesOfUsapPoolStatus() {
@@ -736,7 +885,8 @@ public class ZygoteProcess {
                                 this.secondaryZygoteState.mZygoteOutputWriter.flush();
                                 this.secondaryZygoteState.mZygoteInputStream.readInt();
                             } catch (IOException ioe) {
-                                throw new IllegalStateException("USAP pool state change cause an irrecoverable error", ioe);
+                                throw new IllegalStateException(
+                                        "USAP pool state change cause an irrecoverable error", ioe);
                             }
                         } catch (IOException e) {
                         }
@@ -744,11 +894,14 @@ public class ZygoteProcess {
                     try {
                         this.primaryZygoteState.mZygoteInputStream.readInt();
                     } catch (IOException ioe2) {
-                        throw new IllegalStateException("USAP pool state change cause an irrecoverable error", ioe2);
+                        throw new IllegalStateException(
+                                "USAP pool state change cause an irrecoverable error", ioe2);
                     }
                 } catch (IOException ioe3) {
                     this.mUsapPoolEnabled = !this.mUsapPoolEnabled;
-                    Log.w(LOG_TAG, "Failed to inform zygotes of USAP pool status: " + ioe3.getMessage());
+                    Log.w(
+                            LOG_TAG,
+                            "Failed to inform zygotes of USAP pool status: " + ioe3.getMessage());
                 }
             } catch (Throwable ioe4) {
                 throw ioe4;
@@ -756,11 +909,54 @@ public class ZygoteProcess {
         }
     }
 
-    public ChildZygoteProcess startChildZygote(String processClass, String niceName, int uid, int gid, int[] gids, int runtimeFlags, String seInfo, String abi, String acceptedAbiList, String instructionSet, int uidRangeStart, int uidRangeEnd) {
-        LocalSocketAddress serverAddress = new LocalSocketAddress(processClass + "/" + UUID.randomUUID().toString());
-        String[] extraArgs = {Zygote.CHILD_ZYGOTE_SOCKET_NAME_ARG + serverAddress.getName(), Zygote.CHILD_ZYGOTE_ABI_LIST_ARG + acceptedAbiList, Zygote.CHILD_ZYGOTE_UID_RANGE_START + uidRangeStart, Zygote.CHILD_ZYGOTE_UID_RANGE_END + uidRangeEnd};
+    public ChildZygoteProcess startChildZygote(
+            String processClass,
+            String niceName,
+            int uid,
+            int gid,
+            int[] gids,
+            int runtimeFlags,
+            String seInfo,
+            String abi,
+            String acceptedAbiList,
+            String instructionSet,
+            int uidRangeStart,
+            int uidRangeEnd) {
+        LocalSocketAddress serverAddress =
+                new LocalSocketAddress(processClass + "/" + UUID.randomUUID().toString());
+        String[] extraArgs = {
+            Zygote.CHILD_ZYGOTE_SOCKET_NAME_ARG + serverAddress.getName(),
+            Zygote.CHILD_ZYGOTE_ABI_LIST_ARG + acceptedAbiList,
+            Zygote.CHILD_ZYGOTE_UID_RANGE_START + uidRangeStart,
+            Zygote.CHILD_ZYGOTE_UID_RANGE_END + uidRangeEnd
+        };
         try {
-            Process.ProcessStartResult result = startViaZygote(processClass, niceName, uid, gid, gids, runtimeFlags, 0, 0, seInfo, abi, instructionSet, null, null, true, null, 4, false, null, null, null, true, false, false, extraArgs);
+            Process.ProcessStartResult result =
+                    startViaZygote(
+                            processClass,
+                            niceName,
+                            uid,
+                            gid,
+                            gids,
+                            runtimeFlags,
+                            0,
+                            0,
+                            seInfo,
+                            abi,
+                            instructionSet,
+                            null,
+                            null,
+                            true,
+                            null,
+                            4,
+                            false,
+                            null,
+                            null,
+                            null,
+                            true,
+                            false,
+                            false,
+                            extraArgs);
             return new ChildZygoteProcess(serverAddress, result.pid);
         } catch (ZygoteStartFailedEx ex) {
             throw new RuntimeException("Starting child-zygote through Zygote failed", ex);

@@ -17,17 +17,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import com.samsung.android.knox.analytics.database.Contract;
+
 import java.util.HashMap;
 import java.util.Map;
 
 @SystemApi
 /* loaded from: classes4.dex */
-public class FindActionModeCallback implements ActionMode.Callback, TextWatcher, View.OnClickListener, WebView.FindListener {
+public class FindActionModeCallback
+        implements ActionMode.Callback, TextWatcher, View.OnClickListener, WebView.FindListener {
     private ActionMode mActionMode;
     private int mActiveMatchIndex;
     private View mCustomView;
@@ -42,7 +45,8 @@ public class FindActionModeCallback implements ActionMode.Callback, TextWatcher,
     private Point mGlobalVisibleOffset = new Point();
 
     public FindActionModeCallback(Context context) {
-        this.mCustomView = LayoutInflater.from(context).inflate(R.layout.webview_find, (ViewGroup) null);
+        this.mCustomView =
+                LayoutInflater.from(context).inflate(R.layout.webview_find, (ViewGroup) null);
         this.mEditText = (EditText) this.mCustomView.findViewById(16908291);
         this.mEditText.setCustomSelectionActionModeCallback(new NoAction());
         this.mEditText.setOnClickListener(this);
@@ -74,7 +78,8 @@ public class FindActionModeCallback implements ActionMode.Callback, TextWatcher,
     }
 
     @Override // android.webkit.WebView.FindListener
-    public void onFindResultReceived(int activeMatchOrdinal, int numberOfMatches, boolean isDoneCounting) {
+    public void onFindResultReceived(
+            int activeMatchOrdinal, int numberOfMatches, boolean isDoneCounting) {
         if (isDoneCounting) {
             updateMatchCount(activeMatchOrdinal, numberOfMatches, numberOfMatches == 0);
         }
@@ -135,9 +140,13 @@ public class FindActionModeCallback implements ActionMode.Callback, TextWatcher,
             this.mMatches.setText(R.string.no_matches);
         } else {
             Map<String, Object> arguments = new HashMap<>();
-            arguments.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf(this.mActiveMatchIndex + 1));
+            arguments.put(
+                    Contract.Events.Projection.COUNT_ONLY,
+                    Integer.valueOf(this.mActiveMatchIndex + 1));
             arguments.put("total", Integer.valueOf(this.mNumberOfMatches));
-            this.mMatches.lambda$setTextAsync$0(PluralsMessageFormatter.format(this.mResources, arguments, R.string.matches_found));
+            this.mMatches.lambda$setTextAsync$0(
+                    PluralsMessageFormatter.format(
+                            this.mResources, arguments, R.string.matches_found));
         }
         this.mMatches.setVisibility(0);
     }
@@ -196,8 +205,7 @@ public class FindActionModeCallback implements ActionMode.Callback, TextWatcher,
     }
 
     @Override // android.text.TextWatcher
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    }
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
     @Override // android.text.TextWatcher
     public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -205,8 +213,7 @@ public class FindActionModeCallback implements ActionMode.Callback, TextWatcher,
     }
 
     @Override // android.text.TextWatcher
-    public void afterTextChanged(Editable s) {
-    }
+    public void afterTextChanged(Editable s) {}
 
     public int getActionModeGlobalBottom() {
         if (this.mActionMode == null) {
@@ -237,7 +244,6 @@ public class FindActionModeCallback implements ActionMode.Callback, TextWatcher,
         }
 
         @Override // android.view.ActionMode.Callback
-        public void onDestroyActionMode(ActionMode mode) {
-        }
+        public void onDestroyActionMode(ActionMode mode) {}
     }
 }

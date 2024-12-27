@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
 public interface ContentInterface {
-    ContentProviderResult[] applyBatch(String str, ArrayList<ContentProviderOperation> arrayList) throws RemoteException, OperationApplicationException;
+    ContentProviderResult[] applyBatch(String str, ArrayList<ContentProviderOperation> arrayList)
+            throws RemoteException, OperationApplicationException;
 
     int bulkInsert(Uri uri, ContentValues[] contentValuesArr) throws RemoteException;
 
@@ -30,15 +32,21 @@ public interface ContentInterface {
 
     Uri insert(Uri uri, ContentValues contentValues, Bundle bundle) throws RemoteException;
 
-    AssetFileDescriptor openAssetFile(Uri uri, String str, CancellationSignal cancellationSignal) throws RemoteException, FileNotFoundException;
+    AssetFileDescriptor openAssetFile(Uri uri, String str, CancellationSignal cancellationSignal)
+            throws RemoteException, FileNotFoundException;
 
-    ParcelFileDescriptor openFile(Uri uri, String str, CancellationSignal cancellationSignal) throws RemoteException, FileNotFoundException;
+    ParcelFileDescriptor openFile(Uri uri, String str, CancellationSignal cancellationSignal)
+            throws RemoteException, FileNotFoundException;
 
-    AssetFileDescriptor openTypedAssetFile(Uri uri, String str, Bundle bundle, CancellationSignal cancellationSignal) throws RemoteException, FileNotFoundException;
+    AssetFileDescriptor openTypedAssetFile(
+            Uri uri, String str, Bundle bundle, CancellationSignal cancellationSignal)
+            throws RemoteException, FileNotFoundException;
 
-    Cursor query(Uri uri, String[] strArr, Bundle bundle, CancellationSignal cancellationSignal) throws RemoteException;
+    Cursor query(Uri uri, String[] strArr, Bundle bundle, CancellationSignal cancellationSignal)
+            throws RemoteException;
 
-    boolean refresh(Uri uri, Bundle bundle, CancellationSignal cancellationSignal) throws RemoteException;
+    boolean refresh(Uri uri, Bundle bundle, CancellationSignal cancellationSignal)
+            throws RemoteException;
 
     Uri uncanonicalize(Uri uri) throws RemoteException;
 

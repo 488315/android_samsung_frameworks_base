@@ -2,21 +2,28 @@ package android.media.tv;
 
 import android.content.AttributionSource;
 import android.hardware.hdmi.HdmiDeviceInfo;
-import android.media.tv.ITvInputServiceCallback;
-import android.media.tv.ITvInputSessionCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.InputChannel;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface ITvInputService extends IInterface {
-    void createRecordingSession(ITvInputSessionCallback iTvInputSessionCallback, String str, String str2) throws RemoteException;
+    void createRecordingSession(
+            ITvInputSessionCallback iTvInputSessionCallback, String str, String str2)
+            throws RemoteException;
 
-    void createSession(InputChannel inputChannel, ITvInputSessionCallback iTvInputSessionCallback, String str, String str2, AttributionSource attributionSource) throws RemoteException;
+    void createSession(
+            InputChannel inputChannel,
+            ITvInputSessionCallback iTvInputSessionCallback,
+            String str,
+            String str2,
+            AttributionSource attributionSource)
+            throws RemoteException;
 
     List<String> getAvailableExtensionInterfaceNames() throws RemoteException;
 
@@ -40,20 +47,24 @@ public interface ITvInputService extends IInterface {
 
     public static class Default implements ITvInputService {
         @Override // android.media.tv.ITvInputService
-        public void registerCallback(ITvInputServiceCallback callback) throws RemoteException {
-        }
+        public void registerCallback(ITvInputServiceCallback callback) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputService
-        public void unregisterCallback(ITvInputServiceCallback callback) throws RemoteException {
-        }
+        public void unregisterCallback(ITvInputServiceCallback callback) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputService
-        public void createSession(InputChannel channel, ITvInputSessionCallback callback, String inputId, String sessionId, AttributionSource tvAppAttributionSource) throws RemoteException {
-        }
+        public void createSession(
+                InputChannel channel,
+                ITvInputSessionCallback callback,
+                String inputId,
+                String sessionId,
+                AttributionSource tvAppAttributionSource)
+                throws RemoteException {}
 
         @Override // android.media.tv.ITvInputService
-        public void createRecordingSession(ITvInputSessionCallback callback, String inputId, String sessionId) throws RemoteException {
-        }
+        public void createRecordingSession(
+                ITvInputSessionCallback callback, String inputId, String sessionId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ITvInputService
         public List<String> getAvailableExtensionInterfaceNames() throws RemoteException {
@@ -71,24 +82,20 @@ public interface ITvInputService extends IInterface {
         }
 
         @Override // android.media.tv.ITvInputService
-        public void notifyHardwareAdded(TvInputHardwareInfo hardwareInfo) throws RemoteException {
-        }
+        public void notifyHardwareAdded(TvInputHardwareInfo hardwareInfo) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputService
-        public void notifyHardwareRemoved(TvInputHardwareInfo hardwareInfo) throws RemoteException {
-        }
+        public void notifyHardwareRemoved(TvInputHardwareInfo hardwareInfo)
+                throws RemoteException {}
 
         @Override // android.media.tv.ITvInputService
-        public void notifyHdmiDeviceAdded(HdmiDeviceInfo deviceInfo) throws RemoteException {
-        }
+        public void notifyHdmiDeviceAdded(HdmiDeviceInfo deviceInfo) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputService
-        public void notifyHdmiDeviceRemoved(HdmiDeviceInfo deviceInfo) throws RemoteException {
-        }
+        public void notifyHdmiDeviceRemoved(HdmiDeviceInfo deviceInfo) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputService
-        public void notifyHdmiDeviceUpdated(HdmiDeviceInfo deviceInfo) throws RemoteException {
-        }
+        public void notifyHdmiDeviceUpdated(HdmiDeviceInfo deviceInfo) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -96,7 +103,7 @@ public interface ITvInputService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvInputService {
+    public abstract static class Stub extends Binder implements ITvInputService {
         public static final String DESCRIPTOR = "android.media.tv.ITvInputService";
         static final int TRANSACTION_createRecordingSession = 4;
         static final int TRANSACTION_createSession = 3;
@@ -168,7 +175,8 @@ public interface ITvInputService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -178,26 +186,31 @@ public interface ITvInputService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ITvInputServiceCallback _arg0 = ITvInputServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    ITvInputServiceCallback _arg0 =
+                            ITvInputServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallback(_arg0);
                     return true;
                 case 2:
-                    ITvInputServiceCallback _arg02 = ITvInputServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    ITvInputServiceCallback _arg02 =
+                            ITvInputServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCallback(_arg02);
                     return true;
                 case 3:
                     InputChannel _arg03 = (InputChannel) data.readTypedObject(InputChannel.CREATOR);
-                    ITvInputSessionCallback _arg1 = ITvInputSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ITvInputSessionCallback _arg1 =
+                            ITvInputSessionCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg2 = data.readString();
                     String _arg3 = data.readString();
-                    AttributionSource _arg4 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+                    AttributionSource _arg4 =
+                            (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
                     data.enforceNoDataAvail();
                     createSession(_arg03, _arg1, _arg2, _arg3, _arg4);
                     return true;
                 case 4:
-                    ITvInputSessionCallback _arg04 = ITvInputSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ITvInputSessionCallback _arg04 =
+                            ITvInputSessionCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg12 = data.readString();
                     String _arg22 = data.readString();
                     data.enforceNoDataAvail();
@@ -223,27 +236,32 @@ public interface ITvInputService extends IInterface {
                     reply.writeString(_result3);
                     return true;
                 case 8:
-                    TvInputHardwareInfo _arg07 = (TvInputHardwareInfo) data.readTypedObject(TvInputHardwareInfo.CREATOR);
+                    TvInputHardwareInfo _arg07 =
+                            (TvInputHardwareInfo) data.readTypedObject(TvInputHardwareInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifyHardwareAdded(_arg07);
                     return true;
                 case 9:
-                    TvInputHardwareInfo _arg08 = (TvInputHardwareInfo) data.readTypedObject(TvInputHardwareInfo.CREATOR);
+                    TvInputHardwareInfo _arg08 =
+                            (TvInputHardwareInfo) data.readTypedObject(TvInputHardwareInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifyHardwareRemoved(_arg08);
                     return true;
                 case 10:
-                    HdmiDeviceInfo _arg09 = (HdmiDeviceInfo) data.readTypedObject(HdmiDeviceInfo.CREATOR);
+                    HdmiDeviceInfo _arg09 =
+                            (HdmiDeviceInfo) data.readTypedObject(HdmiDeviceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifyHdmiDeviceAdded(_arg09);
                     return true;
                 case 11:
-                    HdmiDeviceInfo _arg010 = (HdmiDeviceInfo) data.readTypedObject(HdmiDeviceInfo.CREATOR);
+                    HdmiDeviceInfo _arg010 =
+                            (HdmiDeviceInfo) data.readTypedObject(HdmiDeviceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifyHdmiDeviceRemoved(_arg010);
                     return true;
                 case 12:
-                    HdmiDeviceInfo _arg011 = (HdmiDeviceInfo) data.readTypedObject(HdmiDeviceInfo.CREATOR);
+                    HdmiDeviceInfo _arg011 =
+                            (HdmiDeviceInfo) data.readTypedObject(HdmiDeviceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifyHdmiDeviceUpdated(_arg011);
                     return true;
@@ -281,7 +299,8 @@ public interface ITvInputService extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputService
-            public void unregisterCallback(ITvInputServiceCallback callback) throws RemoteException {
+            public void unregisterCallback(ITvInputServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -293,7 +312,13 @@ public interface ITvInputService extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputService
-            public void createSession(InputChannel channel, ITvInputSessionCallback callback, String inputId, String sessionId, AttributionSource tvAppAttributionSource) throws RemoteException {
+            public void createSession(
+                    InputChannel channel,
+                    ITvInputSessionCallback callback,
+                    String inputId,
+                    String sessionId,
+                    AttributionSource tvAppAttributionSource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -309,7 +334,9 @@ public interface ITvInputService extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputService
-            public void createRecordingSession(ITvInputSessionCallback callback, String inputId, String sessionId) throws RemoteException {
+            public void createRecordingSession(
+                    ITvInputSessionCallback callback, String inputId, String sessionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -373,7 +400,8 @@ public interface ITvInputService extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputService
-            public void notifyHardwareAdded(TvInputHardwareInfo hardwareInfo) throws RemoteException {
+            public void notifyHardwareAdded(TvInputHardwareInfo hardwareInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -385,7 +413,8 @@ public interface ITvInputService extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputService
-            public void notifyHardwareRemoved(TvInputHardwareInfo hardwareInfo) throws RemoteException {
+            public void notifyHardwareRemoved(TvInputHardwareInfo hardwareInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

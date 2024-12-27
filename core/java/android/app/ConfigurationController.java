@@ -14,7 +14,9 @@ import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.WindowManagerGlobal;
 import android.window.ConfigurationHelper;
+
 import com.samsung.android.core.CompatSandbox;
+
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -33,7 +35,8 @@ class ConfigurationController {
 
     Configuration updatePendingConfiguration(Configuration config) {
         synchronized (this.mResourcesManager) {
-            if (this.mPendingConfiguration != null && !this.mPendingConfiguration.isOtherSeqNewer(config)) {
+            if (this.mPendingConfiguration != null
+                    && !this.mPendingConfiguration.isOtherSeqNewer(config)) {
                 return null;
             }
             this.mPendingConfiguration = config;
@@ -69,7 +72,8 @@ class ConfigurationController {
             this.mCompatConfiguration = new Configuration();
         }
         this.mCompatConfiguration.setTo(this.mConfiguration);
-        if (this.mResourcesManager.applyCompatConfiguration(displayDensity, this.mCompatConfiguration)) {
+        if (this.mResourcesManager.applyCompatConfiguration(
+                displayDensity, this.mCompatConfiguration)) {
             return this.mCompatConfiguration;
         }
         return config;
@@ -95,7 +99,8 @@ class ConfigurationController {
     }
 
     void handleConfigurationChanged(Configuration config, CompatibilityInfo compat) {
-        ClientTransactionListenerController controller = ClientTransactionListenerController.getInstance();
+        ClientTransactionListenerController controller =
+                ClientTransactionListenerController.getInstance();
         Context contextToUpdate = ActivityThread.currentApplication();
         controller.onContextConfigurationPreChanged(contextToUpdate);
         try {
@@ -120,7 +125,8 @@ class ConfigurationController {
             if (config == null) {
                 return;
             }
-            boolean equivalent = this.mConfiguration != null && this.mConfiguration.diffPublicOnly(config) == 0;
+            boolean equivalent =
+                    this.mConfiguration != null && this.mConfiguration.diffPublicOnly(config) == 0;
             Application app = this.mActivityThread.getApplication();
             app.getResources();
             this.mResourcesManager.applyConfigurationToResources(config, compat);
@@ -135,10 +141,12 @@ class ConfigurationController {
                 if ((systemTheme.getChangingConfigurations() & configDiff) != 0) {
                     systemTheme.rebase();
                 }
-                if (systemUiTheme != null && (systemUiTheme.getChangingConfigurations() & configDiff) != 0) {
+                if (systemUiTheme != null
+                        && (systemUiTheme.getChangingConfigurations() & configDiff) != 0) {
                     systemUiTheme.rebase();
                 }
-                ArrayList<ComponentCallbacks2> callbacks = this.mActivityThread.collectComponentCallbacks(false);
+                ArrayList<ComponentCallbacks2> callbacks =
+                        this.mActivityThread.collectComponentCallbacks(false);
                 ConfigurationHelper.freeTextLayoutCachesIfNeeded(configDiff);
                 if (callbacks != null) {
                     int size = callbacks.size();
@@ -154,18 +162,22 @@ class ConfigurationController {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    void performConfigurationChanged(ComponentCallbacks2 componentCallbacks2, Configuration newConfig) {
+    void performConfigurationChanged(
+            ComponentCallbacks2 componentCallbacks2, Configuration newConfig) {
         Configuration contextThemeWrapperOverrideConfig = null;
         if (componentCallbacks2 instanceof ContextThemeWrapper) {
             ContextThemeWrapper contextThemeWrapper = (ContextThemeWrapper) componentCallbacks2;
             contextThemeWrapperOverrideConfig = contextThemeWrapper.getOverrideConfiguration();
         }
-        Configuration configToReport = createNewConfigAndUpdateIfNotNull(newConfig, contextThemeWrapperOverrideConfig);
+        Configuration configToReport =
+                createNewConfigAndUpdateIfNotNull(newConfig, contextThemeWrapperOverrideConfig);
         componentCallbacks2.onConfigurationChanged(configToReport);
     }
 
     void updateDefaultDensity(int densityDpi) {
-        if (!this.mActivityThread.isInDensityCompatMode() && densityDpi != 0 && densityDpi != DisplayMetrics.DENSITY_DEVICE) {
+        if (!this.mActivityThread.isInDensityCompatMode()
+                && densityDpi != 0
+                && densityDpi != DisplayMetrics.DENSITY_DEVICE) {
             DisplayMetrics.DENSITY_DEVICE = densityDpi;
             Bitmap.setDefaultDensity(densityDpi);
         }
@@ -188,12 +200,14 @@ class ConfigurationController {
         LocaleList.setDefault(new LocaleList(bestLocale, newLocaleList));
     }
 
-    static Configuration createNewConfigAndUpdateIfNotNull(Configuration base, Configuration override) {
+    static Configuration createNewConfigAndUpdateIfNotNull(
+            Configuration base, Configuration override) {
         if (override == null) {
             return base;
         }
         Configuration newConfig = new Configuration(base);
-        if (CompatSandbox.updateConfigWithoutWindowConfigurationIfNeeded(newConfig, base, override)) {
+        if (CompatSandbox.updateConfigWithoutWindowConfigurationIfNeeded(
+                newConfig, base, override)) {
             return newConfig;
         }
         newConfig.updateFrom(override);

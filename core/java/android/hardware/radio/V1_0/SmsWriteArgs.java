@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -20,18 +21,29 @@ public final class SmsWriteArgs {
             return false;
         }
         SmsWriteArgs other = (SmsWriteArgs) otherObject;
-        if (this.status == other.status && HidlSupport.deepEquals(this.pdu, other.pdu) && HidlSupport.deepEquals(this.smsc, other.smsc)) {
+        if (this.status == other.status
+                && HidlSupport.deepEquals(this.pdu, other.pdu)
+                && HidlSupport.deepEquals(this.smsc, other.smsc)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.status))), Integer.valueOf(HidlSupport.deepHashCode(this.pdu)), Integer.valueOf(HidlSupport.deepHashCode(this.smsc)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.status))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.pdu)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.smsc)));
     }
 
     public final String toString() {
-        return "{.status = " + SmsWriteArgsStatus.toString(this.status) + ", .pdu = " + this.pdu + ", .smsc = " + this.smsc + "}";
+        return "{.status = "
+                + SmsWriteArgsStatus.toString(this.status)
+                + ", .pdu = "
+                + this.pdu
+                + ", .smsc = "
+                + this.smsc
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -43,7 +55,8 @@ public final class SmsWriteArgs {
         ArrayList<SmsWriteArgs> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SmsWriteArgs _hidl_vec_element = new SmsWriteArgs();
@@ -53,12 +66,15 @@ public final class SmsWriteArgs {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.status = _hidl_blob.getInt32(_hidl_offset + 0);
         this.pdu = _hidl_blob.getString(_hidl_offset + 8);
-        parcel.readEmbeddedBuffer(this.pdu.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.pdu.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
         this.smsc = _hidl_blob.getString(_hidl_offset + 24);
-        parcel.readEmbeddedBuffer(this.smsc.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 24 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.smsc.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 24 + 0, false);
     }
 
     public final void writeToParcel(HwParcel parcel) {
@@ -67,7 +83,8 @@ public final class SmsWriteArgs {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<SmsWriteArgs> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<SmsWriteArgs> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

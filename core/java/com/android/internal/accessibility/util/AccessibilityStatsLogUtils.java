@@ -3,6 +3,7 @@ package com.android.internal.accessibility.util;
 import android.content.ComponentName;
 import android.content.Context;
 import android.provider.Settings;
+
 import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.util.FrameworkStatsLog;
 
@@ -13,27 +14,45 @@ public final class AccessibilityStatsLogUtils {
     public static int ACCESSIBILITY_PRIVACY_WARNING_STATUS_CLICKED = 2;
     public static int ACCESSIBILITY_PRIVACY_WARNING_STATUS_SERVICE_DISABLED = 3;
 
-    private AccessibilityStatsLogUtils() {
+    private AccessibilityStatsLogUtils() {}
+
+    public static void logAccessibilityShortcutActivated(
+            Context context, ComponentName componentName, int shortcutType) {
+        logAccessibilityShortcutActivatedInternal(
+                componentName, convertToLoggingShortcutType(context, shortcutType), 0);
     }
 
-    public static void logAccessibilityShortcutActivated(Context context, ComponentName componentName, int shortcutType) {
-        logAccessibilityShortcutActivatedInternal(componentName, convertToLoggingShortcutType(context, shortcutType), 0);
+    public static void logAccessibilityShortcutActivated(
+            Context context,
+            ComponentName componentName,
+            int shortcutType,
+            boolean serviceEnabled) {
+        logAccessibilityShortcutActivatedInternal(
+                componentName,
+                convertToLoggingShortcutType(context, shortcutType),
+                convertToLoggingServiceStatus(serviceEnabled));
     }
 
-    public static void logAccessibilityShortcutActivated(Context context, ComponentName componentName, int shortcutType, boolean serviceEnabled) {
-        logAccessibilityShortcutActivatedInternal(componentName, convertToLoggingShortcutType(context, shortcutType), convertToLoggingServiceStatus(serviceEnabled));
-    }
-
-    private static void logAccessibilityShortcutActivatedInternal(ComponentName componentName, int loggingShortcutType, int loggingServiceStatus) {
-        FrameworkStatsLog.write(266, componentName.flattenToString(), loggingShortcutType, loggingServiceStatus);
+    private static void logAccessibilityShortcutActivatedInternal(
+            ComponentName componentName, int loggingShortcutType, int loggingServiceStatus) {
+        FrameworkStatsLog.write(
+                266, componentName.flattenToString(), loggingShortcutType, loggingServiceStatus);
     }
 
     public static void logMagnificationTripleTap(boolean enabled) {
-        FrameworkStatsLog.write(266, AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME.flattenToString(), 3, convertToLoggingServiceStatus(enabled));
+        FrameworkStatsLog.write(
+                266,
+                AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME.flattenToString(),
+                3,
+                convertToLoggingServiceStatus(enabled));
     }
 
     public static void logMagnificationTwoFingerTripleTap(boolean enabled) {
-        FrameworkStatsLog.write(266, AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME.flattenToString(), 8, convertToLoggingServiceStatus(enabled));
+        FrameworkStatsLog.write(
+                266,
+                AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME.flattenToString(),
+                8,
+                convertToLoggingServiceStatus(enabled));
     }
 
     public static void logAccessibilityButtonLongPressStatus(ComponentName componentName) {
@@ -41,7 +60,11 @@ public final class AccessibilityStatsLogUtils {
     }
 
     public static void logMagnificationUsageState(int mode, long duration, float scale) {
-        FrameworkStatsLog.write(345, convertToLoggingMagnificationMode(mode), duration, convertToLoggingMagnificationScale(scale));
+        FrameworkStatsLog.write(
+                345,
+                convertToLoggingMagnificationMode(mode),
+                duration,
+                convertToLoggingMagnificationScale(scale));
     }
 
     public static void logMagnificationModeWithImeOn(int mode) {
@@ -56,16 +79,21 @@ public final class AccessibilityStatsLogUtils {
         FrameworkStatsLog.write(452, duration);
     }
 
-    public static void logNonA11yToolServiceWarningReported(String packageName, int status, long durationMillis) {
+    public static void logNonA11yToolServiceWarningReported(
+            String packageName, int status, long durationMillis) {
         FrameworkStatsLog.write(384, packageName, status, durationMillis);
     }
 
     private static boolean isAccessibilityFloatingMenuEnabled(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.ACCESSIBILITY_BUTTON_MODE, -1) == 1;
+        return Settings.Secure.getInt(
+                        context.getContentResolver(), Settings.Secure.ACCESSIBILITY_BUTTON_MODE, -1)
+                == 1;
     }
 
     private static boolean isAccessibilityGestureEnabled(Context context) {
-        return Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.ACCESSIBILITY_BUTTON_MODE, -1) == 2;
+        return Settings.Secure.getInt(
+                        context.getContentResolver(), Settings.Secure.ACCESSIBILITY_BUTTON_MODE, -1)
+                == 2;
     }
 
     private static int convertToLoggingShortcutType(Context context, int shortcutType) {

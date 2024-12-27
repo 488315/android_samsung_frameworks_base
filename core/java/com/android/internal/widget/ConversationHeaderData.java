@@ -5,7 +5,8 @@ public final class ConversationHeaderData {
     private final ConversationAvatarData mConversationAvatarData;
     private final CharSequence mConversationText;
 
-    ConversationHeaderData(CharSequence conversationText, ConversationAvatarData conversationAvatarData) {
+    ConversationHeaderData(
+            CharSequence conversationText, ConversationAvatarData conversationAvatarData) {
         this.mConversationText = conversationText;
         this.mConversationAvatarData = conversationAvatarData;
     }

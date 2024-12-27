@@ -21,12 +21,22 @@ public final class SemGateConfig {
 
     public static void setGateEnabled(boolean gateEnabled) {
         sGateEnabled = gateEnabled;
-        Log.i(LOG_TAG, "SemGateConfig.setGateEnabled. GATE = " + sGateEnabled + ", LCDTEXT = " + sGateLcdtextEnabled);
+        Log.i(
+                LOG_TAG,
+                "SemGateConfig.setGateEnabled. GATE = "
+                        + sGateEnabled
+                        + ", LCDTEXT = "
+                        + sGateLcdtextEnabled);
     }
 
     public static void setGateLcdtextEnabled(boolean lcdTextEnabled) {
         sGateLcdtextEnabled = lcdTextEnabled;
-        Log.i(LOG_TAG, "SemGateConfig.setGateLcdtextEnabled. GATE = " + sGateEnabled + ", LCDTEXT = " + sGateLcdtextEnabled);
+        Log.i(
+                LOG_TAG,
+                "SemGateConfig.setGateLcdtextEnabled. GATE = "
+                        + sGateEnabled
+                        + ", LCDTEXT = "
+                        + sGateLcdtextEnabled);
     }
 
     public static boolean isGateEnabled() {
@@ -43,7 +53,8 @@ public final class SemGateConfig {
     public static boolean isGateLcdtextEnabled() {
         String debugLevel = String.valueOf(SystemProperties.get("ro.debug_level"));
         if (!"user".equals(Build.TYPE)) {
-            return sGateLcdtextEnabled || SystemProperties.get(GATE_SYS_PROP_LCDTEXT_ENABLED).equals("1");
+            return sGateLcdtextEnabled
+                    || SystemProperties.get(GATE_SYS_PROP_LCDTEXT_ENABLED).equals("1");
         }
         if (debugLevel.equals(DEBUG_LEVEL_LOW)) {
             return false;

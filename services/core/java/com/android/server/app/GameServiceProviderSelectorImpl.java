@@ -15,20 +15,24 @@ public final class GameServiceProviderSelectorImpl {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:64:0x0087, code lost:
-    
-        if (r6 != null) goto L33;
-     */
+
+       if (r6 != null) goto L33;
+    */
     /* JADX WARN: Removed duplicated region for block: B:43:0x0120 A[SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:49:0x0057 A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.app.GameServiceConfiguration get(com.android.server.SystemService.TargetUser r11, java.lang.String r12) {
+    public final com.android.server.app.GameServiceConfiguration get(
+            com.android.server.SystemService.TargetUser r11, java.lang.String r12) {
         /*
             Method dump skipped, instructions count: 379
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.app.GameServiceProviderSelectorImpl.get(com.android.server.SystemService$TargetUser, java.lang.String):com.android.server.app.GameServiceConfiguration");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.app.GameServiceProviderSelectorImpl.get(com.android.server.SystemService$TargetUser,"
+                    + " java.lang.String):com.android.server.app.GameServiceConfiguration");
     }
 }

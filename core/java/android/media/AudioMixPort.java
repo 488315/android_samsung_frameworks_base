@@ -6,18 +6,42 @@ import java.util.List;
 public class AudioMixPort extends AudioPort {
     private final int mIoHandle;
 
-    AudioMixPort(AudioHandle handle, int ioHandle, int role, String deviceName, int[] samplingRates, int[] channelMasks, int[] channelIndexMasks, int[] formats, AudioGain[] gains) {
-        super(handle, role, deviceName, samplingRates, channelMasks, channelIndexMasks, formats, gains);
+    AudioMixPort(
+            AudioHandle handle,
+            int ioHandle,
+            int role,
+            String deviceName,
+            int[] samplingRates,
+            int[] channelMasks,
+            int[] channelIndexMasks,
+            int[] formats,
+            AudioGain[] gains) {
+        super(
+                handle,
+                role,
+                deviceName,
+                samplingRates,
+                channelMasks,
+                channelIndexMasks,
+                formats,
+                gains);
         this.mIoHandle = ioHandle;
     }
 
-    AudioMixPort(AudioHandle handle, int ioHandle, int role, String deviceName, List<AudioProfile> profiles, AudioGain[] gains) {
+    AudioMixPort(
+            AudioHandle handle,
+            int ioHandle,
+            int role,
+            String deviceName,
+            List<AudioProfile> profiles,
+            AudioGain[] gains) {
         super(handle, role, deviceName, profiles, gains, null);
         this.mIoHandle = ioHandle;
     }
 
     @Override // android.media.AudioPort
-    public AudioMixPortConfig buildConfig(int samplingRate, int channelMask, int format, AudioGainConfig gain) {
+    public AudioMixPortConfig buildConfig(
+            int samplingRate, int channelMask, int format, AudioGainConfig gain) {
         return new AudioMixPortConfig(this, samplingRate, channelMask, format, gain);
     }
 

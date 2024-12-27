@@ -23,7 +23,14 @@ final class AnimationStatus {
         STOP = animationStatus4;
         AnimationStatus animationStatus5 = new AnimationStatus("FINISH", 4);
         FINISH = animationStatus5;
-        $VALUES = new AnimationStatus[]{animationStatus, animationStatus2, animationStatus3, animationStatus4, animationStatus5};
+        $VALUES =
+                new AnimationStatus[] {
+                    animationStatus,
+                    animationStatus2,
+                    animationStatus3,
+                    animationStatus4,
+                    animationStatus5
+                };
     }
 
     public static AnimationStatus valueOf(String str) {

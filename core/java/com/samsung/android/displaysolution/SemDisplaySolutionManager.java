@@ -112,12 +112,14 @@ public final class SemDisplaySolutionManager {
         }
     }
 
-    public float getAlphaMaskLevel(float CurrentPlatformBrightnessValue, float FingerPrintPlatformValue, float br_ctrl) {
+    public float getAlphaMaskLevel(
+            float CurrentPlatformBrightnessValue, float FingerPrintPlatformValue, float br_ctrl) {
         if (this.mService == null) {
             return RETURN_ERROR_F;
         }
         try {
-            return this.mService.getAlphaMaskLevel(CurrentPlatformBrightnessValue, FingerPrintPlatformValue, br_ctrl);
+            return this.mService.getAlphaMaskLevel(
+                    CurrentPlatformBrightnessValue, FingerPrintPlatformValue, br_ctrl);
         } catch (RemoteException e) {
             return RETURN_ERROR_F;
         }
@@ -344,7 +346,8 @@ public final class SemDisplaySolutionManager {
         }
     }
 
-    public void setSleepPatternBLF(String mWeekType, long mBedtime, long mWakeupTime, float mConfidence) {
+    public void setSleepPatternBLF(
+            String mWeekType, long mBedtime, long mWakeupTime, float mConfidence) {
         try {
             if (this.mService != null) {
                 this.mService.setSleepPatternBLF(mWeekType, mBedtime, mWakeupTime, mConfidence);

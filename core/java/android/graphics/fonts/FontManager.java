@@ -1,10 +1,11 @@
 package android.graphics.fonts;
 
 import android.annotation.SystemApi;
-import android.graphics.fonts.FontFamilyUpdateRequest;
 import android.os.RemoteException;
 import android.text.FontConfig;
+
 import com.android.internal.graphics.fonts.IFontManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -36,8 +37,7 @@ public class FontManager {
     private final IFontManager mIFontManager;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResultCode {
-    }
+    public @interface ResultCode {}
 
     private FontManager(IFontManager iFontManager) {
         this.mIFontManager = iFontManager;
@@ -56,7 +56,9 @@ public class FontManager {
         List<FontFileUpdateRequest> fontFileUpdateRequests = request.getFontFileUpdateRequests();
         for (int i = 0; i < fontFileUpdateRequests.size(); i++) {
             FontFileUpdateRequest fontFile = fontFileUpdateRequests.get(i);
-            requests.add(new FontUpdateRequest(fontFile.getParcelFileDescriptor(), fontFile.getSignature()));
+            requests.add(
+                    new FontUpdateRequest(
+                            fontFile.getParcelFileDescriptor(), fontFile.getSignature()));
         }
         List<FontFamilyUpdateRequest.FontFamily> fontFamilies = request.getFontFamilies();
         for (int i2 = 0; i2 < fontFamilies.size(); i2++) {

@@ -14,8 +14,7 @@ public interface SemImsDmConfigListener extends IInterface {
 
     public static class Default implements SemImsDmConfigListener {
         @Override // com.samsung.android.ims.SemImsDmConfigListener
-        public void onChangeDmValue(String uri, boolean state) throws RemoteException {
-        }
+        public void onChangeDmValue(String uri, boolean state) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface SemImsDmConfigListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements SemImsDmConfigListener {
+    public abstract static class Stub extends Binder implements SemImsDmConfigListener {
         static final int TRANSACTION_onChangeDmValue = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface SemImsDmConfigListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(SemImsDmConfigListener.DESCRIPTOR);
             }

@@ -8,6 +8,7 @@ import android.hardware.usb.UsbDevice;
 import android.os.Binder;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 
@@ -29,19 +30,37 @@ public final class UsbSerialReader extends IUsbSerialReader.Stub {
         int callingPid = Binder.getCallingPid();
         int callingUid = Binder.getCallingUid();
         if (callingUid != 1000) {
-            if (!ArrayUtils.contains(this.mContext.getPackageManager().getPackagesForUid(callingUid), str)) {
-                throw new IllegalArgumentException(VpnManagerService$$ExternalSyntheticOutline0.m(callingUid, str, " does to belong to the "));
+            if (!ArrayUtils.contains(
+                    this.mContext.getPackageManager().getPackagesForUid(callingUid), str)) {
+                throw new IllegalArgumentException(
+                        VpnManagerService$$ExternalSyntheticOutline0.m(
+                                callingUid, str, " does to belong to the "));
             }
             UserHandle callingUserHandle = Binder.getCallingUserHandle();
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
-                    if (this.mContext.getPackageManager().getPackageInfoAsUser(str, 0, callingUserHandle.getIdentifier()).applicationInfo.targetSdkVersion >= 29 && this.mContext.checkPermission("android.permission.MANAGE_USB", callingPid, callingUid) == -1) {
+                    if (this.mContext
+                                            .getPackageManager()
+                                            .getPackageInfoAsUser(
+                                                    str, 0, callingUserHandle.getIdentifier())
+                                            .applicationInfo
+                                            .targetSdkVersion
+                                    >= 29
+                            && this.mContext.checkPermission(
+                                            "android.permission.MANAGE_USB", callingPid, callingUid)
+                                    == -1) {
                         int userId = UserHandle.getUserId(callingUid);
                         if (this.mDevice instanceof UsbDevice) {
-                            this.mPermissionManager.getPermissionsForUser(userId).checkPermission((UsbDevice) this.mDevice, str, callingPid, callingUid);
+                            this.mPermissionManager
+                                    .getPermissionsForUser(userId)
+                                    .checkPermission(
+                                            (UsbDevice) this.mDevice, str, callingPid, callingUid);
                         } else {
-                            this.mPermissionManager.getPermissionsForUser(userId).checkPermission((UsbAccessory) this.mDevice, callingPid, callingUid);
+                            this.mPermissionManager
+                                    .getPermissionsForUser(userId)
+                                    .checkPermission(
+                                            (UsbAccessory) this.mDevice, callingPid, callingUid);
                         }
                     }
                     Binder.restoreCallingIdentity(clearCallingIdentity);

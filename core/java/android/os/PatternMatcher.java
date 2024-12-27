@@ -1,8 +1,8 @@
 package android.os;
 
-import android.os.Parcelable;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -33,23 +33,23 @@ public class PatternMatcher implements Parcelable {
     private final String mPattern;
     private final int mType;
     private static final int[] sParsedPatternScratch = new int[2048];
-    public static final Parcelable.Creator<PatternMatcher> CREATOR = new Parcelable.Creator<PatternMatcher>() { // from class: android.os.PatternMatcher.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PatternMatcher createFromParcel(Parcel source) {
-            return new PatternMatcher(source);
-        }
+    public static final Parcelable.Creator<PatternMatcher> CREATOR =
+            new Parcelable.Creator<PatternMatcher>() { // from class: android.os.PatternMatcher.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PatternMatcher createFromParcel(Parcel source) {
+                    return new PatternMatcher(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PatternMatcher[] newArray(int size) {
-            return new PatternMatcher[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PatternMatcher[] newArray(int size) {
+                    return new PatternMatcher[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PatternType {
-    }
+    public @interface PatternType {}
 
     public PatternMatcher(String pattern, int type) {
         this.mPattern = pattern;
@@ -105,7 +105,8 @@ public class PatternMatcher implements Parcelable {
     public boolean check() {
         try {
             if (this.mType == 3) {
-                return Arrays.equals(this.mParsedPattern, parseAndVerifyAdvancedPattern(this.mPattern));
+                return Arrays.equals(
+                        this.mParsedPattern, parseAndVerifyAdvancedPattern(this.mPattern));
             }
             return true;
         } catch (IllegalArgumentException e) {
@@ -184,8 +185,7 @@ public class PatternMatcher implements Parcelable {
                         ip2++;
                         nextChar2 = ip2 < NP ? pattern.charAt(ip2) : (char) 0;
                     }
-                    while (match.charAt(im) != nextChar2 && (im = im + 1) < NM) {
-                    }
+                    while (match.charAt(im) != nextChar2 && (im = im + 1) < NM) {}
                     if (im == NM) {
                         return false;
                     }
@@ -193,8 +193,7 @@ public class PatternMatcher implements Parcelable {
                     nextChar = ip < NP ? pattern.charAt(ip) : (char) 0;
                     im++;
                 } else {
-                    while (match.charAt(im) == c && (im = im + 1) < NM) {
-                    }
+                    while (match.charAt(im) == c && (im = im + 1) < NM) {}
                     ip++;
                     nextChar = ip < NP ? pattern.charAt(ip) : (char) 0;
                 }
@@ -222,7 +221,9 @@ public class PatternMatcher implements Parcelable {
             Method dump skipped, instructions count: 528
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.PatternMatcher.parseAndVerifyAdvancedPattern(java.lang.String):int[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.os.PatternMatcher.parseAndVerifyAdvancedPattern(java.lang.String):int[]");
     }
 
     private static boolean isParsedModifier(int parsedChar) {
@@ -271,8 +272,7 @@ public class PatternMatcher implements Parcelable {
                     int charSetStart4 = ip3 + 1;
                     do {
                         ip3++;
-                        if (ip3 < LP) {
-                        }
+                        if (ip3 < LP) {}
                         int charSetEnd3 = ip3 - 1;
                         ip = ip3 + 1;
                         charSetStart = charSetStart4;
@@ -326,7 +326,17 @@ public class PatternMatcher implements Parcelable {
             int i2 = maxRepetition;
             int maxRepetition3 = charSetStart;
             int minRepetition3 = charSetEnd;
-            int matched = matchChars(match, im, LM, tokenType, i, i2, parsedPattern, maxRepetition3, minRepetition3);
+            int matched =
+                    matchChars(
+                            match,
+                            im,
+                            LM,
+                            tokenType,
+                            i,
+                            i2,
+                            parsedPattern,
+                            maxRepetition3,
+                            minRepetition3);
             if (matched == -1) {
                 return false;
             }
@@ -338,9 +348,20 @@ public class PatternMatcher implements Parcelable {
         return ip3 >= LP && im >= LM;
     }
 
-    private static int matchChars(String match, int im, int lm, int tokenType, int minRepetition, int maxRepetition, int[] parsedPattern, int tokenStart, int tokenEnd) {
+    private static int matchChars(
+            String match,
+            int im,
+            int lm,
+            int tokenType,
+            int minRepetition,
+            int maxRepetition,
+            int[] parsedPattern,
+            int tokenStart,
+            int tokenEnd) {
         int matched = 0;
-        while (matched < maxRepetition && matchChar(match, im + matched, lm, tokenType, parsedPattern, tokenStart, tokenEnd)) {
+        while (matched < maxRepetition
+                && matchChar(
+                        match, im + matched, lm, tokenType, parsedPattern, tokenStart, tokenEnd)) {
             matched++;
         }
         if (matched < minRepetition) {
@@ -349,7 +370,14 @@ public class PatternMatcher implements Parcelable {
         return matched;
     }
 
-    private static boolean matchChar(String match, int im, int lm, int tokenType, int[] parsedPattern, int tokenStart, int tokenEnd) {
+    private static boolean matchChar(
+            String match,
+            int im,
+            int lm,
+            int tokenType,
+            int[] parsedPattern,
+            int tokenStart,
+            int tokenEnd) {
         if (im >= lm) {
             return false;
         }

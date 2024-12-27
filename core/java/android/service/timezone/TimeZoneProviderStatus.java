@@ -4,7 +4,9 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.server.SecureKeyConst;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -16,22 +18,26 @@ import java.util.regex.Pattern;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class TimeZoneProviderStatus implements Parcelable {
-    public static final Parcelable.Creator<TimeZoneProviderStatus> CREATOR = new Parcelable.Creator<TimeZoneProviderStatus>() { // from class: android.service.timezone.TimeZoneProviderStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneProviderStatus createFromParcel(Parcel in) {
-            int locationDetectionStatus = in.readInt();
-            int connectivityStatus = in.readInt();
-            int timeZoneResolutionStatus = in.readInt();
-            return new TimeZoneProviderStatus(locationDetectionStatus, connectivityStatus, timeZoneResolutionStatus);
-        }
+    public static final Parcelable.Creator<TimeZoneProviderStatus> CREATOR =
+            new Parcelable.Creator<
+                    TimeZoneProviderStatus>() { // from class:
+                                                // android.service.timezone.TimeZoneProviderStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneProviderStatus createFromParcel(Parcel in) {
+                    int locationDetectionStatus = in.readInt();
+                    int connectivityStatus = in.readInt();
+                    int timeZoneResolutionStatus = in.readInt();
+                    return new TimeZoneProviderStatus(
+                            locationDetectionStatus, connectivityStatus, timeZoneResolutionStatus);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneProviderStatus[] newArray(int size) {
-            return new TimeZoneProviderStatus[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneProviderStatus[] newArray(int size) {
+                    return new TimeZoneProviderStatus[size];
+                }
+            };
     public static final int DEPENDENCY_STATUS_BLOCKED_BY_ENVIRONMENT = 4;
     public static final int DEPENDENCY_STATUS_BLOCKED_BY_SETTINGS = 6;
     public static final int DEPENDENCY_STATUS_DEGRADED_BY_SETTINGS = 5;
@@ -49,15 +55,14 @@ public final class TimeZoneProviderStatus implements Parcelable {
 
     @Target({ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DependencyStatus {
-    }
+    public @interface DependencyStatus {}
 
     @Target({ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OperationStatus {
-    }
+    public @interface OperationStatus {}
 
-    private TimeZoneProviderStatus(int locationDetectionStatus, int connectivityStatus, int timeZoneResolutionStatus) {
+    private TimeZoneProviderStatus(
+            int locationDetectionStatus, int connectivityStatus, int timeZoneResolutionStatus) {
         this.mLocationDetectionDependencyStatus = locationDetectionStatus;
         this.mConnectivityDependencyStatus = connectivityStatus;
         this.mTimeZoneResolutionOperationStatus = timeZoneResolutionStatus;
@@ -76,11 +81,21 @@ public final class TimeZoneProviderStatus implements Parcelable {
     }
 
     public String toString() {
-        return "TimeZoneProviderStatus{mLocationDetectionDependencyStatus=" + dependencyStatusToString(this.mLocationDetectionDependencyStatus) + ", mConnectivityDependencyStatus=" + dependencyStatusToString(this.mConnectivityDependencyStatus) + ", mTimeZoneResolutionOperationStatus=" + operationStatusToString(this.mTimeZoneResolutionOperationStatus) + '}';
+        return "TimeZoneProviderStatus{mLocationDetectionDependencyStatus="
+                + dependencyStatusToString(this.mLocationDetectionDependencyStatus)
+                + ", mConnectivityDependencyStatus="
+                + dependencyStatusToString(this.mConnectivityDependencyStatus)
+                + ", mTimeZoneResolutionOperationStatus="
+                + operationStatusToString(this.mTimeZoneResolutionOperationStatus)
+                + '}';
     }
 
     public static TimeZoneProviderStatus parseProviderStatus(String arg) {
-        Pattern pattern = Pattern.compile("TimeZoneProviderStatus\\{mLocationDetectionDependencyStatus=([^,]+), mConnectivityDependencyStatus=([^,]+), mTimeZoneResolutionOperationStatus=([^\\}]+)\\}");
+        Pattern pattern =
+                Pattern.compile(
+                        "TimeZoneProviderStatus\\{mLocationDetectionDependencyStatus=([^,]+),"
+                            + " mConnectivityDependencyStatus=([^,]+),"
+                            + " mTimeZoneResolutionOperationStatus=([^\\}]+)\\}");
         Matcher matcher = pattern.matcher(arg);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("Unable to parse provider status: " + arg);
@@ -88,7 +103,10 @@ public final class TimeZoneProviderStatus implements Parcelable {
         int locationDependencyStatus = dependencyStatusFromString(matcher.group(1));
         int connectivityDependencyStatus = dependencyStatusFromString(matcher.group(2));
         int timeZoneResolutionOperationStatus = operationStatusFromString(matcher.group(3));
-        return new TimeZoneProviderStatus(locationDependencyStatus, connectivityDependencyStatus, timeZoneResolutionOperationStatus);
+        return new TimeZoneProviderStatus(
+                locationDependencyStatus,
+                connectivityDependencyStatus,
+                timeZoneResolutionOperationStatus);
     }
 
     @Override // android.os.Parcelable
@@ -111,18 +129,27 @@ public final class TimeZoneProviderStatus implements Parcelable {
             return false;
         }
         TimeZoneProviderStatus that = (TimeZoneProviderStatus) o;
-        if (this.mLocationDetectionDependencyStatus == that.mLocationDetectionDependencyStatus && this.mConnectivityDependencyStatus == that.mConnectivityDependencyStatus && this.mTimeZoneResolutionOperationStatus == that.mTimeZoneResolutionOperationStatus) {
+        if (this.mLocationDetectionDependencyStatus == that.mLocationDetectionDependencyStatus
+                && this.mConnectivityDependencyStatus == that.mConnectivityDependencyStatus
+                && this.mTimeZoneResolutionOperationStatus
+                        == that.mTimeZoneResolutionOperationStatus) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mLocationDetectionDependencyStatus), Integer.valueOf(this.mConnectivityDependencyStatus), Integer.valueOf(this.mTimeZoneResolutionOperationStatus));
+        return Objects.hash(
+                Integer.valueOf(this.mLocationDetectionDependencyStatus),
+                Integer.valueOf(this.mConnectivityDependencyStatus),
+                Integer.valueOf(this.mTimeZoneResolutionOperationStatus));
     }
 
     public boolean couldEnableTelephonyFallback() {
-        return this.mLocationDetectionDependencyStatus == 4 || this.mLocationDetectionDependencyStatus == 6 || this.mConnectivityDependencyStatus == 4 || this.mConnectivityDependencyStatus == 6;
+        return this.mLocationDetectionDependencyStatus == 4
+                || this.mLocationDetectionDependencyStatus == 6
+                || this.mConnectivityDependencyStatus == 4
+                || this.mConnectivityDependencyStatus == 6;
     }
 
     public static final class Builder {
@@ -161,7 +188,13 @@ public final class TimeZoneProviderStatus implements Parcelable {
         }
 
         public TimeZoneProviderStatus build() {
-            return new TimeZoneProviderStatus(TimeZoneProviderStatus.requireValidDependencyStatus(this.mLocationDetectionDependencyStatus), TimeZoneProviderStatus.requireValidDependencyStatus(this.mConnectivityDependencyStatus), TimeZoneProviderStatus.requireValidOperationStatus(this.mTimeZoneResolutionOperationStatus));
+            return new TimeZoneProviderStatus(
+                    TimeZoneProviderStatus.requireValidDependencyStatus(
+                            this.mLocationDetectionDependencyStatus),
+                    TimeZoneProviderStatus.requireValidDependencyStatus(
+                            this.mConnectivityDependencyStatus),
+                    TimeZoneProviderStatus.requireValidOperationStatus(
+                            this.mTimeZoneResolutionOperationStatus));
         }
     }
 

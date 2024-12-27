@@ -30,6 +30,7 @@ import android.service.voice.VisibleActivityInfo;
 import android.util.ArrayMap;
 import android.util.Slog;
 import android.view.IWindowManager;
+
 import com.android.internal.app.IVoiceInteractionSessionShowCallback;
 import com.android.internal.app.IVoiceInteractor;
 import com.android.internal.statusbar.IStatusBar;
@@ -42,9 +43,9 @@ import com.android.server.statusbar.StatusBarManagerInternal;
 import com.android.server.statusbar.StatusBarManagerService;
 import com.android.server.uri.UriGrantsManagerInternal;
 import com.android.server.uri.UriGrantsManagerService;
-import com.android.server.voiceinteraction.VoiceInteractionManagerService;
 import com.android.server.wm.ActivityAssistInfo;
 import com.android.server.wm.ActivityTaskManagerInternal;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +54,10 @@ import java.util.concurrent.ScheduledExecutorService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class VoiceInteractionSessionConnection implements ServiceConnection, AssistDataRequester.AssistDataRequesterCallbacks {
-    public static final int POWER_BOOST_TIMEOUT_MS = Integer.parseInt(System.getProperty("vendor.powerhal.interaction.max", "200"));
+public final class VoiceInteractionSessionConnection
+        implements ServiceConnection, AssistDataRequester.AssistDataRequesterCallbacks {
+    public static final int POWER_BOOST_TIMEOUT_MS =
+            Integer.parseInt(System.getProperty("vendor.powerhal.interaction.max", "200"));
     public final IActivityTaskManager mActivityTaskManager;
     public final AssistDataRequester mAssistDataRequester;
     public final Intent mBindIntent;
@@ -77,7 +80,8 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
     public final ArrayList mPendingShowCallbacks;
     public final IBinder mPermissionOwner;
     public final PowerManagerInternal mPowerManagerInternal;
-    public final VoiceInteractionSessionConnection$$ExternalSyntheticLambda0 mRemoveFromLowPowerStandbyAllowlistRunnable;
+    public final VoiceInteractionSessionConnection$$ExternalSyntheticLambda0
+            mRemoveFromLowPowerStandbyAllowlistRunnable;
     public final ScheduledExecutorService mScheduledExecutorService;
     public IVoiceInteractionSessionService mService;
     public IVoiceInteractionSession mSession;
@@ -97,12 +101,10 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
     /* renamed from: com.android.server.voiceinteraction.VoiceInteractionSessionConnection$2, reason: invalid class name */
     public final class AnonymousClass2 implements ServiceConnection {
         @Override // android.content.ServiceConnection
-        public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-        }
+        public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {}
 
         @Override // android.content.ServiceConnection
-        public final void onServiceDisconnected(ComponentName componentName) {
-        }
+        public final void onServiceDisconnected(ComponentName componentName) {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -111,8 +113,11 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
         @Override // java.lang.Runnable
         public final void run() {
             IStatusBar iStatusBar;
-            StatusBarManagerInternal statusBarManagerInternal = (StatusBarManagerInternal) LocalServices.getService(StatusBarManagerInternal.class);
-            if (statusBarManagerInternal == null || (iStatusBar = StatusBarManagerService.this.mBar) == null) {
+            StatusBarManagerInternal statusBarManagerInternal =
+                    (StatusBarManagerInternal)
+                            LocalServices.getService(StatusBarManagerInternal.class);
+            if (statusBarManagerInternal == null
+                    || (iStatusBar = StatusBarManagerService.this.mBar) == null) {
                 return;
             }
             try {
@@ -123,8 +128,7 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Callback {
-    }
+    public interface Callback {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PowerBoostSetter implements Runnable {
@@ -143,15 +147,23 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
                         return;
                     }
                     if (Instant.now().isBefore(this.mExpiryTime)) {
-                        VoiceInteractionSessionConnection.this.mPowerManagerInternal.setPowerBoost(0, 300);
-                        VoiceInteractionSessionConnection voiceInteractionSessionConnection = VoiceInteractionSessionConnection.this;
-                        PowerBoostSetter powerBoostSetter = voiceInteractionSessionConnection.mSetPowerBoostRunnable;
+                        VoiceInteractionSessionConnection.this.mPowerManagerInternal.setPowerBoost(
+                                0, 300);
+                        VoiceInteractionSessionConnection voiceInteractionSessionConnection =
+                                VoiceInteractionSessionConnection.this;
+                        PowerBoostSetter powerBoostSetter =
+                                voiceInteractionSessionConnection.mSetPowerBoostRunnable;
                         if (powerBoostSetter != null) {
-                            voiceInteractionSessionConnection.mFgHandler.postDelayed(powerBoostSetter, VoiceInteractionSessionConnection.POWER_BOOST_TIMEOUT_MS);
+                            voiceInteractionSessionConnection.mFgHandler.postDelayed(
+                                    powerBoostSetter,
+                                    VoiceInteractionSessionConnection.POWER_BOOST_TIMEOUT_MS);
                         }
                     } else {
-                        Slog.w("VoiceInteractionServiceManager", "Reset power boost INTERACTION because reaching max timeout.");
-                        VoiceInteractionSessionConnection.this.mPowerManagerInternal.setPowerBoost(0, -1);
+                        Slog.w(
+                                "VoiceInteractionServiceManager",
+                                "Reset power boost INTERACTION because reaching max timeout.");
+                        VoiceInteractionSessionConnection.this.mPowerManagerInternal.setPowerBoost(
+                                0, -1);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -162,46 +174,74 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
 
     /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.voiceinteraction.VoiceInteractionSessionConnection$$ExternalSyntheticLambda0] */
     /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.voiceinteraction.VoiceInteractionSessionConnection$1] */
-    public VoiceInteractionSessionConnection(Object obj, ComponentName componentName, int i, Context context, Callback callback, int i2, Handler handler) {
+    public VoiceInteractionSessionConnection(
+            Object obj,
+            ComponentName componentName,
+            int i,
+            Context context,
+            Callback callback,
+            int i2,
+            Handler handler) {
         Binder binder = new Binder();
         this.mToken = binder;
         this.mPendingShowCallbacks = new ArrayList();
         this.mPendingHandleAssistWithoutData = new ArrayList();
         this.mScheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
         this.mVisibleActivityInfoForToken = new ArrayMap();
-        this.mRemoveFromLowPowerStandbyAllowlistRunnable = new Runnable() { // from class: com.android.server.voiceinteraction.VoiceInteractionSessionConnection$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                VoiceInteractionSessionConnection.this.removeFromLowPowerStandbyAllowlist();
-            }
-        };
-        this.mShowCallback = new IVoiceInteractionSessionShowCallback.Stub() { // from class: com.android.server.voiceinteraction.VoiceInteractionSessionConnection.1
-            public final void onFailed() {
-                synchronized (VoiceInteractionSessionConnection.this.mLock) {
-                    VoiceInteractionSessionConnection voiceInteractionSessionConnection = VoiceInteractionSessionConnection.this;
-                    for (int i3 = 0; i3 < voiceInteractionSessionConnection.mPendingShowCallbacks.size(); i3++) {
-                        try {
-                            ((IVoiceInteractionSessionShowCallback) voiceInteractionSessionConnection.mPendingShowCallbacks.get(i3)).onFailed();
-                        } catch (RemoteException unused) {
+        this.mRemoveFromLowPowerStandbyAllowlistRunnable =
+                new Runnable() { // from class:
+                                 // com.android.server.voiceinteraction.VoiceInteractionSessionConnection$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        VoiceInteractionSessionConnection.this.removeFromLowPowerStandbyAllowlist();
+                    }
+                };
+        this.mShowCallback =
+                new IVoiceInteractionSessionShowCallback
+                        .Stub() { // from class:
+                                  // com.android.server.voiceinteraction.VoiceInteractionSessionConnection.1
+                    public final void onFailed() {
+                        synchronized (VoiceInteractionSessionConnection.this.mLock) {
+                            VoiceInteractionSessionConnection voiceInteractionSessionConnection =
+                                    VoiceInteractionSessionConnection.this;
+                            for (int i3 = 0;
+                                    i3
+                                            < voiceInteractionSessionConnection
+                                                    .mPendingShowCallbacks.size();
+                                    i3++) {
+                                try {
+                                    ((IVoiceInteractionSessionShowCallback)
+                                                    voiceInteractionSessionConnection
+                                                            .mPendingShowCallbacks.get(i3))
+                                            .onFailed();
+                                } catch (RemoteException unused) {
+                                }
+                            }
+                            voiceInteractionSessionConnection.mPendingShowCallbacks.clear();
                         }
                     }
-                    voiceInteractionSessionConnection.mPendingShowCallbacks.clear();
-                }
-            }
 
-            public final void onShown() {
-                synchronized (VoiceInteractionSessionConnection.this.mLock) {
-                    VoiceInteractionSessionConnection voiceInteractionSessionConnection = VoiceInteractionSessionConnection.this;
-                    for (int i3 = 0; i3 < voiceInteractionSessionConnection.mPendingShowCallbacks.size(); i3++) {
-                        try {
-                            ((IVoiceInteractionSessionShowCallback) voiceInteractionSessionConnection.mPendingShowCallbacks.get(i3)).onShown();
-                        } catch (RemoteException unused) {
+                    public final void onShown() {
+                        synchronized (VoiceInteractionSessionConnection.this.mLock) {
+                            VoiceInteractionSessionConnection voiceInteractionSessionConnection =
+                                    VoiceInteractionSessionConnection.this;
+                            for (int i3 = 0;
+                                    i3
+                                            < voiceInteractionSessionConnection
+                                                    .mPendingShowCallbacks.size();
+                                    i3++) {
+                                try {
+                                    ((IVoiceInteractionSessionShowCallback)
+                                                    voiceInteractionSessionConnection
+                                                            .mPendingShowCallbacks.get(i3))
+                                            .onShown();
+                                } catch (RemoteException unused) {
+                                }
+                            }
+                            voiceInteractionSessionConnection.mPendingShowCallbacks.clear();
                         }
                     }
-                    voiceInteractionSessionConnection.mPendingShowCallbacks.clear();
-                }
-            }
-        };
+                };
         this.mFullConnection = new AnonymousClass2();
         this.mShowAssistDisclosureRunnable = new AnonymousClass3();
         this.mLock = obj;
@@ -213,22 +253,40 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
         this.mHandler = handler;
         this.mActivityTaskManager = ActivityTaskManager.getService();
         ActivityManager.getService();
-        UriGrantsManagerInternal uriGrantsManagerInternal = (UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class);
+        UriGrantsManagerInternal uriGrantsManagerInternal =
+                (UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class);
         this.mUgmInternal = uriGrantsManagerInternal;
-        IWindowManager asInterface = IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
+        IWindowManager asInterface =
+                IWindowManager.Stub.asInterface(ServiceManager.getService("window"));
         this.mIWindowManager = asInterface;
-        this.mPowerManagerInternal = (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
-        this.mLowPowerStandbyControllerInternal = (LowPowerStandbyController.LocalService) LocalServices.getService(LowPowerStandbyController.LocalService.class);
+        this.mPowerManagerInternal =
+                (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
+        this.mLowPowerStandbyControllerInternal =
+                (LowPowerStandbyController.LocalService)
+                        LocalServices.getService(LowPowerStandbyController.LocalService.class);
         this.mFgHandler = FgThread.getHandler();
-        this.mAssistDataRequester = new AssistDataRequester(context, asInterface, (AppOpsManager) context.getSystemService("appops"), this, obj, 50);
-        this.mPermissionOwner = ((UriGrantsManagerService.LocalService) uriGrantsManagerInternal).newUriPermissionOwner("voicesession:" + componentName.flattenToShortString());
+        this.mAssistDataRequester =
+                new AssistDataRequester(
+                        context,
+                        asInterface,
+                        (AppOpsManager) context.getSystemService("appops"),
+                        this,
+                        obj,
+                        50);
+        this.mPermissionOwner =
+                ((UriGrantsManagerService.LocalService) uriGrantsManagerInternal)
+                        .newUriPermissionOwner(
+                                "voicesession:" + componentName.flattenToShortString());
         Intent intent = new Intent("android.service.voice.VoiceInteractionService");
         this.mBindIntent = intent;
         intent.setComponent(componentName);
-        boolean bindServiceAsUser = context.bindServiceAsUser(intent, this, 1048625, new UserHandle(i));
+        boolean bindServiceAsUser =
+                context.bindServiceAsUser(intent, this, 1048625, new UserHandle(i));
         this.mBound = bindServiceAsUser;
         if (!bindServiceAsUser) {
-            Slog.w("VoiceInteractionServiceManager", "Failed binding to voice interaction session service " + componentName);
+            Slog.w(
+                    "VoiceInteractionServiceManager",
+                    "Failed binding to voice interaction session service " + componentName);
         } else {
             try {
                 asInterface.addWindowToken(binder, 2031, 0, (Bundle) null);
@@ -239,7 +297,11 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
     }
 
     public static ArrayMap getTopVisibleActivityInfosLocked() {
-        ArrayList arrayList = (ArrayList) ((ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class)).getTopVisibleActivities();
+        ArrayList arrayList =
+                (ArrayList)
+                        ((ActivityTaskManagerInternal)
+                                        LocalServices.getService(ActivityTaskManagerInternal.class))
+                                .getTopVisibleActivities();
         if (arrayList.isEmpty()) {
             Slog.w("VoiceInteractionServiceManager", "no visible activity");
             return null;
@@ -248,7 +310,10 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
         ArrayMap arrayMap = new ArrayMap(size);
         for (int i = 0; i < size; i++) {
             ActivityAssistInfo activityAssistInfo = (ActivityAssistInfo) arrayList.get(i);
-            arrayMap.put(activityAssistInfo.mActivityToken, new VisibleActivityInfo(activityAssistInfo.mTaskId, activityAssistInfo.mAssistToken));
+            arrayMap.put(
+                    activityAssistInfo.mActivityToken,
+                    new VisibleActivityInfo(
+                            activityAssistInfo.mTaskId, activityAssistInfo.mAssistToken));
         }
         return arrayMap;
     }
@@ -269,7 +334,9 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
                 try {
                     iVoiceInteractionSession.destroy();
                 } catch (RemoteException unused) {
-                    Slog.w("VoiceInteractionServiceManager", "Voice interation session already dead");
+                    Slog.w(
+                            "VoiceInteractionServiceManager",
+                            "Voice interation session already dead");
                 }
             }
             if (z && this.mSession != null) {
@@ -300,18 +367,41 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
         for (int i = 0; i < size; i++) {
             ActivityAssistInfo activityAssistInfo = (ActivityAssistInfo) list.get(i);
             try {
-                this.mSession.handleAssist(activityAssistInfo.mTaskId, activityAssistInfo.mAssistToken, (Bundle) null, (AssistStructure) null, (AssistContent) null, i, size);
+                this.mSession.handleAssist(
+                        activityAssistInfo.mTaskId,
+                        activityAssistInfo.mAssistToken,
+                        (Bundle) null,
+                        (AssistStructure) null,
+                        (AssistContent) null,
+                        i,
+                        size);
             } catch (RemoteException unused) {
             }
         }
     }
 
     public final int getUserDisabledShowContextLocked() {
-        int i = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "assist_structure_enabled", 1, this.mUser) == 0 ? 1 : 0;
-        return Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "assist_screenshot_enabled", 1, this.mUser) == 0 ? i | 2 : i;
+        int i =
+                Settings.Secure.getIntForUser(
+                                        this.mContext.getContentResolver(),
+                                        "assist_structure_enabled",
+                                        1,
+                                        this.mUser)
+                                == 0
+                        ? 1
+                        : 0;
+        return Settings.Secure.getIntForUser(
+                                this.mContext.getContentResolver(),
+                                "assist_screenshot_enabled",
+                                1,
+                                this.mUser)
+                        == 0
+                ? i | 2
+                : i;
     }
 
-    public final void grantClipDataPermissions(ClipData clipData, int i, int i2, int i3, String str) {
+    public final void grantClipDataPermissions(
+            ClipData clipData, int i, int i2, int i3, String str) {
         int itemCount = clipData.getItemCount();
         for (int i4 = 0; i4 < itemCount; i4++) {
             ClipData.Item itemAt = clipData.getItemAt(i4);
@@ -331,9 +421,24 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
             try {
                 try {
                     UriGrantsManagerInternal uriGrantsManagerInternal = this.mUgmInternal;
-                    ((UriGrantsManagerService.LocalService) uriGrantsManagerInternal).checkGrantUriPermission(i2, null, ContentProvider.getUriWithoutUserId(uri), i, ContentProvider.getUserIdFromUri(uri, UserHandle.getUserId(i2)));
+                    ((UriGrantsManagerService.LocalService) uriGrantsManagerInternal)
+                            .checkGrantUriPermission(
+                                    i2,
+                                    null,
+                                    ContentProvider.getUriWithoutUserId(uri),
+                                    i,
+                                    ContentProvider.getUserIdFromUri(
+                                            uri, UserHandle.getUserId(i2)));
                     int userIdFromUri = ContentProvider.getUserIdFromUri(uri, this.mUser);
-                    UriGrantsManager.getService().grantUriPermissionFromOwner(this.mPermissionOwner, i2, str, ContentProvider.getUriWithoutUserId(uri), 1, userIdFromUri, this.mUser);
+                    UriGrantsManager.getService()
+                            .grantUriPermissionFromOwner(
+                                    this.mPermissionOwner,
+                                    i2,
+                                    str,
+                                    ContentProvider.getUriWithoutUserId(uri),
+                                    1,
+                                    userIdFromUri,
+                                    this.mUser);
                 } catch (RemoteException unused) {
                 } catch (SecurityException e) {
                     Slog.w("VoiceInteractionServiceManager", "Can't propagate permission", e);
@@ -347,19 +452,34 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
     public final void handleVisibleActivitiesLocked(int i, IBinder iBinder) {
         VisibleActivityInfo visibleActivityInfo;
         boolean z;
-        if (this.mListeningVisibleActivity && this.mShown && !this.mCanceled && this.mSession != null) {
+        if (this.mListeningVisibleActivity
+                && this.mShown
+                && !this.mCanceled
+                && this.mSession != null) {
             if (i != 1 && i != 2) {
                 z = false;
                 if (i == 3) {
                     ArrayMap topVisibleActivityInfosLocked = getTopVisibleActivityInfosLocked();
-                    if ((topVisibleActivityInfosLocked != null ? (VisibleActivityInfo) topVisibleActivityInfosLocked.get(iBinder) : null) != null || (visibleActivityInfo = (VisibleActivityInfo) this.mVisibleActivityInfoForToken.get(iBinder)) == null) {
+                    if ((topVisibleActivityInfosLocked != null
+                                            ? (VisibleActivityInfo)
+                                                    topVisibleActivityInfosLocked.get(iBinder)
+                                            : null)
+                                    != null
+                            || (visibleActivityInfo =
+                                            (VisibleActivityInfo)
+                                                    this.mVisibleActivityInfoForToken.get(iBinder))
+                                    == null) {
                         return;
                     }
                 } else if (i != 4) {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(i, "notifyActivityEventChangedLocked unexpected type=", "VoiceInteractionServiceManager");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            i,
+                            "notifyActivityEventChangedLocked unexpected type=",
+                            "VoiceInteractionServiceManager");
                     return;
                 } else {
-                    visibleActivityInfo = (VisibleActivityInfo) this.mVisibleActivityInfoForToken.get(iBinder);
+                    visibleActivityInfo =
+                            (VisibleActivityInfo) this.mVisibleActivityInfoForToken.get(iBinder);
                     if (visibleActivityInfo == null) {
                         return;
                     }
@@ -369,7 +489,10 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
                     return;
                 }
                 ArrayMap topVisibleActivityInfosLocked2 = getTopVisibleActivityInfosLocked();
-                VisibleActivityInfo visibleActivityInfo2 = topVisibleActivityInfosLocked2 != null ? (VisibleActivityInfo) topVisibleActivityInfosLocked2.get(iBinder) : null;
+                VisibleActivityInfo visibleActivityInfo2 =
+                        topVisibleActivityInfosLocked2 != null
+                                ? (VisibleActivityInfo) topVisibleActivityInfosLocked2.get(iBinder)
+                                : null;
                 if (visibleActivityInfo2 == null) {
                     return;
                 }
@@ -410,7 +533,8 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
                 } catch (RemoteException unused) {
                 }
             }
-            ((UriGrantsManagerService.LocalService) this.mUgmInternal).revokeUriPermissionFromOwner(this.mPermissionOwner, null, 3, this.mUser);
+            ((UriGrantsManagerService.LocalService) this.mUgmInternal)
+                    .revokeUriPermissionFromOwner(this.mPermissionOwner, null, 3, this.mUser);
             if (this.mSession != null) {
                 try {
                     ActivityTaskManager.getService().finishVoiceTask(this.mSession);
@@ -428,20 +552,33 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
             if (this.mLowPowerStandbyControllerInternal != null) {
                 removeFromLowPowerStandbyAllowlist();
             }
-            VoiceInteractionManagerServiceImpl voiceInteractionManagerServiceImpl = (VoiceInteractionManagerServiceImpl) this.mCallback;
-            VoiceInteractionManagerService.VoiceInteractionManagerServiceStub voiceInteractionManagerServiceStub = voiceInteractionManagerServiceImpl.mServiceStub;
+            VoiceInteractionManagerServiceImpl voiceInteractionManagerServiceImpl =
+                    (VoiceInteractionManagerServiceImpl) this.mCallback;
+            VoiceInteractionManagerService.VoiceInteractionManagerServiceStub
+                    voiceInteractionManagerServiceStub =
+                            voiceInteractionManagerServiceImpl.mServiceStub;
             synchronized (voiceInteractionManagerServiceStub) {
-                int beginBroadcast = VoiceInteractionManagerService.this.mVoiceInteractionSessionListeners.beginBroadcast();
+                int beginBroadcast =
+                        VoiceInteractionManagerService.this.mVoiceInteractionSessionListeners
+                                .beginBroadcast();
                 for (int i = 0; i < beginBroadcast; i++) {
                     try {
-                        VoiceInteractionManagerService.this.mVoiceInteractionSessionListeners.getBroadcastItem(i).onVoiceSessionHidden();
+                        VoiceInteractionManagerService.this
+                                .mVoiceInteractionSessionListeners
+                                .getBroadcastItem(i)
+                                .onVoiceSessionHidden();
                     } catch (RemoteException e) {
-                        Slog.e("VoiceInteractionManager", "Error delivering voice interaction closed event.", e);
+                        Slog.e(
+                                "VoiceInteractionManager",
+                                "Error delivering voice interaction closed event.",
+                                e);
                     }
                 }
-                VoiceInteractionManagerService.this.mVoiceInteractionSessionListeners.finishBroadcast();
+                VoiceInteractionManagerService.this.mVoiceInteractionSessionListeners
+                        .finishBroadcast();
             }
-            voiceInteractionManagerServiceImpl.mServiceStub.setSessionWindowVisible(this.mToken, false);
+            voiceInteractionManagerServiceImpl.mServiceStub.setSessionWindowVisible(
+                    this.mToken, false);
         }
         if (this.mFullyBound) {
             this.mContext.unbindService(this.mFullConnection);
@@ -459,25 +596,50 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
         }
         try {
             if (bundle == null) {
-                iVoiceInteractionSession.handleAssist(-1, (IBinder) null, (Bundle) null, (AssistStructure) null, (AssistContent) null, 0, 0);
+                iVoiceInteractionSession.handleAssist(
+                        -1,
+                        (IBinder) null,
+                        (Bundle) null,
+                        (AssistStructure) null,
+                        (AssistContent) null,
+                        0,
+                        0);
             } else {
                 int i3 = bundle.getInt("taskId");
                 IBinder binder = bundle.getBinder("activityId");
                 Bundle bundle2 = bundle.getBundle("data");
-                AssistStructure assistStructure = (AssistStructure) bundle.getParcelable("structure", AssistStructure.class);
-                AssistContent assistContent = (AssistContent) bundle.getParcelable("content", AssistContent.class);
-                int i4 = bundle2 != null ? bundle2.getInt("android.intent.extra.ASSIST_UID", -1) : -1;
+                AssistStructure assistStructure =
+                        (AssistStructure) bundle.getParcelable("structure", AssistStructure.class);
+                AssistContent assistContent =
+                        (AssistContent) bundle.getParcelable("content", AssistContent.class);
+                int i4 =
+                        bundle2 != null
+                                ? bundle2.getInt("android.intent.extra.ASSIST_UID", -1)
+                                : -1;
                 if (i4 >= 0 && assistContent != null) {
                     Intent intent = assistContent.getIntent();
-                    if (intent != null && (clipData = intent.getClipData()) != null && Intent.isAccessUriMode(intent.getFlags())) {
-                        grantClipDataPermissions(clipData, intent.getFlags(), i4, this.mCallingUid, this.mSessionComponentName.getPackageName());
+                    if (intent != null
+                            && (clipData = intent.getClipData()) != null
+                            && Intent.isAccessUriMode(intent.getFlags())) {
+                        grantClipDataPermissions(
+                                clipData,
+                                intent.getFlags(),
+                                i4,
+                                this.mCallingUid,
+                                this.mSessionComponentName.getPackageName());
                     }
                     ClipData clipData2 = assistContent.getClipData();
                     if (clipData2 != null) {
-                        grantClipDataPermissions(clipData2, 1, i4, this.mCallingUid, this.mSessionComponentName.getPackageName());
+                        grantClipDataPermissions(
+                                clipData2,
+                                1,
+                                i4,
+                                this.mCallingUid,
+                                this.mSessionComponentName.getPackageName());
                     }
                 }
-                this.mSession.handleAssist(i3, binder, bundle2, assistStructure, assistContent, i, i2);
+                this.mSession.handleAssist(
+                        i3, binder, bundle2, assistStructure, assistContent, i, i2);
             }
         } catch (RemoteException unused) {
         }
@@ -498,7 +660,8 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
     @Override // android.content.ServiceConnection
     public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         synchronized (this.mLock) {
-            IVoiceInteractionSessionService asInterface = IVoiceInteractionSessionService.Stub.asInterface(iBinder);
+            IVoiceInteractionSessionService asInterface =
+                    IVoiceInteractionSessionService.Stub.asInterface(iBinder);
             this.mService = asInterface;
             if (!this.mCanceled) {
                 try {
@@ -512,7 +675,8 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
 
     @Override // android.content.ServiceConnection
     public final void onServiceDisconnected(ComponentName componentName) {
-        VoiceInteractionManagerServiceImpl voiceInteractionManagerServiceImpl = (VoiceInteractionManagerServiceImpl) this.mCallback;
+        VoiceInteractionManagerServiceImpl voiceInteractionManagerServiceImpl =
+                (VoiceInteractionManagerServiceImpl) this.mCallback;
         synchronized (voiceInteractionManagerServiceImpl.mServiceStub) {
             voiceInteractionManagerServiceImpl.finishLocked(this.mToken, false);
         }
@@ -525,9 +689,12 @@ public final class VoiceInteractionSessionConnection implements ServiceConnectio
         synchronized (this.mLock) {
             try {
                 if (this.mLowPowerStandbyAllowlisted) {
-                    this.mFgHandler.removeCallbacks(this.mRemoveFromLowPowerStandbyAllowlistRunnable);
-                    LowPowerStandbyController.LocalService localService = this.mLowPowerStandbyControllerInternal;
-                    LowPowerStandbyController.m793$$Nest$mremoveFromAllowlistInternal(LowPowerStandbyController.this, this.mCallingUid, 1);
+                    this.mFgHandler.removeCallbacks(
+                            this.mRemoveFromLowPowerStandbyAllowlistRunnable);
+                    LowPowerStandbyController.LocalService localService =
+                            this.mLowPowerStandbyControllerInternal;
+                    LowPowerStandbyController.m793$$Nest$mremoveFromAllowlistInternal(
+                            LowPowerStandbyController.this, this.mCallingUid, 1);
                     this.mLowPowerStandbyAllowlisted = false;
                 }
             } catch (Throwable th) {

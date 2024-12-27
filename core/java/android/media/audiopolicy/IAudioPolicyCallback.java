@@ -25,32 +25,28 @@ public interface IAudioPolicyCallback extends IInterface {
 
     public static class Default implements IAudioPolicyCallback {
         @Override // android.media.audiopolicy.IAudioPolicyCallback
-        public void notifyAudioFocusGrant(AudioFocusInfo afi, int requestResult) throws RemoteException {
-        }
+        public void notifyAudioFocusGrant(AudioFocusInfo afi, int requestResult)
+                throws RemoteException {}
 
         @Override // android.media.audiopolicy.IAudioPolicyCallback
-        public void notifyAudioFocusLoss(AudioFocusInfo afi, boolean wasNotified) throws RemoteException {
-        }
+        public void notifyAudioFocusLoss(AudioFocusInfo afi, boolean wasNotified)
+                throws RemoteException {}
 
         @Override // android.media.audiopolicy.IAudioPolicyCallback
-        public void notifyAudioFocusRequest(AudioFocusInfo afi, int requestResult) throws RemoteException {
-        }
+        public void notifyAudioFocusRequest(AudioFocusInfo afi, int requestResult)
+                throws RemoteException {}
 
         @Override // android.media.audiopolicy.IAudioPolicyCallback
-        public void notifyAudioFocusAbandon(AudioFocusInfo afi) throws RemoteException {
-        }
+        public void notifyAudioFocusAbandon(AudioFocusInfo afi) throws RemoteException {}
 
         @Override // android.media.audiopolicy.IAudioPolicyCallback
-        public void notifyMixStateUpdate(String regId, int state) throws RemoteException {
-        }
+        public void notifyMixStateUpdate(String regId, int state) throws RemoteException {}
 
         @Override // android.media.audiopolicy.IAudioPolicyCallback
-        public void notifyVolumeAdjust(int adjustment) throws RemoteException {
-        }
+        public void notifyVolumeAdjust(int adjustment) throws RemoteException {}
 
         @Override // android.media.audiopolicy.IAudioPolicyCallback
-        public void notifyUnregistration() throws RemoteException {
-        }
+        public void notifyUnregistration() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -58,7 +54,7 @@ public interface IAudioPolicyCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAudioPolicyCallback {
+    public abstract static class Stub extends Binder implements IAudioPolicyCallback {
         public static final String DESCRIPTOR = "android.media.audiopolicy.IAudioPolicyCallback";
         static final int TRANSACTION_notifyAudioFocusAbandon = 4;
         static final int TRANSACTION_notifyAudioFocusGrant = 1;
@@ -115,7 +111,8 @@ public interface IAudioPolicyCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -125,25 +122,29 @@ public interface IAudioPolicyCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AudioFocusInfo _arg0 = (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
+                    AudioFocusInfo _arg0 =
+                            (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     notifyAudioFocusGrant(_arg0, _arg1);
                     return true;
                 case 2:
-                    AudioFocusInfo _arg02 = (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
+                    AudioFocusInfo _arg02 =
+                            (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
                     boolean _arg12 = data.readBoolean();
                     data.enforceNoDataAvail();
                     notifyAudioFocusLoss(_arg02, _arg12);
                     return true;
                 case 3:
-                    AudioFocusInfo _arg03 = (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
+                    AudioFocusInfo _arg03 =
+                            (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     notifyAudioFocusRequest(_arg03, _arg13);
                     return true;
                 case 4:
-                    AudioFocusInfo _arg04 = (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
+                    AudioFocusInfo _arg04 =
+                            (AudioFocusInfo) data.readTypedObject(AudioFocusInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifyAudioFocusAbandon(_arg04);
                     return true;
@@ -183,7 +184,8 @@ public interface IAudioPolicyCallback extends IInterface {
             }
 
             @Override // android.media.audiopolicy.IAudioPolicyCallback
-            public void notifyAudioFocusGrant(AudioFocusInfo afi, int requestResult) throws RemoteException {
+            public void notifyAudioFocusGrant(AudioFocusInfo afi, int requestResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -196,7 +198,8 @@ public interface IAudioPolicyCallback extends IInterface {
             }
 
             @Override // android.media.audiopolicy.IAudioPolicyCallback
-            public void notifyAudioFocusLoss(AudioFocusInfo afi, boolean wasNotified) throws RemoteException {
+            public void notifyAudioFocusLoss(AudioFocusInfo afi, boolean wasNotified)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -209,7 +212,8 @@ public interface IAudioPolicyCallback extends IInterface {
             }
 
             @Override // android.media.audiopolicy.IAudioPolicyCallback
-            public void notifyAudioFocusRequest(AudioFocusInfo afi, int requestResult) throws RemoteException {
+            public void notifyAudioFocusRequest(AudioFocusInfo afi, int requestResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

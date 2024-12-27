@@ -17,8 +17,7 @@ public interface IExtControlDeviceService extends IInterface {
 
     public static class Default implements IExtControlDeviceService {
         @Override // com.sec.rll.IExtControlDeviceService
-        public void setStatus(int deviceType, int status) throws RemoteException {
-        }
+        public void setStatus(int deviceType, int status) throws RemoteException {}
 
         @Override // com.sec.rll.IExtControlDeviceService
         public int getStatus(int deviceType) throws RemoteException {
@@ -31,7 +30,7 @@ public interface IExtControlDeviceService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IExtControlDeviceService {
+    public abstract static class Stub extends Binder implements IExtControlDeviceService {
         static final int TRANSACTION_getStatus = 2;
         static final int TRANSACTION_setStatus = 1;
 
@@ -72,7 +71,8 @@ public interface IExtControlDeviceService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IExtControlDeviceService.DESCRIPTOR);
             }

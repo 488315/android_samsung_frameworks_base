@@ -8,6 +8,7 @@ import android.hardware.display.DisplayManager;
 import android.os.UserHandle;
 import android.telecom.TelecomManager;
 import android.view.Display;
+
 import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.util.SamsungGlobalActionsAnalytics;
 import com.samsung.android.globalactions.util.SystemController;
@@ -15,7 +16,8 @@ import com.samsung.android.view.SemWindowManager;
 
 /* loaded from: classes6.dex */
 public class EmergencyCallActionViewModel implements ActionViewModel {
-    public static final String DISPLAY_CATEGORY_BUILTIN = "com.samsung.android.hardware.display.category.BUILTIN";
+    public static final String DISPLAY_CATEGORY_BUILTIN =
+            "com.samsung.android.hardware.display.category.BUILTIN";
     private final Context mContext;
     private final SamsungGlobalActions mGlobalActions;
     private ActionInfo mInfo;
@@ -23,7 +25,11 @@ public class EmergencyCallActionViewModel implements ActionViewModel {
     private final SystemController mSystemController;
     private final TelecomManager mTelecomManager;
 
-    public EmergencyCallActionViewModel(Context context, SamsungGlobalActions globalActions, SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics, SystemController systemController) {
+    public EmergencyCallActionViewModel(
+            Context context,
+            SamsungGlobalActions globalActions,
+            SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics,
+            SystemController systemController) {
         this.mContext = context;
         this.mSAnalytics = samsungGlobalActionsAnalytics;
         this.mSystemController = systemController;
@@ -47,8 +53,10 @@ public class EmergencyCallActionViewModel implements ActionViewModel {
         if (this.mTelecomManager == null) {
             return;
         }
-        DisplayManager dm = (DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE);
-        Display[] displays = dm.getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
+        DisplayManager dm =
+                (DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE);
+        Display[] displays =
+                dm.getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
         Display display = displays[0];
         int length = displays.length;
         int i = 0;
@@ -70,17 +78,29 @@ public class EmergencyCallActionViewModel implements ActionViewModel {
             if (SemWindowManager.getInstance().isFolded()) {
                 displayId = display.getDisplayId();
                 emergencyDialIntent = new Intent();
-                emergencyDialIntent.setAction("com.samsung.android.app.telephonyui.action.OPEN_EMERGENCY_DIALER_COVER_SCREEN");
+                emergencyDialIntent.setAction(
+                        "com.samsung.android.app.telephonyui.action.OPEN_EMERGENCY_DIALER_COVER_SCREEN");
             } else {
-                emergencyDialIntent = this.mTelecomManager.createLaunchEmergencyDialerIntent(null).setFlags(343932928).putExtra("com.android.phone.EmergencyDialer.extra.ENTRY_TYPE", 2);
+                emergencyDialIntent =
+                        this.mTelecomManager
+                                .createLaunchEmergencyDialerIntent(null)
+                                .setFlags(343932928)
+                                .putExtra("com.android.phone.EmergencyDialer.extra.ENTRY_TYPE", 2);
             }
             emergencyDialIntent.addFlags(268468224);
             emergencyDialIntent.putExtra("from_global_action", true);
             options.setLaunchDisplayId(displayId);
-            this.mContext.startActivityAsUser(emergencyDialIntent, options.toBundle(), new UserHandle(ActivityManager.getCurrentUser()));
+            this.mContext.startActivityAsUser(
+                    emergencyDialIntent,
+                    options.toBundle(),
+                    new UserHandle(ActivityManager.getCurrentUser()));
         }
         this.mGlobalActions.dismissDialog(true);
-        this.mSAnalytics.sendEventLog(SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.EID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.DID_EMERGENCY_SOS, 9L);
+        this.mSAnalytics.sendEventLog(
+                SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS,
+                SamsungGlobalActionsAnalytics.EID_DEVICE_OPTIONS,
+                SamsungGlobalActionsAnalytics.DID_EMERGENCY_SOS,
+                9L);
     }
 
     @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel

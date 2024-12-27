@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.SystemClock;
-import com.android.internal.util.ObservableServiceConnection;
+
 import java.util.concurrent.Executor;
 
 /* loaded from: classes5.dex */
@@ -20,45 +20,83 @@ public class PersistentServiceConnection<T> extends ObservableServiceConnection<
     private final int mMinConnectionDurationMs;
     private int mReconnectAttempts;
 
-    public PersistentServiceConnection(Context context, Executor executor, Handler handler, ObservableServiceConnection.ServiceTransformer<T> transformer, Intent serviceIntent, int flags, int minConnectionDurationMs, int maxReconnectAttempts, int baseReconnectDelayMs) {
-        this(context, executor, handler, transformer, serviceIntent, flags, minConnectionDurationMs, maxReconnectAttempts, baseReconnectDelayMs, new Injector());
+    public PersistentServiceConnection(
+            Context context,
+            Executor executor,
+            Handler handler,
+            ObservableServiceConnection.ServiceTransformer<T> transformer,
+            Intent serviceIntent,
+            int flags,
+            int minConnectionDurationMs,
+            int maxReconnectAttempts,
+            int baseReconnectDelayMs) {
+        this(
+                context,
+                executor,
+                handler,
+                transformer,
+                serviceIntent,
+                flags,
+                minConnectionDurationMs,
+                maxReconnectAttempts,
+                baseReconnectDelayMs,
+                new Injector());
     }
 
-    public PersistentServiceConnection(Context context, Executor executor, Handler handler, ObservableServiceConnection.ServiceTransformer<T> transformer, Intent serviceIntent, int flags, int minConnectionDurationMs, int maxReconnectAttempts, int baseReconnectDelayMs, Injector injector) {
+    public PersistentServiceConnection(
+            Context context,
+            Executor executor,
+            Handler handler,
+            ObservableServiceConnection.ServiceTransformer<T> transformer,
+            Intent serviceIntent,
+            int flags,
+            int minConnectionDurationMs,
+            int maxReconnectAttempts,
+            int baseReconnectDelayMs,
+            Injector injector) {
         super(context, executor, transformer, serviceIntent, flags);
-        this.mConnectionCallback = new ObservableServiceConnection.Callback<T>() { // from class: com.android.internal.util.PersistentServiceConnection.1
-            private long mConnectedTime;
+        this.mConnectionCallback =
+                new ObservableServiceConnection.Callback<
+                        T>() { // from class:
+                               // com.android.internal.util.PersistentServiceConnection.1
+                    private long mConnectedTime;
 
-            @Override // com.android.internal.util.ObservableServiceConnection.Callback
-            public void onConnected(ObservableServiceConnection<T> connection, T service) {
-                this.mConnectedTime = PersistentServiceConnection.this.mInjector.uptimeMillis();
-            }
-
-            @Override // com.android.internal.util.ObservableServiceConnection.Callback
-            public void onDisconnected(ObservableServiceConnection<T> connection, int reason) {
-                if (reason == 4) {
-                    return;
-                }
-                synchronized (PersistentServiceConnection.this.mLock) {
-                    if (PersistentServiceConnection.this.mInjector.uptimeMillis() - this.mConnectedTime > PersistentServiceConnection.this.mMinConnectionDurationMs) {
-                        PersistentServiceConnection.this.mReconnectAttempts = 0;
-                        PersistentServiceConnection.this.bindInternalLocked();
-                    } else {
-                        PersistentServiceConnection.this.scheduleConnectionAttemptLocked();
+                    @Override // com.android.internal.util.ObservableServiceConnection.Callback
+                    public void onConnected(ObservableServiceConnection<T> connection, T service) {
+                        this.mConnectedTime =
+                                PersistentServiceConnection.this.mInjector.uptimeMillis();
                     }
-                }
-            }
-        };
+
+                    @Override // com.android.internal.util.ObservableServiceConnection.Callback
+                    public void onDisconnected(
+                            ObservableServiceConnection<T> connection, int reason) {
+                        if (reason == 4) {
+                            return;
+                        }
+                        synchronized (PersistentServiceConnection.this.mLock) {
+                            if (PersistentServiceConnection.this.mInjector.uptimeMillis()
+                                            - this.mConnectedTime
+                                    > PersistentServiceConnection.this.mMinConnectionDurationMs) {
+                                PersistentServiceConnection.this.mReconnectAttempts = 0;
+                                PersistentServiceConnection.this.bindInternalLocked();
+                            } else {
+                                PersistentServiceConnection.this.scheduleConnectionAttemptLocked();
+                            }
+                        }
+                    }
+                };
         this.mLock = new Object();
-        this.mConnectRunnable = new Runnable() { // from class: com.android.internal.util.PersistentServiceConnection.2
-            @Override // java.lang.Runnable
-            public void run() {
-                synchronized (PersistentServiceConnection.this.mLock) {
-                    PersistentServiceConnection.this.mCancelToken = null;
-                    PersistentServiceConnection.this.bindInternalLocked();
-                }
-            }
-        };
+        this.mConnectRunnable =
+                new Runnable() { // from class:
+                                 // com.android.internal.util.PersistentServiceConnection.2
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        synchronized (PersistentServiceConnection.this.mLock) {
+                            PersistentServiceConnection.this.mCancelToken = null;
+                            PersistentServiceConnection.this.bindInternalLocked();
+                        }
+                    }
+                };
         this.mHandler = handler;
         this.mMinConnectionDurationMs = minConnectionDurationMs;
         this.mMaxReconnectAttempts = maxReconnectAttempts;
@@ -104,7 +142,8 @@ public class PersistentServiceConnection<T> extends ObservableServiceConnection<
         if (this.mReconnectAttempts >= this.mMaxReconnectAttempts) {
             return;
         }
-        long reconnectDelayMs = (long) Math.scalb(this.mBaseReconnectDelayMs, this.mReconnectAttempts);
+        long reconnectDelayMs =
+                (long) Math.scalb(this.mBaseReconnectDelayMs, this.mReconnectAttempts);
         this.mCancelToken = new Object();
         this.mHandler.postDelayed(this.mConnectRunnable, this.mCancelToken, reconnectDelayMs);
         this.mReconnectAttempts++;

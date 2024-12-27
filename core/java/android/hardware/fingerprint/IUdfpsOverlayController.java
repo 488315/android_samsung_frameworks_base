@@ -1,6 +1,5 @@
 package android.hardware.fingerprint;
 
-import android.hardware.fingerprint.IUdfpsOverlayControllerCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -21,32 +20,30 @@ public interface IUdfpsOverlayController extends IInterface {
 
     void setDebugMessage(int i, String str) throws RemoteException;
 
-    void showUdfpsOverlay(long j, int i, int i2, IUdfpsOverlayControllerCallback iUdfpsOverlayControllerCallback) throws RemoteException;
+    void showUdfpsOverlay(
+            long j, int i, int i2, IUdfpsOverlayControllerCallback iUdfpsOverlayControllerCallback)
+            throws RemoteException;
 
     public static class Default implements IUdfpsOverlayController {
         @Override // android.hardware.fingerprint.IUdfpsOverlayController
-        public void showUdfpsOverlay(long requestId, int sensorId, int reason, IUdfpsOverlayControllerCallback callback) throws RemoteException {
-        }
+        public void showUdfpsOverlay(
+                long requestId, int sensorId, int reason, IUdfpsOverlayControllerCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IUdfpsOverlayController
-        public void hideUdfpsOverlay(int sensorId) throws RemoteException {
-        }
+        public void hideUdfpsOverlay(int sensorId) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IUdfpsOverlayController
-        public void onAcquired(int sensorId, int acquiredInfo) throws RemoteException {
-        }
+        public void onAcquired(int sensorId, int acquiredInfo) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IUdfpsOverlayController
-        public void onEnrollmentProgress(int sensorId, int remaining) throws RemoteException {
-        }
+        public void onEnrollmentProgress(int sensorId, int remaining) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IUdfpsOverlayController
-        public void onEnrollmentHelp(int sensorId) throws RemoteException {
-        }
+        public void onEnrollmentHelp(int sensorId) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IUdfpsOverlayController
-        public void setDebugMessage(int sensorId, String message) throws RemoteException {
-        }
+        public void setDebugMessage(int sensorId, String message) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -54,7 +51,7 @@ public interface IUdfpsOverlayController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUdfpsOverlayController {
+    public abstract static class Stub extends Binder implements IUdfpsOverlayController {
         static final int TRANSACTION_hideUdfpsOverlay = 2;
         static final int TRANSACTION_onAcquired = 3;
         static final int TRANSACTION_onEnrollmentHelp = 5;
@@ -107,7 +104,8 @@ public interface IUdfpsOverlayController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUdfpsOverlayController.DESCRIPTOR);
             }
@@ -120,7 +118,9 @@ public interface IUdfpsOverlayController extends IInterface {
                     long _arg0 = data.readLong();
                     int _arg1 = data.readInt();
                     int _arg2 = data.readInt();
-                    IUdfpsOverlayControllerCallback _arg3 = IUdfpsOverlayControllerCallback.Stub.asInterface(data.readStrongBinder());
+                    IUdfpsOverlayControllerCallback _arg3 =
+                            IUdfpsOverlayControllerCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     showUdfpsOverlay(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -174,7 +174,12 @@ public interface IUdfpsOverlayController extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IUdfpsOverlayController
-            public void showUdfpsOverlay(long requestId, int sensorId, int reason, IUdfpsOverlayControllerCallback callback) throws RemoteException {
+            public void showUdfpsOverlay(
+                    long requestId,
+                    int sensorId,
+                    int reason,
+                    IUdfpsOverlayControllerCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IUdfpsOverlayController.DESCRIPTOR);

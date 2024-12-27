@@ -10,9 +10,10 @@ import android.os.UserHandle;
 import android.util.SparseIntArray;
 import android.util.proto.ProtoOutputStream;
 import android.util.proto.ProtoUtils;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
-import com.android.server.am.ActivityManagerService;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,12 +29,14 @@ public final class UidObserverController {
     public final ArrayList mPendingUidChanges = new ArrayList();
     public final ArrayList mAvailUidChanges = new ArrayList();
     public ChangeRecord[] mActiveUidChanges = new ChangeRecord[5];
-    public final UidObserverController$$ExternalSyntheticLambda0 mDispatchRunnable = new Runnable() { // from class: com.android.server.am.UidObserverController$$ExternalSyntheticLambda0
-        @Override // java.lang.Runnable
-        public final void run() {
-            UidObserverController.this.dispatchUidsChanged();
-        }
-    };
+    public final UidObserverController$$ExternalSyntheticLambda0 mDispatchRunnable =
+            new Runnable() { // from class:
+                             // com.android.server.am.UidObserverController$$ExternalSyntheticLambda0
+                @Override // java.lang.Runnable
+                public final void run() {
+                    UidObserverController.this.dispatchUidsChanged();
+                }
+            };
     public final ActiveUids mValidateUids = new ActiveUids(null, false);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -74,7 +77,8 @@ public final class UidObserverController {
         public int[] mUids;
         public final int mWhich;
 
-        public UidObserverRegistration(int i, String str, int i2, int i3, boolean z, int[] iArr, IBinder iBinder) {
+        public UidObserverRegistration(
+                int i, String str, int i2, int i3, boolean z, int[] iArr, IBinder iBinder) {
             this.mUid = i;
             this.mPkg = str;
             this.mWhich = i2;
@@ -135,7 +139,8 @@ public final class UidObserverController {
             long start = protoOutputStream.start(2246267895831L);
             protoOutputStream.write(1120986464257L, this.mUid);
             protoOutputStream.write(1138166333442L, this.mPkg);
-            ProtoUtils.writeBitWiseFlagsToProtoEnum(protoOutputStream, 2259152797699L, this.mWhich, ORIG_ENUMS, PROTO_ENUMS);
+            ProtoUtils.writeBitWiseFlagsToProtoEnum(
+                    protoOutputStream, 2259152797699L, this.mWhich, ORIG_ENUMS, PROTO_ENUMS);
             protoOutputStream.write(1120986464260L, this.mCutpoint);
             SparseIntArray sparseIntArray = this.mLastProcStates;
             if (sparseIntArray != null) {
@@ -176,9 +181,9 @@ public final class UidObserverController {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:91:0x0130, code lost:
-    
-        if (r14.procState != 20) goto L90;
-     */
+
+       if (r14.procState != 20) goto L90;
+    */
     /* JADX WARN: Removed duplicated region for block: B:101:0x0143 A[Catch: RemoteException -> 0x0192, TryCatch #0 {RemoteException -> 0x0192, blocks: (B:27:0x007a, B:30:0x0091, B:32:0x009f, B:50:0x00c3, B:51:0x00d8, B:53:0x00dc, B:55:0x00e0, B:56:0x00e6, B:58:0x00ea, B:59:0x00ef, B:61:0x00f5, B:63:0x00f9, B:64:0x0100, B:66:0x0104, B:68:0x0178, B:70:0x0182, B:72:0x0186, B:79:0x0114, B:83:0x0124, B:90:0x012e, B:93:0x0135, B:95:0x0139, B:98:0x0140, B:101:0x0143, B:103:0x0147, B:104:0x014e, B:105:0x0169, B:107:0x016d, B:109:0x0171, B:112:0x00cb, B:114:0x00cf, B:116:0x00d3, B:117:0x008b), top: B:26:0x007a }] */
     /* JADX WARN: Removed duplicated region for block: B:107:0x016d A[Catch: RemoteException -> 0x0192, TryCatch #0 {RemoteException -> 0x0192, blocks: (B:27:0x007a, B:30:0x0091, B:32:0x009f, B:50:0x00c3, B:51:0x00d8, B:53:0x00dc, B:55:0x00e0, B:56:0x00e6, B:58:0x00ea, B:59:0x00ef, B:61:0x00f5, B:63:0x00f9, B:64:0x0100, B:66:0x0104, B:68:0x0178, B:70:0x0182, B:72:0x0186, B:79:0x0114, B:83:0x0124, B:90:0x012e, B:93:0x0135, B:95:0x0139, B:98:0x0140, B:101:0x0143, B:103:0x0147, B:104:0x014e, B:105:0x0169, B:107:0x016d, B:109:0x0171, B:112:0x00cb, B:114:0x00cf, B:116:0x00d3, B:117:0x008b), top: B:26:0x007a }] */
     /* JADX WARN: Removed duplicated region for block: B:110:0x0165  */
@@ -192,14 +197,16 @@ public final class UidObserverController {
             Method dump skipped, instructions count: 527
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.UidObserverController.dispatchUidsChanged():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.UidObserverController.dispatchUidsChanged():void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0025, code lost:
-    
-        r8.println("  mUidObservers:");
-        r4 = true;
-     */
+
+       r8.println("  mUidObservers:");
+       r4 = true;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -282,7 +289,10 @@ public final class UidObserverController {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L21
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.UidObserverController.dump(java.io.PrintWriter, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.UidObserverController.dump(java.io.PrintWriter,"
+                    + " java.lang.String):void");
     }
 
     public final void dumpDebug(ProtoOutputStream protoOutputStream, String str) {
@@ -291,7 +301,9 @@ public final class UidObserverController {
             try {
                 int registeredCallbackCount = this.mUidObservers.getRegisteredCallbackCount();
                 while (i < registeredCallbackCount) {
-                    UidObserverRegistration uidObserverRegistration = (UidObserverRegistration) this.mUidObservers.getRegisteredCallbackCookie(i);
+                    UidObserverRegistration uidObserverRegistration =
+                            (UidObserverRegistration)
+                                    this.mUidObservers.getRegisteredCallbackCookie(i);
                     i = (str == null || str.equals(uidObserverRegistration.mPkg)) ? 0 : i + 1;
                     uidObserverRegistration.dumpDebug(protoOutputStream);
                 }
@@ -301,12 +313,26 @@ public final class UidObserverController {
         }
     }
 
-    public final IBinder register(IUidObserver iUidObserver, int i, int i2, String str, int i3, int[] iArr) {
-        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("UidObserver-", str, PackageManagerShellCommandDataLoader.STDIN_PATH);
+    public final IBinder register(
+            IUidObserver iUidObserver, int i, int i2, String str, int i3, int[] iArr) {
+        StringBuilder m =
+                DumpUtils$$ExternalSyntheticOutline0.m(
+                        "UidObserver-", str, PackageManagerShellCommandDataLoader.STDIN_PATH);
         m.append(UUID.randomUUID().toString());
         Binder binder = new Binder(m.toString());
         synchronized (this.mLock) {
-            this.mUidObservers.register(iUidObserver, new UidObserverRegistration(i3, str, i, i2, ActivityManager.checkUidPermission("android.permission.INTERACT_ACROSS_USERS_FULL", i3) == 0, iArr, binder));
+            this.mUidObservers.register(
+                    iUidObserver,
+                    new UidObserverRegistration(
+                            i3,
+                            str,
+                            i,
+                            i2,
+                            ActivityManager.checkUidPermission(
+                                            "android.permission.INTERACT_ACROSS_USERS_FULL", i3)
+                                    == 0,
+                            iArr,
+                            binder));
         }
         return binder;
     }

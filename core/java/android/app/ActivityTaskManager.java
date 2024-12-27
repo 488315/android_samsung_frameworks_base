@@ -1,7 +1,5 @@
 package android.app;
 
-import android.app.ActivityManager;
-import android.app.IActivityTaskManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -17,8 +15,11 @@ import android.util.DisplayMetrics;
 import android.util.Singleton;
 import android.view.RemoteAnimationDefinition;
 import android.window.SplashScreenView;
+
 import com.android.internal.R;
+
 import com.samsung.android.multiwindow.MultiWindowCoreState;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -29,7 +30,8 @@ public class ActivityTaskManager {
     public static final int DISPLAY_COMPAT_PACKAGES = 4;
     public static final int DISPLAY_CUTOUT_PACKAGES = 128;
     public static final int EMBED_ACTIVITY_PACKAGES = 1024;
-    public static final String EXTRA_IGNORE_TARGET_SECURITY = "android.app.extra.EXTRA_IGNORE_TARGET_SECURITY";
+    public static final String EXTRA_IGNORE_TARGET_SECURITY =
+            "android.app.extra.EXTRA_IGNORE_TARGET_SECURITY";
     public static final String EXTRA_OPTIONS = "android.app.extra.OPTIONS";
     public static final int INVALID_STACK_ID = -1;
     public static final int INVALID_TASK_ID = -1;
@@ -53,23 +55,25 @@ public class ActivityTaskManager {
     public static final int SPLIT_SCREEN_CREATE_MODE_UNDEFINED = -1;
     public static final int SUPPORTS_FLEX_PANEL_PACKAGES = 16;
     private static int sMaxRecentTasks = -1;
-    private static final Singleton<ActivityTaskManager> sInstance = new Singleton<ActivityTaskManager>() { // from class: android.app.ActivityTaskManager.1
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.util.Singleton
-        public ActivityTaskManager create() {
-            return new ActivityTaskManager();
-        }
-    };
-    private static final Singleton<IActivityTaskManager> IActivityTaskManagerSingleton = new Singleton<IActivityTaskManager>() { // from class: android.app.ActivityTaskManager.2
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.util.Singleton
-        public IActivityTaskManager create() {
-            IBinder b = ServiceManager.getService(Context.ACTIVITY_TASK_SERVICE);
-            return IActivityTaskManager.Stub.asInterface(b);
-        }
-    };
+    private static final Singleton<ActivityTaskManager> sInstance =
+            new Singleton<ActivityTaskManager>() { // from class: android.app.ActivityTaskManager.1
+                /* JADX INFO: Access modifiers changed from: protected */
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.util.Singleton
+                public ActivityTaskManager create() {
+                    return new ActivityTaskManager();
+                }
+            };
+    private static final Singleton<IActivityTaskManager> IActivityTaskManagerSingleton =
+            new Singleton<IActivityTaskManager>() { // from class: android.app.ActivityTaskManager.2
+                /* JADX INFO: Access modifiers changed from: protected */
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.util.Singleton
+                public IActivityTaskManager create() {
+                    IBinder b = ServiceManager.getService(Context.ACTIVITY_TASK_SERVICE);
+                    return IActivityTaskManager.Stub.asInterface(b);
+                }
+            };
 
     public @interface OrientationControlPolicy {
         public static final int DISABLED_FROM_ASPECT_RATIO = 0;
@@ -82,8 +86,7 @@ public class ActivityTaskManager {
         public static final int LEGACY_FULL_SCREEN_FLAG = 7;
     }
 
-    public @interface SplitCreateMode {
-    }
+    public @interface SplitCreateMode {}
 
     public static String splitCreateModeToString(int splitCreateMode) {
         switch (splitCreateMode) {
@@ -104,8 +107,7 @@ public class ActivityTaskManager {
         }
     }
 
-    private ActivityTaskManager() {
-    }
+    private ActivityTaskManager() {}
 
     public static ActivityTaskManager getInstance() {
         return sInstance.get();
@@ -148,7 +150,8 @@ public class ActivityTaskManager {
         return sMaxRecentTasks;
     }
 
-    public void onSplashScreenViewCopyFinished(int taskId, SplashScreenView.SplashScreenViewParcelable parcelable) {
+    public void onSplashScreenViewCopyFinished(
+            int taskId, SplashScreenView.SplashScreenViewParcelable parcelable) {
         try {
             getService().onSplashScreenViewCopyFinished(taskId, parcelable);
         } catch (RemoteException e) {
@@ -173,8 +176,11 @@ public class ActivityTaskManager {
     }
 
     private static boolean supportsMultiWindow(Context context, boolean ignoreCoreState) {
-        boolean isWatch = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
-        return (!ActivityManager.isLowRamDeviceStatic() || isWatch) && Resources.getSystem().getBoolean(R.bool.config_supportsMultiWindow) && (ignoreCoreState || MultiWindowCoreState.MW_ENABLED);
+        boolean isWatch =
+                context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH);
+        return (!ActivityManager.isLowRamDeviceStatic() || isWatch)
+                && Resources.getSystem().getBoolean(R.bool.config_supportsMultiWindow)
+                && (ignoreCoreState || MultiWindowCoreState.MW_ENABLED);
     }
 
     public static boolean supportsSplitScreenMultiWindow(Context context) {
@@ -182,7 +188,9 @@ public class ActivityTaskManager {
         context.getDisplay().getRealMetrics(dm);
         int widthDp = (int) (dm.widthPixels / dm.density);
         int heightDp = (int) (dm.heightPixels / dm.density);
-        return Math.max(widthDp, heightDp) >= 440 && supportsMultiWindow(context) && Resources.getSystem().getBoolean(R.bool.config_supportsSplitScreenMultiWindow);
+        return Math.max(widthDp, heightDp) >= 440
+                && supportsMultiWindow(context)
+                && Resources.getSystem().getBoolean(R.bool.config_supportsSplitScreenMultiWindow);
     }
 
     public void startSystemLockTaskMode(int taskId) {
@@ -227,7 +235,9 @@ public class ActivityTaskManager {
 
     public static boolean currentUiModeSupportsErrorDialogs(Configuration config) {
         int modeType = config.uiMode & 15;
-        return (modeType == 3 || (modeType == 6 && Build.IS_USER) || modeType == 4 || modeType == 7) ? false : true;
+        return (modeType == 3 || (modeType == 6 && Build.IS_USER) || modeType == 4 || modeType == 7)
+                ? false
+                : true;
     }
 
     public static boolean currentUiModeSupportsErrorDialogs(Context context) {
@@ -236,24 +246,29 @@ public class ActivityTaskManager {
     }
 
     public static int getMaxNumPictureInPictureActions(Context context) {
-        return context.getResources().getInteger(R.integer.config_pictureInPictureMaxNumberOfActions);
+        return context.getResources()
+                .getInteger(R.integer.config_pictureInPictureMaxNumberOfActions);
     }
 
     public List<ActivityManager.RunningTaskInfo> getTasks(int maxNum) {
         return getTasks(maxNum, false, false, -1);
     }
 
-    public List<ActivityManager.RunningTaskInfo> getTasks(int maxNum, boolean filterOnlyVisibleRecents) {
+    public List<ActivityManager.RunningTaskInfo> getTasks(
+            int maxNum, boolean filterOnlyVisibleRecents) {
         return getTasks(maxNum, filterOnlyVisibleRecents, false, -1);
     }
 
-    public List<ActivityManager.RunningTaskInfo> getTasks(int maxNum, boolean filterOnlyVisibleRecents, boolean keepIntentExtra) {
+    public List<ActivityManager.RunningTaskInfo> getTasks(
+            int maxNum, boolean filterOnlyVisibleRecents, boolean keepIntentExtra) {
         return getTasks(maxNum, filterOnlyVisibleRecents, keepIntentExtra, -1);
     }
 
-    public List<ActivityManager.RunningTaskInfo> getTasks(int maxNum, boolean filterOnlyVisibleRecents, boolean keepIntentExtra, int displayId) {
+    public List<ActivityManager.RunningTaskInfo> getTasks(
+            int maxNum, boolean filterOnlyVisibleRecents, boolean keepIntentExtra, int displayId) {
         try {
-            return getService().getTasks(maxNum, filterOnlyVisibleRecents, keepIntentExtra, displayId);
+            return getService()
+                    .getTasks(maxNum, filterOnlyVisibleRecents, keepIntentExtra, displayId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -291,7 +306,8 @@ public class ActivityTaskManager {
         }
     }
 
-    public void registerRemoteAnimationsForDisplay(int displayId, RemoteAnimationDefinition definition) {
+    public void registerRemoteAnimationsForDisplay(
+            int displayId, RemoteAnimationDefinition definition) {
         try {
             getService().registerRemoteAnimationsForDisplay(displayId, definition);
         } catch (RemoteException e) {
@@ -332,19 +348,21 @@ public class ActivityTaskManager {
     }
 
     public static class RootTaskInfo extends TaskInfo implements Parcelable {
-        public static final Parcelable.Creator<RootTaskInfo> CREATOR = new Parcelable.Creator<RootTaskInfo>() { // from class: android.app.ActivityTaskManager.RootTaskInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public RootTaskInfo createFromParcel(Parcel source) {
-                return new RootTaskInfo(source);
-            }
+        public static final Parcelable.Creator<RootTaskInfo> CREATOR =
+                new Parcelable.Creator<RootTaskInfo>() { // from class:
+                    // android.app.ActivityTaskManager.RootTaskInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public RootTaskInfo createFromParcel(Parcel source) {
+                        return new RootTaskInfo(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public RootTaskInfo[] newArray(int size) {
-                return new RootTaskInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public RootTaskInfo[] newArray(int size) {
+                        return new RootTaskInfo[size];
+                    }
+                };
         public Rect bounds;
         public Rect[] childTaskBounds;
         public int[] childTaskIds;

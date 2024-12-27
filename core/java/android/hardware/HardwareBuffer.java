@@ -5,36 +5,41 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.Telephony;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
 import dalvik.system.CloseGuard;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public final class HardwareBuffer implements Parcelable, AutoCloseable {
     public static final int BLOB = 33;
-    public static final Parcelable.Creator<HardwareBuffer> CREATOR = new Parcelable.Creator<HardwareBuffer>() { // from class: android.hardware.HardwareBuffer.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HardwareBuffer createFromParcel(Parcel in) {
-            if (in == null) {
-                throw new NullPointerException("null passed to createFromParcel");
-            }
-            long nativeObject = HardwareBuffer.nReadHardwareBufferFromParcel(in);
-            if (nativeObject != 0) {
-                return new HardwareBuffer(nativeObject);
-            }
-            throw new BadParcelableException("Failed to read hardware buffer");
-        }
+    public static final Parcelable.Creator<HardwareBuffer> CREATOR =
+            new Parcelable.Creator<
+                    HardwareBuffer>() { // from class: android.hardware.HardwareBuffer.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HardwareBuffer createFromParcel(Parcel in) {
+                    if (in == null) {
+                        throw new NullPointerException("null passed to createFromParcel");
+                    }
+                    long nativeObject = HardwareBuffer.nReadHardwareBufferFromParcel(in);
+                    if (nativeObject != 0) {
+                        return new HardwareBuffer(nativeObject);
+                    }
+                    throw new BadParcelableException("Failed to read hardware buffer");
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HardwareBuffer[] newArray(int size) {
-            return new HardwareBuffer[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HardwareBuffer[] newArray(int size) {
+                    return new HardwareBuffer[size];
+                }
+            };
     public static final int DS_24UI8 = 50;
     public static final int DS_FP32UI8 = 52;
     public static final int D_16 = 48;
@@ -72,12 +77,10 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
     private long mNativeObject;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Format {
-    }
+    public @interface Format {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Usage {
-    }
+    public @interface Usage {}
 
     private static native long nCreateFromGraphicBuffer(GraphicBuffer graphicBuffer);
 
@@ -128,7 +131,10 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
         }
         long nativeObject = nCreateHardwareBuffer(width, height, format, layers, usage);
         if (nativeObject == 0) {
-            throw new IllegalArgumentException("Unable to create a HardwareBuffer, either the dimensions passed were too large, too many image layers were requested, or an invalid set of usage flags or invalid format was passed");
+            throw new IllegalArgumentException(
+                    "Unable to create a HardwareBuffer, either the dimensions passed were too"
+                        + " large, too many image layers were requested, or an invalid set of usage"
+                        + " flags or invalid format was passed");
         }
         return new HardwareBuffer(nativeObject);
     }
@@ -159,7 +165,8 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
         this.mNativeObject = nativeObject;
         long bufferSize = nEstimateSize(nativeObject);
         ClassLoader loader = HardwareBuffer.class.getClassLoader();
-        NativeAllocationRegistry registry = new NativeAllocationRegistry(loader, nGetNativeFinalizer(), bufferSize);
+        NativeAllocationRegistry registry =
+                new NativeAllocationRegistry(loader, nGetNativeFinalizer(), bufferSize);
         this.mCleaner = registry.registerNativeAllocation(this, this.mNativeObject);
         this.mCloseGuard.open("HardwareBuffer.close");
     }
@@ -205,7 +212,8 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
 
     private void checkClosed(String name) {
         if (isClosed()) {
-            throw new IllegalStateException("This HardwareBuffer has been closed and its " + name + " cannot be obtained.");
+            throw new IllegalStateException(
+                    "This HardwareBuffer has been closed and its " + name + " cannot be obtained.");
         }
     }
 
@@ -231,7 +239,8 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         if (isClosed()) {
-            throw new IllegalStateException("This HardwareBuffer has been closed and cannot be written to a parcel.");
+            throw new IllegalStateException(
+                    "This HardwareBuffer has been closed and cannot be written to a parcel.");
         }
         nWriteHardwareBufferToParcel(this.mNativeObject, dest);
     }

@@ -31,15 +31,14 @@ class SemDragAndDropAnimationCore {
         this.mItemAnimationListener = l;
     }
 
-    static abstract class ItemAnimation {
+    abstract static class ItemAnimation {
         int mDuration;
         float mProgress;
         long mStartTime;
 
         abstract void getTransformation(Transformation transformation);
 
-        ItemAnimation() {
-        }
+        ItemAnimation() {}
 
         void computeAnimation(long curUpTime) {
             long elapsed = curUpTime - this.mStartTime;
@@ -70,8 +69,7 @@ class SemDragAndDropAnimationCore {
         private int mOffsetXDest;
         private int mOffsetYDest;
 
-        TranslateItemAnimation() {
-        }
+        TranslateItemAnimation() {}
 
         void translate(int offsetDestX, int deltaX, int offsetDestY, int deltaY) {
             this.mOffsetXDest = offsetDestX;
@@ -142,7 +140,8 @@ class SemDragAndDropAnimationCore {
             this.mPivotY = childHitRect.exactCenterY();
         }
 
-        void setScaleUpParameters(float fromX, float toX, float fromY, float toY, float pivotX, float pivotY) {
+        void setScaleUpParameters(
+                float fromX, float toX, float fromY, float toY, float pivotX, float pivotY) {
             this.mFromX = fromX;
             this.mToX = toX;
             this.mFromY = fromY;
@@ -202,8 +201,7 @@ class SemDragAndDropAnimationCore {
         private SparseArray<ItemAnimation> mAnimations = new SparseArray<>();
         private boolean mIsAnimating;
 
-        ItemAnimator() {
-        }
+        ItemAnimator() {}
 
         ItemAnimation getItemAnimation(int position) {
             return this.mAnimations.get(position, null);

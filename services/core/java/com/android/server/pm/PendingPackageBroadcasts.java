@@ -2,6 +2,7 @@ package com.android.server.pm;
 
 import android.util.ArrayMap;
 import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -33,7 +34,9 @@ public final class PendingPackageBroadcasts {
                     ArrayMap arrayMap = (ArrayMap) this.mUidMap.valueAt(i);
                     ArrayMap arrayMap2 = new ArrayMap();
                     for (int i2 = 0; i2 < arrayMap.size(); i2++) {
-                        arrayMap2.put((String) arrayMap.keyAt(i2), new ArrayList((Collection) arrayMap.valueAt(i2)));
+                        arrayMap2.put(
+                                (String) arrayMap.keyAt(i2),
+                                new ArrayList((Collection) arrayMap.valueAt(i2)));
                     }
                     sparseArray.put(this.mUidMap.keyAt(i), arrayMap2);
                 }
@@ -53,7 +56,11 @@ public final class PendingPackageBroadcasts {
                     arrayMap = new ArrayMap();
                     this.mUidMap.put(i, arrayMap);
                 }
-                arrayList = (ArrayList) arrayMap.computeIfAbsent(str, new PendingPackageBroadcasts$$ExternalSyntheticLambda0());
+                arrayList =
+                        (ArrayList)
+                                arrayMap.computeIfAbsent(
+                                        str,
+                                        new PendingPackageBroadcasts$$ExternalSyntheticLambda0());
             } catch (Throwable th) {
                 throw th;
             }

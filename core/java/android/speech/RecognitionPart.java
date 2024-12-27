@@ -4,8 +4,10 @@ import android.annotation.NonNull;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -18,27 +20,28 @@ public final class RecognitionPart implements Parcelable {
     public static final int CONFIDENCE_LEVEL_MEDIUM_HIGH = 4;
     public static final int CONFIDENCE_LEVEL_MEDIUM_LOW = 2;
     public static final int CONFIDENCE_LEVEL_UNKNOWN = 0;
-    public static final Parcelable.Creator<RecognitionPart> CREATOR = new Parcelable.Creator<RecognitionPart>() { // from class: android.speech.RecognitionPart.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionPart[] newArray(int size) {
-            return new RecognitionPart[size];
-        }
+    public static final Parcelable.Creator<RecognitionPart> CREATOR =
+            new Parcelable.Creator<
+                    RecognitionPart>() { // from class: android.speech.RecognitionPart.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionPart[] newArray(int size) {
+                    return new RecognitionPart[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionPart createFromParcel(Parcel in) {
-            return new RecognitionPart(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionPart createFromParcel(Parcel in) {
+                    return new RecognitionPart(in);
+                }
+            };
     private final int mConfidenceLevel;
     private final String mFormattedText;
     private final String mRawText;
     private final long mTimestampMillis;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConfidenceLevel {
-    }
+    public @interface ConfidenceLevel {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public static String defaultFormattedText() {
@@ -56,15 +59,16 @@ public final class RecognitionPart implements Parcelable {
     }
 
     private void onConstructed() {
-        Preconditions.checkArgumentNonnegative(this.mTimestampMillis, "The timestamp must be non-negative.");
+        Preconditions.checkArgumentNonnegative(
+                this.mTimestampMillis, "The timestamp must be non-negative.");
     }
 
-    static abstract class BaseBuilder {
-        BaseBuilder() {
-        }
+    abstract static class BaseBuilder {
+        BaseBuilder() {}
 
         public Builder setFormattedText(String value) {
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) value);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class, (NonNull) null, (Object) value);
             Builder builder = (Builder) this;
             builder.checkNotUsed();
             builder.mBuilderFieldsSet |= 2;
@@ -92,14 +96,28 @@ public final class RecognitionPart implements Parcelable {
         }
     }
 
-    RecognitionPart(String rawText, String formattedText, long timestampMillis, int confidenceLevel) {
+    RecognitionPart(
+            String rawText, String formattedText, long timestampMillis, int confidenceLevel) {
         this.mRawText = rawText;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mRawText);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mRawText);
         this.mFormattedText = formattedText;
         this.mTimestampMillis = timestampMillis;
         this.mConfidenceLevel = confidenceLevel;
-        if (this.mConfidenceLevel != 0 && this.mConfidenceLevel != 1 && this.mConfidenceLevel != 2 && this.mConfidenceLevel != 3 && this.mConfidenceLevel != 4 && this.mConfidenceLevel != 5) {
-            throw new IllegalArgumentException("confidenceLevel was " + this.mConfidenceLevel + " but must be one of: CONFIDENCE_LEVEL_UNKNOWN(0), CONFIDENCE_LEVEL_LOW(1), CONFIDENCE_LEVEL_MEDIUM_LOW(2), CONFIDENCE_LEVEL_MEDIUM(3), CONFIDENCE_LEVEL_MEDIUM_HIGH(4), CONFIDENCE_LEVEL_HIGH(5" + NavigationBarInflaterView.KEY_CODE_END);
+        if (this.mConfidenceLevel != 0
+                && this.mConfidenceLevel != 1
+                && this.mConfidenceLevel != 2
+                && this.mConfidenceLevel != 3
+                && this.mConfidenceLevel != 4
+                && this.mConfidenceLevel != 5) {
+            throw new IllegalArgumentException(
+                    "confidenceLevel was "
+                            + this.mConfidenceLevel
+                            + " but must be one of: CONFIDENCE_LEVEL_UNKNOWN(0),"
+                            + " CONFIDENCE_LEVEL_LOW(1), CONFIDENCE_LEVEL_MEDIUM_LOW(2),"
+                            + " CONFIDENCE_LEVEL_MEDIUM(3), CONFIDENCE_LEVEL_MEDIUM_HIGH(4),"
+                            + " CONFIDENCE_LEVEL_HIGH(5"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         onConstructed();
     }
@@ -121,7 +139,15 @@ public final class RecognitionPart implements Parcelable {
     }
 
     public String toString() {
-        return "RecognitionPart { rawText = " + this.mRawText + ", formattedText = " + this.mFormattedText + ", timestampMillis = " + this.mTimestampMillis + ", confidenceLevel = " + confidenceLevelToString(this.mConfidenceLevel) + " }";
+        return "RecognitionPart { rawText = "
+                + this.mRawText
+                + ", formattedText = "
+                + this.mFormattedText
+                + ", timestampMillis = "
+                + this.mTimestampMillis
+                + ", confidenceLevel = "
+                + confidenceLevelToString(this.mConfidenceLevel)
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -132,7 +158,10 @@ public final class RecognitionPart implements Parcelable {
             return false;
         }
         RecognitionPart that = (RecognitionPart) o;
-        if (Objects.equals(this.mRawText, that.mRawText) && Objects.equals(this.mFormattedText, that.mFormattedText) && this.mTimestampMillis == that.mTimestampMillis && this.mConfidenceLevel == that.mConfidenceLevel) {
+        if (Objects.equals(this.mRawText, that.mRawText)
+                && Objects.equals(this.mFormattedText, that.mFormattedText)
+                && this.mTimestampMillis == that.mTimestampMillis
+                && this.mConfidenceLevel == that.mConfidenceLevel) {
             return true;
         }
         return false;
@@ -140,7 +169,10 @@ public final class RecognitionPart implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + Objects.hashCode(this.mRawText);
-        return (((((_hash * 31) + Objects.hashCode(this.mFormattedText)) * 31) + Long.hashCode(this.mTimestampMillis)) * 31) + this.mConfidenceLevel;
+        return (((((_hash * 31) + Objects.hashCode(this.mFormattedText)) * 31)
+                                + Long.hashCode(this.mTimestampMillis))
+                        * 31)
+                + this.mConfidenceLevel;
     }
 
     @Override // android.os.Parcelable
@@ -167,12 +199,25 @@ public final class RecognitionPart implements Parcelable {
         long timestampMillis = in.readLong();
         int confidenceLevel = in.readInt();
         this.mRawText = rawText;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mRawText);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mRawText);
         this.mFormattedText = formattedText;
         this.mTimestampMillis = timestampMillis;
         this.mConfidenceLevel = confidenceLevel;
-        if (this.mConfidenceLevel != 0 && this.mConfidenceLevel != 1 && this.mConfidenceLevel != 2 && this.mConfidenceLevel != 3 && this.mConfidenceLevel != 4 && this.mConfidenceLevel != 5) {
-            throw new IllegalArgumentException("confidenceLevel was " + this.mConfidenceLevel + " but must be one of: CONFIDENCE_LEVEL_UNKNOWN(0), CONFIDENCE_LEVEL_LOW(1), CONFIDENCE_LEVEL_MEDIUM_LOW(2), CONFIDENCE_LEVEL_MEDIUM(3), CONFIDENCE_LEVEL_MEDIUM_HIGH(4), CONFIDENCE_LEVEL_HIGH(5" + NavigationBarInflaterView.KEY_CODE_END);
+        if (this.mConfidenceLevel != 0
+                && this.mConfidenceLevel != 1
+                && this.mConfidenceLevel != 2
+                && this.mConfidenceLevel != 3
+                && this.mConfidenceLevel != 4
+                && this.mConfidenceLevel != 5) {
+            throw new IllegalArgumentException(
+                    "confidenceLevel was "
+                            + this.mConfidenceLevel
+                            + " but must be one of: CONFIDENCE_LEVEL_UNKNOWN(0),"
+                            + " CONFIDENCE_LEVEL_LOW(1), CONFIDENCE_LEVEL_MEDIUM_LOW(2),"
+                            + " CONFIDENCE_LEVEL_MEDIUM(3), CONFIDENCE_LEVEL_MEDIUM_HIGH(4),"
+                            + " CONFIDENCE_LEVEL_HIGH(5"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         onConstructed();
     }
@@ -191,7 +236,8 @@ public final class RecognitionPart implements Parcelable {
 
         public Builder(String rawText) {
             this.mRawText = rawText;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mRawText);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mRawText);
         }
 
         public Builder setRawText(String value) {
@@ -227,19 +273,24 @@ public final class RecognitionPart implements Parcelable {
             if ((this.mBuilderFieldsSet & 8) == 0) {
                 this.mConfidenceLevel = RecognitionPart.defaultConfidenceLevel();
             }
-            RecognitionPart o = new RecognitionPart(this.mRawText, this.mFormattedText, this.mTimestampMillis, this.mConfidenceLevel);
+            RecognitionPart o =
+                    new RecognitionPart(
+                            this.mRawText,
+                            this.mFormattedText,
+                            this.mTimestampMillis,
+                            this.mConfidenceLevel);
             return o;
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 16) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

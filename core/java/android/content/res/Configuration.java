@@ -12,15 +12,18 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Locale;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public final class Configuration implements Parcelable, Comparable<Configuration> {
@@ -109,8 +112,7 @@ public final class Configuration implements Parcelable, Comparable<Configuration
     public static final int ORIENTATION_LANDSCAPE = 2;
     public static final int ORIENTATION_PORTRAIT = 1;
 
-    @Deprecated
-    public static final int ORIENTATION_SQUARE = 3;
+    @Deprecated public static final int ORIENTATION_SQUARE = 3;
     public static final int ORIENTATION_UNDEFINED = 0;
     public static final int SCREENLAYOUT_COMPAT_NEEDED = 268435456;
     public static final int SCREENLAYOUT_LAYOUTDIR_LTR = 64;
@@ -154,8 +156,7 @@ public final class Configuration implements Parcelable, Comparable<Configuration
     public static final int TOUCHSCREEN_FINGER = 3;
     public static final int TOUCHSCREEN_NOTOUCH = 1;
 
-    @Deprecated
-    public static final int TOUCHSCREEN_STYLUS = 2;
+    @Deprecated public static final int TOUCHSCREEN_STYLUS = 2;
     public static final int TOUCHSCREEN_UNDEFINED = 0;
     public static final int UI_MODE_NIGHT_MASK = 48;
     public static final int UI_MODE_NIGHT_NO = 16;
@@ -209,8 +210,7 @@ public final class Configuration implements Parcelable, Comparable<Configuration
     public int keyboard;
     public int keyboardHidden;
 
-    @Deprecated
-    public Locale locale;
+    @Deprecated public Locale locale;
     private int mGrammaticalGender;
     private LocaleList mLocaleList;
     public int mcc;
@@ -236,34 +236,32 @@ public final class Configuration implements Parcelable, Comparable<Configuration
     public boolean userSetLocale;
     public final WindowConfiguration windowConfiguration;
     public static final Configuration EMPTY = new Configuration();
-    public static final Parcelable.Creator<Configuration> CREATOR = new Parcelable.Creator<Configuration>() { // from class: android.content.res.Configuration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Configuration createFromParcel(Parcel source) {
-            return new Configuration(source);
-        }
+    public static final Parcelable.Creator<Configuration> CREATOR =
+            new Parcelable.Creator<
+                    Configuration>() { // from class: android.content.res.Configuration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Configuration createFromParcel(Parcel source) {
+                    return new Configuration(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Configuration[] newArray(int size) {
-            return new Configuration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Configuration[] newArray(int size) {
+                    return new Configuration[size];
+                }
+            };
 
-    public @interface DexMode {
-    }
-
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface GrammaticalGender {
-    }
+    public @interface DexMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NativeConfig {
-    }
+    public @interface GrammaticalGender {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Orientation {
-    }
+    public @interface NativeConfig {}
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Orientation {}
 
     public static int resetScreenLayout(int curLayout) {
         return ((-268435520) & curLayout) | 36;
@@ -408,8 +406,12 @@ public final class Configuration implements Parcelable, Comparable<Configuration
     }
 
     private void fixUpLocaleList() {
-        if ((this.locale == null && !this.mLocaleList.isEmpty()) || (this.locale != null && !this.locale.equals(this.mLocaleList.get(0)))) {
-            this.mLocaleList = this.locale == null ? LocaleList.getEmptyLocaleList() : new LocaleList(this.locale);
+        if ((this.locale == null && !this.mLocaleList.isEmpty())
+                || (this.locale != null && !this.locale.equals(this.mLocaleList.get(0)))) {
+            this.mLocaleList =
+                    this.locale == null
+                            ? LocaleList.getEmptyLocaleList()
+                            : new LocaleList(this.locale);
         }
     }
 
@@ -853,7 +855,11 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         return sb.toString();
     }
 
-    public void dumpDebug(ProtoOutputStream protoOutputStream, long fieldId, boolean persisted, boolean critical) {
+    public void dumpDebug(
+            ProtoOutputStream protoOutputStream,
+            long fieldId,
+            boolean persisted,
+            boolean critical) {
         long token = protoOutputStream.start(fieldId);
         if (!critical) {
             protoOutputStream.write(1108101562369L, this.fontScale);
@@ -871,12 +877,14 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             protoOutputStream.write(ConfigurationProto.NAVIGATION, this.navigation);
             protoOutputStream.write(ConfigurationProto.NAVIGATION_HIDDEN, this.navigationHidden);
             protoOutputStream.write(ConfigurationProto.UI_MODE, this.uiMode);
-            protoOutputStream.write(ConfigurationProto.SMALLEST_SCREEN_WIDTH_DP, this.smallestScreenWidthDp);
+            protoOutputStream.write(
+                    ConfigurationProto.SMALLEST_SCREEN_WIDTH_DP, this.smallestScreenWidthDp);
             protoOutputStream.write(ConfigurationProto.DENSITY_DPI, this.densityDpi);
             if (!persisted && this.windowConfiguration != null) {
                 this.windowConfiguration.dumpDebug(protoOutputStream, 1146756268051L);
             }
-            protoOutputStream.write(ConfigurationProto.FONT_WEIGHT_ADJUSTMENT, this.fontWeightAdjustment);
+            protoOutputStream.write(
+                    ConfigurationProto.FONT_WEIGHT_ADJUSTMENT, this.fontWeightAdjustment);
         }
         protoOutputStream.write(1155346202637L, this.orientation);
         protoOutputStream.write(ConfigurationProto.SCREEN_WIDTH_DP, this.screenWidthDp);
@@ -900,15 +908,20 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void readFromProto(android.util.proto.ProtoInputStream r27, long r28) throws java.io.IOException {
+    public void readFromProto(android.util.proto.ProtoInputStream r27, long r28)
+            throws java.io.IOException {
         /*
             Method dump skipped, instructions count: 1156
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.content.res.Configuration.readFromProto(android.util.proto.ProtoInputStream, long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.content.res.Configuration.readFromProto(android.util.proto.ProtoInputStream,"
+                    + " long):void");
     }
 
-    public void writeResConfigToProto(ProtoOutputStream protoOutputStream, long fieldId, DisplayMetrics metrics) {
+    public void writeResConfigToProto(
+            ProtoOutputStream protoOutputStream, long fieldId, DisplayMetrics metrics) {
         int width;
         int height;
         if (metrics.widthPixels >= metrics.heightPixels) {
@@ -1067,21 +1080,26 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             changed |= 128;
             this.orientation = delta.orientation;
         }
-        if ((delta.screenLayout & 15) != 0 && (delta.screenLayout & 15) != (this.screenLayout & 15)) {
+        if ((delta.screenLayout & 15) != 0
+                && (delta.screenLayout & 15) != (this.screenLayout & 15)) {
             changed |= 256;
             this.screenLayout = (this.screenLayout & (-16)) | (delta.screenLayout & 15);
         }
-        if ((delta.screenLayout & 48) != 0 && (delta.screenLayout & 48) != (this.screenLayout & 48)) {
+        if ((delta.screenLayout & 48) != 0
+                && (delta.screenLayout & 48) != (this.screenLayout & 48)) {
             changed |= 256;
             this.screenLayout = (this.screenLayout & (-49)) | (delta.screenLayout & 48);
         }
-        if ((delta.screenLayout & 768) != 0 && (delta.screenLayout & 768) != (this.screenLayout & 768)) {
+        if ((delta.screenLayout & 768) != 0
+                && (delta.screenLayout & 768) != (this.screenLayout & 768)) {
             changed |= 256;
             this.screenLayout = (this.screenLayout & (-769)) | (delta.screenLayout & 768);
         }
-        if ((delta.screenLayout & 268435456) != (this.screenLayout & 268435456) && delta.screenLayout != 0) {
+        if ((delta.screenLayout & 268435456) != (this.screenLayout & 268435456)
+                && delta.screenLayout != 0) {
             changed |= 256;
-            this.screenLayout = (this.screenLayout & (-268435457)) | (delta.screenLayout & 268435456);
+            this.screenLayout =
+                    (this.screenLayout & (-268435457)) | (delta.screenLayout & 268435456);
         }
         if ((delta.colorMode & 3) != 0 && (delta.colorMode & 3) != (this.colorMode & 3)) {
             changed |= 16384;
@@ -1108,7 +1126,8 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             changed |= 1024;
             this.screenHeightDp = delta.screenHeightDp;
         }
-        if (delta.smallestScreenWidthDp != 0 && this.smallestScreenWidthDp != delta.smallestScreenWidthDp) {
+        if (delta.smallestScreenWidthDp != 0
+                && this.smallestScreenWidthDp != delta.smallestScreenWidthDp) {
             changed |= 2048;
             this.smallestScreenWidthDp = delta.smallestScreenWidthDp;
         }
@@ -1135,7 +1154,8 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         if (!publicOnly && this.windowConfiguration.updateFrom(delta.windowConfiguration) != 0) {
             changed |= 536870912;
         }
-        if (delta.fontWeightAdjustment != Integer.MAX_VALUE && delta.fontWeightAdjustment != this.fontWeightAdjustment) {
+        if (delta.fontWeightAdjustment != Integer.MAX_VALUE
+                && delta.fontWeightAdjustment != this.fontWeightAdjustment) {
             changed |= 268435456;
             this.fontWeightAdjustment = delta.fontWeightAdjustment;
         }
@@ -1151,11 +1171,13 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             changed |= 16777216;
             this.boldFont = delta.boldFont;
         }
-        if (delta.semButtonShapeEnabled != -1 && this.semButtonShapeEnabled != delta.semButtonShapeEnabled) {
+        if (delta.semButtonShapeEnabled != -1
+                && this.semButtonShapeEnabled != delta.semButtonShapeEnabled) {
             changed |= 2097152;
             this.semButtonShapeEnabled = delta.semButtonShapeEnabled;
         }
-        if (delta.semCursorThicknessScale > 0.0f && this.semCursorThicknessScale != delta.semCursorThicknessScale) {
+        if (delta.semCursorThicknessScale > 0.0f
+                && this.semCursorThicknessScale != delta.semCursorThicknessScale) {
             changed |= 8388608;
             this.semCursorThicknessScale = delta.semCursorThicknessScale;
         }
@@ -1163,7 +1185,8 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             changed |= 4194304;
             this.nightDim = delta.nightDim;
         }
-        if (delta.semDesktopModeEnabled != -1 && this.semDesktopModeEnabled != delta.semDesktopModeEnabled) {
+        if (delta.semDesktopModeEnabled != -1
+                && this.semDesktopModeEnabled != delta.semDesktopModeEnabled) {
             this.semDesktopModeEnabled = delta.semDesktopModeEnabled;
         }
         if (delta.dexMode != -1 && this.dexMode != delta.dexMode) {
@@ -1297,11 +1320,13 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         }
         fixUpLocaleList();
         delta.fixUpLocaleList();
-        if ((compareUndefined || !delta.mLocaleList.isEmpty()) && !this.mLocaleList.equals(delta.mLocaleList)) {
+        if ((compareUndefined || !delta.mLocaleList.isEmpty())
+                && !this.mLocaleList.equals(delta.mLocaleList)) {
             changed = changed | 4 | 8192;
         }
         int deltaScreenLayoutDir = delta.screenLayout & 192;
-        if ((compareUndefined || deltaScreenLayoutDir != 0) && deltaScreenLayoutDir != (this.screenLayout & 192)) {
+        if ((compareUndefined || deltaScreenLayoutDir != 0)
+                && deltaScreenLayoutDir != (this.screenLayout & 192)) {
             changed |= 8192;
         }
         if ((compareUndefined || delta.touchscreen != 0) && this.touchscreen != delta.touchscreen) {
@@ -1310,40 +1335,50 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         if ((compareUndefined || delta.keyboard != 0) && this.keyboard != delta.keyboard) {
             changed |= 16;
         }
-        if ((compareUndefined || delta.keyboardHidden != 0) && this.keyboardHidden != delta.keyboardHidden) {
+        if ((compareUndefined || delta.keyboardHidden != 0)
+                && this.keyboardHidden != delta.keyboardHidden) {
             changed |= 32;
         }
-        if ((compareUndefined || delta.hardKeyboardHidden != 0) && this.hardKeyboardHidden != delta.hardKeyboardHidden) {
+        if ((compareUndefined || delta.hardKeyboardHidden != 0)
+                && this.hardKeyboardHidden != delta.hardKeyboardHidden) {
             changed |= 32;
         }
         if ((compareUndefined || delta.navigation != 0) && this.navigation != delta.navigation) {
             changed |= 64;
         }
-        if ((compareUndefined || delta.navigationHidden != 0) && this.navigationHidden != delta.navigationHidden) {
+        if ((compareUndefined || delta.navigationHidden != 0)
+                && this.navigationHidden != delta.navigationHidden) {
             changed |= 32;
         }
         if ((compareUndefined || delta.orientation != 0) && this.orientation != delta.orientation) {
             changed |= 128;
         }
-        if ((compareUndefined || getScreenLayoutNoDirection(delta.screenLayout) != 0) && getScreenLayoutNoDirection(this.screenLayout) != getScreenLayoutNoDirection(delta.screenLayout)) {
+        if ((compareUndefined || getScreenLayoutNoDirection(delta.screenLayout) != 0)
+                && getScreenLayoutNoDirection(this.screenLayout)
+                        != getScreenLayoutNoDirection(delta.screenLayout)) {
             changed |= 256;
         }
-        if ((compareUndefined || (delta.colorMode & 12) != 0) && (this.colorMode & 12) != (delta.colorMode & 12)) {
+        if ((compareUndefined || (delta.colorMode & 12) != 0)
+                && (this.colorMode & 12) != (delta.colorMode & 12)) {
             changed |= 16384;
         }
-        if ((compareUndefined || (delta.colorMode & 3) != 0) && (this.colorMode & 3) != (delta.colorMode & 3)) {
+        if ((compareUndefined || (delta.colorMode & 3) != 0)
+                && (this.colorMode & 3) != (delta.colorMode & 3)) {
             changed |= 16384;
         }
         if ((compareUndefined || delta.uiMode != 0) && this.uiMode != delta.uiMode) {
             changed |= 512;
         }
-        if ((compareUndefined || delta.screenWidthDp != 0) && this.screenWidthDp != delta.screenWidthDp) {
+        if ((compareUndefined || delta.screenWidthDp != 0)
+                && this.screenWidthDp != delta.screenWidthDp) {
             changed |= 1024;
         }
-        if ((compareUndefined || delta.screenHeightDp != 0) && this.screenHeightDp != delta.screenHeightDp) {
+        if ((compareUndefined || delta.screenHeightDp != 0)
+                && this.screenHeightDp != delta.screenHeightDp) {
             changed |= 1024;
         }
-        if ((compareUndefined || delta.smallestScreenWidthDp != 0) && this.smallestScreenWidthDp != delta.smallestScreenWidthDp) {
+        if ((compareUndefined || delta.smallestScreenWidthDp != 0)
+                && this.smallestScreenWidthDp != delta.smallestScreenWidthDp) {
             changed |= 2048;
         }
         if ((compareUndefined || delta.densityDpi != 0) && this.densityDpi != delta.densityDpi) {
@@ -1352,13 +1387,17 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         if ((compareUndefined || delta.assetsSeq != 0) && this.assetsSeq != delta.assetsSeq) {
             changed |= Integer.MIN_VALUE;
         }
-        if (!publicOnly && this.windowConfiguration.diff(delta.windowConfiguration, compareUndefined) != 0) {
+        if (!publicOnly
+                && this.windowConfiguration.diff(delta.windowConfiguration, compareUndefined)
+                        != 0) {
             changed |= 536870912;
         }
-        if ((compareUndefined || delta.fontWeightAdjustment != Integer.MAX_VALUE) && this.fontWeightAdjustment != delta.fontWeightAdjustment) {
+        if ((compareUndefined || delta.fontWeightAdjustment != Integer.MAX_VALUE)
+                && this.fontWeightAdjustment != delta.fontWeightAdjustment) {
             changed |= 268435456;
         }
-        if ((compareUndefined || delta.mGrammaticalGender != -1) && this.mGrammaticalGender != delta.mGrammaticalGender) {
+        if ((compareUndefined || delta.mGrammaticalGender != -1)
+                && this.mGrammaticalGender != delta.mGrammaticalGender) {
             changed |= 32768;
         }
         if (delta.FlipFont > 0 && this.FlipFont != delta.FlipFont) {
@@ -1367,10 +1406,12 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         if (delta.boldFont != -1 && this.boldFont != delta.boldFont) {
             changed |= 16777216;
         }
-        if (delta.semButtonShapeEnabled != -1 && this.semButtonShapeEnabled != delta.semButtonShapeEnabled) {
+        if (delta.semButtonShapeEnabled != -1
+                && this.semButtonShapeEnabled != delta.semButtonShapeEnabled) {
             changed |= 2097152;
         }
-        if (delta.semCursorThicknessScale > 0.0f && this.semCursorThicknessScale != delta.semCursorThicknessScale) {
+        if (delta.semCursorThicknessScale > 0.0f
+                && this.semCursorThicknessScale != delta.semCursorThicknessScale) {
             changed |= 8388608;
         }
         if (delta.dexMode != -1 && this.dexMode != delta.dexMode) {
@@ -1386,7 +1427,10 @@ public final class Configuration implements Parcelable, Comparable<Configuration
     }
 
     public static boolean needNewResources(int configChanges, int interestingChanges) {
-        return (configChanges & ((((Integer.MIN_VALUE | interestingChanges) | 1073741824) | 16777216) | 268435456)) != 0;
+        return (configChanges
+                        & ((((Integer.MIN_VALUE | interestingChanges) | 1073741824) | 16777216)
+                                | 268435456))
+                != 0;
     }
 
     public boolean isOtherSeqNewer(Configuration other) {
@@ -1729,7 +1773,93 @@ public final class Configuration implements Parcelable, Comparable<Configuration
 
     public int hashCode() {
         int result = (17 * 31) + Float.floatToIntBits(this.fontScale);
-        return (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((result * 31) + this.mcc) * 31) + this.mnc) * 31) + this.mLocaleList.hashCode()) * 31) + this.touchscreen) * 31) + this.keyboard) * 31) + this.keyboardHidden) * 31) + this.hardKeyboardHidden) * 31) + this.navigation) * 31) + this.navigationHidden) * 31) + this.orientation) * 31) + this.screenLayout) * 31) + this.colorMode) * 31) + this.uiMode) * 31) + this.screenWidthDp) * 31) + this.screenHeightDp) * 31) + this.smallestScreenWidthDp) * 31) + this.densityDpi) * 31) + this.assetsSeq) * 31) + this.fontWeightAdjustment) * 31) + this.mGrammaticalGender) * 31) + this.FlipFont) * 31) + this.boldFont) * 31) + this.semButtonShapeEnabled) * 31) + Float.floatToIntBits(this.semCursorThicknessScale)) * 31) + this.nightDim) * 31) + this.semDesktopModeEnabled) * 31) + this.dexMode) * 31) + this.dexCompatEnabled) * 31) + this.dexCompatUiMode) * 31) + this.themeSeq;
+        return (((((((((((((((((((((((((((((((((((((((((((((((((((((((((((result * 31) + this.mcc)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        .mnc)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        .mLocaleList
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        .hashCode())
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        .touchscreen)
+                                                                                                                                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                                                                                                                                        .keyboard)
+                                                                                                                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                                                                                                                        .keyboardHidden)
+                                                                                                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                                                                                                        .hardKeyboardHidden)
+                                                                                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                                                                                        .navigation)
+                                                                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                                                                        .navigationHidden)
+                                                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                                                        .orientation)
+                                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                                        .screenLayout)
+                                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                                        .colorMode)
+                                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                                        .uiMode)
+                                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                                        .screenWidthDp)
+                                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                                        .screenHeightDp)
+                                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                                        .smallestScreenWidthDp)
+                                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                                        .densityDpi)
+                                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                                + this
+                                                                                                                                                                                                                        .assetsSeq)
+                                                                                                                                                                                                        * 31)
+                                                                                                                                                                                                + this
+                                                                                                                                                                                                        .fontWeightAdjustment)
+                                                                                                                                                                                        * 31)
+                                                                                                                                                                                + this
+                                                                                                                                                                                        .mGrammaticalGender)
+                                                                                                                                                                        * 31)
+                                                                                                                                                                + this
+                                                                                                                                                                        .FlipFont)
+                                                                                                                                                        * 31)
+                                                                                                                                                + this
+                                                                                                                                                        .boldFont)
+                                                                                                                                        * 31)
+                                                                                                                                + this
+                                                                                                                                        .semButtonShapeEnabled)
+                                                                                                                        * 31)
+                                                                                                                + Float
+                                                                                                                        .floatToIntBits(
+                                                                                                                                this
+                                                                                                                                        .semCursorThicknessScale))
+                                                                                                        * 31)
+                                                                                                + this
+                                                                                                        .nightDim)
+                                                                                        * 31)
+                                                                                + this
+                                                                                        .semDesktopModeEnabled)
+                                                                        * 31)
+                                                                + this.dexMode)
+                                                        * 31)
+                                                + this.dexCompatEnabled)
+                                        * 31)
+                                + this.dexCompatUiMode)
+                        * 31)
+                + this.themeSeq;
     }
 
     public int getGrammaticalGender() {
@@ -2176,8 +2306,10 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         return delta;
     }
 
-    public static void readXmlAttrs(XmlPullParser parser, Configuration configOut) throws XmlPullParserException, IOException {
-        configOut.fontScale = Float.intBitsToFloat(XmlUtils.readIntAttribute(parser, XML_ATTR_FONT_SCALE, 0));
+    public static void readXmlAttrs(XmlPullParser parser, Configuration configOut)
+            throws XmlPullParserException, IOException {
+        configOut.fontScale =
+                Float.intBitsToFloat(XmlUtils.readIntAttribute(parser, XML_ATTR_FONT_SCALE, 0));
         configOut.mcc = XmlUtils.readIntAttribute(parser, "mcc", 0);
         configOut.mnc = XmlUtils.readIntAttribute(parser, "mnc", 0);
         String localesStr = XmlUtils.readStringAttribute(parser, XML_ATTR_LOCALES);
@@ -2186,19 +2318,25 @@ public final class Configuration implements Parcelable, Comparable<Configuration
         configOut.touchscreen = XmlUtils.readIntAttribute(parser, XML_ATTR_TOUCHSCREEN, 0);
         configOut.keyboard = XmlUtils.readIntAttribute(parser, "key", 0);
         configOut.keyboardHidden = XmlUtils.readIntAttribute(parser, XML_ATTR_KEYBOARD_HIDDEN, 0);
-        configOut.hardKeyboardHidden = XmlUtils.readIntAttribute(parser, XML_ATTR_HARD_KEYBOARD_HIDDEN, 0);
+        configOut.hardKeyboardHidden =
+                XmlUtils.readIntAttribute(parser, XML_ATTR_HARD_KEYBOARD_HIDDEN, 0);
         configOut.navigation = XmlUtils.readIntAttribute(parser, XML_ATTR_NAVIGATION, 0);
-        configOut.navigationHidden = XmlUtils.readIntAttribute(parser, XML_ATTR_NAVIGATION_HIDDEN, 0);
+        configOut.navigationHidden =
+                XmlUtils.readIntAttribute(parser, XML_ATTR_NAVIGATION_HIDDEN, 0);
         configOut.orientation = XmlUtils.readIntAttribute(parser, XML_ATTR_ORIENTATION, 0);
         configOut.screenLayout = XmlUtils.readIntAttribute(parser, XML_ATTR_SCREEN_LAYOUT, 0);
         configOut.colorMode = XmlUtils.readIntAttribute(parser, XML_ATTR_COLOR_MODE, 0);
         configOut.uiMode = XmlUtils.readIntAttribute(parser, XML_ATTR_UI_MODE, 0);
         configOut.screenWidthDp = XmlUtils.readIntAttribute(parser, "width", 0);
         configOut.screenHeightDp = XmlUtils.readIntAttribute(parser, "height", 0);
-        configOut.smallestScreenWidthDp = XmlUtils.readIntAttribute(parser, XML_ATTR_SMALLEST_WIDTH, 0);
+        configOut.smallestScreenWidthDp =
+                XmlUtils.readIntAttribute(parser, XML_ATTR_SMALLEST_WIDTH, 0);
         configOut.densityDpi = XmlUtils.readIntAttribute(parser, XML_ATTR_DENSITY, 0);
-        configOut.fontWeightAdjustment = XmlUtils.readIntAttribute(parser, XML_ATTR_FONT_WEIGHT_ADJUSTMENT, Integer.MAX_VALUE);
-        configOut.mGrammaticalGender = XmlUtils.readIntAttribute(parser, XML_ATTR_GRAMMATICAL_GENDER, -1);
+        configOut.fontWeightAdjustment =
+                XmlUtils.readIntAttribute(
+                        parser, XML_ATTR_FONT_WEIGHT_ADJUSTMENT, Integer.MAX_VALUE);
+        configOut.mGrammaticalGender =
+                XmlUtils.readIntAttribute(parser, XML_ATTR_GRAMMATICAL_GENDER, -1);
     }
 
     public boolean isDexMode() {
@@ -2247,7 +2385,8 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             changed |= 1024;
             this.screenHeightDp = delta.screenHeightDp;
         }
-        if (delta.smallestScreenWidthDp != 0 && this.smallestScreenWidthDp != delta.smallestScreenWidthDp) {
+        if (delta.smallestScreenWidthDp != 0
+                && this.smallestScreenWidthDp != delta.smallestScreenWidthDp) {
             int changed2 = changed | 2048;
             this.smallestScreenWidthDp = delta.smallestScreenWidthDp;
             return changed2;

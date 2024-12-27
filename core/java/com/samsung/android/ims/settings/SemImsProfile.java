@@ -4,26 +4,31 @@ import android.content.ContentValues;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
-import java.util.Locale;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Locale;
+
 /* loaded from: classes6.dex */
 public class SemImsProfile implements Parcelable {
-    public static final Parcelable.Creator<SemImsProfile> CREATOR = new Parcelable.Creator<SemImsProfile>() { // from class: com.samsung.android.ims.settings.SemImsProfile.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemImsProfile createFromParcel(Parcel in) {
-            return new SemImsProfile(in);
-        }
+    public static final Parcelable.Creator<SemImsProfile> CREATOR =
+            new Parcelable.Creator<
+                    SemImsProfile>() { // from class:
+                                       // com.samsung.android.ims.settings.SemImsProfile.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemImsProfile createFromParcel(Parcel in) {
+                    return new SemImsProfile(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemImsProfile[] newArray(int size) {
-            return new SemImsProfile[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemImsProfile[] newArray(int size) {
+                    return new SemImsProfile[size];
+                }
+            };
     private static final String LOG_TAG = "SemImsProfile";
     private JSONObject mBody;
 
@@ -58,7 +63,9 @@ public class SemImsProfile implements Parcelable {
         public static final String SMSIP = "smsip";
         public static final String SS = "ss";
         public static final String MMTEL_CALL_COMPOSER = "mmtel-call-composer";
-        protected static final String[] volteServices = {"mmtel", "mmtel-video", MMTEL_CALL_COMPOSER, "smsip", "ss", "cdpn"};
+        protected static final String[] volteServices = {
+            "mmtel", "mmtel-video", MMTEL_CALL_COMPOSER, "smsip", "ss", "cdpn"
+        };
         public static final String PRESENCE = "presence";
         public static final String FT = "ft";
         public static final String FT_HTTP = "ft_http";
@@ -71,9 +78,39 @@ public class SemImsProfile implements Parcelable {
         public static final String CHATBOT_COMMUNICATION = "chatbot-communication";
         public static final String PLUG_IN = "plug-in";
         public static final String LASTSEEN = "lastseen";
-        protected static final String[] rcsServices = {"options", PRESENCE, "im", FT, FT_HTTP, SLM, IS, VS, EUC, GLS, "profile", EC, CHATBOT_COMMUNICATION, PLUG_IN, LASTSEEN};
+        protected static final String[] rcsServices = {
+            "options",
+            PRESENCE,
+            "im",
+            FT,
+            FT_HTTP,
+            SLM,
+            IS,
+            VS,
+            EUC,
+            GLS,
+            "profile",
+            EC,
+            CHATBOT_COMMUNICATION,
+            PLUG_IN,
+            LASTSEEN
+        };
         public static final String XDM = "xdm";
-        private static final String[] mImsFeatureList = {"mmtel-video", "mmtel", "smsip", SLM, "im", FT, FT_HTTP, IS, VS, "options", PRESENCE, XDM, EUC};
+        private static final String[] mImsFeatureList = {
+            "mmtel-video",
+            "mmtel",
+            "smsip",
+            SLM,
+            "im",
+            FT,
+            FT_HTTP,
+            IS,
+            VS,
+            "options",
+            PRESENCE,
+            XDM,
+            EUC
+        };
 
         public static boolean isValidImsFeature(String queriedFeature) {
             for (String feature : mImsFeatureList) {
@@ -209,7 +246,9 @@ public class SemImsProfile implements Parcelable {
                 JSONObject obj = network.optJSONObject(i);
                 String types = obj.optString("type");
                 for (String s : TextUtils.split(types, ",")) {
-                    JSONObject tmp = new JSONObject(obj, new String[]{"services", "enabled", "dereg_timeout"});
+                    JSONObject tmp =
+                            new JSONObject(
+                                    obj, new String[] {"services", "enabled", "dereg_timeout"});
                     tmp.put("type", s);
                     newNetwork.put(tmp);
                 }

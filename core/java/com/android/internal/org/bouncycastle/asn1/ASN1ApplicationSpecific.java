@@ -1,8 +1,10 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -25,10 +27,12 @@ public abstract class ASN1ApplicationSpecific extends ASN1Primitive {
             try {
                 return getInstance(ASN1Primitive.fromByteArray((byte[]) obj));
             } catch (IOException e) {
-                throw new IllegalArgumentException("Failed to construct object from byte[]: " + e.getMessage());
+                throw new IllegalArgumentException(
+                        "Failed to construct object from byte[]: " + e.getMessage());
             }
         }
-        throw new IllegalArgumentException("unknown object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in getInstance: " + obj.getClass().getName());
     }
 
     protected static int getLengthOfHeader(byte[] data) {
@@ -74,7 +78,9 @@ public abstract class ASN1ApplicationSpecific extends ASN1Primitive {
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     int encodedLength() throws IOException {
-        return StreamUtil.calculateTagLength(this.tag) + StreamUtil.calculateBodyLength(this.octets.length) + this.octets.length;
+        return StreamUtil.calculateTagLength(this.tag)
+                + StreamUtil.calculateBodyLength(this.octets.length)
+                + this.octets.length;
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
@@ -92,10 +98,13 @@ public abstract class ASN1ApplicationSpecific extends ASN1Primitive {
             return false;
         }
         ASN1ApplicationSpecific other = (ASN1ApplicationSpecific) o;
-        return this.isConstructed == other.isConstructed && this.tag == other.tag && Arrays.areEqual(this.octets, other.octets);
+        return this.isConstructed == other.isConstructed
+                && this.tag == other.tag
+                && Arrays.areEqual(this.octets, other.octets);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         boolean z = this.isConstructed;
         return ((z ? 1 : 0) ^ this.tag) ^ Arrays.hashCode(this.octets);

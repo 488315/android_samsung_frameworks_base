@@ -1,6 +1,5 @@
 package com.android.server.chimera;
 
-import com.android.server.chimera.ChimeraCommonUtil;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -20,7 +19,8 @@ public final class ChimeraDataInfo {
         this.mGroupKillCnt = new int[3];
     }
 
-    public static ChimeraDataInfo getDiff(ChimeraDataInfo chimeraDataInfo, ChimeraDataInfo chimeraDataInfo2) {
+    public static ChimeraDataInfo getDiff(
+            ChimeraDataInfo chimeraDataInfo, ChimeraDataInfo chimeraDataInfo2) {
         ChimeraDataInfo chimeraDataInfo3 = new ChimeraDataInfo();
         int i = 0;
         int i2 = 0;

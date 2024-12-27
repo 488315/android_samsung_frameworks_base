@@ -3,18 +3,19 @@ package com.android.internal.widget.remotecompose.player.platform;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.VariableSupport;
 import com.android.internal.widget.remotecompose.core.operations.FloatExpression;
 import com.android.internal.widget.remotecompose.core.operations.ShaderData;
+
 import java.util.HashMap;
 
 /* loaded from: classes5.dex */
 class AndroidRemoteContext extends RemoteContext {
     HashMap<String, VarName> mVarNameHashMap = new HashMap<>();
 
-    AndroidRemoteContext() {
-    }
+    AndroidRemoteContext() {}
 
     public void useCanvas(Canvas canvas) {
         if (this.mPaintContext == null) {
@@ -119,8 +120,16 @@ class AndroidRemoteContext extends RemoteContext {
     }
 
     @Override // com.android.internal.widget.remotecompose.core.RemoteContext
-    public void addClickArea(int id, int contentDescriptionId, float left, float top, float right, float bottom, int metadataId) {
-        String contentDescription = (String) this.mRemoteComposeState.getFromId(contentDescriptionId);
+    public void addClickArea(
+            int id,
+            int contentDescriptionId,
+            float left,
+            float top,
+            float right,
+            float bottom,
+            int metadataId) {
+        String contentDescription =
+                (String) this.mRemoteComposeState.getFromId(contentDescriptionId);
         String metadata = (String) this.mRemoteComposeState.getFromId(metadataId);
         this.mDocument.addClickArea(id, contentDescription, left, top, right, bottom, metadata);
     }

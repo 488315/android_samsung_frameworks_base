@@ -87,20 +87,16 @@ public interface ICustomFrequencyManager extends IInterface {
 
     public static class Default implements ICustomFrequencyManager {
         @Override // android.os.ICustomFrequencyManager
-        public void requestMpParameterUpdate(String command) throws RemoteException {
-        }
+        public void requestMpParameterUpdate(String command) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void requestCPUUpdate(int cpu, int enable) throws RemoteException {
-        }
+        public void requestCPUUpdate(int cpu, int enable) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void mpdUpdate(int mpEnable) throws RemoteException {
-        }
+        public void mpdUpdate(int mpEnable) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void sendCommandToSSRM(String type, String value) throws RemoteException {
-        }
+        public void sendCommandToSSRM(String type, String value) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
         public int getSsrmStatus(int type) throws RemoteException {
@@ -108,7 +104,8 @@ public interface ICustomFrequencyManager extends IInterface {
         }
 
         @Override // android.os.ICustomFrequencyManager
-        public float[] supportVRTemperaturesInformation(String callingPackage, int type, int source) throws RemoteException {
+        public float[] supportVRTemperaturesInformation(String callingPackage, int type, int source)
+                throws RemoteException {
             return null;
         }
 
@@ -118,12 +115,10 @@ public interface ICustomFrequencyManager extends IInterface {
         }
 
         @Override // android.os.ICustomFrequencyManager
-        public void setGamePowerSaving(boolean enabled) throws RemoteException {
-        }
+        public void setGamePowerSaving(boolean enabled) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void setGameFps(int level) throws RemoteException {
-        }
+        public void setGameFps(int level) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
         public int getGameThrottlingLevel() throws RemoteException {
@@ -131,16 +126,14 @@ public interface ICustomFrequencyManager extends IInterface {
         }
 
         @Override // android.os.ICustomFrequencyManager
-        public void setGameTurboMode(boolean enabled) throws RemoteException {
-        }
+        public void setGameTurboMode(boolean enabled) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void setGameTouchParam(String level, String head, String tail) throws RemoteException {
-        }
+        public void setGameTouchParam(String level, String head, String tail)
+                throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void unsetGameTouchParam() throws RemoteException {
-        }
+        public void unsetGameTouchParam() throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
         public CpuTrackerInfo getProcessCpuUsage(int[] tarPids) throws RemoteException {
@@ -163,29 +156,26 @@ public interface ICustomFrequencyManager extends IInterface {
         }
 
         @Override // android.os.ICustomFrequencyManager
-        public void sendDrawingTid(int pid, int tid, int groupId) throws RemoteException {
-        }
+        public void sendDrawingTid(int pid, int tid, int groupId) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public int requestFreezeSlowdown(int pid, boolean isEnabled, String type) throws RemoteException {
+        public int requestFreezeSlowdown(int pid, boolean isEnabled, String type)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.ICustomFrequencyManager
-        public void setFrozenTime(int timeMs) throws RemoteException {
-        }
+        public void setFrozenTime(int timeMs) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void requestGpis(int groupId, int boostLevel, int timeout) throws RemoteException {
-        }
+        public void requestGpis(int groupId, int boostLevel, int timeout) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void acquire(int pid, int token, String procName, int hint, int[] list) throws RemoteException {
-        }
+        public void acquire(int pid, int token, String procName, int hint, int[] list)
+                throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void release(int pid, int token) throws RemoteException {
-        }
+        public void release(int pid, int token) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
         public int[] getSupportedFrequency(int type, int level) throws RemoteException {
@@ -203,8 +193,7 @@ public interface ICustomFrequencyManager extends IInterface {
         }
 
         @Override // android.os.ICustomFrequencyManager
-        public void writeSysfs(int sysfsId, String value) throws RemoteException {
-        }
+        public void writeSysfs(int sysfsId, String value) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
         public String readSysfs(int sysfsId) throws RemoteException {
@@ -217,20 +206,17 @@ public interface ICustomFrequencyManager extends IInterface {
         }
 
         @Override // android.os.ICustomFrequencyManager
-        public void restrictApp(String packageName, int userId, int restrictReason) throws RemoteException {
-        }
+        public void restrictApp(String packageName, int userId, int restrictReason)
+                throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void disableGpisHint() throws RemoteException {
-        }
+        public void disableGpisHint() throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void setGpisHint(boolean flag) throws RemoteException {
-        }
+        public void setGpisHint(boolean flag) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
-        public void enableInteractionHint(boolean enable) throws RemoteException {
-        }
+        public void enableInteractionHint(boolean enable) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
         public List<String> getPreloadList() throws RemoteException {
@@ -238,8 +224,7 @@ public interface ICustomFrequencyManager extends IInterface {
         }
 
         @Override // android.os.ICustomFrequencyManager
-        public void sendTid(int pid, int tid, int type) throws RemoteException {
-        }
+        public void sendTid(int pid, int tid, int type) throws RemoteException {}
 
         @Override // android.os.ICustomFrequencyManager
         public boolean isGameByGraphic(int pid) throws RemoteException {
@@ -252,7 +237,7 @@ public interface ICustomFrequencyManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICustomFrequencyManager {
+    public abstract static class Stub extends Binder implements ICustomFrequencyManager {
         static final int TRANSACTION_acquire = 101;
         static final int TRANSACTION_addDvfsLockAllowedUid = 84;
         static final int TRANSACTION_checkHintExist = 104;
@@ -395,7 +380,8 @@ public interface ICustomFrequencyManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICustomFrequencyManager.DESCRIPTOR);
             }
@@ -743,7 +729,8 @@ public interface ICustomFrequencyManager extends IInterface {
             }
 
             @Override // android.os.ICustomFrequencyManager
-            public float[] supportVRTemperaturesInformation(String callingPackage, int type, int source) throws RemoteException {
+            public float[] supportVRTemperaturesInformation(
+                    String callingPackage, int type, int source) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -840,7 +827,8 @@ public interface ICustomFrequencyManager extends IInterface {
             }
 
             @Override // android.os.ICustomFrequencyManager
-            public void setGameTouchParam(String level, String head, String tail) throws RemoteException {
+            public void setGameTouchParam(String level, String head, String tail)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -879,7 +867,8 @@ public interface ICustomFrequencyManager extends IInterface {
                     _data.writeIntArray(tarPids);
                     this.mRemote.transact(82, _data, _reply, 0);
                     _reply.readException();
-                    CpuTrackerInfo _result = (CpuTrackerInfo) _reply.readTypedObject(CpuTrackerInfo.CREATOR);
+                    CpuTrackerInfo _result =
+                            (CpuTrackerInfo) _reply.readTypedObject(CpuTrackerInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -954,7 +943,8 @@ public interface ICustomFrequencyManager extends IInterface {
             }
 
             @Override // android.os.ICustomFrequencyManager
-            public int requestFreezeSlowdown(int pid, boolean isEnabled, String type) throws RemoteException {
+            public int requestFreezeSlowdown(int pid, boolean isEnabled, String type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -988,7 +978,8 @@ public interface ICustomFrequencyManager extends IInterface {
             }
 
             @Override // android.os.ICustomFrequencyManager
-            public void requestGpis(int groupId, int boostLevel, int timeout) throws RemoteException {
+            public void requestGpis(int groupId, int boostLevel, int timeout)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
@@ -1002,7 +993,8 @@ public interface ICustomFrequencyManager extends IInterface {
             }
 
             @Override // android.os.ICustomFrequencyManager
-            public void acquire(int pid, int token, String procName, int hint, int[] list) throws RemoteException {
+            public void acquire(int pid, int token, String procName, int hint, int[] list)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICustomFrequencyManager.DESCRIPTOR);
@@ -1130,7 +1122,8 @@ public interface ICustomFrequencyManager extends IInterface {
             }
 
             @Override // android.os.ICustomFrequencyManager
-            public void restrictApp(String packageName, int userId, int restrictReason) throws RemoteException {
+            public void restrictApp(String packageName, int userId, int restrictReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

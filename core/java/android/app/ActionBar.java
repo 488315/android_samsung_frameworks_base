@@ -18,7 +18,9 @@ import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
 import android.widget.SpinnerAdapter;
+
 import com.android.internal.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -31,22 +33,17 @@ public abstract class ActionBar {
     public static final int DISPLAY_TITLE_MULTIPLE_LINES = 32;
     public static final int DISPLAY_USE_LOGO = 1;
 
-    @Deprecated
-    public static final int NAVIGATION_MODE_LIST = 1;
+    @Deprecated public static final int NAVIGATION_MODE_LIST = 1;
 
-    @Deprecated
-    public static final int NAVIGATION_MODE_STANDARD = 0;
+    @Deprecated public static final int NAVIGATION_MODE_STANDARD = 0;
 
-    @Deprecated
-    public static final int NAVIGATION_MODE_TABS = 2;
+    @Deprecated public static final int NAVIGATION_MODE_TABS = 2;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DisplayOptions {
-    }
+    public @interface DisplayOptions {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NavigationMode {
-    }
+    public @interface NavigationMode {}
 
     public interface OnMenuVisibilityListener {
         void onMenuVisibilityChanged(boolean z);
@@ -58,7 +55,7 @@ public abstract class ActionBar {
     }
 
     @Deprecated
-    public static abstract class Tab {
+    public abstract static class Tab {
         public static final int INVALID_POSITION = -1;
 
         public abstract CharSequence getContentDescription();
@@ -105,7 +102,8 @@ public abstract class ActionBar {
         void onTabUnselected(Tab tab, FragmentTransaction fragmentTransaction);
     }
 
-    public abstract void addOnMenuVisibilityListener(OnMenuVisibilityListener onMenuVisibilityListener);
+    public abstract void addOnMenuVisibilityListener(
+            OnMenuVisibilityListener onMenuVisibilityListener);
 
     @Deprecated
     public abstract void addTab(Tab tab);
@@ -157,7 +155,8 @@ public abstract class ActionBar {
     @Deprecated
     public abstract void removeAllTabs();
 
-    public abstract void removeOnMenuVisibilityListener(OnMenuVisibilityListener onMenuVisibilityListener);
+    public abstract void removeOnMenuVisibilityListener(
+            OnMenuVisibilityListener onMenuVisibilityListener);
 
     @Deprecated
     public abstract void removeTab(Tab tab);
@@ -195,7 +194,8 @@ public abstract class ActionBar {
     public abstract void setIcon(Drawable drawable);
 
     @Deprecated
-    public abstract void setListNavigationCallbacks(SpinnerAdapter spinnerAdapter, OnNavigationListener onNavigationListener);
+    public abstract void setListNavigationCallbacks(
+            SpinnerAdapter spinnerAdapter, OnNavigationListener onNavigationListener);
 
     public abstract void setLogo(int i);
 
@@ -219,10 +219,28 @@ public abstract class ActionBar {
 
     public static class LayoutParams extends ViewGroup.MarginLayoutParams {
 
-        @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT, mapping = {@ViewDebug.IntToString(from = -1, to = KeyProperties.DIGEST_NONE), @ViewDebug.IntToString(from = 0, to = KeyProperties.DIGEST_NONE), @ViewDebug.IntToString(from = 48, to = "TOP"), @ViewDebug.IntToString(from = 80, to = "BOTTOM"), @ViewDebug.IntToString(from = 3, to = "LEFT"), @ViewDebug.IntToString(from = 5, to = "RIGHT"), @ViewDebug.IntToString(from = Gravity.START, to = "START"), @ViewDebug.IntToString(from = Gravity.END, to = "END"), @ViewDebug.IntToString(from = 16, to = "CENTER_VERTICAL"), @ViewDebug.IntToString(from = 112, to = "FILL_VERTICAL"), @ViewDebug.IntToString(from = 1, to = "CENTER_HORIZONTAL"), @ViewDebug.IntToString(from = 7, to = "FILL_HORIZONTAL"), @ViewDebug.IntToString(from = 17, to = "CENTER"), @ViewDebug.IntToString(from = 119, to = "FILL")})
+        @ViewDebug.ExportedProperty(
+                category = TtmlUtils.TAG_LAYOUT,
+                mapping = {
+                    @ViewDebug.IntToString(from = -1, to = KeyProperties.DIGEST_NONE),
+                    @ViewDebug.IntToString(from = 0, to = KeyProperties.DIGEST_NONE),
+                    @ViewDebug.IntToString(from = 48, to = "TOP"),
+                    @ViewDebug.IntToString(from = 80, to = "BOTTOM"),
+                    @ViewDebug.IntToString(from = 3, to = "LEFT"),
+                    @ViewDebug.IntToString(from = 5, to = "RIGHT"),
+                    @ViewDebug.IntToString(from = Gravity.START, to = "START"),
+                    @ViewDebug.IntToString(from = Gravity.END, to = "END"),
+                    @ViewDebug.IntToString(from = 16, to = "CENTER_VERTICAL"),
+                    @ViewDebug.IntToString(from = 112, to = "FILL_VERTICAL"),
+                    @ViewDebug.IntToString(from = 1, to = "CENTER_HORIZONTAL"),
+                    @ViewDebug.IntToString(from = 7, to = "FILL_HORIZONTAL"),
+                    @ViewDebug.IntToString(from = 17, to = "CENTER"),
+                    @ViewDebug.IntToString(from = 119, to = "FILL")
+                })
         public int gravity;
 
-        public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<LayoutParams> {
+        public final class InspectionCompanion
+                implements android.view.inspector.InspectionCompanion<LayoutParams> {
             private int mLayout_gravityId;
             private boolean mPropertiesMapped = false;
 
@@ -283,14 +301,11 @@ public abstract class ActionBar {
         }
     }
 
-    public void setStackedBackgroundDrawable(Drawable d) {
-    }
+    public void setStackedBackgroundDrawable(Drawable d) {}
 
-    public void setSplitBackgroundDrawable(Drawable d) {
-    }
+    public void setSplitBackgroundDrawable(Drawable d) {}
 
-    public void setHomeButtonEnabled(boolean enabled) {
-    }
+    public void setHomeButtonEnabled(boolean enabled) {}
 
     public Context getThemedContext() {
         return null;
@@ -300,21 +315,18 @@ public abstract class ActionBar {
         return false;
     }
 
-    public void setHomeAsUpIndicator(Drawable indicator) {
-    }
+    public void setHomeAsUpIndicator(Drawable indicator) {}
 
-    public void setHomeAsUpIndicator(int resId) {
-    }
+    public void setHomeAsUpIndicator(int resId) {}
 
-    public void setHomeActionContentDescription(CharSequence description) {
-    }
+    public void setHomeActionContentDescription(CharSequence description) {}
 
-    public void setHomeActionContentDescription(int resId) {
-    }
+    public void setHomeActionContentDescription(int resId) {}
 
     public void setHideOnContentScrollEnabled(boolean hideOnContentScroll) {
         if (hideOnContentScroll) {
-            throw new UnsupportedOperationException("Hide on content scroll is not supported in this action bar configuration.");
+            throw new UnsupportedOperationException(
+                    "Hide on content scroll is not supported in this action bar configuration.");
         }
     }
 
@@ -328,13 +340,17 @@ public abstract class ActionBar {
 
     public void setHideOffset(int offset) {
         if (offset != 0) {
-            throw new UnsupportedOperationException("Setting an explicit action bar hide offset is not supported in this action bar configuration.");
+            throw new UnsupportedOperationException(
+                    "Setting an explicit action bar hide offset is not supported in this action bar"
+                            + " configuration.");
         }
     }
 
     public void setElevation(float elevation) {
         if (elevation != 0.0f) {
-            throw new UnsupportedOperationException("Setting a non-zero elevation is not supported in this action bar configuration.");
+            throw new UnsupportedOperationException(
+                    "Setting a non-zero elevation is not supported in this action bar"
+                            + " configuration.");
         }
     }
 
@@ -342,17 +358,13 @@ public abstract class ActionBar {
         return 0.0f;
     }
 
-    public void setDefaultDisplayHomeAsUpEnabled(boolean enabled) {
-    }
+    public void setDefaultDisplayHomeAsUpEnabled(boolean enabled) {}
 
-    public void setShowHideAnimationEnabled(boolean enabled) {
-    }
+    public void setShowHideAnimationEnabled(boolean enabled) {}
 
-    public void onConfigurationChanged(Configuration config) {
-    }
+    public void onConfigurationChanged(Configuration config) {}
 
-    public void dispatchMenuVisibilityChanged(boolean visible) {
-    }
+    public void dispatchMenuVisibilityChanged(boolean visible) {}
 
     public ActionMode startActionMode(ActionMode.Callback callback) {
         return null;
@@ -382,12 +394,9 @@ public abstract class ActionBar {
         return false;
     }
 
-    public void setWindowTitle(CharSequence title) {
-    }
+    public void setWindowTitle(CharSequence title) {}
 
-    public void onDestroy() {
-    }
+    public void onDestroy() {}
 
-    public void semInvalidateOverflowButtonBadge(int mode) {
-    }
+    public void semInvalidateOverflowButtonBadge(int mode) {}
 }

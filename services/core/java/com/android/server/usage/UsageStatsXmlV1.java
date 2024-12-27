@@ -6,16 +6,19 @@ import android.app.usage.UsageStats;
 import android.content.res.Configuration;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.internal.util.XmlUtils;
-import com.android.server.usage.IntervalStats;
+
+import org.xmlpull.v1.XmlPullParser;
+
 import java.io.IOException;
 import java.net.ProtocolException;
-import org.xmlpull.v1.XmlPullParser;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class UsageStatsXmlV1 {
-    public static void loadCountAndTime(XmlPullParser xmlPullParser, IntervalStats.EventTracker eventTracker) {
+    public static void loadCountAndTime(
+            XmlPullParser xmlPullParser, IntervalStats.EventTracker eventTracker) {
         eventTracker.count = XmlUtils.readIntAttribute(xmlPullParser, "count", 0);
         eventTracker.duration = XmlUtils.readLongAttribute(xmlPullParser, "time", 0L);
         XmlUtils.skipCurrentTag(xmlPullParser);
@@ -33,7 +36,8 @@ public abstract class UsageStatsXmlV1 {
         String str = null;
         intervalStats.activeConfiguration = null;
         intervalStats.events.clear();
-        intervalStats.endTime = XmlUtils.readLongAttribute(xmlPullParser, "endTime") + intervalStats.beginTime;
+        intervalStats.endTime =
+                XmlUtils.readLongAttribute(xmlPullParser, "endTime") + intervalStats.beginTime;
         try {
             intervalStats.majorVersion = XmlUtils.readIntAttribute(xmlPullParser, "majorVersion");
         } catch (IOException unused) {
@@ -106,12 +110,18 @@ public abstract class UsageStatsXmlV1 {
                         i = depth;
                         Configuration configuration = new Configuration();
                         Configuration.readXmlAttrs(xmlPullParser, configuration);
-                        ConfigurationStats orCreateConfigurationStats = intervalStats.getOrCreateConfigurationStats(configuration);
-                        orCreateConfigurationStats.mLastTimeActive = XmlUtils.readLongAttribute(xmlPullParser, "lastTimeActive") + intervalStats.beginTime;
-                        orCreateConfigurationStats.mTotalTimeActive = XmlUtils.readLongAttribute(xmlPullParser, "timeActive");
-                        orCreateConfigurationStats.mActivationCount = XmlUtils.readIntAttribute(xmlPullParser, "count");
+                        ConfigurationStats orCreateConfigurationStats =
+                                intervalStats.getOrCreateConfigurationStats(configuration);
+                        orCreateConfigurationStats.mLastTimeActive =
+                                XmlUtils.readLongAttribute(xmlPullParser, "lastTimeActive")
+                                        + intervalStats.beginTime;
+                        orCreateConfigurationStats.mTotalTimeActive =
+                                XmlUtils.readLongAttribute(xmlPullParser, "timeActive");
+                        orCreateConfigurationStats.mActivationCount =
+                                XmlUtils.readIntAttribute(xmlPullParser, "count");
                         if (XmlUtils.readBooleanAttribute(xmlPullParser, "active")) {
-                            intervalStats.activeConfiguration = orCreateConfigurationStats.mConfiguration;
+                            intervalStats.activeConfiguration =
+                                    orCreateConfigurationStats.mConfiguration;
                         }
                         depth = i;
                         i2 = 5;
@@ -139,52 +149,92 @@ public abstract class UsageStatsXmlV1 {
                         if (attributeValue == null) {
                             throw new ProtocolException("no package attribute present");
                         }
-                        UsageStats orCreateUsageStats = intervalStats.getOrCreateUsageStats(attributeValue);
+                        UsageStats orCreateUsageStats =
+                                intervalStats.getOrCreateUsageStats(attributeValue);
                         i = depth;
-                        orCreateUsageStats.mLastTimeUsed = XmlUtils.readLongAttribute(xmlPullParser, "lastTimeActive") + intervalStats.beginTime;
+                        orCreateUsageStats.mLastTimeUsed =
+                                XmlUtils.readLongAttribute(xmlPullParser, "lastTimeActive")
+                                        + intervalStats.beginTime;
                         try {
-                            orCreateUsageStats.mLastTimeVisible = intervalStats.beginTime + XmlUtils.readLongAttribute(xmlPullParser, "lastTimeVisible");
+                            orCreateUsageStats.mLastTimeVisible =
+                                    intervalStats.beginTime
+                                            + XmlUtils.readLongAttribute(
+                                                    xmlPullParser, "lastTimeVisible");
                         } catch (IOException unused3) {
                             Log.i("UsageStatsXmlV1", "Failed to parse mLastTimeVisible");
                         }
                         try {
-                            orCreateUsageStats.mLastTimeForegroundServiceUsed = intervalStats.beginTime + XmlUtils.readLongAttribute(xmlPullParser, "lastTimeServiceUsed");
+                            orCreateUsageStats.mLastTimeForegroundServiceUsed =
+                                    intervalStats.beginTime
+                                            + XmlUtils.readLongAttribute(
+                                                    xmlPullParser, "lastTimeServiceUsed");
                         } catch (IOException unused4) {
-                            Log.i("UsageStatsXmlV1", "Failed to parse mLastTimeForegroundServiceUsed");
+                            Log.i(
+                                    "UsageStatsXmlV1",
+                                    "Failed to parse mLastTimeForegroundServiceUsed");
                         }
-                        orCreateUsageStats.mTotalTimeInForeground = XmlUtils.readLongAttribute(xmlPullParser, "timeActive");
+                        orCreateUsageStats.mTotalTimeInForeground =
+                                XmlUtils.readLongAttribute(xmlPullParser, "timeActive");
                         try {
-                            orCreateUsageStats.mTotalTimeVisible = XmlUtils.readLongAttribute(xmlPullParser, "timeVisible");
+                            orCreateUsageStats.mTotalTimeVisible =
+                                    XmlUtils.readLongAttribute(xmlPullParser, "timeVisible");
                         } catch (IOException unused5) {
                             Log.i("UsageStatsXmlV1", "Failed to parse mTotalTimeVisible");
                         }
                         try {
-                            orCreateUsageStats.mTotalTimeForegroundServiceUsed = XmlUtils.readLongAttribute(xmlPullParser, "timeServiceUsed");
+                            orCreateUsageStats.mTotalTimeForegroundServiceUsed =
+                                    XmlUtils.readLongAttribute(xmlPullParser, "timeServiceUsed");
                         } catch (IOException unused6) {
-                            Log.i("UsageStatsXmlV1", "Failed to parse mTotalTimeForegroundServiceUsed");
+                            Log.i(
+                                    "UsageStatsXmlV1",
+                                    "Failed to parse mTotalTimeForegroundServiceUsed");
                         }
-                        orCreateUsageStats.mLastEvent = XmlUtils.readIntAttribute(xmlPullParser, "lastEvent");
-                        orCreateUsageStats.mAppLaunchCount = XmlUtils.readIntAttribute(xmlPullParser, "appLaunchCount", 0);
+                        orCreateUsageStats.mLastEvent =
+                                XmlUtils.readIntAttribute(xmlPullParser, "lastEvent");
+                        orCreateUsageStats.mAppLaunchCount =
+                                XmlUtils.readIntAttribute(xmlPullParser, "appLaunchCount", 0);
                         while (true) {
                             int next2 = xmlPullParser.next();
                             if (next2 != 1) {
                                 String name2 = xmlPullParser.getName();
                                 if (next2 != 3 || !name2.equals("package")) {
                                     if (next2 == 2) {
-                                        if (name2.equals("chosen_action") && (readStringAttribute = XmlUtils.readStringAttribute(xmlPullParser, "name")) != null) {
+                                        if (name2.equals("chosen_action")
+                                                && (readStringAttribute =
+                                                                XmlUtils.readStringAttribute(
+                                                                        xmlPullParser, "name"))
+                                                        != null) {
                                             if (orCreateUsageStats.mChooserCounts == null) {
                                                 orCreateUsageStats.mChooserCounts = new ArrayMap();
                                             }
-                                            if (!orCreateUsageStats.mChooserCounts.containsKey(readStringAttribute)) {
-                                                orCreateUsageStats.mChooserCounts.put(readStringAttribute, new ArrayMap());
+                                            if (!orCreateUsageStats.mChooserCounts.containsKey(
+                                                    readStringAttribute)) {
+                                                orCreateUsageStats.mChooserCounts.put(
+                                                        readStringAttribute, new ArrayMap());
                                             }
                                             while (true) {
                                                 int next3 = xmlPullParser.next();
                                                 if (next3 != 1) {
                                                     String name3 = xmlPullParser.getName();
-                                                    if (next3 != 3 || !name3.equals("chosen_action")) {
-                                                        if (next3 == 2 && name3.equals("category")) {
-                                                            ((ArrayMap) orCreateUsageStats.mChooserCounts.get(readStringAttribute)).put(XmlUtils.readStringAttribute(xmlPullParser, "name"), Integer.valueOf(XmlUtils.readIntAttribute(xmlPullParser, "count")));
+                                                    if (next3 != 3
+                                                            || !name3.equals("chosen_action")) {
+                                                        if (next3 == 2
+                                                                && name3.equals("category")) {
+                                                            ((ArrayMap)
+                                                                            orCreateUsageStats
+                                                                                    .mChooserCounts
+                                                                                    .get(
+                                                                                            readStringAttribute))
+                                                                    .put(
+                                                                            XmlUtils
+                                                                                    .readStringAttribute(
+                                                                                            xmlPullParser,
+                                                                                            "name"),
+                                                                            Integer.valueOf(
+                                                                                    XmlUtils
+                                                                                            .readIntAttribute(
+                                                                                                    xmlPullParser,
+                                                                                                    "count")));
                                                         }
                                                     }
                                                 }
@@ -201,21 +251,26 @@ public abstract class UsageStatsXmlV1 {
                         break;
                         break;
                     case 4:
-                        String readStringAttribute2 = XmlUtils.readStringAttribute(xmlPullParser, "package");
+                        String readStringAttribute2 =
+                                XmlUtils.readStringAttribute(xmlPullParser, "package");
                         if (readStringAttribute2 == null) {
                             throw new ProtocolException("no package attribute present");
                         }
-                        String readStringAttribute3 = XmlUtils.readStringAttribute(xmlPullParser, "class");
+                        String readStringAttribute3 =
+                                XmlUtils.readStringAttribute(xmlPullParser, "class");
                         UsageEvents.Event event = new UsageEvents.Event();
                         event.mPackage = intervalStats.getCachedStringRef(readStringAttribute2);
                         if (readStringAttribute3 != null) {
                             event.mClass = intervalStats.getCachedStringRef(readStringAttribute3);
                         }
                         event.mFlags = XmlUtils.readIntAttribute(xmlPullParser, "flags", 0);
-                        event.mTimeStamp = intervalStats.beginTime + XmlUtils.readLongAttribute(xmlPullParser, "time");
+                        event.mTimeStamp =
+                                intervalStats.beginTime
+                                        + XmlUtils.readLongAttribute(xmlPullParser, "time");
                         event.mEventType = XmlUtils.readIntAttribute(xmlPullParser, "type");
                         try {
-                            event.mInstanceId = XmlUtils.readIntAttribute(xmlPullParser, "instanceId");
+                            event.mInstanceId =
+                                    XmlUtils.readIntAttribute(xmlPullParser, "instanceId");
                         } catch (IOException unused7) {
                             Log.i("UsageStatsXmlV1", "Failed to parse mInstanceId");
                         }
@@ -225,13 +280,23 @@ public abstract class UsageStatsXmlV1 {
                             event.mConfiguration = configuration2;
                             Configuration.readXmlAttrs(xmlPullParser, configuration2);
                         } else if (i5 == 8) {
-                            String readStringAttribute4 = XmlUtils.readStringAttribute(xmlPullParser, "shortcutId");
-                            event.mShortcutId = readStringAttribute4 != null ? readStringAttribute4.intern() : str;
+                            String readStringAttribute4 =
+                                    XmlUtils.readStringAttribute(xmlPullParser, "shortcutId");
+                            event.mShortcutId =
+                                    readStringAttribute4 != null
+                                            ? readStringAttribute4.intern()
+                                            : str;
                         } else if (i5 == 11) {
-                            event.mBucketAndReason = XmlUtils.readIntAttribute(xmlPullParser, "standbyBucket", 0);
+                            event.mBucketAndReason =
+                                    XmlUtils.readIntAttribute(xmlPullParser, "standbyBucket", 0);
                         } else if (i5 == 12) {
-                            String readStringAttribute5 = XmlUtils.readStringAttribute(xmlPullParser, "notificationChannel");
-                            event.mNotificationChannelId = readStringAttribute5 != null ? readStringAttribute5.intern() : str;
+                            String readStringAttribute5 =
+                                    XmlUtils.readStringAttribute(
+                                            xmlPullParser, "notificationChannel");
+                            event.mNotificationChannelId =
+                                    readStringAttribute5 != null
+                                            ? readStringAttribute5.intern()
+                                            : str;
                         }
                         intervalStats.addEvent(event);
                         i = depth;

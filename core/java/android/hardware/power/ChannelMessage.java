@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class ChannelMessage implements Parcelable {
-    public static final Parcelable.Creator<ChannelMessage> CREATOR = new Parcelable.Creator<ChannelMessage>() { // from class: android.hardware.power.ChannelMessage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ChannelMessage createFromParcel(Parcel _aidl_source) {
-            ChannelMessage _aidl_out = new ChannelMessage();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ChannelMessage> CREATOR =
+            new Parcelable.Creator<
+                    ChannelMessage>() { // from class: android.hardware.power.ChannelMessage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ChannelMessage createFromParcel(Parcel _aidl_source) {
+                    ChannelMessage _aidl_out = new ChannelMessage();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ChannelMessage[] newArray(int _aidl_size) {
-            return new ChannelMessage[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ChannelMessage[] newArray(int _aidl_size) {
+                    return new ChannelMessage[_aidl_size];
+                }
+            };
     public ChannelMessageContents data;
     public int sessionID = 0;
     public long timeStampNanos = 0;
@@ -72,7 +74,9 @@ public class ChannelMessage implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.data = (ChannelMessageContents) _aidl_parcel.readTypedObject(ChannelMessageContents.CREATOR);
+                this.data =
+                        (ChannelMessageContents)
+                                _aidl_parcel.readTypedObject(ChannelMessageContents.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -101,19 +105,21 @@ public class ChannelMessage implements Parcelable {
     }
 
     public static final class ChannelMessageContents implements Parcelable {
-        public static final Parcelable.Creator<ChannelMessageContents> CREATOR = new Parcelable.Creator<ChannelMessageContents>() { // from class: android.hardware.power.ChannelMessage.ChannelMessageContents.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ChannelMessageContents createFromParcel(Parcel _aidl_source) {
-                return new ChannelMessageContents(_aidl_source);
-            }
+        public static final Parcelable.Creator<ChannelMessageContents> CREATOR =
+                new Parcelable.Creator<ChannelMessageContents>() { // from class:
+                    // android.hardware.power.ChannelMessage.ChannelMessageContents.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ChannelMessageContents createFromParcel(Parcel _aidl_source) {
+                        return new ChannelMessageContents(_aidl_source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ChannelMessageContents[] newArray(int _aidl_size) {
-                return new ChannelMessageContents[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ChannelMessageContents[] newArray(int _aidl_size) {
+                        return new ChannelMessageContents[_aidl_size];
+                    }
+                };
         public static final int hint = 2;
         public static final int mode = 3;
         public static final int reserved = 0;
@@ -257,11 +263,15 @@ public class ChannelMessage implements Parcelable {
                     _set(_aidl_tag, Integer.valueOf(_aidl_value3));
                     return;
                 case 3:
-                    SessionModeSetter _aidl_value4 = (SessionModeSetter) _aidl_parcel.readTypedObject(SessionModeSetter.CREATOR);
+                    SessionModeSetter _aidl_value4 =
+                            (SessionModeSetter)
+                                    _aidl_parcel.readTypedObject(SessionModeSetter.CREATOR);
                     _set(_aidl_tag, _aidl_value4);
                     return;
                 case 4:
-                    WorkDurationFixedV1 _aidl_value5 = (WorkDurationFixedV1) _aidl_parcel.readTypedObject(WorkDurationFixedV1.CREATOR);
+                    WorkDurationFixedV1 _aidl_value5 =
+                            (WorkDurationFixedV1)
+                                    _aidl_parcel.readTypedObject(WorkDurationFixedV1.CREATOR);
                     _set(_aidl_tag, _aidl_value5);
                     return;
                 default:
@@ -292,7 +302,12 @@ public class ChannelMessage implements Parcelable {
 
         private void _assertTag(int tag) {
             if (getTag() != tag) {
-                throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+                throw new IllegalStateException(
+                        "bad access: "
+                                + _tagString(tag)
+                                + ", "
+                                + _tagString(getTag())
+                                + " is available.");
             }
         }
 
@@ -319,21 +334,23 @@ public class ChannelMessage implements Parcelable {
         }
 
         public static class SessionModeSetter implements Parcelable {
-            public static final Parcelable.Creator<SessionModeSetter> CREATOR = new Parcelable.Creator<SessionModeSetter>() { // from class: android.hardware.power.ChannelMessage.ChannelMessageContents.SessionModeSetter.1
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public SessionModeSetter createFromParcel(Parcel _aidl_source) {
-                    SessionModeSetter _aidl_out = new SessionModeSetter();
-                    _aidl_out.readFromParcel(_aidl_source);
-                    return _aidl_out;
-                }
+            public static final Parcelable.Creator<SessionModeSetter> CREATOR =
+                    new Parcelable.Creator<SessionModeSetter>() { // from class:
+                        // android.hardware.power.ChannelMessage.ChannelMessageContents.SessionModeSetter.1
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public SessionModeSetter createFromParcel(Parcel _aidl_source) {
+                            SessionModeSetter _aidl_out = new SessionModeSetter();
+                            _aidl_out.readFromParcel(_aidl_source);
+                            return _aidl_out;
+                        }
 
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public SessionModeSetter[] newArray(int _aidl_size) {
-                    return new SessionModeSetter[_aidl_size];
-                }
-            };
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public SessionModeSetter[] newArray(int _aidl_size) {
+                            return new SessionModeSetter[_aidl_size];
+                        }
+                    };
             public boolean enabled = false;
             public int modeInt;
 

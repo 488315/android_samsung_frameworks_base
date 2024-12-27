@@ -4,34 +4,46 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes2.dex */
 public final class MidiDeviceInfo implements Parcelable {
-    public static final Parcelable.Creator<MidiDeviceInfo> CREATOR = new Parcelable.Creator<MidiDeviceInfo>() { // from class: android.media.midi.MidiDeviceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MidiDeviceInfo createFromParcel(Parcel in) {
-            int type = in.readInt();
-            int id = in.readInt();
-            int inputPortCount = in.readInt();
-            int outputPortCount = in.readInt();
-            String[] inputPortNames = in.createStringArray();
-            String[] outputPortNames = in.createStringArray();
-            boolean isPrivate = in.readInt() == 1;
-            int defaultProtocol = in.readInt();
-            in.readBundle();
-            Bundle properties = in.readBundle();
-            return new MidiDeviceInfo(type, id, inputPortCount, outputPortCount, inputPortNames, outputPortNames, properties, isPrivate, defaultProtocol);
-        }
+    public static final Parcelable.Creator<MidiDeviceInfo> CREATOR =
+            new Parcelable.Creator<
+                    MidiDeviceInfo>() { // from class: android.media.midi.MidiDeviceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MidiDeviceInfo createFromParcel(Parcel in) {
+                    int type = in.readInt();
+                    int id = in.readInt();
+                    int inputPortCount = in.readInt();
+                    int outputPortCount = in.readInt();
+                    String[] inputPortNames = in.createStringArray();
+                    String[] outputPortNames = in.createStringArray();
+                    boolean isPrivate = in.readInt() == 1;
+                    int defaultProtocol = in.readInt();
+                    in.readBundle();
+                    Bundle properties = in.readBundle();
+                    return new MidiDeviceInfo(
+                            type,
+                            id,
+                            inputPortCount,
+                            outputPortCount,
+                            inputPortNames,
+                            outputPortNames,
+                            properties,
+                            isPrivate,
+                            defaultProtocol);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MidiDeviceInfo[] newArray(int size) {
-            return new MidiDeviceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MidiDeviceInfo[] newArray(int size) {
+                    return new MidiDeviceInfo[size];
+                }
+            };
     public static final String PROPERTY_ALSA_CARD = "alsa_card";
     public static final String PROPERTY_ALSA_DEVICE = "alsa_device";
     public static final String PROPERTY_BLUETOOTH_DEVICE = "bluetooth_device";
@@ -65,8 +77,7 @@ public final class MidiDeviceInfo implements Parcelable {
     private final int mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Protocol {
-    }
+    public @interface Protocol {}
 
     public static final class PortInfo {
         public static final int TYPE_INPUT = 1;
@@ -94,7 +105,16 @@ public final class MidiDeviceInfo implements Parcelable {
         }
     }
 
-    public MidiDeviceInfo(int type, int id, int numInputPorts, int numOutputPorts, String[] inputPortNames, String[] outputPortNames, Bundle properties, boolean isPrivate, int defaultProtocol) {
+    public MidiDeviceInfo(
+            int type,
+            int id,
+            int numInputPorts,
+            int numOutputPorts,
+            String[] inputPortNames,
+            String[] outputPortNames,
+            Bundle properties,
+            boolean isPrivate,
+            int defaultProtocol) {
         if (numInputPorts < 0 || numInputPorts > 256) {
             throw new IllegalArgumentException("numInputPorts out of range = " + numInputPorts);
         }
@@ -176,7 +196,18 @@ public final class MidiDeviceInfo implements Parcelable {
 
     public String toString() {
         this.mProperties.getString("name");
-        return "MidiDeviceInfo[mType=" + this.mType + ",mInputPortCount=" + this.mInputPortCount + ",mOutputPortCount=" + this.mOutputPortCount + ",mProperties=" + this.mProperties + ",mIsPrivate=" + this.mIsPrivate + ",mDefaultProtocol=" + this.mDefaultProtocol;
+        return "MidiDeviceInfo[mType="
+                + this.mType
+                + ",mInputPortCount="
+                + this.mInputPortCount
+                + ",mOutputPortCount="
+                + this.mOutputPortCount
+                + ",mProperties="
+                + this.mProperties
+                + ",mIsPrivate="
+                + this.mIsPrivate
+                + ",mDefaultProtocol="
+                + this.mDefaultProtocol;
     }
 
     @Override // android.os.Parcelable
@@ -211,7 +242,17 @@ public final class MidiDeviceInfo implements Parcelable {
         parcel.writeStringArray(this.mOutputPortNames);
         parcel.writeInt(this.mIsPrivate ? 1 : 0);
         parcel.writeInt(this.mDefaultProtocol);
-        parcel.writeBundle(getBasicProperties(new String[]{"name", PROPERTY_MANUFACTURER, "product", "version", "serial_number", PROPERTY_ALSA_CARD, PROPERTY_ALSA_DEVICE}));
+        parcel.writeBundle(
+                getBasicProperties(
+                        new String[] {
+                            "name",
+                            PROPERTY_MANUFACTURER,
+                            "product",
+                            "version",
+                            "serial_number",
+                            PROPERTY_ALSA_CARD,
+                            PROPERTY_ALSA_DEVICE
+                        }));
         parcel.writeBundle(this.mProperties);
     }
 }

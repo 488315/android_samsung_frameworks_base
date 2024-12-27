@@ -1,6 +1,5 @@
 package com.google.android.util;
 
-import com.google.android.util.AbstractMessageParser;
 import java.util.HashMap;
 import java.util.Set;
 

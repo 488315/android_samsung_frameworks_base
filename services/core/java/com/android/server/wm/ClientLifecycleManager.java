@@ -10,6 +10,7 @@ import android.os.RemoteException;
 import android.os.Trace;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.window.flags.Flags;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,7 +25,12 @@ public final class ClientLifecycleManager {
             try {
                 clientTransaction.schedule();
             } catch (RemoteException e) {
-                Slog.w("ClientLifecycleManager", "Failed to deliver transaction for " + client + "\ntransaction=" + clientTransaction);
+                Slog.w(
+                        "ClientLifecycleManager",
+                        "Failed to deliver transaction for "
+                                + client
+                                + "\ntransaction="
+                                + clientTransaction);
                 throw e;
             }
         } finally {
@@ -36,7 +42,12 @@ public final class ClientLifecycleManager {
 
     public final void dispatchPendingTransaction(IApplicationThread iApplicationThread) {
         ClientTransaction clientTransaction;
-        if (Flags.bundleClientTransactionFlag() && (clientTransaction = (ClientTransaction) this.mPendingTransactions.remove(iApplicationThread.asBinder())) != null) {
+        if (Flags.bundleClientTransactionFlag()
+                && (clientTransaction =
+                                (ClientTransaction)
+                                        this.mPendingTransactions.remove(
+                                                iApplicationThread.asBinder()))
+                        != null) {
             try {
                 scheduleTransaction(clientTransaction);
             } catch (RemoteException e) {
@@ -62,7 +73,11 @@ public final class ClientLifecycleManager {
         Trace.traceEnd(32L);
     }
 
-    public final void scheduleTransactionAndLifecycleItems(IApplicationThread iApplicationThread, ClientTransactionItem clientTransactionItem, ActivityLifecycleItem activityLifecycleItem, boolean z) {
+    public final void scheduleTransactionAndLifecycleItems(
+            IApplicationThread iApplicationThread,
+            ClientTransactionItem clientTransactionItem,
+            ActivityLifecycleItem activityLifecycleItem,
+            boolean z) {
         if (!Flags.bundleClientTransactionFlag()) {
             ClientTransaction obtain = ClientTransaction.obtain(iApplicationThread);
             obtain.addTransactionItem(clientTransactionItem);
@@ -71,7 +86,8 @@ public final class ClientLifecycleManager {
             return;
         }
         IBinder asBinder = iApplicationThread.asBinder();
-        ClientTransaction clientTransaction = (ClientTransaction) this.mPendingTransactions.get(asBinder);
+        ClientTransaction clientTransaction =
+                (ClientTransaction) this.mPendingTransactions.get(asBinder);
         if (clientTransaction == null) {
             clientTransaction = ClientTransaction.obtain(iApplicationThread);
             this.mPendingTransactions.put(asBinder, clientTransaction);
@@ -84,7 +100,8 @@ public final class ClientLifecycleManager {
         }
     }
 
-    public final void scheduleTransactionItem(IApplicationThread iApplicationThread, ClientTransactionItem clientTransactionItem) {
+    public final void scheduleTransactionItem(
+            IApplicationThread iApplicationThread, ClientTransactionItem clientTransactionItem) {
         if (!Flags.bundleClientTransactionFlag()) {
             ClientTransaction obtain = ClientTransaction.obtain(iApplicationThread);
             obtain.addTransactionItem(clientTransactionItem);
@@ -92,7 +109,8 @@ public final class ClientLifecycleManager {
             return;
         }
         IBinder asBinder = iApplicationThread.asBinder();
-        ClientTransaction clientTransaction = (ClientTransaction) this.mPendingTransactions.get(asBinder);
+        ClientTransaction clientTransaction =
+                (ClientTransaction) this.mPendingTransactions.get(asBinder);
         if (clientTransaction == null) {
             clientTransaction = ClientTransaction.obtain(iApplicationThread);
             this.mPendingTransactions.put(asBinder, clientTransaction);
@@ -110,6 +128,10 @@ public final class ClientLifecycleManager {
             return true;
         }
         WindowSurfacePlacer windowSurfacePlacer = windowManagerService.mWindowPlacerLocked;
-        return (windowSurfacePlacer.mDeferDepth > 0 || windowSurfacePlacer.mTraversalScheduled || windowSurfacePlacer.mInLayout) ? false : true;
+        return (windowSurfacePlacer.mDeferDepth > 0
+                        || windowSurfacePlacer.mTraversalScheduled
+                        || windowSurfacePlacer.mInLayout)
+                ? false
+                : true;
     }
 }

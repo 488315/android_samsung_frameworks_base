@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.NotificationMessagingUtil;
-import com.android.server.notification.NotificationComparator;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.util.Comparator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -23,22 +25,31 @@ public final class NotificationComparator implements Comparator {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.notification.NotificationComparator$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, final Intent intent) {
-            BackgroundThread.getExecutor().execute(new Runnable() { // from class: com.android.server.notification.NotificationComparator$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    NotificationComparator.AnonymousClass1 anonymousClass1 = NotificationComparator.AnonymousClass1.this;
-                    Intent intent2 = intent;
-                    synchronized (NotificationComparator.this.mStateLock) {
-                        NotificationComparator.this.mDefaultPhoneApp = intent2.getStringExtra("android.telecom.extra.CHANGE_DEFAULT_DIALER_PACKAGE_NAME");
-                        Slog.d("NotificationComparator", "DefaultPhonApp Changed : " + NotificationComparator.this.mDefaultPhoneApp);
-                    }
-                }
-            });
+            BackgroundThread.getExecutor()
+                    .execute(
+                            new Runnable() { // from class:
+                                // com.android.server.notification.NotificationComparator$1$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    NotificationComparator.AnonymousClass1 anonymousClass1 =
+                                            NotificationComparator.AnonymousClass1.this;
+                                    Intent intent2 = intent;
+                                    synchronized (NotificationComparator.this.mStateLock) {
+                                        NotificationComparator.this.mDefaultPhoneApp =
+                                                intent2.getStringExtra(
+                                                        "android.telecom.extra.CHANGE_DEFAULT_DIALER_PACKAGE_NAME");
+                                        Slog.d(
+                                                "NotificationComparator",
+                                                "DefaultPhonApp Changed : "
+                                                        + NotificationComparator.this
+                                                                .mDefaultPhoneApp);
+                                    }
+                                }
+                            });
         }
     }
 
@@ -47,7 +58,8 @@ public final class NotificationComparator implements Comparator {
         this.mStateLock = obj;
         AnonymousClass1 anonymousClass1 = new AnonymousClass1();
         this.mContext = context;
-        context.registerReceiver(anonymousClass1, new IntentFilter("android.telecom.action.DEFAULT_DIALER_CHANGED"));
+        context.registerReceiver(
+                anonymousClass1, new IntentFilter("android.telecom.action.DEFAULT_DIALER_CHANGED"));
         this.mMessagingUtil = new NotificationMessagingUtil(context, obj);
     }
 
@@ -60,9 +72,9 @@ public final class NotificationComparator implements Comparator {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:37:0x00a2, code lost:
-    
-        if (r3 != 0) goto L46;
-     */
+
+       if (r3 != 0) goto L46;
+    */
     @Override // java.util.Comparator
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -73,13 +85,16 @@ public final class NotificationComparator implements Comparator {
             Method dump skipped, instructions count: 249
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.NotificationComparator.compare(java.lang.Object, java.lang.Object):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.NotificationComparator.compare(java.lang.Object,"
+                    + " java.lang.Object):int");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0051, code lost:
-    
-        if (java.util.Objects.equals(r0, r5.mDefaultPhoneApp) != false) goto L25;
-     */
+
+       if (java.util.Objects.equals(r0, r5.mDefaultPhoneApp) != false) goto L25;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -140,6 +155,8 @@ public final class NotificationComparator implements Comparator {
         L61:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.NotificationComparator.isImportantOngoing(com.android.server.notification.NotificationRecord):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.NotificationComparator.isImportantOngoing(com.android.server.notification.NotificationRecord):boolean");
     }
 }

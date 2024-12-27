@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextMotion extends SContextEventContext {
-    public static final Parcelable.Creator<SContextMotion> CREATOR = new Parcelable.Creator<SContextMotion>() { // from class: android.hardware.scontext.SContextMotion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextMotion createFromParcel(Parcel in) {
-            return new SContextMotion(in);
-        }
+    public static final Parcelable.Creator<SContextMotion> CREATOR =
+            new Parcelable.Creator<
+                    SContextMotion>() { // from class: android.hardware.scontext.SContextMotion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextMotion createFromParcel(Parcel in) {
+                    return new SContextMotion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextMotion[] newArray(int size) {
-            return new SContextMotion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextMotion[] newArray(int size) {
+                    return new SContextMotion[size];
+                }
+            };
     private Bundle mContext;
 
     SContextMotion() {
@@ -34,7 +36,8 @@ public class SContextMotion extends SContextEventContext {
         return this.mContext.getInt("Type");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

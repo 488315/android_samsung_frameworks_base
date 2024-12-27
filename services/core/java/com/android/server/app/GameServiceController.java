@@ -5,15 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.TextUtils;
+
 import com.android.server.SystemService;
-import com.android.server.app.GameServiceConfiguration;
+
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class GameServiceController {
-    public volatile GameServiceConfiguration.GameServiceComponentConfiguration mActiveGameServiceComponentConfiguration;
+    public volatile GameServiceConfiguration.GameServiceComponentConfiguration
+            mActiveGameServiceComponentConfiguration;
     public volatile String mActiveGameServiceProviderPackage;
     public final Executor mBackgroundExecutor;
     public final Context mContext;
@@ -38,12 +40,17 @@ public final class GameServiceController {
         public final void onReceive(Context context, Intent intent) {
             if (TextUtils.equals(intent.getData().getSchemeSpecificPart(), this.mPackageName)) {
                 GameServiceController gameServiceController = GameServiceController.this;
-                gameServiceController.mBackgroundExecutor.execute(new GameServiceController$$ExternalSyntheticLambda0(gameServiceController));
+                gameServiceController.mBackgroundExecutor.execute(
+                        new GameServiceController$$ExternalSyntheticLambda0(gameServiceController));
             }
         }
     }
 
-    public GameServiceController(Context context, Executor executor, GameServiceProviderSelectorImpl gameServiceProviderSelectorImpl, GameServiceProviderInstanceFactoryImpl gameServiceProviderInstanceFactoryImpl) {
+    public GameServiceController(
+            Context context,
+            Executor executor,
+            GameServiceProviderSelectorImpl gameServiceProviderSelectorImpl,
+            GameServiceProviderInstanceFactoryImpl gameServiceProviderInstanceFactoryImpl) {
         this.mContext = context;
         this.mGameServiceProviderInstanceFactory = gameServiceProviderInstanceFactoryImpl;
         this.mBackgroundExecutor = executor;
@@ -54,7 +61,8 @@ public final class GameServiceController {
         if (TextUtils.equals(this.mActiveGameServiceProviderPackage, str)) {
             return;
         }
-        PackageChangedBroadcastReceiver packageChangedBroadcastReceiver = this.mGameServicePackageChangedReceiver;
+        PackageChangedBroadcastReceiver packageChangedBroadcastReceiver =
+                this.mGameServicePackageChangedReceiver;
         if (packageChangedBroadcastReceiver != null) {
             this.mContext.unregisterReceiver(packageChangedBroadcastReceiver);
             this.mGameServicePackageChangedReceiver = null;
@@ -69,15 +77,18 @@ public final class GameServiceController {
         intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
         intentFilter.addDataScheme("package");
         intentFilter.addDataSchemeSpecificPart(str, 0);
-        PackageChangedBroadcastReceiver packageChangedBroadcastReceiver2 = new PackageChangedBroadcastReceiver(str);
+        PackageChangedBroadcastReceiver packageChangedBroadcastReceiver2 =
+                new PackageChangedBroadcastReceiver(str);
         this.mGameServicePackageChangedReceiver = packageChangedBroadcastReceiver2;
         this.mContext.registerReceiver(packageChangedBroadcastReceiver2, intentFilter);
     }
 
-    public final void setCurrentForegroundUserAndEvaluateProvider(SystemService.TargetUser targetUser) {
+    public final void setCurrentForegroundUserAndEvaluateProvider(
+            SystemService.TargetUser targetUser) {
         if (!Objects.equals(this.mCurrentForegroundUser, targetUser)) {
             this.mCurrentForegroundUser = targetUser;
-            this.mBackgroundExecutor.execute(new GameServiceController$$ExternalSyntheticLambda0(this));
+            this.mBackgroundExecutor.execute(
+                    new GameServiceController$$ExternalSyntheticLambda0(this));
         }
     }
 }

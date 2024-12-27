@@ -6,6 +6,7 @@ import android.provider.DeviceConfig;
 /* loaded from: classes.dex */
 public abstract class BackupAndRestoreFeatureFlags {
     public static long getBackupTransportFutureTimeoutMillis() {
-        return DeviceConfig.getLong("backup_and_restore", "backup_transport_future_timeout_millis", 600000L);
+        return DeviceConfig.getLong(
+                "backup_and_restore", "backup_transport_future_timeout_millis", 600000L);
     }
 }

@@ -6,17 +6,13 @@ import android.graphics.Rect;
 /* loaded from: classes4.dex */
 public interface SurfaceHolder {
 
-    @Deprecated
-    public static final int SURFACE_TYPE_GPU = 2;
+    @Deprecated public static final int SURFACE_TYPE_GPU = 2;
 
-    @Deprecated
-    public static final int SURFACE_TYPE_HARDWARE = 1;
+    @Deprecated public static final int SURFACE_TYPE_HARDWARE = 1;
 
-    @Deprecated
-    public static final int SURFACE_TYPE_NORMAL = 0;
+    @Deprecated public static final int SURFACE_TYPE_NORMAL = 0;
 
-    @Deprecated
-    public static final int SURFACE_TYPE_PUSH_BUFFERS = 3;
+    @Deprecated public static final int SURFACE_TYPE_PUSH_BUFFERS = 3;
 
     public interface Callback {
         void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i2, int i3);
@@ -54,8 +50,7 @@ public interface SurfaceHolder {
     void unlockCanvasAndPost(Canvas canvas);
 
     public static class BadSurfaceTypeException extends RuntimeException {
-        public BadSurfaceTypeException() {
-        }
+        public BadSurfaceTypeException() {}
 
         public BadSurfaceTypeException(String name) {
             super(name);

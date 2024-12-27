@@ -11,6 +11,7 @@ import android.view.translation.TranslationResponseValue;
 import android.view.translation.ViewTranslationRequest;
 import android.view.translation.ViewTranslationResponse;
 import android.widget.TextView;
+
 import java.util.regex.Pattern;
 
 /* loaded from: classes4.dex */
@@ -22,7 +23,8 @@ public class TranslationTransformationMethod implements TransformationMethod2 {
     private TransformationMethod mOriginalTranslationMethod;
     private final ViewTranslationResponse mTranslationResponse;
 
-    public TranslationTransformationMethod(ViewTranslationResponse response, TransformationMethod method) {
+    public TranslationTransformationMethod(
+            ViewTranslationResponse response, TransformationMethod method) {
         this.mTranslationResponse = response;
         this.mOriginalTranslationMethod = method;
     }
@@ -42,11 +44,14 @@ public class TranslationTransformationMethod implements TransformationMethod2 {
             Log.w(TAG, "Caller did not enable length changes; not transforming to translated text");
             return source;
         }
-        TranslationResponseValue value = this.mTranslationResponse.getValue(ViewTranslationRequest.ID_TEXT);
+        TranslationResponseValue value =
+                this.mTranslationResponse.getValue(ViewTranslationRequest.ID_TEXT);
         boolean showOriginalText = value.getExtras().getBoolean("show_origin_message");
         if (value.getStatusCode() == 0) {
             translatedText = value.getText();
-            if (this.SEP_VERSION.floatValue() >= 15.1d && (view instanceof TextView) && showOriginalText) {
+            if (this.SEP_VERSION.floatValue() >= 15.1d
+                    && (view instanceof TextView)
+                    && showOriginalText) {
                 try {
                     ColorStateList textColor = ((TextView) view).getTextColors();
                     ColorStateList dimTextColor = textColor.withAlpha(179);
@@ -64,15 +69,21 @@ public class TranslationTransformationMethod implements TransformationMethod2 {
         if (TextUtils.isEmpty(translatedText) || isWhitespace(translatedText.toString())) {
             return source;
         }
-        if (this.SEP_VERSION.floatValue() >= 15.1d && (view instanceof TextView) && showOriginalText) {
+        if (this.SEP_VERSION.floatValue() >= 15.1d
+                && (view instanceof TextView)
+                && showOriginalText) {
             return TextUtils.concat(source, "\n", translatedText);
         }
         return translatedText;
     }
 
     @Override // android.text.method.TransformationMethod
-    public void onFocusChanged(View view, CharSequence sourceText, boolean focused, int direction, Rect previouslyFocusedRect) {
-    }
+    public void onFocusChanged(
+            View view,
+            CharSequence sourceText,
+            boolean focused,
+            int direction,
+            Rect previouslyFocusedRect) {}
 
     @Override // android.text.method.TransformationMethod2
     public void setLengthChangesAllowed(boolean allowLengthChanges) {

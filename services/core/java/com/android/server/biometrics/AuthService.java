@@ -31,12 +31,14 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.SystemService;
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
 import com.android.server.am.PendingIntentController$$ExternalSyntheticOutline0;
 import com.android.server.companion.virtual.VirtualDeviceManagerInternal;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,10 +52,10 @@ public final class AuthService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AuthServiceImpl extends IAuthService.Stub {
-        public AuthServiceImpl() {
-        }
+        public AuthServiceImpl() {}
 
-        public static void authenticateFastFail(String str, IBiometricServiceReceiver iBiometricServiceReceiver) {
+        public static void authenticateFastFail(
+                String str, IBiometricServiceReceiver iBiometricServiceReceiver) {
             BootReceiver$$ExternalSyntheticOutline0.m("authenticateFastFail: ", str, "AuthService");
             try {
                 iBiometricServiceReceiver.onError(0, 5, 0);
@@ -62,7 +64,13 @@ public final class AuthService extends SystemService {
             }
         }
 
-        public final long authenticate(IBinder iBinder, long j, int i, IBiometricServiceReceiver iBiometricServiceReceiver, String str, PromptInfo promptInfo) {
+        public final long authenticate(
+                IBinder iBinder,
+                long j,
+                int i,
+                IBiometricServiceReceiver iBiometricServiceReceiver,
+                String str,
+                PromptInfo promptInfo) {
             Slog.i("AuthService", "authenticate: [" + i + "] from pkg=" + str);
             int callingUserId = UserHandle.getCallingUserId();
             int callingUid = Binder.getCallingUid();
@@ -70,41 +78,74 @@ public final class AuthService extends SystemService {
             if (i == callingUserId) {
                 AuthService.m311$$Nest$mcheckPermission(AuthService.this);
             } else {
-                PendingIntentController$$ExternalSyntheticOutline0.m(callingUserId, i, "User ", " is requesting authentication of userid: ", "AuthService");
+                PendingIntentController$$ExternalSyntheticOutline0.m(
+                        callingUserId,
+                        i,
+                        "User ",
+                        " is requesting authentication of userid: ",
+                        "AuthService");
                 AuthService.m310$$Nest$mcheckInternalPermission(AuthService.this);
             }
             AuthService authService = AuthService.this;
-            if (authService.mInjector.getAppOps(authService.getContext()).noteOp(78, callingUid, str, (String) null, "authenticate()") != 0) {
+            if (authService
+                            .mInjector
+                            .getAppOps(authService.getContext())
+                            .noteOp(78, callingUid, str, (String) null, "authenticate()")
+                    != 0) {
                 authenticateFastFail("Denied by app ops: " + str, iBiometricServiceReceiver);
                 return -1L;
             }
-            if (iBinder == null || iBiometricServiceReceiver == null || str == null || promptInfo == null) {
-                authenticateFastFail("Unable to authenticate, one or more null arguments", iBiometricServiceReceiver);
+            if (iBinder == null
+                    || iBiometricServiceReceiver == null
+                    || str == null
+                    || promptInfo == null) {
+                authenticateFastFail(
+                        "Unable to authenticate, one or more null arguments",
+                        iBiometricServiceReceiver);
                 return -1L;
             }
             if (!Utils.isForeground(callingUid, callingPid)) {
-                authenticateFastFail("Caller is not foreground: ".concat(str), iBiometricServiceReceiver);
+                authenticateFastFail(
+                        "Caller is not foreground: ".concat(str), iBiometricServiceReceiver);
                 return -1L;
             }
-            if (promptInfo.requiresTestOrInternalPermission() && AuthService.this.getContext().checkCallingOrSelfPermission("android.permission.TEST_BIOMETRIC") != 0) {
+            if (promptInfo.requiresTestOrInternalPermission()
+                    && AuthService.this
+                                    .getContext()
+                                    .checkCallingOrSelfPermission(
+                                            "android.permission.TEST_BIOMETRIC")
+                            != 0) {
                 AuthService.m310$$Nest$mcheckInternalPermission(AuthService.this);
             }
             if (promptInfo.requiresInternalPermission()) {
                 AuthService.m310$$Nest$mcheckInternalPermission(AuthService.this);
             }
             if (promptInfo.requiresAdvancedPermission()) {
-                AuthService.this.getContext().enforceCallingOrSelfPermission("android.permission.SET_BIOMETRIC_DIALOG_ADVANCED", "Must have SET_BIOMETRIC_DIALOG_ADVANCED permission");
+                AuthService.this
+                        .getContext()
+                        .enforceCallingOrSelfPermission(
+                                "android.permission.SET_BIOMETRIC_DIALOG_ADVANCED",
+                                "Must have SET_BIOMETRIC_DIALOG_ADVANCED permission");
             }
             if (promptInfo.semGetPrivilegedFlag() != 0 || promptInfo.semGetBiometricType() != 0) {
-                AuthService.this.getContext().enforceCallingOrSelfPermission("com.samsung.android.permission.BIOMETRICS_PRIVILEGED", "Must have BIOMETRICS_PRIVILEGED permission");
+                AuthService.this
+                        .getContext()
+                        .enforceCallingOrSelfPermission(
+                                "com.samsung.android.permission.BIOMETRICS_PRIVILEGED",
+                                "Must have BIOMETRICS_PRIVILEGED permission");
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                VirtualDeviceManagerInternal virtualDeviceManagerInternal = (VirtualDeviceManagerInternal) AuthService.this.getLocalService(VirtualDeviceManagerInternal.class);
+                VirtualDeviceManagerInternal virtualDeviceManagerInternal =
+                        (VirtualDeviceManagerInternal)
+                                AuthService.this.getLocalService(
+                                        VirtualDeviceManagerInternal.class);
                 if (virtualDeviceManagerInternal != null) {
                     virtualDeviceManagerInternal.onAuthenticationPrompt(callingUid);
                 }
-                long authenticate = AuthService.this.mBiometricService.authenticate(iBinder, j, i, iBiometricServiceReceiver, str, promptInfo);
+                long authenticate =
+                        AuthService.this.mBiometricService.authenticate(
+                                iBinder, j, i, iBiometricServiceReceiver, str, promptInfo);
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return authenticate;
             } catch (Throwable th) {
@@ -122,8 +163,19 @@ public final class AuthService extends SystemService {
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                int canAuthenticate = AuthService.this.mBiometricService.canAuthenticate(str, i, callingUserId, i2);
-                Slog.d("AuthService", "canAuthenticate, userId: " + i + ", callingUserId: " + callingUserId + ", authenticators: " + i2 + ", result: " + canAuthenticate);
+                int canAuthenticate =
+                        AuthService.this.mBiometricService.canAuthenticate(
+                                str, i, callingUserId, i2);
+                Slog.d(
+                        "AuthService",
+                        "canAuthenticate, userId: "
+                                + i
+                                + ", callingUserId: "
+                                + callingUserId
+                                + ", authenticators: "
+                                + i2
+                                + ", result: "
+                                + canAuthenticate);
                 return canAuthenticate;
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -134,7 +186,9 @@ public final class AuthService extends SystemService {
             Slog.d("AuthService", "cancelAuthentication: [" + iBinder + "], [" + str + "]");
             AuthService.m311$$Nest$mcheckPermission(AuthService.this);
             if (iBinder == null || str == null) {
-                Slog.e("AuthService", "Unable to cancel authentication, one or more null arguments");
+                Slog.e(
+                        "AuthService",
+                        "Unable to cancel authentication, one or more null arguments");
                 return;
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -145,12 +199,16 @@ public final class AuthService extends SystemService {
             }
         }
 
-        public final ITestSession createTestSession(int i, ITestSessionCallback iTestSessionCallback, String str) {
+        public final ITestSession createTestSession(
+                int i, ITestSessionCallback iTestSessionCallback, String str) {
             createTestSession_enforcePermission();
             Slog.d("AuthService", "createTestSession: " + str);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                return AuthService.this.mInjector.getBiometricService().createTestSession(i, iTestSessionCallback, str);
+                return AuthService.this
+                        .mInjector
+                        .getBiometricService()
+                        .createTestSession(i, iTestSessionCallback, str);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -158,7 +216,11 @@ public final class AuthService extends SystemService {
 
         public final long[] getAuthenticatorIds(int i) {
             if (i != UserHandle.getCallingUserId()) {
-                AuthService.this.getContext().enforceCallingOrSelfPermission("android.permission.USE_BIOMETRIC_INTERNAL", "Must have android.permission.USE_BIOMETRIC_INTERNAL permission.");
+                AuthService.this
+                        .getContext()
+                        .enforceCallingOrSelfPermission(
+                                "android.permission.USE_BIOMETRIC_INTERNAL",
+                                "Must have android.permission.USE_BIOMETRIC_INTERNAL permission.");
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
@@ -177,11 +239,33 @@ public final class AuthService extends SystemService {
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                int currentModality = AuthService.this.mBiometricService.getCurrentModality(str, i, callingUserId, i2);
+                int currentModality =
+                        AuthService.this.mBiometricService.getCurrentModality(
+                                str, i, callingUserId, i2);
                 if (currentModality != 1) {
                     currentModality &= -2;
                 }
-                String string = currentModality != 0 ? currentModality != 1 ? currentModality != 2 ? currentModality != 8 ? AuthService.this.getContext().getString(R.string.config_defaultOnDeviceIntelligenceService) : AuthService.this.getContext().getString(R.string.kg_wrong_pattern) : AuthService.this.getContext().getString(R.string.lockscreen_permanent_disabled_sim_message_short) : AuthService.this.getContext().getString(17042722) : null;
+                String string =
+                        currentModality != 0
+                                ? currentModality != 1
+                                        ? currentModality != 2
+                                                ? currentModality != 8
+                                                        ? AuthService.this
+                                                                .getContext()
+                                                                .getString(
+                                                                        R.string
+                                                                                .config_defaultOnDeviceIntelligenceService)
+                                                        : AuthService.this
+                                                                .getContext()
+                                                                .getString(
+                                                                        R.string.kg_wrong_pattern)
+                                                : AuthService.this
+                                                        .getContext()
+                                                        .getString(
+                                                                R.string
+                                                                        .lockscreen_permanent_disabled_sim_message_short)
+                                        : AuthService.this.getContext().getString(17042722)
+                                : null;
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return string;
             } catch (Throwable th) {
@@ -198,7 +282,8 @@ public final class AuthService extends SystemService {
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                if (com.android.internal.hidden_from_bootclasspath.android.hardware.biometrics.Flags.lastAuthenticationTime()) {
+                if (com.android.internal.hidden_from_bootclasspath.android.hardware.biometrics.Flags
+                        .lastAuthenticationTime()) {
                     return AuthService.this.mBiometricService.getLastAuthenticationTime(i, i2);
                 }
                 throw new UnsupportedOperationException();
@@ -216,12 +301,53 @@ public final class AuthService extends SystemService {
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                int currentModality = AuthService.this.mBiometricService.getCurrentModality(str, i, callingUserId, i2);
+                int currentModality =
+                        AuthService.this.mBiometricService.getCurrentModality(
+                                str, i, callingUserId, i2);
                 boolean isCredentialRequested = Utils.isCredentialRequested(i2);
                 if (currentModality != 1) {
                     currentModality &= -2;
                 }
-                String string = currentModality != 0 ? currentModality != 1 ? currentModality != 2 ? currentModality != 8 ? isCredentialRequested ? AuthService.this.getContext().getString(R.string.config_defaultTextClassifierPackage) : AuthService.this.getContext().getString(R.string.config_defaultProfcollectReportUploaderAction) : isCredentialRequested ? AuthService.this.getContext().getString(R.string.lock_to_app_unlock_pattern) : AuthService.this.getContext().getString(R.string.language_picker_section_suggested_bilingual) : isCredentialRequested ? AuthService.this.getContext().getString(R.string.managed_profile_app_label) : AuthService.this.getContext().getString(R.string.lockscreen_sound_off_label) : AuthService.this.getContext().getString(17042723) : null;
+                String string =
+                        currentModality != 0
+                                ? currentModality != 1
+                                        ? currentModality != 2
+                                                ? currentModality != 8
+                                                        ? isCredentialRequested
+                                                                ? AuthService.this
+                                                                        .getContext()
+                                                                        .getString(
+                                                                                R.string
+                                                                                        .config_defaultTextClassifierPackage)
+                                                                : AuthService.this
+                                                                        .getContext()
+                                                                        .getString(
+                                                                                R.string
+                                                                                        .config_defaultProfcollectReportUploaderAction)
+                                                        : isCredentialRequested
+                                                                ? AuthService.this
+                                                                        .getContext()
+                                                                        .getString(
+                                                                                R.string
+                                                                                        .lock_to_app_unlock_pattern)
+                                                                : AuthService.this
+                                                                        .getContext()
+                                                                        .getString(
+                                                                                R.string
+                                                                                        .language_picker_section_suggested_bilingual)
+                                                : isCredentialRequested
+                                                        ? AuthService.this
+                                                                .getContext()
+                                                                .getString(
+                                                                        R.string
+                                                                                .managed_profile_app_label)
+                                                        : AuthService.this
+                                                                .getContext()
+                                                                .getString(
+                                                                        R.string
+                                                                                .lockscreen_sound_off_label)
+                                        : AuthService.this.getContext().getString(17042723)
+                                : null;
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return string;
             } catch (Throwable th) {
@@ -249,22 +375,45 @@ public final class AuthService extends SystemService {
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                int supportedModalities = AuthService.this.mBiometricService.getSupportedModalities(i2);
+                int supportedModalities =
+                        AuthService.this.mBiometricService.getSupportedModalities(i2);
                 if (supportedModalities == 0) {
                     str2 = null;
                 } else if (supportedModalities == 1) {
                     str2 = AuthService.this.getContext().getString(17042722);
                 } else if (supportedModalities == 2) {
-                    str2 = AuthService.this.getContext().getString(R.string.lockscreen_permanent_disabled_sim_message_short);
+                    str2 =
+                            AuthService.this
+                                    .getContext()
+                                    .getString(
+                                            R.string
+                                                    .lockscreen_permanent_disabled_sim_message_short);
                 } else if (supportedModalities == 4) {
-                    str2 = AuthService.this.getContext().getString(R.string.config_defaultOnDeviceIntelligenceService);
+                    str2 =
+                            AuthService.this
+                                    .getContext()
+                                    .getString(R.string.config_defaultOnDeviceIntelligenceService);
                 } else if (supportedModalities == 8) {
                     str2 = AuthService.this.getContext().getString(R.string.kg_wrong_pattern);
                 } else if ((supportedModalities & 1) == 0) {
-                    str2 = AuthService.this.getContext().getString(R.string.config_defaultOnDeviceIntelligenceService);
+                    str2 =
+                            AuthService.this
+                                    .getContext()
+                                    .getString(R.string.config_defaultOnDeviceIntelligenceService);
                 } else {
                     int i3 = supportedModalities & (-2);
-                    str2 = i3 == 2 ? AuthService.this.getContext().getString(R.string.low_memory) : i3 == 8 ? AuthService.this.getContext().getString(R.string.lock_to_app_unlock_password) : AuthService.this.getContext().getString(R.string.config_defaultSystemCaptionsManagerService);
+                    str2 =
+                            i3 == 2
+                                    ? AuthService.this.getContext().getString(R.string.low_memory)
+                                    : i3 == 8
+                                            ? AuthService.this
+                                                    .getContext()
+                                                    .getString(R.string.lock_to_app_unlock_password)
+                                            : AuthService.this
+                                                    .getContext()
+                                                    .getString(
+                                                            R.string
+                                                                    .config_defaultSystemCaptionsManagerService);
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return str2;
@@ -276,7 +425,17 @@ public final class AuthService extends SystemService {
 
         public final String getUiPackage() {
             getUiPackage_enforcePermission();
-            return AuthService.this.getContext().getResources().getString(AuthService.this.getContext().getResources().getIdentifier("config_biometric_prompt_ui_package", "string", "android"));
+            return AuthService.this
+                    .getContext()
+                    .getResources()
+                    .getString(
+                            AuthService.this
+                                    .getContext()
+                                    .getResources()
+                                    .getIdentifier(
+                                            "config_biometric_prompt_ui_package",
+                                            "string",
+                                            "android"));
         }
 
         public final boolean hasEnrolledBiometrics(int i, String str) {
@@ -289,19 +448,23 @@ public final class AuthService extends SystemService {
             }
         }
 
-        public final void invalidateAuthenticatorIds(int i, int i2, IInvalidationCallback iInvalidationCallback) {
+        public final void invalidateAuthenticatorIds(
+                int i, int i2, IInvalidationCallback iInvalidationCallback) {
             AuthService.m310$$Nest$mcheckInternalPermission(AuthService.this);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AuthService.this.mBiometricService.invalidateAuthenticatorIds(i, i2, iInvalidationCallback);
+                AuthService.this.mBiometricService.invalidateAuthenticatorIds(
+                        i, i2, iInvalidationCallback);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         }
 
-        public final void registerAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) {
+        public final void registerAuthenticationStateListener(
+                AuthenticationStateListener authenticationStateListener) {
             AuthService.m310$$Nest$mcheckInternalPermission(AuthService.this);
-            IFingerprintService fingerprintService = AuthService.this.mInjector.getFingerprintService();
+            IFingerprintService fingerprintService =
+                    AuthService.this.mInjector.getFingerprintService();
             if (fingerprintService != null) {
                 fingerprintService.registerAuthenticationStateListener(authenticationStateListener);
             }
@@ -311,11 +474,13 @@ public final class AuthService extends SystemService {
             }
         }
 
-        public final void registerEnabledOnKeyguardCallback(IBiometricEnabledOnKeyguardCallback iBiometricEnabledOnKeyguardCallback) {
+        public final void registerEnabledOnKeyguardCallback(
+                IBiometricEnabledOnKeyguardCallback iBiometricEnabledOnKeyguardCallback) {
             AuthService.m310$$Nest$mcheckInternalPermission(AuthService.this);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AuthService.this.mBiometricService.registerEnabledOnKeyguardCallback(iBiometricEnabledOnKeyguardCallback);
+                AuthService.this.mBiometricService.registerEnabledOnKeyguardCallback(
+                        iBiometricEnabledOnKeyguardCallback);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -331,7 +496,8 @@ public final class AuthService extends SystemService {
             }
         }
 
-        public final void resetLockoutTimeBound(IBinder iBinder, String str, int i, int i2, byte[] bArr) {
+        public final void resetLockoutTimeBound(
+                IBinder iBinder, String str, int i, int i2, byte[] bArr) {
             AuthService.m310$$Nest$mcheckInternalPermission(AuthService.this);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
@@ -341,11 +507,14 @@ public final class AuthService extends SystemService {
             }
         }
 
-        public final void unregisterAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) {
+        public final void unregisterAuthenticationStateListener(
+                AuthenticationStateListener authenticationStateListener) {
             AuthService.m310$$Nest$mcheckInternalPermission(AuthService.this);
-            IFingerprintService fingerprintService = AuthService.this.mInjector.getFingerprintService();
+            IFingerprintService fingerprintService =
+                    AuthService.this.mInjector.getFingerprintService();
             if (fingerprintService != null) {
-                fingerprintService.unregisterAuthenticationStateListener(authenticationStateListener);
+                fingerprintService.unregisterAuthenticationStateListener(
+                        authenticationStateListener);
             }
             IFaceService faceService = AuthService.this.mInjector.getFaceService();
             if (faceService != null) {
@@ -370,11 +539,18 @@ public final class AuthService extends SystemService {
             if (SemBiometricFeature.FP_FEATURE_SUPPORT_FINGERPRINT) {
                 int i = SystemProperties.getInt("ro.board.first_api_level", 0);
                 int i2 = Build.VERSION.DEVICE_INITIAL_SDK_INT;
-                if ((i == 0 && i2 < 33) || i < 33 || SemBiometricFeature.FEATURE_FINGERPRINT_JDM_HAL) {
+                if ((i == 0 && i2 < 33)
+                        || i < 33
+                        || SemBiometricFeature.FEATURE_FINGERPRINT_JDM_HAL) {
                     arrayList.add("0:2:15");
                 }
             }
-            arrayList.add("1:8:" + (SemBiometricFeature.FEATURE_JDM_HAL ? 4095 : IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT));
+            arrayList.add(
+                    "1:8:"
+                            + (SemBiometricFeature.FEATURE_JDM_HAL
+                                    ? 4095
+                                    : IDnsResolverUnsolicitedEventListener
+                                            .DNS_HEALTH_RESULT_TIMEOUT));
             return (String[]) arrayList.toArray(new String[0]);
         }
 
@@ -411,7 +587,13 @@ public final class AuthService extends SystemService {
         }
 
         public boolean isHidlDisabled(Context context) {
-            return (Build.IS_ENG || Build.IS_USERDEBUG) && Settings.Secure.getIntForUser(context.getContentResolver(), "com.android.server.biometrics.AuthService.hidlDisabled", 0, -2) == 1;
+            return (Build.IS_ENG || Build.IS_USERDEBUG)
+                    && Settings.Secure.getIntForUser(
+                                    context.getContentResolver(),
+                                    "com.android.server.biometrics.AuthService.hidlDisabled",
+                                    0,
+                                    -2)
+                            == 1;
         }
 
         public void publishBinderService(AuthService authService, IAuthService.Stub stub) {
@@ -421,13 +603,24 @@ public final class AuthService extends SystemService {
 
     /* renamed from: -$$Nest$mcheckInternalPermission, reason: not valid java name */
     public static void m310$$Nest$mcheckInternalPermission(AuthService authService) {
-        authService.getContext().enforceCallingOrSelfPermission("android.permission.USE_BIOMETRIC_INTERNAL", "Must have USE_BIOMETRIC_INTERNAL permission");
+        authService
+                .getContext()
+                .enforceCallingOrSelfPermission(
+                        "android.permission.USE_BIOMETRIC_INTERNAL",
+                        "Must have USE_BIOMETRIC_INTERNAL permission");
     }
 
     /* renamed from: -$$Nest$mcheckPermission, reason: not valid java name */
     public static void m311$$Nest$mcheckPermission(AuthService authService) {
-        if (authService.getContext().checkCallingOrSelfPermission("android.permission.USE_FINGERPRINT") != 0) {
-            authService.getContext().enforceCallingOrSelfPermission("android.permission.USE_BIOMETRIC", "Must have USE_BIOMETRIC permission");
+        if (authService
+                        .getContext()
+                        .checkCallingOrSelfPermission("android.permission.USE_FINGERPRINT")
+                != 0) {
+            authService
+                    .getContext()
+                    .enforceCallingOrSelfPermission(
+                            "android.permission.USE_BIOMETRIC",
+                            "Must have USE_BIOMETRIC permission");
         }
     }
 
@@ -453,7 +646,10 @@ public final class AuthService extends SystemService {
         for (int i = 0; i < arrayList.size(); i++) {
             strArr[i] = String.join(":", String.valueOf(i), (String) arrayList.get(i), valueOf);
         }
-        BootReceiver$$ExternalSyntheticOutline0.m(new StringBuilder("Generated config_biometric_sensors: "), Arrays.toString(strArr), "AuthService");
+        BootReceiver$$ExternalSyntheticOutline0.m(
+                new StringBuilder("Generated config_biometric_sensors: "),
+                Arrays.toString(strArr),
+                "AuthService");
         return strArr;
     }
 
@@ -467,7 +663,10 @@ public final class AuthService extends SystemService {
         this.mBiometricService = injector.getBiometricService();
         int i3 = 0;
         if (!injector.isHidlDisabled(getContext())) {
-            int i4 = SystemProperties.getInt("ro.board.api_level", SystemProperties.getInt("ro.board.first_api_level", 0));
+            int i4 =
+                    SystemProperties.getInt(
+                            "ro.board.api_level",
+                            SystemProperties.getInt("ro.board.first_api_level", 0));
             String[] configuration = injector.getConfiguration(getContext());
             if (configuration.length == 0 && i4 == 30) {
                 Slog.w("AuthService", "Found R vendor partition without config_biometric_sensors");
@@ -479,7 +678,8 @@ public final class AuthService extends SystemService {
             }
         }
         injector.getClass();
-        BiometricHandlerProvider biometricHandlerProvider = BiometricHandlerProvider.sBiometricHandlerProvider;
+        BiometricHandlerProvider biometricHandlerProvider =
+                BiometricHandlerProvider.sBiometricHandlerProvider;
         final String[] fingerprintAidlInstances = injector.getFingerprintAidlInstances();
         String[] fingerprintConfiguration = injector.getFingerprintConfiguration(getContext());
         final Context context = getContext();
@@ -505,56 +705,74 @@ public final class AuthService extends SystemService {
         final boolean z2 = fingerprintAidlInstances != null && fingerprintAidlInstances.length > 0;
         final boolean z3 = strArr2.length > 0;
         if (z3 || z2) {
-            biometricHandlerProvider.getFingerprintHandler().post(new Runnable() { // from class: com.android.server.biometrics.AuthService$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    boolean z4 = z2;
-                    String[] strArr3 = fingerprintAidlInstances;
-                    String[] strArr4 = strArr2;
-                    boolean z5 = z3;
-                    Context context2 = context;
-                    IFingerprintService iFingerprintService = fingerprintService;
-                    if (Utils.DEBUG) {
-                        StringBuilder sb = new StringBuilder("registerFingerprintSensors: {");
-                        int i7 = 0;
-                        if (z4) {
-                            sb.append("aidl=");
-                            int length2 = strArr3.length;
-                            while (i7 < length2) {
-                                sb.append(strArr3[i7]);
-                                sb.append(", ");
-                                i7++;
-                            }
-                        } else {
-                            sb.append("hidl=");
-                            int length3 = strArr4.length;
-                            while (i7 < length3) {
-                                sb.append(strArr4[i7]);
-                                sb.append(", ");
-                                i7++;
-                            }
-                        }
-                        BootReceiver$$ExternalSyntheticOutline0.m(sb, "}", "AuthService");
-                    }
-                    FingerprintSensorConfigurations fingerprintSensorConfigurations = new FingerprintSensorConfigurations(z5);
-                    if (z4) {
-                        fingerprintSensorConfigurations.addAidlSensors(strArr3);
-                    } else {
-                        fingerprintSensorConfigurations.addHidlSensors(strArr4, context2);
-                    }
-                    if (iFingerprintService == null) {
-                        if (fingerprintSensorConfigurations.hasSensorConfigurations()) {
-                            Slog.e("AuthService", "Fingerprint configuration exists, but FingerprintService is null.");
-                        }
-                    } else {
-                        try {
-                            iFingerprintService.registerAuthenticators(fingerprintSensorConfigurations);
-                        } catch (RemoteException e) {
-                            Slog.e("AuthService", "RemoteException when registering fingerprint authenticators", e);
-                        }
-                    }
-                }
-            });
+            biometricHandlerProvider
+                    .getFingerprintHandler()
+                    .post(
+                            new Runnable() { // from class:
+                                // com.android.server.biometrics.AuthService$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    boolean z4 = z2;
+                                    String[] strArr3 = fingerprintAidlInstances;
+                                    String[] strArr4 = strArr2;
+                                    boolean z5 = z3;
+                                    Context context2 = context;
+                                    IFingerprintService iFingerprintService = fingerprintService;
+                                    if (Utils.DEBUG) {
+                                        StringBuilder sb =
+                                                new StringBuilder("registerFingerprintSensors: {");
+                                        int i7 = 0;
+                                        if (z4) {
+                                            sb.append("aidl=");
+                                            int length2 = strArr3.length;
+                                            while (i7 < length2) {
+                                                sb.append(strArr3[i7]);
+                                                sb.append(", ");
+                                                i7++;
+                                            }
+                                        } else {
+                                            sb.append("hidl=");
+                                            int length3 = strArr4.length;
+                                            while (i7 < length3) {
+                                                sb.append(strArr4[i7]);
+                                                sb.append(", ");
+                                                i7++;
+                                            }
+                                        }
+                                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                                sb, "}", "AuthService");
+                                    }
+                                    FingerprintSensorConfigurations
+                                            fingerprintSensorConfigurations =
+                                                    new FingerprintSensorConfigurations(z5);
+                                    if (z4) {
+                                        fingerprintSensorConfigurations.addAidlSensors(strArr3);
+                                    } else {
+                                        fingerprintSensorConfigurations.addHidlSensors(
+                                                strArr4, context2);
+                                    }
+                                    if (iFingerprintService == null) {
+                                        if (fingerprintSensorConfigurations
+                                                .hasSensorConfigurations()) {
+                                            Slog.e(
+                                                    "AuthService",
+                                                    "Fingerprint configuration exists, but"
+                                                        + " FingerprintService is null.");
+                                        }
+                                    } else {
+                                        try {
+                                            iFingerprintService.registerAuthenticators(
+                                                    fingerprintSensorConfigurations);
+                                        } catch (RemoteException e) {
+                                            Slog.e(
+                                                    "AuthService",
+                                                    "RemoteException when registering fingerprint"
+                                                        + " authenticators",
+                                                    e);
+                                        }
+                                    }
+                                }
+                            });
         } else {
             Slog.d("AuthService", "No fingerprint sensors.");
         }
@@ -562,36 +780,52 @@ public final class AuthService extends SystemService {
         final String[] faceConfiguration = injector.getFaceConfiguration(getContext());
         final Context context2 = getContext();
         final IFaceService faceService = injector.getFaceService();
-        if ((faceConfiguration == null || faceConfiguration.length == 0) && (faceAidlInstances == null || faceAidlInstances.length == 0)) {
+        if ((faceConfiguration == null || faceConfiguration.length == 0)
+                && (faceAidlInstances == null || faceAidlInstances.length == 0)) {
             Slog.d("AuthService", "No face sensors.");
         } else {
-            biometricHandlerProvider.getFaceHandler().post(new Runnable() { // from class: com.android.server.biometrics.AuthService$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    String[] strArr3 = faceAidlInstances;
-                    String[] strArr4 = faceConfiguration;
-                    Context context3 = context2;
-                    IFaceService iFaceService = faceService;
-                    FaceSensorConfigurations faceSensorConfigurations = new FaceSensorConfigurations(false);
-                    if (strArr3 != null && strArr3.length > 0) {
-                        faceSensorConfigurations.addAidlConfigs(strArr3);
-                    }
-                    if (!faceSensorConfigurations.hasSensorConfigurations() && strArr4 != null && strArr4.length > 0) {
-                        faceSensorConfigurations.addHidlConfigs(strArr4, context3);
-                    }
-                    if (iFaceService == null) {
-                        if (faceSensorConfigurations.hasSensorConfigurations()) {
-                            Slog.e("AuthService", "Face configuration exists, but FaceService is null.");
-                        }
-                    } else {
-                        try {
-                            iFaceService.registerAuthenticators(faceSensorConfigurations);
-                        } catch (RemoteException e) {
-                            Slog.e("AuthService", "RemoteException when registering face authenticators", e);
-                        }
-                    }
-                }
-            });
+            biometricHandlerProvider
+                    .getFaceHandler()
+                    .post(
+                            new Runnable() { // from class:
+                                // com.android.server.biometrics.AuthService$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    String[] strArr3 = faceAidlInstances;
+                                    String[] strArr4 = faceConfiguration;
+                                    Context context3 = context2;
+                                    IFaceService iFaceService = faceService;
+                                    FaceSensorConfigurations faceSensorConfigurations =
+                                            new FaceSensorConfigurations(false);
+                                    if (strArr3 != null && strArr3.length > 0) {
+                                        faceSensorConfigurations.addAidlConfigs(strArr3);
+                                    }
+                                    if (!faceSensorConfigurations.hasSensorConfigurations()
+                                            && strArr4 != null
+                                            && strArr4.length > 0) {
+                                        faceSensorConfigurations.addHidlConfigs(strArr4, context3);
+                                    }
+                                    if (iFaceService == null) {
+                                        if (faceSensorConfigurations.hasSensorConfigurations()) {
+                                            Slog.e(
+                                                    "AuthService",
+                                                    "Face configuration exists, but FaceService is"
+                                                        + " null.");
+                                        }
+                                    } else {
+                                        try {
+                                            iFaceService.registerAuthenticators(
+                                                    faceSensorConfigurations);
+                                        } catch (RemoteException e) {
+                                            Slog.e(
+                                                    "AuthService",
+                                                    "RemoteException when registering face"
+                                                        + " authenticators",
+                                                    e);
+                                        }
+                                    }
+                                }
+                            });
         }
         String[] irisConfiguration = injector.getIrisConfiguration(getContext());
         if (injector.isHidlDisabled(getContext())) {
@@ -599,7 +833,10 @@ public final class AuthService extends SystemService {
             sensorConfigArr = null;
         } else {
             i = 0;
-            int i7 = SystemProperties.getInt("ro.board.api_level", SystemProperties.getInt("ro.board.first_api_level", 0));
+            int i7 =
+                    SystemProperties.getInt(
+                            "ro.board.api_level",
+                            SystemProperties.getInt("ro.board.first_api_level", 0));
             if (irisConfiguration.length == 0 && i7 == 30) {
                 Slog.w("AuthService", "Found R vendor partition without config_biometric_sensors");
                 irisConfiguration = generateRSdkCompatibleConfiguration();
@@ -615,7 +852,10 @@ public final class AuthService extends SystemService {
             for (int i9 = i; i9 < length2; i9++) {
                 SensorConfig sensorConfig = sensorConfigArr[i9];
                 if (sensorConfig.modality != 4) {
-                    VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("Unknown modality: "), sensorConfig.modality, "AuthService");
+                    VaultKeeperService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("Unknown modality: "),
+                            sensorConfig.modality,
+                            "AuthService");
                 } else {
                     ArrayList arrayList3 = new ArrayList();
                     boolean z4 = Utils.DEBUG;
@@ -624,13 +864,18 @@ public final class AuthService extends SystemService {
                         i2 = 2;
                     } else if (i10 != 255) {
                         if (i10 != 4095) {
-                            DeviceIdleController$$ExternalSyntheticOutline0.m(i10, "authenticatorStrengthToPropertyStrength: Unknown strength ", "BiometricUtils");
+                            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                    i10,
+                                    "authenticatorStrengthToPropertyStrength: Unknown strength ",
+                                    "BiometricUtils");
                         }
                         i2 = i;
                     } else {
                         i2 = 1;
                     }
-                    arrayList2.add(new SensorPropertiesInternal(sensorConfig.id, i2, 1, arrayList3, false, false));
+                    arrayList2.add(
+                            new SensorPropertiesInternal(
+                                    sensorConfig.id, i2, 1, arrayList3, false, false));
                 }
             }
         }

@@ -5,6 +5,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -12,19 +13,22 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class NetworkProviderInfo implements Parcelable {
-    public static final Parcelable.Creator<NetworkProviderInfo> CREATOR = new Parcelable.Creator<NetworkProviderInfo>() { // from class: android.net.wifi.sharedconnectivity.app.NetworkProviderInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkProviderInfo createFromParcel(Parcel in) {
-            return NetworkProviderInfo.readFromParcel(in);
-        }
+    public static final Parcelable.Creator<NetworkProviderInfo> CREATOR =
+            new Parcelable.Creator<
+                    NetworkProviderInfo>() { // from class:
+                                             // android.net.wifi.sharedconnectivity.app.NetworkProviderInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkProviderInfo createFromParcel(Parcel in) {
+                    return NetworkProviderInfo.readFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkProviderInfo[] newArray(int size) {
-            return new NetworkProviderInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkProviderInfo[] newArray(int size) {
+                    return new NetworkProviderInfo[size];
+                }
+            };
     public static final int DEVICE_TYPE_AUTO = 5;
     public static final int DEVICE_TYPE_LAPTOP = 3;
     public static final int DEVICE_TYPE_PHONE = 1;
@@ -40,8 +44,7 @@ public final class NetworkProviderInfo implements Parcelable {
     private final String mModelName;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeviceType {
-    }
+    public @interface DeviceType {}
 
     public static final class Builder {
         private int mBatteryPercentage;
@@ -98,12 +101,29 @@ public final class NetworkProviderInfo implements Parcelable {
         }
 
         public NetworkProviderInfo build() {
-            return new NetworkProviderInfo(this.mDeviceType, this.mDeviceName, this.mModelName, this.mBatteryPercentage, this.mIsBatteryCharging, this.mConnectionStrength, this.mExtras);
+            return new NetworkProviderInfo(
+                    this.mDeviceType,
+                    this.mDeviceName,
+                    this.mModelName,
+                    this.mBatteryPercentage,
+                    this.mIsBatteryCharging,
+                    this.mConnectionStrength,
+                    this.mExtras);
         }
     }
 
-    private static void validate(int deviceType, String deviceName, String modelName, int batteryPercentage, int connectionStrength) {
-        if (deviceType != 0 && deviceType != 1 && deviceType != 2 && deviceType != 3 && deviceType != 4 && deviceType != 5) {
+    private static void validate(
+            int deviceType,
+            String deviceName,
+            String modelName,
+            int batteryPercentage,
+            int connectionStrength) {
+        if (deviceType != 0
+                && deviceType != 1
+                && deviceType != 2
+                && deviceType != 3
+                && deviceType != 4
+                && deviceType != 5) {
             throw new IllegalArgumentException("Illegal device type");
         }
         if (batteryPercentage < 0 || batteryPercentage > 100) {
@@ -114,7 +134,14 @@ public final class NetworkProviderInfo implements Parcelable {
         }
     }
 
-    private NetworkProviderInfo(int deviceType, String deviceName, String modelName, int batteryPercentage, boolean isBatteryCharging, int connectionStrength, Bundle extras) {
+    private NetworkProviderInfo(
+            int deviceType,
+            String deviceName,
+            String modelName,
+            int batteryPercentage,
+            boolean isBatteryCharging,
+            int connectionStrength,
+            Bundle extras) {
         validate(deviceType, deviceName, modelName, batteryPercentage, connectionStrength);
         this.mDeviceType = deviceType;
         this.mDeviceName = deviceName;
@@ -158,11 +185,22 @@ public final class NetworkProviderInfo implements Parcelable {
             return false;
         }
         NetworkProviderInfo other = (NetworkProviderInfo) obj;
-        return this.mDeviceType == other.getDeviceType() && Objects.equals(this.mDeviceName, other.mDeviceName) && Objects.equals(this.mModelName, other.mModelName) && this.mBatteryPercentage == other.mBatteryPercentage && this.mIsBatteryCharging == other.mIsBatteryCharging && this.mConnectionStrength == other.mConnectionStrength;
+        return this.mDeviceType == other.getDeviceType()
+                && Objects.equals(this.mDeviceName, other.mDeviceName)
+                && Objects.equals(this.mModelName, other.mModelName)
+                && this.mBatteryPercentage == other.mBatteryPercentage
+                && this.mIsBatteryCharging == other.mIsBatteryCharging
+                && this.mConnectionStrength == other.mConnectionStrength;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mDeviceType), this.mDeviceName, this.mModelName, Integer.valueOf(this.mBatteryPercentage), Boolean.valueOf(this.mIsBatteryCharging), Integer.valueOf(this.mConnectionStrength));
+        return Objects.hash(
+                Integer.valueOf(this.mDeviceType),
+                this.mDeviceName,
+                this.mModelName,
+                Integer.valueOf(this.mBatteryPercentage),
+                Boolean.valueOf(this.mIsBatteryCharging),
+                Integer.valueOf(this.mConnectionStrength));
     }
 
     @Override // android.os.Parcelable
@@ -182,10 +220,31 @@ public final class NetworkProviderInfo implements Parcelable {
     }
 
     public static NetworkProviderInfo readFromParcel(Parcel in) {
-        return new NetworkProviderInfo(in.readInt(), in.readString(), in.readString(), in.readInt(), in.readBoolean(), in.readInt(), in.readBundle());
+        return new NetworkProviderInfo(
+                in.readInt(),
+                in.readString(),
+                in.readString(),
+                in.readInt(),
+                in.readBoolean(),
+                in.readInt(),
+                in.readBundle());
     }
 
     public String toString() {
-        return "NetworkProviderInfo[deviceType=" + this.mDeviceType + ", deviceName=" + this.mDeviceName + ", modelName=" + this.mModelName + ", batteryPercentage=" + this.mBatteryPercentage + ", isBatteryCharging=" + this.mIsBatteryCharging + ", connectionStrength=" + this.mConnectionStrength + ", extras=" + this.mExtras.toString() + NavigationBarInflaterView.SIZE_MOD_END;
+        return "NetworkProviderInfo[deviceType="
+                + this.mDeviceType
+                + ", deviceName="
+                + this.mDeviceName
+                + ", modelName="
+                + this.mModelName
+                + ", batteryPercentage="
+                + this.mBatteryPercentage
+                + ", isBatteryCharging="
+                + this.mIsBatteryCharging
+                + ", connectionStrength="
+                + this.mConnectionStrength
+                + ", extras="
+                + this.mExtras.toString()
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

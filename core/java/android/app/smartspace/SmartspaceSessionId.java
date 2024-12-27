@@ -5,24 +5,27 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
 import android.text.format.DateFormat;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class SmartspaceSessionId implements Parcelable {
-    public static final Parcelable.Creator<SmartspaceSessionId> CREATOR = new Parcelable.Creator<SmartspaceSessionId>() { // from class: android.app.smartspace.SmartspaceSessionId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartspaceSessionId createFromParcel(Parcel parcel) {
-            return new SmartspaceSessionId(parcel);
-        }
+    public static final Parcelable.Creator<SmartspaceSessionId> CREATOR =
+            new Parcelable.Creator<SmartspaceSessionId>() { // from class:
+                // android.app.smartspace.SmartspaceSessionId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartspaceSessionId createFromParcel(Parcel parcel) {
+                    return new SmartspaceSessionId(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartspaceSessionId[] newArray(int size) {
-            return new SmartspaceSessionId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartspaceSessionId[] newArray(int size) {
+                    return new SmartspaceSessionId[size];
+                }
+            };
     private final String mId;
     private final UserHandle mUserHandle;
 
@@ -53,7 +56,12 @@ public final class SmartspaceSessionId implements Parcelable {
     }
 
     public String toString() {
-        return "SmartspaceSessionId{mId='" + this.mId + DateFormat.QUOTE + ", mUserId=" + this.mUserHandle.getIdentifier() + '}';
+        return "SmartspaceSessionId{mId='"
+                + this.mId
+                + DateFormat.QUOTE
+                + ", mUserId="
+                + this.mUserHandle.getIdentifier()
+                + '}';
     }
 
     public int hashCode() {

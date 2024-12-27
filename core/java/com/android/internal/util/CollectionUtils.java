@@ -4,7 +4,7 @@ import android.Manifest;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.ExceptionUtils;
-import com.android.internal.util.FunctionalUtils;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,8 +18,7 @@ import java.util.function.Predicate;
 
 /* loaded from: classes5.dex */
 public class CollectionUtils {
-    private CollectionUtils() {
-    }
+    private CollectionUtils() {}
 
     public static <T> boolean contains(Collection<T> collection, T element) {
         return collection != null && collection.contains(element);
@@ -60,7 +59,8 @@ public class CollectionUtils {
         return emptyIfNull(arraySet);
     }
 
-    public static <T> void addIf(List<T> source, Collection<? super T> dest, Predicate<? super T> predicate) {
+    public static <T> void addIf(
+            List<T> source, Collection<? super T> dest, Predicate<? super T> predicate) {
         for (int i = 0; i < size(source); i++) {
             T item = source.get(i);
             if (predicate.test(item)) {
@@ -286,7 +286,8 @@ public class CollectionUtils {
         return isEmpty((Collection<?>) cur) ? Collections.emptySet() : new ArraySet(cur);
     }
 
-    public static <T> void forEach(Set<T> cur, FunctionalUtils.ThrowingConsumer<T> throwingConsumer) {
+    public static <T> void forEach(
+            Set<T> cur, FunctionalUtils.ThrowingConsumer<T> throwingConsumer) {
         int size;
         if (cur == null || throwingConsumer == null || (size = cur.size()) == 0) {
             return;

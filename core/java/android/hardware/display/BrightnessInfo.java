@@ -4,6 +4,7 @@ import android.hardware.Camera;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PowerManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -13,19 +14,21 @@ public final class BrightnessInfo implements Parcelable {
     public static final int BRIGHTNESS_MAX_REASON_POWER_IC = 2;
     public static final int BRIGHTNESS_MAX_REASON_THERMAL = 1;
     public static final int BRIGHTNESS_MAX_REASON_WEAR_BEDTIME_MODE = 3;
-    public static final Parcelable.Creator<BrightnessInfo> CREATOR = new Parcelable.Creator<BrightnessInfo>() { // from class: android.hardware.display.BrightnessInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BrightnessInfo createFromParcel(Parcel source) {
-            return new BrightnessInfo(source);
-        }
+    public static final Parcelable.Creator<BrightnessInfo> CREATOR =
+            new Parcelable.Creator<
+                    BrightnessInfo>() { // from class: android.hardware.display.BrightnessInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BrightnessInfo createFromParcel(Parcel source) {
+                    return new BrightnessInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BrightnessInfo[] newArray(int size) {
-            return new BrightnessInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BrightnessInfo[] newArray(int size) {
+                    return new BrightnessInfo[size];
+                }
+            };
     public static final int HIGH_BRIGHTNESS_MODE_HDR = 2;
     public static final int HIGH_BRIGHTNESS_MODE_OFF = 0;
     public static final int HIGH_BRIGHTNESS_MODE_SUNLIGHT = 1;
@@ -39,18 +42,36 @@ public final class BrightnessInfo implements Parcelable {
     public boolean isAnimating;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BrightnessMaxReason {
-    }
+    public @interface BrightnessMaxReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface HighBrightnessMode {
+    public @interface HighBrightnessMode {}
+
+    public BrightnessInfo(
+            float brightness,
+            float brightnessMinimum,
+            float brightnessMaximum,
+            int highBrightnessMode,
+            float highBrightnessTransitionPoint,
+            int brightnessMaxReason) {
+        this(
+                brightness,
+                brightness,
+                brightnessMinimum,
+                brightnessMaximum,
+                highBrightnessMode,
+                highBrightnessTransitionPoint,
+                brightnessMaxReason);
     }
 
-    public BrightnessInfo(float brightness, float brightnessMinimum, float brightnessMaximum, int highBrightnessMode, float highBrightnessTransitionPoint, int brightnessMaxReason) {
-        this(brightness, brightness, brightnessMinimum, brightnessMaximum, highBrightnessMode, highBrightnessTransitionPoint, brightnessMaxReason);
-    }
-
-    public BrightnessInfo(float brightness, float adjustedBrightness, float brightnessMinimum, float brightnessMaximum, int highBrightnessMode, float highBrightnessTransitionPoint, int brightnessMaxReason) {
+    public BrightnessInfo(
+            float brightness,
+            float adjustedBrightness,
+            float brightnessMinimum,
+            float brightnessMaximum,
+            int highBrightnessMode,
+            float highBrightnessTransitionPoint,
+            int brightnessMaxReason) {
         this.brightness = brightness;
         this.adjustedBrightness = adjustedBrightness;
         this.brightnessMinimum = brightnessMinimum;
@@ -60,7 +81,15 @@ public final class BrightnessInfo implements Parcelable {
         this.brightnessMaxReason = brightnessMaxReason;
     }
 
-    public BrightnessInfo(float brightness, float adjustedBrightness, float brightnessMinimum, float brightnessMaximum, int highBrightnessMode, float highBrightnessTransitionPoint, int brightnessMaxReason, boolean isAnimating) {
+    public BrightnessInfo(
+            float brightness,
+            float adjustedBrightness,
+            float brightnessMinimum,
+            float brightnessMaximum,
+            int highBrightnessMode,
+            float highBrightnessTransitionPoint,
+            int brightnessMaxReason,
+            boolean isAnimating) {
         this.brightness = brightness;
         this.adjustedBrightness = adjustedBrightness;
         this.brightnessMinimum = brightnessMinimum;

@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.WallpaperManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -27,8 +27,7 @@ final class DisabledWallpaperManager extends WallpaperManager {
         return sInstance;
     }
 
-    private DisabledWallpaperManager() {
-    }
+    private DisabledWallpaperManager() {}
 
     @Override // android.app.WallpaperManager
     public boolean isWallpaperSupported() {
@@ -68,12 +67,23 @@ final class DisabledWallpaperManager extends WallpaperManager {
     }
 
     @Override // android.app.WallpaperManager
-    public Drawable getBuiltInDrawable(int outWidth, int outHeight, boolean scaleToFit, float horizontalAlignment, float verticalAlignment) {
+    public Drawable getBuiltInDrawable(
+            int outWidth,
+            int outHeight,
+            boolean scaleToFit,
+            float horizontalAlignment,
+            float verticalAlignment) {
         return (Drawable) unsupported();
     }
 
     @Override // android.app.WallpaperManager
-    public Drawable getBuiltInDrawable(int outWidth, int outHeight, boolean scaleToFit, float horizontalAlignment, float verticalAlignment, int which) {
+    public Drawable getBuiltInDrawable(
+            int outWidth,
+            int outHeight,
+            boolean scaleToFit,
+            float horizontalAlignment,
+            float verticalAlignment,
+            int which) {
         return (Drawable) unsupported();
     }
 
@@ -113,12 +123,14 @@ final class DisabledWallpaperManager extends WallpaperManager {
     }
 
     @Override // android.app.WallpaperManager
-    public void addOnColorsChangedListener(WallpaperManager.OnColorsChangedListener listener, Handler handler) {
+    public void addOnColorsChangedListener(
+            WallpaperManager.OnColorsChangedListener listener, Handler handler) {
         unsupported();
     }
 
     @Override // android.app.WallpaperManager
-    public void addOnColorsChangedListener(WallpaperManager.OnColorsChangedListener listener, Handler handler, int userId) {
+    public void addOnColorsChangedListener(
+            WallpaperManager.OnColorsChangedListener listener, Handler handler, int userId) {
         unsupported();
     }
 
@@ -128,7 +140,8 @@ final class DisabledWallpaperManager extends WallpaperManager {
     }
 
     @Override // android.app.WallpaperManager
-    public void removeOnColorsChangedListener(WallpaperManager.OnColorsChangedListener callback, int userId) {
+    public void removeOnColorsChangedListener(
+            WallpaperManager.OnColorsChangedListener callback, int userId) {
         unsupported();
     }
 
@@ -214,19 +227,23 @@ final class DisabledWallpaperManager extends WallpaperManager {
     }
 
     @Override // android.app.WallpaperManager
-    public int setBitmap(Bitmap fullImage, Rect visibleCropHint, boolean allowBackup) throws IOException {
+    public int setBitmap(Bitmap fullImage, Rect visibleCropHint, boolean allowBackup)
+            throws IOException {
         unsupported();
         return 0;
     }
 
     @Override // android.app.WallpaperManager
-    public int setBitmap(Bitmap fullImage, Rect visibleCropHint, boolean allowBackup, int which) throws IOException {
+    public int setBitmap(Bitmap fullImage, Rect visibleCropHint, boolean allowBackup, int which)
+            throws IOException {
         unsupported();
         return 0;
     }
 
     @Override // android.app.WallpaperManager
-    public int setBitmap(Bitmap fullImage, Rect visibleCropHint, boolean allowBackup, int which, int userId) throws IOException {
+    public int setBitmap(
+            Bitmap fullImage, Rect visibleCropHint, boolean allowBackup, int which, int userId)
+            throws IOException {
         unsupported();
         return 0;
     }
@@ -237,13 +254,16 @@ final class DisabledWallpaperManager extends WallpaperManager {
     }
 
     @Override // android.app.WallpaperManager
-    public int setStream(InputStream bitmapData, Rect visibleCropHint, boolean allowBackup) throws IOException {
+    public int setStream(InputStream bitmapData, Rect visibleCropHint, boolean allowBackup)
+            throws IOException {
         unsupported();
         return 0;
     }
 
     @Override // android.app.WallpaperManager
-    public int setStream(InputStream bitmapData, Rect visibleCropHint, boolean allowBackup, int which) throws IOException {
+    public int setStream(
+            InputStream bitmapData, Rect visibleCropHint, boolean allowBackup, int which)
+            throws IOException {
         unsupported();
         return 0;
     }
@@ -309,7 +329,8 @@ final class DisabledWallpaperManager extends WallpaperManager {
     }
 
     @Override // android.app.WallpaperManager
-    public void sendWallpaperCommand(IBinder windowToken, String action, int x, int y, int z, Bundle extras) {
+    public void sendWallpaperCommand(
+            IBinder windowToken, String action, int x, int y, int z, Bundle extras) {
         unsupported();
     }
 

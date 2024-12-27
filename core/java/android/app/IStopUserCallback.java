@@ -14,12 +14,10 @@ public interface IStopUserCallback extends IInterface {
 
     public static class Default implements IStopUserCallback {
         @Override // android.app.IStopUserCallback
-        public void userStopped(int userId) throws RemoteException {
-        }
+        public void userStopped(int userId) throws RemoteException {}
 
         @Override // android.app.IStopUserCallback
-        public void userStopAborted(int userId) throws RemoteException {
-        }
+        public void userStopAborted(int userId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +25,7 @@ public interface IStopUserCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStopUserCallback {
+    public abstract static class Stub extends Binder implements IStopUserCallback {
         public static final String DESCRIPTOR = "android.app.IStopUserCallback";
         static final int TRANSACTION_userStopAborted = 2;
         static final int TRANSACTION_userStopped = 1;
@@ -69,7 +67,8 @@ public interface IStopUserCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

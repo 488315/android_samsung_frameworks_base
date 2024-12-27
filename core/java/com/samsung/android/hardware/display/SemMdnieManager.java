@@ -138,7 +138,8 @@ public final class SemMdnieManager {
         }
     }
 
-    public boolean setWhiteRGB(int red, int green, int blue, int red_sub, int green_sub, int blue_sub) {
+    public boolean setWhiteRGB(
+            int red, int green, int blue, int red_sub, int green_sub, int blue_sub) {
         if (this.mService == null) {
             return false;
         }

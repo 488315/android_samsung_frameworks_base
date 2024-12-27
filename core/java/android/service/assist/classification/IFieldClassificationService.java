@@ -5,30 +5,32 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.assist.classification.IFieldClassificationCallback;
 
 /* loaded from: classes3.dex */
 public interface IFieldClassificationService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.assist.classification.IFieldClassificationService";
+    public static final String DESCRIPTOR =
+            "android.service.assist.classification.IFieldClassificationService";
 
     void onConnected(boolean z, boolean z2) throws RemoteException;
 
     void onDisconnected() throws RemoteException;
 
-    void onFieldClassificationRequest(FieldClassificationRequest fieldClassificationRequest, IFieldClassificationCallback iFieldClassificationCallback) throws RemoteException;
+    void onFieldClassificationRequest(
+            FieldClassificationRequest fieldClassificationRequest,
+            IFieldClassificationCallback iFieldClassificationCallback)
+            throws RemoteException;
 
     public static class Default implements IFieldClassificationService {
         @Override // android.service.assist.classification.IFieldClassificationService
-        public void onConnected(boolean debug, boolean verbose) throws RemoteException {
-        }
+        public void onConnected(boolean debug, boolean verbose) throws RemoteException {}
 
         @Override // android.service.assist.classification.IFieldClassificationService
-        public void onDisconnected() throws RemoteException {
-        }
+        public void onDisconnected() throws RemoteException {}
 
         @Override // android.service.assist.classification.IFieldClassificationService
-        public void onFieldClassificationRequest(FieldClassificationRequest request, IFieldClassificationCallback callback) throws RemoteException {
-        }
+        public void onFieldClassificationRequest(
+                FieldClassificationRequest request, IFieldClassificationCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +38,7 @@ public interface IFieldClassificationService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFieldClassificationService {
+    public abstract static class Stub extends Binder implements IFieldClassificationService {
         static final int TRANSACTION_onConnected = 1;
         static final int TRANSACTION_onDisconnected = 2;
         static final int TRANSACTION_onFieldClassificationRequest = 3;
@@ -80,7 +82,8 @@ public interface IFieldClassificationService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFieldClassificationService.DESCRIPTOR);
             }
@@ -99,8 +102,11 @@ public interface IFieldClassificationService extends IInterface {
                     onDisconnected();
                     return true;
                 case 3:
-                    FieldClassificationRequest _arg02 = (FieldClassificationRequest) data.readTypedObject(FieldClassificationRequest.CREATOR);
-                    IFieldClassificationCallback _arg12 = IFieldClassificationCallback.Stub.asInterface(data.readStrongBinder());
+                    FieldClassificationRequest _arg02 =
+                            (FieldClassificationRequest)
+                                    data.readTypedObject(FieldClassificationRequest.CREATOR);
+                    IFieldClassificationCallback _arg12 =
+                            IFieldClassificationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onFieldClassificationRequest(_arg02, _arg12);
                     return true;
@@ -150,7 +156,9 @@ public interface IFieldClassificationService extends IInterface {
             }
 
             @Override // android.service.assist.classification.IFieldClassificationService
-            public void onFieldClassificationRequest(FieldClassificationRequest request, IFieldClassificationCallback callback) throws RemoteException {
+            public void onFieldClassificationRequest(
+                    FieldClassificationRequest request, IFieldClassificationCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFieldClassificationService.DESCRIPTOR);

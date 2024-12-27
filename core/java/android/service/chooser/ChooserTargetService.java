@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.service.chooser.IChooserTargetService;
+
 import java.util.List;
 
 @Deprecated
@@ -16,10 +16,12 @@ public abstract class ChooserTargetService extends Service {
     private static final boolean DEBUG = false;
     public static final String META_DATA_NAME = "android.service.chooser.chooser_target_service";
     public static final String SERVICE_INTERFACE = "android.service.chooser.ChooserTargetService";
-    private final String TAG = ChooserTargetService.class.getSimpleName() + '[' + getClass().getSimpleName() + ']';
+    private final String TAG =
+            ChooserTargetService.class.getSimpleName() + '[' + getClass().getSimpleName() + ']';
     private IChooserTargetServiceWrapper mWrapper = null;
 
-    public abstract List<ChooserTarget> onGetChooserTargets(ComponentName componentName, IntentFilter intentFilter);
+    public abstract List<ChooserTarget> onGetChooserTargets(
+            ComponentName componentName, IntentFilter intentFilter);
 
     @Override // android.app.Service
     public IBinder onBind(Intent intent) {
@@ -33,15 +35,20 @@ public abstract class ChooserTargetService extends Service {
     }
 
     private class IChooserTargetServiceWrapper extends IChooserTargetService.Stub {
-        private IChooserTargetServiceWrapper() {
-        }
+        private IChooserTargetServiceWrapper() {}
 
         @Override // android.service.chooser.IChooserTargetService
-        public void getChooserTargets(ComponentName targetComponentName, IntentFilter matchedFilter, IChooserTargetResult result) throws RemoteException {
+        public void getChooserTargets(
+                ComponentName targetComponentName,
+                IntentFilter matchedFilter,
+                IChooserTargetResult result)
+                throws RemoteException {
             List<ChooserTarget> targets = null;
             long id = clearCallingIdentity();
             try {
-                targets = ChooserTargetService.this.onGetChooserTargets(targetComponentName, matchedFilter);
+                targets =
+                        ChooserTargetService.this.onGetChooserTargets(
+                                targetComponentName, matchedFilter);
             } finally {
                 restoreCallingIdentity(id);
                 result.sendResult(targets);

@@ -2,6 +2,7 @@ package com.android.server.cocktailbar.policy.cocktail;
 
 import com.android.server.cocktailbar.mode.CocktailBarModeManager;
 import com.android.server.cocktailbar.settings.CocktailBarSettings;
+
 import com.samsung.android.cocktailbar.Cocktail;
 import com.samsung.android.cocktailbar.CocktailInfo;
 import com.samsung.android.cocktailbar.CocktailProviderInfo;
@@ -16,7 +17,8 @@ public final class CocktailNativePolicy extends AbsCocktailPolicy {
     }
 
     @Override // com.android.server.cocktailbar.policy.cocktail.AbsCocktailPolicy
-    public final boolean isAcceptCloseCocktail(Cocktail cocktail, CocktailBarSettings cocktailBarSettings, int i, boolean z) {
+    public final boolean isAcceptCloseCocktail(
+            Cocktail cocktail, CocktailBarSettings cocktailBarSettings, int i, boolean z) {
         if (!z) {
             return false;
         }
@@ -25,14 +27,23 @@ public final class CocktailNativePolicy extends AbsCocktailPolicy {
     }
 
     @Override // com.android.server.cocktailbar.policy.cocktail.AbsCocktailPolicy
-    public final boolean isAcceptShowCocktail(Cocktail cocktail, CocktailBarSettings cocktailBarSettings, boolean z) {
+    public final boolean isAcceptShowCocktail(
+            Cocktail cocktail, CocktailBarSettings cocktailBarSettings, boolean z) {
         return z;
     }
 
     @Override // com.android.server.cocktailbar.policy.cocktail.AbsCocktailPolicy
-    public final boolean isAcceptUpdateCocktail(Cocktail cocktail, CocktailBarSettings cocktailBarSettings, CocktailBarModeManager cocktailBarModeManager, int i, boolean z) {
+    public final boolean isAcceptUpdateCocktail(
+            Cocktail cocktail,
+            CocktailBarSettings cocktailBarSettings,
+            CocktailBarModeManager cocktailBarModeManager,
+            int i,
+            boolean z) {
         CocktailInfo cocktailInfo = cocktail.getCocktailInfo();
-        if (cocktailInfo == null || (cocktailInfo.getCategory() & EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT) == 0) {
+        if (cocktailInfo == null
+                || (cocktailInfo.getCategory()
+                                & EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT)
+                        == 0) {
             return z;
         }
         this.mListener.enableUpdatableCocktail(cocktail.getCocktailId(), i);

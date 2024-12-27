@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
+
 import java.math.BigInteger;
 import java.util.Enumeration;
 
@@ -33,7 +34,12 @@ public class DomainParameters extends ASN1Object {
         return null;
     }
 
-    public DomainParameters(BigInteger p, BigInteger g, BigInteger q, BigInteger j, ValidationParams validationParams) {
+    public DomainParameters(
+            BigInteger p,
+            BigInteger g,
+            BigInteger q,
+            BigInteger j,
+            ValidationParams validationParams) {
         if (p == null) {
             throw new IllegalArgumentException("'p' cannot be null");
         }
@@ -106,7 +112,8 @@ public class DomainParameters extends ASN1Object {
         return this.validationParams;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(5);
         v.add(this.p);

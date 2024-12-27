@@ -3,8 +3,9 @@ package com.android.server.wm;
 import android.os.SystemClock;
 import android.util.proto.ProtoOutputStream;
 import android.view.SurfaceControl;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.wm.SurfaceAnimator;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -56,7 +57,8 @@ public class LocalAnimationAdapter implements AnimationAdapter {
         }
     }
 
-    public LocalAnimationAdapter(AnimationSpec animationSpec, SurfaceAnimationRunner surfaceAnimationRunner) {
+    public LocalAnimationAdapter(
+            AnimationSpec animationSpec, SurfaceAnimationRunner surfaceAnimationRunner) {
         this.mSpec = animationSpec;
         this.mAnimator = surfaceAnimationRunner;
     }
@@ -110,16 +112,26 @@ public class LocalAnimationAdapter implements AnimationAdapter {
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.wm.LocalAnimationAdapter$$ExternalSyntheticLambda0] */
     @Override // com.android.server.wm.AnimationAdapter
-    public void startAnimation(SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, final int i, final SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback) {
-        this.mAnimator.startAnimation(this.mSpec, surfaceControl, transaction, new Runnable() { // from class: com.android.server.wm.LocalAnimationAdapter$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                LocalAnimationAdapter localAnimationAdapter = LocalAnimationAdapter.this;
-                SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback2 = onAnimationFinishedCallback;
-                int i2 = i;
-                localAnimationAdapter.getClass();
-                onAnimationFinishedCallback2.onAnimationFinished(i2, localAnimationAdapter);
-            }
-        });
+    public void startAnimation(
+            SurfaceControl surfaceControl,
+            SurfaceControl.Transaction transaction,
+            final int i,
+            final SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback) {
+        this.mAnimator.startAnimation(
+                this.mSpec,
+                surfaceControl,
+                transaction,
+                new Runnable() { // from class:
+                                 // com.android.server.wm.LocalAnimationAdapter$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        LocalAnimationAdapter localAnimationAdapter = LocalAnimationAdapter.this;
+                        SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback2 =
+                                onAnimationFinishedCallback;
+                        int i2 = i;
+                        localAnimationAdapter.getClass();
+                        onAnimationFinishedCallback2.onAnimationFinished(i2, localAnimationAdapter);
+                    }
+                });
     }
 }

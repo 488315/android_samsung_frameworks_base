@@ -3,25 +3,28 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class GsmSignalStrength implements Parcelable {
-    public static final Parcelable.Creator<GsmSignalStrength> CREATOR = new Parcelable.Creator<GsmSignalStrength>() { // from class: android.hardware.radio.network.GsmSignalStrength.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GsmSignalStrength createFromParcel(Parcel _aidl_source) {
-            GsmSignalStrength _aidl_out = new GsmSignalStrength();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GsmSignalStrength> CREATOR =
+            new Parcelable.Creator<GsmSignalStrength>() { // from class:
+                // android.hardware.radio.network.GsmSignalStrength.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GsmSignalStrength createFromParcel(Parcel _aidl_source) {
+                    GsmSignalStrength _aidl_out = new GsmSignalStrength();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GsmSignalStrength[] newArray(int _aidl_size) {
-            return new GsmSignalStrength[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GsmSignalStrength[] newArray(int _aidl_size) {
+                    return new GsmSignalStrength[_aidl_size];
+                }
+            };
     public int signalStrength = 0;
     public int bitErrorRate = 0;
     public int timingAdvance = 0;

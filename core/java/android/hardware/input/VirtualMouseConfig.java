@@ -1,26 +1,27 @@
 package android.hardware.input;
 
 import android.annotation.SystemApi;
-import android.hardware.input.VirtualInputDeviceConfig;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public final class VirtualMouseConfig extends VirtualInputDeviceConfig implements Parcelable {
-    public static final Parcelable.Creator<VirtualMouseConfig> CREATOR = new Parcelable.Creator<VirtualMouseConfig>() { // from class: android.hardware.input.VirtualMouseConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualMouseConfig createFromParcel(Parcel in) {
-            return new VirtualMouseConfig(in);
-        }
+    public static final Parcelable.Creator<VirtualMouseConfig> CREATOR =
+            new Parcelable.Creator<VirtualMouseConfig>() { // from class:
+                // android.hardware.input.VirtualMouseConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualMouseConfig createFromParcel(Parcel in) {
+                    return new VirtualMouseConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualMouseConfig[] newArray(int size) {
-            return new VirtualMouseConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualMouseConfig[] newArray(int size) {
+                    return new VirtualMouseConfig[size];
+                }
+            };
 
     private VirtualMouseConfig(Builder builder) {
         super(builder);

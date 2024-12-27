@@ -1,13 +1,16 @@
 package com.android.server.knox.zt.devicetrust.data;
 
 import android.os.Bundle;
+
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -17,7 +20,8 @@ public final class ScFchownData extends TracepointData {
     public final int owner;
     public final long ret;
 
-    public ScFchownData(int i, int i2, int i3, int i4, long j, long j2, long j3, long j4, String str) {
+    public ScFchownData(
+            int i, int i2, int i3, int i4, long j, long j2, long j3, long j4, String str) {
         super(i, j2, j3, j4, str);
         this.fd = i2;
         this.owner = i3;
@@ -73,13 +77,16 @@ public final class ScFchownData extends TracepointData {
         int i5 = this.group;
         long j2 = this.ret;
         String readExtras = readExtras(true);
-        StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(pid, i2, " | pid : ", " | uid : ", m);
+        StringBuilder m =
+                SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                pid, i2, " | pid : ", " | uid : ", m);
         m.append(" | comm : ");
         m.append(str);
         m.append(" | fd : ");
         m.append(i3);
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i4, i5, " | owner : ", " | group : ", m);
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i4, i5, " | owner : ", " | group : ", m);
         m.append(" | ret : ");
         m.append(j2);
         m.append(readExtras);

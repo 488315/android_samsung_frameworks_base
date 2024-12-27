@@ -2,6 +2,7 @@ package com.samsung.vekit.Content;
 
 import com.samsung.vekit.Common.Type.ContentType;
 import com.samsung.vekit.Common.VEContext;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,14 +22,16 @@ public class FragmentAudio extends Content {
         this.bodyDurationList = new ArrayList<>();
     }
 
-    public FragmentAudio setPaths(String introPath, ArrayList<String> bodyPathList, String outroPath) {
+    public FragmentAudio setPaths(
+            String introPath, ArrayList<String> bodyPathList, String outroPath) {
         this.introPath = introPath;
         this.bodyPathList = bodyPathList;
         this.outroPath = outroPath;
         return this;
     }
 
-    public FragmentAudio setDurations(long introDuration, ArrayList<Long> bodyDurationList, long outroDuration) {
+    public FragmentAudio setDurations(
+            long introDuration, ArrayList<Long> bodyDurationList, long outroDuration) {
         this.introDuration = introDuration;
         this.bodyDurationList = bodyDurationList;
         this.outroDuration = outroDuration;

@@ -1,9 +1,8 @@
 package android.app.wallpapereffectsgeneration;
 
 import android.annotation.SystemApi;
-import android.app.wallpapereffectsgeneration.ICinematicEffectListener;
-import android.app.wallpapereffectsgeneration.WallpaperEffectsGenerationManager;
 import android.os.RemoteException;
+
 import java.util.concurrent.Executor;
 
 @SystemApi
@@ -20,9 +19,11 @@ public final class WallpaperEffectsGenerationManager {
     }
 
     @SystemApi
-    public void generateCinematicEffect(CinematicEffectRequest request, Executor executor, CinematicEffectListener listener) {
+    public void generateCinematicEffect(
+            CinematicEffectRequest request, Executor executor, CinematicEffectListener listener) {
         try {
-            this.mService.generateCinematicEffect(request, new CinematicEffectListenerWrapper(listener, executor));
+            this.mService.generateCinematicEffect(
+                    request, new CinematicEffectListenerWrapper(listener, executor));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -39,18 +40,22 @@ public final class WallpaperEffectsGenerationManager {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onCinematicEffectGenerated$0(CinematicEffectResponse response) {
+        public /* synthetic */ void lambda$onCinematicEffectGenerated$0(
+                CinematicEffectResponse response) {
             this.mListener.onCinematicEffectGenerated(response);
         }
 
         @Override // android.app.wallpapereffectsgeneration.ICinematicEffectListener
         public void onCinematicEffectGenerated(final CinematicEffectResponse response) {
-            this.mExecutor.execute(new Runnable() { // from class: android.app.wallpapereffectsgeneration.WallpaperEffectsGenerationManager$CinematicEffectListenerWrapper$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    WallpaperEffectsGenerationManager.CinematicEffectListenerWrapper.this.lambda$onCinematicEffectGenerated$0(response);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.app.wallpapereffectsgeneration.WallpaperEffectsGenerationManager$CinematicEffectListenerWrapper$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            WallpaperEffectsGenerationManager.CinematicEffectListenerWrapper.this
+                                    .lambda$onCinematicEffectGenerated$0(response);
+                        }
+                    });
         }
     }
 }

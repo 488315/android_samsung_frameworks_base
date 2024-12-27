@@ -6,11 +6,13 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface IListFeaturesCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.app.ondeviceintelligence.IListFeaturesCallback";
+    public static final String DESCRIPTOR =
+            "android.app.ondeviceintelligence.IListFeaturesCallback";
 
     void onFailure(int i, String str, PersistableBundle persistableBundle) throws RemoteException;
 
@@ -18,12 +20,11 @@ public interface IListFeaturesCallback extends IInterface {
 
     public static class Default implements IListFeaturesCallback {
         @Override // android.app.ondeviceintelligence.IListFeaturesCallback
-        public void onSuccess(List<Feature> result) throws RemoteException {
-        }
+        public void onSuccess(List<Feature> result) throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IListFeaturesCallback
-        public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams) throws RemoteException {
-        }
+        public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -31,7 +32,7 @@ public interface IListFeaturesCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IListFeaturesCallback {
+    public abstract static class Stub extends Binder implements IListFeaturesCallback {
         static final int TRANSACTION_onFailure = 3;
         static final int TRANSACTION_onSuccess = 2;
 
@@ -72,7 +73,8 @@ public interface IListFeaturesCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IListFeaturesCallback.DESCRIPTOR);
             }
@@ -89,7 +91,8 @@ public interface IListFeaturesCallback extends IInterface {
                 case 3:
                     int _arg02 = data.readInt();
                     String _arg1 = data.readString();
-                    PersistableBundle _arg2 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg2 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg02, _arg1, _arg2);
                     return true;
@@ -127,7 +130,8 @@ public interface IListFeaturesCallback extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IListFeaturesCallback
-            public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams) throws RemoteException {
+            public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IListFeaturesCallback.DESCRIPTOR);

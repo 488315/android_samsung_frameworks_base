@@ -4,7 +4,8 @@ import java.security.cert.CertPath;
 import java.security.cert.CertPathValidatorException;
 
 /* loaded from: classes5.dex */
-public class ExtCertPathValidatorException extends CertPathValidatorException implements ExtException {
+public class ExtCertPathValidatorException extends CertPathValidatorException
+        implements ExtException {
     private Throwable cause;
 
     public ExtCertPathValidatorException(String message) {
@@ -16,12 +17,14 @@ public class ExtCertPathValidatorException extends CertPathValidatorException im
         this.cause = cause;
     }
 
-    public ExtCertPathValidatorException(String msg, Throwable cause, CertPath certPath, int index) {
+    public ExtCertPathValidatorException(
+            String msg, Throwable cause, CertPath certPath, int index) {
         super(msg, cause, certPath, index);
         this.cause = cause;
     }
 
-    @Override // java.lang.Throwable, com.android.internal.org.bouncycastle.jce.exception.ExtException
+    @Override // java.lang.Throwable,
+              // com.android.internal.org.bouncycastle.jce.exception.ExtException
     public Throwable getCause() {
         return this.cause;
     }

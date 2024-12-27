@@ -4,24 +4,27 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class SearchContext implements Parcelable {
-    public static final Parcelable.Creator<SearchContext> CREATOR = new Parcelable.Creator<SearchContext>() { // from class: android.app.search.SearchContext.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchContext createFromParcel(Parcel parcel) {
-            return new SearchContext(parcel);
-        }
+    public static final Parcelable.Creator<SearchContext> CREATOR =
+            new Parcelable.Creator<
+                    SearchContext>() { // from class: android.app.search.SearchContext.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchContext createFromParcel(Parcel parcel) {
+                    return new SearchContext(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchContext[] newArray(int size) {
-            return new SearchContext[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchContext[] newArray(int size) {
+                    return new SearchContext[size];
+                }
+            };
     private final Bundle mExtras;
     private String mPackageName;
     private final int mResultTypes;

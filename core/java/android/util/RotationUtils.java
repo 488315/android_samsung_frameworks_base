@@ -30,11 +30,13 @@ public class RotationUtils {
         }
     }
 
-    public static void rotateBounds(Rect inOutBounds, Rect parentBounds, int oldRotation, int newRotation) {
+    public static void rotateBounds(
+            Rect inOutBounds, Rect parentBounds, int oldRotation, int newRotation) {
         rotateBounds(inOutBounds, parentBounds, deltaRotation(oldRotation, newRotation));
     }
 
-    public static void rotateBounds(Rect inOutBounds, int parentWidth, int parentHeight, int rotation) {
+    public static void rotateBounds(
+            Rect inOutBounds, int parentWidth, int parentHeight, int rotation) {
         int origLeft = inOutBounds.left;
         int origTop = inOutBounds.top;
         switch (rotation) {
@@ -68,7 +70,8 @@ public class RotationUtils {
         return delta < 0 ? delta + 4 : delta;
     }
 
-    public static void rotateSurface(SurfaceControl.Transaction t, SurfaceControl sc, int rotation) {
+    public static void rotateSurface(
+            SurfaceControl.Transaction t, SurfaceControl sc, int rotation) {
         switch (rotation) {
             case 0:
                 t.setMatrix(sc, 1.0f, 0.0f, 0.0f, 1.0f);
@@ -121,7 +124,8 @@ public class RotationUtils {
         }
     }
 
-    public static void transformPhysicalToLogicalCoordinates(int rotation, int physicalWidth, int physicalHeight, Matrix out) {
+    public static void transformPhysicalToLogicalCoordinates(
+            int rotation, int physicalWidth, int physicalHeight, Matrix out) {
         switch (rotation) {
             case 0:
                 out.reset();

@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 import com.android.internal.org.bouncycastle.crypto.CryptoServicesRegistrar;
 import com.android.internal.org.bouncycastle.crypto.DataLengthException;
@@ -9,7 +10,7 @@ import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
 import com.android.internal.org.bouncycastle.jcajce.PKCS12Key;
 import com.android.internal.org.bouncycastle.jcajce.PKCS12KeyWithParameters;
-import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.PBE;
+
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -18,6 +19,7 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
+
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.ShortBufferException;
@@ -44,7 +46,7 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
     }
 
     protected BaseStreamCipher(StreamCipher engine, int ivLength, int keySizeInBits, int digest) {
-        this.availableSpecs = new Class[]{IvParameterSpec.class, PBEParameterSpec.class};
+        this.availableSpecs = new Class[] {IvParameterSpec.class, PBEParameterSpec.class};
         this.ivLength = 0;
         this.pbeSpec = null;
         this.pbeAlgorithm = null;
@@ -115,7 +117,8 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher, javax.crypto.CipherSpi
     protected void engineSetMode(String mode) throws NoSuchAlgorithmException {
-        if (!mode.equalsIgnoreCase(KeyProperties.BLOCK_MODE_ECB) && !mode.equals(KeyProperties.DIGEST_NONE)) {
+        if (!mode.equalsIgnoreCase(KeyProperties.BLOCK_MODE_ECB)
+                && !mode.equals(KeyProperties.DIGEST_NONE)) {
             throw new NoSuchAlgorithmException("can't support mode " + mode);
         }
     }
@@ -128,22 +131,38 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher, javax.crypto.CipherSpi
-    protected void engineInit(int opmode, Key key, AlgorithmParameterSpec params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected void engineInit(
+            int opmode, Key key, AlgorithmParameterSpec params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         CipherParameters param;
         CipherParameters param2;
         this.pbeSpec = null;
         this.pbeAlgorithm = null;
         this.engineParams = null;
         if (!(key instanceof SecretKey)) {
-            throw new InvalidKeyException("Key for algorithm " + key.getAlgorithm() + " not suitable for symmetric enryption.");
+            throw new InvalidKeyException(
+                    "Key for algorithm "
+                            + key.getAlgorithm()
+                            + " not suitable for symmetric enryption.");
         }
         if (key instanceof PKCS12Key) {
             PKCS12Key k = (PKCS12Key) key;
             this.pbeSpec = (PBEParameterSpec) params;
             if ((k instanceof PKCS12KeyWithParameters) && this.pbeSpec == null) {
-                this.pbeSpec = new PBEParameterSpec(((PKCS12KeyWithParameters) k).getSalt(), ((PKCS12KeyWithParameters) k).getIterationCount());
+                this.pbeSpec =
+                        new PBEParameterSpec(
+                                ((PKCS12KeyWithParameters) k).getSalt(),
+                                ((PKCS12KeyWithParameters) k).getIterationCount());
             }
-            param = PBE.Util.makePBEParameters(k.getEncoded(), 2, this.digest, this.keySizeInBits, this.ivLength * 8, this.pbeSpec, this.cipher.getAlgorithmName());
+            param =
+                    PBE.Util.makePBEParameters(
+                            k.getEncoded(),
+                            2,
+                            this.digest,
+                            this.keySizeInBits,
+                            this.ivLength * 8,
+                            this.pbeSpec,
+                            this.cipher.getAlgorithmName());
         } else if (key instanceof BCPBEKey) {
             BCPBEKey k2 = (BCPBEKey) key;
             if (k2.getOID() != null) {
@@ -158,7 +177,8 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
                 param2 = PBE.Util.makePBEParameters(k2, params, this.cipher.getAlgorithmName());
                 this.pbeSpec = (PBEParameterSpec) params;
             } else {
-                throw new InvalidAlgorithmParameterException("PBE requires PBE parameters to be set.");
+                throw new InvalidAlgorithmParameterException(
+                        "PBE requires PBE parameters to be set.");
             }
             if (k2.getIvSize() != 0) {
                 this.ivParam = (ParametersWithIV) param2;
@@ -170,7 +190,9 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
             }
             param = new KeyParameter(key.getEncoded());
         } else if (params instanceof IvParameterSpec) {
-            param = new ParametersWithIV(new KeyParameter(key.getEncoded()), ((IvParameterSpec) params).getIV());
+            param =
+                    new ParametersWithIV(
+                            new KeyParameter(key.getEncoded()), ((IvParameterSpec) params).getIV());
             this.ivParam = (ParametersWithIV) param;
         } else {
             throw new InvalidAlgorithmParameterException("unknown parameter type.");
@@ -208,10 +230,13 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher, javax.crypto.CipherSpi
-    protected void engineInit(int opmode, Key key, AlgorithmParameters params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected void engineInit(int opmode, Key key, AlgorithmParameters params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         AlgorithmParameterSpec paramSpec = null;
-        if (params != null && (paramSpec = SpecUtil.extractSpec(params, this.availableSpecs)) == null) {
-            throw new InvalidAlgorithmParameterException("can't handle parameter " + params.toString());
+        if (params != null
+                && (paramSpec = SpecUtil.extractSpec(params, this.availableSpecs)) == null) {
+            throw new InvalidAlgorithmParameterException(
+                    "can't handle parameter " + params.toString());
         }
         engineInit(opmode, key, paramSpec, random);
         this.engineParams = params;
@@ -234,7 +259,9 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher, javax.crypto.CipherSpi
-    protected int engineUpdate(byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset) throws ShortBufferException {
+    protected int engineUpdate(
+            byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset)
+            throws ShortBufferException {
         if (outputOffset + inputLen > output.length) {
             throw new ShortBufferException("output buffer too short for input.");
         }
@@ -258,7 +285,9 @@ public class BaseStreamCipher extends BaseWrapCipher implements PBE {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseWrapCipher, javax.crypto.CipherSpi
-    protected int engineDoFinal(byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset) throws ShortBufferException {
+    protected int engineDoFinal(
+            byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset)
+            throws ShortBufferException {
         if (outputOffset + inputLen > output.length) {
             throw new ShortBufferException("output buffer too short for input.");
         }

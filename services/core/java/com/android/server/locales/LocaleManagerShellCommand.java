@@ -7,9 +7,11 @@ import android.os.LocaleList;
 import android.os.RemoteException;
 import android.os.ShellCommand;
 import android.os.UserHandle;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -79,17 +81,20 @@ public final class LocaleManagerShellCommand extends ShellCommand {
                                 try {
                                     localeConfig = new LocaleConfig(localeList);
                                 } catch (RemoteException e) {
-                                    UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote Exception: ", e, getOutPrintWriter());
+                                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                            "Remote Exception: ", e, getOutPrintWriter());
                                 }
                             }
-                            this.mBinderService.setOverrideLocaleConfig(nextArg, currentUser, localeConfig);
+                            this.mBinderService.setOverrideLocaleConfig(
+                                    nextArg, currentUser, localeConfig);
                             return 0;
                         }
                         if (nextOption.equals("--user")) {
                             currentUser = UserHandle.parseUserArg(getNextArgRequired());
                         } else {
                             if (!nextOption.equals("--locales")) {
-                                throw new IllegalArgumentException("Unknown option: ".concat(nextOption));
+                                throw new IllegalArgumentException(
+                                        "Unknown option: ".concat(nextOption));
                             }
                             String nextArg2 = getNextArg();
                             if (nextArg2 == null) {
@@ -98,8 +103,10 @@ public final class LocaleManagerShellCommand extends ShellCommand {
                             if (nextArg2.equals("empty")) {
                                 localeList = LocaleList.getEmptyLocaleList();
                             } else {
-                                if (nextArg2.startsWith(PackageManagerShellCommandDataLoader.STDIN_PATH)) {
-                                    throw new IllegalArgumentException("Unknown locales: ".concat(nextArg2));
+                                if (nextArg2.startsWith(
+                                        PackageManagerShellCommandDataLoader.STDIN_PATH)) {
+                                    throw new IllegalArgumentException(
+                                            "Unknown locales: ".concat(nextArg2));
                                 }
                                 localeList = LocaleList.forLanguageTags(nextArg2);
                             }
@@ -121,19 +128,41 @@ public final class LocaleManagerShellCommand extends ShellCommand {
                     currentUser2 = UserHandle.parseUserArg(getNextArgRequired());
                 }
                 try {
-                    LocaleConfig overrideLocaleConfig = this.mBinderService.getOverrideLocaleConfig(nextArg3, currentUser2);
+                    LocaleConfig overrideLocaleConfig =
+                            this.mBinderService.getOverrideLocaleConfig(nextArg3, currentUser2);
                     if (overrideLocaleConfig == null) {
-                        getOutPrintWriter().println("LocaleConfig for " + nextArg3 + " for user " + currentUser2 + " is null");
+                        getOutPrintWriter()
+                                .println(
+                                        "LocaleConfig for "
+                                                + nextArg3
+                                                + " for user "
+                                                + currentUser2
+                                                + " is null");
                     } else {
                         LocaleList supportedLocales = overrideLocaleConfig.getSupportedLocales();
                         if (supportedLocales == null) {
-                            getOutPrintWriter().println("Locales within the LocaleConfig for " + nextArg3 + " for user " + currentUser2 + " are null");
+                            getOutPrintWriter()
+                                    .println(
+                                            "Locales within the LocaleConfig for "
+                                                    + nextArg3
+                                                    + " for user "
+                                                    + currentUser2
+                                                    + " are null");
                         } else {
-                            getOutPrintWriter().println("Locales within the LocaleConfig for " + nextArg3 + " for user " + currentUser2 + " are [" + supportedLocales.toLanguageTags() + "]");
+                            getOutPrintWriter()
+                                    .println(
+                                            "Locales within the LocaleConfig for "
+                                                    + nextArg3
+                                                    + " for user "
+                                                    + currentUser2
+                                                    + " are ["
+                                                    + supportedLocales.toLanguageTags()
+                                                    + "]");
                         }
                     }
                 } catch (RemoteException e2) {
-                    UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote Exception: ", e2, getOutPrintWriter());
+                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                            "Remote Exception: ", e2, getOutPrintWriter());
                 }
                 return 0;
             case 2:
@@ -152,12 +181,23 @@ public final class LocaleManagerShellCommand extends ShellCommand {
                     currentUser3 = UserHandle.parseUserArg(getNextArgRequired());
                 }
                 try {
-                    LocaleList applicationLocales = this.mBinderService.getApplicationLocales(nextArg4, currentUser3);
-                    getOutPrintWriter().println("Locales for " + nextArg4 + " for user " + currentUser3 + " are [" + applicationLocales.toLanguageTags() + "]");
+                    LocaleList applicationLocales =
+                            this.mBinderService.getApplicationLocales(nextArg4, currentUser3);
+                    getOutPrintWriter()
+                            .println(
+                                    "Locales for "
+                                            + nextArg4
+                                            + " for user "
+                                            + currentUser3
+                                            + " are ["
+                                            + applicationLocales.toLanguageTags()
+                                            + "]");
                 } catch (RemoteException e3) {
-                    UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote Exception: ", e3, getOutPrintWriter());
+                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                            "Remote Exception: ", e3, getOutPrintWriter());
                 } catch (IllegalArgumentException unused) {
-                    getOutPrintWriter().println("Unknown package " + nextArg4 + " for userId " + currentUser3);
+                    getOutPrintWriter()
+                            .println("Unknown package " + nextArg4 + " for userId " + currentUser3);
                 }
                 return 0;
             case 3:
@@ -175,11 +215,18 @@ public final class LocaleManagerShellCommand extends ShellCommand {
                         String nextOption4 = getNextOption();
                         if (nextOption4 == null) {
                             try {
-                                this.mBinderService.setApplicationLocales(nextArg5, currentUser4, emptyLocaleList, z);
+                                this.mBinderService.setApplicationLocales(
+                                        nextArg5, currentUser4, emptyLocaleList, z);
                             } catch (RemoteException e4) {
-                                UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote Exception: ", e4, getOutPrintWriter());
+                                UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                        "Remote Exception: ", e4, getOutPrintWriter());
                             } catch (IllegalArgumentException unused2) {
-                                getOutPrintWriter().println("Unknown package " + nextArg5 + " for userId " + currentUser4);
+                                getOutPrintWriter()
+                                        .println(
+                                                "Unknown package "
+                                                        + nextArg5
+                                                        + " for userId "
+                                                        + currentUser4);
                             }
                             return 0;
                         }
@@ -215,11 +262,13 @@ public final class LocaleManagerShellCommand extends ShellCommand {
                                 if (nextArg6 == null) {
                                     break;
                                 }
-                                if (!nextArg6.startsWith(PackageManagerShellCommandDataLoader.STDIN_PATH)) {
+                                if (!nextArg6.startsWith(
+                                        PackageManagerShellCommandDataLoader.STDIN_PATH)) {
                                     z = Boolean.parseBoolean(nextArg6);
                                     break;
                                 } else {
-                                    throw new IllegalArgumentException("Unknown source: ".concat(nextArg6));
+                                    throw new IllegalArgumentException(
+                                            "Unknown source: ".concat(nextArg6));
                                 }
                             case 1:
                                 currentUser4 = UserHandle.parseUserArg(getNextArgRequired());
@@ -229,14 +278,17 @@ public final class LocaleManagerShellCommand extends ShellCommand {
                                 if (nextArg7 == null) {
                                     emptyLocaleList = LocaleList.getEmptyLocaleList();
                                     break;
-                                } else if (!nextArg7.startsWith(PackageManagerShellCommandDataLoader.STDIN_PATH)) {
+                                } else if (!nextArg7.startsWith(
+                                        PackageManagerShellCommandDataLoader.STDIN_PATH)) {
                                     emptyLocaleList = LocaleList.forLanguageTags(nextArg7);
                                     break;
                                 } else {
-                                    throw new IllegalArgumentException("Unknown locales: ".concat(nextArg7));
+                                    throw new IllegalArgumentException(
+                                            "Unknown locales: ".concat(nextArg7));
                                 }
                             default:
-                                throw new IllegalArgumentException("Unknown option: ".concat(nextOption4));
+                                throw new IllegalArgumentException(
+                                        "Unknown option: ".concat(nextOption4));
                         }
                     }
                 }
@@ -250,11 +302,45 @@ public final class LocaleManagerShellCommand extends ShellCommand {
         outPrintWriter.println("Locale manager (locale) shell commands:");
         outPrintWriter.println("  help");
         outPrintWriter.println("      Print this help text.");
-        outPrintWriter.println("  set-app-locales <PACKAGE_NAME> [--user <USER_ID>] [--locales <LOCALE_INFO>][--delegate <FROM_DELEGATE>]");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      Set the locales for the specified app.", "      --user <USER_ID>: apply for the given user, the current user is used when unspecified.", "      --locales <LOCALE_INFO>: The language tags of locale to be included as a single String separated by commas.", "                 eg. en,en-US,hi ");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "                 Empty locale list is used when unspecified.", "      --delegate <FROM_DELEGATE>: The locales are set from a delegate, the value could be true or false. false is the default when unspecified.", "  get-app-locales <PACKAGE_NAME> [--user <USER_ID>]", "      Get the locales for the specified app.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      --user <USER_ID>: get for the given user, the current user is used when unspecified.", "  set-app-localeconfig <PACKAGE_NAME> [--user <USER_ID>] [--locales <LOCALE_INFO>]", "      Set the override LocaleConfig for the specified app.", "      --user <USER_ID>: apply for the given user, the current user is used when unspecified.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      --locales <LOCALE_INFO>: The language tags of locale to be included as a single String separated by commas.", "                 eg. en,en-US,hi ", "                 Empty locale list is used when typing a 'empty' word", "                 NULL is used when unspecified.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  get-app-localeconfig <PACKAGE_NAME> [--user <USER_ID>]", "      Get the locales within the override LocaleConfig for the specified app.", "      --user <USER_ID>: get for the given user, the current user is used when unspecified.");
+        outPrintWriter.println(
+                "  set-app-locales <PACKAGE_NAME> [--user <USER_ID>] [--locales"
+                    + " <LOCALE_INFO>][--delegate <FROM_DELEGATE>]");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      Set the locales for the specified app.",
+                "      --user <USER_ID>: apply for the given user, the current user is used when"
+                    + " unspecified.",
+                "      --locales <LOCALE_INFO>: The language tags of locale to be included as a"
+                    + " single String separated by commas.",
+                "                 eg. en,en-US,hi ");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "                 Empty locale list is used when unspecified.",
+                "      --delegate <FROM_DELEGATE>: The locales are set from a delegate, the value"
+                    + " could be true or false. false is the default when unspecified.",
+                "  get-app-locales <PACKAGE_NAME> [--user <USER_ID>]",
+                "      Get the locales for the specified app.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      --user <USER_ID>: get for the given user, the current user is used when"
+                    + " unspecified.",
+                "  set-app-localeconfig <PACKAGE_NAME> [--user <USER_ID>] [--locales"
+                    + " <LOCALE_INFO>]",
+                "      Set the override LocaleConfig for the specified app.",
+                "      --user <USER_ID>: apply for the given user, the current user is used when"
+                    + " unspecified.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      --locales <LOCALE_INFO>: The language tags of locale to be included as a"
+                    + " single String separated by commas.",
+                "                 eg. en,en-US,hi ",
+                "                 Empty locale list is used when typing a 'empty' word",
+                "                 NULL is used when unspecified.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  get-app-localeconfig <PACKAGE_NAME> [--user <USER_ID>]",
+                "      Get the locales within the override LocaleConfig for the specified app.",
+                "      --user <USER_ID>: get for the given user, the current user is used when"
+                    + " unspecified.");
     }
 }

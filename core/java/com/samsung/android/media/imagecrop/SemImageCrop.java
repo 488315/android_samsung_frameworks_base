@@ -4,7 +4,9 @@ import android.graphics.Rect;
 import android.media.MediaCodecInfo;
 import android.media.MediaCodecList;
 import android.util.Log;
+
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,7 +29,14 @@ public class SemImageCrop {
 
     private native void nativeFinalize();
 
-    private native int nativeProcess(ByteBuffer byteBuffer, int i, SemCroppedImageInfo semCroppedImageInfo, int i2, int i3, int i4, int i5);
+    private native int nativeProcess(
+            ByteBuffer byteBuffer,
+            int i,
+            SemCroppedImageInfo semCroppedImageInfo,
+            int i2,
+            int i3,
+            int i4,
+            int i5);
 
     private native void nativeSetup();
 
@@ -68,12 +77,20 @@ public class SemImageCrop {
             return null;
         }
         if (!isValidRect(rect)) {
-            Log.e(TAG, "rect is not valid, check rect properties has negative value or width/height is less than or equal to zero!");
+            Log.e(
+                    TAG,
+                    "rect is not valid, check rect properties has negative value or width/height is"
+                        + " less than or equal to zero!");
             return null;
         }
         if (isHeicFormat(in)) {
             if (!hasHevcEncoder || !isSupportHeifCapture) {
-                Log.e(TAG, "is heic format, but hevcEncoder : " + hasHevcEncoder + ", supportHeifCapture : " + isSupportHeifCapture);
+                Log.e(
+                        TAG,
+                        "is heic format, but hevcEncoder : "
+                                + hasHevcEncoder
+                                + ", supportHeifCapture : "
+                                + isSupportHeifCapture);
                 return null;
             }
         } else if (!isJpegFormat(in)) {
@@ -85,7 +102,9 @@ public class SemImageCrop {
             return null;
         }
         SemCroppedImageInfo outInfo = new SemCroppedImageInfo(in.limit() * 3);
-        int outLength = nativeProcess(in, in.limit(), outInfo, rect.left, rect.top, rect.right, rect.bottom);
+        int outLength =
+                nativeProcess(
+                        in, in.limit(), outInfo, rect.left, rect.top, rect.right, rect.bottom);
         Log.d(TAG, "outLength : " + outLength);
         outInfo.reAllocInJavaBuffer(outLength);
         if (outInfo.getWidth() <= 0 || outInfo.getHeight() <= 0) {
@@ -105,7 +124,10 @@ public class SemImageCrop {
             return null;
         }
         if (!isValidRect(rect)) {
-            Log.e(TAG, "rect is not valid, check rect properties has negative value or width/height is less than or equal to zero!");
+            Log.e(
+                    TAG,
+                    "rect is not valid, check rect properties has negative value or width/height is"
+                        + " less than or equal to zero!");
             return null;
         }
         SemCroppedImageInfo outInfo = null;
@@ -133,9 +155,9 @@ public class SemImageCrop {
 
     public int[] getSupportedFormat() {
         if (!hasHevcEncoder || !isSupportHeifCapture) {
-            return new int[]{1};
+            return new int[] {1};
         }
-        return new int[]{1, 2};
+        return new int[] {1, 2};
     }
 
     protected void finalize() throws Throwable {
@@ -145,7 +167,12 @@ public class SemImageCrop {
     }
 
     private boolean isValidRect(Rect rect) {
-        return rect.left >= 0 && rect.right >= 0 && rect.top >= 0 && rect.bottom >= 0 && rect.width() > 0 && rect.height() > 0;
+        return rect.left >= 0
+                && rect.right >= 0
+                && rect.top >= 0
+                && rect.bottom >= 0
+                && rect.width() > 0
+                && rect.height() > 0;
     }
 
     private static boolean isHeicFormat(ByteBuffer inBuffer) {

@@ -4,8 +4,11 @@ import android.content.IntentFilter;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.android.net.IProxyService;
+
 import com.google.android.collect.Lists;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
@@ -23,7 +26,9 @@ public class PacProxySelector extends ProxySelector {
     private static final String SOCKS = "SOCKS ";
     private static final String TAG = "PacProxySelector";
     private final List<java.net.Proxy> mDefaultList;
-    private IProxyService mProxyService = IProxyService.Stub.asInterface(ServiceManager.getService("com.android.net.IProxyService"));
+    private IProxyService mProxyService =
+            IProxyService.Stub.asInterface(
+                    ServiceManager.getService("com.android.net.IProxyService"));
 
     public PacProxySelector() {
         if (this.mProxyService == null) {
@@ -36,7 +41,9 @@ public class PacProxySelector extends ProxySelector {
     public List<java.net.Proxy> select(URI uri) {
         String urlString;
         if (this.mProxyService == null) {
-            this.mProxyService = IProxyService.Stub.asInterface(ServiceManager.getService("com.android.net.IProxyService"));
+            this.mProxyService =
+                    IProxyService.Stub.asInterface(
+                            ServiceManager.getService("com.android.net.IProxyService"));
         }
         if (this.mProxyService == null) {
             Log.e(TAG, "select: no proxy service return NO_PROXY");
@@ -73,11 +80,16 @@ public class PacProxySelector extends ProxySelector {
             if (trimmed.equals("DIRECT")) {
                 ret.add(java.net.Proxy.NO_PROXY);
             } else if (trimmed.startsWith(PROXY)) {
-                java.net.Proxy proxy2 = proxyFromHostPort(Proxy.Type.HTTP, trimmed.substring(PROXY.length()));
+                java.net.Proxy proxy2 =
+                        proxyFromHostPort(Proxy.Type.HTTP, trimmed.substring(PROXY.length()));
                 if (proxy2 != null) {
                     ret.add(proxy2);
                 }
-            } else if (trimmed.startsWith(SOCKS) && (proxy = proxyFromHostPort(Proxy.Type.SOCKS, trimmed.substring(SOCKS.length()))) != null) {
+            } else if (trimmed.startsWith(SOCKS)
+                    && (proxy =
+                                    proxyFromHostPort(
+                                            Proxy.Type.SOCKS, trimmed.substring(SOCKS.length())))
+                            != null) {
                 ret.add(proxy);
             }
         }
@@ -100,6 +112,5 @@ public class PacProxySelector extends ProxySelector {
     }
 
     @Override // java.net.ProxySelector
-    public void connectFailed(URI uri, SocketAddress address, IOException failure) {
-    }
+    public void connectFailed(URI uri, SocketAddress address, IOException failure) {}
 }

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ActionMenuPresenter;
 import android.widget.ActionMenuView;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -48,7 +49,8 @@ public abstract class AbsActionBarView extends ViewGroup {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public AbsActionBarView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public AbsActionBarView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mVisAnimListener = new VisibilityAnimListener();
         TypedValue tv = new TypedValue();
@@ -65,11 +67,13 @@ public abstract class AbsActionBarView extends ViewGroup {
     @Override // android.view.View
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        TypedArray a = getContext().obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
+        TypedArray a =
+                getContext().obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
         setContentHeight(a.getLayoutDimension(4, 0));
         a.recycle();
         if (this.mSplitWhenNarrow) {
-            setSplitToolbar(getContext().getResources().getBoolean(R.bool.split_action_bar_is_narrow));
+            setSplitToolbar(
+                    getContext().getResources().getBoolean(R.bool.split_action_bar_is_narrow));
         }
         if (this.mActionMenuPresenter != null) {
             this.mActionMenuPresenter.onConfigurationChanged(newConfig);
@@ -151,12 +155,16 @@ public abstract class AbsActionBarView extends ViewGroup {
                     this.mMenuView.setAlpha(0.0f);
                 }
             }
-            ObjectAnimator anim = ObjectAnimator.ofFloat(this, (Property<AbsActionBarView, Float>) View.ALPHA, 1.0f);
+            ObjectAnimator anim =
+                    ObjectAnimator.ofFloat(
+                            this, (Property<AbsActionBarView, Float>) View.ALPHA, 1.0f);
             anim.setDuration(duration);
             anim.setInterpolator(sAlphaInterpolator);
             if (this.mSplitView != null && this.mMenuView != null) {
                 AnimatorSet set = new AnimatorSet();
-                ObjectAnimator splitAnim = ObjectAnimator.ofFloat(this.mMenuView, (Property<ActionMenuView, Float>) View.ALPHA, 1.0f);
+                ObjectAnimator splitAnim =
+                        ObjectAnimator.ofFloat(
+                                this.mMenuView, (Property<ActionMenuView, Float>) View.ALPHA, 1.0f);
                 splitAnim.setDuration(duration);
                 set.addListener(this.mVisAnimListener.withFinalVisibility(visibility));
                 set.play(anim).with(splitAnim);
@@ -165,12 +173,15 @@ public abstract class AbsActionBarView extends ViewGroup {
             anim.addListener(this.mVisAnimListener.withFinalVisibility(visibility));
             return anim;
         }
-        ObjectAnimator anim2 = ObjectAnimator.ofFloat(this, (Property<AbsActionBarView, Float>) View.ALPHA, 0.0f);
+        ObjectAnimator anim2 =
+                ObjectAnimator.ofFloat(this, (Property<AbsActionBarView, Float>) View.ALPHA, 0.0f);
         anim2.setDuration(duration);
         anim2.setInterpolator(sAlphaInterpolator);
         if (this.mSplitView != null && this.mMenuView != null) {
             AnimatorSet set2 = new AnimatorSet();
-            ObjectAnimator splitAnim2 = ObjectAnimator.ofFloat(this.mMenuView, (Property<ActionMenuView, Float>) View.ALPHA, 0.0f);
+            ObjectAnimator splitAnim2 =
+                    ObjectAnimator.ofFloat(
+                            this.mMenuView, (Property<ActionMenuView, Float>) View.ALPHA, 0.0f);
             splitAnim2.setDuration(duration);
             set2.addListener(this.mVisAnimListener.withFinalVisibility(visibility));
             set2.play(anim2).with(splitAnim2);
@@ -203,12 +214,13 @@ public abstract class AbsActionBarView extends ViewGroup {
     }
 
     public void postShowOverflowMenu() {
-        post(new Runnable() { // from class: com.android.internal.widget.AbsActionBarView.1
-            @Override // java.lang.Runnable
-            public void run() {
-                AbsActionBarView.this.showOverflowMenu();
-            }
-        });
+        post(
+                new Runnable() { // from class: com.android.internal.widget.AbsActionBarView.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        AbsActionBarView.this.showOverflowMenu();
+                    }
+                });
     }
 
     public boolean hideOverflowMenu() {
@@ -246,8 +258,11 @@ public abstract class AbsActionBarView extends ViewGroup {
         }
     }
 
-    protected int measureChildView(View child, int availableWidth, int childSpecHeight, int spacing) {
-        child.measure(View.MeasureSpec.makeMeasureSpec(availableWidth, Integer.MIN_VALUE), childSpecHeight);
+    protected int measureChildView(
+            View child, int availableWidth, int childSpecHeight, int spacing) {
+        child.measure(
+                View.MeasureSpec.makeMeasureSpec(availableWidth, Integer.MIN_VALUE),
+                childSpecHeight);
         return Math.max(0, (availableWidth - child.getMeasuredWidth()) - spacing);
     }
 
@@ -271,8 +286,7 @@ public abstract class AbsActionBarView extends ViewGroup {
         private boolean mCanceled = false;
         int mFinalVisibility;
 
-        protected VisibilityAnimListener() {
-        }
+        protected VisibilityAnimListener() {}
 
         public VisibilityAnimListener withFinalVisibility(int visibility) {
             this.mFinalVisibility = visibility;
@@ -293,7 +307,8 @@ public abstract class AbsActionBarView extends ViewGroup {
             }
             AbsActionBarView.this.mVisibilityAnim = null;
             AbsActionBarView.this.setVisibility(this.mFinalVisibility);
-            if (AbsActionBarView.this.mSplitView != null && AbsActionBarView.this.mMenuView != null) {
+            if (AbsActionBarView.this.mSplitView != null
+                    && AbsActionBarView.this.mMenuView != null) {
                 AbsActionBarView.this.mMenuView.setVisibility(this.mFinalVisibility);
             }
         }
@@ -304,7 +319,6 @@ public abstract class AbsActionBarView extends ViewGroup {
         }
 
         @Override // android.animation.Animator.AnimatorListener
-        public void onAnimationRepeat(Animator animation) {
-        }
+        public void onAnimationRepeat(Animator animation) {}
     }
 }

@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IGetSmdsAddressCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.euicc.IGetSmdsAddressCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.euicc.IGetSmdsAddressCallback";
 
     void onComplete(int i, String str) throws RemoteException;
 
     public static class Default implements IGetSmdsAddressCallback {
         @Override // com.android.internal.telephony.euicc.IGetSmdsAddressCallback
-        public void onComplete(int resultCode, String address) throws RemoteException {
-        }
+        public void onComplete(int resultCode, String address) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IGetSmdsAddressCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetSmdsAddressCallback {
+    public abstract static class Stub extends Binder implements IGetSmdsAddressCallback {
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IGetSmdsAddressCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGetSmdsAddressCallback.DESCRIPTOR);
             }

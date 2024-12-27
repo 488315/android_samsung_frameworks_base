@@ -29,6 +29,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -37,6 +38,7 @@ import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -45,13 +47,17 @@ import java.util.function.Consumer;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class FlashNotificationsController {
-    static final String ACTION_FLASH_NOTIFICATION_START_PREVIEW = "com.android.internal.intent.action.FLASH_NOTIFICATION_START_PREVIEW";
-    static final String ACTION_FLASH_NOTIFICATION_STOP_PREVIEW = "com.android.internal.intent.action.FLASH_NOTIFICATION_STOP_PREVIEW";
+    static final String ACTION_FLASH_NOTIFICATION_START_PREVIEW =
+            "com.android.internal.intent.action.FLASH_NOTIFICATION_START_PREVIEW";
+    static final String ACTION_FLASH_NOTIFICATION_STOP_PREVIEW =
+            "com.android.internal.intent.action.FLASH_NOTIFICATION_STOP_PREVIEW";
     static final int ALL_FLASH_NOTIFICATION_TYPE = 3;
     static final String CAMERA_FLASH_NOTIFICATION_ALL_APPS = "all";
     static final int CAMERA_FLASH_NOTIFICATION_TYPE = 1;
-    static final String EXTRA_FLASH_NOTIFICATION_PREVIEW_COLOR = "com.android.internal.intent.extra.FLASH_NOTIFICATION_PREVIEW_COLOR";
-    static final String EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE = "com.android.internal.intent.extra.FLASH_NOTIFICATION_PREVIEW_TYPE";
+    static final String EXTRA_FLASH_NOTIFICATION_PREVIEW_COLOR =
+            "com.android.internal.intent.extra.FLASH_NOTIFICATION_PREVIEW_COLOR";
+    static final String EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE =
+            "com.android.internal.intent.extra.FLASH_NOTIFICATION_PREVIEW_TYPE";
     static final int NONE_FLASH_NOTIFICATIONS_TYPE = 0;
     static final int PREVIEW_TYPE_LONG = 1;
     static final int PREVIEW_TYPE_SHORT = 0;
@@ -61,11 +67,15 @@ public final class FlashNotificationsController {
     static final int SCREEN_FLASH_NOTIFICATION_MODE_CUSTOM = 1;
     static final int SCREEN_FLASH_NOTIFICATION_TYPE = 2;
     static final String SETTING_KEY_CAMERA_FLASH_NOTIFICATION = "camera_flash_notification";
-    static final String SETTING_KEY_CAMERA_FLASH_NOTIFICATION_APP_LIST = "camera_flash_notification_app_list";
+    static final String SETTING_KEY_CAMERA_FLASH_NOTIFICATION_APP_LIST =
+            "camera_flash_notification_app_list";
     static final String SETTING_KEY_SCREEN_FLASH_NOTIFICATION = "screen_flash_notification";
-    static final String SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR = "screen_flash_notification_color_global";
-    static final String SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR_APPS = "screen_flash_notification_color_apps";
-    static final String SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR_MODE = "screen_flash_notification_color_mode";
+    static final String SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR =
+            "screen_flash_notification_color_global";
+    static final String SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR_APPS =
+            "screen_flash_notification_color_apps";
+    static final String SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR_MODE =
+            "screen_flash_notification_color_mode";
     public final Handler mCallbackHandler;
     public String mCameraId;
     public CameraManager mCameraManager;
@@ -93,8 +103,7 @@ public final class FlashNotificationsController {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class FlashBroadcastReceiver extends BroadcastReceiver {
-        public FlashBroadcastReceiver() {
-        }
+        public FlashBroadcastReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -102,25 +111,44 @@ public final class FlashNotificationsController {
                 if (UserHandle.myUserId() != ActivityManager.getCurrentUser()) {
                     return;
                 }
-                FlashNotificationsController flashNotificationsController = FlashNotificationsController.this;
-                flashNotificationsController.mIsCameraFlashNotificationEnabled = Settings.System.getIntForUser(flashNotificationsController.mContext.getContentResolver(), FlashNotificationsController.SETTING_KEY_CAMERA_FLASH_NOTIFICATION, 0, -2) != 0;
-                FlashNotificationsController flashNotificationsController2 = FlashNotificationsController.this;
+                FlashNotificationsController flashNotificationsController =
+                        FlashNotificationsController.this;
+                flashNotificationsController.mIsCameraFlashNotificationEnabled =
+                        Settings.System.getIntForUser(
+                                        flashNotificationsController.mContext.getContentResolver(),
+                                        FlashNotificationsController
+                                                .SETTING_KEY_CAMERA_FLASH_NOTIFICATION,
+                                        0,
+                                        -2)
+                                != 0;
+                FlashNotificationsController flashNotificationsController2 =
+                        FlashNotificationsController.this;
                 if (flashNotificationsController2.mIsCameraFlashNotificationEnabled) {
                     flashNotificationsController2.prepareForCameraFlashNotification();
                 } else {
                     CameraManager cameraManager = flashNotificationsController2.mCameraManager;
                     if (cameraManager != null) {
-                        cameraManager.unregisterTorchCallback(flashNotificationsController2.mTorchCallback);
+                        cameraManager.unregisterTorchCallback(
+                                flashNotificationsController2.mTorchCallback);
                     }
                 }
-                FlashNotificationsController flashNotificationsController3 = FlashNotificationsController.this;
-                flashNotificationsController3.mCameraManager = (CameraManager) flashNotificationsController3.mContext.getSystemService(CameraManager.class);
-                FlashNotificationsController flashNotificationsController4 = FlashNotificationsController.this;
-                flashNotificationsController4.mCameraManager.registerAvailabilityCallback(flashNotificationsController4.mTorchAvailabilityCallback, flashNotificationsController4.mCallbackHandler);
+                FlashNotificationsController flashNotificationsController3 =
+                        FlashNotificationsController.this;
+                flashNotificationsController3.mCameraManager =
+                        (CameraManager)
+                                flashNotificationsController3.mContext.getSystemService(
+                                        CameraManager.class);
+                FlashNotificationsController flashNotificationsController4 =
+                        FlashNotificationsController.this;
+                flashNotificationsController4.mCameraManager.registerAvailabilityCallback(
+                        flashNotificationsController4.mTorchAvailabilityCallback,
+                        flashNotificationsController4.mCallbackHandler);
                 return;
             }
-            if (!FlashNotificationsController.ACTION_FLASH_NOTIFICATION_START_PREVIEW.equals(intent.getAction())) {
-                if (FlashNotificationsController.ACTION_FLASH_NOTIFICATION_STOP_PREVIEW.equals(intent.getAction())) {
+            if (!FlashNotificationsController.ACTION_FLASH_NOTIFICATION_START_PREVIEW.equals(
+                    intent.getAction())) {
+                if (FlashNotificationsController.ACTION_FLASH_NOTIFICATION_STOP_PREVIEW.equals(
+                        intent.getAction())) {
                     Log.i("FlashNotifController", "ACTION_FLASH_NOTIFICATION_STOP_PREVIEW");
                     FlashNotificationsController.this.stopFlashNotification("preview");
                     return;
@@ -128,14 +156,32 @@ public final class FlashNotificationsController {
                 return;
             }
             Log.i("FlashNotifController", "ACTION_FLASH_NOTIFICATION_START_PREVIEW");
-            int intExtra = intent.getIntExtra(FlashNotificationsController.EXTRA_FLASH_NOTIFICATION_PREVIEW_COLOR, 0);
-            int intExtra2 = intent.getIntExtra(FlashNotificationsController.EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE, 0);
+            int intExtra =
+                    intent.getIntExtra(
+                            FlashNotificationsController.EXTRA_FLASH_NOTIFICATION_PREVIEW_COLOR, 0);
+            int intExtra2 =
+                    intent.getIntExtra(
+                            FlashNotificationsController.EXTRA_FLASH_NOTIFICATION_PREVIEW_TYPE, 0);
             if (intExtra2 == 1) {
-                FlashNotificationsController flashNotificationsController5 = FlashNotificationsController.this;
-                flashNotificationsController5.requestStartFlashNotification(new FlashNotification(3, intExtra, flashNotificationsController5.mContext, "preview", "preview"));
+                FlashNotificationsController flashNotificationsController5 =
+                        FlashNotificationsController.this;
+                flashNotificationsController5.requestStartFlashNotification(
+                        new FlashNotification(
+                                3,
+                                intExtra,
+                                flashNotificationsController5.mContext,
+                                "preview",
+                                "preview"));
             } else if (intExtra2 == 0) {
-                FlashNotificationsController flashNotificationsController6 = FlashNotificationsController.this;
-                flashNotificationsController6.requestStartFlashNotification(new FlashNotification(1, flashNotificationsController6.getScreenFlashColorPreference$2(), flashNotificationsController6.mContext, "preview", "preview"));
+                FlashNotificationsController flashNotificationsController6 =
+                        FlashNotificationsController.this;
+                flashNotificationsController6.requestStartFlashNotification(
+                        new FlashNotification(
+                                1,
+                                flashNotificationsController6.getScreenFlashColorPreference$2(),
+                                flashNotificationsController6.mContext,
+                                "preview",
+                                "preview"));
             }
         }
     }
@@ -147,23 +193,45 @@ public final class FlashNotificationsController {
 
         public FlashContentObserver(Handler handler) {
             super(handler);
-            this.mCameraFlashNotificationUri = Settings.System.getUriFor(FlashNotificationsController.SETTING_KEY_CAMERA_FLASH_NOTIFICATION);
-            this.mScreenFlashNotificationUri = Settings.System.getUriFor(FlashNotificationsController.SETTING_KEY_SCREEN_FLASH_NOTIFICATION);
+            this.mCameraFlashNotificationUri =
+                    Settings.System.getUriFor(
+                            FlashNotificationsController.SETTING_KEY_CAMERA_FLASH_NOTIFICATION);
+            this.mScreenFlashNotificationUri =
+                    Settings.System.getUriFor(
+                            FlashNotificationsController.SETTING_KEY_SCREEN_FLASH_NOTIFICATION);
         }
 
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
             if (!this.mCameraFlashNotificationUri.equals(uri)) {
                 if (this.mScreenFlashNotificationUri.equals(uri)) {
-                    FlashNotificationsController flashNotificationsController = FlashNotificationsController.this;
-                    flashNotificationsController.mIsScreenFlashNotificationEnabled = Settings.System.getIntForUser(flashNotificationsController.mContext.getContentResolver(), FlashNotificationsController.SETTING_KEY_SCREEN_FLASH_NOTIFICATION, 0, -2) != 0;
+                    FlashNotificationsController flashNotificationsController =
+                            FlashNotificationsController.this;
+                    flashNotificationsController.mIsScreenFlashNotificationEnabled =
+                            Settings.System.getIntForUser(
+                                            flashNotificationsController.mContext
+                                                    .getContentResolver(),
+                                            FlashNotificationsController
+                                                    .SETTING_KEY_SCREEN_FLASH_NOTIFICATION,
+                                            0,
+                                            -2)
+                                    != 0;
                     return;
                 }
                 return;
             }
-            FlashNotificationsController flashNotificationsController2 = FlashNotificationsController.this;
-            flashNotificationsController2.mIsCameraFlashNotificationEnabled = Settings.System.getIntForUser(flashNotificationsController2.mContext.getContentResolver(), FlashNotificationsController.SETTING_KEY_CAMERA_FLASH_NOTIFICATION, 0, -2) != 0;
-            FlashNotificationsController flashNotificationsController3 = FlashNotificationsController.this;
+            FlashNotificationsController flashNotificationsController2 =
+                    FlashNotificationsController.this;
+            flashNotificationsController2.mIsCameraFlashNotificationEnabled =
+                    Settings.System.getIntForUser(
+                                    flashNotificationsController2.mContext.getContentResolver(),
+                                    FlashNotificationsController
+                                            .SETTING_KEY_CAMERA_FLASH_NOTIFICATION,
+                                    0,
+                                    -2)
+                            != 0;
+            FlashNotificationsController flashNotificationsController3 =
+                    FlashNotificationsController.this;
             if (flashNotificationsController3.mIsCameraFlashNotificationEnabled) {
                 flashNotificationsController3.prepareForCameraFlashNotification();
                 return;
@@ -202,7 +270,16 @@ public final class FlashNotificationsController {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public FlashNotification(android.content.Context r7, java.lang.String r8, java.lang.String r9, int r10, int r11, android.os.IBinder r12, com.android.server.accessibility.FlashNotificationsController$$ExternalSyntheticLambda1 r13) {
+        public FlashNotification(
+                android.content.Context r7,
+                java.lang.String r8,
+                java.lang.String r9,
+                int r10,
+                int r11,
+                android.os.IBinder r12,
+                com.android.server.accessibility
+                                .FlashNotificationsController$$ExternalSyntheticLambda1
+                        r13) {
             /*
                 r6 = this;
                 r0 = r6
@@ -324,10 +401,20 @@ public final class FlashNotificationsController {
             Ld8:
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.FlashNotificationsController.FlashNotification.<init>(android.content.Context, java.lang.String, java.lang.String, int, int, android.os.IBinder, com.android.server.accessibility.FlashNotificationsController$$ExternalSyntheticLambda1):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.accessibility.FlashNotificationsController.FlashNotification.<init>(android.content.Context,"
+                        + " java.lang.String, java.lang.String, int, int, android.os.IBinder,"
+                        + " com.android.server.accessibility.FlashNotificationsController$$ExternalSyntheticLambda1):void");
         }
 
-        public FlashNotification(String str, int i, int i2, IBinder iBinder, FlashNotificationsController$$ExternalSyntheticLambda1 flashNotificationsController$$ExternalSyntheticLambda1) {
+        public FlashNotification(
+                String str,
+                int i,
+                int i2,
+                IBinder iBinder,
+                FlashNotificationsController$$ExternalSyntheticLambda1
+                        flashNotificationsController$$ExternalSyntheticLambda1) {
             this.mType = i;
             this.mTag = str;
             this.mColor = i2;
@@ -342,7 +429,9 @@ public final class FlashNotificationsController {
             }
             if (i != 3) {
                 this.mOnDuration = 350;
-                this.mOffDuration = FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE;
+                this.mOffDuration =
+                        FrameworkStatsLog
+                                .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE;
                 this.mRepeat = 2;
                 this.mForceStartScreenFlash = false;
                 return;
@@ -396,7 +485,8 @@ public final class FlashNotificationsController {
             StringBuilder sb = new StringBuilder("mShouldDoScreenFlash: ");
             sb.append(this.mShouldDoScreenFlash);
             sb.append(", mShouldDoCameraFlash: ");
-            RCPManagerService$$ExternalSyntheticOutline0.m("FlashNotifController", sb, this.mShouldDoCameraFlash);
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    "FlashNotifController", sb, this.mShouldDoCameraFlash);
             synchronized (this) {
                 FlashNotificationsController.this.mWakeLock.acquire(300000L);
                 try {
@@ -407,7 +497,10 @@ public final class FlashNotificationsController {
                     try {
                         FlashNotificationsController.this.mWakeLock.release();
                     } catch (RuntimeException unused) {
-                        Log.e("FlashNotifController", "Error while releasing FlashNotificationsController wakelock (already released by the system?)");
+                        Log.e(
+                                "FlashNotifController",
+                                "Error while releasing FlashNotificationsController wakelock"
+                                    + " (already released by the system?)");
                     }
                 }
             }
@@ -419,7 +512,8 @@ public final class FlashNotificationsController {
                     if (!this.mForceStop) {
                         FlashNotification flashNotification2 = this.mFlashNotification;
                         IBinder iBinder = flashNotification2.mToken;
-                        if (iBinder != null && (deathRecipient = flashNotification2.mDeathRecipient) != null) {
+                        if (iBinder != null
+                                && (deathRecipient = flashNotification2.mDeathRecipient) != null) {
                             try {
                                 iBinder.unlinkToDeath(deathRecipient, 0);
                             } catch (Exception unused2) {
@@ -433,7 +527,10 @@ public final class FlashNotificationsController {
             }
             FlashNotificationsController.this.mIsCameraFlashNotificationRunning = false;
             Log.i("FlashNotifController", "mIsCameraFlashNotificationRunning false in thread run");
-            VpnManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("run finished: "), this.mFlashNotification.mTag, "FlashNotifController");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("run finished: "),
+                    this.mFlashNotification.mTag,
+                    "FlashNotifController");
         }
 
         public final void startFlashNotification() {
@@ -444,14 +541,17 @@ public final class FlashNotificationsController {
                         FlashNotification flashNotification = this.mFlashNotification;
                         if (flashNotification.mType != 2 && (i = flashNotification.mRepeat) >= 0) {
                             flashNotification.mRepeat = i - 1;
-                            if (i == 0) {
-                            }
+                            if (i == 0) {}
                         }
                         if (this.mShouldDoScreenFlash) {
-                            FlashNotificationsController.m134$$Nest$mdoScreenFlashNotificationOn(FlashNotificationsController.this, this.mColor, flashNotification.mForceStartScreenFlash);
+                            FlashNotificationsController.m134$$Nest$mdoScreenFlashNotificationOn(
+                                    FlashNotificationsController.this,
+                                    this.mColor,
+                                    flashNotification.mForceStartScreenFlash);
                         }
                         if (this.mShouldDoCameraFlash) {
-                            FlashNotificationsController.m133$$Nest$mdoCameraFlashNotificationOn(FlashNotificationsController.this);
+                            FlashNotificationsController.m133$$Nest$mdoCameraFlashNotificationOn(
+                                    FlashNotificationsController.this);
                         }
                         delay(this.mFlashNotification.mOnDuration);
                         FlashNotificationsController.this.doScreenFlashNotificationOff();
@@ -469,27 +569,42 @@ public final class FlashNotificationsController {
     }
 
     /* renamed from: -$$Nest$mdoCameraFlashNotificationOn, reason: not valid java name */
-    public static void m133$$Nest$mdoCameraFlashNotificationOn(FlashNotificationsController flashNotificationsController) {
-        if (flashNotificationsController.mIsCameraFlashNotificationEnabled && !flashNotificationsController.mIsTorchOn) {
+    public static void m133$$Nest$mdoCameraFlashNotificationOn(
+            FlashNotificationsController flashNotificationsController) {
+        if (flashNotificationsController.mIsCameraFlashNotificationEnabled
+                && !flashNotificationsController.mIsTorchOn) {
             flashNotificationsController.doCameraFlashNotification(true);
         }
-        StringBuilder sb = new StringBuilder("doCameraFlashNotificationOn: isCameraFlashNotificationEnabled=");
+        StringBuilder sb =
+                new StringBuilder("doCameraFlashNotificationOn: isCameraFlashNotificationEnabled=");
         sb.append(flashNotificationsController.mIsCameraFlashNotificationEnabled);
         sb.append(", isTorchOn=");
         sb.append(flashNotificationsController.mIsTorchOn);
         sb.append(", isTorchTouched=");
-        FlashNotificationsController$$ExternalSyntheticOutline0.m("FlashNotifController", sb, flashNotificationsController.mIsTorchTouched);
+        FlashNotificationsController$$ExternalSyntheticOutline0.m(
+                "FlashNotifController", sb, flashNotificationsController.mIsTorchTouched);
     }
 
     /* renamed from: -$$Nest$mdoScreenFlashNotificationOn, reason: not valid java name */
-    public static void m134$$Nest$mdoScreenFlashNotificationOn(FlashNotificationsController flashNotificationsController, int i, boolean z) {
+    public static void m134$$Nest$mdoScreenFlashNotificationOn(
+            FlashNotificationsController flashNotificationsController, int i, boolean z) {
         int i2 = flashNotificationsController.mDisplayState;
         boolean z2 = i2 == 3 || i2 == 4;
         if ((flashNotificationsController.mIsScreenFlashNotificationEnabled || z) && !z2) {
-            flashNotificationsController.mMainHandler.sendMessage(PooledLambda.obtainMessage(new FlashNotificationsController$$ExternalSyntheticLambda4(1), flashNotificationsController, Integer.valueOf(i)));
+            flashNotificationsController.mMainHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new FlashNotificationsController$$ExternalSyntheticLambda4(1),
+                            flashNotificationsController,
+                            Integer.valueOf(i)));
         }
-        StringBuilder sb = new StringBuilder("doScreenFlashNotificationOn: isScreenFlashNotificationEnabled=");
-        BatteryService$$ExternalSyntheticOutline0.m(sb, flashNotificationsController.mIsScreenFlashNotificationEnabled, ", isDozeMode=", z2, ", color=");
+        StringBuilder sb =
+                new StringBuilder("doScreenFlashNotificationOn: isScreenFlashNotificationEnabled=");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                sb,
+                flashNotificationsController.mIsScreenFlashNotificationEnabled,
+                ", isDozeMode=",
+                z2,
+                ", color=");
         sb.append(Integer.toHexString(i));
         Log.i("FlashNotifController", sb.toString());
     }
@@ -515,7 +630,9 @@ public final class FlashNotificationsController {
             r3.<init>(r4, r0, r1)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.FlashNotificationsController.<init>(android.content.Context):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.FlashNotificationsController.<init>(android.content.Context):void");
     }
 
     /* JADX WARN: Type inference failed for: r3v0, types: [com.android.server.accessibility.FlashNotificationsController$1] */
@@ -530,43 +647,67 @@ public final class FlashNotificationsController {
         this.mIsCameraOpened = false;
         this.mCameraId = null;
         this.mIsCameraFlashNotificationRunning = false;
-        this.mTorchCallback = new CameraManager.TorchCallback() { // from class: com.android.server.accessibility.FlashNotificationsController.1
-            @Override // android.hardware.camera2.CameraManager.TorchCallback
-            public final void onTorchModeChanged(String str, boolean z) {
-                String str2 = FlashNotificationsController.this.mCameraId;
-                if (str2 == null || !str2.equals(str)) {
-                    return;
-                }
-                FlashNotificationsController.this.mIsTorchOn = z;
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m("onTorchModeChanged, set mIsTorchOn=", "FlashNotifController", z);
-            }
-        };
-        this.mTorchAvailabilityCallback = new CameraManager.AvailabilityCallback() { // from class: com.android.server.accessibility.FlashNotificationsController.2
-            public final void onCameraClosed(String str) {
-                String str2 = FlashNotificationsController.this.mCameraId;
-                if (str2 == null || !str2.equals(str)) {
-                    return;
-                }
-                FlashNotificationsController.this.mIsCameraOpened = false;
-            }
+        this.mTorchCallback =
+                new CameraManager
+                        .TorchCallback() { // from class:
+                                           // com.android.server.accessibility.FlashNotificationsController.1
+                    @Override // android.hardware.camera2.CameraManager.TorchCallback
+                    public final void onTorchModeChanged(String str, boolean z) {
+                        String str2 = FlashNotificationsController.this.mCameraId;
+                        if (str2 == null || !str2.equals(str)) {
+                            return;
+                        }
+                        FlashNotificationsController.this.mIsTorchOn = z;
+                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                "onTorchModeChanged, set mIsTorchOn=", "FlashNotifController", z);
+                    }
+                };
+        this.mTorchAvailabilityCallback =
+                new CameraManager
+                        .AvailabilityCallback() { // from class:
+                                                  // com.android.server.accessibility.FlashNotificationsController.2
+                    public final void onCameraClosed(String str) {
+                        String str2 = FlashNotificationsController.this.mCameraId;
+                        if (str2 == null || !str2.equals(str)) {
+                            return;
+                        }
+                        FlashNotificationsController.this.mIsCameraOpened = false;
+                    }
 
-            public final void onCameraOpened(String str, String str2) {
-                String str3 = FlashNotificationsController.this.mCameraId;
-                if (str3 == null || !str3.equals(str)) {
-                    return;
-                }
-                FlashNotificationsController.this.mIsCameraOpened = true;
-            }
-        };
-        new AudioManager.AudioPlaybackCallback() { // from class: com.android.server.accessibility.FlashNotificationsController.3
+                    public final void onCameraOpened(String str, String str2) {
+                        String str3 = FlashNotificationsController.this.mCameraId;
+                        if (str3 == null || !str3.equals(str)) {
+                            return;
+                        }
+                        FlashNotificationsController.this.mIsCameraOpened = true;
+                    }
+                };
+        new AudioManager
+                .AudioPlaybackCallback() { // from class:
+                                           // com.android.server.accessibility.FlashNotificationsController.3
             @Override // android.media.AudioManager.AudioPlaybackCallback
             public final void onPlaybackConfigChanged(List list) {
-                boolean anyMatch = list != null ? list.stream().anyMatch(new FlashNotificationsController$3$$ExternalSyntheticLambda0()) : false;
+                boolean anyMatch =
+                        list != null
+                                ? list.stream()
+                                        .anyMatch(
+                                                new FlashNotificationsController$3$$ExternalSyntheticLambda0())
+                                : false;
                 if (FlashNotificationsController.this.mIsAlarming != anyMatch) {
-                    AccessibilityManagerService$$ExternalSyntheticOutline0.m("alarm state changed: ", "FlashNotifController", anyMatch);
+                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                            "alarm state changed: ", "FlashNotifController", anyMatch);
                     if (anyMatch) {
-                        FlashNotificationsController flashNotificationsController = FlashNotificationsController.this;
-                        flashNotificationsController.requestStartFlashNotification(new FlashNotification("alarm", 2, flashNotificationsController.getScreenFlashColorPreference$2(), (IBinder) null, (FlashNotificationsController$$ExternalSyntheticLambda1) null));
+                        FlashNotificationsController flashNotificationsController =
+                                FlashNotificationsController.this;
+                        flashNotificationsController.requestStartFlashNotification(
+                                new FlashNotification(
+                                        "alarm",
+                                        2,
+                                        flashNotificationsController
+                                                .getScreenFlashColorPreference$2(),
+                                        (IBinder) null,
+                                        (FlashNotificationsController$$ExternalSyntheticLambda1)
+                                                null));
                     } else {
                         FlashNotificationsController.this.stopFlashNotification("alarm");
                     }
@@ -581,8 +722,10 @@ public final class FlashNotificationsController {
         this.mCallbackHandler = handler2;
         FlashContentObserver flashContentObserver = new FlashContentObserver(handler3);
         ContentResolver contentResolver = context.getContentResolver();
-        contentResolver.registerContentObserver(flashContentObserver.mCameraFlashNotificationUri, false, flashContentObserver, -1);
-        contentResolver.registerContentObserver(flashContentObserver.mScreenFlashNotificationUri, false, flashContentObserver, -1);
+        contentResolver.registerContentObserver(
+                flashContentObserver.mCameraFlashNotificationUri, false, flashContentObserver, -1);
+        contentResolver.registerContentObserver(
+                flashContentObserver.mScreenFlashNotificationUri, false, flashContentObserver, -1);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.BOOT_COMPLETED");
         intentFilter.addAction(ACTION_FLASH_NOTIFICATION_START_PREVIEW);
@@ -590,35 +733,42 @@ public final class FlashNotificationsController {
         FlashBroadcastReceiver flashBroadcastReceiver = new FlashBroadcastReceiver();
         this.mFlashBroadcastReceiver = flashBroadcastReceiver;
         context.registerReceiver(flashBroadcastReceiver, intentFilter, 4);
-        this.mWakeLock = ((PowerManager) context.getSystemService(PowerManager.class)).newWakeLock(1, "a11y:FlashNotificationsController");
-        DisplayManager displayManager = (DisplayManager) context.getSystemService(DisplayManager.class);
+        this.mWakeLock =
+                ((PowerManager) context.getSystemService(PowerManager.class))
+                        .newWakeLock(1, "a11y:FlashNotificationsController");
+        DisplayManager displayManager =
+                (DisplayManager) context.getSystemService(DisplayManager.class);
         this.mDisplayManager = displayManager;
-        DisplayManager.DisplayListener displayListener = new DisplayManager.DisplayListener() { // from class: com.android.server.accessibility.FlashNotificationsController.4
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayAdded(int i) {
-            }
+        DisplayManager.DisplayListener displayListener =
+                new DisplayManager
+                        .DisplayListener() { // from class:
+                                             // com.android.server.accessibility.FlashNotificationsController.4
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayAdded(int i) {}
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayChanged(int i) {
-                Display display;
-                DisplayManager displayManager2 = FlashNotificationsController.this.mDisplayManager;
-                if (displayManager2 == null || (display = displayManager2.getDisplay(i)) == null) {
-                    return;
-                }
-                FlashNotificationsController.this.mDisplayState = display.getState();
-            }
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayChanged(int i) {
+                        Display display;
+                        DisplayManager displayManager2 =
+                                FlashNotificationsController.this.mDisplayManager;
+                        if (displayManager2 == null
+                                || (display = displayManager2.getDisplay(i)) == null) {
+                            return;
+                        }
+                        FlashNotificationsController.this.mDisplayState = display.getState();
+                    }
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayRemoved(int i) {
-            }
-        };
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayRemoved(int i) {}
+                };
         if (displayManager != null) {
             displayManager.registerDisplayListener(displayListener, null);
         }
     }
 
     public static void fadeScreenNotificationOverlayViewMainThread(View view, boolean z) {
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, "alpha", z ? 0.0f : 1.0f, z ? 1.0f : 0.0f);
+        ObjectAnimator ofFloat =
+                ObjectAnimator.ofFloat(view, "alpha", z ? 0.0f : 1.0f, z ? 1.0f : 0.0f);
         ofFloat.setInterpolator(new AccelerateInterpolator());
         ofFloat.setAutoCancel(true);
         ofFloat.setDuration(200L);
@@ -627,10 +777,16 @@ public final class FlashNotificationsController {
 
     public final void doCameraFlashNotification(boolean z) {
         String str;
-        VpnManagerService$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m("doCameraFlashNotification: ", " mCameraId : ", z), this.mCameraId, "FlashNotifController");
+        VpnManagerService$$ExternalSyntheticOutline0.m(
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "doCameraFlashNotification: ", " mCameraId : ", z),
+                this.mCameraId,
+                "FlashNotifController");
         CameraManager cameraManager = this.mCameraManager;
         if (cameraManager == null || (str = this.mCameraId) == null) {
-            Log.e("FlashNotifController", "Can not use camera flash notification, please check CameraManager!");
+            Log.e(
+                    "FlashNotifController",
+                    "Can not use camera flash notification, please check CameraManager!");
             return;
         }
         try {
@@ -645,110 +801,191 @@ public final class FlashNotificationsController {
         if (this.mIsTorchTouched) {
             doCameraFlashNotification(false);
         }
-        StringBuilder sb = new StringBuilder("doCameraFlashNotificationOff: isCameraFlashNotificationEnabled=");
+        StringBuilder sb =
+                new StringBuilder(
+                        "doCameraFlashNotificationOff: isCameraFlashNotificationEnabled=");
         sb.append(this.mIsCameraFlashNotificationEnabled);
         sb.append(", isTorchOn=");
         sb.append(this.mIsTorchOn);
         sb.append(", isTorchTouched=");
-        FlashNotificationsController$$ExternalSyntheticOutline0.m("FlashNotifController", sb, this.mIsTorchTouched);
+        FlashNotificationsController$$ExternalSyntheticOutline0.m(
+                "FlashNotifController", sb, this.mIsTorchTouched);
     }
 
     public final void doScreenFlashNotificationOff() {
         Handler handler = this.mMainHandler;
         final int i = 0;
-        handler.sendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: com.android.server.accessibility.FlashNotificationsController$$ExternalSyntheticLambda2
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                int i2 = i;
-                FlashNotificationsController flashNotificationsController = (FlashNotificationsController) obj;
-                flashNotificationsController.getClass();
-                switch (i2) {
-                    case 0:
-                        Log.d("FlashNotifController", "fadeOutScreenNotificationOverlayViewMainThread");
-                        View view = flashNotificationsController.mScreenFlashNotificationOverlayView;
-                        if (view != null) {
-                            FlashNotificationsController.fadeScreenNotificationOverlayViewMainThread(view, false);
-                        }
-                        View view2 = flashNotificationsController.mCoverScreenNotificationOverlayView;
-                        if (view2 != null) {
-                            FlashNotificationsController.fadeScreenNotificationOverlayViewMainThread(view2, false);
-                            break;
-                        }
-                        break;
-                    default:
-                        Log.d("FlashNotifController", "hideScreenNotificationOverlayViewMainThread");
-                        View view3 = flashNotificationsController.mScreenFlashNotificationOverlayView;
-                        if (view3 != null) {
-                            view3.setVisibility(8);
-                            ((WindowManager) flashNotificationsController.mContext.getSystemService(WindowManager.class)).removeView(flashNotificationsController.mScreenFlashNotificationOverlayView);
-                            flashNotificationsController.mScreenFlashNotificationOverlayView = null;
-                        }
-                        View view4 = flashNotificationsController.mCoverScreenNotificationOverlayView;
-                        if (view4 != null) {
-                            view4.setVisibility(8);
-                            WindowManager coverDisplayWindowManager = flashNotificationsController.getCoverDisplayWindowManager();
-                            if (coverDisplayWindowManager != null) {
-                                coverDisplayWindowManager.removeView(flashNotificationsController.mCoverScreenNotificationOverlayView);
+        handler.sendMessage(
+                PooledLambda.obtainMessage(
+                        new Consumer() { // from class:
+                                         // com.android.server.accessibility.FlashNotificationsController$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                int i2 = i;
+                                FlashNotificationsController flashNotificationsController =
+                                        (FlashNotificationsController) obj;
+                                flashNotificationsController.getClass();
+                                switch (i2) {
+                                    case 0:
+                                        Log.d(
+                                                "FlashNotifController",
+                                                "fadeOutScreenNotificationOverlayViewMainThread");
+                                        View view =
+                                                flashNotificationsController
+                                                        .mScreenFlashNotificationOverlayView;
+                                        if (view != null) {
+                                            FlashNotificationsController
+                                                    .fadeScreenNotificationOverlayViewMainThread(
+                                                            view, false);
+                                        }
+                                        View view2 =
+                                                flashNotificationsController
+                                                        .mCoverScreenNotificationOverlayView;
+                                        if (view2 != null) {
+                                            FlashNotificationsController
+                                                    .fadeScreenNotificationOverlayViewMainThread(
+                                                            view2, false);
+                                            break;
+                                        }
+                                        break;
+                                    default:
+                                        Log.d(
+                                                "FlashNotifController",
+                                                "hideScreenNotificationOverlayViewMainThread");
+                                        View view3 =
+                                                flashNotificationsController
+                                                        .mScreenFlashNotificationOverlayView;
+                                        if (view3 != null) {
+                                            view3.setVisibility(8);
+                                            ((WindowManager)
+                                                            flashNotificationsController.mContext
+                                                                    .getSystemService(
+                                                                            WindowManager.class))
+                                                    .removeView(
+                                                            flashNotificationsController
+                                                                    .mScreenFlashNotificationOverlayView);
+                                            flashNotificationsController
+                                                            .mScreenFlashNotificationOverlayView =
+                                                    null;
+                                        }
+                                        View view4 =
+                                                flashNotificationsController
+                                                        .mCoverScreenNotificationOverlayView;
+                                        if (view4 != null) {
+                                            view4.setVisibility(8);
+                                            WindowManager coverDisplayWindowManager =
+                                                    flashNotificationsController
+                                                            .getCoverDisplayWindowManager();
+                                            if (coverDisplayWindowManager != null) {
+                                                coverDisplayWindowManager.removeView(
+                                                        flashNotificationsController
+                                                                .mCoverScreenNotificationOverlayView);
+                                            }
+                                            flashNotificationsController
+                                                            .mCoverScreenNotificationOverlayView =
+                                                    null;
+                                            break;
+                                        }
+                                        break;
+                                }
                             }
-                            flashNotificationsController.mCoverScreenNotificationOverlayView = null;
-                            break;
-                        }
-                        break;
-                }
-            }
-        }, this));
+                        },
+                        this));
         final int i2 = 1;
-        handler.sendMessageDelayed(PooledLambda.obtainMessage(new Consumer() { // from class: com.android.server.accessibility.FlashNotificationsController$$ExternalSyntheticLambda2
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                int i22 = i2;
-                FlashNotificationsController flashNotificationsController = (FlashNotificationsController) obj;
-                flashNotificationsController.getClass();
-                switch (i22) {
-                    case 0:
-                        Log.d("FlashNotifController", "fadeOutScreenNotificationOverlayViewMainThread");
-                        View view = flashNotificationsController.mScreenFlashNotificationOverlayView;
-                        if (view != null) {
-                            FlashNotificationsController.fadeScreenNotificationOverlayViewMainThread(view, false);
-                        }
-                        View view2 = flashNotificationsController.mCoverScreenNotificationOverlayView;
-                        if (view2 != null) {
-                            FlashNotificationsController.fadeScreenNotificationOverlayViewMainThread(view2, false);
-                            break;
-                        }
-                        break;
-                    default:
-                        Log.d("FlashNotifController", "hideScreenNotificationOverlayViewMainThread");
-                        View view3 = flashNotificationsController.mScreenFlashNotificationOverlayView;
-                        if (view3 != null) {
-                            view3.setVisibility(8);
-                            ((WindowManager) flashNotificationsController.mContext.getSystemService(WindowManager.class)).removeView(flashNotificationsController.mScreenFlashNotificationOverlayView);
-                            flashNotificationsController.mScreenFlashNotificationOverlayView = null;
-                        }
-                        View view4 = flashNotificationsController.mCoverScreenNotificationOverlayView;
-                        if (view4 != null) {
-                            view4.setVisibility(8);
-                            WindowManager coverDisplayWindowManager = flashNotificationsController.getCoverDisplayWindowManager();
-                            if (coverDisplayWindowManager != null) {
-                                coverDisplayWindowManager.removeView(flashNotificationsController.mCoverScreenNotificationOverlayView);
+        handler.sendMessageDelayed(
+                PooledLambda.obtainMessage(
+                        new Consumer() { // from class:
+                                         // com.android.server.accessibility.FlashNotificationsController$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                int i22 = i2;
+                                FlashNotificationsController flashNotificationsController =
+                                        (FlashNotificationsController) obj;
+                                flashNotificationsController.getClass();
+                                switch (i22) {
+                                    case 0:
+                                        Log.d(
+                                                "FlashNotifController",
+                                                "fadeOutScreenNotificationOverlayViewMainThread");
+                                        View view =
+                                                flashNotificationsController
+                                                        .mScreenFlashNotificationOverlayView;
+                                        if (view != null) {
+                                            FlashNotificationsController
+                                                    .fadeScreenNotificationOverlayViewMainThread(
+                                                            view, false);
+                                        }
+                                        View view2 =
+                                                flashNotificationsController
+                                                        .mCoverScreenNotificationOverlayView;
+                                        if (view2 != null) {
+                                            FlashNotificationsController
+                                                    .fadeScreenNotificationOverlayViewMainThread(
+                                                            view2, false);
+                                            break;
+                                        }
+                                        break;
+                                    default:
+                                        Log.d(
+                                                "FlashNotifController",
+                                                "hideScreenNotificationOverlayViewMainThread");
+                                        View view3 =
+                                                flashNotificationsController
+                                                        .mScreenFlashNotificationOverlayView;
+                                        if (view3 != null) {
+                                            view3.setVisibility(8);
+                                            ((WindowManager)
+                                                            flashNotificationsController.mContext
+                                                                    .getSystemService(
+                                                                            WindowManager.class))
+                                                    .removeView(
+                                                            flashNotificationsController
+                                                                    .mScreenFlashNotificationOverlayView);
+                                            flashNotificationsController
+                                                            .mScreenFlashNotificationOverlayView =
+                                                    null;
+                                        }
+                                        View view4 =
+                                                flashNotificationsController
+                                                        .mCoverScreenNotificationOverlayView;
+                                        if (view4 != null) {
+                                            view4.setVisibility(8);
+                                            WindowManager coverDisplayWindowManager =
+                                                    flashNotificationsController
+                                                            .getCoverDisplayWindowManager();
+                                            if (coverDisplayWindowManager != null) {
+                                                coverDisplayWindowManager.removeView(
+                                                        flashNotificationsController
+                                                                .mCoverScreenNotificationOverlayView);
+                                            }
+                                            flashNotificationsController
+                                                            .mCoverScreenNotificationOverlayView =
+                                                    null;
+                                            break;
+                                        }
+                                        break;
+                                }
                             }
-                            flashNotificationsController.mCoverScreenNotificationOverlayView = null;
-                            break;
-                        }
-                        break;
-                }
-            }
-        }, this), 210L);
-        FlashNotificationsController$$ExternalSyntheticOutline0.m("FlashNotifController", new StringBuilder("doScreenFlashNotificationOff: isScreenFlashNotificationEnabled="), this.mIsScreenFlashNotificationEnabled);
+                        },
+                        this),
+                210L);
+        FlashNotificationsController$$ExternalSyntheticOutline0.m(
+                "FlashNotifController",
+                new StringBuilder(
+                        "doScreenFlashNotificationOff: isScreenFlashNotificationEnabled="),
+                this.mIsScreenFlashNotificationEnabled);
     }
 
     public final String getCameraId() {
         for (String str : this.mCameraManager.getCameraIdList()) {
-            CameraCharacteristics cameraCharacteristics = this.mCameraManager.getCameraCharacteristics(str);
-            Boolean bool = (Boolean) cameraCharacteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
+            CameraCharacteristics cameraCharacteristics =
+                    this.mCameraManager.getCameraCharacteristics(str);
+            Boolean bool =
+                    (Boolean) cameraCharacteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
             Integer num = (Integer) cameraCharacteristics.get(CameraCharacteristics.LENS_FACING);
             if (bool != null && num != null && bool.booleanValue() && num.intValue() == 1) {
-                DualAppManagerService$$ExternalSyntheticOutline0.m("Found valid camera, cameraId=", str, "FlashNotifController");
+                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                        "Found valid camera, cameraId=", str, "FlashNotifController");
                 return str;
             }
         }
@@ -757,7 +994,9 @@ public final class FlashNotificationsController {
 
     public final WindowManager getCoverDisplayWindowManager() {
         Display display;
-        Display[] displays = ((DisplayManager) this.mContext.getSystemService("display")).getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
+        Display[] displays =
+                ((DisplayManager) this.mContext.getSystemService("display"))
+                        .getDisplays("com.samsung.android.hardware.display.category.BUILTIN");
         int length = displays.length;
         int i = 0;
         while (true) {
@@ -776,18 +1015,24 @@ public final class FlashNotificationsController {
             return null;
         }
         if (display.getState() == 2) {
-            return (WindowManager) this.mContext.createDisplayContext(display).getSystemService("window");
+            return (WindowManager)
+                    this.mContext.createDisplayContext(display).getSystemService("window");
         }
         Log.d("FlashNotifController", "coverDisplay is not STATE_ON");
         return null;
     }
 
     public final int getScreenFlashColorPreference$2() {
-        return Settings.System.getIntForUser(this.mContext.getContentResolver(), SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR, 1728052992, -2);
+        return Settings.System.getIntForUser(
+                this.mContext.getContentResolver(),
+                SETTING_KEY_SCREEN_FLASH_NOTIFICATION_COLOR,
+                1728052992,
+                -2);
     }
 
     public final void prepareForCameraFlashNotification() {
-        CameraManager cameraManager = (CameraManager) this.mContext.getSystemService(CameraManager.class);
+        CameraManager cameraManager =
+                (CameraManager) this.mContext.getSystemService(CameraManager.class);
         this.mCameraManager = cameraManager;
         if (cameraManager != null) {
             try {
@@ -810,13 +1055,16 @@ public final class FlashNotificationsController {
                 if (str2.equals(str)) {
                     listIterator.remove();
                     IBinder iBinder = flashNotification.mToken;
-                    if (iBinder != null && (deathRecipient2 = flashNotification.mDeathRecipient) != null) {
+                    if (iBinder != null
+                            && (deathRecipient2 = flashNotification.mDeathRecipient) != null) {
                         try {
                             iBinder.unlinkToDeath(deathRecipient2, 0);
                         } catch (Exception unused) {
                         }
                     }
-                    Log.i("FlashNotifController", "removeFlashNotificationLocked: tag=".concat(str2));
+                    Log.i(
+                            "FlashNotifController",
+                            "removeFlashNotificationLocked: tag=".concat(str2));
                     return flashNotification;
                 }
             }
@@ -842,16 +1090,35 @@ public final class FlashNotificationsController {
         if (SystemProperties.getInt("service.camera.running", 0) == 1) {
             return;
         }
-        boolean isEnabled = FeatureFlagUtils.isEnabled(this.mContext, "settings_flash_notifications");
-        this.mIsCameraFlashNotificationEnabled = isEnabled && Settings.System.getIntForUser(this.mContext.getContentResolver(), SETTING_KEY_CAMERA_FLASH_NOTIFICATION, 0, -2) != 0;
-        if (isEnabled && Settings.System.getIntForUser(this.mContext.getContentResolver(), SETTING_KEY_SCREEN_FLASH_NOTIFICATION, 0, -2) != 0) {
+        boolean isEnabled =
+                FeatureFlagUtils.isEnabled(this.mContext, "settings_flash_notifications");
+        this.mIsCameraFlashNotificationEnabled =
+                isEnabled
+                        && Settings.System.getIntForUser(
+                                        this.mContext.getContentResolver(),
+                                        SETTING_KEY_CAMERA_FLASH_NOTIFICATION,
+                                        0,
+                                        -2)
+                                != 0;
+        if (isEnabled
+                && Settings.System.getIntForUser(
+                                this.mContext.getContentResolver(),
+                                SETTING_KEY_SCREEN_FLASH_NOTIFICATION,
+                                0,
+                                -2)
+                        != 0) {
             z = true;
         }
         this.mIsScreenFlashNotificationEnabled = z;
         if (flashNotification.mType != 1 || !z) {
             startFlashNotification(flashNotification);
         } else {
-            this.mMainHandler.sendMessageDelayed(PooledLambda.obtainMessage(new FlashNotificationsController$$ExternalSyntheticLambda4(0), this, flashNotification), 300L);
+            this.mMainHandler.sendMessageDelayed(
+                    PooledLambda.obtainMessage(
+                            new FlashNotificationsController$$ExternalSyntheticLambda4(0),
+                            this,
+                            flashNotification),
+                    300L);
             Log.i("FlashNotifController", "give some delay for flash notification");
         }
     }
@@ -861,7 +1128,9 @@ public final class FlashNotificationsController {
         String str = flashNotification.mTag;
         Log.i("FlashNotifController", "startFlashNotification: type=" + i + ", tag=" + str);
         boolean z = this.mIsCameraFlashNotificationEnabled;
-        if (!z && !this.mIsScreenFlashNotificationEnabled && !flashNotification.mForceStartScreenFlash) {
+        if (!z
+                && !this.mIsScreenFlashNotificationEnabled
+                && !flashNotification.mForceStartScreenFlash) {
             Log.d("FlashNotifController", "Flash notification is disabled");
             return;
         }
@@ -878,7 +1147,10 @@ public final class FlashNotificationsController {
                 try {
                     if (i == 1 || i == 3) {
                         if (this.mCurrentFlashNotification != null) {
-                            Log.i("FlashNotifController", "Default type of flash notification can not work because previous flash notification is working");
+                            Log.i(
+                                    "FlashNotifController",
+                                    "Default type of flash notification can not work because"
+                                        + " previous flash notification is working");
                         } else {
                             startFlashNotificationLocked(flashNotification);
                         }
@@ -905,15 +1177,20 @@ public final class FlashNotificationsController {
         StringBuilder sb = new StringBuilder("startFlashNotificationLocked: type=");
         sb.append(flashNotification.mType);
         sb.append(", tag=");
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, flashNotification.mTag, "FlashNotifController");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                sb, flashNotification.mTag, "FlashNotifController");
         if (flashNotification.mNotiType == 0) {
-            Log.i("FlashNotifController", "startFlashNotificationLocked: flash notification cannot be started.");
+            Log.i(
+                    "FlashNotifController",
+                    "startFlashNotificationLocked: flash notification cannot be started.");
             return;
         }
         this.mCurrentFlashNotification = flashNotification;
         if (this.mIsCameraFlashNotificationEnabled) {
             this.mIsCameraFlashNotificationRunning = true;
-            Log.i("FlashNotifController", "mIsCameraFlashNotificationRunning true in startFlashNotificationLocked");
+            Log.i(
+                    "FlashNotifController",
+                    "mIsCameraFlashNotificationRunning true in startFlashNotificationLocked");
         }
         this.mThread = new FlashNotificationThread(flashNotification);
         this.mFlashNotificationHandler.post(this.mThread);
@@ -929,12 +1206,15 @@ public final class FlashNotificationsController {
     }
 
     public final void stopFlashNotification(String str) {
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("stopFlashNotification: tag=", str, "FlashNotifController");
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "stopFlashNotification: tag=", str, "FlashNotifController");
         synchronized (this.mFlashNotifications) {
             try {
-                FlashNotification removeFlashNotificationLocked = removeFlashNotificationLocked(str);
+                FlashNotification removeFlashNotificationLocked =
+                        removeFlashNotificationLocked(str);
                 FlashNotification flashNotification = this.mCurrentFlashNotification;
-                if (flashNotification != null && removeFlashNotificationLocked == flashNotification) {
+                if (flashNotification != null
+                        && removeFlashNotificationLocked == flashNotification) {
                     stopFlashNotificationLocked();
                     startNextFlashNotificationLocked();
                 }
@@ -946,9 +1226,15 @@ public final class FlashNotificationsController {
 
     public final void stopFlashNotificationLocked() {
         if (this.mThread != null) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(new StringBuilder("stopFlashNotificationLocked: tag="), this.mThread.mFlashNotification.mTag, "FlashNotifController");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("stopFlashNotificationLocked: tag="),
+                    this.mThread.mFlashNotification.mTag,
+                    "FlashNotifController");
             FlashNotificationThread flashNotificationThread = this.mThread;
-            VpnManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("run canceled: "), flashNotificationThread.mFlashNotification.mTag, "FlashNotifController");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("run canceled: "),
+                    flashNotificationThread.mFlashNotification.mTag,
+                    "FlashNotifController");
             synchronized (flashNotificationThread) {
                 FlashNotificationsController.this.mThread.mForceStop = true;
                 FlashNotificationsController.this.mThread.notify();

@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.IProgressListener;
 import android.util.ArraySet;
 import android.util.Pair;
-import com.android.server.am.UserController;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +17,8 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda3 impl
     public final /* synthetic */ UserController f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ UserController$$ExternalSyntheticLambda3(UserController userController, Object obj, int i) {
+    public /* synthetic */ UserController$$ExternalSyntheticLambda3(
+            UserController userController, Object obj, int i) {
         this.$r8$classId = i;
         this.f$0 = userController;
         this.f$1 = obj;
@@ -37,12 +38,17 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda3 impl
                     ArrayList arrayList = (ArrayList) users;
                     if (i >= arrayList.size()) {
                         synchronized (userController.mLock) {
-                            userController.stopExcessRunningUsersLU(userController.mMaxRunningUsers, arraySet);
+                            userController.stopExcessRunningUsersLU(
+                                    userController.mMaxRunningUsers, arraySet);
                         }
                         return;
                     } else {
                         int i2 = ((UserInfo) arrayList.get(i)).id;
-                        UserProperties userProperties = userController.mInjector.getUserManagerInternal().getUserProperties(i2);
+                        UserProperties userProperties =
+                                userController
+                                        .mInjector
+                                        .getUserManagerInternal()
+                                        .getUserProperties(i2);
                         if (userProperties != null && userProperties.getAlwaysVisible()) {
                             arraySet.add(Integer.valueOf(i2));
                         }
@@ -64,12 +70,15 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda3 impl
                 return;
             default:
                 UserController userController3 = this.f$0;
-                UserController.PendingUserStart pendingUserStart = (UserController.PendingUserStart) this.f$1;
+                UserController.PendingUserStart pendingUserStart =
+                        (UserController.PendingUserStart) this.f$1;
                 userController3.getClass();
                 int i4 = pendingUserStart.userId;
                 IProgressListener iProgressListener = pendingUserStart.unlockListener;
-                userController3.checkCallingHasOneOfThosePermissions("startUser", "android.permission.INTERACT_ACROSS_USERS_FULL");
-                userController3.startUserNoChecks(i4, 0, pendingUserStart.userStartMode, iProgressListener);
+                userController3.checkCallingHasOneOfThosePermissions(
+                        "startUser", "android.permission.INTERACT_ACROSS_USERS_FULL");
+                userController3.startUserNoChecks(
+                        i4, 0, pendingUserStart.userStartMode, iProgressListener);
                 return;
         }
     }

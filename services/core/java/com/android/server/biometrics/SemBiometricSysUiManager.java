@@ -11,14 +11,17 @@ import android.os.HandlerExecutor;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.MagnificationConnectionManager$$ExternalSyntheticOutline0;
 import com.android.server.asks.ASKSManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.biometrics.ISemBiometricSysUiCallback;
 import com.samsung.android.biometrics.ISemBiometricSysUiService;
 import com.samsung.android.biometrics.SemBiometricConstants;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,7 +30,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class SemBiometricSysUiManager implements ServiceConnection, IBinder.DeathRecipient, SemBiometricConstants {
+public final class SemBiometricSysUiManager
+        implements ServiceConnection, IBinder.DeathRecipient, SemBiometricConstants {
     public static SemBiometricSysUiManager sInstance;
     public final Context mContext;
     public final Handler mHandler;
@@ -37,41 +41,56 @@ public final class SemBiometricSysUiManager implements ServiceConnection, IBinde
     public final List mPendingCommand = new ArrayList();
     public final List mSessionList = new ArrayList();
     public final AtomicBoolean mKeepBind = new AtomicBoolean(false);
-    public final SemBiometricSysUiManager$$ExternalSyntheticLambda0 mRunnableHandleUnbind = new SemBiometricSysUiManager$$ExternalSyntheticLambda0(this, 2);
-    public final SemBiometricSysUiManager$$ExternalSyntheticLambda0 mRunnableHandleBindTimeout = new SemBiometricSysUiManager$$ExternalSyntheticLambda0(this, 3);
-    public final Executor mExecutor = new HandlerExecutor(BiometricHandlerProvider.sBiometricHandlerProvider.getBiometricCallbackHandler());
+    public final SemBiometricSysUiManager$$ExternalSyntheticLambda0 mRunnableHandleUnbind =
+            new SemBiometricSysUiManager$$ExternalSyntheticLambda0(this, 2);
+    public final SemBiometricSysUiManager$$ExternalSyntheticLambda0 mRunnableHandleBindTimeout =
+            new SemBiometricSysUiManager$$ExternalSyntheticLambda0(this, 3);
+    public final Executor mExecutor =
+            new HandlerExecutor(
+                    BiometricHandlerProvider.sBiometricHandlerProvider
+                            .getBiometricCallbackHandler());
     public final AnonymousClass1 mSysUiServiceReceiver = new AnonymousClass1();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.biometrics.SemBiometricSysUiManager$1, reason: invalid class name */
     public final class AnonymousClass1 extends ISemBiometricSysUiCallback.Stub {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         public final void onError(int i, int i2, int i3) {
             if (Utils.DEBUG) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "onError: ", ", ", ", "), i3, "BiometricSysUiManager");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "onError: ", ", ", ", "),
+                        i3,
+                        "BiometricSysUiManager");
             }
-            SemBiometricSysUiManager.this.mHandler.post(new SemBiometricSysUiManager$$ExternalSyntheticLambda8(this, i, i2, i3, 2));
+            SemBiometricSysUiManager.this.mHandler.post(
+                    new SemBiometricSysUiManager$$ExternalSyntheticLambda8(this, i, i2, i3, 2));
         }
 
         public final void onEvent(int i, int i2, int i3) {
             if (Utils.DEBUG) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "onEvent: ", ", ", ", "), i3, "BiometricSysUiManager");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "onEvent: ", ", ", ", "),
+                        i3,
+                        "BiometricSysUiManager");
             }
-            SemBiometricSysUiManager.this.mHandler.post(new SemBiometricSysUiManager$$ExternalSyntheticLambda8(this, i, i2, i3, 1));
+            SemBiometricSysUiManager.this.mHandler.post(
+                    new SemBiometricSysUiManager$$ExternalSyntheticLambda8(this, i, i2, i3, 1));
         }
 
         public final void onSysUiDismissed(int i, int i2, byte[] bArr) {
             if (Utils.DEBUG) {
-                ASKSManagerService$$ExternalSyntheticOutline0.m(i, i2, "onSysUiDismissed: ", ", ", "BiometricSysUiManager");
+                ASKSManagerService$$ExternalSyntheticOutline0.m(
+                        i, i2, "onSysUiDismissed: ", ", ", "BiometricSysUiManager");
             }
-            SemBiometricSysUiManager.this.mHandler.post(new SemBiometricSysUiManager$$ExternalSyntheticLambda6(this, i, i2, bArr));
+            SemBiometricSysUiManager.this.mHandler.post(
+                    new SemBiometricSysUiManager$$ExternalSyntheticLambda6(this, i, i2, bArr));
         }
 
         public final void onTouchEvent(int i, int i2) {
             if (Utils.DEBUG) {
-                ASKSManagerService$$ExternalSyntheticOutline0.m(i, i2, "onTouchEvent: ", ",", "BiometricSysUiManager");
+                ASKSManagerService$$ExternalSyntheticOutline0.m(
+                        i, i2, "onTouchEvent: ", ",", "BiometricSysUiManager");
             }
             SemBiometricSysUiManager semBiometricSysUiManager = SemBiometricSysUiManager.this;
             synchronized (semBiometricSysUiManager) {
@@ -84,7 +103,9 @@ public final class SemBiometricSysUiManager implements ServiceConnection, IBinde
                                 int i3 = sysUiServiceSession.mId;
                             }
                         } catch (Exception e) {
-                            Slog.w("BiometricSysUiManager", "notifySysUiTouchEvent: " + e.getMessage());
+                            Slog.w(
+                                    "BiometricSysUiManager",
+                                    "notifySysUiTouchEvent: " + e.getMessage());
                         }
                     }
                 } catch (Throwable th) {
@@ -96,16 +117,13 @@ public final class SemBiometricSysUiManager implements ServiceConnection, IBinde
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface SysUiListener {
-        default void onDismissed(int i, byte[] bArr) {
-        }
+        default void onDismissed(int i, byte[] bArr) {}
 
         void onError(int i, int i2);
 
-        default void onEvent(int i, int i2) {
-        }
+        default void onEvent(int i, int i2) {}
 
-        default void onTryAgainPressed(int i) {
-        }
+        default void onTryAgainPressed(int i) {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -129,7 +147,8 @@ public final class SemBiometricSysUiManager implements ServiceConnection, IBinde
         this.mHandler = new Handler(looper);
     }
 
-    public static synchronized void injectMockForTest(SemBiometricSysUiManager semBiometricSysUiManager) {
+    public static synchronized void injectMockForTest(
+            SemBiometricSysUiManager semBiometricSysUiManager) {
         synchronized (SemBiometricSysUiManager.class) {
             sInstance = semBiometricSysUiManager;
         }
@@ -143,13 +162,18 @@ public final class SemBiometricSysUiManager implements ServiceConnection, IBinde
                         return;
                     }
                     if (this.mIsWaitingForConnection) {
-                        Slog.d("BiometricSysUiManager", "openSession: waiting for service connection");
+                        Slog.d(
+                                "BiometricSysUiManager",
+                                "openSession: waiting for service connection");
                         return;
                     }
                     Slog.d("BiometricSysUiManager", "bind: started");
                     int i = Build.IS_ENG ? 603979779 : 603979777;
                     Intent intent = new Intent();
-                    intent.setComponent(new ComponentName("com.samsung.android.biometrics.app.setting", "com.samsung.android.biometrics.app.setting.BiometricsUIService"));
+                    intent.setComponent(
+                            new ComponentName(
+                                    "com.samsung.android.biometrics.app.setting",
+                                    "com.samsung.android.biometrics.app.setting.BiometricsUIService"));
                     this.mContext.bindService(intent, i, this.mExecutor, this);
                     this.mIsWaitingForConnection = true;
                     this.mHandler.postDelayed(this.mRunnableHandleBindTimeout, 3000L);
@@ -254,7 +278,8 @@ public final class SemBiometricSysUiManager implements ServiceConnection, IBinde
             this.mHandler.removeCallbacks(this.mRunnableHandleBindTimeout);
             this.mIsWaitingForConnection = false;
             this.mIsConnected = true;
-            ISemBiometricSysUiService asInterface = ISemBiometricSysUiService.Stub.asInterface(iBinder);
+            ISemBiometricSysUiService asInterface =
+                    ISemBiometricSysUiService.Stub.asInterface(iBinder);
             this.mSysUiService = asInterface;
             if (asInterface == null) {
                 Slog.w("BiometricSysUiManager", "onServiceConnected: failed ");
@@ -321,7 +346,9 @@ public final class SemBiometricSysUiManager implements ServiceConnection, IBinde
                     ((ArrayList) this.mSessionList).add(sysUiServiceSession);
                     if (((ArrayList) this.mSessionList).size() > 10) {
                         Slog.w("BiometricSysUiManager", "openSession: too many session list");
-                        ((SysUiServiceSession) ((ArrayList) this.mSessionList).remove(0)).mListener = null;
+                        ((SysUiServiceSession) ((ArrayList) this.mSessionList).remove(0))
+                                        .mListener =
+                                null;
                     }
                 } else {
                     Slog.v("BiometricSysUiManager", "openSession: exist token");
@@ -340,41 +367,51 @@ public final class SemBiometricSysUiManager implements ServiceConnection, IBinde
         if (Utils.DEBUG) {
             Iterator it = ((ArrayList) this.mSessionList).iterator();
             while (it.hasNext()) {
-                Slog.d("BiometricSysUiManager", "Session Client = " + ((SysUiServiceSession) it.next()).toString());
+                Slog.d(
+                        "BiometricSysUiManager",
+                        "Session Client = " + ((SysUiServiceSession) it.next()).toString());
             }
         }
     }
 
     public final void sendCommand(final Bundle bundle, final int i, final int i2, final int i3) {
-        handleRequest(new Runnable() { // from class: com.android.server.biometrics.SemBiometricSysUiManager$$ExternalSyntheticLambda9
-            @Override // java.lang.Runnable
-            public final void run() {
-                SemBiometricSysUiManager semBiometricSysUiManager = SemBiometricSysUiManager.this;
-                int i4 = i;
-                int i5 = i2;
-                int i6 = i3;
-                Bundle bundle2 = bundle;
-                if (semBiometricSysUiManager.findSessionId(i4) == null) {
-                    AnyMotionDetector$$ExternalSyntheticOutline0.m(i4, "sendCommand: No exist ID, ", "BiometricSysUiManager");
-                    return;
-                }
-                try {
-                    semBiometricSysUiManager.mSysUiService.sendCommand(i4, i5, i6, bundle2);
-                } catch (Exception e) {
-                    MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("sendCommand: "), "BiometricSysUiManager");
-                }
-            }
-        });
+        handleRequest(
+                new Runnable() { // from class:
+                                 // com.android.server.biometrics.SemBiometricSysUiManager$$ExternalSyntheticLambda9
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SemBiometricSysUiManager semBiometricSysUiManager =
+                                SemBiometricSysUiManager.this;
+                        int i4 = i;
+                        int i5 = i2;
+                        int i6 = i3;
+                        Bundle bundle2 = bundle;
+                        if (semBiometricSysUiManager.findSessionId(i4) == null) {
+                            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                                    i4, "sendCommand: No exist ID, ", "BiometricSysUiManager");
+                            return;
+                        }
+                        try {
+                            semBiometricSysUiManager.mSysUiService.sendCommand(i4, i5, i6, bundle2);
+                        } catch (Exception e) {
+                            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                                    e, new StringBuilder("sendCommand: "), "BiometricSysUiManager");
+                        }
+                    }
+                });
     }
 
     public final void sendConnectionError(final int i) {
-        DeviceIdleController$$ExternalSyntheticOutline0.m(i, "sendConnectionError: [", "]", "BiometricSysUiManager");
-        this.mHandler.post(new Runnable() { // from class: com.android.server.biometrics.SemBiometricSysUiManager$$ExternalSyntheticLambda4
-            @Override // java.lang.Runnable
-            public final void run() {
-                SemBiometricSysUiManager.this.notifySysUiErrorEvent(0, 2, i);
-            }
-        });
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                i, "sendConnectionError: [", "]", "BiometricSysUiManager");
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.biometrics.SemBiometricSysUiManager$$ExternalSyntheticLambda4
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SemBiometricSysUiManager.this.notifySysUiErrorEvent(0, 2, i);
+                    }
+                });
     }
 
     public final void unBind() {

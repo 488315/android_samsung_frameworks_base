@@ -6,32 +6,25 @@ import java.lang.annotation.RetentionPolicy;
 /* loaded from: classes.dex */
 public class PixelFormat {
 
-    @Deprecated
-    public static final int A_8 = 8;
+    @Deprecated public static final int A_8 = 8;
     public static final int HSV_888 = 55;
 
-    @Deprecated
-    public static final int JPEG = 256;
+    @Deprecated public static final int JPEG = 256;
 
-    @Deprecated
-    public static final int LA_88 = 10;
+    @Deprecated public static final int LA_88 = 10;
 
-    @Deprecated
-    public static final int L_8 = 9;
+    @Deprecated public static final int L_8 = 9;
     public static final int OPAQUE = -1;
     public static final int RGBA_1010102 = 43;
 
-    @Deprecated
-    public static final int RGBA_4444 = 7;
+    @Deprecated public static final int RGBA_4444 = 7;
 
-    @Deprecated
-    public static final int RGBA_5551 = 6;
+    @Deprecated public static final int RGBA_5551 = 6;
     public static final int RGBA_8888 = 1;
     public static final int RGBA_F16 = 22;
     public static final int RGBX_8888 = 2;
 
-    @Deprecated
-    public static final int RGB_332 = 11;
+    @Deprecated public static final int RGB_332 = 11;
     public static final int RGB_565 = 4;
     public static final int RGB_888 = 3;
     public static final int R_8 = 56;
@@ -39,24 +32,19 @@ public class PixelFormat {
     public static final int TRANSPARENT = -2;
     public static final int UNKNOWN = 0;
 
-    @Deprecated
-    public static final int YCbCr_420_SP = 17;
+    @Deprecated public static final int YCbCr_420_SP = 17;
 
-    @Deprecated
-    public static final int YCbCr_422_I = 20;
+    @Deprecated public static final int YCbCr_422_I = 20;
 
-    @Deprecated
-    public static final int YCbCr_422_SP = 16;
+    @Deprecated public static final int YCbCr_422_SP = 16;
     public int bitsPerPixel;
     public int bytesPerPixel;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Format {
-    }
+    public @interface Format {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Opacity {
-    }
+    public @interface Opacity {}
 
     public static void getPixelFormatInfo(int format, PixelFormat info) {
         switch (format) {

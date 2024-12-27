@@ -3,24 +3,27 @@ package android.app;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class GameModeConfiguration implements Parcelable {
-    public static final Parcelable.Creator<GameModeConfiguration> CREATOR = new Parcelable.Creator<GameModeConfiguration>() { // from class: android.app.GameModeConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GameModeConfiguration createFromParcel(Parcel in) {
-            return new GameModeConfiguration(in);
-        }
+    public static final Parcelable.Creator<GameModeConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    GameModeConfiguration>() { // from class: android.app.GameModeConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GameModeConfiguration createFromParcel(Parcel in) {
+                    return new GameModeConfiguration(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GameModeConfiguration[] newArray(int size) {
-            return new GameModeConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GameModeConfiguration[] newArray(int size) {
+                    return new GameModeConfiguration[size];
+                }
+            };
     public static final int FPS_OVERRIDE_NONE = 0;
     private final int mFpsOverride;
     private final float mScalingFactor;
@@ -30,8 +33,7 @@ public final class GameModeConfiguration implements Parcelable {
         private int mFpsOverride;
         private float mScalingFactor;
 
-        public Builder() {
-        }
+        public Builder() {}
 
         public Builder(GameModeConfiguration configuration) {
             this.mFpsOverride = configuration.mFpsOverride;
@@ -39,7 +41,9 @@ public final class GameModeConfiguration implements Parcelable {
         }
 
         public Builder setScalingFactor(float scalingFactor) {
-            Preconditions.checkArgument(((double) scalingFactor) >= 0.1d && ((double) scalingFactor) <= 1.0d, "Scaling factor should fall between 0.1 and 1.0 (inclusive)");
+            Preconditions.checkArgument(
+                    ((double) scalingFactor) >= 0.1d && ((double) scalingFactor) <= 1.0d,
+                    "Scaling factor should fall between 0.1 and 1.0 (inclusive)");
             this.mScalingFactor = scalingFactor;
             return this;
         }
@@ -92,7 +96,8 @@ public final class GameModeConfiguration implements Parcelable {
             return false;
         }
         GameModeConfiguration config = (GameModeConfiguration) obj;
-        return config.mFpsOverride == this.mFpsOverride && config.mScalingFactor == this.mScalingFactor;
+        return config.mFpsOverride == this.mFpsOverride
+                && config.mScalingFactor == this.mScalingFactor;
     }
 
     public int hashCode() {

@@ -2,6 +2,7 @@ package com.android.server.knox.dar.sdp;
 
 import android.os.SystemProperties;
 import android.util.Log;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -28,28 +29,30 @@ public abstract class SDPLogger {
                     boolean z = SDPLogger.DEBUG;
                     Log.e("SDPLogger", "Log buffer reached the limit! Clearing the buffer...");
                     linkedList.clear();
-                    linkedList.add(SDPLogUtil.makeDebugMessage("ACLog: Unfortunately buffer cleared to prevent overflow!"));
+                    linkedList.add(
+                            SDPLogUtil.makeDebugMessage(
+                                    "ACLog: Unfortunately buffer cleared to prevent overflow!"));
                 }
                 ((LinkedList) mLogQ).add(str);
             }
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:70:0x0167, code lost:
-        
-            if (com.android.server.knox.dar.sdp.SDPLogger.DEBUG == false) goto L78;
-         */
+
+           if (com.android.server.knox.dar.sdp.SDPLogger.DEBUG == false) goto L78;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:71:0x0169, code lost:
-        
-            android.util.Log.d("SDPLogger", "Finished!");
-         */
+
+           android.util.Log.d("SDPLogger", "Finished!");
+        */
         /* JADX WARN: Code restructure failed: missing block: B:72:0x016e, code lost:
-        
-            com.android.server.knox.dar.sdp.SDPLogger.Logger.mState = 0;
-         */
+
+           com.android.server.knox.dar.sdp.SDPLogger.Logger.mState = 0;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:75:0x0173, code lost:
-        
-            return;
-         */
+
+           return;
+        */
         @Override // java.lang.Thread, java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -60,7 +63,9 @@ public abstract class SDPLogger {
                 Method dump skipped, instructions count: 390
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.dar.sdp.SDPLogger.Logger.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.knox.dar.sdp.SDPLogger.Logger.run():void");
         }
     }
 

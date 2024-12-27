@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ITimeFilter extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$tv$tuner$ITimeFilter".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$tv$tuner$ITimeFilter".replace('$', '.');
     public static final String HASH = "f8d74c149f04e76b6d622db2bd8e465dae24b08c";
     public static final int VERSION = 2;
 
@@ -28,12 +29,10 @@ public interface ITimeFilter extends IInterface {
 
     public static class Default implements ITimeFilter {
         @Override // android.hardware.tv.tuner.ITimeFilter
-        public void setTimeStamp(long timeStamp) throws RemoteException {
-        }
+        public void setTimeStamp(long timeStamp) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ITimeFilter
-        public void clearTimeStamp() throws RemoteException {
-        }
+        public void clearTimeStamp() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ITimeFilter
         public long getTimeStamp() throws RemoteException {
@@ -46,8 +45,7 @@ public interface ITimeFilter extends IInterface {
         }
 
         @Override // android.hardware.tv.tuner.ITimeFilter
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ITimeFilter
         public int getInterfaceVersion() {
@@ -65,7 +63,7 @@ public interface ITimeFilter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITimeFilter {
+    public abstract static class Stub extends Binder implements ITimeFilter {
         static final int TRANSACTION_clearTimeStamp = 2;
         static final int TRANSACTION_close = 5;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -96,7 +94,8 @@ public interface ITimeFilter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);

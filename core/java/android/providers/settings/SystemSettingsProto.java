@@ -42,16 +42,14 @@ public final class SystemSettingsProto {
         public static final long ALERT_CACHE = 1146756268034L;
         public static final long DEFAULT_URI = 1146756268033L;
 
-        public Alarm() {
-        }
+        public Alarm() {}
     }
 
     public final class Bluetooth {
         public static final long DISCOVERABILITY = 1146756268033L;
         public static final long DISCOVERABILITY_TIMEOUT_SECS = 1146756268034L;
 
-        public Bluetooth() {
-        }
+        public Bluetooth() {}
     }
 
     public final class DevOptions {
@@ -60,32 +58,28 @@ public final class SystemSettingsProto {
         public static final long SHOW_TOUCHES = 1146756268034L;
         public static final long WINDOW_ORIENTATION_LISTENER_LOG = 1146756268035L;
 
-        public DevOptions() {
-        }
+        public DevOptions() {}
     }
 
     public final class DtmfTone {
         public static final long PLAY_WHEN_DIALING = 1146756268033L;
         public static final long TYPE_PLAYED_WHEN_DIALING = 1146756268034L;
 
-        public DtmfTone() {
-        }
+        public DtmfTone() {}
     }
 
     public final class HapticFeedback {
         public static final long ENABLED = 1146756268033L;
         public static final long INTENSITY = 1146756268034L;
 
-        public HapticFeedback() {
-        }
+        public HapticFeedback() {}
     }
 
     public final class Lockscreen {
         public static final long DISABLED = 1146756268034L;
         public static final long SOUNDS_ENABLED = 1146756268033L;
 
-        public Lockscreen() {
-        }
+        public Lockscreen() {}
     }
 
     public final class Notification {
@@ -97,24 +91,21 @@ public final class SystemSettingsProto {
         public static final long SOUND_CACHE = 1146756268034L;
         public static final long VIBRATION_INTENSITY = 1146756268036L;
 
-        public Notification() {
-        }
+        public Notification() {}
     }
 
     public final class Pointer {
         public static final long POINTER_FILL_STYLE = 1146756268033L;
         public static final long POINTER_SCALE = 1146756268035L;
 
-        public Pointer() {
-        }
+        public Pointer() {}
     }
 
     public final class Ringtone {
         public static final long CACHE = 1146756268034L;
         public static final long DEFAULT_URI = 1146756268033L;
 
-        public Ringtone() {
-        }
+        public Ringtone() {}
     }
 
     public final class Rotation {
@@ -122,8 +113,7 @@ public final class SystemSettingsProto {
         public static final long HIDE_ROTATION_LOCK_TOGGLE_FOR_ACCESSIBILITY = 1146756268035L;
         public static final long USER_ROTATION = 1146756268034L;
 
-        public Rotation() {
-        }
+        public Rotation() {}
     }
 
     public final class Screen {
@@ -135,8 +125,7 @@ public final class SystemSettingsProto {
         public static final long BRIGHTNESS_MODE = 1146756268036L;
         public static final long OFF_TIMEOUT = 1146756268033L;
 
-        public Screen() {
-        }
+        public Screen() {}
     }
 
     public final class Sip {
@@ -145,8 +134,7 @@ public final class SystemSettingsProto {
         public static final long CALL_OPTIONS = 1146756268034L;
         public static final long RECEIVE_CALLS = 1146756268033L;
 
-        public Sip() {
-        }
+        public Sip() {}
     }
 
     public final class Text {
@@ -155,8 +143,7 @@ public final class SystemSettingsProto {
         public static final long AUTO_REPLACE = 1146756268033L;
         public static final long SHOW_PASSWORD = 1146756268036L;
 
-        public Text() {
-        }
+        public Text() {}
     }
 
     public final class Touchpad {
@@ -166,8 +153,7 @@ public final class SystemSettingsProto {
         public static final long TAP_DRAGGING = 1146756268037L;
         public static final long TAP_TO_CLICK = 1146756268036L;
 
-        public Touchpad() {
-        }
+        public Touchpad() {}
     }
 
     public final class Vibrate {
@@ -179,8 +165,7 @@ public final class SystemSettingsProto {
         public static final long RING_INTENSITY = 1146756268039L;
         public static final long WHEN_RINGING = 1146756268036L;
 
-        public Vibrate() {
-        }
+        public Vibrate() {}
     }
 
     public final class Volume {
@@ -198,7 +183,6 @@ public final class SystemSettingsProto {
         public static final long SYSTEM = 1146756268034L;
         public static final long VOICE = 1146756268035L;
 
-        public Volume() {
-        }
+        public Volume() {}
     }
 }

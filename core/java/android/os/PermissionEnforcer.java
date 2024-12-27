@@ -19,7 +19,8 @@ public class PermissionEnforcer {
     }
 
     protected int checkPermission(String permission, AttributionSource source) {
-        return PermissionChecker.checkPermissionForDataDelivery(this.mContext, permission, -1, source, "");
+        return PermissionChecker.checkPermissionForDataDelivery(
+                this.mContext, permission, -1, source, "");
     }
 
     protected int checkPermission(String permission, int pid, int uid) {
@@ -46,7 +47,8 @@ public class PermissionEnforcer {
         return false;
     }
 
-    public void enforcePermission(String permission, AttributionSource source) throws SecurityException {
+    public void enforcePermission(String permission, AttributionSource source)
+            throws SecurityException {
         int result = checkPermission(permission, source);
         if (result != 0) {
             throw new SecurityException(ACCESS_DENIED + permission);
@@ -65,16 +67,19 @@ public class PermissionEnforcer {
         }
     }
 
-    public void enforcePermissionAllOf(String[] permissions, AttributionSource source) throws SecurityException {
+    public void enforcePermissionAllOf(String[] permissions, AttributionSource source)
+            throws SecurityException {
         for (String permission : permissions) {
             int result = checkPermission(permission, source);
             if (result != 0) {
-                throw new SecurityException("Access denied, requires: allOf={" + String.join(", ", permissions) + "}");
+                throw new SecurityException(
+                        "Access denied, requires: allOf={" + String.join(", ", permissions) + "}");
             }
         }
     }
 
-    public void enforcePermissionAllOf(String[] permissions, int pid, int uid) throws SecurityException {
+    public void enforcePermissionAllOf(String[] permissions, int pid, int uid)
+            throws SecurityException {
         if (anyAppOps(permissions)) {
             AttributionSource source = new AttributionSource(uid, null, null);
             enforcePermissionAllOf(permissions, source);
@@ -83,22 +88,26 @@ public class PermissionEnforcer {
         for (String permission : permissions) {
             int result = checkPermission(permission, pid, uid);
             if (result != 0) {
-                throw new SecurityException("Access denied, requires: allOf={" + String.join(", ", permissions) + "}");
+                throw new SecurityException(
+                        "Access denied, requires: allOf={" + String.join(", ", permissions) + "}");
             }
         }
     }
 
-    public void enforcePermissionAnyOf(String[] permissions, AttributionSource source) throws SecurityException {
+    public void enforcePermissionAnyOf(String[] permissions, AttributionSource source)
+            throws SecurityException {
         for (String permission : permissions) {
             int result = checkPermission(permission, source);
             if (result == 0) {
                 return;
             }
         }
-        throw new SecurityException("Access denied, requires: anyOf={" + String.join(", ", permissions) + "}");
+        throw new SecurityException(
+                "Access denied, requires: anyOf={" + String.join(", ", permissions) + "}");
     }
 
-    public void enforcePermissionAnyOf(String[] permissions, int pid, int uid) throws SecurityException {
+    public void enforcePermissionAnyOf(String[] permissions, int pid, int uid)
+            throws SecurityException {
         if (anyAppOps(permissions)) {
             AttributionSource source = new AttributionSource(uid, null, null);
             enforcePermissionAnyOf(permissions, source);
@@ -110,7 +119,8 @@ public class PermissionEnforcer {
                 return;
             }
         }
-        throw new SecurityException("Access denied, requires: anyOf={" + String.join(", ", permissions) + "}");
+        throw new SecurityException(
+                "Access denied, requires: anyOf={" + String.join(", ", permissions) + "}");
     }
 
     public static PermissionEnforcer fromContext(Context context) {

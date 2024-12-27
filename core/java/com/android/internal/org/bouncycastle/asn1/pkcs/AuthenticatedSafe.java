@@ -45,7 +45,8 @@ public class AuthenticatedSafe extends ASN1Object {
         return tmp;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         if (this.isBer) {
             return new BERSequence(this.info);

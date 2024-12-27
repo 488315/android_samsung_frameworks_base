@@ -1,6 +1,5 @@
 package android.sec.enterprise;
 
-import android.sec.enterprise.EnterpriseDeviceManager;
 import android.util.Log;
 
 /* loaded from: classes3.dex */
@@ -34,7 +33,8 @@ public class DeviceInventory {
         }
     }
 
-    public boolean storeCalling(String address, String timeStamp, String duration, String status, boolean isIncoming) {
+    public boolean storeCalling(
+            String address, String timeStamp, String duration, String status, boolean isIncoming) {
         try {
             IEDMProxy lService = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
             if (lService != null) {

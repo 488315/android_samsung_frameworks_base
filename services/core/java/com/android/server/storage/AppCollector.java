@@ -13,7 +13,9 @@ import android.os.Message;
 import android.os.UserManager;
 import android.os.storage.VolumeInfo;
 import android.util.Log;
+
 import com.android.internal.os.BackgroundThread;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,12 @@ public final class AppCollector {
         public final UserManager mUm;
         public final VolumeInfo mVolume;
 
-        public BackgroundHandler(Looper looper, VolumeInfo volumeInfo, PackageManager packageManager, UserManager userManager, StorageStatsManager storageStatsManager) {
+        public BackgroundHandler(
+                Looper looper,
+                VolumeInfo volumeInfo,
+                PackageManager packageManager,
+                UserManager userManager,
+                StorageStatsManager storageStatsManager) {
             super(looper);
             this.mVolume = volumeInfo;
             this.mPm = packageManager;
@@ -51,20 +58,30 @@ public final class AppCollector {
             int size = users.size();
             for (int i = 0; i < size; i++) {
                 UserInfo userInfo = (UserInfo) users.get(i);
-                List installedApplicationsAsUser = this.mPm.getInstalledApplicationsAsUser(512, userInfo.id);
+                List installedApplicationsAsUser =
+                        this.mPm.getInstalledApplicationsAsUser(512, userInfo.id);
                 int size2 = installedApplicationsAsUser.size();
                 for (int i2 = 0; i2 < size2; i2++) {
-                    ApplicationInfo applicationInfo = (ApplicationInfo) installedApplicationsAsUser.get(i2);
+                    ApplicationInfo applicationInfo =
+                            (ApplicationInfo) installedApplicationsAsUser.get(i2);
                     if (Objects.equals(applicationInfo.volumeUuid, this.mVolume.getFsUuid())) {
                         try {
-                            StorageStats queryStatsForPackage = this.mStorageStatsManager.queryStatsForPackage(applicationInfo.storageUuid, applicationInfo.packageName, userInfo.getUserHandle());
-                            PackageStats packageStats = new PackageStats(applicationInfo.packageName, userInfo.id);
+                            StorageStats queryStatsForPackage =
+                                    this.mStorageStatsManager.queryStatsForPackage(
+                                            applicationInfo.storageUuid,
+                                            applicationInfo.packageName,
+                                            userInfo.getUserHandle());
+                            PackageStats packageStats =
+                                    new PackageStats(applicationInfo.packageName, userInfo.id);
                             packageStats.cacheSize = queryStatsForPackage.getCacheBytes();
                             packageStats.codeSize = queryStatsForPackage.getAppBytes();
                             packageStats.dataSize = queryStatsForPackage.getDataBytes();
                             arrayList.add(packageStats);
                         } catch (PackageManager.NameNotFoundException | IOException e) {
-                            Log.e("AppCollector", "An exception occurred while fetching app size", e);
+                            Log.e(
+                                    "AppCollector",
+                                    "An exception occurred while fetching app size",
+                                    e);
                         }
                     }
                 }
@@ -74,6 +91,12 @@ public final class AppCollector {
     }
 
     public AppCollector(Context context, VolumeInfo volumeInfo) {
-        this.mBackgroundHandler = new BackgroundHandler(BackgroundThread.get().getLooper(), volumeInfo, context.getPackageManager(), (UserManager) context.getSystemService("user"), (StorageStatsManager) context.getSystemService("storagestats"));
+        this.mBackgroundHandler =
+                new BackgroundHandler(
+                        BackgroundThread.get().getLooper(),
+                        volumeInfo,
+                        context.getPackageManager(),
+                        (UserManager) context.getSystemService("user"),
+                        (StorageStatsManager) context.getSystemService("storagestats"));
     }
 }

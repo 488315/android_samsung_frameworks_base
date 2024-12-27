@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextActivityCalibration extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextActivityCalibration> CREATOR = new Parcelable.Creator<SemContextActivityCalibration>() { // from class: com.samsung.android.hardware.context.SemContextActivityCalibration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityCalibration createFromParcel(Parcel in) {
-            return new SemContextActivityCalibration(in);
-        }
+    public static final Parcelable.Creator<SemContextActivityCalibration> CREATOR =
+            new Parcelable.Creator<
+                    SemContextActivityCalibration>() { // from class:
+                                                       // com.samsung.android.hardware.context.SemContextActivityCalibration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityCalibration createFromParcel(Parcel in) {
+                    return new SemContextActivityCalibration(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityCalibration[] newArray(int size) {
-            return new SemContextActivityCalibration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityCalibration[] newArray(int size) {
+                    return new SemContextActivityCalibration[size];
+                }
+            };
     public static final int DATA_CELL_ID = 2;
     public static final int DATA_GPS = 1;
     public static final int DATA_UNKNOWN = 0;

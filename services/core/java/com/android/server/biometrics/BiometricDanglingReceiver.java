@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.server.biometrics.sensors.BiometricNotificationUtils;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,7 +28,8 @@ public final class BiometricDanglingReceiver extends BroadcastReceiver {
     }
 
     public static void launchBiometricEnrollActivity(Context context, String str) {
-        context.sendBroadcast(new Intent("android.intent.action.CLOSE_SYSTEM_DIALOGS").setFlags(268435456));
+        context.sendBroadcast(
+                new Intent("android.intent.action.CLOSE_SYSTEM_DIALOGS").setFlags(268435456));
         Intent intent = new Intent(str);
         intent.setPackage(KnoxCustomManagerService.SETTING_PKG_NAME);
         intent.setFlags(268435456);
@@ -39,17 +42,21 @@ public final class BiometricDanglingReceiver extends BroadcastReceiver {
         if ("action_fingerprint_re_enroll_launch".equals(intent.getAction())) {
             launchBiometricEnrollActivity(context, "android.settings.FINGERPRINT_ENROLL");
             Intent intent2 = BiometricNotificationUtils.DISMISS_FRR_INTENT;
-            ((NotificationManager) context.getSystemService(NotificationManager.class)).cancelAsUser("FingerprintReEnroll", 1, UserHandle.CURRENT);
+            ((NotificationManager) context.getSystemService(NotificationManager.class))
+                    .cancelAsUser("FingerprintReEnroll", 1, UserHandle.CURRENT);
         } else if ("action_fingerprint_re_enroll_dismiss".equals(intent.getAction())) {
             Intent intent3 = BiometricNotificationUtils.DISMISS_FRR_INTENT;
-            ((NotificationManager) context.getSystemService(NotificationManager.class)).cancelAsUser("FingerprintReEnroll", 1, UserHandle.CURRENT);
+            ((NotificationManager) context.getSystemService(NotificationManager.class))
+                    .cancelAsUser("FingerprintReEnroll", 1, UserHandle.CURRENT);
         } else if ("action_face_re_enroll_launch".equals(intent.getAction())) {
             launchBiometricEnrollActivity(context, "android.settings.FACE_SETTINGS");
             Intent intent4 = BiometricNotificationUtils.DISMISS_FRR_INTENT;
-            ((NotificationManager) context.getSystemService(NotificationManager.class)).cancelAsUser("FaceReEnroll", 1, UserHandle.CURRENT);
+            ((NotificationManager) context.getSystemService(NotificationManager.class))
+                    .cancelAsUser("FaceReEnroll", 1, UserHandle.CURRENT);
         } else if ("action_face_re_enroll_dismiss".equals(intent.getAction())) {
             Intent intent5 = BiometricNotificationUtils.DISMISS_FRR_INTENT;
-            ((NotificationManager) context.getSystemService(NotificationManager.class)).cancelAsUser("FaceReEnroll", 1, UserHandle.CURRENT);
+            ((NotificationManager) context.getSystemService(NotificationManager.class))
+                    .cancelAsUser("FaceReEnroll", 1, UserHandle.CURRENT);
         }
         context.unregisterReceiver(this);
     }

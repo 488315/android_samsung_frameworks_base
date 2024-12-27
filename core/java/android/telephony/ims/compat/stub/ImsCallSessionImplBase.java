@@ -12,9 +12,11 @@ import android.telephony.ims.ImsStreamMediaProfile;
 import android.telephony.ims.ImsSuppServiceNotification;
 import android.telephony.ims.RtpHeaderExtension;
 import android.telephony.ims.aidl.IImsCallSessionListener;
+
 import com.android.ims.internal.IImsCallSession;
 import com.android.ims.internal.IImsCallSessionListener;
 import com.android.ims.internal.IImsVideoCallProvider;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -24,12 +26,10 @@ public class ImsCallSessionImplBase extends IImsCallSession.Stub {
         setListener(new ImsCallSessionListenerConverter(listener));
     }
 
-    public void setListener(com.android.ims.internal.IImsCallSessionListener listener) {
-    }
+    public void setListener(com.android.ims.internal.IImsCallSessionListener listener) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void close() {
-    }
+    public void close() {}
 
     @Override // com.android.ims.internal.IImsCallSession
     public String getCallId() {
@@ -67,84 +67,64 @@ public class ImsCallSessionImplBase extends IImsCallSession.Stub {
     }
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void setMute(boolean muted) {
-    }
+    public void setMute(boolean muted) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void start(String callee, ImsCallProfile profile) {
-    }
+    public void start(String callee, ImsCallProfile profile) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void startConference(String[] participants, ImsCallProfile profile) {
-    }
+    public void startConference(String[] participants, ImsCallProfile profile) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void accept(int callType, ImsStreamMediaProfile profile) {
-    }
+    public void accept(int callType, ImsStreamMediaProfile profile) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void deflect(String deflectNumber) {
-    }
+    public void deflect(String deflectNumber) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void transfer(String number, boolean isConfirmationRequired) {
-    }
+    public void transfer(String number, boolean isConfirmationRequired) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void consultativeTransfer(IImsCallSession transferToSession) {
-    }
+    public void consultativeTransfer(IImsCallSession transferToSession) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void reject(int reason) {
-    }
+    public void reject(int reason) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void terminate(int reason) {
-    }
+    public void terminate(int reason) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void hold(ImsStreamMediaProfile profile) {
-    }
+    public void hold(ImsStreamMediaProfile profile) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void resume(ImsStreamMediaProfile profile) {
-    }
+    public void resume(ImsStreamMediaProfile profile) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void merge() {
-    }
+    public void merge() {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void update(int callType, ImsStreamMediaProfile profile) {
-    }
+    public void update(int callType, ImsStreamMediaProfile profile) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void extendToConference(String[] participants) {
-    }
+    public void extendToConference(String[] participants) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void inviteParticipants(String[] participants) {
-    }
+    public void inviteParticipants(String[] participants) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void removeParticipants(String[] participants) {
-    }
+    public void removeParticipants(String[] participants) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void sendDtmf(char c, Message result) {
-    }
+    public void sendDtmf(char c, Message result) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void startDtmf(char c) {
-    }
+    public void startDtmf(char c) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void stopDtmf() {
-    }
+    public void stopDtmf() {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void sendUssd(String ussdMessage) {
-    }
+    public void sendUssd(String ussdMessage) {}
 
     @Override // com.android.ims.internal.IImsCallSession
     public IImsVideoCallProvider getVideoCallProvider() {
@@ -157,201 +137,247 @@ public class ImsCallSessionImplBase extends IImsCallSession.Stub {
     }
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void sendRttModifyRequest(ImsCallProfile toProfile) {
-    }
+    public void sendRttModifyRequest(ImsCallProfile toProfile) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void sendRttModifyResponse(boolean status) {
-    }
+    public void sendRttModifyResponse(boolean status) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void sendRttMessage(String rttMessage) {
-    }
+    public void sendRttMessage(String rttMessage) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void cancelTransferCall() {
-    }
+    public void cancelTransferCall() {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void sendImsCallEvent(String event, Bundle extras) {
-    }
+    public void sendImsCallEvent(String event, Bundle extras) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void notifyReadyToHandleImsCallbacks() {
-    }
+    public void notifyReadyToHandleImsCallbacks() {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void sendRtpHeaderExtensions(List<RtpHeaderExtension> headerExtensions) {
-    }
+    public void sendRtpHeaderExtensions(List<RtpHeaderExtension> headerExtensions) {}
 
     @Override // com.android.ims.internal.IImsCallSession
-    public void callSessionNotifyAnbr(int mediaType, int direction, int bitsPerSecond) {
-    }
+    public void callSessionNotifyAnbr(int mediaType, int direction, int bitsPerSecond) {}
 
     private class ImsCallSessionListenerConverter extends IImsCallSessionListener.Stub {
         private final android.telephony.ims.aidl.IImsCallSessionListener mNewListener;
 
-        public ImsCallSessionListenerConverter(android.telephony.ims.aidl.IImsCallSessionListener listener) {
+        public ImsCallSessionListenerConverter(
+                android.telephony.ims.aidl.IImsCallSessionListener listener) {
             this.mNewListener = listener;
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionProgressing(IImsCallSession i, ImsStreamMediaProfile imsStreamMediaProfile) throws RemoteException {
+        public void callSessionProgressing(
+                IImsCallSession i, ImsStreamMediaProfile imsStreamMediaProfile)
+                throws RemoteException {
             this.mNewListener.callSessionProgressing(imsStreamMediaProfile);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionStarted(IImsCallSession i, ImsCallProfile imsCallProfile) throws RemoteException {
+        public void callSessionStarted(IImsCallSession i, ImsCallProfile imsCallProfile)
+                throws RemoteException {
             this.mNewListener.callSessionInitiated(imsCallProfile);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionStartFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
+        public void callSessionStartFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo)
+                throws RemoteException {
             this.mNewListener.callSessionInitiatedFailed(imsReasonInfo);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionTerminated(IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
+        public void callSessionTerminated(IImsCallSession i, ImsReasonInfo imsReasonInfo)
+                throws RemoteException {
             this.mNewListener.callSessionTerminated(imsReasonInfo);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionHeld(IImsCallSession i, ImsCallProfile imsCallProfile) throws RemoteException {
+        public void callSessionHeld(IImsCallSession i, ImsCallProfile imsCallProfile)
+                throws RemoteException {
             this.mNewListener.callSessionHeld(imsCallProfile);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionHoldFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
+        public void callSessionHoldFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo)
+                throws RemoteException {
             this.mNewListener.callSessionHoldFailed(imsReasonInfo);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionHoldReceived(IImsCallSession i, ImsCallProfile imsCallProfile) throws RemoteException {
+        public void callSessionHoldReceived(IImsCallSession i, ImsCallProfile imsCallProfile)
+                throws RemoteException {
             this.mNewListener.callSessionHoldReceived(imsCallProfile);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionResumed(IImsCallSession i, ImsCallProfile imsCallProfile) throws RemoteException {
+        public void callSessionResumed(IImsCallSession i, ImsCallProfile imsCallProfile)
+                throws RemoteException {
             this.mNewListener.callSessionResumed(imsCallProfile);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionResumeFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
+        public void callSessionResumeFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo)
+                throws RemoteException {
             this.mNewListener.callSessionResumeFailed(imsReasonInfo);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionResumeReceived(IImsCallSession i, ImsCallProfile imsCallProfile) throws RemoteException {
+        public void callSessionResumeReceived(IImsCallSession i, ImsCallProfile imsCallProfile)
+                throws RemoteException {
             this.mNewListener.callSessionResumeReceived(imsCallProfile);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionMergeStarted(IImsCallSession i, IImsCallSession newSession, ImsCallProfile profile) throws RemoteException {
+        public void callSessionMergeStarted(
+                IImsCallSession i, IImsCallSession newSession, ImsCallProfile profile)
+                throws RemoteException {
             this.mNewListener.callSessionMergeStarted(newSession, profile);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionMergeComplete(IImsCallSession iImsCallSession) throws RemoteException {
+        public void callSessionMergeComplete(IImsCallSession iImsCallSession)
+                throws RemoteException {
             this.mNewListener.callSessionMergeComplete(iImsCallSession);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionMergeFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
+        public void callSessionMergeFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo)
+                throws RemoteException {
             this.mNewListener.callSessionMergeFailed(imsReasonInfo);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionUpdated(IImsCallSession i, ImsCallProfile imsCallProfile) throws RemoteException {
+        public void callSessionUpdated(IImsCallSession i, ImsCallProfile imsCallProfile)
+                throws RemoteException {
             this.mNewListener.callSessionUpdated(imsCallProfile);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionUpdateFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
+        public void callSessionUpdateFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo)
+                throws RemoteException {
             this.mNewListener.callSessionUpdateFailed(imsReasonInfo);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionUpdateReceived(IImsCallSession i, ImsCallProfile imsCallProfile) throws RemoteException {
+        public void callSessionUpdateReceived(IImsCallSession i, ImsCallProfile imsCallProfile)
+                throws RemoteException {
             this.mNewListener.callSessionUpdateReceived(imsCallProfile);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionConferenceExtended(IImsCallSession i, IImsCallSession newSession, ImsCallProfile imsCallProfile) throws RemoteException {
+        public void callSessionConferenceExtended(
+                IImsCallSession i, IImsCallSession newSession, ImsCallProfile imsCallProfile)
+                throws RemoteException {
             this.mNewListener.callSessionConferenceExtended(newSession, imsCallProfile);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionConferenceExtendFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
+        public void callSessionConferenceExtendFailed(
+                IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
             this.mNewListener.callSessionConferenceExtendFailed(imsReasonInfo);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionConferenceExtendReceived(IImsCallSession i, IImsCallSession newSession, ImsCallProfile imsCallProfile) throws RemoteException {
+        public void callSessionConferenceExtendReceived(
+                IImsCallSession i, IImsCallSession newSession, ImsCallProfile imsCallProfile)
+                throws RemoteException {
             this.mNewListener.callSessionConferenceExtendReceived(newSession, imsCallProfile);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionInviteParticipantsRequestDelivered(IImsCallSession i) throws RemoteException {
+        public void callSessionInviteParticipantsRequestDelivered(IImsCallSession i)
+                throws RemoteException {
             this.mNewListener.callSessionInviteParticipantsRequestDelivered();
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionInviteParticipantsRequestFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
+        public void callSessionInviteParticipantsRequestFailed(
+                IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
             this.mNewListener.callSessionInviteParticipantsRequestFailed(imsReasonInfo);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionRemoveParticipantsRequestDelivered(IImsCallSession i) throws RemoteException {
+        public void callSessionRemoveParticipantsRequestDelivered(IImsCallSession i)
+                throws RemoteException {
             this.mNewListener.callSessionRemoveParticipantsRequestDelivered();
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionRemoveParticipantsRequestFailed(IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
+        public void callSessionRemoveParticipantsRequestFailed(
+                IImsCallSession i, ImsReasonInfo imsReasonInfo) throws RemoteException {
             this.mNewListener.callSessionRemoveParticipantsRequestFailed(imsReasonInfo);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionConferenceStateUpdated(IImsCallSession i, ImsConferenceState imsConferenceState) throws RemoteException {
+        public void callSessionConferenceStateUpdated(
+                IImsCallSession i, ImsConferenceState imsConferenceState) throws RemoteException {
             this.mNewListener.callSessionConferenceStateUpdated(imsConferenceState);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionUssdMessageReceived(IImsCallSession i, int mode, String message) throws RemoteException {
+        public void callSessionUssdMessageReceived(IImsCallSession i, int mode, String message)
+                throws RemoteException {
             this.mNewListener.callSessionUssdMessageReceived(mode, message);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionHandover(IImsCallSession i, int srcAccessTech, int targetAccessTech, ImsReasonInfo reasonInfo) throws RemoteException {
-            this.mNewListener.callSessionHandover(ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech), ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech), reasonInfo);
+        public void callSessionHandover(
+                IImsCallSession i,
+                int srcAccessTech,
+                int targetAccessTech,
+                ImsReasonInfo reasonInfo)
+                throws RemoteException {
+            this.mNewListener.callSessionHandover(
+                    ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech),
+                    ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech),
+                    reasonInfo);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionHandoverFailed(IImsCallSession i, int srcAccessTech, int targetAccessTech, ImsReasonInfo reasonInfo) throws RemoteException {
-            this.mNewListener.callSessionHandoverFailed(ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech), ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech), reasonInfo);
+        public void callSessionHandoverFailed(
+                IImsCallSession i,
+                int srcAccessTech,
+                int targetAccessTech,
+                ImsReasonInfo reasonInfo)
+                throws RemoteException {
+            this.mNewListener.callSessionHandoverFailed(
+                    ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech),
+                    ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech),
+                    reasonInfo);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionMayHandover(IImsCallSession i, int srcAccessTech, int targetAccessTech) throws RemoteException {
-            this.mNewListener.callSessionMayHandover(ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech), ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech));
+        public void callSessionMayHandover(
+                IImsCallSession i, int srcAccessTech, int targetAccessTech) throws RemoteException {
+            this.mNewListener.callSessionMayHandover(
+                    ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech),
+                    ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech));
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionTtyModeReceived(IImsCallSession iImsCallSession, int mode) throws RemoteException {
+        public void callSessionTtyModeReceived(IImsCallSession iImsCallSession, int mode)
+                throws RemoteException {
             this.mNewListener.callSessionTtyModeReceived(mode);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionMultipartyStateChanged(IImsCallSession i, boolean isMultiparty) throws RemoteException {
+        public void callSessionMultipartyStateChanged(IImsCallSession i, boolean isMultiparty)
+                throws RemoteException {
             this.mNewListener.callSessionMultipartyStateChanged(isMultiparty);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionSuppServiceReceived(IImsCallSession i, ImsSuppServiceNotification imsSuppServiceNotification) throws RemoteException {
+        public void callSessionSuppServiceReceived(
+                IImsCallSession i, ImsSuppServiceNotification imsSuppServiceNotification)
+                throws RemoteException {
             this.mNewListener.callSessionSuppServiceReceived(imsSuppServiceNotification);
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionRttModifyRequestReceived(IImsCallSession i, ImsCallProfile imsCallProfile) throws RemoteException {
+        public void callSessionRttModifyRequestReceived(
+                IImsCallSession i, ImsCallProfile imsCallProfile) throws RemoteException {
             this.mNewListener.callSessionRttModifyRequestReceived(imsCallProfile);
         }
 
@@ -366,7 +392,8 @@ public class ImsCallSessionImplBase extends IImsCallSession.Stub {
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionRttAudioIndicatorChanged(ImsStreamMediaProfile profile) throws RemoteException {
+        public void callSessionRttAudioIndicatorChanged(ImsStreamMediaProfile profile)
+                throws RemoteException {
             this.mNewListener.callSessionRttAudioIndicatorChanged(profile);
         }
 
@@ -386,7 +413,8 @@ public class ImsCallSessionImplBase extends IImsCallSession.Stub {
         }
 
         @Override // com.android.ims.internal.IImsCallSessionListener
-        public void callSessionSendAnbrQuery(int mediaType, int direction, int bitsPerSecond) throws RemoteException {
+        public void callSessionSendAnbrQuery(int mediaType, int direction, int bitsPerSecond)
+                throws RemoteException {
             this.mNewListener.callSessionSendAnbrQuery(mediaType, direction, bitsPerSecond);
         }
     }

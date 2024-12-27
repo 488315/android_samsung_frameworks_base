@@ -7,12 +7,12 @@ import android.graphics.RectF;
 import android.graphics.text.PositionedGlyphs;
 import android.graphics.text.TextRunShaper;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.text.Layout;
-import android.text.TextShaper;
 import android.text.style.CharacterStyle;
 import android.text.style.MetricAffectingSpan;
 import android.text.style.ReplacementSpan;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.util.ArrayList;
 
 /* loaded from: classes4.dex */
@@ -45,9 +45,12 @@ public class TextLine {
     private boolean mUseFallbackExtent = false;
     private final TextPaint mWorkPaint = new TextPaint();
     private final TextPaint mActivePaint = new TextPaint();
-    private final SpanSet<MetricAffectingSpan> mMetricAffectingSpanSpanSet = new SpanSet<>(MetricAffectingSpan.class);
-    private final SpanSet<CharacterStyle> mCharacterStyleSpanSet = new SpanSet<>(CharacterStyle.class);
-    private final SpanSet<ReplacementSpan> mReplacementSpanSpanSet = new SpanSet<>(ReplacementSpan.class);
+    private final SpanSet<MetricAffectingSpan> mMetricAffectingSpanSpanSet =
+            new SpanSet<>(MetricAffectingSpan.class);
+    private final SpanSet<CharacterStyle> mCharacterStyleSpanSet =
+            new SpanSet<>(CharacterStyle.class);
+    private final SpanSet<ReplacementSpan> mReplacementSpanSpanSet =
+            new SpanSet<>(ReplacementSpan.class);
     private final DecorationInfo mDecorationInfo = new DecorationInfo();
     private final ArrayList<DecorationInfo> mDecorations = new ArrayList<>();
 
@@ -120,7 +123,18 @@ public class TextLine {
         return null;
     }
 
-    public void set(TextPaint paint, CharSequence text, int start, int limit, int dir, Layout.Directions directions, boolean hasTabs, Layout.TabStops tabStops, int ellipsisStart, int ellipsisEnd, boolean useFallbackLineSpacing) {
+    public void set(
+            TextPaint paint,
+            CharSequence text,
+            int start,
+            int limit,
+            int dir,
+            Layout.Directions directions,
+            boolean hasTabs,
+            Layout.TabStops tabStops,
+            int ellipsisStart,
+            int ellipsisEnd,
+            boolean useFallbackLineSpacing) {
         this.mPaint = paint;
         this.mText = text;
         this.mStart = start;
@@ -157,7 +171,8 @@ public class TextLine {
                 int i = start;
                 while (i < limit) {
                     int inext = this.mReplacementSpanSpanSet.getNextTransition(i, limit);
-                    if (this.mReplacementSpanSpanSet.hasSpansIntersecting(i, inext) && (i - start >= ellipsisEnd || inext - start <= ellipsisStart)) {
+                    if (this.mReplacementSpanSpanSet.hasSpansIntersecting(i, inext)
+                            && (i - start >= ellipsisEnd || inext - start <= ellipsisStart)) {
                         chars[i - start] = 65532;
                         int e = inext - start;
                         for (int j = (i - start) + 1; j < e; j++) {
@@ -201,9 +216,11 @@ public class TextLine {
                 this.mAddedLetterSpacingInPx = (justifyWidth - width2) / (lettersCount - 1);
                 if (this.mAddedLetterSpacingInPx > 0.03d) {
                     String oldFontFeatures = this.mPaint.getFontFeatureSettings();
-                    this.mPaint.setFontFeatureSettings(oldFontFeatures + ", \"liga\" off, \"cliga\" off");
+                    this.mPaint.setFontFeatureSettings(
+                            oldFontFeatures + ", \"liga\" off, \"cliga\" off");
                     float width3 = Math.abs(measure(end, false, null, null, lineInfo));
-                    this.mAddedLetterSpacingInPx = (justifyWidth - width3) / (lineInfo.getClusterCount() - 1);
+                    this.mAddedLetterSpacingInPx =
+                            (justifyWidth - width3) / (lineInfo.getClusterCount() - 1);
                     this.mPaint.setFontFeatureSettings(oldFontFeatures);
                 }
                 this.mAddedWordSpacingInPx = 0.0f;
@@ -238,7 +255,8 @@ public class TextLine {
         return runFlag;
     }
 
-    public static int resolveRunFlagForSubSequence(int runFlag, boolean isRtlRun, int runStart, int runEnd, int spanStart, int spanEnd) {
+    public static int resolveRunFlagForSubSequence(
+            int runFlag, boolean isRtlRun, int runStart, int runEnd, int spanStart, int spanEnd) {
         if (runFlag == 0) {
             return 0;
         }
@@ -276,7 +294,8 @@ public class TextLine {
         while (runIndex < j) {
             int runStart = this.mDirections.getRunStart(runIndex);
             if (runStart <= this.mLen) {
-                int runLimit = Math.min(this.mDirections.getRunLength(runIndex) + runStart, this.mLen);
+                int runLimit =
+                        Math.min(this.mDirections.getRunLength(runIndex) + runStart, this.mLen);
                 boolean runIsRtl = this.mDirections.isRunRtl(runIndex);
                 int runFlag = calculateRunFlag(runIndex, j, this.mDir);
                 float h2 = h;
@@ -310,7 +329,11 @@ public class TextLine {
         }
     }
 
-    public float metrics(Paint.FontMetricsInt fmi, RectF drawBounds, boolean returnDrawWidth, LineInfo lineInfo) {
+    public float metrics(
+            Paint.FontMetricsInt fmi,
+            RectF drawBounds,
+            boolean returnDrawWidth,
+            LineInfo lineInfo) {
         float boundsWidth;
         if (returnDrawWidth) {
             if (drawBounds == null) {
@@ -345,7 +368,8 @@ public class TextLine {
         while (runIndex < runCount) {
             int runStart = this.mDirections.getRunStart(runIndex);
             if (runStart <= this.mLen) {
-                int runLimit = Math.min(this.mDirections.getRunLength(runIndex) + runStart, this.mLen);
+                int runLimit =
+                        Math.min(this.mDirections.getRunLength(runIndex) + runStart, this.mLen);
                 boolean runIsRtl = this.mDirections.isRunRtl(runIndex);
                 int runFlag = calculateRunFlag(runIndex, runCount, this.mDir);
                 float horizontal2 = horizontal;
@@ -356,7 +380,17 @@ public class TextLine {
                         float f = j2 + horizontal2;
                         x = j2;
                         j = j3;
-                        horizontal2 += shapeRun(consumer, segStart, j3, runIsRtl, f, (runIndex == runCount + (-1) && j3 == this.mLen) ? false : true, runFlag);
+                        horizontal2 +=
+                                shapeRun(
+                                        consumer,
+                                        segStart,
+                                        j3,
+                                        runIsRtl,
+                                        f,
+                                        (runIndex == runCount + (-1) && j3 == this.mLen)
+                                                ? false
+                                                : true,
+                                        runFlag);
                         if (j != runLimit) {
                             horizontal2 = this.mDir * nextTab(this.mDir * horizontal2);
                         }
@@ -378,7 +412,12 @@ public class TextLine {
         }
     }
 
-    public float measure(int offset, boolean trailing, Paint.FontMetricsInt fmi, RectF drawBounds, LineInfo lineInfo) {
+    public float measure(
+            int offset,
+            boolean trailing,
+            Paint.FontMetricsInt fmi,
+            RectF drawBounds,
+            LineInfo lineInfo) {
         boolean runIsRtl;
         int runLimit;
         int runStart;
@@ -387,7 +426,12 @@ public class TextLine {
         int target;
         int j;
         if (offset > this.mLen) {
-            throw new IndexOutOfBoundsException("offset(" + offset + ") should be less than line limit(" + this.mLen + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IndexOutOfBoundsException(
+                    "offset("
+                            + offset
+                            + ") should be less than line limit("
+                            + this.mLen
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         boolean z = false;
         if (lineInfo != null) {
@@ -405,7 +449,8 @@ public class TextLine {
             if (runStart2 > this.mLen) {
                 break;
             }
-            int runLimit2 = Math.min(this.mDirections.getRunLength(runIndex2) + runStart2, this.mLen);
+            int runLimit2 =
+                    Math.min(this.mDirections.getRunLength(runIndex2) + runStart2, this.mLen);
             boolean runIsRtl2 = this.mDirections.isRunRtl(runIndex2);
             int runFlag = calculateRunFlag(runIndex2, runCount2, this.mDir);
             float h2 = h;
@@ -413,7 +458,8 @@ public class TextLine {
             int j2 = this.mHasTabs ? runStart2 : runLimit2;
             while (j2 <= runLimit2) {
                 if (j2 == runLimit2 || charAt(j2) == '\t') {
-                    boolean targetIsInThisSegment = (target2 < segStart || target2 >= j2) ? z : true;
+                    boolean targetIsInThisSegment =
+                            (target2 < segStart || target2 >= j2) ? z : true;
                     boolean sameDirection = (this.mDir == -1 ? true : z) != runIsRtl2 ? z : true;
                     if (!targetIsInThisSegment || !sameDirection) {
                         int j3 = j2;
@@ -424,10 +470,25 @@ public class TextLine {
                         runIndex = runIndex2;
                         runCount = runCount2;
                         target = target2;
-                        float segmentWidth = measureRun(segStart2, j3, j3, runIsRtl, fmi, drawBounds, null, 0, h2, lineInfo, runFlag);
+                        float segmentWidth =
+                                measureRun(
+                                        segStart2,
+                                        j3,
+                                        j3,
+                                        runIsRtl,
+                                        fmi,
+                                        drawBounds,
+                                        null,
+                                        0,
+                                        h2,
+                                        lineInfo,
+                                        runFlag);
                         h2 += sameDirection ? segmentWidth : -segmentWidth;
                         if (targetIsInThisSegment) {
-                            return h2 + measureRun(segStart2, offset, j3, runIsRtl, null, null, null, 0, h2, lineInfo, runFlag);
+                            return h2
+                                    + measureRun(
+                                            segStart2, offset, j3, runIsRtl, null, null, null, 0,
+                                            h2, lineInfo, runFlag);
                         }
                         j = j3;
                         if (j != runLimit) {
@@ -444,7 +505,19 @@ public class TextLine {
                         }
                         segStart = j + 1;
                     } else {
-                        return h2 + measureRun(segStart, offset, j2, runIsRtl2, fmi, drawBounds, null, 0, h2, lineInfo, runFlag);
+                        return h2
+                                + measureRun(
+                                        segStart,
+                                        offset,
+                                        j2,
+                                        runIsRtl2,
+                                        fmi,
+                                        drawBounds,
+                                        null,
+                                        0,
+                                        h2,
+                                        lineInfo,
+                                        runFlag);
                     }
                 } else {
                     j = j2;
@@ -483,7 +556,11 @@ public class TextLine {
         float rightX;
         if (bounds != null) {
             if (bounds.length < this.mLen * 2) {
-                throw new IndexOutOfBoundsException("bounds doesn't have enough space to receive the result, needed: " + (this.mLen * 2) + " had: " + bounds.length);
+                throw new IndexOutOfBoundsException(
+                        "bounds doesn't have enough space to receive the result, needed: "
+                                + (this.mLen * 2)
+                                + " had: "
+                                + bounds.length);
             }
             if (advances != null) {
                 advances2 = advances;
@@ -491,7 +568,11 @@ public class TextLine {
                 advances2 = new float[this.mLen];
             }
             if (advances2.length < this.mLen) {
-                throw new IndexOutOfBoundsException("advance doesn't have enough space to receive the result, needed: " + this.mLen + " had: " + advances2.length);
+                throw new IndexOutOfBoundsException(
+                        "advance doesn't have enough space to receive the result, needed: "
+                                + this.mLen
+                                + " had: "
+                                + advances2.length);
             }
             float h2 = 0.0f;
             int runCount = this.mDirections.getRunCount();
@@ -499,7 +580,10 @@ public class TextLine {
             while (runIndex2 < runCount) {
                 int runStart2 = this.mDirections.getRunStart(runIndex2);
                 if (runStart2 <= this.mLen) {
-                    int runLimit2 = Math.min(this.mDirections.getRunLength(runIndex2) + runStart2, this.mLen);
+                    int runLimit2 =
+                            Math.min(
+                                    this.mDirections.getRunLength(runIndex2) + runStart2,
+                                    this.mLen);
                     boolean runIsRtl2 = this.mDirections.isRunRtl(runIndex2);
                     int runFlag = calculateRunFlag(runIndex2, runCount, this.mDir);
                     float h3 = h2;
@@ -513,7 +597,10 @@ public class TextLine {
                             int runLimit3 = runLimit2;
                             runStart = runStart2;
                             runIndex = runIndex2;
-                            float segmentWidth = measureRun(segStart, j2, j2, runIsRtl2, null, null, advances2, segStart, 0.0f, null, runFlag);
+                            float segmentWidth =
+                                    measureRun(
+                                            segStart, j2, j2, runIsRtl2, null, null, advances2,
+                                            segStart, 0.0f, null, runFlag);
                             float oldh = h3;
                             h3 += sameDirection ? segmentWidth : -segmentWidth;
                             float currh = sameDirection ? oldh : h3;
@@ -597,7 +684,8 @@ public class TextLine {
             if (runStart2 > this.mLen) {
                 break;
             }
-            int runLimit2 = Math.min(this.mDirections.getRunLength(runIndex2) + runStart2, this.mLen);
+            int runLimit2 =
+                    Math.min(this.mDirections.getRunLength(runIndex2) + runStart2, this.mLen);
             boolean runIsRtl2 = this.mDirections.isRunRtl(runIndex2);
             int runFlag = calculateRunFlag(runIndex2, runCount2, this.mDir);
             float horizontal2 = horizontal;
@@ -615,7 +703,19 @@ public class TextLine {
                     runStart = runStart2;
                     runIndex = runIndex2;
                     runCount = runCount2;
-                    float width = measureRun(segStart, segStart2, segStart2, runIsRtl2, fmi, null, measurement, segStart3, 0.0f, null, runFlag);
+                    float width =
+                            measureRun(
+                                    segStart,
+                                    segStart2,
+                                    segStart2,
+                                    runIsRtl2,
+                                    fmi,
+                                    null,
+                                    measurement,
+                                    segStart3,
+                                    0.0f,
+                                    null,
+                                    runFlag);
                     horizontal2 += sameDirection ? width : -width;
                     float currHorizontal = sameDirection ? oldHorizontal : horizontal2;
                     int segLimit = Math.min(j, this.mLen);
@@ -675,83 +775,162 @@ public class TextLine {
         return measurement;
     }
 
-    private float drawRun(Canvas c, int start, int limit, boolean runIsRtl, float x, int top, int y, int bottom, boolean needWidth, int runFlag) {
+    private float drawRun(
+            Canvas c,
+            int start,
+            int limit,
+            boolean runIsRtl,
+            float x,
+            int top,
+            int y,
+            int bottom,
+            boolean needWidth,
+            int runFlag) {
         if ((this.mDir == 1) == runIsRtl) {
-            float w = -measureRun(start, limit, limit, runIsRtl, null, null, null, 0, 0.0f, null, runFlag);
-            handleRun(start, limit, limit, runIsRtl, c, null, x + w, top, y, bottom, null, null, false, null, 0, null, runFlag);
+            float w =
+                    -measureRun(
+                            start, limit, limit, runIsRtl, null, null, null, 0, 0.0f, null,
+                            runFlag);
+            handleRun(
+                    start, limit, limit, runIsRtl, c, null, x + w, top, y, bottom, null, null,
+                    false, null, 0, null, runFlag);
             return w;
         }
-        return handleRun(start, limit, limit, runIsRtl, c, null, x, top, y, bottom, null, null, needWidth, null, 0, null, runFlag);
+        return handleRun(
+                start, limit, limit, runIsRtl, c, null, x, top, y, bottom, null, null, needWidth,
+                null, 0, null, runFlag);
     }
 
-    private float measureRun(int start, int offset, int limit, boolean runIsRtl, Paint.FontMetricsInt fmi, RectF drawBounds, float[] advances, int advancesIndex, float x, LineInfo lineInfo, int runFlag) {
+    private float measureRun(
+            int start,
+            int offset,
+            int limit,
+            boolean runIsRtl,
+            Paint.FontMetricsInt fmi,
+            RectF drawBounds,
+            float[] advances,
+            int advancesIndex,
+            float x,
+            LineInfo lineInfo,
+            int runFlag) {
         if (drawBounds != null) {
             if ((this.mDir == 1) == runIsRtl) {
-                float w = -measureRun(start, offset, limit, runIsRtl, null, null, null, 0, 0.0f, null, runFlag);
-                return handleRun(start, offset, limit, runIsRtl, null, null, x + w, 0, 0, 0, fmi, drawBounds, true, advances, advancesIndex, lineInfo, runFlag);
+                float w =
+                        -measureRun(
+                                start, offset, limit, runIsRtl, null, null, null, 0, 0.0f, null,
+                                runFlag);
+                return handleRun(
+                        start,
+                        offset,
+                        limit,
+                        runIsRtl,
+                        null,
+                        null,
+                        x + w,
+                        0,
+                        0,
+                        0,
+                        fmi,
+                        drawBounds,
+                        true,
+                        advances,
+                        advancesIndex,
+                        lineInfo,
+                        runFlag);
             }
         }
-        return handleRun(start, offset, limit, runIsRtl, null, null, x, 0, 0, 0, fmi, drawBounds, true, advances, advancesIndex, lineInfo, runFlag);
+        return handleRun(
+                start,
+                offset,
+                limit,
+                runIsRtl,
+                null,
+                null,
+                x,
+                0,
+                0,
+                0,
+                fmi,
+                drawBounds,
+                true,
+                advances,
+                advancesIndex,
+                lineInfo,
+                runFlag);
     }
 
-    private float shapeRun(TextShaper.GlyphsConsumer consumer, int start, int limit, boolean runIsRtl, float x, boolean needWidth, int runFlag) {
+    private float shapeRun(
+            TextShaper.GlyphsConsumer consumer,
+            int start,
+            int limit,
+            boolean runIsRtl,
+            float x,
+            boolean needWidth,
+            int runFlag) {
         if ((this.mDir == 1) == runIsRtl) {
-            float w = -measureRun(start, limit, limit, runIsRtl, null, null, null, 0, 0.0f, null, runFlag);
-            handleRun(start, limit, limit, runIsRtl, null, consumer, x + w, 0, 0, 0, null, null, false, null, 0, null, runFlag);
+            float w =
+                    -measureRun(
+                            start, limit, limit, runIsRtl, null, null, null, 0, 0.0f, null,
+                            runFlag);
+            handleRun(
+                    start, limit, limit, runIsRtl, null, consumer, x + w, 0, 0, 0, null, null,
+                    false, null, 0, null, runFlag);
             return w;
         }
-        return handleRun(start, limit, limit, runIsRtl, null, consumer, x, 0, 0, 0, null, null, needWidth, null, 0, null, runFlag);
+        return handleRun(
+                start, limit, limit, runIsRtl, null, consumer, x, 0, 0, 0, null, null, needWidth,
+                null, 0, null, runFlag);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:53:0x0186, code lost:
-    
-        r8 = r6;
-        r1 = -1;
-     */
+
+       r8 = r6;
+       r1 = -1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:54:0x018c, code lost:
-    
-        if (r8 != (-1)) goto L115;
-     */
+
+       if (r8 != (-1)) goto L115;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:55:0x018e, code lost:
-    
-        if (r0 == false) goto L114;
-     */
+
+       if (r0 == false) goto L114;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:56:0x0190, code lost:
-    
-        r1 = r27.mLen + 1;
-     */
+
+       r1 = r27.mLen + 1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:57:0x0194, code lost:
-    
-        r6 = r1;
-     */
+
+       r6 = r1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:?, code lost:
-    
-        return r6;
-     */
+
+       return r6;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:59:0x0196, code lost:
-    
-        if (r8 > r11) goto L120;
-     */
+
+       if (r8 > r11) goto L120;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:60:0x0198, code lost:
-    
-        if (r0 == false) goto L118;
-     */
+
+       if (r0 == false) goto L118;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:61:0x019a, code lost:
-    
-        r1 = r11;
-     */
+
+       r1 = r11;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:62:0x019d, code lost:
-    
-        r6 = r1;
-     */
+
+       r6 = r1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:63:?, code lost:
-    
-        return r6;
-     */
+
+       return r6;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:64:0x019c, code lost:
-    
-        r1 = 0;
-     */
+
+       r1 = 0;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -761,7 +940,9 @@ public class TextLine {
             Method dump skipped, instructions count: 417
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.TextLine.getOffsetToLeftRightOf(int, boolean):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.text.TextLine.getOffsetToLeftRightOf(int,"
+                    + " boolean):int");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:43:0x009f  */
@@ -776,7 +957,9 @@ public class TextLine {
             Method dump skipped, instructions count: 237
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.TextLine.getOffsetBeforeAfter(int, int, int, boolean, int, boolean):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.text.TextLine.getOffsetBeforeAfter(int, int, int,"
+                    + " boolean, int, boolean):int");
     }
 
     private static void expandMetricsFromPaint(Paint.FontMetricsInt fmi, TextPaint wp) {
@@ -786,10 +969,18 @@ public class TextLine {
         int previousBottom = fmi.bottom;
         int previousLeading = fmi.leading;
         wp.getFontMetricsInt(fmi);
-        updateMetrics(fmi, previousTop, previousAscent, previousDescent, previousBottom, previousLeading);
+        updateMetrics(
+                fmi, previousTop, previousAscent, previousDescent, previousBottom, previousLeading);
     }
 
-    private void expandMetricsFromPaint(TextPaint wp, int start, int end, int contextStart, int contextEnd, boolean runIsRtl, Paint.FontMetricsInt fmi) {
+    private void expandMetricsFromPaint(
+            TextPaint wp,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean runIsRtl,
+            Paint.FontMetricsInt fmi) {
         int previousTop = fmi.top;
         int previousAscent = fmi.ascent;
         int previousDescent = fmi.descent;
@@ -798,16 +989,31 @@ public class TextLine {
         int count = end - start;
         int contextCount = contextEnd - contextStart;
         if (this.mCharsValid) {
-            wp.getFontMetricsInt(this.mChars, start, count, contextStart, contextCount, runIsRtl, fmi);
+            wp.getFontMetricsInt(
+                    this.mChars, start, count, contextStart, contextCount, runIsRtl, fmi);
         } else if (this.mComputed == null) {
-            wp.getFontMetricsInt(this.mText, this.mStart + start, count, this.mStart + contextStart, contextCount, runIsRtl, fmi);
+            wp.getFontMetricsInt(
+                    this.mText,
+                    this.mStart + start,
+                    count,
+                    this.mStart + contextStart,
+                    contextCount,
+                    runIsRtl,
+                    fmi);
         } else {
             this.mComputed.getFontMetricsInt(this.mStart + start, this.mStart + end, fmi);
         }
-        updateMetrics(fmi, previousTop, previousAscent, previousDescent, previousBottom, previousLeading);
+        updateMetrics(
+                fmi, previousTop, previousAscent, previousDescent, previousBottom, previousLeading);
     }
 
-    static void updateMetrics(Paint.FontMetricsInt fmi, int previousTop, int previousAscent, int previousDescent, int previousBottom, int previousLeading) {
+    static void updateMetrics(
+            Paint.FontMetricsInt fmi,
+            int previousTop,
+            int previousAscent,
+            int previousDescent,
+            int previousBottom,
+            int previousLeading) {
         fmi.top = Math.min(fmi.top, previousTop);
         fmi.ascent = Math.min(fmi.ascent, previousAscent);
         fmi.descent = Math.max(fmi.descent, previousDescent);
@@ -815,7 +1021,15 @@ public class TextLine {
         fmi.leading = Math.max(fmi.leading, previousLeading);
     }
 
-    private static void drawStroke(TextPaint wp, Canvas c, int color, float position, float thickness, float xleft, float xright, float baseline) {
+    private static void drawStroke(
+            TextPaint wp,
+            Canvas c,
+            int color,
+            float position,
+            float thickness,
+            float xleft,
+            float xright,
+            float baseline) {
         float strokeTop = baseline + wp.baselineShift + position;
         int previousColor = wp.getColor();
         Paint.Style previousStyle = wp.getStyle();
@@ -829,7 +1043,18 @@ public class TextLine {
         wp.setAntiAlias(previousAntiAlias);
     }
 
-    private float getRunAdvance(TextPaint wp, int start, int end, int contextStart, int contextEnd, boolean runIsRtl, int offset, float[] advances, int advancesIndex, RectF drawingBounds, LineInfo lineInfo) {
+    private float getRunAdvance(
+            TextPaint wp,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean runIsRtl,
+            int offset,
+            float[] advances,
+            int advancesIndex,
+            RectF drawingBounds,
+            LineInfo lineInfo) {
         if (lineInfo == null) {
             this.mRunInfo = null;
         } else {
@@ -839,17 +1064,43 @@ public class TextLine {
             this.mRunInfo.setClusterCount(0);
         }
         if (this.mCharsValid) {
-            float r = wp.getRunCharacterAdvance(this.mChars, start, end, contextStart, contextEnd, runIsRtl, offset, advances, advancesIndex, drawingBounds, this.mRunInfo);
+            float r =
+                    wp.getRunCharacterAdvance(
+                            this.mChars,
+                            start,
+                            end,
+                            contextStart,
+                            contextEnd,
+                            runIsRtl,
+                            offset,
+                            advances,
+                            advancesIndex,
+                            drawingBounds,
+                            this.mRunInfo);
             if (lineInfo != null) {
-                lineInfo.setClusterCount(lineInfo.getClusterCount() + this.mRunInfo.getClusterCount());
+                lineInfo.setClusterCount(
+                        lineInfo.getClusterCount() + this.mRunInfo.getClusterCount());
             }
             return r;
         }
         int delta = this.mStart;
         if (this.mComputed == null || advances != null || lineInfo != null) {
-            float r2 = wp.getRunCharacterAdvance(this.mText, delta + start, delta + end, delta + contextStart, delta + contextEnd, runIsRtl, delta + offset, advances, advancesIndex, drawingBounds, this.mRunInfo);
+            float r2 =
+                    wp.getRunCharacterAdvance(
+                            this.mText,
+                            delta + start,
+                            delta + end,
+                            delta + contextStart,
+                            delta + contextEnd,
+                            runIsRtl,
+                            delta + offset,
+                            advances,
+                            advancesIndex,
+                            drawingBounds,
+                            this.mRunInfo);
             if (lineInfo != null) {
-                lineInfo.setClusterCount(lineInfo.getClusterCount() + this.mRunInfo.getClusterCount());
+                lineInfo.setClusterCount(
+                        lineInfo.getClusterCount() + this.mRunInfo.getClusterCount());
             }
             return r2;
         }
@@ -863,7 +1114,28 @@ public class TextLine {
         return this.mComputed.getWidth(start + delta, end + delta);
     }
 
-    private float handleText(TextPaint wp, int start, int end, int contextStart, int contextEnd, boolean runIsRtl, Canvas c, TextShaper.GlyphsConsumer consumer, float x, int top, int y, int bottom, Paint.FontMetricsInt fmi, RectF drawBounds, boolean needWidth, int offset, ArrayList<DecorationInfo> decorations, float[] advances, int advancesIndex, LineInfo lineInfo, int runFlag) {
+    private float handleText(
+            TextPaint wp,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean runIsRtl,
+            Canvas c,
+            TextShaper.GlyphsConsumer consumer,
+            float x,
+            int top,
+            int y,
+            int bottom,
+            Paint.FontMetricsInt fmi,
+            RectF drawBounds,
+            boolean needWidth,
+            int offset,
+            ArrayList<DecorationInfo> decorations,
+            float[] advances,
+            int advancesIndex,
+            LineInfo lineInfo,
+            int runFlag) {
         Paint.FontMetricsInt fmi2;
         int numDecorations;
         Paint.FontMetricsInt fmi3;
@@ -903,13 +1175,27 @@ public class TextLine {
             wp.setFlags(wp.getFlags() & (-16385));
         }
         int numDecorations2 = decorations == null ? 0 : decorations.size();
-        if (needWidth || ((c != null || consumer != null) && (wp.bgColor != 0 || numDecorations2 != 0 || runIsRtl))) {
+        if (needWidth
+                || ((c != null || consumer != null)
+                        && (wp.bgColor != 0 || numDecorations2 != 0 || runIsRtl))) {
             if (drawBounds != null && this.mTmpRectForPaintAPI == null) {
                 this.mTmpRectForPaintAPI = new RectF();
             }
             numDecorations = numDecorations2;
             fmi3 = fmi2;
-            totalWidth3 = getRunAdvance(wp, start, end, contextStart, contextEnd, runIsRtl, offset, advances, advancesIndex, drawBounds == null ? null : this.mTmpRectForPaintAPI, lineInfo);
+            totalWidth3 =
+                    getRunAdvance(
+                            wp,
+                            start,
+                            end,
+                            contextStart,
+                            contextEnd,
+                            runIsRtl,
+                            offset,
+                            advances,
+                            advancesIndex,
+                            drawBounds == null ? null : this.mTmpRectForPaintAPI,
+                            lineInfo);
             if (drawBounds != null) {
                 if (runIsRtl) {
                     this.mTmpRectForPaintAPI.offset(x - totalWidth3, 0.0f);
@@ -954,7 +1240,16 @@ public class TextLine {
                 textPaint.setStyle(previousStyle);
                 textPaint.setColor(previousColor);
             }
-            drawTextRun(c, wp, start, end, contextStart, contextEnd, runIsRtl, leftX, y + textPaint.baselineShift);
+            drawTextRun(
+                    c,
+                    wp,
+                    start,
+                    end,
+                    contextStart,
+                    contextEnd,
+                    runIsRtl,
+                    leftX,
+                    y + textPaint.baselineShift);
             if (numDecorations != 0) {
                 int i2 = 0;
                 while (true) {
@@ -968,8 +1263,32 @@ public class TextLine {
                     int i3 = i2;
                     float totalWidth4 = totalWidth;
                     int lastIndex2 = lastIndex;
-                    float decorationStartAdvance = getRunAdvance(wp, start, end, contextStart, contextEnd, runIsRtl, decorationStart, null, 0, null, null);
-                    float decorationEndAdvance = getRunAdvance(wp, start, end, contextStart, contextEnd, runIsRtl, decorationEnd, null, 0, null, null);
+                    float decorationStartAdvance =
+                            getRunAdvance(
+                                    wp,
+                                    start,
+                                    end,
+                                    contextStart,
+                                    contextEnd,
+                                    runIsRtl,
+                                    decorationStart,
+                                    null,
+                                    0,
+                                    null,
+                                    null);
+                    float decorationEndAdvance =
+                            getRunAdvance(
+                                    wp,
+                                    start,
+                                    end,
+                                    contextStart,
+                                    contextEnd,
+                                    runIsRtl,
+                                    decorationEnd,
+                                    null,
+                                    0,
+                                    null,
+                                    null);
                     if (runIsRtl) {
                         float decorationXLeft2 = rightX - decorationEndAdvance;
                         decorationXLeft = decorationXLeft2;
@@ -981,7 +1300,15 @@ public class TextLine {
                     }
                     if (info.underlineColor != 0) {
                         i = y;
-                        drawStroke(wp, c, info.underlineColor, wp.getUnderlinePosition(), info.underlineThickness, decorationXLeft, decorationXRight, y);
+                        drawStroke(
+                                wp,
+                                c,
+                                info.underlineColor,
+                                wp.getUnderlinePosition(),
+                                info.underlineThickness,
+                                decorationXLeft,
+                                decorationXRight,
+                                y);
                     } else {
                         i = y;
                     }
@@ -990,11 +1317,27 @@ public class TextLine {
                     } else {
                         float thickness = Math.max(wp.getUnderlineThickness(), 1.0f);
                         f = 1.0f;
-                        drawStroke(wp, c, wp.getColor(), wp.getUnderlinePosition(), thickness, decorationXLeft, decorationXRight, i);
+                        drawStroke(
+                                wp,
+                                c,
+                                wp.getColor(),
+                                wp.getUnderlinePosition(),
+                                thickness,
+                                decorationXLeft,
+                                decorationXRight,
+                                i);
                     }
                     if (info.isStrikeThruText) {
                         float thickness2 = Math.max(wp.getStrikeThruThickness(), f);
-                        drawStroke(wp, c, wp.getColor(), wp.getStrikeThruPosition(), thickness2, decorationXLeft, decorationXRight, i);
+                        drawStroke(
+                                wp,
+                                c,
+                                wp.getColor(),
+                                wp.getStrikeThruPosition(),
+                                thickness2,
+                                decorationXLeft,
+                                decorationXRight,
+                                i);
                     }
                     i2 = i3 + 1;
                     numDecorations = numDecorations3;
@@ -1011,7 +1354,19 @@ public class TextLine {
         return runIsRtl ? -totalWidth2 : totalWidth2;
     }
 
-    private float handleReplacement(ReplacementSpan replacement, TextPaint wp, int start, int limit, boolean runIsRtl, Canvas c, float x, int top, int y, int bottom, Paint.FontMetricsInt fmi, boolean needWidth) {
+    private float handleReplacement(
+            ReplacementSpan replacement,
+            TextPaint wp,
+            int start,
+            int limit,
+            boolean runIsRtl,
+            Canvas c,
+            float x,
+            int top,
+            int y,
+            int bottom,
+            Paint.FontMetricsInt fmi,
+            boolean needWidth) {
         int previousTop;
         int previousAscent;
         int previousDescent;
@@ -1043,7 +1398,13 @@ public class TextLine {
             }
             ret = replacement.getSize(wp, this.mText, textStart, textLimit, fmi);
             if (needUpdateMetrics) {
-                updateMetrics(fmi, previousTop, previousAscent, previousDescent, previousBottom, previousLeading);
+                updateMetrics(
+                        fmi,
+                        previousTop,
+                        previousAscent,
+                        previousDescent,
+                        previousBottom,
+                        previousLeading);
             }
         }
         float ret2 = ret;
@@ -1119,33 +1480,102 @@ public class TextLine {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private float handleRun(int r41, int r42, int r43, boolean r44, android.graphics.Canvas r45, android.text.TextShaper.GlyphsConsumer r46, float r47, int r48, int r49, int r50, android.graphics.Paint.FontMetricsInt r51, android.graphics.RectF r52, boolean r53, float[] r54, int r55, android.text.TextLine.LineInfo r56, int r57) {
+    private float handleRun(
+            int r41,
+            int r42,
+            int r43,
+            boolean r44,
+            android.graphics.Canvas r45,
+            android.text.TextShaper.GlyphsConsumer r46,
+            float r47,
+            int r48,
+            int r49,
+            int r50,
+            android.graphics.Paint.FontMetricsInt r51,
+            android.graphics.RectF r52,
+            boolean r53,
+            float[] r54,
+            int r55,
+            android.text.TextLine.LineInfo r56,
+            int r57) {
         /*
             Method dump skipped, instructions count: 990
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.TextLine.handleRun(int, int, int, boolean, android.graphics.Canvas, android.text.TextShaper$GlyphsConsumer, float, int, int, int, android.graphics.Paint$FontMetricsInt, android.graphics.RectF, boolean, float[], int, android.text.TextLine$LineInfo, int):float");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.text.TextLine.handleRun(int, int, int, boolean,"
+                    + " android.graphics.Canvas, android.text.TextShaper$GlyphsConsumer, float,"
+                    + " int, int, int, android.graphics.Paint$FontMetricsInt,"
+                    + " android.graphics.RectF, boolean, float[], int,"
+                    + " android.text.TextLine$LineInfo, int):float");
     }
 
-    private void drawTextRun(Canvas c, TextPaint wp, int start, int end, int contextStart, int contextEnd, boolean runIsRtl, float x, int y) {
+    private void drawTextRun(
+            Canvas c,
+            TextPaint wp,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean runIsRtl,
+            float x,
+            int y) {
         if (this.mCharsValid) {
             int count = end - start;
             int contextCount = contextEnd - contextStart;
-            c.drawTextRun(this.mChars, start, count, contextStart, contextCount, x, y, runIsRtl, wp);
+            c.drawTextRun(
+                    this.mChars, start, count, contextStart, contextCount, x, y, runIsRtl, wp);
         } else {
             int delta = this.mStart;
-            c.drawTextRun(this.mText, delta + start, delta + end, delta + contextStart, delta + contextEnd, x, y, runIsRtl, wp);
+            c.drawTextRun(
+                    this.mText,
+                    delta + start,
+                    delta + end,
+                    delta + contextStart,
+                    delta + contextEnd,
+                    x,
+                    y,
+                    runIsRtl,
+                    wp);
         }
     }
 
-    private void shapeTextRun(TextShaper.GlyphsConsumer consumer, TextPaint paint, int start, int end, int contextStart, int contextEnd, boolean runIsRtl, float x) {
+    private void shapeTextRun(
+            TextShaper.GlyphsConsumer consumer,
+            TextPaint paint,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean runIsRtl,
+            float x) {
         PositionedGlyphs glyphs;
         int count = end - start;
         int contextCount = contextEnd - contextStart;
         if (!this.mCharsValid) {
-            glyphs = TextRunShaper.shapeTextRun(this.mText, this.mStart + start, count, this.mStart + contextStart, contextCount, x, 0.0f, runIsRtl, paint);
+            glyphs =
+                    TextRunShaper.shapeTextRun(
+                            this.mText,
+                            this.mStart + start,
+                            count,
+                            this.mStart + contextStart,
+                            contextCount,
+                            x,
+                            0.0f,
+                            runIsRtl,
+                            paint);
         } else {
-            glyphs = TextRunShaper.shapeTextRun(this.mChars, start, count, contextStart, contextCount, x, 0.0f, runIsRtl, paint);
+            glyphs =
+                    TextRunShaper.shapeTextRun(
+                            this.mChars,
+                            start,
+                            count,
+                            contextStart,
+                            contextCount,
+                            x,
+                            0.0f,
+                            runIsRtl,
+                            paint);
         }
         consumer.accept(start, count, glyphs, paint);
     }
@@ -1173,10 +1603,50 @@ public class TextLine {
     }
 
     public static boolean isLineEndSpace(char ch) {
-        return ch == ' ' || ch == '\t' || ch == 5760 || (8192 <= ch && ch <= 8202 && ch != 8199) || ch == 8287 || ch == 12288;
+        return ch == ' '
+                || ch == '\t'
+                || ch == 5760
+                || (8192 <= ch && ch <= 8202 && ch != 8199)
+                || ch == 8287
+                || ch == 12288;
     }
 
     private static boolean equalAttributes(TextPaint lp, TextPaint rp) {
-        return lp.getColorFilter() == rp.getColorFilter() && lp.getMaskFilter() == rp.getMaskFilter() && lp.getShader() == rp.getShader() && lp.getTypeface() == rp.getTypeface() && lp.getXfermode() == rp.getXfermode() && lp.getTextLocales().equals(rp.getTextLocales()) && TextUtils.equals(lp.getFontFeatureSettings(), rp.getFontFeatureSettings()) && TextUtils.equals(lp.getFontVariationSettings(), rp.getFontVariationSettings()) && lp.getShadowLayerRadius() == rp.getShadowLayerRadius() && lp.getShadowLayerDx() == rp.getShadowLayerDx() && lp.getShadowLayerDy() == rp.getShadowLayerDy() && lp.getShadowLayerColor() == rp.getShadowLayerColor() && lp.getFlags() == rp.getFlags() && lp.getHinting() == rp.getHinting() && lp.getStyle() == rp.getStyle() && lp.getColor() == rp.getColor() && lp.getStrokeWidth() == rp.getStrokeWidth() && lp.getStrokeMiter() == rp.getStrokeMiter() && lp.getStrokeCap() == rp.getStrokeCap() && lp.getStrokeJoin() == rp.getStrokeJoin() && lp.getTextAlign() == rp.getTextAlign() && lp.isElegantTextHeight() == rp.isElegantTextHeight() && lp.getTextSize() == rp.getTextSize() && lp.getTextScaleX() == rp.getTextScaleX() && lp.getTextSkewX() == rp.getTextSkewX() && lp.getLetterSpacing() == rp.getLetterSpacing() && lp.getWordSpacing() == rp.getWordSpacing() && lp.getStartHyphenEdit() == rp.getStartHyphenEdit() && lp.getEndHyphenEdit() == rp.getEndHyphenEdit() && lp.bgColor == rp.bgColor && lp.baselineShift == rp.baselineShift && lp.linkColor == rp.linkColor && lp.drawableState == rp.drawableState && lp.density == rp.density && lp.underlineColor == rp.underlineColor && lp.underlineThickness == rp.underlineThickness;
+        return lp.getColorFilter() == rp.getColorFilter()
+                && lp.getMaskFilter() == rp.getMaskFilter()
+                && lp.getShader() == rp.getShader()
+                && lp.getTypeface() == rp.getTypeface()
+                && lp.getXfermode() == rp.getXfermode()
+                && lp.getTextLocales().equals(rp.getTextLocales())
+                && TextUtils.equals(lp.getFontFeatureSettings(), rp.getFontFeatureSettings())
+                && TextUtils.equals(lp.getFontVariationSettings(), rp.getFontVariationSettings())
+                && lp.getShadowLayerRadius() == rp.getShadowLayerRadius()
+                && lp.getShadowLayerDx() == rp.getShadowLayerDx()
+                && lp.getShadowLayerDy() == rp.getShadowLayerDy()
+                && lp.getShadowLayerColor() == rp.getShadowLayerColor()
+                && lp.getFlags() == rp.getFlags()
+                && lp.getHinting() == rp.getHinting()
+                && lp.getStyle() == rp.getStyle()
+                && lp.getColor() == rp.getColor()
+                && lp.getStrokeWidth() == rp.getStrokeWidth()
+                && lp.getStrokeMiter() == rp.getStrokeMiter()
+                && lp.getStrokeCap() == rp.getStrokeCap()
+                && lp.getStrokeJoin() == rp.getStrokeJoin()
+                && lp.getTextAlign() == rp.getTextAlign()
+                && lp.isElegantTextHeight() == rp.isElegantTextHeight()
+                && lp.getTextSize() == rp.getTextSize()
+                && lp.getTextScaleX() == rp.getTextScaleX()
+                && lp.getTextSkewX() == rp.getTextSkewX()
+                && lp.getLetterSpacing() == rp.getLetterSpacing()
+                && lp.getWordSpacing() == rp.getWordSpacing()
+                && lp.getStartHyphenEdit() == rp.getStartHyphenEdit()
+                && lp.getEndHyphenEdit() == rp.getEndHyphenEdit()
+                && lp.bgColor == rp.bgColor
+                && lp.baselineShift == rp.baselineShift
+                && lp.linkColor == rp.linkColor
+                && lp.drawableState == rp.drawableState
+                && lp.density == rp.density
+                && lp.underlineColor == rp.underlineColor
+                && lp.underlineThickness == rp.underlineThickness;
     }
 }

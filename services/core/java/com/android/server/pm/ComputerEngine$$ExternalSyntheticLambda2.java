@@ -1,6 +1,5 @@
 package com.android.server.pm;
 
-import com.android.server.pm.ComputerEngine;
 import java.util.function.Function;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,12 +20,14 @@ public final /* synthetic */ class ComputerEngine$$ExternalSyntheticLambda2 impl
         switch (i) {
             case 0:
                 ComputerEngine computerEngine = (ComputerEngine) obj2;
-                ComputerEngine$$ExternalSyntheticLambda1 computerEngine$$ExternalSyntheticLambda1 = ComputerEngine.sProviderInitOrderSorter;
+                ComputerEngine$$ExternalSyntheticLambda1 computerEngine$$ExternalSyntheticLambda1 =
+                        ComputerEngine.sProviderInitOrderSorter;
                 computerEngine.getClass();
                 return computerEngine.getPackagesForUid(((Integer) obj).intValue());
             case 1:
                 ComputerEngine computerEngine2 = (ComputerEngine) obj2;
-                ComputerEngine$$ExternalSyntheticLambda1 computerEngine$$ExternalSyntheticLambda12 = ComputerEngine.sProviderInitOrderSorter;
+                ComputerEngine$$ExternalSyntheticLambda1 computerEngine$$ExternalSyntheticLambda12 =
+                        ComputerEngine.sProviderInitOrderSorter;
                 computerEngine2.getClass();
                 return computerEngine2.getPackagesForUid(((Integer) obj).intValue());
             default:

@@ -2,55 +2,57 @@ package android.hardware.camera2;
 
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.util.concurrent.Executor;
 
 /* loaded from: classes2.dex */
 public abstract class CameraExtensionSession implements AutoCloseable {
 
-    public static abstract class ExtensionCaptureCallback {
-        public void onCaptureStarted(CameraExtensionSession session, CaptureRequest request, long timestamp) {
-        }
+    public abstract static class ExtensionCaptureCallback {
+        public void onCaptureStarted(
+                CameraExtensionSession session, CaptureRequest request, long timestamp) {}
 
-        public void onCaptureProcessStarted(CameraExtensionSession session, CaptureRequest request) {
-        }
+        public void onCaptureProcessStarted(
+                CameraExtensionSession session, CaptureRequest request) {}
 
-        public void onCaptureFailed(CameraExtensionSession session, CaptureRequest request) {
-        }
+        public void onCaptureFailed(CameraExtensionSession session, CaptureRequest request) {}
 
-        public void onCaptureFailed(CameraExtensionSession session, CaptureRequest request, int failure) {
-        }
+        public void onCaptureFailed(
+                CameraExtensionSession session, CaptureRequest request, int failure) {}
 
-        public void onCaptureSequenceCompleted(CameraExtensionSession session, int sequenceId) {
-        }
+        public void onCaptureSequenceCompleted(CameraExtensionSession session, int sequenceId) {}
 
-        public void onCaptureSequenceAborted(CameraExtensionSession session, int sequenceId) {
-        }
+        public void onCaptureSequenceAborted(CameraExtensionSession session, int sequenceId) {}
 
-        public void onCaptureResultAvailable(CameraExtensionSession session, CaptureRequest request, TotalCaptureResult result) {
-        }
+        public void onCaptureResultAvailable(
+                CameraExtensionSession session,
+                CaptureRequest request,
+                TotalCaptureResult result) {}
 
-        public void onCaptureProcessProgressed(CameraExtensionSession session, CaptureRequest request, int progress) {
-        }
+        public void onCaptureProcessProgressed(
+                CameraExtensionSession session, CaptureRequest request, int progress) {}
     }
 
-    public static abstract class StateCallback {
+    public abstract static class StateCallback {
         public abstract void onConfigureFailed(CameraExtensionSession cameraExtensionSession);
 
         public abstract void onConfigured(CameraExtensionSession cameraExtensionSession);
 
-        public void onClosed(CameraExtensionSession session) {
-        }
+        public void onClosed(CameraExtensionSession session) {}
     }
 
     public CameraDevice getDevice() {
         throw new UnsupportedOperationException("Subclasses must override this method");
     }
 
-    public int capture(CaptureRequest request, Executor executor, ExtensionCaptureCallback listener) throws CameraAccessException {
+    public int capture(CaptureRequest request, Executor executor, ExtensionCaptureCallback listener)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Subclasses must override this method");
     }
 
-    public int setRepeatingRequest(CaptureRequest request, Executor executor, ExtensionCaptureCallback listener) throws CameraAccessException {
+    public int setRepeatingRequest(
+            CaptureRequest request, Executor executor, ExtensionCaptureCallback listener)
+            throws CameraAccessException {
         throw new UnsupportedOperationException("Subclasses must override this method");
     }
 
@@ -83,7 +85,8 @@ public abstract class CameraExtensionSession implements AutoCloseable {
                 return false;
             }
             StillCaptureLatency latency = (StillCaptureLatency) o;
-            if (this.mCaptureLatency == latency.mCaptureLatency && this.mProcessingLatency == latency.mProcessingLatency) {
+            if (this.mCaptureLatency == latency.mCaptureLatency
+                    && this.mProcessingLatency == latency.mProcessingLatency) {
                 return true;
             }
             return false;
@@ -94,7 +97,11 @@ public abstract class CameraExtensionSession implements AutoCloseable {
         }
 
         public String toString() {
-            return "StillCaptureLatency(processingLatency:" + this.mProcessingLatency + ", captureLatency: " + this.mCaptureLatency + NavigationBarInflaterView.KEY_CODE_END;
+            return "StillCaptureLatency(processingLatency:"
+                    + this.mProcessingLatency
+                    + ", captureLatency: "
+                    + this.mCaptureLatency
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
     }
 

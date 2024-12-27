@@ -10,12 +10,14 @@ import android.net.LocalSocketAddress;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Slog;
+
 import com.samsung.android.service.ProtectedATCommand.Device;
 import com.samsung.android.service.ProtectedATCommand.PACMClassifier;
 import com.samsung.android.service.ProtectedATCommand.Packet;
 import com.samsung.android.service.ProtectedATCommand.list.ICmdList;
 import com.samsung.android.service.ProtectedATCommand.list.ProtectedCommand;
 import com.samsung.android.service.ProtectedATCommand.list.UserOpenCommand;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
@@ -37,8 +39,7 @@ public final class PACMService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PACServiceSocketThread implements Runnable {
-        public PACServiceSocketThread() {
-        }
+        public PACServiceSocketThread() {}
 
         public final byte[] executeCommand(Packet packet) {
             int i;
@@ -66,10 +67,14 @@ public final class PACMService extends SystemService {
                         byte[] item = packet.getItem(2);
                         Slog.i("PACMSOCKET", "Packet.PAC_PACKET_CMD_AT_CMD_CHECK:");
                         if (item != null) {
-                            String upperCase = new String(item, StandardCharsets.UTF_8).toUpperCase(Locale.ENGLISH);
+                            String upperCase =
+                                    new String(item, StandardCharsets.UTF_8)
+                                            .toUpperCase(Locale.ENGLISH);
                             Slog.i("PACMSOCKET", "cmd : " + upperCase);
                             PACMService pACMService = PACMService.this;
-                            i = pACMService.mDevice.checkATCommand(pACMService.mAtMap, upperCase, packet);
+                            i =
+                                    pACMService.mDevice.checkATCommand(
+                                            pACMService.mAtMap, upperCase, packet);
                         } else {
                             i = 0;
                         }
@@ -90,8 +95,12 @@ public final class PACMService extends SystemService {
             try {
                 LocalSocket localSocket = new LocalSocket(2);
                 try {
-                    localSocket.bind(new LocalSocketAddress("/dev/socket/pacm/pacmservice", LocalSocketAddress.Namespace.FILESYSTEM));
-                    LocalServerSocket localServerSocket = new LocalServerSocket(localSocket.getFileDescriptor());
+                    localSocket.bind(
+                            new LocalSocketAddress(
+                                    "/dev/socket/pacm/pacmservice",
+                                    LocalSocketAddress.Namespace.FILESYSTEM));
+                    LocalServerSocket localServerSocket =
+                            new LocalServerSocket(localSocket.getFileDescriptor());
                     while (true) {
                         try {
                             try {
@@ -109,7 +118,9 @@ public final class PACMService extends SystemService {
                                     throw th;
                                 }
                             } catch (Exception e) {
-                                Slog.i("PACMSOCKET", "Socket connection may be closed. " + e.toString());
+                                Slog.i(
+                                        "PACMSOCKET",
+                                        "Socket connection may be closed. " + e.toString());
                                 e.printStackTrace();
                             }
                             try {
@@ -172,60 +183,69 @@ public final class PACMService extends SystemService {
         super(context);
         this.mLock = new Object();
         this.mAtMap = new LinkedHashMap();
-        this.mHandler = new Handler() { // from class: com.android.server.PACMService.1
-            @Override // android.os.Handler
-            public final void handleMessage(Message message) {
-                if (message.what != 1) {
-                    return;
-                }
-                Slog.d("PACMService", "MESSAGE_CHECK_BOARDCAST_RECEIVER");
-                List list = PACMService.mReceiverList;
-                if (list == null) {
-                    Slog.e("PACMService", "List is null");
-                    return;
-                }
-                PACMService pACMService = PACMService.this;
-                ArrayList arrayList = (ArrayList) list;
-                boolean contains = arrayList.contains(pACMService.mReceiver);
-                AnonymousClass1 anonymousClass1 = pACMService.mHandler;
-                if (!contains) {
-                    pACMService.registerForBroadcasts();
-                    anonymousClass1.sendEmptyMessageDelayed(1, 2000L);
-                    return;
-                }
-                Slog.i("PACMService", "Already registered BroadcastReceiver! [" + arrayList.size() + "]");
-                if (anonymousClass1.hasMessages(1)) {
-                    anonymousClass1.removeMessages(1);
-                }
-            }
-        };
-        this.mReceiver = new BroadcastReceiver() { // from class: com.android.server.PACMService.2
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                String action = intent.getAction();
-                Slog.i("PACMService", "Broadcast received:" + action);
-                if (action.equals("com.samsung.android.aircommandmanager.START_LOCAL_SOCKET")) {
-                    Slog.i("PACMService", "GalaxyDiag app start");
-                    if (PACMService.this.mDevice.isCsToolInstalled()) {
-                        PACMService.this.mDevice.setCSTool(true);
-                        return;
+        this.mHandler =
+                new Handler() { // from class: com.android.server.PACMService.1
+                    @Override // android.os.Handler
+                    public final void handleMessage(Message message) {
+                        if (message.what != 1) {
+                            return;
+                        }
+                        Slog.d("PACMService", "MESSAGE_CHECK_BOARDCAST_RECEIVER");
+                        List list = PACMService.mReceiverList;
+                        if (list == null) {
+                            Slog.e("PACMService", "List is null");
+                            return;
+                        }
+                        PACMService pACMService = PACMService.this;
+                        ArrayList arrayList = (ArrayList) list;
+                        boolean contains = arrayList.contains(pACMService.mReceiver);
+                        AnonymousClass1 anonymousClass1 = pACMService.mHandler;
+                        if (!contains) {
+                            pACMService.registerForBroadcasts();
+                            anonymousClass1.sendEmptyMessageDelayed(1, 2000L);
+                            return;
+                        }
+                        Slog.i(
+                                "PACMService",
+                                "Already registered BroadcastReceiver! [" + arrayList.size() + "]");
+                        if (anonymousClass1.hasMessages(1)) {
+                            anonymousClass1.removeMessages(1);
+                        }
                     }
-                    return;
-                }
-                if (action.equals("com.samsung.android.aircommandmanager.STOP_LOCAL_SOCKET")) {
-                    Slog.i("PACMService", "GalaxyDiag app end");
-                    PACMService.this.mDevice.setCSTool(false);
-                }
-            }
-        };
+                };
+        this.mReceiver =
+                new BroadcastReceiver() { // from class: com.android.server.PACMService.2
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        String action = intent.getAction();
+                        Slog.i("PACMService", "Broadcast received:" + action);
+                        if (action.equals(
+                                "com.samsung.android.aircommandmanager.START_LOCAL_SOCKET")) {
+                            Slog.i("PACMService", "GalaxyDiag app start");
+                            if (PACMService.this.mDevice.isCsToolInstalled()) {
+                                PACMService.this.mDevice.setCSTool(true);
+                                return;
+                            }
+                            return;
+                        }
+                        if (action.equals(
+                                "com.samsung.android.aircommandmanager.STOP_LOCAL_SOCKET")) {
+                            Slog.i("PACMService", "GalaxyDiag app end");
+                            PACMService.this.mDevice.setCSTool(false);
+                        }
+                    }
+                };
         this.mContext = context;
         this.mDevice = new Device(context);
         try {
             ICmdList[] iCmdListArr = {new ProtectedCommand(), new UserOpenCommand()};
             for (int i = 0; i < 2; i++) {
-                int putCommandList = PACMClassifier.putCommandList(this.mAtMap, iCmdListArr[i].getList());
+                int putCommandList =
+                        PACMClassifier.putCommandList(this.mAtMap, iCmdListArr[i].getList());
                 if (putCommandList != 1) {
-                    Slog.e("PACMService", "Failed to add class command list(" + putCommandList + ")");
+                    Slog.e(
+                            "PACMService",
+                            "Failed to add class command list(" + putCommandList + ")");
                 }
             }
         } catch (Exception e) {

@@ -2,6 +2,7 @@ package com.samsung.android.ims.util;
 
 import android.telecom.PhoneAccount;
 import android.webkit.WebView;
+
 import gov.nist.javax.sip.address.GenericURI;
 
 /* loaded from: classes6.dex */
@@ -50,6 +51,9 @@ public class SemTelUri extends GenericURI {
     }
 
     public String toString() {
-        return WebView.SCHEME_TEL + (this.mIsInternational ? "+" : "") + this.mNumber + (this.mPhoneContext != null ? ";phone-context=" + this.mPhoneContext : "");
+        return WebView.SCHEME_TEL
+                + (this.mIsInternational ? "+" : "")
+                + this.mNumber
+                + (this.mPhoneContext != null ? ";phone-context=" + this.mPhoneContext : "");
     }
 }

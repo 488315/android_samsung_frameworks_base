@@ -26,7 +26,13 @@ public abstract class VoiceInteractionManagerInternal {
 
     public abstract void onPreCreatedUserConversion(int i);
 
-    public abstract void startListeningFromWearable(ParcelFileDescriptor parcelFileDescriptor, AudioFormat audioFormat, PersistableBundle persistableBundle, ComponentName componentName, int i, WearableHotwordDetectionCallback wearableHotwordDetectionCallback);
+    public abstract void startListeningFromWearable(
+            ParcelFileDescriptor parcelFileDescriptor,
+            AudioFormat audioFormat,
+            PersistableBundle persistableBundle,
+            ComponentName componentName,
+            int i,
+            WearableHotwordDetectionCallback wearableHotwordDetectionCallback);
 
     public abstract void startLocalVoiceInteraction(IBinder iBinder, String str, Bundle bundle);
 

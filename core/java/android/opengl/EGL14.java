@@ -122,38 +122,57 @@ public class EGL14 {
     public static final int EGL_WIDTH = 12375;
     public static final int EGL_WINDOW_BIT = 4;
 
-    private static native EGLSurface _eglCreateWindowSurface(EGLDisplay eGLDisplay, EGLConfig eGLConfig, Object obj, int[] iArr, int i);
+    private static native EGLSurface _eglCreateWindowSurface(
+            EGLDisplay eGLDisplay, EGLConfig eGLConfig, Object obj, int[] iArr, int i);
 
-    private static native EGLSurface _eglCreateWindowSurfaceTexture(EGLDisplay eGLDisplay, EGLConfig eGLConfig, Object obj, int[] iArr, int i);
+    private static native EGLSurface _eglCreateWindowSurfaceTexture(
+            EGLDisplay eGLDisplay, EGLConfig eGLConfig, Object obj, int[] iArr, int i);
 
     private static native void _nativeClassInit();
 
     public static native boolean eglBindAPI(int i);
 
-    public static native boolean eglBindTexImage(EGLDisplay eGLDisplay, EGLSurface eGLSurface, int i);
+    public static native boolean eglBindTexImage(
+            EGLDisplay eGLDisplay, EGLSurface eGLSurface, int i);
 
-    public static native boolean eglChooseConfig(EGLDisplay eGLDisplay, int[] iArr, int i, EGLConfig[] eGLConfigArr, int i2, int i3, int[] iArr2, int i4);
+    public static native boolean eglChooseConfig(
+            EGLDisplay eGLDisplay,
+            int[] iArr,
+            int i,
+            EGLConfig[] eGLConfigArr,
+            int i2,
+            int i3,
+            int[] iArr2,
+            int i4);
 
-    public static native boolean eglCopyBuffers(EGLDisplay eGLDisplay, EGLSurface eGLSurface, int i);
+    public static native boolean eglCopyBuffers(
+            EGLDisplay eGLDisplay, EGLSurface eGLSurface, int i);
 
-    public static native EGLContext eglCreateContext(EGLDisplay eGLDisplay, EGLConfig eGLConfig, EGLContext eGLContext, int[] iArr, int i);
+    public static native EGLContext eglCreateContext(
+            EGLDisplay eGLDisplay, EGLConfig eGLConfig, EGLContext eGLContext, int[] iArr, int i);
 
-    public static native EGLSurface eglCreatePbufferFromClientBuffer(EGLDisplay eGLDisplay, int i, int i2, EGLConfig eGLConfig, int[] iArr, int i3);
+    public static native EGLSurface eglCreatePbufferFromClientBuffer(
+            EGLDisplay eGLDisplay, int i, int i2, EGLConfig eGLConfig, int[] iArr, int i3);
 
-    public static native EGLSurface eglCreatePbufferFromClientBuffer(EGLDisplay eGLDisplay, int i, long j, EGLConfig eGLConfig, int[] iArr, int i2);
+    public static native EGLSurface eglCreatePbufferFromClientBuffer(
+            EGLDisplay eGLDisplay, int i, long j, EGLConfig eGLConfig, int[] iArr, int i2);
 
-    public static native EGLSurface eglCreatePbufferSurface(EGLDisplay eGLDisplay, EGLConfig eGLConfig, int[] iArr, int i);
+    public static native EGLSurface eglCreatePbufferSurface(
+            EGLDisplay eGLDisplay, EGLConfig eGLConfig, int[] iArr, int i);
 
     @Deprecated
-    public static native EGLSurface eglCreatePixmapSurface(EGLDisplay eGLDisplay, EGLConfig eGLConfig, int i, int[] iArr, int i2);
+    public static native EGLSurface eglCreatePixmapSurface(
+            EGLDisplay eGLDisplay, EGLConfig eGLConfig, int i, int[] iArr, int i2);
 
     public static native boolean eglDestroyContext(EGLDisplay eGLDisplay, EGLContext eGLContext);
 
     public static native boolean eglDestroySurface(EGLDisplay eGLDisplay, EGLSurface eGLSurface);
 
-    public static native boolean eglGetConfigAttrib(EGLDisplay eGLDisplay, EGLConfig eGLConfig, int i, int[] iArr, int i2);
+    public static native boolean eglGetConfigAttrib(
+            EGLDisplay eGLDisplay, EGLConfig eGLConfig, int i, int[] iArr, int i2);
 
-    public static native boolean eglGetConfigs(EGLDisplay eGLDisplay, EGLConfig[] eGLConfigArr, int i, int i2, int[] iArr, int i3);
+    public static native boolean eglGetConfigs(
+            EGLDisplay eGLDisplay, EGLConfig[] eGLConfigArr, int i, int i2, int[] iArr, int i3);
 
     public static native EGLContext eglGetCurrentContext();
 
@@ -167,23 +186,32 @@ public class EGL14 {
 
     public static native int eglGetError();
 
-    public static native boolean eglInitialize(EGLDisplay eGLDisplay, int[] iArr, int i, int[] iArr2, int i2);
+    public static native boolean eglInitialize(
+            EGLDisplay eGLDisplay, int[] iArr, int i, int[] iArr2, int i2);
 
-    public static native boolean eglMakeCurrent(EGLDisplay eGLDisplay, EGLSurface eGLSurface, EGLSurface eGLSurface2, EGLContext eGLContext);
+    public static native boolean eglMakeCurrent(
+            EGLDisplay eGLDisplay,
+            EGLSurface eGLSurface,
+            EGLSurface eGLSurface2,
+            EGLContext eGLContext);
 
     public static native int eglQueryAPI();
 
-    public static native boolean eglQueryContext(EGLDisplay eGLDisplay, EGLContext eGLContext, int i, int[] iArr, int i2);
+    public static native boolean eglQueryContext(
+            EGLDisplay eGLDisplay, EGLContext eGLContext, int i, int[] iArr, int i2);
 
     public static native String eglQueryString(EGLDisplay eGLDisplay, int i);
 
-    public static native boolean eglQuerySurface(EGLDisplay eGLDisplay, EGLSurface eGLSurface, int i, int[] iArr, int i2);
+    public static native boolean eglQuerySurface(
+            EGLDisplay eGLDisplay, EGLSurface eGLSurface, int i, int[] iArr, int i2);
 
-    public static native boolean eglReleaseTexImage(EGLDisplay eGLDisplay, EGLSurface eGLSurface, int i);
+    public static native boolean eglReleaseTexImage(
+            EGLDisplay eGLDisplay, EGLSurface eGLSurface, int i);
 
     public static native boolean eglReleaseThread();
 
-    public static native boolean eglSurfaceAttrib(EGLDisplay eGLDisplay, EGLSurface eGLSurface, int i, int i2);
+    public static native boolean eglSurfaceAttrib(
+            EGLDisplay eGLDisplay, EGLSurface eGLSurface, int i, int i2);
 
     public static native boolean eglSwapBuffers(EGLDisplay eGLDisplay, EGLSurface eGLSurface);
 
@@ -201,7 +229,8 @@ public class EGL14 {
         _nativeClassInit();
     }
 
-    public static EGLSurface eglCreateWindowSurface(EGLDisplay dpy, EGLConfig config, Object win, int[] attrib_list, int offset) {
+    public static EGLSurface eglCreateWindowSurface(
+            EGLDisplay dpy, EGLConfig config, Object win, int[] attrib_list, int offset) {
         Surface sur = null;
         if (win instanceof SurfaceView) {
             SurfaceView surfaceView = (SurfaceView) win;
@@ -217,9 +246,13 @@ public class EGL14 {
             return surface;
         }
         if (win instanceof SurfaceTexture) {
-            EGLSurface surface2 = _eglCreateWindowSurfaceTexture(dpy, config, win, attrib_list, offset);
+            EGLSurface surface2 =
+                    _eglCreateWindowSurfaceTexture(dpy, config, win, attrib_list, offset);
             return surface2;
         }
-        throw new UnsupportedOperationException("eglCreateWindowSurface() can only be called with an instance of Surface, SurfaceView, SurfaceTexture or SurfaceHolder at the moment, this will be fixed later.");
+        throw new UnsupportedOperationException(
+                "eglCreateWindowSurface() can only be called with an instance of Surface,"
+                    + " SurfaceView, SurfaceTexture or SurfaceHolder at the moment, this will be"
+                    + " fixed later.");
     }
 }

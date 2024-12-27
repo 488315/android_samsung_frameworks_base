@@ -11,6 +11,7 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -23,7 +24,8 @@ public final class IBootControl$Proxy implements IBootControl {
         if (iHwBinder == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = iHwBinder.queryLocalInterface("android.hardware.boot@1.2::IBootControl");
+        IHwInterface queryLocalInterface =
+                iHwBinder.queryLocalInterface("android.hardware.boot@1.2::IBootControl");
         if (queryLocalInterface != null && (queryLocalInterface instanceof IBootControl$Proxy)) {
             return (IBootControl$Proxy) queryLocalInterface;
         }
@@ -48,7 +50,9 @@ public final class IBootControl$Proxy implements IBootControl {
 
     @Override // android.hidl.base.V1_0.IBase
     public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        IBase.kInterfaceName, nativeHandle, arrayList);
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -65,7 +69,9 @@ public final class IBootControl$Proxy implements IBootControl {
 
     @Override // android.hardware.boot.V1_0.IBootControl
     public final int getCurrentSlot() {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.boot@1.0::IBootControl");
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        "android.hardware.boot@1.0::IBootControl");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(2, m, hwParcel, 0);
@@ -104,7 +110,8 @@ public final class IBootControl$Proxy implements IBootControl {
             ArrayList arrayList = new ArrayList();
             HwBlob readBuffer = hwParcel.readBuffer(16L);
             int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+            HwBlob readEmbeddedBuffer =
+                    hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 byte[] bArr = new byte[32];

@@ -18,16 +18,14 @@ public interface IBiometricStateListener extends IInterface {
 
     public static class Default implements IBiometricStateListener {
         @Override // android.hardware.biometrics.IBiometricStateListener
-        public void onStateChanged(int newState) throws RemoteException {
-        }
+        public void onStateChanged(int newState) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricStateListener
-        public void onBiometricAction(int action) throws RemoteException {
-        }
+        public void onBiometricAction(int action) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricStateListener
-        public void onEnrollmentsChanged(int userId, int sensorId, boolean hasEnrollments) throws RemoteException {
-        }
+        public void onEnrollmentsChanged(int userId, int sensorId, boolean hasEnrollments)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +33,7 @@ public interface IBiometricStateListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBiometricStateListener {
+    public abstract static class Stub extends Binder implements IBiometricStateListener {
         static final int TRANSACTION_onBiometricAction = 2;
         static final int TRANSACTION_onEnrollmentsChanged = 3;
         static final int TRANSACTION_onStateChanged = 1;
@@ -79,7 +77,8 @@ public interface IBiometricStateListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBiometricStateListener.DESCRIPTOR);
             }
@@ -151,7 +150,8 @@ public interface IBiometricStateListener extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricStateListener
-            public void onEnrollmentsChanged(int userId, int sensorId, boolean hasEnrollments) throws RemoteException {
+            public void onEnrollmentsChanged(int userId, int sensorId, boolean hasEnrollments)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBiometricStateListener.DESCRIPTOR);

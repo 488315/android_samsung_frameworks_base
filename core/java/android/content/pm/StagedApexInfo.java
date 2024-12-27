@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class StagedApexInfo implements Parcelable {
-    public static final Parcelable.Creator<StagedApexInfo> CREATOR = new Parcelable.Creator<StagedApexInfo>() { // from class: android.content.pm.StagedApexInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StagedApexInfo createFromParcel(Parcel _aidl_source) {
-            StagedApexInfo _aidl_out = new StagedApexInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<StagedApexInfo> CREATOR =
+            new Parcelable.Creator<
+                    StagedApexInfo>() { // from class: android.content.pm.StagedApexInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StagedApexInfo createFromParcel(Parcel _aidl_source) {
+                    StagedApexInfo _aidl_out = new StagedApexInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StagedApexInfo[] newArray(int _aidl_size) {
-            return new StagedApexInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StagedApexInfo[] newArray(int _aidl_size) {
+                    return new StagedApexInfo[_aidl_size];
+                }
+            };
     public String diskImagePath;
     public String moduleName;
     public String versionName;

@@ -1,6 +1,5 @@
 package android.content;
 
-import android.content.ISyncContext;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -16,12 +15,10 @@ public interface ISyncServiceAdapter extends IInterface {
 
     public static class Default implements ISyncServiceAdapter {
         @Override // android.content.ISyncServiceAdapter
-        public void startSync(ISyncContext syncContext, Bundle extras) throws RemoteException {
-        }
+        public void startSync(ISyncContext syncContext, Bundle extras) throws RemoteException {}
 
         @Override // android.content.ISyncServiceAdapter
-        public void cancelSync(ISyncContext syncContext) throws RemoteException {
-        }
+        public void cancelSync(ISyncContext syncContext) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +26,7 @@ public interface ISyncServiceAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISyncServiceAdapter {
+    public abstract static class Stub extends Binder implements ISyncServiceAdapter {
         public static final String DESCRIPTOR = "android.content.ISyncServiceAdapter";
         static final int TRANSACTION_cancelSync = 2;
         static final int TRANSACTION_startSync = 1;
@@ -71,7 +68,8 @@ public interface ISyncServiceAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

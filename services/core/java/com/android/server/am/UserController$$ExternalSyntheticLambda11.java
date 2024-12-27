@@ -8,7 +8,8 @@ public final /* synthetic */ class UserController$$ExternalSyntheticLambda11 imp
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ UserController f$0;
 
-    public /* synthetic */ UserController$$ExternalSyntheticLambda11(UserController userController, int i) {
+    public /* synthetic */ UserController$$ExternalSyntheticLambda11(
+            UserController userController, int i) {
         this.$r8$classId = i;
         this.f$0 = userController;
     }

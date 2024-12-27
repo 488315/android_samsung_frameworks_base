@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.MapEntryLite;
 import java.util.Map;
 
 @CheckReturnValue

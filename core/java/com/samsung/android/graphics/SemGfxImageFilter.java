@@ -7,6 +7,7 @@ import android.graphics.RecordingCanvas;
 import android.util.Log;
 import android.view.SemBlurInfo;
 import android.view.View;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -26,7 +27,8 @@ public class SemGfxImageFilter {
     private View attachedToView = null;
     private int nativeFunctor;
 
-    private static native void nApplyMeshGradient(int i, int i2, int i3, int[] iArr, PointF[] pointFArr);
+    private static native void nApplyMeshGradient(
+            int i, int i2, int i3, int[] iArr, PointF[] pointFArr);
 
     private static native void nApplyToBitmap(int i, int[] iArr, int[] iArr2, int i2, int i3);
 
@@ -42,7 +44,8 @@ public class SemGfxImageFilter {
 
     private static native void nSetIndexedPoint(int i, int i2, float f, float f2);
 
-    private static native void nSetMeshHandles(int i, int i2, float f, float f2, float f3, float f4);
+    private static native void nSetMeshHandles(
+            int i, int i2, float f, float f2, float f3, float f4);
 
     private static native void nSetParam(int i, int i2, float f);
 
@@ -81,9 +84,14 @@ public class SemGfxImageFilter {
             return;
         }
         if (this.attachedToView.getLayerType() != 2) {
-            Log.e(LOG_TAG, "Can't draw SemGfxImageFilter. LayerType must be 'LAYER_TYPE_HARDWARE'!");
+            Log.e(
+                    LOG_TAG,
+                    "Can't draw SemGfxImageFilter. LayerType must be 'LAYER_TYPE_HARDWARE'!");
         } else if (!(canvas instanceof RecordingCanvas)) {
-            Log.e(LOG_TAG, "Can't draw SemGfxImageFilter. Canvas should be instance of 'RecordingCanvas'!");
+            Log.e(
+                    LOG_TAG,
+                    "Can't draw SemGfxImageFilter. Canvas should be instance of"
+                        + " 'RecordingCanvas'!");
         } else {
             ((RecordingCanvas) canvas).drawWebViewFunctor(this.nativeFunctor);
         }
@@ -118,12 +126,19 @@ public class SemGfxImageFilter {
 
     public void applyMeshGradient(int width, int height, int[] colors, List<PointF> points) {
         if (colors.length != width * height) {
-            throw new IllegalArgumentException("Colors array must have exactly width * height elements.");
+            throw new IllegalArgumentException(
+                    "Colors array must have exactly width * height elements.");
         }
         if (points.size() != width * height) {
-            throw new IllegalArgumentException("Points list must have exactly width * height elements.");
+            throw new IllegalArgumentException(
+                    "Points list must have exactly width * height elements.");
         }
-        nApplyMeshGradient(this.nativeFunctor, width, height, colors, (PointF[]) points.toArray(new PointF[0]));
+        nApplyMeshGradient(
+                this.nativeFunctor,
+                width,
+                height,
+                colors,
+                (PointF[]) points.toArray(new PointF[0]));
     }
 
     public void setIndexedColor(int index, int color) {
@@ -144,7 +159,8 @@ public class SemGfxImageFilter {
         if (index < 0) {
             throw new IllegalArgumentException("Index must be greater than or equal to 0.");
         }
-        nSetMeshHandles(this.nativeFunctor, index, upHandle.x, upHandle.y, leftHandle.x, leftHandle.y);
+        nSetMeshHandles(
+                this.nativeFunctor, index, upHandle.x, upHandle.y, leftHandle.x, leftHandle.y);
     }
 
     public void setSaturation(float saturation) {
@@ -185,7 +201,8 @@ public class SemGfxImageFilter {
     }
 
     public Bitmap applyToBitmap(Bitmap bitmap) {
-        Bitmap res = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap res =
+                Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         applyToBitmap(bitmap, res);
         return res;
     }

@@ -3,6 +3,7 @@ package android.security.net.config;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
+
 import javax.net.ssl.ManagerFactoryParameters;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactorySpi;
@@ -13,9 +14,15 @@ public class RootTrustManagerFactorySpi extends TrustManagerFactorySpi {
     private NetworkSecurityConfig mConfig;
 
     @Override // javax.net.ssl.TrustManagerFactorySpi
-    public void engineInit(ManagerFactoryParameters spec) throws InvalidAlgorithmParameterException {
+    public void engineInit(ManagerFactoryParameters spec)
+            throws InvalidAlgorithmParameterException {
         if (!(spec instanceof ApplicationConfigParameters)) {
-            throw new InvalidAlgorithmParameterException("Unsupported spec: " + spec + ". Only " + ApplicationConfigParameters.class.getName() + " supported");
+            throw new InvalidAlgorithmParameterException(
+                    "Unsupported spec: "
+                            + spec
+                            + ". Only "
+                            + ApplicationConfigParameters.class.getName()
+                            + " supported");
         }
         this.mApplicationConfig = ((ApplicationConfigParameters) spec).config;
     }
@@ -34,7 +41,7 @@ public class RootTrustManagerFactorySpi extends TrustManagerFactorySpi {
         if (this.mApplicationConfig == null) {
             throw new IllegalStateException("TrustManagerFactory not initialized");
         }
-        return new TrustManager[]{this.mApplicationConfig.getTrustManager()};
+        return new TrustManager[] {this.mApplicationConfig.getTrustManager()};
     }
 
     public static final class ApplicationConfigParameters implements ManagerFactoryParameters {

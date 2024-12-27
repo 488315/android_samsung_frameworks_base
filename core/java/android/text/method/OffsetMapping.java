@@ -9,8 +9,7 @@ public interface OffsetMapping {
     public static final int MAP_STRATEGY_CURSOR = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MapStrategy {
-    }
+    public @interface MapStrategy {}
 
     int originalToTransformed(int i, int i2);
 

@@ -8,9 +8,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.TimeUtils;
+
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.power.PowerManagerService;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -38,41 +39,55 @@ public class WirelessChargerDetector {
     public final PowerManagerService.SuspendBlockerImpl mSuspendBlocker;
     public int mTotalSamples;
     public final Object mLock = new Object();
-    public final AnonymousClass1 mListener = new SensorEventListener() { // from class: com.android.server.power.WirelessChargerDetector.1
-        @Override // android.hardware.SensorEventListener
-        public final void onAccuracyChanged(Sensor sensor, int i) {
-        }
+    public final AnonymousClass1 mListener =
+            new SensorEventListener() { // from class:
+                                        // com.android.server.power.WirelessChargerDetector.1
+                @Override // android.hardware.SensorEventListener
+                public final void onAccuracyChanged(Sensor sensor, int i) {}
 
-        @Override // android.hardware.SensorEventListener
-        public final void onSensorChanged(SensorEvent sensorEvent) {
-            synchronized (WirelessChargerDetector.this.mLock) {
-                WirelessChargerDetector wirelessChargerDetector = WirelessChargerDetector.this;
-                float[] fArr = sensorEvent.values;
-                WirelessChargerDetector.m829$$Nest$mprocessSampleLocked(wirelessChargerDetector, fArr[0], fArr[1], fArr[2]);
-            }
-        }
-    };
-    public final AnonymousClass2 mSensorTimeout = new Runnable() { // from class: com.android.server.power.WirelessChargerDetector.2
-        @Override // java.lang.Runnable
-        public final void run() {
-            synchronized (WirelessChargerDetector.this.mLock) {
-                WirelessChargerDetector.m828$$Nest$mfinishDetectionLocked(WirelessChargerDetector.this);
-            }
-        }
-    };
+                @Override // android.hardware.SensorEventListener
+                public final void onSensorChanged(SensorEvent sensorEvent) {
+                    synchronized (WirelessChargerDetector.this.mLock) {
+                        WirelessChargerDetector wirelessChargerDetector =
+                                WirelessChargerDetector.this;
+                        float[] fArr = sensorEvent.values;
+                        WirelessChargerDetector.m829$$Nest$mprocessSampleLocked(
+                                wirelessChargerDetector, fArr[0], fArr[1], fArr[2]);
+                    }
+                }
+            };
+    public final AnonymousClass2 mSensorTimeout =
+            new Runnable() { // from class: com.android.server.power.WirelessChargerDetector.2
+                @Override // java.lang.Runnable
+                public final void run() {
+                    synchronized (WirelessChargerDetector.this.mLock) {
+                        WirelessChargerDetector.m828$$Nest$mfinishDetectionLocked(
+                                WirelessChargerDetector.this);
+                    }
+                }
+            };
 
     /* renamed from: -$$Nest$mfinishDetectionLocked, reason: not valid java name */
-    public static void m828$$Nest$mfinishDetectionLocked(WirelessChargerDetector wirelessChargerDetector) {
+    public static void m828$$Nest$mfinishDetectionLocked(
+            WirelessChargerDetector wirelessChargerDetector) {
         if (wirelessChargerDetector.mDetectionInProgress) {
-            wirelessChargerDetector.mSensorManager.unregisterListener(wirelessChargerDetector.mListener);
-            wirelessChargerDetector.mHandler.removeCallbacks(wirelessChargerDetector.mSensorTimeout);
+            wirelessChargerDetector.mSensorManager.unregisterListener(
+                    wirelessChargerDetector.mListener);
+            wirelessChargerDetector.mHandler.removeCallbacks(
+                    wirelessChargerDetector.mSensorTimeout);
             if (wirelessChargerDetector.mMustUpdateRestPosition) {
                 wirelessChargerDetector.mAtRest = false;
                 wirelessChargerDetector.mRestX = FullScreenMagnificationGestureHandler.MAX_SCALE;
                 wirelessChargerDetector.mRestY = FullScreenMagnificationGestureHandler.MAX_SCALE;
                 wirelessChargerDetector.mRestZ = FullScreenMagnificationGestureHandler.MAX_SCALE;
                 if (wirelessChargerDetector.mTotalSamples < 3) {
-                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(new StringBuilder("Wireless charger detector is broken.  Only received "), wirelessChargerDetector.mTotalSamples, " samples from the gravity sensor but we need at least 3 and we expect to see about 16 on average.", "WirelessChargerDetector");
+                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                            new StringBuilder(
+                                    "Wireless charger detector is broken.  Only received "),
+                            wirelessChargerDetector.mTotalSamples,
+                            " samples from the gravity sensor but we need at least 3 and we expect"
+                                + " to see about 16 on average.",
+                            "WirelessChargerDetector");
                 } else if (wirelessChargerDetector.mMovingSamples == 0) {
                     wirelessChargerDetector.mAtRest = true;
                     wirelessChargerDetector.mRestX = wirelessChargerDetector.mLastSampleX;
@@ -87,7 +102,8 @@ public class WirelessChargerDetector {
     }
 
     /* renamed from: -$$Nest$mprocessSampleLocked, reason: not valid java name */
-    public static void m829$$Nest$mprocessSampleLocked(WirelessChargerDetector wirelessChargerDetector, float f, float f2, float f3) {
+    public static void m829$$Nest$mprocessSampleLocked(
+            WirelessChargerDetector wirelessChargerDetector, float f, float f2, float f3) {
         if (wirelessChargerDetector.mDetectionInProgress) {
             wirelessChargerDetector.mLastSampleX = f;
             wirelessChargerDetector.mLastSampleY = f2;
@@ -98,10 +114,23 @@ public class WirelessChargerDetector {
                 wirelessChargerDetector.mFirstSampleX = f;
                 wirelessChargerDetector.mFirstSampleY = f2;
                 wirelessChargerDetector.mFirstSampleZ = f3;
-            } else if (hasMoved(wirelessChargerDetector.mFirstSampleX, wirelessChargerDetector.mFirstSampleY, wirelessChargerDetector.mFirstSampleZ, f, f2, f3)) {
+            } else if (hasMoved(
+                    wirelessChargerDetector.mFirstSampleX,
+                    wirelessChargerDetector.mFirstSampleY,
+                    wirelessChargerDetector.mFirstSampleZ,
+                    f,
+                    f2,
+                    f3)) {
                 wirelessChargerDetector.mMovingSamples++;
             }
-            if (wirelessChargerDetector.mAtRest && hasMoved(wirelessChargerDetector.mRestX, wirelessChargerDetector.mRestY, wirelessChargerDetector.mRestZ, f, f2, f3)) {
+            if (wirelessChargerDetector.mAtRest
+                    && hasMoved(
+                            wirelessChargerDetector.mRestX,
+                            wirelessChargerDetector.mRestY,
+                            wirelessChargerDetector.mRestZ,
+                            f,
+                            f2,
+                            f3)) {
                 wirelessChargerDetector.mAtRest = false;
                 wirelessChargerDetector.mRestX = FullScreenMagnificationGestureHandler.MAX_SCALE;
                 wirelessChargerDetector.mRestY = FullScreenMagnificationGestureHandler.MAX_SCALE;
@@ -112,7 +141,10 @@ public class WirelessChargerDetector {
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.power.WirelessChargerDetector$1] */
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.power.WirelessChargerDetector$2] */
-    public WirelessChargerDetector(SensorManager sensorManager, PowerManagerService.SuspendBlockerImpl suspendBlockerImpl, Handler handler) {
+    public WirelessChargerDetector(
+            SensorManager sensorManager,
+            PowerManagerService.SuspendBlockerImpl suspendBlockerImpl,
+            Handler handler) {
         this.mSensorManager = sensorManager;
         this.mSuspendBlocker = suspendBlockerImpl;
         this.mHandler = handler;
@@ -123,7 +155,11 @@ public class WirelessChargerDetector {
         double d = (f3 * f6) + (f2 * f5) + (f * f4);
         double sqrt = Math.sqrt((f3 * f3) + (f2 * f2) + (f * f));
         double sqrt2 = Math.sqrt((f6 * f6) + (f5 * f5) + (f4 * f4));
-        return sqrt < 8.806650161743164d || sqrt > 10.806650161743164d || sqrt2 < 8.806650161743164d || sqrt2 > 10.806650161743164d || d < (sqrt * sqrt2) * MOVEMENT_ANGLE_COS_THRESHOLD;
+        return sqrt < 8.806650161743164d
+                || sqrt > 10.806650161743164d
+                || sqrt2 < 8.806650161743164d
+                || sqrt2 > 10.806650161743164d
+                || d < (sqrt * sqrt2) * MOVEMENT_ANGLE_COS_THRESHOLD;
     }
 
     public final void dump(PrintWriter printWriter) {
@@ -134,7 +170,13 @@ public class WirelessChargerDetector {
                 printWriter.println("  mGravitySensor=" + this.mGravitySensor);
                 printWriter.println("  mPoweredWirelessly=" + this.mPoweredWirelessly);
                 printWriter.println("  mAtRest=" + this.mAtRest);
-                printWriter.println("  mRestX=" + this.mRestX + ", mRestY=" + this.mRestY + ", mRestZ=" + this.mRestZ);
+                printWriter.println(
+                        "  mRestX="
+                                + this.mRestX
+                                + ", mRestY="
+                                + this.mRestY
+                                + ", mRestZ="
+                                + this.mRestZ);
                 StringBuilder sb = new StringBuilder("  mDetectionInProgress=");
                 sb.append(this.mDetectionInProgress);
                 printWriter.println(sb.toString());
@@ -145,8 +187,20 @@ public class WirelessChargerDetector {
                 printWriter.println("  mMustUpdateRestPosition=" + this.mMustUpdateRestPosition);
                 printWriter.println("  mTotalSamples=" + this.mTotalSamples);
                 printWriter.println("  mMovingSamples=" + this.mMovingSamples);
-                printWriter.println("  mFirstSampleX=" + this.mFirstSampleX + ", mFirstSampleY=" + this.mFirstSampleY + ", mFirstSampleZ=" + this.mFirstSampleZ);
-                printWriter.println("  mLastSampleX=" + this.mLastSampleX + ", mLastSampleY=" + this.mLastSampleY + ", mLastSampleZ=" + this.mLastSampleZ);
+                printWriter.println(
+                        "  mFirstSampleX="
+                                + this.mFirstSampleX
+                                + ", mFirstSampleY="
+                                + this.mFirstSampleY
+                                + ", mFirstSampleZ="
+                                + this.mFirstSampleZ);
+                printWriter.println(
+                        "  mLastSampleX="
+                                + this.mLastSampleX
+                                + ", mLastSampleY="
+                                + this.mLastSampleY
+                                + ", mLastSampleZ="
+                                + this.mLastSampleZ);
             } catch (Throwable th) {
                 throw th;
             }
@@ -155,7 +209,9 @@ public class WirelessChargerDetector {
 
     public final void startDetectionLocked() {
         Sensor sensor;
-        if (this.mDetectionInProgress || (sensor = this.mGravitySensor) == null || !this.mSensorManager.registerListener(this.mListener, sensor, 50000)) {
+        if (this.mDetectionInProgress
+                || (sensor = this.mGravitySensor) == null
+                || !this.mSensorManager.registerListener(this.mListener, sensor, 50000)) {
             return;
         }
         this.mSuspendBlocker.acquire("unknown");

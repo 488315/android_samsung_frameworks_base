@@ -3,26 +3,29 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class UrspRule implements Parcelable {
-    public static final Parcelable.Creator<UrspRule> CREATOR = new Parcelable.Creator<UrspRule>() { // from class: android.hardware.radio.data.UrspRule.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UrspRule createFromParcel(Parcel _aidl_source) {
-            UrspRule _aidl_out = new UrspRule();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<UrspRule> CREATOR =
+            new Parcelable.Creator<
+                    UrspRule>() { // from class: android.hardware.radio.data.UrspRule.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UrspRule createFromParcel(Parcel _aidl_source) {
+                    UrspRule _aidl_out = new UrspRule();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UrspRule[] newArray(int _aidl_size) {
-            return new UrspRule[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UrspRule[] newArray(int _aidl_size) {
+                    return new UrspRule[_aidl_size];
+                }
+            };
     public int precedence = 0;
     public RouteSelectionDescriptor[] routeSelectionDescriptor;
     public TrafficDescriptor[] trafficDescriptors;
@@ -67,14 +70,17 @@ public class UrspRule implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.trafficDescriptors = (TrafficDescriptor[]) _aidl_parcel.createTypedArray(TrafficDescriptor.CREATOR);
+            this.trafficDescriptors =
+                    (TrafficDescriptor[]) _aidl_parcel.createTypedArray(TrafficDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.routeSelectionDescriptor = (RouteSelectionDescriptor[]) _aidl_parcel.createTypedArray(RouteSelectionDescriptor.CREATOR);
+                this.routeSelectionDescriptor =
+                        (RouteSelectionDescriptor[])
+                                _aidl_parcel.createTypedArray(RouteSelectionDescriptor.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

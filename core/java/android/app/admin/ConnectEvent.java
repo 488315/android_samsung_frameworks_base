@@ -2,27 +2,29 @@ package android.app.admin;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /* loaded from: classes.dex */
 public final class ConnectEvent extends NetworkEvent implements Parcelable {
-    public static final Parcelable.Creator<ConnectEvent> CREATOR = new Parcelable.Creator<ConnectEvent>() { // from class: android.app.admin.ConnectEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConnectEvent createFromParcel(Parcel in) {
-            if (in.readInt() != 2) {
-                return null;
-            }
-            return new ConnectEvent(in);
-        }
+    public static final Parcelable.Creator<ConnectEvent> CREATOR =
+            new Parcelable.Creator<ConnectEvent>() { // from class: android.app.admin.ConnectEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConnectEvent createFromParcel(Parcel in) {
+                    if (in.readInt() != 2) {
+                        return null;
+                    }
+                    return new ConnectEvent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConnectEvent[] newArray(int size) {
-            return new ConnectEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConnectEvent[] newArray(int size) {
+                    return new ConnectEvent[size];
+                }
+            };
     private final String mIpAddress;
     private final int mPort;
 
@@ -53,7 +55,13 @@ public final class ConnectEvent extends NetworkEvent implements Parcelable {
     }
 
     public String toString() {
-        return String.format("ConnectEvent(%d, %s, %d, %d, %s)", Long.valueOf(this.mId), this.mIpAddress, Integer.valueOf(this.mPort), Long.valueOf(this.mTimestamp), this.mPackageName);
+        return String.format(
+                "ConnectEvent(%d, %s, %d, %d, %s)",
+                Long.valueOf(this.mId),
+                this.mIpAddress,
+                Integer.valueOf(this.mPort),
+                Long.valueOf(this.mTimestamp),
+                this.mPackageName);
     }
 
     @Override // android.app.admin.NetworkEvent, android.os.Parcelable

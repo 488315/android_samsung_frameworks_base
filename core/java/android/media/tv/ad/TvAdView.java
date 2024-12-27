@@ -9,8 +9,6 @@ import android.graphics.RectF;
 import android.media.tv.TvInputManager;
 import android.media.tv.TvTrackInfo;
 import android.media.tv.TvView;
-import android.media.tv.ad.TvAdManager;
-import android.media.tv.ad.TvAdView;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,7 +23,9 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewRootImpl;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -78,42 +78,51 @@ public class TvAdView extends ViewGroup {
         super(context, attrs, defStyleAttr);
         this.mHandler = new Handler();
         this.mCallbackLock = new Object();
-        this.mSurfaceHolderCallback = new SurfaceHolder.Callback() { // from class: android.media.tv.ad.TvAdView.1
-            @Override // android.view.SurfaceHolder.Callback
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-                TvAdView.this.mSurfaceFormat = format;
-                TvAdView.this.mSurfaceWidth = width;
-                TvAdView.this.mSurfaceHeight = height;
-                TvAdView.this.mSurfaceChanged = true;
-                TvAdView.this.dispatchSurfaceChanged(TvAdView.this.mSurfaceFormat, TvAdView.this.mSurfaceWidth, TvAdView.this.mSurfaceHeight);
-            }
+        this.mSurfaceHolderCallback =
+                new SurfaceHolder.Callback() { // from class: android.media.tv.ad.TvAdView.1
+                    @Override // android.view.SurfaceHolder.Callback
+                    public void surfaceChanged(
+                            SurfaceHolder holder, int format, int width, int height) {
+                        TvAdView.this.mSurfaceFormat = format;
+                        TvAdView.this.mSurfaceWidth = width;
+                        TvAdView.this.mSurfaceHeight = height;
+                        TvAdView.this.mSurfaceChanged = true;
+                        TvAdView.this.dispatchSurfaceChanged(
+                                TvAdView.this.mSurfaceFormat,
+                                TvAdView.this.mSurfaceWidth,
+                                TvAdView.this.mSurfaceHeight);
+                    }
 
-            @Override // android.view.SurfaceHolder.Callback
-            public void surfaceCreated(SurfaceHolder holder) {
-                TvAdView.this.mSurface = holder.getSurface();
-                TvAdView.this.setSessionSurface(TvAdView.this.mSurface);
-            }
+                    @Override // android.view.SurfaceHolder.Callback
+                    public void surfaceCreated(SurfaceHolder holder) {
+                        TvAdView.this.mSurface = holder.getSurface();
+                        TvAdView.this.setSessionSurface(TvAdView.this.mSurface);
+                    }
 
-            @Override // android.view.SurfaceHolder.Callback
-            public void surfaceDestroyed(SurfaceHolder holder) {
-                TvAdView.this.mSurface = null;
-                TvAdView.this.mSurfaceChanged = false;
-                TvAdView.this.setSessionSurface(null);
-            }
-        };
-        this.mFinishedInputEventCallback = new TvAdManager.Session.FinishedInputEventCallback() { // from class: android.media.tv.ad.TvAdView.3
-            @Override // android.media.tv.ad.TvAdManager.Session.FinishedInputEventCallback
-            public void onFinishedInputEvent(Object token, boolean handled) {
-                ViewRootImpl viewRootImpl;
-                if (handled) {
-                    return;
-                }
-                InputEvent event = (InputEvent) token;
-                if (!TvAdView.this.dispatchUnhandledInputEvent(event) && (viewRootImpl = TvAdView.this.getViewRootImpl()) != null) {
-                    viewRootImpl.dispatchUnhandledInputEvent(event);
-                }
-            }
-        };
+                    @Override // android.view.SurfaceHolder.Callback
+                    public void surfaceDestroyed(SurfaceHolder holder) {
+                        TvAdView.this.mSurface = null;
+                        TvAdView.this.mSurfaceChanged = false;
+                        TvAdView.this.setSessionSurface(null);
+                    }
+                };
+        this.mFinishedInputEventCallback =
+                new TvAdManager.Session
+                        .FinishedInputEventCallback() { // from class:
+                                                        // android.media.tv.ad.TvAdView.3
+                    @Override // android.media.tv.ad.TvAdManager.Session.FinishedInputEventCallback
+                    public void onFinishedInputEvent(Object token, boolean handled) {
+                        ViewRootImpl viewRootImpl;
+                        if (handled) {
+                            return;
+                        }
+                        InputEvent event = (InputEvent) token;
+                        if (!TvAdView.this.dispatchUnhandledInputEvent(event)
+                                && (viewRootImpl = TvAdView.this.getViewRootImpl()) != null) {
+                            viewRootImpl.dispatchUnhandledInputEvent(event);
+                        }
+                    }
+                };
         int sourceResId = Resources.getAttributeSetSourceResId(attrs);
         if (sourceResId != 0) {
             Log.d(TAG, "Build local AttributeSet");
@@ -166,7 +175,11 @@ public class TvAdView extends ViewGroup {
     @Override // android.view.ViewGroup, android.view.View
     public void onLayout(boolean changed, int left, int top, int right, int bottom) {
         if (this.mUseRequestedSurfaceLayout) {
-            this.mSurfaceView.layout(this.mSurfaceViewLeft, this.mSurfaceViewTop, this.mSurfaceViewRight, this.mSurfaceViewBottom);
+            this.mSurfaceView.layout(
+                    this.mSurfaceViewLeft,
+                    this.mSurfaceViewTop,
+                    this.mSurfaceViewRight,
+                    this.mSurfaceViewBottom);
         } else {
             this.mSurfaceView.layout(0, 0, right - left, bottom - top);
         }
@@ -178,7 +191,9 @@ public class TvAdView extends ViewGroup {
         int width = this.mSurfaceView.getMeasuredWidth();
         int height = this.mSurfaceView.getMeasuredHeight();
         int childState = this.mSurfaceView.getMeasuredState();
-        setMeasuredDimension(resolveSizeAndState(width, widthMeasureSpec, childState), resolveSizeAndState(height, heightMeasureSpec, childState << 16));
+        setMeasuredDimension(
+                resolveSizeAndState(width, widthMeasureSpec, childState),
+                resolveSizeAndState(height, heightMeasureSpec, childState << 16));
     }
 
     @Override // android.view.View
@@ -198,13 +213,17 @@ public class TvAdView extends ViewGroup {
             removeView(this.mSurfaceView);
         }
         this.mSurface = null;
-        this.mSurfaceView = new SurfaceView(getContext(), this.mAttrs, this.mDefStyleAttr) { // from class: android.media.tv.ad.TvAdView.2
-            @Override // android.view.SurfaceView
-            protected void updateSurface() {
-                super.updateSurface();
-                TvAdView.this.relayoutSessionMediaView();
-            }
-        };
+        this.mSurfaceView =
+                new SurfaceView(
+                        getContext(),
+                        this.mAttrs,
+                        this.mDefStyleAttr) { // from class: android.media.tv.ad.TvAdView.2
+                    @Override // android.view.SurfaceView
+                    protected void updateSurface() {
+                        super.updateSurface();
+                        TvAdView.this.relayoutSessionMediaView();
+                    }
+                };
         this.mSurfaceView.setSecure(true);
         this.mSurfaceView.getHolder().addCallback(this.mSurfaceHolderCallback);
         this.mSurfaceView.getHolder().setFormat(-3);
@@ -287,7 +306,8 @@ public class TvAdView extends ViewGroup {
     }
 
     public boolean dispatchUnhandledInputEvent(InputEvent event) {
-        if (this.mOnUnhandledInputEventListener != null && this.mOnUnhandledInputEventListener.onUnhandledInputEvent(event)) {
+        if (this.mOnUnhandledInputEventListener != null
+                && this.mOnUnhandledInputEventListener.onUnhandledInputEvent(event)) {
             return true;
         }
         return onUnhandledInputEvent(event);
@@ -318,7 +338,9 @@ public class TvAdView extends ViewGroup {
             return false;
         }
         InputEvent copiedEvent = event.copy();
-        int ret = this.mSession.dispatchInputEvent(copiedEvent, copiedEvent, this.mFinishedInputEventCallback, this.mHandler);
+        int ret =
+                this.mSession.dispatchInputEvent(
+                        copiedEvent, copiedEvent, this.mFinishedInputEventCallback, this.mHandler);
         return ret != 0;
     }
 
@@ -390,7 +412,8 @@ public class TvAdView extends ViewGroup {
     }
 
     public void setCallback(Executor executor, TvAdCallback callback) {
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) callback);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) callback);
         synchronized (this.mCallbackLock) {
             this.mCallbackExecutor = executor;
             this.mCallback = callback;
@@ -431,7 +454,10 @@ public class TvAdView extends ViewGroup {
                 if (TvAdView.this.mSurface != null) {
                     TvAdView.this.setSessionSurface(TvAdView.this.mSurface);
                     if (TvAdView.this.mSurfaceChanged) {
-                        TvAdView.this.dispatchSurfaceChanged(TvAdView.this.mSurfaceFormat, TvAdView.this.mSurfaceWidth, TvAdView.this.mSurfaceHeight);
+                        TvAdView.this.dispatchSurfaceChanged(
+                                TvAdView.this.mSurfaceFormat,
+                                TvAdView.this.mSurfaceWidth,
+                                TvAdView.this.mSurfaceHeight);
                     }
                 }
                 TvAdView.this.createSessionMediaView();
@@ -453,7 +479,8 @@ public class TvAdView extends ViewGroup {
         }
 
         @Override // android.media.tv.ad.TvAdManager.SessionCallback
-        public void onLayoutSurface(TvAdManager.Session session, int left, int top, int right, int bottom) {
+        public void onLayoutSurface(
+                TvAdManager.Session session, int left, int top, int right, int bottom) {
             if (this != TvAdView.this.mSessionCallback) {
                 Log.w(TvAdView.TAG, "onLayoutSurface - session not created");
                 return;
@@ -474,12 +501,15 @@ public class TvAdView extends ViewGroup {
             }
             synchronized (TvAdView.this.mCallbackLock) {
                 if (TvAdView.this.mCallbackExecutor != null) {
-                    TvAdView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvAdView.MySessionCallback.this.lambda$onRequestCurrentVideoBounds$0();
-                        }
-                    });
+                    TvAdView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvAdView.MySessionCallback.this
+                                            .lambda$onRequestCurrentVideoBounds$0();
+                                }
+                            });
                 }
             }
         }
@@ -501,12 +531,15 @@ public class TvAdView extends ViewGroup {
             }
             synchronized (TvAdView.this.mCallbackLock) {
                 if (TvAdView.this.mCallbackExecutor != null) {
-                    TvAdView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvAdView.MySessionCallback.this.lambda$onRequestCurrentChannelUri$1();
-                        }
-                    });
+                    TvAdView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvAdView.MySessionCallback.this
+                                            .lambda$onRequestCurrentChannelUri$1();
+                                }
+                            });
                 }
             }
         }
@@ -528,12 +561,15 @@ public class TvAdView extends ViewGroup {
             }
             synchronized (TvAdView.this.mCallbackLock) {
                 if (TvAdView.this.mCallbackExecutor != null) {
-                    TvAdView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda2
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvAdView.MySessionCallback.this.lambda$onRequestTrackInfoList$2();
-                        }
-                    });
+                    TvAdView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda2
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvAdView.MySessionCallback.this
+                                            .lambda$onRequestTrackInfoList$2();
+                                }
+                            });
                 }
             }
         }
@@ -555,12 +591,15 @@ public class TvAdView extends ViewGroup {
             }
             synchronized (TvAdView.this.mCallbackLock) {
                 if (TvAdView.this.mCallbackExecutor != null) {
-                    TvAdView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda4
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvAdView.MySessionCallback.this.lambda$onRequestCurrentTvInputId$3();
-                        }
-                    });
+                    TvAdView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda4
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvAdView.MySessionCallback.this
+                                            .lambda$onRequestCurrentTvInputId$3();
+                                }
+                            });
                 }
             }
         }
@@ -575,50 +614,55 @@ public class TvAdView extends ViewGroup {
         }
 
         @Override // android.media.tv.ad.TvAdManager.SessionCallback
-        public void onRequestSigning(TvAdManager.Session session, final String id, final String algorithm, final String alias, final byte[] data) {
+        public void onRequestSigning(
+                TvAdManager.Session session,
+                final String id,
+                final String algorithm,
+                final String alias,
+                final byte[] data) {
             if (this != TvAdView.this.mSessionCallback) {
                 Log.w(TvAdView.TAG, "onRequestSigning - session not created");
                 return;
             }
             synchronized (TvAdView.this.mCallbackLock) {
                 if (TvAdView.this.mCallbackExecutor != null) {
-                    TvAdView.this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda3
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TvAdView.MySessionCallback.this.lambda$onRequestSigning$4(id, algorithm, alias, data);
-                        }
-                    });
+                    TvAdView.this.mCallbackExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.media.tv.ad.TvAdView$MySessionCallback$$ExternalSyntheticLambda3
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TvAdView.MySessionCallback.this.lambda$onRequestSigning$4(
+                                            id, algorithm, alias, data);
+                                }
+                            });
                 }
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onRequestSigning$4(String id, String algorithm, String alias, byte[] data) {
+        public /* synthetic */ void lambda$onRequestSigning$4(
+                String id, String algorithm, String alias, byte[] data) {
             synchronized (TvAdView.this.mCallbackLock) {
                 if (TvAdView.this.mCallback != null) {
-                    TvAdView.this.mCallback.onRequestSigning(this.mServiceId, id, algorithm, alias, data);
+                    TvAdView.this.mCallback.onRequestSigning(
+                            this.mServiceId, id, algorithm, alias, data);
                 }
             }
         }
     }
 
-    public static abstract class TvAdCallback {
-        public void onRequestCurrentVideoBounds(String serviceId) {
-        }
+    public abstract static class TvAdCallback {
+        public void onRequestCurrentVideoBounds(String serviceId) {}
 
-        public void onRequestCurrentChannelUri(String serviceId) {
-        }
+        public void onRequestCurrentChannelUri(String serviceId) {}
 
-        public void onRequestTrackInfoList(String serviceId) {
-        }
+        public void onRequestTrackInfoList(String serviceId) {}
 
-        public void onRequestCurrentTvInputId(String serviceId) {
-        }
+        public void onRequestCurrentTvInputId(String serviceId) {}
 
-        public void onRequestSigning(String serviceId, String signingId, String algorithm, String alias, byte[] data) {
-        }
+        public void onRequestSigning(
+                String serviceId, String signingId, String algorithm, String alias, byte[] data) {}
 
-        public void onStateChanged(String serviceId, int state, int err) {
-        }
+        public void onStateChanged(String serviceId, int state, int err) {}
     }
 }

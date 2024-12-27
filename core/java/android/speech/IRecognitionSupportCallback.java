@@ -16,12 +16,10 @@ public interface IRecognitionSupportCallback extends IInterface {
 
     public static class Default implements IRecognitionSupportCallback {
         @Override // android.speech.IRecognitionSupportCallback
-        public void onSupportResult(RecognitionSupport recognitionSupport) throws RemoteException {
-        }
+        public void onSupportResult(RecognitionSupport recognitionSupport) throws RemoteException {}
 
         @Override // android.speech.IRecognitionSupportCallback
-        public void onError(int error) throws RemoteException {
-        }
+        public void onError(int error) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IRecognitionSupportCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRecognitionSupportCallback {
+    public abstract static class Stub extends Binder implements IRecognitionSupportCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onSupportResult = 1;
 
@@ -70,7 +68,8 @@ public interface IRecognitionSupportCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRecognitionSupportCallback.DESCRIPTOR);
             }
@@ -80,7 +79,8 @@ public interface IRecognitionSupportCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RecognitionSupport _arg0 = (RecognitionSupport) data.readTypedObject(RecognitionSupport.CREATOR);
+                    RecognitionSupport _arg0 =
+                            (RecognitionSupport) data.readTypedObject(RecognitionSupport.CREATOR);
                     data.enforceNoDataAvail();
                     onSupportResult(_arg0);
                     return true;
@@ -111,7 +111,8 @@ public interface IRecognitionSupportCallback extends IInterface {
             }
 
             @Override // android.speech.IRecognitionSupportCallback
-            public void onSupportResult(RecognitionSupport recognitionSupport) throws RemoteException {
+            public void onSupportResult(RecognitionSupport recognitionSupport)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRecognitionSupportCallback.DESCRIPTOR);

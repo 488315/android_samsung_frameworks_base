@@ -13,7 +13,6 @@ public final class StatLoggerProto {
         public static final long MAX_DURATION_STATS_MICROS = 1112396529671L;
         public static final long TOTAL_DURATION_MICROS = 1112396529668L;
 
-        public Event() {
-        }
+        public Event() {}
     }
 }

@@ -7,22 +7,23 @@ import android.text.TextUtils;
 
 /* loaded from: classes3.dex */
 public class GatewayInfo implements Parcelable {
-    public static final Parcelable.Creator<GatewayInfo> CREATOR = new Parcelable.Creator<GatewayInfo>() { // from class: android.telecom.GatewayInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GatewayInfo createFromParcel(Parcel source) {
-            String gatewayPackageName = source.readString();
-            Uri gatewayUri = Uri.CREATOR.createFromParcel(source);
-            Uri originalAddress = Uri.CREATOR.createFromParcel(source);
-            return new GatewayInfo(gatewayPackageName, gatewayUri, originalAddress);
-        }
+    public static final Parcelable.Creator<GatewayInfo> CREATOR =
+            new Parcelable.Creator<GatewayInfo>() { // from class: android.telecom.GatewayInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GatewayInfo createFromParcel(Parcel source) {
+                    String gatewayPackageName = source.readString();
+                    Uri gatewayUri = Uri.CREATOR.createFromParcel(source);
+                    Uri originalAddress = Uri.CREATOR.createFromParcel(source);
+                    return new GatewayInfo(gatewayPackageName, gatewayUri, originalAddress);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GatewayInfo[] newArray(int size) {
-            return new GatewayInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GatewayInfo[] newArray(int size) {
+                    return new GatewayInfo[size];
+                }
+            };
     private final Uri mGatewayAddress;
     private final String mGatewayProviderPackageName;
     private final Uri mOriginalAddress;

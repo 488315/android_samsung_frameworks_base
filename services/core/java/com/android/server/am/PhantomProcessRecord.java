@@ -7,8 +7,9 @@ import android.os.Trace;
 import android.os.UserHandle;
 import android.util.EventLog;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
-import com.android.server.am.ProcessList;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.function.Consumer;
@@ -31,24 +32,41 @@ public final class PhantomProcessRecord {
     public boolean mZombie;
     public static final long[] LONG_OUT = new long[1];
     public static final int[] LONG_FORMAT = {8202};
-    public final AnonymousClass1 mProcKillTimer = new Runnable() { // from class: com.android.server.am.PhantomProcessRecord.1
-        @Override // java.lang.Runnable
-        public final void run() {
-            synchronized (PhantomProcessRecord.this.mLock) {
-                Slog.w("ActivityManager", "Process " + toString() + " is still alive after " + PhantomProcessRecord.this.mService.mConstants.mProcessKillTimeoutMs + "ms");
-                PhantomProcessRecord phantomProcessRecord = PhantomProcessRecord.this;
-                phantomProcessRecord.mZombie = true;
-                phantomProcessRecord.onProcDied(false);
-            }
-        }
-    };
+    public final AnonymousClass1 mProcKillTimer =
+            new Runnable() { // from class: com.android.server.am.PhantomProcessRecord.1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    synchronized (PhantomProcessRecord.this.mLock) {
+                        Slog.w(
+                                "ActivityManager",
+                                "Process "
+                                        + toString()
+                                        + " is still alive after "
+                                        + PhantomProcessRecord.this
+                                                .mService
+                                                .mConstants
+                                                .mProcessKillTimeoutMs
+                                        + "ms");
+                        PhantomProcessRecord phantomProcessRecord = PhantomProcessRecord.this;
+                        phantomProcessRecord.mZombie = true;
+                        phantomProcessRecord.onProcDied(false);
+                    }
+                }
+            };
     public boolean mKilled = false;
     public int mAdj = -1000;
     public final long mKnownSince = SystemClock.elapsedRealtime();
     public final ProcessList.KillHandler mKillHandler = ProcessList.sKillHandler;
 
     /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.am.PhantomProcessRecord$1] */
-    public PhantomProcessRecord(String str, int i, int i2, int i3, ActivityManagerService activityManagerService, PhantomProcessList$$ExternalSyntheticLambda0 phantomProcessList$$ExternalSyntheticLambda0) {
+    public PhantomProcessRecord(
+            String str,
+            int i,
+            int i2,
+            int i3,
+            ActivityManagerService activityManagerService,
+            PhantomProcessList$$ExternalSyntheticLambda0
+                    phantomProcessList$$ExternalSyntheticLambda0) {
         this.mProcessName = str;
         this.mUid = i;
         this.mPid = i2;
@@ -86,7 +104,8 @@ public final class PhantomProcessRecord {
         }
         Trace.traceBegin(64L, "kill");
         if (z || this.mUid == this.mService.mCurOomAdjUid) {
-            this.mService.reportUidInfoMessageLocked(this.mUid, "Killing " + toString() + ": " + str);
+            this.mService.reportUidInfoMessageLocked(
+                    this.mUid, "Killing " + toString() + ": " + str);
         }
         if (this.mPid > 0) {
             Integer valueOf = Integer.valueOf(UserHandle.getUserId(this.mUid));
@@ -94,9 +113,17 @@ public final class PhantomProcessRecord {
             String str2 = this.mProcessName;
             Integer valueOf3 = Integer.valueOf(this.mAdj);
             long[] rss = Process.getRss(this.mPid);
-            EventLog.writeEvent(30023, valueOf, valueOf2, str2, valueOf3, str, Long.valueOf((rss == null || rss.length <= 0) ? 0L : rss[0]));
+            EventLog.writeEvent(
+                    30023,
+                    valueOf,
+                    valueOf2,
+                    str2,
+                    valueOf3,
+                    str,
+                    Long.valueOf((rss == null || rss.length <= 0) ? 0L : rss[0]));
             if (Process.supportsPidFd()) {
-                this.mKillHandler.postDelayed(this.mProcKillTimer, this, this.mService.mConstants.mProcessKillTimeoutMs);
+                this.mKillHandler.postDelayed(
+                        this.mProcKillTimer, this, this.mService.mConstants.mProcessKillTimeoutMs);
             } else {
                 onProcDied(false);
             }

@@ -12,7 +12,8 @@ import android.widget.ListAdapter;
 import android.widget.PopupWindow;
 
 /* loaded from: classes5.dex */
-public abstract class MenuPopup implements ShowableListMenu, MenuPresenter, AdapterView.OnItemClickListener {
+public abstract class MenuPopup
+        implements ShowableListMenu, MenuPresenter, AdapterView.OnItemClickListener {
     private Rect mEpicenterBounds;
 
     public abstract void addMenu(MenuBuilder menuBuilder);
@@ -40,8 +41,7 @@ public abstract class MenuPopup implements ShowableListMenu, MenuPresenter, Adap
     }
 
     @Override // com.android.internal.view.menu.MenuPresenter
-    public void initForMenu(Context context, MenuBuilder menu) {
-    }
+    public void initForMenu(Context context, MenuBuilder menu) {}
 
     @Override // com.android.internal.view.menu.MenuPresenter
     public MenuView getMenuView(ViewGroup root) {
@@ -70,7 +70,8 @@ public abstract class MenuPopup implements ShowableListMenu, MenuPresenter, Adap
         wrappedAdapter.mAdapterMenu.performItemAction((MenuItem) outerAdapter.getItem(position), 0);
     }
 
-    protected static int measureIndividualMenuWidth(ListAdapter adapter, ViewGroup parent, Context context, int maxAllowedWidth) {
+    protected static int measureIndividualMenuWidth(
+            ListAdapter adapter, ViewGroup parent, Context context, int maxAllowedWidth) {
         int maxWidth = 0;
         View itemView = null;
         int itemType = 0;

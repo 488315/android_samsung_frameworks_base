@@ -9,56 +9,98 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IKeystoreSecurityLevel extends IInterface {
-    public static final String DESCRIPTOR = "android$system$keystore2$IKeystoreSecurityLevel".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$system$keystore2$IKeystoreSecurityLevel".replace('$', '.');
     public static final String HASH = "5648acc9b43590ef0a775b6f5c553831c20cccc4";
     public static final int KEY_FLAG_AUTH_BOUND_WITHOUT_CRYPTOGRAPHIC_LSKF_BINDING = 1;
     public static final int VERSION = 4;
 
-    EphemeralStorageKeyResponse convertStorageKeyToEphemeral(KeyDescriptor keyDescriptor) throws RemoteException;
+    EphemeralStorageKeyResponse convertStorageKeyToEphemeral(KeyDescriptor keyDescriptor)
+            throws RemoteException;
 
-    CreateOperationResponse createOperation(KeyDescriptor keyDescriptor, KeyParameter[] keyParameterArr, boolean z) throws RemoteException;
+    CreateOperationResponse createOperation(
+            KeyDescriptor keyDescriptor, KeyParameter[] keyParameterArr, boolean z)
+            throws RemoteException;
 
     void deleteKey(KeyDescriptor keyDescriptor) throws RemoteException;
 
-    KeyMetadata generateKey(KeyDescriptor keyDescriptor, KeyDescriptor keyDescriptor2, KeyParameter[] keyParameterArr, int i, byte[] bArr) throws RemoteException;
+    KeyMetadata generateKey(
+            KeyDescriptor keyDescriptor,
+            KeyDescriptor keyDescriptor2,
+            KeyParameter[] keyParameterArr,
+            int i,
+            byte[] bArr)
+            throws RemoteException;
 
     String getInterfaceHash() throws RemoteException;
 
     int getInterfaceVersion() throws RemoteException;
 
-    KeyMetadata importKey(KeyDescriptor keyDescriptor, KeyDescriptor keyDescriptor2, KeyParameter[] keyParameterArr, int i, byte[] bArr) throws RemoteException;
+    KeyMetadata importKey(
+            KeyDescriptor keyDescriptor,
+            KeyDescriptor keyDescriptor2,
+            KeyParameter[] keyParameterArr,
+            int i,
+            byte[] bArr)
+            throws RemoteException;
 
-    KeyMetadata importWrappedKey(KeyDescriptor keyDescriptor, KeyDescriptor keyDescriptor2, byte[] bArr, KeyParameter[] keyParameterArr, AuthenticatorSpec[] authenticatorSpecArr) throws RemoteException;
+    KeyMetadata importWrappedKey(
+            KeyDescriptor keyDescriptor,
+            KeyDescriptor keyDescriptor2,
+            byte[] bArr,
+            KeyParameter[] keyParameterArr,
+            AuthenticatorSpec[] authenticatorSpecArr)
+            throws RemoteException;
 
     public static class Default implements IKeystoreSecurityLevel {
         @Override // android.system.keystore2.IKeystoreSecurityLevel
-        public CreateOperationResponse createOperation(KeyDescriptor key, KeyParameter[] operationParameters, boolean forced) throws RemoteException {
+        public CreateOperationResponse createOperation(
+                KeyDescriptor key, KeyParameter[] operationParameters, boolean forced)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.system.keystore2.IKeystoreSecurityLevel
-        public KeyMetadata generateKey(KeyDescriptor key, KeyDescriptor attestationKey, KeyParameter[] params, int flags, byte[] entropy) throws RemoteException {
+        public KeyMetadata generateKey(
+                KeyDescriptor key,
+                KeyDescriptor attestationKey,
+                KeyParameter[] params,
+                int flags,
+                byte[] entropy)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.system.keystore2.IKeystoreSecurityLevel
-        public KeyMetadata importKey(KeyDescriptor key, KeyDescriptor attestationKey, KeyParameter[] params, int flags, byte[] keyData) throws RemoteException {
+        public KeyMetadata importKey(
+                KeyDescriptor key,
+                KeyDescriptor attestationKey,
+                KeyParameter[] params,
+                int flags,
+                byte[] keyData)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.system.keystore2.IKeystoreSecurityLevel
-        public KeyMetadata importWrappedKey(KeyDescriptor key, KeyDescriptor wrappingKey, byte[] maskingKey, KeyParameter[] params, AuthenticatorSpec[] authenticators) throws RemoteException {
+        public KeyMetadata importWrappedKey(
+                KeyDescriptor key,
+                KeyDescriptor wrappingKey,
+                byte[] maskingKey,
+                KeyParameter[] params,
+                AuthenticatorSpec[] authenticators)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.system.keystore2.IKeystoreSecurityLevel
-        public EphemeralStorageKeyResponse convertStorageKeyToEphemeral(KeyDescriptor storageKey) throws RemoteException {
+        public EphemeralStorageKeyResponse convertStorageKeyToEphemeral(KeyDescriptor storageKey)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.system.keystore2.IKeystoreSecurityLevel
-        public void deleteKey(KeyDescriptor key) throws RemoteException {
-        }
+        public void deleteKey(KeyDescriptor key) throws RemoteException {}
 
         @Override // android.system.keystore2.IKeystoreSecurityLevel
         public int getInterfaceVersion() {
@@ -76,7 +118,7 @@ public interface IKeystoreSecurityLevel extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeystoreSecurityLevel {
+    public abstract static class Stub extends Binder implements IKeystoreSecurityLevel {
         static final int TRANSACTION_convertStorageKeyToEphemeral = 5;
         static final int TRANSACTION_createOperation = 1;
         static final int TRANSACTION_deleteKey = 6;
@@ -136,7 +178,8 @@ public interface IKeystoreSecurityLevel extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -157,8 +200,10 @@ public interface IKeystoreSecurityLevel extends IInterface {
             }
             switch (code) {
                 case 1:
-                    KeyDescriptor _arg0 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
-                    KeyParameter[] _arg1 = (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
+                    KeyDescriptor _arg0 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyParameter[] _arg1 =
+                            (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
                     boolean _arg2 = data.readBoolean();
                     data.enforceNoDataAvail();
                     CreateOperationResponse _result = createOperation(_arg0, _arg1, _arg2);
@@ -166,9 +211,12 @@ public interface IKeystoreSecurityLevel extends IInterface {
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 2:
-                    KeyDescriptor _arg02 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
-                    KeyDescriptor _arg12 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
-                    KeyParameter[] _arg22 = (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
+                    KeyDescriptor _arg02 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg12 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyParameter[] _arg22 =
+                            (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
                     int _arg3 = data.readInt();
                     byte[] _arg4 = data.createByteArray();
                     data.enforceNoDataAvail();
@@ -177,9 +225,12 @@ public interface IKeystoreSecurityLevel extends IInterface {
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 3:
-                    KeyDescriptor _arg03 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
-                    KeyDescriptor _arg13 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
-                    KeyParameter[] _arg23 = (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
+                    KeyDescriptor _arg03 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg13 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyParameter[] _arg23 =
+                            (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
                     int _arg32 = data.readInt();
                     byte[] _arg42 = data.createByteArray();
                     data.enforceNoDataAvail();
@@ -188,25 +239,31 @@ public interface IKeystoreSecurityLevel extends IInterface {
                     reply.writeTypedObject(_result3, 1);
                     return true;
                 case 4:
-                    KeyDescriptor _arg04 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
-                    KeyDescriptor _arg14 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg04 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg14 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
                     byte[] _arg24 = data.createByteArray();
-                    KeyParameter[] _arg33 = (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
-                    AuthenticatorSpec[] _arg43 = (AuthenticatorSpec[]) data.createTypedArray(AuthenticatorSpec.CREATOR);
+                    KeyParameter[] _arg33 =
+                            (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
+                    AuthenticatorSpec[] _arg43 =
+                            (AuthenticatorSpec[]) data.createTypedArray(AuthenticatorSpec.CREATOR);
                     data.enforceNoDataAvail();
                     KeyMetadata _result4 = importWrappedKey(_arg04, _arg14, _arg24, _arg33, _arg43);
                     reply.writeNoException();
                     reply.writeTypedObject(_result4, 1);
                     return true;
                 case 5:
-                    KeyDescriptor _arg05 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg05 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     EphemeralStorageKeyResponse _result5 = convertStorageKeyToEphemeral(_arg05);
                     reply.writeNoException();
                     reply.writeTypedObject(_result5, 1);
                     return true;
                 case 6:
-                    KeyDescriptor _arg06 = (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
+                    KeyDescriptor _arg06 =
+                            (KeyDescriptor) data.readTypedObject(KeyDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     deleteKey(_arg06);
                     reply.writeNoException();
@@ -235,7 +292,9 @@ public interface IKeystoreSecurityLevel extends IInterface {
             }
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
-            public CreateOperationResponse createOperation(KeyDescriptor key, KeyParameter[] operationParameters, boolean forced) throws RemoteException {
+            public CreateOperationResponse createOperation(
+                    KeyDescriptor key, KeyParameter[] operationParameters, boolean forced)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -249,7 +308,9 @@ public interface IKeystoreSecurityLevel extends IInterface {
                         throw new RemoteException("Method createOperation is unimplemented.");
                     }
                     _reply.readException();
-                    CreateOperationResponse _result = (CreateOperationResponse) _reply.readTypedObject(CreateOperationResponse.CREATOR);
+                    CreateOperationResponse _result =
+                            (CreateOperationResponse)
+                                    _reply.readTypedObject(CreateOperationResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -258,7 +319,13 @@ public interface IKeystoreSecurityLevel extends IInterface {
             }
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
-            public KeyMetadata generateKey(KeyDescriptor key, KeyDescriptor attestationKey, KeyParameter[] params, int flags, byte[] entropy) throws RemoteException {
+            public KeyMetadata generateKey(
+                    KeyDescriptor key,
+                    KeyDescriptor attestationKey,
+                    KeyParameter[] params,
+                    int flags,
+                    byte[] entropy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -283,7 +350,13 @@ public interface IKeystoreSecurityLevel extends IInterface {
             }
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
-            public KeyMetadata importKey(KeyDescriptor key, KeyDescriptor attestationKey, KeyParameter[] params, int flags, byte[] keyData) throws RemoteException {
+            public KeyMetadata importKey(
+                    KeyDescriptor key,
+                    KeyDescriptor attestationKey,
+                    KeyParameter[] params,
+                    int flags,
+                    byte[] keyData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -308,7 +381,13 @@ public interface IKeystoreSecurityLevel extends IInterface {
             }
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
-            public KeyMetadata importWrappedKey(KeyDescriptor key, KeyDescriptor wrappingKey, byte[] maskingKey, KeyParameter[] params, AuthenticatorSpec[] authenticators) throws RemoteException {
+            public KeyMetadata importWrappedKey(
+                    KeyDescriptor key,
+                    KeyDescriptor wrappingKey,
+                    byte[] maskingKey,
+                    KeyParameter[] params,
+                    AuthenticatorSpec[] authenticators)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -333,7 +412,8 @@ public interface IKeystoreSecurityLevel extends IInterface {
             }
 
             @Override // android.system.keystore2.IKeystoreSecurityLevel
-            public EphemeralStorageKeyResponse convertStorageKeyToEphemeral(KeyDescriptor storageKey) throws RemoteException {
+            public EphemeralStorageKeyResponse convertStorageKeyToEphemeral(
+                    KeyDescriptor storageKey) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -342,10 +422,13 @@ public interface IKeystoreSecurityLevel extends IInterface {
                     _data.writeTypedObject(storageKey, 0);
                     boolean _status = this.mRemote.transact(5, _data, _reply, 32);
                     if (!_status) {
-                        throw new RemoteException("Method convertStorageKeyToEphemeral is unimplemented.");
+                        throw new RemoteException(
+                                "Method convertStorageKeyToEphemeral is unimplemented.");
                     }
                     _reply.readException();
-                    EphemeralStorageKeyResponse _result = (EphemeralStorageKeyResponse) _reply.readTypedObject(EphemeralStorageKeyResponse.CREATOR);
+                    EphemeralStorageKeyResponse _result =
+                            (EphemeralStorageKeyResponse)
+                                    _reply.readTypedObject(EphemeralStorageKeyResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

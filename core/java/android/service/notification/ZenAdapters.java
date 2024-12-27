@@ -2,7 +2,6 @@ package android.service.notification;
 
 import android.app.Flags;
 import android.app.NotificationManager;
-import android.service.notification.ZenPolicy;
 
 /* loaded from: classes3.dex */
 public class ZenAdapters {
@@ -21,9 +20,27 @@ public class ZenAdapters {
         } else {
             i2 = 3;
         }
-        ZenPolicy.Builder zenPolicyBuilder = allowCalls.allowConversations(i2).allowEvents(policy.allowEvents()).allowMedia(policy.allowMedia()).allowMessages(policy.allowMessages() ? prioritySendersToPeopleType(policy.allowMessagesFrom()) : 4).allowReminders(policy.allowReminders()).allowRepeatCallers(policy.allowRepeatCallers()).allowSystem(policy.allowSystem());
+        ZenPolicy.Builder zenPolicyBuilder =
+                allowCalls
+                        .allowConversations(i2)
+                        .allowEvents(policy.allowEvents())
+                        .allowMedia(policy.allowMedia())
+                        .allowMessages(
+                                policy.allowMessages()
+                                        ? prioritySendersToPeopleType(policy.allowMessagesFrom())
+                                        : 4)
+                        .allowReminders(policy.allowReminders())
+                        .allowRepeatCallers(policy.allowRepeatCallers())
+                        .allowSystem(policy.allowSystem());
         if (policy.suppressedVisualEffects != -1) {
-            zenPolicyBuilder.showBadges(policy.showBadges()).showFullScreenIntent(policy.showFullScreenIntents()).showInAmbientDisplay(policy.showAmbient()).showInNotificationList(policy.showInNotificationList()).showLights(policy.showLights()).showPeeking(policy.showPeeking()).showStatusBarIcons(policy.showStatusBarIcons());
+            zenPolicyBuilder
+                    .showBadges(policy.showBadges())
+                    .showFullScreenIntent(policy.showFullScreenIntents())
+                    .showInAmbientDisplay(policy.showAmbient())
+                    .showInNotificationList(policy.showInNotificationList())
+                    .showLights(policy.showLights())
+                    .showPeeking(policy.showPeeking())
+                    .showStatusBarIcons(policy.showStatusBarIcons());
         }
         if (Flags.modesApi()) {
             zenPolicyBuilder.allowPriorityChannels(policy.allowPriorityChannels());
@@ -55,7 +72,8 @@ public class ZenAdapters {
         }
     }
 
-    public static int zenPolicyConversationSendersToNotificationPolicy(int zpConversationSenders, int defaultResult) {
+    public static int zenPolicyConversationSendersToNotificationPolicy(
+            int zpConversationSenders, int defaultResult) {
         switch (zpConversationSenders) {
             case 1:
                 return 1;
@@ -68,7 +86,8 @@ public class ZenAdapters {
         }
     }
 
-    private static int notificationPolicyConversationSendersToZenPolicy(int npPriorityConversationSenders) {
+    private static int notificationPolicyConversationSendersToZenPolicy(
+            int npPriorityConversationSenders) {
         switch (npPriorityConversationSenders) {
             case 1:
                 return 1;

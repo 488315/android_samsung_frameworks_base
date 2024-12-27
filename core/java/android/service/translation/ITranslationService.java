@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
 import android.view.translation.TranslationContext;
+
 import com.android.internal.os.IResultReceiver;
 
 /* loaded from: classes3.dex */
@@ -15,28 +16,31 @@ public interface ITranslationService extends IInterface {
 
     void onConnected(IBinder iBinder) throws RemoteException;
 
-    void onCreateTranslationSession(TranslationContext translationContext, int i, IResultReceiver iResultReceiver) throws RemoteException;
+    void onCreateTranslationSession(
+            TranslationContext translationContext, int i, IResultReceiver iResultReceiver)
+            throws RemoteException;
 
     void onDisconnected() throws RemoteException;
 
-    void onTranslationCapabilitiesRequest(int i, int i2, ResultReceiver resultReceiver) throws RemoteException;
+    void onTranslationCapabilitiesRequest(int i, int i2, ResultReceiver resultReceiver)
+            throws RemoteException;
 
     public static class Default implements ITranslationService {
         @Override // android.service.translation.ITranslationService
-        public void onConnected(IBinder callback) throws RemoteException {
-        }
+        public void onConnected(IBinder callback) throws RemoteException {}
 
         @Override // android.service.translation.ITranslationService
-        public void onDisconnected() throws RemoteException {
-        }
+        public void onDisconnected() throws RemoteException {}
 
         @Override // android.service.translation.ITranslationService
-        public void onCreateTranslationSession(TranslationContext translationContext, int sessionId, IResultReceiver receiver) throws RemoteException {
-        }
+        public void onCreateTranslationSession(
+                TranslationContext translationContext, int sessionId, IResultReceiver receiver)
+                throws RemoteException {}
 
         @Override // android.service.translation.ITranslationService
-        public void onTranslationCapabilitiesRequest(int sourceFormat, int targetFormat, ResultReceiver receiver) throws RemoteException {
-        }
+        public void onTranslationCapabilitiesRequest(
+                int sourceFormat, int targetFormat, ResultReceiver receiver)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -44,7 +48,7 @@ public interface ITranslationService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITranslationService {
+    public abstract static class Stub extends Binder implements ITranslationService {
         static final int TRANSACTION_onConnected = 1;
         static final int TRANSACTION_onCreateTranslationSession = 3;
         static final int TRANSACTION_onDisconnected = 2;
@@ -91,7 +95,8 @@ public interface ITranslationService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITranslationService.DESCRIPTOR);
             }
@@ -109,16 +114,19 @@ public interface ITranslationService extends IInterface {
                     onDisconnected();
                     return true;
                 case 3:
-                    TranslationContext _arg02 = (TranslationContext) data.readTypedObject(TranslationContext.CREATOR);
+                    TranslationContext _arg02 =
+                            (TranslationContext) data.readTypedObject(TranslationContext.CREATOR);
                     int _arg1 = data.readInt();
-                    IResultReceiver _arg2 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg2 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCreateTranslationSession(_arg02, _arg1, _arg2);
                     return true;
                 case 4:
                     int _arg03 = data.readInt();
                     int _arg12 = data.readInt();
-                    ResultReceiver _arg22 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg22 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     onTranslationCapabilitiesRequest(_arg03, _arg12, _arg22);
                     return true;
@@ -167,7 +175,9 @@ public interface ITranslationService extends IInterface {
             }
 
             @Override // android.service.translation.ITranslationService
-            public void onCreateTranslationSession(TranslationContext translationContext, int sessionId, IResultReceiver receiver) throws RemoteException {
+            public void onCreateTranslationSession(
+                    TranslationContext translationContext, int sessionId, IResultReceiver receiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITranslationService.DESCRIPTOR);
@@ -181,7 +191,9 @@ public interface ITranslationService extends IInterface {
             }
 
             @Override // android.service.translation.ITranslationService
-            public void onTranslationCapabilitiesRequest(int sourceFormat, int targetFormat, ResultReceiver receiver) throws RemoteException {
+            public void onTranslationCapabilitiesRequest(
+                    int sourceFormat, int targetFormat, ResultReceiver receiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITranslationService.DESCRIPTOR);

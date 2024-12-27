@@ -3,7 +3,7 @@ package android.telephony;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.RemoteException;
-import android.telephony.BinderCacheManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -13,7 +13,8 @@ import java.util.function.UnaryOperator;
 /* loaded from: classes4.dex */
 public class BinderCacheManager<T extends IInterface> {
     private final BinderInterfaceFactory<T> mBinderInterfaceFactory;
-    private final AtomicReference<BinderCacheManager<T>.BinderDeathTracker> mCachedConnection = new AtomicReference<>();
+    private final AtomicReference<BinderCacheManager<T>.BinderDeathTracker> mCachedConnection =
+            new AtomicReference<>();
 
     public interface BinderInterfaceFactory<T> {
         T create();
@@ -59,7 +60,8 @@ public class BinderCacheManager<T extends IInterface> {
                 } catch (NoSuchElementException e) {
                 }
             }
-            listeners.forEach(new BinderCacheManager$BinderDeathTracker$$ExternalSyntheticLambda0());
+            listeners.forEach(
+                    new BinderCacheManager$BinderDeathTracker$$ExternalSyntheticLambda0());
         }
 
         public T getConnection() {
@@ -77,7 +79,10 @@ public class BinderCacheManager<T extends IInterface> {
 
     public T listenOnBinder(Object obj, Runnable runnable) {
         BinderCacheManager<T>.BinderDeathTracker tracker;
-        if (obj == null || runnable == null || (tracker = getTracker()) == null || !tracker.addListener(obj, runnable)) {
+        if (obj == null
+                || runnable == null
+                || (tracker = getTracker()) == null
+                || !tracker.addListener(obj, runnable)) {
             return null;
         }
         return (T) tracker.getConnection();
@@ -101,14 +106,18 @@ public class BinderCacheManager<T extends IInterface> {
     }
 
     private BinderCacheManager<T>.BinderDeathTracker getTracker() {
-        return this.mCachedConnection.updateAndGet(new UnaryOperator() { // from class: android.telephony.BinderCacheManager$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                BinderCacheManager.BinderDeathTracker lambda$getTracker$0;
-                lambda$getTracker$0 = BinderCacheManager.this.lambda$getTracker$0((BinderCacheManager.BinderDeathTracker) obj);
-                return lambda$getTracker$0;
-            }
-        });
+        return this.mCachedConnection.updateAndGet(
+                new UnaryOperator() { // from class:
+                                      // android.telephony.BinderCacheManager$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        BinderCacheManager.BinderDeathTracker lambda$getTracker$0;
+                        lambda$getTracker$0 =
+                                BinderCacheManager.this.lambda$getTracker$0(
+                                        (BinderCacheManager.BinderDeathTracker) obj);
+                        return lambda$getTracker$0;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */

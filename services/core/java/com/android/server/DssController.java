@@ -7,7 +7,7 @@ import android.graphics.Rect;
 import android.os.Binder;
 import android.util.MergedConfiguration;
 import android.util.Slog;
-import com.android.server.DssController;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -106,7 +106,8 @@ public class DssController {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (this.mGameManager == null) {
-                this.mGameManager = (GameManagerInternal) LocalServices.getService(GameManagerInternal.class);
+                this.mGameManager =
+                        (GameManagerInternal) LocalServices.getService(GameManagerInternal.class);
             }
             GameManagerInternal gameManagerInternal = this.mGameManager;
             if (gameManagerInternal != null) {
@@ -188,7 +189,9 @@ public class DssController {
     public synchronized float getDssForPackage(String str) {
         HashMap hashMap;
         hashMap = this.mAllowList;
-        return (hashMap == null || !hashMap.containsKey(str)) ? 1.0f : ((DssAppDate) this.mAllowList.get(str)).mScale;
+        return (hashMap == null || !hashMap.containsKey(str))
+                ? 1.0f
+                : ((DssAppDate) this.mAllowList.get(str)).mScale;
     }
 
     public synchronized int getGameSiopLevel(String str) {
@@ -246,98 +249,123 @@ public class DssController {
         }
     }
 
-    public void scaleExistingMergedConfiguration(MergedConfiguration mergedConfiguration, String str) {
+    public void scaleExistingMergedConfiguration(
+            MergedConfiguration mergedConfiguration, String str) {
         if (isScaledApp(str)) {
             final float scalingFactor = getScalingFactor(str);
             int i = mergedConfiguration.getGlobalConfiguration().densityDpi;
             int i2 = mergedConfiguration.getOverrideConfiguration().densityDpi;
-            Configuration configuration = new Configuration(mergedConfiguration.getOverrideConfiguration());
+            Configuration configuration =
+                    new Configuration(mergedConfiguration.getOverrideConfiguration());
             if (i2 != 0) {
                 configuration.densityDpi = (int) ((i2 * scalingFactor) + 0.5f);
             } else if (i != 0) {
                 configuration.densityDpi = (int) ((i * scalingFactor) + 0.5f);
             }
-            WindowConfiguration windowConfiguration = mergedConfiguration.getGlobalConfiguration().windowConfiguration;
-            WindowConfiguration windowConfiguration2 = mergedConfiguration.getOverrideConfiguration().windowConfiguration;
+            WindowConfiguration windowConfiguration =
+                    mergedConfiguration.getGlobalConfiguration().windowConfiguration;
+            WindowConfiguration windowConfiguration2 =
+                    mergedConfiguration.getOverrideConfiguration().windowConfiguration;
             final WindowConfiguration windowConfiguration3 = configuration.windowConfiguration;
             final int i3 = 0;
-            PairConfiguration pairConfiguration = new PairConfiguration(windowConfiguration.getAppBounds(), windowConfiguration2.getAppBounds(), new Consumer() { // from class: com.android.server.DssController$Tools$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    int i4 = i3;
-                    WindowConfiguration windowConfiguration4 = windowConfiguration3;
-                    Rect rect = (Rect) obj;
-                    switch (i4) {
-                        case 0:
-                            windowConfiguration4.setAppBounds(rect);
-                            break;
-                        case 1:
-                            windowConfiguration4.setMaxBounds(rect);
-                            break;
-                        default:
-                            windowConfiguration4.setBounds(rect);
-                            break;
-                    }
-                }
-            });
+            PairConfiguration pairConfiguration =
+                    new PairConfiguration(
+                            windowConfiguration.getAppBounds(),
+                            windowConfiguration2.getAppBounds(),
+                            new Consumer() { // from class:
+                                             // com.android.server.DssController$Tools$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    int i4 = i3;
+                                    WindowConfiguration windowConfiguration4 = windowConfiguration3;
+                                    Rect rect = (Rect) obj;
+                                    switch (i4) {
+                                        case 0:
+                                            windowConfiguration4.setAppBounds(rect);
+                                            break;
+                                        case 1:
+                                            windowConfiguration4.setMaxBounds(rect);
+                                            break;
+                                        default:
+                                            windowConfiguration4.setBounds(rect);
+                                            break;
+                                    }
+                                }
+                            });
             final int i4 = 1;
-            PairConfiguration pairConfiguration2 = new PairConfiguration(windowConfiguration.getMaxBounds(), windowConfiguration2.getMaxBounds(), new Consumer() { // from class: com.android.server.DssController$Tools$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    int i42 = i4;
-                    WindowConfiguration windowConfiguration4 = windowConfiguration3;
-                    Rect rect = (Rect) obj;
-                    switch (i42) {
-                        case 0:
-                            windowConfiguration4.setAppBounds(rect);
-                            break;
-                        case 1:
-                            windowConfiguration4.setMaxBounds(rect);
-                            break;
-                        default:
-                            windowConfiguration4.setBounds(rect);
-                            break;
-                    }
-                }
-            });
+            PairConfiguration pairConfiguration2 =
+                    new PairConfiguration(
+                            windowConfiguration.getMaxBounds(),
+                            windowConfiguration2.getMaxBounds(),
+                            new Consumer() { // from class:
+                                             // com.android.server.DssController$Tools$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    int i42 = i4;
+                                    WindowConfiguration windowConfiguration4 = windowConfiguration3;
+                                    Rect rect = (Rect) obj;
+                                    switch (i42) {
+                                        case 0:
+                                            windowConfiguration4.setAppBounds(rect);
+                                            break;
+                                        case 1:
+                                            windowConfiguration4.setMaxBounds(rect);
+                                            break;
+                                        default:
+                                            windowConfiguration4.setBounds(rect);
+                                            break;
+                                    }
+                                }
+                            });
             final int i5 = 2;
-            PairConfiguration pairConfiguration3 = new PairConfiguration(windowConfiguration.getBounds(), windowConfiguration2.getBounds(), new Consumer() { // from class: com.android.server.DssController$Tools$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    int i42 = i5;
-                    WindowConfiguration windowConfiguration4 = windowConfiguration3;
-                    Rect rect = (Rect) obj;
-                    switch (i42) {
-                        case 0:
-                            windowConfiguration4.setAppBounds(rect);
-                            break;
-                        case 1:
-                            windowConfiguration4.setMaxBounds(rect);
-                            break;
-                        default:
-                            windowConfiguration4.setBounds(rect);
-                            break;
-                    }
-                }
-            });
+            PairConfiguration pairConfiguration3 =
+                    new PairConfiguration(
+                            windowConfiguration.getBounds(),
+                            windowConfiguration2.getBounds(),
+                            new Consumer() { // from class:
+                                             // com.android.server.DssController$Tools$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    int i42 = i5;
+                                    WindowConfiguration windowConfiguration4 = windowConfiguration3;
+                                    Rect rect = (Rect) obj;
+                                    switch (i42) {
+                                        case 0:
+                                            windowConfiguration4.setAppBounds(rect);
+                                            break;
+                                        case 1:
+                                            windowConfiguration4.setMaxBounds(rect);
+                                            break;
+                                        default:
+                                            windowConfiguration4.setBounds(rect);
+                                            break;
+                                    }
+                                }
+                            });
             ArrayList arrayList = new ArrayList();
             arrayList.add(pairConfiguration);
             arrayList.add(pairConfiguration2);
             arrayList.add(pairConfiguration3);
-            arrayList.forEach(new Consumer() { // from class: com.android.server.DssController$Tools$$ExternalSyntheticLambda3
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    float f = scalingFactor;
-                    DssController.PairConfiguration pairConfiguration4 = (DssController.PairConfiguration) obj;
-                    Rect rect = pairConfiguration4.mAppGlobal;
-                    Rect rect2 = pairConfiguration4.mAppOverride;
-                    Rect rect3 = rect2 != null ? new Rect(rect2) : rect != null ? new Rect(rect) : null;
-                    if (rect3 != null) {
-                        DssController.Tools.applyScaleToCompatFrame(rect3, f);
-                        pairConfiguration4.mBound.accept(rect3);
-                    }
-                }
-            });
+            arrayList.forEach(
+                    new Consumer() { // from class:
+                                     // com.android.server.DssController$Tools$$ExternalSyntheticLambda3
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            float f = scalingFactor;
+                            DssController.PairConfiguration pairConfiguration4 =
+                                    (DssController.PairConfiguration) obj;
+                            Rect rect = pairConfiguration4.mAppGlobal;
+                            Rect rect2 = pairConfiguration4.mAppOverride;
+                            Rect rect3 =
+                                    rect2 != null
+                                            ? new Rect(rect2)
+                                            : rect != null ? new Rect(rect) : null;
+                            if (rect3 != null) {
+                                DssController.Tools.applyScaleToCompatFrame(rect3, f);
+                                pairConfiguration4.mBound.accept(rect3);
+                            }
+                        }
+                    });
             mergedConfiguration.setOverrideConfiguration(configuration);
         }
     }
@@ -357,17 +385,29 @@ public class DssController {
     public synchronized void setUsesOwnResolution(int i, String str, boolean z) {
         String pidToPkg = pidToPkg(i);
         if (this.mRunningPackages.containsKey(pidToPkg)) {
-            DssController$$ExternalSyntheticThrowCCEIfNotNull0.m(this.mRunningPackages.get(pidToPkg));
+            DssController$$ExternalSyntheticThrowCCEIfNotNull0.m(
+                    this.mRunningPackages.get(pidToPkg));
             throw null;
         }
-        Slog.wtf(TAG, "Trying to setUsesOwnResolution(" + z + ") for a package that isn't running!");
+        Slog.wtf(
+                TAG, "Trying to setUsesOwnResolution(" + z + ") for a package that isn't running!");
     }
 
     public synchronized void showAllDSSInfo() {
         for (Map.Entry entry : this.mAllowList.entrySet()) {
-            Slog.i(TAG, "DSS PackageName : " + ((String) entry.getKey()) + ", GameSiopLevel :" + ((DssAppDate) entry.getValue()).mGameSiopLevel + ", CpuLevel :" + ((DssAppDate) entry.getValue()).mCpuLevel + ", GpuLevel :" + ((DssAppDate) entry.getValue()).mGpuLevel);
+            Slog.i(
+                    TAG,
+                    "DSS PackageName : "
+                            + ((String) entry.getKey())
+                            + ", GameSiopLevel :"
+                            + ((DssAppDate) entry.getValue()).mGameSiopLevel
+                            + ", CpuLevel :"
+                            + ((DssAppDate) entry.getValue()).mCpuLevel
+                            + ", GpuLevel :"
+                            + ((DssAppDate) entry.getValue()).mGpuLevel);
             if (this.mRunningPackages.containsKey(entry.getKey())) {
-                DssController$$ExternalSyntheticThrowCCEIfNotNull0.m(this.mRunningPackages.get((String) entry.getKey()));
+                DssController$$ExternalSyntheticThrowCCEIfNotNull0.m(
+                        this.mRunningPackages.get((String) entry.getKey()));
                 throw null;
             }
         }

@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IVirtualDisplayAliveChecker extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.remoteappmode.IVirtualDisplayAliveChecker";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.remoteappmode.IVirtualDisplayAliveChecker";
 
     void onVirtualDisplayCreated(int i) throws RemoteException;
 
@@ -16,12 +17,10 @@ public interface IVirtualDisplayAliveChecker extends IInterface {
 
     public static class Default implements IVirtualDisplayAliveChecker {
         @Override // com.samsung.android.remoteappmode.IVirtualDisplayAliveChecker
-        public void onVirtualDisplayCreated(int displayId) throws RemoteException {
-        }
+        public void onVirtualDisplayCreated(int displayId) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IVirtualDisplayAliveChecker
-        public void onVirtualDisplayReleased(int displayId) throws RemoteException {
-        }
+        public void onVirtualDisplayReleased(int displayId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface IVirtualDisplayAliveChecker extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualDisplayAliveChecker {
+    public abstract static class Stub extends Binder implements IVirtualDisplayAliveChecker {
         static final int TRANSACTION_onVirtualDisplayCreated = 1;
         static final int TRANSACTION_onVirtualDisplayReleased = 2;
 
@@ -70,7 +69,8 @@ public interface IVirtualDisplayAliveChecker extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVirtualDisplayAliveChecker.DESCRIPTOR);
             }

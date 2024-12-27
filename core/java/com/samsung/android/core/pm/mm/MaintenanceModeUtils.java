@@ -29,25 +29,36 @@ import android.telecom.Logging.Session;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.internal.R;
 import com.android.internal.content.NativeLibraryHelper;
+
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.share.SemShareConstants;
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public class MaintenanceModeUtils {
-    private static final String ACTION_LAUNCH_MYFILES_STORAGE_ANALYSIS = "com.sec.android.app.myfiles.RUN_STORAGE_ANALYSIS";
-    private static final String ACTION_LAUNCH_SMART_SWITCH = "com.sec.android.easyMover.LAUNCH_SMART_SWITCH";
-    private static final String ACTION_LAUNCH_SMART_SWITCH_AGENT = "com.sec.android.easyMover.Agent.action.AUTO_DOWNLOAD";
-    static final String ACTION_NOTIFY_CLOUD_BACKUP_CANCELED = "com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_CANCELED";
-    static final String ACTION_NOTIFY_CLOUD_BACKUP_COMPLETED = "com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_COMPLETED";
-    static final String ACTION_NOTIFY_CLOUD_BACKUP_NOT_FINISHED = "com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_NOT_FINISHED";
-    static final String ACTION_NOTIFY_CLOUD_BACKUP_STARTED = "com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_STARTED";
-    private static final String ACTION_USE_APP_FEATURE_SURVEY = "com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY";
+    private static final String ACTION_LAUNCH_MYFILES_STORAGE_ANALYSIS =
+            "com.sec.android.app.myfiles.RUN_STORAGE_ANALYSIS";
+    private static final String ACTION_LAUNCH_SMART_SWITCH =
+            "com.sec.android.easyMover.LAUNCH_SMART_SWITCH";
+    private static final String ACTION_LAUNCH_SMART_SWITCH_AGENT =
+            "com.sec.android.easyMover.Agent.action.AUTO_DOWNLOAD";
+    static final String ACTION_NOTIFY_CLOUD_BACKUP_CANCELED =
+            "com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_CANCELED";
+    static final String ACTION_NOTIFY_CLOUD_BACKUP_COMPLETED =
+            "com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_COMPLETED";
+    static final String ACTION_NOTIFY_CLOUD_BACKUP_NOT_FINISHED =
+            "com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_NOT_FINISHED";
+    static final String ACTION_NOTIFY_CLOUD_BACKUP_STARTED =
+            "com.samsung.android.scloud.temporarybackup.NOTIFY_BACKUP_STARTED";
+    private static final String ACTION_USE_APP_FEATURE_SURVEY =
+            "com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY";
     static final String BACKUP_STATUS_CLOUD_BACKED_UP_FAILED = "BACKUP_NON_FINISHED";
     static final String BACKUP_STATUS_CLOUD_BACKED_UP_SUCCEEDED = "BACKUP_COMPLETED";
     static final String BACKUP_STATUS_CLOUD_BACKING_UP = "BACKUP_RUNNING";
@@ -66,11 +77,14 @@ public class MaintenanceModeUtils {
     static final String EVENT_ID_TURN_ON_MAINTENANCE_MODE = "7066";
     static final String EVENT_VALUE_ONE = "1";
     static final String EVENT_VALUE_ZERO = "0";
-    private static final String EXTRA_SECURE_LOCK_FROM_SEC_NON_BIOMETRICS = "from_sec_non_biometrics";
+    private static final String EXTRA_SECURE_LOCK_FROM_SEC_NON_BIOMETRICS =
+            "from_sec_non_biometrics";
     private static final String EXTRA_SECURE_LOCK_HIDE_BIOMETRICS_MENU = "hide_biometrics_menu";
     private static final String EXTRA_SMART_SWITCH_EXTERNAL_BNR = "EXTERNAL_BNR";
-    public static final String EXTRA_USER_CONSENT_ABOUT_CREATING_LOG = "user_consent_about_creating_log";
-    public static final String FEATURE_SUPPORT_MAINTENANCE_MODE = "com.samsung.feature.support_repair_mode";
+    public static final String EXTRA_USER_CONSENT_ABOUT_CREATING_LOG =
+            "user_consent_about_creating_log";
+    public static final String FEATURE_SUPPORT_MAINTENANCE_MODE =
+            "com.samsung.feature.support_repair_mode";
     public static final int FLAG_MAINTENANCE_MODE = 524288;
     private static final String LOGGING_TYPE = "ev";
     public static final int MAINTENANCE_MODE_USER_ID = 77;
@@ -84,13 +98,18 @@ public class MaintenanceModeUtils {
     private static final String PACKAGE_DIAGMON_AGENT = "com.sec.android.diagmonagent";
     public static final String PACKAGE_MOBILE_DOCTOR = "com.samsung.android.app.mobiledoctor";
     private static final String PACKAGE_SMART_SWITCH = "com.sec.android.easyMover";
-    public static final String PERMISSION_ACCESS_MAINTENANCE_MODE = "com.samsung.android.permission.ACCESS_MAINTENANCE_MODE";
-    public static final String PROPERTY_DISALLOW_MAINTENANCE_MODE = "persist.sys.disallow_maintenance_mode";
-    public static final String PROPERTY_DISALLOW_MAINTENANCE_MODE_LAST_CALLER = "persist.sys.disallow_maintenance_mode_last_caller";
-    public static final String PROPERTY_IS_IN_MAINTENANCE_MODE = "persist.sys.is_in_maintenance_mode";
+    public static final String PERMISSION_ACCESS_MAINTENANCE_MODE =
+            "com.samsung.android.permission.ACCESS_MAINTENANCE_MODE";
+    public static final String PROPERTY_DISALLOW_MAINTENANCE_MODE =
+            "persist.sys.disallow_maintenance_mode";
+    public static final String PROPERTY_DISALLOW_MAINTENANCE_MODE_LAST_CALLER =
+            "persist.sys.disallow_maintenance_mode_last_caller";
+    public static final String PROPERTY_IS_IN_MAINTENANCE_MODE =
+            "persist.sys.is_in_maintenance_mode";
     private static final String PROVIDER_CALL_FAILED = "PROVIDER_CALL_FAILED";
     private static final String PROVIDER_CLOUD_ARGUMENT_MAINTENANCE = "maintenance";
-    private static final String PROVIDER_CLOUD_AUTHORITY_STATUS_PROVIDER = "content://com.samsung.android.scloud.statusprovider";
+    private static final String PROVIDER_CLOUD_AUTHORITY_STATUS_PROVIDER =
+            "content://com.samsung.android.scloud.statusprovider";
     private static final String PROVIDER_CLOUD_EXTRA_IS_SKIP_CHECK_SUPPORT = "isSkipCheckSupport";
     private static final String PROVIDER_CLOUD_METHOD_CTB_SUPPORT = "ctb_support";
     private static final String PROVIDER_CLOUD_RESPONSE_KEY_FAIL_REASON = "failReason";
@@ -99,7 +118,8 @@ public class MaintenanceModeUtils {
     private static final String PROVIDER_CLOUD_RESPONSE_KEY_STATUS = "status";
     private static final String PROVIDER_CLOUD_RESPONSE_KEY_SUPPORT = "support";
     private static final String PROVIDER_CLOUD_RESPONSE_KEY_TARGET_INTENT = "targetIntent";
-    private static final String PROVIDER_SMART_SWITCH_URI_IS_RUNNING = "content://com.sec.android.easyMover.statusProvider/isRunning";
+    private static final String PROVIDER_SMART_SWITCH_URI_IS_RUNNING =
+            "content://com.sec.android.easyMover.statusProvider/isRunning";
     public static final String TAG = "MaintenanceMode";
     private static final String TRACKING_ID_DEVICE_CARE = "431-399-4853100";
     static final int UNSUPPORTED_REASON_DEX_MODE = 4;
@@ -109,15 +129,20 @@ public class MaintenanceModeUtils {
     static final int UNSUPPORTED_REASON_NOT_IN_OWNER_USER = 2;
     static final int UNSUPPORTED_REASON_NOT_SUPPORTED_ON_DEVICE = 1;
     static final int UNSUPPORTED_REASON_NO_ADD_USER = 3;
-    public static final String USER_TYPE_FULL_MAINTENANCE_MODE = "com.samsung.android.os.usertype.full.MAINTENANCE_MODE";
-    private static final ComponentName COMPONENT_SMART_SWITCH_AGENT = new ComponentName("com.sec.android.easyMover.Agent", "com.sec.android.easyMover.Agent.ServiceActivity");
+    public static final String USER_TYPE_FULL_MAINTENANCE_MODE =
+            "com.samsung.android.os.usertype.full.MAINTENANCE_MODE";
+    private static final ComponentName COMPONENT_SMART_SWITCH_AGENT =
+            new ComponentName(
+                    "com.sec.android.easyMover.Agent",
+                    "com.sec.android.easyMover.Agent.ServiceActivity");
     public static boolean sUserConsentAboutCreatingLog = false;
 
     public static boolean isMaintenanceModeUser(UserInfo info) {
         if (info == null) {
             return false;
         }
-        return ((info.flags & 524288) != 0 || isUserTypeMaintenanceMode(info.userType)) && info.id == 77;
+        return ((info.flags & 524288) != 0 || isUserTypeMaintenanceMode(info.userType))
+                && info.id == 77;
     }
 
     public static boolean isUserTypeMaintenanceMode(String userType) {
@@ -130,7 +155,8 @@ public class MaintenanceModeUtils {
 
     public static boolean hasSystemFeature() {
         try {
-            return ActivityThread.getPackageManager().hasSystemFeature(FEATURE_SUPPORT_MAINTENANCE_MODE, 0);
+            return ActivityThread.getPackageManager()
+                    .hasSystemFeature(FEATURE_SUPPORT_MAINTENANCE_MODE, 0);
         } catch (Exception e) {
             Log.i(TAG, "Failed to check feature: " + e.toString());
             return false;
@@ -170,7 +196,11 @@ public class MaintenanceModeUtils {
 
     private static boolean hasAccessPermission() {
         try {
-            return AppGlobals.getPackageManager().checkUidPermission("com.samsung.android.permission.ACCESS_MAINTENANCE_MODE", Binder.getCallingUid()) == 0;
+            return AppGlobals.getPackageManager()
+                            .checkUidPermission(
+                                    "com.samsung.android.permission.ACCESS_MAINTENANCE_MODE",
+                                    Binder.getCallingUid())
+                    == 0;
         } catch (Exception e) {
             Log.i(TAG, "Failed to check access permission: " + e.toString());
             return false;
@@ -180,7 +210,9 @@ public class MaintenanceModeUtils {
     public static boolean isLowOnStorage(Context context) {
         try {
             long usableSpace = Environment.getDataDirectory().getUsableSpace();
-            long memoryLowThreshold = ((StorageManager) context.getSystemService(StorageManager.class)).getStorageLowBytes(Environment.getDataDirectory());
+            long memoryLowThreshold =
+                    ((StorageManager) context.getSystemService(StorageManager.class))
+                            .getStorageLowBytes(Environment.getDataDirectory());
             return usableSpace < memoryLowThreshold;
         } catch (Exception e) {
             Log.i(TAG, "Failed to check storage capacity: " + e.toString());
@@ -241,8 +273,10 @@ public class MaintenanceModeUtils {
         if ("1".equals(Settings.System.getString(context.getContentResolver(), "new_dex"))) {
             return true;
         }
-        SemDesktopModeManager desktopModeManager = (SemDesktopModeManager) context.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
-        if (desktopModeManager != null && (state = desktopModeManager.getDesktopModeState()) != null) {
+        SemDesktopModeManager desktopModeManager =
+                (SemDesktopModeManager) context.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
+        if (desktopModeManager != null
+                && (state = desktopModeManager.getDesktopModeState()) != null) {
             if (state.enabled != 4) {
                 if (state.enabled != 3) {
                     return false;
@@ -258,7 +292,9 @@ public class MaintenanceModeUtils {
         } catch (Exception e) {
             Log.i(TAG, "Failed to check MPSM: " + e.toString());
         }
-        return Settings.System.getInt(context.getContentResolver(), Settings.System.SEM_MINIMAL_BATTERY_USE, 0) == 1;
+        return Settings.System.getInt(
+                        context.getContentResolver(), Settings.System.SEM_MINIMAL_BATTERY_USE, 0)
+                == 1;
     }
 
     static boolean isSecureLockSet(Context context) {
@@ -275,23 +311,32 @@ public class MaintenanceModeUtils {
         builder.setUseDefaultTitle();
         builder.setAllowedAuthenticators(32768);
         BiometricPrompt biometricPrompt = builder.build();
-        biometricPrompt.authenticateUser(new CancellationSignal(), context.getMainExecutor(), new BiometricPrompt.AuthenticationCallback() { // from class: com.samsung.android.core.pm.mm.MaintenanceModeUtils.1
-            @Override // android.hardware.biometrics.BiometricPrompt.AuthenticationCallback, android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback
-            public void onAuthenticationError(int errorCode, CharSequence errString) {
-                super.onAuthenticationError(errorCode, errString);
-            }
+        biometricPrompt.authenticateUser(
+                new CancellationSignal(),
+                context.getMainExecutor(),
+                new BiometricPrompt
+                        .AuthenticationCallback() { // from class:
+                                                    // com.samsung.android.core.pm.mm.MaintenanceModeUtils.1
+                    @Override // android.hardware.biometrics.BiometricPrompt.AuthenticationCallback,
+                              // android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback
+                    public void onAuthenticationError(int errorCode, CharSequence errString) {
+                        super.onAuthenticationError(errorCode, errString);
+                    }
 
-            @Override // android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
-            public void onAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result) {
-                super.onAuthenticationSucceeded(result);
-                onSucceeded.run();
-            }
+                    @Override // android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
+                    public void onAuthenticationSucceeded(
+                            BiometricPrompt.AuthenticationResult result) {
+                        super.onAuthenticationSucceeded(result);
+                        onSucceeded.run();
+                    }
 
-            @Override // android.hardware.biometrics.BiometricPrompt.AuthenticationCallback, android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback
-            public void onAuthenticationFailed() {
-                super.onAuthenticationFailed();
-            }
-        }, 0);
+                    @Override // android.hardware.biometrics.BiometricPrompt.AuthenticationCallback,
+                              // android.hardware.biometrics.BiometricAuthenticator.AuthenticationCallback
+                    public void onAuthenticationFailed() {
+                        super.onAuthenticationFailed();
+                    }
+                },
+                0);
     }
 
     static float getFontSize(Context context, int dimenResId) {
@@ -308,7 +353,15 @@ public class MaintenanceModeUtils {
         return baseSize;
     }
 
-    static void configureLayout(Activity context, Resources r, Configuration config, boolean isTablet, boolean isFold, int resIdLayoutPortrait, int resIdLayoutLandscape, int resIdContainer) {
+    static void configureLayout(
+            Activity context,
+            Resources r,
+            Configuration config,
+            boolean isTablet,
+            boolean isFold,
+            int resIdLayoutPortrait,
+            int resIdLayoutLandscape,
+            int resIdContainer) {
         boolean isLandscape = config.orientation == 2;
         boolean needToAdjustContainerSize = false;
         if (isTablet) {
@@ -316,26 +369,35 @@ public class MaintenanceModeUtils {
             context.setContentView(resIdLayoutPortrait);
         } else if (isFold) {
             if (config.semDisplayDeviceType == 5) {
-                configureLayoutConsideringFullScreen(context, isLandscape, resIdLayoutPortrait, resIdLayoutLandscape);
+                configureLayoutConsideringFullScreen(
+                        context, isLandscape, resIdLayoutPortrait, resIdLayoutLandscape);
             } else {
                 needToAdjustContainerSize = true;
-                configureLayoutConsideringFullScreen(context, false, resIdLayoutPortrait, resIdLayoutLandscape);
+                configureLayoutConsideringFullScreen(
+                        context, false, resIdLayoutPortrait, resIdLayoutLandscape);
             }
         } else {
-            configureLayoutConsideringFullScreen(context, isLandscape, resIdLayoutPortrait, resIdLayoutLandscape);
+            configureLayoutConsideringFullScreen(
+                    context, isLandscape, resIdLayoutPortrait, resIdLayoutLandscape);
         }
         if (!needToAdjustContainerSize) {
             return;
         }
-        int currentWindowWidth = context.getWindowManager().getCurrentWindowMetrics().getBounds().width();
-        int currentWindowHeight = context.getWindowManager().getCurrentWindowMetrics().getBounds().height();
-        int breakpointLargeWidth = r.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_width_large);
-        int breakpointMiddleWidth = r.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_width_middle);
-        int breakpointMiddleHeight = r.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_height_middle);
+        int currentWindowWidth =
+                context.getWindowManager().getCurrentWindowMetrics().getBounds().width();
+        int currentWindowHeight =
+                context.getWindowManager().getCurrentWindowMetrics().getBounds().height();
+        int breakpointLargeWidth =
+                r.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_width_large);
+        int breakpointMiddleWidth =
+                r.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_width_middle);
+        int breakpointMiddleHeight =
+                r.getDimensionPixelSize(R.dimen.maintenance_mode_breakpoint_screen_height_middle);
         int maxWidth = 0;
         if (currentWindowWidth >= breakpointLargeWidth) {
             maxWidth = r.getDimensionPixelSize(R.dimen.maintenance_mode_page_max_width);
-        } else if (currentWindowWidth >= breakpointMiddleWidth && currentWindowHeight > breakpointMiddleHeight) {
+        } else if (currentWindowWidth >= breakpointMiddleWidth
+                && currentWindowHeight > breakpointMiddleHeight) {
             maxWidth = (int) (currentWindowWidth * MAX_PAGE_WIDTH_PERCENT);
         }
         if (maxWidth > 0) {
@@ -346,7 +408,11 @@ public class MaintenanceModeUtils {
         }
     }
 
-    private static void configureLayoutConsideringFullScreen(Activity context, boolean isLandscape, int resIdLayoutPortrait, int resIdLayoutLandscape) {
+    private static void configureLayoutConsideringFullScreen(
+            Activity context,
+            boolean isLandscape,
+            int resIdLayoutPortrait,
+            int resIdLayoutLandscape) {
         if (isLandscape) {
             context.setContentView(resIdLayoutLandscape);
             context.getWindow().addFlags(1024);
@@ -369,7 +435,10 @@ public class MaintenanceModeUtils {
             return;
         }
         try {
-            Intent targetIntent = (Intent) res.getParcelable(PROVIDER_CLOUD_RESPONSE_KEY_TARGET_INTENT, Intent.class);
+            Intent targetIntent =
+                    (Intent)
+                            res.getParcelable(
+                                    PROVIDER_CLOUD_RESPONSE_KEY_TARGET_INTENT, Intent.class);
             if (targetIntent == null) {
                 Log.i(TAG, "Failed to start SCloud: targetIntent is null");
             } else {
@@ -428,7 +497,10 @@ public class MaintenanceModeUtils {
             return new CloudInfo(false, 30, null);
         }
         Bundle res = callCloudProvider(context, false);
-        return new CloudInfo(isCloudBackupSupported(res), getCloudBackupRetentionPeriod(res), getCloudBackupIntroDescription(res));
+        return new CloudInfo(
+                isCloudBackupSupported(res),
+                getCloudBackupRetentionPeriod(res),
+                getCloudBackupIntroDescription(res));
     }
 
     private static boolean isCloudBackupSupported(Bundle bundle) {
@@ -534,7 +606,13 @@ public class MaintenanceModeUtils {
     private static Bundle callCloudProvider(Context context, boolean skipCheckSupport) {
         Bundle extras = new Bundle();
         extras.putBoolean(PROVIDER_CLOUD_EXTRA_IS_SKIP_CHECK_SUPPORT, skipCheckSupport);
-        Bundle res = call(context, PROVIDER_CLOUD_AUTHORITY_STATUS_PROVIDER, PROVIDER_CLOUD_METHOD_CTB_SUPPORT, PROVIDER_CLOUD_ARGUMENT_MAINTENANCE, extras);
+        Bundle res =
+                call(
+                        context,
+                        PROVIDER_CLOUD_AUTHORITY_STATUS_PROVIDER,
+                        PROVIDER_CLOUD_METHOD_CTB_SUPPORT,
+                        PROVIDER_CLOUD_ARGUMENT_MAINTENANCE,
+                        extras);
         if (res == null) {
             Log.i(TAG, "Failed to call: Response is null");
             return null;
@@ -547,7 +625,8 @@ public class MaintenanceModeUtils {
         return res;
     }
 
-    private static Bundle call(Context context, String authority, String method, String arg, Bundle extras) {
+    private static Bundle call(
+            Context context, String authority, String method, String arg, Bundle extras) {
         try {
             return context.getContentResolver().call(Uri.parse(authority), method, arg, extras);
         } catch (Exception e) {
@@ -568,17 +647,25 @@ public class MaintenanceModeUtils {
     static void sendLoggingDataToSA(Context context, String eventId, String eventValue) {
         try {
             Bundle bundle = new Bundle();
-            bundle.putString(SemShareConstants.DMA_SURVEY_FEATURE_TRACKING_ID, TRACKING_ID_DEVICE_CARE);
+            bundle.putString(
+                    SemShareConstants.DMA_SURVEY_FEATURE_TRACKING_ID, TRACKING_ID_DEVICE_CARE);
             bundle.putString("feature", eventId);
             bundle.putString(SemShareConstants.SURVEY_EXTRA_OWN_PACKAGE, PACKAGE_DEVICE_CARE);
             bundle.putString("type", "ev");
             if (eventValue != null) {
                 bundle.putString("value", eventValue);
             }
-            Intent intent = new Intent("com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY");
+            Intent intent =
+                    new Intent("com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY");
             intent.setPackage("com.sec.android.diagmonagent");
             intent.putExtras(bundle);
-            Log.d(TAG, Session.EXTERNAL_INDICATOR + eventId + (eventValue == null ? "" : NativeLibraryHelper.CLEAR_ABI_OVERRIDE + eventValue));
+            Log.d(
+                    TAG,
+                    Session.EXTERNAL_INDICATOR
+                            + eventId
+                            + (eventValue == null
+                                    ? ""
+                                    : NativeLibraryHelper.CLEAR_ABI_OVERRIDE + eventValue));
             context.sendBroadcast(intent);
         } catch (Exception e) {
         }

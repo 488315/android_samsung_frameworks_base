@@ -8,9 +8,10 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IDirEncryptServiceListener extends IInterface {
-    void onEncryptionStatusChanged(String str, int i, String str2, int i2, int i3) throws RemoteException;
+    void onEncryptionStatusChanged(String str, int i, String str2, int i2, int i3)
+            throws RemoteException;
 
-    public static abstract class Stub extends Binder implements IDirEncryptServiceListener {
+    public abstract static class Stub extends Binder implements IDirEncryptServiceListener {
         private static final String DESCRIPTOR = "IDirEncryptServiceListener";
         static final int TRANSACTION_onEncryptionStatusChanged = 1;
 
@@ -35,11 +36,17 @@ public interface IDirEncryptServiceListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             switch (code) {
                 case 1:
                     data.enforceInterface(DESCRIPTOR);
-                    onEncryptionStatusChanged(data.readString(), data.readInt(), data.readString(), data.readInt(), data.readInt());
+                    onEncryptionStatusChanged(
+                            data.readString(),
+                            data.readInt(),
+                            data.readString(),
+                            data.readInt(),
+                            data.readInt());
                     reply.writeNoException();
                     return true;
                 case IBinder.INTERFACE_TRANSACTION /* 1598968902 */:
@@ -67,7 +74,9 @@ public interface IDirEncryptServiceListener extends IInterface {
             }
 
             @Override // com.samsung.android.security.IDirEncryptServiceListener
-            public void onEncryptionStatusChanged(String volId, int operation, String status, int progress, int storage) throws RemoteException {
+            public void onEncryptionStatusChanged(
+                    String volId, int operation, String status, int progress, int storage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {

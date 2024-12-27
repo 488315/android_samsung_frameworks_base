@@ -5,8 +5,42 @@ import android.text.format.DateFormat;
 
 /* loaded from: classes5.dex */
 public class HexDump {
-    private static final char[] HEX_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.CAPITAL_AM_PM, 'B', 'C', 'D', DateFormat.DAY, 'F'};
-    private static final char[] HEX_LOWER_CASE_DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.AM_PM, 'b', 'c', DateFormat.DATE, 'e', 'f'};
+    private static final char[] HEX_DIGITS = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.CAPITAL_AM_PM,
+        'B',
+        'C',
+        'D',
+        DateFormat.DAY,
+        'F'
+    };
+    private static final char[] HEX_LOWER_CASE_DIGITS = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.AM_PM,
+        'b',
+        'c',
+        DateFormat.DATE,
+        'e',
+        'f'
+    };
 
     public static String dumpHexString(byte[] array) {
         return array == null ? "(null)" : dumpHexString(array, 0, array.length);
@@ -101,7 +135,12 @@ public class HexDump {
     }
 
     public static byte[] toByteArray(int i) {
-        byte[] array = {(byte) ((i >> 24) & 255), (byte) ((i >> 16) & 255), (byte) ((i >> 8) & 255), (byte) (i & 255)};
+        byte[] array = {
+            (byte) ((i >> 24) & 255),
+            (byte) ((i >> 16) & 255),
+            (byte) ((i >> 8) & 255),
+            (byte) (i & 255)
+        };
         return array;
     }
 
@@ -122,7 +161,8 @@ public class HexDump {
         int length = hexString.length();
         byte[] buffer = new byte[length / 2];
         for (int i = 0; i < length; i += 2) {
-            buffer[i / 2] = (byte) ((toByte(hexString.charAt(i)) << 4) | toByte(hexString.charAt(i + 1)));
+            buffer[i / 2] =
+                    (byte) ((toByte(hexString.charAt(i)) << 4) | toByte(hexString.charAt(i + 1)));
         }
         return buffer;
     }

@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class SatelliteDatagram implements Parcelable {
-    public static final Parcelable.Creator<SatelliteDatagram> CREATOR = new Parcelable.Creator<SatelliteDatagram>() { // from class: android.telephony.satellite.stub.SatelliteDatagram.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteDatagram createFromParcel(Parcel _aidl_source) {
-            SatelliteDatagram _aidl_out = new SatelliteDatagram();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SatelliteDatagram> CREATOR =
+            new Parcelable.Creator<
+                    SatelliteDatagram>() { // from class:
+                                           // android.telephony.satellite.stub.SatelliteDatagram.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteDatagram createFromParcel(Parcel _aidl_source) {
+                    SatelliteDatagram _aidl_out = new SatelliteDatagram();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteDatagram[] newArray(int _aidl_size) {
-            return new SatelliteDatagram[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteDatagram[] newArray(int _aidl_size) {
+                    return new SatelliteDatagram[_aidl_size];
+                }
+            };
     public byte[] data;
 
     @Override // android.os.Parcelable

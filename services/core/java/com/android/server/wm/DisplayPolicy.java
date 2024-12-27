@@ -44,6 +44,7 @@ import android.view.WindowManager;
 import android.view.WindowManagerPolicyConstants;
 import android.view.accessibility.AccessibilityManager;
 import android.window.ClientWindowFrames;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.policy.ForceShowNavBarSettingsObserver;
 import com.android.internal.policy.GestureNavigationSettingsObserver;
@@ -65,21 +66,16 @@ import com.android.server.policy.PhoneWindowManager;
 import com.android.server.policy.WindowManagerPolicy;
 import com.android.server.statusbar.StatusBarManagerInternal;
 import com.android.server.statusbar.StatusBarManagerService;
-import com.android.server.wm.AppCompatLetterboxPolicy;
-import com.android.server.wm.DisplayPolicy;
-import com.android.server.wm.InsetsPolicy;
-import com.android.server.wm.Letterbox;
-import com.android.server.wm.SystemGesturesPointerEventListener;
 import com.android.server.wm.SystemGesturesPointerEventListener.FlingGestureDetector;
-import com.android.server.wm.TspStateController;
-import com.android.server.wm.WindowManagerInternal;
 import com.android.wm.shell.Flags;
+
 import com.samsung.android.cocktailbar.CocktailBarManagerInternal;
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
 import com.samsung.android.multiwindow.MultiWindowCoreState;
 import com.samsung.android.multiwindow.MultiWindowEdgeDetector;
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -166,9 +162,11 @@ public final class DisplayPolicy {
     public boolean mTopIsFullscreen;
     public Context mUiContext;
     public volatile boolean mWindowManagerDrawComplete;
-    public static final int SHOW_TYPES_FOR_SWIPE = WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars();
+    public static final int SHOW_TYPES_FOR_SWIPE =
+            WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars();
     public static final int SHOW_TYPES_FOR_PANIC = WindowInsets.Type.navigationBars();
-    public static final boolean USE_CACHED_INSETS_FOR_DISPLAY_SWITCH = SystemProperties.getBoolean("persist.wm.debug.cached_insets_switch", true);
+    public static final boolean USE_CACHED_INSETS_FOR_DISPLAY_SWITCH =
+            SystemProperties.getBoolean("persist.wm.debug.cached_insets_switch", true);
     public static final Rect sTmpRect = new Rect();
     public static final Rect sTmpRect2 = new Rect();
     public static final Rect sTmpDisplayCutoutSafe = new Rect();
@@ -200,21 +198,24 @@ public final class DisplayPolicy {
     public WindowState mDefaultNavigationBar = null;
     public final Rect mTmpFrame = new Rect();
     public final Rect mWindowBounds = new Rect();
-    public final AnonymousClass4 mHiddenNavPanic = new Runnable() { // from class: com.android.server.wm.DisplayPolicy.4
-        @Override // java.lang.Runnable
-        public final void run() {
-            synchronized (DisplayPolicy.this.mLock) {
-                try {
-                    if (((PhoneWindowManager) DisplayPolicy.this.mService.mPolicy).isUserSetupComplete()) {
-                        DisplayPolicy.this.mPendingPanicGestureUptime = SystemClock.uptimeMillis();
-                        DisplayPolicy.this.updateSystemBarAttributes();
+    public final AnonymousClass4 mHiddenNavPanic =
+            new Runnable() { // from class: com.android.server.wm.DisplayPolicy.4
+                @Override // java.lang.Runnable
+                public final void run() {
+                    synchronized (DisplayPolicy.this.mLock) {
+                        try {
+                            if (((PhoneWindowManager) DisplayPolicy.this.mService.mPolicy)
+                                    .isUserSetupComplete()) {
+                                DisplayPolicy.this.mPendingPanicGestureUptime =
+                                        SystemClock.uptimeMillis();
+                                DisplayPolicy.this.updateSystemBarAttributes();
+                            }
+                        } catch (Throwable th) {
+                            throw th;
+                        }
                     }
-                } catch (Throwable th) {
-                    throw th;
                 }
-            }
-        }
-    };
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.DisplayPolicy$1, reason: invalid class name */
@@ -230,123 +231,138 @@ public final class DisplayPolicy {
         /* JADX WARN: Type inference failed for: r2v4, types: [com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0] */
         public AnonymousClass1() {
             final int i = 0;
-            this.mOnSwipeFromLeft = new Runnable(this) { // from class: com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0
-                public final /* synthetic */ DisplayPolicy.AnonymousClass1 f$0;
+            this.mOnSwipeFromLeft =
+                    new Runnable(
+                            this) { // from class:
+                                    // com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0
+                        public final /* synthetic */ DisplayPolicy.AnonymousClass1 f$0;
 
-                {
-                    this.f$0 = this;
-                }
+                        {
+                            this.f$0 = this;
+                        }
 
-                @Override // java.lang.Runnable
-                public final void run() {
-                    int i2 = i;
-                    DisplayPolicy.AnonymousClass1 anonymousClass1 = this.f$0;
-                    switch (i2) {
-                        case 0:
-                            anonymousClass1.onSwipeFromLeft();
-                            break;
-                        case 1:
-                            anonymousClass1.onSwipeFromTop();
-                            break;
-                        case 2:
-                            anonymousClass1.onSwipeFromRight();
-                            break;
-                        default:
-                            anonymousClass1.onSwipeFromBottom();
-                            break;
-                    }
-                }
-            };
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            int i2 = i;
+                            DisplayPolicy.AnonymousClass1 anonymousClass1 = this.f$0;
+                            switch (i2) {
+                                case 0:
+                                    anonymousClass1.onSwipeFromLeft();
+                                    break;
+                                case 1:
+                                    anonymousClass1.onSwipeFromTop();
+                                    break;
+                                case 2:
+                                    anonymousClass1.onSwipeFromRight();
+                                    break;
+                                default:
+                                    anonymousClass1.onSwipeFromBottom();
+                                    break;
+                            }
+                        }
+                    };
             final int i2 = 1;
-            this.mOnSwipeFromTop = new Runnable(this) { // from class: com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0
-                public final /* synthetic */ DisplayPolicy.AnonymousClass1 f$0;
+            this.mOnSwipeFromTop =
+                    new Runnable(
+                            this) { // from class:
+                                    // com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0
+                        public final /* synthetic */ DisplayPolicy.AnonymousClass1 f$0;
 
-                {
-                    this.f$0 = this;
-                }
+                        {
+                            this.f$0 = this;
+                        }
 
-                @Override // java.lang.Runnable
-                public final void run() {
-                    int i22 = i2;
-                    DisplayPolicy.AnonymousClass1 anonymousClass1 = this.f$0;
-                    switch (i22) {
-                        case 0:
-                            anonymousClass1.onSwipeFromLeft();
-                            break;
-                        case 1:
-                            anonymousClass1.onSwipeFromTop();
-                            break;
-                        case 2:
-                            anonymousClass1.onSwipeFromRight();
-                            break;
-                        default:
-                            anonymousClass1.onSwipeFromBottom();
-                            break;
-                    }
-                }
-            };
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            int i22 = i2;
+                            DisplayPolicy.AnonymousClass1 anonymousClass1 = this.f$0;
+                            switch (i22) {
+                                case 0:
+                                    anonymousClass1.onSwipeFromLeft();
+                                    break;
+                                case 1:
+                                    anonymousClass1.onSwipeFromTop();
+                                    break;
+                                case 2:
+                                    anonymousClass1.onSwipeFromRight();
+                                    break;
+                                default:
+                                    anonymousClass1.onSwipeFromBottom();
+                                    break;
+                            }
+                        }
+                    };
             final int i3 = 2;
-            this.mOnSwipeFromRight = new Runnable(this) { // from class: com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0
-                public final /* synthetic */ DisplayPolicy.AnonymousClass1 f$0;
+            this.mOnSwipeFromRight =
+                    new Runnable(
+                            this) { // from class:
+                                    // com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0
+                        public final /* synthetic */ DisplayPolicy.AnonymousClass1 f$0;
 
-                {
-                    this.f$0 = this;
-                }
+                        {
+                            this.f$0 = this;
+                        }
 
-                @Override // java.lang.Runnable
-                public final void run() {
-                    int i22 = i3;
-                    DisplayPolicy.AnonymousClass1 anonymousClass1 = this.f$0;
-                    switch (i22) {
-                        case 0:
-                            anonymousClass1.onSwipeFromLeft();
-                            break;
-                        case 1:
-                            anonymousClass1.onSwipeFromTop();
-                            break;
-                        case 2:
-                            anonymousClass1.onSwipeFromRight();
-                            break;
-                        default:
-                            anonymousClass1.onSwipeFromBottom();
-                            break;
-                    }
-                }
-            };
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            int i22 = i3;
+                            DisplayPolicy.AnonymousClass1 anonymousClass1 = this.f$0;
+                            switch (i22) {
+                                case 0:
+                                    anonymousClass1.onSwipeFromLeft();
+                                    break;
+                                case 1:
+                                    anonymousClass1.onSwipeFromTop();
+                                    break;
+                                case 2:
+                                    anonymousClass1.onSwipeFromRight();
+                                    break;
+                                default:
+                                    anonymousClass1.onSwipeFromBottom();
+                                    break;
+                            }
+                        }
+                    };
             final int i4 = 3;
-            this.mOnSwipeFromBottom = new Runnable(this) { // from class: com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0
-                public final /* synthetic */ DisplayPolicy.AnonymousClass1 f$0;
+            this.mOnSwipeFromBottom =
+                    new Runnable(
+                            this) { // from class:
+                                    // com.android.server.wm.DisplayPolicy$1$$ExternalSyntheticLambda0
+                        public final /* synthetic */ DisplayPolicy.AnonymousClass1 f$0;
 
-                {
-                    this.f$0 = this;
-                }
+                        {
+                            this.f$0 = this;
+                        }
 
-                @Override // java.lang.Runnable
-                public final void run() {
-                    int i22 = i4;
-                    DisplayPolicy.AnonymousClass1 anonymousClass1 = this.f$0;
-                    switch (i22) {
-                        case 0:
-                            anonymousClass1.onSwipeFromLeft();
-                            break;
-                        case 1:
-                            anonymousClass1.onSwipeFromTop();
-                            break;
-                        case 2:
-                            anonymousClass1.onSwipeFromRight();
-                            break;
-                        default:
-                            anonymousClass1.onSwipeFromBottom();
-                            break;
-                    }
-                }
-            };
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            int i22 = i4;
+                            DisplayPolicy.AnonymousClass1 anonymousClass1 = this.f$0;
+                            switch (i22) {
+                                case 0:
+                                    anonymousClass1.onSwipeFromLeft();
+                                    break;
+                                case 1:
+                                    anonymousClass1.onSwipeFromTop();
+                                    break;
+                                case 2:
+                                    anonymousClass1.onSwipeFromRight();
+                                    break;
+                                default:
+                                    anonymousClass1.onSwipeFromBottom();
+                                    break;
+                            }
+                        }
+                    };
         }
 
         public static Insets getControllableInsets(WindowState windowState) {
             InsetsSourceProvider controllableInsetProvider;
-            if (windowState != null && (controllableInsetProvider = windowState.getControllableInsetProvider()) != null) {
-                return controllableInsetProvider.mSource.calculateInsets(windowState.getBounds(), true);
+            if (windowState != null
+                    && (controllableInsetProvider = windowState.getControllableInsetProvider())
+                            != null) {
+                return controllableInsetProvider.mSource.calculateInsets(
+                        windowState.getBounds(), true);
             }
             return Insets.NONE;
         }
@@ -358,9 +374,14 @@ public final class DisplayPolicy {
             DisplayPolicy displayPolicy = DisplayPolicy.this;
             displayPolicy.mHandler.removeCallbacks(this.mOnSwipeFromBottom);
             WindowState windowState = displayPolicy.mTopFullscreenOpaqueWindowState;
-            if (windowState == null || !windowState.isDexMode() || (activityRecord = windowState.mActivityRecord) == null || (i = activityRecord.mTransientBarShowingDelayMillis) < 0) {
+            if (windowState == null
+                    || !windowState.isDexMode()
+                    || (activityRecord = windowState.mActivityRecord) == null
+                    || (i = activityRecord.mTransientBarShowingDelayMillis) < 0) {
                 DisplayContent displayContent = displayPolicy.mDisplayContent;
-                if (!displayContent.isDexMode() || (i = displayContent.mAtmService.mDexController.mDexStarShowingDelayTime) < 0) {
+                if (!displayContent.isDexMode()
+                        || (i = displayContent.mAtmService.mDexController.mDexStarShowingDelayTime)
+                                < 0) {
                     j = 500;
                     displayPolicy.mHandler.postDelayed(this.mOnSwipeFromBottom, j);
                 }
@@ -373,7 +394,8 @@ public final class DisplayPolicy {
             synchronized (DisplayPolicy.this.mLock) {
                 DisplayPolicy displayPolicy = DisplayPolicy.this;
                 WindowState windowState = displayPolicy.mBottomGestureHost;
-                displayPolicy.requestTransientBars(windowState, getControllableInsets(windowState).bottom > 0);
+                displayPolicy.requestTransientBars(
+                        windowState, getControllableInsets(windowState).bottom > 0);
             }
         }
 
@@ -381,13 +403,16 @@ public final class DisplayPolicy {
             Region obtain = Region.obtain();
             synchronized (DisplayPolicy.this.mLock) {
                 try {
-                    DisplayPolicy.this.mDisplayContent.calculateSystemGestureExclusion(obtain, null);
+                    DisplayPolicy.this.mDisplayContent.calculateSystemGestureExclusion(
+                            obtain, null);
                     boolean z = getControllableInsets(DisplayPolicy.this.mLeftGestureHost).left > 0;
                     if (!z) {
                         if (DisplayPolicy.this.mNavigationBarAlwaysShowOnSideGesture) {
-                            SystemGesturesPointerEventListener systemGesturesPointerEventListener = DisplayPolicy.this.mSystemGestures;
-                            if (!obtain.contains((int) systemGesturesPointerEventListener.mDownX[0], (int) systemGesturesPointerEventListener.mDownY[0])) {
-                            }
+                            SystemGesturesPointerEventListener systemGesturesPointerEventListener =
+                                    DisplayPolicy.this.mSystemGestures;
+                            if (!obtain.contains(
+                                    (int) systemGesturesPointerEventListener.mDownX[0],
+                                    (int) systemGesturesPointerEventListener.mDownY[0])) {}
                         }
                         requestTransientBarsForSideSwipe(DisplayPolicy.this.mLeftGestureHost, 1);
                     }
@@ -404,13 +429,17 @@ public final class DisplayPolicy {
             Region obtain = Region.obtain();
             synchronized (DisplayPolicy.this.mLock) {
                 try {
-                    DisplayPolicy.this.mDisplayContent.calculateSystemGestureExclusion(obtain, null);
-                    boolean z = getControllableInsets(DisplayPolicy.this.mRightGestureHost).right > 0;
+                    DisplayPolicy.this.mDisplayContent.calculateSystemGestureExclusion(
+                            obtain, null);
+                    boolean z =
+                            getControllableInsets(DisplayPolicy.this.mRightGestureHost).right > 0;
                     if (!z) {
                         if (DisplayPolicy.this.mNavigationBarAlwaysShowOnSideGesture) {
-                            SystemGesturesPointerEventListener systemGesturesPointerEventListener = DisplayPolicy.this.mSystemGestures;
-                            if (!obtain.contains((int) systemGesturesPointerEventListener.mDownX[0], (int) systemGesturesPointerEventListener.mDownY[0])) {
-                            }
+                            SystemGesturesPointerEventListener systemGesturesPointerEventListener =
+                                    DisplayPolicy.this.mSystemGestures;
+                            if (!obtain.contains(
+                                    (int) systemGesturesPointerEventListener.mDownX[0],
+                                    (int) systemGesturesPointerEventListener.mDownY[0])) {}
                         }
                         requestTransientBarsForSideSwipe(DisplayPolicy.this.mRightGestureHost, 2);
                     }
@@ -426,14 +455,21 @@ public final class DisplayPolicy {
         public final void onSwipeFromTop() {
             synchronized (DisplayPolicy.this.mLock) {
                 try {
-                    MultiWindowPointerEventListener multiWindowPointerEventListener = DisplayPolicy.this.mDisplayContent.mMultiWindowPointerEventListener;
-                    MultiWindowEdgeDetector multiWindowEdgeDetector = multiWindowPointerEventListener != null ? multiWindowPointerEventListener.mMultiWindowEdgeDetector : null;
-                    if (multiWindowEdgeDetector != null && multiWindowPointerEventListener.isAllowCornerGestureState() && multiWindowEdgeDetector.isEdge()) {
+                    MultiWindowPointerEventListener multiWindowPointerEventListener =
+                            DisplayPolicy.this.mDisplayContent.mMultiWindowPointerEventListener;
+                    MultiWindowEdgeDetector multiWindowEdgeDetector =
+                            multiWindowPointerEventListener != null
+                                    ? multiWindowPointerEventListener.mMultiWindowEdgeDetector
+                                    : null;
+                    if (multiWindowEdgeDetector != null
+                            && multiWindowPointerEventListener.isAllowCornerGestureState()
+                            && multiWindowEdgeDetector.isEdge()) {
                         return;
                     }
                     DisplayPolicy displayPolicy = DisplayPolicy.this;
                     WindowState windowState = displayPolicy.mTopGestureHost;
-                    displayPolicy.requestTransientBars(windowState, getControllableInsets(windowState).top > 0);
+                    displayPolicy.requestTransientBars(
+                            windowState, getControllableInsets(windowState).top > 0);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -441,14 +477,15 @@ public final class DisplayPolicy {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:12:0x0029, code lost:
-        
-            if (r0.logicalWidth < r0.logicalHeight) goto L16;
-         */
+
+           if (r0.logicalWidth < r0.logicalHeight) goto L16;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void requestTransientBarsForSideSwipe(com.android.server.wm.WindowState r5, int r6) {
+        public final void requestTransientBarsForSideSwipe(
+                com.android.server.wm.WindowState r5, int r6) {
             /*
                 r4 = this;
                 com.android.server.wm.DisplayPolicy r0 = com.android.server.wm.DisplayPolicy.this
@@ -499,7 +536,10 @@ public final class DisplayPolicy {
             L51:
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DisplayPolicy.AnonymousClass1.requestTransientBarsForSideSwipe(com.android.server.wm.WindowState, int):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.wm.DisplayPolicy.AnonymousClass1.requestTransientBarsForSideSwipe(com.android.server.wm.WindowState,"
+                        + " int):void");
         }
     }
 
@@ -515,185 +555,221 @@ public final class DisplayPolicy {
         /* JADX WARN: Type inference failed for: r2v3, types: [com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda1] */
         public AnonymousClass2(final int i) {
             final int i2 = 0;
-            this.mAppTransitionPending = new Runnable(this) { // from class: com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda1
-                public final /* synthetic */ DisplayPolicy.AnonymousClass2 f$0;
+            this.mAppTransitionPending =
+                    new Runnable(
+                            this) { // from class:
+                                    // com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda1
+                        public final /* synthetic */ DisplayPolicy.AnonymousClass2 f$0;
 
-                {
-                    this.f$0 = this;
-                }
+                        {
+                            this.f$0 = this;
+                        }
 
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IStatusBar iStatusBar;
-                    IStatusBar iStatusBar2;
-                    switch (i2) {
-                        case 0:
-                            DisplayPolicy.AnonymousClass2 anonymousClass2 = this.f$0;
-                            int i3 = i;
-                            StatusBarManagerInternal statusBarManagerInternal = DisplayPolicy.this.getStatusBarManagerInternal();
-                            if (statusBarManagerInternal != null && (iStatusBar = StatusBarManagerService.this.mBar) != null) {
-                                try {
-                                    iStatusBar.appTransitionPending(i3);
-                                    break;
-                                } catch (RemoteException unused) {
-                                    return;
-                                }
-                            }
-                            break;
-                        case 1:
-                            DisplayPolicy.AnonymousClass2 anonymousClass22 = this.f$0;
-                            int i4 = i;
-                            StatusBarManagerInternal statusBarManagerInternal2 = DisplayPolicy.this.getStatusBarManagerInternal();
-                            if (statusBarManagerInternal2 != null && (iStatusBar2 = StatusBarManagerService.this.mBar) != null) {
-                                try {
-                                    iStatusBar2.appTransitionCancelled(i4);
-                                    break;
-                                } catch (RemoteException unused2) {
-                                    return;
-                                }
-                            }
-                            break;
-                        default:
-                            DisplayPolicy.AnonymousClass2 anonymousClass23 = this.f$0;
-                            int i5 = i;
-                            StatusBarManagerInternal statusBarManagerInternal3 = DisplayPolicy.this.getStatusBarManagerInternal();
-                            if (statusBarManagerInternal3 != null) {
-                                StatusBarManagerService.AnonymousClass2 anonymousClass24 = (StatusBarManagerService.AnonymousClass2) statusBarManagerInternal3;
-                                StatusBarManagerService.this.enforceStatusBarService();
-                                IStatusBar iStatusBar3 = StatusBarManagerService.this.mBar;
-                                if (iStatusBar3 != null) {
-                                    try {
-                                        iStatusBar3.appTransitionFinished(i5);
-                                        break;
-                                    } catch (RemoteException unused3) {
-                                        return;
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IStatusBar iStatusBar;
+                            IStatusBar iStatusBar2;
+                            switch (i2) {
+                                case 0:
+                                    DisplayPolicy.AnonymousClass2 anonymousClass2 = this.f$0;
+                                    int i3 = i;
+                                    StatusBarManagerInternal statusBarManagerInternal =
+                                            DisplayPolicy.this.getStatusBarManagerInternal();
+                                    if (statusBarManagerInternal != null
+                                            && (iStatusBar = StatusBarManagerService.this.mBar)
+                                                    != null) {
+                                        try {
+                                            iStatusBar.appTransitionPending(i3);
+                                            break;
+                                        } catch (RemoteException unused) {
+                                            return;
+                                        }
                                     }
-                                }
+                                    break;
+                                case 1:
+                                    DisplayPolicy.AnonymousClass2 anonymousClass22 = this.f$0;
+                                    int i4 = i;
+                                    StatusBarManagerInternal statusBarManagerInternal2 =
+                                            DisplayPolicy.this.getStatusBarManagerInternal();
+                                    if (statusBarManagerInternal2 != null
+                                            && (iStatusBar2 = StatusBarManagerService.this.mBar)
+                                                    != null) {
+                                        try {
+                                            iStatusBar2.appTransitionCancelled(i4);
+                                            break;
+                                        } catch (RemoteException unused2) {
+                                            return;
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    DisplayPolicy.AnonymousClass2 anonymousClass23 = this.f$0;
+                                    int i5 = i;
+                                    StatusBarManagerInternal statusBarManagerInternal3 =
+                                            DisplayPolicy.this.getStatusBarManagerInternal();
+                                    if (statusBarManagerInternal3 != null) {
+                                        StatusBarManagerService.AnonymousClass2 anonymousClass24 =
+                                                (StatusBarManagerService.AnonymousClass2)
+                                                        statusBarManagerInternal3;
+                                        StatusBarManagerService.this.enforceStatusBarService();
+                                        IStatusBar iStatusBar3 = StatusBarManagerService.this.mBar;
+                                        if (iStatusBar3 != null) {
+                                            try {
+                                                iStatusBar3.appTransitionFinished(i5);
+                                                break;
+                                            } catch (RemoteException unused3) {
+                                                return;
+                                            }
+                                        }
+                                    }
+                                    break;
                             }
-                            break;
-                    }
-                }
-            };
+                        }
+                    };
             final int i3 = 1;
-            this.mAppTransitionCancelled = new Runnable(this) { // from class: com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda1
-                public final /* synthetic */ DisplayPolicy.AnonymousClass2 f$0;
+            this.mAppTransitionCancelled =
+                    new Runnable(
+                            this) { // from class:
+                                    // com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda1
+                        public final /* synthetic */ DisplayPolicy.AnonymousClass2 f$0;
 
-                {
-                    this.f$0 = this;
-                }
+                        {
+                            this.f$0 = this;
+                        }
 
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IStatusBar iStatusBar;
-                    IStatusBar iStatusBar2;
-                    switch (i3) {
-                        case 0:
-                            DisplayPolicy.AnonymousClass2 anonymousClass2 = this.f$0;
-                            int i32 = i;
-                            StatusBarManagerInternal statusBarManagerInternal = DisplayPolicy.this.getStatusBarManagerInternal();
-                            if (statusBarManagerInternal != null && (iStatusBar = StatusBarManagerService.this.mBar) != null) {
-                                try {
-                                    iStatusBar.appTransitionPending(i32);
-                                    break;
-                                } catch (RemoteException unused) {
-                                    return;
-                                }
-                            }
-                            break;
-                        case 1:
-                            DisplayPolicy.AnonymousClass2 anonymousClass22 = this.f$0;
-                            int i4 = i;
-                            StatusBarManagerInternal statusBarManagerInternal2 = DisplayPolicy.this.getStatusBarManagerInternal();
-                            if (statusBarManagerInternal2 != null && (iStatusBar2 = StatusBarManagerService.this.mBar) != null) {
-                                try {
-                                    iStatusBar2.appTransitionCancelled(i4);
-                                    break;
-                                } catch (RemoteException unused2) {
-                                    return;
-                                }
-                            }
-                            break;
-                        default:
-                            DisplayPolicy.AnonymousClass2 anonymousClass23 = this.f$0;
-                            int i5 = i;
-                            StatusBarManagerInternal statusBarManagerInternal3 = DisplayPolicy.this.getStatusBarManagerInternal();
-                            if (statusBarManagerInternal3 != null) {
-                                StatusBarManagerService.AnonymousClass2 anonymousClass24 = (StatusBarManagerService.AnonymousClass2) statusBarManagerInternal3;
-                                StatusBarManagerService.this.enforceStatusBarService();
-                                IStatusBar iStatusBar3 = StatusBarManagerService.this.mBar;
-                                if (iStatusBar3 != null) {
-                                    try {
-                                        iStatusBar3.appTransitionFinished(i5);
-                                        break;
-                                    } catch (RemoteException unused3) {
-                                        return;
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IStatusBar iStatusBar;
+                            IStatusBar iStatusBar2;
+                            switch (i3) {
+                                case 0:
+                                    DisplayPolicy.AnonymousClass2 anonymousClass2 = this.f$0;
+                                    int i32 = i;
+                                    StatusBarManagerInternal statusBarManagerInternal =
+                                            DisplayPolicy.this.getStatusBarManagerInternal();
+                                    if (statusBarManagerInternal != null
+                                            && (iStatusBar = StatusBarManagerService.this.mBar)
+                                                    != null) {
+                                        try {
+                                            iStatusBar.appTransitionPending(i32);
+                                            break;
+                                        } catch (RemoteException unused) {
+                                            return;
+                                        }
                                     }
-                                }
+                                    break;
+                                case 1:
+                                    DisplayPolicy.AnonymousClass2 anonymousClass22 = this.f$0;
+                                    int i4 = i;
+                                    StatusBarManagerInternal statusBarManagerInternal2 =
+                                            DisplayPolicy.this.getStatusBarManagerInternal();
+                                    if (statusBarManagerInternal2 != null
+                                            && (iStatusBar2 = StatusBarManagerService.this.mBar)
+                                                    != null) {
+                                        try {
+                                            iStatusBar2.appTransitionCancelled(i4);
+                                            break;
+                                        } catch (RemoteException unused2) {
+                                            return;
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    DisplayPolicy.AnonymousClass2 anonymousClass23 = this.f$0;
+                                    int i5 = i;
+                                    StatusBarManagerInternal statusBarManagerInternal3 =
+                                            DisplayPolicy.this.getStatusBarManagerInternal();
+                                    if (statusBarManagerInternal3 != null) {
+                                        StatusBarManagerService.AnonymousClass2 anonymousClass24 =
+                                                (StatusBarManagerService.AnonymousClass2)
+                                                        statusBarManagerInternal3;
+                                        StatusBarManagerService.this.enforceStatusBarService();
+                                        IStatusBar iStatusBar3 = StatusBarManagerService.this.mBar;
+                                        if (iStatusBar3 != null) {
+                                            try {
+                                                iStatusBar3.appTransitionFinished(i5);
+                                                break;
+                                            } catch (RemoteException unused3) {
+                                                return;
+                                            }
+                                        }
+                                    }
+                                    break;
                             }
-                            break;
-                    }
-                }
-            };
+                        }
+                    };
             final int i4 = 2;
-            this.mAppTransitionFinished = new Runnable(this) { // from class: com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda1
-                public final /* synthetic */ DisplayPolicy.AnonymousClass2 f$0;
+            this.mAppTransitionFinished =
+                    new Runnable(
+                            this) { // from class:
+                                    // com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda1
+                        public final /* synthetic */ DisplayPolicy.AnonymousClass2 f$0;
 
-                {
-                    this.f$0 = this;
-                }
+                        {
+                            this.f$0 = this;
+                        }
 
-                @Override // java.lang.Runnable
-                public final void run() {
-                    IStatusBar iStatusBar;
-                    IStatusBar iStatusBar2;
-                    switch (i4) {
-                        case 0:
-                            DisplayPolicy.AnonymousClass2 anonymousClass2 = this.f$0;
-                            int i32 = i;
-                            StatusBarManagerInternal statusBarManagerInternal = DisplayPolicy.this.getStatusBarManagerInternal();
-                            if (statusBarManagerInternal != null && (iStatusBar = StatusBarManagerService.this.mBar) != null) {
-                                try {
-                                    iStatusBar.appTransitionPending(i32);
-                                    break;
-                                } catch (RemoteException unused) {
-                                    return;
-                                }
-                            }
-                            break;
-                        case 1:
-                            DisplayPolicy.AnonymousClass2 anonymousClass22 = this.f$0;
-                            int i42 = i;
-                            StatusBarManagerInternal statusBarManagerInternal2 = DisplayPolicy.this.getStatusBarManagerInternal();
-                            if (statusBarManagerInternal2 != null && (iStatusBar2 = StatusBarManagerService.this.mBar) != null) {
-                                try {
-                                    iStatusBar2.appTransitionCancelled(i42);
-                                    break;
-                                } catch (RemoteException unused2) {
-                                    return;
-                                }
-                            }
-                            break;
-                        default:
-                            DisplayPolicy.AnonymousClass2 anonymousClass23 = this.f$0;
-                            int i5 = i;
-                            StatusBarManagerInternal statusBarManagerInternal3 = DisplayPolicy.this.getStatusBarManagerInternal();
-                            if (statusBarManagerInternal3 != null) {
-                                StatusBarManagerService.AnonymousClass2 anonymousClass24 = (StatusBarManagerService.AnonymousClass2) statusBarManagerInternal3;
-                                StatusBarManagerService.this.enforceStatusBarService();
-                                IStatusBar iStatusBar3 = StatusBarManagerService.this.mBar;
-                                if (iStatusBar3 != null) {
-                                    try {
-                                        iStatusBar3.appTransitionFinished(i5);
-                                        break;
-                                    } catch (RemoteException unused3) {
-                                        return;
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            IStatusBar iStatusBar;
+                            IStatusBar iStatusBar2;
+                            switch (i4) {
+                                case 0:
+                                    DisplayPolicy.AnonymousClass2 anonymousClass2 = this.f$0;
+                                    int i32 = i;
+                                    StatusBarManagerInternal statusBarManagerInternal =
+                                            DisplayPolicy.this.getStatusBarManagerInternal();
+                                    if (statusBarManagerInternal != null
+                                            && (iStatusBar = StatusBarManagerService.this.mBar)
+                                                    != null) {
+                                        try {
+                                            iStatusBar.appTransitionPending(i32);
+                                            break;
+                                        } catch (RemoteException unused) {
+                                            return;
+                                        }
                                     }
-                                }
+                                    break;
+                                case 1:
+                                    DisplayPolicy.AnonymousClass2 anonymousClass22 = this.f$0;
+                                    int i42 = i;
+                                    StatusBarManagerInternal statusBarManagerInternal2 =
+                                            DisplayPolicy.this.getStatusBarManagerInternal();
+                                    if (statusBarManagerInternal2 != null
+                                            && (iStatusBar2 = StatusBarManagerService.this.mBar)
+                                                    != null) {
+                                        try {
+                                            iStatusBar2.appTransitionCancelled(i42);
+                                            break;
+                                        } catch (RemoteException unused2) {
+                                            return;
+                                        }
+                                    }
+                                    break;
+                                default:
+                                    DisplayPolicy.AnonymousClass2 anonymousClass23 = this.f$0;
+                                    int i5 = i;
+                                    StatusBarManagerInternal statusBarManagerInternal3 =
+                                            DisplayPolicy.this.getStatusBarManagerInternal();
+                                    if (statusBarManagerInternal3 != null) {
+                                        StatusBarManagerService.AnonymousClass2 anonymousClass24 =
+                                                (StatusBarManagerService.AnonymousClass2)
+                                                        statusBarManagerInternal3;
+                                        StatusBarManagerService.this.enforceStatusBarService();
+                                        IStatusBar iStatusBar3 = StatusBarManagerService.this.mBar;
+                                        if (iStatusBar3 != null) {
+                                            try {
+                                                iStatusBar3.appTransitionFinished(i5);
+                                                break;
+                                            } catch (RemoteException unused3) {
+                                                return;
+                                            }
+                                        }
+                                    }
+                                    break;
                             }
-                            break;
-                    }
-                }
-            };
+                        }
+                    };
         }
 
         @Override // com.android.server.wm.WindowManagerInternal.AppTransitionListener
@@ -713,27 +789,31 @@ public final class DisplayPolicy {
 
         @Override // com.android.server.wm.WindowManagerInternal.AppTransitionListener
         public final void onAppTransitionStartingLocked(final long j) {
-            DisplayPolicy.this.mHandler.post(new Runnable() { // from class: com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda0
-                public final /* synthetic */ long f$2 = 120;
+            DisplayPolicy.this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.wm.DisplayPolicy$2$$ExternalSyntheticLambda0
+                        public final /* synthetic */ long f$2 = 120;
 
-                @Override // java.lang.Runnable
-                public final void run() {
-                    DisplayPolicy.AnonymousClass2 anonymousClass2 = DisplayPolicy.AnonymousClass2.this;
-                    long j2 = j;
-                    long j3 = this.f$2;
-                    StatusBarManagerInternal statusBarManagerInternal = DisplayPolicy.this.getStatusBarManagerInternal();
-                    if (statusBarManagerInternal != null) {
-                        int displayId = DisplayPolicy.this.mContext.getDisplayId();
-                        IStatusBar iStatusBar = StatusBarManagerService.this.mBar;
-                        if (iStatusBar != null) {
-                            try {
-                                iStatusBar.appTransitionStarting(displayId, j2, j3);
-                            } catch (RemoteException unused) {
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            DisplayPolicy.AnonymousClass2 anonymousClass2 =
+                                    DisplayPolicy.AnonymousClass2.this;
+                            long j2 = j;
+                            long j3 = this.f$2;
+                            StatusBarManagerInternal statusBarManagerInternal =
+                                    DisplayPolicy.this.getStatusBarManagerInternal();
+                            if (statusBarManagerInternal != null) {
+                                int displayId = DisplayPolicy.this.mContext.getDisplayId();
+                                IStatusBar iStatusBar = StatusBarManagerService.this.mBar;
+                                if (iStatusBar != null) {
+                                    try {
+                                        iStatusBar.appTransitionStarting(displayId, j2, j3);
+                                    } catch (RemoteException unused) {
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-            });
+                    });
         }
     }
 
@@ -782,19 +862,49 @@ public final class DisplayPolicy {
 
             public final String toString() {
                 StringBuilder sb = new StringBuilder(32);
-                return "{nonDecorInsets=" + this.mNonDecorInsets.toShortString(sb) + ", overrideNonDecorInsets=" + this.mOverrideNonDecorInsets.toShortString(sb) + ", configInsets=" + this.mConfigInsets.toShortString(sb) + ", overrideConfigInsets=" + this.mOverrideConfigInsets.toShortString(sb) + ", nonDecorFrame=" + this.mNonDecorFrame.toShortString(sb) + ", overrideNonDecorFrame=" + this.mOverrideNonDecorFrame.toShortString(sb) + ", configFrame=" + this.mConfigFrame.toShortString(sb) + ", overrideConfigFrame=" + this.mOverrideConfigFrame.toShortString(sb) + '}';
+                return "{nonDecorInsets="
+                        + this.mNonDecorInsets.toShortString(sb)
+                        + ", overrideNonDecorInsets="
+                        + this.mOverrideNonDecorInsets.toShortString(sb)
+                        + ", configInsets="
+                        + this.mConfigInsets.toShortString(sb)
+                        + ", overrideConfigInsets="
+                        + this.mOverrideConfigInsets.toShortString(sb)
+                        + ", nonDecorFrame="
+                        + this.mNonDecorFrame.toShortString(sb)
+                        + ", overrideNonDecorFrame="
+                        + this.mOverrideNonDecorFrame.toShortString(sb)
+                        + ", configFrame="
+                        + this.mConfigFrame.toShortString(sb)
+                        + ", overrideConfigFrame="
+                        + this.mOverrideConfigFrame.toShortString(sb)
+                        + '}';
             }
 
             public final InsetsState update(int i, int i2, int i3, DisplayContent displayContent) {
                 Insets calculateInsets;
                 Insets calculateInsets2;
                 DisplayFrames displayFrames = new DisplayFrames();
-                displayFrames.update(i, i2, i3, displayContent.calculateDisplayCutoutForRotation(i, false), displayContent.calculateRoundedCornersForRotation(i), (PrivacyIndicatorBounds) displayContent.mPrivacyIndicatorBoundsCache.getOrCompute(i, displayContent.mCurrentPrivacyIndicatorBounds), (DisplayShape) displayContent.mDisplayShapeCache.getOrCompute(i, displayContent.mInitialDisplayShape));
+                displayFrames.update(
+                        i,
+                        i2,
+                        i3,
+                        displayContent.calculateDisplayCutoutForRotation(i, false),
+                        displayContent.calculateRoundedCornersForRotation(i),
+                        (PrivacyIndicatorBounds)
+                                displayContent.mPrivacyIndicatorBoundsCache.getOrCompute(
+                                        i, displayContent.mCurrentPrivacyIndicatorBounds),
+                        (DisplayShape)
+                                displayContent.mDisplayShapeCache.getOrCompute(
+                                        i, displayContent.mInitialDisplayShape));
                 displayContent.mDisplayPolicy.simulateLayoutDisplay(displayFrames);
                 InsetsState insetsState = displayFrames.mInsetsState;
                 Rect displayFrame = insetsState.getDisplayFrame();
                 if (displayContent.isDexMode()) {
-                    int displayCutout = CoreRune.MD_DEX_NOT_SUPPORT_CUTOUT ? WindowInsets.Type.displayCutout() : 0;
+                    int displayCutout =
+                            CoreRune.MD_DEX_NOT_SUPPORT_CUTOUT
+                                    ? WindowInsets.Type.displayCutout()
+                                    : 0;
                     if (displayContent.mAtmService.mDexController.mIsDexForceImmersiveModeEnabled) {
                         displayCutout |= WindowInsets.Type.navigationBars();
                     }
@@ -808,7 +918,9 @@ public final class DisplayPolicy {
                     }
                     calculateInsets2 = calculateInsets;
                 } else {
-                    calculateInsets = insetsState.calculateInsets(displayFrame, displayContent.mWmService.mDecorTypes, true);
+                    calculateInsets =
+                            insetsState.calculateInsets(
+                                    displayFrame, displayContent.mWmService.mDecorTypes, true);
                     WindowManagerService windowManagerService2 = displayContent.mWmService;
                     int i7 = windowManagerService2.mConfigTypes;
                     if (i7 != windowManagerService2.mDecorTypes) {
@@ -819,15 +931,37 @@ public final class DisplayPolicy {
                 WindowManagerService windowManagerService3 = displayContent.mWmService;
                 int i8 = windowManagerService3.mConfigTypes;
                 int i9 = windowManagerService3.mOverrideConfigTypes;
-                Insets calculateInsets3 = i8 == i9 ? calculateInsets2 : insetsState.calculateInsets(displayFrame, i9, true);
+                Insets calculateInsets3 =
+                        i8 == i9
+                                ? calculateInsets2
+                                : insetsState.calculateInsets(displayFrame, i9, true);
                 WindowManagerService windowManagerService4 = displayContent.mWmService;
                 int i10 = windowManagerService4.mDecorTypes;
                 int i11 = windowManagerService4.mOverrideDecorTypes;
-                Insets calculateInsets4 = i10 == i11 ? calculateInsets : insetsState.calculateInsets(displayFrame, i11, true);
-                this.mNonDecorInsets.set(calculateInsets.left, calculateInsets.top, calculateInsets.right, calculateInsets.bottom);
-                this.mConfigInsets.set(calculateInsets2.left, calculateInsets2.top, calculateInsets2.right, calculateInsets2.bottom);
-                this.mOverrideConfigInsets.set(calculateInsets3.left, calculateInsets3.top, calculateInsets3.right, calculateInsets3.bottom);
-                this.mOverrideNonDecorInsets.set(calculateInsets4.left, calculateInsets4.top, calculateInsets4.right, calculateInsets4.bottom);
+                Insets calculateInsets4 =
+                        i10 == i11
+                                ? calculateInsets
+                                : insetsState.calculateInsets(displayFrame, i11, true);
+                this.mNonDecorInsets.set(
+                        calculateInsets.left,
+                        calculateInsets.top,
+                        calculateInsets.right,
+                        calculateInsets.bottom);
+                this.mConfigInsets.set(
+                        calculateInsets2.left,
+                        calculateInsets2.top,
+                        calculateInsets2.right,
+                        calculateInsets2.bottom);
+                this.mOverrideConfigInsets.set(
+                        calculateInsets3.left,
+                        calculateInsets3.top,
+                        calculateInsets3.right,
+                        calculateInsets3.bottom);
+                this.mOverrideNonDecorInsets.set(
+                        calculateInsets4.left,
+                        calculateInsets4.top,
+                        calculateInsets4.right,
+                        calculateInsets4.bottom);
                 this.mNonDecorFrame.set(displayFrame);
                 this.mNonDecorFrame.inset(this.mNonDecorInsets);
                 this.mConfigFrame.set(displayFrame);
@@ -837,10 +971,22 @@ public final class DisplayPolicy {
                 this.mOverrideNonDecorFrame.set(displayFrame);
                 this.mOverrideNonDecorFrame.inset(this.mOverrideNonDecorInsets);
                 this.mNeedUpdate = false;
-                Insets calculateInsets5 = insetsState.calculateInsets(displayFrame, WindowInsets.Type.statusBars(), true);
-                Insets calculateInsets6 = insetsState.calculateInsets(displayFrame, WindowInsets.Type.displayCutout(), true);
-                this.mCutoutInsets.set(calculateInsets6.left, calculateInsets6.top, calculateInsets6.right, calculateInsets6.bottom);
-                this.mExceptNavConfigInsets.set(Math.max(calculateInsets5.left, calculateInsets6.left), Math.max(calculateInsets5.top, calculateInsets6.top), Math.max(calculateInsets5.right, calculateInsets6.right), Math.max(calculateInsets5.bottom, calculateInsets6.bottom));
+                Insets calculateInsets5 =
+                        insetsState.calculateInsets(
+                                displayFrame, WindowInsets.Type.statusBars(), true);
+                Insets calculateInsets6 =
+                        insetsState.calculateInsets(
+                                displayFrame, WindowInsets.Type.displayCutout(), true);
+                this.mCutoutInsets.set(
+                        calculateInsets6.left,
+                        calculateInsets6.top,
+                        calculateInsets6.right,
+                        calculateInsets6.bottom);
+                this.mExceptNavConfigInsets.set(
+                        Math.max(calculateInsets5.left, calculateInsets6.left),
+                        Math.max(calculateInsets5.top, calculateInsets6.top),
+                        Math.max(calculateInsets5.right, calculateInsets6.right),
+                        Math.max(calculateInsets5.bottom, calculateInsets6.bottom));
                 return insetsState;
             }
         }
@@ -899,7 +1045,8 @@ public final class DisplayPolicy {
                 if (displayPolicy.mPointerLocationView != null) {
                     return;
                 }
-                PointerLocationView pointerLocationView = new PointerLocationView(displayPolicy.mContext);
+                PointerLocationView pointerLocationView =
+                        new PointerLocationView(displayPolicy.mContext);
                 displayPolicy.mPointerLocationView = pointerLocationView;
                 pointerLocationView.setPrintCoords(false);
                 WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
@@ -918,12 +1065,14 @@ public final class DisplayPolicy {
                 sb.append(displayContent.mDisplayId);
                 layoutParams.setTitle(sb.toString());
                 layoutParams.inputFeatures |= 1;
-                ((WindowManager) displayPolicy.mContext.getSystemService(WindowManager.class)).addView(displayPolicy.mPointerLocationView, layoutParams);
+                ((WindowManager) displayPolicy.mContext.getSystemService(WindowManager.class))
+                        .addView(displayPolicy.mPointerLocationView, layoutParams);
                 displayContent.registerPointerEventListener(displayPolicy.mPointerLocationView);
                 return;
             }
             if (i == 5) {
-                WindowManagerPolicyConstants.PointerEventListener pointerEventListener = displayPolicy.mPointerLocationView;
+                WindowManagerPolicyConstants.PointerEventListener pointerEventListener =
+                        displayPolicy.mPointerLocationView;
                 if (pointerEventListener == null) {
                     return;
                 }
@@ -931,7 +1080,8 @@ public final class DisplayPolicy {
                 if (!displayContent2.mRemoved) {
                     displayContent2.unregisterPointerEventListener(pointerEventListener);
                 }
-                ((WindowManager) displayPolicy.mContext.getSystemService(WindowManager.class)).removeView(displayPolicy.mPointerLocationView);
+                ((WindowManager) displayPolicy.mContext.getSystemService(WindowManager.class))
+                        .removeView(displayPolicy.mPointerLocationView);
                 displayPolicy.mPointerLocationView = null;
                 return;
             }
@@ -943,12 +1093,16 @@ public final class DisplayPolicy {
                         return;
                     }
                     if (displayPolicy.mTouchEventView == null) {
-                        displayPolicy.mTouchEventView = new TouchEventView(displayPolicy.mContext, displayPolicy.mExt.mAuthFactorTouchManager);
+                        displayPolicy.mTouchEventView =
+                                new TouchEventView(
+                                        displayPolicy.mContext,
+                                        displayPolicy.mExt.mAuthFactorTouchManager);
                     }
                     Slog.i("WindowManager", "enableTouchListener debugmode:false");
                     displayPolicy.mTouchEventView.setDebugmode(false);
                     try {
-                        displayPolicy.mDisplayContent.registerPointerEventListener(displayPolicy.mTouchEventView);
+                        displayPolicy.mDisplayContent.registerPointerEventListener(
+                                displayPolicy.mTouchEventView);
                     } catch (IllegalStateException e) {
                         Slog.e("WindowManager", "Exception in registering mTouchEventView :- " + e);
                     }
@@ -967,7 +1121,8 @@ public final class DisplayPolicy {
             } else if (displayPolicy.mIsKnoxZtStarted) {
                 try {
                     if (displayPolicy.mTouchEventViewHash == touchEventView.hashCode()) {
-                        displayPolicy.mDisplayContent.unregisterPointerEventListener(displayPolicy.mTouchEventView);
+                        displayPolicy.mDisplayContent.unregisterPointerEventListener(
+                                displayPolicy.mTouchEventView);
                     }
                 } catch (IllegalStateException e2) {
                     Slog.e("WindowManager", "Exception in unregistering mTouchEventView :- " + e2);
@@ -988,20 +1143,33 @@ public final class DisplayPolicy {
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.wm.DisplayPolicy$4] */
     public DisplayPolicy(WindowManagerService windowManagerService, DisplayContent displayContent) {
         this.mService = windowManagerService;
-        Context createDisplayContext = displayContent.isDefaultDisplay ? windowManagerService.mContext : windowManagerService.mContext.createDisplayContext(displayContent.mDisplay);
+        Context createDisplayContext =
+                displayContent.isDefaultDisplay
+                        ? windowManagerService.mContext
+                        : windowManagerService.mContext.createDisplayContext(
+                                displayContent.mDisplay);
         this.mContext = createDisplayContext;
-        this.mUiContext = displayContent.isDefaultDisplay ? windowManagerService.mAtmService.mUiContext : windowManagerService.mAtmService.mSystemThread.getSystemUiContext(displayContent.mDisplayId);
+        this.mUiContext =
+                displayContent.isDefaultDisplay
+                        ? windowManagerService.mAtmService.mUiContext
+                        : windowManagerService.mAtmService.mSystemThread.getSystemUiContext(
+                                displayContent.mDisplayId);
         this.mDisplayContent = displayContent;
         this.mDecorInsets = new DecorInsets(displayContent);
         this.mLock = windowManagerService.mGlobalLock;
         this.mExt = new DisplayPolicyExt(createDisplayContext, windowManagerService, this);
         int i = displayContent.mDisplayId;
         Resources resources = createDisplayContext.getResources();
-        this.mCarDockEnablesAccelerometer = resources.getBoolean(R.bool.config_carrier_wfc_ims_available);
-        this.mDeskDockEnablesAccelerometer = resources.getBoolean(R.bool.config_device_wfc_ims_available);
-        this.mCanSystemBarsBeShownByUser = !resources.getBoolean(R.bool.config_remoteInsetsControllerControlsSystemBars) || resources.getBoolean(R.bool.config_setColorTransformAccelerated);
+        this.mCarDockEnablesAccelerometer =
+                resources.getBoolean(R.bool.config_carrier_wfc_ims_available);
+        this.mDeskDockEnablesAccelerometer =
+                resources.getBoolean(R.bool.config_device_wfc_ims_available);
+        this.mCanSystemBarsBeShownByUser =
+                !resources.getBoolean(R.bool.config_remoteInsetsControllerControlsSystemBars)
+                        || resources.getBoolean(R.bool.config_setColorTransformAccelerated);
         this.mPanicThresholdMs = resources.getInteger(R.integer.config_maxShortcutTargetsPerApp);
-        this.mAccessibilityManager = (AccessibilityManager) createDisplayContext.getSystemService("accessibility");
+        this.mAccessibilityManager =
+                (AccessibilityManager) createDisplayContext.getSystemService("accessibility");
         if (!displayContent.isDefaultDisplay) {
             this.mAwake = true;
             this.mScreenOnEarly = true;
@@ -1012,117 +1180,140 @@ public final class DisplayPolicy {
         this.mHandler = policyHandler;
         boolean z = ViewRootImpl.CLIENT_TRANSIENT;
         if (!z) {
-            SystemGesturesPointerEventListener systemGesturesPointerEventListener = new SystemGesturesPointerEventListener(this.mUiContext, policyHandler, new AnonymousClass1());
+            SystemGesturesPointerEventListener systemGesturesPointerEventListener =
+                    new SystemGesturesPointerEventListener(
+                            this.mUiContext, policyHandler, new AnonymousClass1());
             this.mSystemGestures = systemGesturesPointerEventListener;
-            displayContent.registerPointerEventListener(new TwoFingerSwipeGestureDetector(this.mUiContext, new Function() { // from class: com.android.server.wm.DisplayPolicy$$ExternalSyntheticLambda1
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    final DisplayPolicy displayPolicy = DisplayPolicy.this;
-                    final TwoFingerSwipeGestureDetector twoFingerSwipeGestureDetector = (TwoFingerSwipeGestureDetector) obj;
-                    displayPolicy.getClass();
-                    return new TwoFingerSwipeGestureDetector.GestureListener() { // from class: com.android.server.wm.DisplayPolicy.3
-                        /* JADX WARN: Code restructure failed: missing block: B:29:0x005c, code lost:
-                        
-                            if (r10 == 3) goto L25;
-                         */
-                        /* JADX WARN: Removed duplicated region for block: B:18:0x0060 A[ADDED_TO_REGION] */
-                        /*
-                            Code decompiled incorrectly, please refer to instructions dump.
-                            To view partially-correct code enable 'Show inconsistent code' option in preferences
-                        */
-                        public final void onCommitted(int r10) {
-                            /*
-                                r9 = this;
-                                com.android.server.wm.DisplayPolicy r0 = com.android.server.wm.DisplayPolicy.this
-                                com.android.server.wm.WindowManagerGlobalLock r0 = r0.mLock
-                                monitor-enter(r0)
-                                android.graphics.Region r1 = android.graphics.Region.obtain()     // Catch: java.lang.Throwable -> L6e
-                                com.android.server.wm.DisplayPolicy r2 = com.android.server.wm.DisplayPolicy.this     // Catch: java.lang.Throwable -> L6e
-                                com.android.server.wm.DisplayContent r2 = r2.mDisplayContent     // Catch: java.lang.Throwable -> L6e
-                                r3 = 0
-                                r2.calculateSystemGestureExclusion(r1, r3)     // Catch: java.lang.Throwable -> L6e
-                                com.android.server.wm.DisplayPolicy r2 = com.android.server.wm.DisplayPolicy.this     // Catch: java.lang.Throwable -> L6e
-                                com.android.server.wm.SystemGesturesPointerEventListener r2 = r2.mSystemGestures     // Catch: java.lang.Throwable -> L6e
-                                float[] r3 = r2.mDownX     // Catch: java.lang.Throwable -> L6e
-                                r4 = 0
-                                r3 = r3[r4]     // Catch: java.lang.Throwable -> L6e
-                                int r3 = (int) r3     // Catch: java.lang.Throwable -> L6e
-                                float[] r2 = r2.mDownY     // Catch: java.lang.Throwable -> L6e
-                                r2 = r2[r4]     // Catch: java.lang.Throwable -> L6e
-                                int r2 = (int) r2     // Catch: java.lang.Throwable -> L6e
-                                boolean r1 = r1.contains(r3, r2)     // Catch: java.lang.Throwable -> L6e
-                                r2 = 1
-                                r1 = r1 ^ r2
-                                com.android.server.wm.DisplayPolicy r3 = com.android.server.wm.DisplayPolicy.this     // Catch: java.lang.Throwable -> L6e
-                                com.android.server.wm.DisplayContent r5 = r3.mDisplayContent     // Catch: java.lang.Throwable -> L6e
-                                com.android.server.wm.TaskDisplayArea r5 = r5.getDefaultTaskDisplayArea()     // Catch: java.lang.Throwable -> L6e
-                                if (r5 == 0) goto L70
-                                boolean r6 = r5.isSplitScreenModeActivated()     // Catch: java.lang.Throwable -> L6e
-                                if (r6 == 0) goto L37
-                                goto L70
-                            L37:
-                                boolean r6 = com.samsung.android.rune.CoreRune.MW_MULTI_SPLIT_FULL_TO_SPLIT_BY_GESTURE     // Catch: java.lang.Throwable -> L6e
-                                r7 = 3
-                                r8 = 4
-                                if (r6 == 0) goto L4c
-                                android.content.Context r3 = r3.mContext     // Catch: java.lang.Throwable -> L6e
-                                boolean r3 = com.samsung.android.multiwindow.MultiWindowUtils.isInSubDisplay(r3)     // Catch: java.lang.Throwable -> L6e
-                                if (r3 != 0) goto L4c
-                                if (r10 == r2) goto L5e
-                                if (r10 == r7) goto L5e
-                                if (r10 != r8) goto L70
-                                goto L5e
-                            L4c:
-                                android.content.res.Configuration r3 = r5.getConfiguration()     // Catch: java.lang.Throwable -> L6e
-                                int r3 = r3.orientation     // Catch: java.lang.Throwable -> L6e
-                                if (r3 != r2) goto L57
-                                if (r10 != r8) goto L70
-                                goto L5e
-                            L57:
-                                r5 = 2
-                                if (r3 != r5) goto L70
-                                if (r10 == r2) goto L5e
-                                if (r10 != r7) goto L70
-                            L5e:
-                                if (r1 == 0) goto L70
-                                if (r10 == r2) goto L66
-                                if (r10 == r7) goto L66
-                                if (r10 != r8) goto L70
-                            L66:
-                                com.android.server.wm.DisplayPolicy r9 = com.android.server.wm.DisplayPolicy.this     // Catch: java.lang.Throwable -> L6e
-                                com.android.server.wm.WindowState r10 = r9.mNavigationBar     // Catch: java.lang.Throwable -> L6e
-                                r9.requestTransientBars(r10, r4)     // Catch: java.lang.Throwable -> L6e
-                                goto L70
-                            L6e:
-                                r9 = move-exception
-                                goto L72
-                            L70:
-                                monitor-exit(r0)     // Catch: java.lang.Throwable -> L6e
-                                return
-                            L72:
-                                monitor-exit(r0)     // Catch: java.lang.Throwable -> L6e
-                                throw r9
-                            */
-                            throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DisplayPolicy.AnonymousClass3.onCommitted(int):void");
-                        }
+            displayContent.registerPointerEventListener(
+                    new TwoFingerSwipeGestureDetector(
+                            this.mUiContext,
+                            new Function() { // from class:
+                                // com.android.server.wm.DisplayPolicy$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Function
+                                public final Object apply(Object obj) {
+                                    final DisplayPolicy displayPolicy = DisplayPolicy.this;
+                                    final TwoFingerSwipeGestureDetector
+                                            twoFingerSwipeGestureDetector =
+                                                    (TwoFingerSwipeGestureDetector) obj;
+                                    displayPolicy.getClass();
+                                    return new TwoFingerSwipeGestureDetector
+                                            .GestureListener() { // from class:
+                                        // com.android.server.wm.DisplayPolicy.3
+                                        /* JADX WARN: Code restructure failed: missing block: B:29:0x005c, code lost:
 
-                        public final void onDetecting() {
-                            synchronized (DisplayPolicy.this.mLock) {
-                                try {
-                                    DisplayContent displayContent2 = DisplayPolicy.this.mDisplayContent;
-                                    if (displayContent2.mAtmService.mMultiTaskingController.mIsFullToSplitEnabled) {
-                                        twoFingerSwipeGestureDetector.init(displayContent2.getBounds(), DisplayPolicy.this.mDisplayContent.mBaseDisplayDensity / 160, 13);
-                                    } else {
-                                        twoFingerSwipeGestureDetector.cancel();
-                                    }
-                                } catch (Throwable th) {
-                                    throw th;
+                                           if (r10 == 3) goto L25;
+                                        */
+                                        /* JADX WARN: Removed duplicated region for block: B:18:0x0060 A[ADDED_TO_REGION] */
+                                        /*
+                                            Code decompiled incorrectly, please refer to instructions dump.
+                                            To view partially-correct code enable 'Show inconsistent code' option in preferences
+                                        */
+                                        public final void onCommitted(int r10) {
+                                            /*
+                                                r9 = this;
+                                                com.android.server.wm.DisplayPolicy r0 = com.android.server.wm.DisplayPolicy.this
+                                                com.android.server.wm.WindowManagerGlobalLock r0 = r0.mLock
+                                                monitor-enter(r0)
+                                                android.graphics.Region r1 = android.graphics.Region.obtain()     // Catch: java.lang.Throwable -> L6e
+                                                com.android.server.wm.DisplayPolicy r2 = com.android.server.wm.DisplayPolicy.this     // Catch: java.lang.Throwable -> L6e
+                                                com.android.server.wm.DisplayContent r2 = r2.mDisplayContent     // Catch: java.lang.Throwable -> L6e
+                                                r3 = 0
+                                                r2.calculateSystemGestureExclusion(r1, r3)     // Catch: java.lang.Throwable -> L6e
+                                                com.android.server.wm.DisplayPolicy r2 = com.android.server.wm.DisplayPolicy.this     // Catch: java.lang.Throwable -> L6e
+                                                com.android.server.wm.SystemGesturesPointerEventListener r2 = r2.mSystemGestures     // Catch: java.lang.Throwable -> L6e
+                                                float[] r3 = r2.mDownX     // Catch: java.lang.Throwable -> L6e
+                                                r4 = 0
+                                                r3 = r3[r4]     // Catch: java.lang.Throwable -> L6e
+                                                int r3 = (int) r3     // Catch: java.lang.Throwable -> L6e
+                                                float[] r2 = r2.mDownY     // Catch: java.lang.Throwable -> L6e
+                                                r2 = r2[r4]     // Catch: java.lang.Throwable -> L6e
+                                                int r2 = (int) r2     // Catch: java.lang.Throwable -> L6e
+                                                boolean r1 = r1.contains(r3, r2)     // Catch: java.lang.Throwable -> L6e
+                                                r2 = 1
+                                                r1 = r1 ^ r2
+                                                com.android.server.wm.DisplayPolicy r3 = com.android.server.wm.DisplayPolicy.this     // Catch: java.lang.Throwable -> L6e
+                                                com.android.server.wm.DisplayContent r5 = r3.mDisplayContent     // Catch: java.lang.Throwable -> L6e
+                                                com.android.server.wm.TaskDisplayArea r5 = r5.getDefaultTaskDisplayArea()     // Catch: java.lang.Throwable -> L6e
+                                                if (r5 == 0) goto L70
+                                                boolean r6 = r5.isSplitScreenModeActivated()     // Catch: java.lang.Throwable -> L6e
+                                                if (r6 == 0) goto L37
+                                                goto L70
+                                            L37:
+                                                boolean r6 = com.samsung.android.rune.CoreRune.MW_MULTI_SPLIT_FULL_TO_SPLIT_BY_GESTURE     // Catch: java.lang.Throwable -> L6e
+                                                r7 = 3
+                                                r8 = 4
+                                                if (r6 == 0) goto L4c
+                                                android.content.Context r3 = r3.mContext     // Catch: java.lang.Throwable -> L6e
+                                                boolean r3 = com.samsung.android.multiwindow.MultiWindowUtils.isInSubDisplay(r3)     // Catch: java.lang.Throwable -> L6e
+                                                if (r3 != 0) goto L4c
+                                                if (r10 == r2) goto L5e
+                                                if (r10 == r7) goto L5e
+                                                if (r10 != r8) goto L70
+                                                goto L5e
+                                            L4c:
+                                                android.content.res.Configuration r3 = r5.getConfiguration()     // Catch: java.lang.Throwable -> L6e
+                                                int r3 = r3.orientation     // Catch: java.lang.Throwable -> L6e
+                                                if (r3 != r2) goto L57
+                                                if (r10 != r8) goto L70
+                                                goto L5e
+                                            L57:
+                                                r5 = 2
+                                                if (r3 != r5) goto L70
+                                                if (r10 == r2) goto L5e
+                                                if (r10 != r7) goto L70
+                                            L5e:
+                                                if (r1 == 0) goto L70
+                                                if (r10 == r2) goto L66
+                                                if (r10 == r7) goto L66
+                                                if (r10 != r8) goto L70
+                                            L66:
+                                                com.android.server.wm.DisplayPolicy r9 = com.android.server.wm.DisplayPolicy.this     // Catch: java.lang.Throwable -> L6e
+                                                com.android.server.wm.WindowState r10 = r9.mNavigationBar     // Catch: java.lang.Throwable -> L6e
+                                                r9.requestTransientBars(r10, r4)     // Catch: java.lang.Throwable -> L6e
+                                                goto L70
+                                            L6e:
+                                                r9 = move-exception
+                                                goto L72
+                                            L70:
+                                                monitor-exit(r0)     // Catch: java.lang.Throwable -> L6e
+                                                return
+                                            L72:
+                                                monitor-exit(r0)     // Catch: java.lang.Throwable -> L6e
+                                                throw r9
+                                            */
+                                            throw new UnsupportedOperationException(
+                                                    "Method not decompiled:"
+                                                        + " com.android.server.wm.DisplayPolicy.AnonymousClass3.onCommitted(int):void");
+                                        }
+
+                                        public final void onDetecting() {
+                                            synchronized (DisplayPolicy.this.mLock) {
+                                                try {
+                                                    DisplayContent displayContent2 =
+                                                            DisplayPolicy.this.mDisplayContent;
+                                                    if (displayContent2
+                                                            .mAtmService
+                                                            .mMultiTaskingController
+                                                            .mIsFullToSplitEnabled) {
+                                                        twoFingerSwipeGestureDetector.init(
+                                                                displayContent2.getBounds(),
+                                                                DisplayPolicy.this
+                                                                                .mDisplayContent
+                                                                                .mBaseDisplayDensity
+                                                                        / 160,
+                                                                13);
+                                                    } else {
+                                                        twoFingerSwipeGestureDetector.cancel();
+                                                    }
+                                                } catch (Throwable th) {
+                                                    throw th;
+                                                }
+                                            }
+                                        }
+                                    };
                                 }
-                            }
-                        }
-                    };
-                }
-            }, "DP"));
+                            },
+                            "DP"));
             systemGesturesPointerEventListener.mDisplayContent = displayContent;
             displayContent.registerPointerEventListener(systemGesturesPointerEventListener);
         }
@@ -1133,23 +1324,42 @@ public final class DisplayPolicy {
         if (z || ViewRootImpl.CLIENT_IMMERSIVE_CONFIRMATION) {
             this.mImmersiveModeConfirmation = null;
         } else {
-            this.mImmersiveModeConfirmation = new ImmersiveModeConfirmation(createDisplayContext, looper, windowManagerService.mVrModeEnabled);
+            this.mImmersiveModeConfirmation =
+                    new ImmersiveModeConfirmation(
+                            createDisplayContext, looper, windowManagerService.mVrModeEnabled);
         }
-        this.mScreenshotHelper = displayContent.isDefaultDisplay ? new ScreenshotHelper(createDisplayContext) : null;
+        this.mScreenshotHelper =
+                displayContent.isDefaultDisplay ? new ScreenshotHelper(createDisplayContext) : null;
         if (displayContent.isDefaultDisplay) {
-            this.mHasNavigationBar = createDisplayContext.getResources().getBoolean(R.bool.config_sms_decode_gsm_8bit_data);
+            this.mHasNavigationBar =
+                    createDisplayContext
+                            .getResources()
+                            .getBoolean(R.bool.config_sms_decode_gsm_8bit_data);
         } else {
             this.mHasNavigationBar = displayContent.supportsSystemDecorations();
         }
-        this.mRefreshRatePolicy = new RefreshRatePolicy(windowManagerService, displayContent.mDisplayInfo, windowManagerService.mHighRefreshRateDenylist);
-        GestureNavigationSettingsObserver gestureNavigationSettingsObserver = new GestureNavigationSettingsObserver(policyHandler, BackgroundThread.getHandler(), createDisplayContext, new DisplayPolicy$$ExternalSyntheticLambda2(this, 0));
+        this.mRefreshRatePolicy =
+                new RefreshRatePolicy(
+                        windowManagerService,
+                        displayContent.mDisplayInfo,
+                        windowManagerService.mHighRefreshRateDenylist);
+        GestureNavigationSettingsObserver gestureNavigationSettingsObserver =
+                new GestureNavigationSettingsObserver(
+                        policyHandler,
+                        BackgroundThread.getHandler(),
+                        createDisplayContext,
+                        new DisplayPolicy$$ExternalSyntheticLambda2(this, 0));
         this.mGestureNavigationSettingsObserver = gestureNavigationSettingsObserver;
-        policyHandler.post(new DisplayPolicy$$ExternalSyntheticLambda3(gestureNavigationSettingsObserver, 0));
-        ForceShowNavBarSettingsObserver forceShowNavBarSettingsObserver = new ForceShowNavBarSettingsObserver(policyHandler, createDisplayContext);
+        policyHandler.post(
+                new DisplayPolicy$$ExternalSyntheticLambda3(gestureNavigationSettingsObserver, 0));
+        ForceShowNavBarSettingsObserver forceShowNavBarSettingsObserver =
+                new ForceShowNavBarSettingsObserver(policyHandler, createDisplayContext);
         this.mForceShowNavBarSettingsObserver = forceShowNavBarSettingsObserver;
-        forceShowNavBarSettingsObserver.setOnChangeRunnable(new DisplayPolicy$$ExternalSyntheticLambda2(this, 3));
+        forceShowNavBarSettingsObserver.setOnChangeRunnable(
+                new DisplayPolicy$$ExternalSyntheticLambda2(this, 3));
         this.mForceShowNavigationBarEnabled = forceShowNavBarSettingsObserver.isEnabled();
-        policyHandler.post(new DisplayPolicy$$ExternalSyntheticLambda5(forceShowNavBarSettingsObserver, 0));
+        policyHandler.post(
+                new DisplayPolicy$$ExternalSyntheticLambda5(forceShowNavBarSettingsObserver, 0));
     }
 
     public static void calculateInsetsFrame(Rect rect, Insets insets) {
@@ -1179,8 +1389,12 @@ public final class DisplayPolicy {
         }
     }
 
-    public static WindowState chooseNavigationBackgroundWindow(WindowState windowState, WindowState windowState2, int i) {
-        if (windowState2 != null && windowState2.isVisible() && i == 4 && drawsBarBackground(windowState2)) {
+    public static WindowState chooseNavigationBackgroundWindow(
+            WindowState windowState, WindowState windowState2, int i) {
+        if (windowState2 != null
+                && windowState2.isVisible()
+                && i == 4
+                && drawsBarBackground(windowState2)) {
             return windowState2;
         }
         if (drawsBarBackground(windowState)) {
@@ -1189,8 +1403,19 @@ public final class DisplayPolicy {
         return null;
     }
 
-    public static WindowState chooseNavigationColorWindowLw(WindowState windowState, WindowState windowState2, int i) {
-        return (windowState2 == null || !windowState2.isVisible() || i != 4 || (windowState2.mAttrs.flags & Integer.MIN_VALUE) == 0) ? windowState : (windowState == null || !windowState.mIsDimming || WindowManager.LayoutParams.mayUseInputMethod(windowState.mAttrs.flags)) ? windowState2 : windowState;
+    public static WindowState chooseNavigationColorWindowLw(
+            WindowState windowState, WindowState windowState2, int i) {
+        return (windowState2 == null
+                        || !windowState2.isVisible()
+                        || i != 4
+                        || (windowState2.mAttrs.flags & Integer.MIN_VALUE) == 0)
+                ? windowState
+                : (windowState == null
+                                || !windowState.mIsDimming
+                                || WindowManager.LayoutParams.mayUseInputMethod(
+                                        windowState.mAttrs.flags))
+                        ? windowState2
+                        : windowState;
     }
 
     public static boolean drawsBarBackground(WindowState windowState) {
@@ -1198,13 +1423,16 @@ public final class DisplayPolicy {
             return true;
         }
         WindowManager.LayoutParams layoutParams = windowState.mAttrs;
-        return (layoutParams.privateFlags & 32768) != 0 || ((layoutParams.flags & Integer.MIN_VALUE) != 0);
+        return (layoutParams.privateFlags & 32768) != 0
+                || ((layoutParams.flags & Integer.MIN_VALUE) != 0);
     }
 
     public static boolean intersectsAnyInsets(Rect rect, InsetsState insetsState, int i) {
         for (int sourceSize = insetsState.sourceSize() - 1; sourceSize >= 0; sourceSize--) {
             InsetsSource sourceAt = insetsState.sourceAt(sourceSize);
-            if ((sourceAt.getType() & i) != 0 && sourceAt.isVisible() && Rect.intersects(rect, sourceAt.getFrame())) {
+            if ((sourceAt.getType() & i) != 0
+                    && sourceAt.isVisible()
+                    && Rect.intersects(rect, sourceAt.getFrame())) {
                 return true;
             }
         }
@@ -1218,12 +1446,23 @@ public final class DisplayPolicy {
         if (windowState.getTask() != null && windowState.getTask().isFreeformStashed()) {
             InsetsState insetsState = windowState.getDisplayContent().mInsetsStateController.mState;
             Rect stashedBounds = windowState.getTask().getStashedBounds();
-            return stashedBounds != null && intersectsAnyInsets(stashedBounds, insetsState, WindowInsets.Type.navigationBars());
+            return stashedBounds != null
+                    && intersectsAnyInsets(
+                            stashedBounds, insetsState, WindowInsets.Type.navigationBars());
         }
-        if (!windowState.getWindowConfiguration().tasksAreFloating() || windowState.getDisplayContent() == null) {
-            return intersectsAnyInsets(windowState.mIsDimming ? windowState.getBounds() : windowState.mWindowFrames.mFrame, windowState.getInsetsState(false), WindowInsets.Type.navigationBars());
+        if (!windowState.getWindowConfiguration().tasksAreFloating()
+                || windowState.getDisplayContent() == null) {
+            return intersectsAnyInsets(
+                    windowState.mIsDimming
+                            ? windowState.getBounds()
+                            : windowState.mWindowFrames.mFrame,
+                    windowState.getInsetsState(false),
+                    WindowInsets.Type.navigationBars());
         }
-        return intersectsAnyInsets(windowState.mIsDimming ? windowState.getBounds() : windowState.mWindowFrames.mFrame, windowState.getDisplayContent().mInsetsStateController.mState, WindowInsets.Type.navigationBars());
+        return intersectsAnyInsets(
+                windowState.mIsDimming ? windowState.getBounds() : windowState.mWindowFrames.mFrame,
+                windowState.getDisplayContent().mInsetsStateController.mState,
+                WindowInsets.Type.navigationBars());
     }
 
     /* JADX WARN: Removed duplicated region for block: B:10:0x0055  */
@@ -1236,36 +1475,45 @@ public final class DisplayPolicy {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void addWindowLw(final com.android.server.wm.WindowState r10, android.view.WindowManager.LayoutParams r11) {
+    public final void addWindowLw(
+            final com.android.server.wm.WindowState r10,
+            android.view.WindowManager.LayoutParams r11) {
         /*
             Method dump skipped, instructions count: 368
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DisplayPolicy.addWindowLw(com.android.server.wm.WindowState, android.view.WindowManager$LayoutParams):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DisplayPolicy.addWindowLw(com.android.server.wm.WindowState,"
+                    + " android.view.WindowManager$LayoutParams):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0016, code lost:
-    
-        if (r0 != 2006) goto L37;
-     */
+
+       if (r0 != 2006) goto L37;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:33:0x0135, code lost:
-    
-        if ((134217728 & r8) != 0) goto L63;
-     */
+
+       if ((134217728 & r8) != 0) goto L63;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x013e, code lost:
-    
-        if (android.view.InsetsState.clearsCompatInsets(r10.type, r8, 0, 0) != false) goto L63;
-     */
+
+       if (android.view.InsetsState.clearsCompatInsets(r10.type, r8, 0, 0) != false) goto L63;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void adjustWindowParamsLw(com.android.server.wm.WindowState r9, android.view.WindowManager.LayoutParams r10) {
+    public final void adjustWindowParamsLw(
+            com.android.server.wm.WindowState r9, android.view.WindowManager.LayoutParams r10) {
         /*
             Method dump skipped, instructions count: 326
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DisplayPolicy.adjustWindowParamsLw(com.android.server.wm.WindowState, android.view.WindowManager$LayoutParams):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DisplayPolicy.adjustWindowParamsLw(com.android.server.wm.WindowState,"
+                    + " android.view.WindowManager$LayoutParams):void");
     }
 
     public final void beginPostLayoutPolicyLw() {
@@ -1288,22 +1536,42 @@ public final class DisplayPolicy {
         this.mForciblyShownTypes = 0;
         DisplayPolicyExt displayPolicyExt = this.mExt;
         if (displayPolicyExt.mDisplayPolicy.mDisplayContent.mDisplayId == 0) {
-            FreeformController freeformController = displayPolicyExt.mService.mAtmService.mFreeformController;
-            DisplayContent defaultDisplayContentLocked = freeformController.mAtm.mWindowManager.getDefaultDisplayContentLocked();
+            FreeformController freeformController =
+                    displayPolicyExt.mService.mAtmService.mFreeformController;
+            DisplayContent defaultDisplayContentLocked =
+                    freeformController.mAtm.mWindowManager.getDefaultDisplayContentLocked();
             if (defaultDisplayContentLocked == null) {
                 Slog.d("FreeformController", "Default display content is null");
             } else if (!defaultDisplayContentLocked.isDexMode()) {
                 freeformController.mTmpForceHideFreeformRequester = null;
                 freeformController.mTmpForceHideMinimizeRequester = null;
-                defaultDisplayContentLocked.forAllWindows((Consumer) new FreeformController$$ExternalSyntheticLambda0(freeformController, 1), true);
-                if (freeformController.mForceHideFreeformRequester != freeformController.mTmpForceHideFreeformRequester) {
-                    Slog.d("FreeformController", "beginPostLayoutPolicyLw: forceHideRequester changed, old=" + freeformController.mForceHideFreeformRequester + ", new=" + freeformController.mTmpForceHideFreeformRequester);
-                    freeformController.mForceHideFreeformRequester = freeformController.mTmpForceHideFreeformRequester;
+                defaultDisplayContentLocked.forAllWindows(
+                        (Consumer)
+                                new FreeformController$$ExternalSyntheticLambda0(
+                                        freeformController, 1),
+                        true);
+                if (freeformController.mForceHideFreeformRequester
+                        != freeformController.mTmpForceHideFreeformRequester) {
+                    Slog.d(
+                            "FreeformController",
+                            "beginPostLayoutPolicyLw: forceHideRequester changed, old="
+                                    + freeformController.mForceHideFreeformRequester
+                                    + ", new="
+                                    + freeformController.mTmpForceHideFreeformRequester);
+                    freeformController.mForceHideFreeformRequester =
+                            freeformController.mTmpForceHideFreeformRequester;
                     freeformController.setBlockToAddForceHideFreeformTasks(false);
                 }
-                if (freeformController.mForceHideMinimizeRequester != freeformController.mTmpForceHideMinimizeRequester) {
-                    Slog.d("FreeformController", "beginPostLayoutPolicyLw: forceHide minimize Requester changed, old=" + freeformController.mForceHideMinimizeRequester + ", new=" + freeformController.mTmpForceHideMinimizeRequester);
-                    freeformController.mForceHideMinimizeRequester = freeformController.mTmpForceHideMinimizeRequester;
+                if (freeformController.mForceHideMinimizeRequester
+                        != freeformController.mTmpForceHideMinimizeRequester) {
+                    Slog.d(
+                            "FreeformController",
+                            "beginPostLayoutPolicyLw: forceHide minimize Requester changed, old="
+                                    + freeformController.mForceHideMinimizeRequester
+                                    + ", new="
+                                    + freeformController.mTmpForceHideMinimizeRequester);
+                    freeformController.mForceHideMinimizeRequester =
+                            freeformController.mTmpForceHideMinimizeRequester;
                 }
             }
         }
@@ -1326,7 +1594,8 @@ public final class DisplayPolicy {
         this.mHandler.post(new DisplayPolicy$$ExternalSyntheticLambda16(this, consumer));
     }
 
-    public final boolean canReplaceSystemWindowForDexStandAlone(WindowManager.LayoutParams layoutParams) {
+    public final boolean canReplaceSystemWindowForDexStandAlone(
+            WindowManager.LayoutParams layoutParams) {
         int i = layoutParams.type;
         if (i == 2000) {
             return hasDexStandAloneStatusBar();
@@ -1345,7 +1614,8 @@ public final class DisplayPolicy {
                 }
                 break;
             case 2622:
-                if (this.mNotificationShade == null || this.mNotificationShade.mAttrs.type != 2040) {
+                if (this.mNotificationShade == null
+                        || this.mNotificationShade.mAttrs.type != 2040) {
                     break;
                 }
                 break;
@@ -1385,12 +1655,15 @@ public final class DisplayPolicy {
             Method dump skipped, instructions count: 382
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DisplayPolicy.finishPostLayoutPolicyLw():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DisplayPolicy.finishPostLayoutPolicyLw():void");
     }
 
     public final Rect getBarContentFrameForWindow(WindowState windowState, int i) {
         DisplayFrames displayFrames = this.mDisplayContent.mDisplayFrames;
-        DisplayFrames fixedRotationTransformDisplayFrames = windowState.mToken.getFixedRotationTransformDisplayFrames();
+        DisplayFrames fixedRotationTransformDisplayFrames =
+                windowState.mToken.getFixedRotationTransformDisplayFrames();
         if (fixedRotationTransformDisplayFrames != null) {
             displayFrames = fixedRotationTransformDisplayFrames;
         } else if (windowState.isLayoutNeededInUdcCutout()) {
@@ -1456,7 +1729,9 @@ public final class DisplayPolicy {
         synchronized (this.mServiceAcquireLock) {
             try {
                 if (this.mStatusBarManagerInternal == null) {
-                    this.mStatusBarManagerInternal = (StatusBarManagerInternal) LocalServices.getService(StatusBarManagerInternal.class);
+                    this.mStatusBarManagerInternal =
+                            (StatusBarManagerInternal)
+                                    LocalServices.getService(StatusBarManagerInternal.class);
                 }
                 statusBarManagerInternal = this.mStatusBarManagerInternal;
             } catch (Throwable th) {
@@ -1500,14 +1775,17 @@ public final class DisplayPolicy {
                 udcCutoutPolicy.mTmpBarContentFrame = new Rect();
             }
             udcCutoutPolicy.mTmpBarContentFrame.set(barContentFrameForWindow);
-            udcCutoutPolicy.mTmpBarContentFrame.intersectUnchecked(udcCutoutPolicy.mUdcDisplayFrames.mDisplayCutoutSafe);
+            udcCutoutPolicy.mTmpBarContentFrame.intersectUnchecked(
+                    udcCutoutPolicy.mUdcDisplayFrames.mDisplayCutoutSafe);
             barContentFrameForWindow = udcCutoutPolicy.mTmpBarContentFrame;
         }
-        AppCompatLetterboxPolicy.LetterboxPolicyState letterboxPolicyState = activityRecord.mAppCompatController.mAppCompatLetterboxPolicy.mLetterboxPolicyState;
+        AppCompatLetterboxPolicy.LetterboxPolicyState letterboxPolicyState =
+                activityRecord.mAppCompatController.mAppCompatLetterboxPolicy.mLetterboxPolicyState;
         if (!letterboxPolicyState.isRunning()) {
             return true;
         }
-        Letterbox.LetterboxSurface[] letterboxSurfaceArr = letterboxPolicyState.mLetterbox.mSurfaces;
+        Letterbox.LetterboxSurface[] letterboxSurfaceArr =
+                letterboxPolicyState.mLetterbox.mSurfaces;
         int i2 = 0;
         int i3 = 0;
         for (Letterbox.LetterboxSurface letterboxSurface : letterboxSurfaceArr) {
@@ -1532,17 +1810,23 @@ public final class DisplayPolicy {
         windowState.mPolicy.getClass();
         int windowLayerLw = WindowManagerPolicy.getWindowLayerLw(windowState);
         windowState.mPolicy.getClass();
-        if (windowLayerLw > WindowManagerPolicy.getWindowLayerFromTypeLw(2000) || windowState.isActivityTypeDream()) {
+        if (windowLayerLw > WindowManagerPolicy.getWindowLayerFromTypeLw(2000)
+                || windowState.isActivityTypeDream()) {
             return false;
         }
         boolean isDexMode = windowState.isDexMode();
         DisplayContent displayContent = this.mDisplayContent;
         if (!isDexMode) {
-            return displayContent.mInsetsPolicy.hasHiddenSources(WindowInsets.Type.navigationBars());
+            return displayContent.mInsetsPolicy.hasHiddenSources(
+                    WindowInsets.Type.navigationBars());
         }
         if (windowState.getWindowingMode() == 1) {
             WindowState windowState2 = null;
-            if (windowState.mIsChildWindow && (navControlTarget = displayContent.mInsetsPolicy.getNavControlTarget(windowState, false)) != null) {
+            if (windowState.mIsChildWindow
+                    && (navControlTarget =
+                                    displayContent.mInsetsPolicy.getNavControlTarget(
+                                            windowState, false))
+                            != null) {
                 windowState2 = navControlTarget.getWindow();
             }
             if (windowState2 != null) {
@@ -1551,18 +1835,25 @@ public final class DisplayPolicy {
             if (windowState.isRequestedVisible(WindowInsets.Type.navigationBars(), true)) {
                 return false;
             }
-            return displayContent.mInsetsPolicy.hasHiddenSources(WindowInsets.Type.navigationBars()) || displayContent.mInsetsPolicy.isTransient(WindowInsets.Type.navigationBars());
+            return displayContent.mInsetsPolicy.hasHiddenSources(WindowInsets.Type.navigationBars())
+                    || displayContent.mInsetsPolicy.isTransient(WindowInsets.Type.navigationBars());
         }
         InsetsPolicy insetsPolicy = displayContent.mInsetsPolicy;
-        InsetsPolicy.ImmersiveControlTarget immersiveControlTarget = insetsPolicy.mDexForceImmersiveModeControlTarget;
+        InsetsPolicy.ImmersiveControlTarget immersiveControlTarget =
+                insetsPolicy.mDexForceImmersiveModeControlTarget;
         int navigationBars = WindowInsets.Type.navigationBars();
         InsetsStateController insetsStateController = insetsPolicy.mStateController;
         InsetsState insetsState = insetsStateController.mState;
         for (int sourceSize = insetsState.sourceSize() - 1; sourceSize >= 0; sourceSize--) {
             InsetsSource sourceAt = insetsState.sourceAt(sourceSize);
-            if ((sourceAt.getType() & navigationBars) != 0 && !sourceAt.getFrame().isEmpty() && !sourceAt.isVisible()) {
+            if ((sourceAt.getType() & navigationBars) != 0
+                    && !sourceAt.getFrame().isEmpty()
+                    && !sourceAt.isVisible()) {
                 int type = sourceAt.getType();
-                ArrayList arrayList = (ArrayList) insetsStateController.mControlTargetProvidersMap.get(immersiveControlTarget);
+                ArrayList arrayList =
+                        (ArrayList)
+                                insetsStateController.mControlTargetProvidersMap.get(
+                                        immersiveControlTarget);
                 if (arrayList != null) {
                     Iterator it = arrayList.iterator();
                     while (true) {
@@ -1582,24 +1873,33 @@ public final class DisplayPolicy {
         return false;
     }
 
-    public final void layoutWindowLw(WindowState windowState, WindowState windowState2, DisplayFrames displayFrames) {
+    public final void layoutWindowLw(
+            WindowState windowState, WindowState windowState2, DisplayFrames displayFrames) {
         int i;
         int i2;
         int i3;
         Task task;
         windowState.getClass();
-        if (CoreRune.FW_FOLD_WALLPAPER_POLICY && windowState.mDisplayContent.isDefaultDisplay && !windowState.mToken.canShowInCurrentDevice()) {
+        if (CoreRune.FW_FOLD_WALLPAPER_POLICY
+                && windowState.mDisplayContent.isDefaultDisplay
+                && !windowState.mToken.canShowInCurrentDevice()) {
             return;
         }
         ActivityRecord activityRecord = windowState.mActivityRecord;
         if (activityRecord == null || !activityRecord.mWaitForEnteringPinnedMode) {
-            DisplayFrames fixedRotationTransformDisplayFrames = windowState.mToken.getFixedRotationTransformDisplayFrames();
+            DisplayFrames fixedRotationTransformDisplayFrames =
+                    windowState.mToken.getFixedRotationTransformDisplayFrames();
             if (fixedRotationTransformDisplayFrames == null) {
-                fixedRotationTransformDisplayFrames = windowState.isLayoutNeededInUdcCutout() ? windowState.mDisplayContent.mUdcCutoutPolicy.mUdcDisplayFrames : displayFrames;
+                fixedRotationTransformDisplayFrames =
+                        windowState.isLayoutNeededInUdcCutout()
+                                ? windowState.mDisplayContent.mUdcCutoutPolicy.mUdcDisplayFrames
+                                : displayFrames;
             }
-            WindowManager.LayoutParams forRotation = windowState.mAttrs.forRotation(fixedRotationTransformDisplayFrames.mRotation);
+            WindowManager.LayoutParams forRotation =
+                    windowState.mAttrs.forRotation(fixedRotationTransformDisplayFrames.mRotation);
             ClientWindowFrames clientWindowFrames = sTmpClientFrames;
-            clientWindowFrames.attachedFrame = windowState2 != null ? windowState2.mWindowFrames.mFrame : null;
+            clientWindowFrames.attachedFrame =
+                    windowState2 != null ? windowState2.mWindowFrames.mFrame : null;
             boolean z = forRotation == windowState.mAttrs;
             int i4 = z ? windowState.mRequestedWidth : -1;
             if (this.mDisplayContent.isDexMode() && windowState == this.mNavigationBar) {
@@ -1613,30 +1913,53 @@ public final class DisplayPolicy {
             if (windowState.isPopOver() && (task = windowState.getTask()) != null) {
                 DisplayContent displayContent = windowState.getDisplayContent();
                 InputTarget inputTarget = displayContent.mImeInputTarget;
-                WindowState windowState3 = inputTarget != null ? inputTarget.getWindowState() : null;
-                boolean z2 = windowState3 != null && (!windowState.inFreeformWindowingMode() ? windowState != windowState3 : task != windowState3.getTask());
+                WindowState windowState3 =
+                        inputTarget != null ? inputTarget.getWindowState() : null;
+                boolean z2 =
+                        windowState3 != null
+                                && (!windowState.inFreeformWindowingMode()
+                                        ? windowState != windowState3
+                                        : task != windowState3.getTask());
                 WindowState windowState4 = displayContent.mInputMethodWindow;
                 if (z2 && windowState4 != null && windowState4.isVisibleNow()) {
                     InsetsState insetsState = displayContent.mInsetsStateController.mState;
                     this.mTmpFrame.set(insetsState.getDisplayFrame());
                     Rect rect = this.mTmpFrame;
-                    rect.inset(insetsState.calculateInsets(rect, WindowInsets.Type.systemBars() | WindowInsets.Type.ime() | WindowInsets.Type.displayCutout(), false));
+                    rect.inset(
+                            insetsState.calculateInsets(
+                                    rect,
+                                    WindowInsets.Type.systemBars()
+                                            | WindowInsets.Type.ime()
+                                            | WindowInsets.Type.displayCutout(),
+                                    false));
                     int i6 = windowState.getBounds().bottom - this.mTmpFrame.bottom;
                     if (i6 > 0) {
                         PopOverController popOverController = displayContent.mPopOverController;
                         int i7 = windowState.getBounds().top;
                         int i8 = this.mTmpFrame.top;
                         popOverController.getClass();
-                        if (windowState.isDesktopModeEnabled() || windowState.inFreeformWindowingMode()) {
+                        if (windowState.isDesktopModeEnabled()
+                                || windowState.inFreeformWindowingMode()) {
                             i7 -= windowState.getCaptionHeight();
                             if (windowState.inFreeformWindowingMode()) {
                                 i7 -= windowState.getFreeformThickness();
                             }
                             if (windowState.inFullscreenWindowingMode()) {
-                                i7 -= (int) TypedValue.applyDimension(1, 32.0f, popOverController.mDisplayContent.mWmService.mContext.getResources().getDisplayMetrics());
+                                i7 -=
+                                        (int)
+                                                TypedValue.applyDimension(
+                                                        1,
+                                                        32.0f,
+                                                        popOverController
+                                                                .mDisplayContent
+                                                                .mWmService
+                                                                .mContext
+                                                                .getResources()
+                                                                .getDisplayMetrics());
                             }
                         }
-                        this.mWindowBounds.offset(0, -Math.min(i6, Math.max(Math.max(i7, 0) - i8, 0)));
+                        this.mWindowBounds.offset(
+                                0, -Math.min(i6, Math.max(Math.max(i7, 0) - i8, 0)));
                         if (!windowState.mLayoutWithIme) {
                             windowState.mLayoutWithIme = true;
                             windowState.forceReportingResized();
@@ -1648,7 +1971,18 @@ public final class DisplayPolicy {
                     windowState.forceReportingResized();
                 }
             }
-            this.mWindowLayout.computeFrames(forRotation, windowState.getInsetsState(false), fixedRotationTransformDisplayFrames.mDisplayCutoutSafe, this.mWindowBounds, windowState.getWindowingMode(), i4, i, windowState.mRequestedVisibleTypes, windowState.mGlobalScale, clientWindowFrames, windowState.getStageType());
+            this.mWindowLayout.computeFrames(
+                    forRotation,
+                    windowState.getInsetsState(false),
+                    fixedRotationTransformDisplayFrames.mDisplayCutoutSafe,
+                    this.mWindowBounds,
+                    windowState.getWindowingMode(),
+                    i4,
+                    i,
+                    windowState.mRequestedVisibleTypes,
+                    windowState.mGlobalScale,
+                    clientWindowFrames,
+                    windowState.getStageType());
             int i9 = windowState.mRequestedWidth;
             int i10 = windowState.mRequestedHeight;
             WindowFrames windowFrames = windowState.mWindowFrames;
@@ -1659,7 +1993,9 @@ public final class DisplayPolicy {
             windowFrames.mCompatFrame.set(windowFrames.mFrame);
             float f = windowState.mInvGlobalScale;
             Rect rect2 = windowFrames.mCompatFrame;
-            if (f == 1.0f || windowState.getConfiguration().windowConfiguration.getCompatSandboxInvScale() == 1.0f) {
+            if (f == 1.0f
+                    || windowState.getConfiguration().windowConfiguration.getCompatSandboxInvScale()
+                            == 1.0f) {
                 float f2 = windowState.mInvGlobalScale;
                 if (f2 != 1.0f) {
                     windowFrames.mCompatFrame.scale(f2);
@@ -1674,7 +2010,8 @@ public final class DisplayPolicy {
                 rect2.right = i11 + ((int) ((width * f) + 0.5f));
                 rect2.bottom = i12 + ((int) ((height * f) + 0.5f));
             }
-            windowFrames.mParentFrameWasClippedByDisplayCutout = clientWindowFrames.isParentFrameClippedByDisplayCutout;
+            windowFrames.mParentFrameWasClippedByDisplayCutout =
+                    clientWindowFrames.isParentFrameClippedByDisplayCutout;
             windowFrames.mRelFrame.set(windowFrames.mFrame);
             WindowContainer parent = windowState.getParent();
             if (windowState.mIsChildWindow) {
@@ -1692,22 +2029,27 @@ public final class DisplayPolicy {
             Rect rect4 = windowFrames.mRelFrame;
             Rect rect5 = windowFrames.mFrame;
             rect4.offsetTo(rect5.left - i3, rect5.top - i2);
-            if (i9 != windowState.mLastRequestedWidth || i10 != windowState.mLastRequestedHeight || !windowState.mTmpRect.equals(windowFrames.mParentFrame)) {
+            if (i9 != windowState.mLastRequestedWidth
+                    || i10 != windowState.mLastRequestedHeight
+                    || !windowState.mTmpRect.equals(windowFrames.mParentFrame)) {
                 windowState.mLastRequestedWidth = i9;
                 windowState.mLastRequestedHeight = i10;
                 windowFrames.mContentChanged = true;
             }
-            if (!windowFrames.mFrame.equals(windowFrames.mLastFrame) || !windowFrames.mRelFrame.equals(windowFrames.mLastRelFrame)) {
+            if (!windowFrames.mFrame.equals(windowFrames.mLastFrame)
+                    || !windowFrames.mRelFrame.equals(windowFrames.mLastRelFrame)) {
                 windowState.mWmService.mFrameChangingWindows.add(windowState);
             }
-            if (windowState.mAttrs.type == 2034 && !windowFrames.mFrame.equals(windowFrames.mLastFrame)) {
+            if (windowState.mAttrs.type == 2034
+                    && !windowFrames.mFrame.equals(windowFrames.mLastFrame)) {
                 windowState.mMovedByResize = true;
             }
             if (windowState.mIsWallpaper) {
                 Rect rect6 = windowFrames.mLastFrame;
                 Rect rect7 = windowFrames.mFrame;
                 if (rect6.width() != rect7.width() || rect6.height() != rect7.height()) {
-                    windowState.mDisplayContent.mWallpaperController.updateWallpaperOffset(windowState, false);
+                    windowState.mDisplayContent.mWallpaperController.updateWallpaperOffset(
+                            windowState, false);
                 }
             }
             windowState.updateSourceFrame(windowFrames.mFrame);
@@ -1738,24 +2080,36 @@ public final class DisplayPolicy {
     public final void notifyDisplayReady() {
         this.mHandler.post(new DisplayPolicy$$ExternalSyntheticLambda2(this, 1));
         startEnableTouchEvent(false);
-        SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("notifyDisplayReady() >> KnoxZT startEnableTouchEvent called for Display Id : "), this.mDisplayContent.mDisplayId, "WindowManager");
+        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                new StringBuilder(
+                        "notifyDisplayReady() >> KnoxZT startEnableTouchEvent called for Display Id"
+                            + " : "),
+                this.mDisplayContent.mDisplayId,
+                "WindowManager");
     }
 
     public final void onConfigurationChanged() {
         boolean z;
         Resources currentUserResources = getCurrentUserResources();
         if (this.mDisplayContent.isDefaultDisplay) {
-            this.mHasNavigationBar = currentUserResources.getBoolean(R.bool.config_sms_decode_gsm_8bit_data);
+            this.mHasNavigationBar =
+                    currentUserResources.getBoolean(R.bool.config_sms_decode_gsm_8bit_data);
         }
         if (this.mDisplayContent.isDexMode()) {
             this.mDexTaskbarHeight = currentUserResources.getDimensionPixelSize(17106303);
         }
         this.mSystemGestures.onConfigurationChanged();
-        this.mNavBarOpacityMode = currentUserResources.getInteger(R.integer.config_powerStatsAggregationPeriod);
-        this.mLeftGestureInset = this.mGestureNavigationSettingsObserver.getLeftSensitivity(currentUserResources);
-        this.mRightGestureInset = this.mGestureNavigationSettingsObserver.getRightSensitivity(currentUserResources);
-        this.mNavigationBarAlwaysShowOnSideGesture = currentUserResources.getBoolean(R.bool.config_omnipresentCommunalUser);
-        this.mRemoteInsetsControllerControlsSystemBars = currentUserResources.getBoolean(R.bool.config_remoteInsetsControllerControlsSystemBars);
+        this.mNavBarOpacityMode =
+                currentUserResources.getInteger(R.integer.config_powerStatsAggregationPeriod);
+        this.mLeftGestureInset =
+                this.mGestureNavigationSettingsObserver.getLeftSensitivity(currentUserResources);
+        this.mRightGestureInset =
+                this.mGestureNavigationSettingsObserver.getRightSensitivity(currentUserResources);
+        this.mNavigationBarAlwaysShowOnSideGesture =
+                currentUserResources.getBoolean(R.bool.config_omnipresentCommunalUser);
+        this.mRemoteInsetsControllerControlsSystemBars =
+                currentUserResources.getBoolean(
+                        R.bool.config_remoteInsetsControllerControlsSystemBars);
         updateConfigurationAndScreenSizeDependentBehaviors();
         if (currentUserResources.getBoolean(R.bool.config_autoPowerModePreferWristTilt)) {
             Flags.enableTinyTaskbar();
@@ -1773,18 +2127,28 @@ public final class DisplayPolicy {
         int integer = currentUserResources2.getInteger(R.integer.config_pinnerWebviewPinBytes);
         displayPolicyExt.mNavigationMode = integer;
         if (i != integer && displayPolicy.mDisplayContent.isDefaultDisplay) {
-            StringBuilder sb = new StringBuilder("DisplayPolicyExt#onConfigurationChanged, NavigationMode(new)=");
-            ServiceKeeper$$ExternalSyntheticOutline0.m(displayPolicyExt.mNavigationMode, i, ", NavigationMode(old)=", ", callers=", sb);
+            StringBuilder sb =
+                    new StringBuilder(
+                            "DisplayPolicyExt#onConfigurationChanged, NavigationMode(new)=");
+            ServiceKeeper$$ExternalSyntheticOutline0.m(
+                    displayPolicyExt.mNavigationMode,
+                    i,
+                    ", NavigationMode(old)=",
+                    ", callers=",
+                    sb);
             sb.append(Debug.getCallers(3));
             Log.i("DisplayPolicyExt", sb.toString());
         }
-        displayPolicyExt.mNavBarImeBtnAllRotationsAllowed = CoreRune.IS_TABLET_DEVICE || currentUserResources2.getBoolean(R.bool.config_pdp_reject_enable_retry);
+        displayPolicyExt.mNavBarImeBtnAllRotationsAllowed =
+                CoreRune.IS_TABLET_DEVICE
+                        || currentUserResources2.getBoolean(R.bool.config_pdp_reject_enable_retry);
     }
 
     public final void onDisplaySwitchFinished() {
         WallpaperController wallpaperController = this.mDisplayContent.mWallpaperController;
         if (wallpaperController.mIsWallpaperNotifiedOnDisplaySwitch) {
-            WindowManagerGlobalLock windowManagerGlobalLock = wallpaperController.mService.mGlobalLock;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    wallpaperController.mService.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
@@ -1810,7 +2174,12 @@ public final class DisplayPolicy {
                     if (windowState3 != null) {
                         addWindowLw(windowState3, windowState3.mAttrs);
                     }
-                    Slog.d("WindowManager", "restoreDefaultStatusBar: prev=" + windowState2 + ", now=" + this.mStatusBar);
+                    Slog.d(
+                            "WindowManager",
+                            "restoreDefaultStatusBar: prev="
+                                    + windowState2
+                                    + ", now="
+                                    + this.mStatusBar);
                 }
             } else {
                 this.mStatusBar = null;
@@ -1824,7 +2193,12 @@ public final class DisplayPolicy {
                     if (windowState5 != null) {
                         addWindowLw(windowState5, windowState5.mAttrs);
                     }
-                    Slog.d("WindowManager", "restoreDefaultNavigationBar: prev=" + windowState4 + ", now=" + this.mNavigationBar);
+                    Slog.d(
+                            "WindowManager",
+                            "restoreDefaultNavigationBar: prev="
+                                    + windowState4
+                                    + ", now="
+                                    + this.mNavigationBar);
                 }
             } else {
                 this.mNavigationBar = null;
@@ -1839,7 +2213,12 @@ public final class DisplayPolicy {
                 if (windowState7 != null) {
                     addWindowLw(windowState7, windowState7.mAttrs);
                 }
-                Slog.d("WindowManager", "restoreDefaultNotificationShade: prev=" + windowState6 + ", now=" + this.mNotificationShade);
+                Slog.d(
+                        "WindowManager",
+                        "restoreDefaultNotificationShade: prev="
+                                + windowState6
+                                + ", now="
+                                + this.mNotificationShade);
             }
         }
         if (this.mLastFocusedWindow == windowState) {
@@ -1847,9 +2226,11 @@ public final class DisplayPolicy {
         }
         if (windowState.hasInsetsSourceProvider()) {
             SparseArray insetsSourceProviders = windowState.getInsetsSourceProviders();
-            InsetsStateController insetsStateController = this.mDisplayContent.mInsetsStateController;
+            InsetsStateController insetsStateController =
+                    this.mDisplayContent.mInsetsStateController;
             for (int size = insetsSourceProviders.size() - 1; size >= 0; size--) {
-                InsetsSourceProvider insetsSourceProvider = (InsetsSourceProvider) insetsSourceProviders.valueAt(size);
+                InsetsSourceProvider insetsSourceProvider =
+                        (InsetsSourceProvider) insetsSourceProviders.valueAt(size);
                 insetsSourceProvider.setWindowContainer(null, null, null);
                 int id = insetsSourceProvider.mSource.getId();
                 insetsStateController.getClass();
@@ -1881,12 +2262,15 @@ public final class DisplayPolicy {
         if (activityRecord != null) {
             PopOverState popOverState = activityRecord.mPopOverState;
             if (popOverState.mOptions != null || popOverState.mOptionsInherited != null) {
-                PopOverController popOverController = displayPolicyExt.mDisplayPolicy.mDisplayContent.mPopOverController;
+                PopOverController popOverController =
+                        displayPolicyExt.mDisplayPolicy.mDisplayContent.mPopOverController;
                 popOverController.getClass();
                 WindowState findMainWindow = windowState.mActivityRecord.findMainWindow(false);
-                if (findMainWindow != null && findMainWindow.mChildDimmingDialogs.contains(windowState)) {
+                if (findMainWindow != null
+                        && findMainWindow.mChildDimmingDialogs.contains(windowState)) {
                     findMainWindow.mChildDimmingDialogs.remove(windowState);
-                    popOverController.updatePopOverDimAttributesLw(findMainWindow, findMainWindow.mAttrs);
+                    popOverController.updatePopOverDimAttributesLw(
+                            findMainWindow, findMainWindow.mAttrs);
                 }
             }
         }
@@ -1894,13 +2278,21 @@ public final class DisplayPolicy {
         if (taskbarController.mTaskbarWin == windowState) {
             taskbarController.mTaskbarWin = null;
             WindowState windowState8 = taskbarController.mDisplayPolicy.mNavigationBar;
-            if ((windowState8 == null ? null : windowState8.getControllableInsetProvider()) != null) {
+            if ((windowState8 == null ? null : windowState8.getControllableInsetProvider())
+                    != null) {
                 WindowState windowState9 = taskbarController.mDisplayPolicy.mNavigationBar;
-                if ((windowState9 == null ? null : windowState9.getControllableInsetProvider()).mControlTarget != null) {
+                if ((windowState9 == null ? null : windowState9.getControllableInsetProvider())
+                                .mControlTarget
+                        != null) {
                     DisplayPolicy displayPolicy = taskbarController.mDisplayPolicy;
-                    InsetsStateController insetsStateController2 = displayPolicy.mDisplayContent.mInsetsStateController;
+                    InsetsStateController insetsStateController2 =
+                            displayPolicy.mDisplayContent.mInsetsStateController;
                     WindowState windowState10 = displayPolicy.mNavigationBar;
-                    insetsStateController2.notifyControlChanged((windowState10 == null ? null : windowState10.getControllableInsetProvider()).mControlTarget);
+                    insetsStateController2.notifyControlChanged(
+                            (windowState10 == null
+                                            ? null
+                                            : windowState10.getControllableInsetProvider())
+                                    .mControlTarget);
                 }
             }
         }
@@ -1919,19 +2311,25 @@ public final class DisplayPolicy {
         if (ViewRootImpl.CLIENT_TRANSIENT) {
             return;
         }
-        if (CoreRune.IS_FACTORY_BINARY || FactoryTest.isAutomaticTestMode(this.mContext) || FactoryTest.isRunningFactoryApp()) {
+        if (CoreRune.IS_FACTORY_BINARY
+                || FactoryTest.isAutomaticTestMode(this.mContext)
+                || FactoryTest.isRunningFactoryApp()) {
             Slog.d("WindowManager", "Not showing transient bar, because factory test mode");
             return;
         }
-        if (windowState == this.mStatusBar && this.mService.mExt.mPolicyExt.mLockTaskModeState == 2) {
+        if (windowState == this.mStatusBar
+                && this.mService.mExt.mPolicyExt.mLockTaskModeState == 2) {
             Slog.d("WindowManager", "Not showing transient bar, because lock task mode pinned");
             return;
         }
-        if (windowState == null || !((PhoneWindowManager) this.mService.mPolicy).isUserSetupComplete()) {
+        if (windowState == null
+                || !((PhoneWindowManager) this.mService.mPolicy).isUserSetupComplete()) {
             return;
         }
         if (!this.mCanSystemBarsBeShownByUser) {
-            Slog.d("WindowManager", "Remote insets controller disallows showing system bars - ignoring request");
+            Slog.d(
+                    "WindowManager",
+                    "Remote insets controller disallows showing system bars - ignoring request");
             return;
         }
         if (windowState == this.mStatusBar && this.mDisplayContent.isDexMode()) {
@@ -1941,32 +2339,54 @@ public final class DisplayPolicy {
             if (windowState.hasInsetsSourceProvider()) {
                 SparseArray insetsSourceProviders = windowState.getInsetsSourceProviders();
                 for (int size = insetsSourceProviders.size() - 1; size >= 0; size--) {
-                    if (((InsetsSourceProvider) insetsSourceProviders.valueAt(size)).mSource.getType() == WindowInsets.Type.navigationBars()) {
+                    if (((InsetsSourceProvider) insetsSourceProviders.valueAt(size))
+                                    .mSource.getType()
+                            == WindowInsets.Type.navigationBars()) {
                         return;
                     }
                 }
             }
         }
         InsetsSourceProvider controllableInsetProvider = windowState.getControllableInsetProvider();
-        InsetsControlTarget insetsControlTarget = controllableInsetProvider != null ? controllableInsetProvider.mControlTarget : null;
+        InsetsControlTarget insetsControlTarget =
+                controllableInsetProvider != null ? controllableInsetProvider.mControlTarget : null;
         if (insetsControlTarget == null || insetsControlTarget == this.mNotificationShade) {
             return;
         }
         WindowState window = insetsControlTarget.getWindow();
         if (window == null || !window.isActivityTypeDream()) {
-            int statusBars = (WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars()) & insetsControlTarget.getRequestedVisibleTypes();
-            Slog.d("WindowManager", "requestTransientBars: swipeTarget=" + windowState + ", controlTarget=" + insetsControlTarget + ", canShowTransient=" + insetsControlTarget.canShowTransient() + ", restorePositionTypes=0x" + Integer.toHexString(statusBars) + ", from=" + Debug.getCallers(2));
-            InsetsSourceProvider controllableInsetProvider2 = windowState.getControllableInsetProvider();
-            if (controllableInsetProvider2 != null && controllableInsetProvider2.mSource.getType() == WindowInsets.Type.navigationBars() && (WindowInsets.Type.navigationBars() & statusBars) != 0) {
+            int statusBars =
+                    (WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars())
+                            & insetsControlTarget.getRequestedVisibleTypes();
+            Slog.d(
+                    "WindowManager",
+                    "requestTransientBars: swipeTarget="
+                            + windowState
+                            + ", controlTarget="
+                            + insetsControlTarget
+                            + ", canShowTransient="
+                            + insetsControlTarget.canShowTransient()
+                            + ", restorePositionTypes=0x"
+                            + Integer.toHexString(statusBars)
+                            + ", from="
+                            + Debug.getCallers(2));
+            InsetsSourceProvider controllableInsetProvider2 =
+                    windowState.getControllableInsetProvider();
+            if (controllableInsetProvider2 != null
+                    && controllableInsetProvider2.mSource.getType()
+                            == WindowInsets.Type.navigationBars()
+                    && (WindowInsets.Type.navigationBars() & statusBars) != 0) {
                 insetsControlTarget.showInsets(WindowInsets.Type.navigationBars(), false, null);
                 return;
             }
             if (insetsControlTarget.canShowTransient()) {
                 InsetsPolicy insetsPolicy = this.mDisplayContent.mInsetsPolicy;
-                insetsPolicy.mLastTransientRequestedByPolicyControl = insetsControlTarget instanceof InsetsPolicy.PolicyControlTarget;
+                insetsPolicy.mLastTransientRequestedByPolicyControl =
+                        insetsControlTarget instanceof InsetsPolicy.PolicyControlTarget;
                 insetsPolicy.showTransient(SHOW_TYPES_FOR_SWIPE, z);
                 if (this.mDisplayContent.isDexMode()) {
-                    insetsControlTarget.showInsets((~WindowInsets.Type.statusBars()) & statusBars, false, null);
+                    insetsControlTarget.showInsets(
+                            (~WindowInsets.Type.statusBars()) & statusBars, false, null);
                 } else {
                     insetsControlTarget.showInsets(statusBars, false, null);
                 }
@@ -1974,27 +2394,33 @@ public final class DisplayPolicy {
                 if (this.mDisplayContent.isDexMode()) {
                     insetsControlTarget.showInsets(WindowInsets.Type.navigationBars(), false, null);
                 } else {
-                    insetsControlTarget.showInsets(WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars(), false, null);
+                    insetsControlTarget.showInsets(
+                            WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars(),
+                            false,
+                            null);
                 }
                 if (windowState == this.mStatusBar) {
                     if (this.mDisplayContent.isDexMode() || this.mSkipTransferTouchToStatusBar) {
                         return;
                     }
                     WindowState windowState2 = this.mStatusBar;
-                    if (!windowState2.mWmService.mInputManager.transferTouch(windowState2.mInputChannelToken, windowState2.getDisplayId())) {
+                    if (!windowState2.mWmService.mInputManager.transferTouch(
+                            windowState2.mInputChannelToken, windowState2.getDisplayId())) {
                         Slog.i("WindowManager", "Could not transfer touch to the status bar");
                     }
                 }
             }
             if (!ViewRootImpl.CLIENT_IMMERSIVE_CONFIRMATION && !ViewRootImpl.CLIENT_TRANSIENT) {
-                ImmersiveModeConfirmation immersiveModeConfirmation = this.mImmersiveModeConfirmation;
+                ImmersiveModeConfirmation immersiveModeConfirmation =
+                        this.mImmersiveModeConfirmation;
                 if (immersiveModeConfirmation.mClingWindow != null) {
                     immersiveModeConfirmation.mHandler.post(immersiveModeConfirmation.mConfirm);
                     return;
                 }
                 return;
             }
-            StatusBarManagerService.AnonymousClass2 anonymousClass2 = (StatusBarManagerService.AnonymousClass2) this.mStatusBarManagerInternal;
+            StatusBarManagerService.AnonymousClass2 anonymousClass2 =
+                    (StatusBarManagerService.AnonymousClass2) this.mStatusBarManagerInternal;
             if (StatusBarManagerService.this.mBar == null) {
                 return;
             }
@@ -2058,9 +2484,11 @@ public final class DisplayPolicy {
                     if (z) {
                         this.mService.mAtmService.mVisibleDozeUiProcess = null;
                     } else if (this.mScreenOnFully && this.mNotificationShade != null) {
-                        this.mService.mAtmService.mVisibleDozeUiProcess = this.mNotificationShade.mSession.mProcess;
+                        this.mService.mAtmService.mVisibleDozeUiProcess =
+                                this.mNotificationShade.mSession.mProcess;
                     }
-                    this.mService.mAtmService.mKeyguardController.updateDeferTransitionForAod(this.mAwake);
+                    this.mService.mAtmService.mKeyguardController.updateDeferTransitionForAod(
+                            this.mAwake);
                     if (!z) {
                         onDisplaySwitchFinished();
                     }
@@ -2075,9 +2503,12 @@ public final class DisplayPolicy {
         this.mCanSystemBarsBeShownByUser = z;
     }
 
-    public final void setDropInputModePolicy(WindowState windowState, WindowManager.LayoutParams layoutParams) {
+    public final void setDropInputModePolicy(
+            WindowState windowState, WindowManager.LayoutParams layoutParams) {
         if (layoutParams.type == 2005 && (layoutParams.privateFlags & 536870912) == 0) {
-            ((SurfaceControl.Transaction) this.mService.mTransactionFactory.get()).setDropInputMode(windowState.mSurfaceControl, 1).apply();
+            ((SurfaceControl.Transaction) this.mService.mTransactionFactory.get())
+                    .setDropInputMode(windowState.mSurfaceControl, 1)
+                    .apply();
         }
     }
 
@@ -2114,26 +2545,51 @@ public final class DisplayPolicy {
         WindowState windowState;
         WindowState windowState2;
         ActivityRecord activityRecord;
-        return MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED && this.mFocusedWindow == null && (windowState = this.mTopFullscreenOpaqueWindowState) != null && windowState.isActivityTypeHome() && (windowState2 = this.mSystemUiControllingWindow) != null && windowState2.inSplitScreenWindowingMode() && (activityRecord = this.mDisplayContent.mFocusedApp) != null && activityRecord.inSplitScreenWindowingMode();
+        return MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED
+                && this.mFocusedWindow == null
+                && (windowState = this.mTopFullscreenOpaqueWindowState) != null
+                && windowState.isActivityTypeHome()
+                && (windowState2 = this.mSystemUiControllingWindow) != null
+                && windowState2.inSplitScreenWindowingMode()
+                && (activityRecord = this.mDisplayContent.mFocusedApp) != null
+                && activityRecord.inSplitScreenWindowingMode();
     }
 
     public final void simulateLayoutDisplay(DisplayFrames displayFrames) {
         sTmpClientFrames.attachedFrame = null;
         for (int size = this.mInsetsSourceWindowsExceptIme.size() - 1; size >= 0; size--) {
-            WindowState windowState = (WindowState) this.mInsetsSourceWindowsExceptIme.valueAt(size);
-            if (!isDexStandAloneMode() || !hasDexStandAloneNavigationBar() || windowState != this.mDefaultNavigationBar) {
-                this.mWindowLayout.computeFrames(windowState.mAttrs.forRotation(displayFrames.mRotation), displayFrames.mInsetsState, displayFrames.mDisplayCutoutSafe, displayFrames.mUnrestricted, windowState.getWindowingMode(), -1, -1, windowState.mRequestedVisibleTypes, windowState.mGlobalScale, sTmpClientFrames, windowState.getStageType());
+            WindowState windowState =
+                    (WindowState) this.mInsetsSourceWindowsExceptIme.valueAt(size);
+            if (!isDexStandAloneMode()
+                    || !hasDexStandAloneNavigationBar()
+                    || windowState != this.mDefaultNavigationBar) {
+                this.mWindowLayout.computeFrames(
+                        windowState.mAttrs.forRotation(displayFrames.mRotation),
+                        displayFrames.mInsetsState,
+                        displayFrames.mDisplayCutoutSafe,
+                        displayFrames.mUnrestricted,
+                        windowState.getWindowingMode(),
+                        -1,
+                        -1,
+                        windowState.mRequestedVisibleTypes,
+                        windowState.mGlobalScale,
+                        sTmpClientFrames,
+                        windowState.getStageType());
                 SparseArray insetsSourceProviders = windowState.getInsetsSourceProviders();
                 InsetsState insetsState = displayFrames.mInsetsState;
                 for (int size2 = insetsSourceProviders.size() - 1; size2 >= 0; size2--) {
-                    InsetsSourceProvider insetsSourceProvider = (InsetsSourceProvider) insetsSourceProviders.valueAt(size2);
+                    InsetsSourceProvider insetsSourceProvider =
+                            (InsetsSourceProvider) insetsSourceProviders.valueAt(size2);
                     Rect rect = sTmpClientFrames.frame;
                     insetsSourceProvider.getClass();
                     InsetsSource insetsSource = new InsetsSource(insetsSourceProvider.mSource);
                     insetsSourceProvider.mTmpRect.set(rect);
                     TriFunction triFunction = insetsSourceProvider.mFrameProvider;
                     if (triFunction != null) {
-                        triFunction.apply(displayFrames, insetsSourceProvider.mWindowContainer, insetsSourceProvider.mTmpRect);
+                        triFunction.apply(
+                                displayFrames,
+                                insetsSourceProvider.mWindowContainer,
+                                insetsSourceProvider.mTmpRect);
                     }
                     insetsSource.setFrame(insetsSourceProvider.mTmpRect);
                     insetsSource.updateSideHint(displayFrames.mUnrestricted);
@@ -2157,32 +2613,53 @@ public final class DisplayPolicy {
 
     public final void systemReady() {
         if (!ViewRootImpl.CLIENT_TRANSIENT) {
-            final SystemGesturesPointerEventListener systemGesturesPointerEventListener = this.mSystemGestures;
-            systemGesturesPointerEventListener.mHandler.post(new Runnable() { // from class: com.android.server.wm.SystemGesturesPointerEventListener$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SystemGesturesPointerEventListener systemGesturesPointerEventListener2 = SystemGesturesPointerEventListener.this;
-                    int displayId = systemGesturesPointerEventListener2.mContext.getDisplayId();
-                    if (DisplayManagerGlobal.getInstance().getDisplayInfo(displayId) == null) {
-                        DeviceIdleController$$ExternalSyntheticOutline0.m(displayId, "Cannot create GestureDetector, display removed:", "SystemGestures");
-                    } else {
-                        systemGesturesPointerEventListener2.mGestureDetector = new SystemGesturesPointerEventListener.AnonymousClass1(systemGesturesPointerEventListener2.mContext, systemGesturesPointerEventListener2.new FlingGestureDetector(), systemGesturesPointerEventListener2.mHandler);
-                    }
-                }
-            });
+            final SystemGesturesPointerEventListener systemGesturesPointerEventListener =
+                    this.mSystemGestures;
+            systemGesturesPointerEventListener.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.wm.SystemGesturesPointerEventListener$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SystemGesturesPointerEventListener systemGesturesPointerEventListener2 =
+                                    SystemGesturesPointerEventListener.this;
+                            int displayId =
+                                    systemGesturesPointerEventListener2.mContext.getDisplayId();
+                            if (DisplayManagerGlobal.getInstance().getDisplayInfo(displayId)
+                                    == null) {
+                                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                        displayId,
+                                        "Cannot create GestureDetector, display removed:",
+                                        "SystemGestures");
+                            } else {
+                                systemGesturesPointerEventListener2.mGestureDetector =
+                                        new SystemGesturesPointerEventListener.AnonymousClass1(
+                                                systemGesturesPointerEventListener2.mContext,
+                                                systemGesturesPointerEventListener2
+                                                .new FlingGestureDetector(),
+                                                systemGesturesPointerEventListener2.mHandler);
+                            }
+                        }
+                    });
             if (systemGesturesPointerEventListener.mContext.getDisplayId() == 0) {
-                systemGesturesPointerEventListener.mMultiWindowEdgeDetector = new MultiWindowEdgeDetector(systemGesturesPointerEventListener.mContext, "SystemGesture");
+                systemGesturesPointerEventListener.mMultiWindowEdgeDetector =
+                        new MultiWindowEdgeDetector(
+                                systemGesturesPointerEventListener.mContext, "SystemGesture");
             }
         }
         if (this.mService.mPointerLocationEnabled) {
             setPointerLocationEnabled(true);
         }
         startEnableTouchEvent(false);
-        SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("systemReady() >> KnoxZT startEnableTouchEvent called for Display Id : "), this.mDisplayContent.mDisplayId, "WindowManager");
+        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                new StringBuilder(
+                        "systemReady() >> KnoxZT startEnableTouchEvent called for Display Id : "),
+                this.mDisplayContent.mDisplayId,
+                "WindowManager");
     }
 
     public final boolean topAppHidesSystemBar(int i) {
-        if (this.mTopFullscreenOpaqueWindowState == null || (this.mDisplayContent.mInsetsPolicy.mForcedShowingTypes & i) == i) {
+        if (this.mTopFullscreenOpaqueWindowState == null
+                || (this.mDisplayContent.mInsetsPolicy.mForcedShowingTypes & i) == i) {
             return false;
         }
         return !r0.isRequestedVisible(i, false);
@@ -2215,14 +2692,16 @@ public final class DisplayPolicy {
         boolean z = false;
         if (!CoreRune.FW_NAVBAR_MOVABLE_POLICY) {
             DisplayContent displayContent = this.mDisplayContent;
-            if (displayContent.mBaseDisplayWidth != displayContent.mBaseDisplayHeight && currentUserResources.getBoolean(R.bool.config_orderUnlockAndWake)) {
+            if (displayContent.mBaseDisplayWidth != displayContent.mBaseDisplayHeight
+                    && currentUserResources.getBoolean(R.bool.config_orderUnlockAndWake)) {
                 z = true;
             }
         }
         this.mNavigationBarCanMove = z;
         DisplayRotation displayRotation = this.mDisplayContent.mDisplayRotation;
         displayRotation.getClass();
-        displayRotation.mAllowSeamlessRotationDespiteNavBarMoving = currentUserResources.getBoolean(R.bool.config_allowTheaterModeWakeFromDock);
+        displayRotation.mAllowSeamlessRotationDespiteNavBarMoving =
+                currentUserResources.getBoolean(R.bool.config_allowTheaterModeWakeFromDock);
         boolean z2 = CoreRune.FW_TSP_STATE_CONTROLLER;
         if (z2) {
             DisplayPolicyExt displayPolicyExt = this.mExt;
@@ -2233,7 +2712,8 @@ public final class DisplayPolicy {
             int i4 = displayContent2.mInitialDisplayHeight;
             displayPolicyExt.getClass();
             if (z2 && displayPolicyExt.mDisplayPolicy.mDisplayContent.isDefaultDisplay) {
-                TspStateController tspStateController = displayPolicyExt.mService.mExt.mTspStateController;
+                TspStateController tspStateController =
+                        displayPolicyExt.mService.mExt.mTspStateController;
                 TspStateController.DeviceSize deviceSize = tspStateController.mDeviceSize;
                 deviceSize.width = i;
                 deviceSize.height = i2;
@@ -2256,75 +2736,94 @@ public final class DisplayPolicy {
         if (currentUserId == 0) {
             this.mCurrentUserResources = context.getResources();
         } else {
-            LoadedApk packageInfo = ActivityThread.currentActivityThread().getPackageInfo(context.getPackageName(), (CompatibilityInfo) null, 0, currentUserId);
-            this.mCurrentUserResources = ResourcesManager.getInstance().getResources(context.getWindowContextToken(), packageInfo.getResDir(), (String[]) null, packageInfo.getOverlayDirs(), packageInfo.getOverlayPaths(), packageInfo.getApplicationInfo().sharedLibraryFiles, Integer.valueOf(this.mDisplayContent.mDisplayId), (Configuration) null, context.getResources().getCompatibilityInfo(), (ClassLoader) null, (List) null);
+            LoadedApk packageInfo =
+                    ActivityThread.currentActivityThread()
+                            .getPackageInfo(
+                                    context.getPackageName(),
+                                    (CompatibilityInfo) null,
+                                    0,
+                                    currentUserId);
+            this.mCurrentUserResources =
+                    ResourcesManager.getInstance()
+                            .getResources(
+                                    context.getWindowContextToken(),
+                                    packageInfo.getResDir(),
+                                    (String[]) null,
+                                    packageInfo.getOverlayDirs(),
+                                    packageInfo.getOverlayPaths(),
+                                    packageInfo.getApplicationInfo().sharedLibraryFiles,
+                                    Integer.valueOf(this.mDisplayContent.mDisplayId),
+                                    (Configuration) null,
+                                    context.getResources().getCompatibilityInfo(),
+                                    (ClassLoader) null,
+                                    (List) null);
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:26:0x00a1, code lost:
-    
-        r0 = r13.mDecorInsets.mInfoForRotation.length - 1;
-     */
+
+       r0 = r13.mDecorInsets.mInfoForRotation.length - 1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x00a7, code lost:
-    
-        if (r0 < 0) goto L70;
-     */
+
+       if (r0 < 0) goto L70;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x00a9, code lost:
-    
-        if (r0 == r5) goto L72;
-     */
+
+       if (r0 == r5) goto L72;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x00af, code lost:
-    
-        if (((r0 + r5) % 2) != 1) goto L42;
-     */
+
+       if (((r0 + r5) % 2) != 1) goto L42;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x00b1, code lost:
-    
-        r3 = true;
-     */
+
+       r3 = true;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:32:0x00b4, code lost:
-    
-        if (r3 == false) goto L45;
-     */
+
+       if (r3 == false) goto L45;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:33:0x00b6, code lost:
-    
-        r8 = r4;
-     */
+
+       r8 = r4;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x00b9, code lost:
-    
-        if (r3 == false) goto L48;
-     */
+
+       if (r3 == false) goto L48;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x00bb, code lost:
-    
-        r3 = r6;
-     */
+
+       r3 = r6;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:36:0x00be, code lost:
-    
-        r13.mDecorInsets.mInfoForRotation[r0].update(r0, r8, r3, r13.mDisplayContent);
-     */
+
+       r13.mDecorInsets.mInfoForRotation[r0].update(r0, r8, r3, r13.mDisplayContent);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x00c9, code lost:
-    
-        r0 = r0 - 1;
-     */
+
+       r0 = r0 - 1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x00bd, code lost:
-    
-        r3 = r4;
-     */
+
+       r3 = r4;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x00b8, code lost:
-    
-        r8 = r6;
-     */
+
+       r8 = r6;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x00b3, code lost:
-    
-        r3 = false;
-     */
+
+       r3 = false;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x00cc, code lost:
-    
-        r13.mDecorInsets.mInfoForRotation[r5].set(r7);
-     */
+
+       r13.mDecorInsets.mInfoForRotation[r5].set(r7);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:60:0x009f, code lost:
-    
-        if (r10 != r9) goto L36;
-     */
+
+       if (r10 != r9) goto L36;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2334,7 +2833,9 @@ public final class DisplayPolicy {
             Method dump skipped, instructions count: 257
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DisplayPolicy.updateDecorInsetsInfo():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DisplayPolicy.updateDecorInsetsInfo():boolean");
     }
 
     public final void updateForceShowNavBarSettings() {
@@ -2347,12 +2848,27 @@ public final class DisplayPolicy {
     public int updateLightNavigationBarLw(int i, WindowState windowState) {
         if (windowState != null) {
             boolean z = false;
-            if (intersectsAnyInsets(windowState.mWindowFrames.mFrame, windowState.getInsetsState(false), WindowInsets.Type.navigationBars())) {
+            if (intersectsAnyInsets(
+                    windowState.mWindowFrames.mFrame,
+                    windowState.getInsetsState(false),
+                    WindowInsets.Type.navigationBars())) {
                 boolean z2 = this.mIsResizingByDivider;
-                if (this.mDisplayContent.isDefaultDisplay && this.mService.mAtmService.mNaturalSwitchingController.mNaturalSwitchingRunning) {
+                if (this.mDisplayContent.isDefaultDisplay
+                        && this.mService
+                                .mAtmService
+                                .mNaturalSwitchingController
+                                .mNaturalSwitchingRunning) {
                     z = true;
                 }
-                return (z2 || z) ? i & (-17) : (windowState.isDexMode() && windowState.mActivityRecord != null && windowState.getWindowingMode() == 1 && (windowState.isActivityTypeStandard() || windowState.isActivityTypeAssistant())) ? (i & (-17)) | 2 : (i & (-17)) | (windowState.mAttrs.insetsFlags.appearance & 16);
+                return (z2 || z)
+                        ? i & (-17)
+                        : (windowState.isDexMode()
+                                        && windowState.mActivityRecord != null
+                                        && windowState.getWindowingMode() == 1
+                                        && (windowState.isActivityTypeStandard()
+                                                || windowState.isActivityTypeAssistant()))
+                                ? (i & (-17)) | 2
+                                : (i & (-17)) | (windowState.mAttrs.insetsFlags.appearance & 16);
             }
         }
         int i2 = i & (-17);
@@ -2361,45 +2877,47 @@ public final class DisplayPolicy {
         }
         WindowManager.LayoutParams layoutParams = windowState.mAttrs;
         this.mExt.getClass();
-        return DisplayPolicyExt.isUsingBlurEffect(layoutParams) ? i2 | (windowState.mAttrs.insetsFlags.appearance & 16) : i2;
+        return DisplayPolicyExt.isUsingBlurEffect(layoutParams)
+                ? i2 | (windowState.mAttrs.insetsFlags.appearance & 16)
+                : i2;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:314:0x0200, code lost:
-    
-        if (r0.isRequestedVisible(android.view.WindowInsets.Type.navigationBars(), false) == false) goto L227;
-     */
+
+       if (r0.isRequestedVisible(android.view.WindowInsets.Type.navigationBars(), false) == false) goto L227;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:344:0x025d, code lost:
-    
-        if (com.samsung.android.multiwindow.MultiWindowCoreState.MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED != false) goto L210;
-     */
+
+       if (com.samsung.android.multiwindow.MultiWindowCoreState.MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED != false) goto L210;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:366:0x02a5, code lost:
-    
-        if (r6 == false) goto L226;
-     */
+
+       if (r6 == false) goto L226;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:370:0x02ae, code lost:
-    
-        if (com.samsung.android.rune.CoreRune.MW_MULTI_SPLIT != false) goto L153;
-     */
+
+       if (com.samsung.android.rune.CoreRune.MW_MULTI_SPLIT != false) goto L153;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:382:0x0199, code lost:
-    
-        if (r12 != false) goto L114;
-     */
+
+       if (r12 != false) goto L114;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:383:0x019b, code lost:
-    
-        r8 = r8 & (-3);
-     */
+
+       r8 = r8 & (-3);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:387:0x01a5, code lost:
-    
-        if (r12 != false) goto L114;
-     */
+
+       if (r12 != false) goto L114;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:391:0x01ae, code lost:
-    
-        if (r25.mFreeformTaskSurfaceOverlappingWithNavBar == false) goto L129;
-     */
+
+       if (r25.mFreeformTaskSurfaceOverlappingWithNavBar == false) goto L129;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:393:0x01b3, code lost:
-    
-        if (r0 != false) goto L114;
-     */
+
+       if (r0 != false) goto L114;
+    */
     /* JADX WARN: Removed duplicated region for block: B:128:0x02d9  */
     /* JADX WARN: Removed duplicated region for block: B:174:0x039f  */
     /* JADX WARN: Removed duplicated region for block: B:177:0x03b0 A[RETURN] */
@@ -2418,7 +2936,9 @@ public final class DisplayPolicy {
             Method dump skipped, instructions count: 1595
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DisplayPolicy.updateSystemBarAttributes():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DisplayPolicy.updateSystemBarAttributes():void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:40:0x00da  */
@@ -2426,11 +2946,15 @@ public final class DisplayPolicy {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int validateAddingWindowLw(android.view.WindowManager.LayoutParams r8, int r9, int r10) {
+    public final int validateAddingWindowLw(
+            android.view.WindowManager.LayoutParams r8, int r9, int r10) {
         /*
             Method dump skipped, instructions count: 246
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DisplayPolicy.validateAddingWindowLw(android.view.WindowManager$LayoutParams, int, int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DisplayPolicy.validateAddingWindowLw(android.view.WindowManager$LayoutParams,"
+                    + " int, int):int");
     }
 }

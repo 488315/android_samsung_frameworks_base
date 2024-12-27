@@ -10,12 +10,13 @@ import android.os.RemoteException;
 public interface ITimeZoneProviderManager extends IInterface {
     public static final String DESCRIPTOR = "android.service.timezone.ITimeZoneProviderManager";
 
-    void onTimeZoneProviderEvent(TimeZoneProviderEvent timeZoneProviderEvent) throws RemoteException;
+    void onTimeZoneProviderEvent(TimeZoneProviderEvent timeZoneProviderEvent)
+            throws RemoteException;
 
     public static class Default implements ITimeZoneProviderManager {
         @Override // android.service.timezone.ITimeZoneProviderManager
-        public void onTimeZoneProviderEvent(TimeZoneProviderEvent timeZoneProviderEvent) throws RemoteException {
-        }
+        public void onTimeZoneProviderEvent(TimeZoneProviderEvent timeZoneProviderEvent)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface ITimeZoneProviderManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITimeZoneProviderManager {
+    public abstract static class Stub extends Binder implements ITimeZoneProviderManager {
         static final int TRANSACTION_onTimeZoneProviderEvent = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface ITimeZoneProviderManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITimeZoneProviderManager.DESCRIPTOR);
             }
@@ -71,7 +73,9 @@ public interface ITimeZoneProviderManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    TimeZoneProviderEvent _arg0 = (TimeZoneProviderEvent) data.readTypedObject(TimeZoneProviderEvent.CREATOR);
+                    TimeZoneProviderEvent _arg0 =
+                            (TimeZoneProviderEvent)
+                                    data.readTypedObject(TimeZoneProviderEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onTimeZoneProviderEvent(_arg0);
                     return true;
@@ -97,7 +101,8 @@ public interface ITimeZoneProviderManager extends IInterface {
             }
 
             @Override // android.service.timezone.ITimeZoneProviderManager
-            public void onTimeZoneProviderEvent(TimeZoneProviderEvent timeZoneProviderEvent) throws RemoteException {
+            public void onTimeZoneProviderEvent(TimeZoneProviderEvent timeZoneProviderEvent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITimeZoneProviderManager.DESCRIPTOR);

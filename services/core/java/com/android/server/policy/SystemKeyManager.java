@@ -5,6 +5,7 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
@@ -13,13 +14,21 @@ import com.android.server.statusbar.StatusBarManagerInternal;
 import com.android.server.statusbar.StatusBarManagerService;
 import com.android.server.wm.DisplayPolicy;
 import com.android.server.wm.WindowState;
+
 import java.util.HashMap;
 import java.util.HashSet;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class SystemKeyManager {
-    public static final int[] SUPPORT_KEYCODE = {26, 3, FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CREDENTIAL_MANAGEMENT_APP_REMOVED, 6, 1064, 224};
+    public static final int[] SUPPORT_KEYCODE = {
+        26,
+        3,
+        FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CREDENTIAL_MANAGEMENT_APP_REMOVED,
+        6,
+        1064,
+        224
+    };
     public String mFocusedWindow;
     public boolean mIsActivatedHomeKey;
     public boolean mIsActivatedRecentKey;
@@ -62,7 +71,8 @@ public final class SystemKeyManager {
         }
     }
 
-    public static boolean checkValidRequestedDefaultInfo(int i, int i2, ComponentName componentName) {
+    public static boolean checkValidRequestedDefaultInfo(
+            int i, int i2, ComponentName componentName) {
         if (componentName == null) {
             throw new IllegalArgumentException("requested component name is null.");
         }
@@ -70,9 +80,17 @@ public final class SystemKeyManager {
             return true;
         }
         if (i2 != -1) {
-            throw new IllegalArgumentException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "requested keyCode was wrong. The keyCode(", ") does not supported."));
+            throw new IllegalArgumentException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i,
+                            "requested keyCode was wrong. The keyCode(",
+                            ") does not supported."));
         }
-        FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0.m(i, "requested keyCode was wrong. The keyCode(", ") does not supported.", "SystemKeyManager");
+        FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0.m(
+                i,
+                "requested keyCode was wrong. The keyCode(",
+                ") does not supported.",
+                "SystemKeyManager");
         return false;
     }
 
@@ -105,7 +123,9 @@ public final class SystemKeyManager {
         if (i == 3 || i == 26 || i == 187 || i == 224) {
             DisplayPolicy displayPolicy = this.mPolicy.mDefaultDisplayPolicy;
             WindowState windowState2 = displayPolicy.mExt.mFakeFocusedWindow;
-            if (windowState2 != null && ((windowState = displayPolicy.mFocusedWindow) == null || windowState2.mBaseLayer > windowState.mBaseLayer)) {
+            if (windowState2 != null
+                    && ((windowState = displayPolicy.mFocusedWindow) == null
+                            || windowState2.mBaseLayer > windowState.mBaseLayer)) {
                 str = windowState2.mAttrs.getTitle().toString();
             }
         }
@@ -115,7 +135,9 @@ public final class SystemKeyManager {
     public final boolean hasSystemKeyInfo(int i, int i2) {
         String str = KeyCustomizationConstants.VOLD_DECRYPT;
         if (PhoneWindowManager.DEBUG_INPUT) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "hasSystemKeyInfo() is called keyCode=", " press=");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "hasSystemKeyInfo() is called keyCode=", " press=");
             m.append(keyPressToString(i2));
             m.append(" focusedWindow=");
             m.append(this.mFocusedWindow);
@@ -125,9 +147,9 @@ public final class SystemKeyManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:36:0x006a, code lost:
-    
-        if ((r9 & r5.press) != 0) goto L32;
-     */
+
+       if ((r9 & r5.press) != 0) goto L32;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -224,14 +246,22 @@ public final class SystemKeyManager {
             monitor-exit(r7)     // Catch: java.lang.Throwable -> L4a
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.policy.SystemKeyManager.hasSystemKeyInfoWithFocusedWindow(int, int, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.policy.SystemKeyManager.hasSystemKeyInfoWithFocusedWindow(int,"
+                    + " int, boolean):boolean");
     }
 
     public final boolean isSystemKeyEventRequested(int i, ComponentName componentName) {
         String str = KeyCustomizationConstants.VOLD_DECRYPT;
         boolean z = PhoneWindowManager.DEBUG_INPUT;
         if (z) {
-            Slog.v("SystemKeyManager", "isSystemKeyEventRequested() is called keyCode=" + i + " componentName=" + componentName);
+            Slog.v(
+                    "SystemKeyManager",
+                    "isSystemKeyEventRequested() is called keyCode="
+                            + i
+                            + " componentName="
+                            + componentName);
         }
         if (componentName == null) {
             return false;
@@ -245,7 +275,9 @@ public final class SystemKeyManager {
                 String findFocusedWindow = findFocusedWindow(i);
                 if (TextUtils.isEmpty(findFocusedWindow)) {
                     if (z) {
-                        Slog.i("SystemKeyManager", "isSystemKeyEventRequested() : focusedWindow is empty.");
+                        Slog.i(
+                                "SystemKeyManager",
+                                "isSystemKeyEventRequested() : focusedWindow is empty.");
                     }
                     return false;
                 }
@@ -262,12 +294,18 @@ public final class SystemKeyManager {
 
     public final void notifyRequestedSystemKey() {
         boolean z;
-        StatusBarManagerInternal statusBarManagerInternal = this.mPolicy.getStatusBarManagerInternal();
+        StatusBarManagerInternal statusBarManagerInternal =
+                this.mPolicy.getStatusBarManagerInternal();
         if (statusBarManagerInternal == null) {
             return;
         }
         boolean z2 = true;
-        boolean hasSystemKeyInfoWithFocusedWindow = hasSystemKeyInfoWithFocusedWindow(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CREDENTIAL_MANAGEMENT_APP_REMOVED, 0, true);
+        boolean hasSystemKeyInfoWithFocusedWindow =
+                hasSystemKeyInfoWithFocusedWindow(
+                        FrameworkStatsLog
+                                .DEVICE_POLICY_EVENT__EVENT_ID__CREDENTIAL_MANAGEMENT_APP_REMOVED,
+                        0,
+                        true);
         if (this.mIsActivatedRecentKey != hasSystemKeyInfoWithFocusedWindow) {
             this.mIsActivatedRecentKey = hasSystemKeyInfoWithFocusedWindow;
             z = true;
@@ -283,8 +321,11 @@ public final class SystemKeyManager {
         if (z2) {
             boolean z3 = this.mIsActivatedRecentKey;
             boolean z4 = this.mIsActivatedHomeKey;
-            StatusBarManagerService.AnonymousClass2 anonymousClass2 = (StatusBarManagerService.AnonymousClass2) statusBarManagerInternal;
-            Slog.d("StatusBarManagerService", "notifyRequestedSystemKey recent=" + z3 + " home=" + z4);
+            StatusBarManagerService.AnonymousClass2 anonymousClass2 =
+                    (StatusBarManagerService.AnonymousClass2) statusBarManagerInternal;
+            Slog.d(
+                    "StatusBarManagerService",
+                    "notifyRequestedSystemKey recent=" + z3 + " home=" + z4);
             if (StatusBarManagerService.this.mBar == null) {
                 return;
             }

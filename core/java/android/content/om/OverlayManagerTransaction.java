@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -16,19 +18,21 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class OverlayManagerTransaction implements Parcelable {
-    public static final Parcelable.Creator<OverlayManagerTransaction> CREATOR = new Parcelable.Creator<OverlayManagerTransaction>() { // from class: android.content.om.OverlayManagerTransaction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverlayManagerTransaction createFromParcel(Parcel source) {
-            return new OverlayManagerTransaction(source);
-        }
+    public static final Parcelable.Creator<OverlayManagerTransaction> CREATOR =
+            new Parcelable.Creator<OverlayManagerTransaction>() { // from class:
+                // android.content.om.OverlayManagerTransaction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverlayManagerTransaction createFromParcel(Parcel source) {
+                    return new OverlayManagerTransaction(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverlayManagerTransaction[] newArray(int size) {
-            return new OverlayManagerTransaction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverlayManagerTransaction[] newArray(int size) {
+                    return new OverlayManagerTransaction[size];
+                }
+            };
     private final List<Request> mRequests;
     private final boolean mSelfTargeting;
 
@@ -50,7 +54,8 @@ public final class OverlayManagerTransaction implements Parcelable {
         this.mRequests = new ArrayList(size);
         for (int i = 0; i < size; i++) {
             int request = source.readInt();
-            OverlayIdentifier overlay = (OverlayIdentifier) source.readParcelable(null, OverlayIdentifier.class);
+            OverlayIdentifier overlay =
+                    (OverlayIdentifier) source.readParcelable(null, OverlayIdentifier.class);
             int userId = source.readInt();
             Bundle extras = source.readBundle(null);
             this.mRequests.add(new Request(request, overlay, userId, extras));
@@ -80,8 +85,7 @@ public final class OverlayManagerTransaction implements Parcelable {
         public final int userId;
 
         @Retention(RetentionPolicy.SOURCE)
-        @interface RequestType {
-        }
+        @interface RequestType {}
 
         public Request(int type, OverlayIdentifier overlay, int userId) {
             this(type, overlay, userId, null);
@@ -95,7 +99,13 @@ public final class OverlayManagerTransaction implements Parcelable {
         }
 
         public String toString() {
-            return String.format(Locale.US, "Request{type=0x%02x (%s), overlay=%s, userId=%d}", Integer.valueOf(this.type), typeToString(), this.overlay, Integer.valueOf(this.userId));
+            return String.format(
+                    Locale.US,
+                    "Request{type=0x%02x (%s), overlay=%s, userId=%d}",
+                    Integer.valueOf(this.type),
+                    typeToString(),
+                    this.overlay,
+                    Integer.valueOf(this.userId));
         }
 
         public String typeToString() {
@@ -128,12 +138,14 @@ public final class OverlayManagerTransaction implements Parcelable {
         }
 
         public Builder registerFabricatedOverlay(FabricatedOverlay overlay) {
-            this.mRequests.add(OverlayManagerTransaction.generateRegisterFabricatedOverlayRequest(overlay));
+            this.mRequests.add(
+                    OverlayManagerTransaction.generateRegisterFabricatedOverlayRequest(overlay));
             return this;
         }
 
         public Builder unregisterFabricatedOverlay(OverlayIdentifier overlay) {
-            this.mRequests.add(OverlayManagerTransaction.generateUnRegisterFabricatedOverlayRequest(overlay));
+            this.mRequests.add(
+                    OverlayManagerTransaction.generateUnRegisterFabricatedOverlayRequest(overlay));
             return this;
         }
 
@@ -169,7 +181,8 @@ public final class OverlayManagerTransaction implements Parcelable {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static Request generateUnRegisterFabricatedOverlayRequest(OverlayIdentifier overlayIdentifier) {
+    public static Request generateUnRegisterFabricatedOverlayRequest(
+            OverlayIdentifier overlayIdentifier) {
         Objects.requireNonNull(overlayIdentifier);
         return new Request(3, overlayIdentifier, -1);
     }

@@ -5,9 +5,9 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.LayoutAnimationController;
+
 import com.android.internal.R;
+
 import java.util.Random;
 
 /* loaded from: classes4.dex */
@@ -118,7 +118,8 @@ public class GridLayoutAnimationController extends LayoutAnimationController {
                 break;
             case 2:
                 viewDelay = (long) ((column * columnDelay) + (row * columnsCount * columnDelay));
-                totalDelay = (columnsCount * columnDelay) + (rowsCount * columnsCount * columnDelay);
+                totalDelay =
+                        (columnsCount * columnDelay) + (rowsCount * columnsCount * columnDelay);
                 break;
             default:
                 viewDelay = (long) ((column * columnDelay) + (row * rowDelay));

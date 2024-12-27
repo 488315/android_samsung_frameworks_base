@@ -1,6 +1,5 @@
 package com.samsung.android.wallpaper.legibilitycolors;
 
-import com.samsung.android.wallpaper.legibilitycolors.LegibilityLogic;
 
 /* loaded from: classes6.dex */
 public class LegibilityAutoDim {
@@ -30,7 +29,8 @@ public class LegibilityAutoDim {
         mMaximumComplexityForAutoDim = maximumValue;
     }
 
-    public static AutoDimResult calculateAdaptiveDim(LegibilityLogic.LegibilityResult[] legibilityResultsArray) {
+    public static AutoDimResult calculateAdaptiveDim(
+            LegibilityLogic.LegibilityResult[] legibilityResultsArray) {
         AutoDimResult dimValues = new AutoDimResult();
         float minimumComplexValue = mMinimumComplexityForAutoDim;
         float maximumComplexValue = mMaximumComplexityForAutoDim;
@@ -51,8 +51,14 @@ public class LegibilityAutoDim {
         dimValues.maxComplexity = maxComplexValue;
         dimValues.validMaxComplexity = validMaxComplexValue;
         if (maxComplexRegionID != -1) {
-            LegibilityLogic.AdaptiveShadowData adaptiveShadowData = legibilityResultsArray[maxComplexRegionID].adaptiveShadowData;
-            dimValues.opacity = Math.min((adaptiveShadowData.totalComplexity - minimumComplexValue) / (maximumComplexValue - minimumComplexValue), 1.0f) * 0.1f;
+            LegibilityLogic.AdaptiveShadowData adaptiveShadowData =
+                    legibilityResultsArray[maxComplexRegionID].adaptiveShadowData;
+            dimValues.opacity =
+                    Math.min(
+                                    (adaptiveShadowData.totalComplexity - minimumComplexValue)
+                                            / (maximumComplexValue - minimumComplexValue),
+                                    1.0f)
+                            * 0.1f;
             dimValues.color = -16777216 != adaptiveShadowData.contentColor ? -16777216 : -1;
         } else {
             dimValues.opacity = 0.0f;

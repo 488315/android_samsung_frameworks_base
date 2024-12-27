@@ -1,10 +1,10 @@
 package android.net.metrics;
 
 import android.annotation.SystemApi;
-import android.net.metrics.IpConnectivityLog;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseArray;
+
 import com.android.internal.util.MessageUtils;
 
 @SystemApi
@@ -13,19 +13,21 @@ import com.android.internal.util.MessageUtils;
 public final class DhcpErrorEvent implements IpConnectivityLog.Event {
     public static final int BOOTP_TOO_SHORT = 67174400;
     public static final int BUFFER_UNDERFLOW = 83951616;
-    public static final Parcelable.Creator<DhcpErrorEvent> CREATOR = new Parcelable.Creator<DhcpErrorEvent>() { // from class: android.net.metrics.DhcpErrorEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DhcpErrorEvent createFromParcel(Parcel in) {
-            return new DhcpErrorEvent(in);
-        }
+    public static final Parcelable.Creator<DhcpErrorEvent> CREATOR =
+            new Parcelable.Creator<
+                    DhcpErrorEvent>() { // from class: android.net.metrics.DhcpErrorEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DhcpErrorEvent createFromParcel(Parcel in) {
+                    return new DhcpErrorEvent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DhcpErrorEvent[] newArray(int size) {
-            return new DhcpErrorEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DhcpErrorEvent[] newArray(int size) {
+                    return new DhcpErrorEvent[size];
+                }
+            };
     public static final int DHCP_BAD_MAGIC_COOKIE = 67239936;
     public static final int DHCP_ERROR = 4;
     private static final int DHCP_ERROR_TYPE = 1024;
@@ -79,9 +81,20 @@ public final class DhcpErrorEvent implements IpConnectivityLog.Event {
     }
 
     static final class Decoder {
-        static final SparseArray<String> constants = MessageUtils.findMessageNames(new Class[]{DhcpErrorEvent.class}, new String[]{"L2_", "L3_", "L4_", "BOOTP_", "DHCP_", "BUFFER_", "RECEIVE_", "PARSING_"});
+        static final SparseArray<String> constants =
+                MessageUtils.findMessageNames(
+                        new Class[] {DhcpErrorEvent.class},
+                        new String[] {
+                            "L2_",
+                            "L3_",
+                            "L4_",
+                            "BOOTP_",
+                            "DHCP_",
+                            "BUFFER_",
+                            "RECEIVE_",
+                            "PARSING_"
+                        });
 
-        Decoder() {
-        }
+        Decoder() {}
     }
 }

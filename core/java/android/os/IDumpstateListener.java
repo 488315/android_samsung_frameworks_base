@@ -22,24 +22,19 @@ public interface IDumpstateListener extends IInterface {
 
     public static class Default implements IDumpstateListener {
         @Override // android.os.IDumpstateListener
-        public void onProgress(int progress) throws RemoteException {
-        }
+        public void onProgress(int progress) throws RemoteException {}
 
         @Override // android.os.IDumpstateListener
-        public void onError(int errorCode) throws RemoteException {
-        }
+        public void onError(int errorCode) throws RemoteException {}
 
         @Override // android.os.IDumpstateListener
-        public void onFinished(String bugreportFile) throws RemoteException {
-        }
+        public void onFinished(String bugreportFile) throws RemoteException {}
 
         @Override // android.os.IDumpstateListener
-        public void onScreenshotTaken(boolean success) throws RemoteException {
-        }
+        public void onScreenshotTaken(boolean success) throws RemoteException {}
 
         @Override // android.os.IDumpstateListener
-        public void onUiIntensiveBugreportDumpsFinished() throws RemoteException {
-        }
+        public void onUiIntensiveBugreportDumpsFinished() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +42,7 @@ public interface IDumpstateListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDumpstateListener {
+    public abstract static class Stub extends Binder implements IDumpstateListener {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onFinished = 3;
         static final int TRANSACTION_onProgress = 1;
@@ -97,7 +92,8 @@ public interface IDumpstateListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDumpstateListener.DESCRIPTOR);
             }

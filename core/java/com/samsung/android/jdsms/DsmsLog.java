@@ -2,6 +2,7 @@ package com.samsung.android.jdsms;
 
 import android.os.Build;
 import android.util.Log;
+
 import java.util.Objects;
 
 /* loaded from: classes6.dex */
@@ -51,6 +52,9 @@ public final class DsmsLog {
     }
 
     private static void println(int priority, String tag, String subtag, String msg) {
-        Log.println(priority, tag, String.format("[%s] %s", Objects.toString(subtag, ""), Objects.toString(msg, "")));
+        Log.println(
+                priority,
+                tag,
+                String.format("[%s] %s", Objects.toString(subtag, ""), Objects.toString(msg, "")));
     }
 }

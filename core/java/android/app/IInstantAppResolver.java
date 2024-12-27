@@ -10,18 +10,23 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IInstantAppResolver extends IInterface {
-    void getInstantAppIntentFilterList(InstantAppRequestInfo instantAppRequestInfo, IRemoteCallback iRemoteCallback) throws RemoteException;
+    void getInstantAppIntentFilterList(
+            InstantAppRequestInfo instantAppRequestInfo, IRemoteCallback iRemoteCallback)
+            throws RemoteException;
 
-    void getInstantAppResolveInfoList(InstantAppRequestInfo instantAppRequestInfo, int i, IRemoteCallback iRemoteCallback) throws RemoteException;
+    void getInstantAppResolveInfoList(
+            InstantAppRequestInfo instantAppRequestInfo, int i, IRemoteCallback iRemoteCallback)
+            throws RemoteException;
 
     public static class Default implements IInstantAppResolver {
         @Override // android.app.IInstantAppResolver
-        public void getInstantAppResolveInfoList(InstantAppRequestInfo request, int sequence, IRemoteCallback callback) throws RemoteException {
-        }
+        public void getInstantAppResolveInfoList(
+                InstantAppRequestInfo request, int sequence, IRemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.IInstantAppResolver
-        public void getInstantAppIntentFilterList(InstantAppRequestInfo request, IRemoteCallback callback) throws RemoteException {
-        }
+        public void getInstantAppIntentFilterList(
+                InstantAppRequestInfo request, IRemoteCallback callback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +34,7 @@ public interface IInstantAppResolver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInstantAppResolver {
+    public abstract static class Stub extends Binder implements IInstantAppResolver {
         public static final String DESCRIPTOR = "android.app.IInstantAppResolver";
         static final int TRANSACTION_getInstantAppIntentFilterList = 2;
         static final int TRANSACTION_getInstantAppResolveInfoList = 1;
@@ -71,7 +76,8 @@ public interface IInstantAppResolver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -81,15 +87,21 @@ public interface IInstantAppResolver extends IInterface {
             }
             switch (code) {
                 case 1:
-                    InstantAppRequestInfo _arg0 = (InstantAppRequestInfo) data.readTypedObject(InstantAppRequestInfo.CREATOR);
+                    InstantAppRequestInfo _arg0 =
+                            (InstantAppRequestInfo)
+                                    data.readTypedObject(InstantAppRequestInfo.CREATOR);
                     int _arg1 = data.readInt();
-                    IRemoteCallback _arg2 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg2 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getInstantAppResolveInfoList(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    InstantAppRequestInfo _arg02 = (InstantAppRequestInfo) data.readTypedObject(InstantAppRequestInfo.CREATOR);
-                    IRemoteCallback _arg12 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    InstantAppRequestInfo _arg02 =
+                            (InstantAppRequestInfo)
+                                    data.readTypedObject(InstantAppRequestInfo.CREATOR);
+                    IRemoteCallback _arg12 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getInstantAppIntentFilterList(_arg02, _arg12);
                     return true;
@@ -115,7 +127,9 @@ public interface IInstantAppResolver extends IInterface {
             }
 
             @Override // android.app.IInstantAppResolver
-            public void getInstantAppResolveInfoList(InstantAppRequestInfo request, int sequence, IRemoteCallback callback) throws RemoteException {
+            public void getInstantAppResolveInfoList(
+                    InstantAppRequestInfo request, int sequence, IRemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -129,7 +143,9 @@ public interface IInstantAppResolver extends IInterface {
             }
 
             @Override // android.app.IInstantAppResolver
-            public void getInstantAppIntentFilterList(InstantAppRequestInfo request, IRemoteCallback callback) throws RemoteException {
+            public void getInstantAppIntentFilterList(
+                    InstantAppRequestInfo request, IRemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

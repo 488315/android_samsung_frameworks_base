@@ -26,14 +26,16 @@ public final class ClientMonitorCompositeCallback implements ClientMonitorCallba
     @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
     public final void onClientFinished(BaseClientMonitor baseClientMonitor, boolean z) {
         for (int size = ((ArrayList) this.mCallbacks).size() - 1; size >= 0; size--) {
-            ((ClientMonitorCallback) ((ArrayList) this.mCallbacks).get(size)).onClientFinished(baseClientMonitor, z);
+            ((ClientMonitorCallback) ((ArrayList) this.mCallbacks).get(size))
+                    .onClientFinished(baseClientMonitor, z);
         }
     }
 
     @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
     public final void onClientStarted(BaseClientMonitor baseClientMonitor) {
         for (int i = 0; i < ((ArrayList) this.mCallbacks).size(); i++) {
-            ((ClientMonitorCallback) ((ArrayList) this.mCallbacks).get(i)).onClientStarted(baseClientMonitor);
+            ((ClientMonitorCallback) ((ArrayList) this.mCallbacks).get(i))
+                    .onClientStarted(baseClientMonitor);
         }
     }
 }

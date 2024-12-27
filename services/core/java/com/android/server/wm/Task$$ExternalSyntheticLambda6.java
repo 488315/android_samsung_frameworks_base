@@ -27,9 +27,12 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda6 implements Con
             case 2:
                 ActivityRecord activityRecord = (ActivityRecord) obj;
                 Task rootTask = activityRecord.getRootTask();
-                AnimatingActivityRegistry animatingActivityRegistry = rootTask != null ? rootTask.mAnimatingActivityRegistry : null;
-                AnimatingActivityRegistry animatingActivityRegistry2 = activityRecord.mAnimatingActivityRegistry;
-                if (animatingActivityRegistry2 != null && animatingActivityRegistry2 != animatingActivityRegistry) {
+                AnimatingActivityRegistry animatingActivityRegistry =
+                        rootTask != null ? rootTask.mAnimatingActivityRegistry : null;
+                AnimatingActivityRegistry animatingActivityRegistry2 =
+                        activityRecord.mAnimatingActivityRegistry;
+                if (animatingActivityRegistry2 != null
+                        && animatingActivityRegistry2 != animatingActivityRegistry) {
                     animatingActivityRegistry2.mAnimatingActivities.remove(activityRecord);
                     animatingActivityRegistry2.mFinishedTokens.remove(activityRecord);
                     if (animatingActivityRegistry2.mAnimatingActivities.isEmpty()) {

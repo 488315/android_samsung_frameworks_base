@@ -6,9 +6,11 @@ import android.content.pm.ApplicationInfo;
 import android.content.res.ApkAssets;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+
 import com.android.internal.content.om.OverlayManagerImpl;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Preconditions;
+
 import java.io.Closeable;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -32,9 +34,13 @@ public class ResourcesProvider implements AutoCloseable, Closeable {
     public static ResourcesProvider loadOverlay(OverlayInfo overlayInfo) throws IOException {
         Objects.requireNonNull(overlayInfo);
         Preconditions.checkArgument(overlayInfo.isFabricated(), "Not accepted overlay");
-        Preconditions.checkStringNotEmpty(overlayInfo.getTargetOverlayableName(), "Without overlayable name");
+        Preconditions.checkStringNotEmpty(
+                overlayInfo.getTargetOverlayableName(), "Without overlayable name");
         String overlayName = OverlayManagerImpl.checkOverlayNameValid(overlayInfo.getOverlayName());
-        String path = (String) Preconditions.checkStringNotEmpty(overlayInfo.getBaseCodePath(), "Invalid base path");
+        String path =
+                (String)
+                        Preconditions.checkStringNotEmpty(
+                                overlayInfo.getBaseCodePath(), "Invalid base path");
         Path frroPath = Path.of(path, new String[0]);
         if (!Files.isRegularFile(frroPath, new LinkOption[0])) {
             throw new FileNotFoundException("The frro file not found");
@@ -46,27 +52,65 @@ public class ResourcesProvider implements AutoCloseable, Closeable {
         return new ResourcesProvider(ApkAssets.loadOverlayFromPath(idmapPath.toString(), 0));
     }
 
-    public static ResourcesProvider loadFromApk(ParcelFileDescriptor fileDescriptor) throws IOException {
+    public static ResourcesProvider loadFromApk(ParcelFileDescriptor fileDescriptor)
+            throws IOException {
         return loadFromApk(fileDescriptor, null);
     }
 
-    public static ResourcesProvider loadFromApk(ParcelFileDescriptor fileDescriptor, AssetsProvider assetsProvider) throws IOException {
-        return new ResourcesProvider(ApkAssets.loadFromFd(fileDescriptor.getFileDescriptor(), fileDescriptor.toString(), 4, assetsProvider));
+    public static ResourcesProvider loadFromApk(
+            ParcelFileDescriptor fileDescriptor, AssetsProvider assetsProvider) throws IOException {
+        return new ResourcesProvider(
+                ApkAssets.loadFromFd(
+                        fileDescriptor.getFileDescriptor(),
+                        fileDescriptor.toString(),
+                        4,
+                        assetsProvider));
     }
 
-    public static ResourcesProvider loadFromApk(ParcelFileDescriptor fileDescriptor, long offset, long length, AssetsProvider assetsProvider) throws IOException {
-        return new ResourcesProvider(ApkAssets.loadFromFd(fileDescriptor.getFileDescriptor(), fileDescriptor.toString(), offset, length, 4, assetsProvider));
+    public static ResourcesProvider loadFromApk(
+            ParcelFileDescriptor fileDescriptor,
+            long offset,
+            long length,
+            AssetsProvider assetsProvider)
+            throws IOException {
+        return new ResourcesProvider(
+                ApkAssets.loadFromFd(
+                        fileDescriptor.getFileDescriptor(),
+                        fileDescriptor.toString(),
+                        offset,
+                        length,
+                        4,
+                        assetsProvider));
     }
 
-    public static ResourcesProvider loadFromTable(ParcelFileDescriptor fileDescriptor, AssetsProvider assetsProvider) throws IOException {
-        return new ResourcesProvider(ApkAssets.loadTableFromFd(fileDescriptor.getFileDescriptor(), fileDescriptor.toString(), 4, assetsProvider));
+    public static ResourcesProvider loadFromTable(
+            ParcelFileDescriptor fileDescriptor, AssetsProvider assetsProvider) throws IOException {
+        return new ResourcesProvider(
+                ApkAssets.loadTableFromFd(
+                        fileDescriptor.getFileDescriptor(),
+                        fileDescriptor.toString(),
+                        4,
+                        assetsProvider));
     }
 
-    public static ResourcesProvider loadFromTable(ParcelFileDescriptor fileDescriptor, long offset, long length, AssetsProvider assetsProvider) throws IOException {
-        return new ResourcesProvider(ApkAssets.loadTableFromFd(fileDescriptor.getFileDescriptor(), fileDescriptor.toString(), offset, length, 4, assetsProvider));
+    public static ResourcesProvider loadFromTable(
+            ParcelFileDescriptor fileDescriptor,
+            long offset,
+            long length,
+            AssetsProvider assetsProvider)
+            throws IOException {
+        return new ResourcesProvider(
+                ApkAssets.loadTableFromFd(
+                        fileDescriptor.getFileDescriptor(),
+                        fileDescriptor.toString(),
+                        offset,
+                        length,
+                        4,
+                        assetsProvider));
     }
 
-    public static ResourcesProvider loadFromSplit(Context context, String splitName) throws IOException {
+    public static ResourcesProvider loadFromSplit(Context context, String splitName)
+            throws IOException {
         ApplicationInfo appInfo = context.getApplicationInfo();
         int splitIndex = ArrayUtils.indexOf(appInfo.splitNames, splitName);
         if (splitIndex < 0) {
@@ -76,7 +120,8 @@ public class ResourcesProvider implements AutoCloseable, Closeable {
         return new ResourcesProvider(ApkAssets.loadFromPath(splitPath, 4, null));
     }
 
-    public static ResourcesProvider loadFromDirectory(String path, AssetsProvider assetsProvider) throws IOException {
+    public static ResourcesProvider loadFromDirectory(String path, AssetsProvider assetsProvider)
+            throws IOException {
         return new ResourcesProvider(ApkAssets.loadFromDir(path, 4, assetsProvider));
     }
 
@@ -108,7 +153,10 @@ public class ResourcesProvider implements AutoCloseable, Closeable {
         synchronized (this.mLock) {
             if (this.mOpen) {
                 if (this.mOpenCount != 0) {
-                    throw new IllegalStateException("Failed to close provider used by " + this.mOpenCount + " ResourcesLoader instances");
+                    throw new IllegalStateException(
+                            "Failed to close provider used by "
+                                    + this.mOpenCount
+                                    + " ResourcesLoader instances");
                 }
                 this.mOpen = false;
                 try {
@@ -122,7 +170,12 @@ public class ResourcesProvider implements AutoCloseable, Closeable {
     protected void finalize() throws Throwable {
         synchronized (this.mLock) {
             if (this.mOpenCount != 0) {
-                Log.w(TAG, "ResourcesProvider " + this + " finalized with non-zero refs: " + this.mOpenCount);
+                Log.w(
+                        TAG,
+                        "ResourcesProvider "
+                                + this
+                                + " finalized with non-zero refs: "
+                                + this.mOpenCount);
             }
         }
     }

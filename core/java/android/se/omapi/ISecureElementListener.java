@@ -32,8 +32,9 @@ public interface ISecureElementListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISecureElementListener {
-        public static final String DESCRIPTOR = "android$se$omapi$ISecureElementListener".replace('$', '.');
+    public abstract static class Stub extends Binder implements ISecureElementListener {
+        public static final String DESCRIPTOR =
+                "android$se$omapi$ISecureElementListener".replace('$', '.');
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
 
@@ -59,7 +60,8 @@ public interface ISecureElementListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code == 1598968902) {
                 reply.writeString(descriptor);

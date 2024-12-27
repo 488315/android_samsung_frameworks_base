@@ -1,6 +1,7 @@
 package android.view;
 
 import android.os.Handler;
+
 import com.android.internal.util.GrowingArrayUtils;
 
 /* loaded from: classes4.dex */
@@ -18,7 +19,9 @@ public class HandlerActionQueue {
             if (this.mActions == null) {
                 this.mActions = new HandlerAction[4];
             }
-            this.mActions = (HandlerAction[]) GrowingArrayUtils.append(this.mActions, this.mCount, handlerAction);
+            this.mActions =
+                    (HandlerAction[])
+                            GrowingArrayUtils.append(this.mActions, this.mCount, handlerAction);
             this.mCount++;
         }
     }
@@ -85,7 +88,8 @@ public class HandlerActionQueue {
         }
 
         public boolean matches(Runnable otherAction) {
-            return (otherAction == null && this.action == null) || (this.action != null && this.action.equals(otherAction));
+            return (otherAction == null && this.action == null)
+                    || (this.action != null && this.action.equals(otherAction));
         }
     }
 }

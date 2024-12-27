@@ -1,6 +1,7 @@
 package android.mtp;
 
 import android.app.admin.PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.ToLongFunction;
@@ -43,24 +44,34 @@ class MtpPropertyList {
     }
 
     public int[] getObjectHandles() {
-        return this.mObjectHandles.stream().mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2()).toArray();
+        return this.mObjectHandles.stream()
+                .mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2())
+                .toArray();
     }
 
     public int[] getPropertyCodes() {
-        return this.mPropertyCodes.stream().mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2()).toArray();
+        return this.mPropertyCodes.stream()
+                .mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2())
+                .toArray();
     }
 
     public int[] getDataTypes() {
-        return this.mDataTypes.stream().mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2()).toArray();
+        return this.mDataTypes.stream()
+                .mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2())
+                .toArray();
     }
 
     public long[] getLongValues() {
-        return this.mLongValues.stream().mapToLong(new ToLongFunction() { // from class: android.mtp.MtpPropertyList$$ExternalSyntheticLambda0
-            @Override // java.util.function.ToLongFunction
-            public final long applyAsLong(Object obj) {
-                return ((Long) obj).longValue();
-            }
-        }).toArray();
+        return this.mLongValues.stream()
+                .mapToLong(
+                        new ToLongFunction() { // from class:
+                                               // android.mtp.MtpPropertyList$$ExternalSyntheticLambda0
+                            @Override // java.util.function.ToLongFunction
+                            public final long applyAsLong(Object obj) {
+                                return ((Long) obj).longValue();
+                            }
+                        })
+                .toArray();
     }
 
     public String[] getStringValues() {

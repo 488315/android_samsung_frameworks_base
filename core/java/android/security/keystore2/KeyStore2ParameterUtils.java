@@ -9,6 +9,7 @@ import android.security.GateKeeper;
 import android.security.keymaster.KeymasterDefs;
 import android.security.keystore.UserAuthArgs;
 import android.system.keystore2.Authorization;
+
 import java.math.BigInteger;
 import java.security.ProviderException;
 import java.util.ArrayList;
@@ -134,7 +135,8 @@ public abstract class KeyStore2ParameterUtils {
             throw new IllegalArgumentException("Not a date tag: " + param.keyParameter.tag);
         }
         if (param.keyParameter.value.getDateTime() < 0) {
-            throw new IllegalArgumentException("Date Value too large: " + param.keyParameter.value.getDateTime());
+            throw new IllegalArgumentException(
+                    "Date Value too large: " + param.keyParameter.value.getDateTime());
         }
         return new Date(param.keyParameter.value.getDateTime());
     }
@@ -153,7 +155,9 @@ public abstract class KeyStore2ParameterUtils {
     private static long getRootSid() {
         long rootSid = GateKeeper.getSecureUserId();
         if (rootSid == 0) {
-            throw new IllegalStateException("Secure lock screen must be enabled to create keys requiring user authentication");
+            throw new IllegalStateException(
+                    "Secure lock screen must be enabled to create keys requiring user"
+                        + " authentication");
         }
         return rootSid;
     }
@@ -170,10 +174,15 @@ public abstract class KeyStore2ParameterUtils {
         }
         List<Long> sids = new ArrayList<>();
         if ((spec.getUserAuthenticationType() & 2) != 0) {
-            BiometricManager bm = (BiometricManager) AppGlobals.getInitialApplication().getSystemService(BiometricManager.class);
+            BiometricManager bm =
+                    (BiometricManager)
+                            AppGlobals.getInitialApplication()
+                                    .getSystemService(BiometricManager.class);
             long[] biometricSids = bm.getAuthenticatorIds();
             if (biometricSids.length == 0) {
-                throw new IllegalStateException("At least one biometric must be enrolled to create keys requiring user authentication for every use");
+                throw new IllegalStateException(
+                        "At least one biometric must be enrolled to create keys requiring user"
+                            + " authentication for every use");
             }
             if (spec.getBoundToSpecificSecureUserId() != 0) {
                 sids.add(Long.valueOf(spec.getBoundToSpecificSecureUserId()));
@@ -215,7 +224,9 @@ public abstract class KeyStore2ParameterUtils {
         }
         if (spec.isUserAuthenticationValidWhileOnBody()) {
             if (spec.getUserAuthenticationValidityDurationSeconds() == 0) {
-                throw new ProviderException("Key validity extension while device is on-body is not supported for keys requiring fingerprint authentication");
+                throw new ProviderException(
+                        "Key validity extension while device is on-body is not supported for keys"
+                            + " requiring fingerprint authentication");
             }
             args.add(makeBool(1879048698));
         }

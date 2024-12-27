@@ -3,24 +3,28 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class ImsSuppServiceNotification implements Parcelable {
-    public static final Parcelable.Creator<ImsSuppServiceNotification> CREATOR = new Parcelable.Creator<ImsSuppServiceNotification>() { // from class: android.telephony.ims.ImsSuppServiceNotification.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsSuppServiceNotification createFromParcel(Parcel in) {
-            return new ImsSuppServiceNotification(in);
-        }
+    public static final Parcelable.Creator<ImsSuppServiceNotification> CREATOR =
+            new Parcelable.Creator<
+                    ImsSuppServiceNotification>() { // from class:
+                                                    // android.telephony.ims.ImsSuppServiceNotification.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsSuppServiceNotification createFromParcel(Parcel in) {
+                    return new ImsSuppServiceNotification(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsSuppServiceNotification[] newArray(int size) {
-            return new ImsSuppServiceNotification[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsSuppServiceNotification[] newArray(int size) {
+                    return new ImsSuppServiceNotification[size];
+                }
+            };
     private static final String TAG = "ImsSuppServiceNotification";
     public final int code;
     public final String[] history;
@@ -29,7 +33,8 @@ public final class ImsSuppServiceNotification implements Parcelable {
     public final String number;
     public final int type;
 
-    public ImsSuppServiceNotification(int notificationType, int code, int index, int type, String number, String[] history) {
+    public ImsSuppServiceNotification(
+            int notificationType, int code, int index, int type, String number, String[] history) {
         this.notificationType = notificationType;
         this.code = code;
         this.index = index;
@@ -48,7 +53,19 @@ public final class ImsSuppServiceNotification implements Parcelable {
     }
 
     public String toString() {
-        return "{ notificationType=" + this.notificationType + ", code=" + this.code + ", index=" + this.index + ", type=" + this.type + ", number=" + this.number + ", history=" + Arrays.toString(this.history) + " }";
+        return "{ notificationType="
+                + this.notificationType
+                + ", code="
+                + this.code
+                + ", index="
+                + this.index
+                + ", type="
+                + this.type
+                + ", number="
+                + this.number
+                + ", history="
+                + Arrays.toString(this.history)
+                + " }";
     }
 
     @Override // android.os.Parcelable

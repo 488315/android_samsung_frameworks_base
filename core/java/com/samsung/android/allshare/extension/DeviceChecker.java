@@ -3,9 +3,11 @@ package com.samsung.android.allshare.extension;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+
 import com.samsung.android.allshare.DLog;
 import com.samsung.android.allshare.Device;
 import com.samsung.android.allshare.media.AVPlayer;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -25,7 +27,8 @@ public class DeviceChecker {
             return false;
         }
         try {
-            Context server = context.createPackageContext("com.samsung.android.nearby.mediaserver", 2);
+            Context server =
+                    context.createPackageContext("com.samsung.android.nearby.mediaserver", 2);
             if (server != null) {
                 SharedPreferences preference = server.getSharedPreferences(PREFERENCE, 5);
                 String udn = preference.getString(KEY_UDN, "");
@@ -44,15 +47,18 @@ public class DeviceChecker {
         return getDeviceCheckedList(deviceList, null, null);
     }
 
-    public static ArrayList<Device> getDeviceCheckedList(ArrayList<Device> deviceList, String avPlayerType) {
+    public static ArrayList<Device> getDeviceCheckedList(
+            ArrayList<Device> deviceList, String avPlayerType) {
         return getDeviceCheckedList(deviceList, null, avPlayerType);
     }
 
-    public static ArrayList<Device> getDeviceCheckedList(ArrayList<Device> deviceList, Context context) {
+    public static ArrayList<Device> getDeviceCheckedList(
+            ArrayList<Device> deviceList, Context context) {
         return getDeviceCheckedList(deviceList, context, null);
     }
 
-    private static ArrayList<Device> getDeviceCheckedList(ArrayList<Device> deviceList, Context context, String avPlayerType) {
+    private static ArrayList<Device> getDeviceCheckedList(
+            ArrayList<Device> deviceList, Context context, String avPlayerType) {
         DLog.v_api(TAG_CLASS, "getDeviceCheckedList()");
         ArrayList<Device> adaptiveList = new ArrayList<>();
         ArrayList<Device> wlanDeviceList = new ArrayList<>();
@@ -71,10 +77,20 @@ public class DeviceChecker {
                         id = id.substring(0, point);
                     }
                     deviceUDN.add(id);
-                    if (avPlayerType == null || ((device instanceof AVPlayer) && ((AVPLAYER_VIDEO.equals(avPlayerType) && ((AVPlayer) device).isSupportVideo()) || (AVPLAYER_AUDIO.equals(avPlayerType) && ((AVPlayer) device).isSupportAudio())))) {
+                    if (avPlayerType == null
+                            || ((device instanceof AVPlayer)
+                                    && ((AVPLAYER_VIDEO.equals(avPlayerType)
+                                                    && ((AVPlayer) device).isSupportVideo())
+                                            || (AVPLAYER_AUDIO.equals(avPlayerType)
+                                                    && ((AVPlayer) device).isSupportAudio())))) {
                         adaptiveList.add(device);
                     }
-                } else if (avPlayerType == null || ((device instanceof AVPlayer) && ((AVPLAYER_VIDEO.equals(avPlayerType) && ((AVPlayer) device).isSupportVideo()) || (AVPLAYER_AUDIO.equals(avPlayerType) && ((AVPlayer) device).isSupportAudio())))) {
+                } else if (avPlayerType == null
+                        || ((device instanceof AVPlayer)
+                                && ((AVPLAYER_VIDEO.equals(avPlayerType)
+                                                && ((AVPlayer) device).isSupportVideo())
+                                        || (AVPLAYER_AUDIO.equals(avPlayerType)
+                                                && ((AVPlayer) device).isSupportAudio())))) {
                     wlanDeviceList.add(device);
                 }
             }
@@ -97,62 +113,64 @@ public class DeviceChecker {
                 adaptiveList.add(device2);
             }
         }
-        DLog.i_api(TAG_CLASS, "getDeviceCheckedList() with CONCURRENT_MODE count:" + adaptiveList.size());
+        DLog.i_api(
+                TAG_CLASS,
+                "getDeviceCheckedList() with CONCURRENT_MODE count:" + adaptiveList.size());
         return adaptiveList;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:21:0x004d, code lost:
-    
-        r7 = r6[3];
-     */
+
+       r7 = r6[3];
+    */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x0056, code lost:
-    
-        if (r7.matches("..:..:..:..:..:..") == false) goto L67;
-     */
+
+       if (r7.matches("..:..:..:..:..:..") == false) goto L67;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0058, code lost:
-    
-        r3 = r7.trim();
-     */
+
+       r3 = r7.trim();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x005e, code lost:
-    
-        r4.close();
-     */
+
+       r4.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0067, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x0068, code lost:
-    
-        com.samsung.android.allshare.DLog.w_api(com.samsung.android.allshare.extension.DeviceChecker.TAG_CLASS, "getMacAddrFromArpTable br.close() IOE", r0);
-     */
+
+       com.samsung.android.allshare.DLog.w_api(com.samsung.android.allshare.extension.DeviceChecker.TAG_CLASS, "getMacAddrFromArpTable br.close() IOE", r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x0062, code lost:
-    
-        r1 = move-exception;
-     */
+
+       r1 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:32:0x0063, code lost:
-    
-        com.samsung.android.allshare.DLog.w_api(com.samsung.android.allshare.extension.DeviceChecker.TAG_CLASS, "getMacAddrFromArpTable br.close() E", r1);
-     */
+
+       com.samsung.android.allshare.DLog.w_api(com.samsung.android.allshare.extension.DeviceChecker.TAG_CLASS, "getMacAddrFromArpTable br.close() E", r1);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x006f, code lost:
-    
-        r4.close();
-     */
+
+       r4.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0078, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0079, code lost:
-    
-        com.samsung.android.allshare.DLog.w_api(com.samsung.android.allshare.extension.DeviceChecker.TAG_CLASS, "getMacAddrFromArpTable br.close() IOE", r0);
-     */
+
+       com.samsung.android.allshare.DLog.w_api(com.samsung.android.allshare.extension.DeviceChecker.TAG_CLASS, "getMacAddrFromArpTable br.close() IOE", r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x0073, code lost:
-    
-        r1 = move-exception;
-     */
+
+       r1 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0074, code lost:
-    
-        com.samsung.android.allshare.DLog.w_api(com.samsung.android.allshare.extension.DeviceChecker.TAG_CLASS, "getMacAddrFromArpTable br.close() E", r1);
-     */
+
+       com.samsung.android.allshare.DLog.w_api(com.samsung.android.allshare.extension.DeviceChecker.TAG_CLASS, "getMacAddrFromArpTable br.close() E", r1);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -267,6 +285,8 @@ public class DeviceChecker {
         L9e:
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.allshare.extension.DeviceChecker.getMacAddrFromArpTable(java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.allshare.extension.DeviceChecker.getMacAddrFromArpTable(java.lang.String):java.lang.String");
     }
 }

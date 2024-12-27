@@ -7,7 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
-import com.samsung.android.sepunion.IDeviceInfoManager;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -51,7 +51,8 @@ public class SemEventDelegationManager {
             if (sService != null) {
                 return sService;
             }
-            SemUnionManager um = (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
+            SemUnionManager um =
+                    (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
             IBinder b = um.getSemSystemService("semeventdelegator");
             sService = IDeviceInfoManager.Stub.asInterface(b);
             return sService;
@@ -59,10 +60,12 @@ public class SemEventDelegationManager {
     }
 
     public void registerContentUri(Uri uri, PendingIntent pendingIntent) {
-        registerContentUriAsUser(uri, pendingIntent, this.mContext.getOpPackageName(), this.mContext.getUserId());
+        registerContentUriAsUser(
+                uri, pendingIntent, this.mContext.getOpPackageName(), this.mContext.getUserId());
     }
 
-    private void registerContentUriAsUser(Uri uri, PendingIntent pendingIntent, String packageName, int userId) {
+    private void registerContentUriAsUser(
+            Uri uri, PendingIntent pendingIntent, String packageName, int userId) {
         try {
             IDeviceInfoManager service = getService();
             if (service != null) {
@@ -75,14 +78,17 @@ public class SemEventDelegationManager {
 
     @Deprecated
     public void registerIntentFilter(IntentFilter filter, PendingIntent pendingIntent) {
-        registerIntentFilterAsUser(filter, pendingIntent, this.mContext.getOpPackageName(), this.mContext.getUserId());
+        registerIntentFilterAsUser(
+                filter, pendingIntent, this.mContext.getOpPackageName(), this.mContext.getUserId());
     }
 
-    private void registerIntentFilterAsUser(IntentFilter filter, PendingIntent pendingIntent, String packageName, int userId) {
+    private void registerIntentFilterAsUser(
+            IntentFilter filter, PendingIntent pendingIntent, String packageName, int userId) {
         try {
             IDeviceInfoManager service = getService();
             if (service != null) {
-                service.registerPendingIntentForIntentAsUser(filter, pendingIntent, packageName, userId);
+                service.registerPendingIntentForIntentAsUser(
+                        filter, pendingIntent, packageName, userId);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -93,22 +99,40 @@ public class SemEventDelegationManager {
         try {
             IDeviceInfoManager service = getService();
             if (service != null) {
-                service.registerPendingIntentForIntentForAllUsers(filter, pendingIntent, this.mContext.getOpPackageName(), this.mContext.getUserId());
+                service.registerPendingIntentForIntentForAllUsers(
+                        filter,
+                        pendingIntent,
+                        this.mContext.getOpPackageName(),
+                        this.mContext.getUserId());
             }
         } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
 
-    public void registerPendingIntent(IntentFilter filter, PendingIntent pendingIntent, int flag, List<String> conditions) {
-        registerPendingIntent(filter, pendingIntent, flag, conditions, this.mContext.getOpPackageName(), this.mContext.getUserId());
+    public void registerPendingIntent(
+            IntentFilter filter, PendingIntent pendingIntent, int flag, List<String> conditions) {
+        registerPendingIntent(
+                filter,
+                pendingIntent,
+                flag,
+                conditions,
+                this.mContext.getOpPackageName(),
+                this.mContext.getUserId());
     }
 
-    private void registerPendingIntent(IntentFilter filter, PendingIntent pendingIntent, int flag, List<String> conditions, String packageName, int userId) {
+    private void registerPendingIntent(
+            IntentFilter filter,
+            PendingIntent pendingIntent,
+            int flag,
+            List<String> conditions,
+            String packageName,
+            int userId) {
         try {
             IDeviceInfoManager service = getService();
             if (service != null) {
-                service.registerPendingIntent(filter, pendingIntent, flag, conditions, packageName, userId);
+                service.registerPendingIntent(
+                        filter, pendingIntent, flag, conditions, packageName, userId);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -116,10 +140,12 @@ public class SemEventDelegationManager {
     }
 
     public void unregisterPendingIntent(IntentFilter filter, PendingIntent pendingIntent) {
-        unregisterPendingIntent(filter, pendingIntent, this.mContext.getOpPackageName(), this.mContext.getUserId());
+        unregisterPendingIntent(
+                filter, pendingIntent, this.mContext.getOpPackageName(), this.mContext.getUserId());
     }
 
-    private void unregisterPendingIntent(IntentFilter filter, PendingIntent pendingIntent, String packageName, int userId) {
+    private void unregisterPendingIntent(
+            IntentFilter filter, PendingIntent pendingIntent, String packageName, int userId) {
         try {
             IDeviceInfoManager service = getService();
             if (service != null) {
@@ -131,14 +157,25 @@ public class SemEventDelegationManager {
     }
 
     public void registerCustomEvent(String event, PendingIntent pendingIntent, Bundle bundle) {
-        registerCustomEventAsUser(event, pendingIntent, bundle, this.mContext.getOpPackageName(), this.mContext.getUserId());
+        registerCustomEventAsUser(
+                event,
+                pendingIntent,
+                bundle,
+                this.mContext.getOpPackageName(),
+                this.mContext.getUserId());
     }
 
-    private void registerCustomEventAsUser(String event, PendingIntent pendingIntent, Bundle bundle, String packageName, int userId) {
+    private void registerCustomEventAsUser(
+            String event,
+            PendingIntent pendingIntent,
+            Bundle bundle,
+            String packageName,
+            int userId) {
         try {
             IDeviceInfoManager service = getService();
             if (service != null) {
-                service.registerPendingIntentForCustomEventAsUser(event, pendingIntent, bundle, packageName, userId);
+                service.registerPendingIntentForCustomEventAsUser(
+                        event, pendingIntent, bundle, packageName, userId);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -146,14 +183,17 @@ public class SemEventDelegationManager {
     }
 
     public void unregisterContentUri(Uri uri, PendingIntent pendingIntent) {
-        unregisterContentUriAsUser(uri, pendingIntent, this.mContext.getOpPackageName(), this.mContext.getUserId());
+        unregisterContentUriAsUser(
+                uri, pendingIntent, this.mContext.getOpPackageName(), this.mContext.getUserId());
     }
 
-    private void unregisterContentUriAsUser(Uri uri, PendingIntent pendingIntent, String packageName, int userId) {
+    private void unregisterContentUriAsUser(
+            Uri uri, PendingIntent pendingIntent, String packageName, int userId) {
         try {
             IDeviceInfoManager service = getService();
             if (service != null) {
-                service.unregisterPendingIntentForUriAsUser(uri, pendingIntent, packageName, userId);
+                service.unregisterPendingIntentForUriAsUser(
+                        uri, pendingIntent, packageName, userId);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -162,14 +202,17 @@ public class SemEventDelegationManager {
 
     @Deprecated
     public void unregisterIntentFilter(IntentFilter filter, PendingIntent pendingIntent) {
-        unregisterIntentFilterAsUser(filter, pendingIntent, this.mContext.getOpPackageName(), this.mContext.getUserId());
+        unregisterIntentFilterAsUser(
+                filter, pendingIntent, this.mContext.getOpPackageName(), this.mContext.getUserId());
     }
 
-    private void unregisterIntentFilterAsUser(IntentFilter filter, PendingIntent pendingIntent, String packageName, int userId) {
+    private void unregisterIntentFilterAsUser(
+            IntentFilter filter, PendingIntent pendingIntent, String packageName, int userId) {
         try {
             IDeviceInfoManager service = getService();
             if (service != null) {
-                service.unregisterPendingIntentForIntentAsUser(filter, pendingIntent, packageName, userId);
+                service.unregisterPendingIntentForIntentAsUser(
+                        filter, pendingIntent, packageName, userId);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -177,14 +220,25 @@ public class SemEventDelegationManager {
     }
 
     public void unregisterCustomEvent(String event, PendingIntent pendingIntent, Bundle bundle) {
-        unregisterCustomEventAsUser(event, pendingIntent, bundle, this.mContext.getOpPackageName(), this.mContext.getUserId());
+        unregisterCustomEventAsUser(
+                event,
+                pendingIntent,
+                bundle,
+                this.mContext.getOpPackageName(),
+                this.mContext.getUserId());
     }
 
-    private void unregisterCustomEventAsUser(String event, PendingIntent pendingIntent, Bundle bundle, String packageName, int userId) {
+    private void unregisterCustomEventAsUser(
+            String event,
+            PendingIntent pendingIntent,
+            Bundle bundle,
+            String packageName,
+            int userId) {
         try {
             IDeviceInfoManager service = getService();
             if (service != null) {
-                service.unregisterPendingIntentForCustomEventAsUser(event, pendingIntent, bundle, packageName, userId);
+                service.unregisterPendingIntentForCustomEventAsUser(
+                        event, pendingIntent, bundle, packageName, userId);
             }
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -207,7 +261,8 @@ public class SemEventDelegationManager {
     }
 
     public int getNumPendingIntent(int type) {
-        return getNumPendingIntentAsUser(type, this.mContext.getOpPackageName(), this.mContext.getUserId());
+        return getNumPendingIntentAsUser(
+                type, this.mContext.getOpPackageName(), this.mContext.getUserId());
     }
 
     private int getNumPendingIntentAsUser(int type, String packageName, int userId) {

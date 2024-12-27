@@ -22,7 +22,8 @@ public class X962Parameters extends ASN1Object implements ASN1Choice {
             try {
                 return new X962Parameters(ASN1Primitive.fromByteArray((byte[]) obj));
             } catch (Exception e) {
-                throw new IllegalArgumentException("unable to parse encoded data: " + e.getMessage());
+                throw new IllegalArgumentException(
+                        "unable to parse encoded data: " + e.getMessage());
             }
         }
         throw new IllegalArgumentException("unknown object in getInstance()");
@@ -64,7 +65,8 @@ public class X962Parameters extends ASN1Object implements ASN1Choice {
         return this.params;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.params;
     }

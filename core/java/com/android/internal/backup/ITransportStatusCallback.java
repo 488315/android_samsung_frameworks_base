@@ -16,12 +16,10 @@ public interface ITransportStatusCallback extends IInterface {
 
     public static class Default implements ITransportStatusCallback {
         @Override // com.android.internal.backup.ITransportStatusCallback
-        public void onOperationCompleteWithStatus(int status) throws RemoteException {
-        }
+        public void onOperationCompleteWithStatus(int status) throws RemoteException {}
 
         @Override // com.android.internal.backup.ITransportStatusCallback
-        public void onOperationComplete() throws RemoteException {
-        }
+        public void onOperationComplete() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ITransportStatusCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITransportStatusCallback {
+    public abstract static class Stub extends Binder implements ITransportStatusCallback {
         static final int TRANSACTION_onOperationComplete = 2;
         static final int TRANSACTION_onOperationCompleteWithStatus = 1;
 
@@ -70,7 +68,8 @@ public interface ITransportStatusCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITransportStatusCallback.DESCRIPTOR);
             }

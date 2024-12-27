@@ -2,6 +2,7 @@ package com.android.server.display;
 
 import android.hardware.display.DisplayManagerInternal;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.display.utils.DebugUtils;
 
@@ -28,17 +29,29 @@ public final class WakelockController {
     public final String mTag;
     public boolean mUnfinishedBusiness;
 
-    public WakelockController(int i, DisplayManagerInternal.DisplayPowerCallbacks displayPowerCallbacks) {
+    public WakelockController(
+            int i, DisplayManagerInternal.DisplayPowerCallbacks displayPowerCallbacks) {
         this.mDisplayId = i;
-        this.mTag = BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "WakelockController[", "]");
+        this.mTag =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        i, "WakelockController[", "]");
         this.mDisplayPowerCallbacks = displayPowerCallbacks;
-        this.mSuspendBlockerIdUnfinishedBusiness = BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]unfinished business");
-        this.mSuspendBlockerIdOnStateChanged = BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]on state changed");
-        this.mSuspendBlockerIdProxPositive = BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]prox positive");
-        this.mSuspendBlockerIdProxNegative = BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]prox negative");
-        this.mSuspendBlockerIdProxDebounce = BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]prox debounce");
-        this.mSuspendBlockerIdRefreshRate = BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]vrr ramp animation");
-        this.mSuspendBlockerIdEarlyWakeup = BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]early wakeup");
+        this.mSuspendBlockerIdUnfinishedBusiness =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        i, "[", "]unfinished business");
+        this.mSuspendBlockerIdOnStateChanged =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]on state changed");
+        this.mSuspendBlockerIdProxPositive =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]prox positive");
+        this.mSuspendBlockerIdProxNegative =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]prox negative");
+        this.mSuspendBlockerIdProxDebounce =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]prox debounce");
+        this.mSuspendBlockerIdRefreshRate =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        i, "[", "]vrr ramp animation");
+        this.mSuspendBlockerIdEarlyWakeup =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "[", "]early wakeup");
     }
 
     public final boolean acquireWakelock(int i) {
@@ -47,7 +60,8 @@ public final class WakelockController {
         switch (i) {
             case 1:
                 if (!this.mIsProximityPositiveAcquired) {
-                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(this.mSuspendBlockerIdProxPositive);
+                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(
+                            this.mSuspendBlockerIdProxPositive);
                     this.mIsProximityPositiveAcquired = true;
                     break;
                 } else {
@@ -55,7 +69,8 @@ public final class WakelockController {
                 }
             case 2:
                 if (!this.mIsProximityNegativeAcquired) {
-                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(this.mSuspendBlockerIdProxNegative);
+                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(
+                            this.mSuspendBlockerIdProxNegative);
                     this.mIsProximityNegativeAcquired = true;
                     break;
                 } else {
@@ -63,7 +78,8 @@ public final class WakelockController {
                 }
             case 3:
                 if (!this.mHasProximityDebounced) {
-                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(this.mSuspendBlockerIdProxDebounce);
+                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(
+                            this.mSuspendBlockerIdProxDebounce);
                     this.mHasProximityDebounced = true;
                     break;
                 } else {
@@ -74,7 +90,8 @@ public final class WakelockController {
                     if (z) {
                         Slog.d(str, "State Changed...");
                     }
-                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(this.mSuspendBlockerIdOnStateChanged);
+                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(
+                            this.mSuspendBlockerIdOnStateChanged);
                     this.mOnStateChangedPending = true;
                     break;
                 } else {
@@ -85,7 +102,8 @@ public final class WakelockController {
                     if (z) {
                         Slog.d(str, "Unfinished business...");
                     }
-                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(this.mSuspendBlockerIdUnfinishedBusiness);
+                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(
+                            this.mSuspendBlockerIdUnfinishedBusiness);
                     this.mUnfinishedBusiness = true;
                     break;
                 } else {
@@ -93,7 +111,8 @@ public final class WakelockController {
                 }
             case 6:
                 if (!this.mIsRefreshRateRequested) {
-                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(this.mSuspendBlockerIdRefreshRate);
+                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(
+                            this.mSuspendBlockerIdRefreshRate);
                     this.mIsRefreshRateRequested = true;
                     break;
                 } else {
@@ -101,7 +120,8 @@ public final class WakelockController {
                 }
             case 7:
                 if (!this.mIsEarlyWakeupRequested) {
-                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(this.mSuspendBlockerIdEarlyWakeup);
+                    this.mDisplayPowerCallbacks.acquireSuspendBlocker(
+                            this.mSuspendBlockerIdEarlyWakeup);
                     this.mIsEarlyWakeupRequested = true;
                     break;
                 } else {
@@ -167,28 +187,32 @@ public final class WakelockController {
                 if (!this.mIsProximityPositiveAcquired) {
                     return false;
                 }
-                this.mDisplayPowerCallbacks.releaseSuspendBlocker(this.mSuspendBlockerIdProxPositive);
+                this.mDisplayPowerCallbacks.releaseSuspendBlocker(
+                        this.mSuspendBlockerIdProxPositive);
                 this.mIsProximityPositiveAcquired = false;
                 return true;
             case 2:
                 if (!this.mIsProximityNegativeAcquired) {
                     return false;
                 }
-                this.mDisplayPowerCallbacks.releaseSuspendBlocker(this.mSuspendBlockerIdProxNegative);
+                this.mDisplayPowerCallbacks.releaseSuspendBlocker(
+                        this.mSuspendBlockerIdProxNegative);
                 this.mIsProximityNegativeAcquired = false;
                 return true;
             case 3:
                 if (!this.mHasProximityDebounced) {
                     return false;
                 }
-                this.mDisplayPowerCallbacks.releaseSuspendBlocker(this.mSuspendBlockerIdProxDebounce);
+                this.mDisplayPowerCallbacks.releaseSuspendBlocker(
+                        this.mSuspendBlockerIdProxDebounce);
                 this.mHasProximityDebounced = false;
                 return true;
             case 4:
                 if (!this.mOnStateChangedPending) {
                     return false;
                 }
-                this.mDisplayPowerCallbacks.releaseSuspendBlocker(this.mSuspendBlockerIdOnStateChanged);
+                this.mDisplayPowerCallbacks.releaseSuspendBlocker(
+                        this.mSuspendBlockerIdOnStateChanged);
                 this.mOnStateChangedPending = false;
                 return true;
             case 5:
@@ -198,21 +222,24 @@ public final class WakelockController {
                 if (DEBUG) {
                     Slog.d(this.mTag, "Finished business...");
                 }
-                this.mDisplayPowerCallbacks.releaseSuspendBlocker(this.mSuspendBlockerIdUnfinishedBusiness);
+                this.mDisplayPowerCallbacks.releaseSuspendBlocker(
+                        this.mSuspendBlockerIdUnfinishedBusiness);
                 this.mUnfinishedBusiness = false;
                 return true;
             case 6:
                 if (!this.mIsRefreshRateRequested) {
                     return false;
                 }
-                this.mDisplayPowerCallbacks.releaseSuspendBlocker(this.mSuspendBlockerIdRefreshRate);
+                this.mDisplayPowerCallbacks.releaseSuspendBlocker(
+                        this.mSuspendBlockerIdRefreshRate);
                 this.mIsRefreshRateRequested = false;
                 return true;
             case 7:
                 if (!this.mIsEarlyWakeupRequested) {
                     return false;
                 }
-                this.mDisplayPowerCallbacks.releaseSuspendBlocker(this.mSuspendBlockerIdEarlyWakeup);
+                this.mDisplayPowerCallbacks.releaseSuspendBlocker(
+                        this.mSuspendBlockerIdEarlyWakeup);
                 this.mIsEarlyWakeupRequested = false;
                 return true;
             default:

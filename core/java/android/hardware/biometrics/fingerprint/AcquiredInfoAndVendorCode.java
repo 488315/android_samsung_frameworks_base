@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class AcquiredInfoAndVendorCode implements Parcelable {
-    public static final Parcelable.Creator<AcquiredInfoAndVendorCode> CREATOR = new Parcelable.Creator<AcquiredInfoAndVendorCode>() { // from class: android.hardware.biometrics.fingerprint.AcquiredInfoAndVendorCode.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AcquiredInfoAndVendorCode createFromParcel(Parcel _aidl_source) {
-            return new AcquiredInfoAndVendorCode(_aidl_source);
-        }
+    public static final Parcelable.Creator<AcquiredInfoAndVendorCode> CREATOR =
+            new Parcelable.Creator<AcquiredInfoAndVendorCode>() { // from class:
+                // android.hardware.biometrics.fingerprint.AcquiredInfoAndVendorCode.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AcquiredInfoAndVendorCode createFromParcel(Parcel _aidl_source) {
+                    return new AcquiredInfoAndVendorCode(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AcquiredInfoAndVendorCode[] newArray(int _aidl_size) {
-            return new AcquiredInfoAndVendorCode[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AcquiredInfoAndVendorCode[] newArray(int _aidl_size) {
+                    return new AcquiredInfoAndVendorCode[_aidl_size];
+                }
+            };
     public static final int acquiredInfo = 0;
     public static final int vendorCode = 1;
     private int _tag;
@@ -114,7 +116,12 @@ public final class AcquiredInfoAndVendorCode implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

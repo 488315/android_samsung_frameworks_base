@@ -2,6 +2,7 @@ package android.hardware.camera2.params;
 
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.util.Size;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes2.dex */
@@ -53,7 +54,10 @@ public class StreamConfiguration {
             return false;
         }
         StreamConfiguration other = (StreamConfiguration) obj;
-        if (this.mFormat != other.mFormat || this.mWidth != other.mWidth || this.mHeight != other.mHeight || this.mInput != other.mInput) {
+        if (this.mFormat != other.mFormat
+                || this.mWidth != other.mWidth
+                || this.mHeight != other.mHeight
+                || this.mInput != other.mInput) {
             return false;
         }
         return true;

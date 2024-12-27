@@ -19,10 +19,12 @@ public class ASN1Boolean extends ASN1Primitive {
             try {
                 return (ASN1Boolean) fromByteArray(enc);
             } catch (IOException e) {
-                throw new IllegalArgumentException("failed to construct boolean from byte[]: " + e.getMessage());
+                throw new IllegalArgumentException(
+                        "failed to construct boolean from byte[]: " + e.getMessage());
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public static ASN1Boolean getInstance(boolean value) {
@@ -77,7 +79,8 @@ public class ASN1Boolean extends ASN1Primitive {
         return isTrue() == that.isTrue();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         return isTrue() ? 1 : 0;
     }

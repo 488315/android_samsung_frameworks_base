@@ -6,10 +6,12 @@ import android.content.pm.IPackageManager;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
+
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
+
 import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL10Ext;
 import javax.microedition.khronos.opengles.GL11;
@@ -67,7 +69,8 @@ public class GLImpl implements GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glBindRenderbufferOES(int i, int i2);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glBindTexture(int i, int i2);
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
@@ -139,17 +142,23 @@ public class GLImpl implements GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
     @Override // javax.microedition.khronos.opengles.GL11
     public native void glColorPointer(int i, int i2, int i3, int i4);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public native void glCompressedTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, Buffer buffer);
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
+    public native void glCompressedTexImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, Buffer buffer);
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public native void glCompressedTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
+    public native void glCompressedTexSubImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
-    public native void glCopyTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
+    public native void glCopyTexImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public native void glCopyTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
+    public native void glCopyTexSubImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8);
 
     @Override // javax.microedition.khronos.opengles.GL10
     public native void glCullFace(int i);
@@ -244,10 +253,13 @@ public class GLImpl implements GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
     @Override // javax.microedition.khronos.opengles.GL11Ext
     public native void glDrawTexxvOES(int[] iArr, int i);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11Ext, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11Ext,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glEnable(int i);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11Ext
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11Ext
     public native void glEnableClientState(int i);
 
     @Override // javax.microedition.khronos.opengles.GL10
@@ -356,15 +368,19 @@ public class GLImpl implements GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
     public native void glGetFloatv(int i, float[] fArr, int i2);
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public native void glGetFramebufferAttachmentParameterivOES(int i, int i2, int i3, IntBuffer intBuffer);
+    public native void glGetFramebufferAttachmentParameterivOES(
+            int i, int i2, int i3, IntBuffer intBuffer);
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
-    public native void glGetFramebufferAttachmentParameterivOES(int i, int i2, int i3, int[] iArr, int i4);
+    public native void glGetFramebufferAttachmentParameterivOES(
+            int i, int i2, int i3, int[] iArr, int i4);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glGetIntegerv(int i, IntBuffer intBuffer);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glGetIntegerv(int i, int[] iArr, int i2);
 
     @Override // javax.microedition.khronos.opengles.GL11
@@ -664,19 +680,23 @@ public class GLImpl implements GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
     @Override // javax.microedition.khronos.opengles.GL10
     public native void glStencilMask(int i);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glStencilOp(int i, int i2, int i3);
 
     @Override // javax.microedition.khronos.opengles.GL11
     public native void glTexCoordPointer(int i, int i2, int i3, int i4);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glTexEnvf(int i, int i2, float f);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glTexEnvfv(int i, int i2, FloatBuffer floatBuffer);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glTexEnvfv(int i, int i2, float[] fArr, int i3);
 
     @Override // javax.microedition.khronos.opengles.GL11
@@ -688,13 +708,16 @@ public class GLImpl implements GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
     @Override // javax.microedition.khronos.opengles.GL11
     public native void glTexEnviv(int i, int i2, int[] iArr, int i3);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glTexEnvx(int i, int i2, int i3);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glTexEnvxv(int i, int i2, IntBuffer intBuffer);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glTexEnvxv(int i, int i2, int[] iArr, int i3);
 
     @Override // javax.microedition.khronos.opengles.GL11ExtensionPack
@@ -725,15 +748,18 @@ public class GLImpl implements GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
     public native void glTexGenxv(int i, int i2, int[] iArr, int i3);
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public native void glTexImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
+    public native void glTexImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
 
-    @Override // javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.opengles.GL11ExtensionPack
+    @Override // javax.microedition.khronos.opengles.GL10,
+              // javax.microedition.khronos.opengles.GL11ExtensionPack
     public native void glTexParameterf(int i, int i2, float f);
 
     @Override // javax.microedition.khronos.opengles.GL11
     public native void glTexParameterfv(int i, int i2, FloatBuffer floatBuffer);
 
-    @Override // javax.microedition.khronos.opengles.GL11, javax.microedition.khronos.opengles.GL11Ext
+    @Override // javax.microedition.khronos.opengles.GL11,
+              // javax.microedition.khronos.opengles.GL11Ext
     public native void glTexParameterfv(int i, int i2, float[] fArr, int i3);
 
     @Override // javax.microedition.khronos.opengles.GL11
@@ -755,7 +781,8 @@ public class GLImpl implements GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
     public native void glTexParameterxv(int i, int i2, int[] iArr, int i3);
 
     @Override // javax.microedition.khronos.opengles.GL10
-    public native void glTexSubImage2D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
+    public native void glTexSubImage2D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
 
     @Override // javax.microedition.khronos.opengles.GL10
     public native void glTranslatef(float f, float f2, float f3);
@@ -785,13 +812,19 @@ public class GLImpl implements GL10, GL10Ext, GL11, GL11Ext, GL11ExtensionPack {
         int version = 0;
         IPackageManager pm = AppGlobals.getPackageManager();
         try {
-            ApplicationInfo applicationInfo = pm.getApplicationInfo(appName, 0L, UserHandle.myUserId());
+            ApplicationInfo applicationInfo =
+                    pm.getApplicationInfo(appName, 0L, UserHandle.myUserId());
             if (applicationInfo != null) {
                 version = applicationInfo.targetSdkVersion;
             }
         } catch (RemoteException e) {
         }
-        Log.e("OpenGLES", String.format("Application %s (SDK target %d) called a GL11 Pointer method with an indirect Buffer.", appName, Integer.valueOf(version)));
+        Log.e(
+                "OpenGLES",
+                String.format(
+                        "Application %s (SDK target %d) called a GL11 Pointer method with an"
+                            + " indirect Buffer.",
+                        appName, Integer.valueOf(version)));
         if (version > 3) {
             return false;
         }

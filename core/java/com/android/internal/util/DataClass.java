@@ -10,21 +10,30 @@ import java.lang.annotation.Target;
 /* loaded from: classes5.dex */
 public @interface DataClass {
 
-    @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
+    @Target({
+        ElementType.FIELD,
+        ElementType.METHOD,
+        ElementType.PARAMETER,
+        ElementType.LOCAL_VARIABLE
+    })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Each {
-    }
+    public @interface Each {}
 
     @Target({ElementType.METHOD})
     @Deprecated
     @Retention(RetentionPolicy.SOURCE)
     public @interface Generated {
 
-        @Target({ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.TYPE})
+        @Target({
+            ElementType.FIELD,
+            ElementType.METHOD,
+            ElementType.ANNOTATION_TYPE,
+            ElementType.CONSTRUCTOR,
+            ElementType.TYPE
+        })
         @Deprecated
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Member {
-        }
+        public @interface Member {}
 
         String codegenVersion();
 
@@ -37,8 +46,7 @@ public @interface DataClass {
 
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MaySetToNull {
-    }
+    public @interface MaySetToNull {}
 
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.SOURCE)
@@ -68,8 +76,7 @@ public @interface DataClass {
 
     @Target({ElementType.FIELD})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SuppressConstDefsGeneration {
-    }
+    public @interface SuppressConstDefsGeneration {}
 
     boolean genAidl() default false;
 

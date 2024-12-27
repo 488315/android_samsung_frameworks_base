@@ -11,11 +11,13 @@ import android.os.PowerManager;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.am.mars.MARsFreezeStateRecord$$ExternalSyntheticOutline0;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -68,7 +70,7 @@ public final class WpcAuthenticator {
             WAIT_CERT_CHAIN = authStatus3;
             AuthStatus authStatus4 = new AuthStatus("WAIT_CHALLENGE_AUTH", 3);
             WAIT_CHALLENGE_AUTH = authStatus4;
-            $VALUES = new AuthStatus[]{authStatus, authStatus2, authStatus3, authStatus4};
+            $VALUES = new AuthStatus[] {authStatus, authStatus2, authStatus3, authStatus4};
         }
 
         public static AuthStatus valueOf(String str) {
@@ -84,8 +86,7 @@ public final class WpcAuthenticator {
     public final class BatteryEventReceiver extends BroadcastReceiver {
         public boolean isAttachedAuthPad = false;
 
-        public BatteryEventReceiver() {
-        }
+        public BatteryEventReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -99,10 +100,15 @@ public final class WpcAuthenticator {
             sb.append(", misc_event: ");
             sb.append(intExtra);
             sb.append(", plug event: ");
-            SystemServiceManager$$ExternalSyntheticOutline0.m(sb, intExtra2, "BattAuthManager_WpcAuthenticator");
+            SystemServiceManager$$ExternalSyntheticOutline0.m(
+                    sb, intExtra2, "BattAuthManager_WpcAuthenticator");
             if ((intExtra & 512) == 512) {
                 try {
-                    bufferedReader = new BufferedReader(new FileReader("/sys/class/power_supply/battery/wpc_auth_mode", StandardCharsets.UTF_8));
+                    bufferedReader =
+                            new BufferedReader(
+                                    new FileReader(
+                                            "/sys/class/power_supply/battery/wpc_auth_mode",
+                                            StandardCharsets.UTF_8));
                 } catch (IOException | NumberFormatException e) {
                     Slog.e("BattAuthManager_WpcAuthenticator", "exception in readAuthMode", e);
                 }
@@ -154,17 +160,38 @@ public final class WpcAuthenticator {
         }
 
         public static String getNameOfMsgWhat(int i) {
-            return i == 0 ? "MSG_AUTH_STOP" : 1 == i ? "MSG_AUTH_START" : 2 == i ? "MSG_AUTH_REQ_DIGEST" : 3 == i ? "MSG_AUTH_GET_AND_CHECK_DIGEST" : 4 == i ? "MSG_AUTH_REQ_CERT_CHAIN" : 5 == i ? "MSG_AUTH_GET_AND_VERIFY_CERT_CHAIN" : 7 == i ? "MSG_AUTH_REQ_CHALLENGE" : 8 == i ? "MSG_AUTH_GET_AND_VERIFY_CHALLENGE" : 1000 == i ? "MSG_AUTH_TIMEOUT" : NandswapManager$$ExternalSyntheticOutline0.m(i, "");
+            return i == 0
+                    ? "MSG_AUTH_STOP"
+                    : 1 == i
+                            ? "MSG_AUTH_START"
+                            : 2 == i
+                                    ? "MSG_AUTH_REQ_DIGEST"
+                                    : 3 == i
+                                            ? "MSG_AUTH_GET_AND_CHECK_DIGEST"
+                                            : 4 == i
+                                                    ? "MSG_AUTH_REQ_CERT_CHAIN"
+                                                    : 5 == i
+                                                            ? "MSG_AUTH_GET_AND_VERIFY_CERT_CHAIN"
+                                                            : 7 == i
+                                                                    ? "MSG_AUTH_REQ_CHALLENGE"
+                                                                    : 8 == i
+                                                                            ? "MSG_AUTH_GET_AND_VERIFY_CHALLENGE"
+                                                                            : 1000 == i
+                                                                                    ? "MSG_AUTH_TIMEOUT"
+                                                                                    : NandswapManager$$ExternalSyntheticOutline0
+                                                                                            .m(
+                                                                                                    i,
+                                                                                                    "");
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:109:0x0314, code lost:
-        
-            android.util.Slog.d("BattAuthManager_WpcAuthenticator", "searchDigest, match found! " + r7);
-         */
+
+           android.util.Slog.d("BattAuthManager_WpcAuthenticator", "searchDigest, match found! " + r7);
+        */
         /* JADX WARN: Code restructure failed: missing block: B:110:0x0329, code lost:
-        
-            r8 = r5;
-         */
+
+           r8 = r5;
+        */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -175,7 +202,9 @@ public final class WpcAuthenticator {
                 Method dump skipped, instructions count: 1037
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.battauthmanager.WpcAuthenticator.WpcAuthHandler.handleMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.samsung.android.battauthmanager.WpcAuthenticator.WpcAuthHandler.handleMessage(android.os.Message):void");
         }
     }
 
@@ -187,7 +216,10 @@ public final class WpcAuthenticator {
         if (z) {
             battAuthHelper.writeDataToBattMisc(bArr);
             Base64.Encoder encoder = Base64.getEncoder();
-            String m$1 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(encoder.encodeToString(wpcAuthenticator.certChainHash), encoder.encodeToString(wpcAuthenticator.productPublicKey));
+            String m$1 =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                            encoder.encodeToString(wpcAuthenticator.certChainHash),
+                            encoder.encodeToString(wpcAuthenticator.productPublicKey));
             Path path = Paths.get("/efs/Battery/qi_digests/cached_digests", new String[0]);
             Path path2 = Paths.get("/efs/Battery/qi_digests/cached_digests.tmp", new String[0]);
             if (!Files.exists(path, new LinkOption[0])) {
@@ -202,7 +234,8 @@ public final class WpcAuthenticator {
                 Charset charset = StandardCharsets.UTF_8;
                 BufferedReader newBufferedReader = Files.newBufferedReader(path, charset);
                 try {
-                    BufferedWriter newBufferedWriter = Files.newBufferedWriter(path2, charset, StandardOpenOption.CREATE_NEW);
+                    BufferedWriter newBufferedWriter =
+                            Files.newBufferedWriter(path2, charset, StandardOpenOption.CREATE_NEW);
                     int i = 0;
                     while (true) {
                         try {
@@ -227,10 +260,15 @@ public final class WpcAuthenticator {
                     newBufferedWriter.close();
                     newBufferedReader.close();
                     try {
-                        Os.chmod("/efs/Battery/qi_digests/cached_digests", FrameworkStatsLog.HOTWORD_DETECTION_SERVICE_RESTARTED);
+                        Os.chmod(
+                                "/efs/Battery/qi_digests/cached_digests",
+                                FrameworkStatsLog.HOTWORD_DETECTION_SERVICE_RESTARTED);
                         Os.chown("/efs/Battery/qi_digests/cached_digests", 1000, 1000);
                     } catch (ErrnoException e2) {
-                        Slog.e("BattAuthManager_WpcAuthenticator", "setPermission: ErrnoException", e2);
+                        Slog.e(
+                                "BattAuthManager_WpcAuthenticator",
+                                "setPermission: ErrnoException",
+                                e2);
                     }
                 } finally {
                 }
@@ -240,13 +278,16 @@ public final class WpcAuthenticator {
         } else {
             battAuthHelper.writeDataToBattMisc(bArr2);
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m("setAuthPass, result : ", "BattAuthManager_WpcAuthenticator", z);
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                "setAuthPass, result : ", "BattAuthManager_WpcAuthenticator", z);
     }
 
     public WpcAuthenticator(Context context, Looper looper) {
         this.mAuthWakeLock = null;
         this.mWpcAuthHandler = new WpcAuthHandler(looper);
-        context.registerReceiver(new BatteryEventReceiver(), new IntentFilter("com.samsung.server.BatteryService.action.SEC_BATTERY_EVENT"));
+        context.registerReceiver(
+                new BatteryEventReceiver(),
+                new IntentFilter("com.samsung.server.BatteryService.action.SEC_BATTERY_EVENT"));
         PowerManager powerManager = (PowerManager) context.getSystemService("power");
         if (powerManager != null) {
             this.mAuthWakeLock = powerManager.newWakeLock(1, "BattAuthManager_WpcAuthenticator");
@@ -264,7 +305,9 @@ public final class WpcAuthenticator {
         int length = bArr.length;
         int i = 0;
         while (i < length) {
-            i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%02X ", new Object[]{Byte.valueOf(bArr[i])}, sb, i, 1);
+            i =
+                    MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                            "%02X ", new Object[] {Byte.valueOf(bArr[i])}, sb, i, 1);
         }
         return sb.toString();
     }
@@ -272,25 +315,32 @@ public final class WpcAuthenticator {
     public static void removeDigests() {
         final Path path = Paths.get("/efs/Battery/qi_digests/", new String[0]);
         try {
-            Files.walkFileTree(path, new SimpleFileVisitor() { // from class: com.samsung.android.battauthmanager.WpcAuthenticator.1
-                @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
-                public final FileVisitResult postVisitDirectory(Object obj, IOException iOException) {
-                    Path path2 = (Path) obj;
-                    if (!path2.equals(path)) {
-                        Files.delete(path2);
-                    }
-                    return FileVisitResult.CONTINUE;
-                }
+            Files.walkFileTree(
+                    path,
+                    new SimpleFileVisitor() { // from class:
+                                              // com.samsung.android.battauthmanager.WpcAuthenticator.1
+                        @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
+                        public final FileVisitResult postVisitDirectory(
+                                Object obj, IOException iOException) {
+                            Path path2 = (Path) obj;
+                            if (!path2.equals(path)) {
+                                Files.delete(path2);
+                            }
+                            return FileVisitResult.CONTINUE;
+                        }
 
-                @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
-                public final FileVisitResult visitFile(Object obj, BasicFileAttributes basicFileAttributes) {
-                    Files.delete((Path) obj);
-                    return FileVisitResult.CONTINUE;
-                }
-            });
+                        @Override // java.nio.file.SimpleFileVisitor, java.nio.file.FileVisitor
+                        public final FileVisitResult visitFile(
+                                Object obj, BasicFileAttributes basicFileAttributes) {
+                            Files.delete((Path) obj);
+                            return FileVisitResult.CONTINUE;
+                        }
+                    });
             Slog.d("BattAuthManager_WpcAuthenticator", "removeDigests");
         } catch (IOException e) {
-            Slog.e("BattAuthManager_WpcAuthenticator", "Failed to delete removeDigests: " + e.getMessage());
+            Slog.e(
+                    "BattAuthManager_WpcAuthenticator",
+                    "Failed to delete removeDigests: " + e.getMessage());
         }
     }
 }

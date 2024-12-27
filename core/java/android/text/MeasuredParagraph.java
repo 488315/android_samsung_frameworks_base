@@ -6,18 +6,18 @@ import android.graphics.text.LineBreakConfig;
 import android.graphics.text.MeasuredText;
 import android.icu.lang.UCharacter;
 import android.icu.text.Bidi;
-import android.text.AutoGrowArray;
-import android.text.Layout;
 import android.text.style.LineBreakConfigSpan;
 import android.text.style.MetricAffectingSpan;
 import android.text.style.ReplacementSpan;
 import android.util.Pools;
+
 import java.util.Arrays;
 
 /* loaded from: classes4.dex */
 public class MeasuredParagraph {
     private static final char OBJECT_REPLACEMENT_CHARACTER = 65532;
-    private static final Pools.SynchronizedPool<MeasuredParagraph> sPool = new Pools.SynchronizedPool<>(1);
+    private static final Pools.SynchronizedPool<MeasuredParagraph> sPool =
+            new Pools.SynchronizedPool<>(1);
     private Bidi mBidi;
     private Paint.FontMetricsInt mCachedFm;
     private char[] mCopiedBuffer;
@@ -41,8 +41,7 @@ public class MeasuredParagraph {
         void onAppendStyleRun(Paint paint, LineBreakConfig lineBreakConfig, int i, boolean z);
     }
 
-    private MeasuredParagraph() {
-    }
+    private MeasuredParagraph() {}
 
     private static MeasuredParagraph obtain() {
         MeasuredParagraph mt = sPool.acquire();
@@ -109,7 +108,8 @@ public class MeasuredParagraph {
                 if (bidi.getRunLevel(0) == 0) {
                     return Layout.DIRS_ALL_LEFT_TO_RIGHT;
                 }
-                return new Layout.Directions(new int[]{0, (bidi.getRunLevel(0) << 26) | (end - start)});
+                return new Layout.Directions(
+                        new int[] {0, (bidi.getRunLevel(0) << 26) | (end - start)});
             }
             byte[] levels = new byte[bidi.getRunCount()];
             for (int i = 0; i < bidi.getRunCount(); i++) {
@@ -124,7 +124,9 @@ public class MeasuredParagraph {
                     vIndex = visualOrders[i2];
                 }
                 dirs[i2 * 2] = bidi.getRunStart(vIndex);
-                dirs[(i2 * 2) + 1] = (bidi.getRunLevel(vIndex) << 26) | (bidi.getRunLimit(vIndex) - dirs[i2 * 2]);
+                dirs[(i2 * 2) + 1] =
+                        (bidi.getRunLevel(vIndex) << 26)
+                                | (bidi.getRunLimit(vIndex) - dirs[i2 * 2]);
             }
             return new Layout.Directions(dirs);
         }
@@ -132,7 +134,13 @@ public class MeasuredParagraph {
             return Layout.DIRS_ALL_LEFT_TO_RIGHT;
         }
         int length = end - start;
-        return AndroidBidi.directions(this.mParaDir, this.mLevels.getRawArray(), start, this.mCopiedBuffer, start, length);
+        return AndroidBidi.directions(
+                this.mParaDir,
+                this.mLevels.getRawArray(),
+                start,
+                this.mCopiedBuffer,
+                start,
+                length);
     }
 
     public float getWholeWidth() {
@@ -179,13 +187,24 @@ public class MeasuredParagraph {
         return this.mMeasuredText.getCharWidthAt(offset);
     }
 
-    public static MeasuredParagraph buildForBidi(CharSequence text, int start, int end, TextDirectionHeuristic textDir, MeasuredParagraph recycle) {
+    public static MeasuredParagraph buildForBidi(
+            CharSequence text,
+            int start,
+            int end,
+            TextDirectionHeuristic textDir,
+            MeasuredParagraph recycle) {
         MeasuredParagraph mt = recycle == null ? obtain() : recycle;
         mt.resetAndAnalyzeBidi(text, start, end, textDir);
         return mt;
     }
 
-    public static MeasuredParagraph buildForMeasurement(TextPaint paint, CharSequence text, int start, int end, TextDirectionHeuristic textDir, MeasuredParagraph recycle) {
+    public static MeasuredParagraph buildForMeasurement(
+            TextPaint paint,
+            CharSequence text,
+            int start,
+            int end,
+            TextDirectionHeuristic textDir,
+            MeasuredParagraph recycle) {
         MeasuredParagraph mt = recycle == null ? obtain() : recycle;
         mt.resetAndAnalyzeBidi(text, start, end, textDir);
         mt.mWidths.resize(mt.mTextLength);
@@ -198,49 +217,150 @@ public class MeasuredParagraph {
         }
         int spanStart = start;
         while (spanStart < end) {
-            int maSpanEnd = mt.mSpanned.nextSpanTransition(spanStart, end, MetricAffectingSpan.class);
-            int lbcSpanEnd = mt.mSpanned.nextSpanTransition(spanStart, end, LineBreakConfigSpan.class);
+            int maSpanEnd =
+                    mt.mSpanned.nextSpanTransition(spanStart, end, MetricAffectingSpan.class);
+            int lbcSpanEnd =
+                    mt.mSpanned.nextSpanTransition(spanStart, end, LineBreakConfigSpan.class);
             int spanEnd = Math.min(maSpanEnd, lbcSpanEnd);
-            MetricAffectingSpan[] spans = (MetricAffectingSpan[]) mt.mSpanned.getSpans(spanStart, spanEnd, MetricAffectingSpan.class);
-            LineBreakConfigSpan[] lbcSpans = (LineBreakConfigSpan[]) mt.mSpanned.getSpans(spanStart, spanEnd, LineBreakConfigSpan.class);
-            mt.applyMetricsAffectingSpan(paint, null, (MetricAffectingSpan[]) TextUtils.removeEmptySpans(spans, mt.mSpanned, MetricAffectingSpan.class), (LineBreakConfigSpan[]) TextUtils.removeEmptySpans(lbcSpans, mt.mSpanned, LineBreakConfigSpan.class), spanStart, spanEnd, null, null);
+            MetricAffectingSpan[] spans =
+                    (MetricAffectingSpan[])
+                            mt.mSpanned.getSpans(spanStart, spanEnd, MetricAffectingSpan.class);
+            LineBreakConfigSpan[] lbcSpans =
+                    (LineBreakConfigSpan[])
+                            mt.mSpanned.getSpans(spanStart, spanEnd, LineBreakConfigSpan.class);
+            mt.applyMetricsAffectingSpan(
+                    paint,
+                    null,
+                    (MetricAffectingSpan[])
+                            TextUtils.removeEmptySpans(
+                                    spans, mt.mSpanned, MetricAffectingSpan.class),
+                    (LineBreakConfigSpan[])
+                            TextUtils.removeEmptySpans(
+                                    lbcSpans, mt.mSpanned, LineBreakConfigSpan.class),
+                    spanStart,
+                    spanEnd,
+                    null,
+                    null);
             spanStart = spanEnd;
             mt = mt;
         }
         return mt;
     }
 
-    public static MeasuredParagraph buildForStaticLayout(TextPaint paint, LineBreakConfig lineBreakConfig, CharSequence text, int start, int end, TextDirectionHeuristic textDir, int hyphenationMode, boolean computeLayout, boolean computeBounds, MeasuredParagraph hint, MeasuredParagraph recycle) {
-        return buildForStaticLayoutInternal(paint, lineBreakConfig, text, start, end, textDir, hyphenationMode, computeLayout, computeBounds, hint, recycle, null);
+    public static MeasuredParagraph buildForStaticLayout(
+            TextPaint paint,
+            LineBreakConfig lineBreakConfig,
+            CharSequence text,
+            int start,
+            int end,
+            TextDirectionHeuristic textDir,
+            int hyphenationMode,
+            boolean computeLayout,
+            boolean computeBounds,
+            MeasuredParagraph hint,
+            MeasuredParagraph recycle) {
+        return buildForStaticLayoutInternal(
+                paint,
+                lineBreakConfig,
+                text,
+                start,
+                end,
+                textDir,
+                hyphenationMode,
+                computeLayout,
+                computeBounds,
+                hint,
+                recycle,
+                null);
     }
 
-    public static MeasuredParagraph buildForStaticLayoutTest(TextPaint paint, LineBreakConfig lineBreakConfig, CharSequence text, int start, int end, TextDirectionHeuristic textDir, int hyphenationMode, boolean computeLayout, StyleRunCallback testCallback) {
-        return buildForStaticLayoutInternal(paint, lineBreakConfig, text, start, end, textDir, hyphenationMode, computeLayout, false, null, null, testCallback);
+    public static MeasuredParagraph buildForStaticLayoutTest(
+            TextPaint paint,
+            LineBreakConfig lineBreakConfig,
+            CharSequence text,
+            int start,
+            int end,
+            TextDirectionHeuristic textDir,
+            int hyphenationMode,
+            boolean computeLayout,
+            StyleRunCallback testCallback) {
+        return buildForStaticLayoutInternal(
+                paint,
+                lineBreakConfig,
+                text,
+                start,
+                end,
+                textDir,
+                hyphenationMode,
+                computeLayout,
+                false,
+                null,
+                null,
+                testCallback);
     }
 
-    private static MeasuredParagraph buildForStaticLayoutInternal(TextPaint paint, LineBreakConfig lineBreakConfig, CharSequence text, int start, int end, TextDirectionHeuristic textDir, int hyphenationMode, boolean computeLayout, boolean computeBounds, MeasuredParagraph hint, MeasuredParagraph recycle, StyleRunCallback testCallback) {
+    private static MeasuredParagraph buildForStaticLayoutInternal(
+            TextPaint paint,
+            LineBreakConfig lineBreakConfig,
+            CharSequence text,
+            int start,
+            int end,
+            TextDirectionHeuristic textDir,
+            int hyphenationMode,
+            boolean computeLayout,
+            boolean computeBounds,
+            MeasuredParagraph hint,
+            MeasuredParagraph recycle,
+            StyleRunCallback testCallback) {
         MeasuredParagraph mt;
         MeasuredParagraph mt2 = recycle == null ? obtain() : recycle;
         mt2.resetAndAnalyzeBidi(text, start, end, textDir);
-        MeasuredText.Builder builder = hint == null ? new MeasuredText.Builder(mt2.mCopiedBuffer).setComputeHyphenation(hyphenationMode).setComputeLayout(computeLayout).setComputeBounds(computeBounds) : new MeasuredText.Builder(hint.mMeasuredText);
+        MeasuredText.Builder builder =
+                hint == null
+                        ? new MeasuredText.Builder(mt2.mCopiedBuffer)
+                                .setComputeHyphenation(hyphenationMode)
+                                .setComputeLayout(computeLayout)
+                                .setComputeBounds(computeBounds)
+                        : new MeasuredText.Builder(hint.mMeasuredText);
         if (mt2.mTextLength == 0) {
             mt2.mMeasuredText = builder.build();
             return mt2;
         }
         if (mt2.mSpanned == null) {
-            mt2.applyMetricsAffectingSpan(paint, lineBreakConfig, null, null, start, end, builder, testCallback);
+            mt2.applyMetricsAffectingSpan(
+                    paint, lineBreakConfig, null, null, start, end, builder, testCallback);
             mt2.mSpanEndCache.append(end);
             mt = mt2;
         } else {
             int spanStart = start;
             while (spanStart < end) {
-                int maSpanEnd = mt2.mSpanned.nextSpanTransition(spanStart, end, MetricAffectingSpan.class);
-                int lbcSpanEnd = mt2.mSpanned.nextSpanTransition(spanStart, end, LineBreakConfigSpan.class);
+                int maSpanEnd =
+                        mt2.mSpanned.nextSpanTransition(spanStart, end, MetricAffectingSpan.class);
+                int lbcSpanEnd =
+                        mt2.mSpanned.nextSpanTransition(spanStart, end, LineBreakConfigSpan.class);
                 int spanEnd = Math.min(maSpanEnd, lbcSpanEnd);
-                MetricAffectingSpan[] spans = (MetricAffectingSpan[]) mt2.mSpanned.getSpans(spanStart, spanEnd, MetricAffectingSpan.class);
-                LineBreakConfigSpan[] lbcSpans = (LineBreakConfigSpan[]) mt2.mSpanned.getSpans(spanStart, spanEnd, LineBreakConfigSpan.class);
+                MetricAffectingSpan[] spans =
+                        (MetricAffectingSpan[])
+                                mt2.mSpanned.getSpans(
+                                        spanStart, spanEnd, MetricAffectingSpan.class);
+                LineBreakConfigSpan[] lbcSpans =
+                        (LineBreakConfigSpan[])
+                                mt2.mSpanned.getSpans(
+                                        spanStart, spanEnd, LineBreakConfigSpan.class);
                 MeasuredParagraph mt3 = mt2;
-                mt2.applyMetricsAffectingSpan(paint, lineBreakConfig, (MetricAffectingSpan[]) TextUtils.removeEmptySpans(spans, mt2.mSpanned, MetricAffectingSpan.class), (LineBreakConfigSpan[]) TextUtils.removeEmptySpans(lbcSpans, mt2.mSpanned, LineBreakConfigSpan.class), spanStart, spanEnd, builder, testCallback);
+                mt2.applyMetricsAffectingSpan(
+                        paint,
+                        lineBreakConfig,
+                        (MetricAffectingSpan[])
+                                TextUtils.removeEmptySpans(
+                                        spans, mt2.mSpanned, MetricAffectingSpan.class),
+                        (LineBreakConfigSpan[])
+                                TextUtils.removeEmptySpans(
+                                        lbcSpans, mt2.mSpanned, LineBreakConfigSpan.class),
+                        spanStart,
+                        spanEnd,
+                        builder,
+                        testCallback);
                 mt3.mSpanEndCache.append(spanEnd);
                 spanStart = spanEnd;
                 mt2 = mt3;
@@ -258,7 +378,11 @@ public class MeasuredParagraph {
     /* JADX WARN: Type inference failed for: r5v41 */
     /* JADX WARN: Type inference failed for: r5v42 */
     /* JADX WARN: Type inference failed for: r5v52 */
-    private void resetAndAnalyzeBidi(CharSequence charSequence, int i, int i2, TextDirectionHeuristic textDirectionHeuristic) {
+    private void resetAndAnalyzeBidi(
+            CharSequence charSequence,
+            int i,
+            int i2,
+            TextDirectionHeuristic textDirectionHeuristic) {
         int i3;
         int i4;
         reset();
@@ -270,7 +394,8 @@ public class MeasuredParagraph {
         }
         TextUtils.getChars(charSequence, i, i2, this.mCopiedBuffer, 0);
         if (this.mSpanned != null) {
-            ReplacementSpan[] replacementSpanArr = (ReplacementSpan[]) this.mSpanned.getSpans(i, i2, ReplacementSpan.class);
+            ReplacementSpan[] replacementSpanArr =
+                    (ReplacementSpan[]) this.mSpanned.getSpans(i, i2, ReplacementSpan.class);
             for (int i5 = 0; i5 < replacementSpanArr.length; i5++) {
                 int spanStart = this.mSpanned.getSpanStart(replacementSpanArr[i5]) - i;
                 int spanEnd = this.mSpanned.getSpanEnd(replacementSpanArr[i5]) - i;
@@ -284,7 +409,10 @@ public class MeasuredParagraph {
             }
         }
         if (ClientFlags.icuBidiMigration()) {
-            if ((textDirectionHeuristic == TextDirectionHeuristics.LTR || textDirectionHeuristic == TextDirectionHeuristics.FIRSTSTRONG_LTR || textDirectionHeuristic == TextDirectionHeuristics.ANYRTL_LTR) && TextUtils.doesNotNeedBidi(this.mCopiedBuffer, 0, this.mTextLength)) {
+            if ((textDirectionHeuristic == TextDirectionHeuristics.LTR
+                            || textDirectionHeuristic == TextDirectionHeuristics.FIRSTSTRONG_LTR
+                            || textDirectionHeuristic == TextDirectionHeuristics.ANYRTL_LTR)
+                    && TextUtils.doesNotNeedBidi(this.mCopiedBuffer, 0, this.mTextLength)) {
                 this.mLevels.clear();
                 this.mLtrWithoutBidi = true;
                 return;
@@ -301,13 +429,16 @@ public class MeasuredParagraph {
                 i4 = 127;
             }
             this.mBidi = new Bidi(this.mCopiedBuffer, 0, null, 0, this.mCopiedBuffer.length, i4);
-            if (this.mCopiedBuffer.length > 0 && this.mBidi.getParagraphIndex(this.mCopiedBuffer.length - 1) != 0) {
+            if (this.mCopiedBuffer.length > 0
+                    && this.mBidi.getParagraphIndex(this.mCopiedBuffer.length - 1) != 0) {
                 for (int i6 = 0; i6 < this.mTextLength; i6++) {
-                    if (!Character.isSurrogate(this.mCopiedBuffer[i6]) && UCharacter.getDirection(this.mCopiedBuffer[i6]) == 7) {
+                    if (!Character.isSurrogate(this.mCopiedBuffer[i6])
+                            && UCharacter.getDirection(this.mCopiedBuffer[i6]) == 7) {
                         this.mCopiedBuffer[i6] = OBJECT_REPLACEMENT_CHARACTER;
                     }
                 }
-                this.mBidi = new Bidi(this.mCopiedBuffer, 0, null, 0, this.mCopiedBuffer.length, i4);
+                this.mBidi =
+                        new Bidi(this.mCopiedBuffer, 0, null, 0, this.mCopiedBuffer.length, i4);
             }
             this.mLevels.resize(this.mTextLength);
             byte[] rawArray = this.mLevels.getRawArray();
@@ -317,7 +448,10 @@ public class MeasuredParagraph {
             this.mLtrWithoutBidi = false;
             return;
         }
-        if ((textDirectionHeuristic == TextDirectionHeuristics.LTR || textDirectionHeuristic == TextDirectionHeuristics.FIRSTSTRONG_LTR || textDirectionHeuristic == TextDirectionHeuristics.ANYRTL_LTR) && TextUtils.doesNotNeedBidi(this.mCopiedBuffer, 0, this.mTextLength)) {
+        if ((textDirectionHeuristic == TextDirectionHeuristics.LTR
+                        || textDirectionHeuristic == TextDirectionHeuristics.FIRSTSTRONG_LTR
+                        || textDirectionHeuristic == TextDirectionHeuristics.ANYRTL_LTR)
+                && TextUtils.doesNotNeedBidi(this.mCopiedBuffer, 0, this.mTextLength)) {
             this.mLevels.clear();
             this.mParaDir = 1;
             this.mLtrWithoutBidi = true;
@@ -339,8 +473,20 @@ public class MeasuredParagraph {
         this.mLtrWithoutBidi = false;
     }
 
-    private void applyReplacementRun(ReplacementSpan replacement, int start, int end, TextPaint paint, MeasuredText.Builder builder, StyleRunCallback testCallback) {
-        float width = replacement.getSize(paint, this.mSpanned, start + this.mTextStart, end + this.mTextStart, this.mCachedFm);
+    private void applyReplacementRun(
+            ReplacementSpan replacement,
+            int start,
+            int end,
+            TextPaint paint,
+            MeasuredText.Builder builder,
+            StyleRunCallback testCallback) {
+        float width =
+                replacement.getSize(
+                        paint,
+                        this.mSpanned,
+                        start + this.mTextStart,
+                        end + this.mTextStart,
+                        this.mCachedFm);
         if (builder == null) {
             this.mWidths.set(start, width);
             if (end > start + 1) {
@@ -355,7 +501,13 @@ public class MeasuredParagraph {
         }
     }
 
-    private void applyStyleRun(int start, int end, TextPaint paint, LineBreakConfig config, MeasuredText.Builder builder, StyleRunCallback testCallback) {
+    private void applyStyleRun(
+            int start,
+            int end,
+            TextPaint paint,
+            LineBreakConfig config,
+            MeasuredText.Builder builder,
+            StyleRunCallback testCallback) {
         int levelEnd;
         boolean z;
         boolean isRtl;
@@ -374,7 +526,16 @@ public class MeasuredParagraph {
                 try {
                     oldFlag2 = oldFlag3;
                     try {
-                        this.mWholeWidth += paint.getTextRunAdvances(this.mCopiedBuffer, start, i2 - start, start, i2 - start, false, this.mWidths.getRawArray(), start);
+                        this.mWholeWidth +=
+                                paint.getTextRunAdvances(
+                                        this.mCopiedBuffer,
+                                        start,
+                                        i2 - start,
+                                        start,
+                                        i2 - start,
+                                        false,
+                                        this.mWidths.getRawArray(),
+                                        start);
                         paint.setFlags(oldFlag2);
                         lineBreakConfig = config;
                         z2 = false;
@@ -420,7 +581,16 @@ public class MeasuredParagraph {
                         oldFlag = oldFlag4;
                     }
                     try {
-                        this.mWholeWidth += paint.getTextRunAdvances(this.mCopiedBuffer, levelStart, levelLength, levelStart, levelLength, isRtl2, this.mWidths.getRawArray(), levelStart);
+                        this.mWholeWidth +=
+                                paint.getTextRunAdvances(
+                                        this.mCopiedBuffer,
+                                        levelStart,
+                                        levelLength,
+                                        levelStart,
+                                        levelLength,
+                                        isRtl2,
+                                        this.mWidths.getRawArray(),
+                                        levelStart);
                         paint.setFlags(oldFlag);
                         isRtl = isRtl2;
                     } catch (Throwable th4) {
@@ -459,7 +629,15 @@ public class MeasuredParagraph {
         }
     }
 
-    private void applyMetricsAffectingSpan(TextPaint paint, LineBreakConfig lineBreakConfig, MetricAffectingSpan[] spans, LineBreakConfigSpan[] lbcSpans, int start, int end, MeasuredText.Builder builder, StyleRunCallback testCallback) {
+    private void applyMetricsAffectingSpan(
+            TextPaint paint,
+            LineBreakConfig lineBreakConfig,
+            MetricAffectingSpan[] spans,
+            LineBreakConfigSpan[] lbcSpans,
+            int start,
+            int end,
+            MeasuredText.Builder builder,
+            StyleRunCallback testCallback) {
         ReplacementSpan replacement;
         LineBreakConfig lineBreakConfig2;
         this.mCachedPaint.set(paint);
@@ -496,9 +674,21 @@ public class MeasuredParagraph {
             this.mCachedPaint.getFontMetricsInt(this.mCachedFm);
         }
         if (replacement != null) {
-            applyReplacementRun(replacement, startInCopiedBuffer, endInCopiedBuffer, this.mCachedPaint, builder, testCallback);
+            applyReplacementRun(
+                    replacement,
+                    startInCopiedBuffer,
+                    endInCopiedBuffer,
+                    this.mCachedPaint,
+                    builder,
+                    testCallback);
         } else {
-            applyStyleRun(startInCopiedBuffer, endInCopiedBuffer, this.mCachedPaint, lineBreakConfig2, builder, testCallback);
+            applyStyleRun(
+                    startInCopiedBuffer,
+                    endInCopiedBuffer,
+                    this.mCachedPaint,
+                    lineBreakConfig2,
+                    builder,
+                    testCallback);
         }
         if (needFontMetrics) {
             if (this.mCachedPaint.baselineShift < 0) {

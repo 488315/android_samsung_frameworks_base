@@ -20,6 +20,7 @@ public class TintFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "tint")
     private int mTint;
+
     private final String mTintShader;
 
     public TintFilter(String name) {
@@ -27,7 +28,18 @@ public class TintFilter extends Filter {
         this.mTint = -16776961;
         this.mTileSize = 640;
         this.mTarget = 0;
-        this.mTintShader = "precision mediump float;\nuniform sampler2D tex_sampler_0;\nuniform vec3 tint;\nuniform vec3 color_ratio;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  float avg_color = dot(color_ratio, color.rgb);\n  vec3 new_color = min(0.8 * avg_color + 0.2 * tint, 1.0);\n  gl_FragColor = vec4(new_color.rgb, color.a);\n}\n";
+        this.mTintShader =
+                "precision mediump float;\n"
+                        + "uniform sampler2D tex_sampler_0;\n"
+                        + "uniform vec3 tint;\n"
+                        + "uniform vec3 color_ratio;\n"
+                        + "varying vec2 v_texcoord;\n"
+                        + "void main() {\n"
+                        + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                        + "  float avg_color = dot(color_ratio, color.rgb);\n"
+                        + "  vec3 new_color = min(0.8 * avg_color + 0.2 * tint, 1.0);\n"
+                        + "  gl_FragColor = vec4(new_color.rgb, color.a);\n"
+                        + "}\n";
     }
 
     @Override // android.filterfw.core.Filter
@@ -44,13 +56,27 @@ public class TintFilter extends Filter {
     public void initProgram(FilterContext context, int target) {
         switch (target) {
             case 3:
-                ShaderProgram shaderProgram = new ShaderProgram(context, "precision mediump float;\nuniform sampler2D tex_sampler_0;\nuniform vec3 tint;\nuniform vec3 color_ratio;\nvarying vec2 v_texcoord;\nvoid main() {\n  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n  float avg_color = dot(color_ratio, color.rgb);\n  vec3 new_color = min(0.8 * avg_color + 0.2 * tint, 1.0);\n  gl_FragColor = vec4(new_color.rgb, color.a);\n}\n");
+                ShaderProgram shaderProgram =
+                        new ShaderProgram(
+                                context,
+                                "precision mediump float;\n"
+                                    + "uniform sampler2D tex_sampler_0;\n"
+                                    + "uniform vec3 tint;\n"
+                                    + "uniform vec3 color_ratio;\n"
+                                    + "varying vec2 v_texcoord;\n"
+                                    + "void main() {\n"
+                                    + "  vec4 color = texture2D(tex_sampler_0, v_texcoord);\n"
+                                    + "  float avg_color = dot(color_ratio, color.rgb);\n"
+                                    + "  vec3 new_color = min(0.8 * avg_color + 0.2 * tint, 1.0);\n"
+                                    + "  gl_FragColor = vec4(new_color.rgb, color.a);\n"
+                                    + "}\n");
                 shaderProgram.setMaximumTileSize(this.mTileSize);
                 this.mProgram = shaderProgram;
                 this.mTarget = target;
                 return;
             default:
-                throw new RuntimeException("Filter Sharpen does not support frames of target " + target + "!");
+                throw new RuntimeException(
+                        "Filter Sharpen does not support frames of target " + target + "!");
         }
     }
 
@@ -82,7 +108,11 @@ public class TintFilter extends Filter {
     }
 
     private void updateParameters() {
-        float[] tint_color = {Color.red(this.mTint) / 255.0f, Color.green(this.mTint) / 255.0f, Color.blue(this.mTint) / 255.0f};
+        float[] tint_color = {
+            Color.red(this.mTint) / 255.0f,
+            Color.green(this.mTint) / 255.0f,
+            Color.blue(this.mTint) / 255.0f
+        };
         this.mProgram.setHostValue("tint", tint_color);
     }
 }

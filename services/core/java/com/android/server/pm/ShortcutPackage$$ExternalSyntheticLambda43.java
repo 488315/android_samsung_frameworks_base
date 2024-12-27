@@ -7,7 +7,9 @@ import android.content.pm.AppSearchShortcutInfo;
 import android.content.pm.AppSearchShortcutPerson;
 import android.content.pm.ShortcutInfo;
 import android.util.Slog;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.Collections;
 import java.util.function.Function;
 
@@ -17,7 +19,8 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda43 im
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ ShortcutPackage f$0;
 
-    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda43(ShortcutPackage shortcutPackage, int i) {
+    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda43(
+            ShortcutPackage shortcutPackage, int i) {
         this.$r8$classId = i;
         this.f$0 = shortcutPackage;
     }
@@ -29,13 +32,37 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda43 im
         switch (i) {
             case 0:
                 AppSearchSession appSearchSession = (AppSearchSession) obj;
-                Slog.d("ShortcutService", "Setup Schema for user=" + shortcutPackage.mShortcutUser.mUserId + " pkg=" + shortcutPackage.mPackageName);
-                SetSchemaRequest.Builder addRequiredPermissionsForSchemaTypeVisibility = new SetSchemaRequest.Builder().addSchemas(AppSearchShortcutPerson.SCHEMA, AppSearchShortcutInfo.SCHEMA).setForceOverride(true).addRequiredPermissionsForSchemaTypeVisibility("Shortcut", Collections.singleton(5)).addRequiredPermissionsForSchemaTypeVisibility("Shortcut", Collections.singleton(6)).addRequiredPermissionsForSchemaTypeVisibility("ShortcutPerson", Collections.singleton(5)).addRequiredPermissionsForSchemaTypeVisibility("ShortcutPerson", Collections.singleton(6));
+                Slog.d(
+                        "ShortcutService",
+                        "Setup Schema for user="
+                                + shortcutPackage.mShortcutUser.mUserId
+                                + " pkg="
+                                + shortcutPackage.mPackageName);
+                SetSchemaRequest.Builder addRequiredPermissionsForSchemaTypeVisibility =
+                        new SetSchemaRequest.Builder()
+                                .addSchemas(
+                                        AppSearchShortcutPerson.SCHEMA,
+                                        AppSearchShortcutInfo.SCHEMA)
+                                .setForceOverride(true)
+                                .addRequiredPermissionsForSchemaTypeVisibility(
+                                        "Shortcut", Collections.singleton(5))
+                                .addRequiredPermissionsForSchemaTypeVisibility(
+                                        "Shortcut", Collections.singleton(6))
+                                .addRequiredPermissionsForSchemaTypeVisibility(
+                                        "ShortcutPerson", Collections.singleton(5))
+                                .addRequiredPermissionsForSchemaTypeVisibility(
+                                        "ShortcutPerson", Collections.singleton(6));
                 AndroidFuture androidFuture = new AndroidFuture();
-                appSearchSession.setSchema(addRequiredPermissionsForSchemaTypeVisibility.build(), shortcutPackage.mExecutor, shortcutPackage.mShortcutUser.mExecutor, new ShortcutPackage$$ExternalSyntheticLambda23(3, androidFuture, appSearchSession));
+                appSearchSession.setSchema(
+                        addRequiredPermissionsForSchemaTypeVisibility.build(),
+                        shortcutPackage.mExecutor,
+                        shortcutPackage.mShortcutUser.mExecutor,
+                        new ShortcutPackage$$ExternalSyntheticLambda23(
+                                3, androidFuture, appSearchSession));
                 return androidFuture;
             default:
-                return ShortcutInfo.createFromGenericDocument(shortcutPackage.mShortcutUser.mUserId, (GenericDocument) obj);
+                return ShortcutInfo.createFromGenericDocument(
+                        shortcutPackage.mShortcutUser.mUserId, (GenericDocument) obj);
         }
     }
 }

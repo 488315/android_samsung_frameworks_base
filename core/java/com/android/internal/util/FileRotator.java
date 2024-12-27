@@ -2,6 +2,9 @@ package com.android.internal.util;
 
 import android.os.FileUtils;
 import android.util.Pair;
+
+import libcore.io.IoUtils;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -17,7 +20,6 @@ import java.util.TreeSet;
 import java.util.function.ToLongFunction;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-import libcore.io.IoUtils;
 
 /* loaded from: classes5.dex */
 public class FileRotator {
@@ -54,11 +56,17 @@ public class FileRotator {
             if (name.startsWith(this.mPrefix)) {
                 if (name.endsWith(SUFFIX_BACKUP)) {
                     File backupFile = new File(this.mBasePath, name);
-                    File file = new File(this.mBasePath, name.substring(0, name.length() - SUFFIX_BACKUP.length()));
+                    File file =
+                            new File(
+                                    this.mBasePath,
+                                    name.substring(0, name.length() - SUFFIX_BACKUP.length()));
                     backupFile.renameTo(file);
                 } else if (name.endsWith(SUFFIX_NO_BACKUP)) {
                     File noBackupFile = new File(this.mBasePath, name);
-                    File file2 = new File(this.mBasePath, name.substring(0, name.length() - SUFFIX_NO_BACKUP.length()));
+                    File file2 =
+                            new File(
+                                    this.mBasePath,
+                                    name.substring(0, name.length() - SUFFIX_NO_BACKUP.length()));
                     noBackupFile.delete();
                     file2.delete();
                 }
@@ -104,27 +112,29 @@ public class FileRotator {
     }
 
     @Deprecated
-    public void combineActive(final Reader reader, final Writer writer, long currentTimeMillis) throws IOException {
-        rewriteActive(new Rewriter() { // from class: com.android.internal.util.FileRotator.1
-            @Override // com.android.internal.util.FileRotator.Rewriter
-            public void reset() {
-            }
+    public void combineActive(final Reader reader, final Writer writer, long currentTimeMillis)
+            throws IOException {
+        rewriteActive(
+                new Rewriter() { // from class: com.android.internal.util.FileRotator.1
+                    @Override // com.android.internal.util.FileRotator.Rewriter
+                    public void reset() {}
 
-            @Override // com.android.internal.util.FileRotator.Reader
-            public void read(InputStream in) throws IOException {
-                reader.read(in);
-            }
+                    @Override // com.android.internal.util.FileRotator.Reader
+                    public void read(InputStream in) throws IOException {
+                        reader.read(in);
+                    }
 
-            @Override // com.android.internal.util.FileRotator.Rewriter
-            public boolean shouldWrite() {
-                return true;
-            }
+                    @Override // com.android.internal.util.FileRotator.Rewriter
+                    public boolean shouldWrite() {
+                        return true;
+                    }
 
-            @Override // com.android.internal.util.FileRotator.Writer
-            public void write(OutputStream out) throws IOException {
-                writer.write(out);
-            }
-        }, currentTimeMillis);
+                    @Override // com.android.internal.util.FileRotator.Writer
+                    public void write(OutputStream out) throws IOException {
+                        writer.write(out);
+                    }
+                },
+                currentTimeMillis);
     }
 
     public void rewriteAll(Rewriter rewriter) throws IOException {
@@ -168,25 +178,34 @@ public class FileRotator {
         }
     }
 
-    public void rewriteSingle(Rewriter rewriter, long startTimeMillis, long endTimeMillis) throws IOException {
+    public void rewriteSingle(Rewriter rewriter, long startTimeMillis, long endTimeMillis)
+            throws IOException {
         FileInfo info = new FileInfo(this.mPrefix);
         info.startMillis = startTimeMillis;
         info.endMillis = endTimeMillis;
         rewriteSingle(rewriter, info.build());
     }
 
-    public void readMatching(Reader reader, long matchStartMillis, long matchEndMillis) throws IOException {
+    public void readMatching(Reader reader, long matchStartMillis, long matchEndMillis)
+            throws IOException {
         FileInfo info = new FileInfo(this.mPrefix);
-        TreeSet<Pair<Long, String>> readSet = new TreeSet<>((Comparator<? super Pair<Long, String>>) Comparator.comparingLong(new ToLongFunction() { // from class: com.android.internal.util.FileRotator$$ExternalSyntheticLambda0
-            @Override // java.util.function.ToLongFunction
-            public final long applyAsLong(Object obj) {
-                long longValue;
-                longValue = ((Long) ((Pair) obj).first).longValue();
-                return longValue;
-            }
-        }));
+        TreeSet<Pair<Long, String>> readSet =
+                new TreeSet<>(
+                        (Comparator<? super Pair<Long, String>>)
+                                Comparator.comparingLong(
+                                        new ToLongFunction() { // from class:
+                                                               // com.android.internal.util.FileRotator$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.ToLongFunction
+                                            public final long applyAsLong(Object obj) {
+                                                long longValue;
+                                                longValue = ((Long) ((Pair) obj).first).longValue();
+                                                return longValue;
+                                            }
+                                        }));
         for (String name : this.mBasePath.list()) {
-            if (info.parse(name) && info.startMillis <= matchEndMillis && matchStartMillis <= info.endMillis) {
+            if (info.parse(name)
+                    && info.startMillis <= matchEndMillis
+                    && matchStartMillis <= info.endMillis) {
                 readSet.add(new Pair<>(Long.valueOf(info.startMillis), name));
             }
         }
@@ -203,7 +222,10 @@ public class FileRotator {
         long oldestActiveStart = Long.MAX_VALUE;
         FileInfo info = new FileInfo(this.mPrefix);
         for (String name : this.mBasePath.list()) {
-            if (info.parse(name) && info.isActive() && info.startMillis < currentTimeMillis && info.startMillis < oldestActiveStart) {
+            if (info.parse(name)
+                    && info.isActive()
+                    && info.startMillis < currentTimeMillis
+                    && info.startMillis < oldestActiveStart) {
                 oldestActiveName = name;
                 oldestActiveStart = info.startMillis;
             }
@@ -287,7 +309,9 @@ public class FileRotator {
             this.startMillis = -1L;
             int dotIndex = name.lastIndexOf(46);
             int dashIndex = name.lastIndexOf(45);
-            if (dotIndex == -1 || dashIndex == -1 || !this.prefix.equals(name.substring(0, dotIndex))) {
+            if (dotIndex == -1
+                    || dashIndex == -1
+                    || !this.prefix.equals(name.substring(0, dotIndex))) {
                 return false;
             }
             try {

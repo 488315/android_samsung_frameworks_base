@@ -6,11 +6,9 @@ import android.text.TextPaint;
 
 /* loaded from: classes4.dex */
 public class SubscriptSpan extends MetricAffectingSpan implements ParcelableSpan {
-    public SubscriptSpan() {
-    }
+    public SubscriptSpan() {}
 
-    public SubscriptSpan(Parcel src) {
-    }
+    public SubscriptSpan(Parcel src) {}
 
     @Override // android.text.ParcelableSpan
     public int getSpanTypeId() {
@@ -33,8 +31,7 @@ public class SubscriptSpan extends MetricAffectingSpan implements ParcelableSpan
     }
 
     @Override // android.text.ParcelableSpan
-    public void writeToParcelInternal(Parcel dest, int flags) {
-    }
+    public void writeToParcelInternal(Parcel dest, int flags) {}
 
     @Override // android.text.style.CharacterStyle
     public void updateDrawState(TextPaint textPaint) {

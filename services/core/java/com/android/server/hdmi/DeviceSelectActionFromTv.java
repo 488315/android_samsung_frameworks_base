@@ -3,7 +3,6 @@ package com.android.server.hdmi;
 import android.hardware.hdmi.HdmiDeviceInfo;
 import android.hardware.hdmi.IHdmiControlCallback;
 import android.util.Slog;
-import com.android.server.hdmi.HdmiControlService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -18,8 +17,7 @@ public final class DeviceSelectActionFromTv extends HdmiCecFeatureAction {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.hdmi.DeviceSelectActionFromTv$1, reason: invalid class name */
     public final class AnonymousClass1 implements HdmiControlService.SendMessageCallback {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
         public final void onSendCompleted(int i) {
@@ -29,11 +27,16 @@ public final class DeviceSelectActionFromTv extends HdmiCecFeatureAction {
         }
     }
 
-    public DeviceSelectActionFromTv(HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv, HdmiDeviceInfo hdmiDeviceInfo, IHdmiControlCallback iHdmiControlCallback, boolean z) {
+    public DeviceSelectActionFromTv(
+            HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv,
+            HdmiDeviceInfo hdmiDeviceInfo,
+            IHdmiControlCallback iHdmiControlCallback,
+            boolean z) {
         super(hdmiCecLocalDeviceTv, iHdmiControlCallback);
         this.mPowerStatusCounter = 0;
         this.mTarget = hdmiDeviceInfo;
-        this.mGivePowerStatus = HdmiCecMessage.build(getSourceAddress(), hdmiDeviceInfo.getLogicalAddress(), 143);
+        this.mGivePowerStatus =
+                HdmiCecMessage.build(getSourceAddress(), hdmiDeviceInfo.getLogicalAddress(), 143);
         this.mIsCec20 = z;
     }
 
@@ -63,7 +66,9 @@ public final class DeviceSelectActionFromTv extends HdmiCecFeatureAction {
 
     @Override // com.android.server.hdmi.HdmiCecFeatureAction
     public final boolean processCommand(HdmiCecMessage hdmiCecMessage) {
-        if (hdmiCecMessage.mSource != this.mTarget.getLogicalAddress() || this.mState != 1 || hdmiCecMessage.mOpcode != 144) {
+        if (hdmiCecMessage.mSource != this.mTarget.getLogicalAddress()
+                || this.mState != 1
+                || hdmiCecMessage.mOpcode != 144) {
             return false;
         }
         byte b = hdmiCecMessage.mParams[0];
@@ -91,7 +96,8 @@ public final class DeviceSelectActionFromTv extends HdmiCecFeatureAction {
                 int logicalAddress = this.mTarget.getLogicalAddress();
                 HdmiCecLocalDevice hdmiCecLocalDevice = this.mSource;
                 hdmiCecLocalDevice.sendUserControlPressedAndReleased(logicalAddress, 64);
-                hdmiCecLocalDevice.sendUserControlPressedAndReleased(this.mTarget.getLogicalAddress(), 109);
+                hdmiCecLocalDevice.sendUserControlPressedAndReleased(
+                        this.mTarget.getLogicalAddress(), 109);
             }
             this.mState = 3;
             addTimer(3, 5000);
@@ -112,7 +118,14 @@ public final class DeviceSelectActionFromTv extends HdmiCecFeatureAction {
         HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv = (HdmiCecLocalDeviceTv) this.mSource;
         hdmiCecLocalDeviceTv.mService.getLocalActiveSource().invalidate();
         hdmiCecLocalDeviceTv.setActivePath(this.mTarget.getPhysicalAddress());
-        this.mService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), 15, 134, HdmiCecMessageBuilder.physicalAddressToParam(this.mTarget.getPhysicalAddress())), null);
+        this.mService.sendCecCommand(
+                HdmiCecMessage.build(
+                        getSourceAddress(),
+                        15,
+                        134,
+                        HdmiCecMessageBuilder.physicalAddressToParam(
+                                this.mTarget.getPhysicalAddress())),
+                null);
     }
 
     @Override // com.android.server.hdmi.HdmiCecFeatureAction
@@ -120,8 +133,11 @@ public final class DeviceSelectActionFromTv extends HdmiCecFeatureAction {
         sendSetStreamPath$1();
         HdmiCecMessage hdmiCecMessage = this.mGivePowerStatus;
         if (this.mIsCec20) {
-            HdmiDeviceInfo cecDeviceInfo = this.mSource.mService.mHdmiCecNetwork.getCecDeviceInfo(this.mTarget.getLogicalAddress());
-            int devicePowerStatus = cecDeviceInfo != null ? cecDeviceInfo.getDevicePowerStatus() : -1;
+            HdmiDeviceInfo cecDeviceInfo =
+                    this.mSource.mService.mHdmiCecNetwork.getCecDeviceInfo(
+                            this.mTarget.getLogicalAddress());
+            int devicePowerStatus =
+                    cecDeviceInfo != null ? cecDeviceInfo.getDevicePowerStatus() : -1;
             if (devicePowerStatus == -1) {
                 sendCommand(hdmiCecMessage, new AnonymousClass1());
             } else if (devicePowerStatus == 0) {

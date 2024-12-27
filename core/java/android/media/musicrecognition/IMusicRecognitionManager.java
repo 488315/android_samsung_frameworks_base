@@ -8,14 +8,16 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IMusicRecognitionManager extends IInterface {
-    public static final String DESCRIPTOR = "android.media.musicrecognition.IMusicRecognitionManager";
+    public static final String DESCRIPTOR =
+            "android.media.musicrecognition.IMusicRecognitionManager";
 
-    void beginRecognition(RecognitionRequest recognitionRequest, IBinder iBinder) throws RemoteException;
+    void beginRecognition(RecognitionRequest recognitionRequest, IBinder iBinder)
+            throws RemoteException;
 
     public static class Default implements IMusicRecognitionManager {
         @Override // android.media.musicrecognition.IMusicRecognitionManager
-        public void beginRecognition(RecognitionRequest recognitionRequest, IBinder callback) throws RemoteException {
-        }
+        public void beginRecognition(RecognitionRequest recognitionRequest, IBinder callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,7 @@ public interface IMusicRecognitionManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMusicRecognitionManager {
+    public abstract static class Stub extends Binder implements IMusicRecognitionManager {
         static final int TRANSACTION_beginRecognition = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface IMusicRecognitionManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMusicRecognitionManager.DESCRIPTOR);
             }
@@ -71,7 +74,8 @@ public interface IMusicRecognitionManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RecognitionRequest _arg0 = (RecognitionRequest) data.readTypedObject(RecognitionRequest.CREATOR);
+                    RecognitionRequest _arg0 =
+                            (RecognitionRequest) data.readTypedObject(RecognitionRequest.CREATOR);
                     IBinder _arg1 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     beginRecognition(_arg0, _arg1);
@@ -99,7 +103,8 @@ public interface IMusicRecognitionManager extends IInterface {
             }
 
             @Override // android.media.musicrecognition.IMusicRecognitionManager
-            public void beginRecognition(RecognitionRequest recognitionRequest, IBinder callback) throws RemoteException {
+            public void beginRecognition(RecognitionRequest recognitionRequest, IBinder callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

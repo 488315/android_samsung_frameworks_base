@@ -14,8 +14,7 @@ public final class PackageServiceDumpProto {
         public static final long NAME = 1138166333441L;
         public static final long UID = 1120986464258L;
 
-        public PackageShortProto() {
-        }
+        public PackageShortProto() {}
     }
 
     public final class SharedLibraryProto {
@@ -24,15 +23,13 @@ public final class PackageServiceDumpProto {
         public static final long NAME = 1138166333441L;
         public static final long PATH = 1138166333443L;
 
-        public SharedLibraryProto() {
-        }
+        public SharedLibraryProto() {}
     }
 
     public final class SharedUserProto {
         public static final long NAME = 1138166333442L;
         public static final long UID = 1120986464257L;
 
-        public SharedUserProto() {
-        }
+        public SharedUserProto() {}
     }
 }

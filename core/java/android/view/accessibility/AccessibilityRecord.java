@@ -3,6 +3,7 @@ package android.view.accessibility;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,8 +43,7 @@ public class AccessibilityRecord {
     final List<CharSequence> mText = new ArrayList();
     int mConnectionId = -1;
 
-    public AccessibilityRecord() {
-    }
+    public AccessibilityRecord() {}
 
     public AccessibilityRecord(AccessibilityRecord record) {
         init(record);
@@ -78,11 +78,20 @@ public class AccessibilityRecord {
 
     public AccessibilityNodeInfo getSource(int prefetchingStrategy) {
         enforceSealed();
-        if (this.mConnectionId == -1 || this.mSourceWindowId == -1 || AccessibilityNodeInfo.getAccessibilityViewId(this.mSourceNodeId) == Integer.MAX_VALUE) {
+        if (this.mConnectionId == -1
+                || this.mSourceWindowId == -1
+                || AccessibilityNodeInfo.getAccessibilityViewId(this.mSourceNodeId)
+                        == Integer.MAX_VALUE) {
             return null;
         }
         AccessibilityInteractionClient client = AccessibilityInteractionClient.getInstance();
-        return client.findAccessibilityNodeInfoByAccessibilityId(this.mConnectionId, this.mSourceWindowId, this.mSourceNodeId, false, prefetchingStrategy, (Bundle) null);
+        return client.findAccessibilityNodeInfoByAccessibilityId(
+                this.mConnectionId,
+                this.mSourceWindowId,
+                this.mSourceNodeId,
+                false,
+                prefetchingStrategy,
+                (Bundle) null);
     }
 
     public void setDisplayId(int displayId) {
@@ -291,7 +300,8 @@ public class AccessibilityRecord {
 
     public void setBeforeText(CharSequence beforeText) {
         enforceNotSealed();
-        this.mBeforeText = beforeText == null ? null : beforeText.subSequence(0, beforeText.length());
+        this.mBeforeText =
+                beforeText == null ? null : beforeText.subSequence(0, beforeText.length());
     }
 
     public CharSequence getContentDescription() {
@@ -300,7 +310,10 @@ public class AccessibilityRecord {
 
     public void setContentDescription(CharSequence contentDescription) {
         enforceNotSealed();
-        this.mContentDescription = contentDescription == null ? null : contentDescription.subSequence(0, contentDescription.length());
+        this.mContentDescription =
+                contentDescription == null
+                        ? null
+                        : contentDescription.subSequence(0, contentDescription.length());
     }
 
     public Parcelable getParcelableData() {
@@ -370,8 +383,7 @@ public class AccessibilityRecord {
     }
 
     @Deprecated
-    public void recycle() {
-    }
+    public void recycle() {}
 
     void init(AccessibilityRecord record) {
         this.mSealed = record.mSealed;

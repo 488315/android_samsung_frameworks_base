@@ -4,8 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.samsung.android.knox.dar.ddar.DualDarConstants;
-import com.samsung.android.knox.dar.ddar.proxy.IProxyService;
 import com.samsung.android.knox.dar.ddar.securesession.SecureClient;
 
 /* loaded from: classes6.dex */
@@ -43,7 +43,8 @@ public class KnoxProxyManager {
     private synchronized IProxyService getService() {
         try {
             if (this._service == null) {
-                this._service = IProxyService.Stub.asInterface(ServiceManager.getService(PROXY_SERVICE));
+                this._service =
+                        IProxyService.Stub.asInterface(ServiceManager.getService(PROXY_SERVICE));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +55,8 @@ public class KnoxProxyManager {
         return this._service;
     }
 
-    public boolean registerAgentByAction(String agentName, int userId, String packageName, String actionName) {
+    public boolean registerAgentByAction(
+            String agentName, int userId, String packageName, String actionName) {
         try {
             IProxyService service = getService();
             if (service != null) {
@@ -63,11 +65,21 @@ public class KnoxProxyManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.e(TAG, "Error: registerAgentByAction failed. agentName = " + agentName + ", userId = " + userId + ", packageName = " + packageName + ",actionName = " + actionName);
+        Log.e(
+                TAG,
+                "Error: registerAgentByAction failed. agentName = "
+                        + agentName
+                        + ", userId = "
+                        + userId
+                        + ", packageName = "
+                        + packageName
+                        + ",actionName = "
+                        + actionName);
         return false;
     }
 
-    public boolean registerAgentByMetadata(String agentName, int userId, String packageName, String metadata) {
+    public boolean registerAgentByMetadata(
+            String agentName, int userId, String packageName, String metadata) {
         try {
             IProxyService service = getService();
             if (service != null) {
@@ -76,7 +88,16 @@ public class KnoxProxyManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.e(TAG, "Error: registerAgentByMetadata failed. agentName = " + agentName + ", userId = " + userId + ", packageName = " + packageName + ",metadata = " + metadata);
+        Log.e(
+                TAG,
+                "Error: registerAgentByMetadata failed. agentName = "
+                        + agentName
+                        + ", userId = "
+                        + userId
+                        + ", packageName = "
+                        + packageName
+                        + ",metadata = "
+                        + metadata);
         return false;
     }
 
@@ -106,11 +127,23 @@ public class KnoxProxyManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.e(TAG, "Error: relayMessage failed. agentName = " + agentName + ", svcName = " + svcName + ", command = " + command);
+        Log.e(
+                TAG,
+                "Error: relayMessage failed. agentName = "
+                        + agentName
+                        + ", svcName = "
+                        + svcName
+                        + ", command = "
+                        + command);
         return null;
     }
 
-    public Bundle relayMessageSecurely(String agentName, String svcName, String command, Bundle args, SecureClient secureClient) {
+    public Bundle relayMessageSecurely(
+            String agentName,
+            String svcName,
+            String command,
+            Bundle args,
+            SecureClient secureClient) {
         try {
             IProxyService service = getService();
             if (service != null) {
@@ -124,7 +157,14 @@ public class KnoxProxyManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.e(TAG, "Error: relayMessage failed. agentName = " + agentName + ", svcName = " + svcName + ", command = " + command);
+        Log.e(
+                TAG,
+                "Error: relayMessage failed. agentName = "
+                        + agentName
+                        + ", svcName = "
+                        + svcName
+                        + ", command = "
+                        + command);
         return null;
     }
 
@@ -141,11 +181,20 @@ public class KnoxProxyManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Log.e(TAG, "Error: relayMessage failed. agentName = " + agentName + ", svcName = " + svcName + ", command = " + command);
+        Log.e(
+                TAG,
+                "Error: relayMessage failed. agentName = "
+                        + agentName
+                        + ", svcName = "
+                        + svcName
+                        + ", command = "
+                        + command);
         return null;
     }
 
-    public synchronized SecureClient initializeSecureSession(String initClientAlias, String endClientAgentName, String endClientSvcName) throws Exception {
+    public synchronized SecureClient initializeSecureSession(
+            String initClientAlias, String endClientAgentName, String endClientSvcName)
+            throws Exception {
         SecureClient secureClient;
         try {
             secureClient = new SecureClient(initClientAlias);
@@ -153,7 +202,9 @@ public class KnoxProxyManager {
             Bundle input = new Bundle();
             input.putString(SECURE_CLIENT_ID, secureClient.getClientId());
             input.putString(SECURE_CLIENT_PUB_KEY, secureClient.getPublicKeyString());
-            Bundle ret = relayMessage(endClientAgentName, endClientSvcName, INITIALIZE_SECURE_SESSION, input);
+            Bundle ret =
+                    relayMessage(
+                            endClientAgentName, endClientSvcName, INITIALIZE_SECURE_SESSION, input);
             if (ret != null) {
                 String taProxyPubKey = ret.getString(DualDarConstants.DUAL_DAR_RESPONSE);
                 Log.d(TAG, "generating session key w/ " + endClientSvcName);
@@ -169,10 +220,15 @@ public class KnoxProxyManager {
         return secureClient;
     }
 
-    public void terminateSecureSession(SecureClient secureClient, String endClientAgentName, String endClientSvcName) throws Exception {
+    public void terminateSecureSession(
+            SecureClient secureClient, String endClientAgentName, String endClientSvcName)
+            throws Exception {
         if (secureClient != null) {
             try {
-                Log.d(TAG, "destroying all session and private keys of: " + secureClient.getClientId());
+                Log.d(
+                        TAG,
+                        "destroying all session and private keys of: "
+                                + secureClient.getClientId());
                 Bundle input = new Bundle();
                 input.putString(SECURE_CLIENT_ID, secureClient.getClientId());
                 relayMessage(endClientAgentName, endClientSvcName, TERMINATE_SECURE_SESSION, input);

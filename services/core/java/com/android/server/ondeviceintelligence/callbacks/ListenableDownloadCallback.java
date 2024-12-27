@@ -3,7 +3,9 @@ package com.android.server.ondeviceintelligence.callbacks;
 import android.app.ondeviceintelligence.IDownloadCallback;
 import android.os.Handler;
 import android.os.PersistableBundle;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.concurrent.TimeoutException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -14,7 +16,11 @@ public final class ListenableDownloadCallback extends IDownloadCallback.Stub imp
     public final Handler handler;
     public final long idleTimeoutMs;
 
-    public ListenableDownloadCallback(IDownloadCallback iDownloadCallback, Handler handler, AndroidFuture androidFuture, long j) {
+    public ListenableDownloadCallback(
+            IDownloadCallback iDownloadCallback,
+            Handler handler,
+            AndroidFuture androidFuture,
+            long j) {
         this.callback = iDownloadCallback;
         this.handler = handler;
         this.future = androidFuture;

@@ -5,7 +5,9 @@ import android.hardware.broadcastradio.V2_0.VendorKeyValue;
 import android.os.HwBlob;
 import android.os.HwParcel;
 import android.util.SparseArray;
+
 import com.android.server.utils.Slogf;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -77,7 +79,12 @@ public final /* synthetic */ class TunerSession$$ExternalSyntheticLambda0 {
                 List list = (List) obj2;
                 ITunerSession$Proxy iTunerSession$Proxy2 = ((TunerSession) obj).mHwSession;
                 SparseArray sparseArray2 = Convert.METADATA_KEYS;
-                ArrayList arrayList2 = list == null ? null : list instanceof ArrayList ? (ArrayList) list : new ArrayList(list);
+                ArrayList arrayList2 =
+                        list == null
+                                ? null
+                                : list instanceof ArrayList
+                                        ? (ArrayList) list
+                                        : new ArrayList(list);
                 iTunerSession$Proxy2.getClass();
                 HwParcel hwParcel3 = new HwParcel();
                 hwParcel3.writeInterfaceToken("android.hardware.broadcastradio@2.0::ITunerSession");

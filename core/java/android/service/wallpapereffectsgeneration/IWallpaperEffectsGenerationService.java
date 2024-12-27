@@ -9,14 +9,16 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IWallpaperEffectsGenerationService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.wallpapereffectsgeneration.IWallpaperEffectsGenerationService";
+    public static final String DESCRIPTOR =
+            "android.service.wallpapereffectsgeneration.IWallpaperEffectsGenerationService";
 
-    void onGenerateCinematicEffect(CinematicEffectRequest cinematicEffectRequest) throws RemoteException;
+    void onGenerateCinematicEffect(CinematicEffectRequest cinematicEffectRequest)
+            throws RemoteException;
 
     public static class Default implements IWallpaperEffectsGenerationService {
         @Override // android.service.wallpapereffectsgeneration.IWallpaperEffectsGenerationService
-        public void onGenerateCinematicEffect(CinematicEffectRequest request) throws RemoteException {
-        }
+        public void onGenerateCinematicEffect(CinematicEffectRequest request)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +26,7 @@ public interface IWallpaperEffectsGenerationService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWallpaperEffectsGenerationService {
+    public abstract static class Stub extends Binder implements IWallpaperEffectsGenerationService {
         static final int TRANSACTION_onGenerateCinematicEffect = 1;
 
         public Stub() {
@@ -62,7 +64,8 @@ public interface IWallpaperEffectsGenerationService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWallpaperEffectsGenerationService.DESCRIPTOR);
             }
@@ -72,7 +75,9 @@ public interface IWallpaperEffectsGenerationService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    CinematicEffectRequest _arg0 = (CinematicEffectRequest) data.readTypedObject(CinematicEffectRequest.CREATOR);
+                    CinematicEffectRequest _arg0 =
+                            (CinematicEffectRequest)
+                                    data.readTypedObject(CinematicEffectRequest.CREATOR);
                     data.enforceNoDataAvail();
                     onGenerateCinematicEffect(_arg0);
                     return true;
@@ -98,7 +103,8 @@ public interface IWallpaperEffectsGenerationService extends IInterface {
             }
 
             @Override // android.service.wallpapereffectsgeneration.IWallpaperEffectsGenerationService
-            public void onGenerateCinematicEffect(CinematicEffectRequest request) throws RemoteException {
+            public void onGenerateCinematicEffect(CinematicEffectRequest request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWallpaperEffectsGenerationService.DESCRIPTOR);

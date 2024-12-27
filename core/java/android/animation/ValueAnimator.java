@@ -1,7 +1,5 @@
 package android.animation;
 
-import android.animation.AnimationHandler;
-import android.animation.Animator;
 import android.os.Looper;
 import android.os.SystemProperties;
 import android.os.Trace;
@@ -10,6 +8,7 @@ import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -31,10 +30,13 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
     boolean mStartTimeCommitted;
     PropertyValuesHolder[] mValues;
     HashMap<String, PropertyValuesHolder> mValuesMap;
-    private static final boolean TRACE_ANIMATION_FRACTION = SystemProperties.getBoolean("persist.debug.animator.trace_fraction", false);
+    private static final boolean TRACE_ANIMATION_FRACTION =
+            SystemProperties.getBoolean("persist.debug.animator.trace_fraction", false);
     private static float sDurationScale = 1.0f;
-    private static final ArrayList<WeakReference<DurationScaleChangeListener>> sDurationScaleChangeListeners = new ArrayList<>();
-    private static final TimeInterpolator sDefaultInterpolator = new AccelerateDecelerateInterpolator();
+    private static final ArrayList<WeakReference<DurationScaleChangeListener>>
+            sDurationScaleChangeListeners = new ArrayList<>();
+    private static final TimeInterpolator sDefaultInterpolator =
+            new AccelerateDecelerateInterpolator();
     long mStartTime = -1;
     float mSeekFraction = -1.0f;
     private boolean mResumed = false;
@@ -65,8 +67,7 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RepeatMode {
-    }
+    public @interface RepeatMode {}
 
     public static void setDurationScale(float durationScale) {
         List<WeakReference<DurationScaleChangeListener>> listenerCopy;
@@ -87,11 +88,13 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         return sDurationScale;
     }
 
-    public static boolean registerDurationScaleChangeListener(DurationScaleChangeListener listener) {
+    public static boolean registerDurationScaleChangeListener(
+            DurationScaleChangeListener listener) {
         int posToReplace = -1;
         synchronized (sDurationScaleChangeListeners) {
             for (int i = 0; i < sDurationScaleChangeListeners.size(); i++) {
-                WeakReference<DurationScaleChangeListener> ref = sDurationScaleChangeListeners.get(i);
+                WeakReference<DurationScaleChangeListener> ref =
+                        sDurationScaleChangeListeners.get(i);
                 if (ref.get() == null) {
                     if (posToReplace == -1) {
                         posToReplace = i;
@@ -108,11 +111,13 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         }
     }
 
-    public static boolean unregisterDurationScaleChangeListener(DurationScaleChangeListener listener) {
+    public static boolean unregisterDurationScaleChangeListener(
+            DurationScaleChangeListener listener) {
         boolean remove;
         synchronized (sDurationScaleChangeListeners) {
             WeakReference<DurationScaleChangeListener> listenerRefToRemove = null;
-            Iterator<WeakReference<DurationScaleChangeListener>> it = sDurationScaleChangeListeners.iterator();
+            Iterator<WeakReference<DurationScaleChangeListener>> it =
+                    sDurationScaleChangeListeners.iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;
@@ -232,7 +237,8 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
     @Override // android.animation.Animator
     public ValueAnimator setDuration(long duration) {
         if (duration < 0) {
-            throw new IllegalArgumentException("Animators cannot have negative duration: " + duration);
+            throw new IllegalArgumentException(
+                    "Animators cannot have negative duration: " + duration);
         }
         this.mDuration = duration;
         return this;
@@ -311,7 +317,9 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
     }
 
     private boolean shouldPlayBackward(int iteration, boolean inReverse) {
-        if (iteration <= 0 || this.mRepeatMode != 2 || (iteration >= this.mRepeatCount + 1 && this.mRepeatCount != -1)) {
+        if (iteration <= 0
+                || this.mRepeatMode != 2
+                || (iteration >= this.mRepeatCount + 1 && this.mRepeatCount != -1)) {
             return inReverse;
         }
         return inReverse ? iteration % 2 == 0 : iteration % 2 != 0;
@@ -331,7 +339,8 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         if (durationScale == 0.0f) {
             durationScale = 1.0f;
         }
-        return (long) ((AnimationUtils.currentAnimationTimeMillis() - this.mStartTime) / durationScale);
+        return (long)
+                ((AnimationUtils.currentAnimationTimeMillis() - this.mStartTime) / durationScale);
     }
 
     @Override // android.animation.Animator
@@ -490,7 +499,8 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         if (this.mAnimationEndRequested) {
             return;
         }
-        if ((this.mStarted || this.mRunning || this.mStartListenersCalled) && this.mListeners != null) {
+        if ((this.mStarted || this.mRunning || this.mStartListenersCalled)
+                && this.mListeners != null) {
             if (!this.mRunning) {
                 notifyStartListeners(this.mReversing);
             }
@@ -517,7 +527,9 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
     @Override // android.animation.Animator
     public void resume() {
         if (Looper.myLooper() == null) {
-            throw new AndroidRuntimeException("Animators may only be resumed from the same thread that the animator was started on");
+            throw new AndroidRuntimeException(
+                    "Animators may only be resumed from the same thread that the animator was"
+                            + " started on");
         }
         if (this.mPaused && !this.mResumed) {
             this.mResumed = true;
@@ -637,10 +649,12 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         boolean done = false;
         if (this.mRunning) {
             long scaledDuration = getScaledDuration();
-            float fraction = scaledDuration > 0 ? (currentTime - this.mStartTime) / scaledDuration : 1.0f;
+            float fraction =
+                    scaledDuration > 0 ? (currentTime - this.mStartTime) / scaledDuration : 1.0f;
             float lastFraction = this.mOverallFraction;
             boolean newIteration = ((int) fraction) > ((int) lastFraction);
-            boolean lastIterationFinished = fraction >= ((float) (this.mRepeatCount + 1)) && this.mRepeatCount != -1;
+            boolean lastIterationFinished =
+                    fraction >= ((float) (this.mRepeatCount + 1)) && this.mRepeatCount != -1;
             if (scaledDuration == 0) {
                 done = true;
             } else if (newIteration && !lastIterationFinished) {
@@ -649,7 +663,8 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
                 done = true;
             }
             this.mOverallFraction = clampFraction(fraction);
-            float currentIterationFraction = getCurrentIterationFraction(this.mOverallFraction, this.mReversing);
+            float currentIterationFraction =
+                    getCurrentIterationFraction(this.mOverallFraction, this.mReversing);
             animateValue(currentIterationFraction);
         }
         return done;
@@ -664,7 +679,8 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         long duration = getTotalDuration();
         if (lastPlayTime < 0 || (lastPlayTime == 0 && currentPlayTime > 0)) {
             notifyStartListeners(false);
-        } else if (lastPlayTime > duration || (lastPlayTime == duration && currentPlayTime < duration)) {
+        } else if (lastPlayTime > duration
+                || (lastPlayTime == duration && currentPlayTime < duration)) {
             notifyStartListeners(true);
         }
         if (duration >= 0) {
@@ -675,7 +691,8 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
         if (this.mRepeatCount > 0) {
             int iteration = Math.max(0, (int) (currentPlayTime2 / this.mDuration));
             int lastIteration = Math.max(0, (int) (lastPlayTime2 / this.mDuration));
-            if (Math.min(iteration, this.mRepeatCount) != Math.min(lastIteration, this.mRepeatCount)) {
+            if (Math.min(iteration, this.mRepeatCount)
+                    != Math.min(lastIteration, this.mRepeatCount)) {
                 notifyListeners(Animator.AnimatorCaller.ON_REPEAT, false);
             }
         }
@@ -728,7 +745,8 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
             if (this.mReversing) {
                 resolveDurationScale = frameTime;
             } else {
-                resolveDurationScale = ((long) (this.mStartDelay * resolveDurationScale())) + frameTime;
+                resolveDurationScale =
+                        ((long) (this.mStartDelay * resolveDurationScale())) + frameTime;
             }
             this.mStartTime = resolveDurationScale;
         }
@@ -871,11 +889,12 @@ public class ValueAnimator extends Animator implements AnimationHandler.Animatio
     }
 
     @Override // android.animation.Animator
-    public void setAllowRunningAsynchronously(boolean mayRunAsync) {
-    }
+    public void setAllowRunningAsynchronously(boolean mayRunAsync) {}
 
     public AnimationHandler getAnimationHandler() {
-        return this.mAnimationHandler != null ? this.mAnimationHandler : AnimationHandler.getInstance();
+        return this.mAnimationHandler != null
+                ? this.mAnimationHandler
+                : AnimationHandler.getInstance();
     }
 
     public void setAnimationHandler(AnimationHandler animationHandler) {

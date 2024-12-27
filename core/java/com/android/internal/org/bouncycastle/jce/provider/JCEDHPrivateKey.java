@@ -15,11 +15,13 @@ import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.crypto.params.DHPrivateKeyParameters;
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.PKCS12BagAttributeCarrierImpl;
 import com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
 import java.util.Enumeration;
+
 import javax.crypto.interfaces.DHPrivateKey;
 import javax.crypto.spec.DHParameterSpec;
 import javax.crypto.spec.DHPrivateKeySpec;
@@ -32,8 +34,7 @@ public class JCEDHPrivateKey implements DHPrivateKey, PKCS12BagAttributeCarrier 
     private PrivateKeyInfo info;
     BigInteger x;
 
-    protected JCEDHPrivateKey() {
-    }
+    protected JCEDHPrivateKey() {}
 
     JCEDHPrivateKey(DHPrivateKey key) {
         this.x = key.getX();
@@ -54,7 +55,8 @@ public class JCEDHPrivateKey implements DHPrivateKey, PKCS12BagAttributeCarrier 
         if (id.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)) {
             DHParameter params = DHParameter.getInstance(seq);
             if (params.getL() != null) {
-                this.dhSpec = new DHParameterSpec(params.getP(), params.getG(), params.getL().intValue());
+                this.dhSpec =
+                        new DHParameterSpec(params.getP(), params.getG(), params.getL().intValue());
                 return;
             } else {
                 this.dhSpec = new DHParameterSpec(params.getP(), params.getG());
@@ -71,7 +73,11 @@ public class JCEDHPrivateKey implements DHPrivateKey, PKCS12BagAttributeCarrier 
 
     JCEDHPrivateKey(DHPrivateKeyParameters params) {
         this.x = params.getX();
-        this.dhSpec = new DHParameterSpec(params.getParameters().getP(), params.getParameters().getG(), params.getParameters().getL());
+        this.dhSpec =
+                new DHParameterSpec(
+                        params.getParameters().getP(),
+                        params.getParameters().getG(),
+                        params.getParameters().getL());
     }
 
     @Override // java.security.Key
@@ -90,7 +96,15 @@ public class JCEDHPrivateKey implements DHPrivateKey, PKCS12BagAttributeCarrier 
             if (this.info != null) {
                 return this.info.getEncoded(ASN1Encoding.DER);
             }
-            PrivateKeyInfo info = new PrivateKeyInfo(new AlgorithmIdentifier(PKCSObjectIdentifiers.dhKeyAgreement, new DHParameter(this.dhSpec.getP(), this.dhSpec.getG(), this.dhSpec.getL())), new ASN1Integer(getX()));
+            PrivateKeyInfo info =
+                    new PrivateKeyInfo(
+                            new AlgorithmIdentifier(
+                                    PKCSObjectIdentifiers.dhKeyAgreement,
+                                    new DHParameter(
+                                            this.dhSpec.getP(),
+                                            this.dhSpec.getG(),
+                                            this.dhSpec.getL())),
+                            new ASN1Integer(getX()));
             return info.getEncoded(ASN1Encoding.DER);
         } catch (IOException e) {
             return null;
@@ -109,7 +123,9 @@ public class JCEDHPrivateKey implements DHPrivateKey, PKCS12BagAttributeCarrier 
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         this.x = (BigInteger) in.readObject();
-        this.dhSpec = new DHParameterSpec((BigInteger) in.readObject(), (BigInteger) in.readObject(), in.readInt());
+        this.dhSpec =
+                new DHParameterSpec(
+                        (BigInteger) in.readObject(), (BigInteger) in.readObject(), in.readInt());
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {

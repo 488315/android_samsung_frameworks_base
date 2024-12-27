@@ -15,6 +15,7 @@ import android.graphics.RuntimeShader;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.graphics.Typeface;
+
 import com.android.internal.widget.remotecompose.core.PaintContext;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.operations.ShaderData;
@@ -44,11 +45,25 @@ public class AndroidPaintContext extends PaintContext {
     }
 
     @Override // com.android.internal.widget.remotecompose.core.PaintContext
-    public void drawBitmap(int imageId, int srcLeft, int srcTop, int srcRight, int srcBottom, int dstLeft, int dstTop, int dstRight, int dstBottom, int cdId) {
+    public void drawBitmap(
+            int imageId,
+            int srcLeft,
+            int srcTop,
+            int srcRight,
+            int srcBottom,
+            int dstLeft,
+            int dstTop,
+            int dstRight,
+            int dstBottom,
+            int cdId) {
         AndroidRemoteContext androidContext = (AndroidRemoteContext) this.mContext;
         if (androidContext.mRemoteComposeState.containsId(imageId)) {
             Bitmap bitmap = (Bitmap) androidContext.mRemoteComposeState.getFromId(imageId);
-            this.mCanvas.drawBitmap(bitmap, new Rect(srcLeft, srcTop, srcRight, srcBottom), new Rect(dstLeft, dstTop, dstRight, dstBottom), this.mPaint);
+            this.mCanvas.drawBitmap(
+                    bitmap,
+                    new Rect(srcLeft, srcTop, srcRight, srcBottom),
+                    new Rect(dstLeft, dstTop, dstRight, dstBottom),
+                    this.mPaint);
         }
     }
 
@@ -63,7 +78,8 @@ public class AndroidPaintContext extends PaintContext {
     }
 
     @Override // com.android.internal.widget.remotecompose.core.PaintContext
-    public void drawArc(float left, float top, float right, float bottom, float startAngle, float sweepAngle) {
+    public void drawArc(
+            float left, float top, float right, float bottom, float startAngle, float sweepAngle) {
         this.mCanvas.drawArc(left, top, right, bottom, startAngle, sweepAngle, true, this.mPaint);
     }
 
@@ -104,13 +120,15 @@ public class AndroidPaintContext extends PaintContext {
     }
 
     @Override // com.android.internal.widget.remotecompose.core.PaintContext
-    public void drawRoundRect(float left, float top, float right, float bottom, float radiusX, float radiusY) {
+    public void drawRoundRect(
+            float left, float top, float right, float bottom, float radiusX, float radiusY) {
         this.mCanvas.drawRoundRect(left, top, right, bottom, radiusX, radiusY, this.mPaint);
     }
 
     @Override // com.android.internal.widget.remotecompose.core.PaintContext
     public void drawTextOnPath(int textId, int pathId, float hOffset, float vOffset) {
-        this.mCanvas.drawTextOnPath(getText(textId), getPath(pathId, 0.0f, 1.0f), hOffset, vOffset, this.mPaint);
+        this.mCanvas.drawTextOnPath(
+                getText(textId), getPath(pathId, 0.0f, 1.0f), hOffset, vOffset, this.mPaint);
     }
 
     @Override // com.android.internal.widget.remotecompose.core.PaintContext
@@ -122,12 +140,23 @@ public class AndroidPaintContext extends PaintContext {
         this.mPaint.getTextBounds(str, start, end, this.mTmpRect);
         bounds[0] = this.mTmpRect.left;
         bounds[1] = this.mTmpRect.top;
-        bounds[2] = monospace ? this.mPaint.measureText(str, start, end) - this.mTmpRect.left : this.mTmpRect.right;
+        bounds[2] =
+                monospace
+                        ? this.mPaint.measureText(str, start, end) - this.mTmpRect.left
+                        : this.mTmpRect.right;
         bounds[3] = this.mTmpRect.bottom;
     }
 
     @Override // com.android.internal.widget.remotecompose.core.PaintContext
-    public void drawTextRun(int textID, int start, int end, int contextStart, int contextEnd, float x, float y, boolean rtl) {
+    public void drawTextRun(
+            int textID,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            float x,
+            float y,
+            boolean rtl) {
         String textToPaint = getText(textID);
         if (end == -1) {
             if (start != 0) {
@@ -209,159 +238,202 @@ public class AndroidPaintContext extends PaintContext {
 
     @Override // com.android.internal.widget.remotecompose.core.PaintContext
     public void applyPaint(PaintBundle mPaintData) {
-        mPaintData.applyPaintChange(this, new PaintChanges() { // from class: com.android.internal.widget.remotecompose.player.platform.AndroidPaintContext.1
-            Shader.TileMode[] mTileModes = {Shader.TileMode.CLAMP, Shader.TileMode.REPEAT, Shader.TileMode.MIRROR};
+        mPaintData.applyPaintChange(
+                this,
+                new PaintChanges() { // from class:
+                                     // com.android.internal.widget.remotecompose.player.platform.AndroidPaintContext.1
+                    Shader.TileMode[] mTileModes = {
+                        Shader.TileMode.CLAMP, Shader.TileMode.REPEAT, Shader.TileMode.MIRROR
+                    };
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setTextSize(float size) {
-                AndroidPaintContext.this.mPaint.setTextSize(size);
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setTextSize(float size) {
+                        AndroidPaintContext.this.mPaint.setTextSize(size);
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setTypeFace(int fontType, int weight, boolean italic) {
-                int[] iArr = {0, 1, 2, 3};
-                switch (fontType) {
-                    case 0:
-                        if (weight == 400 && !italic) {
-                            AndroidPaintContext.this.mPaint.setTypeface(Typeface.DEFAULT);
-                            break;
-                        } else {
-                            AndroidPaintContext.this.mPaint.setTypeface(Typeface.create(Typeface.DEFAULT, weight, italic));
-                            break;
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setTypeFace(int fontType, int weight, boolean italic) {
+                        int[] iArr = {0, 1, 2, 3};
+                        switch (fontType) {
+                            case 0:
+                                if (weight == 400 && !italic) {
+                                    AndroidPaintContext.this.mPaint.setTypeface(Typeface.DEFAULT);
+                                    break;
+                                } else {
+                                    AndroidPaintContext.this.mPaint.setTypeface(
+                                            Typeface.create(Typeface.DEFAULT, weight, italic));
+                                    break;
+                                }
+                            case 1:
+                                if (weight == 400 && !italic) {
+                                    AndroidPaintContext.this.mPaint.setTypeface(
+                                            Typeface.SANS_SERIF);
+                                    break;
+                                } else {
+                                    AndroidPaintContext.this.mPaint.setTypeface(
+                                            Typeface.create(Typeface.SANS_SERIF, weight, italic));
+                                    break;
+                                }
+                            case 2:
+                                if (weight == 400 && !italic) {
+                                    AndroidPaintContext.this.mPaint.setTypeface(Typeface.SERIF);
+                                    break;
+                                } else {
+                                    AndroidPaintContext.this.mPaint.setTypeface(
+                                            Typeface.create(Typeface.SERIF, weight, italic));
+                                    break;
+                                }
+                            case 3:
+                                if (weight == 400 && !italic) {
+                                    AndroidPaintContext.this.mPaint.setTypeface(Typeface.MONOSPACE);
+                                    break;
+                                } else {
+                                    AndroidPaintContext.this.mPaint.setTypeface(
+                                            Typeface.create(Typeface.MONOSPACE, weight, italic));
+                                    break;
+                                }
                         }
-                    case 1:
-                        if (weight == 400 && !italic) {
-                            AndroidPaintContext.this.mPaint.setTypeface(Typeface.SANS_SERIF);
-                            break;
-                        } else {
-                            AndroidPaintContext.this.mPaint.setTypeface(Typeface.create(Typeface.SANS_SERIF, weight, italic));
-                            break;
+                    }
+
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setStrokeWidth(float width) {
+                        AndroidPaintContext.this.mPaint.setStrokeWidth(width);
+                    }
+
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setColor(int color) {
+                        AndroidPaintContext.this.mPaint.setColor(color);
+                    }
+
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setStrokeCap(int cap) {
+                        AndroidPaintContext.this.mPaint.setStrokeCap(Paint.Cap.values()[cap]);
+                    }
+
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setStyle(int style) {
+                        AndroidPaintContext.this.mPaint.setStyle(Paint.Style.values()[style]);
+                    }
+
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setShader(int shaderId) {
+                        if (shaderId == 0) {
+                            AndroidPaintContext.this.mPaint.setShader(null);
+                            return;
                         }
-                    case 2:
-                        if (weight == 400 && !italic) {
-                            AndroidPaintContext.this.mPaint.setTypeface(Typeface.SERIF);
-                            break;
-                        } else {
-                            AndroidPaintContext.this.mPaint.setTypeface(Typeface.create(Typeface.SERIF, weight, italic));
-                            break;
+                        ShaderData data = AndroidPaintContext.this.getShaderData(shaderId);
+                        RuntimeShader shader =
+                                new RuntimeShader(
+                                        AndroidPaintContext.this.getText(data.getShaderTextId()));
+                        String[] names = data.getUniformFloatNames();
+                        for (String name : names) {
+                            float[] val = data.getUniformFloats(name);
+                            shader.setFloatUniform(name, val);
                         }
-                    case 3:
-                        if (weight == 400 && !italic) {
-                            AndroidPaintContext.this.mPaint.setTypeface(Typeface.MONOSPACE);
-                            break;
-                        } else {
-                            AndroidPaintContext.this.mPaint.setTypeface(Typeface.create(Typeface.MONOSPACE, weight, italic));
-                            break;
+                        String[] names2 = data.getUniformIntegerNames();
+                        for (String name2 : names2) {
+                            int[] val2 = data.getUniformInts(name2);
+                            shader.setIntUniform(name2, val2);
                         }
-                }
-            }
+                        for (String str : data.getUniformBitmapNames()) {
+                            data.getUniformBitmapId(str);
+                        }
+                        AndroidPaintContext.this.mPaint.setShader(shader);
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setStrokeWidth(float width) {
-                AndroidPaintContext.this.mPaint.setStrokeWidth(width);
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setImageFilterQuality(int quality) {
+                        Utils.log(" quality =" + quality);
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setColor(int color) {
-                AndroidPaintContext.this.mPaint.setColor(color);
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setBlendMode(int mode) {
+                        AndroidPaintContext.this.mPaint.setBlendMode(
+                                AndroidPaintContext.origamiToBlendMode(mode));
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setStrokeCap(int cap) {
-                AndroidPaintContext.this.mPaint.setStrokeCap(Paint.Cap.values()[cap]);
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setAlpha(float a) {
+                        AndroidPaintContext.this.mPaint.setAlpha((int) (255.0f * a));
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setStyle(int style) {
-                AndroidPaintContext.this.mPaint.setStyle(Paint.Style.values()[style]);
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setStrokeMiter(float miter) {
+                        AndroidPaintContext.this.mPaint.setStrokeMiter(miter);
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setShader(int shaderId) {
-                if (shaderId == 0) {
-                    AndroidPaintContext.this.mPaint.setShader(null);
-                    return;
-                }
-                ShaderData data = AndroidPaintContext.this.getShaderData(shaderId);
-                RuntimeShader shader = new RuntimeShader(AndroidPaintContext.this.getText(data.getShaderTextId()));
-                String[] names = data.getUniformFloatNames();
-                for (String name : names) {
-                    float[] val = data.getUniformFloats(name);
-                    shader.setFloatUniform(name, val);
-                }
-                String[] names2 = data.getUniformIntegerNames();
-                for (String name2 : names2) {
-                    int[] val2 = data.getUniformInts(name2);
-                    shader.setIntUniform(name2, val2);
-                }
-                for (String str : data.getUniformBitmapNames()) {
-                    data.getUniformBitmapId(str);
-                }
-                AndroidPaintContext.this.mPaint.setShader(shader);
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setStrokeJoin(int join) {
+                        AndroidPaintContext.this.mPaint.setStrokeJoin(Paint.Join.values()[join]);
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setImageFilterQuality(int quality) {
-                Utils.log(" quality =" + quality);
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setFilterBitmap(boolean filter) {
+                        AndroidPaintContext.this.mPaint.setFilterBitmap(filter);
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setBlendMode(int mode) {
-                AndroidPaintContext.this.mPaint.setBlendMode(AndroidPaintContext.origamiToBlendMode(mode));
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setAntiAlias(boolean aa) {
+                        AndroidPaintContext.this.mPaint.setAntiAlias(aa);
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setAlpha(float a) {
-                AndroidPaintContext.this.mPaint.setAlpha((int) (255.0f * a));
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void clear(long mask) {}
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setStrokeMiter(float miter) {
-                AndroidPaintContext.this.mPaint.setStrokeMiter(miter);
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setLinearGradient(
+                            int[] colors,
+                            float[] stops,
+                            float startX,
+                            float startY,
+                            float endX,
+                            float endY,
+                            int tileMode) {
+                        AndroidPaintContext.this.mPaint.setShader(
+                                new LinearGradient(
+                                        startX,
+                                        startY,
+                                        endX,
+                                        endY,
+                                        colors,
+                                        stops,
+                                        this.mTileModes[tileMode]));
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setStrokeJoin(int join) {
-                AndroidPaintContext.this.mPaint.setStrokeJoin(Paint.Join.values()[join]);
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setRadialGradient(
+                            int[] colors,
+                            float[] stops,
+                            float centerX,
+                            float centerY,
+                            float radius,
+                            int tileMode) {
+                        AndroidPaintContext.this.mPaint.setShader(
+                                new RadialGradient(
+                                        centerX,
+                                        centerY,
+                                        radius,
+                                        colors,
+                                        stops,
+                                        this.mTileModes[tileMode]));
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setFilterBitmap(boolean filter) {
-                AndroidPaintContext.this.mPaint.setFilterBitmap(filter);
-            }
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setSweepGradient(
+                            int[] colors, float[] stops, float centerX, float centerY) {
+                        AndroidPaintContext.this.mPaint.setShader(
+                                new SweepGradient(centerX, centerY, colors, stops));
+                    }
 
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setAntiAlias(boolean aa) {
-                AndroidPaintContext.this.mPaint.setAntiAlias(aa);
-            }
-
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void clear(long mask) {
-            }
-
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setLinearGradient(int[] colors, float[] stops, float startX, float startY, float endX, float endY, int tileMode) {
-                AndroidPaintContext.this.mPaint.setShader(new LinearGradient(startX, startY, endX, endY, colors, stops, this.mTileModes[tileMode]));
-            }
-
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setRadialGradient(int[] colors, float[] stops, float centerX, float centerY, float radius, int tileMode) {
-                AndroidPaintContext.this.mPaint.setShader(new RadialGradient(centerX, centerY, radius, colors, stops, this.mTileModes[tileMode]));
-            }
-
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setSweepGradient(int[] colors, float[] stops, float centerX, float centerY) {
-                AndroidPaintContext.this.mPaint.setShader(new SweepGradient(centerX, centerY, colors, stops));
-            }
-
-            @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
-            public void setColorFilter(int color, int mode) {
-                PorterDuff.Mode pmode = AndroidPaintContext.origamiToPorterDuffMode(mode);
-                if (pmode != null) {
-                    AndroidPaintContext.this.mPaint.setColorFilter(new PorterDuffColorFilter(color, pmode));
-                }
-            }
-        });
+                    @Override // com.android.internal.widget.remotecompose.core.operations.paint.PaintChanges
+                    public void setColorFilter(int color, int mode) {
+                        PorterDuff.Mode pmode = AndroidPaintContext.origamiToPorterDuffMode(mode);
+                        if (pmode != null) {
+                            AndroidPaintContext.this.mPaint.setColorFilter(
+                                    new PorterDuffColorFilter(color, pmode));
+                        }
+                    }
+                });
     }
 
     @Override // com.android.internal.widget.remotecompose.core.PaintContext

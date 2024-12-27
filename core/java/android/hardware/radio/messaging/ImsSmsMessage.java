@@ -4,26 +4,29 @@ import android.hardware.radio.RadioTechnologyFamily$$;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class ImsSmsMessage implements Parcelable {
-    public static final Parcelable.Creator<ImsSmsMessage> CREATOR = new Parcelable.Creator<ImsSmsMessage>() { // from class: android.hardware.radio.messaging.ImsSmsMessage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsSmsMessage createFromParcel(Parcel _aidl_source) {
-            ImsSmsMessage _aidl_out = new ImsSmsMessage();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ImsSmsMessage> CREATOR =
+            new Parcelable.Creator<ImsSmsMessage>() { // from class:
+                // android.hardware.radio.messaging.ImsSmsMessage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsSmsMessage createFromParcel(Parcel _aidl_source) {
+                    ImsSmsMessage _aidl_out = new ImsSmsMessage();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsSmsMessage[] newArray(int _aidl_size) {
-            return new ImsSmsMessage[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsSmsMessage[] newArray(int _aidl_size) {
+                    return new ImsSmsMessage[_aidl_size];
+                }
+            };
     public CdmaSmsMessage[] cdmaMessage;
     public GsmSmsMessage[] gsmMessage;
     public int tech;
@@ -88,14 +91,16 @@ public class ImsSmsMessage implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.cdmaMessage = (CdmaSmsMessage[]) _aidl_parcel.createTypedArray(CdmaSmsMessage.CREATOR);
+            this.cdmaMessage =
+                    (CdmaSmsMessage[]) _aidl_parcel.createTypedArray(CdmaSmsMessage.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.gsmMessage = (GsmSmsMessage[]) _aidl_parcel.createTypedArray(GsmSmsMessage.CREATOR);
+                this.gsmMessage =
+                        (GsmSmsMessage[]) _aidl_parcel.createTypedArray(GsmSmsMessage.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

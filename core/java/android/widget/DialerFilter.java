@@ -41,7 +41,7 @@ public class DialerFilter extends RelativeLayout {
     @Override // android.view.View
     protected void onFinishInflate() {
         super.onFinishInflate();
-        this.mInputFilters = new InputFilter[]{new InputFilter.AllCaps()};
+        this.mInputFilters = new InputFilter[] {new InputFilter.AllCaps()};
         this.mHint = (EditText) findViewById(16908293);
         if (this.mHint == null) {
             throw new IllegalStateException("DialerFilter must have a child EditText named hint");
@@ -53,7 +53,8 @@ public class DialerFilter extends RelativeLayout {
         this.mLetters.setFocusable(false);
         this.mPrimary = (EditText) findViewById(16908300);
         if (this.mPrimary == null) {
-            throw new IllegalStateException("DialerFilter must have a child EditText named primary");
+            throw new IllegalStateException(
+                    "DialerFilter must have a child EditText named primary");
         }
         this.mPrimary.setFilters(this.mInputFilters);
         this.mDigits = this.mPrimary;
@@ -92,7 +93,9 @@ public class DialerFilter extends RelativeLayout {
             case 67:
                 switch (this.mMode) {
                     case 1:
-                        handled = this.mDigits.onKeyDown(keyCode, event) & this.mLetters.onKeyDown(keyCode, event);
+                        handled =
+                                this.mDigits.onKeyDown(keyCode, event)
+                                        & this.mLetters.onKeyDown(keyCode, event);
                         break;
                     case 2:
                         handled = this.mLetters.onKeyDown(keyCode, event);
@@ -313,6 +316,5 @@ public class DialerFilter extends RelativeLayout {
         text.removeSpan(watcher);
     }
 
-    protected void onModeChange(int oldMode, int newMode) {
-    }
+    protected void onModeChange(int oldMode, int newMode) {}
 }

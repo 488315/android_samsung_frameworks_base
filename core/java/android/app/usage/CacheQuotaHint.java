@@ -3,26 +3,38 @@ package android.app.usage;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class CacheQuotaHint implements Parcelable {
-    public static final Parcelable.Creator<CacheQuotaHint> CREATOR = new Parcelable.Creator<CacheQuotaHint>() { // from class: android.app.usage.CacheQuotaHint.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CacheQuotaHint createFromParcel(Parcel in) {
-            Builder builder = new Builder();
-            return builder.setVolumeUuid(in.readString()).setUid(in.readInt()).setQuota(in.readLong()).setUsageStats((UsageStats) in.readParcelable(UsageStats.class.getClassLoader(), UsageStats.class)).build();
-        }
+    public static final Parcelable.Creator<CacheQuotaHint> CREATOR =
+            new Parcelable.Creator<
+                    CacheQuotaHint>() { // from class: android.app.usage.CacheQuotaHint.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CacheQuotaHint createFromParcel(Parcel in) {
+                    Builder builder = new Builder();
+                    return builder.setVolumeUuid(in.readString())
+                            .setUid(in.readInt())
+                            .setQuota(in.readLong())
+                            .setUsageStats(
+                                    (UsageStats)
+                                            in.readParcelable(
+                                                    UsageStats.class.getClassLoader(),
+                                                    UsageStats.class))
+                            .build();
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CacheQuotaHint[] newArray(int size) {
-            return new CacheQuotaHint[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CacheQuotaHint[] newArray(int size) {
+                    return new CacheQuotaHint[size];
+                }
+            };
     public static final long QUOTA_NOT_SET = -1;
     private final long mQuota;
     private final int mUid;
@@ -70,11 +82,18 @@ public final class CacheQuotaHint implements Parcelable {
             return false;
         }
         CacheQuotaHint other = (CacheQuotaHint) o;
-        return Objects.equals(this.mUuid, other.mUuid) && Objects.equals(this.mUsageStats, other.mUsageStats) && this.mUid == other.mUid && this.mQuota == other.mQuota;
+        return Objects.equals(this.mUuid, other.mUuid)
+                && Objects.equals(this.mUsageStats, other.mUsageStats)
+                && this.mUid == other.mUid
+                && this.mQuota == other.mQuota;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mUuid, Integer.valueOf(this.mUid), this.mUsageStats, Long.valueOf(this.mQuota));
+        return Objects.hash(
+                this.mUuid,
+                Integer.valueOf(this.mUid),
+                this.mUsageStats,
+                Long.valueOf(this.mQuota));
     }
 
     public static final class Builder {
@@ -83,8 +102,7 @@ public final class CacheQuotaHint implements Parcelable {
         private UsageStats mUsageStats;
         private String mUuid;
 
-        public Builder() {
-        }
+        public Builder() {}
 
         public Builder(CacheQuotaHint hint) {
             setVolumeUuid(hint.getVolumeUuid());

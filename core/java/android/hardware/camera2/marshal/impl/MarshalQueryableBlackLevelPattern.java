@@ -4,6 +4,7 @@ import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.params.BlackLevelPattern;
 import android.hardware.camera2.utils.TypeReference;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
@@ -11,7 +12,8 @@ public class MarshalQueryableBlackLevelPattern implements MarshalQueryable<Black
     private static final int SIZE = 16;
 
     private class MarshalerBlackLevelPattern extends Marshaler<BlackLevelPattern> {
-        protected MarshalerBlackLevelPattern(TypeReference<BlackLevelPattern> typeReference, int nativeType) {
+        protected MarshalerBlackLevelPattern(
+                TypeReference<BlackLevelPattern> typeReference, int nativeType) {
             super(MarshalQueryableBlackLevelPattern.this, typeReference, nativeType);
         }
 
@@ -41,12 +43,14 @@ public class MarshalQueryableBlackLevelPattern implements MarshalQueryable<Black
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public Marshaler<BlackLevelPattern> createMarshaler(TypeReference<BlackLevelPattern> managedType, int nativeType) {
+    public Marshaler<BlackLevelPattern> createMarshaler(
+            TypeReference<BlackLevelPattern> managedType, int nativeType) {
         return new MarshalerBlackLevelPattern(managedType, nativeType);
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public boolean isTypeMappingSupported(TypeReference<BlackLevelPattern> managedType, int nativeType) {
+    public boolean isTypeMappingSupported(
+            TypeReference<BlackLevelPattern> managedType, int nativeType) {
         return nativeType == 1 && BlackLevelPattern.class.equals(managedType.getType());
     }
 }

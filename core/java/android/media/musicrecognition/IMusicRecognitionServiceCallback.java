@@ -10,7 +10,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IMusicRecognitionServiceCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.media.musicrecognition.IMusicRecognitionServiceCallback";
+    public static final String DESCRIPTOR =
+            "android.media.musicrecognition.IMusicRecognitionServiceCallback";
 
     void onRecognitionFailed(int i) throws RemoteException;
 
@@ -18,12 +19,11 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
 
     public static class Default implements IMusicRecognitionServiceCallback {
         @Override // android.media.musicrecognition.IMusicRecognitionServiceCallback
-        public void onRecognitionSucceeded(MediaMetadata result, Bundle extras) throws RemoteException {
-        }
+        public void onRecognitionSucceeded(MediaMetadata result, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.musicrecognition.IMusicRecognitionServiceCallback
-        public void onRecognitionFailed(int failureCode) throws RemoteException {
-        }
+        public void onRecognitionFailed(int failureCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -31,7 +31,7 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMusicRecognitionServiceCallback {
+    public abstract static class Stub extends Binder implements IMusicRecognitionServiceCallback {
         static final int TRANSACTION_onRecognitionFailed = 2;
         static final int TRANSACTION_onRecognitionSucceeded = 1;
 
@@ -72,7 +72,8 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMusicRecognitionServiceCallback.DESCRIPTOR);
             }
@@ -82,7 +83,8 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    MediaMetadata _arg0 = (MediaMetadata) data.readTypedObject(MediaMetadata.CREATOR);
+                    MediaMetadata _arg0 =
+                            (MediaMetadata) data.readTypedObject(MediaMetadata.CREATOR);
                     Bundle _arg1 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     onRecognitionSucceeded(_arg0, _arg1);
@@ -114,7 +116,8 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
             }
 
             @Override // android.media.musicrecognition.IMusicRecognitionServiceCallback
-            public void onRecognitionSucceeded(MediaMetadata result, Bundle extras) throws RemoteException {
+            public void onRecognitionSucceeded(MediaMetadata result, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMusicRecognitionServiceCallback.DESCRIPTOR);

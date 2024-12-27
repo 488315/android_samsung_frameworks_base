@@ -15,25 +15,37 @@ import android.view.VelocityTracker;
 import android.view.WindowManager;
 import android.view.WindowManagerPolicyConstants;
 import android.view.inputmethod.InputMethodManager;
+
 import com.android.internal.content.NativeLibraryHelper;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
-public class TouchEventView implements InputManager.InputDeviceListener, WindowManagerPolicyConstants.PointerEventListener {
+public class TouchEventView
+        implements InputManager.InputDeviceListener,
+                WindowManagerPolicyConstants.PointerEventListener {
     private static final String FLOATING_KEYBOARD_HEIGHT = "floating_keyboard_height";
     private static final String FLOATING_KEYBOARD_INFO = "floating_keyboard_info";
-    private static final String FLOATING_KEYBOARD_LOCATION_LAND_X = "floating_keyboard_location_land_x";
-    private static final String FLOATING_KEYBOARD_LOCATION_LAND_Y = "floating_keyboard_location_land_y";
+    private static final String FLOATING_KEYBOARD_LOCATION_LAND_X =
+            "floating_keyboard_location_land_x";
+    private static final String FLOATING_KEYBOARD_LOCATION_LAND_Y =
+            "floating_keyboard_location_land_y";
     private static final String FLOATING_KEYBOARD_LOCATION_X = "floating_keyboard_location_x";
     private static final String FLOATING_KEYBOARD_LOCATION_Y = "floating_keyboard_location_y";
     private static final String FLOATING_KEYBOARD_ON = "floating_keyboard_on";
     private static final String FLOATING_KEYBOARD_WIDTH = "floating_keyboard_width";
-    public static final String HONEY_BOARD_PROVIDER = "content://com.samsung.android.honeyboard.provider.KeyboardSettingsProvider";
-    private static final String HONEY_DEFAULT_PACKAGE_NAME = "com.samsung.android.honeyboard/.service.HoneyBoardService";
-    public static final String KEYBOARD_SETTINGS_PROVIDER = "content://com.sec.android.inputmethod.implement.setting.provider.KeyboardSettingsProvider";
-    public static final String KEYBOARD_SETTINGS_PROVIDER_BETA = "content://com.sec.android.inputmethod.beta.implement.setting.provider.KeyboardSettingsProvider";
-    private static final String SKBDN_DEFAULT_PACKAGE_NAME = "com.sec.android.inputmethod.beta/com.sec.android.inputmethod.SamsungKeypad";
-    private static final String SKBD_DEFAULT_PACKAGE_NAME = "com.sec.android.inputmethod/.SamsungKeypad";
+    public static final String HONEY_BOARD_PROVIDER =
+            "content://com.samsung.android.honeyboard.provider.KeyboardSettingsProvider";
+    private static final String HONEY_DEFAULT_PACKAGE_NAME =
+            "com.samsung.android.honeyboard/.service.HoneyBoardService";
+    public static final String KEYBOARD_SETTINGS_PROVIDER =
+            "content://com.sec.android.inputmethod.implement.setting.provider.KeyboardSettingsProvider";
+    public static final String KEYBOARD_SETTINGS_PROVIDER_BETA =
+            "content://com.sec.android.inputmethod.beta.implement.setting.provider.KeyboardSettingsProvider";
+    private static final String SKBDN_DEFAULT_PACKAGE_NAME =
+            "com.sec.android.inputmethod.beta/com.sec.android.inputmethod.SamsungKeypad";
+    private static final String SKBD_DEFAULT_PACKAGE_NAME =
+            "com.sec.android.inputmethod/.SamsungKeypad";
     private static final String TAG = "TouchEventView";
     private int mActivePointerId;
     private AuthFactorTouchManager mAuthFactorTouchManager;
@@ -91,7 +103,16 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
             this.mRawX += this.x_offset;
             this.mRawY += this.y_offset;
             this.isTyping = isUserTypingKeyboard(this.mRawX, this.mRawY, orient);
-            Log.i(TAG, "mTouchMajor: " + this.mTouchMajor + ", mTouchMinor: " + this.mTouchMinor + ", mDownTime: " + this.mDownTime + ", mUpTime: " + this.mUpTime);
+            Log.i(
+                    TAG,
+                    "mTouchMajor: "
+                            + this.mTouchMajor
+                            + ", mTouchMinor: "
+                            + this.mTouchMinor
+                            + ", mDownTime: "
+                            + this.mDownTime
+                            + ", mUpTime: "
+                            + this.mUpTime);
             Log.i(TAG, "isTyping: " + this.isTyping);
             int action = event.getAction();
             int NP = this.mPointers.size();
@@ -120,13 +141,15 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
                     this.mPointers.add(new PointerState());
                     NP++;
                 }
-                if (this.mActivePointerId < 0 || !this.mPointers.get(this.mActivePointerId).mCurDown) {
+                if (this.mActivePointerId < 0
+                        || !this.mPointers.get(this.mActivePointerId).mCurDown) {
                     this.mActivePointerId = id;
                 }
                 PointerState ps2 = this.mPointers.get(id);
                 ps2.mCurDown = true;
                 InputDevice device = InputDevice.getDevice(event.getDeviceId());
-                ps2.mHasBoundingBox = (device == null || device.getMotionRange(32) == null) ? false : true;
+                ps2.mHasBoundingBox =
+                        (device == null || device.getMotionRange(32) == null) ? false : true;
             }
             int NI = event.getPointerCount();
             this.mVelocity.addMovement(event);
@@ -138,7 +161,8 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
             int N = event.getHistorySize();
             for (int historyPos = 0; historyPos < N; historyPos++) {
                 for (int i = 0; i < NI; i++) {
-                    PointerState ps3 = this.mCurDown ? this.mPointers.get(event.getPointerId(i)) : null;
+                    PointerState ps3 =
+                            this.mCurDown ? this.mPointers.get(event.getPointerId(i)) : null;
                     MotionEvent.PointerCoords coords = ps3 != null ? ps3.mCoords : this.mTempCoords;
                     event.getHistoricalPointerCoords(i, historyPos, coords);
                     if (ps3 != null) {
@@ -159,7 +183,12 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
                     if (this.mAltVelocity != null) {
                         ps4.mAltXVelocity = this.mAltVelocity.getXVelocity(id2);
                         ps4.mAltYVelocity = this.mAltVelocity.getYVelocity(id2);
-                        Log.i(TAG, "mAltXVelocity: " + ps4.mAltXVelocity + ", mAltYVelocity: " + ps4.mAltYVelocity);
+                        Log.i(
+                                TAG,
+                                "mAltXVelocity: "
+                                        + ps4.mAltXVelocity
+                                        + ", mAltYVelocity: "
+                                        + ps4.mAltYVelocity);
                     }
                     ps4.mToolType = event.getToolType(i2);
                     Log.i(TAG, "ToolType: " + ps4.mToolType);
@@ -168,7 +197,16 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
                         ps4.mBoundingTop = event.getAxisValue(33, i2);
                         ps4.mBoundingRight = event.getAxisValue(34, i2);
                         ps4.mBoundingBottom = event.getAxisValue(35, i2);
-                        Log.i(TAG, "mBoundingLeft: " + ps4.mBoundingLeft + ", mBoundingRight: " + ps4.mBoundingRight + ", mBoundingTop: " + ps4.mBoundingTop + ", mBoundingBottom: " + ps4.mBoundingBottom);
+                        Log.i(
+                                TAG,
+                                "mBoundingLeft: "
+                                        + ps4.mBoundingLeft
+                                        + ", mBoundingRight: "
+                                        + ps4.mBoundingRight
+                                        + ", mBoundingTop: "
+                                        + ps4.mBoundingTop
+                                        + ", mBoundingBottom: "
+                                        + ps4.mBoundingBottom);
                     }
                 }
             }
@@ -222,13 +260,33 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
         String[] columns = {FLOATING_KEYBOARD_INFO};
         Cursor c = null;
         try {
-            String defaultIme = Settings.Secure.getString(this.mContext.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
+            String defaultIme =
+                    Settings.Secure.getString(
+                            this.mContext.getContentResolver(),
+                            Settings.Secure.DEFAULT_INPUT_METHOD);
             if (SKBD_DEFAULT_PACKAGE_NAME.equals(defaultIme)) {
-                c = this.mContext.getContentResolver().query(Uri.parse(KEYBOARD_SETTINGS_PROVIDER), null, null, columns, null);
+                c =
+                        this.mContext
+                                .getContentResolver()
+                                .query(
+                                        Uri.parse(KEYBOARD_SETTINGS_PROVIDER),
+                                        null,
+                                        null,
+                                        columns,
+                                        null);
             } else if (SKBDN_DEFAULT_PACKAGE_NAME.equals(defaultIme)) {
-                c = this.mContext.getContentResolver().query(Uri.parse(KEYBOARD_SETTINGS_PROVIDER_BETA), null, null, columns, null);
+                c =
+                        this.mContext
+                                .getContentResolver()
+                                .query(
+                                        Uri.parse(KEYBOARD_SETTINGS_PROVIDER_BETA),
+                                        null,
+                                        null,
+                                        columns,
+                                        null);
             } else {
-                if (!"com.samsung.android.honeyboard/.service.HoneyBoardService".equals(defaultIme)) {
+                if (!"com.samsung.android.honeyboard/.service.HoneyBoardService"
+                        .equals(defaultIme)) {
                     Log.d(TAG, "unkown keyboard");
                     if (0 != 0) {
                         c.close();
@@ -236,7 +294,10 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
                     }
                     return;
                 }
-                c = this.mContext.getContentResolver().query(Uri.parse(HONEY_BOARD_PROVIDER), null, null, columns, null);
+                c =
+                        this.mContext
+                                .getContentResolver()
+                                .query(Uri.parse(HONEY_BOARD_PROVIDER), null, null, columns, null);
             }
             if (c != null) {
                 c.moveToFirst();
@@ -247,7 +308,18 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
                 int landY = c.getInt(c.getColumnIndex(FLOATING_KEYBOARD_LOCATION_LAND_Y));
                 int width = c.getInt(c.getColumnIndex(FLOATING_KEYBOARD_WIDTH));
                 int height = c.getInt(c.getColumnIndex(FLOATING_KEYBOARD_HEIGHT));
-                Log.i(TAG, "isFloatingKeyboardOn: " + isFloatingKeyboardOn + ", x: " + x + ", y: " + y + ", landX: " + landX + ", landY: " + landY);
+                Log.i(
+                        TAG,
+                        "isFloatingKeyboardOn: "
+                                + isFloatingKeyboardOn
+                                + ", x: "
+                                + x
+                                + ", y: "
+                                + y
+                                + ", landX: "
+                                + landX
+                                + ", landY: "
+                                + landY);
                 this.keyboard_x = width;
                 this.keyboard_y = height;
             }
@@ -268,12 +340,15 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
     }
 
     private boolean isKeyboardShown() {
-        InputMethodManager is = (InputMethodManager) this.mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager is =
+                (InputMethodManager) this.mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         return is.semIsInputMethodShown();
     }
 
     private int setOffset() {
-        Display display = ((WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        Display display =
+                ((WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE))
+                        .getDefaultDisplay();
         int rotation = display.getRotation();
         if (rotation == 0) {
             this.x_offset = 0.0f;
@@ -296,7 +371,11 @@ public class TouchEventView implements InputManager.InputDeviceListener, WindowM
             if (x >= 0.0f && this.keyboard_x >= x && y >= 0.0f && this.keyboard_y >= y) {
                 return true;
             }
-        } else if ((orient == 1 || orient == 3) && x >= 0.0f && this.keyboard_x >= x && y >= 0.0f && this.keyboard_y >= y) {
+        } else if ((orient == 1 || orient == 3)
+                && x >= 0.0f
+                && this.keyboard_x >= x
+                && y >= 0.0f
+                && this.keyboard_y >= y) {
             return true;
         }
         return false;

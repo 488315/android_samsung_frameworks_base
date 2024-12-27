@@ -6,8 +6,9 @@ import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
-import com.android.internal.os.BinderInternal;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.Random;
 
 /* loaded from: classes5.dex */
@@ -33,39 +34,50 @@ public class BinderLatencyObserver {
     private int mFirstBucketSize = 5;
     private float mBucketScaleFactor = 1.125f;
     private int mStatsdPushIntervalMinutes = 360;
-    private Runnable mLatencyObserverRunnable = new Runnable() { // from class: com.android.internal.os.BinderLatencyObserver.1
-        @Override // java.lang.Runnable
-        public void run() {
-            ArrayMap<LatencyDims, int[]> histogramMap;
-            BinderLatencyObserver.this.noteLatencyDelayed();
-            synchronized (BinderLatencyObserver.this.mLock) {
-                histogramMap = new ArrayMap<>((ArrayMap<LatencyDims, int[]>) BinderLatencyObserver.this.mLatencyHistograms);
-                BinderLatencyObserver.this.mLatencyHistograms.clear();
-            }
-            BinderTransactionNameResolver resolver = new BinderTransactionNameResolver();
-            ProtoOutputStream proto = new ProtoOutputStream();
-            int histogramsWritten = 0;
-            for (LatencyDims dims : histogramMap.keySet()) {
-                if (proto.getRawSize() + 1000 > BinderLatencyObserver.this.getMaxAtomSizeBytes()) {
+    private Runnable mLatencyObserverRunnable =
+            new Runnable() { // from class: com.android.internal.os.BinderLatencyObserver.1
+                @Override // java.lang.Runnable
+                public void run() {
+                    ArrayMap<LatencyDims, int[]> histogramMap;
+                    BinderLatencyObserver.this.noteLatencyDelayed();
+                    synchronized (BinderLatencyObserver.this.mLock) {
+                        histogramMap =
+                                new ArrayMap<>(
+                                        (ArrayMap<LatencyDims, int[]>)
+                                                BinderLatencyObserver.this.mLatencyHistograms);
+                        BinderLatencyObserver.this.mLatencyHistograms.clear();
+                    }
+                    BinderTransactionNameResolver resolver = new BinderTransactionNameResolver();
+                    ProtoOutputStream proto = new ProtoOutputStream();
+                    int histogramsWritten = 0;
+                    for (LatencyDims dims : histogramMap.keySet()) {
+                        if (proto.getRawSize() + 1000
+                                > BinderLatencyObserver.this.getMaxAtomSizeBytes()) {
+                            if (histogramsWritten > 0) {
+                                BinderLatencyObserver.this.writeAtomToStatsd(proto);
+                            }
+                            proto = new ProtoOutputStream();
+                            histogramsWritten = 0;
+                        }
+                        String transactionName =
+                                resolver.getMethodName(
+                                        dims.getBinderClass(), dims.getTransactionCode());
+                        BinderLatencyObserver.this.fillApiStatsProto(
+                                proto, dims, transactionName, histogramMap.get(dims));
+                        histogramsWritten++;
+                    }
                     if (histogramsWritten > 0) {
                         BinderLatencyObserver.this.writeAtomToStatsd(proto);
                     }
-                    proto = new ProtoOutputStream();
-                    histogramsWritten = 0;
                 }
-                String transactionName = resolver.getMethodName(dims.getBinderClass(), dims.getTransactionCode());
-                BinderLatencyObserver.this.fillApiStatsProto(proto, dims, transactionName, histogramMap.get(dims));
-                histogramsWritten++;
-            }
-            if (histogramsWritten > 0) {
-                BinderLatencyObserver.this.writeAtomToStatsd(proto);
-            }
-        }
-    };
-    private BinderLatencyBuckets mLatencyBuckets = new BinderLatencyBuckets(this.mBucketCount, this.mFirstBucketSize, this.mBucketScaleFactor);
+            };
+    private BinderLatencyBuckets mLatencyBuckets =
+            new BinderLatencyBuckets(
+                    this.mBucketCount, this.mFirstBucketSize, this.mBucketScaleFactor);
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void fillApiStatsProto(ProtoOutputStream proto, LatencyDims dims, String transactionName, int[] histogram) {
+    public void fillApiStatsProto(
+            ProtoOutputStream proto, LatencyDims dims, String transactionName, int[] histogram) {
         int firstNonEmptyBucket = 0;
         int i = 0;
         while (true) {
@@ -110,13 +122,21 @@ public class BinderLatencyObserver {
     }
 
     protected void writeAtomToStatsd(ProtoOutputStream atom) {
-        FrameworkStatsLog.write(342, atom.getBytes(), this.mPeriodicSamplingInterval, this.mShardingModulo, this.mBucketCount, this.mFirstBucketSize, this.mBucketScaleFactor);
+        FrameworkStatsLog.write(
+                342,
+                atom.getBytes(),
+                this.mPeriodicSamplingInterval,
+                this.mShardingModulo,
+                this.mBucketCount,
+                this.mFirstBucketSize,
+                this.mBucketScaleFactor);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void noteLatencyDelayed() {
         this.mLatencyObserverHandler.removeCallbacks(this.mLatencyObserverRunnable);
-        this.mLatencyObserverHandler.postDelayed(this.mLatencyObserverRunnable, this.mStatsdPushIntervalMinutes * 60 * 1000);
+        this.mLatencyObserverHandler.postDelayed(
+                this.mLatencyObserverRunnable, this.mStatsdPushIntervalMinutes * 60 * 1000);
     }
 
     public static class Injector {
@@ -147,7 +167,9 @@ public class BinderLatencyObserver {
         }
         long elapsedTimeMicro = getElapsedRealtimeMicro();
         long callDuration = elapsedTimeMicro - s.timeStarted;
-        int bucketIdx = this.mLatencyBuckets.sampleToBucket(callDuration > 2147483647L ? Integer.MAX_VALUE : (int) callDuration);
+        int bucketIdx =
+                this.mLatencyBuckets.sampleToBucket(
+                        callDuration > 2147483647L ? Integer.MAX_VALUE : (int) callDuration);
         synchronized (this.mLock) {
             int[] buckets = this.mLatencyHistograms.get(dims);
             if (buckets == null) {
@@ -174,7 +196,10 @@ public class BinderLatencyObserver {
 
     public void setSamplingInterval(int samplingInterval) {
         if (samplingInterval <= 0) {
-            Slog.w(TAG, "Ignored invalid sampling interval (value must be positive): " + samplingInterval);
+            Slog.w(
+                    TAG,
+                    "Ignored invalid sampling interval (value must be positive): "
+                            + samplingInterval);
             return;
         }
         synchronized (this.mLock) {
@@ -187,7 +212,9 @@ public class BinderLatencyObserver {
 
     public void setShardingModulo(int shardingModulo) {
         if (shardingModulo <= 0) {
-            Slog.w(TAG, "Ignored invalid sharding modulo (value must be positive): " + shardingModulo);
+            Slog.w(
+                    TAG,
+                    "Ignored invalid sharding modulo (value must be positive): " + shardingModulo);
             return;
         }
         synchronized (this.mLock) {
@@ -201,7 +228,10 @@ public class BinderLatencyObserver {
 
     public void setPushInterval(int pushIntervalMinutes) {
         if (pushIntervalMinutes <= 0) {
-            Slog.w(TAG, "Ignored invalid push interval (value must be positive): " + pushIntervalMinutes);
+            Slog.w(
+                    TAG,
+                    "Ignored invalid push interval (value must be positive): "
+                            + pushIntervalMinutes);
             return;
         }
         synchronized (this.mLock) {
@@ -212,13 +242,18 @@ public class BinderLatencyObserver {
         }
     }
 
-    public void setHistogramBucketsParams(int bucketCount, int firstBucketSize, float bucketScaleFactor) {
+    public void setHistogramBucketsParams(
+            int bucketCount, int firstBucketSize, float bucketScaleFactor) {
         synchronized (this.mLock) {
-            if (bucketCount != this.mBucketCount || firstBucketSize != this.mFirstBucketSize || bucketScaleFactor != this.mBucketScaleFactor) {
+            if (bucketCount != this.mBucketCount
+                    || firstBucketSize != this.mFirstBucketSize
+                    || bucketScaleFactor != this.mBucketScaleFactor) {
                 this.mBucketCount = bucketCount;
                 this.mFirstBucketSize = firstBucketSize;
                 this.mBucketScaleFactor = bucketScaleFactor;
-                this.mLatencyBuckets = new BinderLatencyBuckets(this.mBucketCount, this.mFirstBucketSize, this.mBucketScaleFactor);
+                this.mLatencyBuckets =
+                        new BinderLatencyBuckets(
+                                this.mBucketCount, this.mFirstBucketSize, this.mBucketScaleFactor);
                 reset();
             }
         }
@@ -258,7 +293,8 @@ public class BinderLatencyObserver {
                 return false;
             }
             LatencyDims o = (LatencyDims) other;
-            return this.mTransactionCode == o.getTransactionCode() && this.mBinderClass == o.getBinderClass();
+            return this.mTransactionCode == o.getTransactionCode()
+                    && this.mBinderClass == o.getBinderClass();
         }
 
         public int hashCode() {

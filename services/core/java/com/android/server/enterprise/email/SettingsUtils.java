@@ -13,15 +13,18 @@ import android.sec.enterprise.email.EnterpriseExchangeAccount;
 import android.sec.enterprise.email.EnterpriseLDAPAccount;
 import android.util.Log;
 import android.util.secutil.Slog;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.adapter.AdapterRegistry;
 import com.android.server.enterprise.adapter.IPersonaManagerAdapter;
 import com.android.server.enterprise.adapterlayer.PersonaManagerAdapter;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.accounts.Account;
 import com.samsung.android.knox.accounts.HostAuth;
 import com.samsung.android.knox.accounts.LDAPAccount;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -64,34 +67,63 @@ public abstract class SettingsUtils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.enterprise.email.AccountMetaData getAccount(android.net.Uri r44, android.net.Uri r45, android.net.Uri r46, long r47, android.content.Context r49, com.samsung.android.knox.ContextInfo r50) {
+    public static com.android.server.enterprise.email.AccountMetaData getAccount(
+            android.net.Uri r44,
+            android.net.Uri r45,
+            android.net.Uri r46,
+            long r47,
+            android.content.Context r49,
+            com.samsung.android.knox.ContextInfo r50) {
         /*
             Method dump skipped, instructions count: 785
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.SettingsUtils.getAccount(android.net.Uri, android.net.Uri, android.net.Uri, long, android.content.Context, com.samsung.android.knox.ContextInfo):com.android.server.enterprise.email.AccountMetaData");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.SettingsUtils.getAccount(android.net.Uri,"
+                    + " android.net.Uri, android.net.Uri, long, android.content.Context,"
+                    + " com.samsung.android.knox.ContextInfo):com.android.server.enterprise.email.AccountMetaData");
     }
 
-    public static synchronized AccountMetaData getAccountDetails(long j, Context context, ContextInfo contextInfo) {
+    public static synchronized AccountMetaData getAccountDetails(
+            long j, Context context, ContextInfo contextInfo) {
         AccountMetaData account;
         synchronized (SettingsUtils.class) {
-            account = getAccount(Uri.parse("content://com.samsung.android.email.provider/hostauth"), Uri.parse("content://com.samsung.android.email.provider/account"), Uri.parse("content://com.samsung.android.email.provider/policies"), j, context, contextInfo);
+            account =
+                    getAccount(
+                            Uri.parse("content://com.samsung.android.email.provider/hostauth"),
+                            Uri.parse("content://com.samsung.android.email.provider/account"),
+                            Uri.parse("content://com.samsung.android.email.provider/policies"),
+                            j,
+                            context,
+                            contextInfo);
         }
         return account;
     }
 
-    public static synchronized AccountMetaData getAccountDetails$1(long j, Context context, ContextInfo contextInfo) {
+    public static synchronized AccountMetaData getAccountDetails$1(
+            long j, Context context, ContextInfo contextInfo) {
         AccountMetaData account;
         synchronized (SettingsUtils.class) {
             int i = contextInfo.mContainerId;
             Log.d("SettingsUtils", "getAccountDetails() :  with P");
-            account = getAccount(Uri.parse("content://com.samsung.android.email.provider/hostauth"), Uri.parse("content://com.samsung.android.email.provider/account"), Uri.parse("content://com.samsung.android.email.provider/policies"), j, context, contextInfo);
+            account =
+                    getAccount(
+                            Uri.parse("content://com.samsung.android.email.provider/hostauth"),
+                            Uri.parse("content://com.samsung.android.email.provider/account"),
+                            Uri.parse("content://com.samsung.android.email.provider/policies"),
+                            j,
+                            context,
+                            contextInfo);
         }
         return account;
     }
 
-    public static Account getAccountFromEnterpriseEmailAccount(EnterpriseEmailAccount enterpriseEmailAccount) {
-        Slog.i("SettingsUtils", "getAccountFromEnterpriseEmailAccount() : " + enterpriseEmailAccount);
+    public static Account getAccountFromEnterpriseEmailAccount(
+            EnterpriseEmailAccount enterpriseEmailAccount) {
+        Slog.i(
+                "SettingsUtils",
+                "getAccountFromEnterpriseEmailAccount() : " + enterpriseEmailAccount);
         Account account = new Account();
         account.id = (int) enterpriseEmailAccount.mId;
         account.displayName = enterpriseEmailAccount.mDisplayName;
@@ -109,7 +141,8 @@ public abstract class SettingsUtils {
         account.protocolVersion = null;
         account.securitySyncKey = null;
         account.signature = enterpriseEmailAccount.mSignature;
-        account.emailNotificationVibrateAlways = enterpriseEmailAccount.mEmailNotificationVibrateAlways;
+        account.emailNotificationVibrateAlways =
+                enterpriseEmailAccount.mEmailNotificationVibrateAlways;
         account.emailNotificationVibrateWhenSilent = false;
         HostAuth hostAuth = new HostAuth();
         account.hostAuthRecv = hostAuth;
@@ -142,8 +175,11 @@ public abstract class SettingsUtils {
         return account;
     }
 
-    public static Account getAccountFromEnterpriseExchangeAccount(EnterpriseExchangeAccount enterpriseExchangeAccount) {
-        Slog.i("SettingsUtils", "getAccountFromEnterpriseExchangeAccount() : " + enterpriseExchangeAccount);
+    public static Account getAccountFromEnterpriseExchangeAccount(
+            EnterpriseExchangeAccount enterpriseExchangeAccount) {
+        Slog.i(
+                "SettingsUtils",
+                "getAccountFromEnterpriseExchangeAccount() : " + enterpriseExchangeAccount);
         Account account = new Account();
         account.id = (int) enterpriseExchangeAccount.mId;
         account.displayName = enterpriseExchangeAccount.mDisplayName;
@@ -169,12 +205,14 @@ public abstract class SettingsUtils {
         account.roamingSyncSchedule = enterpriseExchangeAccount.mRoamingSyncSchedule;
         account.syncCalendarAge = enterpriseExchangeAccount.mSyncCalendarAge;
         account.emailBodyTruncationSize = enterpriseExchangeAccount.mEmailBodyTruncationSize;
-        account.emailRoamingBodyTruncationSize = enterpriseExchangeAccount.mEmailRoamingBodyTruncationSize;
+        account.emailRoamingBodyTruncationSize =
+                enterpriseExchangeAccount.mEmailRoamingBodyTruncationSize;
         account.syncContacts = enterpriseExchangeAccount.mSyncContacts;
         account.syncCalendar = enterpriseExchangeAccount.mSyncCalendar;
         account.syncTasks = enterpriseExchangeAccount.mSyncTasks;
         account.syncNotes = enterpriseExchangeAccount.mSyncNotes;
-        account.emailNotificationVibrateAlways = enterpriseExchangeAccount.mEmailNotificationVibrateAlways;
+        account.emailNotificationVibrateAlways =
+                enterpriseExchangeAccount.mEmailNotificationVibrateAlways;
         account.emailNotificationVibrateWhenSilent = false;
         HostAuth hostAuth = new HostAuth();
         account.hostAuthRecv = hostAuth;
@@ -207,34 +245,45 @@ public abstract class SettingsUtils {
         return account;
     }
 
-    public static synchronized long getAccountId(ContextInfo contextInfo, String str, String str2, String str3, String str4, boolean z, Context context) {
+    public static synchronized long getAccountId(
+            ContextInfo contextInfo,
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            boolean z,
+            Context context) {
         long accountIdInternal;
         synchronized (SettingsUtils.class) {
             int i = contextInfo.mContainerId;
             Uri parse = Uri.parse("content://com.samsung.android.email.provider/hostauth");
             Uri parse2 = Uri.parse("content://com.samsung.android.email.provider/account");
-            Log.i("SettingsUtils", "getAccountId : USER space    UserHandle.myUserId() " + UserHandle.myUserId());
-            accountIdInternal = getAccountIdInternal(parse, parse2, str, str2, str3, str4, z, context, contextInfo);
+            Log.i(
+                    "SettingsUtils",
+                    "getAccountId : USER space    UserHandle.myUserId() " + UserHandle.myUserId());
+            accountIdInternal =
+                    getAccountIdInternal(
+                            parse, parse2, str, str2, str3, str4, z, context, contextInfo);
         }
         return accountIdInternal;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0175, code lost:
-    
-        if (r1 != null) goto L65;
-     */
+
+       if (r1 != null) goto L65;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x0177, code lost:
-    
-        r1.close();
-     */
+
+       r1.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:48:0x017e, code lost:
-    
-        if (r1 == null) goto L73;
-     */
+
+       if (r1 == null) goto L73;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:64:0x00fd, code lost:
-    
-        if (r6 != null) goto L34;
-     */
+
+       if (r6 != null) goto L34;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:73:0x018f  */
     /* JADX WARN: Type inference failed for: r6v1 */
@@ -250,12 +299,26 @@ public abstract class SettingsUtils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static long getAccountIdInternal(android.net.Uri r17, android.net.Uri r18, java.lang.String r19, java.lang.String r20, java.lang.String r21, java.lang.String r22, boolean r23, android.content.Context r24, com.samsung.android.knox.ContextInfo r25) {
+    public static long getAccountIdInternal(
+            android.net.Uri r17,
+            android.net.Uri r18,
+            java.lang.String r19,
+            java.lang.String r20,
+            java.lang.String r21,
+            java.lang.String r22,
+            boolean r23,
+            android.content.Context r24,
+            com.samsung.android.knox.ContextInfo r25) {
         /*
             Method dump skipped, instructions count: 416
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.SettingsUtils.getAccountIdInternal(android.net.Uri, android.net.Uri, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean, android.content.Context, com.samsung.android.knox.ContextInfo):long");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.SettingsUtils.getAccountIdInternal(android.net.Uri,"
+                    + " android.net.Uri, java.lang.String, java.lang.String, java.lang.String,"
+                    + " java.lang.String, boolean, android.content.Context,"
+                    + " com.samsung.android.knox.ContextInfo):long");
     }
 
     public static String[] getEasDomainAndUserFromLogin(String str) {
@@ -279,7 +342,8 @@ public abstract class SettingsUtils {
         return strArr;
     }
 
-    public static LDAPAccount getLDAPAccountFromEnterpriseLDAPAccount(EnterpriseLDAPAccount enterpriseLDAPAccount) {
+    public static LDAPAccount getLDAPAccountFromEnterpriseLDAPAccount(
+            EnterpriseLDAPAccount enterpriseLDAPAccount) {
         if (enterpriseLDAPAccount == null) {
             return null;
         }
@@ -300,22 +364,23 @@ public abstract class SettingsUtils {
         if (i != preCallingUid) {
             return "com.samsung.android.email.provider";
         }
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(new StringBuilder("getPackageNameForUid :   "), adminPkg, "SettingsUtils");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                new StringBuilder("getPackageNameForUid :   "), adminPkg, "SettingsUtils");
         return adminPkg;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:17:0x00e1, code lost:
-    
-        if (r1 != null) goto L37;
-     */
+
+       if (r1 != null) goto L37;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:18:0x00e3, code lost:
-    
-        r1.close();
-     */
+
+       r1.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x00f2, code lost:
-    
-        if (r1 == null) goto L43;
-     */
+
+       if (r1 == null) goto L43;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:43:0x00fc A[Catch: all -> 0x0021, TryCatch #1 {all -> 0x0021, blocks: (B:4:0x000f, B:7:0x0027, B:16:0x00de, B:18:0x00e3, B:41:0x00f7, B:43:0x00fc, B:44:0x00ff, B:34:0x00ef), top: B:3:0x000f }] */
     /* JADX WARN: Type inference failed for: r9v1 */
@@ -325,12 +390,19 @@ public abstract class SettingsUtils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static synchronized java.lang.String getSMIMEAlias(com.samsung.android.knox.ContextInfo r17, long r18, android.content.Context r20, boolean r21) {
+    public static synchronized java.lang.String getSMIMEAlias(
+            com.samsung.android.knox.ContextInfo r17,
+            long r18,
+            android.content.Context r20,
+            boolean r21) {
         /*
             Method dump skipped, instructions count: 258
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.SettingsUtils.getSMIMEAlias(com.samsung.android.knox.ContextInfo, long, android.content.Context, boolean):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.SettingsUtils.getSMIMEAlias(com.samsung.android.knox.ContextInfo,"
+                    + " long, android.content.Context, boolean):java.lang.String");
     }
 
     public static String getSecurityPassword(String str) {
@@ -384,7 +456,10 @@ public abstract class SettingsUtils {
         if (i == 0) {
             return false;
         }
-        ((PersonaManagerAdapter) ((IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class))).getClass();
+        ((PersonaManagerAdapter)
+                        ((IPersonaManagerAdapter)
+                                AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class)))
+                .getClass();
         return SemPersonaManager.isKnoxId(i);
     }
 
@@ -400,7 +475,11 @@ public abstract class SettingsUtils {
             int i = lastIndexOf + 1;
             int indexOf2 = validStr.indexOf(46, i);
             int lastIndexOf2 = validStr.lastIndexOf(46);
-            return indexOf > 0 && indexOf == lastIndexOf && i < indexOf2 && indexOf2 <= lastIndexOf2 && lastIndexOf2 < length - 1;
+            return indexOf > 0
+                    && indexOf == lastIndexOf
+                    && i < indexOf2
+                    && indexOf2 <= lastIndexOf2
+                    && lastIndexOf2 < length - 1;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -408,18 +487,23 @@ public abstract class SettingsUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:17:0x00f5, code lost:
-    
-        return r3;
-     */
+
+       return r3;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x00f2, code lost:
-    
-        if (0 == 0) goto L24;
-     */
+
+       if (0 == 0) goto L24;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean loadHostAuth(android.net.Uri r17, long r18, com.android.server.enterprise.email.AccountMetaData r20, boolean r21, android.content.Context r22) {
+    public static boolean loadHostAuth(
+            android.net.Uri r17,
+            long r18,
+            com.android.server.enterprise.email.AccountMetaData r20,
+            boolean r21,
+            android.content.Context r22) {
         /*
             r0 = r20
             java.lang.String r1 = "loadHostAuth row count : "
@@ -525,7 +609,11 @@ public abstract class SettingsUtils {
         Lfb:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.SettingsUtils.loadHostAuth(android.net.Uri, long, com.android.server.enterprise.email.AccountMetaData, boolean, android.content.Context):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.SettingsUtils.loadHostAuth(android.net.Uri,"
+                    + " long, com.android.server.enterprise.email.AccountMetaData, boolean,"
+                    + " android.content.Context):boolean");
     }
 
     public static synchronized void sendAccountsChangedBroadcast(Context context, int i) {
@@ -543,14 +631,33 @@ public abstract class SettingsUtils {
                     if (userId == 0) {
                         emails = context;
                     } else if (isPersona(userId)) {
-                        emails = context.createPackageContextAsUser("com.samsung.android.email.provider", 0, new UserHandle(userId));
-                        Log.i("SettingsUtils", "sendAccountsChangedBroadcast : USER space   com.samsung.android.email.provider");
+                        emails =
+                                context.createPackageContextAsUser(
+                                        "com.samsung.android.email.provider",
+                                        0,
+                                        new UserHandle(userId));
+                        Log.i(
+                                "SettingsUtils",
+                                "sendAccountsChangedBroadcast : USER space  "
+                                    + " com.samsung.android.email.provider");
                     } else {
-                        emails = context.createPackageContextAsUser(getPackageNameForUid(i), 0, new UserHandle(userId));
+                        emails =
+                                context.createPackageContextAsUser(
+                                        getPackageNameForUid(i), 0, new UserHandle(userId));
                         Log.i("SettingsUtils", "sendAccountsChangedBroadcast : USER space");
                     }
-                    emails.getContentResolver().notifyChange(Uri.parse("content://com.samsung.android.email.provider/hostauth"), (ContentObserver) null, true);
-                    emails.getContentResolver().notifyChange(Uri.parse("content://com.samsung.android.email.provider/account"), (ContentObserver) null, true);
+                    emails.getContentResolver()
+                            .notifyChange(
+                                    Uri.parse(
+                                            "content://com.samsung.android.email.provider/hostauth"),
+                                    (ContentObserver) null,
+                                    true);
+                    emails.getContentResolver()
+                            .notifyChange(
+                                    Uri.parse(
+                                            "content://com.samsung.android.email.provider/account"),
+                                    (ContentObserver) null,
+                                    true);
                     Log.i("SettingsUtils", "sendAccountsChangedBroadcast()");
                 } catch (Exception e2) {
                     e2.printStackTrace();

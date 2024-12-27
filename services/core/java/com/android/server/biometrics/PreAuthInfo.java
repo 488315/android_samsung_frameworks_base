@@ -3,6 +3,7 @@ package com.android.server.biometrics;
 import android.hardware.biometrics.PromptInfo;
 import android.hardware.biometrics.face.V1_0.OptionalBool$$ExternalSyntheticOutline0;
 import android.util.Pair;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,7 +21,17 @@ public final class PreAuthInfo {
     public final boolean mIsMandatoryBiometricsAuthentication;
     public final boolean mOnlyMandatoryBiometricsRequested;
 
-    public PreAuthInfo(boolean z, int i, boolean z2, List list, List list2, boolean z3, PromptInfo promptInfo, BiometricCameraManagerImpl biometricCameraManagerImpl, boolean z4, boolean z5) {
+    public PreAuthInfo(
+            boolean z,
+            int i,
+            boolean z2,
+            List list,
+            List list2,
+            boolean z3,
+            PromptInfo promptInfo,
+            BiometricCameraManagerImpl biometricCameraManagerImpl,
+            boolean z4,
+            boolean z5) {
         this.mBiometricRequested = z;
         this.mBiometricStrengthRequested = i;
         this.mBiometricCameraManager = biometricCameraManagerImpl;
@@ -35,9 +46,9 @@ public final class PreAuthInfo {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:38:0x014a, code lost:
-    
-        if (((java.lang.Boolean) ((java.util.HashMap) r0.mFaceEnrolledForUser).getOrDefault(java.lang.Integer.valueOf(r22), r5)).booleanValue() != false) goto L44;
-     */
+
+       if (((java.lang.Boolean) ((java.util.HashMap) r0.mFaceEnrolledForUser).getOrDefault(java.lang.Integer.valueOf(r22), r5)).booleanValue() != false) goto L44;
+    */
     /* JADX WARN: Removed duplicated region for block: B:119:0x02a9  */
     /* JADX WARN: Removed duplicated region for block: B:168:0x0199  */
     /* JADX WARN: Removed duplicated region for block: B:170:0x018c  */
@@ -54,12 +65,29 @@ public final class PreAuthInfo {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.biometrics.PreAuthInfo create(android.app.trust.ITrustManager r18, android.app.admin.DevicePolicyManager r19, com.android.server.biometrics.BiometricService.SettingObserver r20, java.util.List r21, int r22, android.hardware.biometrics.PromptInfo r23, java.lang.String r24, boolean r25, android.content.Context r26, com.android.server.biometrics.BiometricCameraManagerImpl r27) {
+    public static com.android.server.biometrics.PreAuthInfo create(
+            android.app.trust.ITrustManager r18,
+            android.app.admin.DevicePolicyManager r19,
+            com.android.server.biometrics.BiometricService.SettingObserver r20,
+            java.util.List r21,
+            int r22,
+            android.hardware.biometrics.PromptInfo r23,
+            java.lang.String r24,
+            boolean r25,
+            android.content.Context r26,
+            com.android.server.biometrics.BiometricCameraManagerImpl r27) {
         /*
             Method dump skipped, instructions count: 890
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.PreAuthInfo.create(android.app.trust.ITrustManager, android.app.admin.DevicePolicyManager, com.android.server.biometrics.BiometricService$SettingObserver, java.util.List, int, android.hardware.biometrics.PromptInfo, java.lang.String, boolean, android.content.Context, com.android.server.biometrics.BiometricCameraManagerImpl):com.android.server.biometrics.PreAuthInfo");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.biometrics.PreAuthInfo.create(android.app.trust.ITrustManager,"
+                    + " android.app.admin.DevicePolicyManager,"
+                    + " com.android.server.biometrics.BiometricService$SettingObserver,"
+                    + " java.util.List, int, android.hardware.biometrics.PromptInfo,"
+                    + " java.lang.String, boolean, android.content.Context,"
+                    + " com.android.server.biometrics.BiometricCameraManagerImpl):com.android.server.biometrics.PreAuthInfo");
     }
 
     public final Pair calculateErrorByPriority() {
@@ -82,7 +110,15 @@ public final class PreAuthInfo {
                 pair3 = pair5;
             }
         }
-        return pair != null ? pair : pair2 != null ? pair2 : (!com.android.internal.hidden_from_bootclasspath.android.hardware.biometrics.Flags.mandatoryBiometrics() || pair3 == null) ? pair4 != null ? pair4 : (Pair) this.ineligibleSensors.get(0) : pair3;
+        return pair != null
+                ? pair
+                : pair2 != null
+                        ? pair2
+                        : (!com.android.internal.hidden_from_bootclasspath.android.hardware
+                                                .biometrics.Flags.mandatoryBiometrics()
+                                        || pair3 == null)
+                                ? pair4 != null ? pair4 : (Pair) this.ineligibleSensors.get(0)
+                                : pair3;
     }
 
     public final int getEligibleModalities() {
@@ -95,18 +131,18 @@ public final class PreAuthInfo {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0070, code lost:
-    
-        if (r3 != false) goto L29;
-     */
+
+       if (r3 != false) goto L29;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x0072, code lost:
-    
-        r1 = r2;
-        r0 = 12;
-     */
+
+       r1 = r2;
+       r0 = 12;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:42:0x009b, code lost:
-    
-        if (r3 != false) goto L29;
-     */
+
+       if (r3 != false) goto L29;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -116,12 +152,16 @@ public final class PreAuthInfo {
             Method dump skipped, instructions count: 254
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.PreAuthInfo.getInternalStatus():android.util.Pair");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.biometrics.PreAuthInfo.getInternalStatus():android.util.Pair");
     }
 
     public final Pair getPreAuthenticateStatus() {
         Pair internalStatus = getInternalStatus();
-        int authenticatorStatusToBiometricConstant = Utils.authenticatorStatusToBiometricConstant(((Integer) internalStatus.second).intValue());
+        int authenticatorStatusToBiometricConstant =
+                Utils.authenticatorStatusToBiometricConstant(
+                        ((Integer) internalStatus.second).intValue());
         int intValue = ((Integer) internalStatus.first).intValue();
         switch (((Integer) internalStatus.second).intValue()) {
             case 1:
@@ -141,11 +181,19 @@ public final class PreAuthInfo {
                 intValue = 0;
                 break;
         }
-        return new Pair(Integer.valueOf(intValue), Integer.valueOf(authenticatorStatusToBiometricConstant));
+        return new Pair(
+                Integer.valueOf(intValue), Integer.valueOf(authenticatorStatusToBiometricConstant));
     }
 
     public final String toString() {
-        StringBuilder sb = new StringBuilder("BiometricRequested: " + this.mBiometricRequested + ", StrengthRequested: " + this.mBiometricStrengthRequested + ", CredentialRequested: " + this.credentialRequested);
+        StringBuilder sb =
+                new StringBuilder(
+                        "BiometricRequested: "
+                                + this.mBiometricRequested
+                                + ", StrengthRequested: "
+                                + this.mBiometricStrengthRequested
+                                + ", CredentialRequested: "
+                                + this.credentialRequested);
         sb.append(", Eligible:{");
         Iterator it = this.eligibleSensors.iterator();
         while (it.hasNext()) {

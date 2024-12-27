@@ -3,6 +3,7 @@ package android.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -25,8 +26,11 @@ public class TwoLineListItem extends RelativeLayout {
 
     public TwoLineListItem(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TwoLineListItem, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.TwoLineListItem, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.TwoLineListItem, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.TwoLineListItem, attrs, a, defStyleAttr, defStyleRes);
         a.recycle();
     }
 

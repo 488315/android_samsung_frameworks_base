@@ -5,9 +5,11 @@ import android.util.Log;
 
 /* loaded from: classes2.dex */
 public final class ExynosDisplaySolutionManager {
-    public static final String HDR_TUNE_PATTERN_CHANGED = "com.android.server.display.HDR_TUNE_PATTERN_CHANGED";
+    public static final String HDR_TUNE_PATTERN_CHANGED =
+            "com.android.server.display.HDR_TUNE_PATTERN_CHANGED";
     public static final String HDR_TUNE_PATTERN_COLOR = "com.android.server.display.hdr_tune_color";
-    public static final String HDR_TUNE_PATTERN_FORMAT = "com.android.server.display.hdr_tune_format";
+    public static final String HDR_TUNE_PATTERN_FORMAT =
+            "com.android.server.display.hdr_tune_format";
     public static final String HDR_TUNE_PATTERN_TYPE = "com.android.server.display.hdr_tune_type";
     private static float RETURN_ERROR = -1.0f;
     private static int RETURN_ERROR_INT = -1;

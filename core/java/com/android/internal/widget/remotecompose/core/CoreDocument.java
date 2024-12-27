@@ -1,7 +1,7 @@
 package com.android.internal.widget.remotecompose.core;
 
-import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.operations.Theme;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -149,7 +149,8 @@ public class CoreDocument {
         scaleOutput[1] = contentScaleY;
     }
 
-    private void computeTranslate(float w, float h, float contentScaleX, float contentScaleY, float[] translateOutput) {
+    private void computeTranslate(
+            float w, float h, float contentScaleX, float contentScaleY, float[] translateOutput) {
         int horizontalContentAlignment = this.mContentAlignment & 240;
         int verticalContentAlignment = this.mContentAlignment & 15;
         float translateX = 0.0f;
@@ -201,7 +202,14 @@ public class CoreDocument {
         float mRight;
         float mTop;
 
-        public ClickAreaRepresentation(int id, String contentDescription, float left, float top, float right, float bottom, String metadata) {
+        public ClickAreaRepresentation(
+                int id,
+                String contentDescription,
+                float left,
+                float top,
+                float right,
+                float bottom,
+                String metadata) {
             this.mId = id;
             this.mContentDescription = contentDescription;
             this.mLeft = left;
@@ -278,8 +286,17 @@ public class CoreDocument {
         this.mVersion = new Version(majorVersion, minorVersion, patch);
     }
 
-    public void addClickArea(int id, String contentDescription, float left, float top, float right, float bottom, String metadata) {
-        this.mClickAreas.add(new ClickAreaRepresentation(id, contentDescription, left, top, right, bottom, metadata));
+    public void addClickArea(
+            int id,
+            String contentDescription,
+            float left,
+            float top,
+            float right,
+            float bottom,
+            String metadata) {
+        this.mClickAreas.add(
+                new ClickAreaRepresentation(
+                        id, contentDescription, left, top, right, bottom, metadata));
     }
 
     public void addClickListener(ClickCallbacks callback) {
@@ -335,7 +352,12 @@ public class CoreDocument {
         context.mRemoteComposeState = this.mRemoteComposeState;
         if (this.mContentSizing == 2) {
             computeScale(context.mWidth, context.mHeight, this.mScaleOutput);
-            computeTranslate(context.mWidth, context.mHeight, this.mScaleOutput[0], this.mScaleOutput[1], this.mTranslateOutput);
+            computeTranslate(
+                    context.mWidth,
+                    context.mHeight,
+                    this.mScaleOutput[0],
+                    this.mScaleOutput[1],
+                    this.mTranslateOutput);
             context.mPaintContext.translate(this.mTranslateOutput[0], this.mTranslateOutput[1]);
             context.mPaintContext.scale(this.mScaleOutput[0], this.mScaleOutput[1]);
         }
@@ -348,7 +370,10 @@ public class CoreDocument {
             Operation op = it.next();
             boolean apply = true;
             if (theme != -1) {
-                apply = (op instanceof Theme) || context.getTheme() == theme || context.getTheme() == -1;
+                apply =
+                        (op instanceof Theme)
+                                || context.getTheme() == theme
+                                || context.getTheme() == -1;
             }
             if (apply) {
                 op.apply(context);

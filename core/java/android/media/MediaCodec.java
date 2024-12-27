@@ -4,8 +4,6 @@ import android.annotation.SystemApi;
 import android.graphics.Rect;
 import android.hardware.HardwareBuffer;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.media.Image;
-import android.media.MediaCodec;
 import android.media.codec.Flags;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +13,7 @@ import android.os.Message;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Surface;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -65,7 +64,9 @@ public final class MediaCodec {
     public static final int CRYPTO_MODE_AES_CBC = 2;
     public static final int CRYPTO_MODE_AES_CTR = 1;
     public static final int CRYPTO_MODE_UNENCRYPTED = 0;
-    private static final String EOS_AND_DECODE_ONLY_ERROR_MESSAGE = "An input buffer cannot have both BUFFER_FLAG_END_OF_STREAM and BUFFER_FLAG_DECODE_ONLY flags";
+    private static final String EOS_AND_DECODE_ONLY_ERROR_MESSAGE =
+            "An input buffer cannot have both BUFFER_FLAG_END_OF_STREAM and BUFFER_FLAG_DECODE_ONLY"
+                    + " flags";
     private static final int EVENT_CALLBACK = 1;
     private static final int EVENT_FIRST_TUNNEL_FRAME_READY = 4;
     private static final int EVENT_FRAME_RENDERED = 3;
@@ -113,12 +114,10 @@ public final class MediaCodec {
     private BitSet mValidOutputIndices;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BufferFlag {
-    }
+    public @interface BufferFlag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ConfigureFlag {
-    }
+    public @interface ConfigureFlag {}
 
     public interface OnFirstTunnelFrameReadyListener {
         void onFirstTunnelFrameReady(MediaCodec mediaCodec);
@@ -129,12 +128,10 @@ public final class MediaCodec {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OutputBufferInfo {
-    }
+    public @interface OutputBufferInfo {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VideoScalingMode {
-    }
+    public @interface VideoScalingMode {}
 
     private final native ByteBuffer getBuffer(boolean z, int i);
 
@@ -151,7 +148,13 @@ public final class MediaCodec {
     /* JADX INFO: Access modifiers changed from: private */
     public static native void native_closeMediaImage(long j);
 
-    private final native void native_configure(String[] strArr, Object[] objArr, Surface surface, MediaCrypto mediaCrypto, IHwBinder iHwBinder, int i);
+    private final native void native_configure(
+            String[] strArr,
+            Object[] objArr,
+            Surface surface,
+            MediaCrypto mediaCrypto,
+            IHwBinder iHwBinder,
+            int i);
 
     private static final native PersistentSurface native_createPersistentInputSurface();
 
@@ -182,18 +185,34 @@ public final class MediaCodec {
     private static native Image native_mapHardwareBuffer(HardwareBuffer hardwareBuffer);
 
     /* JADX INFO: Access modifiers changed from: private */
-    public native void native_queueHardwareBuffer(int i, HardwareBuffer hardwareBuffer, long j, int i2, ArrayList<String> arrayList, ArrayList<Object> arrayList2);
+    public native void native_queueHardwareBuffer(
+            int i,
+            HardwareBuffer hardwareBuffer,
+            long j,
+            int i2,
+            ArrayList<String> arrayList,
+            ArrayList<Object> arrayList2);
 
-    private final native void native_queueInputBuffer(int i, int i2, int i3, long j, int i4) throws CryptoException;
+    private final native void native_queueInputBuffer(int i, int i2, int i3, long j, int i4)
+            throws CryptoException;
 
-    private final native void native_queueInputBuffers(int i, Object[] objArr) throws CryptoException, CodecException;
+    private final native void native_queueInputBuffers(int i, Object[] objArr)
+            throws CryptoException, CodecException;
 
     /* JADX INFO: Access modifiers changed from: private */
-    public native void native_queueLinearBlock(int i, LinearBlock linearBlock, Object[] objArr, Object[] objArr2, ArrayList<String> arrayList, ArrayList<Object> arrayList2);
+    public native void native_queueLinearBlock(
+            int i,
+            LinearBlock linearBlock,
+            Object[] objArr,
+            Object[] objArr2,
+            ArrayList<String> arrayList,
+            ArrayList<Object> arrayList2);
 
-    private final native void native_queueSecureInputBuffer(int i, int i2, CryptoInfo cryptoInfo, long j, int i3) throws CryptoException;
+    private final native void native_queueSecureInputBuffer(
+            int i, int i2, CryptoInfo cryptoInfo, long j, int i3) throws CryptoException;
 
-    private final native void native_queueSecureInputBuffers(int i, Object[] objArr, Object[] objArr2) throws CryptoException, CodecException;
+    private final native void native_queueSecureInputBuffers(
+            int i, Object[] objArr, Object[] objArr2) throws CryptoException, CodecException;
 
     private final native void native_release();
 
@@ -280,8 +299,13 @@ public final class MediaCodec {
                         synchronized (MediaCodec.this.mListenerLock) {
                             onFrameRenderedListener = MediaCodec.this.mOnFrameRenderedListener;
                         }
-                        if (mediaTimeUs != null && systemNano != null && onFrameRenderedListener != null) {
-                            onFrameRenderedListener.onFrameRendered(this.mCodec, ((Long) mediaTimeUs).longValue(), ((Long) systemNano).longValue());
+                        if (mediaTimeUs != null
+                                && systemNano != null
+                                && onFrameRenderedListener != null) {
+                            onFrameRenderedListener.onFrameRendered(
+                                    this.mCodec,
+                                    ((Long) mediaTimeUs).longValue(),
+                                    ((Long) systemNano).longValue());
                             i++;
                         } else {
                             return;
@@ -290,7 +314,8 @@ public final class MediaCodec {
                     break;
                 case 4:
                     synchronized (MediaCodec.this.mListenerLock) {
-                        onFirstTunnelFrameReadyListener = MediaCodec.this.mOnFirstTunnelFrameReadyListener;
+                        onFirstTunnelFrameReadyListener =
+                                MediaCodec.this.mOnFirstTunnelFrameReadyListener;
                     }
                     if (onFirstTunnelFrameReadyListener != null) {
                         onFirstTunnelFrameReadyListener.onFirstTunnelFrameReady(this.mCodec);
@@ -313,13 +338,15 @@ public final class MediaCodec {
                     synchronized (MediaCodec.this.mBufferLock) {
                         switch (MediaCodec.this.mBufferMode) {
                             case 0:
-                                MediaCodec.this.validateInputByteBufferLocked(MediaCodec.this.mCachedInputBuffers, index);
+                                MediaCodec.this.validateInputByteBufferLocked(
+                                        MediaCodec.this.mCachedInputBuffers, index);
                                 break;
                             case 1:
                                 while (MediaCodec.this.mQueueRequests.size() <= index) {
                                     MediaCodec.this.mQueueRequests.add(null);
                                 }
-                                QueueRequest request = (QueueRequest) MediaCodec.this.mQueueRequests.get(index);
+                                QueueRequest request =
+                                        (QueueRequest) MediaCodec.this.mQueueRequests.get(index);
                                 if (request == null) {
                                     request = new QueueRequest(this.mCodec, index);
                                     MediaCodec.this.mQueueRequests.set(index, request);
@@ -327,7 +354,8 @@ public final class MediaCodec {
                                 request.setAccessible(true);
                                 break;
                             default:
-                                throw new IllegalStateException("Unrecognized buffer mode: " + MediaCodec.this.mBufferMode);
+                                throw new IllegalStateException(
+                                        "Unrecognized buffer mode: " + MediaCodec.this.mBufferMode);
                         }
                     }
                     MediaCodec.this.mCallback.onInputBufferAvailable(this.mCodec, index);
@@ -338,13 +366,15 @@ public final class MediaCodec {
                     synchronized (MediaCodec.this.mBufferLock) {
                         switch (MediaCodec.this.mBufferMode) {
                             case 0:
-                                MediaCodec.this.validateOutputByteBufferLocked(MediaCodec.this.mCachedOutputBuffers, index2, info);
+                                MediaCodec.this.validateOutputByteBufferLocked(
+                                        MediaCodec.this.mCachedOutputBuffers, index2, info);
                                 break;
                             case 1:
                                 while (MediaCodec.this.mOutputFrames.size() <= index2) {
                                     MediaCodec.this.mOutputFrames.add(null);
                                 }
-                                OutputFrame frame = (OutputFrame) MediaCodec.this.mOutputFrames.get(index2);
+                                OutputFrame frame =
+                                        (OutputFrame) MediaCodec.this.mOutputFrames.get(index2);
                                 if (frame == null) {
                                     frame = new OutputFrame(index2);
                                     MediaCodec.this.mOutputFrames.set(index2, frame);
@@ -353,7 +383,8 @@ public final class MediaCodec {
                                 frame.setAccessible(true);
                                 break;
                             default:
-                                throw new IllegalStateException("Unrecognized buffer mode: " + MediaCodec.this.mBufferMode);
+                                throw new IllegalStateException(
+                                        "Unrecognized buffer mode: " + MediaCodec.this.mBufferMode);
                         }
                     }
                     MediaCodec.this.mCallback.onOutputBufferAvailable(this.mCodec, index2, info);
@@ -362,7 +393,8 @@ public final class MediaCodec {
                     MediaCodec.this.mCallback.onError(this.mCodec, (CodecException) msg.obj);
                     return;
                 case 4:
-                    MediaCodec.this.mCallback.onOutputFormatChanged(this.mCodec, new MediaFormat((Map<String, Object>) msg.obj));
+                    MediaCodec.this.mCallback.onOutputFormatChanged(
+                            this.mCodec, new MediaFormat((Map<String, Object>) msg.obj));
                     return;
                 case 5:
                 default:
@@ -376,13 +408,15 @@ public final class MediaCodec {
                     synchronized (MediaCodec.this.mBufferLock) {
                         switch (MediaCodec.this.mBufferMode) {
                             case 0:
-                                MediaCodec.this.validateOutputByteBuffersLocked(MediaCodec.this.mCachedOutputBuffers, index3, infos);
+                                MediaCodec.this.validateOutputByteBuffersLocked(
+                                        MediaCodec.this.mCachedOutputBuffers, index3, infos);
                                 break;
                             case 1:
                                 while (MediaCodec.this.mOutputFrames.size() <= index3) {
                                     MediaCodec.this.mOutputFrames.add(null);
                                 }
-                                OutputFrame frame2 = (OutputFrame) MediaCodec.this.mOutputFrames.get(index3);
+                                OutputFrame frame2 =
+                                        (OutputFrame) MediaCodec.this.mOutputFrames.get(index3);
                                 if (frame2 == null) {
                                     frame2 = new OutputFrame(index3);
                                     MediaCodec.this.mOutputFrames.set(index3, frame2);
@@ -391,7 +425,8 @@ public final class MediaCodec {
                                 frame2.setAccessible(true);
                                 break;
                             default:
-                                throw new IllegalArgumentException("Unrecognized buffer mode: for large frame output");
+                                throw new IllegalArgumentException(
+                                        "Unrecognized buffer mode: for large frame output");
                         }
                     }
                     MediaCodec.this.mCallback.onOutputBuffersAvailable(this.mCodec, index3, infos);
@@ -425,7 +460,8 @@ public final class MediaCodec {
     }
 
     @SystemApi
-    public static MediaCodec createByCodecNameForClient(String name, int clientPid, int clientUid) throws IOException {
+    public static MediaCodec createByCodecNameForClient(String name, int clientPid, int clientUid)
+            throws IOException {
         return new MediaCodec(name, false, false, clientPid, clientUid);
     }
 
@@ -484,8 +520,7 @@ public final class MediaCodec {
     }
 
     public class IncompatibleWithBlockModelException extends RuntimeException {
-        IncompatibleWithBlockModelException() {
-        }
+        IncompatibleWithBlockModelException() {}
 
         IncompatibleWithBlockModelException(String message) {
             super(message);
@@ -510,33 +545,44 @@ public final class MediaCodec {
         configure(format, surface, crypto, null, flags);
     }
 
-    public void configure(MediaFormat format, Surface surface, int flags, MediaDescrambler descrambler) {
-        configure(format, surface, null, descrambler != null ? descrambler.getBinder() : null, flags);
+    public void configure(
+            MediaFormat format, Surface surface, int flags, MediaDescrambler descrambler) {
+        configure(
+                format, surface, null, descrambler != null ? descrambler.getBinder() : null, flags);
     }
 
-    private void configure(MediaFormat format, Surface surface, MediaCrypto crypto, IHwBinder descramblerBinder, int flags) {
+    private void configure(
+            MediaFormat format,
+            Surface surface,
+            MediaCrypto crypto,
+            IHwBinder descramblerBinder,
+            int flags) {
         boolean canDetach;
         String[] keys;
         Object[] values;
         if (crypto != null && descramblerBinder != null) {
             throw new IllegalArgumentException("Can't use crypto and descrambler together!");
         }
-        boolean canDetach2 = GetFlag(new Supplier() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda6
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(Flags.nullOutputSurfaceSupport());
-                return valueOf;
-            }
-        });
-        if (GetFlag(new Supplier() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda7
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(Flags.nullOutputSurface());
-                return valueOf;
-            }
-        })) {
+        boolean canDetach2 =
+                GetFlag(
+                        new Supplier() { // from class:
+                            // android.media.MediaCodec$$ExternalSyntheticLambda6
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                Boolean valueOf;
+                                valueOf = Boolean.valueOf(Flags.nullOutputSurfaceSupport());
+                                return valueOf;
+                            }
+                        });
+        if (GetFlag(
+                new Supplier() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda7
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        Boolean valueOf;
+                        valueOf = Boolean.valueOf(Flags.nullOutputSurface());
+                        return valueOf;
+                    }
+                })) {
             if (surface == null && (flags & 8) != 0 && !canDetach2) {
                 throw new IllegalArgumentException("Codec does not support detached surface");
             }
@@ -557,7 +603,8 @@ public final class MediaCodec {
                     try {
                         int sessionId = ((Integer) entry.getValue()).intValue();
                         keys2[i] = MediaFormat.KEY_AUDIO_HW_SYNC;
-                        values2[i] = Integer.valueOf(AudioSystem.getAudioHwSyncForSession(sessionId));
+                        values2[i] =
+                                Integer.valueOf(AudioSystem.getAudioHwSyncForSession(sessionId));
                     } catch (Exception e) {
                         throw new IllegalArgumentException("Wrong Session ID Parameter!");
                     }
@@ -596,14 +643,15 @@ public final class MediaCodec {
         if (!this.mHasSurface) {
             throw new IllegalStateException("codec was not configured for an output surface");
         }
-        if (GetFlag(new Supplier() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda8
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(Flags.nullOutputSurfaceSupport());
-                return valueOf;
-            }
-        })) {
+        if (GetFlag(
+                new Supplier() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda8
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        Boolean valueOf;
+                        valueOf = Boolean.valueOf(Flags.nullOutputSurfaceSupport());
+                        return valueOf;
+                    }
+                })) {
             native_detachOutputSurface();
             return;
         }
@@ -617,8 +665,7 @@ public final class MediaCodec {
     static class PersistentSurface extends Surface {
         private long mPersistentObject;
 
-        PersistentSurface() {
-        }
+        PersistentSurface() {}
 
         @Override // android.view.Surface
         public void release() {
@@ -677,8 +724,7 @@ public final class MediaCodec {
         private final int mErrorCode;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface ReasonCode {
-        }
+        public @interface ReasonCode {}
 
         CodecException(int errorCode, int actionCode, String detailMessage) {
             super(detailMessage);
@@ -705,7 +751,8 @@ public final class MediaCodec {
         }
     }
 
-    public static final class CryptoException extends RuntimeException implements MediaDrmThrowable {
+    public static final class CryptoException extends RuntimeException
+            implements MediaDrmThrowable {
         public static final int ERROR_FRAME_TOO_LARGE = 8;
         public static final int ERROR_INSUFFICIENT_OUTPUT_PROTECTION = 4;
         public static final int ERROR_INSUFFICIENT_SECURITY = 7;
@@ -722,14 +769,19 @@ public final class MediaCodec {
         private final int mVendorError;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface CryptoErrorCode {
-        }
+        public @interface CryptoErrorCode {}
 
         public CryptoException(int errorCode, String detailMessage) {
             this(detailMessage, errorCode, 0, 0, 0, null);
         }
 
-        public CryptoException(String message, int errorCode, int vendorError, int oemError, int errorContext, CryptoInfo cryptoInfo) {
+        public CryptoException(
+                String message,
+                int errorCode,
+                int vendorError,
+                int oemError,
+                int errorContext,
+                CryptoInfo cryptoInfo) {
             super(message);
             this.mErrorCode = errorCode;
             this.mVendorError = vendorError;
@@ -762,13 +814,17 @@ public final class MediaCodec {
         }
     }
 
-    public final void queueInputBuffer(int index, int offset, int size, long presentationTimeUs, int flags) throws CryptoException {
+    public final void queueInputBuffer(
+            int index, int offset, int size, long presentationTimeUs, int flags)
+            throws CryptoException {
         if ((flags & 32) != 0 && (flags & 4) != 0) {
             throw new InvalidBufferFlagsException(EOS_AND_DECODE_ONLY_ERROR_MESSAGE);
         }
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("queueInputBuffer() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use getQueueRequest() to queue buffers");
+                throw new IncompatibleWithBlockModelException(
+                        "queueInputBuffer() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL."
+                                + " Please use getQueueRequest() to queue buffers");
             }
             invalidateByteBufferLocked(this.mCachedInputBuffers, index, true);
             this.mDequeuedInputBuffers.remove(index);
@@ -784,7 +840,9 @@ public final class MediaCodec {
     public final void queueInputBuffers(int index, ArrayDeque<BufferInfo> bufferInfos) {
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("queueInputBuffers() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use getQueueRequest() to queue buffers");
+                throw new IncompatibleWithBlockModelException(
+                        "queueInputBuffers() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL."
+                                + " Please use getQueueRequest() to queue buffers");
             }
             invalidateByteBufferLocked(this.mCachedInputBuffers, index, true);
             this.mDequeuedInputBuffers.remove(index);
@@ -829,7 +887,13 @@ public final class MediaCodec {
             }
         }
 
-        public void set(int newNumSubSamples, int[] newNumBytesOfClearData, int[] newNumBytesOfEncryptedData, byte[] newKey, byte[] newIV, int newMode) {
+        public void set(
+                int newNumSubSamples,
+                int[] newNumBytesOfClearData,
+                int[] newNumBytesOfEncryptedData,
+                byte[] newKey,
+                byte[] newIV,
+                int newMode) {
             this.numSubSamples = newNumSubSamples;
             this.numBytesOfClearData = newNumBytesOfClearData;
             this.numBytesOfEncryptedData = newNumBytesOfEncryptedData;
@@ -879,13 +943,18 @@ public final class MediaCodec {
         }
     }
 
-    public final void queueSecureInputBuffer(int index, int offset, CryptoInfo info, long presentationTimeUs, int flags) throws CryptoException {
+    public final void queueSecureInputBuffer(
+            int index, int offset, CryptoInfo info, long presentationTimeUs, int flags)
+            throws CryptoException {
         if ((flags & 32) != 0 && (flags & 4) != 0) {
             throw new InvalidBufferFlagsException(EOS_AND_DECODE_ONLY_ERROR_MESSAGE);
         }
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("queueSecureInputBuffer() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use getQueueRequest() to queue buffers");
+                throw new IncompatibleWithBlockModelException(
+                        "queueSecureInputBuffer() is not compatible with"
+                                + " CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use getQueueRequest() to"
+                                + " queue buffers");
             }
             invalidateByteBufferLocked(this.mCachedInputBuffers, index, true);
             this.mDequeuedInputBuffers.remove(index);
@@ -898,10 +967,14 @@ public final class MediaCodec {
         }
     }
 
-    public final void queueSecureInputBuffers(int index, ArrayDeque<BufferInfo> bufferInfos, ArrayDeque<CryptoInfo> cryptoInfos) {
+    public final void queueSecureInputBuffers(
+            int index, ArrayDeque<BufferInfo> bufferInfos, ArrayDeque<CryptoInfo> cryptoInfos) {
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("queueSecureInputBuffers() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use getQueueRequest() to queue buffers");
+                throw new IncompatibleWithBlockModelException(
+                        "queueSecureInputBuffers() is not compatible with"
+                                + " CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use getQueueRequest() to"
+                                + " queue buffers");
             }
             invalidateByteBufferLocked(this.mCachedInputBuffers, index, true);
             this.mDequeuedInputBuffers.remove(index);
@@ -917,7 +990,10 @@ public final class MediaCodec {
     public final int dequeueInputBuffer(long timeoutUs) {
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("dequeueInputBuffer() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use MediaCodec.Callback objectes to get input buffer slots.");
+                throw new IncompatibleWithBlockModelException(
+                        "dequeueInputBuffer() is not compatible with"
+                                + " CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use MediaCodec.Callback"
+                                + " objectes to get input buffer slots.");
             }
         }
         int res = native_dequeueInputBuffer(timeoutUs);
@@ -946,8 +1022,7 @@ public final class MediaCodec {
 
         private native void native_recycle();
 
-        private LinearBlock() {
-        }
+        private LinearBlock() {}
 
         public boolean isMappable() {
             boolean z;
@@ -1071,7 +1146,8 @@ public final class MediaCodec {
             return this;
         }
 
-        public QueueRequest setMultiFrameLinearBlock(LinearBlock block, ArrayDeque<BufferInfo> infos) {
+        public QueueRequest setMultiFrameLinearBlock(
+                LinearBlock block, ArrayDeque<BufferInfo> infos) {
             if (!isAccessible()) {
                 throw new IllegalStateException("The request is stale");
             }
@@ -1085,7 +1161,8 @@ public final class MediaCodec {
             return this;
         }
 
-        public QueueRequest setEncryptedLinearBlock(LinearBlock block, int offset, int size, CryptoInfo cryptoInfo) {
+        public QueueRequest setEncryptedLinearBlock(
+                LinearBlock block, int offset, int size, CryptoInfo cryptoInfo) {
             Objects.requireNonNull(cryptoInfo);
             if (!isAccessible()) {
                 throw new IllegalStateException("The request is stale");
@@ -1101,7 +1178,10 @@ public final class MediaCodec {
             return this;
         }
 
-        public QueueRequest setMultiFrameEncryptedLinearBlock(LinearBlock block, ArrayDeque<BufferInfo> bufferInfos, ArrayDeque<CryptoInfo> cryptoInfos) {
+        public QueueRequest setMultiFrameEncryptedLinearBlock(
+                LinearBlock block,
+                ArrayDeque<BufferInfo> bufferInfos,
+                ArrayDeque<CryptoInfo> cryptoInfos) {
             if (!isAccessible()) {
                 throw new IllegalStateException("The request is stale");
             }
@@ -1205,9 +1285,21 @@ public final class MediaCodec {
                 this.mBufferInfos.add(info);
             }
             if (this.mLinearBlock != null) {
-                this.mCodec.native_queueLinearBlock(this.mIndex, this.mLinearBlock, this.mCryptoInfos.isEmpty() ? null : this.mCryptoInfos.toArray(), this.mBufferInfos.toArray(), this.mTuningKeys, this.mTuningValues);
+                this.mCodec.native_queueLinearBlock(
+                        this.mIndex,
+                        this.mLinearBlock,
+                        this.mCryptoInfos.isEmpty() ? null : this.mCryptoInfos.toArray(),
+                        this.mBufferInfos.toArray(),
+                        this.mTuningKeys,
+                        this.mTuningValues);
             } else if (this.mHardwareBuffer != null) {
-                this.mCodec.native_queueHardwareBuffer(this.mIndex, this.mHardwareBuffer, this.mPresentationTimeUs, this.mFlags, this.mTuningKeys, this.mTuningValues);
+                this.mCodec.native_queueHardwareBuffer(
+                        this.mIndex,
+                        this.mHardwareBuffer,
+                        this.mPresentationTimeUs,
+                        this.mFlags,
+                        this.mTuningKeys,
+                        this.mTuningValues);
             }
             clear();
         }
@@ -1243,7 +1335,11 @@ public final class MediaCodec {
                 throw new IllegalStateException("The codec is not configured for block model");
             }
             if (index < 0 || index >= this.mQueueRequests.size()) {
-                throw new IndexOutOfBoundsException("Expected range of index: [0," + (this.mQueueRequests.size() - 1) + "]; actual: " + index);
+                throw new IndexOutOfBoundsException(
+                        "Expected range of index: [0,"
+                                + (this.mQueueRequests.size() - 1)
+                                + "]; actual: "
+                                + index);
             }
             QueueRequest request = this.mQueueRequests.get(index);
             if (request == null) {
@@ -1260,7 +1356,10 @@ public final class MediaCodec {
     public final int dequeueOutputBuffer(BufferInfo info, long timeoutUs) {
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("dequeueOutputBuffer() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use MediaCodec.Callback objects to get output buffer slots.");
+                throw new IncompatibleWithBlockModelException(
+                        "dequeueOutputBuffer() is not compatible with"
+                                + " CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use MediaCodec.Callback"
+                                + " objects to get output buffer slots.");
             }
         }
         int res = native_dequeueOutputBuffer(info, timeoutUs);
@@ -1289,7 +1388,8 @@ public final class MediaCodec {
         releaseOutputBufferInternal(index, true, true, renderTimestampNs);
     }
 
-    private void releaseOutputBufferInternal(int index, boolean render, boolean updatePts, long renderTimestampNs) {
+    private void releaseOutputBufferInternal(
+            int index, boolean render, boolean updatePts, long renderTimestampNs) {
         synchronized (this.mBufferLock) {
             switch (this.mBufferMode) {
                 case 0:
@@ -1306,7 +1406,8 @@ public final class MediaCodec {
                     frame.clear();
                     break;
                 default:
-                    throw new IllegalStateException("Unrecognized buffer mode: " + this.mBufferMode);
+                    throw new IllegalStateException(
+                            "Unrecognized buffer mode: " + this.mBufferMode);
             }
         }
         releaseOutputBuffer(index, render, updatePts, renderTimestampNs);
@@ -1335,8 +1436,7 @@ public final class MediaCodec {
             private ByteBuffer mByteBuffer;
             private Image mImage;
 
-            private CodecBuffer() {
-            }
+            private CodecBuffer() {}
 
             public void free() {
                 if (this.mByteBuffer != null) {
@@ -1437,29 +1537,48 @@ public final class MediaCodec {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void validateOutputByteBuffersLocked(ByteBuffer[] buffers, int index, ArrayDeque<BufferInfo> infoDeque) {
+    public void validateOutputByteBuffersLocked(
+            ByteBuffer[] buffers, int index, ArrayDeque<BufferInfo> infoDeque) {
         ByteBuffer buffer;
-        Optional<BufferInfo> minInfo = infoDeque.stream().min(new Comparator() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda0
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int compare;
-                compare = Integer.compare(((MediaCodec.BufferInfo) obj).offset, ((MediaCodec.BufferInfo) obj2).offset);
-                return compare;
-            }
-        });
-        Optional<BufferInfo> maxInfo = infoDeque.stream().max(new Comparator() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda1
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int compare;
-                compare = Integer.compare(((MediaCodec.BufferInfo) obj).offset, ((MediaCodec.BufferInfo) obj2).offset);
-                return compare;
-            }
-        });
+        Optional<BufferInfo> minInfo =
+                infoDeque.stream()
+                        .min(
+                                new Comparator() { // from class:
+                                    // android.media.MediaCodec$$ExternalSyntheticLambda0
+                                    @Override // java.util.Comparator
+                                    public final int compare(Object obj, Object obj2) {
+                                        int compare;
+                                        compare =
+                                                Integer.compare(
+                                                        ((MediaCodec.BufferInfo) obj).offset,
+                                                        ((MediaCodec.BufferInfo) obj2).offset);
+                                        return compare;
+                                    }
+                                });
+        Optional<BufferInfo> maxInfo =
+                infoDeque.stream()
+                        .max(
+                                new Comparator() { // from class:
+                                    // android.media.MediaCodec$$ExternalSyntheticLambda1
+                                    @Override // java.util.Comparator
+                                    public final int compare(Object obj, Object obj2) {
+                                        int compare;
+                                        compare =
+                                                Integer.compare(
+                                                        ((MediaCodec.BufferInfo) obj).offset,
+                                                        ((MediaCodec.BufferInfo) obj2).offset);
+                                        return compare;
+                                    }
+                                });
         if (buffers == null) {
             if (index >= 0) {
                 this.mValidOutputIndices.set(index);
             }
-        } else if (index >= 0 && index < buffers.length && (buffer = buffers[index]) != null && minInfo.isPresent() && maxInfo.isPresent()) {
+        } else if (index >= 0
+                && index < buffers.length
+                && (buffer = buffers[index]) != null
+                && minInfo.isPresent()
+                && maxInfo.isPresent()) {
             buffer.setAccessible(true);
             buffer.limit(maxInfo.get().offset + maxInfo.get().size);
             buffer.position(minInfo.get().offset);
@@ -1532,7 +1651,8 @@ public final class MediaCodec {
                 ByteBuffer buffer = buffers[i];
                 if (buffer != null && indices.get(i)) {
                     buffer.setAccessible(true);
-                    if (!input && (info = this.mDequeuedOutputInfos.get(Integer.valueOf(i))) != null) {
+                    if (!input
+                            && (info = this.mDequeuedOutputInfos.get(Integer.valueOf(i))) != null) {
                         buffer.limit(info.offset + info.size).position(info.offset);
                     }
                 }
@@ -1550,7 +1670,10 @@ public final class MediaCodec {
         ByteBuffer[] byteBufferArr;
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("getInputBuffers() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please obtain MediaCodec.LinearBlock or HardwareBuffer objects and attach to QueueRequest objects.");
+                throw new IncompatibleWithBlockModelException(
+                        "getInputBuffers() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL."
+                            + " Please obtain MediaCodec.LinearBlock or HardwareBuffer objects and"
+                            + " attach to QueueRequest objects.");
             }
             if (this.mCachedInputBuffers == null) {
                 cacheBuffersLocked(true);
@@ -1567,7 +1690,9 @@ public final class MediaCodec {
         ByteBuffer[] byteBufferArr;
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("getOutputBuffers() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use getOutputFrame to get output frames.");
+                throw new IncompatibleWithBlockModelException(
+                        "getOutputBuffers() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL."
+                                + " Please use getOutputFrame to get output frames.");
             }
             if (this.mCachedOutputBuffers == null) {
                 cacheBuffersLocked(false);
@@ -1583,7 +1708,10 @@ public final class MediaCodec {
     public ByteBuffer getInputBuffer(int index) {
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("getInputBuffer() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please obtain MediaCodec.LinearBlock or HardwareBuffer objects and attach to QueueRequest objects.");
+                throw new IncompatibleWithBlockModelException(
+                        "getInputBuffer() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL."
+                            + " Please obtain MediaCodec.LinearBlock or HardwareBuffer objects and"
+                            + " attach to QueueRequest objects.");
             }
         }
         ByteBuffer newBuffer = getBuffer(true, index);
@@ -1597,7 +1725,10 @@ public final class MediaCodec {
     public Image getInputImage(int index) {
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("getInputImage() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please obtain MediaCodec.LinearBlock or HardwareBuffer objects and attach to QueueRequest objects.");
+                throw new IncompatibleWithBlockModelException(
+                        "getInputImage() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL."
+                            + " Please obtain MediaCodec.LinearBlock or HardwareBuffer objects and"
+                            + " attach to QueueRequest objects.");
             }
         }
         Image newImage = getImage(true, index);
@@ -1611,7 +1742,9 @@ public final class MediaCodec {
     public ByteBuffer getOutputBuffer(int index) {
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("getOutputBuffer() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use getOutputFrame() to get output frames.");
+                throw new IncompatibleWithBlockModelException(
+                        "getOutputBuffer() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL."
+                                + " Please use getOutputFrame() to get output frames.");
             }
         }
         ByteBuffer newBuffer = getBuffer(false, index);
@@ -1625,7 +1758,9 @@ public final class MediaCodec {
     public Image getOutputImage(int index) {
         synchronized (this.mBufferLock) {
             if (this.mBufferMode == 1) {
-                throw new IncompatibleWithBlockModelException("getOutputImage() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL. Please use getOutputFrame() to get output frames.");
+                throw new IncompatibleWithBlockModelException(
+                        "getOutputImage() is not compatible with CONFIGURE_FLAG_USE_BLOCK_MODEL."
+                                + " Please use getOutputFrame() to get output frames.");
             }
         }
         Image newImage = getImage(false, index);
@@ -1740,7 +1875,11 @@ public final class MediaCodec {
                 throw new IllegalStateException("The codec is not configured for block model");
             }
             if (index < 0 || index >= this.mOutputFrames.size()) {
-                throw new IndexOutOfBoundsException("Expected range of index: [0," + (this.mQueueRequests.size() - 1) + "]; actual: " + index);
+                throw new IndexOutOfBoundsException(
+                        "Expected range of index: [0,"
+                                + (this.mQueueRequests.size() - 1)
+                                + "]; actual: "
+                                + index);
             }
             frame = this.mOutputFrames.get(index);
             if (frame == null) {
@@ -1816,18 +1955,24 @@ public final class MediaCodec {
                 EventHandler newHandler = getEventHandlerOn(handler, this.mCallbackHandler);
                 if (newHandler != this.mCallbackHandler) {
                     if (Flags.setCallbackStall()) {
-                        logAndRun("[new handler] removeMessages(SET_CALLBACK)", new Runnable() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda2
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                MediaCodec.this.lambda$setCallback$5();
-                            }
-                        });
-                        logAndRun("[new handler] removeMessages(CALLBACK)", new Runnable() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda3
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                MediaCodec.this.lambda$setCallback$6();
-                            }
-                        });
+                        logAndRun(
+                                "[new handler] removeMessages(SET_CALLBACK)",
+                                new Runnable() { // from class:
+                                    // android.media.MediaCodec$$ExternalSyntheticLambda2
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        MediaCodec.this.lambda$setCallback$5();
+                                    }
+                                });
+                        logAndRun(
+                                "[new handler] removeMessages(CALLBACK)",
+                                new Runnable() { // from class:
+                                    // android.media.MediaCodec$$ExternalSyntheticLambda3
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        MediaCodec.this.lambda$setCallback$6();
+                                    }
+                                });
                     } else {
                         this.mCallbackHandler.removeMessages(2);
                         this.mCallbackHandler.removeMessages(1);
@@ -1837,18 +1982,24 @@ public final class MediaCodec {
             }
         } else if (this.mCallbackHandler != null) {
             if (Flags.setCallbackStall()) {
-                logAndRun("[null handler] removeMessages(SET_CALLBACK)", new Runnable() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda4
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        MediaCodec.this.lambda$setCallback$7();
-                    }
-                });
-                logAndRun("[null handler] removeMessages(CALLBACK)", new Runnable() { // from class: android.media.MediaCodec$$ExternalSyntheticLambda5
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        MediaCodec.this.lambda$setCallback$8();
-                    }
-                });
+                logAndRun(
+                        "[null handler] removeMessages(SET_CALLBACK)",
+                        new Runnable() { // from class:
+                            // android.media.MediaCodec$$ExternalSyntheticLambda4
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                MediaCodec.this.lambda$setCallback$7();
+                            }
+                        });
+                logAndRun(
+                        "[null handler] removeMessages(CALLBACK)",
+                        new Runnable() { // from class:
+                            // android.media.MediaCodec$$ExternalSyntheticLambda5
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                MediaCodec.this.lambda$setCallback$8();
+                            }
+                        });
             } else {
                 this.mCallbackHandler.removeMessages(2);
                 this.mCallbackHandler.removeMessages(1);
@@ -1885,11 +2036,13 @@ public final class MediaCodec {
         setCallback(cb, null);
     }
 
-    public void setOnFirstTunnelFrameReadyListener(Handler handler, OnFirstTunnelFrameReadyListener listener) {
+    public void setOnFirstTunnelFrameReadyListener(
+            Handler handler, OnFirstTunnelFrameReadyListener listener) {
         synchronized (this.mListenerLock) {
             this.mOnFirstTunnelFrameReadyListener = listener;
             if (listener != null) {
-                EventHandler newHandler = getEventHandlerOn(handler, this.mOnFirstTunnelFrameReadyHandler);
+                EventHandler newHandler =
+                        getEventHandlerOn(handler, this.mOnFirstTunnelFrameReadyHandler);
                 if (newHandler != this.mOnFirstTunnelFrameReadyHandler) {
                     this.mOnFirstTunnelFrameReadyHandler.removeMessages(4);
                 }
@@ -1925,8 +2078,7 @@ public final class MediaCodec {
         private String mName;
         private int mType;
 
-        private ParameterDescriptor() {
-        }
+        private ParameterDescriptor() {}
 
         public String getName() {
             return this.mName;
@@ -1972,21 +2124,28 @@ public final class MediaCodec {
         return new EventHandler(this, looper);
     }
 
-    public static abstract class Callback {
+    public abstract static class Callback {
         public abstract void onError(MediaCodec mediaCodec, CodecException codecException);
 
         public abstract void onInputBufferAvailable(MediaCodec mediaCodec, int i);
 
-        public abstract void onOutputBufferAvailable(MediaCodec mediaCodec, int i, BufferInfo bufferInfo);
+        public abstract void onOutputBufferAvailable(
+                MediaCodec mediaCodec, int i, BufferInfo bufferInfo);
 
         public abstract void onOutputFormatChanged(MediaCodec mediaCodec, MediaFormat mediaFormat);
 
-        public void onOutputBuffersAvailable(MediaCodec codec, int index, ArrayDeque<BufferInfo> infos) {
-            throw new IllegalStateException("Client must override onOutputBuffersAvailable when codec is configured to operate with multiple access units");
+        public void onOutputBuffersAvailable(
+                MediaCodec codec, int index, ArrayDeque<BufferInfo> infos) {
+            throw new IllegalStateException(
+                    "Client must override onOutputBuffersAvailable when codec is configured to"
+                            + " operate with multiple access units");
         }
 
         public void onCryptoError(MediaCodec codec, CryptoException e) {
-            throw new IllegalStateException("Client must override onCryptoError when the codec is configured with CONFIGURE_FLAG_USE_CRYPTO_ASYNC.", e);
+            throw new IllegalStateException(
+                    "Client must override onCryptoError when the codec is configured with"
+                            + " CONFIGURE_FLAG_USE_CRYPTO_ASYNC.",
+                    e);
         }
     }
 
@@ -2116,7 +2275,14 @@ public final class MediaCodec {
             super.setCropRect(cropRect);
         }
 
-        public MediaImage(ByteBuffer buffer, ByteBuffer info, boolean readOnly, long timestamp, int xOffset, int yOffset, Rect cropRect) {
+        public MediaImage(
+                ByteBuffer buffer,
+                ByteBuffer info,
+                boolean readOnly,
+                long timestamp,
+                int xOffset,
+                int yOffset,
+                Rect cropRect) {
             int planeOffsetInc;
             int planeOffsetInc2;
             Rect cropRect2;
@@ -2145,7 +2311,8 @@ public final class MediaCodec {
                 this.mWidth = info.getInt();
                 this.mHeight = info.getInt();
                 if (this.mWidth < 1 || this.mHeight < 1) {
-                    throw new UnsupportedOperationException("unsupported size: " + this.mWidth + "x" + this.mHeight);
+                    throw new UnsupportedOperationException(
+                            "unsupported size: " + this.mWidth + "x" + this.mHeight);
                 }
                 int bitDepth = info.getInt();
                 if (bitDepth != 8 && bitDepth != 10) {
@@ -2162,7 +2329,11 @@ public final class MediaCodec {
                         planeOffsetInc = 2;
                         planeOffsetInc2 = 4;
                     } else {
-                        throw new UnsupportedOperationException("couldn't infer ImageFormat bitDepth: " + bitDepth + " bitDepthAllocated: " + bitDepthAllocated);
+                        throw new UnsupportedOperationException(
+                                "couldn't infer ImageFormat bitDepth: "
+                                        + bitDepth
+                                        + " bitDepthAllocated: "
+                                        + bitDepthAllocated);
                     }
                     this.mPlanes = new MediaPlane[numPlanes];
                     int ix = 0;
@@ -2178,11 +2349,25 @@ public final class MediaCodec {
                             int bitDepthAllocated2 = bitDepthAllocated;
                             if (horiz == (ix == 0 ? 1 : 2)) {
                                 if (colInc < 1 || rowInc < 1) {
-                                    throw new UnsupportedOperationException("unexpected strides: " + colInc + " pixel, " + rowInc + " row on plane " + ix);
+                                    throw new UnsupportedOperationException(
+                                            "unexpected strides: "
+                                                    + colInc
+                                                    + " pixel, "
+                                                    + rowInc
+                                                    + " row on plane "
+                                                    + ix);
                                 }
                                 buffer.clear();
-                                byteBuffer.position(this.mBuffer.position() + planeOffset + ((xOffset / horiz) * colInc) + ((i / vert) * rowInc));
-                                byteBuffer.limit(buffer.position() + Utils.divUp(bitDepth, 8) + (((this.mHeight / vert) - 1) * rowInc) + (((this.mWidth / horiz) - 1) * colInc));
+                                byteBuffer.position(
+                                        this.mBuffer.position()
+                                                + planeOffset
+                                                + ((xOffset / horiz) * colInc)
+                                                + ((i / vert) * rowInc));
+                                byteBuffer.limit(
+                                        buffer.position()
+                                                + Utils.divUp(bitDepth, 8)
+                                                + (((this.mHeight / vert) - 1) * rowInc)
+                                                + (((this.mWidth / horiz) - 1) * colInc));
                                 this.mPlanes[ix] = new MediaPlane(buffer.slice(), rowInc, colInc);
                                 if ((this.mFormat == 35 || this.mFormat == 54) && ix == 1) {
                                     cbPlaneOffset = planeOffset;
@@ -2202,13 +2387,24 @@ public final class MediaCodec {
                                 i = yOffset;
                             }
                         }
-                        throw new UnsupportedOperationException("unexpected subsampling: " + horiz + "x" + vert + " on plane " + ix);
+                        throw new UnsupportedOperationException(
+                                "unexpected subsampling: "
+                                        + horiz
+                                        + "x"
+                                        + vert
+                                        + " on plane "
+                                        + ix);
                     }
                     if (this.mFormat == 54) {
                         if (crPlaneOffset != cbPlaneOffset + planeOffsetInc) {
-                            throw new UnsupportedOperationException("Invalid plane offsets cbPlaneOffset: " + cbPlaneOffset + " crPlaneOffset: " + crPlaneOffset);
+                            throw new UnsupportedOperationException(
+                                    "Invalid plane offsets cbPlaneOffset: "
+                                            + cbPlaneOffset
+                                            + " crPlaneOffset: "
+                                            + crPlaneOffset);
                         }
-                        if (this.mPlanes[1].getPixelStride() != planeOffsetInc2 || this.mPlanes[2].getPixelStride() != planeOffsetInc2) {
+                        if (this.mPlanes[1].getPixelStride() != planeOffsetInc2
+                                || this.mPlanes[2].getPixelStride() != planeOffsetInc2) {
                             throw new UnsupportedOperationException("Invalid pixelStride");
                         }
                     }
@@ -2221,16 +2417,30 @@ public final class MediaCodec {
                     super.setCropRect(cropRect2);
                     return;
                 }
-                throw new UnsupportedOperationException("unsupported allocated bit depth: " + bitDepthAllocated);
+                throw new UnsupportedOperationException(
+                        "unsupported allocated bit depth: " + bitDepthAllocated);
             }
             throw new UnsupportedOperationException("unsupported info length: " + info.remaining());
         }
 
-        public MediaImage(ByteBuffer[] buffers, int[] rowStrides, int[] pixelStrides, int width, int height, int format, boolean readOnly, long timestamp, int xOffset, int yOffset, Rect cropRect, long context) {
+        public MediaImage(
+                ByteBuffer[] buffers,
+                int[] rowStrides,
+                int[] pixelStrides,
+                int width,
+                int height,
+                int format,
+                boolean readOnly,
+                long timestamp,
+                int xOffset,
+                int yOffset,
+                Rect cropRect,
+                long context) {
             Rect cropRect2;
             ByteBuffer[] byteBufferArr = buffers;
             int[] iArr = rowStrides;
-            if (byteBufferArr.length == iArr.length && byteBufferArr.length == pixelStrides.length) {
+            if (byteBufferArr.length == iArr.length
+                    && byteBufferArr.length == pixelStrides.length) {
                 this.mWidth = width;
                 this.mHeight = height;
                 this.mFormat = format;
@@ -2259,7 +2469,8 @@ public final class MediaCodec {
                 this.mBufferContext = context;
                 return;
             }
-            throw new IllegalArgumentException("buffers, rowStrides and pixelStrides should have the same length");
+            throw new IllegalArgumentException(
+                    "buffers, rowStrides and pixelStrides should have the same length");
         }
 
         private class MediaPlane extends Image.Plane {
@@ -2305,7 +2516,6 @@ public final class MediaCodec {
         public static final String SECURE = "android.media.mediacodec.secure";
         public static final String WIDTH = "android.media.mediacodec.width";
 
-        private MetricsConstants() {
-        }
+        private MetricsConstants() {}
     }
 }

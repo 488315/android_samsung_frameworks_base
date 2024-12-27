@@ -7,13 +7,19 @@ import android.os.BatteryUsageStatsQuery;
 import android.os.UidBatteryConsumer;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class CustomEnergyConsumerPowerCalculator extends PowerCalculator {
     @Override // com.android.server.power.stats.PowerCalculator
-    public final void calculate(BatteryUsageStats.Builder builder, BatteryStats batteryStats, long j, long j2, BatteryUsageStatsQuery batteryUsageStatsQuery) {
+    public final void calculate(
+            BatteryUsageStats.Builder builder,
+            BatteryStats batteryStats,
+            long j,
+            long j2,
+            BatteryUsageStatsQuery batteryUsageStatsQuery) {
         int i;
         double[] dArr;
         SparseArray uidBatteryConsumerBuilders = builder.getUidBatteryConsumerBuilders();
@@ -25,8 +31,10 @@ public final class CustomEnergyConsumerPowerCalculator extends PowerCalculator {
             if (size < 0) {
                 break;
             }
-            UidBatteryConsumer.Builder builder2 = (UidBatteryConsumer.Builder) uidBatteryConsumerBuilders.valueAt(size);
-            long[] customEnergyConsumerBatteryConsumptionUC = builder2.getBatteryStatsUid().getCustomEnergyConsumerBatteryConsumptionUC();
+            UidBatteryConsumer.Builder builder2 =
+                    (UidBatteryConsumer.Builder) uidBatteryConsumerBuilders.valueAt(size);
+            long[] customEnergyConsumerBatteryConsumptionUC =
+                    builder2.getBatteryStatsUid().getCustomEnergyConsumerBatteryConsumptionUC();
             if (customEnergyConsumerBatteryConsumptionUC == null) {
                 dArr = null;
             } else {
@@ -39,7 +47,12 @@ public final class CustomEnergyConsumerPowerCalculator extends PowerCalculator {
                 if (dArr3 == null) {
                     dArr3 = new double[dArr.length];
                 } else if (dArr3.length != dArr.length) {
-                    Slog.wtf("CustomEnergyCsmrPowerCalc", "Number of custom energy components is not the same for all apps: " + dArr3.length + ", " + dArr.length);
+                    Slog.wtf(
+                            "CustomEnergyCsmrPowerCalc",
+                            "Number of custom energy components is not the same for all apps: "
+                                    + dArr3.length
+                                    + ", "
+                                    + dArr.length);
                     dArr3 = Arrays.copyOf(dArr3, dArr.length);
                 }
                 while (i < dArr.length) {
@@ -54,7 +67,8 @@ public final class CustomEnergyConsumerPowerCalculator extends PowerCalculator {
             }
             size--;
         }
-        long[] customEnergyConsumerBatteryConsumptionUC2 = batteryStats.getCustomEnergyConsumerBatteryConsumptionUC();
+        long[] customEnergyConsumerBatteryConsumptionUC2 =
+                batteryStats.getCustomEnergyConsumerBatteryConsumptionUC();
         if (customEnergyConsumerBatteryConsumptionUC2 != null) {
             dArr2 = new double[customEnergyConsumerBatteryConsumptionUC2.length];
             for (int i3 = 0; i3 < customEnergyConsumerBatteryConsumptionUC2.length; i3++) {
@@ -62,15 +76,19 @@ public final class CustomEnergyConsumerPowerCalculator extends PowerCalculator {
             }
         }
         if (dArr2 != null) {
-            AggregateBatteryConsumer.Builder aggregateBatteryConsumerBuilder = builder.getAggregateBatteryConsumerBuilder(0);
+            AggregateBatteryConsumer.Builder aggregateBatteryConsumerBuilder =
+                    builder.getAggregateBatteryConsumerBuilder(0);
             for (int i4 = 0; i4 < dArr2.length; i4++) {
-                aggregateBatteryConsumerBuilder.setConsumedPowerForCustomComponent(i4 + 1000, dArr2[i4]);
+                aggregateBatteryConsumerBuilder.setConsumedPowerForCustomComponent(
+                        i4 + 1000, dArr2[i4]);
             }
         }
         if (dArr3 != null) {
-            AggregateBatteryConsumer.Builder aggregateBatteryConsumerBuilder2 = builder.getAggregateBatteryConsumerBuilder(1);
+            AggregateBatteryConsumer.Builder aggregateBatteryConsumerBuilder2 =
+                    builder.getAggregateBatteryConsumerBuilder(1);
             while (i < dArr3.length) {
-                aggregateBatteryConsumerBuilder2.setConsumedPowerForCustomComponent(i + 1000, dArr3[i]);
+                aggregateBatteryConsumerBuilder2.setConsumedPowerForCustomComponent(
+                        i + 1000, dArr3[i]);
                 i++;
             }
         }

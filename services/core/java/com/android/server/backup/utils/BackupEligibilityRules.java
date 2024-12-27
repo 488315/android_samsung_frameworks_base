@@ -10,13 +10,16 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.backup.transport.BackupTransportClient;
 import com.android.server.backup.transport.TransportConnection;
 import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.pkg.PackageStateInternal;
+
 import com.google.android.collect.Sets;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,21 +36,32 @@ public final class BackupEligibilityRules {
     public final int mUserId;
 
     static {
-        ArraySet newArraySet = Sets.newArraySet(new String[]{"@pm@", "android"});
+        ArraySet newArraySet = Sets.newArraySet(new String[] {"@pm@", "android"});
         systemPackagesAllowedForProfileUser = newArraySet;
-        ArraySet newArraySet2 = Sets.newArraySet(new String[]{"com.android.wallpaperbackup", "com.android.providers.settings"});
+        ArraySet newArraySet2 =
+                Sets.newArraySet(
+                        new String[] {
+                            "com.android.wallpaperbackup", "com.android.providers.settings"
+                        });
         HashSet hashSet = new HashSet(newArraySet);
         hashSet.addAll(newArraySet2);
         systemPackagesAllowedForNonSystemUsers = hashSet;
     }
 
-    public BackupEligibilityRules(PackageManager packageManager, PackageManagerInternal packageManagerInternal, int i, Context context, int i2, boolean z) {
+    public BackupEligibilityRules(
+            PackageManager packageManager,
+            PackageManagerInternal packageManagerInternal,
+            int i,
+            Context context,
+            int i2,
+            boolean z) {
         this.mIsProfileUser = false;
         this.mPackageManager = packageManager;
         this.mPackageManagerInternal = packageManagerInternal;
         this.mUserId = i;
         this.mBackupDestination = i2;
-        this.mIsProfileUser = ((UserManager) context.getSystemService(UserManager.class)).isProfile();
+        this.mIsProfileUser =
+                ((UserManager) context.getSystemService(UserManager.class)).isProfile();
         this.mSkipRestoreForLaunchedApps = z;
     }
 
@@ -61,9 +75,18 @@ public final class BackupEligibilityRules {
     }
 
     public boolean appIsDisabled(ApplicationInfo applicationInfo) {
-        PackageStateInternal packageStateInternal = ((PackageManagerService.PackageManagerInternalImpl) this.mPackageManagerInternal).getPackageStateInternal(applicationInfo.packageName);
-        int enabledState = packageStateInternal == null ? 0 : packageStateInternal.getUserStateOrDefault(this.mUserId).getEnabledState();
-        return enabledState != 0 ? enabledState == 2 || enabledState == 3 || enabledState == 4 : !applicationInfo.enabled;
+        PackageStateInternal packageStateInternal =
+                ((PackageManagerService.PackageManagerInternalImpl) this.mPackageManagerInternal)
+                        .getPackageStateInternal(applicationInfo.packageName);
+        int enabledState =
+                packageStateInternal == null
+                        ? 0
+                        : packageStateInternal
+                                .getUserStateOrDefault(this.mUserId)
+                                .getEnabledState();
+        return enabledState != 0
+                ? enabledState == 2 || enabledState == 3 || enabledState == 4
+                : !applicationInfo.enabled;
     }
 
     public boolean appIsEligibleForBackup(ApplicationInfo applicationInfo) {
@@ -74,12 +97,14 @@ public final class BackupEligibilityRules {
             if (this.mUserId != 0) {
                 boolean z = this.mIsProfileUser;
                 if (z) {
-                    if (!((ArraySet) systemPackagesAllowedForProfileUser).contains(applicationInfo.packageName)) {
+                    if (!((ArraySet) systemPackagesAllowedForProfileUser)
+                            .contains(applicationInfo.packageName)) {
                         return false;
                     }
                 }
                 if (!z) {
-                    if (!((HashSet) systemPackagesAllowedForNonSystemUsers).contains(applicationInfo.packageName)) {
+                    if (!((HashSet) systemPackagesAllowedForNonSystemUsers)
+                            .contains(applicationInfo.packageName)) {
                         return false;
                     }
                 }
@@ -88,30 +113,40 @@ public final class BackupEligibilityRules {
                 return false;
             }
         }
-        if (applicationInfo.packageName.equals("com.android.sharedstoragebackup") || applicationInfo.isInstantApp()) {
+        if (applicationInfo.packageName.equals("com.android.sharedstoragebackup")
+                || applicationInfo.isInstantApp()) {
             return false;
         }
         return !appIsDisabled(applicationInfo);
     }
 
-    public final boolean appIsRunningAndEligibleForBackupWithTransport(TransportConnection transportConnection, String str) {
+    public final boolean appIsRunningAndEligibleForBackupWithTransport(
+            TransportConnection transportConnection, String str) {
         try {
-            PackageInfo packageInfoAsUser = this.mPackageManager.getPackageInfoAsUser(str, 134217728, this.mUserId);
+            PackageInfo packageInfoAsUser =
+                    this.mPackageManager.getPackageInfoAsUser(str, 134217728, this.mUserId);
             ApplicationInfo applicationInfo = packageInfoAsUser.applicationInfo;
-            if (appIsEligibleForBackup(applicationInfo) && !appIsStopped(applicationInfo) && !appIsDisabled(applicationInfo)) {
+            if (appIsEligibleForBackup(applicationInfo)
+                    && !appIsStopped(applicationInfo)
+                    && !appIsDisabled(applicationInfo)) {
                 if (transportConnection != null) {
                     try {
-                        BackupTransportClient connectOrThrow = transportConnection.connectOrThrow("AppBackupUtils.appIsRunningAndEligibleForBackupWithTransport");
+                        BackupTransportClient connectOrThrow =
+                                transportConnection.connectOrThrow(
+                                        "AppBackupUtils.appIsRunningAndEligibleForBackupWithTransport");
                         boolean appGetsFullBackup = appGetsFullBackup(packageInfoAsUser);
                         AndroidFuture newFuture = connectOrThrow.mTransportFutures.newFuture();
-                        connectOrThrow.mTransportBinder.isAppEligibleForBackup(packageInfoAsUser, appGetsFullBackup, newFuture);
+                        connectOrThrow.mTransportBinder.isAppEligibleForBackup(
+                                packageInfoAsUser, appGetsFullBackup, newFuture);
                         Boolean bool = (Boolean) connectOrThrow.getFutureResult(newFuture);
                         if (bool != null) {
                             return bool.booleanValue();
                         }
                         return false;
                     } catch (Exception e) {
-                        Slog.e("BackupManagerService", "Unable to ask about eligibility: " + e.getMessage());
+                        Slog.e(
+                                "BackupManagerService",
+                                "Unable to ask about eligibility: " + e.getMessage());
                     }
                 }
                 return true;
@@ -130,10 +165,14 @@ public final class BackupEligibilityRules {
         }
         int i3 = this.mUserId;
         if (i2 == 1) {
-            return ((i & 1) == 0 && CompatChanges.isChangeEnabled(183147249L, applicationInfo.packageName, UserHandle.of(i3))) || z;
+            return ((i & 1) == 0
+                            && CompatChanges.isChangeEnabled(
+                                    183147249L, applicationInfo.packageName, UserHandle.of(i3)))
+                    || z;
         }
         if (i2 != 2) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i2, "Unknown operation type:", "BackupManagerService");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i2, "Unknown operation type:", "BackupManagerService");
             return false;
         }
         String str = applicationInfo.packageName;
@@ -154,22 +193,27 @@ public final class BackupEligibilityRules {
             return z3;
         }
         try {
-            return this.mPackageManager.getPropertyAsUser("android.backup.ALLOW_ADB_BACKUP", str, null, i3).getBoolean();
+            return this.mPackageManager
+                    .getPropertyAsUser("android.backup.ALLOW_ADB_BACKUP", str, null, i3)
+                    .getBoolean();
         } catch (PackageManager.NameNotFoundException unused) {
-            Slog.w("BackupManagerService", "Failed to read allowAdbBackup property for + ".concat(str));
+            Slog.w(
+                    "BackupManagerService",
+                    "Failed to read allowAdbBackup property for + ".concat(str));
             return z;
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:30:0x0055, code lost:
-    
-        r0 = r0 + 1;
-     */
+
+       r0 = r0 + 1;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean signaturesMatch(android.content.pm.Signature[] r8, android.content.pm.PackageInfo r9) {
+    public final boolean signaturesMatch(
+            android.content.pm.Signature[] r8, android.content.pm.PackageInfo r9) {
         /*
             r7 = this;
             java.lang.String r0 = r9.packageName
@@ -233,6 +277,9 @@ public final class BackupEligibilityRules {
         L5c:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.utils.BackupEligibilityRules.signaturesMatch(android.content.pm.Signature[], android.content.pm.PackageInfo):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.utils.BackupEligibilityRules.signaturesMatch(android.content.pm.Signature[],"
+                    + " android.content.pm.PackageInfo):boolean");
     }
 }

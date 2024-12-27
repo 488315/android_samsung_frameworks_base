@@ -4,7 +4,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.IndentingPrintWriter;
+
 import com.android.server.CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -19,7 +21,8 @@ final class ScreenTimeoutOverridePolicy {
         indentingPrintWriter.println();
         indentingPrintWriter.println("ScreenTimeoutOverridePolicy:");
         indentingPrintWriter.increaseIndent();
-        indentingPrintWriter.println("mScreenTimeoutOverrideConfig=" + this.mScreenTimeoutOverrideConfig);
+        indentingPrintWriter.println(
+                "mScreenTimeoutOverrideConfig=" + this.mScreenTimeoutOverrideConfig);
         indentingPrintWriter.println("mLastAutoReleaseReason=" + this.mLastAutoReleaseReason);
     }
 
@@ -31,6 +34,10 @@ final class ScreenTimeoutOverridePolicy {
         powerManagerService.mClock.getClass();
         handler.sendMessageAtTime(obtainMessage, SystemClock.uptimeMillis());
         this.mLastAutoReleaseReason = i;
-        CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0.m(new StringBuilder("Releasing all screen timeout override wake lock. (reason="), this.mLastAutoReleaseReason, ")", "ScreenTimeoutOverridePolicy");
+        CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0.m(
+                new StringBuilder("Releasing all screen timeout override wake lock. (reason="),
+                this.mLastAutoReleaseReason,
+                ")",
+                "ScreenTimeoutOverridePolicy");
     }
 }

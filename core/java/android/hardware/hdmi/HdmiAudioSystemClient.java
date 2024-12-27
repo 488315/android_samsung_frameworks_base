@@ -35,7 +35,8 @@ public final class HdmiAudioSystemClient extends HdmiClient {
         return 5;
     }
 
-    public void sendReportAudioStatusCecCommand(boolean isMuteAdjust, int volume, int maxVolume, boolean isMute) {
+    public void sendReportAudioStatusCecCommand(
+            boolean isMuteAdjust, int volume, int maxVolume, boolean isMute) {
         if (isMuteAdjust) {
             try {
                 this.mService.reportAudioStatus(getDeviceType(), volume, maxVolume, isMute);
@@ -51,25 +52,34 @@ public final class HdmiAudioSystemClient extends HdmiClient {
             try {
                 this.mService.reportAudioStatus(getDeviceType(), volume, maxVolume, isMute);
                 this.mCanSendAudioStatus = false;
-                this.mHandler.postDelayed(new Runnable() { // from class: android.hardware.hdmi.HdmiAudioSystemClient.1
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        if (HdmiAudioSystemClient.this.mPendingReportAudioStatus) {
-                            try {
-                                try {
-                                    HdmiAudioSystemClient.this.mService.reportAudioStatus(HdmiAudioSystemClient.this.getDeviceType(), HdmiAudioSystemClient.this.mLastVolume, HdmiAudioSystemClient.this.mLastMaxVolume, HdmiAudioSystemClient.this.mLastIsMute);
-                                    HdmiAudioSystemClient.this.mHandler.postDelayed(this, 500L);
-                                } catch (RemoteException e2) {
-                                    HdmiAudioSystemClient.this.mCanSendAudioStatus = true;
+                this.mHandler.postDelayed(
+                        new Runnable() { // from class:
+                            // android.hardware.hdmi.HdmiAudioSystemClient.1
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                if (HdmiAudioSystemClient.this.mPendingReportAudioStatus) {
+                                    try {
+                                        try {
+                                            HdmiAudioSystemClient.this.mService.reportAudioStatus(
+                                                    HdmiAudioSystemClient.this.getDeviceType(),
+                                                    HdmiAudioSystemClient.this.mLastVolume,
+                                                    HdmiAudioSystemClient.this.mLastMaxVolume,
+                                                    HdmiAudioSystemClient.this.mLastIsMute);
+                                            HdmiAudioSystemClient.this.mHandler.postDelayed(
+                                                    this, 500L);
+                                        } catch (RemoteException e2) {
+                                            HdmiAudioSystemClient.this.mCanSendAudioStatus = true;
+                                        }
+                                        return;
+                                    } finally {
+                                        HdmiAudioSystemClient.this.mPendingReportAudioStatus =
+                                                false;
+                                    }
                                 }
-                                return;
-                            } finally {
-                                HdmiAudioSystemClient.this.mPendingReportAudioStatus = false;
+                                HdmiAudioSystemClient.this.mCanSendAudioStatus = true;
                             }
-                        }
-                        HdmiAudioSystemClient.this.mCanSendAudioStatus = true;
-                    }
-                }, 500L);
+                        },
+                        500L);
                 return;
             } catch (RemoteException e2) {
                 return;
@@ -78,8 +88,7 @@ public final class HdmiAudioSystemClient extends HdmiClient {
         this.mPendingReportAudioStatus = true;
     }
 
-    public void setSystemAudioMode(boolean state, SetSystemAudioModeCallback callback) {
-    }
+    public void setSystemAudioMode(boolean state, SetSystemAudioModeCallback callback) {}
 
     public void setSystemAudioModeOnForAudioOnlySource() {
         try {

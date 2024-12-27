@@ -99,7 +99,9 @@ public class CachedFrameManager extends SimpleFrameManager {
         synchronized (this.mAvailableFrames) {
             for (Map.Entry<Integer, Frame> entry : this.mAvailableFrames.entrySet()) {
                 Frame frame = entry.getValue();
-                if (frame.getFormat().isReplaceableBy(format) && bindingType == frame.getBindingType() && (bindingType == 0 || bindingId == frame.getBindingId())) {
+                if (frame.getFormat().isReplaceableBy(format)
+                        && bindingType == frame.getBindingType()
+                        && (bindingType == 0 || bindingId == frame.getBindingId())) {
                     super.retainFrame(frame);
                     this.mAvailableFrames.remove(entry.getKey());
                     frame.onFrameFetch();

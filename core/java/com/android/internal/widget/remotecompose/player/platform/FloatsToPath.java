@@ -2,6 +2,7 @@ package com.android.internal.widget.remotecompose.player.platform;
 
 import android.graphics.Path;
 import android.graphics.PathMeasure;
+
 import com.android.internal.widget.remotecompose.core.operations.Utils;
 
 /* loaded from: classes5.dex */
@@ -23,17 +24,32 @@ public class FloatsToPath {
                     break;
                 case 12:
                     int i4 = i + 3;
-                    path.quadTo(floatPath[i4 + 0], floatPath[i4 + 1], floatPath[i4 + 2], floatPath[i4 + 3]);
+                    path.quadTo(
+                            floatPath[i4 + 0],
+                            floatPath[i4 + 1],
+                            floatPath[i4 + 2],
+                            floatPath[i4 + 3]);
                     i = i4 + 4;
                     break;
                 case 13:
                     int i5 = i + 3;
-                    path.conicTo(floatPath[i5 + 0], floatPath[i5 + 1], floatPath[i5 + 2], floatPath[i5 + 3], floatPath[i5 + 4]);
+                    path.conicTo(
+                            floatPath[i5 + 0],
+                            floatPath[i5 + 1],
+                            floatPath[i5 + 2],
+                            floatPath[i5 + 3],
+                            floatPath[i5 + 4]);
                     i = i5 + 5;
                     break;
                 case 14:
                     int i6 = i + 3;
-                    path.cubicTo(floatPath[i6 + 0], floatPath[i6 + 1], floatPath[i6 + 2], floatPath[i6 + 3], floatPath[i6 + 4], floatPath[i6 + 5]);
+                    path.cubicTo(
+                            floatPath[i6 + 0],
+                            floatPath[i6 + 1],
+                            floatPath[i6 + 2],
+                            floatPath[i6 + 3],
+                            floatPath[i6 + 4],
+                            floatPath[i6 + 5]);
                     i = i6 + 6;
                     break;
                 case 15:

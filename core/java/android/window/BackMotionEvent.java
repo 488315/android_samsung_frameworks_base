@@ -6,19 +6,21 @@ import android.view.RemoteAnimationTarget;
 
 /* loaded from: classes4.dex */
 public final class BackMotionEvent implements Parcelable {
-    public static final Parcelable.Creator<BackMotionEvent> CREATOR = new Parcelable.Creator<BackMotionEvent>() { // from class: android.window.BackMotionEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BackMotionEvent createFromParcel(Parcel in) {
-            return new BackMotionEvent(in);
-        }
+    public static final Parcelable.Creator<BackMotionEvent> CREATOR =
+            new Parcelable.Creator<
+                    BackMotionEvent>() { // from class: android.window.BackMotionEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BackMotionEvent createFromParcel(Parcel in) {
+                    return new BackMotionEvent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BackMotionEvent[] newArray(int size) {
-            return new BackMotionEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BackMotionEvent[] newArray(int size) {
+                    return new BackMotionEvent[size];
+                }
+            };
     private final RemoteAnimationTarget mDepartingAnimationTarget;
     private final float mProgress;
     private final int mSwipeEdge;
@@ -28,7 +30,15 @@ public final class BackMotionEvent implements Parcelable {
     private final float mVelocityX;
     private final float mVelocityY;
 
-    public BackMotionEvent(float touchX, float touchY, float progress, float velocityX, float velocityY, boolean triggerBack, int swipeEdge, RemoteAnimationTarget departingAnimationTarget) {
+    public BackMotionEvent(
+            float touchX,
+            float touchY,
+            float progress,
+            float velocityX,
+            float velocityY,
+            boolean triggerBack,
+            int swipeEdge,
+            RemoteAnimationTarget departingAnimationTarget) {
         this.mTouchX = touchX;
         this.mTouchY = touchY;
         this.mProgress = progress;
@@ -47,7 +57,8 @@ public final class BackMotionEvent implements Parcelable {
         this.mVelocityY = in.readFloat();
         this.mTriggerBack = in.readBoolean();
         this.mSwipeEdge = in.readInt();
-        this.mDepartingAnimationTarget = (RemoteAnimationTarget) in.readTypedObject(RemoteAnimationTarget.CREATOR);
+        this.mDepartingAnimationTarget =
+                (RemoteAnimationTarget) in.readTypedObject(RemoteAnimationTarget.CREATOR);
     }
 
     @Override // android.os.Parcelable
@@ -100,6 +111,22 @@ public final class BackMotionEvent implements Parcelable {
     }
 
     public String toString() {
-        return "BackMotionEvent{mTouchX=" + this.mTouchX + ", mTouchY=" + this.mTouchY + ", mProgress=" + this.mProgress + ", mVelocityX=" + this.mVelocityX + ", mVelocityY=" + this.mVelocityY + ", mTriggerBack=" + this.mTriggerBack + ", mSwipeEdge" + this.mSwipeEdge + ", mDepartingAnimationTarget" + this.mDepartingAnimationTarget + "}";
+        return "BackMotionEvent{mTouchX="
+                + this.mTouchX
+                + ", mTouchY="
+                + this.mTouchY
+                + ", mProgress="
+                + this.mProgress
+                + ", mVelocityX="
+                + this.mVelocityX
+                + ", mVelocityY="
+                + this.mVelocityY
+                + ", mTriggerBack="
+                + this.mTriggerBack
+                + ", mSwipeEdge"
+                + this.mSwipeEdge
+                + ", mDepartingAnimationTarget"
+                + this.mDepartingAnimationTarget
+                + "}";
     }
 }

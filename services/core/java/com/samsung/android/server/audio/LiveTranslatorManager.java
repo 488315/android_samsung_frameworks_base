@@ -10,9 +10,12 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0;
 import com.android.server.utils.EventLogger;
+
 import com.samsung.android.server.audio.utils.AudioUtils;
+
 import java.util.Set;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,7 +23,8 @@ import java.util.Set;
 public final class LiveTranslatorManager {
     public static ContentResolver mCr;
     public static LiveTranslatorManager sInstance;
-    public static final EventLogger sVoipLiveTranslateLogger = new EventLogger(30, "Live translate history");
+    public static final EventLogger sVoipLiveTranslateLogger =
+            new EventLogger(30, "Live translate history");
     public final AudioSettingsHelper mAudioSettingsHelper;
     public final Uri mCallAssistantUri;
     public boolean mIsLiveTranslateOn;
@@ -39,7 +43,8 @@ public final class LiveTranslatorManager {
         this.mIsVoiceCapable = z;
         this.mAudioSettingsHelper = AudioSettingsHelper.getInstance(context);
         mCr = context.getContentResolver();
-        this.mCallAssistantUri = Uri.parse("content://com.samsung.android.callassistant.voipprovider");
+        this.mCallAssistantUri =
+                Uri.parse("content://com.samsung.android.callassistant.voipprovider");
     }
 
     public final void setVoipTranslator(String str, boolean z) {
@@ -47,13 +52,21 @@ public final class LiveTranslatorManager {
         EventLogger eventLogger = sVoipLiveTranslateLogger;
         if (z) {
             try {
-                z2 = mCr.call(this.mCallAssistantUri, "isSupportedVoipTranslation", str, (Bundle) null).getBoolean("is_support_voip_translation");
+                z2 =
+                        mCr.call(
+                                        this.mCallAssistantUri,
+                                        "isSupportedVoipTranslation",
+                                        str,
+                                        (Bundle) null)
+                                .getBoolean("is_support_voip_translation");
             } catch (Exception e) {
                 Log.e("LiveTranslatorManager", e.getMessage());
                 z2 = false;
             }
             if (z2) {
-                String m = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("l_voip_translate_package_name=", str);
+                String m =
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                "l_voip_translate_package_name=", str);
                 eventLogger.enqueue(new EventLogger.StringEvent(m));
                 AudioSystem.setParameters(m);
             }
@@ -61,7 +74,9 @@ public final class LiveTranslatorManager {
             z2 = false;
         }
         this.mIsLiveTranslateOn = z && z2;
-        StringBuilder m2 = FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("setVoipTranslator enable ", z, ", supported ", z2, ", mode ");
+        StringBuilder m2 =
+                FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                        "setVoipTranslator enable ", z, ", supported ", z2, ", mode ");
         m2.append(this.mCurAudioMode);
         m2.append(", ");
         m2.append(str);
@@ -72,7 +87,8 @@ public final class LiveTranslatorManager {
         try {
             Settings.System.putString(contentResolver, "voip_translator_package", str);
             Binder.restoreCallingIdentity(clearCallingIdentity);
-            AudioUtils.setSettingsInt(mCr, "voip_translator_enable", this.mIsLiveTranslateOn ? 1 : 0);
+            AudioUtils.setSettingsInt(
+                    mCr, "voip_translator_enable", this.mIsLiveTranslateOn ? 1 : 0);
         } catch (Throwable th) {
             Binder.restoreCallingIdentity(clearCallingIdentity);
             throw th;
@@ -82,7 +98,9 @@ public final class LiveTranslatorManager {
     public final void updateAudioMode(int i, String str) {
         this.mPackageName = str;
         this.mCurAudioMode = i;
-        Log.i("LiveTranslatorManager", "updateAudioMode() audioMode=" + this.mCurAudioMode + ", caller=" + str);
+        Log.i(
+                "LiveTranslatorManager",
+                "updateAudioMode() audioMode=" + this.mCurAudioMode + ", caller=" + str);
         updateVoipTranslator();
         if (this.mCurAudioMode == 0) {
             this.mPackageName = "";
@@ -91,9 +109,9 @@ public final class LiveTranslatorManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:23:0x00a5, code lost:
-    
-        if (r1 != false) goto L33;
-     */
+
+       if (r1 != false) goto L33;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -196,6 +214,8 @@ public final class LiveTranslatorManager {
         Lbf:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.audio.LiveTranslatorManager.updateVoipTranslator():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.audio.LiveTranslatorManager.updateVoipTranslator():void");
     }
 }

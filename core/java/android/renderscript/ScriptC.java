@@ -3,6 +3,7 @@ package android.renderscript;
 import android.app.compat.CompatChanges;
 import android.content.res.Resources;
 import android.util.Slog;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -46,16 +47,27 @@ public class ScriptC extends Script {
     private static void throwExceptionIfScriptCUnsupported() {
         try {
             System.loadLibrary("RS");
-            Slog.w(TAG, "ScriptC scripts are not supported when targeting an API Level >= 36. Please refer to https://developer.android.com/guide/topics/renderscript/migration-guide for proposed alternatives.");
+            Slog.w(
+                    TAG,
+                    "ScriptC scripts are not supported when targeting an API Level >= 36. Please"
+                        + " refer to"
+                        + " https://developer.android.com/guide/topics/renderscript/migration-guide"
+                        + " for proposed alternatives.");
             if (CompatChanges.isChangeEnabled(RENDERSCRIPT_SCRIPTC_DEPRECATION_CHANGE_ID)) {
-                throw new UnsupportedOperationException("ScriptC scripts are not supported when targeting an API Level >= 36. Please refer to https://developer.android.com/guide/topics/renderscript/migration-guide for proposed alternatives.");
+                throw new UnsupportedOperationException(
+                        "ScriptC scripts are not supported when targeting an API Level >= 36."
+                            + " Please refer to"
+                            + " https://developer.android.com/guide/topics/renderscript/migration-guide"
+                            + " for proposed alternatives.");
             }
         } catch (UnsatisfiedLinkError e) {
-            throw new UnsupportedOperationException("This device does not have an ABI that supports ScriptC.");
+            throw new UnsupportedOperationException(
+                    "This device does not have an ABI that supports ScriptC.");
         }
     }
 
-    private static synchronized long internalCreate(RenderScript rs, Resources resources, int resourceID) {
+    private static synchronized long internalCreate(
+            RenderScript rs, Resources resources, int resourceID) {
         long nScriptCCreate;
         synchronized (ScriptC.class) {
             throwExceptionIfScriptCUnsupported();
@@ -77,7 +89,9 @@ public class ScriptC extends Script {
                             pgmLength += bytesRead;
                         } else {
                             String resName = resources.getResourceEntryName(resourceID);
-                            nScriptCCreate = rs.nScriptCCreate(resName, RenderScript.getCachePath(), pgm, pgmLength);
+                            nScriptCCreate =
+                                    rs.nScriptCCreate(
+                                            resName, RenderScript.getCachePath(), pgm, pgmLength);
                         }
                     }
                 } finally {
@@ -90,11 +104,14 @@ public class ScriptC extends Script {
         return nScriptCCreate;
     }
 
-    private static synchronized long internalStringCreate(RenderScript rs, String resName, byte[] bitcode) {
+    private static synchronized long internalStringCreate(
+            RenderScript rs, String resName, byte[] bitcode) {
         long nScriptCCreate;
         synchronized (ScriptC.class) {
             throwExceptionIfScriptCUnsupported();
-            nScriptCCreate = rs.nScriptCCreate(resName, RenderScript.getCachePath(), bitcode, bitcode.length);
+            nScriptCCreate =
+                    rs.nScriptCCreate(
+                            resName, RenderScript.getCachePath(), bitcode, bitcode.length);
         }
         return nScriptCCreate;
     }

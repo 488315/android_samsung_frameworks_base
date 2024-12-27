@@ -7,7 +7,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.NtpTrustedTime;
+
 import com.android.internal.util.Parcelling;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -20,119 +22,97 @@ public class PermissionInfo extends PackageItemInfo implements Parcelable {
     public static final int FLAG_IMMUTABLY_RESTRICTED = 16;
     public static final int FLAG_INSTALLED = 1073741824;
 
-    @SystemApi
-    public static final int FLAG_REMOVED = 2;
+    @SystemApi public static final int FLAG_REMOVED = 2;
     public static final int FLAG_SOFT_RESTRICTED = 8;
     public static final int PROTECTION_DANGEROUS = 1;
     public static final int PROTECTION_FLAG_APPOP = 64;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_APP_PREDICTOR = 2097152;
+    @SystemApi public static final int PROTECTION_FLAG_APP_PREDICTOR = 2097152;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_COMPANION = 8388608;
+    @SystemApi public static final int PROTECTION_FLAG_COMPANION = 8388608;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_CONFIGURATOR = 524288;
+    @SystemApi public static final int PROTECTION_FLAG_CONFIGURATOR = 524288;
     public static final int PROTECTION_FLAG_DEVELOPMENT = 32;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_DOCUMENTER = 262144;
+    @SystemApi public static final int PROTECTION_FLAG_DOCUMENTER = 262144;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_INCIDENT_REPORT_APPROVER = 1048576;
+    @SystemApi public static final int PROTECTION_FLAG_INCIDENT_REPORT_APPROVER = 1048576;
     public static final int PROTECTION_FLAG_INSTALLER = 256;
     public static final int PROTECTION_FLAG_INSTANT = 4096;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_KNOWN_SIGNER = 134217728;
+    @SystemApi public static final int PROTECTION_FLAG_KNOWN_SIGNER = 134217728;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_MODULE = 4194304;
+    @SystemApi public static final int PROTECTION_FLAG_MODULE = 4194304;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_OEM = 16384;
+    @SystemApi public static final int PROTECTION_FLAG_OEM = 16384;
     public static final int PROTECTION_FLAG_PRE23 = 128;
     public static final int PROTECTION_FLAG_PREINSTALLED = 1024;
     public static final int PROTECTION_FLAG_PRIVILEGED = 16;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_RECENTS = 33554432;
+    @SystemApi public static final int PROTECTION_FLAG_RECENTS = 33554432;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_RETAIL_DEMO = 16777216;
+    @SystemApi public static final int PROTECTION_FLAG_RETAIL_DEMO = 16777216;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_ROLE = 67108864;
+    @SystemApi public static final int PROTECTION_FLAG_ROLE = 67108864;
     public static final int PROTECTION_FLAG_RUNTIME_ONLY = 8192;
     public static final int PROTECTION_FLAG_SETUP = 2048;
 
-    @Deprecated
-    public static final int PROTECTION_FLAG_SYSTEM = 16;
+    @Deprecated public static final int PROTECTION_FLAG_SYSTEM = 16;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_SYSTEM_TEXT_CLASSIFIER = 65536;
+    @SystemApi public static final int PROTECTION_FLAG_SYSTEM_TEXT_CLASSIFIER = 65536;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_VENDOR_PRIVILEGED = 32768;
+    @SystemApi public static final int PROTECTION_FLAG_VENDOR_PRIVILEGED = 32768;
     public static final int PROTECTION_FLAG_VERIFIER = 512;
 
-    @SystemApi
-    public static final int PROTECTION_FLAG_WELLBEING = 131072;
+    @SystemApi public static final int PROTECTION_FLAG_WELLBEING = 131072;
     public static final int PROTECTION_INTERNAL = 4;
 
-    @Deprecated
-    public static final int PROTECTION_MASK_BASE = 15;
+    @Deprecated public static final int PROTECTION_MASK_BASE = 15;
 
-    @Deprecated
-    public static final int PROTECTION_MASK_FLAGS = 65520;
+    @Deprecated public static final int PROTECTION_MASK_FLAGS = 65520;
     public static final int PROTECTION_NORMAL = 0;
     public static final int PROTECTION_SIGNATURE = 2;
 
-    @Deprecated
-    public static final int PROTECTION_SIGNATURE_OR_SYSTEM = 3;
+    @Deprecated public static final int PROTECTION_SIGNATURE_OR_SYSTEM = 3;
 
-    @SystemApi
-    public final String backgroundPermission;
+    @SystemApi public final String backgroundPermission;
     public int descriptionRes;
     public int flags;
     public String group;
 
-    @SystemApi
-    public Set<String> knownCerts;
+    @SystemApi public Set<String> knownCerts;
     public CharSequence nonLocalizedDescription;
 
-    @Deprecated
-    public int protectionLevel;
+    @Deprecated public int protectionLevel;
 
-    @SystemApi
-    public int requestRes;
-    private static final Parcelling.BuiltIn.ForStringSet sForStringSet = (Parcelling.BuiltIn.ForStringSet) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForStringSet.class);
-    public static final Parcelable.Creator<PermissionInfo> CREATOR = new Parcelable.Creator<PermissionInfo>() { // from class: android.content.pm.PermissionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PermissionInfo createFromParcel(Parcel source) {
-            return new PermissionInfo(source);
-        }
+    @SystemApi public int requestRes;
+    private static final Parcelling.BuiltIn.ForStringSet sForStringSet =
+            (Parcelling.BuiltIn.ForStringSet)
+                    Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForStringSet.class);
+    public static final Parcelable.Creator<PermissionInfo> CREATOR =
+            new Parcelable.Creator<
+                    PermissionInfo>() { // from class: android.content.pm.PermissionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PermissionInfo createFromParcel(Parcel source) {
+                    return new PermissionInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PermissionInfo[] newArray(int size) {
-            return new PermissionInfo[size];
-        }
-    };
-
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Flags {
-    }
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PermissionInfo[] newArray(int size) {
+                    return new PermissionInfo[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Protection {
-    }
+    public @interface Flags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ProtectionFlags {
-    }
+    public @interface Protection {}
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ProtectionFlags {}
 
     public static int fixProtectionLevel(int level) {
         if (level == 3) {
@@ -300,7 +280,8 @@ public class PermissionInfo extends PackageItemInfo implements Parcelable {
         if (this.nonLocalizedDescription != null) {
             return this.nonLocalizedDescription;
         }
-        if (this.descriptionRes == 0 || (label = pm.getText(this.packageName, this.descriptionRes, null)) == null) {
+        if (this.descriptionRes == 0
+                || (label = pm.getText(this.packageName, this.descriptionRes, null)) == null) {
             return null;
         }
         return label;
@@ -315,7 +296,11 @@ public class PermissionInfo extends PackageItemInfo implements Parcelable {
     }
 
     public String toString() {
-        return "PermissionInfo{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.name + "}";
+        return "PermissionInfo{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + this.name
+                + "}";
     }
 
     @Override // android.os.Parcelable

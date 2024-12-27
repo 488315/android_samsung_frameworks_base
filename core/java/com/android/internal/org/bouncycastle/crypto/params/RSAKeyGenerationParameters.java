@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto.params;
 
 import com.android.internal.org.bouncycastle.crypto.KeyGenerationParameters;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -9,7 +10,8 @@ public class RSAKeyGenerationParameters extends KeyGenerationParameters {
     private int certainty;
     private BigInteger publicExponent;
 
-    public RSAKeyGenerationParameters(BigInteger publicExponent, SecureRandom random, int strength, int certainty) {
+    public RSAKeyGenerationParameters(
+            BigInteger publicExponent, SecureRandom random, int strength, int certainty) {
         super(random, strength);
         if (strength < 12) {
             throw new IllegalArgumentException("key strength too small");

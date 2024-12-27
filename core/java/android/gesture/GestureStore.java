@@ -48,8 +48,10 @@ public class GestureStore {
     }
 
     public ArrayList<Prediction> recognize(Gesture gesture) {
-        Instance instance = Instance.createInstance(this.mSequenceType, this.mOrientationStyle, gesture, null);
-        return this.mClassifier.classify(this.mSequenceType, this.mOrientationStyle, instance.vector);
+        Instance instance =
+                Instance.createInstance(this.mSequenceType, this.mOrientationStyle, gesture, null);
+        return this.mClassifier.classify(
+                this.mSequenceType, this.mOrientationStyle, instance.vector);
     }
 
     public void addGesture(String entryName, Gesture gesture) {
@@ -62,7 +64,9 @@ public class GestureStore {
             this.mNamedGestures.put(entryName, gestures);
         }
         gestures.add(gesture);
-        this.mClassifier.addInstance(Instance.createInstance(this.mSequenceType, this.mOrientationStyle, gesture, entryName));
+        this.mClassifier.addInstance(
+                Instance.createInstance(
+                        this.mSequenceType, this.mOrientationStyle, gesture, entryName));
         this.mChanged = true;
     }
 
@@ -105,7 +109,11 @@ public class GestureStore {
         DataOutputStream out = null;
         try {
             HashMap<String, ArrayList<Gesture>> maps = this.mNamedGestures;
-            out = new DataOutputStream(stream instanceof BufferedOutputStream ? stream : new BufferedOutputStream(stream, 32768));
+            out =
+                    new DataOutputStream(
+                            stream instanceof BufferedOutputStream
+                                    ? stream
+                                    : new BufferedOutputStream(stream, 32768));
             out.writeShort(1);
             out.writeInt(maps.size());
             for (Map.Entry<String, ArrayList<Gesture>> entry : maps.entrySet()) {
@@ -174,7 +182,9 @@ public class GestureStore {
         L2c:
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.gesture.GestureStore.load(java.io.InputStream, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.gesture.GestureStore.load(java.io.InputStream,"
+                        + " boolean):void");
     }
 
     private void readFormatV1(DataInputStream in) throws IOException {
@@ -189,7 +199,9 @@ public class GestureStore {
             for (int j = 0; j < gestureCount; j++) {
                 Gesture gesture = Gesture.deserialize(in);
                 gestures.add(gesture);
-                classifier.addInstance(Instance.createInstance(this.mSequenceType, this.mOrientationStyle, gesture, name));
+                classifier.addInstance(
+                        Instance.createInstance(
+                                this.mSequenceType, this.mOrientationStyle, gesture, name));
             }
             namedGestures.put(name, gestures);
         }

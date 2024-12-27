@@ -15,7 +15,9 @@ import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.samsung.android.knox.ucm.plugin.agent.IUcmAgentService;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -33,52 +35,63 @@ public final class UcmAgentWrapper {
     public IUcmAgentService mUcmAgentService;
     public boolean mBound = false;
     public final Queue mEventBoxQueue = new LinkedList();
-    public final AnonymousClass2 mConnection = new ServiceConnection() { // from class: com.samsung.ucm.ucmservice.UcmAgentWrapper.2
-        @Override // android.content.ServiceConnection
-        public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            String packageName;
-            Log.d("UcmAgentWrapper", "onServiceConnected " + componentName);
-            removeMessages(4);
-            UcmAgentWrapper.this.mUcmAgentService = IUcmAgentService.Stub.asInterface(iBinder);
-            ComponentName componentName2 = UcmAgentWrapper.this.componentName;
-            if (componentName2 == null || (packageName = componentName2.getPackageName()) == null || packageName.isEmpty()) {
-                return;
-            }
-            Log.d("UcmAgentWrapper", "notify binding done : ".concat(packageName));
-            Intent intent = new Intent("com.samsung.android.knox.intent.action.UCM_REFRESH_DONE");
-            intent.putExtra("PackageName", packageName);
-            UcmAgentWrapper.this.mContext.sendBroadcastAsUser(intent, UserHandle.SYSTEM);
-            while (!UcmAgentWrapper.this.mEventBoxQueue.isEmpty()) {
-                EventBox eventBox = (EventBox) ((LinkedList) UcmAgentWrapper.this.mEventBoxQueue).poll();
-                if (eventBox != null) {
-                    try {
-                        UcmAgentWrapper ucmAgentWrapper = UcmAgentWrapper.this;
-                        int i = eventBox.eventId;
-                        Bundle bundle = eventBox.eventData;
-                        IUcmAgentService iUcmAgentService = ucmAgentWrapper.mUcmAgentService;
-                        if (iUcmAgentService != null) {
-                            iUcmAgentService.notifyChange(i, bundle);
+    public final AnonymousClass2 mConnection =
+            new ServiceConnection() { // from class: com.samsung.ucm.ucmservice.UcmAgentWrapper.2
+                @Override // android.content.ServiceConnection
+                public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                    String packageName;
+                    Log.d("UcmAgentWrapper", "onServiceConnected " + componentName);
+                    removeMessages(4);
+                    UcmAgentWrapper.this.mUcmAgentService =
+                            IUcmAgentService.Stub.asInterface(iBinder);
+                    ComponentName componentName2 = UcmAgentWrapper.this.componentName;
+                    if (componentName2 == null
+                            || (packageName = componentName2.getPackageName()) == null
+                            || packageName.isEmpty()) {
+                        return;
+                    }
+                    Log.d("UcmAgentWrapper", "notify binding done : ".concat(packageName));
+                    Intent intent =
+                            new Intent("com.samsung.android.knox.intent.action.UCM_REFRESH_DONE");
+                    intent.putExtra("PackageName", packageName);
+                    UcmAgentWrapper.this.mContext.sendBroadcastAsUser(intent, UserHandle.SYSTEM);
+                    while (!UcmAgentWrapper.this.mEventBoxQueue.isEmpty()) {
+                        EventBox eventBox =
+                                (EventBox)
+                                        ((LinkedList) UcmAgentWrapper.this.mEventBoxQueue).poll();
+                        if (eventBox != null) {
+                            try {
+                                UcmAgentWrapper ucmAgentWrapper = UcmAgentWrapper.this;
+                                int i = eventBox.eventId;
+                                Bundle bundle = eventBox.eventData;
+                                IUcmAgentService iUcmAgentService =
+                                        ucmAgentWrapper.mUcmAgentService;
+                                if (iUcmAgentService != null) {
+                                    iUcmAgentService.notifyChange(i, bundle);
+                                }
+                            } catch (RemoteException e) {
+                                Log.e(
+                                        "UcmAgentWrapper",
+                                        "Noti was not sent cause binding, send notifyChange : "
+                                                + e);
+                                e.printStackTrace();
+                            }
                         }
-                    } catch (RemoteException e) {
-                        Log.e("UcmAgentWrapper", "Noti was not sent cause binding, send notifyChange : " + e);
-                        e.printStackTrace();
                     }
                 }
-            }
-        }
 
-        @Override // android.content.ServiceConnection
-        public final void onServiceDisconnected(ComponentName componentName) {
-            Log.d("UcmAgentWrapper", "onServiceDisconnected " + componentName);
-            UcmAgentWrapper ucmAgentWrapper = UcmAgentWrapper.this;
-            ucmAgentWrapper.mUcmAgentService = null;
-            if (ucmAgentWrapper.mBound) {
-                Log.d("UcmAgentWrapper", "scheduleRestart");
-                ucmAgentWrapper.mHandler.removeMessages(4);
-                ucmAgentWrapper.mHandler.sendEmptyMessageDelayed(4, 5000L);
-            }
-        }
-    };
+                @Override // android.content.ServiceConnection
+                public final void onServiceDisconnected(ComponentName componentName) {
+                    Log.d("UcmAgentWrapper", "onServiceDisconnected " + componentName);
+                    UcmAgentWrapper ucmAgentWrapper = UcmAgentWrapper.this;
+                    ucmAgentWrapper.mUcmAgentService = null;
+                    if (ucmAgentWrapper.mBound) {
+                        Log.d("UcmAgentWrapper", "scheduleRestart");
+                        ucmAgentWrapper.mHandler.removeMessages(4);
+                        ucmAgentWrapper.mHandler.sendEmptyMessageDelayed(4, 5000L);
+                    }
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AgentInfo {
@@ -130,7 +143,8 @@ public final class UcmAgentWrapper {
             stringBuffer.append(", pinMaxLength:" + this.pinMaxLength);
             stringBuffer.append(", authMaxCnt:" + this.authMaxCnt);
             stringBuffer.append(", authMode:" + this.authMode);
-            stringBuffer.append(", isGeneratePasswordAvailable:" + this.isGeneratePasswordAvailable);
+            stringBuffer.append(
+                    ", isGeneratePasswordAvailable:" + this.isGeneratePasswordAvailable);
             stringBuffer.append(", isODESupport:" + this.isODESupport);
             stringBuffer.append(", storageType:" + this.storageType);
             stringBuffer.append(", enabledSCP:" + this.enabledSCP);
@@ -153,7 +167,8 @@ public final class UcmAgentWrapper {
             stringBuffer.append(", isPUKSupported:" + this.isPUKSupported);
             stringBuffer.append(", supportSign:" + this.supportSign);
             stringBuffer.append(", isSupportChangePin:" + this.isSupportChangePin);
-            stringBuffer.append(", isSupportChangePinWithPassword:" + this.isSupportChangePinWithPassword);
+            stringBuffer.append(
+                    ", isSupportChangePinWithPassword:" + this.isSupportChangePinWithPassword);
             stringBuffer.append(", supportPinConfiguration:" + this.supportPinConfiguration);
             stringBuffer.append(", isSupportBiometricForUCM:" + this.isSupportBiometricForUCM);
             return stringBuffer.toString();
@@ -168,7 +183,10 @@ public final class UcmAgentWrapper {
 
     /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.ucm.ucmservice.UcmAgentWrapper$2] */
     /* JADX WARN: Type inference failed for: r3v3, types: [com.samsung.ucm.ucmservice.UcmAgentWrapper$1] */
-    public UcmAgentWrapper(Context context, IUcmAgentManagerDeleteDelegate iUcmAgentManagerDeleteDelegate, ComponentName componentName) {
+    public UcmAgentWrapper(
+            Context context,
+            IUcmAgentManagerDeleteDelegate iUcmAgentManagerDeleteDelegate,
+            ComponentName componentName) {
         this.mContext = context;
         this.mAgentDeleteDelegate = iUcmAgentManagerDeleteDelegate;
         this.componentName = componentName;
@@ -176,56 +194,68 @@ public final class UcmAgentWrapper {
             Log.d("UcmAgentWrapper", "createHandler. enter");
             HandlerThread handlerThread = new HandlerThread("UcmAgentWrapperHandlerThread");
             handlerThread.start();
-            this.mHandler = new Handler(handlerThread.getLooper()) { // from class: com.samsung.ucm.ucmservice.UcmAgentWrapper.1
-                @Override // android.os.Handler
-                public final void handleMessage(Message message) {
-                    if (message.what != 4) {
-                        return;
-                    }
-                    UcmAgentWrapper ucmAgentWrapper = UcmAgentWrapper.this;
-                    ucmAgentWrapper.unbind();
-                    Log.d("UcmAgentWrapper", "MSG_RESTART_TIMEOUT");
-                    UcmServiceAgentManager ucmServiceAgentManager = (UcmServiceAgentManager) ucmAgentWrapper.mAgentDeleteDelegate;
-                    ucmServiceAgentManager.getClass();
-                    Log.i("UcmService.UcmAgentManager", "deletAndRefreshAgents()");
-                    Log.i("UcmService.UcmAgentManager", "deletAndRefreshAgents() remove " + ucmAgentWrapper);
-                    ((ArrayList) ucmServiceAgentManager.getActiveAgentList()).remove(ucmAgentWrapper);
-                    ucmServiceAgentManager.refreshAgentList();
-                }
-            };
+            this.mHandler =
+                    new Handler(
+                            handlerThread
+                                    .getLooper()) { // from class:
+                                                    // com.samsung.ucm.ucmservice.UcmAgentWrapper.1
+                        @Override // android.os.Handler
+                        public final void handleMessage(Message message) {
+                            if (message.what != 4) {
+                                return;
+                            }
+                            UcmAgentWrapper ucmAgentWrapper = UcmAgentWrapper.this;
+                            ucmAgentWrapper.unbind();
+                            Log.d("UcmAgentWrapper", "MSG_RESTART_TIMEOUT");
+                            UcmServiceAgentManager ucmServiceAgentManager =
+                                    (UcmServiceAgentManager) ucmAgentWrapper.mAgentDeleteDelegate;
+                            ucmServiceAgentManager.getClass();
+                            Log.i("UcmService.UcmAgentManager", "deletAndRefreshAgents()");
+                            Log.i(
+                                    "UcmService.UcmAgentManager",
+                                    "deletAndRefreshAgents() remove " + ucmAgentWrapper);
+                            ((ArrayList) ucmServiceAgentManager.getActiveAgentList())
+                                    .remove(ucmAgentWrapper);
+                            ucmServiceAgentManager.refreshAgentList();
+                        }
+                    };
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:145:0x033a, code lost:
-    
-        if (r8 == null) goto L161;
-     */
+
+       if (r8 == null) goto L161;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:146:0x033c, code lost:
-    
-        r8.close();
-     */
+
+       r8.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:148:0x0343, code lost:
-    
-        if (r8 == null) goto L161;
-     */
+
+       if (r8 == null) goto L161;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:150:0x0340, code lost:
-    
-        if (r8 == null) goto L161;
-     */
+
+       if (r8 == null) goto L161;
+    */
     /* JADX WARN: Removed duplicated region for block: B:120:0x0348  */
     /* JADX WARN: Removed duplicated region for block: B:122:0x035e  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.samsung.ucm.ucmservice.UcmAgentWrapper.AgentInfo getAgentInfo(android.content.pm.ResolveInfo r11, android.content.Context r12) {
+    public static com.samsung.ucm.ucmservice.UcmAgentWrapper.AgentInfo getAgentInfo(
+            android.content.pm.ResolveInfo r11, android.content.Context r12) {
         /*
             Method dump skipped, instructions count: 891
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.ucm.ucmservice.UcmAgentWrapper.getAgentInfo(android.content.pm.ResolveInfo, android.content.Context):com.samsung.ucm.ucmservice.UcmAgentWrapper$AgentInfo");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.ucm.ucmservice.UcmAgentWrapper.getAgentInfo(android.content.pm.ResolveInfo,"
+                    + " android.content.Context):com.samsung.ucm.ucmservice.UcmAgentWrapper$AgentInfo");
     }
 
     public static byte[] hexStringToByteArray(String str) {
@@ -239,7 +269,10 @@ public final class UcmAgentWrapper {
         int length = str.length();
         byte[] bArr = new byte[length / 2];
         for (int i = 0; i < length; i += 2) {
-            bArr[i / 2] = (byte) (Character.digit(str.charAt(i + 1), 16) + (Character.digit(str.charAt(i), 16) << 4));
+            bArr[i / 2] =
+                    (byte)
+                            (Character.digit(str.charAt(i + 1), 16)
+                                    + (Character.digit(str.charAt(i), 16) << 4));
         }
         return bArr;
     }

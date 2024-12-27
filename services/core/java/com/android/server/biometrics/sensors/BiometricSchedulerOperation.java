@@ -3,9 +3,10 @@ package com.android.server.biometrics.sensors;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
-import com.android.server.biometrics.sensors.BiometricScheduler;
+
 import java.util.Arrays;
 import java.util.function.BooleanSupplier;
 
@@ -19,40 +20,66 @@ public final class BiometricSchedulerOperation {
     public ClientMonitorCallback mOnStartCallback;
     public int mState;
 
-    public BiometricSchedulerOperation(int i, BaseClientMonitor baseClientMonitor, ClientMonitorCallback clientMonitorCallback) {
-        this(baseClientMonitor, clientMonitorCallback, i, new BiometricSchedulerOperation$$ExternalSyntheticLambda1());
+    public BiometricSchedulerOperation(
+            int i,
+            BaseClientMonitor baseClientMonitor,
+            ClientMonitorCallback clientMonitorCallback) {
+        this(
+                baseClientMonitor,
+                clientMonitorCallback,
+                i,
+                new BiometricSchedulerOperation$$ExternalSyntheticLambda1());
     }
 
-    public BiometricSchedulerOperation(BaseClientMonitor baseClientMonitor, ClientMonitorCallback clientMonitorCallback, int i, BooleanSupplier booleanSupplier) {
+    public BiometricSchedulerOperation(
+            BaseClientMonitor baseClientMonitor,
+            ClientMonitorCallback clientMonitorCallback,
+            int i,
+            BooleanSupplier booleanSupplier) {
         this.mClientMonitor = baseClientMonitor;
         this.mClientCallback = clientMonitorCallback;
         this.mState = i;
         this.mIsDebuggable = booleanSupplier;
-        this.mCancelWatchdog = new Runnable() { // from class: com.android.server.biometrics.sensors.BiometricSchedulerOperation$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                BiometricSchedulerOperation biometricSchedulerOperation = BiometricSchedulerOperation.this;
-                BaseClientMonitor baseClientMonitor2 = biometricSchedulerOperation.mClientMonitor;
-                if (biometricSchedulerOperation.mState == 5) {
-                    return;
-                }
-                Slog.e("BiometricSchedulerOperation", "[Watchdog Triggered]: " + biometricSchedulerOperation);
-                try {
-                    baseClientMonitor2.mListener.onError(baseClientMonitor2.mSensorId, baseClientMonitor2.mCookie, 5, 0);
-                } catch (RemoteException unused) {
-                    Slog.e("BiometricSchedulerOperation", "Remote exception when trying to send error in cancel watchdog.");
-                }
-                biometricSchedulerOperation.getWrappedCallback(biometricSchedulerOperation.mOnStartCallback).onClientFinished(baseClientMonitor2, false);
-            }
-        };
+        this.mCancelWatchdog =
+                new Runnable() { // from class:
+                    // com.android.server.biometrics.sensors.BiometricSchedulerOperation$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        BiometricSchedulerOperation biometricSchedulerOperation =
+                                BiometricSchedulerOperation.this;
+                        BaseClientMonitor baseClientMonitor2 =
+                                biometricSchedulerOperation.mClientMonitor;
+                        if (biometricSchedulerOperation.mState == 5) {
+                            return;
+                        }
+                        Slog.e(
+                                "BiometricSchedulerOperation",
+                                "[Watchdog Triggered]: " + biometricSchedulerOperation);
+                        try {
+                            baseClientMonitor2.mListener.onError(
+                                    baseClientMonitor2.mSensorId, baseClientMonitor2.mCookie, 5, 0);
+                        } catch (RemoteException unused) {
+                            Slog.e(
+                                    "BiometricSchedulerOperation",
+                                    "Remote exception when trying to send error in cancel"
+                                        + " watchdog.");
+                        }
+                        biometricSchedulerOperation
+                                .getWrappedCallback(biometricSchedulerOperation.mOnStartCallback)
+                                .onClientFinished(baseClientMonitor2, false);
+                    }
+                };
     }
 
-    public BiometricSchedulerOperation(BaseClientMonitor baseClientMonitor, ClientMonitorCallback clientMonitorCallback, BooleanSupplier booleanSupplier) {
+    public BiometricSchedulerOperation(
+            BaseClientMonitor baseClientMonitor,
+            ClientMonitorCallback clientMonitorCallback,
+            BooleanSupplier booleanSupplier) {
         this(baseClientMonitor, clientMonitorCallback, 0, booleanSupplier);
     }
 
     public final void cancel(Handler handler, ClientMonitorCallback clientMonitorCallback) {
-        boolean contains = ArrayUtils.contains(new int[]{5}, this.mState);
+        boolean contains = ArrayUtils.contains(new int[] {5}, this.mState);
         if (contains) {
             String str = "cancel: mState must not be " + this.mState;
             if (this.mIsDebuggable.getAsBoolean()) {
@@ -65,16 +92,22 @@ public final class BiometricSchedulerOperation {
         }
         int i = this.mState;
         if (i == 3) {
-            Slog.w("BiometricSchedulerOperation", "Cannot cancel - already invoked for operation: " + this);
+            Slog.w(
+                    "BiometricSchedulerOperation",
+                    "Cannot cancel - already invoked for operation: " + this);
             return;
         }
         this.mState = 3;
         BaseClientMonitor baseClientMonitor = this.mClientMonitor;
         if (i == 0 || i == 1 || i == 4) {
-            Slog.d("BiometricSchedulerOperation", "[Cancelling] Current client (without start): " + baseClientMonitor);
+            Slog.d(
+                    "BiometricSchedulerOperation",
+                    "[Cancelling] Current client (without start): " + baseClientMonitor);
             baseClientMonitor.cancelWithoutStarting(getWrappedCallback(clientMonitorCallback));
         } else {
-            Slog.d("BiometricSchedulerOperation", "[Cancelling] Current client: " + baseClientMonitor);
+            Slog.d(
+                    "BiometricSchedulerOperation",
+                    "[Cancelling] Current client: " + baseClientMonitor);
             baseClientMonitor.cancel();
         }
         handler.postDelayed(this.mCancelWatchdog, 3000L);
@@ -87,12 +120,16 @@ public final class BiometricSchedulerOperation {
         int i = this.mState;
         BaseClientMonitor baseClientMonitor = this.mClientMonitor;
         if (i == 1) {
-            Slog.d("BiometricSchedulerOperation", "Operation marked for cancellation, cancelling now: " + this);
+            Slog.d(
+                    "BiometricSchedulerOperation",
+                    "Operation marked for cancellation, cancelling now: " + this);
             wrappedCallback.onClientFinished(baseClientMonitor, true);
             if (baseClientMonitor instanceof ErrorConsumer) {
                 ((ErrorConsumer) baseClientMonitor).onError(5, 0);
             } else {
-                Slog.w("BiometricSchedulerOperation", "monitor cancelled but does not implement ErrorConsumer");
+                Slog.w(
+                        "BiometricSchedulerOperation",
+                        "monitor cancelled but does not implement ErrorConsumer");
             }
             return false;
         }
@@ -127,16 +164,25 @@ public final class BiometricSchedulerOperation {
         return z;
     }
 
-    public final ClientMonitorCompositeCallback getWrappedCallback(ClientMonitorCallback clientMonitorCallback) {
-        return new ClientMonitorCompositeCallback(new ClientMonitorCallback() { // from class: com.android.server.biometrics.sensors.BiometricSchedulerOperation.1
-            @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
-            public final void onClientFinished(BaseClientMonitor baseClientMonitor, boolean z) {
-                Slog.d("BiometricSchedulerOperation", "[Finished / destroy]: " + baseClientMonitor);
-                BiometricSchedulerOperation biometricSchedulerOperation = BiometricSchedulerOperation.this;
-                biometricSchedulerOperation.mClientMonitor.destroy();
-                biometricSchedulerOperation.mState = 5;
-            }
-        }, clientMonitorCallback, this.mClientCallback);
+    public final ClientMonitorCompositeCallback getWrappedCallback(
+            ClientMonitorCallback clientMonitorCallback) {
+        return new ClientMonitorCompositeCallback(
+                new ClientMonitorCallback() { // from class:
+                                              // com.android.server.biometrics.sensors.BiometricSchedulerOperation.1
+                    @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
+                    public final void onClientFinished(
+                            BaseClientMonitor baseClientMonitor, boolean z) {
+                        Slog.d(
+                                "BiometricSchedulerOperation",
+                                "[Finished / destroy]: " + baseClientMonitor);
+                        BiometricSchedulerOperation biometricSchedulerOperation =
+                                BiometricSchedulerOperation.this;
+                        biometricSchedulerOperation.mClientMonitor.destroy();
+                        biometricSchedulerOperation.mState = 5;
+                    }
+                },
+                clientMonitorCallback,
+                this.mClientCallback);
     }
 
     public final boolean isMatchingRequestId(long j) {

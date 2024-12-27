@@ -6,22 +6,27 @@ import android.util.Log;
 
 /* loaded from: classes5.dex */
 public class SemSmartClipExtendedMetaTag extends SemSmartClipMetaTag implements Parcelable {
-    public static final Parcelable.Creator<SemSmartClipExtendedMetaTag> CREATOR = new Parcelable.Creator<SemSmartClipExtendedMetaTag>() { // from class: com.samsung.android.content.smartclip.SemSmartClipExtendedMetaTag.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSmartClipExtendedMetaTag createFromParcel(Parcel in) {
-            Log.d(SemSmartClipExtendedMetaTag.TAG, "SemSmartClipExtendedMetaTag.createFromParcel called");
-            SemSmartClipExtendedMetaTag data = new SemSmartClipExtendedMetaTag(null, null);
-            data.readFromParcel(in);
-            return data;
-        }
+    public static final Parcelable.Creator<SemSmartClipExtendedMetaTag> CREATOR =
+            new Parcelable.Creator<
+                    SemSmartClipExtendedMetaTag>() { // from class:
+                                                     // com.samsung.android.content.smartclip.SemSmartClipExtendedMetaTag.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSmartClipExtendedMetaTag createFromParcel(Parcel in) {
+                    Log.d(
+                            SemSmartClipExtendedMetaTag.TAG,
+                            "SemSmartClipExtendedMetaTag.createFromParcel called");
+                    SemSmartClipExtendedMetaTag data = new SemSmartClipExtendedMetaTag(null, null);
+                    data.readFromParcel(in);
+                    return data;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSmartClipExtendedMetaTag[] newArray(int size) {
-            return new SemSmartClipExtendedMetaTag[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSmartClipExtendedMetaTag[] newArray(int size) {
+                    return new SemSmartClipExtendedMetaTag[size];
+                }
+            };
     public static final String TAG = "SemSmartClipExtendedMetaTag";
     protected byte[] mExtraData;
     protected Parcelable mParcelableData;

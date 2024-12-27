@@ -42,8 +42,8 @@ public interface IMotionRecognitionService extends IInterface {
 
     public static class Default implements IMotionRecognitionService {
         @Override // com.samsung.android.gesture.IMotionRecognitionService
-        public void registerCallback(IBinder binder, int motion_sensors, int motion_events) throws RemoteException {
-        }
+        public void registerCallback(IBinder binder, int motion_sensors, int motion_events)
+                throws RemoteException {}
 
         @Override // com.samsung.android.gesture.IMotionRecognitionService
         public boolean getSSPstatus() throws RemoteException {
@@ -56,20 +56,23 @@ public interface IMotionRecognitionService extends IInterface {
         }
 
         @Override // com.samsung.android.gesture.IMotionRecognitionService
-        public void unregisterCallback(IBinder binder) throws RemoteException {
-        }
+        public void unregisterCallback(IBinder binder) throws RemoteException {}
 
         @Override // com.samsung.android.gesture.IMotionRecognitionService
-        public void useMotionAlways(IBinder binder, boolean bUseAlways) throws RemoteException {
-        }
+        public void useMotionAlways(IBinder binder, boolean bUseAlways) throws RemoteException {}
 
         @Override // com.samsung.android.gesture.IMotionRecognitionService
-        public void setMotionAngle(IBinder binder, int status) throws RemoteException {
-        }
+        public void setMotionAngle(IBinder binder, int status) throws RemoteException {}
 
         @Override // com.samsung.android.gesture.IMotionRecognitionService
-        public void setMotionTiltLevel(int stopUp, int level1Up, int level2Up, int stopDown, int level1Down, int level2Down) throws RemoteException {
-        }
+        public void setMotionTiltLevel(
+                int stopUp,
+                int level1Up,
+                int level2Up,
+                int stopDown,
+                int level1Down,
+                int level2Down)
+                throws RemoteException {}
 
         @Override // com.samsung.android.gesture.IMotionRecognitionService
         public int resetMotionEngine() throws RemoteException {
@@ -97,16 +100,14 @@ public interface IMotionRecognitionService extends IInterface {
         }
 
         @Override // com.samsung.android.gesture.IMotionRecognitionService
-        public void startAdaptiveBrightness() throws RemoteException {
-        }
+        public void startAdaptiveBrightness() throws RemoteException {}
 
         @Override // com.samsung.android.gesture.IMotionRecognitionService
-        public void stopAdaptiveBrightness() throws RemoteException {
-        }
+        public void stopAdaptiveBrightness() throws RemoteException {}
 
         @Override // com.samsung.android.gesture.IMotionRecognitionService
-        public void enableSARDevice(boolean enable, long deviceId, int slot, int extId) throws RemoteException {
-        }
+        public void enableSARDevice(boolean enable, long deviceId, int slot, int extId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -114,7 +115,7 @@ public interface IMotionRecognitionService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMotionRecognitionService {
+    public abstract static class Stub extends Binder implements IMotionRecognitionService {
         static final int TRANSACTION_enableSARDevice = 15;
         static final int TRANSACTION_getEvLuxTableInfo = 11;
         static final int TRANSACTION_getEvToLux = 10;
@@ -194,7 +195,8 @@ public interface IMotionRecognitionService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMotionRecognitionService.DESCRIPTOR);
             }
@@ -322,7 +324,8 @@ public interface IMotionRecognitionService extends IInterface {
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
-            public void registerCallback(IBinder binder, int motion_sensors, int motion_events) throws RemoteException {
+            public void registerCallback(IBinder binder, int motion_sensors, int motion_events)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -418,7 +421,14 @@ public interface IMotionRecognitionService extends IInterface {
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
-            public void setMotionTiltLevel(int stopUp, int level1Up, int level2Up, int stopDown, int level1Down, int level2Down) throws RemoteException {
+            public void setMotionTiltLevel(
+                    int stopUp,
+                    int level1Up,
+                    int level2Up,
+                    int stopDown,
+                    int level1Down,
+                    int level2Down)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -549,7 +559,8 @@ public interface IMotionRecognitionService extends IInterface {
             }
 
             @Override // com.samsung.android.gesture.IMotionRecognitionService
-            public void enableSARDevice(boolean enable, long deviceId, int slot, int extId) throws RemoteException {
+            public void enableSARDevice(boolean enable, long deviceId, int slot, int extId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -5,7 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.mocca.IMoccaEventListener;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -14,19 +14,25 @@ public interface IMoccaService extends IInterface {
 
     List<String> getSupportedTypes() throws RemoteException;
 
-    boolean hasContextAvailabilityListener(IMoccaEventListener iMoccaEventListener) throws RemoteException;
+    boolean hasContextAvailabilityListener(IMoccaEventListener iMoccaEventListener)
+            throws RemoteException;
 
     boolean hasContextListener(IMoccaEventListener iMoccaEventListener) throws RemoteException;
 
     boolean isAvailableType(String str) throws RemoteException;
 
-    boolean registerContextAvailabilityListener(IMoccaEventListener iMoccaEventListener, String str) throws RemoteException;
+    boolean registerContextAvailabilityListener(IMoccaEventListener iMoccaEventListener, String str)
+            throws RemoteException;
 
-    boolean registerContextListener(IMoccaEventListener iMoccaEventListener, String str, ContextParam contextParam) throws RemoteException;
+    boolean registerContextListener(
+            IMoccaEventListener iMoccaEventListener, String str, ContextParam contextParam)
+            throws RemoteException;
 
-    void unregisterContextAvailabilityListener(IMoccaEventListener iMoccaEventListener, String str) throws RemoteException;
+    void unregisterContextAvailabilityListener(IMoccaEventListener iMoccaEventListener, String str)
+            throws RemoteException;
 
-    void unregisterContextListener(IMoccaEventListener iMoccaEventListener, String str) throws RemoteException;
+    void unregisterContextListener(IMoccaEventListener iMoccaEventListener, String str)
+            throws RemoteException;
 
     public static class Default implements IMoccaService {
         @Override // com.samsung.android.mocca.IMoccaService
@@ -40,27 +46,31 @@ public interface IMoccaService extends IInterface {
         }
 
         @Override // com.samsung.android.mocca.IMoccaService
-        public boolean registerContextAvailabilityListener(IMoccaEventListener listener, String contextType) throws RemoteException {
+        public boolean registerContextAvailabilityListener(
+                IMoccaEventListener listener, String contextType) throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.mocca.IMoccaService
-        public void unregisterContextAvailabilityListener(IMoccaEventListener listener, String contextType) throws RemoteException {
-        }
+        public void unregisterContextAvailabilityListener(
+                IMoccaEventListener listener, String contextType) throws RemoteException {}
 
         @Override // com.samsung.android.mocca.IMoccaService
-        public boolean hasContextAvailabilityListener(IMoccaEventListener listener) throws RemoteException {
+        public boolean hasContextAvailabilityListener(IMoccaEventListener listener)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.mocca.IMoccaService
-        public boolean registerContextListener(IMoccaEventListener listener, String contextType, ContextParam param) throws RemoteException {
+        public boolean registerContextListener(
+                IMoccaEventListener listener, String contextType, ContextParam param)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.mocca.IMoccaService
-        public void unregisterContextListener(IMoccaEventListener listener, String contextType) throws RemoteException {
-        }
+        public void unregisterContextListener(IMoccaEventListener listener, String contextType)
+                throws RemoteException {}
 
         @Override // com.samsung.android.mocca.IMoccaService
         public boolean hasContextListener(IMoccaEventListener listener) throws RemoteException {
@@ -73,7 +83,7 @@ public interface IMoccaService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMoccaService {
+    public abstract static class Stub extends Binder implements IMoccaService {
         static final int TRANSACTION_getSupportedTypes = 1;
         static final int TRANSACTION_hasContextAvailabilityListener = 5;
         static final int TRANSACTION_hasContextListener = 8;
@@ -132,7 +142,8 @@ public interface IMoccaService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMoccaService.DESCRIPTOR);
             }
@@ -154,7 +165,8 @@ public interface IMoccaService extends IInterface {
                     reply.writeBoolean(_result2);
                     return true;
                 case 3:
-                    IMoccaEventListener _arg02 = IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
+                    IMoccaEventListener _arg02 =
+                            IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
                     String _arg1 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result3 = registerContextAvailabilityListener(_arg02, _arg1);
@@ -162,21 +174,24 @@ public interface IMoccaService extends IInterface {
                     reply.writeBoolean(_result3);
                     return true;
                 case 4:
-                    IMoccaEventListener _arg03 = IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
+                    IMoccaEventListener _arg03 =
+                            IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
                     String _arg12 = data.readString();
                     data.enforceNoDataAvail();
                     unregisterContextAvailabilityListener(_arg03, _arg12);
                     reply.writeNoException();
                     return true;
                 case 5:
-                    IMoccaEventListener _arg04 = IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
+                    IMoccaEventListener _arg04 =
+                            IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result4 = hasContextAvailabilityListener(_arg04);
                     reply.writeNoException();
                     reply.writeBoolean(_result4);
                     return true;
                 case 6:
-                    IMoccaEventListener _arg05 = IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
+                    IMoccaEventListener _arg05 =
+                            IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
                     String _arg13 = data.readString();
                     ContextParam _arg2 = (ContextParam) data.readTypedObject(ContextParam.CREATOR);
                     data.enforceNoDataAvail();
@@ -185,14 +200,16 @@ public interface IMoccaService extends IInterface {
                     reply.writeBoolean(_result5);
                     return true;
                 case 7:
-                    IMoccaEventListener _arg06 = IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
+                    IMoccaEventListener _arg06 =
+                            IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
                     String _arg14 = data.readString();
                     data.enforceNoDataAvail();
                     unregisterContextListener(_arg06, _arg14);
                     reply.writeNoException();
                     return true;
                 case 8:
-                    IMoccaEventListener _arg07 = IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
+                    IMoccaEventListener _arg07 =
+                            IMoccaEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result6 = hasContextListener(_arg07);
                     reply.writeNoException();
@@ -253,7 +270,8 @@ public interface IMoccaService extends IInterface {
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
-            public boolean registerContextAvailabilityListener(IMoccaEventListener listener, String contextType) throws RemoteException {
+            public boolean registerContextAvailabilityListener(
+                    IMoccaEventListener listener, String contextType) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -271,7 +289,8 @@ public interface IMoccaService extends IInterface {
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
-            public void unregisterContextAvailabilityListener(IMoccaEventListener listener, String contextType) throws RemoteException {
+            public void unregisterContextAvailabilityListener(
+                    IMoccaEventListener listener, String contextType) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -287,7 +306,8 @@ public interface IMoccaService extends IInterface {
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
-            public boolean hasContextAvailabilityListener(IMoccaEventListener listener) throws RemoteException {
+            public boolean hasContextAvailabilityListener(IMoccaEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -304,7 +324,9 @@ public interface IMoccaService extends IInterface {
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
-            public boolean registerContextListener(IMoccaEventListener listener, String contextType, ContextParam param) throws RemoteException {
+            public boolean registerContextListener(
+                    IMoccaEventListener listener, String contextType, ContextParam param)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -323,7 +345,8 @@ public interface IMoccaService extends IInterface {
             }
 
             @Override // com.samsung.android.mocca.IMoccaService
-            public void unregisterContextListener(IMoccaEventListener listener, String contextType) throws RemoteException {
+            public void unregisterContextListener(IMoccaEventListener listener, String contextType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

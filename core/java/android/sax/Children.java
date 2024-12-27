@@ -4,8 +4,7 @@ package android.sax;
 class Children {
     Child[] children = new Child[16];
 
-    Children() {
-    }
+    Children() {}
 
     Element getOrCreate(Element parent, String uri, String localName) {
         Child previous;
@@ -18,7 +17,9 @@ class Children {
             return current2;
         }
         do {
-            if (current.hash == hash && current.uri.compareTo(uri) == 0 && current.localName.compareTo(localName) == 0) {
+            if (current.hash == hash
+                    && current.uri.compareTo(uri) == 0
+                    && current.localName.compareTo(localName) == 0) {
                 return current;
             }
             previous = current;
@@ -37,7 +38,9 @@ class Children {
             return null;
         }
         do {
-            if (current.hash == hash && current.uri.compareTo(uri) == 0 && current.localName.compareTo(localName) == 0) {
+            if (current.hash == hash
+                    && current.uri.compareTo(uri) == 0
+                    && current.localName.compareTo(localName) == 0) {
                 return current;
             }
             current = current.next;

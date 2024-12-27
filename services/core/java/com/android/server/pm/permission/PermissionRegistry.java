@@ -3,9 +3,12 @@ package com.android.server.pm.permission;
 import android.content.pm.PermissionInfo;
 import android.os.UserHandle;
 import android.util.ArrayMap;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
-import java.util.Collection;
+
 import libcore.util.EmptyArray;
+
+import java.util.Collection;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -18,8 +21,14 @@ public final class PermissionRegistry {
     public final Permission enforcePermissionTree(int i, String str) {
         Permission findPermissionTree;
         Collection values = this.mPermissionTrees.values();
-        if (str == null || (findPermissionTree = Permission.findPermissionTree(str, values)) == null || findPermissionTree.mUid != UserHandle.getAppId(i)) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "Calling uid ", " is not allowed to add to or remove from the permission tree"));
+        if (str == null
+                || (findPermissionTree = Permission.findPermissionTree(str, values)) == null
+                || findPermissionTree.mUid != UserHandle.getAppId(i)) {
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i,
+                            "Calling uid ",
+                            " is not allowed to add to or remove from the permission tree"));
         }
         return findPermissionTree;
     }
@@ -31,7 +40,8 @@ public final class PermissionRegistry {
     public final void transferPermissions(String str, String str2) {
         int i = 0;
         while (i < 2) {
-            for (Permission permission : (i == 0 ? this.mPermissionTrees : this.mPermissions).values()) {
+            for (Permission permission :
+                    (i == 0 ? this.mPermissionTrees : this.mPermissions).values()) {
                 if (str.equals(permission.mPermissionInfo.packageName)) {
                     PermissionInfo permissionInfo = new PermissionInfo();
                     PermissionInfo permissionInfo2 = permission.mPermissionInfo;

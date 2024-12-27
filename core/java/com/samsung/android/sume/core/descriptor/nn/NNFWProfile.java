@@ -2,6 +2,7 @@ package com.samsung.android.sume.core.descriptor.nn;
 
 import com.samsung.android.sume.core.types.HwUnit;
 import com.samsung.android.sume.core.types.nn.NNFW;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;

@@ -6,14 +6,19 @@ import android.os.UserHandle;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class InstallPackageHelper$$ExternalSyntheticLambda1 implements Runnable {
+public final /* synthetic */ class InstallPackageHelper$$ExternalSyntheticLambda1
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ InstallPackageHelper f$0;
     public final /* synthetic */ Object f$1;
     public final /* synthetic */ String f$2;
     public final /* synthetic */ int f$3;
 
-    public /* synthetic */ InstallPackageHelper$$ExternalSyntheticLambda1(InstallPackageHelper installPackageHelper, String str, int i, IntentSender intentSender) {
+    public /* synthetic */ InstallPackageHelper$$ExternalSyntheticLambda1(
+            InstallPackageHelper installPackageHelper,
+            String str,
+            int i,
+            IntentSender intentSender) {
         this.$r8$classId = 2;
         this.f$0 = installPackageHelper;
         this.f$2 = str;
@@ -21,7 +26,8 @@ public final /* synthetic */ class InstallPackageHelper$$ExternalSyntheticLambda
         this.f$1 = intentSender;
     }
 
-    public /* synthetic */ InstallPackageHelper$$ExternalSyntheticLambda1(InstallPackageHelper installPackageHelper, int[] iArr, String str, int i, int i2) {
+    public /* synthetic */ InstallPackageHelper$$ExternalSyntheticLambda1(
+            InstallPackageHelper installPackageHelper, int[] iArr, String str, int i, int i2) {
         this.$r8$classId = i2;
         this.f$0 = installPackageHelper;
         this.f$1 = iArr;
@@ -39,7 +45,10 @@ public final /* synthetic */ class InstallPackageHelper$$ExternalSyntheticLambda
                 int i = this.f$3;
                 installPackageHelper.getClass();
                 for (int i2 : iArr) {
-                    ((AppOpsManager) installPackageHelper.mPm.mContext.getSystemService(AppOpsManager.class)).setMode(119, UserHandle.getUid(i2, i), str, 3);
+                    ((AppOpsManager)
+                                    installPackageHelper.mPm.mContext.getSystemService(
+                                            AppOpsManager.class))
+                            .setMode(119, UserHandle.getUid(i2, i), str, 3);
                 }
                 break;
             case 1:
@@ -49,7 +58,10 @@ public final /* synthetic */ class InstallPackageHelper$$ExternalSyntheticLambda
                 int i3 = this.f$3;
                 installPackageHelper2.getClass();
                 for (int i4 : iArr2) {
-                    ((AppOpsManager) installPackageHelper2.mPm.mContext.getSystemService(AppOpsManager.class)).setMode(119, UserHandle.getUid(i4, i3), str2, 2);
+                    ((AppOpsManager)
+                                    installPackageHelper2.mPm.mContext.getSystemService(
+                                            AppOpsManager.class))
+                            .setMode(119, UserHandle.getUid(i4, i3), str2, 2);
                 }
                 break;
             default:
@@ -57,9 +69,11 @@ public final /* synthetic */ class InstallPackageHelper$$ExternalSyntheticLambda
                 String str3 = this.f$2;
                 int i5 = this.f$3;
                 IntentSender intentSender = (IntentSender) this.f$1;
-                installPackageHelper3.mPm.restorePermissionsAndUpdateRolesForNewUserInstall(i5, str3);
+                installPackageHelper3.mPm.restorePermissionsAndUpdateRolesForNewUserInstall(
+                        i5, str3);
                 if (intentSender != null) {
-                    InstallPackageHelper.onInstallComplete(1, installPackageHelper3.mContext, intentSender);
+                    InstallPackageHelper.onInstallComplete(
+                            1, installPackageHelper3.mContext, intentSender);
                     break;
                 }
                 break;

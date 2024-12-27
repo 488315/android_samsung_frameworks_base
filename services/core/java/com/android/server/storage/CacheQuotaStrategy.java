@@ -20,10 +20,14 @@ import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseLongArray;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.pm.Installer;
 import com.android.server.usage.UsageStatsService;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -34,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -55,16 +58,28 @@ public final class CacheQuotaStrategy implements RemoteCallback.OnResultListener
         long currentTimeMillis = System.currentTimeMillis();
         long j = currentTimeMillis - 31449600000L;
         ArrayList arrayList = new ArrayList();
-        List<UserInfo> users = ((UserManager) cacheQuotaStrategy2.mContext.getSystemService(UserManager.class)).getUsers();
+        List<UserInfo> users =
+                ((UserManager) cacheQuotaStrategy2.mContext.getSystemService(UserManager.class))
+                        .getUsers();
         PackageManager packageManager = cacheQuotaStrategy2.mContext.getPackageManager();
         for (UserInfo userInfo : users) {
-            List queryUsageStats = UsageStatsService.this.queryUsageStats(userInfo.id, j, currentTimeMillis, 4, false);
+            List queryUsageStats =
+                    UsageStatsService.this.queryUsageStats(
+                            userInfo.id, j, currentTimeMillis, 4, false);
             if (queryUsageStats != null) {
                 for (int i = 0; i < queryUsageStats.size(); i++) {
                     UsageStats usageStats = (UsageStats) queryUsageStats.get(i);
                     try {
-                        ApplicationInfo applicationInfoAsUser = packageManager.getApplicationInfoAsUser(usageStats.getPackageName(), 0, userInfo.id);
-                        arrayList.add(new CacheQuotaHint.Builder().setVolumeUuid(applicationInfoAsUser.volumeUuid).setUid(applicationInfoAsUser.uid).setUsageStats(usageStats).setQuota(-1L).build());
+                        ApplicationInfo applicationInfoAsUser =
+                                packageManager.getApplicationInfoAsUser(
+                                        usageStats.getPackageName(), 0, userInfo.id);
+                        arrayList.add(
+                                new CacheQuotaHint.Builder()
+                                        .setVolumeUuid(applicationInfoAsUser.volumeUuid)
+                                        .setUid(applicationInfoAsUser.uid)
+                                        .setUsageStats(usageStats)
+                                        .setQuota(-1L)
+                                        .build());
                     } catch (PackageManager.NameNotFoundException unused) {
                     }
                 }
@@ -74,7 +89,11 @@ public final class CacheQuotaStrategy implements RemoteCallback.OnResultListener
         return arrayList;
     }
 
-    public CacheQuotaStrategy(Context context, UsageStatsManagerInternal usageStatsManagerInternal, Installer installer, ArrayMap arrayMap) {
+    public CacheQuotaStrategy(
+            Context context,
+            UsageStatsManagerInternal usageStatsManagerInternal,
+            Installer installer,
+            ArrayMap arrayMap) {
         Objects.requireNonNull(context);
         this.mContext = context;
         Objects.requireNonNull(usageStatsManagerInternal);
@@ -83,14 +102,22 @@ public final class CacheQuotaStrategy implements RemoteCallback.OnResultListener
         this.mInstaller = installer;
         Objects.requireNonNull(arrayMap);
         this.mQuotaMap = arrayMap;
-        this.mPreviousValuesFile = new AtomicFile(new File(new File(Environment.getDataDirectory(), "system"), "cachequota.xml"));
+        this.mPreviousValuesFile =
+                new AtomicFile(
+                        new File(
+                                new File(Environment.getDataDirectory(), "system"),
+                                "cachequota.xml"));
     }
 
     public static CacheQuotaHint getRequestFromXml(TypedXmlPullParser typedXmlPullParser) {
         try {
             String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "uuid");
             int attributeInt = typedXmlPullParser.getAttributeInt((String) null, "uid");
-            return new CacheQuotaHint.Builder().setVolumeUuid(attributeValue).setUid(attributeInt).setQuota(typedXmlPullParser.getAttributeLong((String) null, "bytes")).build();
+            return new CacheQuotaHint.Builder()
+                    .setVolumeUuid(attributeValue)
+                    .setUid(attributeInt)
+                    .setQuota(typedXmlPullParser.getAttributeLong((String) null, "bytes"))
+                    .build();
         } catch (XmlPullParserException unused) {
             Slog.e("CacheQuotaStrategy", "Invalid cache quota request, skipping.");
             return null;
@@ -125,11 +152,13 @@ public final class CacheQuotaStrategy implements RemoteCallback.OnResultListener
             } while (next != 1);
             return new Pair(Long.valueOf(attributeLong), arrayList);
         } catch (NumberFormatException unused) {
-            throw new IllegalStateException("Previous bytes formatted incorrectly; aborting quota read.");
+            throw new IllegalStateException(
+                    "Previous bytes formatted incorrectly; aborting quota read.");
         }
     }
 
-    public static void saveToXml(TypedXmlSerializer typedXmlSerializer, List list, long j) throws IOException {
+    public static void saveToXml(TypedXmlSerializer typedXmlSerializer, List list, long j)
+            throws IOException {
         typedXmlSerializer.startDocument((String) null, Boolean.TRUE);
         typedXmlSerializer.startTag((String) null, "cache-info");
         typedXmlSerializer.attributeLong((String) null, "previousBytes", j);
@@ -149,15 +178,23 @@ public final class CacheQuotaStrategy implements RemoteCallback.OnResultListener
     }
 
     public final void onResult(Bundle bundle) {
-        ArrayList parcelableArrayList = bundle.getParcelableArrayList("requests", CacheQuotaHint.class);
+        ArrayList parcelableArrayList =
+                bundle.getParcelableArrayList("requests", CacheQuotaHint.class);
         pushProcessedQuotas(parcelableArrayList);
         FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = this.mPreviousValuesFile.startWrite();
-            saveToXml(Xml.resolveSerializer(fileOutputStream), parcelableArrayList, new StatFs(Environment.getDataDirectory().getAbsolutePath()).getAvailableBytes());
+            saveToXml(
+                    Xml.resolveSerializer(fileOutputStream),
+                    parcelableArrayList,
+                    new StatFs(Environment.getDataDirectory().getAbsolutePath())
+                            .getAvailableBytes());
             this.mPreviousValuesFile.finishWrite(fileOutputStream);
         } catch (Exception e) {
-            Slog.e("CacheQuotaStrategy", "An error occurred while writing the cache quota file.", e);
+            Slog.e(
+                    "CacheQuotaStrategy",
+                    "An error occurred while writing the cache quota file.",
+                    e);
             this.mPreviousValuesFile.failWrite(fileOutputStream);
         }
     }
@@ -185,14 +222,18 @@ public final class CacheQuotaStrategy implements RemoteCallback.OnResultListener
                     String volumeUuid2 = cacheQuotaHint.getVolumeUuid();
                     int userId2 = UserHandle.getUserId(uid);
                     int appId2 = UserHandle.getAppId(uid);
-                    SparseLongArray sparseLongArray = (SparseLongArray) this.mQuotaMap.get(volumeUuid2);
+                    SparseLongArray sparseLongArray =
+                            (SparseLongArray) this.mQuotaMap.get(volumeUuid2);
                     if (sparseLongArray == null) {
                         sparseLongArray = new SparseLongArray();
                         this.mQuotaMap.put(volumeUuid2, sparseLongArray);
                     }
                     sparseLongArray.put(UserHandle.getUid(userId2, appId2), quota);
                 } catch (Installer.InstallerException e2) {
-                    Slog.w("CacheQuotaStrategy", "Failed to set cache quota for " + cacheQuotaHint.getUid(), e2);
+                    Slog.w(
+                            "CacheQuotaStrategy",
+                            "Failed to set cache quota for " + cacheQuotaHint.getUid(),
+                            e2);
                 }
             }
         }
@@ -213,7 +254,9 @@ public final class CacheQuotaStrategy implements RemoteCallback.OnResultListener
                         openRead.close();
                     }
                     if (readFromXml == null) {
-                        Slog.e("CacheQuotaStrategy", "An error occurred while parsing the cache quota file.");
+                        Slog.e(
+                                "CacheQuotaStrategy",
+                                "An error occurred while parsing the cache quota file.");
                         return -1L;
                     }
                     pushProcessedQuotas((List) readFromXml.second);

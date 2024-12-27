@@ -3,27 +3,31 @@ package android.media;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.util.ArrayList;
 
 /* loaded from: classes2.dex */
 public final class RemoteDisplayState implements Parcelable {
-    public static final Parcelable.Creator<RemoteDisplayState> CREATOR = new Parcelable.Creator<RemoteDisplayState>() { // from class: android.media.RemoteDisplayState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteDisplayState createFromParcel(Parcel in) {
-            return new RemoteDisplayState(in);
-        }
+    public static final Parcelable.Creator<RemoteDisplayState> CREATOR =
+            new Parcelable.Creator<
+                    RemoteDisplayState>() { // from class: android.media.RemoteDisplayState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteDisplayState createFromParcel(Parcel in) {
+                    return new RemoteDisplayState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteDisplayState[] newArray(int size) {
-            return new RemoteDisplayState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteDisplayState[] newArray(int size) {
+                    return new RemoteDisplayState[size];
+                }
+            };
     public static final int DISCOVERY_MODE_ACTIVE = 2;
     public static final int DISCOVERY_MODE_NONE = 0;
     public static final int DISCOVERY_MODE_PASSIVE = 1;
-    public static final String SERVICE_INTERFACE = "com.android.media.remotedisplay.RemoteDisplayProvider";
+    public static final String SERVICE_INTERFACE =
+            "com.android.media.remotedisplay.RemoteDisplayProvider";
     public final ArrayList<RemoteDisplayInfo> displays;
 
     public RemoteDisplayState() {
@@ -58,19 +62,21 @@ public final class RemoteDisplayState implements Parcelable {
     }
 
     public static final class RemoteDisplayInfo implements Parcelable {
-        public static final Parcelable.Creator<RemoteDisplayInfo> CREATOR = new Parcelable.Creator<RemoteDisplayInfo>() { // from class: android.media.RemoteDisplayState.RemoteDisplayInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public RemoteDisplayInfo createFromParcel(Parcel in) {
-                return new RemoteDisplayInfo(in);
-            }
+        public static final Parcelable.Creator<RemoteDisplayInfo> CREATOR =
+                new Parcelable.Creator<RemoteDisplayInfo>() { // from class:
+                    // android.media.RemoteDisplayState.RemoteDisplayInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public RemoteDisplayInfo createFromParcel(Parcel in) {
+                        return new RemoteDisplayInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public RemoteDisplayInfo[] newArray(int size) {
-                return new RemoteDisplayInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public RemoteDisplayInfo[] newArray(int size) {
+                        return new RemoteDisplayInfo[size];
+                    }
+                };
         public static final int PLAYBACK_VOLUME_FIXED = 0;
         public static final int PLAYBACK_VOLUME_VARIABLE = 1;
         public static final int STATUS_AVAILABLE = 2;
@@ -138,7 +144,23 @@ public final class RemoteDisplayState implements Parcelable {
         }
 
         public String toString() {
-            return "RemoteDisplayInfo{ id=" + this.id + ", name=" + this.name + ", description=" + this.description + ", status=" + this.status + ", volume=" + this.volume + ", volumeMax=" + this.volumeMax + ", volumeHandling=" + this.volumeHandling + ", presentationDisplayId=" + this.presentationDisplayId + " }";
+            return "RemoteDisplayInfo{ id="
+                    + this.id
+                    + ", name="
+                    + this.name
+                    + ", description="
+                    + this.description
+                    + ", status="
+                    + this.status
+                    + ", volume="
+                    + this.volume
+                    + ", volumeMax="
+                    + this.volumeMax
+                    + ", volumeHandling="
+                    + this.volumeHandling
+                    + ", presentationDisplayId="
+                    + this.presentationDisplayId
+                    + " }";
         }
     }
 }

@@ -6,6 +6,7 @@ import android.os.ParcelUuid;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,8 +19,7 @@ public class BluetoothDeviceFilterUtils {
     private static final boolean DEBUG = false;
     private static final String LOG_TAG = "CDM_BluetoothDeviceFilterUtils";
 
-    private BluetoothDeviceFilterUtils() {
-    }
+    private BluetoothDeviceFilterUtils() {}
 
     static String patternToString(Pattern p) {
         if (p == null) {
@@ -36,10 +36,14 @@ public class BluetoothDeviceFilterUtils {
     }
 
     static boolean matchesAddress(String deviceAddress, BluetoothDevice device) {
-        return deviceAddress == null || (device != null && deviceAddress.equals(device.getAddress()));
+        return deviceAddress == null
+                || (device != null && deviceAddress.equals(device.getAddress()));
     }
 
-    static boolean matchesServiceUuids(List<ParcelUuid> serviceUuids, List<ParcelUuid> serviceUuidMasks, BluetoothDevice device) {
+    static boolean matchesServiceUuids(
+            List<ParcelUuid> serviceUuids,
+            List<ParcelUuid> serviceUuidMasks,
+            BluetoothDevice device) {
         for (int i = 0; i < serviceUuids.size(); i++) {
             ParcelUuid uuid = serviceUuids.get(i);
             ParcelUuid uuidMask = serviceUuidMasks.get(i);
@@ -50,9 +54,13 @@ public class BluetoothDeviceFilterUtils {
         return true;
     }
 
-    static boolean matchesServiceUuid(ParcelUuid serviceUuid, ParcelUuid serviceUuidMask, BluetoothDevice device) {
+    static boolean matchesServiceUuid(
+            ParcelUuid serviceUuid, ParcelUuid serviceUuidMask, BluetoothDevice device) {
         boolean result = false;
-        List<ParcelUuid> deviceUuids = device.getUuids() == null ? Collections.emptyList() : Arrays.asList(device.getUuids());
+        List<ParcelUuid> deviceUuids =
+                device.getUuids() == null
+                        ? Collections.emptyList()
+                        : Arrays.asList(device.getUuids());
         if (serviceUuid == null) {
             return true;
         }
@@ -89,7 +97,8 @@ public class BluetoothDeviceFilterUtils {
         return result;
     }
 
-    private static void debugLogMatchResult(boolean result, BluetoothDevice device, Object criteria) {
+    private static void debugLogMatchResult(
+            boolean result, BluetoothDevice device, Object criteria) {
         Log.i(LOG_TAG, getDeviceDisplayNameInternal(device) + (result ? " ~ " : " !~ ") + criteria);
     }
 
@@ -122,6 +131,9 @@ public class BluetoothDeviceFilterUtils {
         if (mask == null) {
             return Objects.equals(data, uuid);
         }
-        return (data.getLeastSignificantBits() & mask.getLeastSignificantBits()) == (uuid.getLeastSignificantBits() & mask.getLeastSignificantBits()) && (data.getMostSignificantBits() & mask.getMostSignificantBits()) == (uuid.getMostSignificantBits() & mask.getMostSignificantBits());
+        return (data.getLeastSignificantBits() & mask.getLeastSignificantBits())
+                        == (uuid.getLeastSignificantBits() & mask.getLeastSignificantBits())
+                && (data.getMostSignificantBits() & mask.getMostSignificantBits())
+                        == (uuid.getMostSignificantBits() & mask.getMostSignificantBits());
     }
 }

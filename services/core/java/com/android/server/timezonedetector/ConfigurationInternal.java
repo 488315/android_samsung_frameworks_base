@@ -2,6 +2,7 @@ package com.android.server.timezonedetector;
 
 import android.app.time.TimeZoneCapabilities;
 import android.os.UserHandle;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -51,11 +52,13 @@ public final class ConfigurationInternal {
     }
 
     public final TimeZoneCapabilities asCapabilities() {
-        TimeZoneCapabilities.Builder builder = new TimeZoneCapabilities.Builder(UserHandle.of(this.mUserId));
+        TimeZoneCapabilities.Builder builder =
+                new TimeZoneCapabilities.Builder(UserHandle.of(this.mUserId));
         boolean isAutoDetectionSupported = isAutoDetectionSupported();
         boolean z = this.mUserConfigAllowed;
         int i = 10;
-        builder.setConfigureAutoDetectionEnabledCapability(!isAutoDetectionSupported ? 10 : !z ? 20 : 40);
+        builder.setConfigureAutoDetectionEnabledCapability(
+                !isAutoDetectionSupported ? 10 : !z ? 20 : 40);
         boolean z2 = this.mLocationEnabledSetting;
         builder.setUseLocationEnabled(z2);
         boolean z3 = this.mGeoDetectionSupported;
@@ -64,7 +67,8 @@ public final class ConfigurationInternal {
             i = (z4 && z2) ? 40 : 30;
         }
         builder.setConfigureGeoDetectionEnabledCapability(i);
-        builder.setSetManualTimeZoneCapability(z ? (isAutoDetectionSupported() && z4) ? 30 : 40 : 20);
+        builder.setSetManualTimeZoneCapability(
+                z ? (isAutoDetectionSupported() && z4) ? 30 : 40 : 20);
         return builder.build();
     }
 
@@ -76,7 +80,24 @@ public final class ConfigurationInternal {
             return false;
         }
         ConfigurationInternal configurationInternal = (ConfigurationInternal) obj;
-        return this.mUserId == configurationInternal.mUserId && this.mUserConfigAllowed == configurationInternal.mUserConfigAllowed && this.mTelephonyDetectionSupported == configurationInternal.mTelephonyDetectionSupported && this.mGeoDetectionSupported == configurationInternal.mGeoDetectionSupported && this.mTelephonyFallbackSupported == configurationInternal.mTelephonyFallbackSupported && this.mGeoDetectionRunInBackgroundEnabled == configurationInternal.mGeoDetectionRunInBackgroundEnabled && this.mEnhancedMetricsCollectionEnabled == configurationInternal.mEnhancedMetricsCollectionEnabled && this.mAutoDetectionEnabledSetting == configurationInternal.mAutoDetectionEnabledSetting && this.mLocationEnabledSetting == configurationInternal.mLocationEnabledSetting && this.mGeoLocationFbEnabledSetting == configurationInternal.mGeoLocationFbEnabledSetting && this.mGeoDetectionEnabledSetting == configurationInternal.mGeoDetectionEnabledSetting;
+        return this.mUserId == configurationInternal.mUserId
+                && this.mUserConfigAllowed == configurationInternal.mUserConfigAllowed
+                && this.mTelephonyDetectionSupported
+                        == configurationInternal.mTelephonyDetectionSupported
+                && this.mGeoDetectionSupported == configurationInternal.mGeoDetectionSupported
+                && this.mTelephonyFallbackSupported
+                        == configurationInternal.mTelephonyFallbackSupported
+                && this.mGeoDetectionRunInBackgroundEnabled
+                        == configurationInternal.mGeoDetectionRunInBackgroundEnabled
+                && this.mEnhancedMetricsCollectionEnabled
+                        == configurationInternal.mEnhancedMetricsCollectionEnabled
+                && this.mAutoDetectionEnabledSetting
+                        == configurationInternal.mAutoDetectionEnabledSetting
+                && this.mLocationEnabledSetting == configurationInternal.mLocationEnabledSetting
+                && this.mGeoLocationFbEnabledSetting
+                        == configurationInternal.mGeoLocationFbEnabledSetting
+                && this.mGeoDetectionEnabledSetting
+                        == configurationInternal.mGeoDetectionEnabledSetting;
     }
 
     public final int getDetectionMode() {
@@ -95,7 +116,18 @@ public final class ConfigurationInternal {
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mUserId), Boolean.valueOf(this.mUserConfigAllowed), Boolean.valueOf(this.mTelephonyDetectionSupported), Boolean.valueOf(this.mGeoDetectionSupported), Boolean.valueOf(this.mTelephonyFallbackSupported), Boolean.valueOf(this.mGeoDetectionRunInBackgroundEnabled), Boolean.valueOf(this.mEnhancedMetricsCollectionEnabled), Boolean.valueOf(this.mGeoLocationFbEnabledSetting), Boolean.valueOf(this.mAutoDetectionEnabledSetting), Boolean.valueOf(this.mLocationEnabledSetting), Boolean.valueOf(this.mGeoDetectionEnabledSetting));
+        return Objects.hash(
+                Integer.valueOf(this.mUserId),
+                Boolean.valueOf(this.mUserConfigAllowed),
+                Boolean.valueOf(this.mTelephonyDetectionSupported),
+                Boolean.valueOf(this.mGeoDetectionSupported),
+                Boolean.valueOf(this.mTelephonyFallbackSupported),
+                Boolean.valueOf(this.mGeoDetectionRunInBackgroundEnabled),
+                Boolean.valueOf(this.mEnhancedMetricsCollectionEnabled),
+                Boolean.valueOf(this.mGeoLocationFbEnabledSetting),
+                Boolean.valueOf(this.mAutoDetectionEnabledSetting),
+                Boolean.valueOf(this.mLocationEnabledSetting),
+                Boolean.valueOf(this.mGeoDetectionEnabledSetting));
     }
 
     public final boolean isAutoDetectionSupported() {
@@ -103,10 +135,36 @@ public final class ConfigurationInternal {
     }
 
     public final boolean isGeoDetectionExecutionEnabled() {
-        return getDetectionMode() == 2 || (this.mGeoDetectionSupported && this.mLocationEnabledSetting && this.mAutoDetectionEnabledSetting && this.mGeoDetectionRunInBackgroundEnabled);
+        return getDetectionMode() == 2
+                || (this.mGeoDetectionSupported
+                        && this.mLocationEnabledSetting
+                        && this.mAutoDetectionEnabledSetting
+                        && this.mGeoDetectionRunInBackgroundEnabled);
     }
 
     public final String toString() {
-        return "ConfigurationInternal{mUserId=" + this.mUserId + ", mUserConfigAllowed=" + this.mUserConfigAllowed + ", mTelephonyDetectionSupported=" + this.mTelephonyDetectionSupported + ", mGeoDetectionSupported=" + this.mGeoDetectionSupported + ", mTelephonyFallbackSupported=" + this.mTelephonyFallbackSupported + ", mGeoDetectionRunInBackgroundEnabled=" + this.mGeoDetectionRunInBackgroundEnabled + ", mEnhancedMetricsCollectionEnabled=" + this.mEnhancedMetricsCollectionEnabled + ", mAutoDetectionEnabledSetting=" + this.mAutoDetectionEnabledSetting + ", mLocationEnabledSetting=" + this.mLocationEnabledSetting + ", mGeoDetectionEnabledSetting=" + this.mGeoDetectionEnabledSetting + ", mGeoLocationFbEnabledSetting=" + this.mGeoLocationFbEnabledSetting + '}';
+        return "ConfigurationInternal{mUserId="
+                + this.mUserId
+                + ", mUserConfigAllowed="
+                + this.mUserConfigAllowed
+                + ", mTelephonyDetectionSupported="
+                + this.mTelephonyDetectionSupported
+                + ", mGeoDetectionSupported="
+                + this.mGeoDetectionSupported
+                + ", mTelephonyFallbackSupported="
+                + this.mTelephonyFallbackSupported
+                + ", mGeoDetectionRunInBackgroundEnabled="
+                + this.mGeoDetectionRunInBackgroundEnabled
+                + ", mEnhancedMetricsCollectionEnabled="
+                + this.mEnhancedMetricsCollectionEnabled
+                + ", mAutoDetectionEnabledSetting="
+                + this.mAutoDetectionEnabledSetting
+                + ", mLocationEnabledSetting="
+                + this.mLocationEnabledSetting
+                + ", mGeoDetectionEnabledSetting="
+                + this.mGeoDetectionEnabledSetting
+                + ", mGeoLocationFbEnabledSetting="
+                + this.mGeoLocationFbEnabledSetting
+                + '}';
     }
 }

@@ -8,14 +8,15 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface ISatelliteDisallowedReasonsCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.satellite.ISatelliteDisallowedReasonsCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.satellite.ISatelliteDisallowedReasonsCallback";
 
     void onSatelliteDisallowedReasonsChanged(int[] iArr) throws RemoteException;
 
     public static class Default implements ISatelliteDisallowedReasonsCallback {
         @Override // android.telephony.satellite.ISatelliteDisallowedReasonsCallback
-        public void onSatelliteDisallowedReasonsChanged(int[] disallowedReasons) throws RemoteException {
-        }
+        public void onSatelliteDisallowedReasonsChanged(int[] disallowedReasons)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,8 @@ public interface ISatelliteDisallowedReasonsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatelliteDisallowedReasonsCallback {
+    public abstract static class Stub extends Binder
+            implements ISatelliteDisallowedReasonsCallback {
         static final int TRANSACTION_onSatelliteDisallowedReasonsChanged = 1;
 
         public Stub() {
@@ -34,7 +36,8 @@ public interface ISatelliteDisallowedReasonsCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(ISatelliteDisallowedReasonsCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(ISatelliteDisallowedReasonsCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof ISatelliteDisallowedReasonsCallback)) {
                 return (ISatelliteDisallowedReasonsCallback) iin;
             }
@@ -61,7 +64,8 @@ public interface ISatelliteDisallowedReasonsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISatelliteDisallowedReasonsCallback.DESCRIPTOR);
             }
@@ -97,7 +101,8 @@ public interface ISatelliteDisallowedReasonsCallback extends IInterface {
             }
 
             @Override // android.telephony.satellite.ISatelliteDisallowedReasonsCallback
-            public void onSatelliteDisallowedReasonsChanged(int[] disallowedReasons) throws RemoteException {
+            public void onSatelliteDisallowedReasonsChanged(int[] disallowedReasons)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteDisallowedReasonsCallback.DESCRIPTOR);

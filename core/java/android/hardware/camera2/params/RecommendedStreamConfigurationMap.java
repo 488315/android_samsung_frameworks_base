@@ -4,6 +4,7 @@ import android.util.ArraySet;
 import android.util.Range;
 import android.util.Size;
 import android.view.Surface;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -28,10 +29,10 @@ public final class RecommendedStreamConfigurationMap {
     private int mUsecase;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RecommendedUsecase {
-    }
+    public @interface RecommendedUsecase {}
 
-    public RecommendedStreamConfigurationMap(StreamConfigurationMap recommendedMap, int usecase, boolean supportsPrivate) {
+    public RecommendedStreamConfigurationMap(
+            StreamConfigurationMap recommendedMap, int usecase, boolean supportsPrivate) {
         this.mRecommendedMap = recommendedMap;
         this.mUsecase = usecase;
         this.mSupportsPrivate = supportsPrivate;
@@ -58,7 +59,8 @@ public final class RecommendedStreamConfigurationMap {
     }
 
     public Set<Integer> getValidOutputFormatsForInput(int inputFormat) {
-        return getUnmodifiableIntegerSet(this.mRecommendedMap.getValidOutputFormatsForInput(inputFormat));
+        return getUnmodifiableIntegerSet(
+                this.mRecommendedMap.getValidOutputFormatsForInput(inputFormat));
     }
 
     public Set<Integer> getInputFormats() {

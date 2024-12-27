@@ -12,40 +12,44 @@ public final class WatchedSparseArray extends WatchableImpl implements Snappable
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedSparseArray$1] */
     public WatchedSparseArray() {
         this.mWatching = false;
-        this.mObserver = new Watcher() { // from class: com.android.server.utils.WatchedSparseArray.1
-            @Override // com.android.server.utils.Watcher
-            public final void onChange(Watchable watchable) {
-                WatchedSparseArray.this.dispatchChange(watchable);
-            }
-        };
+        this.mObserver =
+                new Watcher() { // from class: com.android.server.utils.WatchedSparseArray.1
+                    @Override // com.android.server.utils.Watcher
+                    public final void onChange(Watchable watchable) {
+                        WatchedSparseArray.this.dispatchChange(watchable);
+                    }
+                };
         this.mStorage = new SparseArray();
     }
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedSparseArray$1] */
     public WatchedSparseArray(int i) {
         this.mWatching = false;
-        this.mObserver = new Watcher() { // from class: com.android.server.utils.WatchedSparseArray.1
-            @Override // com.android.server.utils.Watcher
-            public final void onChange(Watchable watchable) {
-                WatchedSparseArray.this.dispatchChange(watchable);
-            }
-        };
+        this.mObserver =
+                new Watcher() { // from class: com.android.server.utils.WatchedSparseArray.1
+                    @Override // com.android.server.utils.Watcher
+                    public final void onChange(Watchable watchable) {
+                        WatchedSparseArray.this.dispatchChange(watchable);
+                    }
+                };
         this.mStorage = new SparseArray(i);
     }
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedSparseArray$1] */
     public WatchedSparseArray(WatchedSparseArray watchedSparseArray) {
         this.mWatching = false;
-        this.mObserver = new Watcher() { // from class: com.android.server.utils.WatchedSparseArray.1
-            @Override // com.android.server.utils.Watcher
-            public final void onChange(Watchable watchable) {
-                WatchedSparseArray.this.dispatchChange(watchable);
-            }
-        };
+        this.mObserver =
+                new Watcher() { // from class: com.android.server.utils.WatchedSparseArray.1
+                    @Override // com.android.server.utils.Watcher
+                    public final void onChange(Watchable watchable) {
+                        WatchedSparseArray.this.dispatchChange(watchable);
+                    }
+                };
         this.mStorage = watchedSparseArray.mStorage.clone();
     }
 
-    public static void snapshot(WatchedSparseArray watchedSparseArray, WatchedSparseArray watchedSparseArray2) {
+    public static void snapshot(
+            WatchedSparseArray watchedSparseArray, WatchedSparseArray watchedSparseArray2) {
         if (watchedSparseArray.mStorage.size() != 0) {
             throw new IllegalArgumentException("snapshot destination is not empty");
         }

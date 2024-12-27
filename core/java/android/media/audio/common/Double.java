@@ -4,27 +4,29 @@ import android.hardware.scontext.SContextConstants;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class Double implements Parcelable {
-    public static final Parcelable.Creator<Double> CREATOR = new Parcelable.Creator<Double>() { // from class: android.media.audio.common.Double.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Double createFromParcel(Parcel _aidl_source) {
-            Double _aidl_out = new Double();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Double> CREATOR =
+            new Parcelable.Creator<Double>() { // from class: android.media.audio.common.Double.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Double createFromParcel(Parcel _aidl_source) {
+                    Double _aidl_out = new Double();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Double[] newArray(int _aidl_size) {
-            return new Double[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Double[] newArray(int _aidl_size) {
+                    return new Double[_aidl_size];
+                }
+            };
     public double value = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
 
     @Override // android.os.Parcelable
@@ -85,7 +87,8 @@ public class Double implements Parcelable {
             return false;
         }
         Double that = (Double) other;
-        if (Objects.deepEquals(java.lang.Double.valueOf(this.value), java.lang.Double.valueOf(that.value))) {
+        if (Objects.deepEquals(
+                java.lang.Double.valueOf(this.value), java.lang.Double.valueOf(that.value))) {
             return true;
         }
         return false;

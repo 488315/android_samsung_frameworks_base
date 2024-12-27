@@ -15,7 +15,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Size;
+
 import com.google.android.mms.ContentType;
+
 import java.io.IOException;
 import java.util.concurrent.Callable;
 
@@ -43,7 +45,8 @@ public class ImageUtils {
             this.mTempMatrix.reset();
             this.mTempMatrix.setScale(64.0f / width, 64.0f / height, 0.0f, 0.0f);
             this.mTempCompactBitmapCanvas.drawColor(0, PorterDuff.Mode.SRC);
-            this.mTempCompactBitmapCanvas.drawBitmap(bitmap, this.mTempMatrix, this.mTempCompactBitmapPaint);
+            this.mTempCompactBitmapCanvas.drawBitmap(
+                    bitmap, this.mTempMatrix, this.mTempCompactBitmapPaint);
             bitmap = this.mTempCompactBitmap;
             height = 64;
             width = 64;
@@ -84,13 +87,16 @@ public class ImageUtils {
         return buildScaledBitmap(drawable, maxWidth, maxHeight, false);
     }
 
-    public static Bitmap buildScaledBitmap(Drawable drawable, int maxWidth, int maxHeight, boolean allowUpscaling) {
+    public static Bitmap buildScaledBitmap(
+            Drawable drawable, int maxWidth, int maxHeight, boolean allowUpscaling) {
         if (drawable == null) {
             return null;
         }
         int originalWidth = drawable.getIntrinsicWidth();
         int originalHeight = drawable.getIntrinsicHeight();
-        if (originalWidth <= maxWidth && originalHeight <= maxHeight && (drawable instanceof BitmapDrawable)) {
+        if (originalWidth <= maxWidth
+                && originalHeight <= maxHeight
+                && (drawable instanceof BitmapDrawable)) {
             return ((BitmapDrawable) drawable).getBitmap();
         }
         if (originalHeight <= 0 || originalWidth <= 0) {
@@ -111,34 +117,57 @@ public class ImageUtils {
 
     public static int calculateSampleSize(Size currentSize, Size requestedSize) {
         int inSampleSize = 1;
-        if (currentSize.getHeight() > requestedSize.getHeight() || currentSize.getWidth() > requestedSize.getWidth()) {
+        if (currentSize.getHeight() > requestedSize.getHeight()
+                || currentSize.getWidth() > requestedSize.getWidth()) {
             int halfHeight = currentSize.getHeight() / 2;
             int halfWidth = currentSize.getWidth() / 2;
-            while (halfHeight / inSampleSize >= requestedSize.getHeight() && halfWidth / inSampleSize >= requestedSize.getWidth()) {
+            while (halfHeight / inSampleSize >= requestedSize.getHeight()
+                    && halfWidth / inSampleSize >= requestedSize.getWidth()) {
                 inSampleSize *= 2;
             }
         }
         return inSampleSize;
     }
 
-    public static Bitmap loadThumbnail(ContentResolver resolver, final Uri uri, final Size size) throws IOException {
+    public static Bitmap loadThumbnail(ContentResolver resolver, final Uri uri, final Size size)
+            throws IOException {
         final ContentProviderClient client = resolver.acquireContentProviderClient(uri);
         try {
             final Bundle opts = new Bundle();
-            opts.putParcelable(ContentResolver.EXTRA_SIZE, new Point(size.getWidth(), size.getHeight()));
-            Bitmap decodeBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource((Callable<AssetFileDescriptor>) new Callable() { // from class: com.android.internal.util.ImageUtils$$ExternalSyntheticLambda0
-                @Override // java.util.concurrent.Callable
-                public final Object call() {
-                    AssetFileDescriptor openTypedAssetFile;
-                    openTypedAssetFile = ContentProviderClient.this.openTypedAssetFile(uri, ContentType.IMAGE_UNSPECIFIED, opts, null);
-                    return openTypedAssetFile;
-                }
-            }), new ImageDecoder.OnHeaderDecodedListener() { // from class: com.android.internal.util.ImageUtils$$ExternalSyntheticLambda1
-                @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
-                public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
-                    ImageUtils.lambda$loadThumbnail$1(Size.this, imageDecoder, imageInfo, source);
-                }
-            });
+            opts.putParcelable(
+                    ContentResolver.EXTRA_SIZE, new Point(size.getWidth(), size.getHeight()));
+            Bitmap decodeBitmap =
+                    ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(
+                                    (Callable<AssetFileDescriptor>)
+                                            new Callable() { // from class:
+                                                             // com.android.internal.util.ImageUtils$$ExternalSyntheticLambda0
+                                                @Override // java.util.concurrent.Callable
+                                                public final Object call() {
+                                                    AssetFileDescriptor openTypedAssetFile;
+                                                    openTypedAssetFile =
+                                                            ContentProviderClient.this
+                                                                    .openTypedAssetFile(
+                                                                            uri,
+                                                                            ContentType
+                                                                                    .IMAGE_UNSPECIFIED,
+                                                                            opts,
+                                                                            null);
+                                                    return openTypedAssetFile;
+                                                }
+                                            }),
+                            new ImageDecoder
+                                    .OnHeaderDecodedListener() { // from class:
+                                                                 // com.android.internal.util.ImageUtils$$ExternalSyntheticLambda1
+                                @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
+                                public final void onHeaderDecoded(
+                                        ImageDecoder imageDecoder,
+                                        ImageDecoder.ImageInfo imageInfo,
+                                        ImageDecoder.Source source) {
+                                    ImageUtils.lambda$loadThumbnail$1(
+                                            Size.this, imageDecoder, imageInfo, source);
+                                }
+                            });
             if (client != null) {
                 client.close();
             }
@@ -155,7 +184,11 @@ public class ImageUtils {
         }
     }
 
-    static /* synthetic */ void lambda$loadThumbnail$1(Size size, ImageDecoder decoder, ImageDecoder.ImageInfo info, ImageDecoder.Source source) {
+    static /* synthetic */ void lambda$loadThumbnail$1(
+            Size size,
+            ImageDecoder decoder,
+            ImageDecoder.ImageInfo info,
+            ImageDecoder.Source source) {
         decoder.setAllocator(1);
         int sample = calculateSampleSize(info.getSize(), size);
         if (sample > 1) {

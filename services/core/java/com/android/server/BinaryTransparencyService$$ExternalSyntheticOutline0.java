@@ -1,6 +1,7 @@
 package com.android.server;
 
 import android.util.Slog;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -15,7 +16,8 @@ public abstract /* synthetic */ class BinaryTransparencyService$$ExternalSynthet
         return new StringBuilder(str2);
     }
 
-    public static StringBuilder m(PrintWriter printWriter, String str, String str2, StringBuilder sb) {
+    public static StringBuilder m(
+            PrintWriter printWriter, String str, String str2, StringBuilder sb) {
         sb.append(str);
         printWriter.println(sb.toString());
         return new StringBuilder(str2);
@@ -33,7 +35,8 @@ public abstract /* synthetic */ class BinaryTransparencyService$$ExternalSynthet
         return new StringBuilder(str);
     }
 
-    public static StringBuilder m(StringBuilder sb, boolean z, PrintWriter printWriter, String str) {
+    public static StringBuilder m(
+            StringBuilder sb, boolean z, PrintWriter printWriter, String str) {
         sb.append(z);
         printWriter.println(sb.toString());
         return new StringBuilder(str);

@@ -4,7 +4,9 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.samsung.android.rune.PMRune;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -125,7 +127,12 @@ public class RestrictedReceiverFilter {
 
     public boolean isAllowedActionLocked(String packageName, String action) {
         Set<String> allowedActions;
-        return (TextUtils.isEmpty(packageName) || TextUtils.isEmpty(action) || (allowedActions = this.mAllowedItems.get(packageName)) == null || !allowedActions.contains(action)) ? false : true;
+        return (TextUtils.isEmpty(packageName)
+                        || TextUtils.isEmpty(action)
+                        || (allowedActions = this.mAllowedItems.get(packageName)) == null
+                        || !allowedActions.contains(action))
+                ? false
+                : true;
     }
 
     private boolean isExemptedPackageLocked(String packageName) {
@@ -141,7 +148,9 @@ public class RestrictedReceiverFilter {
     }
 
     public void addViolationLog(String packageName, String codePath, String action) {
-        if (TextUtils.isEmpty(packageName) || TextUtils.isEmpty(codePath) || TextUtils.isEmpty(action)) {
+        if (TextUtils.isEmpty(packageName)
+                || TextUtils.isEmpty(codePath)
+                || TextUtils.isEmpty(action)) {
             return;
         }
         String msg = "Restricted action " + action + " for package " + packageName;
@@ -166,18 +175,22 @@ public class RestrictedReceiverFilter {
             if (this.mViolationActions.size() == 0) {
                 return "No Restricted receiver violations";
             }
-            this.mViolationActions.forEach(new BiConsumer() { // from class: com.samsung.android.core.pm.allowlist.RestrictedReceiverFilter$$ExternalSyntheticLambda0
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    RestrictedReceiverFilter.this.lambda$getViolationLog$0(sb, (String) obj, (List) obj2);
-                }
-            });
+            this.mViolationActions.forEach(
+                    new BiConsumer() { // from class:
+                                       // com.samsung.android.core.pm.allowlist.RestrictedReceiverFilter$$ExternalSyntheticLambda0
+                        @Override // java.util.function.BiConsumer
+                        public final void accept(Object obj, Object obj2) {
+                            RestrictedReceiverFilter.this.lambda$getViolationLog$0(
+                                    sb, (String) obj, (List) obj2);
+                        }
+                    });
             return sb.toString();
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$getViolationLog$0(StringBuilder sb, String packageName, List actions) {
+    public /* synthetic */ void lambda$getViolationLog$0(
+            StringBuilder sb, String packageName, List actions) {
         sb.append(NavigationBarInflaterView.SIZE_MOD_START + packageName + "]\n");
         sb.append("    path: " + this.mViolationCodePaths.get(packageName) + "\n");
         sb.append("    violations:\n");

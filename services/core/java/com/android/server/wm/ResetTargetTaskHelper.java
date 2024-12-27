@@ -2,8 +2,10 @@ package com.android.server.wm;
 
 import android.app.ActivityOptions;
 import android.os.Debug;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -64,7 +66,12 @@ public final class ResetTargetTaskHelper implements Consumer, Predicate {
                     }
                 }
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_TASKS_enabled[3]) {
-                    ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_TASKS, -4617490621756721600L, 0, null, String.valueOf(activityRecord));
+                    ProtoLogImpl_54989576.w(
+                            ProtoLogGroup.WM_DEBUG_TASKS,
+                            -4617490621756721600L,
+                            0,
+                            null,
+                            String.valueOf(activityRecord));
                 }
                 activityRecord.finishIfPossible(str, false);
             }
@@ -88,21 +95,44 @@ public final class ResetTargetTaskHelper implements Consumer, Predicate {
             int windowingMode = this.mTargetRootTask.getWindowingMode();
             int activityType = this.mTargetRootTask.getActivityType();
             while (!this.mPendingReparentActivities.isEmpty()) {
-                ActivityRecord activityRecord2 = (ActivityRecord) this.mPendingReparentActivities.remove(0);
-                boolean alwaysCreateRootTask = DisplayContent.alwaysCreateRootTask(windowingMode, activityType);
-                Task bottomMostTask = alwaysCreateRootTask ? displayArea.getBottomMostTask() : this.mTargetRootTask.getBottomMostTask();
-                if (bottomMostTask == null || !activityRecord2.taskAffinity.equals(bottomMostTask.affinity)) {
+                ActivityRecord activityRecord2 =
+                        (ActivityRecord) this.mPendingReparentActivities.remove(0);
+                boolean alwaysCreateRootTask =
+                        DisplayContent.alwaysCreateRootTask(windowingMode, activityType);
+                Task bottomMostTask =
+                        alwaysCreateRootTask
+                                ? displayArea.getBottomMostTask()
+                                : this.mTargetRootTask.getBottomMostTask();
+                if (bottomMostTask == null
+                        || !activityRecord2.taskAffinity.equals(bottomMostTask.affinity)) {
                     bottomMostTask = null;
                 } else if (ProtoLogImpl_54989576.Cache.WM_DEBUG_TASKS_enabled[c]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_TASKS, 1730793580703791926L, 0, null, String.valueOf(activityRecord2), String.valueOf(bottomMostTask));
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_DEBUG_TASKS,
+                            1730793580703791926L,
+                            0,
+                            null,
+                            String.valueOf(activityRecord2),
+                            String.valueOf(bottomMostTask));
                 }
                 if (bottomMostTask == null) {
                     if (alwaysCreateRootTask) {
                         activityRecord = activityRecord2;
-                        reuseOrCreateTask = displayArea.getOrCreateRootTask(windowingMode, activityType, false, null, null, null, 0);
+                        reuseOrCreateTask =
+                                displayArea.getOrCreateRootTask(
+                                        windowingMode, activityType, false, null, null, null, 0);
                     } else {
                         activityRecord = activityRecord2;
-                        reuseOrCreateTask = this.mTargetRootTask.reuseOrCreateTask(activityRecord.info, null, null, null, false, null, null, null);
+                        reuseOrCreateTask =
+                                this.mTargetRootTask.reuseOrCreateTask(
+                                        activityRecord.info,
+                                        null,
+                                        null,
+                                        null,
+                                        false,
+                                        null,
+                                        null,
+                                        null);
                     }
                     bottomMostTask = reuseOrCreateTask;
                     bottomMostTask.affinityIntent = activityRecord.intent;
@@ -141,7 +171,9 @@ public final class ResetTargetTaskHelper implements Consumer, Predicate {
             if (!z && !z3) {
                 if (activityRecord.resultTo != null) {
                     this.mResultActivities.add(activityRecord);
-                } else if (z2 && (str2 = activityRecord.taskAffinity) != null && !str2.equals(this.mTask.affinity)) {
+                } else if (z2
+                        && (str2 = activityRecord.taskAffinity) != null
+                        && !str2.equals(this.mTask.affinity)) {
                     this.mPendingReparentActivities.add(activityRecord);
                 }
             }
@@ -158,7 +190,10 @@ public final class ResetTargetTaskHelper implements Consumer, Predicate {
             }
         } else if (activityRecord.resultTo != null) {
             this.mResultActivities.add(activityRecord);
-        } else if (this.mTargetTaskFound && z2 && (str = this.mTargetTask.affinity) != null && str.equals(activityRecord.taskAffinity)) {
+        } else if (this.mTargetTaskFound
+                && z2
+                && (str = this.mTargetTask.affinity) != null
+                && str.equals(activityRecord.taskAffinity)) {
             this.mResultActivities.add(activityRecord);
             if (this.mForceReset || z) {
                 finishActivities("move-affinity", this.mResultActivities);
@@ -169,16 +204,37 @@ public final class ResetTargetTaskHelper implements Consumer, Predicate {
                 Task task = this.mTargetTask;
                 int i2 = this.mActivityReparentPosition;
                 while (!this.mResultActivities.isEmpty()) {
-                    ActivityRecord activityRecord2 = (ActivityRecord) this.mResultActivities.remove(0);
+                    ActivityRecord activityRecord2 =
+                            (ActivityRecord) this.mResultActivities.remove(0);
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ADD_REMOVE_enabled[2]) {
-                        ProtoLogImpl_54989576.i(ProtoLogGroup.WM_DEBUG_ADD_REMOVE, 3361857745281957526L, 0, null, String.valueOf(activityRecord2), String.valueOf(this.mTask), String.valueOf(task), String.valueOf(Debug.getCallers(4)));
+                        ProtoLogImpl_54989576.i(
+                                ProtoLogGroup.WM_DEBUG_ADD_REMOVE,
+                                3361857745281957526L,
+                                0,
+                                null,
+                                String.valueOf(activityRecord2),
+                                String.valueOf(this.mTask),
+                                String.valueOf(task),
+                                String.valueOf(Debug.getCallers(4)));
                     }
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_TASKS_enabled[1]) {
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_TASKS, 3958829063955690349L, 0, null, String.valueOf(activityRecord2), String.valueOf(activityRecord));
+                        ProtoLogImpl_54989576.v(
+                                ProtoLogGroup.WM_DEBUG_TASKS,
+                                3958829063955690349L,
+                                0,
+                                null,
+                                String.valueOf(activityRecord2),
+                                String.valueOf(activityRecord));
                     }
                     activityRecord2.reparent(task, i2, "resetTargetTaskIfNeeded");
                 }
-                if (activityRecord.info.launchMode == 1 && (activityBelow = this.mTargetTask.getActivityBelow(activityRecord)) != null && activityBelow.intent.getComponent().equals(activityRecord.intent.getComponent())) {
+                if (activityRecord.info.launchMode == 1
+                        && (activityBelow = this.mTargetTask.getActivityBelow(activityRecord))
+                                != null
+                        && activityBelow
+                                .intent
+                                .getComponent()
+                                .equals(activityRecord.intent.getComponent())) {
                     activityBelow.finishIfPossible("replace", false);
                 }
             }

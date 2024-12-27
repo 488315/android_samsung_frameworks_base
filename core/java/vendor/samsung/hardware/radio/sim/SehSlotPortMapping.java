@@ -3,23 +3,27 @@ package vendor.samsung.hardware.radio.sim;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehSlotPortMapping implements Parcelable {
-    public static final Parcelable.Creator<SehSlotPortMapping> CREATOR = new Parcelable.Creator<SehSlotPortMapping>() { // from class: vendor.samsung.hardware.radio.sim.SehSlotPortMapping.1
-        @Override // android.os.Parcelable.Creator
-        public SehSlotPortMapping createFromParcel(Parcel _aidl_source) {
-            SehSlotPortMapping _aidl_out = new SehSlotPortMapping();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehSlotPortMapping> CREATOR =
+            new Parcelable.Creator<
+                    SehSlotPortMapping>() { // from class:
+                                            // vendor.samsung.hardware.radio.sim.SehSlotPortMapping.1
+                @Override // android.os.Parcelable.Creator
+                public SehSlotPortMapping createFromParcel(Parcel _aidl_source) {
+                    SehSlotPortMapping _aidl_out = new SehSlotPortMapping();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehSlotPortMapping[] newArray(int _aidl_size) {
-            return new SehSlotPortMapping[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehSlotPortMapping[] newArray(int _aidl_size) {
+                    return new SehSlotPortMapping[_aidl_size];
+                }
+            };
     public int physicalSlotId = 0;
     public int portId = 0;
 

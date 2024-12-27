@@ -8,8 +8,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.Slog;
-import com.android.server.notification.ConditionProviders;
-import com.android.server.notification.ManagedServices;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -39,12 +38,16 @@ public final class ZenModeConditions implements ConditionProviders.Callback {
         conditionProviders.mCallback = this;
     }
 
-    public final void evaluateConfig(ZenModeConfig zenModeConfig, ComponentName componentName, boolean z) {
+    public final void evaluateConfig(
+            ZenModeConfig zenModeConfig, ComponentName componentName, boolean z) {
         ZenModeConfig.ZenRule zenRule;
         if (zenModeConfig == null) {
             return;
         }
-        if (!android.app.Flags.modesUi() && (zenRule = zenModeConfig.manualRule) != null && zenRule.condition != null && !zenRule.isTrueOrUnknown()) {
+        if (!android.app.Flags.modesUi()
+                && (zenRule = zenModeConfig.manualRule) != null
+                && zenRule.condition != null
+                && !zenRule.isTrueOrUnknown()) {
             if (DEBUG) {
                 Log.d("ZenModeHelper", "evaluateConfig: clearing manual rule");
             }
@@ -72,7 +75,8 @@ public final class ZenModeConditions implements ConditionProviders.Callback {
             try {
                 for (int size = this.mSubscriptions.size() - 1; size >= 0; size--) {
                     Uri uri = (Uri) this.mSubscriptions.keyAt(size);
-                    ComponentName componentName2 = (ComponentName) this.mSubscriptions.valueAt(size);
+                    ComponentName componentName2 =
+                            (ComponentName) this.mSubscriptions.valueAt(size);
                     if (z && !arraySet.contains(uri)) {
                         this.mConditionProviders.unsubscribeIfNecessary(componentName2, uri);
                         this.mSubscriptions.removeAt(size);
@@ -86,10 +90,17 @@ public final class ZenModeConditions implements ConditionProviders.Callback {
         this.mEvaluatedUsers.add(new Integer(zenModeConfig.user));
     }
 
-    public final void evaluateRule(ZenModeConfig.ZenRule zenRule, ArraySet arraySet, ComponentName componentName, boolean z, boolean z2) {
+    public final void evaluateRule(
+            ZenModeConfig.ZenRule zenRule,
+            ArraySet arraySet,
+            ComponentName componentName,
+            boolean z,
+            boolean z2) {
         Uri uri;
         IConditionProvider iConditionProvider;
-        if (zenRule == null || (uri = zenRule.conditionId) == null || zenRule.configurationActivity != null) {
+        if (zenRule == null
+                || (uri = zenRule.conditionId) == null
+                || zenRule.configurationActivity != null) {
             return;
         }
         Iterator it = this.mConditionProviders.mSystemConditionProviders.iterator();
@@ -97,12 +108,20 @@ public final class ZenModeConditions implements ConditionProviders.Callback {
         boolean z4 = false;
         boolean z5 = true;
         while (it.hasNext()) {
-            SystemConditionProviderService systemConditionProviderService = (SystemConditionProviderService) it.next();
+            SystemConditionProviderService systemConditionProviderService =
+                    (SystemConditionProviderService) it.next();
             if (systemConditionProviderService.isValidConditionId(uri)) {
-                if (systemConditionProviderService.getComponent().getClassName().equals("com.android.server.notification.ScheduleConditionProvider") && z) {
+                if (systemConditionProviderService
+                                .getComponent()
+                                .getClassName()
+                                .equals("com.android.server.notification.ScheduleConditionProvider")
+                        && z) {
                     ZenModeConfig config = this.mHelper.getConfig();
                     String str = zenRule.id;
-                    if (str == null || !str.equals("EVERY_NIGHT_DEFAULT_RULE") || config.automaticRules.size() != 1 || zenRule.enabled) {
+                    if (str == null
+                            || !str.equals("EVERY_NIGHT_DEFAULT_RULE")
+                            || config.automaticRules.size() != 1
+                            || zenRule.enabled) {
                         z5 = systemConditionProviderService.isScheduleEnabled();
                         systemConditionProviderService.onScheduleEnabled(true);
                     } else {
@@ -110,7 +129,10 @@ public final class ZenModeConditions implements ConditionProviders.Callback {
                         systemConditionProviderService.onScheduleEnabled(false);
                     }
                 }
-                this.mConditionProviders.ensureRecordExists(systemConditionProviderService.getComponent(), uri, systemConditionProviderService.asInterface());
+                this.mConditionProviders.ensureRecordExists(
+                        systemConditionProviderService.getComponent(),
+                        uri,
+                        systemConditionProviderService.asInterface());
                 zenRule.component = systemConditionProviderService.getComponent();
                 z4 = true;
             }
@@ -123,7 +145,8 @@ public final class ZenModeConditions implements ConditionProviders.Callback {
             } else {
                 Iterator it2 = ((ArrayList) conditionProviders.getServices()).iterator();
                 while (it2.hasNext()) {
-                    ManagedServices.ManagedServiceInfo managedServiceInfo = (ManagedServices.ManagedServiceInfo) it2.next();
+                    ManagedServices.ManagedServiceInfo managedServiceInfo =
+                            (ManagedServices.ManagedServiceInfo) it2.next();
                     if (componentName2.equals(managedServiceInfo.component)) {
                         iConditionProvider = managedServiceInfo.service;
                         break;
@@ -139,12 +162,15 @@ public final class ZenModeConditions implements ConditionProviders.Callback {
                 Log.d("ZenModeHelper", sb.toString());
             }
             if (iConditionProvider != null) {
-                this.mConditionProviders.ensureRecordExists(zenRule.component, uri, iConditionProvider);
+                this.mConditionProviders.ensureRecordExists(
+                        zenRule.component, uri, iConditionProvider);
             }
         }
         if (zenRule.component == null && zenRule.enabler == null) {
             if (!android.app.Flags.modesUi() || (android.app.Flags.modesUi() && !z2)) {
-                Log.w("ZenModeHelper", "No component found for automatic rule: " + zenRule.conditionId);
+                Log.w(
+                        "ZenModeHelper",
+                        "No component found for automatic rule: " + zenRule.conditionId);
                 zenRule.enabled = false;
                 return;
             }
@@ -161,9 +187,12 @@ public final class ZenModeConditions implements ConditionProviders.Callback {
             Uri uri2 = zenRule.conditionId;
             synchronized (conditionProviders2.mMutex) {
                 try {
-                    ConditionProviders.ConditionRecord recordLocked = conditionProviders2.getRecordLocked(uri2, componentName3, false);
+                    ConditionProviders.ConditionRecord recordLocked =
+                            conditionProviders2.getRecordLocked(uri2, componentName3, false);
                     if (recordLocked == null) {
-                        Slog.w(conditionProviders2.TAG, "Unable to subscribe to " + componentName3 + " " + uri2);
+                        Slog.w(
+                                conditionProviders2.TAG,
+                                "Unable to subscribe to " + componentName3 + " " + uri2);
                         z3 = false;
                     } else if (!recordLocked.subscribed || !z5) {
                         conditionProviders2.subscribeLocked(recordLocked);
@@ -193,7 +222,8 @@ public final class ZenModeConditions implements ConditionProviders.Callback {
         if (uri3 != null) {
             synchronized (conditionProviders3.mMutex) {
                 try {
-                    ConditionProviders.ConditionRecord recordLocked2 = conditionProviders3.getRecordLocked(uri3, componentName4, false);
+                    ConditionProviders.ConditionRecord recordLocked2 =
+                            conditionProviders3.getRecordLocked(uri3, componentName4, false);
                     r1 = recordLocked2 != null ? recordLocked2.condition : null;
                 } finally {
                 }

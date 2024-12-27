@@ -1,7 +1,9 @@
 package com.android.server.enterprise.threatdefense;
 
 import android.util.Log;
+
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -141,7 +143,9 @@ public final class RUFSPolicy {
             android.util.Log.i(r0, r7)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.threatdefense.RUFSPolicy.<init>(java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.threatdefense.RUFSPolicy.<init>(java.lang.String):void");
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -173,7 +177,10 @@ public final class RUFSPolicy {
                 try {
                     fileInputStream = new FileInputStream((String) e);
                     try {
-                        e = new BufferedReader(new InputStreamReader(fileInputStream, StandardCharsets.UTF_8));
+                        e =
+                                new BufferedReader(
+                                        new InputStreamReader(
+                                                fileInputStream, StandardCharsets.UTF_8));
                     } catch (FileNotFoundException e2) {
                         e = e2;
                         e = 0;
@@ -208,7 +215,8 @@ public final class RUFSPolicy {
                     fileInputStream = null;
                 }
                 try {
-                    String str2 = (String) e.lines().collect(Collectors.joining(System.lineSeparator()));
+                    String str2 =
+                            (String) e.lines().collect(Collectors.joining(System.lineSeparator()));
                     try {
                         e.close();
                         fileInputStream.close();
@@ -283,9 +291,18 @@ public final class RUFSPolicy {
                     String str3 = (String) it.next();
                     Log.i("RUFSPolicy", "exception list : " + str3);
                     String[] split = str3.split(":");
-                    if (split.length > 1 && (str2 = this.mPackageName) != null && str2.equals(split[0])) {
+                    if (split.length > 1
+                            && (str2 = this.mPackageName) != null
+                            && str2.equals(split[0])) {
                         i = Integer.parseInt(split[1]);
-                        Log.d("RUFSPolicy", "Exception package : " + split[0] + " version : " + split[1] + "==" + i);
+                        Log.d(
+                                "RUFSPolicy",
+                                "Exception package : "
+                                        + split[0]
+                                        + " version : "
+                                        + split[1]
+                                        + "=="
+                                        + i);
                         break;
                     }
                 }

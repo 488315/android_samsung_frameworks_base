@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
+
 import com.android.internal.R;
 import com.android.internal.policy.PhoneWindow;
 
@@ -40,7 +41,8 @@ public class SemUiSupportService extends Service implements Window.Callback, Key
         this.mContext = this;
         try {
             PackageManager packageManager = getPackageManager();
-            if (packageManager != null && (appInfo = packageManager.getApplicationInfo(getPackageName(), 0)) != null) {
+            if (packageManager != null
+                    && (appInfo = packageManager.getApplicationInfo(getPackageName(), 0)) != null) {
                 this.mContext = new ContextThemeWrapper(this, appInfo.theme);
                 Log.i(TAG, "loaded theme = " + appInfo.theme);
             }
@@ -151,7 +153,9 @@ public class SemUiSupportService extends Service implements Window.Callback, Key
 
     public WindowManager.LayoutParams createLayoutParams() {
         Log.i(TAG, "createLayoutParams");
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams(2002, R.string.config_deviceSpecificAudioService, -3);
+        WindowManager.LayoutParams lp =
+                new WindowManager.LayoutParams(
+                        2002, R.string.config_deviceSpecificAudioService, -3);
         lp.privateFlags |= 16;
         lp.softInputMode = 32;
         lp.setTitle(getClass().getName());
@@ -191,7 +195,8 @@ public class SemUiSupportService extends Service implements Window.Callback, Key
         if (this.mWindow.superDispatchKeyEvent(event)) {
             return true;
         }
-        return event.dispatch(this, this.mDecor != null ? this.mDecor.getKeyDispatcherState() : null, this);
+        return event.dispatch(
+                this, this.mDecor != null ? this.mDecor.getKeyDispatcherState() : null, this);
     }
 
     @Override // android.view.Window.Callback
@@ -245,28 +250,22 @@ public class SemUiSupportService extends Service implements Window.Callback, Key
     }
 
     @Override // android.view.Window.Callback
-    public void onWindowAttributesChanged(WindowManager.LayoutParams attrs) {
-    }
+    public void onWindowAttributesChanged(WindowManager.LayoutParams attrs) {}
 
     @Override // android.view.Window.Callback
-    public void onContentChanged() {
-    }
+    public void onContentChanged() {}
 
     @Override // android.view.Window.Callback
-    public void onWindowFocusChanged(boolean hasFocus) {
-    }
+    public void onWindowFocusChanged(boolean hasFocus) {}
 
     @Override // android.view.Window.Callback
-    public void onAttachedToWindow() {
-    }
+    public void onAttachedToWindow() {}
 
     @Override // android.view.Window.Callback
-    public void onDetachedFromWindow() {
-    }
+    public void onDetachedFromWindow() {}
 
     @Override // android.view.Window.Callback
-    public void onPanelClosed(int featureId, Menu menu) {
-    }
+    public void onPanelClosed(int featureId, Menu menu) {}
 
     @Override // android.view.Window.Callback
     public boolean onSearchRequested() {
@@ -289,10 +288,8 @@ public class SemUiSupportService extends Service implements Window.Callback, Key
     }
 
     @Override // android.view.Window.Callback
-    public void onActionModeStarted(ActionMode mode) {
-    }
+    public void onActionModeStarted(ActionMode mode) {}
 
     @Override // android.view.Window.Callback
-    public void onActionModeFinished(ActionMode mode) {
-    }
+    public void onActionModeFinished(ActionMode mode) {}
 }

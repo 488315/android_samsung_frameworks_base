@@ -11,8 +11,7 @@ public final class ActiveSourceAction extends HdmiCecFeatureAction {
     }
 
     @Override // com.android.server.hdmi.HdmiCecFeatureAction
-    public final void handleTimerEvent(int i) {
-    }
+    public final void handleTimerEvent(int i) {}
 
     @Override // com.android.server.hdmi.HdmiCecFeatureAction
     public final boolean processCommand(HdmiCecMessage hdmiCecMessage) {
@@ -25,14 +24,20 @@ public final class ActiveSourceAction extends HdmiCecFeatureAction {
         int sourceAddress = getSourceAddress();
         HdmiCecLocalDevice hdmiCecLocalDevice = this.mSource;
         int physicalAddress = hdmiCecLocalDevice.getDeviceInfo().getPhysicalAddress();
-        HdmiCecMessage buildActiveSource = HdmiCecMessageBuilder.buildActiveSource(sourceAddress, physicalAddress);
+        HdmiCecMessage buildActiveSource =
+                HdmiCecMessageBuilder.buildActiveSource(sourceAddress, physicalAddress);
         HdmiControlService hdmiControlService = this.mService;
         hdmiControlService.sendCecCommand(buildActiveSource, null);
-        HdmiCecLocalDeviceSource hdmiCecLocalDeviceSource = (HdmiCecLocalDeviceSource) hdmiCecLocalDevice;
+        HdmiCecLocalDeviceSource hdmiCecLocalDeviceSource =
+                (HdmiCecLocalDeviceSource) hdmiCecLocalDevice;
         if (hdmiCecLocalDeviceSource.mDeviceType == 4) {
-            hdmiControlService.sendCecCommand(HdmiCecMessage.build(sourceAddress, this.mDestination, 142, new byte[]{(byte) 0}), null);
+            hdmiControlService.sendCecCommand(
+                    HdmiCecMessage.build(
+                            sourceAddress, this.mDestination, 142, new byte[] {(byte) 0}),
+                    null);
         }
-        hdmiCecLocalDeviceSource.setActiveSource(sourceAddress, physicalAddress, "ActiveSourceAction");
+        hdmiCecLocalDeviceSource.setActiveSource(
+                sourceAddress, physicalAddress, "ActiveSourceAction");
         this.mState = 2;
         finish(true);
     }

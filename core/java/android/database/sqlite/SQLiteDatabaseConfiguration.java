@@ -3,6 +3,7 @@ package android.database.sqlite;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Pair;
+
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.function.BinaryOperator;
@@ -29,7 +30,8 @@ public final class SQLiteDatabaseConfiguration {
     public boolean shouldTruncateWalFile;
     public String syncMode;
     public final ArrayMap<String, UnaryOperator<String>> customScalarFunctions = new ArrayMap<>();
-    public final ArrayMap<String, BinaryOperator<String>> customAggregateFunctions = new ArrayMap<>();
+    public final ArrayMap<String, BinaryOperator<String>> customAggregateFunctions =
+            new ArrayMap<>();
     public final ArrayList<Pair<String, Object[]>> perConnectionSql = new ArrayList<>();
     public int lookasideSlotSize = -1;
     public int lookasideSlotCount = -1;
@@ -72,16 +74,21 @@ public final class SQLiteDatabaseConfiguration {
             throw new IllegalArgumentException("other must not be null.");
         }
         if (!this.path.equals(other.path)) {
-            throw new IllegalArgumentException("other configuration must refer to the same database.");
+            throw new IllegalArgumentException(
+                    "other configuration must refer to the same database.");
         }
         this.openFlags = other.openFlags;
         this.maxSqlCacheSize = other.maxSqlCacheSize;
         this.locale = other.locale;
         this.foreignKeyConstraintsEnabled = other.foreignKeyConstraintsEnabled;
         this.customScalarFunctions.clear();
-        this.customScalarFunctions.putAll((ArrayMap<? extends String, ? extends UnaryOperator<String>>) other.customScalarFunctions);
+        this.customScalarFunctions.putAll(
+                (ArrayMap<? extends String, ? extends UnaryOperator<String>>)
+                        other.customScalarFunctions);
         this.customAggregateFunctions.clear();
-        this.customAggregateFunctions.putAll((ArrayMap<? extends String, ? extends BinaryOperator<String>>) other.customAggregateFunctions);
+        this.customAggregateFunctions.putAll(
+                (ArrayMap<? extends String, ? extends BinaryOperator<String>>)
+                        other.customAggregateFunctions);
         this.perConnectionSql.clear();
         this.perConnectionSql.addAll(other.perConnectionSql);
         this.lookasideSlotSize = other.lookasideSlotSize;
@@ -105,7 +112,9 @@ public final class SQLiteDatabaseConfiguration {
     }
 
     boolean isLegacyCompatibilityWalEnabled() {
-        return this.journalMode == null && this.syncMode == null && (this.openFlags & Integer.MIN_VALUE) != 0;
+        return this.journalMode == null
+                && this.syncMode == null
+                && (this.openFlags & Integer.MIN_VALUE) != 0;
     }
 
     private static String stripPathForLogs(String path) {
@@ -131,7 +140,9 @@ public final class SQLiteDatabaseConfiguration {
         }
         this.shouldTruncateWalFile = false;
         if (!isWalEnabledInternal()) {
-            return this.journalMode != null ? this.journalMode : SQLiteGlobal.getDefaultJournalMode();
+            return this.journalMode != null
+                    ? this.journalMode
+                    : SQLiteGlobal.getDefaultJournalMode();
         }
         this.shouldTruncateWalFile = true;
         return SQLiteDatabase.JOURNAL_MODE_WAL;
@@ -165,7 +176,8 @@ public final class SQLiteDatabaseConfiguration {
         if (walEnabled || isCompatibilityWalEnabled) {
             return true;
         }
-        return this.journalMode != null && this.journalMode.equalsIgnoreCase(SQLiteDatabase.JOURNAL_MODE_WAL);
+        return this.journalMode != null
+                && this.journalMode.equalsIgnoreCase(SQLiteDatabase.JOURNAL_MODE_WAL);
     }
 
     public boolean isQueryCollectDb() {

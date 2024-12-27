@@ -2,7 +2,9 @@ package android.content.integrity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.nio.charset.StandardCharsets;
@@ -29,12 +31,10 @@ public abstract class AtomicFormula extends IntegrityFormula {
     private final int mKey;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Key {
-    }
+    public @interface Key {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Operator {
-    }
+    public @interface Operator {}
 
     public AtomicFormula(int key) {
         Preconditions.checkArgument(isValidKey(key), "Unknown key: %d", Integer.valueOf(key));
@@ -42,33 +42,38 @@ public abstract class AtomicFormula extends IntegrityFormula {
     }
 
     public static final class LongAtomicFormula extends AtomicFormula implements Parcelable {
-        public static final Parcelable.Creator<LongAtomicFormula> CREATOR = new Parcelable.Creator<LongAtomicFormula>() { // from class: android.content.integrity.AtomicFormula.LongAtomicFormula.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public LongAtomicFormula createFromParcel(Parcel in) {
-                return new LongAtomicFormula(in);
-            }
+        public static final Parcelable.Creator<LongAtomicFormula> CREATOR =
+                new Parcelable.Creator<LongAtomicFormula>() { // from class:
+                    // android.content.integrity.AtomicFormula.LongAtomicFormula.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public LongAtomicFormula createFromParcel(Parcel in) {
+                        return new LongAtomicFormula(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public LongAtomicFormula[] newArray(int size) {
-                return new LongAtomicFormula[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public LongAtomicFormula[] newArray(int size) {
+                        return new LongAtomicFormula[size];
+                    }
+                };
         private final Integer mOperator;
         private final Long mValue;
 
         public LongAtomicFormula(int key) {
             super(key);
-            Preconditions.checkArgument(key == 4, "Key %s cannot be used with LongAtomicFormula", keyToString(key));
+            Preconditions.checkArgument(
+                    key == 4, "Key %s cannot be used with LongAtomicFormula", keyToString(key));
             this.mValue = null;
             this.mOperator = null;
         }
 
         public LongAtomicFormula(int key, int operator, long value) {
             super(key);
-            Preconditions.checkArgument(key == 4, "Key %s cannot be used with LongAtomicFormula", keyToString(key));
-            Preconditions.checkArgument(isValidOperator(operator), "Unknown operator: %d", Integer.valueOf(operator));
+            Preconditions.checkArgument(
+                    key == 4, "Key %s cannot be used with LongAtomicFormula", keyToString(key));
+            Preconditions.checkArgument(
+                    isValidOperator(operator), "Unknown operator: %d", Integer.valueOf(operator));
             this.mOperator = Integer.valueOf(operator);
             this.mValue = Long.valueOf(value);
         }
@@ -98,7 +103,8 @@ public abstract class AtomicFormula extends IntegrityFormula {
                 case 2:
                     return metadataValue >= this.mValue.longValue();
                 default:
-                    throw new IllegalArgumentException(String.format("Unexpected operator %d", this.mOperator));
+                    throw new IllegalArgumentException(
+                            String.format("Unexpected operator %d", this.mOperator));
             }
         }
 
@@ -121,7 +127,11 @@ public abstract class AtomicFormula extends IntegrityFormula {
             if (this.mValue == null || this.mOperator == null) {
                 return String.format("(%s)", keyToString(getKey()));
             }
-            return String.format("(%s %s %s)", keyToString(getKey()), operatorToString(this.mOperator.intValue()), this.mValue);
+            return String.format(
+                    "(%s %s %s)",
+                    keyToString(getKey()),
+                    operatorToString(this.mOperator.intValue()),
+                    this.mValue);
         }
 
         public boolean equals(Object o) {
@@ -132,7 +142,9 @@ public abstract class AtomicFormula extends IntegrityFormula {
                 return false;
             }
             LongAtomicFormula that = (LongAtomicFormula) o;
-            if (getKey() == that.getKey() && Objects.equals(this.mValue, that.mValue) && Objects.equals(this.mOperator, that.mOperator)) {
+            if (getKey() == that.getKey()
+                    && Objects.equals(this.mValue, that.mValue)
+                    && Objects.equals(this.mOperator, that.mOperator)) {
                 return true;
             }
             return false;
@@ -180,19 +192,21 @@ public abstract class AtomicFormula extends IntegrityFormula {
     }
 
     public static final class StringAtomicFormula extends AtomicFormula implements Parcelable {
-        public static final Parcelable.Creator<StringAtomicFormula> CREATOR = new Parcelable.Creator<StringAtomicFormula>() { // from class: android.content.integrity.AtomicFormula.StringAtomicFormula.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public StringAtomicFormula createFromParcel(Parcel in) {
-                return new StringAtomicFormula(in);
-            }
+        public static final Parcelable.Creator<StringAtomicFormula> CREATOR =
+                new Parcelable.Creator<StringAtomicFormula>() { // from class:
+                    // android.content.integrity.AtomicFormula.StringAtomicFormula.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public StringAtomicFormula createFromParcel(Parcel in) {
+                        return new StringAtomicFormula(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public StringAtomicFormula[] newArray(int size) {
-                return new StringAtomicFormula[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public StringAtomicFormula[] newArray(int size) {
+                        return new StringAtomicFormula[size];
+                    }
+                };
         private final Boolean mIsHashedValue;
         private final String mValue;
 
@@ -202,7 +216,8 @@ public abstract class AtomicFormula extends IntegrityFormula {
             if (key != 0 && key != 1 && key != 3 && key != 2 && key != 7 && key != 8) {
                 z = false;
             }
-            Preconditions.checkArgument(z, "Key %s cannot be used with StringAtomicFormula", keyToString(key));
+            Preconditions.checkArgument(
+                    z, "Key %s cannot be used with StringAtomicFormula", keyToString(key));
             this.mValue = null;
             this.mIsHashedValue = null;
         }
@@ -213,16 +228,26 @@ public abstract class AtomicFormula extends IntegrityFormula {
             if (key != 0 && key != 1 && key != 3 && key != 2 && key != 7 && key != 8) {
                 z = false;
             }
-            Preconditions.checkArgument(z, "Key %s cannot be used with StringAtomicFormula", keyToString(key));
+            Preconditions.checkArgument(
+                    z, "Key %s cannot be used with StringAtomicFormula", keyToString(key));
             this.mValue = value;
             this.mIsHashedValue = Boolean.valueOf(isHashed);
         }
 
         public StringAtomicFormula(int key, String value) {
             super(key);
-            Preconditions.checkArgument(key == 0 || key == 1 || key == 3 || key == 2 || key == 7 || key == 8, "Key %s cannot be used with StringAtomicFormula", keyToString(key));
+            Preconditions.checkArgument(
+                    key == 0 || key == 1 || key == 3 || key == 2 || key == 7 || key == 8,
+                    "Key %s cannot be used with StringAtomicFormula",
+                    keyToString(key));
             this.mValue = hashValue(key, value);
-            this.mIsHashedValue = Boolean.valueOf(key == 1 || key == 3 || key == 7 || key == 8 || !this.mValue.equals(value));
+            this.mIsHashedValue =
+                    Boolean.valueOf(
+                            key == 1
+                                    || key == 3
+                                    || key == 7
+                                    || key == 8
+                                    || !this.mValue.equals(value));
         }
 
         StringAtomicFormula(Parcel in) {
@@ -263,7 +288,8 @@ public abstract class AtomicFormula extends IntegrityFormula {
             if (this.mValue == null || this.mIsHashedValue == null) {
                 return String.format("(%s)", keyToString(getKey()));
             }
-            return String.format("(%s %s %s)", keyToString(getKey()), operatorToString(0), this.mValue);
+            return String.format(
+                    "(%s %s %s)", keyToString(getKey()), operatorToString(0), this.mValue);
         }
 
         public boolean equals(Object o) {
@@ -307,7 +333,8 @@ public abstract class AtomicFormula extends IntegrityFormula {
             return this.mIsHashedValue;
         }
 
-        private static List<String> getMetadataValue(AppInstallMetadata appInstallMetadata, int key) {
+        private static List<String> getMetadataValue(
+                AppInstallMetadata appInstallMetadata, int key) {
             switch (key) {
                 case 0:
                     return Collections.singletonList(appInstallMetadata.getPackageName());
@@ -321,7 +348,8 @@ public abstract class AtomicFormula extends IntegrityFormula {
                 case 5:
                 case 6:
                 default:
-                    throw new IllegalStateException("Unexpected key in StringAtomicFormula: " + key);
+                    throw new IllegalStateException(
+                            "Unexpected key in StringAtomicFormula: " + key);
                 case 7:
                     return Collections.singletonList(appInstallMetadata.getStampCertificateHash());
                 case 8:
@@ -348,30 +376,38 @@ public abstract class AtomicFormula extends IntegrityFormula {
     }
 
     public static final class BooleanAtomicFormula extends AtomicFormula implements Parcelable {
-        public static final Parcelable.Creator<BooleanAtomicFormula> CREATOR = new Parcelable.Creator<BooleanAtomicFormula>() { // from class: android.content.integrity.AtomicFormula.BooleanAtomicFormula.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BooleanAtomicFormula createFromParcel(Parcel in) {
-                return new BooleanAtomicFormula(in);
-            }
+        public static final Parcelable.Creator<BooleanAtomicFormula> CREATOR =
+                new Parcelable.Creator<BooleanAtomicFormula>() { // from class:
+                    // android.content.integrity.AtomicFormula.BooleanAtomicFormula.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BooleanAtomicFormula createFromParcel(Parcel in) {
+                        return new BooleanAtomicFormula(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public BooleanAtomicFormula[] newArray(int size) {
-                return new BooleanAtomicFormula[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public BooleanAtomicFormula[] newArray(int size) {
+                        return new BooleanAtomicFormula[size];
+                    }
+                };
         private final Boolean mValue;
 
         public BooleanAtomicFormula(int key) {
             super(key);
-            Preconditions.checkArgument(key == 5 || key == 6, String.format("Key %s cannot be used with BooleanAtomicFormula", keyToString(key)));
+            Preconditions.checkArgument(
+                    key == 5 || key == 6,
+                    String.format(
+                            "Key %s cannot be used with BooleanAtomicFormula", keyToString(key)));
             this.mValue = null;
         }
 
         public BooleanAtomicFormula(int key, boolean value) {
             super(key);
-            Preconditions.checkArgument(key == 5 || key == 6, String.format("Key %s cannot be used with BooleanAtomicFormula", keyToString(key)));
+            Preconditions.checkArgument(
+                    key == 5 || key == 6,
+                    String.format(
+                            "Key %s cannot be used with BooleanAtomicFormula", keyToString(key)));
             this.mValue = Boolean.valueOf(value);
         }
 
@@ -387,7 +423,9 @@ public abstract class AtomicFormula extends IntegrityFormula {
 
         @Override // android.content.integrity.IntegrityFormula
         public boolean matches(AppInstallMetadata appInstallMetadata) {
-            return this.mValue != null && getBooleanMetadataValue(appInstallMetadata, getKey()) == this.mValue.booleanValue();
+            return this.mValue != null
+                    && getBooleanMetadataValue(appInstallMetadata, getKey())
+                            == this.mValue.booleanValue();
         }
 
         @Override // android.content.integrity.IntegrityFormula
@@ -409,7 +447,8 @@ public abstract class AtomicFormula extends IntegrityFormula {
             if (this.mValue == null) {
                 return String.format("(%s)", keyToString(getKey()));
             }
-            return String.format("(%s %s %s)", keyToString(getKey()), operatorToString(0), this.mValue);
+            return String.format(
+                    "(%s %s %s)", keyToString(getKey()), operatorToString(0), this.mValue);
         }
 
         public boolean equals(Object o) {
@@ -448,14 +487,16 @@ public abstract class AtomicFormula extends IntegrityFormula {
             return this.mValue;
         }
 
-        private static boolean getBooleanMetadataValue(AppInstallMetadata appInstallMetadata, int key) {
+        private static boolean getBooleanMetadataValue(
+                AppInstallMetadata appInstallMetadata, int key) {
             switch (key) {
                 case 5:
                     return appInstallMetadata.isPreInstalled();
                 case 6:
                     return appInstallMetadata.isStampTrusted();
                 default:
-                    throw new IllegalStateException("Unexpected key in BooleanAtomicFormula: " + key);
+                    throw new IllegalStateException(
+                            "Unexpected key in BooleanAtomicFormula: " + key);
             }
         }
     }
@@ -503,6 +544,7 @@ public abstract class AtomicFormula extends IntegrityFormula {
     }
 
     private static boolean isValidKey(int key) {
-        return key == 0 || key == 1 || key == 4 || key == 2 || key == 3 || key == 5 || key == 6 || key == 7 || key == 8;
+        return key == 0 || key == 1 || key == 4 || key == 2 || key == 3 || key == 5 || key == 6
+                || key == 7 || key == 8;
     }
 }

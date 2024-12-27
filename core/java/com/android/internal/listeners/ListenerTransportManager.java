@@ -2,7 +2,7 @@ package com.android.internal.listeners;
 
 import android.os.RemoteException;
 import android.util.ArrayMap;
-import com.android.internal.listeners.ListenerTransport;
+
 import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -61,7 +61,8 @@ public abstract class ListenerTransportManager<TTransport extends ListenerTransp
         }
     }
 
-    protected void registerTransport(TTransport transport, TTransport oldTransport) throws RemoteException {
+    protected void registerTransport(TTransport transport, TTransport oldTransport)
+            throws RemoteException {
         registerTransport(transport);
         try {
             unregisterTransport(oldTransport);

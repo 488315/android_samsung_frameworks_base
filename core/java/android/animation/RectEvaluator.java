@@ -6,8 +6,7 @@ import android.graphics.Rect;
 public class RectEvaluator implements TypeEvaluator<Rect> {
     private Rect mRect;
 
-    public RectEvaluator() {
-    }
+    public RectEvaluator() {}
 
     public RectEvaluator(Rect reuseRect) {
         this.mRect = reuseRect;

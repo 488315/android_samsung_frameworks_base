@@ -9,20 +9,21 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IInjectRecognitionEvent extends IInterface {
-    public static final String DESCRIPTOR = "android.media.soundtrigger_middleware.IInjectRecognitionEvent";
+    public static final String DESCRIPTOR =
+            "android.media.soundtrigger_middleware.IInjectRecognitionEvent";
 
     void triggerAbortRecognition() throws RemoteException;
 
-    void triggerRecognitionEvent(byte[] bArr, PhraseRecognitionExtra[] phraseRecognitionExtraArr) throws RemoteException;
+    void triggerRecognitionEvent(byte[] bArr, PhraseRecognitionExtra[] phraseRecognitionExtraArr)
+            throws RemoteException;
 
     public static class Default implements IInjectRecognitionEvent {
         @Override // android.media.soundtrigger_middleware.IInjectRecognitionEvent
-        public void triggerRecognitionEvent(byte[] data, PhraseRecognitionExtra[] phraseExtras) throws RemoteException {
-        }
+        public void triggerRecognitionEvent(byte[] data, PhraseRecognitionExtra[] phraseExtras)
+                throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.IInjectRecognitionEvent
-        public void triggerAbortRecognition() throws RemoteException {
-        }
+        public void triggerAbortRecognition() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +31,7 @@ public interface IInjectRecognitionEvent extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInjectRecognitionEvent {
+    public abstract static class Stub extends Binder implements IInjectRecognitionEvent {
         static final int TRANSACTION_triggerAbortRecognition = 2;
         static final int TRANSACTION_triggerRecognitionEvent = 1;
 
@@ -55,7 +56,8 @@ public interface IInjectRecognitionEvent extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInjectRecognitionEvent.DESCRIPTOR);
             }
@@ -66,7 +68,9 @@ public interface IInjectRecognitionEvent extends IInterface {
             switch (code) {
                 case 1:
                     byte[] _arg0 = data.createByteArray();
-                    PhraseRecognitionExtra[] _arg1 = (PhraseRecognitionExtra[]) data.createTypedArray(PhraseRecognitionExtra.CREATOR);
+                    PhraseRecognitionExtra[] _arg1 =
+                            (PhraseRecognitionExtra[])
+                                    data.createTypedArray(PhraseRecognitionExtra.CREATOR);
                     data.enforceNoDataAvail();
                     triggerRecognitionEvent(_arg0, _arg1);
                     return true;
@@ -95,7 +99,8 @@ public interface IInjectRecognitionEvent extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.IInjectRecognitionEvent
-            public void triggerRecognitionEvent(byte[] data, PhraseRecognitionExtra[] phraseExtras) throws RemoteException {
+            public void triggerRecognitionEvent(byte[] data, PhraseRecognitionExtra[] phraseExtras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInjectRecognitionEvent.DESCRIPTOR);

@@ -11,12 +11,13 @@ import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Log;
-import com.sec.rll.IExtControlDeviceService;
+
 import java.lang.reflect.Method;
 
 /* loaded from: classes6.dex */
 public class ExtControlDeviceService extends IExtControlDeviceService.Stub {
-    private static final String ACTION_NFC_POLICY_CHANGED = "com.sec.android.intent.action.NFC_POLICY_CHANGED";
+    private static final String ACTION_NFC_POLICY_CHANGED =
+            "com.sec.android.intent.action.NFC_POLICY_CHANGED";
     private static final boolean DEBUG = isENGDevice();
     private static final int DEVICE_GPS = 4097;
     private static final int DEVICE_NFC = 8193;
@@ -55,7 +56,9 @@ public class ExtControlDeviceService extends IExtControlDeviceService.Stub {
         if (deviceType == 4097) {
             Log.e(TAG, "Set gps state called with state : " + status);
             Binder.clearCallingIdentity();
-            int currentMode = Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, 0);
+            int currentMode =
+                    Settings.Secure.getInt(
+                            mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, 0);
             int mode = 3;
             switch (currentMode) {
                 case 0:
@@ -91,7 +94,8 @@ public class ExtControlDeviceService extends IExtControlDeviceService.Stub {
                         break;
                     }
             }
-            Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, mode);
+            Settings.Secure.putInt(
+                    mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, mode);
             return;
         }
         if (deviceType == 8193) {
@@ -101,7 +105,8 @@ public class ExtControlDeviceService extends IExtControlDeviceService.Stub {
     }
 
     private static void setNfcState(int state) {
-        boolean isGpFelicaSupported = mContext.getPackageManager().hasSystemFeature("com.samsung.android.nfc.gpfelica");
+        boolean isGpFelicaSupported =
+                mContext.getPackageManager().hasSystemFeature("com.samsung.android.nfc.gpfelica");
         if (isGpFelicaSupported && state == 0) {
             SystemProperties.set(PROPERTY_NFC_LOCKOUT, Integer.toString(state));
             Intent nfcIntent = new Intent(ACTION_NFC_POLICY_CHANGED);
@@ -117,7 +122,8 @@ public class ExtControlDeviceService extends IExtControlDeviceService.Stub {
 
     private static boolean setLocationMode(int mode) {
         Binder.clearCallingIdentity();
-        return Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, mode);
+        return Settings.Secure.putInt(
+                mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, mode);
     }
 
     private boolean isAccessPermitted() {
@@ -152,8 +158,16 @@ public class ExtControlDeviceService extends IExtControlDeviceService.Stub {
         }
         if (deviceType == 4097) {
             Binder.clearCallingIdentity();
-            Log.e(TAG, "get gps state called return value  : " + Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, 0));
-            int currentMode = Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, 0);
+            Log.e(
+                    TAG,
+                    "get gps state called return value  : "
+                            + Settings.Secure.getInt(
+                                    mContext.getContentResolver(),
+                                    Settings.Secure.LOCATION_MODE,
+                                    0));
+            int currentMode =
+                    Settings.Secure.getInt(
+                            mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, 0);
             return (currentMode == 3 || currentMode == 1) ? 1 : 0;
         }
         if (deviceType != 8193) {

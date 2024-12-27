@@ -77,14 +77,19 @@ public final class RggbChannelVector {
             return false;
         }
         RggbChannelVector other = (RggbChannelVector) obj;
-        if (this.mRed != other.mRed || this.mGreenEven != other.mGreenEven || this.mGreenOdd != other.mGreenOdd || this.mBlue != other.mBlue) {
+        if (this.mRed != other.mRed
+                || this.mGreenEven != other.mGreenEven
+                || this.mGreenOdd != other.mGreenOdd
+                || this.mBlue != other.mBlue) {
             return false;
         }
         return true;
     }
 
     public int hashCode() {
-        return ((Float.floatToIntBits(this.mRed) ^ Float.floatToIntBits(this.mGreenEven)) ^ Float.floatToIntBits(this.mGreenOdd)) ^ Float.floatToIntBits(this.mBlue);
+        return ((Float.floatToIntBits(this.mRed) ^ Float.floatToIntBits(this.mGreenEven))
+                        ^ Float.floatToIntBits(this.mGreenOdd))
+                ^ Float.floatToIntBits(this.mBlue);
     }
 
     public String toString() {
@@ -92,6 +97,11 @@ public final class RggbChannelVector {
     }
 
     private String toShortString() {
-        return String.format("{R:%f, G_even:%f, G_odd:%f, B:%f}", Float.valueOf(this.mRed), Float.valueOf(this.mGreenEven), Float.valueOf(this.mGreenOdd), Float.valueOf(this.mBlue));
+        return String.format(
+                "{R:%f, G_even:%f, G_odd:%f, B:%f}",
+                Float.valueOf(this.mRed),
+                Float.valueOf(this.mGreenEven),
+                Float.valueOf(this.mGreenOdd),
+                Float.valueOf(this.mBlue));
     }
 }

@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.autofill.IInlineSuggestionUi;
 import android.view.SurfaceControlViewHost;
 
 /* loaded from: classes3.dex */
@@ -15,7 +14,12 @@ public interface IInlineSuggestionUiCallback extends IInterface {
 
     void onClick() throws RemoteException;
 
-    void onContent(IInlineSuggestionUi iInlineSuggestionUi, SurfaceControlViewHost.SurfacePackage surfacePackage, int i, int i2) throws RemoteException;
+    void onContent(
+            IInlineSuggestionUi iInlineSuggestionUi,
+            SurfaceControlViewHost.SurfacePackage surfacePackage,
+            int i,
+            int i2)
+            throws RemoteException;
 
     void onError() throws RemoteException;
 
@@ -27,28 +31,28 @@ public interface IInlineSuggestionUiCallback extends IInterface {
 
     public static class Default implements IInlineSuggestionUiCallback {
         @Override // android.service.autofill.IInlineSuggestionUiCallback
-        public void onClick() throws RemoteException {
-        }
+        public void onClick() throws RemoteException {}
 
         @Override // android.service.autofill.IInlineSuggestionUiCallback
-        public void onLongClick() throws RemoteException {
-        }
+        public void onLongClick() throws RemoteException {}
 
         @Override // android.service.autofill.IInlineSuggestionUiCallback
-        public void onContent(IInlineSuggestionUi content, SurfaceControlViewHost.SurfacePackage surface, int width, int height) throws RemoteException {
-        }
+        public void onContent(
+                IInlineSuggestionUi content,
+                SurfaceControlViewHost.SurfacePackage surface,
+                int width,
+                int height)
+                throws RemoteException {}
 
         @Override // android.service.autofill.IInlineSuggestionUiCallback
-        public void onError() throws RemoteException {
-        }
+        public void onError() throws RemoteException {}
 
         @Override // android.service.autofill.IInlineSuggestionUiCallback
-        public void onTransferTouchFocusToImeWindow(IBinder sourceInputToken, int displayId) throws RemoteException {
-        }
+        public void onTransferTouchFocusToImeWindow(IBinder sourceInputToken, int displayId)
+                throws RemoteException {}
 
         @Override // android.service.autofill.IInlineSuggestionUiCallback
-        public void onStartIntentSender(IntentSender intentSender) throws RemoteException {
-        }
+        public void onStartIntentSender(IntentSender intentSender) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -56,7 +60,7 @@ public interface IInlineSuggestionUiCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInlineSuggestionUiCallback {
+    public abstract static class Stub extends Binder implements IInlineSuggestionUiCallback {
         static final int TRANSACTION_onClick = 1;
         static final int TRANSACTION_onContent = 3;
         static final int TRANSACTION_onError = 4;
@@ -109,7 +113,8 @@ public interface IInlineSuggestionUiCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInlineSuggestionUiCallback.DESCRIPTOR);
             }
@@ -125,8 +130,12 @@ public interface IInlineSuggestionUiCallback extends IInterface {
                     onLongClick();
                     return true;
                 case 3:
-                    IInlineSuggestionUi _arg0 = IInlineSuggestionUi.Stub.asInterface(data.readStrongBinder());
-                    SurfaceControlViewHost.SurfacePackage _arg1 = (SurfaceControlViewHost.SurfacePackage) data.readTypedObject(SurfaceControlViewHost.SurfacePackage.CREATOR);
+                    IInlineSuggestionUi _arg0 =
+                            IInlineSuggestionUi.Stub.asInterface(data.readStrongBinder());
+                    SurfaceControlViewHost.SurfacePackage _arg1 =
+                            (SurfaceControlViewHost.SurfacePackage)
+                                    data.readTypedObject(
+                                            SurfaceControlViewHost.SurfacePackage.CREATOR);
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
                     data.enforceNoDataAvail();
@@ -190,7 +199,12 @@ public interface IInlineSuggestionUiCallback extends IInterface {
             }
 
             @Override // android.service.autofill.IInlineSuggestionUiCallback
-            public void onContent(IInlineSuggestionUi content, SurfaceControlViewHost.SurfacePackage surface, int width, int height) throws RemoteException {
+            public void onContent(
+                    IInlineSuggestionUi content,
+                    SurfaceControlViewHost.SurfacePackage surface,
+                    int width,
+                    int height)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);
@@ -216,7 +230,8 @@ public interface IInlineSuggestionUiCallback extends IInterface {
             }
 
             @Override // android.service.autofill.IInlineSuggestionUiCallback
-            public void onTransferTouchFocusToImeWindow(IBinder sourceInputToken, int displayId) throws RemoteException {
+            public void onTransferTouchFocusToImeWindow(IBinder sourceInputToken, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInlineSuggestionUiCallback.DESCRIPTOR);

@@ -6,6 +6,7 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.misc.MiscObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
+
 import java.io.IOException;
 import java.security.PublicKey;
 import java.util.ArrayList;
@@ -48,7 +49,10 @@ public class CompositePublicKey implements PublicKey {
             v.add(SubjectPublicKeyInfo.getInstance(this.keys.get(i).getEncoded()));
         }
         try {
-            return new SubjectPublicKeyInfo(new AlgorithmIdentifier(MiscObjectIdentifiers.id_alg_composite), new DERSequence(v)).getEncoded(ASN1Encoding.DER);
+            return new SubjectPublicKeyInfo(
+                            new AlgorithmIdentifier(MiscObjectIdentifiers.id_alg_composite),
+                            new DERSequence(v))
+                    .getEncoded(ASN1Encoding.DER);
         } catch (IOException e) {
             throw new IllegalStateException("unable to encode composite key: " + e.getMessage());
         }

@@ -10,18 +10,46 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IObbBackupService extends IInterface {
-    void backupObbs(String str, ParcelFileDescriptor parcelFileDescriptor, int i, IBackupManager iBackupManager) throws RemoteException;
+    void backupObbs(
+            String str,
+            ParcelFileDescriptor parcelFileDescriptor,
+            int i,
+            IBackupManager iBackupManager)
+            throws RemoteException;
 
-    void restoreObbFile(String str, ParcelFileDescriptor parcelFileDescriptor, long j, int i, String str2, long j2, long j3, int i2, IBackupManager iBackupManager) throws RemoteException;
+    void restoreObbFile(
+            String str,
+            ParcelFileDescriptor parcelFileDescriptor,
+            long j,
+            int i,
+            String str2,
+            long j2,
+            long j3,
+            int i2,
+            IBackupManager iBackupManager)
+            throws RemoteException;
 
     public static class Default implements IObbBackupService {
         @Override // com.android.internal.backup.IObbBackupService
-        public void backupObbs(String packageName, ParcelFileDescriptor data, int token, IBackupManager callbackBinder) throws RemoteException {
-        }
+        public void backupObbs(
+                String packageName,
+                ParcelFileDescriptor data,
+                int token,
+                IBackupManager callbackBinder)
+                throws RemoteException {}
 
         @Override // com.android.internal.backup.IObbBackupService
-        public void restoreObbFile(String pkgName, ParcelFileDescriptor data, long fileSize, int type, String path, long mode, long mtime, int token, IBackupManager callbackBinder) throws RemoteException {
-        }
+        public void restoreObbFile(
+                String pkgName,
+                ParcelFileDescriptor data,
+                long fileSize,
+                int type,
+                String path,
+                long mode,
+                long mtime,
+                int token,
+                IBackupManager callbackBinder)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +57,7 @@ public interface IObbBackupService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IObbBackupService {
+    public abstract static class Stub extends Binder implements IObbBackupService {
         public static final String DESCRIPTOR = "com.android.internal.backup.IObbBackupService";
         static final int TRANSACTION_backupObbs = 1;
         static final int TRANSACTION_restoreObbFile = 2;
@@ -71,7 +99,8 @@ public interface IObbBackupService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -82,7 +111,9 @@ public interface IObbBackupService extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    ParcelFileDescriptor _arg1 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg1 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     int _arg2 = data.readInt();
                     IBackupManager _arg3 = IBackupManager.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
@@ -90,7 +121,9 @@ public interface IObbBackupService extends IInterface {
                     return true;
                 case 2:
                     String _arg02 = data.readString();
-                    ParcelFileDescriptor _arg12 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg12 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg22 = data.readLong();
                     int _arg32 = data.readInt();
                     String _arg4 = data.readString();
@@ -99,7 +132,8 @@ public interface IObbBackupService extends IInterface {
                     int _arg7 = data.readInt();
                     IBackupManager _arg8 = IBackupManager.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    restoreObbFile(_arg02, _arg12, _arg22, _arg32, _arg4, _arg5, _arg6, _arg7, _arg8);
+                    restoreObbFile(
+                            _arg02, _arg12, _arg22, _arg32, _arg4, _arg5, _arg6, _arg7, _arg8);
                     return true;
                 default:
                     return super.onTransact(code, data, reply, flags);
@@ -123,7 +157,12 @@ public interface IObbBackupService extends IInterface {
             }
 
             @Override // com.android.internal.backup.IObbBackupService
-            public void backupObbs(String packageName, ParcelFileDescriptor data, int token, IBackupManager callbackBinder) throws RemoteException {
+            public void backupObbs(
+                    String packageName,
+                    ParcelFileDescriptor data,
+                    int token,
+                    IBackupManager callbackBinder)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -138,7 +177,17 @@ public interface IObbBackupService extends IInterface {
             }
 
             @Override // com.android.internal.backup.IObbBackupService
-            public void restoreObbFile(String pkgName, ParcelFileDescriptor data, long fileSize, int type, String path, long mode, long mtime, int token, IBackupManager callbackBinder) throws RemoteException {
+            public void restoreObbFile(
+                    String pkgName,
+                    ParcelFileDescriptor data,
+                    long fileSize,
+                    int type,
+                    String path,
+                    long mode,
+                    long mtime,
+                    int token,
+                    IBackupManager callbackBinder)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextSlocationArDistanceAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextSlocationArDistanceAttribute> CREATOR = new Parcelable.Creator<SemContextSlocationArDistanceAttribute>() { // from class: com.samsung.android.hardware.context.SemContextSlocationArDistanceAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSlocationArDistanceAttribute createFromParcel(Parcel in) {
-            return new SemContextSlocationArDistanceAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextSlocationArDistanceAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextSlocationArDistanceAttribute>() { // from class:
+                                                                // com.samsung.android.hardware.context.SemContextSlocationArDistanceAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSlocationArDistanceAttribute createFromParcel(Parcel in) {
+                    return new SemContextSlocationArDistanceAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSlocationArDistanceAttribute[] newArray(int size) {
-            return new SemContextSlocationArDistanceAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSlocationArDistanceAttribute[] newArray(int size) {
+                    return new SemContextSlocationArDistanceAttribute[size];
+                }
+            };
     private static final String TAG = "SemContextSlocationArDistanceAttribute";
     private int[] mDistanceCmd;
     private int mMode;

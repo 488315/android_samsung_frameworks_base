@@ -21,16 +21,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.android.internal.R;
-import com.android.internal.app.ChooserActivity;
-import com.android.internal.app.ResolverActivity;
-import com.android.internal.app.ResolverListAdapter;
 import com.android.internal.app.chooser.ChooserTargetInfo;
 import com.android.internal.app.chooser.DisplayResolveInfo;
 import com.android.internal.app.chooser.MultiDisplayResolveInfo;
 import com.android.internal.app.chooser.SelectableTargetInfo;
 import com.android.internal.app.chooser.TargetInfo;
 import com.android.internal.config.sysui.SystemUiDeviceConfigFlags;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -69,7 +68,8 @@ public class ChooserListAdapter extends ResolverListAdapter {
     private int mNumShortcutResults;
     private final View.OnLayoutChangeListener mPinTextSpacingListener;
     private ChooserTargetInfo mPlaceHolderTargetInfo;
-    private final SelectableTargetInfo.SelectableTargetInfoCommunicator mSelectableTargetInfoCommunicator;
+    private final SelectableTargetInfo.SelectableTargetInfoCommunicator
+            mSelectableTargetInfoCommunicator;
     private final List<ChooserTargetInfo> mServiceTargets;
     private List<DisplayResolveInfo> mSortedList;
 
@@ -87,11 +87,19 @@ public class ChooserListAdapter extends ResolverListAdapter {
 
     /* renamed from: com.android.internal.app.ChooserListAdapter$1, reason: invalid class name */
     class AnonymousClass1 implements View.OnLayoutChangeListener {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.view.View.OnLayoutChangeListener
-        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        public void onLayoutChange(
+                View v,
+                int left,
+                int top,
+                int right,
+                int bottom,
+                int oldLeft,
+                int oldTop,
+                int oldRight,
+                int oldBottom) {
             final TextView textView = (TextView) v;
             Layout layout = textView.getLayout();
             if (layout != null) {
@@ -105,20 +113,42 @@ public class ChooserListAdapter extends ResolverListAdapter {
                     ViewGroup.LayoutParams params = textView.getLayoutParams();
                     params.width = desiredWidth;
                     textView.setLayoutParams(params);
-                    textView.post(new Runnable() { // from class: com.android.internal.app.ChooserListAdapter$1$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            TextView.this.requestLayout();
-                        }
-                    });
+                    textView.post(
+                            new Runnable() { // from class:
+                                             // com.android.internal.app.ChooserListAdapter$1$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TextView.this.requestLayout();
+                                }
+                            });
                 }
                 textView.removeOnLayoutChangeListener(this);
             }
         }
     }
 
-    public ChooserListAdapter(Context context, List<Intent> payloadIntents, Intent[] initialIntents, List<ResolveInfo> rList, boolean filterLastUsed, ResolverListController resolverListController, ChooserListCommunicator chooserListCommunicator, SelectableTargetInfo.SelectableTargetInfoCommunicator selectableTargetInfoCommunicator, PackageManager packageManager, ChooserActivityLogger chooserActivityLogger, UserHandle initialIntentsUserSpace) {
-        super(context, payloadIntents, null, rList, filterLastUsed, resolverListController, chooserListCommunicator, false, initialIntentsUserSpace);
+    public ChooserListAdapter(
+            Context context,
+            List<Intent> payloadIntents,
+            Intent[] initialIntents,
+            List<ResolveInfo> rList,
+            boolean filterLastUsed,
+            ResolverListController resolverListController,
+            ChooserListCommunicator chooserListCommunicator,
+            SelectableTargetInfo.SelectableTargetInfoCommunicator selectableTargetInfoCommunicator,
+            PackageManager packageManager,
+            ChooserActivityLogger chooserActivityLogger,
+            UserHandle initialIntentsUserSpace) {
+        super(
+                context,
+                payloadIntents,
+                null,
+                rList,
+                filterLastUsed,
+                resolverListController,
+                chooserListCommunicator,
+                false,
+                initialIntentsUserSpace);
         this.mEnableStackedApps = true;
         int i = 0;
         this.mNumShortcutResults = 0;
@@ -130,7 +160,8 @@ public class ChooserListAdapter extends ResolverListAdapter {
         this.mListViewDataChanged = false;
         this.mSortedList = new ArrayList();
         this.mPinTextSpacingListener = new AnonymousClass1();
-        this.mMaxShortcutTargetsPerApp = context.getResources().getInteger(R.integer.config_maxShortcutTargetsPerApp);
+        this.mMaxShortcutTargetsPerApp =
+                context.getResources().getInteger(R.integer.config_maxShortcutTargetsPerApp);
         this.mChooserListCommunicator = chooserListCommunicator;
         createPlaceHolders();
         this.mSelectableTargetInfoCommunicator = selectableTargetInfoCommunicator;
@@ -174,7 +205,8 @@ public class ChooserListAdapter extends ResolverListAdapter {
                             ri.icon = 0;
                         }
                         ri.userHandle = this.mInitialIntentsUserSpace;
-                        this.mCallerTargets.add(new DisplayResolveInfo(ii, ri, ii, makePresentationGetter(ri)));
+                        this.mCallerTargets.add(
+                                new DisplayResolveInfo(ii, ri, ii, makePresentationGetter(ri)));
                         if (this.mCallerTargets.size() == 4) {
                             break;
                         }
@@ -184,7 +216,11 @@ public class ChooserListAdapter extends ResolverListAdapter {
                 i = 0;
             }
         }
-        this.mApplySharingAppLimits = DeviceConfig.getBoolean("systemui", SystemUiDeviceConfigFlags.APPLY_SHARING_APP_LIMITS_IN_SYSUI, true);
+        this.mApplySharingAppLimits =
+                DeviceConfig.getBoolean(
+                        "systemui",
+                        SystemUiDeviceConfigFlags.APPLY_SHARING_APP_LIMITS_IN_SYSUI,
+                        true);
     }
 
     AppPredictor getAppPredictor() {
@@ -229,7 +265,8 @@ public class ChooserListAdapter extends ResolverListAdapter {
     protected void onBindView(View view, TargetInfo info, int position) {
         ResolverListAdapter.ViewHolder holder = (ResolverListAdapter.ViewHolder) view.getTag();
         if (info == null) {
-            holder.icon.lambda$setImageURIAsync$0(this.mContext.getDrawable(R.drawable.resolver_icon_placeholder));
+            holder.icon.lambda$setImageURIAsync$0(
+                    this.mContext.getDrawable(R.drawable.resolver_icon_placeholder));
             return;
         }
         holder.bindLabel(info.getDisplayLabel(), info.getExtendedInfo(), alwaysShowSubLabel());
@@ -255,9 +292,18 @@ public class ChooserListAdapter extends ResolverListAdapter {
             }
         }
         if (info instanceof ChooserActivity.PlaceHolderTargetInfo) {
-            int maxWidth = this.mContext.getResources().getDimensionPixelSize(R.dimen.chooser_direct_share_label_placeholder_max_width);
+            int maxWidth =
+                    this.mContext
+                            .getResources()
+                            .getDimensionPixelSize(
+                                    R.dimen.chooser_direct_share_label_placeholder_max_width);
             holder.text.setMaxWidth(maxWidth);
-            holder.text.setBackground(this.mContext.getResources().getDrawable(R.drawable.chooser_direct_share_label_placeholder, this.mContext.getTheme()));
+            holder.text.setBackground(
+                    this.mContext
+                            .getResources()
+                            .getDrawable(
+                                    R.drawable.chooser_direct_share_label_placeholder,
+                                    this.mContext.getTheme()));
             holder.itemView.setBackground(null);
         } else {
             holder.text.setMaxWidth(Integer.MAX_VALUE);
@@ -270,7 +316,9 @@ public class ChooserListAdapter extends ResolverListAdapter {
             holder.text.setPaddingRelative(0, 0, bkg.getIntrinsicWidth(), 0);
             holder.text.setBackground(bkg);
         } else {
-            if (info.isPinned() && (getPositionTargetType(position) == 2 || getPositionTargetType(position) == 1)) {
+            if (info.isPinned()
+                    && (getPositionTargetType(position) == 2
+                            || getPositionTargetType(position) == 1)) {
                 Drawable bkg2 = this.mContext.getDrawable(R.drawable.chooser_pinned_background);
                 holder.text.setPaddingRelative(bkg2.getIntrinsicWidth(), 0, 0, 0);
                 holder.text.setBackground(bkg2);
@@ -295,7 +343,12 @@ public class ChooserListAdapter extends ResolverListAdapter {
     }
 
     void updateAlphabeticalList() {
-        new AsyncTask<Void, Void, List<DisplayResolveInfo>>() { // from class: com.android.internal.app.ChooserListAdapter.2
+        new AsyncTask<
+                Void,
+                Void,
+                List<
+                        DisplayResolveInfo>>() { // from class:
+                                                 // com.android.internal.app.ChooserListAdapter.2
             /* JADX INFO: Access modifiers changed from: protected */
             @Override // android.os.AsyncTask
             public List<DisplayResolveInfo> doInBackground(Void... voids) {
@@ -308,23 +361,36 @@ public class ChooserListAdapter extends ResolverListAdapter {
                 Map<String, DisplayResolveInfo> consolidated = new HashMap<>();
                 for (DisplayResolveInfo info : allTargets) {
                     if (info.getResolveInfo().userHandle == null) {
-                        Log.e(ChooserListAdapter.TAG, "ResolveInfo with null UserHandle found: " + info.getResolveInfo());
+                        Log.e(
+                                ChooserListAdapter.TAG,
+                                "ResolveInfo with null UserHandle found: " + info.getResolveInfo());
                     }
-                    String resolvedTarget = info.getResolvedComponentName().getPackageName() + '#' + ((Object) info.getDisplayLabel()) + '#' + ResolverActivity.getResolveInfoUserHandle(info.getResolveInfo(), ChooserListAdapter.this.getUserHandle()).getIdentifier();
+                    String resolvedTarget =
+                            info.getResolvedComponentName().getPackageName()
+                                    + '#'
+                                    + ((Object) info.getDisplayLabel())
+                                    + '#'
+                                    + ResolverActivity.getResolveInfoUserHandle(
+                                                    info.getResolveInfo(),
+                                                    ChooserListAdapter.this.getUserHandle())
+                                            .getIdentifier();
                     DisplayResolveInfo multiDri = consolidated.get(resolvedTarget);
                     if (multiDri == null) {
                         consolidated.put(resolvedTarget, info);
                     } else if (multiDri instanceof MultiDisplayResolveInfo) {
                         ((MultiDisplayResolveInfo) multiDri).addTarget(info);
                     } else {
-                        MultiDisplayResolveInfo multiDisplayResolveInfo = new MultiDisplayResolveInfo(resolvedTarget, multiDri);
+                        MultiDisplayResolveInfo multiDisplayResolveInfo =
+                                new MultiDisplayResolveInfo(resolvedTarget, multiDri);
                         multiDisplayResolveInfo.addTarget(info);
                         consolidated.put(resolvedTarget, multiDisplayResolveInfo);
                     }
                 }
                 List<DisplayResolveInfo> groupedTargets = new ArrayList<>();
                 groupedTargets.addAll(consolidated.values());
-                Collections.sort(groupedTargets, new ChooserActivity.AzInfoComparator(ChooserListAdapter.this.mContext));
+                Collections.sort(
+                        groupedTargets,
+                        new ChooserActivity.AzInfoComparator(ChooserListAdapter.this.mContext));
                 return groupedTargets;
             }
 
@@ -339,7 +405,10 @@ public class ChooserListAdapter extends ResolverListAdapter {
 
     @Override // com.android.internal.app.ResolverListAdapter, android.widget.Adapter
     public int getCount() {
-        return getRankedTargetCount() + getAlphaTargetCount() + getSelectableServiceTargetCount() + getCallerTargetCount();
+        return getRankedTargetCount()
+                + getAlphaTargetCount()
+                + getSelectableServiceTargetCount()
+                + getCallerTargetCount();
     }
 
     @Override // com.android.internal.app.ResolverListAdapter
@@ -367,7 +436,9 @@ public class ChooserListAdapter extends ResolverListAdapter {
 
     public int getServiceTargetCount() {
         if (this.mChooserListCommunicator.shouldShowServiceTargets()) {
-            return Math.min(this.mServiceTargets.size(), this.mChooserListCommunicator.getMaxRankedTargets());
+            return Math.min(
+                    this.mServiceTargets.size(),
+                    this.mChooserListCommunicator.getMaxRankedTargets());
         }
         return 0;
     }
@@ -382,7 +453,8 @@ public class ChooserListAdapter extends ResolverListAdapter {
     }
 
     public int getRankedTargetCount() {
-        int spacesAvailable = this.mChooserListCommunicator.getMaxRankedTargets() - getCallerTargetCount();
+        int spacesAvailable =
+                this.mChooserListCommunicator.getMaxRankedTargets() - getCallerTargetCount();
         return Math.min(spacesAvailable, super.getCount());
     }
 
@@ -418,7 +490,8 @@ public class ChooserListAdapter extends ResolverListAdapter {
         if (position == -1) {
             return null;
         }
-        int serviceTargetCount = filtered ? getServiceTargetCount() : getSelectableServiceTargetCount();
+        int serviceTargetCount =
+                filtered ? getServiceTargetCount() : getSelectableServiceTargetCount();
         if (position < serviceTargetCount) {
             return this.mServiceTargets.get(position);
         }
@@ -430,7 +503,9 @@ public class ChooserListAdapter extends ResolverListAdapter {
         int offset2 = offset + callerTargetCount;
         int rankedTargetCount = getRankedTargetCount();
         if (position - offset2 < rankedTargetCount) {
-            return filtered ? super.getItem(position - offset2) : getDisplayResolveInfo(position - offset2);
+            return filtered
+                    ? super.getItem(position - offset2)
+                    : getDisplayResolveInfo(position - offset2);
         }
         int offset3 = offset2 + rankedTargetCount;
         if (position - offset3 >= getAlphaTargetCount() || this.mSortedList.isEmpty()) {
@@ -442,7 +517,8 @@ public class ChooserListAdapter extends ResolverListAdapter {
     @Override // com.android.internal.app.ResolverListAdapter
     protected boolean shouldAddResolveInfo(DisplayResolveInfo dri) {
         for (TargetInfo existingInfo : this.mCallerTargets) {
-            if (this.mResolverListCommunicator.resolveInfoMatch(dri.getResolveInfo(), existingInfo.getResolveInfo())) {
+            if (this.mResolverListCommunicator.resolveInfoMatch(
+                    dri.getResolveInfo(), existingInfo.getResolveInfo())) {
                 return false;
             }
         }
@@ -451,10 +527,15 @@ public class ChooserListAdapter extends ResolverListAdapter {
 
     public List<ChooserTargetInfo> getSurfacedTargetInfo() {
         int maxSurfacedTargets = this.mChooserListCommunicator.getMaxRankedTargets();
-        return this.mServiceTargets.subList(0, Math.min(maxSurfacedTargets, getSelectableServiceTargetCount()));
+        return this.mServiceTargets.subList(
+                0, Math.min(maxSurfacedTargets, getSelectableServiceTargetCount()));
     }
 
-    public void addServiceResults(DisplayResolveInfo origTarget, List<ChooserTarget> targets, int targetType, Map<ChooserTarget, ShortcutInfo> directShareToShortcutInfos) {
+    public void addServiceResults(
+            DisplayResolveInfo origTarget,
+            List<ChooserTarget> targets,
+            int targetType,
+            Map<ChooserTarget, ShortcutInfo> directShareToShortcutInfos) {
         float targetScore;
         if (targets.size() != 0) {
             float baseScore = getBaseScore(origTarget, targetType);
@@ -462,7 +543,10 @@ public class ChooserListAdapter extends ResolverListAdapter {
             int i = 0;
             boolean isShortcutResult = targetType == 2 || targetType == 3;
             int maxTargets = isShortcutResult ? this.mMaxShortcutTargetsPerApp : 2;
-            int targetsLimit = this.mApplySharingAppLimits ? Math.min(targets.size(), maxTargets) : targets.size();
+            int targetsLimit =
+                    this.mApplySharingAppLimits
+                            ? Math.min(targets.size(), maxTargets)
+                            : targets.size();
             int count = targetsLimit;
             float lastScore = 0.0f;
             boolean shouldNotify = false;
@@ -476,7 +560,8 @@ public class ChooserListAdapter extends ResolverListAdapter {
                         targetScore2 = lastScore * 0.95f;
                     }
                 }
-                ShortcutInfo shortcutInfo = isShortcutResult ? directShareToShortcutInfos.get(target) : null;
+                ShortcutInfo shortcutInfo =
+                        isShortcutResult ? directShareToShortcutInfos.get(target) : null;
                 if (shortcutInfo != null && shortcutInfo.isPinned()) {
                     targetScore = targetScore2 + 1000.0f;
                 } else {
@@ -486,7 +571,15 @@ public class ChooserListAdapter extends ResolverListAdapter {
                 Context contextAsUser = this.mContext.createContextAsUser(userHandle, i);
                 int i3 = i2;
                 int count2 = count;
-                boolean isInserted = insertServiceTarget(new SelectableTargetInfo(contextAsUser, origTarget, target, targetScore, this.mSelectableTargetInfoCommunicator, shortcutInfo));
+                boolean isInserted =
+                        insertServiceTarget(
+                                new SelectableTargetInfo(
+                                        contextAsUser,
+                                        origTarget,
+                                        target,
+                                        targetScore,
+                                        this.mSelectableTargetInfoCommunicator,
+                                        shortcutInfo));
                 if (isInserted && isShortcutResult) {
                     this.mNumShortcutResults++;
                 }
@@ -522,12 +615,15 @@ public class ChooserListAdapter extends ResolverListAdapter {
     }
 
     public void completeServiceTargetLoading() {
-        this.mServiceTargets.removeIf(new Predicate() { // from class: com.android.internal.app.ChooserListAdapter$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ChooserListAdapter.lambda$completeServiceTargetLoading$0((ChooserTargetInfo) obj);
-            }
-        });
+        this.mServiceTargets.removeIf(
+                new Predicate() { // from class:
+                                  // com.android.internal.app.ChooserListAdapter$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ChooserListAdapter.lambda$completeServiceTargetLoading$0(
+                                (ChooserTargetInfo) obj);
+                    }
+                });
         if (this.mServiceTargets.isEmpty()) {
             this.mServiceTargets.add(new ChooserActivity.EmptyTargetInfo());
             this.mChooserActivityLogger.logSharesheetEmptyDirectShareRow();
@@ -536,7 +632,8 @@ public class ChooserListAdapter extends ResolverListAdapter {
     }
 
     private boolean insertServiceTarget(ChooserTargetInfo chooserTargetInfo) {
-        if (this.mServiceTargets.size() == 1 && (this.mServiceTargets.get(0) instanceof ChooserActivity.EmptyTargetInfo)) {
+        if (this.mServiceTargets.size() == 1
+                && (this.mServiceTargets.get(0) instanceof ChooserActivity.EmptyTargetInfo)) {
             return false;
         }
         for (ChooserTargetInfo otherTargetInfo : this.mServiceTargets) {
@@ -546,7 +643,9 @@ public class ChooserListAdapter extends ResolverListAdapter {
         }
         int currentSize = this.mServiceTargets.size();
         float newScore = chooserTargetInfo.getModifiedScore();
-        for (int i = 0; i < Math.min(currentSize, this.mChooserListCommunicator.getMaxRankedTargets()); i++) {
+        for (int i = 0;
+                i < Math.min(currentSize, this.mChooserListCommunicator.getMaxRankedTargets());
+                i++) {
             ChooserTargetInfo serviceTarget = this.mServiceTargets.get(i);
             if (serviceTarget == null) {
                 this.mServiceTargets.set(i, chooserTargetInfo);
@@ -574,20 +673,34 @@ public class ChooserListAdapter extends ResolverListAdapter {
     }
 
     @Override // com.android.internal.app.ResolverListAdapter
-    AsyncTask<List<ResolverActivity.ResolvedComponentInfo>, Void, List<ResolverActivity.ResolvedComponentInfo>> createSortingTask(final boolean doPostProcessing) {
-        return new AsyncTask<List<ResolverActivity.ResolvedComponentInfo>, Void, List<ResolverActivity.ResolvedComponentInfo>>() { // from class: com.android.internal.app.ChooserListAdapter.3
+    AsyncTask<
+                    List<ResolverActivity.ResolvedComponentInfo>,
+                    Void,
+                    List<ResolverActivity.ResolvedComponentInfo>>
+            createSortingTask(final boolean doPostProcessing) {
+        return new AsyncTask<
+                List<ResolverActivity.ResolvedComponentInfo>,
+                Void,
+                List<
+                        ResolverActivity
+                                .ResolvedComponentInfo>>() { // from class:
+                                                             // com.android.internal.app.ChooserListAdapter.3
             /* JADX INFO: Access modifiers changed from: protected */
             @Override // android.os.AsyncTask
-            public List<ResolverActivity.ResolvedComponentInfo> doInBackground(List<ResolverActivity.ResolvedComponentInfo>... params) {
+            public List<ResolverActivity.ResolvedComponentInfo> doInBackground(
+                    List<ResolverActivity.ResolvedComponentInfo>... params) {
                 Trace.beginSection("ChooserListAdapter#SortingTask");
-                ChooserListAdapter.this.mResolverListController.topK(params[0], ChooserListAdapter.this.mChooserListCommunicator.getMaxRankedTargets());
+                ChooserListAdapter.this.mResolverListController.topK(
+                        params[0],
+                        ChooserListAdapter.this.mChooserListCommunicator.getMaxRankedTargets());
                 Trace.endSection();
                 return params[0];
             }
 
             /* JADX INFO: Access modifiers changed from: protected */
             @Override // android.os.AsyncTask
-            public void onPostExecute(List<ResolverActivity.ResolvedComponentInfo> sortedComponents) {
+            public void onPostExecute(
+                    List<ResolverActivity.ResolvedComponentInfo> sortedComponents) {
                 ChooserListAdapter.this.processSortedList(sortedComponents, doPostProcessing);
                 if (doPostProcessing) {
                     ChooserListAdapter.this.mChooserListCommunicator.updateProfileViewButton();
@@ -601,7 +714,9 @@ public class ChooserListAdapter extends ResolverListAdapter {
         this.mAppPredictor = appPredictor;
     }
 
-    public void setAppPredictorCallback(AppPredictor.Callback appPredictorCallback, ResolverAppPredictorCallback appPredictorCallbackWrapper) {
+    public void setAppPredictorCallback(
+            AppPredictor.Callback appPredictorCallback,
+            ResolverAppPredictorCallback appPredictorCallbackWrapper) {
         this.mAppPredictorCallback = appPredictorCallback;
         this.mAppPredictorCallbackWrapper = appPredictorCallbackWrapper;
     }

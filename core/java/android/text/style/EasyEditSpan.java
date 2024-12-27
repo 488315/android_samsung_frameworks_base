@@ -6,7 +6,8 @@ import android.text.ParcelableSpan;
 
 /* loaded from: classes4.dex */
 public class EasyEditSpan implements ParcelableSpan {
-    public static final String EXTRA_TEXT_CHANGED_TYPE = "android.text.style.EXTRA_TEXT_CHANGED_TYPE";
+    public static final String EXTRA_TEXT_CHANGED_TYPE =
+            "android.text.style.EXTRA_TEXT_CHANGED_TYPE";
     public static final int TEXT_DELETED = 1;
     public static final int TEXT_MODIFIED = 2;
     private boolean mDeleteEnabled;

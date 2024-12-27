@@ -8,6 +8,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -31,8 +32,7 @@ public interface IBinaryTransparencyService extends IInterface {
         }
 
         @Override // com.android.internal.os.IBinaryTransparencyService
-        public void recordMeasurementsForAllPackages() throws RemoteException {
-        }
+        public void recordMeasurementsForAllPackages() throws RemoteException {}
 
         @Override // com.android.internal.os.IBinaryTransparencyService
         public List<ApexInfo> collectAllApexInfo(boolean includeTestOnly) throws RemoteException {
@@ -40,12 +40,14 @@ public interface IBinaryTransparencyService extends IInterface {
         }
 
         @Override // com.android.internal.os.IBinaryTransparencyService
-        public List<AppInfo> collectAllUpdatedPreloadInfo(Bundle packagesToSkip) throws RemoteException {
+        public List<AppInfo> collectAllUpdatedPreloadInfo(Bundle packagesToSkip)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.os.IBinaryTransparencyService
-        public List<AppInfo> collectAllSilentInstalledMbaInfo(Bundle packagesToSkip) throws RemoteException {
+        public List<AppInfo> collectAllSilentInstalledMbaInfo(Bundle packagesToSkip)
+                throws RemoteException {
             return null;
         }
 
@@ -55,7 +57,7 @@ public interface IBinaryTransparencyService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBinaryTransparencyService {
+    public abstract static class Stub extends Binder implements IBinaryTransparencyService {
         static final int TRANSACTION_collectAllApexInfo = 3;
         static final int TRANSACTION_collectAllSilentInstalledMbaInfo = 5;
         static final int TRANSACTION_collectAllUpdatedPreloadInfo = 4;
@@ -105,7 +107,8 @@ public interface IBinaryTransparencyService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBinaryTransparencyService.DESCRIPTOR);
             }
@@ -196,7 +199,8 @@ public interface IBinaryTransparencyService extends IInterface {
             }
 
             @Override // com.android.internal.os.IBinaryTransparencyService
-            public List<ApexInfo> collectAllApexInfo(boolean includeTestOnly) throws RemoteException {
+            public List<ApexInfo> collectAllApexInfo(boolean includeTestOnly)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -213,7 +217,8 @@ public interface IBinaryTransparencyService extends IInterface {
             }
 
             @Override // com.android.internal.os.IBinaryTransparencyService
-            public List<AppInfo> collectAllUpdatedPreloadInfo(Bundle packagesToSkip) throws RemoteException {
+            public List<AppInfo> collectAllUpdatedPreloadInfo(Bundle packagesToSkip)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -230,7 +235,8 @@ public interface IBinaryTransparencyService extends IInterface {
             }
 
             @Override // com.android.internal.os.IBinaryTransparencyService
-            public List<AppInfo> collectAllSilentInstalledMbaInfo(Bundle packagesToSkip) throws RemoteException {
+            public List<AppInfo> collectAllSilentInstalledMbaInfo(Bundle packagesToSkip)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -254,21 +260,24 @@ public interface IBinaryTransparencyService extends IInterface {
     }
 
     public static class ApexInfo implements Parcelable {
-        public static final Parcelable.Creator<ApexInfo> CREATOR = new Parcelable.Creator<ApexInfo>() { // from class: com.android.internal.os.IBinaryTransparencyService.ApexInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ApexInfo createFromParcel(Parcel _aidl_source) {
-                ApexInfo _aidl_out = new ApexInfo();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<ApexInfo> CREATOR =
+                new Parcelable.Creator<
+                        ApexInfo>() { // from class:
+                                      // com.android.internal.os.IBinaryTransparencyService.ApexInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ApexInfo createFromParcel(Parcel _aidl_source) {
+                        ApexInfo _aidl_out = new ApexInfo();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ApexInfo[] newArray(int _aidl_size) {
-                return new ApexInfo[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ApexInfo[] newArray(int _aidl_size) {
+                        return new ApexInfo[_aidl_size];
+                    }
+                };
         public byte[] digest;
         public String moduleName;
         public String packageName;
@@ -367,21 +376,24 @@ public interface IBinaryTransparencyService extends IInterface {
     }
 
     public static class AppInfo implements Parcelable {
-        public static final Parcelable.Creator<AppInfo> CREATOR = new Parcelable.Creator<AppInfo>() { // from class: com.android.internal.os.IBinaryTransparencyService.AppInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AppInfo createFromParcel(Parcel _aidl_source) {
-                AppInfo _aidl_out = new AppInfo();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<AppInfo> CREATOR =
+                new Parcelable.Creator<
+                        AppInfo>() { // from class:
+                                     // com.android.internal.os.IBinaryTransparencyService.AppInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AppInfo createFromParcel(Parcel _aidl_source) {
+                        AppInfo _aidl_out = new AppInfo();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AppInfo[] newArray(int _aidl_size) {
-                return new AppInfo[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AppInfo[] newArray(int _aidl_size) {
+                        return new AppInfo[_aidl_size];
+                    }
+                };
         public byte[] digest;
         public String initiator;
         public String[] initiatorSignerDigests;

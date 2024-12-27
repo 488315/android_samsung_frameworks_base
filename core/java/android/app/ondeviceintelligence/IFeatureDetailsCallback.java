@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IFeatureDetailsCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.app.ondeviceintelligence.IFeatureDetailsCallback";
+    public static final String DESCRIPTOR =
+            "android.app.ondeviceintelligence.IFeatureDetailsCallback";
 
     void onFailure(int i, String str, PersistableBundle persistableBundle) throws RemoteException;
 
@@ -17,12 +18,11 @@ public interface IFeatureDetailsCallback extends IInterface {
 
     public static class Default implements IFeatureDetailsCallback {
         @Override // android.app.ondeviceintelligence.IFeatureDetailsCallback
-        public void onSuccess(FeatureDetails result) throws RemoteException {
-        }
+        public void onSuccess(FeatureDetails result) throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IFeatureDetailsCallback
-        public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams) throws RemoteException {
-        }
+        public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface IFeatureDetailsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFeatureDetailsCallback {
+    public abstract static class Stub extends Binder implements IFeatureDetailsCallback {
         static final int TRANSACTION_onFailure = 3;
         static final int TRANSACTION_onSuccess = 2;
 
@@ -71,7 +71,8 @@ public interface IFeatureDetailsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFeatureDetailsCallback.DESCRIPTOR);
             }
@@ -81,14 +82,16 @@ public interface IFeatureDetailsCallback extends IInterface {
             }
             switch (code) {
                 case 2:
-                    FeatureDetails _arg0 = (FeatureDetails) data.readTypedObject(FeatureDetails.CREATOR);
+                    FeatureDetails _arg0 =
+                            (FeatureDetails) data.readTypedObject(FeatureDetails.CREATOR);
                     data.enforceNoDataAvail();
                     onSuccess(_arg0);
                     return true;
                 case 3:
                     int _arg02 = data.readInt();
                     String _arg1 = data.readString();
-                    PersistableBundle _arg2 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg2 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg02, _arg1, _arg2);
                     return true;
@@ -126,7 +129,8 @@ public interface IFeatureDetailsCallback extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IFeatureDetailsCallback
-            public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams) throws RemoteException {
+            public void onFailure(int errorCode, String errorMessage, PersistableBundle errorParams)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFeatureDetailsCallback.DESCRIPTOR);

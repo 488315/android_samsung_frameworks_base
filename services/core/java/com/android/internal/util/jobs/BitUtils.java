@@ -1,6 +1,7 @@
 package com.android.internal.util.jobs;
 
 import android.text.TextUtils;
+
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Objects;
@@ -10,15 +11,17 @@ import java.util.function.IntFunction;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class BitUtils {
-    private BitUtils() {
-    }
+    private BitUtils() {}
 
     public static long bitAt(int i) {
         return 1 << i;
     }
 
     public static int bytesToBEInt(byte[] bArr) {
-        return uint8(bArr[3]) + (uint8(bArr[0]) << 24) + (uint8(bArr[1]) << 16) + (uint8(bArr[2]) << 8);
+        return uint8(bArr[3])
+                + (uint8(bArr[0]) << 24)
+                + (uint8(bArr[1]) << 16)
+                + (uint8(bArr[2]) << 8);
     }
 
     public static int bytesToLEInt(byte[] bArr) {
@@ -77,7 +80,16 @@ public final class BitUtils {
     }
 
     public static boolean maskedEquals(UUID uuid, UUID uuid2, UUID uuid3) {
-        return uuid3 == null ? Objects.equals(uuid, uuid2) : maskedEquals(uuid.getLeastSignificantBits(), uuid2.getLeastSignificantBits(), uuid3.getLeastSignificantBits()) && maskedEquals(uuid.getMostSignificantBits(), uuid2.getMostSignificantBits(), uuid3.getMostSignificantBits());
+        return uuid3 == null
+                ? Objects.equals(uuid, uuid2)
+                : maskedEquals(
+                                uuid.getLeastSignificantBits(),
+                                uuid2.getLeastSignificantBits(),
+                                uuid3.getLeastSignificantBits())
+                        && maskedEquals(
+                                uuid.getMostSignificantBits(),
+                                uuid2.getMostSignificantBits(),
+                                uuid3.getMostSignificantBits());
     }
 
     public static boolean maskedEquals(byte[] bArr, byte[] bArr2, byte[] bArr3) {
@@ -88,7 +100,8 @@ public final class BitUtils {
         if (bArr3 == null) {
             return Arrays.equals(bArr, bArr2);
         }
-        Preconditions.checkArgument(bArr.length == bArr3.length, "Mask must be of same size as inputs");
+        Preconditions.checkArgument(
+                bArr.length == bArr3.length, "Mask must be of same size as inputs");
         for (int i = 0; i < bArr3.length; i++) {
             if (!maskedEquals(bArr[i], bArr2[i], bArr3[i])) {
                 return false;

@@ -3,6 +3,7 @@ package android.net.shared;
 import android.hardware.broadcastradio.V2_0.AmFmBandRange$$ExternalSyntheticOutline0;
 import android.net.PrivateDnsConfigParcel;
 import android.text.TextUtils;
+
 import java.net.InetAddress;
 import java.util.Arrays;
 
@@ -21,12 +22,25 @@ public class PrivateDnsConfig {
         this(false);
     }
 
-    public PrivateDnsConfig(int i, String str, InetAddress[] inetAddressArr, String str2, InetAddress[] inetAddressArr2, String str3, int i2) {
+    public PrivateDnsConfig(
+            int i,
+            String str,
+            InetAddress[] inetAddressArr,
+            String str2,
+            InetAddress[] inetAddressArr2,
+            String str3,
+            int i2) {
         this.mode = i;
         this.hostname = str == null ? "" : str;
-        this.ips = inetAddressArr != null ? (InetAddress[]) inetAddressArr.clone() : new InetAddress[0];
+        this.ips =
+                inetAddressArr != null
+                        ? (InetAddress[]) inetAddressArr.clone()
+                        : new InetAddress[0];
         this.dohName = str2 == null ? "" : str2;
-        this.dohIps = inetAddressArr2 != null ? (InetAddress[]) inetAddressArr2.clone() : new InetAddress[0];
+        this.dohIps =
+                inetAddressArr2 != null
+                        ? (InetAddress[]) inetAddressArr2.clone()
+                        : new InetAddress[0];
         this.dohPath = str3 == null ? "" : str3;
         this.dohPort = i2;
     }
@@ -51,12 +65,28 @@ public class PrivateDnsConfig {
 
     public static PrivateDnsConfig fromParcel(PrivateDnsConfigParcel privateDnsConfigParcel) {
         String[] strArr = privateDnsConfigParcel.ips;
-        InetAddress[] inetAddressArr = (InetAddress[]) ParcelableUtil.fromParcelableArray(strArr, new InitialConfiguration$$ExternalSyntheticLambda9(0)).toArray(new InetAddress[strArr.length]);
+        InetAddress[] inetAddressArr =
+                (InetAddress[])
+                        ParcelableUtil.fromParcelableArray(
+                                        strArr,
+                                        new InitialConfiguration$$ExternalSyntheticLambda9(0))
+                                .toArray(new InetAddress[strArr.length]);
         if (privateDnsConfigParcel.privateDnsMode == -1) {
             return new PrivateDnsConfig(privateDnsConfigParcel.hostname, inetAddressArr);
         }
         String[] strArr2 = privateDnsConfigParcel.dohIps;
-        return new PrivateDnsConfig(privateDnsConfigParcel.privateDnsMode, privateDnsConfigParcel.hostname, inetAddressArr, privateDnsConfigParcel.dohName, (InetAddress[]) ParcelableUtil.fromParcelableArray(strArr2, new InitialConfiguration$$ExternalSyntheticLambda9(0)).toArray(new InetAddress[strArr2.length]), privateDnsConfigParcel.dohPath, privateDnsConfigParcel.dohPort);
+        return new PrivateDnsConfig(
+                privateDnsConfigParcel.privateDnsMode,
+                privateDnsConfigParcel.hostname,
+                inetAddressArr,
+                privateDnsConfigParcel.dohName,
+                (InetAddress[])
+                        ParcelableUtil.fromParcelableArray(
+                                        strArr2,
+                                        new InitialConfiguration$$ExternalSyntheticLambda9(0))
+                                .toArray(new InetAddress[strArr2.length]),
+                privateDnsConfigParcel.dohPath,
+                privateDnsConfigParcel.dohPort);
     }
 
     private static String modeAsString(int i) {
@@ -74,10 +104,20 @@ public class PrivateDnsConfig {
     public PrivateDnsConfigParcel toParcel() {
         PrivateDnsConfigParcel privateDnsConfigParcel = new PrivateDnsConfigParcel();
         privateDnsConfigParcel.hostname = this.hostname;
-        privateDnsConfigParcel.ips = (String[]) ParcelableUtil.toParcelableArray(Arrays.asList(this.ips), new InitialConfiguration$$ExternalSyntheticLambda9(1), String.class);
+        privateDnsConfigParcel.ips =
+                (String[])
+                        ParcelableUtil.toParcelableArray(
+                                Arrays.asList(this.ips),
+                                new InitialConfiguration$$ExternalSyntheticLambda9(1),
+                                String.class);
         privateDnsConfigParcel.privateDnsMode = this.mode;
         privateDnsConfigParcel.dohName = this.dohName;
-        privateDnsConfigParcel.dohIps = (String[]) ParcelableUtil.toParcelableArray(Arrays.asList(this.dohIps), new InitialConfiguration$$ExternalSyntheticLambda9(1), String.class);
+        privateDnsConfigParcel.dohIps =
+                (String[])
+                        ParcelableUtil.toParcelableArray(
+                                Arrays.asList(this.dohIps),
+                                new InitialConfiguration$$ExternalSyntheticLambda9(1),
+                                String.class);
         privateDnsConfigParcel.dohPath = this.dohPath;
         privateDnsConfigParcel.dohPort = this.dohPort;
         return privateDnsConfigParcel;

@@ -10,19 +10,21 @@ import android.text.Spanned;
 @SystemApi
 /* loaded from: classes2.dex */
 public final class NanoAppRpcService implements Parcelable {
-    public static final Parcelable.Creator<NanoAppRpcService> CREATOR = new Parcelable.Creator<NanoAppRpcService>() { // from class: android.hardware.location.NanoAppRpcService.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppRpcService createFromParcel(Parcel in) {
-            return new NanoAppRpcService(in);
-        }
+    public static final Parcelable.Creator<NanoAppRpcService> CREATOR =
+            new Parcelable.Creator<NanoAppRpcService>() { // from class:
+                // android.hardware.location.NanoAppRpcService.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppRpcService createFromParcel(Parcel in) {
+                    return new NanoAppRpcService(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppRpcService[] newArray(int size) {
-            return new NanoAppRpcService[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppRpcService[] newArray(int size) {
+                    return new NanoAppRpcService[size];
+                }
+            };
     private long mServiceId;
     private int mServiceVersion;
 
@@ -68,7 +70,15 @@ public final class NanoAppRpcService implements Parcelable {
     }
 
     public String toString() {
-        return "NanoAppRpcService[Id = " + Long.toHexString(this.mServiceId) + ", version = v" + getMajorVersion() + MediaMetrics.SEPARATOR + getMinorVersion() + MediaMetrics.SEPARATOR + getPatchVersion() + NavigationBarInflaterView.SIZE_MOD_END;
+        return "NanoAppRpcService[Id = "
+                + Long.toHexString(this.mServiceId)
+                + ", version = v"
+                + getMajorVersion()
+                + MediaMetrics.SEPARATOR
+                + getMinorVersion()
+                + MediaMetrics.SEPARATOR
+                + getPatchVersion()
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public boolean equals(Object object) {
@@ -79,7 +89,8 @@ public final class NanoAppRpcService implements Parcelable {
             return false;
         }
         NanoAppRpcService other = (NanoAppRpcService) object;
-        boolean isEqual = other.getId() == this.mServiceId && other.getVersion() == this.mServiceVersion;
+        boolean isEqual =
+                other.getId() == this.mServiceId && other.getVersion() == this.mServiceVersion;
         return isEqual;
     }
 

@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.util.SparseArray;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.MagnificationConnectionManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.WindowMagnificationGestureHandler$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,21 +52,25 @@ public final class SemBioLoggingManager {
 
         public final void sendBroadcast(Context context, Intent intent, boolean z) {
             String str;
-            if (SemBiometricFeature.FP_FEATURE_SENSOR_IS_IN_DISPLAY_TYPE && (str = this.mTouchMap) != null) {
+            if (SemBiometricFeature.FP_FEATURE_SENSOR_IS_IN_DISPLAY_TYPE
+                    && (str = this.mTouchMap) != null) {
                 intent.putExtra("touch_map", str);
             }
             intent.putExtra("screen_status", z);
             intent.putExtra("pkg_name", this.mPackageName);
             try {
-                context.sendBroadcastAsUser(intent, UserHandle.CURRENT, "android.permission.MANAGE_BIOMETRIC");
+                context.sendBroadcastAsUser(
+                        intent, UserHandle.CURRENT, "android.permission.MANAGE_BIOMETRIC");
             } catch (Exception e) {
-                MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("sendBroadcast: "), "BiometricStats");
+                MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("sendBroadcast: "), "BiometricStats");
             }
         }
 
         public final void sendBroadcastFaceInfo(Context context, Intent intent) {
             intent.putExtra("pkg_name", this.mPackageName);
-            if (!SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FLIP && !SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FOLD) {
+            if (!SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FLIP
+                    && !SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FOLD) {
                 intent.putExtra("fold_state", 0);
             } else if (Utils.isFolderOpened(context) || Utils.isFlipOpened(context)) {
                 intent.putExtra("fold_state", 1);
@@ -72,19 +78,40 @@ public final class SemBioLoggingManager {
                 intent.putExtra("fold_state", 2);
             }
             try {
-                context.sendBroadcastAsUser(intent, UserHandle.CURRENT, "android.permission.MANAGE_BIOMETRIC");
+                context.sendBroadcastAsUser(
+                        intent, UserHandle.CURRENT, "android.permission.MANAGE_BIOMETRIC");
             } catch (Exception e) {
-                MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("sendBroadcast: "), "BiometricStats");
+                MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("sendBroadcast: "), "BiometricStats");
             }
         }
 
         public final String toDumpFormat() {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd HH:mm:ss.SSS", Locale.ENGLISH);
+            SimpleDateFormat simpleDateFormat =
+                    new SimpleDateFormat("MM/dd HH:mm:ss.SSS", Locale.ENGLISH);
             try {
-                String format = this.mResultTime == 0 ? "-----------" : simpleDateFormat.format(new Date(this.mResultTime));
-                return this.mType + ", " + this.mPackageName + ", " + simpleDateFormat.format(new Date(this.mStartTime)) + ", " + format + ", " + this.mLatency + ", " + this.mExtra + ", " + this.mBadQualityCount + ", " + this.mResult;
+                String format =
+                        this.mResultTime == 0
+                                ? "-----------"
+                                : simpleDateFormat.format(new Date(this.mResultTime));
+                return this.mType
+                        + ", "
+                        + this.mPackageName
+                        + ", "
+                        + simpleDateFormat.format(new Date(this.mStartTime))
+                        + ", "
+                        + format
+                        + ", "
+                        + this.mLatency
+                        + ", "
+                        + this.mExtra
+                        + ", "
+                        + this.mBadQualityCount
+                        + ", "
+                        + this.mResult;
             } catch (Exception e) {
-                MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("toDumpFormat: "), "BiometricStats");
+                MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("toDumpFormat: "), "BiometricStats");
                 return "formatting error";
             }
         }
@@ -103,7 +130,8 @@ public final class SemBioLoggingManager {
             sb.append(", mExtra=");
             sb.append(this.mExtra);
             sb.append(", mBadQualityCount=");
-            return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(sb, this.mBadQualityCount, '}');
+            return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                    sb, this.mBadQualityCount, '}');
         }
     }
 
@@ -143,10 +171,12 @@ public final class SemBioLoggingManager {
 
     public final void faceDump(PrintWriter printWriter) {
         if (this.mLastFaceEnrollLog != null) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Enroll: "), this.mLastFaceEnrollLog, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Enroll: "), this.mLastFaceEnrollLog, printWriter);
         }
         if (this.mLastFaceRemoveLog != null) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Remove: "), this.mLastFaceRemoveLog, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Remove: "), this.mLastFaceRemoveLog, printWriter);
         }
         Iterator it = this.mFaceAuthLogList.iterator();
         while (it.hasNext()) {
@@ -217,7 +247,11 @@ public final class SemBioLoggingManager {
                 } else if (SemBiometricFeature.FP_FEATURE_SENSOR_IS_OPTICAL) {
                     StringBuilder sb = new StringBuilder();
                     sb.append(dumpFormat);
-                    sb.append(", S:" + loggingInfo.mFpScreenStatus + ", A:" + loggingInfo.mFpAlphaMaskLvl);
+                    sb.append(
+                            ", S:"
+                                    + loggingInfo.mFpScreenStatus
+                                    + ", A:"
+                                    + loggingInfo.mFpAlphaMaskLvl);
                     dumpFormat = sb.toString();
                 }
                 this.mFpAuthLogList.add(dumpFormat);

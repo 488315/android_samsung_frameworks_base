@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.digest;
 
 import com.android.internal.org.bouncycastle.crypto.Digest;
+
 import java.security.MessageDigest;
 
 /* loaded from: classes5.dex */

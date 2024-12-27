@@ -5,49 +5,69 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import vendor.samsung.hardware.radio.SehRadioResponseInfo;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioNetworkResponse extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$network$ISehRadioNetworkResponse".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$network$ISehRadioNetworkResponse".replace('$', '.');
     public static final String HASH = "8fb94cb4cf759f224987eb2d1908582a1f6f1600";
     public static final int VERSION = 1;
 
     void emergencyControlResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
 
-    void emergencySearchResponse(SehRadioResponseInfo sehRadioResponseInfo, int i) throws RemoteException;
+    void emergencySearchResponse(SehRadioResponseInfo sehRadioResponseInfo, int i)
+            throws RemoteException;
 
-    void getAvailableNetworksResponse(SehRadioResponseInfo sehRadioResponseInfo, SehOperatorInfo[] sehOperatorInfoArr) throws RemoteException;
+    void getAvailableNetworksResponse(
+            SehRadioResponseInfo sehRadioResponseInfo, SehOperatorInfo[] sehOperatorInfoArr)
+            throws RemoteException;
 
     void getCnapResponse(SehRadioResponseInfo sehRadioResponseInfo, int i) throws RemoteException;
 
-    void getCsgListResponse(SehRadioResponseInfo sehRadioResponseInfo, SehCsgInfo[] sehCsgInfoArr) throws RemoteException;
+    void getCsgListResponse(SehRadioResponseInfo sehRadioResponseInfo, SehCsgInfo[] sehCsgInfoArr)
+            throws RemoteException;
 
-    void getDisable2gResponse(SehRadioResponseInfo sehRadioResponseInfo, int i) throws RemoteException;
+    void getDisable2gResponse(SehRadioResponseInfo sehRadioResponseInfo, int i)
+            throws RemoteException;
 
     String getInterfaceHash() throws RemoteException;
 
     int getInterfaceVersion() throws RemoteException;
 
-    void getNrIconTypeResponse(SehRadioResponseInfo sehRadioResponseInfo, int i) throws RemoteException;
+    void getNrIconTypeResponse(SehRadioResponseInfo sehRadioResponseInfo, int i)
+            throws RemoteException;
 
     void getNrModeResponse(SehRadioResponseInfo sehRadioResponseInfo, int i) throws RemoteException;
 
-    void getPreferredNetworkListResponse(SehRadioResponseInfo sehRadioResponseInfo, SehPreferredNetworkInfo[] sehPreferredNetworkInfoArr) throws RemoteException;
+    void getPreferredNetworkListResponse(
+            SehRadioResponseInfo sehRadioResponseInfo,
+            SehPreferredNetworkInfo[] sehPreferredNetworkInfoArr)
+            throws RemoteException;
 
-    void getRoamingNetworkInfoViaBLEResponse(SehRadioResponseInfo sehRadioResponseInfo, SehRoamingNetworkInfo[] sehRoamingNetworkInfoArr) throws RemoteException;
+    void getRoamingNetworkInfoViaBLEResponse(
+            SehRadioResponseInfo sehRadioResponseInfo,
+            SehRoamingNetworkInfo[] sehRoamingNetworkInfoArr)
+            throws RemoteException;
 
-    void getVendorSpecificConfigurationResponse(SehRadioResponseInfo sehRadioResponseInfo, SehVendorConfiguration[] sehVendorConfigurationArr) throws RemoteException;
+    void getVendorSpecificConfigurationResponse(
+            SehRadioResponseInfo sehRadioResponseInfo,
+            SehVendorConfiguration[] sehVendorConfigurationArr)
+            throws RemoteException;
 
     void selectCsgManualResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
 
     void sendEncodedUssdResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
 
-    void sendRequestRawResponse(SehRadioResponseInfo sehRadioResponseInfo, byte[] bArr) throws RemoteException;
+    void sendRequestRawResponse(SehRadioResponseInfo sehRadioResponseInfo, byte[] bArr)
+            throws RemoteException;
 
-    void sendRequestStringsResponse(SehRadioResponseInfo sehRadioResponseInfo, String[] strArr) throws RemoteException;
+    void sendRequestStringsResponse(SehRadioResponseInfo sehRadioResponseInfo, String[] strArr)
+            throws RemoteException;
 
-    void setCurrentNetworkInfoViaBLEResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
+    void setCurrentNetworkInfoViaBLEResponse(SehRadioResponseInfo sehRadioResponseInfo)
+            throws RemoteException;
 
     void setDisable2gResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
 
@@ -55,106 +75,105 @@ public interface ISehRadioNetworkResponse extends IInterface {
 
     void setNrModeResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
 
-    void setPreferredNetworkListResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
+    void setPreferredNetworkListResponse(SehRadioResponseInfo sehRadioResponseInfo)
+            throws RemoteException;
 
-    void setRoamingNetworkInfoViaBLEResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
+    void setRoamingNetworkInfoViaBLEResponse(SehRadioResponseInfo sehRadioResponseInfo)
+            throws RemoteException;
 
-    void setScanResultViaBLEResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
+    void setScanResultViaBLEResponse(SehRadioResponseInfo sehRadioResponseInfo)
+            throws RemoteException;
 
-    void setVendorSpecificConfigurationResponse(SehRadioResponseInfo sehRadioResponseInfo) throws RemoteException;
+    void setVendorSpecificConfigurationResponse(SehRadioResponseInfo sehRadioResponseInfo)
+            throws RemoteException;
 
     public static class Default implements ISehRadioNetworkResponse {
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void emergencyControlResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void emergencyControlResponse(SehRadioResponseInfo info) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void emergencySearchResponse(SehRadioResponseInfo info, int respEmergencySearch) throws RemoteException {
-        }
+        public void emergencySearchResponse(SehRadioResponseInfo info, int respEmergencySearch)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void getAvailableNetworksResponse(SehRadioResponseInfo info, SehOperatorInfo[] networkInfos) throws RemoteException {
-        }
+        public void getAvailableNetworksResponse(
+                SehRadioResponseInfo info, SehOperatorInfo[] networkInfos) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void getCnapResponse(SehRadioResponseInfo info, int m) throws RemoteException {
-        }
+        public void getCnapResponse(SehRadioResponseInfo info, int m) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void getCsgListResponse(SehRadioResponseInfo info, SehCsgInfo[] csgInfos) throws RemoteException {
-        }
+        public void getCsgListResponse(SehRadioResponseInfo info, SehCsgInfo[] csgInfos)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void getDisable2gResponse(SehRadioResponseInfo info, int isDisable) throws RemoteException {
-        }
+        public void getDisable2gResponse(SehRadioResponseInfo info, int isDisable)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void getNrIconTypeResponse(SehRadioResponseInfo info, int nrIconType) throws RemoteException {
-        }
+        public void getNrIconTypeResponse(SehRadioResponseInfo info, int nrIconType)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void getNrModeResponse(SehRadioResponseInfo info, int nrMode) throws RemoteException {
-        }
+        public void getNrModeResponse(SehRadioResponseInfo info, int nrMode)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void getPreferredNetworkListResponse(SehRadioResponseInfo info, SehPreferredNetworkInfo[] infos) throws RemoteException {
-        }
+        public void getPreferredNetworkListResponse(
+                SehRadioResponseInfo info, SehPreferredNetworkInfo[] infos)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void getRoamingNetworkInfoViaBLEResponse(SehRadioResponseInfo info, SehRoamingNetworkInfo[] networkInfo) throws RemoteException {
-        }
+        public void getRoamingNetworkInfoViaBLEResponse(
+                SehRadioResponseInfo info, SehRoamingNetworkInfo[] networkInfo)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void getVendorSpecificConfigurationResponse(SehRadioResponseInfo info, SehVendorConfiguration[] configurations) throws RemoteException {
-        }
+        public void getVendorSpecificConfigurationResponse(
+                SehRadioResponseInfo info, SehVendorConfiguration[] configurations)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void selectCsgManualResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void selectCsgManualResponse(SehRadioResponseInfo info) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void sendEncodedUssdResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void sendEncodedUssdResponse(SehRadioResponseInfo info) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void sendRequestRawResponse(SehRadioResponseInfo info, byte[] data) throws RemoteException {
-        }
+        public void sendRequestRawResponse(SehRadioResponseInfo info, byte[] data)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void sendRequestStringsResponse(SehRadioResponseInfo info, String[] data) throws RemoteException {
-        }
+        public void sendRequestStringsResponse(SehRadioResponseInfo info, String[] data)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void setCurrentNetworkInfoViaBLEResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void setCurrentNetworkInfoViaBLEResponse(SehRadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void setDisable2gResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void setDisable2gResponse(SehRadioResponseInfo info) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void setImsCallListResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void setImsCallListResponse(SehRadioResponseInfo info) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void setNrModeResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void setNrModeResponse(SehRadioResponseInfo info) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void setPreferredNetworkListResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void setPreferredNetworkListResponse(SehRadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void setRoamingNetworkInfoViaBLEResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void setRoamingNetworkInfoViaBLEResponse(SehRadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void setScanResultViaBLEResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void setScanResultViaBLEResponse(SehRadioResponseInfo info) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-        public void setVendorSpecificConfigurationResponse(SehRadioResponseInfo info) throws RemoteException {
-        }
+        public void setVendorSpecificConfigurationResponse(SehRadioResponseInfo info)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
         public int getInterfaceVersion() {
@@ -172,7 +191,7 @@ public interface ISehRadioNetworkResponse extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioNetworkResponse {
+    public abstract static class Stub extends Binder implements ISehRadioNetworkResponse {
         static final int TRANSACTION_emergencyControlResponse = 1;
         static final int TRANSACTION_emergencySearchResponse = 2;
         static final int TRANSACTION_getAvailableNetworksResponse = 3;
@@ -221,7 +240,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -242,129 +262,182 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SehRadioResponseInfo _arg0 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg0 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     emergencyControlResponse(_arg0);
                     return true;
                 case 2:
-                    SehRadioResponseInfo _arg02 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg02 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     emergencySearchResponse(_arg02, _arg1);
                     return true;
                 case 3:
-                    SehRadioResponseInfo _arg03 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    SehOperatorInfo[] _arg12 = (SehOperatorInfo[]) data.createTypedArray(SehOperatorInfo.CREATOR);
+                    SehRadioResponseInfo _arg03 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehOperatorInfo[] _arg12 =
+                            (SehOperatorInfo[]) data.createTypedArray(SehOperatorInfo.CREATOR);
                     data.enforceNoDataAvail();
                     getAvailableNetworksResponse(_arg03, _arg12);
                     return true;
                 case 4:
-                    SehRadioResponseInfo _arg04 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg04 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     getCnapResponse(_arg04, _arg13);
                     return true;
                 case 5:
-                    SehRadioResponseInfo _arg05 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg05 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     SehCsgInfo[] _arg14 = (SehCsgInfo[]) data.createTypedArray(SehCsgInfo.CREATOR);
                     data.enforceNoDataAvail();
                     getCsgListResponse(_arg05, _arg14);
                     return true;
                 case 6:
-                    SehRadioResponseInfo _arg06 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg06 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     int _arg15 = data.readInt();
                     data.enforceNoDataAvail();
                     getDisable2gResponse(_arg06, _arg15);
                     return true;
                 case 7:
-                    SehRadioResponseInfo _arg07 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg07 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     int _arg16 = data.readInt();
                     data.enforceNoDataAvail();
                     getNrIconTypeResponse(_arg07, _arg16);
                     return true;
                 case 8:
-                    SehRadioResponseInfo _arg08 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg08 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     int _arg17 = data.readInt();
                     data.enforceNoDataAvail();
                     getNrModeResponse(_arg08, _arg17);
                     return true;
                 case 9:
-                    SehRadioResponseInfo _arg09 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    SehPreferredNetworkInfo[] _arg18 = (SehPreferredNetworkInfo[]) data.createTypedArray(SehPreferredNetworkInfo.CREATOR);
+                    SehRadioResponseInfo _arg09 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehPreferredNetworkInfo[] _arg18 =
+                            (SehPreferredNetworkInfo[])
+                                    data.createTypedArray(SehPreferredNetworkInfo.CREATOR);
                     data.enforceNoDataAvail();
                     getPreferredNetworkListResponse(_arg09, _arg18);
                     return true;
                 case 10:
-                    SehRadioResponseInfo _arg010 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    SehRoamingNetworkInfo[] _arg19 = (SehRoamingNetworkInfo[]) data.createTypedArray(SehRoamingNetworkInfo.CREATOR);
+                    SehRadioResponseInfo _arg010 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRoamingNetworkInfo[] _arg19 =
+                            (SehRoamingNetworkInfo[])
+                                    data.createTypedArray(SehRoamingNetworkInfo.CREATOR);
                     data.enforceNoDataAvail();
                     getRoamingNetworkInfoViaBLEResponse(_arg010, _arg19);
                     return true;
                 case 11:
-                    SehRadioResponseInfo _arg011 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
-                    SehVendorConfiguration[] _arg110 = (SehVendorConfiguration[]) data.createTypedArray(SehVendorConfiguration.CREATOR);
+                    SehRadioResponseInfo _arg011 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehVendorConfiguration[] _arg110 =
+                            (SehVendorConfiguration[])
+                                    data.createTypedArray(SehVendorConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     getVendorSpecificConfigurationResponse(_arg011, _arg110);
                     return true;
                 case 12:
-                    SehRadioResponseInfo _arg012 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg012 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     selectCsgManualResponse(_arg012);
                     return true;
                 case 13:
-                    SehRadioResponseInfo _arg013 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg013 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     sendEncodedUssdResponse(_arg013);
                     return true;
                 case 14:
-                    SehRadioResponseInfo _arg014 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg014 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     byte[] _arg111 = data.createByteArray();
                     data.enforceNoDataAvail();
                     sendRequestRawResponse(_arg014, _arg111);
                     return true;
                 case 15:
-                    SehRadioResponseInfo _arg015 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg015 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     String[] _arg112 = data.createStringArray();
                     data.enforceNoDataAvail();
                     sendRequestStringsResponse(_arg015, _arg112);
                     return true;
                 case 16:
-                    SehRadioResponseInfo _arg016 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg016 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setCurrentNetworkInfoViaBLEResponse(_arg016);
                     return true;
                 case 17:
-                    SehRadioResponseInfo _arg017 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg017 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setDisable2gResponse(_arg017);
                     return true;
                 case 18:
-                    SehRadioResponseInfo _arg018 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg018 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setImsCallListResponse(_arg018);
                     return true;
                 case 19:
-                    SehRadioResponseInfo _arg019 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg019 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setNrModeResponse(_arg019);
                     return true;
                 case 20:
-                    SehRadioResponseInfo _arg020 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg020 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setPreferredNetworkListResponse(_arg020);
                     return true;
                 case 21:
-                    SehRadioResponseInfo _arg021 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg021 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setRoamingNetworkInfoViaBLEResponse(_arg021);
                     return true;
                 case 22:
-                    SehRadioResponseInfo _arg022 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg022 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setScanResultViaBLEResponse(_arg022);
                     return true;
                 case 23:
-                    SehRadioResponseInfo _arg023 = (SehRadioResponseInfo) data.readTypedObject(SehRadioResponseInfo.CREATOR);
+                    SehRadioResponseInfo _arg023 =
+                            (SehRadioResponseInfo)
+                                    data.readTypedObject(SehRadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setVendorSpecificConfigurationResponse(_arg023);
                     return true;
@@ -399,7 +472,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method emergencyControlResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method emergencyControlResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -407,7 +481,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void emergencySearchResponse(SehRadioResponseInfo info, int respEmergencySearch) throws RemoteException {
+            public void emergencySearchResponse(SehRadioResponseInfo info, int respEmergencySearch)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -415,7 +490,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     _data.writeInt(respEmergencySearch);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method emergencySearchResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method emergencySearchResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -423,7 +499,9 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void getAvailableNetworksResponse(SehRadioResponseInfo info, SehOperatorInfo[] networkInfos) throws RemoteException {
+            public void getAvailableNetworksResponse(
+                    SehRadioResponseInfo info, SehOperatorInfo[] networkInfos)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -431,7 +509,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     _data.writeTypedArray(networkInfos, 0);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getAvailableNetworksResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getAvailableNetworksResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -455,7 +534,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void getCsgListResponse(SehRadioResponseInfo info, SehCsgInfo[] csgInfos) throws RemoteException {
+            public void getCsgListResponse(SehRadioResponseInfo info, SehCsgInfo[] csgInfos)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -471,7 +551,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void getDisable2gResponse(SehRadioResponseInfo info, int isDisable) throws RemoteException {
+            public void getDisable2gResponse(SehRadioResponseInfo info, int isDisable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -487,7 +568,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void getNrIconTypeResponse(SehRadioResponseInfo info, int nrIconType) throws RemoteException {
+            public void getNrIconTypeResponse(SehRadioResponseInfo info, int nrIconType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -503,7 +585,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void getNrModeResponse(SehRadioResponseInfo info, int nrMode) throws RemoteException {
+            public void getNrModeResponse(SehRadioResponseInfo info, int nrMode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -519,7 +602,9 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void getPreferredNetworkListResponse(SehRadioResponseInfo info, SehPreferredNetworkInfo[] infos) throws RemoteException {
+            public void getPreferredNetworkListResponse(
+                    SehRadioResponseInfo info, SehPreferredNetworkInfo[] infos)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -527,7 +612,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     _data.writeTypedArray(infos, 0);
                     boolean _status = this.mRemote.transact(9, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getPreferredNetworkListResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getPreferredNetworkListResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -535,7 +621,9 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void getRoamingNetworkInfoViaBLEResponse(SehRadioResponseInfo info, SehRoamingNetworkInfo[] networkInfo) throws RemoteException {
+            public void getRoamingNetworkInfoViaBLEResponse(
+                    SehRadioResponseInfo info, SehRoamingNetworkInfo[] networkInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -543,7 +631,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     _data.writeTypedArray(networkInfo, 0);
                     boolean _status = this.mRemote.transact(10, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getRoamingNetworkInfoViaBLEResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getRoamingNetworkInfoViaBLEResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -551,7 +640,9 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void getVendorSpecificConfigurationResponse(SehRadioResponseInfo info, SehVendorConfiguration[] configurations) throws RemoteException {
+            public void getVendorSpecificConfigurationResponse(
+                    SehRadioResponseInfo info, SehVendorConfiguration[] configurations)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -559,7 +650,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     _data.writeTypedArray(configurations, 0);
                     boolean _status = this.mRemote.transact(11, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getVendorSpecificConfigurationResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getVendorSpecificConfigurationResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -574,7 +666,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(12, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method selectCsgManualResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method selectCsgManualResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -589,7 +682,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(13, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method sendEncodedUssdResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method sendEncodedUssdResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -597,7 +691,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void sendRequestRawResponse(SehRadioResponseInfo info, byte[] data) throws RemoteException {
+            public void sendRequestRawResponse(SehRadioResponseInfo info, byte[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -605,7 +700,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     _data.writeByteArray(data);
                     boolean _status = this.mRemote.transact(14, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method sendRequestRawResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method sendRequestRawResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -613,7 +709,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void sendRequestStringsResponse(SehRadioResponseInfo info, String[] data) throws RemoteException {
+            public void sendRequestStringsResponse(SehRadioResponseInfo info, String[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -621,7 +718,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     _data.writeStringArray(data);
                     boolean _status = this.mRemote.transact(15, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method sendRequestStringsResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method sendRequestStringsResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -629,14 +727,16 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void setCurrentNetworkInfoViaBLEResponse(SehRadioResponseInfo info) throws RemoteException {
+            public void setCurrentNetworkInfoViaBLEResponse(SehRadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(16, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setCurrentNetworkInfoViaBLEResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCurrentNetworkInfoViaBLEResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -666,7 +766,8 @@ public interface ISehRadioNetworkResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(18, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setImsCallListResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setImsCallListResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -689,14 +790,16 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void setPreferredNetworkListResponse(SehRadioResponseInfo info) throws RemoteException {
+            public void setPreferredNetworkListResponse(SehRadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(20, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setPreferredNetworkListResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setPreferredNetworkListResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -704,14 +807,16 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void setRoamingNetworkInfoViaBLEResponse(SehRadioResponseInfo info) throws RemoteException {
+            public void setRoamingNetworkInfoViaBLEResponse(SehRadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(21, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setRoamingNetworkInfoViaBLEResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setRoamingNetworkInfoViaBLEResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -719,14 +824,16 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void setScanResultViaBLEResponse(SehRadioResponseInfo info) throws RemoteException {
+            public void setScanResultViaBLEResponse(SehRadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(22, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setScanResultViaBLEResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setScanResultViaBLEResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -734,14 +841,16 @@ public interface ISehRadioNetworkResponse extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse
-            public void setVendorSpecificConfigurationResponse(SehRadioResponseInfo info) throws RemoteException {
+            public void setVendorSpecificConfigurationResponse(SehRadioResponseInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(23, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setVendorSpecificConfigurationResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setVendorSpecificConfigurationResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

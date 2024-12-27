@@ -5,6 +5,7 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi;
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.ExtendedInvalidKeySpecException;
+
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -24,15 +25,27 @@ import java.security.spec.RSAPublicKeySpec;
 public class KeyFactorySpi extends BaseKeyFactorySpi {
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
     protected KeySpec engineGetKeySpec(Key key, Class spec) throws InvalidKeySpecException {
-        if ((spec.isAssignableFrom(KeySpec.class) || spec.isAssignableFrom(RSAPublicKeySpec.class)) && (key instanceof RSAPublicKey)) {
+        if ((spec.isAssignableFrom(KeySpec.class) || spec.isAssignableFrom(RSAPublicKeySpec.class))
+                && (key instanceof RSAPublicKey)) {
             RSAPublicKey k = (RSAPublicKey) key;
             return new RSAPublicKeySpec(k.getModulus(), k.getPublicExponent());
         }
-        if ((spec.isAssignableFrom(KeySpec.class) || spec.isAssignableFrom(RSAPrivateCrtKeySpec.class)) && (key instanceof RSAPrivateCrtKey)) {
+        if ((spec.isAssignableFrom(KeySpec.class)
+                        || spec.isAssignableFrom(RSAPrivateCrtKeySpec.class))
+                && (key instanceof RSAPrivateCrtKey)) {
             RSAPrivateCrtKey k2 = (RSAPrivateCrtKey) key;
-            return new RSAPrivateCrtKeySpec(k2.getModulus(), k2.getPublicExponent(), k2.getPrivateExponent(), k2.getPrimeP(), k2.getPrimeQ(), k2.getPrimeExponentP(), k2.getPrimeExponentQ(), k2.getCrtCoefficient());
+            return new RSAPrivateCrtKeySpec(
+                    k2.getModulus(),
+                    k2.getPublicExponent(),
+                    k2.getPrivateExponent(),
+                    k2.getPrimeP(),
+                    k2.getPrimeQ(),
+                    k2.getPrimeExponentP(),
+                    k2.getPrimeExponentQ(),
+                    k2.getCrtCoefficient());
         }
-        if ((spec.isAssignableFrom(KeySpec.class) || spec.isAssignableFrom(RSAPrivateKeySpec.class)) && (key instanceof RSAPrivateKey)) {
+        if ((spec.isAssignableFrom(KeySpec.class) || spec.isAssignableFrom(RSAPrivateKeySpec.class))
+                && (key instanceof RSAPrivateKey)) {
             RSAPrivateKey k3 = (RSAPrivateKey) key;
             return new RSAPrivateKeySpec(k3.getModulus(), k3.getPrivateExponent());
         }
@@ -57,12 +70,16 @@ public class KeyFactorySpi extends BaseKeyFactorySpi {
     protected PrivateKey engineGeneratePrivate(KeySpec keySpec) throws InvalidKeySpecException {
         if (keySpec instanceof PKCS8EncodedKeySpec) {
             try {
-                return generatePrivate(PrivateKeyInfo.getInstance(((PKCS8EncodedKeySpec) keySpec).getEncoded()));
+                return generatePrivate(
+                        PrivateKeyInfo.getInstance(((PKCS8EncodedKeySpec) keySpec).getEncoded()));
             } catch (Exception e) {
                 try {
-                    return new BCRSAPrivateCrtKey(com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey.getInstance(((PKCS8EncodedKeySpec) keySpec).getEncoded()));
+                    return new BCRSAPrivateCrtKey(
+                            com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey
+                                    .getInstance(((PKCS8EncodedKeySpec) keySpec).getEncoded()));
                 } catch (Exception e2) {
-                    throw new ExtendedInvalidKeySpecException("unable to process key spec: " + e.toString(), e);
+                    throw new ExtendedInvalidKeySpecException(
+                            "unable to process key spec: " + e.toString(), e);
                 }
             }
         }
@@ -87,7 +104,9 @@ public class KeyFactorySpi extends BaseKeyFactorySpi {
     public PrivateKey generatePrivate(PrivateKeyInfo keyInfo) throws IOException {
         ASN1ObjectIdentifier algOid = keyInfo.getPrivateKeyAlgorithm().getAlgorithm();
         if (RSAUtil.isRsaOid(algOid)) {
-            com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey rsaPrivKey = com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey.getInstance(keyInfo.parsePrivateKey());
+            com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey rsaPrivKey =
+                    com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey.getInstance(
+                            keyInfo.parsePrivateKey());
             if (rsaPrivKey.getCoefficient().intValue() == 0) {
                 return new BCRSAPrivateKey(keyInfo.getPrivateKeyAlgorithm(), rsaPrivKey);
             }

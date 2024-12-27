@@ -3,26 +3,29 @@ package android.hardware.radio.ims;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SrvccCall implements Parcelable {
-    public static final Parcelable.Creator<SrvccCall> CREATOR = new Parcelable.Creator<SrvccCall>() { // from class: android.hardware.radio.ims.SrvccCall.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SrvccCall createFromParcel(Parcel _aidl_source) {
-            SrvccCall _aidl_out = new SrvccCall();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SrvccCall> CREATOR =
+            new Parcelable.Creator<
+                    SrvccCall>() { // from class: android.hardware.radio.ims.SrvccCall.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SrvccCall createFromParcel(Parcel _aidl_source) {
+                    SrvccCall _aidl_out = new SrvccCall();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SrvccCall[] newArray(int _aidl_size) {
-            return new SrvccCall[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SrvccCall[] newArray(int _aidl_size) {
+                    return new SrvccCall[_aidl_size];
+                }
+            };
     public int callSubstate;
     public int callType;
     public String name;

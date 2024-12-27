@@ -31,12 +31,14 @@ public interface IIpClient extends IInterface {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class Default implements IIpClient {
         @Override // android.net.ip.IIpClient
-        public void addKeepalivePacketFilter(int i, TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable) throws RemoteException {
-        }
+        public void addKeepalivePacketFilter(
+                int i, TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable)
+                throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void addNattKeepalivePacketFilter(int i, NattKeepalivePacketDataParcelable nattKeepalivePacketDataParcelable) throws RemoteException {
-        }
+        public void addNattKeepalivePacketFilter(
+                int i, NattKeepalivePacketDataParcelable nattKeepalivePacketDataParcelable)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -44,12 +46,10 @@ public interface IIpClient extends IInterface {
         }
 
         @Override // android.net.ip.IIpClient
-        public void completedPreDhcpAction() throws RemoteException {
-        }
+        public void completedPreDhcpAction() throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void confirmConfiguration() throws RemoteException {
-        }
+        public void confirmConfiguration() throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
         public String getInterfaceHash() {
@@ -62,52 +62,43 @@ public interface IIpClient extends IInterface {
         }
 
         @Override // android.net.ip.IIpClient
-        public void notifyPreconnectionComplete(boolean z) throws RemoteException {
-        }
+        public void notifyPreconnectionComplete(boolean z) throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void readPacketFilterComplete(byte[] bArr) throws RemoteException {
-        }
+        public void readPacketFilterComplete(byte[] bArr) throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void removeKeepalivePacketFilter(int i) throws RemoteException {
-        }
+        public void removeKeepalivePacketFilter(int i) throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void setHttpProxy(ProxyInfo proxyInfo) throws RemoteException {
-        }
+        public void setHttpProxy(ProxyInfo proxyInfo) throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void setL2KeyAndGroupHint(String str, String str2) throws RemoteException {
-        }
+        public void setL2KeyAndGroupHint(String str, String str2) throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void setMulticastFilter(boolean z) throws RemoteException {
-        }
+        public void setMulticastFilter(boolean z) throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void setTcpBufferSizes(String str) throws RemoteException {
-        }
+        public void setTcpBufferSizes(String str) throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void shutdown() throws RemoteException {
-        }
+        public void shutdown() throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void startProvisioning(ProvisioningConfigurationParcelable provisioningConfigurationParcelable) throws RemoteException {
-        }
+        public void startProvisioning(
+                ProvisioningConfigurationParcelable provisioningConfigurationParcelable)
+                throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void stop() throws RemoteException {
-        }
+        public void stop() throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void updateApfCapabilities(ApfCapabilities apfCapabilities) throws RemoteException {
-        }
+        public void updateApfCapabilities(ApfCapabilities apfCapabilities) throws RemoteException {}
 
         @Override // android.net.ip.IIpClient
-        public void updateLayer2Information(Layer2InformationParcelable layer2InformationParcelable) throws RemoteException {
-        }
+        public void updateLayer2Information(Layer2InformationParcelable layer2InformationParcelable)
+                throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -138,7 +129,8 @@ public interface IIpClient extends IInterface {
             public IBinder mRemote;
 
             @Override // android.net.ip.IIpClient
-            public final void addKeepalivePacketFilter(int i, TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable) {
+            public final void addKeepalivePacketFilter(
+                    int i, TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IIpClient.DESCRIPTOR);
@@ -146,7 +138,8 @@ public interface IIpClient extends IInterface {
                     obtain.writeTypedObject(tcpKeepalivePacketDataParcelable, 0);
                     if (this.mRemote.transact(10, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method addKeepalivePacketFilter is unimplemented.");
+                        throw new RemoteException(
+                                "Method addKeepalivePacketFilter is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -154,7 +147,8 @@ public interface IIpClient extends IInterface {
             }
 
             @Override // android.net.ip.IIpClient
-            public final void addNattKeepalivePacketFilter(int i, NattKeepalivePacketDataParcelable nattKeepalivePacketDataParcelable) {
+            public final void addNattKeepalivePacketFilter(
+                    int i, NattKeepalivePacketDataParcelable nattKeepalivePacketDataParcelable) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IIpClient.DESCRIPTOR);
@@ -162,7 +156,8 @@ public interface IIpClient extends IInterface {
                     obtain.writeTypedObject(nattKeepalivePacketDataParcelable, 0);
                     if (this.mRemote.transact(13, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method addNattKeepalivePacketFilter is unimplemented.");
+                        throw new RemoteException(
+                                "Method addNattKeepalivePacketFilter is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -181,7 +176,8 @@ public interface IIpClient extends IInterface {
                     obtain.writeInterfaceToken(IIpClient.DESCRIPTOR);
                     if (this.mRemote.transact(1, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method completedPreDhcpAction is unimplemented.");
+                        throw new RemoteException(
+                                "Method completedPreDhcpAction is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -210,7 +206,8 @@ public interface IIpClient extends IInterface {
                         Parcel obtain2 = Parcel.obtain();
                         try {
                             obtain.writeInterfaceToken(IIpClient.DESCRIPTOR);
-                            this.mRemote.transact(Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
+                            this.mRemote.transact(
+                                    Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
                             obtain2.readException();
                             this.mCachedHash = obtain2.readString();
                             obtain2.recycle();
@@ -234,7 +231,8 @@ public interface IIpClient extends IInterface {
                     Parcel obtain2 = Parcel.obtain();
                     try {
                         obtain.writeInterfaceToken(IIpClient.DESCRIPTOR);
-                        this.mRemote.transact(Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
+                        this.mRemote.transact(
+                                Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
                         obtain2.readException();
                         this.mCachedVersion = obtain2.readInt();
                     } finally {
@@ -253,7 +251,8 @@ public interface IIpClient extends IInterface {
                     obtain.writeBoolean(z);
                     if (this.mRemote.transact(14, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method notifyPreconnectionComplete is unimplemented.");
+                        throw new RemoteException(
+                                "Method notifyPreconnectionComplete is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -268,7 +267,8 @@ public interface IIpClient extends IInterface {
                     obtain.writeByteArray(bArr);
                     if (this.mRemote.transact(3, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method readPacketFilterComplete is unimplemented.");
+                        throw new RemoteException(
+                                "Method readPacketFilterComplete is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -283,7 +283,8 @@ public interface IIpClient extends IInterface {
                     obtain.writeInt(i);
                     if (this.mRemote.transact(11, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method removeKeepalivePacketFilter is unimplemented.");
+                        throw new RemoteException(
+                                "Method removeKeepalivePacketFilter is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -366,7 +367,8 @@ public interface IIpClient extends IInterface {
             }
 
             @Override // android.net.ip.IIpClient
-            public final void startProvisioning(ProvisioningConfigurationParcelable provisioningConfigurationParcelable) {
+            public final void startProvisioning(
+                    ProvisioningConfigurationParcelable provisioningConfigurationParcelable) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IIpClient.DESCRIPTOR);
@@ -410,14 +412,16 @@ public interface IIpClient extends IInterface {
             }
 
             @Override // android.net.ip.IIpClient
-            public final void updateLayer2Information(Layer2InformationParcelable layer2InformationParcelable) {
+            public final void updateLayer2Information(
+                    Layer2InformationParcelable layer2InformationParcelable) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IIpClient.DESCRIPTOR);
                     obtain.writeTypedObject(layer2InformationParcelable, 0);
                     if (this.mRemote.transact(15, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method updateLayer2Information is unimplemented.");
+                        throw new RemoteException(
+                                "Method updateLayer2Information is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -450,7 +454,8 @@ public interface IIpClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             String str = IIpClient.DESCRIPTOR;
             if (i >= 1 && i <= TRANSACTION_getInterfaceVersion) {
                 parcel.enforceInterface(str);
@@ -483,7 +488,10 @@ public interface IIpClient extends IInterface {
                     shutdown();
                     return true;
                 case 5:
-                    startProvisioning((ProvisioningConfigurationParcelable) parcel.readTypedObject(ProvisioningConfigurationParcelable.CREATOR));
+                    startProvisioning(
+                            (ProvisioningConfigurationParcelable)
+                                    parcel.readTypedObject(
+                                            ProvisioningConfigurationParcelable.CREATOR));
                     return true;
                 case 6:
                     stop();
@@ -498,7 +506,11 @@ public interface IIpClient extends IInterface {
                     setMulticastFilter(parcel.readBoolean());
                     return true;
                 case 10:
-                    addKeepalivePacketFilter(parcel.readInt(), (TcpKeepalivePacketDataParcelable) parcel.readTypedObject(TcpKeepalivePacketDataParcelable.CREATOR));
+                    addKeepalivePacketFilter(
+                            parcel.readInt(),
+                            (TcpKeepalivePacketDataParcelable)
+                                    parcel.readTypedObject(
+                                            TcpKeepalivePacketDataParcelable.CREATOR));
                     return true;
                 case 11:
                     removeKeepalivePacketFilter(parcel.readInt());
@@ -507,16 +519,23 @@ public interface IIpClient extends IInterface {
                     setL2KeyAndGroupHint(parcel.readString(), parcel.readString());
                     return true;
                 case 13:
-                    addNattKeepalivePacketFilter(parcel.readInt(), (NattKeepalivePacketDataParcelable) parcel.readTypedObject(NattKeepalivePacketDataParcelable.CREATOR));
+                    addNattKeepalivePacketFilter(
+                            parcel.readInt(),
+                            (NattKeepalivePacketDataParcelable)
+                                    parcel.readTypedObject(
+                                            NattKeepalivePacketDataParcelable.CREATOR));
                     return true;
                 case 14:
                     notifyPreconnectionComplete(parcel.readBoolean());
                     return true;
                 case 15:
-                    updateLayer2Information((Layer2InformationParcelable) parcel.readTypedObject(Layer2InformationParcelable.CREATOR));
+                    updateLayer2Information(
+                            (Layer2InformationParcelable)
+                                    parcel.readTypedObject(Layer2InformationParcelable.CREATOR));
                     return true;
                 case 16:
-                    updateApfCapabilities((ApfCapabilities) parcel.readTypedObject(ApfCapabilities.CREATOR));
+                    updateApfCapabilities(
+                            (ApfCapabilities) parcel.readTypedObject(ApfCapabilities.CREATOR));
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -524,9 +543,13 @@ public interface IIpClient extends IInterface {
         }
     }
 
-    void addKeepalivePacketFilter(int i, TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable) throws RemoteException;
+    void addKeepalivePacketFilter(
+            int i, TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable)
+            throws RemoteException;
 
-    void addNattKeepalivePacketFilter(int i, NattKeepalivePacketDataParcelable nattKeepalivePacketDataParcelable) throws RemoteException;
+    void addNattKeepalivePacketFilter(
+            int i, NattKeepalivePacketDataParcelable nattKeepalivePacketDataParcelable)
+            throws RemoteException;
 
     void completedPreDhcpAction() throws RemoteException;
 
@@ -552,11 +575,13 @@ public interface IIpClient extends IInterface {
 
     void shutdown() throws RemoteException;
 
-    void startProvisioning(ProvisioningConfigurationParcelable provisioningConfigurationParcelable) throws RemoteException;
+    void startProvisioning(ProvisioningConfigurationParcelable provisioningConfigurationParcelable)
+            throws RemoteException;
 
     void stop() throws RemoteException;
 
     void updateApfCapabilities(ApfCapabilities apfCapabilities) throws RemoteException;
 
-    void updateLayer2Information(Layer2InformationParcelable layer2InformationParcelable) throws RemoteException;
+    void updateLayer2Information(Layer2InformationParcelable layer2InformationParcelable)
+            throws RemoteException;
 }

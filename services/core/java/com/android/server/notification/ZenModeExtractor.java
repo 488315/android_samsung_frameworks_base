@@ -35,12 +35,17 @@ public class ZenModeExtractor implements NotificationSignalExtractor {
             return null;
         }
         synchronized (zenModeHelper.mConfigLock) {
-            shouldIntercept = zenModeHelper.mFiltering.shouldIntercept(zenModeHelper.mZenMode, zenModeHelper.mConsolidatedPolicy, notificationRecord);
+            shouldIntercept =
+                    zenModeHelper.mFiltering.shouldIntercept(
+                            zenModeHelper.mZenMode,
+                            zenModeHelper.mConsolidatedPolicy,
+                            notificationRecord);
         }
         notificationRecord.mIntercept = shouldIntercept;
         notificationRecord.mInterceptSet = true;
         if (shouldIntercept) {
-            notificationRecord.mSuppressedVisualEffects = this.mZenModeHelper.mConsolidatedPolicy.copy().suppressedVisualEffects;
+            notificationRecord.mSuppressedVisualEffects =
+                    this.mZenModeHelper.mConsolidatedPolicy.copy().suppressedVisualEffects;
         } else {
             notificationRecord.mSuppressedVisualEffects = 0;
         }
@@ -48,8 +53,7 @@ public class ZenModeExtractor implements NotificationSignalExtractor {
     }
 
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void setConfig(RankingConfig rankingConfig) {
-    }
+    public final void setConfig(RankingConfig rankingConfig) {}
 
     @Override // com.android.server.notification.NotificationSignalExtractor
     public final void setZenHelper(ZenModeHelper zenModeHelper) {

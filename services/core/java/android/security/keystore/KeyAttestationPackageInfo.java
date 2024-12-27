@@ -29,9 +29,11 @@ public final class KeyAttestationPackageInfo implements Parcelable {
                     if (parcel.dataPosition() - dataPosition < readInt) {
                         keyAttestationPackageInfo.versionCode = parcel.readLong();
                         if (parcel.dataPosition() - dataPosition < readInt) {
-                            keyAttestationPackageInfo.signatures = (Signature[]) parcel.createTypedArray(Signature.CREATOR);
+                            keyAttestationPackageInfo.signatures =
+                                    (Signature[]) parcel.createTypedArray(Signature.CREATOR);
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");

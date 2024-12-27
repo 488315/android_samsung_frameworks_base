@@ -2,6 +2,7 @@ package com.android.server;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.samsung.android.service.HermesService.HermesServiceManager;
 
 /* loaded from: classes5.dex */
@@ -42,7 +43,8 @@ public class HermesATCmd implements IWorkOnAt {
     private HermesServiceManager bindHermesServiceManager() {
         if (this.mHermesServiceManager == null) {
             Log.i(TAG, "bindHermesServiceManager() is called.");
-            this.mHermesServiceManager = new HermesServiceManager(this.mContext.getApplicationContext());
+            this.mHermesServiceManager =
+                    new HermesServiceManager(this.mContext.getApplicationContext());
         }
         return this.mHermesServiceManager;
     }
@@ -158,7 +160,9 @@ public class HermesATCmd implements IWorkOnAt {
                         break;
                     }
                 case 93:
-                    byte[] res = bindHermesServiceManager().cosPatchTest(hexStringToByteArray(params[2]));
+                    byte[] res =
+                            bindHermesServiceManager()
+                                    .cosPatchTest(hexStringToByteArray(params[2]));
                     if (res != null) {
                         result = result + new String(res);
                         break;
@@ -202,7 +206,10 @@ public class HermesATCmd implements IWorkOnAt {
         int length = hexString.length();
         byte[] byteArray = new byte[length / 2];
         for (int i = 0; i < length; i += 2) {
-            byteArray[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) << 4) + Character.digit(hexString.charAt(i + 1), 16));
+            byteArray[i / 2] =
+                    (byte)
+                            ((Character.digit(hexString.charAt(i), 16) << 4)
+                                    + Character.digit(hexString.charAt(i + 1), 16));
         }
         return byteArray;
     }

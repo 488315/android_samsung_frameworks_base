@@ -7,19 +7,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextEnvironmentAdaptiveDisplay extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextEnvironmentAdaptiveDisplay> CREATOR = new Parcelable.Creator<SemContextEnvironmentAdaptiveDisplay>() { // from class: com.samsung.android.hardware.context.SemContextEnvironmentAdaptiveDisplay.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextEnvironmentAdaptiveDisplay createFromParcel(Parcel in) {
-            return new SemContextEnvironmentAdaptiveDisplay(in);
-        }
+    public static final Parcelable.Creator<SemContextEnvironmentAdaptiveDisplay> CREATOR =
+            new Parcelable.Creator<
+                    SemContextEnvironmentAdaptiveDisplay>() { // from class:
+                                                              // com.samsung.android.hardware.context.SemContextEnvironmentAdaptiveDisplay.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextEnvironmentAdaptiveDisplay createFromParcel(Parcel in) {
+                    return new SemContextEnvironmentAdaptiveDisplay(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextEnvironmentAdaptiveDisplay[] newArray(int size) {
-            return new SemContextEnvironmentAdaptiveDisplay[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextEnvironmentAdaptiveDisplay[] newArray(int size) {
+                    return new SemContextEnvironmentAdaptiveDisplay[size];
+                }
+            };
     private Bundle mContext;
 
     SemContextEnvironmentAdaptiveDisplay() {

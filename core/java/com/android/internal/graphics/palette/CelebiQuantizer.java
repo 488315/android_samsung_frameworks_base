@@ -1,6 +1,5 @@
 package com.android.internal.graphics.palette;
 
-import com.android.internal.graphics.palette.Palette;
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -11,7 +10,9 @@ public class CelebiQuantizer implements Quantizer {
     public void quantize(int[] pixels, int maxColors) {
         WuQuantizer wu = new WuQuantizer();
         wu.quantize(pixels, maxColors);
-        WSMeansQuantizer kmeans = new WSMeansQuantizer(wu.getColors(), new LABPointProvider(), wu.inputPixelToCount());
+        WSMeansQuantizer kmeans =
+                new WSMeansQuantizer(
+                        wu.getColors(), new LABPointProvider(), wu.inputPixelToCount());
         kmeans.quantize(pixels, maxColors);
         this.mSwatches = kmeans.getQuantizedColors();
     }

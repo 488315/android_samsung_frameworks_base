@@ -1,6 +1,7 @@
 package com.android.internal.inputmethod;
 
 import android.util.Log;
+
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
@@ -10,8 +11,7 @@ import java.util.concurrent.TimeoutException;
 
 /* loaded from: classes5.dex */
 public final class CompletableFutureUtil {
-    private CompletableFutureUtil() {
-    }
+    private CompletableFutureUtil() {}
 
     private static <T> T getValueOrRethrowErrorInternal(CompletableFuture<T> future) {
         boolean interrupted = false;
@@ -34,9 +34,16 @@ public final class CompletableFutureUtil {
         return future.get();
     }
 
-    private static <T> T getValueOrNullInternal(CompletableFuture<T> future, String tag, String methodName, long timeoutMillis, CancellationGroup cancellationGroup) {
+    private static <T> T getValueOrNullInternal(
+            CompletableFuture<T> future,
+            String tag,
+            String methodName,
+            long timeoutMillis,
+            CancellationGroup cancellationGroup) {
         T t;
-        boolean needsToUnregister = cancellationGroup != null && cancellationGroup.tryRegisterFutureOrCancelImmediately(future);
+        boolean needsToUnregister =
+                cancellationGroup != null
+                        && cancellationGroup.tryRegisterFutureOrCancelImmediately(future);
         boolean interrupted = false;
         while (true) {
             try {
@@ -148,23 +155,44 @@ public final class CompletableFutureUtil {
         return ((Integer) getValueOrRethrowErrorInternal(future)).intValue();
     }
 
-    public static boolean getResultOrFalse(CompletableFuture<Boolean> future, String tag, String methodName, CancellationGroup cancellationGroup, long timeoutMillis) {
-        Boolean obj = (Boolean) getValueOrNullInternal(future, tag, methodName, timeoutMillis, cancellationGroup);
+    public static boolean getResultOrFalse(
+            CompletableFuture<Boolean> future,
+            String tag,
+            String methodName,
+            CancellationGroup cancellationGroup,
+            long timeoutMillis) {
+        Boolean obj =
+                (Boolean)
+                        getValueOrNullInternal(
+                                future, tag, methodName, timeoutMillis, cancellationGroup);
         if (obj != null) {
             return obj.booleanValue();
         }
         return false;
     }
 
-    public static int getResultOrZero(CompletableFuture<Integer> future, String tag, String methodName, CancellationGroup cancellationGroup, long timeoutMillis) {
-        Integer obj = (Integer) getValueOrNullInternal(future, tag, methodName, timeoutMillis, cancellationGroup);
+    public static int getResultOrZero(
+            CompletableFuture<Integer> future,
+            String tag,
+            String methodName,
+            CancellationGroup cancellationGroup,
+            long timeoutMillis) {
+        Integer obj =
+                (Integer)
+                        getValueOrNullInternal(
+                                future, tag, methodName, timeoutMillis, cancellationGroup);
         if (obj != null) {
             return obj.intValue();
         }
         return 0;
     }
 
-    public static <T> T getResultOrNull(CompletableFuture<T> completableFuture, String str, String str2, CancellationGroup cancellationGroup, long j) {
+    public static <T> T getResultOrNull(
+            CompletableFuture<T> completableFuture,
+            String str,
+            String str2,
+            CancellationGroup cancellationGroup,
+            long j) {
         return (T) getValueOrNullInternal(completableFuture, str, str2, j, cancellationGroup);
     }
 }

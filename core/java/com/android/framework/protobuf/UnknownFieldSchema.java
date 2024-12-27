@@ -41,8 +41,7 @@ abstract class UnknownFieldSchema<T, B> {
 
     abstract void writeTo(T t, Writer writer) throws IOException;
 
-    UnknownFieldSchema() {
-    }
+    UnknownFieldSchema() {}
 
     final boolean mergeOneFieldFrom(B unknownFields, Reader reader) throws IOException {
         int tag = reader.getTag();
@@ -77,7 +76,7 @@ abstract class UnknownFieldSchema<T, B> {
     }
 
     final void mergeFrom(B unknownFields, Reader reader) throws IOException {
-        while (reader.getFieldNumber() != Integer.MAX_VALUE && mergeOneFieldFrom(unknownFields, reader)) {
-        }
+        while (reader.getFieldNumber() != Integer.MAX_VALUE
+                && mergeOneFieldFrom(unknownFields, reader)) {}
     }
 }

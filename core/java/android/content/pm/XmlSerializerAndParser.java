@@ -3,14 +3,17 @@ package android.content.pm;
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
+import java.io.IOException;
+
 /* loaded from: classes.dex */
 public interface XmlSerializerAndParser<T> {
-    T createFromXml(TypedXmlPullParser typedXmlPullParser) throws IOException, XmlPullParserException;
+    T createFromXml(TypedXmlPullParser typedXmlPullParser)
+            throws IOException, XmlPullParserException;
 
     void writeAsXml(T t, TypedXmlSerializer typedXmlSerializer) throws IOException;
 

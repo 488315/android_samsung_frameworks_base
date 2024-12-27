@@ -3,7 +3,9 @@ package android.os.vibrator;
 import android.content.res.Resources;
 import android.os.VibrationAttributes;
 import android.util.IndentingPrintWriter;
+
 import com.android.internal.R;
+
 import java.util.Arrays;
 
 /* loaded from: classes3.dex */
@@ -23,19 +25,34 @@ public class VibrationConfig {
     private final int mRequestVibrationParamsTimeoutMs;
 
     public VibrationConfig(Resources resources) {
-        this.mHapticChannelMaxVibrationAmplitude = loadFloat(resources, R.dimen.config_hapticChannelMaxVibrationAmplitude, 0.0f);
-        this.mRampDownDurationMs = loadInteger(resources, R.integer.config_vibrationWaveformRampDownDuration, 0);
-        this.mRampStepDurationMs = loadInteger(resources, R.integer.config_vibrationWaveformRampStepDuration, 0);
-        this.mRequestVibrationParamsTimeoutMs = loadInteger(resources, R.integer.config_requestVibrationParamsTimeout, 0);
-        this.mRequestVibrationParamsForUsages = loadIntArray(resources, R.array.config_requestVibrationParamsForUsages);
-        this.mIgnoreVibrationsOnWirelessCharger = loadBoolean(resources, R.bool.config_ignoreVibrationsOnWirelessCharger, false);
-        this.mDefaultKeyboardVibrationEnabled = loadBoolean(resources, R.bool.config_defaultKeyboardVibrationEnabled, true);
-        this.mHasFixedKeyboardAmplitude = loadFloat(resources, R.dimen.config_keyboardHapticFeedbackFixedAmplitude, -1.0f) > 0.0f;
-        this.mDefaultAlarmVibrationIntensity = loadDefaultIntensity(resources, R.integer.config_defaultAlarmVibrationIntensity);
-        this.mDefaultHapticFeedbackIntensity = loadDefaultIntensity(resources, R.integer.config_defaultHapticFeedbackIntensity);
-        this.mDefaultMediaVibrationIntensity = loadDefaultIntensity(resources, R.integer.config_defaultMediaVibrationIntensity);
-        this.mDefaultNotificationVibrationIntensity = loadDefaultIntensity(resources, R.integer.config_defaultNotificationVibrationIntensity);
-        this.mDefaultRingVibrationIntensity = loadDefaultIntensity(resources, R.integer.config_defaultRingVibrationIntensity);
+        this.mHapticChannelMaxVibrationAmplitude =
+                loadFloat(resources, R.dimen.config_hapticChannelMaxVibrationAmplitude, 0.0f);
+        this.mRampDownDurationMs =
+                loadInteger(resources, R.integer.config_vibrationWaveformRampDownDuration, 0);
+        this.mRampStepDurationMs =
+                loadInteger(resources, R.integer.config_vibrationWaveformRampStepDuration, 0);
+        this.mRequestVibrationParamsTimeoutMs =
+                loadInteger(resources, R.integer.config_requestVibrationParamsTimeout, 0);
+        this.mRequestVibrationParamsForUsages =
+                loadIntArray(resources, R.array.config_requestVibrationParamsForUsages);
+        this.mIgnoreVibrationsOnWirelessCharger =
+                loadBoolean(resources, R.bool.config_ignoreVibrationsOnWirelessCharger, false);
+        this.mDefaultKeyboardVibrationEnabled =
+                loadBoolean(resources, R.bool.config_defaultKeyboardVibrationEnabled, true);
+        this.mHasFixedKeyboardAmplitude =
+                loadFloat(resources, R.dimen.config_keyboardHapticFeedbackFixedAmplitude, -1.0f)
+                        > 0.0f;
+        this.mDefaultAlarmVibrationIntensity =
+                loadDefaultIntensity(resources, R.integer.config_defaultAlarmVibrationIntensity);
+        this.mDefaultHapticFeedbackIntensity =
+                loadDefaultIntensity(resources, R.integer.config_defaultHapticFeedbackIntensity);
+        this.mDefaultMediaVibrationIntensity =
+                loadDefaultIntensity(resources, R.integer.config_defaultMediaVibrationIntensity);
+        this.mDefaultNotificationVibrationIntensity =
+                loadDefaultIntensity(
+                        resources, R.integer.config_defaultNotificationVibrationIntensity);
+        this.mDefaultRingVibrationIntensity =
+                loadDefaultIntensity(resources, R.integer.config_defaultRingVibrationIntensity);
     }
 
     private static int loadDefaultIntensity(Resources res, int resId) {
@@ -123,17 +140,44 @@ public class VibrationConfig {
     }
 
     public String toString() {
-        return "VibrationConfig{mIgnoreVibrationsOnWirelessCharger=" + this.mIgnoreVibrationsOnWirelessCharger + ", mHapticChannelMaxVibrationAmplitude=" + this.mHapticChannelMaxVibrationAmplitude + ", mRampStepDurationMs=" + this.mRampStepDurationMs + ", mRampDownDurationMs=" + this.mRampDownDurationMs + ", mRequestVibrationParamsForUsages=" + Arrays.toString(getRequestVibrationParamsForUsagesNames()) + ", mRequestVibrationParamsTimeoutMs=" + this.mRequestVibrationParamsTimeoutMs + ", mDefaultAlarmIntensity=" + this.mDefaultAlarmVibrationIntensity + ", mDefaultHapticFeedbackIntensity=" + this.mDefaultHapticFeedbackIntensity + ", mDefaultMediaIntensity=" + this.mDefaultMediaVibrationIntensity + ", mDefaultNotificationIntensity=" + this.mDefaultNotificationVibrationIntensity + ", mDefaultRingIntensity=" + this.mDefaultRingVibrationIntensity + ", mDefaultKeyboardVibrationEnabled=" + this.mDefaultKeyboardVibrationEnabled + "}";
+        return "VibrationConfig{mIgnoreVibrationsOnWirelessCharger="
+                + this.mIgnoreVibrationsOnWirelessCharger
+                + ", mHapticChannelMaxVibrationAmplitude="
+                + this.mHapticChannelMaxVibrationAmplitude
+                + ", mRampStepDurationMs="
+                + this.mRampStepDurationMs
+                + ", mRampDownDurationMs="
+                + this.mRampDownDurationMs
+                + ", mRequestVibrationParamsForUsages="
+                + Arrays.toString(getRequestVibrationParamsForUsagesNames())
+                + ", mRequestVibrationParamsTimeoutMs="
+                + this.mRequestVibrationParamsTimeoutMs
+                + ", mDefaultAlarmIntensity="
+                + this.mDefaultAlarmVibrationIntensity
+                + ", mDefaultHapticFeedbackIntensity="
+                + this.mDefaultHapticFeedbackIntensity
+                + ", mDefaultMediaIntensity="
+                + this.mDefaultMediaVibrationIntensity
+                + ", mDefaultNotificationIntensity="
+                + this.mDefaultNotificationVibrationIntensity
+                + ", mDefaultRingIntensity="
+                + this.mDefaultRingVibrationIntensity
+                + ", mDefaultKeyboardVibrationEnabled="
+                + this.mDefaultKeyboardVibrationEnabled
+                + "}";
     }
 
     public void dumpWithoutDefaultSettings(IndentingPrintWriter pw) {
         pw.println("VibrationConfig:");
         pw.increaseIndent();
-        pw.println("ignoreVibrationsOnWirelessCharger = " + this.mIgnoreVibrationsOnWirelessCharger);
+        pw.println(
+                "ignoreVibrationsOnWirelessCharger = " + this.mIgnoreVibrationsOnWirelessCharger);
         pw.println("hapticChannelMaxAmplitude = " + this.mHapticChannelMaxVibrationAmplitude);
         pw.println("rampStepDurationMs = " + this.mRampStepDurationMs);
         pw.println("rampDownDurationMs = " + this.mRampDownDurationMs);
-        pw.println("requestVibrationParamsForUsages = " + Arrays.toString(getRequestVibrationParamsForUsagesNames()));
+        pw.println(
+                "requestVibrationParamsForUsages = "
+                        + Arrays.toString(getRequestVibrationParamsForUsagesNames()));
         pw.println("requestVibrationParamsTimeoutMs = " + this.mRequestVibrationParamsTimeoutMs);
         pw.decreaseIndent();
     }

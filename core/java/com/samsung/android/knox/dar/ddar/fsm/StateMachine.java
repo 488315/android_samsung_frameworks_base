@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.samsung.android.knox.dar.ddar.DualDarConstants;
 import com.samsung.android.knox.dar.ddar.proxy.IProxyService;
 import com.samsung.android.knox.dar.ddar.proxy.KnoxProxyManager;
@@ -81,7 +82,9 @@ public class StateMachine {
 
     private static IProxyService getService() {
         if (_instance == null) {
-            _instance = IProxyService.Stub.asInterface(ServiceManager.getService(KnoxProxyManager.PROXY_SERVICE));
+            _instance =
+                    IProxyService.Stub.asInterface(
+                            ServiceManager.getService(KnoxProxyManager.PROXY_SERVICE));
         }
         return _instance;
     }

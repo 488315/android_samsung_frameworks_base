@@ -6,10 +6,9 @@ import android.util.Slog;
 import android.view.Display;
 import android.view.DisplayAddress;
 import android.view.Surface;
-import com.android.server.display.DisplayAdapter;
-import com.android.server.display.DisplayManagerService;
-import com.android.server.display.PersistentDataStore;
+
 import com.android.server.display.utils.DebugUtils;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -27,10 +26,10 @@ public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
     public boolean mNeedWakeLock = false;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Listener {
-    }
+    public interface Listener {}
 
-    public DisplayDeviceRepository(DisplayManagerService.SyncRoot syncRoot, PersistentDataStore persistentDataStore) {
+    public DisplayDeviceRepository(
+            DisplayManagerService.SyncRoot syncRoot, PersistentDataStore persistentDataStore) {
         this.mSyncRoot = syncRoot;
         this.mPersistentDataStore = persistentDataStore;
     }
@@ -54,9 +53,12 @@ public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
 
     public final DisplayDevice getByAddressLocked(DisplayAddress displayAddress) {
         for (int size = ((ArrayList) this.mDisplayDevices).size() - 1; size >= 0; size--) {
-            DisplayDevice displayDevice = (DisplayDevice) ((ArrayList) this.mDisplayDevices).get(size);
+            DisplayDevice displayDevice =
+                    (DisplayDevice) ((ArrayList) this.mDisplayDevices).get(size);
             DisplayDeviceInfo displayDeviceInfoLocked = displayDevice.getDisplayDeviceInfoLocked();
-            if (displayAddress.equals(displayDeviceInfoLocked.address) || DisplayAddress.Physical.isPortMatch(displayAddress, displayDeviceInfoLocked.address)) {
+            if (displayAddress.equals(displayDeviceInfoLocked.address)
+                    || DisplayAddress.Physical.isPortMatch(
+                            displayAddress, displayDeviceInfoLocked.address)) {
                 return displayDevice;
             }
         }
@@ -65,7 +67,8 @@ public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
 
     public final DisplayDevice getByUniqueIdLocked(String str) {
         for (int size = ((ArrayList) this.mDisplayDevices).size() - 1; size >= 0; size--) {
-            DisplayDevice displayDevice = (DisplayDevice) ((ArrayList) this.mDisplayDevices).get(size);
+            DisplayDevice displayDevice =
+                    (DisplayDevice) ((ArrayList) this.mDisplayDevices).get(size);
             if (displayDevice.mUniqueId.equals(str)) {
                 return displayDevice;
             }
@@ -106,33 +109,69 @@ public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
             if (i == 2) {
                 synchronized (this.mSyncRoot) {
                     try {
-                        DisplayDeviceInfo displayDeviceInfoLocked = displayDevice.getDisplayDeviceInfoLocked();
+                        DisplayDeviceInfo displayDeviceInfoLocked =
+                                displayDevice.getDisplayDeviceInfoLocked();
                         if (((ArrayList) this.mDisplayDevices).contains(displayDevice)) {
                             str2 = str;
                             if (z) {
                                 Trace.traceBegin(131072L, "handleDisplayDeviceChanged");
                             }
-                            int diff = displayDevice.mDebugLastLoggedDeviceInfo.diff(displayDeviceInfoLocked);
+                            int diff =
+                                    displayDevice.mDebugLastLoggedDeviceInfo.diff(
+                                            displayDeviceInfoLocked);
                             if (diff == 2) {
-                                Slog.i("DisplayDeviceRepository", "Display device changed state: \"" + displayDeviceInfoLocked.name + "\", " + Display.stateToString(displayDeviceInfoLocked.state));
+                                Slog.i(
+                                        "DisplayDeviceRepository",
+                                        "Display device changed state: \""
+                                                + displayDeviceInfoLocked.name
+                                                + "\", "
+                                                + Display.stateToString(
+                                                        displayDeviceInfoLocked.state));
                             } else if (diff == 32) {
-                                Slog.i("DisplayDeviceRepository", "Display device rotated: \"" + displayDeviceInfoLocked.name + "\", " + Surface.rotationToString(displayDeviceInfoLocked.rotation));
+                                Slog.i(
+                                        "DisplayDeviceRepository",
+                                        "Display device rotated: \""
+                                                + displayDeviceInfoLocked.name
+                                                + "\", "
+                                                + Surface.rotationToString(
+                                                        displayDeviceInfoLocked.rotation));
                             } else if (diff == 192) {
-                                Slog.i("DisplayDeviceRepository", "Display device changed render timings: \"" + displayDeviceInfoLocked.name + "\", renderFrameRate=" + displayDeviceInfoLocked.renderFrameRate + ", presentationDeadlineNanos=" + displayDeviceInfoLocked.presentationDeadlineNanos + ", appVsyncOffsetNanos=" + displayDeviceInfoLocked.appVsyncOffsetNanos);
+                                Slog.i(
+                                        "DisplayDeviceRepository",
+                                        "Display device changed render timings: \""
+                                                + displayDeviceInfoLocked.name
+                                                + "\", renderFrameRate="
+                                                + displayDeviceInfoLocked.renderFrameRate
+                                                + ", presentationDeadlineNanos="
+                                                + displayDeviceInfoLocked.presentationDeadlineNanos
+                                                + ", appVsyncOffsetNanos="
+                                                + displayDeviceInfoLocked.appVsyncOffsetNanos);
                             } else if (diff == 4) {
                                 if (z) {
-                                    Slog.i("DisplayDeviceRepository", "Display device changed committed state: \"" + displayDeviceInfoLocked.name + "\", " + Display.stateToString(displayDeviceInfoLocked.committedState));
+                                    Slog.i(
+                                            "DisplayDeviceRepository",
+                                            "Display device changed committed state: \""
+                                                    + displayDeviceInfoLocked.name
+                                                    + "\", "
+                                                    + Display.stateToString(
+                                                            displayDeviceInfoLocked
+                                                                    .committedState));
                                 }
                             } else if (diff != 16) {
-                                Slog.i("DisplayDeviceRepository", "Display device changed: " + displayDeviceInfoLocked);
+                                Slog.i(
+                                        "DisplayDeviceRepository",
+                                        "Display device changed: " + displayDeviceInfoLocked);
                             }
                             if ((diff & 8) != 0) {
                                 try {
-                                    PersistentDataStore persistentDataStore = this.mPersistentDataStore;
+                                    PersistentDataStore persistentDataStore =
+                                            this.mPersistentDataStore;
                                     int i2 = displayDeviceInfoLocked.colorMode;
                                     persistentDataStore.getClass();
                                     if (displayDevice.hasStableUniqueId()) {
-                                        PersistentDataStore.DisplayState displayState = persistentDataStore.getDisplayState(displayDevice.mUniqueId, true);
+                                        PersistentDataStore.DisplayState displayState =
+                                                persistentDataStore.getDisplayState(
+                                                        displayDevice.mUniqueId, true);
                                         if (i2 != displayState.mColorMode) {
                                             displayState.mColorMode = i2;
                                             persistentDataStore.mDirty = true;
@@ -151,7 +190,10 @@ public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
                                 Trace.traceEnd(131072L);
                             }
                         } else {
-                            Slog.w("DisplayDeviceRepository", "Attempted to change non-existent display device: " + displayDeviceInfoLocked);
+                            Slog.w(
+                                    "DisplayDeviceRepository",
+                                    "Attempted to change non-existent display device: "
+                                            + displayDeviceInfoLocked);
                         }
                     } finally {
                     }
@@ -159,19 +201,28 @@ public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
             } else if (i == 3) {
                 synchronized (this.mSyncRoot) {
                     try {
-                        DisplayDeviceInfo displayDeviceInfoLocked2 = displayDevice.getDisplayDeviceInfoLocked();
+                        DisplayDeviceInfo displayDeviceInfoLocked2 =
+                                displayDevice.getDisplayDeviceInfoLocked();
                         if (((ArrayList) this.mDisplayDevices).remove(displayDevice)) {
                             if (displayDeviceInfoLocked2.type != 2) {
                                 z2 = false;
                             }
-                            Slog.i("DisplayDeviceRepository", "Display device removed: " + displayDeviceInfoLocked2);
+                            Slog.i(
+                                    "DisplayDeviceRepository",
+                                    "Display device removed: " + displayDeviceInfoLocked2);
                             displayDevice.mDebugLastLoggedDeviceInfo = displayDeviceInfoLocked2;
                             sendEventLocked(displayDevice, 3);
-                            if (!this.mNeedWakeLock && z2 && (wakeLock2 = this.mHDMIWakeLock) != null && wakeLock2.isHeld()) {
+                            if (!this.mNeedWakeLock
+                                    && z2
+                                    && (wakeLock2 = this.mHDMIWakeLock) != null
+                                    && wakeLock2.isHeld()) {
                                 this.mHDMIWakeLock.release();
                             }
                         } else {
-                            Slog.w("DisplayDeviceRepository", "Attempted to remove non-existent display device: " + displayDeviceInfoLocked2);
+                            Slog.w(
+                                    "DisplayDeviceRepository",
+                                    "Attempted to remove non-existent display device: "
+                                            + displayDeviceInfoLocked2);
                         }
                     } finally {
                     }
@@ -182,16 +233,25 @@ public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
             str2 = str;
             synchronized (this.mSyncRoot) {
                 try {
-                    DisplayDeviceInfo displayDeviceInfoLocked3 = displayDevice.getDisplayDeviceInfoLocked();
+                    DisplayDeviceInfo displayDeviceInfoLocked3 =
+                            displayDevice.getDisplayDeviceInfoLocked();
                     if (((ArrayList) this.mDisplayDevices).contains(displayDevice)) {
-                        Slog.w("DisplayDeviceRepository", "Attempted to add already added display device: " + displayDeviceInfoLocked3);
+                        Slog.w(
+                                "DisplayDeviceRepository",
+                                "Attempted to add already added display device: "
+                                        + displayDeviceInfoLocked3);
                     } else {
                         boolean z3 = displayDeviceInfoLocked3.type == 2;
-                        Slog.i("DisplayDeviceRepository", "Display device added: " + displayDeviceInfoLocked3);
+                        Slog.i(
+                                "DisplayDeviceRepository",
+                                "Display device added: " + displayDeviceInfoLocked3);
                         displayDevice.mDebugLastLoggedDeviceInfo = displayDeviceInfoLocked3;
                         ((ArrayList) this.mDisplayDevices).add(displayDevice);
                         sendEventLocked(displayDevice, 1);
-                        if (this.mNeedWakeLock && z3 && (wakeLock = this.mHDMIWakeLock) != null && !wakeLock.isHeld()) {
+                        if (this.mNeedWakeLock
+                                && z3
+                                && (wakeLock = this.mHDMIWakeLock) != null
+                                && !wakeLock.isHeld()) {
                             this.mHDMIWakeLock.acquire();
                         }
                     }
@@ -207,10 +267,13 @@ public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
     public final void sendChangedEventLocked(DisplayDevice displayDevice, int i) {
         int size = ((ArrayList) this.mListeners).size();
         for (int i2 = 0; i2 < size; i2++) {
-            LogicalDisplayMapper logicalDisplayMapper = (LogicalDisplayMapper) ((Listener) ((ArrayList) this.mListeners).get(i2));
+            LogicalDisplayMapper logicalDisplayMapper =
+                    (LogicalDisplayMapper) ((Listener) ((ArrayList) this.mListeners).get(i2));
             if (LogicalDisplayMapper.DEBUG) {
                 logicalDisplayMapper.getClass();
-                Slog.d("LogicalDisplayMapper", "Display device changed: " + displayDevice.getDisplayDeviceInfoLocked());
+                Slog.d(
+                        "LogicalDisplayMapper",
+                        "Display device changed: " + displayDevice.getDisplayDeviceInfoLocked());
             }
             logicalDisplayMapper.finishStateTransitionLocked(false);
             logicalDisplayMapper.updateLogicalDisplaysLocked(i, false);
@@ -228,6 +291,9 @@ public final class DisplayDeviceRepository implements DisplayAdapter.Listener {
             Method dump skipped, instructions count: 346
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.DisplayDeviceRepository.sendEventLocked(com.android.server.display.DisplayDevice, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.DisplayDeviceRepository.sendEventLocked(com.android.server.display.DisplayDevice,"
+                    + " int):void");
     }
 }

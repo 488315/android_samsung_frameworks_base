@@ -5,30 +5,35 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
 import android.util.TimeUtils;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class Geofence implements Parcelable {
-    public static final Parcelable.Creator<Geofence> CREATOR = new Parcelable.Creator<Geofence>() { // from class: android.location.Geofence.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Geofence createFromParcel(Parcel in) {
-            return new Geofence(in.readDouble(), in.readDouble(), in.readFloat(), in.readLong());
-        }
+    public static final Parcelable.Creator<Geofence> CREATOR =
+            new Parcelable.Creator<Geofence>() { // from class: android.location.Geofence.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Geofence createFromParcel(Parcel in) {
+                    return new Geofence(
+                            in.readDouble(), in.readDouble(), in.readFloat(), in.readLong());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Geofence[] newArray(int size) {
-            return new Geofence[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Geofence[] newArray(int size) {
+                    return new Geofence[size];
+                }
+            };
     private long mExpirationRealtimeMs;
     private final double mLatitude;
     private final double mLongitude;
     private final float mRadius;
 
-    public static Geofence createCircle(double latitude, double longitude, float radius, long expirationRealtimeMs) {
+    public static Geofence createCircle(
+            double latitude, double longitude, float radius, long expirationRealtimeMs) {
         return new Geofence(latitude, longitude, radius, expirationRealtimeMs);
     }
 
@@ -83,16 +88,26 @@ public final class Geofence implements Parcelable {
             return false;
         }
         Geofence geofence = (Geofence) o;
-        return Double.compare(geofence.mLatitude, this.mLatitude) == 0 && Double.compare(geofence.mLongitude, this.mLongitude) == 0 && Float.compare(geofence.mRadius, this.mRadius) == 0 && this.mExpirationRealtimeMs == geofence.mExpirationRealtimeMs;
+        return Double.compare(geofence.mLatitude, this.mLatitude) == 0
+                && Double.compare(geofence.mLongitude, this.mLongitude) == 0
+                && Float.compare(geofence.mRadius, this.mRadius) == 0
+                && this.mExpirationRealtimeMs == geofence.mExpirationRealtimeMs;
     }
 
     public int hashCode() {
-        return Objects.hash(Double.valueOf(this.mLatitude), Double.valueOf(this.mLongitude), Float.valueOf(this.mRadius));
+        return Objects.hash(
+                Double.valueOf(this.mLatitude),
+                Double.valueOf(this.mLongitude),
+                Float.valueOf(this.mRadius));
     }
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Geofence[(").append(this.mLatitude).append(", ").append(this.mLongitude).append(NavigationBarInflaterView.KEY_CODE_END);
+        builder.append("Geofence[(")
+                .append(this.mLatitude)
+                .append(", ")
+                .append(this.mLongitude)
+                .append(NavigationBarInflaterView.KEY_CODE_END);
         builder.append(" ").append(this.mRadius).append("m");
         if (this.mExpirationRealtimeMs < Long.MAX_VALUE) {
             if (isExpired()) {

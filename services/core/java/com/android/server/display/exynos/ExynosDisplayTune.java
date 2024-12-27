@@ -1,6 +1,7 @@
 package com.android.server.display.exynos;
 
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -74,16 +75,15 @@ public final class ExynosDisplayTune {
 
     public static int getItemEnable(String str, String str2, String str3) {
         try {
-            String[] parserFactoryXMLText = ExynosDisplayUtils.parserFactoryXMLText(0, 0, str, str2, str3);
+            String[] parserFactoryXMLText =
+                    ExynosDisplayUtils.parserFactoryXMLText(0, 0, str, str2, str3);
             if (parserFactoryXMLText != null) {
-                if (parserFactoryXMLText.length < 1) {
-                }
+                if (parserFactoryXMLText.length < 1) {}
                 return Integer.parseInt(parserFactoryXMLText[0].split("\\s*,\\s*")[0]);
             }
             parserFactoryXMLText = ExynosDisplayUtils.parserFactoryXMLText(10, 0, str, str2, str3);
             if (parserFactoryXMLText != null) {
-                if (parserFactoryXMLText.length < 1) {
-                }
+                if (parserFactoryXMLText.length < 1) {}
                 return Integer.parseInt(parserFactoryXMLText[0].split("\\s*,\\s*")[0]);
             }
             return 0;
@@ -103,15 +103,23 @@ public final class ExynosDisplayTune {
         } else if (this.mTuneTimer == null) {
             Timer timer2 = new Timer();
             this.mTuneTimer = timer2;
-            timer2.scheduleAtFixedRate(new TimerTask() { // from class: com.android.server.display.exynos.ExynosDisplayTune.1
-                @Override // java.util.TimerTask, java.lang.Runnable
-                public final void run() {
-                    ExynosDisplayTune exynosDisplayTune = ExynosDisplayTune.this;
-                    exynosDisplayTune.setCalibrationDQE(ExynosDisplayUtils.getPathWithPanel(exynosDisplayTune.CALIB_DATA_XML_PATH), "tune");
-                }
-            }, this.mDelayMs, this.mPeriodMs);
+            timer2.scheduleAtFixedRate(
+                    new TimerTask() { // from class:
+                                      // com.android.server.display.exynos.ExynosDisplayTune.1
+                        @Override // java.util.TimerTask, java.lang.Runnable
+                        public final void run() {
+                            ExynosDisplayTune exynosDisplayTune = ExynosDisplayTune.this;
+                            exynosDisplayTune.setCalibrationDQE(
+                                    ExynosDisplayUtils.getPathWithPanel(
+                                            exynosDisplayTune.CALIB_DATA_XML_PATH),
+                                    "tune");
+                        }
+                    },
+                    this.mDelayMs,
+                    this.mPeriodMs);
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("enableTuneTimer: enable=", "ExynosDisplayTune", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "enableTuneTimer: enable=", "ExynosDisplayTune", z);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:17:0x005a A[RETURN] */
@@ -125,6 +133,9 @@ public final class ExynosDisplayTune {
             Method dump skipped, instructions count: 1105
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.exynos.ExynosDisplayTune.setCalibrationDQE(java.lang.String, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.exynos.ExynosDisplayTune.setCalibrationDQE(java.lang.String,"
+                    + " java.lang.String):void");
     }
 }

@@ -3,14 +3,14 @@ package com.android.server.display.brightness.clamper;
 import android.os.Handler;
 import android.provider.DeviceConfigInterface;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.am.KillPolicyManager$$ExternalSyntheticOutline0;
 import com.android.server.display.DisplayDeviceConfig;
-import com.android.server.display.brightness.clamper.BrightnessClamper;
-import com.android.server.display.brightness.clamper.BrightnessClamperController;
 import com.android.server.display.feature.DeviceConfigParameterProvider;
 import com.android.server.display.utils.DeviceConfigParsingUtils;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,14 +36,16 @@ public final class BrightnessPowerClamper extends BrightnessClamper {
     public String mUniqueDisplayId;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class Injector {
-    }
+    class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface PowerData {
-    }
+    public interface PowerData {}
 
-    public BrightnessPowerClamper(Injector injector, Handler handler, BrightnessClamperController.ClamperChangeListener clamperChangeListener, PowerData powerData) {
+    public BrightnessPowerClamper(
+            Injector injector,
+            Handler handler,
+            BrightnessClamperController.ClamperChangeListener clamperChangeListener,
+            PowerData powerData) {
         super(handler, clamperChangeListener);
         this.mPowerThrottlingDataOverride = Map.of();
         this.mPowerThrottlingDataFromDDC = null;
@@ -57,15 +59,36 @@ public final class BrightnessPowerClamper extends BrightnessClamper {
         this.mDataSetMapper = new BrightnessPowerClamper$$ExternalSyntheticLambda2();
         this.mInjector = injector;
         injector.getClass();
-        this.mConfigParameterProvider = new DeviceConfigParameterProvider(DeviceConfigInterface.REAL);
+        this.mConfigParameterProvider =
+                new DeviceConfigParameterProvider(DeviceConfigInterface.REAL);
         handler.post(new BrightnessPowerClamper$$ExternalSyntheticLambda3(this, powerData, 0));
     }
 
     @Override // com.android.server.display.brightness.clamper.BrightnessClamper
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, this.mUniqueDisplayId, "  mCurrentThermalLevel=", KillPolicyManager$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "BrightnessPowerClamper:", "  mCurrentAvgPowerConsumed="), this.mCurrentAvgPowerConsumed, printWriter, "  mUniqueDisplayId=")), this.mCurrentThermalLevel, printWriter, "  mPowerThrottlingDataFromDDC=");
-        DisplayDeviceConfig.PowerThrottlingData powerThrottlingData = this.mPowerThrottlingDataFromDDC;
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(m, powerThrottlingData == null ? "null" : powerThrottlingData.toString(), printWriter);
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                printWriter,
+                                this.mUniqueDisplayId,
+                                "  mCurrentThermalLevel=",
+                                KillPolicyManager$$ExternalSyntheticOutline0.m(
+                                        BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                                                printWriter,
+                                                "BrightnessPowerClamper:",
+                                                "  mCurrentAvgPowerConsumed="),
+                                        this.mCurrentAvgPowerConsumed,
+                                        printWriter,
+                                        "  mUniqueDisplayId=")),
+                        this.mCurrentThermalLevel,
+                        printWriter,
+                        "  mPowerThrottlingDataFromDDC=");
+        DisplayDeviceConfig.PowerThrottlingData powerThrottlingData =
+                this.mPowerThrottlingDataFromDDC;
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                m,
+                powerThrottlingData == null ? "null" : powerThrottlingData.toString(),
+                printWriter);
         super.dump(printWriter);
     }
 
@@ -76,19 +99,30 @@ public final class BrightnessPowerClamper extends BrightnessClamper {
 
     @Override // com.android.server.display.brightness.clamper.BrightnessClamper
     public final void onDeviceConfigChanged() {
-        this.mHandler.post(new Runnable() { // from class: com.android.server.display.brightness.clamper.BrightnessPowerClamper$$ExternalSyntheticLambda5
-            @Override // java.lang.Runnable
-            public final void run() {
-                BrightnessPowerClamper brightnessPowerClamper = BrightnessPowerClamper.this;
-                brightnessPowerClamper.mPowerThrottlingDataOverride = DeviceConfigParsingUtils.parseDeviceConfigMap(brightnessPowerClamper.mConfigParameterProvider.mDeviceConfig.getString("display_manager", "power_throttling_data", (String) null), brightnessPowerClamper.mDataPointMapper, brightnessPowerClamper.mDataSetMapper);
-                brightnessPowerClamper.recalculateActiveData();
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.display.brightness.clamper.BrightnessPowerClamper$$ExternalSyntheticLambda5
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        BrightnessPowerClamper brightnessPowerClamper = BrightnessPowerClamper.this;
+                        brightnessPowerClamper.mPowerThrottlingDataOverride =
+                                DeviceConfigParsingUtils.parseDeviceConfigMap(
+                                        brightnessPowerClamper.mConfigParameterProvider
+                                                .mDeviceConfig.getString(
+                                                "display_manager",
+                                                "power_throttling_data",
+                                                (String) null),
+                                        brightnessPowerClamper.mDataPointMapper,
+                                        brightnessPowerClamper.mDataSetMapper);
+                        brightnessPowerClamper.recalculateActiveData();
+                    }
+                });
     }
 
     @Override // com.android.server.display.brightness.clamper.BrightnessClamper
     public final void onDisplayChanged(Object obj) {
-        this.mHandler.post(new BrightnessPowerClamper$$ExternalSyntheticLambda3(this, (PowerData) obj, 1));
+        this.mHandler.post(
+                new BrightnessPowerClamper$$ExternalSyntheticLambda3(this, (PowerData) obj, 1));
     }
 
     public final void recalculateActiveData() {
@@ -97,7 +131,10 @@ public final class BrightnessPowerClamper extends BrightnessClamper {
         if (str == null || this.mDataId == null) {
             return;
         }
-        DisplayDeviceConfig.PowerThrottlingData powerThrottlingData = (DisplayDeviceConfig.PowerThrottlingData) ((Map) this.mPowerThrottlingDataOverride.getOrDefault(str, Map.of())).getOrDefault(this.mDataId, this.mPowerThrottlingDataFromDDC);
+        DisplayDeviceConfig.PowerThrottlingData powerThrottlingData =
+                (DisplayDeviceConfig.PowerThrottlingData)
+                        ((Map) this.mPowerThrottlingDataOverride.getOrDefault(str, Map.of()))
+                                .getOrDefault(this.mDataId, this.mPowerThrottlingDataFromDDC);
         this.mPowerThrottlingDataActive = powerThrottlingData;
         if (powerThrottlingData != null) {
             PmicMonitor pmicMonitor = this.mPmicMonitor;
@@ -111,7 +148,8 @@ public final class BrightnessPowerClamper extends BrightnessClamper {
             }
         } else {
             PmicMonitor pmicMonitor2 = this.mPmicMonitor;
-            if (pmicMonitor2 != null && (scheduledFuture = pmicMonitor2.mPmicMonitorFuture) != null) {
+            if (pmicMonitor2 != null
+                    && (scheduledFuture = pmicMonitor2.mPmicMonitorFuture) != null) {
                 scheduledFuture.cancel(true);
                 pmicMonitor2.mPmicMonitorFuture = null;
             }
@@ -123,12 +161,14 @@ public final class BrightnessPowerClamper extends BrightnessClamper {
         float f;
         boolean z;
         int i = this.mCurrentThermalLevel;
-        DisplayDeviceConfig.PowerThrottlingData powerThrottlingData = this.mPowerThrottlingDataActive;
+        DisplayDeviceConfig.PowerThrottlingData powerThrottlingData =
+                this.mPowerThrottlingDataActive;
         if (powerThrottlingData != null) {
             Iterator it = ((ArrayList) powerThrottlingData.throttlingLevels).iterator();
             f = 0.0f;
             while (it.hasNext()) {
-                DisplayDeviceConfig.PowerThrottlingData.ThrottlingLevel throttlingLevel = (DisplayDeviceConfig.PowerThrottlingData.ThrottlingLevel) it.next();
+                DisplayDeviceConfig.PowerThrottlingData.ThrottlingLevel throttlingLevel =
+                        (DisplayDeviceConfig.PowerThrottlingData.ThrottlingLevel) it.next();
                 if (throttlingLevel.thermalStatus > i) {
                     break;
                 } else {
@@ -145,7 +185,10 @@ public final class BrightnessPowerClamper extends BrightnessClamper {
         if (f > FullScreenMagnificationGestureHandler.MAX_SCALE) {
             float f3 = this.mCurrentAvgPowerConsumed;
             if (f3 > f) {
-                f2 = Math.max((f / f3) * 1.0f, this.mPowerThrottlingConfigData.brightnessLowestCapAllowed);
+                f2 =
+                        Math.max(
+                                (f / f3) * 1.0f,
+                                this.mPowerThrottlingConfigData.brightnessLowestCapAllowed);
                 z = true;
                 if (this.mBrightnessCap == f2 || this.mIsActive != z) {
                     this.mIsActive = z;
@@ -156,28 +199,37 @@ public final class BrightnessPowerClamper extends BrightnessClamper {
             }
         }
         z = false;
-        if (this.mBrightnessCap == f2) {
-        }
+        if (this.mBrightnessCap == f2) {}
         this.mIsActive = z;
         this.mBrightnessCap = f2;
         this.mChangeListener.onChanged();
     }
 
     public final void setDisplayData(PowerData powerData) {
-        this.mUniqueDisplayId = ((BrightnessClamperController.DisplayDeviceData) powerData).mUniqueDisplayId;
-        BrightnessClamperController.DisplayDeviceData displayDeviceData = (BrightnessClamperController.DisplayDeviceData) powerData;
+        this.mUniqueDisplayId =
+                ((BrightnessClamperController.DisplayDeviceData) powerData).mUniqueDisplayId;
+        BrightnessClamperController.DisplayDeviceData displayDeviceData =
+                (BrightnessClamperController.DisplayDeviceData) powerData;
         String str = displayDeviceData.mPowerThrottlingDataId;
         this.mDataId = str;
         DisplayDeviceConfig displayDeviceConfig = displayDeviceData.mDisplayDeviceConfig;
-        DisplayDeviceConfig.PowerThrottlingData powerThrottlingData = (DisplayDeviceConfig.PowerThrottlingData) ((HashMap) displayDeviceConfig.mPowerThrottlingDataMapByThrottlingId).get(str);
+        DisplayDeviceConfig.PowerThrottlingData powerThrottlingData =
+                (DisplayDeviceConfig.PowerThrottlingData)
+                        ((HashMap) displayDeviceConfig.mPowerThrottlingDataMapByThrottlingId)
+                                .get(str);
         this.mPowerThrottlingDataFromDDC = powerThrottlingData;
         if (powerThrottlingData == null && !"default".equals(this.mDataId)) {
-            Slog.wtf("BrightnessPowerClamper", "Power throttling data is missing for powerThrottlingDataId=" + this.mDataId);
+            Slog.wtf(
+                    "BrightnessPowerClamper",
+                    "Power throttling data is missing for powerThrottlingDataId=" + this.mDataId);
         }
-        DisplayDeviceConfig.PowerThrottlingConfigData powerThrottlingConfigData = displayDeviceConfig.mPowerThrottlingConfigData;
+        DisplayDeviceConfig.PowerThrottlingConfigData powerThrottlingConfigData =
+                displayDeviceConfig.mPowerThrottlingConfigData;
         this.mPowerThrottlingConfigData = powerThrottlingConfigData;
         if (powerThrottlingConfigData == null) {
-            Slog.d("BrightnessPowerClamper", "Power throttling data is missing for configuration data.");
+            Slog.d(
+                    "BrightnessPowerClamper",
+                    "Power throttling data is missing for configuration data.");
         }
     }
 

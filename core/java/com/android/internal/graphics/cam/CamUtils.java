@@ -2,18 +2,34 @@ package com.android.internal.graphics.cam;
 
 import android.graphics.Color;
 import android.hardware.scontext.SContextConstants;
+
 import com.android.internal.graphics.ColorUtils;
 
 /* loaded from: classes5.dex */
 public final class CamUtils {
-    static final float[][] XYZ_TO_CAM16RGB = {new float[]{0.401288f, 0.650173f, -0.051461f}, new float[]{-0.250268f, 1.204414f, 0.045854f}, new float[]{-0.002079f, 0.048952f, 0.953127f}};
-    static final float[][] CAM16RGB_TO_XYZ = {new float[]{1.8620678f, -1.0112547f, 0.14918678f}, new float[]{0.38752654f, 0.62144744f, -0.00897398f}, new float[]{-0.0158415f, -0.03412294f, 1.0499644f}};
+    static final float[][] XYZ_TO_CAM16RGB = {
+        new float[] {0.401288f, 0.650173f, -0.051461f},
+        new float[] {-0.250268f, 1.204414f, 0.045854f},
+        new float[] {-0.002079f, 0.048952f, 0.953127f}
+    };
+    static final float[][] CAM16RGB_TO_XYZ = {
+        new float[] {1.8620678f, -1.0112547f, 0.14918678f},
+        new float[] {0.38752654f, 0.62144744f, -0.00897398f},
+        new float[] {-0.0158415f, -0.03412294f, 1.0499644f}
+    };
     static final float[] WHITE_POINT_D65 = {95.047f, 100.0f, 108.883f};
-    static final double[][] SRGB_TO_XYZ = {new double[]{0.41233895d, 0.35762064d, 0.18051042d}, new double[]{0.2126d, 0.7152d, 0.0722d}, new double[]{0.01932141d, 0.11916382d, 0.95034478d}};
-    static final double[][] XYZ_TO_SRGB = {new double[]{3.2413774792388685d, -1.5376652402851851d, -0.49885366846268053d}, new double[]{-0.9691452513005321d, 1.8758853451067872d, 0.04156585616912061d}, new double[]{0.05562093689691305d, -0.20395524564742123d, 1.0571799111220335d}};
+    static final double[][] SRGB_TO_XYZ = {
+        new double[] {0.41233895d, 0.35762064d, 0.18051042d},
+        new double[] {0.2126d, 0.7152d, 0.0722d},
+        new double[] {0.01932141d, 0.11916382d, 0.95034478d}
+    };
+    static final double[][] XYZ_TO_SRGB = {
+        new double[] {3.2413774792388685d, -1.5376652402851851d, -0.49885366846268053d},
+        new double[] {-0.9691452513005321d, 1.8758853451067872d, 0.04156585616912061d},
+        new double[] {0.05562093689691305d, -0.20395524564742123d, 1.0571799111220335d}
+    };
 
-    private CamUtils() {
-    }
+    private CamUtils() {}
 
     public static int signum(double num) {
         if (num < SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
@@ -116,7 +132,8 @@ public final class CamUtils {
         } else {
             zT = ((116.0f * fy) - 16.0f) / 903.2963f;
         }
-        return ColorUtils.XYZToColor(WHITE_POINT_D65[0] * xT, WHITE_POINT_D65[1] * yT, WHITE_POINT_D65[2] * zT);
+        return ColorUtils.XYZToColor(
+                WHITE_POINT_D65[0] * xT, WHITE_POINT_D65[1] * yT, WHITE_POINT_D65[2] * zT);
     }
 
     public static float lstarFromInt(int argb) {
@@ -149,7 +166,7 @@ public final class CamUtils {
         double x = (r * matrix[0][0]) + (g * matrix[0][1]) + (b * matrix[0][2]);
         double y = (r * matrix[1][0]) + (g * matrix[1][1]) + (b * matrix[1][2]);
         double z = (r * matrix[2][0]) + (g * matrix[2][1]) + (b * matrix[2][2]);
-        return new float[]{(float) x, (float) y, (float) z};
+        return new float[] {(float) x, (float) y, (float) z};
     }
 
     public static double yFromLstar(double lstar) {

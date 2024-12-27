@@ -7,52 +7,66 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.app.IVoiceInteractorRequest;
 
 /* loaded from: classes5.dex */
 public interface IVoiceInteractorCallback extends IInterface {
-    void deliverAbortVoiceResult(IVoiceInteractorRequest iVoiceInteractorRequest, Bundle bundle) throws RemoteException;
+    void deliverAbortVoiceResult(IVoiceInteractorRequest iVoiceInteractorRequest, Bundle bundle)
+            throws RemoteException;
 
     void deliverCancel(IVoiceInteractorRequest iVoiceInteractorRequest) throws RemoteException;
 
-    void deliverCommandResult(IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, Bundle bundle) throws RemoteException;
+    void deliverCommandResult(
+            IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, Bundle bundle)
+            throws RemoteException;
 
-    void deliverCompleteVoiceResult(IVoiceInteractorRequest iVoiceInteractorRequest, Bundle bundle) throws RemoteException;
+    void deliverCompleteVoiceResult(IVoiceInteractorRequest iVoiceInteractorRequest, Bundle bundle)
+            throws RemoteException;
 
-    void deliverConfirmationResult(IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, Bundle bundle) throws RemoteException;
+    void deliverConfirmationResult(
+            IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, Bundle bundle)
+            throws RemoteException;
 
-    void deliverPickOptionResult(IVoiceInteractorRequest iVoiceInteractorRequest, boolean z, VoiceInteractor.PickOptionRequest.Option[] optionArr, Bundle bundle) throws RemoteException;
+    void deliverPickOptionResult(
+            IVoiceInteractorRequest iVoiceInteractorRequest,
+            boolean z,
+            VoiceInteractor.PickOptionRequest.Option[] optionArr,
+            Bundle bundle)
+            throws RemoteException;
 
     void destroy() throws RemoteException;
 
     public static class Default implements IVoiceInteractorCallback {
         @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverConfirmationResult(IVoiceInteractorRequest request, boolean confirmed, Bundle result) throws RemoteException {
-        }
+        public void deliverConfirmationResult(
+                IVoiceInteractorRequest request, boolean confirmed, Bundle result)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverPickOptionResult(IVoiceInteractorRequest request, boolean finished, VoiceInteractor.PickOptionRequest.Option[] selections, Bundle result) throws RemoteException {
-        }
+        public void deliverPickOptionResult(
+                IVoiceInteractorRequest request,
+                boolean finished,
+                VoiceInteractor.PickOptionRequest.Option[] selections,
+                Bundle result)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverCompleteVoiceResult(IVoiceInteractorRequest request, Bundle result) throws RemoteException {
-        }
+        public void deliverCompleteVoiceResult(IVoiceInteractorRequest request, Bundle result)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverAbortVoiceResult(IVoiceInteractorRequest request, Bundle result) throws RemoteException {
-        }
+        public void deliverAbortVoiceResult(IVoiceInteractorRequest request, Bundle result)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverCommandResult(IVoiceInteractorRequest request, boolean finished, Bundle result) throws RemoteException {
-        }
+        public void deliverCommandResult(
+                IVoiceInteractorRequest request, boolean finished, Bundle result)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void deliverCancel(IVoiceInteractorRequest request) throws RemoteException {
-        }
+        public void deliverCancel(IVoiceInteractorRequest request) throws RemoteException {}
 
         @Override // com.android.internal.app.IVoiceInteractorCallback
-        public void destroy() throws RemoteException {
-        }
+        public void destroy() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -60,7 +74,7 @@ public interface IVoiceInteractorCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoiceInteractorCallback {
+    public abstract static class Stub extends Binder implements IVoiceInteractorCallback {
         public static final String DESCRIPTOR = "com.android.internal.app.IVoiceInteractorCallback";
         static final int TRANSACTION_deliverAbortVoiceResult = 4;
         static final int TRANSACTION_deliverCancel = 6;
@@ -117,7 +131,8 @@ public interface IVoiceInteractorCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -127,41 +142,50 @@ public interface IVoiceInteractorCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IVoiceInteractorRequest _arg0 = IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractorRequest _arg0 =
+                            IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
                     boolean _arg1 = data.readBoolean();
                     Bundle _arg2 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     deliverConfirmationResult(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    IVoiceInteractorRequest _arg02 = IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractorRequest _arg02 =
+                            IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
                     boolean _arg12 = data.readBoolean();
-                    VoiceInteractor.PickOptionRequest.Option[] _arg22 = (VoiceInteractor.PickOptionRequest.Option[]) data.createTypedArray(VoiceInteractor.PickOptionRequest.Option.CREATOR);
+                    VoiceInteractor.PickOptionRequest.Option[] _arg22 =
+                            (VoiceInteractor.PickOptionRequest.Option[])
+                                    data.createTypedArray(
+                                            VoiceInteractor.PickOptionRequest.Option.CREATOR);
                     Bundle _arg3 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     deliverPickOptionResult(_arg02, _arg12, _arg22, _arg3);
                     return true;
                 case 3:
-                    IVoiceInteractorRequest _arg03 = IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractorRequest _arg03 =
+                            IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
                     Bundle _arg13 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     deliverCompleteVoiceResult(_arg03, _arg13);
                     return true;
                 case 4:
-                    IVoiceInteractorRequest _arg04 = IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractorRequest _arg04 =
+                            IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
                     Bundle _arg14 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     deliverAbortVoiceResult(_arg04, _arg14);
                     return true;
                 case 5:
-                    IVoiceInteractorRequest _arg05 = IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractorRequest _arg05 =
+                            IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
                     boolean _arg15 = data.readBoolean();
                     Bundle _arg23 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     deliverCommandResult(_arg05, _arg15, _arg23);
                     return true;
                 case 6:
-                    IVoiceInteractorRequest _arg06 = IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractorRequest _arg06 =
+                            IVoiceInteractorRequest.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     deliverCancel(_arg06);
                     return true;
@@ -190,7 +214,9 @@ public interface IVoiceInteractorCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
-            public void deliverConfirmationResult(IVoiceInteractorRequest request, boolean confirmed, Bundle result) throws RemoteException {
+            public void deliverConfirmationResult(
+                    IVoiceInteractorRequest request, boolean confirmed, Bundle result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -204,7 +230,12 @@ public interface IVoiceInteractorCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
-            public void deliverPickOptionResult(IVoiceInteractorRequest request, boolean finished, VoiceInteractor.PickOptionRequest.Option[] selections, Bundle result) throws RemoteException {
+            public void deliverPickOptionResult(
+                    IVoiceInteractorRequest request,
+                    boolean finished,
+                    VoiceInteractor.PickOptionRequest.Option[] selections,
+                    Bundle result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -219,7 +250,8 @@ public interface IVoiceInteractorCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
-            public void deliverCompleteVoiceResult(IVoiceInteractorRequest request, Bundle result) throws RemoteException {
+            public void deliverCompleteVoiceResult(IVoiceInteractorRequest request, Bundle result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -232,7 +264,8 @@ public interface IVoiceInteractorCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
-            public void deliverAbortVoiceResult(IVoiceInteractorRequest request, Bundle result) throws RemoteException {
+            public void deliverAbortVoiceResult(IVoiceInteractorRequest request, Bundle result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -245,7 +278,9 @@ public interface IVoiceInteractorCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IVoiceInteractorCallback
-            public void deliverCommandResult(IVoiceInteractorRequest request, boolean finished, Bundle result) throws RemoteException {
+            public void deliverCommandResult(
+                    IVoiceInteractorRequest request, boolean finished, Bundle result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

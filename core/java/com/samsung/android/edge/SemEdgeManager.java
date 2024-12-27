@@ -16,9 +16,10 @@ import android.os.ServiceManager;
 import android.provider.DocumentsContract;
 import android.provider.Settings;
 import android.util.Log;
-import com.samsung.android.edge.IEdgeLightingCallback;
+
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.util.SemLog;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -29,7 +30,8 @@ public class SemEdgeManager {
     public static final int DISABLE_NONE_EDGE_LIGHTING = 0;
     private static final String EDGE_LIGHTING = "edge_lighting";
     private static final int EDGE_LIGHTING_ALWAYS = 0;
-    private static final String EDGE_LIGHTING_EDGE_NOTIFICATIONS = "edge_lighting_edge_notifications";
+    private static final String EDGE_LIGHTING_EDGE_NOTIFICATIONS =
+            "edge_lighting_edge_notifications";
     public static final boolean EDGE_LIGHTING_ENABLED;
     private static final int EDGE_LIGHTING_SCREEN_OFF = 2;
     private static final int EDGE_LIGHTING_SCREEN_ON = 1;
@@ -42,11 +44,14 @@ public class SemEdgeManager {
     private final String mPackageName;
     private INotificationManager mService;
     private Object mEdgeLightingDelegatesLock = new Object();
-    private final CopyOnWriteArrayList<EdgeLightingCallbackDelegate> mEdgeLightingCallbackDelegates = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<EdgeLightingCallbackDelegate>
+            mEdgeLightingCallbackDelegates = new CopyOnWriteArrayList<>();
     private final Binder mToken = new Binder();
 
     static {
-        String feature = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_EDGE");
+        String feature =
+                SemFloatingFeature.getInstance()
+                        .getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_EDGE");
         EDGE_LIGHTING_ENABLED = feature != null && feature.contains("edgelighting_v2");
     }
 
@@ -89,7 +94,8 @@ public class SemEdgeManager {
         }
         synchronized (this.mEdgeLightingDelegatesLock) {
             EdgeLightingCallbackDelegate delegate = null;
-            Iterator<EdgeLightingCallbackDelegate> i = this.mEdgeLightingCallbackDelegates.iterator();
+            Iterator<EdgeLightingCallbackDelegate> i =
+                    this.mEdgeLightingCallbackDelegates.iterator();
             while (true) {
                 if (!i.hasNext()) {
                     break;
@@ -104,7 +110,9 @@ public class SemEdgeManager {
                 delegate = new EdgeLightingCallbackDelegate(callback);
                 this.mEdgeLightingCallbackDelegates.add(delegate);
             }
-            ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+            ComponentName cm =
+                    new ComponentName(
+                            this.mContext.getPackageName(), getClass().getCanonicalName());
             if (delegate != null) {
                 try {
                     this.mService.bindEdgeLightingService(delegate, condition, cm);
@@ -125,7 +133,8 @@ public class SemEdgeManager {
         }
         synchronized (this.mEdgeLightingDelegatesLock) {
             EdgeLightingCallbackDelegate delegate = null;
-            Iterator<EdgeLightingCallbackDelegate> i = this.mEdgeLightingCallbackDelegates.iterator();
+            Iterator<EdgeLightingCallbackDelegate> i =
+                    this.mEdgeLightingCallbackDelegates.iterator();
             while (true) {
                 if (!i.hasNext()) {
                     break;
@@ -159,7 +168,8 @@ public class SemEdgeManager {
         }
         synchronized (this.mEdgeLightingDelegatesLock) {
             EdgeLightingCallbackDelegate delegate = null;
-            Iterator<EdgeLightingCallbackDelegate> i = this.mEdgeLightingCallbackDelegates.iterator();
+            Iterator<EdgeLightingCallbackDelegate> i =
+                    this.mEdgeLightingCallbackDelegates.iterator();
             while (true) {
                 if (!i.hasNext()) {
                     break;
@@ -174,7 +184,9 @@ public class SemEdgeManager {
                 delegate = new EdgeLightingCallbackDelegate(listener);
                 this.mEdgeLightingCallbackDelegates.add(delegate);
             }
-            ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+            ComponentName cm =
+                    new ComponentName(
+                            this.mContext.getPackageName(), getClass().getCanonicalName());
             if (delegate != null) {
                 try {
                     this.mService.registerEdgeLightingListener(delegate, cm);
@@ -195,7 +207,8 @@ public class SemEdgeManager {
         }
         synchronized (this.mEdgeLightingDelegatesLock) {
             EdgeLightingCallbackDelegate delegate = null;
-            Iterator<EdgeLightingCallbackDelegate> i = this.mEdgeLightingCallbackDelegates.iterator();
+            Iterator<EdgeLightingCallbackDelegate> i =
+                    this.mEdgeLightingCallbackDelegates.iterator();
             while (true) {
                 if (!i.hasNext()) {
                     break;
@@ -282,7 +295,8 @@ public class SemEdgeManager {
         }
     }
 
-    public void cancelNotificationByGroupKey(String pkg, String tag, int id, int userId, String key, String groupKey) {
+    public void cancelNotificationByGroupKey(
+            String pkg, String tag, int id, int userId, String key, String groupKey) {
         if (getService() == null) {
             Log.e(TAG, " cancelNotificationByNotification : service is null");
             return;
@@ -377,48 +391,64 @@ public class SemEdgeManager {
         EdgeLightingCallbackDelegate(OnEdgeLightingCallback callback) {
             this.mCallback = callback;
             this.mListener = null;
-            this.mHandler = new Handler(SemEdgeManager.this.mContext.getMainLooper()) { // from class: com.samsung.android.edge.SemEdgeManager.EdgeLightingCallbackDelegate.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    if (EdgeLightingCallbackDelegate.this.mCallback != null) {
-                        switch (msg.what) {
-                            case 0:
-                                Bundle param = (Bundle) msg.obj;
-                                String pn = param.getString("packageName");
-                                SemEdgeLightingInfo info = (SemEdgeLightingInfo) param.getParcelable(DocumentsContract.EXTRA_INFO);
-                                EdgeLightingCallbackDelegate.this.mCallback.onStartEdgeLighting(pn, info, msg.arg1);
-                                break;
-                            case 1:
-                                String pkg = (String) msg.obj;
-                                EdgeLightingCallbackDelegate.this.mCallback.onStopEdgeLighting(pkg, msg.arg1);
-                                break;
-                            case 4:
-                                EdgeLightingCallbackDelegate.this.mCallback.onScreenChanged(msg.arg1 == 1);
-                                break;
+            this.mHandler =
+                    new Handler(
+                            SemEdgeManager.this.mContext
+                                    .getMainLooper()) { // from class:
+                                                        // com.samsung.android.edge.SemEdgeManager.EdgeLightingCallbackDelegate.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            if (EdgeLightingCallbackDelegate.this.mCallback != null) {
+                                switch (msg.what) {
+                                    case 0:
+                                        Bundle param = (Bundle) msg.obj;
+                                        String pn = param.getString("packageName");
+                                        SemEdgeLightingInfo info =
+                                                (SemEdgeLightingInfo)
+                                                        param.getParcelable(
+                                                                DocumentsContract.EXTRA_INFO);
+                                        EdgeLightingCallbackDelegate.this.mCallback
+                                                .onStartEdgeLighting(pn, info, msg.arg1);
+                                        break;
+                                    case 1:
+                                        String pkg = (String) msg.obj;
+                                        EdgeLightingCallbackDelegate.this.mCallback
+                                                .onStopEdgeLighting(pkg, msg.arg1);
+                                        break;
+                                    case 4:
+                                        EdgeLightingCallbackDelegate.this.mCallback.onScreenChanged(
+                                                msg.arg1 == 1);
+                                        break;
+                                }
+                            }
                         }
-                    }
-                }
-            };
+                    };
         }
 
         EdgeLightingCallbackDelegate(OnEdgeLightingListener listener) {
             this.mCallback = null;
             this.mListener = listener;
-            this.mHandler = new Handler(SemEdgeManager.this.mContext.getMainLooper()) { // from class: com.samsung.android.edge.SemEdgeManager.EdgeLightingCallbackDelegate.2
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    if (EdgeLightingCallbackDelegate.this.mListener != null) {
-                        switch (msg.what) {
-                            case 2:
-                                EdgeLightingCallbackDelegate.this.mListener.onEdgeLightingStarted();
-                                break;
-                            case 3:
-                                EdgeLightingCallbackDelegate.this.mListener.onEdgeLightingStopped();
-                                break;
+            this.mHandler =
+                    new Handler(
+                            SemEdgeManager.this.mContext
+                                    .getMainLooper()) { // from class:
+                                                        // com.samsung.android.edge.SemEdgeManager.EdgeLightingCallbackDelegate.2
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            if (EdgeLightingCallbackDelegate.this.mListener != null) {
+                                switch (msg.what) {
+                                    case 2:
+                                        EdgeLightingCallbackDelegate.this.mListener
+                                                .onEdgeLightingStarted();
+                                        break;
+                                    case 3:
+                                        EdgeLightingCallbackDelegate.this.mListener
+                                                .onEdgeLightingStopped();
+                                        break;
+                                }
+                            }
                         }
-                    }
-                }
-            };
+                    };
         }
 
         OnEdgeLightingCallback getCallback() {
@@ -430,7 +460,8 @@ public class SemEdgeManager {
         }
 
         @Override // com.samsung.android.edge.IEdgeLightingCallback
-        public void onStartEdgeLighting(String packageName, SemEdgeLightingInfo info, int reason) throws RemoteException {
+        public void onStartEdgeLighting(String packageName, SemEdgeLightingInfo info, int reason)
+                throws RemoteException {
             Message msg = Message.obtain(this.mHandler, 0, reason, 0);
             Bundle params = new Bundle();
             params.putString("packageName", packageName);

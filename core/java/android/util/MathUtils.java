@@ -7,8 +7,7 @@ public final class MathUtils {
     private static final float DEG_TO_RAD = 0.017453292f;
     private static final float RAD_TO_DEG = 57.295784f;
 
-    private MathUtils() {
-    }
+    private MathUtils() {}
 
     public static float abs(float v) {
         return v > 0.0f ? v : -v;
@@ -205,11 +204,13 @@ public final class MathUtils {
         return (value - start) / (stop - start);
     }
 
-    public static float map(float minStart, float minStop, float maxStart, float maxStop, float value) {
+    public static float map(
+            float minStart, float minStop, float maxStart, float maxStop, float value) {
         return ((maxStop - maxStart) * ((value - minStart) / (minStop - minStart))) + maxStart;
     }
 
-    public static float constrainedMap(float rangeMin, float rangeMax, float valueMin, float valueMax, float value) {
+    public static float constrainedMap(
+            float rangeMin, float rangeMax, float valueMin, float valueMax, float value) {
         return lerp(rangeMin, rangeMax, lerpInvSat(valueMin, valueMax, value));
     }
 

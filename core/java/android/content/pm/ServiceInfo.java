@@ -5,24 +5,26 @@ import android.os.BatteryManager;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Printer;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes.dex */
 public class ServiceInfo extends ComponentInfo implements Parcelable {
-    public static final Parcelable.Creator<ServiceInfo> CREATOR = new Parcelable.Creator<ServiceInfo>() { // from class: android.content.pm.ServiceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ServiceInfo createFromParcel(Parcel source) {
-            return new ServiceInfo(source);
-        }
+    public static final Parcelable.Creator<ServiceInfo> CREATOR =
+            new Parcelable.Creator<ServiceInfo>() { // from class: android.content.pm.ServiceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ServiceInfo createFromParcel(Parcel source) {
+                    return new ServiceInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ServiceInfo[] newArray(int size) {
-            return new ServiceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ServiceInfo[] newArray(int size) {
+                    return new ServiceInfo[size];
+                }
+            };
     public static final int FLAG_ALLOW_SHARED_ISOLATED_PROCESS = 16;
     public static final int FLAG_EXTERNAL_SERVICE = 4;
     public static final int FLAG_ISOLATED_PROCESS = 2;
@@ -44,8 +46,7 @@ public class ServiceInfo extends ComponentInfo implements Parcelable {
     public static final int FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION = 32;
     public static final int FOREGROUND_SERVICE_TYPE_MICROPHONE = 128;
 
-    @Deprecated
-    public static final int FOREGROUND_SERVICE_TYPE_NONE = 0;
+    @Deprecated public static final int FOREGROUND_SERVICE_TYPE_NONE = 0;
     public static final int FOREGROUND_SERVICE_TYPE_PHONE_CALL = 4;
     public static final int FOREGROUND_SERVICE_TYPE_REMOTE_MESSAGING = 512;
     public static final int FOREGROUND_SERVICE_TYPE_SHORT_SERVICE = 2048;
@@ -56,8 +57,7 @@ public class ServiceInfo extends ComponentInfo implements Parcelable {
     public String permission;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ForegroundServiceType {
-    }
+    public @interface ForegroundServiceType {}
 
     public ServiceInfo() {
         this.mForegroundServiceType = 0;
@@ -87,7 +87,11 @@ public class ServiceInfo extends ComponentInfo implements Parcelable {
     }
 
     public String toString() {
-        return "ServiceInfo{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.name + "}";
+        return "ServiceInfo{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + this.name
+                + "}";
     }
 
     public static String foregroundServiceTypeToLabel(int type) {
@@ -136,7 +140,8 @@ public class ServiceInfo extends ComponentInfo implements Parcelable {
         return 0;
     }
 
-    @Override // android.content.pm.ComponentInfo, android.content.pm.PackageItemInfo, android.os.Parcelable
+    @Override // android.content.pm.ComponentInfo, android.content.pm.PackageItemInfo,
+    // android.os.Parcelable
     public void writeToParcel(Parcel dest, int parcelableFlags) {
         super.writeToParcel(dest, parcelableFlags);
         dest.writeString8(this.permission);

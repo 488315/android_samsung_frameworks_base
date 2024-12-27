@@ -30,6 +30,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.FrameworkStatsLog;
@@ -43,7 +44,6 @@ import com.android.server.RescueParty;
 import com.android.server.SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.am.ContentProviderRecord;
 import com.android.server.am.ContentProviderRecord.ExternalProcessHandle;
 import com.android.server.pm.UserManagerInternal;
 import com.android.server.sdksandbox.SdkSandboxManagerLocal;
@@ -51,6 +51,7 @@ import com.android.server.uri.UriGrantsManagerService;
 import com.android.server.usage.UsageStatsService;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.ActivityTaskManagerService.SettingObserver;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,7 +65,9 @@ import java.util.function.Function;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class ContentProviderHelper {
-    public static final int[] PROCESS_STATE_STATS_FORMAT = {32, FrameworkStatsLog.PACKAGE_MANAGER_SNAPSHOT_REPORTED, 10272};
+    public static final int[] PROCESS_STATE_STATS_FORMAT = {
+        32, FrameworkStatsLog.PACKAGE_MANAGER_SNAPSHOT_REPORTED, 10272
+    };
     public final ProviderMap mProviderMap;
     public final ActivityManagerService mService;
     public boolean mSystemProvidersInstalled;
@@ -81,13 +84,33 @@ public final class ContentProviderHelper {
             super(ContentProviderHelper.this.mService.mHandler);
             Uri uriFor = Settings.Global.getUriFor("development_settings_enabled");
             this.mUri = uriFor;
-            this.mBugreportStorageProvider = new ComponentName("com.android.shell", "com.android.shell.BugreportStorageProvider");
-            ContentProviderHelper.this.mService.mContext.getContentResolver().registerContentObserver(uriFor, false, this, -1);
+            this.mBugreportStorageProvider =
+                    new ComponentName(
+                            "com.android.shell", "com.android.shell.BugreportStorageProvider");
+            ContentProviderHelper.this
+                    .mService
+                    .mContext
+                    .getContentResolver()
+                    .registerContentObserver(uriFor, false, this, -1);
             onChange();
         }
 
         public final void onChange() {
-            ContentProviderHelper.this.mService.mContext.getPackageManager().setComponentEnabledSetting(this.mBugreportStorageProvider, Settings.Global.getInt(ContentProviderHelper.this.mService.mContext.getContentResolver(), "development_settings_enabled", Build.IS_ENG ? 1 : 0) != 0 ? 1 : 0, 0);
+            ContentProviderHelper.this
+                    .mService
+                    .mContext
+                    .getPackageManager()
+                    .setComponentEnabledSetting(
+                            this.mBugreportStorageProvider,
+                            Settings.Global.getInt(
+                                                    ContentProviderHelper.this.mService.mContext
+                                                            .getContentResolver(),
+                                                    "development_settings_enabled",
+                                                    Build.IS_ENG ? 1 : 0)
+                                            != 0
+                                    ? 1
+                                    : 0,
+                            0);
         }
 
         @Override // android.database.ContentObserver
@@ -124,68 +147,111 @@ public final class ContentProviderHelper {
     public static void checkTime(long j, String str) {
         long uptimeMillis = SystemClock.uptimeMillis() - j;
         if (uptimeMillis > 50) {
-            Slog.w("ContentProviderHelper", "Slow operation: " + uptimeMillis + "ms so far, now at " + str);
+            Slog.w(
+                    "ContentProviderHelper",
+                    "Slow operation: " + uptimeMillis + "ms so far, now at " + str);
         }
     }
 
     public static boolean hasProviderConnectionLocked(ProcessRecord processRecord) {
         for (int size = processRecord.mProviders.mPubProviders.size() - 1; size >= 0; size--) {
-            if (!((ContentProviderRecord) processRecord.mProviders.mPubProviders.valueAt(size)).connections.isEmpty()) {
+            if (!((ContentProviderRecord) processRecord.mProviders.mPubProviders.valueAt(size))
+                    .connections.isEmpty()) {
                 return true;
             }
         }
         return false;
     }
 
-    public final void checkAssociationAndPermissionLocked(final ProcessRecord processRecord, final ProviderInfo providerInfo, int i, int i2, boolean z, String str, long j) {
+    public final void checkAssociationAndPermissionLocked(
+            final ProcessRecord processRecord,
+            final ProviderInfo providerInfo,
+            int i,
+            int i2,
+            boolean z,
+            String str,
+            long j) {
         String str2;
         if (processRecord == null) {
-            str2 = this.mService.validateAssociationAllowedLocked(providerInfo.applicationInfo.uid, i, providerInfo.packageName, null) ? null : "<null>";
+            str2 =
+                    this.mService.validateAssociationAllowedLocked(
+                                    providerInfo.applicationInfo.uid,
+                                    i,
+                                    providerInfo.packageName,
+                                    null)
+                            ? null
+                            : "<null>";
         } else {
-            str2 = (String) processRecord.mPkgList.searchEachPackage(new Function() { // from class: com.android.server.am.ContentProviderHelper$$ExternalSyntheticLambda2
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    ContentProviderHelper contentProviderHelper = ContentProviderHelper.this;
-                    ProcessRecord processRecord2 = processRecord;
-                    ProviderInfo providerInfo2 = providerInfo;
-                    contentProviderHelper.getClass();
-                    int i3 = processRecord2.uid;
-                    String str3 = providerInfo2.packageName;
-                    int i4 = providerInfo2.applicationInfo.uid;
-                    if (contentProviderHelper.mService.validateAssociationAllowedLocked(i3, i4, (String) obj, str3)) {
-                        return null;
-                    }
-                    return providerInfo2.packageName;
-                }
-            });
+            str2 =
+                    (String)
+                            processRecord.mPkgList.searchEachPackage(
+                                    new Function() { // from class:
+                                                     // com.android.server.am.ContentProviderHelper$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.Function
+                                        public final Object apply(Object obj) {
+                                            ContentProviderHelper contentProviderHelper =
+                                                    ContentProviderHelper.this;
+                                            ProcessRecord processRecord2 = processRecord;
+                                            ProviderInfo providerInfo2 = providerInfo;
+                                            contentProviderHelper.getClass();
+                                            int i3 = processRecord2.uid;
+                                            String str3 = providerInfo2.packageName;
+                                            int i4 = providerInfo2.applicationInfo.uid;
+                                            if (contentProviderHelper.mService
+                                                    .validateAssociationAllowedLocked(
+                                                            i3, i4, (String) obj, str3)) {
+                                                return null;
+                                            }
+                                            return providerInfo2.packageName;
+                                        }
+                                    });
         }
         if (str2 != null) {
-            throw new SecurityException(BootReceiver$$ExternalSyntheticOutline0.m("Content provider lookup ", str, " failed: association not allowed with package ", str2));
+            throw new SecurityException(
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            "Content provider lookup ",
+                            str,
+                            " failed: association not allowed with package ",
+                            str2));
         }
         checkTime(j, "getContentProviderImpl: before checkContentProviderPermission");
-        String checkContentProviderPermission = checkContentProviderPermission(providerInfo, Binder.getCallingPid(), Binder.getCallingUid(), i2, z, processRecord != null ? processRecord.toString() : null);
+        String checkContentProviderPermission =
+                checkContentProviderPermission(
+                        providerInfo,
+                        Binder.getCallingPid(),
+                        Binder.getCallingUid(),
+                        i2,
+                        z,
+                        processRecord != null ? processRecord.toString() : null);
         if (checkContentProviderPermission != null) {
             throw new SecurityException(checkContentProviderPermission);
         }
         checkTime(j, "getContentProviderImpl: after checkContentProviderPermission");
     }
 
-    public final String checkContentProviderPermission(ProviderInfo providerInfo, int i, int i2, int i3, boolean z, String str) {
+    public final String checkContentProviderPermission(
+            ProviderInfo providerInfo, int i, int i2, int i3, boolean z, String str) {
         boolean canAccessContentProviderFromSdkSandbox;
         int i4;
         String str2;
         boolean z2;
         if (Process.isSdkSandboxUid(i2)) {
-            SdkSandboxManagerLocal sdkSandboxManagerLocal = (SdkSandboxManagerLocal) LocalManagerRegistry.getManager(SdkSandboxManagerLocal.class);
+            SdkSandboxManagerLocal sdkSandboxManagerLocal =
+                    (SdkSandboxManagerLocal)
+                            LocalManagerRegistry.getManager(SdkSandboxManagerLocal.class);
             if (sdkSandboxManagerLocal == null) {
-                throw new IllegalStateException("SdkSandboxManagerLocal not found when checking whether SDK sandbox uid may access the contentprovider.");
+                throw new IllegalStateException(
+                        "SdkSandboxManagerLocal not found when checking whether SDK sandbox uid may"
+                            + " access the contentprovider.");
             }
-            canAccessContentProviderFromSdkSandbox = sdkSandboxManagerLocal.canAccessContentProviderFromSdkSandbox(providerInfo);
+            canAccessContentProviderFromSdkSandbox =
+                    sdkSandboxManagerLocal.canAccessContentProviderFromSdkSandbox(providerInfo);
         } else {
             canAccessContentProviderFromSdkSandbox = true;
         }
         if (!canAccessContentProviderFromSdkSandbox) {
-            return "ContentProvider access not allowed from sdk sandbox UID. ProviderInfo: " + providerInfo.toString();
+            return "ContentProvider access not allowed from sdk sandbox UID. ProviderInfo: "
+                    + providerInfo.toString();
         }
         boolean z3 = false;
         ActivityManagerService activityManagerService = this.mService;
@@ -196,12 +262,21 @@ public final class ContentProviderHelper {
             if (currentUserId == UserHandle.getUserId(i2)) {
                 z2 = false;
             } else {
-                if (((UriGrantsManagerService.LocalService) activityManagerService.mUgmInternal).checkAuthorityGrants(i2, providerInfo, currentUserId, z)) {
+                if (((UriGrantsManagerService.LocalService) activityManagerService.mUgmInternal)
+                        .checkAuthorityGrants(i2, providerInfo, currentUserId, z)) {
                     return null;
                 }
                 z2 = true;
             }
-            int handleIncomingUser = activityManagerService.mUserController.handleIncomingUser(i, i2, i3, false, 0, "checkContentProviderPermissionLocked " + providerInfo.authority, null);
+            int handleIncomingUser =
+                    activityManagerService.mUserController.handleIncomingUser(
+                            i,
+                            i2,
+                            i3,
+                            false,
+                            0,
+                            "checkContentProviderPermissionLocked " + providerInfo.authority,
+                            null);
             i4 = handleIncomingUser;
             if (handleIncomingUser == currentUserId) {
                 z3 = z2;
@@ -209,7 +284,22 @@ public final class ContentProviderHelper {
         } else {
             i4 = i3;
         }
-        if (ActivityManagerService.checkComponentPermission(i, i2, providerInfo.readPermission, 0, providerInfo.applicationInfo.uid, providerInfo.exported) == 0 || ActivityManagerService.checkComponentPermission(i, i2, providerInfo.writePermission, 0, providerInfo.applicationInfo.uid, providerInfo.exported) == 0) {
+        if (ActivityManagerService.checkComponentPermission(
+                                i,
+                                i2,
+                                providerInfo.readPermission,
+                                0,
+                                providerInfo.applicationInfo.uid,
+                                providerInfo.exported)
+                        == 0
+                || ActivityManagerService.checkComponentPermission(
+                                i,
+                                i2,
+                                providerInfo.writePermission,
+                                0,
+                                providerInfo.applicationInfo.uid,
+                                providerInfo.exported)
+                        == 0) {
             return null;
         }
         PathPermission[] pathPermissionArr = providerInfo.pathPermissions;
@@ -219,17 +309,35 @@ public final class ContentProviderHelper {
                 int i5 = length - 1;
                 PathPermission pathPermission = pathPermissionArr[i5];
                 String readPermission = pathPermission.getReadPermission();
-                if (readPermission != null && ActivityManagerService.checkComponentPermission(i, i2, readPermission, 0, providerInfo.applicationInfo.uid, providerInfo.exported) == 0) {
+                if (readPermission != null
+                        && ActivityManagerService.checkComponentPermission(
+                                        i,
+                                        i2,
+                                        readPermission,
+                                        0,
+                                        providerInfo.applicationInfo.uid,
+                                        providerInfo.exported)
+                                == 0) {
                     return null;
                 }
                 String writePermission = pathPermission.getWritePermission();
-                if (writePermission != null && ActivityManagerService.checkComponentPermission(i, i2, writePermission, 0, providerInfo.applicationInfo.uid, providerInfo.exported) == 0) {
+                if (writePermission != null
+                        && ActivityManagerService.checkComponentPermission(
+                                        i,
+                                        i2,
+                                        writePermission,
+                                        0,
+                                        providerInfo.applicationInfo.uid,
+                                        providerInfo.exported)
+                                == 0) {
                     return null;
                 }
                 length = i5;
             }
         }
-        if (!z3 && ((UriGrantsManagerService.LocalService) activityManagerService.mUgmInternal).checkAuthorityGrants(i2, providerInfo, i4, z)) {
+        if (!z3
+                && ((UriGrantsManagerService.LocalService) activityManagerService.mUgmInternal)
+                        .checkAuthorityGrants(i2, providerInfo, i4, z)) {
             return null;
         }
         if (!providerInfo.exported) {
@@ -237,12 +345,17 @@ public final class ContentProviderHelper {
         } else if ("android.permission.MANAGE_DOCUMENTS".equals(providerInfo.readPermission)) {
             str2 = " requires that you obtain access using ACTION_OPEN_DOCUMENT or related APIs";
         } else {
-            str2 = " requires " + providerInfo.readPermission + " or " + providerInfo.writePermission;
+            str2 =
+                    " requires "
+                            + providerInfo.readPermission
+                            + " or "
+                            + providerInfo.writePermission;
         }
         StringBuilder sb = new StringBuilder("Permission Denial: opening provider ");
         sb.append(providerInfo.name);
         sb.append(" from ");
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, str != null ? str : "(null)", " (pid=", ", uid=", sb);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                i, str != null ? str : "(null)", " (pid=", ", uid=", sb);
         sb.append(i2);
         sb.append(")");
         sb.append(str2);
@@ -251,17 +364,22 @@ public final class ContentProviderHelper {
         return sb2;
     }
 
-    public final boolean cleanupAppInLaunchingProvidersLocked(ProcessRecord processRecord, boolean z) {
+    public final boolean cleanupAppInLaunchingProvidersLocked(
+            ProcessRecord processRecord, boolean z) {
         boolean z2 = false;
         for (int size = this.mLaunchingProviders.size() - 1; size >= 0; size--) {
-            ContentProviderRecord contentProviderRecord = (ContentProviderRecord) this.mLaunchingProviders.get(size);
+            ContentProviderRecord contentProviderRecord =
+                    (ContentProviderRecord) this.mLaunchingProviders.get(size);
             if (contentProviderRecord.launchingApp == processRecord) {
                 int i = contentProviderRecord.mRestartCount + 1;
                 contentProviderRecord.mRestartCount = i;
                 if (i > 3) {
                     z = true;
                 }
-                if (z || processRecord.mErrorState.mBad || (contentProviderRecord.connections.isEmpty() && !contentProviderRecord.hasExternalProcessHandles())) {
+                if (z
+                        || processRecord.mErrorState.mBad
+                        || (contentProviderRecord.connections.isEmpty()
+                                && !contentProviderRecord.hasExternalProcessHandles())) {
                     removeDyingProviderLocked(processRecord, contentProviderRecord, true);
                 } else {
                     z2 = true;
@@ -271,7 +389,13 @@ public final class ContentProviderHelper {
         return z2;
     }
 
-    public final boolean decProviderCountLocked(final ContentProviderConnection contentProviderConnection, ContentProviderRecord contentProviderRecord, IBinder iBinder, final boolean z, boolean z2, final boolean z3) {
+    public final boolean decProviderCountLocked(
+            final ContentProviderConnection contentProviderConnection,
+            ContentProviderRecord contentProviderRecord,
+            IBinder iBinder,
+            final boolean z,
+            boolean z2,
+            final boolean z3) {
         int i;
         if (contentProviderConnection == null) {
             contentProviderRecord.removeExternalProcessHandleLocked(iBinder);
@@ -285,19 +409,25 @@ public final class ContentProviderHelper {
             return false;
         }
         if (z2) {
-            BackgroundThread.getHandler().postDelayed(new Runnable() { // from class: com.android.server.am.ContentProviderHelper$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ContentProviderHelper.this.handleProviderRemoval(contentProviderConnection, z, z3);
-                }
-            }, 5000L);
+            BackgroundThread.getHandler()
+                    .postDelayed(
+                            new Runnable() { // from class:
+                                             // com.android.server.am.ContentProviderHelper$$ExternalSyntheticLambda3
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ContentProviderHelper.this.handleProviderRemoval(
+                                            contentProviderConnection, z, z3);
+                                }
+                            },
+                            5000L);
         } else {
             handleProviderRemoval(contentProviderConnection, z, z3);
         }
         return true;
     }
 
-    public final void dumpProvidersLocked(PrintWriter printWriter, String[] strArr, int i, boolean z, String str) {
+    public final void dumpProvidersLocked(
+            PrintWriter printWriter, String[] strArr, int i, boolean z, String str) {
         ArrayList arrayList = null;
         ArrayList arrayList2 = null;
         ArrayList arrayList3 = null;
@@ -330,20 +460,54 @@ public final class ContentProviderHelper {
         printWriter.println("ACTIVITY MANAGER CONTENT PROVIDERS (dumpsys activity providers)");
         ProviderMap providerMap = this.mProviderMap;
         boolean z2 = false;
-        boolean dumpProvidersByClassLocked = providerMap.mSingletonByClass.size() > 0 ? ProviderMap.dumpProvidersByClassLocked(printWriter, z, str, "  Published single-user content providers (by class):", false, providerMap.mSingletonByClass) : false;
+        boolean dumpProvidersByClassLocked =
+                providerMap.mSingletonByClass.size() > 0
+                        ? ProviderMap.dumpProvidersByClassLocked(
+                                printWriter,
+                                z,
+                                str,
+                                "  Published single-user content providers (by class):",
+                                false,
+                                providerMap.mSingletonByClass)
+                        : false;
         for (int i3 = 0; i3 < providerMap.mProvidersByClassPerUser.size(); i3++) {
-            dumpProvidersByClassLocked |= ProviderMap.dumpProvidersByClassLocked(printWriter, z, str, "  Published user " + providerMap.mProvidersByClassPerUser.keyAt(i3) + " content providers (by class):", dumpProvidersByClassLocked, (HashMap) providerMap.mProvidersByClassPerUser.valueAt(i3));
+            dumpProvidersByClassLocked |=
+                    ProviderMap.dumpProvidersByClassLocked(
+                            printWriter,
+                            z,
+                            str,
+                            "  Published user "
+                                    + providerMap.mProvidersByClassPerUser.keyAt(i3)
+                                    + " content providers (by class):",
+                            dumpProvidersByClassLocked,
+                            (HashMap) providerMap.mProvidersByClassPerUser.valueAt(i3));
         }
         if (z) {
-            dumpProvidersByClassLocked = ProviderMap.dumpProvidersByNameLocked(printWriter, str, "  Single-user authority to provider mappings:", dumpProvidersByClassLocked, providerMap.mSingletonByName) | dumpProvidersByClassLocked;
+            dumpProvidersByClassLocked =
+                    ProviderMap.dumpProvidersByNameLocked(
+                                    printWriter,
+                                    str,
+                                    "  Single-user authority to provider mappings:",
+                                    dumpProvidersByClassLocked,
+                                    providerMap.mSingletonByName)
+                            | dumpProvidersByClassLocked;
             for (int i4 = 0; i4 < providerMap.mProvidersByNamePerUser.size(); i4++) {
-                dumpProvidersByClassLocked |= ProviderMap.dumpProvidersByNameLocked(printWriter, str, "  User " + providerMap.mProvidersByNamePerUser.keyAt(i4) + " authority to provider mappings:", dumpProvidersByClassLocked, (HashMap) providerMap.mProvidersByNamePerUser.valueAt(i4));
+                dumpProvidersByClassLocked |=
+                        ProviderMap.dumpProvidersByNameLocked(
+                                printWriter,
+                                str,
+                                "  User "
+                                        + providerMap.mProvidersByNamePerUser.keyAt(i4)
+                                        + " authority to provider mappings:",
+                                dumpProvidersByClassLocked,
+                                (HashMap) providerMap.mProvidersByNamePerUser.valueAt(i4));
             }
         }
         if (this.mLaunchingProviders.size() > 0) {
             boolean z3 = dumpProvidersByClassLocked;
             for (int size = this.mLaunchingProviders.size() - 1; size >= 0; size--) {
-                ContentProviderRecord contentProviderRecord = (ContentProviderRecord) this.mLaunchingProviders.get(size);
+                ContentProviderRecord contentProviderRecord =
+                        (ContentProviderRecord) this.mLaunchingProviders.get(size);
                 if (str == null || str.equals(contentProviderRecord.name.getPackageName())) {
                     if (!z2) {
                         if (z3) {
@@ -369,13 +533,21 @@ public final class ContentProviderHelper {
 
     public final List generateApplicationProvidersLocked(ProcessRecord processRecord) {
         try {
-            List list = AppGlobals.getPackageManager().queryContentProviders(processRecord.processName, processRecord.uid, 268438528L, (String) null).getList();
+            List list =
+                    AppGlobals.getPackageManager()
+                            .queryContentProviders(
+                                    processRecord.processName,
+                                    processRecord.uid,
+                                    268438528L,
+                                    (String) null)
+                            .getList();
             if (list == null) {
                 return null;
             }
             int size = list.size();
             ProcessProviderRecord processProviderRecord = processRecord.mProviders;
-            processProviderRecord.mPubProviders.ensureCapacity(processProviderRecord.mPubProviders.size() + size);
+            processProviderRecord.mPubProviders.ensureCapacity(
+                    processProviderRecord.mPubProviders.size() + size);
             int i = 0;
             while (i < size) {
                 ProviderInfo providerInfo = (ProviderInfo) list.get(i);
@@ -385,23 +557,41 @@ public final class ContentProviderHelper {
                 String str2 = providerInfo.name;
                 int i2 = providerInfo.flags;
                 activityManagerService.getClass();
-                boolean isSingleton = ActivityManagerService.isSingleton(str, applicationInfo, str2, i2);
+                boolean isSingleton =
+                        ActivityManagerService.isSingleton(str, applicationInfo, str2, i2);
                 if (!isSingletonOrSystemUserOnly(providerInfo) || processRecord.userId == 0) {
                     boolean isInstantApp = providerInfo.applicationInfo.isInstantApp();
                     String str3 = providerInfo.splitName;
-                    boolean z = str3 == null || ArrayUtils.contains(providerInfo.applicationInfo.splitNames, str3);
+                    boolean z =
+                            str3 == null
+                                    || ArrayUtils.contains(
+                                            providerInfo.applicationInfo.splitNames, str3);
                     if (!isInstantApp || z) {
-                        ComponentName componentName = new ComponentName(providerInfo.packageName, providerInfo.name);
-                        ContentProviderRecord providerByClass = this.mProviderMap.getProviderByClass(processRecord.userId, componentName);
+                        ComponentName componentName =
+                                new ComponentName(providerInfo.packageName, providerInfo.name);
+                        ContentProviderRecord providerByClass =
+                                this.mProviderMap.getProviderByClass(
+                                        processRecord.userId, componentName);
                         if (providerByClass == null) {
-                            ContentProviderRecord contentProviderRecord = new ContentProviderRecord(this.mService, providerInfo, processRecord.info, componentName, isSingleton);
-                            this.mProviderMap.putProviderByClass(componentName, contentProviderRecord);
+                            ContentProviderRecord contentProviderRecord =
+                                    new ContentProviderRecord(
+                                            this.mService,
+                                            providerInfo,
+                                            processRecord.info,
+                                            componentName,
+                                            isSingleton);
+                            this.mProviderMap.putProviderByClass(
+                                    componentName, contentProviderRecord);
                             providerByClass = contentProviderRecord;
                         }
                         processProviderRecord.mPubProviders.put(providerInfo.name, providerByClass);
-                        if (!providerInfo.multiprocess || !"android".equals(providerInfo.packageName)) {
+                        if (!providerInfo.multiprocess
+                                || !"android".equals(providerInfo.packageName)) {
                             ApplicationInfo applicationInfo2 = providerInfo.applicationInfo;
-                            processRecord.addPackage(applicationInfo2.packageName, applicationInfo2.longVersionCode, this.mService.mProcessStats);
+                            processRecord.addPackage(
+                                    applicationInfo2.packageName,
+                                    applicationInfo2.longVersionCode,
+                                    this.mService.mProcessStats);
                         }
                         this.mService.notifyPackageUse(providerInfo.applicationInfo.packageName, 4);
                         i++;
@@ -424,16 +614,25 @@ public final class ContentProviderHelper {
         }
     }
 
-    public final ContentProviderHolder getContentProvider(IApplicationThread iApplicationThread, String str, String str2, int i, boolean z) {
+    public final ContentProviderHolder getContentProvider(
+            IApplicationThread iApplicationThread, String str, String str2, int i, boolean z) {
         ActivityManagerService activityManagerService = this.mService;
         activityManagerService.getClass();
         ActivityManagerService.enforceNotIsolatedCaller("getContentProvider");
         if (iApplicationThread != null) {
             int callingUid = Binder.getCallingUid();
-            if (str == null || activityManagerService.mAppOpsService.checkPackage(callingUid, str) == 0) {
-                return getContentProviderImpl(iApplicationThread, str2, null, callingUid, str, null, z, i, -1);
+            if (str == null
+                    || activityManagerService.mAppOpsService.checkPackage(callingUid, str) == 0) {
+                return getContentProviderImpl(
+                        iApplicationThread, str2, null, callingUid, str, null, z, i, -1);
             }
-            throw new SecurityException(SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0.m(callingUid, "Given calling package ", str, " does not match caller's uid "));
+            throw new SecurityException(
+                    SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0
+                            .m(
+                                    callingUid,
+                                    "Given calling package ",
+                                    str,
+                                    " does not match caller's uid "));
         }
         String str3 = "null IApplicationThread when getting content provider " + str2;
         Slog.w("ContentProviderHelper", str3);
@@ -442,17 +641,17 @@ public final class ContentProviderHelper {
 
     /* JADX WARN: Can't wrap try/catch for region: R(12:240|(5:242|(1:244)|258|259|260)(1:382)|245|246|247|248|(1:250)|251|(1:253)|258|259|260) */
     /* JADX WARN: Code restructure failed: missing block: B:131:0x03ea, code lost:
-    
-        if (r12 == 1000) goto L181;
-     */
+
+       if (r12 == 1000) goto L181;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:255:0x071a, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:257:0x071c, code lost:
-    
-        android.util.Slog.e("ContentProviderHelper", "Failed to schedule install provider " + r4.processName + ", " + r12.authority, r0);
-     */
+
+       android.util.Slog.e("ContentProviderHelper", "Failed to schedule install provider " + r4.processName + ", " + r12.authority, r0);
+    */
     /* JADX WARN: Finally extract failed */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:120:0x03b7  */
@@ -493,23 +692,39 @@ public final class ContentProviderHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.app.ContentProviderHolder getContentProviderImpl(android.app.IApplicationThread r65, java.lang.String r66, android.os.IBinder r67, int r68, java.lang.String r69, java.lang.String r70, boolean r71, int r72, int r73) {
+    public final android.app.ContentProviderHolder getContentProviderImpl(
+            android.app.IApplicationThread r65,
+            java.lang.String r66,
+            android.os.IBinder r67,
+            int r68,
+            java.lang.String r69,
+            java.lang.String r70,
+            boolean r71,
+            int r72,
+            int r73) {
         /*
             Method dump skipped, instructions count: 2902
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.ContentProviderHelper.getContentProviderImpl(android.app.IApplicationThread, java.lang.String, android.os.IBinder, int, java.lang.String, java.lang.String, boolean, int, int):android.app.ContentProviderHolder");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.ContentProviderHelper.getContentProviderImpl(android.app.IApplicationThread,"
+                    + " java.lang.String, android.os.IBinder, int, java.lang.String,"
+                    + " java.lang.String, boolean, int, int):android.app.ContentProviderHolder");
     }
 
-    public final void handleProviderRemoval(ContentProviderConnection contentProviderConnection, boolean z, boolean z2) {
+    public final void handleProviderRemoval(
+            ContentProviderConnection contentProviderConnection, boolean z, boolean z2) {
         ProcessRecord processRecord;
         ActivityManagerService activityManagerService = this.mService;
         ActivityManagerService.boostPriorityForLockedSection();
         synchronized (activityManagerService) {
             if (contentProviderConnection != null) {
                 try {
-                    if (contentProviderConnection.provider != null && contentProviderConnection.decrementCount(z) == 0) {
-                        ContentProviderRecord contentProviderRecord = contentProviderConnection.provider;
+                    if (contentProviderConnection.provider != null
+                            && contentProviderConnection.decrementCount(z) == 0) {
+                        ContentProviderRecord contentProviderRecord =
+                                contentProviderConnection.provider;
                         if (contentProviderConnection.association != null) {
                             synchronized (contentProviderConnection.mProcStatsLock) {
                                 contentProviderConnection.association.stop();
@@ -518,11 +733,14 @@ public final class ContentProviderHelper {
                         }
                         contentProviderRecord.connections.remove(contentProviderConnection);
                         ProcessRecord processRecord2 = contentProviderRecord.proc;
-                        if (processRecord2 != null && !hasProviderConnectionLocked(processRecord2)) {
+                        if (processRecord2 != null
+                                && !hasProviderConnectionLocked(processRecord2)) {
                             contentProviderRecord.proc.mProfile.clearHostingComponentType(64);
                         }
-                        contentProviderConnection.client.mProviders.mConProviders.remove(contentProviderConnection);
-                        if (contentProviderConnection.client.mState.mSetProcState < 15 && (processRecord = contentProviderRecord.proc) != null) {
+                        contentProviderConnection.client.mProviders.mConProviders.remove(
+                                contentProviderConnection);
+                        if (contentProviderConnection.client.mState.mSetProcState < 15
+                                && (processRecord = contentProviderRecord.proc) != null) {
                             processRecord.mProviders.mLastProviderTime = SystemClock.uptimeMillis();
                         }
                         ActivityManagerService activityManagerService2 = this.mService;
@@ -540,14 +758,17 @@ public final class ContentProviderHelper {
                             ProcessRecord processRecord4 = contentProviderConnection.client;
                             ProcessRecord processRecord5 = contentProviderRecord.proc;
                             oomAdjuster.getClass();
-                            if (!OomAdjuster.evaluateConnectionPrelude(processRecord4, processRecord5)) {
+                            if (!OomAdjuster.evaluateConnectionPrelude(
+                                    processRecord4, processRecord5)) {
                                 ProcessStateRecord processStateRecord = processRecord5.mState;
                                 int i3 = processStateRecord.mSetAdj;
                                 ProcessStateRecord processStateRecord2 = processRecord4.mState;
-                                if (i3 < processStateRecord2.mSetAdj && processStateRecord.mSetProcState < processStateRecord2.mSetProcState) {
-                                }
+                                if (i3 < processStateRecord2.mSetAdj
+                                        && processStateRecord.mSetProcState
+                                                < processStateRecord2.mSetProcState) {}
                             }
-                            this.mService.updateOomAdjLocked(8, contentProviderConnection.provider.proc);
+                            this.mService.updateOomAdjLocked(
+                                    8, contentProviderConnection.provider.proc);
                         }
                         ActivityManagerService.resetPriorityAfterLockedSection();
                         return;
@@ -561,7 +782,18 @@ public final class ContentProviderHelper {
         }
     }
 
-    public final ContentProviderConnection incProviderCountLocked(ProcessRecord processRecord, ContentProviderRecord contentProviderRecord, IBinder iBinder, int i, String str, String str2, boolean z, boolean z2, long j, ProcessList processList, int i2) {
+    public final ContentProviderConnection incProviderCountLocked(
+            ProcessRecord processRecord,
+            ContentProviderRecord contentProviderRecord,
+            IBinder iBinder,
+            int i,
+            String str,
+            String str2,
+            boolean z,
+            boolean z2,
+            long j,
+            ProcessList processList,
+            int i2) {
         if (processRecord == null) {
             if (iBinder == null) {
                 contentProviderRecord.externalProcessNoHandleCount++;
@@ -569,10 +801,14 @@ public final class ContentProviderHelper {
                 if (contentProviderRecord.externalProcessTokenToHandle == null) {
                     contentProviderRecord.externalProcessTokenToHandle = new ArrayMap();
                 }
-                ContentProviderRecord.ExternalProcessHandle externalProcessHandle = (ContentProviderRecord.ExternalProcessHandle) contentProviderRecord.externalProcessTokenToHandle.get(iBinder);
+                ContentProviderRecord.ExternalProcessHandle externalProcessHandle =
+                        (ContentProviderRecord.ExternalProcessHandle)
+                                contentProviderRecord.externalProcessTokenToHandle.get(iBinder);
                 if (externalProcessHandle == null) {
-                    externalProcessHandle = contentProviderRecord.new ExternalProcessHandle(iBinder, i, str2);
-                    contentProviderRecord.externalProcessTokenToHandle.put(iBinder, externalProcessHandle);
+                    externalProcessHandle =
+                            contentProviderRecord.new ExternalProcessHandle(iBinder, i, str2);
+                    contentProviderRecord.externalProcessTokenToHandle.put(
+                            iBinder, externalProcessHandle);
                     externalProcessHandle.startAssociationIfNeeded(contentProviderRecord);
                 }
                 externalProcessHandle.mAcquisitionCount++;
@@ -582,7 +818,8 @@ public final class ContentProviderHelper {
         ProcessProviderRecord processProviderRecord = processRecord.mProviders;
         int size = processProviderRecord.mConProviders.size();
         for (int i3 = 0; i3 < size; i3++) {
-            ContentProviderConnection contentProviderConnection = (ContentProviderConnection) processProviderRecord.mConProviders.get(i3);
+            ContentProviderConnection contentProviderConnection =
+                    (ContentProviderConnection) processProviderRecord.mConProviders.get(i3);
             if (contentProviderConnection.provider == contentProviderRecord) {
                 synchronized (contentProviderConnection.mLock) {
                     try {
@@ -599,7 +836,8 @@ public final class ContentProviderHelper {
                 return contentProviderConnection;
             }
         }
-        ContentProviderConnection contentProviderConnection2 = new ContentProviderConnection(contentProviderRecord, processRecord, str, i2);
+        ContentProviderConnection contentProviderConnection2 =
+                new ContentProviderConnection(contentProviderRecord, processRecord, str, i2);
         contentProviderConnection2.startAssociationIfNeeded();
         synchronized (contentProviderConnection2.mLock) {
             try {
@@ -629,7 +867,13 @@ public final class ContentProviderHelper {
         int i5 = processRecord.mState.mCurProcState;
         int i6 = contentProviderRecord.uid;
         long j2 = contentProviderRecord.appInfo.longVersionCode;
-        activityManagerService.startAssociationLocked(i4, str3, i5, i6, contentProviderRecord.name, contentProviderRecord.info.processName);
+        activityManagerService.startAssociationLocked(
+                i4,
+                str3,
+                i5,
+                i6,
+                contentProviderRecord.name,
+                contentProviderRecord.info.processName);
         if (z2 && contentProviderRecord.proc != null && processRecord.mState.mSetAdj <= 250) {
             checkTime(j, "getContentProviderImpl: before updateLruProcess");
             processList.updateLruProcessLocked(contentProviderRecord.proc, null, false);
@@ -645,12 +889,23 @@ public final class ContentProviderHelper {
         ActivityManagerService.boostPriorityForLockedSection();
         synchronized (activityManagerService) {
             try {
-                generateApplicationProvidersLocked = generateApplicationProvidersLocked((ProcessRecord) this.mService.mProcessList.mProcessNames.get("system", 1000));
+                generateApplicationProvidersLocked =
+                        generateApplicationProvidersLocked(
+                                (ProcessRecord)
+                                        this.mService.mProcessList.mProcessNames.get(
+                                                "system", 1000));
                 if (generateApplicationProvidersLocked != null) {
-                    for (int size = generateApplicationProvidersLocked.size() - 1; size >= 0; size--) {
-                        ProviderInfo providerInfo = (ProviderInfo) generateApplicationProvidersLocked.get(size);
+                    for (int size = generateApplicationProvidersLocked.size() - 1;
+                            size >= 0;
+                            size--) {
+                        ProviderInfo providerInfo =
+                                (ProviderInfo) generateApplicationProvidersLocked.get(size);
                         if ((providerInfo.applicationInfo.flags & 1) == 0) {
-                            Slog.w("ContentProviderHelper", "Not installing system proc provider " + providerInfo.name + ": not system .apk");
+                            Slog.w(
+                                    "ContentProviderHelper",
+                                    "Not installing system proc provider "
+                                            + providerInfo.name
+                                            + ": not system .apk");
                             generateApplicationProvidersLocked.remove(size);
                         }
                     }
@@ -671,98 +926,179 @@ public final class ContentProviderHelper {
         ActivityManagerConstants activityManagerConstants = activityManagerService2.mConstants;
         ContentResolver contentResolver = activityManagerService2.mContext.getContentResolver();
         activityManagerConstants.mResolver = contentResolver;
-        contentResolver.registerContentObserver(ActivityManagerConstants.ACTIVITY_MANAGER_CONSTANTS_URI, false, activityManagerConstants);
-        activityManagerConstants.mResolver.registerContentObserver(ActivityManagerConstants.ACTIVITY_STARTS_LOGGING_ENABLED_URI, false, activityManagerConstants);
-        activityManagerConstants.mResolver.registerContentObserver(ActivityManagerConstants.FOREGROUND_SERVICE_STARTS_LOGGING_ENABLED_URI, false, activityManagerConstants);
+        contentResolver.registerContentObserver(
+                ActivityManagerConstants.ACTIVITY_MANAGER_CONSTANTS_URI,
+                false,
+                activityManagerConstants);
+        activityManagerConstants.mResolver.registerContentObserver(
+                ActivityManagerConstants.ACTIVITY_STARTS_LOGGING_ENABLED_URI,
+                false,
+                activityManagerConstants);
+        activityManagerConstants.mResolver.registerContentObserver(
+                ActivityManagerConstants.FOREGROUND_SERVICE_STARTS_LOGGING_ENABLED_URI,
+                false,
+                activityManagerConstants);
         if (activityManagerConstants.mSystemServerAutomaticHeapDumpEnabled) {
-            activityManagerConstants.mResolver.registerContentObserver(ActivityManagerConstants.ENABLE_AUTOMATIC_SYSTEM_SERVER_HEAP_DUMPS_URI, false, activityManagerConstants);
+            activityManagerConstants.mResolver.registerContentObserver(
+                    ActivityManagerConstants.ENABLE_AUTOMATIC_SYSTEM_SERVER_HEAP_DUMPS_URI,
+                    false,
+                    activityManagerConstants);
         }
-        activityManagerConstants.mResolver.registerContentObserver(ActivityManagerConstants.FORCE_ENABLE_PSS_PROFILING_URI, false, activityManagerConstants);
+        activityManagerConstants.mResolver.registerContentObserver(
+                ActivityManagerConstants.FORCE_ENABLE_PSS_PROFILING_URI,
+                false,
+                activityManagerConstants);
         activityManagerConstants.updateConstants();
         if (activityManagerConstants.mSystemServerAutomaticHeapDumpEnabled) {
             activityManagerConstants.updateEnableAutomaticSystemServerHeapDumps();
         }
-        DeviceConfig.addOnPropertiesChangedListener("activity_manager", ActivityThread.currentApplication().getMainExecutor(), activityManagerConstants.mOnDeviceConfigChangedListener);
-        DeviceConfig.addOnPropertiesChangedListener("activity_manager_ca", ActivityThread.currentApplication().getMainExecutor(), activityManagerConstants.mOnDeviceConfigChangedForComponentAliasListener);
-        activityManagerConstants.mOnDeviceConfigChangedListener.onPropertiesChanged(DeviceConfig.getProperties("activity_manager", new String[0]));
-        activityManagerConstants.mOnDeviceConfigChangedForComponentAliasListener.onPropertiesChanged(DeviceConfig.getProperties("activity_manager_ca", new String[0]));
-        activityManagerConstants.mFlagActivityStartsLoggingEnabled = Settings.Global.getInt(activityManagerConstants.mResolver, "activity_starts_logging_enabled", 1) == 1;
-        Settings.Global.getInt(activityManagerConstants.mResolver, "foreground_service_starts_logging_enabled", 1);
-        activityManagerConstants.mForceEnablePssProfiling = Settings.Global.getInt(activityManagerConstants.mResolver, "force_enable_pss_profiling", 0) == 1;
+        DeviceConfig.addOnPropertiesChangedListener(
+                "activity_manager",
+                ActivityThread.currentApplication().getMainExecutor(),
+                activityManagerConstants.mOnDeviceConfigChangedListener);
+        DeviceConfig.addOnPropertiesChangedListener(
+                "activity_manager_ca",
+                ActivityThread.currentApplication().getMainExecutor(),
+                activityManagerConstants.mOnDeviceConfigChangedForComponentAliasListener);
+        activityManagerConstants.mOnDeviceConfigChangedListener.onPropertiesChanged(
+                DeviceConfig.getProperties("activity_manager", new String[0]));
+        activityManagerConstants.mOnDeviceConfigChangedForComponentAliasListener
+                .onPropertiesChanged(
+                        DeviceConfig.getProperties("activity_manager_ca", new String[0]));
+        activityManagerConstants.mFlagActivityStartsLoggingEnabled =
+                Settings.Global.getInt(
+                                activityManagerConstants.mResolver,
+                                "activity_starts_logging_enabled",
+                                1)
+                        == 1;
+        Settings.Global.getInt(
+                activityManagerConstants.mResolver, "foreground_service_starts_logging_enabled", 1);
+        activityManagerConstants.mForceEnablePssProfiling =
+                Settings.Global.getInt(
+                                activityManagerConstants.mResolver, "force_enable_pss_profiling", 0)
+                        == 1;
         activityManagerConstants.mService.mDropboxRateLimiter.init();
         this.mService.mCoreSettingsObserver = new CoreSettingsObserver(this.mService);
         ActivityTaskManagerService activityTaskManagerService = this.mService.mActivityTaskManager;
         activityTaskManagerService.getClass();
         activityTaskManagerService.new SettingObserver();
         new DevelopmentSettingsObserver();
-        new SettingsToPropertiesMapper(this.mService.mContext.getContentResolver(), SettingsToPropertiesMapper.sGlobalSettings, SettingsToPropertiesMapper.sDeviceConfigScopes, SettingsToPropertiesMapper.sDeviceConfigAconfigScopes).updatePropertiesFromSettings();
+        new SettingsToPropertiesMapper(
+                        this.mService.mContext.getContentResolver(),
+                        SettingsToPropertiesMapper.sGlobalSettings,
+                        SettingsToPropertiesMapper.sDeviceConfigScopes,
+                        SettingsToPropertiesMapper.sDeviceConfigAconfigScopes)
+                .updatePropertiesFromSettings();
         final OomAdjuster oomAdjuster = this.mService.mOomAdjuster;
         CachedAppOptimizer cachedAppOptimizer = oomAdjuster.mCachedAppOptimizer;
         cachedAppOptimizer.getClass();
-        DeviceConfig.addOnPropertiesChangedListener("activity_manager", ActivityThread.currentApplication().getMainExecutor(), cachedAppOptimizer.mOnFlagsChangedListener);
-        DeviceConfig.addOnPropertiesChangedListener("activity_manager_native_boot", ActivityThread.currentApplication().getMainExecutor(), cachedAppOptimizer.mOnNativeBootFlagsChangedListener);
-        cachedAppOptimizer.mAm.mContext.getContentResolver().registerContentObserver(CachedAppOptimizer.CACHED_APP_FREEZER_ENABLED_URI, false, cachedAppOptimizer.mSettingsObserver);
+        DeviceConfig.addOnPropertiesChangedListener(
+                "activity_manager",
+                ActivityThread.currentApplication().getMainExecutor(),
+                cachedAppOptimizer.mOnFlagsChangedListener);
+        DeviceConfig.addOnPropertiesChangedListener(
+                "activity_manager_native_boot",
+                ActivityThread.currentApplication().getMainExecutor(),
+                cachedAppOptimizer.mOnNativeBootFlagsChangedListener);
+        cachedAppOptimizer
+                .mAm
+                .mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        CachedAppOptimizer.CACHED_APP_FREEZER_ENABLED_URI,
+                        false,
+                        cachedAppOptimizer.mSettingsObserver);
         synchronized (cachedAppOptimizer.mPhenotypeFlagLock) {
             cachedAppOptimizer.updateUseCompaction();
             cachedAppOptimizer.updateCompactionThrottles();
-            cachedAppOptimizer.mCompactStatsdSampleRate = DeviceConfig.getFloat("activity_manager", "compact_statsd_sample_rate", 0.1f);
-            cachedAppOptimizer.mCompactStatsdSampleRate = Math.min(1.0f, Math.max(FullScreenMagnificationGestureHandler.MAX_SCALE, cachedAppOptimizer.mCompactStatsdSampleRate));
-            cachedAppOptimizer.mFreezerStatsdSampleRate = DeviceConfig.getFloat("activity_manager", "freeze_statsd_sample_rate", 0.1f);
-            cachedAppOptimizer.mFreezerStatsdSampleRate = Math.min(1.0f, Math.max(FullScreenMagnificationGestureHandler.MAX_SCALE, cachedAppOptimizer.mFreezerStatsdSampleRate));
-            cachedAppOptimizer.mFullAnonRssThrottleKb = DeviceConfig.getLong("activity_manager", "compact_full_rss_throttle_kb", 12000L);
+            cachedAppOptimizer.mCompactStatsdSampleRate =
+                    DeviceConfig.getFloat("activity_manager", "compact_statsd_sample_rate", 0.1f);
+            cachedAppOptimizer.mCompactStatsdSampleRate =
+                    Math.min(
+                            1.0f,
+                            Math.max(
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    cachedAppOptimizer.mCompactStatsdSampleRate));
+            cachedAppOptimizer.mFreezerStatsdSampleRate =
+                    DeviceConfig.getFloat("activity_manager", "freeze_statsd_sample_rate", 0.1f);
+            cachedAppOptimizer.mFreezerStatsdSampleRate =
+                    Math.min(
+                            1.0f,
+                            Math.max(
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    cachedAppOptimizer.mFreezerStatsdSampleRate));
+            cachedAppOptimizer.mFullAnonRssThrottleKb =
+                    DeviceConfig.getLong(
+                            "activity_manager", "compact_full_rss_throttle_kb", 12000L);
             if (cachedAppOptimizer.mFullAnonRssThrottleKb < 0) {
                 cachedAppOptimizer.mFullAnonRssThrottleKb = 12000L;
             }
-            cachedAppOptimizer.mFullDeltaRssThrottleKb = DeviceConfig.getLong("activity_manager", "compact_full_delta_rss_throttle_kb", 8000L);
+            cachedAppOptimizer.mFullDeltaRssThrottleKb =
+                    DeviceConfig.getLong(
+                            "activity_manager", "compact_full_delta_rss_throttle_kb", 8000L);
             if (cachedAppOptimizer.mFullDeltaRssThrottleKb < 0) {
                 cachedAppOptimizer.mFullDeltaRssThrottleKb = 8000L;
             }
             cachedAppOptimizer.updateProcStateThrottle();
             cachedAppOptimizer.updateUseFreezer();
-            cachedAppOptimizer.mCompactThrottleMinOomAdj = DeviceConfig.getLong("activity_manager", "compact_throttle_min_oom_adj", 850L);
+            cachedAppOptimizer.mCompactThrottleMinOomAdj =
+                    DeviceConfig.getLong("activity_manager", "compact_throttle_min_oom_adj", 850L);
             if (cachedAppOptimizer.mCompactThrottleMinOomAdj < 850) {
                 cachedAppOptimizer.mCompactThrottleMinOomAdj = 850L;
             }
-            cachedAppOptimizer.mCompactThrottleMaxOomAdj = DeviceConfig.getLong("activity_manager", "compact_throttle_max_oom_adj", 999L);
+            cachedAppOptimizer.mCompactThrottleMaxOomAdj =
+                    DeviceConfig.getLong("activity_manager", "compact_throttle_max_oom_adj", 999L);
             if (cachedAppOptimizer.mCompactThrottleMaxOomAdj > 999) {
                 cachedAppOptimizer.mCompactThrottleMaxOomAdj = 999L;
             }
         }
         CacheOomRanker cacheOomRanker = oomAdjuster.mCacheOomRanker;
-        DeviceConfig.addOnPropertiesChangedListener("activity_manager", ActivityThread.currentApplication().getMainExecutor(), cacheOomRanker.mOnFlagsChangedListener);
+        DeviceConfig.addOnPropertiesChangedListener(
+                "activity_manager",
+                ActivityThread.currentApplication().getMainExecutor(),
+                cacheOomRanker.mOnFlagsChangedListener);
         synchronized (cacheOomRanker.mPhenotypeFlagLock) {
-            cacheOomRanker.mUseOomReRanking = DeviceConfig.getBoolean("activity_manager", "use_oom_re_ranking", false);
+            cacheOomRanker.mUseOomReRanking =
+                    DeviceConfig.getBoolean("activity_manager", "use_oom_re_ranking", false);
             cacheOomRanker.updateNumberToReRank();
-            cacheOomRanker.mLruWeight = DeviceConfig.getFloat("activity_manager", "oom_re_ranking_lru_weight", 0.35f);
-            cacheOomRanker.mUsesWeight = DeviceConfig.getFloat("activity_manager", "oom_re_ranking_uses_weight", 0.5f);
-            cacheOomRanker.mRssWeight = DeviceConfig.getFloat("activity_manager", "oom_re_ranking_rss_weight", 0.15f);
+            cacheOomRanker.mLruWeight =
+                    DeviceConfig.getFloat("activity_manager", "oom_re_ranking_lru_weight", 0.35f);
+            cacheOomRanker.mUsesWeight =
+                    DeviceConfig.getFloat("activity_manager", "oom_re_ranking_uses_weight", 0.5f);
+            cacheOomRanker.mRssWeight =
+                    DeviceConfig.getFloat("activity_manager", "oom_re_ranking_rss_weight", 0.15f);
         }
         if (oomAdjuster.mService.mConstants.KEEP_WARMING_SERVICES.size() > 0) {
-            oomAdjuster.mService.mContext.registerReceiverForAllUsers(new BroadcastReceiver() { // from class: com.android.server.am.OomAdjuster.1
-                public AnonymousClass1() {
-                }
+            oomAdjuster.mService.mContext.registerReceiverForAllUsers(
+                    new BroadcastReceiver() { // from class: com.android.server.am.OomAdjuster.1
+                        public AnonymousClass1() {}
 
-                @Override // android.content.BroadcastReceiver
-                public final void onReceive(Context context, Intent intent) {
-                    ActivityManagerService activityManagerService3 = OomAdjuster.this.mService;
-                    ActivityManagerService.boostPriorityForLockedSection();
-                    synchronized (activityManagerService3) {
-                        try {
-                            OomAdjuster.this.handleUserSwitchedLocked();
-                        } catch (Throwable th2) {
+                        @Override // android.content.BroadcastReceiver
+                        public final void onReceive(Context context, Intent intent) {
+                            ActivityManagerService activityManagerService3 =
+                                    OomAdjuster.this.mService;
+                            ActivityManagerService.boostPriorityForLockedSection();
+                            synchronized (activityManagerService3) {
+                                try {
+                                    OomAdjuster.this.handleUserSwitchedLocked();
+                                } catch (Throwable th2) {
+                                    ActivityManagerService.resetPriorityAfterLockedSection();
+                                    throw th2;
+                                }
+                            }
                             ActivityManagerService.resetPriorityAfterLockedSection();
-                            throw th2;
                         }
-                    }
-                    ActivityManagerService.resetPriorityAfterLockedSection();
-                }
-            }, new IntentFilter("android.intent.action.USER_SWITCHED"), null, oomAdjuster.mService.mHandler);
+                    },
+                    new IntentFilter("android.intent.action.USER_SWITCHED"),
+                    null,
+                    oomAdjuster.mService.mHandler);
         }
         Context context = this.mService.mContext;
         int i = RescueParty.LEVEL_ISRB_BOOT;
         if ("true".equals(SystemProperties.get("device_config.reset_performed"))) {
             if ("true".equals(SystemProperties.get("device_config.reset_performed"))) {
-                String resetFlagsFileContent = SettingsToPropertiesMapper.getResetFlagsFileContent();
+                String resetFlagsFileContent =
+                        SettingsToPropertiesMapper.getResetFlagsFileContent();
                 if (TextUtils.isEmpty(resetFlagsFileContent)) {
                     strArr = new String[0];
                 } else {
@@ -771,7 +1107,8 @@ public final class ContentProviderHelper {
                     for (String str : split) {
                         String[] split2 = str.split("\\.");
                         if (split2.length < 3) {
-                            SettingsToPropertiesMapper.logErr("failed to extract category name from property ".concat(str));
+                            SettingsToPropertiesMapper.logErr(
+                                    "failed to extract category name from property ".concat(str));
                         } else {
                             hashSet.add(split2[2]);
                         }
@@ -789,39 +1126,54 @@ public final class ContentProviderHelper {
         }
         ContentResolver contentResolver2 = context.getContentResolver();
         ExecutorService newSingleThreadExecutor = Executors.newSingleThreadExecutor();
-        RescueParty.RescuePartyMonitorCallback rescuePartyMonitorCallback = new RescueParty.RescuePartyMonitorCallback();
+        RescueParty.RescuePartyMonitorCallback rescuePartyMonitorCallback =
+                new RescueParty.RescuePartyMonitorCallback();
         rescuePartyMonitorCallback.mContext = context;
-        DeviceConfig.setMonitorCallback(contentResolver2, newSingleThreadExecutor, rescuePartyMonitorCallback);
+        DeviceConfig.setMonitorCallback(
+                contentResolver2, newSingleThreadExecutor, rescuePartyMonitorCallback);
     }
 
     public final boolean isAuthorityRedirectedForCloneProfileCached(String str) {
         if (((HashMap) this.mCloneProfileAuthorityRedirectionCache).containsKey(str)) {
-            Boolean bool = (Boolean) ((HashMap) this.mCloneProfileAuthorityRedirectionCache).get(str);
+            Boolean bool =
+                    (Boolean) ((HashMap) this.mCloneProfileAuthorityRedirectionCache).get(str);
             if (bool == null) {
                 return false;
             }
             return bool.booleanValue();
         }
-        boolean isAuthorityRedirectedForCloneProfile = ContentProvider.isAuthorityRedirectedForCloneProfile(str);
-        ((HashMap) this.mCloneProfileAuthorityRedirectionCache).put(str, Boolean.valueOf(isAuthorityRedirectedForCloneProfile));
+        boolean isAuthorityRedirectedForCloneProfile =
+                ContentProvider.isAuthorityRedirectedForCloneProfile(str);
+        ((HashMap) this.mCloneProfileAuthorityRedirectionCache)
+                .put(str, Boolean.valueOf(isAuthorityRedirectedForCloneProfile));
         return isAuthorityRedirectedForCloneProfile;
     }
 
-    public final boolean isHolderVisibleToCaller(ContentProviderHolder contentProviderHolder, int i, int i2) {
+    public final boolean isHolderVisibleToCaller(
+            ContentProviderHolder contentProviderHolder, int i, int i2) {
         ProviderInfo providerInfo;
         if (contentProviderHolder == null || (providerInfo = contentProviderHolder.info) == null) {
             return false;
         }
-        boolean isAuthorityRedirectedForCloneProfileCached = isAuthorityRedirectedForCloneProfileCached(providerInfo.authority);
+        boolean isAuthorityRedirectedForCloneProfileCached =
+                isAuthorityRedirectedForCloneProfileCached(providerInfo.authority);
         ActivityManagerService activityManagerService = this.mService;
         if (isAuthorityRedirectedForCloneProfileCached) {
-            UserManagerInternal userManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+            UserManagerInternal userManagerInternal =
+                    (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
             UserInfo userInfo = userManagerInternal.getUserInfo(i2);
-            if (((userInfo == null || !userInfo.isCloneProfile()) ? i2 : userManagerInternal.getProfileParentId(i2)) != i2) {
-                return !activityManagerService.getPackageManagerInternal().filterAppAccess(i, i2, contentProviderHolder.info.packageName, false);
+            if (((userInfo == null || !userInfo.isCloneProfile())
+                            ? i2
+                            : userManagerInternal.getProfileParentId(i2))
+                    != i2) {
+                return !activityManagerService
+                        .getPackageManagerInternal()
+                        .filterAppAccess(i, i2, contentProviderHolder.info.packageName, false);
             }
         }
-        return !activityManagerService.getPackageManagerInternal().filterAppAccess(i, i2, contentProviderHolder.info.packageName, true);
+        return !activityManagerService
+                .getPackageManagerInternal()
+                .filterAppAccess(i, i2, contentProviderHolder.info.packageName, true);
     }
 
     public final boolean isProcessAliveLocked(ProcessRecord processRecord) {
@@ -836,13 +1188,19 @@ public final class ContentProviderHelper {
             return false;
         }
         long j = jArr[0];
-        return (j == 90 || j == 88 || j == 120 || j == 75 || Process.getUidForPid(i) != processRecord.uid) ? false : true;
+        return (j == 90
+                        || j == 88
+                        || j == 120
+                        || j == 75
+                        || Process.getUidForPid(i) != processRecord.uid)
+                ? false
+                : true;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:6:0x0016, code lost:
-    
-        if ((r0 & 536870912) != 0) goto L11;
-     */
+
+       if ((r0 & 536870912) != 0) goto L11;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -877,19 +1235,28 @@ public final class ContentProviderHelper {
         L2d:
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.ContentProviderHelper.isSingletonOrSystemUserOnly(android.content.pm.ProviderInfo):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.ContentProviderHelper.isSingletonOrSystemUserOnly(android.content.pm.ProviderInfo):boolean");
     }
 
-    public final void maybeUpdateProviderUsageStatsLocked(ProcessRecord processRecord, String str, String str2) {
+    public final void maybeUpdateProviderUsageStatsLocked(
+            ProcessRecord processRecord, String str, String str2) {
         UserState startedUserState;
-        if (processRecord == null || processRecord.mState.mCurProcState > 6 || (startedUserState = this.mService.mUserController.getStartedUserState(processRecord.userId)) == null) {
+        if (processRecord == null
+                || processRecord.mState.mCurProcState > 6
+                || (startedUserState =
+                                this.mService.mUserController.getStartedUserState(
+                                        processRecord.userId))
+                        == null) {
             return;
         }
         long elapsedRealtime = SystemClock.elapsedRealtime();
         Long l = (Long) startedUserState.mProviderLastReportedFg.get(str2);
         if (l == null || l.longValue() < elapsedRealtime - 60000) {
             if (this.mService.mSystemReady) {
-                UsageStatsService.this.mAppStandby.postReportContentProviderUsage(str2, str, processRecord.userId);
+                UsageStatsService.this.mAppStandby.postReportContentProviderUsage(
+                        str2, str, processRecord.userId);
             }
             startedUserState.mProviderLastReportedFg.put(str2, Long.valueOf(elapsedRealtime));
         }
@@ -905,7 +1272,8 @@ public final class ContentProviderHelper {
         this.mService.getClass();
         ActivityManagerService.enforceNotIsolatedCaller("publishContentProviders");
         if (Process.isSdkSandboxUid(Binder.getCallingUid())) {
-            throw new SecurityException("SDK sandbox process not allowed to call publishContentProviders");
+            throw new SecurityException(
+                    "SDK sandbox process not allowed to call publishContentProviders");
         }
         ActivityManagerService activityManagerService2 = this.mService;
         ActivityManagerService.boostPriorityForLockedSection();
@@ -915,28 +1283,47 @@ public final class ContentProviderHelper {
                 th = th;
             }
             try {
-                ProcessRecord recordForAppLOSP = this.mService.getRecordForAppLOSP(iApplicationThread);
+                ProcessRecord recordForAppLOSP =
+                        this.mService.getRecordForAppLOSP(iApplicationThread);
                 if (recordForAppLOSP == null) {
-                    throw new SecurityException("Unable to find app for caller " + iApplicationThread + " (pid=" + Binder.getCallingPid() + ") when publishing content providers");
+                    throw new SecurityException(
+                            "Unable to find app for caller "
+                                    + iApplicationThread
+                                    + " (pid="
+                                    + Binder.getCallingPid()
+                                    + ") when publishing content providers");
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 int size = list.size();
                 int i = 0;
                 boolean z = false;
                 while (i < size) {
-                    ContentProviderHolder contentProviderHolder = (ContentProviderHolder) list.get(i);
-                    if (contentProviderHolder != null && (providerInfo2 = contentProviderHolder.info) != null && contentProviderHolder.provider != null) {
-                        ContentProviderRecord contentProviderRecord = (ContentProviderRecord) recordForAppLOSP.mProviders.mPubProviders.get(providerInfo2.name);
+                    ContentProviderHolder contentProviderHolder =
+                            (ContentProviderHolder) list.get(i);
+                    if (contentProviderHolder != null
+                            && (providerInfo2 = contentProviderHolder.info) != null
+                            && contentProviderHolder.provider != null) {
+                        ContentProviderRecord contentProviderRecord =
+                                (ContentProviderRecord)
+                                        recordForAppLOSP.mProviders.mPubProviders.get(
+                                                providerInfo2.name);
                         if (contentProviderRecord != null) {
                             ProviderInfo providerInfo3 = contentProviderRecord.info;
-                            this.mProviderMap.putProviderByClass(new ComponentName(providerInfo3.packageName, providerInfo3.name), contentProviderRecord);
+                            this.mProviderMap.putProviderByClass(
+                                    new ComponentName(
+                                            providerInfo3.packageName, providerInfo3.name),
+                                    contentProviderRecord);
                             for (String str : contentProviderRecord.info.authority.split(";")) {
                                 ProviderMap providerMap = this.mProviderMap;
                                 providerMap.getClass();
                                 if (contentProviderRecord.singleton) {
                                     providerMap.mSingletonByName.put(str, contentProviderRecord);
                                 } else {
-                                    providerMap.getProvidersByName(UserHandle.getUserId(contentProviderRecord.appInfo.uid)).put(str, contentProviderRecord);
+                                    providerMap
+                                            .getProvidersByName(
+                                                    UserHandle.getUserId(
+                                                            contentProviderRecord.appInfo.uid))
+                                            .put(str, contentProviderRecord);
                                 }
                             }
                             int size2 = this.mLaunchingProviders.size();
@@ -955,9 +1342,13 @@ public final class ContentProviderHelper {
                                 this.mService.mHandler.removeMessages(73, contentProviderRecord);
                                 this.mService.mHandler.removeMessages(57, recordForAppLOSP);
                             }
-                            ApplicationInfo applicationInfo = contentProviderRecord.info.applicationInfo;
+                            ApplicationInfo applicationInfo =
+                                    contentProviderRecord.info.applicationInfo;
                             activityManagerService = activityManagerService2;
-                            recordForAppLOSP.addPackage(applicationInfo.packageName, applicationInfo.longVersionCode, this.mService.mProcessStats);
+                            recordForAppLOSP.addPackage(
+                                    applicationInfo.packageName,
+                                    applicationInfo.longVersionCode,
+                                    this.mService.mProcessStats);
                             synchronized (contentProviderRecord) {
                                 contentProviderRecord.provider = contentProviderHolder.provider;
                                 contentProviderRecord.setProcess(recordForAppLOSP);
@@ -982,9 +1373,15 @@ public final class ContentProviderHelper {
                     this.mService.updateOomAdjLocked(7, recordForAppLOSP);
                     int size3 = list.size();
                     for (int i3 = 0; i3 < size3; i3++) {
-                        ContentProviderHolder contentProviderHolder2 = (ContentProviderHolder) list.get(i3);
-                        if (contentProviderHolder2 != null && (providerInfo = contentProviderHolder2.info) != null && contentProviderHolder2.provider != null) {
-                            maybeUpdateProviderUsageStatsLocked(recordForAppLOSP, providerInfo.packageName, providerInfo.authority);
+                        ContentProviderHolder contentProviderHolder2 =
+                                (ContentProviderHolder) list.get(i3);
+                        if (contentProviderHolder2 != null
+                                && (providerInfo = contentProviderHolder2.info) != null
+                                && contentProviderHolder2.provider != null) {
+                            maybeUpdateProviderUsageStatsLocked(
+                                    recordForAppLOSP,
+                                    providerInfo.packageName,
+                                    providerInfo.authority);
                         }
                     }
                 }
@@ -1010,13 +1407,25 @@ public final class ContentProviderHelper {
                     return;
                 }
                 ProviderInfo providerInfo = providerByName.info;
-                ContentProviderRecord providerByClass = this.mProviderMap.getProviderByClass(i, new ComponentName(providerInfo.packageName, providerInfo.name));
+                ContentProviderRecord providerByClass =
+                        this.mProviderMap.getProviderByClass(
+                                i, new ComponentName(providerInfo.packageName, providerInfo.name));
                 if (!providerByClass.hasExternalProcessHandles()) {
-                    Slog.e("ContentProviderHelper", "Attempt to remove content provider: " + providerByClass + " with no external references.");
+                    Slog.e(
+                            "ContentProviderHelper",
+                            "Attempt to remove content provider: "
+                                    + providerByClass
+                                    + " with no external references.");
                 } else if (providerByClass.removeExternalProcessHandleLocked(iBinder)) {
                     this.mService.updateOomAdjLocked(8, providerByClass.proc);
                 } else {
-                    Slog.e("ContentProviderHelper", "Attempt to remove content provider " + providerByClass + " with no external reference for token: " + iBinder + ".");
+                    Slog.e(
+                            "ContentProviderHelper",
+                            "Attempt to remove content provider "
+                                    + providerByClass
+                                    + " with no external reference for token: "
+                                    + iBinder
+                                    + ".");
                 }
                 ActivityManagerService.resetPriorityAfterLockedSection();
             } catch (Throwable th) {
@@ -1031,26 +1440,43 @@ public final class ContentProviderHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean removeDyingProviderLocked(com.android.server.am.ProcessRecord r18, com.android.server.am.ContentProviderRecord r19, boolean r20) {
+    public final boolean removeDyingProviderLocked(
+            com.android.server.am.ProcessRecord r18,
+            com.android.server.am.ContentProviderRecord r19,
+            boolean r20) {
         /*
             Method dump skipped, instructions count: 442
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.ContentProviderHelper.removeDyingProviderLocked(com.android.server.am.ProcessRecord, com.android.server.am.ContentProviderRecord, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.ContentProviderHelper.removeDyingProviderLocked(com.android.server.am.ProcessRecord,"
+                    + " com.android.server.am.ContentProviderRecord, boolean):boolean");
     }
 
-    public final boolean requestTargetProviderPermissionsReviewIfNeededLocked(ProviderInfo providerInfo, ProcessRecord processRecord, int i, Context context) {
+    public final boolean requestTargetProviderPermissionsReviewIfNeededLocked(
+            ProviderInfo providerInfo, ProcessRecord processRecord, int i, Context context) {
         ActivityManagerService activityManagerService = this.mService;
-        if (!activityManagerService.getPackageManagerInternal().isPermissionsReviewRequired(i, providerInfo.packageName)) {
+        if (!activityManagerService
+                .getPackageManagerInternal()
+                .isPermissionsReviewRequired(i, providerInfo.packageName)) {
             return true;
         }
         if (processRecord != null && processRecord.mState.mSetSchedGroup <= 0) {
-            ProfileService$1$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m(i, "u", " Instantiating a provider in package "), providerInfo.packageName, " requires a permissions review", "ContentProviderHelper");
+            ProfileService$1$$ExternalSyntheticOutline0.m(
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "u", " Instantiating a provider in package "),
+                    providerInfo.packageName,
+                    " requires a permissions review",
+                    "ContentProviderHelper");
             return false;
         }
-        Intent m = BatteryService$$ExternalSyntheticOutline0.m(276824064, "android.intent.action.REVIEW_PERMISSIONS");
+        Intent m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        276824064, "android.intent.action.REVIEW_PERMISSIONS");
         m.putExtra("android.intent.extra.PACKAGE_NAME", providerInfo.packageName);
-        activityManagerService.mHandler.post(new StartActivityRunnable(context, m, new UserHandle(i)));
+        activityManagerService.mHandler.post(
+                new StartActivityRunnable(context, m, new UserHandle(i)));
         return false;
     }
 }

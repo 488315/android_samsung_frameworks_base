@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ViewAnimator;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
@@ -30,7 +31,11 @@ public class DialogViewAnimator extends ViewAnimator {
         int childHeightMeasureSpec;
         int i;
         int i2 = 1073741824;
-        boolean measureMatchParentChildren = (View.MeasureSpec.getMode(widthMeasureSpec) == 1073741824 && View.MeasureSpec.getMode(heightMeasureSpec) == 1073741824) ? false : true;
+        boolean measureMatchParentChildren =
+                (View.MeasureSpec.getMode(widthMeasureSpec) == 1073741824
+                                && View.MeasureSpec.getMode(heightMeasureSpec) == 1073741824)
+                        ? false
+                        : true;
         int count = getChildCount();
         int maxHeight2 = 0;
         int maxWidth = 0;
@@ -54,11 +59,17 @@ public class DialogViewAnimator extends ViewAnimator {
                 measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, 0);
                 int state = 0;
                 if (measureMatchParentChildren && !matchWidth) {
-                    maxWidth = Math.max(maxWidth, child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin);
+                    maxWidth =
+                            Math.max(
+                                    maxWidth,
+                                    child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin);
                     state = 0 | (child.getMeasuredWidthAndState() & (-16777216));
                 }
                 if (measureMatchParentChildren && !matchHeight) {
-                    maxHeight2 = Math.max(maxHeight2, child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin);
+                    maxHeight2 =
+                            Math.max(
+                                    maxHeight2,
+                                    child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin);
                     state |= (child.getMeasuredHeightAndState() >> 16) & (-256);
                 }
                 childState = combineMeasuredStates(childState2, state);
@@ -69,28 +80,58 @@ public class DialogViewAnimator extends ViewAnimator {
         }
         int childState3 = childState;
         int maxWidth2 = maxWidth + getPaddingLeft() + getPaddingRight();
-        int maxHeight3 = Math.max(maxHeight2 + getPaddingTop() + getPaddingBottom(), getSuggestedMinimumHeight());
+        int maxHeight3 =
+                Math.max(
+                        maxHeight2 + getPaddingTop() + getPaddingBottom(),
+                        getSuggestedMinimumHeight());
         int maxWidth3 = Math.max(maxWidth2, getSuggestedMinimumWidth());
         Drawable drawable = getForeground();
         if (drawable != null) {
             maxHeight3 = Math.max(maxHeight3, drawable.getMinimumHeight());
             maxWidth3 = Math.max(maxWidth3, drawable.getMinimumWidth());
         }
-        setMeasuredDimension(resolveSizeAndState(maxWidth3, widthMeasureSpec, childState3), resolveSizeAndState(maxHeight3, heightMeasureSpec, childState3 << 16));
+        setMeasuredDimension(
+                resolveSizeAndState(maxWidth3, widthMeasureSpec, childState3),
+                resolveSizeAndState(maxHeight3, heightMeasureSpec, childState3 << 16));
         int matchCount = this.mMatchParentChildren.size();
         int i4 = 0;
         while (i4 < matchCount) {
             View child2 = this.mMatchParentChildren.get(i4);
-            ViewGroup.MarginLayoutParams lp2 = (ViewGroup.MarginLayoutParams) child2.getLayoutParams();
+            ViewGroup.MarginLayoutParams lp2 =
+                    (ViewGroup.MarginLayoutParams) child2.getLayoutParams();
             if (lp2.width == maxHeight) {
-                childWidthMeasureSpec = View.MeasureSpec.makeMeasureSpec((((getMeasuredWidth() - getPaddingLeft()) - getPaddingRight()) - lp2.leftMargin) - lp2.rightMargin, i2);
+                childWidthMeasureSpec =
+                        View.MeasureSpec.makeMeasureSpec(
+                                (((getMeasuredWidth() - getPaddingLeft()) - getPaddingRight())
+                                                - lp2.leftMargin)
+                                        - lp2.rightMargin,
+                                i2);
             } else {
-                childWidthMeasureSpec = getChildMeasureSpec(widthMeasureSpec, getPaddingLeft() + getPaddingRight() + lp2.leftMargin + lp2.rightMargin, lp2.width);
+                childWidthMeasureSpec =
+                        getChildMeasureSpec(
+                                widthMeasureSpec,
+                                getPaddingLeft()
+                                        + getPaddingRight()
+                                        + lp2.leftMargin
+                                        + lp2.rightMargin,
+                                lp2.width);
             }
             if (lp2.height == -1) {
-                childHeightMeasureSpec = View.MeasureSpec.makeMeasureSpec((((getMeasuredHeight() - getPaddingTop()) - getPaddingBottom()) - lp2.topMargin) - lp2.bottomMargin, 1073741824);
+                childHeightMeasureSpec =
+                        View.MeasureSpec.makeMeasureSpec(
+                                (((getMeasuredHeight() - getPaddingTop()) - getPaddingBottom())
+                                                - lp2.topMargin)
+                                        - lp2.bottomMargin,
+                                1073741824);
             } else {
-                childHeightMeasureSpec = getChildMeasureSpec(heightMeasureSpec, getPaddingTop() + getPaddingBottom() + lp2.topMargin + lp2.bottomMargin, lp2.height);
+                childHeightMeasureSpec =
+                        getChildMeasureSpec(
+                                heightMeasureSpec,
+                                getPaddingTop()
+                                        + getPaddingBottom()
+                                        + lp2.topMargin
+                                        + lp2.bottomMargin,
+                                lp2.height);
             }
             child2.measure(childWidthMeasureSpec, childHeightMeasureSpec);
             i4++;

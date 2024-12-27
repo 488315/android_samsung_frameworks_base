@@ -4,27 +4,32 @@ import android.annotation.NonNull;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class VisualQueryDetectedResult implements Parcelable {
-    public static final Parcelable.Creator<VisualQueryDetectedResult> CREATOR = new Parcelable.Creator<VisualQueryDetectedResult>() { // from class: android.service.voice.VisualQueryDetectedResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisualQueryDetectedResult[] newArray(int size) {
-            return new VisualQueryDetectedResult[size];
-        }
+    public static final Parcelable.Creator<VisualQueryDetectedResult> CREATOR =
+            new Parcelable.Creator<
+                    VisualQueryDetectedResult>() { // from class:
+                                                   // android.service.voice.VisualQueryDetectedResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisualQueryDetectedResult[] newArray(int size) {
+                    return new VisualQueryDetectedResult[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisualQueryDetectedResult createFromParcel(Parcel in) {
-            return new VisualQueryDetectedResult(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisualQueryDetectedResult createFromParcel(Parcel in) {
+                    return new VisualQueryDetectedResult(in);
+                }
+            };
     private final byte[] mAccessibilityDetectionData;
     private final String mPartialQuery;
     private final int mSpeakerId;
@@ -53,12 +58,17 @@ public final class VisualQueryDetectedResult implements Parcelable {
     }
 
     public Builder buildUpon() {
-        return new Builder().setPartialQuery(this.mPartialQuery).setSpeakerId(this.mSpeakerId).setAccessibilityDetectionData(this.mAccessibilityDetectionData);
+        return new Builder()
+                .setPartialQuery(this.mPartialQuery)
+                .setSpeakerId(this.mSpeakerId)
+                .setAccessibilityDetectionData(this.mAccessibilityDetectionData);
     }
 
-    VisualQueryDetectedResult(String partialQuery, int speakerId, byte[] accessibilityDetectionData) {
+    VisualQueryDetectedResult(
+            String partialQuery, int speakerId, byte[] accessibilityDetectionData) {
         this.mPartialQuery = partialQuery;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPartialQuery);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPartialQuery);
         this.mSpeakerId = speakerId;
         this.mAccessibilityDetectionData = accessibilityDetectionData;
         onConstructed();
@@ -77,7 +87,13 @@ public final class VisualQueryDetectedResult implements Parcelable {
     }
 
     public String toString() {
-        return "VisualQueryDetectedResult { partialQuery = " + this.mPartialQuery + ", speakerId = " + this.mSpeakerId + ", accessibilityDetectionData = " + Arrays.toString(this.mAccessibilityDetectionData) + " }";
+        return "VisualQueryDetectedResult { partialQuery = "
+                + this.mPartialQuery
+                + ", speakerId = "
+                + this.mSpeakerId
+                + ", accessibilityDetectionData = "
+                + Arrays.toString(this.mAccessibilityDetectionData)
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -88,7 +104,10 @@ public final class VisualQueryDetectedResult implements Parcelable {
             return false;
         }
         VisualQueryDetectedResult that = (VisualQueryDetectedResult) o;
-        if (Objects.equals(this.mPartialQuery, that.mPartialQuery) && this.mSpeakerId == that.mSpeakerId && Arrays.equals(this.mAccessibilityDetectionData, that.mAccessibilityDetectionData)) {
+        if (Objects.equals(this.mPartialQuery, that.mPartialQuery)
+                && this.mSpeakerId == that.mSpeakerId
+                && Arrays.equals(
+                        this.mAccessibilityDetectionData, that.mAccessibilityDetectionData)) {
             return true;
         }
         return false;
@@ -96,7 +115,8 @@ public final class VisualQueryDetectedResult implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + Objects.hashCode(this.mPartialQuery);
-        return (((_hash * 31) + this.mSpeakerId) * 31) + Arrays.hashCode(this.mAccessibilityDetectionData);
+        return (((_hash * 31) + this.mSpeakerId) * 31)
+                + Arrays.hashCode(this.mAccessibilityDetectionData);
     }
 
     @Override // android.os.Parcelable
@@ -116,7 +136,8 @@ public final class VisualQueryDetectedResult implements Parcelable {
         int speakerId = in.readInt();
         byte[] accessibilityDetectionData = in.createByteArray();
         this.mPartialQuery = partialQuery;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPartialQuery);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPartialQuery);
         this.mSpeakerId = speakerId;
         this.mAccessibilityDetectionData = accessibilityDetectionData;
         onConstructed();
@@ -159,20 +180,23 @@ public final class VisualQueryDetectedResult implements Parcelable {
                 this.mSpeakerId = VisualQueryDetectedResult.defaultSpeakerId();
             }
             if ((this.mBuilderFieldsSet & 4) == 0) {
-                this.mAccessibilityDetectionData = VisualQueryDetectedResult.defaultAccessibilityDetectionData();
+                this.mAccessibilityDetectionData =
+                        VisualQueryDetectedResult.defaultAccessibilityDetectionData();
             }
-            VisualQueryDetectedResult o = new VisualQueryDetectedResult(this.mPartialQuery, this.mSpeakerId, this.mAccessibilityDetectionData);
+            VisualQueryDetectedResult o =
+                    new VisualQueryDetectedResult(
+                            this.mPartialQuery, this.mSpeakerId, this.mAccessibilityDetectionData);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 8) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

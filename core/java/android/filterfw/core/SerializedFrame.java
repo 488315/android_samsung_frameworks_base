@@ -3,6 +3,7 @@ package android.filterfw.core;
 import android.filterfw.format.ObjectFormat;
 import android.graphics.Bitmap;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -29,7 +30,8 @@ public class SerializedFrame extends Frame {
         private final void ensureFit(int bytesToWrite) {
             if (this.mOffset + bytesToWrite > this.mBuffer.length) {
                 byte[] oldBuffer = this.mBuffer;
-                this.mBuffer = new byte[Math.max(this.mOffset + bytesToWrite, this.mBuffer.length * 2)];
+                this.mBuffer =
+                        new byte[Math.max(this.mOffset + bytesToWrite, this.mBuffer.length * 2)];
                 System.arraycopy(oldBuffer, 0, this.mBuffer, 0, this.mOffset);
             }
         }
@@ -136,7 +138,8 @@ public class SerializedFrame extends Frame {
             this.mObjectOut = new ObjectOutputStream(this.mByteOutputStream);
             this.mByteOutputStream.markHeaderEnd();
         } catch (IOException e) {
-            throw new RuntimeException("Could not create serialization streams for SerializedFrame!", e);
+            throw new RuntimeException(
+                    "Could not create serialization streams for SerializedFrame!", e);
         }
     }
 
@@ -153,8 +156,7 @@ public class SerializedFrame extends Frame {
     }
 
     @Override // android.filterfw.core.Frame
-    protected void releaseNativeAllocation() {
-    }
+    protected void releaseNativeAllocation() {}
 
     @Override // android.filterfw.core.Frame
     public Object getObjectValue() {
@@ -233,7 +235,8 @@ public class SerializedFrame extends Frame {
             this.mObjectOut.flush();
             this.mObjectOut.close();
         } catch (IOException e) {
-            throw new RuntimeException("Could not serialize object " + object + " in " + this + "!", e);
+            throw new RuntimeException(
+                    "Could not serialize object " + object + " in " + this + "!", e);
         }
     }
 
@@ -245,7 +248,8 @@ public class SerializedFrame extends Frame {
         } catch (IOException e) {
             throw new RuntimeException("Could not deserialize object in " + this + "!", e);
         } catch (ClassNotFoundException e2) {
-            throw new RuntimeException("Unable to deserialize object of unknown class in " + this + "!", e2);
+            throw new RuntimeException(
+                    "Unable to deserialize object of unknown class in " + this + "!", e2);
         }
     }
 

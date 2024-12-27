@@ -10,18 +10,20 @@ import android.os.RemoteException;
 public interface SemImsRegiListener extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.ims.SemImsRegiListener";
 
-    void onDeregistered(SemImsRegistration semImsRegistration, SemImsRegistrationError semImsRegistrationError) throws RemoteException;
+    void onDeregistered(
+            SemImsRegistration semImsRegistration, SemImsRegistrationError semImsRegistrationError)
+            throws RemoteException;
 
     void onRegistered(SemImsRegistration semImsRegistration) throws RemoteException;
 
     public static class Default implements SemImsRegiListener {
         @Override // com.samsung.android.ims.SemImsRegiListener
-        public void onRegistered(SemImsRegistration reg) throws RemoteException {
-        }
+        public void onRegistered(SemImsRegistration reg) throws RemoteException {}
 
         @Override // com.samsung.android.ims.SemImsRegiListener
-        public void onDeregistered(SemImsRegistration reg, SemImsRegistrationError registrationError) throws RemoteException {
-        }
+        public void onDeregistered(
+                SemImsRegistration reg, SemImsRegistrationError registrationError)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +31,7 @@ public interface SemImsRegiListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements SemImsRegiListener {
+    public abstract static class Stub extends Binder implements SemImsRegiListener {
         static final int TRANSACTION_onDeregistered = 2;
         static final int TRANSACTION_onRegistered = 1;
 
@@ -70,7 +72,8 @@ public interface SemImsRegiListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(SemImsRegiListener.DESCRIPTOR);
             }
@@ -80,13 +83,17 @@ public interface SemImsRegiListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SemImsRegistration _arg0 = (SemImsRegistration) data.readTypedObject(SemImsRegistration.CREATOR);
+                    SemImsRegistration _arg0 =
+                            (SemImsRegistration) data.readTypedObject(SemImsRegistration.CREATOR);
                     data.enforceNoDataAvail();
                     onRegistered(_arg0);
                     return true;
                 case 2:
-                    SemImsRegistration _arg02 = (SemImsRegistration) data.readTypedObject(SemImsRegistration.CREATOR);
-                    SemImsRegistrationError _arg1 = (SemImsRegistrationError) data.readTypedObject(SemImsRegistrationError.CREATOR);
+                    SemImsRegistration _arg02 =
+                            (SemImsRegistration) data.readTypedObject(SemImsRegistration.CREATOR);
+                    SemImsRegistrationError _arg1 =
+                            (SemImsRegistrationError)
+                                    data.readTypedObject(SemImsRegistrationError.CREATOR);
                     data.enforceNoDataAvail();
                     onDeregistered(_arg02, _arg1);
                     return true;
@@ -124,7 +131,9 @@ public interface SemImsRegiListener extends IInterface {
             }
 
             @Override // com.samsung.android.ims.SemImsRegiListener
-            public void onDeregistered(SemImsRegistration reg, SemImsRegistrationError registrationError) throws RemoteException {
+            public void onDeregistered(
+                    SemImsRegistration reg, SemImsRegistrationError registrationError)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(SemImsRegiListener.DESCRIPTOR);

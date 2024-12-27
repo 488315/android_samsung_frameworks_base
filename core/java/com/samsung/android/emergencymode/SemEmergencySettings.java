@@ -9,24 +9,25 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
 import com.android.internal.telephony.TelephonyProperties;
+
 import java.util.Arrays;
 
 /* loaded from: classes6.dex */
 public class SemEmergencySettings {
     private static final String TAG = "SemEmergencySettings";
 
-    private SemEmergencySettings() {
-    }
+    private SemEmergencySettings() {}
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0068, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0065, code lost:
-    
-        if (r1 == null) goto L19;
-     */
+
+       if (r1 == null) goto L19;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -94,7 +95,10 @@ public class SemEmergencySettings {
             r0 = 0
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.emergencymode.SemEmergencySettings.get(android.content.ContentResolver, java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.emergencymode.SemEmergencySettings.get(android.content.ContentResolver,"
+                    + " java.lang.String):java.lang.String");
     }
 
     @Deprecated
@@ -104,25 +108,25 @@ public class SemEmergencySettings {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0037, code lost:
-    
-        if (r11 != 1) goto L16;
-     */
+
+       if (r11 != 1) goto L16;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0127, code lost:
-    
-        if ("China".equalsIgnoreCase(r0) != false) goto L57;
-     */
+
+       if ("China".equalsIgnoreCase(r0) != false) goto L57;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:?, code lost:
-    
-        return "119";
-     */
+
+       return "119";
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:?, code lost:
-    
-        return "911";
-     */
+
+       return "911";
+    */
     /* JADX WARN: Code restructure failed: missing block: B:67:0x00ef, code lost:
-    
-        if ("China".equalsIgnoreCase(r0) != false) goto L57;
-     */
+
+       if ("China".equalsIgnoreCase(r0) != false) goto L57;
+    */
     /* JADX WARN: Removed duplicated region for block: B:26:0x0117  */
     /* JADX WARN: Removed duplicated region for block: B:28:0x011c  */
     /* JADX WARN: Removed duplicated region for block: B:35:? A[RETURN, SYNTHETIC] */
@@ -131,12 +135,18 @@ public class SemEmergencySettings {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.lang.String getEmergencyNumber(android.content.Context r20, android.content.ContentResolver r21, java.lang.String r22) {
+    public static java.lang.String getEmergencyNumber(
+            android.content.Context r20,
+            android.content.ContentResolver r21,
+            java.lang.String r22) {
         /*
             Method dump skipped, instructions count: 335
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.emergencymode.SemEmergencySettings.getEmergencyNumber(android.content.Context, android.content.ContentResolver, java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.emergencymode.SemEmergencySettings.getEmergencyNumber(android.content.Context,"
+                    + " android.content.ContentResolver, java.lang.String):java.lang.String");
     }
 
     private static String checkForMCC() {
@@ -165,22 +175,44 @@ public class SemEmergencySettings {
         int size_readystate = arrIsReady.length;
         String arrIsReadyValue = Arrays.toString(arrIsReady);
         if (size_readystate > 0 && arrIsReady[0].equals("READY")) {
-            Elog.d(TAG, "checkForMCC: requested Country : mcc1[0] " + mcc1[0] + " sim ready = " + arrIsReady[0]);
+            Elog.d(
+                    TAG,
+                    "checkForMCC: requested Country : mcc1[0] "
+                            + mcc1[0]
+                            + " sim ready = "
+                            + arrIsReady[0]);
             return mcc1[0];
         }
         if (size_readystate > 1 && arrIsReady[1].equals("READY")) {
-            Elog.d(TAG, "checkForMCC: requested Country : mcc1[1] " + mcc1[1] + " sim ready = " + arrIsReady[1]);
+            Elog.d(
+                    TAG,
+                    "checkForMCC: requested Country : mcc1[1] "
+                            + mcc1[1]
+                            + " sim ready = "
+                            + arrIsReady[1]);
             return mcc1[1];
         }
         if (simCount > 0 && mcc1[0] != null) {
-            Elog.d(TAG, "checkForMCC: requested Country : mcc1[0] " + mcc1[0] + " sim ready = " + arrIsReadyValue);
+            Elog.d(
+                    TAG,
+                    "checkForMCC: requested Country : mcc1[0] "
+                            + mcc1[0]
+                            + " sim ready = "
+                            + arrIsReadyValue);
             return mcc1[0];
         }
         if (simCount > 1 && mcc1[1] != null) {
-            Elog.d(TAG, "checkForMCC: requested Country : mcc1[1] " + mcc1[1] + " sim ready = " + arrIsReadyValue);
+            Elog.d(
+                    TAG,
+                    "checkForMCC: requested Country : mcc1[1] "
+                            + mcc1[1]
+                            + " sim ready = "
+                            + arrIsReadyValue);
             return mcc1[1];
         }
-        Elog.d(TAG, "checkForMCC: requested Country : default cond. sim ready = " + arrIsReadyValue);
+        Elog.d(
+                TAG,
+                "checkForMCC: requested Country : default cond. sim ready = " + arrIsReadyValue);
         return null;
     }
 
@@ -209,7 +241,8 @@ public class SemEmergencySettings {
     private static boolean isPossibleNormalCall(Context context) {
         try {
             try {
-                TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService("phone");
+                TelephonyManager telephonyManager =
+                        (TelephonyManager) context.getSystemService("phone");
                 if (telephonyManager.getServiceState().getState() != 0) {
                     return false;
                 }

@@ -4,6 +4,5 @@ import com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvi
 
 /* loaded from: classes5.dex */
 abstract class SymmetricAlgorithmProvider extends AlgorithmProvider {
-    SymmetricAlgorithmProvider() {
-    }
+    SymmetricAlgorithmProvider() {}
 }

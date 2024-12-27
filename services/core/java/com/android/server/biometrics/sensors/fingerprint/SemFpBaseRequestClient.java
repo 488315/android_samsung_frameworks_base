@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.log.BiometricContext;
 import com.android.server.biometrics.log.BiometricLogger;
@@ -12,11 +13,14 @@ import com.android.server.biometrics.sensors.ClientMonitorCallback;
 import com.android.server.biometrics.sensors.ClientMonitorCallbackConverter;
 import com.android.server.biometrics.sensors.HalClientMonitor;
 import com.android.server.biometrics.sensors.fingerprint.aidl.AidlSession;
+
 import com.samsung.android.bio.fingerprint.ISemFingerprintRequestCallback;
-import java.util.function.Function;
-import java.util.function.Supplier;
+
 import vendor.samsung.hardware.biometrics.fingerprint.ISehFingerprint;
 import vendor.samsung.hardware.biometrics.fingerprint.SehResult;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -33,16 +37,38 @@ public class SemFpBaseRequestClient extends HalClientMonitor {
     /* renamed from: com.android.server.biometrics.sensors.fingerprint.SemFpBaseRequestClient$1, reason: invalid class name */
     public final class AnonymousClass1 implements ClientMonitorCallback {
         @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
-        public final void onClientFinished(BaseClientMonitor baseClientMonitor, boolean z) {
-        }
+        public final void onClientFinished(BaseClientMonitor baseClientMonitor, boolean z) {}
 
         @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
-        public final void onClientStarted(BaseClientMonitor baseClientMonitor) {
-        }
+        public final void onClientStarted(BaseClientMonitor baseClientMonitor) {}
     }
 
-    public SemFpBaseRequestClient(Context context, BiometricContext biometricContext, Supplier supplier, IBinder iBinder, ClientMonitorCallbackConverter clientMonitorCallbackConverter, int i, int i2, String str, boolean z, int i3, int i4, byte[] bArr, byte[] bArr2) {
-        super(context, supplier, iBinder, clientMonitorCallbackConverter, i2, str, 0, i, new BiometricLogger(context, 1, 0, 0, null), biometricContext, false);
+    public SemFpBaseRequestClient(
+            Context context,
+            BiometricContext biometricContext,
+            Supplier supplier,
+            IBinder iBinder,
+            ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+            int i,
+            int i2,
+            String str,
+            boolean z,
+            int i3,
+            int i4,
+            byte[] bArr,
+            byte[] bArr2) {
+        super(
+                context,
+                supplier,
+                iBinder,
+                clientMonitorCallbackConverter,
+                i2,
+                str,
+                0,
+                i,
+                new BiometricLogger(context, 1, 0, 0, null),
+                biometricContext,
+                false);
         this.mUseScheduler = z;
         this.mCommand = i3;
         this.mParam = i4;
@@ -75,12 +101,16 @@ public class SemFpBaseRequestClient extends HalClientMonitor {
             return;
         }
         try {
-            ISemFingerprintRequestCallback iSemFingerprintRequestCallback = clientMonitorCallbackConverter.mFingerprintRequestReceiver;
+            ISemFingerprintRequestCallback iSemFingerprintRequestCallback =
+                    clientMonitorCallbackConverter.mFingerprintRequestReceiver;
             if (iSemFingerprintRequestCallback != null) {
                 iSemFingerprintRequestCallback.onResult(i);
             }
         } catch (RemoteException e) {
-            Slog.w("FingerprintRequestClient", "Failed to invoke sendEvent with onRequestResult", e);
+            Slog.w(
+                    "FingerprintRequestClient",
+                    "Failed to invoke sendEvent with onRequestResult",
+                    e);
             this.mCallback.onClientFinished(this, false);
         }
     }
@@ -99,7 +129,8 @@ public class SemFpBaseRequestClient extends HalClientMonitor {
         sb.append("] FP_FINISH (");
         sb.append(System.currentTimeMillis() - currentTimeMillis);
         sb.append("ms) RESULT: ");
-        SystemServiceManager$$ExternalSyntheticOutline0.m(sb, this.mRequestResult, "FingerprintRequestClient");
+        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                sb, this.mRequestResult, "FingerprintRequestClient");
         boolean z = this.mRequestResult >= 0;
         if (this.mUseScheduler && z && this.mIsAsyncOperation) {
             return;
@@ -145,7 +176,11 @@ public class SemFpBaseRequestClient extends HalClientMonitor {
             }
             int i5 = sehRequest.retValue;
             this.mRequestResult = i5;
-            if (i5 == 0 && (bArr = sehRequest.data) != null && bArr.length != 0 && (bArr2 = this.mOutputBuffer) != null && bArr2.length != 0) {
+            if (i5 == 0
+                    && (bArr = sehRequest.data) != null
+                    && bArr.length != 0
+                    && (bArr2 = this.mOutputBuffer) != null
+                    && bArr2.length != 0) {
                 int min = Math.min(bArr.length, bArr2.length);
                 System.arraycopy(bArr, 0, this.mOutputBuffer, 0, min);
                 this.mRequestResult = min;
@@ -157,7 +192,9 @@ public class SemFpBaseRequestClient extends HalClientMonitor {
 
     public final int startWithoutScheduler() {
         if (this.mUseScheduler) {
-            Slog.w("FingerprintRequestClient", "startWithoutScheduler: It must be started by the scheduler!!");
+            Slog.w(
+                    "FingerprintRequestClient",
+                    "startWithoutScheduler: It must be started by the scheduler!!");
             throw new UnsupportedOperationException("useScheduler option is set");
         }
         start(new AnonymousClass1());

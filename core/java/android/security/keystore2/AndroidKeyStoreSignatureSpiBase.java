@@ -5,7 +5,9 @@ import android.security.KeyStoreException;
 import android.security.KeyStoreOperation;
 import android.security.keystore.ArrayUtils;
 import android.security.keystore.KeyStoreCryptoOperation;
-import android.security.keystore2.KeyStoreCryptoOperationChunkedStreamer;
+
+import libcore.util.EmptyArray;
+
 import java.nio.ByteBuffer;
 import java.security.InvalidKeyException;
 import java.security.InvalidParameterException;
@@ -19,10 +21,10 @@ import java.security.SignatureException;
 import java.security.SignatureSpi;
 import java.util.ArrayList;
 import java.util.List;
-import libcore.util.EmptyArray;
 
 /* loaded from: classes3.dex */
-abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements KeyStoreCryptoOperation {
+abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi
+        implements KeyStoreCryptoOperation {
     private static final String TAG = "AndroidKeyStoreSignatureSpiBase";
     private Exception mCachedException;
     private KeyStoreCryptoOperationStreamer mMessageStreamer;
@@ -52,7 +54,8 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
 
     /* JADX WARN: Multi-variable type inference failed */
     @Override // java.security.SignatureSpi
-    protected final void engineInitSign(PrivateKey privateKey, SecureRandom random) throws InvalidKeyException {
+    protected final void engineInitSign(PrivateKey privateKey, SecureRandom random)
+            throws InvalidKeyException {
         resetAll();
         try {
             if (privateKey == 0) {
@@ -128,8 +131,13 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
         int purpose = this.mSigning ? 2 : 3;
         parameters.add(KeyStore2ParameterUtils.makeEnum(536870913, purpose));
         try {
-            this.mOperation = this.mKey.getSecurityLevel().createOperation(this.mKey.getKeyIdDescriptor(), parameters);
-            this.mOperationChallenge = KeyStoreCryptoOperationUtils.getOrMakeOperationChallenge(this.mOperation, this.mKey);
+            this.mOperation =
+                    this.mKey
+                            .getSecurityLevel()
+                            .createOperation(this.mKey.getKeyIdDescriptor(), parameters);
+            this.mOperationChallenge =
+                    KeyStoreCryptoOperationUtils.getOrMakeOperationChallenge(
+                            this.mOperation, this.mKey);
             this.mMessageStreamer = createMainDataStreamer(this.mOperation);
         } catch (KeyStoreException keyStoreException) {
             throw KeyStoreCryptoOperationUtils.getInvalidKeyException(this.mKey, keyStoreException);
@@ -137,7 +145,8 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
     }
 
     protected KeyStoreCryptoOperationStreamer createMainDataStreamer(KeyStoreOperation operation) {
-        return new KeyStoreCryptoOperationChunkedStreamer(new KeyStoreCryptoOperationChunkedStreamer.MainDataStream(operation));
+        return new KeyStoreCryptoOperationChunkedStreamer(
+                new KeyStoreCryptoOperationChunkedStreamer.MainDataStream(operation));
     }
 
     @Override // android.security.keystore.KeyStoreCryptoOperation
@@ -162,7 +171,10 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
             try {
                 byte[] output = this.mMessageStreamer.update(b, off, len);
                 if (output.length != 0) {
-                    throw new ProviderException("Update operation unexpectedly produced output: " + output.length + " bytes");
+                    throw new ProviderException(
+                            "Update operation unexpectedly produced output: "
+                                    + output.length
+                                    + " bytes");
                 }
             } catch (KeyStoreException e) {
                 throw new SignatureException(e);
@@ -174,7 +186,7 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
 
     @Override // java.security.SignatureSpi
     protected final void engineUpdate(byte b) throws SignatureException {
-        engineUpdate(new byte[]{b}, 0, 1);
+        engineUpdate(new byte[] {b}, 0, 1);
     }
 
     @Override // java.security.SignatureSpi
@@ -199,7 +211,8 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
     }
 
     @Override // java.security.SignatureSpi
-    protected final int engineSign(byte[] out, int outOffset, int outLen) throws SignatureException {
+    protected final int engineSign(byte[] out, int outOffset, int outLen)
+            throws SignatureException {
         return super.engineSign(out, outOffset, outLen);
     }
 
@@ -210,7 +223,8 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
         }
         try {
             ensureKeystoreOperationInitialized();
-            KeyStoreCryptoOperationUtils.getRandomBytesToMixIntoKeystoreRng(this.appRandom, getAdditionalEntropyAmountForSign());
+            KeyStoreCryptoOperationUtils.getRandomBytesToMixIntoKeystoreRng(
+                    this.appRandom, getAdditionalEntropyAmountForSign());
             byte[] signature = this.mMessageStreamer.doFinal(EmptyArray.BYTE, 0, 0, null);
             resetWhilePreservingInitState();
             return signature;
@@ -228,7 +242,8 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
     }
 
     @Override // java.security.SignatureSpi
-    protected final boolean engineVerify(byte[] sigBytes, int offset, int len) throws SignatureException {
+    protected final boolean engineVerify(byte[] sigBytes, int offset, int len)
+            throws SignatureException {
         return engineVerify(ArrayUtils.subarray(sigBytes, offset, len));
     }
 
@@ -240,7 +255,8 @@ abstract class AndroidKeyStoreSignatureSpiBase extends SignatureSpi implements K
 
     @Override // java.security.SignatureSpi
     @Deprecated
-    protected final void engineSetParameter(String param, Object value) throws InvalidParameterException {
+    protected final void engineSetParameter(String param, Object value)
+            throws InvalidParameterException {
         throw new InvalidParameterException();
     }
 

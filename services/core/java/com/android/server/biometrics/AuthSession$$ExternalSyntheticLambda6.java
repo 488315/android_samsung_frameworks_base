@@ -1,6 +1,7 @@
 package com.android.server.biometrics;
 
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
+
 import java.util.Iterator;
 import java.util.function.Function;
 
@@ -11,7 +12,8 @@ public final /* synthetic */ class AuthSession$$ExternalSyntheticLambda6 impleme
     public final /* synthetic */ AuthSession f$0;
     public final /* synthetic */ int f$1;
 
-    public /* synthetic */ AuthSession$$ExternalSyntheticLambda6(AuthSession authSession, int i, int i2) {
+    public /* synthetic */ AuthSession$$ExternalSyntheticLambda6(
+            AuthSession authSession, int i, int i2) {
         this.$r8$classId = i2;
         this.f$0 = authSession;
         this.f$1 = i;
@@ -33,17 +35,22 @@ public final /* synthetic */ class AuthSession$$ExternalSyntheticLambda6 impleme
                             i = biometricSensor2.getCurrentStrength();
                         }
                     } else {
-                        NandswapManager$$ExternalSyntheticOutline0.m(i2, "Unknown sensor: ", "BiometricService/AuthSession");
+                        NandswapManager$$ExternalSyntheticOutline0.m(
+                                i2, "Unknown sensor: ", "BiometricService/AuthSession");
                         i = 4095;
                     }
                 }
-                return Boolean.valueOf(Utils.isAtLeastStrength(i, biometricSensor.getCurrentStrength()));
+                return Boolean.valueOf(
+                        Utils.isAtLeastStrength(i, biometricSensor.getCurrentStrength()));
             default:
                 AuthSession authSession2 = this.f$0;
                 int i3 = this.f$1;
                 authSession2.getClass();
                 int i4 = ((BiometricSensor) obj).id;
-                return Boolean.valueOf((i4 == i3 || authSession2.mSfpsSensorIds.contains(Integer.valueOf(i4))) ? false : true);
+                return Boolean.valueOf(
+                        (i4 == i3 || authSession2.mSfpsSensorIds.contains(Integer.valueOf(i4)))
+                                ? false
+                                : true);
         }
     }
 }

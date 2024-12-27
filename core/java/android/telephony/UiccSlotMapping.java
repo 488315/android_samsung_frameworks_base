@@ -4,24 +4,27 @@ import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class UiccSlotMapping implements Parcelable {
-    public static final Parcelable.Creator<UiccSlotMapping> CREATOR = new Parcelable.Creator<UiccSlotMapping>() { // from class: android.telephony.UiccSlotMapping.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiccSlotMapping createFromParcel(Parcel in) {
-            return new UiccSlotMapping(in);
-        }
+    public static final Parcelable.Creator<UiccSlotMapping> CREATOR =
+            new Parcelable.Creator<
+                    UiccSlotMapping>() { // from class: android.telephony.UiccSlotMapping.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiccSlotMapping createFromParcel(Parcel in) {
+                    return new UiccSlotMapping(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiccSlotMapping[] newArray(int size) {
-            return new UiccSlotMapping[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiccSlotMapping[] newArray(int size) {
+                    return new UiccSlotMapping[size];
+                }
+            };
     private final int mLogicalSlotIndex;
     private final int mPhysicalSlotIndex;
     private final int mPortIndex;
@@ -70,17 +73,28 @@ public final class UiccSlotMapping implements Parcelable {
             return false;
         }
         UiccSlotMapping that = (UiccSlotMapping) obj;
-        if (this.mPortIndex == that.mPortIndex && this.mPhysicalSlotIndex == that.mPhysicalSlotIndex && this.mLogicalSlotIndex == that.mLogicalSlotIndex) {
+        if (this.mPortIndex == that.mPortIndex
+                && this.mPhysicalSlotIndex == that.mPhysicalSlotIndex
+                && this.mLogicalSlotIndex == that.mLogicalSlotIndex) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mPortIndex), Integer.valueOf(this.mPhysicalSlotIndex), Integer.valueOf(this.mLogicalSlotIndex));
+        return Objects.hash(
+                Integer.valueOf(this.mPortIndex),
+                Integer.valueOf(this.mPhysicalSlotIndex),
+                Integer.valueOf(this.mLogicalSlotIndex));
     }
 
     public String toString() {
-        return "UiccSlotMapping (mPortIndex=" + this.mPortIndex + ", mPhysicalSlotIndex=" + this.mPhysicalSlotIndex + ", mLogicalSlotIndex=" + this.mLogicalSlotIndex + NavigationBarInflaterView.KEY_CODE_END;
+        return "UiccSlotMapping (mPortIndex="
+                + this.mPortIndex
+                + ", mPhysicalSlotIndex="
+                + this.mPhysicalSlotIndex
+                + ", mLogicalSlotIndex="
+                + this.mLogicalSlotIndex
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

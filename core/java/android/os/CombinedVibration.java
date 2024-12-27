@@ -1,10 +1,10 @@
 package android.os;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.os.Parcelable;
-import android.os.VibrationEffect;
 import android.util.SparseArray;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -13,29 +13,32 @@ import java.util.StringJoiner;
 
 /* loaded from: classes3.dex */
 public abstract class CombinedVibration implements Parcelable {
-    public static final Parcelable.Creator<CombinedVibration> CREATOR = new Parcelable.Creator<CombinedVibration>() { // from class: android.os.CombinedVibration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CombinedVibration createFromParcel(Parcel in) {
-            int token = in.readInt();
-            if (token == 1) {
-                return new Mono(in);
-            }
-            if (token == 2) {
-                return new Stereo(in);
-            }
-            if (token == 3) {
-                return new Sequential(in);
-            }
-            throw new IllegalStateException("Unexpected combined vibration event type token in parcel.");
-        }
+    public static final Parcelable.Creator<CombinedVibration> CREATOR =
+            new Parcelable.Creator<
+                    CombinedVibration>() { // from class: android.os.CombinedVibration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CombinedVibration createFromParcel(Parcel in) {
+                    int token = in.readInt();
+                    if (token == 1) {
+                        return new Mono(in);
+                    }
+                    if (token == 2) {
+                        return new Stereo(in);
+                    }
+                    if (token == 3) {
+                        return new Sequential(in);
+                    }
+                    throw new IllegalStateException(
+                            "Unexpected combined vibration event type token in parcel.");
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CombinedVibration[] newArray(int size) {
-            return new CombinedVibration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CombinedVibration[] newArray(int size) {
+                    return new CombinedVibration[size];
+                }
+            };
     private static final int PARCEL_TOKEN_MONO = 1;
     private static final int PARCEL_TOKEN_SEQUENTIAL = 3;
     private static final int PARCEL_TOKEN_STEREO = 2;
@@ -54,12 +57,12 @@ public abstract class CombinedVibration implements Parcelable {
 
     public abstract String toDebugString();
 
-    public abstract <ParamT> CombinedVibration transform(VibrationEffect.Transformation<ParamT> transformation, ParamT paramt);
+    public abstract <ParamT> CombinedVibration transform(
+            VibrationEffect.Transformation<ParamT> transformation, ParamT paramt);
 
     public abstract void validate();
 
-    CombinedVibration() {
-    }
+    CombinedVibration() {}
 
     public static CombinedVibration createParallel(VibrationEffect effect) {
         CombinedVibration combined = new Mono(effect);
@@ -87,8 +90,7 @@ public abstract class CombinedVibration implements Parcelable {
     public static final class ParallelCombination {
         private final SparseArray<VibrationEffect> mEffects = new SparseArray<>();
 
-        ParallelCombination() {
-        }
+        ParallelCombination() {}
 
         public ParallelCombination addVibrator(int vibratorId, VibrationEffect effect) {
             this.mEffects.put(vibratorId, effect);
@@ -97,7 +99,8 @@ public abstract class CombinedVibration implements Parcelable {
 
         public CombinedVibration combine() {
             if (this.mEffects.size() == 0) {
-                throw new IllegalStateException("Combination must have at least one element to combine.");
+                throw new IllegalStateException(
+                        "Combination must have at least one element to combine.");
             }
             CombinedVibration combined = new Stereo(this.mEffects);
             combined.validate();
@@ -109,15 +112,16 @@ public abstract class CombinedVibration implements Parcelable {
         private final ArrayList<CombinedVibration> mEffects = new ArrayList<>();
         private final ArrayList<Integer> mDelays = new ArrayList<>();
 
-        SequentialCombination() {
-        }
+        SequentialCombination() {}
 
         public SequentialCombination addNext(int vibratorId, VibrationEffect effect) {
             return addNext(vibratorId, effect, 0);
         }
 
         public SequentialCombination addNext(int vibratorId, VibrationEffect effect, int delay) {
-            return addNext(CombinedVibration.startParallel().addVibrator(vibratorId, effect).combine(), delay);
+            return addNext(
+                    CombinedVibration.startParallel().addVibrator(vibratorId, effect).combine(),
+                    delay);
         }
 
         public SequentialCombination addNext(CombinedVibration effect) {
@@ -130,7 +134,9 @@ public abstract class CombinedVibration implements Parcelable {
                 int firstEffectIndex = this.mDelays.size();
                 this.mEffects.addAll(sequentialEffect.getEffects());
                 this.mDelays.addAll(sequentialEffect.getDelays());
-                this.mDelays.set(firstEffectIndex, Integer.valueOf(this.mDelays.get(firstEffectIndex).intValue() + delay));
+                this.mDelays.set(
+                        firstEffectIndex,
+                        Integer.valueOf(this.mDelays.get(firstEffectIndex).intValue() + delay));
             } else {
                 this.mEffects.add(effect);
                 this.mDelays.add(Integer.valueOf(delay));
@@ -140,7 +146,8 @@ public abstract class CombinedVibration implements Parcelable {
 
         public CombinedVibration combine() {
             if (this.mEffects.size() == 0) {
-                throw new IllegalStateException("Combination must have at least one element to combine.");
+                throw new IllegalStateException(
+                        "Combination must have at least one element to combine.");
             }
             CombinedVibration combined = new Sequential(this.mEffects, this.mDelays);
             combined.validate();
@@ -149,20 +156,21 @@ public abstract class CombinedVibration implements Parcelable {
     }
 
     public static final class Mono extends CombinedVibration {
-        public static final Parcelable.Creator<Mono> CREATOR = new Parcelable.Creator<Mono>() { // from class: android.os.CombinedVibration.Mono.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Mono createFromParcel(Parcel in) {
-                in.readInt();
-                return new Mono(in);
-            }
+        public static final Parcelable.Creator<Mono> CREATOR =
+                new Parcelable.Creator<Mono>() { // from class: android.os.CombinedVibration.Mono.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Mono createFromParcel(Parcel in) {
+                        in.readInt();
+                        return new Mono(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Mono[] newArray(int size) {
-                return new Mono[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Mono[] newArray(int size) {
+                        return new Mono[size];
+                    }
+                };
         private final VibrationEffect mEffect;
 
         Mono(Parcel in) {
@@ -193,7 +201,8 @@ public abstract class CombinedVibration implements Parcelable {
         }
 
         @Override // android.os.CombinedVibration
-        public <ParamT> CombinedVibration transform(VibrationEffect.Transformation<ParamT> transformation, ParamT param) {
+        public <ParamT> CombinedVibration transform(
+                VibrationEffect.Transformation<ParamT> transformation, ParamT param) {
             VibrationEffect newEffect = transformation.transform(this.mEffect, param);
             if (this.mEffect.equals(newEffect)) {
                 return this;
@@ -258,20 +267,22 @@ public abstract class CombinedVibration implements Parcelable {
     }
 
     public static final class Stereo extends CombinedVibration {
-        public static final Parcelable.Creator<Stereo> CREATOR = new Parcelable.Creator<Stereo>() { // from class: android.os.CombinedVibration.Stereo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Stereo createFromParcel(Parcel in) {
-                in.readInt();
-                return new Stereo(in);
-            }
+        public static final Parcelable.Creator<Stereo> CREATOR =
+                new Parcelable.Creator<
+                        Stereo>() { // from class: android.os.CombinedVibration.Stereo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Stereo createFromParcel(Parcel in) {
+                        in.readInt();
+                        return new Stereo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Stereo[] newArray(int size) {
-                return new Stereo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Stereo[] newArray(int size) {
+                        return new Stereo[size];
+                    }
+                };
         private final SparseArray<VibrationEffect> mEffects;
 
         Stereo(Parcel in) {
@@ -324,14 +335,17 @@ public abstract class CombinedVibration implements Parcelable {
 
         @Override // android.os.CombinedVibration
         public void validate() {
-            Preconditions.checkArgument(this.mEffects.size() > 0, "There should be at least one effect set for a combined effect");
+            Preconditions.checkArgument(
+                    this.mEffects.size() > 0,
+                    "There should be at least one effect set for a combined effect");
             for (int i = 0; i < this.mEffects.size(); i++) {
                 this.mEffects.valueAt(i).validate();
             }
         }
 
         @Override // android.os.CombinedVibration
-        public <ParamT> CombinedVibration transform(VibrationEffect.Transformation<ParamT> transformation, ParamT param) {
+        public <ParamT> CombinedVibration transform(
+                VibrationEffect.Transformation<ParamT> transformation, ParamT param) {
             ParallelCombination combination = CombinedVibration.startParallel();
             boolean hasSameEffects = true;
             for (int i = 0; i < this.mEffects.size(); i++) {
@@ -400,7 +414,12 @@ public abstract class CombinedVibration implements Parcelable {
         public String toDebugString() {
             StringJoiner sj = new StringJoiner(",", "Stereo{", "}");
             for (int i = 0; i < this.mEffects.size(); i++) {
-                sj.add(String.format(Locale.ROOT, "vibrator(id=%d): %s", Integer.valueOf(this.mEffects.keyAt(i)), this.mEffects.valueAt(i).toDebugString()));
+                sj.add(
+                        String.format(
+                                Locale.ROOT,
+                                "vibrator(id=%d): %s",
+                                Integer.valueOf(this.mEffects.keyAt(i)),
+                                this.mEffects.valueAt(i).toDebugString()));
             }
             return sj.toString();
         }
@@ -422,20 +441,22 @@ public abstract class CombinedVibration implements Parcelable {
     }
 
     public static final class Sequential extends CombinedVibration {
-        public static final Parcelable.Creator<Sequential> CREATOR = new Parcelable.Creator<Sequential>() { // from class: android.os.CombinedVibration.Sequential.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Sequential createFromParcel(Parcel in) {
-                in.readInt();
-                return new Sequential(in);
-            }
+        public static final Parcelable.Creator<Sequential> CREATOR =
+                new Parcelable.Creator<
+                        Sequential>() { // from class: android.os.CombinedVibration.Sequential.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Sequential createFromParcel(Parcel in) {
+                        in.readInt();
+                        return new Sequential(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Sequential[] newArray(int size) {
-                return new Sequential[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Sequential[] newArray(int size) {
+                        return new Sequential[size];
+                    }
+                };
         private static final long MAX_HAPTIC_FEEDBACK_SEQUENCE_SIZE = 3;
         private final List<Integer> mDelays;
         private final List<CombinedVibration> mEffects;
@@ -503,25 +524,34 @@ public abstract class CombinedVibration implements Parcelable {
 
         @Override // android.os.CombinedVibration
         public void validate() {
-            Preconditions.checkArgument(this.mEffects.size() > 0, "There should be at least one effect set for a combined effect");
-            Preconditions.checkArgument(this.mEffects.size() == this.mDelays.size(), "Effect and delays should have equal length");
+            Preconditions.checkArgument(
+                    this.mEffects.size() > 0,
+                    "There should be at least one effect set for a combined effect");
+            Preconditions.checkArgument(
+                    this.mEffects.size() == this.mDelays.size(),
+                    "Effect and delays should have equal length");
             int effectCount = this.mEffects.size();
             for (int i = 0; i < effectCount; i++) {
                 if (this.mDelays.get(i).intValue() < 0) {
-                    throw new IllegalArgumentException("Delays must all be >= 0 (delays=" + this.mDelays + NavigationBarInflaterView.KEY_CODE_END);
+                    throw new IllegalArgumentException(
+                            "Delays must all be >= 0 (delays="
+                                    + this.mDelays
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                 }
             }
             for (int i2 = 0; i2 < effectCount; i2++) {
                 CombinedVibration effect = this.mEffects.get(i2);
                 if (effect instanceof Sequential) {
-                    throw new IllegalArgumentException("There should be no nested sequential effects in a combined effect");
+                    throw new IllegalArgumentException(
+                            "There should be no nested sequential effects in a combined effect");
                 }
                 effect.validate();
             }
         }
 
         @Override // android.os.CombinedVibration
-        public <ParamT> CombinedVibration transform(VibrationEffect.Transformation<ParamT> transformation, ParamT param) {
+        public <ParamT> CombinedVibration transform(
+                VibrationEffect.Transformation<ParamT> transformation, ParamT param) {
             SequentialCombination combination = CombinedVibration.startSequential();
             boolean hasSameEffects = true;
             for (int i = 0; i < this.mEffects.size(); i++) {
@@ -586,7 +616,12 @@ public abstract class CombinedVibration implements Parcelable {
         public String toDebugString() {
             StringJoiner sj = new StringJoiner(",", "Sequential{", "}");
             for (int i = 0; i < this.mEffects.size(); i++) {
-                sj.add(String.format(Locale.ROOT, "delayMs=%d, effect=%s", this.mDelays.get(i), this.mEffects.get(i).toDebugString()));
+                sj.add(
+                        String.format(
+                                Locale.ROOT,
+                                "delayMs=%d, effect=%s",
+                                this.mDelays.get(i),
+                                this.mEffects.get(i).toDebugString()));
             }
             return sj.toString();
         }

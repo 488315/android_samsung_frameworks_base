@@ -9,9 +9,9 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.hardware.input.PhysicalKeyLayout;
 import android.util.Slog;
 import android.util.TypedValue;
+
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.runtime.ObjectMethods;
@@ -43,7 +43,8 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
         void draw(Canvas canvas);
     }
 
-    public KeyboardLayoutPreviewDrawable(Context context, PhysicalKeyLayout keyLayout, int width, int height) {
+    public KeyboardLayoutPreviewDrawable(
+            Context context, PhysicalKeyLayout keyLayout, int width, int height) {
         this.mWidth = width;
         this.mHeight = height;
         this.mResourceProvider = new ResourceProvider(context);
@@ -108,20 +109,30 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
                     for (PhysicalKeyLayout.LayoutKey layoutKey : row2) {
                         totalRowWeight += layoutKey.keyWeight();
                     }
-                    float keyWidthInPx2 = (width4 - ((keysInRow * 2) * keyPadding)) / totalRowWeight;
+                    float keyWidthInPx2 =
+                            (width4 - ((keysInRow * 2) * keyPadding)) / totalRowWeight;
                     int rowCount2 = rowCount;
-                    float top2 = (i2 * keyHeight2) + keyboardPadding + (((i2 * 2) + 1) * keyPadding);
+                    float top2 =
+                            (i2 * keyHeight2) + keyboardPadding + (((i2 * 2) + 1) * keyPadding);
                     int j2 = 0;
                     float isoEnterWidthUnit2 = isoEnterWidthUnit;
                     float isoEnterKeyTop3 = isoEnterKeyTop2;
                     float isoEnterKeyLeft2 = isoEnterKeyLeft;
                     float isoEnterKeyLeft3 = 0.0f;
                     while (j2 < keysInRow) {
-                        float left = (((j2 * 2) + 1) * keyPadding) + keyboardPadding + (isoEnterKeyLeft3 * keyWidthInPx2);
+                        float left =
+                                (((j2 * 2) + 1) * keyPadding)
+                                        + keyboardPadding
+                                        + (isoEnterKeyLeft3 * keyWidthInPx2);
                         float rowWeightOnLeft = isoEnterKeyLeft3 + row2[j2].keyWeight();
                         int keyboardPadding2 = keyboardPadding;
                         int keysInRow2 = keysInRow;
-                        RectF keyRect = new RectF(left, top2, left + (row2[j2].keyWeight() * keyWidthInPx2), top2 + keyHeight2);
+                        RectF keyRect =
+                                new RectF(
+                                        left,
+                                        top2,
+                                        left + (row2[j2].keyWeight() * keyWidthInPx2),
+                                        top2 + keyHeight2);
                         if (enterKey != null && row2[j2].keyCode() == 66) {
                             if (enterKey.row() != i2 || enterKey.column() != j2) {
                                 keyWidthInPx = keyWidthInPx2;
@@ -155,7 +166,15 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
                             i = i2;
                             keyHeight = keyHeight2;
                             top = top2;
-                            this.mKeyDrawables.add(new TypingKey(null, keyRect, keyRadius, this.mResourceProvider.getTextPadding(), this.mResourceProvider.getSpecialKeyPaint(), this.mResourceProvider.getSpecialKeyPaint(), this.mResourceProvider.getSpecialKeyPaint()));
+                            this.mKeyDrawables.add(
+                                    new TypingKey(
+                                            null,
+                                            keyRect,
+                                            keyRadius,
+                                            this.mResourceProvider.getTextPadding(),
+                                            this.mResourceProvider.getSpecialKeyPaint(),
+                                            this.mResourceProvider.getSpecialKeyPaint(),
+                                            this.mResourceProvider.getSpecialKeyPaint()));
                             width2 = width4;
                         } else {
                             keyWidthInPx = keyWidthInPx2;
@@ -167,10 +186,26 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
                             top = top2;
                             if (PhysicalKeyLayout.isKeyPositionUnsure(row[j])) {
                                 width2 = width4;
-                                this.mKeyDrawables.add(new UnsureTypingKey(row[j].glyph(), keyRect, keyRadius, this.mResourceProvider.getTextPadding(), this.mResourceProvider.getTypingKeyPaint(), this.mResourceProvider.getPrimaryGlyphPaint(), this.mResourceProvider.getSecondaryGlyphPaint()));
+                                this.mKeyDrawables.add(
+                                        new UnsureTypingKey(
+                                                row[j].glyph(),
+                                                keyRect,
+                                                keyRadius,
+                                                this.mResourceProvider.getTextPadding(),
+                                                this.mResourceProvider.getTypingKeyPaint(),
+                                                this.mResourceProvider.getPrimaryGlyphPaint(),
+                                                this.mResourceProvider.getSecondaryGlyphPaint()));
                             } else {
                                 width2 = width4;
-                                this.mKeyDrawables.add(new TypingKey(row[j].glyph(), keyRect, keyRadius, this.mResourceProvider.getTextPadding(), this.mResourceProvider.getTypingKeyPaint(), this.mResourceProvider.getPrimaryGlyphPaint(), this.mResourceProvider.getSecondaryGlyphPaint()));
+                                this.mKeyDrawables.add(
+                                        new TypingKey(
+                                                row[j].glyph(),
+                                                keyRect,
+                                                keyRadius,
+                                                this.mResourceProvider.getTextPadding(),
+                                                this.mResourceProvider.getTypingKeyPaint(),
+                                                this.mResourceProvider.getPrimaryGlyphPaint(),
+                                                this.mResourceProvider.getSecondaryGlyphPaint()));
                             }
                         }
                         j2 = j + 1;
@@ -195,8 +230,14 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
                 float isoEnterKeyTop5 = isoEnterKeyTop;
                 float keyHeight3 = keyHeight2;
                 if (enterKey != null) {
-                    IsoEnterKey.Builder isoEnterKeyBuilder = new IsoEnterKey.Builder(keyRadius, this.mResourceProvider.getSpecialKeyPaint());
-                    isoEnterKeyBuilder.setTopWidth(enterKey.topKeyWeight() * isoEnterWidthUnit).setStartPoint(isoEnterKeyLeft, isoEnterKeyTop5).setVerticalEdges(keyHeight3, (keyHeight3 + keyPadding) * 2.0f).setBottomWidth(enterKey.bottomKeyWeight() * isoEnterWidthUnit);
+                    IsoEnterKey.Builder isoEnterKeyBuilder =
+                            new IsoEnterKey.Builder(
+                                    keyRadius, this.mResourceProvider.getSpecialKeyPaint());
+                    isoEnterKeyBuilder
+                            .setTopWidth(enterKey.topKeyWeight() * isoEnterWidthUnit)
+                            .setStartPoint(isoEnterKeyLeft, isoEnterKeyTop5)
+                            .setVerticalEdges(keyHeight3, (keyHeight3 + keyPadding) * 2.0f)
+                            .setBottomWidth(enterKey.bottomKeyWeight() * isoEnterWidthUnit);
                     this.mKeyDrawables.add(isoEnterKeyBuilder.build());
                     return;
                 }
@@ -205,25 +246,32 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
             width = width4;
             height = height4;
         }
-        Slog.e(TAG, "Invalid width and height to draw layout preview, width = " + width + ", height = " + height);
+        Slog.e(
+                TAG,
+                "Invalid width and height to draw layout preview, width = "
+                        + width
+                        + ", height = "
+                        + height);
     }
 
     @Override // android.graphics.drawable.Drawable
     public void draw(Canvas canvas) {
         float keyboardRadius = this.mResourceProvider.getBackgroundRadius();
-        canvas.drawRoundRect(this.mKeyboardBackground, keyboardRadius, keyboardRadius, this.mResourceProvider.getBackgroundPaint());
+        canvas.drawRoundRect(
+                this.mKeyboardBackground,
+                keyboardRadius,
+                keyboardRadius,
+                this.mResourceProvider.getBackgroundPaint());
         for (KeyDrawable key : this.mKeyDrawables) {
             key.draw(canvas);
         }
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void setAlpha(int alpha) {
-    }
+    public void setAlpha(int alpha) {}
 
     @Override // android.graphics.drawable.Drawable
-    public void setColorFilter(ColorFilter colorFilter) {
-    }
+    public void setColorFilter(ColorFilter colorFilter) {}
 
     @Override // android.graphics.drawable.Drawable
     public int getOpacity() {
@@ -239,7 +287,14 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
         private final Paint mModifierTextPaint;
         private final float mTextPadding;
 
-        private TypingKey(PhysicalKeyLayout.KeyGlyph glyphData, RectF keyRect, float keyRadius, float textPadding, Paint keyPaint, Paint baseTextPaint, Paint modifierTextPaint) {
+        private TypingKey(
+                PhysicalKeyLayout.KeyGlyph glyphData,
+                RectF keyRect,
+                float keyRadius,
+                float textPadding,
+                Paint keyPaint,
+                Paint baseTextPaint,
+                Paint modifierTextPaint) {
             this.mGlyphDrawables = new ArrayList();
             this.mKeyRect = keyRect;
             this.mKeyRadius = keyRadius;
@@ -259,15 +314,29 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
             if (glyphData == null || !glyphData.hasBaseText()) {
                 return;
             }
-            this.mGlyphDrawables.add(new GlyphDrawable(glyphData.getBaseText(), new RectF(), 9, this.mBaseTextPaint));
+            this.mGlyphDrawables.add(
+                    new GlyphDrawable(
+                            glyphData.getBaseText(), new RectF(), 9, this.mBaseTextPaint));
             if (glyphData.hasValidShiftText()) {
-                this.mGlyphDrawables.add(new GlyphDrawable(glyphData.getShiftText(), new RectF(), 5, this.mModifierTextPaint));
+                this.mGlyphDrawables.add(
+                        new GlyphDrawable(
+                                glyphData.getShiftText(), new RectF(), 5, this.mModifierTextPaint));
             }
             if (glyphData.hasValidAltGrText()) {
-                this.mGlyphDrawables.add(new GlyphDrawable(glyphData.getAltGrText(), new RectF(), 10, this.mModifierTextPaint));
+                this.mGlyphDrawables.add(
+                        new GlyphDrawable(
+                                glyphData.getAltGrText(),
+                                new RectF(),
+                                10,
+                                this.mModifierTextPaint));
             }
             if (glyphData.hasValidAltGrShiftText()) {
-                this.mGlyphDrawables.add(new GlyphDrawable(glyphData.getAltGrShiftText(), new RectF(), 6, this.mModifierTextPaint));
+                this.mGlyphDrawables.add(
+                        new GlyphDrawable(
+                                glyphData.getAltGrShiftText(),
+                                new RectF(),
+                                6,
+                                this.mModifierTextPaint));
             }
         }
 
@@ -293,7 +362,11 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
                 glyph.paint.getTextBounds(glyph.text, 0, glyph.text.length(), textBounds);
                 float textWidth = textBounds.width();
                 float textHeight = textBounds.height();
-                glyph.rect.set(centerX - (textWidth / 2.0f), (centerY - (textHeight / 2.0f)) - textBounds.top, (textWidth / 2.0f) + centerX, ((textHeight / 2.0f) + centerY) - textBounds.top);
+                glyph.rect.set(
+                        centerX - (textWidth / 2.0f),
+                        (centerY - (textHeight / 2.0f)) - textBounds.top,
+                        (textWidth / 2.0f) + centerX,
+                        ((textHeight / 2.0f) + centerY) - textBounds.top);
             }
         }
 
@@ -305,18 +378,41 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
                 float textHeight = glyph.rect.height();
                 float keyWidth = this.mKeyRect.width();
                 float keyHeight = this.mKeyRect.height();
-                if (textWidth == 0.0f || textHeight == 0.0f || keyWidth == 0.0f || keyHeight == 0.0f) {
+                if (textWidth == 0.0f
+                        || textHeight == 0.0f
+                        || keyWidth == 0.0f
+                        || keyHeight == 0.0f) {
                     return;
                 } else {
-                    canvas.drawText(glyph.text, 0, glyph.text.length(), this.mKeyRect.left + glyph.rect.left, this.mKeyRect.top + glyph.rect.top, glyph.paint);
+                    canvas.drawText(
+                            glyph.text,
+                            0,
+                            glyph.text.length(),
+                            this.mKeyRect.left + glyph.rect.left,
+                            this.mKeyRect.top + glyph.rect.top,
+                            glyph.paint);
                 }
             }
         }
     }
 
     private static class UnsureTypingKey extends TypingKey {
-        private UnsureTypingKey(PhysicalKeyLayout.KeyGlyph glyphData, RectF keyRect, float keyRadius, float textPadding, Paint keyPaint, Paint baseTextPaint, Paint modifierTextPaint) {
-            super(glyphData, keyRect, keyRadius, textPadding, KeyboardLayoutPreviewDrawable.createGreyedOutPaint(keyPaint), KeyboardLayoutPreviewDrawable.createGreyedOutPaint(baseTextPaint), KeyboardLayoutPreviewDrawable.createGreyedOutPaint(modifierTextPaint));
+        private UnsureTypingKey(
+                PhysicalKeyLayout.KeyGlyph glyphData,
+                RectF keyRect,
+                float keyRadius,
+                float textPadding,
+                Paint keyPaint,
+                Paint baseTextPaint,
+                Paint modifierTextPaint) {
+            super(
+                    glyphData,
+                    keyRect,
+                    keyRadius,
+                    textPadding,
+                    KeyboardLayoutPreviewDrawable.createGreyedOutPaint(keyPaint),
+                    KeyboardLayoutPreviewDrawable.createGreyedOutPaint(baseTextPaint),
+                    KeyboardLayoutPreviewDrawable.createGreyedOutPaint(modifierTextPaint));
         }
     }
 
@@ -378,22 +474,41 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
             /* JADX INFO: Access modifiers changed from: private */
             public IsoEnterKey build() {
                 Path enterKey = new Path();
-                RectF oval = new RectF(-this.mKeyRadius, -this.mKeyRadius, this.mKeyRadius, this.mKeyRadius);
+                RectF oval =
+                        new RectF(
+                                -this.mKeyRadius,
+                                -this.mKeyRadius,
+                                this.mKeyRadius,
+                                this.mKeyRadius);
                 enterKey.moveTo(this.mLeft + this.mKeyRadius, this.mTop);
                 enterKey.lineTo((this.mLeft + this.mTopWidth) - this.mKeyRadius, this.mTop);
                 oval.offsetTo((this.mLeft + this.mTopWidth) - (this.mKeyRadius * 2.0f), this.mTop);
                 enterKey.arcTo(oval, 270.0f, 90.0f);
-                enterKey.lineTo(this.mLeft + this.mTopWidth, (this.mTop + this.mRightHeight) - this.mKeyRadius);
-                oval.offsetTo((this.mLeft + this.mTopWidth) - (this.mKeyRadius * 2.0f), (this.mTop + this.mRightHeight) - (this.mKeyRadius * 2.0f));
+                enterKey.lineTo(
+                        this.mLeft + this.mTopWidth,
+                        (this.mTop + this.mRightHeight) - this.mKeyRadius);
+                oval.offsetTo(
+                        (this.mLeft + this.mTopWidth) - (this.mKeyRadius * 2.0f),
+                        (this.mTop + this.mRightHeight) - (this.mKeyRadius * 2.0f));
                 enterKey.arcTo(oval, 0.0f, 90.0f);
-                enterKey.lineTo(((this.mLeft + this.mTopWidth) - this.mBottomWidth) + this.mKeyRadius, this.mTop + this.mRightHeight);
-                oval.offsetTo((this.mLeft + this.mTopWidth) - this.mBottomWidth, (this.mTop + this.mRightHeight) - (this.mKeyRadius * 2.0f));
+                enterKey.lineTo(
+                        ((this.mLeft + this.mTopWidth) - this.mBottomWidth) + this.mKeyRadius,
+                        this.mTop + this.mRightHeight);
+                oval.offsetTo(
+                        (this.mLeft + this.mTopWidth) - this.mBottomWidth,
+                        (this.mTop + this.mRightHeight) - (this.mKeyRadius * 2.0f));
                 enterKey.arcTo(oval, 90.0f, 90.0f);
-                enterKey.lineTo((this.mLeft + this.mTopWidth) - this.mBottomWidth, (this.mTop + this.mLeftHeight) - this.mKeyRadius);
-                oval.offsetTo(((this.mLeft + this.mTopWidth) - this.mBottomWidth) - (this.mKeyRadius * 2.0f), this.mTop + this.mLeftHeight);
+                enterKey.lineTo(
+                        (this.mLeft + this.mTopWidth) - this.mBottomWidth,
+                        (this.mTop + this.mLeftHeight) - this.mKeyRadius);
+                oval.offsetTo(
+                        ((this.mLeft + this.mTopWidth) - this.mBottomWidth)
+                                - (this.mKeyRadius * 2.0f),
+                        this.mTop + this.mLeftHeight);
                 enterKey.arcTo(oval, 0.0f, -90.0f);
                 enterKey.lineTo(this.mLeft + this.mKeyRadius, this.mTop + this.mLeftHeight);
-                oval.offsetTo(this.mLeft, (this.mTop + this.mLeftHeight) - (this.mKeyRadius * 2.0f));
+                oval.offsetTo(
+                        this.mLeft, (this.mTop + this.mLeftHeight) - (this.mKeyRadius * 2.0f));
                 enterKey.arcTo(oval, 90.0f, 90.0f);
                 enterKey.lineTo(this.mLeft, this.mTop + this.mKeyRadius);
                 oval.offsetTo(this.mLeft, this.mTop);
@@ -419,7 +534,20 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
 
         @Override // java.lang.Record
         public final boolean equals(Object o) {
-            return (boolean) ObjectMethods.bootstrap(MethodHandles.lookup(), "equals", MethodType.methodType(Boolean.TYPE, GlyphDrawable.class, Object.class), GlyphDrawable.class, "text;rect;gravity;paint", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->text:Ljava/lang/String;", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->rect:Landroid/graphics/RectF;", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->gravity:I", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->paint:Landroid/graphics/Paint;").dynamicInvoker().invoke(this, o) /* invoke-custom */;
+            return (boolean)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "equals",
+                                    MethodType.methodType(
+                                            Boolean.TYPE, GlyphDrawable.class, Object.class),
+                                    GlyphDrawable.class,
+                                    "text;rect;gravity;paint",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->text:Ljava/lang/String;",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->rect:Landroid/graphics/RectF;",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->gravity:I",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->paint:Landroid/graphics/Paint;")
+                            .dynamicInvoker()
+                            .invoke(this, o) /* invoke-custom */;
         }
 
         public int gravity() {
@@ -428,7 +556,19 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
 
         @Override // java.lang.Record
         public final int hashCode() {
-            return (int) ObjectMethods.bootstrap(MethodHandles.lookup(), "hashCode", MethodType.methodType(Integer.TYPE, GlyphDrawable.class), GlyphDrawable.class, "text;rect;gravity;paint", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->text:Ljava/lang/String;", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->rect:Landroid/graphics/RectF;", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->gravity:I", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->paint:Landroid/graphics/Paint;").dynamicInvoker().invoke(this) /* invoke-custom */;
+            return (int)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "hashCode",
+                                    MethodType.methodType(Integer.TYPE, GlyphDrawable.class),
+                                    GlyphDrawable.class,
+                                    "text;rect;gravity;paint",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->text:Ljava/lang/String;",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->rect:Landroid/graphics/RectF;",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->gravity:I",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->paint:Landroid/graphics/Paint;")
+                            .dynamicInvoker()
+                            .invoke(this) /* invoke-custom */;
         }
 
         public Paint paint() {
@@ -445,7 +585,19 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
 
         @Override // java.lang.Record
         public final String toString() {
-            return (String) ObjectMethods.bootstrap(MethodHandles.lookup(), "toString", MethodType.methodType(String.class, GlyphDrawable.class), GlyphDrawable.class, "text;rect;gravity;paint", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->text:Ljava/lang/String;", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->rect:Landroid/graphics/RectF;", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->gravity:I", "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->paint:Landroid/graphics/Paint;").dynamicInvoker().invoke(this) /* invoke-custom */;
+            return (String)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "toString",
+                                    MethodType.methodType(String.class, GlyphDrawable.class),
+                                    GlyphDrawable.class,
+                                    "text;rect;gravity;paint",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->text:Ljava/lang/String;",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->rect:Landroid/graphics/RectF;",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->gravity:I",
+                                    "FIELD:Landroid/hardware/input/KeyboardLayoutPreviewDrawable$GlyphDrawable;->paint:Landroid/graphics/Paint;")
+                            .dynamicInvoker()
+                            .invoke(this) /* invoke-custom */;
         }
     }
 
@@ -464,20 +616,42 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
         private final Paint mTypingKeyPaint;
 
         private ResourceProvider(Context context) {
-            this.mKeyPadding = (int) TypedValue.applyDimension(1, 3.0f, context.getResources().getDisplayMetrics());
-            this.mKeyboardPadding = (int) TypedValue.applyDimension(1, 10.0f, context.getResources().getDisplayMetrics());
-            this.mKeyRadius = (int) TypedValue.applyDimension(1, 5.0f, context.getResources().getDisplayMetrics());
-            this.mBackgroundRadius = (int) TypedValue.applyDimension(1, 10.0f, context.getResources().getDisplayMetrics());
-            this.mSpToPxMultiplier = TypedValue.applyDimension(2, 1.0f, context.getResources().getDisplayMetrics());
-            this.mTextPadding = TypedValue.applyDimension(1, 1.0f, context.getResources().getDisplayMetrics());
+            this.mKeyPadding =
+                    (int)
+                            TypedValue.applyDimension(
+                                    1, 3.0f, context.getResources().getDisplayMetrics());
+            this.mKeyboardPadding =
+                    (int)
+                            TypedValue.applyDimension(
+                                    1, 10.0f, context.getResources().getDisplayMetrics());
+            this.mKeyRadius =
+                    (int)
+                            TypedValue.applyDimension(
+                                    1, 5.0f, context.getResources().getDisplayMetrics());
+            this.mBackgroundRadius =
+                    (int)
+                            TypedValue.applyDimension(
+                                    1, 10.0f, context.getResources().getDisplayMetrics());
+            this.mSpToPxMultiplier =
+                    TypedValue.applyDimension(2, 1.0f, context.getResources().getDisplayMetrics());
+            this.mTextPadding =
+                    TypedValue.applyDimension(1, 1.0f, context.getResources().getDisplayMetrics());
             boolean isDark = (context.getResources().getConfiguration().uiMode & 48) == 32;
             int typingKeyColor = context.getColor(isDark ? 17170625 : 17170543);
             int specialKeyColor = context.getColor(isDark ? 17170471 : 17170530);
             int primaryGlyphColor = context.getColor(isDark ? 17170584 : 17170541);
             int secondaryGlyphColor = context.getColor(isDark ? 17170594 : 17170551);
             int backgroundColor = context.getColor(isDark ? 17170587 : 17170544);
-            this.mPrimaryGlyphPaint = KeyboardLayoutPreviewDrawable.createTextPaint(primaryGlyphColor, this.mSpToPxMultiplier * 10.0f, Typeface.create(Typeface.SANS_SERIF, 1));
-            this.mSecondaryGlyphPaint = KeyboardLayoutPreviewDrawable.createTextPaint(secondaryGlyphColor, this.mSpToPxMultiplier * 10.0f, Typeface.create(Typeface.SANS_SERIF, 0));
+            this.mPrimaryGlyphPaint =
+                    KeyboardLayoutPreviewDrawable.createTextPaint(
+                            primaryGlyphColor,
+                            this.mSpToPxMultiplier * 10.0f,
+                            Typeface.create(Typeface.SANS_SERIF, 1));
+            this.mSecondaryGlyphPaint =
+                    KeyboardLayoutPreviewDrawable.createTextPaint(
+                            secondaryGlyphColor,
+                            this.mSpToPxMultiplier * 10.0f,
+                            Typeface.create(Typeface.SANS_SERIF, 0));
             this.mFontMetrics = this.mPrimaryGlyphPaint.getFontMetrics();
             this.mTypingKeyPaint = KeyboardLayoutPreviewDrawable.createFillPaint(typingKeyColor);
             this.mSpecialKeyPaint = KeyboardLayoutPreviewDrawable.createFillPaint(specialKeyColor);
@@ -493,7 +667,8 @@ final class KeyboardLayoutPreviewDrawable extends Drawable {
                     break;
                 }
                 updateTextSize(textSize);
-                if ((this.mFontMetrics.bottom - this.mFontMetrics.top) + (this.mTextPadding * 3.0f) > keyHeight / 2.0f) {
+                if ((this.mFontMetrics.bottom - this.mFontMetrics.top) + (this.mTextPadding * 3.0f)
+                        > keyHeight / 2.0f) {
                     textSize--;
                     break;
                 }

@@ -7,27 +7,55 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.camera.iris.IIrisServiceLockoutResetCallback;
-import com.samsung.android.camera.iris.IIrisServiceReceiver;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface IIrisService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.camera.iris.IIrisService";
 
-    void addLockoutResetCallback(IIrisServiceLockoutResetCallback iIrisServiceLockoutResetCallback) throws RemoteException;
+    void addLockoutResetCallback(IIrisServiceLockoutResetCallback iIrisServiceLockoutResetCallback)
+            throws RemoteException;
 
-    void authenticate(IBinder iBinder, IBinder iBinder2, int i, int i2, int i3, int i4, long j, int i5, IIrisServiceReceiver iIrisServiceReceiver, int i6, String str, Bundle bundle, byte[] bArr) throws RemoteException;
+    void authenticate(
+            IBinder iBinder,
+            IBinder iBinder2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            long j,
+            int i5,
+            IIrisServiceReceiver iIrisServiceReceiver,
+            int i6,
+            String str,
+            Bundle bundle,
+            byte[] bArr)
+            throws RemoteException;
 
     void cancelAuthentication(IBinder iBinder, String str) throws RemoteException;
 
-    void cancelAuthenticationFromService(IBinder iBinder, String str, int i, int i2, int i3, boolean z) throws RemoteException;
+    void cancelAuthenticationFromService(
+            IBinder iBinder, String str, int i, int i2, int i3, boolean z) throws RemoteException;
 
     void cancelEnrollment(IBinder iBinder) throws RemoteException;
 
     void enableIRImageCallback(int i, String str, int i2) throws RemoteException;
 
-    void enroll(IBinder iBinder, IBinder iBinder2, int i, int i2, int i3, int i4, byte[] bArr, int i5, IIrisServiceReceiver iIrisServiceReceiver, int i6, String str, Bundle bundle) throws RemoteException;
+    void enroll(
+            IBinder iBinder,
+            IBinder iBinder2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            byte[] bArr,
+            int i5,
+            IIrisServiceReceiver iIrisServiceReceiver,
+            int i6,
+            String str,
+            Bundle bundle)
+            throws RemoteException;
 
     long getAuthenticatorId(String str) throws RemoteException;
 
@@ -43,15 +71,50 @@ public interface IIrisService extends IInterface {
 
     long preEnroll(IBinder iBinder) throws RemoteException;
 
-    void prepareForAuthentication(boolean z, IBinder iBinder, long j, int i, IBiometricSensorReceiver iBiometricSensorReceiver, String str, int i2, int i3, int i4, int i5, Bundle bundle) throws RemoteException;
+    void prepareForAuthentication(
+            boolean z,
+            IBinder iBinder,
+            long j,
+            int i,
+            IBiometricSensorReceiver iBiometricSensorReceiver,
+            String str,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            Bundle bundle)
+            throws RemoteException;
 
-    void prompt_authenticate(IBinder iBinder, IBinder iBinder2, int i, int i2, int i3, int i4, long j, int i5, IIrisServiceReceiver iIrisServiceReceiver, int i6, String str, Bundle bundle, byte[] bArr) throws RemoteException;
+    void prompt_authenticate(
+            IBinder iBinder,
+            IBinder iBinder2,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            long j,
+            int i5,
+            IIrisServiceReceiver iIrisServiceReceiver,
+            int i6,
+            String str,
+            Bundle bundle,
+            byte[] bArr)
+            throws RemoteException;
 
-    void remove(IBinder iBinder, int i, int i2, int i3, IIrisServiceReceiver iIrisServiceReceiver) throws RemoteException;
+    void remove(IBinder iBinder, int i, int i2, int i3, IIrisServiceReceiver iIrisServiceReceiver)
+            throws RemoteException;
 
     void rename(int i, int i2, String str) throws RemoteException;
 
-    int request(IBinder iBinder, int i, byte[] bArr, byte[] bArr2, int i2, int i3, IIrisServiceReceiver iIrisServiceReceiver) throws RemoteException;
+    int request(
+            IBinder iBinder,
+            int i,
+            byte[] bArr,
+            byte[] bArr2,
+            int i2,
+            int i3,
+            IIrisServiceReceiver iIrisServiceReceiver)
+            throws RemoteException;
 
     void resetTimeout(byte[] bArr) throws RemoteException;
 
@@ -63,40 +126,79 @@ public interface IIrisService extends IInterface {
 
     public static class Default implements IIrisService {
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void authenticate(IBinder token, IBinder windownToken, int x, int y, int width, int height, long sessionId, int userId, IIrisServiceReceiver receiver, int flags, String opPackageName, Bundle attr, byte[] fidoRequestData) throws RemoteException {
-        }
+        public void authenticate(
+                IBinder token,
+                IBinder windownToken,
+                int x,
+                int y,
+                int width,
+                int height,
+                long sessionId,
+                int userId,
+                IIrisServiceReceiver receiver,
+                int flags,
+                String opPackageName,
+                Bundle attr,
+                byte[] fidoRequestData)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void prompt_authenticate(IBinder token, IBinder windownToken, int x, int y, int width, int height, long sessionId, int userId, IIrisServiceReceiver receiver, int flags, String opPackageName, Bundle attr, byte[] fidoRequestData) throws RemoteException {
-        }
+        public void prompt_authenticate(
+                IBinder token,
+                IBinder windownToken,
+                int x,
+                int y,
+                int width,
+                int height,
+                long sessionId,
+                int userId,
+                IIrisServiceReceiver receiver,
+                int flags,
+                String opPackageName,
+                Bundle attr,
+                byte[] fidoRequestData)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void cancelAuthentication(IBinder token, String opPackageName) throws RemoteException {
-        }
+        public void cancelAuthentication(IBinder token, String opPackageName)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void enroll(IBinder token, IBinder windownToken, int x, int y, int width, int height, byte[] cryptoToken, int groupId, IIrisServiceReceiver receiver, int flags, String opPackageName, Bundle attr) throws RemoteException {
-        }
+        public void enroll(
+                IBinder token,
+                IBinder windownToken,
+                int x,
+                int y,
+                int width,
+                int height,
+                byte[] cryptoToken,
+                int groupId,
+                IIrisServiceReceiver receiver,
+                int flags,
+                String opPackageName,
+                Bundle attr)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void cancelEnrollment(IBinder token) throws RemoteException {
-        }
+        public void cancelEnrollment(IBinder token) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void remove(IBinder token, int irisId, int groupId, int userId, IIrisServiceReceiver receiver) throws RemoteException {
-        }
+        public void remove(
+                IBinder token, int irisId, int groupId, int userId, IIrisServiceReceiver receiver)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void rename(int irisId, int groupId, String name) throws RemoteException {
-        }
+        public void rename(int irisId, int groupId, String name) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public List<Iris> getEnrolledIrises(int groupId, String opPackageName) throws RemoteException {
+        public List<Iris> getEnrolledIrises(int groupId, String opPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public boolean isHardwareDetected(long deviceId, String opPackageName) throws RemoteException {
+        public boolean isHardwareDetected(long deviceId, String opPackageName)
+                throws RemoteException {
             return false;
         }
 
@@ -126,41 +228,63 @@ public interface IIrisService extends IInterface {
         }
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public int request(IBinder token, int cmd, byte[] inputBuf, byte[] outputBuf, int inParam, int groupId, IIrisServiceReceiver receiver) throws RemoteException {
+        public int request(
+                IBinder token,
+                int cmd,
+                byte[] inputBuf,
+                byte[] outputBuf,
+                int inParam,
+                int groupId,
+                IIrisServiceReceiver receiver)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void resetTimeout(byte[] cryptoToken) throws RemoteException {
-        }
+        public void resetTimeout(byte[] cryptoToken) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void addLockoutResetCallback(IIrisServiceLockoutResetCallback callback) throws RemoteException {
-        }
+        public void addLockoutResetCallback(IIrisServiceLockoutResetCallback callback)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void setIrisViewType(int groupId, String opPackageName, int irisViewType) throws RemoteException {
-        }
+        public void setIrisViewType(int groupId, String opPackageName, int irisViewType)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void enableIRImageCallback(int groupId, String opPackageName, int callbackType) throws RemoteException {
-        }
+        public void enableIRImageCallback(int groupId, String opPackageName, int callbackType)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void setActiveUser(int uid) throws RemoteException {
-        }
+        public void setActiveUser(int uid) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void prepareForAuthentication(boolean requireConfirmation, IBinder token, long sessionId, int userId, IBiometricSensorReceiver wrapperReceiver, String opPackageName, int cookie, int callingUid, int callingPid, int callingUserId, Bundle bundle) throws RemoteException {
-        }
+        public void prepareForAuthentication(
+                boolean requireConfirmation,
+                IBinder token,
+                long sessionId,
+                int userId,
+                IBiometricSensorReceiver wrapperReceiver,
+                String opPackageName,
+                int cookie,
+                int callingUid,
+                int callingPid,
+                int callingUserId,
+                Bundle bundle)
+                throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void startPreparedClient(int cookie) throws RemoteException {
-        }
+        public void startPreparedClient(int cookie) throws RemoteException {}
 
         @Override // com.samsung.android.camera.iris.IIrisService
-        public void cancelAuthenticationFromService(IBinder token, String opPackageName, int callingUid, int callingPid, int callingUserId, boolean fromClient) throws RemoteException {
-        }
+        public void cancelAuthenticationFromService(
+                IBinder token,
+                String opPackageName,
+                int callingUid,
+                int callingPid,
+                int callingUserId,
+                boolean fromClient)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -168,7 +292,7 @@ public interface IIrisService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIrisService {
+    public abstract static class Stub extends Binder implements IIrisService {
         static final int TRANSACTION_addLockoutResetCallback = 17;
         static final int TRANSACTION_authenticate = 1;
         static final int TRANSACTION_cancelAuthentication = 3;
@@ -272,7 +396,8 @@ public interface IIrisService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             byte[] _arg3;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIrisService.DESCRIPTOR);
@@ -291,13 +416,16 @@ public interface IIrisService extends IInterface {
                     int _arg5 = data.readInt();
                     long _arg6 = data.readLong();
                     int _arg7 = data.readInt();
-                    IIrisServiceReceiver _arg8 = IIrisServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IIrisServiceReceiver _arg8 =
+                            IIrisServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     int _arg9 = data.readInt();
                     String _arg10 = data.readString();
                     Bundle _arg11 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     byte[] _arg12 = data.createByteArray();
                     data.enforceNoDataAvail();
-                    authenticate(_arg0, _arg1, _arg2, _arg32, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10, _arg11, _arg12);
+                    authenticate(
+                            _arg0, _arg1, _arg2, _arg32, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10, _arg11, _arg12);
                     reply.writeNoException();
                     return true;
                 case 2:
@@ -309,13 +437,16 @@ public interface IIrisService extends IInterface {
                     int _arg52 = data.readInt();
                     long _arg62 = data.readLong();
                     int _arg72 = data.readInt();
-                    IIrisServiceReceiver _arg82 = IIrisServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IIrisServiceReceiver _arg82 =
+                            IIrisServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     int _arg92 = data.readInt();
                     String _arg102 = data.readString();
                     Bundle _arg112 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     byte[] _arg122 = data.createByteArray();
                     data.enforceNoDataAvail();
-                    prompt_authenticate(_arg02, _arg13, _arg22, _arg33, _arg42, _arg52, _arg62, _arg72, _arg82, _arg92, _arg102, _arg112, _arg122);
+                    prompt_authenticate(
+                            _arg02, _arg13, _arg22, _arg33, _arg42, _arg52, _arg62, _arg72, _arg82,
+                            _arg92, _arg102, _arg112, _arg122);
                     reply.writeNoException();
                     return true;
                 case 3:
@@ -334,12 +465,15 @@ public interface IIrisService extends IInterface {
                     int _arg53 = data.readInt();
                     byte[] _arg63 = data.createByteArray();
                     int _arg73 = data.readInt();
-                    IIrisServiceReceiver _arg83 = IIrisServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IIrisServiceReceiver _arg83 =
+                            IIrisServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     int _arg93 = data.readInt();
                     String _arg103 = data.readString();
                     Bundle _arg113 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    enroll(_arg04, _arg15, _arg23, _arg34, _arg43, _arg53, _arg63, _arg73, _arg83, _arg93, _arg103, _arg113);
+                    enroll(
+                            _arg04, _arg15, _arg23, _arg34, _arg43, _arg53, _arg63, _arg73, _arg83,
+                            _arg93, _arg103, _arg113);
                     reply.writeNoException();
                     return true;
                 case 5:
@@ -353,7 +487,8 @@ public interface IIrisService extends IInterface {
                     int _arg16 = data.readInt();
                     int _arg24 = data.readInt();
                     int _arg35 = data.readInt();
-                    IIrisServiceReceiver _arg44 = IIrisServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IIrisServiceReceiver _arg44 =
+                            IIrisServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     remove(_arg06, _arg16, _arg24, _arg35, _arg44);
                     reply.writeNoException();
@@ -432,7 +567,8 @@ public interface IIrisService extends IInterface {
                     }
                     int _arg45 = data.readInt();
                     int _arg54 = data.readInt();
-                    IIrisServiceReceiver _arg64 = IIrisServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IIrisServiceReceiver _arg64 =
+                            IIrisServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result8 = request(_arg015, _arg114, _arg26, _arg3, _arg45, _arg54, _arg64);
                     reply.writeNoException();
@@ -446,7 +582,9 @@ public interface IIrisService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 17:
-                    IIrisServiceLockoutResetCallback _arg017 = IIrisServiceLockoutResetCallback.Stub.asInterface(data.readStrongBinder());
+                    IIrisServiceLockoutResetCallback _arg017 =
+                            IIrisServiceLockoutResetCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addLockoutResetCallback(_arg017);
                     reply.writeNoException();
@@ -478,7 +616,8 @@ public interface IIrisService extends IInterface {
                     IBinder _arg117 = data.readStrongBinder();
                     long _arg29 = data.readLong();
                     int _arg37 = data.readInt();
-                    IBiometricSensorReceiver _arg46 = IBiometricSensorReceiver.Stub.asInterface(data.readStrongBinder());
+                    IBiometricSensorReceiver _arg46 =
+                            IBiometricSensorReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg55 = data.readString();
                     int _arg65 = data.readInt();
                     int _arg74 = data.readInt();
@@ -486,7 +625,9 @@ public interface IIrisService extends IInterface {
                     int _arg94 = data.readInt();
                     Bundle _arg104 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    prepareForAuthentication(_arg021, _arg117, _arg29, _arg37, _arg46, _arg55, _arg65, _arg74, _arg84, _arg94, _arg104);
+                    prepareForAuthentication(
+                            _arg021, _arg117, _arg29, _arg37, _arg46, _arg55, _arg65, _arg74,
+                            _arg84, _arg94, _arg104);
                     reply.writeNoException();
                     return true;
                 case 22:
@@ -503,7 +644,8 @@ public interface IIrisService extends IInterface {
                     int _arg47 = data.readInt();
                     boolean _arg56 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    cancelAuthenticationFromService(_arg023, _arg118, _arg210, _arg38, _arg47, _arg56);
+                    cancelAuthenticationFromService(
+                            _arg023, _arg118, _arg210, _arg38, _arg47, _arg56);
                     reply.writeNoException();
                     return true;
                 default:
@@ -528,7 +670,21 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public void authenticate(IBinder token, IBinder windownToken, int x, int y, int width, int height, long sessionId, int userId, IIrisServiceReceiver receiver, int flags, String opPackageName, Bundle attr, byte[] fidoRequestData) throws RemoteException {
+            public void authenticate(
+                    IBinder token,
+                    IBinder windownToken,
+                    int x,
+                    int y,
+                    int width,
+                    int height,
+                    long sessionId,
+                    int userId,
+                    IIrisServiceReceiver receiver,
+                    int flags,
+                    String opPackageName,
+                    Bundle attr,
+                    byte[] fidoRequestData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -626,7 +782,21 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public void prompt_authenticate(IBinder token, IBinder windownToken, int x, int y, int width, int height, long sessionId, int userId, IIrisServiceReceiver receiver, int flags, String opPackageName, Bundle attr, byte[] fidoRequestData) throws RemoteException {
+            public void prompt_authenticate(
+                    IBinder token,
+                    IBinder windownToken,
+                    int x,
+                    int y,
+                    int width,
+                    int height,
+                    long sessionId,
+                    int userId,
+                    IIrisServiceReceiver receiver,
+                    int flags,
+                    String opPackageName,
+                    Bundle attr,
+                    byte[] fidoRequestData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -724,7 +894,8 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public void cancelAuthentication(IBinder token, String opPackageName) throws RemoteException {
+            public void cancelAuthentication(IBinder token, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -740,7 +911,20 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public void enroll(IBinder token, IBinder windownToken, int x, int y, int width, int height, byte[] cryptoToken, int groupId, IIrisServiceReceiver receiver, int flags, String opPackageName, Bundle attr) throws RemoteException {
+            public void enroll(
+                    IBinder token,
+                    IBinder windownToken,
+                    int x,
+                    int y,
+                    int width,
+                    int height,
+                    byte[] cryptoToken,
+                    int groupId,
+                    IIrisServiceReceiver receiver,
+                    int flags,
+                    String opPackageName,
+                    Bundle attr)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -856,7 +1040,13 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public void remove(IBinder token, int irisId, int groupId, int userId, IIrisServiceReceiver receiver) throws RemoteException {
+            public void remove(
+                    IBinder token,
+                    int irisId,
+                    int groupId,
+                    int userId,
+                    IIrisServiceReceiver receiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -892,7 +1082,8 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public List<Iris> getEnrolledIrises(int groupId, String opPackageName) throws RemoteException {
+            public List<Iris> getEnrolledIrises(int groupId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -910,7 +1101,8 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public boolean isHardwareDetected(long deviceId, String opPackageName) throws RemoteException {
+            public boolean isHardwareDetected(long deviceId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -962,7 +1154,8 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public boolean hasEnrolledIrises(int groupId, String opPackageName) throws RemoteException {
+            public boolean hasEnrolledIrises(int groupId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -980,7 +1173,8 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public boolean hasDisabledIris(int groupId, String opPackageName) throws RemoteException {
+            public boolean hasDisabledIris(int groupId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1015,7 +1209,15 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public int request(IBinder token, int cmd, byte[] inputBuf, byte[] outputBuf, int inParam, int groupId, IIrisServiceReceiver receiver) throws RemoteException {
+            public int request(
+                    IBinder token,
+                    int cmd,
+                    byte[] inputBuf,
+                    byte[] outputBuf,
+                    int inParam,
+                    int groupId,
+                    IIrisServiceReceiver receiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1054,7 +1256,8 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public void addLockoutResetCallback(IIrisServiceLockoutResetCallback callback) throws RemoteException {
+            public void addLockoutResetCallback(IIrisServiceLockoutResetCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1069,7 +1272,8 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public void setIrisViewType(int groupId, String opPackageName, int irisViewType) throws RemoteException {
+            public void setIrisViewType(int groupId, String opPackageName, int irisViewType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1086,7 +1290,8 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public void enableIRImageCallback(int groupId, String opPackageName, int callbackType) throws RemoteException {
+            public void enableIRImageCallback(int groupId, String opPackageName, int callbackType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1118,7 +1323,19 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public void prepareForAuthentication(boolean requireConfirmation, IBinder token, long sessionId, int userId, IBiometricSensorReceiver wrapperReceiver, String opPackageName, int cookie, int callingUid, int callingPid, int callingUserId, Bundle bundle) throws RemoteException {
+            public void prepareForAuthentication(
+                    boolean requireConfirmation,
+                    IBinder token,
+                    long sessionId,
+                    int userId,
+                    IBiometricSensorReceiver wrapperReceiver,
+                    String opPackageName,
+                    int cookie,
+                    int callingUid,
+                    int callingPid,
+                    int callingUserId,
+                    Bundle bundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1226,7 +1443,14 @@ public interface IIrisService extends IInterface {
             }
 
             @Override // com.samsung.android.camera.iris.IIrisService
-            public void cancelAuthenticationFromService(IBinder token, String opPackageName, int callingUid, int callingPid, int callingUserId, boolean fromClient) throws RemoteException {
+            public void cancelAuthenticationFromService(
+                    IBinder token,
+                    String opPackageName,
+                    int callingUid,
+                    int callingPid,
+                    int callingUserId,
+                    boolean fromClient)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

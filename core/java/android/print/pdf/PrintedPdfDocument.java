@@ -22,11 +22,19 @@ public class PrintedPdfDocument extends PdfDocument {
         int marginTop = (int) ((minMargins.getTopMils() / 1000.0f) * 72.0f);
         int marginRight = (int) ((minMargins.getRightMils() / 1000.0f) * 72.0f);
         int marginBottom = (int) ((minMargins.getBottomMils() / 1000.0f) * 72.0f);
-        this.mContentRect = new Rect(marginLeft, marginTop, this.mPageWidth - marginRight, this.mPageHeight - marginBottom);
+        this.mContentRect =
+                new Rect(
+                        marginLeft,
+                        marginTop,
+                        this.mPageWidth - marginRight,
+                        this.mPageHeight - marginBottom);
     }
 
     public PdfDocument.Page startPage(int pageNumber) {
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(this.mPageWidth, this.mPageHeight, pageNumber).setContentRect(this.mContentRect).create();
+        PdfDocument.PageInfo pageInfo =
+                new PdfDocument.PageInfo.Builder(this.mPageWidth, this.mPageHeight, pageNumber)
+                        .setContentRect(this.mContentRect)
+                        .create();
         return startPage(pageInfo);
     }
 

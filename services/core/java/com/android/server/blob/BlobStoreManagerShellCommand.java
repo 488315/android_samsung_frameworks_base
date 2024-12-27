@@ -4,8 +4,10 @@ import android.app.ActivityManager;
 import android.app.blob.BlobHandle;
 import android.os.ShellCommand;
 import android.util.LongSparseArray;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.Base64;
 
@@ -85,11 +87,18 @@ public final class BlobStoreManagerShellCommand extends ShellCommand {
                     return -1;
                 }
                 BlobStoreManagerService blobStoreManagerService = this.mService;
-                BlobHandle create = BlobHandle.create(parsedArgs.algorithm, parsedArgs.digest, parsedArgs.label, parsedArgs.expiryTimeMillis, parsedArgs.tag);
+                BlobHandle create =
+                        BlobHandle.create(
+                                parsedArgs.algorithm,
+                                parsedArgs.digest,
+                                parsedArgs.label,
+                                parsedArgs.expiryTimeMillis,
+                                parsedArgs.tag);
                 int i2 = parsedArgs.userId;
                 synchronized (blobStoreManagerService.mBlobsLock) {
                     try {
-                        BlobMetadata blobMetadata = (BlobMetadata) blobStoreManagerService.mBlobsMap.get(create);
+                        BlobMetadata blobMetadata =
+                                (BlobMetadata) blobStoreManagerService.mBlobsMap.get(create);
                         if (blobMetadata != null) {
                             blobMetadata.removeDataForUser(i2);
                             if (blobMetadata.shouldBeDeleted(false)) {
@@ -116,10 +125,15 @@ public final class BlobStoreManagerShellCommand extends ShellCommand {
                         for (int i4 = 0; i4 < size; i4++) {
                             int keyAt = blobStoreManagerService2.mSessions.keyAt(i4);
                             if (i3 == -1 || i3 == keyAt) {
-                                LongSparseArray longSparseArray = (LongSparseArray) blobStoreManagerService2.mSessions.valueAt(i4);
+                                LongSparseArray longSparseArray =
+                                        (LongSparseArray)
+                                                blobStoreManagerService2.mSessions.valueAt(i4);
                                 int size2 = longSparseArray.size();
                                 for (int i5 = 0; i5 < size2; i5++) {
-                                    blobStoreManagerService2.mActiveBlobIds.remove(Long.valueOf(((BlobStoreSession) longSparseArray.valueAt(i5)).mSessionId));
+                                    blobStoreManagerService2.mActiveBlobIds.remove(
+                                            Long.valueOf(
+                                                    ((BlobStoreSession) longSparseArray.valueAt(i5))
+                                                            .mSessionId));
                                 }
                             }
                         }
@@ -142,7 +156,12 @@ public final class BlobStoreManagerShellCommand extends ShellCommand {
                 BlobStoreManagerService blobStoreManagerService3 = this.mService;
                 int i6 = parsedArgs3.userId;
                 synchronized (blobStoreManagerService3.mBlobsLock) {
-                    blobStoreManagerService3.mBlobsMap.entrySet().removeIf(new BlobStoreManagerService$$ExternalSyntheticLambda10(blobStoreManagerService3, i6, 0));
+                    blobStoreManagerService3
+                            .mBlobsMap
+                            .entrySet()
+                            .removeIf(
+                                    new BlobStoreManagerService$$ExternalSyntheticLambda10(
+                                            blobStoreManagerService3, i6, 0));
                     blobStoreManagerService3.writeBlobsInfoAsync();
                 }
                 return 0;
@@ -160,11 +179,14 @@ public final class BlobStoreManagerShellCommand extends ShellCommand {
                         int i8 = 0;
                         while (true) {
                             if (i8 < size3) {
-                                BlobMetadata blobMetadata2 = (BlobMetadata) blobStoreManagerService4.mBlobsMap.valueAt(i8);
+                                BlobMetadata blobMetadata2 =
+                                        (BlobMetadata)
+                                                blobStoreManagerService4.mBlobsMap.valueAt(i8);
                                 if (blobMetadata2.mBlobId != j) {
                                     i8++;
                                 } else {
-                                    boolean hasACommitterInUser = blobMetadata2.hasACommitterInUser(i7);
+                                    boolean hasACommitterInUser =
+                                            blobMetadata2.hasACommitterInUser(i7);
                                 }
                             } else {
                                 i = 0;
@@ -196,12 +218,34 @@ public final class BlobStoreManagerShellCommand extends ShellCommand {
         outPrintWriter.println("    Remove all sessions.");
         outPrintWriter.println("    Options:");
         outPrintWriter.println("      -u or --user: specify which user's sessions to be removed.");
-        outPrintWriter.println("                    If not specified, sessions in all users are removed.");
+        outPrintWriter.println(
+                "                    If not specified, sessions in all users are removed.");
         outPrintWriter.println();
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "clear-all-blobs [-u | --user USER_ID]", "    Remove all blobs.", "    Options:", "      -u or --user: specify which user's blobs to be removed.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "                    If not specified, blobs in all users are removed.", "delete-blob [-u | --user USER_ID] [--digest DIGEST] [--expiry EXPIRY_TIME] [--label LABEL] [--tag TAG]", "    Delete a blob.", "    Options:");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      -u or --user: specify which user's blobs to be removed;", "                    If not specified, blobs in all users are removed.", "      --digest: Base64 encoded digest of the blob to delete.", "      --expiry: Expiry time of the blob to delete, in milliseconds.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      --label: Label of the blob to delete.", "      --tag: Tag of the blob to delete.", "idle-maintenance", "    Run idle maintenance which takes care of removing stale data.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "clear-all-blobs [-u | --user USER_ID]",
+                "    Remove all blobs.",
+                "    Options:",
+                "      -u or --user: specify which user's blobs to be removed.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "                    If not specified, blobs in all users are removed.",
+                "delete-blob [-u | --user USER_ID] [--digest DIGEST] [--expiry EXPIRY_TIME]"
+                    + " [--label LABEL] [--tag TAG]",
+                "    Delete a blob.",
+                "    Options:");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      -u or --user: specify which user's blobs to be removed;",
+                "                    If not specified, blobs in all users are removed.",
+                "      --digest: Base64 encoded digest of the blob to delete.",
+                "      --expiry: Expiry time of the blob to delete, in milliseconds.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      --label: Label of the blob to delete.",
+                "      --tag: Tag of the blob to delete.",
+                "idle-maintenance",
+                "    Run idle maintenance which takes care of removing stale data.");
         outPrintWriter.println("query-blob-existence [-b BLOB_ID] [-u | --user USER_ID]");
         outPrintWriter.println("    Prints 1 if blob exists, otherwise 0.");
         outPrintWriter.println();
@@ -303,7 +347,8 @@ public final class BlobStoreManagerShellCommand extends ShellCommand {
                     parsedArgs.algorithm = getNextArgRequired();
                     break;
                 default:
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "Error: unknown option '", nextOption, "'");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter, "Error: unknown option '", nextOption, "'");
                     return -1;
             }
         }

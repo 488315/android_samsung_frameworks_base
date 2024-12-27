@@ -53,12 +53,17 @@ public interface SemBiometricConstants {
     public static final String KEY_BIO_TPA_MODE = "biometric_tpa_mode";
     public static final String KEY_CHALLENGE_TOKEN = "KEY_CHALLENGE_TOKEN";
     public static final String KEY_FP_GESTURE_DIRECTION = "KEY_FP_GESTURE_DIRECTION";
-    public static final String KEY_FP_ICON_ADAPTIVE_OPTION_WHEN_SCREEN_OFF = "fingerprint_adaptive_icon";
-    public static final String KEY_FP_ICON_OLD_OPTION_WHEN_SCREEN_OFF = "fingerprint_screen_off_icon";
-    public static final String KEY_FP_ICON_OPTION_WHEN_SCREEN_OFF = "fingerprint_screen_off_icon_aod";
-    public static final String KEY_FP_ICON_OPTION_WHEN_SCREEN_ON = "fingerprint_screen_on_icon_lock";
+    public static final String KEY_FP_ICON_ADAPTIVE_OPTION_WHEN_SCREEN_OFF =
+            "fingerprint_adaptive_icon";
+    public static final String KEY_FP_ICON_OLD_OPTION_WHEN_SCREEN_OFF =
+            "fingerprint_screen_off_icon";
+    public static final String KEY_FP_ICON_OPTION_WHEN_SCREEN_OFF =
+            "fingerprint_screen_off_icon_aod";
+    public static final String KEY_FP_ICON_OPTION_WHEN_SCREEN_ON =
+            "fingerprint_screen_on_icon_lock";
     public static final String KEY_FP_MASKVIEW_DEBUG_MODE = "fingerprint_maskview_debug_mode";
-    public static final String KEY_FP_PF_GUIDELINE_DISPLAYED = "fingerprint_protective_film_guideline_displayed";
+    public static final String KEY_FP_PF_GUIDELINE_DISPLAYED =
+            "fingerprint_protective_film_guideline_displayed";
     public static final String KEY_FP_VI_EFFECT_TYPE = "fingerprint_effect";
     public static final String KEY_IDENTIFIER_NAME = "KEY_IDENTIFIER_NAME";
     public static final String KEY_INDISPLAY_SENSOR_AREA = "sem_area";
@@ -70,8 +75,10 @@ public interface SemBiometricConstants {
     public static final String KEY_MANAGED_PROFILE_COLOR = "MANAGED_PROFILE_COLOR";
     public static final String KEY_MANAGED_PROFILE_KNOX = "MANAGED_PROFILE_KNOX";
     public static final String KEY_MANAGED_PROFILE_KNOX_NAME = "MANAGED_PROFILE_KNOX_NAME";
-    public static final String KEY_MANAGED_PROFILE_KNOX_ONLY_CONFIRM_BIOMETRIC = "MANAGED_PROFILE_KNOX_ONLY_CONFIRM_BIOMETRIC";
-    public static final String KEY_MANAGED_PROFILE_KNOX_TWO_FACTOR = "MANAGED_PROFILE_KNOX_TWO_FACTOR";
+    public static final String KEY_MANAGED_PROFILE_KNOX_ONLY_CONFIRM_BIOMETRIC =
+            "MANAGED_PROFILE_KNOX_ONLY_CONFIRM_BIOMETRIC";
+    public static final String KEY_MANAGED_PROFILE_KNOX_TWO_FACTOR =
+            "MANAGED_PROFILE_KNOX_TWO_FACTOR";
     public static final String KEY_PACKAGE_NAME = "KEY_PACKAGE_NAME";
     public static final String KEY_SECURE_FOLDER = "SECURE_FOLDER";
     public static final String KEY_SECURE_FOLDER_NAME = "SECURE_FOLDER_NAME";
@@ -110,46 +117,35 @@ public interface SemBiometricConstants {
     public static final int TSP_STATE_ENABLE = 1;
     public static final int TSP_STATE_ENABLE_HALF = 2;
 
-    public @interface GestureCalibrationDismissedReason {
-    }
+    public @interface GestureCalibrationDismissedReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GestureCalibrationEvent {
-    }
+    public @interface GestureCalibrationEvent {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LocalHbmCmd {
-    }
+    public @interface LocalHbmCmd {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SettingDbName {
-    }
+    public @interface SettingDbName {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SysUiBundleKey {
-    }
+    public @interface SysUiBundleKey {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SysUiCommand {
-    }
+    public @interface SysUiCommand {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SysUiError {
-    }
+    public @interface SysUiError {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SysUiPromptEvent {
-    }
+    public @interface SysUiPromptEvent {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SysUiRequestCommand {
-    }
+    public @interface SysUiRequestCommand {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SysUiTspEvent {
-    }
+    public @interface SysUiTspEvent {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SysUiType {
-    }
+    public @interface SysUiType {}
 }

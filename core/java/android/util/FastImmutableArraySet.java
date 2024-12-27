@@ -12,7 +12,8 @@ public final class FastImmutableArraySet<T> extends AbstractSet<T> {
         this.mContents = contents;
     }
 
-    @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.Set
+    @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable,
+              // java.util.Set
     public Iterator<T> iterator() {
         FastIterator<T> it = this.mIterator;
         if (it == null) {

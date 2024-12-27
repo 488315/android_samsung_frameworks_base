@@ -50,7 +50,9 @@ public interface SharedPreferences {
 
     Set<String> getStringSet(String str, Set<String> set);
 
-    void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener onSharedPreferenceChangeListener);
+    void registerOnSharedPreferenceChangeListener(
+            OnSharedPreferenceChangeListener onSharedPreferenceChangeListener);
 
-    void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener onSharedPreferenceChangeListener);
+    void unregisterOnSharedPreferenceChangeListener(
+            OnSharedPreferenceChangeListener onSharedPreferenceChangeListener);
 }

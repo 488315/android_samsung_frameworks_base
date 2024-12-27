@@ -4,6 +4,7 @@ import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.params.ColorSpaceTransform;
 import android.hardware.camera2.utils.TypeReference;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
@@ -12,7 +13,8 @@ public class MarshalQueryableColorSpaceTransform implements MarshalQueryable<Col
     private static final int SIZE = 72;
 
     private class MarshalerColorSpaceTransform extends Marshaler<ColorSpaceTransform> {
-        protected MarshalerColorSpaceTransform(TypeReference<ColorSpaceTransform> typeReference, int nativeType) {
+        protected MarshalerColorSpaceTransform(
+                TypeReference<ColorSpaceTransform> typeReference, int nativeType) {
             super(MarshalQueryableColorSpaceTransform.this, typeReference, nativeType);
         }
 
@@ -42,12 +44,14 @@ public class MarshalQueryableColorSpaceTransform implements MarshalQueryable<Col
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public Marshaler<ColorSpaceTransform> createMarshaler(TypeReference<ColorSpaceTransform> managedType, int nativeType) {
+    public Marshaler<ColorSpaceTransform> createMarshaler(
+            TypeReference<ColorSpaceTransform> managedType, int nativeType) {
         return new MarshalerColorSpaceTransform(managedType, nativeType);
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public boolean isTypeMappingSupported(TypeReference<ColorSpaceTransform> managedType, int nativeType) {
+    public boolean isTypeMappingSupported(
+            TypeReference<ColorSpaceTransform> managedType, int nativeType) {
         return nativeType == 5 && ColorSpaceTransform.class.equals(managedType.getType());
     }
 }

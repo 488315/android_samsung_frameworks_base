@@ -7,6 +7,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.internal.net.IOemNetd;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
@@ -17,6 +18,7 @@ import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.ProcessList$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.utils.NetdHelper;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -56,7 +58,13 @@ public final class KnoxNetworkFilterFirewall {
             DELETE = ipRestoreActionType3;
             IpRestoreActionType ipRestoreActionType4 = new IpRestoreActionType("REMOVE_CHAIN", 3);
             REMOVE_CHAIN = ipRestoreActionType4;
-            $VALUES = new IpRestoreActionType[]{ipRestoreActionType, ipRestoreActionType2, ipRestoreActionType3, ipRestoreActionType4};
+            $VALUES =
+                    new IpRestoreActionType[] {
+                        ipRestoreActionType,
+                        ipRestoreActionType2,
+                        ipRestoreActionType3,
+                        ipRestoreActionType4
+                    };
         }
 
         public static IpRestoreActionType valueOf(String str) {
@@ -76,7 +84,12 @@ public final class KnoxNetworkFilterFirewall {
         public final String jumpChain;
         public final String secondParam;
 
-        public IpRestoreParam(String str, String str2, String str3, String str4, IpRestoreActionType ipRestoreActionType) {
+        public IpRestoreParam(
+                String str,
+                String str2,
+                String str3,
+                String str4,
+                IpRestoreActionType ipRestoreActionType) {
             this.actionChain = str;
             this.firstParam = str2;
             this.jumpChain = str3;
@@ -89,8 +102,11 @@ public final class KnoxNetworkFilterFirewall {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                int isIptablesMatchEnabled = getOemNetdService().isIptablesMatchEnabled("connbytes");
-                Log.d("knoxNwFilter-KnoxNetworkFilterFirewall", "isIptablesExtensionPresent: connbytes " + isIptablesMatchEnabled);
+                int isIptablesMatchEnabled =
+                        getOemNetdService().isIptablesMatchEnabled("connbytes");
+                Log.d(
+                        "knoxNwFilter-KnoxNetworkFilterFirewall",
+                        "isIptablesExtensionPresent: connbytes " + isIptablesMatchEnabled);
                 if (isIptablesMatchEnabled == 0) {
                     IS_CONNBYTE_EXTENSION_PRESENT = true;
                 }
@@ -108,7 +124,15 @@ public final class KnoxNetworkFilterFirewall {
         }
         String str = UserHandle.getUserId(i) + "_knox_nwfilter_cp_rdt";
         ArrayList arrayList = new ArrayList();
-        arrayList.add(new IpRestoreParam(str, BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, " -m owner --uid-owner ", " -o lo -p tcp --dport 80 "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("REDIRECT --to-port "), i2), "", IpRestoreActionType.APPEND));
+        arrayList.add(
+                new IpRestoreParam(
+                        str,
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i, " -m owner --uid-owner ", " -o lo -p tcp --dport 80 "),
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("REDIRECT --to-port "), i2),
+                        "",
+                        IpRestoreActionType.APPEND));
         insertRules(4, "*nat", null, arrayList, true);
     }
 
@@ -126,10 +150,19 @@ public final class KnoxNetworkFilterFirewall {
         }
         String str = i3 + PackageManagerShellCommandDataLoader.STDIN_PATH + i2;
         ArrayList arrayList = new ArrayList();
-        String m2 = XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str, " -p udp --dport 853 ");
+        String m2 =
+                XmlUtils$$ExternalSyntheticOutline0.m(
+                        " -m owner --uid-owner ", str, " -p udp --dport 853 ");
         IpRestoreActionType ipRestoreActionType = IpRestoreActionType.INSERT;
         arrayList.add(new IpRestoreParam(m, m2, "DROP", "", ipRestoreActionType));
-        arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str, " -p tcp --dport 853 "), "DROP", "", ipRestoreActionType));
+        arrayList.add(
+                new IpRestoreParam(
+                        m,
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                " -m owner --uid-owner ", str, " -p tcp --dport 853 "),
+                        "DROP",
+                        "",
+                        ipRestoreActionType));
         insertRules(46, "*filter", null, arrayList, true);
     }
 
@@ -144,7 +177,15 @@ public final class KnoxNetworkFilterFirewall {
         for (Map.Entry entry : hashMap.entrySet()) {
             Iterator it2 = ((List) entry.getValue()).iterator();
             while (it2.hasNext()) {
-                ((ArrayList) createTableHeaderCmd).add(parseIptablesRestoreCmd(new IpRestoreParam((String) entry.getKey(), "", (String) it2.next(), "", IpRestoreActionType.INSERT)));
+                ((ArrayList) createTableHeaderCmd)
+                        .add(
+                                parseIptablesRestoreCmd(
+                                        new IpRestoreParam(
+                                                (String) entry.getKey(),
+                                                "",
+                                                (String) it2.next(),
+                                                "",
+                                                IpRestoreActionType.INSERT)));
             }
         }
         ((ArrayList) createTableHeaderCmd).add("COMMIT\n");
@@ -153,7 +194,14 @@ public final class KnoxNetworkFilterFirewall {
 
     public static Map createFilterMap(int i) {
         HashMap hashMap = new HashMap();
-        hashMap.put("OUTPUT", Arrays.asList(NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_unauth_drop"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_dot_drop"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_dns_drop"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_app_act")));
+        hashMap.put(
+                "OUTPUT",
+                Arrays.asList(
+                        NandswapManager$$ExternalSyntheticOutline0.m(
+                                i, "_knox_nwfilter_unauth_drop"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_dot_drop"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_dns_drop"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_app_act")));
         return hashMap;
     }
 
@@ -168,14 +216,39 @@ public final class KnoxNetworkFilterFirewall {
 
     public static Map createMangleMapList(int i) {
         HashMap hashMap = new HashMap();
-        hashMap.put("OUTPUT", Arrays.asList(NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_tcp_mark"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_udp_mark"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_dns_mark"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_udp_exempt"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_app_act")));
-        hashMap.put("PREROUTING", Arrays.asList(i + "_knox_nwfilter_tcp_rdt", NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_udp_rdt"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_dns_rdt")));
+        hashMap.put(
+                "OUTPUT",
+                Arrays.asList(
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_tcp_mark"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_udp_mark"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_dns_mark"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(
+                                i, "_knox_nwfilter_udp_exempt"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_app_act")));
+        hashMap.put(
+                "PREROUTING",
+                Arrays.asList(
+                        i + "_knox_nwfilter_tcp_rdt",
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_udp_rdt"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_dns_rdt")));
         return hashMap;
     }
 
     public static Map createNatMap(int i) {
         HashMap hashMap = new HashMap();
-        hashMap.put("OUTPUT", Arrays.asList(NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_udp_rdt"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_udp_exempt"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_dns_rdt"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_app_rdt"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_tcp_rdt"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_cp_rdt"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_dns_exempt"), NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_app_act")));
+        hashMap.put(
+                "OUTPUT",
+                Arrays.asList(
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_udp_rdt"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(
+                                i, "_knox_nwfilter_udp_exempt"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_dns_rdt"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_app_rdt"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_tcp_rdt"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_cp_rdt"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(
+                                i, "_knox_nwfilter_dns_exempt"),
+                        NandswapManager$$ExternalSyntheticOutline0.m(i, "_knox_nwfilter_app_act")));
         return hashMap;
     }
 
@@ -231,12 +304,34 @@ public final class KnoxNetworkFilterFirewall {
                         str3 = str8;
                         str2 = str5;
                         str4 = str7;
-                        arrayList.add(new IpRestoreParam(str6, " -p udp -d " + str9 + str8 + str10 + str7 + Integer.toString(i), "DROP", "", ipRestoreActionType));
+                        arrayList.add(
+                                new IpRestoreParam(
+                                        str6,
+                                        " -p udp -d "
+                                                + str9
+                                                + str8
+                                                + str10
+                                                + str7
+                                                + Integer.toString(i),
+                                        "DROP",
+                                        "",
+                                        ipRestoreActionType));
                     } else {
                         str2 = str5;
                         str3 = str8;
                         str4 = str7;
-                        arrayList2.add(new IpRestoreParam(str6, " -p udp -d " + str9 + str3 + str10 + str4 + Integer.toString(i), "DROP", "", ipRestoreActionType));
+                        arrayList2.add(
+                                new IpRestoreParam(
+                                        str6,
+                                        " -p udp -d "
+                                                + str9
+                                                + str3
+                                                + str10
+                                                + str4
+                                                + Integer.toString(i),
+                                        "DROP",
+                                        "",
+                                        ipRestoreActionType));
                     }
                     str7 = str4;
                     str8 = str3;
@@ -256,10 +351,32 @@ public final class KnoxNetworkFilterFirewall {
                     String str15 = split2[1];
                     if (InetAddress.getByName(str14) instanceof Inet4Address) {
                         it = it3;
-                        arrayList.add(new IpRestoreParam(str6, " -p tcp -m state --state NEW -d " + str14 + str12 + str15 + str13 + Integer.toString(i), "DROP", "", ipRestoreActionType));
+                        arrayList.add(
+                                new IpRestoreParam(
+                                        str6,
+                                        " -p tcp -m state --state NEW -d "
+                                                + str14
+                                                + str12
+                                                + str15
+                                                + str13
+                                                + Integer.toString(i),
+                                        "DROP",
+                                        "",
+                                        ipRestoreActionType));
                     } else {
                         it = it3;
-                        arrayList2.add(new IpRestoreParam(str6, " -p tcp -m state --state NEW -d " + str14 + str12 + str15 + str13 + Integer.toString(i), "DROP", "", ipRestoreActionType));
+                        arrayList2.add(
+                                new IpRestoreParam(
+                                        str6,
+                                        " -p tcp -m state --state NEW -d "
+                                                + str14
+                                                + str12
+                                                + str15
+                                                + str13
+                                                + Integer.toString(i),
+                                        "DROP",
+                                        "",
+                                        ipRestoreActionType));
                     }
                     it3 = it;
                 }
@@ -271,9 +388,31 @@ public final class KnoxNetworkFilterFirewall {
                     String str16 = split3[0];
                     String str17 = split3[1];
                     if (InetAddress.getByName(str16) instanceof Inet4Address) {
-                        arrayList.add(new IpRestoreParam(str6, " -p udp -d " + str16 + str12 + str17 + str13 + Integer.toString(i), "DROP", "", ipRestoreActionType));
+                        arrayList.add(
+                                new IpRestoreParam(
+                                        str6,
+                                        " -p udp -d "
+                                                + str16
+                                                + str12
+                                                + str17
+                                                + str13
+                                                + Integer.toString(i),
+                                        "DROP",
+                                        "",
+                                        ipRestoreActionType));
                     } else {
-                        arrayList2.add(new IpRestoreParam(str6, " -p udp -d " + str16 + str12 + str17 + str13 + Integer.toString(i), "DROP", "", ipRestoreActionType));
+                        arrayList2.add(
+                                new IpRestoreParam(
+                                        str6,
+                                        " -p udp -d "
+                                                + str16
+                                                + str12
+                                                + str17
+                                                + str13
+                                                + Integer.toString(i),
+                                        "DROP",
+                                        "",
+                                        ipRestoreActionType));
                     }
                 }
             }
@@ -297,11 +436,29 @@ public final class KnoxNetworkFilterFirewall {
             i4 = i5 + 1;
         }
         String str = i4 + PackageManagerShellCommandDataLoader.STDIN_PATH + i3;
-        String m2 = XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str, " -p udp --dport 5353 ");
+        String m2 =
+                XmlUtils$$ExternalSyntheticOutline0.m(
+                        " -m owner --uid-owner ", str, " -p udp --dport 5353 ");
         IpRestoreActionType ipRestoreActionType = IpRestoreActionType.INSERT;
         arrayList.add(new IpRestoreParam(m, m2, "ACCEPT", "", ipRestoreActionType));
-        arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str, " -p udp --dport 1900 "), "ACCEPT", "", ipRestoreActionType));
-        arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str, " -p udp -m pkttype --pkt-type multicast "), "ACCEPT", "", ipRestoreActionType));
+        arrayList.add(
+                new IpRestoreParam(
+                        m,
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                " -m owner --uid-owner ", str, " -p udp --dport 1900 "),
+                        "ACCEPT",
+                        "",
+                        ipRestoreActionType));
+        arrayList.add(
+                new IpRestoreParam(
+                        m,
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                " -m owner --uid-owner ",
+                                str,
+                                " -p udp -m pkttype --pkt-type multicast "),
+                        "ACCEPT",
+                        "",
+                        ipRestoreActionType));
         if (i2 == 2) {
             insertRules(4, "*nat", null, arrayList, true);
         }
@@ -329,7 +486,12 @@ public final class KnoxNetworkFilterFirewall {
             StringBuilder sb = new StringBuilder("ip -6 route del ");
             sb.append(" local default dev lo table " + Integer.toString(62));
             sb.append(";ip -6 rule del ");
-            sb.append(" from all fwmark " + Integer.toString(62) + " table " + Integer.toString(62) + " prio 10");
+            sb.append(
+                    " from all fwmark "
+                            + Integer.toString(62)
+                            + " table "
+                            + Integer.toString(62)
+                            + " prio 10");
             sb.append(";");
             runSingleCommand(sb.toString());
             return;
@@ -337,7 +499,12 @@ public final class KnoxNetworkFilterFirewall {
         StringBuilder sb2 = new StringBuilder("ip -6 route del ");
         sb2.append(" local default dev lo table " + Integer.toString(63));
         sb2.append(";ip -6 rule del ");
-        sb2.append(" from all fwmark " + Integer.toString(63) + " table " + Integer.toString(63) + " prio 10");
+        sb2.append(
+                " from all fwmark "
+                        + Integer.toString(63)
+                        + " table "
+                        + Integer.toString(63)
+                        + " prio 10");
         sb2.append(";");
         runSingleCommand(sb2.toString());
     }
@@ -349,7 +516,12 @@ public final class KnoxNetworkFilterFirewall {
             StringBuilder sb = new StringBuilder("ip -6 route del ");
             sb.append(" local default dev lo table " + Integer.toString(62));
             sb.append(";ip -6 rule del ");
-            sb.append(" from all fwmark " + Integer.toString(62) + " table " + Integer.toString(62) + " prio 10");
+            sb.append(
+                    " from all fwmark "
+                            + Integer.toString(62)
+                            + " table "
+                            + Integer.toString(62)
+                            + " prio 10");
             sb.append(";");
             runSingleCommand(sb.toString());
             return;
@@ -357,7 +529,12 @@ public final class KnoxNetworkFilterFirewall {
         StringBuilder sb2 = new StringBuilder("ip -6 route del ");
         sb2.append(" local default dev lo table " + Integer.toString(63));
         sb2.append(";ip -6 rule del ");
-        sb2.append(" from all fwmark " + Integer.toString(63) + " table " + Integer.toString(63) + " prio 10");
+        sb2.append(
+                " from all fwmark "
+                        + Integer.toString(63)
+                        + " table "
+                        + Integer.toString(63)
+                        + " prio 10");
         sb2.append(";");
         runSingleCommand(sb2.toString());
     }
@@ -395,7 +572,8 @@ public final class KnoxNetworkFilterFirewall {
     }
 
     public static void insertRule(int i, String str, String str2) {
-        insertRules(i, str, Collections.singletonList(str2), Collections.singletonList(null), false);
+        insertRules(
+                i, str, Collections.singletonList(str2), Collections.singletonList(null), false);
     }
 
     public static void insertRules(int i, String str, List list, List list2, boolean z) {
@@ -481,10 +659,42 @@ public final class KnoxNetworkFilterFirewall {
         boolean isEmpty = str.isEmpty();
         IpRestoreActionType ipRestoreActionType = IpRestoreActionType.INSERT;
         if (isEmpty) {
-            arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str2, " ! -o lo -p tcp -m state --state NEW "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("REDIRECT --to-port "), i2), "", ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    " -m owner --uid-owner ",
+                                    str2,
+                                    " ! -o lo -p tcp -m state --state NEW "),
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("REDIRECT --to-port "), i2),
+                            "",
+                            ipRestoreActionType));
         } else {
-            arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str2, " -o lo -p tcp -d ", str, " -m state --state NEW "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("REDIRECT --to-port "), i2), "", ipRestoreActionType));
-            arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str2, " ! -o lo -p tcp -m state --state NEW "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("REDIRECT --to-port "), i2), "", ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    " -m owner --uid-owner ",
+                                    str2,
+                                    " -o lo -p tcp -d ",
+                                    str,
+                                    " -m state --state NEW "),
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("REDIRECT --to-port "), i2),
+                            "",
+                            ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    " -m owner --uid-owner ",
+                                    str2,
+                                    " ! -o lo -p tcp -m state --state NEW "),
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("REDIRECT --to-port "), i2),
+                            "",
+                            ipRestoreActionType));
         }
         insertRules(4, "*nat", null, arrayList, true);
     }
@@ -502,25 +712,87 @@ public final class KnoxNetworkFilterFirewall {
                 if (str.isEmpty()) {
                     str5 = " -p udp -m connmark --mark ";
                     str4 = "REDIRECT --to-port ";
-                    arrayList.add(new IpRestoreParam(m, " -m owner --uid-owner 10000-19999 ! -o lo  -p udp -m state --state NEW -m connbytes --connbytes 1:1 --connbytes-dir original --connbytes-mode packets ", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
+                    arrayList.add(
+                            new IpRestoreParam(
+                                    m,
+                                    " -m owner --uid-owner 10000-19999 ! -o lo  -p udp -m state"
+                                        + " --state NEW -m connbytes --connbytes 1:1"
+                                        + " --connbytes-dir original --connbytes-mode packets ",
+                                    ProcessList$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("CONNMARK --set-mark "), 62),
+                                    "",
+                                    ipRestoreActionType));
                 } else {
                     str5 = " -p udp -m connmark --mark ";
                     str4 = "REDIRECT --to-port ";
-                    arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner 10000-19999 -o lo -d ", str, " -p udp -m state --state NEW -m connbytes --connbytes 1:1 --connbytes-dir original --connbytes-mode packets "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
-                    arrayList.add(new IpRestoreParam(m, " -m owner --uid-owner 10000-19999 ! -o lo  -p udp -m state --state NEW -m connbytes --connbytes 1:1 --connbytes-dir original --connbytes-mode packets ", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
+                    arrayList.add(
+                            new IpRestoreParam(
+                                    m,
+                                    XmlUtils$$ExternalSyntheticOutline0.m(
+                                            " -m owner --uid-owner 10000-19999 -o lo -d ",
+                                            str,
+                                            " -p udp -m state --state NEW -m connbytes --connbytes"
+                                                + " 1:1 --connbytes-dir original --connbytes-mode"
+                                                + " packets "),
+                                    ProcessList$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("CONNMARK --set-mark "), 62),
+                                    "",
+                                    ipRestoreActionType));
+                    arrayList.add(
+                            new IpRestoreParam(
+                                    m,
+                                    " -m owner --uid-owner 10000-19999 ! -o lo  -p udp -m state"
+                                        + " --state NEW -m connbytes --connbytes 1:1"
+                                        + " --connbytes-dir original --connbytes-mode packets ",
+                                    ProcessList$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("CONNMARK --set-mark "), 62),
+                                    "",
+                                    ipRestoreActionType));
                 }
                 str3 = str5;
             } else {
                 str3 = " -p udp -m connmark --mark ";
                 str4 = "REDIRECT --to-port ";
                 if (str.isEmpty()) {
-                    arrayList.add(new IpRestoreParam(m, " -m owner --uid-owner 10000-19999 ! -o lo  -p udp -m state --state NEW ", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
+                    arrayList.add(
+                            new IpRestoreParam(
+                                    m,
+                                    " -m owner --uid-owner 10000-19999 ! -o lo  -p udp -m state"
+                                        + " --state NEW ",
+                                    ProcessList$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("CONNMARK --set-mark "), 62),
+                                    "",
+                                    ipRestoreActionType));
                 } else {
-                    arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner 10000-19999 -o lo -d ", str, " -p udp -m state --state NEW "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
-                    arrayList.add(new IpRestoreParam(m, " -m owner --uid-owner 10000-19999 ! -o lo  -p udp -m state --state NEW ", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
+                    arrayList.add(
+                            new IpRestoreParam(
+                                    m,
+                                    XmlUtils$$ExternalSyntheticOutline0.m(
+                                            " -m owner --uid-owner 10000-19999 -o lo -d ",
+                                            str,
+                                            " -p udp -m state --state NEW "),
+                                    ProcessList$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("CONNMARK --set-mark "), 62),
+                                    "",
+                                    ipRestoreActionType));
+                    arrayList.add(
+                            new IpRestoreParam(
+                                    m,
+                                    " -m owner --uid-owner 10000-19999 ! -o lo  -p udp -m state"
+                                        + " --state NEW ",
+                                    ProcessList$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("CONNMARK --set-mark "), 62),
+                                    "",
+                                    ipRestoreActionType));
                 }
             }
-            arrayList.add(new IpRestoreParam(m, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(str3), 62), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(str4), i2), "", ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(str3), 62),
+                            ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(str4), i2),
+                            "",
+                            ipRestoreActionType));
             insertRules(4, "*nat", null, arrayList, true);
             return;
         }
@@ -529,20 +801,97 @@ public final class KnoxNetworkFilterFirewall {
         if (!IS_CONNBYTE_EXTENSION_PRESENT) {
             str2 = "*nat";
             if (str.isEmpty()) {
-                arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str6, " ! -o lo  -p udp -m state --state NEW "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
+                arrayList.add(
+                        new IpRestoreParam(
+                                m,
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        " -m owner --uid-owner ",
+                                        str6,
+                                        " ! -o lo  -p udp -m state --state NEW "),
+                                ProcessList$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("CONNMARK --set-mark "), 63),
+                                "",
+                                ipRestoreActionType));
             } else {
-                arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str6, " -o lo -d ", str, " -p udp -m state --state NEW "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
-                arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str6, " ! -o lo  -p udp -m state --state NEW "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
+                arrayList.add(
+                        new IpRestoreParam(
+                                m,
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        " -m owner --uid-owner ",
+                                        str6,
+                                        " -o lo -d ",
+                                        str,
+                                        " -p udp -m state --state NEW "),
+                                ProcessList$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("CONNMARK --set-mark "), 63),
+                                "",
+                                ipRestoreActionType));
+                arrayList.add(
+                        new IpRestoreParam(
+                                m,
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        " -m owner --uid-owner ",
+                                        str6,
+                                        " ! -o lo  -p udp -m state --state NEW "),
+                                ProcessList$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("CONNMARK --set-mark "), 63),
+                                "",
+                                ipRestoreActionType));
             }
         } else if (str.isEmpty()) {
             str2 = "*nat";
-            arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str6, " ! -o lo  -p udp -m state --state NEW -m connbytes --connbytes 1:1 --connbytes-dir original --connbytes-mode packets "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    " -m owner --uid-owner ",
+                                    str6,
+                                    " ! -o lo  -p udp -m state --state NEW -m connbytes --connbytes"
+                                        + " 1:1 --connbytes-dir original --connbytes-mode packets"
+                                        + " "),
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("CONNMARK --set-mark "), 63),
+                            "",
+                            ipRestoreActionType));
         } else {
             str2 = "*nat";
-            arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str6, " -o lo -d ", str, " -p udp -m state --state NEW -m connbytes --connbytes 1:1 --connbytes-dir original --connbytes-mode packets "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
-            arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str6, " ! -o lo  -p udp -m state --state NEW -m connbytes --connbytes 1:1 --connbytes-dir original --connbytes-mode packets "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    " -m owner --uid-owner ",
+                                    str6,
+                                    " -o lo -d ",
+                                    str,
+                                    " -p udp -m state --state NEW -m connbytes --connbytes 1:1"
+                                        + " --connbytes-dir original --connbytes-mode packets "),
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("CONNMARK --set-mark "), 63),
+                            "",
+                            ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    " -m owner --uid-owner ",
+                                    str6,
+                                    " ! -o lo  -p udp -m state --state NEW -m connbytes --connbytes"
+                                        + " 1:1 --connbytes-dir original --connbytes-mode packets"
+                                        + " "),
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("CONNMARK --set-mark "), 63),
+                            "",
+                            ipRestoreActionType));
         }
-        arrayList.add(new IpRestoreParam(m, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p udp -m connmark --mark "), 63), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("REDIRECT --to-port "), i2), "", ipRestoreActionType));
+        arrayList.add(
+                new IpRestoreParam(
+                        m,
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(" -p udp -m connmark --mark "), 63),
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("REDIRECT --to-port "), i2),
+                        "",
+                        ipRestoreActionType));
         insertRules(4, str2, null, arrayList, true);
     }
 
@@ -570,7 +919,15 @@ public final class KnoxNetworkFilterFirewall {
                 str10 = " prio 10";
                 str11 = ";";
                 str12 = " local default dev lo table ";
-                arrayList.add(new IpRestoreParam(m, " -m owner --uid-owner 10000-19999 ! -o lo -p tcp -m state --state NEW ", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
+                arrayList.add(
+                        new IpRestoreParam(
+                                m,
+                                " -m owner --uid-owner 10000-19999 ! -o lo -p tcp -m state --state"
+                                    + " NEW ",
+                                ProcessList$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("CONNMARK --set-mark "), 62),
+                                "",
+                                ipRestoreActionType));
             } else {
                 str12 = " local default dev lo table ";
                 str7 = ";ip -6 rule add ";
@@ -578,11 +935,41 @@ public final class KnoxNetworkFilterFirewall {
                 str9 = " table ";
                 str10 = " prio 10";
                 str11 = ";";
-                arrayList.add(new IpRestoreParam(m, " -m owner --uid-owner 10000-19999 ! -o lo -p tcp -m state --state NEW ", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
+                arrayList.add(
+                        new IpRestoreParam(
+                                m,
+                                " -m owner --uid-owner 10000-19999 ! -o lo -p tcp -m state --state"
+                                    + " NEW ",
+                                ProcessList$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("CONNMARK --set-mark "), 62),
+                                "",
+                                ipRestoreActionType));
             }
-            arrayList.add(new IpRestoreParam(m, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p tcp -m connmark --mark "), 62), "CONNMARK --restore-mark", "", ipRestoreActionType));
-            arrayList.add(new IpRestoreParam(m, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p tcp -m connmark --mark "), 62), "ACCEPT", "", ipRestoreActionType));
-            arrayList.add(new IpRestoreParam(m2, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p tcp --syn -i lo -m mark --mark "), 62), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("TPROXY --on-port "), i2), "", ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder(" -p tcp -m connmark --mark "), 62),
+                            "CONNMARK --restore-mark",
+                            "",
+                            ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder(" -p tcp -m connmark --mark "), 62),
+                            "ACCEPT",
+                            "",
+                            ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m2,
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder(" -p tcp --syn -i lo -m mark --mark "), 62),
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("TPROXY --on-port "), i2),
+                            "",
+                            ipRestoreActionType));
             insertRules(6, "*mangle", null, arrayList, true);
             StringBuilder sb = new StringBuilder("ip -6 route add ");
             sb.append(str12 + Integer.toString(62));
@@ -600,18 +987,60 @@ public final class KnoxNetworkFilterFirewall {
             str4 = " local default dev lo table ";
             str5 = ";ip -6 rule add ";
             str6 = " from all fwmark ";
-            arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str13, " ! -o lo -p tcp -m state --state NEW "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    " -m owner --uid-owner ",
+                                    str13,
+                                    " ! -o lo -p tcp -m state --state NEW "),
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("CONNMARK --set-mark "), 63),
+                            "",
+                            ipRestoreActionType));
         } else {
             str6 = " from all fwmark ";
             str5 = ";ip -6 rule add ";
             str4 = " local default dev lo table ";
             str2 = "ip -6 route add ";
-            arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str13, " ! -o lo -p tcp -m state --state NEW "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    " -m owner --uid-owner ",
+                                    str13,
+                                    " ! -o lo -p tcp -m state --state NEW "),
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("CONNMARK --set-mark "), 63),
+                            "",
+                            ipRestoreActionType));
             str3 = "*mangle";
         }
-        arrayList.add(new IpRestoreParam(m, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p tcp -m connmark --mark "), 63), "CONNMARK --restore-mark", "", ipRestoreActionType));
-        arrayList.add(new IpRestoreParam(m, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p tcp -m connmark --mark "), 63), "ACCEPT", "", ipRestoreActionType));
-        arrayList.add(new IpRestoreParam(m2, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p tcp --syn -i lo -m mark --mark "), 63), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("TPROXY --on-port "), i2), "", ipRestoreActionType));
+        arrayList.add(
+                new IpRestoreParam(
+                        m,
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(" -p tcp -m connmark --mark "), 63),
+                        "CONNMARK --restore-mark",
+                        "",
+                        ipRestoreActionType));
+        arrayList.add(
+                new IpRestoreParam(
+                        m,
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(" -p tcp -m connmark --mark "), 63),
+                        "ACCEPT",
+                        "",
+                        ipRestoreActionType));
+        arrayList.add(
+                new IpRestoreParam(
+                        m2,
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(" -p tcp --syn -i lo -m mark --mark "), 63),
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("TPROXY --on-port "), i2),
+                        "",
+                        ipRestoreActionType));
         insertRules(6, str3, null, arrayList, true);
         StringBuilder sb2 = new StringBuilder(str2);
         sb2.append(str4 + Integer.toString(63));
@@ -648,9 +1077,25 @@ public final class KnoxNetworkFilterFirewall {
                 str13 = ";";
                 str14 = " local default dev lo table ";
                 if (str.isEmpty()) {
-                    arrayList.add(new IpRestoreParam(m, " -m owner --uid-owner 10000-19999 ! -o lo -p udp -m state --state NEW ", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
+                    arrayList.add(
+                            new IpRestoreParam(
+                                    m,
+                                    " -m owner --uid-owner 10000-19999 ! -o lo -p udp -m state"
+                                        + " --state NEW ",
+                                    ProcessList$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("CONNMARK --set-mark "), 62),
+                                    "",
+                                    ipRestoreActionType));
                 } else {
-                    arrayList.add(new IpRestoreParam(m, " -m owner --uid-owner 10000-19999 ! -o lo -p udp -m state --state NEW ", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
+                    arrayList.add(
+                            new IpRestoreParam(
+                                    m,
+                                    " -m owner --uid-owner 10000-19999 ! -o lo -p udp -m state"
+                                        + " --state NEW ",
+                                    ProcessList$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("CONNMARK --set-mark "), 62),
+                                    "",
+                                    ipRestoreActionType));
                 }
             } else if (str.isEmpty()) {
                 str9 = ";ip -6 rule add ";
@@ -659,7 +1104,16 @@ public final class KnoxNetworkFilterFirewall {
                 str12 = " prio 10";
                 str13 = ";";
                 str14 = " local default dev lo table ";
-                arrayList.add(new IpRestoreParam(m, " -m owner --uid-owner 10000-19999 ! -o lo -p udp -m state --state NEW -m connbytes --connbytes 1:1 --connbytes-dir original --connbytes-mode packets ", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
+                arrayList.add(
+                        new IpRestoreParam(
+                                m,
+                                " -m owner --uid-owner 10000-19999 ! -o lo -p udp -m state --state"
+                                    + " NEW -m connbytes --connbytes 1:1 --connbytes-dir original"
+                                    + " --connbytes-mode packets ",
+                                ProcessList$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("CONNMARK --set-mark "), 62),
+                                "",
+                                ipRestoreActionType));
             } else {
                 str14 = " local default dev lo table ";
                 str9 = ";ip -6 rule add ";
@@ -667,11 +1121,42 @@ public final class KnoxNetworkFilterFirewall {
                 str11 = " table ";
                 str12 = " prio 10";
                 str13 = ";";
-                arrayList.add(new IpRestoreParam(m, " -m owner --uid-owner 10000-19999 ! -o lo -p udp -m state --state NEW -m connbytes --connbytes 1:1 --connbytes-dir original --connbytes-mode packets ", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 62), "", ipRestoreActionType));
+                arrayList.add(
+                        new IpRestoreParam(
+                                m,
+                                " -m owner --uid-owner 10000-19999 ! -o lo -p udp -m state --state"
+                                    + " NEW -m connbytes --connbytes 1:1 --connbytes-dir original"
+                                    + " --connbytes-mode packets ",
+                                ProcessList$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("CONNMARK --set-mark "), 62),
+                                "",
+                                ipRestoreActionType));
             }
-            arrayList.add(new IpRestoreParam(m, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p udp -m connmark --mark "), 62), "CONNMARK --restore-mark", "", ipRestoreActionType));
-            arrayList.add(new IpRestoreParam(m, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p udp -m connmark --mark "), 62), "ACCEPT", "", ipRestoreActionType));
-            arrayList.add(new IpRestoreParam(m2, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p udp -i lo -m mark --mark "), 62), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("TPROXY --on-port "), i2), "", ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder(" -p udp -m connmark --mark "), 62),
+                            "CONNMARK --restore-mark",
+                            "",
+                            ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder(" -p udp -m connmark --mark "), 62),
+                            "ACCEPT",
+                            "",
+                            ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m2,
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder(" -p udp -i lo -m mark --mark "), 62),
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("TPROXY --on-port "), i2),
+                            "",
+                            ipRestoreActionType));
             insertRules(6, "*mangle", null, arrayList, true);
             StringBuilder sb = new StringBuilder("ip -6 route add ");
             sb.append(str14 + Integer.toString(62));
@@ -691,14 +1176,38 @@ public final class KnoxNetworkFilterFirewall {
                 str6 = " from all fwmark ";
                 str7 = "*mangle";
                 str8 = "ip -6 route add ";
-                arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str15, " ! -o lo -p udp -m state --state NEW -m connbytes --connbytes 1:1 --connbytes-dir original --connbytes-mode packets "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
+                arrayList.add(
+                        new IpRestoreParam(
+                                m,
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        " -m owner --uid-owner ",
+                                        str15,
+                                        " ! -o lo -p udp -m state --state NEW -m connbytes"
+                                            + " --connbytes 1:1 --connbytes-dir original"
+                                            + " --connbytes-mode packets "),
+                                ProcessList$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("CONNMARK --set-mark "), 63),
+                                "",
+                                ipRestoreActionType));
             } else {
                 str4 = m2;
                 str6 = " from all fwmark ";
                 str5 = ";ip -6 rule add ";
                 str2 = " local default dev lo table ";
                 str8 = "ip -6 route add ";
-                arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str15, " ! -o lo -p udp -m state --state NEW -m connbytes --connbytes 1:1 --connbytes-dir original --connbytes-mode packets "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
+                arrayList.add(
+                        new IpRestoreParam(
+                                m,
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        " -m owner --uid-owner ",
+                                        str15,
+                                        " ! -o lo -p udp -m state --state NEW -m connbytes"
+                                            + " --connbytes 1:1 --connbytes-dir original"
+                                            + " --connbytes-mode packets "),
+                                ProcessList$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("CONNMARK --set-mark "), 63),
+                                "",
+                                ipRestoreActionType));
                 str7 = "*mangle";
             }
             str3 = str8;
@@ -710,14 +1219,56 @@ public final class KnoxNetworkFilterFirewall {
             str6 = " from all fwmark ";
             str7 = "*mangle";
             if (str.isEmpty()) {
-                arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str15, " ! -o lo -p udp -m state --state NEW "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
+                arrayList.add(
+                        new IpRestoreParam(
+                                m,
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        " -m owner --uid-owner ",
+                                        str15,
+                                        " ! -o lo -p udp -m state --state NEW "),
+                                ProcessList$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("CONNMARK --set-mark "), 63),
+                                "",
+                                ipRestoreActionType));
             } else {
-                arrayList.add(new IpRestoreParam(m, XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str15, " ! -o lo -p udp -m state --state NEW "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("CONNMARK --set-mark "), 63), "", ipRestoreActionType));
+                arrayList.add(
+                        new IpRestoreParam(
+                                m,
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        " -m owner --uid-owner ",
+                                        str15,
+                                        " ! -o lo -p udp -m state --state NEW "),
+                                ProcessList$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("CONNMARK --set-mark "), 63),
+                                "",
+                                ipRestoreActionType));
             }
         }
-        arrayList.add(new IpRestoreParam(m, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p udp -m connmark --mark "), 63), "CONNMARK --restore-mark", "", ipRestoreActionType));
-        arrayList.add(new IpRestoreParam(m, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p udp -m connmark --mark "), 63), "ACCEPT", "", ipRestoreActionType));
-        arrayList.add(new IpRestoreParam(str4, ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder(" -p udp -i lo -m mark --mark "), 63), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("TPROXY --on-port "), i2), "", ipRestoreActionType));
+        arrayList.add(
+                new IpRestoreParam(
+                        m,
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(" -p udp -m connmark --mark "), 63),
+                        "CONNMARK --restore-mark",
+                        "",
+                        ipRestoreActionType));
+        arrayList.add(
+                new IpRestoreParam(
+                        m,
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(" -p udp -m connmark --mark "), 63),
+                        "ACCEPT",
+                        "",
+                        ipRestoreActionType));
+        arrayList.add(
+                new IpRestoreParam(
+                        str4,
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(" -p udp -i lo -m mark --mark "), 63),
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("TPROXY --on-port "), i2),
+                        "",
+                        ipRestoreActionType));
         insertRules(6, str7, null, arrayList, true);
         StringBuilder sb2 = new StringBuilder(str3);
         sb2.append(str2 + Integer.toString(63));
@@ -732,9 +1283,23 @@ public final class KnoxNetworkFilterFirewall {
         ArrayList arrayList = new ArrayList();
         IpRestoreActionType ipRestoreActionType = IpRestoreActionType.INSERT;
         if (i == 0) {
-            arrayList.add(new IpRestoreParam(m, " -o lo -p udp --dport 53 -d 127.0.0.1", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("REDIRECT --to-port "), i2), "", ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            " -o lo -p udp --dport 53 -d 127.0.0.1",
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("REDIRECT --to-port "), i2),
+                            "",
+                            ipRestoreActionType));
         } else {
-            arrayList.add(new IpRestoreParam(m, " -o lo -p udp --dport 53 -d 127.0.0.2", ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("REDIRECT --to-port "), i2), "", ipRestoreActionType));
+            arrayList.add(
+                    new IpRestoreParam(
+                            m,
+                            " -o lo -p udp --dport 53 -d 127.0.0.2",
+                            ProcessList$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("REDIRECT --to-port "), i2),
+                            "",
+                            ipRestoreActionType));
         }
         insertRules(4, "*nat", null, arrayList, true);
     }
@@ -750,14 +1315,30 @@ public final class KnoxNetworkFilterFirewall {
         for (Map.Entry entry : hashMap.entrySet()) {
             Iterator it2 = ((List) entry.getValue()).iterator();
             while (it2.hasNext()) {
-                ((ArrayList) createTableHeaderCmd).add(parseIptablesRestoreCmd(new IpRestoreParam((String) entry.getKey(), "", (String) it2.next(), "", IpRestoreActionType.DELETE)));
+                ((ArrayList) createTableHeaderCmd)
+                        .add(
+                                parseIptablesRestoreCmd(
+                                        new IpRestoreParam(
+                                                (String) entry.getKey(),
+                                                "",
+                                                (String) it2.next(),
+                                                "",
+                                                IpRestoreActionType.DELETE)));
             }
         }
         Iterator it3 = hashMap.entrySet().iterator();
         while (it3.hasNext()) {
             Iterator it4 = ((List) ((Map.Entry) it3.next()).getValue()).iterator();
             while (it4.hasNext()) {
-                ((ArrayList) createTableHeaderCmd).add(parseIptablesRestoreCmd(new IpRestoreParam((String) it4.next(), null, null, null, IpRestoreActionType.REMOVE_CHAIN)));
+                ((ArrayList) createTableHeaderCmd)
+                        .add(
+                                parseIptablesRestoreCmd(
+                                        new IpRestoreParam(
+                                                (String) it4.next(),
+                                                null,
+                                                null,
+                                                null,
+                                                IpRestoreActionType.REMOVE_CHAIN)));
             }
         }
         ((ArrayList) createTableHeaderCmd).add("COMMIT\n");
@@ -776,7 +1357,15 @@ public final class KnoxNetworkFilterFirewall {
         }
         String str = UserHandle.getUserId(i) + "_knox_nwfilter_cp_rdt";
         ArrayList arrayList = new ArrayList();
-        arrayList.add(new IpRestoreParam(str, BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, " -m owner --uid-owner ", " -o lo -p tcp --dport 80 "), ProcessList$$ExternalSyntheticOutline0.m(new StringBuilder("REDIRECT --to-port "), i2), "", IpRestoreActionType.DELETE));
+        arrayList.add(
+                new IpRestoreParam(
+                        str,
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i, " -m owner --uid-owner ", " -o lo -p tcp --dport 80 "),
+                        ProcessList$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("REDIRECT --to-port "), i2),
+                        "",
+                        IpRestoreActionType.DELETE));
         insertRules(4, "*nat", null, arrayList, true);
     }
 
@@ -785,10 +1374,16 @@ public final class KnoxNetworkFilterFirewall {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                Log.d("knoxNwFilter-KnoxNetworkFilterFirewall", "testing: command " + join + "target " + i);
-                INetworkManagementService.Stub.asInterface(ServiceManager.getService("network_management")).runKnoxFirewallRulesCommand(i, join);
+                Log.d(
+                        "knoxNwFilter-KnoxNetworkFilterFirewall",
+                        "testing: command " + join + "target " + i);
+                INetworkManagementService.Stub.asInterface(
+                                ServiceManager.getService("network_management"))
+                        .runKnoxFirewallRulesCommand(i, join);
             } catch (Exception e) {
-                Log.e("knoxNwFilter-KnoxNetworkFilterFirewall", "Failed to run cmd: " + e.getMessage());
+                Log.e(
+                        "knoxNwFilter-KnoxNetworkFilterFirewall",
+                        "Failed to run cmd: " + e.getMessage());
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -801,15 +1396,26 @@ public final class KnoxNetworkFilterFirewall {
         try {
             try {
                 Map map = NetdHelper.allowedCommands;
-                split = (str == null || str.isEmpty()) ? null : str.trim().split(NetdHelper.CMD_DELIMITER);
+                split =
+                        (str == null || str.isEmpty())
+                                ? null
+                                : str.trim().split(NetdHelper.CMD_DELIMITER);
             } catch (RemoteException e) {
-                Log.e("knoxNwFilter-KnoxNetworkFilterFirewall", "runSingleCommand error " + e.getMessage());
+                Log.e(
+                        "knoxNwFilter-KnoxNetworkFilterFirewall",
+                        "runSingleCommand error " + e.getMessage());
             }
             if (split == null) {
-                Log.e("knoxNwFilter-KnoxNetworkFilterFirewall", "Error splitting commands " + split);
+                Log.e(
+                        "knoxNwFilter-KnoxNetworkFilterFirewall",
+                        "Error splitting commands " + split);
             } else {
                 for (String str2 : split) {
-                    INetworkManagementService.Stub.asInterface(ServiceManager.getService("network_management")).runKnoxRulesCommand(NetdHelper.getCmdNumber(str2).intValue(), NetdHelper.getCmdParams(str2));
+                    INetworkManagementService.Stub.asInterface(
+                                    ServiceManager.getService("network_management"))
+                            .runKnoxRulesCommand(
+                                    NetdHelper.getCmdNumber(str2).intValue(),
+                                    NetdHelper.getCmdParams(str2));
                 }
             }
         } finally {
@@ -835,7 +1441,9 @@ public final class KnoxNetworkFilterFirewall {
             if (asInterface != null) {
                 z = asInterface.isAlive();
                 if (!z) {
-                    Log.e("knoxNwFilter-KnoxNetworkFilterFirewall", "Can't connect to NativeNetdService netd");
+                    Log.e(
+                            "knoxNwFilter-KnoxNetworkFilterFirewall",
+                            "Can't connect to NativeNetdService netd");
                 }
             }
         }
@@ -844,7 +1452,10 @@ public final class KnoxNetworkFilterFirewall {
             try {
                 this.mOemNetdService = IOemNetd.Stub.asInterface(iNetd.getOemNetd());
             } catch (RemoteException e) {
-                ActivityManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Failed to get OemNetd listener "), "knoxNwFilter-KnoxNetworkFilterFirewall");
+                ActivityManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("Failed to get OemNetd listener "),
+                        "knoxNwFilter-KnoxNetworkFilterFirewall");
             }
         }
         return this.mOemNetdService;

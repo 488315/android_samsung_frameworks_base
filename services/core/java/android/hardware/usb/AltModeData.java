@@ -29,9 +29,13 @@ public final class AltModeData implements Parcelable {
                     AltModeData altModeData = new AltModeData();
                     int readInt = parcel.readInt();
                     if (readInt != 0) {
-                        throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(readInt, "union: unknown tag: "));
+                        throw new IllegalArgumentException(
+                                VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                        readInt, "union: unknown tag: "));
                     }
-                    DisplayPortAltModeData displayPortAltModeData = (DisplayPortAltModeData) parcel.readTypedObject(DisplayPortAltModeData.CREATOR);
+                    DisplayPortAltModeData displayPortAltModeData =
+                            (DisplayPortAltModeData)
+                                    parcel.readTypedObject(DisplayPortAltModeData.CREATOR);
                     altModeData._tag = readInt;
                     altModeData._value = displayPortAltModeData;
                     return altModeData;
@@ -57,21 +61,27 @@ public final class AltModeData implements Parcelable {
                                     if (parcel.dataPosition() - dataPosition < readInt2) {
                                         displayPortAltModeData2.hpd = parcel.readBoolean();
                                         if (parcel.dataPosition() - dataPosition < readInt2) {
-                                            displayPortAltModeData2.linkTrainingStatus = parcel.readInt();
+                                            displayPortAltModeData2.linkTrainingStatus =
+                                                    parcel.readInt();
                                             if (dataPosition > Integer.MAX_VALUE - readInt2) {
-                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                throw new BadParcelableException(
+                                                        "Overflow in the size of parcelable");
                                             }
                                         } else if (dataPosition > Integer.MAX_VALUE - readInt2) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else if (dataPosition > Integer.MAX_VALUE - readInt2) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt2) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt2) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt2) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -125,7 +135,9 @@ public final class AltModeData implements Parcelable {
             parcel.writeInt(this.cableStatus);
             parcel.writeInt(this.pinAssignment);
             parcel.writeBoolean(this.hpd);
-            int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.linkTrainingStatus, dataPosition);
+            int m =
+                    SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                            parcel, this.linkTrainingStatus, dataPosition);
             SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
         }
     }
@@ -145,9 +157,11 @@ public final class AltModeData implements Parcelable {
         }
         int i = this._tag;
         if (i == 0) {
-            throw new IllegalStateException("bad access: displayPortAltModeData, displayPortAltModeData is available.");
+            throw new IllegalStateException(
+                    "bad access: displayPortAltModeData, displayPortAltModeData is available.");
         }
-        throw new IllegalStateException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "unknown field: "));
+        throw new IllegalStateException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "unknown field: "));
     }
 
     public final int getStability() {

@@ -5,8 +5,7 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.view.Display;
-import com.android.server.display.DisplayManagerService;
-import com.android.server.display.DisplayPowerController;
+
 import com.android.server.power.PowerManagerUtil;
 import com.android.server.power.Slog;
 
@@ -29,16 +28,17 @@ public final class EarlyWakeUpManager {
     public final Object mEarlyWakeUpLock = new Object();
     public boolean mEarlyLightSensorReadyLocked = true;
     public boolean mEarlyDisplayReadyLocked = true;
-    public final AnonymousClass1 mEarlyLightSensorReadyListener = new Runnable() { // from class: com.android.server.display.EarlyWakeUpManager.1
-        @Override // java.lang.Runnable
-        public final void run() {
-            synchronized (EarlyWakeUpManager.this.mEarlyWakeUpLock) {
-                EarlyWakeUpManager earlyWakeUpManager = EarlyWakeUpManager.this;
-                earlyWakeUpManager.mEarlyLightSensorReadyLocked = true;
-                earlyWakeUpManager.updateSuspendBlockerLocked();
-            }
-        }
-    };
+    public final AnonymousClass1 mEarlyLightSensorReadyListener =
+            new Runnable() { // from class: com.android.server.display.EarlyWakeUpManager.1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    synchronized (EarlyWakeUpManager.this.mEarlyWakeUpLock) {
+                        EarlyWakeUpManager earlyWakeUpManager = EarlyWakeUpManager.this;
+                        earlyWakeUpManager.mEarlyLightSensorReadyLocked = true;
+                        earlyWakeUpManager.updateSuspendBlockerLocked();
+                    }
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EarlyWakeUpHandler extends Handler {
@@ -58,7 +58,13 @@ public final class EarlyWakeUpManager {
     }
 
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.display.EarlyWakeUpManager$1] */
-    public EarlyWakeUpManager(String str, int i, DisplayPowerController.AnonymousClass4 anonymousClass4, DisplayBlanker displayBlanker, AutomaticBrightnessController automaticBrightnessController, WakelockController wakelockController) {
+    public EarlyWakeUpManager(
+            String str,
+            int i,
+            DisplayPowerController.AnonymousClass4 anonymousClass4,
+            DisplayBlanker displayBlanker,
+            AutomaticBrightnessController automaticBrightnessController,
+            WakelockController wakelockController) {
         this.mTag = str;
         this.mDisplayId = i;
         this.mCallbacks = anonymousClass4;
@@ -78,53 +84,81 @@ public final class EarlyWakeUpManager {
         if (z == this.mEarlyDisplayEnabled) {
             return;
         }
-        if (z && (Display.isDozeState(i) || PowerManagerUtil.SECURITY_FINGERPRINT_IN_DISPLAY || PowerManagerUtil.SEC_FEATURE_SUPPORT_AOD_LIVE_CLOCK)) {
+        if (z
+                && (Display.isDozeState(i)
+                        || PowerManagerUtil.SECURITY_FINGERPRINT_IN_DISPLAY
+                        || PowerManagerUtil.SEC_FEATURE_SUPPORT_AOD_LIVE_CLOCK)) {
             return;
         }
         this.mEarlyDisplayEnabled = z;
         this.mEarlyDisplayReadyLocked = false;
-        this.mHandler.post(new Runnable() { // from class: com.android.server.display.EarlyWakeUpManager$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                EarlyWakeUpManager earlyWakeUpManager = EarlyWakeUpManager.this;
-                boolean z2 = z;
-                earlyWakeUpManager.getClass();
-                int i2 = z2 ? 2 : 0;
-                DisplayBlanker displayBlanker = earlyWakeUpManager.mBlanker;
-                int i3 = earlyWakeUpManager.mDisplayId;
-                DisplayManagerService.AnonymousClass1 anonymousClass1 = (DisplayManagerService.AnonymousClass1) displayBlanker;
-                synchronized (anonymousClass1) {
-                    synchronized (DisplayManagerService.this.mRequestDisplayStateLock) {
-                        try {
-                            synchronized (DisplayManagerService.this.mSyncRoot) {
-                                int indexOfKey = DisplayManagerService.this.mDisplayStateOverrides.indexOfKey(i3);
-                                if (DisplayManagerService.this.mDisplayStateOverrides.valueAt(indexOfKey) != i2) {
-                                    Slog.d("DisplayManagerService", "setDisplayStateOverrideForEarlyWakeUp : stateOverride=" + Display.stateToString(i2) + " displayId=" + i3);
-                                    DisplayManagerService.this.mDisplayStateOverrides.setValueAt(indexOfKey, i2);
-                                    DisplayManagerService displayManagerService = DisplayManagerService.this;
-                                    Runnable updateDisplayStateLocked = displayManagerService.updateDisplayStateLocked(displayManagerService.mLogicalDisplayMapper.getDisplayLocked(i3, true).mPrimaryDisplayDevice);
-                                    if (updateDisplayStateLocked != null) {
-                                        updateDisplayStateLocked.run();
+        this.mHandler.post(
+                new Runnable() { // from class:
+                    // com.android.server.display.EarlyWakeUpManager$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        EarlyWakeUpManager earlyWakeUpManager = EarlyWakeUpManager.this;
+                        boolean z2 = z;
+                        earlyWakeUpManager.getClass();
+                        int i2 = z2 ? 2 : 0;
+                        DisplayBlanker displayBlanker = earlyWakeUpManager.mBlanker;
+                        int i3 = earlyWakeUpManager.mDisplayId;
+                        DisplayManagerService.AnonymousClass1 anonymousClass1 =
+                                (DisplayManagerService.AnonymousClass1) displayBlanker;
+                        synchronized (anonymousClass1) {
+                            synchronized (DisplayManagerService.this.mRequestDisplayStateLock) {
+                                try {
+                                    synchronized (DisplayManagerService.this.mSyncRoot) {
+                                        int indexOfKey =
+                                                DisplayManagerService.this.mDisplayStateOverrides
+                                                        .indexOfKey(i3);
+                                        if (DisplayManagerService.this.mDisplayStateOverrides
+                                                        .valueAt(indexOfKey)
+                                                != i2) {
+                                            Slog.d(
+                                                    "DisplayManagerService",
+                                                    "setDisplayStateOverrideForEarlyWakeUp :"
+                                                        + " stateOverride="
+                                                            + Display.stateToString(i2)
+                                                            + " displayId="
+                                                            + i3);
+                                            DisplayManagerService.this.mDisplayStateOverrides
+                                                    .setValueAt(indexOfKey, i2);
+                                            DisplayManagerService displayManagerService =
+                                                    DisplayManagerService.this;
+                                            Runnable updateDisplayStateLocked =
+                                                    displayManagerService.updateDisplayStateLocked(
+                                                            displayManagerService
+                                                                    .mLogicalDisplayMapper
+                                                                    .getDisplayLocked(i3, true)
+                                                                    .mPrimaryDisplayDevice);
+                                            if (updateDisplayStateLocked != null) {
+                                                updateDisplayStateLocked.run();
+                                            }
+                                        } else {
+                                            Slog.d(
+                                                    "DisplayManagerService",
+                                                    "setDisplayStateOverrideForEarlyWakeUp:"
+                                                        + " sameRequest "
+                                                            + Display.stateToString(i2));
+                                        }
                                     }
-                                } else {
-                                    Slog.d("DisplayManagerService", "setDisplayStateOverrideForEarlyWakeUp: sameRequest " + Display.stateToString(i2));
+                                } catch (Throwable th) {
+                                    throw th;
                                 }
                             }
-                        } catch (Throwable th) {
-                            throw th;
+                        }
+                        synchronized (earlyWakeUpManager.mEarlyWakeUpLock) {
+                            earlyWakeUpManager.mEarlyDisplayReadyLocked = true;
+                            earlyWakeUpManager.updateSuspendBlockerLocked();
                         }
                     }
-                }
-                synchronized (earlyWakeUpManager.mEarlyWakeUpLock) {
-                    earlyWakeUpManager.mEarlyDisplayReadyLocked = true;
-                    earlyWakeUpManager.updateSuspendBlockerLocked();
-                }
-            }
-        });
+                });
     }
 
     public final void setEarlyLightSensorEnabledLocked(boolean z, boolean z2, boolean z3) {
-        AutomaticBrightnessController automaticBrightnessController = this.mAutomaticBrightnessController;
+        AutomaticBrightnessController automaticBrightnessController =
+                this.mAutomaticBrightnessController;
         if (automaticBrightnessController == null) {
             return;
         }
@@ -135,7 +169,8 @@ public final class EarlyWakeUpManager {
         this.mEarlyLightSensorReadyLocked = false;
         if (z != automaticBrightnessController.mShouldApplyEarlyWakeUp) {
             automaticBrightnessController.mShouldApplyEarlyWakeUp = z;
-            automaticBrightnessController.mPendingEarlyLightSensorReadyListener = this.mEarlyLightSensorReadyListener;
+            automaticBrightnessController.mPendingEarlyLightSensorReadyListener =
+                    this.mEarlyLightSensorReadyListener;
         }
     }
 
@@ -230,7 +265,9 @@ public final class EarlyWakeUpManager {
             monitor-exit(r1)     // Catch: java.lang.Throwable -> L42
             throw r11
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.EarlyWakeUpManager.update(int, boolean, boolean, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.display.EarlyWakeUpManager.update(int,"
+                    + " boolean, boolean, boolean):void");
     }
 
     public final void updateSuspendBlockerLocked() {

@@ -4,25 +4,28 @@ import android.annotation.SystemApi;
 import android.content.IntentFilter;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class InstantAppIntentFilter implements Parcelable {
-    public static final Parcelable.Creator<InstantAppIntentFilter> CREATOR = new Parcelable.Creator<InstantAppIntentFilter>() { // from class: android.content.pm.InstantAppIntentFilter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstantAppIntentFilter createFromParcel(Parcel in) {
-            return new InstantAppIntentFilter(in);
-        }
+    public static final Parcelable.Creator<InstantAppIntentFilter> CREATOR =
+            new Parcelable.Creator<InstantAppIntentFilter>() { // from class:
+                // android.content.pm.InstantAppIntentFilter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstantAppIntentFilter createFromParcel(Parcel in) {
+                    return new InstantAppIntentFilter(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstantAppIntentFilter[] newArray(int size) {
-            return new InstantAppIntentFilter[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstantAppIntentFilter[] newArray(int size) {
+                    return new InstantAppIntentFilter[size];
+                }
+            };
     private final List<IntentFilter> mFilters = new ArrayList();
     private final String mSplitName;
 

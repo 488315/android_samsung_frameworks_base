@@ -7,8 +7,7 @@ public class SimpleScheduler extends Scheduler {
     }
 
     @Override // android.filterfw.core.Scheduler
-    public void reset() {
-    }
+    public void reset() {}
 
     @Override // android.filterfw.core.Scheduler
     public Filter scheduleNextNode() {

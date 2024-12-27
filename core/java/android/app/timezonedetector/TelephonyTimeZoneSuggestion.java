@@ -8,6 +8,7 @@ import android.speech.tts.TextToSpeech;
 import android.telecom.Logging.Session;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -18,19 +19,21 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class TelephonyTimeZoneSuggestion implements Parcelable {
-    public static final Parcelable.Creator<TelephonyTimeZoneSuggestion> CREATOR = new Parcelable.Creator<TelephonyTimeZoneSuggestion>() { // from class: android.app.timezonedetector.TelephonyTimeZoneSuggestion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelephonyTimeZoneSuggestion createFromParcel(Parcel in) {
-            return TelephonyTimeZoneSuggestion.createFromParcel(in);
-        }
+    public static final Parcelable.Creator<TelephonyTimeZoneSuggestion> CREATOR =
+            new Parcelable.Creator<TelephonyTimeZoneSuggestion>() { // from class:
+                // android.app.timezonedetector.TelephonyTimeZoneSuggestion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelephonyTimeZoneSuggestion createFromParcel(Parcel in) {
+                    return TelephonyTimeZoneSuggestion.createFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelephonyTimeZoneSuggestion[] newArray(int size) {
-            return new TelephonyTimeZoneSuggestion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelephonyTimeZoneSuggestion[] newArray(int size) {
+                    return new TelephonyTimeZoneSuggestion[size];
+                }
+            };
     public static final int MATCH_TYPE_EMULATOR_ZONE_ID = 4;
     public static final int MATCH_TYPE_NA = 0;
     public static final int MATCH_TYPE_NETWORK_COUNTRY_AND_OFFSET = 3;
@@ -48,14 +51,13 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
     private final String mZoneId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MatchType {
-    }
+    public @interface MatchType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Quality {
-    }
+    public @interface Quality {}
 
-    public static TelephonyTimeZoneSuggestion createEmptySuggestion(int slotIndex, String debugInfo) {
+    public static TelephonyTimeZoneSuggestion createEmptySuggestion(
+            int slotIndex, String debugInfo) {
         return new Builder(slotIndex).addDebugInfo(debugInfo).build();
     }
 
@@ -71,8 +73,14 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
     /* JADX INFO: Access modifiers changed from: private */
     public static TelephonyTimeZoneSuggestion createFromParcel(Parcel in) {
         int slotIndex = in.readInt();
-        TelephonyTimeZoneSuggestion suggestion = new Builder(slotIndex).setZoneId(in.readString()).setMatchType(in.readInt()).setQuality(in.readInt()).build();
-        List<String> debugInfo = in.readArrayList(TelephonyTimeZoneSuggestion.class.getClassLoader(), String.class);
+        TelephonyTimeZoneSuggestion suggestion =
+                new Builder(slotIndex)
+                        .setZoneId(in.readString())
+                        .setMatchType(in.readInt())
+                        .setQuality(in.readInt())
+                        .build();
+        List<String> debugInfo =
+                in.readArrayList(TelephonyTimeZoneSuggestion.class.getClassLoader(), String.class);
         if (debugInfo != null) {
             suggestion.addDebugInfo(debugInfo);
         }
@@ -112,7 +120,9 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
     }
 
     public List<String> getDebugInfo() {
-        return this.mDebugInfo == null ? Collections.emptyList() : Collections.unmodifiableList(this.mDebugInfo);
+        return this.mDebugInfo == null
+                ? Collections.emptyList()
+                : Collections.unmodifiableList(this.mDebugInfo);
     }
 
     public void addDebugInfo(String debugInfo) {
@@ -137,18 +147,39 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
             return false;
         }
         TelephonyTimeZoneSuggestion that = (TelephonyTimeZoneSuggestion) o;
-        if (this.mSlotIndex == that.mSlotIndex && this.mMatchType == that.mMatchType && this.mQuality == that.mQuality && this.mCountryIso == that.mCountryIso && Objects.equals(this.mZoneId, that.mZoneId)) {
+        if (this.mSlotIndex == that.mSlotIndex
+                && this.mMatchType == that.mMatchType
+                && this.mQuality == that.mQuality
+                && this.mCountryIso == that.mCountryIso
+                && Objects.equals(this.mZoneId, that.mZoneId)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mSlotIndex), this.mZoneId, Integer.valueOf(this.mMatchType), Integer.valueOf(this.mQuality));
+        return Objects.hash(
+                Integer.valueOf(this.mSlotIndex),
+                this.mZoneId,
+                Integer.valueOf(this.mMatchType),
+                Integer.valueOf(this.mQuality));
     }
 
     public String toString() {
-        return "TelephonyTimeZoneSuggestion{mSlotIndex=" + this.mSlotIndex + ", mZoneId='" + this.mZoneId + DateFormat.QUOTE + ", mMatchType=" + this.mMatchType + ", mQuality=" + this.mQuality + ", mDebugInfo=" + this.mDebugInfo + ", mCountryIso=" + this.mCountryIso + '}';
+        return "TelephonyTimeZoneSuggestion{mSlotIndex="
+                + this.mSlotIndex
+                + ", mZoneId='"
+                + this.mZoneId
+                + DateFormat.QUOTE
+                + ", mMatchType="
+                + this.mMatchType
+                + ", mQuality="
+                + this.mQuality
+                + ", mDebugInfo="
+                + this.mDebugInfo
+                + ", mCountryIso="
+                + this.mCountryIso
+                + '}';
     }
 
     public static final class Builder {
@@ -190,13 +221,22 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
             int matchType = this.mMatchType;
             if (this.mZoneId == null) {
                 if (quality != 0 || matchType != 0) {
-                    throw new RuntimeException("Invalid quality or match type for null zone ID. quality=" + quality + ", matchType=" + matchType);
+                    throw new RuntimeException(
+                            "Invalid quality or match type for null zone ID. quality="
+                                    + quality
+                                    + ", matchType="
+                                    + matchType);
                 }
             } else {
                 boolean qualityValid = quality == 1 || quality == 2 || quality == 3;
-                boolean matchTypeValid = matchType == 2 || matchType == 3 || matchType == 4 || matchType == 5;
+                boolean matchTypeValid =
+                        matchType == 2 || matchType == 3 || matchType == 4 || matchType == 5;
                 if (!qualityValid || !matchTypeValid) {
-                    throw new RuntimeException("Invalid quality or match type with zone ID. quality=" + quality + ", matchType=" + matchType);
+                    throw new RuntimeException(
+                            "Invalid quality or match type with zone ID. quality="
+                                    + quality
+                                    + ", matchType="
+                                    + matchType);
                 }
             }
         }
@@ -208,7 +248,8 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    public static TelephonyTimeZoneSuggestion parseCommandLineArg(ShellCommand cmd) throws IllegalArgumentException {
+    public static TelephonyTimeZoneSuggestion parseCommandLineArg(ShellCommand cmd)
+            throws IllegalArgumentException {
         char c;
         Integer slotIndex = null;
         String zoneId = null;
@@ -258,10 +299,14 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
                         zoneId = cmd.getNextArgRequired();
                         break;
                     case 2:
-                        quality = Integer.valueOf(parseQualityCommandLineArg(cmd.getNextArgRequired()));
+                        quality =
+                                Integer.valueOf(
+                                        parseQualityCommandLineArg(cmd.getNextArgRequired()));
                         break;
                     case 3:
-                        matchType = Integer.valueOf(parseMatchTypeCommandLineArg(cmd.getNextArgRequired()));
+                        matchType =
+                                Integer.valueOf(
+                                        parseMatchTypeCommandLineArg(cmd.getNextArgRequired()));
                         break;
                     default:
                         throw new IllegalArgumentException("Unknown option: " + opt);
@@ -271,7 +316,8 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
                     throw new IllegalArgumentException("No slotIndex specified.");
                 }
                 Builder builder = new Builder(slotIndex.intValue());
-                if (!TextUtils.isEmpty(zoneId) && !Session.SESSION_SEPARATION_CHAR_CHILD.equals(zoneId)) {
+                if (!TextUtils.isEmpty(zoneId)
+                        && !Session.SESSION_SEPARATION_CHAR_CHILD.equals(zoneId)) {
                     builder.setZoneId(zoneId);
                 }
                 if (quality != null) {

@@ -15,8 +15,7 @@ public class Recolor extends Transition {
     private static final String PROPNAME_BACKGROUND = "android:recolor:background";
     private static final String PROPNAME_TEXT_COLOR = "android:recolor:textColor";
 
-    public Recolor() {
-    }
+    public Recolor() {}
 
     public Recolor(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -25,7 +24,9 @@ public class Recolor extends Transition {
     private void captureValues(TransitionValues transitionValues) {
         transitionValues.values.put(PROPNAME_BACKGROUND, transitionValues.view.getBackground());
         if (transitionValues.view instanceof TextView) {
-            transitionValues.values.put(PROPNAME_TEXT_COLOR, Integer.valueOf(((TextView) transitionValues.view).getCurrentTextColor()));
+            transitionValues.values.put(
+                    PROPNAME_TEXT_COLOR,
+                    Integer.valueOf(((TextView) transitionValues.view).getCurrentTextColor()));
         }
     }
 
@@ -40,19 +41,22 @@ public class Recolor extends Transition {
     }
 
     @Override // android.transition.Transition
-    public Animator createAnimator(ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
+    public Animator createAnimator(
+            ViewGroup sceneRoot, TransitionValues startValues, TransitionValues endValues) {
         if (startValues == null || endValues == null) {
             return null;
         }
         View view = endValues.view;
         Drawable startBackground = (Drawable) startValues.values.get(PROPNAME_BACKGROUND);
         Drawable endBackground = (Drawable) endValues.values.get(PROPNAME_BACKGROUND);
-        if ((startBackground instanceof ColorDrawable) && (endBackground instanceof ColorDrawable)) {
+        if ((startBackground instanceof ColorDrawable)
+                && (endBackground instanceof ColorDrawable)) {
             ColorDrawable startColor = (ColorDrawable) startBackground;
             ColorDrawable endColor = (ColorDrawable) endBackground;
             if (startColor.getColor() != endColor.getColor()) {
                 endColor.setColor(startColor.getColor());
-                return ObjectAnimator.ofArgb(endBackground, "color", startColor.getColor(), endColor.getColor());
+                return ObjectAnimator.ofArgb(
+                        endBackground, "color", startColor.getColor(), endColor.getColor());
             }
         }
         if (view instanceof TextView) {

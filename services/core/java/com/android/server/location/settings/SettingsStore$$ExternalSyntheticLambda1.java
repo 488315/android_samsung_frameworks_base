@@ -1,6 +1,7 @@
 package com.android.server.location.settings;
 
 import android.util.Log;
+
 import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,7 +14,8 @@ public final /* synthetic */ class SettingsStore$$ExternalSyntheticLambda1 imple
     public final /* synthetic */ SettingsStore f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ SettingsStore$$ExternalSyntheticLambda1(SettingsStore settingsStore, Object obj, int i) {
+    public /* synthetic */ SettingsStore$$ExternalSyntheticLambda1(
+            SettingsStore settingsStore, Object obj, int i) {
         this.$r8$classId = i;
         this.f$0 = settingsStore;
         this.f$1 = obj;

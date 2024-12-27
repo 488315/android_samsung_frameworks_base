@@ -5,21 +5,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class SmartClipRemoteRequestInfo implements Parcelable {
-    public static final Parcelable.Creator<SmartClipRemoteRequestInfo> CREATOR = new Parcelable.Creator<SmartClipRemoteRequestInfo>() { // from class: com.samsung.android.content.smartclip.SmartClipRemoteRequestInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartClipRemoteRequestInfo createFromParcel(Parcel in) {
-            SmartClipRemoteRequestInfo data = new SmartClipRemoteRequestInfo();
-            data.readFromParcel(in);
-            return data;
-        }
+    public static final Parcelable.Creator<SmartClipRemoteRequestInfo> CREATOR =
+            new Parcelable.Creator<
+                    SmartClipRemoteRequestInfo>() { // from class:
+                                                    // com.samsung.android.content.smartclip.SmartClipRemoteRequestInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartClipRemoteRequestInfo createFromParcel(Parcel in) {
+                    SmartClipRemoteRequestInfo data = new SmartClipRemoteRequestInfo();
+                    data.readFromParcel(in);
+                    return data;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SmartClipRemoteRequestInfo[] newArray(int size) {
-            return new SmartClipRemoteRequestInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SmartClipRemoteRequestInfo[] newArray(int size) {
+                    return new SmartClipRemoteRequestInfo[size];
+                }
+            };
     public static final int REQUEST_TYPE_AIR_BUTTON_HIT_TEST = 2;
     public static final int REQUEST_TYPE_INJECT_INPUT_EVENT = 3;
     public static final int REQUEST_TYPE_INVALID = 0;
@@ -46,7 +49,8 @@ public class SmartClipRemoteRequestInfo implements Parcelable {
         this.mTargetWindowLayer = -1;
     }
 
-    public SmartClipRemoteRequestInfo(int requestId, int requestType, int windowTargetingType, Parcelable requestData) {
+    public SmartClipRemoteRequestInfo(
+            int requestId, int requestType, int windowTargetingType, Parcelable requestData) {
         this.mCallerPid = 0;
         this.mCallerUid = 0;
         this.mRequestId = 0;

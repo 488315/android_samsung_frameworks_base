@@ -12,12 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.android.internal.R;
-import com.android.internal.app.AbstractMultiProfilePagerAdapter;
-import com.android.internal.app.ResolverActivity;
 import com.android.internal.widget.PagerAdapter;
 import com.android.internal.widget.ViewPager;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -49,8 +50,7 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
         void onSwitchOnWorkSelected();
     }
 
-    @interface Profile {
-    }
+    @interface Profile {}
 
     public interface QuietModeManager {
         boolean isQuietModeEnabled(UserHandle userHandle);
@@ -86,7 +86,13 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
 
     abstract void setupListAdapter(int i);
 
-    AbstractMultiProfilePagerAdapter(Context context, int currentPage, EmptyStateProvider emptyStateProvider, QuietModeManager quietModeManager, UserHandle workProfileUserHandle, UserHandle cloneUserHandle) {
+    AbstractMultiProfilePagerAdapter(
+            Context context,
+            int currentPage,
+            EmptyStateProvider emptyStateProvider,
+            QuietModeManager quietModeManager,
+            UserHandle workProfileUserHandle,
+            UserHandle cloneUserHandle) {
         this.mContext = (Context) Objects.requireNonNull(context);
         this.mCurrentPage = currentPage;
         this.mWorkProfileUserHandle = workProfileUserHandle;
@@ -108,27 +114,38 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
     }
 
     void setupViewPager(ViewPager viewPager) {
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() { // from class: com.android.internal.app.AbstractMultiProfilePagerAdapter.1
-            @Override // com.android.internal.widget.ViewPager.SimpleOnPageChangeListener, com.android.internal.widget.ViewPager.OnPageChangeListener
-            public void onPageSelected(int position) {
-                AbstractMultiProfilePagerAdapter.this.semSetNeedSortingInRebuildList(true);
-                AbstractMultiProfilePagerAdapter.this.mCurrentPage = position;
-                if (!AbstractMultiProfilePagerAdapter.this.mLoadedPages.contains(Integer.valueOf(position))) {
-                    AbstractMultiProfilePagerAdapter.this.rebuildActiveTab(true);
-                    AbstractMultiProfilePagerAdapter.this.mLoadedPages.add(Integer.valueOf(position));
-                }
-                if (AbstractMultiProfilePagerAdapter.this.mOnProfileSelectedListener != null) {
-                    AbstractMultiProfilePagerAdapter.this.mOnProfileSelectedListener.onProfileSelected(position);
-                }
-            }
+        viewPager.setOnPageChangeListener(
+                new ViewPager
+                        .SimpleOnPageChangeListener() { // from class:
+                                                        // com.android.internal.app.AbstractMultiProfilePagerAdapter.1
+                    @Override // com.android.internal.widget.ViewPager.SimpleOnPageChangeListener,
+                              // com.android.internal.widget.ViewPager.OnPageChangeListener
+                    public void onPageSelected(int position) {
+                        AbstractMultiProfilePagerAdapter.this.semSetNeedSortingInRebuildList(true);
+                        AbstractMultiProfilePagerAdapter.this.mCurrentPage = position;
+                        if (!AbstractMultiProfilePagerAdapter.this.mLoadedPages.contains(
+                                Integer.valueOf(position))) {
+                            AbstractMultiProfilePagerAdapter.this.rebuildActiveTab(true);
+                            AbstractMultiProfilePagerAdapter.this.mLoadedPages.add(
+                                    Integer.valueOf(position));
+                        }
+                        if (AbstractMultiProfilePagerAdapter.this.mOnProfileSelectedListener
+                                != null) {
+                            AbstractMultiProfilePagerAdapter.this.mOnProfileSelectedListener
+                                    .onProfileSelected(position);
+                        }
+                    }
 
-            @Override // com.android.internal.widget.ViewPager.SimpleOnPageChangeListener, com.android.internal.widget.ViewPager.OnPageChangeListener
-            public void onPageScrollStateChanged(int state) {
-                if (AbstractMultiProfilePagerAdapter.this.mOnProfileSelectedListener != null) {
-                    AbstractMultiProfilePagerAdapter.this.mOnProfileSelectedListener.onProfilePageStateChanged(state);
-                }
-            }
-        });
+                    @Override // com.android.internal.widget.ViewPager.SimpleOnPageChangeListener,
+                              // com.android.internal.widget.ViewPager.OnPageChangeListener
+                    public void onPageScrollStateChanged(int state) {
+                        if (AbstractMultiProfilePagerAdapter.this.mOnProfileSelectedListener
+                                != null) {
+                            AbstractMultiProfilePagerAdapter.this.mOnProfileSelectedListener
+                                    .onProfilePageStateChanged(state);
+                        }
+                    }
+                });
         viewPager.setAdapter(this);
         viewPager.setCurrentItem(this.mCurrentPage);
         this.mLoadedPages.add(Integer.valueOf(this.mCurrentPage));
@@ -226,28 +243,41 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
         emptyState.onEmptyStateShown();
         View.OnClickListener clickListener = null;
         if (emptyState.getButtonClickListener() != null) {
-            clickListener = new View.OnClickListener() { // from class: com.android.internal.app.AbstractMultiProfilePagerAdapter$$ExternalSyntheticLambda0
-                @Override // android.view.View.OnClickListener
-                public final void onClick(View view) {
-                    AbstractMultiProfilePagerAdapter.this.lambda$showEmptyResolverListEmptyState$1(emptyState, listAdapter, view);
-                }
-            };
+            clickListener =
+                    new View
+                            .OnClickListener() { // from class:
+                                                 // com.android.internal.app.AbstractMultiProfilePagerAdapter$$ExternalSyntheticLambda0
+                        @Override // android.view.View.OnClickListener
+                        public final void onClick(View view) {
+                            AbstractMultiProfilePagerAdapter.this
+                                    .lambda$showEmptyResolverListEmptyState$1(
+                                            emptyState, listAdapter, view);
+                        }
+                    };
         }
         showEmptyState(listAdapter, emptyState, clickListener);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$showEmptyResolverListEmptyState$1(EmptyState emptyState, final ResolverListAdapter listAdapter, View v) {
-        emptyState.getButtonClickListener().onClick(new EmptyState.TabControl() { // from class: com.android.internal.app.AbstractMultiProfilePagerAdapter$$ExternalSyntheticLambda1
-            @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter.EmptyState.TabControl
-            public final void showSpinner() {
-                AbstractMultiProfilePagerAdapter.this.lambda$showEmptyResolverListEmptyState$0(listAdapter);
-            }
-        });
+    public /* synthetic */ void lambda$showEmptyResolverListEmptyState$1(
+            EmptyState emptyState, final ResolverListAdapter listAdapter, View v) {
+        emptyState
+                .getButtonClickListener()
+                .onClick(
+                        new EmptyState
+                                .TabControl() { // from class:
+                                                // com.android.internal.app.AbstractMultiProfilePagerAdapter$$ExternalSyntheticLambda1
+                            @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter.EmptyState.TabControl
+                            public final void showSpinner() {
+                                AbstractMultiProfilePagerAdapter.this
+                                        .lambda$showEmptyResolverListEmptyState$0(listAdapter);
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$showEmptyResolverListEmptyState$0(ResolverListAdapter listAdapter) {
+    public /* synthetic */ void lambda$showEmptyResolverListEmptyState$0(
+            ResolverListAdapter listAdapter) {
         ProfileDescriptor descriptor = getItem(userHandleToPageIndex(listAdapter.getUserHandle()));
         showSpinner(descriptor.getEmptyStateView());
     }
@@ -265,33 +295,52 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
             this.mContentResolver = contentResolver;
         }
 
-        public boolean hasCrossProfileIntents(List<Intent> intents, final int source, final int target) {
+        public boolean hasCrossProfileIntents(
+                List<Intent> intents, final int source, final int target) {
             final IPackageManager packageManager = AppGlobals.getPackageManager();
-            return intents.stream().anyMatch(new Predicate() { // from class: com.android.internal.app.AbstractMultiProfilePagerAdapter$CrossProfileIntentsChecker$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    boolean lambda$hasCrossProfileIntents$0;
-                    lambda$hasCrossProfileIntents$0 = AbstractMultiProfilePagerAdapter.CrossProfileIntentsChecker.this.lambda$hasCrossProfileIntents$0(source, target, packageManager, (Intent) obj);
-                    return lambda$hasCrossProfileIntents$0;
-                }
-            });
+            return intents.stream()
+                    .anyMatch(
+                            new Predicate() { // from class:
+                                              // com.android.internal.app.AbstractMultiProfilePagerAdapter$CrossProfileIntentsChecker$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    boolean lambda$hasCrossProfileIntents$0;
+                                    lambda$hasCrossProfileIntents$0 =
+                                            AbstractMultiProfilePagerAdapter
+                                                    .CrossProfileIntentsChecker.this
+                                                    .lambda$hasCrossProfileIntents$0(
+                                                            source,
+                                                            target,
+                                                            packageManager,
+                                                            (Intent) obj);
+                                    return lambda$hasCrossProfileIntents$0;
+                                }
+                            });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ boolean lambda$hasCrossProfileIntents$0(int source, int target, IPackageManager packageManager, Intent intent) {
-            return IntentForwarderActivity.canForward(intent, source, target, packageManager, this.mContentResolver) != null;
+        public /* synthetic */ boolean lambda$hasCrossProfileIntents$0(
+                int source, int target, IPackageManager packageManager, Intent intent) {
+            return IntentForwarderActivity.canForward(
+                            intent, source, target, packageManager, this.mContentResolver)
+                    != null;
         }
     }
 
-    protected void showEmptyState(ResolverListAdapter activeListAdapter, EmptyState emptyState, View.OnClickListener buttonOnClick) {
-        ProfileDescriptor descriptor = getItem(userHandleToPageIndex(activeListAdapter.getUserHandle()));
+    protected void showEmptyState(
+            ResolverListAdapter activeListAdapter,
+            EmptyState emptyState,
+            View.OnClickListener buttonOnClick) {
+        ProfileDescriptor descriptor =
+                getItem(userHandleToPageIndex(activeListAdapter.getUserHandle()));
         descriptor.rootView.findViewById(R.id.resolver_list).setVisibility(8);
         ViewGroup emptyStateView = descriptor.getEmptyStateView();
         resetViewVisibilitiesForEmptyState(emptyStateView);
         emptyStateView.setVisibility(0);
         View container = emptyStateView.findViewById(R.id.resolver_empty_state_container);
         setupContainerPadding(container);
-        TextView titleView = (TextView) emptyStateView.findViewById(R.id.resolver_empty_state_title);
+        TextView titleView =
+                (TextView) emptyStateView.findViewById(R.id.resolver_empty_state_title);
         String title = emptyState.getTitle();
         if (title != null) {
             titleView.setVisibility(0);
@@ -299,7 +348,8 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
         } else {
             titleView.setVisibility(8);
         }
-        TextView subtitleView = (TextView) emptyStateView.findViewById(R.id.resolver_empty_state_subtitle);
+        TextView subtitleView =
+                (TextView) emptyStateView.findViewById(R.id.resolver_empty_state_subtitle);
         String subtitle = emptyState.getSubtitle();
         if (subtitle != null) {
             subtitleView.setVisibility(0);
@@ -315,8 +365,7 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
         activeListAdapter.markTabLoaded();
     }
 
-    protected void setupContainerPadding(View container) {
-    }
+    protected void setupContainerPadding(View container) {}
 
     private void showSpinner(View emptyStateView) {
         emptyStateView.findViewById(R.id.resolver_empty_state_title).setVisibility(4);
@@ -334,12 +383,17 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
     }
 
     protected void showListView(ResolverListAdapter activeListAdapter) {
-        ProfileDescriptor descriptor = getItem(userHandleToPageIndex(activeListAdapter.getUserHandle()));
+        ProfileDescriptor descriptor =
+                getItem(userHandleToPageIndex(activeListAdapter.getUserHandle()));
         if (descriptor.rootView.findViewById(R.id.resolver_list) != null) {
             descriptor.rootView.findViewById(R.id.resolver_list).setVisibility(0);
         }
-        if (descriptor.rootView.findViewById(R.id.sem_resolver_second_depth_recycler_view) != null) {
-            descriptor.rootView.findViewById(R.id.sem_resolver_second_depth_recycler_view).setVisibility(0);
+        if (descriptor.rootView.findViewById(R.id.sem_resolver_second_depth_recycler_view)
+                != null) {
+            descriptor
+                    .rootView
+                    .findViewById(R.id.sem_resolver_second_depth_recycler_view)
+                    .setVisibility(0);
         }
         View emptyStateView = descriptor.rootView.findViewById(R.id.resolver_empty_state);
         if (emptyStateView != null) {
@@ -351,10 +405,12 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
         if (this.mWorkProfileUserHandle == null) {
             return false;
         }
-        List<ResolverActivity.ResolvedComponentInfo> resolversForIntent = adapter.getResolversForUser(UserHandle.of(UserHandle.myUserId()));
+        List<ResolverActivity.ResolvedComponentInfo> resolversForIntent =
+                adapter.getResolversForUser(UserHandle.of(UserHandle.myUserId()));
         for (ResolverActivity.ResolvedComponentInfo info : resolversForIntent) {
             ResolveInfo resolveInfo = info.getResolveInfoAt(0);
-            if (resolveInfo.targetUserId != -2 && !SemPersonaManager.isSecureFolderId(resolveInfo.targetUserId)) {
+            if (resolveInfo.targetUserId != -2
+                    && !SemPersonaManager.isSecureFolderId(resolveInfo.targetUserId)) {
                 return true;
             }
         }
@@ -363,7 +419,9 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
 
     boolean shouldShowEmptyStateScreen(ResolverListAdapter listAdapter) {
         int count = listAdapter.getUnfilteredCount();
-        return (count == 0 && listAdapter.getPlaceholderCount() == 0) || (listAdapter.getUserHandle().equals(this.mWorkProfileUserHandle) && isQuietModeEnabled(this.mWorkProfileUserHandle));
+        return (count == 0 && listAdapter.getPlaceholderCount() == 0)
+                || (listAdapter.getUserHandle().equals(this.mWorkProfileUserHandle)
+                        && isQuietModeEnabled(this.mWorkProfileUserHandle));
     }
 
     public static class ProfileDescriptor {
@@ -436,8 +494,7 @@ public abstract class AbstractMultiProfilePagerAdapter extends PagerAdapter {
             return false;
         }
 
-        default void onEmptyStateShown() {
-        }
+        default void onEmptyStateShown() {}
     }
 
     public void semSetNeedSortingInRebuildList(boolean needSort) {

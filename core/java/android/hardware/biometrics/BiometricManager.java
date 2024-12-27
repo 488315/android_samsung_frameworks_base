@@ -2,12 +2,13 @@ package android.hardware.biometrics;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.hardware.biometrics.BiometricTestSession;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -32,26 +33,22 @@ public class BiometricManager {
 
     public interface Authenticators {
 
-        @SystemApi
-        public static final int BIOMETRIC_CONVENIENCE = 4095;
+        @SystemApi public static final int BIOMETRIC_CONVENIENCE = 4095;
         public static final int BIOMETRIC_MAX_STRENGTH = 1;
         public static final int BIOMETRIC_MIN_STRENGTH = 32767;
         public static final int BIOMETRIC_STRONG = 15;
         public static final int BIOMETRIC_WEAK = 255;
         public static final int DEVICE_CREDENTIAL = 32768;
 
-        @SystemApi
-        public static final int EMPTY_SET = 0;
+        @SystemApi public static final int EMPTY_SET = 0;
         public static final int MANDATORY_BIOMETRICS = 65536;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Types {
-        }
+        public @interface Types {}
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BiometricError {
-    }
+    public @interface BiometricError {}
 
     public static String authenticatorToStr(int authenticatorType) {
         switch (authenticatorType) {
@@ -117,7 +114,8 @@ public class BiometricManager {
 
     public List<SensorProperties> getSensorProperties() {
         try {
-            List<SensorPropertiesInternal> internalProperties = this.mService.getSensorProperties(this.mContext.getOpPackageName());
+            List<SensorPropertiesInternal> internalProperties =
+                    this.mService.getSensorProperties(this.mContext.getOpPackageName());
             List<SensorProperties> properties = new ArrayList<>();
             for (SensorPropertiesInternal internalProp : internalProperties) {
                 properties.add(SensorProperties.from(internalProp));
@@ -130,21 +128,29 @@ public class BiometricManager {
 
     public BiometricTestSession createTestSession(int sensorId) {
         try {
-            return new BiometricTestSession(this.mContext, sensorId, new BiometricTestSession.TestSessionProvider() { // from class: android.hardware.biometrics.BiometricManager$$ExternalSyntheticLambda0
-                @Override // android.hardware.biometrics.BiometricTestSession.TestSessionProvider
-                public final ITestSession createTestSession(Context context, int i, ITestSessionCallback iTestSessionCallback) {
-                    ITestSession lambda$createTestSession$0;
-                    lambda$createTestSession$0 = BiometricManager.this.lambda$createTestSession$0(context, i, iTestSessionCallback);
-                    return lambda$createTestSession$0;
-                }
-            });
+            return new BiometricTestSession(
+                    this.mContext,
+                    sensorId,
+                    new BiometricTestSession.TestSessionProvider() { // from class:
+                        // android.hardware.biometrics.BiometricManager$$ExternalSyntheticLambda0
+                        @Override // android.hardware.biometrics.BiometricTestSession.TestSessionProvider
+                        public final ITestSession createTestSession(
+                                Context context, int i, ITestSessionCallback iTestSessionCallback) {
+                            ITestSession lambda$createTestSession$0;
+                            lambda$createTestSession$0 =
+                                    BiometricManager.this.lambda$createTestSession$0(
+                                            context, i, iTestSessionCallback);
+                            return lambda$createTestSession$0;
+                        }
+                    });
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ ITestSession lambda$createTestSession$0(Context context, int sensorId1, ITestSessionCallback callback) throws RemoteException {
+    public /* synthetic */ ITestSession lambda$createTestSession$0(
+            Context context, int sensorId1, ITestSessionCallback callback) throws RemoteException {
         return this.mService.createTestSession(sensorId1, callback, context.getOpPackageName());
     }
 
@@ -160,7 +166,11 @@ public class BiometricManager {
     public int canAuthenticate() {
         int result = canAuthenticate(this.mContext.getUserId(), 255);
         FrameworkStatsLog.write(354, false, 0, result);
-        FrameworkStatsLog.write(356, 4, this.mContext.getApplicationInfo().uid, this.mContext.getApplicationInfo().targetSdkVersion);
+        FrameworkStatsLog.write(
+                356,
+                4,
+                this.mContext.getApplicationInfo().uid,
+                this.mContext.getApplicationInfo().targetSdkVersion);
         return result;
     }
 
@@ -235,7 +245,8 @@ public class BiometricManager {
         Slog.w(TAG, "unregisterAuthenticationStateListener(): Service not connected");
     }
 
-    public void invalidateAuthenticatorIds(int userId, int fromSensorId, IInvalidationCallback callback) {
+    public void invalidateAuthenticatorIds(
+            int userId, int fromSensorId, IInvalidationCallback callback) {
         if (this.mService != null) {
             try {
                 this.mService.invalidateAuthenticatorIds(userId, fromSensorId, callback);
@@ -261,10 +272,16 @@ public class BiometricManager {
         return new long[0];
     }
 
-    public void resetLockoutTimeBound(IBinder token, String opPackageName, int fromSensorId, int userId, byte[] hardwareAuthToken) {
+    public void resetLockoutTimeBound(
+            IBinder token,
+            String opPackageName,
+            int fromSensorId,
+            int userId,
+            byte[] hardwareAuthToken) {
         if (this.mService != null) {
             try {
-                this.mService.resetLockoutTimeBound(token, opPackageName, fromSensorId, userId, hardwareAuthToken);
+                this.mService.resetLockoutTimeBound(
+                        token, opPackageName, fromSensorId, userId, hardwareAuthToken);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -282,12 +299,15 @@ public class BiometricManager {
     }
 
     public long getLastAuthenticationTime(int authenticators) {
-        if (authenticators == 0 || (GET_LAST_AUTH_TIME_ALLOWED_AUTHENTICATORS & authenticators) != authenticators) {
-            throw new IllegalArgumentException("Only BIOMETRIC_STRONG and DEVICE_CREDENTIAL authenticators may be used.");
+        if (authenticators == 0
+                || (GET_LAST_AUTH_TIME_ALLOWED_AUTHENTICATORS & authenticators) != authenticators) {
+            throw new IllegalArgumentException(
+                    "Only BIOMETRIC_STRONG and DEVICE_CREDENTIAL authenticators may be used.");
         }
         if (this.mService != null) {
             try {
-                return this.mService.getLastAuthenticationTime(UserHandle.myUserId(), authenticators);
+                return this.mService.getLastAuthenticationTime(
+                        UserHandle.myUserId(), authenticators);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }

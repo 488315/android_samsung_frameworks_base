@@ -471,7 +471,8 @@ public class UserOpenCommand extends ICmdList {
         putAtCommands("AT+FPSENSOR=1,2,0", this.cmdType);
         putAtCommands("AT+PRECONFG=0,0", this.cmdType);
         putAtCommands("AT+PRECONFG=1,0", this.cmdType);
-        putAtCommands("AT+PRECONFG=*|CRB(LGT,LUC,LUO,SKT,SKC,SKO,KTT,KTC,KTO,ANY,KOO)", this.cmdType);
+        putAtCommands(
+                "AT+PRECONFG=*|CRB(LGT,LUC,LUO,SKT,SKC,SKO,KTT,KTC,KTO,ANY,KOO)", this.cmdType);
         putAtCommands("AT+SERIALNO=*|SLO|ABO", this.cmdType);
         putAtCommands("AT+APCHIPTT=*", this.cmdType);
         putAtCommands("AT+SWVER=*|SLO", this.cmdType);

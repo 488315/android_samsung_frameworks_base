@@ -12,8 +12,10 @@ import android.os.Message;
 import android.os.SemHqmManager;
 import android.os.SystemClock;
 import android.os.UserHandle;
+
 import com.android.internal.util.RingBuffer;
 import com.android.server.am.ActivityManagerService;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -83,7 +85,17 @@ public final class HeimdallReportManager {
         }
 
         public final String toString() {
-            return this.packageName + "," + this.versionName + "," + this.memoryUsage + "," + this.specKillCnt + "," + this.globalKillCnt + "," + this.realKillCnt;
+            return this.packageName
+                    + ","
+                    + this.versionName
+                    + ","
+                    + this.memoryUsage
+                    + ","
+                    + this.specKillCnt
+                    + ","
+                    + this.globalKillCnt
+                    + ","
+                    + this.realKillCnt;
         }
     }
 
@@ -94,16 +106,22 @@ public final class HeimdallReportManager {
         public final /* synthetic */ HeimdallReportManager this$0;
 
         public BigdataManager(HeimdallReportManager heimdallReportManager) {
-            this.mSemHqmManager = (SemHqmManager) heimdallReportManager.mContext.getSystemService("HqmManagerService");
+            this.mSemHqmManager =
+                    (SemHqmManager)
+                            heimdallReportManager.mContext.getSystemService("HqmManagerService");
             File file = new File("/data/misc/pageboost/heimdall_last_bigdata_string");
             try {
                 if (file.exists()) {
                     try {
-                        FileInputStream fileInputStream = new FileInputStream("/data/misc/pageboost/heimdall_last_bigdata_string");
+                        FileInputStream fileInputStream =
+                                new FileInputStream(
+                                        "/data/misc/pageboost/heimdall_last_bigdata_string");
                         try {
-                            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+                            InputStreamReader inputStreamReader =
+                                    new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
                             try {
-                                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                                BufferedReader bufferedReader =
+                                        new BufferedReader(inputStreamReader);
                                 while (true) {
                                     try {
                                         String readLine = bufferedReader.readLine();
@@ -120,9 +138,12 @@ public final class HeimdallReportManager {
                                     }
                                 }
                                 if (file.delete()) {
-                                    Heimdall.log("Big data backup file is deleted during importing.");
+                                    Heimdall.log(
+                                            "Big data backup file is deleted during importing.");
                                 } else {
-                                    Heimdall.log("Big data backup file is NOT deleted during importing.");
+                                    Heimdall.log(
+                                            "Big data backup file is NOT deleted during"
+                                                + " importing.");
                                 }
                                 Heimdall.log("Import BigdataInfoList");
                                 bufferedReader.close();
@@ -151,7 +172,8 @@ public final class HeimdallReportManager {
             Iterator it = this.mBigdataInfoList.iterator();
             while (it.hasNext()) {
                 BigdataInfo bigdataInfo2 = (BigdataInfo) it.next();
-                if (bigdataInfo2.packageName.equals(bigdataInfo.packageName) && bigdataInfo2.versionName.equals(bigdataInfo.versionName)) {
+                if (bigdataInfo2.packageName.equals(bigdataInfo.packageName)
+                        && bigdataInfo2.versionName.equals(bigdataInfo.versionName)) {
                     bigdataInfo2.globalKillCnt += bigdataInfo.globalKillCnt;
                     bigdataInfo2.specKillCnt += bigdataInfo.specKillCnt;
                     bigdataInfo2.realKillCnt += bigdataInfo.realKillCnt;
@@ -160,36 +182,55 @@ public final class HeimdallReportManager {
                     if (i < i2) {
                         bigdataInfo2.memoryUsage = i2;
                     }
-                    Heimdall.log("add BigdataInfo to list. " + BigdataInfo.m326$$Nest$mtoJsonData(bigdataInfo2));
+                    Heimdall.log(
+                            "add BigdataInfo to list. "
+                                    + BigdataInfo.m326$$Nest$mtoJsonData(bigdataInfo2));
                     return;
                 }
             }
             this.mBigdataInfoList.add(bigdataInfo);
-            Heimdall.log("add BigdataInfo to list. " + BigdataInfo.m326$$Nest$mtoJsonData(bigdataInfo));
+            Heimdall.log(
+                    "add BigdataInfo to list. " + BigdataInfo.m326$$Nest$mtoJsonData(bigdataInfo));
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BroadcastManager extends BroadcastReceiver {
-        public BroadcastManager() {
-        }
+        public BroadcastManager() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (!"android.intent.action.ACTION_SHUTDOWN".equals(action) && !"android.intent.action.REBOOT".equals(action)) {
+            if (!"android.intent.action.ACTION_SHUTDOWN".equals(action)
+                    && !"android.intent.action.REBOOT".equals(action)) {
                 if ("com.sec.android.intent.action.HQM_UPDATE_REQ".equals(action)) {
                     BigdataManager bigdataManager = HeimdallReportManager.this.mBigdataManager;
                     Iterator it = bigdataManager.mBigdataInfoList.iterator();
                     while (it.hasNext()) {
                         BigdataInfo bigdataInfo = (BigdataInfo) it.next();
                         if (bigdataManager.mSemHqmManager != null) {
-                            String m326$$Nest$mtoJsonData = BigdataInfo.m326$$Nest$mtoJsonData(bigdataInfo);
+                            String m326$$Nest$mtoJsonData =
+                                    BigdataInfo.m326$$Nest$mtoJsonData(bigdataInfo);
                             if (m326$$Nest$mtoJsonData.length() < 1024) {
-                                if (bigdataManager.mSemHqmManager.sendHWParamToHQM(0, "AP", "HDMM", "sm", "0.0", "sec", "", m326$$Nest$mtoJsonData, "")) {
-                                    Heimdall.log("Successful to send data to HQM. " + BigdataInfo.m326$$Nest$mtoJsonData(bigdataInfo));
+                                if (bigdataManager.mSemHqmManager.sendHWParamToHQM(
+                                        0,
+                                        "AP",
+                                        "HDMM",
+                                        "sm",
+                                        "0.0",
+                                        "sec",
+                                        "",
+                                        m326$$Nest$mtoJsonData,
+                                        "")) {
+                                    Heimdall.log(
+                                            "Successful to send data to HQM. "
+                                                    + BigdataInfo.m326$$Nest$mtoJsonData(
+                                                            bigdataInfo));
                                 } else {
-                                    Heimdall.log("Failed to send data to HQM." + BigdataInfo.m326$$Nest$mtoJsonData(bigdataInfo));
+                                    Heimdall.log(
+                                            "Failed to send data to HQM."
+                                                    + BigdataInfo.m326$$Nest$mtoJsonData(
+                                                            bigdataInfo));
                                 }
                             }
                         }
@@ -213,13 +254,18 @@ public final class HeimdallReportManager {
                     }
                 }
                 try {
-                    FileOutputStream fileOutputStream = new FileOutputStream("/data/misc/pageboost/heimdall_last_bigdata_string");
+                    FileOutputStream fileOutputStream =
+                            new FileOutputStream(
+                                    "/data/misc/pageboost/heimdall_last_bigdata_string");
                     try {
-                        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8);
+                        OutputStreamWriter outputStreamWriter =
+                                new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8);
                         try {
                             Iterator it2 = bigdataManager2.mBigdataInfoList.iterator();
                             while (it2.hasNext()) {
-                                outputStreamWriter.append((CharSequence) (((BigdataInfo) it2.next()).toString() + "\n"));
+                                outputStreamWriter.append(
+                                        (CharSequence)
+                                                (((BigdataInfo) it2.next()).toString() + "\n"));
                             }
                             Heimdall.log("Export BigdataInfoList");
                             outputStreamWriter.close();
@@ -256,8 +302,19 @@ public final class HeimdallReportManager {
             this.lock = new Object();
         }
 
-        public final void addReportHistory(HeimdallAlwaysRunningProcInfo heimdallAlwaysRunningProcInfo) {
-            HeimdallReportManager.this.mReportHistory.append(new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault()).format(new Date()) + ",pid=" + heimdallAlwaysRunningProcInfo.pid + ",processName=" + heimdallAlwaysRunningProcInfo.processName + ",packageName=" + heimdallAlwaysRunningProcInfo.packageName + ",abnormalType=" + heimdallAlwaysRunningProcInfo.abnormalType);
+        public final void addReportHistory(
+                HeimdallAlwaysRunningProcInfo heimdallAlwaysRunningProcInfo) {
+            HeimdallReportManager.this.mReportHistory.append(
+                    new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault())
+                                    .format(new Date())
+                            + ",pid="
+                            + heimdallAlwaysRunningProcInfo.pid
+                            + ",processName="
+                            + heimdallAlwaysRunningProcInfo.processName
+                            + ",packageName="
+                            + heimdallAlwaysRunningProcInfo.packageName
+                            + ",abnormalType="
+                            + heimdallAlwaysRunningProcInfo.abnormalType);
         }
 
         @Override // android.os.Handler
@@ -281,7 +338,8 @@ public final class HeimdallReportManager {
                         Heimdall.log("send broadcast for " + poll.toDumpString());
                         sendBroadcast(poll);
                         addReportHistory(poll);
-                        HeimdallReportManager.this.mReportedAlwaysRunningProcesses.add(poll.processName);
+                        HeimdallReportManager.this.mReportedAlwaysRunningProcesses.add(
+                                poll.processName);
                     } finally {
                     }
                 }
@@ -397,10 +455,13 @@ public final class HeimdallReportManager {
                 r11 = 0
                 return r11
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.heimdall.HeimdallReportManager.ReportHandler.poll():com.android.server.chimera.heimdall.HeimdallAlwaysRunningProcInfo");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.chimera.heimdall.HeimdallReportManager.ReportHandler.poll():com.android.server.chimera.heimdall.HeimdallAlwaysRunningProcInfo");
         }
 
-        public final void sendBroadcast(HeimdallAlwaysRunningProcInfo heimdallAlwaysRunningProcInfo) {
+        public final void sendBroadcast(
+                HeimdallAlwaysRunningProcInfo heimdallAlwaysRunningProcInfo) {
             Intent intent = new Intent();
             intent.setAction("com.samsung.sdhms.MEMORY_ABNORMAL_HEIMDALL");
             intent.setPackage("com.sec.android.sdhms");
@@ -413,7 +474,8 @@ public final class HeimdallReportManager {
         }
     }
 
-    public HeimdallReportManager(Looper looper, Context context, ActivityManagerService activityManagerService) {
+    public HeimdallReportManager(
+            Looper looper, Context context, ActivityManagerService activityManagerService) {
         this.mContext = context;
         this.mService = activityManagerService;
         this.mReportHandler = new ReportHandler(looper);
@@ -446,7 +508,8 @@ public final class HeimdallReportManager {
                 if (size != 0) {
                     Iterator it = reportHandler.mReportData.iterator();
                     while (it.hasNext()) {
-                        printWriter.println("    " + ((HeimdallAlwaysRunningProcInfo) it.next()).processName);
+                        printWriter.println(
+                                "    " + ((HeimdallAlwaysRunningProcInfo) it.next()).processName);
                     }
                 }
             } catch (Throwable th) {
@@ -458,25 +521,25 @@ public final class HeimdallReportManager {
     /* JADX WARN: Can't wrap try/catch for region: R(26:7|(2:8|9)|10|(1:12)(14:308|309|310|(1:312)(1:347)|313|314|316|317|318|319|320|321|322|323)|13|(4:14|15|(1:17)(1:304)|(6:18|19|21|22|(14:236|237|238|239|240|241|242|243|(3:244|245|(1:247)(1:248))|249|250|251|252|253)|24))|25|(1:27)(15:191|192|193|(1:195)(1:232)|196|197|198|199|200|201|(2:203|204)|206|207|208|209)|28|(5:29|30|(1:32)(1:187)|(6:33|34|35|36|(2:168|169)|(1:39))|40)|41|(3:42|43|(2:44|45))|(20:113|114|115|116|117|118|(20:121|122|123|124|125|126|(16:129|130|131|132|48|49|50|(1:52)(1:109)|53|54|55|(1:57)(14:67|68|69|70|71|72|73|74|75|76|77|59|60|62)|66|59|60|62)|128|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62)|120|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62)|47|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62) */
     /* JADX WARN: Can't wrap try/catch for region: R(40:7|(2:8|9)|10|(1:12)(14:308|309|310|(1:312)(1:347)|313|314|316|317|318|319|320|321|322|323)|13|14|15|(1:17)(1:304)|18|19|21|22|(14:236|237|238|239|240|241|242|243|(3:244|245|(1:247)(1:248))|249|250|251|252|253)|24|25|(1:27)(15:191|192|193|(1:195)(1:232)|196|197|198|199|200|201|(2:203|204)|206|207|208|209)|28|29|30|(1:32)(1:187)|(6:33|34|35|36|(2:168|169)|(1:39))|40|41|42|43|(2:44|45)|(20:113|114|115|116|117|118|(20:121|122|123|124|125|126|(16:129|130|131|132|48|49|50|(1:52)(1:109)|53|54|55|(1:57)(14:67|68|69|70|71|72|73|74|75|76|77|59|60|62)|66|59|60|62)|128|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62)|120|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62)|47|48|49|50|(0)(0)|53|54|55|(0)(0)|66|59|60|62) */
     /* JADX WARN: Code restructure failed: missing block: B:107:0x0594, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:108:0x0613, code lost:
-    
-        com.android.server.chimera.heimdall.Heimdall.log(r0.getMessage());
-     */
+
+       com.android.server.chimera.heimdall.Heimdall.log(r0.getMessage());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:110:0x0566, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:112:0x062f, code lost:
-    
-        com.android.server.chimera.heimdall.Heimdall.log(r0.getMessage());
-     */
+
+       com.android.server.chimera.heimdall.Heimdall.log(r0.getMessage());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x058d, code lost:
-    
-        if (r4 != null) goto L250;
-     */
+
+       if (r4 != null) goto L250;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:109:0x0569 A[Catch: IOException | SecurityException -> 0x0566, TRY_LEAVE, TryCatch #46 {IOException | SecurityException -> 0x0566, blocks: (B:50:0x054d, B:52:0x0556, B:109:0x0569), top: B:49:0x054d }] */
     /* JADX WARN: Removed duplicated region for block: B:113:0x042a  */
@@ -506,27 +569,38 @@ public final class HeimdallReportManager {
             Method dump skipped, instructions count: 1604
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.heimdall.HeimdallReportManager.reportDumpFile(com.android.server.chimera.heimdall.HeimdallProcessData):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.chimera.heimdall.HeimdallReportManager.reportDumpFile(com.android.server.chimera.heimdall.HeimdallProcessData):void");
     }
 
     public final void sendBroadcast2Bartender(HeimdallProcessData heimdallProcessData) {
         if (heimdallProcessData.isGlobalKill()) {
             return;
         }
-        HeimdallAlwaysRunningProcInfo heimdallAlwaysRunningProcInfo = new HeimdallAlwaysRunningProcInfo(heimdallProcessData);
+        HeimdallAlwaysRunningProcInfo heimdallAlwaysRunningProcInfo =
+                new HeimdallAlwaysRunningProcInfo(heimdallProcessData);
         ReportHandler reportHandler = this.mReportHandler;
         reportHandler.getClass();
-        Heimdall.log("enter requestSendBroadcast2Bartender " + heimdallAlwaysRunningProcInfo.toDumpString());
+        Heimdall.log(
+                "enter requestSendBroadcast2Bartender "
+                        + heimdallAlwaysRunningProcInfo.toDumpString());
         synchronized (reportHandler.lock) {
             try {
                 ((LinkedList) reportHandler.mReportData).add(heimdallAlwaysRunningProcInfo);
                 long elapsedRealtime = SystemClock.elapsedRealtime();
                 if (elapsedRealtime - reportHandler.mLastSendTime >= 300000) {
-                    Heimdall.log("requestSendBroadcast2Bartender over 5min " + heimdallAlwaysRunningProcInfo.toDumpString());
+                    Heimdall.log(
+                            "requestSendBroadcast2Bartender over 5min "
+                                    + heimdallAlwaysRunningProcInfo.toDumpString());
                     reportHandler.sendMessage(reportHandler.obtainMessage(1));
                 } else if (((LinkedList) reportHandler.mReportData).size() == 1) {
-                    Heimdall.log("requestSendBroadcast2Bartender first call in 5min " + heimdallAlwaysRunningProcInfo.toDumpString());
-                    reportHandler.sendMessageDelayed(reportHandler.obtainMessage(1), 300000 - (elapsedRealtime - reportHandler.mLastSendTime));
+                    Heimdall.log(
+                            "requestSendBroadcast2Bartender first call in 5min "
+                                    + heimdallAlwaysRunningProcInfo.toDumpString());
+                    reportHandler.sendMessageDelayed(
+                            reportHandler.obtainMessage(1),
+                            300000 - (elapsedRealtime - reportHandler.mLastSendTime));
                 }
             } catch (Throwable th) {
                 throw th;

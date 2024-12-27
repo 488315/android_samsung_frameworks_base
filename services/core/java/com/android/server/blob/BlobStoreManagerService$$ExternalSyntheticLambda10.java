@@ -5,12 +5,14 @@ import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BlobStoreManagerService$$ExternalSyntheticLambda10 implements Predicate {
+public final /* synthetic */ class BlobStoreManagerService$$ExternalSyntheticLambda10
+        implements Predicate {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BlobStoreManagerService f$0;
     public final /* synthetic */ int f$1;
 
-    public /* synthetic */ BlobStoreManagerService$$ExternalSyntheticLambda10(BlobStoreManagerService blobStoreManagerService, int i, int i2) {
+    public /* synthetic */ BlobStoreManagerService$$ExternalSyntheticLambda10(
+            BlobStoreManagerService blobStoreManagerService, int i, int i2) {
         this.$r8$classId = i2;
         this.f$0 = blobStoreManagerService;
         this.f$1 = i;
@@ -25,7 +27,8 @@ public final /* synthetic */ class BlobStoreManagerService$$ExternalSyntheticLam
                 blobStoreManagerService.getClass();
                 BlobMetadata blobMetadata = (BlobMetadata) ((Map.Entry) obj).getValue();
                 if (i == -1) {
-                    blobStoreManagerService.mActiveBlobIds.remove(Long.valueOf(blobMetadata.mBlobId));
+                    blobStoreManagerService.mActiveBlobIds.remove(
+                            Long.valueOf(blobMetadata.mBlobId));
                     return true;
                 }
                 blobMetadata.removeDataForUser(i);

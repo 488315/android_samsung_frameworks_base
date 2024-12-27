@@ -1,7 +1,6 @@
 package android.app;
 
 import android.annotation.SystemApi;
-import android.app.ISearchManager;
 import android.app.slice.Slice;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -18,10 +17,12 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
-public class SearchManager implements DialogInterface.OnDismissListener, DialogInterface.OnCancelListener {
+public class SearchManager
+        implements DialogInterface.OnDismissListener, DialogInterface.OnCancelListener {
     public static final String ACTION_KEY = "action_key";
     public static final String ACTION_MSG = "action_msg";
     public static final String APP_DATA = "app_data";
@@ -35,62 +36,55 @@ public class SearchManager implements DialogInterface.OnDismissListener, DialogI
     public static final String EXTRA_WEB_SEARCH_PENDINGINTENT = "web_search_pendingintent";
     public static final int FLAG_QUERY_REFINEMENT = 1;
     public static final String INTENT_ACTION_GLOBAL_SEARCH = "android.search.action.GLOBAL_SEARCH";
-    public static final String INTENT_ACTION_SEARCHABLES_CHANGED = "android.search.action.SEARCHABLES_CHANGED";
-    public static final String INTENT_ACTION_SEARCH_SETTINGS = "android.search.action.SEARCH_SETTINGS";
-    public static final String INTENT_ACTION_SEARCH_SETTINGS_CHANGED = "android.search.action.SETTINGS_CHANGED";
-    public static final String INTENT_ACTION_WEB_SEARCH_SETTINGS = "android.search.action.WEB_SEARCH_SETTINGS";
-    public static final String INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED = "android.search.action.GLOBAL_SEARCH_ACTIVITY_CHANGED";
+    public static final String INTENT_ACTION_SEARCHABLES_CHANGED =
+            "android.search.action.SEARCHABLES_CHANGED";
+    public static final String INTENT_ACTION_SEARCH_SETTINGS =
+            "android.search.action.SEARCH_SETTINGS";
+    public static final String INTENT_ACTION_SEARCH_SETTINGS_CHANGED =
+            "android.search.action.SETTINGS_CHANGED";
+    public static final String INTENT_ACTION_WEB_SEARCH_SETTINGS =
+            "android.search.action.WEB_SEARCH_SETTINGS";
+    public static final String INTENT_GLOBAL_SEARCH_ACTIVITY_CHANGED =
+            "android.search.action.GLOBAL_SEARCH_ACTIVITY_CHANGED";
     public static final char MENU_KEY = 's';
     public static final int MENU_KEYCODE = 47;
     public static final String QUERY = "query";
     public static final String SEARCH_MODE = "search_mode";
     public static final String SEM_EXTRA_FROM_SVI = "isSamsungVoice";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_EXTRA = "suggest_extra_flags";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_EXTRA = "suggest_extra_flags";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_GROUP = "suggest_group";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_GROUP = "suggest_group";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_ICON_1_BLOB = "suggest_icon_1_blob";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_ICON_1_BLOB = "suggest_icon_1_blob";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_ICON_3 = "suggest_icon_3";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_ICON_3 = "suggest_icon_3";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_ICON_4 = "suggest_icon_4";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_ICON_4 = "suggest_icon_4";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_INK_DATA = "suggest_ink_data";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_INK_DATA = "suggest_ink_data";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_MIME_TYPE = "suggest_mime_type";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_MIME_TYPE = "suggest_mime_type";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_TARGET_TYPE = "suggest_target_type";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_TARGET_TYPE = "suggest_target_type";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_TEXT_3 = "suggest_text_3";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_TEXT_3 = "suggest_text_3";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_TEXT_4 = "suggest_text_4";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_TEXT_4 = "suggest_text_4";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_TEXT_5 = "suggest_text_5";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_TEXT_5 = "suggest_text_5";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_COLUMN_URI = "suggest_uri";
+    @Deprecated public static final String SEM_SUGGEST_COLUMN_URI = "suggest_uri";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_PARAMETER_END_TIME = "etime";
+    @Deprecated public static final String SEM_SUGGEST_PARAMETER_END_TIME = "etime";
 
-    @Deprecated
-    public static final String SEM_SUGGEST_PARAMETER_START_TIME = "stime";
+    @Deprecated public static final String SEM_SUGGEST_PARAMETER_START_TIME = "stime";
 
     @Deprecated
     public static final String SEM_SUGGEST_URI_PATH_REGEX_QUERY = "search_suggest_regex_query";
-    public static final String SHORTCUT_MIME_TYPE = "vnd.android.cursor.item/vnd.android.search.suggest";
+
+    public static final String SHORTCUT_MIME_TYPE =
+            "vnd.android.cursor.item/vnd.android.search.suggest";
     public static final String SUGGEST_COLUMN_AUDIO_CHANNEL_CONFIG = "suggest_audio_channel_config";
     public static final String SUGGEST_COLUMN_CONTENT_TYPE = "suggest_content_type";
     public static final String SUGGEST_COLUMN_DURATION = "suggest_duration";
@@ -112,13 +106,15 @@ public class SearchManager implements DialogInterface.OnDismissListener, DialogI
     public static final String SUGGEST_COLUMN_RENTAL_PRICE = "suggest_rental_price";
     public static final String SUGGEST_COLUMN_RESULT_CARD_IMAGE = "suggest_result_card_image";
     public static final String SUGGEST_COLUMN_SHORTCUT_ID = "suggest_shortcut_id";
-    public static final String SUGGEST_COLUMN_SPINNER_WHILE_REFRESHING = "suggest_spinner_while_refreshing";
+    public static final String SUGGEST_COLUMN_SPINNER_WHILE_REFRESHING =
+            "suggest_spinner_while_refreshing";
     public static final String SUGGEST_COLUMN_TEXT_1 = "suggest_text_1";
     public static final String SUGGEST_COLUMN_TEXT_2 = "suggest_text_2";
     public static final String SUGGEST_COLUMN_TEXT_2_URL = "suggest_text_2_url";
     public static final String SUGGEST_COLUMN_VIDEO_HEIGHT = "suggest_video_height";
     public static final String SUGGEST_COLUMN_VIDEO_WIDTH = "suggest_video_width";
-    public static final String SUGGEST_MIME_TYPE = "vnd.android.cursor.dir/vnd.android.search.suggest";
+    public static final String SUGGEST_MIME_TYPE =
+            "vnd.android.cursor.dir/vnd.android.search.suggest";
     public static final String SUGGEST_NEVER_MAKE_SHORTCUT = "_-1";
     public static final String SUGGEST_PARAMETER_LIMIT = "limit";
     public static final String SUGGEST_URI_PATH_QUERY = "search_suggest_query";
@@ -130,7 +126,8 @@ public class SearchManager implements DialogInterface.OnDismissListener, DialogI
     private SearchDialog mSearchDialog;
     OnDismissListener mDismissListener = null;
     OnCancelListener mCancelListener = null;
-    private final ISearchManager mService = ISearchManager.Stub.asInterface(ServiceManager.getServiceOrThrow("search"));
+    private final ISearchManager mService =
+            ISearchManager.Stub.asInterface(ServiceManager.getServiceOrThrow("search"));
 
     public interface OnCancelListener {
         void onCancel();
@@ -145,19 +142,38 @@ public class SearchManager implements DialogInterface.OnDismissListener, DialogI
         this.mHandler = handler;
     }
 
-    public void startSearch(String initialQuery, boolean selectInitialQuery, ComponentName launchActivity, Bundle appSearchData, boolean globalSearch) {
-        startSearch(initialQuery, selectInitialQuery, launchActivity, appSearchData, globalSearch, null);
+    public void startSearch(
+            String initialQuery,
+            boolean selectInitialQuery,
+            ComponentName launchActivity,
+            Bundle appSearchData,
+            boolean globalSearch) {
+        startSearch(
+                initialQuery,
+                selectInitialQuery,
+                launchActivity,
+                appSearchData,
+                globalSearch,
+                null);
     }
 
-    public void startSearch(String initialQuery, boolean selectInitialQuery, ComponentName launchActivity, Bundle appSearchData, boolean globalSearch, Rect sourceBounds) {
+    public void startSearch(
+            String initialQuery,
+            boolean selectInitialQuery,
+            ComponentName launchActivity,
+            Bundle appSearchData,
+            boolean globalSearch,
+            Rect sourceBounds) {
         if (globalSearch) {
             startGlobalSearch(initialQuery, selectInitialQuery, appSearchData, sourceBounds);
             return;
         }
-        UiModeManager uiModeManager = (UiModeManager) this.mContext.getSystemService(UiModeManager.class);
+        UiModeManager uiModeManager =
+                (UiModeManager) this.mContext.getSystemService(UiModeManager.class);
         if (uiModeManager.getCurrentModeType() != 4) {
             ensureSearchDialog();
-            this.mSearchDialog.show(initialQuery, selectInitialQuery, launchActivity, appSearchData);
+            this.mSearchDialog.show(
+                    initialQuery, selectInitialQuery, launchActivity, appSearchData);
         }
     }
 
@@ -169,7 +185,11 @@ public class SearchManager implements DialogInterface.OnDismissListener, DialogI
         }
     }
 
-    void startGlobalSearch(String initialQuery, boolean selectInitialQuery, Bundle appSearchData, Rect sourceBounds) {
+    void startGlobalSearch(
+            String initialQuery,
+            boolean selectInitialQuery,
+            Bundle appSearchData,
+            Rect sourceBounds) {
         Bundle appSearchData2;
         ComponentName globalSearchActivity = getGlobalSearchActivity();
         if (globalSearchActivity == null) {
@@ -290,7 +310,8 @@ public class SearchManager implements DialogInterface.OnDismissListener, DialogI
         if (searchable == null || (authority = searchable.getSuggestAuthority()) == null) {
             return null;
         }
-        Uri.Builder uriBuilder = new Uri.Builder().scheme("content").authority(authority).query("").fragment("");
+        Uri.Builder uriBuilder =
+                new Uri.Builder().scheme("content").authority(authority).query("").fragment("");
         String contentPath = searchable.getSuggestPath();
         if (contentPath != null) {
             uriBuilder.appendEncodedPath(contentPath);

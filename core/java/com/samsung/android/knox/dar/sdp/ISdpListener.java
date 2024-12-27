@@ -16,12 +16,10 @@ public interface ISdpListener extends IInterface {
 
     public static class Default implements ISdpListener {
         @Override // com.samsung.android.knox.dar.sdp.ISdpListener
-        public void onStateChange(int state) throws RemoteException {
-        }
+        public void onStateChange(int state) throws RemoteException {}
 
         @Override // com.samsung.android.knox.dar.sdp.ISdpListener
-        public void onEngineRemoved() throws RemoteException {
-        }
+        public void onEngineRemoved() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ISdpListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISdpListener {
+    public abstract static class Stub extends Binder implements ISdpListener {
         static final int TRANSACTION_onEngineRemoved = 2;
         static final int TRANSACTION_onStateChange = 1;
 
@@ -70,7 +68,8 @@ public interface ISdpListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISdpListener.DESCRIPTOR);
             }

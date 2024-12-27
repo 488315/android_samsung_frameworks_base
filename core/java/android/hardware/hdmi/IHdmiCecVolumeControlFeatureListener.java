@@ -8,14 +8,15 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IHdmiCecVolumeControlFeatureListener extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.hdmi.IHdmiCecVolumeControlFeatureListener";
+    public static final String DESCRIPTOR =
+            "android.hardware.hdmi.IHdmiCecVolumeControlFeatureListener";
 
     void onHdmiCecVolumeControlFeature(int i) throws RemoteException;
 
     public static class Default implements IHdmiCecVolumeControlFeatureListener {
         @Override // android.hardware.hdmi.IHdmiCecVolumeControlFeatureListener
-        public void onHdmiCecVolumeControlFeature(int hdmiCecVolumeControl) throws RemoteException {
-        }
+        public void onHdmiCecVolumeControlFeature(int hdmiCecVolumeControl)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,8 @@ public interface IHdmiCecVolumeControlFeatureListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHdmiCecVolumeControlFeatureListener {
+    public abstract static class Stub extends Binder
+            implements IHdmiCecVolumeControlFeatureListener {
         static final int TRANSACTION_onHdmiCecVolumeControlFeature = 1;
 
         public Stub() {
@@ -34,7 +36,8 @@ public interface IHdmiCecVolumeControlFeatureListener extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IHdmiCecVolumeControlFeatureListener.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IHdmiCecVolumeControlFeatureListener.DESCRIPTOR);
             if (iin != null && (iin instanceof IHdmiCecVolumeControlFeatureListener)) {
                 return (IHdmiCecVolumeControlFeatureListener) iin;
             }
@@ -61,7 +64,8 @@ public interface IHdmiCecVolumeControlFeatureListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IHdmiCecVolumeControlFeatureListener.DESCRIPTOR);
             }
@@ -97,7 +101,8 @@ public interface IHdmiCecVolumeControlFeatureListener extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiCecVolumeControlFeatureListener
-            public void onHdmiCecVolumeControlFeature(int hdmiCecVolumeControl) throws RemoteException {
+            public void onHdmiCecVolumeControlFeature(int hdmiCecVolumeControl)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IHdmiCecVolumeControlFeatureListener.DESCRIPTOR);

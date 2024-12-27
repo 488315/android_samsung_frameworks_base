@@ -10,7 +10,6 @@ public final class WinscopeExtensionsImplOuterClass {
         public static final long INPUTMETHOD_SERVICE = 1146756268034L;
         public static final long VIEWCAPTURE = 1146756268036L;
 
-        public WinscopeExtensionsImpl() {
-        }
+        public WinscopeExtensionsImpl() {}
     }
 }

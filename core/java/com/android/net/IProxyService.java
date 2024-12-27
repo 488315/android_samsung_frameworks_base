@@ -24,7 +24,8 @@ public interface IProxyService extends IInterface {
 
     String resolvePacFile(String str, String str2) throws RemoteException;
 
-    boolean setMiscValueForPacProfile(int i, String str, String str2, int i2) throws RemoteException;
+    boolean setMiscValueForPacProfile(int i, String str, String str2, int i2)
+            throws RemoteException;
 
     void setPacFile(String str) throws RemoteException;
 
@@ -32,7 +33,9 @@ public interface IProxyService extends IInterface {
 
     boolean startPacSystemForKnoxProfile(String str) throws RemoteException;
 
-    int startProxyServerForKnoxProfile(String str, int i, String str2, String str3, boolean z, String str4, int i2) throws RemoteException;
+    int startProxyServerForKnoxProfile(
+            String str, int i, String str2, String str3, boolean z, String str4, int i2)
+            throws RemoteException;
 
     boolean stopPacSystemForKnoxProfile(String str) throws RemoteException;
 
@@ -45,8 +48,7 @@ public interface IProxyService extends IInterface {
         }
 
         @Override // com.android.net.IProxyService
-        public void setPacFile(String scriptContents) throws RemoteException {
-        }
+        public void setPacFile(String scriptContents) throws RemoteException {}
 
         @Override // com.android.net.IProxyService
         public boolean startPacSystemForKnoxProfile(String profileName) throws RemoteException {
@@ -59,21 +61,31 @@ public interface IProxyService extends IInterface {
         }
 
         @Override // com.android.net.IProxyService
-        public int startProxyServerForKnoxProfile(String profileName, int proxyAuthType, String userName, String password, boolean isCredentialPredfined, String staticProxyServer, int staticProxyPort) throws RemoteException {
+        public int startProxyServerForKnoxProfile(
+                String profileName,
+                int proxyAuthType,
+                String userName,
+                String password,
+                boolean isCredentialPredfined,
+                String staticProxyServer,
+                int staticProxyPort)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.net.IProxyService
-        public void stopProxyServerForKnoxProfile(String profileName) throws RemoteException {
-        }
+        public void stopProxyServerForKnoxProfile(String profileName) throws RemoteException {}
 
         @Override // com.android.net.IProxyService
-        public boolean setPacFileForKnoxProfile(String profileName, String scriptContents) throws RemoteException {
+        public boolean setPacFileForKnoxProfile(String profileName, String scriptContents)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.net.IProxyService
-        public boolean setMiscValueForPacProfile(int netId, String profileName, String interfacename, int showScreen) throws RemoteException {
+        public boolean setMiscValueForPacProfile(
+                int netId, String profileName, String interfacename, int showScreen)
+                throws RemoteException {
             return false;
         }
 
@@ -83,12 +95,10 @@ public interface IProxyService extends IInterface {
         }
 
         @Override // com.android.net.IProxyService
-        public void handleScreenunlock() throws RemoteException {
-        }
+        public void handleScreenunlock() throws RemoteException {}
 
         @Override // com.android.net.IProxyService
-        public void resetInterface(String profileName) throws RemoteException {
-        }
+        public void resetInterface(String profileName) throws RemoteException {}
 
         @Override // com.android.net.IProxyService
         public boolean isProxyThreadRunning(String profileName) throws RemoteException {
@@ -111,7 +121,7 @@ public interface IProxyService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProxyService {
+    public abstract static class Stub extends Binder implements IProxyService {
         static final int TRANSACTION_getProxyPortForProfile = 9;
         static final int TRANSACTION_getProxythreadStatus = 13;
         static final int TRANSACTION_handleScreenunlock = 10;
@@ -188,7 +198,8 @@ public interface IProxyService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface("com.android.net.IProxyService");
             }
@@ -233,7 +244,9 @@ public interface IProxyService extends IInterface {
                     String _arg5 = data.readString();
                     int _arg6 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result4 = startProxyServerForKnoxProfile(_arg05, _arg12, _arg2, _arg3, _arg4, _arg5, _arg6);
+                    int _result4 =
+                            startProxyServerForKnoxProfile(
+                                    _arg05, _arg12, _arg2, _arg3, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeInt(_result4);
                     return true;
@@ -385,7 +398,15 @@ public interface IProxyService extends IInterface {
             }
 
             @Override // com.android.net.IProxyService
-            public int startProxyServerForKnoxProfile(String profileName, int proxyAuthType, String userName, String password, boolean isCredentialPredfined, String staticProxyServer, int staticProxyPort) throws RemoteException {
+            public int startProxyServerForKnoxProfile(
+                    String profileName,
+                    int proxyAuthType,
+                    String userName,
+                    String password,
+                    boolean isCredentialPredfined,
+                    String staticProxyServer,
+                    int staticProxyPort)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -423,7 +444,8 @@ public interface IProxyService extends IInterface {
             }
 
             @Override // com.android.net.IProxyService
-            public boolean setPacFileForKnoxProfile(String profileName, String scriptContents) throws RemoteException {
+            public boolean setPacFileForKnoxProfile(String profileName, String scriptContents)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -441,7 +463,9 @@ public interface IProxyService extends IInterface {
             }
 
             @Override // com.android.net.IProxyService
-            public boolean setMiscValueForPacProfile(int netId, String profileName, String interfacename, int showScreen) throws RemoteException {
+            public boolean setMiscValueForPacProfile(
+                    int netId, String profileName, String interfacename, int showScreen)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

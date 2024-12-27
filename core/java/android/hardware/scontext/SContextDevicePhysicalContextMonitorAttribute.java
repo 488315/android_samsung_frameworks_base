@@ -26,7 +26,8 @@ public class SContextDevicePhysicalContextMonitorAttribute extends SContextAttri
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mMode < 0) {
             Log.d(TAG, "Mode value is wrong!!");

@@ -7,29 +7,32 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.ims.DelegateRequest;
-import android.telephony.ims.aidl.IImsCapabilityCallback;
-import android.telephony.ims.aidl.IImsRegistrationCallback;
-import android.telephony.ims.aidl.IRcsUceControllerCallback;
-import android.telephony.ims.aidl.IRcsUcePublishStateCallback;
-import android.telephony.ims.aidl.ISipDelegate;
-import android.telephony.ims.aidl.ISipDelegateConnectionStateCallback;
-import android.telephony.ims.aidl.ISipDelegateMessageCallback;
+
 import com.android.ims.internal.IImsServiceFeatureCallback;
 import com.android.internal.telephony.IIntegerConsumer;
 import com.android.internal.telephony.ISipDialogStateCallback;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface IImsRcsController extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.IImsRcsController";
 
-    void createSipDelegate(int i, DelegateRequest delegateRequest, String str, ISipDelegateConnectionStateCallback iSipDelegateConnectionStateCallback, ISipDelegateMessageCallback iSipDelegateMessageCallback) throws RemoteException;
+    void createSipDelegate(
+            int i,
+            DelegateRequest delegateRequest,
+            String str,
+            ISipDelegateConnectionStateCallback iSipDelegateConnectionStateCallback,
+            ISipDelegateMessageCallback iSipDelegateMessageCallback)
+            throws RemoteException;
 
     void destroySipDelegate(int i, ISipDelegate iSipDelegate, int i2) throws RemoteException;
 
-    void getImsRcsRegistrationState(int i, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void getImsRcsRegistrationState(int i, IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
-    void getImsRcsRegistrationTransportType(int i, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void getImsRcsRegistrationTransportType(int i, IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
     int getUcePublishState(int i) throws RemoteException;
 
@@ -41,58 +44,81 @@ public interface IImsRcsController extends IInterface {
 
     boolean isUceSettingEnabled(int i, String str, String str2) throws RemoteException;
 
-    void registerImsRegistrationCallback(int i, IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException;
+    void registerImsRegistrationCallback(int i, IImsRegistrationCallback iImsRegistrationCallback)
+            throws RemoteException;
 
-    void registerRcsAvailabilityCallback(int i, IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException;
+    void registerRcsAvailabilityCallback(int i, IImsCapabilityCallback iImsCapabilityCallback)
+            throws RemoteException;
 
-    void registerRcsFeatureCallback(int i, IImsServiceFeatureCallback iImsServiceFeatureCallback) throws RemoteException;
+    void registerRcsFeatureCallback(int i, IImsServiceFeatureCallback iImsServiceFeatureCallback)
+            throws RemoteException;
 
-    void registerSipDialogStateCallback(int i, ISipDialogStateCallback iSipDialogStateCallback) throws RemoteException;
+    void registerSipDialogStateCallback(int i, ISipDialogStateCallback iSipDialogStateCallback)
+            throws RemoteException;
 
-    void registerUcePublishStateCallback(int i, IRcsUcePublishStateCallback iRcsUcePublishStateCallback) throws RemoteException;
+    void registerUcePublishStateCallback(
+            int i, IRcsUcePublishStateCallback iRcsUcePublishStateCallback) throws RemoteException;
 
-    void requestAvailability(int i, String str, String str2, Uri uri, IRcsUceControllerCallback iRcsUceControllerCallback) throws RemoteException;
+    void requestAvailability(
+            int i,
+            String str,
+            String str2,
+            Uri uri,
+            IRcsUceControllerCallback iRcsUceControllerCallback)
+            throws RemoteException;
 
-    void requestCapabilities(int i, String str, String str2, List<Uri> list, IRcsUceControllerCallback iRcsUceControllerCallback) throws RemoteException;
+    void requestCapabilities(
+            int i,
+            String str,
+            String str2,
+            List<Uri> list,
+            IRcsUceControllerCallback iRcsUceControllerCallback)
+            throws RemoteException;
 
     void setUceSettingEnabled(int i, boolean z) throws RemoteException;
 
-    void triggerNetworkRegistration(int i, ISipDelegate iSipDelegate, int i2, String str) throws RemoteException;
+    void triggerNetworkRegistration(int i, ISipDelegate iSipDelegate, int i2, String str)
+            throws RemoteException;
 
-    void unregisterImsFeatureCallback(IImsServiceFeatureCallback iImsServiceFeatureCallback) throws RemoteException;
+    void unregisterImsFeatureCallback(IImsServiceFeatureCallback iImsServiceFeatureCallback)
+            throws RemoteException;
 
-    void unregisterImsRegistrationCallback(int i, IImsRegistrationCallback iImsRegistrationCallback) throws RemoteException;
+    void unregisterImsRegistrationCallback(int i, IImsRegistrationCallback iImsRegistrationCallback)
+            throws RemoteException;
 
-    void unregisterRcsAvailabilityCallback(int i, IImsCapabilityCallback iImsCapabilityCallback) throws RemoteException;
+    void unregisterRcsAvailabilityCallback(int i, IImsCapabilityCallback iImsCapabilityCallback)
+            throws RemoteException;
 
-    void unregisterSipDialogStateCallback(int i, ISipDialogStateCallback iSipDialogStateCallback) throws RemoteException;
+    void unregisterSipDialogStateCallback(int i, ISipDialogStateCallback iSipDialogStateCallback)
+            throws RemoteException;
 
-    void unregisterUcePublishStateCallback(int i, IRcsUcePublishStateCallback iRcsUcePublishStateCallback) throws RemoteException;
+    void unregisterUcePublishStateCallback(
+            int i, IRcsUcePublishStateCallback iRcsUcePublishStateCallback) throws RemoteException;
 
     public static class Default implements IImsRcsController {
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void registerImsRegistrationCallback(int subId, IImsRegistrationCallback c) throws RemoteException {
-        }
+        public void registerImsRegistrationCallback(int subId, IImsRegistrationCallback c)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void unregisterImsRegistrationCallback(int subId, IImsRegistrationCallback c) throws RemoteException {
-        }
+        public void unregisterImsRegistrationCallback(int subId, IImsRegistrationCallback c)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void getImsRcsRegistrationState(int subId, IIntegerConsumer consumer) throws RemoteException {
-        }
+        public void getImsRcsRegistrationState(int subId, IIntegerConsumer consumer)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void getImsRcsRegistrationTransportType(int subId, IIntegerConsumer consumer) throws RemoteException {
-        }
+        public void getImsRcsRegistrationTransportType(int subId, IIntegerConsumer consumer)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void registerRcsAvailabilityCallback(int subId, IImsCapabilityCallback c) throws RemoteException {
-        }
+        public void registerRcsAvailabilityCallback(int subId, IImsCapabilityCallback c)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void unregisterRcsAvailabilityCallback(int subId, IImsCapabilityCallback c) throws RemoteException {
-        }
+        public void unregisterRcsAvailabilityCallback(int subId, IImsCapabilityCallback c)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
         public boolean isCapable(int subId, int capability, int radioTech) throws RemoteException {
@@ -100,17 +126,28 @@ public interface IImsRcsController extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public boolean isAvailable(int subId, int capability, int radioTech) throws RemoteException {
+        public boolean isAvailable(int subId, int capability, int radioTech)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void requestCapabilities(int subId, String callingPackage, String callingFeatureId, List<Uri> contactNumbers, IRcsUceControllerCallback c) throws RemoteException {
-        }
+        public void requestCapabilities(
+                int subId,
+                String callingPackage,
+                String callingFeatureId,
+                List<Uri> contactNumbers,
+                IRcsUceControllerCallback c)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void requestAvailability(int subId, String callingPackage, String callingFeatureId, Uri contactNumber, IRcsUceControllerCallback c) throws RemoteException {
-        }
+        public void requestAvailability(
+                int subId,
+                String callingPackage,
+                String callingFeatureId,
+                Uri contactNumber,
+                IRcsUceControllerCallback c)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
         public int getUcePublishState(int subId) throws RemoteException {
@@ -118,21 +155,21 @@ public interface IImsRcsController extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public boolean isUceSettingEnabled(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public boolean isUceSettingEnabled(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return false;
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void setUceSettingEnabled(int subId, boolean isEnabled) throws RemoteException {
-        }
+        public void setUceSettingEnabled(int subId, boolean isEnabled) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void registerUcePublishStateCallback(int subId, IRcsUcePublishStateCallback c) throws RemoteException {
-        }
+        public void registerUcePublishStateCallback(int subId, IRcsUcePublishStateCallback c)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void unregisterUcePublishStateCallback(int subId, IRcsUcePublishStateCallback c) throws RemoteException {
-        }
+        public void unregisterUcePublishStateCallback(int subId, IRcsUcePublishStateCallback c)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
         public boolean isSipDelegateSupported(int subId) throws RemoteException {
@@ -140,32 +177,38 @@ public interface IImsRcsController extends IInterface {
         }
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void createSipDelegate(int subId, DelegateRequest request, String packageName, ISipDelegateConnectionStateCallback delegateState, ISipDelegateMessageCallback delegateMessage) throws RemoteException {
-        }
+        public void createSipDelegate(
+                int subId,
+                DelegateRequest request,
+                String packageName,
+                ISipDelegateConnectionStateCallback delegateState,
+                ISipDelegateMessageCallback delegateMessage)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void destroySipDelegate(int subId, ISipDelegate connection, int reason) throws RemoteException {
-        }
+        public void destroySipDelegate(int subId, ISipDelegate connection, int reason)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void triggerNetworkRegistration(int subId, ISipDelegate connection, int sipCode, String sipReason) throws RemoteException {
-        }
+        public void triggerNetworkRegistration(
+                int subId, ISipDelegate connection, int sipCode, String sipReason)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void registerSipDialogStateCallback(int subId, ISipDialogStateCallback cb) throws RemoteException {
-        }
+        public void registerSipDialogStateCallback(int subId, ISipDialogStateCallback cb)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void unregisterSipDialogStateCallback(int subId, ISipDialogStateCallback cb) throws RemoteException {
-        }
+        public void unregisterSipDialogStateCallback(int subId, ISipDialogStateCallback cb)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void registerRcsFeatureCallback(int slotId, IImsServiceFeatureCallback callback) throws RemoteException {
-        }
+        public void registerRcsFeatureCallback(int slotId, IImsServiceFeatureCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsRcsController
-        public void unregisterImsFeatureCallback(IImsServiceFeatureCallback callback) throws RemoteException {
-        }
+        public void unregisterImsFeatureCallback(IImsServiceFeatureCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -173,7 +216,7 @@ public interface IImsRcsController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsRcsController {
+    public abstract static class Stub extends Binder implements IImsRcsController {
         static final int TRANSACTION_createSipDelegate = 17;
         static final int TRANSACTION_destroySipDelegate = 18;
         static final int TRANSACTION_getImsRcsRegistrationState = 3;
@@ -277,7 +320,8 @@ public interface IImsRcsController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsRcsController.DESCRIPTOR);
             }
@@ -288,42 +332,48 @@ public interface IImsRcsController extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    IImsRegistrationCallback _arg1 = IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsRegistrationCallback _arg1 =
+                            IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerImsRegistrationCallback(_arg0, _arg1);
                     reply.writeNoException();
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    IImsRegistrationCallback _arg12 = IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsRegistrationCallback _arg12 =
+                            IImsRegistrationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterImsRegistrationCallback(_arg02, _arg12);
                     reply.writeNoException();
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    IIntegerConsumer _arg13 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg13 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getImsRcsRegistrationState(_arg03, _arg13);
                     reply.writeNoException();
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    IIntegerConsumer _arg14 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg14 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getImsRcsRegistrationTransportType(_arg04, _arg14);
                     reply.writeNoException();
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    IImsCapabilityCallback _arg15 = IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsCapabilityCallback _arg15 =
+                            IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerRcsAvailabilityCallback(_arg05, _arg15);
                     reply.writeNoException();
                     return true;
                 case 6:
                     int _arg06 = data.readInt();
-                    IImsCapabilityCallback _arg16 = IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsCapabilityCallback _arg16 =
+                            IImsCapabilityCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterRcsAvailabilityCallback(_arg06, _arg16);
                     reply.writeNoException();
@@ -351,7 +401,8 @@ public interface IImsRcsController extends IInterface {
                     String _arg19 = data.readString();
                     String _arg23 = data.readString();
                     List<Uri> _arg3 = data.createTypedArrayList(Uri.CREATOR);
-                    IRcsUceControllerCallback _arg4 = IRcsUceControllerCallback.Stub.asInterface(data.readStrongBinder());
+                    IRcsUceControllerCallback _arg4 =
+                            IRcsUceControllerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestCapabilities(_arg09, _arg19, _arg23, _arg3, _arg4);
                     reply.writeNoException();
@@ -361,7 +412,8 @@ public interface IImsRcsController extends IInterface {
                     String _arg110 = data.readString();
                     String _arg24 = data.readString();
                     Uri _arg32 = (Uri) data.readTypedObject(Uri.CREATOR);
-                    IRcsUceControllerCallback _arg42 = IRcsUceControllerCallback.Stub.asInterface(data.readStrongBinder());
+                    IRcsUceControllerCallback _arg42 =
+                            IRcsUceControllerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestAvailability(_arg010, _arg110, _arg24, _arg32, _arg42);
                     reply.writeNoException();
@@ -391,14 +443,16 @@ public interface IImsRcsController extends IInterface {
                     return true;
                 case 14:
                     int _arg014 = data.readInt();
-                    IRcsUcePublishStateCallback _arg113 = IRcsUcePublishStateCallback.Stub.asInterface(data.readStrongBinder());
+                    IRcsUcePublishStateCallback _arg113 =
+                            IRcsUcePublishStateCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerUcePublishStateCallback(_arg014, _arg113);
                     reply.writeNoException();
                     return true;
                 case 15:
                     int _arg015 = data.readInt();
-                    IRcsUcePublishStateCallback _arg114 = IRcsUcePublishStateCallback.Stub.asInterface(data.readStrongBinder());
+                    IRcsUcePublishStateCallback _arg114 =
+                            IRcsUcePublishStateCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterUcePublishStateCallback(_arg015, _arg114);
                     reply.writeNoException();
@@ -412,10 +466,14 @@ public interface IImsRcsController extends IInterface {
                     return true;
                 case 17:
                     int _arg017 = data.readInt();
-                    DelegateRequest _arg115 = (DelegateRequest) data.readTypedObject(DelegateRequest.CREATOR);
+                    DelegateRequest _arg115 =
+                            (DelegateRequest) data.readTypedObject(DelegateRequest.CREATOR);
                     String _arg26 = data.readString();
-                    ISipDelegateConnectionStateCallback _arg33 = ISipDelegateConnectionStateCallback.Stub.asInterface(data.readStrongBinder());
-                    ISipDelegateMessageCallback _arg43 = ISipDelegateMessageCallback.Stub.asInterface(data.readStrongBinder());
+                    ISipDelegateConnectionStateCallback _arg33 =
+                            ISipDelegateConnectionStateCallback.Stub.asInterface(
+                                    data.readStrongBinder());
+                    ISipDelegateMessageCallback _arg43 =
+                            ISipDelegateMessageCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     createSipDelegate(_arg017, _arg115, _arg26, _arg33, _arg43);
                     reply.writeNoException();
@@ -439,27 +497,31 @@ public interface IImsRcsController extends IInterface {
                     return true;
                 case 20:
                     int _arg020 = data.readInt();
-                    ISipDialogStateCallback _arg118 = ISipDialogStateCallback.Stub.asInterface(data.readStrongBinder());
+                    ISipDialogStateCallback _arg118 =
+                            ISipDialogStateCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerSipDialogStateCallback(_arg020, _arg118);
                     reply.writeNoException();
                     return true;
                 case 21:
                     int _arg021 = data.readInt();
-                    ISipDialogStateCallback _arg119 = ISipDialogStateCallback.Stub.asInterface(data.readStrongBinder());
+                    ISipDialogStateCallback _arg119 =
+                            ISipDialogStateCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterSipDialogStateCallback(_arg021, _arg119);
                     reply.writeNoException();
                     return true;
                 case 22:
                     int _arg022 = data.readInt();
-                    IImsServiceFeatureCallback _arg120 = IImsServiceFeatureCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsServiceFeatureCallback _arg120 =
+                            IImsServiceFeatureCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerRcsFeatureCallback(_arg022, _arg120);
                     reply.writeNoException();
                     return true;
                 case 23:
-                    IImsServiceFeatureCallback _arg023 = IImsServiceFeatureCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsServiceFeatureCallback _arg023 =
+                            IImsServiceFeatureCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterImsFeatureCallback(_arg023);
                     reply.writeNoException();
@@ -486,7 +548,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void registerImsRegistrationCallback(int subId, IImsRegistrationCallback c) throws RemoteException {
+            public void registerImsRegistrationCallback(int subId, IImsRegistrationCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -502,7 +565,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void unregisterImsRegistrationCallback(int subId, IImsRegistrationCallback c) throws RemoteException {
+            public void unregisterImsRegistrationCallback(int subId, IImsRegistrationCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -518,7 +582,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void getImsRcsRegistrationState(int subId, IIntegerConsumer consumer) throws RemoteException {
+            public void getImsRcsRegistrationState(int subId, IIntegerConsumer consumer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -534,7 +599,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void getImsRcsRegistrationTransportType(int subId, IIntegerConsumer consumer) throws RemoteException {
+            public void getImsRcsRegistrationTransportType(int subId, IIntegerConsumer consumer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -550,7 +616,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void registerRcsAvailabilityCallback(int subId, IImsCapabilityCallback c) throws RemoteException {
+            public void registerRcsAvailabilityCallback(int subId, IImsCapabilityCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -566,7 +633,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void unregisterRcsAvailabilityCallback(int subId, IImsCapabilityCallback c) throws RemoteException {
+            public void unregisterRcsAvailabilityCallback(int subId, IImsCapabilityCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -582,7 +650,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public boolean isCapable(int subId, int capability, int radioTech) throws RemoteException {
+            public boolean isCapable(int subId, int capability, int radioTech)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -601,7 +670,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public boolean isAvailable(int subId, int capability, int radioTech) throws RemoteException {
+            public boolean isAvailable(int subId, int capability, int radioTech)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -620,7 +690,13 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void requestCapabilities(int subId, String callingPackage, String callingFeatureId, List<Uri> contactNumbers, IRcsUceControllerCallback c) throws RemoteException {
+            public void requestCapabilities(
+                    int subId,
+                    String callingPackage,
+                    String callingFeatureId,
+                    List<Uri> contactNumbers,
+                    IRcsUceControllerCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -639,7 +715,13 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void requestAvailability(int subId, String callingPackage, String callingFeatureId, Uri contactNumber, IRcsUceControllerCallback c) throws RemoteException {
+            public void requestAvailability(
+                    int subId,
+                    String callingPackage,
+                    String callingFeatureId,
+                    Uri contactNumber,
+                    IRcsUceControllerCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -675,7 +757,9 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public boolean isUceSettingEnabled(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public boolean isUceSettingEnabled(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -710,7 +794,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void registerUcePublishStateCallback(int subId, IRcsUcePublishStateCallback c) throws RemoteException {
+            public void registerUcePublishStateCallback(int subId, IRcsUcePublishStateCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -726,7 +811,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void unregisterUcePublishStateCallback(int subId, IRcsUcePublishStateCallback c) throws RemoteException {
+            public void unregisterUcePublishStateCallback(int subId, IRcsUcePublishStateCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -759,7 +845,13 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void createSipDelegate(int subId, DelegateRequest request, String packageName, ISipDelegateConnectionStateCallback delegateState, ISipDelegateMessageCallback delegateMessage) throws RemoteException {
+            public void createSipDelegate(
+                    int subId,
+                    DelegateRequest request,
+                    String packageName,
+                    ISipDelegateConnectionStateCallback delegateState,
+                    ISipDelegateMessageCallback delegateMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -778,7 +870,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void destroySipDelegate(int subId, ISipDelegate connection, int reason) throws RemoteException {
+            public void destroySipDelegate(int subId, ISipDelegate connection, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -795,7 +888,9 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void triggerNetworkRegistration(int subId, ISipDelegate connection, int sipCode, String sipReason) throws RemoteException {
+            public void triggerNetworkRegistration(
+                    int subId, ISipDelegate connection, int sipCode, String sipReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -813,7 +908,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void registerSipDialogStateCallback(int subId, ISipDialogStateCallback cb) throws RemoteException {
+            public void registerSipDialogStateCallback(int subId, ISipDialogStateCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -829,7 +925,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void unregisterSipDialogStateCallback(int subId, ISipDialogStateCallback cb) throws RemoteException {
+            public void unregisterSipDialogStateCallback(int subId, ISipDialogStateCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -845,7 +942,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void registerRcsFeatureCallback(int slotId, IImsServiceFeatureCallback callback) throws RemoteException {
+            public void registerRcsFeatureCallback(int slotId, IImsServiceFeatureCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -861,7 +959,8 @@ public interface IImsRcsController extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsRcsController
-            public void unregisterImsFeatureCallback(IImsServiceFeatureCallback callback) throws RemoteException {
+            public void unregisterImsFeatureCallback(IImsServiceFeatureCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

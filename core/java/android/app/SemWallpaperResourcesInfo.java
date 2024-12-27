@@ -8,8 +8,14 @@ import android.os.Bundle;
 import android.os.Debug;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.samsung.android.wallpaper.utils.SemWallpaperProperties;
 import com.samsung.android.wallpaper.utils.WhichChecker;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileDescriptor;
 import java.io.InputStream;
@@ -25,9 +31,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* loaded from: classes.dex */
 public class SemWallpaperResourcesInfo {
@@ -51,8 +54,7 @@ public class SemWallpaperResourcesInfo {
         public boolean isBespoke = false;
         public ArrayList<String> cmfInfo = new ArrayList<>();
 
-        Item() {
-        }
+        Item() {}
 
         public String toString() {
             StringBuilder builder = new StringBuilder();
@@ -86,8 +88,7 @@ public class SemWallpaperResourcesInfo {
         public String mServiceClassName;
         public String mServicePkgName;
 
-        TypeParams() {
-        }
+        TypeParams() {}
 
         public String toString() {
             return this.mServicePkgName + "/" + this.mServiceClassName;
@@ -102,8 +103,7 @@ public class SemWallpaperResourcesInfo {
         private final HashMap<Integer, String> mDefaultMultipackStyle = new HashMap<>();
         private final HashSet<String> mKnownColorCode = new HashSet<>();
 
-        ResourceData() {
-        }
+        ResourceData() {}
 
         public void addItem(Item item) {
             ArrayList<Item> itemArray = this.mItemsMap.get(Integer.valueOf(item.type));
@@ -163,7 +163,10 @@ public class SemWallpaperResourcesInfo {
 
         private int getDefaultWallpaperType(int which) {
             if (WhichChecker.isModeAbsent(which)) {
-                Log.w(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperType: mode is missing. which=" + which, new IllegalArgumentException());
+                Log.w(
+                        SemWallpaperResourcesInfo.TAG,
+                        "getDefaultWallpaperType: mode is missing. which=" + which,
+                        new IllegalArgumentException());
             }
             return this.mDefaultTypeMap.getOrDefault(Integer.valueOf(which), 0).intValue();
         }
@@ -177,7 +180,10 @@ public class SemWallpaperResourcesInfo {
 
         public Item getDefaultWallpaperItem(int which, String deviceColorCode, int wallpaperType) {
             if (WhichChecker.isModeAbsent(which)) {
-                Log.w(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: mode is missing. which=" + which, new IllegalArgumentException());
+                Log.w(
+                        SemWallpaperResourcesInfo.TAG,
+                        "getDefaultWallpaperItem: mode is missing. which=" + which,
+                        new IllegalArgumentException());
             }
             Item matchedItem = null;
             ArrayList<Item> candidateItems = this.mItemsMap.get(Integer.valueOf(wallpaperType));
@@ -185,28 +191,50 @@ public class SemWallpaperResourcesInfo {
                 matchedItem = chooseDefaultWallpaperItem(which, deviceColorCode, candidateItems);
             }
             if (matchedItem == null) {
-                Log.w(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: nothing matched. which=" + which);
+                Log.w(
+                        SemWallpaperResourcesInfo.TAG,
+                        "getDefaultWallpaperItem: nothing matched. which=" + which);
                 return null;
             }
             if (WhichChecker.isSystemAndLock(matchedItem.which) && WhichChecker.isLock(which)) {
-                Log.i(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: paired lock. which=" + which + ", matched=[" + matchedItem + NavigationBarInflaterView.SIZE_MOD_END);
+                Log.i(
+                        SemWallpaperResourcesInfo.TAG,
+                        "getDefaultWallpaperItem: paired lock. which="
+                                + which
+                                + ", matched=["
+                                + matchedItem
+                                + NavigationBarInflaterView.SIZE_MOD_END);
                 return null;
             }
             if (SemWallpaperResourcesInfo.DEBUG) {
-                Log.i(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: which=" + which + ", colorCode=" + deviceColorCode + ", matched=[" + matchedItem + NavigationBarInflaterView.SIZE_MOD_END);
+                Log.i(
+                        SemWallpaperResourcesInfo.TAG,
+                        "getDefaultWallpaperItem: which="
+                                + which
+                                + ", colorCode="
+                                + deviceColorCode
+                                + ", matched=["
+                                + matchedItem
+                                + NavigationBarInflaterView.SIZE_MOD_END);
             }
             return matchedItem;
         }
 
-        private Item chooseDefaultWallpaperItem(int which, String deviceColorCode, ArrayList<Item> candidateItems) {
+        private Item chooseDefaultWallpaperItem(
+                int which, String deviceColorCode, ArrayList<Item> candidateItems) {
             Item item;
             if (candidateItems.isEmpty()) {
                 Log.w(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: empty item array");
                 return null;
             }
-            if (this.mIsSupportCMF && !TextUtils.isEmpty(deviceColorCode) && (item = getFirstExactlyMatchedItem(which, deviceColorCode, candidateItems)) != null) {
+            if (this.mIsSupportCMF
+                    && !TextUtils.isEmpty(deviceColorCode)
+                    && (item = getFirstExactlyMatchedItem(which, deviceColorCode, candidateItems))
+                            != null) {
                 if (SemWallpaperResourcesInfo.DEBUG) {
-                    Log.i(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: which & color matched. item=" + item);
+                    Log.i(
+                            SemWallpaperResourcesInfo.TAG,
+                            "getDefaultWallpaperItem: which & color matched. item=" + item);
                 }
                 return item;
             }
@@ -222,7 +250,10 @@ public class SemWallpaperResourcesInfo {
                     }
                     if (item2.isDefault) {
                         if (SemWallpaperResourcesInfo.DEBUG) {
-                            Log.i(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: which & default matched. item=" + item2);
+                            Log.i(
+                                    SemWallpaperResourcesInfo.TAG,
+                                    "getDefaultWallpaperItem: which & default matched. item="
+                                            + item2);
                         }
                         return item2;
                     }
@@ -230,7 +261,10 @@ public class SemWallpaperResourcesInfo {
             }
             if (firstItem != null) {
                 if (SemWallpaperResourcesInfo.DEBUG) {
-                    Log.i(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: which matched. use first item. item=" + firstItem);
+                    Log.i(
+                            SemWallpaperResourcesInfo.TAG,
+                            "getDefaultWallpaperItem: which matched. use first item. item="
+                                    + firstItem);
                 }
                 return firstItem;
             }
@@ -244,7 +278,9 @@ public class SemWallpaperResourcesInfo {
                     }
                     if (item3.isDefault) {
                         if (SemWallpaperResourcesInfo.DEBUG) {
-                            Log.i(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: default matched. item=" + item3);
+                            Log.i(
+                                    SemWallpaperResourcesInfo.TAG,
+                                    "getDefaultWallpaperItem: default matched. item=" + item3);
                         }
                         return item3;
                     }
@@ -252,11 +288,19 @@ public class SemWallpaperResourcesInfo {
             }
             if (firstItem2 != null) {
                 if (SemWallpaperResourcesInfo.DEBUG) {
-                    Log.i(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: type matched. use first item. item=" + firstItem2);
+                    Log.i(
+                            SemWallpaperResourcesInfo.TAG,
+                            "getDefaultWallpaperItem: type matched. use first item. item="
+                                    + firstItem2);
                 }
                 return firstItem2;
             }
-            Log.w(SemWallpaperResourcesInfo.TAG, "getDefaultWallpaperItem: could not find matched item. which=" + which + ", deviceColor=" + deviceColorCode);
+            Log.w(
+                    SemWallpaperResourcesInfo.TAG,
+                    "getDefaultWallpaperItem: could not find matched item. which="
+                            + which
+                            + ", deviceColor="
+                            + deviceColorCode);
             return null;
         }
 
@@ -279,7 +323,8 @@ public class SemWallpaperResourcesInfo {
             return null;
         }
 
-        private Item getFirstExactlyMatchedItem(int which, String colorCode, ArrayList<Item> candidateItems) {
+        private Item getFirstExactlyMatchedItem(
+                int which, String colorCode, ArrayList<Item> candidateItems) {
             if (TextUtils.isEmpty(colorCode)) {
                 return null;
             }
@@ -300,7 +345,9 @@ public class SemWallpaperResourcesInfo {
             }
             ArrayList<Item> itemArray = this.mItemsMap.get(8);
             if (itemArray == null || itemArray.isEmpty()) {
-                Log.i(SemWallpaperResourcesInfo.TAG, "getVideoItemByFilename: video item array is empty");
+                Log.i(
+                        SemWallpaperResourcesInfo.TAG,
+                        "getVideoItemByFilename: video item array is empty");
                 return null;
             }
             Iterator<Item> it = itemArray.iterator();
@@ -327,12 +374,13 @@ public class SemWallpaperResourcesInfo {
         }
 
         private void sortAscending() {
-            Comparator ascending = new Comparator<Item>() { // from class: android.app.SemWallpaperResourcesInfo.ResourceData.1
-                @Override // java.util.Comparator
-                public int compare(Item r1, Item r2) {
-                    return r1.index.compareTo(r2.index);
-                }
-            };
+            Comparator ascending = new Comparator<Item>() { // from class:
+                        // android.app.SemWallpaperResourcesInfo.ResourceData.1
+                        @Override // java.util.Comparator
+                        public int compare(Item r1, Item r2) {
+                            return r1.index.compareTo(r2.index);
+                        }
+                    };
             for (ArrayList<Item> itemArray : this.mItemsMap.values()) {
                 if (itemArray.size() > 1) {
                     Collections.sort(itemArray, ascending);
@@ -416,7 +464,11 @@ public class SemWallpaperResourcesInfo {
             String str;
             ResourceParser resourceParser = this;
             ResourceData result = new ResourceData();
-            int resId = resourceParser.mContext.getResources().getIdentifier("resources_info", "raw", wallpaperResPkgName);
+            int resId =
+                    resourceParser
+                            .mContext
+                            .getResources()
+                            .getIdentifier("resources_info", "raw", wallpaperResPkgName);
             Writer writer = new StringWriter();
             char[] buffer = new char[1024];
             try {
@@ -490,14 +542,18 @@ public class SemWallpaperResourcesInfo {
                                     }
                                     int which = jsonItem.optInt("which", -1);
                                     int screen = jsonItem.optInt("screen", -1);
-                                    item.which = resourceParser.determineModeEnsuredWhich(which, screen);
+                                    item.which =
+                                            resourceParser.determineModeEnsuredWhich(which, screen);
                                     item.isBespoke = jsonItem.optBoolean("isBespoke", false);
                                     item.fileName = jsonItem.optString("filename", null);
                                     item.videoFrameInfo = jsonItem.optInt("frame_no", -1);
-                                    item.isBlackFirstFrame = jsonItem.optBoolean("isBlackFirstFrame", false);
-                                    resourceParser.parseCmfInfo(jsonItem.getJSONArray("cmf_info"), item);
+                                    item.isBlackFirstFrame =
+                                            jsonItem.optBoolean("isBlackFirstFrame", false);
+                                    resourceParser.parseCmfInfo(
+                                            jsonItem.getJSONArray("cmf_info"), item);
                                     result.addKnownColors(item.cmfInfo);
-                                    resourceParser.parseTypeParams(jsonItem.optJSONObject("type_params"), item);
+                                    resourceParser.parseTypeParams(
+                                            jsonItem.optJSONObject("type_params"), item);
                                     result.addItem(item);
                                     lastParseSuccessItemIndex = item.index.intValue();
                                     i++;
@@ -515,7 +571,10 @@ public class SemWallpaperResourcesInfo {
                         }
                         e = e4;
                         Log.e(SemWallpaperResourcesInfo.TAG, "parseJson: e=" + e, e);
-                        Log.e(SemWallpaperResourcesInfo.TAG, "parseJson: last parse success item index=" + lastParseSuccessItemIndex);
+                        Log.e(
+                                SemWallpaperResourcesInfo.TAG,
+                                "parseJson: last parse success item index="
+                                        + lastParseSuccessItemIndex);
                         Log.e(SemWallpaperResourcesInfo.TAG, "parseJson: " + jsonData);
                         return new ResourceData();
                     }
@@ -525,7 +584,9 @@ public class SemWallpaperResourcesInfo {
                         while (i2 < jsonArray2.length()) {
                             JSONObject object = jsonArray2.getJSONObject(i2);
                             int screen2 = object.getInt(str);
-                            int which2 = resourceParser.determineModeEnsuredWhich(object.getInt("which"), screen2);
+                            int which2 =
+                                    resourceParser.determineModeEnsuredWhich(
+                                            object.getInt("which"), screen2);
                             String str2 = str;
                             int type = object.getInt("type");
                             if (type == 10) {
@@ -575,7 +636,8 @@ public class SemWallpaperResourcesInfo {
             JSONObject svcSettingsObj = jsonTypeParams.optJSONObject("service_settings");
             if (svcSettingsObj != null) {
                 Bundle svcSettingBundle = convertJsonObjectToBundle(svcSettingsObj);
-                typeParams.mExtras.putBundle(SemWallpaperProperties.KEY_SERVICE_SETTINGS, svcSettingBundle);
+                typeParams.mExtras.putBundle(
+                        SemWallpaperProperties.KEY_SERVICE_SETTINGS, svcSettingBundle);
             }
         }
 
@@ -587,7 +649,9 @@ public class SemWallpaperResourcesInfo {
             for (int j = 0; j < cmfCount; j++) {
                 String colorCode = getRefinedColorCode(cmfArray.optString(j, null));
                 if (TextUtils.isEmpty(colorCode)) {
-                    Log.w(SemWallpaperResourcesInfo.TAG, "parseCmfInfo: empty cmf detected. wp item index=" + outItem.index);
+                    Log.w(
+                            SemWallpaperResourcesInfo.TAG,
+                            "parseCmfInfo: empty cmf detected. wp item index=" + outItem.index);
                 } else {
                     outItem.cmfInfo.add(colorCode);
                 }
@@ -613,7 +677,9 @@ public class SemWallpaperResourcesInfo {
                         bundle.putBundle(key, convertJsonObjectToBundle((JSONObject) value));
                     }
                 } catch (JSONException e) {
-                    Log.e(SemWallpaperResourcesInfo.TAG, "convertJsonObjectToBundle: failed to get value. key=" + key);
+                    Log.e(
+                            SemWallpaperResourcesInfo.TAG,
+                            "convertJsonObjectToBundle: failed to get value. key=" + key);
                 }
             }
             return bundle;
@@ -636,7 +702,12 @@ public class SemWallpaperResourcesInfo {
             if (!WhichChecker.isModeAbsent(which)) {
                 return which;
             }
-            Log.w(SemWallpaperResourcesInfo.TAG, "determineModeEnsuredWhich: screen is missing. which=" + which + ", screen=" + screen);
+            Log.w(
+                    SemWallpaperResourcesInfo.TAG,
+                    "determineModeEnsuredWhich: screen is missing. which="
+                            + which
+                            + ", screen="
+                            + screen);
             return which | 4;
         }
     }
@@ -645,7 +716,8 @@ public class SemWallpaperResourcesInfo {
         try {
             this.mResPkgContext = context.createPackageContext(WALLPAPER_PACKAGE, 0);
             if (this.mResPkgContext != null) {
-                this.mResource = new ResourceParser(this.mResPkgContext).parseJson(WALLPAPER_PACKAGE);
+                this.mResource =
+                        new ResourceParser(this.mResPkgContext).parseJson(WALLPAPER_PACKAGE);
             }
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "init: e=" + e);
@@ -656,7 +728,14 @@ public class SemWallpaperResourcesInfo {
         this.mContext = context.getApplicationContext();
         if (this.mContext == null) {
             String pkgName = context.getPackageName();
-            Log.w(TAG, "init: failed to get app context. context=" + context + NavigationBarInflaterView.KEY_CODE_START + pkgName + "), resPkgContext=" + this.mResPkgContext);
+            Log.w(
+                    TAG,
+                    "init: failed to get app context. context="
+                            + context
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + pkgName
+                            + "), resPkgContext="
+                            + this.mResPkgContext);
             try {
                 this.mContext = context.createPackageContext(pkgName, 0);
             } catch (PackageManager.NameNotFoundException e2) {
@@ -685,12 +764,19 @@ public class SemWallpaperResourcesInfo {
         if (TextUtils.isEmpty(resourceName)) {
             return null;
         }
-        int wallpaperResId = this.mResPkgContext.getResources().getIdentifier(resourceName.substring(0, resourceName.lastIndexOf(46)), "drawable", WALLPAPER_PACKAGE);
+        int wallpaperResId =
+                this.mResPkgContext
+                        .getResources()
+                        .getIdentifier(
+                                resourceName.substring(0, resourceName.lastIndexOf(46)),
+                                "drawable",
+                                WALLPAPER_PACKAGE);
         Log.i(TAG, "getDefaultImageWallpaper: wallpaperResId = " + wallpaperResId);
         if (wallpaperResId <= 0) {
             return null;
         }
-        InputStream inputStream = this.mResPkgContext.getResources().openRawResource(wallpaperResId);
+        InputStream inputStream =
+                this.mResPkgContext.getResources().openRawResource(wallpaperResId);
         return inputStream;
     }
 
@@ -734,11 +820,16 @@ public class SemWallpaperResourcesInfo {
             Log.w(TAG, "getDefaultLiveWallpaperComponentName: no matched item" + which);
             return null;
         }
-        if (item.typeParams == null || TextUtils.isEmpty(item.typeParams.mServicePkgName) || TextUtils.isEmpty(item.typeParams.mServiceClassName)) {
-            Log.w(TAG, "getDefaultLiveWallpaperComponentName: empty component name. which=" + which);
+        if (item.typeParams == null
+                || TextUtils.isEmpty(item.typeParams.mServicePkgName)
+                || TextUtils.isEmpty(item.typeParams.mServiceClassName)) {
+            Log.w(
+                    TAG,
+                    "getDefaultLiveWallpaperComponentName: empty component name. which=" + which);
             return null;
         }
-        return new ComponentName(item.typeParams.mServicePkgName, item.typeParams.mServiceClassName);
+        return new ComponentName(
+                item.typeParams.mServicePkgName, item.typeParams.mServiceClassName);
     }
 
     public Bundle getDefaultLiveWallpaperExtras(int which) {
@@ -801,7 +892,10 @@ public class SemWallpaperResourcesInfo {
 
     private int getModeEnsuredWhich(int which) {
         if (WhichChecker.isModeAbsent(which)) {
-            Log.w(TAG, "getModeEnsuredWhich: mode is missing. which=" + which, new IllegalArgumentException());
+            Log.w(
+                    TAG,
+                    "getModeEnsuredWhich: mode is missing. which=" + which,
+                    new IllegalArgumentException());
             return which | 4;
         }
         return which;

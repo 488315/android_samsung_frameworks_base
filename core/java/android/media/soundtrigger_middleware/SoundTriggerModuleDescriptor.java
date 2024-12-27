@@ -4,27 +4,30 @@ import android.media.soundtrigger.Properties;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SoundTriggerModuleDescriptor implements Parcelable {
-    public static final Parcelable.Creator<SoundTriggerModuleDescriptor> CREATOR = new Parcelable.Creator<SoundTriggerModuleDescriptor>() { // from class: android.media.soundtrigger_middleware.SoundTriggerModuleDescriptor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SoundTriggerModuleDescriptor createFromParcel(Parcel _aidl_source) {
-            SoundTriggerModuleDescriptor _aidl_out = new SoundTriggerModuleDescriptor();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SoundTriggerModuleDescriptor> CREATOR =
+            new Parcelable.Creator<SoundTriggerModuleDescriptor>() { // from class:
+                // android.media.soundtrigger_middleware.SoundTriggerModuleDescriptor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SoundTriggerModuleDescriptor createFromParcel(Parcel _aidl_source) {
+                    SoundTriggerModuleDescriptor _aidl_out = new SoundTriggerModuleDescriptor();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SoundTriggerModuleDescriptor[] newArray(int _aidl_size) {
-            return new SoundTriggerModuleDescriptor[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SoundTriggerModuleDescriptor[] newArray(int _aidl_size) {
+                    return new SoundTriggerModuleDescriptor[_aidl_size];
+                }
+            };
     public int handle = 0;
     public Properties properties;
 
@@ -91,14 +94,16 @@ public class SoundTriggerModuleDescriptor implements Parcelable {
             return false;
         }
         SoundTriggerModuleDescriptor that = (SoundTriggerModuleDescriptor) other;
-        if (Objects.deepEquals(Integer.valueOf(this.handle), Integer.valueOf(that.handle)) && Objects.deepEquals(this.properties, that.properties)) {
+        if (Objects.deepEquals(Integer.valueOf(this.handle), Integer.valueOf(that.handle))
+                && Objects.deepEquals(this.properties, that.properties)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.handle), this.properties).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this.handle), this.properties).toArray());
     }
 
     @Override // android.os.Parcelable

@@ -6,8 +6,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.vr.IPersistentVrStateCallbacks;
-import android.service.vr.IVrStateCallbacks;
 
 /* loaded from: classes3.dex */
 public interface IVrManager extends IInterface {
@@ -19,7 +17,8 @@ public interface IVrManager extends IInterface {
 
     void registerListener(IVrStateCallbacks iVrStateCallbacks) throws RemoteException;
 
-    void registerPersistentVrStateListener(IPersistentVrStateCallbacks iPersistentVrStateCallbacks) throws RemoteException;
+    void registerPersistentVrStateListener(IPersistentVrStateCallbacks iPersistentVrStateCallbacks)
+            throws RemoteException;
 
     void setAndBindCompositor(String str) throws RemoteException;
 
@@ -27,28 +26,28 @@ public interface IVrManager extends IInterface {
 
     void setStandbyEnabled(boolean z) throws RemoteException;
 
-    void setVr2dDisplayProperties(Vr2dDisplayProperties vr2dDisplayProperties) throws RemoteException;
+    void setVr2dDisplayProperties(Vr2dDisplayProperties vr2dDisplayProperties)
+            throws RemoteException;
 
     void unregisterListener(IVrStateCallbacks iVrStateCallbacks) throws RemoteException;
 
-    void unregisterPersistentVrStateListener(IPersistentVrStateCallbacks iPersistentVrStateCallbacks) throws RemoteException;
+    void unregisterPersistentVrStateListener(
+            IPersistentVrStateCallbacks iPersistentVrStateCallbacks) throws RemoteException;
 
     public static class Default implements IVrManager {
         @Override // android.service.vr.IVrManager
-        public void registerListener(IVrStateCallbacks cb) throws RemoteException {
-        }
+        public void registerListener(IVrStateCallbacks cb) throws RemoteException {}
 
         @Override // android.service.vr.IVrManager
-        public void unregisterListener(IVrStateCallbacks cb) throws RemoteException {
-        }
+        public void unregisterListener(IVrStateCallbacks cb) throws RemoteException {}
 
         @Override // android.service.vr.IVrManager
-        public void registerPersistentVrStateListener(IPersistentVrStateCallbacks cb) throws RemoteException {
-        }
+        public void registerPersistentVrStateListener(IPersistentVrStateCallbacks cb)
+                throws RemoteException {}
 
         @Override // android.service.vr.IVrManager
-        public void unregisterPersistentVrStateListener(IPersistentVrStateCallbacks cb) throws RemoteException {
-        }
+        public void unregisterPersistentVrStateListener(IPersistentVrStateCallbacks cb)
+                throws RemoteException {}
 
         @Override // android.service.vr.IVrManager
         public boolean getVrModeState() throws RemoteException {
@@ -61,12 +60,11 @@ public interface IVrManager extends IInterface {
         }
 
         @Override // android.service.vr.IVrManager
-        public void setPersistentVrModeEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setPersistentVrModeEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.service.vr.IVrManager
-        public void setVr2dDisplayProperties(Vr2dDisplayProperties vr2dDisplayProperties) throws RemoteException {
-        }
+        public void setVr2dDisplayProperties(Vr2dDisplayProperties vr2dDisplayProperties)
+                throws RemoteException {}
 
         @Override // android.service.vr.IVrManager
         public int getVr2dDisplayId() throws RemoteException {
@@ -74,12 +72,10 @@ public interface IVrManager extends IInterface {
         }
 
         @Override // android.service.vr.IVrManager
-        public void setAndBindCompositor(String componentName) throws RemoteException {
-        }
+        public void setAndBindCompositor(String componentName) throws RemoteException {}
 
         @Override // android.service.vr.IVrManager
-        public void setStandbyEnabled(boolean standby) throws RemoteException {
-        }
+        public void setStandbyEnabled(boolean standby) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -87,7 +83,7 @@ public interface IVrManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVrManager {
+    public abstract static class Stub extends Binder implements IVrManager {
         public static final String DESCRIPTOR = "android.service.vr.IVrManager";
         static final int TRANSACTION_getPersistentVrModeEnabled = 6;
         static final int TRANSACTION_getVr2dDisplayId = 9;
@@ -156,7 +152,8 @@ public interface IVrManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -166,25 +163,29 @@ public interface IVrManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IVrStateCallbacks _arg0 = IVrStateCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IVrStateCallbacks _arg0 =
+                            IVrStateCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerListener(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IVrStateCallbacks _arg02 = IVrStateCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IVrStateCallbacks _arg02 =
+                            IVrStateCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterListener(_arg02);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    IPersistentVrStateCallbacks _arg03 = IPersistentVrStateCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IPersistentVrStateCallbacks _arg03 =
+                            IPersistentVrStateCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerPersistentVrStateListener(_arg03);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    IPersistentVrStateCallbacks _arg04 = IPersistentVrStateCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IPersistentVrStateCallbacks _arg04 =
+                            IPersistentVrStateCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterPersistentVrStateListener(_arg04);
                     reply.writeNoException();
@@ -206,7 +207,9 @@ public interface IVrManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 8:
-                    Vr2dDisplayProperties _arg06 = (Vr2dDisplayProperties) data.readTypedObject(Vr2dDisplayProperties.CREATOR);
+                    Vr2dDisplayProperties _arg06 =
+                            (Vr2dDisplayProperties)
+                                    data.readTypedObject(Vr2dDisplayProperties.CREATOR);
                     data.enforceNoDataAvail();
                     setVr2dDisplayProperties(_arg06);
                     reply.writeNoException();
@@ -280,7 +283,8 @@ public interface IVrManager extends IInterface {
             }
 
             @Override // android.service.vr.IVrManager
-            public void registerPersistentVrStateListener(IPersistentVrStateCallbacks cb) throws RemoteException {
+            public void registerPersistentVrStateListener(IPersistentVrStateCallbacks cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -295,7 +299,8 @@ public interface IVrManager extends IInterface {
             }
 
             @Override // android.service.vr.IVrManager
-            public void unregisterPersistentVrStateListener(IPersistentVrStateCallbacks cb) throws RemoteException {
+            public void unregisterPersistentVrStateListener(IPersistentVrStateCallbacks cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -357,7 +362,8 @@ public interface IVrManager extends IInterface {
             }
 
             @Override // android.service.vr.IVrManager
-            public void setVr2dDisplayProperties(Vr2dDisplayProperties vr2dDisplayProperties) throws RemoteException {
+            public void setVr2dDisplayProperties(Vr2dDisplayProperties vr2dDisplayProperties)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

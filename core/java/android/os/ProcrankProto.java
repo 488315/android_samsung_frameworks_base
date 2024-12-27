@@ -17,8 +17,7 @@ public final class ProcrankProto {
         public static final long VSS = 1112396529666L;
         public static final long ZSWAP = 1112396529673L;
 
-        public Process() {
-        }
+        public Process() {}
     }
 
     public final class Summary {
@@ -26,21 +25,18 @@ public final class ProcrankProto {
         public static final long TOTAL = 1146756268033L;
         public static final long ZRAM = 1146756268034L;
 
-        public Summary() {
-        }
+        public Summary() {}
 
         public final class Zram {
             public static final long RAW_TEXT = 1138166333441L;
 
-            public Zram() {
-            }
+            public Zram() {}
         }
 
         public final class Ram {
             public static final long RAW_TEXT = 1138166333441L;
 
-            public Ram() {
-            }
+            public Ram() {}
         }
     }
 }

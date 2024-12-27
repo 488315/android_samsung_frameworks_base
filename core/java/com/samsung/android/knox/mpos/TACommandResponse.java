@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class TACommandResponse implements Parcelable {
-    public static final Parcelable.Creator<TACommandResponse> CREATOR = new Parcelable.Creator<TACommandResponse>() { // from class: com.samsung.android.knox.mpos.TACommandResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TACommandResponse createFromParcel(Parcel in) {
-            return new TACommandResponse(in);
-        }
+    public static final Parcelable.Creator<TACommandResponse> CREATOR =
+            new Parcelable.Creator<
+                    TACommandResponse>() { // from class:
+                                           // com.samsung.android.knox.mpos.TACommandResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TACommandResponse createFromParcel(Parcel in) {
+                    return new TACommandResponse(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TACommandResponse[] newArray(int size) {
-            return new TACommandResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TACommandResponse[] newArray(int size) {
+                    return new TACommandResponse[size];
+                }
+            };
     private static final String TAG = "TACommandResponse";
     public String mErrorMsg;
     public byte[] mResponse;
@@ -71,6 +74,5 @@ public class TACommandResponse implements Parcelable {
         return 0;
     }
 
-    public void dump() {
-    }
+    public void dump() {}
 }

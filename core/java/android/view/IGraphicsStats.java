@@ -6,17 +6,18 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
-import android.view.IGraphicsStatsCallback;
 
 /* loaded from: classes4.dex */
 public interface IGraphicsStats extends IInterface {
-    ParcelFileDescriptor requestBufferForProcess(String str, IGraphicsStatsCallback iGraphicsStatsCallback) throws RemoteException;
+    ParcelFileDescriptor requestBufferForProcess(
+            String str, IGraphicsStatsCallback iGraphicsStatsCallback) throws RemoteException;
 
     int requestRenderEngineFor(String str) throws RemoteException;
 
     public static class Default implements IGraphicsStats {
         @Override // android.view.IGraphicsStats
-        public ParcelFileDescriptor requestBufferForProcess(String packageName, IGraphicsStatsCallback callback) throws RemoteException {
+        public ParcelFileDescriptor requestBufferForProcess(
+                String packageName, IGraphicsStatsCallback callback) throws RemoteException {
             return null;
         }
 
@@ -31,7 +32,7 @@ public interface IGraphicsStats extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGraphicsStats {
+    public abstract static class Stub extends Binder implements IGraphicsStats {
         public static final String DESCRIPTOR = "android.view.IGraphicsStats";
         static final int TRANSACTION_requestBufferForProcess = 1;
         static final int TRANSACTION_requestRenderEngineFor = 2;
@@ -73,7 +74,8 @@ public interface IGraphicsStats extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -84,7 +86,8 @@ public interface IGraphicsStats extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    IGraphicsStatsCallback _arg1 = IGraphicsStatsCallback.Stub.asInterface(data.readStrongBinder());
+                    IGraphicsStatsCallback _arg1 =
+                            IGraphicsStatsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     ParcelFileDescriptor _result = requestBufferForProcess(_arg0, _arg1);
                     reply.writeNoException();
@@ -119,7 +122,8 @@ public interface IGraphicsStats extends IInterface {
             }
 
             @Override // android.view.IGraphicsStats
-            public ParcelFileDescriptor requestBufferForProcess(String packageName, IGraphicsStatsCallback callback) throws RemoteException {
+            public ParcelFileDescriptor requestBufferForProcess(
+                    String packageName, IGraphicsStatsCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -128,7 +132,9 @@ public interface IGraphicsStats extends IInterface {
                     _data.writeStrongInterface(callback);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

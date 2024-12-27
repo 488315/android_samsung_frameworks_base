@@ -2,6 +2,7 @@ package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerVersionChecker;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -65,16 +66,13 @@ public abstract class FrontendSettings {
     private int mSpectralInversion = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FrontendSpectralInversion {
-    }
+    public @interface FrontendSpectralInversion {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InnerFec {
-    }
+    public @interface InnerFec {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     public abstract int getType();
 

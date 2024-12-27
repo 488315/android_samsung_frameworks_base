@@ -2,24 +2,28 @@ package com.samsung.android.sdhms;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public class SemNetworkUsageStats implements Parcelable {
-    public static final Parcelable.Creator<SemNetworkUsageStats> CREATOR = new Parcelable.Creator<SemNetworkUsageStats>() { // from class: com.samsung.android.sdhms.SemNetworkUsageStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemNetworkUsageStats createFromParcel(Parcel in) {
-            return new SemNetworkUsageStats(in);
-        }
+    public static final Parcelable.Creator<SemNetworkUsageStats> CREATOR =
+            new Parcelable.Creator<
+                    SemNetworkUsageStats>() { // from class:
+                                              // com.samsung.android.sdhms.SemNetworkUsageStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemNetworkUsageStats createFromParcel(Parcel in) {
+                    return new SemNetworkUsageStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemNetworkUsageStats[] newArray(int size) {
-            return new SemNetworkUsageStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemNetworkUsageStats[] newArray(int size) {
+                    return new SemNetworkUsageStats[size];
+                }
+            };
     private long endTime;
     private List<NetworkUsageHistoryItem> netUsageList;
     private long startTime;
@@ -62,7 +66,12 @@ public class SemNetworkUsageStats implements Parcelable {
                 this.netUsageList = new ArrayList();
             }
             if (value == null) {
-                this.netUsageList.add(new NetworkUsageHistoryItem.Builder().packageName("").uid(0).usage(0L).build());
+                this.netUsageList.add(
+                        new NetworkUsageHistoryItem.Builder()
+                                .packageName("")
+                                .uid(0)
+                                .usage(0L)
+                                .build());
                 return this;
             }
             this.netUsageList.addAll(value);
@@ -99,19 +108,22 @@ public class SemNetworkUsageStats implements Parcelable {
     }
 
     public static class NetworkUsageHistoryItem implements Parcelable {
-        public static final Parcelable.Creator<NetworkUsageHistoryItem> CREATOR = new Parcelable.Creator<NetworkUsageHistoryItem>() { // from class: com.samsung.android.sdhms.SemNetworkUsageStats.NetworkUsageHistoryItem.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public NetworkUsageHistoryItem createFromParcel(Parcel in) {
-                return new NetworkUsageHistoryItem(in);
-            }
+        public static final Parcelable.Creator<NetworkUsageHistoryItem> CREATOR =
+                new Parcelable.Creator<
+                        NetworkUsageHistoryItem>() { // from class:
+                                                     // com.samsung.android.sdhms.SemNetworkUsageStats.NetworkUsageHistoryItem.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public NetworkUsageHistoryItem createFromParcel(Parcel in) {
+                        return new NetworkUsageHistoryItem(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public NetworkUsageHistoryItem[] newArray(int size) {
-                return new NetworkUsageHistoryItem[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public NetworkUsageHistoryItem[] newArray(int size) {
+                        return new NetworkUsageHistoryItem[size];
+                    }
+                };
         private String packageName;
         private int uid;
         private long usage;

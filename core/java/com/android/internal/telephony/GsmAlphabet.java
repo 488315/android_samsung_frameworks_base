@@ -4,8 +4,11 @@ import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseIntArray;
+
 import com.android.internal.R;
+
 import com.google.android.mms.pdu.CharacterSets;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -26,11 +29,94 @@ public class GsmAlphabet {
     private static int sHighestEnabledSingleShiftCode;
     private static boolean sDisableCountryEncodingCheck = false;
     private static boolean sEnableIgnoreSpecialChar = false;
-    private static final String[] sLanguageTables = {"@£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞ\uffffÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà", "@£$¥€éùıòÇ\nĞğ\rÅåΔ_ΦΓΛΩΠΨΣΘΞ\uffffŞşßÉ !\"#¤%&'()*+,-./0123456789:;<=>?İABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§çabcdefghijklmnopqrstuvwxyzäöñüà", "", "@£$¥êéúíóç\nÔô\rÁáΔ_ªÇÀ∞^\\€Ó|\uffffÂâÊÉ !\"#º%&'()*+,-./0123456789:;<=>?ÍABCDEFGHIJKLMNOPQRSTUVWXYZÃÕÚÜ§~abcdefghijklmnopqrstuvwxyzãõ`üà", "ঁংঃঅআইঈউঊঋ\nঌ \r এঐ  ওঔকখগঘঙচ\uffffছজঝঞ !টঠডঢণত)(থদ,ধ.ন0123456789:; পফ?বভমযর ল   শষসহ়ঽািীুূৃৄ  েৈ  োৌ্ৎabcdefghijklmnopqrstuvwxyzৗড়ঢ়ৰৱ", "ઁંઃઅઆઇઈઉઊઋ\nઌઍ\r એઐઑ ઓઔકખગઘઙચ\uffffછજઝઞ !ટઠડઢણત)(થદ,ધ.ન0123456789:; પફ?બભમયર લળ વશષસહ઼ઽાિીુૂૃૄૅ ેૈૉ ોૌ્ૐabcdefghijklmnopqrstuvwxyzૠૡૢૣ૱", "ँंःअआइईउऊऋ\nऌऍ\rऎएऐऑऒओऔकखगघङच\uffffछजझञ !टठडढणत)(थद,ध.न0123456789:;ऩपफ?बभमयरऱलळऴवशषसह़ऽािीुूृॄॅॆेैॉॊोौ्ॐabcdefghijklmnopqrstuvwxyzॲॻॼॾॿ", " ಂಃಅಆಇಈಉಊಋ\nಌ \rಎಏಐ ಒಓಔಕಖಗಘಙಚ\uffffಛಜಝಞ !ಟಠಡಢಣತ)(ಥದ,ಧ.ನ0123456789:; ಪಫ?ಬಭಮಯರಱಲಳ ವಶಷಸಹ಼ಽಾಿೀುೂೃೄ ೆೇೈ ೊೋೌ್ೕabcdefghijklmnopqrstuvwxyzೖೠೡೢೣ", " ംഃഅആഇഈഉഊഋ\nഌ \rഎഏഐ ഒഓഔകഖഗഘങച\uffffഛജഝഞ !ടഠഡഢണത)(ഥദ,ധ.ന0123456789:; പഫ?ബഭമയരറലളഴവശഷസഹ ഽാിീുൂൃൄ െേൈ ൊോൌ്ൗabcdefghijklmnopqrstuvwxyzൠൡൢൣ൹", "ଁଂଃଅଆଇଈଉଊଋ\nଌ \r ଏଐ  ଓଔକଖଗଘଙଚ\uffffଛଜଝଞ !ଟଠଡଢଣତ)(ଥଦ,ଧ.ନ0123456789:; ପଫ?ବଭମଯର ଲଳ ଵଶଷସହ଼ଽାିୀୁୂୃୄ  େୈ  ୋୌ୍ୖabcdefghijklmnopqrstuvwxyzୗୠୡୢୣ", "ਁਂਃਅਆਇਈਉਊ \n  \r ਏਐ  ਓਔਕਖਗਘਙਚ\uffffਛਜਝਞ !ਟਠਡਢਣਤ)(ਥਦ,ਧ.ਨ0123456789:; ਪਫ?ਬਭਮਯਰ ਲਲ਼ ਵਸ਼ ਸਹ਼ ਾਿੀੁੂ    ੇੈ  ੋੌ੍ੑabcdefghijklmnopqrstuvwxyzੰੱੲੳੴ", " ஂஃஅஆஇஈஉஊ \n  \rஎஏஐ ஒஓஔக   ஙச\uffff ஜ ஞ !ட   ணத)(  , .ந0123456789:;னப ?  மயரறலளழவஶஷஸஹ  ாிீுூ   ெேை ொோௌ்ௐabcdefghijklmnopqrstuvwxyzௗ௰௱௲௹", "ఁంఃఅఆఇఈఉఊఋ\nఌ \rఎఏఐ ఒఓఔకఖగఘఙచ\uffffఛజఝఞ !టఠడఢణత)(థద,ధ.న0123456789:; పఫ?బభమయరఱలళ వశషసహ ఽాిీుూృౄ ెేై ొోౌ్ౕabcdefghijklmnopqrstuvwxyzౖౠౡౢౣ", "اآبٻڀپڦتۂٿ\nٹٽ\rٺټثجځڄڃڅچڇحخد\uffffڌڈډڊ !ڏڍذرڑړ)(ڙز,ږ.ژ0123456789:;ښسش?صضطظعفقکڪګگڳڱلمنںڻڼوۄەہھءیېےٍُِٗٔabcdefghijklmnopqrstuvwxyzّٰٕٖٓ"};
-    private static final String[] sLanguageShiftTables = {"          \f         ^                   {}     \\            [~] |                                    €                          ", "          \f         ^                   {}     \\            [~] |      Ğ İ         Ş               ç € ğ ı         ş            ", "         ç\f         ^                   {}     \\            [~] |Á       Í     Ó     Ú           á   €   í     ó     ú          ", "     ê   ç\fÔô Áá  ΦΓ^ΩΠΨΣΘ     Ê        {}     \\            [~] |À       Í     Ó     Ú     ÃÕ    Â   €   í     ó     ú     ãõ  â", "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*০১ ২৩৪৫৬৭৮৯য়ৠৡৢ{}ৣ৲৳৴৵\\৶৷৸৹৺       [~] |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ", "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ૦૧૨૩૪૫૬૭૮૯  {}     \\            [~] |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ", "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ०१२३४५६७८९॒॑{}॓॔क़ख़ग़\\ज़ड़ढ़फ़य़ॠॡॢॣ॰ॱ [~] |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ", "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ೦೧೨೩೪೫೬೭೮೯ೞೱ{}ೲ    \\            [~] |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ", "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ൦൧൨൩൪൫൬൭൮൯൰൱{}൲൳൴൵ൺ\\ൻർൽൾൿ       [~] |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ", "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ୦୧୨୩୪୫୬୭୮୯ଡ଼ଢ଼{}ୟ୰ୱ  \\            [~] |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ", "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ੦੧੨੩੪੫੬੭੮੯ਖ਼ਗ਼{}ਜ਼ੜਫ਼ੵ \\            [~] |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ", "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ௦௧௨௩௪௫௬௭௮௯௳௴{}௵௶௷௸௺\\            [~] |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ", "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*   ౦౧౨౩౪౫౬౭౮౯ౘౙ{}౸౹౺౻౼\\౽౾౿         [~] |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ", "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*\u0600\u0601 ۰۱۲۳۴۵۶۷۸۹،؍{}؎؏ؐؑؒ\\ؓؔ؛؟ـْ٘٫٬ٲٳۍ[~]۔|ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          "};
+    private static final String[] sLanguageTables = {
+        "@£$¥èéùìòÇ\n"
+            + "Øø\r"
+            + "ÅåΔ_ΦΓΛΩΠΨΣΘΞ\uffffÆæßÉ"
+            + " !\"#¤%&'()*+,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà",
+        "@£$¥€éùıòÇ\n"
+            + "Ğğ\r"
+            + "ÅåΔ_ΦΓΛΩΠΨΣΘΞ\uffffŞşßÉ"
+            + " !\"#¤%&'()*+,-./0123456789:;<=>?İABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§çabcdefghijklmnopqrstuvwxyzäöñüà",
+        "",
+        "@£$¥êéúíóç\n"
+            + "Ôô\r"
+            + "ÁáΔ_ªÇÀ∞^\\€Ó|\uffffÂâÊÉ"
+            + " !\"#º%&'()*+,-./0123456789:;<=>?ÍABCDEFGHIJKLMNOPQRSTUVWXYZÃÕÚÜ§~abcdefghijklmnopqrstuvwxyzãõ`üà",
+        "ঁংঃঅআইঈউঊঋ\n"
+            + "ঌ \r"
+            + " এঐ  ওঔকখগঘঙচ\uffffছজঝঞ !টঠডঢণত)(থদ,ধ.ন0123456789:; পফ?বভমযর ল   শষসহ়ঽািীুূৃৄ  েৈ "
+            + " োৌ্ৎabcdefghijklmnopqrstuvwxyzৗড়ঢ়ৰৱ",
+        "ઁંઃઅઆઇઈઉઊઋ\n"
+            + "ઌઍ\r"
+            + " એઐઑ ઓઔકખગઘઙચ\uffffછજઝઞ !ટઠડઢણત)(થદ,ધ.ન0123456789:; પફ?બભમયર લળ વશષસહ઼ઽાિીુૂૃૄૅ ેૈૉ"
+            + " ોૌ્ૐabcdefghijklmnopqrstuvwxyzૠૡૢૣ૱",
+        "ँंःअआइईउऊऋ\n"
+            + "ऌऍ\r"
+            + "ऎएऐऑऒओऔकखगघङच\uffffछजझञ"
+            + " !टठडढणत)(थद,ध.न0123456789:;ऩपफ?बभमयरऱलळऴवशषसह़ऽािीुूृॄॅॆेैॉॊोौ्ॐabcdefghijklmnopqrstuvwxyzॲॻॼॾॿ",
+        " ಂಃಅಆಇಈಉಊಋ\n"
+            + "ಌ \r"
+            + "ಎಏಐ ಒಓಔಕಖಗಘಙಚ\uffffಛಜಝಞ !ಟಠಡಢಣತ)(ಥದ,ಧ.ನ0123456789:; ಪಫ?ಬಭಮಯರಱಲಳ ವಶಷಸಹ಼ಽಾಿೀುೂೃೄ ೆೇೈ"
+            + " ೊೋೌ್ೕabcdefghijklmnopqrstuvwxyzೖೠೡೢೣ",
+        " ംഃഅആഇഈഉഊഋ\n"
+            + "ഌ \r"
+            + "എഏഐ ഒഓഔകഖഗഘങച\uffffഛജഝഞ !ടഠഡഢണത)(ഥദ,ധ.ന0123456789:; പഫ?ബഭമയരറലളഴവശഷസഹ ഽാിീുൂൃൄ െേൈ"
+            + " ൊോൌ്ൗabcdefghijklmnopqrstuvwxyzൠൡൢൣ൹",
+        "ଁଂଃଅଆଇଈଉଊଋ\n"
+            + "ଌ \r"
+            + " ଏଐ  ଓଔକଖଗଘଙଚ\uffffଛଜଝଞ !ଟଠଡଢଣତ)(ଥଦ,ଧ.ନ0123456789:; ପଫ?ବଭମଯର ଲଳ ଵଶଷସହ଼ଽାିୀୁୂୃୄ  େୈ "
+            + " ୋୌ୍ୖabcdefghijklmnopqrstuvwxyzୗୠୡୢୣ",
+        "ਁਂਃਅਆਇਈਉਊ \n"
+            + "  \r"
+            + " ਏਐ  ਓਔਕਖਗਘਙਚ\uffffਛਜਝਞ !ਟਠਡਢਣਤ)(ਥਦ,ਧ.ਨ0123456789:; ਪਫ?ਬਭਮਯਰ ਲਲ਼ ਵਸ਼ ਸਹ਼ ਾਿੀੁੂ    ੇੈ "
+            + " ੋੌ੍ੑabcdefghijklmnopqrstuvwxyzੰੱੲੳੴ",
+        " ஂஃஅஆஇஈஉஊ \n"
+            + "  \r"
+            + "எஏஐ ஒஓஔக   ஙச\uffff ஜ ஞ !ட   ணத)(  , .ந0123456789:;னப ?  மயரறலளழவஶஷஸஹ  ாிீுூ   ெேை"
+            + " ொோௌ்ௐabcdefghijklmnopqrstuvwxyzௗ௰௱௲௹",
+        "ఁంఃఅఆఇఈఉఊఋ\n"
+            + "ఌ \r"
+            + "ఎఏఐ ఒఓఔకఖగఘఙచ\uffffఛజఝఞ !టఠడఢణత)(థద,ధ.న0123456789:; పఫ?బభమయరఱలళ వశషసహ ఽాిీుూృౄ ెేై"
+            + " ొోౌ్ౕabcdefghijklmnopqrstuvwxyzౖౠౡౢౣ",
+        "اآبٻڀپڦتۂٿ\n"
+            + "ٹٽ\r"
+            + "ٺټثجځڄڃڅچڇحخد\uffffڌڈډڊ"
+            + " !ڏڍذرڑړ)(ڙز,ږ.ژ0123456789:;ښسش?صضطظعفقکڪګگڳڱلمنںڻڼوۄەہھءیېےٍُِٗٔabcdefghijklmnopqrstuvwxyzّٰٕٖٓ"
+    };
+    private static final String[] sLanguageShiftTables = {
+        "          \f         ^                   {}     \\            [~] |                       "
+            + "             €                          ",
+        "          \f         ^                   {}     \\            [~] |      Ğ İ         Ş    "
+            + "           ç € ğ ı         ş            ",
+        "         ç\f         ^                   {}     \\            [~] |Á       Í     Ó     Ú  "
+            + "         á   €   í     ó     ú          ",
+        "     ê   ç\fÔô Áá  ΦΓ^ΩΠΨΣΘ     Ê        {}     \\            [~] |À       Í     Ó     Ú  "
+            + "   ÃÕ    Â   €   í     ó     ú     ãõ  â",
+        "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*০১ ২৩৪৫৬৭৮৯য়ৠৡৢ{}ৣ৲৳৴৵\\৶৷৸৹৺       [~]"
+            + " |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ",
+        "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ૦૧૨૩૪૫૬૭૮૯  {}     \\            [~]"
+            + " |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ",
+        "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ०१२३४५६७८९॒॑{}॓॔क़ख़ग़\\ज़ड़ढ़फ़य़ॠॡॢॣ॰ॱ [~]"
+            + " |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ",
+        "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ೦೧೨೩೪೫೬೭೮೯ೞೱ{}ೲ    \\            [~]"
+            + " |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ",
+        "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ൦൧൨൩൪൫൬൭൮൯൰൱{}൲൳൴൵ൺ\\ൻർൽൾൿ       [~]"
+            + " |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ",
+        "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ୦୧୨୩୪୫୬୭୮୯ଡ଼ଢ଼{}ୟ୰ୱ  \\            [~]"
+            + " |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ",
+        "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ੦੧੨੩੪੫੬੭੮੯ਖ਼ਗ਼{}ਜ਼ੜਫ਼ੵ \\            [~]"
+            + " |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ",
+        "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*।॥ ௦௧௨௩௪௫௬௭௮௯௳௴{}௵௶௷௸௺\\            [~]"
+            + " |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ",
+        "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*   ౦౧౨౩౪౫౬౭౮౯ౘౙ{}౸౹౺౻౼\\౽౾౿         [~]"
+            + " |ABCDEFGHIJKLMNOPQRSTUVWXYZ          €                          ",
+        "@£$¥¿\"¤%&'\f*+ -/<=>¡^¡_#*\u0600\u0601"
+            + " ۰۱۲۳۴۵۶۷۸۹،؍{}؎؏ؐؑؒ\\ؓؔ؛؟ـْ٘٫٬ٲٳۍ[~]۔|ABCDEFGHIJKLMNOPQRSTUVWXYZ          €        "
+            + "                  "
+    };
 
-    private GsmAlphabet() {
-    }
+    private GsmAlphabet() {}
 
     public static class TextEncodingDetails {
         public int codeUnitCount;
@@ -41,7 +127,19 @@ public class GsmAlphabet {
         public int msgCount;
 
         public String toString() {
-            return "TextEncodingDetails { msgCount=" + this.msgCount + ", codeUnitCount=" + this.codeUnitCount + ", codeUnitsRemaining=" + this.codeUnitsRemaining + ", codeUnitSize=" + this.codeUnitSize + ", languageTable=" + this.languageTable + ", languageShiftTable=" + this.languageShiftTable + " }";
+            return "TextEncodingDetails { msgCount="
+                    + this.msgCount
+                    + ", codeUnitCount="
+                    + this.codeUnitCount
+                    + ", codeUnitsRemaining="
+                    + this.codeUnitsRemaining
+                    + ", codeUnitSize="
+                    + this.codeUnitSize
+                    + ", languageTable="
+                    + this.languageTable
+                    + ", languageShiftTable="
+                    + this.languageShiftTable
+                    + " }";
         }
     }
 
@@ -93,17 +191,21 @@ public class GsmAlphabet {
         return c;
     }
 
-    public static byte[] stringToGsm7BitPackedWithHeader(String data, byte[] header) throws EncodeException {
+    public static byte[] stringToGsm7BitPackedWithHeader(String data, byte[] header)
+            throws EncodeException {
         return stringToGsm7BitPackedWithHeader(data, header, 0, 0);
     }
 
-    public static byte[] stringToGsm7BitPackedWithHeader(String data, byte[] header, int languageTable, int languageShiftTable) throws EncodeException {
+    public static byte[] stringToGsm7BitPackedWithHeader(
+            String data, byte[] header, int languageTable, int languageShiftTable)
+            throws EncodeException {
         if (header == null || header.length == 0) {
             return stringToGsm7BitPacked(data, languageTable, languageShiftTable);
         }
         int headerBits = (header.length + 1) * 8;
         int headerSeptets = (headerBits + 6) / 7;
-        byte[] ret = stringToGsm7BitPacked(data, headerSeptets, true, languageTable, languageShiftTable);
+        byte[] ret =
+                stringToGsm7BitPacked(data, headerSeptets, true, languageTable, languageShiftTable);
         ret[1] = (byte) header.length;
         System.arraycopy(header, 0, ret, 2, header.length);
         return ret;
@@ -113,13 +215,22 @@ public class GsmAlphabet {
         return stringToGsm7BitPacked(data, 0, true, 0, 0);
     }
 
-    public static byte[] stringToGsm7BitPacked(String data, int languageTable, int languageShiftTable) throws EncodeException {
+    public static byte[] stringToGsm7BitPacked(
+            String data, int languageTable, int languageShiftTable) throws EncodeException {
         return stringToGsm7BitPacked(data, 0, true, languageTable, languageShiftTable);
     }
 
-    public static byte[] stringToGsm7BitPacked(String data, int startingSeptetOffset, boolean throwException, int languageTable, int languageShiftTable) throws EncodeException {
+    public static byte[] stringToGsm7BitPacked(
+            String data,
+            int startingSeptetOffset,
+            boolean throwException,
+            int languageTable,
+            int languageShiftTable)
+            throws EncodeException {
         int dataLen = data.length();
-        int septetCount = countGsmSeptetsUsingTables(data, !throwException, languageTable, languageShiftTable);
+        int septetCount =
+                countGsmSeptetsUsingTables(
+                        data, !throwException, languageTable, languageShiftTable);
         int i = -1;
         if (septetCount == -1) {
             throw new EncodeException("countGsmSeptetsUsingTables(): unencodable char");
@@ -174,7 +285,13 @@ public class GsmAlphabet {
         return gsm7BitPackedToString(pdu, offset, lengthSeptets, 0, 0, 0);
     }
 
-    public static String gsm7BitPackedToString(byte[] pdu, int offset, int lengthSeptets, int numPaddingBits, int languageTable, int shiftTable) {
+    public static String gsm7BitPackedToString(
+            byte[] pdu,
+            int offset,
+            int lengthSeptets,
+            int numPaddingBits,
+            int languageTable,
+            int shiftTable) {
         int languageTable2;
         int shiftTable2 = shiftTable;
         StringBuilder ret = new StringBuilder(lengthSeptets);
@@ -206,7 +323,9 @@ public class GsmAlphabet {
                 int shift = bitOffset % 8;
                 int gsmVal = (pdu[offset + byteOffset] >> shift) & 127;
                 if (shift > 1) {
-                    gsmVal = (gsmVal & (127 >> (shift - 1))) | (127 & (pdu[(offset + byteOffset) + 1] << (8 - shift)));
+                    gsmVal =
+                            (gsmVal & (127 >> (shift - 1)))
+                                    | (127 & (pdu[(offset + byteOffset) + 1] << (8 - shift)));
                 }
                 if (prevCharWasEscape) {
                     if (gsmVal == 27) {
@@ -237,12 +356,15 @@ public class GsmAlphabet {
         return gsm8BitUnpackedToString(data, offset, length, "");
     }
 
-    public static String gsm8BitUnpackedToString(byte[] data, int offset, int length, String characterset) {
+    public static String gsm8BitUnpackedToString(
+            byte[] data, int offset, int length, String characterset) {
         int c;
         boolean isMbcs = false;
         Charset charset = null;
         ByteBuffer mbcsBuffer = null;
-        if (!TextUtils.isEmpty(characterset) && !characterset.equalsIgnoreCase(CharacterSets.MIMENAME_US_ASCII) && Charset.isSupported(characterset)) {
+        if (!TextUtils.isEmpty(characterset)
+                && !characterset.equalsIgnoreCase(CharacterSets.MIMENAME_US_ASCII)
+                && Charset.isSupported(characterset)) {
             isMbcs = true;
             charset = Charset.forName(characterset);
             mbcsBuffer = ByteBuffer.allocate(2);
@@ -262,7 +384,8 @@ public class GsmAlphabet {
                 }
             } else {
                 if (prevWasEscape) {
-                    char shiftChar = c < shiftTableToChar.length() ? shiftTableToChar.charAt(c) : ' ';
+                    char shiftChar =
+                            c < shiftTableToChar.length() ? shiftTableToChar.charAt(c) : ' ';
                     if (shiftChar == ' ') {
                         if (c < languageTableToChar.length()) {
                             ret.append(languageTableToChar.charAt(c));
@@ -305,7 +428,8 @@ public class GsmAlphabet {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void stringToGsm8BitUnpackedField(java.lang.String r9, byte[] r10, int r11, int r12) {
+    public static void stringToGsm8BitUnpackedField(
+            java.lang.String r9, byte[] r10, int r11, int r12) {
         /*
             r0 = r11
             android.util.SparseIntArray[] r1 = com.android.internal.telephony.GsmAlphabet.sCharsToGsmTables
@@ -355,7 +479,10 @@ public class GsmAlphabet {
         L4d:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.GsmAlphabet.stringToGsm8BitUnpackedField(java.lang.String, byte[], int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.telephony.GsmAlphabet.stringToGsm8BitUnpackedField(java.lang.String,"
+                    + " byte[], int, int):void");
     }
 
     public static int countGsmSeptets(char c) {
@@ -380,10 +507,13 @@ public class GsmAlphabet {
     }
 
     public static boolean isGsmSeptets(char c) {
-        return (sCharsToGsmTables[0].get(c, -1) == -1 && sCharsToShiftTables[0].get(c, -1) == -1) ? false : true;
+        return (sCharsToGsmTables[0].get(c, -1) == -1 && sCharsToShiftTables[0].get(c, -1) == -1)
+                ? false
+                : true;
     }
 
-    public static int countGsmSeptetsUsingTables(CharSequence s, boolean use7bitOnly, int languageTable, int languageShiftTable) {
+    public static int countGsmSeptetsUsingTables(
+            CharSequence s, boolean use7bitOnly, int languageTable, int languageShiftTable) {
         int count = 0;
         int sz = s.length();
         SparseIntArray charToLanguageTable = sCharsToGsmTables[languageTable];
@@ -518,7 +648,11 @@ public class GsmAlphabet {
                         septetsRemaining = (160 - udhLength) - septets2;
                     }
                     int unencodableCount = lpc2.unencodableCounts[shiftTable];
-                    if ((!use7bitOnly || unencodableCount <= minUnencodableCount) && ((use7bitOnly && unencodableCount < minUnencodableCount) || septetsPerMessage < ted2.msgCount || (septetsPerMessage == ted2.msgCount && septetsRemaining > ted2.codeUnitsRemaining))) {
+                    if ((!use7bitOnly || unencodableCount <= minUnencodableCount)
+                            && ((use7bitOnly && unencodableCount < minUnencodableCount)
+                                    || septetsPerMessage < ted2.msgCount
+                                    || (septetsPerMessage == ted2.msgCount
+                                            && septetsRemaining > ted2.codeUnitsRemaining))) {
                         minUnencodableCount = unencodableCount;
                         ted2.msgCount = septetsPerMessage;
                         ted2.codeUnitCount = septets2;
@@ -540,7 +674,8 @@ public class GsmAlphabet {
         return ted2;
     }
 
-    public static int findGsmSeptetLimitIndex(String s, int start, int limit, int langTable, int langShiftTable) {
+    public static int findGsmSeptetLimitIndex(
+            String s, int start, int limit, int langTable, int langShiftTable) {
         int accumulator = 0;
         int size = s.length();
         SparseIntArray charToLangTable = sCharsToGsmTables[langTable];
@@ -604,7 +739,8 @@ public class GsmAlphabet {
         sEnabledSingleShiftTables = r.getIntArray(R.array.config_sms_enabled_single_shift_tables);
         sEnabledLockingShiftTables = r.getIntArray(R.array.config_sms_enabled_locking_shift_tables);
         if (sEnabledSingleShiftTables.length > 0) {
-            sHighestEnabledSingleShiftCode = sEnabledSingleShiftTables[sEnabledSingleShiftTables.length - 1];
+            sHighestEnabledSingleShiftCode =
+                    sEnabledSingleShiftTables[sEnabledSingleShiftTables.length - 1];
         } else {
             sHighestEnabledSingleShiftCode = 0;
         }
@@ -615,14 +751,25 @@ public class GsmAlphabet {
         int numTables = sLanguageTables.length;
         int numShiftTables = sLanguageShiftTables.length;
         if (numTables != numShiftTables) {
-            Log.e(TAG, "Error: language tables array length " + numTables + " != shift tables array length " + numShiftTables);
+            Log.e(
+                    TAG,
+                    "Error: language tables array length "
+                            + numTables
+                            + " != shift tables array length "
+                            + numShiftTables);
         }
         sCharsToGsmTables = new SparseIntArray[numTables];
         for (int i = 0; i < numTables; i++) {
             String table = sLanguageTables[i];
             int tableLen = table.length();
             if (tableLen != 0 && tableLen != 128) {
-                Log.e(TAG, "Error: language tables index " + i + " length " + tableLen + " (expected 128 or 0)");
+                Log.e(
+                        TAG,
+                        "Error: language tables index "
+                                + i
+                                + " length "
+                                + tableLen
+                                + " (expected 128 or 0)");
             }
             SparseIntArray charToGsmTable = new SparseIntArray(tableLen);
             sCharsToGsmTables[i] = charToGsmTable;
@@ -635,7 +782,13 @@ public class GsmAlphabet {
             String shiftTable = sLanguageShiftTables[i2];
             int shiftTableLen = shiftTable.length();
             if (shiftTableLen != 0 && shiftTableLen != 128) {
-                Log.e(TAG, "Error: language shift tables index " + i2 + " length " + shiftTableLen + " (expected 128 or 0)");
+                Log.e(
+                        TAG,
+                        "Error: language shift tables index "
+                                + i2
+                                + " length "
+                                + shiftTableLen
+                                + " (expected 128 or 0)");
             }
             SparseIntArray charToShiftTable = new SparseIntArray(shiftTableLen);
             sCharsToShiftTables[i2] = charToShiftTable;
@@ -674,11 +827,16 @@ public class GsmAlphabet {
         }
     }
 
-    public static TextEncodingDetails countGsmSeptetsWithEmail(CharSequence s, boolean use7bitOnly, int maxEmailLen) {
+    public static TextEncodingDetails countGsmSeptetsWithEmail(
+            CharSequence s, boolean use7bitOnly, int maxEmailLen) {
         int udhLength;
         int septetsPerMessage;
         int septetsRemaining;
-        Log.d(TAG, "sEnabledSingleShiftTables.length + sEnabledLockingShiftTables.length == 0: " + (sEnabledSingleShiftTables.length + sEnabledLockingShiftTables.length == 0));
+        Log.d(
+                TAG,
+                "sEnabledSingleShiftTables.length + sEnabledLockingShiftTables.length == 0: "
+                        + (sEnabledSingleShiftTables.length + sEnabledLockingShiftTables.length
+                                == 0));
         int i = -1;
         if (sEnabledSingleShiftTables.length + sEnabledLockingShiftTables.length == 0) {
             TextEncodingDetails ted = new TextEncodingDetails();
@@ -696,9 +854,11 @@ public class GsmAlphabet {
             } else if (septets != -1) {
                 ted.codeUnitCount = septets;
                 if (septets > maxLenPerSMS) {
-                    ted.msgCount = ((maxLenPerSMSWithHeader - 1) + septets) / maxLenPerSMSWithHeader;
+                    ted.msgCount =
+                            ((maxLenPerSMSWithHeader - 1) + septets) / maxLenPerSMSWithHeader;
                     if (septets % maxLenPerSMSWithHeader > 0) {
-                        ted.codeUnitsRemaining = maxLenPerSMSWithHeader - (septets % maxLenPerSMSWithHeader);
+                        ted.codeUnitsRemaining =
+                                maxLenPerSMSWithHeader - (septets % maxLenPerSMSWithHeader);
                     } else {
                         ted.codeUnitsRemaining = 0;
                     }
@@ -795,7 +955,11 @@ public class GsmAlphabet {
                         septetsRemaining = (160 - udhLength) - septets2;
                     }
                     int unencodableCount = lpc2.unencodableCounts[shiftTable];
-                    if ((!use7bitOnly || unencodableCount <= minUnencodableCount) && ((use7bitOnly && unencodableCount < minUnencodableCount) || septetsPerMessage < ted2.msgCount || (septetsPerMessage == ted2.msgCount && septetsRemaining > ted2.codeUnitsRemaining))) {
+                    if ((!use7bitOnly || unencodableCount <= minUnencodableCount)
+                            && ((use7bitOnly && unencodableCount < minUnencodableCount)
+                                    || septetsPerMessage < ted2.msgCount
+                                    || (septetsPerMessage == ted2.msgCount
+                                            && septetsRemaining > ted2.codeUnitsRemaining))) {
                         minUnencodableCount = unencodableCount;
                         ted2.msgCount = septetsPerMessage;
                         ted2.codeUnitCount = septets2;
@@ -812,7 +976,8 @@ public class GsmAlphabet {
         return ted2;
     }
 
-    public static TextEncodingDetails countGsmSeptets(CharSequence s, boolean use7bitOnly, boolean ignoreSpecialChar) {
+    public static TextEncodingDetails countGsmSeptets(
+            CharSequence s, boolean use7bitOnly, boolean ignoreSpecialChar) {
         sEnableIgnoreSpecialChar = ignoreSpecialChar;
         TextEncodingDetails ted = countGsmSeptets(s, use7bitOnly);
         sEnableIgnoreSpecialChar = false;

@@ -7,8 +7,7 @@ public class ElasticEaseIn implements Interpolator {
     private float amplitude;
     private float period;
 
-    public ElasticEaseIn() {
-    }
+    public ElasticEaseIn() {}
 
     public ElasticEaseIn(float amplitude, float period) {
         this.amplitude = amplitude;
@@ -38,6 +37,7 @@ public class ElasticEaseIn implements Interpolator {
             s = p / 4.0f;
         }
         float t2 = t - 1.0f;
-        return (float) (-(a * Math.pow(2.0d, t2 * 10.0f) * Math.sin(((t2 - s) * 6.283185307179586d) / p)));
+        return (float)
+                (-(a * Math.pow(2.0d, t2 * 10.0f) * Math.sin(((t2 - s) * 6.283185307179586d) / p)));
     }
 }

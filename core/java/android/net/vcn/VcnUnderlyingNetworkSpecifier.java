@@ -5,26 +5,31 @@ import android.net.NetworkSpecifier;
 import android.net.TelephonyNetworkSpecifier;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class VcnUnderlyingNetworkSpecifier extends NetworkSpecifier implements Parcelable {
-    public static final Parcelable.Creator<VcnUnderlyingNetworkSpecifier> CREATOR = new Parcelable.Creator<VcnUnderlyingNetworkSpecifier>() { // from class: android.net.vcn.VcnUnderlyingNetworkSpecifier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VcnUnderlyingNetworkSpecifier createFromParcel(Parcel in) {
-            int[] subIds = in.createIntArray();
-            return new VcnUnderlyingNetworkSpecifier(subIds);
-        }
+    public static final Parcelable.Creator<VcnUnderlyingNetworkSpecifier> CREATOR =
+            new Parcelable.Creator<
+                    VcnUnderlyingNetworkSpecifier>() { // from class:
+                                                       // android.net.vcn.VcnUnderlyingNetworkSpecifier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VcnUnderlyingNetworkSpecifier createFromParcel(Parcel in) {
+                    int[] subIds = in.createIntArray();
+                    return new VcnUnderlyingNetworkSpecifier(subIds);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VcnUnderlyingNetworkSpecifier[] newArray(int size) {
-            return new VcnUnderlyingNetworkSpecifier[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VcnUnderlyingNetworkSpecifier[] newArray(int size) {
+                    return new VcnUnderlyingNetworkSpecifier[size];
+                }
+            };
     private final int[] mSubIds;
 
     public VcnUnderlyingNetworkSpecifier(int[] subIds) {
@@ -61,13 +66,16 @@ public final class VcnUnderlyingNetworkSpecifier extends NetworkSpecifier implem
     }
 
     public String toString() {
-        return "VcnUnderlyingNetworkSpecifier [mSubIds = " + Arrays.toString(this.mSubIds) + NavigationBarInflaterView.SIZE_MOD_END;
+        return "VcnUnderlyingNetworkSpecifier [mSubIds = "
+                + Arrays.toString(this.mSubIds)
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     @Override // android.net.NetworkSpecifier
     public boolean canBeSatisfiedBy(NetworkSpecifier other) {
         if (other instanceof TelephonyNetworkSpecifier) {
-            return ArrayUtils.contains(this.mSubIds, ((TelephonyNetworkSpecifier) other).getSubscriptionId());
+            return ArrayUtils.contains(
+                    this.mSubIds, ((TelephonyNetworkSpecifier) other).getSubscriptionId());
         }
         return equals(other);
     }

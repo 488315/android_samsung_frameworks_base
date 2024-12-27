@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class MicrophoneInfo implements Parcelable {
-    public static final Parcelable.Creator<MicrophoneInfo> CREATOR = new Parcelable.Creator<MicrophoneInfo>() { // from class: android.media.audio.common.MicrophoneInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MicrophoneInfo createFromParcel(Parcel _aidl_source) {
-            MicrophoneInfo _aidl_out = new MicrophoneInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<MicrophoneInfo> CREATOR =
+            new Parcelable.Creator<
+                    MicrophoneInfo>() { // from class: android.media.audio.common.MicrophoneInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MicrophoneInfo createFromParcel(Parcel _aidl_source) {
+                    MicrophoneInfo _aidl_out = new MicrophoneInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MicrophoneInfo[] newArray(int _aidl_size) {
-            return new MicrophoneInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MicrophoneInfo[] newArray(int _aidl_size) {
+                    return new MicrophoneInfo[_aidl_size];
+                }
+            };
     public static final int GROUP_UNKNOWN = -1;
     public static final int INDEX_IN_THE_GROUP_UNKNOWN = -1;
     public AudioDevice device;
@@ -148,7 +151,9 @@ public class MicrophoneInfo implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.frequencyResponse = (FrequencyResponsePoint[]) _aidl_parcel.createTypedArray(FrequencyResponsePoint.CREATOR);
+            this.frequencyResponse =
+                    (FrequencyResponsePoint[])
+                            _aidl_parcel.createTypedArray(FrequencyResponsePoint.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -201,20 +206,49 @@ public class MicrophoneInfo implements Parcelable {
             return false;
         }
         MicrophoneInfo that = (MicrophoneInfo) other;
-        if (Objects.deepEquals(this.id, that.id) && Objects.deepEquals(this.device, that.device) && Objects.deepEquals(Integer.valueOf(this.location), Integer.valueOf(that.location)) && Objects.deepEquals(Integer.valueOf(this.group), Integer.valueOf(that.group)) && Objects.deepEquals(Integer.valueOf(this.indexInTheGroup), Integer.valueOf(that.indexInTheGroup)) && Objects.deepEquals(this.sensitivity, that.sensitivity) && Objects.deepEquals(Integer.valueOf(this.directionality), Integer.valueOf(that.directionality)) && Objects.deepEquals(this.frequencyResponse, that.frequencyResponse) && Objects.deepEquals(this.position, that.position) && Objects.deepEquals(this.orientation, that.orientation)) {
+        if (Objects.deepEquals(this.id, that.id)
+                && Objects.deepEquals(this.device, that.device)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.location), Integer.valueOf(that.location))
+                && Objects.deepEquals(Integer.valueOf(this.group), Integer.valueOf(that.group))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.indexInTheGroup),
+                        Integer.valueOf(that.indexInTheGroup))
+                && Objects.deepEquals(this.sensitivity, that.sensitivity)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.directionality), Integer.valueOf(that.directionality))
+                && Objects.deepEquals(this.frequencyResponse, that.frequencyResponse)
+                && Objects.deepEquals(this.position, that.position)
+                && Objects.deepEquals(this.orientation, that.orientation)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.id, this.device, Integer.valueOf(this.location), Integer.valueOf(this.group), Integer.valueOf(this.indexInTheGroup), this.sensitivity, Integer.valueOf(this.directionality), this.frequencyResponse, this.position, this.orientation).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.id,
+                                this.device,
+                                Integer.valueOf(this.location),
+                                Integer.valueOf(this.group),
+                                Integer.valueOf(this.indexInTheGroup),
+                                this.sensitivity,
+                                Integer.valueOf(this.directionality),
+                                this.frequencyResponse,
+                                this.position,
+                                this.orientation)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.device);
-        return _mask | describeContents(this.sensitivity) | describeContents(this.frequencyResponse) | describeContents(this.position) | describeContents(this.orientation);
+        return _mask
+                | describeContents(this.sensitivity)
+                | describeContents(this.frequencyResponse)
+                | describeContents(this.position)
+                | describeContents(this.orientation);
     }
 
     private int describeContents(Object _v) {
@@ -235,21 +269,23 @@ public class MicrophoneInfo implements Parcelable {
     }
 
     public static class Sensitivity implements Parcelable {
-        public static final Parcelable.Creator<Sensitivity> CREATOR = new Parcelable.Creator<Sensitivity>() { // from class: android.media.audio.common.MicrophoneInfo.Sensitivity.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Sensitivity createFromParcel(Parcel _aidl_source) {
-                Sensitivity _aidl_out = new Sensitivity();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<Sensitivity> CREATOR =
+                new Parcelable.Creator<Sensitivity>() { // from class:
+                    // android.media.audio.common.MicrophoneInfo.Sensitivity.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Sensitivity createFromParcel(Parcel _aidl_source) {
+                        Sensitivity _aidl_out = new Sensitivity();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Sensitivity[] newArray(int _aidl_size) {
-                return new Sensitivity[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Sensitivity[] newArray(int _aidl_size) {
+                        return new Sensitivity[_aidl_size];
+                    }
+                };
         public float leveldBFS = 0.0f;
         public float maxSpldB = 0.0f;
         public float minSpldB = 0.0f;
@@ -323,21 +359,23 @@ public class MicrophoneInfo implements Parcelable {
     }
 
     public static class FrequencyResponsePoint implements Parcelable {
-        public static final Parcelable.Creator<FrequencyResponsePoint> CREATOR = new Parcelable.Creator<FrequencyResponsePoint>() { // from class: android.media.audio.common.MicrophoneInfo.FrequencyResponsePoint.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FrequencyResponsePoint createFromParcel(Parcel _aidl_source) {
-                FrequencyResponsePoint _aidl_out = new FrequencyResponsePoint();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<FrequencyResponsePoint> CREATOR =
+                new Parcelable.Creator<FrequencyResponsePoint>() { // from class:
+                    // android.media.audio.common.MicrophoneInfo.FrequencyResponsePoint.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FrequencyResponsePoint createFromParcel(Parcel _aidl_source) {
+                        FrequencyResponsePoint _aidl_out = new FrequencyResponsePoint();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FrequencyResponsePoint[] newArray(int _aidl_size) {
-                return new FrequencyResponsePoint[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FrequencyResponsePoint[] newArray(int _aidl_size) {
+                        return new FrequencyResponsePoint[_aidl_size];
+                    }
+                };
         public float frequencyHz = 0.0f;
         public float leveldB = 0.0f;
 
@@ -401,21 +439,23 @@ public class MicrophoneInfo implements Parcelable {
     }
 
     public static class Coordinate implements Parcelable {
-        public static final Parcelable.Creator<Coordinate> CREATOR = new Parcelable.Creator<Coordinate>() { // from class: android.media.audio.common.MicrophoneInfo.Coordinate.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Coordinate createFromParcel(Parcel _aidl_source) {
-                Coordinate _aidl_out = new Coordinate();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<Coordinate> CREATOR =
+                new Parcelable.Creator<Coordinate>() { // from class:
+                    // android.media.audio.common.MicrophoneInfo.Coordinate.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Coordinate createFromParcel(Parcel _aidl_source) {
+                        Coordinate _aidl_out = new Coordinate();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Coordinate[] newArray(int _aidl_size) {
-                return new Coordinate[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Coordinate[] newArray(int _aidl_size) {
+                        return new Coordinate[_aidl_size];
+                    }
+                };
         public float x = 0.0f;
         public float y = 0.0f;
         public float z = 0.0f;

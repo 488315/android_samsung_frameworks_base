@@ -7,7 +7,9 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,7 +24,11 @@ public final class CleanupManager {
     public final RecoverySnapshotStorage mSnapshotStorage;
     public final UserManager mUserManager;
 
-    public CleanupManager(RecoverySnapshotStorage recoverySnapshotStorage, RecoverableKeyStoreDb recoverableKeyStoreDb, UserManager userManager, ApplicationKeyStorage applicationKeyStorage) {
+    public CleanupManager(
+            RecoverySnapshotStorage recoverySnapshotStorage,
+            RecoverableKeyStoreDb recoverableKeyStoreDb,
+            UserManager userManager,
+            ApplicationKeyStorage applicationKeyStorage) {
         this.mSnapshotStorage = recoverySnapshotStorage;
         this.mDatabase = recoverableKeyStoreDb;
         this.mUserManager = userManager;
@@ -51,7 +57,8 @@ public final class CleanupManager {
     }
 
     public final void removeDataForUser(int i) {
-        NetworkScoreService$$ExternalSyntheticOutline0.m(i, "Removing data for user ", ".", "CleanupManager");
+        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                i, "Removing data for user ", ".", "CleanupManager");
         Iterator it = ((ArrayList) this.mDatabase.getRecoveryAgents(i)).iterator();
         while (it.hasNext()) {
             Integer num = (Integer) it.next();
@@ -63,26 +70,47 @@ public final class CleanupManager {
             }
             int intValue2 = num.intValue();
             RecoverableKeyStoreDb recoverableKeyStoreDb = this.mDatabase;
-            for (String str : ((HashMap) recoverableKeyStoreDb.getAllKeys(i, intValue2, recoverableKeyStoreDb.getPlatformKeyGenerationId(i))).keySet()) {
+            for (String str :
+                    ((HashMap)
+                                    recoverableKeyStoreDb.getAllKeys(
+                                            i,
+                                            intValue2,
+                                            recoverableKeyStoreDb.getPlatformKeyGenerationId(i)))
+                            .keySet()) {
                 try {
                     this.mApplicationKeyStorage.deleteEntry(i, intValue2, str);
                 } catch (ServiceSpecificException e) {
-                    Log.e("CleanupManager", "Error while removing recoverable key " + str + " : " + e);
+                    Log.e(
+                            "CleanupManager",
+                            "Error while removing recoverable key " + str + " : " + e);
                 }
             }
         }
         RecoverableKeyStoreDbHelper recoverableKeyStoreDbHelper = this.mDatabase.mKeyStoreDbHelper;
-        recoverableKeyStoreDbHelper.getWritableDatabase().delete("keys", "user_id = ?", new String[]{Integer.toString(i)});
-        recoverableKeyStoreDbHelper.getWritableDatabase().delete("user_metadata", "user_id = ?", new String[]{Integer.toString(i)});
-        recoverableKeyStoreDbHelper.getWritableDatabase().delete("recovery_service_metadata", "user_id = ?", new String[]{Integer.toString(i)});
-        recoverableKeyStoreDbHelper.getWritableDatabase().delete("root_of_trust", "user_id = ?", new String[]{Integer.toString(i)});
+        recoverableKeyStoreDbHelper
+                .getWritableDatabase()
+                .delete("keys", "user_id = ?", new String[] {Integer.toString(i)});
+        recoverableKeyStoreDbHelper
+                .getWritableDatabase()
+                .delete("user_metadata", "user_id = ?", new String[] {Integer.toString(i)});
+        recoverableKeyStoreDbHelper
+                .getWritableDatabase()
+                .delete(
+                        "recovery_service_metadata",
+                        "user_id = ?",
+                        new String[] {Integer.toString(i)});
+        recoverableKeyStoreDbHelper
+                .getWritableDatabase()
+                .delete("root_of_trust", "user_id = ?", new String[] {Integer.toString(i)});
     }
 
     public final void storeUserSerialNumber(int i, long j) {
-        NetworkScoreService$$ExternalSyntheticOutline0.m(i, "Storing serial number for user ", ".", "CleanupManager");
+        NetworkScoreService$$ExternalSyntheticOutline0.m(
+                i, "Storing serial number for user ", ".", "CleanupManager");
         this.mSerialNumbers.put(Integer.valueOf(i), Long.valueOf(j));
         RecoverableKeyStoreDb recoverableKeyStoreDb = this.mDatabase;
-        SQLiteDatabase writableDatabase = recoverableKeyStoreDb.mKeyStoreDbHelper.getWritableDatabase();
+        SQLiteDatabase writableDatabase =
+                recoverableKeyStoreDb.mKeyStoreDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("user_id", Integer.valueOf(i));
         contentValues.put("user_serial_number", Long.valueOf(j));
@@ -94,15 +122,18 @@ public final class CleanupManager {
     public final synchronized void verifyKnownUsers() {
         try {
             this.mSerialNumbers = this.mDatabase.getUserSerialNumbers();
-            ArrayList arrayList = new ArrayList() { // from class: com.android.server.locksettings.recoverablekeystore.storage.CleanupManager.1
-            };
+            ArrayList arrayList =
+                    new ArrayList() { // from class:
+                                      // com.android.server.locksettings.recoverablekeystore.storage.CleanupManager.1
+                    };
             for (Map.Entry entry : this.mSerialNumbers.entrySet()) {
                 Integer num = (Integer) entry.getKey();
                 Long l = (Long) entry.getValue();
                 if (l == null) {
                     l = -1L;
                 }
-                long serialNumberForUser = this.mUserManager.getSerialNumberForUser(UserHandle.of(num.intValue()));
+                long serialNumberForUser =
+                        this.mUserManager.getSerialNumberForUser(UserHandle.of(num.intValue()));
                 if (serialNumberForUser == -1) {
                     arrayList.add(num);
                     removeDataForUser(num.intValue());

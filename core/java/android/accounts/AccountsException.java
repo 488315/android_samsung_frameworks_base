@@ -2,8 +2,7 @@ package android.accounts;
 
 /* loaded from: classes.dex */
 public class AccountsException extends Exception {
-    public AccountsException() {
-    }
+    public AccountsException() {}
 
     public AccountsException(String message) {
         super(message);

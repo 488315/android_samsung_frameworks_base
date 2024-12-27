@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.ActivityThread;
 import android.content.ComponentCallbacks;
 import android.content.ComponentCallbacks2;
 import android.content.ComponentCallbacksController;
@@ -12,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.autofill.AutofillManager;
 import android.view.autofill.Helper;
+
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
@@ -42,50 +42,35 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
 
         void onActivityStopped(Activity activity);
 
-        default void onActivityPreCreated(Activity activity, Bundle savedInstanceState) {
-        }
+        default void onActivityPreCreated(Activity activity, Bundle savedInstanceState) {}
 
-        default void onActivityPostCreated(Activity activity, Bundle savedInstanceState) {
-        }
+        default void onActivityPostCreated(Activity activity, Bundle savedInstanceState) {}
 
-        default void onActivityPreStarted(Activity activity) {
-        }
+        default void onActivityPreStarted(Activity activity) {}
 
-        default void onActivityPostStarted(Activity activity) {
-        }
+        default void onActivityPostStarted(Activity activity) {}
 
-        default void onActivityPreResumed(Activity activity) {
-        }
+        default void onActivityPreResumed(Activity activity) {}
 
-        default void onActivityPostResumed(Activity activity) {
-        }
+        default void onActivityPostResumed(Activity activity) {}
 
-        default void onActivityPrePaused(Activity activity) {
-        }
+        default void onActivityPrePaused(Activity activity) {}
 
-        default void onActivityPostPaused(Activity activity) {
-        }
+        default void onActivityPostPaused(Activity activity) {}
 
-        default void onActivityPreStopped(Activity activity) {
-        }
+        default void onActivityPreStopped(Activity activity) {}
 
-        default void onActivityPostStopped(Activity activity) {
-        }
+        default void onActivityPostStopped(Activity activity) {}
 
-        default void onActivityPreSaveInstanceState(Activity activity, Bundle outState) {
-        }
+        default void onActivityPreSaveInstanceState(Activity activity, Bundle outState) {}
 
-        default void onActivityPostSaveInstanceState(Activity activity, Bundle outState) {
-        }
+        default void onActivityPostSaveInstanceState(Activity activity, Bundle outState) {}
 
-        default void onActivityPreDestroyed(Activity activity) {
-        }
+        default void onActivityPreDestroyed(Activity activity) {}
 
-        default void onActivityPostDestroyed(Activity activity) {
-        }
+        default void onActivityPostDestroyed(Activity activity) {}
 
-        default void onActivityConfigurationChanged(Activity activity) {
-        }
+        default void onActivityConfigurationChanged(Activity activity) {}
     }
 
     public Application() {
@@ -107,8 +92,7 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
         Typeface.setFlipFonts();
     }
 
-    public void onTerminate() {
-    }
+    public void onTerminate() {}
 
     @Override // android.content.ComponentCallbacks
     public void onConfigurationChanged(Configuration newConfig) {
@@ -181,7 +165,8 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (Object obj : callbacks) {
-                ((ActivityLifecycleCallbacks) obj).onActivityPreCreated(activity, savedInstanceState);
+                ((ActivityLifecycleCallbacks) obj)
+                        .onActivityPreCreated(activity, savedInstanceState);
             }
         }
     }
@@ -199,7 +184,8 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (Object obj : callbacks) {
-                ((ActivityLifecycleCallbacks) obj).onActivityPostCreated(activity, savedInstanceState);
+                ((ActivityLifecycleCallbacks) obj)
+                        .onActivityPostCreated(activity, savedInstanceState);
             }
         }
     }
@@ -316,7 +302,8 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (Object obj : callbacks) {
-                ((ActivityLifecycleCallbacks) obj).onActivityPreSaveInstanceState(activity, outState);
+                ((ActivityLifecycleCallbacks) obj)
+                        .onActivityPreSaveInstanceState(activity, outState);
             }
         }
     }
@@ -334,7 +321,8 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
         Object[] callbacks = collectActivityLifecycleCallbacks();
         if (callbacks != null) {
             for (Object obj : callbacks) {
-                ((ActivityLifecycleCallbacks) obj).onActivityPostSaveInstanceState(activity, outState);
+                ((ActivityLifecycleCallbacks) obj)
+                        .onActivityPostSaveInstanceState(activity, outState);
             }
         }
     }
@@ -419,20 +407,36 @@ public class Application extends ContextWrapper implements ComponentCallbacks2 {
             if (record != null && (activity = record.activity) != null) {
                 if (record.isTopResumedActivity) {
                     if (Helper.sVerbose) {
-                        Log.v(TAG, "getAutofillClient(): found top resumed activity for " + this + ": " + activity);
+                        Log.v(
+                                TAG,
+                                "getAutofillClient(): found top resumed activity for "
+                                        + this
+                                        + ": "
+                                        + activity);
                     }
                     return activity.getAutofillClient();
                 }
                 if (activity.getWindow().getDecorView().hasFocus()) {
                     if (Helper.sVerbose) {
-                        Log.v(TAG, "getAutofillClient(): found focused activity for " + this + ": " + activity);
+                        Log.v(
+                                TAG,
+                                "getAutofillClient(): found focused activity for "
+                                        + this
+                                        + ": "
+                                        + activity);
                     }
                     return activity.getAutofillClient();
                 }
             }
         }
         if (Helper.sVerbose) {
-            Log.v(TAG, "getAutofillClient(): none of the " + activityCount + " activities on " + this + " are top resumed nor have focus");
+            Log.v(
+                    TAG,
+                    "getAutofillClient(): none of the "
+                            + activityCount
+                            + " activities on "
+                            + this
+                            + " are top resumed nor have focus");
         }
         return null;
     }

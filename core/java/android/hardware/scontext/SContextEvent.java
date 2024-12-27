@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextEvent implements Parcelable {
-    static final Parcelable.Creator<SContextEvent> CREATOR = new Parcelable.Creator<SContextEvent>() { // from class: android.hardware.scontext.SContextEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextEvent createFromParcel(Parcel in) {
-            return new SContextEvent(in);
-        }
+    static final Parcelable.Creator<SContextEvent> CREATOR =
+            new Parcelable.Creator<
+                    SContextEvent>() { // from class: android.hardware.scontext.SContextEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextEvent createFromParcel(Parcel in) {
+                    return new SContextEvent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextEvent[] newArray(int size) {
-            return new SContextEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextEvent[] newArray(int size) {
+                    return new SContextEvent[size];
+                }
+            };
     private SContextEventContext mDuplicatedEventContext;
     private SContextEventContext mEventContext;
     public SContext scontext;
@@ -471,9 +473,13 @@ public class SContextEvent implements Parcelable {
     private void readFromParcel(Parcel src) {
         this.timestamp = src.readLong();
         this.scontext = (SContext) src.readParcelable(SContext.class.getClassLoader());
-        this.mEventContext = (SContextEventContext) src.readParcelable(SContextEventContext.class.getClassLoader());
+        this.mEventContext =
+                (SContextEventContext)
+                        src.readParcelable(SContextEventContext.class.getClassLoader());
         if (this.scontext.getType() == 49) {
-            this.mDuplicatedEventContext = (SContextEventContext) src.readParcelable(SContextEventContext.class.getClassLoader());
+            this.mDuplicatedEventContext =
+                    (SContextEventContext)
+                            src.readParcelable(SContextEventContext.class.getClassLoader());
         }
     }
 }

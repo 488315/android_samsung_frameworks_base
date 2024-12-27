@@ -4,23 +4,27 @@ import android.content.res.Configuration;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseIntArray;
+
 import java.util.Arrays;
 
 /* loaded from: classes4.dex */
 public final class SizeConfigurationBuckets implements Parcelable {
-    public static final Parcelable.Creator<SizeConfigurationBuckets> CREATOR = new Parcelable.Creator<SizeConfigurationBuckets>() { // from class: android.window.SizeConfigurationBuckets.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SizeConfigurationBuckets[] newArray(int size) {
-            return new SizeConfigurationBuckets[size];
-        }
+    public static final Parcelable.Creator<SizeConfigurationBuckets> CREATOR =
+            new Parcelable.Creator<
+                    SizeConfigurationBuckets>() { // from class:
+                                                  // android.window.SizeConfigurationBuckets.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SizeConfigurationBuckets[] newArray(int size) {
+                    return new SizeConfigurationBuckets[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SizeConfigurationBuckets createFromParcel(Parcel in) {
-            return new SizeConfigurationBuckets(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SizeConfigurationBuckets createFromParcel(Parcel in) {
+                    return new SizeConfigurationBuckets(in);
+                }
+            };
     private final int[] mHorizontal;
     private final boolean mScreenLayoutLongSet;
     private final int[] mScreenLayoutSize;
@@ -59,13 +63,22 @@ public final class SizeConfigurationBuckets implements Parcelable {
         this.mScreenLayoutLongSet = screenLayoutLongSet;
     }
 
-    public static int filterDiff(int diff, Configuration oldConfig, Configuration newConfig, SizeConfigurationBuckets buckets) {
+    public static int filterDiff(
+            int diff,
+            Configuration oldConfig,
+            Configuration newConfig,
+            SizeConfigurationBuckets buckets) {
         if (buckets == null) {
             return diff;
         }
-        boolean nonSizeLayoutFieldsUnchanged = areNonSizeLayoutFieldsUnchanged(oldConfig.screenLayout, newConfig.screenLayout);
+        boolean nonSizeLayoutFieldsUnchanged =
+                areNonSizeLayoutFieldsUnchanged(oldConfig.screenLayout, newConfig.screenLayout);
         if ((diff & 1024) != 0) {
-            boolean crosses = buckets.crossesHorizontalSizeThreshold(oldConfig.screenWidthDp, newConfig.screenWidthDp) || buckets.crossesVerticalSizeThreshold(oldConfig.screenHeightDp, newConfig.screenHeightDp);
+            boolean crosses =
+                    buckets.crossesHorizontalSizeThreshold(
+                                    oldConfig.screenWidthDp, newConfig.screenWidthDp)
+                            || buckets.crossesVerticalSizeThreshold(
+                                    oldConfig.screenHeightDp, newConfig.screenHeightDp);
             if (!crosses) {
                 diff &= -1025;
             }
@@ -78,7 +91,11 @@ public final class SizeConfigurationBuckets implements Parcelable {
             }
         }
         int oldSmallest2 = diff & 256;
-        if (oldSmallest2 != 0 && nonSizeLayoutFieldsUnchanged && !buckets.crossesScreenLayoutSizeThreshold(oldConfig, newConfig) && !buckets.crossesScreenLayoutLongThreshold(oldConfig.screenLayout, newConfig.screenLayout)) {
+        if (oldSmallest2 != 0
+                && nonSizeLayoutFieldsUnchanged
+                && !buckets.crossesScreenLayoutSizeThreshold(oldConfig, newConfig)
+                && !buckets.crossesScreenLayoutLongThreshold(
+                        oldConfig.screenLayout, newConfig.screenLayout)) {
             return diff & (-257);
         }
         return diff;
@@ -96,7 +113,8 @@ public final class SizeConfigurationBuckets implements Parcelable {
         return crossesSizeThreshold(this.mSmallest, firstDp, secondDp);
     }
 
-    public boolean crossesScreenLayoutSizeThreshold(Configuration firstConfig, Configuration secondConfig) {
+    public boolean crossesScreenLayoutSizeThreshold(
+            Configuration firstConfig, Configuration secondConfig) {
         if ((firstConfig.screenLayout & 15) == (secondConfig.screenLayout & 15)) {
             return false;
         }
@@ -105,7 +123,8 @@ public final class SizeConfigurationBuckets implements Parcelable {
         }
         if (this.mScreenLayoutSize != null) {
             for (int screenLayoutSize : this.mScreenLayoutSize) {
-                if (firstConfig.isLayoutSizeAtLeast(screenLayoutSize) != secondConfig.isLayoutSizeAtLeast(screenLayoutSize)) {
+                if (firstConfig.isLayoutSizeAtLeast(screenLayoutSize)
+                        != secondConfig.isLayoutSizeAtLeast(screenLayoutSize)) {
                     return true;
                 }
             }
@@ -113,13 +132,16 @@ public final class SizeConfigurationBuckets implements Parcelable {
         return false;
     }
 
-    private boolean crossesScreenLayoutLongThreshold(int firstScreenLayout, int secondScreenLayout) {
+    private boolean crossesScreenLayoutLongThreshold(
+            int firstScreenLayout, int secondScreenLayout) {
         int firstScreenLayoutLongValue = firstScreenLayout & 48;
         int secondScreenLayoutLongValue = secondScreenLayout & 48;
-        return this.mScreenLayoutLongSet && firstScreenLayoutLongValue != secondScreenLayoutLongValue;
+        return this.mScreenLayoutLongSet
+                && firstScreenLayoutLongValue != secondScreenLayoutLongValue;
     }
 
-    public static boolean areNonSizeLayoutFieldsUnchanged(int oldScreenLayout, int newScreenLayout) {
+    public static boolean areNonSizeLayoutFieldsUnchanged(
+            int oldScreenLayout, int newScreenLayout) {
         return (oldScreenLayout & 268436416) == (268436416 & newScreenLayout);
     }
 
@@ -129,7 +151,8 @@ public final class SizeConfigurationBuckets implements Parcelable {
         }
         for (int i = thresholds.length - 1; i >= 0; i--) {
             int threshold = thresholds[i];
-            if ((firstDp < threshold && secondDp >= threshold) || (firstDp >= threshold && secondDp < threshold)) {
+            if ((firstDp < threshold && secondDp >= threshold)
+                    || (firstDp >= threshold && secondDp < threshold)) {
                 return true;
             }
         }
@@ -137,10 +160,23 @@ public final class SizeConfigurationBuckets implements Parcelable {
     }
 
     public String toString() {
-        return Arrays.toString(this.mHorizontal) + " " + Arrays.toString(this.mVertical) + " " + Arrays.toString(this.mSmallest) + " " + Arrays.toString(this.mScreenLayoutSize) + " " + this.mScreenLayoutLongSet;
+        return Arrays.toString(this.mHorizontal)
+                + " "
+                + Arrays.toString(this.mVertical)
+                + " "
+                + Arrays.toString(this.mSmallest)
+                + " "
+                + Arrays.toString(this.mScreenLayoutSize)
+                + " "
+                + this.mScreenLayoutLongSet;
     }
 
-    public SizeConfigurationBuckets(int[] horizontal, int[] vertical, int[] smallest, int[] screenLayoutSize, boolean screenLayoutLongSet) {
+    public SizeConfigurationBuckets(
+            int[] horizontal,
+            int[] vertical,
+            int[] smallest,
+            int[] screenLayoutSize,
+            boolean screenLayoutLongSet) {
         this.mHorizontal = horizontal;
         this.mVertical = vertical;
         this.mSmallest = smallest;
@@ -218,6 +254,5 @@ public final class SizeConfigurationBuckets implements Parcelable {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

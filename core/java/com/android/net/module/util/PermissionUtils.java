@@ -8,6 +8,7 @@ import android.media.MediaMetrics;
 import android.net.NetworkStack;
 import android.os.Binder;
 import android.os.UserHandle;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +26,8 @@ public final class PermissionUtils {
         return false;
     }
 
-    public static boolean hasAnyPermissionOf(Context context, int pid, int uid, String... permissions) {
+    public static boolean hasAnyPermissionOf(
+            Context context, int pid, int uid, String... permissions) {
         for (String permission : permissions) {
             if (context.checkPermission(permission, pid, uid) == 0) {
                 return true;
@@ -36,7 +38,10 @@ public final class PermissionUtils {
 
     public static void enforceAnyPermissionOf(Context context, String... permissions) {
         if (!hasAnyPermissionOf(context, permissions)) {
-            throw new SecurityException("Requires one of the following permissions: " + String.join(", ", permissions) + MediaMetrics.SEPARATOR);
+            throw new SecurityException(
+                    "Requires one of the following permissions: "
+                            + String.join(", ", permissions)
+                            + MediaMetrics.SEPARATOR);
         }
     }
 
@@ -44,7 +49,8 @@ public final class PermissionUtils {
         enforceNetworkStackPermissionOr(context, new String[0]);
     }
 
-    public static void enforceNetworkStackPermissionOr(Context context, String... otherPermissions) {
+    public static void enforceNetworkStackPermissionOr(
+            Context context, String... otherPermissions) {
         ArrayList<String> permissions = new ArrayList<>(Arrays.asList(otherPermissions));
         permissions.add(Manifest.permission.NETWORK_STACK);
         permissions.add(NetworkStack.PERMISSION_MAINLINE_NETWORK_STACK);
@@ -52,7 +58,8 @@ public final class PermissionUtils {
     }
 
     public static void enforceRestrictedNetworkPermission(Context context, String message) {
-        context.enforceCallingOrSelfPermission(Manifest.permission.CONNECTIVITY_USE_RESTRICTED_NETWORKS, message);
+        context.enforceCallingOrSelfPermission(
+                Manifest.permission.CONNECTIVITY_USE_RESTRICTED_NETWORKS, message);
     }
 
     public static void enforceAccessNetworkStatePermission(Context context, String message) {
@@ -61,7 +68,14 @@ public final class PermissionUtils {
 
     public static boolean hasDumpPermission(Context context, String tag, PrintWriter pw) {
         if (context.checkCallingOrSelfPermission(Manifest.permission.DUMP) != 0) {
-            pw.println("Permission Denial: can't dump " + tag + " from from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid() + " due to missing android.permission.DUMP permission");
+            pw.println(
+                    "Permission Denial: can't dump "
+                            + tag
+                            + " from from pid="
+                            + Binder.getCallingPid()
+                            + ", uid="
+                            + Binder.getCallingUid()
+                            + " due to missing android.permission.DUMP permission");
             return false;
         }
         return true;

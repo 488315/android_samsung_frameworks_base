@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class KeyCreationWithGeneralInfo implements Parcelable {
-    public static final Parcelable.Creator<KeyCreationWithGeneralInfo> CREATOR = new Parcelable.Creator<KeyCreationWithGeneralInfo>() { // from class: android.security.metrics.KeyCreationWithGeneralInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyCreationWithGeneralInfo createFromParcel(Parcel _aidl_source) {
-            KeyCreationWithGeneralInfo _aidl_out = new KeyCreationWithGeneralInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<KeyCreationWithGeneralInfo> CREATOR =
+            new Parcelable.Creator<
+                    KeyCreationWithGeneralInfo>() { // from class:
+                                                    // android.security.metrics.KeyCreationWithGeneralInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyCreationWithGeneralInfo createFromParcel(Parcel _aidl_source) {
+                    KeyCreationWithGeneralInfo _aidl_out = new KeyCreationWithGeneralInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyCreationWithGeneralInfo[] newArray(int _aidl_size) {
-            return new KeyCreationWithGeneralInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyCreationWithGeneralInfo[] newArray(int _aidl_size) {
+                    return new KeyCreationWithGeneralInfo[_aidl_size];
+                }
+            };
     public int algorithm;
     public int ec_curve;
     public int key_origin;

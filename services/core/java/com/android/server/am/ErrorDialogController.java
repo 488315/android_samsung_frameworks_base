@@ -2,9 +2,9 @@ package com.android.server.am;
 
 import android.app.AnrController;
 import android.content.Context;
-import com.android.server.am.AppErrorDialog;
-import com.android.server.am.AppNotRespondingDialog;
+
 import com.android.server.wm.WindowManagerInternal;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -46,28 +46,33 @@ public final class ErrorDialogController {
         if (arrayList.isEmpty() || z) {
             ActivityManagerService activityManagerService = this.mService;
             WindowManagerInternal windowManagerInternal = activityManagerService.mWmInternal;
-            arrayList.add(windowManagerInternal != null ? windowManagerInternal.getTopFocusedDisplayUiContext() : activityManagerService.mUiContext);
+            arrayList.add(
+                    windowManagerInternal != null
+                            ? windowManagerInternal.getTopFocusedDisplayUiContext()
+                            : activityManagerService.mUiContext);
         }
         return arrayList;
     }
 
     public final void scheduleForAllDialogs(final List list, final Consumer consumer) {
-        this.mService.mUiHandler.post(new Runnable() { // from class: com.android.server.am.ErrorDialogController$$ExternalSyntheticLambda4
-            @Override // java.lang.Runnable
-            public final void run() {
-                ErrorDialogController errorDialogController = ErrorDialogController.this;
-                List list2 = list;
-                Consumer consumer2 = consumer;
-                if (list2 == null) {
-                    errorDialogController.getClass();
-                    return;
-                }
-                errorDialogController.getClass();
-                for (int size = list2.size() - 1; size >= 0; size--) {
-                    consumer2.accept((BaseErrorDialog) list2.get(size));
-                }
-            }
-        });
+        this.mService.mUiHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.am.ErrorDialogController$$ExternalSyntheticLambda4
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ErrorDialogController errorDialogController = ErrorDialogController.this;
+                        List list2 = list;
+                        Consumer consumer2 = consumer;
+                        if (list2 == null) {
+                            errorDialogController.getClass();
+                            return;
+                        }
+                        errorDialogController.getClass();
+                        for (int size = list2.size() - 1; size >= 0; size--) {
+                            consumer2.accept((BaseErrorDialog) list2.get(size));
+                        }
+                    }
+                });
     }
 
     public final void showAnrDialogs(AppNotRespondingDialog.Data data) {
@@ -75,9 +80,13 @@ public final class ErrorDialogController {
         this.mAnrDialogs = new ArrayList();
         ArrayList arrayList = (ArrayList) displayContexts;
         for (int size = arrayList.size() - 1; size >= 0; size--) {
-            ((ArrayList) this.mAnrDialogs).add(new AppNotRespondingDialog(this.mService, (Context) arrayList.get(size), data));
+            ((ArrayList) this.mAnrDialogs)
+                    .add(
+                            new AppNotRespondingDialog(
+                                    this.mService, (Context) arrayList.get(size), data));
         }
-        scheduleForAllDialogs(this.mAnrDialogs, new ErrorDialogController$$ExternalSyntheticLambda0(1));
+        scheduleForAllDialogs(
+                this.mAnrDialogs, new ErrorDialogController$$ExternalSyntheticLambda0(1));
     }
 
     public final void showCrashDialogs(AppErrorDialog.Data data) {
@@ -89,10 +98,14 @@ public final class ErrorDialogController {
             size--;
             ActivityManagerService activityManagerService = this.mService;
             if (size < 0) {
-                activityManagerService.mUiHandler.post(new ErrorDialogController$$ExternalSyntheticLambda2(1, this));
+                activityManagerService.mUiHandler.post(
+                        new ErrorDialogController$$ExternalSyntheticLambda2(1, this));
                 return;
             }
-            ((ArrayList) this.mCrashDialogs).add(new AppErrorDialog((Context) arrayList.get(size), activityManagerService, data));
+            ((ArrayList) this.mCrashDialogs)
+                    .add(
+                            new AppErrorDialog(
+                                    (Context) arrayList.get(size), activityManagerService, data));
         }
     }
 
@@ -101,8 +114,15 @@ public final class ErrorDialogController {
         this.mViolationDialogs = new ArrayList();
         ArrayList arrayList = (ArrayList) displayContexts;
         for (int size = arrayList.size() - 1; size >= 0; size--) {
-            ((ArrayList) this.mViolationDialogs).add(new StrictModeViolationDialog((Context) arrayList.get(size), this.mService, appErrorResult, this.mApp));
+            ((ArrayList) this.mViolationDialogs)
+                    .add(
+                            new StrictModeViolationDialog(
+                                    (Context) arrayList.get(size),
+                                    this.mService,
+                                    appErrorResult,
+                                    this.mApp));
         }
-        scheduleForAllDialogs(this.mViolationDialogs, new ErrorDialogController$$ExternalSyntheticLambda0(1));
+        scheduleForAllDialogs(
+                this.mViolationDialogs, new ErrorDialogController$$ExternalSyntheticLambda0(1));
     }
 }

@@ -7,44 +7,69 @@ import android.net.Uri;
 import android.provider.CalendarContract;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
-import com.android.server.notification.EventConditionProvider;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class CalendarTracker {
     public EventConditionProvider.AnonymousClass2 mCallback;
-    public final AnonymousClass1 mObserver = new ContentObserver() { // from class: com.android.server.notification.CalendarTracker.1
-        @Override // android.database.ContentObserver
-        public final void onChange(boolean z) {
-            if (CalendarTracker.DEBUG) {
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m("onChange selfChange=", "ConditionProviders.CT", z);
-            }
-        }
+    public final AnonymousClass1 mObserver =
+            new ContentObserver() { // from class: com.android.server.notification.CalendarTracker.1
+                @Override // android.database.ContentObserver
+                public final void onChange(boolean z) {
+                    if (CalendarTracker.DEBUG) {
+                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                "onChange selfChange=", "ConditionProviders.CT", z);
+                    }
+                }
 
-        @Override // android.database.ContentObserver
-        public final void onChange(boolean z, Uri uri) {
-            if (CalendarTracker.DEBUG) {
-                Log.d("ConditionProviders.CT", "onChange selfChange=" + z + " uri=" + uri + " u=" + CalendarTracker.this.mUserContext.getUserId());
-            }
-            EventConditionProvider.AnonymousClass2 anonymousClass2 = CalendarTracker.this.mCallback;
-            anonymousClass2.getClass();
-            if (EventConditionProvider.DEBUG) {
-                Slog.d("ConditionProviders.ECP", "mTrackerCallback.onChanged");
-            }
-            EventConditionProvider eventConditionProvider = EventConditionProvider.this;
-            eventConditionProvider.mWorker.removeCallbacks(eventConditionProvider.mEvaluateSubscriptionsW);
-            eventConditionProvider.mWorker.postDelayed(eventConditionProvider.mEvaluateSubscriptionsW, 2000L);
-        }
-    };
+                @Override // android.database.ContentObserver
+                public final void onChange(boolean z, Uri uri) {
+                    if (CalendarTracker.DEBUG) {
+                        Log.d(
+                                "ConditionProviders.CT",
+                                "onChange selfChange="
+                                        + z
+                                        + " uri="
+                                        + uri
+                                        + " u="
+                                        + CalendarTracker.this.mUserContext.getUserId());
+                    }
+                    EventConditionProvider.AnonymousClass2 anonymousClass2 =
+                            CalendarTracker.this.mCallback;
+                    anonymousClass2.getClass();
+                    if (EventConditionProvider.DEBUG) {
+                        Slog.d("ConditionProviders.ECP", "mTrackerCallback.onChanged");
+                    }
+                    EventConditionProvider eventConditionProvider = EventConditionProvider.this;
+                    eventConditionProvider.mWorker.removeCallbacks(
+                            eventConditionProvider.mEvaluateSubscriptionsW);
+                    eventConditionProvider.mWorker.postDelayed(
+                            eventConditionProvider.mEvaluateSubscriptionsW, 2000L);
+                }
+            };
     public boolean mRegistered;
     public final Context mSystemContext;
     public final Context mUserContext;
     public static final boolean DEBUG = Log.isLoggable("ConditionProviders", 3);
-    public static final String[] INSTANCE_PROJECTION = {"begin", "end", KnoxCustomManagerService.SHORTCUT_TITLE, "visible", "event_id", "calendar_displayName", "ownerAccount", "calendar_id", "availability"};
-    public static final String[] ATTENDEE_PROJECTION = {"event_id", "attendeeEmail", "attendeeStatus"};
+    public static final String[] INSTANCE_PROJECTION = {
+        "begin",
+        "end",
+        KnoxCustomManagerService.SHORTCUT_TITLE,
+        "visible",
+        "event_id",
+        "calendar_displayName",
+        "ownerAccount",
+        "calendar_id",
+        "availability"
+    };
+    public static final String[] ATTENDEE_PROJECTION = {
+        "event_id", "attendeeEmail", "attendeeStatus"
+    };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CheckEventResult {
@@ -64,30 +89,34 @@ public final class CalendarTracker {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.notification.CalendarTracker.CheckEventResult checkEvent(android.service.notification.ZenModeConfig.EventInfo r33, long r34) {
+    public final com.android.server.notification.CalendarTracker.CheckEventResult checkEvent(
+            android.service.notification.ZenModeConfig.EventInfo r33, long r34) {
         /*
             Method dump skipped, instructions count: 413
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.CalendarTracker.checkEvent(android.service.notification.ZenModeConfig$EventInfo, long):com.android.server.notification.CalendarTracker$CheckEventResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.CalendarTracker.checkEvent(android.service.notification.ZenModeConfig$EventInfo,"
+                    + " long):com.android.server.notification.CalendarTracker$CheckEventResult");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x004b, code lost:
-    
-        if (com.android.server.notification.CalendarTracker.DEBUG == false) goto L21;
-     */
+
+       if (com.android.server.notification.CalendarTracker.DEBUG == false) goto L21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:13:0x004d, code lost:
-    
-        android.util.Log.d("ConditionProviders.CT", "getCalendarsWithAccess took " + (java.lang.System.currentTimeMillis() - r1));
-     */
+
+       android.util.Log.d("ConditionProviders.CT", "getCalendarsWithAccess took " + (java.lang.System.currentTimeMillis() - r1));
+    */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0063, code lost:
-    
-        return r3;
-     */
+
+       return r3;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0046, code lost:
-    
-        if (r4 == null) goto L18;
-     */
+
+       if (r4 == null) goto L18;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -153,24 +182,32 @@ public final class CalendarTracker {
         L69:
             throw r11
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.CalendarTracker.getCalendarsWithAccess():android.util.ArraySet");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.CalendarTracker.getCalendarsWithAccess():android.util.ArraySet");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:60:0x00ee, code lost:
-    
-        android.util.Log.d("ConditionProviders.CT", "No attendees found");
-     */
+
+       android.util.Log.d("ConditionProviders.CT", "No attendees found");
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean meetsAttendee(android.service.notification.ZenModeConfig.EventInfo r17, int r18, java.lang.String r19) {
+    public final boolean meetsAttendee(
+            android.service.notification.ZenModeConfig.EventInfo r17,
+            int r18,
+            java.lang.String r19) {
         /*
             Method dump skipped, instructions count: 334
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.CalendarTracker.meetsAttendee(android.service.notification.ZenModeConfig$EventInfo, int, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.CalendarTracker.meetsAttendee(android.service.notification.ZenModeConfig$EventInfo,"
+                    + " int, java.lang.String):boolean");
     }
 
     public final void setCallback(EventConditionProvider.AnonymousClass2 anonymousClass2) {
@@ -189,7 +226,8 @@ public final class CalendarTracker {
         boolean z3 = DEBUG;
         if (z2) {
             if (z3) {
-                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(userId, "unregister content observer u=", "ConditionProviders.CT");
+                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                        userId, "unregister content observer u=", "ConditionProviders.CT");
             }
             contentResolver.unregisterContentObserver(anonymousClass1);
         }
@@ -199,11 +237,15 @@ public final class CalendarTracker {
         }
         if (this.mRegistered) {
             if (z3) {
-                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(userId, "register content observer u=", "ConditionProviders.CT");
+                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                        userId, "register content observer u=", "ConditionProviders.CT");
             }
-            contentResolver.registerContentObserver(CalendarContract.Instances.CONTENT_URI, true, anonymousClass1, userId);
-            contentResolver.registerContentObserver(CalendarContract.Events.CONTENT_URI, true, anonymousClass1, userId);
-            contentResolver.registerContentObserver(CalendarContract.Calendars.CONTENT_URI, true, anonymousClass1, userId);
+            contentResolver.registerContentObserver(
+                    CalendarContract.Instances.CONTENT_URI, true, anonymousClass1, userId);
+            contentResolver.registerContentObserver(
+                    CalendarContract.Events.CONTENT_URI, true, anonymousClass1, userId);
+            contentResolver.registerContentObserver(
+                    CalendarContract.Calendars.CONTENT_URI, true, anonymousClass1, userId);
         }
     }
 }

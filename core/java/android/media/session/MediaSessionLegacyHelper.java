@@ -13,7 +13,6 @@ import android.media.MediaCommunicationManager;
 import android.media.MediaMetadata;
 import android.media.MediaMetrics;
 import android.media.Rating;
-import android.media.session.MediaSession;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -35,8 +34,11 @@ public class MediaSessionLegacyHelper {
 
     private MediaSessionLegacyHelper(Context context) {
         this.mContext = context;
-        this.mSessionManager = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
-        this.mCommunicationManager = (MediaCommunicationManager) context.getSystemService(MediaCommunicationManager.class);
+        this.mSessionManager =
+                (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
+        this.mCommunicationManager =
+                (MediaCommunicationManager)
+                        context.getSystemService(MediaCommunicationManager.class);
     }
 
     public static MediaSessionLegacyHelper getHelper(Context context) {
@@ -48,66 +50,88 @@ public class MediaSessionLegacyHelper {
         return sInstance;
     }
 
-    public static Bundle getOldMetadata(MediaMetadata metadata, int artworkWidth, int artworkHeight) {
+    public static Bundle getOldMetadata(
+            MediaMetadata metadata, int artworkWidth, int artworkHeight) {
         boolean includeArtwork = (artworkWidth == -1 || artworkHeight == -1) ? false : true;
         Bundle oldMetadata = new Bundle();
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_ALBUM)) {
-            oldMetadata.putString(String.valueOf(1), metadata.getString(MediaMetadata.METADATA_KEY_ALBUM));
+            oldMetadata.putString(
+                    String.valueOf(1), metadata.getString(MediaMetadata.METADATA_KEY_ALBUM));
         }
         if (includeArtwork && metadata.containsKey(MediaMetadata.METADATA_KEY_ART)) {
             Bitmap art = metadata.getBitmap(MediaMetadata.METADATA_KEY_ART);
-            oldMetadata.putParcelable(String.valueOf(100), scaleBitmapIfTooBig(art, artworkWidth, artworkHeight));
+            oldMetadata.putParcelable(
+                    String.valueOf(100), scaleBitmapIfTooBig(art, artworkWidth, artworkHeight));
         } else if (includeArtwork && metadata.containsKey(MediaMetadata.METADATA_KEY_ALBUM_ART)) {
             Bitmap art2 = metadata.getBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART);
-            oldMetadata.putParcelable(String.valueOf(100), scaleBitmapIfTooBig(art2, artworkWidth, artworkHeight));
+            oldMetadata.putParcelable(
+                    String.valueOf(100), scaleBitmapIfTooBig(art2, artworkWidth, artworkHeight));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_ALBUM_ARTIST)) {
-            oldMetadata.putString(String.valueOf(13), metadata.getString(MediaMetadata.METADATA_KEY_ALBUM_ARTIST));
+            oldMetadata.putString(
+                    String.valueOf(13),
+                    metadata.getString(MediaMetadata.METADATA_KEY_ALBUM_ARTIST));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_ARTIST)) {
-            oldMetadata.putString(String.valueOf(2), metadata.getString(MediaMetadata.METADATA_KEY_ARTIST));
+            oldMetadata.putString(
+                    String.valueOf(2), metadata.getString(MediaMetadata.METADATA_KEY_ARTIST));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_AUTHOR)) {
-            oldMetadata.putString(String.valueOf(3), metadata.getString(MediaMetadata.METADATA_KEY_AUTHOR));
+            oldMetadata.putString(
+                    String.valueOf(3), metadata.getString(MediaMetadata.METADATA_KEY_AUTHOR));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_COMPILATION)) {
-            oldMetadata.putString(String.valueOf(15), metadata.getString(MediaMetadata.METADATA_KEY_COMPILATION));
+            oldMetadata.putString(
+                    String.valueOf(15), metadata.getString(MediaMetadata.METADATA_KEY_COMPILATION));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_COMPOSER)) {
-            oldMetadata.putString(String.valueOf(4), metadata.getString(MediaMetadata.METADATA_KEY_COMPOSER));
+            oldMetadata.putString(
+                    String.valueOf(4), metadata.getString(MediaMetadata.METADATA_KEY_COMPOSER));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_DATE)) {
-            oldMetadata.putString(String.valueOf(5), metadata.getString(MediaMetadata.METADATA_KEY_DATE));
+            oldMetadata.putString(
+                    String.valueOf(5), metadata.getString(MediaMetadata.METADATA_KEY_DATE));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_DISC_NUMBER)) {
-            oldMetadata.putLong(String.valueOf(14), metadata.getLong(MediaMetadata.METADATA_KEY_DISC_NUMBER));
+            oldMetadata.putLong(
+                    String.valueOf(14), metadata.getLong(MediaMetadata.METADATA_KEY_DISC_NUMBER));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_DURATION)) {
-            oldMetadata.putLong(String.valueOf(9), metadata.getLong(MediaMetadata.METADATA_KEY_DURATION));
+            oldMetadata.putLong(
+                    String.valueOf(9), metadata.getLong(MediaMetadata.METADATA_KEY_DURATION));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_GENRE)) {
-            oldMetadata.putString(String.valueOf(6), metadata.getString(MediaMetadata.METADATA_KEY_GENRE));
+            oldMetadata.putString(
+                    String.valueOf(6), metadata.getString(MediaMetadata.METADATA_KEY_GENRE));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_NUM_TRACKS)) {
-            oldMetadata.putLong(String.valueOf(10), metadata.getLong(MediaMetadata.METADATA_KEY_NUM_TRACKS));
+            oldMetadata.putLong(
+                    String.valueOf(10), metadata.getLong(MediaMetadata.METADATA_KEY_NUM_TRACKS));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_RATING)) {
-            oldMetadata.putParcelable(String.valueOf(101), metadata.getRating(MediaMetadata.METADATA_KEY_RATING));
+            oldMetadata.putParcelable(
+                    String.valueOf(101), metadata.getRating(MediaMetadata.METADATA_KEY_RATING));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_USER_RATING)) {
-            oldMetadata.putParcelable(String.valueOf(268435457), metadata.getRating(MediaMetadata.METADATA_KEY_USER_RATING));
+            oldMetadata.putParcelable(
+                    String.valueOf(268435457),
+                    metadata.getRating(MediaMetadata.METADATA_KEY_USER_RATING));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_TITLE)) {
-            oldMetadata.putString(String.valueOf(7), metadata.getString(MediaMetadata.METADATA_KEY_TITLE));
+            oldMetadata.putString(
+                    String.valueOf(7), metadata.getString(MediaMetadata.METADATA_KEY_TITLE));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_TRACK_NUMBER)) {
-            oldMetadata.putLong(String.valueOf(0), metadata.getLong(MediaMetadata.METADATA_KEY_TRACK_NUMBER));
+            oldMetadata.putLong(
+                    String.valueOf(0), metadata.getLong(MediaMetadata.METADATA_KEY_TRACK_NUMBER));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_WRITER)) {
-            oldMetadata.putString(String.valueOf(11), metadata.getString(MediaMetadata.METADATA_KEY_WRITER));
+            oldMetadata.putString(
+                    String.valueOf(11), metadata.getString(MediaMetadata.METADATA_KEY_WRITER));
         }
         if (metadata.containsKey(MediaMetadata.METADATA_KEY_YEAR)) {
-            oldMetadata.putLong(String.valueOf(8), metadata.getLong(MediaMetadata.METADATA_KEY_YEAR));
+            oldMetadata.putLong(
+                    String.valueOf(8), metadata.getLong(MediaMetadata.METADATA_KEY_YEAR));
         }
         return oldMetadata;
     }
@@ -188,7 +212,8 @@ public class MediaSessionLegacyHelper {
         }
     }
 
-    public void addMediaButtonListener(PendingIntent pi, ComponentName mbrComponent, Context context) {
+    public void addMediaButtonListener(
+            PendingIntent pi, ComponentName mbrComponent, Context context) {
         if (pi == null) {
             Log.w(TAG, "Pending intent was null, can't addMediaButtonListener.");
             return;
@@ -212,7 +237,9 @@ public class MediaSessionLegacyHelper {
 
     public void removeMediaButtonListener(PendingIntent pi) {
         SessionHolder holder;
-        if (pi != null && (holder = getHolder(pi, false)) != null && holder.mMediaButtonListener != null) {
+        if (pi != null
+                && (holder = getHolder(pi, false)) != null
+                && holder.mMediaButtonListener != null) {
             holder.mFlags &= -2;
             holder.mSession.setFlags(holder.mFlags);
             holder.mMediaButtonListener = null;
@@ -240,7 +267,11 @@ public class MediaSessionLegacyHelper {
                 Paint paint = new Paint();
                 paint.setAntiAlias(true);
                 paint.setFilterBitmap(true);
-                canvas.drawBitmap(bitmap, (Rect) null, new RectF(0.0f, 0.0f, outBitmap.getWidth(), outBitmap.getHeight()), paint);
+                canvas.drawBitmap(
+                        bitmap,
+                        (Rect) null,
+                        new RectF(0.0f, 0.0f, outBitmap.getWidth(), outBitmap.getHeight()),
+                        paint);
                 return outBitmap;
             }
             return bitmap;
@@ -251,7 +282,8 @@ public class MediaSessionLegacyHelper {
     private SessionHolder getHolder(PendingIntent pi, boolean createIfMissing) {
         SessionHolder holder = this.mSessions.get(pi);
         if (holder == null && createIfMissing) {
-            MediaSession session = new MediaSession(this.mContext, "MediaSessionHelper-" + pi.getCreatorPackage());
+            MediaSession session =
+                    new MediaSession(this.mContext, "MediaSessionHelper-" + pi.getCreatorPackage());
             session.setActive(true);
             SessionHolder holder2 = new SessionHolder(session, pi);
             this.mSessions.put(pi, holder2);
@@ -280,7 +312,8 @@ public class MediaSessionLegacyHelper {
 
         @Override // android.media.session.MediaSession.Callback
         public boolean onMediaButtonEvent(Intent mediaButtonIntent) {
-            MediaSessionLegacyHelper.sendKeyEvent(this.mPendingIntent, this.mContext, mediaButtonIntent);
+            MediaSessionLegacyHelper.sendKeyEvent(
+                    this.mPendingIntent, this.mContext, mediaButtonIntent);
             return true;
         }
 
@@ -329,7 +362,9 @@ public class MediaSessionLegacyHelper {
             intent.putExtra(Intent.EXTRA_KEY_EVENT, ke2);
             MediaSessionLegacyHelper.sendKeyEvent(this.mPendingIntent, this.mContext, intent);
             if (MediaSessionLegacyHelper.DEBUG) {
-                Log.d(MediaSessionLegacyHelper.TAG, "Sent " + keyCode + " to pending intent " + this.mPendingIntent);
+                Log.d(
+                        MediaSessionLegacyHelper.TAG,
+                        "Sent " + keyCode + " to pending intent " + this.mPendingIntent);
             }
         }
     }
@@ -363,8 +398,7 @@ public class MediaSessionLegacyHelper {
         }
 
         private class SessionCallback extends MediaSession.Callback {
-            private SessionCallback() {
-            }
+            private SessionCallback() {}
 
             @Override // android.media.session.MediaSession.Callback
             public boolean onMediaButtonEvent(Intent mediaButtonIntent) {

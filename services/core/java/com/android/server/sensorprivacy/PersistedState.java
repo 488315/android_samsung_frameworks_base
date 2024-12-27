@@ -4,6 +4,7 @@ import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.AtomicFile;
 import android.util.SparseArray;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 
@@ -60,7 +61,9 @@ public final class PersistedState {
                 return false;
             }
             TypeUserSensor typeUserSensor = (TypeUserSensor) obj;
-            return this.mType == typeUserSensor.mType && this.mUserId == typeUserSensor.mUserId && this.mSensor == typeUserSensor.mSensor;
+            return this.mType == typeUserSensor.mType
+                    && this.mUserId == typeUserSensor.mUserId
+                    && this.mSensor == typeUserSensor.mSensor;
         }
 
         public final int hashCode() {
@@ -84,14 +87,19 @@ public final class PersistedState {
             Method dump skipped, instructions count: 481
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.sensorprivacy.PersistedState.<init>():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.sensorprivacy.PersistedState.<init>():void");
     }
 
     public static void readPVersion0(TypedXmlPullParser typedXmlPullParser, PVersion0 pVersion0) {
         XmlUtils.nextElement(typedXmlPullParser);
         while (typedXmlPullParser.getEventType() != 1) {
             if ("individual-sensor-privacy".equals(typedXmlPullParser.getName())) {
-                pVersion0.mIndividualEnabled.put(XmlUtils.readIntAttribute(typedXmlPullParser, "sensor"), new SensorState(XmlUtils.readBooleanAttribute(typedXmlPullParser, "enabled")));
+                pVersion0.mIndividualEnabled.put(
+                        XmlUtils.readIntAttribute(typedXmlPullParser, "sensor"),
+                        new SensorState(
+                                XmlUtils.readBooleanAttribute(typedXmlPullParser, "enabled")));
                 XmlUtils.skipCurrentTag(typedXmlPullParser);
             } else {
                 XmlUtils.nextElement(typedXmlPullParser);
@@ -107,9 +115,14 @@ public final class PersistedState {
                 int depth = typedXmlPullParser.getDepth();
                 while (XmlUtils.nextElementWithin(typedXmlPullParser, depth)) {
                     if ("individual-sensor-privacy".equals(typedXmlPullParser.getName())) {
-                        int attributeInt2 = typedXmlPullParser.getAttributeInt((String) null, "sensor");
-                        boolean attributeBoolean = typedXmlPullParser.getAttributeBoolean((String) null, "enabled");
-                        SparseArray sparseArray = (SparseArray) pVersion1.mIndividualEnabled.get(attributeInt, new SparseArray());
+                        int attributeInt2 =
+                                typedXmlPullParser.getAttributeInt((String) null, "sensor");
+                        boolean attributeBoolean =
+                                typedXmlPullParser.getAttributeBoolean((String) null, "enabled");
+                        SparseArray sparseArray =
+                                (SparseArray)
+                                        pVersion1.mIndividualEnabled.get(
+                                                attributeInt, new SparseArray());
                         pVersion1.mIndividualEnabled.put(attributeInt, sparseArray);
                         sparseArray.put(attributeInt2, new SensorState(attributeBoolean));
                     }
@@ -126,9 +139,11 @@ public final class PersistedState {
                 int attributeInt2 = typedXmlPullParser.getAttributeInt((String) null, "user-id");
                 int attributeInt3 = typedXmlPullParser.getAttributeInt((String) null, "sensor");
                 int attributeInt4 = typedXmlPullParser.getAttributeInt((String) null, "state-type");
-                long attributeLong = typedXmlPullParser.getAttributeLong((String) null, "last-change");
+                long attributeLong =
+                        typedXmlPullParser.getAttributeLong((String) null, "last-change");
                 ArrayMap arrayMap = pVersion2.mStates;
-                TypeUserSensor typeUserSensor = new TypeUserSensor(attributeInt, attributeInt2, attributeInt3);
+                TypeUserSensor typeUserSensor =
+                        new TypeUserSensor(attributeInt, attributeInt2, attributeInt3);
                 SensorState sensorState = new SensorState();
                 sensorState.mStateType = attributeInt4;
                 String str = SensorPrivacyService.ACTION_DISABLE_TOGGLE_SENSOR_PRIVACY;

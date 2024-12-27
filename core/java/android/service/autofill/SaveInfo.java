@@ -9,8 +9,10 @@ import android.util.ArraySet;
 import android.util.DebugUtils;
 import android.view.autofill.AutofillId;
 import android.view.autofill.Helper;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -18,60 +20,77 @@ import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class SaveInfo implements Parcelable {
-    public static final Parcelable.Creator<SaveInfo> CREATOR = new Parcelable.Creator<SaveInfo>() { // from class: android.service.autofill.SaveInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SaveInfo createFromParcel(Parcel parcel) {
-            Builder builder;
-            int type = parcel.readInt();
-            AutofillId[] requiredIds = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
-            if (requiredIds != null) {
-                builder = new Builder(type, requiredIds);
-            } else {
-                builder = new Builder(type);
-            }
-            AutofillId[] optionalIds = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
-            if (optionalIds != null) {
-                builder.setOptionalIds(optionalIds);
-            }
-            int negativeButtonStyle = parcel.readInt();
-            if (negativeButtonStyle == 999) {
-                builder.semSetNegativeSecondAction(negativeButtonStyle, (IntentSender) parcel.readParcelable(null, IntentSender.class), (IntentSender) parcel.readParcelable(null, IntentSender.class));
-            } else {
-                builder.setNegativeAction(negativeButtonStyle, (IntentSender) parcel.readParcelable(null, IntentSender.class));
-                parcel.readParcelable(null, IntentSender.class);
-            }
-            builder.setPositiveAction(parcel.readInt());
-            builder.setDescription(parcel.readCharSequence());
-            CustomDescription customDescripton = (CustomDescription) parcel.readParcelable(null, CustomDescription.class);
-            if (customDescripton != null) {
-                builder.setCustomDescription(customDescripton);
-            }
-            InternalValidator validator = (InternalValidator) parcel.readParcelable(null, InternalValidator.class);
-            if (validator != null) {
-                builder.setValidator(validator);
-            }
-            InternalSanitizer[] sanitizers = (InternalSanitizer[]) parcel.readParcelableArray(null, InternalSanitizer.class);
-            if (sanitizers != null) {
-                for (InternalSanitizer internalSanitizer : sanitizers) {
-                    AutofillId[] autofillIds = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
-                    builder.addSanitizer(internalSanitizer, autofillIds);
+    public static final Parcelable.Creator<SaveInfo> CREATOR =
+            new Parcelable.Creator<SaveInfo>() { // from class: android.service.autofill.SaveInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SaveInfo createFromParcel(Parcel parcel) {
+                    Builder builder;
+                    int type = parcel.readInt();
+                    AutofillId[] requiredIds =
+                            (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
+                    if (requiredIds != null) {
+                        builder = new Builder(type, requiredIds);
+                    } else {
+                        builder = new Builder(type);
+                    }
+                    AutofillId[] optionalIds =
+                            (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
+                    if (optionalIds != null) {
+                        builder.setOptionalIds(optionalIds);
+                    }
+                    int negativeButtonStyle = parcel.readInt();
+                    if (negativeButtonStyle == 999) {
+                        builder.semSetNegativeSecondAction(
+                                negativeButtonStyle,
+                                (IntentSender) parcel.readParcelable(null, IntentSender.class),
+                                (IntentSender) parcel.readParcelable(null, IntentSender.class));
+                    } else {
+                        builder.setNegativeAction(
+                                negativeButtonStyle,
+                                (IntentSender) parcel.readParcelable(null, IntentSender.class));
+                        parcel.readParcelable(null, IntentSender.class);
+                    }
+                    builder.setPositiveAction(parcel.readInt());
+                    builder.setDescription(parcel.readCharSequence());
+                    CustomDescription customDescripton =
+                            (CustomDescription)
+                                    parcel.readParcelable(null, CustomDescription.class);
+                    if (customDescripton != null) {
+                        builder.setCustomDescription(customDescripton);
+                    }
+                    InternalValidator validator =
+                            (InternalValidator)
+                                    parcel.readParcelable(null, InternalValidator.class);
+                    if (validator != null) {
+                        builder.setValidator(validator);
+                    }
+                    InternalSanitizer[] sanitizers =
+                            (InternalSanitizer[])
+                                    parcel.readParcelableArray(null, InternalSanitizer.class);
+                    if (sanitizers != null) {
+                        for (InternalSanitizer internalSanitizer : sanitizers) {
+                            AutofillId[] autofillIds =
+                                    (AutofillId[])
+                                            parcel.readParcelableArray(null, AutofillId.class);
+                            builder.addSanitizer(internalSanitizer, autofillIds);
+                        }
+                    }
+                    AutofillId triggerId =
+                            (AutofillId) parcel.readParcelable(null, AutofillId.class);
+                    if (triggerId != null) {
+                        builder.setTriggerId(triggerId);
+                    }
+                    builder.setFlags(parcel.readInt());
+                    return builder.build();
                 }
-            }
-            AutofillId triggerId = (AutofillId) parcel.readParcelable(null, AutofillId.class);
-            if (triggerId != null) {
-                builder.setTriggerId(triggerId);
-            }
-            builder.setFlags(parcel.readInt());
-            return builder.build();
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SaveInfo[] newArray(int size) {
-            return new SaveInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SaveInfo[] newArray(int size) {
+                    return new SaveInfo[size];
+                }
+            };
     public static final int FLAG_DELAY_SAVE = 4;
     public static final int FLAG_DONT_SAVE_ON_FINISH = 2;
     public static final int FLAG_SAVE_ON_ALL_VIEWS_INVISIBLE = 1;
@@ -106,26 +125,50 @@ public final class SaveInfo implements Parcelable {
     private final InternalValidator mValidator;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface NegativeButtonStyle {
-    }
+    @interface NegativeButtonStyle {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface PositiveButtonStyle {
-    }
+    @interface PositiveButtonStyle {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface SaveDataType {
-    }
+    @interface SaveDataType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface SaveInfoFlags {
-    }
+    @interface SaveInfoFlags {}
 
     public static SaveInfo copy(SaveInfo s, AutofillId[] optionalIds) {
-        return new SaveInfo(s.mType, s.mNegativeButtonStyle, s.mPositiveButtonStyle, s.mNegativeActionListener, s.mSemNegativeSecondActionListener, s.mRequiredIds, AutofillServiceHelper.assertValid(optionalIds), s.mDescription, s.mFlags, s.mCustomDescription, s.mValidator, s.mSanitizerKeys, s.mSanitizerValues, s.mTriggerId);
+        return new SaveInfo(
+                s.mType,
+                s.mNegativeButtonStyle,
+                s.mPositiveButtonStyle,
+                s.mNegativeActionListener,
+                s.mSemNegativeSecondActionListener,
+                s.mRequiredIds,
+                AutofillServiceHelper.assertValid(optionalIds),
+                s.mDescription,
+                s.mFlags,
+                s.mCustomDescription,
+                s.mValidator,
+                s.mSanitizerKeys,
+                s.mSanitizerValues,
+                s.mTriggerId);
     }
 
-    private SaveInfo(int type, int negativeButtonStyle, int positiveButtonStyle, IntentSender negativeActionListener, IntentSender SemNegativeSecondActionListener, AutofillId[] requiredIds, AutofillId[] optionalIds, CharSequence description, int flags, CustomDescription customDescription, InternalValidator validator, InternalSanitizer[] sanitizerKeys, AutofillId[][] sanitizerValues, AutofillId triggerId) {
+    private SaveInfo(
+            int type,
+            int negativeButtonStyle,
+            int positiveButtonStyle,
+            IntentSender negativeActionListener,
+            IntentSender SemNegativeSecondActionListener,
+            AutofillId[] requiredIds,
+            AutofillId[] optionalIds,
+            CharSequence description,
+            int flags,
+            CustomDescription customDescription,
+            InternalValidator validator,
+            InternalSanitizer[] sanitizerKeys,
+            AutofillId[][] sanitizerValues,
+            AutofillId triggerId) {
         this.mType = type;
         this.mNegativeButtonStyle = negativeButtonStyle;
         this.mNegativeActionListener = negativeActionListener;
@@ -270,14 +313,18 @@ public final class SaveInfo implements Parcelable {
 
         public Builder setDescription(CharSequence description) {
             throwIfDestroyed();
-            Preconditions.checkState(this.mCustomDescription == null, "Can call setDescription() or setCustomDescription(), but not both");
+            Preconditions.checkState(
+                    this.mCustomDescription == null,
+                    "Can call setDescription() or setCustomDescription(), but not both");
             this.mDescription = description;
             return this;
         }
 
         public Builder setCustomDescription(CustomDescription customDescription) {
             throwIfDestroyed();
-            Preconditions.checkState(this.mDescription == null, "Can call setDescription() or setCustomDescription(), but not both");
+            Preconditions.checkState(
+                    this.mDescription == null,
+                    "Can call setDescription() or setCustomDescription(), but not both");
             this.mCustomDescription = customDescription;
             return this;
         }
@@ -290,7 +337,8 @@ public final class SaveInfo implements Parcelable {
             return this;
         }
 
-        public Builder semSetNegativeSecondAction(int style, IntentSender listener, IntentSender listener2) {
+        public Builder semSetNegativeSecondAction(
+                int style, IntentSender listener, IntentSender listener2) {
             throwIfDestroyed();
             if (style != 999) {
                 throw new IllegalArgumentException("Invalid style: " + style);
@@ -310,7 +358,10 @@ public final class SaveInfo implements Parcelable {
 
         public Builder setValidator(Validator validator) {
             throwIfDestroyed();
-            Preconditions.checkArgument(validator instanceof InternalValidator, "not provided by Android System: %s", validator);
+            Preconditions.checkArgument(
+                    validator instanceof InternalValidator,
+                    "not provided by Android System: %s",
+                    validator);
             this.mValidator = (InternalValidator) validator;
             return this;
         }
@@ -318,13 +369,17 @@ public final class SaveInfo implements Parcelable {
         public Builder addSanitizer(Sanitizer sanitizer, AutofillId... ids) {
             throwIfDestroyed();
             Preconditions.checkArgument(!ArrayUtils.isEmpty(ids), "ids cannot be empty or null");
-            Preconditions.checkArgument(sanitizer instanceof InternalSanitizer, "not provided by Android System: %s", sanitizer);
+            Preconditions.checkArgument(
+                    sanitizer instanceof InternalSanitizer,
+                    "not provided by Android System: %s",
+                    sanitizer);
             if (this.mSanitizers == null) {
                 this.mSanitizers = new ArrayMap<>();
                 this.mSanitizerIds = new ArraySet<>(ids.length);
             }
             for (AutofillId id : ids) {
-                Preconditions.checkArgument(!this.mSanitizerIds.contains(id), "already added %s", id);
+                Preconditions.checkArgument(
+                        !this.mSanitizerIds.contains(id), "already added %s", id);
                 this.mSanitizerIds.add(id);
             }
             this.mSanitizers.put((InternalSanitizer) sanitizer, ids);
@@ -354,7 +409,25 @@ public final class SaveInfo implements Parcelable {
         if (!Helper.sDebug) {
             return super.toString();
         }
-        StringBuilder builder = new StringBuilder("SaveInfo: [type=").append(DebugUtils.flagsToString(SaveInfo.class, "SAVE_DATA_TYPE_", this.mType)).append(", requiredIds=").append(Arrays.toString(this.mRequiredIds)).append(", negative style=").append(DebugUtils.flagsToString(SaveInfo.class, "NEGATIVE_BUTTON_STYLE_", this.mNegativeButtonStyle)).append(", positive style=").append(DebugUtils.flagsToString(SaveInfo.class, "POSITIVE_BUTTON_STYLE_", this.mPositiveButtonStyle));
+        StringBuilder builder =
+                new StringBuilder("SaveInfo: [type=")
+                        .append(
+                                DebugUtils.flagsToString(
+                                        SaveInfo.class, "SAVE_DATA_TYPE_", this.mType))
+                        .append(", requiredIds=")
+                        .append(Arrays.toString(this.mRequiredIds))
+                        .append(", negative style=")
+                        .append(
+                                DebugUtils.flagsToString(
+                                        SaveInfo.class,
+                                        "NEGATIVE_BUTTON_STYLE_",
+                                        this.mNegativeButtonStyle))
+                        .append(", positive style=")
+                        .append(
+                                DebugUtils.flagsToString(
+                                        SaveInfo.class,
+                                        "POSITIVE_BUTTON_STYLE_",
+                                        this.mPositiveButtonStyle));
         if (this.mOptionalIds != null) {
             builder.append(", optionalIds=").append(Arrays.toString(this.mOptionalIds));
         }

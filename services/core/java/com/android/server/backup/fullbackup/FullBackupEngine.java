@@ -8,13 +8,13 @@ import android.content.pm.PackageManager;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.AppWidgetBackupBridge;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.backup.BackupAgentTimeoutParameters;
 import com.android.server.backup.BackupManagerYuva;
 import com.android.server.backup.BackupRestoreTask;
 import com.android.server.backup.UserBackupManagerService;
-import com.android.server.backup.fullbackup.PerformFullTransportBackupTask;
 import com.android.server.backup.remote.FutureBackupCallback;
 import com.android.server.backup.remote.RemoteCall;
 import com.android.server.backup.remote.RemoteCallable;
@@ -22,6 +22,7 @@ import com.android.server.backup.transport.BackupTransportClient;
 import com.android.server.backup.transport.TransportStatusCallback;
 import com.android.server.backup.utils.BackupEligibilityRules;
 import com.android.server.backup.utils.BackupManagerMonitorEventSender;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -61,7 +62,14 @@ public final class FullBackupEngine {
         public final int mToken;
         public final int mUserId;
 
-        public FullBackupRunner(UserBackupManagerService userBackupManagerService, PackageInfo packageInfo, IBackupAgent iBackupAgent, ParcelFileDescriptor parcelFileDescriptor, int i, boolean z, String[] strArr) {
+        public FullBackupRunner(
+                UserBackupManagerService userBackupManagerService,
+                PackageInfo packageInfo,
+                IBackupAgent iBackupAgent,
+                ParcelFileDescriptor parcelFileDescriptor,
+                int i,
+                boolean z,
+                String[] strArr) {
             this.isDisableDataExtractionRules = false;
             this.mUserId = userBackupManagerService.mUserId;
             this.mPackageManager = FullBackupEngine.this.backupManagerService.mPackageManager;
@@ -81,7 +89,13 @@ public final class FullBackupEngine {
             try {
                 try {
                     try {
-                        AppMetadataBackupWriter appMetadataBackupWriter = new AppMetadataBackupWriter(new FullBackupDataOutput(this.mPipe, -1L, FullBackupEngine.this.mTransportFlags), this.mPackageManager);
+                        AppMetadataBackupWriter appMetadataBackupWriter =
+                                new AppMetadataBackupWriter(
+                                        new FullBackupDataOutput(
+                                                this.mPipe,
+                                                -1L,
+                                                FullBackupEngine.this.mTransportFlags),
+                                        this.mPackageManager);
                         String str = this.mPackage.packageName;
                         boolean equals = "com.android.sharedstoragebackup".equals(str);
                         ApplicationInfo applicationInfo = this.mPackage.applicationInfo;
@@ -90,12 +104,15 @@ public final class FullBackupEngine {
                         boolean z2 = z && !equals && (!((i & 1) != 0) || ((i & 128) != 0));
                         if (!equals) {
                             File file = new File(this.mFilesDir, "_manifest");
-                            appMetadataBackupWriter.backupManifest(this.mPackage, file, this.mFilesDir, null, z2);
+                            appMetadataBackupWriter.backupManifest(
+                                    this.mPackage, file, this.mFilesDir, null, z2);
                             file.delete();
-                            byte[] widgetState = AppWidgetBackupBridge.getWidgetState(str, this.mUserId);
+                            byte[] widgetState =
+                                    AppWidgetBackupBridge.getWidgetState(str, this.mUserId);
                             if (widgetState != null && widgetState.length > 0) {
                                 File file2 = new File(this.mFilesDir, "_meta");
-                                appMetadataBackupWriter.backupWidget(this.mPackage, file2, this.mFilesDir, widgetState);
+                                appMetadataBackupWriter.backupWidget(
+                                        this.mPackage, file2, this.mFilesDir, widgetState);
                                 file2.delete();
                             }
                         }
@@ -105,30 +122,51 @@ public final class FullBackupEngine {
                         }
                         Slog.d("BackupManagerService", "Calling doFullBackup() on " + str);
                         if (equals) {
-                            BackupAgentTimeoutParameters backupAgentTimeoutParameters = FullBackupEngine.this.mAgentTimeoutParameters;
+                            BackupAgentTimeoutParameters backupAgentTimeoutParameters =
+                                    FullBackupEngine.this.mAgentTimeoutParameters;
                             synchronized (backupAgentTimeoutParameters.mLock) {
-                                fullBackupAgentTimeoutMillis = backupAgentTimeoutParameters.mSharedBackupAgentTimeoutMillis;
+                                fullBackupAgentTimeoutMillis =
+                                        backupAgentTimeoutParameters
+                                                .mSharedBackupAgentTimeoutMillis;
                             }
                         } else {
-                            fullBackupAgentTimeoutMillis = FullBackupEngine.this.mAgentTimeoutParameters.getFullBackupAgentTimeoutMillis();
+                            fullBackupAgentTimeoutMillis =
+                                    FullBackupEngine.this.mAgentTimeoutParameters
+                                            .getFullBackupAgentTimeoutMillis();
                         }
                         long j = fullBackupAgentTimeoutMillis;
                         FullBackupEngine fullBackupEngine = FullBackupEngine.this;
-                        fullBackupEngine.backupManagerService.prepareOperationTimeout(this.mToken, j, fullBackupEngine.mTimeoutMonitor, 0);
+                        fullBackupEngine.backupManagerService.prepareOperationTimeout(
+                                this.mToken, j, fullBackupEngine.mTimeoutMonitor, 0);
                         if (this.mSmartSwitchBackupPath != null) {
-                            this.mAgent.doDisableDataExtractionRules(this.isDisableDataExtractionRules);
+                            this.mAgent.doDisableDataExtractionRules(
+                                    this.isDisableDataExtractionRules);
                             IBackupAgent iBackupAgent = this.mAgent;
                             ParcelFileDescriptor parcelFileDescriptor = this.mPipe;
                             FullBackupEngine fullBackupEngine2 = FullBackupEngine.this;
-                            iBackupAgent.doFullBackupPath(parcelFileDescriptor, fullBackupEngine2.mQuota, this.mToken, fullBackupEngine2.backupManagerService.mBackupManagerBinder, fullBackupEngine2.mTransportFlags, this.mSmartSwitchBackupPath);
+                            iBackupAgent.doFullBackupPath(
+                                    parcelFileDescriptor,
+                                    fullBackupEngine2.mQuota,
+                                    this.mToken,
+                                    fullBackupEngine2.backupManagerService.mBackupManagerBinder,
+                                    fullBackupEngine2.mTransportFlags,
+                                    this.mSmartSwitchBackupPath);
                         } else {
                             IBackupAgent iBackupAgent2 = this.mAgent;
                             ParcelFileDescriptor parcelFileDescriptor2 = this.mPipe;
                             FullBackupEngine fullBackupEngine3 = FullBackupEngine.this;
-                            iBackupAgent2.doFullBackup(parcelFileDescriptor2, fullBackupEngine3.mQuota, this.mToken, fullBackupEngine3.backupManagerService.mBackupManagerBinder, fullBackupEngine3.mTransportFlags);
+                            iBackupAgent2.doFullBackup(
+                                    parcelFileDescriptor2,
+                                    fullBackupEngine3.mQuota,
+                                    this.mToken,
+                                    fullBackupEngine3.backupManagerService.mBackupManagerBinder,
+                                    fullBackupEngine3.mTransportFlags);
                         }
                     } catch (IOException e) {
-                        Slog.e("BackupManagerService", "Error running full backup for " + this.mPackage.packageName, e);
+                        Slog.e(
+                                "BackupManagerService",
+                                "Error running full backup for " + this.mPackage.packageName,
+                                e);
                         BackupManagerYuva backupManagerYuva = FullBackupEngine.mBackupManagerYuva;
                         if (backupManagerYuva != null) {
                             backupManagerYuva.isMemorySaverBackupFail = true;
@@ -136,7 +174,11 @@ public final class FullBackupEngine {
                         }
                     }
                 } catch (RemoteException e2) {
-                    Slog.e("BackupManagerService", "Remote agent vanished during full backup of " + this.mPackage.packageName, e2);
+                    Slog.e(
+                            "BackupManagerService",
+                            "Remote agent vanished during full backup of "
+                                    + this.mPackage.packageName,
+                            e2);
                     BackupManagerYuva backupManagerYuva2 = FullBackupEngine.mBackupManagerYuva;
                     if (backupManagerYuva2 != null) {
                         backupManagerYuva2.isMemorySaverBackupFail = true;
@@ -157,7 +199,21 @@ public final class FullBackupEngine {
         }
     }
 
-    public FullBackupEngine(UserBackupManagerService userBackupManagerService, OutputStream outputStream, PerformFullTransportBackupTask.SinglePackageBackupPreflight singlePackageBackupPreflight, PackageInfo packageInfo, boolean z, BackupRestoreTask backupRestoreTask, long j, int i, int i2, BackupEligibilityRules backupEligibilityRules, int i3, String[] strArr, BackupManagerMonitorEventSender backupManagerMonitorEventSender) {
+    public FullBackupEngine(
+            UserBackupManagerService userBackupManagerService,
+            OutputStream outputStream,
+            PerformFullTransportBackupTask.SinglePackageBackupPreflight
+                    singlePackageBackupPreflight,
+            PackageInfo packageInfo,
+            boolean z,
+            BackupRestoreTask backupRestoreTask,
+            long j,
+            int i,
+            int i2,
+            BackupEligibilityRules backupEligibilityRules,
+            int i3,
+            String[] strArr,
+            BackupManagerMonitorEventSender backupManagerMonitorEventSender) {
         this.backupManagerService = userBackupManagerService;
         this.mOutput = outputStream;
         this.mPreflightHook = singlePackageBackupPreflight;
@@ -168,7 +224,8 @@ public final class FullBackupEngine {
         this.mOpToken = i;
         this.mTransportFlags = i2;
         this.mSmartSwitchBackupPath = strArr;
-        BackupAgentTimeoutParameters backupAgentTimeoutParameters = userBackupManagerService.mAgentTimeoutParameters;
+        BackupAgentTimeoutParameters backupAgentTimeoutParameters =
+                userBackupManagerService.mAgentTimeoutParameters;
         Objects.requireNonNull(backupAgentTimeoutParameters, "Timeout parameters cannot be null");
         this.mAgentTimeoutParameters = backupAgentTimeoutParameters;
         this.mBackupEligibilityRules = backupEligibilityRules;
@@ -177,21 +234,21 @@ public final class FullBackupEngine {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:30:0x00ad, code lost:
-    
-        if (r0 == null) goto L30;
-     */
+
+       if (r0 == null) goto L30;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x00af, code lost:
-    
-        r0.isMemorySaverBackupFail = true;
-     */
+
+       r0.isMemorySaverBackupFail = true;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:32:0x00b1, code lost:
-    
-        r16 = -1000;
-     */
+
+       r16 = -1000;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:53:0x00f8, code lost:
-    
-        if (r0 == null) goto L30;
-     */
+
+       if (r0 == null) goto L30;
+    */
     /* JADX WARN: Removed duplicated region for block: B:26:0x0133  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -202,12 +259,18 @@ public final class FullBackupEngine {
             Method dump skipped, instructions count: 313
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.fullbackup.FullBackupEngine.backupOnePackage():int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.fullbackup.FullBackupEngine.backupOnePackage():int");
     }
 
     public final boolean initializeAgent() {
         if (this.mAgent == null) {
-            this.mAgent = this.backupManagerService.bindToAgentSynchronous(this.mPkg.applicationInfo, 1, this.mBackupEligibilityRules.mBackupDestination);
+            this.mAgent =
+                    this.backupManagerService.bindToAgentSynchronous(
+                            this.mPkg.applicationInfo,
+                            1,
+                            this.mBackupEligibilityRules.mBackupDestination);
         }
         return this.mAgent != null;
     }
@@ -215,46 +278,79 @@ public final class FullBackupEngine {
     public final int preflightCheck() {
         int i;
         final long j;
-        final PerformFullTransportBackupTask.SinglePackageBackupPreflight singlePackageBackupPreflight = this.mPreflightHook;
+        final PerformFullTransportBackupTask.SinglePackageBackupPreflight
+                singlePackageBackupPreflight = this.mPreflightHook;
         if (singlePackageBackupPreflight == null) {
             return 0;
         }
         int i2 = -1003;
         if (!initializeAgent()) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Unable to bind to full agent for "), this.mPkg.packageName, "BackupManagerService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Unable to bind to full agent for "),
+                    this.mPkg.packageName,
+                    "BackupManagerService");
             return -1003;
         }
         PackageInfo packageInfo = this.mPkg;
         final IBackupAgent iBackupAgent = this.mAgent;
-        PerformFullTransportBackupTask performFullTransportBackupTask = PerformFullTransportBackupTask.this;
-        long fullBackupAgentTimeoutMillis = performFullTransportBackupTask.mAgentTimeoutParameters.getFullBackupAgentTimeoutMillis();
+        PerformFullTransportBackupTask performFullTransportBackupTask =
+                PerformFullTransportBackupTask.this;
+        long fullBackupAgentTimeoutMillis =
+                performFullTransportBackupTask.mAgentTimeoutParameters
+                        .getFullBackupAgentTimeoutMillis();
         try {
-            performFullTransportBackupTask.mUserBackupManagerService.prepareOperationTimeout(singlePackageBackupPreflight.mCurrentOpToken, fullBackupAgentTimeoutMillis, singlePackageBackupPreflight, 0);
-            iBackupAgent.doMeasureFullBackup(singlePackageBackupPreflight.mQuota, singlePackageBackupPreflight.mCurrentOpToken, performFullTransportBackupTask.mUserBackupManagerService.mBackupManagerBinder, singlePackageBackupPreflight.mTransportFlags);
-            singlePackageBackupPreflight.mLatch.await(fullBackupAgentTimeoutMillis, TimeUnit.MILLISECONDS);
+            performFullTransportBackupTask.mUserBackupManagerService.prepareOperationTimeout(
+                    singlePackageBackupPreflight.mCurrentOpToken,
+                    fullBackupAgentTimeoutMillis,
+                    singlePackageBackupPreflight,
+                    0);
+            iBackupAgent.doMeasureFullBackup(
+                    singlePackageBackupPreflight.mQuota,
+                    singlePackageBackupPreflight.mCurrentOpToken,
+                    performFullTransportBackupTask.mUserBackupManagerService.mBackupManagerBinder,
+                    singlePackageBackupPreflight.mTransportFlags);
+            singlePackageBackupPreflight.mLatch.await(
+                    fullBackupAgentTimeoutMillis, TimeUnit.MILLISECONDS);
             j = singlePackageBackupPreflight.mResult.get();
         } catch (Exception e) {
-            Slog.w("PFTBT", "Exception preflighting " + packageInfo.packageName + ": " + e.getMessage());
+            Slog.w(
+                    "PFTBT",
+                    "Exception preflighting " + packageInfo.packageName + ": " + e.getMessage());
         }
         if (j < 0) {
             i = (int) j;
             this.mAgent.clearBackupRestoreEventLogger();
             return i;
         }
-        BackupTransportClient connectOrThrow = singlePackageBackupPreflight.mTransportConnection.connectOrThrow("PFTBT$SPBP.preflightFullBackup()");
-        BackupTransportClient.TransportStatusCallbackPool transportStatusCallbackPool = connectOrThrow.mCallbackPool;
+        BackupTransportClient connectOrThrow =
+                singlePackageBackupPreflight.mTransportConnection.connectOrThrow(
+                        "PFTBT$SPBP.preflightFullBackup()");
+        BackupTransportClient.TransportStatusCallbackPool transportStatusCallbackPool =
+                connectOrThrow.mCallbackPool;
         TransportStatusCallback acquire = transportStatusCallbackPool.acquire();
         try {
             connectOrThrow.mTransportBinder.checkFullBackupSize(j, acquire);
             int operationStatus = acquire.getOperationStatus();
             transportStatusCallbackPool.recycle(acquire);
             if (operationStatus == -1005) {
-                new RemoteCall(false, new RemoteCallable() { // from class: com.android.server.backup.fullbackup.PerformFullTransportBackupTask$SinglePackageBackupPreflight$$ExternalSyntheticLambda0
-                    @Override // com.android.server.backup.remote.RemoteCallable
-                    public final void call(FutureBackupCallback futureBackupCallback) {
-                        iBackupAgent.doQuotaExceeded(j, PerformFullTransportBackupTask.SinglePackageBackupPreflight.this.mQuota, futureBackupCallback);
-                    }
-                }, performFullTransportBackupTask.mAgentTimeoutParameters.getQuotaExceededTimeoutMillis()).call();
+                new RemoteCall(
+                                false,
+                                new RemoteCallable() { // from class:
+                                                       // com.android.server.backup.fullbackup.PerformFullTransportBackupTask$SinglePackageBackupPreflight$$ExternalSyntheticLambda0
+                                    @Override // com.android.server.backup.remote.RemoteCallable
+                                    public final void call(
+                                            FutureBackupCallback futureBackupCallback) {
+                                        iBackupAgent.doQuotaExceeded(
+                                                j,
+                                                PerformFullTransportBackupTask
+                                                        .SinglePackageBackupPreflight.this
+                                                        .mQuota,
+                                                futureBackupCallback);
+                                    }
+                                },
+                                performFullTransportBackupTask.mAgentTimeoutParameters
+                                        .getQuotaExceededTimeoutMillis())
+                        .call();
             }
             i2 = operationStatus;
             i = i2;

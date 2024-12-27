@@ -6,8 +6,7 @@ public final class KeyboardConfiguredProto {
     public final class RepeatedKeyboardLayoutConfig {
         public static final long KEYBOARD_LAYOUT_CONFIG = 2246267895809L;
 
-        public RepeatedKeyboardLayoutConfig() {
-        }
+        public RepeatedKeyboardLayoutConfig() {}
     }
 
     public final class KeyboardLayoutConfig {
@@ -18,7 +17,6 @@ public final class KeyboardConfiguredProto {
         public static final long KEYBOARD_LAYOUT_TYPE = 1120986464257L;
         public static final long LAYOUT_SELECTION_CRITERIA = 1120986464260L;
 
-        public KeyboardLayoutConfig() {
-        }
+        public KeyboardLayoutConfig() {}
     }
 }

@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class VolumeShaperState implements Parcelable {
-    public static final Parcelable.Creator<VolumeShaperState> CREATOR = new Parcelable.Creator<VolumeShaperState>() { // from class: android.media.VolumeShaperState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VolumeShaperState createFromParcel(Parcel _aidl_source) {
-            VolumeShaperState _aidl_out = new VolumeShaperState();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<VolumeShaperState> CREATOR =
+            new Parcelable.Creator<
+                    VolumeShaperState>() { // from class: android.media.VolumeShaperState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VolumeShaperState createFromParcel(Parcel _aidl_source) {
+                    VolumeShaperState _aidl_out = new VolumeShaperState();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VolumeShaperState[] newArray(int _aidl_size) {
-            return new VolumeShaperState[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VolumeShaperState[] newArray(int _aidl_size) {
+                    return new VolumeShaperState[_aidl_size];
+                }
+            };
     public float volume = 0.0f;
     public float xOffset = 0.0f;
 

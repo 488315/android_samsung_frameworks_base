@@ -3,11 +3,12 @@ package com.samsung.android.server.packagefeature;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.Debug;
 import android.util.Slog;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.wm.MultiTaskingAppCompatAspectRatioOverrides;
 import com.android.server.wm.MultiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda0;
 import com.android.server.wm.MultiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda1;
-import com.samsung.android.server.packagefeature.PackageFeatureUserChangePersister;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,7 +27,9 @@ public final class PackageFeatureUserChange {
     public boolean mIsLoadFileCompleted;
     public boolean mIsSystemReady;
     public final PackageFeatureUserChangePersister mPersister;
-    public final MultiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda0 mPersisterCallback;
+    public final
+    MultiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda0
+            mPersisterCallback;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface DumpInterface {
@@ -41,7 +44,14 @@ public final class PackageFeatureUserChange {
         this(i, str, str2, dumpInterface, true, null);
     }
 
-    public PackageFeatureUserChange(int i, String str, String str2, DumpInterface dumpInterface, boolean z, MultiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda0 multiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda0) {
+    public PackageFeatureUserChange(
+            int i,
+            String str,
+            String str2,
+            DumpInterface dumpInterface,
+            boolean z,
+            MultiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda0
+                    multiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda0) {
         this.mIdentityFlag = i;
         this.mFilePath = str;
         this.mFileName = str2;
@@ -53,19 +63,22 @@ public final class PackageFeatureUserChange {
             return;
         }
         String str3 = PackageFeatureUserChangePersister.PACKAGE_SETTINGS_DIRECTORY;
-        PackageFeatureUserChangePersister packageFeatureUserChangePersister = PackageFeatureUserChangePersister.LazyHolder.sPackageFeatureUserChangePersister;
+        PackageFeatureUserChangePersister packageFeatureUserChangePersister =
+                PackageFeatureUserChangePersister.LazyHolder.sPackageFeatureUserChangePersister;
         this.mPersister = packageFeatureUserChangePersister;
         synchronized (packageFeatureUserChangePersister.mLock) {
             ((ArrayList) packageFeatureUserChangePersister.mPackageFeatureUserChanges).add(this);
             synchronized (packageFeatureUserChangePersister.mLock) {
-                packageFeatureUserChangePersister.mLoadRequestFlags = i | packageFeatureUserChangePersister.mLoadRequestFlags;
+                packageFeatureUserChangePersister.mLoadRequestFlags =
+                        i | packageFeatureUserChangePersister.mLoadRequestFlags;
                 PackageFeatureUserChangePersister.H h = packageFeatureUserChangePersister.mH;
                 if (!h.hasMessages(1)) {
                     h.sendEmptyMessageDelayed(1, 500L);
                 }
             }
         }
-        this.mPersisterCallback = multiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda0;
+        this.mPersisterCallback =
+                multiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda0;
     }
 
     public final void dump(PrintWriter printWriter, String str, String str2) {
@@ -95,7 +108,11 @@ public final class PackageFeatureUserChange {
     }
 
     public final ConcurrentHashMap getChangeValuesAsUser(int i) {
-        return (ConcurrentHashMap) ((ConcurrentHashMap) this.mChangeValuesAsUser).computeIfAbsent(Integer.valueOf(i), new PackageFeatureUserChange$$ExternalSyntheticLambda0());
+        return (ConcurrentHashMap)
+                ((ConcurrentHashMap) this.mChangeValuesAsUser)
+                        .computeIfAbsent(
+                                Integer.valueOf(i),
+                                new PackageFeatureUserChange$$ExternalSyntheticLambda0());
     }
 
     public final Object getValue(int i, String str) {
@@ -126,35 +143,68 @@ public final class PackageFeatureUserChange {
             }
         }
         if (z3) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("onLoadFileCompletedAndSystemReady: flag="), this.mIdentityFlag, "PackageFeature");
-            final MultiTaskingAppCompatAspectRatioOverrides.MinAspectRatioOverrides minAspectRatioOverrides = this.mPersisterCallback.f$0;
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("onLoadFileCompletedAndSystemReady: flag="),
+                    this.mIdentityFlag,
+                    "PackageFeature");
+            final MultiTaskingAppCompatAspectRatioOverrides.MinAspectRatioOverrides
+                    minAspectRatioOverrides = this.mPersisterCallback.f$0;
             minAspectRatioOverrides.getClass();
             Slog.d("MultiTaskingAppCompat", "Start to migrate to package manager.");
             ConcurrentHashMap concurrentHashMap = new ConcurrentHashMap();
             synchronized (minAspectRatioOverrides) {
                 try {
-                    for (Integer num : ((ConcurrentHashMap) minAspectRatioOverrides.mUserOverrides.mChangeValuesAsUser).keySet()) {
-                        ((ConcurrentHashMap) concurrentHashMap.computeIfAbsent(num, new MultiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda1())).putAll(minAspectRatioOverrides.mUserOverrides.getChangeValuesAsUser(num.intValue()));
+                    for (Integer num :
+                            ((ConcurrentHashMap)
+                                            minAspectRatioOverrides
+                                                    .mUserOverrides
+                                                    .mChangeValuesAsUser)
+                                    .keySet()) {
+                        ((ConcurrentHashMap)
+                                        concurrentHashMap.computeIfAbsent(
+                                                num,
+                                                new MultiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda1()))
+                                .putAll(
+                                        minAspectRatioOverrides.mUserOverrides
+                                                .getChangeValuesAsUser(num.intValue()));
                     }
                 } finally {
                 }
             }
-            concurrentHashMap.forEach(new BiConsumer() { // from class: com.android.server.wm.MultiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda2
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    MultiTaskingAppCompatAspectRatioOverrides.MinAspectRatioOverrides minAspectRatioOverrides2 = MultiTaskingAppCompatAspectRatioOverrides.MinAspectRatioOverrides.this;
-                    minAspectRatioOverrides2.getClass();
-                    int intValue = ((Integer) obj).intValue();
-                    MultiTaskingAppCompatAspectRatioOverrides multiTaskingAppCompatAspectRatioOverrides = MultiTaskingAppCompatAspectRatioOverrides.this;
-                    multiTaskingAppCompatAspectRatioOverrides.getClass();
-                    ((ConcurrentHashMap) obj2).forEach(new MultiTaskingAppCompatAspectRatioOverrides$$ExternalSyntheticLambda0(multiTaskingAppCompatAspectRatioOverrides, intValue));
-                }
-            });
+            concurrentHashMap.forEach(
+                    new BiConsumer() { // from class:
+                                       // com.android.server.wm.MultiTaskingAppCompatAspectRatioOverrides$MinAspectRatioOverrides$$ExternalSyntheticLambda2
+                        @Override // java.util.function.BiConsumer
+                        public final void accept(Object obj, Object obj2) {
+                            MultiTaskingAppCompatAspectRatioOverrides.MinAspectRatioOverrides
+                                    minAspectRatioOverrides2 =
+                                            MultiTaskingAppCompatAspectRatioOverrides
+                                                    .MinAspectRatioOverrides.this;
+                            minAspectRatioOverrides2.getClass();
+                            int intValue = ((Integer) obj).intValue();
+                            MultiTaskingAppCompatAspectRatioOverrides
+                                    multiTaskingAppCompatAspectRatioOverrides =
+                                            MultiTaskingAppCompatAspectRatioOverrides.this;
+                            multiTaskingAppCompatAspectRatioOverrides.getClass();
+                            ((ConcurrentHashMap) obj2)
+                                    .forEach(
+                                            new MultiTaskingAppCompatAspectRatioOverrides$$ExternalSyntheticLambda0(
+                                                    multiTaskingAppCompatAspectRatioOverrides,
+                                                    intValue));
+                        }
+                    });
             synchronized (minAspectRatioOverrides) {
                 try {
-                    Iterator it = ((ConcurrentHashMap) minAspectRatioOverrides.mUserOverrides.mChangeValuesAsUser).keySet().iterator();
+                    Iterator it =
+                            ((ConcurrentHashMap)
+                                            minAspectRatioOverrides
+                                                    .mUserOverrides
+                                                    .mChangeValuesAsUser)
+                                    .keySet()
+                                    .iterator();
                     while (it.hasNext()) {
-                        minAspectRatioOverrides.mUserOverrides.reset(((Integer) it.next()).intValue());
+                        minAspectRatioOverrides.mUserOverrides.reset(
+                                ((Integer) it.next()).intValue());
                     }
                 } finally {
                 }
@@ -166,7 +216,9 @@ public final class PackageFeatureUserChange {
     public final Object putValue(String str, int i, Object obj) {
         Object obj2 = null;
         if (str == null) {
-            Slog.w("PackageFeature", "putValue, packageName is null. caller=" + Debug.getCallers(6));
+            Slog.w(
+                    "PackageFeature",
+                    "putValue, packageName is null. caller=" + Debug.getCallers(6));
         } else if (obj == null) {
             Slog.w("PackageFeature", "putValue, value is null. caller=" + Debug.getCallers(6));
         } else {
@@ -176,12 +228,21 @@ public final class PackageFeatureUserChange {
                 int i2 = this.mIdentityFlag;
                 synchronized (packageFeatureUserChangePersister.mLock) {
                     try {
-                        Integer num = (Integer) ((ConcurrentHashMap) packageFeatureUserChangePersister.mSaveRequestFlagsWithUserId).get(Integer.valueOf(i));
+                        Integer num =
+                                (Integer)
+                                        ((ConcurrentHashMap)
+                                                        packageFeatureUserChangePersister
+                                                                .mSaveRequestFlagsWithUserId)
+                                                .get(Integer.valueOf(i));
                         if (num != null) {
                             i2 |= num.intValue();
                         }
-                        ((ConcurrentHashMap) packageFeatureUserChangePersister.mSaveRequestFlagsWithUserId).put(Integer.valueOf(i), Integer.valueOf(i2));
-                        PackageFeatureUserChangePersister.H h = packageFeatureUserChangePersister.mH;
+                        ((ConcurrentHashMap)
+                                        packageFeatureUserChangePersister
+                                                .mSaveRequestFlagsWithUserId)
+                                .put(Integer.valueOf(i), Integer.valueOf(i2));
+                        PackageFeatureUserChangePersister.H h =
+                                packageFeatureUserChangePersister.mH;
                         if (!h.hasMessages(1)) {
                             h.sendEmptyMessageDelayed(1, 2000L);
                         }
@@ -201,7 +262,8 @@ public final class PackageFeatureUserChange {
             synchronized (packageFeatureUserChangePersister.mLock) {
                 packageFeatureUserChangePersister.mH.removeMessages(1);
                 packageFeatureUserChangePersister.mLoadRequestFlags = 0;
-                ((ConcurrentHashMap) packageFeatureUserChangePersister.mSaveRequestFlagsWithUserId).clear();
+                ((ConcurrentHashMap) packageFeatureUserChangePersister.mSaveRequestFlagsWithUserId)
+                        .clear();
                 packageFeatureUserChangePersister.resetFiles(i, i2);
             }
         }

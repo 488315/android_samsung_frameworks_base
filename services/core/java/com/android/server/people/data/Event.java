@@ -4,6 +4,7 @@ import android.text.format.DateFormat;
 import android.util.ArraySet;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;
+
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -75,7 +76,9 @@ public final class Event {
             } else if (fieldNumber == 2) {
                 builder.mTimestamp = protoInputStream.readLong(1112396529666L);
             } else if (fieldNumber != 3) {
-                Slog.w("Event", "Could not read undefined field: " + protoInputStream.getFieldNumber());
+                Slog.w(
+                        "Event",
+                        "Could not read undefined field: " + protoInputStream.getFieldNumber());
             } else {
                 builder.mDurationSeconds = protoInputStream.readInt(1120986464259L);
             }
@@ -91,11 +94,16 @@ public final class Event {
             return false;
         }
         Event event = (Event) obj;
-        return this.mTimestamp == event.mTimestamp && this.mType == event.mType && this.mDurationSeconds == event.mDurationSeconds;
+        return this.mTimestamp == event.mTimestamp
+                && this.mType == event.mType
+                && this.mDurationSeconds == event.mDurationSeconds;
     }
 
     public final int hashCode() {
-        return Objects.hash(Long.valueOf(this.mTimestamp), Integer.valueOf(this.mType), Integer.valueOf(this.mDurationSeconds));
+        return Objects.hash(
+                Long.valueOf(this.mTimestamp),
+                Integer.valueOf(this.mType),
+                Integer.valueOf(this.mDurationSeconds));
     }
 
     public final String toString() {

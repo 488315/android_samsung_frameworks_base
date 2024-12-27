@@ -6,6 +6,7 @@ import com.android.internal.org.bouncycastle.asn1.DERGeneralizedTime;
 import com.android.internal.org.bouncycastle.asn1.DERIA5String;
 import com.android.internal.org.bouncycastle.asn1.DERPrintableString;
 import com.android.internal.org.bouncycastle.asn1.DERUTF8String;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -22,13 +23,17 @@ public class X509DefaultEntryConverter extends X509NameEntryConverter {
         if (value.length() != 0 && value.charAt(0) == '\\') {
             value = value.substring(1);
         }
-        if (oid.equals((ASN1Primitive) X509Name.EmailAddress) || oid.equals((ASN1Primitive) X509Name.DC)) {
+        if (oid.equals((ASN1Primitive) X509Name.EmailAddress)
+                || oid.equals((ASN1Primitive) X509Name.DC)) {
             return new DERIA5String(value);
         }
         if (oid.equals((ASN1Primitive) X509Name.DATE_OF_BIRTH)) {
             return new DERGeneralizedTime(value);
         }
-        if (oid.equals((ASN1Primitive) X509Name.C) || oid.equals((ASN1Primitive) X509Name.SN) || oid.equals((ASN1Primitive) X509Name.DN_QUALIFIER) || oid.equals((ASN1Primitive) X509Name.TELEPHONE_NUMBER)) {
+        if (oid.equals((ASN1Primitive) X509Name.C)
+                || oid.equals((ASN1Primitive) X509Name.SN)
+                || oid.equals((ASN1Primitive) X509Name.DN_QUALIFIER)
+                || oid.equals((ASN1Primitive) X509Name.TELEPHONE_NUMBER)) {
             return new DERPrintableString(value);
         }
         return new DERUTF8String(value);

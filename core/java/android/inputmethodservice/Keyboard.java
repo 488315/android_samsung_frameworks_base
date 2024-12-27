@@ -10,12 +10,15 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.util.Xml;
+
 import com.android.internal.R;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-import org.xmlpull.v1.XmlPullParserException;
 
 @Deprecated
 /* loaded from: classes2.dex */
@@ -78,12 +81,21 @@ public class Keyboard {
         public Row(Resources res, Keyboard parent, XmlResourceParser parser) {
             this.parent = parent;
             TypedArray a = res.obtainAttributes(Xml.asAttributeSet(parser), R.styleable.Keyboard);
-            this.defaultWidth = Keyboard.getDimensionOrFraction(a, 0, parent.mDisplayWidth, parent.mDefaultWidth);
-            this.defaultHeight = Keyboard.getDimensionOrFraction(a, 1, parent.mDisplayHeight, parent.mDefaultHeight);
-            this.defaultHorizontalGap = Keyboard.getDimensionOrFraction(a, 2, parent.mDisplayWidth, parent.mDefaultHorizontalGap);
-            this.verticalGap = Keyboard.getDimensionOrFraction(a, 3, parent.mDisplayHeight, parent.mDefaultVerticalGap);
+            this.defaultWidth =
+                    Keyboard.getDimensionOrFraction(
+                            a, 0, parent.mDisplayWidth, parent.mDefaultWidth);
+            this.defaultHeight =
+                    Keyboard.getDimensionOrFraction(
+                            a, 1, parent.mDisplayHeight, parent.mDefaultHeight);
+            this.defaultHorizontalGap =
+                    Keyboard.getDimensionOrFraction(
+                            a, 2, parent.mDisplayWidth, parent.mDefaultHorizontalGap);
+            this.verticalGap =
+                    Keyboard.getDimensionOrFraction(
+                            a, 3, parent.mDisplayHeight, parent.mDefaultVerticalGap);
             a.recycle();
-            TypedArray a2 = res.obtainAttributes(Xml.asAttributeSet(parser), R.styleable.Keyboard_Row);
+            TypedArray a2 =
+                    res.obtainAttributes(Xml.asAttributeSet(parser), R.styleable.Keyboard_Row);
             this.rowEdgeFlags = a2.getInt(0, 0);
             this.mode = a2.getResourceId(1, 0);
             a2.recycle();
@@ -130,22 +142,33 @@ public class Keyboard {
             this.x = x;
             this.y = y;
             TypedArray a = res.obtainAttributes(Xml.asAttributeSet(parser), R.styleable.Keyboard);
-            this.width = Keyboard.getDimensionOrFraction(a, 0, this.keyboard.mDisplayWidth, parent.defaultWidth);
-            this.height = Keyboard.getDimensionOrFraction(a, 1, this.keyboard.mDisplayHeight, parent.defaultHeight);
-            this.gap = Keyboard.getDimensionOrFraction(a, 2, this.keyboard.mDisplayWidth, parent.defaultHorizontalGap);
+            this.width =
+                    Keyboard.getDimensionOrFraction(
+                            a, 0, this.keyboard.mDisplayWidth, parent.defaultWidth);
+            this.height =
+                    Keyboard.getDimensionOrFraction(
+                            a, 1, this.keyboard.mDisplayHeight, parent.defaultHeight);
+            this.gap =
+                    Keyboard.getDimensionOrFraction(
+                            a, 2, this.keyboard.mDisplayWidth, parent.defaultHorizontalGap);
             a.recycle();
-            TypedArray a2 = res.obtainAttributes(Xml.asAttributeSet(parser), R.styleable.Keyboard_Key);
+            TypedArray a2 =
+                    res.obtainAttributes(Xml.asAttributeSet(parser), R.styleable.Keyboard_Key);
             this.x += this.gap;
             TypedValue codesValue = new TypedValue();
             a2.getValue(0, codesValue);
             if (codesValue.type == 16 || codesValue.type == 17) {
-                this.codes = new int[]{codesValue.data};
+                this.codes = new int[] {codesValue.data};
             } else if (codesValue.type == 3) {
                 this.codes = parseCSV(codesValue.string.toString());
             }
             this.iconPreview = a2.getDrawable(7);
             if (this.iconPreview != null) {
-                this.iconPreview.setBounds(0, 0, this.iconPreview.getIntrinsicWidth(), this.iconPreview.getIntrinsicHeight());
+                this.iconPreview.setBounds(
+                        0,
+                        0,
+                        this.iconPreview.getIntrinsicWidth(),
+                        this.iconPreview.getIntrinsicHeight());
             }
             this.popupCharacters = a2.getText(2);
             this.popupResId = a2.getResourceId(1, 0);
@@ -156,12 +179,13 @@ public class Keyboard {
             this.edgeFlags |= parent.rowEdgeFlags;
             this.icon = a2.getDrawable(10);
             if (this.icon != null) {
-                this.icon.setBounds(0, 0, this.icon.getIntrinsicWidth(), this.icon.getIntrinsicHeight());
+                this.icon.setBounds(
+                        0, 0, this.icon.getIntrinsicWidth(), this.icon.getIntrinsicHeight());
             }
             this.label = a2.getText(9);
             this.text = a2.getText(8);
             if (this.codes == null && !TextUtils.isEmpty(this.label)) {
-                this.codes = new int[]{this.label.charAt(0)};
+                this.codes = new int[] {this.label.charAt(0)};
             }
             a2.recycle();
         }
@@ -208,7 +232,10 @@ public class Keyboard {
             boolean rightEdge = (this.edgeFlags & 2) > 0;
             boolean topEdge = (this.edgeFlags & 4) > 0;
             boolean bottomEdge = (this.edgeFlags & 8) > 0;
-            return (x >= this.x || (leftEdge && x <= this.x + this.width)) && (x < this.x + this.width || (rightEdge && x >= this.x)) && ((y >= this.y || (topEdge && y <= this.y + this.height)) && (y < this.y + this.height || (bottomEdge && y >= this.y)));
+            return (x >= this.x || (leftEdge && x <= this.x + this.width))
+                    && (x < this.x + this.width || (rightEdge && x >= this.x))
+                    && ((y >= this.y || (topEdge && y <= this.y + this.height))
+                            && (y < this.y + this.height || (bottomEdge && y >= this.y)));
         }
 
         public int squaredDistanceFrom(int x, int y) {
@@ -248,8 +275,8 @@ public class Keyboard {
     }
 
     public Keyboard(Context context, int xmlLayoutResId, int modeId, int width, int height) {
-        this.mShiftKeys = new Key[]{null, null};
-        this.mShiftKeyIndices = new int[]{-1, -1};
+        this.mShiftKeys = new Key[] {null, null};
+        this.mShiftKeyIndices = new int[] {-1, -1};
         this.rows = new ArrayList<>();
         this.mDisplayWidth = width;
         this.mDisplayHeight = height;
@@ -264,8 +291,8 @@ public class Keyboard {
     }
 
     public Keyboard(Context context, int xmlLayoutResId, int modeId) {
-        this.mShiftKeys = new Key[]{null, null};
-        this.mShiftKeyIndices = new int[]{-1, -1};
+        this.mShiftKeys = new Key[] {null, null};
+        this.mShiftKeyIndices = new int[] {-1, -1};
         this.rows = new ArrayList<>();
         DisplayMetrics dm = context.getResources().getDisplayMetrics();
         this.mDisplayWidth = dm.widthPixels;
@@ -281,7 +308,12 @@ public class Keyboard {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public Keyboard(Context context, int layoutTemplateResId, CharSequence characters, int columns, int horizontalPadding) {
+    public Keyboard(
+            Context context,
+            int layoutTemplateResId,
+            CharSequence characters,
+            int columns,
+            int horizontalPadding) {
         this(context, layoutTemplateResId);
         int x = 0;
         int y = 0;
@@ -296,7 +328,8 @@ public class Keyboard {
         int maxColumns = columns == -1 ? Integer.MAX_VALUE : columns;
         for (int i = 0; i < characters.length(); i++) {
             int charAt = characters.charAt(i);
-            if (column >= maxColumns || this.mDefaultWidth + x + horizontalPadding > this.mDisplayWidth) {
+            if (column >= maxColumns
+                    || this.mDefaultWidth + x + horizontalPadding > this.mDisplayWidth) {
                 x = 0;
                 y += this.mDefaultVerticalGap + this.mDefaultHeight;
                 column = 0;
@@ -305,7 +338,7 @@ public class Keyboard {
             key.x = x;
             key.y = y;
             key.label = String.valueOf((char) charAt);
-            key.codes = new int[]{charAt};
+            key.codes = new int[] {charAt};
             column++;
             x += key.width + key.gap;
             this.mKeys.add(key);
@@ -435,7 +468,14 @@ public class Keyboard {
                 int count = 0;
                 for (int i = 0; i < this.mKeys.size(); i++) {
                     Key key = this.mKeys.get(i);
-                    if (key.squaredDistanceFrom(x, y) < this.mProximityThreshold || key.squaredDistanceFrom((this.mCellWidth + x) - 1, y) < this.mProximityThreshold || key.squaredDistanceFrom((this.mCellWidth + x) - 1, (this.mCellHeight + y) - 1) < this.mProximityThreshold || key.squaredDistanceFrom(x, (this.mCellHeight + y) - 1) < this.mProximityThreshold) {
+                    if (key.squaredDistanceFrom(x, y) < this.mProximityThreshold
+                            || key.squaredDistanceFrom((this.mCellWidth + x) - 1, y)
+                                    < this.mProximityThreshold
+                            || key.squaredDistanceFrom(
+                                            (this.mCellWidth + x) - 1, (this.mCellHeight + y) - 1)
+                                    < this.mProximityThreshold
+                            || key.squaredDistanceFrom(x, (this.mCellHeight + y) - 1)
+                                    < this.mProximityThreshold) {
                         indices[count] = i;
                         count++;
                     }
@@ -456,7 +496,11 @@ public class Keyboard {
         if (this.mGridNeighbors == null) {
             computeNearestNeighbors();
         }
-        if (x >= 0 && x < getMinWidth() && y >= 0 && y < getHeight() && (index = ((y / this.mCellHeight) * 10) + (x / this.mCellWidth)) < 50) {
+        if (x >= 0
+                && x < getMinWidth()
+                && y >= 0
+                && y < getHeight()
+                && (index = ((y / this.mCellHeight) * 10) + (x / this.mCellWidth)) < 50) {
             return this.mGridNeighbors[index];
         }
         return new int[0];
@@ -466,7 +510,8 @@ public class Keyboard {
         return new Row(res, this, parser);
     }
 
-    protected Key createKeyFromXml(Resources res, Row parent, int x, int y, XmlResourceParser parser) {
+    protected Key createKeyFromXml(
+            Resources res, Row parent, int x, int y, XmlResourceParser parser) {
         return new Key(res, parent, x, y, parser);
     }
 
@@ -496,7 +541,10 @@ public class Keyboard {
                         try {
                             currentRow = createRowFromXml(res, parser);
                             this.rows.add(currentRow);
-                            boolean skipRow = (currentRow.mode == 0 || currentRow.mode == this.mKeyboardMode) ? false : true;
+                            boolean skipRow =
+                                    (currentRow.mode == 0 || currentRow.mode == this.mKeyboardMode)
+                                            ? false
+                                            : true;
                             if (skipRow) {
                                 try {
                                     skipToEndOfRow(parser);
@@ -633,7 +681,8 @@ public class Keyboard {
         this.mTotalHeight = y2 - this.mDefaultVerticalGap;
     }
 
-    private void skipToEndOfRow(XmlResourceParser parser) throws XmlPullParserException, IOException {
+    private void skipToEndOfRow(XmlResourceParser parser)
+            throws XmlPullParserException, IOException {
         while (true) {
             int event = parser.next();
             if (event != 1) {
@@ -648,7 +697,8 @@ public class Keyboard {
 
     private void parseKeyboardAttributes(Resources res, XmlResourceParser parser) {
         TypedArray a = res.obtainAttributes(Xml.asAttributeSet(parser), R.styleable.Keyboard);
-        this.mDefaultWidth = getDimensionOrFraction(a, 0, this.mDisplayWidth, this.mDisplayWidth / 10);
+        this.mDefaultWidth =
+                getDimensionOrFraction(a, 0, this.mDisplayWidth, this.mDisplayWidth / 10);
         this.mDefaultHeight = getDimensionOrFraction(a, 1, this.mDisplayHeight, 50);
         this.mDefaultHorizontalGap = getDimensionOrFraction(a, 2, this.mDisplayWidth, 0);
         this.mDefaultVerticalGap = getDimensionOrFraction(a, 3, this.mDisplayHeight, 0);

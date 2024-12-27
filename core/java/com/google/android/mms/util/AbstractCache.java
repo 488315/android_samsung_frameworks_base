@@ -10,8 +10,7 @@ public abstract class AbstractCache<K, V> {
     private static final String TAG = "AbstractCache";
     private final HashMap<K, CacheEntry<V>> mCacheMap = new HashMap<>();
 
-    protected AbstractCache() {
-    }
+    protected AbstractCache() {}
 
     public boolean put(K key, V value) {
         if (this.mCacheMap.size() >= 500 || key == null) {
@@ -52,7 +51,6 @@ public abstract class AbstractCache<K, V> {
         int hit;
         V value;
 
-        private CacheEntry() {
-        }
+        private CacheEntry() {}
     }
 }

@@ -3,7 +3,9 @@ package com.android.internal.util.jobs;
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.util.ArraySet;
 import android.util.EmptyArray;
+
 import dalvik.system.VMRuntime;
+
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -23,8 +25,7 @@ public class ArrayUtils {
     private static Object[] sCache = new Object[73];
     public static final File[] EMPTY_FILE = new File[0];
 
-    private ArrayUtils() {
-    }
+    private ArrayUtils() {}
 
     public static ArraySet add(ArraySet arraySet, Object obj) {
         if (arraySet == null) {
@@ -62,7 +63,7 @@ public class ArrayUtils {
 
     public static boolean[] appendBoolean(boolean[] zArr, boolean z) {
         if (zArr == null) {
-            return new boolean[]{z};
+            return new boolean[] {z};
         }
         int length = zArr.length;
         boolean[] zArr2 = new boolean[1 + length];
@@ -99,7 +100,7 @@ public class ArrayUtils {
 
     public static int[] appendInt(int[] iArr, int i, boolean z) {
         if (iArr == null) {
-            return new int[]{i};
+            return new int[] {i};
         }
         int length = iArr.length;
         if (!z) {
@@ -121,7 +122,7 @@ public class ArrayUtils {
 
     public static long[] appendLong(long[] jArr, long j, boolean z) {
         if (jArr == null) {
-            return new long[]{j};
+            return new long[] {j};
         }
         int length = jArr.length;
         if (!z) {
@@ -139,7 +140,8 @@ public class ArrayUtils {
 
     public static void checkBounds(int i, int i2) {
         if (i2 < 0 || i <= i2) {
-            throw new ArrayIndexOutOfBoundsException(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "length=", "; index="));
+            throw new ArrayIndexOutOfBoundsException(
+                    ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "length=", "; index="));
         }
     }
 
@@ -322,11 +324,42 @@ public class ArrayUtils {
     }
 
     private static Object[] createEmptyArray(Class cls) {
-        return cls == String.class ? EmptyArray.STRING : cls == Object.class ? EmptyArray.OBJECT : (Object[]) Array.newInstance((Class<?>) cls, 0);
+        return cls == String.class
+                ? EmptyArray.STRING
+                : cls == Object.class
+                        ? EmptyArray.OBJECT
+                        : (Object[]) Array.newInstance((Class<?>) cls, 0);
     }
 
     public static String deepToString(Object obj) {
-        return (obj == null || !obj.getClass().isArray()) ? String.valueOf(obj) : obj.getClass() == boolean[].class ? Arrays.toString((boolean[]) obj) : obj.getClass() == byte[].class ? Arrays.toString((byte[]) obj) : obj.getClass() == char[].class ? Arrays.toString((char[]) obj) : obj.getClass() == double[].class ? Arrays.toString((double[]) obj) : obj.getClass() == float[].class ? Arrays.toString((float[]) obj) : obj.getClass() == int[].class ? Arrays.toString((int[]) obj) : obj.getClass() == long[].class ? Arrays.toString((long[]) obj) : obj.getClass() == short[].class ? Arrays.toString((short[]) obj) : Arrays.deepToString((Object[]) obj);
+        return (obj == null || !obj.getClass().isArray())
+                ? String.valueOf(obj)
+                : obj.getClass() == boolean[].class
+                        ? Arrays.toString((boolean[]) obj)
+                        : obj.getClass() == byte[].class
+                                ? Arrays.toString((byte[]) obj)
+                                : obj.getClass() == char[].class
+                                        ? Arrays.toString((char[]) obj)
+                                        : obj.getClass() == double[].class
+                                                ? Arrays.toString((double[]) obj)
+                                                : obj.getClass() == float[].class
+                                                        ? Arrays.toString((float[]) obj)
+                                                        : obj.getClass() == int[].class
+                                                                ? Arrays.toString((int[]) obj)
+                                                                : obj.getClass() == long[].class
+                                                                        ? Arrays.toString(
+                                                                                (long[]) obj)
+                                                                        : obj.getClass()
+                                                                                        == short[]
+                                                                                                .class
+                                                                                ? Arrays.toString(
+                                                                                        (short[])
+                                                                                                obj)
+                                                                                : Arrays
+                                                                                        .deepToString(
+                                                                                                (Object
+                                                                                                                [])
+                                                                                                        obj);
     }
 
     public static int[] defeatNullable(int[] iArr) {
@@ -714,10 +747,13 @@ public class ArrayUtils {
 
     public static void throwsIfOutOfBounds(int i, int i2, int i3) {
         if (i < 0) {
-            throw new ArrayIndexOutOfBoundsException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Negative length: "));
+            throw new ArrayIndexOutOfBoundsException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Negative length: "));
         }
         if ((i2 | i3) < 0 || i2 > i - i3) {
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "length=", "; regionStart=", "; regionLength=");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "length=", "; regionStart=", "; regionLength=");
             m.append(i3);
             throw new ArrayIndexOutOfBoundsException(m.toString());
         }

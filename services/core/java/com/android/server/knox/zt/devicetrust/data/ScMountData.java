@@ -1,15 +1,18 @@
 package com.android.server.knox.zt.devicetrust.data;
 
 import android.os.Bundle;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -21,7 +24,18 @@ public final class ScMountData extends TracepointData {
     public final long ret;
     public final String type;
 
-    public ScMountData(int i, String str, String str2, String str3, long j, String str4, long j2, long j3, long j4, long j5, String str5) {
+    public ScMountData(
+            int i,
+            String str,
+            String str2,
+            String str3,
+            long j,
+            String str4,
+            long j2,
+            long j3,
+            long j4,
+            long j5,
+            String str5) {
         super(i, j3, j4, j5, str5);
         this.devName = str;
         this.dirName = str2;
@@ -85,10 +99,14 @@ public final class ScMountData extends TracepointData {
         String str5 = this.data;
         long j3 = this.ret;
         String readExtras = readExtras(true);
-        StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(pid, i2, " | pid : ", " | uid : ", m);
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, " | comm : ", str, " | dev_name : ", str2);
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, " | dir_name : ", str3, " | type : ", str4);
+        StringBuilder m =
+                SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                pid, i2, " | pid : ", " | uid : ", m);
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                m, " | comm : ", str, " | dev_name : ", str2);
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                m, " | dir_name : ", str3, " | type : ", str4);
         BootReceiver$$ExternalSyntheticOutline0.m(m, " | flags : ", j2, " | data : ");
         m.append(str5);
         m.append(" | ret : ");

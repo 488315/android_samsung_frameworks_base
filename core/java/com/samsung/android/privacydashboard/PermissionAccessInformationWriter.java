@@ -8,13 +8,16 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.UserHandle;
 import android.os.UserManager;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public class PermissionAccessInformationWriter {
-    private static final Uri PROVIDER_URI = Uri.parse("content://com.samsung.android.privacydashboard.provider/permissionAccessInformations");
+    private static final Uri PROVIDER_URI =
+            Uri.parse(
+                    "content://com.samsung.android.privacydashboard.provider/permissionAccessInformations");
 
     public void write(Context context, Iterator<PermissionAccessInformation> iterator) {
         long ident;
@@ -28,11 +31,16 @@ public class PermissionAccessInformationWriter {
             contentValues.put("uid", String.valueOf(permissionAccessInformation.getUid()));
             contentValues.put("package", permissionAccessInformation.getPackageName());
             contentValues.put("proxyPackage", permissionAccessInformation.getProxyPackageName());
-            contentValues.put("proxyAttributionTag", permissionAccessInformation.getProxyAttributionTag());
-            contentValues.put("isBackground", String.valueOf(permissionAccessInformation.isBackground()));
-            contentValues.put("accessTime", String.valueOf(permissionAccessInformation.getAccessTime()));
-            UserHandle appUserHandle = UserHandle.getUserHandleForUid(permissionAccessInformation.getUid());
-            if (appUserHandle.semGetIdentifier() == 0 || um.isManagedProfile(appUserHandle.getIdentifier())) {
+            contentValues.put(
+                    "proxyAttributionTag", permissionAccessInformation.getProxyAttributionTag());
+            contentValues.put(
+                    "isBackground", String.valueOf(permissionAccessInformation.isBackground()));
+            contentValues.put(
+                    "accessTime", String.valueOf(permissionAccessInformation.getAccessTime()));
+            UserHandle appUserHandle =
+                    UserHandle.getUserHandleForUid(permissionAccessInformation.getUid());
+            if (appUserHandle.semGetIdentifier() == 0
+                    || um.isManagedProfile(appUserHandle.getIdentifier())) {
                 informationList.add(contentValues);
             } else {
                 subUserinformationList.add(contentValues);
@@ -53,13 +61,19 @@ public class PermissionAccessInformationWriter {
         }
         if (subUserinformationList.size() > 0) {
             for (SemUserInfo userInfo : um.semGetUsers()) {
-                if (userInfo.getUserHandle().semGetIdentifier() != 0 && !um.isManagedProfile(userInfo.getUserHandle().semGetIdentifier())) {
+                if (userInfo.getUserHandle().semGetIdentifier() != 0
+                        && !um.isManagedProfile(userInfo.getUserHandle().semGetIdentifier())) {
                     ContentValues[] bulkArray2 = new ContentValues[subUserinformationList.size()];
                     subUserinformationList.toArray(bulkArray2);
                     ident = Binder.clearCallingIdentity();
                     try {
                         try {
-                            context.getContentResolver().bulkInsert(ContentProvider.maybeAddUserId(PROVIDER_URI, userInfo.getUserHandle().semGetIdentifier()), bulkArray2);
+                            context.getContentResolver()
+                                    .bulkInsert(
+                                            ContentProvider.maybeAddUserId(
+                                                    PROVIDER_URI,
+                                                    userInfo.getUserHandle().semGetIdentifier()),
+                                            bulkArray2);
                         } catch (Exception e2) {
                             e2.printStackTrace();
                         }

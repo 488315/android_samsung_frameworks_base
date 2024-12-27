@@ -7,7 +7,9 @@ import android.os.Binder;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.SparseArray;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Objects;
@@ -16,7 +18,9 @@ import java.util.function.Predicate;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class DumpUtils {
-    public static final ComponentName[] CRITICAL_SECTION_COMPONENTS = {new ComponentName(Constants.SYSTEMUI_PACKAGE_NAME, "com.android.systemui.SystemUIService")};
+    public static final ComponentName[] CRITICAL_SECTION_COMPONENTS = {
+        new ComponentName(Constants.SYSTEMUI_PACKAGE_NAME, "com.android.systemui.SystemUIService")
+    };
     private static final boolean DEBUG = false;
     private static final String TAG = "DumpUtils";
 
@@ -35,18 +39,22 @@ public final class DumpUtils {
         void dump(Object obj);
     }
 
-    private DumpUtils() {
+    private DumpUtils() {}
+
+    public static boolean checkDumpAndUsageStatsPermission(
+            Context context, String str, PrintWriter printWriter) {
+        return checkDumpPermission(context, str, printWriter)
+                && checkUsageStatsPermission(context, str, printWriter);
     }
 
-    public static boolean checkDumpAndUsageStatsPermission(Context context, String str, PrintWriter printWriter) {
-        return checkDumpPermission(context, str, printWriter) && checkUsageStatsPermission(context, str, printWriter);
-    }
-
-    public static boolean checkDumpPermission(Context context, String str, PrintWriter printWriter) {
+    public static boolean checkDumpPermission(
+            Context context, String str, PrintWriter printWriter) {
         if (context.checkCallingOrSelfPermission("android.permission.DUMP") == 0) {
             return true;
         }
-        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Permission Denial: can't dump ", str, " from from pid=");
+        StringBuilder m =
+                DumpUtils$$ExternalSyntheticOutline0.m(
+                        "Permission Denial: can't dump ", str, " from from pid=");
         m.append(Binder.getCallingPid());
         m.append(", uid=");
         m.append(Binder.getCallingUid());
@@ -55,13 +63,16 @@ public final class DumpUtils {
         return false;
     }
 
-    public static boolean checkUsageStatsPermission(Context context, String str, PrintWriter printWriter) {
+    public static boolean checkUsageStatsPermission(
+            Context context, String str, PrintWriter printWriter) {
         int callingUid = Binder.getCallingUid();
         if (callingUid == 0 || callingUid == 1000 || callingUid == 1067 || callingUid == 2000) {
             return true;
         }
         if (context.checkCallingOrSelfPermission("android.permission.PACKAGE_USAGE_STATS") != 0) {
-            StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Permission Denial: can't dump ", str, " from from pid=");
+            StringBuilder m =
+                    DumpUtils$$ExternalSyntheticOutline0.m(
+                            "Permission Denial: can't dump ", str, " from from pid=");
             m.append(Binder.getCallingPid());
             m.append(", uid=");
             m.append(Binder.getCallingUid());
@@ -79,7 +90,9 @@ public final class DumpUtils {
                 }
             }
         }
-        StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("Permission Denial: can't dump ", str, " from from pid=");
+        StringBuilder m2 =
+                DumpUtils$$ExternalSyntheticOutline0.m(
+                        "Permission Denial: can't dump ", str, " from from pid=");
         m2.append(Binder.getCallingPid());
         m2.append(", uid=");
         m2.append(Binder.getCallingUid());
@@ -88,27 +101,37 @@ public final class DumpUtils {
         return false;
     }
 
-    public static void dumpAsync(Handler handler, final Dump dump, PrintWriter printWriter, final String str, long j) {
+    public static void dumpAsync(
+            Handler handler, final Dump dump, PrintWriter printWriter, final String str, long j) {
         final StringWriter stringWriter = new StringWriter();
-        if (handler.runWithScissors(new Runnable() { // from class: com.android.internal.util.jobs.DumpUtils.1
-            @Override // java.lang.Runnable
-            public final void run() {
-                FastPrintWriter fastPrintWriter = new FastPrintWriter(stringWriter);
-                dump.dump(fastPrintWriter, str);
-                fastPrintWriter.close();
-            }
-        }, j)) {
+        if (handler.runWithScissors(
+                new Runnable() { // from class: com.android.internal.util.jobs.DumpUtils.1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        FastPrintWriter fastPrintWriter = new FastPrintWriter(stringWriter);
+                        dump.dump(fastPrintWriter, str);
+                        fastPrintWriter.close();
+                    }
+                },
+                j)) {
             printWriter.print(stringWriter.toString());
         } else {
             printWriter.println("... timed out");
         }
     }
 
-    public static void dumpSparseArray(PrintWriter printWriter, String str, SparseArray sparseArray, String str2) {
+    public static void dumpSparseArray(
+            PrintWriter printWriter, String str, SparseArray sparseArray, String str2) {
         dumpSparseArray(printWriter, str, sparseArray, str2, null, null);
     }
 
-    public static void dumpSparseArray(PrintWriter printWriter, String str, SparseArray sparseArray, String str2, KeyDumper keyDumper, ValueDumper valueDumper) {
+    public static void dumpSparseArray(
+            PrintWriter printWriter,
+            String str,
+            SparseArray sparseArray,
+            String str2,
+            KeyDumper keyDumper,
+            ValueDumper valueDumper) {
         int size = sparseArray.size();
         if (size == 0) {
             printWriter.print(str);
@@ -146,27 +169,38 @@ public final class DumpUtils {
         }
     }
 
-    public static void dumpSparseArrayValues(final PrintWriter printWriter, final String str, SparseArray sparseArray, String str2) {
-        dumpSparseArray(printWriter, str, sparseArray, str2, new KeyDumper() { // from class: com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda1
-            @Override // com.android.internal.util.jobs.DumpUtils.KeyDumper
-            public final void dump(int i, int i2) {
-                DumpUtils.lambda$dumpSparseArrayValues$3(printWriter, str, i, i2);
-            }
-        }, null);
+    public static void dumpSparseArrayValues(
+            final PrintWriter printWriter, final String str, SparseArray sparseArray, String str2) {
+        dumpSparseArray(
+                printWriter,
+                str,
+                sparseArray,
+                str2,
+                new KeyDumper() { // from class:
+                                  // com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda1
+                    @Override // com.android.internal.util.jobs.DumpUtils.KeyDumper
+                    public final void dump(int i, int i2) {
+                        DumpUtils.lambda$dumpSparseArrayValues$3(printWriter, str, i, i2);
+                    }
+                },
+                null);
     }
 
     public static Predicate filterRecord(final String str) {
         if (TextUtils.isEmpty(str)) {
             final int i = 0;
-            return new Predicate() { // from class: com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
+            return new Predicate() { // from class:
+                                     // com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
                     boolean lambda$filterRecord$0;
                     boolean isSecMediaPackage;
-                    ComponentName.WithComponentName withComponentName = (ComponentName.WithComponentName) obj;
+                    ComponentName.WithComponentName withComponentName =
+                            (ComponentName.WithComponentName) obj;
                     switch (i) {
                         case 0:
-                            lambda$filterRecord$0 = DumpUtils.lambda$filterRecord$0(withComponentName);
+                            lambda$filterRecord$0 =
+                                    DumpUtils.lambda$filterRecord$0(withComponentName);
                             return lambda$filterRecord$0;
                         case 1:
                             return Objects.nonNull(withComponentName);
@@ -187,15 +221,18 @@ public final class DumpUtils {
         }
         if ("all".equals(str)) {
             final int i2 = 1;
-            return new Predicate() { // from class: com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
+            return new Predicate() { // from class:
+                                     // com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
                     boolean lambda$filterRecord$0;
                     boolean isSecMediaPackage;
-                    ComponentName.WithComponentName withComponentName = (ComponentName.WithComponentName) obj;
+                    ComponentName.WithComponentName withComponentName =
+                            (ComponentName.WithComponentName) obj;
                     switch (i2) {
                         case 0:
-                            lambda$filterRecord$0 = DumpUtils.lambda$filterRecord$0(withComponentName);
+                            lambda$filterRecord$0 =
+                                    DumpUtils.lambda$filterRecord$0(withComponentName);
                             return lambda$filterRecord$0;
                         case 1:
                             return Objects.nonNull(withComponentName);
@@ -216,15 +253,18 @@ public final class DumpUtils {
         }
         if ("all-platform".equals(str)) {
             final int i3 = 2;
-            return new Predicate() { // from class: com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
+            return new Predicate() { // from class:
+                                     // com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
                     boolean lambda$filterRecord$0;
                     boolean isSecMediaPackage;
-                    ComponentName.WithComponentName withComponentName = (ComponentName.WithComponentName) obj;
+                    ComponentName.WithComponentName withComponentName =
+                            (ComponentName.WithComponentName) obj;
                     switch (i3) {
                         case 0:
-                            lambda$filterRecord$0 = DumpUtils.lambda$filterRecord$0(withComponentName);
+                            lambda$filterRecord$0 =
+                                    DumpUtils.lambda$filterRecord$0(withComponentName);
                             return lambda$filterRecord$0;
                         case 1:
                             return Objects.nonNull(withComponentName);
@@ -245,15 +285,18 @@ public final class DumpUtils {
         }
         if ("all-non-platform".equals(str)) {
             final int i4 = 3;
-            return new Predicate() { // from class: com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
+            return new Predicate() { // from class:
+                                     // com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
                     boolean lambda$filterRecord$0;
                     boolean isSecMediaPackage;
-                    ComponentName.WithComponentName withComponentName = (ComponentName.WithComponentName) obj;
+                    ComponentName.WithComponentName withComponentName =
+                            (ComponentName.WithComponentName) obj;
                     switch (i4) {
                         case 0:
-                            lambda$filterRecord$0 = DumpUtils.lambda$filterRecord$0(withComponentName);
+                            lambda$filterRecord$0 =
+                                    DumpUtils.lambda$filterRecord$0(withComponentName);
                             return lambda$filterRecord$0;
                         case 1:
                             return Objects.nonNull(withComponentName);
@@ -274,15 +317,18 @@ public final class DumpUtils {
         }
         if ("all-platform-critical".equals(str)) {
             final int i5 = 4;
-            return new Predicate() { // from class: com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
+            return new Predicate() { // from class:
+                                     // com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
                     boolean lambda$filterRecord$0;
                     boolean isSecMediaPackage;
-                    ComponentName.WithComponentName withComponentName = (ComponentName.WithComponentName) obj;
+                    ComponentName.WithComponentName withComponentName =
+                            (ComponentName.WithComponentName) obj;
                     switch (i5) {
                         case 0:
-                            lambda$filterRecord$0 = DumpUtils.lambda$filterRecord$0(withComponentName);
+                            lambda$filterRecord$0 =
+                                    DumpUtils.lambda$filterRecord$0(withComponentName);
                             return lambda$filterRecord$0;
                         case 1:
                             return Objects.nonNull(withComponentName);
@@ -303,15 +349,18 @@ public final class DumpUtils {
         }
         if ("all-platform-non-critical".equals(str)) {
             final int i6 = 5;
-            return new Predicate() { // from class: com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
+            return new Predicate() { // from class:
+                                     // com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
                     boolean lambda$filterRecord$0;
                     boolean isSecMediaPackage;
-                    ComponentName.WithComponentName withComponentName = (ComponentName.WithComponentName) obj;
+                    ComponentName.WithComponentName withComponentName =
+                            (ComponentName.WithComponentName) obj;
                     switch (i6) {
                         case 0:
-                            lambda$filterRecord$0 = DumpUtils.lambda$filterRecord$0(withComponentName);
+                            lambda$filterRecord$0 =
+                                    DumpUtils.lambda$filterRecord$0(withComponentName);
                             return lambda$filterRecord$0;
                         case 1:
                             return Objects.nonNull(withComponentName);
@@ -332,15 +381,18 @@ public final class DumpUtils {
         }
         if ("samsung-media".equals(str)) {
             final int i7 = 6;
-            return new Predicate() { // from class: com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
+            return new Predicate() { // from class:
+                                     // com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda2
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
                     boolean lambda$filterRecord$0;
                     boolean isSecMediaPackage;
-                    ComponentName.WithComponentName withComponentName = (ComponentName.WithComponentName) obj;
+                    ComponentName.WithComponentName withComponentName =
+                            (ComponentName.WithComponentName) obj;
                     switch (i7) {
                         case 0:
-                            lambda$filterRecord$0 = DumpUtils.lambda$filterRecord$0(withComponentName);
+                            lambda$filterRecord$0 =
+                                    DumpUtils.lambda$filterRecord$0(withComponentName);
                             return lambda$filterRecord$0;
                         case 1:
                             return Objects.nonNull(withComponentName);
@@ -361,21 +413,27 @@ public final class DumpUtils {
         }
         final ComponentName unflattenFromString = ComponentName.unflattenFromString(str);
         if (unflattenFromString != null) {
-            return new Predicate() { // from class: com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda9
+            return new Predicate() { // from class:
+                                     // com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda9
                 @Override // java.util.function.Predicate
                 public final boolean test(Object obj) {
                     boolean lambda$filterRecord$1;
-                    lambda$filterRecord$1 = DumpUtils.lambda$filterRecord$1(unflattenFromString, (ComponentName.WithComponentName) obj);
+                    lambda$filterRecord$1 =
+                            DumpUtils.lambda$filterRecord$1(
+                                    unflattenFromString, (ComponentName.WithComponentName) obj);
                     return lambda$filterRecord$1;
                 }
             };
         }
         final int parseIntWithBase = ParseUtils.parseIntWithBase(str, 16, -1);
-        return new Predicate() { // from class: com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda10
+        return new Predicate() { // from class:
+                                 // com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticLambda10
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 boolean lambda$filterRecord$2;
-                lambda$filterRecord$2 = DumpUtils.lambda$filterRecord$2(parseIntWithBase, str, (ComponentName.WithComponentName) obj);
+                lambda$filterRecord$2 =
+                        DumpUtils.lambda$filterRecord$2(
+                                parseIntWithBase, str, (ComponentName.WithComponentName) obj);
                 return lambda$filterRecord$2;
             }
         };
@@ -399,23 +457,39 @@ public final class DumpUtils {
     }
 
     public static boolean isNonPlatformPackage(ComponentName.WithComponentName withComponentName) {
-        return (withComponentName == null || isPlatformPackage(withComponentName.getComponentName()) || isSecMediaPackage(withComponentName.getComponentName())) ? false : true;
+        return (withComponentName == null
+                        || isPlatformPackage(withComponentName.getComponentName())
+                        || isSecMediaPackage(withComponentName.getComponentName()))
+                ? false
+                : true;
     }
 
     public static boolean isNonPlatformPackage(ComponentName componentName) {
-        return (componentName == null || !isNonPlatformPackage(componentName.getPackageName()) || isSecMediaPackage(componentName.getPackageName())) ? false : true;
+        return (componentName == null
+                        || !isNonPlatformPackage(componentName.getPackageName())
+                        || isSecMediaPackage(componentName.getPackageName()))
+                ? false
+                : true;
     }
 
     public static boolean isNonPlatformPackage(String str) {
         return (str == null || isPlatformPackage(str) || isSecMediaPackage(str)) ? false : true;
     }
 
-    public static boolean isPlatformCriticalPackage(ComponentName.WithComponentName withComponentName) {
-        return withComponentName != null && isPlatformPackage(withComponentName.getComponentName()) && isCriticalPackage(withComponentName.getComponentName());
+    public static boolean isPlatformCriticalPackage(
+            ComponentName.WithComponentName withComponentName) {
+        return withComponentName != null
+                && isPlatformPackage(withComponentName.getComponentName())
+                && isCriticalPackage(withComponentName.getComponentName());
     }
 
-    public static boolean isPlatformNonCriticalPackage(ComponentName.WithComponentName withComponentName) {
-        return (withComponentName == null || !isPlatformPackage(withComponentName.getComponentName()) || isCriticalPackage(withComponentName.getComponentName())) ? false : true;
+    public static boolean isPlatformNonCriticalPackage(
+            ComponentName.WithComponentName withComponentName) {
+        return (withComponentName == null
+                        || !isPlatformPackage(withComponentName.getComponentName())
+                        || isCriticalPackage(withComponentName.getComponentName()))
+                ? false
+                : true;
     }
 
     public static boolean isPlatformPackage(ComponentName.WithComponentName withComponentName) {
@@ -427,7 +501,10 @@ public final class DumpUtils {
     }
 
     public static boolean isPlatformPackage(String str) {
-        return str != null && (str.equals("android") || str.startsWith("android.") || str.startsWith("com.android."));
+        return str != null
+                && (str.equals("android")
+                        || str.startsWith("android.")
+                        || str.startsWith("com.android."));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -440,27 +517,42 @@ public final class DumpUtils {
     }
 
     private static boolean isSecMediaPackage(String str) {
-        return str != null && ("com.google.android.providers.media.module".equals(str) || "com.samsung.android.providers.media".equals(str) || "com.samsung.android.providers.trash".equals(str) || "com.sec.android.app.myfiles".equals(str) || "com.sec.android.gallery3d".equals(str));
+        return str != null
+                && ("com.google.android.providers.media.module".equals(str)
+                        || "com.samsung.android.providers.media".equals(str)
+                        || "com.samsung.android.providers.trash".equals(str)
+                        || "com.sec.android.app.myfiles".equals(str)
+                        || "com.sec.android.gallery3d".equals(str));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static /* synthetic */ void lambda$dumpSparseArrayValues$3(PrintWriter printWriter, String str, int i, int i2) {
+    public static /* synthetic */ void lambda$dumpSparseArrayValues$3(
+            PrintWriter printWriter, String str, int i, int i2) {
         printWriter.printf("%s%s", str, str);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static /* synthetic */ boolean lambda$filterRecord$0(ComponentName.WithComponentName withComponentName) {
+    public static /* synthetic */ boolean lambda$filterRecord$0(
+            ComponentName.WithComponentName withComponentName) {
         return false;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static /* synthetic */ boolean lambda$filterRecord$1(ComponentName componentName, ComponentName.WithComponentName withComponentName) {
-        return withComponentName != null && componentName.equals(withComponentName.getComponentName());
+    public static /* synthetic */ boolean lambda$filterRecord$1(
+            ComponentName componentName, ComponentName.WithComponentName withComponentName) {
+        return withComponentName != null
+                && componentName.equals(withComponentName.getComponentName());
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static /* synthetic */ boolean lambda$filterRecord$2(int i, String str, ComponentName.WithComponentName withComponentName) {
-        return (i != -1 && System.identityHashCode(withComponentName) == i) || withComponentName.getComponentName().flattenToString().toLowerCase().contains(str.toLowerCase());
+    public static /* synthetic */ boolean lambda$filterRecord$2(
+            int i, String str, ComponentName.WithComponentName withComponentName) {
+        return (i != -1 && System.identityHashCode(withComponentName) == i)
+                || withComponentName
+                        .getComponentName()
+                        .flattenToString()
+                        .toLowerCase()
+                        .contains(str.toLowerCase());
     }
 
     private static void logMessage(PrintWriter printWriter, String str) {

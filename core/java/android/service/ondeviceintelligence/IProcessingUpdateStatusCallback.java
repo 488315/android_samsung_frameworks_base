@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IProcessingUpdateStatusCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.ondeviceintelligence.IProcessingUpdateStatusCallback";
+    public static final String DESCRIPTOR =
+            "android.service.ondeviceintelligence.IProcessingUpdateStatusCallback";
 
     void onFailure(int i, String str) throws RemoteException;
 
@@ -17,12 +18,10 @@ public interface IProcessingUpdateStatusCallback extends IInterface {
 
     public static class Default implements IProcessingUpdateStatusCallback {
         @Override // android.service.ondeviceintelligence.IProcessingUpdateStatusCallback
-        public void onSuccess(PersistableBundle statusParams) throws RemoteException {
-        }
+        public void onSuccess(PersistableBundle statusParams) throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IProcessingUpdateStatusCallback
-        public void onFailure(int errorCode, String errorMessage) throws RemoteException {
-        }
+        public void onFailure(int errorCode, String errorMessage) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface IProcessingUpdateStatusCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProcessingUpdateStatusCallback {
+    public abstract static class Stub extends Binder implements IProcessingUpdateStatusCallback {
         static final int TRANSACTION_onFailure = 3;
         static final int TRANSACTION_onSuccess = 2;
 
@@ -71,7 +70,8 @@ public interface IProcessingUpdateStatusCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IProcessingUpdateStatusCallback.DESCRIPTOR);
             }
@@ -81,7 +81,8 @@ public interface IProcessingUpdateStatusCallback extends IInterface {
             }
             switch (code) {
                 case 2:
-                    PersistableBundle _arg0 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg0 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     onSuccess(_arg0);
                     reply.writeNoException();

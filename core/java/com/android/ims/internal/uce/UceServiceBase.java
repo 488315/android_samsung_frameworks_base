@@ -13,8 +13,7 @@ public abstract class UceServiceBase {
     private UceServiceBinder mBinder;
 
     private final class UceServiceBinder extends IUceService.Stub {
-        private UceServiceBinder() {
-        }
+        private UceServiceBinder() {}
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
         public boolean startService(IUceListener uceListener) {
@@ -32,13 +31,17 @@ public abstract class UceServiceBase {
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public int createOptionsService(IOptionsListener optionsListener, UceLong optionsServiceListenerHdl) {
-            return UceServiceBase.this.onCreateOptionsService(optionsListener, optionsServiceListenerHdl);
+        public int createOptionsService(
+                IOptionsListener optionsListener, UceLong optionsServiceListenerHdl) {
+            return UceServiceBase.this.onCreateOptionsService(
+                    optionsListener, optionsServiceListenerHdl);
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public int createOptionsServiceForSubscription(IOptionsListener optionsListener, UceLong optionsServiceListenerHdl, String iccId) {
-            return UceServiceBase.this.onCreateOptionsService(optionsListener, optionsServiceListenerHdl, iccId);
+        public int createOptionsServiceForSubscription(
+                IOptionsListener optionsListener, UceLong optionsServiceListenerHdl, String iccId) {
+            return UceServiceBase.this.onCreateOptionsService(
+                    optionsListener, optionsServiceListenerHdl, iccId);
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
@@ -47,13 +50,19 @@ public abstract class UceServiceBase {
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public int createPresenceService(IPresenceListener presServiceListener, UceLong presServiceListenerHdl) {
-            return UceServiceBase.this.onCreatePresService(presServiceListener, presServiceListenerHdl);
+        public int createPresenceService(
+                IPresenceListener presServiceListener, UceLong presServiceListenerHdl) {
+            return UceServiceBase.this.onCreatePresService(
+                    presServiceListener, presServiceListenerHdl);
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
-        public int createPresenceServiceForSubscription(IPresenceListener presServiceListener, UceLong presServiceListenerHdl, String iccId) {
-            return UceServiceBase.this.onCreatePresService(presServiceListener, presServiceListenerHdl, iccId);
+        public int createPresenceServiceForSubscription(
+                IPresenceListener presServiceListener,
+                UceLong presServiceListenerHdl,
+                String iccId) {
+            return UceServiceBase.this.onCreatePresService(
+                    presServiceListener, presServiceListenerHdl, iccId);
         }
 
         @Override // com.android.ims.internal.uce.uceservice.IUceService
@@ -106,27 +115,29 @@ public abstract class UceServiceBase {
         return false;
     }
 
-    protected int onCreateOptionsService(IOptionsListener optionsListener, UceLong optionsServiceListenerHdl) {
+    protected int onCreateOptionsService(
+            IOptionsListener optionsListener, UceLong optionsServiceListenerHdl) {
         return 0;
     }
 
-    protected int onCreateOptionsService(IOptionsListener optionsListener, UceLong optionsServiceListenerHdl, String iccId) {
+    protected int onCreateOptionsService(
+            IOptionsListener optionsListener, UceLong optionsServiceListenerHdl, String iccId) {
         return 0;
     }
 
-    protected void onDestroyOptionsService(int cdServiceHandle) {
-    }
+    protected void onDestroyOptionsService(int cdServiceHandle) {}
 
-    protected int onCreatePresService(IPresenceListener presServiceListener, UceLong presServiceListenerHdl) {
+    protected int onCreatePresService(
+            IPresenceListener presServiceListener, UceLong presServiceListenerHdl) {
         return 0;
     }
 
-    protected int onCreatePresService(IPresenceListener presServiceListener, UceLong presServiceListenerHdl, String iccId) {
+    protected int onCreatePresService(
+            IPresenceListener presServiceListener, UceLong presServiceListenerHdl, String iccId) {
         return 0;
     }
 
-    protected void onDestroyPresService(int presServiceHdl) {
-    }
+    protected void onDestroyPresService(int presServiceHdl) {}
 
     protected boolean onGetServiceStatus() {
         return false;

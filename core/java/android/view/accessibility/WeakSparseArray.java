@@ -1,6 +1,7 @@
 package android.view.accessibility;
 
 import android.util.SparseArray;
+
 import java.lang.ref.Reference;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
@@ -10,8 +11,7 @@ final class WeakSparseArray<E> {
     private final ReferenceQueue<E> mRefQueue = new ReferenceQueue<>();
     private final SparseArray<WeakReferenceWithId<E>> mSparseArray = new SparseArray<>();
 
-    WeakSparseArray() {
-    }
+    WeakSparseArray() {}
 
     public void append(int key, E value) {
         removeUnreachableValues();

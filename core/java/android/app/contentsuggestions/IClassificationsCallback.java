@@ -5,18 +5,22 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface IClassificationsCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.app.contentsuggestions.IClassificationsCallback";
+    public static final String DESCRIPTOR =
+            "android.app.contentsuggestions.IClassificationsCallback";
 
-    void onContentClassificationsAvailable(int i, List<ContentClassification> list) throws RemoteException;
+    void onContentClassificationsAvailable(int i, List<ContentClassification> list)
+            throws RemoteException;
 
     public static class Default implements IClassificationsCallback {
         @Override // android.app.contentsuggestions.IClassificationsCallback
-        public void onContentClassificationsAvailable(int statusCode, List<ContentClassification> classifications) throws RemoteException {
-        }
+        public void onContentClassificationsAvailable(
+                int statusCode, List<ContentClassification> classifications)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +28,7 @@ public interface IClassificationsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IClassificationsCallback {
+    public abstract static class Stub extends Binder implements IClassificationsCallback {
         static final int TRANSACTION_onContentClassificationsAvailable = 1;
 
         public Stub() {
@@ -62,7 +66,8 @@ public interface IClassificationsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IClassificationsCallback.DESCRIPTOR);
             }
@@ -73,7 +78,8 @@ public interface IClassificationsCallback extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    List<ContentClassification> _arg1 = data.createTypedArrayList(ContentClassification.CREATOR);
+                    List<ContentClassification> _arg1 =
+                            data.createTypedArrayList(ContentClassification.CREATOR);
                     data.enforceNoDataAvail();
                     onContentClassificationsAvailable(_arg0, _arg1);
                     return true;
@@ -99,7 +105,9 @@ public interface IClassificationsCallback extends IInterface {
             }
 
             @Override // android.app.contentsuggestions.IClassificationsCallback
-            public void onContentClassificationsAvailable(int statusCode, List<ContentClassification> classifications) throws RemoteException {
+            public void onContentClassificationsAvailable(
+                    int statusCode, List<ContentClassification> classifications)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IClassificationsCallback.DESCRIPTOR);

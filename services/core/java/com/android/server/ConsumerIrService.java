@@ -22,7 +22,9 @@ public class ConsumerIrService extends IConsumerIrService.Stub {
     public ConsumerIrService(Context context) {
         IConsumerIr iConsumerIr = null;
         this.mAidlService = null;
-        ((PowerManager) context.getSystemService("power")).newWakeLock(1, "ConsumerIrService").setReferenceCounted(true);
+        ((PowerManager) context.getSystemService("power"))
+                .newWakeLock(1, "ConsumerIrService")
+                .setReferenceCounted(true);
         StringBuilder sb = new StringBuilder();
         String str = IConsumerIr.DESCRIPTOR;
         sb.append(str);
@@ -68,7 +70,8 @@ public class ConsumerIrService extends IConsumerIrService.Stub {
                     return halGetCarrierFrequencies();
                 }
                 try {
-                    ConsumerIrFreqRange[] carrierFreqs = ((IConsumerIr$Stub$Proxy) iConsumerIr).getCarrierFreqs();
+                    ConsumerIrFreqRange[] carrierFreqs =
+                            ((IConsumerIr$Stub$Proxy) iConsumerIr).getCarrierFreqs();
                     if (carrierFreqs.length <= 0) {
                         Slog.e("ConsumerIrService", "Error getting carrier frequencies.");
                     }

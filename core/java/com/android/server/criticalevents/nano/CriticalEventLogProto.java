@@ -6,6 +6,7 @@ import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -128,11 +129,13 @@ public final class CriticalEventLogProto extends MessageNano {
         }
     }
 
-    public static CriticalEventLogProto parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+    public static CriticalEventLogProto parseFrom(byte[] data)
+            throws InvalidProtocolBufferNanoException {
         return (CriticalEventLogProto) MessageNano.mergeFrom(new CriticalEventLogProto(), data);
     }
 
-    public static CriticalEventLogProto parseFrom(CodedInputByteBufferNano input) throws IOException {
+    public static CriticalEventLogProto parseFrom(CodedInputByteBufferNano input)
+            throws IOException {
         return new CriticalEventLogProto().mergeFrom(input);
     }
 }

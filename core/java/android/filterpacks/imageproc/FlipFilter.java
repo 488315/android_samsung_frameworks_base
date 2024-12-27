@@ -15,6 +15,7 @@ public class FlipFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = Slice.HINT_HORIZONTAL)
     private boolean mHorizontal;
+
     private Program mProgram;
     private int mTarget;
 
@@ -53,7 +54,8 @@ public class FlipFilter extends Filter {
                 updateParameters();
                 return;
             default:
-                throw new RuntimeException("Filter Sharpen does not support frames of target " + target + "!");
+                throw new RuntimeException(
+                        "Filter Sharpen does not support frames of target " + target + "!");
         }
     }
 

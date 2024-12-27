@@ -10,9 +10,6 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.WindowManagerImpl;
 import android.window.ITaskFpsCallback;
 import android.window.InputTransferToken;
 import android.window.TaskFpsCallback;
@@ -20,8 +17,10 @@ import android.window.TrustedPresentationThresholds;
 import android.window.WindowMetricsController;
 import android.window.WindowProvider;
 import android.window.WindowProviderService;
+
 import com.android.internal.os.IResultReceiver;
 import com.android.window.flags.Flags;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -75,7 +74,12 @@ public final class WindowManagerImpl implements WindowManager {
     @Override // android.view.ViewManager
     public void addView(View view, ViewGroup.LayoutParams params) {
         applyTokens(params);
-        this.mGlobal.addView(view, params, this.mContext.getDisplayNoVerify(), this.mParentWindow, this.mContext.getUserId());
+        this.mGlobal.addView(
+                view,
+                params,
+                this.mContext.getDisplayNoVerify(),
+                this.mParentWindow,
+                this.mContext.getUserId());
     }
 
     @Override // android.view.ViewManager
@@ -107,11 +111,24 @@ public final class WindowManagerImpl implements WindowManager {
         if (windowProvider.getWindowType() == windowType) {
             return;
         }
-        IllegalArgumentException exception = new IllegalArgumentException("Window type mismatch. Window Context's window type is " + windowProvider.getWindowType() + ", while LayoutParams' type is set to " + windowType + ". Please create another Window Context via createWindowContext(getDisplay(), " + windowType + ", null) to add window with type:" + windowType);
-        if (!WindowProviderService.isWindowProviderService(windowProvider.getWindowContextOptions())) {
+        IllegalArgumentException exception =
+                new IllegalArgumentException(
+                        "Window type mismatch. Window Context's window type is "
+                                + windowProvider.getWindowType()
+                                + ", while LayoutParams' type is set to "
+                                + windowType
+                                + ". Please create another Window Context via"
+                                + " createWindowContext(getDisplay(), "
+                                + windowType
+                                + ", null) to add window with type:"
+                                + windowType);
+        if (!WindowProviderService.isWindowProviderService(
+                windowProvider.getWindowContextOptions())) {
             throw exception;
         }
-        StrictMode.onIncorrectContextUsed("WindowContext's window type must match type in WindowManager.LayoutParams", exception);
+        StrictMode.onIncorrectContextUsed(
+                "WindowContext's window type must match type in WindowManager.LayoutParams",
+                exception);
     }
 
     @Override // android.view.ViewManager
@@ -125,32 +142,44 @@ public final class WindowManagerImpl implements WindowManager {
     }
 
     @Override // android.view.WindowManager
-    public void requestAppKeyboardShortcuts(final WindowManager.KeyboardShortcutsReceiver receiver, int deviceId) {
-        IResultReceiver resultReceiver = new IResultReceiver.Stub() { // from class: android.view.WindowManagerImpl.1
-            @Override // com.android.internal.os.IResultReceiver
-            public void send(int resultCode, Bundle resultData) throws RemoteException {
-                List<KeyboardShortcutGroup> result = resultData.getParcelableArrayList(WindowManager.PARCEL_KEY_SHORTCUTS_ARRAY, KeyboardShortcutGroup.class);
-                receiver.onKeyboardShortcutsReceived(result);
-            }
-        };
+    public void requestAppKeyboardShortcuts(
+            final WindowManager.KeyboardShortcutsReceiver receiver, int deviceId) {
+        IResultReceiver resultReceiver =
+                new IResultReceiver.Stub() { // from class: android.view.WindowManagerImpl.1
+                    @Override // com.android.internal.os.IResultReceiver
+                    public void send(int resultCode, Bundle resultData) throws RemoteException {
+                        List<KeyboardShortcutGroup> result =
+                                resultData.getParcelableArrayList(
+                                        WindowManager.PARCEL_KEY_SHORTCUTS_ARRAY,
+                                        KeyboardShortcutGroup.class);
+                        receiver.onKeyboardShortcutsReceived(result);
+                    }
+                };
         try {
-            WindowManagerGlobal.getWindowManagerService().requestAppKeyboardShortcuts(resultReceiver, deviceId);
+            WindowManagerGlobal.getWindowManagerService()
+                    .requestAppKeyboardShortcuts(resultReceiver, deviceId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
     @Override // android.view.WindowManager
-    public void requestImeKeyboardShortcuts(final WindowManager.KeyboardShortcutsReceiver receiver, int deviceId) {
-        IResultReceiver resultReceiver = new IResultReceiver.Stub() { // from class: android.view.WindowManagerImpl.2
-            @Override // com.android.internal.os.IResultReceiver
-            public void send(int resultCode, Bundle resultData) throws RemoteException {
-                List<KeyboardShortcutGroup> result = resultData.getParcelableArrayList(WindowManager.PARCEL_KEY_SHORTCUTS_ARRAY, KeyboardShortcutGroup.class);
-                receiver.onKeyboardShortcutsReceived(result);
-            }
-        };
+    public void requestImeKeyboardShortcuts(
+            final WindowManager.KeyboardShortcutsReceiver receiver, int deviceId) {
+        IResultReceiver resultReceiver =
+                new IResultReceiver.Stub() { // from class: android.view.WindowManagerImpl.2
+                    @Override // com.android.internal.os.IResultReceiver
+                    public void send(int resultCode, Bundle resultData) throws RemoteException {
+                        List<KeyboardShortcutGroup> result =
+                                resultData.getParcelableArrayList(
+                                        WindowManager.PARCEL_KEY_SHORTCUTS_ARRAY,
+                                        KeyboardShortcutGroup.class);
+                        receiver.onKeyboardShortcutsReceived(result);
+                    }
+                };
         try {
-            WindowManagerGlobal.getWindowManagerService().requestImeKeyboardShortcuts(resultReceiver, deviceId);
+            WindowManagerGlobal.getWindowManagerService()
+                    .requestImeKeyboardShortcuts(resultReceiver, deviceId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -173,7 +202,8 @@ public final class WindowManagerImpl implements WindowManager {
     @Override // android.view.WindowManager
     public void setShouldShowWithInsecureKeyguard(int displayId, boolean shouldShow) {
         try {
-            WindowManagerGlobal.getWindowManagerService().setShouldShowWithInsecureKeyguard(displayId, shouldShow);
+            WindowManagerGlobal.getWindowManagerService()
+                    .setShouldShowWithInsecureKeyguard(displayId, shouldShow);
         } catch (RemoteException e) {
         }
     }
@@ -181,7 +211,8 @@ public final class WindowManagerImpl implements WindowManager {
     @Override // android.view.WindowManager
     public void setShouldShowSystemDecors(int displayId, boolean shouldShow) {
         try {
-            WindowManagerGlobal.getWindowManagerService().setShouldShowSystemDecors(displayId, shouldShow);
+            WindowManagerGlobal.getWindowManagerService()
+                    .setShouldShowSystemDecors(displayId, shouldShow);
         } catch (RemoteException e) {
         }
     }
@@ -271,7 +302,9 @@ public final class WindowManagerImpl implements WindowManager {
         Objects.requireNonNull(listener, "listener must not be null");
         IBinder contextToken = Context.getToken(this.mContext);
         if (contextToken == null) {
-            throw new UnsupportedOperationException("The context of this window manager instance must be a UI context, e.g. an Activity or a Context created by Context#createWindowContext()");
+            throw new UnsupportedOperationException(
+                    "The context of this window manager instance must be a UI context, e.g. an"
+                        + " Activity or a Context created by Context#createWindowContext()");
         }
         this.mGlobal.registerProposedRotationListener(contextToken, executor, listener);
     }
@@ -292,9 +325,11 @@ public final class WindowManagerImpl implements WindowManager {
 
     @Override // android.view.WindowManager
     public void registerTaskFpsCallback(int taskId, Executor executor, TaskFpsCallback callback) {
-        OnFpsCallbackListenerProxy onFpsCallbackListenerProxy = new OnFpsCallbackListenerProxy(executor, callback);
+        OnFpsCallbackListenerProxy onFpsCallbackListenerProxy =
+                new OnFpsCallbackListenerProxy(executor, callback);
         try {
-            WindowManagerGlobal.getWindowManagerService().registerTaskFpsCallback(taskId, onFpsCallbackListenerProxy);
+            WindowManagerGlobal.getWindowManagerService()
+                    .registerTaskFpsCallback(taskId, onFpsCallbackListenerProxy);
             synchronized (this.mOnFpsCallbackListenerProxies) {
                 this.mOnFpsCallbackListenerProxies.add(onFpsCallbackListenerProxy);
             }
@@ -306,12 +341,14 @@ public final class WindowManagerImpl implements WindowManager {
     @Override // android.view.WindowManager
     public void unregisterTaskFpsCallback(TaskFpsCallback callback) {
         synchronized (this.mOnFpsCallbackListenerProxies) {
-            Iterator<OnFpsCallbackListenerProxy> iterator = this.mOnFpsCallbackListenerProxies.iterator();
+            Iterator<OnFpsCallbackListenerProxy> iterator =
+                    this.mOnFpsCallbackListenerProxies.iterator();
             while (iterator.hasNext()) {
                 OnFpsCallbackListenerProxy proxy = iterator.next();
                 if (proxy.mCallback == callback) {
                     try {
-                        WindowManagerGlobal.getWindowManagerService().unregisterTaskFpsCallback(proxy);
+                        WindowManagerGlobal.getWindowManagerService()
+                                .unregisterTaskFpsCallback(proxy);
                         iterator.remove();
                     } catch (RemoteException e) {
                         throw e.rethrowFromSystemServer();
@@ -333,12 +370,15 @@ public final class WindowManagerImpl implements WindowManager {
 
         @Override // android.window.ITaskFpsCallback
         public void onFpsReported(final float fps) {
-            this.mExecutor.execute(new Runnable() { // from class: android.view.WindowManagerImpl$OnFpsCallbackListenerProxy$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    WindowManagerImpl.OnFpsCallbackListenerProxy.this.lambda$onFpsReported$0(fps);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.view.WindowManagerImpl$OnFpsCallbackListenerProxy$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            WindowManagerImpl.OnFpsCallbackListenerProxy.this
+                                    .lambda$onFpsReported$0(fps);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -365,7 +405,9 @@ public final class WindowManagerImpl implements WindowManager {
     @Override // android.view.WindowManager
     public List<ComponentName> notifyScreenshotListeners(int displayId) {
         try {
-            return List.copyOf(WindowManagerGlobal.getWindowManagerService().notifyScreenshotListeners(displayId));
+            return List.copyOf(
+                    WindowManagerGlobal.getWindowManagerService()
+                            .notifyScreenshotListeners(displayId));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -398,7 +440,8 @@ public final class WindowManagerImpl implements WindowManager {
             return false;
         }
         try {
-            return WindowManagerGlobal.getWindowManagerService().replaceContentOnDisplay(displayId, sc);
+            return WindowManagerGlobal.getWindowManagerService()
+                    .replaceContentOnDisplay(displayId, sc);
         } catch (RemoteException e) {
             e.rethrowAsRuntimeException();
             return false;
@@ -406,7 +449,11 @@ public final class WindowManagerImpl implements WindowManager {
     }
 
     @Override // android.view.WindowManager
-    public void registerTrustedPresentationListener(IBinder window, TrustedPresentationThresholds thresholds, Executor executor, Consumer<Boolean> listener) {
+    public void registerTrustedPresentationListener(
+            IBinder window,
+            TrustedPresentationThresholds thresholds,
+            Executor executor,
+            Consumer<Boolean> listener) {
         Objects.requireNonNull(window, "window must not be null");
         Objects.requireNonNull(thresholds, "thresholds must not be null");
         Objects.requireNonNull(executor, "executor must not be null");
@@ -421,21 +468,31 @@ public final class WindowManagerImpl implements WindowManager {
     }
 
     @Override // android.view.WindowManager
-    public InputTransferToken registerBatchedSurfaceControlInputReceiver(InputTransferToken hostInputTransferToken, SurfaceControl surfaceControl, Choreographer choreographer, SurfaceControlInputReceiver receiver) {
+    public InputTransferToken registerBatchedSurfaceControlInputReceiver(
+            InputTransferToken hostInputTransferToken,
+            SurfaceControl surfaceControl,
+            Choreographer choreographer,
+            SurfaceControlInputReceiver receiver) {
         Objects.requireNonNull(hostInputTransferToken);
         Objects.requireNonNull(surfaceControl);
         Objects.requireNonNull(choreographer);
         Objects.requireNonNull(receiver);
-        return this.mGlobal.registerBatchedSurfaceControlInputReceiver(hostInputTransferToken, surfaceControl, choreographer, receiver);
+        return this.mGlobal.registerBatchedSurfaceControlInputReceiver(
+                hostInputTransferToken, surfaceControl, choreographer, receiver);
     }
 
     @Override // android.view.WindowManager
-    public InputTransferToken registerUnbatchedSurfaceControlInputReceiver(InputTransferToken hostInputTransferToken, SurfaceControl surfaceControl, Looper looper, SurfaceControlInputReceiver receiver) {
+    public InputTransferToken registerUnbatchedSurfaceControlInputReceiver(
+            InputTransferToken hostInputTransferToken,
+            SurfaceControl surfaceControl,
+            Looper looper,
+            SurfaceControlInputReceiver receiver) {
         Objects.requireNonNull(hostInputTransferToken);
         Objects.requireNonNull(surfaceControl);
         Objects.requireNonNull(looper);
         Objects.requireNonNull(receiver);
-        return this.mGlobal.registerUnbatchedSurfaceControlInputReceiver(hostInputTransferToken, surfaceControl, looper, receiver);
+        return this.mGlobal.registerUnbatchedSurfaceControlInputReceiver(
+                hostInputTransferToken, surfaceControl, looper, receiver);
     }
 
     @Override // android.view.WindowManager
@@ -451,7 +508,8 @@ public final class WindowManagerImpl implements WindowManager {
     }
 
     @Override // android.view.WindowManager
-    public boolean transferTouchGesture(InputTransferToken transferFromToken, InputTransferToken transferToToken) {
+    public boolean transferTouchGesture(
+            InputTransferToken transferFromToken, InputTransferToken transferToToken) {
         Objects.requireNonNull(transferFromToken);
         Objects.requireNonNull(transferToToken);
         return this.mGlobal.transferTouchGesture(transferFromToken, transferToToken);

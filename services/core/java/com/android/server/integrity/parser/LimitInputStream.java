@@ -1,6 +1,7 @@
 package com.android.server.integrity.parser;
 
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.FilterInputStream;
 import java.io.InputStream;
 
@@ -13,7 +14,9 @@ public final class LimitInputStream extends FilterInputStream {
     public LimitInputStream(InputStream inputStream, int i) {
         super(inputStream);
         if (i < 0) {
-            throw new IllegalArgumentException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "limit ", " cannot be negative"));
+            throw new IllegalArgumentException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "limit ", " cannot be negative"));
         }
         this.mReadBytes = 0;
         this.mLimit = i;

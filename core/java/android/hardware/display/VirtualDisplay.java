@@ -10,7 +10,11 @@ public final class VirtualDisplay {
     private Surface mSurface;
     private IVirtualDisplayCallback mToken;
 
-    VirtualDisplay(DisplayManagerGlobal global, Display display, IVirtualDisplayCallback token, Surface surface) {
+    VirtualDisplay(
+            DisplayManagerGlobal global,
+            Display display,
+            IVirtualDisplayCallback token,
+            Surface surface) {
         this.mGlobal = global;
         this.mDisplay = display;
         this.mToken = token;
@@ -58,17 +62,20 @@ public final class VirtualDisplay {
     }
 
     public String toString() {
-        return "VirtualDisplay{display=" + this.mDisplay + ", token=" + this.mToken + ", surface=" + this.mSurface + "}";
+        return "VirtualDisplay{display="
+                + this.mDisplay
+                + ", token="
+                + this.mToken
+                + ", surface="
+                + this.mSurface
+                + "}";
     }
 
-    public static abstract class Callback {
-        public void onPaused() {
-        }
+    public abstract static class Callback {
+        public void onPaused() {}
 
-        public void onResumed() {
-        }
+        public void onResumed() {}
 
-        public void onStopped() {
-        }
+        public void onStopped() {}
     }
 }

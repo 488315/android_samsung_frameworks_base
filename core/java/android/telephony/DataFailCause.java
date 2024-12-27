@@ -5,7 +5,9 @@ import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.PersistableBundle;
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.telephony.util.ArrayUtils;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -394,9 +396,7 @@ public final class DataFailCause {
     public static final int USER_AUTHENTICATION = 29;
     public static final int VSNCP_ADMINISTRATIVELY_PROHIBITED = 2245;
 
-    @SystemApi
-    @Deprecated
-    public static final int VSNCP_APN_UNATHORIZED = 2238;
+    @SystemApi @Deprecated public static final int VSNCP_APN_UNATHORIZED = 2238;
     public static final int VSNCP_APN_UNAUTHORIZED = 2238;
     public static final int VSNCP_GEN_ERROR = 2237;
     public static final int VSNCP_INSUFFICIENT_PARAMETERS = 2243;
@@ -743,13 +743,16 @@ public final class DataFailCause {
         sFailCauseMap.put(9000, "IWLAN_NON_3GPP_ACCESS_TO_EPC_NOT_ALLOWED");
         sFailCauseMap.put(Integer.valueOf(IWLAN_USER_UNKNOWN), "IWLAN_USER_UNKNOWN");
         sFailCauseMap.put(Integer.valueOf(IWLAN_NO_APN_SUBSCRIPTION), "IWLAN_NO_APN_SUBSCRIPTION");
-        sFailCauseMap.put(Integer.valueOf(IWLAN_AUTHORIZATION_REJECTED), "IWLAN_AUTHORIZATION_REJECTED");
+        sFailCauseMap.put(
+                Integer.valueOf(IWLAN_AUTHORIZATION_REJECTED), "IWLAN_AUTHORIZATION_REJECTED");
         sFailCauseMap.put(Integer.valueOf(IWLAN_ILLEGAL_ME), "IWLAN_ILLEGAL_ME");
         sFailCauseMap.put(10500, "IWLAN_NETWORK_FAILURE");
         sFailCauseMap.put(11001, "IWLAN_RAT_TYPE_NOT_ALLOWED");
         sFailCauseMap.put(11005, "IWLAN_IMEI_NOT_ACCEPTED");
         sFailCauseMap.put(Integer.valueOf(IWLAN_PLMN_NOT_ALLOWED), "IWLAN_PLMN_NOT_ALLOWED");
-        sFailCauseMap.put(Integer.valueOf(IWLAN_UNAUTHENTICATED_EMERGENCY_NOT_SUPPORTED), "IWLAN_UNAUTHENTICATED_EMERGENCY_NOT_SUPPORTED");
+        sFailCauseMap.put(
+                Integer.valueOf(IWLAN_UNAUTHENTICATED_EMERGENCY_NOT_SUPPORTED),
+                "IWLAN_UNAUTHENTICATED_EMERGENCY_NOT_SUPPORTED");
         sFailCauseMap.put(16384, "IWLAN_IKEV2_CONFIG_FAILURE");
         sFailCauseMap.put(16385, "IWLAN_IKEV2_AUTH_FAILURE");
         sFailCauseMap.put(16386, "IWLAN_IKEV2_MSG_TIMEOUT");
@@ -794,7 +797,9 @@ public final class DataFailCause {
         sFailCauseMap.put(Integer.valueOf(HANDOVER_FAILED), "HANDOVER_FAILED");
         sFailCauseMap.put(Integer.valueOf(DUPLICATE_CID), "DUPLICATE_CID");
         sFailCauseMap.put(Integer.valueOf(NO_DEFAULT_DATA), "NO_DEFAULT_DATA");
-        sFailCauseMap.put(Integer.valueOf(SERVICE_TEMPORARILY_UNAVAILABLE), "SERVICE_TEMPORARILY_UNAVAILABLE");
+        sFailCauseMap.put(
+                Integer.valueOf(SERVICE_TEMPORARILY_UNAVAILABLE),
+                "SERVICE_TEMPORARILY_UNAVAILABLE");
         sFailCauseMap.put(Integer.valueOf(REQUEST_NOT_SUPPORTED), "REQUEST_NOT_SUPPORTED");
         sFailCauseMap.put(Integer.valueOf(NO_RETRY_FAILURE), "NO_RETRY_FAILURE");
         sFailCauseMap.put(-7, "NOT_SPECIFIED");
@@ -808,24 +813,32 @@ public final class DataFailCause {
         sPermanentFailureCache = new HashMap<>();
     }
 
-    private DataFailCause() {
-    }
+    private DataFailCause() {}
 
     public static boolean isRadioRestartFailure(Context context, final int cause, int subId) {
         PersistableBundle b;
-        CarrierConfigManager configManager = (CarrierConfigManager) context.getSystemService("carrier_config");
+        CarrierConfigManager configManager =
+                (CarrierConfigManager) context.getSystemService("carrier_config");
         if (configManager != null && (b = configManager.getConfigForSubId(subId)) != null) {
-            if (cause == 36 && b.getBoolean(CarrierConfigManager.KEY_RESTART_RADIO_ON_PDP_FAIL_REGULAR_DEACTIVATION_BOOL)) {
+            if (cause == 36
+                    && b.getBoolean(
+                            CarrierConfigManager
+                                    .KEY_RESTART_RADIO_ON_PDP_FAIL_REGULAR_DEACTIVATION_BOOL)) {
                 return true;
             }
-            int[] causeCodes = b.getIntArray(CarrierConfigManager.KEY_RADIO_RESTART_FAILURE_CAUSES_INT_ARRAY);
+            int[] causeCodes =
+                    b.getIntArray(CarrierConfigManager.KEY_RADIO_RESTART_FAILURE_CAUSES_INT_ARRAY);
             if (causeCodes != null) {
-                return Arrays.stream(causeCodes).anyMatch(new IntPredicate() { // from class: android.telephony.DataFailCause$$ExternalSyntheticLambda0
-                    @Override // java.util.function.IntPredicate
-                    public final boolean test(int i) {
-                        return DataFailCause.lambda$isRadioRestartFailure$0(cause, i);
-                    }
-                });
+                return Arrays.stream(causeCodes)
+                        .anyMatch(
+                                new IntPredicate() { // from class:
+                                                     // android.telephony.DataFailCause$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.IntPredicate
+                                    public final boolean test(int i) {
+                                        return DataFailCause.lambda$isRadioRestartFailure$0(
+                                                cause, i);
+                                    }
+                                });
             }
             return false;
         }
@@ -843,8 +856,15 @@ public final class DataFailCause {
         synchronized (sPermanentFailureCache) {
             Set<Integer> permanentFailureSet = sPermanentFailureCache.get(Integer.valueOf(subId));
             if (permanentFailureSet == null) {
-                CarrierConfigManager configManager = (CarrierConfigManager) context.getSystemService("carrier_config");
-                if (configManager != null && (b = configManager.getConfigForSubId(subId)) != null && (permanentFailureStrings = b.getStringArray(CarrierConfigManager.KEY_CARRIER_DATA_CALL_PERMANENT_FAILURE_STRINGS)) != null) {
+                CarrierConfigManager configManager =
+                        (CarrierConfigManager) context.getSystemService("carrier_config");
+                if (configManager != null
+                        && (b = configManager.getConfigForSubId(subId)) != null
+                        && (permanentFailureStrings =
+                                        b.getStringArray(
+                                                CarrierConfigManager
+                                                        .KEY_CARRIER_DATA_CALL_PERMANENT_FAILURE_STRINGS))
+                                != null) {
                     permanentFailureSet = new HashSet();
                     for (Map.Entry<Integer, String> e : sFailCauseMap.entrySet()) {
                         if (ArrayUtils.contains(permanentFailureStrings, e.getValue())) {
@@ -883,11 +903,30 @@ public final class DataFailCause {
     }
 
     public static boolean isEventLoggable(int dataFailCause) {
-        return dataFailCause == 8 || dataFailCause == 26 || dataFailCause == 28 || dataFailCause == 29 || dataFailCause == 30 || dataFailCause == 31 || dataFailCause == 33 || dataFailCause == 32 || dataFailCause == 34 || dataFailCause == 35 || dataFailCause == 50 || dataFailCause == 51 || dataFailCause == 111 || dataFailCause == -3 || dataFailCause == -5 || dataFailCause == -6 || dataFailCause == 65538;
+        return dataFailCause == 8
+                || dataFailCause == 26
+                || dataFailCause == 28
+                || dataFailCause == 29
+                || dataFailCause == 30
+                || dataFailCause == 31
+                || dataFailCause == 33
+                || dataFailCause == 32
+                || dataFailCause == 34
+                || dataFailCause == 35
+                || dataFailCause == 50
+                || dataFailCause == 51
+                || dataFailCause == 111
+                || dataFailCause == -3
+                || dataFailCause == -5
+                || dataFailCause == -6
+                || dataFailCause == 65538;
     }
 
     public static String toString(int dataFailCause) {
-        return sFailCauseMap.getOrDefault(Integer.valueOf(dataFailCause), "UNKNOWN") + "(0x" + Integer.toHexString(dataFailCause) + NavigationBarInflaterView.KEY_CODE_END;
+        return sFailCauseMap.getOrDefault(Integer.valueOf(dataFailCause), "UNKNOWN")
+                + "(0x"
+                + Integer.toHexString(dataFailCause)
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public static int getFailCause(int failCause) {
@@ -902,6 +941,21 @@ public final class DataFailCause {
     }
 
     public static boolean isDataConnectionErrorFromCp(int dataFailCause) {
-        return dataFailCause == 8 || dataFailCause == 26 || dataFailCause == 27 || dataFailCause == 28 || dataFailCause == 29 || dataFailCause == 30 || dataFailCause == 31 || dataFailCause == 32 || dataFailCause == 33 || dataFailCause == 34 || dataFailCause == 35 || dataFailCause == 50 || dataFailCause == 51 || dataFailCause == 52 || dataFailCause == 111 || dataFailCause == 112;
+        return dataFailCause == 8
+                || dataFailCause == 26
+                || dataFailCause == 27
+                || dataFailCause == 28
+                || dataFailCause == 29
+                || dataFailCause == 30
+                || dataFailCause == 31
+                || dataFailCause == 32
+                || dataFailCause == 33
+                || dataFailCause == 34
+                || dataFailCause == 35
+                || dataFailCause == 50
+                || dataFailCause == 51
+                || dataFailCause == 52
+                || dataFailCause == 111
+                || dataFailCause == 112;
     }
 }

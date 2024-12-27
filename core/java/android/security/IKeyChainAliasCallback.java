@@ -12,8 +12,7 @@ public interface IKeyChainAliasCallback extends IInterface {
 
     public static class Default implements IKeyChainAliasCallback {
         @Override // android.security.IKeyChainAliasCallback
-        public void alias(String alias) throws RemoteException {
-        }
+        public void alias(String alias) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IKeyChainAliasCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyChainAliasCallback {
+    public abstract static class Stub extends Binder implements IKeyChainAliasCallback {
         public static final String DESCRIPTOR = "android.security.IKeyChainAliasCallback";
         static final int TRANSACTION_alias = 1;
 
@@ -60,7 +59,8 @@ public interface IKeyChainAliasCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

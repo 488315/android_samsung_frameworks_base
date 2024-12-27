@@ -8,19 +8,23 @@ import android.graphics.drawable.Icon;
 import android.os.RemoteException;
 import android.service.autofill.IInlineSuggestionUi;
 import android.util.Slog;
+
 import com.android.internal.view.inline.IInlineContentCallback;
 import com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticOutline0;
 import com.android.server.autofill.Helper;
 import com.android.server.autofill.ui.RemoteInlineSuggestionUi.AnonymousClass1;
+
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class RemoteInlineSuggestionUi$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class RemoteInlineSuggestionUi$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ RemoteInlineSuggestionUi f$0;
 
-    public /* synthetic */ RemoteInlineSuggestionUi$$ExternalSyntheticLambda0(RemoteInlineSuggestionUi remoteInlineSuggestionUi, int i) {
+    public /* synthetic */ RemoteInlineSuggestionUi$$ExternalSyntheticLambda0(
+            RemoteInlineSuggestionUi remoteInlineSuggestionUi, int i) {
         this.$r8$classId = i;
         this.f$0 = remoteInlineSuggestionUi;
     }
@@ -31,24 +35,33 @@ public final /* synthetic */ class RemoteInlineSuggestionUi$$ExternalSyntheticLa
         RemoteInlineSuggestionUi remoteInlineSuggestionUi = this.f$0;
         switch (i) {
             case 0:
-                RemoteInlineSuggestionUi$$ExternalSyntheticLambda0 remoteInlineSuggestionUi$$ExternalSyntheticLambda0 = remoteInlineSuggestionUi.mDelayedReleaseViewRunnable;
+                RemoteInlineSuggestionUi$$ExternalSyntheticLambda0
+                        remoteInlineSuggestionUi$$ExternalSyntheticLambda0 =
+                                remoteInlineSuggestionUi.mDelayedReleaseViewRunnable;
                 Slice slice = null;
                 if (remoteInlineSuggestionUi$$ExternalSyntheticLambda0 != null) {
-                    remoteInlineSuggestionUi.mHandler.removeCallbacks(remoteInlineSuggestionUi$$ExternalSyntheticLambda0);
+                    remoteInlineSuggestionUi.mHandler.removeCallbacks(
+                            remoteInlineSuggestionUi$$ExternalSyntheticLambda0);
                     remoteInlineSuggestionUi.mDelayedReleaseViewRunnable = null;
                 }
-                IInlineSuggestionUi iInlineSuggestionUi = remoteInlineSuggestionUi.mInlineSuggestionUi;
+                IInlineSuggestionUi iInlineSuggestionUi =
+                        remoteInlineSuggestionUi.mInlineSuggestionUi;
                 if (iInlineSuggestionUi != null) {
                     try {
-                        iInlineSuggestionUi.getSurfacePackage(remoteInlineSuggestionUi.new AnonymousClass1());
+                        iInlineSuggestionUi.getSurfacePackage(
+                                remoteInlineSuggestionUi.new AnonymousClass1());
                         break;
                     } catch (RemoteException unused) {
-                        Slog.w("RemoteInlineSuggestionUi", "RemoteException calling getSurfacePackage.");
+                        Slog.w(
+                                "RemoteInlineSuggestionUi",
+                                "RemoteException calling getSurfacePackage.");
                         return;
                     }
                 } else if (!remoteInlineSuggestionUi.mWaitingForUiCreation) {
-                    RemoteInlineSuggestionViewConnector remoteInlineSuggestionViewConnector = remoteInlineSuggestionUi.mRemoteInlineSuggestionViewConnector;
-                    Slice slice2 = remoteInlineSuggestionViewConnector.mInlinePresentation.getSlice();
+                    RemoteInlineSuggestionViewConnector remoteInlineSuggestionViewConnector =
+                            remoteInlineSuggestionUi.mRemoteInlineSuggestionViewConnector;
+                    Slice slice2 =
+                            remoteInlineSuggestionViewConnector.mInlinePresentation.getSlice();
                     if (slice2 != null) {
                         int currentUser = ActivityManager.getCurrentUser();
                         Iterator<SliceItem> it = slice2.getItems().iterator();
@@ -58,8 +71,14 @@ public final /* synthetic */ class RemoteInlineSuggestionUi$$ExternalSyntheticLa
                                 if (next.getFormat().equals("image")) {
                                     Icon icon = next.getIcon();
                                     if (icon.getType() == 4 || icon.getType() == 6) {
-                                        if (ContentProvider.getUserIdFromUri(icon.getUri(), currentUser) != currentUser) {
-                                            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(currentUser, "sanitizeSlice() user: ", " cannot access icons in Slice", "AutofillHelper");
+                                        if (ContentProvider.getUserIdFromUri(
+                                                        icon.getUri(), currentUser)
+                                                != currentUser) {
+                                            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                                                    currentUser,
+                                                    "sanitizeSlice() user: ",
+                                                    " cannot access icons in Slice",
+                                                    "AutofillHelper");
                                         }
                                     }
                                 }
@@ -70,13 +89,25 @@ public final /* synthetic */ class RemoteInlineSuggestionUi$$ExternalSyntheticLa
                     }
                     if (slice == null) {
                         if (Helper.sDebug) {
-                            Slog.d("RemoteInlineSuggestionViewConnector", "Skipped rendering inline suggestion.");
+                            Slog.d(
+                                    "RemoteInlineSuggestionViewConnector",
+                                    "Skipped rendering inline suggestion.");
                         }
                     } else if (remoteInlineSuggestionViewConnector.mRemoteRenderService != null) {
                         if (Helper.sDebug) {
-                            Slog.d("RemoteInlineSuggestionViewConnector", "Request to recreate the UI");
+                            Slog.d(
+                                    "RemoteInlineSuggestionViewConnector",
+                                    "Request to recreate the UI");
                         }
-                        remoteInlineSuggestionViewConnector.mRemoteRenderService.renderSuggestion(remoteInlineSuggestionUi.mInlineSuggestionUiCallback, remoteInlineSuggestionViewConnector.mInlinePresentation, remoteInlineSuggestionUi.mWidth, remoteInlineSuggestionUi.mHeight, remoteInlineSuggestionViewConnector.mHostInputToken, remoteInlineSuggestionViewConnector.mDisplayId, remoteInlineSuggestionViewConnector.mUserId, remoteInlineSuggestionViewConnector.mSessionId);
+                        remoteInlineSuggestionViewConnector.mRemoteRenderService.renderSuggestion(
+                                remoteInlineSuggestionUi.mInlineSuggestionUiCallback,
+                                remoteInlineSuggestionViewConnector.mInlinePresentation,
+                                remoteInlineSuggestionUi.mWidth,
+                                remoteInlineSuggestionUi.mHeight,
+                                remoteInlineSuggestionViewConnector.mHostInputToken,
+                                remoteInlineSuggestionViewConnector.mDisplayId,
+                                remoteInlineSuggestionViewConnector.mUserId,
+                                remoteInlineSuggestionViewConnector.mSessionId);
                     }
                     remoteInlineSuggestionUi.mWaitingForUiCreation = true;
                     break;
@@ -94,17 +125,22 @@ public final /* synthetic */ class RemoteInlineSuggestionUi$$ExternalSyntheticLa
                         if (Helper.sVerbose) {
                             Slog.v("RemoteInlineSuggestionUi", "releasing the host");
                         }
-                        remoteInlineSuggestionUi.mInlineSuggestionUi.releaseSurfaceControlViewHost();
+                        remoteInlineSuggestionUi.mInlineSuggestionUi
+                                .releaseSurfaceControlViewHost();
                         remoteInlineSuggestionUi.mInlineSuggestionUi = null;
                     } catch (RemoteException unused2) {
-                        Slog.w("RemoteInlineSuggestionUi", "RemoteException calling releaseSurfaceControlViewHost");
+                        Slog.w(
+                                "RemoteInlineSuggestionUi",
+                                "RemoteException calling releaseSurfaceControlViewHost");
                     }
                 }
                 remoteInlineSuggestionUi.mDelayedReleaseViewRunnable = null;
                 break;
             case 3:
-                remoteInlineSuggestionUi.mRemoteInlineSuggestionViewConnector.mOnAutofillCallback.run();
-                IInlineContentCallback iInlineContentCallback = remoteInlineSuggestionUi.mInlineContentCallback;
+                remoteInlineSuggestionUi.mRemoteInlineSuggestionViewConnector.mOnAutofillCallback
+                        .run();
+                IInlineContentCallback iInlineContentCallback =
+                        remoteInlineSuggestionUi.mInlineContentCallback;
                 if (iInlineContentCallback != null) {
                     try {
                         iInlineContentCallback.onClick();
@@ -116,7 +152,8 @@ public final /* synthetic */ class RemoteInlineSuggestionUi$$ExternalSyntheticLa
                 }
                 break;
             case 4:
-                IInlineContentCallback iInlineContentCallback2 = remoteInlineSuggestionUi.mInlineContentCallback;
+                IInlineContentCallback iInlineContentCallback2 =
+                        remoteInlineSuggestionUi.mInlineContentCallback;
                 if (iInlineContentCallback2 != null) {
                     try {
                         iInlineContentCallback2.onLongClick();
@@ -128,7 +165,8 @@ public final /* synthetic */ class RemoteInlineSuggestionUi$$ExternalSyntheticLa
                 }
                 break;
             default:
-                remoteInlineSuggestionUi.mRemoteInlineSuggestionViewConnector.mOnErrorCallback.run();
+                remoteInlineSuggestionUi.mRemoteInlineSuggestionViewConnector.mOnErrorCallback
+                        .run();
                 break;
         }
     }

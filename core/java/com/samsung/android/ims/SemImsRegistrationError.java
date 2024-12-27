@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemImsRegistrationError implements Parcelable {
-    public static final Parcelable.Creator<SemImsRegistrationError> CREATOR = new Parcelable.Creator<SemImsRegistrationError>() { // from class: com.samsung.android.ims.SemImsRegistrationError.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemImsRegistrationError createFromParcel(Parcel in) {
-            return new SemImsRegistrationError(in);
-        }
+    public static final Parcelable.Creator<SemImsRegistrationError> CREATOR =
+            new Parcelable.Creator<
+                    SemImsRegistrationError>() { // from class:
+                                                 // com.samsung.android.ims.SemImsRegistrationError.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemImsRegistrationError createFromParcel(Parcel in) {
+                    return new SemImsRegistrationError(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemImsRegistrationError[] newArray(int size) {
-            return new SemImsRegistrationError[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemImsRegistrationError[] newArray(int size) {
+                    return new SemImsRegistrationError[size];
+                }
+            };
     private int mDeregistrationReason;
     private int mDetailedDeregiReason;
     private int mSipErrorCode;
@@ -34,7 +37,11 @@ public class SemImsRegistrationError implements Parcelable {
         this.mSipErrorCode = 0;
     }
 
-    public SemImsRegistrationError(int sipErrorCode, String sipErrorReason, int detailedDeregiReason, int deregistrationReason) {
+    public SemImsRegistrationError(
+            int sipErrorCode,
+            String sipErrorReason,
+            int detailedDeregiReason,
+            int deregistrationReason) {
         this.mSipErrorCode = sipErrorCode;
         this.mSipErrorReason = sipErrorReason;
         this.mDetailedDeregiReason = detailedDeregiReason;

@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.os.epic.IEpicObject;
 
 /* loaded from: classes3.dex */
 public interface IEpicManager extends IInterface {
@@ -32,7 +31,7 @@ public interface IEpicManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEpicManager {
+    public abstract static class Stub extends Binder implements IEpicManager {
         static final int TRANSACTION_Create = 1;
         static final int TRANSACTION_Creates = 2;
 
@@ -73,7 +72,8 @@ public interface IEpicManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IEpicManager.DESCRIPTOR);
             }

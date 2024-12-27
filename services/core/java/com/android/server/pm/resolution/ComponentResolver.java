@@ -20,6 +20,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.internal.pm.pkg.component.ComponentMutateUtils;
 import com.android.internal.pm.pkg.component.ParsedActivity;
 import com.android.internal.pm.pkg.component.ParsedComponent;
@@ -45,6 +46,7 @@ import com.android.server.pm.pkg.PackageUserStateInternal;
 import com.android.server.pm.snapshot.PackageDataSnapshot;
 import com.android.server.utils.Snappable;
 import com.android.server.utils.SnapshotCache;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -70,13 +72,18 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         public final HashMap mActivities;
         public final UserNeedsBadgingCache mUserNeedsBadging;
 
-        public ActivityIntentResolver(UserManagerService userManagerService, UserNeedsBadgingCache userNeedsBadgingCache) {
+        public ActivityIntentResolver(
+                UserManagerService userManagerService,
+                UserNeedsBadgingCache userNeedsBadgingCache) {
             super(userManagerService);
             this.mActivities = new HashMap();
             this.mUserNeedsBadging = userNeedsBadgingCache;
         }
 
-        public ActivityIntentResolver(ActivityIntentResolver activityIntentResolver, UserManagerService userManagerService, UserNeedsBadgingCache userNeedsBadgingCache) {
+        public ActivityIntentResolver(
+                ActivityIntentResolver activityIntentResolver,
+                UserManagerService userManagerService,
+                UserNeedsBadgingCache userNeedsBadgingCache) {
             super(activityIntentResolver, userManagerService);
             HashMap hashMap = new HashMap();
             this.mActivities = hashMap;
@@ -84,11 +91,13 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             this.mUserNeedsBadging = userNeedsBadgingCache;
         }
 
-        public final void addActivity(Computer computer, ParsedActivity parsedActivity, String str, List list) {
+        public final void addActivity(
+                Computer computer, ParsedActivity parsedActivity, String str, List list) {
             this.mActivities.put(parsedActivity.getComponentName(), parsedActivity);
             int size = parsedActivity.getIntents().size();
             for (int i = 0; i < size; i++) {
-                ParsedIntentInfo parsedIntentInfo = (ParsedIntentInfo) parsedActivity.getIntents().get(i);
+                ParsedIntentInfo parsedIntentInfo =
+                        (ParsedIntentInfo) parsedActivity.getIntents().get(i);
                 IntentFilter intentFilter = parsedIntentInfo.getIntentFilter();
                 if (list != null && "activity".equals(str)) {
                     ((ArrayList) list).add(Pair.create(parsedActivity, parsedIntentInfo));
@@ -96,7 +105,9 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                 if (!intentFilter.debugCheck()) {
                     Log.w("PackageManager", "==> For Activity " + parsedActivity.getName());
                 }
-                addFilter((PackageDataSnapshot) computer, Pair.create(parsedActivity, parsedIntentInfo));
+                addFilter(
+                        (PackageDataSnapshot) computer,
+                        Pair.create(parsedActivity, parsedIntentInfo));
             }
         }
 
@@ -106,7 +117,10 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             ArrayList arrayList = (ArrayList) list;
             for (int size = arrayList.size() - 1; size >= 0; size--) {
                 ActivityInfo activityInfo = ((ResolveInfo) arrayList.get(size)).activityInfo;
-                if (Objects.equals(activityInfo.name, ((ParsedActivity) pair.first).getName()) && Objects.equals(activityInfo.packageName, ((ParsedActivity) pair.first).getPackageName())) {
+                if (Objects.equals(activityInfo.name, ((ParsedActivity) pair.first).getName())
+                        && Objects.equals(
+                                activityInfo.packageName,
+                                ((ParsedActivity) pair.first).getPackageName())) {
                     return false;
                 }
             }
@@ -121,7 +135,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             printWriter.print(str);
             printWriter.print(Integer.toHexString(System.identityHashCode(parsedActivity)));
             printWriter.print(' ');
-            ComponentName.printShortString(printWriter, parsedActivity.getPackageName(), parsedActivity.getClassName());
+            ComponentName.printShortString(
+                    printWriter, parsedActivity.getPackageName(), parsedActivity.getClassName());
             printWriter.print(" filter ");
             printWriter.println(Integer.toHexString(System.identityHashCode(parsedIntentInfo)));
         }
@@ -132,7 +147,10 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             printWriter.print(str);
             printWriter.print(Integer.toHexString(System.identityHashCode(pair.first)));
             printWriter.print(' ');
-            ComponentName.printShortString(printWriter, ((ParsedActivity) pair.first).getPackageName(), ((ParsedActivity) pair.first).getClassName());
+            ComponentName.printShortString(
+                    printWriter,
+                    ((ParsedActivity) pair.first).getPackageName(),
+                    ((ParsedActivity) pair.first).getClassName());
             if (i > 1) {
                 printWriter.print(" (");
                 printWriter.print(i);
@@ -170,16 +188,40 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             ParsedIntentInfo parsedIntentInfo = (ParsedIntentInfo) pair.second;
             IntentFilter intentFilter = parsedIntentInfo.getIntentFilter();
             ResolveInfo resolveInfo = null;
-            if (this.mUserManager.mLocalService.exists(i2) && (packageStateInternal = computer.getPackageStateInternal(parsedActivity.getPackageName())) != null && packageStateInternal.pkg != null && PackageStateUtils.isEnabledAndMatches(packageStateInternal, parsedActivity, j, i2)) {
-                PackageUserStateInternal userStateOrDefault = packageStateInternal.getUserStateOrDefault(i2);
-                ActivityInfo generateActivityInfo = PackageInfoUtils.generateActivityInfo(packageStateInternal.pkg, parsedActivity, j, userStateOrDefault, i2, packageStateInternal);
+            if (this.mUserManager.mLocalService.exists(i2)
+                    && (packageStateInternal =
+                                    computer.getPackageStateInternal(
+                                            parsedActivity.getPackageName()))
+                            != null
+                    && packageStateInternal.pkg != null
+                    && PackageStateUtils.isEnabledAndMatches(
+                            packageStateInternal, parsedActivity, j, i2)) {
+                PackageUserStateInternal userStateOrDefault =
+                        packageStateInternal.getUserStateOrDefault(i2);
+                ActivityInfo generateActivityInfo =
+                        PackageInfoUtils.generateActivityInfo(
+                                packageStateInternal.pkg,
+                                parsedActivity,
+                                j,
+                                userStateOrDefault,
+                                i2,
+                                packageStateInternal);
                 if (generateActivityInfo != null) {
                     boolean z = (33554432 & j) != 0;
                     boolean z2 = (j & 16777216) != 0;
-                    boolean z3 = z2 && intentFilter.isVisibleToInstantApp() && (!z || intentFilter.isExplicitlyVisibleToInstantApp());
+                    boolean z3 =
+                            z2
+                                    && intentFilter.isVisibleToInstantApp()
+                                    && (!z || intentFilter.isExplicitlyVisibleToInstantApp());
                     boolean z4 = (j & 8388608) != 0;
-                    if ((!z2 || z3 || userStateOrDefault.isInstantApp()) && ((z4 || !userStateOrDefault.isInstantApp()) && (!userStateOrDefault.isInstantApp() || !packageStateInternal.getBoolean(2)))) {
-                        resolveInfo = new ResolveInfo(intentFilter.hasCategory("android.intent.category.BROWSABLE"));
+                    if ((!z2 || z3 || userStateOrDefault.isInstantApp())
+                            && ((z4 || !userStateOrDefault.isInstantApp())
+                                    && (!userStateOrDefault.isInstantApp()
+                                            || !packageStateInternal.getBoolean(2)))) {
+                        resolveInfo =
+                                new ResolveInfo(
+                                        intentFilter.hasCategory(
+                                                "android.intent.category.BROWSABLE"));
                         resolveInfo.activityInfo = generateActivityInfo;
                         if ((j & 64) != 0) {
                             resolveInfo.filter = intentFilter;
@@ -190,10 +232,28 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                         resolveInfo.isDefault = parsedIntentInfo.isHasDefault();
                         resolveInfo.labelRes = parsedIntentInfo.getLabelRes();
                         resolveInfo.nonLocalizedLabel = parsedIntentInfo.getNonLocalizedLabel();
-                        if (SystemProperties.getBoolean("sys.knox.app_name_change", false) && (applicationPolicy = EnterpriseDeviceManager.getInstance().getApplicationPolicy()) != null) {
-                            String applicationNameForComponent = applicationPolicy.getApplicationNameForComponent(parsedActivity.getPackageName() + "/" + generateActivityInfo.name, parsedActivity.getPackageName(), i2);
+                        if (SystemProperties.getBoolean("sys.knox.app_name_change", false)
+                                && (applicationPolicy =
+                                                EnterpriseDeviceManager.getInstance()
+                                                        .getApplicationPolicy())
+                                        != null) {
+                            String applicationNameForComponent =
+                                    applicationPolicy.getApplicationNameForComponent(
+                                            parsedActivity.getPackageName()
+                                                    + "/"
+                                                    + generateActivityInfo.name,
+                                            parsedActivity.getPackageName(),
+                                            i2);
                             if (applicationNameForComponent != null) {
-                                Log.e("PackageManager", "replace res.nonLocalizedLabel(" + ((Object) resolveInfo.nonLocalizedLabel) + ") to newName(" + applicationNameForComponent + ") and activity.getPackageName() () UId(" + Process.myUid() + ")");
+                                Log.e(
+                                        "PackageManager",
+                                        "replace res.nonLocalizedLabel("
+                                                + ((Object) resolveInfo.nonLocalizedLabel)
+                                                + ") to newName("
+                                                + applicationNameForComponent
+                                                + ") and activity.getPackageName() () UId("
+                                                + Process.myUid()
+                                                + ")");
                                 resolveInfo.nonLocalizedLabel = applicationNameForComponent;
                             }
                         }
@@ -219,7 +279,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             return null;
         }
 
-        public final List queryIntentForPackage(Computer computer, Intent intent, String str, long j, List list, int i) {
+        public final List queryIntentForPackage(
+                Computer computer, Intent intent, String str, long j, List list, int i) {
             if (!this.mUserManager.mLocalService.exists(i)) {
                 return null;
             }
@@ -235,7 +296,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                 if (!intents.isEmpty()) {
                     Pair[] pairArr = new Pair[intents.size()];
                     for (int i3 = 0; i3 < intents.size(); i3++) {
-                        pairArr[i3] = Pair.create(parsedActivity, (ParsedIntentInfo) intents.get(i3));
+                        pairArr[i3] =
+                                Pair.create(parsedActivity, (ParsedIntentInfo) intents.get(i3));
                     }
                     arrayList.add(pairArr);
                 }
@@ -247,7 +309,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             this.mActivities.remove(parsedActivity.getComponentName());
             int size = parsedActivity.getIntents().size();
             for (int i = 0; i < size; i++) {
-                ParsedIntentInfo parsedIntentInfo = (ParsedIntentInfo) parsedActivity.getIntents().get(i);
+                ParsedIntentInfo parsedIntentInfo =
+                        (ParsedIntentInfo) parsedActivity.getIntents().get(i);
                 parsedIntentInfo.getIntentFilter();
                 removeFilter(Pair.create(parsedActivity, parsedIntentInfo));
             }
@@ -277,7 +340,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             int size = arrayList.size();
             int i = 0;
             while (i < size) {
-                InstantAppResolveInfo instantAppResolveInfo = ((AuxiliaryResolveInfo.AuxiliaryFilter) arrayList.get(i)).resolveInfo;
+                InstantAppResolveInfo instantAppResolveInfo =
+                        ((AuxiliaryResolveInfo.AuxiliaryFilter) arrayList.get(i)).resolveInfo;
                 String packageName = instantAppResolveInfo.getPackageName();
                 Pair pair = (Pair) this.mOrderResult.get(packageName);
                 if (pair != null) {
@@ -302,7 +366,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         }
 
         @Override // com.android.server.IntentResolver
-        public final /* bridge */ /* synthetic */ boolean isPackageForFilter(String str, Object obj) {
+        public final /* bridge */ /* synthetic */ boolean isPackageForFilter(
+                String str, Object obj) {
             return true;
         }
 
@@ -313,7 +378,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
 
         @Override // com.android.server.IntentResolver
         public final Object newResult(Computer computer, Object obj, int i, int i2, long j) {
-            AuxiliaryResolveInfo.AuxiliaryFilter auxiliaryFilter = (AuxiliaryResolveInfo.AuxiliaryFilter) obj;
+            AuxiliaryResolveInfo.AuxiliaryFilter auxiliaryFilter =
+                    (AuxiliaryResolveInfo.AuxiliaryFilter) obj;
             if (this.mUserManager.mLocalService.exists(i2)) {
                 String packageName = auxiliaryFilter.resolveInfo.getPackageName();
                 int order = auxiliaryFilter.getOrder();
@@ -344,7 +410,9 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             this.mUserManager = userManagerService;
         }
 
-        public MimeGroupsAwareIntentResolver(MimeGroupsAwareIntentResolver mimeGroupsAwareIntentResolver, UserManagerService userManagerService) {
+        public MimeGroupsAwareIntentResolver(
+                MimeGroupsAwareIntentResolver mimeGroupsAwareIntentResolver,
+                UserManagerService userManagerService) {
             ArrayMap arrayMap = new ArrayMap();
             this.mMimeGroupToFilter = arrayMap;
             this.mIsUpdatingMimeGroup = false;
@@ -359,9 +427,22 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             IntentFilter intentFilter = getIntentFilter(pair);
             Computer computer = (Computer) packageDataSnapshot;
             IntentFilter intentFilter2 = getIntentFilter(pair);
-            for (int countMimeGroups = intentFilter2.countMimeGroups() - 1; countMimeGroups >= 0; countMimeGroups--) {
-                PackageSetting packageStateInternal = computer.getPackageStateInternal(((ParsedComponent) pair.first).getPackageName());
-                Iterator it = (packageStateInternal == null ? Collections.emptyList() : (Collection) packageStateInternal.getMimeGroups().get(intentFilter2.getMimeGroup(countMimeGroups))).iterator();
+            for (int countMimeGroups = intentFilter2.countMimeGroups() - 1;
+                    countMimeGroups >= 0;
+                    countMimeGroups--) {
+                PackageSetting packageStateInternal =
+                        computer.getPackageStateInternal(
+                                ((ParsedComponent) pair.first).getPackageName());
+                Iterator it =
+                        (packageStateInternal == null
+                                        ? Collections.emptyList()
+                                        : (Collection)
+                                                packageStateInternal
+                                                        .getMimeGroups()
+                                                        .get(
+                                                                intentFilter2.getMimeGroup(
+                                                                        countMimeGroups)))
+                                .iterator();
                 while (it.hasNext()) {
                     try {
                         intentFilter2.addDynamicDataType((String) it.next());
@@ -373,7 +454,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             if (this.mIsUpdatingMimeGroup) {
                 return;
             }
-            register_intent_filter(pair, intentFilter.mimeGroupsIterator(), this.mMimeGroupToFilter);
+            register_intent_filter(
+                    pair, intentFilter.mimeGroupsIterator(), this.mMimeGroupToFilter);
         }
 
         @Override // com.android.server.IntentResolver
@@ -382,12 +464,15 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             if (!this.mUserManager.mLocalService.exists(i)) {
                 return true;
             }
-            PackageSetting packageStateInternal = computer.getPackageStateInternal(((ParsedComponent) pair.first).getPackageName());
+            PackageSetting packageStateInternal =
+                    computer.getPackageStateInternal(
+                            ((ParsedComponent) pair.first).getPackageName());
             if (packageStateInternal != null && packageStateInternal.pkg != null) {
                 if (!packageStateInternal.isSystem()) {
                     return packageStateInternal.getUserStateOrDefault(i).isStopped();
                 }
-                if (packageStateInternal.getBoolean(8) && packageStateInternal.getUserStateOrDefault(i).isStopped()) {
+                if (packageStateInternal.getBoolean(8)
+                        && packageStateInternal.getUserStateOrDefault(i).isStopped()) {
                     return true;
                 }
             }
@@ -399,7 +484,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             Pair pair = (Pair) obj;
             IntentFilter intentFilter = getIntentFilter(pair);
             if (!this.mIsUpdatingMimeGroup) {
-                unregister_intent_filter(pair, intentFilter.mimeGroupsIterator(), this.mMimeGroupToFilter);
+                unregister_intent_filter(
+                        pair, intentFilter.mimeGroupsIterator(), this.mMimeGroupToFilter);
             }
             super.removeFilterInternal(pair);
             intentFilter.clearDynamicDataTypes();
@@ -447,8 +533,7 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class ReceiverIntentResolver extends ActivityIntentResolver {
-    }
+    public final class ReceiverIntentResolver extends ActivityIntentResolver {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceIntentResolver extends MimeGroupsAwareIntentResolver {
@@ -471,7 +556,9 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         }
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public ServiceIntentResolver(ServiceIntentResolver serviceIntentResolver, UserManagerService userManagerService) {
+        public ServiceIntentResolver(
+                ServiceIntentResolver serviceIntentResolver,
+                UserManagerService userManagerService) {
             super(serviceIntentResolver, userManagerService);
             this.$r8$classId = 0;
             HashMap hashMap = new HashMap();
@@ -480,7 +567,10 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         }
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public ServiceIntentResolver(ServiceIntentResolver serviceIntentResolver, UserManagerService userManagerService, byte b) {
+        public ServiceIntentResolver(
+                ServiceIntentResolver serviceIntentResolver,
+                UserManagerService userManagerService,
+                byte b) {
             super(serviceIntentResolver, userManagerService);
             this.$r8$classId = 1;
             ArrayMap arrayMap = new ArrayMap();
@@ -496,7 +586,12 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                     ArrayList arrayList = (ArrayList) list;
                     for (int size = arrayList.size() - 1; size >= 0; size--) {
                         ServiceInfo serviceInfo = ((ResolveInfo) arrayList.get(size)).serviceInfo;
-                        if (Objects.equals(serviceInfo.name, ((ParsedService) pair.first).getClassName()) && Objects.equals(serviceInfo.packageName, ((ParsedService) pair.first).getPackageName())) {
+                        if (Objects.equals(
+                                        serviceInfo.name,
+                                        ((ParsedService) pair.first).getClassName())
+                                && Objects.equals(
+                                        serviceInfo.packageName,
+                                        ((ParsedService) pair.first).getPackageName())) {
                             break;
                         }
                     }
@@ -505,8 +600,14 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                     Pair pair2 = (Pair) obj;
                     ArrayList arrayList2 = (ArrayList) list;
                     for (int size2 = arrayList2.size() - 1; size2 >= 0; size2--) {
-                        ProviderInfo providerInfo = ((ResolveInfo) arrayList2.get(size2)).providerInfo;
-                        if (Objects.equals(providerInfo.name, ((ParsedProvider) pair2.first).getClassName()) && Objects.equals(providerInfo.packageName, ((ParsedProvider) pair2.first).getPackageName())) {
+                        ProviderInfo providerInfo =
+                                ((ResolveInfo) arrayList2.get(size2)).providerInfo;
+                        if (Objects.equals(
+                                        providerInfo.name,
+                                        ((ParsedProvider) pair2.first).getClassName())
+                                && Objects.equals(
+                                        providerInfo.packageName,
+                                        ((ParsedProvider) pair2.first).getPackageName())) {
                             break;
                         }
                     }
@@ -525,9 +626,13 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                     printWriter.print(str);
                     printWriter.print(Integer.toHexString(System.identityHashCode(parsedService)));
                     printWriter.print(' ');
-                    ComponentName.printShortString(printWriter, parsedService.getPackageName(), parsedService.getClassName());
+                    ComponentName.printShortString(
+                            printWriter,
+                            parsedService.getPackageName(),
+                            parsedService.getClassName());
                     printWriter.print(" filter ");
-                    printWriter.print(Integer.toHexString(System.identityHashCode(parsedIntentInfo)));
+                    printWriter.print(
+                            Integer.toHexString(System.identityHashCode(parsedIntentInfo)));
                     if (parsedService.getPermission() == null) {
                         printWriter.println();
                         break;
@@ -543,9 +648,13 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                     printWriter.print(str);
                     printWriter.print(Integer.toHexString(System.identityHashCode(parsedProvider)));
                     printWriter.print(' ');
-                    ComponentName.printShortString(printWriter, parsedProvider.getPackageName(), parsedProvider.getClassName());
+                    ComponentName.printShortString(
+                            printWriter,
+                            parsedProvider.getPackageName(),
+                            parsedProvider.getClassName());
                     printWriter.print(" filter ");
-                    printWriter.println(Integer.toHexString(System.identityHashCode(parsedIntentInfo2)));
+                    printWriter.println(
+                            Integer.toHexString(System.identityHashCode(parsedIntentInfo2)));
                     break;
             }
         }
@@ -558,7 +667,10 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                     printWriter.print(str);
                     printWriter.print(Integer.toHexString(System.identityHashCode(pair.first)));
                     printWriter.print(' ');
-                    ComponentName.printShortString(printWriter, ((ParsedService) pair.first).getPackageName(), ((ParsedService) pair.first).getClassName());
+                    ComponentName.printShortString(
+                            printWriter,
+                            ((ParsedService) pair.first).getPackageName(),
+                            ((ParsedService) pair.first).getClassName());
                     if (i > 1) {
                         printWriter.print(" (");
                         printWriter.print(i);
@@ -571,7 +683,10 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                     printWriter.print(str);
                     printWriter.print(Integer.toHexString(System.identityHashCode(pair2.first)));
                     printWriter.print(' ');
-                    ComponentName.printShortString(printWriter, ((ParsedProvider) pair2.first).getPackageName(), ((ParsedProvider) pair2.first).getClassName());
+                    ComponentName.printShortString(
+                            printWriter,
+                            ((ParsedProvider) pair2.first).getPackageName(),
+                            ((ParsedProvider) pair2.first).getClassName());
                     if (i > 1) {
                         printWriter.print(" (");
                         printWriter.print(i);
@@ -628,14 +743,32 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                         ParsedService parsedService = (ParsedService) pair.first;
                         ParsedIntentInfo parsedIntentInfo = (ParsedIntentInfo) pair.second;
                         IntentFilter intentFilter = parsedIntentInfo.getIntentFilter();
-                        PackageSetting packageStateInternal = computer.getPackageStateInternal(parsedService.getPackageName());
-                        if (packageStateInternal != null && packageStateInternal.pkg != null && PackageStateUtils.isEnabledAndMatches(packageStateInternal, parsedService, j, i2)) {
-                            PackageUserStateInternal userStateOrDefault = packageStateInternal.getUserStateOrDefault(i2);
-                            ServiceInfo generateServiceInfo = PackageInfoUtils.generateServiceInfo(packageStateInternal.pkg, parsedService, j, userStateOrDefault, null, i2, packageStateInternal);
+                        PackageSetting packageStateInternal =
+                                computer.getPackageStateInternal(parsedService.getPackageName());
+                        if (packageStateInternal != null
+                                && packageStateInternal.pkg != null
+                                && PackageStateUtils.isEnabledAndMatches(
+                                        packageStateInternal, parsedService, j, i2)) {
+                            PackageUserStateInternal userStateOrDefault =
+                                    packageStateInternal.getUserStateOrDefault(i2);
+                            ServiceInfo generateServiceInfo =
+                                    PackageInfoUtils.generateServiceInfo(
+                                            packageStateInternal.pkg,
+                                            parsedService,
+                                            j,
+                                            userStateOrDefault,
+                                            null,
+                                            i2,
+                                            packageStateInternal);
                             if (generateServiceInfo != null) {
                                 boolean z = (16777216 & j) != 0;
                                 boolean z2 = (8388608 & j) != 0;
-                                if ((!z || intentFilter.isVisibleToInstantApp() || userStateOrDefault.isInstantApp()) && ((z2 || !userStateOrDefault.isInstantApp()) && (!userStateOrDefault.isInstantApp() || !packageStateInternal.getBoolean(2)))) {
+                                if ((!z
+                                                || intentFilter.isVisibleToInstantApp()
+                                                || userStateOrDefault.isInstantApp())
+                                        && ((z2 || !userStateOrDefault.isInstantApp())
+                                                && (!userStateOrDefault.isInstantApp()
+                                                        || !packageStateInternal.getBoolean(2)))) {
                                     resolveInfo = new ResolveInfo();
                                     resolveInfo.serviceInfo = generateServiceInfo;
                                     if ((64 & j) != 0) {
@@ -645,9 +778,11 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                                     resolveInfo.match = i;
                                     resolveInfo.isDefault = parsedIntentInfo.isHasDefault();
                                     resolveInfo.labelRes = parsedIntentInfo.getLabelRes();
-                                    resolveInfo.nonLocalizedLabel = parsedIntentInfo.getNonLocalizedLabel();
+                                    resolveInfo.nonLocalizedLabel =
+                                            parsedIntentInfo.getNonLocalizedLabel();
                                     resolveInfo.icon = parsedIntentInfo.getIcon();
-                                    resolveInfo.system = resolveInfo.serviceInfo.applicationInfo.isSystemApp();
+                                    resolveInfo.system =
+                                            resolveInfo.serviceInfo.applicationInfo.isSystemApp();
                                 }
                             }
                         }
@@ -660,12 +795,44 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                         ParsedProvider parsedProvider = (ParsedProvider) pair2.first;
                         ParsedIntentInfo parsedIntentInfo2 = (ParsedIntentInfo) pair2.second;
                         IntentFilter intentFilter2 = parsedIntentInfo2.getIntentFilter();
-                        PackageSetting packageStateInternal2 = computer.getPackageStateInternal(parsedProvider.getPackageName());
-                        if (packageStateInternal2 != null && packageStateInternal2.pkg != null && PackageStateUtils.isEnabledAndMatches(packageStateInternal2, parsedProvider, j, i2)) {
-                            PackageUserStateInternal userStateOrDefault2 = packageStateInternal2.getUserStateOrDefault(i2);
+                        PackageSetting packageStateInternal2 =
+                                computer.getPackageStateInternal(parsedProvider.getPackageName());
+                        if (packageStateInternal2 != null
+                                && packageStateInternal2.pkg != null
+                                && PackageStateUtils.isEnabledAndMatches(
+                                        packageStateInternal2, parsedProvider, j, i2)) {
+                            PackageUserStateInternal userStateOrDefault2 =
+                                    packageStateInternal2.getUserStateOrDefault(i2);
                             boolean z3 = (16777216 & j) != 0;
                             boolean z4 = (8388608 & j) != 0;
-                            if ((!z3 || intentFilter2.isVisibleToInstantApp() || userStateOrDefault2.isInstantApp()) && ((z4 || !userStateOrDefault2.isInstantApp()) && ((!userStateOrDefault2.isInstantApp() || !packageStateInternal2.getBoolean(2)) && (generateApplicationInfo = PackageInfoUtils.generateApplicationInfo(packageStateInternal2.pkg, j, userStateOrDefault2, i2, packageStateInternal2)) != null && (generateProviderInfo = PackageInfoUtils.generateProviderInfo(packageStateInternal2.pkg, parsedProvider, j, userStateOrDefault2, generateApplicationInfo, i2, packageStateInternal2)) != null))) {
+                            if ((!z3
+                                            || intentFilter2.isVisibleToInstantApp()
+                                            || userStateOrDefault2.isInstantApp())
+                                    && ((z4 || !userStateOrDefault2.isInstantApp())
+                                            && ((!userStateOrDefault2.isInstantApp()
+                                                            || !packageStateInternal2.getBoolean(2))
+                                                    && (generateApplicationInfo =
+                                                                    PackageInfoUtils
+                                                                            .generateApplicationInfo(
+                                                                                    packageStateInternal2
+                                                                                            .pkg,
+                                                                                    j,
+                                                                                    userStateOrDefault2,
+                                                                                    i2,
+                                                                                    packageStateInternal2))
+                                                            != null
+                                                    && (generateProviderInfo =
+                                                                    PackageInfoUtils
+                                                                            .generateProviderInfo(
+                                                                                    packageStateInternal2
+                                                                                            .pkg,
+                                                                                    parsedProvider,
+                                                                                    j,
+                                                                                    userStateOrDefault2,
+                                                                                    generateApplicationInfo,
+                                                                                    i2,
+                                                                                    packageStateInternal2))
+                                                            != null))) {
                                 resolveInfo2 = new ResolveInfo();
                                 resolveInfo2.providerInfo = generateProviderInfo;
                                 if ((64 & j) != 0) {
@@ -675,9 +842,11 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                                 resolveInfo2.match = i;
                                 resolveInfo2.isDefault = parsedIntentInfo2.isHasDefault();
                                 resolveInfo2.labelRes = parsedIntentInfo2.getLabelRes();
-                                resolveInfo2.nonLocalizedLabel = parsedIntentInfo2.getNonLocalizedLabel();
+                                resolveInfo2.nonLocalizedLabel =
+                                        parsedIntentInfo2.getNonLocalizedLabel();
                                 resolveInfo2.icon = parsedIntentInfo2.getIcon();
-                                resolveInfo2.system = resolveInfo2.providerInfo.applicationInfo.isSystemApp();
+                                resolveInfo2.system =
+                                        resolveInfo2.providerInfo.applicationInfo.isSystemApp();
                             }
                         }
                     }
@@ -709,7 +878,9 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
     }
 
     /* JADX WARN: Type inference failed for: r4v2, types: [com.android.server.pm.resolution.ComponentResolver$1] */
-    public ComponentResolver(UserManagerService userManagerService, final UserNeedsBadgingCache userNeedsBadgingCache) {
+    public ComponentResolver(
+            UserManagerService userManagerService,
+            final UserNeedsBadgingCache userNeedsBadgingCache) {
         super(userManagerService);
         this.mDeferProtectedFilters = true;
         this.mActivities = new ActivityIntentResolver(userManagerService, userNeedsBadgingCache);
@@ -718,23 +889,29 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         this.mServices = new ServiceIntentResolver(userManagerService, 0);
         this.mProvidersByAuthority = new ArrayMap();
         this.mDeferProtectedFilters = true;
-        this.mSnapshot = new SnapshotCache(this, this) { // from class: com.android.server.pm.resolution.ComponentResolver.1
-            @Override // com.android.server.utils.SnapshotCache
-            public final Object createSnapshot() {
-                ComponentResolverSnapshot componentResolverSnapshot;
-                PackageManagerTracedLock packageManagerTracedLock = ComponentResolver.this.mLock;
-                boolean z = PackageManagerService.DEBUG_COMPRESSION;
-                synchronized (packageManagerTracedLock) {
-                    try {
-                        componentResolverSnapshot = new ComponentResolverSnapshot(ComponentResolver.this, userNeedsBadgingCache);
-                    } catch (Throwable th) {
-                        boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
-                        throw th;
+        this.mSnapshot =
+                new SnapshotCache(
+                        this,
+                        this) { // from class: com.android.server.pm.resolution.ComponentResolver.1
+                    @Override // com.android.server.utils.SnapshotCache
+                    public final Object createSnapshot() {
+                        ComponentResolverSnapshot componentResolverSnapshot;
+                        PackageManagerTracedLock packageManagerTracedLock =
+                                ComponentResolver.this.mLock;
+                        boolean z = PackageManagerService.DEBUG_COMPRESSION;
+                        synchronized (packageManagerTracedLock) {
+                            try {
+                                componentResolverSnapshot =
+                                        new ComponentResolverSnapshot(
+                                                ComponentResolver.this, userNeedsBadgingCache);
+                            } catch (Throwable th) {
+                                boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
+                                throw th;
+                            }
+                        }
+                        return componentResolverSnapshot;
                     }
-                }
-                return componentResolverSnapshot;
-            }
-        };
+                };
     }
 
     public static void getIntentListSubset(List list, Function function, Iterator it) {
@@ -746,18 +923,20 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             Object next = it.next();
             Iterator it2 = arrayList.iterator();
             while (it2.hasNext()) {
-                Iterator it3 = (Iterator) function.apply(((ParsedIntentInfo) it2.next()).getIntentFilter());
+                Iterator it3 =
+                        (Iterator)
+                                function.apply(((ParsedIntentInfo) it2.next()).getIntentFilter());
                 while (it3 != null && it3.hasNext()) {
                     Object next2 = it3.next();
-                    if (next2 == null || !next2.equals(next)) {
-                    }
+                    if (next2 == null || !next2.equals(next)) {}
                 }
                 it2.remove();
             }
         }
     }
 
-    public final void addAllComponents(AndroidPackage androidPackage, boolean z, String str, Computer computer) {
+    public final void addAllComponents(
+            AndroidPackage androidPackage, boolean z, String str, Computer computer) {
         ParsedActivity parsedActivity;
         final int i = 0;
         final int i2 = 1;
@@ -768,11 +947,19 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             try {
                 int size = ArrayUtils.size(androidPackage.getActivities());
                 for (int i3 = 0; i3 < size; i3++) {
-                    this.mActivities.addActivity(computer, (ParsedActivity) androidPackage.getActivities().get(i3), "activity", arrayList);
+                    this.mActivities.addActivity(
+                            computer,
+                            (ParsedActivity) androidPackage.getActivities().get(i3),
+                            "activity",
+                            arrayList);
                 }
                 int size2 = ArrayUtils.size(androidPackage.getReceivers());
                 for (int i4 = 0; i4 < size2; i4++) {
-                    this.mReceivers.addActivity(computer, (ParsedActivity) androidPackage.getReceivers().get(i4), "receiver", null);
+                    this.mReceivers.addActivity(
+                            computer,
+                            (ParsedActivity) androidPackage.getReceivers().get(i4),
+                            "receiver",
+                            null);
                 }
                 addProvidersLocked(computer, androidPackage);
                 addServicesLocked(computer, androidPackage);
@@ -785,8 +972,11 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         boolean z4 = PackageManagerService.DEBUG_COMPRESSION;
         for (int size3 = arrayList.size() - 1; size3 >= 0; size3--) {
             Pair pair = (Pair) arrayList.get(size3);
-            PackageSetting disabledSystemPackage = computer.getDisabledSystemPackage(((ParsedActivity) pair.first).getPackageName());
-            AndroidPackage androidPackage2 = disabledSystemPackage == null ? null : disabledSystemPackage.pkg;
+            PackageSetting disabledSystemPackage =
+                    computer.getDisabledSystemPackage(
+                            ((ParsedActivity) pair.first).getPackageName());
+            AndroidPackage androidPackage2 =
+                    disabledSystemPackage == null ? null : disabledSystemPackage.pkg;
             List activities = androidPackage2 != null ? androidPackage2.getActivities() : null;
             ParsedActivity parsedActivity2 = (ParsedActivity) pair.first;
             ParsedIntentInfo parsedIntentInfo = (ParsedIntentInfo) pair.second;
@@ -803,7 +993,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                                 if (this.mProtectedFilters == null) {
                                     this.mProtectedFilters = new ArrayList();
                                 }
-                                ((ArrayList) this.mProtectedFilters).add(Pair.create(parsedActivity2, parsedIntentInfo));
+                                ((ArrayList) this.mProtectedFilters)
+                                        .add(Pair.create(parsedActivity2, parsedIntentInfo));
                             } else if (!packageName.equals(str)) {
                                 intentFilter.setPriority(0);
                             }
@@ -817,7 +1008,19 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                                 break;
                             }
                             parsedActivity = (ParsedActivity) it.next();
-                            if (parsedActivity.getName().equals(parsedActivity2.getName()) || parsedActivity.getName().equals(parsedActivity2.getTargetActivity()) || (parsedActivity.getTargetActivity() != null && (parsedActivity.getTargetActivity().equals(parsedActivity2.getName()) || parsedActivity.getTargetActivity().equals(parsedActivity2.getTargetActivity())))) {
+                            if (parsedActivity.getName().equals(parsedActivity2.getName())
+                                    || parsedActivity
+                                            .getName()
+                                            .equals(parsedActivity2.getTargetActivity())
+                                    || (parsedActivity.getTargetActivity() != null
+                                            && (parsedActivity
+                                                            .getTargetActivity()
+                                                            .equals(parsedActivity2.getName())
+                                                    || parsedActivity
+                                                            .getTargetActivity()
+                                                            .equals(
+                                                                    parsedActivity2
+                                                                            .getTargetActivity())))) {
                                 break;
                             }
                         }
@@ -827,44 +1030,52 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                             ArrayList arrayList2 = new ArrayList(parsedActivity.getIntents());
                             Iterator<String> actionsIterator2 = intentFilter.actionsIterator();
                             if (actionsIterator2 != null) {
-                                getIntentListSubset(arrayList2, new Function() { // from class: com.android.server.pm.resolution.ComponentResolver$$ExternalSyntheticLambda1
-                                    @Override // java.util.function.Function
-                                    public final Object apply(Object obj) {
-                                        IntentFilter intentFilter2 = (IntentFilter) obj;
-                                        switch (i) {
-                                            case 0:
-                                                return intentFilter2.actionsIterator();
-                                            case 1:
-                                                return intentFilter2.categoriesIterator();
-                                            case 2:
-                                                return intentFilter2.schemesIterator();
-                                            default:
-                                                return intentFilter2.authoritiesIterator();
-                                        }
-                                    }
-                                }, actionsIterator2);
+                                getIntentListSubset(
+                                        arrayList2,
+                                        new Function() { // from class:
+                                                         // com.android.server.pm.resolution.ComponentResolver$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                IntentFilter intentFilter2 = (IntentFilter) obj;
+                                                switch (i) {
+                                                    case 0:
+                                                        return intentFilter2.actionsIterator();
+                                                    case 1:
+                                                        return intentFilter2.categoriesIterator();
+                                                    case 2:
+                                                        return intentFilter2.schemesIterator();
+                                                    default:
+                                                        return intentFilter2.authoritiesIterator();
+                                                }
+                                            }
+                                        },
+                                        actionsIterator2);
                                 if (arrayList2.size() == 0) {
                                     intentFilter.setPriority(0);
                                 }
                             }
                             Iterator<String> categoriesIterator = intentFilter.categoriesIterator();
                             if (categoriesIterator != null) {
-                                getIntentListSubset(arrayList2, new Function() { // from class: com.android.server.pm.resolution.ComponentResolver$$ExternalSyntheticLambda1
-                                    @Override // java.util.function.Function
-                                    public final Object apply(Object obj) {
-                                        IntentFilter intentFilter2 = (IntentFilter) obj;
-                                        switch (i2) {
-                                            case 0:
-                                                return intentFilter2.actionsIterator();
-                                            case 1:
-                                                return intentFilter2.categoriesIterator();
-                                            case 2:
-                                                return intentFilter2.schemesIterator();
-                                            default:
-                                                return intentFilter2.authoritiesIterator();
-                                        }
-                                    }
-                                }, categoriesIterator);
+                                getIntentListSubset(
+                                        arrayList2,
+                                        new Function() { // from class:
+                                                         // com.android.server.pm.resolution.ComponentResolver$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                IntentFilter intentFilter2 = (IntentFilter) obj;
+                                                switch (i2) {
+                                                    case 0:
+                                                        return intentFilter2.actionsIterator();
+                                                    case 1:
+                                                        return intentFilter2.categoriesIterator();
+                                                    case 2:
+                                                        return intentFilter2.schemesIterator();
+                                                    default:
+                                                        return intentFilter2.authoritiesIterator();
+                                                }
+                                            }
+                                        },
+                                        categoriesIterator);
                                 if (arrayList2.size() == 0) {
                                     intentFilter.setPriority(0);
                                 }
@@ -872,52 +1083,66 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                             Iterator<String> schemesIterator = intentFilter.schemesIterator();
                             if (schemesIterator != null) {
                                 final int i5 = 2;
-                                getIntentListSubset(arrayList2, new Function() { // from class: com.android.server.pm.resolution.ComponentResolver$$ExternalSyntheticLambda1
-                                    @Override // java.util.function.Function
-                                    public final Object apply(Object obj) {
-                                        IntentFilter intentFilter2 = (IntentFilter) obj;
-                                        switch (i5) {
-                                            case 0:
-                                                return intentFilter2.actionsIterator();
-                                            case 1:
-                                                return intentFilter2.categoriesIterator();
-                                            case 2:
-                                                return intentFilter2.schemesIterator();
-                                            default:
-                                                return intentFilter2.authoritiesIterator();
-                                        }
-                                    }
-                                }, schemesIterator);
+                                getIntentListSubset(
+                                        arrayList2,
+                                        new Function() { // from class:
+                                                         // com.android.server.pm.resolution.ComponentResolver$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                IntentFilter intentFilter2 = (IntentFilter) obj;
+                                                switch (i5) {
+                                                    case 0:
+                                                        return intentFilter2.actionsIterator();
+                                                    case 1:
+                                                        return intentFilter2.categoriesIterator();
+                                                    case 2:
+                                                        return intentFilter2.schemesIterator();
+                                                    default:
+                                                        return intentFilter2.authoritiesIterator();
+                                                }
+                                            }
+                                        },
+                                        schemesIterator);
                                 if (arrayList2.size() == 0) {
                                     intentFilter.setPriority(0);
                                 }
                             }
-                            Iterator<IntentFilter.AuthorityEntry> authoritiesIterator = intentFilter.authoritiesIterator();
+                            Iterator<IntentFilter.AuthorityEntry> authoritiesIterator =
+                                    intentFilter.authoritiesIterator();
                             if (authoritiesIterator != null) {
                                 final int i6 = 3;
-                                getIntentListSubset(arrayList2, new Function() { // from class: com.android.server.pm.resolution.ComponentResolver$$ExternalSyntheticLambda1
-                                    @Override // java.util.function.Function
-                                    public final Object apply(Object obj) {
-                                        IntentFilter intentFilter2 = (IntentFilter) obj;
-                                        switch (i6) {
-                                            case 0:
-                                                return intentFilter2.actionsIterator();
-                                            case 1:
-                                                return intentFilter2.categoriesIterator();
-                                            case 2:
-                                                return intentFilter2.schemesIterator();
-                                            default:
-                                                return intentFilter2.authoritiesIterator();
-                                        }
-                                    }
-                                }, authoritiesIterator);
+                                getIntentListSubset(
+                                        arrayList2,
+                                        new Function() { // from class:
+                                                         // com.android.server.pm.resolution.ComponentResolver$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                IntentFilter intentFilter2 = (IntentFilter) obj;
+                                                switch (i6) {
+                                                    case 0:
+                                                        return intentFilter2.actionsIterator();
+                                                    case 1:
+                                                        return intentFilter2.categoriesIterator();
+                                                    case 2:
+                                                        return intentFilter2.schemesIterator();
+                                                    default:
+                                                        return intentFilter2.authoritiesIterator();
+                                                }
+                                            }
+                                        },
+                                        authoritiesIterator);
                                 if (arrayList2.size() == 0) {
                                     intentFilter.setPriority(0);
                                 }
                             }
                             int i7 = 0;
                             for (int size4 = arrayList2.size() - 1; size4 >= 0; size4--) {
-                                i7 = Math.max(i7, ((ParsedIntentInfo) arrayList2.get(size4)).getIntentFilter().getPriority());
+                                i7 =
+                                        Math.max(
+                                                i7,
+                                                ((ParsedIntentInfo) arrayList2.get(size4))
+                                                        .getIntentFilter()
+                                                        .getPriority());
                             }
                             if (intentFilter.getPriority() > i7) {
                                 intentFilter.setPriority(i7);
@@ -935,19 +1160,29 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
     public final void addProvidersLocked(Computer computer, AndroidPackage androidPackage) {
         int size = ArrayUtils.size(androidPackage.getProviders());
         for (int i = 0; i < size; i++) {
-            ParsedProviderImpl parsedProviderImpl = (ParsedProvider) androidPackage.getProviders().get(i);
+            ParsedProviderImpl parsedProviderImpl =
+                    (ParsedProvider) androidPackage.getProviders().get(i);
             ServiceIntentResolver serviceIntentResolver = this.mProviders;
-            if (((ArrayMap) serviceIntentResolver.mServices).containsKey(parsedProviderImpl.getComponentName())) {
-                Slog.w("PackageManager", "Provider " + parsedProviderImpl.getComponentName() + " already defined; ignoring");
+            if (((ArrayMap) serviceIntentResolver.mServices)
+                    .containsKey(parsedProviderImpl.getComponentName())) {
+                Slog.w(
+                        "PackageManager",
+                        "Provider "
+                                + parsedProviderImpl.getComponentName()
+                                + " already defined; ignoring");
             } else {
-                ((ArrayMap) serviceIntentResolver.mServices).put(parsedProviderImpl.getComponentName(), parsedProviderImpl);
+                ((ArrayMap) serviceIntentResolver.mServices)
+                        .put(parsedProviderImpl.getComponentName(), parsedProviderImpl);
                 int size2 = parsedProviderImpl.getIntents().size();
                 for (int i2 = 0; i2 < size2; i2++) {
-                    ParsedIntentInfo parsedIntentInfo = (ParsedIntentInfo) parsedProviderImpl.getIntents().get(i2);
+                    ParsedIntentInfo parsedIntentInfo =
+                            (ParsedIntentInfo) parsedProviderImpl.getIntents().get(i2);
                     if (!parsedIntentInfo.getIntentFilter().debugCheck()) {
                         Log.w("PackageManager", "==> For Provider " + parsedProviderImpl.getName());
                     }
-                    serviceIntentResolver.addFilter((PackageDataSnapshot) computer, Pair.create(parsedProviderImpl, parsedIntentInfo));
+                    serviceIntentResolver.addFilter(
+                            (PackageDataSnapshot) computer,
+                            Pair.create(parsedProviderImpl, parsedIntentInfo));
                 }
             }
             if (parsedProviderImpl.getAuthority() != null) {
@@ -955,26 +1190,36 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                 ComponentMutateUtils.setAuthority(parsedProviderImpl, (String) null);
                 for (int i3 = 0; i3 < split.length; i3++) {
                     if (i3 == 1 && parsedProviderImpl.isSyncable()) {
-                        ParsedProviderImpl parsedProviderImpl2 = new ParsedProviderImpl(parsedProviderImpl);
+                        ParsedProviderImpl parsedProviderImpl2 =
+                                new ParsedProviderImpl(parsedProviderImpl);
                         ComponentMutateUtils.setSyncable(parsedProviderImpl2, false);
                         parsedProviderImpl = parsedProviderImpl2;
                     }
                     if (this.mProvidersByAuthority.containsKey(split[i3])) {
-                        ParsedProvider parsedProvider = (ParsedProvider) this.mProvidersByAuthority.get(split[i3]);
-                        ComponentName componentName = (parsedProvider == null || parsedProvider.getComponentName() == null) ? null : parsedProvider.getComponentName();
-                        String packageName = componentName != null ? componentName.getPackageName() : "?";
+                        ParsedProvider parsedProvider =
+                                (ParsedProvider) this.mProvidersByAuthority.get(split[i3]);
+                        ComponentName componentName =
+                                (parsedProvider == null
+                                                || parsedProvider.getComponentName() == null)
+                                        ? null
+                                        : parsedProvider.getComponentName();
+                        String packageName =
+                                componentName != null ? componentName.getPackageName() : "?";
                         StringBuilder sb = new StringBuilder("Skipping provider name ");
                         sb.append(split[i3]);
                         sb.append(" (in package ");
                         sb.append(androidPackage.getPackageName());
                         sb.append("): name already used by ");
-                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, packageName, "PackageManager");
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                sb, packageName, "PackageManager");
                     } else {
                         this.mProvidersByAuthority.put(split[i3], parsedProviderImpl);
                         if (parsedProviderImpl.getAuthority() == null) {
                             ComponentMutateUtils.setAuthority(parsedProviderImpl, split[i3]);
                         } else {
-                            ComponentMutateUtils.setAuthority(parsedProviderImpl, parsedProviderImpl.getAuthority() + ";" + split[i3]);
+                            ComponentMutateUtils.setAuthority(
+                                    parsedProviderImpl,
+                                    parsedProviderImpl.getAuthority() + ";" + split[i3]);
                         }
                     }
                 }
@@ -987,14 +1232,18 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
         for (int i = 0; i < size; i++) {
             ParsedService parsedService = (ParsedService) androidPackage.getServices().get(i);
             ServiceIntentResolver serviceIntentResolver = this.mServices;
-            ((HashMap) serviceIntentResolver.mServices).put(parsedService.getComponentName(), parsedService);
+            ((HashMap) serviceIntentResolver.mServices)
+                    .put(parsedService.getComponentName(), parsedService);
             int size2 = parsedService.getIntents().size();
             for (int i2 = 0; i2 < size2; i2++) {
-                ParsedIntentInfo parsedIntentInfo = (ParsedIntentInfo) parsedService.getIntents().get(i2);
+                ParsedIntentInfo parsedIntentInfo =
+                        (ParsedIntentInfo) parsedService.getIntents().get(i2);
                 if (!parsedIntentInfo.getIntentFilter().debugCheck()) {
                     Log.w("PackageManager", "==> For Service " + parsedService.getName());
                 }
-                serviceIntentResolver.addFilter((PackageDataSnapshot) computer, Pair.create(parsedService, parsedIntentInfo));
+                serviceIntentResolver.addFilter(
+                        (PackageDataSnapshot) computer,
+                        Pair.create(parsedService, parsedIntentInfo));
             }
         }
     }
@@ -1006,15 +1255,31 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             try {
                 int size = ArrayUtils.size(androidPackage.getProviders());
                 for (int i = 0; i < size; i++) {
-                    ParsedProvider parsedProvider = (ParsedProvider) androidPackage.getProviders().get(i);
+                    ParsedProvider parsedProvider =
+                            (ParsedProvider) androidPackage.getProviders().get(i);
                     if (parsedProvider.getAuthority() != null) {
                         String[] split = parsedProvider.getAuthority().split(";");
                         for (int i2 = 0; i2 < split.length; i2++) {
                             if (this.mProvidersByAuthority.containsKey(split[i2])) {
-                                ParsedProvider parsedProvider2 = (ParsedProvider) this.mProvidersByAuthority.get(split[i2]);
-                                String packageName = (parsedProvider2 == null || parsedProvider2.getComponentName() == null) ? "?" : parsedProvider2.getComponentName().getPackageName();
+                                ParsedProvider parsedProvider2 =
+                                        (ParsedProvider) this.mProvidersByAuthority.get(split[i2]);
+                                String packageName =
+                                        (parsedProvider2 == null
+                                                        || parsedProvider2.getComponentName()
+                                                                == null)
+                                                ? "?"
+                                                : parsedProvider2
+                                                        .getComponentName()
+                                                        .getPackageName();
                                 if (!packageName.equals(androidPackage.getPackageName())) {
-                                    throw new PackageManagerException(-13, "Can't install because provider name " + split[i2] + " (in package " + androidPackage.getPackageName() + ") is already used by " + packageName);
+                                    throw new PackageManagerException(
+                                            -13,
+                                            "Can't install because provider name "
+                                                    + split[i2]
+                                                    + " (in package "
+                                                    + androidPackage.getPackageName()
+                                                    + ") is already used by "
+                                                    + packageName);
                                 }
                             }
                         }
@@ -1042,8 +1307,10 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
                         ArrayList arrayList = (ArrayList) list2;
                         for (int size = arrayList.size() - 1; size >= 0; size--) {
                             Pair pair = (Pair) arrayList.get(size);
-                            ParsedMainComponent parsedMainComponent = (ParsedMainComponent) pair.first;
-                            IntentFilter intentFilter = ((ParsedIntentInfo) pair.second).getIntentFilter();
+                            ParsedMainComponent parsedMainComponent =
+                                    (ParsedMainComponent) pair.first;
+                            IntentFilter intentFilter =
+                                    ((ParsedIntentInfo) pair.second).getIntentFilter();
                             String packageName = parsedMainComponent.getPackageName();
                             parsedMainComponent.getClassName();
                             if (!packageName.equals(str)) {
@@ -1073,7 +1340,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             ((ArrayMap) serviceIntentResolver.mServices).remove(parsedProvider.getComponentName());
             int size3 = parsedProvider.getIntents().size();
             for (int i3 = 0; i3 < size3; i3++) {
-                ParsedIntentInfo parsedIntentInfo = (ParsedIntentInfo) parsedProvider.getIntents().get(i3);
+                ParsedIntentInfo parsedIntentInfo =
+                        (ParsedIntentInfo) parsedProvider.getIntents().get(i3);
                 parsedIntentInfo.getIntentFilter();
                 serviceIntentResolver.removeFilter(Pair.create(parsedProvider, parsedIntentInfo));
             }
@@ -1097,7 +1365,8 @@ public final class ComponentResolver extends ComponentResolverLocked implements 
             ((HashMap) serviceIntentResolver2.mServices).remove(parsedService.getComponentName());
             int size6 = parsedService.getIntents().size();
             for (int i7 = 0; i7 < size6; i7++) {
-                ParsedIntentInfo parsedIntentInfo2 = (ParsedIntentInfo) parsedService.getIntents().get(i7);
+                ParsedIntentInfo parsedIntentInfo2 =
+                        (ParsedIntentInfo) parsedService.getIntents().get(i7);
                 parsedIntentInfo2.getIntentFilter();
                 serviceIntentResolver2.removeFilter(Pair.create(parsedService, parsedIntentInfo2));
             }

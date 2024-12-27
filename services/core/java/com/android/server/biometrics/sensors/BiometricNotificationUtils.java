@@ -16,14 +16,41 @@ public abstract class BiometricNotificationUtils {
     public static final Intent DISMISS_FRR_INTENT = new Intent("action_biometric_frr_dismiss");
     public static long sLastAlertTime;
 
-    public static void showNotificationHelper(Context context, String str, String str2, String str3, PendingIntent pendingIntent, Notification.Action action, Notification.Action action2, String str4, String str5, String str6, int i, boolean z, int i2) {
+    public static void showNotificationHelper(
+            Context context,
+            String str,
+            String str2,
+            String str3,
+            PendingIntent pendingIntent,
+            Notification.Action action,
+            Notification.Action action2,
+            String str4,
+            String str5,
+            String str6,
+            int i,
+            boolean z,
+            int i2) {
         Slog.v("BiometricNotificationUtils", " listenToDismissEvent = " + z);
         Intent intent = DISMISS_FRR_INTENT;
         UserHandle userHandle = UserHandle.CURRENT;
-        PendingIntent activityAsUser = PendingIntent.getActivityAsUser(context, 0, intent, 67108864, null, userHandle);
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(NotificationManager.class);
+        PendingIntent activityAsUser =
+                PendingIntent.getActivityAsUser(context, 0, intent, 67108864, null, userHandle);
+        NotificationManager notificationManager =
+                (NotificationManager) context.getSystemService(NotificationManager.class);
         NotificationChannel notificationChannel = new NotificationChannel(str5, str, 4);
-        Notification.Builder visibility = new Notification.Builder(context, str5).setSmallIcon(R.drawable.ic_lockscreen_silent_focused).setContentTitle(str2).setContentText(str3).setStyle(new Notification.BigTextStyle().bigText(str3)).setSubText(str).setOnlyAlertOnce(true).setLocalOnly(true).setAutoCancel(true).setCategory(str4).setContentIntent(pendingIntent).setVisibility(i);
+        Notification.Builder visibility =
+                new Notification.Builder(context, str5)
+                        .setSmallIcon(R.drawable.ic_lockscreen_silent_focused)
+                        .setContentTitle(str2)
+                        .setContentText(str3)
+                        .setStyle(new Notification.BigTextStyle().bigText(str3))
+                        .setSubText(str)
+                        .setOnlyAlertOnce(true)
+                        .setLocalOnly(true)
+                        .setAutoCancel(true)
+                        .setCategory(str4)
+                        .setContentIntent(pendingIntent)
+                        .setVisibility(i);
         if (i2 > 0) {
             visibility.setFlag(i2, true);
         }

@@ -6,6 +6,7 @@ import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
+
 import java.util.ArrayList;
 
 /* loaded from: classes2.dex */
@@ -28,19 +29,25 @@ final class ButtonDispatcher {
     private final ArrayList<View> mViews = new ArrayList<>();
     private float mAlpha = 1.0f;
     private int mVisibility = 0;
-    private final ValueAnimator.AnimatorUpdateListener mAlphaListener = new ValueAnimator.AnimatorUpdateListener() { // from class: android.inputmethodservice.navigationbar.ButtonDispatcher$$ExternalSyntheticLambda0
-        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-        public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-            ButtonDispatcher.this.lambda$new$0(valueAnimator);
-        }
-    };
-    private final AnimatorListenerAdapter mFadeListener = new AnimatorListenerAdapter() { // from class: android.inputmethodservice.navigationbar.ButtonDispatcher.1
-        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-        public void onAnimationEnd(Animator animation) {
-            ButtonDispatcher.this.mFadeAnimator = null;
-            ButtonDispatcher.this.setVisibility(ButtonDispatcher.this.getAlpha() == 1.0f ? 0 : 4);
-        }
-    };
+    private final ValueAnimator.AnimatorUpdateListener mAlphaListener =
+            new ValueAnimator.AnimatorUpdateListener() { // from class:
+                // android.inputmethodservice.navigationbar.ButtonDispatcher$$ExternalSyntheticLambda0
+                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    ButtonDispatcher.this.lambda$new$0(valueAnimator);
+                }
+            };
+    private final AnimatorListenerAdapter mFadeListener =
+            new AnimatorListenerAdapter() { // from class:
+                // android.inputmethodservice.navigationbar.ButtonDispatcher.1
+                @Override // android.animation.AnimatorListenerAdapter,
+                // android.animation.Animator.AnimatorListener
+                public void onAnimationEnd(Animator animation) {
+                    ButtonDispatcher.this.mFadeAnimator = null;
+                    ButtonDispatcher.this.setVisibility(
+                            ButtonDispatcher.this.getAlpha() == 1.0f ? 0 : 4);
+                }
+            };
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$0(ValueAnimator animation) {
@@ -270,6 +277,5 @@ final class ButtonDispatcher {
         }
     }
 
-    public void onDestroy() {
-    }
+    public void onDestroy() {}
 }

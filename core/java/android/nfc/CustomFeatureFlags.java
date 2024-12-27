@@ -10,7 +10,24 @@ import java.util.function.Predicate;
 /* loaded from: classes3.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_ENABLE_NFC_CHARGING, Flags.FLAG_ENABLE_NFC_MAINLINE, Flags.FLAG_ENABLE_NFC_READER_OPTION, Flags.FLAG_ENABLE_NFC_SET_DISCOVERY_TECH, Flags.FLAG_ENABLE_NFC_USER_RESTRICTION, Flags.FLAG_ENABLE_TAG_DETECTION_BROADCASTS, Flags.FLAG_NFC_OBSERVE_MODE, Flags.FLAG_NFC_OBSERVE_MODE_ST_SHIM, Flags.FLAG_NFC_OEM_EXTENSION, Flags.FLAG_NFC_READ_POLLING_LOOP, Flags.FLAG_NFC_READ_POLLING_LOOP_ST_SHIM, Flags.FLAG_NFC_SET_DEFAULT_DISC_TECH, Flags.FLAG_NFC_STATE_CHANGE, Flags.FLAG_NFC_VENDOR_CMD, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(
+                    Arrays.asList(
+                            Flags.FLAG_ENABLE_NFC_CHARGING,
+                            Flags.FLAG_ENABLE_NFC_MAINLINE,
+                            Flags.FLAG_ENABLE_NFC_READER_OPTION,
+                            Flags.FLAG_ENABLE_NFC_SET_DISCOVERY_TECH,
+                            Flags.FLAG_ENABLE_NFC_USER_RESTRICTION,
+                            Flags.FLAG_ENABLE_TAG_DETECTION_BROADCASTS,
+                            Flags.FLAG_NFC_OBSERVE_MODE,
+                            Flags.FLAG_NFC_OBSERVE_MODE_ST_SHIM,
+                            Flags.FLAG_NFC_OEM_EXTENSION,
+                            Flags.FLAG_NFC_READ_POLLING_LOOP,
+                            Flags.FLAG_NFC_READ_POLLING_LOOP_ST_SHIM,
+                            Flags.FLAG_NFC_SET_DEFAULT_DISC_TECH,
+                            Flags.FLAG_NFC_STATE_CHANGE,
+                            Flags.FLAG_NFC_VENDOR_CMD,
+                            ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,142 +35,184 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // android.nfc.FeatureFlags
     public boolean enableNfcCharging() {
-        return getValue(Flags.FLAG_ENABLE_NFC_CHARGING, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda2
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).enableNfcCharging();
-            }
-        });
+        return getValue(
+                Flags.FLAG_ENABLE_NFC_CHARGING,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda2
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).enableNfcCharging();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean enableNfcMainline() {
-        return getValue(Flags.FLAG_ENABLE_NFC_MAINLINE, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda5
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).enableNfcMainline();
-            }
-        });
+        return getValue(
+                Flags.FLAG_ENABLE_NFC_MAINLINE,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda5
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).enableNfcMainline();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean enableNfcReaderOption() {
-        return getValue(Flags.FLAG_ENABLE_NFC_READER_OPTION, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda11
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).enableNfcReaderOption();
-            }
-        });
+        return getValue(
+                Flags.FLAG_ENABLE_NFC_READER_OPTION,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda11
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).enableNfcReaderOption();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean enableNfcSetDiscoveryTech() {
-        return getValue(Flags.FLAG_ENABLE_NFC_SET_DISCOVERY_TECH, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda12
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).enableNfcSetDiscoveryTech();
-            }
-        });
+        return getValue(
+                Flags.FLAG_ENABLE_NFC_SET_DISCOVERY_TECH,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda12
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).enableNfcSetDiscoveryTech();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean enableNfcUserRestriction() {
-        return getValue(Flags.FLAG_ENABLE_NFC_USER_RESTRICTION, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).enableNfcUserRestriction();
-            }
-        });
+        return getValue(
+                Flags.FLAG_ENABLE_NFC_USER_RESTRICTION,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).enableNfcUserRestriction();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean enableTagDetectionBroadcasts() {
-        return getValue(Flags.FLAG_ENABLE_TAG_DETECTION_BROADCASTS, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda13
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).enableTagDetectionBroadcasts();
-            }
-        });
+        return getValue(
+                Flags.FLAG_ENABLE_TAG_DETECTION_BROADCASTS,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda13
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).enableTagDetectionBroadcasts();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean nfcObserveMode() {
-        return getValue(Flags.FLAG_NFC_OBSERVE_MODE, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda7
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).nfcObserveMode();
-            }
-        });
+        return getValue(
+                Flags.FLAG_NFC_OBSERVE_MODE,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda7
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).nfcObserveMode();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean nfcObserveModeStShim() {
-        return getValue(Flags.FLAG_NFC_OBSERVE_MODE_ST_SHIM, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda3
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).nfcObserveModeStShim();
-            }
-        });
+        return getValue(
+                Flags.FLAG_NFC_OBSERVE_MODE_ST_SHIM,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda3
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).nfcObserveModeStShim();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean nfcOemExtension() {
-        return getValue(Flags.FLAG_NFC_OEM_EXTENSION, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda9
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).nfcOemExtension();
-            }
-        });
+        return getValue(
+                Flags.FLAG_NFC_OEM_EXTENSION,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda9
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).nfcOemExtension();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean nfcReadPollingLoop() {
-        return getValue(Flags.FLAG_NFC_READ_POLLING_LOOP, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda6
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).nfcReadPollingLoop();
-            }
-        });
+        return getValue(
+                Flags.FLAG_NFC_READ_POLLING_LOOP,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda6
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).nfcReadPollingLoop();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean nfcReadPollingLoopStShim() {
-        return getValue(Flags.FLAG_NFC_READ_POLLING_LOOP_ST_SHIM, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda4
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).nfcReadPollingLoopStShim();
-            }
-        });
+        return getValue(
+                Flags.FLAG_NFC_READ_POLLING_LOOP_ST_SHIM,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda4
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).nfcReadPollingLoopStShim();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean nfcSetDefaultDiscTech() {
-        return getValue(Flags.FLAG_NFC_SET_DEFAULT_DISC_TECH, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda10
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).nfcSetDefaultDiscTech();
-            }
-        });
+        return getValue(
+                Flags.FLAG_NFC_SET_DEFAULT_DISC_TECH,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda10
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).nfcSetDefaultDiscTech();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean nfcStateChange() {
-        return getValue(Flags.FLAG_NFC_STATE_CHANGE, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda8
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).nfcStateChange();
-            }
-        });
+        return getValue(
+                Flags.FLAG_NFC_STATE_CHANGE,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda8
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).nfcStateChange();
+                    }
+                });
     }
 
     @Override // android.nfc.FeatureFlags
     public boolean nfcVendorCmd() {
-        return getValue(Flags.FLAG_NFC_VENDOR_CMD, new Predicate() { // from class: android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).nfcVendorCmd();
-            }
-        });
+        return getValue(
+                Flags.FLAG_NFC_VENDOR_CMD,
+                new Predicate() { // from class:
+                                  // android.nfc.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).nfcVendorCmd();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {
@@ -172,6 +231,20 @@ public class CustomFeatureFlags implements FeatureFlags {
     }
 
     public List<String> getFlagNames() {
-        return Arrays.asList(Flags.FLAG_ENABLE_NFC_CHARGING, Flags.FLAG_ENABLE_NFC_MAINLINE, Flags.FLAG_ENABLE_NFC_READER_OPTION, Flags.FLAG_ENABLE_NFC_SET_DISCOVERY_TECH, Flags.FLAG_ENABLE_NFC_USER_RESTRICTION, Flags.FLAG_ENABLE_TAG_DETECTION_BROADCASTS, Flags.FLAG_NFC_OBSERVE_MODE, Flags.FLAG_NFC_OBSERVE_MODE_ST_SHIM, Flags.FLAG_NFC_OEM_EXTENSION, Flags.FLAG_NFC_READ_POLLING_LOOP, Flags.FLAG_NFC_READ_POLLING_LOOP_ST_SHIM, Flags.FLAG_NFC_SET_DEFAULT_DISC_TECH, Flags.FLAG_NFC_STATE_CHANGE, Flags.FLAG_NFC_VENDOR_CMD);
+        return Arrays.asList(
+                Flags.FLAG_ENABLE_NFC_CHARGING,
+                Flags.FLAG_ENABLE_NFC_MAINLINE,
+                Flags.FLAG_ENABLE_NFC_READER_OPTION,
+                Flags.FLAG_ENABLE_NFC_SET_DISCOVERY_TECH,
+                Flags.FLAG_ENABLE_NFC_USER_RESTRICTION,
+                Flags.FLAG_ENABLE_TAG_DETECTION_BROADCASTS,
+                Flags.FLAG_NFC_OBSERVE_MODE,
+                Flags.FLAG_NFC_OBSERVE_MODE_ST_SHIM,
+                Flags.FLAG_NFC_OEM_EXTENSION,
+                Flags.FLAG_NFC_READ_POLLING_LOOP,
+                Flags.FLAG_NFC_READ_POLLING_LOOP_ST_SHIM,
+                Flags.FLAG_NFC_SET_DEFAULT_DISC_TECH,
+                Flags.FLAG_NFC_STATE_CHANGE,
+                Flags.FLAG_NFC_VENDOR_CMD);
     }
 }

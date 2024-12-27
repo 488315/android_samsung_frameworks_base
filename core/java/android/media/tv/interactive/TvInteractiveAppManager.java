@@ -11,8 +11,6 @@ import android.media.tv.TvContentRating;
 import android.media.tv.TvInputManager;
 import android.media.tv.TvRecordingInfo;
 import android.media.tv.TvTrackInfo;
-import android.media.tv.interactive.ITvInteractiveAppClient;
-import android.media.tv.interactive.ITvInteractiveAppManagerCallback;
 import android.net.Uri;
 import android.net.http.SslCertificate;
 import android.os.Bundle;
@@ -29,7 +27,9 @@ import android.view.InputEvent;
 import android.view.InputEventSender;
 import android.view.Surface;
 import android.view.View;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -39,7 +39,8 @@ import java.util.concurrent.Executor;
 
 /* loaded from: classes3.dex */
 public final class TvInteractiveAppManager {
-    public static final String ACTION_APP_LINK_COMMAND = "android.media.tv.interactive.action.APP_LINK_COMMAND";
+    public static final String ACTION_APP_LINK_COMMAND =
+            "android.media.tv.interactive.action.APP_LINK_COMMAND";
     public static final String APP_LINK_KEY_BACK_URI = "back_uri";
     public static final String APP_LINK_KEY_CLASS_NAME = "class_name";
     public static final String APP_LINK_KEY_COMMAND_TYPE = "command_type";
@@ -73,468 +74,605 @@ public final class TvInteractiveAppManager {
     private int mNextSeq;
     private final ITvInteractiveAppManager mService;
     private final int mUserId;
-    private final SparseArray<SessionCallbackRecord> mSessionCallbackRecordMap = new SparseArray<>();
+    private final SparseArray<SessionCallbackRecord> mSessionCallbackRecordMap =
+            new SparseArray<>();
     private final List<TvInteractiveAppCallbackRecord> mCallbackRecords = new ArrayList();
     private final Object mLock = new Object();
-    private final ITvInteractiveAppClient mClient = new ITvInteractiveAppClient.Stub() { // from class: android.media.tv.interactive.TvInteractiveAppManager.1
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onSessionCreated(String iAppServiceId, IBinder token, InputChannel channel, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for " + token);
-                    return;
+    private final ITvInteractiveAppClient mClient =
+            new ITvInteractiveAppClient
+                    .Stub() { // from class: android.media.tv.interactive.TvInteractiveAppManager.1
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onSessionCreated(
+                        String iAppServiceId, IBinder token, InputChannel channel, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for " + token);
+                            return;
+                        }
+                        Session session = null;
+                        if (token != null) {
+                            session =
+                                    new Session(
+                                            token,
+                                            channel,
+                                            TvInteractiveAppManager.this.mService,
+                                            TvInteractiveAppManager.this.mUserId,
+                                            seq,
+                                            TvInteractiveAppManager.this.mSessionCallbackRecordMap);
+                        } else {
+                            TvInteractiveAppManager.this.mSessionCallbackRecordMap.delete(seq);
+                        }
+                        record.postSessionCreated(session);
+                    }
                 }
-                Session session = null;
-                if (token != null) {
-                    session = new Session(token, channel, TvInteractiveAppManager.this.mService, TvInteractiveAppManager.this.mUserId, seq, TvInteractiveAppManager.this.mSessionCallbackRecordMap);
-                } else {
-                    TvInteractiveAppManager.this.mSessionCallbackRecordMap.delete(seq);
-                }
-                record.postSessionCreated(session);
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onSessionReleased(int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                TvInteractiveAppManager.this.mSessionCallbackRecordMap.delete(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq:" + seq);
-                } else {
-                    record.mSession.releaseInternal();
-                    record.postSessionReleased();
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onSessionReleased(int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.delete(seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq:" + seq);
+                        } else {
+                            record.mSession.releaseInternal();
+                            record.postSessionReleased();
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onLayoutSurface(int left, int top, int right, int bottom, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postLayoutSurface(left, top, right, bottom);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onLayoutSurface(int left, int top, int right, int bottom, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postLayoutSurface(left, top, right, bottom);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onBroadcastInfoRequest(BroadcastInfoRequest request, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postBroadcastInfoRequest(request);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onBroadcastInfoRequest(BroadcastInfoRequest request, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postBroadcastInfoRequest(request);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRemoveBroadcastInfo(int requestId, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRemoveBroadcastInfo(requestId);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRemoveBroadcastInfo(int requestId, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRemoveBroadcastInfo(requestId);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onCommandRequest(String cmdType, Bundle parameters, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postCommandRequest(cmdType, parameters);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onCommandRequest(String cmdType, Bundle parameters, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postCommandRequest(cmdType, parameters);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onTimeShiftCommandRequest(String cmdType, Bundle parameters, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postTimeShiftCommandRequest(cmdType, parameters);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onTimeShiftCommandRequest(String cmdType, Bundle parameters, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postTimeShiftCommandRequest(cmdType, parameters);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onSetVideoBounds(Rect rect, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postSetVideoBounds(rect);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onSetVideoBounds(Rect rect, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postSetVideoBounds(rect);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onAdRequest(AdRequest request, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postAdRequest(request);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onAdRequest(AdRequest request, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postAdRequest(request);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestCurrentVideoBounds(int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestCurrentVideoBounds();
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestCurrentVideoBounds(int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestCurrentVideoBounds();
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestCurrentChannelUri(int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestCurrentChannelUri();
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestCurrentChannelUri(int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestCurrentChannelUri();
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestCurrentChannelLcn(int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestCurrentChannelLcn();
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestCurrentChannelLcn(int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestCurrentChannelLcn();
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestStreamVolume(int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestStreamVolume();
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestStreamVolume(int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestStreamVolume();
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestTrackInfoList(int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestTrackInfoList();
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestTrackInfoList(int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestTrackInfoList();
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestSelectedTrackInfo(int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestSelectedTrackInfo();
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestSelectedTrackInfo(int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestSelectedTrackInfo();
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestCurrentTvInputId(int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestCurrentTvInputId();
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestCurrentTvInputId(int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestCurrentTvInputId();
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestTimeShiftMode(int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestTimeShiftMode();
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestTimeShiftMode(int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestTimeShiftMode();
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestAvailableSpeeds(int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestAvailableSpeeds();
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestAvailableSpeeds(int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestAvailableSpeeds();
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestStartRecording(String requestId, Uri programUri, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestStartRecording(requestId, programUri);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestStartRecording(String requestId, Uri programUri, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestStartRecording(requestId, programUri);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestStopRecording(String recordingId, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestStopRecording(recordingId);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestStopRecording(String recordingId, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestStopRecording(recordingId);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestScheduleRecording(String requestId, String inputId, Uri channelUri, Uri programUri, Bundle params, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestScheduleRecording(requestId, inputId, channelUri, programUri, params);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestScheduleRecording(
+                        String requestId,
+                        String inputId,
+                        Uri channelUri,
+                        Uri programUri,
+                        Bundle params,
+                        int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestScheduleRecording(
+                                    requestId, inputId, channelUri, programUri, params);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestScheduleRecording2(String requestId, String inputId, Uri channelUri, long startTime, long duration, int repeatDays, Bundle params, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestScheduleRecording(requestId, inputId, channelUri, startTime, duration, repeatDays, params);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestScheduleRecording2(
+                        String requestId,
+                        String inputId,
+                        Uri channelUri,
+                        long startTime,
+                        long duration,
+                        int repeatDays,
+                        Bundle params,
+                        int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestScheduleRecording(
+                                    requestId,
+                                    inputId,
+                                    channelUri,
+                                    startTime,
+                                    duration,
+                                    repeatDays,
+                                    params);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onSetTvRecordingInfo(String recordingId, TvRecordingInfo recordingInfo, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postSetTvRecordingInfo(recordingId, recordingInfo);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onSetTvRecordingInfo(
+                        String recordingId, TvRecordingInfo recordingInfo, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postSetTvRecordingInfo(recordingId, recordingInfo);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestTvRecordingInfo(String recordingId, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestTvRecordingInfo(recordingId);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestTvRecordingInfo(String recordingId, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestTvRecordingInfo(recordingId);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestTvRecordingInfoList(int type, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestTvRecordingInfoList(type);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestTvRecordingInfoList(int type, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestTvRecordingInfoList(type);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestSigning(String id, String algorithm, String alias, byte[] data, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestSigning(id, algorithm, alias, data);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestSigning(
+                        String id, String algorithm, String alias, byte[] data, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestSigning(id, algorithm, alias, data);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestSigning2(String id, String algorithm, String host, int port, byte[] data, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestSigning(id, algorithm, host, port, data);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestSigning2(
+                        String id, String algorithm, String host, int port, byte[] data, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestSigning(id, algorithm, host, port, data);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onRequestCertificate(String host, int port, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postRequestCertificate(host, port);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onRequestCertificate(String host, int port, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postRequestCertificate(host, port);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onSessionStateChanged(int state, int err, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postSessionStateChanged(state, err);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onSessionStateChanged(int state, int err, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postSessionStateChanged(state, err);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onBiInteractiveAppCreated(Uri biIAppUri, String biIAppId, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postBiInteractiveAppCreated(biIAppUri, biIAppId);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onBiInteractiveAppCreated(Uri biIAppUri, String biIAppId, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postBiInteractiveAppCreated(biIAppUri, biIAppId);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onTeletextAppStateChanged(int state, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postTeletextAppStateChanged(state);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onTeletextAppStateChanged(int state, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postTeletextAppStateChanged(state);
+                        }
+                    }
                 }
-            }
-        }
 
-        @Override // android.media.tv.interactive.ITvInteractiveAppClient
-        public void onAdBufferReady(AdBuffer buffer, int seq) {
-            synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
-                SessionCallbackRecord record = (SessionCallbackRecord) TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(seq);
-                if (record == null) {
-                    Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
-                } else {
-                    record.postAdBufferReady(buffer);
+                @Override // android.media.tv.interactive.ITvInteractiveAppClient
+                public void onAdBufferReady(AdBuffer buffer, int seq) {
+                    synchronized (TvInteractiveAppManager.this.mSessionCallbackRecordMap) {
+                        SessionCallbackRecord record =
+                                (SessionCallbackRecord)
+                                        TvInteractiveAppManager.this.mSessionCallbackRecordMap.get(
+                                                seq);
+                        if (record == null) {
+                            Log.e(TvInteractiveAppManager.TAG, "Callback not found for seq " + seq);
+                        } else {
+                            record.postAdBufferReady(buffer);
+                        }
+                    }
                 }
-            }
-        }
-    };
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ErrorCode {
-    }
+    public @interface ErrorCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InteractiveAppState {
-    }
+    public @interface InteractiveAppState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ServiceState {
-    }
+    public @interface ServiceState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TeletextAppState {
-    }
+    public @interface TeletextAppState {}
 
     public TvInteractiveAppManager(ITvInteractiveAppManager service, int userId) {
         this.mService = service;
         this.mUserId = userId;
-        ITvInteractiveAppManagerCallback managerCallback = new ITvInteractiveAppManagerCallback.Stub() { // from class: android.media.tv.interactive.TvInteractiveAppManager.2
-            @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-            public void onInteractiveAppServiceAdded(String iAppServiceId) {
-                synchronized (TvInteractiveAppManager.this.mLock) {
-                    for (TvInteractiveAppCallbackRecord record : TvInteractiveAppManager.this.mCallbackRecords) {
-                        record.postInteractiveAppServiceAdded(iAppServiceId);
+        ITvInteractiveAppManagerCallback managerCallback =
+                new ITvInteractiveAppManagerCallback
+                        .Stub() { // from class:
+                                  // android.media.tv.interactive.TvInteractiveAppManager.2
+                    @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
+                    public void onInteractiveAppServiceAdded(String iAppServiceId) {
+                        synchronized (TvInteractiveAppManager.this.mLock) {
+                            for (TvInteractiveAppCallbackRecord record :
+                                    TvInteractiveAppManager.this.mCallbackRecords) {
+                                record.postInteractiveAppServiceAdded(iAppServiceId);
+                            }
+                        }
                     }
-                }
-            }
 
-            @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-            public void onInteractiveAppServiceRemoved(String iAppServiceId) {
-                synchronized (TvInteractiveAppManager.this.mLock) {
-                    for (TvInteractiveAppCallbackRecord record : TvInteractiveAppManager.this.mCallbackRecords) {
-                        record.postInteractiveAppServiceRemoved(iAppServiceId);
+                    @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
+                    public void onInteractiveAppServiceRemoved(String iAppServiceId) {
+                        synchronized (TvInteractiveAppManager.this.mLock) {
+                            for (TvInteractiveAppCallbackRecord record :
+                                    TvInteractiveAppManager.this.mCallbackRecords) {
+                                record.postInteractiveAppServiceRemoved(iAppServiceId);
+                            }
+                        }
                     }
-                }
-            }
 
-            @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-            public void onInteractiveAppServiceUpdated(String iAppServiceId) {
-                synchronized (TvInteractiveAppManager.this.mLock) {
-                    for (TvInteractiveAppCallbackRecord record : TvInteractiveAppManager.this.mCallbackRecords) {
-                        record.postInteractiveAppServiceUpdated(iAppServiceId);
+                    @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
+                    public void onInteractiveAppServiceUpdated(String iAppServiceId) {
+                        synchronized (TvInteractiveAppManager.this.mLock) {
+                            for (TvInteractiveAppCallbackRecord record :
+                                    TvInteractiveAppManager.this.mCallbackRecords) {
+                                record.postInteractiveAppServiceUpdated(iAppServiceId);
+                            }
+                        }
                     }
-                }
-            }
 
-            @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-            public void onTvInteractiveAppServiceInfoUpdated(TvInteractiveAppServiceInfo iAppInfo) {
-                synchronized (TvInteractiveAppManager.this.mLock) {
-                    for (TvInteractiveAppCallbackRecord record : TvInteractiveAppManager.this.mCallbackRecords) {
-                        record.postTvInteractiveAppServiceInfoUpdated(iAppInfo);
+                    @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
+                    public void onTvInteractiveAppServiceInfoUpdated(
+                            TvInteractiveAppServiceInfo iAppInfo) {
+                        synchronized (TvInteractiveAppManager.this.mLock) {
+                            for (TvInteractiveAppCallbackRecord record :
+                                    TvInteractiveAppManager.this.mCallbackRecords) {
+                                record.postTvInteractiveAppServiceInfoUpdated(iAppInfo);
+                            }
+                        }
                     }
-                }
-            }
 
-            @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
-            public void onStateChanged(String iAppServiceId, int type, int state, int err) {
-                synchronized (TvInteractiveAppManager.this.mLock) {
-                    for (TvInteractiveAppCallbackRecord record : TvInteractiveAppManager.this.mCallbackRecords) {
-                        record.postStateChanged(iAppServiceId, type, state, err);
+                    @Override // android.media.tv.interactive.ITvInteractiveAppManagerCallback
+                    public void onStateChanged(String iAppServiceId, int type, int state, int err) {
+                        synchronized (TvInteractiveAppManager.this.mLock) {
+                            for (TvInteractiveAppCallbackRecord record :
+                                    TvInteractiveAppManager.this.mCallbackRecords) {
+                                record.postStateChanged(iAppServiceId, type, state, err);
+                            }
+                        }
                     }
-                }
-            }
-        };
+                };
         try {
             if (this.mService != null) {
                 this.mService.registerCallback(managerCallback, this.mUserId);
@@ -544,21 +682,17 @@ public final class TvInteractiveAppManager {
         }
     }
 
-    public static abstract class TvInteractiveAppCallback {
-        public void onInteractiveAppServiceAdded(String iAppServiceId) {
-        }
+    public abstract static class TvInteractiveAppCallback {
+        public void onInteractiveAppServiceAdded(String iAppServiceId) {}
 
-        public void onInteractiveAppServiceRemoved(String iAppServiceId) {
-        }
+        public void onInteractiveAppServiceRemoved(String iAppServiceId) {}
 
-        public void onInteractiveAppServiceUpdated(String iAppServiceId) {
-        }
+        public void onInteractiveAppServiceUpdated(String iAppServiceId) {}
 
-        public void onTvInteractiveAppServiceInfoUpdated(TvInteractiveAppServiceInfo iAppInfo) {
-        }
+        public void onTvInteractiveAppServiceInfoUpdated(TvInteractiveAppServiceInfo iAppInfo) {}
 
-        public void onTvInteractiveAppServiceStateChanged(String iAppServiceId, int type, int state, int err) {
-        }
+        public void onTvInteractiveAppServiceStateChanged(
+                String iAppServiceId, int type, int state, int err) {}
     }
 
     private static final class TvInteractiveAppCallbackRecord {
@@ -575,56 +709,76 @@ public final class TvInteractiveAppManager {
         }
 
         public void postInteractiveAppServiceAdded(final String iAppServiceId) {
-            this.mExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.TvInteractiveAppCallbackRecord.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    TvInteractiveAppCallbackRecord.this.mCallback.onInteractiveAppServiceAdded(iAppServiceId);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.TvInteractiveAppCallbackRecord.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            TvInteractiveAppCallbackRecord.this.mCallback
+                                    .onInteractiveAppServiceAdded(iAppServiceId);
+                        }
+                    });
         }
 
         public void postInteractiveAppServiceRemoved(final String iAppServiceId) {
-            this.mExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.TvInteractiveAppCallbackRecord.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    TvInteractiveAppCallbackRecord.this.mCallback.onInteractiveAppServiceRemoved(iAppServiceId);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.TvInteractiveAppCallbackRecord.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            TvInteractiveAppCallbackRecord.this.mCallback
+                                    .onInteractiveAppServiceRemoved(iAppServiceId);
+                        }
+                    });
         }
 
         public void postInteractiveAppServiceUpdated(final String iAppServiceId) {
-            this.mExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.TvInteractiveAppCallbackRecord.3
-                @Override // java.lang.Runnable
-                public void run() {
-                    TvInteractiveAppCallbackRecord.this.mCallback.onInteractiveAppServiceUpdated(iAppServiceId);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.TvInteractiveAppCallbackRecord.3
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            TvInteractiveAppCallbackRecord.this.mCallback
+                                    .onInteractiveAppServiceUpdated(iAppServiceId);
+                        }
+                    });
         }
 
-        public void postTvInteractiveAppServiceInfoUpdated(final TvInteractiveAppServiceInfo iAppInfo) {
-            this.mExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.TvInteractiveAppCallbackRecord.4
-                @Override // java.lang.Runnable
-                public void run() {
-                    TvInteractiveAppCallbackRecord.this.mCallback.onTvInteractiveAppServiceInfoUpdated(iAppInfo);
-                }
-            });
+        public void postTvInteractiveAppServiceInfoUpdated(
+                final TvInteractiveAppServiceInfo iAppInfo) {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.TvInteractiveAppCallbackRecord.4
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            TvInteractiveAppCallbackRecord.this.mCallback
+                                    .onTvInteractiveAppServiceInfoUpdated(iAppInfo);
+                        }
+                    });
         }
 
-        public void postStateChanged(final String iAppServiceId, final int type, final int state, final int err) {
-            this.mExecutor.execute(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.TvInteractiveAppCallbackRecord.5
-                @Override // java.lang.Runnable
-                public void run() {
-                    TvInteractiveAppCallbackRecord.this.mCallback.onTvInteractiveAppServiceStateChanged(iAppServiceId, type, state, err);
-                }
-            });
+        public void postStateChanged(
+                final String iAppServiceId, final int type, final int state, final int err) {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.TvInteractiveAppCallbackRecord.5
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            TvInteractiveAppCallbackRecord.this.mCallback
+                                    .onTvInteractiveAppServiceStateChanged(
+                                            iAppServiceId, type, state, err);
+                        }
+                    });
         }
     }
 
-    public void createSession(String iAppServiceId, int type, SessionCallback callback, Handler handler) {
+    public void createSession(
+            String iAppServiceId, int type, SessionCallback callback, Handler handler) {
         createSessionInternal(iAppServiceId, type, callback, handler);
     }
 
-    private void createSessionInternal(String iAppServiceId, int type, SessionCallback callback, Handler handler) {
+    private void createSessionInternal(
+            String iAppServiceId, int type, SessionCallback callback, Handler handler) {
         Preconditions.checkNotNull(iAppServiceId);
         Preconditions.checkNotNull(callback);
         Preconditions.checkNotNull(handler);
@@ -727,7 +881,13 @@ public final class TvInteractiveAppManager {
             void onFinishedInputEvent(Object obj, boolean z);
         }
 
-        private Session(IBinder token, InputChannel channel, ITvInteractiveAppManager service, int userId, int seq, SparseArray<SessionCallbackRecord> sessionCallbackRecordMap) {
+        private Session(
+                IBinder token,
+                InputChannel channel,
+                ITvInteractiveAppManager service,
+                int userId,
+                int seq,
+                SparseArray<SessionCallbackRecord> sessionCallbackRecordMap) {
             this.mHandler = new InputEventHandler(Looper.getMainLooper());
             this.mPendingEventPool = new Pools.SimplePool(20);
             this.mPendingEvents = new SparseArray<>(20);
@@ -957,7 +1117,8 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.notifyRecordingStarted(this.mToken, recordingId, requestId, this.mUserId);
+                this.mService.notifyRecordingStarted(
+                        this.mToken, recordingId, requestId, this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -993,7 +1154,8 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.sendCertificate(this.mToken, host, port, SslCertificate.saveState(cert), this.mUserId);
+                this.mService.sendCertificate(
+                        this.mToken, host, port, SslCertificate.saveState(cert), this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -1029,7 +1191,8 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.notifyTimeShiftStatusChanged(this.mToken, inputId, status, this.mUserId);
+                this.mService.notifyTimeShiftStatusChanged(
+                        this.mToken, inputId, status, this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -1041,7 +1204,8 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.notifyTimeShiftStartPositionChanged(this.mToken, inputId, timeMs, this.mUserId);
+                this.mService.notifyTimeShiftStartPositionChanged(
+                        this.mToken, inputId, timeMs, this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -1053,7 +1217,8 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.notifyTimeShiftCurrentPositionChanged(this.mToken, inputId, timeMs, this.mUserId);
+                this.mService.notifyTimeShiftCurrentPositionChanged(
+                        this.mToken, inputId, timeMs, this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -1065,7 +1230,8 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.notifyRecordingConnectionFailed(this.mToken, recordingId, inputId, this.mUserId);
+                this.mService.notifyRecordingConnectionFailed(
+                        this.mToken, recordingId, inputId, this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -1077,7 +1243,8 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.notifyRecordingDisconnected(this.mToken, recordingId, inputId, this.mUserId);
+                this.mService.notifyRecordingDisconnected(
+                        this.mToken, recordingId, inputId, this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -1089,7 +1256,8 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.notifyRecordingTuned(this.mToken, recordingId, channelUri, this.mUserId);
+                this.mService.notifyRecordingTuned(
+                        this.mToken, recordingId, channelUri, this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -1113,7 +1281,8 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.notifyRecordingScheduled(this.mToken, recordingId, requestId, this.mUserId);
+                this.mService.notifyRecordingScheduled(
+                        this.mToken, recordingId, requestId, this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -1142,7 +1311,8 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.createMediaView(this.mToken, view.getWindowToken(), frame, this.mUserId);
+                this.mService.createMediaView(
+                        this.mToken, view.getWindowToken(), frame, this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -1179,13 +1349,18 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.dispatchSurfaceChanged(this.mToken, format, width, height, this.mUserId);
+                this.mService.dispatchSurfaceChanged(
+                        this.mToken, format, width, height, this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
 
-        public int dispatchInputEvent(InputEvent event, Object token, FinishedInputEventCallback callback, Handler handler) {
+        public int dispatchInputEvent(
+                InputEvent event,
+                Object token,
+                FinishedInputEventCallback callback,
+                Handler handler) {
             Preconditions.checkNotNull(event);
             Preconditions.checkNotNull(callback);
             Preconditions.checkNotNull(handler);
@@ -1349,7 +1524,8 @@ public final class TvInteractiveAppManager {
                 return;
             }
             try {
-                this.mService.notifyContentBlocked(this.mToken, rating.flattenToString(), this.mUserId);
+                this.mService.notifyContentBlocked(
+                        this.mToken, rating.flattenToString(), this.mUserId);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -1409,7 +1585,11 @@ public final class TvInteractiveAppManager {
             }
         }
 
-        private PendingEvent obtainPendingEventLocked(InputEvent event, Object token, FinishedInputEventCallback callback, Handler handler) {
+        private PendingEvent obtainPendingEventLocked(
+                InputEvent event,
+                Object token,
+                FinishedInputEventCallback callback,
+                Handler handler) {
             PendingEvent p = this.mPendingEventPool.acquire();
             if (p == null) {
                 p = new PendingEvent();
@@ -1446,7 +1626,8 @@ public final class TvInteractiveAppManager {
         private int sendInputEventOnMainLooperLocked(PendingEvent p) {
             if (this.mInputChannel != null) {
                 if (this.mSender == null) {
-                    this.mSender = new TvInputEventSender(this.mInputChannel, this.mHandler.getLooper());
+                    this.mSender =
+                            new TvInputEventSender(this.mInputChannel, this.mHandler.getLooper());
                 }
                 InputEvent event = p.mEvent;
                 int seq = event.getSequenceNumber();
@@ -1457,7 +1638,12 @@ public final class TvInteractiveAppManager {
                     this.mHandler.sendMessageDelayed(msg, INPUT_SESSION_NOT_RESPONDING_TIMEOUT);
                     return -1;
                 }
-                Log.w(TvInteractiveAppManager.TAG, "Unable to send input event to session: " + this.mToken + " dropping:" + event);
+                Log.w(
+                        TvInteractiveAppManager.TAG,
+                        "Unable to send input event to session: "
+                                + this.mToken
+                                + " dropping:"
+                                + event);
                 return 0;
             }
             return 0;
@@ -1472,7 +1658,10 @@ public final class TvInteractiveAppManager {
                 PendingEvent p = this.mPendingEvents.valueAt(index);
                 this.mPendingEvents.removeAt(index);
                 if (timeout) {
-                    Log.w(TvInteractiveAppManager.TAG, "Timeout waiting for session to handle input event after 2500 ms: " + this.mToken);
+                    Log.w(
+                            TvInteractiveAppManager.TAG,
+                            "Timeout waiting for session to handle input event after 2500 ms: "
+                                    + this.mToken);
                 } else {
                     this.mHandler.removeMessages(2, p);
                 }
@@ -1499,7 +1688,8 @@ public final class TvInteractiveAppManager {
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 1:
-                        Session.this.sendInputEventAndReportResultOnMainLooper((PendingEvent) msg.obj);
+                        Session.this.sendInputEventAndReportResultOnMainLooper(
+                                (PendingEvent) msg.obj);
                         break;
                     case 2:
                         Session.this.finishedInputEvent(msg.arg1, false, true);
@@ -1529,8 +1719,7 @@ public final class TvInteractiveAppManager {
             public Object mEventToken;
             public boolean mHandled;
 
-            private PendingEvent() {
-            }
+            private PendingEvent() {}
 
             public void recycle() {
                 this.mEvent = null;
@@ -1562,385 +1751,524 @@ public final class TvInteractiveAppManager {
 
         void postSessionCreated(final Session session) {
             this.mSession = session;
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onSessionCreated(session);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onSessionCreated(session);
+                        }
+                    });
         }
 
         void postSessionReleased() {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onSessionReleased(SessionCallbackRecord.this.mSession);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onSessionReleased(
+                                    SessionCallbackRecord.this.mSession);
+                        }
+                    });
         }
 
         void postLayoutSurface(final int left, final int top, final int right, final int bottom) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.3
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onLayoutSurface(SessionCallbackRecord.this.mSession, left, top, right, bottom);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.3
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onLayoutSurface(
+                                    SessionCallbackRecord.this.mSession, left, top, right, bottom);
+                        }
+                    });
         }
 
         void postBroadcastInfoRequest(final BroadcastInfoRequest request) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.4
-                @Override // java.lang.Runnable
-                public void run() {
-                    if (SessionCallbackRecord.this.mSession.getInputSession() != null) {
-                        SessionCallbackRecord.this.mSession.getInputSession().requestBroadcastInfo(request);
-                    }
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.4
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            if (SessionCallbackRecord.this.mSession.getInputSession() != null) {
+                                SessionCallbackRecord.this
+                                        .mSession
+                                        .getInputSession()
+                                        .requestBroadcastInfo(request);
+                            }
+                        }
+                    });
         }
 
         void postRemoveBroadcastInfo(final int requestId) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.5
-                @Override // java.lang.Runnable
-                public void run() {
-                    if (SessionCallbackRecord.this.mSession.getInputSession() != null) {
-                        SessionCallbackRecord.this.mSession.getInputSession().removeBroadcastInfo(requestId);
-                    }
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.5
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            if (SessionCallbackRecord.this.mSession.getInputSession() != null) {
+                                SessionCallbackRecord.this
+                                        .mSession
+                                        .getInputSession()
+                                        .removeBroadcastInfo(requestId);
+                            }
+                        }
+                    });
         }
 
         void postCommandRequest(final String cmdType, final Bundle parameters) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.6
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onCommandRequest(SessionCallbackRecord.this.mSession, cmdType, parameters);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.6
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onCommandRequest(
+                                    SessionCallbackRecord.this.mSession, cmdType, parameters);
+                        }
+                    });
         }
 
         void postTimeShiftCommandRequest(final String cmdType, final Bundle parameters) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.7
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onTimeShiftCommandRequest(SessionCallbackRecord.this.mSession, cmdType, parameters);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.7
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onTimeShiftCommandRequest(
+                                    SessionCallbackRecord.this.mSession, cmdType, parameters);
+                        }
+                    });
         }
 
         void postSetVideoBounds(final Rect rect) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.8
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onSetVideoBounds(SessionCallbackRecord.this.mSession, rect);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.8
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onSetVideoBounds(
+                                    SessionCallbackRecord.this.mSession, rect);
+                        }
+                    });
         }
 
         void postRequestCurrentVideoBounds() {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.9
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestCurrentVideoBounds(SessionCallbackRecord.this.mSession);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.9
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestCurrentVideoBounds(
+                                    SessionCallbackRecord.this.mSession);
+                        }
+                    });
         }
 
         void postRequestCurrentChannelUri() {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.10
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestCurrentChannelUri(SessionCallbackRecord.this.mSession);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.10
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestCurrentChannelUri(
+                                    SessionCallbackRecord.this.mSession);
+                        }
+                    });
         }
 
         void postRequestCurrentChannelLcn() {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.11
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestCurrentChannelLcn(SessionCallbackRecord.this.mSession);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.11
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestCurrentChannelLcn(
+                                    SessionCallbackRecord.this.mSession);
+                        }
+                    });
         }
 
         void postRequestStreamVolume() {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.12
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestStreamVolume(SessionCallbackRecord.this.mSession);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.12
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestStreamVolume(
+                                    SessionCallbackRecord.this.mSession);
+                        }
+                    });
         }
 
         void postRequestTrackInfoList() {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.13
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestTrackInfoList(SessionCallbackRecord.this.mSession);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.13
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestTrackInfoList(
+                                    SessionCallbackRecord.this.mSession);
+                        }
+                    });
         }
 
         void postRequestSelectedTrackInfo() {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.14
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestSelectedTrackInfo(SessionCallbackRecord.this.mSession);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.14
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestSelectedTrackInfo(
+                                    SessionCallbackRecord.this.mSession);
+                        }
+                    });
         }
 
         void postRequestCurrentTvInputId() {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.15
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestCurrentTvInputId(SessionCallbackRecord.this.mSession);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.15
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestCurrentTvInputId(
+                                    SessionCallbackRecord.this.mSession);
+                        }
+                    });
         }
 
         void postRequestTimeShiftMode() {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.16
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestTimeShiftMode(SessionCallbackRecord.this.mSession);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.16
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestTimeShiftMode(
+                                    SessionCallbackRecord.this.mSession);
+                        }
+                    });
         }
 
         void postRequestAvailableSpeeds() {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.17
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestAvailableSpeeds(SessionCallbackRecord.this.mSession);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.17
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestAvailableSpeeds(
+                                    SessionCallbackRecord.this.mSession);
+                        }
+                    });
         }
 
         void postRequestStartRecording(final String requestId, final Uri programUri) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.18
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestStartRecording(SessionCallbackRecord.this.mSession, requestId, programUri);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.18
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestStartRecording(
+                                    SessionCallbackRecord.this.mSession, requestId, programUri);
+                        }
+                    });
         }
 
         void postRequestStopRecording(final String recordingId) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.19
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestStopRecording(SessionCallbackRecord.this.mSession, recordingId);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.19
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestStopRecording(
+                                    SessionCallbackRecord.this.mSession, recordingId);
+                        }
+                    });
         }
 
-        void postRequestScheduleRecording(final String requestId, final String inputId, final Uri channelUri, final Uri programUri, final Bundle params) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.20
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestScheduleRecording(SessionCallbackRecord.this.mSession, requestId, inputId, channelUri, programUri, params);
-                }
-            });
+        void postRequestScheduleRecording(
+                final String requestId,
+                final String inputId,
+                final Uri channelUri,
+                final Uri programUri,
+                final Bundle params) {
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.20
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestScheduleRecording(
+                                    SessionCallbackRecord.this.mSession,
+                                    requestId,
+                                    inputId,
+                                    channelUri,
+                                    programUri,
+                                    params);
+                        }
+                    });
         }
 
-        void postRequestScheduleRecording(final String requestId, final String inputId, final Uri channelUri, final long startTime, final long duration, final int repeatDays, final Bundle params) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.21
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestScheduleRecording(SessionCallbackRecord.this.mSession, requestId, inputId, channelUri, startTime, duration, repeatDays, params);
-                }
-            });
+        void postRequestScheduleRecording(
+                final String requestId,
+                final String inputId,
+                final Uri channelUri,
+                final long startTime,
+                final long duration,
+                final int repeatDays,
+                final Bundle params) {
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.21
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestScheduleRecording(
+                                    SessionCallbackRecord.this.mSession,
+                                    requestId,
+                                    inputId,
+                                    channelUri,
+                                    startTime,
+                                    duration,
+                                    repeatDays,
+                                    params);
+                        }
+                    });
         }
 
-        void postRequestSigning(final String id, final String algorithm, final String alias, final byte[] data) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.22
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestSigning(SessionCallbackRecord.this.mSession, id, algorithm, alias, data);
-                }
-            });
+        void postRequestSigning(
+                final String id, final String algorithm, final String alias, final byte[] data) {
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.22
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestSigning(
+                                    SessionCallbackRecord.this.mSession,
+                                    id,
+                                    algorithm,
+                                    alias,
+                                    data);
+                        }
+                    });
         }
 
-        void postRequestSigning(final String id, final String algorithm, final String host, final int port, final byte[] data) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.23
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestSigning(SessionCallbackRecord.this.mSession, id, algorithm, host, port, data);
-                }
-            });
+        void postRequestSigning(
+                final String id,
+                final String algorithm,
+                final String host,
+                final int port,
+                final byte[] data) {
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.23
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestSigning(
+                                    SessionCallbackRecord.this.mSession,
+                                    id,
+                                    algorithm,
+                                    host,
+                                    port,
+                                    data);
+                        }
+                    });
         }
 
         void postRequestCertificate(final String host, final int port) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.24
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestCertificate(SessionCallbackRecord.this.mSession, host, port);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.24
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestCertificate(
+                                    SessionCallbackRecord.this.mSession, host, port);
+                        }
+                    });
         }
 
         void postRequestTvRecordingInfo(final String recordingId) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.25
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestTvRecordingInfo(SessionCallbackRecord.this.mSession, recordingId);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.25
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onRequestTvRecordingInfo(
+                                    SessionCallbackRecord.this.mSession, recordingId);
+                        }
+                    });
         }
 
         void postRequestTvRecordingInfoList(final int type) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.26
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onRequestTvRecordingInfoList(SessionCallbackRecord.this.mSession, type);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.26
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback
+                                    .onRequestTvRecordingInfoList(
+                                            SessionCallbackRecord.this.mSession, type);
+                        }
+                    });
         }
 
         void postSetTvRecordingInfo(final String recordingId, final TvRecordingInfo recordingInfo) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.27
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onSetTvRecordingInfo(SessionCallbackRecord.this.mSession, recordingId, recordingInfo);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.27
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onSetTvRecordingInfo(
+                                    SessionCallbackRecord.this.mSession,
+                                    recordingId,
+                                    recordingInfo);
+                        }
+                    });
         }
 
         void postAdRequest(final AdRequest request) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.28
-                @Override // java.lang.Runnable
-                public void run() {
-                    if (SessionCallbackRecord.this.mSession.getInputSession() != null) {
-                        SessionCallbackRecord.this.mSession.getInputSession().requestAd(request);
-                    }
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.28
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            if (SessionCallbackRecord.this.mSession.getInputSession() != null) {
+                                SessionCallbackRecord.this
+                                        .mSession
+                                        .getInputSession()
+                                        .requestAd(request);
+                            }
+                        }
+                    });
         }
 
         void postSessionStateChanged(final int state, final int err) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.29
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onSessionStateChanged(SessionCallbackRecord.this.mSession, state, err);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.29
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onSessionStateChanged(
+                                    SessionCallbackRecord.this.mSession, state, err);
+                        }
+                    });
         }
 
         void postBiInteractiveAppCreated(final Uri biIAppUri, final String biIAppId) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.30
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onBiInteractiveAppCreated(SessionCallbackRecord.this.mSession, biIAppUri, biIAppId);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.30
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onBiInteractiveAppCreated(
+                                    SessionCallbackRecord.this.mSession, biIAppUri, biIAppId);
+                        }
+                    });
         }
 
         void postTeletextAppStateChanged(final int state) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.31
-                @Override // java.lang.Runnable
-                public void run() {
-                    SessionCallbackRecord.this.mSessionCallback.onTeletextAppStateChanged(SessionCallbackRecord.this.mSession, state);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.31
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SessionCallbackRecord.this.mSessionCallback.onTeletextAppStateChanged(
+                                    SessionCallbackRecord.this.mSession, state);
+                        }
+                    });
         }
 
         void postAdBufferReady(final AdBuffer buffer) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.32
-                @Override // java.lang.Runnable
-                public void run() {
-                    if (SessionCallbackRecord.this.mSession.getInputSession() != null) {
-                        SessionCallbackRecord.this.mSession.getInputSession().notifyAdBufferReady(buffer);
-                    }
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.media.tv.interactive.TvInteractiveAppManager.SessionCallbackRecord.32
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            if (SessionCallbackRecord.this.mSession.getInputSession() != null) {
+                                SessionCallbackRecord.this
+                                        .mSession
+                                        .getInputSession()
+                                        .notifyAdBufferReady(buffer);
+                            }
+                        }
+                    });
         }
     }
 
-    public static abstract class SessionCallback {
-        public void onSessionCreated(Session session) {
-        }
+    public abstract static class SessionCallback {
+        public void onSessionCreated(Session session) {}
 
-        public void onSessionReleased(Session session) {
-        }
+        public void onSessionReleased(Session session) {}
 
-        public void onLayoutSurface(Session session, int left, int top, int right, int bottom) {
-        }
+        public void onLayoutSurface(Session session, int left, int top, int right, int bottom) {}
 
-        public void onCommandRequest(Session session, String cmdType, Bundle parameters) {
-        }
+        public void onCommandRequest(Session session, String cmdType, Bundle parameters) {}
 
-        public void onTimeShiftCommandRequest(Session session, String cmdType, Bundle parameters) {
-        }
+        public void onTimeShiftCommandRequest(Session session, String cmdType, Bundle parameters) {}
 
-        public void onSetVideoBounds(Session session, Rect rect) {
-        }
+        public void onSetVideoBounds(Session session, Rect rect) {}
 
-        public void onRequestCurrentVideoBounds(Session session) {
-        }
+        public void onRequestCurrentVideoBounds(Session session) {}
 
-        public void onRequestCurrentChannelUri(Session session) {
-        }
+        public void onRequestCurrentChannelUri(Session session) {}
 
-        public void onRequestCurrentChannelLcn(Session session) {
-        }
+        public void onRequestCurrentChannelLcn(Session session) {}
 
-        public void onRequestStreamVolume(Session session) {
-        }
+        public void onRequestStreamVolume(Session session) {}
 
-        public void onRequestTrackInfoList(Session session) {
-        }
+        public void onRequestTrackInfoList(Session session) {}
 
-        public void onRequestSelectedTrackInfo(Session session) {
-        }
+        public void onRequestSelectedTrackInfo(Session session) {}
 
-        public void onRequestCurrentTvInputId(Session session) {
-        }
+        public void onRequestCurrentTvInputId(Session session) {}
 
-        public void onRequestTimeShiftMode(Session session) {
-        }
+        public void onRequestTimeShiftMode(Session session) {}
 
-        public void onRequestAvailableSpeeds(Session session) {
-        }
+        public void onRequestAvailableSpeeds(Session session) {}
 
-        public void onRequestStartRecording(Session session, String requestId, Uri programUri) {
-        }
+        public void onRequestStartRecording(Session session, String requestId, Uri programUri) {}
 
-        public void onRequestStopRecording(Session session, String recordingId) {
-        }
+        public void onRequestStopRecording(Session session, String recordingId) {}
 
-        public void onRequestScheduleRecording(Session session, String requestId, String inputId, Uri channelUri, Uri programUri, Bundle params) {
-        }
+        public void onRequestScheduleRecording(
+                Session session,
+                String requestId,
+                String inputId,
+                Uri channelUri,
+                Uri programUri,
+                Bundle params) {}
 
-        public void onRequestScheduleRecording(Session session, String requestId, String inputId, Uri channelUri, long startTime, long duration, int repeatDays, Bundle params) {
-        }
+        public void onRequestScheduleRecording(
+                Session session,
+                String requestId,
+                String inputId,
+                Uri channelUri,
+                long startTime,
+                long duration,
+                int repeatDays,
+                Bundle params) {}
 
-        public void onSetTvRecordingInfo(Session session, String recordingId, TvRecordingInfo recordingInfo) {
-        }
+        public void onSetTvRecordingInfo(
+                Session session, String recordingId, TvRecordingInfo recordingInfo) {}
 
-        public void onRequestTvRecordingInfo(Session session, String recordingId) {
-        }
+        public void onRequestTvRecordingInfo(Session session, String recordingId) {}
 
-        public void onRequestTvRecordingInfoList(Session session, int type) {
-        }
+        public void onRequestTvRecordingInfoList(Session session, int type) {}
 
-        public void onRequestSigning(Session session, String signingId, String algorithm, String alias, byte[] data) {
-        }
+        public void onRequestSigning(
+                Session session, String signingId, String algorithm, String alias, byte[] data) {}
 
-        public void onRequestSigning(Session session, String signingId, String algorithm, String host, int port, byte[] data) {
-        }
+        public void onRequestSigning(
+                Session session,
+                String signingId,
+                String algorithm,
+                String host,
+                int port,
+                byte[] data) {}
 
-        public void onRequestCertificate(Session session, String host, int port) {
-        }
+        public void onRequestCertificate(Session session, String host, int port) {}
 
-        public void onSessionStateChanged(Session session, int state, int err) {
-        }
+        public void onSessionStateChanged(Session session, int state, int err) {}
 
-        public void onBiInteractiveAppCreated(Session session, Uri biIAppUri, String biIAppId) {
-        }
+        public void onBiInteractiveAppCreated(Session session, Uri biIAppUri, String biIAppId) {}
 
-        public void onTeletextAppStateChanged(Session session, int state) {
-        }
+        public void onTeletextAppStateChanged(Session session, int state) {}
     }
 }

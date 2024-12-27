@@ -3,24 +3,27 @@ package android.hardware.input;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public final class VirtualMouseScrollEvent implements Parcelable {
-    public static final Parcelable.Creator<VirtualMouseScrollEvent> CREATOR = new Parcelable.Creator<VirtualMouseScrollEvent>() { // from class: android.hardware.input.VirtualMouseScrollEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualMouseScrollEvent createFromParcel(Parcel source) {
-            return new VirtualMouseScrollEvent(source);
-        }
+    public static final Parcelable.Creator<VirtualMouseScrollEvent> CREATOR =
+            new Parcelable.Creator<VirtualMouseScrollEvent>() { // from class:
+                // android.hardware.input.VirtualMouseScrollEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualMouseScrollEvent createFromParcel(Parcel source) {
+                    return new VirtualMouseScrollEvent(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualMouseScrollEvent[] newArray(int size) {
-            return new VirtualMouseScrollEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualMouseScrollEvent[] newArray(int size) {
+                    return new VirtualMouseScrollEvent[size];
+                }
+            };
     private final long mEventTimeNanos;
     private final float mXAxisMovement;
     private final float mYAxisMovement;
@@ -50,7 +53,12 @@ public final class VirtualMouseScrollEvent implements Parcelable {
     }
 
     public String toString() {
-        return "VirtualMouseScrollEvent( x=" + this.mXAxisMovement + " y=" + this.mYAxisMovement + " eventTime(ns)=" + this.mEventTimeNanos;
+        return "VirtualMouseScrollEvent( x="
+                + this.mXAxisMovement
+                + " y="
+                + this.mYAxisMovement
+                + " eventTime(ns)="
+                + this.mEventTimeNanos;
     }
 
     public float getXAxisMovement() {
@@ -71,7 +79,8 @@ public final class VirtualMouseScrollEvent implements Parcelable {
         private float mYAxisMovement;
 
         public VirtualMouseScrollEvent build() {
-            return new VirtualMouseScrollEvent(this.mXAxisMovement, this.mYAxisMovement, this.mEventTimeNanos);
+            return new VirtualMouseScrollEvent(
+                    this.mXAxisMovement, this.mYAxisMovement, this.mEventTimeNanos);
         }
 
         public Builder setXAxisMovement(float xAxisMovement) {

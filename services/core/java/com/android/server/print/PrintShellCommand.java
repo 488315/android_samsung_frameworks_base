@@ -4,7 +4,9 @@ import android.os.RemoteException;
 import android.os.ShellCommand;
 import android.os.UserHandle;
 import android.print.IPrintManager;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,7 +28,11 @@ public final class PrintShellCommand extends ShellCommand {
                 return -1;
             }
             try {
-                getOutPrintWriter().println(Boolean.toString(this.mService.getBindInstantServiceAllowed(parseUserId.intValue())));
+                getOutPrintWriter()
+                        .println(
+                                Boolean.toString(
+                                        this.mService.getBindInstantServiceAllowed(
+                                                parseUserId.intValue())));
                 return 0;
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
@@ -41,7 +47,8 @@ public final class PrintShellCommand extends ShellCommand {
             String nextArgRequired = getNextArgRequired();
             if (nextArgRequired != null) {
                 try {
-                    this.mService.setBindInstantServiceAllowed(parseUserId2.intValue(), Boolean.parseBoolean(nextArgRequired));
+                    this.mService.setBindInstantServiceAllowed(
+                            parseUserId2.intValue(), Boolean.parseBoolean(nextArgRequired));
                     return 0;
                 } catch (RemoteException e2) {
                     e2.rethrowFromSystemServer();
@@ -59,7 +66,11 @@ public final class PrintShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println("  set-bind-instant-service-allowed [--user <USER_ID>] true|false ");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Set whether binding to print services provided by instant apps is allowed.", "  get-bind-instant-service-allowed [--user <USER_ID>]", "    Get whether binding to print services provided by instant apps is allowed.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Set whether binding to print services provided by instant apps is allowed.",
+                "  get-bind-instant-service-allowed [--user <USER_ID>]",
+                "    Get whether binding to print services provided by instant apps is allowed.");
     }
 
     public final Integer parseUserId() {

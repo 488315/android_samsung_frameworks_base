@@ -15,15 +15,21 @@ import android.os.ResultReceiver;
 public interface ISessionCallback extends IInterface {
     void onAdjustVolume(String str, int i, int i2, int i3) throws RemoteException;
 
-    void onCommand(String str, int i, int i2, String str2, Bundle bundle, ResultReceiver resultReceiver) throws RemoteException;
+    void onCommand(
+            String str, int i, int i2, String str2, Bundle bundle, ResultReceiver resultReceiver)
+            throws RemoteException;
 
-    void onCustomAction(String str, int i, int i2, String str2, Bundle bundle) throws RemoteException;
+    void onCustomAction(String str, int i, int i2, String str2, Bundle bundle)
+            throws RemoteException;
 
     void onFastForward(String str, int i, int i2) throws RemoteException;
 
-    void onMediaButton(String str, int i, int i2, Intent intent, int i3, ResultReceiver resultReceiver) throws RemoteException;
+    void onMediaButton(
+            String str, int i, int i2, Intent intent, int i3, ResultReceiver resultReceiver)
+            throws RemoteException;
 
-    void onMediaButtonFromController(String str, int i, int i2, Intent intent) throws RemoteException;
+    void onMediaButtonFromController(String str, int i, int i2, Intent intent)
+            throws RemoteException;
 
     void onNext(String str, int i, int i2) throws RemoteException;
 
@@ -31,17 +37,21 @@ public interface ISessionCallback extends IInterface {
 
     void onPlay(String str, int i, int i2) throws RemoteException;
 
-    void onPlayFromMediaId(String str, int i, int i2, String str2, Bundle bundle) throws RemoteException;
+    void onPlayFromMediaId(String str, int i, int i2, String str2, Bundle bundle)
+            throws RemoteException;
 
-    void onPlayFromSearch(String str, int i, int i2, String str2, Bundle bundle) throws RemoteException;
+    void onPlayFromSearch(String str, int i, int i2, String str2, Bundle bundle)
+            throws RemoteException;
 
     void onPlayFromUri(String str, int i, int i2, Uri uri, Bundle bundle) throws RemoteException;
 
     void onPrepare(String str, int i, int i2) throws RemoteException;
 
-    void onPrepareFromMediaId(String str, int i, int i2, String str2, Bundle bundle) throws RemoteException;
+    void onPrepareFromMediaId(String str, int i, int i2, String str2, Bundle bundle)
+            throws RemoteException;
 
-    void onPrepareFromSearch(String str, int i, int i2, String str2, Bundle bundle) throws RemoteException;
+    void onPrepareFromSearch(String str, int i, int i2, String str2, Bundle bundle)
+            throws RemoteException;
 
     void onPrepareFromUri(String str, int i, int i2, Uri uri, Bundle bundle) throws RemoteException;
 
@@ -63,100 +73,109 @@ public interface ISessionCallback extends IInterface {
 
     public static class Default implements ISessionCallback {
         @Override // android.media.session.ISessionCallback
-        public void onCommand(String packageName, int pid, int uid, String command, Bundle args, ResultReceiver cb) throws RemoteException {
-        }
+        public void onCommand(
+                String packageName,
+                int pid,
+                int uid,
+                String command,
+                Bundle args,
+                ResultReceiver cb)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onMediaButton(String packageName, int pid, int uid, Intent mediaButtonIntent, int sequenceNumber, ResultReceiver cb) throws RemoteException {
-        }
+        public void onMediaButton(
+                String packageName,
+                int pid,
+                int uid,
+                Intent mediaButtonIntent,
+                int sequenceNumber,
+                ResultReceiver cb)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onMediaButtonFromController(String packageName, int pid, int uid, Intent mediaButtonIntent) throws RemoteException {
-        }
+        public void onMediaButtonFromController(
+                String packageName, int pid, int uid, Intent mediaButtonIntent)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onPrepare(String packageName, int pid, int uid) throws RemoteException {
-        }
+        public void onPrepare(String packageName, int pid, int uid) throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onPrepareFromMediaId(String packageName, int pid, int uid, String mediaId, Bundle extras) throws RemoteException {
-        }
+        public void onPrepareFromMediaId(
+                String packageName, int pid, int uid, String mediaId, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onPrepareFromSearch(String packageName, int pid, int uid, String query, Bundle extras) throws RemoteException {
-        }
+        public void onPrepareFromSearch(
+                String packageName, int pid, int uid, String query, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onPrepareFromUri(String packageName, int pid, int uid, Uri uri, Bundle extras) throws RemoteException {
-        }
+        public void onPrepareFromUri(String packageName, int pid, int uid, Uri uri, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onPlay(String packageName, int pid, int uid) throws RemoteException {
-        }
+        public void onPlay(String packageName, int pid, int uid) throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onPlayFromMediaId(String packageName, int pid, int uid, String mediaId, Bundle extras) throws RemoteException {
-        }
+        public void onPlayFromMediaId(
+                String packageName, int pid, int uid, String mediaId, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onPlayFromSearch(String packageName, int pid, int uid, String query, Bundle extras) throws RemoteException {
-        }
+        public void onPlayFromSearch(
+                String packageName, int pid, int uid, String query, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onPlayFromUri(String packageName, int pid, int uid, Uri uri, Bundle extras) throws RemoteException {
-        }
+        public void onPlayFromUri(String packageName, int pid, int uid, Uri uri, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onSkipToTrack(String packageName, int pid, int uid, long id) throws RemoteException {
-        }
+        public void onSkipToTrack(String packageName, int pid, int uid, long id)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onPause(String packageName, int pid, int uid) throws RemoteException {
-        }
+        public void onPause(String packageName, int pid, int uid) throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onStop(String packageName, int pid, int uid) throws RemoteException {
-        }
+        public void onStop(String packageName, int pid, int uid) throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onNext(String packageName, int pid, int uid) throws RemoteException {
-        }
+        public void onNext(String packageName, int pid, int uid) throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onPrevious(String packageName, int pid, int uid) throws RemoteException {
-        }
+        public void onPrevious(String packageName, int pid, int uid) throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onFastForward(String packageName, int pid, int uid) throws RemoteException {
-        }
+        public void onFastForward(String packageName, int pid, int uid) throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onRewind(String packageName, int pid, int uid) throws RemoteException {
-        }
+        public void onRewind(String packageName, int pid, int uid) throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onSeekTo(String packageName, int pid, int uid, long pos) throws RemoteException {
-        }
+        public void onSeekTo(String packageName, int pid, int uid, long pos)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onRate(String packageName, int pid, int uid, Rating rating) throws RemoteException {
-        }
+        public void onRate(String packageName, int pid, int uid, Rating rating)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onSetPlaybackSpeed(String packageName, int pid, int uid, float speed) throws RemoteException {
-        }
+        public void onSetPlaybackSpeed(String packageName, int pid, int uid, float speed)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onCustomAction(String packageName, int pid, int uid, String action, Bundle args) throws RemoteException {
-        }
+        public void onCustomAction(String packageName, int pid, int uid, String action, Bundle args)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onAdjustVolume(String packageName, int pid, int uid, int direction) throws RemoteException {
-        }
+        public void onAdjustVolume(String packageName, int pid, int uid, int direction)
+                throws RemoteException {}
 
         @Override // android.media.session.ISessionCallback
-        public void onSetVolumeTo(String packageName, int pid, int uid, int value) throws RemoteException {
-        }
+        public void onSetVolumeTo(String packageName, int pid, int uid, int value)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -164,7 +183,7 @@ public interface ISessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISessionCallback {
+    public abstract static class Stub extends Binder implements ISessionCallback {
         public static final String DESCRIPTOR = "android.media.session.ISessionCallback";
         static final int TRANSACTION_onAdjustVolume = 23;
         static final int TRANSACTION_onCommand = 1;
@@ -272,7 +291,8 @@ public interface ISessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -287,7 +307,8 @@ public interface ISessionCallback extends IInterface {
                     int _arg2 = data.readInt();
                     String _arg3 = data.readString();
                     Bundle _arg4 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    ResultReceiver _arg5 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg5 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     onCommand(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5);
                     return true;
@@ -297,7 +318,8 @@ public interface ISessionCallback extends IInterface {
                     int _arg22 = data.readInt();
                     Intent _arg32 = (Intent) data.readTypedObject(Intent.CREATOR);
                     int _arg42 = data.readInt();
-                    ResultReceiver _arg52 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg52 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     onMediaButton(_arg02, _arg12, _arg22, _arg32, _arg42, _arg52);
                     return true;
@@ -498,7 +520,14 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onCommand(String packageName, int pid, int uid, String command, Bundle args, ResultReceiver cb) throws RemoteException {
+            public void onCommand(
+                    String packageName,
+                    int pid,
+                    int uid,
+                    String command,
+                    Bundle args,
+                    ResultReceiver cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -515,7 +544,14 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onMediaButton(String packageName, int pid, int uid, Intent mediaButtonIntent, int sequenceNumber, ResultReceiver cb) throws RemoteException {
+            public void onMediaButton(
+                    String packageName,
+                    int pid,
+                    int uid,
+                    Intent mediaButtonIntent,
+                    int sequenceNumber,
+                    ResultReceiver cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -532,7 +568,9 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onMediaButtonFromController(String packageName, int pid, int uid, Intent mediaButtonIntent) throws RemoteException {
+            public void onMediaButtonFromController(
+                    String packageName, int pid, int uid, Intent mediaButtonIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -561,7 +599,9 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onPrepareFromMediaId(String packageName, int pid, int uid, String mediaId, Bundle extras) throws RemoteException {
+            public void onPrepareFromMediaId(
+                    String packageName, int pid, int uid, String mediaId, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -577,7 +617,9 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onPrepareFromSearch(String packageName, int pid, int uid, String query, Bundle extras) throws RemoteException {
+            public void onPrepareFromSearch(
+                    String packageName, int pid, int uid, String query, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -593,7 +635,9 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onPrepareFromUri(String packageName, int pid, int uid, Uri uri, Bundle extras) throws RemoteException {
+            public void onPrepareFromUri(
+                    String packageName, int pid, int uid, Uri uri, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -623,7 +667,9 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onPlayFromMediaId(String packageName, int pid, int uid, String mediaId, Bundle extras) throws RemoteException {
+            public void onPlayFromMediaId(
+                    String packageName, int pid, int uid, String mediaId, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -639,7 +685,9 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onPlayFromSearch(String packageName, int pid, int uid, String query, Bundle extras) throws RemoteException {
+            public void onPlayFromSearch(
+                    String packageName, int pid, int uid, String query, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -655,7 +703,8 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onPlayFromUri(String packageName, int pid, int uid, Uri uri, Bundle extras) throws RemoteException {
+            public void onPlayFromUri(String packageName, int pid, int uid, Uri uri, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -671,7 +720,8 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onSkipToTrack(String packageName, int pid, int uid, long id) throws RemoteException {
+            public void onSkipToTrack(String packageName, int pid, int uid, long id)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -770,7 +820,8 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onSeekTo(String packageName, int pid, int uid, long pos) throws RemoteException {
+            public void onSeekTo(String packageName, int pid, int uid, long pos)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -785,7 +836,8 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onRate(String packageName, int pid, int uid, Rating rating) throws RemoteException {
+            public void onRate(String packageName, int pid, int uid, Rating rating)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -800,7 +852,8 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onSetPlaybackSpeed(String packageName, int pid, int uid, float speed) throws RemoteException {
+            public void onSetPlaybackSpeed(String packageName, int pid, int uid, float speed)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -815,7 +868,9 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onCustomAction(String packageName, int pid, int uid, String action, Bundle args) throws RemoteException {
+            public void onCustomAction(
+                    String packageName, int pid, int uid, String action, Bundle args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -831,7 +886,8 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onAdjustVolume(String packageName, int pid, int uid, int direction) throws RemoteException {
+            public void onAdjustVolume(String packageName, int pid, int uid, int direction)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -846,7 +902,8 @@ public interface ISessionCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionCallback
-            public void onSetVolumeTo(String packageName, int pid, int uid, int value) throws RemoteException {
+            public void onSetVolumeTo(String packageName, int pid, int uid, int value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

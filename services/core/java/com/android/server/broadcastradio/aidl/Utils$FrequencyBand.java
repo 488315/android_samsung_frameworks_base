@@ -23,7 +23,14 @@ public final class Utils$FrequencyBand {
         AM_MW = utils$FrequencyBand4;
         Utils$FrequencyBand utils$FrequencyBand5 = new Utils$FrequencyBand("AM_SW", 4);
         AM_SW = utils$FrequencyBand5;
-        $VALUES = new Utils$FrequencyBand[]{utils$FrequencyBand, utils$FrequencyBand2, utils$FrequencyBand3, utils$FrequencyBand4, utils$FrequencyBand5};
+        $VALUES =
+                new Utils$FrequencyBand[] {
+                    utils$FrequencyBand,
+                    utils$FrequencyBand2,
+                    utils$FrequencyBand3,
+                    utils$FrequencyBand4,
+                    utils$FrequencyBand5
+                };
     }
 
     public static Utils$FrequencyBand valueOf(String str) {

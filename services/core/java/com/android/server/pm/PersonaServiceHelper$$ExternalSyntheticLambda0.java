@@ -4,14 +4,17 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.ddar.IDualDARPolicy;
+
 import java.util.List;
 import java.util.function.Function;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class PersonaServiceHelper$$ExternalSyntheticLambda0 implements Function {
+public final /* synthetic */ class PersonaServiceHelper$$ExternalSyntheticLambda0
+        implements Function {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ int f$0;
 
@@ -37,7 +40,9 @@ public final /* synthetic */ class PersonaServiceHelper$$ExternalSyntheticLambda
                 try {
                     bundle = iDualDARPolicy.getConfig(new ContextInfo(Binder.getCallingUid(), i2));
                 } catch (RemoteException e) {
-                    Log.d("PersonaServiceHelper", "isDERestrictionEnforced exception " + e.getMessage());
+                    Log.d(
+                            "PersonaServiceHelper",
+                            "isDERestrictionEnforced exception " + e.getMessage());
                 }
                 if (bundle == null) {
                     break;

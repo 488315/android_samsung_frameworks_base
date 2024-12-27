@@ -6,8 +6,7 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes.dex */
 public abstract class Authority implements Parcelable {
-    protected Authority() {
-    }
+    protected Authority() {}
 
     public boolean equals(Object o) {
         if (this == o) {

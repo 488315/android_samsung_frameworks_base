@@ -1,9 +1,9 @@
 package android.renderscript;
 
-import android.renderscript.Script;
 import android.telecom.Logging.Session;
 import android.util.Log;
 import android.util.Pair;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,7 +74,12 @@ public final class ScriptGroup extends BaseObj {
             super(id, rs);
         }
 
-        Closure(RenderScript rs, Script.KernelID kernelID, Type returnType, Object[] args, Map<Script.FieldID, Object> globals) {
+        Closure(
+                RenderScript rs,
+                Script.KernelID kernelID,
+                Type returnType,
+                Object[] args,
+                Map<Script.FieldID, Object> globals) {
             super(0L, rs);
             this.mArgs = args;
             this.mReturnValue = Allocation.createTyped(rs, returnType);
@@ -92,7 +97,8 @@ public final class ScriptGroup extends BaseObj {
                 long[] depFieldIDs2 = depFieldIDs;
                 long[] depClosures2 = depClosures;
                 int[] sizes2 = sizes;
-                retrieveValueAndDependenceInfo(rs, i, null, args[i], values, sizes2, depClosures2, depFieldIDs2);
+                retrieveValueAndDependenceInfo(
+                        rs, i, null, args[i], values, sizes2, depClosures2, depFieldIDs2);
                 i++;
                 depFieldIDs = depFieldIDs2;
                 depClosures = depClosures2;
@@ -111,15 +117,28 @@ public final class ScriptGroup extends BaseObj {
                 Object obj = entry.getValue();
                 Script.FieldID fieldID = entry.getKey();
                 fieldIDs2[i2] = fieldID.getID(rs);
-                retrieveValueAndDependenceInfo(rs, i2, fieldID, obj, values2, sizes3, depClosures3, depFieldIDs3);
+                retrieveValueAndDependenceInfo(
+                        rs, i2, fieldID, obj, values2, sizes3, depClosures3, depFieldIDs3);
                 i2++;
             }
-            long id = rs.nClosureCreate(kernelID.getID(rs), this.mReturnValue.getID(rs), fieldIDs2, values2, sizes3, depClosures3, depFieldIDs3);
+            long id =
+                    rs.nClosureCreate(
+                            kernelID.getID(rs),
+                            this.mReturnValue.getID(rs),
+                            fieldIDs2,
+                            values2,
+                            sizes3,
+                            depClosures3,
+                            depFieldIDs3);
             setID(id);
             this.guard.open("destroy");
         }
 
-        Closure(RenderScript rs, Script.InvokeID invokeID, Object[] args, Map<Script.FieldID, Object> globals) {
+        Closure(
+                RenderScript rs,
+                Script.InvokeID invokeID,
+                Object[] args,
+                Map<Script.FieldID, Object> globals) {
             super(0L, rs);
             this.mFP = FieldPacker.createFromArray(args);
             this.mArgs = args;
@@ -137,12 +156,15 @@ public final class ScriptGroup extends BaseObj {
                 Script.FieldID fieldID = entry.getKey();
                 fieldIDs[i] = fieldID.getID(rs);
                 long[] depFieldIDs2 = depFieldIDs;
-                retrieveValueAndDependenceInfo(rs, i, fieldID, obj, values, sizes, jArr, depFieldIDs2);
+                retrieveValueAndDependenceInfo(
+                        rs, i, fieldID, obj, values, sizes, jArr, depFieldIDs2);
                 i++;
                 depFieldIDs = depFieldIDs2;
                 sizes = sizes;
             }
-            long id = rs.nInvokeClosureCreate(invokeID.getID(rs), this.mFP.getData(), fieldIDs, values, sizes);
+            long id =
+                    rs.nInvokeClosureCreate(
+                            invokeID.getID(rs), this.mFP.getData(), fieldIDs, values, sizes);
             setID(id);
             this.guard.open("destroy");
         }
@@ -161,7 +183,15 @@ public final class ScriptGroup extends BaseObj {
             super.finalize();
         }
 
-        private void retrieveValueAndDependenceInfo(RenderScript rs, int index, Script.FieldID fid, Object obj, long[] values, int[] sizes, long[] depClosures, long[] depFieldIDs) {
+        private void retrieveValueAndDependenceInfo(
+                RenderScript rs,
+                int index,
+                Script.FieldID fid,
+                Object obj,
+                long[] values,
+                int[] sizes,
+                long[] depClosures,
+                long[] depFieldIDs) {
             if (obj instanceof Future) {
                 Future f = (Future) obj;
                 obj = f.getValue();
@@ -290,8 +320,7 @@ public final class ScriptGroup extends BaseObj {
         List<Pair<Closure, Script.FieldID>> mFieldID = new ArrayList();
         List<Pair<Closure, Integer>> mArgIndex = new ArrayList();
 
-        Input() {
-        }
+        Input() {}
 
         void addReference(Closure closure, int index) {
             this.mArgIndex.add(Pair.create(closure, Integer.valueOf(index)));
@@ -325,7 +354,12 @@ public final class ScriptGroup extends BaseObj {
         this.guard.open("destroy");
     }
 
-    ScriptGroup(RenderScript rs, String name, List<Closure> closures, List<Input> inputs, Future[] outputs) {
+    ScriptGroup(
+            RenderScript rs,
+            String name,
+            List<Closure> closures,
+            List<Input> inputs,
+            Future[] outputs) {
         super(0L, rs);
         this.mName = name;
         this.mClosures = closures;
@@ -342,11 +376,23 @@ public final class ScriptGroup extends BaseObj {
 
     public Object[] execute(Object... inputs) {
         if (inputs.length < this.mInputs2.size()) {
-            Log.e(TAG, toString() + " receives " + inputs.length + " inputs, less than expected " + this.mInputs2.size());
+            Log.e(
+                    TAG,
+                    toString()
+                            + " receives "
+                            + inputs.length
+                            + " inputs, less than expected "
+                            + this.mInputs2.size());
             return null;
         }
         if (inputs.length > this.mInputs2.size()) {
-            Log.i(TAG, toString() + " receives " + inputs.length + " inputs, more than expected " + this.mInputs2.size());
+            Log.i(
+                    TAG,
+                    toString()
+                            + " receives "
+                            + inputs.length
+                            + " inputs, more than expected "
+                            + this.mInputs2.size());
         }
         for (int i = 0; i < this.mInputs2.size(); i++) {
             Object obj = inputs[i];
@@ -380,7 +426,8 @@ public final class ScriptGroup extends BaseObj {
         for (int ct = 0; ct < this.mInputs.length; ct++) {
             if (this.mInputs[ct].mKID == s) {
                 this.mInputs[ct].mAllocation = a;
-                this.mRS.nScriptGroupSetInput(getID(this.mRS), s.getID(this.mRS), this.mRS.safeID(a));
+                this.mRS.nScriptGroupSetInput(
+                        getID(this.mRS), s.getID(this.mRS), this.mRS.safeID(a));
                 return;
             }
         }
@@ -391,7 +438,8 @@ public final class ScriptGroup extends BaseObj {
         for (int ct = 0; ct < this.mOutputs.length; ct++) {
             if (this.mOutputs[ct].mKID == s) {
                 this.mOutputs[ct].mAllocation = a;
-                this.mRS.nScriptGroupSetOutput(getID(this.mRS), s.getID(this.mRS), this.mRS.safeID(a));
+                this.mRS.nScriptGroupSetOutput(
+                        getID(this.mRS), s.getID(this.mRS), this.mRS.safeID(a));
                 return;
             }
         }
@@ -464,7 +512,8 @@ public final class ScriptGroup extends BaseObj {
                 Node n = this.mNodes.get(ct);
                 if (n.mInputs.size() == 0) {
                     if (n.mOutputs.size() == 0 && this.mNodes.size() > 1) {
-                        throw new RSInvalidStateException("Groups cannot contain unconnected scripts");
+                        throw new RSInvalidStateException(
+                                "Groups cannot contain unconnected scripts");
                     }
                     validateDAGRecurse(n, ct + 1);
                 }
@@ -500,7 +549,8 @@ public final class ScriptGroup extends BaseObj {
 
         public Builder addKernel(Script.KernelID k) {
             if (this.mLines.size() != 0) {
-                throw new RSInvalidStateException("Kernels may not be added once connections exist.");
+                throw new RSInvalidStateException(
+                        "Kernels may not be added once connections exist.");
             }
             if (findNode(k) != null) {
                 return this;
@@ -654,13 +704,18 @@ public final class ScriptGroup extends BaseObj {
             this.mRS = rs;
         }
 
-        private Closure addKernelInternal(Script.KernelID k, Type returnType, Object[] args, Map<Script.FieldID, Object> globalBindings) {
+        private Closure addKernelInternal(
+                Script.KernelID k,
+                Type returnType,
+                Object[] args,
+                Map<Script.FieldID, Object> globalBindings) {
             Closure c = new Closure(this.mRS, k, returnType, args, globalBindings);
             this.mClosures.add(c);
             return c;
         }
 
-        private Closure addInvokeInternal(Script.InvokeID invoke, Object[] args, Map<Script.FieldID, Object> globalBindings) {
+        private Closure addInvokeInternal(
+                Script.InvokeID invoke, Object[] args, Map<Script.FieldID, Object> globalBindings) {
             Closure c = new Closure(this.mRS, invoke, args, globalBindings);
             this.mClosures.add(c);
             return c;
@@ -691,16 +746,25 @@ public final class ScriptGroup extends BaseObj {
         }
 
         public ScriptGroup create(String name, Future... outputs) {
-            if (name == null || name.isEmpty() || name.length() > 100 || !name.equals(name.replaceAll("[^a-zA-Z0-9-]", Session.SESSION_SEPARATION_CHAR_CHILD))) {
+            if (name == null
+                    || name.isEmpty()
+                    || name.length() > 100
+                    || !name.equals(
+                            name.replaceAll(
+                                    "[^a-zA-Z0-9-]", Session.SESSION_SEPARATION_CHAR_CHILD))) {
                 throw new RSIllegalArgumentException("invalid script group name");
             }
-            ScriptGroup ret = new ScriptGroup(this.mRS, name, this.mClosures, this.mInputs, outputs);
+            ScriptGroup ret =
+                    new ScriptGroup(this.mRS, name, this.mClosures, this.mInputs, outputs);
             this.mClosures = new ArrayList();
             this.mInputs = new ArrayList();
             return ret;
         }
 
-        private boolean seperateArgsAndBindings(Object[] argsAndBindings, ArrayList<Object> args, Map<Script.FieldID, Object> bindingMap) {
+        private boolean seperateArgsAndBindings(
+                Object[] argsAndBindings,
+                ArrayList<Object> args,
+                Map<Script.FieldID, Object> bindingMap) {
             int i = 0;
             while (i < argsAndBindings.length && !(argsAndBindings[i] instanceof Binding)) {
                 args.add(argsAndBindings[i]);

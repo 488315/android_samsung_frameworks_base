@@ -8,8 +8,7 @@ public interface IClientCallback extends IInterface {
 
     public static class Default implements IClientCallback {
         @Override // android.os.IClientCallback
-        public void onClients(IBinder registered, boolean hasClients) throws RemoteException {
-        }
+        public void onClients(IBinder registered, boolean hasClients) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -17,7 +16,7 @@ public interface IClientCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IClientCallback {
+    public abstract static class Stub extends Binder implements IClientCallback {
         static final int TRANSACTION_onClients = 1;
 
         public Stub() {
@@ -55,7 +54,8 @@ public interface IClientCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IClientCallback.DESCRIPTOR);
             }

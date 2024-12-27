@@ -1,6 +1,7 @@
 package com.samsung.android.globalactions.util;
 
 import android.util.Log;
+
 import com.samsung.android.emergencymode.Elog;
 
 /* loaded from: classes6.dex */
@@ -29,6 +30,5 @@ public class LogWrapper {
         Elog.d(this.mPackageTag + TAG + tag, msg);
     }
 
-    public void logDebug(String tag, String msg) {
-    }
+    public void logDebug(String tag, String msg) {}
 }

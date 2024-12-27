@@ -16,6 +16,7 @@ public class CallbackFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "listener")
     private FilterContext.OnFrameReceivedListener mListener;
+
     private Handler mUiThreadHandler;
 
     @GenerateFieldPort(hasDefault = true, name = "userData")
@@ -27,7 +28,11 @@ public class CallbackFilter extends Filter {
         private FilterContext.OnFrameReceivedListener mListener;
         private Object mUserData;
 
-        public CallbackRunnable(FilterContext.OnFrameReceivedListener listener, Filter filter, Frame frame, Object userData) {
+        public CallbackRunnable(
+                FilterContext.OnFrameReceivedListener listener,
+                Filter filter,
+                Frame frame,
+                Object userData) {
             this.mListener = listener;
             this.mFilter = filter;
             this.mFrame = frame;
@@ -64,7 +69,8 @@ public class CallbackFilter extends Filter {
         if (this.mListener != null) {
             if (this.mCallbacksOnUiThread) {
                 input.retain();
-                CallbackRunnable uiRunnable = new CallbackRunnable(this.mListener, this, input, this.mUserData);
+                CallbackRunnable uiRunnable =
+                        new CallbackRunnable(this.mListener, this, input, this.mUserData);
                 if (!this.mUiThreadHandler.post(uiRunnable)) {
                     throw new RuntimeException("Unable to send callback to UI thread!");
                 }

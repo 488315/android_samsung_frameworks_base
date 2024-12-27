@@ -8,24 +8,28 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import com.android.internal.inputmethod.IInputContentUriToken;
+
 import java.security.InvalidParameterException;
 
 /* loaded from: classes4.dex */
 public final class InputContentInfo implements Parcelable {
-    public static final Parcelable.Creator<InputContentInfo> CREATOR = new Parcelable.Creator<InputContentInfo>() { // from class: android.view.inputmethod.InputContentInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputContentInfo createFromParcel(Parcel source) {
-            return new InputContentInfo(source);
-        }
+    public static final Parcelable.Creator<InputContentInfo> CREATOR =
+            new Parcelable.Creator<
+                    InputContentInfo>() { // from class: android.view.inputmethod.InputContentInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputContentInfo createFromParcel(Parcel source) {
+                    return new InputContentInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputContentInfo[] newArray(int size) {
-            return new InputContentInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputContentInfo[] newArray(int size) {
+                    return new InputContentInfo[size];
+                }
+            };
     private final Uri mContentUri;
     private final int mContentUriOwnerUserId;
     private final ClipDescription mDescription;
@@ -39,7 +43,8 @@ public final class InputContentInfo implements Parcelable {
     public InputContentInfo(Uri contentUri, ClipDescription description, Uri linkUri) {
         validateInternal(contentUri, description, linkUri, true);
         this.mContentUri = contentUri;
-        this.mContentUriOwnerUserId = ContentProvider.getUserIdFromUri(this.mContentUri, UserHandle.myUserId());
+        this.mContentUriOwnerUserId =
+                ContentProvider.getUserIdFromUri(this.mContentUri, UserHandle.myUserId());
         this.mDescription = description;
         this.mLinkUri = linkUri;
     }
@@ -48,7 +53,8 @@ public final class InputContentInfo implements Parcelable {
         return validateInternal(this.mContentUri, this.mDescription, this.mLinkUri, false);
     }
 
-    private static boolean validateInternal(Uri contentUri, ClipDescription description, Uri linkUri, boolean throwException) {
+    private static boolean validateInternal(
+            Uri contentUri, ClipDescription description, Uri linkUri, boolean throwException) {
         if (contentUri == null) {
             if (!throwException) {
                 return false;
@@ -70,11 +76,14 @@ public final class InputContentInfo implements Parcelable {
         }
         if (linkUri != null) {
             String scheme = linkUri.getScheme();
-            if (scheme == null || (!scheme.equalsIgnoreCase(IntentFilter.SCHEME_HTTP) && !scheme.equalsIgnoreCase(IntentFilter.SCHEME_HTTPS))) {
+            if (scheme == null
+                    || (!scheme.equalsIgnoreCase(IntentFilter.SCHEME_HTTP)
+                            && !scheme.equalsIgnoreCase(IntentFilter.SCHEME_HTTPS))) {
                 if (!throwException) {
                     return false;
                 }
-                throw new InvalidParameterException("linkUri must have either http or https scheme");
+                throw new InvalidParameterException(
+                        "linkUri must have either http or https scheme");
             }
             return true;
         }

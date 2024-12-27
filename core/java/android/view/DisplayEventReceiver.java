@@ -3,9 +3,12 @@ package android.view;
 import android.os.Looper;
 import android.os.MessageQueue;
 import android.util.Log;
+
 import dalvik.annotation.optimization.FastNative;
-import java.lang.ref.WeakReference;
+
 import libcore.util.NativeAllocationRegistry;
+
+import java.lang.ref.WeakReference;
 
 /* loaded from: classes4.dex */
 public abstract class DisplayEventReceiver {
@@ -14,7 +17,10 @@ public abstract class DisplayEventReceiver {
     private static final String TAG = "DisplayEventReceiver";
     public static final int VSYNC_SOURCE_APP = 0;
     public static final int VSYNC_SOURCE_SURFACE_FLINGER = 1;
-    private static final NativeAllocationRegistry sNativeAllocationRegistry = NativeAllocationRegistry.createMalloced(DisplayEventReceiver.class.getClassLoader(), nativeGetDisplayEventReceiverFinalizer());
+    private static final NativeAllocationRegistry sNativeAllocationRegistry =
+            NativeAllocationRegistry.createMalloced(
+                    DisplayEventReceiver.class.getClassLoader(),
+                    nativeGetDisplayEventReceiverFinalizer());
     private Runnable mFreeNativeResources;
     private MessageQueue mMessageQueue;
     private long mReceiverPtr;
@@ -24,7 +30,13 @@ public abstract class DisplayEventReceiver {
 
     private static native VsyncEventData nativeGetLatestVsyncEventData(long j);
 
-    private static native long nativeInit(WeakReference<DisplayEventReceiver> weakReference, WeakReference<VsyncEventData> weakReference2, MessageQueue messageQueue, int i, int i2, long j);
+    private static native long nativeInit(
+            WeakReference<DisplayEventReceiver> weakReference,
+            WeakReference<VsyncEventData> weakReference2,
+            MessageQueue messageQueue,
+            int i,
+            int i2,
+            long j);
 
     @FastNative
     private static native void nativeScheduleVsync(long j);
@@ -37,14 +49,23 @@ public abstract class DisplayEventReceiver {
         this(looper, vsyncSource, eventRegistration, 0L);
     }
 
-    public DisplayEventReceiver(Looper looper, int vsyncSource, int eventRegistration, long layerHandle) {
+    public DisplayEventReceiver(
+            Looper looper, int vsyncSource, int eventRegistration, long layerHandle) {
         this.mVsyncEventData = new VsyncEventData();
         if (looper == null) {
             throw new IllegalArgumentException("looper must not be null");
         }
         this.mMessageQueue = looper.getQueue();
-        this.mReceiverPtr = nativeInit(new WeakReference(this), new WeakReference(this.mVsyncEventData), this.mMessageQueue, vsyncSource, eventRegistration, layerHandle);
-        this.mFreeNativeResources = sNativeAllocationRegistry.registerNativeAllocation(this, this.mReceiverPtr);
+        this.mReceiverPtr =
+                nativeInit(
+                        new WeakReference(this),
+                        new WeakReference(this.mVsyncEventData),
+                        this.mMessageQueue,
+                        vsyncSource,
+                        eventRegistration,
+                        layerHandle);
+        this.mFreeNativeResources =
+                sNativeAllocationRegistry.registerNativeAllocation(this, this.mReceiverPtr);
     }
 
     public void dispose() {
@@ -97,7 +118,11 @@ public abstract class DisplayEventReceiver {
             }
         }
 
-        VsyncEventData(FrameTimeline[] frameTimelines, int preferredFrameTimelineIndex, int frameTimelinesLength, long frameInterval) {
+        VsyncEventData(
+                FrameTimeline[] frameTimelines,
+                int preferredFrameTimelineIndex,
+                int frameTimelinesLength,
+                long frameInterval) {
             this.frameInterval = -1L;
             this.preferredFrameTimelineIndex = 0;
             this.frameTimelinesLength = 1;
@@ -121,20 +146,20 @@ public abstract class DisplayEventReceiver {
         }
     }
 
-    public void onVsync(long timestampNanos, long physicalDisplayId, int frame, VsyncEventData vsyncEventData) {
-    }
+    public void onVsync(
+            long timestampNanos,
+            long physicalDisplayId,
+            int frame,
+            VsyncEventData vsyncEventData) {}
 
-    public void onHotplug(long timestampNanos, long physicalDisplayId, boolean connected) {
-    }
+    public void onHotplug(long timestampNanos, long physicalDisplayId, boolean connected) {}
 
-    public void onHotplugConnectionError(long timestampNanos, int connectionError) {
-    }
+    public void onHotplugConnectionError(long timestampNanos, int connectionError) {}
 
-    public void onModeChanged(long timestampNanos, long physicalDisplayId, int modeId, long renderPeriod) {
-    }
+    public void onModeChanged(
+            long timestampNanos, long physicalDisplayId, int modeId, long renderPeriod) {}
 
-    public void onHdcpLevelsChanged(long physicalDisplayId, int connectedLevel, int maxLevel) {
-    }
+    public void onHdcpLevelsChanged(long physicalDisplayId, int connectedLevel, int maxLevel) {}
 
     public static class FrameRateOverride {
         public final float frameRateHz;
@@ -150,12 +175,15 @@ public abstract class DisplayEventReceiver {
         }
     }
 
-    public void onFrameRateOverridesChanged(long timestampNanos, long physicalDisplayId, FrameRateOverride[] overrides) {
-    }
+    public void onFrameRateOverridesChanged(
+            long timestampNanos, long physicalDisplayId, FrameRateOverride[] overrides) {}
 
     public void scheduleVsync() {
         if (this.mReceiverPtr == 0) {
-            Log.w(TAG, "Attempted to schedule a vertical sync pulse but the display event receiver has already been disposed.");
+            Log.w(
+                    TAG,
+                    "Attempted to schedule a vertical sync pulse but the display event receiver has"
+                        + " already been disposed.");
         } else {
             nativeScheduleVsync(this.mReceiverPtr);
         }
@@ -177,15 +205,18 @@ public abstract class DisplayEventReceiver {
         onHotplugConnectionError(timestampNanos, connectionError);
     }
 
-    private void dispatchModeChanged(long timestampNanos, long physicalDisplayId, int modeId, long renderPeriod) {
+    private void dispatchModeChanged(
+            long timestampNanos, long physicalDisplayId, int modeId, long renderPeriod) {
         onModeChanged(timestampNanos, physicalDisplayId, modeId, renderPeriod);
     }
 
-    private void dispatchFrameRateOverrides(long timestampNanos, long physicalDisplayId, FrameRateOverride[] overrides) {
+    private void dispatchFrameRateOverrides(
+            long timestampNanos, long physicalDisplayId, FrameRateOverride[] overrides) {
         onFrameRateOverridesChanged(timestampNanos, physicalDisplayId, overrides);
     }
 
-    private void dispatchHdcpLevelsChanged(long physicalDisplayId, int connectedLevel, int maxLevel) {
+    private void dispatchHdcpLevelsChanged(
+            long physicalDisplayId, int connectedLevel, int maxLevel) {
         onHdcpLevelsChanged(physicalDisplayId, connectedLevel, maxLevel);
     }
 }

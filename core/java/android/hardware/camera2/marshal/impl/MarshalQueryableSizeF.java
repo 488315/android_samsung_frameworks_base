@@ -4,6 +4,7 @@ import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.utils.TypeReference;
 import android.util.SizeF;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */

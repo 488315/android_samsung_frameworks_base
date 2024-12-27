@@ -9,8 +9,9 @@ import android.net.INetd;
 import android.util.ArrayMap;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
-import com.android.server.am.mars.MARsFreezeStateRecord;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -54,7 +55,8 @@ public final class EventRecorder {
         public final long time;
         public final Integer uid;
 
-        public Event(long j, Integer num, EventType eventType, Integer num2, Integer num3, String str) {
+        public Event(
+                long j, Integer num, EventType eventType, Integer num2, Integer num3, String str) {
             this.time = j;
             this.uid = num;
             this.eventType = eventType;
@@ -165,21 +167,26 @@ public final class EventRecorder {
 
         @Override // android.app.job.JobService
         public final boolean onStartJob(final JobParameters jobParameters) {
-            BackgroundThread.getHandler().post(new Runnable() { // from class: com.android.server.am.mars.EventRecorder$RemoveOutdatedJobService$$ExternalSyntheticLambda0
-                /* JADX WARN: Removed duplicated region for block: B:135:0x01d3  */
-                @Override // java.lang.Runnable
-                /*
-                    Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
-                */
-                public final void run() {
-                    /*
-                        Method dump skipped, instructions count: 484
-                        To view this dump change 'Code comments level' option to 'DEBUG'
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.mars.EventRecorder$RemoveOutdatedJobService$$ExternalSyntheticLambda0.run():void");
-                }
-            });
+            BackgroundThread.getHandler()
+                    .post(
+                            new Runnable() { // from class:
+                                // com.android.server.am.mars.EventRecorder$RemoveOutdatedJobService$$ExternalSyntheticLambda0
+                                /* JADX WARN: Removed duplicated region for block: B:135:0x01d3  */
+                                @Override // java.lang.Runnable
+                                /*
+                                    Code decompiled incorrectly, please refer to instructions dump.
+                                    To view partially-correct code enable 'Show inconsistent code' option in preferences
+                                */
+                                public final void run() {
+                                    /*
+                                        Method dump skipped, instructions count: 484
+                                        To view this dump change 'Code comments level' option to 'DEBUG'
+                                    */
+                                    throw new UnsupportedOperationException(
+                                            "Method not decompiled:"
+                                                + " com.android.server.am.mars.EventRecorder$RemoveOutdatedJobService$$ExternalSyntheticLambda0.run():void");
+                                }
+                            });
             return true;
         }
 
@@ -195,12 +202,17 @@ public final class EventRecorder {
         if (j4 < j || j2 < j3) {
             return 0L;
         }
-        return (j3 >= j || j2 >= j4) ? (j > j3 || j4 > j2) ? Math.min(j2, j4) - Math.max(j, j3) : j4 - j3 : j2 - j;
+        return (j3 >= j || j2 >= j4)
+                ? (j > j3 || j4 > j2) ? Math.min(j2, j4) - Math.max(j, j3) : j4 - j3
+                : j2 - j;
     }
 
     public static void countUnfreezeEvent(ArrayMap arrayMap, Event event, Converter converter) {
         Integer valueOf;
-        ArrayMap arrayMap2 = (ArrayMap) arrayMap.computeIfAbsent(event.uid, new EventRecorder$$ExternalSyntheticLambda1());
+        ArrayMap arrayMap2 =
+                (ArrayMap)
+                        arrayMap.computeIfAbsent(
+                                event.uid, new EventRecorder$$ExternalSyntheticLambda1());
         String str = event.reason;
         int hashCode = str.hashCode();
         int i = 0;
@@ -218,7 +230,9 @@ public final class EventRecorder {
                 hashCode = (str + i).hashCode();
             }
         }
-        arrayMap2.put(valueOf, Integer.valueOf(((Integer) arrayMap2.getOrDefault(valueOf, 0)).intValue() + 1));
+        arrayMap2.put(
+                valueOf,
+                Integer.valueOf(((Integer) arrayMap2.getOrDefault(valueOf, 0)).intValue() + 1));
     }
 
     public static boolean createNewEmptyFile(File file2) {
@@ -240,7 +254,13 @@ public final class EventRecorder {
         }
     }
 
-    public static void processFreezeEvent(long j, long j2, Event event, ArrayMap arrayMap, ArrayMap arrayMap2, ArrayMap arrayMap3) {
+    public static void processFreezeEvent(
+            long j,
+            long j2,
+            Event event,
+            ArrayMap arrayMap,
+            ArrayMap arrayMap2,
+            ArrayMap arrayMap3) {
         boolean z = event.eventType == EventType.FREEZE;
         long j3 = event.time;
         Integer num = event.uid;
@@ -254,18 +274,39 @@ public final class EventRecorder {
                 Slog.e("EventRecorder", "unfreeze event without freeze event. uid : " + num);
                 return;
             }
-            arrayMap2.put(num, Long.valueOf(((Long) arrayMap2.getOrDefault(num, 0L)).longValue() + calculateOverlapPeriod(j, j2, ((Long) arrayMap.remove(num)).longValue(), event.time)));
+            arrayMap2.put(
+                    num,
+                    Long.valueOf(
+                            ((Long) arrayMap2.getOrDefault(num, 0L)).longValue()
+                                    + calculateOverlapPeriod(
+                                            j,
+                                            j2,
+                                            ((Long) arrayMap.remove(num)).longValue(),
+                                            event.time)));
             if (j > j3 || j2 < j3) {
                 return;
             }
-            ArrayList arrayList = (ArrayList) arrayMap3.getOrDefault(num, new ArrayList(Collections.nCopies(MARsFreezeStateRecord.UnfreezeReasonType.values().length, 0)));
-            int typeNum = MARsFreezeStateRecord.UnfreezeReasonType.reasonTypeOf(event.reason).getTypeNum();
-            arrayList.set(typeNum, Integer.valueOf(((Integer) arrayList.get(typeNum)).intValue() + 1));
+            ArrayList arrayList =
+                    (ArrayList)
+                            arrayMap3.getOrDefault(
+                                    num,
+                                    new ArrayList(
+                                            Collections.nCopies(
+                                                    MARsFreezeStateRecord.UnfreezeReasonType
+                                                            .values()
+                                                            .length,
+                                                    0)));
+            int typeNum =
+                    MARsFreezeStateRecord.UnfreezeReasonType.reasonTypeOf(event.reason)
+                            .getTypeNum();
+            arrayList.set(
+                    typeNum, Integer.valueOf(((Integer) arrayList.get(typeNum)).intValue() + 1));
             arrayMap3.put(num, arrayList);
         }
     }
 
-    public static void processUidEvent(long j, long j2, Event event, ArrayMap arrayMap, ArrayMap arrayMap2) {
+    public static void processUidEvent(
+            long j, long j2, Event event, ArrayMap arrayMap, ArrayMap arrayMap2) {
         boolean z = event.eventType == EventType.UID_RUN;
         Integer num = event.uid;
         if (z) {
@@ -275,7 +316,15 @@ public final class EventRecorder {
             arrayMap.put(num, Long.valueOf(event.time));
         } else {
             if (arrayMap.get(num) != null) {
-                arrayMap2.put(num, Long.valueOf(((Long) arrayMap2.getOrDefault(num, 0L)).longValue() + calculateOverlapPeriod(j, j2, ((Long) arrayMap.remove(num)).longValue(), event.time)));
+                arrayMap2.put(
+                        num,
+                        Long.valueOf(
+                                ((Long) arrayMap2.getOrDefault(num, 0L)).longValue()
+                                        + calculateOverlapPeriod(
+                                                j,
+                                                j2,
+                                                ((Long) arrayMap.remove(num)).longValue(),
+                                                event.time)));
                 return;
             }
             Slog.e("EventRecorder", "stop event without run event. uid : " + num);
@@ -301,7 +350,14 @@ public final class EventRecorder {
         if (FEATURE_ENABLE) {
             synchronized (this.mLock) {
                 try {
-                    Event event = new Event(j, num, EventType.UNFREEZE, Integer.valueOf(i), Integer.valueOf(i), str);
+                    Event event =
+                            new Event(
+                                    j,
+                                    num,
+                                    EventType.UNFREEZE,
+                                    Integer.valueOf(i),
+                                    Integer.valueOf(i),
+                                    str);
                     long currentTimeMillis = System.currentTimeMillis();
                     this.mPendingWrite.add(event);
                     if (this.mPendingWrite.size() > 250) {
@@ -352,7 +408,8 @@ public final class EventRecorder {
                 try {
                     int size = this.mPendingWrite.size();
                     Iterator descendingIterator = this.mPendingWrite.descendingIterator();
-                    while (descendingIterator.hasNext() && ((Event) descendingIterator.next()).time + 500 > j) {
+                    while (descendingIterator.hasNext()
+                            && ((Event) descendingIterator.next()).time + 500 > j) {
                         size--;
                     }
                     while (size > 0) {
@@ -368,7 +425,11 @@ public final class EventRecorder {
             reentrantLock.lock();
             try {
                 try {
-                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getAbsolutePath(), true), StandardCharsets.UTF_8));
+                    BufferedWriter bufferedWriter =
+                            new BufferedWriter(
+                                    new OutputStreamWriter(
+                                            new FileOutputStream(file.getAbsolutePath(), true),
+                                            StandardCharsets.UTF_8));
                     try {
                         bufferedWriter.write(sb.toString());
                         bufferedWriter.close();
@@ -397,12 +458,15 @@ public final class EventRecorder {
             return;
         }
         mCommitPending = true;
-        BackgroundThread.getHandler().post(new Runnable() { // from class: com.android.server.am.mars.EventRecorder$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                EventRecorder.this.performWrite(j);
-            }
-        });
+        BackgroundThread.getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.am.mars.EventRecorder$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EventRecorder.this.performWrite(j);
+                            }
+                        });
     }
 
     public final void reportUnfreezeCount(ArrayMap arrayMap, PrintWriter printWriter) {
@@ -413,7 +477,11 @@ public final class EventRecorder {
             mFileLock.lock();
             try {
                 try {
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file.getAbsolutePath()), StandardCharsets.UTF_8));
+                    BufferedReader bufferedReader =
+                            new BufferedReader(
+                                    new InputStreamReader(
+                                            new FileInputStream(file.getAbsolutePath()),
+                                            StandardCharsets.UTF_8));
                     while (true) {
                         try {
                             String readLine = bufferedReader.readLine();
@@ -421,8 +489,13 @@ public final class EventRecorder {
                                 break;
                             }
                             Event event = new Event(readLine);
-                            if (event.eventType == EventType.UNFREEZE && (event.reason.startsWith(INetd.IF_FLAG_BROADCAST) || event.reason.startsWith("Binder(0)") || event.reason.startsWith("Binder(1)") || event.reason.startsWith("free_buffer_full"))) {
-                                if (event.procStateAfterEvent.intValue() >= 16 || event.procStateBeforeEvent.intValue() >= 16) {
+                            if (event.eventType == EventType.UNFREEZE
+                                    && (event.reason.startsWith(INetd.IF_FLAG_BROADCAST)
+                                            || event.reason.startsWith("Binder(0)")
+                                            || event.reason.startsWith("Binder(1)")
+                                            || event.reason.startsWith("free_buffer_full"))) {
+                                if (event.procStateAfterEvent.intValue() >= 16
+                                        || event.procStateBeforeEvent.intValue() >= 16) {
                                     countUnfreezeEvent(arrayMap2, event, converter);
                                 }
                             }
@@ -440,7 +513,9 @@ public final class EventRecorder {
                     Slog.e("EventRecorder", "Error at reportUnfreezeCount", e);
                 }
                 IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter);
-                indentingPrintWriter.println("ACTIVITY MANAGER FREECESS UNFREEZE COUNT(dumpsys activity freecess report_unfreeze)");
+                indentingPrintWriter.println(
+                        "ACTIVITY MANAGER FREECESS UNFREEZE COUNT(dumpsys activity freecess"
+                            + " report_unfreeze)");
                 for (Map.Entry entry : arrayMap2.entrySet()) {
                     Integer num = (Integer) entry.getKey();
                     ArrayMap arrayMap3 = (ArrayMap) entry.getValue();
@@ -449,9 +524,11 @@ public final class EventRecorder {
                         indentingPrintWriter.println();
                         indentingPrintWriter.increaseIndent();
                         for (Map.Entry entry2 : arrayMap3.entrySet()) {
-                            String str = (String) converter.hashCache.get((Integer) entry2.getKey());
+                            String str =
+                                    (String) converter.hashCache.get((Integer) entry2.getKey());
                             if (str != null) {
-                                indentingPrintWriter.println(str + " " + ((Integer) entry2.getValue()));
+                                indentingPrintWriter.println(
+                                        str + " " + ((Integer) entry2.getValue()));
                             }
                         }
                         indentingPrintWriter.decreaseIndent();

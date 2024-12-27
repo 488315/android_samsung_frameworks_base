@@ -2,6 +2,7 @@ package com.android.internal.graphics;
 
 import android.graphics.Color;
 import android.hardware.scontext.SContextConstants;
+
 import com.android.internal.graphics.cam.Cam;
 
 /* loaded from: classes5.dex */
@@ -20,16 +21,21 @@ public final class ColorUtils {
         double calculateContrast(int i, int i2, int i3);
     }
 
-    private ColorUtils() {
-    }
+    private ColorUtils() {}
 
     public static int compositeColors(int foreground, int background) {
         int bgAlpha = Color.alpha(background);
         int fgAlpha = Color.alpha(foreground);
         int a = compositeAlpha(fgAlpha, bgAlpha);
-        int r = compositeComponent(Color.red(foreground), fgAlpha, Color.red(background), bgAlpha, a);
-        int g = compositeComponent(Color.green(foreground), fgAlpha, Color.green(background), bgAlpha, a);
-        int b = compositeComponent(Color.blue(foreground), fgAlpha, Color.blue(background), bgAlpha, a);
+        int r =
+                compositeComponent(
+                        Color.red(foreground), fgAlpha, Color.red(background), bgAlpha, a);
+        int g =
+                compositeComponent(
+                        Color.green(foreground), fgAlpha, Color.green(background), bgAlpha, a);
+        int b =
+                compositeComponent(
+                        Color.blue(foreground), fgAlpha, Color.blue(background), bgAlpha, a);
         return Color.argb(a, r, g, b);
     }
 
@@ -52,7 +58,8 @@ public final class ColorUtils {
 
     public static double calculateContrast(int foreground, int background) {
         if (Color.alpha(background) != 255) {
-            throw new IllegalArgumentException("background can not be translucent: #" + Integer.toHexString(background));
+            throw new IllegalArgumentException(
+                    "background can not be translucent: #" + Integer.toHexString(background));
         }
         if (Color.alpha(foreground) < 255) {
             foreground = compositeColors(foreground, background);
@@ -62,37 +69,53 @@ public final class ColorUtils {
         return Math.max(luminance1, luminance2) / Math.min(luminance1, luminance2);
     }
 
-    public static int calculateMinimumBackgroundAlpha(int foreground, int background, float minContrastRatio) {
+    public static int calculateMinimumBackgroundAlpha(
+            int foreground, int background, float minContrastRatio) {
         int background2 = setAlphaComponent(background, 255);
         final int leastContrastyColor = setAlphaComponent(foreground, 255);
-        return binaryAlphaSearch(foreground, background2, minContrastRatio, new ContrastCalculator() { // from class: com.android.internal.graphics.ColorUtils$$ExternalSyntheticLambda1
-            @Override // com.android.internal.graphics.ColorUtils.ContrastCalculator
-            public final double calculateContrast(int i, int i2, int i3) {
-                return ColorUtils.lambda$calculateMinimumBackgroundAlpha$0(leastContrastyColor, i, i2, i3);
-            }
-        });
+        return binaryAlphaSearch(
+                foreground,
+                background2,
+                minContrastRatio,
+                new ContrastCalculator() { // from class:
+                                           // com.android.internal.graphics.ColorUtils$$ExternalSyntheticLambda1
+                    @Override // com.android.internal.graphics.ColorUtils.ContrastCalculator
+                    public final double calculateContrast(int i, int i2, int i3) {
+                        return ColorUtils.lambda$calculateMinimumBackgroundAlpha$0(
+                                leastContrastyColor, i, i2, i3);
+                    }
+                });
     }
 
-    static /* synthetic */ double lambda$calculateMinimumBackgroundAlpha$0(int leastContrastyColor, int fg, int bg, int alpha) {
+    static /* synthetic */ double lambda$calculateMinimumBackgroundAlpha$0(
+            int leastContrastyColor, int fg, int bg, int alpha) {
         int testBackground = blendARGB(leastContrastyColor, bg, alpha / 255.0f);
         return calculateContrast(fg, setAlphaComponent(testBackground, 255));
     }
 
-    public static int calculateMinimumAlpha(int foreground, int background, float minContrastRatio) {
+    public static int calculateMinimumAlpha(
+            int foreground, int background, float minContrastRatio) {
         if (Color.alpha(background) != 255) {
-            throw new IllegalArgumentException("background can not be translucent: #" + Integer.toHexString(background));
+            throw new IllegalArgumentException(
+                    "background can not be translucent: #" + Integer.toHexString(background));
         }
-        ContrastCalculator contrastCalculator = new ContrastCalculator() { // from class: com.android.internal.graphics.ColorUtils$$ExternalSyntheticLambda0
-            @Override // com.android.internal.graphics.ColorUtils.ContrastCalculator
-            public final double calculateContrast(int i, int i2, int i3) {
-                return ColorUtils.lambda$calculateMinimumAlpha$1(i, i2, i3);
-            }
-        };
+        ContrastCalculator contrastCalculator =
+                new ContrastCalculator() { // from class:
+                                           // com.android.internal.graphics.ColorUtils$$ExternalSyntheticLambda0
+                    @Override // com.android.internal.graphics.ColorUtils.ContrastCalculator
+                    public final double calculateContrast(int i, int i2, int i3) {
+                        return ColorUtils.lambda$calculateMinimumAlpha$1(i, i2, i3);
+                    }
+                };
         double testRatio = contrastCalculator.calculateContrast(foreground, background, 255);
         if (testRatio < minContrastRatio) {
             return -1;
         }
-        return binaryAlphaSearch(setAlphaComponent(foreground, 255), background, minContrastRatio, contrastCalculator);
+        return binaryAlphaSearch(
+                setAlphaComponent(foreground, 255),
+                background,
+                minContrastRatio,
+                contrastCalculator);
     }
 
     static /* synthetic */ double lambda$calculateMinimumAlpha$1(int fg, int bg, int alpha) {
@@ -100,10 +123,13 @@ public final class ColorUtils {
         return calculateContrast(testForeground, bg);
     }
 
-    private static int binaryAlphaSearch(int foreground, int background, float minContrastRatio, ContrastCalculator calculator) {
+    private static int binaryAlphaSearch(
+            int foreground, int background, float minContrastRatio, ContrastCalculator calculator) {
         int minAlpha = 0;
         int maxAlpha = 255;
-        for (int numIterations = 0; numIterations <= 10 && maxAlpha - minAlpha > 1; numIterations++) {
+        for (int numIterations = 0;
+                numIterations <= 10 && maxAlpha - minAlpha > 1;
+                numIterations++) {
             int testAlpha = (minAlpha + maxAlpha) / 2;
             double testRatio = calculator.calculateContrast(foreground, background, testAlpha);
             if (testRatio < minContrastRatio) {
@@ -272,7 +298,40 @@ public final class ColorUtils {
         double r = (((3.2406d * x) + ((-1.5372d) * y)) + ((-0.4986d) * z)) / XYZ_WHITE_REFERENCE_Y;
         double g = ((((-0.9689d) * x) + (1.8758d * y)) + (0.0415d * z)) / XYZ_WHITE_REFERENCE_Y;
         double b = (((0.0557d * x) + ((-0.204d) * y)) + (1.057d * z)) / XYZ_WHITE_REFERENCE_Y;
-        return Color.rgb(constrain((int) Math.round((r > 0.0031308d ? (Math.pow(r, 0.4166666666666667d) * 1.055d) - 0.055d : r * 12.92d) * 255.0d), 0, 255), constrain((int) Math.round((g > 0.0031308d ? (Math.pow(g, 0.4166666666666667d) * 1.055d) - 0.055d : g * 12.92d) * 255.0d), 0, 255), constrain((int) Math.round(255.0d * (b > 0.0031308d ? (Math.pow(b, 0.4166666666666667d) * 1.055d) - 0.055d : b * 12.92d)), 0, 255));
+        return Color.rgb(
+                constrain(
+                        (int)
+                                Math.round(
+                                        (r > 0.0031308d
+                                                        ? (Math.pow(r, 0.4166666666666667d)
+                                                                        * 1.055d)
+                                                                - 0.055d
+                                                        : r * 12.92d)
+                                                * 255.0d),
+                        0,
+                        255),
+                constrain(
+                        (int)
+                                Math.round(
+                                        (g > 0.0031308d
+                                                        ? (Math.pow(g, 0.4166666666666667d)
+                                                                        * 1.055d)
+                                                                - 0.055d
+                                                        : g * 12.92d)
+                                                * 255.0d),
+                        0,
+                        255),
+                constrain(
+                        (int)
+                                Math.round(
+                                        255.0d
+                                                * (b > 0.0031308d
+                                                        ? (Math.pow(b, 0.4166666666666667d)
+                                                                        * 1.055d)
+                                                                - 0.055d
+                                                        : b * 12.92d)),
+                        0,
+                        255));
     }
 
     public static int LABToColor(double l, double a, double b) {
@@ -282,7 +341,10 @@ public final class ColorUtils {
     }
 
     public static double distanceEuclidean(double[] labX, double[] labY) {
-        return Math.sqrt(Math.pow(labX[0] - labY[0], 2.0d) + Math.pow(labX[1] - labY[1], 2.0d) + Math.pow(labX[2] - labY[2], 2.0d));
+        return Math.sqrt(
+                Math.pow(labX[0] - labY[0], 2.0d)
+                        + Math.pow(labX[1] - labY[1], 2.0d)
+                        + Math.pow(labX[2] - labY[2], 2.0d));
     }
 
     private static float constrain(float amount, float low, float high) {

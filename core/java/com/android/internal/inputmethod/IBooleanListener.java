@@ -14,8 +14,7 @@ public interface IBooleanListener extends IInterface {
 
     public static class Default implements IBooleanListener {
         @Override // com.android.internal.inputmethod.IBooleanListener
-        public void onResult(boolean value) throws RemoteException {
-        }
+        public void onResult(boolean value) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IBooleanListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBooleanListener {
+    public abstract static class Stub extends Binder implements IBooleanListener {
         static final int TRANSACTION_onResult = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IBooleanListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBooleanListener.DESCRIPTOR);
             }

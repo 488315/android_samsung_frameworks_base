@@ -3,24 +3,28 @@ package com.android.internal.compat;
 import android.compat.Compatibility;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.HashSet;
 import java.util.Set;
 
 /* loaded from: classes5.dex */
 public final class CompatibilityChangeConfig implements Parcelable {
-    public static final Parcelable.Creator<CompatibilityChangeConfig> CREATOR = new Parcelable.Creator<CompatibilityChangeConfig>() { // from class: com.android.internal.compat.CompatibilityChangeConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatibilityChangeConfig createFromParcel(Parcel in) {
-            return new CompatibilityChangeConfig(in);
-        }
+    public static final Parcelable.Creator<CompatibilityChangeConfig> CREATOR =
+            new Parcelable.Creator<
+                    CompatibilityChangeConfig>() { // from class:
+                                                   // com.android.internal.compat.CompatibilityChangeConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatibilityChangeConfig createFromParcel(Parcel in) {
+                    return new CompatibilityChangeConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatibilityChangeConfig[] newArray(int size) {
-            return new CompatibilityChangeConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatibilityChangeConfig[] newArray(int size) {
+                    return new CompatibilityChangeConfig[size];
+                }
+            };
     private final Compatibility.ChangeConfig mChangeConfig;
 
     public CompatibilityChangeConfig(Compatibility.ChangeConfig changeConfig) {

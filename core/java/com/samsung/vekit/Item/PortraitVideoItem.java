@@ -1,6 +1,7 @@
 package com.samsung.vekit.Item;
 
 import android.util.Log;
+
 import com.samsung.vekit.Common.Object.PVDetectionInfo;
 import com.samsung.vekit.Common.Object.PVFrameInfo;
 import com.samsung.vekit.Common.Object.PVKeyFrame;
@@ -9,6 +10,7 @@ import com.samsung.vekit.Common.Type.ItemType;
 import com.samsung.vekit.Common.VEContext;
 import com.samsung.vekit.Content.Content;
 import com.samsung.vekit.Listener.PortraitVideoStatusListener;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -104,7 +106,9 @@ public class PortraitVideoItem extends VideoItem implements PortraitVideoStatusL
 
     @Override // com.samsung.vekit.Listener.PortraitVideoStatusListener
     public void onPortraitVideoError(int requestType) {
-        Log.i(this.TAG, "onPortraitVideoError -> ItemId : " + this.id + ", requestType : " + requestType);
+        Log.i(
+                this.TAG,
+                "onPortraitVideoError -> ItemId : " + this.id + ", requestType : " + requestType);
         if (this.portraitVideoStatusListener != null) {
             this.portraitVideoStatusListener.onPortraitVideoError(requestType);
         }

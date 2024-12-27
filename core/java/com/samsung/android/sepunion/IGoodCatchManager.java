@@ -5,7 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.sepunion.IGoodCatchDispatcher;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -14,18 +14,20 @@ public interface IGoodCatchManager extends IInterface {
 
     List<String> getSelectedSettingKey() throws RemoteException;
 
-    void registerListener(String str, String[] strArr, IGoodCatchDispatcher iGoodCatchDispatcher, IBinder iBinder) throws RemoteException;
+    void registerListener(
+            String str, String[] strArr, IGoodCatchDispatcher iGoodCatchDispatcher, IBinder iBinder)
+            throws RemoteException;
 
     void update(String[] strArr) throws RemoteException;
 
     public static class Default implements IGoodCatchManager {
         @Override // com.samsung.android.sepunion.IGoodCatchManager
-        public void registerListener(String module, String[] function, IGoodCatchDispatcher sd, IBinder cb) throws RemoteException {
-        }
+        public void registerListener(
+                String module, String[] function, IGoodCatchDispatcher sd, IBinder cb)
+                throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IGoodCatchManager
-        public void update(String[] data) throws RemoteException {
-        }
+        public void update(String[] data) throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IGoodCatchManager
         public List<String> getSelectedSettingKey() throws RemoteException {
@@ -38,7 +40,7 @@ public interface IGoodCatchManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGoodCatchManager {
+    public abstract static class Stub extends Binder implements IGoodCatchManager {
         static final int TRANSACTION_getSelectedSettingKey = 3;
         static final int TRANSACTION_registerListener = 1;
         static final int TRANSACTION_update = 2;
@@ -82,7 +84,8 @@ public interface IGoodCatchManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGoodCatchManager.DESCRIPTOR);
             }
@@ -94,7 +97,8 @@ public interface IGoodCatchManager extends IInterface {
                 case 1:
                     String _arg0 = data.readString();
                     String[] _arg1 = data.createStringArray();
-                    IGoodCatchDispatcher _arg2 = IGoodCatchDispatcher.Stub.asInterface(data.readStrongBinder());
+                    IGoodCatchDispatcher _arg2 =
+                            IGoodCatchDispatcher.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg3 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     registerListener(_arg0, _arg1, _arg2, _arg3);
@@ -133,7 +137,9 @@ public interface IGoodCatchManager extends IInterface {
             }
 
             @Override // com.samsung.android.sepunion.IGoodCatchManager
-            public void registerListener(String module, String[] function, IGoodCatchDispatcher sd, IBinder cb) throws RemoteException {
+            public void registerListener(
+                    String module, String[] function, IGoodCatchDispatcher sd, IBinder cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

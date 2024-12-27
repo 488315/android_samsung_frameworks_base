@@ -4,8 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -13,20 +15,23 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class ManagedSubscriptionsPolicy implements Parcelable {
-    public static final Parcelable.Creator<ManagedSubscriptionsPolicy> CREATOR = new Parcelable.Creator<ManagedSubscriptionsPolicy>() { // from class: android.app.admin.ManagedSubscriptionsPolicy.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ManagedSubscriptionsPolicy createFromParcel(Parcel in) {
-            ManagedSubscriptionsPolicy policy = new ManagedSubscriptionsPolicy(in.readInt());
-            return policy;
-        }
+    public static final Parcelable.Creator<ManagedSubscriptionsPolicy> CREATOR =
+            new Parcelable.Creator<ManagedSubscriptionsPolicy>() { // from class:
+                // android.app.admin.ManagedSubscriptionsPolicy.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ManagedSubscriptionsPolicy createFromParcel(Parcel in) {
+                    ManagedSubscriptionsPolicy policy =
+                            new ManagedSubscriptionsPolicy(in.readInt());
+                    return policy;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ManagedSubscriptionsPolicy[] newArray(int size) {
-            return new ManagedSubscriptionsPolicy[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ManagedSubscriptionsPolicy[] newArray(int size) {
+                    return new ManagedSubscriptionsPolicy[size];
+                }
+            };
     private static final String KEY_POLICY_TYPE = "policy_type";
     private static final String TAG = "ManagedSubscriptionsPolicy";
     public static final int TYPE_ALL_MANAGED_SUBSCRIPTIONS = 1;
@@ -34,8 +39,7 @@ public final class ManagedSubscriptionsPolicy implements Parcelable {
     private final int mPolicyType;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ManagedSubscriptionsPolicyType {
-    }
+    @interface ManagedSubscriptionsPolicyType {}
 
     public ManagedSubscriptionsPolicy(int policyType) {
         if (policyType != 0 && policyType != 1) {
@@ -49,7 +53,8 @@ public final class ManagedSubscriptionsPolicy implements Parcelable {
     }
 
     public String toString() {
-        return TextUtils.formatSimple("ManagedSubscriptionsPolicy (type: %d)", Integer.valueOf(this.mPolicyType));
+        return TextUtils.formatSimple(
+                "ManagedSubscriptionsPolicy (type: %d)", Integer.valueOf(this.mPolicyType));
     }
 
     @Override // android.os.Parcelable
@@ -79,7 +84,9 @@ public final class ManagedSubscriptionsPolicy implements Parcelable {
 
     public static ManagedSubscriptionsPolicy readFromXml(TypedXmlPullParser parser) {
         try {
-            ManagedSubscriptionsPolicy policy = new ManagedSubscriptionsPolicy(parser.getAttributeInt(null, KEY_POLICY_TYPE, -1));
+            ManagedSubscriptionsPolicy policy =
+                    new ManagedSubscriptionsPolicy(
+                            parser.getAttributeInt(null, KEY_POLICY_TYPE, -1));
             return policy;
         } catch (IllegalArgumentException e) {
             Log.w(TAG, "Load xml failed", e);

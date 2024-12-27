@@ -3,9 +3,9 @@ package android.os;
 import android.annotation.SystemApi;
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.proto.ProtoOutputStream;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -23,19 +23,20 @@ public class WorkSource implements Parcelable {
     int mNum;
     int[] mUids;
     static final WorkSource sTmpWorkSource = new WorkSource(0);
-    public static final Parcelable.Creator<WorkSource> CREATOR = new Parcelable.Creator<WorkSource>() { // from class: android.os.WorkSource.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WorkSource createFromParcel(Parcel in) {
-            return new WorkSource(in);
-        }
+    public static final Parcelable.Creator<WorkSource> CREATOR =
+            new Parcelable.Creator<WorkSource>() { // from class: android.os.WorkSource.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WorkSource createFromParcel(Parcel in) {
+                    return new WorkSource(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WorkSource[] newArray(int size) {
-            return new WorkSource[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WorkSource[] newArray(int size) {
+                    return new WorkSource[size];
+                }
+            };
 
     public WorkSource() {
         this.mUids = new int[0];
@@ -69,7 +70,7 @@ public class WorkSource implements Parcelable {
     public WorkSource(int uid) {
         this.mUids = new int[0];
         this.mNum = 1;
-        this.mUids = new int[]{uid, 0};
+        this.mUids = new int[] {uid, 0};
         this.mNames = null;
         this.mChains = null;
     }
@@ -79,8 +80,8 @@ public class WorkSource implements Parcelable {
         this.mUids = new int[0];
         Objects.requireNonNull(packageName, "packageName can't be null");
         this.mNum = 1;
-        this.mUids = new int[]{uid, 0};
-        this.mNames = new String[]{packageName, null};
+        this.mUids = new int[] {uid, 0};
+        this.mNames = new String[] {packageName, null};
         this.mChains = null;
     }
 
@@ -99,7 +100,11 @@ public class WorkSource implements Parcelable {
     }
 
     public static boolean isChainedBatteryAttributionEnabled(Context context) {
-        return Settings.Global.getInt(context.getContentResolver(), Settings.Global.CHAINED_BATTERY_ATTRIBUTION_ENABLED, 0) == 1;
+        return Settings.Global.getInt(
+                        context.getContentResolver(),
+                        Settings.Global.CHAINED_BATTERY_ATTRIBUTION_ENABLED,
+                        0)
+                == 1;
     }
 
     public static boolean isChainedBatteryAttributionEnabled$ravenwood(Context context) {
@@ -383,10 +388,12 @@ public class WorkSource implements Parcelable {
             uidRemoved = removeUids(other);
         } else {
             if (this.mNames == null) {
-                throw new IllegalArgumentException("Other " + other + " has names, but target " + this + " does not");
+                throw new IllegalArgumentException(
+                        "Other " + other + " has names, but target " + this + " does not");
             }
             if (other.mNames == null) {
-                throw new IllegalArgumentException("Target " + this + " has names, but other " + other + " does not");
+                throw new IllegalArgumentException(
+                        "Target " + this + " has names, but other " + other + " does not");
             }
             uidRemoved = removeUidsAndNames(other);
         }
@@ -476,7 +483,8 @@ public class WorkSource implements Parcelable {
                     System.arraycopy(names1, i1 + 1, names1, i1, N1 - i1);
                 }
                 i2++;
-            } else if (uids2[i2] > uids1[i1] || (uids2[i2] == uids1[i1] && names2[i2].compareTo(names1[i1]) > 0)) {
+            } else if (uids2[i2] > uids1[i1]
+                    || (uids2[i2] == uids1[i1] && names2[i2].compareTo(names1[i1]) > 0)) {
                 i1++;
             } else {
                 i2++;
@@ -491,10 +499,12 @@ public class WorkSource implements Parcelable {
             return updateUidsLocked(other, set, returnNewbs);
         }
         if (this.mNum > 0 && this.mNames == null) {
-            throw new IllegalArgumentException("Other " + other + " has names, but target " + this + " does not");
+            throw new IllegalArgumentException(
+                    "Other " + other + " has names, but target " + this + " does not");
         }
         if (other.mNum > 0 && other.mNames == null) {
-            throw new IllegalArgumentException("Target " + this + " has names, but other " + other + " does not");
+            throw new IllegalArgumentException(
+                    "Target " + this + " has names, but other " + other + " does not");
         }
         return updateUidsAndNamesLocked(other, set, returnNewbs);
     }
@@ -603,8 +613,7 @@ public class WorkSource implements Parcelable {
                     if (i2 < N2) {
                         int compare = compare(other, i1, i2);
                         diff = compare;
-                        if (compare > 0) {
-                        }
+                        if (compare > 0) {}
                     }
                     if (!set) {
                         if (i2 < N2 && diff == 0) {
@@ -711,19 +720,21 @@ public class WorkSource implements Parcelable {
 
     @SystemApi
     public static final class WorkChain implements Parcelable {
-        public static final Parcelable.Creator<WorkChain> CREATOR = new Parcelable.Creator<WorkChain>() { // from class: android.os.WorkSource.WorkChain.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public WorkChain createFromParcel(Parcel in) {
-                return new WorkChain(in);
-            }
+        public static final Parcelable.Creator<WorkChain> CREATOR =
+                new Parcelable.Creator<
+                        WorkChain>() { // from class: android.os.WorkSource.WorkChain.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public WorkChain createFromParcel(Parcel in) {
+                        return new WorkChain(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public WorkChain[] newArray(int size) {
-                return new WorkChain[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public WorkChain[] newArray(int size) {
+                        return new WorkChain[size];
+                    }
+                };
         private int mSize;
         private String[] mTags;
         private int[] mUids;
@@ -815,7 +826,8 @@ public class WorkSource implements Parcelable {
         }
 
         public int hashCode() {
-            return ((this.mSize + (Arrays.hashCode(this.mUids) * 31)) * 31) + Arrays.hashCode(this.mTags);
+            return ((this.mSize + (Arrays.hashCode(this.mUids) * 31)) * 31)
+                    + Arrays.hashCode(this.mTags);
         }
 
         public boolean equals(Object o) {
@@ -823,7 +835,9 @@ public class WorkSource implements Parcelable {
                 return false;
             }
             WorkChain other = (WorkChain) o;
-            return this.mSize == other.mSize && Arrays.equals(this.mUids, other.mUids) && Arrays.equals(this.mTags, other.mTags);
+            return this.mSize == other.mSize
+                    && Arrays.equals(this.mUids, other.mUids)
+                    && Arrays.equals(this.mTags, other.mTags);
         }
 
         @Override // android.os.Parcelable
@@ -865,7 +879,7 @@ public class WorkSource implements Parcelable {
             }
         }
         if (newChains != null || goneChains != null) {
-            return new ArrayList[]{newChains, goneChains};
+            return new ArrayList[] {newChains, goneChains};
         }
         return null;
     }

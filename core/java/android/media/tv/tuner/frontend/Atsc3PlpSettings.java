@@ -50,8 +50,7 @@ public class Atsc3PlpSettings {
         private int mModulation;
         private int mPlpId;
 
-        private Builder() {
-        }
+        private Builder() {}
 
         public Builder setPlpId(int plpId) {
             this.mPlpId = plpId;
@@ -79,7 +78,8 @@ public class Atsc3PlpSettings {
         }
 
         public Atsc3PlpSettings build() {
-            return new Atsc3PlpSettings(this.mPlpId, this.mModulation, this.mInterleaveMode, this.mCodeRate, this.mFec);
+            return new Atsc3PlpSettings(
+                    this.mPlpId, this.mModulation, this.mInterleaveMode, this.mCodeRate, this.mFec);
         }
     }
 }

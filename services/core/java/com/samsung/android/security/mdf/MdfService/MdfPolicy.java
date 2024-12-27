@@ -12,8 +12,10 @@ import android.os.SystemProperties;
 import android.os.UserManager;
 import android.sec.enterprise.auditlog.AuditLog;
 import android.util.Log;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.server.input.KeyboardMetricsCollector;
+
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.EnterpriseKnoxManager;
 import com.samsung.android.knox.devicesecurity.PasswordPolicy;
@@ -43,7 +45,8 @@ public final class MdfPolicy {
         this.mLockPatternUtils = new LockPatternUtils(context.getApplicationContext());
         this.mCertificatePolicy = EnterpriseKnoxManager.getInstance(context).getCertificatePolicy();
         this.mPasswordPolicy = EnterpriseDeviceManager.getInstance(context).getPasswordPolicy();
-        this.mRestrictionPolicy = EnterpriseDeviceManager.getInstance(context).getRestrictionPolicy();
+        this.mRestrictionPolicy =
+                EnterpriseDeviceManager.getInstance(context).getRestrictionPolicy();
         this.mUserManager = (UserManager) context.getSystemService("user");
         this.mMdfUtils = new MdfUtils();
     }
@@ -95,7 +98,9 @@ public final class MdfPolicy {
             Method dump skipped, instructions count: 356
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.security.mdf.MdfService.MdfPolicy.checkDevicePolicy():int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.security.mdf.MdfService.MdfPolicy.checkDevicePolicy():int");
     }
 
     public final int enableCCMode(boolean z) {
@@ -113,10 +118,15 @@ public final class MdfPolicy {
             if (i == 1) {
                 int cCMode = setCCMode(4);
                 if (cCMode != 0) {
-                    MdfPolicy$$ExternalSyntheticOutline0.m(cCMode, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                    MdfPolicy$$ExternalSyntheticOutline0.m(
+                            cCMode, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
                     return cCMode;
                 }
-                setNotification(this.mContext.getResources().getString(R.string.permlab_hideOverlayWindows), this.mContext.getResources().getString(R.string.permlab_foregroundServiceHealth));
+                setNotification(
+                        this.mContext.getResources().getString(R.string.permlab_hideOverlayWindows),
+                        this.mContext
+                                .getResources()
+                                .getString(R.string.permlab_foregroundServiceHealth));
                 SystemProperties.set("security.mdf.result", Integer.toString(cCMode));
                 return cCMode;
             }
@@ -127,24 +137,31 @@ public final class MdfPolicy {
             if (i == 8) {
                 int cCMode2 = setCCMode(8);
                 if (cCMode2 != 0) {
-                    MdfPolicy$$ExternalSyntheticOutline0.m(cCMode2, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                    MdfPolicy$$ExternalSyntheticOutline0.m(
+                            cCMode2, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
                     return cCMode2;
                 }
-                setNotification(this.mContext.getResources().getString(R.string.permlab_highSamplingRateSensors), this.mContext.getResources().getString(R.string.permlab_handoverStatus));
+                setNotification(
+                        this.mContext
+                                .getResources()
+                                .getString(R.string.permlab_highSamplingRateSensors),
+                        this.mContext.getResources().getString(R.string.permlab_handoverStatus));
                 SystemProperties.set("security.mdf.result", Integer.toString(-11));
                 return -11;
             }
             if (i == 16) {
                 int cCMode3 = setCCMode(16);
                 if (cCMode3 != 0) {
-                    MdfPolicy$$ExternalSyntheticOutline0.m(cCMode3, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                    MdfPolicy$$ExternalSyntheticOutline0.m(
+                            cCMode3, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
                 }
                 SystemProperties.set("security.mdf.result", Integer.toString(-12));
                 return -12;
             }
             int cCMode4 = setCCMode(16);
             if (cCMode4 != 0) {
-                MdfPolicy$$ExternalSyntheticOutline0.m(cCMode4, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                MdfPolicy$$ExternalSyntheticOutline0.m(
+                        cCMode4, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
             }
             SystemProperties.set("security.mdf.result", Integer.toString(-13));
             return -13;
@@ -157,7 +174,8 @@ public final class MdfPolicy {
             if (i == 16) {
                 int cCMode5 = setCCMode(16);
                 if (cCMode5 != 0) {
-                    MdfPolicy$$ExternalSyntheticOutline0.m(cCMode5, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                    MdfPolicy$$ExternalSyntheticOutline0.m(
+                            cCMode5, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
                 }
                 SystemProperties.set("security.mdf.result", Integer.toString(-12));
                 return -12;
@@ -165,14 +183,16 @@ public final class MdfPolicy {
             if (i == 8) {
                 int cCMode6 = setCCMode(8);
                 if (cCMode6 != 0) {
-                    MdfPolicy$$ExternalSyntheticOutline0.m(cCMode6, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                    MdfPolicy$$ExternalSyntheticOutline0.m(
+                            cCMode6, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
                 }
                 SystemProperties.set("security.mdf.result", Integer.toString(-11));
                 return -11;
             }
             int cCMode7 = setCCMode(16);
             if (cCMode7 != 0) {
-                MdfPolicy$$ExternalSyntheticOutline0.m(cCMode7, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                MdfPolicy$$ExternalSyntheticOutline0.m(
+                        cCMode7, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
             }
             SystemProperties.set("security.mdf.result", Integer.toString(-13));
             return -13;
@@ -180,7 +200,10 @@ public final class MdfPolicy {
         int checkDevicePolicy = checkDevicePolicy();
         SystemProperties.set("security.mdf.result", Integer.toString(checkDevicePolicy));
         if (checkDevicePolicy != 0) {
-            MdfPolicy$$ExternalSyntheticOutline0.m(checkDevicePolicy, new StringBuilder("Prerequisite policies have yet to set. res = "), "MdfService");
+            MdfPolicy$$ExternalSyntheticOutline0.m(
+                    checkDevicePolicy,
+                    new StringBuilder("Prerequisite policies have yet to set. res = "),
+                    "MdfService");
         }
         if (this.mMdfUtils.FIPS_Openssl_SelfTest() != 0) {
             logForAuditAndLogcat(1, 6, "FIPS self-test : FAILED");
@@ -192,19 +215,27 @@ public final class MdfPolicy {
         if (i2 == 0) {
             int cCMode8 = setCCMode(1);
             if (cCMode8 != 0) {
-                MdfPolicy$$ExternalSyntheticOutline0.m(cCMode8, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                MdfPolicy$$ExternalSyntheticOutline0.m(
+                        cCMode8, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
                 return cCMode8;
             }
-            setNotification(this.mContext.getResources().getString(R.string.permlab_hideOverlayWindows), this.mContext.getResources().getString(R.string.permlab_foregroundServiceDataSync));
+            setNotification(
+                    this.mContext.getResources().getString(R.string.permlab_hideOverlayWindows),
+                    this.mContext
+                            .getResources()
+                            .getString(R.string.permlab_foregroundServiceDataSync));
             return cCMode8;
         }
         Log.e("MdfService", "Failed. check fips self test. res = " + Integer.toString(i2));
         int cCMode9 = setCCMode(8);
         if (cCMode9 != 0) {
-            MdfPolicy$$ExternalSyntheticOutline0.m(cCMode9, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+            MdfPolicy$$ExternalSyntheticOutline0.m(
+                    cCMode9, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
             return cCMode9;
         }
-        setNotification(this.mContext.getResources().getString(R.string.permlab_highSamplingRateSensors), this.mContext.getResources().getString(R.string.permlab_handoverStatus));
+        setNotification(
+                this.mContext.getResources().getString(R.string.permlab_highSamplingRateSensors),
+                this.mContext.getResources().getString(R.string.permlab_handoverStatus));
         return cCMode9;
     }
 
@@ -213,7 +244,8 @@ public final class MdfPolicy {
         int i2;
         try {
             if (Binder.getCallingUid() != 1000) {
-                throw new SecurityException("Security Exception Occurred. Only SYSTEM can use the MdfService.");
+                throw new SecurityException(
+                        "Security Exception Occurred. Only SYSTEM can use the MdfService.");
             }
             int cCModeFlag = this.mMdfUtils.getCCModeFlag();
             int i3 = cCModeFlag == 1 ? 1 : cCModeFlag == 4 ? 4 : cCModeFlag == 8 ? 8 : 16;
@@ -228,39 +260,56 @@ public final class MdfPolicy {
                     i2 = 0;
                 }
                 if (i2 != 0) {
-                    MdfPolicy$$ExternalSyntheticOutline0.m(i2, new StringBuilder("Failed. check fips self test. res = "), "MdfService");
-                    setNotification(this.mContext.getResources().getString(R.string.permlab_highSamplingRateSensors), this.mContext.getResources().getString(R.string.permlab_handoverStatus));
+                    MdfPolicy$$ExternalSyntheticOutline0.m(
+                            i2,
+                            new StringBuilder("Failed. check fips self test. res = "),
+                            "MdfService");
+                    setNotification(
+                            this.mContext
+                                    .getResources()
+                                    .getString(R.string.permlab_highSamplingRateSensors),
+                            this.mContext
+                                    .getResources()
+                                    .getString(R.string.permlab_handoverStatus));
                     i = setCCMode(8);
                     if (i != 0) {
-                        MdfPolicy$$ExternalSyntheticOutline0.m(i, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                        MdfPolicy$$ExternalSyntheticOutline0.m(
+                                i, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
                     }
                 } else {
                     i = checkDevicePolicy();
                     if (i != 0) {
-                        MdfPolicy$$ExternalSyntheticOutline0.m(i, new StringBuilder("Prerequisite policies have yet to set. res = "), "MdfService");
+                        MdfPolicy$$ExternalSyntheticOutline0.m(
+                                i,
+                                new StringBuilder("Prerequisite policies have yet to set. res = "),
+                                "MdfService");
                     }
                 }
             } else if (i3 == 4) {
                 i = setCCMode(4);
                 if (i != 0) {
-                    MdfPolicy$$ExternalSyntheticOutline0.m(i, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                    MdfPolicy$$ExternalSyntheticOutline0.m(
+                            i, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
                 }
             } else if (i3 == 8) {
                 int cCMode = setCCMode(8);
                 if (cCMode != 0) {
-                    MdfPolicy$$ExternalSyntheticOutline0.m(cCMode, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                    MdfPolicy$$ExternalSyntheticOutline0.m(
+                            cCMode, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
                 }
                 i = -11;
             } else if (i3 == 16) {
                 int cCMode2 = setCCMode(16);
                 if (cCMode2 != 0) {
-                    MdfPolicy$$ExternalSyntheticOutline0.m(cCMode2, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                    MdfPolicy$$ExternalSyntheticOutline0.m(
+                            cCMode2, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
                 }
                 i = -12;
             } else {
                 int cCMode3 = setCCMode(16);
                 if (cCMode3 != 0) {
-                    MdfPolicy$$ExternalSyntheticOutline0.m(cCMode3, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
+                    MdfPolicy$$ExternalSyntheticOutline0.m(
+                            cCMode3, new StringBuilder("Failed. setCCMode. res = "), "MdfService");
                 }
                 i = -13;
             }
@@ -302,19 +351,23 @@ public final class MdfPolicy {
             Method dump skipped, instructions count: 301
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.security.mdf.MdfService.MdfPolicy.setCCMode(int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.security.mdf.MdfService.MdfPolicy.setCCMode(int):int");
     }
 
     public final void setNotification(String str, String str2) {
         Log.d("MdfService", "Notice for applying security policy");
-        NotificationManager notificationManager = (NotificationManager) this.mContext.getSystemService("notification");
+        NotificationManager notificationManager =
+                (NotificationManager) this.mContext.getSystemService("notification");
         if (notificationManager == null) {
             Log.d("MdfService", "NotificationManager is null");
             return;
         }
-        NotificationChannel notificationChannel = new NotificationChannel("mdf_channel_id", "Mdf Channel", 4);
+        NotificationChannel notificationChannel =
+                new NotificationChannel("mdf_channel_id", "Mdf Channel", 4);
         notificationChannel.enableVibration(true);
-        notificationChannel.setVibrationPattern(new long[]{0, 500});
+        notificationChannel.setVibrationPattern(new long[] {0, 500});
         notificationManager.createNotificationChannel(notificationChannel);
         Notification.Builder builder = new Notification.Builder(this.mContext);
         builder.setContentTitle(str);

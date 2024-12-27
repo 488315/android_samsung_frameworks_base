@@ -4,12 +4,15 @@ import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.audio.AudioService$$ExternalSyntheticOutline0;
 import com.android.server.usb.descriptors.report.TextReportCanvas;
 import com.android.server.usb.descriptors.report.UsbStrings;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class UsbDescriptor {
-    public static final String[] sStatusStrings = {"UNPARSED", "PARSED - OK", "PARSED - UNDERRUN", "PARSED - OVERRUN"};
+    public static final String[] sStatusStrings = {
+        "UNPARSED", "PARSED - OK", "PARSED - UNDERRUN", "PARSED - OVERRUN"
+    };
     public int mHierarchyLevel;
     public final int mLength;
     public int mOverUnderRunCount;
@@ -101,7 +104,13 @@ public abstract class UsbDescriptor {
         int i2 = this.mStatus;
         if (i2 != 1) {
             if (i2 == 0 || i2 == 2 || i2 == 3) {
-                textReportCanvas.writeParagraph("status: " + sStatusStrings[this.mStatus] + " [" + this.mOverUnderRunCount + "]", true);
+                textReportCanvas.writeParagraph(
+                        "status: "
+                                + sStatusStrings[this.mStatus]
+                                + " ["
+                                + this.mOverUnderRunCount
+                                + "]",
+                        true);
             }
         }
     }

@@ -3,12 +3,14 @@ package android.hardware.radio.V1_6;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class NrSignalStrength {
-    public android.hardware.radio.V1_4.NrSignalStrength base = new android.hardware.radio.V1_4.NrSignalStrength();
+    public android.hardware.radio.V1_4.NrSignalStrength base =
+            new android.hardware.radio.V1_4.NrSignalStrength();
     public int csiCqiTableIndex = 0;
     public ArrayList<Byte> csiCqiReport = new ArrayList<>();
 
@@ -20,18 +22,29 @@ public final class NrSignalStrength {
             return false;
         }
         NrSignalStrength other = (NrSignalStrength) otherObject;
-        if (HidlSupport.deepEquals(this.base, other.base) && this.csiCqiTableIndex == other.csiCqiTableIndex && HidlSupport.deepEquals(this.csiCqiReport, other.csiCqiReport)) {
+        if (HidlSupport.deepEquals(this.base, other.base)
+                && this.csiCqiTableIndex == other.csiCqiTableIndex
+                && HidlSupport.deepEquals(this.csiCqiReport, other.csiCqiReport)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.base)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.csiCqiTableIndex))), Integer.valueOf(HidlSupport.deepHashCode(this.csiCqiReport)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.base)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.csiCqiTableIndex))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.csiCqiReport)));
     }
 
     public final String toString() {
-        return "{.base = " + this.base + ", .csiCqiTableIndex = " + this.csiCqiTableIndex + ", .csiCqiReport = " + this.csiCqiReport + "}";
+        return "{.base = "
+                + this.base
+                + ", .csiCqiTableIndex = "
+                + this.csiCqiTableIndex
+                + ", .csiCqiReport = "
+                + this.csiCqiReport
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -43,7 +56,8 @@ public final class NrSignalStrength {
         ArrayList<NrSignalStrength> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 48, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 48, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             NrSignalStrength _hidl_vec_element = new NrSignalStrength();
@@ -53,11 +67,14 @@ public final class NrSignalStrength {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.base.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 0);
         this.csiCqiTableIndex = _hidl_blob.getInt32(_hidl_offset + 24);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 32 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 1, _hidl_blob.handle(), _hidl_offset + 32 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 1, _hidl_blob.handle(), _hidl_offset + 32 + 0, true);
         this.csiCqiReport.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             byte _hidl_vec_element = childBlob.getInt8(_hidl_index_0 * 1);
@@ -71,7 +88,8 @@ public final class NrSignalStrength {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<NrSignalStrength> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<NrSignalStrength> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

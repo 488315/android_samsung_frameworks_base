@@ -12,47 +12,56 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.autofill.Helper;
+
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.wifi.SemWifiManager;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class UserData implements FieldClassificationUserData, Parcelable {
-    public static final Parcelable.Creator<UserData> CREATOR = new Parcelable.Creator<UserData>() { // from class: android.service.autofill.UserData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UserData createFromParcel(Parcel parcel) {
-            String id = parcel.readString();
-            String[] categoryIds = parcel.readStringArray();
-            String[] values = parcel.readStringArray();
-            String defaultAlgorithm = parcel.readString();
-            Bundle defaultArgs = parcel.readBundle();
-            ArrayMap<String, String> categoryAlgorithms = new ArrayMap<>();
-            parcel.readMap(categoryAlgorithms, String.class.getClassLoader());
-            ArrayMap<String, Bundle> categoryArgs = new ArrayMap<>();
-            parcel.readMap(categoryArgs, Bundle.class.getClassLoader());
-            Builder builder = new Builder(id, values[0], categoryIds[0]).setFieldClassificationAlgorithm(defaultAlgorithm, defaultArgs);
-            for (int i = 1; i < categoryIds.length; i++) {
-                builder.add(values[i], categoryIds[i]);
-            }
-            int size = categoryAlgorithms.size();
-            if (size > 0) {
-                for (int i2 = 0; i2 < size; i2++) {
-                    String categoryId = categoryAlgorithms.keyAt(i2);
-                    builder.setFieldClassificationAlgorithmForCategory(categoryId, categoryAlgorithms.valueAt(i2), categoryArgs.get(categoryId));
+    public static final Parcelable.Creator<UserData> CREATOR =
+            new Parcelable.Creator<UserData>() { // from class: android.service.autofill.UserData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UserData createFromParcel(Parcel parcel) {
+                    String id = parcel.readString();
+                    String[] categoryIds = parcel.readStringArray();
+                    String[] values = parcel.readStringArray();
+                    String defaultAlgorithm = parcel.readString();
+                    Bundle defaultArgs = parcel.readBundle();
+                    ArrayMap<String, String> categoryAlgorithms = new ArrayMap<>();
+                    parcel.readMap(categoryAlgorithms, String.class.getClassLoader());
+                    ArrayMap<String, Bundle> categoryArgs = new ArrayMap<>();
+                    parcel.readMap(categoryArgs, Bundle.class.getClassLoader());
+                    Builder builder =
+                            new Builder(id, values[0], categoryIds[0])
+                                    .setFieldClassificationAlgorithm(defaultAlgorithm, defaultArgs);
+                    for (int i = 1; i < categoryIds.length; i++) {
+                        builder.add(values[i], categoryIds[i]);
+                    }
+                    int size = categoryAlgorithms.size();
+                    if (size > 0) {
+                        for (int i2 = 0; i2 < size; i2++) {
+                            String categoryId = categoryAlgorithms.keyAt(i2);
+                            builder.setFieldClassificationAlgorithmForCategory(
+                                    categoryId,
+                                    categoryAlgorithms.valueAt(i2),
+                                    categoryArgs.get(categoryId));
+                        }
+                    }
+                    return builder.build();
                 }
-            }
-            return builder.build();
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UserData[] newArray(int size) {
-            return new UserData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UserData[] newArray(int size) {
+                    return new UserData[size];
+                }
+            };
     private static final int DEFAULT_MAX_CATEGORY_COUNT = 10;
     private static final int DEFAULT_MAX_FIELD_CLASSIFICATION_IDS_SIZE = 10;
     private static final int DEFAULT_MAX_USER_DATA_SIZE = 50;
@@ -217,7 +226,8 @@ public final class UserData implements FieldClassificationUserData, Parcelable {
             return this;
         }
 
-        public Builder setFieldClassificationAlgorithmForCategory(String categoryId, String name, Bundle args) {
+        public Builder setFieldClassificationAlgorithmForCategory(
+                String categoryId, String name, Bundle args) {
             throwIfDestroyed();
             Objects.requireNonNull(categoryId);
             if (this.mCategoryAlgorithms == null) {
@@ -236,9 +246,15 @@ public final class UserData implements FieldClassificationUserData, Parcelable {
             checkNotEmpty(SemWifiManager.EXTRA_CATEGORY_ID, categoryId);
             checkValidValue(value);
             if (!this.mUniqueCategoryIds.contains(categoryId)) {
-                Preconditions.checkState(this.mUniqueCategoryIds.size() < UserData.getMaxCategoryCount(), "already added %d unique category ids", Integer.valueOf(this.mUniqueCategoryIds.size()));
+                Preconditions.checkState(
+                        this.mUniqueCategoryIds.size() < UserData.getMaxCategoryCount(),
+                        "already added %d unique category ids",
+                        Integer.valueOf(this.mUniqueCategoryIds.size()));
             }
-            Preconditions.checkState(this.mValues.size() < UserData.getMaxUserDataSize(), "already added %d elements", Integer.valueOf(this.mValues.size()));
+            Preconditions.checkState(
+                    this.mValues.size() < UserData.getMaxUserDataSize(),
+                    "already added %d elements",
+                    Integer.valueOf(this.mValues.size()));
             addMapping(value, categoryId);
             return this;
         }
@@ -264,7 +280,11 @@ public final class UserData implements FieldClassificationUserData, Parcelable {
         private void checkValidValue(String value) {
             Objects.requireNonNull(value);
             int length = value.length();
-            Preconditions.checkArgumentInRange(length, UserData.getMinValueLength(), UserData.getMaxValueLength(), "value length (" + length + NavigationBarInflaterView.KEY_CODE_END);
+            Preconditions.checkArgumentInRange(
+                    length,
+                    UserData.getMinValueLength(),
+                    UserData.getMaxValueLength(),
+                    "value length (" + length + NavigationBarInflaterView.KEY_CODE_END);
         }
 
         public UserData build() {

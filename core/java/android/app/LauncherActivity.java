@@ -23,7 +23,9 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -58,8 +60,7 @@ public abstract class LauncherActivity extends ListActivity {
             this.className = ci.name;
         }
 
-        public ListItem() {
-        }
+        public ListItem() {}
     }
 
     private class ActivityAdapter extends BaseAdapter implements Filterable {
@@ -73,7 +74,9 @@ public abstract class LauncherActivity extends ListActivity {
 
         public ActivityAdapter(IconResizer resizer) {
             this.mIconResizer = resizer;
-            this.mInflater = (LayoutInflater) LauncherActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.mInflater =
+                    (LayoutInflater)
+                            LauncherActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             this.mShowIcons = LauncherActivity.this.onEvaluateShowIcons();
             this.mActivitiesList = LauncherActivity.this.makeListItems();
         }
@@ -133,9 +136,13 @@ public abstract class LauncherActivity extends ListActivity {
             text.lambda$setTextAsync$0(item.label);
             if (this.mShowIcons) {
                 if (item.icon == null) {
-                    item.icon = this.mIconResizer.createIconThumbnail(item.resolveInfo.loadIcon(LauncherActivity.this.getPackageManager()));
+                    item.icon =
+                            this.mIconResizer.createIconThumbnail(
+                                    item.resolveInfo.loadIcon(
+                                            LauncherActivity.this.getPackageManager()));
                 }
-                text.setCompoundDrawablesRelativeWithIntrinsicBounds(item.icon, (Drawable) null, (Drawable) null, (Drawable) null);
+                text.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                        item.icon, (Drawable) null, (Drawable) null, (Drawable) null);
             }
         }
 
@@ -148,20 +155,21 @@ public abstract class LauncherActivity extends ListActivity {
         }
 
         private class ArrayFilter extends Filter {
-            private ArrayFilter() {
-            }
+            private ArrayFilter() {}
 
             @Override // android.widget.Filter
             protected Filter.FilterResults performFiltering(CharSequence prefix) {
                 Filter.FilterResults results = new Filter.FilterResults();
                 if (ActivityAdapter.this.mOriginalValues == null) {
                     synchronized (ActivityAdapter.this.lock) {
-                        ActivityAdapter.this.mOriginalValues = new ArrayList(ActivityAdapter.this.mActivitiesList);
+                        ActivityAdapter.this.mOriginalValues =
+                                new ArrayList(ActivityAdapter.this.mActivitiesList);
                     }
                 }
                 if (prefix == null || prefix.length() == 0) {
                     synchronized (ActivityAdapter.this.lock) {
-                        ArrayList<ListItem> list = new ArrayList<>(ActivityAdapter.this.mOriginalValues);
+                        ArrayList<ListItem> list =
+                                new ArrayList<>(ActivityAdapter.this.mOriginalValues);
                         results.values = list;
                         results.count = list.size();
                     }
@@ -241,7 +249,8 @@ public abstract class LauncherActivity extends ListActivity {
                 } else if (iconHeight > iconWidth) {
                     width = (int) (height * ratio);
                 }
-                Bitmap.Config c = icon.getOpacity() != -1 ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
+                Bitmap.Config c =
+                        icon.getOpacity() != -1 ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
                 Bitmap thumb = Bitmap.createBitmap(this.mIconWidth, this.mIconHeight, c);
                 Canvas canvas = this.mCanvas;
                 canvas.setBitmap(thumb);
@@ -306,12 +315,13 @@ public abstract class LauncherActivity extends ListActivity {
     private void updateButtonText() {
         Button cancelButton = (Button) findViewById(16908313);
         if (cancelButton != null) {
-            cancelButton.setOnClickListener(new View.OnClickListener() { // from class: android.app.LauncherActivity.1
-                @Override // android.view.View.OnClickListener
-                public void onClick(View v) {
-                    LauncherActivity.this.finish();
-                }
-            });
+            cancelButton.setOnClickListener(
+                    new View.OnClickListener() { // from class: android.app.LauncherActivity.1
+                        @Override // android.view.View.OnClickListener
+                        public void onClick(View v) {
+                            LauncherActivity.this.finish();
+                        }
+                    });
         }
     }
 

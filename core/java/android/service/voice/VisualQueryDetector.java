@@ -9,15 +9,15 @@ import android.os.ParcelFileDescriptor;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.SharedMemory;
-import android.service.voice.IVisualQueryDetectionVoiceInteractionCallback;
-import android.service.voice.VisualQueryDetector;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.app.IHotwordRecognitionStatusCallback;
 import com.android.internal.app.IVoiceInteractionAccessibilitySettingsListener;
 import com.android.internal.app.IVoiceInteractionManagerService;
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.util.FunctionalUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -37,9 +37,15 @@ public class VisualQueryDetector {
     private final Executor mExecutor;
     private final IVoiceInteractionManagerService mManagerService;
     private AccessibilityDetectionEnabledListenerWrapper mActiveAccessibilityListenerWrapper = null;
-    private final VisualQueryDetectorInitializationDelegate mInitializationDelegate = new VisualQueryDetectorInitializationDelegate();
+    private final VisualQueryDetectorInitializationDelegate mInitializationDelegate =
+            new VisualQueryDetectorInitializationDelegate();
 
-    VisualQueryDetector(IVoiceInteractionManagerService managerService, Executor executor, Callback callback, Context context, String attributionTag) {
+    VisualQueryDetector(
+            IVoiceInteractionManagerService managerService,
+            Executor executor,
+            Callback callback,
+            Context context,
+            String attributionTag) {
         this.mManagerService = managerService;
         this.mCallback = callback;
         this.mExecutor = executor;
@@ -61,7 +67,11 @@ public class VisualQueryDetector {
         synchronized (this.mInitializationDelegate.getLock()) {
             this.mInitializationDelegate.startRecognition();
             try {
-                this.mManagerService.startPerceiving(new BinderCallback(this.mExecutor, this.mCallback, this.mInitializationDelegate.getLock()));
+                this.mManagerService.startPerceiving(
+                        new BinderCallback(
+                                this.mExecutor,
+                                this.mCallback,
+                                this.mInitializationDelegate.getLock()));
             } catch (RemoteException e) {
                 e.rethrowFromSystemServer();
             } catch (SecurityException e2) {
@@ -97,7 +107,8 @@ public class VisualQueryDetector {
         synchronized (this.mInitializationDelegate.getLock()) {
             try {
                 try {
-                    accessibilityDetectionEnabled = this.mManagerService.getAccessibilityDetectionEnabled();
+                    accessibilityDetectionEnabled =
+                            this.mManagerService.getAccessibilityDetectionEnabled();
                 } catch (RemoteException e) {
                     e.rethrowFromSystemServer();
                     return false;
@@ -118,11 +129,17 @@ public class VisualQueryDetector {
                 e.rethrowFromSystemServer();
             }
             if (this.mActiveAccessibilityListenerWrapper != null) {
-                Slog.e(TAG, "Fail to register accessibility setting listener: already registered and not unregistered.");
-                throw new IllegalStateException("Cannot register listener with listeners already set.");
+                Slog.e(
+                        TAG,
+                        "Fail to register accessibility setting listener: already registered and"
+                            + " not unregistered.");
+                throw new IllegalStateException(
+                        "Cannot register listener with listeners already set.");
             }
-            this.mActiveAccessibilityListenerWrapper = new AccessibilityDetectionEnabledListenerWrapper(listener);
-            this.mManagerService.registerAccessibilityDetectionSettingsListener(this.mActiveAccessibilityListenerWrapper);
+            this.mActiveAccessibilityListenerWrapper =
+                    new AccessibilityDetectionEnabledListenerWrapper(listener);
+            this.mManagerService.registerAccessibilityDetectionSettingsListener(
+                    this.mActiveAccessibilityListenerWrapper);
         }
     }
 
@@ -138,12 +155,14 @@ public class VisualQueryDetector {
                 Slog.e(TAG, "Not able to remove the listener: listener does not exist.");
                 throw new IllegalStateException("Cannot clear listener since it is not set.");
             }
-            this.mManagerService.unregisterAccessibilityDetectionSettingsListener(this.mActiveAccessibilityListenerWrapper);
+            this.mManagerService.unregisterAccessibilityDetectionSettingsListener(
+                    this.mActiveAccessibilityListenerWrapper);
             this.mActiveAccessibilityListenerWrapper = null;
         }
     }
 
-    private final class AccessibilityDetectionEnabledListenerWrapper extends IVoiceInteractionAccessibilitySettingsListener.Stub {
+    private final class AccessibilityDetectionEnabledListenerWrapper
+            extends IVoiceInteractionAccessibilitySettingsListener.Stub {
         private Consumer<Boolean> mListener;
 
         AccessibilityDetectionEnabledListenerWrapper(Consumer<Boolean> listener) {
@@ -194,12 +213,23 @@ public class VisualQueryDetector {
 
     private class VisualQueryDetectorInitializationDelegate extends AbstractDetector {
         VisualQueryDetectorInitializationDelegate() {
-            super(VisualQueryDetector.this.mManagerService, VisualQueryDetector.this.mExecutor, null);
+            super(
+                    VisualQueryDetector.this.mManagerService,
+                    VisualQueryDetector.this.mExecutor,
+                    null);
         }
 
         @Override // android.service.voice.AbstractDetector
         void initialize(PersistableBundle options, SharedMemory sharedMemory) {
-            initAndVerifyDetector(options, sharedMemory, new InitializationStateListener(VisualQueryDetector.this.mExecutor, VisualQueryDetector.this.mCallback, VisualQueryDetector.this.mContext), 3, VisualQueryDetector.this.mAttributionTag);
+            initAndVerifyDetector(
+                    options,
+                    sharedMemory,
+                    new InitializationStateListener(
+                            VisualQueryDetector.this.mExecutor,
+                            VisualQueryDetector.this.mCallback,
+                            VisualQueryDetector.this.mContext),
+                    3,
+                    VisualQueryDetector.this.mAttributionTag);
         }
 
         @Override // android.service.voice.HotwordDetector
@@ -215,7 +245,10 @@ public class VisualQueryDetector {
         }
 
         @Override // android.service.voice.AbstractDetector, android.service.voice.HotwordDetector
-        public final boolean startRecognition(ParcelFileDescriptor audioStream, AudioFormat audioFormat, PersistableBundle options) {
+        public final boolean startRecognition(
+                ParcelFileDescriptor audioStream,
+                AudioFormat audioFormat,
+                PersistableBundle options) {
             return false;
         }
 
@@ -225,8 +258,7 @@ public class VisualQueryDetector {
         }
 
         @Override // android.service.voice.HotwordDetector
-        public void dump(String prefix, PrintWriter pw) {
-        }
+        public void dump(String prefix, PrintWriter pw) {}
 
         /* JADX INFO: Access modifiers changed from: private */
         public Object getLock() {
@@ -249,23 +281,31 @@ public class VisualQueryDetector {
         @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
         public void onQueryDetected(final String partialQuery) {
             Slog.v(VisualQueryDetector.TAG, "BinderCallback#onQueryDetected");
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda5
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    VisualQueryDetector.BinderCallback.this.lambda$onQueryDetected$1(partialQuery);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda5
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            VisualQueryDetector.BinderCallback.this.lambda$onQueryDetected$1(
+                                    partialQuery);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onQueryDetected$1(final String partialQuery) throws Exception {
+        public /* synthetic */ void lambda$onQueryDetected$1(final String partialQuery)
+                throws Exception {
             synchronized (this.mLock) {
-                this.mExecutor.execute(new Runnable() { // from class: android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        VisualQueryDetector.BinderCallback.this.lambda$onQueryDetected$0(partialQuery);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                VisualQueryDetector.BinderCallback.this.lambda$onQueryDetected$0(
+                                        partialQuery);
+                            }
+                        });
             }
         }
 
@@ -277,51 +317,65 @@ public class VisualQueryDetector {
         @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
         public void onResultDetected(final VisualQueryDetectedResult partialResult) {
             Slog.v(VisualQueryDetector.TAG, "BinderCallback#onResultDetected");
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda4
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    VisualQueryDetector.BinderCallback.this.lambda$onResultDetected$3(partialResult);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda4
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            VisualQueryDetector.BinderCallback.this.lambda$onResultDetected$3(
+                                    partialResult);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onResultDetected$3(final VisualQueryDetectedResult partialResult) throws Exception {
+        public /* synthetic */ void lambda$onResultDetected$3(
+                final VisualQueryDetectedResult partialResult) throws Exception {
             synchronized (this.mLock) {
-                this.mExecutor.execute(new Runnable() { // from class: android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda7
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        VisualQueryDetector.BinderCallback.this.lambda$onResultDetected$2(partialResult);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda7
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                VisualQueryDetector.BinderCallback.this.lambda$onResultDetected$2(
+                                        partialResult);
+                            }
+                        });
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onResultDetected$2(VisualQueryDetectedResult partialResult) {
+        public /* synthetic */ void lambda$onResultDetected$2(
+                VisualQueryDetectedResult partialResult) {
             this.mCallback.onQueryDetected(partialResult);
         }
 
         @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
         public void onQueryFinished() {
             Slog.v(VisualQueryDetector.TAG, "BinderCallback#onQueryFinished");
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    VisualQueryDetector.BinderCallback.this.lambda$onQueryFinished$5();
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda0
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            VisualQueryDetector.BinderCallback.this.lambda$onQueryFinished$5();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onQueryFinished$5() throws Exception {
             synchronized (this.mLock) {
-                this.mExecutor.execute(new Runnable() { // from class: android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda3
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        VisualQueryDetector.BinderCallback.this.lambda$onQueryFinished$4();
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda3
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                VisualQueryDetector.BinderCallback.this.lambda$onQueryFinished$4();
+                            }
+                        });
             }
         }
 
@@ -333,23 +387,28 @@ public class VisualQueryDetector {
         @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
         public void onQueryRejected() {
             Slog.v(VisualQueryDetector.TAG, "BinderCallback#onQueryRejected");
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda9
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    VisualQueryDetector.BinderCallback.this.lambda$onQueryRejected$7();
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda9
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            VisualQueryDetector.BinderCallback.this.lambda$onQueryRejected$7();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onQueryRejected$7() throws Exception {
             synchronized (this.mLock) {
-                this.mExecutor.execute(new Runnable() { // from class: android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda8
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        VisualQueryDetector.BinderCallback.this.lambda$onQueryRejected$6();
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda8
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                VisualQueryDetector.BinderCallback.this.lambda$onQueryRejected$6();
+                            }
+                        });
             }
         }
 
@@ -359,28 +418,44 @@ public class VisualQueryDetector {
         }
 
         @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
-        public void onVisualQueryDetectionServiceFailure(final VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) {
-            Slog.v(VisualQueryDetector.TAG, "BinderCallback#onVisualQueryDetectionServiceFailure: " + visualQueryDetectionServiceFailure);
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda1
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    VisualQueryDetector.BinderCallback.this.lambda$onVisualQueryDetectionServiceFailure$9(visualQueryDetectionServiceFailure);
-                }
-            });
+        public void onVisualQueryDetectionServiceFailure(
+                final VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) {
+            Slog.v(
+                    VisualQueryDetector.TAG,
+                    "BinderCallback#onVisualQueryDetectionServiceFailure: "
+                            + visualQueryDetectionServiceFailure);
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda1
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            VisualQueryDetector.BinderCallback.this
+                                    .lambda$onVisualQueryDetectionServiceFailure$9(
+                                            visualQueryDetectionServiceFailure);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$9(final VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) throws Exception {
-            this.mExecutor.execute(new Runnable() { // from class: android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda6
-                @Override // java.lang.Runnable
-                public final void run() {
-                    VisualQueryDetector.BinderCallback.this.lambda$onVisualQueryDetectionServiceFailure$8(visualQueryDetectionServiceFailure);
-                }
-            });
+        public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$9(
+                final VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
+                throws Exception {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.voice.VisualQueryDetector$BinderCallback$$ExternalSyntheticLambda6
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            VisualQueryDetector.BinderCallback.this
+                                    .lambda$onVisualQueryDetectionServiceFailure$8(
+                                            visualQueryDetectionServiceFailure);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$8(VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) {
+        public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$8(
+                VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) {
             if (visualQueryDetectionServiceFailure != null) {
                 this.mCallback.onFailure(visualQueryDetectionServiceFailure);
             } else {
@@ -402,48 +477,52 @@ public class VisualQueryDetector {
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onKeyphraseDetected(SoundTrigger.KeyphraseRecognitionEvent recognitionEvent, HotwordDetectedResult result) {
-        }
+        public void onKeyphraseDetected(
+                SoundTrigger.KeyphraseRecognitionEvent recognitionEvent,
+                HotwordDetectedResult result) {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onKeyphraseDetectedFromExternalSource(HotwordDetectedResult result) {
-        }
+        public void onKeyphraseDetectedFromExternalSource(HotwordDetectedResult result) {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onGenericSoundTriggerDetected(SoundTrigger.GenericRecognitionEvent recognitionEvent) throws RemoteException {
-        }
+        public void onGenericSoundTriggerDetected(
+                SoundTrigger.GenericRecognitionEvent recognitionEvent) throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onRejected(HotwordRejectedResult result) throws RemoteException {
-        }
+        public void onRejected(HotwordRejectedResult result) throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onRecognitionPaused() throws RemoteException {
-        }
+        public void onRecognitionPaused() throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onRecognitionResumed() throws RemoteException {
-        }
+        public void onRecognitionResumed() throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
         public void onStatusReported(final int status) {
             Slog.v(VisualQueryDetector.TAG, "onStatusReported");
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda7
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    VisualQueryDetector.InitializationStateListener.this.lambda$onStatusReported$1(status);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda7
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            VisualQueryDetector.InitializationStateListener.this
+                                    .lambda$onStatusReported$1(status);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onStatusReported$1(final int status) throws Exception {
-            this.mExecutor.execute(new Runnable() { // from class: android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    VisualQueryDetector.InitializationStateListener.this.lambda$onStatusReported$0(status);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            VisualQueryDetector.InitializationStateListener.this
+                                    .lambda$onStatusReported$0(status);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -454,22 +533,29 @@ public class VisualQueryDetector {
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
         public void onProcessRestarted() throws RemoteException {
             Slog.v(VisualQueryDetector.TAG, "onProcessRestarted()");
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda9
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    VisualQueryDetector.InitializationStateListener.this.lambda$onProcessRestarted$3();
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda9
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            VisualQueryDetector.InitializationStateListener.this
+                                    .lambda$onProcessRestarted$3();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onProcessRestarted$3() throws Exception {
-            this.mExecutor.execute(new Runnable() { // from class: android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda6
-                @Override // java.lang.Runnable
-                public final void run() {
-                    VisualQueryDetector.InitializationStateListener.this.lambda$onProcessRestarted$2();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda6
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            VisualQueryDetector.InitializationStateListener.this
+                                    .lambda$onProcessRestarted$2();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -478,33 +564,53 @@ public class VisualQueryDetector {
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onHotwordDetectionServiceFailure(HotwordDetectionServiceFailure hotwordDetectionServiceFailure) throws RemoteException {
-            Slog.w(VisualQueryDetector.TAG, "onHotwordDetectionServiceFailure: " + hotwordDetectionServiceFailure);
+        public void onHotwordDetectionServiceFailure(
+                HotwordDetectionServiceFailure hotwordDetectionServiceFailure)
+                throws RemoteException {
+            Slog.w(
+                    VisualQueryDetector.TAG,
+                    "onHotwordDetectionServiceFailure: " + hotwordDetectionServiceFailure);
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onVisualQueryDetectionServiceFailure(final VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) throws RemoteException {
-            Slog.v(VisualQueryDetector.TAG, "onVisualQueryDetectionServiceFailure: " + visualQueryDetectionServiceFailure);
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda2
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    VisualQueryDetector.InitializationStateListener.this.lambda$onVisualQueryDetectionServiceFailure$5(visualQueryDetectionServiceFailure);
-                }
-            });
+        public void onVisualQueryDetectionServiceFailure(
+                final VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
+                throws RemoteException {
+            Slog.v(
+                    VisualQueryDetector.TAG,
+                    "onVisualQueryDetectionServiceFailure: " + visualQueryDetectionServiceFailure);
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda2
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            VisualQueryDetector.InitializationStateListener.this
+                                    .lambda$onVisualQueryDetectionServiceFailure$5(
+                                            visualQueryDetectionServiceFailure);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$5(final VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) throws Exception {
-            this.mExecutor.execute(new Runnable() { // from class: android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    VisualQueryDetector.InitializationStateListener.this.lambda$onVisualQueryDetectionServiceFailure$4(visualQueryDetectionServiceFailure);
-                }
-            });
+        public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$5(
+                final VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
+                throws Exception {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            VisualQueryDetector.InitializationStateListener.this
+                                    .lambda$onVisualQueryDetectionServiceFailure$4(
+                                            visualQueryDetectionServiceFailure);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$4(VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) {
+        public /* synthetic */ void lambda$onVisualQueryDetectionServiceFailure$4(
+                VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) {
             if (visualQueryDetectionServiceFailure != null) {
                 this.mCallback.onFailure(visualQueryDetectionServiceFailure);
             } else {
@@ -514,67 +620,93 @@ public class VisualQueryDetector {
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
         public void onSoundTriggerFailure(SoundTriggerFailure soundTriggerFailure) {
-            Slog.wtf(VisualQueryDetector.TAG, "Unexpected STFailure in VisualQueryDetector" + soundTriggerFailure);
+            Slog.wtf(
+                    VisualQueryDetector.TAG,
+                    "Unexpected STFailure in VisualQueryDetector" + soundTriggerFailure);
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
         public void onUnknownFailure(final String errorMessage) throws RemoteException {
             Slog.v(VisualQueryDetector.TAG, "onUnknownFailure: " + errorMessage);
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda4
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    VisualQueryDetector.InitializationStateListener.this.lambda$onUnknownFailure$7(errorMessage);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda4
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            VisualQueryDetector.InitializationStateListener.this
+                                    .lambda$onUnknownFailure$7(errorMessage);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onUnknownFailure$7(final String errorMessage) throws Exception {
-            this.mExecutor.execute(new Runnable() { // from class: android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    VisualQueryDetector.InitializationStateListener.this.lambda$onUnknownFailure$6(errorMessage);
-                }
-            });
+        public /* synthetic */ void lambda$onUnknownFailure$7(final String errorMessage)
+                throws Exception {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            VisualQueryDetector.InitializationStateListener.this
+                                    .lambda$onUnknownFailure$6(errorMessage);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onUnknownFailure$6(String errorMessage) {
-            this.mCallback.onUnknownFailure(!TextUtils.isEmpty(errorMessage) ? errorMessage : "Error data is null");
+            this.mCallback.onUnknownFailure(
+                    !TextUtils.isEmpty(errorMessage) ? errorMessage : "Error data is null");
         }
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onOpenFile(final String filename, final AndroidFuture future) throws RemoteException {
+        public void onOpenFile(final String filename, final AndroidFuture future)
+                throws RemoteException {
             Slog.v(VisualQueryDetector.TAG, "BinderCallback#onOpenFile " + filename);
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda8
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    VisualQueryDetector.InitializationStateListener.this.lambda$onOpenFile$9(filename, future);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda8
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            VisualQueryDetector.InitializationStateListener.this
+                                    .lambda$onOpenFile$9(filename, future);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onOpenFile$9(final String filename, final AndroidFuture future) throws Exception {
-            this.mExecutor.execute(new Runnable() { // from class: android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    VisualQueryDetector.InitializationStateListener.this.lambda$onOpenFile$8(filename, future);
-                }
-            });
+        public /* synthetic */ void lambda$onOpenFile$9(
+                final String filename, final AndroidFuture future) throws Exception {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.voice.VisualQueryDetector$InitializationStateListener$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            VisualQueryDetector.InitializationStateListener.this
+                                    .lambda$onOpenFile$8(filename, future);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onOpenFile$8(String filename, AndroidFuture future) {
-            Slog.v(VisualQueryDetector.TAG, "onOpenFile: " + filename + "under internal app storage.");
+            Slog.v(
+                    VisualQueryDetector.TAG,
+                    "onOpenFile: " + filename + "under internal app storage.");
             File f = new File(this.mContext.getFilesDir(), filename);
             ParcelFileDescriptor pfd = null;
             try {
                 try {
                     pfd = ParcelFileDescriptor.open(f, 268435456);
-                    Slog.d(VisualQueryDetector.TAG, "Successfully opened a file with ParcelFileDescriptor.");
+                    Slog.d(
+                            VisualQueryDetector.TAG,
+                            "Successfully opened a file with ParcelFileDescriptor.");
                 } catch (FileNotFoundException e) {
-                    Slog.e(VisualQueryDetector.TAG, "Cannot open file. No ParcelFileDescriptor returned.");
+                    Slog.e(
+                            VisualQueryDetector.TAG,
+                            "Cannot open file. No ParcelFileDescriptor returned.");
                 }
             } finally {
                 future.complete(pfd);

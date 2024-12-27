@@ -6,6 +6,7 @@ import android.os.incremental.V4Signature;
 import android.system.Os;
 import android.system.OsConstants;
 import android.util.Slog;
+
 import com.android.internal.org.bouncycastle.asn1.nist.NISTObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.cms.CMSException;
@@ -15,6 +16,7 @@ import com.android.internal.org.bouncycastle.cms.SignerInformation;
 import com.android.internal.org.bouncycastle.cms.SignerInformationVerifier;
 import com.android.internal.org.bouncycastle.cms.jcajce.JcaSimpleSignerInfoVerifierBuilder;
 import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +45,8 @@ public abstract class VerityUtils {
     private static native int statxForFsverityNative(String str);
 
     public static boolean isFsVeritySupported() {
-        return Build.VERSION.DEVICE_INITIAL_SDK_INT >= 30 || SystemProperties.getInt("ro.apk_verity.mode", 0) == 2;
+        return Build.VERSION.DEVICE_INITIAL_SDK_INT >= 30
+                || SystemProperties.getInt("ro.apk_verity.mode", 0) == 2;
     }
 
     public static boolean isFsveritySignatureFile(File file) {
@@ -57,21 +60,28 @@ public abstract class VerityUtils {
     public static void setUpFsverity(String filePath) throws IOException {
         int errno = enableFsverityNative(filePath);
         if (errno != 0) {
-            throw new IOException("Failed to enable fs-verity on " + filePath + ": " + Os.strerror(errno));
+            throw new IOException(
+                    "Failed to enable fs-verity on " + filePath + ": " + Os.strerror(errno));
         }
     }
 
     public static void setUpFsverity(int fd) throws IOException {
         int errno = enableFsverityForFdNative(fd);
         if (errno != 0) {
-            throw new IOException("Failed to enable fs-verity on FD(" + fd + "): " + Os.strerror(errno));
+            throw new IOException(
+                    "Failed to enable fs-verity on FD(" + fd + "): " + Os.strerror(errno));
         }
     }
 
     public static boolean hasFsverity(String filePath) {
         int retval = statxForFsverityNative(filePath);
         if (retval < 0) {
-            Slog.e(TAG, "Failed to check whether fs-verity is enabled, errno " + (-retval) + ": " + filePath);
+            Slog.e(
+                    TAG,
+                    "Failed to check whether fs-verity is enabled, errno "
+                            + (-retval)
+                            + ": "
+                            + filePath);
             return false;
         }
         if (retval != 1) {
@@ -80,13 +90,16 @@ public abstract class VerityUtils {
         return true;
     }
 
-    public static boolean verifyPkcs7DetachedSignature(byte[] signatureBlock, byte[] digest, InputStream derCertInputStream) {
+    public static boolean verifyPkcs7DetachedSignature(
+            byte[] signatureBlock, byte[] digest, InputStream derCertInputStream) {
         if (digest.length != 32) {
             Slog.w(TAG, "Only sha256 is currently supported");
             return false;
         }
         try {
-            CMSSignedData signedData = new CMSSignedData(new CMSProcessableByteArray(toFormattedDigest(digest)), signatureBlock);
+            CMSSignedData signedData =
+                    new CMSSignedData(
+                            new CMSProcessableByteArray(toFormattedDigest(digest)), signatureBlock);
             if (!signedData.isDetachedSignature()) {
                 Slog.w(TAG, "Expect only detached siganture");
                 return false;
@@ -99,8 +112,12 @@ public abstract class VerityUtils {
                 Slog.w(TAG, "Expect no CRL in signature");
                 return false;
             }
-            X509Certificate trustedCert = (X509Certificate) CertificateFactory.getInstance("X.509").generateCertificate(derCertInputStream);
-            SignerInformationVerifier verifier = new JcaSimpleSignerInfoVerifierBuilder().build(trustedCert);
+            X509Certificate trustedCert =
+                    (X509Certificate)
+                            CertificateFactory.getInstance("X.509")
+                                    .generateCertificate(derCertInputStream);
+            SignerInformationVerifier verifier =
+                    new JcaSimpleSignerInfoVerifierBuilder().build(trustedCert);
             for (SignerInformation si : signedData.getSignerInfos().getSigners()) {
                 if (si.getSignedAttributes() != null && si.getSignedAttributes().size() > 0) {
                     Slog.w(TAG, "Unexpected signed attributes");
@@ -115,7 +132,9 @@ public abstract class VerityUtils {
                     return false;
                 }
                 if (!PKCSObjectIdentifiers.rsaEncryption.getId().equals(si.getEncryptionAlgOID())) {
-                    Slog.w(TAG, "Unsupported encryption algorithm OID: " + si.getEncryptionAlgOID());
+                    Slog.w(
+                            TAG,
+                            "Unsupported encryption algorithm OID: " + si.getEncryptionAlgOID());
                     return false;
                 }
                 if (si.verify(verifier)) {
@@ -142,12 +161,14 @@ public abstract class VerityUtils {
         return result;
     }
 
-    public static byte[] generateFsVerityDigest(long fileSize, V4Signature.HashingInfo hashingInfo) throws DigestException, NoSuchAlgorithmException {
+    public static byte[] generateFsVerityDigest(long fileSize, V4Signature.HashingInfo hashingInfo)
+            throws DigestException, NoSuchAlgorithmException {
         if (hashingInfo.rawRootHash == null || hashingInfo.rawRootHash.length != 32) {
             throw new IllegalArgumentException("Expect a 32-byte rootHash for SHA256");
         }
         if (hashingInfo.log2BlockSize != 12) {
-            throw new IllegalArgumentException("Unsupported log2BlockSize: " + ((int) hashingInfo.log2BlockSize));
+            throw new IllegalArgumentException(
+                    "Unsupported log2BlockSize: " + ((int) hashingInfo.log2BlockSize));
         }
         ByteBuffer buffer = ByteBuffer.allocate(256);
         buffer.order(ByteOrder.LITTLE_ENDIAN);

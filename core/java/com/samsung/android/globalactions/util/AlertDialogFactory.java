@@ -8,6 +8,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.ContextThemeWrapper;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
 import com.android.internal.R;
 
 /* loaded from: classes6.dex */
@@ -27,10 +28,15 @@ public class AlertDialogFactory {
             this.mAlertDialog.dismiss();
         }
         this.mIsNightMode = (this.mContext.getResources().getConfiguration().uiMode & 48) == 32;
-        this.mAlertDialogBuilder = new AlertDialog.Builder(this.mIsNightMode ? new ContextThemeWrapper(this.mContext, 16974120) : this.mContext);
+        this.mAlertDialogBuilder =
+                new AlertDialog.Builder(
+                        this.mIsNightMode
+                                ? new ContextThemeWrapper(this.mContext, 16974120)
+                                : this.mContext);
     }
 
-    public AlertDialog getProKioskModeDialog(final Runnable positiveRunnable, final Runnable negativeRunnable) {
+    public AlertDialog getProKioskModeDialog(
+            final Runnable positiveRunnable, final Runnable negativeRunnable) {
         initAlertDialogBuilder();
         this.mAlertDialogBuilder.setTitle(R.string.global_action_pro_kiosk_mode_title);
         this.mAlertDialogBuilder.setMessage(R.string.global_action_pro_kiosk_mode_enter_passcode);
@@ -38,24 +44,36 @@ public class AlertDialogFactory {
         layout.setOrientation(1);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(-1, -1);
         params.setMargins(50, 0, 50, 0);
-        this.mPasswordTextView = new EditText(this.mIsNightMode ? new ContextThemeWrapper(this.mContext, 16974120) : this.mContext);
+        this.mPasswordTextView =
+                new EditText(
+                        this.mIsNightMode
+                                ? new ContextThemeWrapper(this.mContext, 16974120)
+                                : this.mContext);
         this.mPasswordTextView.setInputType(129);
         this.mPasswordTextView.setTransformationMethod(PasswordTransformationMethod.getInstance());
         this.mPasswordTextView.setGravity(1);
         layout.addView(this.mPasswordTextView, params);
         this.mAlertDialogBuilder.setView(layout);
-        this.mAlertDialogBuilder.setPositiveButton(17039370, new DialogInterface.OnClickListener() { // from class: com.samsung.android.globalactions.util.AlertDialogFactory$$ExternalSyntheticLambda0
-            @Override // android.content.DialogInterface.OnClickListener
-            public final void onClick(DialogInterface dialogInterface, int i) {
-                positiveRunnable.run();
-            }
-        });
-        this.mAlertDialogBuilder.setNegativeButton(17039360, new DialogInterface.OnClickListener() { // from class: com.samsung.android.globalactions.util.AlertDialogFactory$$ExternalSyntheticLambda1
-            @Override // android.content.DialogInterface.OnClickListener
-            public final void onClick(DialogInterface dialogInterface, int i) {
-                negativeRunnable.run();
-            }
-        });
+        this.mAlertDialogBuilder.setPositiveButton(
+                17039370,
+                new DialogInterface
+                        .OnClickListener() { // from class:
+                                             // com.samsung.android.globalactions.util.AlertDialogFactory$$ExternalSyntheticLambda0
+                    @Override // android.content.DialogInterface.OnClickListener
+                    public final void onClick(DialogInterface dialogInterface, int i) {
+                        positiveRunnable.run();
+                    }
+                });
+        this.mAlertDialogBuilder.setNegativeButton(
+                17039360,
+                new DialogInterface
+                        .OnClickListener() { // from class:
+                                             // com.samsung.android.globalactions.util.AlertDialogFactory$$ExternalSyntheticLambda1
+                    @Override // android.content.DialogInterface.OnClickListener
+                    public final void onClick(DialogInterface dialogInterface, int i) {
+                        negativeRunnable.run();
+                    }
+                });
         this.mAlertDialog = this.mAlertDialogBuilder.create();
         this.mAlertDialog.getWindow().getAttributes().setTitle("GlobalActions_ProKioskDialog");
         this.mAlertDialog.getWindow().setType(2008);
@@ -67,7 +85,8 @@ public class AlertDialogFactory {
         initAlertDialogBuilder();
         this.mAlertDialogBuilder.setTitle(R.string.global_action_insert_sim_card);
         this.mAlertDialogBuilder.setMessage(R.string.global_action_insert_sim_card_message);
-        this.mAlertDialogBuilder.setPositiveButton(17039370, (DialogInterface.OnClickListener) null);
+        this.mAlertDialogBuilder.setPositiveButton(
+                17039370, (DialogInterface.OnClickListener) null);
         this.mAlertDialog = this.mAlertDialogBuilder.create();
         this.mAlertDialog.getWindow().getAttributes().setTitle("GlobalActions_InsertSimCardDialog");
         this.mAlertDialog.getWindow().setType(2009);

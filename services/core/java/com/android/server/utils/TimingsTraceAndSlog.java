@@ -32,7 +32,8 @@ public final class TimingsTraceAndSlog extends TimingsTraceLog {
     }
 
     public final String toString() {
-        return AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder("TimingsTraceAndSlog["), this.mTag, "]");
+        return AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                new StringBuilder("TimingsTraceAndSlog["), this.mTag, "]");
     }
 
     public final void traceBegin(String str) {

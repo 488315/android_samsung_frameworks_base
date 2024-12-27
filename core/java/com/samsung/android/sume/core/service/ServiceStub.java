@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.controller.MediaController;
 import com.samsung.android.sume.core.controller.MediaFilterController;
@@ -11,6 +12,7 @@ import com.samsung.android.sume.core.filter.MediaFilter;
 import com.samsung.android.sume.core.graph.Graph;
 import com.samsung.android.sume.core.graph.MFDescriptorGraph;
 import com.samsung.android.sume.core.message.Request;
+
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,7 +20,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
 /* loaded from: classes6.dex */
-public abstract class ServiceStub extends Service implements ServiceController, MediaController.OnEventListener {
+public abstract class ServiceStub extends Service
+        implements ServiceController, MediaController.OnEventListener {
     private static final String TAG = Def.tagOf((Class<?>) ServiceStub.class);
     private final AtomicInteger controllerId = new AtomicInteger(0);
     protected Map<Integer, MediaFilterController> mediaFilterControllers = new ConcurrentHashMap();
@@ -46,12 +49,18 @@ public abstract class ServiceStub extends Service implements ServiceController, 
     }
 
     protected void onIntentReceived(Intent intent) {
-        String action = (String) Optional.ofNullable(intent).map(new Function() { // from class: com.samsung.android.sume.core.service.ServiceStub$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((Intent) obj).getAction();
-            }
-        }).orElse("n/a");
+        String action =
+                (String)
+                        Optional.ofNullable(intent)
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.service.ServiceStub$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return ((Intent) obj).getAction();
+                                            }
+                                        })
+                                .orElse("n/a");
         Log.d(TAG, "intent: action=" + action);
         if ("start-foreground".equals(action)) {
             Intent activityIntent = (Intent) intent.getParcelableExtra("activity-intent");
@@ -72,7 +81,8 @@ public abstract class ServiceStub extends Service implements ServiceController, 
 
     @Override // com.samsung.android.sume.core.service.ServiceController
     public void releaseMediaFilterController(int id) {
-        MediaFilterController mediaFilterController = this.mediaFilterControllers.remove(Integer.valueOf(id));
+        MediaFilterController mediaFilterController =
+                this.mediaFilterControllers.remove(Integer.valueOf(id));
         if (mediaFilterController != null) {
             mediaFilterController.release();
         }
@@ -80,14 +90,15 @@ public abstract class ServiceStub extends Service implements ServiceController, 
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:16:0x007a, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public com.samsung.android.sume.core.message.ResponseHolder request(int r7, final com.samsung.android.sume.core.message.Request r8) {
+    public com.samsung.android.sume.core.message.ResponseHolder request(
+            int r7, final com.samsung.android.sume.core.message.Request r8) {
         /*
             r6 = this;
             com.samsung.android.sume.core.message.ResponseHolder r0 = new com.samsung.android.sume.core.message.ResponseHolder
@@ -149,7 +160,10 @@ public abstract class ServiceStub extends Service implements ServiceController, 
         L7a:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.sume.core.service.ServiceStub.request(int, com.samsung.android.sume.core.message.Request):com.samsung.android.sume.core.message.ResponseHolder");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.sume.core.service.ServiceStub.request(int,"
+                    + " com.samsung.android.sume.core.message.Request):com.samsung.android.sume.core.message.ResponseHolder");
     }
 
     static /* synthetic */ boolean lambda$request$0(Request request, Integer it) {

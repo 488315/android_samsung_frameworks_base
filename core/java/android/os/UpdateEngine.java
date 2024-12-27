@@ -2,8 +2,7 @@ package android.os;
 
 import android.annotation.SystemApi;
 import android.content.res.AssetFileDescriptor;
-import android.os.IUpdateEngine;
-import android.os.IUpdateEngineCallback;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -14,11 +13,11 @@ public class UpdateEngine {
     private static final String UPDATE_ENGINE_SERVICE = "android.os.UpdateEngineService";
     private IUpdateEngineCallback mUpdateEngineCallback = null;
     private final Object mUpdateEngineCallbackLock = new Object();
-    private final IUpdateEngine mUpdateEngine = IUpdateEngine.Stub.asInterface(ServiceManager.getService(UPDATE_ENGINE_SERVICE));
+    private final IUpdateEngine mUpdateEngine =
+            IUpdateEngine.Stub.asInterface(ServiceManager.getService(UPDATE_ENGINE_SERVICE));
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ErrorCode {
-    }
+    public @interface ErrorCode {}
 
     public static final class ErrorCodeConstants {
         public static final int DEVICE_CORRUPTED = 61;
@@ -60,35 +59,38 @@ public class UpdateEngine {
     public boolean bind(final UpdateEngineCallback callback, final Handler handler) {
         boolean bind;
         synchronized (this.mUpdateEngineCallbackLock) {
-            this.mUpdateEngineCallback = new IUpdateEngineCallback.Stub() { // from class: android.os.UpdateEngine.1
-                @Override // android.os.IUpdateEngineCallback
-                public void onStatusUpdate(final int status, final float percent) {
-                    if (handler != null) {
-                        handler.post(new Runnable() { // from class: android.os.UpdateEngine.1.1
-                            @Override // java.lang.Runnable
-                            public void run() {
+            this.mUpdateEngineCallback =
+                    new IUpdateEngineCallback.Stub() { // from class: android.os.UpdateEngine.1
+                        @Override // android.os.IUpdateEngineCallback
+                        public void onStatusUpdate(final int status, final float percent) {
+                            if (handler != null) {
+                                handler.post(
+                                        new Runnable() { // from class: android.os.UpdateEngine.1.1
+                                            @Override // java.lang.Runnable
+                                            public void run() {
+                                                callback.onStatusUpdate(status, percent);
+                                            }
+                                        });
+                            } else {
                                 callback.onStatusUpdate(status, percent);
                             }
-                        });
-                    } else {
-                        callback.onStatusUpdate(status, percent);
-                    }
-                }
+                        }
 
-                @Override // android.os.IUpdateEngineCallback
-                public void onPayloadApplicationComplete(final int errorCode) {
-                    if (handler != null) {
-                        handler.post(new Runnable() { // from class: android.os.UpdateEngine.1.2
-                            @Override // java.lang.Runnable
-                            public void run() {
+                        @Override // android.os.IUpdateEngineCallback
+                        public void onPayloadApplicationComplete(final int errorCode) {
+                            if (handler != null) {
+                                handler.post(
+                                        new Runnable() { // from class: android.os.UpdateEngine.1.2
+                                            @Override // java.lang.Runnable
+                                            public void run() {
+                                                callback.onPayloadApplicationComplete(errorCode);
+                                            }
+                                        });
+                            } else {
                                 callback.onPayloadApplicationComplete(errorCode);
                             }
-                        });
-                    } else {
-                        callback.onPayloadApplicationComplete(errorCode);
-                    }
-                }
-            };
+                        }
+                    };
             try {
                 bind = this.mUpdateEngine.bind(this.mUpdateEngineCallback);
             } catch (RemoteException e) {
@@ -112,7 +114,11 @@ public class UpdateEngine {
 
     public void applyPayload(AssetFileDescriptor assetFd, String[] headerKeyValuePairs) {
         try {
-            this.mUpdateEngine.applyPayloadFd(assetFd.getParcelFileDescriptor(), assetFd.getStartOffset(), assetFd.getLength(), headerKeyValuePairs);
+            this.mUpdateEngine.applyPayloadFd(
+                    assetFd.getParcelFileDescriptor(),
+                    assetFd.getStartOffset(),
+                    assetFd.getLength(),
+                    headerKeyValuePairs);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -209,15 +215,21 @@ public class UpdateEngine {
             if (this.mErrorCode == 60) {
                 return this.mFreeSpaceRequired;
             }
-            throw new IllegalStateException(String.format("getFreeSpaceRequired() is not available when error code is %d", Integer.valueOf(this.mErrorCode)));
+            throw new IllegalStateException(
+                    String.format(
+                            "getFreeSpaceRequired() is not available when error code is %d",
+                            Integer.valueOf(this.mErrorCode)));
         }
     }
 
-    public AllocateSpaceResult allocateSpace(String payloadMetadataFilename, String[] headerKeyValuePairs) {
+    public AllocateSpaceResult allocateSpace(
+            String payloadMetadataFilename, String[] headerKeyValuePairs) {
         int i;
         AllocateSpaceResult result = new AllocateSpaceResult();
         try {
-            result.mFreeSpaceRequired = this.mUpdateEngine.allocateSpaceForPayload(payloadMetadataFilename, headerKeyValuePairs);
+            result.mFreeSpaceRequired =
+                    this.mUpdateEngine.allocateSpaceForPayload(
+                            payloadMetadataFilename, headerKeyValuePairs);
             if (result.mFreeSpaceRequired == 0) {
                 i = 0;
             } else {
@@ -261,8 +273,7 @@ public class UpdateEngine {
         }
 
         @Override // android.os.IUpdateEngineCallback
-        public void onStatusUpdate(int status, float percent) {
-        }
+        public void onStatusUpdate(int status, float percent) {}
 
         @Override // android.os.IUpdateEngineCallback
         public void onPayloadApplicationComplete(int errorCode) {

@@ -7,14 +7,18 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.internal.app.IVoiceActionCheckCallback;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface IVoiceInteractionService extends IInterface {
     void detectorRemoteExceptionOccurred(IBinder iBinder, int i) throws RemoteException;
 
-    void getActiveServiceSupportedActions(List<String> list, IVoiceActionCheckCallback iVoiceActionCheckCallback) throws RemoteException;
+    void getActiveServiceSupportedActions(
+            List<String> list, IVoiceActionCheckCallback iVoiceActionCheckCallback)
+            throws RemoteException;
 
     void launchVoiceAssistFromKeyguard() throws RemoteException;
 
@@ -30,36 +34,31 @@ public interface IVoiceInteractionService extends IInterface {
 
     public static class Default implements IVoiceInteractionService {
         @Override // android.service.voice.IVoiceInteractionService
-        public void ready() throws RemoteException {
-        }
+        public void ready() throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionService
-        public void soundModelsChanged() throws RemoteException {
-        }
+        public void soundModelsChanged() throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionService
-        public void shutdown() throws RemoteException {
-        }
+        public void shutdown() throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionService
-        public void launchVoiceAssistFromKeyguard() throws RemoteException {
-        }
+        public void launchVoiceAssistFromKeyguard() throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionService
-        public void getActiveServiceSupportedActions(List<String> voiceActions, IVoiceActionCheckCallback callback) throws RemoteException {
-        }
+        public void getActiveServiceSupportedActions(
+                List<String> voiceActions, IVoiceActionCheckCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionService
-        public void prepareToShowSession(Bundle args, int flags) throws RemoteException {
-        }
+        public void prepareToShowSession(Bundle args, int flags) throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionService
-        public void showSessionFailed(Bundle args) throws RemoteException {
-        }
+        public void showSessionFailed(Bundle args) throws RemoteException {}
 
         @Override // android.service.voice.IVoiceInteractionService
-        public void detectorRemoteExceptionOccurred(IBinder token, int detectorType) throws RemoteException {
-        }
+        public void detectorRemoteExceptionOccurred(IBinder token, int detectorType)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -67,7 +66,7 @@ public interface IVoiceInteractionService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoiceInteractionService {
+    public abstract static class Stub extends Binder implements IVoiceInteractionService {
         public static final String DESCRIPTOR = "android.service.voice.IVoiceInteractionService";
         static final int TRANSACTION_detectorRemoteExceptionOccurred = 8;
         static final int TRANSACTION_getActiveServiceSupportedActions = 5;
@@ -127,7 +126,8 @@ public interface IVoiceInteractionService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -150,7 +150,8 @@ public interface IVoiceInteractionService extends IInterface {
                     return true;
                 case 5:
                     List<String> _arg0 = data.createStringArrayList();
-                    IVoiceActionCheckCallback _arg1 = IVoiceActionCheckCallback.Stub.asInterface(data.readStrongBinder());
+                    IVoiceActionCheckCallback _arg1 =
+                            IVoiceActionCheckCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getActiveServiceSupportedActions(_arg0, _arg1);
                     return true;
@@ -237,7 +238,9 @@ public interface IVoiceInteractionService extends IInterface {
             }
 
             @Override // android.service.voice.IVoiceInteractionService
-            public void getActiveServiceSupportedActions(List<String> voiceActions, IVoiceActionCheckCallback callback) throws RemoteException {
+            public void getActiveServiceSupportedActions(
+                    List<String> voiceActions, IVoiceActionCheckCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -275,7 +278,8 @@ public interface IVoiceInteractionService extends IInterface {
             }
 
             @Override // android.service.voice.IVoiceInteractionService
-            public void detectorRemoteExceptionOccurred(IBinder token, int detectorType) throws RemoteException {
+            public void detectorRemoteExceptionOccurred(IBinder token, int detectorType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

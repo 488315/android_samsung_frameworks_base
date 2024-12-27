@@ -34,20 +34,23 @@ import android.system.OsConstants;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.internal.app.ResolverActivity;
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
-import com.android.server.PinnerService;
-import com.android.server.SystemService;
 import com.android.server.flags.Flags;
 import com.android.server.wm.ActivityTaskManagerInternal;
 import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.WindowManagerGlobalLock;
 import com.android.server.wm.WindowManagerService;
+
 import dalvik.system.DexFile;
 import dalvik.system.VMRuntime;
+
+import sun.misc.Unsafe;
+
 import java.io.Closeable;
 import java.io.DataInputStream;
 import java.io.FileDescriptor;
@@ -64,7 +67,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import sun.misc.Unsafe;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -90,16 +92,19 @@ public final class PinnerService extends SystemService {
     public final PinnerHandler mPinnerHandler;
     public final UserManager mUserManager;
     public static final int PAGE_SIZE = (int) Os.sysconf(OsConstants._SC_PAGESIZE);
-    public static final boolean PROP_PIN_PINLIST = SystemProperties.getBoolean("pinner.use_pinlist", true);
-    public static final long DEFAULT_ANON_SIZE = SystemProperties.getLong("pinner.pin_shared_anon_size", 0);
+    public static final boolean PROP_PIN_PINLIST =
+            SystemProperties.getBoolean("pinner.use_pinlist", true);
+    public static final long DEFAULT_ANON_SIZE =
+            SystemProperties.getLong("pinner.pin_shared_anon_size", 0);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IPinnerService.Stub {
-        public BinderService() {
-        }
+        public BinderService() {}
 
-        public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-            if (DumpUtils.checkDumpPermission(PinnerService.this.mContext, "PinnerService", printWriter)) {
+        public final void dump(
+                FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+            if (DumpUtils.checkDumpPermission(
+                    PinnerService.this.mContext, "PinnerService", printWriter)) {
                 HashSet hashSet = new HashSet();
                 HashSet hashSet2 = new HashSet();
                 synchronized (PinnerService.this) {
@@ -113,7 +118,8 @@ public final class PinnerService extends SystemService {
                             }
                             Integer num = (Integer) it.next();
                             int intValue = num.intValue();
-                            PinnedApp pinnedApp = (PinnedApp) PinnerService.this.mPinnedApps.get(num);
+                            PinnedApp pinnedApp =
+                                    (PinnedApp) PinnerService.this.mPinnedApps.get(num);
                             PinnerService.this.getClass();
                             printWriter.print(PinnerService.getNameForKey(intValue));
                             printWriter.print(" uid=");
@@ -121,18 +127,30 @@ public final class PinnerService extends SystemService {
                             printWriter.print(" active=");
                             printWriter.print(pinnedApp.active);
                             printWriter.println();
-                            Iterator it2 = ((PinnedApp) PinnerService.this.mPinnedApps.get(num)).mFiles.iterator();
+                            Iterator it2 =
+                                    ((PinnedApp) PinnerService.this.mPinnedApps.get(num))
+                                            .mFiles.iterator();
                             while (it2.hasNext()) {
                                 PinnedFile pinnedFile = (PinnedFile) it2.next();
                                 printWriter.print("  ");
-                                printWriter.format("%s pinned:%d bytes (%d MB) pinlist:%b\n", pinnedFile.fileName, Integer.valueOf(pinnedFile.bytesPinned), Integer.valueOf(pinnedFile.bytesPinned / i), Boolean.valueOf(pinnedFile.used_pinlist));
+                                printWriter.format(
+                                        "%s pinned:%d bytes (%d MB) pinlist:%b\n",
+                                        pinnedFile.fileName,
+                                        Integer.valueOf(pinnedFile.bytesPinned),
+                                        Integer.valueOf(pinnedFile.bytesPinned / i),
+                                        Boolean.valueOf(pinnedFile.used_pinlist));
                                 j += pinnedFile.bytesPinned;
                                 hashSet.add(pinnedFile);
                                 Iterator it3 = pinnedFile.pinnedDeps.iterator();
                                 while (it3.hasNext()) {
                                     PinnedFile pinnedFile2 = (PinnedFile) it3.next();
                                     printWriter.print("  ");
-                                    printWriter.format("%s pinned:%d bytes (%d MB) pinlist:%b (Dependency)\n", pinnedFile2.fileName, Integer.valueOf(pinnedFile2.bytesPinned), Integer.valueOf(pinnedFile2.bytesPinned / i), Boolean.valueOf(pinnedFile2.used_pinlist));
+                                    printWriter.format(
+                                            "%s pinned:%d bytes (%d MB) pinlist:%b (Dependency)\n",
+                                            pinnedFile2.fileName,
+                                            Integer.valueOf(pinnedFile2.bytesPinned),
+                                            Integer.valueOf(pinnedFile2.bytesPinned / i),
+                                            Boolean.valueOf(pinnedFile2.used_pinlist));
                                     j += pinnedFile2.bytesPinned;
                                     hashSet.add(pinnedFile2);
                                     i = 1048576;
@@ -149,14 +167,20 @@ public final class PinnerService extends SystemService {
                         boolean z = true;
                         while (it4.hasNext()) {
                             String str = (String) it4.next();
-                            for (PinnedFile pinnedFile4 : PinnerService.this.getAllPinsForGroup(str)) {
+                            for (PinnedFile pinnedFile4 :
+                                    PinnerService.this.getAllPinsForGroup(str)) {
                                 if (!hashSet.contains(pinnedFile4)) {
                                     if (z) {
                                         printWriter.print("Group:" + str);
                                         printWriter.println();
                                         z = false;
                                     }
-                                    printWriter.format("  %s pinned:%d bytes (%d MB) pinlist:%b\n", pinnedFile4.fileName, Integer.valueOf(pinnedFile4.bytesPinned), Integer.valueOf(pinnedFile4.bytesPinned / 1048576), Boolean.valueOf(pinnedFile4.used_pinlist));
+                                    printWriter.format(
+                                            "  %s pinned:%d bytes (%d MB) pinlist:%b\n",
+                                            pinnedFile4.fileName,
+                                            Integer.valueOf(pinnedFile4.bytesPinned),
+                                            Integer.valueOf(pinnedFile4.bytesPinned / 1048576),
+                                            Boolean.valueOf(pinnedFile4.used_pinlist));
                                     j += pinnedFile4.bytesPinned;
                                 }
                             }
@@ -164,10 +188,16 @@ public final class PinnerService extends SystemService {
                         printWriter.println();
                         PinnerService pinnerService = PinnerService.this;
                         if (pinnerService.mPinAnonAddress != 0) {
-                            printWriter.format("Pinned anon region: %d (%d MB)\n", Long.valueOf(pinnerService.mCurrentlyPinnedAnonSize), Long.valueOf(PinnerService.this.mCurrentlyPinnedAnonSize / 1048576));
+                            printWriter.format(
+                                    "Pinned anon region: %d (%d MB)\n",
+                                    Long.valueOf(pinnerService.mCurrentlyPinnedAnonSize),
+                                    Long.valueOf(
+                                            PinnerService.this.mCurrentlyPinnedAnonSize / 1048576));
                             j += PinnerService.this.mCurrentlyPinnedAnonSize;
                         }
-                        printWriter.format("Total pinned: %s bytes (%s MB)\n", Long.valueOf(j), Long.valueOf(j / 1048576));
+                        printWriter.format(
+                                "Total pinned: %s bytes (%s MB)\n",
+                                Long.valueOf(j), Long.valueOf(j / 1048576));
                         printWriter.println();
                         if (!PinnerService.this.mPendingRepin.isEmpty()) {
                             printWriter.print("Pending repin: ");
@@ -197,15 +227,25 @@ public final class PinnerService extends SystemService {
                 values = pinnerService.mPinnedFiles.values();
             }
             for (PinnedFile pinnedFile : values) {
-                arrayList.add(new PinnedFileStat(pinnedFile.fileName, pinnedFile.bytesPinned, pinnedFile.groupName));
+                arrayList.add(
+                        new PinnedFileStat(
+                                pinnedFile.fileName, pinnedFile.bytesPinned, pinnedFile.groupName));
             }
             if (pinnerService.mCurrentlyPinnedAnonSize > 0) {
-                arrayList.add(new PinnedFileStat("[anon]", pinnerService.mCurrentlyPinnedAnonSize, "[anon]"));
+                arrayList.add(
+                        new PinnedFileStat(
+                                "[anon]", pinnerService.mCurrentlyPinnedAnonSize, "[anon]"));
             }
             return arrayList;
         }
 
-        public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
+        public final void onShellCommand(
+                FileDescriptor fileDescriptor,
+                FileDescriptor fileDescriptor2,
+                FileDescriptor fileDescriptor3,
+                String[] strArr,
+                ShellCallback shellCallback,
+                ResultReceiver resultReceiver) {
             if (strArr.length < 1) {
                 PrintWriter printWriter = new PrintWriter(new FileOutputStream(fileDescriptor2));
                 printWriter.println("Command is not given.");
@@ -216,7 +256,9 @@ public final class PinnerService extends SystemService {
             String str = strArr[0];
             str.getClass();
             if (!str.equals("repin")) {
-                String m = XmlUtils$$ExternalSyntheticOutline0.m("Unknown pinner command: ", str, ". Supported commands: repin");
+                String m =
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "Unknown pinner command: ", str, ". Supported commands: repin");
                 PrintWriter printWriter2 = new PrintWriter(new FileOutputStream(fileDescriptor2));
                 printWriter2.println(m);
                 printWriter2.flush();
@@ -225,18 +267,21 @@ public final class PinnerService extends SystemService {
             }
             PinnerService pinnerService = PinnerService.this;
             pinnerService.getClass();
-            pinnerService.mPinnerHandler.sendMessage(PooledLambda.obtainMessage(new PinnerService$$ExternalSyntheticLambda4(), pinnerService));
+            pinnerService.mPinnerHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new PinnerService$$ExternalSyntheticLambda4(), pinnerService));
             PinnerService pinnerService2 = PinnerService.this;
             pinnerService2.getClass();
-            pinnerService2.mPinnerHandler.sendMessage(PooledLambda.obtainMessage(new PinnerService$$ExternalSyntheticLambda1(1), pinnerService2, 0));
+            pinnerService2.mPinnerHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new PinnerService$$ExternalSyntheticLambda1(1), pinnerService2, 0));
             resultReceiver.send(0, null);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public class Injector {
-    }
+    public class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PinRange {
@@ -364,17 +409,24 @@ public final class PinnerService extends SystemService {
                 return;
             }
             PinnerService pinnerService = PinnerService.this;
-            for (String str : pinnerService.mContext.getResources().getStringArray(R.array.config_sms_enabled_single_shift_tables)) {
+            for (String str :
+                    pinnerService
+                            .mContext
+                            .getResources()
+                            .getStringArray(R.array.config_sms_enabled_single_shift_tables)) {
                 pinnerService.mInjector.getClass();
-                PinnedFile pinFileInternal = PinnerService.pinFileInternal(Integer.MAX_VALUE, str, false);
+                PinnedFile pinFileInternal =
+                        PinnerService.pinFileInternal(Integer.MAX_VALUE, str, false);
                 if (pinFileInternal == null) {
-                    BootReceiver$$ExternalSyntheticOutline0.m("Failed to pin file = ", str, "PinnerService");
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            "Failed to pin file = ", str, "PinnerService");
                 } else {
                     synchronized (pinnerService) {
                         pinnerService.mPinnedFiles.put(pinFileInternal.fileName, pinFileInternal);
                     }
                     pinFileInternal.groupName = "system";
-                    pinnerService.pinOptimizedDexDependencies(pinFileInternal, Integer.MAX_VALUE, null);
+                    pinnerService.pinOptimizedDexDependencies(
+                            pinFileInternal, Integer.MAX_VALUE, null);
                 }
             }
             pinnerService.refreshPinAnonConfig();
@@ -392,36 +444,48 @@ public final class PinnerService extends SystemService {
         this.mPinnedApps = new ArrayMap();
         this.mPendingRepin = new ArrayMap();
         this.mPinnerHandler = null;
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.PinnerService.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                if ("android.intent.action.PACKAGE_REPLACED".equals(intent.getAction())) {
-                    String schemeSpecificPart = intent.getData().getSchemeSpecificPart();
-                    ArraySet arraySet = new ArraySet();
-                    arraySet.add(schemeSpecificPart);
-                    PinnerService.this.update(arraySet, true);
-                }
-            }
-        };
-        this.mDeviceConfigAnonSizeListener = new DeviceConfig.OnPropertiesChangedListener() { // from class: com.android.server.PinnerService.2
-            public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                if ("runtime_native".equals(properties.getNamespace()) && properties.getKeyset().contains("pin_shared_anon_size")) {
-                    PinnerService.this.refreshPinAnonConfig();
-                }
-            }
-        };
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver() { // from class: com.android.server.PinnerService.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        if ("android.intent.action.PACKAGE_REPLACED".equals(intent.getAction())) {
+                            String schemeSpecificPart = intent.getData().getSchemeSpecificPart();
+                            ArraySet arraySet = new ArraySet();
+                            arraySet.add(schemeSpecificPart);
+                            PinnerService.this.update(arraySet, true);
+                        }
+                    }
+                };
+        this.mDeviceConfigAnonSizeListener =
+                new DeviceConfig
+                        .OnPropertiesChangedListener() { // from class:
+                                                         // com.android.server.PinnerService.2
+                    public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                        if ("runtime_native".equals(properties.getNamespace())
+                                && properties.getKeyset().contains("pin_shared_anon_size")) {
+                            PinnerService.this.refreshPinAnonConfig();
+                        }
+                    }
+                };
         this.mContext = context;
         this.mInjector = injector;
         injector.getClass();
         this.mDeviceConfigInterface = DeviceConfigInterface.REAL;
-        this.mConfiguredToPinCamera = context.getResources().getBoolean(R.bool.config_requireCallCapableAccountForHandle);
-        this.mConfiguredHomePinBytes = context.getResources().getInteger(R.integer.config_searchKeyBehavior);
-        this.mConfiguredToPinAssistant = context.getResources().getBoolean(R.bool.config_repairModeSupported);
-        this.mConfiguredWebviewPinBytes = context.getResources().getInteger(R.integer.config_selected_udfps_touch_detection);
+        this.mConfiguredToPinCamera =
+                context.getResources().getBoolean(R.bool.config_requireCallCapableAccountForHandle);
+        this.mConfiguredHomePinBytes =
+                context.getResources().getInteger(R.integer.config_searchKeyBehavior);
+        this.mConfiguredToPinAssistant =
+                context.getResources().getBoolean(R.bool.config_repairModeSupported);
+        this.mConfiguredWebviewPinBytes =
+                context.getResources().getInteger(R.integer.config_selected_udfps_touch_detection);
         this.mPinKeys = createPinKeys();
         this.mPinnerHandler = new PinnerHandler(BackgroundThread.get().getLooper());
-        this.mAtmInternal = (ActivityTaskManagerInternal) LocalServices.getService(ActivityTaskManagerInternal.class);
-        this.mAmInternal = (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
+        this.mAtmInternal =
+                (ActivityTaskManagerInternal)
+                        LocalServices.getService(ActivityTaskManagerInternal.class);
+        this.mAmInternal =
+                (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
         IActivityManager service = ActivityManager.getService();
         this.mUserManager = (UserManager) context.getSystemService(UserManager.class);
         IntentFilter intentFilter = new IntentFilter();
@@ -429,38 +493,66 @@ public final class PinnerService extends SystemService {
         intentFilter.addDataScheme("package");
         context.registerReceiver(broadcastReceiver, intentFilter);
         try {
-            service.registerUidObserver(new UidObserver() { // from class: com.android.server.PinnerService.4
-                public final void onUidActive(int i) {
-                    PinnerService pinnerService = PinnerService.this;
-                    pinnerService.mPinnerHandler.sendMessage(PooledLambda.obtainMessage(new PinnerService$$ExternalSyntheticLambda1(3), pinnerService, Integer.valueOf(i)));
-                }
+            service.registerUidObserver(
+                    new UidObserver() { // from class: com.android.server.PinnerService.4
+                        public final void onUidActive(int i) {
+                            PinnerService pinnerService = PinnerService.this;
+                            pinnerService.mPinnerHandler.sendMessage(
+                                    PooledLambda.obtainMessage(
+                                            new PinnerService$$ExternalSyntheticLambda1(3),
+                                            pinnerService,
+                                            Integer.valueOf(i)));
+                        }
 
-                public final void onUidGone(int i, boolean z) {
-                    PinnerService pinnerService = PinnerService.this;
-                    pinnerService.mPinnerHandler.sendMessage(PooledLambda.obtainMessage(new PinnerService$$ExternalSyntheticLambda1(2), pinnerService, Integer.valueOf(i)));
-                }
-            }, 10, 0, (String) null);
+                        public final void onUidGone(int i, boolean z) {
+                            PinnerService pinnerService = PinnerService.this;
+                            pinnerService.mPinnerHandler.sendMessage(
+                                    PooledLambda.obtainMessage(
+                                            new PinnerService$$ExternalSyntheticLambda1(2),
+                                            pinnerService,
+                                            Integer.valueOf(i)));
+                        }
+                    },
+                    10,
+                    0,
+                    (String) null);
         } catch (RemoteException e) {
             Slog.e("PinnerService", "Failed to register uid observer", e);
         }
         final Uri uriFor = Settings.Secure.getUriFor("user_setup_complete");
-        this.mContext.getContentResolver().registerContentObserver(uriFor, false, new ContentObserver() { // from class: com.android.server.PinnerService.3
-            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-            {
-                super(null);
-            }
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        uriFor,
+                        false,
+                        new ContentObserver() { // from class: com.android.server.PinnerService.3
+                            /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+                            {
+                                super(null);
+                            }
 
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z, Uri uri) {
-                if (uriFor.equals(uri)) {
-                    PinnerService pinnerService = PinnerService.this;
-                    if (pinnerService.mConfiguredHomePinBytes > 0) {
-                        pinnerService.mPinnerHandler.sendMessage(PooledLambda.obtainMessage(new PinnerService$$ExternalSyntheticLambda2(), pinnerService, 1, Integer.valueOf(ActivityManager.getCurrentUser()), Boolean.TRUE));
-                    }
-                }
-            }
-        }, -1);
-        this.mDeviceConfigInterface.addOnPropertiesChangedListener("runtime_native", new HandlerExecutor(this.mPinnerHandler), this.mDeviceConfigAnonSizeListener);
+                            @Override // android.database.ContentObserver
+                            public final void onChange(boolean z, Uri uri) {
+                                if (uriFor.equals(uri)) {
+                                    PinnerService pinnerService = PinnerService.this;
+                                    if (pinnerService.mConfiguredHomePinBytes > 0) {
+                                        pinnerService.mPinnerHandler.sendMessage(
+                                                PooledLambda.obtainMessage(
+                                                        new PinnerService$$ExternalSyntheticLambda2(),
+                                                        pinnerService,
+                                                        1,
+                                                        Integer.valueOf(
+                                                                ActivityManager.getCurrentUser()),
+                                                        Boolean.TRUE));
+                                    }
+                                }
+                            }
+                        },
+                        -1);
+        this.mDeviceConfigInterface.addOnPropertiesChangedListener(
+                "runtime_native",
+                new HandlerExecutor(this.mPinnerHandler),
+                this.mDeviceConfigAnonSizeListener);
     }
 
     public static String getNameForKey(int i) {
@@ -476,13 +568,20 @@ public final class PinnerService extends SystemService {
             entry = zipFile.getEntry("assets/pinlist.meta");
         }
         if (entry == null) {
-            PinnerService$$ExternalSyntheticOutline0.m("Could not find pinlist.meta for \"", str, "\": pinning as blob", "PinnerService");
+            PinnerService$$ExternalSyntheticOutline0.m(
+                    "Could not find pinlist.meta for \"",
+                    str,
+                    "\": pinning as blob",
+                    "PinnerService");
             return null;
         }
         try {
             return zipFile.getInputStream(entry);
         } catch (IOException e) {
-            Slog.w("PinnerService", "error reading pin metadata \"" + str + "\": pinning as blob", e);
+            Slog.w(
+                    "PinnerService",
+                    "error reading pin metadata \"" + str + "\": pinning as blob",
+                    e);
             return null;
         }
     }
@@ -497,7 +596,8 @@ public final class PinnerService extends SystemService {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.PinnerService.PinnedFile pinFileInternal(int r4, java.lang.String r5, boolean r6) {
+    public static com.android.server.PinnerService.PinnedFile pinFileInternal(
+            int r4, java.lang.String r5, boolean r6) {
         /*
             r0 = 0
             if (r6 == 0) goto L29
@@ -562,7 +662,9 @@ public final class PinnerService extends SystemService {
             safeClose(r6)
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.PinnerService.pinFileInternal(int, java.lang.String, boolean):com.android.server.PinnerService$PinnedFile");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.PinnerService.pinFileInternal(int,"
+                    + " java.lang.String, boolean):com.android.server.PinnerService$PinnedFile");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:46:0x00f2  */
@@ -572,12 +674,16 @@ public final class PinnerService extends SystemService {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.PinnerService.PinnedFile pinFileRanges(java.lang.String r20, int r21, com.android.server.PinnerService.PinRangeSource r22) {
+    public static com.android.server.PinnerService.PinnedFile pinFileRanges(
+            java.lang.String r20, int r21, com.android.server.PinnerService.PinRangeSource r22) {
         /*
             Method dump skipped, instructions count: 261
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.PinnerService.pinFileRanges(java.lang.String, int, com.android.server.PinnerService$PinRangeSource):com.android.server.PinnerService$PinnedFile");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.PinnerService.pinFileRanges(java.lang.String, int,"
+                    + " com.android.server.PinnerService$PinRangeSource):com.android.server.PinnerService$PinnedFile");
     }
 
     public static void safeClose(Closeable closeable) {
@@ -613,7 +719,11 @@ public final class PinnerService extends SystemService {
 
     public final ArraySet createPinKeys() {
         ArraySet arraySet = new ArraySet();
-        if (this.mConfiguredToPinCamera && this.mDeviceConfigInterface.getBoolean("runtime_native_boot", "pin_camera", SystemProperties.getBoolean("pinner.pin_camera", true))) {
+        if (this.mConfiguredToPinCamera
+                && this.mDeviceConfigInterface.getBoolean(
+                        "runtime_native_boot",
+                        "pin_camera",
+                        SystemProperties.getBoolean("pinner.pin_camera", true))) {
             arraySet.add(0);
         }
         if (this.mConfiguredHomePinBytes > 0) {
@@ -628,18 +738,25 @@ public final class PinnerService extends SystemService {
     public final List getAllPinsForGroup(final String str) {
         List list;
         synchronized (this) {
-            list = this.mPinnedFiles.values().stream().filter(new Predicate() { // from class: com.android.server.PinnerService$$ExternalSyntheticLambda3
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return ((PinnerService.PinnedFile) obj).groupName.equals(str);
-                }
-            }).toList();
+            list =
+                    this.mPinnedFiles.values().stream()
+                            .filter(
+                                    new Predicate() { // from class:
+                                                      // com.android.server.PinnerService$$ExternalSyntheticLambda3
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            return ((PinnerService.PinnedFile) obj)
+                                                    .groupName.equals(str);
+                                        }
+                                    })
+                            .toList();
         }
         return list;
     }
 
     public final ApplicationInfo getApplicationInfoForIntent(int i, Intent intent, boolean z) {
-        ResolveInfo resolveActivityAsUser = this.mContext.getPackageManager().resolveActivityAsUser(intent, 851968, i);
+        ResolveInfo resolveActivityAsUser =
+                this.mContext.getPackageManager().resolveActivityAsUser(intent, 851968, i);
         if (resolveActivityAsUser == null) {
             return null;
         }
@@ -649,10 +766,15 @@ public final class PinnerService extends SystemService {
         if (!z) {
             return null;
         }
-        Iterator it = this.mContext.getPackageManager().queryIntentActivitiesAsUser(intent, 851968, i).iterator();
+        Iterator it =
+                this.mContext
+                        .getPackageManager()
+                        .queryIntentActivitiesAsUser(intent, 851968, i)
+                        .iterator();
         ApplicationInfo applicationInfo = null;
         while (it.hasNext()) {
-            ApplicationInfo applicationInfo2 = ((ResolveInfo) it.next()).activityInfo.applicationInfo;
+            ApplicationInfo applicationInfo2 =
+                    ((ResolveInfo) it.next()).activityInfo.applicationInfo;
             if ((applicationInfo2.flags & 1) != 0) {
                 if (applicationInfo != null) {
                     return null;
@@ -666,20 +788,32 @@ public final class PinnerService extends SystemService {
     public final ApplicationInfo getInfoForKey(int i, int i2) {
         Intent homeIntent;
         if (i == 0) {
-            ApplicationInfo applicationInfoForIntent = getApplicationInfoForIntent(i2, new Intent("android.media.action.STILL_IMAGE_CAMERA"), false);
+            ApplicationInfo applicationInfoForIntent =
+                    getApplicationInfoForIntent(
+                            i2, new Intent("android.media.action.STILL_IMAGE_CAMERA"), false);
             if (applicationInfoForIntent == null) {
-                applicationInfoForIntent = getApplicationInfoForIntent(i2, new Intent("android.media.action.STILL_IMAGE_CAMERA_SECURE"), false);
+                applicationInfoForIntent =
+                        getApplicationInfoForIntent(
+                                i2,
+                                new Intent("android.media.action.STILL_IMAGE_CAMERA_SECURE"),
+                                false);
             }
-            return applicationInfoForIntent == null ? getApplicationInfoForIntent(i2, new Intent("android.media.action.STILL_IMAGE_CAMERA"), true) : applicationInfoForIntent;
+            return applicationInfoForIntent == null
+                    ? getApplicationInfoForIntent(
+                            i2, new Intent("android.media.action.STILL_IMAGE_CAMERA"), true)
+                    : applicationInfoForIntent;
         }
         if (i != 1) {
             if (i != 2) {
                 return null;
             }
-            return getApplicationInfoForIntent(i2, new Intent("android.intent.action.ASSIST"), true);
+            return getApplicationInfoForIntent(
+                    i2, new Intent("android.intent.action.ASSIST"), true);
         }
-        ActivityTaskManagerService.LocalService localService = (ActivityTaskManagerService.LocalService) this.mAtmInternal;
-        WindowManagerGlobalLock windowManagerGlobalLock = ActivityTaskManagerService.this.mGlobalLock;
+        ActivityTaskManagerService.LocalService localService =
+                (ActivityTaskManagerService.LocalService) this.mAtmInternal;
+        WindowManagerGlobalLock windowManagerGlobalLock =
+                ActivityTaskManagerService.this.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
@@ -704,7 +838,8 @@ public final class PinnerService extends SystemService {
     }
 
     @Override // com.android.server.SystemService
-    public final void onUserSwitching(SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
+    public final void onUserSwitching(
+            SystemService.TargetUser targetUser, SystemService.TargetUser targetUser2) {
         int userIdentifier = targetUser2.getUserIdentifier();
         if (this.mUserManager.isManagedProfile(userIdentifier)) {
             return;
@@ -745,7 +880,10 @@ public final class PinnerService extends SystemService {
                 this.mPinnedApps.put(Integer.valueOf(i), pinnedApp2);
             }
             boolean z2 = false;
-            int i4 = i != 0 ? i != 1 ? i != 2 ? 0 : 62914560 : this.mConfiguredHomePinBytes : 83886080;
+            int i4 =
+                    i != 0
+                            ? i != 1 ? i != 2 ? 0 : 62914560 : this.mConfiguredHomePinBytes
+                            : 83886080;
             ArrayList arrayList = new ArrayList();
             arrayList.add(infoForKey.sourceDir);
             String[] strArr = infoForKey.splitSourceDirs;
@@ -761,12 +899,14 @@ public final class PinnerService extends SystemService {
             while (it.hasNext()) {
                 String str2 = (String) it.next();
                 if (i4 <= 0) {
-                    HeimdAllFsService$$ExternalSyntheticOutline0.m("Reached to the pin size limit. Skipping: ", str2, "PinnerService");
+                    HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                            "Reached to the pin size limit. Skipping: ", str2, "PinnerService");
                 } else {
                     this.mInjector.getClass();
                     PinnedFile pinFileInternal = pinFileInternal(i4, str2, true);
                     if (pinFileInternal == null) {
-                        BootReceiver$$ExternalSyntheticOutline0.m("Failed to pin ", str2, "PinnerService");
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                "Failed to pin ", str2, "PinnerService");
                     } else {
                         pinFileInternal.groupName = getNameForKey(i);
                         synchronized (this) {
@@ -775,7 +915,8 @@ public final class PinnerService extends SystemService {
                         }
                         i4 -= pinFileInternal.bytesPinned;
                         if (str2.equals(infoForKey.sourceDir) && !z2) {
-                            pinOptimizedDexDependencies(pinFileInternal, Integer.MAX_VALUE, infoForKey);
+                            pinOptimizedDexDependencies(
+                                    pinFileInternal, Integer.MAX_VALUE, infoForKey);
                         }
                     }
                 }
@@ -790,7 +931,10 @@ public final class PinnerService extends SystemService {
             synchronized (this) {
                 try {
                     if (!this.mPinnedApps.isEmpty()) {
-                        Slog.e("PinnerService", "Attempted to update a list of apps, but apps were already pinned. Skipping.");
+                        Slog.e(
+                                "PinnerService",
+                                "Attempted to update a list of apps, but apps were already pinned."
+                                    + " Skipping.");
                         return;
                     }
                     this.mPinKeys = createPinKeys;
@@ -806,7 +950,8 @@ public final class PinnerService extends SystemService {
         }
     }
 
-    public final void pinOptimizedDexDependencies(PinnedFile pinnedFile, int i, ApplicationInfo applicationInfo) {
+    public final void pinOptimizedDexDependencies(
+            PinnedFile pinnedFile, int i, ApplicationInfo applicationInfo) {
         if (pinnedFile.fileName.endsWith(".jar") || pinnedFile.fileName.endsWith(".apk")) {
             String[] strArr = null;
             String str = applicationInfo != null ? applicationInfo.primaryCpuAbi : null;
@@ -814,7 +959,9 @@ public final class PinnerService extends SystemService {
                 str = Build.SUPPORTED_ABIS[0];
             }
             try {
-                strArr = DexFile.getDexFileOutputPaths(pinnedFile.fileName, VMRuntime.getInstructionSet(str));
+                strArr =
+                        DexFile.getDexFileOutputPaths(
+                                pinnedFile.fileName, VMRuntime.getInstructionSet(str));
             } catch (IOException unused) {
             }
             if (strArr == null) {
@@ -841,7 +988,15 @@ public final class PinnerService extends SystemService {
     public final void refreshPinAnonConfig() {
         long j;
         long j2;
-        long max = Math.max(0L, Math.min(this.mDeviceConfigInterface.getLong("runtime_native", "pin_shared_anon_size", DEFAULT_ANON_SIZE), 2147483648L));
+        long max =
+                Math.max(
+                        0L,
+                        Math.min(
+                                this.mDeviceConfigInterface.getLong(
+                                        "runtime_native",
+                                        "pin_shared_anon_size",
+                                        DEFAULT_ANON_SIZE),
+                                2147483648L));
         if (max != this.mPinAnonSize) {
             this.mPinAnonSize = max;
             if (max == 0) {
@@ -864,7 +1019,9 @@ public final class PinnerService extends SystemService {
                     Slog.d("PinnerService", "pinAnonRegion: already pinned region of size " + max);
                     return;
                 }
-                Slog.d("PinnerService", "pinAnonRegion: resetting pinned region for new size " + max);
+                Slog.d(
+                        "PinnerService",
+                        "pinAnonRegion: resetting pinned region for new size " + max);
                 long j5 = this.mPinAnonAddress;
                 if (j5 != 0) {
                     safeMunmap(j5, this.mCurrentlyPinnedAnonSize);
@@ -873,7 +1030,14 @@ public final class PinnerService extends SystemService {
                 this.mCurrentlyPinnedAnonSize = 0L;
             }
             try {
-                j2 = Os.mmap(0L, max, OsConstants.PROT_READ | OsConstants.PROT_WRITE, OsConstants.MAP_SHARED | OsConstants.MAP_ANONYMOUS, new FileDescriptor(), 0L);
+                j2 =
+                        Os.mmap(
+                                0L,
+                                max,
+                                OsConstants.PROT_READ | OsConstants.PROT_WRITE,
+                                OsConstants.MAP_SHARED | OsConstants.MAP_ANONYMOUS,
+                                new FileDescriptor(),
+                                0L);
             } catch (Exception e) {
                 e = e;
                 j2 = 0;
@@ -896,11 +1060,15 @@ public final class PinnerService extends SystemService {
                         throw new Exception("Couldn't get Unsafe");
                     }
                     Class cls = Long.TYPE;
-                    Unsafe.class.getMethod("setMemory", cls, cls, Byte.TYPE).invoke(unsafe, Long.valueOf(j2), Long.valueOf(max), (byte) 1);
+                    Unsafe.class
+                            .getMethod("setMemory", cls, cls, Byte.TYPE)
+                            .invoke(unsafe, Long.valueOf(j2), Long.valueOf(max), (byte) 1);
                     Os.mlock(j2, max);
                     this.mCurrentlyPinnedAnonSize = max;
                     this.mPinAnonAddress = j2;
-                    Slog.w("PinnerService", "pinAnonRegion success, size=" + this.mCurrentlyPinnedAnonSize);
+                    Slog.w(
+                            "PinnerService",
+                            "pinAnonRegion success, size=" + this.mCurrentlyPinnedAnonSize);
                 } catch (Exception e2) {
                     e = e2;
                     Slog.e("PinnerService", "Could not pin anon region of size " + max, e);
@@ -920,7 +1088,9 @@ public final class PinnerService extends SystemService {
     }
 
     public final void sendPinAppsMessage(int i) {
-        this.mPinnerHandler.sendMessage(PooledLambda.obtainMessage(new PinnerService$$ExternalSyntheticLambda1(0), this, Integer.valueOf(i)));
+        this.mPinnerHandler.sendMessage(
+                PooledLambda.obtainMessage(
+                        new PinnerService$$ExternalSyntheticLambda1(0), this, Integer.valueOf(i)));
     }
 
     public final void unpinApp(int i) {
@@ -976,8 +1146,16 @@ public final class PinnerService extends SystemService {
             Integer num = (Integer) arraySet2.valueAt(size);
             ApplicationInfo infoForKey = getInfoForKey(num.intValue(), currentUser);
             if (infoForKey != null && arraySet.contains(infoForKey.packageName)) {
-                Slog.i("PinnerService", "Updating pinned files for " + infoForKey.packageName + " force=" + z);
-                this.mPinnerHandler.sendMessage(PooledLambda.obtainMessage(new PinnerService$$ExternalSyntheticLambda2(), this, num, Integer.valueOf(currentUser), Boolean.valueOf(z)));
+                Slog.i(
+                        "PinnerService",
+                        "Updating pinned files for " + infoForKey.packageName + " force=" + z);
+                this.mPinnerHandler.sendMessage(
+                        PooledLambda.obtainMessage(
+                                new PinnerService$$ExternalSyntheticLambda2(),
+                                this,
+                                num,
+                                Integer.valueOf(currentUser),
+                                Boolean.valueOf(z)));
             }
         }
     }

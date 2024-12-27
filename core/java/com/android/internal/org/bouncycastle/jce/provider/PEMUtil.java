@@ -4,6 +4,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1InputStream;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.util.encoders.Base64;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -22,9 +23,9 @@ public class PEMUtil {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0022, code lost:
-    
-        if (r0.length() == 0) goto L27;
-     */
+
+       if (r0.length() == 0) goto L27;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -60,7 +61,9 @@ public class PEMUtil {
             java.lang.String r1 = r0.toString()
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.jce.provider.PEMUtil.readLine(java.io.InputStream):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.org.bouncycastle.jce.provider.PEMUtil.readLine(java.io.InputStream):java.lang.String");
     }
 
     ASN1Sequence readPEMObject(InputStream in) throws IOException {
@@ -74,7 +77,9 @@ public class PEMUtil {
         } while (!line.startsWith(this._header2));
         while (true) {
             String line2 = readLine(in);
-            if (line2 == null || line2.startsWith(this._footer1) || line2.startsWith(this._footer2)) {
+            if (line2 == null
+                    || line2.startsWith(this._footer1)
+                    || line2.startsWith(this._footer2)) {
                 break;
             }
             pemBuf.append(line2);

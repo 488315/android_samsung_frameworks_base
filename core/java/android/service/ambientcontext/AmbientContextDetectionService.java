@@ -7,60 +7,79 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteCallback;
-import android.service.ambientcontext.AmbientContextDetectionService;
-import android.service.ambientcontext.IAmbientContextDetectionService;
 import android.util.Slog;
+
 import java.util.Objects;
 import java.util.function.Consumer;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public abstract class AmbientContextDetectionService extends Service {
-    public static final String SERVICE_INTERFACE = "android.service.ambientcontext.AmbientContextDetectionService";
+    public static final String SERVICE_INTERFACE =
+            "android.service.ambientcontext.AmbientContextDetectionService";
     private static final String TAG = AmbientContextDetectionService.class.getSimpleName();
 
-    public abstract void onQueryServiceStatus(int[] iArr, String str, Consumer<AmbientContextDetectionServiceStatus> consumer);
+    public abstract void onQueryServiceStatus(
+            int[] iArr, String str, Consumer<AmbientContextDetectionServiceStatus> consumer);
 
-    public abstract void onStartDetection(AmbientContextEventRequest ambientContextEventRequest, String str, Consumer<AmbientContextDetectionResult> consumer, Consumer<AmbientContextDetectionServiceStatus> consumer2);
+    public abstract void onStartDetection(
+            AmbientContextEventRequest ambientContextEventRequest,
+            String str,
+            Consumer<AmbientContextDetectionResult> consumer,
+            Consumer<AmbientContextDetectionServiceStatus> consumer2);
 
     public abstract void onStopDetection(String str);
 
     /* renamed from: android.service.ambientcontext.AmbientContextDetectionService$1, reason: invalid class name */
     class AnonymousClass1 extends IAmbientContextDetectionService.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.service.ambientcontext.IAmbientContextDetectionService
-        public void startDetection(AmbientContextEventRequest request, String packageName, final RemoteCallback detectionResultCallback, final RemoteCallback statusCallback) {
+        public void startDetection(
+                AmbientContextEventRequest request,
+                String packageName,
+                final RemoteCallback detectionResultCallback,
+                final RemoteCallback statusCallback) {
             Objects.requireNonNull(request);
             Objects.requireNonNull(packageName);
             Objects.requireNonNull(detectionResultCallback);
             Objects.requireNonNull(statusCallback);
-            Consumer<AmbientContextDetectionResult> detectionResultConsumer = new Consumer() { // from class: android.service.ambientcontext.AmbientContextDetectionService$1$$ExternalSyntheticLambda1
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    AmbientContextDetectionService.AnonymousClass1.lambda$startDetection$0(RemoteCallback.this, (AmbientContextDetectionResult) obj);
-                }
-            };
-            Consumer<AmbientContextDetectionServiceStatus> statusConsumer = new Consumer() { // from class: android.service.ambientcontext.AmbientContextDetectionService$1$$ExternalSyntheticLambda2
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    AmbientContextDetectionService.AnonymousClass1.lambda$startDetection$1(RemoteCallback.this, (AmbientContextDetectionServiceStatus) obj);
-                }
-            };
-            AmbientContextDetectionService.this.onStartDetection(request, packageName, detectionResultConsumer, statusConsumer);
+            Consumer<AmbientContextDetectionResult> detectionResultConsumer =
+                    new Consumer() { // from class:
+                                     // android.service.ambientcontext.AmbientContextDetectionService$1$$ExternalSyntheticLambda1
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            AmbientContextDetectionService.AnonymousClass1.lambda$startDetection$0(
+                                    RemoteCallback.this, (AmbientContextDetectionResult) obj);
+                        }
+                    };
+            Consumer<AmbientContextDetectionServiceStatus> statusConsumer =
+                    new Consumer() { // from class:
+                                     // android.service.ambientcontext.AmbientContextDetectionService$1$$ExternalSyntheticLambda2
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            AmbientContextDetectionService.AnonymousClass1.lambda$startDetection$1(
+                                    RemoteCallback.this,
+                                    (AmbientContextDetectionServiceStatus) obj);
+                        }
+                    };
+            AmbientContextDetectionService.this.onStartDetection(
+                    request, packageName, detectionResultConsumer, statusConsumer);
             Slog.d(AmbientContextDetectionService.TAG, "startDetection " + request);
         }
 
-        static /* synthetic */ void lambda$startDetection$0(RemoteCallback detectionResultCallback, AmbientContextDetectionResult result) {
+        static /* synthetic */ void lambda$startDetection$0(
+                RemoteCallback detectionResultCallback, AmbientContextDetectionResult result) {
             Bundle bundle = new Bundle();
             bundle.putParcelable(AmbientContextDetectionResult.RESULT_RESPONSE_BUNDLE_KEY, result);
             detectionResultCallback.sendResult(bundle);
         }
 
-        static /* synthetic */ void lambda$startDetection$1(RemoteCallback statusCallback, AmbientContextDetectionServiceStatus status) {
+        static /* synthetic */ void lambda$startDetection$1(
+                RemoteCallback statusCallback, AmbientContextDetectionServiceStatus status) {
             Bundle bundle = new Bundle();
-            bundle.putParcelable(AmbientContextDetectionServiceStatus.STATUS_RESPONSE_BUNDLE_KEY, status);
+            bundle.putParcelable(
+                    AmbientContextDetectionServiceStatus.STATUS_RESPONSE_BUNDLE_KEY, status);
             statusCallback.sendResult(bundle);
         }
 
@@ -71,22 +90,31 @@ public abstract class AmbientContextDetectionService extends Service {
         }
 
         @Override // android.service.ambientcontext.IAmbientContextDetectionService
-        public void queryServiceStatus(int[] eventTypes, String packageName, final RemoteCallback callback) {
+        public void queryServiceStatus(
+                int[] eventTypes, String packageName, final RemoteCallback callback) {
             Objects.requireNonNull(eventTypes);
             Objects.requireNonNull(packageName);
             Objects.requireNonNull(callback);
-            Consumer<AmbientContextDetectionServiceStatus> consumer = new Consumer() { // from class: android.service.ambientcontext.AmbientContextDetectionService$1$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    AmbientContextDetectionService.AnonymousClass1.lambda$queryServiceStatus$2(RemoteCallback.this, (AmbientContextDetectionServiceStatus) obj);
-                }
-            };
-            AmbientContextDetectionService.this.onQueryServiceStatus(eventTypes, packageName, consumer);
+            Consumer<AmbientContextDetectionServiceStatus> consumer =
+                    new Consumer() { // from class:
+                                     // android.service.ambientcontext.AmbientContextDetectionService$1$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            AmbientContextDetectionService.AnonymousClass1
+                                    .lambda$queryServiceStatus$2(
+                                            RemoteCallback.this,
+                                            (AmbientContextDetectionServiceStatus) obj);
+                        }
+                    };
+            AmbientContextDetectionService.this.onQueryServiceStatus(
+                    eventTypes, packageName, consumer);
         }
 
-        static /* synthetic */ void lambda$queryServiceStatus$2(RemoteCallback callback, AmbientContextDetectionServiceStatus response) {
+        static /* synthetic */ void lambda$queryServiceStatus$2(
+                RemoteCallback callback, AmbientContextDetectionServiceStatus response) {
             Bundle bundle = new Bundle();
-            bundle.putParcelable(AmbientContextDetectionServiceStatus.STATUS_RESPONSE_BUNDLE_KEY, response);
+            bundle.putParcelable(
+                    AmbientContextDetectionServiceStatus.STATUS_RESPONSE_BUNDLE_KEY, response);
             callback.sendResult(bundle);
         }
     }

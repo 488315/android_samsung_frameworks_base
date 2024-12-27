@@ -3,24 +3,28 @@ package vendor.samsung.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehPreferredNetworkInfo implements Parcelable {
-    public static final Parcelable.Creator<SehPreferredNetworkInfo> CREATOR = new Parcelable.Creator<SehPreferredNetworkInfo>() { // from class: vendor.samsung.hardware.radio.network.SehPreferredNetworkInfo.1
-        @Override // android.os.Parcelable.Creator
-        public SehPreferredNetworkInfo createFromParcel(Parcel _aidl_source) {
-            SehPreferredNetworkInfo _aidl_out = new SehPreferredNetworkInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehPreferredNetworkInfo> CREATOR =
+            new Parcelable.Creator<
+                    SehPreferredNetworkInfo>() { // from class:
+                                                 // vendor.samsung.hardware.radio.network.SehPreferredNetworkInfo.1
+                @Override // android.os.Parcelable.Creator
+                public SehPreferredNetworkInfo createFromParcel(Parcel _aidl_source) {
+                    SehPreferredNetworkInfo _aidl_out = new SehPreferredNetworkInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehPreferredNetworkInfo[] newArray(int _aidl_size) {
-            return new SehPreferredNetworkInfo[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehPreferredNetworkInfo[] newArray(int _aidl_size) {
+                    return new SehPreferredNetworkInfo[_aidl_size];
+                }
+            };
     public String oper;
     public String plmn;
     public int index = 0;

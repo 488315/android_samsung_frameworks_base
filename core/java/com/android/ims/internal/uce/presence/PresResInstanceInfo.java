@@ -2,23 +2,27 @@ package com.android.ims.internal.uce.presence;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 
 /* loaded from: classes5.dex */
 public class PresResInstanceInfo implements Parcelable {
-    public static final Parcelable.Creator<PresResInstanceInfo> CREATOR = new Parcelable.Creator<PresResInstanceInfo>() { // from class: com.android.ims.internal.uce.presence.PresResInstanceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresResInstanceInfo createFromParcel(Parcel source) {
-            return new PresResInstanceInfo(source);
-        }
+    public static final Parcelable.Creator<PresResInstanceInfo> CREATOR =
+            new Parcelable.Creator<
+                    PresResInstanceInfo>() { // from class:
+                                             // com.android.ims.internal.uce.presence.PresResInstanceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresResInstanceInfo createFromParcel(Parcel source) {
+                    return new PresResInstanceInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresResInstanceInfo[] newArray(int size) {
-            return new PresResInstanceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresResInstanceInfo[] newArray(int size) {
+                    return new PresResInstanceInfo[size];
+                }
+            };
     public static final int UCE_PRES_RES_INSTANCE_STATE_ACTIVE = 0;
     public static final int UCE_PRES_RES_INSTANCE_STATE_PENDING = 1;
     public static final int UCE_PRES_RES_INSTANCE_STATE_TERMINATED = 2;
@@ -103,10 +107,18 @@ public class PresResInstanceInfo implements Parcelable {
         this.mReason = source.readString();
         this.mResInstanceState = source.readInt();
         this.mPresentityUri = source.readString();
-        Parcelable[] tempParcelableArray = (Parcelable[]) source.readParcelableArray(PresTupleInfo.class.getClassLoader(), PresTupleInfo.class);
+        Parcelable[] tempParcelableArray =
+                (Parcelable[])
+                        source.readParcelableArray(
+                                PresTupleInfo.class.getClassLoader(), PresTupleInfo.class);
         this.mTupleInfoArray = new PresTupleInfo[0];
         if (tempParcelableArray != null) {
-            this.mTupleInfoArray = (PresTupleInfo[]) Arrays.copyOf(tempParcelableArray, tempParcelableArray.length, PresTupleInfo[].class);
+            this.mTupleInfoArray =
+                    (PresTupleInfo[])
+                            Arrays.copyOf(
+                                    tempParcelableArray,
+                                    tempParcelableArray.length,
+                                    PresTupleInfo[].class);
         }
     }
 }

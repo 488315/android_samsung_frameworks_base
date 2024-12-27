@@ -55,7 +55,8 @@ public class SemSmartClipViewHelper {
         return view.semSetSmartClipTags(null);
     }
 
-    public static boolean setDataExtractionListener(View view, SemSmartClipDataExtractionListener listener) {
+    public static boolean setDataExtractionListener(
+            View view, SemSmartClipDataExtractionListener listener) {
         if (view == null) {
             return false;
         }
@@ -63,7 +64,8 @@ public class SemSmartClipViewHelper {
         return true;
     }
 
-    public static int extractDefaultSmartClipData(View view, SemSmartClipCroppedArea croppedArea, SemSmartClipDataElement resultElement) {
+    public static int extractDefaultSmartClipData(
+            View view, SemSmartClipCroppedArea croppedArea, SemSmartClipDataElement resultElement) {
         if (view == null) {
             Log.e(TAG, "extractDefaultSmartClipData : The view is null!");
             return 0;

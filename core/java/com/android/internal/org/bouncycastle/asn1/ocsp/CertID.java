@@ -17,7 +17,11 @@ public class CertID extends ASN1Object {
     ASN1OctetString issuerNameHash;
     ASN1Integer serialNumber;
 
-    public CertID(AlgorithmIdentifier hashAlgorithm, ASN1OctetString issuerNameHash, ASN1OctetString issuerKeyHash, ASN1Integer serialNumber) {
+    public CertID(
+            AlgorithmIdentifier hashAlgorithm,
+            ASN1OctetString issuerNameHash,
+            ASN1OctetString issuerKeyHash,
+            ASN1Integer serialNumber) {
         this.hashAlgorithm = hashAlgorithm;
         this.issuerNameHash = issuerNameHash;
         this.issuerKeyHash = issuerKeyHash;
@@ -61,7 +65,8 @@ public class CertID extends ASN1Object {
         return this.serialNumber;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(4);
         v.add(this.hashAlgorithm);

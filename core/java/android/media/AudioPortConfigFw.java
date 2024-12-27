@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AudioPortConfigFw implements Parcelable {
-    public static final Parcelable.Creator<AudioPortConfigFw> CREATOR = new Parcelable.Creator<AudioPortConfigFw>() { // from class: android.media.AudioPortConfigFw.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortConfigFw createFromParcel(Parcel _aidl_source) {
-            AudioPortConfigFw _aidl_out = new AudioPortConfigFw();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioPortConfigFw> CREATOR =
+            new Parcelable.Creator<
+                    AudioPortConfigFw>() { // from class: android.media.AudioPortConfigFw.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortConfigFw createFromParcel(Parcel _aidl_source) {
+                    AudioPortConfigFw _aidl_out = new AudioPortConfigFw();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortConfigFw[] newArray(int _aidl_size) {
-            return new AudioPortConfigFw[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortConfigFw[] newArray(int _aidl_size) {
+                    return new AudioPortConfigFw[_aidl_size];
+                }
+            };
     public android.media.audio.common.AudioPortConfig hal;
     public AudioPortConfigSys sys;
 
@@ -50,14 +52,19 @@ public class AudioPortConfigFw implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.hal = (android.media.audio.common.AudioPortConfig) _aidl_parcel.readTypedObject(android.media.audio.common.AudioPortConfig.CREATOR);
+            this.hal =
+                    (android.media.audio.common.AudioPortConfig)
+                            _aidl_parcel.readTypedObject(
+                                    android.media.audio.common.AudioPortConfig.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.sys = (AudioPortConfigSys) _aidl_parcel.readTypedObject(AudioPortConfigSys.CREATOR);
+                this.sys =
+                        (AudioPortConfigSys)
+                                _aidl_parcel.readTypedObject(AudioPortConfigSys.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

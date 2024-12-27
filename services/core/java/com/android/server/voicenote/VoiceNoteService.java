@@ -20,7 +20,8 @@ public final class VoiceNoteService extends Binder {
             if (intent == null || (action = intent.getAction()) == null) {
                 return;
             }
-            if (action.equals("android.intent.action.PACKAGE_REPLACED") || action.equals("android.intent.action.PACKAGE_ADDED")) {
+            if (action.equals("android.intent.action.PACKAGE_REPLACED")
+                    || action.equals("android.intent.action.PACKAGE_ADDED")) {
                 VoiceNoteService.backgroundAllowlist(context);
             }
         }
@@ -28,7 +29,10 @@ public final class VoiceNoteService extends Binder {
 
     public static void backgroundAllowlist(Context context) {
         try {
-            int i = context.getPackageManager().getApplicationInfo("com.sec.android.app.voicenote", 0).uid;
+            int i =
+                    context.getPackageManager()
+                            .getApplicationInfo("com.sec.android.app.voicenote", 0)
+                            .uid;
             String num = Integer.toString(i);
             if (i >= 1000 && num != null) {
                 if (hasValidSignature(context)) {
@@ -47,8 +51,15 @@ public final class VoiceNoteService extends Binder {
     public static boolean hasValidSignature(Context context) {
         try {
             PackageManager packageManager = context.getPackageManager();
-            if (packageManager.getPackageInfo("android", 64).signatures[0].equals(packageManager.getPackageInfo("com.sec.android.app.voicenote", 64).signatures[0])) {
-                Log.d("VoiceNoteService", "hasValidSignature, VALID : com.sec.android.app.voicenote");
+            if (packageManager
+                    .getPackageInfo("android", 64)
+                    .signatures[0]
+                    .equals(
+                            packageManager.getPackageInfo("com.sec.android.app.voicenote", 64)
+                                    .signatures[0])) {
+                Log.d(
+                        "VoiceNoteService",
+                        "hasValidSignature, VALID : com.sec.android.app.voicenote");
                 return true;
             }
         } catch (PackageManager.NameNotFoundException | NullPointerException e) {

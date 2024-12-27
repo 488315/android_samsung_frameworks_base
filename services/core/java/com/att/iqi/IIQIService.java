@@ -6,9 +6,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
-import com.att.iqi.IMetricQueryCallback;
-import com.att.iqi.IMetricSourcingCallback;
-import com.att.iqi.IProfileChangedCallback;
+
 import com.att.iqi.lib.Metric;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,12 +22,10 @@ public interface IIQIService extends IInterface {
         }
 
         @Override // com.att.iqi.IIQIService
-        public void disableService() throws RemoteException {
-        }
+        public void disableService() throws RemoteException {}
 
         @Override // com.att.iqi.IIQIService
-        public void forceStopService() throws RemoteException {
-        }
+        public void forceStopService() throws RemoteException {}
 
         @Override // com.att.iqi.IIQIService
         public long getTimestamp() throws RemoteException {
@@ -37,16 +33,17 @@ public interface IIQIService extends IInterface {
         }
 
         @Override // com.att.iqi.IIQIService
-        public void registerMetricQueryCallback(Metric.ID id, IMetricQueryCallback iMetricQueryCallback) throws RemoteException {
-        }
+        public void registerMetricQueryCallback(
+                Metric.ID id, IMetricQueryCallback iMetricQueryCallback) throws RemoteException {}
 
         @Override // com.att.iqi.IIQIService
-        public void registerMetricSourcingCallback(Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback) throws RemoteException {
-        }
+        public void registerMetricSourcingCallback(
+                Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback)
+                throws RemoteException {}
 
         @Override // com.att.iqi.IIQIService
-        public void registerProfileChangedCallback(IProfileChangedCallback iProfileChangedCallback) throws RemoteException {
-        }
+        public void registerProfileChangedCallback(IProfileChangedCallback iProfileChangedCallback)
+                throws RemoteException {}
 
         @Override // com.att.iqi.IIQIService
         public boolean reportKeyCode(byte[] bArr) throws RemoteException {
@@ -64,20 +61,20 @@ public interface IIQIService extends IInterface {
         }
 
         @Override // com.att.iqi.IIQIService
-        public void submitMetric(Metric metric) throws RemoteException {
-        }
+        public void submitMetric(Metric metric) throws RemoteException {}
 
         @Override // com.att.iqi.IIQIService
-        public void unregisterMetricQueryCallback(Metric.ID id, IMetricQueryCallback iMetricQueryCallback) throws RemoteException {
-        }
+        public void unregisterMetricQueryCallback(
+                Metric.ID id, IMetricQueryCallback iMetricQueryCallback) throws RemoteException {}
 
         @Override // com.att.iqi.IIQIService
-        public void unregisterMetricSourcingCallback(Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback) throws RemoteException {
-        }
+        public void unregisterMetricSourcingCallback(
+                Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback)
+                throws RemoteException {}
 
         @Override // com.att.iqi.IIQIService
-        public void unregisterProfileChangedCallback(IProfileChangedCallback iProfileChangedCallback) throws RemoteException {
-        }
+        public void unregisterProfileChangedCallback(
+                IProfileChangedCallback iProfileChangedCallback) throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -151,7 +148,9 @@ public interface IIQIService extends IInterface {
             }
 
             @Override // com.att.iqi.IIQIService
-            public void registerMetricQueryCallback(Metric.ID id, IMetricQueryCallback iMetricQueryCallback) throws RemoteException {
+            public void registerMetricQueryCallback(
+                    Metric.ID id, IMetricQueryCallback iMetricQueryCallback)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IIQIService.DESCRIPTOR);
@@ -164,7 +163,9 @@ public interface IIQIService extends IInterface {
             }
 
             @Override // com.att.iqi.IIQIService
-            public void registerMetricSourcingCallback(Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback) throws RemoteException {
+            public void registerMetricSourcingCallback(
+                    Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IIQIService.DESCRIPTOR);
@@ -177,7 +178,8 @@ public interface IIQIService extends IInterface {
             }
 
             @Override // com.att.iqi.IIQIService
-            public void registerProfileChangedCallback(IProfileChangedCallback iProfileChangedCallback) throws RemoteException {
+            public void registerProfileChangedCallback(
+                    IProfileChangedCallback iProfileChangedCallback) throws RemoteException {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IIQIService.DESCRIPTOR);
@@ -249,7 +251,9 @@ public interface IIQIService extends IInterface {
             }
 
             @Override // com.att.iqi.IIQIService
-            public void unregisterMetricQueryCallback(Metric.ID id, IMetricQueryCallback iMetricQueryCallback) throws RemoteException {
+            public void unregisterMetricQueryCallback(
+                    Metric.ID id, IMetricQueryCallback iMetricQueryCallback)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IIQIService.DESCRIPTOR);
@@ -262,7 +266,9 @@ public interface IIQIService extends IInterface {
             }
 
             @Override // com.att.iqi.IIQIService
-            public void unregisterMetricSourcingCallback(Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback) throws RemoteException {
+            public void unregisterMetricSourcingCallback(
+                    Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback)
+                    throws RemoteException {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IIQIService.DESCRIPTOR);
@@ -275,7 +281,8 @@ public interface IIQIService extends IInterface {
             }
 
             @Override // com.att.iqi.IIQIService
-            public void unregisterProfileChangedCallback(IProfileChangedCallback iProfileChangedCallback) throws RemoteException {
+            public void unregisterProfileChangedCallback(
+                    IProfileChangedCallback iProfileChangedCallback) throws RemoteException {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IIQIService.DESCRIPTOR);
@@ -296,7 +303,9 @@ public interface IIQIService extends IInterface {
                 return null;
             }
             IInterface queryLocalInterface = iBinder.queryLocalInterface(IIQIService.DESCRIPTOR);
-            return (queryLocalInterface == null || !(queryLocalInterface instanceof IIQIService)) ? new Proxy(iBinder) : (IIQIService) queryLocalInterface;
+            return (queryLocalInterface == null || !(queryLocalInterface instanceof IIQIService))
+                    ? new Proxy(iBinder)
+                    : (IIQIService) queryLocalInterface;
         }
 
         @Override // android.os.IInterface
@@ -305,7 +314,8 @@ public interface IIQIService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(IIQIService.DESCRIPTOR);
             }
@@ -315,7 +325,9 @@ public interface IIQIService extends IInterface {
             }
             switch (i) {
                 case 1:
-                    boolean shouldSubmitMetric = shouldSubmitMetric((Metric.ID) _Parcel.readTypedObject(parcel, Metric.ID.CREATOR));
+                    boolean shouldSubmitMetric =
+                            shouldSubmitMetric(
+                                    (Metric.ID) _Parcel.readTypedObject(parcel, Metric.ID.CREATOR));
                     parcel2.writeNoException();
                     parcel2.writeInt(shouldSubmitMetric ? 1 : 0);
                     return true;
@@ -323,22 +335,32 @@ public interface IIQIService extends IInterface {
                     submitMetric((Metric) _Parcel.readTypedObject(parcel, Metric.CREATOR));
                     return true;
                 case 3:
-                    registerMetricQueryCallback((Metric.ID) _Parcel.readTypedObject(parcel, Metric.ID.CREATOR), IMetricQueryCallback.Stub.asInterface(parcel.readStrongBinder()));
+                    registerMetricQueryCallback(
+                            (Metric.ID) _Parcel.readTypedObject(parcel, Metric.ID.CREATOR),
+                            IMetricQueryCallback.Stub.asInterface(parcel.readStrongBinder()));
                     return true;
                 case 4:
-                    unregisterMetricQueryCallback((Metric.ID) _Parcel.readTypedObject(parcel, Metric.ID.CREATOR), IMetricQueryCallback.Stub.asInterface(parcel.readStrongBinder()));
+                    unregisterMetricQueryCallback(
+                            (Metric.ID) _Parcel.readTypedObject(parcel, Metric.ID.CREATOR),
+                            IMetricQueryCallback.Stub.asInterface(parcel.readStrongBinder()));
                     return true;
                 case 5:
-                    registerMetricSourcingCallback((Metric.ID) _Parcel.readTypedObject(parcel, Metric.ID.CREATOR), IMetricSourcingCallback.Stub.asInterface(parcel.readStrongBinder()));
+                    registerMetricSourcingCallback(
+                            (Metric.ID) _Parcel.readTypedObject(parcel, Metric.ID.CREATOR),
+                            IMetricSourcingCallback.Stub.asInterface(parcel.readStrongBinder()));
                     return true;
                 case 6:
-                    unregisterMetricSourcingCallback((Metric.ID) _Parcel.readTypedObject(parcel, Metric.ID.CREATOR), IMetricSourcingCallback.Stub.asInterface(parcel.readStrongBinder()));
+                    unregisterMetricSourcingCallback(
+                            (Metric.ID) _Parcel.readTypedObject(parcel, Metric.ID.CREATOR),
+                            IMetricSourcingCallback.Stub.asInterface(parcel.readStrongBinder()));
                     return true;
                 case 7:
-                    registerProfileChangedCallback(IProfileChangedCallback.Stub.asInterface(parcel.readStrongBinder()));
+                    registerProfileChangedCallback(
+                            IProfileChangedCallback.Stub.asInterface(parcel.readStrongBinder()));
                     return true;
                 case 8:
-                    unregisterProfileChangedCallback(IProfileChangedCallback.Stub.asInterface(parcel.readStrongBinder()));
+                    unregisterProfileChangedCallback(
+                            IProfileChangedCallback.Stub.asInterface(parcel.readStrongBinder()));
                     return true;
                 case 9:
                     boolean reportKeyCode = reportKeyCode(parcel.createByteArray());
@@ -394,11 +416,14 @@ public interface IIQIService extends IInterface {
 
     long getTimestamp() throws RemoteException;
 
-    void registerMetricQueryCallback(Metric.ID id, IMetricQueryCallback iMetricQueryCallback) throws RemoteException;
+    void registerMetricQueryCallback(Metric.ID id, IMetricQueryCallback iMetricQueryCallback)
+            throws RemoteException;
 
-    void registerMetricSourcingCallback(Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback) throws RemoteException;
+    void registerMetricSourcingCallback(
+            Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback) throws RemoteException;
 
-    void registerProfileChangedCallback(IProfileChangedCallback iProfileChangedCallback) throws RemoteException;
+    void registerProfileChangedCallback(IProfileChangedCallback iProfileChangedCallback)
+            throws RemoteException;
 
     boolean reportKeyCode(byte[] bArr) throws RemoteException;
 
@@ -408,9 +433,12 @@ public interface IIQIService extends IInterface {
 
     void submitMetric(Metric metric) throws RemoteException;
 
-    void unregisterMetricQueryCallback(Metric.ID id, IMetricQueryCallback iMetricQueryCallback) throws RemoteException;
+    void unregisterMetricQueryCallback(Metric.ID id, IMetricQueryCallback iMetricQueryCallback)
+            throws RemoteException;
 
-    void unregisterMetricSourcingCallback(Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback) throws RemoteException;
+    void unregisterMetricSourcingCallback(
+            Metric.ID id, IMetricSourcingCallback iMetricSourcingCallback) throws RemoteException;
 
-    void unregisterProfileChangedCallback(IProfileChangedCallback iProfileChangedCallback) throws RemoteException;
+    void unregisterProfileChangedCallback(IProfileChangedCallback iProfileChangedCallback)
+            throws RemoteException;
 }

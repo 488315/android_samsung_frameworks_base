@@ -28,12 +28,15 @@ import android.util.ArraySet;
 import android.util.Slog;
 import android.view.MotionEvent;
 import android.view.WindowManagerPolicyConstants;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.ibs.sleepmode.SharePrefUtils;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -57,20 +60,26 @@ public final class IbsQuickDim {
     public final Object mLock = new Object();
     public float mSQDPowerSave = FullScreenMagnificationGestureHandler.MAX_SCALE;
     public int mBrightness = 0;
-    public final Map SQDGainMap = new HashMap() { // from class: com.android.server.ibs.sqd.IbsQuickDim.1
-        {
-            put(41, 0);
-            put(60, 10);
-            put(80, 19);
-            put(100, 27);
-            put(130, 54);
-            put(150, 71);
-            put(180, 85);
-            put(205, 109);
-            put(230, 122);
-            put(Integer.valueOf(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT), Integer.valueOf(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__RESOLVER_EMPTY_STATE_NO_SHARING_TO_WORK));
-        }
-    };
+    public final Map SQDGainMap =
+            new HashMap() { // from class: com.android.server.ibs.sqd.IbsQuickDim.1
+                {
+                    put(41, 0);
+                    put(60, 10);
+                    put(80, 19);
+                    put(100, 27);
+                    put(130, 54);
+                    put(150, 71);
+                    put(180, 85);
+                    put(205, 109);
+                    put(230, 122);
+                    put(
+                            Integer.valueOf(
+                                    IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT),
+                            Integer.valueOf(
+                                    FrameworkStatsLog
+                                            .DEVICE_POLICY_EVENT__EVENT_ID__RESOLVER_EMPTY_STATE_NO_SHARING_TO_WORK));
+                }
+            };
     public boolean mCharging = false;
     public long mChargingFinishTime = 0;
     public long mDimStartTime = 0;
@@ -81,65 +90,80 @@ public final class IbsQuickDim {
     public boolean mUiControlEnabled = false;
     public int mQuickDimMode = 2;
     public qkDimHandler mQkDimHandler = null;
-    public final AnonymousClass2 mPointerEventListener = new WindowManagerPolicyConstants.PointerEventListener() { // from class: com.android.server.ibs.sqd.IbsQuickDim.2
-        public final void onPointerEvent(MotionEvent motionEvent) {
-            if (motionEvent.getAction() == 0) {
-                IbsQuickDim ibsQuickDim = IbsQuickDim.this;
-                if (ibsQuickDim.mQuickDimMode == 2) {
-                    ibsQuickDim.mQkDimHandler.sendEmptyMessage(3);
+    public final AnonymousClass2 mPointerEventListener =
+            new WindowManagerPolicyConstants
+                    .PointerEventListener() { // from class:
+                                              // com.android.server.ibs.sqd.IbsQuickDim.2
+                public final void onPointerEvent(MotionEvent motionEvent) {
+                    if (motionEvent.getAction() == 0) {
+                        IbsQuickDim ibsQuickDim = IbsQuickDim.this;
+                        if (ibsQuickDim.mQuickDimMode == 2) {
+                            ibsQuickDim.mQkDimHandler.sendEmptyMessage(3);
+                        }
+                    }
                 }
-            }
-        }
-    };
+            };
     public int mLastFPS = -1;
     public boolean mScreenOn = false;
     public boolean mQuickdimEnable = true;
-    public final AnonymousClass3 mProcessObserver = new IProcessObserver.Stub() { // from class: com.android.server.ibs.sqd.IbsQuickDim.3
-        public final void onForegroundActivitiesChanged(int i, int i2, boolean z) {
-            if (IbsQuickDim.m583$$Nest$misSqdCanWork(IbsQuickDim.this)) {
-                synchronized (IbsQuickDim.this.mLock) {
-                    try {
-                        IbsQuickDim ibsQuickDim = IbsQuickDim.this;
-                        if (ibsQuickDim.mQuickDimMode == 1) {
-                            return;
-                        }
-                        if (z) {
-                            if (!ibsQuickDim.mBlockUnDimUidSet.contains(Integer.valueOf(i2))) {
-                                IbsQuickDim ibsQuickDim2 = IbsQuickDim.this;
-                                if (ibsQuickDim2.mUiControlEnabled || ibsQuickDim2.mAllowDimUidSet.contains(Integer.valueOf(i2))) {
-                                    IbsQuickDim ibsQuickDim3 = IbsQuickDim.this;
-                                    if (((ibsQuickDim3.mUiControlEnabled || ibsQuickDim3.mAllowDimUidSet.contains(Integer.valueOf(i2))) && IbsQuickDim.this.mQuickDimMode == 3) || IbsQuickDim.this.mQuickDimMode == 4) {
-                                        IbsQuickDim ibsQuickDim4 = IbsQuickDim.this;
-                                        ibsQuickDim4.mQuickDimMode = 2;
-                                        ibsQuickDim4.mQkDimHandler.sendEmptyMessage(1);
+    public final AnonymousClass3 mProcessObserver =
+            new IProcessObserver.Stub() { // from class: com.android.server.ibs.sqd.IbsQuickDim.3
+                public final void onForegroundActivitiesChanged(int i, int i2, boolean z) {
+                    if (IbsQuickDim.m583$$Nest$misSqdCanWork(IbsQuickDim.this)) {
+                        synchronized (IbsQuickDim.this.mLock) {
+                            try {
+                                IbsQuickDim ibsQuickDim = IbsQuickDim.this;
+                                if (ibsQuickDim.mQuickDimMode == 1) {
+                                    return;
+                                }
+                                if (z) {
+                                    if (!ibsQuickDim.mBlockUnDimUidSet.contains(
+                                            Integer.valueOf(i2))) {
+                                        IbsQuickDim ibsQuickDim2 = IbsQuickDim.this;
+                                        if (ibsQuickDim2.mUiControlEnabled
+                                                || ibsQuickDim2.mAllowDimUidSet.contains(
+                                                        Integer.valueOf(i2))) {
+                                            IbsQuickDim ibsQuickDim3 = IbsQuickDim.this;
+                                            if (((ibsQuickDim3.mUiControlEnabled
+                                                                    || ibsQuickDim3.mAllowDimUidSet
+                                                                            .contains(
+                                                                                    Integer.valueOf(
+                                                                                            i2)))
+                                                            && IbsQuickDim.this.mQuickDimMode == 3)
+                                                    || IbsQuickDim.this.mQuickDimMode == 4) {
+                                                IbsQuickDim ibsQuickDim4 = IbsQuickDim.this;
+                                                ibsQuickDim4.mQuickDimMode = 2;
+                                                ibsQuickDim4.mQkDimHandler.sendEmptyMessage(1);
+                                            }
+                                        }
+                                    }
+                                    IbsQuickDim ibsQuickDim5 = IbsQuickDim.this;
+                                    if (ibsQuickDim5.mQuickDimMode != 3) {
+                                        ibsQuickDim5.mQuickDimMode = 3;
+                                        if (IbsQuickDim.DEBUG) {
+                                            Slog.d(
+                                                    "IbsQuickDim",
+                                                    " stop dim detect because fg click"
+                                                        + " mQuickDimMode = "
+                                                            + IbsQuickDim.this.mQuickDimMode);
+                                        }
+                                        IbsQuickDim.this.mQkDimHandler.sendEmptyMessage(4);
                                     }
                                 }
-                            }
-                            IbsQuickDim ibsQuickDim5 = IbsQuickDim.this;
-                            if (ibsQuickDim5.mQuickDimMode != 3) {
-                                ibsQuickDim5.mQuickDimMode = 3;
-                                if (IbsQuickDim.DEBUG) {
-                                    Slog.d("IbsQuickDim", " stop dim detect because fg click mQuickDimMode = " + IbsQuickDim.this.mQuickDimMode);
-                                }
-                                IbsQuickDim.this.mQkDimHandler.sendEmptyMessage(4);
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
                 }
-            }
-        }
 
-        public final void onForegroundServicesChanged(int i, int i2, int i3) {
-        }
+                public final void onForegroundServicesChanged(int i, int i2, int i3) {}
 
-        public final void onProcessDied(int i, int i2) {
-        }
+                public final void onProcessDied(int i, int i2) {}
 
-        public final void onProcessStarted(int i, int i2, int i3, String str, String str2) {
-        }
-    };
+                public final void onProcessStarted(
+                        int i, int i2, int i3, String str, String str2) {}
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IntentReceiver extends BroadcastReceiver {
@@ -151,7 +175,8 @@ public final class IbsQuickDim {
             IbsQuickDim.this.mFilter.addAction("android.intent.action.ACTION_POWER_CONNECTED");
             IbsQuickDim.this.mFilter.addAction("android.intent.action.ACTION_POWER_DISCONNECTED");
             IbsQuickDim.this.mFilter.addAction("android.intent.action.BOOT_COMPLETED");
-            IbsQuickDim.this.mFilter.addAction("com.samsung.server.PowerManagerService.action.USER_ACTIVITY");
+            IbsQuickDim.this.mFilter.addAction(
+                    "com.samsung.server.PowerManagerService.action.USER_ACTIVITY");
             IntentFilter intentFilter2 = new IntentFilter();
             IbsQuickDim.this.mPkgFilter = intentFilter2;
             intentFilter2.addAction("android.intent.action.PACKAGE_FULLY_REMOVED");
@@ -197,10 +222,12 @@ public final class IbsQuickDim {
                 IbsQuickDim.this.mSQDPowerSave = FullScreenMagnificationGestureHandler.MAX_SCALE;
                 return;
             }
-            if (!"com.samsung.server.PowerManagerService.action.USER_ACTIVITY".equals(intent.getAction())) {
+            if (!"com.samsung.server.PowerManagerService.action.USER_ACTIVITY"
+                    .equals(intent.getAction())) {
                 if (!"android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
                     if ("android.intent.action.PACKAGE_FULLY_REMOVED".equals(intent.getAction())) {
-                        Optional.ofNullable(intent.getData()).ifPresent(new IbsQuickDim$$ExternalSyntheticLambda1(1, this));
+                        Optional.ofNullable(intent.getData())
+                                .ifPresent(new IbsQuickDim$$ExternalSyntheticLambda1(1, this));
                         return;
                     }
                     return;
@@ -208,7 +235,8 @@ public final class IbsQuickDim {
                     IbsQuickDim ibsQuickDim3 = IbsQuickDim.this;
                     ibsQuickDim3.getClass();
                     Slog.d("IbsQuickDim", "handleBootComplete");
-                    ibsQuickDim3.mQkDimHandler.post(new IbsQuickDim$$ExternalSyntheticLambda0(ibsQuickDim3, 1));
+                    ibsQuickDim3.mQkDimHandler.post(
+                            new IbsQuickDim$$ExternalSyntheticLambda0(ibsQuickDim3, 1));
                     return;
                 }
             }
@@ -252,7 +280,8 @@ public final class IbsQuickDim {
             public final /* synthetic */ int $r8$classId;
             public final /* synthetic */ SQLiteSQDwhilteList this$1;
 
-            public /* synthetic */ AllowDataOperator(SQLiteSQDwhilteList sQLiteSQDwhilteList, int i) {
+            public /* synthetic */ AllowDataOperator(
+                    SQLiteSQDwhilteList sQLiteSQDwhilteList, int i) {
                 this.$r8$classId = i;
                 this.this$1 = sQLiteSQDwhilteList;
             }
@@ -260,9 +289,11 @@ public final class IbsQuickDim {
             public final int delete(String[] strArr) {
                 switch (this.$r8$classId) {
                     case 0:
-                        return this.this$1.mDb.delete("allowList", "PackageName = ? AND Uid = ?", strArr);
+                        return this.this$1.mDb.delete(
+                                "allowList", "PackageName = ? AND Uid = ?", strArr);
                     default:
-                        return this.this$1.mDb.delete("whilteList", "PackageName = ? AND Uid = ?", strArr);
+                        return this.this$1.mDb.delete(
+                                "whilteList", "PackageName = ? AND Uid = ?", strArr);
                 }
             }
 
@@ -286,11 +317,13 @@ public final class IbsQuickDim {
                     case 0:
                         SQLiteQueryBuilder sQLiteQueryBuilder = new SQLiteQueryBuilder();
                         sQLiteQueryBuilder.setTables("allowList");
-                        return sQLiteQueryBuilder.query(sQLiteDatabase, null, null, null, null, null, null);
+                        return sQLiteQueryBuilder.query(
+                                sQLiteDatabase, null, null, null, null, null, null);
                     default:
                         SQLiteQueryBuilder sQLiteQueryBuilder2 = new SQLiteQueryBuilder();
                         sQLiteQueryBuilder2.setTables("whilteList");
-                        return sQLiteQueryBuilder2.query(sQLiteDatabase, null, null, null, null, null, null);
+                        return sQLiteQueryBuilder2.query(
+                                sQLiteDatabase, null, null, null, null, null, null);
                 }
             }
         }
@@ -301,13 +334,24 @@ public final class IbsQuickDim {
 
         @Override // android.database.sqlite.SQLiteOpenHelper
         public final void onCreate(SQLiteDatabase sQLiteDatabase) {
-            sQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS  whilteList(_id INTEGER PRIMARY KEY AUTOINCREMENT,PackageName TEXT,Uid INT)");
-            sQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS  allowList(_id INTEGER PRIMARY KEY AUTOINCREMENT,PackageName TEXT,Uid INT)");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE IF NOT EXISTS  whilteList(_id INTEGER PRIMARY KEY"
+                        + " AUTOINCREMENT,PackageName TEXT,Uid INT)");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE IF NOT EXISTS  allowList(_id INTEGER PRIMARY KEY"
+                        + " AUTOINCREMENT,PackageName TEXT,Uid INT)");
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
         public final void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
-            Slog.w("IbsQuickDim", DualAppManagerService$$ExternalSyntheticOutline0.m(i, i2, "Upgrading database from version ", " to ", ", which will destroy all old data"));
+            Slog.w(
+                    "IbsQuickDim",
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            i,
+                            i2,
+                            "Upgrading database from version ",
+                            " to ",
+                            ", which will destroy all old data"));
             sQLiteDatabase.execSQL("DROP TABLE IF EXISTS suggestions");
             onCreate(sQLiteDatabase);
         }
@@ -322,9 +366,13 @@ public final class IbsQuickDim {
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
             boolean z2;
-            IbsQuickDim.this.mScreenOffTimeoutSetting = Settings.System.getIntForUser(r9.mResolver, "screen_off_timeout", 60000, -2);
+            IbsQuickDim.this.mScreenOffTimeoutSetting =
+                    Settings.System.getIntForUser(r9.mResolver, "screen_off_timeout", 60000, -2);
             IbsQuickDim ibsQuickDim = IbsQuickDim.this;
-            ibsQuickDim.mSmartStayEnabledSetting = Settings.System.getIntForUser(ibsQuickDim.mResolver, "intelligent_sleep_mode", 0, -2) != 0;
+            ibsQuickDim.mSmartStayEnabledSetting =
+                    Settings.System.getIntForUser(
+                                    ibsQuickDim.mResolver, "intelligent_sleep_mode", 0, -2)
+                            != 0;
             IbsQuickDim ibsQuickDim2 = IbsQuickDim.this;
             long j = ibsQuickDim2.mScreenOffTimeoutSetting;
             if (j < 60000 || (z2 = ibsQuickDim2.mSmartStayEnabledSetting)) {
@@ -337,7 +385,9 @@ public final class IbsQuickDim {
             }
             IbsQuickDim ibsQuickDim3 = IbsQuickDim.this;
             if (ibsQuickDim3.mQuickDimMode != 1) {
-                ibsQuickDim3.mBrightness = Settings.System.getIntForUser(ibsQuickDim3.mResolver, "screen_brightness", 0, -2);
+                ibsQuickDim3.mBrightness =
+                        Settings.System.getIntForUser(
+                                ibsQuickDim3.mResolver, "screen_brightness", 0, -2);
             }
         }
     }
@@ -356,7 +406,9 @@ public final class IbsQuickDim {
             if (IbsQuickDim.m583$$Nest$misSqdCanWork(ibsQuickDim)) {
                 int i = message.what;
                 if (i == 1) {
-                    if (ibsQuickDim.mQuickDimMode != 2 || (fpsFromSurfaceFlinger = ibsQuickDim.getFpsFromSurfaceFlinger()) == -2) {
+                    if (ibsQuickDim.mQuickDimMode != 2
+                            || (fpsFromSurfaceFlinger = ibsQuickDim.getFpsFromSurfaceFlinger())
+                                    == -2) {
                         return;
                     }
                     int i2 = ibsQuickDim.mLastFPS;
@@ -388,7 +440,9 @@ public final class IbsQuickDim {
                         return;
                     }
                 }
-                if (ibsQuickDim.mQuickDimMode == 1 || (fpsFromSurfaceFlinger2 = ibsQuickDim.getFpsFromSurfaceFlinger()) == -2) {
+                if (ibsQuickDim.mQuickDimMode == 1
+                        || (fpsFromSurfaceFlinger2 = ibsQuickDim.getFpsFromSurfaceFlinger())
+                                == -2) {
                     return;
                 }
                 if (fpsFromSurfaceFlinger2 != ibsQuickDim.mLastFPS) {
@@ -408,7 +462,10 @@ public final class IbsQuickDim {
 
     /* renamed from: -$$Nest$misSqdCanWork, reason: not valid java name */
     public static boolean m583$$Nest$misSqdCanWork(IbsQuickDim ibsQuickDim) {
-        return ibsQuickDim.mQuickdimEnable && ibsQuickDim.mScreenOn && (ibsQuickDim.mUiControlEnabled || !ibsQuickDim.mAllowDimUidSet.isEmpty()) && !ibsQuickDim.mCharging;
+        return ibsQuickDim.mQuickdimEnable
+                && ibsQuickDim.mScreenOn
+                && (ibsQuickDim.mUiControlEnabled || !ibsQuickDim.mAllowDimUidSet.isEmpty())
+                && !ibsQuickDim.mCharging;
     }
 
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.ibs.sqd.IbsQuickDim$3] */
@@ -461,7 +518,10 @@ public final class IbsQuickDim {
     public final void quitDimMode() {
         if (this.mQuickDimMode == 1) {
             if (DEBUG) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder(" quit dim mode mQuickDimMode = "), this.mQuickDimMode, "IbsQuickDim");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        new StringBuilder(" quit dim mode mQuickDimMode = "),
+                        this.mQuickDimMode,
+                        "IbsQuickDim");
             }
             int i = 0;
             this.mPowerManagerInternal.setScreenDimDurationOverrideFromSqd(false);
@@ -476,7 +536,8 @@ public final class IbsQuickDim {
                     i = ((Integer) entry.getValue()).intValue();
                 }
             }
-            this.mSQDPowerSave += (((currentTimeMillis - this.mDimStartTime) / 1000.0f) / 3600.0f) * i;
+            this.mSQDPowerSave +=
+                    (((currentTimeMillis - this.mDimStartTime) / 1000.0f) / 3600.0f) * i;
             this.mDimStartTime = -1L;
         }
     }
@@ -494,7 +555,10 @@ public final class IbsQuickDim {
             if (!z2) {
                 this.mQuickDimMode = 2;
                 this.mQkDimHandler.sendEmptyMessage(4);
-            } else if (this.mQuickdimEnable && this.mScreenOn && this.mQuickDimMode == 2 && !this.mCharging) {
+            } else if (this.mQuickdimEnable
+                    && this.mScreenOn
+                    && this.mQuickDimMode == 2
+                    && !this.mCharging) {
                 this.mQkDimHandler.sendEmptyMessage(1);
             }
             SharePrefUtils.putBoolean(this.mContext, "pref_sqd_enabled_key", z);

@@ -1,6 +1,7 @@
 package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -14,8 +15,7 @@ public class AtscFrontendSettings extends FrontendSettings {
     private final int mModulation;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Modulation {
-    }
+    public @interface Modulation {}
 
     private AtscFrontendSettings(long frequency, int modulation) {
         super(frequency);

@@ -4,25 +4,29 @@ import android.annotation.NonNull;
 import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.ArrayUtils;
+
 import java.util.Arrays;
 
 /* loaded from: classes4.dex */
 public class PrivacyIndicatorBounds implements Parcelable {
-    public static final Parcelable.Creator<PrivacyIndicatorBounds> CREATOR = new Parcelable.Creator<PrivacyIndicatorBounds>() { // from class: android.view.PrivacyIndicatorBounds.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrivacyIndicatorBounds[] newArray(int size) {
-            return new PrivacyIndicatorBounds[size];
-        }
+    public static final Parcelable.Creator<PrivacyIndicatorBounds> CREATOR =
+            new Parcelable.Creator<
+                    PrivacyIndicatorBounds>() { // from class: android.view.PrivacyIndicatorBounds.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrivacyIndicatorBounds[] newArray(int size) {
+                    return new PrivacyIndicatorBounds[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrivacyIndicatorBounds createFromParcel(Parcel in) {
-            return new PrivacyIndicatorBounds(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrivacyIndicatorBounds createFromParcel(Parcel in) {
+                    return new PrivacyIndicatorBounds(in);
+                }
+            };
     private final int mRotation;
     private final Rect[] mStaticBounds;
 
@@ -49,18 +53,21 @@ public class PrivacyIndicatorBounds implements Parcelable {
         return updateStaticBounds(newBounds);
     }
 
-    public PrivacyIndicatorBounds inset(int insetLeft, int insetTop, int insetRight, int insetBottom) {
+    public PrivacyIndicatorBounds inset(
+            int insetLeft, int insetTop, int insetRight, int insetBottom) {
         if (insetLeft == 0 && insetTop == 0 && insetRight == 0 && insetBottom == 0) {
             return this;
         }
         Rect[] insetStaticBounds = new Rect[this.mStaticBounds.length];
         for (int i = 0; i < this.mStaticBounds.length; i++) {
-            insetStaticBounds[i] = insetRect(this.mStaticBounds[i], insetLeft, insetTop, insetRight, insetBottom);
+            insetStaticBounds[i] =
+                    insetRect(this.mStaticBounds[i], insetLeft, insetTop, insetRight, insetBottom);
         }
         return updateStaticBounds(insetStaticBounds);
     }
 
-    private static Rect insetRect(Rect orig, int insetLeft, int insetTop, int insetRight, int insetBottom) {
+    private static Rect insetRect(
+            Rect orig, int insetLeft, int insetTop, int insetRight, int insetBottom) {
         if (orig == null) {
             return null;
         }
@@ -103,7 +110,11 @@ public class PrivacyIndicatorBounds implements Parcelable {
     }
 
     public String toString() {
-        return "PrivacyIndicatorBounds {static bounds=" + getStaticPrivacyIndicatorBounds() + " rotation=" + this.mRotation + "}";
+        return "PrivacyIndicatorBounds {static bounds="
+                + getStaticPrivacyIndicatorBounds()
+                + " rotation="
+                + this.mRotation
+                + "}";
     }
 
     public boolean equals(Object o) {
@@ -114,7 +125,8 @@ public class PrivacyIndicatorBounds implements Parcelable {
             return false;
         }
         PrivacyIndicatorBounds that = (PrivacyIndicatorBounds) o;
-        if (Arrays.equals(this.mStaticBounds, that.mStaticBounds) && this.mRotation == that.mRotation) {
+        if (Arrays.equals(this.mStaticBounds, that.mStaticBounds)
+                && this.mRotation == that.mRotation) {
             return true;
         }
         return false;
@@ -140,11 +152,11 @@ public class PrivacyIndicatorBounds implements Parcelable {
         Rect[] staticBounds = (Rect[]) in.createTypedArray(Rect.CREATOR);
         int rotation = in.readInt();
         this.mStaticBounds = staticBounds;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStaticBounds);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mStaticBounds);
         this.mRotation = rotation;
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

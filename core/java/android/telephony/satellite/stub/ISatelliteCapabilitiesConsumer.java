@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface ISatelliteCapabilitiesConsumer extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.satellite.stub.ISatelliteCapabilitiesConsumer";
+    public static final String DESCRIPTOR =
+            "android.telephony.satellite.stub.ISatelliteCapabilitiesConsumer";
 
     void accept(SatelliteCapabilities satelliteCapabilities) throws RemoteException;
 
     public static class Default implements ISatelliteCapabilitiesConsumer {
         @Override // android.telephony.satellite.stub.ISatelliteCapabilitiesConsumer
-        public void accept(SatelliteCapabilities result) throws RemoteException {
-        }
+        public void accept(SatelliteCapabilities result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ISatelliteCapabilitiesConsumer extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatelliteCapabilitiesConsumer {
+    public abstract static class Stub extends Binder implements ISatelliteCapabilitiesConsumer {
         static final int TRANSACTION_accept = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ISatelliteCapabilitiesConsumer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISatelliteCapabilitiesConsumer.DESCRIPTOR);
             }
@@ -71,7 +72,9 @@ public interface ISatelliteCapabilitiesConsumer extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SatelliteCapabilities _arg0 = (SatelliteCapabilities) data.readTypedObject(SatelliteCapabilities.CREATOR);
+                    SatelliteCapabilities _arg0 =
+                            (SatelliteCapabilities)
+                                    data.readTypedObject(SatelliteCapabilities.CREATOR);
                     data.enforceNoDataAvail();
                     accept(_arg0);
                     return true;

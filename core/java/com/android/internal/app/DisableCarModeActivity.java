@@ -16,7 +16,9 @@ public class DisableCarModeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            IUiModeManager uiModeManager = IUiModeManager.Stub.asInterface(ServiceManager.getService(Context.UI_MODE_SERVICE));
+            IUiModeManager uiModeManager =
+                    IUiModeManager.Stub.asInterface(
+                            ServiceManager.getService(Context.UI_MODE_SERVICE));
             uiModeManager.disableCarModeByCallingPackage(3, getOpPackageName());
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to disable car mode", e);

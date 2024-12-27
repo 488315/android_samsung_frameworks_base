@@ -2,8 +2,7 @@ package android.hardware.radio;
 
 import android.annotation.SystemApi;
 import android.graphics.Bitmap;
-import android.hardware.radio.ProgramList;
-import android.hardware.radio.RadioManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -15,26 +14,19 @@ public abstract class RadioTuner {
     public static final int DIRECTION_DOWN = 1;
     public static final int DIRECTION_UP = 0;
 
-    @Deprecated
-    public static final int ERROR_BACKGROUND_SCAN_FAILED = 6;
+    @Deprecated public static final int ERROR_BACKGROUND_SCAN_FAILED = 6;
 
-    @Deprecated
-    public static final int ERROR_BACKGROUND_SCAN_UNAVAILABLE = 5;
+    @Deprecated public static final int ERROR_BACKGROUND_SCAN_UNAVAILABLE = 5;
 
-    @Deprecated
-    public static final int ERROR_CANCELLED = 2;
+    @Deprecated public static final int ERROR_CANCELLED = 2;
 
-    @Deprecated
-    public static final int ERROR_CONFIG = 4;
+    @Deprecated public static final int ERROR_CONFIG = 4;
 
-    @Deprecated
-    public static final int ERROR_HARDWARE_FAILURE = 0;
+    @Deprecated public static final int ERROR_HARDWARE_FAILURE = 0;
 
-    @Deprecated
-    public static final int ERROR_SCAN_TIMEOUT = 3;
+    @Deprecated public static final int ERROR_SCAN_TIMEOUT = 3;
 
-    @Deprecated
-    public static final int ERROR_SERVER_DIED = 1;
+    @Deprecated public static final int ERROR_SERVER_DIED = 1;
     public static final int TUNER_RESULT_CANCELED = 6;
     public static final int TUNER_RESULT_INTERNAL_ERROR = 1;
     public static final int TUNER_RESULT_INVALID_ARGUMENTS = 2;
@@ -45,8 +37,7 @@ public abstract class RadioTuner {
     public static final int TUNER_RESULT_UNKNOWN_ERROR = 7;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TunerResultType {
-    }
+    public @interface TunerResultType {}
 
     public abstract int cancel();
 
@@ -100,7 +91,8 @@ public abstract class RadioTuner {
     }
 
     public Bitmap getMetadataImage(int id) {
-        throw new UnsupportedOperationException("Getting metadata image must be implemented in child classes");
+        throw new UnsupportedOperationException(
+                "Getting metadata image must be implemented in child classes");
     }
 
     public ProgramList getDynamicProgramList(ProgramList.Filter filter) {
@@ -127,49 +119,35 @@ public abstract class RadioTuner {
         throw new UnsupportedOperationException("Getting parameters is not supported");
     }
 
-    public static abstract class Callback {
-        public void onError(int status) {
-        }
+    public abstract static class Callback {
+        public void onError(int status) {}
 
-        public void onTuneFailed(int result, ProgramSelector selector) {
-        }
+        public void onTuneFailed(int result, ProgramSelector selector) {}
 
         @Deprecated
-        public void onConfigurationChanged(RadioManager.BandConfig config) {
-        }
+        public void onConfigurationChanged(RadioManager.BandConfig config) {}
 
-        public void onProgramInfoChanged(RadioManager.ProgramInfo info) {
-        }
+        public void onProgramInfoChanged(RadioManager.ProgramInfo info) {}
 
         @Deprecated
-        public void onMetadataChanged(RadioMetadata metadata) {
-        }
+        public void onMetadataChanged(RadioMetadata metadata) {}
 
-        public void onTrafficAnnouncement(boolean active) {
-        }
+        public void onTrafficAnnouncement(boolean active) {}
 
-        public void onEmergencyAnnouncement(boolean active) {
-        }
+        public void onEmergencyAnnouncement(boolean active) {}
 
-        public void onAntennaState(boolean connected) {
-        }
+        public void onAntennaState(boolean connected) {}
 
-        public void onControlChanged(boolean control) {
-        }
+        public void onControlChanged(boolean control) {}
 
-        public void onBackgroundScanAvailabilityChange(boolean isAvailable) {
-        }
+        public void onBackgroundScanAvailabilityChange(boolean isAvailable) {}
 
-        public void onBackgroundScanComplete() {
-        }
+        public void onBackgroundScanComplete() {}
 
-        public void onProgramListChanged() {
-        }
+        public void onProgramListChanged() {}
 
-        public void onConfigFlagUpdated(int flag, boolean value) {
-        }
+        public void onConfigFlagUpdated(int flag, boolean value) {}
 
-        public void onParametersUpdated(Map<String, String> parameters) {
-        }
+        public void onParametersUpdated(Map<String, String> parameters) {}
     }
 }

@@ -24,7 +24,8 @@ public class SContextShakeMotionAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mStrength < 0) {
             Log.e(TAG, "The strength is wrong.");

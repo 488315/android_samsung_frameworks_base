@@ -15,8 +15,7 @@ public class Selection {
         int preceding(int i);
     }
 
-    private Selection() {
-    }
+    private Selection() {}
 
     public static final int getSelectionStart(CharSequence text) {
         if (text instanceof Spanned) {
@@ -72,7 +71,8 @@ public class Selection {
 
     private static void removeMemory(Spannable text) {
         text.removeSpan(SELECTION_MEMORY);
-        MemoryTextWatcher[] watchers = (MemoryTextWatcher[]) text.getSpans(0, text.length(), MemoryTextWatcher.class);
+        MemoryTextWatcher[] watchers =
+                (MemoryTextWatcher[]) text.getSpans(0, text.length(), MemoryTextWatcher.class);
         for (MemoryTextWatcher watcher : watchers) {
             text.removeSpan(watcher);
         }
@@ -80,12 +80,10 @@ public class Selection {
 
     public static final class MemoryTextWatcher implements TextWatcher {
         @Override // android.text.TextWatcher
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
         @Override // android.text.TextWatcher
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-        }
+        public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
         @Override // android.text.TextWatcher
         public void afterTextChanged(Editable s) {
@@ -140,7 +138,8 @@ public class Selection {
         return true;
     }
 
-    private static void setSelectionAndMemory(Spannable text, Layout layout, int line, int end, int direction, boolean extend) {
+    private static void setSelectionAndMemory(
+            Spannable text, Layout layout, int line, int end, int direction, boolean extend) {
         int move;
         int newMemory;
         if (layout.getParagraphDirection(line) == layout.getParagraphDirection(line + direction)) {
@@ -350,7 +349,8 @@ public class Selection {
         return true;
     }
 
-    public static boolean moveToPreceding(Spannable text, PositionIterator iter, boolean extendSelection) {
+    public static boolean moveToPreceding(
+            Spannable text, PositionIterator iter, boolean extendSelection) {
         int offset = iter.preceding(getSelectionEnd(text));
         if (offset != -1) {
             if (extendSelection) {
@@ -363,7 +363,8 @@ public class Selection {
         return true;
     }
 
-    public static boolean moveToFollowing(Spannable text, PositionIterator iter, boolean extendSelection) {
+    public static boolean moveToFollowing(
+            Spannable text, PositionIterator iter, boolean extendSelection) {
         int offset = iter.following(getSelectionEnd(text));
         if (offset != -1) {
             if (extendSelection) {
@@ -416,17 +417,14 @@ public class Selection {
     }
 
     private static final class START implements NoCopySpan {
-        private START() {
-        }
+        private START() {}
     }
 
     private static final class END implements NoCopySpan {
-        private END() {
-        }
+        private END() {}
     }
 
     private static final class MEMORY implements NoCopySpan {
-        private MEMORY() {
-        }
+        private MEMORY() {}
     }
 }

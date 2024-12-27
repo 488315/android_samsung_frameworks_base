@@ -1,9 +1,9 @@
 package android.os;
 
 import android.content.Context;
-import android.os.ILazyService;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
@@ -42,11 +42,17 @@ public class LazyService extends ILazyService.Stub {
                 ServiceManager.addService(name, binder);
             } catch (Throwable e) {
                 Log.e(TAG, "Failure adding " + name + " Service", e);
-                historyServices.add("Failure adding " + name + " Service, Exception : " + e.toString());
+                historyServices.add(
+                        "Failure adding " + name + " Service, Exception : " + e.toString());
                 binder = null;
             }
             Log.d(TAG, (System.currentTimeMillis() - time) + "ms");
-            historyServices.add("GetService " + name + " Service : " + (System.currentTimeMillis() - time) + "ms");
+            historyServices.add(
+                    "GetService "
+                            + name
+                            + " Service : "
+                            + (System.currentTimeMillis() - time)
+                            + "ms");
             return binder;
         }
     }
@@ -108,7 +114,9 @@ public class LazyService extends ILazyService.Stub {
             try {
                 IBinder binder = (IBinder) this.mConstructor.newInstance(context);
                 return binder;
-            } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            } catch (IllegalAccessException
+                    | InstantiationException
+                    | InvocationTargetException e) {
                 Log.e(LazyService.TAG, "Error in createService (DefaultServiceCreator)", e);
                 LazyService.historyServices.add("Failure creating Exception : " + e.toString());
                 return null;

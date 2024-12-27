@@ -1,11 +1,13 @@
 package android.audio.policy.configuration.V7_0;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class Routes {
@@ -61,7 +63,8 @@ public class Routes {
             this.sources = sources;
         }
 
-        static Route read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static Route read(XmlPullParser _parser)
+                throws XmlPullParserException, IOException, DatatypeConfigurationException {
             Route _instance = new Route();
             String _raw = _parser.getAttributeValue(null, "type");
             if (_raw != null) {
@@ -88,7 +91,8 @@ public class Routes {
         return this.route;
     }
 
-    static Routes read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Routes read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         Routes _instance = new Routes();
         _parser.getDepth();

@@ -20,24 +20,19 @@ public interface IStreamingServiceCallback extends IInterface {
 
     public static class Default implements IStreamingServiceCallback {
         @Override // android.telephony.mbms.IStreamingServiceCallback
-        public void onError(int errorCode, String message) throws RemoteException {
-        }
+        public void onError(int errorCode, String message) throws RemoteException {}
 
         @Override // android.telephony.mbms.IStreamingServiceCallback
-        public void onStreamStateUpdated(int state, int reason) throws RemoteException {
-        }
+        public void onStreamStateUpdated(int state, int reason) throws RemoteException {}
 
         @Override // android.telephony.mbms.IStreamingServiceCallback
-        public void onMediaDescriptionUpdated() throws RemoteException {
-        }
+        public void onMediaDescriptionUpdated() throws RemoteException {}
 
         @Override // android.telephony.mbms.IStreamingServiceCallback
-        public void onBroadcastSignalStrengthUpdated(int signalStrength) throws RemoteException {
-        }
+        public void onBroadcastSignalStrengthUpdated(int signalStrength) throws RemoteException {}
 
         @Override // android.telephony.mbms.IStreamingServiceCallback
-        public void onStreamMethodUpdated(int methodType) throws RemoteException {
-        }
+        public void onStreamMethodUpdated(int methodType) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -45,7 +40,7 @@ public interface IStreamingServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStreamingServiceCallback {
+    public abstract static class Stub extends Binder implements IStreamingServiceCallback {
         public static final String DESCRIPTOR = "android.telephony.mbms.IStreamingServiceCallback";
         static final int TRANSACTION_onBroadcastSignalStrengthUpdated = 4;
         static final int TRANSACTION_onError = 1;
@@ -96,7 +91,8 @@ public interface IStreamingServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -189,7 +185,8 @@ public interface IStreamingServiceCallback extends IInterface {
             }
 
             @Override // android.telephony.mbms.IStreamingServiceCallback
-            public void onBroadcastSignalStrengthUpdated(int signalStrength) throws RemoteException {
+            public void onBroadcastSignalStrengthUpdated(int signalStrength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

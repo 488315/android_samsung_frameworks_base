@@ -1,8 +1,8 @@
 package com.android.internal.graphics.palette;
 
 import com.android.internal.graphics.ColorUtils;
-import com.android.internal.graphics.palette.Palette;
 import com.android.internal.ml.clustering.KMeans;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,8 @@ public class VariationalKMeansQuantizer implements Quantizer {
     public void quantize(int[] pixels, int maxColors) {
         float[] hsl;
         float[] hsl2 = {0.0f, 0.0f, 0.0f};
-        float[][] hslPixels = (float[][]) Array.newInstance((Class<?>) Float.TYPE, pixels.length, 3);
+        float[][] hslPixels =
+                (float[][]) Array.newInstance((Class<?>) Float.TYPE, pixels.length, 3);
         for (int i = 0; i < pixels.length; i++) {
             ColorUtils.colorToHSL(pixels[i], hsl2);
             hslPixels[i][0] = hsl2[0] / 360.0f;
@@ -59,7 +60,11 @@ public class VariationalKMeansQuantizer implements Quantizer {
                     int k = 0;
                     while (k < currentCentroid.length) {
                         int k2 = k;
-                        currentCentroid[k2] = (float) (currentCentroid[k] + ((compareToCentroid[k] - currentCentroid[k]) / 2.0d));
+                        currentCentroid[k2] =
+                                (float)
+                                        (currentCentroid[k]
+                                                + ((compareToCentroid[k] - currentCentroid[k])
+                                                        / 2.0d));
                         k = k2 + 1;
                         hsl2 = hsl2;
                     }

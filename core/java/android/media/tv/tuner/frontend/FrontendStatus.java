@@ -2,6 +2,7 @@ package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerVersionChecker;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -107,35 +108,27 @@ public class FrontendStatus {
     private Integer mUec;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FrontendBandwidth {
-    }
+    public @interface FrontendBandwidth {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FrontendGuardInterval {
-    }
+    public @interface FrontendGuardInterval {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FrontendInterleaveMode {
-    }
+    public @interface FrontendInterleaveMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FrontendModulation {
-    }
+    public @interface FrontendModulation {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FrontendRollOff {
-    }
+    public @interface FrontendRollOff {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FrontendStatusType {
-    }
+    public @interface FrontendStatusType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FrontendTransmissionMode {
-    }
+    public @interface FrontendTransmissionMode {}
 
-    private FrontendStatus() {
-    }
+    private FrontendStatus() {}
 
     public boolean isDemodLocked() {
         if (this.mIsDemodLocked == null) {

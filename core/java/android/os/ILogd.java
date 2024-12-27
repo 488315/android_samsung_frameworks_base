@@ -10,12 +10,10 @@ public interface ILogd extends IInterface {
 
     public static class Default implements ILogd {
         @Override // android.os.ILogd
-        public void approve(int uid, int gid, int pid, int fd) throws RemoteException {
-        }
+        public void approve(int uid, int gid, int pid, int fd) throws RemoteException {}
 
         @Override // android.os.ILogd
-        public void decline(int uid, int gid, int pid, int fd) throws RemoteException {
-        }
+        public void decline(int uid, int gid, int pid, int fd) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +21,7 @@ public interface ILogd extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILogd {
+    public abstract static class Stub extends Binder implements ILogd {
         static final int TRANSACTION_approve = 1;
         static final int TRANSACTION_decline = 2;
 
@@ -64,7 +62,8 @@ public interface ILogd extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ILogd.DESCRIPTOR);
             }

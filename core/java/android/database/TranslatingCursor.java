@@ -5,7 +5,9 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.os.CancellationSignal;
 import android.util.ArraySet;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -33,7 +35,8 @@ public class TranslatingCursor extends CrossProcessCursorWrapper {
         }
     }
 
-    public TranslatingCursor(Cursor cursor, Config config, Translator translator, boolean dropLast) {
+    public TranslatingCursor(
+            Cursor cursor, Config config, Translator translator, boolean dropLast) {
         super(cursor);
         this.mConfig = (Config) Objects.requireNonNull(config);
         this.mTranslator = (Translator) Objects.requireNonNull(translator);
@@ -59,23 +62,54 @@ public class TranslatingCursor extends CrossProcessCursorWrapper {
     @Override // android.database.CursorWrapper, android.database.Cursor
     public String[] getColumnNames() {
         if (this.mDropLast) {
-            return (String[]) Arrays.copyOfRange(super.getColumnNames(), 0, super.getColumnCount() - 1);
+            return (String[])
+                    Arrays.copyOfRange(super.getColumnNames(), 0, super.getColumnCount() - 1);
         }
         return super.getColumnNames();
     }
 
-    public static Cursor query(Config config, Translator translator, SQLiteQueryBuilder qb, SQLiteDatabase db, String[] projectionIn, String selection, String[] selectionArgs, String groupBy, String having, String sortOrder, String limit, CancellationSignal signal) {
+    public static Cursor query(
+            Config config,
+            Translator translator,
+            SQLiteQueryBuilder qb,
+            SQLiteDatabase db,
+            String[] projectionIn,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having,
+            String sortOrder,
+            String limit,
+            CancellationSignal signal) {
         String[] projectionIn2 = projectionIn;
-        boolean requestedAuxiliaryColumn = ArrayUtils.isEmpty(projectionIn) || ArrayUtils.contains(projectionIn2, config.auxiliaryColumn);
-        boolean requestedTranslateColumns = ArrayUtils.isEmpty(projectionIn) || ArrayUtils.containsAny(projectionIn2, config.translateColumns);
+        boolean requestedAuxiliaryColumn =
+                ArrayUtils.isEmpty(projectionIn)
+                        || ArrayUtils.contains(projectionIn2, config.auxiliaryColumn);
+        boolean requestedTranslateColumns =
+                ArrayUtils.isEmpty(projectionIn)
+                        || ArrayUtils.containsAny(projectionIn2, config.translateColumns);
         if (!requestedTranslateColumns) {
-            return qb.query(db, projectionIn, selection, selectionArgs, groupBy, having, sortOrder, limit, signal);
+            return qb.query(
+                    db,
+                    projectionIn,
+                    selection,
+                    selectionArgs,
+                    groupBy,
+                    having,
+                    sortOrder,
+                    limit,
+                    signal);
         }
         if (!requestedAuxiliaryColumn) {
-            projectionIn2 = (String[]) ArrayUtils.appendElement(String.class, projectionIn2, config.auxiliaryColumn);
+            projectionIn2 =
+                    (String[])
+                            ArrayUtils.appendElement(
+                                    String.class, projectionIn2, config.auxiliaryColumn);
         }
-        Cursor c = qb.query(db, projectionIn2, selection, selectionArgs, groupBy, having, sortOrder);
-        return new TranslatingCursor(c, config, translator, requestedAuxiliaryColumn ? false : true);
+        Cursor c =
+                qb.query(db, projectionIn2, selection, selectionArgs, groupBy, having, sortOrder);
+        return new TranslatingCursor(
+                c, config, translator, requestedAuxiliaryColumn ? false : true);
     }
 
     @Override // android.database.CrossProcessCursorWrapper, android.database.CrossProcessCursor
@@ -136,7 +170,11 @@ public class TranslatingCursor extends CrossProcessCursorWrapper {
     @Override // android.database.CursorWrapper, android.database.Cursor
     public String getString(int columnIndex) {
         if (ArrayUtils.contains(this.mTranslateColumnIndices, Integer.valueOf(columnIndex))) {
-            return this.mTranslator.translate(super.getString(columnIndex), this.mAuxiliaryColumnIndex, getColumnName(columnIndex), this);
+            return this.mTranslator.translate(
+                    super.getString(columnIndex),
+                    this.mAuxiliaryColumnIndex,
+                    getColumnName(columnIndex),
+                    this);
         }
         return super.getString(columnIndex);
     }

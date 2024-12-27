@@ -1,15 +1,18 @@
 package com.android.server.knox.zt.devicetrust.data;
 
 import android.os.Bundle;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -39,7 +42,33 @@ public final class ProcEventData extends EndpointData {
     public final int tid;
     public final int uid;
 
-    public ProcEventData(int i, long j, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16, long j2, long j3, long j4, String str, String str2, String str3, long j5, long j6, long j7) {
+    public ProcEventData(
+            int i,
+            long j,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            int i11,
+            int i12,
+            int i13,
+            int i14,
+            int i15,
+            int i16,
+            long j2,
+            long j3,
+            long j4,
+            String str,
+            String str2,
+            String str3,
+            long j5,
+            long j6,
+            long j7) {
         super(i, j);
         this.syscall = i2;
         this.exitCode = i3;
@@ -175,14 +204,22 @@ public final class ProcEventData extends EndpointData {
         long j6 = this.reserved_2;
         long j7 = this.reserved_3;
         String readExtras = readExtras(true);
-        StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i2, i3, " | syscall : ", " | exitCode : ", m);
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i4, i5, " | tid : ", " | pid : ", m);
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i6, i7, " | ppid : ", " | uid : ", m);
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i8, i9, " | gid : ", " | suid : ", m);
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i10, i11, " | sgid : ", " | euid : ", m);
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i12, i13, " | egid : ", " | fsuid : ", m);
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i14, i15, " | fsgid : ", " | ownerUid : ", m);
+        StringBuilder m =
+                SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i2, i3, " | syscall : ", " | exitCode : ", m);
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i4, i5, " | tid : ", " | pid : ", m);
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i6, i7, " | ppid : ", " | uid : ", m);
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i8, i9, " | gid : ", " | suid : ", m);
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i10, i11, " | sgid : ", " | euid : ", m);
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i12, i13, " | egid : ", " | fsuid : ", m);
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i14, i15, " | fsgid : ", " | ownerUid : ", m);
         m.append(" | ownerGid : ");
         m.append(i16);
         m.append(" | atime : ");
@@ -191,7 +228,8 @@ public final class ProcEventData extends EndpointData {
         m.append(j4);
         m.append(" | filepath : ");
         m.append(str);
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, " | cwd : ", str2, " | cmdline : ", str3);
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                m, " | cwd : ", str2, " | cmdline : ", str3);
         BootReceiver$$ExternalSyntheticOutline0.m(m, "reserved_1 : ", j5, " | reserved_2 : ");
         m.append(j6);
         m.append(" | reserved_3 : ");

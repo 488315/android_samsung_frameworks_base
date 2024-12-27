@@ -12,16 +12,36 @@ import android.filterfw.format.ImageFormat;
 /* loaded from: classes.dex */
 public class FisheyeFilter extends Filter {
     private static final String TAG = "FisheyeFilter";
-    private static final String mFisheyeShader = "precision mediump float;\nuniform sampler2D tex_sampler_0;\nuniform vec2 scale;\nuniform float alpha;\nuniform float radius2;\nuniform float factor;\nvarying vec2 v_texcoord;\nvoid main() {\n  const float m_pi_2 = 1.570963;\n  const float min_dist = 0.01;\n  vec2 coord = v_texcoord - vec2(0.5, 0.5);\n  float dist = length(coord * scale);\n  dist = max(dist, min_dist);\n  float radian = m_pi_2 - atan(alpha * sqrt(radius2 - dist * dist), dist);\n  float scalar = radian * factor / dist;\n  vec2 new_coord = coord * scalar + vec2(0.5, 0.5);\n  gl_FragColor = texture2D(tex_sampler_0, new_coord);\n}\n";
+    private static final String mFisheyeShader =
+            "precision mediump float;\n"
+                    + "uniform sampler2D tex_sampler_0;\n"
+                    + "uniform vec2 scale;\n"
+                    + "uniform float alpha;\n"
+                    + "uniform float radius2;\n"
+                    + "uniform float factor;\n"
+                    + "varying vec2 v_texcoord;\n"
+                    + "void main() {\n"
+                    + "  const float m_pi_2 = 1.570963;\n"
+                    + "  const float min_dist = 0.01;\n"
+                    + "  vec2 coord = v_texcoord - vec2(0.5, 0.5);\n"
+                    + "  float dist = length(coord * scale);\n"
+                    + "  dist = max(dist, min_dist);\n"
+                    + "  float radian = m_pi_2 - atan(alpha * sqrt(radius2 - dist * dist), dist);\n"
+                    + "  float scalar = radian * factor / dist;\n"
+                    + "  vec2 new_coord = coord * scalar + vec2(0.5, 0.5);\n"
+                    + "  gl_FragColor = texture2D(tex_sampler_0, new_coord);\n"
+                    + "}\n";
     private int mHeight;
     private Program mProgram;
 
     @GenerateFieldPort(hasDefault = true, name = "scale")
     private float mScale;
+
     private int mTarget;
 
     @GenerateFieldPort(hasDefault = true, name = "tile_size")
     private int mTileSize;
+
     private int mWidth;
 
     public FisheyeFilter(String name) {
@@ -53,7 +73,8 @@ public class FisheyeFilter extends Filter {
                 this.mTarget = target;
                 return;
             default:
-                throw new RuntimeException("Filter FisheyeFilter does not support frames of target " + target + "!");
+                throw new RuntimeException(
+                        "Filter FisheyeFilter does not support frames of target " + target + "!");
         }
     }
 
@@ -100,7 +121,10 @@ public class FisheyeFilter extends Filter {
         float bound = (float) Math.sqrt(bound2);
         float radius = 1.15f * bound;
         float radius2 = radius * radius;
-        float max_radian = 1.5707964f - ((float) Math.atan((alpha / bound) * ((float) Math.sqrt(radius2 - bound2))));
+        float max_radian =
+                1.5707964f
+                        - ((float)
+                                Math.atan((alpha / bound) * ((float) Math.sqrt(radius2 - bound2))));
         float factor = bound / max_radian;
         this.mProgram.setHostValue("scale", scale);
         this.mProgram.setHostValue("radius2", Float.valueOf(radius2));

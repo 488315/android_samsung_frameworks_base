@@ -5,34 +5,38 @@ import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class VisualQueryAttentionResult implements Parcelable {
-    public static final Parcelable.Creator<VisualQueryAttentionResult> CREATOR = new Parcelable.Creator<VisualQueryAttentionResult>() { // from class: android.service.voice.VisualQueryAttentionResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisualQueryAttentionResult[] newArray(int size) {
-            return new VisualQueryAttentionResult[size];
-        }
+    public static final Parcelable.Creator<VisualQueryAttentionResult> CREATOR =
+            new Parcelable.Creator<
+                    VisualQueryAttentionResult>() { // from class:
+                                                    // android.service.voice.VisualQueryAttentionResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisualQueryAttentionResult[] newArray(int size) {
+                    return new VisualQueryAttentionResult[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisualQueryAttentionResult createFromParcel(Parcel in) {
-            return new VisualQueryAttentionResult(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisualQueryAttentionResult createFromParcel(Parcel in) {
+                    return new VisualQueryAttentionResult(in);
+                }
+            };
     public static final int INTERACTION_INTENTION_AUDIO_VISUAL = 0;
     public static final int INTERACTION_INTENTION_VISUAL_ACCESSIBILITY = 1;
     private final int mEngagementLevel;
     private final int mInteractionIntention;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InteractionIntention {
-    }
+    public @interface InteractionIntention {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int defaultInteractionIntention() {
@@ -45,7 +49,9 @@ public final class VisualQueryAttentionResult implements Parcelable {
     }
 
     public Builder buildUpon() {
-        return new Builder().setInteractionIntention(this.mInteractionIntention).setEngagementLevel(this.mEngagementLevel);
+        return new Builder()
+                .setInteractionIntention(this.mInteractionIntention)
+                .setEngagementLevel(this.mEngagementLevel);
     }
 
     public static String interactionIntentionToString(int value) {
@@ -62,10 +68,22 @@ public final class VisualQueryAttentionResult implements Parcelable {
     VisualQueryAttentionResult(int interactionIntention, int engagementLevel) {
         this.mInteractionIntention = interactionIntention;
         if (this.mInteractionIntention != 0 && this.mInteractionIntention != 1) {
-            throw new IllegalArgumentException("interactionIntention was " + this.mInteractionIntention + " but must be one of: INTERACTION_INTENTION_AUDIO_VISUAL(0), INTERACTION_INTENTION_VISUAL_ACCESSIBILITY(1" + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "interactionIntention was "
+                            + this.mInteractionIntention
+                            + " but must be one of: INTERACTION_INTENTION_AUDIO_VISUAL(0),"
+                            + " INTERACTION_INTENTION_VISUAL_ACCESSIBILITY(1"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mEngagementLevel = engagementLevel;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, this.mEngagementLevel, "from", 1L, "to", 100L);
+        AnnotationValidations.validate(
+                (Class<IntRange>) IntRange.class,
+                (IntRange) null,
+                this.mEngagementLevel,
+                "from",
+                1L,
+                "to",
+                100L);
     }
 
     public int getInteractionIntention() {
@@ -77,7 +95,11 @@ public final class VisualQueryAttentionResult implements Parcelable {
     }
 
     public String toString() {
-        return "VisualQueryAttentionResult { interactionIntention = " + this.mInteractionIntention + ", engagementLevel = " + this.mEngagementLevel + " }";
+        return "VisualQueryAttentionResult { interactionIntention = "
+                + this.mInteractionIntention
+                + ", engagementLevel = "
+                + this.mEngagementLevel
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -88,7 +110,8 @@ public final class VisualQueryAttentionResult implements Parcelable {
             return false;
         }
         VisualQueryAttentionResult that = (VisualQueryAttentionResult) o;
-        if (this.mInteractionIntention == that.mInteractionIntention && this.mEngagementLevel == that.mEngagementLevel) {
+        if (this.mInteractionIntention == that.mInteractionIntention
+                && this.mEngagementLevel == that.mEngagementLevel) {
             return true;
         }
         return false;
@@ -115,10 +138,22 @@ public final class VisualQueryAttentionResult implements Parcelable {
         int engagementLevel = in.readInt();
         this.mInteractionIntention = interactionIntention;
         if (this.mInteractionIntention != 0 && this.mInteractionIntention != 1) {
-            throw new IllegalArgumentException("interactionIntention was " + this.mInteractionIntention + " but must be one of: INTERACTION_INTENTION_AUDIO_VISUAL(0), INTERACTION_INTENTION_VISUAL_ACCESSIBILITY(1" + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "interactionIntention was "
+                            + this.mInteractionIntention
+                            + " but must be one of: INTERACTION_INTENTION_AUDIO_VISUAL(0),"
+                            + " INTERACTION_INTENTION_VISUAL_ACCESSIBILITY(1"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mEngagementLevel = engagementLevel;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, this.mEngagementLevel, "from", 1L, "to", 100L);
+        AnnotationValidations.validate(
+                (Class<IntRange>) IntRange.class,
+                (IntRange) null,
+                this.mEngagementLevel,
+                "from",
+                1L,
+                "to",
+                100L);
     }
 
     public static final class Builder {
@@ -144,23 +179,26 @@ public final class VisualQueryAttentionResult implements Parcelable {
             checkNotUsed();
             this.mBuilderFieldsSet |= 4;
             if ((this.mBuilderFieldsSet & 1) == 0) {
-                this.mInteractionIntention = VisualQueryAttentionResult.defaultInteractionIntention();
+                this.mInteractionIntention =
+                        VisualQueryAttentionResult.defaultInteractionIntention();
             }
             if ((this.mBuilderFieldsSet & 2) == 0) {
                 this.mEngagementLevel = VisualQueryAttentionResult.defaultEngagementLevel();
             }
-            VisualQueryAttentionResult o = new VisualQueryAttentionResult(this.mInteractionIntention, this.mEngagementLevel);
+            VisualQueryAttentionResult o =
+                    new VisualQueryAttentionResult(
+                            this.mInteractionIntention, this.mEngagementLevel);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 4) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

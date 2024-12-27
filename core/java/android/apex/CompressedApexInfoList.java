@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class CompressedApexInfoList implements Parcelable {
-    public static final Parcelable.Creator<CompressedApexInfoList> CREATOR = new Parcelable.Creator<CompressedApexInfoList>() { // from class: android.apex.CompressedApexInfoList.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompressedApexInfoList createFromParcel(Parcel _aidl_source) {
-            CompressedApexInfoList _aidl_out = new CompressedApexInfoList();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CompressedApexInfoList> CREATOR =
+            new Parcelable.Creator<
+                    CompressedApexInfoList>() { // from class: android.apex.CompressedApexInfoList.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompressedApexInfoList createFromParcel(Parcel _aidl_source) {
+                    CompressedApexInfoList _aidl_out = new CompressedApexInfoList();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompressedApexInfoList[] newArray(int _aidl_size) {
-            return new CompressedApexInfoList[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompressedApexInfoList[] newArray(int _aidl_size) {
+                    return new CompressedApexInfoList[_aidl_size];
+                }
+            };
     public CompressedApexInfo[] apexInfos;
 
     @Override // android.os.Parcelable
@@ -47,7 +49,9 @@ public class CompressedApexInfoList implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.apexInfos = (CompressedApexInfo[]) _aidl_parcel.createTypedArray(CompressedApexInfo.CREATOR);
+                this.apexInfos =
+                        (CompressedApexInfo[])
+                                _aidl_parcel.createTypedArray(CompressedApexInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

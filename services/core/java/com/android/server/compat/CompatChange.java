@@ -3,12 +3,14 @@ package com.android.server.compat;
 import android.app.compat.PackageOverride;
 import android.content.pm.ApplicationInfo;
 import android.util.Slog;
+
 import com.android.internal.compat.AndroidBuildClassifier;
 import com.android.internal.compat.CompatibilityChangeInfo;
 import com.android.internal.compat.OverrideAllowedState;
 import com.android.server.compat.overrides.ChangeOverrides;
 import com.android.server.compat.overrides.OverrideValue;
 import com.android.server.compat.overrides.RawOverrideValue;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,7 +33,8 @@ public final class CompatChange extends CompatibilityChangeInfo {
         this(j, null, -1, -1, false, false, null, false);
     }
 
-    public CompatChange(long j, String str, int i, int i2, boolean z, boolean z2, String str2, boolean z3) {
+    public CompatChange(
+            long j, String str, int i, int i2, boolean z, boolean z2, String str2, boolean z3) {
         super(Long.valueOf(j), str, i, i2, z, z2, str2, z3);
         this.mListener = null;
         this.mEvaluatedOverrides = new ConcurrentHashMap();
@@ -40,7 +43,8 @@ public final class CompatChange extends CompatibilityChangeInfo {
 
     public final void addPackageOverrideInternal(String str, boolean z) {
         if (getLoggingOnly()) {
-            throw new IllegalArgumentException("Can't add overrides for a logging only change " + toString());
+            throw new IllegalArgumentException(
+                    "Can't add overrides for a logging only change " + toString());
         }
         this.mEvaluatedOverrides.put(str, Boolean.valueOf(z));
         synchronized (this) {
@@ -51,7 +55,8 @@ public final class CompatChange extends CompatibilityChangeInfo {
         }
     }
 
-    public final boolean isEnabled(ApplicationInfo applicationInfo, AndroidBuildClassifier androidBuildClassifier) {
+    public final boolean isEnabled(
+            ApplicationInfo applicationInfo, AndroidBuildClassifier androidBuildClassifier) {
         Boolean bool;
         if (applicationInfo == null) {
             return !getDisabled();
@@ -63,7 +68,11 @@ public final class CompatChange extends CompatibilityChangeInfo {
         if (getDisabled()) {
             return false;
         }
-        return getEnableSinceTargetSdk() == -1 || Math.min(applicationInfo.targetSdkVersion, androidBuildClassifier.platformTargetSdk()) >= getEnableSinceTargetSdk();
+        return getEnableSinceTargetSdk() == -1
+                || Math.min(
+                                applicationInfo.targetSdkVersion,
+                                androidBuildClassifier.platformTargetSdk())
+                        >= getEnableSinceTargetSdk();
     }
 
     public final synchronized void loadOverrides(ChangeOverrides changeOverrides) {
@@ -83,7 +92,10 @@ public final class CompatChange extends CompatibilityChangeInfo {
                         ConcurrentHashMap concurrentHashMap = this.mRawOverrides;
                         PackageOverride.Builder builder = new PackageOverride.Builder();
                         Boolean bool = overrideValue.enabled;
-                        concurrentHashMap.put(str, builder.setEnabled(bool == null ? false : bool.booleanValue()).build());
+                        concurrentHashMap.put(
+                                str,
+                                builder.setEnabled(bool == null ? false : bool.booleanValue())
+                                        .build());
                     }
                 }
             }
@@ -96,12 +108,17 @@ public final class CompatChange extends CompatibilityChangeInfo {
                     } else {
                         ConcurrentHashMap concurrentHashMap2 = this.mEvaluatedOverrides;
                         Boolean bool2 = overrideValue2.enabled;
-                        concurrentHashMap2.put(str2, Boolean.valueOf(bool2 == null ? false : bool2.booleanValue()));
+                        concurrentHashMap2.put(
+                                str2,
+                                Boolean.valueOf(bool2 == null ? false : bool2.booleanValue()));
                         ConcurrentHashMap concurrentHashMap3 = this.mRawOverrides;
                         String str3 = overrideValue2.packageName;
                         PackageOverride.Builder builder2 = new PackageOverride.Builder();
                         Boolean bool3 = overrideValue2.enabled;
-                        concurrentHashMap3.put(str3, builder2.setEnabled(bool3 == null ? false : bool3.booleanValue()).build());
+                        concurrentHashMap3.put(
+                                str3,
+                                builder2.setEnabled(bool3 == null ? false : bool3.booleanValue())
+                                        .build());
                     }
                 }
             }
@@ -114,14 +131,20 @@ public final class CompatChange extends CompatibilityChangeInfo {
                         PackageOverride.Builder builder3 = new PackageOverride.Builder();
                         Long l = rawOverrideValue.minVersionCode;
                         long j = 0;
-                        PackageOverride.Builder minVersionCode = builder3.setMinVersionCode(l == null ? 0L : l.longValue());
+                        PackageOverride.Builder minVersionCode =
+                                builder3.setMinVersionCode(l == null ? 0L : l.longValue());
                         Long l2 = rawOverrideValue.maxVersionCode;
                         if (l2 != null) {
                             j = l2.longValue();
                         }
-                        PackageOverride.Builder maxVersionCode = minVersionCode.setMaxVersionCode(j);
+                        PackageOverride.Builder maxVersionCode =
+                                minVersionCode.setMaxVersionCode(j);
                         Boolean bool4 = rawOverrideValue.enabled;
-                        this.mRawOverrides.put(rawOverrideValue.packageName, maxVersionCode.setEnabled(bool4 == null ? false : bool4.booleanValue()).build());
+                        this.mRawOverrides.put(
+                                rawOverrideValue.packageName,
+                                maxVersionCode
+                                        .setEnabled(bool4 == null ? false : bool4.booleanValue())
+                                        .build());
                     }
                 }
             }
@@ -130,14 +153,16 @@ public final class CompatChange extends CompatibilityChangeInfo {
         }
     }
 
-    public final synchronized boolean recheckOverride(String str, OverrideAllowedState overrideAllowedState, Long l) {
+    public final synchronized boolean recheckOverride(
+            String str, OverrideAllowedState overrideAllowedState, Long l) {
         if (str == null) {
             return false;
         }
         try {
             boolean z = overrideAllowedState.state == 0;
             if (l != null && this.mRawOverrides.containsKey(str) && z) {
-                int evaluate = ((PackageOverride) this.mRawOverrides.get(str)).evaluate(l.longValue());
+                int evaluate =
+                        ((PackageOverride) this.mRawOverrides.get(str)).evaluate(l.longValue());
                 if (evaluate != 0) {
                     if (evaluate == 1) {
                         addPackageOverrideInternal(str, true);
@@ -180,9 +205,12 @@ public final class CompatChange extends CompatibilityChangeInfo {
             for (Map.Entry entry : this.mRawOverrides.entrySet()) {
                 RawOverrideValue rawOverrideValue2 = new RawOverrideValue();
                 rawOverrideValue2.packageName = (String) entry.getKey();
-                rawOverrideValue2.minVersionCode = Long.valueOf(((PackageOverride) entry.getValue()).getMinVersionCode());
-                rawOverrideValue2.maxVersionCode = Long.valueOf(((PackageOverride) entry.getValue()).getMaxVersionCode());
-                rawOverrideValue2.enabled = Boolean.valueOf(((PackageOverride) entry.getValue()).isEnabled());
+                rawOverrideValue2.minVersionCode =
+                        Long.valueOf(((PackageOverride) entry.getValue()).getMinVersionCode());
+                rawOverrideValue2.maxVersionCode =
+                        Long.valueOf(((PackageOverride) entry.getValue()).getMaxVersionCode());
+                rawOverrideValue2.enabled =
+                        Boolean.valueOf(((PackageOverride) entry.getValue()).isEnabled());
                 rawOverrideValue.add(rawOverrideValue2);
             }
             changeOverrides.raw = raw;

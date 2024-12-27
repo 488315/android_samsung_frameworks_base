@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.math.ec.ECLookupTable;
 import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.math.raw.Nat192;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -16,14 +17,18 @@ public class SecP192K1Curve extends ECCurve.AbstractFp {
     private static final int SECP192K1_DEFAULT_COORDS = 2;
     protected SecP192K1Point infinity;
     public static final BigInteger q = SecP192K1FieldElement.Q;
-    private static final ECFieldElement[] SECP192K1_AFFINE_ZS = {new SecP192K1FieldElement(ECConstants.ONE)};
+    private static final ECFieldElement[] SECP192K1_AFFINE_ZS = {
+        new SecP192K1FieldElement(ECConstants.ONE)
+    };
 
     public SecP192K1Curve() {
         super(q);
         this.infinity = new SecP192K1Point(this, null, null);
         this.a = fromBigInteger(ECConstants.ZERO);
         this.b = fromBigInteger(BigInteger.valueOf(3L));
-        this.order = new BigInteger(1, Hex.decodeStrict("FFFFFFFFFFFFFFFFFFFFFFFE26F2FC170F69466A74DEFD8D"));
+        this.order =
+                new BigInteger(
+                        1, Hex.decodeStrict("FFFFFFFFFFFFFFFFFFFFFFFE26F2FC170F69466A74DEFD8D"));
         this.cofactor = BigInteger.valueOf(1L);
         this.coord = 2;
     }
@@ -83,7 +88,8 @@ public class SecP192K1Curve extends ECCurve.AbstractFp {
             Nat192.copy(((SecP192K1FieldElement) p.getRawYCoord()).x, 0, table, pos2);
             pos = pos2 + 6;
         }
-        return new AbstractECLookupTable() { // from class: com.android.internal.org.bouncycastle.math.ec.custom.sec.SecP192K1Curve.1
+        return new AbstractECLookupTable() { // from class:
+                                             // com.android.internal.org.bouncycastle.math.ec.custom.sec.SecP192K1Curve.1
             @Override // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
             public int getSize() {
                 return len;
@@ -105,7 +111,8 @@ public class SecP192K1Curve extends ECCurve.AbstractFp {
                 return createPoint(x, y);
             }
 
-            @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable, com.android.internal.org.bouncycastle.math.ec.ECLookupTable
+            @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable,
+                      // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
             public ECPoint lookupVar(int index) {
                 int[] x = Nat192.create();
                 int[] y = Nat192.create();
@@ -118,19 +125,24 @@ public class SecP192K1Curve extends ECCurve.AbstractFp {
             }
 
             private ECPoint createPoint(int[] x, int[] y) {
-                return SecP192K1Curve.this.createRawPoint(new SecP192K1FieldElement(x), new SecP192K1FieldElement(y), SecP192K1Curve.SECP192K1_AFFINE_ZS);
+                return SecP192K1Curve.this.createRawPoint(
+                        new SecP192K1FieldElement(x),
+                        new SecP192K1FieldElement(y),
+                        SecP192K1Curve.SECP192K1_AFFINE_ZS);
             }
         };
     }
 
-    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp, com.android.internal.org.bouncycastle.math.ec.ECCurve
+    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp,
+              // com.android.internal.org.bouncycastle.math.ec.ECCurve
     public ECFieldElement randomFieldElement(SecureRandom r) {
         int[] x = Nat192.create();
         SecP192K1Field.random(r, x);
         return new SecP192K1FieldElement(x);
     }
 
-    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp, com.android.internal.org.bouncycastle.math.ec.ECCurve
+    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp,
+              // com.android.internal.org.bouncycastle.math.ec.ECCurve
     public ECFieldElement randomFieldElementMult(SecureRandom r) {
         int[] x = Nat192.create();
         SecP192K1Field.randomMult(r, x);

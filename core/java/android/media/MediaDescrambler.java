@@ -2,13 +2,11 @@ package android.media;
 
 import android.hardware.cas.IDescrambler;
 import android.hardware.cas.V1_0.IDescramblerBase;
-import android.media.MediaCas;
-import android.media.MediaCasException;
-import android.media.MediaCodec;
 import android.os.IHwBinder;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.util.Log;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
@@ -27,7 +25,9 @@ public final class MediaDescrambler implements AutoCloseable {
     private interface DescramblerWrapper {
         IHwBinder asBinder();
 
-        int descramble(ByteBuffer byteBuffer, ByteBuffer byteBuffer2, MediaCodec.CryptoInfo cryptoInfo) throws RemoteException;
+        int descramble(
+                ByteBuffer byteBuffer, ByteBuffer byteBuffer2, MediaCodec.CryptoInfo cryptoInfo)
+                throws RemoteException;
 
         void release() throws RemoteException;
 
@@ -37,7 +37,19 @@ public final class MediaDescrambler implements AutoCloseable {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public final native int native_descramble(byte b, byte b2, int i, int[] iArr, int[] iArr2, ByteBuffer byteBuffer, int i2, int i3, ByteBuffer byteBuffer2, int i4, int i5) throws RemoteException;
+    public final native int native_descramble(
+            byte b,
+            byte b2,
+            int i,
+            int[] iArr,
+            int[] iArr2,
+            ByteBuffer byteBuffer,
+            int i2,
+            int i3,
+            ByteBuffer byteBuffer2,
+            int i4,
+            int i5)
+            throws RemoteException;
 
     private static final native void native_init();
 
@@ -64,7 +76,8 @@ public final class MediaDescrambler implements AutoCloseable {
         }
 
         @Override // android.media.MediaDescrambler.DescramblerWrapper
-        public int descramble(ByteBuffer src, ByteBuffer dst, MediaCodec.CryptoInfo cryptoInfo) throws RemoteException {
+        public int descramble(ByteBuffer src, ByteBuffer dst, MediaCodec.CryptoInfo cryptoInfo)
+                throws RemoteException {
             throw new RemoteException("Not supported");
         }
 
@@ -102,9 +115,22 @@ public final class MediaDescrambler implements AutoCloseable {
         }
 
         @Override // android.media.MediaDescrambler.DescramblerWrapper
-        public int descramble(ByteBuffer srcBuf, ByteBuffer dstBuf, MediaCodec.CryptoInfo cryptoInfo) throws RemoteException {
+        public int descramble(
+                ByteBuffer srcBuf, ByteBuffer dstBuf, MediaCodec.CryptoInfo cryptoInfo)
+                throws RemoteException {
             try {
-                return MediaDescrambler.this.native_descramble(cryptoInfo.key[0], cryptoInfo.key[1], cryptoInfo.numSubSamples, cryptoInfo.numBytesOfClearData, cryptoInfo.numBytesOfEncryptedData, srcBuf, srcBuf.position(), srcBuf.limit(), dstBuf, dstBuf.position(), dstBuf.limit());
+                return MediaDescrambler.this.native_descramble(
+                        cryptoInfo.key[0],
+                        cryptoInfo.key[1],
+                        cryptoInfo.numSubSamples,
+                        cryptoInfo.numBytesOfClearData,
+                        cryptoInfo.numBytesOfEncryptedData,
+                        srcBuf,
+                        srcBuf.position(),
+                        srcBuf.limit(),
+                        dstBuf,
+                        dstBuf.position(),
+                        dstBuf.limit());
             } catch (RemoteException e) {
                 MediaDescrambler.this.cleanupAndRethrowIllegalState();
                 return -1;
@@ -129,7 +155,8 @@ public final class MediaDescrambler implements AutoCloseable {
                     byteArray.add(Byte.valueOf(b));
                 }
             }
-            MediaCasStateException.throwExceptionIfNeeded(this.mHidlDescrambler.setMediaCasSession(byteArray));
+            MediaCasStateException.throwExceptionIfNeeded(
+                    this.mHidlDescrambler.setMediaCasSession(byteArray));
         }
 
         @Override // android.media.MediaDescrambler.DescramblerWrapper
@@ -155,30 +182,37 @@ public final class MediaDescrambler implements AutoCloseable {
         try {
             try {
                 if (MediaCas.getService() != null) {
-                    this.mIDescrambler = new AidlDescrambler(MediaCas.getService().createDescrambler(CA_system_id));
+                    this.mIDescrambler =
+                            new AidlDescrambler(
+                                    MediaCas.getService().createDescrambler(CA_system_id));
                     this.mIsAidlHal = true;
                 } else {
                     if (MediaCas.getServiceHidl() == null) {
                         throw new Exception("No CAS service found!");
                     }
-                    this.mIDescrambler = new HidlDescrambler(MediaCas.getServiceHidl().createDescrambler(CA_system_id));
+                    this.mIDescrambler =
+                            new HidlDescrambler(
+                                    MediaCas.getServiceHidl().createDescrambler(CA_system_id));
                     this.mIsAidlHal = false;
                 }
                 if (this.mIDescrambler == null) {
-                    throw new MediaCasException.UnsupportedCasException("Unsupported CA_system_id " + CA_system_id);
+                    throw new MediaCasException.UnsupportedCasException(
+                            "Unsupported CA_system_id " + CA_system_id);
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Failed to create descrambler: " + e);
                 this.mIDescrambler = null;
                 if (this.mIDescrambler == null) {
-                    throw new MediaCasException.UnsupportedCasException("Unsupported CA_system_id " + CA_system_id);
+                    throw new MediaCasException.UnsupportedCasException(
+                            "Unsupported CA_system_id " + CA_system_id);
                 }
             }
         } catch (Throwable th) {
             if (this.mIDescrambler != null) {
                 throw th;
             }
-            throw new MediaCasException.UnsupportedCasException("Unsupported CA_system_id " + CA_system_id);
+            throw new MediaCasException.UnsupportedCasException(
+                    "Unsupported CA_system_id " + CA_system_id);
         }
     }
 
@@ -210,19 +244,26 @@ public final class MediaDescrambler implements AutoCloseable {
         }
     }
 
-    public final int descramble(ByteBuffer srcBuf, ByteBuffer dstBuf, MediaCodec.CryptoInfo cryptoInfo) {
+    public final int descramble(
+            ByteBuffer srcBuf, ByteBuffer dstBuf, MediaCodec.CryptoInfo cryptoInfo) {
         validateInternalStates();
         if (cryptoInfo.numSubSamples <= 0) {
-            throw new IllegalArgumentException("Invalid CryptoInfo: invalid numSubSamples=" + cryptoInfo.numSubSamples);
+            throw new IllegalArgumentException(
+                    "Invalid CryptoInfo: invalid numSubSamples=" + cryptoInfo.numSubSamples);
         }
         if (cryptoInfo.numBytesOfClearData == null && cryptoInfo.numBytesOfEncryptedData == null) {
-            throw new IllegalArgumentException("Invalid CryptoInfo: clearData and encryptedData size arrays are both null!");
+            throw new IllegalArgumentException(
+                    "Invalid CryptoInfo: clearData and encryptedData size arrays are both null!");
         }
-        if (cryptoInfo.numBytesOfClearData != null && cryptoInfo.numBytesOfClearData.length < cryptoInfo.numSubSamples) {
-            throw new IllegalArgumentException("Invalid CryptoInfo: numBytesOfClearData is too small!");
+        if (cryptoInfo.numBytesOfClearData != null
+                && cryptoInfo.numBytesOfClearData.length < cryptoInfo.numSubSamples) {
+            throw new IllegalArgumentException(
+                    "Invalid CryptoInfo: numBytesOfClearData is too small!");
         }
-        if (cryptoInfo.numBytesOfEncryptedData != null && cryptoInfo.numBytesOfEncryptedData.length < cryptoInfo.numSubSamples) {
-            throw new IllegalArgumentException("Invalid CryptoInfo: numBytesOfEncryptedData is too small!");
+        if (cryptoInfo.numBytesOfEncryptedData != null
+                && cryptoInfo.numBytesOfEncryptedData.length < cryptoInfo.numSubSamples) {
+            throw new IllegalArgumentException(
+                    "Invalid CryptoInfo: numBytesOfEncryptedData is too small!");
         }
         if (cryptoInfo.key == null || cryptoInfo.key.length != 16) {
             throw new IllegalArgumentException("Invalid CryptoInfo: key array is invalid!");

@@ -10,8 +10,13 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.util.Pair;
+
 import com.att.iqi.lib.IQIManager;
-import com.att.iqi.libs.PreferenceStore;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,16 +31,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class IQIConcierge {
-    private static final String ACTION_MCC_MNC_VALIDATION_STATE_CHANGED = "com.att.iqi.action.ACTION_MCC_MNC_VALIDATION_STATE_CHANGED";
+    private static final String ACTION_MCC_MNC_VALIDATION_STATE_CHANGED =
+            "com.att.iqi.action.ACTION_MCC_MNC_VALIDATION_STATE_CHANGED";
     private static final String IQI_MCCMNC_RESOURCE = "/mccmnc.xml";
-    private static final String PERMISSION_MODIFY_MNC_MCC_VALIDATION_STATE = "com.att.iqi.permission.MODIFY_MNC_MCC_VALIDATION_STATE";
+    private static final String PERMISSION_MODIFY_MNC_MCC_VALIDATION_STATE =
+            "com.att.iqi.permission.MODIFY_MNC_MCC_VALIDATION_STATE";
     private static final String VERSION = "14.1-skye";
     private static IQIConcierge sInstance = null;
     private static boolean sMccMncValidationDisabled = false;
@@ -48,37 +52,55 @@ public final class IQIConcierge {
     private static final ArrayList sMCCMNCs = createNetIdPairList();
 
     private IQIConcierge(Context context) {
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.att.iqi.libs.IQIConcierge.1
-            @Override // android.content.BroadcastReceiver
-            public void onReceive(Context context2, Intent intent) {
-                if (TextUtils.equals(intent.getAction(), IQIConcierge.ACTION_MCC_MNC_VALIDATION_STATE_CHANGED)) {
-                    PreferenceStore.getInstance().setBoolean(PreferenceStore.PREF_DISABLE_MCC_MNC_VALIDATION, intent.getBooleanExtra("disabled", false));
-                }
-            }
-        };
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver() { // from class: com.att.iqi.libs.IQIConcierge.1
+                    @Override // android.content.BroadcastReceiver
+                    public void onReceive(Context context2, Intent intent) {
+                        if (TextUtils.equals(
+                                intent.getAction(),
+                                IQIConcierge.ACTION_MCC_MNC_VALIDATION_STATE_CHANGED)) {
+                            PreferenceStore.getInstance()
+                                    .setBoolean(
+                                            PreferenceStore.PREF_DISABLE_MCC_MNC_VALIDATION,
+                                            intent.getBooleanExtra("disabled", false));
+                        }
+                    }
+                };
         this.mMncMccValidationStateChangedReceiver = broadcastReceiver;
         LogUtil.loge("IQI Concierge version: 14.1-skye");
         IQIManager.getInstance();
-        context.registerReceiver(broadcastReceiver, new IntentFilter(ACTION_MCC_MNC_VALIDATION_STATE_CHANGED), PERMISSION_MODIFY_MNC_MCC_VALIDATION_STATE, WorkerThread.getHandler(), 2);
-        PreferenceStore.getInstance().registerPreferenceChangeListener(new PreferenceStore.PreferenceChangeListener() { // from class: com.att.iqi.libs.IQIConcierge$$ExternalSyntheticLambda0
-            @Override // com.att.iqi.libs.PreferenceStore.PreferenceChangeListener
-            public final void onPreferenceChanged(String str) {
-                IQIConcierge.this.lambda$new$0(str);
-            }
-        });
+        context.registerReceiver(
+                broadcastReceiver,
+                new IntentFilter(ACTION_MCC_MNC_VALIDATION_STATE_CHANGED),
+                PERMISSION_MODIFY_MNC_MCC_VALIDATION_STATE,
+                WorkerThread.getHandler(),
+                2);
+        PreferenceStore.getInstance()
+                .registerPreferenceChangeListener(
+                        new PreferenceStore
+                                .PreferenceChangeListener() { // from class:
+                                                              // com.att.iqi.libs.IQIConcierge$$ExternalSyntheticLambda0
+                            @Override // com.att.iqi.libs.PreferenceStore.PreferenceChangeListener
+                            public final void onPreferenceChanged(String str) {
+                                IQIConcierge.this.lambda$new$0(str);
+                            }
+                        });
         updateMccMncValidationStateFromPrefStore();
     }
 
     private static void copyBridgeLibrary(String str) {
         Path path = Paths.get(str, BRIDGE_LIBRARY_NAME);
-        String string = PreferenceStore.getInstance().getString(PreferenceStore.PREF_BRIDGE_LIBRARY_PATH, "");
+        String string =
+                PreferenceStore.getInstance()
+                        .getString(PreferenceStore.PREF_BRIDGE_LIBRARY_PATH, "");
         if (string.isEmpty()) {
             if (!Files.exists(path, new LinkOption[0])) {
                 LogUtil.logd("File not found in: " + path.toString());
                 return;
             } else {
                 LogUtil.logd("storing packageLibrary [" + path + "]");
-                PreferenceStore.getInstance().setString(PreferenceStore.PREF_BRIDGE_LIBRARY_PATH, path.toString());
+                PreferenceStore.getInstance()
+                        .setString(PreferenceStore.PREF_BRIDGE_LIBRARY_PATH, path.toString());
                 return;
             }
         }
@@ -90,8 +112,22 @@ public final class IQIConcierge {
         }
         LogUtil.logd("Performing copy...");
         try {
-            Files.copy(path2, path, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
-            Files.setPosixFilePermissions(path, new HashSet(Arrays.asList(PosixFilePermission.OTHERS_EXECUTE, PosixFilePermission.OTHERS_READ, PosixFilePermission.GROUP_EXECUTE, PosixFilePermission.GROUP_READ, PosixFilePermission.OWNER_EXECUTE, PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE)));
+            Files.copy(
+                    path2,
+                    path,
+                    StandardCopyOption.REPLACE_EXISTING,
+                    StandardCopyOption.COPY_ATTRIBUTES);
+            Files.setPosixFilePermissions(
+                    path,
+                    new HashSet(
+                            Arrays.asList(
+                                    PosixFilePermission.OTHERS_EXECUTE,
+                                    PosixFilePermission.OTHERS_READ,
+                                    PosixFilePermission.GROUP_EXECUTE,
+                                    PosixFilePermission.GROUP_READ,
+                                    PosixFilePermission.OWNER_EXECUTE,
+                                    PosixFilePermission.OWNER_READ,
+                                    PosixFilePermission.OWNER_WRITE)));
             LogUtil.logd("Copy completed");
         } catch (Exception e) {
             LogUtil.loge(e.toString(), e);
@@ -102,7 +138,8 @@ public final class IQIConcierge {
         HashSet hashSet = new HashSet();
         try {
             XmlPullParser newPullParser = XmlPullParserFactory.newInstance().newPullParser();
-            InputStream resourceAsStream = IQIConcierge.class.getResourceAsStream(IQI_MCCMNC_RESOURCE);
+            InputStream resourceAsStream =
+                    IQIConcierge.class.getResourceAsStream(IQI_MCCMNC_RESOURCE);
             newPullParser.setInput(resourceAsStream, null);
             parseXmlConfig(newPullParser, hashSet);
             resourceAsStream.close();
@@ -118,7 +155,8 @@ public final class IQIConcierge {
 
     private static String getNativeLibraryDirPath(Context context, String str) {
         try {
-            ApplicationInfo applicationInfo = context.getPackageManager().getPackageInfo(str, 1024).applicationInfo;
+            ApplicationInfo applicationInfo =
+                    context.getPackageManager().getPackageInfo(str, 1024).applicationInfo;
             if (applicationInfo != null) {
                 return applicationInfo.nativeLibraryDir;
             }
@@ -139,7 +177,8 @@ public final class IQIConcierge {
     }
 
     public static boolean isServiceBindingAllowed() {
-        int integer = PreferenceStore.getInstance().getInteger(PreferenceStore.PREF_SERVICE_STATE, 1);
+        int integer =
+                PreferenceStore.getInstance().getInteger(PreferenceStore.PREF_SERVICE_STATE, 1);
         boolean z = (sMccMncValidationDisabled || !sSimDisabled) && integer == 1;
         StringBuilder sb = new StringBuilder("isServiceBindingAllowed? ");
         sb.append(z ? "YES" : "NO");
@@ -177,20 +216,28 @@ public final class IQIConcierge {
         while (it.hasNext()) {
             Pair pair = (Pair) it.next();
             LogUtil.logd("config netId " + ((String) pair.first) + " " + ((String) pair.second));
-            if (((String) pair.second).equals(mncString) && ((String) pair.first).equals(mccString)) {
+            if (((String) pair.second).equals(mncString)
+                    && ((String) pair.first).equals(mccString)) {
                 return true;
             }
         }
         return sMCCMNCs.isEmpty();
     }
 
-    private static void parseXmlConfig(XmlPullParser xmlPullParser, HashSet hashSet) throws XmlPullParserException, IOException {
+    private static void parseXmlConfig(XmlPullParser xmlPullParser, HashSet hashSet)
+            throws XmlPullParserException, IOException {
         String name;
         int eventType = xmlPullParser.getEventType();
         while (eventType != 1) {
-            if (eventType == 3 && (name = xmlPullParser.getName()) != null && name.equalsIgnoreCase(sXmlTagName)) {
-                Pair pair = new Pair(xmlPullParser.getAttributeValue(null, sXmlAttributeMccName), xmlPullParser.getAttributeValue(null, sXmlAttributeMncName));
-                LogUtil.logd("read tag in XML: " + ((String) pair.first) + " " + ((String) pair.second));
+            if (eventType == 3
+                    && (name = xmlPullParser.getName()) != null
+                    && name.equalsIgnoreCase(sXmlTagName)) {
+                Pair pair =
+                        new Pair(
+                                xmlPullParser.getAttributeValue(null, sXmlAttributeMccName),
+                                xmlPullParser.getAttributeValue(null, sXmlAttributeMncName));
+                LogUtil.logd(
+                        "read tag in XML: " + ((String) pair.first) + " " + ((String) pair.second));
                 hashSet.add(pair);
             }
             eventType = xmlPullParser.next();
@@ -259,16 +306,22 @@ public final class IQIConcierge {
         L70:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.att.iqi.libs.IQIConcierge.shouldCopy(java.nio.file.Path, java.nio.file.Path):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.att.iqi.libs.IQIConcierge.shouldCopy(java.nio.file.Path,"
+                    + " java.nio.file.Path):boolean");
     }
 
     private void updateMccMncValidationStateFromPrefStore() {
-        sMccMncValidationDisabled = PreferenceStore.getInstance().getBoolean(PreferenceStore.PREF_DISABLE_MCC_MNC_VALIDATION, false);
+        sMccMncValidationDisabled =
+                PreferenceStore.getInstance()
+                        .getBoolean(PreferenceStore.PREF_DISABLE_MCC_MNC_VALIDATION, false);
     }
 
     public static boolean updateSubscriptions(SubscriptionManager subscriptionManager) {
         if (subscriptionManager != null) {
-            List<SubscriptionInfo> activeSubscriptionInfoList = subscriptionManager.getActiveSubscriptionInfoList();
+            List<SubscriptionInfo> activeSubscriptionInfoList =
+                    subscriptionManager.getActiveSubscriptionInfoList();
             boolean z = true;
             if (activeSubscriptionInfoList != null && !activeSubscriptionInfoList.isEmpty()) {
                 Iterator<SubscriptionInfo> it = activeSubscriptionInfoList.iterator();

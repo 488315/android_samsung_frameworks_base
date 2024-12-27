@@ -36,13 +36,24 @@ public class DialogTitle extends TextView {
             if (ellipsisCount > 0) {
                 setSingleLine(false);
                 setMaxLines(2);
-                TypedArray a = this.mContext.obtainStyledAttributes(null, R.styleable.TextAppearance, 16842817, 16973892);
+                TypedArray a =
+                        this.mContext.obtainStyledAttributes(
+                                null, R.styleable.TextAppearance, 16842817, 16973892);
                 TypedValue outValue = new TypedValue();
-                this.mContext.getTheme().resolveAttribute(com.android.internal.R.attr.parentIsDeviceDefault, outValue, true);
+                this.mContext
+                        .getTheme()
+                        .resolveAttribute(
+                                com.android.internal.R.attr.parentIsDeviceDefault, outValue, true);
                 boolean mIsDeviceDefault = outValue.data != 0;
                 if (mIsDeviceDefault) {
-                    int textSize = this.mContext.getResources().getDimensionPixelSize(com.android.internal.R.dimen.sem_dialog_title_text_size);
-                    float currentFontScale = this.mContext.getResources().getConfiguration().fontScale;
+                    int textSize =
+                            this.mContext
+                                    .getResources()
+                                    .getDimensionPixelSize(
+                                            com.android.internal.R.dimen
+                                                    .sem_dialog_title_text_size);
+                    float currentFontScale =
+                            this.mContext.getResources().getConfiguration().fontScale;
                     float scaleBase = textSize;
                     if (currentFontScale > 1.3f) {
                         scaleBase = (textSize / currentFontScale) * 1.3f;

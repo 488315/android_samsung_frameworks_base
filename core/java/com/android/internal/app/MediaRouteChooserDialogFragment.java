@@ -55,7 +55,8 @@ public class MediaRouteChooserDialogFragment extends DialogFragment {
         }
     }
 
-    public MediaRouteChooserDialog onCreateChooserDialog(Context context, Bundle savedInstanceState) {
+    public MediaRouteChooserDialog onCreateChooserDialog(
+            Context context, Bundle savedInstanceState) {
         return new MediaRouteChooserDialog(context, getTheme());
     }
 

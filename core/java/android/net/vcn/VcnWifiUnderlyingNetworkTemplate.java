@@ -2,8 +2,10 @@ package android.net.vcn;
 
 import android.os.PersistableBundle;
 import android.util.ArraySet;
+
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.vcn.repackaged.util.PersistableBundleUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
@@ -15,8 +17,20 @@ public final class VcnWifiUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
     private static final String SSIDS_KEY = "mSsids";
     private final Set<String> mSsids;
 
-    private VcnWifiUnderlyingNetworkTemplate(int meteredMatchCriteria, int minEntryUpstreamBandwidthKbps, int minExitUpstreamBandwidthKbps, int minEntryDownstreamBandwidthKbps, int minExitDownstreamBandwidthKbps, Set<String> ssids) {
-        super(1, meteredMatchCriteria, minEntryUpstreamBandwidthKbps, minExitUpstreamBandwidthKbps, minEntryDownstreamBandwidthKbps, minExitDownstreamBandwidthKbps);
+    private VcnWifiUnderlyingNetworkTemplate(
+            int meteredMatchCriteria,
+            int minEntryUpstreamBandwidthKbps,
+            int minExitUpstreamBandwidthKbps,
+            int minEntryDownstreamBandwidthKbps,
+            int minExitDownstreamBandwidthKbps,
+            Set<String> ssids) {
+        super(
+                1,
+                meteredMatchCriteria,
+                minEntryUpstreamBandwidthKbps,
+                minExitUpstreamBandwidthKbps,
+                minEntryDownstreamBandwidthKbps,
+                minExitDownstreamBandwidthKbps);
         this.mSsids = new ArraySet(ssids);
         validate();
     }
@@ -44,14 +58,25 @@ public final class VcnWifiUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
         int minExitDownstreamBandwidthKbps = in.getInt("mMinExitDownstreamBandwidthKbps", 0);
         PersistableBundle ssidsBundle = in.getPersistableBundle(SSIDS_KEY);
         Objects.requireNonNull(ssidsBundle, "ssidsBundle is null");
-        Set<String> ssids = new ArraySet<>(PersistableBundleUtils.toList(ssidsBundle, PersistableBundleUtils.STRING_DESERIALIZER));
-        return new VcnWifiUnderlyingNetworkTemplate(meteredMatchCriteria, minEntryUpstreamBandwidthKbps, minExitUpstreamBandwidthKbps, minEntryDownstreamBandwidthKbps, minExitDownstreamBandwidthKbps, ssids);
+        Set<String> ssids =
+                new ArraySet<>(
+                        PersistableBundleUtils.toList(
+                                ssidsBundle, PersistableBundleUtils.STRING_DESERIALIZER));
+        return new VcnWifiUnderlyingNetworkTemplate(
+                meteredMatchCriteria,
+                minEntryUpstreamBandwidthKbps,
+                minExitUpstreamBandwidthKbps,
+                minEntryDownstreamBandwidthKbps,
+                minExitDownstreamBandwidthKbps,
+                ssids);
     }
 
     @Override // android.net.vcn.VcnUnderlyingNetworkTemplate
     public PersistableBundle toPersistableBundle() {
         PersistableBundle result = super.toPersistableBundle();
-        PersistableBundle ssidsBundle = PersistableBundleUtils.fromList(new ArrayList(this.mSsids), PersistableBundleUtils.STRING_SERIALIZER);
+        PersistableBundle ssidsBundle =
+                PersistableBundleUtils.fromList(
+                        new ArrayList(this.mSsids), PersistableBundleUtils.STRING_SERIALIZER);
         result.putPersistableBundle(SSIDS_KEY, ssidsBundle);
         return result;
     }
@@ -107,22 +132,32 @@ public final class VcnWifiUnderlyingNetworkTemplate extends VcnUnderlyingNetwork
             return this;
         }
 
-        public Builder setMinUpstreamBandwidthKbps(int minEntryUpstreamBandwidthKbps, int minExitUpstreamBandwidthKbps) {
-            VcnUnderlyingNetworkTemplate.validateMinBandwidthKbps(minEntryUpstreamBandwidthKbps, minExitUpstreamBandwidthKbps);
+        public Builder setMinUpstreamBandwidthKbps(
+                int minEntryUpstreamBandwidthKbps, int minExitUpstreamBandwidthKbps) {
+            VcnUnderlyingNetworkTemplate.validateMinBandwidthKbps(
+                    minEntryUpstreamBandwidthKbps, minExitUpstreamBandwidthKbps);
             this.mMinEntryUpstreamBandwidthKbps = minEntryUpstreamBandwidthKbps;
             this.mMinExitUpstreamBandwidthKbps = minExitUpstreamBandwidthKbps;
             return this;
         }
 
-        public Builder setMinDownstreamBandwidthKbps(int minEntryDownstreamBandwidthKbps, int minExitDownstreamBandwidthKbps) {
-            VcnUnderlyingNetworkTemplate.validateMinBandwidthKbps(minEntryDownstreamBandwidthKbps, minExitDownstreamBandwidthKbps);
+        public Builder setMinDownstreamBandwidthKbps(
+                int minEntryDownstreamBandwidthKbps, int minExitDownstreamBandwidthKbps) {
+            VcnUnderlyingNetworkTemplate.validateMinBandwidthKbps(
+                    minEntryDownstreamBandwidthKbps, minExitDownstreamBandwidthKbps);
             this.mMinEntryDownstreamBandwidthKbps = minEntryDownstreamBandwidthKbps;
             this.mMinExitDownstreamBandwidthKbps = minExitDownstreamBandwidthKbps;
             return this;
         }
 
         public VcnWifiUnderlyingNetworkTemplate build() {
-            return new VcnWifiUnderlyingNetworkTemplate(this.mMeteredMatchCriteria, this.mMinEntryUpstreamBandwidthKbps, this.mMinExitUpstreamBandwidthKbps, this.mMinEntryDownstreamBandwidthKbps, this.mMinExitDownstreamBandwidthKbps, this.mSsids);
+            return new VcnWifiUnderlyingNetworkTemplate(
+                    this.mMeteredMatchCriteria,
+                    this.mMinEntryUpstreamBandwidthKbps,
+                    this.mMinExitUpstreamBandwidthKbps,
+                    this.mMinEntryDownstreamBandwidthKbps,
+                    this.mMinExitDownstreamBandwidthKbps,
+                    this.mSsids);
         }
     }
 }

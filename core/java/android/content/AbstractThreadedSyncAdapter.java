@@ -1,7 +1,6 @@
 package android.content;
 
 import android.accounts.Account;
-import android.content.ISyncAdapter;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +11,9 @@ import android.os.RemoteException;
 import android.os.Trace;
 import android.util.EventLog;
 import android.util.Log;
+
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,8 +23,7 @@ import java.util.function.BiConsumer;
 public abstract class AbstractThreadedSyncAdapter {
     private static final boolean ENABLE_LOG;
 
-    @Deprecated
-    public static final int LOG_SYNC_DETAILS = 2743;
+    @Deprecated public static final int LOG_SYNC_DETAILS = 2743;
     private static final String TAG = "SyncAdapter";
     private boolean mAllowParallelSyncs;
     private final boolean mAutoInitialize;
@@ -33,7 +33,12 @@ public abstract class AbstractThreadedSyncAdapter {
     private final Object mSyncThreadLock;
     private final HashMap<Account, SyncThread> mSyncThreads;
 
-    public abstract void onPerformSync(Account account, Bundle bundle, String str, ContentProviderClient contentProviderClient, SyncResult syncResult);
+    public abstract void onPerformSync(
+            Account account,
+            Bundle bundle,
+            String str,
+            ContentProviderClient contentProviderClient,
+            SyncResult syncResult);
 
     static {
         ENABLE_LOG = Build.IS_DEBUGGABLE && Log.isLoggable(TAG, 3);
@@ -43,7 +48,8 @@ public abstract class AbstractThreadedSyncAdapter {
         this(context, autoInitialize, false);
     }
 
-    public AbstractThreadedSyncAdapter(Context context, boolean autoInitialize, boolean allowParallelSyncs) {
+    public AbstractThreadedSyncAdapter(
+            Context context, boolean autoInitialize, boolean allowParallelSyncs) {
         this.mSyncThreads = new HashMap<>();
         this.mSyncThreadLock = new Object();
         this.mContext = context;
@@ -67,8 +73,7 @@ public abstract class AbstractThreadedSyncAdapter {
 
     /* JADX INFO: Access modifiers changed from: private */
     class ISyncAdapterImpl extends ISyncAdapter.Stub {
-        private ISyncAdapterImpl() {
-        }
+        private ISyncAdapterImpl() {}
 
         private boolean isCallerSystem() {
             long callingUid = Binder.getCallingUid();
@@ -84,12 +89,21 @@ public abstract class AbstractThreadedSyncAdapter {
             if (!isCallerSystem()) {
                 return;
             }
-            Handler.getMain().sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.content.AbstractThreadedSyncAdapter$ISyncAdapterImpl$$ExternalSyntheticLambda0
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((AbstractThreadedSyncAdapter) obj).handleOnUnsyncableAccount((ISyncAdapterUnsyncableAccountCallback) obj2);
-                }
-            }, AbstractThreadedSyncAdapter.this, cb));
+            Handler.getMain()
+                    .sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new BiConsumer() { // from class:
+                                        // android.content.AbstractThreadedSyncAdapter$ISyncAdapterImpl$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.BiConsumer
+                                        public final void accept(Object obj, Object obj2) {
+                                            ((AbstractThreadedSyncAdapter) obj)
+                                                    .handleOnUnsyncableAccount(
+                                                            (ISyncAdapterUnsyncableAccountCallback)
+                                                                    obj2);
+                                        }
+                                    },
+                                    AbstractThreadedSyncAdapter.this,
+                                    cb));
         }
 
         /* JADX WARN: Removed duplicated region for block: B:64:0x012e  */
@@ -98,12 +112,19 @@ public abstract class AbstractThreadedSyncAdapter {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public void startSync(android.content.ISyncContext r18, java.lang.String r19, android.accounts.Account r20, android.os.Bundle r21) {
+        public void startSync(
+                android.content.ISyncContext r18,
+                java.lang.String r19,
+                android.accounts.Account r20,
+                android.os.Bundle r21) {
             /*
                 Method dump skipped, instructions count: 311
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.content.AbstractThreadedSyncAdapter.ISyncAdapterImpl.startSync(android.content.ISyncContext, java.lang.String, android.accounts.Account, android.os.Bundle):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.content.AbstractThreadedSyncAdapter.ISyncAdapterImpl.startSync(android.content.ISyncContext,"
+                        + " java.lang.String, android.accounts.Account, android.os.Bundle):void");
         }
 
         @Override // android.content.ISyncAdapter
@@ -115,13 +136,15 @@ public abstract class AbstractThreadedSyncAdapter {
             try {
                 try {
                     synchronized (AbstractThreadedSyncAdapter.this.mSyncThreadLock) {
-                        Iterator it = AbstractThreadedSyncAdapter.this.mSyncThreads.values().iterator();
+                        Iterator it =
+                                AbstractThreadedSyncAdapter.this.mSyncThreads.values().iterator();
                         while (true) {
                             if (!it.hasNext()) {
                                 break;
                             }
                             SyncThread current = (SyncThread) it.next();
-                            if (current.mSyncContext.getSyncContextBinder() == syncContext.asBinder()) {
+                            if (current.mSyncContext.getSyncContextBinder()
+                                    == syncContext.asBinder()) {
                                 info = current;
                                 break;
                             }
@@ -129,7 +152,9 @@ public abstract class AbstractThreadedSyncAdapter {
                     }
                     if (info != null) {
                         if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
-                            Log.d(AbstractThreadedSyncAdapter.TAG, "cancelSync() " + info.mAuthority + " " + info.mAccount);
+                            Log.d(
+                                    AbstractThreadedSyncAdapter.TAG,
+                                    "cancelSync() " + info.mAuthority + " " + info.mAccount);
                         }
                         if (AbstractThreadedSyncAdapter.this.mAllowParallelSyncs) {
                             AbstractThreadedSyncAdapter.this.onSyncCanceled(info);
@@ -160,7 +185,12 @@ public abstract class AbstractThreadedSyncAdapter {
         private final SyncContext mSyncContext;
         private final Account mThreadsKey;
 
-        private SyncThread(String name, SyncContext syncContext, String authority, Account account, Bundle extras) {
+        private SyncThread(
+                String name,
+                SyncContext syncContext,
+                String authority,
+                Account account,
+                Bundle extras) {
             super(name);
             this.mSyncContext = syncContext;
             this.mAuthority = authority;
@@ -193,7 +223,8 @@ public abstract class AbstractThreadedSyncAdapter {
                                 this.mSyncContext.onFinished(syncResult);
                             }
                             synchronized (AbstractThreadedSyncAdapter.this.mSyncThreadLock) {
-                                AbstractThreadedSyncAdapter.this.mSyncThreads.remove(this.mThreadsKey);
+                                AbstractThreadedSyncAdapter.this.mSyncThreads.remove(
+                                        this.mThreadsKey);
                             }
                             if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
                                 Log.d(AbstractThreadedSyncAdapter.TAG, "Thread finished");
@@ -204,10 +235,19 @@ public abstract class AbstractThreadedSyncAdapter {
                         if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
                             Log.d(AbstractThreadedSyncAdapter.TAG, "Calling onPerformSync...");
                         }
-                        ContentProviderClient provider2 = AbstractThreadedSyncAdapter.this.mContext.getContentResolver().acquireContentProviderClient(this.mAuthority);
+                        ContentProviderClient provider2 =
+                                AbstractThreadedSyncAdapter.this
+                                        .mContext
+                                        .getContentResolver()
+                                        .acquireContentProviderClient(this.mAuthority);
                         try {
                             if (provider2 != null) {
-                                AbstractThreadedSyncAdapter.this.onPerformSync(this.mAccount, this.mExtras, this.mAuthority, provider2, syncResult);
+                                AbstractThreadedSyncAdapter.this.onPerformSync(
+                                        this.mAccount,
+                                        this.mExtras,
+                                        this.mAuthority,
+                                        provider2,
+                                        syncResult);
                             } else {
                                 syncResult.databaseError = true;
                             }
@@ -222,7 +262,8 @@ public abstract class AbstractThreadedSyncAdapter {
                                 this.mSyncContext.onFinished(syncResult);
                             }
                             synchronized (AbstractThreadedSyncAdapter.this.mSyncThreadLock) {
-                                AbstractThreadedSyncAdapter.this.mSyncThreads.remove(this.mThreadsKey);
+                                AbstractThreadedSyncAdapter.this.mSyncThreads.remove(
+                                        this.mThreadsKey);
                             }
                             if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
                                 Log.d(AbstractThreadedSyncAdapter.TAG, "Thread finished");
@@ -239,7 +280,8 @@ public abstract class AbstractThreadedSyncAdapter {
                             if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
                                 Log.d(AbstractThreadedSyncAdapter.TAG, "SecurityException", e);
                             }
-                            AbstractThreadedSyncAdapter.this.onSecurityException(this.mAccount, this.mExtras, this.mAuthority, syncResult);
+                            AbstractThreadedSyncAdapter.this.onSecurityException(
+                                    this.mAccount, this.mExtras, this.mAuthority, syncResult);
                             syncResult.databaseError = true;
                             Trace.traceEnd(128L);
                             if (provider != null) {
@@ -249,7 +291,8 @@ public abstract class AbstractThreadedSyncAdapter {
                                 this.mSyncContext.onFinished(syncResult);
                             }
                             synchronized (AbstractThreadedSyncAdapter.this.mSyncThreadLock) {
-                                AbstractThreadedSyncAdapter.this.mSyncThreads.remove(this.mThreadsKey);
+                                AbstractThreadedSyncAdapter.this.mSyncThreads.remove(
+                                        this.mThreadsKey);
                             }
                             if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
                                 Log.d(AbstractThreadedSyncAdapter.TAG, "Thread finished");
@@ -265,7 +308,8 @@ public abstract class AbstractThreadedSyncAdapter {
                                 this.mSyncContext.onFinished(syncResult);
                             }
                             synchronized (AbstractThreadedSyncAdapter.this.mSyncThreadLock) {
-                                AbstractThreadedSyncAdapter.this.mSyncThreads.remove(this.mThreadsKey);
+                                AbstractThreadedSyncAdapter.this.mSyncThreads.remove(
+                                        this.mThreadsKey);
                             }
                             if (AbstractThreadedSyncAdapter.ENABLE_LOG) {
                                 Log.d(AbstractThreadedSyncAdapter.TAG, "Thread finished");
@@ -312,8 +356,8 @@ public abstract class AbstractThreadedSyncAdapter {
         return true;
     }
 
-    public void onSecurityException(Account account, Bundle extras, String authority, SyncResult syncResult) {
-    }
+    public void onSecurityException(
+            Account account, Bundle extras, String authority, SyncResult syncResult) {}
 
     public void onSyncCanceled() {
         SyncThread syncThread;

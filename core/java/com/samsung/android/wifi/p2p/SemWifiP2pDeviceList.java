@@ -1,6 +1,7 @@
 package com.samsung.android.wifi.p2p;
 
 import android.text.TextUtils;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
@@ -43,7 +44,9 @@ public class SemWifiP2pDeviceList {
     }
 
     public boolean remove(SemWifiP2pDevice device) {
-        return (isInvalidDevice(device) || this.mDevices.remove(device.getDeviceAddress()) == null) ? false : true;
+        return (isInvalidDevice(device) || this.mDevices.remove(device.getDeviceAddress()) == null)
+                ? false
+                : true;
     }
 
     public SemWifiP2pDevice remove(String deviceAddress) {

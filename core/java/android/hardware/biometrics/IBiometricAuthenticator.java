@@ -1,9 +1,5 @@
 package android.hardware.biometrics;
 
-import android.hardware.biometrics.IBiometricSensorReceiver;
-import android.hardware.biometrics.IInvalidationCallback;
-import android.hardware.biometrics.ITestSession;
-import android.hardware.biometrics.ITestSessionCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -14,9 +10,11 @@ import android.os.RemoteException;
 public interface IBiometricAuthenticator extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.biometrics.IBiometricAuthenticator";
 
-    void cancelAuthenticationFromService(IBinder iBinder, String str, long j) throws RemoteException;
+    void cancelAuthenticationFromService(IBinder iBinder, String str, long j)
+            throws RemoteException;
 
-    ITestSession createTestSession(ITestSessionCallback iTestSessionCallback, String str) throws RemoteException;
+    ITestSession createTestSession(ITestSessionCallback iTestSessionCallback, String str)
+            throws RemoteException;
 
     byte[] dumpSensorServiceStateProto(boolean z) throws RemoteException;
 
@@ -28,11 +26,24 @@ public interface IBiometricAuthenticator extends IInterface {
 
     boolean hasEnrolledTemplates(int i, String str) throws RemoteException;
 
-    void invalidateAuthenticatorId(int i, IInvalidationCallback iInvalidationCallback) throws RemoteException;
+    void invalidateAuthenticatorId(int i, IInvalidationCallback iInvalidationCallback)
+            throws RemoteException;
 
     boolean isHardwareDetected(String str) throws RemoteException;
 
-    void prepareForAuthentication(boolean z, IBinder iBinder, long j, int i, IBiometricSensorReceiver iBiometricSensorReceiver, String str, long j2, int i2, boolean z2, boolean z3, boolean z4) throws RemoteException;
+    void prepareForAuthentication(
+            boolean z,
+            IBinder iBinder,
+            long j,
+            int i,
+            IBiometricSensorReceiver iBiometricSensorReceiver,
+            String str,
+            long j2,
+            int i2,
+            boolean z2,
+            boolean z3,
+            boolean z4)
+            throws RemoteException;
 
     void resetLockout(IBinder iBinder, String str, int i, byte[] bArr) throws RemoteException;
 
@@ -40,31 +51,44 @@ public interface IBiometricAuthenticator extends IInterface {
 
     public static class Default implements IBiometricAuthenticator {
         @Override // android.hardware.biometrics.IBiometricAuthenticator
-        public ITestSession createTestSession(ITestSessionCallback callback, String opPackageName) throws RemoteException {
+        public ITestSession createTestSession(ITestSessionCallback callback, String opPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.IBiometricAuthenticator
-        public SensorPropertiesInternal getSensorProperties(String opPackageName) throws RemoteException {
+        public SensorPropertiesInternal getSensorProperties(String opPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.IBiometricAuthenticator
-        public byte[] dumpSensorServiceStateProto(boolean clearSchedulerBuffer) throws RemoteException {
+        public byte[] dumpSensorServiceStateProto(boolean clearSchedulerBuffer)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.IBiometricAuthenticator
-        public void prepareForAuthentication(boolean requireConfirmation, IBinder token, long operationId, int userId, IBiometricSensorReceiver sensorReceiver, String opPackageName, long requestId, int cookie, boolean allowBackgroundAuthentication, boolean isForLegacyFingerprintManager, boolean isMandatoryBiometrics) throws RemoteException {
-        }
+        public void prepareForAuthentication(
+                boolean requireConfirmation,
+                IBinder token,
+                long operationId,
+                int userId,
+                IBiometricSensorReceiver sensorReceiver,
+                String opPackageName,
+                long requestId,
+                int cookie,
+                boolean allowBackgroundAuthentication,
+                boolean isForLegacyFingerprintManager,
+                boolean isMandatoryBiometrics)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricAuthenticator
-        public void startPreparedClient(int cookie) throws RemoteException {
-        }
+        public void startPreparedClient(int cookie) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricAuthenticator
-        public void cancelAuthenticationFromService(IBinder token, String opPackageName, long requestId) throws RemoteException {
-        }
+        public void cancelAuthenticationFromService(
+                IBinder token, String opPackageName, long requestId) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricAuthenticator
         public boolean isHardwareDetected(String opPackageName) throws RemoteException {
@@ -72,7 +96,8 @@ public interface IBiometricAuthenticator extends IInterface {
         }
 
         @Override // android.hardware.biometrics.IBiometricAuthenticator
-        public boolean hasEnrolledTemplates(int userId, String opPackageName) throws RemoteException {
+        public boolean hasEnrolledTemplates(int userId, String opPackageName)
+                throws RemoteException {
             return false;
         }
 
@@ -82,8 +107,8 @@ public interface IBiometricAuthenticator extends IInterface {
         }
 
         @Override // android.hardware.biometrics.IBiometricAuthenticator
-        public void invalidateAuthenticatorId(int userId, IInvalidationCallback callback) throws RemoteException {
-        }
+        public void invalidateAuthenticatorId(int userId, IInvalidationCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricAuthenticator
         public long getAuthenticatorId(int callingUserId) throws RemoteException {
@@ -91,8 +116,9 @@ public interface IBiometricAuthenticator extends IInterface {
         }
 
         @Override // android.hardware.biometrics.IBiometricAuthenticator
-        public void resetLockout(IBinder token, String opPackageName, int userId, byte[] hardwareAuthToken) throws RemoteException {
-        }
+        public void resetLockout(
+                IBinder token, String opPackageName, int userId, byte[] hardwareAuthToken)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -100,7 +126,7 @@ public interface IBiometricAuthenticator extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBiometricAuthenticator {
+    public abstract static class Stub extends Binder implements IBiometricAuthenticator {
         static final int TRANSACTION_cancelAuthenticationFromService = 6;
         static final int TRANSACTION_createTestSession = 1;
         static final int TRANSACTION_dumpSensorServiceStateProto = 3;
@@ -171,7 +197,8 @@ public interface IBiometricAuthenticator extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBiometricAuthenticator.DESCRIPTOR);
             }
@@ -181,7 +208,8 @@ public interface IBiometricAuthenticator extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ITestSessionCallback _arg0 = ITestSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ITestSessionCallback _arg0 =
+                            ITestSessionCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg1 = data.readString();
                     data.enforceNoDataAvail();
                     ITestSession _result = createTestSession(_arg0, _arg1);
@@ -207,7 +235,8 @@ public interface IBiometricAuthenticator extends IInterface {
                     IBinder _arg12 = data.readStrongBinder();
                     long _arg2 = data.readLong();
                     int _arg3 = data.readInt();
-                    IBiometricSensorReceiver _arg4 = IBiometricSensorReceiver.Stub.asInterface(data.readStrongBinder());
+                    IBiometricSensorReceiver _arg4 =
+                            IBiometricSensorReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg5 = data.readString();
                     long _arg6 = data.readLong();
                     int _arg7 = data.readInt();
@@ -215,7 +244,9 @@ public interface IBiometricAuthenticator extends IInterface {
                     boolean _arg9 = data.readBoolean();
                     boolean _arg10 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    prepareForAuthentication(_arg04, _arg12, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10);
+                    prepareForAuthentication(
+                            _arg04, _arg12, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10);
                     reply.writeNoException();
                     return true;
                 case 5:
@@ -256,7 +287,8 @@ public interface IBiometricAuthenticator extends IInterface {
                     return true;
                 case 10:
                     int _arg010 = data.readInt();
-                    IInvalidationCallback _arg15 = IInvalidationCallback.Stub.asInterface(data.readStrongBinder());
+                    IInvalidationCallback _arg15 =
+                            IInvalidationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     invalidateAuthenticatorId(_arg010, _arg15);
                     reply.writeNoException();
@@ -299,7 +331,8 @@ public interface IBiometricAuthenticator extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricAuthenticator
-            public ITestSession createTestSession(ITestSessionCallback callback, String opPackageName) throws RemoteException {
+            public ITestSession createTestSession(
+                    ITestSessionCallback callback, String opPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -317,7 +350,8 @@ public interface IBiometricAuthenticator extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricAuthenticator
-            public SensorPropertiesInternal getSensorProperties(String opPackageName) throws RemoteException {
+            public SensorPropertiesInternal getSensorProperties(String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -325,7 +359,9 @@ public interface IBiometricAuthenticator extends IInterface {
                     _data.writeString(opPackageName);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    SensorPropertiesInternal _result = (SensorPropertiesInternal) _reply.readTypedObject(SensorPropertiesInternal.CREATOR);
+                    SensorPropertiesInternal _result =
+                            (SensorPropertiesInternal)
+                                    _reply.readTypedObject(SensorPropertiesInternal.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -334,7 +370,8 @@ public interface IBiometricAuthenticator extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricAuthenticator
-            public byte[] dumpSensorServiceStateProto(boolean clearSchedulerBuffer) throws RemoteException {
+            public byte[] dumpSensorServiceStateProto(boolean clearSchedulerBuffer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -351,7 +388,19 @@ public interface IBiometricAuthenticator extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricAuthenticator
-            public void prepareForAuthentication(boolean requireConfirmation, IBinder token, long operationId, int userId, IBiometricSensorReceiver sensorReceiver, String opPackageName, long requestId, int cookie, boolean allowBackgroundAuthentication, boolean isForLegacyFingerprintManager, boolean isMandatoryBiometrics) throws RemoteException {
+            public void prepareForAuthentication(
+                    boolean requireConfirmation,
+                    IBinder token,
+                    long operationId,
+                    int userId,
+                    IBiometricSensorReceiver sensorReceiver,
+                    String opPackageName,
+                    long requestId,
+                    int cookie,
+                    boolean allowBackgroundAuthentication,
+                    boolean isForLegacyFingerprintManager,
+                    boolean isMandatoryBiometrics)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -455,7 +504,8 @@ public interface IBiometricAuthenticator extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricAuthenticator
-            public void cancelAuthenticationFromService(IBinder token, String opPackageName, long requestId) throws RemoteException {
+            public void cancelAuthenticationFromService(
+                    IBinder token, String opPackageName, long requestId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -489,7 +539,8 @@ public interface IBiometricAuthenticator extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricAuthenticator
-            public boolean hasEnrolledTemplates(int userId, String opPackageName) throws RemoteException {
+            public boolean hasEnrolledTemplates(int userId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -524,7 +575,8 @@ public interface IBiometricAuthenticator extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricAuthenticator
-            public void invalidateAuthenticatorId(int userId, IInvalidationCallback callback) throws RemoteException {
+            public void invalidateAuthenticatorId(int userId, IInvalidationCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -557,7 +609,9 @@ public interface IBiometricAuthenticator extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricAuthenticator
-            public void resetLockout(IBinder token, String opPackageName, int userId, byte[] hardwareAuthToken) throws RemoteException {
+            public void resetLockout(
+                    IBinder token, String opPackageName, int userId, byte[] hardwareAuthToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

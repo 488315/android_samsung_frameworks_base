@@ -3,6 +3,7 @@ package android.spay;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,19 +25,21 @@ public class TACommandRequest implements Parcelable {
     public byte[] mRequest;
     public int mVersion;
     private static boolean DEBUG = true;
-    public static final Parcelable.Creator<TACommandRequest> CREATOR = new Parcelable.Creator<TACommandRequest>() { // from class: android.spay.TACommandRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TACommandRequest createFromParcel(Parcel in) {
-            return new TACommandRequest(in);
-        }
+    public static final Parcelable.Creator<TACommandRequest> CREATOR =
+            new Parcelable.Creator<
+                    TACommandRequest>() { // from class: android.spay.TACommandRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TACommandRequest createFromParcel(Parcel in) {
+                    return new TACommandRequest(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TACommandRequest[] newArray(int size) {
-            return new TACommandRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TACommandRequest[] newArray(int size) {
+                    return new TACommandRequest[size];
+                }
+            };
 
     public TACommandRequest() {
         this.mVersion = -1;
@@ -112,7 +115,13 @@ public class TACommandRequest implements Parcelable {
         return 0;
     }
 
-    private TACommandRequest(int _version, byte[] _magicNum, int _commandId, int _length, int _offset, byte[] _requestPayload) {
+    private TACommandRequest(
+            int _version,
+            byte[] _magicNum,
+            int _commandId,
+            int _length,
+            int _offset,
+            byte[] _requestPayload) {
         this.mVersion = -1;
         this.mMagicNum = null;
         this.mLength = 0;
@@ -159,10 +168,24 @@ public class TACommandRequest implements Parcelable {
             if (DEBUG) {
                 Log.i(TAG, "generating the chunk from " + offset + " to " + ((offset + 2972) - 1));
             }
-            arr.add(new TACommandRequest(this.mVersion, this.mMagicNum, this.mCommandId, this.mLength, offset, Arrays.copyOfRange(this.mRequest, offset, offset + 2972)));
+            arr.add(
+                    new TACommandRequest(
+                            this.mVersion,
+                            this.mMagicNum,
+                            this.mCommandId,
+                            this.mLength,
+                            offset,
+                            Arrays.copyOfRange(this.mRequest, offset, offset + 2972)));
             offset += 2972;
         }
-        arr.add(new TACommandRequest(this.mVersion, this.mMagicNum, this.mCommandId, this.mLength, offset, Arrays.copyOfRange(this.mRequest, offset, this.mLength)));
+        arr.add(
+                new TACommandRequest(
+                        this.mVersion,
+                        this.mMagicNum,
+                        this.mCommandId,
+                        this.mLength,
+                        offset,
+                        Arrays.copyOfRange(this.mRequest, offset, this.mLength)));
         if (DEBUG) {
             Log.i(TAG, "generating the chunk from " + offset + " to " + (this.mLength - 1));
         }

@@ -16,20 +16,43 @@ public final class AppCompatController {
     public final AppCompatOrientationPolicy mOrientationPolicy;
     public final TransparentPolicy mTransparentPolicy;
 
-    public AppCompatController(WindowManagerService windowManagerService, ActivityRecord activityRecord) {
+    public AppCompatController(
+            WindowManagerService windowManagerService, ActivityRecord activityRecord) {
         this.mActivityRecord = activityRecord;
-        OptPropFactory optPropFactory = new OptPropFactory(windowManagerService.mContext.getPackageManager(), activityRecord.packageName);
-        AppCompatDeviceStateQuery appCompatDeviceStateQuery = new AppCompatDeviceStateQuery(activityRecord);
+        OptPropFactory optPropFactory =
+                new OptPropFactory(
+                        windowManagerService.mContext.getPackageManager(),
+                        activityRecord.packageName);
+        AppCompatDeviceStateQuery appCompatDeviceStateQuery =
+                new AppCompatDeviceStateQuery(activityRecord);
         this.mAppCompatDeviceStateQuery = appCompatDeviceStateQuery;
-        TransparentPolicy transparentPolicy = new TransparentPolicy(activityRecord, windowManagerService.mAppCompatConfiguration);
+        TransparentPolicy transparentPolicy =
+                new TransparentPolicy(activityRecord, windowManagerService.mAppCompatConfiguration);
         this.mTransparentPolicy = transparentPolicy;
-        AppCompatOverrides appCompatOverrides = new AppCompatOverrides(activityRecord, windowManagerService.mAppCompatConfiguration, optPropFactory, appCompatDeviceStateQuery);
+        AppCompatOverrides appCompatOverrides =
+                new AppCompatOverrides(
+                        activityRecord,
+                        windowManagerService.mAppCompatConfiguration,
+                        optPropFactory,
+                        appCompatDeviceStateQuery);
         this.mAppCompatOverrides = appCompatOverrides;
-        this.mOrientationPolicy = new AppCompatOrientationPolicy(activityRecord, appCompatOverrides);
-        this.mAppCompatAspectRatioPolicy = new AppCompatAspectRatioPolicy(activityRecord, transparentPolicy, appCompatOverrides);
-        this.mAppCompatReachabilityPolicy = new AppCompatReachabilityPolicy(activityRecord, windowManagerService.mAppCompatConfiguration);
-        this.mAppCompatLetterboxPolicy = new AppCompatLetterboxPolicy(activityRecord, windowManagerService.mAppCompatConfiguration);
-        this.mDesktopAppCompatAspectRatioPolicy = new DesktopAppCompatAspectRatioPolicy(activityRecord, appCompatOverrides, transparentPolicy, windowManagerService.mAppCompatConfiguration);
+        this.mOrientationPolicy =
+                new AppCompatOrientationPolicy(activityRecord, appCompatOverrides);
+        this.mAppCompatAspectRatioPolicy =
+                new AppCompatAspectRatioPolicy(
+                        activityRecord, transparentPolicy, appCompatOverrides);
+        this.mAppCompatReachabilityPolicy =
+                new AppCompatReachabilityPolicy(
+                        activityRecord, windowManagerService.mAppCompatConfiguration);
+        this.mAppCompatLetterboxPolicy =
+                new AppCompatLetterboxPolicy(
+                        activityRecord, windowManagerService.mAppCompatConfiguration);
+        this.mDesktopAppCompatAspectRatioPolicy =
+                new DesktopAppCompatAspectRatioPolicy(
+                        activityRecord,
+                        appCompatOverrides,
+                        transparentPolicy,
+                        windowManagerService.mAppCompatConfiguration);
         this.mAppCompatSizeCompatModePolicy = new AppCompatSizeCompatModePolicy(activityRecord);
     }
 }

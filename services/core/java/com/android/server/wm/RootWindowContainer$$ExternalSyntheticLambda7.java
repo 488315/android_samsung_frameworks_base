@@ -1,15 +1,18 @@
 package com.android.server.wm;
 
 import android.os.RemoteException;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda7 implements Consumer {
+public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda7
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ RootWindowContainer f$0;
 
-    public /* synthetic */ RootWindowContainer$$ExternalSyntheticLambda7(RootWindowContainer rootWindowContainer, int i) {
+    public /* synthetic */ RootWindowContainer$$ExternalSyntheticLambda7(
+            RootWindowContainer rootWindowContainer, int i) {
         this.$r8$classId = i;
         this.f$0 = rootWindowContainer;
     }
@@ -32,7 +35,9 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda7
                     task.mLayerRank = i3;
                 }
                 if (task.mLayerRank != i2) {
-                    task.forAllActivities(new RootWindowContainer$$ExternalSyntheticLambda7(rootWindowContainer, 2));
+                    task.forAllActivities(
+                            new RootWindowContainer$$ExternalSyntheticLambda7(
+                                    rootWindowContainer, 2));
                     break;
                 }
                 break;
@@ -41,7 +46,8 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda7
                 rootWindowContainer.getClass();
                 if (windowState.mHasSurface) {
                     try {
-                        windowState.mClient.closeSystemDialogs(rootWindowContainer.mCloseSystemDialogsReason);
+                        windowState.mClient.closeSystemDialogs(
+                                rootWindowContainer.mCloseSystemDialogsReason);
                         break;
                     } catch (RemoteException unused) {
                         return;
@@ -52,7 +58,8 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda7
                 ActivityRecord activityRecord2 = (ActivityRecord) obj;
                 rootWindowContainer.getClass();
                 if (activityRecord2.hasProcess()) {
-                    rootWindowContainer.mTaskSupervisor.onProcessActivityStateChanged(activityRecord2.app, true);
+                    rootWindowContainer.mTaskSupervisor.onProcessActivityStateChanged(
+                            activityRecord2.app, true);
                     break;
                 }
                 break;

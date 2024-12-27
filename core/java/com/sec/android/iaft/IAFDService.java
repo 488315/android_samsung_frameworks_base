@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
-import com.sec.android.iaft.IIAFDService;
 
 /* loaded from: classes6.dex */
 public class IAFDService extends Service {
@@ -29,12 +28,28 @@ public class IAFDService extends Service {
     private IAFDServiceImpl mIAFDServiceImpl;
 
     public class IAFDBinder extends IIAFDService.Stub {
-        public IAFDBinder() {
-        }
+        public IAFDBinder() {}
 
         @Override // com.sec.android.iaft.IIAFDService
-        public boolean IAFDParse(String packageName, String nativeLibraryDir, int puserId, int appuid, int flags, String exceptionClassName, String exceptionMessage, String stackTrace) {
-            return IAFDDiagnosis.getInstance().parseExpType(packageName, nativeLibraryDir, puserId, appuid, flags, exceptionClassName, exceptionMessage, stackTrace);
+        public boolean IAFDParse(
+                String packageName,
+                String nativeLibraryDir,
+                int puserId,
+                int appuid,
+                int flags,
+                String exceptionClassName,
+                String exceptionMessage,
+                String stackTrace) {
+            return IAFDDiagnosis.getInstance()
+                    .parseExpType(
+                            packageName,
+                            nativeLibraryDir,
+                            puserId,
+                            appuid,
+                            flags,
+                            exceptionClassName,
+                            exceptionMessage,
+                            stackTrace);
         }
 
         @Override // com.sec.android.iaft.IIAFDService

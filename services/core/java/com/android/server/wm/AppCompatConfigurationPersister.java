@@ -3,8 +3,9 @@ package com.android.server.wm;
 import android.os.StrictMode;
 import android.util.AtomicFile;
 import android.util.Slog;
-import com.android.server.wm.PersisterQueue;
+
 import com.android.server.wm.nano.WindowManagerProtos;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,7 +39,8 @@ public final class AppCompatConfigurationPersister {
         public final int mTabletopModeReachability;
         public final int mVerticalReachability;
 
-        public UpdateValuesCommand(AtomicFile atomicFile, int i, int i2, int i3, int i4, Consumer consumer) {
+        public UpdateValuesCommand(
+                AtomicFile atomicFile, int i, int i2, int i3, int i4, Consumer consumer) {
             this.mFileToUpdate = atomicFile;
             this.mHorizontalReachability = i;
             this.mVerticalReachability = i2;
@@ -50,11 +52,14 @@ public final class AppCompatConfigurationPersister {
         @Override // com.android.server.wm.PersisterQueue.WriteQueueItem
         public final void process() {
             Consumer consumer;
-            WindowManagerProtos.LetterboxProto letterboxProto = new WindowManagerProtos.LetterboxProto();
-            letterboxProto.letterboxPositionForHorizontalReachability = this.mHorizontalReachability;
+            WindowManagerProtos.LetterboxProto letterboxProto =
+                    new WindowManagerProtos.LetterboxProto();
+            letterboxProto.letterboxPositionForHorizontalReachability =
+                    this.mHorizontalReachability;
             letterboxProto.letterboxPositionForVerticalReachability = this.mVerticalReachability;
             letterboxProto.letterboxPositionForBookModeReachability = this.mBookModeReachability;
-            letterboxProto.letterboxPositionForTabletopModeReachability = this.mTabletopModeReachability;
+            letterboxProto.letterboxPositionForTabletopModeReachability =
+                    this.mTabletopModeReachability;
             byte[] byteArray = WindowManagerProtos.LetterboxProto.toByteArray(letterboxProto);
             FileOutputStream fileOutputStream = null;
             try {
@@ -68,7 +73,11 @@ public final class AppCompatConfigurationPersister {
                     }
                 } catch (IOException e) {
                     this.mFileToUpdate.failWrite(fileOutputStream);
-                    Slog.e("WindowManager", "Error writing to AppCompatConfigurationPersister. Using default values!", e);
+                    Slog.e(
+                            "WindowManager",
+                            "Error writing to AppCompatConfigurationPersister. Using default"
+                                + " values!",
+                            e);
                     consumer = this.mOnComplete;
                     if (consumer == null) {
                         return;
@@ -85,7 +94,15 @@ public final class AppCompatConfigurationPersister {
         }
     }
 
-    public AppCompatConfigurationPersister(Supplier supplier, Supplier supplier2, Supplier supplier3, Supplier supplier4, File file, PersisterQueue persisterQueue, Consumer consumer, String str) {
+    public AppCompatConfigurationPersister(
+            Supplier supplier,
+            Supplier supplier2,
+            Supplier supplier3,
+            Supplier supplier4,
+            File file,
+            PersisterQueue persisterQueue,
+            Consumer consumer,
+            String str) {
         this.mDefaultHorizontalReachabilitySupplier = supplier;
         this.mDefaultVerticalReachabilitySupplier = supplier2;
         this.mDefaultBookModeReachabilitySupplier = supplier3;
@@ -93,51 +110,77 @@ public final class AppCompatConfigurationPersister {
         this.mCompletionCallback = consumer;
         this.mConfigurationFile = new AtomicFile(new File(file, str));
         this.mPersisterQueue = persisterQueue;
-        Runnable runnable = new Runnable() { // from class: com.android.server.wm.AppCompatConfigurationPersister$$ExternalSyntheticLambda0
-            /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:14:0x0036 -> B:10:0x004d). Please report as a decompilation issue!!! */
-            @Override // java.lang.Runnable
-            public final void run() {
-                AppCompatConfigurationPersister appCompatConfigurationPersister = AppCompatConfigurationPersister.this;
-                if (!appCompatConfigurationPersister.mConfigurationFile.exists()) {
-                    appCompatConfigurationPersister.useDefaultValue();
-                    return;
-                }
-                FileInputStream fileInputStream = null;
-                try {
-                    try {
+        Runnable runnable = new Runnable() { // from class:
+                    // com.android.server.wm.AppCompatConfigurationPersister$$ExternalSyntheticLambda0
+                    /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:14:0x0036 -> B:10:0x004d). Please report as a decompilation issue!!! */
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        AppCompatConfigurationPersister appCompatConfigurationPersister =
+                                AppCompatConfigurationPersister.this;
+                        if (!appCompatConfigurationPersister.mConfigurationFile.exists()) {
+                            appCompatConfigurationPersister.useDefaultValue();
+                            return;
+                        }
+                        FileInputStream fileInputStream = null;
                         try {
-                            fileInputStream = appCompatConfigurationPersister.mConfigurationFile.openRead();
-                            WindowManagerProtos.LetterboxProto parseFrom = WindowManagerProtos.LetterboxProto.parseFrom(AppCompatConfigurationPersister.readInputStream(fileInputStream));
-                            appCompatConfigurationPersister.mLetterboxPositionForHorizontalReachability = parseFrom.letterboxPositionForHorizontalReachability;
-                            appCompatConfigurationPersister.mLetterboxPositionForVerticalReachability = parseFrom.letterboxPositionForVerticalReachability;
-                            appCompatConfigurationPersister.mLetterboxPositionForBookModeReachability = parseFrom.letterboxPositionForBookModeReachability;
-                            appCompatConfigurationPersister.mLetterboxPositionForTabletopModeReachability = parseFrom.letterboxPositionForTabletopModeReachability;
-                            fileInputStream.close();
-                        } catch (Throwable th) {
-                            if (fileInputStream != null) {
+                            try {
                                 try {
+                                    fileInputStream =
+                                            appCompatConfigurationPersister.mConfigurationFile
+                                                    .openRead();
+                                    WindowManagerProtos.LetterboxProto parseFrom =
+                                            WindowManagerProtos.LetterboxProto.parseFrom(
+                                                    AppCompatConfigurationPersister.readInputStream(
+                                                            fileInputStream));
+                                    appCompatConfigurationPersister
+                                                    .mLetterboxPositionForHorizontalReachability =
+                                            parseFrom.letterboxPositionForHorizontalReachability;
+                                    appCompatConfigurationPersister
+                                                    .mLetterboxPositionForVerticalReachability =
+                                            parseFrom.letterboxPositionForVerticalReachability;
+                                    appCompatConfigurationPersister
+                                                    .mLetterboxPositionForBookModeReachability =
+                                            parseFrom.letterboxPositionForBookModeReachability;
+                                    appCompatConfigurationPersister
+                                                    .mLetterboxPositionForTabletopModeReachability =
+                                            parseFrom.letterboxPositionForTabletopModeReachability;
                                     fileInputStream.close();
-                                } catch (IOException e) {
-                                    appCompatConfigurationPersister.useDefaultValue();
-                                    Slog.e("WindowManager", "Error reading from AppCompatConfigurationPersister ", e);
+                                } catch (Throwable th) {
+                                    if (fileInputStream != null) {
+                                        try {
+                                            fileInputStream.close();
+                                        } catch (IOException e) {
+                                            appCompatConfigurationPersister.useDefaultValue();
+                                            Slog.e(
+                                                    "WindowManager",
+                                                    "Error reading from"
+                                                        + " AppCompatConfigurationPersister ",
+                                                    e);
+                                        }
+                                    }
+                                    throw th;
+                                }
+                            } catch (IOException e2) {
+                                Slog.e(
+                                        "WindowManager",
+                                        "Error reading from AppCompatConfigurationPersister. Using"
+                                            + " default values!",
+                                        e2);
+                                appCompatConfigurationPersister.useDefaultValue();
+                                if (fileInputStream == null) {
+                                } else {
+                                    fileInputStream.close();
                                 }
                             }
-                            throw th;
-                        }
-                    } catch (IOException e2) {
-                        Slog.e("WindowManager", "Error reading from AppCompatConfigurationPersister. Using default values!", e2);
-                        appCompatConfigurationPersister.useDefaultValue();
-                        if (fileInputStream == null) {
-                        } else {
-                            fileInputStream.close();
+                        } catch (IOException e3) {
+                            appCompatConfigurationPersister.useDefaultValue();
+                            Slog.e(
+                                    "WindowManager",
+                                    "Error reading from AppCompatConfigurationPersister ",
+                                    e3);
                         }
                     }
-                } catch (IOException e3) {
-                    appCompatConfigurationPersister.useDefaultValue();
-                    Slog.e("WindowManager", "Error reading from AppCompatConfigurationPersister ", e3);
-                }
-            }
-        };
+                };
         StrictMode.ThreadPolicy threadPolicy = StrictMode.getThreadPolicy();
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitDiskReads().build());
         runnable.run();
@@ -163,11 +206,15 @@ public final class AppCompatConfigurationPersister {
     }
 
     public final int getLetterboxPositionForHorizontalReachability(boolean z) {
-        return z ? this.mLetterboxPositionForBookModeReachability : this.mLetterboxPositionForHorizontalReachability;
+        return z
+                ? this.mLetterboxPositionForBookModeReachability
+                : this.mLetterboxPositionForHorizontalReachability;
     }
 
     public final int getLetterboxPositionForVerticalReachability(boolean z) {
-        return z ? this.mLetterboxPositionForTabletopModeReachability : this.mLetterboxPositionForVerticalReachability;
+        return z
+                ? this.mLetterboxPositionForTabletopModeReachability
+                : this.mLetterboxPositionForVerticalReachability;
     }
 
     public final void setLetterboxPositionForHorizontalReachability(int i, boolean z) {
@@ -201,13 +248,25 @@ public final class AppCompatConfigurationPersister {
     }
 
     public final void updateConfiguration() {
-        this.mPersisterQueue.addItem(new UpdateValuesCommand(this.mConfigurationFile, this.mLetterboxPositionForHorizontalReachability, this.mLetterboxPositionForVerticalReachability, this.mLetterboxPositionForBookModeReachability, this.mLetterboxPositionForTabletopModeReachability, this.mCompletionCallback), true);
+        this.mPersisterQueue.addItem(
+                new UpdateValuesCommand(
+                        this.mConfigurationFile,
+                        this.mLetterboxPositionForHorizontalReachability,
+                        this.mLetterboxPositionForVerticalReachability,
+                        this.mLetterboxPositionForBookModeReachability,
+                        this.mLetterboxPositionForTabletopModeReachability,
+                        this.mCompletionCallback),
+                true);
     }
 
     public void useDefaultValue() {
-        this.mLetterboxPositionForHorizontalReachability = ((Integer) this.mDefaultHorizontalReachabilitySupplier.get()).intValue();
-        this.mLetterboxPositionForVerticalReachability = ((Integer) this.mDefaultVerticalReachabilitySupplier.get()).intValue();
-        this.mLetterboxPositionForBookModeReachability = ((Integer) this.mDefaultBookModeReachabilitySupplier.get()).intValue();
-        this.mLetterboxPositionForTabletopModeReachability = ((Integer) this.mDefaultTabletopModeReachabilitySupplier.get()).intValue();
+        this.mLetterboxPositionForHorizontalReachability =
+                ((Integer) this.mDefaultHorizontalReachabilitySupplier.get()).intValue();
+        this.mLetterboxPositionForVerticalReachability =
+                ((Integer) this.mDefaultVerticalReachabilitySupplier.get()).intValue();
+        this.mLetterboxPositionForBookModeReachability =
+                ((Integer) this.mDefaultBookModeReachabilitySupplier.get()).intValue();
+        this.mLetterboxPositionForTabletopModeReachability =
+                ((Integer) this.mDefaultTabletopModeReachabilitySupplier.get()).intValue();
     }
 }

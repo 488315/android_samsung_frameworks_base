@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import java.io.IOException;
 
 /* loaded from: classes.dex */
@@ -64,30 +66,37 @@ public class GrantCredentialsPermissionActivity extends Activity implements View
             String accountTypeLabel = getAccountLabel(this.mAccount);
             final TextView authTokenTypeView = (TextView) findViewById(R.id.authtoken_type);
             authTokenTypeView.setVisibility(8);
-            AccountManagerCallback<String> callback = new AccountManagerCallback<String>() { // from class: android.accounts.GrantCredentialsPermissionActivity.1
-                @Override // android.accounts.AccountManagerCallback
-                public void run(AccountManagerFuture<String> future) {
-                    try {
-                        final String authTokenLabel = future.getResult();
-                        if (!TextUtils.isEmpty(authTokenLabel)) {
-                            GrantCredentialsPermissionActivity.this.runOnUiThread(new Runnable() { // from class: android.accounts.GrantCredentialsPermissionActivity.1.1
-                                @Override // java.lang.Runnable
-                                public void run() {
-                                    if (!GrantCredentialsPermissionActivity.this.isFinishing()) {
-                                        authTokenTypeView.lambda$setTextAsync$0(authTokenLabel);
-                                        authTokenTypeView.setVisibility(0);
-                                    }
+            AccountManagerCallback<String> callback =
+                    new AccountManagerCallback<String>() { // from class:
+                        // android.accounts.GrantCredentialsPermissionActivity.1
+                        @Override // android.accounts.AccountManagerCallback
+                        public void run(AccountManagerFuture<String> future) {
+                            try {
+                                final String authTokenLabel = future.getResult();
+                                if (!TextUtils.isEmpty(authTokenLabel)) {
+                                    GrantCredentialsPermissionActivity.this.runOnUiThread(
+                                            new Runnable() { // from class:
+                                                // android.accounts.GrantCredentialsPermissionActivity.1.1
+                                                @Override // java.lang.Runnable
+                                                public void run() {
+                                                    if (!GrantCredentialsPermissionActivity.this
+                                                            .isFinishing()) {
+                                                        authTokenTypeView.lambda$setTextAsync$0(
+                                                                authTokenLabel);
+                                                        authTokenTypeView.setVisibility(0);
+                                                    }
+                                                }
+                                            });
                                 }
-                            });
+                            } catch (AuthenticatorException e) {
+                            } catch (OperationCanceledException e2) {
+                            } catch (IOException e3) {
+                            }
                         }
-                    } catch (AuthenticatorException e) {
-                    } catch (OperationCanceledException e2) {
-                    } catch (IOException e3) {
-                    }
-                }
-            };
+                    };
             if (!AccountManager.ACCOUNT_ACCESS_TOKEN_TYPE.equals(this.mAuthTokenType)) {
-                AccountManager.get(this).getAuthTokenLabel(this.mAccount.type, this.mAuthTokenType, callback, null);
+                AccountManager.get(this)
+                        .getAuthTokenLabel(this.mAccount.type, this.mAuthTokenType, callback, null);
             }
             findViewById(R.id.allow_button).setOnClickListener(this);
             findViewById(R.id.deny_button).setOnClickListener(this);
@@ -109,7 +118,8 @@ public class GrantCredentialsPermissionActivity extends Activity implements View
     }
 
     private String getAccountLabel(Account account) {
-        AuthenticatorDescription[] authenticatorTypes = AccountManager.get(this).getAuthenticatorTypes();
+        AuthenticatorDescription[] authenticatorTypes =
+                AccountManager.get(this).getAuthenticatorTypes();
         for (AuthenticatorDescription desc : authenticatorTypes) {
             if (desc.type.equals(account.type)) {
                 try {
@@ -125,7 +135,8 @@ public class GrantCredentialsPermissionActivity extends Activity implements View
     }
 
     private View newPackageView(String packageLabel) {
-        View view = this.mInflater.inflate(R.layout.permissions_package_list_item, (ViewGroup) null);
+        View view =
+                this.mInflater.inflate(R.layout.permissions_package_list_item, (ViewGroup) null);
         ((TextView) view.findViewById(R.id.package_label)).lambda$setTextAsync$0(packageLabel);
         return view;
     }
@@ -134,14 +145,16 @@ public class GrantCredentialsPermissionActivity extends Activity implements View
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.allow_button /* 16908777 */:
-                AccountManager.get(this).updateAppPermission(this.mAccount, this.mAuthTokenType, this.mUid, true);
+                AccountManager.get(this)
+                        .updateAppPermission(this.mAccount, this.mAuthTokenType, this.mUid, true);
                 Intent result = new Intent();
                 result.putExtra("retry", true);
                 setResult(-1, result);
                 setAccountAuthenticatorResult(result.getExtras());
                 break;
             case R.id.deny_button /* 16908995 */:
-                AccountManager.get(this).updateAppPermission(this.mAccount, this.mAuthTokenType, this.mUid, false);
+                AccountManager.get(this)
+                        .updateAppPermission(this.mAccount, this.mAuthTokenType, this.mUid, false);
                 setResult(0);
                 break;
         }
@@ -155,7 +168,9 @@ public class GrantCredentialsPermissionActivity extends Activity implements View
     @Override // android.app.Activity
     public void finish() {
         Intent intent = getIntent();
-        AccountAuthenticatorResponse response = (AccountAuthenticatorResponse) intent.getParcelableExtra("response", AccountAuthenticatorResponse.class);
+        AccountAuthenticatorResponse response =
+                (AccountAuthenticatorResponse)
+                        intent.getParcelableExtra("response", AccountAuthenticatorResponse.class);
         if (response != null) {
             if (this.mResultBundle != null) {
                 response.onResult(this.mResultBundle);

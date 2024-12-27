@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -20,7 +21,8 @@ import java.util.Objects;
 public final class E2eeContactKeysManager {
     private static final int ARRAY_IS_NULL = -1;
     public static final String AUTHORITY = "com.android.contactkeys.contactkeysprovider";
-    public static final Uri AUTHORITY_URI = Uri.parse("content://com.android.contactkeys.contactkeysprovider");
+    public static final Uri AUTHORITY_URI =
+            Uri.parse("content://com.android.contactkeys.contactkeysprovider");
     private static final int MAX_KEY_SIZE_BYTES = 5000;
     public static final int VERIFICATION_STATE_UNVERIFIED = 0;
     public static final int VERIFICATION_STATE_VERIFICATION_FAILED = 1;
@@ -28,22 +30,23 @@ public final class E2eeContactKeysManager {
     private final ContentResolver mContentResolver;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VerificationState {
-    }
+    public @interface VerificationState {}
 
     public E2eeContactKeysManager(Context context) {
         Objects.requireNonNull(context);
         this.mContentResolver = context.getContentResolver();
     }
 
-    public void updateOrInsertE2eeContactKey(String lookupKey, String deviceId, String accountId, byte[] keyValue) {
+    public void updateOrInsertE2eeContactKey(
+            String lookupKey, String deviceId, String accountId, byte[] keyValue) {
         validateKeyLength(keyValue);
         Bundle extras = new Bundle();
         extras.putString("lookup", (String) Objects.requireNonNull(lookupKey));
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
         extras.putByteArray(E2eeContactKeys.KEY_VALUE, (byte[]) Objects.requireNonNull(keyValue));
-        nullSafeCall(this.mContentResolver, E2eeContactKeys.UPDATE_OR_INSERT_CONTACT_KEY_METHOD, extras);
+        nullSafeCall(
+                this.mContentResolver, E2eeContactKeys.UPDATE_OR_INSERT_CONTACT_KEY_METHOD, extras);
     }
 
     public E2eeContactKey getE2eeContactKey(String lookupKey, String deviceId, String accountId) {
@@ -51,21 +54,27 @@ public final class E2eeContactKeysManager {
         extras.putString("lookup", (String) Objects.requireNonNull(lookupKey));
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.GET_CONTACT_KEY_METHOD, extras);
+        Bundle response =
+                nullSafeCall(this.mContentResolver, E2eeContactKeys.GET_CONTACT_KEY_METHOD, extras);
         if (response == null) {
             return null;
         }
-        return (E2eeContactKey) response.getParcelable(E2eeContactKeys.KEY_CONTACT_KEY, E2eeContactKey.class);
+        return (E2eeContactKey)
+                response.getParcelable(E2eeContactKeys.KEY_CONTACT_KEY, E2eeContactKey.class);
     }
 
     public List<E2eeContactKey> getAllE2eeContactKeys(String lookupKey) {
         Bundle extras = new Bundle();
         extras.putString("lookup", (String) Objects.requireNonNull(lookupKey));
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.GET_ALL_CONTACT_KEYS_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver, E2eeContactKeys.GET_ALL_CONTACT_KEYS_METHOD, extras);
         if (response == null) {
             return new ArrayList();
         }
-        List<E2eeContactKey> value = response.getParcelableArrayList(E2eeContactKeys.KEY_CONTACT_KEYS, E2eeContactKey.class);
+        List<E2eeContactKey> value =
+                response.getParcelableArrayList(
+                        E2eeContactKeys.KEY_CONTACT_KEYS, E2eeContactKey.class);
         if (value == null) {
             return new ArrayList();
         }
@@ -75,68 +84,107 @@ public final class E2eeContactKeysManager {
     public List<E2eeContactKey> getOwnerE2eeContactKeys(String lookupKey) {
         Bundle extras = new Bundle();
         extras.putString("lookup", (String) Objects.requireNonNull(lookupKey));
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.GET_OWNER_CONTACT_KEYS_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver,
+                        E2eeContactKeys.GET_OWNER_CONTACT_KEYS_METHOD,
+                        extras);
         if (response == null) {
             return new ArrayList();
         }
-        List<E2eeContactKey> value = response.getParcelableArrayList(E2eeContactKeys.KEY_CONTACT_KEYS, E2eeContactKey.class);
+        List<E2eeContactKey> value =
+                response.getParcelableArrayList(
+                        E2eeContactKeys.KEY_CONTACT_KEYS, E2eeContactKey.class);
         if (value == null) {
             return new ArrayList();
         }
         return value;
     }
 
-    public boolean updateE2eeContactKeyLocalVerificationState(String lookupKey, String deviceId, String accountId, int localVerificationState) {
+    public boolean updateE2eeContactKeyLocalVerificationState(
+            String lookupKey, String deviceId, String accountId, int localVerificationState) {
         validateVerificationState(localVerificationState);
         Bundle extras = new Bundle();
         extras.putString("lookup", (String) Objects.requireNonNull(lookupKey));
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
         extras.putInt(E2eeContactKeys.LOCAL_VERIFICATION_STATE, localVerificationState);
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.UPDATE_CONTACT_KEY_LOCAL_VERIFICATION_STATE_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver,
+                        E2eeContactKeys.UPDATE_CONTACT_KEY_LOCAL_VERIFICATION_STATE_METHOD,
+                        extras);
         return response != null && response.getBoolean(E2eeContactKeys.KEY_UPDATED_ROWS);
     }
 
     @SystemApi
-    public boolean updateE2eeContactKeyLocalVerificationState(String lookupKey, String deviceId, String accountId, String ownerPackageName, int localVerificationState) {
+    public boolean updateE2eeContactKeyLocalVerificationState(
+            String lookupKey,
+            String deviceId,
+            String accountId,
+            String ownerPackageName,
+            int localVerificationState) {
         validateVerificationState(localVerificationState);
         Bundle extras = new Bundle();
         extras.putString("lookup", (String) Objects.requireNonNull(lookupKey));
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
-        extras.putString(E2eeContactKeys.OWNER_PACKAGE_NAME, (String) Objects.requireNonNull(ownerPackageName));
+        extras.putString(
+                E2eeContactKeys.OWNER_PACKAGE_NAME,
+                (String) Objects.requireNonNull(ownerPackageName));
         extras.putInt(E2eeContactKeys.LOCAL_VERIFICATION_STATE, localVerificationState);
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.UPDATE_CONTACT_KEY_LOCAL_VERIFICATION_STATE_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver,
+                        E2eeContactKeys.UPDATE_CONTACT_KEY_LOCAL_VERIFICATION_STATE_METHOD,
+                        extras);
         return response != null && response.getBoolean(E2eeContactKeys.KEY_UPDATED_ROWS);
     }
 
-    public boolean updateE2eeContactKeyRemoteVerificationState(String lookupKey, String deviceId, String accountId, int remoteVerificationState) {
+    public boolean updateE2eeContactKeyRemoteVerificationState(
+            String lookupKey, String deviceId, String accountId, int remoteVerificationState) {
         validateVerificationState(remoteVerificationState);
         Bundle extras = new Bundle();
         extras.putString("lookup", (String) Objects.requireNonNull(lookupKey));
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
         extras.putInt(E2eeContactKeys.REMOTE_VERIFICATION_STATE, remoteVerificationState);
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.UPDATE_CONTACT_KEY_REMOTE_VERIFICATION_STATE_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver,
+                        E2eeContactKeys.UPDATE_CONTACT_KEY_REMOTE_VERIFICATION_STATE_METHOD,
+                        extras);
         return response != null && response.getBoolean(E2eeContactKeys.KEY_UPDATED_ROWS);
     }
 
     @SystemApi
-    public boolean updateE2eeContactKeyRemoteVerificationState(String lookupKey, String deviceId, String accountId, String ownerPackageName, int remoteVerificationState) {
+    public boolean updateE2eeContactKeyRemoteVerificationState(
+            String lookupKey,
+            String deviceId,
+            String accountId,
+            String ownerPackageName,
+            int remoteVerificationState) {
         validateVerificationState(remoteVerificationState);
         Bundle extras = new Bundle();
         extras.putString("lookup", (String) Objects.requireNonNull(lookupKey));
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
-        extras.putString(E2eeContactKeys.OWNER_PACKAGE_NAME, (String) Objects.requireNonNull(ownerPackageName));
+        extras.putString(
+                E2eeContactKeys.OWNER_PACKAGE_NAME,
+                (String) Objects.requireNonNull(ownerPackageName));
         extras.putInt(E2eeContactKeys.REMOTE_VERIFICATION_STATE, remoteVerificationState);
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.UPDATE_CONTACT_KEY_REMOTE_VERIFICATION_STATE_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver,
+                        E2eeContactKeys.UPDATE_CONTACT_KEY_REMOTE_VERIFICATION_STATE_METHOD,
+                        extras);
         return response != null && response.getBoolean(E2eeContactKeys.KEY_UPDATED_ROWS);
     }
 
     private static void validateVerificationState(int verificationState) {
         if (verificationState != 0 && verificationState != 1 && verificationState != 2) {
-            throw new IllegalArgumentException("Verification state value " + verificationState + " is not supported");
+            throw new IllegalArgumentException(
+                    "Verification state value " + verificationState + " is not supported");
         }
     }
 
@@ -145,7 +193,9 @@ public final class E2eeContactKeysManager {
         extras.putString("lookup", (String) Objects.requireNonNull(lookupKey));
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.REMOVE_CONTACT_KEY_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver, E2eeContactKeys.REMOVE_CONTACT_KEY_METHOD, extras);
         return response != null && response.getBoolean(E2eeContactKeys.KEY_UPDATED_ROWS);
     }
 
@@ -155,36 +205,59 @@ public final class E2eeContactKeysManager {
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
         extras.putByteArray(E2eeContactKeys.KEY_VALUE, (byte[]) Objects.requireNonNull(keyValue));
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.UPDATE_OR_INSERT_SELF_KEY_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver,
+                        E2eeContactKeys.UPDATE_OR_INSERT_SELF_KEY_METHOD,
+                        extras);
         return response != null && response.getBoolean(E2eeContactKeys.KEY_UPDATED_ROWS);
     }
 
     private static void validateKeyLength(byte[] keyValue) {
         Objects.requireNonNull(keyValue);
         if (keyValue.length == 0 || keyValue.length > getMaxKeySizeBytes()) {
-            throw new IllegalArgumentException("Key value length is " + keyValue.length + ". Should be more than 0 and less than " + getMaxKeySizeBytes());
+            throw new IllegalArgumentException(
+                    "Key value length is "
+                            + keyValue.length
+                            + ". Should be more than 0 and less than "
+                            + getMaxKeySizeBytes());
         }
     }
 
-    public boolean updateE2eeSelfKeyRemoteVerificationState(String deviceId, String accountId, int remoteVerificationState) {
+    public boolean updateE2eeSelfKeyRemoteVerificationState(
+            String deviceId, String accountId, int remoteVerificationState) {
         validateVerificationState(remoteVerificationState);
         Bundle extras = new Bundle();
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
         extras.putInt(E2eeContactKeys.REMOTE_VERIFICATION_STATE, remoteVerificationState);
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.UPDATE_SELF_KEY_REMOTE_VERIFICATION_STATE_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver,
+                        E2eeContactKeys.UPDATE_SELF_KEY_REMOTE_VERIFICATION_STATE_METHOD,
+                        extras);
         return response != null && response.getBoolean(E2eeContactKeys.KEY_UPDATED_ROWS);
     }
 
     @SystemApi
-    public boolean updateE2eeSelfKeyRemoteVerificationState(String deviceId, String accountId, String ownerPackageName, int remoteVerificationState) {
+    public boolean updateE2eeSelfKeyRemoteVerificationState(
+            String deviceId,
+            String accountId,
+            String ownerPackageName,
+            int remoteVerificationState) {
         validateVerificationState(remoteVerificationState);
         Bundle extras = new Bundle();
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
-        extras.putString(E2eeContactKeys.OWNER_PACKAGE_NAME, (String) Objects.requireNonNull(ownerPackageName));
+        extras.putString(
+                E2eeContactKeys.OWNER_PACKAGE_NAME,
+                (String) Objects.requireNonNull(ownerPackageName));
         extras.putInt(E2eeContactKeys.REMOTE_VERIFICATION_STATE, remoteVerificationState);
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.UPDATE_SELF_KEY_REMOTE_VERIFICATION_STATE_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver,
+                        E2eeContactKeys.UPDATE_SELF_KEY_REMOTE_VERIFICATION_STATE_METHOD,
+                        extras);
         return response != null && response.getBoolean(E2eeContactKeys.KEY_UPDATED_ROWS);
     }
 
@@ -196,20 +269,26 @@ public final class E2eeContactKeysManager {
         Bundle extras = new Bundle();
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.GET_SELF_KEY_METHOD, extras);
+        Bundle response =
+                nullSafeCall(this.mContentResolver, E2eeContactKeys.GET_SELF_KEY_METHOD, extras);
         if (response == null) {
             return null;
         }
-        return (E2eeSelfKey) response.getParcelable(E2eeContactKeys.KEY_CONTACT_KEY, E2eeSelfKey.class);
+        return (E2eeSelfKey)
+                response.getParcelable(E2eeContactKeys.KEY_CONTACT_KEY, E2eeSelfKey.class);
     }
 
     public List<E2eeSelfKey> getAllE2eeSelfKeys() {
         Bundle extras = new Bundle();
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.GET_ALL_SELF_KEYS_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver, E2eeContactKeys.GET_ALL_SELF_KEYS_METHOD, extras);
         if (response == null) {
             return new ArrayList();
         }
-        List<E2eeSelfKey> value = response.getParcelableArrayList(E2eeContactKeys.KEY_CONTACT_KEYS, E2eeSelfKey.class);
+        List<E2eeSelfKey> value =
+                response.getParcelableArrayList(
+                        E2eeContactKeys.KEY_CONTACT_KEYS, E2eeSelfKey.class);
         if (value == null) {
             return new ArrayList();
         }
@@ -218,11 +297,15 @@ public final class E2eeContactKeysManager {
 
     public List<E2eeSelfKey> getOwnerE2eeSelfKeys() {
         Bundle extras = new Bundle();
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.GET_OWNER_SELF_KEYS_METHOD, extras);
+        Bundle response =
+                nullSafeCall(
+                        this.mContentResolver, E2eeContactKeys.GET_OWNER_SELF_KEYS_METHOD, extras);
         if (response == null) {
             return new ArrayList();
         }
-        List<E2eeSelfKey> value = response.getParcelableArrayList(E2eeContactKeys.KEY_CONTACT_KEYS, E2eeSelfKey.class);
+        List<E2eeSelfKey> value =
+                response.getParcelableArrayList(
+                        E2eeContactKeys.KEY_CONTACT_KEYS, E2eeSelfKey.class);
         if (value == null) {
             return new ArrayList();
         }
@@ -233,7 +316,8 @@ public final class E2eeContactKeysManager {
         Bundle extras = new Bundle();
         extras.putString(E2eeContactKeys.DEVICE_ID, (String) Objects.requireNonNull(deviceId));
         extras.putString("account_id", (String) Objects.requireNonNull(accountId));
-        Bundle response = nullSafeCall(this.mContentResolver, E2eeContactKeys.REMOVE_SELF_KEY_METHOD, extras);
+        Bundle response =
+                nullSafeCall(this.mContentResolver, E2eeContactKeys.REMOVE_SELF_KEY_METHOD, extras);
         return response != null && response.getBoolean(E2eeContactKeys.KEY_UPDATED_ROWS);
     }
 
@@ -276,48 +360,63 @@ public final class E2eeContactKeysManager {
         public static final String REMOVE_CONTACT_KEY_METHOD = "removeContactKey";
         public static final String REMOVE_SELF_KEY_METHOD = "removeSelfKey";
         public static final String TIME_UPDATED = "time_updated";
-        public static final String UPDATE_CONTACT_KEY_LOCAL_VERIFICATION_STATE_METHOD = "updateContactKeyLocalVerificationState";
-        public static final String UPDATE_CONTACT_KEY_REMOTE_VERIFICATION_STATE_METHOD = "updateContactKeyRemoteVerificationState";
+        public static final String UPDATE_CONTACT_KEY_LOCAL_VERIFICATION_STATE_METHOD =
+                "updateContactKeyLocalVerificationState";
+        public static final String UPDATE_CONTACT_KEY_REMOTE_VERIFICATION_STATE_METHOD =
+                "updateContactKeyRemoteVerificationState";
         public static final String UPDATE_OR_INSERT_CONTACT_KEY_METHOD = "updateOrInsertContactKey";
         public static final String UPDATE_OR_INSERT_SELF_KEY_METHOD = "updateOrInsertSelfKey";
-        public static final String UPDATE_SELF_KEY_REMOTE_VERIFICATION_STATE_METHOD = "updateSelfKeyRemoteVerificationState";
+        public static final String UPDATE_SELF_KEY_REMOTE_VERIFICATION_STATE_METHOD =
+                "updateSelfKeyRemoteVerificationState";
 
-        private E2eeContactKeys() {
-        }
+        private E2eeContactKeys() {}
     }
 
     public static final class E2eeContactKey extends E2eeBaseKey implements Parcelable {
-        public static final Parcelable.Creator<E2eeContactKey> CREATOR = new Parcelable.Creator<E2eeContactKey>() { // from class: android.provider.E2eeContactKeysManager.E2eeContactKey.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public E2eeContactKey createFromParcel(Parcel source) {
-                byte[] keyValue;
-                String deviceId = source.readString8();
-                String accountId = source.readString8();
-                String ownerPackageName = source.readString8();
-                long timeUpdated = source.readLong();
-                int keyValueLength = source.readInt();
-                if (keyValueLength > 0) {
-                    byte[] keyValue2 = new byte[keyValueLength];
-                    source.readByteArray(keyValue2);
-                    keyValue = keyValue2;
-                } else {
-                    keyValue = null;
-                }
-                int localVerificationState = source.readInt();
-                int remoteVerificationState = source.readInt();
-                String displayName = source.readString8();
-                String number = source.readString8();
-                String address = source.readString8();
-                return new E2eeContactKey(deviceId, accountId, ownerPackageName, timeUpdated, keyValue, localVerificationState, remoteVerificationState, displayName, number, address);
-            }
+        public static final Parcelable.Creator<E2eeContactKey> CREATOR =
+                new Parcelable.Creator<
+                        E2eeContactKey>() { // from class:
+                                            // android.provider.E2eeContactKeysManager.E2eeContactKey.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public E2eeContactKey createFromParcel(Parcel source) {
+                        byte[] keyValue;
+                        String deviceId = source.readString8();
+                        String accountId = source.readString8();
+                        String ownerPackageName = source.readString8();
+                        long timeUpdated = source.readLong();
+                        int keyValueLength = source.readInt();
+                        if (keyValueLength > 0) {
+                            byte[] keyValue2 = new byte[keyValueLength];
+                            source.readByteArray(keyValue2);
+                            keyValue = keyValue2;
+                        } else {
+                            keyValue = null;
+                        }
+                        int localVerificationState = source.readInt();
+                        int remoteVerificationState = source.readInt();
+                        String displayName = source.readString8();
+                        String number = source.readString8();
+                        String address = source.readString8();
+                        return new E2eeContactKey(
+                                deviceId,
+                                accountId,
+                                ownerPackageName,
+                                timeUpdated,
+                                keyValue,
+                                localVerificationState,
+                                remoteVerificationState,
+                                displayName,
+                                number,
+                                address);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public E2eeContactKey[] newArray(int size) {
-                return new E2eeContactKey[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public E2eeContactKey[] newArray(int size) {
+                        return new E2eeContactKey[size];
+                    }
+                };
         private final String mDisplayName;
         private final String mEmailAddress;
         private final int mLocalVerificationState;
@@ -353,8 +452,24 @@ public final class E2eeContactKeysManager {
             return super.getTimeUpdated();
         }
 
-        public E2eeContactKey(String deviceId, String accountId, String ownerPackageName, long timeUpdated, byte[] keyValue, int localVerificationState, int remoteVerificationState, String displayName, String phoneNumber, String emailAddress) {
-            super(deviceId, accountId, ownerPackageName, timeUpdated, keyValue, remoteVerificationState);
+        public E2eeContactKey(
+                String deviceId,
+                String accountId,
+                String ownerPackageName,
+                long timeUpdated,
+                byte[] keyValue,
+                int localVerificationState,
+                int remoteVerificationState,
+                String displayName,
+                String phoneNumber,
+                String emailAddress) {
+            super(
+                    deviceId,
+                    accountId,
+                    ownerPackageName,
+                    timeUpdated,
+                    keyValue,
+                    remoteVerificationState);
             this.mLocalVerificationState = localVerificationState;
             this.mDisplayName = displayName;
             this.mPhoneNumber = phoneNumber;
@@ -378,7 +493,17 @@ public final class E2eeContactKeysManager {
         }
 
         public int hashCode() {
-            return Objects.hash(this.mDeviceId, this.mAccountId, this.mOwnerPackageName, Long.valueOf(this.mTimeUpdated), Integer.valueOf(Arrays.hashCode(this.mKeyValue)), Integer.valueOf(this.mLocalVerificationState), Integer.valueOf(this.mRemoteVerificationState), this.mDisplayName, this.mPhoneNumber, this.mEmailAddress);
+            return Objects.hash(
+                    this.mDeviceId,
+                    this.mAccountId,
+                    this.mOwnerPackageName,
+                    Long.valueOf(this.mTimeUpdated),
+                    Integer.valueOf(Arrays.hashCode(this.mKeyValue)),
+                    Integer.valueOf(this.mLocalVerificationState),
+                    Integer.valueOf(this.mRemoteVerificationState),
+                    this.mDisplayName,
+                    this.mPhoneNumber,
+                    this.mEmailAddress);
         }
 
         public boolean equals(Object obj) {
@@ -392,7 +517,16 @@ public final class E2eeContactKeysManager {
                 return false;
             }
             E2eeContactKey toCompare = (E2eeContactKey) obj;
-            if (!Objects.equals(this.mDeviceId, toCompare.mDeviceId) || !Objects.equals(this.mAccountId, toCompare.mAccountId) || !Objects.equals(this.mOwnerPackageName, toCompare.mOwnerPackageName) || this.mTimeUpdated != toCompare.mTimeUpdated || !Arrays.equals(this.mKeyValue, toCompare.mKeyValue) || this.mLocalVerificationState != toCompare.mLocalVerificationState || this.mRemoteVerificationState != toCompare.mRemoteVerificationState || !Objects.equals(this.mDisplayName, toCompare.mDisplayName) || !Objects.equals(this.mPhoneNumber, toCompare.mPhoneNumber) || !Objects.equals(this.mEmailAddress, toCompare.mEmailAddress)) {
+            if (!Objects.equals(this.mDeviceId, toCompare.mDeviceId)
+                    || !Objects.equals(this.mAccountId, toCompare.mAccountId)
+                    || !Objects.equals(this.mOwnerPackageName, toCompare.mOwnerPackageName)
+                    || this.mTimeUpdated != toCompare.mTimeUpdated
+                    || !Arrays.equals(this.mKeyValue, toCompare.mKeyValue)
+                    || this.mLocalVerificationState != toCompare.mLocalVerificationState
+                    || this.mRemoteVerificationState != toCompare.mRemoteVerificationState
+                    || !Objects.equals(this.mDisplayName, toCompare.mDisplayName)
+                    || !Objects.equals(this.mPhoneNumber, toCompare.mPhoneNumber)
+                    || !Objects.equals(this.mEmailAddress, toCompare.mEmailAddress)) {
                 return false;
             }
             return true;
@@ -422,33 +556,42 @@ public final class E2eeContactKeysManager {
     }
 
     public static final class E2eeSelfKey extends E2eeBaseKey implements Parcelable {
-        public static final Parcelable.Creator<E2eeSelfKey> CREATOR = new Parcelable.Creator<E2eeSelfKey>() { // from class: android.provider.E2eeContactKeysManager.E2eeSelfKey.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public E2eeSelfKey createFromParcel(Parcel source) {
-                byte[] keyValue;
-                String deviceId = source.readString8();
-                String accountId = source.readString8();
-                String ownerPackageName = source.readString8();
-                long timeUpdated = source.readLong();
-                int keyValueLength = source.readInt();
-                if (keyValueLength > 0) {
-                    byte[] keyValue2 = new byte[keyValueLength];
-                    source.readByteArray(keyValue2);
-                    keyValue = keyValue2;
-                } else {
-                    keyValue = null;
-                }
-                int remoteVerificationState = source.readInt();
-                return new E2eeSelfKey(deviceId, accountId, ownerPackageName, timeUpdated, keyValue, remoteVerificationState);
-            }
+        public static final Parcelable.Creator<E2eeSelfKey> CREATOR =
+                new Parcelable.Creator<
+                        E2eeSelfKey>() { // from class:
+                                         // android.provider.E2eeContactKeysManager.E2eeSelfKey.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public E2eeSelfKey createFromParcel(Parcel source) {
+                        byte[] keyValue;
+                        String deviceId = source.readString8();
+                        String accountId = source.readString8();
+                        String ownerPackageName = source.readString8();
+                        long timeUpdated = source.readLong();
+                        int keyValueLength = source.readInt();
+                        if (keyValueLength > 0) {
+                            byte[] keyValue2 = new byte[keyValueLength];
+                            source.readByteArray(keyValue2);
+                            keyValue = keyValue2;
+                        } else {
+                            keyValue = null;
+                        }
+                        int remoteVerificationState = source.readInt();
+                        return new E2eeSelfKey(
+                                deviceId,
+                                accountId,
+                                ownerPackageName,
+                                timeUpdated,
+                                keyValue,
+                                remoteVerificationState);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public E2eeSelfKey[] newArray(int size) {
-                return new E2eeSelfKey[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public E2eeSelfKey[] newArray(int size) {
+                        return new E2eeSelfKey[size];
+                    }
+                };
 
         @Override // android.provider.E2eeContactKeysManager.E2eeBaseKey
         public /* bridge */ /* synthetic */ String getAccountId() {
@@ -480,12 +623,30 @@ public final class E2eeContactKeysManager {
             return super.getTimeUpdated();
         }
 
-        public E2eeSelfKey(String deviceId, String accountId, String ownerPackageName, long timeUpdated, byte[] keyValue, int remoteVerificationState) {
-            super(deviceId, accountId, ownerPackageName, timeUpdated, keyValue, remoteVerificationState);
+        public E2eeSelfKey(
+                String deviceId,
+                String accountId,
+                String ownerPackageName,
+                long timeUpdated,
+                byte[] keyValue,
+                int remoteVerificationState) {
+            super(
+                    deviceId,
+                    accountId,
+                    ownerPackageName,
+                    timeUpdated,
+                    keyValue,
+                    remoteVerificationState);
         }
 
         public int hashCode() {
-            return Objects.hash(this.mDeviceId, this.mAccountId, this.mOwnerPackageName, Long.valueOf(this.mTimeUpdated), Integer.valueOf(Arrays.hashCode(this.mKeyValue)), Integer.valueOf(this.mRemoteVerificationState));
+            return Objects.hash(
+                    this.mDeviceId,
+                    this.mAccountId,
+                    this.mOwnerPackageName,
+                    Long.valueOf(this.mTimeUpdated),
+                    Integer.valueOf(Arrays.hashCode(this.mKeyValue)),
+                    Integer.valueOf(this.mRemoteVerificationState));
         }
 
         public boolean equals(Object obj) {
@@ -499,7 +660,12 @@ public final class E2eeContactKeysManager {
                 return false;
             }
             E2eeSelfKey toCompare = (E2eeSelfKey) obj;
-            if (!Objects.equals(this.mDeviceId, toCompare.mDeviceId) || !Objects.equals(this.mAccountId, toCompare.mAccountId) || !Objects.equals(this.mOwnerPackageName, toCompare.mOwnerPackageName) || this.mTimeUpdated != toCompare.mTimeUpdated || !Arrays.equals(this.mKeyValue, toCompare.mKeyValue) || this.mRemoteVerificationState != toCompare.mRemoteVerificationState) {
+            if (!Objects.equals(this.mDeviceId, toCompare.mDeviceId)
+                    || !Objects.equals(this.mAccountId, toCompare.mAccountId)
+                    || !Objects.equals(this.mOwnerPackageName, toCompare.mOwnerPackageName)
+                    || this.mTimeUpdated != toCompare.mTimeUpdated
+                    || !Arrays.equals(this.mKeyValue, toCompare.mKeyValue)
+                    || this.mRemoteVerificationState != toCompare.mRemoteVerificationState) {
                 return false;
             }
             return true;
@@ -524,7 +690,7 @@ public final class E2eeContactKeysManager {
         }
     }
 
-    static abstract class E2eeBaseKey {
+    abstract static class E2eeBaseKey {
         protected final String mAccountId;
         protected final String mDeviceId;
         protected final byte[] mKeyValue;
@@ -532,7 +698,13 @@ public final class E2eeContactKeysManager {
         protected final int mRemoteVerificationState;
         protected final long mTimeUpdated;
 
-        protected E2eeBaseKey(String deviceId, String accountId, String ownerPackageName, long timeUpdated, byte[] keyValue, int remoteVerificationState) {
+        protected E2eeBaseKey(
+                String deviceId,
+                String accountId,
+                String ownerPackageName,
+                long timeUpdated,
+                byte[] keyValue,
+                int remoteVerificationState) {
             this.mDeviceId = deviceId;
             this.mAccountId = accountId;
             this.mOwnerPackageName = ownerPackageName;

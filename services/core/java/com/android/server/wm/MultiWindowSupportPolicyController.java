@@ -5,7 +5,9 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import com.samsung.android.server.packagefeature.PackageFeature;
+
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.function.Consumer;
@@ -13,16 +15,24 @@ import java.util.function.Consumer;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class MultiWindowSupportPolicyController implements IController {
-    public MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository mAllowListRepository;
+    public MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+            mAllowListRepository;
     public final ActivityTaskManagerService mAtm;
-    public MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository mBlockListRepository;
+    public MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+            mBlockListRepository;
 
-    public MultiWindowSupportPolicyController(ActivityTaskManagerService activityTaskManagerService) {
+    public MultiWindowSupportPolicyController(
+            ActivityTaskManagerService activityTaskManagerService) {
         this.mAtm = activityTaskManagerService;
         if (this.mBlockListRepository == null) {
-            MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository = new MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository(1, activityTaskManagerService, "BlockList");
-            PackageFeature.DISPLAY_COMPAT.registerCallback(multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository);
-            this.mBlockListRepository = multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository;
+            MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                    multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository =
+                            new MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository(
+                                    1, activityTaskManagerService, "BlockList");
+            PackageFeature.DISPLAY_COMPAT.registerCallback(
+                    multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository);
+            this.mBlockListRepository =
+                    multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository;
         }
     }
 
@@ -32,20 +42,28 @@ public final class MultiWindowSupportPolicyController implements IController {
             return false;
         }
         ApplicationInfo applicationInfo = activityInfo.applicationInfo;
-        if (applicationInfo != null && (bundle = applicationInfo.metaData) != null && bundle.getBoolean("com.samsung.android.multiwindow.ignore.nonresizable.setting", false)) {
+        if (applicationInfo != null
+                && (bundle = applicationInfo.metaData) != null
+                && bundle.getBoolean(
+                        "com.samsung.android.multiwindow.ignore.nonresizable.setting", false)) {
             return true;
         }
         Bundle bundle2 = activityInfo.metaData;
-        return bundle2 != null && bundle2.getBoolean("com.samsung.android.multiwindow.ignore.nonresizable.setting", false);
+        return bundle2 != null
+                && bundle2.getBoolean(
+                        "com.samsung.android.multiwindow.ignore.nonresizable.setting", false);
     }
 
-    public static boolean supportsNonResizableMultiWindow(TaskDisplayArea taskDisplayArea, boolean z) {
+    public static boolean supportsNonResizableMultiWindow(
+            TaskDisplayArea taskDisplayArea, boolean z) {
         if (z) {
             return false;
         }
         ActivityTaskManagerService activityTaskManagerService = taskDisplayArea.mAtmService;
         int i = activityTaskManagerService.mSupportsNonResizableMultiWindow;
-        return activityTaskManagerService.mDevEnableNonResizableMultiWindow || i == 1 || (i != -1 && taskDisplayArea.getConfiguration().smallestScreenWidthDp >= 600);
+        return activityTaskManagerService.mDevEnableNonResizableMultiWindow
+                || i == 1
+                || (i != -1 && taskDisplayArea.getConfiguration().smallestScreenWidthDp >= 600);
     }
 
     public final int checkSupportPolicyLocked(int i, String str) {
@@ -57,10 +75,20 @@ public final class MultiWindowSupportPolicyController implements IController {
             return i;
         }
         int i3 = i & (-3145729);
-        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository = this.mAllowListRepository;
-        if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository == null || !multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository.containsPackage(str, false)) {
-            MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2 = this.mBlockListRepository;
-            if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2 == null || !multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2.containsPackage(str, true)) {
+        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository =
+                        this.mAllowListRepository;
+        if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                        == null
+                || !multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                        .containsPackage(str, false)) {
+            MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                    multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2 =
+                            this.mBlockListRepository;
+            if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2
+                            == null
+                    || !multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2
+                            .containsPackage(str, true)) {
                 return i3;
             }
             i2 = 2097152;
@@ -73,21 +101,29 @@ public final class MultiWindowSupportPolicyController implements IController {
     @Override // com.android.server.wm.IController
     public final void dumpLocked(PrintWriter printWriter) {
         printWriter.println("[MultiWindowSupportPolicyController]");
-        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository = this.mAllowListRepository;
-        if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository != null) {
-            multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository.dump(printWriter);
+        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository =
+                        this.mAllowListRepository;
+        if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                != null) {
+            multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                    .dump(printWriter);
         }
-        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2 = this.mBlockListRepository;
-        if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2 != null) {
-            multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2.dump(printWriter);
+        MultiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository
+                multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2 =
+                        this.mBlockListRepository;
+        if (multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2
+                != null) {
+            multiWindowSupportPolicyController$MultiWindowSupportRepository$AllowListRepository2
+                    .dump(printWriter);
         }
     }
 
     @Override // com.android.server.wm.IController
-    public final void initialize() {
-    }
+    public final void initialize() {}
 
-    public final boolean supportsMultiWindowInDisplayArea(TaskDisplayArea taskDisplayArea, int i, boolean z, boolean z2) {
+    public final boolean supportsMultiWindowInDisplayArea(
+            TaskDisplayArea taskDisplayArea, int i, boolean z, boolean z2) {
         if (i == 10) {
             return false;
         }
@@ -105,17 +141,24 @@ public final class MultiWindowSupportPolicyController implements IController {
         while (it.hasNext()) {
             Task task = (Task) it.next();
             updateSupportPolicyLocked(null, task);
-            task.forAllActivities(new Consumer() { // from class: com.android.server.wm.MultiWindowSupportPolicyController$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    MultiWindowSupportPolicyController multiWindowSupportPolicyController = MultiWindowSupportPolicyController.this;
-                    ActivityRecord activityRecord = (ActivityRecord) obj;
-                    multiWindowSupportPolicyController.getClass();
-                    activityRecord.mIgnoreDevSettingForNonResizable = MultiWindowSupportPolicyController.isIgnoreDevSettingForNonResizable(activityRecord.info);
-                    ActivityInfo activityInfo = activityRecord.info;
-                    activityInfo.resizeMode = multiWindowSupportPolicyController.checkSupportPolicyLocked(activityInfo.resizeMode, activityRecord.packageName);
-                }
-            });
+            task.forAllActivities(
+                    new Consumer() { // from class:
+                                     // com.android.server.wm.MultiWindowSupportPolicyController$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            MultiWindowSupportPolicyController multiWindowSupportPolicyController =
+                                    MultiWindowSupportPolicyController.this;
+                            ActivityRecord activityRecord = (ActivityRecord) obj;
+                            multiWindowSupportPolicyController.getClass();
+                            activityRecord.mIgnoreDevSettingForNonResizable =
+                                    MultiWindowSupportPolicyController
+                                            .isIgnoreDevSettingForNonResizable(activityRecord.info);
+                            ActivityInfo activityInfo = activityRecord.info;
+                            activityInfo.resizeMode =
+                                    multiWindowSupportPolicyController.checkSupportPolicyLocked(
+                                            activityInfo.resizeMode, activityRecord.packageName);
+                        }
+                    });
         }
     }
 
@@ -124,6 +167,9 @@ public final class MultiWindowSupportPolicyController implements IController {
             task.mIgnoreDevSettingForNonResizable = isIgnoreDevSettingForNonResizable(activityInfo);
         }
         ComponentName componentName = task.realActivity;
-        task.mResizeMode = checkSupportPolicyLocked(task.mResizeMode, componentName != null ? componentName.getPackageName() : null);
+        task.mResizeMode =
+                checkSupportPolicyLocked(
+                        task.mResizeMode,
+                        componentName != null ? componentName.getPackageName() : null);
     }
 }

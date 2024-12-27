@@ -12,22 +12,23 @@ import android.os.RemoteException;
 public interface IDropBoxManagerService extends IInterface {
     void addData(String str, byte[] bArr, int i) throws RemoteException;
 
-    void addFile(String str, ParcelFileDescriptor parcelFileDescriptor, int i) throws RemoteException;
+    void addFile(String str, ParcelFileDescriptor parcelFileDescriptor, int i)
+            throws RemoteException;
 
     DropBoxManager.Entry getNextEntry(String str, long j, String str2) throws RemoteException;
 
-    DropBoxManager.Entry getNextEntryWithAttribution(String str, long j, String str2, String str3) throws RemoteException;
+    DropBoxManager.Entry getNextEntryWithAttribution(String str, long j, String str2, String str3)
+            throws RemoteException;
 
     boolean isTagEnabled(String str) throws RemoteException;
 
     public static class Default implements IDropBoxManagerService {
         @Override // com.android.internal.os.IDropBoxManagerService
-        public void addData(String tag, byte[] data, int flags) throws RemoteException {
-        }
+        public void addData(String tag, byte[] data, int flags) throws RemoteException {}
 
         @Override // com.android.internal.os.IDropBoxManagerService
-        public void addFile(String tag, ParcelFileDescriptor fd, int flags) throws RemoteException {
-        }
+        public void addFile(String tag, ParcelFileDescriptor fd, int flags)
+                throws RemoteException {}
 
         @Override // com.android.internal.os.IDropBoxManagerService
         public boolean isTagEnabled(String tag) throws RemoteException {
@@ -35,12 +36,15 @@ public interface IDropBoxManagerService extends IInterface {
         }
 
         @Override // com.android.internal.os.IDropBoxManagerService
-        public DropBoxManager.Entry getNextEntry(String tag, long millis, String packageName) throws RemoteException {
+        public DropBoxManager.Entry getNextEntry(String tag, long millis, String packageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.os.IDropBoxManagerService
-        public DropBoxManager.Entry getNextEntryWithAttribution(String tag, long millis, String packageName, String attributionTag) throws RemoteException {
+        public DropBoxManager.Entry getNextEntryWithAttribution(
+                String tag, long millis, String packageName, String attributionTag)
+                throws RemoteException {
             return null;
         }
 
@@ -50,7 +54,7 @@ public interface IDropBoxManagerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDropBoxManagerService {
+    public abstract static class Stub extends Binder implements IDropBoxManagerService {
         public static final String DESCRIPTOR = "com.android.internal.os.IDropBoxManagerService";
         static final int TRANSACTION_addData = 1;
         static final int TRANSACTION_addFile = 2;
@@ -101,7 +105,8 @@ public interface IDropBoxManagerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -120,7 +125,9 @@ public interface IDropBoxManagerService extends IInterface {
                     return true;
                 case 2:
                     String _arg02 = data.readString();
-                    ParcelFileDescriptor _arg12 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg12 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
                     addFile(_arg02, _arg12, _arg22);
@@ -148,7 +155,8 @@ public interface IDropBoxManagerService extends IInterface {
                     String _arg24 = data.readString();
                     String _arg3 = data.readString();
                     data.enforceNoDataAvail();
-                    DropBoxManager.Entry _result3 = getNextEntryWithAttribution(_arg05, _arg14, _arg24, _arg3);
+                    DropBoxManager.Entry _result3 =
+                            getNextEntryWithAttribution(_arg05, _arg14, _arg24, _arg3);
                     reply.writeNoException();
                     reply.writeTypedObject(_result3, 1);
                     return true;
@@ -191,7 +199,8 @@ public interface IDropBoxManagerService extends IInterface {
             }
 
             @Override // com.android.internal.os.IDropBoxManagerService
-            public void addFile(String tag, ParcelFileDescriptor fd, int flags) throws RemoteException {
+            public void addFile(String tag, ParcelFileDescriptor fd, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -225,7 +234,8 @@ public interface IDropBoxManagerService extends IInterface {
             }
 
             @Override // com.android.internal.os.IDropBoxManagerService
-            public DropBoxManager.Entry getNextEntry(String tag, long millis, String packageName) throws RemoteException {
+            public DropBoxManager.Entry getNextEntry(String tag, long millis, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -235,7 +245,9 @@ public interface IDropBoxManagerService extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    DropBoxManager.Entry _result = (DropBoxManager.Entry) _reply.readTypedObject(DropBoxManager.Entry.CREATOR);
+                    DropBoxManager.Entry _result =
+                            (DropBoxManager.Entry)
+                                    _reply.readTypedObject(DropBoxManager.Entry.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -244,7 +256,9 @@ public interface IDropBoxManagerService extends IInterface {
             }
 
             @Override // com.android.internal.os.IDropBoxManagerService
-            public DropBoxManager.Entry getNextEntryWithAttribution(String tag, long millis, String packageName, String attributionTag) throws RemoteException {
+            public DropBoxManager.Entry getNextEntryWithAttribution(
+                    String tag, long millis, String packageName, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -255,7 +269,9 @@ public interface IDropBoxManagerService extends IInterface {
                     _data.writeString(attributionTag);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    DropBoxManager.Entry _result = (DropBoxManager.Entry) _reply.readTypedObject(DropBoxManager.Entry.CREATOR);
+                    DropBoxManager.Entry _result =
+                            (DropBoxManager.Entry)
+                                    _reply.readTypedObject(DropBoxManager.Entry.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

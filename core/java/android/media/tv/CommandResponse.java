@@ -5,20 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class CommandResponse extends BroadcastInfoResponse implements Parcelable {
-    public static final Parcelable.Creator<CommandResponse> CREATOR = new Parcelable.Creator<CommandResponse>() { // from class: android.media.tv.CommandResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CommandResponse createFromParcel(Parcel source) {
-            source.readInt();
-            return CommandResponse.createFromParcelBody(source);
-        }
+    public static final Parcelable.Creator<CommandResponse> CREATOR =
+            new Parcelable.Creator<
+                    CommandResponse>() { // from class: android.media.tv.CommandResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CommandResponse createFromParcel(Parcel source) {
+                    source.readInt();
+                    return CommandResponse.createFromParcelBody(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CommandResponse[] newArray(int size) {
-            return new CommandResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CommandResponse[] newArray(int size) {
+                    return new CommandResponse[size];
+                }
+            };
     private static final int RESPONSE_TYPE = 7;
     public static final String RESPONSE_TYPE_JSON = "json";
     public static final String RESPONSE_TYPE_XML = "xml";
@@ -29,7 +31,8 @@ public final class CommandResponse extends BroadcastInfoResponse implements Parc
         return new CommandResponse(in);
     }
 
-    public CommandResponse(int requestId, int sequence, int responseResult, String response, String responseType) {
+    public CommandResponse(
+            int requestId, int sequence, int responseResult, String response, String responseType) {
         super(7, requestId, sequence, responseResult);
         this.mResponse = response;
         this.mResponseType = responseType;

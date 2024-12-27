@@ -88,9 +88,9 @@ public class LruCache<K, V> {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x0062, code lost:
-    
-        throw new java.lang.IllegalStateException(getClass().getName() + ".sizeOf() is reporting inconsistent results!");
-     */
+
+       throw new java.lang.IllegalStateException(getClass().getName() + ".sizeOf() is reporting inconsistent results!");
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -152,7 +152,8 @@ public class LruCache<K, V> {
             monitor-exit(r5)     // Catch: java.lang.Throwable -> L63
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.util.LruCache.trimToSize(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.util.LruCache.trimToSize(int):void");
     }
 
     private Map.Entry<K, V> eldest() {
@@ -184,8 +185,7 @@ public class LruCache<K, V> {
         return previous;
     }
 
-    protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue) {
-    }
+    protected void entryRemoved(boolean evicted, K key, V oldValue, V newValue) {}
 
     protected V create(K key) {
         return null;
@@ -243,6 +243,11 @@ public class LruCache<K, V> {
         int hitPercent;
         int accesses = this.hitCount + this.missCount;
         hitPercent = accesses != 0 ? (this.hitCount * 100) / accesses : 0;
-        return String.format("LruCache[maxSize=%d,hits=%d,misses=%d,hitRate=%d%%]", Integer.valueOf(this.maxSize), Integer.valueOf(this.hitCount), Integer.valueOf(this.missCount), Integer.valueOf(hitPercent));
+        return String.format(
+                "LruCache[maxSize=%d,hits=%d,misses=%d,hitRate=%d%%]",
+                Integer.valueOf(this.maxSize),
+                Integer.valueOf(this.hitCount),
+                Integer.valueOf(this.missCount),
+                Integer.valueOf(hitPercent));
     }
 }

@@ -4,8 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
 import com.samsung.android.knox.application.NetworkStats;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.util.Hashtable;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -35,10 +37,15 @@ public final class NetworkDataUsageDb {
                 }
             }
             try {
-                sQLiteDatabase.execSQL("create table NetworkDataUsage (_id integer primary key , mobiledatausagercv long, wifidatausagesendrcv long, mobiledatausagesend long, wifidatausagesend long );");
+                sQLiteDatabase.execSQL(
+                        "create table NetworkDataUsage (_id integer primary key ,"
+                            + " mobiledatausagercv long, wifidatausagesendrcv long,"
+                            + " mobiledatausagesend long, wifidatausagesend long );");
                 Log.i("NetworkDataUsageDb", "::createDmAppMgrTable: Table is Created ");
             } catch (Exception unused3) {
-                Log.i("NetworkDataUsageDb", "::createDmAppMgrTable: Exception while table is creating ");
+                Log.i(
+                        "NetworkDataUsageDb",
+                        "::createDmAppMgrTable: Exception while table is creating ");
             }
         }
         return sQLiteDatabase;
@@ -62,7 +69,9 @@ public final class NetworkDataUsageDb {
             }
             try {
                 try {
-                    Cursor query = sQLiteDatabase.query("NetworkDataUsage", null, null, null, null, null, null);
+                    Cursor query =
+                            sQLiteDatabase.query(
+                                    "NetworkDataUsage", null, null, null, null, null, null);
                     if (query != null) {
                         try {
                             try {
@@ -71,12 +80,33 @@ public final class NetworkDataUsageDb {
                                     if (query.moveToFirst()) {
                                         do {
                                             NetworkStats networkStats = new NetworkStats();
-                                            networkStats.uid = query.getInt(query.getColumnIndex(KnoxCustomManagerService.ID));
-                                            networkStats.mobileTxBytes = query.getLong(query.getColumnIndex("mobiledatausagesend"));
-                                            networkStats.mobileRxBytes = query.getLong(query.getColumnIndex("mobiledatausagercv"));
-                                            networkStats.wifiTxBytes = query.getLong(query.getColumnIndex("wifidatausagesend"));
-                                            networkStats.wifiRxBytes = query.getLong(query.getColumnIndex("wifidatausagesendrcv"));
-                                            hashtable.put(Integer.valueOf(query.getInt(query.getColumnIndex(KnoxCustomManagerService.ID))), networkStats);
+                                            networkStats.uid =
+                                                    query.getInt(
+                                                            query.getColumnIndex(
+                                                                    KnoxCustomManagerService.ID));
+                                            networkStats.mobileTxBytes =
+                                                    query.getLong(
+                                                            query.getColumnIndex(
+                                                                    "mobiledatausagesend"));
+                                            networkStats.mobileRxBytes =
+                                                    query.getLong(
+                                                            query.getColumnIndex(
+                                                                    "mobiledatausagercv"));
+                                            networkStats.wifiTxBytes =
+                                                    query.getLong(
+                                                            query.getColumnIndex(
+                                                                    "wifidatausagesend"));
+                                            networkStats.wifiRxBytes =
+                                                    query.getLong(
+                                                            query.getColumnIndex(
+                                                                    "wifidatausagesendrcv"));
+                                            hashtable.put(
+                                                    Integer.valueOf(
+                                                            query.getInt(
+                                                                    query.getColumnIndex(
+                                                                            KnoxCustomManagerService
+                                                                                    .ID))),
+                                                    networkStats);
                                         } while (query.moveToNext());
                                     }
                                     hashtable2 = hashtable;

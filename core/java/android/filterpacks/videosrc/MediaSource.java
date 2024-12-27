@@ -17,7 +17,9 @@ import android.net.Uri;
 import android.opengl.Matrix;
 import android.util.Log;
 import android.view.Surface;
+
 import com.samsung.android.content.smartclip.SemSmartClipMetaTagType;
+
 import java.io.IOException;
 
 /* loaded from: classes.dex */
@@ -31,6 +33,7 @@ public class MediaSource extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = SemSmartClipMetaTagType.CONTEXT)
     private Context mContext;
+
     private ShaderProgram mFrameExtractor;
     private final String mFrameShader;
     private boolean mGotSize;
@@ -39,12 +42,14 @@ public class MediaSource extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "loop")
     private boolean mLooping;
+
     private GLFrame mMediaFrame;
     private MediaPlayer mMediaPlayer;
     private boolean mNewFrameAvailable;
 
     @GenerateFieldPort(hasDefault = true, name = "orientation")
     private int mOrientation;
+
     private boolean mOrientationUpdated;
     private MutableFrameFormat mOutputFormat;
     private boolean mPaused;
@@ -59,6 +64,7 @@ public class MediaSource extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "sourceUrl")
     private String mSourceUrl;
+
     private SurfaceTexture mSurfaceTexture;
 
     @GenerateFieldPort(hasDefault = true, name = "volume")
@@ -66,15 +72,28 @@ public class MediaSource extends Filter {
 
     @GenerateFinalPort(hasDefault = true, name = "waitForNewFrame")
     private boolean mWaitForNewFrame;
+
     private int mWidth;
     private MediaPlayer.OnCompletionListener onCompletionListener;
     private SurfaceTexture.OnFrameAvailableListener onMediaFrameAvailableListener;
     private MediaPlayer.OnPreparedListener onPreparedListener;
     private MediaPlayer.OnVideoSizeChangedListener onVideoSizeChangedListener;
-    private static final float[] mSourceCoords_0 = {1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f};
-    private static final float[] mSourceCoords_270 = {0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f};
-    private static final float[] mSourceCoords_180 = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f};
-    private static final float[] mSourceCoords_90 = {1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f};
+    private static final float[] mSourceCoords_0 = {
+        1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+        1.0f
+    };
+    private static final float[] mSourceCoords_270 = {
+        0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,
+        1.0f
+    };
+    private static final float[] mSourceCoords_180 = {
+        0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f,
+        1.0f
+    };
+    private static final float[] mSourceCoords_90 = {
+        1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+        1.0f
+    };
 
     public MediaSource(String name) {
         super(name);
@@ -86,71 +105,90 @@ public class MediaSource extends Filter {
         this.mLooping = true;
         this.mVolume = 0.0f;
         this.mOrientation = 0;
-        this.mFrameShader = "#extension GL_OES_EGL_image_external : require\nprecision mediump float;\nuniform samplerExternalOES tex_sampler_0;\nvarying vec2 v_texcoord;\nvoid main() {\n  gl_FragColor = texture2D(tex_sampler_0, v_texcoord);\n}\n";
-        this.onVideoSizeChangedListener = new MediaPlayer.OnVideoSizeChangedListener() { // from class: android.filterpacks.videosrc.MediaSource.1
-            @Override // android.media.MediaPlayer.OnVideoSizeChangedListener
-            public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-                if (MediaSource.this.mLogVerbose) {
-                    Log.v(MediaSource.TAG, "MediaPlayer sent dimensions: " + width + " x " + height);
-                }
-                if (!MediaSource.this.mGotSize) {
-                    if (MediaSource.this.mOrientation == 0 || MediaSource.this.mOrientation == 180) {
-                        MediaSource.this.mOutputFormat.setDimensions(width, height);
-                    } else {
-                        MediaSource.this.mOutputFormat.setDimensions(height, width);
+        this.mFrameShader =
+                "#extension GL_OES_EGL_image_external : require\n"
+                        + "precision mediump float;\n"
+                        + "uniform samplerExternalOES tex_sampler_0;\n"
+                        + "varying vec2 v_texcoord;\n"
+                        + "void main() {\n"
+                        + "  gl_FragColor = texture2D(tex_sampler_0, v_texcoord);\n"
+                        + "}\n";
+        this.onVideoSizeChangedListener =
+                new MediaPlayer.OnVideoSizeChangedListener() { // from class:
+                    // android.filterpacks.videosrc.MediaSource.1
+                    @Override // android.media.MediaPlayer.OnVideoSizeChangedListener
+                    public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
+                        if (MediaSource.this.mLogVerbose) {
+                            Log.v(
+                                    MediaSource.TAG,
+                                    "MediaPlayer sent dimensions: " + width + " x " + height);
+                        }
+                        if (!MediaSource.this.mGotSize) {
+                            if (MediaSource.this.mOrientation == 0
+                                    || MediaSource.this.mOrientation == 180) {
+                                MediaSource.this.mOutputFormat.setDimensions(width, height);
+                            } else {
+                                MediaSource.this.mOutputFormat.setDimensions(height, width);
+                            }
+                            MediaSource.this.mWidth = width;
+                            MediaSource.this.mHeight = height;
+                        } else if (MediaSource.this.mOutputFormat.getWidth() != width
+                                || MediaSource.this.mOutputFormat.getHeight() != height) {
+                            Log.e(MediaSource.TAG, "Multiple video size change events received!");
+                        }
+                        synchronized (MediaSource.this) {
+                            MediaSource.this.mGotSize = true;
+                            MediaSource.this.notify();
+                        }
                     }
-                    MediaSource.this.mWidth = width;
-                    MediaSource.this.mHeight = height;
-                } else if (MediaSource.this.mOutputFormat.getWidth() != width || MediaSource.this.mOutputFormat.getHeight() != height) {
-                    Log.e(MediaSource.TAG, "Multiple video size change events received!");
-                }
-                synchronized (MediaSource.this) {
-                    MediaSource.this.mGotSize = true;
-                    MediaSource.this.notify();
-                }
-            }
-        };
-        this.onPreparedListener = new MediaPlayer.OnPreparedListener() { // from class: android.filterpacks.videosrc.MediaSource.2
-            @Override // android.media.MediaPlayer.OnPreparedListener
-            public void onPrepared(MediaPlayer mp) {
-                if (MediaSource.this.mLogVerbose) {
-                    Log.v(MediaSource.TAG, "MediaPlayer is prepared");
-                }
-                synchronized (MediaSource.this) {
-                    MediaSource.this.mPrepared = true;
-                    MediaSource.this.notify();
-                }
-            }
-        };
-        this.onCompletionListener = new MediaPlayer.OnCompletionListener() { // from class: android.filterpacks.videosrc.MediaSource.3
-            @Override // android.media.MediaPlayer.OnCompletionListener
-            public void onCompletion(MediaPlayer mp) {
-                if (MediaSource.this.mLogVerbose) {
-                    Log.v(MediaSource.TAG, "MediaPlayer has completed playback");
-                }
-                synchronized (MediaSource.this) {
-                    MediaSource.this.mCompleted = true;
-                }
-            }
-        };
-        this.onMediaFrameAvailableListener = new SurfaceTexture.OnFrameAvailableListener() { // from class: android.filterpacks.videosrc.MediaSource.4
-            @Override // android.graphics.SurfaceTexture.OnFrameAvailableListener
-            public void onFrameAvailable(SurfaceTexture surfaceTexture) {
-                if (MediaSource.this.mLogVerbose) {
-                    Log.v(MediaSource.TAG, "New frame from media player");
-                }
-                synchronized (MediaSource.this) {
-                    if (MediaSource.this.mLogVerbose) {
-                        Log.v(MediaSource.TAG, "New frame: notify");
+                };
+        this.onPreparedListener =
+                new MediaPlayer.OnPreparedListener() { // from class:
+                    // android.filterpacks.videosrc.MediaSource.2
+                    @Override // android.media.MediaPlayer.OnPreparedListener
+                    public void onPrepared(MediaPlayer mp) {
+                        if (MediaSource.this.mLogVerbose) {
+                            Log.v(MediaSource.TAG, "MediaPlayer is prepared");
+                        }
+                        synchronized (MediaSource.this) {
+                            MediaSource.this.mPrepared = true;
+                            MediaSource.this.notify();
+                        }
                     }
-                    MediaSource.this.mNewFrameAvailable = true;
-                    MediaSource.this.notify();
-                    if (MediaSource.this.mLogVerbose) {
-                        Log.v(MediaSource.TAG, "New frame: notify done");
+                };
+        this.onCompletionListener =
+                new MediaPlayer.OnCompletionListener() { // from class:
+                    // android.filterpacks.videosrc.MediaSource.3
+                    @Override // android.media.MediaPlayer.OnCompletionListener
+                    public void onCompletion(MediaPlayer mp) {
+                        if (MediaSource.this.mLogVerbose) {
+                            Log.v(MediaSource.TAG, "MediaPlayer has completed playback");
+                        }
+                        synchronized (MediaSource.this) {
+                            MediaSource.this.mCompleted = true;
+                        }
                     }
-                }
-            }
-        };
+                };
+        this.onMediaFrameAvailableListener =
+                new SurfaceTexture.OnFrameAvailableListener() { // from class:
+                    // android.filterpacks.videosrc.MediaSource.4
+                    @Override // android.graphics.SurfaceTexture.OnFrameAvailableListener
+                    public void onFrameAvailable(SurfaceTexture surfaceTexture) {
+                        if (MediaSource.this.mLogVerbose) {
+                            Log.v(MediaSource.TAG, "New frame from media player");
+                        }
+                        synchronized (MediaSource.this) {
+                            if (MediaSource.this.mLogVerbose) {
+                                Log.v(MediaSource.TAG, "New frame: notify");
+                            }
+                            MediaSource.this.mNewFrameAvailable = true;
+                            MediaSource.this.notify();
+                            if (MediaSource.this.mLogVerbose) {
+                                Log.v(MediaSource.TAG, "New frame: notify done");
+                            }
+                        }
+                    }
+                };
         this.mNewFrameAvailable = false;
         this.mLogVerbose = Log.isLoggable(TAG, 2);
     }
@@ -169,7 +207,16 @@ public class MediaSource extends Filter {
         if (this.mLogVerbose) {
             Log.v(TAG, "Preparing MediaSource");
         }
-        this.mFrameExtractor = new ShaderProgram(context, "#extension GL_OES_EGL_image_external : require\nprecision mediump float;\nuniform samplerExternalOES tex_sampler_0;\nvarying vec2 v_texcoord;\nvoid main() {\n  gl_FragColor = texture2D(tex_sampler_0, v_texcoord);\n}\n");
+        this.mFrameExtractor =
+                new ShaderProgram(
+                        context,
+                        "#extension GL_OES_EGL_image_external : require\n"
+                                + "precision mediump float;\n"
+                                + "uniform samplerExternalOES tex_sampler_0;\n"
+                                + "varying vec2 v_texcoord;\n"
+                                + "void main() {\n"
+                                + "  gl_FragColor = texture2D(tex_sampler_0, v_texcoord);\n"
+                                + "}\n");
         this.mFrameExtractor.setSourceRect(0.0f, 1.0f, 1.0f, -1.0f);
         createFormats();
     }
@@ -184,7 +231,8 @@ public class MediaSource extends Filter {
                 Log.v(TAG, "Current source is Asset!");
             }
         }
-        this.mMediaFrame = (GLFrame) context.getFrameManager().newBoundFrame(this.mOutputFormat, 104, 0L);
+        this.mMediaFrame =
+                (GLFrame) context.getFrameManager().newBoundFrame(this.mOutputFormat, 104, 0L);
         this.mSurfaceTexture = new SurfaceTexture(this.mMediaFrame.getTextureId());
         if (!setupMediaPlayer(this.mSelectedIsUrl)) {
             throw new RuntimeException("Error setting up MediaPlayer!");
@@ -280,10 +328,28 @@ public class MediaSource extends Filter {
             }
             if (this.mLogVerbose) {
                 Log.v(TAG, "OrientationHint = " + this.mOrientation);
-                String temp = String.format("SetSourceRegion: %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f", Float.valueOf(sourceCoords[4]), Float.valueOf(sourceCoords[5]), Float.valueOf(sourceCoords[0]), Float.valueOf(sourceCoords[1]), Float.valueOf(sourceCoords[12]), Float.valueOf(sourceCoords[13]), Float.valueOf(sourceCoords[8]), Float.valueOf(sourceCoords[9]));
+                String temp =
+                        String.format(
+                                "SetSourceRegion: %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f",
+                                Float.valueOf(sourceCoords[4]),
+                                Float.valueOf(sourceCoords[5]),
+                                Float.valueOf(sourceCoords[0]),
+                                Float.valueOf(sourceCoords[1]),
+                                Float.valueOf(sourceCoords[12]),
+                                Float.valueOf(sourceCoords[13]),
+                                Float.valueOf(sourceCoords[8]),
+                                Float.valueOf(sourceCoords[9]));
                 Log.v(TAG, temp);
             }
-            this.mFrameExtractor.setSourceRegion(sourceCoords[4], sourceCoords[5], sourceCoords[0], sourceCoords[1], sourceCoords[12], sourceCoords[13], sourceCoords[8], sourceCoords[9]);
+            this.mFrameExtractor.setSourceRegion(
+                    sourceCoords[4],
+                    sourceCoords[5],
+                    sourceCoords[0],
+                    sourceCoords[1],
+                    sourceCoords[12],
+                    sourceCoords[13],
+                    sourceCoords[8],
+                    sourceCoords[9]);
             this.mOrientationUpdated = false;
         }
         Frame output = context.getFrameManager().newFrame(this.mOutputFormat);
@@ -434,13 +500,17 @@ public class MediaSource extends Filter {
                 if (this.mContext == null) {
                     this.mMediaPlayer.setDataSource(this.mSourceUrl);
                 } else {
-                    this.mMediaPlayer.setDataSource(this.mContext, Uri.parse(this.mSourceUrl.toString()));
+                    this.mMediaPlayer.setDataSource(
+                            this.mContext, Uri.parse(this.mSourceUrl.toString()));
                 }
             } else {
                 if (this.mLogVerbose) {
                     Log.v(TAG, "Setting MediaPlayer source to asset " + this.mSourceAsset);
                 }
-                this.mMediaPlayer.setDataSource(this.mSourceAsset.getFileDescriptor(), this.mSourceAsset.getStartOffset(), this.mSourceAsset.getLength());
+                this.mMediaPlayer.setDataSource(
+                        this.mSourceAsset.getFileDescriptor(),
+                        this.mSourceAsset.getStartOffset(),
+                        this.mSourceAsset.getLength());
             }
             this.mMediaPlayer.setLooping(this.mLooping);
             this.mMediaPlayer.setVolume(this.mVolume, this.mVolume);
@@ -459,16 +529,20 @@ public class MediaSource extends Filter {
             this.mMediaPlayer.release();
             this.mMediaPlayer = null;
             if (useUrl) {
-                throw new RuntimeException(String.format("Unable to set MediaPlayer to URL %s!", this.mSourceUrl), e);
+                throw new RuntimeException(
+                        String.format("Unable to set MediaPlayer to URL %s!", this.mSourceUrl), e);
             }
-            throw new RuntimeException(String.format("Unable to set MediaPlayer to asset %s!", this.mSourceAsset), e);
+            throw new RuntimeException(
+                    String.format("Unable to set MediaPlayer to asset %s!", this.mSourceAsset), e);
         } catch (IllegalArgumentException e2) {
             this.mMediaPlayer.release();
             this.mMediaPlayer = null;
             if (useUrl) {
-                throw new RuntimeException(String.format("Unable to set MediaPlayer to URL %s!", this.mSourceUrl), e2);
+                throw new RuntimeException(
+                        String.format("Unable to set MediaPlayer to URL %s!", this.mSourceUrl), e2);
             }
-            throw new RuntimeException(String.format("Unable to set MediaPlayer to asset %s!", this.mSourceAsset), e2);
+            throw new RuntimeException(
+                    String.format("Unable to set MediaPlayer to asset %s!", this.mSourceAsset), e2);
         }
         return true;
     }

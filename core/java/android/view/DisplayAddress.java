@@ -18,19 +18,21 @@ public abstract class DisplayAddress implements Parcelable {
     }
 
     public static final class Physical extends DisplayAddress {
-        public static final Parcelable.Creator<Physical> CREATOR = new Parcelable.Creator<Physical>() { // from class: android.view.DisplayAddress.Physical.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Physical createFromParcel(Parcel in) {
-                return new Physical(in.readLong());
-            }
+        public static final Parcelable.Creator<Physical> CREATOR =
+                new Parcelable.Creator<
+                        Physical>() { // from class: android.view.DisplayAddress.Physical.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Physical createFromParcel(Parcel in) {
+                        return new Physical(in.readLong());
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Physical[] newArray(int size) {
-                return new Physical[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Physical[] newArray(int size) {
+                        return new Physical[size];
+                    }
+                };
         private static final int MODEL_SHIFT = 8;
         private static final long UNKNOWN_MODEL = 0;
         private final long mPhysicalDisplayId;
@@ -52,7 +54,8 @@ public abstract class DisplayAddress implements Parcelable {
         }
 
         public boolean equals(Object other) {
-            return (other instanceof Physical) && this.mPhysicalDisplayId == ((Physical) other).mPhysicalDisplayId;
+            return (other instanceof Physical)
+                    && this.mPhysicalDisplayId == ((Physical) other).mPhysicalDisplayId;
         }
 
         public String toString() {
@@ -93,28 +96,32 @@ public abstract class DisplayAddress implements Parcelable {
             if (port < 0 || port > 255) {
                 throw new IllegalArgumentException("The port should be in the interval [0, 255]");
             }
-            this.mPhysicalDisplayId = Integer.toUnsignedLong(port) | (model == null ? 0L : model.longValue() << 8);
+            this.mPhysicalDisplayId =
+                    Integer.toUnsignedLong(port) | (model == null ? 0L : model.longValue() << 8);
         }
     }
 
     public static final class Network extends DisplayAddress {
-        public static final Parcelable.Creator<Network> CREATOR = new Parcelable.Creator<Network>() { // from class: android.view.DisplayAddress.Network.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Network createFromParcel(Parcel in) {
-                return new Network(in.readString());
-            }
+        public static final Parcelable.Creator<Network> CREATOR =
+                new Parcelable.Creator<
+                        Network>() { // from class: android.view.DisplayAddress.Network.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Network createFromParcel(Parcel in) {
+                        return new Network(in.readString());
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Network[] newArray(int size) {
-                return new Network[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Network[] newArray(int size) {
+                        return new Network[size];
+                    }
+                };
         private final String mMacAddress;
 
         public boolean equals(Object other) {
-            return (other instanceof Network) && this.mMacAddress.equals(((Network) other).mMacAddress);
+            return (other instanceof Network)
+                    && this.mMacAddress.equals(((Network) other).mMacAddress);
         }
 
         public String toString() {

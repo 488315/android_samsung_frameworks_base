@@ -16,9 +16,11 @@ public interface ICoverManager extends IInterface {
 
     void disableCoverManager(boolean z, IBinder iBinder, String str) throws RemoteException;
 
-    boolean disableLcdOffByCover(IBinder iBinder, ComponentName componentName) throws RemoteException;
+    boolean disableLcdOffByCover(IBinder iBinder, ComponentName componentName)
+            throws RemoteException;
 
-    boolean enableLcdOffByCover(IBinder iBinder, ComponentName componentName) throws RemoteException;
+    boolean enableLcdOffByCover(IBinder iBinder, ComponentName componentName)
+            throws RemoteException;
 
     CoverState getCoverState() throws RemoteException;
 
@@ -34,15 +36,19 @@ public interface ICoverManager extends IInterface {
 
     void registerCallback(IBinder iBinder, ComponentName componentName) throws RemoteException;
 
-    void registerListenerCallback(IBinder iBinder, ComponentName componentName, int i) throws RemoteException;
+    void registerListenerCallback(IBinder iBinder, ComponentName componentName, int i)
+            throws RemoteException;
 
-    void registerListenerCallbackForExternal(IBinder iBinder, ComponentName componentName, int i) throws RemoteException;
+    void registerListenerCallbackForExternal(IBinder iBinder, ComponentName componentName, int i)
+            throws RemoteException;
 
-    void registerNfcTouchListenerCallback(int i, IBinder iBinder, ComponentName componentName) throws RemoteException;
+    void registerNfcTouchListenerCallback(int i, IBinder iBinder, ComponentName componentName)
+            throws RemoteException;
 
     void removeLedNotification(Bundle bundle) throws RemoteException;
 
-    boolean requestCoverAuthentication(IBinder iBinder, ComponentName componentName) throws RemoteException;
+    boolean requestCoverAuthentication(IBinder iBinder, ComponentName componentName)
+            throws RemoteException;
 
     void sendDataToCover(int i, byte[] bArr) throws RemoteException;
 
@@ -52,7 +58,8 @@ public interface ICoverManager extends IInterface {
 
     void sendSystemEvent(Bundle bundle) throws RemoteException;
 
-    boolean setFotaInProgress(boolean z, IBinder iBinder, ComponentName componentName) throws RemoteException;
+    boolean setFotaInProgress(boolean z, IBinder iBinder, ComponentName componentName)
+            throws RemoteException;
 
     boolean unregisterCallback(IBinder iBinder) throws RemoteException;
 
@@ -62,12 +69,12 @@ public interface ICoverManager extends IInterface {
 
     public static class Default implements ICoverManager {
         @Override // com.samsung.android.cover.ICoverManager
-        public void registerCallback(IBinder binder, ComponentName component) throws RemoteException {
-        }
+        public void registerCallback(IBinder binder, ComponentName component)
+                throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManager
-        public void registerListenerCallback(IBinder binder, ComponentName component, int type) throws RemoteException {
-        }
+        public void registerListenerCallback(IBinder binder, ComponentName component, int type)
+                throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManager
         public boolean unregisterCallback(IBinder binder) throws RemoteException {
@@ -90,8 +97,8 @@ public interface ICoverManager extends IInterface {
         }
 
         @Override // com.samsung.android.cover.ICoverManager
-        public void disableCoverManager(boolean disable, IBinder token, String pkg) throws RemoteException {
-        }
+        public void disableCoverManager(boolean disable, IBinder token, String pkg)
+                throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManager
         public int getVersion() throws RemoteException {
@@ -99,16 +106,14 @@ public interface ICoverManager extends IInterface {
         }
 
         @Override // com.samsung.android.cover.ICoverManager
-        public void sendDataToCover(int command, byte[] data) throws RemoteException {
-        }
+        public void sendDataToCover(int command, byte[] data) throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManager
-        public void sendPowerKeyToCover() throws RemoteException {
-        }
+        public void sendPowerKeyToCover() throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManager
-        public void registerNfcTouchListenerCallback(int command, IBinder token, ComponentName component) throws RemoteException {
-        }
+        public void registerNfcTouchListenerCallback(
+                int command, IBinder token, ComponentName component) throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManager
         public boolean unregisterNfcTouchListenerCallback(IBinder token) throws RemoteException {
@@ -116,38 +121,39 @@ public interface ICoverManager extends IInterface {
         }
 
         @Override // com.samsung.android.cover.ICoverManager
-        public void sendDataToNfcLedCover(int command, byte[] data) throws RemoteException {
-        }
+        public void sendDataToNfcLedCover(int command, byte[] data) throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManager
-        public void addLedNotification(Bundle data) throws RemoteException {
-        }
+        public void addLedNotification(Bundle data) throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManager
-        public void removeLedNotification(Bundle data) throws RemoteException {
-        }
+        public void removeLedNotification(Bundle data) throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManager
-        public void sendSystemEvent(Bundle data) throws RemoteException {
-        }
+        public void sendSystemEvent(Bundle data) throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManager
-        public boolean disableLcdOffByCover(IBinder binder, ComponentName component) throws RemoteException {
+        public boolean disableLcdOffByCover(IBinder binder, ComponentName component)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.cover.ICoverManager
-        public boolean enableLcdOffByCover(IBinder binder, ComponentName component) throws RemoteException {
+        public boolean enableLcdOffByCover(IBinder binder, ComponentName component)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.cover.ICoverManager
-        public boolean requestCoverAuthentication(IBinder binder, ComponentName component) throws RemoteException {
+        public boolean requestCoverAuthentication(IBinder binder, ComponentName component)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.cover.ICoverManager
-        public boolean setFotaInProgress(boolean inProgress, IBinder binder, ComponentName component) throws RemoteException {
+        public boolean setFotaInProgress(
+                boolean inProgress, IBinder binder, ComponentName component)
+                throws RemoteException {
             return false;
         }
 
@@ -157,8 +163,8 @@ public interface ICoverManager extends IInterface {
         }
 
         @Override // com.samsung.android.cover.ICoverManager
-        public void registerListenerCallbackForExternal(IBinder binder, ComponentName component, int type) throws RemoteException {
-        }
+        public void registerListenerCallbackForExternal(
+                IBinder binder, ComponentName component, int type) throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverManager
         public boolean unregisterCallbackForExternal(IBinder binder) throws RemoteException {
@@ -176,7 +182,7 @@ public interface ICoverManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICoverManager {
+    public abstract static class Stub extends Binder implements ICoverManager {
         static final int TRANSACTION_addLedNotification = 14;
         static final int TRANSACTION_disableCoverManager = 7;
         static final int TRANSACTION_disableLcdOffByCover = 17;
@@ -283,7 +289,8 @@ public interface ICoverManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICoverManager.DESCRIPTOR);
             }
@@ -294,14 +301,16 @@ public interface ICoverManager extends IInterface {
             switch (code) {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
-                    ComponentName _arg1 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg1 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     registerCallback(_arg0, _arg1);
                     reply.writeNoException();
                     return true;
                 case 2:
                     IBinder _arg02 = data.readStrongBinder();
-                    ComponentName _arg12 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg12 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     registerListenerCallback(_arg02, _arg12, _arg2);
@@ -356,7 +365,8 @@ public interface ICoverManager extends IInterface {
                 case 11:
                     int _arg06 = data.readInt();
                     IBinder _arg15 = data.readStrongBinder();
-                    ComponentName _arg23 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg23 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     registerNfcTouchListenerCallback(_arg06, _arg15, _arg23);
                     reply.writeNoException();
@@ -395,7 +405,8 @@ public interface ICoverManager extends IInterface {
                     return true;
                 case 17:
                     IBinder _arg012 = data.readStrongBinder();
-                    ComponentName _arg17 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg17 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result7 = disableLcdOffByCover(_arg012, _arg17);
                     reply.writeNoException();
@@ -403,7 +414,8 @@ public interface ICoverManager extends IInterface {
                     return true;
                 case 18:
                     IBinder _arg013 = data.readStrongBinder();
-                    ComponentName _arg18 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg18 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result8 = enableLcdOffByCover(_arg013, _arg18);
                     reply.writeNoException();
@@ -411,7 +423,8 @@ public interface ICoverManager extends IInterface {
                     return true;
                 case 19:
                     IBinder _arg014 = data.readStrongBinder();
-                    ComponentName _arg19 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg19 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result9 = requestCoverAuthentication(_arg014, _arg19);
                     reply.writeNoException();
@@ -420,7 +433,8 @@ public interface ICoverManager extends IInterface {
                 case 20:
                     boolean _arg015 = data.readBoolean();
                     IBinder _arg110 = data.readStrongBinder();
-                    ComponentName _arg24 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg24 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result10 = setFotaInProgress(_arg015, _arg110, _arg24);
                     reply.writeNoException();
@@ -435,7 +449,8 @@ public interface ICoverManager extends IInterface {
                     return true;
                 case 22:
                     IBinder _arg017 = data.readStrongBinder();
-                    ComponentName _arg111 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg111 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg25 = data.readInt();
                     data.enforceNoDataAvail();
                     registerListenerCallbackForExternal(_arg017, _arg111, _arg25);
@@ -475,7 +490,8 @@ public interface ICoverManager extends IInterface {
             }
 
             @Override // com.samsung.android.cover.ICoverManager
-            public void registerCallback(IBinder binder, ComponentName component) throws RemoteException {
+            public void registerCallback(IBinder binder, ComponentName component)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -491,7 +507,8 @@ public interface ICoverManager extends IInterface {
             }
 
             @Override // com.samsung.android.cover.ICoverManager
-            public void registerListenerCallback(IBinder binder, ComponentName component, int type) throws RemoteException {
+            public void registerListenerCallback(IBinder binder, ComponentName component, int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -573,7 +590,8 @@ public interface ICoverManager extends IInterface {
             }
 
             @Override // com.samsung.android.cover.ICoverManager
-            public void disableCoverManager(boolean disable, IBinder token, String pkg) throws RemoteException {
+            public void disableCoverManager(boolean disable, IBinder token, String pkg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -636,7 +654,8 @@ public interface ICoverManager extends IInterface {
             }
 
             @Override // com.samsung.android.cover.ICoverManager
-            public void registerNfcTouchListenerCallback(int command, IBinder token, ComponentName component) throws RemoteException {
+            public void registerNfcTouchListenerCallback(
+                    int command, IBinder token, ComponentName component) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -653,7 +672,8 @@ public interface ICoverManager extends IInterface {
             }
 
             @Override // com.samsung.android.cover.ICoverManager
-            public boolean unregisterNfcTouchListenerCallback(IBinder token) throws RemoteException {
+            public boolean unregisterNfcTouchListenerCallback(IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -731,7 +751,8 @@ public interface ICoverManager extends IInterface {
             }
 
             @Override // com.samsung.android.cover.ICoverManager
-            public boolean disableLcdOffByCover(IBinder binder, ComponentName component) throws RemoteException {
+            public boolean disableLcdOffByCover(IBinder binder, ComponentName component)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -749,7 +770,8 @@ public interface ICoverManager extends IInterface {
             }
 
             @Override // com.samsung.android.cover.ICoverManager
-            public boolean enableLcdOffByCover(IBinder binder, ComponentName component) throws RemoteException {
+            public boolean enableLcdOffByCover(IBinder binder, ComponentName component)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -767,7 +789,8 @@ public interface ICoverManager extends IInterface {
             }
 
             @Override // com.samsung.android.cover.ICoverManager
-            public boolean requestCoverAuthentication(IBinder binder, ComponentName component) throws RemoteException {
+            public boolean requestCoverAuthentication(IBinder binder, ComponentName component)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -785,7 +808,9 @@ public interface ICoverManager extends IInterface {
             }
 
             @Override // com.samsung.android.cover.ICoverManager
-            public boolean setFotaInProgress(boolean inProgress, IBinder binder, ComponentName component) throws RemoteException {
+            public boolean setFotaInProgress(
+                    boolean inProgress, IBinder binder, ComponentName component)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -821,7 +846,8 @@ public interface ICoverManager extends IInterface {
             }
 
             @Override // com.samsung.android.cover.ICoverManager
-            public void registerListenerCallbackForExternal(IBinder binder, ComponentName component, int type) throws RemoteException {
+            public void registerListenerCallbackForExternal(
+                    IBinder binder, ComponentName component, int type) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

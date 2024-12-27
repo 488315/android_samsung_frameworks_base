@@ -1,6 +1,7 @@
 package com.android.server.permission.jarjar.kotlin.collections;
 
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
@@ -12,8 +13,7 @@ final class EmptyMap implements Map, Serializable {
     public static final EmptyMap INSTANCE = new EmptyMap();
     private static final long serialVersionUID = 8246714829545688274L;
 
-    private EmptyMap() {
-    }
+    private EmptyMap() {}
 
     private final Object readResolve() {
         return INSTANCE;
@@ -21,7 +21,8 @@ final class EmptyMap implements Map, Serializable {
 
     @Override // java.util.Map
     public final void clear() {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.Map
@@ -70,17 +71,20 @@ final class EmptyMap implements Map, Serializable {
 
     @Override // java.util.Map
     public final /* bridge */ /* synthetic */ Object put(Object obj, Object obj2) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.Map
     public final void putAll(Map map) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.Map
     public final Object remove(Object obj) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.Map

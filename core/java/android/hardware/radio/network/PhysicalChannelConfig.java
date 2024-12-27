@@ -4,27 +4,30 @@ import android.hardware.radio.RadioTechnology$$;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class PhysicalChannelConfig implements Parcelable {
-    public static final Parcelable.Creator<PhysicalChannelConfig> CREATOR = new Parcelable.Creator<PhysicalChannelConfig>() { // from class: android.hardware.radio.network.PhysicalChannelConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhysicalChannelConfig createFromParcel(Parcel _aidl_source) {
-            PhysicalChannelConfig _aidl_out = new PhysicalChannelConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<PhysicalChannelConfig> CREATOR =
+            new Parcelable.Creator<PhysicalChannelConfig>() { // from class:
+                // android.hardware.radio.network.PhysicalChannelConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhysicalChannelConfig createFromParcel(Parcel _aidl_source) {
+                    PhysicalChannelConfig _aidl_out = new PhysicalChannelConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhysicalChannelConfig[] newArray(int _aidl_size) {
-            return new PhysicalChannelConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhysicalChannelConfig[] newArray(int _aidl_size) {
+                    return new PhysicalChannelConfig[_aidl_size];
+                }
+            };
     public PhysicalChannelConfigBand band;
     public int[] contextIds;
     public int rat;
@@ -136,7 +139,9 @@ public class PhysicalChannelConfig implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.band = (PhysicalChannelConfigBand) _aidl_parcel.readTypedObject(PhysicalChannelConfigBand.CREATOR);
+                this.band =
+                        (PhysicalChannelConfigBand)
+                                _aidl_parcel.readTypedObject(PhysicalChannelConfigBand.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

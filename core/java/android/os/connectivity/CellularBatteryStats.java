@@ -6,39 +6,57 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.telephony.CellSignalStrength;
 import android.telephony.ModemActivityInfo;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class CellularBatteryStats implements Parcelable {
-    public static final Parcelable.Creator<CellularBatteryStats> CREATOR = new Parcelable.Creator<CellularBatteryStats>() { // from class: android.os.connectivity.CellularBatteryStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellularBatteryStats createFromParcel(Parcel in) {
-            long loggingDurationMs = in.readLong();
-            long kernelActiveTimeMs = in.readLong();
-            long numPacketsTx = in.readLong();
-            long numBytesTx = in.readLong();
-            long numPacketsRx = in.readLong();
-            long numBytesRx = in.readLong();
-            long sleepTimeMs = in.readLong();
-            long idleTimeMs = in.readLong();
-            long rxTimeMs = in.readLong();
-            long energyConsumedMaMs = in.readLong();
-            long[] timeInRatMs = in.createLongArray();
-            long[] timeInRxSignalStrengthLevelMs = in.createLongArray();
-            long[] txTimeMs = in.createLongArray();
-            long monitoredRailChargeConsumedMaMs = in.readLong();
-            return new CellularBatteryStats(loggingDurationMs, kernelActiveTimeMs, numPacketsTx, numBytesTx, numPacketsRx, numBytesRx, sleepTimeMs, idleTimeMs, rxTimeMs, Long.valueOf(energyConsumedMaMs), timeInRatMs, timeInRxSignalStrengthLevelMs, txTimeMs, monitoredRailChargeConsumedMaMs);
-        }
+    public static final Parcelable.Creator<CellularBatteryStats> CREATOR =
+            new Parcelable.Creator<
+                    CellularBatteryStats>() { // from class:
+                                              // android.os.connectivity.CellularBatteryStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellularBatteryStats createFromParcel(Parcel in) {
+                    long loggingDurationMs = in.readLong();
+                    long kernelActiveTimeMs = in.readLong();
+                    long numPacketsTx = in.readLong();
+                    long numBytesTx = in.readLong();
+                    long numPacketsRx = in.readLong();
+                    long numBytesRx = in.readLong();
+                    long sleepTimeMs = in.readLong();
+                    long idleTimeMs = in.readLong();
+                    long rxTimeMs = in.readLong();
+                    long energyConsumedMaMs = in.readLong();
+                    long[] timeInRatMs = in.createLongArray();
+                    long[] timeInRxSignalStrengthLevelMs = in.createLongArray();
+                    long[] txTimeMs = in.createLongArray();
+                    long monitoredRailChargeConsumedMaMs = in.readLong();
+                    return new CellularBatteryStats(
+                            loggingDurationMs,
+                            kernelActiveTimeMs,
+                            numPacketsTx,
+                            numBytesTx,
+                            numPacketsRx,
+                            numBytesRx,
+                            sleepTimeMs,
+                            idleTimeMs,
+                            rxTimeMs,
+                            Long.valueOf(energyConsumedMaMs),
+                            timeInRatMs,
+                            timeInRxSignalStrengthLevelMs,
+                            txTimeMs,
+                            monitoredRailChargeConsumedMaMs);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellularBatteryStats[] newArray(int size) {
-            return new CellularBatteryStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellularBatteryStats[] newArray(int size) {
+                    return new CellularBatteryStats[size];
+                }
+            };
     private final long mEnergyConsumedMaMs;
     private final long mIdleTimeMs;
     private final long mKernelActiveTimeMs;
@@ -54,7 +72,21 @@ public final class CellularBatteryStats implements Parcelable {
     private final long[] mTimeInRxSignalStrengthLevelMs;
     private final long[] mTxTimeMs;
 
-    public CellularBatteryStats(long loggingDurationMs, long kernelActiveTimeMs, long numPacketsTx, long numBytesTx, long numPacketsRx, long numBytesRx, long sleepTimeMs, long idleTimeMs, long rxTimeMs, Long energyConsumedMaMs, long[] timeInRatMs, long[] timeInRxSignalStrengthLevelMs, long[] txTimeMs, long monitoredRailChargeConsumedMaMs) {
+    public CellularBatteryStats(
+            long loggingDurationMs,
+            long kernelActiveTimeMs,
+            long numPacketsTx,
+            long numBytesTx,
+            long numPacketsRx,
+            long numBytesRx,
+            long sleepTimeMs,
+            long idleTimeMs,
+            long rxTimeMs,
+            Long energyConsumedMaMs,
+            long[] timeInRatMs,
+            long[] timeInRxSignalStrengthLevelMs,
+            long[] txTimeMs,
+            long monitoredRailChargeConsumedMaMs) {
         this.mLoggingDurationMs = loggingDurationMs;
         this.mKernelActiveTimeMs = kernelActiveTimeMs;
         this.mNumPacketsTx = numPacketsTx;
@@ -65,9 +97,23 @@ public final class CellularBatteryStats implements Parcelable {
         this.mIdleTimeMs = idleTimeMs;
         this.mRxTimeMs = rxTimeMs;
         this.mEnergyConsumedMaMs = energyConsumedMaMs.longValue();
-        this.mTimeInRatMs = Arrays.copyOfRange(timeInRatMs, 0, Math.min(timeInRatMs.length, BatteryStats.NUM_DATA_CONNECTION_TYPES));
-        this.mTimeInRxSignalStrengthLevelMs = Arrays.copyOfRange(timeInRxSignalStrengthLevelMs, 0, Math.min(timeInRxSignalStrengthLevelMs.length, CellSignalStrength.getNumSignalStrengthLevels()));
-        this.mTxTimeMs = Arrays.copyOfRange(txTimeMs, 0, Math.min(txTimeMs.length, ModemActivityInfo.getNumTxPowerLevels()));
+        this.mTimeInRatMs =
+                Arrays.copyOfRange(
+                        timeInRatMs,
+                        0,
+                        Math.min(timeInRatMs.length, BatteryStats.NUM_DATA_CONNECTION_TYPES));
+        this.mTimeInRxSignalStrengthLevelMs =
+                Arrays.copyOfRange(
+                        timeInRxSignalStrengthLevelMs,
+                        0,
+                        Math.min(
+                                timeInRxSignalStrengthLevelMs.length,
+                                CellSignalStrength.getNumSignalStrengthLevels()));
+        this.mTxTimeMs =
+                Arrays.copyOfRange(
+                        txTimeMs,
+                        0,
+                        Math.min(txTimeMs.length, ModemActivityInfo.getNumTxPowerLevels()));
         this.mMonitoredRailChargeConsumedMaMs = monitoredRailChargeConsumedMaMs;
     }
 
@@ -97,11 +143,41 @@ public final class CellularBatteryStats implements Parcelable {
             return true;
         }
         CellularBatteryStats otherStats = (CellularBatteryStats) other;
-        return this.mLoggingDurationMs == otherStats.mLoggingDurationMs && this.mKernelActiveTimeMs == otherStats.mKernelActiveTimeMs && this.mNumPacketsTx == otherStats.mNumPacketsTx && this.mNumBytesTx == otherStats.mNumBytesTx && this.mNumPacketsRx == otherStats.mNumPacketsRx && this.mNumBytesRx == otherStats.mNumBytesRx && this.mSleepTimeMs == otherStats.mSleepTimeMs && this.mIdleTimeMs == otherStats.mIdleTimeMs && this.mRxTimeMs == otherStats.mRxTimeMs && this.mEnergyConsumedMaMs == otherStats.mEnergyConsumedMaMs && Arrays.equals(this.mTimeInRatMs, otherStats.mTimeInRatMs) && Arrays.equals(this.mTimeInRxSignalStrengthLevelMs, otherStats.mTimeInRxSignalStrengthLevelMs) && Arrays.equals(this.mTxTimeMs, otherStats.mTxTimeMs) && this.mMonitoredRailChargeConsumedMaMs == otherStats.mMonitoredRailChargeConsumedMaMs;
+        return this.mLoggingDurationMs == otherStats.mLoggingDurationMs
+                && this.mKernelActiveTimeMs == otherStats.mKernelActiveTimeMs
+                && this.mNumPacketsTx == otherStats.mNumPacketsTx
+                && this.mNumBytesTx == otherStats.mNumBytesTx
+                && this.mNumPacketsRx == otherStats.mNumPacketsRx
+                && this.mNumBytesRx == otherStats.mNumBytesRx
+                && this.mSleepTimeMs == otherStats.mSleepTimeMs
+                && this.mIdleTimeMs == otherStats.mIdleTimeMs
+                && this.mRxTimeMs == otherStats.mRxTimeMs
+                && this.mEnergyConsumedMaMs == otherStats.mEnergyConsumedMaMs
+                && Arrays.equals(this.mTimeInRatMs, otherStats.mTimeInRatMs)
+                && Arrays.equals(
+                        this.mTimeInRxSignalStrengthLevelMs,
+                        otherStats.mTimeInRxSignalStrengthLevelMs)
+                && Arrays.equals(this.mTxTimeMs, otherStats.mTxTimeMs)
+                && this.mMonitoredRailChargeConsumedMaMs
+                        == otherStats.mMonitoredRailChargeConsumedMaMs;
     }
 
     public int hashCode() {
-        return Objects.hash(Long.valueOf(this.mLoggingDurationMs), Long.valueOf(this.mKernelActiveTimeMs), Long.valueOf(this.mNumPacketsTx), Long.valueOf(this.mNumBytesTx), Long.valueOf(this.mNumPacketsRx), Long.valueOf(this.mNumBytesRx), Long.valueOf(this.mSleepTimeMs), Long.valueOf(this.mIdleTimeMs), Long.valueOf(this.mRxTimeMs), Long.valueOf(this.mEnergyConsumedMaMs), Integer.valueOf(Arrays.hashCode(this.mTimeInRatMs)), Integer.valueOf(Arrays.hashCode(this.mTimeInRxSignalStrengthLevelMs)), Integer.valueOf(Arrays.hashCode(this.mTxTimeMs)), Long.valueOf(this.mMonitoredRailChargeConsumedMaMs));
+        return Objects.hash(
+                Long.valueOf(this.mLoggingDurationMs),
+                Long.valueOf(this.mKernelActiveTimeMs),
+                Long.valueOf(this.mNumPacketsTx),
+                Long.valueOf(this.mNumBytesTx),
+                Long.valueOf(this.mNumPacketsRx),
+                Long.valueOf(this.mNumBytesRx),
+                Long.valueOf(this.mSleepTimeMs),
+                Long.valueOf(this.mIdleTimeMs),
+                Long.valueOf(this.mRxTimeMs),
+                Long.valueOf(this.mEnergyConsumedMaMs),
+                Integer.valueOf(Arrays.hashCode(this.mTimeInRatMs)),
+                Integer.valueOf(Arrays.hashCode(this.mTimeInRxSignalStrengthLevelMs)),
+                Integer.valueOf(Arrays.hashCode(this.mTxTimeMs)),
+                Long.valueOf(this.mMonitoredRailChargeConsumedMaMs));
     }
 
     public long getLoggingDurationMillis() {

@@ -7,19 +7,20 @@ import android.util.proto.ProtoOutputStream;
 
 /* loaded from: classes.dex */
 public class FeatureInfo implements Parcelable {
-    public static final Parcelable.Creator<FeatureInfo> CREATOR = new Parcelable.Creator<FeatureInfo>() { // from class: android.content.pm.FeatureInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FeatureInfo createFromParcel(Parcel source) {
-            return new FeatureInfo(source);
-        }
+    public static final Parcelable.Creator<FeatureInfo> CREATOR =
+            new Parcelable.Creator<FeatureInfo>() { // from class: android.content.pm.FeatureInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FeatureInfo createFromParcel(Parcel source) {
+                    return new FeatureInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FeatureInfo[] newArray(int size) {
-            return new FeatureInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FeatureInfo[] newArray(int size) {
+                    return new FeatureInfo[size];
+                }
+            };
     public static final int FLAG_REQUIRED = 1;
     public static final int GL_ES_VERSION_UNDEFINED = 0;
     public int flags;
@@ -27,8 +28,7 @@ public class FeatureInfo implements Parcelable {
     public int reqGlEsVersion;
     public int version;
 
-    public FeatureInfo() {
-    }
+    public FeatureInfo() {}
 
     public FeatureInfo(FeatureInfo orig) {
         this.name = orig.name;
@@ -39,9 +39,23 @@ public class FeatureInfo implements Parcelable {
 
     public String toString() {
         if (this.name != null) {
-            return "FeatureInfo{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.name + " v=" + this.version + " fl=0x" + Integer.toHexString(this.flags) + "}";
+            return "FeatureInfo{"
+                    + Integer.toHexString(System.identityHashCode(this))
+                    + " "
+                    + this.name
+                    + " v="
+                    + this.version
+                    + " fl=0x"
+                    + Integer.toHexString(this.flags)
+                    + "}";
         }
-        return "FeatureInfo{" + Integer.toHexString(System.identityHashCode(this)) + " glEsVers=" + getGlEsVersion() + " fl=0x" + Integer.toHexString(this.flags) + "}";
+        return "FeatureInfo{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " glEsVers="
+                + getGlEsVersion()
+                + " fl=0x"
+                + Integer.toHexString(this.flags)
+                + "}";
     }
 
     @Override // android.os.Parcelable

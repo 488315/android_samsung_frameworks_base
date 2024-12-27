@@ -26,6 +26,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
@@ -38,6 +39,7 @@ import com.android.server.wm.ActivityTaskManagerService;
 import com.android.server.wm.RecentTasks;
 import com.android.server.wm.WindowManagerGlobalLock;
 import com.android.server.wm.WindowManagerService;
+
 import com.google.android.collect.Lists;
 import com.samsung.android.core.pm.allowlist.BroadcastReceiverListParser;
 import com.samsung.android.core.pm.allowlist.BroadcastReceiverListParserWithScpm;
@@ -48,6 +50,7 @@ import com.samsung.android.server.packagefeature.PackageFeature;
 import com.samsung.android.server.packagefeature.PackageFeatureCallback;
 import com.samsung.android.server.packagefeature.PackageFeatureData;
 import com.samsung.android.server.pm.PmLog;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -87,7 +90,8 @@ public final class ActivityManagerServiceExt {
     public final ActivityManagerService mService;
     public final ArrayList persistentApps;
     public static final String CSC_VERSION = SystemProperties.get("ril.official_cscver", "DUMMY");
-    public static final File PRE_BOOT_CSC_FILE = new File(new File(Environment.getDataDirectory(), "system"), "pre_boot_csc.dat");
+    public static final File PRE_BOOT_CSC_FILE =
+            new File(new File(Environment.getDataDirectory(), "system"), "pre_boot_csc.dat");
     public BroadcastReceiverListParser mParser = new BroadcastReceiverListParserWithScpm();
     public final Map mBroadcastReceiverNotInAllowlist = new ArrayMap();
     public final ArrayList mLongLiveAppByPackages = new ArrayList();
@@ -114,16 +118,22 @@ public final class ActivityManagerServiceExt {
             boolean z;
             switch (this.$r8$classId) {
                 case 0:
-                    ActivityManagerService activityManagerService = ((ActivityManagerServiceExt) this.this$0).mService;
+                    ActivityManagerService activityManagerService =
+                            ((ActivityManagerServiceExt) this.this$0).mService;
                     ActivityManagerService.boostPriorityForLockedSection();
                     synchronized (activityManagerService) {
                         try {
-                            ArrayList arrayList = ((ActivityManagerServiceExt) this.this$0).mDeXKillProcesses;
+                            ArrayList arrayList =
+                                    ((ActivityManagerServiceExt) this.this$0).mDeXKillProcesses;
                             if (arrayList != null) {
                                 int size = arrayList.size();
                                 for (int i = 0; i < size; i++) {
-                                    ActivityManagerServiceExt activityManagerServiceExt = (ActivityManagerServiceExt) this.this$0;
-                                    activityManagerServiceExt.forceKillProcessesForDeXExitLocked((ProcessRecord) activityManagerServiceExt.mDeXKillProcesses.get(i));
+                                    ActivityManagerServiceExt activityManagerServiceExt =
+                                            (ActivityManagerServiceExt) this.this$0;
+                                    activityManagerServiceExt.forceKillProcessesForDeXExitLocked(
+                                            (ProcessRecord)
+                                                    activityManagerServiceExt.mDeXKillProcesses.get(
+                                                            i));
                                 }
                             }
                         } finally {
@@ -147,15 +157,26 @@ public final class ActivityManagerServiceExt {
                             intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
                             intentFilter.addAction("android.intent.action.PACKAGE_REPLACED");
                             intentFilter.addDataScheme("package");
-                            ActivityManagerServiceExt activityManagerServiceExt2 = ActivityManagerServiceExt.this;
-                            activityManagerServiceExt2.mContext.registerReceiverAsUser(metaDataCollector2.mPackageReceiver, UserHandle.ALL, intentFilter, null, activityManagerServiceExt2.mBgHandler);
+                            ActivityManagerServiceExt activityManagerServiceExt2 =
+                                    ActivityManagerServiceExt.this;
+                            activityManagerServiceExt2.mContext.registerReceiverAsUser(
+                                    metaDataCollector2.mPackageReceiver,
+                                    UserHandle.ALL,
+                                    intentFilter,
+                                    null,
+                                    activityManagerServiceExt2.mBgHandler);
                             Slog.v("MetaDataCollector", "begin");
-                            List<PackageInfo> installedPackages = ActivityManagerServiceExt.this.mContext.getPackageManager().getInstalledPackages(128);
+                            List<PackageInfo> installedPackages =
+                                    ActivityManagerServiceExt.this
+                                            .mContext
+                                            .getPackageManager()
+                                            .getInstalledPackages(128);
                             synchronized (metaDataCollector2) {
                                 try {
                                     Iterator<PackageInfo> it = installedPackages.iterator();
                                     while (it.hasNext()) {
-                                        metaDataCollector2.loadMetaDataOnceLocked(it.next().applicationInfo);
+                                        metaDataCollector2.loadMetaDataOnceLocked(
+                                                it.next().applicationInfo);
                                         metaDataCollector2.mLoaded = true;
                                     }
                                     Slog.v("MetaDataCollector", "loadInternal() done.");
@@ -199,7 +220,10 @@ public final class ActivityManagerServiceExt {
             StringBuilder sb = new StringBuilder();
             sb.append(this.packageName);
             sb.append(":");
-            sb.append(this.ref.get() == null ? PackageManagerShellCommandDataLoader.STDIN_PATH : Integer.valueOf(((ProcessRecord) this.ref.get()).mPid));
+            sb.append(
+                    this.ref.get() == null
+                            ? PackageManagerShellCommandDataLoader.STDIN_PATH
+                            : Integer.valueOf(((ProcessRecord) this.ref.get()).mPid));
             return sb.toString();
         }
     }
@@ -207,54 +231,76 @@ public final class ActivityManagerServiceExt {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MetaDataCollector {
         public final Map mBooleanMetaDataMap = new HashMap();
-        public final String[] mBooleanMetaDataKeys = {"com.samsung.android.persistent.downloadable"};
+        public final String[] mBooleanMetaDataKeys = {
+            "com.samsung.android.persistent.downloadable"
+        };
         public final Map mStringMetaDataMap = new HashMap();
-        public final String[] mStringMetaDataKeys = {"com.samsung.android.dex.kill_process_timeout"};
+        public final String[] mStringMetaDataKeys = {
+            "com.samsung.android.dex.kill_process_timeout"
+        };
         public boolean mLoaded = false;
         public final AnonymousClass2 mLoadRunnable = new AnonymousClass2(1, this);
-        public final AnonymousClass2 mPackageReceiver = new BroadcastReceiver() { // from class: com.android.server.am.ActivityManagerServiceExt.MetaDataCollector.2
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context, Intent intent) {
-                Uri data;
-                String action = intent.getAction();
-                Slog.d("MetaDataCollector", "onReceive: begin action=" + action);
-                String str = null;
-                if (("android.intent.action.PACKAGE_ADDED".equals(action) || "android.intent.action.PACKAGE_REMOVED".equals(action) || "android.intent.action.PACKAGE_REPLACED".equals(action)) && (data = intent.getData()) != null) {
-                    str = data.getSchemeSpecificPart();
-                }
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m("onReceive: done pkgName=", str, "MetaDataCollector");
-                if (str == null) {
-                    return;
-                }
-                try {
-                    ApplicationInfo applicationInfo = AppGlobals.getPackageManager().getApplicationInfo(str, 128L, context.getUserId());
-                    synchronized (MetaDataCollector.this) {
-                        MetaDataCollector.this.loadMetaDataOnceLocked(applicationInfo);
-                    }
-                    if (applicationInfo != null) {
-                        ActivityManagerService activityManagerService = ActivityManagerServiceExt.this.mService;
-                        ActivityManagerService.boostPriorityForLockedSection();
-                        synchronized (activityManagerService) {
-                            try {
-                                ProcessRecord processRecordLocked = ActivityManagerServiceExt.this.mService.mProcessList.getProcessRecordLocked(applicationInfo.uid, str);
-                                if (processRecordLocked != null) {
-                                    ActivityManagerServiceExt.this.mService.parseDexKillProcessTimeout(processRecordLocked);
-                                }
-                            } catch (Throwable th) {
-                                ActivityManagerService.resetPriorityAfterLockedSection();
-                                throw th;
-                            }
+        public final AnonymousClass2 mPackageReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.am.ActivityManagerServiceExt.MetaDataCollector.2
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context, Intent intent) {
+                        Uri data;
+                        String action = intent.getAction();
+                        Slog.d("MetaDataCollector", "onReceive: begin action=" + action);
+                        String str = null;
+                        if (("android.intent.action.PACKAGE_ADDED".equals(action)
+                                        || "android.intent.action.PACKAGE_REMOVED".equals(action)
+                                        || "android.intent.action.PACKAGE_REPLACED".equals(action))
+                                && (data = intent.getData()) != null) {
+                            str = data.getSchemeSpecificPart();
                         }
-                        ActivityManagerService.resetPriorityAfterLockedSection();
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                "onReceive: done pkgName=", str, "MetaDataCollector");
+                        if (str == null) {
+                            return;
+                        }
+                        try {
+                            ApplicationInfo applicationInfo =
+                                    AppGlobals.getPackageManager()
+                                            .getApplicationInfo(str, 128L, context.getUserId());
+                            synchronized (MetaDataCollector.this) {
+                                MetaDataCollector.this.loadMetaDataOnceLocked(applicationInfo);
+                            }
+                            if (applicationInfo != null) {
+                                ActivityManagerService activityManagerService =
+                                        ActivityManagerServiceExt.this.mService;
+                                ActivityManagerService.boostPriorityForLockedSection();
+                                synchronized (activityManagerService) {
+                                    try {
+                                        ProcessRecord processRecordLocked =
+                                                ActivityManagerServiceExt.this.mService.mProcessList
+                                                        .getProcessRecordLocked(
+                                                                applicationInfo.uid, str);
+                                        if (processRecordLocked != null) {
+                                            ActivityManagerServiceExt.this.mService
+                                                    .parseDexKillProcessTimeout(
+                                                            processRecordLocked);
+                                        }
+                                    } catch (Throwable th) {
+                                        ActivityManagerService.resetPriorityAfterLockedSection();
+                                        throw th;
+                                    }
+                                }
+                                ActivityManagerService.resetPriorityAfterLockedSection();
+                            }
+                        } catch (RemoteException e) {
+                            Slog.v(
+                                    "MetaDataCollector",
+                                    "getApplicationInfo: failed for " + str + " - " + e,
+                                    e);
+                        }
                     }
-                } catch (RemoteException e) {
-                    Slog.v("MetaDataCollector", "getApplicationInfo: failed for " + str + " - " + e, e);
-                }
-            }
-        };
+                };
 
         /* renamed from: -$$Nest$mhasBooleanMetaData, reason: not valid java name */
-        public static boolean m170$$Nest$mhasBooleanMetaData(MetaDataCollector metaDataCollector, String str, String str2) {
+        public static boolean m170$$Nest$mhasBooleanMetaData(
+                MetaDataCollector metaDataCollector, String str, String str2) {
             boolean z;
             Set set;
             Bundle bundle;
@@ -266,7 +312,12 @@ public final class ActivityManagerServiceExt {
             if (!z) {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    ApplicationInfo applicationInfo = AppGlobals.getPackageManager().getApplicationInfo(str, 128L, ActivityManagerServiceExt.this.mContext.getUserId());
+                    ApplicationInfo applicationInfo =
+                            AppGlobals.getPackageManager()
+                                    .getApplicationInfo(
+                                            str,
+                                            128L,
+                                            ActivityManagerServiceExt.this.mContext.getUserId());
                     if (applicationInfo != null && (bundle = applicationInfo.metaData) != null) {
                         z2 = bundle.getBoolean(str2);
                     }
@@ -294,13 +345,14 @@ public final class ActivityManagerServiceExt {
             if (ActivityManagerServiceExt.this.mService.mSystemReady && z) {
                 return;
             }
-            ActivityManagerServiceExt.this.mBgHandler.removeCallbacks(metaDataCollector.mLoadRunnable);
-            ActivityManagerServiceExt.this.mBgHandler.postDelayed(metaDataCollector.mLoadRunnable, 1000L);
+            ActivityManagerServiceExt.this.mBgHandler.removeCallbacks(
+                    metaDataCollector.mLoadRunnable);
+            ActivityManagerServiceExt.this.mBgHandler.postDelayed(
+                    metaDataCollector.mLoadRunnable, 1000L);
         }
 
         /* JADX WARN: Type inference failed for: r2v9, types: [com.android.server.am.ActivityManagerServiceExt$MetaDataCollector$2] */
-        public MetaDataCollector() {
-        }
+        public MetaDataCollector() {}
 
         public final void loadMetaDataOnceLocked(ApplicationInfo applicationInfo) {
             if (applicationInfo == null) {
@@ -344,46 +396,59 @@ public final class ActivityManagerServiceExt {
     }
 
     static {
-        MAX_LONG_LIVE_APP = CoreRune.FW_DEDICATED_MEMORY ? DynamicHiddenApp.MAX_NEVERKILLEDAPP_NUM : 1;
+        MAX_LONG_LIVE_APP =
+                CoreRune.FW_DEDICATED_MEMORY ? DynamicHiddenApp.MAX_NEVERKILLEDAPP_NUM : 1;
     }
 
-    public ActivityManagerServiceExt(Context context, ActivityManagerService activityManagerService) {
-        PackageFeatureCallback packageFeatureCallback = new PackageFeatureCallback() { // from class: com.android.server.am.ActivityManagerServiceExt.1
-            @Override // com.samsung.android.server.packagefeature.PackageFeatureCallback
-            public final void onPackageFeatureDataChanged(PackageFeatureData packageFeatureData) {
-            }
+    public ActivityManagerServiceExt(
+            Context context, ActivityManagerService activityManagerService) {
+        PackageFeatureCallback packageFeatureCallback =
+                new PackageFeatureCallback() { // from class:
+                                               // com.android.server.am.ActivityManagerServiceExt.1
+                    @Override // com.samsung.android.server.packagefeature.PackageFeatureCallback
+                    public final void onPackageFeatureDataChanged(
+                            PackageFeatureData packageFeatureData) {}
 
-            @Override // com.samsung.android.server.packagefeature.PackageFeatureCallback
-            public final void onUnformattedPackageFeatureFileChanged(String str, Function function) {
-                FileDescriptor fileDescriptor = (FileDescriptor) function.apply(str);
-                if (fileDescriptor == null) {
-                    return;
-                }
-                ActivityManagerService activityManagerService2 = ActivityManagerServiceExt.this.mService;
-                ActivityManagerService.boostPriorityForLockedSection();
-                synchronized (activityManagerService2) {
-                    try {
-                        if (!(ActivityManagerServiceExt.this.mParser instanceof BroadcastReceiverListParserWithScpm)) {
-                            ActivityManagerService.resetPriorityAfterLockedSection();
+                    @Override // com.samsung.android.server.packagefeature.PackageFeatureCallback
+                    public final void onUnformattedPackageFeatureFileChanged(
+                            String str, Function function) {
+                        FileDescriptor fileDescriptor = (FileDescriptor) function.apply(str);
+                        if (fileDescriptor == null) {
                             return;
                         }
-                        BroadcastReceiverListParser updateParserIfNeeded = BroadcastReceiverListParserWithScpm.updateParserIfNeeded(fileDescriptor);
-                        if (updateParserIfNeeded != null) {
-                            ActivityManagerServiceExt.this.mParser = updateParserIfNeeded;
-                            boolean isWorkCompChangedEnabled = updateParserIfNeeded.isWorkCompChangedEnabled();
-                            if (PMRune.PM_WA_WORK_COMP_CHANGED != isWorkCompChangedEnabled) {
-                                PMRune.PM_WA_WORK_COMP_CHANGED = isWorkCompChangedEnabled;
-                                PmLog.logDebugInfoAndLogcat("PM_WA_WORK_COMP_CHANGED change to " + isWorkCompChangedEnabled);
+                        ActivityManagerService activityManagerService2 =
+                                ActivityManagerServiceExt.this.mService;
+                        ActivityManagerService.boostPriorityForLockedSection();
+                        synchronized (activityManagerService2) {
+                            try {
+                                if (!(ActivityManagerServiceExt.this.mParser
+                                        instanceof BroadcastReceiverListParserWithScpm)) {
+                                    ActivityManagerService.resetPriorityAfterLockedSection();
+                                    return;
+                                }
+                                BroadcastReceiverListParser updateParserIfNeeded =
+                                        BroadcastReceiverListParserWithScpm.updateParserIfNeeded(
+                                                fileDescriptor);
+                                if (updateParserIfNeeded != null) {
+                                    ActivityManagerServiceExt.this.mParser = updateParserIfNeeded;
+                                    boolean isWorkCompChangedEnabled =
+                                            updateParserIfNeeded.isWorkCompChangedEnabled();
+                                    if (PMRune.PM_WA_WORK_COMP_CHANGED
+                                            != isWorkCompChangedEnabled) {
+                                        PMRune.PM_WA_WORK_COMP_CHANGED = isWorkCompChangedEnabled;
+                                        PmLog.logDebugInfoAndLogcat(
+                                                "PM_WA_WORK_COMP_CHANGED change to "
+                                                        + isWorkCompChangedEnabled);
+                                    }
+                                }
+                                ActivityManagerService.resetPriorityAfterLockedSection();
+                            } catch (Throwable th) {
+                                ActivityManagerService.resetPriorityAfterLockedSection();
+                                throw th;
                             }
                         }
-                        ActivityManagerService.resetPriorityAfterLockedSection();
-                    } catch (Throwable th) {
-                        ActivityManagerService.resetPriorityAfterLockedSection();
-                        throw th;
                     }
-                }
-            }
-        };
+                };
         HashSet hashSet = new HashSet();
         this.mForceStopReasons = hashSet;
         HashSet hashSet2 = new HashSet();
@@ -394,7 +459,7 @@ public final class ActivityManagerServiceExt {
         this.mDeXKillProcesses = null;
         this.mRelaxedBroadcastActions = null;
         new HashSet();
-        this.persistentApps = Lists.newArrayList(new String[]{Constants.SYSTEMUI_PACKAGE_NAME});
+        this.persistentApps = Lists.newArrayList(new String[] {Constants.SYSTEMUI_PACKAGE_NAME});
         this.mContext = context;
         this.mService = activityManagerService;
         this.mParser.parseAllowList();
@@ -420,7 +485,8 @@ public final class ActivityManagerServiceExt {
         Slog.v("ActivityManagerServiceExt", "ActivityManagerServiceExt :: created");
     }
 
-    public static void updateNeverKill(RemoteCallback remoteCallback, boolean z, String str, int i) {
+    public static void updateNeverKill(
+            RemoteCallback remoteCallback, boolean z, String str, int i) {
         if (i <= 0) {
             return;
         }
@@ -440,8 +506,11 @@ public final class ActivityManagerServiceExt {
     }
 
     public final boolean addLongLivePackageLocked(String str) {
-        Slog.i("ActivityManagerServiceExt", "longLivePackage " + this.mLongLiveAppByPackages + " + " + str);
-        if (this.mLongLiveAppByPackages.contains(str) || this.mLongLiveAppByPackages.size() >= MAX_LONG_LIVE_APP) {
+        Slog.i(
+                "ActivityManagerServiceExt",
+                "longLivePackage " + this.mLongLiveAppByPackages + " + " + str);
+        if (this.mLongLiveAppByPackages.contains(str)
+                || this.mLongLiveAppByPackages.size() >= MAX_LONG_LIVE_APP) {
             return false;
         }
         this.mLongLiveAppByPackages.add(str);
@@ -455,7 +524,8 @@ public final class ActivityManagerServiceExt {
         }
         printWriter.println();
         if (z) {
-            printWriter.println("-------------------------------------------------------------------------------");
+            printWriter.println(
+                    "-------------------------------------------------------------------------------");
         }
         printWriter.println("ACTIVITY MANAGER - LONG LIVE APP");
         printWriter.print("    longLiveAppByPackages: ");
@@ -467,27 +537,40 @@ public final class ActivityManagerServiceExt {
     public final void forceKillProcessesForDeXExitLocked(ProcessRecord processRecord) {
         if (processRecord.mState.mSetProcState > 13) {
             processRecord.mRemoved = true;
-            this.mService.mProcessList.removeProcessLocked(processRecord, false, true, 13, 0, "kill dex related process when exit", true);
-            BootReceiver$$ExternalSyntheticOutline0.m(new StringBuilder("kill dex related process succeeded - "), processRecord.processName, "ActivityManagerServiceExt");
+            this.mService.mProcessList.removeProcessLocked(
+                    processRecord, false, true, 13, 0, "kill dex related process when exit", true);
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("kill dex related process succeeded - "),
+                    processRecord.processName,
+                    "ActivityManagerServiceExt");
         } else {
-            StringBuilder sb = new StringBuilder("kill dex related process failed for procstate - ");
+            StringBuilder sb =
+                    new StringBuilder("kill dex related process failed for procstate - ");
             sb.append(processRecord.processName);
             sb.append(":");
-            DeviceIdleController$$ExternalSyntheticOutline0.m(sb, processRecord.mState.mSetProcState, "ActivityManagerServiceExt");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    sb, processRecord.mState.mSetProcState, "ActivityManagerServiceExt");
         }
     }
 
-    public final boolean forceStopPackageLocked(int i, int i2, int i3, boolean z, boolean z2, String str, String str2) {
+    public final boolean forceStopPackageLocked(
+            int i, int i2, int i3, boolean z, boolean z2, String str, String str2) {
         boolean z3;
-        if (MetaDataCollector.m170$$Nest$mhasBooleanMetaData(this.mMetaDataCollector, str, "com.samsung.android.persistent.downloadable") && ((HashSet) this.mForceStopReasons).contains(str2)) {
-            Slog.v("ActivityManagerServiceExt", "forceStopPackageLocked with revised flags for " + str);
+        if (MetaDataCollector.m170$$Nest$mhasBooleanMetaData(
+                        this.mMetaDataCollector, str, "com.samsung.android.persistent.downloadable")
+                && ((HashSet) this.mForceStopReasons).contains(str2)) {
+            Slog.v(
+                    "ActivityManagerServiceExt",
+                    "forceStopPackageLocked with revised flags for " + str);
             z3 = true;
             boolean z4 = z3;
-            return this.mService.forceStopPackageLocked(str, i, z4, z, true, z4, z2, false, i2, str2, i3);
+            return this.mService.forceStopPackageLocked(
+                    str, i, z4, z, true, z4, z2, false, i2, str2, i3);
         }
         z3 = false;
         boolean z42 = z3;
-        return this.mService.forceStopPackageLocked(str, i, z42, z, true, z42, z2, false, i2, str2, i3);
+        return this.mService.forceStopPackageLocked(
+                str, i, z42, z, true, z42, z2, false, i2, str2, i3);
     }
 
     public final ArrayList getDedicatedProcessesLocked(int i) {
@@ -497,7 +580,8 @@ public final class ActivityManagerServiceExt {
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                RecentTasks.UserToProcMap userToProcMap = activityTaskManagerService.mRecentTasks.mUserToProcs;
+                RecentTasks.UserToProcMap userToProcMap =
+                        activityTaskManagerService.mRecentTasks.mUserToProcs;
                 if (i == -1) {
                     arrayList = new ArrayList();
                     int size = userToProcMap.size();
@@ -529,7 +613,8 @@ public final class ActivityManagerServiceExt {
                 sharedPreferences.getStringSet("LONG_LIVE_BY_PACKAGE", null);
             } catch (ClassCastException unused2) {
                 String string = this.mPref.getString("LONG_LIVE_BY_PACKAGE", null);
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m("migrateTo Set ", string, "ActivityManagerServiceExt");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        "migrateTo Set ", string, "ActivityManagerServiceExt");
                 if (this.mPref == null) {
                     this.mPref = this.mContext.getSharedPreferences("multiwindow.property", 0);
                 }
@@ -553,8 +638,12 @@ public final class ActivityManagerServiceExt {
         }
     }
 
-    public final IntentFilter intentFilterForReceiverAllowlist(IIntentReceiver iIntentReceiver, int i, final IntentFilter intentFilter, String str) {
-        if (intentFilter == null || str == null || iIntentReceiver == null || !((i == 0 || i == -1) && this.mParser.isInRestrictedPackageList(str))) {
+    public final IntentFilter intentFilterForReceiverAllowlist(
+            IIntentReceiver iIntentReceiver, int i, final IntentFilter intentFilter, String str) {
+        if (intentFilter == null
+                || str == null
+                || iIntentReceiver == null
+                || !((i == 0 || i == -1) && this.mParser.isInRestrictedPackageList(str))) {
             return intentFilter;
         }
         ArrayList arrayList = new ArrayList();
@@ -564,7 +653,8 @@ public final class ActivityManagerServiceExt {
         }
         while (actionsIterator.hasNext()) {
             String next = actionsIterator.next();
-            if (this.mParser.getRestricedIntent().contains(next) && !this.mParser.isInAllowList(next, str, intentFilter)) {
+            if (this.mParser.getRestricedIntent().contains(next)
+                    && !this.mParser.isInAllowList(next, str, intentFilter)) {
                 arrayList.add(next);
                 if (((ArrayMap) this.mBroadcastReceiverNotInAllowlist).containsKey(next)) {
                     List list = (List) ((ArrayMap) this.mBroadcastReceiverNotInAllowlist).get(next);
@@ -572,17 +662,23 @@ public final class ActivityManagerServiceExt {
                         list.add(str);
                     }
                 } else {
-                    ((ArrayMap) this.mBroadcastReceiverNotInAllowlist).put(next, PortStatus_1_1$$ExternalSyntheticOutline0.m(str));
+                    ((ArrayMap) this.mBroadcastReceiverNotInAllowlist)
+                            .put(next, PortStatus_1_1$$ExternalSyntheticOutline0.m(str));
                 }
-                Slog.d("ActivityManagerServiceExt", XmlUtils$$ExternalSyntheticOutline0.m("action:", next, " callerPackage:", str, " is not registered!"));
+                Slog.d(
+                        "ActivityManagerServiceExt",
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "action:", next, " callerPackage:", str, " is not registered!"));
             }
         }
-        arrayList.forEach(new Consumer() { // from class: com.android.server.am.ActivityManagerServiceExt$$ExternalSyntheticLambda7
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                intentFilter.removeAction((String) obj);
-            }
-        });
+        arrayList.forEach(
+                new Consumer() { // from class:
+                                 // com.android.server.am.ActivityManagerServiceExt$$ExternalSyntheticLambda7
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        intentFilter.removeAction((String) obj);
+                    }
+                });
         return intentFilter;
     }
 
@@ -624,21 +720,28 @@ public final class ActivityManagerServiceExt {
         }
         String intent2 = intent.toString();
         StringBuilder sb = new StringBuilder();
-        sb.append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(System.currentTimeMillis())));
+        sb.append(
+                new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+                        .format(new Date(System.currentTimeMillis())));
         sb.append(" from=");
         RCPManagerService$$ExternalSyntheticOutline0.m$1(sb, str, " key=", intent2);
         if (this.mDiscardList.size() > 10) {
             this.mDiscardList.remove(0);
         }
         this.mDiscardList.add(sb.toString());
-        Slog.d("ActivityManagerServiceExt", "Too many Broadcast Requested :: This BR will not be sent from=" + str + " intent=" + intent);
+        Slog.d(
+                "ActivityManagerServiceExt",
+                "Too many Broadcast Requested :: This BR will not be sent from="
+                        + str
+                        + " intent="
+                        + intent);
         return true;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:61:0x013b, code lost:
-    
-        if ("force-keep-alive".equals(r9.mAdjType) == false) goto L22;
-     */
+
+       if ("force-keep-alive".equals(r9.mAdjType) == false) goto L22;
+    */
     /* JADX WARN: Removed duplicated region for block: B:45:0x0108 A[Catch: all -> 0x00cf, TryCatch #5 {all -> 0x00cf, blocks: (B:20:0x0085, B:25:0x0143, B:29:0x00a4, B:30:0x00ac, B:32:0x00b2, B:38:0x00d6, B:40:0x00dc, B:43:0x00fa, B:45:0x0108, B:46:0x0110, B:48:0x0114, B:53:0x0120, B:56:0x0128, B:60:0x0132, B:62:0x013d, B:66:0x00ea, B:81:0x014f, B:76:0x01ae, B:84:0x0160, B:86:0x0169, B:88:0x019e), top: B:19:0x0085 }] */
     /* JADX WARN: Removed duplicated region for block: B:48:0x0114 A[Catch: all -> 0x00cf, TryCatch #5 {all -> 0x00cf, blocks: (B:20:0x0085, B:25:0x0143, B:29:0x00a4, B:30:0x00ac, B:32:0x00b2, B:38:0x00d6, B:40:0x00dc, B:43:0x00fa, B:45:0x0108, B:46:0x0110, B:48:0x0114, B:53:0x0120, B:56:0x0128, B:60:0x0132, B:62:0x013d, B:66:0x00ea, B:81:0x014f, B:76:0x01ae, B:84:0x0160, B:86:0x0169, B:88:0x019e), top: B:19:0x0085 }] */
     /* JADX WARN: Removed duplicated region for block: B:49:0x0118  */
@@ -652,7 +755,10 @@ public final class ActivityManagerServiceExt {
             Method dump skipped, instructions count: 470
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.ActivityManagerServiceExt.killAllBackgroundProcessesExcept(int, int, android.os.Bundle):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.ActivityManagerServiceExt.killAllBackgroundProcessesExcept(int,"
+                    + " int, android.os.Bundle):void");
     }
 
     public final void markAsLongLivePackageIfAliveLocked(String str) {
@@ -660,7 +766,9 @@ public final class ActivityManagerServiceExt {
         ActivityManagerService.boostPriorityForProcLockedSection();
         synchronized (activityManagerProcLock) {
             try {
-                this.mService.mProcessList.forEachLruProcessesLOSP(new ActivityManagerServiceExt$$ExternalSyntheticLambda0(this, str, 2), false);
+                this.mService.mProcessList.forEachLruProcessesLOSP(
+                        new ActivityManagerServiceExt$$ExternalSyntheticLambda0(this, str, 2),
+                        false);
             } catch (Throwable th) {
                 ActivityManagerService.resetPriorityAfterProcLockedSection();
                 throw th;
@@ -670,18 +778,23 @@ public final class ActivityManagerServiceExt {
     }
 
     public final boolean removeLongLivePackageLocked(String str) {
-        Slog.i("ActivityManagerServiceExt", "longLivePackage " + this.mLongLiveAppByPackages + " - " + str);
+        Slog.i(
+                "ActivityManagerServiceExt",
+                "longLivePackage " + this.mLongLiveAppByPackages + " - " + str);
         if (!this.mLongLiveAppByPackages.contains(str)) {
             return false;
         }
         this.mLongLiveAppByPackages.remove(str);
         for (int size = this.mLongLiveCallbacks.size() - 1; size >= 0; size--) {
-            LongLiveCallback longLiveCallback = (LongLiveCallback) this.mLongLiveCallbacks.get(size);
+            LongLiveCallback longLiveCallback =
+                    (LongLiveCallback) this.mLongLiveCallbacks.get(size);
             if (str.equals(longLiveCallback.packageName)) {
                 ProcessRecord processRecord = (ProcessRecord) longLiveCallback.ref.get();
                 if (processRecord != null) {
                     processRecord.mDedicated = false;
-                    this.mCb4Process.ifPresent(new ActivityManagerServiceExt$$ExternalSyntheticLambda4(this, longLiveCallback, processRecord, 1));
+                    this.mCb4Process.ifPresent(
+                            new ActivityManagerServiceExt$$ExternalSyntheticLambda4(
+                                    this, longLiveCallback, processRecord, 1));
                 }
                 this.mLongLiveCallbacks.remove(size);
             }
@@ -691,14 +804,21 @@ public final class ActivityManagerServiceExt {
 
     public final void removeLongLivePackageWhenUninstalledLocked(String str) {
         if (this.mLongLiveAppByPackages.contains(str)) {
-            Slog.v("ActivityManagerServiceExt", "Uninstalled:" + this.mLongLiveAppByPackages + PackageManagerShellCommandDataLoader.STDIN_PATH + str);
+            Slog.v(
+                    "ActivityManagerServiceExt",
+                    "Uninstalled:"
+                            + this.mLongLiveAppByPackages
+                            + PackageManagerShellCommandDataLoader.STDIN_PATH
+                            + str);
             this.mLongLiveAppByPackages.remove(str);
             if (this.mLongLiveAppByPackages.size() == 0) {
                 this.mLongLiveCallbacks.clear();
             } else {
                 for (int size = this.mLongLiveCallbacks.size() - 1; size >= 0; size--) {
-                    LongLiveCallback longLiveCallback = (LongLiveCallback) this.mLongLiveCallbacks.get(size);
-                    if (((ProcessRecord) longLiveCallback.ref.get()) == null || str.equals(longLiveCallback.packageName)) {
+                    LongLiveCallback longLiveCallback =
+                            (LongLiveCallback) this.mLongLiveCallbacks.get(size);
+                    if (((ProcessRecord) longLiveCallback.ref.get()) == null
+                            || str.equals(longLiveCallback.packageName)) {
                         this.mLongLiveCallbacks.remove(size);
                     }
                 }
@@ -732,7 +852,9 @@ public final class ActivityManagerServiceExt {
             ProcessRecord processRecord = (ProcessRecord) longLiveCallback.ref.get();
             if (processRecord != null) {
                 processRecord.mDedicated = false;
-                this.mCb4Process.ifPresent(new ActivityManagerServiceExt$$ExternalSyntheticLambda4(this, longLiveCallback, processRecord, 0));
+                this.mCb4Process.ifPresent(
+                        new ActivityManagerServiceExt$$ExternalSyntheticLambda4(
+                                this, longLiveCallback, processRecord, 0));
             }
         }
         this.mLongLiveCallbacks.clear();
@@ -761,7 +883,10 @@ public final class ActivityManagerServiceExt {
             edit.remove("LONG_LIVE_BY_PACKAGE");
             return edit.commit();
         }
-        if (str.equals(this.mLongLiveAppByPackages.isEmpty() ? null : (String) this.mLongLiveAppByPackages.get(0))) {
+        if (str.equals(
+                this.mLongLiveAppByPackages.isEmpty()
+                        ? null
+                        : (String) this.mLongLiveAppByPackages.get(0))) {
             return false;
         }
         restoreAllAdjs();
@@ -786,31 +911,52 @@ public final class ActivityManagerServiceExt {
                     ActivityManagerService.boostPriorityForProcLockedSection();
                     synchronized (activityManagerProcLock) {
                         try {
-                            this.mService.mProcessList.forEachLruProcessesLOSP(new Consumer() { // from class: com.android.server.am.ActivityManagerServiceExt$$ExternalSyntheticLambda2
-                                @Override // java.util.function.Consumer
-                                public final void accept(Object obj2) {
-                                    final ActivityManagerServiceExt activityManagerServiceExt = ActivityManagerServiceExt.this;
-                                    int i2 = intValue;
-                                    final String str2 = str;
-                                    final boolean z2 = z;
-                                    final ProcessRecord processRecord = (ProcessRecord) obj2;
-                                    activityManagerServiceExt.getClass();
-                                    if (i2 == processRecord.userId && processRecord.processName.equals(str2)) {
-                                        processRecord.mDedicated = z2;
-                                        activityManagerServiceExt.mCb4Process.ifPresent(new Consumer() { // from class: com.android.server.am.ActivityManagerServiceExt$$ExternalSyntheticLambda11
-                                            @Override // java.util.function.Consumer
-                                            public final void accept(Object obj3) {
-                                                ActivityManagerServiceExt activityManagerServiceExt2 = ActivityManagerServiceExt.this;
-                                                boolean z3 = z2;
-                                                String str3 = str2;
-                                                ProcessRecord processRecord2 = processRecord;
-                                                activityManagerServiceExt2.getClass();
-                                                ActivityManagerServiceExt.updateNeverKill((RemoteCallback) obj3, z3, str3, processRecord2.mPid);
+                            this.mService.mProcessList.forEachLruProcessesLOSP(
+                                    new Consumer() { // from class:
+                                                     // com.android.server.am.ActivityManagerServiceExt$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj2) {
+                                            final ActivityManagerServiceExt
+                                                    activityManagerServiceExt =
+                                                            ActivityManagerServiceExt.this;
+                                            int i2 = intValue;
+                                            final String str2 = str;
+                                            final boolean z2 = z;
+                                            final ProcessRecord processRecord =
+                                                    (ProcessRecord) obj2;
+                                            activityManagerServiceExt.getClass();
+                                            if (i2 == processRecord.userId
+                                                    && processRecord.processName.equals(str2)) {
+                                                processRecord.mDedicated = z2;
+                                                activityManagerServiceExt.mCb4Process.ifPresent(
+                                                        new Consumer() { // from class:
+                                                                         // com.android.server.am.ActivityManagerServiceExt$$ExternalSyntheticLambda11
+                                                            @Override // java.util.function.Consumer
+                                                            public final void accept(Object obj3) {
+                                                                ActivityManagerServiceExt
+                                                                        activityManagerServiceExt2 =
+                                                                                ActivityManagerServiceExt
+                                                                                        .this;
+                                                                boolean z3 = z2;
+                                                                String str3 = str2;
+                                                                ProcessRecord processRecord2 =
+                                                                        processRecord;
+                                                                activityManagerServiceExt2
+                                                                        .getClass();
+                                                                ActivityManagerServiceExt
+                                                                        .updateNeverKill(
+                                                                                (RemoteCallback)
+                                                                                        obj3,
+                                                                                z3,
+                                                                                str3,
+                                                                                processRecord2
+                                                                                        .mPid);
+                                                            }
+                                                        });
                                             }
-                                        });
-                                    }
-                                }
-                            }, false);
+                                        }
+                                    },
+                                    false);
                         } catch (Throwable th) {
                             ActivityManagerService.resetPriorityAfterProcLockedSection();
                             throw th;

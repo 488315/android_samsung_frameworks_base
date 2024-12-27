@@ -3,6 +3,7 @@ package android.hardware.radio.V1_6;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -20,18 +21,29 @@ public final class EpsQos {
             return false;
         }
         EpsQos other = (EpsQos) otherObject;
-        if (this.qci == other.qci && HidlSupport.deepEquals(this.downlink, other.downlink) && HidlSupport.deepEquals(this.uplink, other.uplink)) {
+        if (this.qci == other.qci
+                && HidlSupport.deepEquals(this.downlink, other.downlink)
+                && HidlSupport.deepEquals(this.uplink, other.uplink)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.qci))), Integer.valueOf(HidlSupport.deepHashCode(this.downlink)), Integer.valueOf(HidlSupport.deepHashCode(this.uplink)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.qci))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.downlink)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.uplink)));
     }
 
     public final String toString() {
-        return "{.qci = " + ((int) this.qci) + ", .downlink = " + this.downlink + ", .uplink = " + this.uplink + "}";
+        return "{.qci = "
+                + ((int) this.qci)
+                + ", .downlink = "
+                + this.downlink
+                + ", .uplink = "
+                + this.uplink
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -43,7 +55,8 @@ public final class EpsQos {
         ArrayList<EpsQos> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 20, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 20, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             EpsQos _hidl_vec_element = new EpsQos();
@@ -53,7 +66,8 @@ public final class EpsQos {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.qci = _hidl_blob.getInt16(0 + _hidl_offset);
         this.downlink.readEmbeddedFromParcel(parcel, _hidl_blob, 4 + _hidl_offset);
         this.uplink.readEmbeddedFromParcel(parcel, _hidl_blob, 12 + _hidl_offset);

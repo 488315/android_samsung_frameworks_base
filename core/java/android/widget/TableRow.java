@@ -13,7 +13,7 @@ import android.view.ViewHierarchyEncoder;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.LinearLayout;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -30,12 +30,14 @@ public class TableRow extends LinearLayout {
 
         @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT)
         public int column;
+
         private int[] mOffset;
 
         @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT)
         public int span;
 
-        public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<LayoutParams> {
+        public final class InspectionCompanion
+                implements android.view.inspector.InspectionCompanion<LayoutParams> {
             private int mLayout_columnId;
             private int mLayout_spanId;
             private boolean mPropertiesMapped = false;
@@ -119,7 +121,8 @@ public class TableRow extends LinearLayout {
             }
         }
 
-        @Override // android.widget.LinearLayout.LayoutParams, android.view.ViewGroup.MarginLayoutParams, android.view.ViewGroup.LayoutParams
+        @Override // android.widget.LinearLayout.LayoutParams,
+                  // android.view.ViewGroup.MarginLayoutParams, android.view.ViewGroup.LayoutParams
         protected void encodeProperties(ViewHierarchyEncoder encoder) {
             super.encodeProperties(encoder);
             encoder.addProperty("layout:column", this.column);
@@ -219,7 +222,13 @@ public class TableRow extends LinearLayout {
     }
 
     @Override // android.widget.LinearLayout
-    void measureChildBeforeLayout(View child, int childIndex, int widthMeasureSpec, int totalWidth, int heightMeasureSpec, int totalHeight) {
+    void measureChildBeforeLayout(
+            View child,
+            int childIndex,
+            int widthMeasureSpec,
+            int totalWidth,
+            int heightMeasureSpec,
+            int totalHeight) {
         if (this.mConstrainedColumnWidths != null) {
             LayoutParams lp = (LayoutParams) child.getLayoutParams();
             int measureMode = 1073741824;
@@ -234,8 +243,19 @@ public class TableRow extends LinearLayout {
             if (isHorizontalGravity) {
                 measureMode = Integer.MIN_VALUE;
             }
-            int childWidthMeasureSpec = View.MeasureSpec.makeMeasureSpec(Math.max(0, (columnWidth - lp.leftMargin) - lp.rightMargin), measureMode);
-            int childHeightMeasureSpec = getChildMeasureSpec(heightMeasureSpec, this.mPaddingTop + this.mPaddingBottom + lp.topMargin + lp.bottomMargin + totalHeight, lp.height);
+            int childWidthMeasureSpec =
+                    View.MeasureSpec.makeMeasureSpec(
+                            Math.max(0, (columnWidth - lp.leftMargin) - lp.rightMargin),
+                            measureMode);
+            int childHeightMeasureSpec =
+                    getChildMeasureSpec(
+                            heightMeasureSpec,
+                            this.mPaddingTop
+                                    + this.mPaddingBottom
+                                    + lp.topMargin
+                                    + lp.bottomMargin
+                                    + totalHeight,
+                            lp.height);
             child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
             if (isHorizontalGravity) {
                 int childWidth = child.getMeasuredWidth();
@@ -256,7 +276,8 @@ public class TableRow extends LinearLayout {
             iArr[0] = 0;
             return;
         }
-        super.measureChildBeforeLayout(child, childIndex, widthMeasureSpec, totalWidth, heightMeasureSpec, totalHeight);
+        super.measureChildBeforeLayout(
+                child, childIndex, widthMeasureSpec, totalWidth, heightMeasureSpec, totalHeight);
     }
 
     @Override // android.widget.LinearLayout
@@ -292,14 +313,19 @@ public class TableRow extends LinearLayout {
                             spec = getChildMeasureSpec(widthMeasureSpec, 0, -2);
                             break;
                         case -1:
-                            spec = View.MeasureSpec.makeSafeMeasureSpec(View.MeasureSpec.getSize(heightMeasureSpec), 0);
+                            spec =
+                                    View.MeasureSpec.makeSafeMeasureSpec(
+                                            View.MeasureSpec.getSize(heightMeasureSpec), 0);
                             break;
                         default:
                             spec = View.MeasureSpec.makeMeasureSpec(layoutParams.width, 1073741824);
                             break;
                     }
                     child.measure(spec, spec);
-                    int width = child.getMeasuredWidth() + layoutParams.leftMargin + layoutParams.rightMargin;
+                    int width =
+                            child.getMeasuredWidth()
+                                    + layoutParams.leftMargin
+                                    + layoutParams.rightMargin;
                     columnWidths[i] = width;
                 } else {
                     columnWidths[i] = 0;
@@ -348,8 +374,7 @@ public class TableRow extends LinearLayout {
     private class ChildrenTracker implements ViewGroup.OnHierarchyChangeListener {
         private ViewGroup.OnHierarchyChangeListener listener;
 
-        private ChildrenTracker() {
-        }
+        private ChildrenTracker() {}
 
         /* JADX INFO: Access modifiers changed from: private */
         public void setOnHierarchyChangeListener(ViewGroup.OnHierarchyChangeListener listener) {

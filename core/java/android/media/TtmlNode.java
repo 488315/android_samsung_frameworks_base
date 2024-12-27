@@ -15,7 +15,14 @@ class TtmlNode {
     public final long mStartTimeMs;
     public final String mText;
 
-    public TtmlNode(String name, String attributes, String text, long startTimeMs, long endTimeMs, TtmlNode parent, long runId) {
+    public TtmlNode(
+            String name,
+            String attributes,
+            String text,
+            long startTimeMs,
+            long endTimeMs,
+            TtmlNode parent,
+            long runId) {
         this.mName = name;
         this.mAttributes = attributes;
         this.mText = text;

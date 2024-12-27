@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public final class InstanceId implements Parcelable {
-    public static final Parcelable.Creator<InstanceId> CREATOR = new Parcelable.Creator<InstanceId>() { // from class: com.android.internal.logging.InstanceId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstanceId createFromParcel(Parcel in) {
-            return new InstanceId(in);
-        }
+    public static final Parcelable.Creator<InstanceId> CREATOR =
+            new Parcelable.Creator<
+                    InstanceId>() { // from class: com.android.internal.logging.InstanceId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstanceId createFromParcel(Parcel in) {
+                    return new InstanceId(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstanceId[] newArray(int size) {
-            return new InstanceId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstanceId[] newArray(int size) {
+                    return new InstanceId[size];
+                }
+            };
     static final int INSTANCE_ID_MAX = 1048576;
     private final int mId;
 

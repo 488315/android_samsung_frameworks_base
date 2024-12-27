@@ -1,6 +1,5 @@
 package android.net;
 
-import android.net.IpMemoryStoreClient;
 import android.net.ipmemorystore.OnBlobRetrievedListener;
 import android.net.ipmemorystore.OnL2KeyResponseListener;
 import android.net.ipmemorystore.OnNetworkAttributesRetrievedListener;
@@ -8,7 +7,8 @@ import android.net.ipmemorystore.OnSameL3NetworkResponseListener;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class IpMemoryStoreClient$$ExternalSyntheticLambda5 implements IpMemoryStoreClient.ThrowingRunnable {
+public final /* synthetic */ class IpMemoryStoreClient$$ExternalSyntheticLambda5
+        implements IpMemoryStoreClient.ThrowingRunnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -32,7 +32,8 @@ public final /* synthetic */ class IpMemoryStoreClient$$ExternalSyntheticLambda5
                 IpMemoryStoreClient.lambda$findL2Key$8((OnL2KeyResponseListener) obj);
                 break;
             case 3:
-                IpMemoryStoreClient.lambda$retrieveNetworkAttributes$14((OnNetworkAttributesRetrievedListener) obj);
+                IpMemoryStoreClient.lambda$retrieveNetworkAttributes$14(
+                        (OnNetworkAttributesRetrievedListener) obj);
                 break;
             default:
                 IpMemoryStoreClient.lambda$retrieveBlob$17((OnBlobRetrievedListener) obj);

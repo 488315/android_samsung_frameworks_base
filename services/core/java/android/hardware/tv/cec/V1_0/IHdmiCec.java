@@ -12,7 +12,9 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.server.hdmi.HdmiCecController;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -26,7 +28,9 @@ public interface IHdmiCec extends IBase {
 
         @Override // android.hardware.tv.cec.V1_0.IHdmiCec
         public final int addLogicalAddress(int i) {
-            HwParcel m = ITunerSession$Proxy$$ExternalSyntheticOutline0.m(i, "android.hardware.tv.cec@1.0::IHdmiCec");
+            HwParcel m =
+                    ITunerSession$Proxy$$ExternalSyntheticOutline0.m(
+                            i, "android.hardware.tv.cec@1.0::IHdmiCec");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(1, m, hwParcel, 0);
@@ -45,7 +49,9 @@ public interface IHdmiCec extends IBase {
 
         @Override // android.hardware.tv.cec.V1_0.IHdmiCec
         public final void clearLogicalAddress() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.tv.cec@1.0::IHdmiCec");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.tv.cec@1.0::IHdmiCec");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(2, m, hwParcel, 0);
@@ -58,7 +64,9 @@ public interface IHdmiCec extends IBase {
 
         @Override // android.hidl.base.V1_0.IBase
         public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -91,7 +99,9 @@ public interface IHdmiCec extends IBase {
 
         @Override // android.hardware.tv.cec.V1_0.IHdmiCec
         public final int getCecVersion() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.tv.cec@1.0::IHdmiCec");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.tv.cec@1.0::IHdmiCec");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(6, m, hwParcel, 0);
@@ -130,7 +140,8 @@ public interface IHdmiCec extends IBase {
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -144,8 +155,11 @@ public interface IHdmiCec extends IBase {
         }
 
         @Override // android.hardware.tv.cec.V1_0.IHdmiCec
-        public final void getPhysicalAddress(getPhysicalAddressCallback getphysicaladdresscallback) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.tv.cec@1.0::IHdmiCec");
+        public final void getPhysicalAddress(
+                getPhysicalAddressCallback getphysicaladdresscallback) {
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.tv.cec@1.0::IHdmiCec");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(3, m, hwParcel, 0);
@@ -159,7 +173,9 @@ public interface IHdmiCec extends IBase {
 
         @Override // android.hardware.tv.cec.V1_0.IHdmiCec
         public final ArrayList getPortInfo() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.tv.cec@1.0::IHdmiCec");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.tv.cec@1.0::IHdmiCec");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(8, m, hwParcel, 0);
@@ -173,7 +189,9 @@ public interface IHdmiCec extends IBase {
 
         @Override // android.hardware.tv.cec.V1_0.IHdmiCec
         public final int getVendorId() {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.tv.cec@1.0::IHdmiCec");
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            "android.hardware.tv.cec@1.0::IHdmiCec");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(7, m, hwParcel, 0);
@@ -219,7 +237,9 @@ public interface IHdmiCec extends IBase {
 
         @Override // android.hardware.tv.cec.V1_0.IHdmiCec
         public final boolean isConnected(int i) {
-            HwParcel m = ITunerSession$Proxy$$ExternalSyntheticOutline0.m(i, "android.hardware.tv.cec@1.0::IHdmiCec");
+            HwParcel m =
+                    ITunerSession$Proxy$$ExternalSyntheticOutline0.m(
+                            i, "android.hardware.tv.cec@1.0::IHdmiCec");
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(12, m, hwParcel, 0);
@@ -355,11 +375,13 @@ public interface IHdmiCec extends IBase {
     }
 
     static IHdmiCec getService() {
-        IHwBinder service = HwBinder.getService("android.hardware.tv.cec@1.0::IHdmiCec", "default", true);
+        IHwBinder service =
+                HwBinder.getService("android.hardware.tv.cec@1.0::IHdmiCec", "default", true);
         if (service == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = service.queryLocalInterface("android.hardware.tv.cec@1.0::IHdmiCec");
+        IHwInterface queryLocalInterface =
+                service.queryLocalInterface("android.hardware.tv.cec@1.0::IHdmiCec");
         if (queryLocalInterface != null && (queryLocalInterface instanceof IHdmiCec)) {
             return (IHdmiCec) queryLocalInterface;
         }

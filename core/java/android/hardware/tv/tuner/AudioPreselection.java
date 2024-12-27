@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AudioPreselection implements Parcelable {
-    public static final Parcelable.Creator<AudioPreselection> CREATOR = new Parcelable.Creator<AudioPreselection>() { // from class: android.hardware.tv.tuner.AudioPreselection.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPreselection createFromParcel(Parcel _aidl_source) {
-            AudioPreselection _aidl_out = new AudioPreselection();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioPreselection> CREATOR =
+            new Parcelable.Creator<AudioPreselection>() { // from class:
+                // android.hardware.tv.tuner.AudioPreselection.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPreselection createFromParcel(Parcel _aidl_source) {
+                    AudioPreselection _aidl_out = new AudioPreselection();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPreselection[] newArray(int _aidl_size) {
-            return new AudioPreselection[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPreselection[] newArray(int _aidl_size) {
+                    return new AudioPreselection[_aidl_size];
+                }
+            };
     public AudioPreselectionLabel[] labels;
     public String language;
     public int renderingIndication;
@@ -73,7 +75,9 @@ public class AudioPreselection implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.labels = (AudioPreselectionLabel[]) _aidl_parcel.createTypedArray(AudioPreselectionLabel.CREATOR);
+            this.labels =
+                    (AudioPreselectionLabel[])
+                            _aidl_parcel.createTypedArray(AudioPreselectionLabel.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

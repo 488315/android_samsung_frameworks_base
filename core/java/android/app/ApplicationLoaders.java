@@ -8,9 +8,13 @@ import android.os.Trace;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.NtpTrustedTime;
+
 import com.android.internal.os.ClassLoaderFactory;
-import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
+
 import dalvik.system.PathClassLoader;
+
+import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,25 +32,94 @@ public class ApplicationLoaders {
         return gApplicationLoaders;
     }
 
-    ClassLoader getClassLoader(String zip, int targetSdkVersion, boolean isBundled, String librarySearchPath, String libraryPermittedPath, ClassLoader parent, String classLoaderName) {
-        return getClassLoaderWithSharedLibraries(zip, targetSdkVersion, isBundled, librarySearchPath, libraryPermittedPath, parent, classLoaderName, null, null, null);
+    ClassLoader getClassLoader(
+            String zip,
+            int targetSdkVersion,
+            boolean isBundled,
+            String librarySearchPath,
+            String libraryPermittedPath,
+            ClassLoader parent,
+            String classLoaderName) {
+        return getClassLoaderWithSharedLibraries(
+                zip,
+                targetSdkVersion,
+                isBundled,
+                librarySearchPath,
+                libraryPermittedPath,
+                parent,
+                classLoaderName,
+                null,
+                null,
+                null);
     }
 
-    ClassLoader getClassLoaderWithSharedLibraries(String zip, int targetSdkVersion, boolean isBundled, String librarySearchPath, String libraryPermittedPath, ClassLoader parent, String classLoaderName, List<ClassLoader> sharedLibraries, List<String> nativeSharedLibraries, List<ClassLoader> sharedLibrariesLoadedAfterApp) {
-        return getClassLoader(zip, targetSdkVersion, isBundled, librarySearchPath, libraryPermittedPath, parent, zip, classLoaderName, sharedLibraries, nativeSharedLibraries, sharedLibrariesLoadedAfterApp);
+    ClassLoader getClassLoaderWithSharedLibraries(
+            String zip,
+            int targetSdkVersion,
+            boolean isBundled,
+            String librarySearchPath,
+            String libraryPermittedPath,
+            ClassLoader parent,
+            String classLoaderName,
+            List<ClassLoader> sharedLibraries,
+            List<String> nativeSharedLibraries,
+            List<ClassLoader> sharedLibrariesLoadedAfterApp) {
+        return getClassLoader(
+                zip,
+                targetSdkVersion,
+                isBundled,
+                librarySearchPath,
+                libraryPermittedPath,
+                parent,
+                zip,
+                classLoaderName,
+                sharedLibraries,
+                nativeSharedLibraries,
+                sharedLibrariesLoadedAfterApp);
     }
 
-    ClassLoader getSharedLibraryClassLoaderWithSharedLibraries(String zip, int targetSdkVersion, boolean isBundled, String librarySearchPath, String libraryPermittedPath, ClassLoader parent, String classLoaderName, List<ClassLoader> sharedLibraries, List<ClassLoader> sharedLibrariesAfter) {
-        ClassLoader loader = getCachedNonBootclasspathSystemLib(zip, parent, classLoaderName, sharedLibraries);
+    ClassLoader getSharedLibraryClassLoaderWithSharedLibraries(
+            String zip,
+            int targetSdkVersion,
+            boolean isBundled,
+            String librarySearchPath,
+            String libraryPermittedPath,
+            ClassLoader parent,
+            String classLoaderName,
+            List<ClassLoader> sharedLibraries,
+            List<ClassLoader> sharedLibrariesAfter) {
+        ClassLoader loader =
+                getCachedNonBootclasspathSystemLib(zip, parent, classLoaderName, sharedLibraries);
         if (loader != null) {
             return loader;
         }
         List<String> nativeSharedLibraries = new ArrayList<>();
         nativeSharedLibraries.add(SemInputDeviceManager.MOTION_CONTROL_TYPE_ALL);
-        return getClassLoaderWithSharedLibraries(zip, targetSdkVersion, isBundled, librarySearchPath, libraryPermittedPath, parent, classLoaderName, sharedLibraries, nativeSharedLibraries, sharedLibrariesAfter);
+        return getClassLoaderWithSharedLibraries(
+                zip,
+                targetSdkVersion,
+                isBundled,
+                librarySearchPath,
+                libraryPermittedPath,
+                parent,
+                classLoaderName,
+                sharedLibraries,
+                nativeSharedLibraries,
+                sharedLibrariesAfter);
     }
 
-    private ClassLoader getClassLoader(String zip, int targetSdkVersion, boolean isBundled, String librarySearchPath, String libraryPermittedPath, ClassLoader parent, String cacheKey, String classLoaderName, List<ClassLoader> sharedLibraries, List<String> nativeSharedLibraries, List<ClassLoader> sharedLibrariesLoadedAfterApp) {
+    private ClassLoader getClassLoader(
+            String zip,
+            int targetSdkVersion,
+            boolean isBundled,
+            String librarySearchPath,
+            String libraryPermittedPath,
+            ClassLoader parent,
+            String cacheKey,
+            String classLoaderName,
+            List<ClassLoader> sharedLibraries,
+            List<String> nativeSharedLibraries,
+            List<ClassLoader> sharedLibrariesLoadedAfterApp) {
         ClassLoader parent2;
         ClassLoader baseParent = ClassLoader.getSystemClassLoader().getParent();
         synchronized (this.mLoaders) {
@@ -65,10 +138,23 @@ public class ApplicationLoaders {
                     if (loader == null) {
                         Trace.traceBegin(64L, zip);
                         try {
-                            ClassLoader classloader = ClassLoaderFactory.createClassLoader(zip, librarySearchPath, libraryPermittedPath, parent2, targetSdkVersion, isBundled, classLoaderName, sharedLibraries, nativeSharedLibraries, sharedLibrariesLoadedAfterApp);
+                            ClassLoader classloader =
+                                    ClassLoaderFactory.createClassLoader(
+                                            zip,
+                                            librarySearchPath,
+                                            libraryPermittedPath,
+                                            parent2,
+                                            targetSdkVersion,
+                                            isBundled,
+                                            classLoaderName,
+                                            sharedLibraries,
+                                            nativeSharedLibraries,
+                                            sharedLibrariesLoadedAfterApp);
                             Trace.traceEnd(64L);
                             Trace.traceBegin(64L, "setLayerPaths");
-                            GraphicsEnvironment.getInstance().setLayerPaths(classloader, librarySearchPath, libraryPermittedPath);
+                            GraphicsEnvironment.getInstance()
+                                    .setLayerPaths(
+                                            classloader, librarySearchPath, libraryPermittedPath);
                             Trace.traceEnd(64L);
                             if (cacheKey != null) {
                                 this.mLoaders.put(cacheKey, classloader);
@@ -90,7 +176,9 @@ public class ApplicationLoaders {
                 throw th;
             }
             Trace.traceBegin(64L, zip);
-            ClassLoader loader2 = ClassLoaderFactory.createClassLoader(zip, null, parent2, classLoaderName, sharedLibraries, null);
+            ClassLoader loader2 =
+                    ClassLoaderFactory.createClassLoader(
+                            zip, null, parent2, classLoaderName, sharedLibraries, null);
             Trace.traceEnd(64L);
             return loader2;
         }
@@ -118,13 +206,29 @@ public class ApplicationLoaders {
                 String dependencyPath = dependency.getPath();
                 CachedClassLoader cached = this.mSystemLibsCacheMap.get(dependencyPath);
                 if (cached == null) {
-                    throw new IllegalStateException("Failed to find dependency " + dependencyPath + " of cachedlibrary " + path);
+                    throw new IllegalStateException(
+                            "Failed to find dependency "
+                                    + dependencyPath
+                                    + " of cachedlibrary "
+                                    + path);
                 }
                 sharedLibraries2.add(cached.loader);
             }
             sharedLibraries = sharedLibraries2;
         }
-        ClassLoader classLoader = getClassLoader(path, Build.VERSION.SDK_INT, true, null, null, null, null, null, sharedLibraries, null, null);
+        ClassLoader classLoader =
+                getClassLoader(
+                        path,
+                        Build.VERSION.SDK_INT,
+                        true,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        sharedLibraries,
+                        null,
+                        null);
         if (classLoader == null) {
             throw new IllegalStateException("Failed to cache " + path);
         }
@@ -142,21 +246,48 @@ public class ApplicationLoaders {
         return lhs.equals(rhs);
     }
 
-    public ClassLoader getCachedNonBootclasspathSystemLib(String zip, ClassLoader parent, String classLoaderName, List<ClassLoader> sharedLibraries) {
+    public ClassLoader getCachedNonBootclasspathSystemLib(
+            String zip,
+            ClassLoader parent,
+            String classLoaderName,
+            List<ClassLoader> sharedLibraries) {
         CachedClassLoader cached;
-        if (this.mSystemLibsCacheMap == null || parent != null || classLoaderName != null || (cached = this.mSystemLibsCacheMap.get(zip)) == null) {
+        if (this.mSystemLibsCacheMap == null
+                || parent != null
+                || classLoaderName != null
+                || (cached = this.mSystemLibsCacheMap.get(zip)) == null) {
             return null;
         }
         if (!sharedLibrariesEquals(sharedLibraries, cached.sharedLibraries)) {
-            Log.w(TAG, "Unexpected environment loading cached library " + zip + " (real|cached): (" + sharedLibraries + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + cached.sharedLibraries + NavigationBarInflaterView.KEY_CODE_END);
+            Log.w(
+                    TAG,
+                    "Unexpected environment loading cached library "
+                            + zip
+                            + " (real|cached): ("
+                            + sharedLibraries
+                            + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                            + cached.sharedLibraries
+                            + NavigationBarInflaterView.KEY_CODE_END);
             return null;
         }
         Log.d(TAG, "Returning zygote-cached class loader: " + zip);
         return cached.loader;
     }
 
-    public ClassLoader createAndCacheWebViewClassLoader(String packagePath, String libsPath, String cacheKey) {
-        return getClassLoader(packagePath, Build.VERSION.SDK_INT, false, libsPath, null, null, cacheKey, null, null, null, null);
+    public ClassLoader createAndCacheWebViewClassLoader(
+            String packagePath, String libsPath, String cacheKey) {
+        return getClassLoader(
+                packagePath,
+                Build.VERSION.SDK_INT,
+                false,
+                libsPath,
+                null,
+                null,
+                cacheKey,
+                null,
+                null,
+                null,
+                null);
     }
 
     void addPath(ClassLoader classLoader, String dexPath) {
@@ -179,7 +310,6 @@ public class ApplicationLoaders {
         ClassLoader loader;
         List<ClassLoader> sharedLibraries;
 
-        private CachedClassLoader() {
-        }
+        private CachedClassLoader() {}
     }
 }

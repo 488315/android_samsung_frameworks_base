@@ -11,6 +11,7 @@ import android.os.Messenger;
 import android.os.ParcelFileDescriptor;
 import android.tracing.TraceReportParams;
 import android.util.Log;
+
 import java.io.IOException;
 import java.util.UUID;
 
@@ -40,8 +41,7 @@ public class TraceReportService extends Service {
         }
     }
 
-    public void onReportTrace(TraceParams args) {
-    }
+    public void onReportTrace(TraceParams args) {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public boolean onMessage(Message msg) {
@@ -67,14 +67,20 @@ public class TraceReportService extends Service {
     @Override // android.app.Service
     public final IBinder onBind(Intent intent) {
         if (this.mMessenger == null) {
-            this.mMessenger = new Messenger(new Handler(Looper.getMainLooper(), new Handler.Callback() { // from class: android.service.tracing.TraceReportService$$ExternalSyntheticLambda0
-                @Override // android.os.Handler.Callback
-                public final boolean handleMessage(Message message) {
-                    boolean onMessage;
-                    onMessage = TraceReportService.this.onMessage(message);
-                    return onMessage;
-                }
-            }));
+            this.mMessenger =
+                    new Messenger(
+                            new Handler(
+                                    Looper.getMainLooper(),
+                                    new Handler
+                                            .Callback() { // from class:
+                                                          // android.service.tracing.TraceReportService$$ExternalSyntheticLambda0
+                                        @Override // android.os.Handler.Callback
+                                        public final boolean handleMessage(Message message) {
+                                            boolean onMessage;
+                                            onMessage = TraceReportService.this.onMessage(message);
+                                            return onMessage;
+                                        }
+                                    }));
         }
         return this.mMessenger.getBinder();
     }

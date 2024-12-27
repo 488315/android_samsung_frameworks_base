@@ -5,7 +5,8 @@ import android.net.Uri;
 /* loaded from: classes6.dex */
 public final class Contract {
     public static final String AUTHORITY = "com.samsung.android.knox.analytics.provider";
-    public static final Uri CONTENT_URI = Uri.parse("content://com.samsung.android.knox.analytics.provider");
+    public static final Uri CONTENT_URI =
+            Uri.parse("content://com.samsung.android.knox.analytics.provider");
     public static final String[] DEFAULT_SIZE = {String.valueOf(1000)};
     public static final int SIZE = 1000;
 
@@ -20,7 +21,8 @@ public final class Contract {
     }
 
     public static class CompressedEvents {
-        public static final String METHOD_PERFORM_COMPRESSED_EVENTS_TRANSACTION = "performCompressedEventsTransaction";
+        public static final String METHOD_PERFORM_COMPRESSED_EVENTS_TRANSACTION =
+                "performCompressedEventsTransaction";
         public static final String PATH = "compressed_events";
         public static final Uri CONTENT_URI = Uri.withAppendedPath(Contract.CONTENT_URI, PATH);
 
@@ -83,7 +85,8 @@ public final class Contract {
         public static class Selection {
             public static final String CHUNK_SIZE = "chunk_size";
             public static final String DELETE_BY_SIZE = "deleteChunkBySize";
-            public static final String DELETE_BY_SIZE_ONLY_EVENTS = "deleteChunkBySizeOnlyPlainEvents";
+            public static final String DELETE_BY_SIZE_ONLY_EVENTS =
+                    "deleteChunkBySizeOnlyPlainEvents";
             public static final String DELETE_UNTIL_TARGET_DB_SIZE = "deleteUntilTargetDbSize";
             public static final String DELETE_UP_TO_ID = "deleteUpToId";
         }

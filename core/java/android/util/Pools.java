@@ -9,8 +9,7 @@ public final class Pools {
         boolean release(T t);
     }
 
-    private Pools() {
-    }
+    private Pools() {}
 
     public static class SimplePool<T> implements Pool<T> {
         private final Object[] mPool;

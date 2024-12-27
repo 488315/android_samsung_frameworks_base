@@ -1,6 +1,7 @@
 package com.android.security;
 
 import com.android.internal.util.ArrayUtils;
+
 import java.math.BigInteger;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
@@ -24,6 +25,7 @@ import java.security.spec.ECPublicKeySpec;
 import java.security.spec.EllipticCurve;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
+
 import javax.crypto.AEADBadTagException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -63,7 +65,7 @@ public abstract class SecureBox {
             ENCRYPT = aesGcmOperation;
             AesGcmOperation aesGcmOperation2 = new AesGcmOperation("DECRYPT", 1);
             DECRYPT = aesGcmOperation2;
-            $VALUES = new AesGcmOperation[]{aesGcmOperation, aesGcmOperation2};
+            $VALUES = new AesGcmOperation[] {aesGcmOperation, aesGcmOperation2};
         }
 
         public static AesGcmOperation valueOf(String str) {
@@ -79,22 +81,44 @@ public abstract class SecureBox {
         byte[] bArr = {2, 0};
         VERSION = bArr;
         Charset charset = StandardCharsets.UTF_8;
-        HKDF_SALT = ArrayUtils.concat(new byte[][]{"SECUREBOX".getBytes(charset), bArr});
+        HKDF_SALT = ArrayUtils.concat(new byte[][] {"SECUREBOX".getBytes(charset), bArr});
         HKDF_INFO_WITH_PUBLIC_KEY = "P256 HKDF-SHA-256 AES-128-GCM".getBytes(charset);
         HKDF_INFO_WITHOUT_PUBLIC_KEY = "SHARED HKDF-SHA-256 AES-128-GCM".getBytes(charset);
-        CONSTANT_01 = new byte[]{1};
+        CONSTANT_01 = new byte[] {1};
         EMPTY_BYTE_ARRAY = new byte[0];
         BIG_INT_02 = BigInteger.valueOf(2L);
-        BigInteger bigInteger = new BigInteger("ffffffff00000001000000000000000000000000ffffffffffffffffffffffff", 16);
+        BigInteger bigInteger =
+                new BigInteger(
+                        "ffffffff00000001000000000000000000000000ffffffffffffffffffffffff", 16);
         EC_PARAM_P = bigInteger;
         BigInteger subtract = bigInteger.subtract(new BigInteger("3"));
         EC_PARAM_A = subtract;
-        BigInteger bigInteger2 = new BigInteger("5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b", 16);
+        BigInteger bigInteger2 =
+                new BigInteger(
+                        "5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b", 16);
         EC_PARAM_B = bigInteger2;
-        EC_PARAM_SPEC = new ECParameterSpec(new EllipticCurve(new ECFieldFp(bigInteger), subtract, bigInteger2), new ECPoint(new BigInteger("6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c296", 16), new BigInteger("4fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5", 16)), new BigInteger("ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551", 16), 1);
+        EC_PARAM_SPEC =
+                new ECParameterSpec(
+                        new EllipticCurve(new ECFieldFp(bigInteger), subtract, bigInteger2),
+                        new ECPoint(
+                                new BigInteger(
+                                        "6b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c296",
+                                        16),
+                                new BigInteger(
+                                        "4fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+                                        16)),
+                        new BigInteger(
+                                "ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+                                16),
+                        1);
     }
 
-    public static byte[] aesGcmInternal(AesGcmOperation aesGcmOperation, SecretKey secretKey, byte[] bArr, byte[] bArr2, byte[] bArr3) {
+    public static byte[] aesGcmInternal(
+            AesGcmOperation aesGcmOperation,
+            SecretKey secretKey,
+            byte[] bArr,
+            byte[] bArr2,
+            byte[] bArr3) {
         try {
             Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
             GCMParameterSpec gCMParameterSpec = new GCMParameterSpec(128, bArr);
@@ -143,18 +167,37 @@ public abstract class SecureBox {
             bArr4 = HKDF_INFO_WITHOUT_PUBLIC_KEY;
         } else {
             byte[] readEncryptedPayload = readEncryptedPayload(wrap, 65);
-            BigInteger bigInteger = new BigInteger(1, Arrays.copyOfRange(readEncryptedPayload, 1, 33));
-            BigInteger bigInteger2 = new BigInteger(1, Arrays.copyOfRange(readEncryptedPayload, 33, 65));
+            BigInteger bigInteger =
+                    new BigInteger(1, Arrays.copyOfRange(readEncryptedPayload, 1, 33));
+            BigInteger bigInteger2 =
+                    new BigInteger(1, Arrays.copyOfRange(readEncryptedPayload, 33, 65));
             BigInteger bigInteger3 = EC_PARAM_P;
-            if (bigInteger.compareTo(bigInteger3) >= 0 || bigInteger2.compareTo(bigInteger3) >= 0 || bigInteger.signum() == -1 || bigInteger2.signum() == -1) {
+            if (bigInteger.compareTo(bigInteger3) >= 0
+                    || bigInteger2.compareTo(bigInteger3) >= 0
+                    || bigInteger.signum() == -1
+                    || bigInteger2.signum() == -1) {
                 throw new InvalidKeyException("Point lies outside of the expected curve");
             }
             BigInteger bigInteger4 = BIG_INT_02;
-            if (!bigInteger2.modPow(bigInteger4, bigInteger3).equals(bigInteger.modPow(bigInteger4, bigInteger3).add(EC_PARAM_A).mod(bigInteger3).multiply(bigInteger).add(EC_PARAM_B).mod(bigInteger3))) {
+            if (!bigInteger2
+                    .modPow(bigInteger4, bigInteger3)
+                    .equals(
+                            bigInteger
+                                    .modPow(bigInteger4, bigInteger3)
+                                    .add(EC_PARAM_A)
+                                    .mod(bigInteger3)
+                                    .multiply(bigInteger)
+                                    .add(EC_PARAM_B)
+                                    .mod(bigInteger3))) {
                 throw new InvalidKeyException("Point lies outside of the expected curve");
             }
             try {
-                PublicKey generatePublic = KeyFactory.getInstance("EC").generatePublic(new ECPublicKeySpec(new ECPoint(bigInteger, bigInteger2), EC_PARAM_SPEC));
+                PublicKey generatePublic =
+                        KeyFactory.getInstance("EC")
+                                .generatePublic(
+                                        new ECPublicKeySpec(
+                                                new ECPoint(bigInteger, bigInteger2),
+                                                EC_PARAM_SPEC));
                 KeyAgreement keyAgreement = KeyAgreement.getInstance("ECDH");
                 try {
                     keyAgreement.init(privateKey);
@@ -170,7 +213,12 @@ public abstract class SecureBox {
         }
         byte[] readEncryptedPayload2 = readEncryptedPayload(wrap, 12);
         byte[] readEncryptedPayload3 = readEncryptedPayload(wrap, wrap.remaining());
-        return aesGcmInternal(AesGcmOperation.DECRYPT, hkdfDeriveKey(ArrayUtils.concat(new byte[][]{bArr5, bArr}), HKDF_SALT, bArr4), readEncryptedPayload2, readEncryptedPayload3, bArr2);
+        return aesGcmInternal(
+                AesGcmOperation.DECRYPT,
+                hkdfDeriveKey(ArrayUtils.concat(new byte[][] {bArr5, bArr}), HKDF_SALT, bArr4),
+                readEncryptedPayload2,
+                readEncryptedPayload3,
+                bArr2);
     }
 
     public static byte[] encodePublicKey(PublicKey publicKey) {
@@ -221,9 +269,23 @@ public abstract class SecureBox {
         byte[] bArr6 = new byte[12];
         new SecureRandom().nextBytes(bArr6);
         try {
-            byte[] aesGcmInternal = aesGcmInternal(AesGcmOperation.ENCRYPT, hkdfDeriveKey(ArrayUtils.concat(new byte[][]{bArr5, bArr}), HKDF_SALT, bArr4), bArr6, bArr3, bArr2);
+            byte[] aesGcmInternal =
+                    aesGcmInternal(
+                            AesGcmOperation.ENCRYPT,
+                            hkdfDeriveKey(
+                                    ArrayUtils.concat(new byte[][] {bArr5, bArr}),
+                                    HKDF_SALT,
+                                    bArr4),
+                            bArr6,
+                            bArr3,
+                            bArr2);
             byte[] bArr7 = VERSION;
-            return keyPair == null ? ArrayUtils.concat(new byte[][]{bArr7, bArr6, aesGcmInternal}) : ArrayUtils.concat(new byte[][]{bArr7, encodePublicKey(keyPair.getPublic()), bArr6, aesGcmInternal});
+            return keyPair == null
+                    ? ArrayUtils.concat(new byte[][] {bArr7, bArr6, aesGcmInternal})
+                    : ArrayUtils.concat(
+                            new byte[][] {
+                                bArr7, encodePublicKey(keyPair.getPublic()), bArr6, aesGcmInternal
+                            });
         } catch (AEADBadTagException e2) {
             throw new RuntimeException(e2);
         }

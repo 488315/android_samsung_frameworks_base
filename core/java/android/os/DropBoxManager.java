@@ -1,10 +1,10 @@
 package android.os;
 
 import android.content.Context;
-import android.os.ParcelFileDescriptor;
-import android.os.Parcelable;
 import android.util.Log;
+
 import com.android.internal.os.IDropBoxManagerService;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.Closeable;
@@ -18,7 +18,8 @@ import java.util.zip.GZIPInputStream;
 
 /* loaded from: classes3.dex */
 public class DropBoxManager {
-    public static final String ACTION_DROPBOX_ENTRY_ADDED = "android.intent.action.DROPBOX_ENTRY_ADDED";
+    public static final String ACTION_DROPBOX_ENTRY_ADDED =
+            "android.intent.action.DROPBOX_ENTRY_ADDED";
     public static final String EXTRA_DROPPED_COUNT = "android.os.extra.DROPPED_COUNT";
     public static final String EXTRA_TAG = "tag";
     public static final String EXTRA_TIME = "time";
@@ -31,28 +32,29 @@ public class DropBoxManager {
     private final IDropBoxManagerService mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Flags {
-    }
+    public @interface Flags {}
 
     public static class Entry implements Parcelable, Closeable {
-        public static final Parcelable.Creator<Entry> CREATOR = new Parcelable.Creator() { // from class: android.os.DropBoxManager.Entry.1
-            @Override // android.os.Parcelable.Creator
-            public Entry[] newArray(int size) {
-                return new Entry[size];
-            }
+        public static final Parcelable.Creator<Entry> CREATOR =
+                new Parcelable.Creator() { // from class: android.os.DropBoxManager.Entry.1
+                    @Override // android.os.Parcelable.Creator
+                    public Entry[] newArray(int size) {
+                        return new Entry[size];
+                    }
 
-            @Override // android.os.Parcelable.Creator
-            public Entry createFromParcel(Parcel in) {
-                String tag = in.readString();
-                long millis = in.readLong();
-                int flags = in.readInt();
-                if ((flags & 8) != 0) {
-                    return new Entry(tag, millis, in.createByteArray(), flags & (-9));
-                }
-                ParcelFileDescriptor pfd = ParcelFileDescriptor.CREATOR.createFromParcel(in);
-                return new Entry(tag, millis, pfd, flags);
-            }
-        };
+                    @Override // android.os.Parcelable.Creator
+                    public Entry createFromParcel(Parcel in) {
+                        String tag = in.readString();
+                        long millis = in.readLong();
+                        int flags = in.readInt();
+                        if ((flags & 8) != 0) {
+                            return new Entry(tag, millis, in.createByteArray(), flags & (-9));
+                        }
+                        ParcelFileDescriptor pfd =
+                                ParcelFileDescriptor.CREATOR.createFromParcel(in);
+                        return new Entry(tag, millis, pfd, flags);
+                    }
+                };
         private final byte[] mData;
         private final ParcelFileDescriptor mFileDescriptor;
         private final int mFlags;
@@ -257,7 +259,8 @@ public class DropBoxManager {
         try {
             this.mService.addData(tag, data, flags);
         } catch (RemoteException e) {
-            if ((e instanceof TransactionTooLargeException) && this.mContext.getApplicationInfo().targetSdkVersion < 24) {
+            if ((e instanceof TransactionTooLargeException)
+                    && this.mContext.getApplicationInfo().targetSdkVersion < 24) {
                 Log.e(TAG, "App sent too much data, so it was ignored", e);
                 return;
             }
@@ -293,7 +296,8 @@ public class DropBoxManager {
 
     public Entry getNextEntry(String tag, long msec) {
         try {
-            return this.mService.getNextEntryWithAttribution(tag, msec, this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+            return this.mService.getNextEntryWithAttribution(
+                    tag, msec, this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         } catch (SecurityException e2) {

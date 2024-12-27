@@ -2,7 +2,9 @@ package android.util;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.knox.analytics.database.Contract;
+
 import java.util.Arrays;
 
 /* loaded from: classes4.dex */
@@ -13,7 +15,9 @@ public class IntArray implements Cloneable {
 
     private IntArray(int[] array, int size) {
         this.mValues = array;
-        this.mSize = Preconditions.checkArgumentInRange(size, 0, array.length, Contract.DatabaseSize.PATH);
+        this.mSize =
+                Preconditions.checkArgumentInRange(
+                        size, 0, array.length, Contract.DatabaseSize.PATH);
     }
 
     public IntArray() {

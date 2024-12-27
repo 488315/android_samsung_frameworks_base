@@ -3,31 +3,40 @@ package android.credentials.selection;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes.dex */
 public final class GetCredentialProviderData extends ProviderData implements Parcelable {
-    public static final Parcelable.Creator<GetCredentialProviderData> CREATOR = new Parcelable.Creator<GetCredentialProviderData>() { // from class: android.credentials.selection.GetCredentialProviderData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetCredentialProviderData createFromParcel(Parcel in) {
-            return new GetCredentialProviderData(in);
-        }
+    public static final Parcelable.Creator<GetCredentialProviderData> CREATOR =
+            new Parcelable.Creator<GetCredentialProviderData>() { // from class:
+                // android.credentials.selection.GetCredentialProviderData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetCredentialProviderData createFromParcel(Parcel in) {
+                    return new GetCredentialProviderData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetCredentialProviderData[] newArray(int size) {
-            return new GetCredentialProviderData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetCredentialProviderData[] newArray(int size) {
+                    return new GetCredentialProviderData[size];
+                }
+            };
     private final List<Entry> mActionChips;
     private final List<AuthenticationEntry> mAuthenticationEntries;
     private final List<Entry> mCredentialEntries;
     private final Entry mRemoteEntry;
 
-    public GetCredentialProviderData(String providerFlattenedComponentName, List<Entry> credentialEntries, List<Entry> actionChips, List<AuthenticationEntry> authenticationEntries, Entry remoteEntry) {
+    public GetCredentialProviderData(
+            String providerFlattenedComponentName,
+            List<Entry> credentialEntries,
+            List<Entry> actionChips,
+            List<AuthenticationEntry> authenticationEntries,
+            Entry remoteEntry) {
         super(providerFlattenedComponentName);
         this.mCredentialEntries = new ArrayList(credentialEntries);
         this.mActionChips = new ArrayList(actionChips);
@@ -36,7 +45,12 @@ public final class GetCredentialProviderData extends ProviderData implements Par
     }
 
     public GetCredentialProviderInfo toGetCredentialProviderInfo() {
-        return new GetCredentialProviderInfo(getProviderFlattenedComponentName(), this.mCredentialEntries, this.mActionChips, this.mAuthenticationEntries, this.mRemoteEntry);
+        return new GetCredentialProviderInfo(
+                getProviderFlattenedComponentName(),
+                this.mCredentialEntries,
+                this.mActionChips,
+                this.mAuthenticationEntries,
+                this.mRemoteEntry);
     }
 
     public List<Entry> getCredentialEntries() {
@@ -60,15 +74,20 @@ public final class GetCredentialProviderData extends ProviderData implements Par
         ArrayList arrayList = new ArrayList();
         in.readTypedList(arrayList, Entry.CREATOR);
         this.mCredentialEntries = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCredentialEntries);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCredentialEntries);
         ArrayList arrayList2 = new ArrayList();
         in.readTypedList(arrayList2, Entry.CREATOR);
         this.mActionChips = arrayList2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mActionChips);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mActionChips);
         ArrayList arrayList3 = new ArrayList();
         in.readTypedList(arrayList3, AuthenticationEntry.CREATOR);
         this.mAuthenticationEntries = arrayList3;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAuthenticationEntries);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mAuthenticationEntries);
         Entry remoteEntry = (Entry) in.readTypedObject(Entry.CREATOR);
         this.mRemoteEntry = remoteEntry;
     }
@@ -119,7 +138,12 @@ public final class GetCredentialProviderData extends ProviderData implements Par
         }
 
         public GetCredentialProviderData build() {
-            return new GetCredentialProviderData(this.mProviderFlattenedComponentName, this.mCredentialEntries, this.mActionChips, this.mAuthenticationEntries, this.mRemoteEntry);
+            return new GetCredentialProviderData(
+                    this.mProviderFlattenedComponentName,
+                    this.mCredentialEntries,
+                    this.mActionChips,
+                    this.mAuthenticationEntries,
+                    this.mRemoteEntry);
         }
     }
 }

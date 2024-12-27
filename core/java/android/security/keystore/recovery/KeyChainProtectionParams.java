@@ -3,6 +3,7 @@ package android.security.keystore.recovery;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -11,19 +12,22 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class KeyChainProtectionParams implements Parcelable {
-    public static final Parcelable.Creator<KeyChainProtectionParams> CREATOR = new Parcelable.Creator<KeyChainProtectionParams>() { // from class: android.security.keystore.recovery.KeyChainProtectionParams.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyChainProtectionParams createFromParcel(Parcel in) {
-            return new KeyChainProtectionParams(in);
-        }
+    public static final Parcelable.Creator<KeyChainProtectionParams> CREATOR =
+            new Parcelable.Creator<
+                    KeyChainProtectionParams>() { // from class:
+                                                  // android.security.keystore.recovery.KeyChainProtectionParams.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyChainProtectionParams createFromParcel(Parcel in) {
+                    return new KeyChainProtectionParams(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyChainProtectionParams[] newArray(int length) {
-            return new KeyChainProtectionParams[length];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyChainProtectionParams[] newArray(int length) {
+                    return new KeyChainProtectionParams[length];
+                }
+            };
     public static final int TYPE_LOCKSCREEN = 100;
     public static final int UI_FORMAT_PASSWORD = 2;
     public static final int UI_FORMAT_PATTERN = 3;
@@ -34,15 +38,12 @@ public final class KeyChainProtectionParams implements Parcelable {
     private Integer mUserSecretType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LockScreenUiFormat {
-    }
+    public @interface LockScreenUiFormat {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UserSecretType {
-    }
+    public @interface UserSecretType {}
 
-    private KeyChainProtectionParams() {
-    }
+    private KeyChainProtectionParams() {}
 
     public int getUserSecretType() {
         return this.mUserSecretType.intValue();
@@ -111,7 +112,8 @@ public final class KeyChainProtectionParams implements Parcelable {
     protected KeyChainProtectionParams(Parcel in) {
         this.mUserSecretType = Integer.valueOf(in.readInt());
         this.mLockScreenUiFormat = Integer.valueOf(in.readInt());
-        this.mKeyDerivationParams = (KeyDerivationParams) in.readTypedObject(KeyDerivationParams.CREATOR);
+        this.mKeyDerivationParams =
+                (KeyDerivationParams) in.readTypedObject(KeyDerivationParams.CREATOR);
         this.mSecret = in.createByteArray();
     }
 

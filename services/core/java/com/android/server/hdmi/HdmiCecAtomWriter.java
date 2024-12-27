@@ -15,7 +15,13 @@ public class HdmiCecAtomWriter {
     }
 
     public static void earcStatusChanged(int i, int i2, int i3, boolean z, boolean z2) {
-        FrameworkStatsLog.write(701, z, z2, i != 0 ? i != 1 ? i != 2 ? i != 3 ? 0 : 4 : 3 : 2 : 1, i2 != 0 ? i2 != 1 ? i2 != 2 ? i2 != 3 ? 0 : 4 : 3 : 2 : 1, i3);
+        FrameworkStatsLog.write(
+                701,
+                z,
+                z2,
+                i != 0 ? i != 1 ? i != 2 ? i != 3 ? 0 : 4 : 3 : 2 : 1,
+                i2 != 0 ? i2 != 1 ? i2 != 2 ? i2 != 3 ? 0 : 4 : 3 : 2 : 1,
+                i3);
     }
 
     public final void messageReported(HdmiCecMessage hdmiCecMessage, int i, int i2, int i3) {
@@ -36,7 +42,16 @@ public class HdmiCecAtomWriter {
         } else {
             if (i6 != 68) {
                 messageReportedSpecialArgs2 = new MessageReportedSpecialArgs();
-                writeHdmiCecMessageReportedAtom(i2, i, i5, hdmiCecMessage.mDestination, i6, i4, messageReportedSpecialArgs2.mUserControlPressedCommand, messageReportedSpecialArgs2.mFeatureAbortOpcode, messageReportedSpecialArgs2.mFeatureAbortReason);
+                writeHdmiCecMessageReportedAtom(
+                        i2,
+                        i,
+                        i5,
+                        hdmiCecMessage.mDestination,
+                        i6,
+                        i4,
+                        messageReportedSpecialArgs2.mUserControlPressedCommand,
+                        messageReportedSpecialArgs2.mFeatureAbortOpcode,
+                        messageReportedSpecialArgs2.mFeatureAbortReason);
             }
             messageReportedSpecialArgs = new MessageReportedSpecialArgs();
             if (bArr.length > 0) {
@@ -49,10 +64,20 @@ public class HdmiCecAtomWriter {
             }
         }
         messageReportedSpecialArgs2 = messageReportedSpecialArgs;
-        writeHdmiCecMessageReportedAtom(i2, i, i5, hdmiCecMessage.mDestination, i6, i4, messageReportedSpecialArgs2.mUserControlPressedCommand, messageReportedSpecialArgs2.mFeatureAbortOpcode, messageReportedSpecialArgs2.mFeatureAbortReason);
+        writeHdmiCecMessageReportedAtom(
+                i2,
+                i,
+                i5,
+                hdmiCecMessage.mDestination,
+                i6,
+                i4,
+                messageReportedSpecialArgs2.mUserControlPressedCommand,
+                messageReportedSpecialArgs2.mFeatureAbortOpcode,
+                messageReportedSpecialArgs2.mFeatureAbortReason);
     }
 
-    public void writeHdmiCecMessageReportedAtom(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9) {
+    public void writeHdmiCecMessageReportedAtom(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9) {
         FrameworkStatsLog.write(310, i, i2, i3, i4, i5, i6, i7, i8, i9);
     }
 }

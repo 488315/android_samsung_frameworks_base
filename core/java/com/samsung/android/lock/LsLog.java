@@ -3,6 +3,7 @@ package com.samsung.android.lock;
 import android.content.Context;
 import android.util.Log;
 import android.util.SparseIntArray;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes6.dex */
@@ -12,8 +13,7 @@ public final class LsLog {
     private static int mSecurityDebugLevel = 0;
     private static final SparseIntArray mFailureCount = new SparseIntArray();
 
-    private LsLog() {
-    }
+    private LsLog() {}
 
     public static void enroll(String msg) {
         enroll(msg, false);

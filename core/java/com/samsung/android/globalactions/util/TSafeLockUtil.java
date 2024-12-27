@@ -31,7 +31,8 @@ public class TSafeLockUtil {
         } catch (PackageManager.NameNotFoundException e) {
         }
         if (ret.booleanValue()) {
-            if (Settings.System.getInt(this.mContext.getContentResolver(), OFF_MENU_SETTING, 0) == 1) {
+            if (Settings.System.getInt(this.mContext.getContentResolver(), OFF_MENU_SETTING, 0)
+                    == 1) {
                 z2 = true;
             }
             ret = Boolean.valueOf(z2);

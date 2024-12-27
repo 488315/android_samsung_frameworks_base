@@ -4,24 +4,27 @@ package android.os;
 public interface IExternalVibratorService extends IInterface {
     public static final String DESCRIPTOR = "android.os.IExternalVibratorService";
 
-    ExternalVibrationScale onExternalVibrationStart(ExternalVibration externalVibration) throws RemoteException;
+    ExternalVibrationScale onExternalVibrationStart(ExternalVibration externalVibration)
+            throws RemoteException;
 
     void onExternalVibrationStop(ExternalVibration externalVibration) throws RemoteException;
 
-    boolean shouldIgnoreExternalVibrationLocked(int i, int i2, int i3, int i4) throws RemoteException;
+    boolean shouldIgnoreExternalVibrationLocked(int i, int i2, int i3, int i4)
+            throws RemoteException;
 
     public static class Default implements IExternalVibratorService {
         @Override // android.os.IExternalVibratorService
-        public ExternalVibrationScale onExternalVibrationStart(ExternalVibration vib) throws RemoteException {
+        public ExternalVibrationScale onExternalVibrationStart(ExternalVibration vib)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IExternalVibratorService
-        public void onExternalVibrationStop(ExternalVibration vib) throws RemoteException {
-        }
+        public void onExternalVibrationStop(ExternalVibration vib) throws RemoteException {}
 
         @Override // android.os.IExternalVibratorService
-        public boolean shouldIgnoreExternalVibrationLocked(int content_type, int usage, int source, int flags) throws RemoteException {
+        public boolean shouldIgnoreExternalVibrationLocked(
+                int content_type, int usage, int source, int flags) throws RemoteException {
             return false;
         }
 
@@ -31,7 +34,7 @@ public interface IExternalVibratorService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IExternalVibratorService {
+    public abstract static class Stub extends Binder implements IExternalVibratorService {
         static final int TRANSACTION_onExternalVibrationStart = 1;
         static final int TRANSACTION_onExternalVibrationStop = 2;
         static final int TRANSACTION_shouldIgnoreExternalVibrationLocked = 3;
@@ -75,7 +78,8 @@ public interface IExternalVibratorService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IExternalVibratorService.DESCRIPTOR);
             }
@@ -85,14 +89,16 @@ public interface IExternalVibratorService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ExternalVibration _arg0 = (ExternalVibration) data.readTypedObject(ExternalVibration.CREATOR);
+                    ExternalVibration _arg0 =
+                            (ExternalVibration) data.readTypedObject(ExternalVibration.CREATOR);
                     data.enforceNoDataAvail();
                     ExternalVibrationScale _result = onExternalVibrationStart(_arg0);
                     reply.writeNoException();
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 2:
-                    ExternalVibration _arg02 = (ExternalVibration) data.readTypedObject(ExternalVibration.CREATOR);
+                    ExternalVibration _arg02 =
+                            (ExternalVibration) data.readTypedObject(ExternalVibration.CREATOR);
                     data.enforceNoDataAvail();
                     onExternalVibrationStop(_arg02);
                     reply.writeNoException();
@@ -103,7 +109,8 @@ public interface IExternalVibratorService extends IInterface {
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result2 = shouldIgnoreExternalVibrationLocked(_arg03, _arg1, _arg2, _arg3);
+                    boolean _result2 =
+                            shouldIgnoreExternalVibrationLocked(_arg03, _arg1, _arg2, _arg3);
                     reply.writeNoException();
                     reply.writeBoolean(_result2);
                     return true;
@@ -129,7 +136,8 @@ public interface IExternalVibratorService extends IInterface {
             }
 
             @Override // android.os.IExternalVibratorService
-            public ExternalVibrationScale onExternalVibrationStart(ExternalVibration vib) throws RemoteException {
+            public ExternalVibrationScale onExternalVibrationStart(ExternalVibration vib)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -137,7 +145,9 @@ public interface IExternalVibratorService extends IInterface {
                     _data.writeTypedObject(vib, 0);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ExternalVibrationScale _result = (ExternalVibrationScale) _reply.readTypedObject(ExternalVibrationScale.CREATOR);
+                    ExternalVibrationScale _result =
+                            (ExternalVibrationScale)
+                                    _reply.readTypedObject(ExternalVibrationScale.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -161,7 +171,8 @@ public interface IExternalVibratorService extends IInterface {
             }
 
             @Override // android.os.IExternalVibratorService
-            public boolean shouldIgnoreExternalVibrationLocked(int content_type, int usage, int source, int flags) throws RemoteException {
+            public boolean shouldIgnoreExternalVibrationLocked(
+                    int content_type, int usage, int source, int flags) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

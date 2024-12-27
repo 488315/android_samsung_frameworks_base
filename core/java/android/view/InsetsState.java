@@ -7,27 +7,27 @@ import android.os.Parcelable;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.util.proto.ProtoOutputStream;
-import android.view.DisplayCutout;
-import android.view.WindowInsets;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes4.dex */
 public class InsetsState implements Parcelable {
-    public static final Parcelable.Creator<InsetsState> CREATOR = new Parcelable.Creator<InsetsState>() { // from class: android.view.InsetsState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InsetsState createFromParcel(Parcel in) {
-            return new InsetsState(in);
-        }
+    public static final Parcelable.Creator<InsetsState> CREATOR =
+            new Parcelable.Creator<InsetsState>() { // from class: android.view.InsetsState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InsetsState createFromParcel(Parcel in) {
+                    return new InsetsState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InsetsState[] newArray(int size) {
-            return new InsetsState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InsetsState[] newArray(int size) {
+                    return new InsetsState[size];
+                }
+            };
     private final DisplayCutout.ParcelableWrapper mDisplayCutout;
     private final Rect mDisplayFrame;
     private DisplayShape mDisplayShape;
@@ -61,7 +61,16 @@ public class InsetsState implements Parcelable {
         set(copy, copySources);
     }
 
-    public WindowInsets calculateInsets(Rect frame, InsetsState ignoringVisibilityState, boolean isScreenRound, int legacySoftInputMode, int legacyWindowFlags, int legacySystemUiFlags, int windowType, int activityType, SparseIntArray idSideMap) {
+    public WindowInsets calculateInsets(
+            Rect frame,
+            InsetsState ignoringVisibilityState,
+            boolean isScreenRound,
+            int legacySoftInputMode,
+            int legacyWindowFlags,
+            int legacySystemUiFlags,
+            int windowType,
+            int activityType,
+            SparseIntArray idSideMap) {
         int compatInsetsTypes;
         int forceConsumingTypes;
         boolean forceConsumingOpaqueCaptionBar;
@@ -106,7 +115,14 @@ public class InsetsState implements Parcelable {
             int i4 = i3;
             Rect[][] typeMaxBoundingRectsMap2 = typeMaxBoundingRectsMap;
             Rect[][] typeBoundingRectsMap2 = typeBoundingRectsMap;
-            processSource(source, relativeFrame, false, typeInsetsMap2, idSideMap, typeVisibilityMap2, typeBoundingRectsMap);
+            processSource(
+                    source,
+                    relativeFrame,
+                    false,
+                    typeInsetsMap2,
+                    idSideMap,
+                    typeVisibilityMap2,
+                    typeBoundingRectsMap);
             if (type == WindowInsets.Type.ime()) {
                 typeVisibilityMap = typeVisibilityMap2;
                 typeMaxInsetsMap = typeMaxInsetsMap2;
@@ -128,7 +144,14 @@ public class InsetsState implements Parcelable {
                     typeMaxInsetsMap = typeMaxInsetsMap2;
                     typeInsetsMap = typeInsetsMap2;
                     i = i2;
-                    processSource(ignoringVisibilitySource, relativeFrameMax, true, typeMaxInsetsMap, null, null, typeMaxBoundingRectsMap2);
+                    processSource(
+                            ignoringVisibilitySource,
+                            relativeFrameMax,
+                            true,
+                            typeMaxInsetsMap,
+                            null,
+                            null,
+                            typeMaxBoundingRectsMap2);
                 }
             }
             insetsState = this;
@@ -163,7 +186,24 @@ public class InsetsState implements Parcelable {
         } else {
             compatInsetsTypes = 0;
         }
-        return new WindowInsets(typeInsetsMap3, typeMaxInsetsMap3, typeVisibilityMap3, isScreenRound, forceConsumingTypes2, forceConsumingOpaqueCaptionBar2, suppressScrimTypes2, calculateRelativeCutout(frame), calculateRelativeRoundedCorners(frame), calculateRelativePrivacyIndicatorBounds(frame), calculateRelativeDisplayShape(frame), compatInsetsTypes, (legacySystemUiFlags & 256) != 0, typeBoundingRectsMap3, typeMaxBoundingRectsMap3, frame.width(), frame.height());
+        return new WindowInsets(
+                typeInsetsMap3,
+                typeMaxInsetsMap3,
+                typeVisibilityMap3,
+                isScreenRound,
+                forceConsumingTypes2,
+                forceConsumingOpaqueCaptionBar2,
+                suppressScrimTypes2,
+                calculateRelativeCutout(frame),
+                calculateRelativeRoundedCorners(frame),
+                calculateRelativePrivacyIndicatorBounds(frame),
+                calculateRelativeDisplayShape(frame),
+                compatInsetsTypes,
+                (legacySystemUiFlags & 256) != 0,
+                typeBoundingRectsMap3,
+                typeMaxBoundingRectsMap3,
+                frame.width(),
+                frame.height());
     }
 
     private DisplayCutout calculateRelativeCutout(Rect frame) {
@@ -178,7 +218,10 @@ public class InsetsState implements Parcelable {
         int insetTop = frame.top - this.mDisplayFrame.top;
         int insetRight = this.mDisplayFrame.right - frame.right;
         int insetBottom = this.mDisplayFrame.bottom - frame.bottom;
-        if (insetLeft >= raw.getSafeInsetLeft() && insetTop >= raw.getSafeInsetTop() && insetRight >= raw.getSafeInsetRight() && insetBottom >= raw.getSafeInsetBottom()) {
+        if (insetLeft >= raw.getSafeInsetLeft()
+                && insetTop >= raw.getSafeInsetTop()
+                && insetRight >= raw.getSafeInsetRight()
+                && insetBottom >= raw.getSafeInsetBottom()) {
             return DisplayCutout.NO_CUTOUT;
         }
         return raw.inset(insetLeft, insetTop, insetRight, insetBottom);
@@ -255,7 +298,8 @@ public class InsetsState implements Parcelable {
         return insets;
     }
 
-    public Insets calculateVisibleInsets(Rect frame, int windowType, int activityType, int softInputMode, int windowFlags) {
+    public Insets calculateVisibleInsets(
+            Rect frame, int windowType, int activityType, int softInputMode, int windowFlags) {
         int visibleInsetsTypes;
         int softInputAdjustMode = softInputMode & 240;
         if (softInputAdjustMode != 48) {
@@ -296,25 +340,83 @@ public class InsetsState implements Parcelable {
         Rect sourceFrame = source.getFrame();
         int sourceWidth = sourceFrame.width();
         int sourceHeight = sourceFrame.height();
-        return insets.left == sourceWidth || insets.right == sourceWidth || insets.top == sourceHeight || insets.bottom == sourceHeight;
+        return insets.left == sourceWidth
+                || insets.right == sourceWidth
+                || insets.top == sourceHeight
+                || insets.bottom == sourceHeight;
     }
 
-    private void processSource(InsetsSource source, Rect relativeFrame, boolean ignoreVisibility, Insets[] typeInsetsMap, SparseIntArray idSideMap, boolean[] typeVisibilityMap, Rect[][] typeBoundingRectsMap) {
+    private void processSource(
+            InsetsSource source,
+            Rect relativeFrame,
+            boolean ignoreVisibility,
+            Insets[] typeInsetsMap,
+            SparseIntArray idSideMap,
+            boolean[] typeVisibilityMap,
+            Rect[][] typeBoundingRectsMap) {
         Insets insets = source.calculateInsets(relativeFrame, ignoreVisibility);
         Rect[] boundingRects = source.calculateBoundingRects(relativeFrame, ignoreVisibility);
         int type = source.getType();
-        processSourceAsPublicType(source, typeInsetsMap, idSideMap, typeVisibilityMap, typeBoundingRectsMap, insets, boundingRects, type);
+        processSourceAsPublicType(
+                source,
+                typeInsetsMap,
+                idSideMap,
+                typeVisibilityMap,
+                typeBoundingRectsMap,
+                insets,
+                boundingRects,
+                type);
         if (type == 32) {
-            processSourceAsPublicType(source, typeInsetsMap, idSideMap, typeVisibilityMap, typeBoundingRectsMap, insets, boundingRects, 16);
+            processSourceAsPublicType(
+                    source,
+                    typeInsetsMap,
+                    idSideMap,
+                    typeVisibilityMap,
+                    typeBoundingRectsMap,
+                    insets,
+                    boundingRects,
+                    16);
         }
         if (type == 4) {
-            processSourceAsPublicType(source, typeInsetsMap, idSideMap, typeVisibilityMap, typeBoundingRectsMap, insets, boundingRects, 16);
-            processSourceAsPublicType(source, typeInsetsMap, idSideMap, typeVisibilityMap, typeBoundingRectsMap, insets, boundingRects, 32);
-            processSourceAsPublicType(source, typeInsetsMap, idSideMap, typeVisibilityMap, typeBoundingRectsMap, insets, boundingRects, 64);
+            processSourceAsPublicType(
+                    source,
+                    typeInsetsMap,
+                    idSideMap,
+                    typeVisibilityMap,
+                    typeBoundingRectsMap,
+                    insets,
+                    boundingRects,
+                    16);
+            processSourceAsPublicType(
+                    source,
+                    typeInsetsMap,
+                    idSideMap,
+                    typeVisibilityMap,
+                    typeBoundingRectsMap,
+                    insets,
+                    boundingRects,
+                    32);
+            processSourceAsPublicType(
+                    source,
+                    typeInsetsMap,
+                    idSideMap,
+                    typeVisibilityMap,
+                    typeBoundingRectsMap,
+                    insets,
+                    boundingRects,
+                    64);
         }
     }
 
-    private void processSourceAsPublicType(InsetsSource source, Insets[] typeInsetsMap, SparseIntArray idSideMap, boolean[] typeVisibilityMap, Rect[][] typeBoundingRectsMap, Insets insets, Rect[] boundingRects, int type) {
+    private void processSourceAsPublicType(
+            InsetsSource source,
+            Insets[] typeInsetsMap,
+            SparseIntArray idSideMap,
+            boolean[] typeVisibilityMap,
+            Rect[][] typeBoundingRectsMap,
+            Insets insets,
+            Rect[] boundingRects,
+            int type) {
         int insetSide;
         int index = WindowInsets.Type.indexOf(type);
         if (!Insets.NONE.equals(insets)) {
@@ -376,7 +478,9 @@ public class InsetsState implements Parcelable {
 
     public boolean isSourceOrDefaultVisible(int id, int type) {
         InsetsSource source = this.mSources.get(id);
-        return source != null ? source.isVisible() : (WindowInsets.Type.defaultVisible() & type) != 0;
+        return source != null
+                ? source.isVisible()
+                : (WindowInsets.Type.defaultVisible() & type) != 0;
     }
 
     public void setDisplayFrame(Rect frame) {
@@ -530,8 +634,14 @@ public class InsetsState implements Parcelable {
         this.mSources.put(source.getId(), source);
     }
 
-    public static boolean clearsCompatInsets(int windowType, int windowFlags, int activityType, int forceConsumingTypes) {
-        return ((windowFlags & 512) == 0 || windowType == 2013 || windowType == 2010 || (forceConsumingTypes != 0 && activityType == 1)) ? false : true;
+    public static boolean clearsCompatInsets(
+            int windowType, int windowFlags, int activityType, int forceConsumingTypes) {
+        return ((windowFlags & 512) == 0
+                        || windowType == 2013
+                        || windowType == 2010
+                        || (forceConsumingTypes != 0 && activityType == 1))
+                ? false
+                : true;
     }
 
     public void dump(String prefix, PrintWriter pw) {
@@ -565,9 +675,9 @@ public class InsetsState implements Parcelable {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:53:0x00b1, code lost:
-    
-        r13 = r6.valueAt(r10);
-     */
+
+       r13 = r6.valueAt(r10);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -577,11 +687,20 @@ public class InsetsState implements Parcelable {
             Method dump skipped, instructions count: 248
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.InsetsState.equals(java.lang.Object, boolean, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.view.InsetsState.equals(java.lang.Object, boolean,"
+                    + " boolean):boolean");
     }
 
     public int hashCode() {
-        return Objects.hash(this.mDisplayFrame, this.mDisplayCutout, Integer.valueOf(this.mSources.contentHashCode()), this.mRoundedCorners, this.mPrivacyIndicatorBounds, this.mRoundedCornerFrame, this.mDisplayShape);
+        return Objects.hash(
+                this.mDisplayFrame,
+                this.mDisplayCutout,
+                Integer.valueOf(this.mSources.contentHashCode()),
+                this.mRoundedCorners,
+                this.mPrivacyIndicatorBounds,
+                this.mRoundedCornerFrame,
+                this.mDisplayShape);
     }
 
     public InsetsState(Parcel in) {
@@ -620,7 +739,8 @@ public class InsetsState implements Parcelable {
         this.mDisplayCutout.readFromParcel(in);
         this.mRoundedCorners = (RoundedCorners) in.readTypedObject(RoundedCorners.CREATOR);
         this.mRoundedCornerFrame.readFromParcel(in);
-        this.mPrivacyIndicatorBounds = (PrivacyIndicatorBounds) in.readTypedObject(PrivacyIndicatorBounds.CREATOR);
+        this.mPrivacyIndicatorBounds =
+                (PrivacyIndicatorBounds) in.readTypedObject(PrivacyIndicatorBounds.CREATOR);
         this.mDisplayShape = (DisplayShape) in.readTypedObject(DisplayShape.CREATOR);
         int size = in.readInt();
         if (this.mSources == null) {
@@ -642,7 +762,21 @@ public class InsetsState implements Parcelable {
         for (int i = 0; i < size; i++) {
             joiner.add(this.mSources.valueAt(i).toString());
         }
-        return "InsetsState: {mDisplayFrame=" + this.mDisplayFrame + ", mDisplayCutout=" + this.mDisplayCutout + ", mRoundedCorners=" + this.mRoundedCorners + "  mRoundedCornerFrame=" + this.mRoundedCornerFrame + ", mPrivacyIndicatorBounds=" + this.mPrivacyIndicatorBounds + ", mDisplayShape=" + this.mDisplayShape + ", mSources= { " + joiner + " }";
+        return "InsetsState: {mDisplayFrame="
+                + this.mDisplayFrame
+                + ", mDisplayCutout="
+                + this.mDisplayCutout
+                + ", mRoundedCorners="
+                + this.mRoundedCorners
+                + "  mRoundedCornerFrame="
+                + this.mRoundedCornerFrame
+                + ", mPrivacyIndicatorBounds="
+                + this.mPrivacyIndicatorBounds
+                + ", mDisplayShape="
+                + this.mDisplayShape
+                + ", mSources= { "
+                + joiner
+                + " }";
     }
 
     public static void traverse(InsetsState state1, InsetsState state2, OnTraverseCallbacks cb) {
@@ -694,19 +828,14 @@ public class InsetsState implements Parcelable {
     }
 
     public interface OnTraverseCallbacks {
-        default void onStart(InsetsState state1, InsetsState state2) {
-        }
+        default void onStart(InsetsState state1, InsetsState state2) {}
 
-        default void onIdMatch(InsetsSource source1, InsetsSource source2) {
-        }
+        default void onIdMatch(InsetsSource source1, InsetsSource source2) {}
 
-        default void onIdNotFoundInState1(int index2, InsetsSource source2) {
-        }
+        default void onIdNotFoundInState1(int index2, InsetsSource source2) {}
 
-        default void onIdNotFoundInState2(int index1, InsetsSource source1) {
-        }
+        default void onIdNotFoundInState2(int index1, InsetsSource source1) {}
 
-        default void onFinish(InsetsState state1, InsetsState state2) {
-        }
+        default void onFinish(InsetsState state1, InsetsState state2) {}
     }
 }

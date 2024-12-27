@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.samsung.android.media.AudioParameter;
 
 /* loaded from: classes5.dex */
@@ -18,12 +19,17 @@ public class SemMultiMicManager {
     private static final String AUDIO_PARAMETER_STREAM_ZOOM_MAX = "cam_zoom_max";
     private static final String AUDIO_PARAMETER_STREAM_ZOOM_MIN = "cam_zoom_min";
     private static final String AUDIO_PARAMETER_STREAM_ZOOM_STEP = "cam_zoom";
-    private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_AUDIO_FOCUS_ENABLE = "audio_focus_enable";
-    private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_CAMERA_DIRECTION = "camera_direction";
-    private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_FOCUS_COORDINATE = "focus_coordinate";
+    private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_AUDIO_FOCUS_ENABLE =
+            "audio_focus_enable";
+    private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_CAMERA_DIRECTION =
+            "camera_direction";
+    private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_FOCUS_COORDINATE =
+            "focus_coordinate";
     private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_MODE = "mode";
-    private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_PHONE_ORIENTATION = "phone_orientation";
-    private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_SENSITIVITY_LEVEL = "sensitivity_level";
+    private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_PHONE_ORIENTATION =
+            "phone_orientation";
+    private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_SENSITIVITY_LEVEL =
+            "sensitivity_level";
     private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_LEVEL = "zoom_level";
     private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_MAX = "zoom_max";
     private static final String AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_MIN = "zoom_min";
@@ -53,8 +59,7 @@ public class SemMultiMicManager {
     private int mSensitivityLevel = -88888;
     private int mMode = 0;
 
-    private SemMultiMicManager() {
-    }
+    private SemMultiMicManager() {}
 
     public static SemMultiMicManager getInstance() {
         if (!isSupported()) {
@@ -67,7 +72,17 @@ public class SemMultiMicManager {
     }
 
     public void initialize(int soundLocation, int deviceOrientation, float maxZoom, float minZoom) {
-        String parameters = new AudioParameter.Builder().setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_CAMERA_DIRECTION, soundLocation).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_PHONE_ORIENTATION, deviceOrientation).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_MAX, maxZoom).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_MIN, minZoom).build().toString();
+        String parameters =
+                new AudioParameter.Builder()
+                        .setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_CAMERA_DIRECTION, soundLocation)
+                        .setParam(
+                                AUDIO_PARAMETER_SUBKEY_MULTI_MIC_PHONE_ORIENTATION,
+                                deviceOrientation)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_MAX, maxZoom)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_MIN, minZoom)
+                        .build()
+                        .toString();
         setAudioServiceConfig(parameters);
         this.mSoundLocation = soundLocation;
         this.mOrientation = deviceOrientation;
@@ -76,7 +91,16 @@ public class SemMultiMicManager {
     }
 
     public void release() {
-        String parameters = new AudioParameter.Builder().setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_CAMERA_DIRECTION, 0).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_PHONE_ORIENTATION, 0).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_MAX, -1.0f).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_MIN, 0).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_SENSITIVITY_LEVEL, -88888).build().toString();
+        String parameters =
+                new AudioParameter.Builder()
+                        .setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_CAMERA_DIRECTION, 0)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_PHONE_ORIENTATION, 0)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_MAX, -1.0f)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_MIN, 0)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_SENSITIVITY_LEVEL, -88888)
+                        .build()
+                        .toString();
         setAudioServiceConfig(parameters);
         this.mSoundLocation = 0;
         this.mOrientation = 0;
@@ -86,18 +110,39 @@ public class SemMultiMicManager {
     }
 
     public void setEnabled(boolean z) {
-        setAudioServiceConfig(new AudioParameter.Builder().setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_AUDIO_FOCUS_ENABLE, z ? 1 : 0).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_FOCUS_COORDINATE, -88888).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_LEVEL, 0.0f).build().toString());
+        setAudioServiceConfig(
+                new AudioParameter.Builder()
+                        .setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_AUDIO_FOCUS_ENABLE, z ? 1 : 0)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_FOCUS_COORDINATE, -88888)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_LEVEL, 0.0f)
+                        .build()
+                        .toString());
         this.mEnable = z;
     }
 
     public void setAudioFocusCoordinate(int coordinate) {
-        String parameters = new AudioParameter.Builder().setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_AUDIO_FOCUS_ENABLE, 1).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_FOCUS_COORDINATE, coordinate).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_LEVEL, 0.0f).build().toString();
+        String parameters =
+                new AudioParameter.Builder()
+                        .setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_AUDIO_FOCUS_ENABLE, 1)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_FOCUS_COORDINATE, coordinate)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_LEVEL, 0.0f)
+                        .build()
+                        .toString();
         setAudioServiceConfig(parameters);
         this.mCoordinate = coordinate;
     }
 
     public void setAudioZoomLevel(float cameraZoomLevel) {
-        String parameters = new AudioParameter.Builder().setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_AUDIO_FOCUS_ENABLE, 1).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_FOCUS_COORDINATE, -88888).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_LEVEL, cameraZoomLevel).build().toString();
+        String parameters =
+                new AudioParameter.Builder()
+                        .setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_AUDIO_FOCUS_ENABLE, 1)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_FOCUS_COORDINATE, -88888)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_ZOOM_LEVEL, cameraZoomLevel)
+                        .build()
+                        .toString();
         setAudioServiceConfig(parameters);
         this.mCameraZoomLevel = cameraZoomLevel;
     }
@@ -130,7 +175,12 @@ public class SemMultiMicManager {
             Log.e(TAG, "Invalid level " + level + " in setMicSensitivity");
             return false;
         }
-        String parameters = new AudioParameter.Builder().setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_SENSITIVITY_LEVEL, level).build().toString();
+        String parameters =
+                new AudioParameter.Builder()
+                        .setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_SENSITIVITY_LEVEL, level)
+                        .build()
+                        .toString();
         setAudioServiceConfig(parameters);
         this.mSensitivityLevel = level;
         return true;
@@ -145,7 +195,11 @@ public class SemMultiMicManager {
             Log.e(TAG, "Invalid mode " + mode + " in setMode");
             return false;
         }
-        AudioParameter.Builder builder = new AudioParameter.Builder().setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY).setParam("mode", mode).setParam(AudioParameter.SUBKEY_AUDIO_PARAM);
+        AudioParameter.Builder builder =
+                new AudioParameter.Builder()
+                        .setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY)
+                        .setParam("mode", mode)
+                        .setParam(AudioParameter.SUBKEY_AUDIO_PARAM);
         setAudioServiceConfig(builder.build().toString());
         this.mMode = mode;
         return true;
@@ -160,7 +214,12 @@ public class SemMultiMicManager {
             Log.e(TAG, "Invalid location " + soundLocation + " in setSoundLocation");
             return false;
         }
-        String parameters = new AudioParameter.Builder().setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY).setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_CAMERA_DIRECTION, soundLocation).build().toString();
+        String parameters =
+                new AudioParameter.Builder()
+                        .setParam(AUDIO_PARAMETER_SEC_LOCAL_MULTI_MIC_KEY)
+                        .setParam(AUDIO_PARAMETER_SUBKEY_MULTI_MIC_CAMERA_DIRECTION, soundLocation)
+                        .build()
+                        .toString();
         setAudioServiceConfig(parameters);
         this.mSoundLocation = soundLocation;
         return true;
@@ -180,7 +239,13 @@ public class SemMultiMicManager {
             version = Integer.parseInt("08020");
         } catch (NumberFormatException e) {
         }
-        return mode == 0 ? version >= 8001 : mode == 1 ? version >= 8010 || (version >= 7010 && version < 8000) : mode == 2 ? version >= 8020 || (version >= 7020 && version < 8000) : version >= 8001;
+        return mode == 0
+                ? version >= 8001
+                : mode == 1
+                        ? version >= 8010 || (version >= 7010 && version < 8000)
+                        : mode == 2
+                                ? version >= 8020 || (version >= 7020 && version < 8000)
+                                : version >= 8001;
     }
 
     private static boolean isValidMode(int mode) {

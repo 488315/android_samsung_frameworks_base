@@ -14,7 +14,13 @@ public class PKIXCertRevocationCheckerParameters {
     private final Date validDate;
     private final PublicKey workingPublicKey;
 
-    public PKIXCertRevocationCheckerParameters(PKIXExtendedParameters paramsPKIX, Date validDate, CertPath certPath, int index, X509Certificate signingCert, PublicKey workingPublicKey) {
+    public PKIXCertRevocationCheckerParameters(
+            PKIXExtendedParameters paramsPKIX,
+            Date validDate,
+            CertPath certPath,
+            int index,
+            X509Certificate signingCert,
+            PublicKey workingPublicKey) {
         this.paramsPKIX = paramsPKIX;
         this.validDate = validDate;
         this.certPath = certPath;

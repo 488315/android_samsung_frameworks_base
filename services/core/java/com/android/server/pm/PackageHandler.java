@@ -25,17 +25,17 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.util.CollectionUtils;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticOutline0;
-import com.android.server.pm.InstantAppResolver;
-import com.android.server.pm.InstantAppResolverConnection;
-import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.verify.domain.DomainVerificationService;
+
 import com.samsung.android.core.pm.containerservice.PackageHelperExt;
 import com.samsung.android.rune.PMRune;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
@@ -78,21 +78,40 @@ public final class PackageHandler extends Handler {
                         for (int i6 = 0; i6 < size2; i6++) {
                             strArr[i4] = (String) arrayMap.keyAt(i6);
                             arrayListArr[i4] = (ArrayList) arrayMap.valueAt(i6);
-                            PackageSetting packageLPr = installPackageHelper.mPm.mSettings.getPackageLPr(strArr[i4]);
-                            iArr[i4] = packageLPr != null ? UserHandle.getUid(keyAt, packageLPr.mAppId) : -1;
+                            PackageSetting packageLPr =
+                                    installPackageHelper.mPm.mSettings.getPackageLPr(strArr[i4]);
+                            iArr[i4] =
+                                    packageLPr != null
+                                            ? UserHandle.getUid(keyAt, packageLPr.mAppId)
+                                            : -1;
                             i4++;
                         }
                     }
-                    PendingPackageBroadcasts pendingPackageBroadcasts = installPackageHelper.mPm.mPendingBroadcasts;
+                    PendingPackageBroadcasts pendingPackageBroadcasts =
+                            installPackageHelper.mPm.mPendingBroadcasts;
                     synchronized (pendingPackageBroadcasts.mLock) {
                         pendingPackageBroadcasts.mUidMap.clear();
                     }
                     Computer snapshotComputer = installPackageHelper.mPm.snapshotComputer();
                     for (int i7 = 0; i7 < i4; i7++) {
-                        if (PMRune.PM_WA_WORK_COMP_CHANGED && (arrayList = arrayListArr[i7]) != null && arrayList.size() == 1 && arrayListArr[i7].contains("androidx.work.impl.background.systemalarm.RescheduleReceiver")) {
-                            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("Don't send PACKAGE_CHANGED for "), strArr[i7], " by WorkManager", "PackageManager");
+                        if (PMRune.PM_WA_WORK_COMP_CHANGED
+                                && (arrayList = arrayListArr[i7]) != null
+                                && arrayList.size() == 1
+                                && arrayListArr[i7].contains(
+                                        "androidx.work.impl.background.systemalarm.RescheduleReceiver")) {
+                            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("Don't send PACKAGE_CHANGED for "),
+                                    strArr[i7],
+                                    " by WorkManager",
+                                    "PackageManager");
                         } else {
-                            installPackageHelper.mBroadcastHelper.sendPackageChangedBroadcast(snapshotComputer, strArr[i7], true, arrayListArr[i7], iArr[i7], null);
+                            installPackageHelper.mBroadcastHelper.sendPackageChangedBroadcast(
+                                    snapshotComputer,
+                                    strArr[i7],
+                                    true,
+                                    arrayListArr[i7],
+                                    iArr[i7],
+                                    null);
                         }
                     }
                     return;
@@ -101,23 +120,32 @@ public final class PackageHandler extends Handler {
             }
         }
         if (i == 9) {
-            InstallRequest installRequest = (InstallRequest) this.mPm.mRunningInstalls.get(message.arg1);
-            if (!(installRequest != null ? this.mPm.isLocaleOptimizedPackage(0, installRequest.mName) : false)) {
+            InstallRequest installRequest =
+                    (InstallRequest) this.mPm.mRunningInstalls.get(message.arg1);
+            if (!(installRequest != null
+                    ? this.mPm.isLocaleOptimizedPackage(0, installRequest.mName)
+                    : false)) {
                 doHandlePostInstall(message);
                 return;
             }
             PackageManagerService packageManagerService = this.mPm;
             packageManagerService.getClass();
-            Slog.d("PackageManager", "updateLocaleOverlaysForPackage() called with: msg = [" + message + "]");
+            Slog.d(
+                    "PackageManager",
+                    "updateLocaleOverlaysForPackage() called with: msg = [" + message + "]");
             int i8 = message.arg1;
             int i9 = message.arg2;
-            InstallRequest installRequest2 = (InstallRequest) packageManagerService.mRunningInstalls.get(i8);
-            PackageManagerService.InstallLocaleOverlaysType installLocaleOverlaysType = PackageManagerService.InstallLocaleOverlaysType.PACKAGE_INSTALL;
+            InstallRequest installRequest2 =
+                    (InstallRequest) packageManagerService.mRunningInstalls.get(i8);
+            PackageManagerService.InstallLocaleOverlaysType installLocaleOverlaysType =
+                    PackageManagerService.InstallLocaleOverlaysType.PACKAGE_INSTALL;
             if (installRequest2 == null) {
-                packageManagerService.overlaysInstallComplete(i8, i9, installLocaleOverlaysType, -1, null, null);
+                packageManagerService.overlaysInstallComplete(
+                        i8, i9, installLocaleOverlaysType, -1, null, null);
                 return;
             } else {
-                packageManagerService.updateLocaleOverlaysForPackage(i8, i9, installLocaleOverlaysType, -1, installRequest2.mName);
+                packageManagerService.updateLocaleOverlaysForPackage(
+                        i8, i9, installLocaleOverlaysType, -1, installRequest2.mName);
                 return;
             }
         }
@@ -151,32 +179,47 @@ public final class PackageHandler extends Handler {
         }
         if (i == 15) {
             int i10 = message.arg1;
-            PackageVerificationState packageVerificationState = (PackageVerificationState) this.mPm.mPendingVerification.get(i10);
+            PackageVerificationState packageVerificationState =
+                    (PackageVerificationState) this.mPm.mPendingVerification.get(i10);
             if (packageVerificationState == null) {
-                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(i10, "Verification with id ", " not found. It may be invalid or overridden by integrity verification", "PackageManager");
+                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                        i10,
+                        "Verification with id ",
+                        " not found. It may be invalid or overridden by integrity verification",
+                        "PackageManager");
                 return;
             } else if (packageVerificationState.isVerificationComplete()) {
-                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(i10, "Verification with id ", " already complete.", "PackageManager");
+                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                        i10, "Verification with id ", " already complete.", "PackageManager");
                 return;
             } else {
-                VerificationUtils.processVerificationResponse(i10, packageVerificationState, (PackageVerificationResponse) message.obj, this.mPm);
+                VerificationUtils.processVerificationResponse(
+                        i10,
+                        packageVerificationState,
+                        (PackageVerificationResponse) message.obj,
+                        this.mPm);
                 return;
             }
         }
         if (i == 16) {
             int i11 = message.arg1;
             boolean z = message.arg2 != 0;
-            PackageVerificationState packageVerificationState2 = (PackageVerificationState) this.mPm.mPendingVerification.get(i11);
-            if (packageVerificationState2 == null || packageVerificationState2.isVerificationComplete()) {
+            PackageVerificationState packageVerificationState2 =
+                    (PackageVerificationState) this.mPm.mPendingVerification.get(i11);
+            if (packageVerificationState2 == null
+                    || packageVerificationState2.isVerificationComplete()) {
                 return;
             }
-            PackageVerificationResponse packageVerificationResponse = (PackageVerificationResponse) message.obj;
+            PackageVerificationResponse packageVerificationResponse =
+                    (PackageVerificationResponse) message.obj;
             if (!z) {
-                if (packageVerificationState2.mExtendedTimeoutUids.get(packageVerificationResponse.callerUid, false)) {
+                if (packageVerificationState2.mExtendedTimeoutUids.get(
+                        packageVerificationResponse.callerUid, false)) {
                     return;
                 }
             }
-            VerificationUtils.processVerificationResponseOnTimeout(i11, packageVerificationState2, packageVerificationResponse, this.mPm);
+            VerificationUtils.processVerificationResponseOnTimeout(
+                    i11, packageVerificationState2, packageVerificationResponse, this.mPm);
             return;
         }
         switch (i) {
@@ -194,7 +237,8 @@ public final class PackageHandler extends Handler {
                 Computer snapshotComputer2 = packageManagerService3.snapshotComputer();
                 PackageManagerService packageManagerService4 = this.mPm;
                 UserManagerService userManagerService = packageManagerService4.mUserManager;
-                InstantAppResolverConnection instantAppResolverConnection = packageManagerService4.mInstantAppResolverConnection;
+                InstantAppResolverConnection instantAppResolverConnection =
+                        packageManagerService4.mInstantAppResolverConnection;
                 InstantAppRequest instantAppRequest = (InstantAppRequest) message.obj;
                 ActivityInfo activityInfo = packageManagerService4.mInstantAppInstallerActivity;
                 Handler handler = packageManagerService4.mHandler;
@@ -203,72 +247,164 @@ public final class PackageHandler extends Handler {
                 String str = instantAppRequest.token;
                 boolean z3 = InstantAppResolver.DEBUG_INSTANT;
                 if (z3) {
-                    DualAppManagerService$$ExternalSyntheticOutline0.m("[", str, "] Phase2; resolving", "PackageManager");
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            "[", str, "] Phase2; resolving", "PackageManager");
                 }
                 Intent intent = instantAppRequest.origIntent;
-                InstantAppResolver.AnonymousClass1 anonymousClass1 = new InstantAppResolver.AnonymousClass1(snapshotComputer2, userManagerService, intent, str, instantAppRequest, InstantAppResolver.sanitizeIntent(intent), activityInfo, context);
+                InstantAppResolver.AnonymousClass1 anonymousClass1 =
+                        new InstantAppResolver.AnonymousClass1(
+                                snapshotComputer2,
+                                userManagerService,
+                                intent,
+                                str,
+                                instantAppRequest,
+                                InstantAppResolver.sanitizeIntent(intent),
+                                activityInfo,
+                                context);
                 try {
-                    InstantAppRequestInfo instantAppRequestInfo = new InstantAppRequestInfo(InstantAppResolver.sanitizeIntent(instantAppRequest.origIntent), instantAppRequest.hostDigestPrefixSecure, UserHandle.of(instantAppRequest.userId), instantAppRequest.isRequesterInstantApp, instantAppRequest.token);
+                    InstantAppRequestInfo instantAppRequestInfo =
+                            new InstantAppRequestInfo(
+                                    InstantAppResolver.sanitizeIntent(instantAppRequest.origIntent),
+                                    instantAppRequest.hostDigestPrefixSecure,
+                                    UserHandle.of(instantAppRequest.userId),
+                                    instantAppRequest.isRequesterInstantApp,
+                                    instantAppRequest.token);
                     instantAppResolverConnection.getClass();
-                    InstantAppResolverConnection.AnonymousClass1 anonymousClass12 = new IRemoteCallback.Stub() { // from class: com.android.server.pm.InstantAppResolverConnection.1
-                        public final /* synthetic */ InstantAppResolver.AnonymousClass1 val$callback;
-                        public final /* synthetic */ Handler val$callbackHandler;
-                        public final /* synthetic */ long val$startTime;
+                    InstantAppResolverConnection.AnonymousClass1 anonymousClass12 =
+                            new IRemoteCallback
+                                    .Stub() { // from class:
+                                              // com.android.server.pm.InstantAppResolverConnection.1
+                                public final /* synthetic */ InstantAppResolver.AnonymousClass1
+                                        val$callback;
+                                public final /* synthetic */ Handler val$callbackHandler;
+                                public final /* synthetic */ long val$startTime;
 
-                        public AnonymousClass1(Handler handler2, InstantAppResolver.AnonymousClass1 anonymousClass13, long currentTimeMillis2) {
-                            r1 = handler2;
-                            r2 = anonymousClass13;
-                            r3 = currentTimeMillis2;
-                        }
-
-                        public final void sendResult(Bundle bundle) {
-                            final ArrayList parcelableArrayList = bundle.getParcelableArrayList("android.app.extra.RESOLVE_INFO", InstantAppResolveInfo.class);
-                            Handler handler2 = r1;
-                            final InstantAppResolver.AnonymousClass1 anonymousClass13 = r2;
-                            final long j = r3;
-                            handler2.post(new Runnable() { // from class: com.android.server.pm.InstantAppResolverConnection$1$$ExternalSyntheticLambda0
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    InstantAppResolver.AnonymousClass1 anonymousClass14 = InstantAppResolver.AnonymousClass1.this;
-                                    ArrayList arrayList2 = parcelableArrayList;
-                                    long j2 = j;
-                                    Intent intent2 = null;
-                                    if (arrayList2 != null) {
-                                        anonymousClass14.getClass();
-                                        if (arrayList2.size() > 0) {
-                                            Intent intent3 = anonymousClass14.val$origIntent;
-                                            AuxiliaryResolveInfo filterInstantAppIntent = InstantAppResolver.filterInstantAppIntent(anonymousClass14.val$computer, anonymousClass14.val$userManager, arrayList2, intent3, null, 0, intent3.getPackage(), anonymousClass14.val$token, anonymousClass14.val$requestObj.hostDigestPrefixSecure);
-                                            if (filterInstantAppIntent != null) {
-                                                intent2 = filterInstantAppIntent.failureIntent;
-                                            }
-                                        }
-                                    }
-                                    Intent intent4 = intent2;
-                                    InstantAppRequest instantAppRequest2 = anonymousClass14.val$requestObj;
-                                    Intent intent5 = instantAppRequest2.origIntent;
-                                    Intent intent6 = anonymousClass14.val$sanitizedIntent;
-                                    String str2 = instantAppRequest2.callingPackage;
-                                    String str3 = instantAppRequest2.callingFeatureId;
-                                    Bundle bundle2 = instantAppRequest2.verificationBundle;
-                                    String str4 = instantAppRequest2.resolvedType;
-                                    int i13 = instantAppRequest2.userId;
-                                    AuxiliaryResolveInfo auxiliaryResolveInfo = instantAppRequest2.responseObj;
-                                    Intent buildEphemeralInstallerIntent = InstantAppResolver.buildEphemeralInstallerIntent(intent5, intent6, intent4, str2, str3, bundle2, str4, i13, auxiliaryResolveInfo.installFailureActivity, anonymousClass14.val$token, false, auxiliaryResolveInfo.filters);
-                                    ActivityInfo activityInfo2 = anonymousClass14.val$instantAppInstaller;
-                                    buildEphemeralInstallerIntent.setComponent(new ComponentName(activityInfo2.packageName, activityInfo2.name));
-                                    InstantAppResolver.logMetrics(FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, anonymousClass14.val$requestObj.responseObj.filters != null ? 0 : 1, j2, anonymousClass14.val$token);
-                                    anonymousClass14.val$context.startActivity(buildEphemeralInstallerIntent);
+                                public AnonymousClass1(
+                                        Handler handler2,
+                                        InstantAppResolver.AnonymousClass1 anonymousClass13,
+                                        long currentTimeMillis2) {
+                                    r1 = handler2;
+                                    r2 = anonymousClass13;
+                                    r3 = currentTimeMillis2;
                                 }
-                            });
-                        }
-                    };
+
+                                public final void sendResult(Bundle bundle) {
+                                    final ArrayList parcelableArrayList =
+                                            bundle.getParcelableArrayList(
+                                                    "android.app.extra.RESOLVE_INFO",
+                                                    InstantAppResolveInfo.class);
+                                    Handler handler2 = r1;
+                                    final InstantAppResolver.AnonymousClass1 anonymousClass13 = r2;
+                                    final long j = r3;
+                                    handler2.post(
+                                            new Runnable() { // from class:
+                                                             // com.android.server.pm.InstantAppResolverConnection$1$$ExternalSyntheticLambda0
+                                                @Override // java.lang.Runnable
+                                                public final void run() {
+                                                    InstantAppResolver.AnonymousClass1
+                                                            anonymousClass14 =
+                                                                    InstantAppResolver
+                                                                            .AnonymousClass1.this;
+                                                    ArrayList arrayList2 = parcelableArrayList;
+                                                    long j2 = j;
+                                                    Intent intent2 = null;
+                                                    if (arrayList2 != null) {
+                                                        anonymousClass14.getClass();
+                                                        if (arrayList2.size() > 0) {
+                                                            Intent intent3 =
+                                                                    anonymousClass14.val$origIntent;
+                                                            AuxiliaryResolveInfo
+                                                                    filterInstantAppIntent =
+                                                                            InstantAppResolver
+                                                                                    .filterInstantAppIntent(
+                                                                                            anonymousClass14
+                                                                                                    .val$computer,
+                                                                                            anonymousClass14
+                                                                                                    .val$userManager,
+                                                                                            arrayList2,
+                                                                                            intent3,
+                                                                                            null,
+                                                                                            0,
+                                                                                            intent3
+                                                                                                    .getPackage(),
+                                                                                            anonymousClass14
+                                                                                                    .val$token,
+                                                                                            anonymousClass14
+                                                                                                    .val$requestObj
+                                                                                                    .hostDigestPrefixSecure);
+                                                            if (filterInstantAppIntent != null) {
+                                                                intent2 =
+                                                                        filterInstantAppIntent
+                                                                                .failureIntent;
+                                                            }
+                                                        }
+                                                    }
+                                                    Intent intent4 = intent2;
+                                                    InstantAppRequest instantAppRequest2 =
+                                                            anonymousClass14.val$requestObj;
+                                                    Intent intent5 = instantAppRequest2.origIntent;
+                                                    Intent intent6 =
+                                                            anonymousClass14.val$sanitizedIntent;
+                                                    String str2 = instantAppRequest2.callingPackage;
+                                                    String str3 =
+                                                            instantAppRequest2.callingFeatureId;
+                                                    Bundle bundle2 =
+                                                            instantAppRequest2.verificationBundle;
+                                                    String str4 = instantAppRequest2.resolvedType;
+                                                    int i13 = instantAppRequest2.userId;
+                                                    AuxiliaryResolveInfo auxiliaryResolveInfo =
+                                                            instantAppRequest2.responseObj;
+                                                    Intent buildEphemeralInstallerIntent =
+                                                            InstantAppResolver
+                                                                    .buildEphemeralInstallerIntent(
+                                                                            intent5,
+                                                                            intent6,
+                                                                            intent4,
+                                                                            str2,
+                                                                            str3,
+                                                                            bundle2,
+                                                                            str4,
+                                                                            i13,
+                                                                            auxiliaryResolveInfo
+                                                                                    .installFailureActivity,
+                                                                            anonymousClass14
+                                                                                    .val$token,
+                                                                            false,
+                                                                            auxiliaryResolveInfo
+                                                                                    .filters);
+                                                    ActivityInfo activityInfo2 =
+                                                            anonymousClass14
+                                                                    .val$instantAppInstaller;
+                                                    buildEphemeralInstallerIntent.setComponent(
+                                                            new ComponentName(
+                                                                    activityInfo2.packageName,
+                                                                    activityInfo2.name));
+                                                    InstantAppResolver.logMetrics(
+                                                            FrameworkStatsLog
+                                                                    .CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                                                            anonymousClass14
+                                                                                    .val$requestObj
+                                                                                    .responseObj
+                                                                                    .filters
+                                                                            != null
+                                                                    ? 0
+                                                                    : 1,
+                                                            j2,
+                                                            anonymousClass14.val$token);
+                                                    anonymousClass14.val$context.startActivity(
+                                                            buildEphemeralInstallerIntent);
+                                                }
+                                            });
+                                }
+                            };
                     try {
                         String token = instantAppRequestInfo.getToken();
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
                             IInstantAppResolver bind = instantAppResolverConnection.bind(token);
                             Binder.restoreCallingIdentity(clearCallingIdentity);
-                            bind.getInstantAppIntentFilterList(instantAppRequestInfo, anonymousClass12);
+                            bind.getInstantAppIntentFilterList(
+                                    instantAppRequestInfo, anonymousClass12);
                             return;
                         } catch (Throwable th) {
                             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -283,13 +419,22 @@ public final class PackageHandler extends Handler {
                     }
                 } catch (InstantAppResolverConnection.ConnectionException e) {
                     int i13 = e.failure == 1 ? 2 : 1;
-                    InstantAppResolver.logMetrics(FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, i13, currentTimeMillis2, str);
+                    InstantAppResolver.logMetrics(
+                            FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+                            i13,
+                            currentTimeMillis2,
+                            str);
                     if (z3) {
                         if (i13 == 2) {
-                            DualAppManagerService$$ExternalSyntheticOutline0.m("[", str, "] Phase2; bind timed out", "PackageManager");
+                            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                    "[", str, "] Phase2; bind timed out", "PackageManager");
                             return;
                         } else {
-                            DualAppManagerService$$ExternalSyntheticOutline0.m("[", str, "] Phase2; service connection error", "PackageManager");
+                            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                    "[",
+                                    str,
+                                    "] Phase2; service connection error",
+                                    "PackageManager");
                             return;
                         }
                     }
@@ -298,9 +443,11 @@ public final class PackageHandler extends Handler {
             case 21:
                 int i14 = message.arg1;
                 int i15 = message.arg2;
-                VerifyingSession verifyingSession = (VerifyingSession) this.mPm.mPendingEnableRollback.get(i14);
+                VerifyingSession verifyingSession =
+                        (VerifyingSession) this.mPm.mPendingEnableRollback.get(i14);
                 if (verifyingSession == null) {
-                    BrailleDisplayConnection$$ExternalSyntheticOutline0.m(i14, "Invalid rollback enabled token ", " received", "PackageManager");
+                    BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                            i14, "Invalid rollback enabled token ", " received", "PackageManager");
                     return;
                 }
                 this.mPm.mPendingEnableRollback.remove(i14);
@@ -316,7 +463,8 @@ public final class PackageHandler extends Handler {
             case 22:
                 int i16 = message.arg1;
                 int i17 = message.arg2;
-                VerifyingSession verifyingSession2 = (VerifyingSession) this.mPm.mPendingEnableRollback.get(i16);
+                VerifyingSession verifyingSession2 =
+                        (VerifyingSession) this.mPm.mPendingEnableRollback.get(i16);
                 if (verifyingSession2 != null) {
                     Uri fromFile2 = Uri.fromFile(verifyingSession2.mOriginInfo.mResolvedFile);
                     Slog.w("PackageManager", "Enable rollback timed out for " + fromFile2);
@@ -328,14 +476,20 @@ public final class PackageHandler extends Handler {
                     Intent intent2 = new Intent("android.intent.action.CANCEL_ENABLE_ROLLBACK");
                     intent2.putExtra("android.content.pm.extra.ENABLE_ROLLBACK_SESSION_ID", i17);
                     intent2.addFlags(335544320);
-                    this.mPm.mContext.sendBroadcastAsUser(intent2, UserHandle.SYSTEM, "android.permission.PACKAGE_ROLLBACK_AGENT");
+                    this.mPm.mContext.sendBroadcastAsUser(
+                            intent2,
+                            UserHandle.SYSTEM,
+                            "android.permission.PACKAGE_ROLLBACK_AGENT");
                     return;
                 }
                 return;
             case 23:
                 CleanUpArgs cleanUpArgs = (CleanUpArgs) message.obj;
                 if (cleanUpArgs != null) {
-                    this.mPm.mRemovePackageHelper.cleanUpResources(cleanUpArgs.mPackageName, cleanUpArgs.mCodeFile, cleanUpArgs.mInstructionSets);
+                    this.mPm.mRemovePackageHelper.cleanUpResources(
+                            cleanUpArgs.mPackageName,
+                            cleanUpArgs.mCodeFile,
+                            cleanUpArgs.mInstructionSets);
                     return;
                 }
                 return;
@@ -349,9 +503,14 @@ public final class PackageHandler extends Handler {
                 return;
             case 25:
                 int i18 = message.arg1;
-                PackageVerificationState packageVerificationState3 = (PackageVerificationState) this.mPm.mPendingVerification.get(i18);
+                PackageVerificationState packageVerificationState3 =
+                        (PackageVerificationState) this.mPm.mPendingVerification.get(i18);
                 if (packageVerificationState3 == null) {
-                    BrailleDisplayConnection$$ExternalSyntheticOutline0.m(i18, "Integrity verification with id ", " not found. It may be invalid or overridden by verifier", "PackageManager");
+                    BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                            i18,
+                            "Integrity verification with id ",
+                            " not found. It may be invalid or overridden by verifier",
+                            "PackageManager");
                     return;
                 }
                 int intValue = ((Integer) message.obj).intValue();
@@ -372,12 +531,16 @@ public final class PackageHandler extends Handler {
                 return;
             case 26:
                 int i19 = message.arg1;
-                PackageVerificationState packageVerificationState4 = (PackageVerificationState) this.mPm.mPendingVerification.get(i19);
-                if (packageVerificationState4 == null || packageVerificationState4.mIntegrityVerificationComplete) {
+                PackageVerificationState packageVerificationState4 =
+                        (PackageVerificationState) this.mPm.mPendingVerification.get(i19);
+                if (packageVerificationState4 == null
+                        || packageVerificationState4.mIntegrityVerificationComplete) {
                     return;
                 }
                 VerifyingSession verifyingSession4 = packageVerificationState4.mVerifyingSession;
-                String str3 = "Integrity verification timed out for " + Uri.fromFile(verifyingSession4.mOriginInfo.mResolvedFile);
+                String str3 =
+                        "Integrity verification timed out for "
+                                + Uri.fromFile(verifyingSession4.mOriginInfo.mResolvedFile);
                 Slog.i("PackageManager", str3);
                 packageVerificationState4.mIntegrityVerificationComplete = true;
                 verifyingSession4.setReturnCode(-22, str3);
@@ -389,14 +552,27 @@ public final class PackageHandler extends Handler {
                 verifyingSession4.handleReturnCode();
                 return;
             case 27:
-                ((DomainVerificationService) this.mPm.mDomainVerificationManager).mProxy.runMessage(message.arg1, message.obj);
+                ((DomainVerificationService) this.mPm.mDomainVerificationManager)
+                        .mProxy.runMessage(message.arg1, message.obj);
                 return;
             case 28:
                 try {
-                    this.mPm.mInjector.getSharedLibrariesImpl().pruneUnusedStaticSharedLibraries(this.mPm.snapshotComputer(), Long.MAX_VALUE, Settings.Global.getLong(this.mPm.mContext.getContentResolver(), "unused_static_shared_lib_min_cache_period", PackageManagerService.DEFAULT_UNUSED_STATIC_SHARED_LIB_MIN_CACHE_PERIOD));
+                    this.mPm
+                            .mInjector
+                            .getSharedLibrariesImpl()
+                            .pruneUnusedStaticSharedLibraries(
+                                    this.mPm.snapshotComputer(),
+                                    Long.MAX_VALUE,
+                                    Settings.Global.getLong(
+                                            this.mPm.mContext.getContentResolver(),
+                                            "unused_static_shared_lib_min_cache_period",
+                                            PackageManagerService
+                                                    .DEFAULT_UNUSED_STATIC_SHARED_LIB_MIN_CACHE_PERIOD));
                     return;
                 } catch (IOException e2) {
-                    Log.w("PackageManager", "Failed to prune unused static shared libraries :" + e2.getMessage());
+                    Log.w(
+                            "PackageManager",
+                            "Failed to prune unused static shared libraries :" + e2.getMessage());
                     return;
                 }
             default:
@@ -405,9 +581,9 @@ public final class PackageHandler extends Handler {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:324:0x0641, code lost:
-    
-        if (r7 == r0) goto L285;
-     */
+
+       if (r7 == r0) goto L285;
+    */
     /* JADX WARN: Removed duplicated region for block: B:262:0x07b4  */
     /* JADX WARN: Removed duplicated region for block: B:267:0x07cb A[EDGE_INSN: B:267:0x07cb->B:274:0x07cb BREAK  A[LOOP:3: B:261:0x07b2->B:264:0x07bf], SYNTHETIC] */
     /*
@@ -419,7 +595,9 @@ public final class PackageHandler extends Handler {
             Method dump skipped, instructions count: 2224
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.PackageHandler.doHandlePostInstall(android.os.Message):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.PackageHandler.doHandlePostInstall(android.os.Message):void");
     }
 
     @Override // android.os.Handler

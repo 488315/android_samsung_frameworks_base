@@ -7,21 +7,24 @@ import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.Xml;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
-import com.android.server.appop.AppOpsService;
 import com.android.server.appop.AppOpsService.Op;
 import com.android.server.appop.AppOpsService.UidState;
+
 import com.samsung.android.knox.analytics.service.KnoxAnalyticsSystemService;
 import com.samsung.android.knox.analytics.util.KnoxAnalyticsDataConverter;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -34,7 +37,8 @@ public final class AppOpsRecentAccessPersistence {
         this.mAppOpsService = appOpsService;
     }
 
-    public static void writeDeviceAttributedOps(TypedXmlSerializer typedXmlSerializer, AppOpsService.Op op) {
+    public static void writeDeviceAttributedOps(
+            TypedXmlSerializer typedXmlSerializer, AppOpsService.Op op) {
         ArrayMap arrayMap;
         AppOpsManager.AttributedOpEntry attributedOpEntry;
         AppOpsService.Op op2 = op;
@@ -45,7 +49,8 @@ public final class AppOpsRecentAccessPersistence {
             int i = 0;
             while (i < arrayMap2.size()) {
                 String str2 = (String) arrayMap2.keyAt(i);
-                AppOpsManager.AttributedOpEntry createAttributedOpEntryLocked = ((AttributedOp) arrayMap2.valueAt(i)).createAttributedOpEntryLocked();
+                AppOpsManager.AttributedOpEntry createAttributedOpEntryLocked =
+                        ((AttributedOp) arrayMap2.valueAt(i)).createAttributedOpEntryLocked();
                 ArraySet collectKeys = createAttributedOpEntryLocked.collectKeys();
                 int i2 = 0;
                 while (i2 < collectKeys.size()) {
@@ -53,16 +58,36 @@ public final class AppOpsRecentAccessPersistence {
                     int extractUidStateFromKey = AppOpsManager.extractUidStateFromKey(longValue);
                     int extractFlagsFromKey = AppOpsManager.extractFlagsFromKey(longValue);
                     int i3 = i;
-                    long lastAccessTime = createAttributedOpEntryLocked.getLastAccessTime(extractUidStateFromKey, extractUidStateFromKey, extractFlagsFromKey);
+                    long lastAccessTime =
+                            createAttributedOpEntryLocked.getLastAccessTime(
+                                    extractUidStateFromKey,
+                                    extractUidStateFromKey,
+                                    extractFlagsFromKey);
                     Iterator it2 = it;
-                    long lastRejectTime = createAttributedOpEntryLocked.getLastRejectTime(extractUidStateFromKey, extractUidStateFromKey, extractFlagsFromKey);
+                    long lastRejectTime =
+                            createAttributedOpEntryLocked.getLastRejectTime(
+                                    extractUidStateFromKey,
+                                    extractUidStateFromKey,
+                                    extractFlagsFromKey);
                     ArraySet arraySet = collectKeys;
                     int i4 = i2;
-                    long lastDuration = createAttributedOpEntryLocked.getLastDuration(extractUidStateFromKey, extractUidStateFromKey, extractFlagsFromKey);
-                    AppOpsManager.OpEventProxyInfo lastProxyInfo = createAttributedOpEntryLocked.getLastProxyInfo(extractUidStateFromKey, extractUidStateFromKey, extractFlagsFromKey);
-                    if (lastAccessTime > 0 || lastRejectTime > 0 || lastDuration > 0 || lastProxyInfo != null) {
+                    long lastDuration =
+                            createAttributedOpEntryLocked.getLastDuration(
+                                    extractUidStateFromKey,
+                                    extractUidStateFromKey,
+                                    extractFlagsFromKey);
+                    AppOpsManager.OpEventProxyInfo lastProxyInfo =
+                            createAttributedOpEntryLocked.getLastProxyInfo(
+                                    extractUidStateFromKey,
+                                    extractUidStateFromKey,
+                                    extractFlagsFromKey);
+                    if (lastAccessTime > 0
+                            || lastRejectTime > 0
+                            || lastDuration > 0
+                            || lastProxyInfo != null) {
                         arrayMap = arrayMap2;
-                        typedXmlSerializer.startTag((String) null, KnoxAnalyticsSystemService.STATUS_PARAMETER_NAME);
+                        typedXmlSerializer.startTag(
+                                (String) null, KnoxAnalyticsSystemService.STATUS_PARAMETER_NAME);
                         attributedOpEntry = createAttributedOpEntryLocked;
                         if (str2 != null) {
                             typedXmlSerializer.attribute((String) null, "id", str2);
@@ -72,7 +97,10 @@ public final class AppOpsRecentAccessPersistence {
                             typedXmlSerializer.attribute((String) null, "dv", str);
                         }
                         if (lastAccessTime > 0) {
-                            typedXmlSerializer.attributeLong((String) null, KnoxAnalyticsDataConverter.TIMESTAMP, lastAccessTime);
+                            typedXmlSerializer.attributeLong(
+                                    (String) null,
+                                    KnoxAnalyticsDataConverter.TIMESTAMP,
+                                    lastAccessTime);
                         }
                         if (lastRejectTime > 0) {
                             typedXmlSerializer.attributeLong((String) null, "r", lastRejectTime);
@@ -81,18 +109,24 @@ public final class AppOpsRecentAccessPersistence {
                             typedXmlSerializer.attributeLong((String) null, "d", lastDuration);
                         }
                         if (lastProxyInfo != null) {
-                            typedXmlSerializer.attributeInt((String) null, "pu", lastProxyInfo.getUid());
+                            typedXmlSerializer.attributeInt(
+                                    (String) null, "pu", lastProxyInfo.getUid());
                             if (lastProxyInfo.getPackageName() != null) {
-                                typedXmlSerializer.attribute((String) null, "pp", lastProxyInfo.getPackageName());
+                                typedXmlSerializer.attribute(
+                                        (String) null, "pp", lastProxyInfo.getPackageName());
                             }
                             if (lastProxyInfo.getAttributionTag() != null) {
-                                typedXmlSerializer.attribute((String) null, "pc", lastProxyInfo.getAttributionTag());
+                                typedXmlSerializer.attribute(
+                                        (String) null, "pc", lastProxyInfo.getAttributionTag());
                             }
-                            if (lastProxyInfo.getDeviceId() != null && !Objects.equals(lastProxyInfo.getDeviceId(), "default:0")) {
-                                typedXmlSerializer.attribute((String) null, "pdv", lastProxyInfo.getDeviceId());
+                            if (lastProxyInfo.getDeviceId() != null
+                                    && !Objects.equals(lastProxyInfo.getDeviceId(), "default:0")) {
+                                typedXmlSerializer.attribute(
+                                        (String) null, "pdv", lastProxyInfo.getDeviceId());
                             }
                         }
-                        typedXmlSerializer.endTag((String) null, KnoxAnalyticsSystemService.STATUS_PARAMETER_NAME);
+                        typedXmlSerializer.endTag(
+                                (String) null, KnoxAnalyticsSystemService.STATUS_PARAMETER_NAME);
                     } else {
                         arrayMap = arrayMap2;
                         attributedOpEntry = createAttributedOpEntryLocked;
@@ -142,12 +176,14 @@ public final class AppOpsRecentAccessPersistence {
                         int attributeInt = typedXmlPullParser.getAttributeInt(str6, str7);
                         AppOpsService appOpsService2 = this.mAppOpsService;
                         Objects.requireNonNull(appOpsService2);
-                        AppOpsService.UidState uidState2 = appOpsService2.new UidState(attributeInt);
+                        AppOpsService.UidState uidState2 =
+                                appOpsService2.new UidState(attributeInt);
                         sparseArray.put(attributeInt, uidState2);
                         int depth2 = typedXmlPullParser.getDepth();
                         while (true) {
                             int next2 = typedXmlPullParser.next();
-                            if (next2 == i3 || (next2 == i4 && typedXmlPullParser.getDepth() <= depth2)) {
+                            if (next2 == i3
+                                    || (next2 == i4 && typedXmlPullParser.getDepth() <= depth2)) {
                                 break;
                             }
                             if (next2 != i4 && next2 != i5) {
@@ -156,45 +192,104 @@ public final class AppOpsRecentAccessPersistence {
                                     i = depth2;
                                     appOpsService = appOpsService2;
                                     uidState = uidState2;
-                                    AppOpsService.Op op3 = appOpsService2.new Op(uidState2, attributeValue, typedXmlPullParser.getAttributeInt(str6, str7), uidState2.uid);
+                                    AppOpsService.Op op3 =
+                                            appOpsService2
+                                            .new Op(
+                                                    uidState2,
+                                                    attributeValue,
+                                                    typedXmlPullParser.getAttributeInt(str6, str7),
+                                                    uidState2.uid);
                                     int depth3 = typedXmlPullParser.getDepth();
                                     while (true) {
                                         int next3 = typedXmlPullParser.next();
-                                        if (next3 == 1 || (next3 == i4 && typedXmlPullParser.getDepth() <= depth3)) {
+                                        if (next3 == 1
+                                                || (next3 == i4
+                                                        && typedXmlPullParser.getDepth()
+                                                                <= depth3)) {
                                             break;
                                         }
                                         if (next3 != i4 && next3 != i5) {
-                                            if (typedXmlPullParser.getName().equals(KnoxAnalyticsSystemService.STATUS_PARAMETER_NAME)) {
-                                                String readStringAttribute = XmlUtils.readStringAttribute(typedXmlPullParser, "id");
-                                                long attributeLong = typedXmlPullParser.getAttributeLong((String) null, str7);
-                                                int extractUidStateFromKey = AppOpsManager.extractUidStateFromKey(attributeLong);
-                                                int extractFlagsFromKey = AppOpsManager.extractFlagsFromKey(attributeLong);
-                                                String attributeValue2 = typedXmlPullParser.getAttributeValue((String) null, "dv");
-                                                long attributeLong2 = typedXmlPullParser.getAttributeLong((String) null, KnoxAnalyticsDataConverter.TIMESTAMP, 0L);
+                                            if (typedXmlPullParser
+                                                    .getName()
+                                                    .equals(
+                                                            KnoxAnalyticsSystemService
+                                                                    .STATUS_PARAMETER_NAME)) {
+                                                String readStringAttribute =
+                                                        XmlUtils.readStringAttribute(
+                                                                typedXmlPullParser, "id");
+                                                long attributeLong =
+                                                        typedXmlPullParser.getAttributeLong(
+                                                                (String) null, str7);
+                                                int extractUidStateFromKey =
+                                                        AppOpsManager.extractUidStateFromKey(
+                                                                attributeLong);
+                                                int extractFlagsFromKey =
+                                                        AppOpsManager.extractFlagsFromKey(
+                                                                attributeLong);
+                                                String attributeValue2 =
+                                                        typedXmlPullParser.getAttributeValue(
+                                                                (String) null, "dv");
+                                                long attributeLong2 =
+                                                        typedXmlPullParser.getAttributeLong(
+                                                                (String) null,
+                                                                KnoxAnalyticsDataConverter
+                                                                        .TIMESTAMP,
+                                                                0L);
                                                 i2 = depth3;
                                                 str5 = str7;
-                                                long attributeLong3 = typedXmlPullParser.getAttributeLong((String) null, "r", 0L);
-                                                long attributeLong4 = typedXmlPullParser.getAttributeLong((String) null, "d", -1L);
-                                                String readStringAttribute2 = XmlUtils.readStringAttribute(typedXmlPullParser, "pp");
-                                                int attributeInt2 = typedXmlPullParser.getAttributeInt((String) null, "pu", -1);
-                                                String readStringAttribute3 = XmlUtils.readStringAttribute(typedXmlPullParser, "pc");
-                                                String attributeValue3 = typedXmlPullParser.getAttributeValue((String) null, "pdv");
-                                                if (attributeValue2 == null || attributeValue2.equals("")) {
+                                                long attributeLong3 =
+                                                        typedXmlPullParser.getAttributeLong(
+                                                                (String) null, "r", 0L);
+                                                long attributeLong4 =
+                                                        typedXmlPullParser.getAttributeLong(
+                                                                (String) null, "d", -1L);
+                                                String readStringAttribute2 =
+                                                        XmlUtils.readStringAttribute(
+                                                                typedXmlPullParser, "pp");
+                                                int attributeInt2 =
+                                                        typedXmlPullParser.getAttributeInt(
+                                                                (String) null, "pu", -1);
+                                                String readStringAttribute3 =
+                                                        XmlUtils.readStringAttribute(
+                                                                typedXmlPullParser, "pc");
+                                                String attributeValue3 =
+                                                        typedXmlPullParser.getAttributeValue(
+                                                                (String) null, "pdv");
+                                                if (attributeValue2 == null
+                                                        || attributeValue2.equals("")) {
                                                     attributeValue2 = "default:0";
                                                 }
                                                 op = op2;
-                                                AttributedOp orCreateAttribution = op.getOrCreateAttribution(op, readStringAttribute, attributeValue2);
+                                                AttributedOp orCreateAttribution =
+                                                        op.getOrCreateAttribution(
+                                                                op,
+                                                                readStringAttribute,
+                                                                attributeValue2);
                                                 if (attributeLong2 > 0) {
-                                                    orCreateAttribution.accessed(attributeLong2, attributeLong4, attributeInt2, readStringAttribute2, readStringAttribute3, attributeValue3, extractUidStateFromKey, extractFlagsFromKey);
+                                                    orCreateAttribution.accessed(
+                                                            attributeLong2,
+                                                            attributeLong4,
+                                                            attributeInt2,
+                                                            readStringAttribute2,
+                                                            readStringAttribute3,
+                                                            attributeValue3,
+                                                            extractUidStateFromKey,
+                                                            extractFlagsFromKey);
                                                 }
                                                 if (attributeLong3 > 0) {
-                                                    orCreateAttribution.rejected(extractUidStateFromKey, extractFlagsFromKey, attributeLong3);
+                                                    orCreateAttribution.rejected(
+                                                            extractUidStateFromKey,
+                                                            extractFlagsFromKey,
+                                                            attributeLong3);
                                                 }
                                             } else {
                                                 i2 = depth3;
                                                 str5 = str7;
                                                 op = op2;
-                                                Slog.w("AppOpsRecentAccessPersistence", "Unknown element under <op>: " + typedXmlPullParser.getName());
+                                                Slog.w(
+                                                        "AppOpsRecentAccessPersistence",
+                                                        "Unknown element under <op>: "
+                                                                + typedXmlPullParser.getName());
                                                 XmlUtils.skipCurrentTag(typedXmlPullParser);
                                             }
                                             op2 = op;
@@ -207,7 +302,8 @@ public final class AppOpsRecentAccessPersistence {
                                     str4 = str7;
                                     AppOpsService.Op op4 = op2;
                                     str3 = null;
-                                    AppOpsService.Ops ops = (AppOpsService.Ops) uidState.pkgOps.get(attributeValue);
+                                    AppOpsService.Ops ops =
+                                            (AppOpsService.Ops) uidState.pkgOps.get(attributeValue);
                                     if (ops == null) {
                                         ops = new AppOpsService.Ops(attributeValue, uidState);
                                         uidState.pkgOps.put(attributeValue, ops);
@@ -219,7 +315,10 @@ public final class AppOpsRecentAccessPersistence {
                                     i = depth2;
                                     appOpsService = appOpsService2;
                                     uidState = uidState2;
-                                    Slog.w("AppOpsRecentAccessPersistence", "Unknown element under <pkg>: " + typedXmlPullParser.getName());
+                                    Slog.w(
+                                            "AppOpsRecentAccessPersistence",
+                                            "Unknown element under <pkg>: "
+                                                    + typedXmlPullParser.getName());
                                     XmlUtils.skipCurrentTag(typedXmlPullParser);
                                 }
                                 str6 = str3;
@@ -238,7 +337,9 @@ public final class AppOpsRecentAccessPersistence {
                     } else {
                         str = str6;
                         str2 = str7;
-                        Slog.w("AppOpsRecentAccessPersistence", "Unknown element under <pkg>: " + typedXmlPullParser.getName());
+                        Slog.w(
+                                "AppOpsRecentAccessPersistence",
+                                "Unknown element under <pkg>: " + typedXmlPullParser.getName());
                         XmlUtils.skipCurrentTag(typedXmlPullParser);
                     }
                     str6 = str;
@@ -265,7 +366,12 @@ public final class AppOpsRecentAccessPersistence {
                                 break;
                             }
                         } while (next != 1);
-                    } catch (IOException | IllegalStateException | IndexOutOfBoundsException | NullPointerException | NumberFormatException | XmlPullParserException e) {
+                    } catch (IOException
+                            | IllegalStateException
+                            | IndexOutOfBoundsException
+                            | NullPointerException
+                            | NumberFormatException
+                            | XmlPullParserException e) {
                         Slog.w("AppOpsRecentAccessPersistence", "Failed parsing " + e);
                         sparseArray.clear();
                         this.mAppOpsService.mAppOpsCheckingService.clearAllModes();
@@ -278,8 +384,7 @@ public final class AppOpsRecentAccessPersistence {
                         int next2 = resolvePullParser.next();
                         if (next2 != 1) {
                             if (next2 == 3) {
-                                if (resolvePullParser.getDepth() > depth) {
-                                }
+                                if (resolvePullParser.getDepth() > depth) {}
                             }
                             if (next2 != 3 && next2 != 4) {
                                 String name = resolvePullParser.getName();
@@ -288,7 +393,10 @@ public final class AppOpsRecentAccessPersistence {
                                 } else if (name.equals("uid")) {
                                     XmlUtils.skipCurrentTag(resolvePullParser);
                                 } else {
-                                    Slog.w("AppOpsRecentAccessPersistence", "Unknown element under <app-ops>: " + resolvePullParser.getName());
+                                    Slog.w(
+                                            "AppOpsRecentAccessPersistence",
+                                            "Unknown element under <app-ops>: "
+                                                    + resolvePullParser.getName());
                                     XmlUtils.skipCurrentTag(resolvePullParser);
                                 }
                             }
@@ -308,7 +416,11 @@ public final class AppOpsRecentAccessPersistence {
                     throw th;
                 }
             } catch (FileNotFoundException unused3) {
-                Slog.i("AppOpsRecentAccessPersistence", "No existing app ops " + this.mRecentAccessesFile.getBaseFile() + "; starting empty");
+                Slog.i(
+                        "AppOpsRecentAccessPersistence",
+                        "No existing app ops "
+                                + this.mRecentAccessesFile.getBaseFile()
+                                + "; starting empty");
             }
         }
     }
@@ -324,11 +436,13 @@ public final class AppOpsRecentAccessPersistence {
                         resolveSerializer.startTag((String) null, "app-ops");
                         resolveSerializer.attributeInt((String) null, "v", 1);
                         for (int i = 0; i < sparseArray.size(); i++) {
-                            AppOpsService.UidState uidState = (AppOpsService.UidState) sparseArray.valueAt(i);
+                            AppOpsService.UidState uidState =
+                                    (AppOpsService.UidState) sparseArray.valueAt(i);
                             int i2 = uidState.uid;
                             for (int i3 = 0; i3 < uidState.pkgOps.size(); i3++) {
                                 String str = (String) uidState.pkgOps.keyAt(i3);
-                                AppOpsService.Ops ops = (AppOpsService.Ops) uidState.pkgOps.valueAt(i3);
+                                AppOpsService.Ops ops =
+                                        (AppOpsService.Ops) uidState.pkgOps.valueAt(i3);
                                 resolveSerializer.startTag((String) null, "pkg");
                                 resolveSerializer.attribute((String) null, "n", str);
                                 resolveSerializer.startTag((String) null, "uid");
@@ -348,7 +462,10 @@ public final class AppOpsRecentAccessPersistence {
                         resolveSerializer.endDocument();
                         this.mRecentAccessesFile.finishWrite(startWrite);
                     } catch (IOException e) {
-                        Slog.w("AppOpsRecentAccessPersistence", "Failed to write state, restoring backup.", e);
+                        Slog.w(
+                                "AppOpsRecentAccessPersistence",
+                                "Failed to write state, restoring backup.",
+                                e);
                         this.mRecentAccessesFile.failWrite(startWrite);
                     }
                 } catch (IOException e2) {

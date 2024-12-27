@@ -13,8 +13,9 @@ import android.os.Looper;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.samsung.android.ims.extensions.SemContextExt;
-import com.samsung.android.ims.options.SemImsCapabilityService;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -48,15 +49,19 @@ public class SemCapabilityManager {
 
     private void init() {
         this.LOG_TAG = "semCapabilityManager[" + this.mPhoneId + "] this: " + this;
-        this.mRestartReceiver = new BroadcastReceiver() { // from class: com.samsung.android.ims.options.SemCapabilityManager.1
-            @Override // android.content.BroadcastReceiver
-            public void onReceive(Context context, Intent intent) {
-                Log.i(SemCapabilityManager.this.LOG_TAG, "onReceive " + intent.getAction());
-                if (TextUtils.equals(intent.getAction(), SemCapabilityManager.INTENT_ACTION_IMSSERVICE_RESTART)) {
-                    Log.i(SemCapabilityManager.this.LOG_TAG, "IMS service restarted.");
-                }
-            }
-        };
+        this.mRestartReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.samsung.android.ims.options.SemCapabilityManager.1
+                    @Override // android.content.BroadcastReceiver
+                    public void onReceive(Context context, Intent intent) {
+                        Log.i(SemCapabilityManager.this.LOG_TAG, "onReceive " + intent.getAction());
+                        if (TextUtils.equals(
+                                intent.getAction(),
+                                SemCapabilityManager.INTENT_ACTION_IMSSERVICE_RESTART)) {
+                            Log.i(SemCapabilityManager.this.LOG_TAG, "IMS service restarted.");
+                        }
+                    }
+                };
         IntentFilter filter = new IntentFilter();
         filter.addAction(INTENT_ACTION_IMSSERVICE_RESTART);
         this.mContext.registerReceiver(this.mRestartReceiver, filter);
@@ -72,39 +77,51 @@ public class SemCapabilityManager {
             return;
         }
         Log.i(this.LOG_TAG, "Connecting to SemCapabilityDiscoveryService...");
-        this.mConnection = new ServiceConnection() { // from class: com.samsung.android.ims.options.SemCapabilityManager.2
-            @Override // android.content.ServiceConnection
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                Log.i(SemCapabilityManager.this.LOG_TAG, "Connected to SemCapabilityDiscoveryService.");
-                SemCapabilityManager.this.mImsCapabilityService = SemImsCapabilityService.Stub.asInterface(service);
-                if (SemCapabilityManager.this.mListener != null) {
-                    SemCapabilityManager.this.mListener.onConnected();
-                }
-                if (!SemCapabilityManager.this.mQueuedCapabilityListener.isEmpty()) {
-                    try {
-                        for (SemCapabilityListener listener : SemCapabilityManager.this.mQueuedCapabilityListener) {
-                            SemCapabilityManager.this.registerListener(listener);
+        this.mConnection =
+                new ServiceConnection() { // from class:
+                                          // com.samsung.android.ims.options.SemCapabilityManager.2
+                    @Override // android.content.ServiceConnection
+                    public void onServiceConnected(ComponentName name, IBinder service) {
+                        Log.i(
+                                SemCapabilityManager.this.LOG_TAG,
+                                "Connected to SemCapabilityDiscoveryService.");
+                        SemCapabilityManager.this.mImsCapabilityService =
+                                SemImsCapabilityService.Stub.asInterface(service);
+                        if (SemCapabilityManager.this.mListener != null) {
+                            SemCapabilityManager.this.mListener.onConnected();
                         }
-                        SemCapabilityManager.this.mQueuedCapabilityListener.clear();
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                        Log.e(SemCapabilityManager.this.LOG_TAG, "registerListener failed. RemoteException: " + e);
+                        if (!SemCapabilityManager.this.mQueuedCapabilityListener.isEmpty()) {
+                            try {
+                                for (SemCapabilityListener listener :
+                                        SemCapabilityManager.this.mQueuedCapabilityListener) {
+                                    SemCapabilityManager.this.registerListener(listener);
+                                }
+                                SemCapabilityManager.this.mQueuedCapabilityListener.clear();
+                            } catch (RemoteException e) {
+                                e.printStackTrace();
+                                Log.e(
+                                        SemCapabilityManager.this.LOG_TAG,
+                                        "registerListener failed. RemoteException: " + e);
+                            }
+                        }
                     }
-                }
-            }
 
-            @Override // android.content.ServiceConnection
-            public void onServiceDisconnected(ComponentName name) {
-                Log.i(SemCapabilityManager.this.LOG_TAG, "Disconnected to SemCapabilityDiscoveryService.");
-                if (SemCapabilityManager.this.mListener != null) {
-                    SemCapabilityManager.this.mListener.onDisconnected();
-                }
-                SemCapabilityManager.this.mImsCapabilityService = null;
-            }
-        };
+                    @Override // android.content.ServiceConnection
+                    public void onServiceDisconnected(ComponentName name) {
+                        Log.i(
+                                SemCapabilityManager.this.LOG_TAG,
+                                "Disconnected to SemCapabilityDiscoveryService.");
+                        if (SemCapabilityManager.this.mListener != null) {
+                            SemCapabilityManager.this.mListener.onDisconnected();
+                        }
+                        SemCapabilityManager.this.mImsCapabilityService = null;
+                    }
+                };
         Intent intent = new Intent();
-        intent.setClassName("com.sec.imsservice", "com.sec.internal.ims.imsservice.SemCapabilityService");
-        SemContextExt.bindServiceAsUser(this.mContext, intent, this.mConnection, 1, SemContextExt.CURRENT_OR_SELF);
+        intent.setClassName(
+                "com.sec.imsservice", "com.sec.internal.ims.imsservice.SemCapabilityService");
+        SemContextExt.bindServiceAsUser(
+                this.mContext, intent, this.mConnection, 1, SemContextExt.CURRENT_OR_SELF);
     }
 
     public void disconnect() {
@@ -141,25 +158,35 @@ public class SemCapabilityManager {
         if (uri == null || this.mImsCapabilityService == null) {
             return null;
         }
-        return this.mImsCapabilityService.getCapabilities(uri.toString(), refreshType, this.mPhoneId);
+        return this.mImsCapabilityService.getCapabilities(
+                uri.toString(), refreshType, this.mPhoneId);
     }
 
-    public SemCapabilities getCapabilitiesByNumber(String number, int refreshType, boolean delay) throws RemoteException {
+    public SemCapabilities getCapabilitiesByNumber(String number, int refreshType, boolean delay)
+            throws RemoteException {
         if (this.mImsCapabilityService != null) {
-            return this.mImsCapabilityService.getCapabilitiesByNumber(number, refreshType, delay, this.mPhoneId);
+            return this.mImsCapabilityService.getCapabilitiesByNumber(
+                    number, refreshType, delay, this.mPhoneId);
         }
         return null;
     }
 
-    public SemCapabilities[] getCapabilitiesByContactId(String contactId, int refreshType) throws RemoteException {
+    public SemCapabilities[] getCapabilitiesByContactId(String contactId, int refreshType)
+            throws RemoteException {
         if (this.mImsCapabilityService != null) {
-            return this.mImsCapabilityService.getCapabilitiesByContactId(contactId, refreshType, this.mPhoneId);
+            return this.mImsCapabilityService.getCapabilitiesByContactId(
+                    contactId, refreshType, this.mPhoneId);
         }
         return null;
     }
 
     public void registerListener(SemCapabilityListener listener) throws RemoteException {
-        Log.i(this.LOG_TAG, "registerListener: listener = " + listener + ", Caller = " + Binder.getCallingPid());
+        Log.i(
+                this.LOG_TAG,
+                "registerListener: listener = "
+                        + listener
+                        + ", Caller = "
+                        + Binder.getCallingPid());
         if (listener == null || !TextUtils.isEmpty(listener.getToken())) {
             Log.i(this.LOG_TAG, "registerListener: token is notEmpty ");
             return;
@@ -168,7 +195,8 @@ public class SemCapabilityManager {
             Log.e(this.LOG_TAG, "registerListener: not connected.");
             this.mQueuedCapabilityListener.add(listener);
         } else {
-            String token = this.mImsCapabilityService.registerListener(listener.callback, this.mPhoneId);
+            String token =
+                    this.mImsCapabilityService.registerListener(listener.callback, this.mPhoneId);
             if (token != null) {
                 listener.setToken(token);
             }

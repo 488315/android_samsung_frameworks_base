@@ -5,8 +5,6 @@ import android.app.ActivityOptions;
 import android.app.ActivityThread;
 import android.app.IActivityManager;
 import android.app.IApplicationThread;
-import android.content.IIntentReceiver;
-import android.content.IIntentSender;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -21,32 +19,34 @@ public class IntentSender implements Parcelable {
     private ActivityManager.PendingIntentInfo mCachedInfo;
     private final IIntentSender mTarget;
     IBinder mWhitelistToken;
-    private static final Bundle SEND_INTENT_DEFAULT_OPTIONS = ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(-1).toBundle();
-    public static final Parcelable.Creator<IntentSender> CREATOR = new Parcelable.Creator<IntentSender>() { // from class: android.content.IntentSender.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IntentSender createFromParcel(Parcel in) {
-            IBinder target = in.readStrongBinder();
-            if (target != null) {
-                return new IntentSender(target);
-            }
-            return null;
-        }
+    private static final Bundle SEND_INTENT_DEFAULT_OPTIONS =
+            ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(-1).toBundle();
+    public static final Parcelable.Creator<IntentSender> CREATOR =
+            new Parcelable.Creator<IntentSender>() { // from class: android.content.IntentSender.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IntentSender createFromParcel(Parcel in) {
+                    IBinder target = in.readStrongBinder();
+                    if (target != null) {
+                        return new IntentSender(target);
+                    }
+                    return null;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IntentSender[] newArray(int size) {
-            return new IntentSender[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IntentSender[] newArray(int size) {
+                    return new IntentSender[size];
+                }
+            };
 
     public interface OnFinished {
-        void onSendFinished(IntentSender intentSender, Intent intent, int i, String str, Bundle bundle);
+        void onSendFinished(
+                IntentSender intentSender, Intent intent, int i, String str, Bundle bundle);
     }
 
     public static class SendIntentException extends AndroidException {
-        public SendIntentException() {
-        }
+        public SendIntentException() {}
 
         public SendIntentException(String name) {
             super(name);
@@ -73,7 +73,14 @@ public class IntentSender implements Parcelable {
         }
 
         @Override // android.content.IIntentReceiver
-        public void performReceive(Intent intent, int resultCode, String data, Bundle extras, boolean serialized, boolean sticky, int sendingUser) {
+        public void performReceive(
+                Intent intent,
+                int resultCode,
+                String data,
+                Bundle extras,
+                boolean serialized,
+                boolean sticky,
+                int sendingUser) {
             this.mIntent = intent;
             this.mResultCode = resultCode;
             this.mResultData = data;
@@ -87,19 +94,48 @@ public class IntentSender implements Parcelable {
 
         @Override // java.lang.Runnable
         public void run() {
-            this.mWho.onSendFinished(this.mIntentSender, this.mIntent, this.mResultCode, this.mResultData, this.mResultExtras);
+            this.mWho.onSendFinished(
+                    this.mIntentSender,
+                    this.mIntent,
+                    this.mResultCode,
+                    this.mResultData,
+                    this.mResultExtras);
         }
     }
 
-    public void sendIntent(Context context, int code, Intent intent, OnFinished onFinished, Handler handler) throws SendIntentException {
+    public void sendIntent(
+            Context context, int code, Intent intent, OnFinished onFinished, Handler handler)
+            throws SendIntentException {
         sendIntent(context, code, intent, onFinished, handler, null, SEND_INTENT_DEFAULT_OPTIONS);
     }
 
-    public void sendIntent(Context context, int code, Intent intent, OnFinished onFinished, Handler handler, String requiredPermission) throws SendIntentException {
-        sendIntent(context, code, intent, onFinished, handler, requiredPermission, SEND_INTENT_DEFAULT_OPTIONS);
+    public void sendIntent(
+            Context context,
+            int code,
+            Intent intent,
+            OnFinished onFinished,
+            Handler handler,
+            String requiredPermission)
+            throws SendIntentException {
+        sendIntent(
+                context,
+                code,
+                intent,
+                onFinished,
+                handler,
+                requiredPermission,
+                SEND_INTENT_DEFAULT_OPTIONS);
     }
 
-    public void sendIntent(Context context, int code, Intent intent, OnFinished onFinished, Handler handler, String requiredPermission, Bundle options) throws SendIntentException {
+    public void sendIntent(
+            Context context,
+            int code,
+            Intent intent,
+            OnFinished onFinished,
+            Handler handler,
+            String requiredPermission,
+            Bundle options)
+            throws SendIntentException {
         String resolvedType;
         FinishedDispatcher finishedDispatcher;
         if (intent != null) {
@@ -124,7 +160,17 @@ public class IntentSender implements Parcelable {
         } else {
             finishedDispatcher = null;
         }
-        int res = service.sendIntentSender(app, iIntentSender, iBinder, code, intent, resolvedType, finishedDispatcher, requiredPermission, options);
+        int res =
+                service.sendIntentSender(
+                        app,
+                        iIntentSender,
+                        iBinder,
+                        code,
+                        intent,
+                        resolvedType,
+                        finishedDispatcher,
+                        requiredPermission,
+                        options);
         if (res < 0) {
             throw new SendIntentException();
         }
@@ -218,7 +264,8 @@ public class IntentSender implements Parcelable {
     private ActivityManager.PendingIntentInfo getCachedInfo() {
         if (this.mCachedInfo == null) {
             try {
-                this.mCachedInfo = ActivityManager.getService().getInfoForIntentSender(this.mTarget);
+                this.mCachedInfo =
+                        ActivityManager.getService().getInfoForIntentSender(this.mTarget);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }

@@ -12,8 +12,7 @@ public interface IHdmiSystemAudioModeChangeListener extends IInterface {
 
     public static class Default implements IHdmiSystemAudioModeChangeListener {
         @Override // android.hardware.hdmi.IHdmiSystemAudioModeChangeListener
-        public void onStatusChanged(boolean enabled) throws RemoteException {
-        }
+        public void onStatusChanged(boolean enabled) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +20,9 @@ public interface IHdmiSystemAudioModeChangeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHdmiSystemAudioModeChangeListener {
-        public static final String DESCRIPTOR = "android.hardware.hdmi.IHdmiSystemAudioModeChangeListener";
+    public abstract static class Stub extends Binder implements IHdmiSystemAudioModeChangeListener {
+        public static final String DESCRIPTOR =
+                "android.hardware.hdmi.IHdmiSystemAudioModeChangeListener";
         static final int TRANSACTION_onStatusChanged = 1;
 
         public Stub() {
@@ -60,7 +60,8 @@ public interface IHdmiSystemAudioModeChangeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

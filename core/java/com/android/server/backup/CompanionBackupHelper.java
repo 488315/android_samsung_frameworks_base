@@ -24,7 +24,9 @@ public class CompanionBackupHelper extends BlobBackupHelper {
             return null;
         }
         try {
-            ICompanionDeviceManager cdm = ICompanionDeviceManager.Stub.asInterface(ServiceManager.getService(Context.COMPANION_DEVICE_SERVICE));
+            ICompanionDeviceManager cdm =
+                    ICompanionDeviceManager.Stub.asInterface(
+                            ServiceManager.getService(Context.COMPANION_DEVICE_SERVICE));
             byte[] payload = cdm.getBackupPayload(this.mUserId);
             return payload;
         } catch (Exception e) {
@@ -38,7 +40,9 @@ public class CompanionBackupHelper extends BlobBackupHelper {
         Slog.i(TAG, "Got companion backup data.");
         if (KEY_COMPANION.equals(key)) {
             try {
-                ICompanionDeviceManager cdm = ICompanionDeviceManager.Stub.asInterface(ServiceManager.getService(Context.COMPANION_DEVICE_SERVICE));
+                ICompanionDeviceManager cdm =
+                        ICompanionDeviceManager.Stub.asInterface(
+                                ServiceManager.getService(Context.COMPANION_DEVICE_SERVICE));
                 cdm.applyRestoredPayload(payload, this.mUserId);
             } catch (Exception e) {
                 Slog.e(TAG, "Error applying restored payload to CompanionDeviceManager.", e);

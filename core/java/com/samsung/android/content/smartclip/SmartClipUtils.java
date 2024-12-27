@@ -18,7 +18,12 @@ public class SmartClipUtils {
             return false;
         }
         String metaValue = metaTag.getValue();
-        return (metaTag.getType().equals("url") && (metaValue == null || metaValue.startsWith("about:") || metaValue.startsWith("email://"))) ? false : true;
+        return (metaTag.getType().equals("url")
+                        && (metaValue == null
+                                || metaValue.startsWith("about:")
+                                || metaValue.startsWith("email://")))
+                ? false
+                : true;
     }
 
     public static boolean isInstanceOf(Object o, String className) {
@@ -41,11 +46,17 @@ public class SmartClipUtils {
         } catch (PackageManager.NameNotFoundException e) {
         }
         if (ai == null) {
-            Log.e(TAG, "getChromeViewClassNameFromManifest : Could not get appInfo! - " + packageName);
+            Log.e(
+                    TAG,
+                    "getChromeViewClassNameFromManifest : Could not get appInfo! - " + packageName);
             return null;
         }
         Bundle bundle = ai.metaData;
-        if (bundle != null && (chromeViewName = bundle.getString("org.chromium.content.browser.SMART_CLIP_PROVIDER")) != null) {
+        if (bundle != null
+                && (chromeViewName =
+                                bundle.getString(
+                                        "org.chromium.content.browser.SMART_CLIP_PROVIDER"))
+                        != null) {
             Log.d(TAG, "Target chrome view = " + chromeViewName);
         }
         return chromeViewName;

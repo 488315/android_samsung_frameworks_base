@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IKeyguardLockedStateListener extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.policy.IKeyguardLockedStateListener";
+    public static final String DESCRIPTOR =
+            "com.android.internal.policy.IKeyguardLockedStateListener";
 
     void onKeyguardLockedStateChanged(boolean z) throws RemoteException;
 
     public static class Default implements IKeyguardLockedStateListener {
         @Override // com.android.internal.policy.IKeyguardLockedStateListener
-        public void onKeyguardLockedStateChanged(boolean isKeyguardLocked) throws RemoteException {
-        }
+        public void onKeyguardLockedStateChanged(boolean isKeyguardLocked) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IKeyguardLockedStateListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyguardLockedStateListener {
+    public abstract static class Stub extends Binder implements IKeyguardLockedStateListener {
         static final int TRANSACTION_onKeyguardLockedStateChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IKeyguardLockedStateListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKeyguardLockedStateListener.DESCRIPTOR);
             }
@@ -97,7 +98,8 @@ public interface IKeyguardLockedStateListener extends IInterface {
             }
 
             @Override // com.android.internal.policy.IKeyguardLockedStateListener
-            public void onKeyguardLockedStateChanged(boolean isKeyguardLocked) throws RemoteException {
+            public void onKeyguardLockedStateChanged(boolean isKeyguardLocked)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IKeyguardLockedStateListener.DESCRIPTOR);

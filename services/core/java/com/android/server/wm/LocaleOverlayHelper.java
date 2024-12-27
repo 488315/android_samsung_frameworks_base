@@ -1,12 +1,14 @@
 package com.android.server.wm;
 
 import android.os.LocaleList;
+
 import java.util.Locale;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class LocaleOverlayHelper {
-    public static LocaleList combineLocalesIfOverlayExists(LocaleList localeList, LocaleList localeList2) {
+    public static LocaleList combineLocalesIfOverlayExists(
+            LocaleList localeList, LocaleList localeList2) {
         if (localeList == null || localeList.isEmpty()) {
             return localeList;
         }

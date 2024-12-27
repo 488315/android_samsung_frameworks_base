@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class MediaResourceInfoParcel implements Parcelable {
-    public static final Parcelable.Creator<MediaResourceInfoParcel> CREATOR = new Parcelable.Creator<MediaResourceInfoParcel>() { // from class: com.samsung.android.media.MediaResourceInfoParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaResourceInfoParcel createFromParcel(Parcel _aidl_source) {
-            MediaResourceInfoParcel _aidl_out = new MediaResourceInfoParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<MediaResourceInfoParcel> CREATOR =
+            new Parcelable.Creator<
+                    MediaResourceInfoParcel>() { // from class:
+                                                 // com.samsung.android.media.MediaResourceInfoParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaResourceInfoParcel createFromParcel(Parcel _aidl_source) {
+                    MediaResourceInfoParcel _aidl_out = new MediaResourceInfoParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaResourceInfoParcel[] newArray(int _aidl_size) {
-            return new MediaResourceInfoParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaResourceInfoParcel[] newArray(int _aidl_size) {
+                    return new MediaResourceInfoParcel[_aidl_size];
+                }
+            };
     public ResourceInfoParcel[] resourceInfos;
     public int status = 0;
     public int totalSize = 0;
@@ -67,7 +70,9 @@ public class MediaResourceInfoParcel implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.resourceInfos = (ResourceInfoParcel[]) _aidl_parcel.createTypedArray(ResourceInfoParcel.CREATOR);
+                this.resourceInfos =
+                        (ResourceInfoParcel[])
+                                _aidl_parcel.createTypedArray(ResourceInfoParcel.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

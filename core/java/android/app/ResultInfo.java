@@ -4,23 +4,25 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class ResultInfo implements Parcelable {
-    public static final Parcelable.Creator<ResultInfo> CREATOR = new Parcelable.Creator<ResultInfo>() { // from class: android.app.ResultInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResultInfo createFromParcel(Parcel in) {
-            return new ResultInfo(in);
-        }
+    public static final Parcelable.Creator<ResultInfo> CREATOR =
+            new Parcelable.Creator<ResultInfo>() { // from class: android.app.ResultInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResultInfo createFromParcel(Parcel in) {
+                    return new ResultInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResultInfo[] newArray(int size) {
-            return new ResultInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResultInfo[] newArray(int size) {
+                    return new ResultInfo[size];
+                }
+            };
     public final IBinder mCallerToken;
     public final Intent mData;
     public final int mRequestCode;
@@ -31,7 +33,8 @@ public class ResultInfo implements Parcelable {
         this(resultWho, requestCode, resultCode, data, null);
     }
 
-    public ResultInfo(String resultWho, int requestCode, int resultCode, Intent data, IBinder callerToken) {
+    public ResultInfo(
+            String resultWho, int requestCode, int resultCode, Intent data, IBinder callerToken) {
         this.mResultWho = resultWho;
         this.mRequestCode = requestCode;
         this.mResultCode = resultCode;
@@ -40,7 +43,15 @@ public class ResultInfo implements Parcelable {
     }
 
     public String toString() {
-        return "ResultInfo{who=" + this.mResultWho + ", request=" + this.mRequestCode + ", result=" + this.mResultCode + ", data=" + this.mData + "}";
+        return "ResultInfo{who="
+                + this.mResultWho
+                + ", request="
+                + this.mRequestCode
+                + ", result="
+                + this.mResultCode
+                + ", data="
+                + this.mData
+                + "}";
     }
 
     @Override // android.os.Parcelable
@@ -85,11 +96,17 @@ public class ResultInfo implements Parcelable {
         } else {
             intentsEqual = this.mData.filterEquals(other.mData);
         }
-        return intentsEqual && Objects.equals(this.mResultWho, other.mResultWho) && this.mResultCode == other.mResultCode && this.mRequestCode == other.mRequestCode && this.mCallerToken == other.mCallerToken;
+        return intentsEqual
+                && Objects.equals(this.mResultWho, other.mResultWho)
+                && this.mResultCode == other.mResultCode
+                && this.mRequestCode == other.mRequestCode
+                && this.mCallerToken == other.mCallerToken;
     }
 
     public int hashCode() {
-        int result = (((((17 * 31) + this.mRequestCode) * 31) + this.mResultCode) * 31) + Objects.hashCode(this.mResultWho);
+        int result =
+                (((((17 * 31) + this.mRequestCode) * 31) + this.mResultCode) * 31)
+                        + Objects.hashCode(this.mResultWho);
         if (this.mData != null) {
             result = (result * 31) + this.mData.filterHashCode();
         }

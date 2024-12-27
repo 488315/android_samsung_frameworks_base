@@ -9,7 +9,8 @@ import android.view.Surface;
 
 /* loaded from: classes.dex */
 public interface IVirtualCameraCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.companion.virtual.camera.IVirtualCameraCallback";
+    public static final String DESCRIPTOR =
+            "android.companion.virtual.camera.IVirtualCameraCallback";
 
     void onProcessCaptureRequest(int i, long j) throws RemoteException;
 
@@ -19,16 +20,15 @@ public interface IVirtualCameraCallback extends IInterface {
 
     public static class Default implements IVirtualCameraCallback {
         @Override // android.companion.virtual.camera.IVirtualCameraCallback
-        public void onStreamConfigured(int streamId, Surface surface, int width, int height, int format) throws RemoteException {
-        }
+        public void onStreamConfigured(
+                int streamId, Surface surface, int width, int height, int format)
+                throws RemoteException {}
 
         @Override // android.companion.virtual.camera.IVirtualCameraCallback
-        public void onProcessCaptureRequest(int streamId, long frameId) throws RemoteException {
-        }
+        public void onProcessCaptureRequest(int streamId, long frameId) throws RemoteException {}
 
         @Override // android.companion.virtual.camera.IVirtualCameraCallback
-        public void onStreamClosed(int streamId) throws RemoteException {
-        }
+        public void onStreamClosed(int streamId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +36,7 @@ public interface IVirtualCameraCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualCameraCallback {
+    public abstract static class Stub extends Binder implements IVirtualCameraCallback {
         static final int TRANSACTION_onProcessCaptureRequest = 2;
         static final int TRANSACTION_onStreamClosed = 3;
         static final int TRANSACTION_onStreamConfigured = 1;
@@ -80,7 +80,8 @@ public interface IVirtualCameraCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVirtualCameraCallback.DESCRIPTOR);
             }
@@ -131,7 +132,9 @@ public interface IVirtualCameraCallback extends IInterface {
             }
 
             @Override // android.companion.virtual.camera.IVirtualCameraCallback
-            public void onStreamConfigured(int streamId, Surface surface, int width, int height, int format) throws RemoteException {
+            public void onStreamConfigured(
+                    int streamId, Surface surface, int width, int height, int format)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IVirtualCameraCallback.DESCRIPTOR);

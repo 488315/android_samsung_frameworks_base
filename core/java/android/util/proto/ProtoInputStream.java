@@ -1,6 +1,7 @@
 package android.util.proto;
 
 import android.util.LongArray;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -94,10 +95,15 @@ public final class ProtoInputStream extends ProtoStream {
             if (getOffset() == this.mPackedEnd) {
                 this.mState = (byte) (this.mState & (-3));
             } else {
-                throw new ProtoParseException("Unexpectedly reached end of packed field at offset 0x" + Integer.toHexString(this.mPackedEnd) + dumpDebugData());
+                throw new ProtoParseException(
+                        "Unexpectedly reached end of packed field at offset 0x"
+                                + Integer.toHexString(this.mPackedEnd)
+                                + dumpDebugData());
             }
         }
-        if (this.mDepth >= 0 && getOffset() == getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth))) {
+        if (this.mDepth >= 0
+                && getOffset()
+                        == getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth))) {
             this.mFieldNumber = -1;
         } else {
             readTag();
@@ -124,7 +130,11 @@ public final class ProtoInputStream extends ProtoStream {
                 this.mState = (byte) (this.mState & (-2));
                 return value;
             default:
-                throw new IllegalArgumentException("Requested field id (" + getFieldIdString(fieldId) + ") cannot be read as a double" + dumpDebugData());
+                throw new IllegalArgumentException(
+                        "Requested field id ("
+                                + getFieldIdString(fieldId)
+                                + ") cannot be read as a double"
+                                + dumpDebugData());
         }
     }
 
@@ -139,7 +149,11 @@ public final class ProtoInputStream extends ProtoStream {
                 this.mState = (byte) (this.mState & (-2));
                 return value;
             default:
-                throw new IllegalArgumentException("Requested field id (" + getFieldIdString(fieldId) + ") is not a float" + dumpDebugData());
+                throw new IllegalArgumentException(
+                        "Requested field id ("
+                                + getFieldIdString(fieldId)
+                                + ") is not a float"
+                                + dumpDebugData());
         }
     }
 
@@ -165,7 +179,11 @@ public final class ProtoInputStream extends ProtoStream {
                 value = decodeZigZag32((int) readVarint());
                 break;
             default:
-                throw new IllegalArgumentException("Requested field id (" + getFieldIdString(fieldId) + ") is not an int" + dumpDebugData());
+                throw new IllegalArgumentException(
+                        "Requested field id ("
+                                + getFieldIdString(fieldId)
+                                + ") is not an int"
+                                + dumpDebugData());
         }
         this.mState = (byte) (this.mState & (-2));
         return value;
@@ -192,7 +210,11 @@ public final class ProtoInputStream extends ProtoStream {
                 value = decodeZigZag64(readVarint());
                 break;
             default:
-                throw new IllegalArgumentException("Requested field id (" + getFieldIdString(fieldId) + ") is not an long" + dumpDebugData());
+                throw new IllegalArgumentException(
+                        "Requested field id ("
+                                + getFieldIdString(fieldId)
+                                + ") is not an long"
+                                + dumpDebugData());
         }
         this.mState = (byte) (this.mState & (-2));
         return value;
@@ -209,7 +231,11 @@ public final class ProtoInputStream extends ProtoStream {
                 this.mState = (byte) (this.mState & (-2));
                 return value;
             default:
-                throw new IllegalArgumentException("Requested field id (" + getFieldIdString(fieldId) + ") is not an boolean" + dumpDebugData());
+                throw new IllegalArgumentException(
+                        "Requested field id ("
+                                + getFieldIdString(fieldId)
+                                + ") is not an boolean"
+                                + dumpDebugData());
         }
     }
 
@@ -225,7 +251,11 @@ public final class ProtoInputStream extends ProtoStream {
                 this.mState = (byte) (len2 & (-2));
                 return value;
             default:
-                throw new IllegalArgumentException("Requested field id(" + getFieldIdString(fieldId) + ") is not an string" + dumpDebugData());
+                throw new IllegalArgumentException(
+                        "Requested field id("
+                                + getFieldIdString(fieldId)
+                                + ") is not an string"
+                                + dumpDebugData());
         }
     }
 
@@ -242,7 +272,11 @@ public final class ProtoInputStream extends ProtoStream {
                 this.mState = (byte) (len2 & (-2));
                 return value;
             default:
-                throw new IllegalArgumentException("Requested field type (" + getFieldIdString(fieldId) + ") cannot be read as raw bytes" + dumpDebugData());
+                throw new IllegalArgumentException(
+                        "Requested field type ("
+                                + getFieldIdString(fieldId)
+                                + ") cannot be read as raw bytes"
+                                + dumpDebugData());
         }
     }
 
@@ -257,12 +291,33 @@ public final class ProtoInputStream extends ProtoStream {
         int i = this.mDepth + 1;
         this.mDepth = i;
         if (i == this.mExpectedObjectTokenStack.size()) {
-            this.mExpectedObjectTokenStack.add(makeToken(0, (fieldId & 2199023255552L) == 2199023255552L, this.mDepth, (int) fieldId, getOffset() + messageSize));
+            this.mExpectedObjectTokenStack.add(
+                    makeToken(
+                            0,
+                            (fieldId & 2199023255552L) == 2199023255552L,
+                            this.mDepth,
+                            (int) fieldId,
+                            getOffset() + messageSize));
         } else {
-            this.mExpectedObjectTokenStack.set(this.mDepth, makeToken(0, (fieldId & 2199023255552L) == 2199023255552L, this.mDepth, (int) fieldId, getOffset() + messageSize));
+            this.mExpectedObjectTokenStack.set(
+                    this.mDepth,
+                    makeToken(
+                            0,
+                            (fieldId & 2199023255552L) == 2199023255552L,
+                            this.mDepth,
+                            (int) fieldId,
+                            getOffset() + messageSize));
         }
-        if (this.mDepth > 0 && getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth)) > getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth - 1))) {
-            throw new ProtoParseException("Embedded Object (" + token2String(this.mExpectedObjectTokenStack.get(this.mDepth)) + ") ends after of parent Objects's (" + token2String(this.mExpectedObjectTokenStack.get(this.mDepth - 1)) + ") end" + dumpDebugData());
+        if (this.mDepth > 0
+                && getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth))
+                        > getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth - 1))) {
+            throw new ProtoParseException(
+                    "Embedded Object ("
+                            + token2String(this.mExpectedObjectTokenStack.get(this.mDepth))
+                            + ") ends after of parent Objects's ("
+                            + token2String(this.mExpectedObjectTokenStack.get(this.mDepth - 1))
+                            + ") end"
+                            + dumpDebugData());
         }
         this.mState = (byte) (this.mState & (-2));
         return this.mExpectedObjectTokenStack.get(this.mDepth);
@@ -270,10 +325,17 @@ public final class ProtoInputStream extends ProtoStream {
 
     public void end(long token) {
         if (this.mExpectedObjectTokenStack.get(this.mDepth) != token) {
-            throw new ProtoParseException("end token " + token + " does not match current message token " + this.mExpectedObjectTokenStack.get(this.mDepth) + dumpDebugData());
+            throw new ProtoParseException(
+                    "end token "
+                            + token
+                            + " does not match current message token "
+                            + this.mExpectedObjectTokenStack.get(this.mDepth)
+                            + dumpDebugData());
         }
         if (getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth)) > getOffset()) {
-            incOffset(getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth)) - getOffset());
+            incOffset(
+                    getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth))
+                            - getOffset());
         }
         this.mDepth--;
         this.mState = (byte) (this.mState & (-2));
@@ -306,7 +368,10 @@ public final class ProtoInputStream extends ProtoStream {
             fillBuffer();
             int fragment = this.mEnd - this.mOffset;
             if (fragment < 0) {
-                throw new ProtoParseException("Incomplete varint at offset 0x" + Integer.toHexString(getOffset()) + dumpDebugData());
+                throw new ProtoParseException(
+                        "Incomplete varint at offset 0x"
+                                + Integer.toHexString(getOffset())
+                                + dumpDebugData());
             }
             for (int i = 0; i < fragment; i++) {
                 byte b = this.mBuffer[this.mOffset + i];
@@ -317,7 +382,10 @@ public final class ProtoInputStream extends ProtoStream {
                 }
                 shift += 7;
                 if (shift > 63) {
-                    throw new ProtoParseException("Varint is too large at offset 0x" + Integer.toHexString(getOffset() + i) + dumpDebugData());
+                    throw new ProtoParseException(
+                            "Varint is too large at offset 0x"
+                                    + Integer.toHexString(getOffset() + i)
+                                    + dumpDebugData());
                 }
             }
             incOffset(fragment);
@@ -327,16 +395,23 @@ public final class ProtoInputStream extends ProtoStream {
     private int readFixed32() throws IOException {
         if (this.mOffset + 4 <= this.mEnd) {
             incOffset(4);
-            return (this.mBuffer[this.mOffset - 4] & 255) | ((this.mBuffer[this.mOffset - 3] & 255) << 8) | ((this.mBuffer[this.mOffset - 2] & 255) << 16) | ((this.mBuffer[this.mOffset - 1] & 255) << 24);
+            return (this.mBuffer[this.mOffset - 4] & 255)
+                    | ((this.mBuffer[this.mOffset - 3] & 255) << 8)
+                    | ((this.mBuffer[this.mOffset - 2] & 255) << 16)
+                    | ((this.mBuffer[this.mOffset - 1] & 255) << 24);
         }
         int value = 0;
         int shift = 0;
         int bytesLeft = 4;
         while (bytesLeft > 0) {
             fillBuffer();
-            int fragment = this.mEnd - this.mOffset < bytesLeft ? this.mEnd - this.mOffset : bytesLeft;
+            int fragment =
+                    this.mEnd - this.mOffset < bytesLeft ? this.mEnd - this.mOffset : bytesLeft;
             if (fragment < 0) {
-                throw new ProtoParseException("Incomplete fixed32 at offset 0x" + Integer.toHexString(getOffset()) + dumpDebugData());
+                throw new ProtoParseException(
+                        "Incomplete fixed32 at offset 0x"
+                                + Integer.toHexString(getOffset())
+                                + dumpDebugData());
             }
             incOffset(fragment);
             bytesLeft -= fragment;
@@ -352,16 +427,27 @@ public final class ProtoInputStream extends ProtoStream {
     private long readFixed64() throws IOException {
         if (this.mOffset + 8 <= this.mEnd) {
             incOffset(8);
-            return ((this.mBuffer[this.mOffset - 7] & 255) << 8) | (this.mBuffer[this.mOffset - 8] & 255) | ((this.mBuffer[this.mOffset - 6] & 255) << 16) | ((this.mBuffer[this.mOffset - 5] & 255) << 24) | ((this.mBuffer[this.mOffset - 4] & 255) << 32) | ((this.mBuffer[this.mOffset - 3] & 255) << 40) | ((this.mBuffer[this.mOffset - 2] & 255) << 48) | ((this.mBuffer[this.mOffset - 1] & 255) << 56);
+            return ((this.mBuffer[this.mOffset - 7] & 255) << 8)
+                    | (this.mBuffer[this.mOffset - 8] & 255)
+                    | ((this.mBuffer[this.mOffset - 6] & 255) << 16)
+                    | ((this.mBuffer[this.mOffset - 5] & 255) << 24)
+                    | ((this.mBuffer[this.mOffset - 4] & 255) << 32)
+                    | ((this.mBuffer[this.mOffset - 3] & 255) << 40)
+                    | ((this.mBuffer[this.mOffset - 2] & 255) << 48)
+                    | ((this.mBuffer[this.mOffset - 1] & 255) << 56);
         }
         long value = 0;
         int shift = 0;
         int bytesLeft = 8;
         while (bytesLeft > 0) {
             fillBuffer();
-            int fragment = this.mEnd - this.mOffset < bytesLeft ? this.mEnd - this.mOffset : bytesLeft;
+            int fragment =
+                    this.mEnd - this.mOffset < bytesLeft ? this.mEnd - this.mOffset : bytesLeft;
             if (fragment < 0) {
-                throw new ProtoParseException("Incomplete fixed64 at offset 0x" + Integer.toHexString(getOffset()) + dumpDebugData());
+                throw new ProtoParseException(
+                        "Incomplete fixed64 at offset 0x"
+                                + Integer.toHexString(getOffset())
+                                + dumpDebugData());
             }
             incOffset(fragment);
             bytesLeft -= fragment;
@@ -386,7 +472,10 @@ public final class ProtoInputStream extends ProtoStream {
             }
             fillBuffer();
             if (this.mOffset >= this.mEnd) {
-                throw new ProtoParseException("Unexpectedly reached end of the InputStream at offset 0x" + Integer.toHexString(this.mEnd) + dumpDebugData());
+                throw new ProtoParseException(
+                        "Unexpectedly reached end of the InputStream at offset 0x"
+                                + Integer.toHexString(this.mEnd)
+                                + dumpDebugData());
             }
         }
         System.arraycopy(this.mBuffer, this.mOffset, buffer, pos, n - pos);
@@ -419,7 +508,10 @@ public final class ProtoInputStream extends ProtoStream {
             this.mOffset -= this.mEnd;
             this.mDiscardedBytes += this.mEnd;
             if (this.mOffset >= this.mBufferSize) {
-                int skipped = (int) this.mStream.skip((this.mOffset / this.mBufferSize) * this.mBufferSize);
+                int skipped =
+                        (int)
+                                this.mStream.skip(
+                                        (this.mOffset / this.mBufferSize) * this.mBufferSize);
                 this.mDiscardedBytes += skipped;
                 this.mOffset -= skipped;
             }
@@ -451,7 +543,12 @@ public final class ProtoInputStream extends ProtoStream {
                 case 3:
                 case 4:
                 default:
-                    throw new ProtoParseException("Unexpected wire type: " + this.mWireType + " at offset 0x" + Integer.toHexString(this.mOffset) + dumpDebugData());
+                    throw new ProtoParseException(
+                            "Unexpected wire type: "
+                                    + this.mWireType
+                                    + " at offset 0x"
+                                    + Integer.toHexString(this.mOffset)
+                                    + dumpDebugData());
                 case 5:
                     incOffset(4);
                     break;
@@ -463,8 +560,13 @@ public final class ProtoInputStream extends ProtoStream {
 
     private void incOffset(int n) {
         this.mOffset += n;
-        if (this.mDepth >= 0 && getOffset() > getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth))) {
-            throw new ProtoParseException("Unexpectedly reached end of embedded object.  " + token2String(this.mExpectedObjectTokenStack.get(this.mDepth)) + dumpDebugData());
+        if (this.mDepth >= 0
+                && getOffset()
+                        > getOffsetFromToken(this.mExpectedObjectTokenStack.get(this.mDepth))) {
+            throw new ProtoParseException(
+                    "Unexpectedly reached end of embedded object.  "
+                            + token2String(this.mExpectedObjectTokenStack.get(this.mDepth))
+                            + dumpDebugData());
         }
     }
 
@@ -478,7 +580,13 @@ public final class ProtoInputStream extends ProtoStream {
                 case 6:
                 case 16:
                     if (length % 8 != 0) {
-                        throw new IllegalArgumentException("Requested field id (" + getFieldIdString(fieldId) + ") packed length " + length + " is not aligned for fixed64" + dumpDebugData());
+                        throw new IllegalArgumentException(
+                                "Requested field id ("
+                                        + getFieldIdString(fieldId)
+                                        + ") packed length "
+                                        + length
+                                        + " is not aligned for fixed64"
+                                        + dumpDebugData());
                     }
                     this.mWireType = 1;
                     return;
@@ -486,7 +594,13 @@ public final class ProtoInputStream extends ProtoStream {
                 case 7:
                 case 15:
                     if (length % 4 != 0) {
-                        throw new IllegalArgumentException("Requested field id (" + getFieldIdString(fieldId) + ") packed length " + length + " is not aligned for fixed32" + dumpDebugData());
+                        throw new IllegalArgumentException(
+                                "Requested field id ("
+                                        + getFieldIdString(fieldId)
+                                        + ") packed length "
+                                        + length
+                                        + " is not aligned for fixed32"
+                                        + dumpDebugData());
                     }
                     this.mWireType = 5;
                     return;
@@ -505,26 +619,47 @@ public final class ProtoInputStream extends ProtoStream {
                 case 11:
                 case 12:
                 default:
-                    throw new IllegalArgumentException("Requested field id (" + getFieldIdString(fieldId) + ") is not a packable field" + dumpDebugData());
+                    throw new IllegalArgumentException(
+                            "Requested field id ("
+                                    + getFieldIdString(fieldId)
+                                    + ") is not a packable field"
+                                    + dumpDebugData());
             }
         }
     }
 
     private void assertFieldNumber(long fieldId) {
         if (((int) fieldId) != this.mFieldNumber) {
-            throw new IllegalArgumentException("Requested field id (" + getFieldIdString(fieldId) + ") does not match current field number (0x" + Integer.toHexString(this.mFieldNumber) + ") at offset 0x" + Integer.toHexString(getOffset()) + dumpDebugData());
+            throw new IllegalArgumentException(
+                    "Requested field id ("
+                            + getFieldIdString(fieldId)
+                            + ") does not match current field number (0x"
+                            + Integer.toHexString(this.mFieldNumber)
+                            + ") at offset 0x"
+                            + Integer.toHexString(getOffset())
+                            + dumpDebugData());
         }
     }
 
     private void assertWireType(int wireType) {
         if (wireType != this.mWireType) {
-            throw new WireTypeMismatchException("Current wire type " + getWireTypeString(this.mWireType) + " does not match expected wire type " + getWireTypeString(wireType) + " at offset 0x" + Integer.toHexString(getOffset()) + dumpDebugData());
+            throw new WireTypeMismatchException(
+                    "Current wire type "
+                            + getWireTypeString(this.mWireType)
+                            + " does not match expected wire type "
+                            + getWireTypeString(wireType)
+                            + " at offset 0x"
+                            + Integer.toHexString(getOffset())
+                            + dumpDebugData());
         }
     }
 
     private void assertFreshData() {
         if ((this.mState & 1) != 1) {
-            throw new ProtoParseException("Attempting to read already read field at offset 0x" + Integer.toHexString(getOffset()) + dumpDebugData());
+            throw new ProtoParseException(
+                    "Attempting to read already read field at offset 0x"
+                            + Integer.toHexString(getOffset())
+                            + dumpDebugData());
         }
     }
 
@@ -535,7 +670,8 @@ public final class ProtoInputStream extends ProtoStream {
         sb.append("\nmState : 0x").append(Integer.toHexString(this.mState));
         sb.append("\nmDiscardedBytes : 0x").append(Integer.toHexString(this.mDiscardedBytes));
         sb.append("\nmOffset : 0x").append(Integer.toHexString(this.mOffset));
-        sb.append("\nmExpectedObjectTokenStack : ").append(Objects.toString(this.mExpectedObjectTokenStack));
+        sb.append("\nmExpectedObjectTokenStack : ")
+                .append(Objects.toString(this.mExpectedObjectTokenStack));
         sb.append("\nmDepth : 0x").append(Integer.toHexString(this.mDepth));
         sb.append("\nmBuffer : ").append(Arrays.toString(this.mBuffer));
         sb.append("\nmBufferSize : 0x").append(Integer.toHexString(this.mBufferSize));

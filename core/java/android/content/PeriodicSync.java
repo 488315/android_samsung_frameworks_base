@@ -4,23 +4,25 @@ import android.accounts.Account;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class PeriodicSync implements Parcelable {
-    public static final Parcelable.Creator<PeriodicSync> CREATOR = new Parcelable.Creator<PeriodicSync>() { // from class: android.content.PeriodicSync.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PeriodicSync createFromParcel(Parcel source) {
-            return new PeriodicSync(source);
-        }
+    public static final Parcelable.Creator<PeriodicSync> CREATOR =
+            new Parcelable.Creator<PeriodicSync>() { // from class: android.content.PeriodicSync.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PeriodicSync createFromParcel(Parcel source) {
+                    return new PeriodicSync(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PeriodicSync[] newArray(int size) {
-            return new PeriodicSync[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PeriodicSync[] newArray(int size) {
+                    return new PeriodicSync[size];
+                }
+            };
     public final Account account;
     public final String authority;
     public final Bundle extras;
@@ -47,7 +49,8 @@ public class PeriodicSync implements Parcelable {
         this.flexTime = other.flexTime;
     }
 
-    public PeriodicSync(Account account, String authority, Bundle extras, long period, long flexTime) {
+    public PeriodicSync(
+            Account account, String authority, Bundle extras, long period, long flexTime) {
         this.account = account;
         this.authority = authority;
         this.extras = new Bundle(extras);
@@ -85,7 +88,10 @@ public class PeriodicSync implements Parcelable {
             return false;
         }
         PeriodicSync other = (PeriodicSync) o;
-        return this.account.equals(other.account) && this.authority.equals(other.authority) && this.period == other.period && syncExtrasEquals(this.extras, other.extras);
+        return this.account.equals(other.account)
+                && this.authority.equals(other.authority)
+                && this.period == other.period
+                && syncExtrasEquals(this.extras, other.extras);
     }
 
     public static boolean syncExtrasEquals(Bundle b1, Bundle b2) {
@@ -104,6 +110,13 @@ public class PeriodicSync implements Parcelable {
     }
 
     public String toString() {
-        return "account: " + this.account + ", authority: " + this.authority + ". period: " + this.period + "s , flex: " + this.flexTime;
+        return "account: "
+                + this.account
+                + ", authority: "
+                + this.authority
+                + ". period: "
+                + this.period
+                + "s , flex: "
+                + this.flexTime;
     }
 }

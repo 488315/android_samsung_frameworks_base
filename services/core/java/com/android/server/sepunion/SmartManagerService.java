@@ -21,13 +21,16 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.server.KnoxCaptureInputFilter$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
 import com.android.server.am.FreecessController$$ExternalSyntheticOutline0;
 import com.android.server.sepunion.SmartManagerService.RunningProcessObserver;
+
 import com.samsung.android.app.usage.IUsageStatsWatcher;
 import com.samsung.android.sepunion.ISmartManagerService;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -37,12 +40,16 @@ import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class SmartManagerService extends ISmartManagerService.Stub implements AbsSemSystemService {
+public final class SmartManagerService extends ISmartManagerService.Stub
+        implements AbsSemSystemService {
     public final Context mContext;
     public static final Uri PAYMENT_SWITCH_URI = Settings.Secure.getUriFor("payment_safety_switch");
-    public static final Uri PAYMENT_APP_URI = Uri.parse("content://com.samsung.android.sm/ProtectedApps");
-    public static final Uri PAYMENT_APP_CHECK_URI = Uri.parse("content://com.samsung.android.sm.payment");
-    public static final Uri IMPORT_COMPONENT_LIST_URI = Uri.parse("content://com.samsung.android.sm.payment/importantComponentList");
+    public static final Uri PAYMENT_APP_URI =
+            Uri.parse("content://com.samsung.android.sm/ProtectedApps");
+    public static final Uri PAYMENT_APP_CHECK_URI =
+            Uri.parse("content://com.samsung.android.sm.payment");
+    public static final Uri IMPORT_COMPONENT_LIST_URI =
+            Uri.parse("content://com.samsung.android.sm.payment/importantComponentList");
     public static final String[] PROJECTION = {"package_name"};
     public static final String[] ARGS = {"1"};
     public static final Uri SM_PROVIDER_URI = Uri.parse("content://com.samsung.android.sm.dcapi");
@@ -53,83 +60,107 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
     public final ConcurrentHashMap mImportantAppLastCheckTimeMap = new ConcurrentHashMap();
     public final HashSet mImportantAppSet = new HashSet();
     public final ArrayList mImportantComponentList = new ArrayList();
-    public final AnonymousClass1 mUserActionReceiver = new BroadcastReceiver() { // from class: com.android.server.sepunion.SmartManagerService.1
-        @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if ("android.intent.action.USER_UNLOCKED".equals(action)) {
-                Uri uri = SmartManagerService.PAYMENT_SWITCH_URI;
-                Log.i("SmartManagerService", "onUserUnlocked");
-                SmartManagerService.this.mHandler.sendEmptyMessage(70);
-                return;
-            }
-            int intExtra = "com.samsung.knox.securefolder.SETUP_COMPLETE".equals(action) ? intent.getIntExtra("userid", -1) : intent.getIntExtra("android.intent.extra.user_handle", -1);
-            Message obtain = Message.obtain();
-            obtain.what = 60;
-            Bundle bundle = new Bundle();
-            bundle.putString("action", action);
-            bundle.putInt("userid", intExtra);
-            obtain.setData(bundle);
-            SmartManagerService.this.mHandler.sendMessage(obtain);
-        }
-    };
-    public final AnonymousClass2 mPkgChangedIntentReceiver = new BroadcastReceiver() { // from class: com.android.server.sepunion.SmartManagerService.2
-        @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if ("android.intent.action.PACKAGE_ADDED".equals(action) || "android.intent.action.PACKAGE_REMOVED".equals(action)) {
-                int intExtra = intent.getIntExtra("android.intent.extra.UID", 0);
-                boolean booleanExtra = intent.getBooleanExtra("android.intent.extra.REPLACING", false);
-                Uri data = intent.getData();
-                if (booleanExtra || data == null) {
-                    return;
+    public final AnonymousClass1 mUserActionReceiver =
+            new BroadcastReceiver() { // from class:
+                                      // com.android.server.sepunion.SmartManagerService.1
+                @Override // android.content.BroadcastReceiver
+                public final void onReceive(Context context, Intent intent) {
+                    String action = intent.getAction();
+                    if ("android.intent.action.USER_UNLOCKED".equals(action)) {
+                        Uri uri = SmartManagerService.PAYMENT_SWITCH_URI;
+                        Log.i("SmartManagerService", "onUserUnlocked");
+                        SmartManagerService.this.mHandler.sendEmptyMessage(70);
+                        return;
+                    }
+                    int intExtra =
+                            "com.samsung.knox.securefolder.SETUP_COMPLETE".equals(action)
+                                    ? intent.getIntExtra("userid", -1)
+                                    : intent.getIntExtra("android.intent.extra.user_handle", -1);
+                    Message obtain = Message.obtain();
+                    obtain.what = 60;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("action", action);
+                    bundle.putInt("userid", intExtra);
+                    obtain.setData(bundle);
+                    SmartManagerService.this.mHandler.sendMessage(obtain);
                 }
-                Message obtain = Message.obtain();
-                obtain.what = 50;
-                Bundle m = FreecessController$$ExternalSyntheticOutline0.m(intExtra, "action", action, "uid");
-                m.putString("pkg_name", data.getSchemeSpecificPart());
-                obtain.setData(m);
-                SmartManagerService.this.mHandler.sendMessage(obtain);
-            }
-        }
-    };
-    public final AnonymousClass3 mUsageStatusWatcher = new IUsageStatsWatcher.Stub() { // from class: com.android.server.sepunion.SmartManagerService.3
-        public final void notePauseComponent(ComponentName componentName, Intent intent, int i, int i2) {
-        }
+            };
+    public final AnonymousClass2 mPkgChangedIntentReceiver =
+            new BroadcastReceiver() { // from class:
+                                      // com.android.server.sepunion.SmartManagerService.2
+                @Override // android.content.BroadcastReceiver
+                public final void onReceive(Context context, Intent intent) {
+                    String action = intent.getAction();
+                    if ("android.intent.action.PACKAGE_ADDED".equals(action)
+                            || "android.intent.action.PACKAGE_REMOVED".equals(action)) {
+                        int intExtra = intent.getIntExtra("android.intent.extra.UID", 0);
+                        boolean booleanExtra =
+                                intent.getBooleanExtra("android.intent.extra.REPLACING", false);
+                        Uri data = intent.getData();
+                        if (booleanExtra || data == null) {
+                            return;
+                        }
+                        Message obtain = Message.obtain();
+                        obtain.what = 50;
+                        Bundle m =
+                                FreecessController$$ExternalSyntheticOutline0.m(
+                                        intExtra, "action", action, "uid");
+                        m.putString("pkg_name", data.getSchemeSpecificPart());
+                        obtain.setData(m);
+                        SmartManagerService.this.mHandler.sendMessage(obtain);
+                    }
+                }
+            };
+    public final AnonymousClass3 mUsageStatusWatcher =
+            new IUsageStatsWatcher
+                    .Stub() { // from class: com.android.server.sepunion.SmartManagerService.3
+                public final void notePauseComponent(
+                        ComponentName componentName, Intent intent, int i, int i2) {}
 
-        public final void noteResumeComponent(ComponentName componentName, Intent intent, int i, int i2) {
-            if (componentName != null) {
-                SmartManagerService smartManagerService = SmartManagerService.this;
-                String packageName = componentName.getPackageName();
-                String className = componentName.getClassName();
-                smartManagerService.mHandler.removeMessages(40);
-                Message obtain = Message.obtain();
-                obtain.what = 40;
-                Bundle bundle = new Bundle();
-                bundle.putString("pkg_name", packageName);
-                bundle.putString("class_name", className);
-                obtain.setData(bundle);
-                smartManagerService.mHandler.sendMessage(obtain);
-            }
-        }
+                public final void noteResumeComponent(
+                        ComponentName componentName, Intent intent, int i, int i2) {
+                    if (componentName != null) {
+                        SmartManagerService smartManagerService = SmartManagerService.this;
+                        String packageName = componentName.getPackageName();
+                        String className = componentName.getClassName();
+                        smartManagerService.mHandler.removeMessages(40);
+                        Message obtain = Message.obtain();
+                        obtain.what = 40;
+                        Bundle bundle = new Bundle();
+                        bundle.putString("pkg_name", packageName);
+                        bundle.putString("class_name", className);
+                        obtain.setData(bundle);
+                        smartManagerService.mHandler.sendMessage(obtain);
+                    }
+                }
 
-        public final void noteStopComponent(ComponentName componentName, Intent intent, int i, int i2) {
-        }
-    };
-    public final AnonymousClass4 mLocationChangeReceiver = new BroadcastReceiver() { // from class: com.android.server.sepunion.SmartManagerService.4
-        @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
-            SmartManagerService.m870$$Nest$monPermissionChanged(SmartManagerService.this, 3);
-        }
-    };
-    public final AnonymousClass5 mPrivacyChangedListener = new SensorPrivacyManager.OnSensorPrivacyChangedListener() { // from class: com.android.server.sepunion.SmartManagerService.5
-        public final void onSensorPrivacyChanged(int i, boolean z) {
-            if (i == 2 || i == 1) {
-                SmartManagerService.m870$$Nest$monPermissionChanged(SmartManagerService.this, i);
-            }
-        }
-    };
-    public final BgWorkerHandler mHandler = new BgWorkerHandler(KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("SmartManagerService").getLooper());
+                public final void noteStopComponent(
+                        ComponentName componentName, Intent intent, int i, int i2) {}
+            };
+    public final AnonymousClass4 mLocationChangeReceiver =
+            new BroadcastReceiver() { // from class:
+                                      // com.android.server.sepunion.SmartManagerService.4
+                @Override // android.content.BroadcastReceiver
+                public final void onReceive(Context context, Intent intent) {
+                    SmartManagerService.m870$$Nest$monPermissionChanged(
+                            SmartManagerService.this, 3);
+                }
+            };
+    public final AnonymousClass5 mPrivacyChangedListener =
+            new SensorPrivacyManager
+                    .OnSensorPrivacyChangedListener() { // from class:
+                                                        // com.android.server.sepunion.SmartManagerService.5
+                public final void onSensorPrivacyChanged(int i, boolean z) {
+                    if (i == 2 || i == 1) {
+                        SmartManagerService.m870$$Nest$monPermissionChanged(
+                                SmartManagerService.this, i);
+                    }
+                }
+            };
+    public final BgWorkerHandler mHandler =
+            new BgWorkerHandler(
+                    KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("SmartManagerService")
+                            .getLooper());
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BgWorkerHandler extends Handler {
@@ -140,7 +171,8 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             Uri uri = SmartManagerService.PAYMENT_SWITCH_URI;
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m(new StringBuilder("msg : "), message.what, "SmartManagerService");
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("msg : "), message.what, "SmartManagerService");
             int i = message.what;
             SmartManagerService smartManagerService = SmartManagerService.this;
             if (i == 10) {
@@ -156,18 +188,31 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
                     return;
                 }
                 int i2 = data.getInt("pid", 0);
-                ActivityManager activityManager = (ActivityManager) smartManagerService.mContext.getSystemService("activity");
+                ActivityManager activityManager =
+                        (ActivityManager) smartManagerService.mContext.getSystemService("activity");
                 if (activityManager == null) {
                     return;
                 }
                 String packageFromAppProcesses = activityManager.getPackageFromAppProcesses(i2);
-                if (smartManagerService.isProtectedApp(packageFromAppProcesses) && !smartManagerService.mImportantAppSet.contains(packageFromAppProcesses)) {
+                if (smartManagerService.isProtectedApp(packageFromAppProcesses)
+                        && !smartManagerService.mImportantAppSet.contains(
+                                packageFromAppProcesses)) {
                     data.putString("pkg_name", packageFromAppProcesses);
                     try {
-                        smartManagerService.mContext.getContentResolver().call(SmartManagerService.PAYMENT_APP_CHECK_URI, "startCheck", (String) null, data);
+                        smartManagerService
+                                .mContext
+                                .getContentResolver()
+                                .call(
+                                        SmartManagerService.PAYMENT_APP_CHECK_URI,
+                                        "startCheck",
+                                        (String) null,
+                                        data);
                         return;
                     } catch (SQLiteException | IllegalArgumentException e) {
-                        Log.e("SmartManagerService", "SmartManager app doesn't support payment policy, please check", e);
+                        Log.e(
+                                "SmartManagerService",
+                                "SmartManager app doesn't support payment policy, please check",
+                                e);
                         return;
                     }
                 }
@@ -178,19 +223,34 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
                 smartManagerService.getClass();
                 try {
                     String string = data2.getString("pkg_name");
-                    long longValue = ((Long) smartManagerService.mImportantAppLastCheckTimeMap.getOrDefault(string, -1L)).longValue();
+                    long longValue =
+                            ((Long)
+                                            smartManagerService.mImportantAppLastCheckTimeMap
+                                                    .getOrDefault(string, -1L))
+                                    .longValue();
                     long currentTimeMillis = System.currentTimeMillis();
                     if (Math.abs(longValue - currentTimeMillis) < 3000) {
                         Log.e("SmartManagerService", "avoid repeat check in 3 seconds");
                     } else {
-                        smartManagerService.mImportantAppLastCheckTimeMap.put(string, Long.valueOf(currentTimeMillis));
+                        smartManagerService.mImportantAppLastCheckTimeMap.put(
+                                string, Long.valueOf(currentTimeMillis));
                         if (smartManagerService.isProtectedApp(string)) {
-                            smartManagerService.mContext.getContentResolver().call(SmartManagerService.PAYMENT_APP_CHECK_URI, "startCheck", (String) null, data2);
+                            smartManagerService
+                                    .mContext
+                                    .getContentResolver()
+                                    .call(
+                                            SmartManagerService.PAYMENT_APP_CHECK_URI,
+                                            "startCheck",
+                                            (String) null,
+                                            data2);
                         }
                     }
                     return;
                 } catch (SQLiteException | IllegalArgumentException e2) {
-                    Log.e("SmartManagerService", "SmartManager app doesn't support payment policy, please check", e2);
+                    Log.e(
+                            "SmartManagerService",
+                            "SmartManager app doesn't support payment policy, please check",
+                            e2);
                     return;
                 }
             }
@@ -198,10 +258,20 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
                 Bundle data3 = message.getData();
                 smartManagerService.getClass();
                 try {
-                    smartManagerService.mContext.getContentResolver().call(SmartManagerService.PAYMENT_APP_CHECK_URI, "onPkgChanged", (String) null, data3);
+                    smartManagerService
+                            .mContext
+                            .getContentResolver()
+                            .call(
+                                    SmartManagerService.PAYMENT_APP_CHECK_URI,
+                                    "onPkgChanged",
+                                    (String) null,
+                                    data3);
                     return;
                 } catch (SQLiteException | IllegalArgumentException e3) {
-                    Log.e("SmartManagerService", "SmartManager app doesn't support payment policy, please check", e3);
+                    Log.e(
+                            "SmartManagerService",
+                            "SmartManager app doesn't support payment policy, please check",
+                            e3);
                     return;
                 }
             }
@@ -209,10 +279,20 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
                 Bundle data4 = message.getData();
                 smartManagerService.getClass();
                 try {
-                    smartManagerService.mContext.getContentResolver().call(SmartManagerService.PAYMENT_APP_CHECK_URI, "onUserAction", (String) null, data4);
+                    smartManagerService
+                            .mContext
+                            .getContentResolver()
+                            .call(
+                                    SmartManagerService.PAYMENT_APP_CHECK_URI,
+                                    "onUserAction",
+                                    (String) null,
+                                    data4);
                     return;
                 } catch (SQLiteException | IllegalArgumentException e4) {
-                    Log.e("SmartManagerService", "SmartManager app doesn't support payment policy, please check", e4);
+                    Log.e(
+                            "SmartManagerService",
+                            "SmartManager app doesn't support payment policy, please check",
+                            e4);
                     return;
                 }
             }
@@ -223,7 +303,14 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
                 Bundle data5 = message.getData();
                 smartManagerService.getClass();
                 try {
-                    smartManagerService.mContext.getContentResolver().call(SmartManagerService.SM_PROVIDER_URI, "updatePrivacyLockingState", (String) null, data5);
+                    smartManagerService
+                            .mContext
+                            .getContentResolver()
+                            .call(
+                                    SmartManagerService.SM_PROVIDER_URI,
+                                    "updatePrivacyLockingState",
+                                    (String) null,
+                                    data5);
                     return;
                 } catch (IllegalArgumentException e5) {
                     Log.e("SmartManagerService", "notify to smart manager has exception ", e5);
@@ -232,9 +319,23 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
             }
             smartManagerService.getClass();
             try {
-                ProtectedAppChangedObserver protectedAppChangedObserver = smartManagerService.new ProtectedAppChangedObserver(smartManagerService.mHandler);
-                smartManagerService.mContext.getContentResolver().registerContentObserver(SmartManagerService.PAYMENT_SWITCH_URI, true, protectedAppChangedObserver);
-                smartManagerService.mContext.getContentResolver().registerContentObserver(SmartManagerService.PAYMENT_APP_URI, true, protectedAppChangedObserver);
+                ProtectedAppChangedObserver protectedAppChangedObserver =
+                        smartManagerService
+                        .new ProtectedAppChangedObserver(smartManagerService.mHandler);
+                smartManagerService
+                        .mContext
+                        .getContentResolver()
+                        .registerContentObserver(
+                                SmartManagerService.PAYMENT_SWITCH_URI,
+                                true,
+                                protectedAppChangedObserver);
+                smartManagerService
+                        .mContext
+                        .getContentResolver()
+                        .registerContentObserver(
+                                SmartManagerService.PAYMENT_APP_URI,
+                                true,
+                                protectedAppChangedObserver);
             } catch (Exception e6) {
                 Log.e("SmartManagerService", "registerObserver cause exception", e6);
             }
@@ -262,17 +363,21 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RunningProcessObserver extends IProcessObserver.Stub {
-        public RunningProcessObserver() {
-        }
+        public RunningProcessObserver() {}
 
         public final void onForegroundActivitiesChanged(int i, int i2, boolean z) {
             if (z) {
-                if (((Boolean) SmartManagerService.this.mCheckedAppMap.getOrDefault(Integer.valueOf(i2), Boolean.FALSE)).booleanValue()) {
+                if (((Boolean)
+                                SmartManagerService.this.mCheckedAppMap.getOrDefault(
+                                        Integer.valueOf(i2), Boolean.FALSE))
+                        .booleanValue()) {
                     Uri uri = SmartManagerService.PAYMENT_SWITCH_URI;
-                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i2, "already checked ", "SmartManagerService");
+                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                            i2, "already checked ", "SmartManagerService");
                     return;
                 }
-                ConcurrentHashMap concurrentHashMap = SmartManagerService.this.mForegroundActivitiesPidMap;
+                ConcurrentHashMap concurrentHashMap =
+                        SmartManagerService.this.mForegroundActivitiesPidMap;
                 Integer valueOf = Integer.valueOf(i);
                 Boolean bool = Boolean.TRUE;
                 concurrentHashMap.put(valueOf, bool);
@@ -289,22 +394,24 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
             }
         }
 
-        public final void onForegroundServicesChanged(int i, int i2, int i3) {
-        }
+        public final void onForegroundServicesChanged(int i, int i2, int i3) {}
 
         public final void onProcessDied(int i, int i2) {
-            if (((Boolean) SmartManagerService.this.mForegroundActivitiesPidMap.getOrDefault(Integer.valueOf(i), Boolean.FALSE)).booleanValue()) {
+            if (((Boolean)
+                            SmartManagerService.this.mForegroundActivitiesPidMap.getOrDefault(
+                                    Integer.valueOf(i), Boolean.FALSE))
+                    .booleanValue()) {
                 SmartManagerService.this.mForegroundActivitiesPidMap.remove(Integer.valueOf(i));
                 SmartManagerService.this.mCheckedAppMap.remove(Integer.valueOf(i2));
             }
         }
 
-        public final void onProcessStarted(int i, int i2, int i3, String str, String str2) {
-        }
+        public final void onProcessStarted(int i, int i2, int i3, String str, String str2) {}
     }
 
     /* renamed from: -$$Nest$monPermissionChanged, reason: not valid java name */
-    public static void m870$$Nest$monPermissionChanged(SmartManagerService smartManagerService, int i) {
+    public static void m870$$Nest$monPermissionChanged(
+            SmartManagerService smartManagerService, int i) {
         smartManagerService.mHandler.removeMessages(100);
         Message obtain = Message.obtain();
         obtain.what = 100;
@@ -324,17 +431,20 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
     }
 
     @Override // com.android.server.sepunion.AbsSemSystemService
-    public final void dump(FileDescriptor fileDescriptor, final PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, final PrintWriter printWriter, String[] strArr) {
         printWriter.println("##### SmartManagerService  #####");
         printWriter.println(" Current Payment App:");
         synchronized (this.mProtectedAppSet) {
-            this.mProtectedAppSet.forEach(new Consumer() { // from class: com.android.server.sepunion.SmartManagerService$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    Uri uri = SmartManagerService.PAYMENT_SWITCH_URI;
-                    printWriter.println((String) obj);
-                }
-            });
+            this.mProtectedAppSet.forEach(
+                    new Consumer() { // from class:
+                                     // com.android.server.sepunion.SmartManagerService$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            Uri uri = SmartManagerService.PAYMENT_SWITCH_URI;
+                            printWriter.println((String) obj);
+                        }
+                    });
         }
     }
 
@@ -363,14 +473,18 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
         this.mImportantAppSet.clear();
         this.mImportantComponentList.clear();
         try {
-            Cursor query = this.mContext.getContentResolver().query(IMPORT_COMPONENT_LIST_URI, null, null, null, null);
+            Cursor query =
+                    this.mContext
+                            .getContentResolver()
+                            .query(IMPORT_COMPONENT_LIST_URI, null, null, null, null);
             if (query != null) {
                 try {
                     if (query.moveToFirst()) {
                         do {
                             String string = query.getString(0);
                             this.mImportantAppSet.add(string);
-                            this.mImportantComponentList.add(new ComponentName(string, query.getString(1)));
+                            this.mImportantComponentList.add(
+                                    new ComponentName(string, query.getString(1)));
                         } while (query.moveToNext());
                     }
                 } finally {
@@ -470,88 +584,113 @@ public final class SmartManagerService extends ISmartManagerService.Stub impleme
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L24
             throw r10
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.sepunion.SmartManagerService.loadProtectedAppSet():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.sepunion.SmartManagerService.loadProtectedAppSet():void");
     }
 
     @Override // com.android.server.sepunion.AbsSemSystemService
     public final void onBootPhase(int i) {
         if (i == 1000) {
             Log.i("SmartManagerService", "onBootPhase");
-            this.mHandler.post(new Runnable() { // from class: com.android.server.sepunion.SmartManagerService$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SmartManagerService smartManagerService = SmartManagerService.this;
-                    Uri uri = SmartManagerService.PAYMENT_SWITCH_URI;
-                    smartManagerService.getClass();
-                    try {
-                        IntentFilter intentFilter = new IntentFilter();
-                        intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
-                        intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
-                        intentFilter.addDataScheme("package");
-                        smartManagerService.mContext.registerReceiverAsUser(smartManagerService.mPkgChangedIntentReceiver, UserHandle.ALL, intentFilter, null, smartManagerService.mHandler);
-                        IntentFilter intentFilter2 = new IntentFilter();
-                        intentFilter2.addAction("android.intent.action.USER_ADDED");
-                        intentFilter2.addAction("com.samsung.knox.securefolder.SETUP_COMPLETE");
-                        intentFilter2.addAction("android.intent.action.USER_STOPPED");
-                        intentFilter2.addAction("android.intent.action.USER_UNLOCKED");
-                        smartManagerService.mContext.registerReceiver(smartManagerService.mUserActionReceiver, intentFilter2, null, smartManagerService.mHandler);
-                        smartManagerService.mContext.registerReceiver(smartManagerService.mLocationChangeReceiver, new IntentFilter("android.location.MODE_CHANGED"), null, smartManagerService.mHandler);
-                    } catch (NullPointerException e) {
-                        Log.e("SmartManagerService", "registerReceiver cause exception", e);
-                    }
-                    try {
-                        ActivityManager.getService().registerProcessObserver(smartManagerService.new RunningProcessObserver());
-                    } catch (RemoteException e2) {
-                        Log.e("SmartManagerService", "registerRunningProcessObserver cause exception", e2);
-                    }
-                    try {
-                        SensorPrivacyManager sensorPrivacyManager = (SensorPrivacyManager) smartManagerService.mContext.getSystemService(SensorPrivacyManager.class);
-                        sensorPrivacyManager.addSensorPrivacyListener(2, smartManagerService.mPrivacyChangedListener);
-                        sensorPrivacyManager.addSensorPrivacyListener(1, smartManagerService.mPrivacyChangedListener);
-                    } catch (IllegalArgumentException e3) {
-                        Log.e("SmartManagerService", "register listener exception ", e3);
-                    }
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.sepunion.SmartManagerService$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SmartManagerService smartManagerService = SmartManagerService.this;
+                            Uri uri = SmartManagerService.PAYMENT_SWITCH_URI;
+                            smartManagerService.getClass();
+                            try {
+                                IntentFilter intentFilter = new IntentFilter();
+                                intentFilter.addAction("android.intent.action.PACKAGE_ADDED");
+                                intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
+                                intentFilter.addDataScheme("package");
+                                smartManagerService.mContext.registerReceiverAsUser(
+                                        smartManagerService.mPkgChangedIntentReceiver,
+                                        UserHandle.ALL,
+                                        intentFilter,
+                                        null,
+                                        smartManagerService.mHandler);
+                                IntentFilter intentFilter2 = new IntentFilter();
+                                intentFilter2.addAction("android.intent.action.USER_ADDED");
+                                intentFilter2.addAction(
+                                        "com.samsung.knox.securefolder.SETUP_COMPLETE");
+                                intentFilter2.addAction("android.intent.action.USER_STOPPED");
+                                intentFilter2.addAction("android.intent.action.USER_UNLOCKED");
+                                smartManagerService.mContext.registerReceiver(
+                                        smartManagerService.mUserActionReceiver,
+                                        intentFilter2,
+                                        null,
+                                        smartManagerService.mHandler);
+                                smartManagerService.mContext.registerReceiver(
+                                        smartManagerService.mLocationChangeReceiver,
+                                        new IntentFilter("android.location.MODE_CHANGED"),
+                                        null,
+                                        smartManagerService.mHandler);
+                            } catch (NullPointerException e) {
+                                Log.e("SmartManagerService", "registerReceiver cause exception", e);
+                            }
+                            try {
+                                ActivityManager.getService()
+                                        .registerProcessObserver(
+                                                smartManagerService.new RunningProcessObserver());
+                            } catch (RemoteException e2) {
+                                Log.e(
+                                        "SmartManagerService",
+                                        "registerRunningProcessObserver cause exception",
+                                        e2);
+                            }
+                            try {
+                                SensorPrivacyManager sensorPrivacyManager =
+                                        (SensorPrivacyManager)
+                                                smartManagerService.mContext.getSystemService(
+                                                        SensorPrivacyManager.class);
+                                sensorPrivacyManager.addSensorPrivacyListener(
+                                        2, smartManagerService.mPrivacyChangedListener);
+                                sensorPrivacyManager.addSensorPrivacyListener(
+                                        1, smartManagerService.mPrivacyChangedListener);
+                            } catch (IllegalArgumentException e3) {
+                                Log.e("SmartManagerService", "register listener exception ", e3);
+                            }
+                        }
+                    });
         }
     }
 
-    public final void onCleanupUser(int i) {
-    }
+    public final void onCleanupUser(int i) {}
 
     @Override // com.android.server.sepunion.AbsSemSystemService
-    public final void onCreate(Bundle bundle) {
-    }
+    public final void onCreate(Bundle bundle) {}
 
-    public final void onDestroy() {
-    }
+    public final void onDestroy() {}
 
-    public final void onStart() {
-    }
+    public final void onStart() {}
 
-    public final void onStartUser(int i) {
-    }
+    public final void onStartUser(int i) {}
 
-    public final void onStopUser(int i) {
-    }
+    public final void onStopUser(int i) {}
 
-    public final void onSwitchUser(int i) {
-    }
+    public final void onSwitchUser(int i) {}
 
-    public final void onUnlockUser(int i) {
-    }
+    public final void onUnlockUser(int i) {}
 
     public final void registerWatcherForImportantComponentList() {
         try {
-            UsageStatsManager usageStatsManager = (UsageStatsManager) this.mContext.getSystemService("usagestats");
+            UsageStatsManager usageStatsManager =
+                    (UsageStatsManager) this.mContext.getSystemService("usagestats");
             usageStatsManager.unregisterUsageStatsWatcher(this.mUsageStatusWatcher);
             if (this.mImportantComponentList.isEmpty()) {
                 Log.e("SmartManagerService", "IMPORTANT_COMPONENT_LIST is empty");
             } else {
-                usageStatsManager.registerUsageStatsWatcher(this.mUsageStatusWatcher, this.mImportantComponentList);
+                usageStatsManager.registerUsageStatsWatcher(
+                        this.mUsageStatusWatcher, this.mImportantComponentList);
             }
         } catch (Exception e) {
-            Log.e("SmartManagerService", "registerWatcherForImportantComponents cause exception", e);
+            Log.e(
+                    "SmartManagerService",
+                    "registerWatcherForImportantComponents cause exception",
+                    e);
         }
     }
 }

@@ -6,17 +6,6 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
-import android.content.pm.IDexModuleRegisterCallback;
-import android.content.pm.IMemorySaverPackageMoveObserver;
-import android.content.pm.IOnChecksumsReadyListener;
-import android.content.pm.IPackageDataObserver;
-import android.content.pm.IPackageDeleteObserver;
-import android.content.pm.IPackageDeleteObserver2;
-import android.content.pm.IPackageInstaller;
-import android.content.pm.IPackageManager;
-import android.content.pm.IPackageMoveObserver;
-import android.content.pm.IPackageStatsObserver;
-import android.content.pm.PackageManager;
 import android.content.pm.dex.IArtManager;
 import android.graphics.Bitmap;
 import android.os.Binder;
@@ -31,6 +20,7 @@ import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.text.TextUtils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,21 +31,32 @@ import java.util.stream.IntStream;
 
 /* loaded from: classes.dex */
 public interface IPackageManager extends IInterface {
-    boolean activitySupportsIntentAsUser(ComponentName componentName, Intent intent, String str, int i) throws RemoteException;
+    boolean activitySupportsIntentAsUser(
+            ComponentName componentName, Intent intent, String str, int i) throws RemoteException;
 
-    void addCrossProfileIntentFilter(IntentFilter intentFilter, String str, int i, int i2, int i3) throws RemoteException;
+    void addCrossProfileIntentFilter(IntentFilter intentFilter, String str, int i, int i2, int i3)
+            throws RemoteException;
 
     boolean addPermission(PermissionInfo permissionInfo) throws RemoteException;
 
     boolean addPermissionAsync(PermissionInfo permissionInfo) throws RemoteException;
 
-    void addPersistentPreferredActivity(IntentFilter intentFilter, ComponentName componentName, int i) throws RemoteException;
+    void addPersistentPreferredActivity(
+            IntentFilter intentFilter, ComponentName componentName, int i) throws RemoteException;
 
-    void addPreferredActivity(IntentFilter intentFilter, int i, ComponentName[] componentNameArr, ComponentName componentName, int i2, boolean z) throws RemoteException;
+    void addPreferredActivity(
+            IntentFilter intentFilter,
+            int i,
+            ComponentName[] componentNameArr,
+            ComponentName componentName,
+            int i2,
+            boolean z)
+            throws RemoteException;
 
     boolean applyRuntimePermissionsForAllApplicationsForMDM(int i, int i2) throws RemoteException;
 
-    boolean applyRuntimePermissionsForMDM(String str, List<String> list, int i, int i2) throws RemoteException;
+    boolean applyRuntimePermissionsForMDM(String str, List<String> list, int i, int i2)
+            throws RemoteException;
 
     boolean canForwardTo(Intent intent, String str, int i, int i2) throws RemoteException;
 
@@ -81,7 +82,8 @@ public interface IPackageManager extends IInterface {
 
     void clearApplicationProfileData(String str) throws RemoteException;
 
-    void clearApplicationUserData(String str, IPackageDataObserver iPackageDataObserver, int i) throws RemoteException;
+    void clearApplicationUserData(String str, IPackageDataObserver iPackageDataObserver, int i)
+            throws RemoteException;
 
     void clearCrossProfileIntentFilters(int i, String str) throws RemoteException;
 
@@ -97,16 +99,29 @@ public interface IPackageManager extends IInterface {
 
     String[] currentToCanonicalPackageNames(String[] strArr) throws RemoteException;
 
-    void deleteApplicationCacheFiles(String str, IPackageDataObserver iPackageDataObserver) throws RemoteException;
+    void deleteApplicationCacheFiles(String str, IPackageDataObserver iPackageDataObserver)
+            throws RemoteException;
 
-    void deleteApplicationCacheFilesAsUser(String str, int i, IPackageDataObserver iPackageDataObserver) throws RemoteException;
+    void deleteApplicationCacheFilesAsUser(
+            String str, int i, IPackageDataObserver iPackageDataObserver) throws RemoteException;
 
-    void deleteExistingPackageAsUser(VersionedPackage versionedPackage, IPackageDeleteObserver2 iPackageDeleteObserver2, int i) throws RemoteException;
+    void deleteExistingPackageAsUser(
+            VersionedPackage versionedPackage,
+            IPackageDeleteObserver2 iPackageDeleteObserver2,
+            int i)
+            throws RemoteException;
 
     @Deprecated
-    void deletePackageAsUser(String str, int i, IPackageDeleteObserver iPackageDeleteObserver, int i2, int i3) throws RemoteException;
+    void deletePackageAsUser(
+            String str, int i, IPackageDeleteObserver iPackageDeleteObserver, int i2, int i3)
+            throws RemoteException;
 
-    void deletePackageVersioned(VersionedPackage versionedPackage, IPackageDeleteObserver2 iPackageDeleteObserver2, int i, int i2) throws RemoteException;
+    void deletePackageVersioned(
+            VersionedPackage versionedPackage,
+            IPackageDeleteObserver2 iPackageDeleteObserver2,
+            int i,
+            int i2)
+            throws RemoteException;
 
     void deletePreloadsFileCache() throws RemoteException;
 
@@ -122,7 +137,8 @@ public interface IPackageManager extends IInterface {
 
     void freeStorage(String str, long j, int i, IntentSender intentSender) throws RemoteException;
 
-    void freeStorageAndNotify(String str, long j, int i, IPackageDataObserver iPackageDataObserver) throws RemoteException;
+    void freeStorageAndNotify(String str, long j, int i, IPackageDataObserver iPackageDataObserver)
+            throws RemoteException;
 
     ActivityInfo getActivityInfo(ComponentName componentName, long j, int i) throws RemoteException;
 
@@ -148,7 +164,8 @@ public interface IPackageManager extends IInterface {
 
     ApplicationInfo getApplicationInfo(String str, long j, int i) throws RemoteException;
 
-    Bitmap getArchivedAppIcon(String str, UserHandle userHandle, String str2) throws RemoteException;
+    Bitmap getArchivedAppIcon(String str, UserHandle userHandle, String str2)
+            throws RemoteException;
 
     ArchivedPackageParcel getArchivedPackage(String str, int i) throws RemoteException;
 
@@ -214,7 +231,8 @@ public interface IPackageManager extends IInterface {
 
     ParceledListSlice getInstantApps(int i) throws RemoteException;
 
-    InstrumentationInfo getInstrumentationInfoAsUser(ComponentName componentName, int i, int i2) throws RemoteException;
+    InstrumentationInfo getInstrumentationInfoAsUser(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
     @Deprecated
     ParceledListSlice getIntentFilterVerifications(String str) throws RemoteException;
@@ -226,9 +244,11 @@ public interface IPackageManager extends IInterface {
 
     ResolveInfo getLastChosenActivity(Intent intent, String str, int i) throws RemoteException;
 
-    IntentSender getLaunchIntentSenderForPackage(String str, String str2, String str3, int i) throws RemoteException;
+    IntentSender getLaunchIntentSenderForPackage(String str, String str2, String str3, int i)
+            throws RemoteException;
 
-    boolean getMetadataForIconTray(String str, String str2, int i, List<String> list) throws RemoteException;
+    boolean getMetadataForIconTray(String str, String str2, int i, List<String> list)
+            throws RemoteException;
 
     List<String> getMimeGroup(String str, String str2) throws RemoteException;
 
@@ -246,19 +266,22 @@ public interface IPackageManager extends IInterface {
 
     PackageInfo getPackageInfo(String str, long j, int i) throws RemoteException;
 
-    PackageInfo getPackageInfoVersioned(VersionedPackage versionedPackage, long j, int i) throws RemoteException;
+    PackageInfo getPackageInfoVersioned(VersionedPackage versionedPackage, long j, int i)
+            throws RemoteException;
 
     IPackageInstaller getPackageInstaller() throws RemoteException;
 
     List<String> getPackageListForDualDarPolicy(String str) throws RemoteException;
 
-    void getPackageSizeInfo(String str, int i, IPackageStatsObserver iPackageStatsObserver) throws RemoteException;
+    void getPackageSizeInfo(String str, int i, IPackageStatsObserver iPackageStatsObserver)
+            throws RemoteException;
 
     int getPackageUid(String str, long j, int i) throws RemoteException;
 
     String[] getPackagesForUid(int i) throws RemoteException;
 
-    ParceledListSlice getPackagesHoldingPermissions(String[] strArr, long j, int i) throws RemoteException;
+    ParceledListSlice getPackagesHoldingPermissions(String[] strArr, long j, int i)
+            throws RemoteException;
 
     String getPermissionControllerPackageName() throws RemoteException;
 
@@ -266,13 +289,15 @@ public interface IPackageManager extends IInterface {
 
     ParceledListSlice getPersistentApplications(int i) throws RemoteException;
 
-    int getPreferredActivities(List<IntentFilter> list, List<ComponentName> list2, String str) throws RemoteException;
+    int getPreferredActivities(List<IntentFilter> list, List<ComponentName> list2, String str)
+            throws RemoteException;
 
     byte[] getPreferredActivityBackup(int i) throws RemoteException;
 
     int getPrivateFlagsForUid(int i) throws RemoteException;
 
-    PackageManager.Property getPropertyAsUser(String str, String str2, String str3, int i) throws RemoteException;
+    PackageManager.Property getPropertyAsUser(String str, String str2, String str3, int i)
+            throws RemoteException;
 
     ProviderInfo getProviderInfo(ComponentName componentName, long j, int i) throws RemoteException;
 
@@ -341,7 +366,8 @@ public interface IPackageManager extends IInterface {
 
     void holdLock(IBinder iBinder, int i) throws RemoteException;
 
-    int installExistingPackageAsUser(String str, int i, int i2, int i3, List<String> list) throws RemoteException;
+    int installExistingPackageAsUser(String str, int i, int i2, int i3, List<String> list)
+            throws RemoteException;
 
     boolean isAppArchivable(String str, UserHandle userHandle) throws RemoteException;
 
@@ -383,7 +409,9 @@ public interface IPackageManager extends IInterface {
 
     boolean isUnknownSourcePackage(String str) throws RemoteException;
 
-    void logAppProcessStartIfNeeded(String str, String str2, int i, String str3, String str4, int i2) throws RemoteException;
+    void logAppProcessStartIfNeeded(
+            String str, String str2, int i, String str3, String str4, int i2)
+            throws RemoteException;
 
     void makeProviderVisible(int i, String str) throws RemoteException;
 
@@ -391,7 +419,11 @@ public interface IPackageManager extends IInterface {
 
     int movePackage(String str, String str2) throws RemoteException;
 
-    int movePackageToSd(String str, String str2, IMemorySaverPackageMoveObserver iMemorySaverPackageMoveObserver) throws RemoteException;
+    int movePackageToSd(
+            String str,
+            String str2,
+            IMemorySaverPackageMoveObserver iMemorySaverPackageMoveObserver)
+            throws RemoteException;
 
     int movePrimaryStorage(String str) throws RemoteException;
 
@@ -401,41 +433,64 @@ public interface IPackageManager extends IInterface {
 
     void notifyPackagesReplacedReceived(String[] strArr) throws RemoteException;
 
-    void overrideLabelAndIcon(ComponentName componentName, String str, int i, int i2) throws RemoteException;
+    void overrideLabelAndIcon(ComponentName componentName, String str, int i, int i2)
+            throws RemoteException;
 
     int performDexOptForADCP(String str, boolean z) throws RemoteException;
 
-    boolean performDexOptMode(String str, boolean z, String str2, boolean z2, boolean z3, String str3) throws RemoteException;
+    boolean performDexOptMode(
+            String str, boolean z, String str2, boolean z2, boolean z3, String str3)
+            throws RemoteException;
 
     boolean performDexOptSecondary(String str, String str2, boolean z) throws RemoteException;
 
-    ParceledListSlice queryContentProviders(String str, int i, long j, String str2) throws RemoteException;
+    ParceledListSlice queryContentProviders(String str, int i, long j, String str2)
+            throws RemoteException;
 
     ParceledListSlice queryInstrumentationAsUser(String str, int i, int i2) throws RemoteException;
 
-    ParceledListSlice queryIntentActivities(Intent intent, String str, long j, int i) throws RemoteException;
+    ParceledListSlice queryIntentActivities(Intent intent, String str, long j, int i)
+            throws RemoteException;
 
-    ParceledListSlice queryIntentActivityOptions(ComponentName componentName, Intent[] intentArr, String[] strArr, Intent intent, String str, long j, int i) throws RemoteException;
+    ParceledListSlice queryIntentActivityOptions(
+            ComponentName componentName,
+            Intent[] intentArr,
+            String[] strArr,
+            Intent intent,
+            String str,
+            long j,
+            int i)
+            throws RemoteException;
 
-    ParceledListSlice queryIntentContentProviders(Intent intent, String str, long j, int i) throws RemoteException;
+    ParceledListSlice queryIntentContentProviders(Intent intent, String str, long j, int i)
+            throws RemoteException;
 
-    ParceledListSlice queryIntentReceivers(Intent intent, String str, long j, int i) throws RemoteException;
+    ParceledListSlice queryIntentReceivers(Intent intent, String str, long j, int i)
+            throws RemoteException;
 
-    ParceledListSlice queryIntentServices(Intent intent, String str, long j, int i) throws RemoteException;
+    ParceledListSlice queryIntentServices(Intent intent, String str, long j, int i)
+            throws RemoteException;
 
     ParceledListSlice queryProperty(String str, int i) throws RemoteException;
 
     void querySyncProviders(List<String> list, List<ProviderInfo> list2) throws RemoteException;
 
-    void registerDexModule(String str, String str2, boolean z, IDexModuleRegisterCallback iDexModuleRegisterCallback) throws RemoteException;
+    void registerDexModule(
+            String str,
+            String str2,
+            boolean z,
+            IDexModuleRegisterCallback iDexModuleRegisterCallback)
+            throws RemoteException;
 
     void registerMoveCallback(IPackageMoveObserver iPackageMoveObserver) throws RemoteException;
 
-    void registerPackageMonitorCallback(IRemoteCallback iRemoteCallback, int i) throws RemoteException;
+    void registerPackageMonitorCallback(IRemoteCallback iRemoteCallback, int i)
+            throws RemoteException;
 
     void relinquishUpdateOwnership(String str) throws RemoteException;
 
-    boolean removeCrossProfileIntentFilter(IntentFilter intentFilter, String str, int i, int i2, int i3) throws RemoteException;
+    boolean removeCrossProfileIntentFilter(
+            IntentFilter intentFilter, String str, int i, int i2, int i3) throws RemoteException;
 
     boolean removeEncPkgDir(int i, String str) throws RemoteException;
 
@@ -443,9 +498,23 @@ public interface IPackageManager extends IInterface {
 
     void removePermission(String str) throws RemoteException;
 
-    void replacePreferredActivity(IntentFilter intentFilter, int i, ComponentName[] componentNameArr, ComponentName componentName, int i2) throws RemoteException;
+    void replacePreferredActivity(
+            IntentFilter intentFilter,
+            int i,
+            ComponentName[] componentNameArr,
+            ComponentName componentName,
+            int i2)
+            throws RemoteException;
 
-    void requestPackageChecksums(String str, boolean z, int i, int i2, List list, IOnChecksumsReadyListener iOnChecksumsReadyListener, int i3) throws RemoteException;
+    void requestPackageChecksums(
+            String str,
+            boolean z,
+            int i,
+            int i2,
+            List list,
+            IOnChecksumsReadyListener iOnChecksumsReadyListener,
+            int i3)
+            throws RemoteException;
 
     void resetApplicationPreferences(int i) throws RemoteException;
 
@@ -463,7 +532,8 @@ public interface IPackageManager extends IInterface {
 
     void restorePreferredActivities(byte[] bArr, int i) throws RemoteException;
 
-    boolean semIsPermissionRevokedByUserFixed(String str, String str2, int i) throws RemoteException;
+    boolean semIsPermissionRevokedByUserFixed(String str, String str2, int i)
+            throws RemoteException;
 
     void sendDeviceCustomizationReadyBroadcast() throws RemoteException;
 
@@ -471,17 +541,22 @@ public interface IPackageManager extends IInterface {
 
     void setApplicationCategoryHint(String str, int i, String str2) throws RemoteException;
 
-    void setApplicationEnabledSetting(String str, int i, int i2, int i3, String str2) throws RemoteException;
+    void setApplicationEnabledSetting(String str, int i, int i2, int i3, String str2)
+            throws RemoteException;
 
     boolean setApplicationHiddenSettingAsUser(String str, boolean z, int i) throws RemoteException;
 
     boolean setBlockUninstallForUser(String str, boolean z, int i) throws RemoteException;
 
-    void setComponentEnabledSetting(ComponentName componentName, int i, int i2, int i3, String str) throws RemoteException;
+    void setComponentEnabledSetting(ComponentName componentName, int i, int i2, int i3, String str)
+            throws RemoteException;
 
-    void setComponentEnabledSettings(List<PackageManager.ComponentEnabledSetting> list, int i, String str) throws RemoteException;
+    void setComponentEnabledSettings(
+            List<PackageManager.ComponentEnabledSetting> list, int i, String str)
+            throws RemoteException;
 
-    String[] setDistractingPackageRestrictionsAsUser(String[] strArr, int i, int i2) throws RemoteException;
+    String[] setDistractingPackageRestrictionsAsUser(String[] strArr, int i, int i2)
+            throws RemoteException;
 
     void setHarmfulAppWarning(String str, CharSequence charSequence, int i) throws RemoteException;
 
@@ -495,7 +570,14 @@ public interface IPackageManager extends IInterface {
 
     void setKeepUninstalledPackages(List<String> list) throws RemoteException;
 
-    void setLastChosenActivity(Intent intent, String str, int i, IntentFilter intentFilter, int i2, ComponentName componentName) throws RemoteException;
+    void setLastChosenActivity(
+            Intent intent,
+            String str,
+            int i,
+            IntentFilter intentFilter,
+            int i2,
+            ComponentName componentName)
+            throws RemoteException;
 
     int setLicensePermissionsForMDM(String str) throws RemoteException;
 
@@ -503,7 +585,17 @@ public interface IPackageManager extends IInterface {
 
     void setPackageStoppedState(String str, boolean z, int i) throws RemoteException;
 
-    String[] setPackagesSuspendedAsUser(String[] strArr, boolean z, PersistableBundle persistableBundle, PersistableBundle persistableBundle2, SuspendDialogInfo suspendDialogInfo, int i, String str, int i2, int i3) throws RemoteException;
+    String[] setPackagesSuspendedAsUser(
+            String[] strArr,
+            boolean z,
+            PersistableBundle persistableBundle,
+            PersistableBundle persistableBundle2,
+            SuspendDialogInfo suspendDialogInfo,
+            int i,
+            String str,
+            int i2,
+            int i3)
+            throws RemoteException;
 
     boolean setRequiredForSystemUser(String str, boolean z) throws RemoteException;
 
@@ -537,8 +629,7 @@ public interface IPackageManager extends IInterface {
 
     public static class Default implements IPackageManager {
         @Override // android.content.pm.IPackageManager
-        public void checkPackageStartable(String packageName, int userId) throws RemoteException {
-        }
+        public void checkPackageStartable(String packageName, int userId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public boolean isPackageAvailable(String packageName, int userId) throws RemoteException {
@@ -546,22 +637,26 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public PackageInfo getPackageInfo(String packageName, long flags, int userId) throws RemoteException {
+        public PackageInfo getPackageInfo(String packageName, long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public PackageInfo getPackageInfoVersioned(VersionedPackage versionedPackage, long flags, int userId) throws RemoteException {
+        public PackageInfo getPackageInfoVersioned(
+                VersionedPackage versionedPackage, long flags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public int getPackageUid(String packageName, long flags, int userId) throws RemoteException {
+        public int getPackageUid(String packageName, long flags, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.IPackageManager
-        public int[] getPackageGids(String packageName, long flags, int userId) throws RemoteException {
+        public int[] getPackageGids(String packageName, long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -576,7 +671,8 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public ApplicationInfo getApplicationInfo(String packageName, long flags, int userId) throws RemoteException {
+        public ApplicationInfo getApplicationInfo(String packageName, long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -586,27 +682,33 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public ActivityInfo getActivityInfo(ComponentName className, long flags, int userId) throws RemoteException {
+        public ActivityInfo getActivityInfo(ComponentName className, long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean activitySupportsIntentAsUser(ComponentName className, Intent intent, String resolvedType, int userId) throws RemoteException {
+        public boolean activitySupportsIntentAsUser(
+                ComponentName className, Intent intent, String resolvedType, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ActivityInfo getReceiverInfo(ComponentName className, long flags, int userId) throws RemoteException {
+        public ActivityInfo getReceiverInfo(ComponentName className, long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ServiceInfo getServiceInfo(ComponentName className, long flags, int userId) throws RemoteException {
+        public ServiceInfo getServiceInfo(ComponentName className, long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ProviderInfo getProviderInfo(ComponentName className, long flags, int userId) throws RemoteException {
+        public ProviderInfo getProviderInfo(ComponentName className, long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -666,67 +768,88 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public ResolveInfo resolveIntent(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+        public ResolveInfo resolveIntent(Intent intent, String resolvedType, long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ResolveInfo findPersistentPreferredActivity(Intent intent, int userId) throws RemoteException {
+        public ResolveInfo findPersistentPreferredActivity(Intent intent, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean canForwardTo(Intent intent, String resolvedType, int sourceUserId, int targetUserId) throws RemoteException {
+        public boolean canForwardTo(
+                Intent intent, String resolvedType, int sourceUserId, int targetUserId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice queryIntentActivities(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+        public ParceledListSlice queryIntentActivities(
+                Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice queryIntentActivityOptions(ComponentName caller, Intent[] specifics, String[] specificTypes, Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+        public ParceledListSlice queryIntentActivityOptions(
+                ComponentName caller,
+                Intent[] specifics,
+                String[] specificTypes,
+                Intent intent,
+                String resolvedType,
+                long flags,
+                int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice queryIntentReceivers(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+        public ParceledListSlice queryIntentReceivers(
+                Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ResolveInfo resolveService(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+        public ResolveInfo resolveService(
+                Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice queryIntentServices(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+        public ParceledListSlice queryIntentServices(
+                Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice queryIntentContentProviders(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+        public ParceledListSlice queryIntentContentProviders(
+                Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice getInstalledPackages(long flags, int userId) throws RemoteException {
+        public ParceledListSlice getInstalledPackages(long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParcelFileDescriptor getAppMetadataFd(String packageName, int userId) throws RemoteException {
+        public ParcelFileDescriptor getAppMetadataFd(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice getPackagesHoldingPermissions(String[] permissions, long flags, int userId) throws RemoteException {
+        public ParceledListSlice getPackagesHoldingPermissions(
+                String[] permissions, long flags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice getInstalledApplications(long flags, int userId) throws RemoteException {
+        public ParceledListSlice getInstalledApplications(long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -736,56 +859,70 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public ProviderInfo resolveContentProvider(String name, long flags, int userId) throws RemoteException {
+        public ProviderInfo resolveContentProvider(String name, long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void querySyncProviders(List<String> outNames, List<ProviderInfo> outInfo) throws RemoteException {
-        }
+        public void querySyncProviders(List<String> outNames, List<ProviderInfo> outInfo)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice queryContentProviders(String processName, int uid, long flags, String metaDataKey) throws RemoteException {
+        public ParceledListSlice queryContentProviders(
+                String processName, int uid, long flags, String metaDataKey)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public InstrumentationInfo getInstrumentationInfoAsUser(ComponentName className, int flags, int userId) throws RemoteException {
+        public InstrumentationInfo getInstrumentationInfoAsUser(
+                ComponentName className, int flags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice queryInstrumentationAsUser(String targetPackage, int flags, int userId) throws RemoteException {
+        public ParceledListSlice queryInstrumentationAsUser(
+                String targetPackage, int flags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void finishPackageInstall(int token, boolean didLaunch) throws RemoteException {
-        }
+        public void finishPackageInstall(int token, boolean didLaunch) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void setInstallerPackageName(String targetPackage, String installerPackageName) throws RemoteException {
-        }
+        public void setInstallerPackageName(String targetPackage, String installerPackageName)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void relinquishUpdateOwnership(String targetPackage) throws RemoteException {
-        }
+        public void relinquishUpdateOwnership(String targetPackage) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void setApplicationCategoryHint(String packageName, int categoryHint, String callerPackageName) throws RemoteException {
-        }
+        public void setApplicationCategoryHint(
+                String packageName, int categoryHint, String callerPackageName)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void deletePackageAsUser(String packageName, int versionCode, IPackageDeleteObserver observer, int userId, int flags) throws RemoteException {
-        }
+        public void deletePackageAsUser(
+                String packageName,
+                int versionCode,
+                IPackageDeleteObserver observer,
+                int userId,
+                int flags)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void deletePackageVersioned(VersionedPackage versionedPackage, IPackageDeleteObserver2 observer, int userId, int flags) throws RemoteException {
-        }
+        public void deletePackageVersioned(
+                VersionedPackage versionedPackage,
+                IPackageDeleteObserver2 observer,
+                int userId,
+                int flags)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void deleteExistingPackageAsUser(VersionedPackage versionedPackage, IPackageDeleteObserver2 observer, int userId) throws RemoteException {
-        }
+        public void deleteExistingPackageAsUser(
+                VersionedPackage versionedPackage, IPackageDeleteObserver2 observer, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public String getInstallerPackageName(String packageName) throws RemoteException {
@@ -793,97 +930,145 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public InstallSourceInfo getInstallSourceInfo(String packageName, int userId) throws RemoteException {
+        public InstallSourceInfo getInstallSourceInfo(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void resetApplicationPreferences(int userId) throws RemoteException {
-        }
+        public void resetApplicationPreferences(int userId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public ResolveInfo getLastChosenActivity(Intent intent, String resolvedType, int flags) throws RemoteException {
+        public ResolveInfo getLastChosenActivity(Intent intent, String resolvedType, int flags)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setLastChosenActivity(Intent intent, String resolvedType, int flags, IntentFilter filter, int match, ComponentName activity) throws RemoteException {
-        }
+        public void setLastChosenActivity(
+                Intent intent,
+                String resolvedType,
+                int flags,
+                IntentFilter filter,
+                int match,
+                ComponentName activity)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void addPreferredActivity(IntentFilter filter, int match, ComponentName[] set, ComponentName activity, int userId, boolean removeExisting) throws RemoteException {
-        }
+        public void addPreferredActivity(
+                IntentFilter filter,
+                int match,
+                ComponentName[] set,
+                ComponentName activity,
+                int userId,
+                boolean removeExisting)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void replacePreferredActivity(IntentFilter filter, int match, ComponentName[] set, ComponentName activity, int userId) throws RemoteException {
-        }
+        public void replacePreferredActivity(
+                IntentFilter filter,
+                int match,
+                ComponentName[] set,
+                ComponentName activity,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void clearPackagePreferredActivities(String packageName) throws RemoteException {
-        }
+        public void clearPackagePreferredActivities(String packageName) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public int getPreferredActivities(List<IntentFilter> outFilters, List<ComponentName> outActivities, String packageName) throws RemoteException {
+        public int getPreferredActivities(
+                List<IntentFilter> outFilters,
+                List<ComponentName> outActivities,
+                String packageName)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void addPersistentPreferredActivity(IntentFilter filter, ComponentName activity, int userId) throws RemoteException {
-        }
+        public void addPersistentPreferredActivity(
+                IntentFilter filter, ComponentName activity, int userId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void clearPackagePersistentPreferredActivities(String packageName, int userId) throws RemoteException {
-        }
+        public void clearPackagePersistentPreferredActivities(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void clearPersistentPreferredActivity(IntentFilter filter, int userId) throws RemoteException {
-        }
+        public void clearPersistentPreferredActivity(IntentFilter filter, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void addCrossProfileIntentFilter(IntentFilter intentFilter, String ownerPackage, int sourceUserId, int targetUserId, int flags) throws RemoteException {
-        }
+        public void addCrossProfileIntentFilter(
+                IntentFilter intentFilter,
+                String ownerPackage,
+                int sourceUserId,
+                int targetUserId,
+                int flags)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public boolean removeCrossProfileIntentFilter(IntentFilter intentFilter, String ownerPackage, int sourceUserId, int targetUserId, int flags) throws RemoteException {
+        public boolean removeCrossProfileIntentFilter(
+                IntentFilter intentFilter,
+                String ownerPackage,
+                int sourceUserId,
+                int targetUserId,
+                int flags)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void clearCrossProfileIntentFilters(int sourceUserId, String ownerPackage) throws RemoteException {
-        }
+        public void clearCrossProfileIntentFilters(int sourceUserId, String ownerPackage)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public String[] setDistractingPackageRestrictionsAsUser(String[] packageNames, int restrictionFlags, int userId) throws RemoteException {
+        public String[] setDistractingPackageRestrictionsAsUser(
+                String[] packageNames, int restrictionFlags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public String[] setPackagesSuspendedAsUser(String[] packageNames, boolean suspended, PersistableBundle appExtras, PersistableBundle launcherExtras, SuspendDialogInfo dialogInfo, int flags, String suspendingPackage, int suspendingUserId, int targetUserId) throws RemoteException {
+        public String[] setPackagesSuspendedAsUser(
+                String[] packageNames,
+                boolean suspended,
+                PersistableBundle appExtras,
+                PersistableBundle launcherExtras,
+                SuspendDialogInfo dialogInfo,
+                int flags,
+                String suspendingPackage,
+                int suspendingUserId,
+                int targetUserId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public String[] getUnsuspendablePackagesForUser(String[] packageNames, int userId) throws RemoteException {
+        public String[] getUnsuspendablePackagesForUser(String[] packageNames, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean isPackageSuspendedForUser(String packageName, int userId) throws RemoteException {
+        public boolean isPackageSuspendedForUser(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean isPackageQuarantinedForUser(String packageName, int userId) throws RemoteException {
+        public boolean isPackageQuarantinedForUser(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean isPackageStoppedForUser(String packageName, int userId) throws RemoteException {
+        public boolean isPackageStoppedForUser(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public Bundle getSuspendedPackageAppExtras(String packageName, int userId) throws RemoteException {
+        public Bundle getSuspendedPackageAppExtras(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -898,8 +1083,7 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void restorePreferredActivities(byte[] backup, int userId) throws RemoteException {
-        }
+        public void restorePreferredActivities(byte[] backup, int userId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public byte[] getDefaultAppsBackup(int userId) throws RemoteException {
@@ -907,8 +1091,7 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void restoreDefaultApps(byte[] backup, int userId) throws RemoteException {
-        }
+        public void restoreDefaultApps(byte[] backup, int userId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public byte[] getDomainVerificationBackup(int userId) throws RemoteException {
@@ -916,87 +1099,110 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void restoreDomainVerification(byte[] backup, int userId) throws RemoteException {
-        }
+        public void restoreDomainVerification(byte[] backup, int userId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public ComponentName getHomeActivities(List<ResolveInfo> outHomeCandidates) throws RemoteException {
+        public ComponentName getHomeActivities(List<ResolveInfo> outHomeCandidates)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setHomeActivity(ComponentName className, int userId) throws RemoteException {
-        }
+        public void setHomeActivity(ComponentName className, int userId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void overrideLabelAndIcon(ComponentName componentName, String nonLocalizedLabel, int icon, int userId) throws RemoteException {
-        }
+        public void overrideLabelAndIcon(
+                ComponentName componentName, String nonLocalizedLabel, int icon, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void restoreLabelAndIcon(ComponentName componentName, int userId) throws RemoteException {
-        }
+        public void restoreLabelAndIcon(ComponentName componentName, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void setComponentEnabledSetting(ComponentName componentName, int newState, int flags, int userId, String callingPackage) throws RemoteException {
-        }
+        public void setComponentEnabledSetting(
+                ComponentName componentName,
+                int newState,
+                int flags,
+                int userId,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void setComponentEnabledSettings(List<PackageManager.ComponentEnabledSetting> settings, int userId, String callingPackage) throws RemoteException {
-        }
+        public void setComponentEnabledSettings(
+                List<PackageManager.ComponentEnabledSetting> settings,
+                int userId,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public int getComponentEnabledSetting(ComponentName componentName, int userId) throws RemoteException {
+        public int getComponentEnabledSetting(ComponentName componentName, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setApplicationEnabledSetting(String packageName, int newState, int flags, int userId, String callingPackage) throws RemoteException {
-        }
+        public void setApplicationEnabledSetting(
+                String packageName, int newState, int flags, int userId, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public int getApplicationEnabledSetting(String packageName, int userId) throws RemoteException {
+        public int getApplicationEnabledSetting(String packageName, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void logAppProcessStartIfNeeded(String packageName, String processName, int uid, String seinfo, String apkFile, int pid) throws RemoteException {
-        }
+        public void logAppProcessStartIfNeeded(
+                String packageName,
+                String processName,
+                int uid,
+                String seinfo,
+                String apkFile,
+                int pid)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void flushPackageRestrictionsAsUser(int userId) throws RemoteException {
-        }
+        public void flushPackageRestrictionsAsUser(int userId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void setPackageStoppedState(String packageName, boolean stopped, int userId) throws RemoteException {
-        }
+        public void setPackageStoppedState(String packageName, boolean stopped, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void freeStorageAndNotify(String volumeUuid, long freeStorageSize, int storageFlags, IPackageDataObserver observer) throws RemoteException {
-        }
+        public void freeStorageAndNotify(
+                String volumeUuid,
+                long freeStorageSize,
+                int storageFlags,
+                IPackageDataObserver observer)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void freeStorage(String volumeUuid, long freeStorageSize, int storageFlags, IntentSender pi) throws RemoteException {
-        }
+        public void freeStorage(
+                String volumeUuid, long freeStorageSize, int storageFlags, IntentSender pi)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void deleteApplicationCacheFiles(String packageName, IPackageDataObserver observer) throws RemoteException {
-        }
+        public void deleteApplicationCacheFiles(String packageName, IPackageDataObserver observer)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void deleteApplicationCacheFilesAsUser(String packageName, int userId, IPackageDataObserver observer) throws RemoteException {
-        }
+        public void deleteApplicationCacheFilesAsUser(
+                String packageName, int userId, IPackageDataObserver observer)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void clearApplicationUserData(String packageName, IPackageDataObserver observer, int userId) throws RemoteException {
-        }
+        public void clearApplicationUserData(
+                String packageName, IPackageDataObserver observer, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void clearApplicationProfileData(String packageName) throws RemoteException {
-        }
+        public void clearApplicationProfileData(String packageName) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void getPackageSizeInfo(String packageName, int userHandle, IPackageStatsObserver observer) throws RemoteException {
-        }
+        public void getPackageSizeInfo(
+                String packageName, int userHandle, IPackageStatsObserver observer)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public String[] getSystemSharedLibraryNames() throws RemoteException {
@@ -1024,8 +1230,7 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void enterSafeMode() throws RemoteException {
-        }
+        public void enterSafeMode() throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public boolean isSafeMode() throws RemoteException {
@@ -1038,24 +1243,39 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void notifyPackageUse(String packageName, int reason) throws RemoteException {
-        }
+        public void notifyPackageUse(String packageName, int reason) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void notifyDexLoad(String loadingPackageName, Map<String, String> classLoaderContextMap, String loaderIsa) throws RemoteException {
-        }
+        public void notifyDexLoad(
+                String loadingPackageName,
+                Map<String, String> classLoaderContextMap,
+                String loaderIsa)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void registerDexModule(String packageName, String dexModulePath, boolean isSharedModule, IDexModuleRegisterCallback callback) throws RemoteException {
-        }
+        public void registerDexModule(
+                String packageName,
+                String dexModulePath,
+                boolean isSharedModule,
+                IDexModuleRegisterCallback callback)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public boolean performDexOptMode(String packageName, boolean checkProfiles, String targetCompilerFilter, boolean force, boolean bootComplete, String splitName) throws RemoteException {
+        public boolean performDexOptMode(
+                String packageName,
+                boolean checkProfiles,
+                String targetCompilerFilter,
+                boolean force,
+                boolean bootComplete,
+                String splitName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean performDexOptSecondary(String packageName, String targetCompilerFilter, boolean force) throws RemoteException {
+        public boolean performDexOptSecondary(
+                String packageName, String targetCompilerFilter, boolean force)
+                throws RemoteException {
             return false;
         }
 
@@ -1070,12 +1290,10 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void registerMoveCallback(IPackageMoveObserver callback) throws RemoteException {
-        }
+        public void registerMoveCallback(IPackageMoveObserver callback) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void unregisterMoveCallback(IPackageMoveObserver callback) throws RemoteException {
-        }
+        public void unregisterMoveCallback(IPackageMoveObserver callback) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public int movePackage(String packageName, String volumeUuid) throws RemoteException {
@@ -1083,7 +1301,9 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public int movePackageToSd(String packageName, String volumeUuid, IMemorySaverPackageMoveObserver observer) throws RemoteException {
+        public int movePackageToSd(
+                String packageName, String volumeUuid, IMemorySaverPackageMoveObserver observer)
+                throws RemoteException {
             return 0;
         }
 
@@ -1103,34 +1323,43 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public int installExistingPackageAsUser(String packageName, int userId, int installFlags, int installReason, List<String> whiteListedPermissions) throws RemoteException {
+        public int installExistingPackageAsUser(
+                String packageName,
+                int userId,
+                int installFlags,
+                int installReason,
+                List<String> whiteListedPermissions)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void verifyPendingInstall(int id, int verificationCode) throws RemoteException {
-        }
+        public void verifyPendingInstall(int id, int verificationCode) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void extendVerificationTimeout(int id, int verificationCodeAtTimeout, long millisecondsToDelay) throws RemoteException {
-        }
+        public void extendVerificationTimeout(
+                int id, int verificationCodeAtTimeout, long millisecondsToDelay)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void verifyIntentFilter(int id, int verificationCode, List<String> failedDomains) throws RemoteException {
-        }
+        public void verifyIntentFilter(int id, int verificationCode, List<String> failedDomains)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public int getIntentVerificationStatus(String packageName, int userId) throws RemoteException {
+        public int getIntentVerificationStatus(String packageName, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean updateIntentVerificationStatus(String packageName, int status, int userId) throws RemoteException {
+        public boolean updateIntentVerificationStatus(String packageName, int status, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice getIntentFilterVerifications(String packageName) throws RemoteException {
+        public ParceledListSlice getIntentFilterVerifications(String packageName)
+                throws RemoteException {
             return null;
         }
 
@@ -1160,21 +1389,24 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean setApplicationHiddenSettingAsUser(String packageName, boolean hidden, int userId) throws RemoteException {
+        public boolean setApplicationHiddenSettingAsUser(
+                String packageName, boolean hidden, int userId) throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean getApplicationHiddenSettingAsUser(String packageName, int userId) throws RemoteException {
+        public boolean getApplicationHiddenSettingAsUser(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setSystemAppHiddenUntilInstalled(String packageName, boolean hidden) throws RemoteException {
-        }
+        public void setSystemAppHiddenUntilInstalled(String packageName, boolean hidden)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public boolean setSystemAppInstallState(String packageName, boolean installed, int userId) throws RemoteException {
+        public boolean setSystemAppInstallState(String packageName, boolean installed, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -1184,12 +1416,14 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean setBlockUninstallForUser(String packageName, boolean blockUninstall, int userId) throws RemoteException {
+        public boolean setBlockUninstallForUser(
+                String packageName, boolean blockUninstall, int userId) throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean getBlockUninstallForUser(String packageName, int userId) throws RemoteException {
+        public boolean getBlockUninstallForUser(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -1204,12 +1438,14 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean isPackageSignedByKeySet(String packageName, KeySet ks) throws RemoteException {
+        public boolean isPackageSignedByKeySet(String packageName, KeySet ks)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean isPackageSignedByKeySetExactly(String packageName, KeySet ks) throws RemoteException {
+        public boolean isPackageSignedByKeySetExactly(String packageName, KeySet ks)
+                throws RemoteException {
             return false;
         }
 
@@ -1234,7 +1470,8 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean setInstantAppCookie(String packageName, byte[] cookie, int userId) throws RemoteException {
+        public boolean setInstantAppCookie(String packageName, byte[] cookie, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -1249,13 +1486,14 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean setRequiredForSystemUser(String packageName, boolean systemUserApp) throws RemoteException {
+        public boolean setRequiredForSystemUser(String packageName, boolean systemUserApp)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setUpdateAvailable(String packageName, boolean updateAvaialble) throws RemoteException {
-        }
+        public void setUpdateAvailable(String packageName, boolean updateAvaialble)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public String getServicesSystemSharedLibraryPackageName() throws RemoteException {
@@ -1268,7 +1506,8 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public ChangedPackages getChangedPackages(int sequenceNumber, int userId) throws RemoteException {
+        public ChangedPackages getChangedPackages(int sequenceNumber, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -1283,23 +1522,25 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice getSharedLibraries(String packageName, long flags, int userId) throws RemoteException {
+        public ParceledListSlice getSharedLibraries(String packageName, long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice getDeclaredSharedLibraries(String packageName, long flags, int userId) throws RemoteException {
+        public ParceledListSlice getDeclaredSharedLibraries(
+                String packageName, long flags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean canRequestPackageInstalls(String packageName, int userId) throws RemoteException {
+        public boolean canRequestPackageInstalls(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void deletePreloadsFileCache() throws RemoteException {
-        }
+        public void deletePreloadsFileCache() throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public ComponentName getInstantAppResolverComponent() throws RemoteException {
@@ -1317,7 +1558,8 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public String getInstantAppAndroidId(String packageName, int userId) throws RemoteException {
+        public String getInstantAppAndroidId(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -1327,21 +1569,24 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setHarmfulAppWarning(String packageName, CharSequence warning, int userId) throws RemoteException {
-        }
+        public void setHarmfulAppWarning(String packageName, CharSequence warning, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public CharSequence getHarmfulAppWarning(String packageName, int userId) throws RemoteException {
+        public CharSequence getHarmfulAppWarning(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean hasSigningCertificate(String packageName, byte[] signingCertificate, int flags) throws RemoteException {
+        public boolean hasSigningCertificate(
+                String packageName, byte[] signingCertificate, int flags) throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean hasUidSigningCertificate(int uid, byte[] signingCertificate, int flags) throws RemoteException {
+        public boolean hasUidSigningCertificate(int uid, byte[] signingCertificate, int flags)
+                throws RemoteException {
             return false;
         }
 
@@ -1391,13 +1636,13 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean isPackageStateProtected(String packageName, int userId) throws RemoteException {
+        public boolean isPackageStateProtected(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void sendDeviceCustomizationReadyBroadcast() throws RemoteException {
-        }
+        public void sendDeviceCustomizationReadyBroadcast() throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public List<ModuleInfo> getInstalledModules(int flags) throws RemoteException {
@@ -1415,29 +1660,38 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setRuntimePermissionsVersion(int version, int userId) throws RemoteException {
-        }
+        public void setRuntimePermissionsVersion(int version, int userId) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void notifyPackagesReplacedReceived(String[] packages) throws RemoteException {
-        }
+        public void notifyPackagesReplacedReceived(String[] packages) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void requestPackageChecksums(String packageName, boolean includeSplits, int optional, int required, List trustedInstallers, IOnChecksumsReadyListener onChecksumsReadyListener, int userId) throws RemoteException {
-        }
+        public void requestPackageChecksums(
+                String packageName,
+                boolean includeSplits,
+                int optional,
+                int required,
+                List trustedInstallers,
+                IOnChecksumsReadyListener onChecksumsReadyListener,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public IntentSender getLaunchIntentSenderForPackage(String packageName, String callingPackage, String featureId, int userId) throws RemoteException {
+        public IntentSender getLaunchIntentSenderForPackage(
+                String packageName, String callingPackage, String featureId, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public String[] getAppOpPermissionPackages(String permissionName, int userId) throws RemoteException {
+        public String[] getAppOpPermissionPackages(String permissionName, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public PermissionGroupInfo getPermissionGroupInfo(String name, int flags) throws RemoteException {
+        public PermissionGroupInfo getPermissionGroupInfo(String name, int flags)
+                throws RemoteException {
             return null;
         }
 
@@ -1452,17 +1706,17 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void removePermission(String name) throws RemoteException {
-        }
+        public void removePermission(String name) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public int checkPermission(String permName, String pkgName, int userId) throws RemoteException {
+        public int checkPermission(String permName, String pkgName, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void grantRuntimePermission(String packageName, String permissionName, int userId) throws RemoteException {
-        }
+        public void grantRuntimePermission(String packageName, String permissionName, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public int checkUidPermission(String permName, int uid) throws RemoteException {
@@ -1470,8 +1724,8 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setMimeGroup(String packageName, String group, List<String> mimeTypes) throws RemoteException {
-        }
+        public void setMimeGroup(String packageName, String group, List<String> mimeTypes)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public String getSplashScreenTheme(String packageName, int userId) throws RemoteException {
@@ -1479,8 +1733,8 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setSplashScreenTheme(String packageName, String themeName, int userId) throws RemoteException {
-        }
+        public void setSplashScreenTheme(String packageName, String themeName, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public int getUserMinAspectRatio(String packageName, int userId) throws RemoteException {
@@ -1488,8 +1742,8 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setUserMinAspectRatio(String packageName, int userId, int aspectRatio) throws RemoteException {
-        }
+        public void setUserMinAspectRatio(String packageName, int userId, int aspectRatio)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public List<String> getMimeGroup(String packageName, String group) throws RemoteException {
@@ -1502,12 +1756,11 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void makeProviderVisible(int recipientAppId, String visibleAuthority) throws RemoteException {
-        }
+        public void makeProviderVisible(int recipientAppId, String visibleAuthority)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void makeUidVisible(int recipientAppId, int visibleUid) throws RemoteException {
-        }
+        public void makeUidVisible(int recipientAppId, int visibleUid) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public IBinder getHoldLockToken() throws RemoteException {
@@ -1515,22 +1768,23 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void holdLock(IBinder token, int durationMs) throws RemoteException {
-        }
+        public void holdLock(IBinder token, int durationMs) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public PackageManager.Property getPropertyAsUser(String propertyName, String packageName, String className, int userId) throws RemoteException {
+        public PackageManager.Property getPropertyAsUser(
+                String propertyName, String packageName, String className, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice queryProperty(String propertyName, int componentType) throws RemoteException {
+        public ParceledListSlice queryProperty(String propertyName, int componentType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setKeepUninstalledPackages(List<String> packageList) throws RemoteException {
-        }
+        public void setKeepUninstalledPackages(List<String> packageList) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public int setLicensePermissionsForMDM(String packageName) throws RemoteException {
@@ -1538,7 +1792,8 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public List<String> getPackageGrantedPermissionsForMDM(String packageName) throws RemoteException {
+        public List<String> getPackageGrantedPermissionsForMDM(String packageName)
+                throws RemoteException {
             return null;
         }
 
@@ -1548,49 +1803,59 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void clearPackagePreferredActivitiesAsUserForMDM(String packageName, int userId) throws RemoteException {
-        }
+        public void clearPackagePreferredActivitiesAsUserForMDM(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public boolean applyRuntimePermissionsForMDM(String pkgName, List<String> permissions, int permState, int userId) throws RemoteException {
+        public boolean applyRuntimePermissionsForMDM(
+                String pkgName, List<String> permissions, int permState, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean applyRuntimePermissionsForAllApplicationsForMDM(int permState, int userId) throws RemoteException {
+        public boolean applyRuntimePermissionsForAllApplicationsForMDM(int permState, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public List<String> getRequestedRuntimePermissionsForMDM(String pkgName) throws RemoteException {
+        public List<String> getRequestedRuntimePermissionsForMDM(String pkgName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean[] canPackageQuery(String sourcePackageName, String[] targetPackageNames, int userId) throws RemoteException {
+        public boolean[] canPackageQuery(
+                String sourcePackageName, String[] targetPackageNames, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean waitForHandler(long timeoutMillis, boolean forBackgroundHandler) throws RemoteException {
+        public boolean waitForHandler(long timeoutMillis, boolean forBackgroundHandler)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void registerPackageMonitorCallback(IRemoteCallback callback, int userId) throws RemoteException {
-        }
+        public void registerPackageMonitorCallback(IRemoteCallback callback, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void unregisterPackageMonitorCallback(IRemoteCallback callback) throws RemoteException {
-        }
+        public void unregisterPackageMonitorCallback(IRemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public ArchivedPackageParcel getArchivedPackage(String packageName, int userId) throws RemoteException {
+        public ArchivedPackageParcel getArchivedPackage(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.IPackageManager
-        public Bitmap getArchivedAppIcon(String packageName, UserHandle user, String callingPackageName) throws RemoteException {
+        public Bitmap getArchivedAppIcon(
+                String packageName, UserHandle user, String callingPackageName)
+                throws RemoteException {
             return null;
         }
 
@@ -1610,7 +1875,8 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public List<String> getPackageListForDualDarPolicy(String packageType) throws RemoteException {
+        public List<String> getPackageListForDualDarPolicy(String packageType)
+                throws RemoteException {
             return null;
         }
 
@@ -1630,12 +1896,15 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean getMetadataForIconTray(String packageName, String metadata, int userId, List<String> feature) throws RemoteException {
+        public boolean getMetadataForIconTray(
+                String packageName, String metadata, int userId, List<String> feature)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean semIsPermissionRevokedByUserFixed(String permName, String packageName, int userId) throws RemoteException {
+        public boolean semIsPermissionRevokedByUserFixed(
+                String permName, String packageName, int userId) throws RemoteException {
             return false;
         }
 
@@ -1645,7 +1914,8 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public ParceledListSlice getUnknownSourcePackagesAsUser(long flags, int userId) throws RemoteException {
+        public ParceledListSlice getUnknownSourcePackagesAsUser(long flags, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -1655,13 +1925,14 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public boolean isSystemCompressedPackage(String packageName, int userId) throws RemoteException {
+        public boolean isSystemCompressedPackage(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IPackageManager
-        public void changeMonetizationBadgeState(String value, String packageName) throws RemoteException {
-        }
+        public void changeMonetizationBadgeState(String value, String packageName)
+                throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public boolean shouldAppSupportBadgeIcon(String packageName) throws RemoteException {
@@ -1669,12 +1940,10 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.content.pm.IPackageManager
-        public void setAppCategoryHintUser(String pkgName, int category) throws RemoteException {
-        }
+        public void setAppCategoryHintUser(String pkgName, int category) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
-        public void clearAppCategoryHintUser(String pkgName) throws RemoteException {
-        }
+        public void clearAppCategoryHintUser(String pkgName) throws RemoteException {}
 
         @Override // android.content.pm.IPackageManager
         public Map<String, String> getAppCategoryHintUserMap() throws RemoteException {
@@ -1692,7 +1961,7 @@ public interface IPackageManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPackageManager {
+    public abstract static class Stub extends Binder implements IPackageManager {
         public static final String DESCRIPTOR = "android.content.pm.IPackageManager";
         static final int TRANSACTION_activitySupportsIntentAsUser = 12;
         static final int TRANSACTION_addCrossProfileIntentFilter = 65;
@@ -1950,7 +2219,9 @@ public interface IPackageManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IPackageManager asInterface(IBinder obj) {
@@ -2470,7 +2741,8 @@ public interface IPackageManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, final Parcel data, final Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, final Parcel data, final Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -2504,7 +2776,8 @@ public interface IPackageManager extends IInterface {
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 4:
-                    VersionedPackage _arg04 = (VersionedPackage) data.readTypedObject(VersionedPackage.CREATOR);
+                    VersionedPackage _arg04 =
+                            (VersionedPackage) data.readTypedObject(VersionedPackage.CREATOR);
                     long _arg14 = data.readLong();
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
@@ -2561,7 +2834,8 @@ public interface IPackageManager extends IInterface {
                     reply.writeInt(_result9);
                     return true;
                 case 11:
-                    ComponentName _arg011 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg011 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     long _arg18 = data.readLong();
                     int _arg26 = data.readInt();
                     data.enforceNoDataAvail();
@@ -2570,17 +2844,20 @@ public interface IPackageManager extends IInterface {
                     reply.writeTypedObject(_result10, 1);
                     return true;
                 case 12:
-                    ComponentName _arg012 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg012 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     Intent _arg19 = (Intent) data.readTypedObject(Intent.CREATOR);
                     String _arg27 = data.readString();
                     int _arg3 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result11 = activitySupportsIntentAsUser(_arg012, _arg19, _arg27, _arg3);
+                    boolean _result11 =
+                            activitySupportsIntentAsUser(_arg012, _arg19, _arg27, _arg3);
                     reply.writeNoException();
                     reply.writeBoolean(_result11);
                     return true;
                 case 13:
-                    ComponentName _arg013 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg013 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     long _arg110 = data.readLong();
                     int _arg28 = data.readInt();
                     data.enforceNoDataAvail();
@@ -2589,7 +2866,8 @@ public interface IPackageManager extends IInterface {
                     reply.writeTypedObject(_result12, 1);
                     return true;
                 case 14:
-                    ComponentName _arg014 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg014 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     long _arg111 = data.readLong();
                     int _arg29 = data.readInt();
                     data.enforceNoDataAvail();
@@ -2598,7 +2876,8 @@ public interface IPackageManager extends IInterface {
                     reply.writeTypedObject(_result13, 1);
                     return true;
                 case 15:
-                    ComponentName _arg015 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg015 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     long _arg112 = data.readLong();
                     int _arg210 = data.readInt();
                     data.enforceNoDataAvail();
@@ -2718,12 +2997,14 @@ public interface IPackageManager extends IInterface {
                     long _arg214 = data.readLong();
                     int _arg34 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result29 = queryIntentActivities(_arg029, _arg118, _arg214, _arg34);
+                    ParceledListSlice _result29 =
+                            queryIntentActivities(_arg029, _arg118, _arg214, _arg34);
                     reply.writeNoException();
                     reply.writeTypedObject(_result29, 1);
                     return true;
                 case 31:
-                    ComponentName _arg030 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg030 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     Intent[] _arg119 = (Intent[]) data.createTypedArray(Intent.CREATOR);
                     String[] _arg215 = data.createStringArray();
                     Intent _arg35 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -2731,7 +3012,9 @@ public interface IPackageManager extends IInterface {
                     long _arg5 = data.readLong();
                     int _arg6 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result30 = queryIntentActivityOptions(_arg030, _arg119, _arg215, _arg35, _arg4, _arg5, _arg6);
+                    ParceledListSlice _result30 =
+                            queryIntentActivityOptions(
+                                    _arg030, _arg119, _arg215, _arg35, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeTypedObject(_result30, 1);
                     return true;
@@ -2741,7 +3024,8 @@ public interface IPackageManager extends IInterface {
                     long _arg216 = data.readLong();
                     int _arg36 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result31 = queryIntentReceivers(_arg031, _arg120, _arg216, _arg36);
+                    ParceledListSlice _result31 =
+                            queryIntentReceivers(_arg031, _arg120, _arg216, _arg36);
                     reply.writeNoException();
                     reply.writeTypedObject(_result31, 1);
                     return true;
@@ -2761,7 +3045,8 @@ public interface IPackageManager extends IInterface {
                     long _arg218 = data.readLong();
                     int _arg38 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result33 = queryIntentServices(_arg033, _arg122, _arg218, _arg38);
+                    ParceledListSlice _result33 =
+                            queryIntentServices(_arg033, _arg122, _arg218, _arg38);
                     reply.writeNoException();
                     reply.writeTypedObject(_result33, 1);
                     return true;
@@ -2771,7 +3056,8 @@ public interface IPackageManager extends IInterface {
                     long _arg219 = data.readLong();
                     int _arg39 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result34 = queryIntentContentProviders(_arg034, _arg123, _arg219, _arg39);
+                    ParceledListSlice _result34 =
+                            queryIntentContentProviders(_arg034, _arg123, _arg219, _arg39);
                     reply.writeNoException();
                     reply.writeTypedObject(_result34, 1);
                     return true;
@@ -2796,7 +3082,8 @@ public interface IPackageManager extends IInterface {
                     long _arg126 = data.readLong();
                     int _arg220 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result37 = getPackagesHoldingPermissions(_arg037, _arg126, _arg220);
+                    ParceledListSlice _result37 =
+                            getPackagesHoldingPermissions(_arg037, _arg126, _arg220);
                     reply.writeNoException();
                     reply.writeTypedObject(_result37, 1);
                     return true;
@@ -2826,7 +3113,8 @@ public interface IPackageManager extends IInterface {
                     return true;
                 case 42:
                     List<String> _arg041 = data.createStringArrayList();
-                    ArrayList createTypedArrayList = data.createTypedArrayList(ProviderInfo.CREATOR);
+                    ArrayList createTypedArrayList =
+                            data.createTypedArrayList(ProviderInfo.CREATOR);
                     data.enforceNoDataAvail();
                     querySyncProviders(_arg041, createTypedArrayList);
                     reply.writeNoException();
@@ -2839,16 +3127,19 @@ public interface IPackageManager extends IInterface {
                     long _arg222 = data.readLong();
                     String _arg310 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result41 = queryContentProviders(_arg042, _arg129, _arg222, _arg310);
+                    ParceledListSlice _result41 =
+                            queryContentProviders(_arg042, _arg129, _arg222, _arg310);
                     reply.writeNoException();
                     reply.writeTypedObject(_result41, 1);
                     return true;
                 case 44:
-                    ComponentName _arg043 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg043 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg130 = data.readInt();
                     int _arg223 = data.readInt();
                     data.enforceNoDataAvail();
-                    InstrumentationInfo _result42 = getInstrumentationInfoAsUser(_arg043, _arg130, _arg223);
+                    InstrumentationInfo _result42 =
+                            getInstrumentationInfoAsUser(_arg043, _arg130, _arg223);
                     reply.writeNoException();
                     reply.writeTypedObject(_result42, 1);
                     return true;
@@ -2857,7 +3148,8 @@ public interface IPackageManager extends IInterface {
                     int _arg131 = data.readInt();
                     int _arg224 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result43 = queryInstrumentationAsUser(_arg044, _arg131, _arg224);
+                    ParceledListSlice _result43 =
+                            queryInstrumentationAsUser(_arg044, _arg131, _arg224);
                     reply.writeNoException();
                     reply.writeTypedObject(_result43, 1);
                     return true;
@@ -2892,7 +3184,8 @@ public interface IPackageManager extends IInterface {
                 case 50:
                     String _arg049 = data.readString();
                     int _arg135 = data.readInt();
-                    IPackageDeleteObserver _arg226 = IPackageDeleteObserver.Stub.asInterface(data.readStrongBinder());
+                    IPackageDeleteObserver _arg226 =
+                            IPackageDeleteObserver.Stub.asInterface(data.readStrongBinder());
                     int _arg311 = data.readInt();
                     int _arg42 = data.readInt();
                     data.enforceNoDataAvail();
@@ -2900,8 +3193,10 @@ public interface IPackageManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 51:
-                    VersionedPackage _arg050 = (VersionedPackage) data.readTypedObject(VersionedPackage.CREATOR);
-                    IPackageDeleteObserver2 _arg136 = IPackageDeleteObserver2.Stub.asInterface(data.readStrongBinder());
+                    VersionedPackage _arg050 =
+                            (VersionedPackage) data.readTypedObject(VersionedPackage.CREATOR);
+                    IPackageDeleteObserver2 _arg136 =
+                            IPackageDeleteObserver2.Stub.asInterface(data.readStrongBinder());
                     int _arg227 = data.readInt();
                     int _arg312 = data.readInt();
                     data.enforceNoDataAvail();
@@ -2909,8 +3204,10 @@ public interface IPackageManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 52:
-                    VersionedPackage _arg051 = (VersionedPackage) data.readTypedObject(VersionedPackage.CREATOR);
-                    IPackageDeleteObserver2 _arg137 = IPackageDeleteObserver2.Stub.asInterface(data.readStrongBinder());
+                    VersionedPackage _arg051 =
+                            (VersionedPackage) data.readTypedObject(VersionedPackage.CREATOR);
+                    IPackageDeleteObserver2 _arg137 =
+                            IPackageDeleteObserver2.Stub.asInterface(data.readStrongBinder());
                     int _arg228 = data.readInt();
                     data.enforceNoDataAvail();
                     deleteExistingPackageAsUser(_arg051, _arg137, _arg228);
@@ -2950,18 +3247,23 @@ public interface IPackageManager extends IInterface {
                     Intent _arg056 = (Intent) data.readTypedObject(Intent.CREATOR);
                     String _arg140 = data.readString();
                     int _arg230 = data.readInt();
-                    IntentFilter _arg313 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
+                    IntentFilter _arg313 =
+                            (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
                     int _arg43 = data.readInt();
-                    ComponentName _arg52 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg52 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     setLastChosenActivity(_arg056, _arg140, _arg230, _arg313, _arg43, _arg52);
                     reply.writeNoException();
                     return true;
                 case 58:
-                    IntentFilter _arg057 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
+                    IntentFilter _arg057 =
+                            (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
                     int _arg141 = data.readInt();
-                    ComponentName[] _arg231 = (ComponentName[]) data.createTypedArray(ComponentName.CREATOR);
-                    ComponentName _arg314 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName[] _arg231 =
+                            (ComponentName[]) data.createTypedArray(ComponentName.CREATOR);
+                    ComponentName _arg314 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg44 = data.readInt();
                     boolean _arg53 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -2969,10 +3271,13 @@ public interface IPackageManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 59:
-                    IntentFilter _arg058 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
+                    IntentFilter _arg058 =
+                            (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
                     int _arg142 = data.readInt();
-                    ComponentName[] _arg232 = (ComponentName[]) data.createTypedArray(ComponentName.CREATOR);
-                    ComponentName _arg315 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName[] _arg232 =
+                            (ComponentName[]) data.createTypedArray(ComponentName.CREATOR);
+                    ComponentName _arg315 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg45 = data.readInt();
                     data.enforceNoDataAvail();
                     replacePreferredActivity(_arg058, _arg142, _arg232, _arg315, _arg45);
@@ -2996,8 +3301,10 @@ public interface IPackageManager extends IInterface {
                     reply.writeTypedList(arrayList2, 1);
                     return true;
                 case 62:
-                    IntentFilter _arg060 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
-                    ComponentName _arg143 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    IntentFilter _arg060 =
+                            (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
+                    ComponentName _arg143 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg234 = data.readInt();
                     data.enforceNoDataAvail();
                     addPersistentPreferredActivity(_arg060, _arg143, _arg234);
@@ -3011,14 +3318,16 @@ public interface IPackageManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 64:
-                    IntentFilter _arg062 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
+                    IntentFilter _arg062 =
+                            (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
                     int _arg145 = data.readInt();
                     data.enforceNoDataAvail();
                     clearPersistentPreferredActivity(_arg062, _arg145);
                     reply.writeNoException();
                     return true;
                 case 65:
-                    IntentFilter _arg063 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
+                    IntentFilter _arg063 =
+                            (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
                     String _arg146 = data.readString();
                     int _arg235 = data.readInt();
                     int _arg316 = data.readInt();
@@ -3028,13 +3337,16 @@ public interface IPackageManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 66:
-                    IntentFilter _arg064 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
+                    IntentFilter _arg064 =
+                            (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
                     String _arg147 = data.readString();
                     int _arg236 = data.readInt();
                     int _arg317 = data.readInt();
                     int _arg47 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result48 = removeCrossProfileIntentFilter(_arg064, _arg147, _arg236, _arg317, _arg47);
+                    boolean _result48 =
+                            removeCrossProfileIntentFilter(
+                                    _arg064, _arg147, _arg236, _arg317, _arg47);
                     reply.writeNoException();
                     reply.writeBoolean(_result48);
                     return true;
@@ -3050,22 +3362,29 @@ public interface IPackageManager extends IInterface {
                     int _arg149 = data.readInt();
                     int _arg237 = data.readInt();
                     data.enforceNoDataAvail();
-                    String[] _result49 = setDistractingPackageRestrictionsAsUser(_arg066, _arg149, _arg237);
+                    String[] _result49 =
+                            setDistractingPackageRestrictionsAsUser(_arg066, _arg149, _arg237);
                     reply.writeNoException();
                     reply.writeStringArray(_result49);
                     return true;
                 case 69:
                     String[] _arg067 = data.createStringArray();
                     boolean _arg150 = data.readBoolean();
-                    PersistableBundle _arg238 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
-                    PersistableBundle _arg318 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
-                    SuspendDialogInfo _arg48 = (SuspendDialogInfo) data.readTypedObject(SuspendDialogInfo.CREATOR);
+                    PersistableBundle _arg238 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg318 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    SuspendDialogInfo _arg48 =
+                            (SuspendDialogInfo) data.readTypedObject(SuspendDialogInfo.CREATOR);
                     int _arg54 = data.readInt();
                     String _arg62 = data.readString();
                     int _arg7 = data.readInt();
                     int _arg8 = data.readInt();
                     data.enforceNoDataAvail();
-                    String[] _result50 = setPackagesSuspendedAsUser(_arg067, _arg150, _arg238, _arg318, _arg48, _arg54, _arg62, _arg7, _arg8);
+                    String[] _result50 =
+                            setPackagesSuspendedAsUser(
+                                    _arg067, _arg150, _arg238, _arg318, _arg48, _arg54, _arg62,
+                                    _arg7, _arg8);
                     reply.writeNoException();
                     reply.writeStringArray(_result50);
                     return true;
@@ -3168,14 +3487,16 @@ public interface IPackageManager extends IInterface {
                     reply.writeTypedList(arrayList3, 1);
                     return true;
                 case 83:
-                    ComponentName _arg080 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg080 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg160 = data.readInt();
                     data.enforceNoDataAvail();
                     setHomeActivity(_arg080, _arg160);
                     reply.writeNoException();
                     return true;
                 case 84:
-                    ComponentName _arg081 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg081 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg161 = data.readString();
                     int _arg239 = data.readInt();
                     int _arg319 = data.readInt();
@@ -3184,14 +3505,16 @@ public interface IPackageManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 85:
-                    ComponentName _arg082 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg082 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg162 = data.readInt();
                     data.enforceNoDataAvail();
                     restoreLabelAndIcon(_arg082, _arg162);
                     reply.writeNoException();
                     return true;
                 case 86:
-                    ComponentName _arg083 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg083 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg163 = data.readInt();
                     int _arg240 = data.readInt();
                     int _arg320 = data.readInt();
@@ -3201,7 +3524,9 @@ public interface IPackageManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 87:
-                    List<PackageManager.ComponentEnabledSetting> _arg084 = data.createTypedArrayList(PackageManager.ComponentEnabledSetting.CREATOR);
+                    List<PackageManager.ComponentEnabledSetting> _arg084 =
+                            data.createTypedArrayList(
+                                    PackageManager.ComponentEnabledSetting.CREATOR);
                     int _arg164 = data.readInt();
                     String _arg241 = data.readString();
                     data.enforceNoDataAvail();
@@ -3209,7 +3534,8 @@ public interface IPackageManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 88:
-                    ComponentName _arg085 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg085 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg165 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result61 = getComponentEnabledSetting(_arg085, _arg165);
@@ -3263,7 +3589,8 @@ public interface IPackageManager extends IInterface {
                     String _arg091 = data.readString();
                     long _arg170 = data.readLong();
                     int _arg245 = data.readInt();
-                    IPackageDataObserver _arg323 = IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
+                    IPackageDataObserver _arg323 =
+                            IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     freeStorageAndNotify(_arg091, _arg170, _arg245, _arg323);
                     reply.writeNoException();
@@ -3272,14 +3599,16 @@ public interface IPackageManager extends IInterface {
                     String _arg092 = data.readString();
                     long _arg171 = data.readLong();
                     int _arg246 = data.readInt();
-                    IntentSender _arg324 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
+                    IntentSender _arg324 =
+                            (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     data.enforceNoDataAvail();
                     freeStorage(_arg092, _arg171, _arg246, _arg324);
                     reply.writeNoException();
                     return true;
                 case 96:
                     String _arg093 = data.readString();
-                    IPackageDataObserver _arg172 = IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
+                    IPackageDataObserver _arg172 =
+                            IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     deleteApplicationCacheFiles(_arg093, _arg172);
                     reply.writeNoException();
@@ -3287,14 +3616,16 @@ public interface IPackageManager extends IInterface {
                 case 97:
                     String _arg094 = data.readString();
                     int _arg173 = data.readInt();
-                    IPackageDataObserver _arg247 = IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
+                    IPackageDataObserver _arg247 =
+                            IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     deleteApplicationCacheFilesAsUser(_arg094, _arg173, _arg247);
                     reply.writeNoException();
                     return true;
                 case 98:
                     String _arg095 = data.readString();
-                    IPackageDataObserver _arg174 = IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
+                    IPackageDataObserver _arg174 =
+                            IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
                     int _arg248 = data.readInt();
                     data.enforceNoDataAvail();
                     clearApplicationUserData(_arg095, _arg174, _arg248);
@@ -3309,7 +3640,8 @@ public interface IPackageManager extends IInterface {
                 case 100:
                     String _arg097 = data.readString();
                     int _arg175 = data.readInt();
-                    IPackageStatsObserver _arg249 = IPackageStatsObserver.Stub.asInterface(data.readStrongBinder());
+                    IPackageStatsObserver _arg249 =
+                            IPackageStatsObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getPackageSizeInfo(_arg097, _arg175, _arg249);
                     reply.writeNoException();
@@ -3326,12 +3658,15 @@ public interface IPackageManager extends IInterface {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result64.size());
-                        _result64.forEach(new BiConsumer() { // from class: android.content.pm.IPackageManager$Stub$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IPackageManager.Stub.lambda$onTransact$0(Parcel.this, (String) obj, (String) obj2);
-                            }
-                        });
+                        _result64.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.content.pm.IPackageManager$Stub$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IPackageManager.Stub.lambda$onTransact$0(
+                                                Parcel.this, (String) obj, (String) obj2);
+                                    }
+                                });
                     }
                     return true;
                 case 103:
@@ -3376,12 +3711,16 @@ public interface IPackageManager extends IInterface {
                     String _arg0100 = data.readString();
                     int N = data.readInt();
                     final Map<String, String> _arg178 = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.content.pm.IPackageManager$Stub$$ExternalSyntheticLambda1
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IPackageManager.Stub.lambda$onTransact$1(Parcel.this, _arg178, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.content.pm.IPackageManager$Stub$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IPackageManager.Stub.lambda$onTransact$1(
+                                                    Parcel.this, _arg178, i);
+                                        }
+                                    });
                     String _arg250 = data.readString();
                     data.enforceNoDataAvail();
                     notifyDexLoad(_arg0100, _arg178, _arg250);
@@ -3390,7 +3729,8 @@ public interface IPackageManager extends IInterface {
                     String _arg0101 = data.readString();
                     String _arg179 = data.readString();
                     boolean _arg251 = data.readBoolean();
-                    IDexModuleRegisterCallback _arg325 = IDexModuleRegisterCallback.Stub.asInterface(data.readStrongBinder());
+                    IDexModuleRegisterCallback _arg325 =
+                            IDexModuleRegisterCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerDexModule(_arg0101, _arg179, _arg251, _arg325);
                     return true;
@@ -3402,7 +3742,8 @@ public interface IPackageManager extends IInterface {
                     boolean _arg412 = data.readBoolean();
                     String _arg56 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result70 = performDexOptMode(_arg0102, _arg180, _arg252, _arg326, _arg412, _arg56);
+                    boolean _result70 =
+                            performDexOptMode(_arg0102, _arg180, _arg252, _arg326, _arg412, _arg56);
                     reply.writeNoException();
                     reply.writeBoolean(_result70);
                     return true;
@@ -3431,13 +3772,15 @@ public interface IPackageManager extends IInterface {
                     reply.writeInt(_result73);
                     return true;
                 case 116:
-                    IPackageMoveObserver _arg0106 = IPackageMoveObserver.Stub.asInterface(data.readStrongBinder());
+                    IPackageMoveObserver _arg0106 =
+                            IPackageMoveObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerMoveCallback(_arg0106);
                     reply.writeNoException();
                     return true;
                 case 117:
-                    IPackageMoveObserver _arg0107 = IPackageMoveObserver.Stub.asInterface(data.readStrongBinder());
+                    IPackageMoveObserver _arg0107 =
+                            IPackageMoveObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterMoveCallback(_arg0107);
                     reply.writeNoException();
@@ -3453,7 +3796,9 @@ public interface IPackageManager extends IInterface {
                 case 119:
                     String _arg0109 = data.readString();
                     String _arg184 = data.readString();
-                    IMemorySaverPackageMoveObserver _arg254 = IMemorySaverPackageMoveObserver.Stub.asInterface(data.readStrongBinder());
+                    IMemorySaverPackageMoveObserver _arg254 =
+                            IMemorySaverPackageMoveObserver.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result75 = movePackageToSd(_arg0109, _arg184, _arg254);
                     reply.writeNoException();
@@ -3485,7 +3830,9 @@ public interface IPackageManager extends IInterface {
                     int _arg327 = data.readInt();
                     List<String> _arg413 = data.createStringArrayList();
                     data.enforceNoDataAvail();
-                    int _result79 = installExistingPackageAsUser(_arg0112, _arg185, _arg255, _arg327, _arg413);
+                    int _result79 =
+                            installExistingPackageAsUser(
+                                    _arg0112, _arg185, _arg255, _arg327, _arg413);
                     reply.writeNoException();
                     reply.writeInt(_result79);
                     return true;
@@ -3568,7 +3915,8 @@ public interface IPackageManager extends IInterface {
                     boolean _arg191 = data.readBoolean();
                     int _arg259 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result88 = setApplicationHiddenSettingAsUser(_arg0120, _arg191, _arg259);
+                    boolean _result88 =
+                            setApplicationHiddenSettingAsUser(_arg0120, _arg191, _arg259);
                     reply.writeNoException();
                     reply.writeBoolean(_result88);
                     return true;
@@ -3761,7 +4109,8 @@ public interface IPackageManager extends IInterface {
                     long _arg1109 = data.readLong();
                     int _arg264 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result112 = getDeclaredSharedLibraries(_arg0141, _arg1109, _arg264);
+                    ParceledListSlice _result112 =
+                            getDeclaredSharedLibraries(_arg0141, _arg1109, _arg264);
                     reply.writeNoException();
                     reply.writeTypedObject(_result112, 1);
                     return true;
@@ -3807,7 +4156,8 @@ public interface IPackageManager extends IInterface {
                     return true;
                 case 169:
                     String _arg0144 = data.readString();
-                    CharSequence _arg1112 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg1112 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     int _arg265 = data.readInt();
                     data.enforceNoDataAvail();
                     setHarmfulAppWarning(_arg0144, _arg1112, _arg265);
@@ -3943,10 +4293,12 @@ public interface IPackageManager extends IInterface {
                     int _arg328 = data.readInt();
                     ClassLoader cl = getClass().getClassLoader();
                     List _arg414 = data.readArrayList(cl);
-                    IOnChecksumsReadyListener _arg57 = IOnChecksumsReadyListener.Stub.asInterface(data.readStrongBinder());
+                    IOnChecksumsReadyListener _arg57 =
+                            IOnChecksumsReadyListener.Stub.asInterface(data.readStrongBinder());
                     int _arg63 = data.readInt();
                     data.enforceNoDataAvail();
-                    requestPackageChecksums(_arg0154, _arg1119, _arg268, _arg328, _arg414, _arg57, _arg63);
+                    requestPackageChecksums(
+                            _arg0154, _arg1119, _arg268, _arg328, _arg414, _arg57, _arg63);
                     reply.writeNoException();
                     return true;
                 case 190:
@@ -3955,7 +4307,8 @@ public interface IPackageManager extends IInterface {
                     String _arg269 = data.readString();
                     int _arg329 = data.readInt();
                     data.enforceNoDataAvail();
-                    IntentSender _result135 = getLaunchIntentSenderForPackage(_arg0155, _arg1120, _arg269, _arg329);
+                    IntentSender _result135 =
+                            getLaunchIntentSenderForPackage(_arg0155, _arg1120, _arg269, _arg329);
                     reply.writeNoException();
                     reply.writeTypedObject(_result135, 1);
                     return true;
@@ -3976,14 +4329,16 @@ public interface IPackageManager extends IInterface {
                     reply.writeTypedObject(_result137, 1);
                     return true;
                 case 193:
-                    PermissionInfo _arg0158 = (PermissionInfo) data.readTypedObject(PermissionInfo.CREATOR);
+                    PermissionInfo _arg0158 =
+                            (PermissionInfo) data.readTypedObject(PermissionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result138 = addPermission(_arg0158);
                     reply.writeNoException();
                     reply.writeBoolean(_result138);
                     return true;
                 case 194:
-                    PermissionInfo _arg0159 = (PermissionInfo) data.readTypedObject(PermissionInfo.CREATOR);
+                    PermissionInfo _arg0159 =
+                            (PermissionInfo) data.readTypedObject(PermissionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result139 = addPermissionAsync(_arg0159);
                     reply.writeNoException();
@@ -4107,7 +4462,8 @@ public interface IPackageManager extends IInterface {
                     String _arg275 = data.readString();
                     int _arg330 = data.readInt();
                     data.enforceNoDataAvail();
-                    PackageManager.Property _result147 = getPropertyAsUser(_arg0174, _arg1135, _arg275, _arg330);
+                    PackageManager.Property _result147 =
+                            getPropertyAsUser(_arg0174, _arg1135, _arg275, _arg330);
                     reply.writeNoException();
                     reply.writeTypedObject(_result147, 1);
                     return true;
@@ -4159,7 +4515,8 @@ public interface IPackageManager extends IInterface {
                     int _arg276 = data.readInt();
                     int _arg331 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result152 = applyRuntimePermissionsForMDM(_arg0181, _arg1138, _arg276, _arg331);
+                    boolean _result152 =
+                            applyRuntimePermissionsForMDM(_arg0181, _arg1138, _arg276, _arg331);
                     reply.writeNoException();
                     reply.writeBoolean(_result152);
                     return true;
@@ -4167,7 +4524,8 @@ public interface IPackageManager extends IInterface {
                     int _arg0182 = data.readInt();
                     int _arg1139 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result153 = applyRuntimePermissionsForAllApplicationsForMDM(_arg0182, _arg1139);
+                    boolean _result153 =
+                            applyRuntimePermissionsForAllApplicationsForMDM(_arg0182, _arg1139);
                     reply.writeNoException();
                     reply.writeBoolean(_result153);
                     return true;
@@ -4196,14 +4554,16 @@ public interface IPackageManager extends IInterface {
                     reply.writeBoolean(_result156);
                     return true;
                 case 222:
-                    IRemoteCallback _arg0186 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg0186 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg1142 = data.readInt();
                     data.enforceNoDataAvail();
                     registerPackageMonitorCallback(_arg0186, _arg1142);
                     reply.writeNoException();
                     return true;
                 case 223:
-                    IRemoteCallback _arg0187 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg0187 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterPackageMonitorCallback(_arg0187);
                     reply.writeNoException();
@@ -4284,7 +4644,8 @@ public interface IPackageManager extends IInterface {
                     int _arg279 = data.readInt();
                     List<String> _arg332 = new ArrayList<>();
                     data.enforceNoDataAvail();
-                    boolean _result166 = getMetadataForIconTray(_arg0197, _arg1149, _arg279, _arg332);
+                    boolean _result166 =
+                            getMetadataForIconTray(_arg0197, _arg1149, _arg279, _arg332);
                     reply.writeNoException();
                     reply.writeBoolean(_result166);
                     reply.writeStringList(_arg332);
@@ -4294,7 +4655,8 @@ public interface IPackageManager extends IInterface {
                     String _arg1150 = data.readString();
                     int _arg280 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result167 = semIsPermissionRevokedByUserFixed(_arg0198, _arg1150, _arg280);
+                    boolean _result167 =
+                            semIsPermissionRevokedByUserFixed(_arg0198, _arg1150, _arg280);
                     reply.writeNoException();
                     reply.writeBoolean(_result167);
                     return true;
@@ -4309,7 +4671,8 @@ public interface IPackageManager extends IInterface {
                     long _arg0200 = data.readLong();
                     int _arg1151 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result169 = getUnknownSourcePackagesAsUser(_arg0200, _arg1151);
+                    ParceledListSlice _result169 =
+                            getUnknownSourcePackagesAsUser(_arg0200, _arg1151);
                     reply.writeNoException();
                     reply.writeTypedObject(_result169, 1);
                     return true;
@@ -4363,12 +4726,15 @@ public interface IPackageManager extends IInterface {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result173.size());
-                        _result173.forEach(new BiConsumer() { // from class: android.content.pm.IPackageManager$Stub$$ExternalSyntheticLambda2
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IPackageManager.Stub.lambda$onTransact$2(Parcel.this, (String) obj, (String) obj2);
-                            }
-                        });
+                        _result173.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.content.pm.IPackageManager$Stub$$ExternalSyntheticLambda2
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IPackageManager.Stub.lambda$onTransact$2(
+                                                Parcel.this, (String) obj, (String) obj2);
+                                    }
+                                });
                     }
                     return true;
                 case 244:
@@ -4380,12 +4746,15 @@ public interface IPackageManager extends IInterface {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result174.size());
-                        _result174.forEach(new BiConsumer() { // from class: android.content.pm.IPackageManager$Stub$$ExternalSyntheticLambda3
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IPackageManager.Stub.lambda$onTransact$3(Parcel.this, (String) obj, (String[]) obj2);
-                            }
-                        });
+                        _result174.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.content.pm.IPackageManager$Stub$$ExternalSyntheticLambda3
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IPackageManager.Stub.lambda$onTransact$3(
+                                                Parcel.this, (String) obj, (String[]) obj2);
+                                    }
+                                });
                     }
                     return true;
                 default:
@@ -4432,7 +4801,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void checkPackageStartable(String packageName, int userId) throws RemoteException {
+            public void checkPackageStartable(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4448,7 +4818,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean isPackageAvailable(String packageName, int userId) throws RemoteException {
+            public boolean isPackageAvailable(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4466,7 +4837,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public PackageInfo getPackageInfo(String packageName, long flags, int userId) throws RemoteException {
+            public PackageInfo getPackageInfo(String packageName, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4485,7 +4857,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public PackageInfo getPackageInfoVersioned(VersionedPackage versionedPackage, long flags, int userId) throws RemoteException {
+            public PackageInfo getPackageInfoVersioned(
+                    VersionedPackage versionedPackage, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4504,7 +4878,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int getPackageUid(String packageName, long flags, int userId) throws RemoteException {
+            public int getPackageUid(String packageName, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4523,7 +4898,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int[] getPackageGids(String packageName, long flags, int userId) throws RemoteException {
+            public int[] getPackageGids(String packageName, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4576,7 +4952,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ApplicationInfo getApplicationInfo(String packageName, long flags, int userId) throws RemoteException {
+            public ApplicationInfo getApplicationInfo(String packageName, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4586,7 +4963,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    ApplicationInfo _result = (ApplicationInfo) _reply.readTypedObject(ApplicationInfo.CREATOR);
+                    ApplicationInfo _result =
+                            (ApplicationInfo) _reply.readTypedObject(ApplicationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4612,7 +4990,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ActivityInfo getActivityInfo(ComponentName className, long flags, int userId) throws RemoteException {
+            public ActivityInfo getActivityInfo(ComponentName className, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4622,7 +5001,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    ActivityInfo _result = (ActivityInfo) _reply.readTypedObject(ActivityInfo.CREATOR);
+                    ActivityInfo _result =
+                            (ActivityInfo) _reply.readTypedObject(ActivityInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4631,7 +5011,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean activitySupportsIntentAsUser(ComponentName className, Intent intent, String resolvedType, int userId) throws RemoteException {
+            public boolean activitySupportsIntentAsUser(
+                    ComponentName className, Intent intent, String resolvedType, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4651,7 +5033,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ActivityInfo getReceiverInfo(ComponentName className, long flags, int userId) throws RemoteException {
+            public ActivityInfo getReceiverInfo(ComponentName className, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4661,7 +5044,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(13, _data, _reply, 0);
                     _reply.readException();
-                    ActivityInfo _result = (ActivityInfo) _reply.readTypedObject(ActivityInfo.CREATOR);
+                    ActivityInfo _result =
+                            (ActivityInfo) _reply.readTypedObject(ActivityInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4670,7 +5054,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ServiceInfo getServiceInfo(ComponentName className, long flags, int userId) throws RemoteException {
+            public ServiceInfo getServiceInfo(ComponentName className, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4689,7 +5074,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ProviderInfo getProviderInfo(ComponentName className, long flags, int userId) throws RemoteException {
+            public ProviderInfo getProviderInfo(ComponentName className, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4699,7 +5085,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(15, _data, _reply, 0);
                     _reply.readException();
-                    ProviderInfo _result = (ProviderInfo) _reply.readTypedObject(ProviderInfo.CREATOR);
+                    ProviderInfo _result =
+                            (ProviderInfo) _reply.readTypedObject(ProviderInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4725,7 +5112,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int checkSignatures(String pkg1, String pkg2, int userId) throws RemoteException {
+            public int checkSignatures(String pkg1, String pkg2, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4897,7 +5285,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ResolveInfo resolveIntent(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+            public ResolveInfo resolveIntent(
+                    Intent intent, String resolvedType, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4917,7 +5307,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ResolveInfo findPersistentPreferredActivity(Intent intent, int userId) throws RemoteException {
+            public ResolveInfo findPersistentPreferredActivity(Intent intent, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4935,7 +5326,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean canForwardTo(Intent intent, String resolvedType, int sourceUserId, int targetUserId) throws RemoteException {
+            public boolean canForwardTo(
+                    Intent intent, String resolvedType, int sourceUserId, int targetUserId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4955,7 +5348,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice queryIntentActivities(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+            public ParceledListSlice queryIntentActivities(
+                    Intent intent, String resolvedType, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4966,7 +5361,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(30, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4975,7 +5371,15 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice queryIntentActivityOptions(ComponentName caller, Intent[] specifics, String[] specificTypes, Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+            public ParceledListSlice queryIntentActivityOptions(
+                    ComponentName caller,
+                    Intent[] specifics,
+                    String[] specificTypes,
+                    Intent intent,
+                    String resolvedType,
+                    long flags,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4989,7 +5393,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(31, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4998,7 +5403,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice queryIntentReceivers(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+            public ParceledListSlice queryIntentReceivers(
+                    Intent intent, String resolvedType, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5009,7 +5416,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(32, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5018,7 +5426,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ResolveInfo resolveService(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+            public ResolveInfo resolveService(
+                    Intent intent, String resolvedType, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5038,7 +5448,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice queryIntentServices(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+            public ParceledListSlice queryIntentServices(
+                    Intent intent, String resolvedType, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5049,7 +5461,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(34, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5058,7 +5471,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice queryIntentContentProviders(Intent intent, String resolvedType, long flags, int userId) throws RemoteException {
+            public ParceledListSlice queryIntentContentProviders(
+                    Intent intent, String resolvedType, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5069,7 +5484,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(35, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5078,7 +5494,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice getInstalledPackages(long flags, int userId) throws RemoteException {
+            public ParceledListSlice getInstalledPackages(long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5087,7 +5504,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(36, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5096,7 +5514,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParcelFileDescriptor getAppMetadataFd(String packageName, int userId) throws RemoteException {
+            public ParcelFileDescriptor getAppMetadataFd(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5105,7 +5524,9 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(37, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5114,7 +5535,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice getPackagesHoldingPermissions(String[] permissions, long flags, int userId) throws RemoteException {
+            public ParceledListSlice getPackagesHoldingPermissions(
+                    String[] permissions, long flags, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5124,7 +5546,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(38, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5133,7 +5556,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice getInstalledApplications(long flags, int userId) throws RemoteException {
+            public ParceledListSlice getInstalledApplications(long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5142,7 +5566,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(39, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5159,7 +5584,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(40, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5168,7 +5594,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ProviderInfo resolveContentProvider(String name, long flags, int userId) throws RemoteException {
+            public ProviderInfo resolveContentProvider(String name, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5178,7 +5605,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(41, _data, _reply, 0);
                     _reply.readException();
-                    ProviderInfo _result = (ProviderInfo) _reply.readTypedObject(ProviderInfo.CREATOR);
+                    ProviderInfo _result =
+                            (ProviderInfo) _reply.readTypedObject(ProviderInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5187,7 +5615,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void querySyncProviders(List<String> outNames, List<ProviderInfo> outInfo) throws RemoteException {
+            public void querySyncProviders(List<String> outNames, List<ProviderInfo> outInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5205,7 +5634,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice queryContentProviders(String processName, int uid, long flags, String metaDataKey) throws RemoteException {
+            public ParceledListSlice queryContentProviders(
+                    String processName, int uid, long flags, String metaDataKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5216,7 +5647,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeString(metaDataKey);
                     this.mRemote.transact(43, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5225,7 +5657,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public InstrumentationInfo getInstrumentationInfoAsUser(ComponentName className, int flags, int userId) throws RemoteException {
+            public InstrumentationInfo getInstrumentationInfoAsUser(
+                    ComponentName className, int flags, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5235,7 +5668,9 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(44, _data, _reply, 0);
                     _reply.readException();
-                    InstrumentationInfo _result = (InstrumentationInfo) _reply.readTypedObject(InstrumentationInfo.CREATOR);
+                    InstrumentationInfo _result =
+                            (InstrumentationInfo)
+                                    _reply.readTypedObject(InstrumentationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5244,7 +5679,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice queryInstrumentationAsUser(String targetPackage, int flags, int userId) throws RemoteException {
+            public ParceledListSlice queryInstrumentationAsUser(
+                    String targetPackage, int flags, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5254,7 +5690,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(45, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5279,7 +5716,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setInstallerPackageName(String targetPackage, String installerPackageName) throws RemoteException {
+            public void setInstallerPackageName(String targetPackage, String installerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5310,7 +5748,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setApplicationCategoryHint(String packageName, int categoryHint, String callerPackageName) throws RemoteException {
+            public void setApplicationCategoryHint(
+                    String packageName, int categoryHint, String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5327,7 +5767,13 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void deletePackageAsUser(String packageName, int versionCode, IPackageDeleteObserver observer, int userId, int flags) throws RemoteException {
+            public void deletePackageAsUser(
+                    String packageName,
+                    int versionCode,
+                    IPackageDeleteObserver observer,
+                    int userId,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5346,7 +5792,12 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void deletePackageVersioned(VersionedPackage versionedPackage, IPackageDeleteObserver2 observer, int userId, int flags) throws RemoteException {
+            public void deletePackageVersioned(
+                    VersionedPackage versionedPackage,
+                    IPackageDeleteObserver2 observer,
+                    int userId,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5364,7 +5815,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void deleteExistingPackageAsUser(VersionedPackage versionedPackage, IPackageDeleteObserver2 observer, int userId) throws RemoteException {
+            public void deleteExistingPackageAsUser(
+                    VersionedPackage versionedPackage, IPackageDeleteObserver2 observer, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5398,7 +5851,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public InstallSourceInfo getInstallSourceInfo(String packageName, int userId) throws RemoteException {
+            public InstallSourceInfo getInstallSourceInfo(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5407,7 +5861,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(54, _data, _reply, 0);
                     _reply.readException();
-                    InstallSourceInfo _result = (InstallSourceInfo) _reply.readTypedObject(InstallSourceInfo.CREATOR);
+                    InstallSourceInfo _result =
+                            (InstallSourceInfo) _reply.readTypedObject(InstallSourceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5431,7 +5886,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ResolveInfo getLastChosenActivity(Intent intent, String resolvedType, int flags) throws RemoteException {
+            public ResolveInfo getLastChosenActivity(Intent intent, String resolvedType, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5450,7 +5906,14 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setLastChosenActivity(Intent intent, String resolvedType, int flags, IntentFilter filter, int match, ComponentName activity) throws RemoteException {
+            public void setLastChosenActivity(
+                    Intent intent,
+                    String resolvedType,
+                    int flags,
+                    IntentFilter filter,
+                    int match,
+                    ComponentName activity)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5470,7 +5933,14 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void addPreferredActivity(IntentFilter filter, int match, ComponentName[] set, ComponentName activity, int userId, boolean removeExisting) throws RemoteException {
+            public void addPreferredActivity(
+                    IntentFilter filter,
+                    int match,
+                    ComponentName[] set,
+                    ComponentName activity,
+                    int userId,
+                    boolean removeExisting)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5490,7 +5960,13 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void replacePreferredActivity(IntentFilter filter, int match, ComponentName[] set, ComponentName activity, int userId) throws RemoteException {
+            public void replacePreferredActivity(
+                    IntentFilter filter,
+                    int match,
+                    ComponentName[] set,
+                    ComponentName activity,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5524,7 +6000,11 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int getPreferredActivities(List<IntentFilter> outFilters, List<ComponentName> outActivities, String packageName) throws RemoteException {
+            public int getPreferredActivities(
+                    List<IntentFilter> outFilters,
+                    List<ComponentName> outActivities,
+                    String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5543,7 +6023,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void addPersistentPreferredActivity(IntentFilter filter, ComponentName activity, int userId) throws RemoteException {
+            public void addPersistentPreferredActivity(
+                    IntentFilter filter, ComponentName activity, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5560,7 +6042,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void clearPackagePersistentPreferredActivities(String packageName, int userId) throws RemoteException {
+            public void clearPackagePersistentPreferredActivities(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5576,7 +6059,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void clearPersistentPreferredActivity(IntentFilter filter, int userId) throws RemoteException {
+            public void clearPersistentPreferredActivity(IntentFilter filter, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5592,7 +6076,13 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void addCrossProfileIntentFilter(IntentFilter intentFilter, String ownerPackage, int sourceUserId, int targetUserId, int flags) throws RemoteException {
+            public void addCrossProfileIntentFilter(
+                    IntentFilter intentFilter,
+                    String ownerPackage,
+                    int sourceUserId,
+                    int targetUserId,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5611,7 +6101,13 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean removeCrossProfileIntentFilter(IntentFilter intentFilter, String ownerPackage, int sourceUserId, int targetUserId, int flags) throws RemoteException {
+            public boolean removeCrossProfileIntentFilter(
+                    IntentFilter intentFilter,
+                    String ownerPackage,
+                    int sourceUserId,
+                    int targetUserId,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5632,7 +6128,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void clearCrossProfileIntentFilters(int sourceUserId, String ownerPackage) throws RemoteException {
+            public void clearCrossProfileIntentFilters(int sourceUserId, String ownerPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5648,7 +6145,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public String[] setDistractingPackageRestrictionsAsUser(String[] packageNames, int restrictionFlags, int userId) throws RemoteException {
+            public String[] setDistractingPackageRestrictionsAsUser(
+                    String[] packageNames, int restrictionFlags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5667,7 +6166,17 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public String[] setPackagesSuspendedAsUser(String[] packageNames, boolean suspended, PersistableBundle appExtras, PersistableBundle launcherExtras, SuspendDialogInfo dialogInfo, int flags, String suspendingPackage, int suspendingUserId, int targetUserId) throws RemoteException {
+            public String[] setPackagesSuspendedAsUser(
+                    String[] packageNames,
+                    boolean suspended,
+                    PersistableBundle appExtras,
+                    PersistableBundle launcherExtras,
+                    SuspendDialogInfo dialogInfo,
+                    int flags,
+                    String suspendingPackage,
+                    int suspendingUserId,
+                    int targetUserId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5692,7 +6201,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public String[] getUnsuspendablePackagesForUser(String[] packageNames, int userId) throws RemoteException {
+            public String[] getUnsuspendablePackagesForUser(String[] packageNames, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5710,7 +6220,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean isPackageSuspendedForUser(String packageName, int userId) throws RemoteException {
+            public boolean isPackageSuspendedForUser(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5728,7 +6239,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean isPackageQuarantinedForUser(String packageName, int userId) throws RemoteException {
+            public boolean isPackageQuarantinedForUser(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5746,7 +6258,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean isPackageStoppedForUser(String packageName, int userId) throws RemoteException {
+            public boolean isPackageStoppedForUser(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5764,7 +6277,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public Bundle getSuspendedPackageAppExtras(String packageName, int userId) throws RemoteException {
+            public Bundle getSuspendedPackageAppExtras(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5782,7 +6296,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public String getSuspendingPackage(String packageName, int userId) throws RemoteException {
+            public String getSuspendingPackage(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5817,7 +6332,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void restorePreferredActivities(byte[] backup, int userId) throws RemoteException {
+            public void restorePreferredActivities(byte[] backup, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5883,7 +6399,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void restoreDomainVerification(byte[] backup, int userId) throws RemoteException {
+            public void restoreDomainVerification(byte[] backup, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5899,14 +6416,16 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ComponentName getHomeActivities(List<ResolveInfo> outHomeCandidates) throws RemoteException {
+            public ComponentName getHomeActivities(List<ResolveInfo> outHomeCandidates)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(82, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     _reply.readTypedList(outHomeCandidates, ResolveInfo.CREATOR);
                     return _result;
                 } finally {
@@ -5916,7 +6435,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setHomeActivity(ComponentName className, int userId) throws RemoteException {
+            public void setHomeActivity(ComponentName className, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5932,7 +6452,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void overrideLabelAndIcon(ComponentName componentName, String nonLocalizedLabel, int icon, int userId) throws RemoteException {
+            public void overrideLabelAndIcon(
+                    ComponentName componentName, String nonLocalizedLabel, int icon, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5950,7 +6472,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void restoreLabelAndIcon(ComponentName componentName, int userId) throws RemoteException {
+            public void restoreLabelAndIcon(ComponentName componentName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5966,7 +6489,13 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setComponentEnabledSetting(ComponentName componentName, int newState, int flags, int userId, String callingPackage) throws RemoteException {
+            public void setComponentEnabledSetting(
+                    ComponentName componentName,
+                    int newState,
+                    int flags,
+                    int userId,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5985,7 +6514,11 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setComponentEnabledSettings(List<PackageManager.ComponentEnabledSetting> settings, int userId, String callingPackage) throws RemoteException {
+            public void setComponentEnabledSettings(
+                    List<PackageManager.ComponentEnabledSetting> settings,
+                    int userId,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6002,7 +6535,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int getComponentEnabledSetting(ComponentName componentName, int userId) throws RemoteException {
+            public int getComponentEnabledSetting(ComponentName componentName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6020,7 +6554,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setApplicationEnabledSetting(String packageName, int newState, int flags, int userId, String callingPackage) throws RemoteException {
+            public void setApplicationEnabledSetting(
+                    String packageName, int newState, int flags, int userId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6039,7 +6575,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int getApplicationEnabledSetting(String packageName, int userId) throws RemoteException {
+            public int getApplicationEnabledSetting(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6057,7 +6594,14 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void logAppProcessStartIfNeeded(String packageName, String processName, int uid, String seinfo, String apkFile, int pid) throws RemoteException {
+            public void logAppProcessStartIfNeeded(
+                    String packageName,
+                    String processName,
+                    int uid,
+                    String seinfo,
+                    String apkFile,
+                    int pid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6092,7 +6636,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setPackageStoppedState(String packageName, boolean stopped, int userId) throws RemoteException {
+            public void setPackageStoppedState(String packageName, boolean stopped, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6109,7 +6654,12 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void freeStorageAndNotify(String volumeUuid, long freeStorageSize, int storageFlags, IPackageDataObserver observer) throws RemoteException {
+            public void freeStorageAndNotify(
+                    String volumeUuid,
+                    long freeStorageSize,
+                    int storageFlags,
+                    IPackageDataObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6127,7 +6677,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void freeStorage(String volumeUuid, long freeStorageSize, int storageFlags, IntentSender pi) throws RemoteException {
+            public void freeStorage(
+                    String volumeUuid, long freeStorageSize, int storageFlags, IntentSender pi)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6145,7 +6697,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void deleteApplicationCacheFiles(String packageName, IPackageDataObserver observer) throws RemoteException {
+            public void deleteApplicationCacheFiles(
+                    String packageName, IPackageDataObserver observer) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6161,7 +6714,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void deleteApplicationCacheFilesAsUser(String packageName, int userId, IPackageDataObserver observer) throws RemoteException {
+            public void deleteApplicationCacheFilesAsUser(
+                    String packageName, int userId, IPackageDataObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6178,7 +6733,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void clearApplicationUserData(String packageName, IPackageDataObserver observer, int userId) throws RemoteException {
+            public void clearApplicationUserData(
+                    String packageName, IPackageDataObserver observer, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6210,7 +6767,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void getPackageSizeInfo(String packageName, int userHandle, IPackageStatsObserver observer) throws RemoteException {
+            public void getPackageSizeInfo(
+                    String packageName, int userHandle, IPackageStatsObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6243,7 +6802,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public Map<String, String> getSystemSharedLibraryNamesAndPaths() throws RemoteException {
+            public Map<String, String> getSystemSharedLibraryNamesAndPaths()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 final Parcel _reply = Parcel.obtain();
                 try {
@@ -6252,12 +6812,17 @@ public interface IPackageManager extends IInterface {
                     _reply.readException();
                     int N = _reply.readInt();
                     final Map<String, String> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.content.pm.IPackageManager$Stub$Proxy$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IPackageManager.Stub.Proxy.lambda$getSystemSharedLibraryNamesAndPaths$0(Parcel.this, _result, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.content.pm.IPackageManager$Stub$Proxy$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IPackageManager.Stub.Proxy
+                                                    .lambda$getSystemSharedLibraryNamesAndPaths$0(
+                                                            Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6265,7 +6830,8 @@ public interface IPackageManager extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$getSystemSharedLibraryNamesAndPaths$0(Parcel _reply, Map _result, int i) {
+            static /* synthetic */ void lambda$getSystemSharedLibraryNamesAndPaths$0(
+                    Parcel _reply, Map _result, int i) {
                 String k = _reply.readString();
                 String v = _reply.readString();
                 _result.put(k, v);
@@ -6279,7 +6845,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(103, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6381,7 +6948,11 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void notifyDexLoad(String loadingPackageName, Map<String, String> classLoaderContextMap, String loaderIsa) throws RemoteException {
+            public void notifyDexLoad(
+                    String loadingPackageName,
+                    Map<String, String> classLoaderContextMap,
+                    String loaderIsa)
+                    throws RemoteException {
                 final Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -6390,12 +6961,15 @@ public interface IPackageManager extends IInterface {
                         _data.writeInt(-1);
                     } else {
                         _data.writeInt(classLoaderContextMap.size());
-                        classLoaderContextMap.forEach(new BiConsumer() { // from class: android.content.pm.IPackageManager$Stub$Proxy$$ExternalSyntheticLambda3
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IPackageManager.Stub.Proxy.lambda$notifyDexLoad$1(Parcel.this, (String) obj, (String) obj2);
-                            }
-                        });
+                        classLoaderContextMap.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.content.pm.IPackageManager$Stub$Proxy$$ExternalSyntheticLambda3
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IPackageManager.Stub.Proxy.lambda$notifyDexLoad$1(
+                                                Parcel.this, (String) obj, (String) obj2);
+                                    }
+                                });
                     }
                     _data.writeString(loaderIsa);
                     this.mRemote.transact(110, _data, null, 1);
@@ -6410,7 +6984,12 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void registerDexModule(String packageName, String dexModulePath, boolean isSharedModule, IDexModuleRegisterCallback callback) throws RemoteException {
+            public void registerDexModule(
+                    String packageName,
+                    String dexModulePath,
+                    boolean isSharedModule,
+                    IDexModuleRegisterCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -6425,7 +7004,14 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean performDexOptMode(String packageName, boolean checkProfiles, String targetCompilerFilter, boolean force, boolean bootComplete, String splitName) throws RemoteException {
+            public boolean performDexOptMode(
+                    String packageName,
+                    boolean checkProfiles,
+                    String targetCompilerFilter,
+                    boolean force,
+                    boolean bootComplete,
+                    String splitName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6447,7 +7033,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean performDexOptSecondary(String packageName, String targetCompilerFilter, boolean force) throws RemoteException {
+            public boolean performDexOptSecondary(
+                    String packageName, String targetCompilerFilter, boolean force)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6466,7 +7054,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int performDexOptForADCP(String packageName, boolean force) throws RemoteException {
+            public int performDexOptForADCP(String packageName, boolean force)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6516,7 +7105,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void unregisterMoveCallback(IPackageMoveObserver callback) throws RemoteException {
+            public void unregisterMoveCallback(IPackageMoveObserver callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6549,7 +7139,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int movePackageToSd(String packageName, String volumeUuid, IMemorySaverPackageMoveObserver observer) throws RemoteException {
+            public int movePackageToSd(
+                    String packageName, String volumeUuid, IMemorySaverPackageMoveObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6618,7 +7210,13 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int installExistingPackageAsUser(String packageName, int userId, int installFlags, int installReason, List<String> whiteListedPermissions) throws RemoteException {
+            public int installExistingPackageAsUser(
+                    String packageName,
+                    int userId,
+                    int installFlags,
+                    int installReason,
+                    List<String> whiteListedPermissions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6655,7 +7253,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void extendVerificationTimeout(int id, int verificationCodeAtTimeout, long millisecondsToDelay) throws RemoteException {
+            public void extendVerificationTimeout(
+                    int id, int verificationCodeAtTimeout, long millisecondsToDelay)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6672,7 +7272,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void verifyIntentFilter(int id, int verificationCode, List<String> failedDomains) throws RemoteException {
+            public void verifyIntentFilter(int id, int verificationCode, List<String> failedDomains)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6689,7 +7290,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int getIntentVerificationStatus(String packageName, int userId) throws RemoteException {
+            public int getIntentVerificationStatus(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6707,7 +7309,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean updateIntentVerificationStatus(String packageName, int status, int userId) throws RemoteException {
+            public boolean updateIntentVerificationStatus(
+                    String packageName, int status, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6726,7 +7329,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice getIntentFilterVerifications(String packageName) throws RemoteException {
+            public ParceledListSlice getIntentFilterVerifications(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6734,7 +7338,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(129, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6743,7 +7348,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice getAllIntentFilters(String packageName) throws RemoteException {
+            public ParceledListSlice getAllIntentFilters(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6751,7 +7357,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(130, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6767,7 +7374,9 @@ public interface IPackageManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(131, _data, _reply, 0);
                     _reply.readException();
-                    VerifierDeviceIdentity _result = (VerifierDeviceIdentity) _reply.readTypedObject(VerifierDeviceIdentity.CREATOR);
+                    VerifierDeviceIdentity _result =
+                            (VerifierDeviceIdentity)
+                                    _reply.readTypedObject(VerifierDeviceIdentity.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6824,7 +7433,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean setApplicationHiddenSettingAsUser(String packageName, boolean hidden, int userId) throws RemoteException {
+            public boolean setApplicationHiddenSettingAsUser(
+                    String packageName, boolean hidden, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6843,7 +7453,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean getApplicationHiddenSettingAsUser(String packageName, int userId) throws RemoteException {
+            public boolean getApplicationHiddenSettingAsUser(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6861,7 +7472,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setSystemAppHiddenUntilInstalled(String packageName, boolean hidden) throws RemoteException {
+            public void setSystemAppHiddenUntilInstalled(String packageName, boolean hidden)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6877,7 +7489,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean setSystemAppInstallState(String packageName, boolean installed, int userId) throws RemoteException {
+            public boolean setSystemAppInstallState(
+                    String packageName, boolean installed, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6903,7 +7516,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(139, _data, _reply, 0);
                     _reply.readException();
-                    IPackageInstaller _result = IPackageInstaller.Stub.asInterface(_reply.readStrongBinder());
+                    IPackageInstaller _result =
+                            IPackageInstaller.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6912,7 +7526,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean setBlockUninstallForUser(String packageName, boolean blockUninstall, int userId) throws RemoteException {
+            public boolean setBlockUninstallForUser(
+                    String packageName, boolean blockUninstall, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6931,7 +7546,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean getBlockUninstallForUser(String packageName, int userId) throws RemoteException {
+            public boolean getBlockUninstallForUser(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6949,7 +7565,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public KeySet getKeySetByAlias(String packageName, String alias) throws RemoteException {
+            public KeySet getKeySetByAlias(String packageName, String alias)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6984,7 +7601,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean isPackageSignedByKeySet(String packageName, KeySet ks) throws RemoteException {
+            public boolean isPackageSignedByKeySet(String packageName, KeySet ks)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7002,7 +7620,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean isPackageSignedByKeySetExactly(String packageName, KeySet ks) throws RemoteException {
+            public boolean isPackageSignedByKeySetExactly(String packageName, KeySet ks)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7060,7 +7679,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(148, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7069,7 +7689,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public byte[] getInstantAppCookie(String packageName, int userId) throws RemoteException {
+            public byte[] getInstantAppCookie(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7087,7 +7708,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean setInstantAppCookie(String packageName, byte[] cookie, int userId) throws RemoteException {
+            public boolean setInstantAppCookie(String packageName, byte[] cookie, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7142,7 +7764,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean setRequiredForSystemUser(String packageName, boolean systemUserApp) throws RemoteException {
+            public boolean setRequiredForSystemUser(String packageName, boolean systemUserApp)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7160,7 +7783,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setUpdateAvailable(String packageName, boolean updateAvaialble) throws RemoteException {
+            public void setUpdateAvailable(String packageName, boolean updateAvaialble)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7208,7 +7832,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ChangedPackages getChangedPackages(int sequenceNumber, int userId) throws RemoteException {
+            public ChangedPackages getChangedPackages(int sequenceNumber, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7217,7 +7842,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(157, _data, _reply, 0);
                     _reply.readException();
-                    ChangedPackages _result = (ChangedPackages) _reply.readTypedObject(ChangedPackages.CREATOR);
+                    ChangedPackages _result =
+                            (ChangedPackages) _reply.readTypedObject(ChangedPackages.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7226,7 +7852,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean isPackageDeviceAdminOnAnyUser(String packageName) throws RemoteException {
+            public boolean isPackageDeviceAdminOnAnyUser(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7261,7 +7888,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice getSharedLibraries(String packageName, long flags, int userId) throws RemoteException {
+            public ParceledListSlice getSharedLibraries(String packageName, long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7271,7 +7899,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(160, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7280,7 +7909,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice getDeclaredSharedLibraries(String packageName, long flags, int userId) throws RemoteException {
+            public ParceledListSlice getDeclaredSharedLibraries(
+                    String packageName, long flags, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7290,7 +7920,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(161, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7299,7 +7930,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean canRequestPackageInstalls(String packageName, int userId) throws RemoteException {
+            public boolean canRequestPackageInstalls(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7338,7 +7970,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(164, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7354,7 +7987,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(165, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7370,7 +8004,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(166, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7379,7 +8014,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public String getInstantAppAndroidId(String packageName, int userId) throws RemoteException {
+            public String getInstantAppAndroidId(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7413,7 +8049,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setHarmfulAppWarning(String packageName, CharSequence warning, int userId) throws RemoteException {
+            public void setHarmfulAppWarning(String packageName, CharSequence warning, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7435,7 +8072,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public CharSequence getHarmfulAppWarning(String packageName, int userId) throws RemoteException {
+            public CharSequence getHarmfulAppWarning(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7444,7 +8082,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(170, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7453,7 +8092,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean hasSigningCertificate(String packageName, byte[] signingCertificate, int flags) throws RemoteException {
+            public boolean hasSigningCertificate(
+                    String packageName, byte[] signingCertificate, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7472,7 +8113,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean hasUidSigningCertificate(int uid, byte[] signingCertificate, int flags) throws RemoteException {
+            public boolean hasUidSigningCertificate(int uid, byte[] signingCertificate, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7635,7 +8277,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean isPackageStateProtected(String packageName, int userId) throws RemoteException {
+            public boolean isPackageStateProtected(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7719,7 +8362,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setRuntimePermissionsVersion(int version, int userId) throws RemoteException {
+            public void setRuntimePermissionsVersion(int version, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7750,7 +8394,15 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void requestPackageChecksums(String packageName, boolean includeSplits, int optional, int required, List trustedInstallers, IOnChecksumsReadyListener onChecksumsReadyListener, int userId) throws RemoteException {
+            public void requestPackageChecksums(
+                    String packageName,
+                    boolean includeSplits,
+                    int optional,
+                    int required,
+                    List trustedInstallers,
+                    IOnChecksumsReadyListener onChecksumsReadyListener,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7771,7 +8423,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public IntentSender getLaunchIntentSenderForPackage(String packageName, String callingPackage, String featureId, int userId) throws RemoteException {
+            public IntentSender getLaunchIntentSenderForPackage(
+                    String packageName, String callingPackage, String featureId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7782,7 +8436,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(190, _data, _reply, 0);
                     _reply.readException();
-                    IntentSender _result = (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
+                    IntentSender _result =
+                            (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7791,7 +8446,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public String[] getAppOpPermissionPackages(String permissionName, int userId) throws RemoteException {
+            public String[] getAppOpPermissionPackages(String permissionName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7809,7 +8465,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public PermissionGroupInfo getPermissionGroupInfo(String name, int flags) throws RemoteException {
+            public PermissionGroupInfo getPermissionGroupInfo(String name, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7818,7 +8475,9 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(192, _data, _reply, 0);
                     _reply.readException();
-                    PermissionGroupInfo _result = (PermissionGroupInfo) _reply.readTypedObject(PermissionGroupInfo.CREATOR);
+                    PermissionGroupInfo _result =
+                            (PermissionGroupInfo)
+                                    _reply.readTypedObject(PermissionGroupInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7876,7 +8535,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int checkPermission(String permName, String pkgName, int userId) throws RemoteException {
+            public int checkPermission(String permName, String pkgName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7895,7 +8555,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void grantRuntimePermission(String packageName, String permissionName, int userId) throws RemoteException {
+            public void grantRuntimePermission(
+                    String packageName, String permissionName, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7930,7 +8591,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setMimeGroup(String packageName, String group, List<String> mimeTypes) throws RemoteException {
+            public void setMimeGroup(String packageName, String group, List<String> mimeTypes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7947,7 +8609,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public String getSplashScreenTheme(String packageName, int userId) throws RemoteException {
+            public String getSplashScreenTheme(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7965,7 +8628,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setSplashScreenTheme(String packageName, String themeName, int userId) throws RemoteException {
+            public void setSplashScreenTheme(String packageName, String themeName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7982,7 +8646,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public int getUserMinAspectRatio(String packageName, int userId) throws RemoteException {
+            public int getUserMinAspectRatio(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8000,7 +8665,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setUserMinAspectRatio(String packageName, int userId, int aspectRatio) throws RemoteException {
+            public void setUserMinAspectRatio(String packageName, int userId, int aspectRatio)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8017,7 +8683,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public List<String> getMimeGroup(String packageName, String group) throws RemoteException {
+            public List<String> getMimeGroup(String packageName, String group)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8052,7 +8719,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void makeProviderVisible(int recipientAppId, String visibleAuthority) throws RemoteException {
+            public void makeProviderVisible(int recipientAppId, String visibleAuthority)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8116,7 +8784,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public PackageManager.Property getPropertyAsUser(String propertyName, String packageName, String className, int userId) throws RemoteException {
+            public PackageManager.Property getPropertyAsUser(
+                    String propertyName, String packageName, String className, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8127,7 +8797,9 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(210, _data, _reply, 0);
                     _reply.readException();
-                    PackageManager.Property _result = (PackageManager.Property) _reply.readTypedObject(PackageManager.Property.CREATOR);
+                    PackageManager.Property _result =
+                            (PackageManager.Property)
+                                    _reply.readTypedObject(PackageManager.Property.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8136,7 +8808,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice queryProperty(String propertyName, int componentType) throws RemoteException {
+            public ParceledListSlice queryProperty(String propertyName, int componentType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8145,7 +8818,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(componentType);
                     this.mRemote.transact(211, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8154,7 +8828,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setKeepUninstalledPackages(List<String> packageList) throws RemoteException {
+            public void setKeepUninstalledPackages(List<String> packageList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8186,7 +8861,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public List<String> getPackageGrantedPermissionsForMDM(String packageName) throws RemoteException {
+            public List<String> getPackageGrantedPermissionsForMDM(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8220,7 +8896,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void clearPackagePreferredActivitiesAsUserForMDM(String packageName, int userId) throws RemoteException {
+            public void clearPackagePreferredActivitiesAsUserForMDM(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8236,7 +8913,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean applyRuntimePermissionsForMDM(String pkgName, List<String> permissions, int permState, int userId) throws RemoteException {
+            public boolean applyRuntimePermissionsForMDM(
+                    String pkgName, List<String> permissions, int permState, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8256,7 +8935,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean applyRuntimePermissionsForAllApplicationsForMDM(int permState, int userId) throws RemoteException {
+            public boolean applyRuntimePermissionsForAllApplicationsForMDM(
+                    int permState, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8274,7 +8954,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public List<String> getRequestedRuntimePermissionsForMDM(String pkgName) throws RemoteException {
+            public List<String> getRequestedRuntimePermissionsForMDM(String pkgName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8291,7 +8972,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean[] canPackageQuery(String sourcePackageName, String[] targetPackageNames, int userId) throws RemoteException {
+            public boolean[] canPackageQuery(
+                    String sourcePackageName, String[] targetPackageNames, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8310,7 +8993,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean waitForHandler(long timeoutMillis, boolean forBackgroundHandler) throws RemoteException {
+            public boolean waitForHandler(long timeoutMillis, boolean forBackgroundHandler)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8328,7 +9012,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void registerPackageMonitorCallback(IRemoteCallback callback, int userId) throws RemoteException {
+            public void registerPackageMonitorCallback(IRemoteCallback callback, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8344,7 +9029,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void unregisterPackageMonitorCallback(IRemoteCallback callback) throws RemoteException {
+            public void unregisterPackageMonitorCallback(IRemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8359,7 +9045,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ArchivedPackageParcel getArchivedPackage(String packageName, int userId) throws RemoteException {
+            public ArchivedPackageParcel getArchivedPackage(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8368,7 +9055,9 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(224, _data, _reply, 0);
                     _reply.readException();
-                    ArchivedPackageParcel _result = (ArchivedPackageParcel) _reply.readTypedObject(ArchivedPackageParcel.CREATOR);
+                    ArchivedPackageParcel _result =
+                            (ArchivedPackageParcel)
+                                    _reply.readTypedObject(ArchivedPackageParcel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8377,7 +9066,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public Bitmap getArchivedAppIcon(String packageName, UserHandle user, String callingPackageName) throws RemoteException {
+            public Bitmap getArchivedAppIcon(
+                    String packageName, UserHandle user, String callingPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8396,7 +9087,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean isAppArchivable(String packageName, UserHandle user) throws RemoteException {
+            public boolean isAppArchivable(String packageName, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8440,7 +9132,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(228, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8449,7 +9142,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public List<String> getPackageListForDualDarPolicy(String packageType) throws RemoteException {
+            public List<String> getPackageListForDualDarPolicy(String packageType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8519,7 +9213,9 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean getMetadataForIconTray(String packageName, String metadata, int userId, List<String> feature) throws RemoteException {
+            public boolean getMetadataForIconTray(
+                    String packageName, String metadata, int userId, List<String> feature)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8539,7 +9235,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean semIsPermissionRevokedByUserFixed(String permName, String packageName, int userId) throws RemoteException {
+            public boolean semIsPermissionRevokedByUserFixed(
+                    String permName, String packageName, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8575,7 +9272,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public ParceledListSlice getUnknownSourcePackagesAsUser(long flags, int userId) throws RemoteException {
+            public ParceledListSlice getUnknownSourcePackagesAsUser(long flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8584,7 +9282,8 @@ public interface IPackageManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(236, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8593,7 +9292,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean isPackageAutoDisabled(String packageName, int uid) throws RemoteException {
+            public boolean isPackageAutoDisabled(String packageName, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8611,7 +9311,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public boolean isSystemCompressedPackage(String packageName, int userId) throws RemoteException {
+            public boolean isSystemCompressedPackage(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8629,7 +9330,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void changeMonetizationBadgeState(String value, String packageName) throws RemoteException {
+            public void changeMonetizationBadgeState(String value, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8662,7 +9364,8 @@ public interface IPackageManager extends IInterface {
             }
 
             @Override // android.content.pm.IPackageManager
-            public void setAppCategoryHintUser(String pkgName, int category) throws RemoteException {
+            public void setAppCategoryHintUser(String pkgName, int category)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8702,12 +9405,17 @@ public interface IPackageManager extends IInterface {
                     _reply.readException();
                     int N = _reply.readInt();
                     final Map<String, String> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.content.pm.IPackageManager$Stub$Proxy$$ExternalSyntheticLambda1
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IPackageManager.Stub.Proxy.lambda$getAppCategoryHintUserMap$2(Parcel.this, _result, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.content.pm.IPackageManager$Stub$Proxy$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IPackageManager.Stub.Proxy
+                                                    .lambda$getAppCategoryHintUserMap$2(
+                                                            Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8715,14 +9423,16 @@ public interface IPackageManager extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$getAppCategoryHintUserMap$2(Parcel _reply, Map _result, int i) {
+            static /* synthetic */ void lambda$getAppCategoryHintUserMap$2(
+                    Parcel _reply, Map _result, int i) {
                 String k = _reply.readString();
                 String v = _reply.readString();
                 _result.put(k, v);
             }
 
             @Override // android.content.pm.IPackageManager
-            public Map<String, String[]> getAppCategoryInfos(String pkgName) throws RemoteException {
+            public Map<String, String[]> getAppCategoryInfos(String pkgName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 final Parcel _reply = Parcel.obtain();
                 try {
@@ -8732,12 +9442,16 @@ public interface IPackageManager extends IInterface {
                     _reply.readException();
                     int N = _reply.readInt();
                     final Map<String, String[]> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.content.pm.IPackageManager$Stub$Proxy$$ExternalSyntheticLambda2
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IPackageManager.Stub.Proxy.lambda$getAppCategoryInfos$3(Parcel.this, _result, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.content.pm.IPackageManager$Stub$Proxy$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IPackageManager.Stub.Proxy.lambda$getAppCategoryInfos$3(
+                                                    Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8745,7 +9459,8 @@ public interface IPackageManager extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$getAppCategoryInfos$3(Parcel _reply, Map _result, int i) {
+            static /* synthetic */ void lambda$getAppCategoryInfos$3(
+                    Parcel _reply, Map _result, int i) {
                 String k = _reply.readString();
                 String[] v = _reply.createStringArray();
                 _result.put(k, v);
@@ -8753,87 +9468,121 @@ public interface IPackageManager extends IInterface {
         }
 
         protected void getAppMetadataFd_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.GET_APP_METADATA, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.GET_APP_METADATA, getCallingPid(), getCallingUid());
         }
 
         protected void removeCrossProfileIntentFilter_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.INTERACT_ACROSS_USERS_FULL,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void clearCrossProfileIntentFilters_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.INTERACT_ACROSS_USERS_FULL,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void freeStorageAndNotify_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CLEAR_APP_CACHE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CLEAR_APP_CACHE, getCallingPid(), getCallingUid());
         }
 
         protected void freeStorage_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CLEAR_APP_CACHE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CLEAR_APP_CACHE, getCallingPid(), getCallingUid());
         }
 
         protected void clearApplicationUserData_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CLEAR_APP_USER_DATA, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CLEAR_APP_USER_DATA, getCallingPid(), getCallingUid());
         }
 
         protected void getMoveStatus_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void registerMoveCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void unregisterMoveCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void movePackage_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOVE_PACKAGE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOVE_PACKAGE, getCallingPid(), getCallingUid());
         }
 
         protected void movePackageToSd_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOVE_PACKAGE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOVE_PACKAGE, getCallingPid(), getCallingUid());
         }
 
         protected void movePrimaryStorage_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MOVE_PACKAGE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MOVE_PACKAGE, getCallingPid(), getCallingUid());
         }
 
         protected void setInstallLocation_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void getVerifierDeviceIdentity_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.PACKAGE_VERIFICATION_AGENT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.PACKAGE_VERIFICATION_AGENT,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void setApplicationHiddenSettingAsUser_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USERS, getCallingPid(), getCallingUid());
+        protected void setApplicationHiddenSettingAsUser_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USERS, getCallingPid(), getCallingUid());
         }
 
         protected void setBlockUninstallForUser_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DELETE_PACKAGES, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DELETE_PACKAGES, getCallingPid(), getCallingUid());
         }
 
         protected void setUpdateAvailable_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.INSTALL_PACKAGES, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.INSTALL_PACKAGES, getCallingPid(), getCallingUid());
         }
 
         protected void getInstantAppAndroidId_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_INSTANT_APPS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_INSTANT_APPS, getCallingPid(), getCallingUid());
         }
 
         protected void setUserMinAspectRatio_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.INSTALL_PACKAGES, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.INSTALL_PACKAGES, getCallingPid(), getCallingUid());
         }
 
         protected void makeUidVisible_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MAKE_UID_VISIBLE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MAKE_UID_VISIBLE, getCallingPid(), getCallingUid());
         }
 
         protected void getAppMetadataSource_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.GET_APP_METADATA, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.GET_APP_METADATA, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

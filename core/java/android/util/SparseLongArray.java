@@ -58,8 +58,10 @@ public class SparseLongArray implements Cloneable {
 
     public void removeAtRange(int index, int size) {
         int size2 = Math.min(size, this.mSize - index);
-        System.arraycopy(this.mKeys, index + size2, this.mKeys, index, this.mSize - (index + size2));
-        System.arraycopy(this.mValues, index + size2, this.mValues, index, this.mSize - (index + size2));
+        System.arraycopy(
+                this.mKeys, index + size2, this.mKeys, index, this.mSize - (index + size2));
+        System.arraycopy(
+                this.mValues, index + size2, this.mValues, index, this.mSize - (index + size2));
         this.mSize -= size2;
     }
 

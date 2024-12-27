@@ -9,11 +9,14 @@ import android.os.Debug;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
 import android.view.DisplayInfo;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -34,16 +37,34 @@ public abstract class ConfigurationContainer {
     private final Configuration mResolvedTmpConfig = new Configuration();
     private final Rect mTmpRect = new Rect();
 
-    public static void applySizeOverrideIfNeeded(DisplayContent displayContent, ApplicationInfo applicationInfo, Configuration configuration, Configuration configuration2, boolean z, boolean z2, boolean z3, Task task) {
+    public static void applySizeOverrideIfNeeded(
+            DisplayContent displayContent,
+            ApplicationInfo applicationInfo,
+            Configuration configuration,
+            Configuration configuration2,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            Task task) {
         Task task2;
         int i;
         int i2;
         if (displayContent == null) {
             return;
         }
-        boolean isChangeEnabled = displayContent.mWmService.mFlags.mInsetsDecoupledConfiguration ? (applicationInfo.isChangeEnabled(151861875L) || applicationInfo.isChangeEnabled(327313645L)) ? false : true : applicationInfo.isChangeEnabled(327313645L);
+        boolean isChangeEnabled =
+                displayContent.mWmService.mFlags.mInsetsDecoupledConfiguration
+                        ? (applicationInfo.isChangeEnabled(151861875L)
+                                        || applicationInfo.isChangeEnabled(327313645L))
+                                ? false
+                                : true
+                        : applicationInfo.isChangeEnabled(327313645L);
         int windowingMode = configuration.windowConfiguration.getWindowingMode();
-        boolean z4 = WindowConfiguration.isFloating(windowingMode) && (configuration2.windowConfiguration.getWindowingMode() == 0 || WindowConfiguration.isFloating(configuration2.windowConfiguration.getWindowingMode()));
+        boolean z4 =
+                WindowConfiguration.isFloating(windowingMode)
+                        && (configuration2.windowConfiguration.getWindowingMode() == 0
+                                || WindowConfiguration.isFloating(
+                                        configuration2.windowConfiguration.getWindowingMode()));
         int rotation = configuration.windowConfiguration.getRotation();
         if (rotation == -1 && !z2) {
             rotation = displayContent.mDisplayRotation.mRotation;
@@ -61,18 +82,24 @@ public abstract class ConfigurationContainer {
             int i4 = z5 ? displayContent.mBaseDisplayWidth : displayContent.mBaseDisplayHeight;
             Rect appBounds = configuration2.windowConfiguration.getAppBounds();
             if (appBounds == null || appBounds.isEmpty()) {
-                configuration2.windowConfiguration.setAppBounds(configuration.windowConfiguration.getBounds());
+                configuration2.windowConfiguration.setAppBounds(
+                        configuration.windowConfiguration.getBounds());
                 appBounds = configuration2.windowConfiguration.getAppBounds();
                 if (task != null) {
                     task2 = task.getCreatedByOrganizerTask();
-                    if (task2 != null && ((i2 = task2.mOffsetYForInsets) != 0 || task2.mOffsetXForInsets != 0)) {
+                    if (task2 != null
+                            && ((i2 = task2.mOffsetYForInsets) != 0
+                                    || task2.mOffsetXForInsets != 0)) {
                         appBounds.offset(task2.mOffsetXForInsets, i2);
                     }
                 } else {
                     task2 = task;
                 }
-                appBounds.intersectUnchecked(displayContent.mDisplayPolicy.getDecorInsetsInfo(rotation, i3, i4).mOverrideNonDecorFrame);
-                if (task2 != null && ((i = task2.mOffsetYForInsets) != 0 || task2.mOffsetXForInsets != 0)) {
+                appBounds.intersectUnchecked(
+                        displayContent.mDisplayPolicy.getDecorInsetsInfo(rotation, i3, i4)
+                                .mOverrideNonDecorFrame);
+                if (task2 != null
+                        && ((i = task2.mOffsetYForInsets) != 0 || task2.mOffsetXForInsets != 0)) {
                     appBounds.offset(-task2.mOffsetXForInsets, -i);
                 }
             }
@@ -88,16 +115,26 @@ public abstract class ConfigurationContainer {
                 configuration2.screenHeightDp = (int) ((appBounds.height() / f2) + 0.5f);
             }
             if (configuration2.smallestScreenWidthDp == 0 && windowingMode == 1) {
-                displayContent.computeSizeRanges(new DisplayInfo(displayContent.mDisplayInfo), z5, i3, i4, displayContent.mDisplayMetrics.density, configuration2, true);
+                displayContent.computeSizeRanges(
+                        new DisplayInfo(displayContent.mDisplayInfo),
+                        z5,
+                        i3,
+                        i4,
+                        displayContent.mDisplayMetrics.density,
+                        configuration2,
+                        true);
             }
             if (configuration2.orientation == 0) {
-                configuration2.orientation = configuration2.screenWidthDp > configuration2.screenHeightDp ? 2 : 1;
+                configuration2.orientation =
+                        configuration2.screenWidthDp > configuration2.screenHeightDp ? 2 : 1;
             }
         }
     }
 
     public static boolean equivalentBounds(Rect rect, Rect rect2) {
-        return rect == rect2 || (rect != null && (rect.equals(rect2) || (rect.isEmpty() && rect2 == null))) || (rect2 != null && rect2.isEmpty() && rect == null);
+        return rect == rect2
+                || (rect != null && (rect.equals(rect2) || (rect.isEmpty() && rect2 == null)))
+                || (rect2 != null && rect2.isEmpty() && rect == null);
     }
 
     public static boolean isCompatibleActivityType(int i, int i2) {
@@ -119,7 +156,8 @@ public abstract class ConfigurationContainer {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean applyAppSpecificConfig(java.lang.Integer r6, android.os.LocaleList r7, java.lang.Integer r8) {
+    public boolean applyAppSpecificConfig(
+            java.lang.Integer r6, android.os.LocaleList r7, java.lang.Integer r8) {
         /*
             r5 = this;
             android.content.res.Configuration r0 = r5.mRequestsTmpConfig
@@ -183,7 +221,10 @@ public abstract class ConfigurationContainer {
         L5f:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.ConfigurationContainer.applyAppSpecificConfig(java.lang.Integer, android.os.LocaleList, java.lang.Integer):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.ConfigurationContainer.applyAppSpecificConfig(java.lang.Integer,"
+                    + " android.os.LocaleList, java.lang.Integer):boolean");
     }
 
     public boolean containsListener(ConfigurationContainerListener configurationContainerListener) {
@@ -195,8 +236,17 @@ public abstract class ConfigurationContainer {
             return 0;
         }
         Rect requestedOverrideBounds = getRequestedOverrideBounds();
-        int i = (rect != null && requestedOverrideBounds.left == rect.left && requestedOverrideBounds.top == rect.top) ? 0 : 1;
-        return (rect != null && requestedOverrideBounds.width() == rect.width() && requestedOverrideBounds.height() == rect.height()) ? i : i | 2;
+        int i =
+                (rect != null
+                                && requestedOverrideBounds.left == rect.left
+                                && requestedOverrideBounds.top == rect.top)
+                        ? 0
+                        : 1;
+        return (rect != null
+                        && requestedOverrideBounds.width() == rect.width()
+                        && requestedOverrideBounds.height() == rect.height())
+                ? i
+                : i | 2;
     }
 
     public int diffRequestedOverrideMaxBounds(Rect rect) {
@@ -204,11 +254,21 @@ public abstract class ConfigurationContainer {
             return 0;
         }
         Rect requestedOverrideMaxBounds = getRequestedOverrideMaxBounds();
-        int i = (rect != null && requestedOverrideMaxBounds.left == rect.left && requestedOverrideMaxBounds.top == rect.top) ? 0 : 1;
-        return (rect != null && requestedOverrideMaxBounds.width() == rect.width() && requestedOverrideMaxBounds.height() == rect.height()) ? i : i | 2;
+        int i =
+                (rect != null
+                                && requestedOverrideMaxBounds.left == rect.left
+                                && requestedOverrideMaxBounds.top == rect.top)
+                        ? 0
+                        : 1;
+        return (rect != null
+                        && requestedOverrideMaxBounds.width() == rect.width()
+                        && requestedOverrideMaxBounds.height() == rect.height())
+                ? i
+                : i | 2;
     }
 
-    public void dispatchConfigurationToChild(ConfigurationContainer configurationContainer, Configuration configuration) {
+    public void dispatchConfigurationToChild(
+            ConfigurationContainer configurationContainer, Configuration configuration) {
         configurationContainer.onConfigurationChanged(configuration);
     }
 
@@ -223,7 +283,8 @@ public abstract class ConfigurationContainer {
             windowingModeToString = windowingModeToString.toUpperCase();
         }
         int requestedOverrideWindowingMode = getRequestedOverrideWindowingMode();
-        String windowingModeToString2 = WindowConfiguration.windowingModeToString(requestedOverrideWindowingMode);
+        String windowingModeToString2 =
+                WindowConfiguration.windowingModeToString(requestedOverrideWindowingMode);
         if (requestedOverrideWindowingMode != 0 && requestedOverrideWindowingMode != 1) {
             windowingModeToString2 = windowingModeToString2.toUpperCase();
         }
@@ -239,7 +300,12 @@ public abstract class ConfigurationContainer {
         sb.append(" type=");
         sb.append(activityTypeToString);
         sb.append(" mode=");
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, windowingModeToString, " override-mode=", windowingModeToString2, " requested-bounds=");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                sb,
+                windowingModeToString,
+                " override-mode=",
+                windowingModeToString2,
+                " requested-bounds=");
         sb.append(getRequestedOverrideBounds().toShortString());
         sb.append(" bounds=");
         sb.append(getBounds().toShortString());
@@ -270,10 +336,12 @@ public abstract class ConfigurationContainer {
                 m.append(this.mResolvedOverrideConfiguration);
                 printWriter.println(m.toString());
             } else {
-                StringBuilder m2 = Preconditions$$ExternalSyntheticOutline0.m(str, "   Over(Request)=");
+                StringBuilder m2 =
+                        Preconditions$$ExternalSyntheticOutline0.m(str, "   Over(Request)=");
                 m2.append(this.mRequestedOverrideConfiguration);
                 printWriter.println(m2.toString());
-                printWriter.println(str + "   Over(Resolve)=" + this.mResolvedOverrideConfiguration);
+                printWriter.println(
+                        str + "   Over(Resolve)=" + this.mResolvedOverrideConfiguration);
             }
         }
         for (int childCount = getChildCount() - 1; childCount >= 0; childCount += -1) {
@@ -284,7 +352,8 @@ public abstract class ConfigurationContainer {
     public void dumpDebug(ProtoOutputStream protoOutputStream, long j, int i) {
         long start = protoOutputStream.start(1146756268033L);
         if (i == 0 || this.mHasOverrideConfiguration) {
-            this.mRequestedOverrideConfiguration.dumpDebug(protoOutputStream, 1146756268033L, i == 2);
+            this.mRequestedOverrideConfiguration.dumpDebug(
+                    protoOutputStream, 1146756268033L, i == 2);
         }
         if (i == 0) {
             this.mFullConfiguration.dumpDebug(protoOutputStream, 1146756268034L, false);
@@ -293,7 +362,8 @@ public abstract class ConfigurationContainer {
         if (i == 1) {
             long start2 = protoOutputStream.start(1146756268034L);
             long start3 = protoOutputStream.start(1146756268051L);
-            protoOutputStream.write(1120986464258L, this.mFullConfiguration.windowConfiguration.getWindowingMode());
+            protoOutputStream.write(
+                    1120986464258L, this.mFullConfiguration.windowConfiguration.getWindowingMode());
             protoOutputStream.end(start3);
             protoOutputStream.end(start2);
         }
@@ -363,7 +433,8 @@ public abstract class ConfigurationContainer {
     }
 
     public Rect getRequestedOverrideMaxBounds() {
-        this.mReturnBounds.set(getRequestedOverrideConfiguration().windowConfiguration.getMaxBounds());
+        this.mReturnBounds.set(
+                getRequestedOverrideConfiguration().windowConfiguration.getMaxBounds());
         return this.mReturnBounds;
     }
 
@@ -421,7 +492,8 @@ public abstract class ConfigurationContainer {
     }
 
     public boolean inMultiWindowMode() {
-        return WindowConfiguration.inMultiWindowMode(this.mFullConfiguration.windowConfiguration.getWindowingMode());
+        return WindowConfiguration.inMultiWindowMode(
+                this.mFullConfiguration.windowConfiguration.getWindowingMode());
     }
 
     public boolean inPinnedWindowingMode() {
@@ -429,7 +501,8 @@ public abstract class ConfigurationContainer {
     }
 
     public boolean inSplitScreenWindowingMode() {
-        return WindowConfiguration.isSplitScreenWindowingMode(this.mFullConfiguration.windowConfiguration);
+        return WindowConfiguration.isSplitScreenWindowingMode(
+                this.mFullConfiguration.windowConfiguration);
     }
 
     public boolean isActivityTypeAssistant() {
@@ -467,7 +540,8 @@ public abstract class ConfigurationContainer {
     }
 
     public boolean isAlwaysOnTopFreeform() {
-        return this.mFullConfiguration.windowConfiguration.getWindowingMode() == 5 && this.mFullConfiguration.windowConfiguration.isAlwaysOnTop();
+        return this.mFullConfiguration.windowConfiguration.getWindowingMode() == 5
+                && this.mFullConfiguration.windowConfiguration.isAlwaysOnTop();
     }
 
     public boolean isCompatible(int i, int i2) {
@@ -506,11 +580,14 @@ public abstract class ConfigurationContainer {
         onMergedOverrideConfigurationChanged();
         if (!this.mResolvedTmpConfig.equals(this.mResolvedOverrideConfiguration)) {
             for (int size = this.mChangeListeners.size() - 1; size >= 0; size--) {
-                ((ConfigurationContainerListener) this.mChangeListeners.get(size)).onRequestedOverrideConfigurationChanged(this.mResolvedOverrideConfiguration);
+                ((ConfigurationContainerListener) this.mChangeListeners.get(size))
+                        .onRequestedOverrideConfigurationChanged(
+                                this.mResolvedOverrideConfiguration);
             }
         }
         for (int size2 = this.mChangeListeners.size() - 1; size2 >= 0; size2--) {
-            ((ConfigurationContainerListener) this.mChangeListeners.get(size2)).onMergedOverrideConfigurationChanged(this.mMergedOverrideConfiguration);
+            ((ConfigurationContainerListener) this.mChangeListeners.get(size2))
+                    .onMergedOverrideConfigurationChanged(this.mMergedOverrideConfiguration);
         }
         for (int childCount = getChildCount() - 1; childCount >= 0; childCount--) {
             dispatchConfigurationToChild(getChildAt(childCount), this.mFullConfiguration);
@@ -532,7 +609,9 @@ public abstract class ConfigurationContainer {
         onRequestedOverrideConfigurationChanged(configuration);
     }
 
-    public void onParentChanged(ConfigurationContainer configurationContainer, ConfigurationContainer configurationContainer2) {
+    public void onParentChanged(
+            ConfigurationContainer configurationContainer,
+            ConfigurationContainer configurationContainer2) {
         if (configurationContainer != null) {
             onConfigurationChanged(configurationContainer.mFullConfiguration);
         }
@@ -548,18 +627,22 @@ public abstract class ConfigurationContainer {
         return false;
     }
 
-    public void registerConfigurationChangeListener(ConfigurationContainerListener configurationContainerListener) {
+    public void registerConfigurationChangeListener(
+            ConfigurationContainerListener configurationContainerListener) {
         registerConfigurationChangeListener(configurationContainerListener, true);
     }
 
-    public void registerConfigurationChangeListener(ConfigurationContainerListener configurationContainerListener, boolean z) {
+    public void registerConfigurationChangeListener(
+            ConfigurationContainerListener configurationContainerListener, boolean z) {
         if (this.mChangeListeners.contains(configurationContainerListener)) {
             return;
         }
         this.mChangeListeners.add(configurationContainerListener);
         if (z) {
-            configurationContainerListener.onRequestedOverrideConfigurationChanged(this.mResolvedOverrideConfiguration);
-            configurationContainerListener.onMergedOverrideConfigurationChanged(this.mMergedOverrideConfiguration);
+            configurationContainerListener.onRequestedOverrideConfigurationChanged(
+                    this.mResolvedOverrideConfiguration);
+            configurationContainerListener.onMergedOverrideConfigurationChanged(
+                    this.mMergedOverrideConfiguration);
         }
     }
 
@@ -578,8 +661,17 @@ public abstract class ConfigurationContainer {
             onRequestedOverrideConfigurationChanged(this.mRequestsTmpConfig);
             return;
         }
-        Log.d("WindowManager", "setActivityType's exception occurs, name=" + getName() + ", caller=" + Debug.getCallers(7));
-        throw new IllegalStateException("Can't change activity type once set: " + this + " activityType=" + WindowConfiguration.activityTypeToString(i));
+        Log.d(
+                "WindowManager",
+                "setActivityType's exception occurs, name="
+                        + getName()
+                        + ", caller="
+                        + Debug.getCallers(7));
+        throw new IllegalStateException(
+                "Can't change activity type once set: "
+                        + this
+                        + " activityType="
+                        + WindowConfiguration.activityTypeToString(i));
     }
 
     public void setAlwaysOnTop(boolean z) {
@@ -647,7 +739,8 @@ public abstract class ConfigurationContainer {
         return this.mFullConfiguration.windowConfiguration.supportSplitScreenWindowingMode();
     }
 
-    public void unregisterConfigurationChangeListener(ConfigurationContainerListener configurationContainerListener) {
+    public void unregisterConfigurationChangeListener(
+            ConfigurationContainerListener configurationContainerListener) {
         this.mChangeListeners.remove(configurationContainerListener);
     }
 
@@ -655,7 +748,9 @@ public abstract class ConfigurationContainer {
         this.mHasOverrideConfiguration = !Configuration.EMPTY.equals(configuration);
         this.mRequestedOverrideConfiguration.setTo(configuration);
         Rect bounds = this.mRequestedOverrideConfiguration.windowConfiguration.getBounds();
-        if (this.mHasOverrideConfiguration && providesMaxBounds() && diffRequestedOverrideMaxBounds(bounds) != 0) {
+        if (this.mHasOverrideConfiguration
+                && providesMaxBounds()
+                && diffRequestedOverrideMaxBounds(bounds) != 0) {
             this.mRequestedOverrideConfiguration.windowConfiguration.setMaxBounds(bounds);
         }
     }

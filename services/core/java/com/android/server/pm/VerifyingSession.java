@@ -17,8 +17,9 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
-import com.android.server.pm.PackageSessionVerifier;
+
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
@@ -52,7 +53,19 @@ public final class VerifyingSession {
     public int mRet = 1;
     public String mErrorMessage = null;
 
-    public VerifyingSession(UserHandle userHandle, File file, String str, PackageSessionVerifier.AnonymousClass1 anonymousClass1, PackageInstaller.SessionParams sessionParams, InstallSource installSource, int i, SigningDetails signingDetails, int i2, PackageLite packageLite, boolean z, PackageManagerService packageManagerService) {
+    public VerifyingSession(
+            UserHandle userHandle,
+            File file,
+            String str,
+            PackageSessionVerifier.AnonymousClass1 anonymousClass1,
+            PackageInstaller.SessionParams sessionParams,
+            InstallSource installSource,
+            int i,
+            SigningDetails signingDetails,
+            int i2,
+            PackageLite packageLite,
+            boolean z,
+            PackageManagerService packageManagerService) {
         this.sessionFlags = 0;
         this.mPm = packageManagerService;
         this.mUser = userHandle;
@@ -65,7 +78,12 @@ public final class VerifyingSession {
         this.mInstallFlags = sessionParams.installFlags;
         this.mInstallSource = installSource;
         this.mPackageAbiOverride = sessionParams.abiOverride;
-        this.mVerificationInfo = new VerificationInfo(sessionParams.originatingUri, sessionParams.referrerUri, sessionParams.originatingUid, i);
+        this.mVerificationInfo =
+                new VerificationInfo(
+                        sessionParams.originatingUri,
+                        sessionParams.referrerUri,
+                        sessionParams.originatingUid,
+                        i);
         this.mSigningDetails = signingDetails;
         this.mRequiredInstalledVersionCode = sessionParams.requiredInstalledVersionCode;
         DataLoaderParams dataLoaderParams = sessionParams.dataLoaderParams;
@@ -105,23 +123,31 @@ public final class VerifyingSession {
 
     public final int getDefaultVerificationResponse() {
         PackageManagerService packageManagerService = this.mPm;
-        if (packageManagerService.mUserManager.hasUserRestriction("ensure_verify_apps", this.mUser.getIdentifier())) {
+        if (packageManagerService.mUserManager.hasUserRestriction(
+                "ensure_verify_apps", this.mUser.getIdentifier())) {
             return -1;
         }
-        return Settings.Global.getInt(packageManagerService.mContext.getContentResolver(), "verifier_default_response", 1);
+        return Settings.Global.getInt(
+                packageManagerService.mContext.getContentResolver(),
+                "verifier_default_response",
+                1);
     }
 
     public final void handleReturnCode() {
         int i;
         String str;
-        if (this.mWaitForVerificationToComplete || this.mWaitForIntegrityVerificationToComplete || this.mWaitForEnableRollbackToComplete) {
+        if (this.mWaitForVerificationToComplete
+                || this.mWaitForIntegrityVerificationToComplete
+                || this.mWaitForEnableRollbackToComplete) {
             return;
         }
         MultiPackageVerifyingSession multiPackageVerifyingSession = this.mParentVerifyingSession;
         if (multiPackageVerifyingSession != null) {
             ((ArraySet) multiPackageVerifyingSession.mVerificationState).add(this);
-            if (((ArraySet) multiPackageVerifyingSession.mVerificationState).size() == multiPackageVerifyingSession.mChildVerifyingSessions.size()) {
-                Iterator it = ((ArraySet) multiPackageVerifyingSession.mVerificationState).iterator();
+            if (((ArraySet) multiPackageVerifyingSession.mVerificationState).size()
+                    == multiPackageVerifyingSession.mChildVerifyingSessions.size()) {
+                Iterator it =
+                        ((ArraySet) multiPackageVerifyingSession.mVerificationState).iterator();
                 while (true) {
                     if (!it.hasNext()) {
                         i = 1;
@@ -137,28 +163,57 @@ public final class VerifyingSession {
                     }
                 }
                 try {
-                    multiPackageVerifyingSession.mObserver.onPackageInstalled((String) null, i, str, new Bundle());
+                    multiPackageVerifyingSession.mObserver.onPackageInstalled(
+                            (String) null, i, str, new Bundle());
                 } catch (RemoteException unused) {
                     Slog.i("PackageManager", "Observer no longer exists.");
                 }
             }
         } else {
             try {
-                this.mObserver.onPackageInstalled((String) null, this.mRet, this.mErrorMessage, new Bundle());
+                this.mObserver.onPackageInstalled(
+                        (String) null, this.mRet, this.mErrorMessage, new Bundle());
             } catch (RemoteException unused2) {
                 Slog.i("PackageManager", "Observer no longer exists.");
             }
         }
         int i2 = this.mRet;
         if (i2 != 1) {
-            FrameworkStatsLog.write(524, this.mSessionId, (String) null, -1, (int[]) null, (int[]) null, (int[]) null, (int[]) null, i2, 0, 0L, 0L, (int[]) null, (long[]) null, 0L, 0, this.mInstallSource.mInstallerPackageUid, -1, this.mDataLoaderType, this.mUserActionRequiredType, (this.mInstallFlags & 2048) != 0, false, false, this.mIsInherit, false, false, this.mIsStaged);
+            FrameworkStatsLog.write(
+                    524,
+                    this.mSessionId,
+                    (String) null,
+                    -1,
+                    (int[]) null,
+                    (int[]) null,
+                    (int[]) null,
+                    (int[]) null,
+                    i2,
+                    0,
+                    0L,
+                    0L,
+                    (int[]) null,
+                    (long[]) null,
+                    0L,
+                    0,
+                    this.mInstallSource.mInstallerPackageUid,
+                    -1,
+                    this.mDataLoaderType,
+                    this.mUserActionRequiredType,
+                    (this.mInstallFlags & 2048) != 0,
+                    false,
+                    false,
+                    this.mIsInherit,
+                    false,
+                    false,
+                    this.mIsStaged);
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:208:0x059a, code lost:
-    
-        if (r9.contains(r2.packageName) != false) goto L211;
-     */
+
+       if (r9.contains(r2.packageName) != false) goto L211;
+    */
     /* JADX WARN: Removed duplicated region for block: B:100:0x072c  */
     /* JADX WARN: Removed duplicated region for block: B:102:0x0262  */
     /* JADX WARN: Removed duplicated region for block: B:155:0x04ba  */
@@ -181,15 +236,25 @@ public final class VerifyingSession {
             Method dump skipped, instructions count: 1957
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.VerifyingSession.handleStartVerify():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.VerifyingSession.handleStartVerify():void");
     }
 
-    public final boolean isAdbVerificationEnabled(PackageInfoLite packageInfoLite, int i, boolean z) {
+    public final boolean isAdbVerificationEnabled(
+            PackageInfoLite packageInfoLite, int i, boolean z) {
         PackageManagerService packageManagerService = this.mPm;
-        boolean z2 = Settings.Global.getInt(packageManagerService.mContext.getContentResolver(), "verifier_verify_adb_installs", 1) != 0;
+        boolean z2 =
+                Settings.Global.getInt(
+                                packageManagerService.mContext.getContentResolver(),
+                                "verifier_verify_adb_installs",
+                                1)
+                        != 0;
         if (packageManagerService.isUserRestricted(i, "ensure_verify_apps")) {
             if (!z2) {
-                Slog.w("PackageManager", "Force verification of ADB install because of user restriction.");
+                Slog.w(
+                        "PackageManager",
+                        "Force verification of ADB install because of user restriction.");
             }
             return true;
         }
@@ -197,7 +262,10 @@ public final class VerifyingSession {
             return false;
         }
         if (z) {
-            if (packageManagerService.snapshotComputer().getPackageStateInternal(packageInfoLite.packageName) != null) {
+            if (packageManagerService
+                            .snapshotComputer()
+                            .getPackageStateInternal(packageInfoLite.packageName)
+                    != null) {
                 return !packageInfoLite.debuggable;
             }
         }
@@ -205,7 +273,9 @@ public final class VerifyingSession {
     }
 
     public final void populateInstallerExtras(Intent intent) {
-        intent.putExtra("android.content.pm.extra.VERIFICATION_INSTALLER_PACKAGE", this.mInstallSource.mInitiatingPackageName);
+        intent.putExtra(
+                "android.content.pm.extra.VERIFICATION_INSTALLER_PACKAGE",
+                this.mInstallSource.mInitiatingPackageName);
         VerificationInfo verificationInfo = this.mVerificationInfo;
         if (verificationInfo != null) {
             Uri uri = verificationInfo.mOriginatingUri;
@@ -235,6 +305,10 @@ public final class VerifyingSession {
     }
 
     public final String toString() {
-        return "VerifyingSession{" + Integer.toHexString(System.identityHashCode(this)) + " file=" + this.mOriginInfo.mFile + "}";
+        return "VerifyingSession{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " file="
+                + this.mOriginInfo.mFile
+                + "}";
     }
 }

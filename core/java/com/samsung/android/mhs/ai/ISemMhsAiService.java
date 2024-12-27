@@ -10,18 +10,19 @@ import android.os.RemoteException;
 public interface ISemMhsAiService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.mhs.ai.ISemMhsAiService";
 
-    void serviceTypeQuery(float[][] fArr, String[] strArr, int[] iArr, int i) throws RemoteException;
+    void serviceTypeQuery(float[][] fArr, String[] strArr, int[] iArr, int i)
+            throws RemoteException;
 
     void toggleDebugMode(boolean z) throws RemoteException;
 
     public static class Default implements ISemMhsAiService {
         @Override // com.samsung.android.mhs.ai.ISemMhsAiService
-        public void serviceTypeQuery(float[][] trfDataArr, String[] convoStrArr, int[] timeStepArr, int convoCnt) throws RemoteException {
-        }
+        public void serviceTypeQuery(
+                float[][] trfDataArr, String[] convoStrArr, int[] timeStepArr, int convoCnt)
+                throws RemoteException {}
 
         @Override // com.samsung.android.mhs.ai.ISemMhsAiService
-        public void toggleDebugMode(boolean debug) throws RemoteException {
-        }
+        public void toggleDebugMode(boolean debug) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +30,7 @@ public interface ISemMhsAiService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemMhsAiService {
+    public abstract static class Stub extends Binder implements ISemMhsAiService {
         static final int TRANSACTION_serviceTypeQuery = 1;
         static final int TRANSACTION_toggleDebugMode = 2;
 
@@ -70,7 +71,8 @@ public interface ISemMhsAiService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemMhsAiService.DESCRIPTOR);
             }
@@ -114,7 +116,9 @@ public interface ISemMhsAiService extends IInterface {
             }
 
             @Override // com.samsung.android.mhs.ai.ISemMhsAiService
-            public void serviceTypeQuery(float[][] trfDataArr, String[] convoStrArr, int[] timeStepArr, int convoCnt) throws RemoteException {
+            public void serviceTypeQuery(
+                    float[][] trfDataArr, String[] convoStrArr, int[] timeStepArr, int convoCnt)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemMhsAiService.DESCRIPTOR);

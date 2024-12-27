@@ -11,7 +11,10 @@ public class BugReportActionViewModel implements ActionViewModel {
     private final ResourcesWrapper mResourcesWrapper;
     private final SystemController mSystemController;
 
-    public BugReportActionViewModel(SamsungGlobalActions globalActions, SystemController systemController, ResourcesWrapper resourcesWrapper) {
+    public BugReportActionViewModel(
+            SamsungGlobalActions globalActions,
+            SystemController systemController,
+            ResourcesWrapper resourcesWrapper) {
         this.mGlobalActions = globalActions;
         this.mSystemController = systemController;
         this.mResourcesWrapper = resourcesWrapper;

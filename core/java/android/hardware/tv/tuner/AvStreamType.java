@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class AvStreamType implements Parcelable {
-    public static final Parcelable.Creator<AvStreamType> CREATOR = new Parcelable.Creator<AvStreamType>() { // from class: android.hardware.tv.tuner.AvStreamType.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AvStreamType createFromParcel(Parcel _aidl_source) {
-            return new AvStreamType(_aidl_source);
-        }
+    public static final Parcelable.Creator<AvStreamType> CREATOR =
+            new Parcelable.Creator<
+                    AvStreamType>() { // from class: android.hardware.tv.tuner.AvStreamType.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AvStreamType createFromParcel(Parcel _aidl_source) {
+                    return new AvStreamType(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AvStreamType[] newArray(int _aidl_size) {
-            return new AvStreamType[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AvStreamType[] newArray(int _aidl_size) {
+                    return new AvStreamType[_aidl_size];
+                }
+            };
     public static final int audio = 1;
     public static final int video = 0;
     private int _tag;
@@ -114,7 +116,12 @@ public final class AvStreamType implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

@@ -2,6 +2,7 @@ package com.android.server.backup;
 
 import android.content.pm.Signature;
 import android.util.Slog;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -31,14 +32,17 @@ public abstract class BackupUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:31:0x006b, code lost:
-    
-        r1 = r1 + 1;
-     */
+
+       r1 = r1 + 1;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean signaturesMatch(java.util.ArrayList r7, android.content.pm.PackageInfo r8, android.content.pm.PackageManagerInternal r9) {
+    public static boolean signaturesMatch(
+            java.util.ArrayList r7,
+            android.content.pm.PackageInfo r8,
+            android.content.pm.PackageManagerInternal r9) {
         /*
             r0 = 0
             if (r8 == 0) goto L73
@@ -107,6 +111,10 @@ public abstract class BackupUtils {
         L73:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.BackupUtils.signaturesMatch(java.util.ArrayList, android.content.pm.PackageInfo, android.content.pm.PackageManagerInternal):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.BackupUtils.signaturesMatch(java.util.ArrayList,"
+                    + " android.content.pm.PackageInfo,"
+                    + " android.content.pm.PackageManagerInternal):boolean");
     }
 }

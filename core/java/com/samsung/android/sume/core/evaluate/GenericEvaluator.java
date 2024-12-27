@@ -2,8 +2,9 @@ package com.samsung.android.sume.core.evaluate;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.samsung.android.sume.core.Def;
-import java.lang.Comparable;
+
 import java.util.stream.Stream;
 
 /* loaded from: classes6.dex */

@@ -1,6 +1,7 @@
 package android.os;
 
 import android.annotation.SystemApi;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
@@ -27,7 +28,9 @@ public class HidlSupport {
         if (lft == rgt) {
             return true;
         }
-        if (lft == null || rgt == null || (lftClazz = lft.getClass()) != (rgtClazz = rgt.getClass())) {
+        if (lft == null
+                || rgt == null
+                || (lftClazz = lft.getClass()) != (rgtClazz = rgt.getClass())) {
             return false;
         }
         if (lftClazz.isArray()) {
@@ -40,14 +43,20 @@ public class HidlSupport {
             }
             final Object[] lftArray = (Object[]) lft;
             final Object[] rgtArray = (Object[]) rgt;
-            if (lftArray.length == rgtArray.length && IntStream.range(0, lftArray.length).allMatch(new IntPredicate() { // from class: android.os.HidlSupport$$ExternalSyntheticLambda2
-                @Override // java.util.function.IntPredicate
-                public final boolean test(int i) {
-                    boolean deepEquals;
-                    deepEquals = HidlSupport.deepEquals(lftArray[i], rgtArray[i]);
-                    return deepEquals;
-                }
-            })) {
+            if (lftArray.length == rgtArray.length
+                    && IntStream.range(0, lftArray.length)
+                            .allMatch(
+                                    new IntPredicate() { // from class:
+                                                         // android.os.HidlSupport$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.IntPredicate
+                                        public final boolean test(int i) {
+                                            boolean deepEquals;
+                                            deepEquals =
+                                                    HidlSupport.deepEquals(
+                                                            lftArray[i], rgtArray[i]);
+                                            return deepEquals;
+                                        }
+                                    })) {
                 return true;
             }
             return false;
@@ -59,14 +68,17 @@ public class HidlSupport {
                 return false;
             }
             final Iterator<Object> lftIter = lftList.iterator();
-            return rgtList.stream().allMatch(new Predicate() { // from class: android.os.HidlSupport$$ExternalSyntheticLambda3
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    boolean deepEquals;
-                    deepEquals = HidlSupport.deepEquals(lftIter.next(), obj);
-                    return deepEquals;
-                }
-            });
+            return rgtList.stream()
+                    .allMatch(
+                            new Predicate() { // from class:
+                                              // android.os.HidlSupport$$ExternalSyntheticLambda3
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    boolean deepEquals;
+                                    deepEquals = HidlSupport.deepEquals(lftIter.next(), obj);
+                                    return deepEquals;
+                                }
+                            });
         }
         throwErrorIfUnsupportedType(lft);
         return lft.equals(rgt);
@@ -95,24 +107,35 @@ public class HidlSupport {
             if (elementType.isPrimitive()) {
                 return primitiveArrayHashCode(o);
             }
-            return Arrays.hashCode(Arrays.stream((Object[]) o).mapToInt(new ToIntFunction() { // from class: android.os.HidlSupport$$ExternalSyntheticLambda0
-                @Override // java.util.function.ToIntFunction
-                public final int applyAsInt(Object obj) {
-                    int deepHashCode;
-                    deepHashCode = HidlSupport.deepHashCode(obj);
-                    return deepHashCode;
-                }
-            }).toArray());
+            return Arrays.hashCode(
+                    Arrays.stream((Object[]) o)
+                            .mapToInt(
+                                    new ToIntFunction() { // from class:
+                                                          // android.os.HidlSupport$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.ToIntFunction
+                                        public final int applyAsInt(Object obj) {
+                                            int deepHashCode;
+                                            deepHashCode = HidlSupport.deepHashCode(obj);
+                                            return deepHashCode;
+                                        }
+                                    })
+                            .toArray());
         }
         if (o instanceof List) {
-            return Arrays.hashCode(((List) o).stream().mapToInt(new ToIntFunction() { // from class: android.os.HidlSupport$$ExternalSyntheticLambda1
-                @Override // java.util.function.ToIntFunction
-                public final int applyAsInt(Object obj) {
-                    int deepHashCode;
-                    deepHashCode = HidlSupport.deepHashCode(obj);
-                    return deepHashCode;
-                }
-            }).toArray());
+            return Arrays.hashCode(
+                    ((List) o)
+                            .stream()
+                                    .mapToInt(
+                                            new ToIntFunction() { // from class:
+                                                                  // android.os.HidlSupport$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.ToIntFunction
+                                                public final int applyAsInt(Object obj) {
+                                                    int deepHashCode;
+                                                    deepHashCode = HidlSupport.deepHashCode(obj);
+                                                    return deepHashCode;
+                                                }
+                                            })
+                                    .toArray());
         }
         throwErrorIfUnsupportedType(o);
         return o.hashCode();
@@ -120,7 +143,9 @@ public class HidlSupport {
 
     private static void throwErrorIfUnsupportedType(Object o) {
         if ((o instanceof Collection) && !(o instanceof List)) {
-            throw new UnsupportedOperationException("Cannot check equality on collections other than lists: " + o.getClass().getName());
+            throw new UnsupportedOperationException(
+                    "Cannot check equality on collections other than lists: "
+                            + o.getClass().getName());
         }
         if (o instanceof Map) {
             throw new UnsupportedOperationException("Cannot check equality on maps");

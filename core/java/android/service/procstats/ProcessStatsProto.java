@@ -14,7 +14,6 @@ public final class ProcessStatsProto {
         public static final long CACHED_PSS = 1146756268035L;
         public static final long CPU = 1120986464257L;
 
-        public Kill() {
-        }
+        public Kill() {}
     }
 }

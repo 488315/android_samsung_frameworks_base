@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.util.Pair;
-import com.android.server.textclassifier.IconsUriHelper;
+
 import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 
@@ -20,32 +20,55 @@ import java.util.Arrays;
 /* loaded from: classes2.dex */
 public final class IconsContentProvider extends ContentProvider {
     public static final /* synthetic */ int $r8$clinit = 0;
-    public final IconsContentProvider$$ExternalSyntheticLambda0 mWriter = new ContentProvider.PipeDataWriter() { // from class: com.android.server.textclassifier.IconsContentProvider$$ExternalSyntheticLambda0
-        @Override // android.content.ContentProvider.PipeDataWriter
-        public final void writeDataToPipe(ParcelFileDescriptor parcelFileDescriptor, Uri uri, String str, Bundle bundle, Object obj) {
-            IconsContentProvider iconsContentProvider = IconsContentProvider.this;
-            Pair pair = (Pair) obj;
-            int i = IconsContentProvider.$r8$clinit;
-            iconsContentProvider.getClass();
-            try {
-                ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream = new ParcelFileDescriptor.AutoCloseOutputStream(parcelFileDescriptor);
-                try {
-                    IconsUriHelper.ResourceInfo resourceInfo = (IconsUriHelper.ResourceInfo) pair.first;
-                    IconsContentProvider.getBitmap(Icon.createWithResource(resourceInfo.packageName, resourceInfo.id).loadDrawableAsUser(iconsContentProvider.getContext(), ((Integer) pair.second).intValue())).compress(Bitmap.CompressFormat.PNG, 100, autoCloseOutputStream);
-                    autoCloseOutputStream.close();
-                } finally {
+    public final IconsContentProvider$$ExternalSyntheticLambda0 mWriter =
+            new ContentProvider
+                    .PipeDataWriter() { // from class:
+                                        // com.android.server.textclassifier.IconsContentProvider$$ExternalSyntheticLambda0
+                @Override // android.content.ContentProvider.PipeDataWriter
+                public final void writeDataToPipe(
+                        ParcelFileDescriptor parcelFileDescriptor,
+                        Uri uri,
+                        String str,
+                        Bundle bundle,
+                        Object obj) {
+                    IconsContentProvider iconsContentProvider = IconsContentProvider.this;
+                    Pair pair = (Pair) obj;
+                    int i = IconsContentProvider.$r8$clinit;
+                    iconsContentProvider.getClass();
+                    try {
+                        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream =
+                                new ParcelFileDescriptor.AutoCloseOutputStream(
+                                        parcelFileDescriptor);
+                        try {
+                            IconsUriHelper.ResourceInfo resourceInfo =
+                                    (IconsUriHelper.ResourceInfo) pair.first;
+                            IconsContentProvider.getBitmap(
+                                            Icon.createWithResource(
+                                                            resourceInfo.packageName,
+                                                            resourceInfo.id)
+                                                    .loadDrawableAsUser(
+                                                            iconsContentProvider.getContext(),
+                                                            ((Integer) pair.second).intValue()))
+                                    .compress(
+                                            Bitmap.CompressFormat.PNG, 100, autoCloseOutputStream);
+                            autoCloseOutputStream.close();
+                        } finally {
+                        }
+                    } catch (Exception e) {
+                        Log.e("IconsContentProvider", "Error retrieving icon for uri: " + uri, e);
+                    }
                 }
-            } catch (Exception e) {
-                Log.e("IconsContentProvider", "Error retrieving icon for uri: " + uri, e);
-            }
-        }
-    };
+            };
 
     public static Bitmap getBitmap(Drawable drawable) {
         if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
             throw new IllegalStateException("The icon is zero-sized");
         }
-        Bitmap createBitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap createBitmap =
+                Bitmap.createBitmap(
+                        drawable.getIntrinsicWidth(),
+                        drawable.getIntrinsicHeight(),
+                        Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(createBitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
@@ -59,7 +82,8 @@ public final class IconsContentProvider extends ContentProvider {
         bitmap.compress(compressFormat, 100, byteArrayOutputStream);
         ByteArrayOutputStream byteArrayOutputStream2 = new ByteArrayOutputStream();
         getBitmap(drawable2).compress(compressFormat, 100, byteArrayOutputStream2);
-        return Arrays.equals(byteArrayOutputStream.toByteArray(), byteArrayOutputStream2.toByteArray());
+        return Arrays.equals(
+                byteArrayOutputStream.toByteArray(), byteArrayOutputStream2.toByteArray());
     }
 
     @Override // android.content.ContentProvider
@@ -89,7 +113,8 @@ public final class IconsContentProvider extends ContentProvider {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.os.ParcelFileDescriptor openFile(android.net.Uri r9, java.lang.String r10) {
+    public final android.os.ParcelFileDescriptor openFile(
+            android.net.Uri r9, java.lang.String r10) {
         /*
             r8 = this;
             com.android.server.textclassifier.IconsUriHelper r10 = com.android.server.textclassifier.IconsUriHelper.sSingleton
@@ -190,7 +215,10 @@ public final class IconsContentProvider extends ContentProvider {
             android.util.Log.e(r10, r9, r8)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.textclassifier.IconsContentProvider.openFile(android.net.Uri, java.lang.String):android.os.ParcelFileDescriptor");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.textclassifier.IconsContentProvider.openFile(android.net.Uri,"
+                    + " java.lang.String):android.os.ParcelFileDescriptor");
     }
 
     @Override // android.content.ContentProvider

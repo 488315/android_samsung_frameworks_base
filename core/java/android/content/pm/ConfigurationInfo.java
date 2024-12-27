@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ConfigurationInfo implements Parcelable {
-    public static final Parcelable.Creator<ConfigurationInfo> CREATOR = new Parcelable.Creator<ConfigurationInfo>() { // from class: android.content.pm.ConfigurationInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConfigurationInfo createFromParcel(Parcel source) {
-            return new ConfigurationInfo(source);
-        }
+    public static final Parcelable.Creator<ConfigurationInfo> CREATOR =
+            new Parcelable.Creator<
+                    ConfigurationInfo>() { // from class: android.content.pm.ConfigurationInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConfigurationInfo createFromParcel(Parcel source) {
+                    return new ConfigurationInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConfigurationInfo[] newArray(int size) {
-            return new ConfigurationInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConfigurationInfo[] newArray(int size) {
+                    return new ConfigurationInfo[size];
+                }
+            };
     public static final int GL_ES_VERSION_UNDEFINED = 0;
     public static final int INPUT_FEATURE_FIVE_WAY_NAV = 2;
     public static final int INPUT_FEATURE_HARD_KEYBOARD = 1;
@@ -42,7 +44,19 @@ public class ConfigurationInfo implements Parcelable {
     }
 
     public String toString() {
-        return "ConfigurationInfo{" + Integer.toHexString(System.identityHashCode(this)) + " touchscreen = " + this.reqTouchScreen + " inputMethod = " + this.reqKeyboardType + " navigation = " + this.reqNavigation + " reqInputFeatures = " + this.reqInputFeatures + " reqGlEsVersion = " + this.reqGlEsVersion + "}";
+        return "ConfigurationInfo{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " touchscreen = "
+                + this.reqTouchScreen
+                + " inputMethod = "
+                + this.reqKeyboardType
+                + " navigation = "
+                + this.reqNavigation
+                + " reqInputFeatures = "
+                + this.reqInputFeatures
+                + " reqGlEsVersion = "
+                + this.reqGlEsVersion
+                + "}";
     }
 
     @Override // android.os.Parcelable

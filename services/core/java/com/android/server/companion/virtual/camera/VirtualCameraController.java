@@ -10,6 +10,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import java.util.Iterator;
 import java.util.Map;
 
@@ -62,9 +63,13 @@ public final class VirtualCameraController implements IBinder.DeathRecipient {
                     Iterator it = ((ArrayMap) this.mCameras).keySet().iterator();
                     while (it.hasNext()) {
                         try {
-                            ((IVirtualCameraService.Stub.Proxy) this.mVirtualCameraService).unregisterCamera((IBinder) it.next());
+                            ((IVirtualCameraService.Stub.Proxy) this.mVirtualCameraService)
+                                    .unregisterCamera((IBinder) it.next());
                         } catch (RemoteException e) {
-                            Slog.w("VirtualCameraController", "close(): Camera failed to be removed on camera service.", e);
+                            Slog.w(
+                                    "VirtualCameraController",
+                                    "close(): Camera failed to be removed on camera service.",
+                                    e);
                         }
                     }
                 }
@@ -86,7 +91,10 @@ public final class VirtualCameraController implements IBinder.DeathRecipient {
                 e.rethrowFromSystemServer();
             }
             if (waitForService == null) {
-                Slog.e("VirtualCameraController", "connectVirtualCameraService: Failed to connect to the virtual camera service");
+                Slog.e(
+                        "VirtualCameraController",
+                        "connectVirtualCameraService: Failed to connect to the virtual camera"
+                            + " service");
             } else {
                 waitForService.linkToDeath(this, 0);
                 this.mVirtualCameraService = IVirtualCameraService.Stub.asInterface(waitForService);
@@ -114,12 +122,23 @@ public final class VirtualCameraController implements IBinder.DeathRecipient {
     public final boolean registerCameraWithService(VirtualCameraConfig virtualCameraConfig) {
         boolean registerCamera;
         VirtualCameraConfiguration virtualCameraConfiguration = new VirtualCameraConfiguration();
-        virtualCameraConfiguration.supportedStreamConfigs = (SupportedStreamConfiguration[]) virtualCameraConfig.getStreamConfigs().stream().map(new VirtualCameraConversionUtil$$ExternalSyntheticLambda0()).toArray(new VirtualCameraConversionUtil$$ExternalSyntheticLambda1());
+        virtualCameraConfiguration.supportedStreamConfigs =
+                (SupportedStreamConfiguration[])
+                        virtualCameraConfig.getStreamConfigs().stream()
+                                .map(new VirtualCameraConversionUtil$$ExternalSyntheticLambda0())
+                                .toArray(
+                                        new VirtualCameraConversionUtil$$ExternalSyntheticLambda1());
         virtualCameraConfiguration.sensorOrientation = virtualCameraConfig.getSensorOrientation();
         virtualCameraConfiguration.lensFacing = virtualCameraConfig.getLensFacing();
-        virtualCameraConfiguration.virtualCameraCallback = new VirtualCameraConversionUtil$1(virtualCameraConfig.getCallback());
+        virtualCameraConfiguration.virtualCameraCallback =
+                new VirtualCameraConversionUtil$1(virtualCameraConfig.getCallback());
         synchronized (this.mServiceLock) {
-            registerCamera = ((IVirtualCameraService.Stub.Proxy) this.mVirtualCameraService).registerCamera(virtualCameraConfig.getCallback().asBinder(), virtualCameraConfiguration, this.mDeviceId);
+            registerCamera =
+                    ((IVirtualCameraService.Stub.Proxy) this.mVirtualCameraService)
+                            .registerCamera(
+                                    virtualCameraConfig.getCallback().asBinder(),
+                                    virtualCameraConfiguration,
+                                    this.mDeviceId);
         }
         return registerCamera;
     }
@@ -132,7 +151,8 @@ public final class VirtualCameraController implements IBinder.DeathRecipient {
                     connectVirtualCameraServiceIfNeeded();
                     try {
                         synchronized (this.mServiceLock) {
-                            ((IVirtualCameraService.Stub.Proxy) this.mVirtualCameraService).unregisterCamera(asBinder);
+                            ((IVirtualCameraService.Stub.Proxy) this.mVirtualCameraService)
+                                    .unregisterCamera(asBinder);
                         }
                         ((ArrayMap) this.mCameras).remove(asBinder);
                     } catch (RemoteException e) {

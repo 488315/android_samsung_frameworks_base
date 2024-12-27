@@ -11,7 +11,9 @@ import android.sec.clipboard.data.ClipboardConstants;
 import android.sec.clipboard.util.CompatabilityHelper;
 import android.sec.clipboard.util.Log;
 import android.text.TextUtils;
+
 import com.samsung.android.content.clipboard.provider.SemImageClipDataProvider;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -64,7 +66,9 @@ public class SemImageClipData extends SemClipData {
         switch (type) {
             case 2:
                 ((SemImageClipData) altData).setExtraParcelFileDescriptor(this.mExtraParcelFd);
-                boolean result2 = ((SemImageClipData) altData).setBitmapPath(getBitmapPath(), getExtraDataPath());
+                boolean result2 =
+                        ((SemImageClipData) altData)
+                                .setBitmapPath(getBitmapPath(), getExtraDataPath());
                 return result2;
             default:
                 return false;
@@ -97,7 +101,8 @@ public class SemImageClipData extends SemClipData {
         } else {
             this.mContentUri = Uri.parse(this.mContentUriString);
         }
-        if (this.mImagePath != null && this.mImagePath.contains(CompatabilityHelper.OLD_CLIPBOARD_ROOT_PATH)) {
+        if (this.mImagePath != null
+                && this.mImagePath.contains(CompatabilityHelper.OLD_CLIPBOARD_ROOT_PATH)) {
             setImagePath(CompatabilityHelper.replacePathForCompatability(this.mImagePath));
         }
         Log.secD(TAG, "imageclipdata toLoad called");
@@ -238,7 +243,9 @@ public class SemImageClipData extends SemClipData {
             this.mInitBaseValue = source.readString();
             this.mInitBaseValueCheck = source.readByte() != 0;
             this.mExtraDataPath = source.readString();
-            this.mExtraParcelFd = (ParcelFileDescriptor) source.readParcelable(ParcelFileDescriptor.class.getClassLoader());
+            this.mExtraParcelFd =
+                    (ParcelFileDescriptor)
+                            source.readParcelable(ParcelFileDescriptor.class.getClassLoader());
         } catch (Exception e) {
             Log.secI(TAG, "readFromSource~Exception :" + e.getMessage());
         }
@@ -263,7 +270,11 @@ public class SemImageClipData extends SemClipData {
     }
 
     public String toString() {
-        return "SemImageClipData class. Value is " + ((Object) (this.mImagePath.length() > 20 ? this.mImagePath.subSequence(0, 20) : this.mImagePath));
+        return "SemImageClipData class. Value is "
+                + ((Object)
+                        (this.mImagePath.length() > 20
+                                ? this.mImagePath.subSequence(0, 20)
+                                : this.mImagePath));
     }
 
     private boolean compareFile(FileInputStream src, FileInputStream dest) {
@@ -553,7 +564,9 @@ public class SemImageClipData extends SemClipData {
             try {
                 ContentValues values = new ContentValues();
                 values.put("_data", path);
-                Uri contentUri = context.getContentResolver().insert(SemImageClipDataProvider.CONTENT_URI, values);
+                Uri contentUri =
+                        context.getContentResolver()
+                                .insert(SemImageClipDataProvider.CONTENT_URI, values);
                 setContentUri(contentUri);
             } catch (Exception e) {
                 Log.e(TAG, "Exception occurs in insertContentUri because " + e.getMessage());

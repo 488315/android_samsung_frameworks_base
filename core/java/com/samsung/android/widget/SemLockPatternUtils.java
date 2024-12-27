@@ -2,10 +2,12 @@ package com.samsung.android.widget;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockscreenCredential;
 import com.android.internal.widget.VerifyCredentialResponse;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -34,8 +36,7 @@ public class SemLockPatternUtils {
     }
 
     @Deprecated(forRemoval = true, since = "13.0")
-    public void clearEncryptionPassword() {
-    }
+    public void clearEncryptionPassword() {}
 
     public boolean isFmmLockEnabled(int userid) {
         return this.mLockPatternUtils.isFMMLockEnabled(userid);
@@ -57,11 +58,18 @@ public class SemLockPatternUtils {
         return this.mLockPatternUtils.getCredentialTypeForUser(userId);
     }
 
-    public boolean setLockCredential(String currentPassword, int currentLockType, String newPassword, int newLockType, int userId) {
+    public boolean setLockCredential(
+            String currentPassword,
+            int currentLockType,
+            String newPassword,
+            int newLockType,
+            int userId) {
         LockscreenCredential currentCredential = createCredential(currentPassword, currentLockType);
         LockscreenCredential newCredential = createCredential(newPassword, newLockType);
         try {
-            boolean result = this.mLockPatternUtils.setLockCredential(newCredential, currentCredential, userId);
+            boolean result =
+                    this.mLockPatternUtils.setLockCredential(
+                            newCredential, currentCredential, userId);
             return result;
         } catch (Exception e) {
             Log.i(TAG, "setLockCredential : catch exception", e);
@@ -77,7 +85,8 @@ public class SemLockPatternUtils {
             return false;
         }
         try {
-            VerifyCredentialResponse response = this.mLockPatternUtils.verifyCredential(credential, userId, 0);
+            VerifyCredentialResponse response =
+                    this.mLockPatternUtils.verifyCredential(credential, userId, 0);
             if (response.getResponseCode() != 0) {
                 Log.i(TAG, "verifyCredential : return " + response.getResponseCode());
                 return false;
@@ -102,7 +111,9 @@ public class SemLockPatternUtils {
         LockscreenCredential currentCredential = createCredential(currentPassword, credentialType);
         LockscreenCredential newCredential = LockscreenCredential.createNone();
         try {
-            boolean result = this.mLockPatternUtils.setLockCredential(newCredential, currentCredential, userId);
+            boolean result =
+                    this.mLockPatternUtils.setLockCredential(
+                            newCredential, currentCredential, userId);
             return result;
         } catch (Exception e) {
             Log.i(TAG, "clearLock : catch exception", e);
@@ -113,7 +124,8 @@ public class SemLockPatternUtils {
     private LockscreenCredential createCredential(String password, int credentialType) {
         switch (credentialType) {
             case 1:
-                List<LockPatternView.Cell> pattern = LockPatternUtils.byteArrayToPattern(password.getBytes());
+                List<LockPatternView.Cell> pattern =
+                        LockPatternUtils.byteArrayToPattern(password.getBytes());
                 return LockscreenCredential.createPattern(pattern);
             case 2:
             case 4:

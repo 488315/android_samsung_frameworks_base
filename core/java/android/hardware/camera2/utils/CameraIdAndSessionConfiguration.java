@@ -6,23 +6,26 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class CameraIdAndSessionConfiguration implements Parcelable {
-    public static final Parcelable.Creator<CameraIdAndSessionConfiguration> CREATOR = new Parcelable.Creator<CameraIdAndSessionConfiguration>() { // from class: android.hardware.camera2.utils.CameraIdAndSessionConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraIdAndSessionConfiguration createFromParcel(Parcel in) {
-            return new CameraIdAndSessionConfiguration(in);
-        }
+    public static final Parcelable.Creator<CameraIdAndSessionConfiguration> CREATOR =
+            new Parcelable.Creator<CameraIdAndSessionConfiguration>() { // from class:
+                // android.hardware.camera2.utils.CameraIdAndSessionConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraIdAndSessionConfiguration createFromParcel(Parcel in) {
+                    return new CameraIdAndSessionConfiguration(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraIdAndSessionConfiguration[] newArray(int size) {
-            return new CameraIdAndSessionConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraIdAndSessionConfiguration[] newArray(int size) {
+                    return new CameraIdAndSessionConfiguration[size];
+                }
+            };
     private String mCameraId;
     private SessionConfiguration mSessionConfiguration;
 
-    public CameraIdAndSessionConfiguration(String cameraId, SessionConfiguration sessionConfiguration) {
+    public CameraIdAndSessionConfiguration(
+            String cameraId, SessionConfiguration sessionConfiguration) {
         this.mCameraId = cameraId;
         this.mSessionConfiguration = sessionConfiguration;
     }

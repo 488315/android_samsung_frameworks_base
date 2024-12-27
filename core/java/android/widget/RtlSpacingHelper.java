@@ -12,8 +12,7 @@ class RtlSpacingHelper {
     private boolean mIsRtl = false;
     private boolean mIsRelative = false;
 
-    RtlSpacingHelper() {
-    }
+    RtlSpacingHelper() {}
 
     public int getLeft() {
         return this.mLeft;

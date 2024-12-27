@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioPlaybackRate implements Parcelable {
-    public static final Parcelable.Creator<AudioPlaybackRate> CREATOR = new Parcelable.Creator<AudioPlaybackRate>() { // from class: android.media.audio.common.AudioPlaybackRate.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPlaybackRate createFromParcel(Parcel _aidl_source) {
-            AudioPlaybackRate _aidl_out = new AudioPlaybackRate();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioPlaybackRate> CREATOR =
+            new Parcelable.Creator<AudioPlaybackRate>() { // from class:
+                // android.media.audio.common.AudioPlaybackRate.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPlaybackRate createFromParcel(Parcel _aidl_source) {
+                    AudioPlaybackRate _aidl_out = new AudioPlaybackRate();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPlaybackRate[] newArray(int _aidl_size) {
-            return new AudioPlaybackRate[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPlaybackRate[] newArray(int _aidl_size) {
+                    return new AudioPlaybackRate[_aidl_size];
+                }
+            };
     public float speed = 0.0f;
     public float pitch = 0.0f;
     public int timestretchMode = 0;
@@ -129,14 +132,28 @@ public class AudioPlaybackRate implements Parcelable {
             return false;
         }
         AudioPlaybackRate that = (AudioPlaybackRate) other;
-        if (Objects.deepEquals(java.lang.Float.valueOf(this.speed), java.lang.Float.valueOf(that.speed)) && Objects.deepEquals(java.lang.Float.valueOf(this.pitch), java.lang.Float.valueOf(that.pitch)) && Objects.deepEquals(Integer.valueOf(this.timestretchMode), Integer.valueOf(that.timestretchMode)) && Objects.deepEquals(Integer.valueOf(this.fallbackMode), Integer.valueOf(that.fallbackMode))) {
+        if (Objects.deepEquals(
+                        java.lang.Float.valueOf(this.speed), java.lang.Float.valueOf(that.speed))
+                && Objects.deepEquals(
+                        java.lang.Float.valueOf(this.pitch), java.lang.Float.valueOf(that.pitch))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.timestretchMode),
+                        Integer.valueOf(that.timestretchMode))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.fallbackMode), Integer.valueOf(that.fallbackMode))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(java.lang.Float.valueOf(this.speed), java.lang.Float.valueOf(this.pitch), Integer.valueOf(this.timestretchMode), Integer.valueOf(this.fallbackMode)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                java.lang.Float.valueOf(this.speed),
+                                java.lang.Float.valueOf(this.pitch),
+                                Integer.valueOf(this.timestretchMode),
+                                Integer.valueOf(this.fallbackMode))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

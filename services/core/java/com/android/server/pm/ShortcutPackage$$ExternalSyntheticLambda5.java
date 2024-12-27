@@ -2,6 +2,7 @@ package com.android.server.pm;
 
 import android.content.pm.ShortcutInfo;
 import android.util.ArrayMap;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -12,7 +13,8 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda5 imp
     public final /* synthetic */ Object f$1;
     public final /* synthetic */ int f$2;
 
-    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda5(ShortcutPackage shortcutPackage, Object obj, int i, int i2) {
+    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda5(
+            ShortcutPackage shortcutPackage, Object obj, int i, int i2) {
         this.$r8$classId = i2;
         this.f$0 = shortcutPackage;
         this.f$1 = obj;
@@ -32,7 +34,8 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda5 imp
                     if (str == null) {
                         if (i != 0) {
                             shortcutInfo.setDisabledMessageResId(i);
-                            shortcutPackage.mShortcutUser.mService.fixUpShortcutResourceNamesAndValues(shortcutInfo);
+                            shortcutPackage.mShortcutUser.mService
+                                    .fixUpShortcutResourceNamesAndValues(shortcutInfo);
                             break;
                         }
                     } else {
@@ -49,11 +52,13 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda5 imp
                 shortcutPackage2.getClass();
                 if (!shortcutInfo2.isManifestShortcut()) {
                     if (shortcutInfo2.isDynamic() && i2 != 0) {
-                        ShortcutPackage.incrementCountForActivity(arrayMap, shortcutInfo2.getActivity(), 1);
+                        ShortcutPackage.incrementCountForActivity(
+                                arrayMap, shortcutInfo2.getActivity(), 1);
                         break;
                     }
                 } else {
-                    ShortcutPackage.incrementCountForActivity(arrayMap, shortcutInfo2.getActivity(), 1);
+                    ShortcutPackage.incrementCountForActivity(
+                            arrayMap, shortcutInfo2.getActivity(), 1);
                     break;
                 }
                 break;

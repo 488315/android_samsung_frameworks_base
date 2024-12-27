@@ -25,7 +25,7 @@ public interface IApnSourceService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IApnSourceService {
+    public abstract static class Stub extends Binder implements IApnSourceService {
         static final int TRANSACTION_getApns = 1;
 
         public Stub() {
@@ -63,7 +63,8 @@ public interface IApnSourceService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IApnSourceService.DESCRIPTOR);
             }
@@ -109,7 +110,8 @@ public interface IApnSourceService extends IInterface {
                     _data.writeInt(subId);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ContentValues[] _result = (ContentValues[]) _reply.createTypedArray(ContentValues.CREATOR);
+                    ContentValues[] _result =
+                            (ContentValues[]) _reply.createTypedArray(ContentValues.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

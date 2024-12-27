@@ -6,6 +6,7 @@ import android.hardware.broadcastradio.DabTableEntry$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -57,7 +58,9 @@ public class DhcpResultsParcelable implements Parcelable {
                 throw new BadParcelableException("Parcelable too small");
             }
             if (parcel.dataPosition() - dataPosition < readInt) {
-                this.baseConfiguration = (StaticIpConfiguration) parcel.readTypedObject(StaticIpConfiguration.CREATOR);
+                this.baseConfiguration =
+                        (StaticIpConfiguration)
+                                parcel.readTypedObject(StaticIpConfiguration.CREATOR);
                 if (parcel.dataPosition() - dataPosition < readInt) {
                     this.leaseDuration = parcel.readInt();
                     if (parcel.dataPosition() - dataPosition < readInt) {
@@ -71,19 +74,23 @@ public class DhcpResultsParcelable implements Parcelable {
                                     if (parcel.dataPosition() - dataPosition < readInt) {
                                         this.captivePortalApiUrl = parcel.readString();
                                         if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                         parcel.setDataPosition(dataPosition + readInt);
                                         return;
                                     }
                                     if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -110,7 +117,34 @@ public class DhcpResultsParcelable implements Parcelable {
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         stringJoiner.add("baseConfiguration: " + Objects.toString(this.baseConfiguration));
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, DabTableEntry$$ExternalSyntheticOutline0.m(this.captivePortalApiUrl, "DhcpResultsParcelable", DabTableEntry$$ExternalSyntheticOutline0.m(this.serverHostName, "captivePortalApiUrl: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.vendorInfo, "serverHostName: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.serverAddress, "vendorInfo: ", AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("leaseDuration: "), this.leaseDuration, stringJoiner, "mtu: "), this.mtu, stringJoiner, "serverAddress: "), stringJoiner), stringJoiner), stringJoiner), stringJoiner));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                DabTableEntry$$ExternalSyntheticOutline0.m(
+                        this.captivePortalApiUrl,
+                        "DhcpResultsParcelable",
+                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                this.serverHostName,
+                                "captivePortalApiUrl: ",
+                                DabTableEntry$$ExternalSyntheticOutline0.m(
+                                        this.vendorInfo,
+                                        "serverHostName: ",
+                                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                                this.serverAddress,
+                                                "vendorInfo: ",
+                                                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                                                new StringBuilder(
+                                                                        "leaseDuration: "),
+                                                                this.leaseDuration,
+                                                                stringJoiner,
+                                                                "mtu: "),
+                                                        this.mtu,
+                                                        stringJoiner,
+                                                        "serverAddress: "),
+                                                stringJoiner),
+                                        stringJoiner),
+                                stringJoiner),
+                        stringJoiner));
     }
 
     @Override // android.os.Parcelable
@@ -126,6 +160,7 @@ public class DhcpResultsParcelable implements Parcelable {
         parcel.writeString(this.captivePortalApiUrl);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

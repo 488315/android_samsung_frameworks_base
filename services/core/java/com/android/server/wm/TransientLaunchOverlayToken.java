@@ -2,6 +2,7 @@ package com.android.server.wm;
 
 import android.os.Debug;
 import android.util.Slog;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -40,7 +41,14 @@ public final class TransientLaunchOverlayToken extends WindowToken {
             if (transition != null && transition.hasTransientLaunch() && z) {
                 transition.collect(this, false);
             }
-            Slog.i("TransientLaunchOverlayToken", "setVisibility, visible=" + z + ", t=" + this + ", caller=" + Debug.getCallers(3));
+            Slog.i(
+                    "TransientLaunchOverlayToken",
+                    "setVisibility, visible="
+                            + z
+                            + ", t="
+                            + this
+                            + ", caller="
+                            + Debug.getCallers(3));
             setVisibleRequested(z);
             scheduleAnimation();
         }
@@ -54,7 +62,12 @@ public final class TransientLaunchOverlayToken extends WindowToken {
     @Override // com.android.server.wm.WindowToken
     public final String toString() {
         if (this.stringName == null) {
-            this.stringName = "TransientLaunchOverlayToken{" + Integer.toHexString(System.identityHashCode(this)) + " token=" + this.token + '}';
+            this.stringName =
+                    "TransientLaunchOverlayToken{"
+                            + Integer.toHexString(System.identityHashCode(this))
+                            + " token="
+                            + this.token
+                            + '}';
         }
         return this.stringName;
     }

@@ -15,12 +15,14 @@ public interface ListenerTransport<TListener> {
         if (getListener() == null) {
             return;
         }
-        executor.execute(new Runnable() { // from class: com.android.internal.listeners.ListenerTransport$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                ListenerTransport.this.lambda$execute$0(operation);
-            }
-        });
+        executor.execute(
+                new Runnable() { // from class:
+                                 // com.android.internal.listeners.ListenerTransport$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ListenerTransport.this.lambda$execute$0(operation);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */

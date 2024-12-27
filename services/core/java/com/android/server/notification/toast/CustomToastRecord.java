@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.internal.util.Preconditions;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.notification.NotificationManagerService;
@@ -16,7 +17,17 @@ import com.android.server.notification.NotificationManagerService;
 public final class CustomToastRecord extends ToastRecord {
     public final ITransientNotification callback;
 
-    public CustomToastRecord(NotificationManagerService notificationManagerService, int i, int i2, String str, boolean z, IBinder iBinder, ITransientNotification iTransientNotification, int i3, Binder binder, int i4) {
+    public CustomToastRecord(
+            NotificationManagerService notificationManagerService,
+            int i,
+            int i2,
+            String str,
+            boolean z,
+            IBinder iBinder,
+            ITransientNotification iTransientNotification,
+            int i3,
+            Binder binder,
+            int i4) {
         super(notificationManagerService, i, i2, str, z, iBinder, i3, binder, i4);
         this.callback = (ITransientNotification) Preconditions.checkNotNull(iTransientNotification);
     }
@@ -29,7 +40,8 @@ public final class CustomToastRecord extends ToastRecord {
             StringBuilder sb = new StringBuilder("Object died trying to hide custom toast ");
             sb.append(this.token);
             sb.append(" in package ");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, this.pkg, "NotificationService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    sb, this.pkg, "NotificationService");
         }
     }
 
@@ -50,7 +62,8 @@ public final class CustomToastRecord extends ToastRecord {
             StringBuilder sb = new StringBuilder("Object died trying to show custom toast ");
             sb.append(this.token);
             sb.append(" in package ");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, this.pkg, "NotificationService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    sb, this.pkg, "NotificationService");
             NotificationManagerService notificationManagerService = this.mNotificationManager;
             int i = this.pid;
             synchronized (notificationManagerService.mToastQueue) {

@@ -8,11 +8,12 @@ import android.util.Pair;
 import android.util.Slog;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.asks.ASKSManagerService$$ExternalSyntheticOutline0;
-import com.android.server.power.shutdown.PlayerInterface;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,8 @@ public final class PngPlayer extends AnimationPlayer implements PlayerInterface.
     /* renamed from: com.android.server.power.shutdown.PngPlayer$1, reason: invalid class name */
     public final class AnonymousClass1 implements View.OnLayoutChangeListener {
         @Override // android.view.View.OnLayoutChangeListener
-        public final void onLayoutChange(View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
-        }
+        public final void onLayoutChange(
+                View view, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {}
     }
 
     public static Bitmap getBitmap(File file) {
@@ -45,7 +46,8 @@ public final class PngPlayer extends AnimationPlayer implements PlayerInterface.
 
     public static void setImageToView(ImageView imageView, Bitmap bitmap) {
         Locale locale = Locale.ENGLISH;
-        DeviceIdleController$$ExternalSyntheticOutline0.m(bitmap.getByteCount(), "setImageToView bitmapSize[", "]", "Shutdown-PngPlayer");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                bitmap.getByteCount(), "setImageToView bitmapSize[", "]", "Shutdown-PngPlayer");
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         imageView.setImageBitmap(bitmap);
     }
@@ -69,9 +71,17 @@ public final class PngPlayer extends AnimationPlayer implements PlayerInterface.
             }
             Bitmap bitmap = this.mainBitmap;
             if (bitmap != null) {
-                this.mainAnimationWidthHeight = Pair.create(Integer.valueOf(bitmap.getWidth()), Integer.valueOf(this.mainBitmap.getHeight()));
+                this.mainAnimationWidthHeight =
+                        Pair.create(
+                                Integer.valueOf(bitmap.getWidth()),
+                                Integer.valueOf(this.mainBitmap.getHeight()));
             }
-            Slog.i("Shutdown-PngPlayer", String.format(Locale.ENGLISH, "getMainAnimationWidthHeight unexpected flow %s", this.mainAnimationWidthHeight));
+            Slog.i(
+                    "Shutdown-PngPlayer",
+                    String.format(
+                            Locale.ENGLISH,
+                            "getMainAnimationWidthHeight unexpected flow %s",
+                            this.mainAnimationWidthHeight));
         }
         return this.mainAnimationWidthHeight;
     }
@@ -85,9 +95,21 @@ public final class PngPlayer extends AnimationPlayer implements PlayerInterface.
     public final void onSizeChanged(int i, int i2, int i3, int i4) {
         final Bitmap bitmap;
         Locale locale = Locale.ENGLISH;
-        Slog.d("Shutdown-PngPlayer", ActivityManagerService$$ExternalSyntheticOutline0.m(i3, i4, ", oldHeight=", ",", ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "onSizeChanged width=", ", height=", ", oldWidth=")));
+        Slog.d(
+                "Shutdown-PngPlayer",
+                ActivityManagerService$$ExternalSyntheticOutline0.m(
+                        i3,
+                        i4,
+                        ", oldHeight=",
+                        ",",
+                        ArrayUtils$$ExternalSyntheticOutline0.m(
+                                i, i2, "onSizeChanged width=", ", height=", ", oldWidth=")));
         if (i == 0 || i2 == 0 || this.subBitmap == null) {
-            Slog.d("Shutdown-PngPlayer", "getMatchedAnimationLoader viewWidth or viewHeight is 0 or subAnimationLoaders is null " + this.mainBitmap);
+            Slog.d(
+                    "Shutdown-PngPlayer",
+                    "getMatchedAnimationLoader viewWidth or viewHeight is 0 or subAnimationLoaders"
+                        + " is null "
+                            + this.mainBitmap);
             bitmap = this.mainBitmap;
         } else {
             Bitmap bitmap2 = this.mainBitmap;
@@ -95,13 +117,23 @@ public final class PngPlayer extends AnimationPlayer implements PlayerInterface.
             Bitmap bitmap3 = this.mainBitmap;
             int height = bitmap3 != null ? bitmap3.getHeight() : Integer.MAX_VALUE;
             if (i == width && i2 == height) {
-                ASKSManagerService$$ExternalSyntheticOutline0.m(i, i2, "getMatchedAnimationLoader main matched exactly width=", ", height=", "Shutdown-PngPlayer");
+                ASKSManagerService$$ExternalSyntheticOutline0.m(
+                        i,
+                        i2,
+                        "getMatchedAnimationLoader main matched exactly width=",
+                        ", height=",
+                        "Shutdown-PngPlayer");
                 bitmap = this.mainBitmap;
             } else {
                 int width2 = this.subBitmap.getWidth();
                 int height2 = this.subBitmap.getHeight();
                 if (i == width2 && i2 == height2) {
-                    ASKSManagerService$$ExternalSyntheticOutline0.m(i, i2, "getMatchedAnimationLoader sub matched exactly width=", ", height=", "Shutdown-PngPlayer");
+                    ASKSManagerService$$ExternalSyntheticOutline0.m(
+                            i,
+                            i2,
+                            "getMatchedAnimationLoader sub matched exactly width=",
+                            ", height=",
+                            "Shutdown-PngPlayer");
                     bitmap = this.subBitmap;
                 } else {
                     int i5 = i;
@@ -127,7 +159,12 @@ public final class PngPlayer extends AnimationPlayer implements PlayerInterface.
                         height /= i10;
                     }
                     if (i8 == width && i9 == height) {
-                        ASKSManagerService$$ExternalSyntheticOutline0.m(i8, i9, "getMatchedAnimationLoader main matched ratio width=", ", height=", "Shutdown-PngPlayer");
+                        ASKSManagerService$$ExternalSyntheticOutline0.m(
+                                i8,
+                                i9,
+                                "getMatchedAnimationLoader main matched ratio width=",
+                                ", height=",
+                                "Shutdown-PngPlayer");
                         bitmap = this.mainBitmap;
                     } else {
                         int i13 = width2;
@@ -144,23 +181,37 @@ public final class PngPlayer extends AnimationPlayer implements PlayerInterface.
                             height2 /= i13;
                         }
                         if (i8 == width2 && i9 == height2) {
-                            ASKSManagerService$$ExternalSyntheticOutline0.m(i8, i9, "getMatchedAnimationLoader sub matched ratio width=", ", height=", "Shutdown-PngPlayer");
+                            ASKSManagerService$$ExternalSyntheticOutline0.m(
+                                    i8,
+                                    i9,
+                                    "getMatchedAnimationLoader sub matched ratio width=",
+                                    ", height=",
+                                    "Shutdown-PngPlayer");
                             bitmap = this.subBitmap;
                         } else {
-                            ASKSManagerService$$ExternalSyntheticOutline0.m(i, i2, "getMatchedAnimationLoader not found matched resouce viewWidth=", ", viewHeight=", "Shutdown-PngPlayer");
+                            ASKSManagerService$$ExternalSyntheticOutline0.m(
+                                    i,
+                                    i2,
+                                    "getMatchedAnimationLoader not found matched resouce"
+                                        + " viewWidth=",
+                                    ", viewHeight=",
+                                    "Shutdown-PngPlayer");
                             bitmap = this.mainBitmap;
                         }
                     }
                 }
             }
         }
-        getDrawHandler().post(new Runnable() { // from class: com.android.server.power.shutdown.PngPlayer$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                PngPlayer pngPlayer = PngPlayer.this;
-                PngPlayer.setImageToView(pngPlayer.mainImageView, bitmap);
-            }
-        });
+        getDrawHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.power.shutdown.PngPlayer$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                PngPlayer pngPlayer = PngPlayer.this;
+                                PngPlayer.setImageToView(pngPlayer.mainImageView, bitmap);
+                            }
+                        });
     }
 
     @Override // com.android.server.power.shutdown.PlayerInterface

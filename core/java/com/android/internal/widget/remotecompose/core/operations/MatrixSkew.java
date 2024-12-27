@@ -1,11 +1,13 @@
 package com.android.internal.widget.remotecompose.core.operations;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.widget.remotecompose.core.CompanionOperation;
 import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.PaintContext;
 import com.android.internal.widget.remotecompose.core.PaintOperation;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -25,12 +27,15 @@ public class MatrixSkew extends PaintOperation {
     }
 
     public String toString() {
-        return "DrawArc " + this.mSkewY + ", " + this.mSkewY + NavigationBarInflaterView.GRAVITY_SEPARATOR;
+        return "DrawArc "
+                + this.mSkewY
+                + ", "
+                + this.mSkewY
+                + NavigationBarInflaterView.GRAVITY_SEPARATOR;
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public void read(WireBuffer buffer, List<Operation> operations) {

@@ -6,18 +6,22 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes3.dex */
 public interface IAttestationVerificationService extends IInterface {
-    public static final String DESCRIPTOR = "android.security.attestationverification.IAttestationVerificationService";
+    public static final String DESCRIPTOR =
+            "android.security.attestationverification.IAttestationVerificationService";
 
-    void onVerifyAttestation(Bundle bundle, byte[] bArr, AndroidFuture androidFuture) throws RemoteException;
+    void onVerifyAttestation(Bundle bundle, byte[] bArr, AndroidFuture androidFuture)
+            throws RemoteException;
 
     public static class Default implements IAttestationVerificationService {
         @Override // android.security.attestationverification.IAttestationVerificationService
-        public void onVerifyAttestation(Bundle requirements, byte[] attestation, AndroidFuture callback) throws RemoteException {
-        }
+        public void onVerifyAttestation(
+                Bundle requirements, byte[] attestation, AndroidFuture callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +29,7 @@ public interface IAttestationVerificationService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAttestationVerificationService {
+    public abstract static class Stub extends Binder implements IAttestationVerificationService {
         static final int TRANSACTION_onVerifyAttestation = 1;
 
         public Stub() {
@@ -63,7 +67,8 @@ public interface IAttestationVerificationService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAttestationVerificationService.DESCRIPTOR);
             }
@@ -75,7 +80,8 @@ public interface IAttestationVerificationService extends IInterface {
                 case 1:
                     Bundle _arg0 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     byte[] _arg1 = data.createByteArray();
-                    AndroidFuture _arg2 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg2 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     onVerifyAttestation(_arg0, _arg1, _arg2);
                     return true;
@@ -101,7 +107,9 @@ public interface IAttestationVerificationService extends IInterface {
             }
 
             @Override // android.security.attestationverification.IAttestationVerificationService
-            public void onVerifyAttestation(Bundle requirements, byte[] attestation, AndroidFuture callback) throws RemoteException {
+            public void onVerifyAttestation(
+                    Bundle requirements, byte[] attestation, AndroidFuture callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAttestationVerificationService.DESCRIPTOR);

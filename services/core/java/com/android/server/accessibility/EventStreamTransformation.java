@@ -23,8 +23,7 @@ public interface EventStreamTransformation {
         }
     }
 
-    default void onDestroy() {
-    }
+    default void onDestroy() {}
 
     default void onKeyEvent(KeyEvent keyEvent, int i) {
         EventStreamTransformation next = getNext();

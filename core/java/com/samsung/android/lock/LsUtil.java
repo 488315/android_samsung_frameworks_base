@@ -3,6 +3,7 @@ package com.samsung.android.lock;
 import android.os.Build;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.Format;

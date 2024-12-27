@@ -3,6 +3,7 @@ package android.hardware.broadcastradio;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -29,13 +30,17 @@ public final class Announcement implements Parcelable {
                     throw new BadParcelableException("Parcelable too small");
                 }
                 if (parcel.dataPosition() - dataPosition < readInt) {
-                    announcement.selector = (ProgramSelector) parcel.readTypedObject(ProgramSelector.CREATOR);
+                    announcement.selector =
+                            (ProgramSelector) parcel.readTypedObject(ProgramSelector.CREATOR);
                     if (parcel.dataPosition() - dataPosition < readInt) {
                         announcement.type = parcel.readByte();
                         if (parcel.dataPosition() - dataPosition < readInt) {
-                            announcement.vendorInfo = (VendorKeyValue[]) parcel.createTypedArray(VendorKeyValue.CREATOR);
+                            announcement.vendorInfo =
+                                    (VendorKeyValue[])
+                                            parcel.createTypedArray(VendorKeyValue.CREATOR);
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -93,7 +98,9 @@ public final class Announcement implements Parcelable {
             return false;
         }
         Announcement announcement = (Announcement) obj;
-        return Objects.deepEquals(this.selector, announcement.selector) && Objects.deepEquals(Byte.valueOf(this.type), Byte.valueOf(announcement.type)) && Objects.deepEquals(this.vendorInfo, announcement.vendorInfo);
+        return Objects.deepEquals(this.selector, announcement.selector)
+                && Objects.deepEquals(Byte.valueOf(this.type), Byte.valueOf(announcement.type))
+                && Objects.deepEquals(this.vendorInfo, announcement.vendorInfo);
     }
 
     public final int getStability() {
@@ -101,7 +108,8 @@ public final class Announcement implements Parcelable {
     }
 
     public final int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.selector, Byte.valueOf(this.type), this.vendorInfo).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(this.selector, Byte.valueOf(this.type), this.vendorInfo).toArray());
     }
 
     public final String toString() {
@@ -109,7 +117,38 @@ public final class Announcement implements Parcelable {
         stringJoiner.add("selector: " + Objects.toString(this.selector));
         StringBuilder sb = new StringBuilder("type: ");
         byte b = this.type;
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.vendorInfo), "Announcement", AmFmRegionConfig$$ExternalSyntheticOutline0.m(b == 0 ? "INVALID" : b == 1 ? "EMERGENCY" : b == 2 ? "WARNING" : b == 3 ? "TRAFFIC" : b == 4 ? "WEATHER" : b == 5 ? "NEWS" : b == 6 ? "EVENT" : b == 7 ? "SPORT" : b == 8 ? "MISC" : Byte.toString(b), "vendorInfo: ", sb, stringJoiner), stringJoiner));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                        Arrays.toString(this.vendorInfo),
+                        "Announcement",
+                        AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                                b == 0
+                                        ? "INVALID"
+                                        : b == 1
+                                                ? "EMERGENCY"
+                                                : b == 2
+                                                        ? "WARNING"
+                                                        : b == 3
+                                                                ? "TRAFFIC"
+                                                                : b == 4
+                                                                        ? "WEATHER"
+                                                                        : b == 5
+                                                                                ? "NEWS"
+                                                                                : b == 6
+                                                                                        ? "EVENT"
+                                                                                        : b == 7
+                                                                                                ? "SPORT"
+                                                                                                : b
+                                                                                                                == 8
+                                                                                                        ? "MISC"
+                                                                                                        : Byte
+                                                                                                                .toString(
+                                                                                                                        b),
+                                "vendorInfo: ",
+                                sb,
+                                stringJoiner),
+                        stringJoiner));
     }
 
     @Override // android.os.Parcelable

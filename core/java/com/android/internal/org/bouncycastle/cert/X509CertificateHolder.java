@@ -12,6 +12,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.TBSCertificate;
 import com.android.internal.org.bouncycastle.operator.ContentVerifier;
 import com.android.internal.org.bouncycastle.operator.ContentVerifierProvider;
 import com.android.internal.org.bouncycastle.util.Encodable;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -123,12 +124,16 @@ public class X509CertificateHolder implements Encodable, Serializable {
     }
 
     public boolean isValidOn(Date date) {
-        return (date.before(this.x509Certificate.getStartDate().getDate()) || date.after(this.x509Certificate.getEndDate().getDate())) ? false : true;
+        return (date.before(this.x509Certificate.getStartDate().getDate())
+                        || date.after(this.x509Certificate.getEndDate().getDate()))
+                ? false
+                : true;
     }
 
     public boolean isSignatureValid(ContentVerifierProvider verifierProvider) throws CertException {
         TBSCertificate tbsCert = this.x509Certificate.getTBSCertificate();
-        if (!CertUtils.isAlgIdEqual(tbsCert.getSignature(), this.x509Certificate.getSignatureAlgorithm())) {
+        if (!CertUtils.isAlgIdEqual(
+                tbsCert.getSignature(), this.x509Certificate.getSignatureAlgorithm())) {
             throw new CertException("signature invalid - algorithm identifier mismatch");
         }
         try {

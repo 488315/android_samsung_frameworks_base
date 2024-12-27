@@ -17,12 +17,11 @@ public interface IConvertCredentialCallback extends IInterface {
 
     public static class Default implements IConvertCredentialCallback {
         @Override // android.service.autofill.IConvertCredentialCallback
-        public void onSuccess(ConvertCredentialResponse convertCredentialResponse) throws RemoteException {
-        }
+        public void onSuccess(ConvertCredentialResponse convertCredentialResponse)
+                throws RemoteException {}
 
         @Override // android.service.autofill.IConvertCredentialCallback
-        public void onFailure(CharSequence message) throws RemoteException {
-        }
+        public void onFailure(CharSequence message) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface IConvertCredentialCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IConvertCredentialCallback {
+    public abstract static class Stub extends Binder implements IConvertCredentialCallback {
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -71,7 +70,8 @@ public interface IConvertCredentialCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IConvertCredentialCallback.DESCRIPTOR);
             }
@@ -81,12 +81,15 @@ public interface IConvertCredentialCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ConvertCredentialResponse _arg0 = (ConvertCredentialResponse) data.readTypedObject(ConvertCredentialResponse.CREATOR);
+                    ConvertCredentialResponse _arg0 =
+                            (ConvertCredentialResponse)
+                                    data.readTypedObject(ConvertCredentialResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onSuccess(_arg0);
                     return true;
                 case 2:
-                    CharSequence _arg02 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg02 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg02);
                     return true;
@@ -112,7 +115,8 @@ public interface IConvertCredentialCallback extends IInterface {
             }
 
             @Override // android.service.autofill.IConvertCredentialCallback
-            public void onSuccess(ConvertCredentialResponse convertCredentialResponse) throws RemoteException {
+            public void onSuccess(ConvertCredentialResponse convertCredentialResponse)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IConvertCredentialCallback.DESCRIPTOR);

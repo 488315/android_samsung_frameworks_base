@@ -9,17 +9,19 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.PathInterpolator;
+
 import com.android.internal.R;
 import com.android.internal.graphics.ColorUtils;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class SemRecoilDrawable extends LayerDrawable {
@@ -39,7 +41,8 @@ public class SemRecoilDrawable extends LayerDrawable {
     private static final Long PRESS_ANIMATION_DURATION = 100L;
     private static final Long RELEASE_ANIMATION_DURATION = 350L;
     private static final Interpolator PRESS_INTERPOLATOR = new LinearInterpolator();
-    private static final Interpolator RELEASE_INTERPOLATOR = new PathInterpolator(0.17f, 0.17f, 0.67f, 1.0f);
+    private static final Interpolator RELEASE_INTERPOLATOR =
+            new PathInterpolator(0.17f, 0.17f, 0.67f, 1.0f);
 
     public SemRecoilDrawable() {
         super(new Drawable[0]);
@@ -146,12 +149,14 @@ public class SemRecoilDrawable extends LayerDrawable {
     }
 
     private void initAnimator() {
-        this.mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.graphics.drawable.SemRecoilDrawable$$ExternalSyntheticLambda0
-            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                SemRecoilDrawable.this.lambda$initAnimator$0(valueAnimator);
-            }
-        });
+        this.mAnimator.addUpdateListener(
+                new ValueAnimator.AnimatorUpdateListener() { // from class:
+                    // android.graphics.drawable.SemRecoilDrawable$$ExternalSyntheticLambda0
+                    @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        SemRecoilDrawable.this.lambda$initAnimator$0(valueAnimator);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -164,7 +169,8 @@ public class SemRecoilDrawable extends LayerDrawable {
         if (this.mAnimator.isRunning()) {
             this.mAnimator.cancel();
         }
-        this.mAnimator.setFloatValues(((Float) this.mAnimator.getAnimatedValue()).floatValue(), opacity);
+        this.mAnimator.setFloatValues(
+                ((Float) this.mAnimator.getAnimatedValue()).floatValue(), opacity);
         this.mAnimator.setInterpolator(PRESS_INTERPOLATOR);
         this.mAnimator.setDuration(this.mPressDuration);
         this.mAnimator.start();
@@ -185,7 +191,9 @@ public class SemRecoilDrawable extends LayerDrawable {
     }
 
     @Override // android.graphics.drawable.LayerDrawable, android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws IOException, XmlPullParserException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws IOException, XmlPullParserException {
         TypedArray a = r.obtainAttributes(attrs, R.styleable.SemRecoil);
         try {
             try {
@@ -278,7 +286,9 @@ public class SemRecoilDrawable extends LayerDrawable {
     }
 
     private int getAnimatingTintColor() {
-        float alpha = Color.valueOf(this.mTintColor).alpha() * ((Float) this.mAnimator.getAnimatedValue()).floatValue();
+        float alpha =
+                Color.valueOf(this.mTintColor).alpha()
+                        * ((Float) this.mAnimator.getAnimatedValue()).floatValue();
         return ColorUtils.setAlphaComponent(this.mTintColor, (int) (255.0f * alpha));
     }
 

@@ -13,9 +13,11 @@ import android.sec.enterprise.content.SecContentProviderURI;
 import android.text.FontConfig;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.sdk.sfe.SFEffect;
 import com.samsung.android.sdk.sfe.util.SFError;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -38,7 +40,8 @@ public class FontManager {
     private static final String TAG = "SFFontManager";
     private static String mFlipFontPath;
     private static final boolean DEBUG = SFEffect.DEBUG;
-    private static final String sOverrideFont = SemCscFeature.getInstance().getString("CscFeature_SetupWizard_ConfigStepSequenceType");
+    private static final String sOverrideFont =
+            SemCscFeature.getInstance().getString("CscFeature_SetupWizard_ConfigStepSequenceType");
     private static FontConfig mParser = null;
     private static boolean mSetFontConfigFinished = false;
     private static long mLastSystemFontChangedTime = 0;
@@ -70,12 +73,16 @@ public class FontManager {
     private FontConfig getFontConfig() {
         String fontXmlName = "/fonts.xml";
         String sales_code = SystemProperties.get("ro.csc.sales_code");
-        if (sales_code.equals("MYM") || sales_code.equals("BKD") || sales_code.equals("BNG") || sales_code.equals("BCK")) {
+        if (sales_code.equals("MYM")
+                || sales_code.equals("BKD")
+                || sales_code.equals("BNG")
+                || sales_code.equals("BCK")) {
             fontXmlName = "/fonts_additional.xml";
         }
         String fontXmlPath = "/system/etc" + fontXmlName;
         try {
-            FontConfig parser = FontListParser.parse(fontXmlPath, "/system/fonts/", null, null, null, 0L, 0);
+            FontConfig parser =
+                    FontListParser.parse(fontXmlPath, "/system/fonts/", null, null, null, 0L, 0);
             return parser;
         } catch (Exception e) {
             Log.e(TAG, fontXmlPath + " does not exist on this system");
@@ -91,7 +98,14 @@ public class FontManager {
                 }
                 return null;
             }
-            Log.d(TAG, "getSystemFontName fontFamily = " + fontFamily + ", isItalic = " + isItalic + ", isBold = " + isBold);
+            Log.d(
+                    TAG,
+                    "getSystemFontName fontFamily = "
+                            + fontFamily
+                            + ", isItalic = "
+                            + isItalic
+                            + ", isBold = "
+                            + isBold);
             int weight = isBold ? 700 : 400;
             for (FontConfig.FontFamily family : mParser.getFamilies()) {
                 if (family.getName() != null) {
@@ -112,9 +126,11 @@ public class FontManager {
             for (FontConfig.Alias alias : mParser.getAliases()) {
                 if (alias.getWeight() != 0) {
                     for (FontConfig.FontFamily family2 : mParser.getFamilies()) {
-                        if (family2.getName() != null && family2.getName().equals(alias.getOriginal())) {
+                        if (family2.getName() != null
+                                && family2.getName().equals(alias.getOriginal())) {
                             for (FontConfig.Font font2 : family2.getFonts()) {
-                                if (font2.getWeight() == alias.getWeight() && font2.isItalic() == isItalic) {
+                                if (font2.getWeight() == alias.getWeight()
+                                        && font2.isItalic() == isItalic) {
                                     return font2.getFile().getAbsolutePath();
                                 }
                             }
@@ -131,7 +147,9 @@ public class FontManager {
             return null;
         }
         File mtFontsDir = new File("/data/app_fonts/");
-        if (mtFontsDir.isDirectory() && mtFontsDir.list() != null && mtFontsDir.list().length == 0) {
+        if (mtFontsDir.isDirectory()
+                && mtFontsDir.list() != null
+                && mtFontsDir.list().length == 0) {
             return "default";
         }
         try {
@@ -191,7 +209,12 @@ public class FontManager {
         }
         String strFontPath = getFontPathFlipFont(context);
         String strPackageName = strFontPath.substring(strFontPath.lastIndexOf("/") + 1);
-        Log.d(TAG, "getFlipFontPath - strFontPath = " + strFontPath + ", strPackageName = " + strPackageName);
+        Log.d(
+                TAG,
+                "getFlipFontPath - strFontPath = "
+                        + strFontPath
+                        + ", strPackageName = "
+                        + strPackageName);
         if (!strFontPath.endsWith("default")) {
             String strFontPath2 = strFontPath + "/" + DROIDSANS;
             if (DEBUG) {
@@ -209,7 +232,11 @@ public class FontManager {
                 mLastSystemFontChangedTime = timeSansLocFile;
                 return mFlipFontPath;
             }
-            String fontName = strPackageName2.toLowerCase() + MediaMetrics.SEPARATOR + getFontNameFlipFont(context) + ".ttf";
+            String fontName =
+                    strPackageName2.toLowerCase()
+                            + MediaMetrics.SEPARATOR
+                            + getFontNameFlipFont(context)
+                            + ".ttf";
             insertFontData(fontName, readFile(fontFile));
             mFlipFontPath = fontName;
             mLastSystemFontChangedTime = timeSansLocFile;
@@ -223,12 +250,18 @@ public class FontManager {
         return null;
     }
 
-    private String getFlipFontFromPackage(Context context, String strPackageName, String strFontName) {
+    private String getFlipFontFromPackage(
+            Context context, String strPackageName, String strFontName) {
         String packageName = strPackageName.toLowerCase();
         String assetFontPath = FONT_DIRECTORY + strFontName + ".ttf";
         String fontName = packageName + MediaMetrics.SEPARATOR + strFontName + ".ttf";
         if (DEBUG) {
-            Log.d(TAG, "getFlipFontFromPakage : Application pakage name = " + packageName + " , font name = " + strFontName);
+            Log.d(
+                    TAG,
+                    "getFlipFontFromPakage : Application pakage name = "
+                            + packageName
+                            + " , font name = "
+                            + strFontName);
         }
         try {
             PackageManager mPackageManager = context.getPackageManager();
@@ -244,7 +277,13 @@ public class FontManager {
             return fontName;
         } catch (Exception ex) {
             ex.printStackTrace();
-            Uri uriFont = Uri.parse(SecContentProviderURI.CONTENT + packageName + "/fonts/" + strFontName + ".ttf");
+            Uri uriFont =
+                    Uri.parse(
+                            SecContentProviderURI.CONTENT
+                                    + packageName
+                                    + "/fonts/"
+                                    + strFontName
+                                    + ".ttf");
             try {
                 InputStream isFont = context.getContentResolver().openInputStream(uriFont);
                 try {

@@ -1,7 +1,9 @@
 package com.android.server.credentials.metrics;
 
 import android.util.Slog;
+
 import com.android.server.credentials.metrics.shared.ResponseCollective;
+
 import java.util.Map;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -36,7 +38,9 @@ public final class ChosenProviderFinalPhaseMetric {
         if (j >= j2) {
             return (int) ((j - j2) / 1000);
         }
-        Slog.i("ChosenFinalPhaseMetric", "The timestamp is before service started, falling back to default int");
+        Slog.i(
+                "ChosenFinalPhaseMetric",
+                "The timestamp is before service started, falling back to default int");
         return -1;
     }
 }

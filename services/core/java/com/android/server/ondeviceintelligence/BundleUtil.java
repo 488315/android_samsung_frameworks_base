@@ -17,7 +17,9 @@ import android.util.Log;
 /* loaded from: classes2.dex */
 public abstract class BundleUtil {
     public static boolean canMarshall(Object obj) {
-        return (obj instanceof byte[]) || (obj instanceof PersistableBundle) || PersistableBundle.isValidType(obj);
+        return (obj instanceof byte[])
+                || (obj instanceof PersistableBundle)
+                || PersistableBundle.isValidType(obj);
     }
 
     public static void ensureValidBundle(Bundle bundle) {
@@ -47,7 +49,9 @@ public abstract class BundleUtil {
                         validateBitmap((Bitmap) obj);
                     } else {
                         if (!(obj instanceof Parcelable[])) {
-                            throw new BadParcelableException("Unsupported Parcelable type encountered in the Bundle: ".concat(obj.getClass().getSimpleName()));
+                            throw new BadParcelableException(
+                                    "Unsupported Parcelable type encountered in the Bundle: "
+                                            .concat(obj.getClass().getSimpleName()));
                         }
                         validateParcelableArray((Parcelable[]) obj);
                     }
@@ -73,7 +77,9 @@ public abstract class BundleUtil {
                     validateBitmap((Bitmap) obj);
                 } else {
                     if (!(obj instanceof Parcelable[])) {
-                        throw new BadParcelableException("Unsupported Parcelable type encountered in the Bundle: ".concat(obj.getClass().getSimpleName()));
+                        throw new BadParcelableException(
+                                "Unsupported Parcelable type encountered in the Bundle: "
+                                        .concat(obj.getClass().getSimpleName()));
                     }
                     validateParcelableArray((Parcelable[]) obj);
                 }
@@ -92,7 +98,9 @@ public abstract class BundleUtil {
                     continue;
                 } else {
                     if (!(obj instanceof ParcelFileDescriptor)) {
-                        throw new BadParcelableException("Unsupported Parcelable type encountered in the Bundle: ".concat(obj.getClass().getSimpleName()));
+                        throw new BadParcelableException(
+                                "Unsupported Parcelable type encountered in the Bundle: "
+                                        .concat(obj.getClass().getSimpleName()));
                     }
                     validatePfdReadOnly((ParcelFileDescriptor) obj);
                 }
@@ -122,7 +130,8 @@ public abstract class BundleUtil {
 
     public static void validateBitmap(Bitmap bitmap) {
         if (bitmap.isMutable()) {
-            throw new BadParcelableException("Encountered a mutable Bitmap in the Bundle at key : " + bitmap);
+            throw new BadParcelableException(
+                    "Encountered a mutable Bitmap in the Bundle at key : " + bitmap);
         }
     }
 
@@ -151,9 +160,12 @@ public abstract class BundleUtil {
             return;
         }
         try {
-            if ((Os.fcntlInt(parcelFileDescriptor.getFileDescriptor(), OsConstants.F_GETFL, 0) & OsConstants.O_ACCMODE) == OsConstants.O_RDONLY) {
+            if ((Os.fcntlInt(parcelFileDescriptor.getFileDescriptor(), OsConstants.F_GETFL, 0)
+                            & OsConstants.O_ACCMODE)
+                    == OsConstants.O_RDONLY) {
             } else {
-                throw new BadParcelableException("Bundle contains a parcel file descriptor which is not read-only.");
+                throw new BadParcelableException(
+                        "Bundle contains a parcel file descriptor which is not read-only.");
             }
         } catch (ErrnoException e) {
             throw new BadParcelableException("Invalid File descriptor passed in the Bundle.", e);

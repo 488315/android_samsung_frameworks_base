@@ -1,6 +1,7 @@
 package com.android.server.asks;
 
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -12,11 +13,20 @@ public final class PolicyConvert {
 
     public static void MakeString(ArrayList arrayList, String str, String str2, Map map) {
         for (int i = 0; i < arrayList.size(); i++) {
-            ArrayList arrayList2 = map.containsKey(arrayList.get(i)) ? (ArrayList) map.get(arrayList.get(i)) : new ArrayList();
+            ArrayList arrayList2 =
+                    map.containsKey(arrayList.get(i))
+                            ? (ArrayList) map.get(arrayList.get(i))
+                            : new ArrayList();
             if ("DELETE".equals(str)) {
                 arrayList2.add("        <delete version=\"00000000\" datelimit=\"" + str2 + "\"/>");
             } else {
-                arrayList2.add(XmlUtils$$ExternalSyntheticOutline0.m("        <restrict version=\"00000000\" type=\"", str, "\" datelimit=\"", str2, "\" from=\"Token\"/>"));
+                arrayList2.add(
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "        <restrict version=\"00000000\" type=\"",
+                                str,
+                                "\" datelimit=\"",
+                                str2,
+                                "\" from=\"Token\"/>"));
             }
             map.put((String) arrayList.get(i), arrayList2);
         }
@@ -33,38 +43,38 @@ public final class PolicyConvert {
 
     /* JADX WARN: Can't wrap try/catch for region: R(15:0|1|(5:2|3|(5:5|7|8|9|(3:10|11|(7:13|(5:15|16|17|18|(4:433|434|435|436)(4:20|21|22|23))(1:446)|24|25|(1:27)(2:49|(2:51|52))|(8:33|34|35|(3:37|38|39)(1:48)|40|(2:42|(1:44)(1:45))|46|47)(3:29|30|31)|32)(2:447|448)))(1:476)|(2:412|413)|(2:55|56))|(3:59|(7:62|(1:64)(1:71)|65|(2:68|66)|69|70|60)|72)(0)|73|74|(2:75|76)|(18:(27:78|80|81|82|(3:83|84|(1:369)(3:86|(3:108|109|(2:111|112)(1:113))(3:88|89|(3:105|106|107)(3:91|92|(5:94|95|(2:97|(2:99|100))|101|102)(1:104)))|103))|(2:364|365)|(2:117|118)|(2:121|(2:122|(3:124|(2:126|127)(2:129|130)|128)(1:131)))(0)|132|133|134|135|(5:137|139|140|141|(3:142|(3:143|144|(5:146|(3:201|202|(1:1)(3:206|207|208))(2:148|(2:199|200)(2:150|(2:197|198)(2:152|(4:189|190|(1:193)|(1:196))(3:154|(5:156|157|(1:162)|163|164)(3:166|167|(1:177)(2:169|(3:171|172|173)(1:174)))|165))))|175|176|165)(2:328|329))|185))(1:355)|(2:322|323)|(2:321|216)|(4:219|(3:221|(2:224|222)|225)|226|(3:228|(2:231|229)|232))|233|(4:236|(2:239|237)|240|234)|241|242|243|244|(7:246|247|248|(5:251|(2:254|252)|255|256|249)|257|258|259)(1:306)|(2:280|281)|(10:262|(1:264)|265|(1:267)|268|(1:270)|271|(1:273)|274|(1:276))|277|278)(1:403)|134|135|(0)(0)|(0)|(0)|(0)|233|(1:234)|241|242|243|244|(0)(0)|(0)|(0)|277|278)|114|(0)|(0)|(0)(0)|132|133|(1:(0))) */
     /* JADX WARN: Code restructure failed: missing block: B:179:0x039b, code lost:
-    
-        if (r0.length() <= 0) goto L473;
-     */
+
+       if (r0.length() <= 0) goto L473;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:180:0x039d, code lost:
-    
-        if (r13 == null) goto L474;
-     */
+
+       if (r13 == null) goto L474;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:182:0x03a3, code lost:
-    
-        if (r13.size() <= 0) goto L475;
-     */
+
+       if (r13.size() <= 0) goto L475;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:183:0x03a5, code lost:
-    
-        r5.put(r0, r13);
-     */
+
+       r5.put(r0, r13);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:317:0x032c, code lost:
-    
-        r6 = null;
-     */
+
+       r6 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:318:0x0332, code lost:
-    
-        r11 = 0;
-        r9 = r9;
-     */
+
+       r11 = 0;
+       r9 = r9;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:362:0x03e4, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:363:0x03e5, code lost:
-    
-        r0.printStackTrace();
-     */
+
+       r0.printStackTrace();
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:117:0x026d A[Catch: IOException -> 0x0271, TRY_ENTER, TRY_LEAVE, TryCatch #8 {IOException -> 0x0271, blocks: (B:117:0x026d, B:376:0x0289), top: B:75:0x01e0 }] */
     /* JADX WARN: Removed duplicated region for block: B:121:0x028e  */
@@ -243,6 +253,8 @@ public final class PolicyConvert {
             Method dump skipped, instructions count: 1543
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.asks.PolicyConvert.convert(java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.asks.PolicyConvert.convert(java.lang.String):boolean");
     }
 }

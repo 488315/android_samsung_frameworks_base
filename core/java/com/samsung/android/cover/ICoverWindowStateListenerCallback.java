@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ICoverWindowStateListenerCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.cover.ICoverWindowStateListenerCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.cover.ICoverWindowStateListenerCallback";
 
     void onCoverAppCovered(boolean z) throws RemoteException;
 
     public static class Default implements ICoverWindowStateListenerCallback {
         @Override // com.samsung.android.cover.ICoverWindowStateListenerCallback
-        public void onCoverAppCovered(boolean covered) throws RemoteException {
-        }
+        public void onCoverAppCovered(boolean covered) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ICoverWindowStateListenerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICoverWindowStateListenerCallback {
+    public abstract static class Stub extends Binder implements ICoverWindowStateListenerCallback {
         static final int TRANSACTION_onCoverAppCovered = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ICoverWindowStateListenerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICoverWindowStateListenerCallback.DESCRIPTOR);
             }

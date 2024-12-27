@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.jcajce.provider.config;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter;
+
 import java.util.Map;
 
 /* loaded from: classes5.dex */
@@ -19,7 +20,9 @@ public interface ConfigurableProvider {
 
     void addAttributes(String str, Map<String, String> map);
 
-    void addKeyInfoConverter(ASN1ObjectIdentifier aSN1ObjectIdentifier, AsymmetricKeyInfoConverter asymmetricKeyInfoConverter);
+    void addKeyInfoConverter(
+            ASN1ObjectIdentifier aSN1ObjectIdentifier,
+            AsymmetricKeyInfoConverter asymmetricKeyInfoConverter);
 
     void addPrivateAlgorithm(String str, ASN1ObjectIdentifier aSN1ObjectIdentifier, String str2);
 

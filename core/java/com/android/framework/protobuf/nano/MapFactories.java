@@ -20,8 +20,7 @@ public final class MapFactories {
     }
 
     private static class DefaultMapFactory implements MapFactory {
-        private DefaultMapFactory() {
-        }
+        private DefaultMapFactory() {}
 
         @Override // com.android.framework.protobuf.nano.MapFactories.MapFactory
         public <K, V> Map<K, V> forMap(Map<K, V> oldMap) {
@@ -32,6 +31,5 @@ public final class MapFactories {
         }
     }
 
-    private MapFactories() {
-    }
+    private MapFactories() {}
 }

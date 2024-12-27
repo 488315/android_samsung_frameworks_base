@@ -2,6 +2,7 @@ package com.samsung.android.authnrservice.service;
 
 import android.content.Context;
 import android.hardware.fingerprint.FingerprintManager;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
@@ -16,7 +17,8 @@ public final class FingerprintOperation {
 
     public FingerprintOperation(Context context) {
         this.mFingerprintManager = null;
-        this.mFingerprintManager = (FingerprintManager) context.getSystemService(FingerprintManager.class);
+        this.mFingerprintManager =
+                (FingerprintManager) context.getSystemService(FingerprintManager.class);
         this.mUserId = context.getUserId();
     }
 
@@ -42,7 +44,8 @@ public final class FingerprintOperation {
         allocate.putShort((short) 2);
         allocate.putShort((short) bArr.length);
         allocate.put(bArr);
-        byte[] sendRequest = sendRequest(Arrays.copyOfRange(allocate.array(), 0, allocate.position()));
+        byte[] sendRequest =
+                sendRequest(Arrays.copyOfRange(allocate.array(), 0, allocate.position()));
         if (sendRequest != null && sendRequest.length != 0) {
             ByteBuffer wrap = ByteBuffer.wrap(sendRequest);
             wrap.order(byteOrder);
@@ -72,7 +75,8 @@ public final class FingerprintOperation {
             System.arraycopy("authnr".getBytes(StandardCharsets.UTF_8), 0, bArr2, 8, 6);
             System.arraycopy(bArr, 0, bArr2, 14, bArr.length);
             byte[] bArr3 = new byte[10240];
-            int semProcessFido = this.mFingerprintManager.semProcessFido(this.mUserId, bArr2, bArr3);
+            int semProcessFido =
+                    this.mFingerprintManager.semProcessFido(this.mUserId, bArr2, bArr3);
             if (semProcessFido == 0) {
                 AuthnrLog.e("FPO", "request failed");
                 return null;
@@ -90,7 +94,8 @@ public final class FingerprintOperation {
         allocate.putShort((short) 1);
         allocate.putShort((short) bArr.length);
         allocate.put(bArr);
-        byte[] sendRequest = sendRequest(Arrays.copyOfRange(allocate.array(), 0, allocate.position()));
+        byte[] sendRequest =
+                sendRequest(Arrays.copyOfRange(allocate.array(), 0, allocate.position()));
         if (sendRequest != null && sendRequest.length != 0) {
             ByteBuffer wrap = ByteBuffer.wrap(sendRequest);
             wrap.order(byteOrder);

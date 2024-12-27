@@ -11,11 +11,13 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.server.ServiceThread;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
-import com.android.server.desktopmode.StateManager;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.desktopmode.SemDesktopModeState;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -53,19 +55,27 @@ public final class SettingsHelper {
         public final void onChange(boolean z, Uri uri, int i) {
             super.onChange(z, uri, i);
             String lastPathSegment = uri.getLastPathSegment();
-            String settingsAsUser = DesktopModeSettings.getSettingsAsUser(SettingsHelper.this.mResolver, lastPathSegment, (String) null, i);
+            String settingsAsUser =
+                    DesktopModeSettings.getSettingsAsUser(
+                            SettingsHelper.this.mResolver, lastPathSegment, (String) null, i);
             if (DesktopModeFeature.DEBUG) {
                 Map map = SettingsHelper.KEYS_TO_MIGRATE;
-                StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i, "Setting ", lastPathSegment, " for user ", " changed to=");
+                StringBuilder m =
+                        StorageManagerService$$ExternalSyntheticOutline0.m(
+                                i, "Setting ", lastPathSegment, " for user ", " changed to=");
                 m.append(settingsAsUser);
                 Log.d("[DMS]SettingsHelper", m.toString());
             }
-            if (i != 0 && ((ArraySet) DesktopModeSettings.SETTINGS_GLOBAL_KEYS).contains(lastPathSegment)) {
-                DesktopModeSettings.setSettingsAsUser(SettingsHelper.this.mResolver, lastPathSegment, settingsAsUser, 0);
+            if (i != 0
+                    && ((ArraySet) DesktopModeSettings.SETTINGS_GLOBAL_KEYS)
+                            .contains(lastPathSegment)) {
+                DesktopModeSettings.setSettingsAsUser(
+                        SettingsHelper.this.mResolver, lastPathSegment, settingsAsUser, 0);
             }
             Iterator it = ((CopyOnWriteArrayList) SettingsHelper.this.mListeners).iterator();
             while (it.hasNext()) {
-                OnSettingChangedListener onSettingChangedListener = (OnSettingChangedListener) it.next();
+                OnSettingChangedListener onSettingChangedListener =
+                        (OnSettingChangedListener) it.next();
                 if (lastPathSegment.equals(onSettingChangedListener.mInterestedKey)) {
                     onSettingChangedListener.onSettingChanged(settingsAsUser);
                 }
@@ -91,63 +101,86 @@ public final class SettingsHelper {
         arrayMap2.put("touch_keyboard", "true");
     }
 
-    public SettingsHelper(Context context, ServiceThread serviceThread, IStateManager iStateManager, Injector injector) {
-        StateManager.StateListener stateListener = new StateManager.StateListener() { // from class: com.android.server.desktopmode.SettingsHelper.1
-            @Override // com.android.server.desktopmode.StateManager.StateListener
-            public final void onDualModeStopLoadingScreen(boolean z) {
-                if (z) {
-                    SettingsHelper.this.setToDefaultIfNoSettings();
-                }
-            }
-
-            @Override // com.android.server.desktopmode.StateManager.StateListener
-            public final void onStopLoadingScreen(boolean z) {
-                if (z) {
-                    SettingsHelper.this.setToDefaultIfNoSettings();
-                }
-            }
-
-            @Override // com.android.server.desktopmode.StateManager.StateListener
-            public final void onUserChanged(StateManager.InternalState internalState) {
-                int i = internalState.mCurrentUserId;
-                SettingsHelper settingsHelper = SettingsHelper.this;
-                if (i != 0) {
-                    ContentResolver contentResolver = settingsHelper.mResolver;
-                    Iterator it = ((ArraySet) DesktopModeSettings.SETTINGS_GLOBAL_KEYS).iterator();
-                    while (it.hasNext()) {
-                        String str = (String) it.next();
-                        String settingsAsUser = DesktopModeSettings.getSettingsAsUser(contentResolver, str, (String) null, 0);
-                        if (settingsAsUser != null) {
-                            DesktopModeSettings.setSettingsAsUser(contentResolver, str, settingsAsUser, i);
+    public SettingsHelper(
+            Context context,
+            ServiceThread serviceThread,
+            IStateManager iStateManager,
+            Injector injector) {
+        StateManager.StateListener stateListener =
+                new StateManager
+                        .StateListener() { // from class:
+                                           // com.android.server.desktopmode.SettingsHelper.1
+                    @Override // com.android.server.desktopmode.StateManager.StateListener
+                    public final void onDualModeStopLoadingScreen(boolean z) {
+                        if (z) {
+                            SettingsHelper.this.setToDefaultIfNoSettings();
                         }
                     }
-                } else {
-                    settingsHelper.getClass();
-                }
-                DesktopModeSettings.sCurrentUserId = i;
-                if (settingsHelper.mContext.getPackageManager().isUpgrade() && i == 0) {
-                    for (Map.Entry entry : ((ArrayMap) SettingsHelper.KEYS_TO_MIGRATE).entrySet()) {
-                        String str2 = "persist.service.dex." + ((String) entry.getKey());
-                        String str3 = SystemProperties.get(str2, "");
-                        if (!"".equals(str3)) {
-                            DesktopModeSettings.setSettings(settingsHelper.mResolver, (String) entry.getValue(), str3);
-                            SystemProperties.set(str2, (String) null);
+
+                    @Override // com.android.server.desktopmode.StateManager.StateListener
+                    public final void onStopLoadingScreen(boolean z) {
+                        if (z) {
+                            SettingsHelper.this.setToDefaultIfNoSettings();
                         }
                     }
-                }
-                int i2 = internalState.mDesktopModeState.enabled;
-                settingsHelper.backupOrRestoreSettings(i2 == 3 || i2 == 4, internalState, internalState.mCurrentUserId);
-                if (DesktopModeFeature.SUPPORT_SFC) {
-                    settingsHelper.backupOrRestoreSuperFastCharging(internalState.mCurrentUserId, internalState.mDockState.isDexPad());
-                }
-            }
-        };
+
+                    @Override // com.android.server.desktopmode.StateManager.StateListener
+                    public final void onUserChanged(StateManager.InternalState internalState) {
+                        int i = internalState.mCurrentUserId;
+                        SettingsHelper settingsHelper = SettingsHelper.this;
+                        if (i != 0) {
+                            ContentResolver contentResolver = settingsHelper.mResolver;
+                            Iterator it =
+                                    ((ArraySet) DesktopModeSettings.SETTINGS_GLOBAL_KEYS)
+                                            .iterator();
+                            while (it.hasNext()) {
+                                String str = (String) it.next();
+                                String settingsAsUser =
+                                        DesktopModeSettings.getSettingsAsUser(
+                                                contentResolver, str, (String) null, 0);
+                                if (settingsAsUser != null) {
+                                    DesktopModeSettings.setSettingsAsUser(
+                                            contentResolver, str, settingsAsUser, i);
+                                }
+                            }
+                        } else {
+                            settingsHelper.getClass();
+                        }
+                        DesktopModeSettings.sCurrentUserId = i;
+                        if (settingsHelper.mContext.getPackageManager().isUpgrade() && i == 0) {
+                            for (Map.Entry entry :
+                                    ((ArrayMap) SettingsHelper.KEYS_TO_MIGRATE).entrySet()) {
+                                String str2 = "persist.service.dex." + ((String) entry.getKey());
+                                String str3 = SystemProperties.get(str2, "");
+                                if (!"".equals(str3)) {
+                                    DesktopModeSettings.setSettings(
+                                            settingsHelper.mResolver,
+                                            (String) entry.getValue(),
+                                            str3);
+                                    SystemProperties.set(str2, (String) null);
+                                }
+                            }
+                        }
+                        int i2 = internalState.mDesktopModeState.enabled;
+                        settingsHelper.backupOrRestoreSettings(
+                                i2 == 3 || i2 == 4, internalState, internalState.mCurrentUserId);
+                        if (DesktopModeFeature.SUPPORT_SFC) {
+                            settingsHelper.backupOrRestoreSuperFastCharging(
+                                    internalState.mCurrentUserId,
+                                    internalState.mDockState.isDexPad());
+                        }
+                    }
+                };
         this.mContext = context;
         ContentResolver contentResolver = context.getContentResolver();
         this.mResolver = contentResolver;
         ((StateManager) iStateManager).registerListener(stateListener);
         this.mInjector = injector;
-        contentResolver.registerContentObserver(DesktopModeSettings.CONTENT_URI, true, new SettingsObserver(new Handler(serviceThread.getLooper())), -1);
+        contentResolver.registerContentObserver(
+                DesktopModeSettings.CONTENT_URI,
+                true,
+                new SettingsObserver(new Handler(serviceThread.getLooper())),
+                -1);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:62:0x0189  */
@@ -156,49 +189,71 @@ public final class SettingsHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void backupOrRestoreSettings(boolean r10, com.android.server.desktopmode.StateManager.InternalState r11, int r12) {
+    public final void backupOrRestoreSettings(
+            boolean r10, com.android.server.desktopmode.StateManager.InternalState r11, int r12) {
         /*
             Method dump skipped, instructions count: 448
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.desktopmode.SettingsHelper.backupOrRestoreSettings(boolean, com.android.server.desktopmode.StateManager$InternalState, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.desktopmode.SettingsHelper.backupOrRestoreSettings(boolean,"
+                    + " com.android.server.desktopmode.StateManager$InternalState, int):void");
     }
 
     public final void backupOrRestoreSuperFastCharging(int i, boolean z) {
         this.mInjector.getClass();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         if (z) {
-            int intForUser = Settings.System.getIntForUser(this.mResolver, "super_fast_charging", 1, i);
+            int intForUser =
+                    Settings.System.getIntForUser(this.mResolver, "super_fast_charging", 1, i);
             boolean z2 = DesktopModeFeature.DEBUG;
             if (z2) {
-                DesktopModeService$$ExternalSyntheticOutline0.m(intForUser, "backupOrRestoreFastCharging(), current normalSfcValue=", "[DMS]SettingsHelper");
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        intForUser,
+                        "backupOrRestoreFastCharging(), current normalSfcValue=",
+                        "[DMS]SettingsHelper");
             }
             if (intForUser == 0) {
-                DesktopModeSettings.setSettingsAsUser(this.mResolver, "super_fast_charging_backup", intForUser, i);
+                DesktopModeSettings.setSettingsAsUser(
+                        this.mResolver, "super_fast_charging_backup", intForUser, i);
                 Settings.System.putIntForUser(this.mResolver, "super_fast_charging", 1, i);
                 if (z2) {
-                    Log.d("[DMS]SettingsHelper", "backupOrRestoreFastCharging(), Enabling super fast charging");
+                    Log.d(
+                            "[DMS]SettingsHelper",
+                            "backupOrRestoreFastCharging(), Enabling super fast charging");
                 }
             }
         } else {
-            int settingsAsUser = DesktopModeSettings.getSettingsAsUser(this.mResolver, "super_fast_charging_backup", 1, i);
+            int settingsAsUser =
+                    DesktopModeSettings.getSettingsAsUser(
+                            this.mResolver, "super_fast_charging_backup", 1, i);
             if (settingsAsUser == 0) {
                 if (DesktopModeFeature.DEBUG) {
-                    DesktopModeService$$ExternalSyntheticOutline0.m(settingsAsUser, "backupOrRestoreFastCharging(), Restoring backed up value=", "[DMS]SettingsHelper");
+                    DesktopModeService$$ExternalSyntheticOutline0.m(
+                            settingsAsUser,
+                            "backupOrRestoreFastCharging(), Restoring backed up value=",
+                            "[DMS]SettingsHelper");
                 }
                 Settings.System.putIntForUser(this.mResolver, "super_fast_charging", 0, i);
-                DesktopModeSettings.deleteSettingsAsUser(this.mResolver, "super_fast_charging_backup", i);
+                DesktopModeSettings.deleteSettingsAsUser(
+                        this.mResolver, "super_fast_charging_backup", i);
             }
         }
         Binder.restoreCallingIdentity(clearCallingIdentity);
     }
 
-    public final void clearSettingsByLauncherDataCleared(StateManager.InternalState internalState, int i) {
+    public final void clearSettingsByLauncherDataCleared(
+            StateManager.InternalState internalState, int i) {
         if (DesktopModeFeature.DEBUG) {
             Log.d("[DMS]SettingsHelper", "clearSettingsByLauncherDataCleared()");
         }
         try {
-            this.mResolver.call(DesktopModeSettings.getUriAsUser(i), "clearSettings", (String) null, (Bundle) null);
+            this.mResolver.call(
+                    DesktopModeSettings.getUriAsUser(i),
+                    "clearSettings",
+                    (String) null,
+                    (Bundle) null);
         } catch (IllegalArgumentException e) {
             Log.e("[DMS]DesktopModeSettings", "Failed to clear Dex settings", e);
         }
@@ -206,16 +261,26 @@ public final class SettingsHelper {
         if (semDesktopModeState.enabled == 4) {
             if (semDesktopModeState.getDisplayType() == 101) {
                 if (DesktopModeFeature.DEBUG) {
-                    Log.d("[DMS]SettingsHelper", "set Dex default on virtual keyboard in standalone");
+                    Log.d(
+                            "[DMS]SettingsHelper",
+                            "set Dex default on virtual keyboard in standalone");
                 }
                 Settings.Secure.putIntForUser(this.mResolver, "show_ime_with_hard_keyboard", 0, i);
             } else if (semDesktopModeState.getDisplayType() == 102) {
                 if (DesktopModeFeature.DEBUG) {
-                    Log.d("[DMS]SettingsHelper", "set the setting for touchkeyboard, isDexStationCoverAttached=" + internalState.isDexStationConnectedWithFlipCover());
+                    Log.d(
+                            "[DMS]SettingsHelper",
+                            "set the setting for touchkeyboard, isDexStationCoverAttached="
+                                    + internalState.isDexStationConnectedWithFlipCover());
                 }
-                DesktopModeSettings.setSettingsAsUser(this.mResolver, "touch_keyboard", !internalState.isDexStationConnectedWithFlipCover(), i);
+                DesktopModeSettings.setSettingsAsUser(
+                        this.mResolver,
+                        "touch_keyboard",
+                        !internalState.isDexStationConnectedWithFlipCover(),
+                        i);
                 if (internalState.isDexStationConnectedWithFlipCover()) {
-                    DesktopModeSettings.setSettingsAsUser(this.mResolver, "touch_keyboard_backup", true, i);
+                    DesktopModeSettings.setSettingsAsUser(
+                            this.mResolver, "touch_keyboard_backup", true, i);
                 }
                 setToDefaultIfNoSettings();
             }
@@ -224,7 +289,8 @@ public final class SettingsHelper {
     }
 
     public final void registerListener(OnSettingChangedListener onSettingChangedListener) {
-        if (onSettingChangedListener == null || ((CopyOnWriteArrayList) this.mListeners).contains(onSettingChangedListener)) {
+        if (onSettingChangedListener == null
+                || ((CopyOnWriteArrayList) this.mListeners).contains(onSettingChangedListener)) {
             return;
         }
         ((CopyOnWriteArrayList) this.mListeners).add(onSettingChangedListener);
@@ -281,13 +347,17 @@ public final class SettingsHelper {
         L60:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.desktopmode.SettingsHelper.setPsmValue(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.desktopmode.SettingsHelper.setPsmValue(int):void");
     }
 
     public final void setToDefaultIfNoSettings() {
         for (Map.Entry entry : ((ArrayMap) DEFAULT_VALUES).entrySet()) {
             String str = (String) entry.getKey();
-            if (DesktopModeSettings.getSettingsAsUser(this.mResolver, str, (String) null, DesktopModeSettings.sCurrentUserId) == null) {
+            if (DesktopModeSettings.getSettingsAsUser(
+                            this.mResolver, str, (String) null, DesktopModeSettings.sCurrentUserId)
+                    == null) {
                 DesktopModeSettings.setSettings(this.mResolver, str, (String) entry.getValue());
             }
         }

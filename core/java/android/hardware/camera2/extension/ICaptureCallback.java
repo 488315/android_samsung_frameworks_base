@@ -11,7 +11,8 @@ import android.os.RemoteException;
 public interface ICaptureCallback extends IInterface {
     public static final String DESCRIPTOR = "android.hardware.camera2.extension.ICaptureCallback";
 
-    void onCaptureCompleted(long j, int i, CameraMetadataNative cameraMetadataNative) throws RemoteException;
+    void onCaptureCompleted(long j, int i, CameraMetadataNative cameraMetadataNative)
+            throws RemoteException;
 
     void onCaptureFailed(int i) throws RemoteException;
 
@@ -29,36 +30,32 @@ public interface ICaptureCallback extends IInterface {
 
     public static class Default implements ICaptureCallback {
         @Override // android.hardware.camera2.extension.ICaptureCallback
-        public void onCaptureStarted(int captureSequenceId, long timestamp) throws RemoteException {
-        }
+        public void onCaptureStarted(int captureSequenceId, long timestamp)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICaptureCallback
-        public void onCaptureProcessStarted(int captureSequenceId) throws RemoteException {
-        }
+        public void onCaptureProcessStarted(int captureSequenceId) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICaptureCallback
-        public void onCaptureFailed(int captureSequenceId) throws RemoteException {
-        }
+        public void onCaptureFailed(int captureSequenceId) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICaptureCallback
-        public void onCaptureSequenceCompleted(int captureSequenceId) throws RemoteException {
-        }
+        public void onCaptureSequenceCompleted(int captureSequenceId) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICaptureCallback
-        public void onCaptureSequenceAborted(int captureSequenceId) throws RemoteException {
-        }
+        public void onCaptureSequenceAborted(int captureSequenceId) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICaptureCallback
-        public void onCaptureCompleted(long shutterTimestamp, int requestId, CameraMetadataNative results) throws RemoteException {
-        }
+        public void onCaptureCompleted(
+                long shutterTimestamp, int requestId, CameraMetadataNative results)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICaptureCallback
-        public void onCaptureProcessProgressed(int progress) throws RemoteException {
-        }
+        public void onCaptureProcessProgressed(int progress) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICaptureCallback
-        public void onCaptureProcessFailed(int captureSequenceId, int captureFailureReason) throws RemoteException {
-        }
+        public void onCaptureProcessFailed(int captureSequenceId, int captureFailureReason)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -66,7 +63,7 @@ public interface ICaptureCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICaptureCallback {
+    public abstract static class Stub extends Binder implements ICaptureCallback {
         static final int TRANSACTION_onCaptureCompleted = 6;
         static final int TRANSACTION_onCaptureFailed = 3;
         static final int TRANSACTION_onCaptureProcessFailed = 8;
@@ -125,7 +122,8 @@ public interface ICaptureCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICaptureCallback.DESCRIPTOR);
             }
@@ -168,7 +166,9 @@ public interface ICaptureCallback extends IInterface {
                 case 6:
                     long _arg06 = data.readLong();
                     int _arg12 = data.readInt();
-                    CameraMetadataNative _arg2 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg2 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     data.enforceNoDataAvail();
                     onCaptureCompleted(_arg06, _arg12, _arg2);
                     reply.writeNoException();
@@ -208,7 +208,8 @@ public interface ICaptureCallback extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.ICaptureCallback
-            public void onCaptureStarted(int captureSequenceId, long timestamp) throws RemoteException {
+            public void onCaptureStarted(int captureSequenceId, long timestamp)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -284,7 +285,9 @@ public interface ICaptureCallback extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.ICaptureCallback
-            public void onCaptureCompleted(long shutterTimestamp, int requestId, CameraMetadataNative results) throws RemoteException {
+            public void onCaptureCompleted(
+                    long shutterTimestamp, int requestId, CameraMetadataNative results)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -316,7 +319,8 @@ public interface ICaptureCallback extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.ICaptureCallback
-            public void onCaptureProcessFailed(int captureSequenceId, int captureFailureReason) throws RemoteException {
+            public void onCaptureProcessFailed(int captureSequenceId, int captureFailureReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

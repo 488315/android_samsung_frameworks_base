@@ -1,11 +1,11 @@
 package android.media;
 
 import android.annotation.SystemApi;
-import android.media.RouteDiscoveryPreference;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,22 +18,26 @@ import java.util.stream.Collectors;
 
 /* loaded from: classes2.dex */
 public final class RouteDiscoveryPreference implements Parcelable {
-    public static final Parcelable.Creator<RouteDiscoveryPreference> CREATOR = new Parcelable.Creator<RouteDiscoveryPreference>() { // from class: android.media.RouteDiscoveryPreference.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RouteDiscoveryPreference createFromParcel(Parcel in) {
-            return new RouteDiscoveryPreference(in);
-        }
+    public static final Parcelable.Creator<RouteDiscoveryPreference> CREATOR =
+            new Parcelable.Creator<RouteDiscoveryPreference>() { // from class:
+                // android.media.RouteDiscoveryPreference.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RouteDiscoveryPreference createFromParcel(Parcel in) {
+                    return new RouteDiscoveryPreference(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RouteDiscoveryPreference[] newArray(int size) {
-            return new RouteDiscoveryPreference[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RouteDiscoveryPreference[] newArray(int size) {
+                    return new RouteDiscoveryPreference[size];
+                }
+            };
 
     @SystemApi
-    public static final RouteDiscoveryPreference EMPTY = new Builder(Collections.emptyList(), false).build();
+    public static final RouteDiscoveryPreference EMPTY =
+            new Builder(Collections.emptyList(), false).build();
+
     private final List<String> mAllowedPackages;
     private final Bundle mExtras;
     private final List<String> mPackageOrder;
@@ -105,7 +109,15 @@ public final class RouteDiscoveryPreference implements Parcelable {
     }
 
     public String toString() {
-        StringBuilder result = new StringBuilder().append("RouteDiscoveryRequest{ ").append("preferredFeatures={").append(String.join(", ", this.mPreferredFeatures)).append("}").append(", activeScan=").append(this.mShouldPerformActiveScan).append(" }");
+        StringBuilder result =
+                new StringBuilder()
+                        .append("RouteDiscoveryRequest{ ")
+                        .append("preferredFeatures={")
+                        .append(String.join(", ", this.mPreferredFeatures))
+                        .append("}")
+                        .append(", activeScan=")
+                        .append(this.mShouldPerformActiveScan)
+                        .append(" }");
         return result.toString();
     }
 
@@ -117,11 +129,18 @@ public final class RouteDiscoveryPreference implements Parcelable {
             return false;
         }
         RouteDiscoveryPreference other = (RouteDiscoveryPreference) o;
-        return Objects.equals(this.mPreferredFeatures, other.mPreferredFeatures) && Objects.equals(this.mPackageOrder, other.mPackageOrder) && Objects.equals(this.mAllowedPackages, other.mAllowedPackages) && this.mShouldPerformActiveScan == other.mShouldPerformActiveScan;
+        return Objects.equals(this.mPreferredFeatures, other.mPreferredFeatures)
+                && Objects.equals(this.mPackageOrder, other.mPackageOrder)
+                && Objects.equals(this.mAllowedPackages, other.mAllowedPackages)
+                && this.mShouldPerformActiveScan == other.mShouldPerformActiveScan;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mPreferredFeatures, this.mPackageOrder, this.mAllowedPackages, Boolean.valueOf(this.mShouldPerformActiveScan));
+        return Objects.hash(
+                this.mPreferredFeatures,
+                this.mPackageOrder,
+                this.mAllowedPackages,
+                Boolean.valueOf(this.mShouldPerformActiveScan));
     }
 
     public static final class Builder {
@@ -133,12 +152,19 @@ public final class RouteDiscoveryPreference implements Parcelable {
 
         public Builder(List<String> preferredFeatures, boolean activeScan) {
             Objects.requireNonNull(preferredFeatures, "preferredFeatures must not be null");
-            this.mPreferredFeatures = (List) preferredFeatures.stream().filter(new Predicate() { // from class: android.media.RouteDiscoveryPreference$Builder$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return RouteDiscoveryPreference.Builder.lambda$new$0((String) obj);
-                }
-            }).collect(Collectors.toList());
+            this.mPreferredFeatures =
+                    (List)
+                            preferredFeatures.stream()
+                                    .filter(
+                                            new Predicate() { // from class:
+                                                // android.media.RouteDiscoveryPreference$Builder$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Predicate
+                                                public final boolean test(Object obj) {
+                                                    return RouteDiscoveryPreference.Builder
+                                                            .lambda$new$0((String) obj);
+                                                }
+                                            })
+                                    .collect(Collectors.toList());
             this.mPackageOrder = List.of();
             this.mAllowedPackages = List.of();
             this.mActiveScan = activeScan;
@@ -178,12 +204,20 @@ public final class RouteDiscoveryPreference implements Parcelable {
 
         public Builder setPreferredFeatures(List<String> preferredFeatures) {
             Objects.requireNonNull(preferredFeatures, "preferredFeatures must not be null");
-            this.mPreferredFeatures = (List) preferredFeatures.stream().filter(new Predicate() { // from class: android.media.RouteDiscoveryPreference$Builder$$ExternalSyntheticLambda1
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return RouteDiscoveryPreference.Builder.lambda$setPreferredFeatures$1((String) obj);
-                }
-            }).collect(Collectors.toList());
+            this.mPreferredFeatures =
+                    (List)
+                            preferredFeatures.stream()
+                                    .filter(
+                                            new Predicate() { // from class:
+                                                // android.media.RouteDiscoveryPreference$Builder$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.Predicate
+                                                public final boolean test(Object obj) {
+                                                    return RouteDiscoveryPreference.Builder
+                                                            .lambda$setPreferredFeatures$1(
+                                                                    (String) obj);
+                                                }
+                                            })
+                                    .collect(Collectors.toList());
             return this;
         }
 

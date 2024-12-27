@@ -12,8 +12,7 @@ public interface IVoiceInteractorRequest extends IInterface {
 
     public static class Default implements IVoiceInteractorRequest {
         @Override // com.android.internal.app.IVoiceInteractorRequest
-        public void cancel() throws RemoteException {
-        }
+        public void cancel() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IVoiceInteractorRequest extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoiceInteractorRequest {
+    public abstract static class Stub extends Binder implements IVoiceInteractorRequest {
         public static final String DESCRIPTOR = "com.android.internal.app.IVoiceInteractorRequest";
         static final int TRANSACTION_cancel = 1;
 
@@ -60,7 +59,8 @@ public interface IVoiceInteractorRequest extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

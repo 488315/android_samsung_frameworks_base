@@ -14,8 +14,7 @@ public interface ISemWifiApSmartCallback extends IInterface {
 
     public static class Default implements ISemWifiApSmartCallback {
         @Override // com.samsung.android.wifi.ISemWifiApSmartCallback
-        public void onStateChanged(int state, String mhsMac) throws RemoteException {
-        }
+        public void onStateChanged(int state, String mhsMac) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface ISemWifiApSmartCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemWifiApSmartCallback {
+    public abstract static class Stub extends Binder implements ISemWifiApSmartCallback {
         static final int TRANSACTION_onStateChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface ISemWifiApSmartCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemWifiApSmartCallback.DESCRIPTOR);
             }

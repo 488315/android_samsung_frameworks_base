@@ -3,36 +3,42 @@ package android.app.time;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class TimeCapabilitiesAndConfig implements Parcelable {
-    public static final Parcelable.Creator<TimeCapabilitiesAndConfig> CREATOR = new Parcelable.Creator<TimeCapabilitiesAndConfig>() { // from class: android.app.time.TimeCapabilitiesAndConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeCapabilitiesAndConfig createFromParcel(Parcel source) {
-            return TimeCapabilitiesAndConfig.readFromParcel(source);
-        }
+    public static final Parcelable.Creator<TimeCapabilitiesAndConfig> CREATOR =
+            new Parcelable.Creator<TimeCapabilitiesAndConfig>() { // from class:
+                // android.app.time.TimeCapabilitiesAndConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeCapabilitiesAndConfig createFromParcel(Parcel source) {
+                    return TimeCapabilitiesAndConfig.readFromParcel(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeCapabilitiesAndConfig[] newArray(int size) {
-            return new TimeCapabilitiesAndConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeCapabilitiesAndConfig[] newArray(int size) {
+                    return new TimeCapabilitiesAndConfig[size];
+                }
+            };
     private final TimeCapabilities mCapabilities;
     private final TimeConfiguration mConfiguration;
 
-    public TimeCapabilitiesAndConfig(TimeCapabilities timeCapabilities, TimeConfiguration timeConfiguration) {
+    public TimeCapabilitiesAndConfig(
+            TimeCapabilities timeCapabilities, TimeConfiguration timeConfiguration) {
         this.mCapabilities = (TimeCapabilities) Objects.requireNonNull(timeCapabilities);
         this.mConfiguration = (TimeConfiguration) Objects.requireNonNull(timeConfiguration);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public static TimeCapabilitiesAndConfig readFromParcel(Parcel in) {
-        TimeCapabilities capabilities = (TimeCapabilities) in.readParcelable(null, TimeCapabilities.class);
-        TimeConfiguration configuration = (TimeConfiguration) in.readParcelable(null, TimeConfiguration.class);
+        TimeCapabilities capabilities =
+                (TimeCapabilities) in.readParcelable(null, TimeCapabilities.class);
+        TimeConfiguration configuration =
+                (TimeConfiguration) in.readParcelable(null, TimeConfiguration.class);
         return new TimeCapabilitiesAndConfig(capabilities, configuration);
     }
 
@@ -63,7 +69,8 @@ public final class TimeCapabilitiesAndConfig implements Parcelable {
             return false;
         }
         TimeCapabilitiesAndConfig that = (TimeCapabilitiesAndConfig) o;
-        if (this.mCapabilities.equals(that.mCapabilities) && this.mConfiguration.equals(that.mConfiguration)) {
+        if (this.mCapabilities.equals(that.mCapabilities)
+                && this.mConfiguration.equals(that.mConfiguration)) {
             return true;
         }
         return false;
@@ -74,6 +81,10 @@ public final class TimeCapabilitiesAndConfig implements Parcelable {
     }
 
     public String toString() {
-        return "TimeCapabilitiesAndConfig{mCapabilities=" + this.mCapabilities + ", mConfiguration=" + this.mConfiguration + '}';
+        return "TimeCapabilitiesAndConfig{mCapabilities="
+                + this.mCapabilities
+                + ", mConfiguration="
+                + this.mConfiguration
+                + '}';
     }
 }

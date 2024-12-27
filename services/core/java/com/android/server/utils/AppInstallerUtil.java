@@ -15,7 +15,10 @@ public abstract class AppInstallerUtil {
         try {
             str2 = context.getPackageManager().getInstallerPackageName(str);
         } catch (IllegalArgumentException e) {
-            Log.e("AppInstallerUtil", "Exception while retrieving the package installer of " + str, e);
+            Log.e(
+                    "AppInstallerUtil",
+                    "Exception while retrieving the package installer of " + str,
+                    e);
             str2 = null;
         }
         if (str2 == null) {

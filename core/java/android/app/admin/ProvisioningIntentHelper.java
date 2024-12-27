@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.util.Log;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
@@ -24,8 +25,7 @@ final class ProvisioningIntentHelper {
     private static final Map<String, Class> EXTRAS_TO_CLASS_MAP = createExtrasToClassMap();
     private static final String TAG = "ProvisioningIntentHelper";
 
-    private ProvisioningIntentHelper() {
-    }
+    private ProvisioningIntentHelper() {}
 
     public static Intent createProvisioningIntentFromNfcIntent(Intent nfcIntent) {
         Objects.requireNonNull(nfcIntent);
@@ -76,15 +76,18 @@ final class ProvisioningIntentHelper {
         return bundle;
     }
 
-    private static void addPropertyToBundle(String propertyName, Properties properties, Bundle bundle) {
+    private static void addPropertyToBundle(
+            String propertyName, Properties properties, Bundle bundle) {
         if (EXTRAS_TO_CLASS_MAP.get(propertyName) == ComponentName.class) {
-            ComponentName componentName = ComponentName.unflattenFromString(properties.getProperty(propertyName));
+            ComponentName componentName =
+                    ComponentName.unflattenFromString(properties.getProperty(propertyName));
             bundle.putParcelable(propertyName, componentName);
             return;
         }
         if (EXTRAS_TO_CLASS_MAP.get(propertyName) == PersistableBundle.class) {
             try {
-                bundle.putParcelable(propertyName, deserializeExtrasBundle(properties, propertyName));
+                bundle.putParcelable(
+                        propertyName, deserializeExtrasBundle(properties, propertyName));
                 return;
             } catch (IOException e) {
                 Log.e(TAG, "Failed to parse " + propertyName + MediaMetrics.SEPARATOR, e);
@@ -92,7 +95,8 @@ final class ProvisioningIntentHelper {
             }
         }
         if (EXTRAS_TO_CLASS_MAP.get(propertyName) == Boolean.class) {
-            bundle.putBoolean(propertyName, Boolean.parseBoolean(properties.getProperty(propertyName)));
+            bundle.putBoolean(
+                    propertyName, Boolean.parseBoolean(properties.getProperty(propertyName)));
             return;
         }
         if (EXTRAS_TO_CLASS_MAP.get(propertyName) == Long.class) {
@@ -104,7 +108,8 @@ final class ProvisioningIntentHelper {
         }
     }
 
-    private static PersistableBundle deserializeExtrasBundle(Properties properties, String extraName) throws IOException {
+    private static PersistableBundle deserializeExtrasBundle(
+            Properties properties, String extraName) throws IOException {
         String serializedExtras = properties.getProperty(extraName);
         if (serializedExtras == null) {
             return null;
@@ -121,18 +126,22 @@ final class ProvisioningIntentHelper {
 
     private static Intent createProvisioningIntentFromBundle(Bundle bundle) {
         Objects.requireNonNull(bundle);
-        Intent provisioningIntent = new Intent(DevicePolicyManager.ACTION_PROVISION_MANAGED_DEVICE_FROM_TRUSTED_SOURCE);
+        Intent provisioningIntent =
+                new Intent(DevicePolicyManager.ACTION_PROVISION_MANAGED_DEVICE_FROM_TRUSTED_SOURCE);
         provisioningIntent.putExtras(bundle);
         provisioningIntent.putExtra(DevicePolicyManager.EXTRA_PROVISIONING_TRIGGER, 5);
         return provisioningIntent;
     }
 
     private static boolean containsRequiredProvisioningExtras(Bundle bundle) {
-        return bundle.containsKey(DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_NAME) || bundle.containsKey(DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME);
+        return bundle.containsKey(DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_PACKAGE_NAME)
+                || bundle.containsKey(
+                        DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_COMPONENT_NAME);
     }
 
     private static NdefRecord getFirstNdefRecord(Intent nfcIntent) {
-        Parcelable[] ndefMessages = nfcIntent.getParcelableArrayExtra("android.nfc.extra.NDEF_MESSAGES");
+        Parcelable[] ndefMessages =
+                nfcIntent.getParcelableArrayExtra("android.nfc.extra.NDEF_MESSAGES");
         if (ndefMessages == null) {
             Log.i(TAG, "No EXTRA_NDEF_MESSAGES from nfcIntent");
             return null;
@@ -173,7 +182,9 @@ final class ProvisioningIntentHelper {
     }
 
     private static Set<String> getPersistableBundleExtras() {
-        return Set.of(DevicePolicyManager.EXTRA_PROVISIONING_ADMIN_EXTRAS_BUNDLE, DevicePolicyManager.EXTRA_PROVISIONING_ROLE_HOLDER_EXTRAS_BUNDLE);
+        return Set.of(
+                DevicePolicyManager.EXTRA_PROVISIONING_ADMIN_EXTRAS_BUNDLE,
+                DevicePolicyManager.EXTRA_PROVISIONING_ROLE_HOLDER_EXTRAS_BUNDLE);
     }
 
     private static Set<String> getComponentNameExtras() {
@@ -181,7 +192,10 @@ final class ProvisioningIntentHelper {
     }
 
     private static Set<String> getIntExtras() {
-        return Set.of(DevicePolicyManager.EXTRA_PROVISIONING_WIFI_PROXY_PORT, DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_MINIMUM_VERSION_CODE, DevicePolicyManager.EXTRA_PROVISIONING_SUPPORTED_MODES);
+        return Set.of(
+                DevicePolicyManager.EXTRA_PROVISIONING_WIFI_PROXY_PORT,
+                DevicePolicyManager.EXTRA_PROVISIONING_DEVICE_ADMIN_MINIMUM_VERSION_CODE,
+                DevicePolicyManager.EXTRA_PROVISIONING_SUPPORTED_MODES);
     }
 
     private static Set<String> getLongExtras() {
@@ -189,6 +203,21 @@ final class ProvisioningIntentHelper {
     }
 
     private static Set<String> getBooleanExtras() {
-        return Set.of((Object[]) new String[]{DevicePolicyManager.EXTRA_PROVISIONING_ALLOW_OFFLINE, DevicePolicyManager.EXTRA_PROVISIONING_SHOULD_LAUNCH_RESULT_INTENT, DevicePolicyManager.EXTRA_PROVISIONING_KEEP_ACCOUNT_ON_MIGRATION, DevicePolicyManager.EXTRA_PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED, DevicePolicyManager.EXTRA_PROVISIONING_WIFI_HIDDEN, DevicePolicyManager.EXTRA_PROVISIONING_SENSORS_PERMISSION_GRANT_OPT_OUT, DevicePolicyManager.EXTRA_PROVISIONING_SKIP_ENCRYPTION, DevicePolicyManager.EXTRA_PROVISIONING_SKIP_EDUCATION_SCREENS, DevicePolicyManager.EXTRA_PROVISIONING_USE_MOBILE_DATA, DevicePolicyManager.EXTRA_PROVISIONING_SKIP_OWNERSHIP_DISCLAIMER, DevicePolicyManager.EXTRA_PROVISIONING_RETURN_BEFORE_POLICY_COMPLIANCE, DevicePolicyManager.EXTRA_PROVISIONING_KEEP_SCREEN_ON});
+        return Set.of(
+                (Object[])
+                        new String[] {
+                            DevicePolicyManager.EXTRA_PROVISIONING_ALLOW_OFFLINE,
+                            DevicePolicyManager.EXTRA_PROVISIONING_SHOULD_LAUNCH_RESULT_INTENT,
+                            DevicePolicyManager.EXTRA_PROVISIONING_KEEP_ACCOUNT_ON_MIGRATION,
+                            DevicePolicyManager.EXTRA_PROVISIONING_LEAVE_ALL_SYSTEM_APPS_ENABLED,
+                            DevicePolicyManager.EXTRA_PROVISIONING_WIFI_HIDDEN,
+                            DevicePolicyManager.EXTRA_PROVISIONING_SENSORS_PERMISSION_GRANT_OPT_OUT,
+                            DevicePolicyManager.EXTRA_PROVISIONING_SKIP_ENCRYPTION,
+                            DevicePolicyManager.EXTRA_PROVISIONING_SKIP_EDUCATION_SCREENS,
+                            DevicePolicyManager.EXTRA_PROVISIONING_USE_MOBILE_DATA,
+                            DevicePolicyManager.EXTRA_PROVISIONING_SKIP_OWNERSHIP_DISCLAIMER,
+                            DevicePolicyManager.EXTRA_PROVISIONING_RETURN_BEFORE_POLICY_COMPLIANCE,
+                            DevicePolicyManager.EXTRA_PROVISIONING_KEEP_SCREEN_ON
+                        });
     }
 }

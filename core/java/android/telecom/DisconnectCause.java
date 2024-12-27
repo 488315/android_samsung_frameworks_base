@@ -8,6 +8,7 @@ import android.provider.CalendarContract;
 import android.service.timezone.TimeZoneProviderService;
 import android.telephony.ims.ImsReasonInfo;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -19,27 +20,39 @@ public final class DisconnectCause implements Parcelable {
     public static final int CALL_PULLED = 12;
     public static final int CANCELED = 4;
     public static final int CONNECTION_MANAGER_NOT_SUPPORTED = 10;
-    public static final Parcelable.Creator<DisconnectCause> CREATOR = new Parcelable.Creator<DisconnectCause>() { // from class: android.telecom.DisconnectCause.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisconnectCause createFromParcel(Parcel source) {
-            int code = source.readInt();
-            CharSequence label = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
-            CharSequence description = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
-            String reason = source.readString();
-            int tone = source.readInt();
-            int telephonyDisconnectCause = source.readInt();
-            int telephonyPreciseDisconnectCause = source.readInt();
-            ImsReasonInfo imsReasonInfo = (ImsReasonInfo) source.readParcelable(null, ImsReasonInfo.class);
-            return new DisconnectCause(code, label, description, reason, tone, telephonyDisconnectCause, telephonyPreciseDisconnectCause, imsReasonInfo);
-        }
+    public static final Parcelable.Creator<DisconnectCause> CREATOR =
+            new Parcelable.Creator<
+                    DisconnectCause>() { // from class: android.telecom.DisconnectCause.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisconnectCause createFromParcel(Parcel source) {
+                    int code = source.readInt();
+                    CharSequence label = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
+                    CharSequence description =
+                            TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
+                    String reason = source.readString();
+                    int tone = source.readInt();
+                    int telephonyDisconnectCause = source.readInt();
+                    int telephonyPreciseDisconnectCause = source.readInt();
+                    ImsReasonInfo imsReasonInfo =
+                            (ImsReasonInfo) source.readParcelable(null, ImsReasonInfo.class);
+                    return new DisconnectCause(
+                            code,
+                            label,
+                            description,
+                            reason,
+                            tone,
+                            telephonyDisconnectCause,
+                            telephonyPreciseDisconnectCause,
+                            imsReasonInfo);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisconnectCause[] newArray(int size) {
-            return new DisconnectCause[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisconnectCause[] newArray(int size) {
+                    return new DisconnectCause[size];
+                }
+            };
     public static final int ERROR = 1;
     public static final int LOCAL = 2;
     public static final int MISSED = 5;
@@ -62,8 +75,7 @@ public final class DisconnectCause implements Parcelable {
     private int mToneToPlay;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DisconnectCauseCode {
-    }
+    public @interface DisconnectCauseCode {}
 
     public DisconnectCause(int code) {
         this(code, null, null, null, -1);
@@ -77,11 +89,20 @@ public final class DisconnectCause implements Parcelable {
         this(code, label, description, reason, -1);
     }
 
-    public DisconnectCause(int code, CharSequence label, CharSequence description, String reason, int toneToPlay) {
+    public DisconnectCause(
+            int code, CharSequence label, CharSequence description, String reason, int toneToPlay) {
         this(code, label, description, reason, toneToPlay, 36, 65535, null);
     }
 
-    public DisconnectCause(int code, CharSequence label, CharSequence description, String reason, int toneToPlay, int telephonyDisconnectCause, int telephonyPreciseDisconnectCause, ImsReasonInfo imsReasonInfo) {
+    public DisconnectCause(
+            int code,
+            CharSequence label,
+            CharSequence description,
+            String reason,
+            int toneToPlay,
+            int telephonyDisconnectCause,
+            int telephonyPreciseDisconnectCause,
+            ImsReasonInfo imsReasonInfo) {
         this.mDisconnectCode = code;
         this.mDisconnectLabel = label;
         this.mDisconnectDescription = description;
@@ -178,7 +199,15 @@ public final class DisconnectCause implements Parcelable {
         }
 
         public DisconnectCause build() {
-            return new DisconnectCause(this.mDisconnectCode, this.mDisconnectLabel, this.mDisconnectDescription, this.mDisconnectReason, this.mToneToPlay, this.mTelephonyDisconnectCause, this.mTelephonyPreciseDisconnectCause, this.mImsReasonInfo);
+            return new DisconnectCause(
+                    this.mDisconnectCode,
+                    this.mDisconnectLabel,
+                    this.mDisconnectDescription,
+                    this.mDisconnectReason,
+                    this.mToneToPlay,
+                    this.mTelephonyDisconnectCause,
+                    this.mTelephonyPreciseDisconnectCause,
+                    this.mImsReasonInfo);
         }
     }
 
@@ -200,7 +229,14 @@ public final class DisconnectCause implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hashCode(Integer.valueOf(this.mDisconnectCode)) + Objects.hashCode(this.mDisconnectLabel) + Objects.hashCode(this.mDisconnectDescription) + Objects.hashCode(this.mDisconnectReason) + Objects.hashCode(Integer.valueOf(this.mToneToPlay)) + Objects.hashCode(Integer.valueOf(this.mTelephonyDisconnectCause)) + Objects.hashCode(Integer.valueOf(this.mTelephonyPreciseDisconnectCause)) + Objects.hashCode(this.mImsReasonInfo);
+        return Objects.hashCode(Integer.valueOf(this.mDisconnectCode))
+                + Objects.hashCode(this.mDisconnectLabel)
+                + Objects.hashCode(this.mDisconnectDescription)
+                + Objects.hashCode(this.mDisconnectReason)
+                + Objects.hashCode(Integer.valueOf(this.mToneToPlay))
+                + Objects.hashCode(Integer.valueOf(this.mTelephonyDisconnectCause))
+                + Objects.hashCode(Integer.valueOf(this.mTelephonyPreciseDisconnectCause))
+                + Objects.hashCode(this.mImsReasonInfo);
     }
 
     public boolean equals(Object o) {
@@ -208,7 +244,18 @@ public final class DisconnectCause implements Parcelable {
             return false;
         }
         DisconnectCause d = (DisconnectCause) o;
-        return Objects.equals(Integer.valueOf(this.mDisconnectCode), Integer.valueOf(d.getCode())) && Objects.equals(this.mDisconnectLabel, d.getLabel()) && Objects.equals(this.mDisconnectDescription, d.getDescription()) && Objects.equals(this.mDisconnectReason, d.getReason()) && Objects.equals(Integer.valueOf(this.mToneToPlay), Integer.valueOf(d.getTone())) && Objects.equals(Integer.valueOf(this.mTelephonyDisconnectCause), Integer.valueOf(d.getTelephonyDisconnectCause())) && Objects.equals(Integer.valueOf(this.mTelephonyPreciseDisconnectCause), Integer.valueOf(d.getTelephonyPreciseDisconnectCause())) && Objects.equals(this.mImsReasonInfo, d.getImsReasonInfo());
+        return Objects.equals(Integer.valueOf(this.mDisconnectCode), Integer.valueOf(d.getCode()))
+                && Objects.equals(this.mDisconnectLabel, d.getLabel())
+                && Objects.equals(this.mDisconnectDescription, d.getDescription())
+                && Objects.equals(this.mDisconnectReason, d.getReason())
+                && Objects.equals(Integer.valueOf(this.mToneToPlay), Integer.valueOf(d.getTone()))
+                && Objects.equals(
+                        Integer.valueOf(this.mTelephonyDisconnectCause),
+                        Integer.valueOf(d.getTelephonyDisconnectCause()))
+                && Objects.equals(
+                        Integer.valueOf(this.mTelephonyPreciseDisconnectCause),
+                        Integer.valueOf(d.getTelephonyPreciseDisconnectCause()))
+                && Objects.equals(this.mImsReasonInfo, d.getImsReasonInfo());
     }
 
     public String toString() {
@@ -258,8 +305,25 @@ public final class DisconnectCause implements Parcelable {
                 break;
         }
         String label = this.mDisconnectLabel == null ? "" : this.mDisconnectLabel.toString();
-        String description = this.mDisconnectDescription == null ? "" : this.mDisconnectDescription.toString();
+        String description =
+                this.mDisconnectDescription == null ? "" : this.mDisconnectDescription.toString();
         String reason = this.mDisconnectReason != null ? this.mDisconnectReason : "";
-        return "DisconnectCause [ Code: (" + code + ") Label: (" + label + ") Description: (" + description + ") Reason: (" + reason + ") Tone: (" + this.mToneToPlay + ")  TelephonyCause: " + this.mTelephonyDisconnectCause + "/" + this.mTelephonyPreciseDisconnectCause + " ImsReasonInfo: " + this.mImsReasonInfo + NavigationBarInflaterView.SIZE_MOD_END;
+        return "DisconnectCause [ Code: ("
+                + code
+                + ") Label: ("
+                + label
+                + ") Description: ("
+                + description
+                + ") Reason: ("
+                + reason
+                + ") Tone: ("
+                + this.mToneToPlay
+                + ")  TelephonyCause: "
+                + this.mTelephonyDisconnectCause
+                + "/"
+                + this.mTelephonyPreciseDisconnectCause
+                + " ImsReasonInfo: "
+                + this.mImsReasonInfo
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

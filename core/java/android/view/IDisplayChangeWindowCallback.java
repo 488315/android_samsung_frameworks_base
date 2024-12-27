@@ -11,12 +11,12 @@ import android.window.WindowContainerTransaction;
 public interface IDisplayChangeWindowCallback extends IInterface {
     public static final String DESCRIPTOR = "android.view.IDisplayChangeWindowCallback";
 
-    void continueDisplayChange(WindowContainerTransaction windowContainerTransaction) throws RemoteException;
+    void continueDisplayChange(WindowContainerTransaction windowContainerTransaction)
+            throws RemoteException;
 
     public static class Default implements IDisplayChangeWindowCallback {
         @Override // android.view.IDisplayChangeWindowCallback
-        public void continueDisplayChange(WindowContainerTransaction t) throws RemoteException {
-        }
+        public void continueDisplayChange(WindowContainerTransaction t) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IDisplayChangeWindowCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDisplayChangeWindowCallback {
+    public abstract static class Stub extends Binder implements IDisplayChangeWindowCallback {
         static final int TRANSACTION_continueDisplayChange = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IDisplayChangeWindowCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDisplayChangeWindowCallback.DESCRIPTOR);
             }
@@ -72,7 +73,9 @@ public interface IDisplayChangeWindowCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    WindowContainerTransaction _arg0 = (WindowContainerTransaction) data.readTypedObject(WindowContainerTransaction.CREATOR);
+                    WindowContainerTransaction _arg0 =
+                            (WindowContainerTransaction)
+                                    data.readTypedObject(WindowContainerTransaction.CREATOR);
                     data.enforceNoDataAvail();
                     continueDisplayChange(_arg0);
                     reply.writeNoException();

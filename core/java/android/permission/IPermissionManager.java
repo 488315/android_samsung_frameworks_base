@@ -13,9 +13,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
-import android.permission.IOnPermissionsChangeListener;
-import android.permission.IPermissionManager;
-import android.permission.PermissionManager;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,9 +25,11 @@ import java.util.stream.IntStream;
 public interface IPermissionManager extends IInterface {
     public static final String DESCRIPTOR = "android.permission.IPermissionManager";
 
-    boolean addAllowlistedRestrictedPermission(String str, String str2, int i, int i2) throws RemoteException;
+    boolean addAllowlistedRestrictedPermission(String str, String str2, int i, int i2)
+            throws RemoteException;
 
-    void addOnPermissionsChangeListener(IOnPermissionsChangeListener iOnPermissionsChangeListener) throws RemoteException;
+    void addOnPermissionsChangeListener(IOnPermissionsChangeListener iOnPermissionsChangeListener)
+            throws RemoteException;
 
     boolean addPermission(PermissionInfo permissionInfo, boolean z) throws RemoteException;
 
@@ -39,9 +39,11 @@ public interface IPermissionManager extends IInterface {
 
     ParceledListSlice getAllPermissionGroups(int i) throws RemoteException;
 
-    Map<String, PermissionManager.PermissionState> getAllPermissionStates(String str, String str2, int i) throws RemoteException;
+    Map<String, PermissionManager.PermissionState> getAllPermissionStates(
+            String str, String str2, int i) throws RemoteException;
 
-    List<String> getAllowlistedRestrictedPermissions(String str, int i, int i2) throws RemoteException;
+    List<String> getAllowlistedRestrictedPermissions(String str, int i, int i2)
+            throws RemoteException;
 
     List<String> getAutoRevokeExemptionGrantedPackages(int i) throws RemoteException;
 
@@ -61,33 +63,44 @@ public interface IPermissionManager extends IInterface {
 
     boolean isAutoRevokeExempted(String str, int i) throws RemoteException;
 
-    boolean isPermissionRevokedByPolicy(String str, String str2, int i, int i2) throws RemoteException;
+    boolean isPermissionRevokedByPolicy(String str, String str2, int i, int i2)
+            throws RemoteException;
 
-    boolean isRegisteredAttributionSource(AttributionSourceState attributionSourceState) throws RemoteException;
+    boolean isRegisteredAttributionSource(AttributionSourceState attributionSourceState)
+            throws RemoteException;
 
     ParceledListSlice queryPermissionsByGroup(String str, int i) throws RemoteException;
 
-    IBinder registerAttributionSource(AttributionSourceState attributionSourceState) throws RemoteException;
+    IBinder registerAttributionSource(AttributionSourceState attributionSourceState)
+            throws RemoteException;
 
-    boolean removeAllowlistedRestrictedPermission(String str, String str2, int i, int i2) throws RemoteException;
+    boolean removeAllowlistedRestrictedPermission(String str, String str2, int i, int i2)
+            throws RemoteException;
 
-    void removeOnPermissionsChangeListener(IOnPermissionsChangeListener iOnPermissionsChangeListener) throws RemoteException;
+    void removeOnPermissionsChangeListener(
+            IOnPermissionsChangeListener iOnPermissionsChangeListener) throws RemoteException;
 
     void removePermission(String str) throws RemoteException;
 
-    void revokePostNotificationPermissionWithoutKillForTest(String str, int i) throws RemoteException;
+    void revokePostNotificationPermissionWithoutKillForTest(String str, int i)
+            throws RemoteException;
 
-    void revokeRuntimePermission(String str, String str2, String str3, int i, String str4) throws RemoteException;
+    void revokeRuntimePermission(String str, String str2, String str3, int i, String str4)
+            throws RemoteException;
 
     boolean setAutoRevokeExempted(String str, boolean z, int i) throws RemoteException;
 
-    boolean shouldShowRequestPermissionRationale(String str, String str2, int i, int i2) throws RemoteException;
+    boolean shouldShowRequestPermissionRationale(String str, String str2, int i, int i2)
+            throws RemoteException;
 
-    void startOneTimePermissionSession(String str, int i, int i2, long j, long j2) throws RemoteException;
+    void startOneTimePermissionSession(String str, int i, int i2, long j, long j2)
+            throws RemoteException;
 
     void stopOneTimePermissionSession(String str, int i) throws RemoteException;
 
-    void updatePermissionFlags(String str, String str2, int i, int i2, boolean z, String str3, int i3) throws RemoteException;
+    void updatePermissionFlags(
+            String str, String str2, int i, int i2, boolean z, String str3, int i3)
+            throws RemoteException;
 
     void updatePermissionFlagsForAllApps(int i, int i2, int i3) throws RemoteException;
 
@@ -98,84 +111,111 @@ public interface IPermissionManager extends IInterface {
         }
 
         @Override // android.permission.IPermissionManager
-        public PermissionGroupInfo getPermissionGroupInfo(String groupName, int flags) throws RemoteException {
+        public PermissionGroupInfo getPermissionGroupInfo(String groupName, int flags)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.permission.IPermissionManager
-        public PermissionInfo getPermissionInfo(String permissionName, String packageName, int flags) throws RemoteException {
+        public PermissionInfo getPermissionInfo(
+                String permissionName, String packageName, int flags) throws RemoteException {
             return null;
         }
 
         @Override // android.permission.IPermissionManager
-        public ParceledListSlice queryPermissionsByGroup(String groupName, int flags) throws RemoteException {
+        public ParceledListSlice queryPermissionsByGroup(String groupName, int flags)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.permission.IPermissionManager
-        public boolean addPermission(PermissionInfo permissionInfo, boolean async) throws RemoteException {
+        public boolean addPermission(PermissionInfo permissionInfo, boolean async)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.permission.IPermissionManager
-        public void removePermission(String permissionName) throws RemoteException {
-        }
+        public void removePermission(String permissionName) throws RemoteException {}
 
         @Override // android.permission.IPermissionManager
-        public int getPermissionFlags(String packageName, String permissionName, String persistentDeviceId, int userId) throws RemoteException {
+        public int getPermissionFlags(
+                String packageName, String permissionName, String persistentDeviceId, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.permission.IPermissionManager
-        public void updatePermissionFlags(String packageName, String permissionName, int flagMask, int flagValues, boolean checkAdjustPolicyFlagPermission, String persistentDeviceId, int userId) throws RemoteException {
-        }
+        public void updatePermissionFlags(
+                String packageName,
+                String permissionName,
+                int flagMask,
+                int flagValues,
+                boolean checkAdjustPolicyFlagPermission,
+                String persistentDeviceId,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionManager
-        public void updatePermissionFlagsForAllApps(int flagMask, int flagValues, int userId) throws RemoteException {
-        }
+        public void updatePermissionFlagsForAllApps(int flagMask, int flagValues, int userId)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionManager
-        public void addOnPermissionsChangeListener(IOnPermissionsChangeListener listener) throws RemoteException {
-        }
+        public void addOnPermissionsChangeListener(IOnPermissionsChangeListener listener)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionManager
-        public void removeOnPermissionsChangeListener(IOnPermissionsChangeListener listener) throws RemoteException {
-        }
+        public void removeOnPermissionsChangeListener(IOnPermissionsChangeListener listener)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionManager
-        public List<String> getAllowlistedRestrictedPermissions(String packageName, int flags, int userId) throws RemoteException {
+        public List<String> getAllowlistedRestrictedPermissions(
+                String packageName, int flags, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.permission.IPermissionManager
-        public boolean addAllowlistedRestrictedPermission(String packageName, String permissionName, int flags, int userId) throws RemoteException {
+        public boolean addAllowlistedRestrictedPermission(
+                String packageName, String permissionName, int flags, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.permission.IPermissionManager
-        public boolean removeAllowlistedRestrictedPermission(String packageName, String permissionName, int flags, int userId) throws RemoteException {
+        public boolean removeAllowlistedRestrictedPermission(
+                String packageName, String permissionName, int flags, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.permission.IPermissionManager
-        public void grantRuntimePermission(String packageName, String permissionName, String persistentDeviceId, int userId) throws RemoteException {
-        }
+        public void grantRuntimePermission(
+                String packageName, String permissionName, String persistentDeviceId, int userId)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionManager
-        public void revokeRuntimePermission(String packageName, String permissionName, String persistentDeviceId, int userId, String reason) throws RemoteException {
-        }
+        public void revokeRuntimePermission(
+                String packageName,
+                String permissionName,
+                String persistentDeviceId,
+                int userId,
+                String reason)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionManager
-        public void revokePostNotificationPermissionWithoutKillForTest(String packageName, int userId) throws RemoteException {
-        }
+        public void revokePostNotificationPermissionWithoutKillForTest(
+                String packageName, int userId) throws RemoteException {}
 
         @Override // android.permission.IPermissionManager
-        public boolean shouldShowRequestPermissionRationale(String packageName, String permissionName, int deviceId, int userId) throws RemoteException {
+        public boolean shouldShowRequestPermissionRationale(
+                String packageName, String permissionName, int deviceId, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.permission.IPermissionManager
-        public boolean isPermissionRevokedByPolicy(String packageName, String permissionName, int deviceId, int userId) throws RemoteException {
+        public boolean isPermissionRevokedByPolicy(
+                String packageName, String permissionName, int deviceId, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -185,25 +225,33 @@ public interface IPermissionManager extends IInterface {
         }
 
         @Override // android.permission.IPermissionManager
-        public void startOneTimePermissionSession(String packageName, int deviceId, int userId, long timeout, long revokeAfterKilledDelay) throws RemoteException {
-        }
+        public void startOneTimePermissionSession(
+                String packageName,
+                int deviceId,
+                int userId,
+                long timeout,
+                long revokeAfterKilledDelay)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionManager
-        public void stopOneTimePermissionSession(String packageName, int userId) throws RemoteException {
-        }
+        public void stopOneTimePermissionSession(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.permission.IPermissionManager
-        public List<String> getAutoRevokeExemptionRequestedPackages(int userId) throws RemoteException {
+        public List<String> getAutoRevokeExemptionRequestedPackages(int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.permission.IPermissionManager
-        public List<String> getAutoRevokeExemptionGrantedPackages(int userId) throws RemoteException {
+        public List<String> getAutoRevokeExemptionGrantedPackages(int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.permission.IPermissionManager
-        public boolean setAutoRevokeExempted(String packageName, boolean exempted, int userId) throws RemoteException {
+        public boolean setAutoRevokeExempted(String packageName, boolean exempted, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -213,7 +261,8 @@ public interface IPermissionManager extends IInterface {
         }
 
         @Override // android.permission.IPermissionManager
-        public IBinder registerAttributionSource(AttributionSourceState source) throws RemoteException {
+        public IBinder registerAttributionSource(AttributionSourceState source)
+                throws RemoteException {
             return null;
         }
 
@@ -223,22 +272,27 @@ public interface IPermissionManager extends IInterface {
         }
 
         @Override // android.permission.IPermissionManager
-        public boolean isRegisteredAttributionSource(AttributionSourceState source) throws RemoteException {
+        public boolean isRegisteredAttributionSource(AttributionSourceState source)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.permission.IPermissionManager
-        public int checkPermission(String packageName, String permissionName, String persistentDeviceId, int userId) throws RemoteException {
+        public int checkPermission(
+                String packageName, String permissionName, String persistentDeviceId, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.permission.IPermissionManager
-        public int checkUidPermission(int uid, String permissionName, int deviceId) throws RemoteException {
+        public int checkUidPermission(int uid, String permissionName, int deviceId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.permission.IPermissionManager
-        public Map<String, PermissionManager.PermissionState> getAllPermissionStates(String packageName, String persistentDeviceId, int userId) throws RemoteException {
+        public Map<String, PermissionManager.PermissionState> getAllPermissionStates(
+                String packageName, String persistentDeviceId, int userId) throws RemoteException {
             return null;
         }
 
@@ -248,7 +302,7 @@ public interface IPermissionManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPermissionManager {
+    public abstract static class Stub extends Binder implements IPermissionManager {
         static final int TRANSACTION_addAllowlistedRestrictedPermission = 13;
         static final int TRANSACTION_addOnPermissionsChangeListener = 10;
         static final int TRANSACTION_addPermission = 5;
@@ -293,7 +347,9 @@ public interface IPermissionManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IPermissionManager asInterface(IBinder obj) {
@@ -389,7 +445,8 @@ public interface IPermissionManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPermissionManager.DESCRIPTOR);
             }
@@ -431,7 +488,8 @@ public interface IPermissionManager extends IInterface {
                     reply.writeTypedObject(_result4, 1);
                     return true;
                 case 5:
-                    PermissionInfo _arg05 = (PermissionInfo) data.readTypedObject(PermissionInfo.CREATOR);
+                    PermissionInfo _arg05 =
+                            (PermissionInfo) data.readTypedObject(PermissionInfo.CREATOR);
                     boolean _arg14 = data.readBoolean();
                     data.enforceNoDataAvail();
                     boolean _result5 = addPermission(_arg05, _arg14);
@@ -475,13 +533,15 @@ public interface IPermissionManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 10:
-                    IOnPermissionsChangeListener _arg010 = IOnPermissionsChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IOnPermissionsChangeListener _arg010 =
+                            IOnPermissionsChangeListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addOnPermissionsChangeListener(_arg010);
                     reply.writeNoException();
                     return true;
                 case 11:
-                    IOnPermissionsChangeListener _arg011 = IOnPermissionsChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IOnPermissionsChangeListener _arg011 =
+                            IOnPermissionsChangeListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeOnPermissionsChangeListener(_arg011);
                     reply.writeNoException();
@@ -491,7 +551,8 @@ public interface IPermissionManager extends IInterface {
                     int _arg18 = data.readInt();
                     int _arg25 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<String> _result7 = getAllowlistedRestrictedPermissions(_arg012, _arg18, _arg25);
+                    List<String> _result7 =
+                            getAllowlistedRestrictedPermissions(_arg012, _arg18, _arg25);
                     reply.writeNoException();
                     reply.writeStringList(_result7);
                     return true;
@@ -501,7 +562,8 @@ public interface IPermissionManager extends IInterface {
                     int _arg26 = data.readInt();
                     int _arg33 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result8 = addAllowlistedRestrictedPermission(_arg013, _arg19, _arg26, _arg33);
+                    boolean _result8 =
+                            addAllowlistedRestrictedPermission(_arg013, _arg19, _arg26, _arg33);
                     reply.writeNoException();
                     reply.writeBoolean(_result8);
                     return true;
@@ -511,7 +573,8 @@ public interface IPermissionManager extends IInterface {
                     int _arg27 = data.readInt();
                     int _arg34 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result9 = removeAllowlistedRestrictedPermission(_arg014, _arg110, _arg27, _arg34);
+                    boolean _result9 =
+                            removeAllowlistedRestrictedPermission(_arg014, _arg110, _arg27, _arg34);
                     reply.writeNoException();
                     reply.writeBoolean(_result9);
                     return true;
@@ -547,7 +610,8 @@ public interface IPermissionManager extends IInterface {
                     int _arg210 = data.readInt();
                     int _arg37 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result10 = shouldShowRequestPermissionRationale(_arg018, _arg114, _arg210, _arg37);
+                    boolean _result10 =
+                            shouldShowRequestPermissionRationale(_arg018, _arg114, _arg210, _arg37);
                     reply.writeNoException();
                     reply.writeBoolean(_result10);
                     return true;
@@ -557,7 +621,8 @@ public interface IPermissionManager extends IInterface {
                     int _arg211 = data.readInt();
                     int _arg38 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result11 = isPermissionRevokedByPolicy(_arg019, _arg115, _arg211, _arg38);
+                    boolean _result11 =
+                            isPermissionRevokedByPolicy(_arg019, _arg115, _arg211, _arg38);
                     reply.writeNoException();
                     reply.writeBoolean(_result11);
                     return true;
@@ -615,7 +680,9 @@ public interface IPermissionManager extends IInterface {
                     reply.writeBoolean(_result16);
                     return true;
                 case 27:
-                    AttributionSourceState _arg026 = (AttributionSourceState) data.readTypedObject(AttributionSourceState.CREATOR);
+                    AttributionSourceState _arg026 =
+                            (AttributionSourceState)
+                                    data.readTypedObject(AttributionSourceState.CREATOR);
                     data.enforceNoDataAvail();
                     IBinder _result17 = registerAttributionSource(_arg026);
                     reply.writeNoException();
@@ -629,7 +696,9 @@ public interface IPermissionManager extends IInterface {
                     reply.writeInt(_result18);
                     return true;
                 case 29:
-                    AttributionSourceState _arg028 = (AttributionSourceState) data.readTypedObject(AttributionSourceState.CREATOR);
+                    AttributionSourceState _arg028 =
+                            (AttributionSourceState)
+                                    data.readTypedObject(AttributionSourceState.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result19 = isRegisteredAttributionSource(_arg028);
                     reply.writeNoException();
@@ -659,18 +728,24 @@ public interface IPermissionManager extends IInterface {
                     String _arg122 = data.readString();
                     int _arg216 = data.readInt();
                     data.enforceNoDataAvail();
-                    Map<String, PermissionManager.PermissionState> _result22 = getAllPermissionStates(_arg031, _arg122, _arg216);
+                    Map<String, PermissionManager.PermissionState> _result22 =
+                            getAllPermissionStates(_arg031, _arg122, _arg216);
                     reply.writeNoException();
                     if (_result22 == null) {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result22.size());
-                        _result22.forEach(new BiConsumer() { // from class: android.permission.IPermissionManager$Stub$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IPermissionManager.Stub.lambda$onTransact$0(Parcel.this, (String) obj, (PermissionManager.PermissionState) obj2);
-                            }
-                        });
+                        _result22.forEach(
+                                new BiConsumer() { // from class:
+                                                   // android.permission.IPermissionManager$Stub$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IPermissionManager.Stub.lambda$onTransact$0(
+                                                Parcel.this,
+                                                (String) obj,
+                                                (PermissionManager.PermissionState) obj2);
+                                    }
+                                });
                     }
                     return true;
                 default:
@@ -678,7 +753,8 @@ public interface IPermissionManager extends IInterface {
             }
         }
 
-        static /* synthetic */ void lambda$onTransact$0(Parcel reply, String k, PermissionManager.PermissionState v) {
+        static /* synthetic */ void lambda$onTransact$0(
+                Parcel reply, String k, PermissionManager.PermissionState v) {
             reply.writeString(k);
             reply.writeTypedObject(v, 1);
         }
@@ -709,7 +785,8 @@ public interface IPermissionManager extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -718,7 +795,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public PermissionGroupInfo getPermissionGroupInfo(String groupName, int flags) throws RemoteException {
+            public PermissionGroupInfo getPermissionGroupInfo(String groupName, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -727,7 +805,9 @@ public interface IPermissionManager extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    PermissionGroupInfo _result = (PermissionGroupInfo) _reply.readTypedObject(PermissionGroupInfo.CREATOR);
+                    PermissionGroupInfo _result =
+                            (PermissionGroupInfo)
+                                    _reply.readTypedObject(PermissionGroupInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -736,7 +816,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public PermissionInfo getPermissionInfo(String permissionName, String packageName, int flags) throws RemoteException {
+            public PermissionInfo getPermissionInfo(
+                    String permissionName, String packageName, int flags) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -746,7 +827,8 @@ public interface IPermissionManager extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    PermissionInfo _result = (PermissionInfo) _reply.readTypedObject(PermissionInfo.CREATOR);
+                    PermissionInfo _result =
+                            (PermissionInfo) _reply.readTypedObject(PermissionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -755,7 +837,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public ParceledListSlice queryPermissionsByGroup(String groupName, int flags) throws RemoteException {
+            public ParceledListSlice queryPermissionsByGroup(String groupName, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -764,7 +847,8 @@ public interface IPermissionManager extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -773,7 +857,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public boolean addPermission(PermissionInfo permissionInfo, boolean async) throws RemoteException {
+            public boolean addPermission(PermissionInfo permissionInfo, boolean async)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -806,7 +891,12 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public int getPermissionFlags(String packageName, String permissionName, String persistentDeviceId, int userId) throws RemoteException {
+            public int getPermissionFlags(
+                    String packageName,
+                    String permissionName,
+                    String persistentDeviceId,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -826,7 +916,15 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public void updatePermissionFlags(String packageName, String permissionName, int flagMask, int flagValues, boolean checkAdjustPolicyFlagPermission, String persistentDeviceId, int userId) throws RemoteException {
+            public void updatePermissionFlags(
+                    String packageName,
+                    String permissionName,
+                    int flagMask,
+                    int flagValues,
+                    boolean checkAdjustPolicyFlagPermission,
+                    String persistentDeviceId,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -847,7 +945,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public void updatePermissionFlagsForAllApps(int flagMask, int flagValues, int userId) throws RemoteException {
+            public void updatePermissionFlagsForAllApps(int flagMask, int flagValues, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -864,7 +963,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public void addOnPermissionsChangeListener(IOnPermissionsChangeListener listener) throws RemoteException {
+            public void addOnPermissionsChangeListener(IOnPermissionsChangeListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -879,7 +979,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public void removeOnPermissionsChangeListener(IOnPermissionsChangeListener listener) throws RemoteException {
+            public void removeOnPermissionsChangeListener(IOnPermissionsChangeListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -894,7 +995,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public List<String> getAllowlistedRestrictedPermissions(String packageName, int flags, int userId) throws RemoteException {
+            public List<String> getAllowlistedRestrictedPermissions(
+                    String packageName, int flags, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -913,7 +1015,9 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public boolean addAllowlistedRestrictedPermission(String packageName, String permissionName, int flags, int userId) throws RemoteException {
+            public boolean addAllowlistedRestrictedPermission(
+                    String packageName, String permissionName, int flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -933,7 +1037,9 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public boolean removeAllowlistedRestrictedPermission(String packageName, String permissionName, int flags, int userId) throws RemoteException {
+            public boolean removeAllowlistedRestrictedPermission(
+                    String packageName, String permissionName, int flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -953,7 +1059,12 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public void grantRuntimePermission(String packageName, String permissionName, String persistentDeviceId, int userId) throws RemoteException {
+            public void grantRuntimePermission(
+                    String packageName,
+                    String permissionName,
+                    String persistentDeviceId,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -971,7 +1082,13 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public void revokeRuntimePermission(String packageName, String permissionName, String persistentDeviceId, int userId, String reason) throws RemoteException {
+            public void revokeRuntimePermission(
+                    String packageName,
+                    String permissionName,
+                    String persistentDeviceId,
+                    int userId,
+                    String reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -990,7 +1107,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public void revokePostNotificationPermissionWithoutKillForTest(String packageName, int userId) throws RemoteException {
+            public void revokePostNotificationPermissionWithoutKillForTest(
+                    String packageName, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1006,7 +1124,9 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public boolean shouldShowRequestPermissionRationale(String packageName, String permissionName, int deviceId, int userId) throws RemoteException {
+            public boolean shouldShowRequestPermissionRationale(
+                    String packageName, String permissionName, int deviceId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1026,7 +1146,9 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public boolean isPermissionRevokedByPolicy(String packageName, String permissionName, int deviceId, int userId) throws RemoteException {
+            public boolean isPermissionRevokedByPolicy(
+                    String packageName, String permissionName, int deviceId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1046,14 +1168,16 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public List<SplitPermissionInfoParcelable> getSplitPermissions() throws RemoteException {
+            public List<SplitPermissionInfoParcelable> getSplitPermissions()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(IPermissionManager.DESCRIPTOR);
                     this.mRemote.transact(20, _data, _reply, 0);
                     _reply.readException();
-                    List<SplitPermissionInfoParcelable> _result = _reply.createTypedArrayList(SplitPermissionInfoParcelable.CREATOR);
+                    List<SplitPermissionInfoParcelable> _result =
+                            _reply.createTypedArrayList(SplitPermissionInfoParcelable.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1062,7 +1186,13 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public void startOneTimePermissionSession(String packageName, int deviceId, int userId, long timeout, long revokeAfterKilledDelay) throws RemoteException {
+            public void startOneTimePermissionSession(
+                    String packageName,
+                    int deviceId,
+                    int userId,
+                    long timeout,
+                    long revokeAfterKilledDelay)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1081,7 +1211,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public void stopOneTimePermissionSession(String packageName, int userId) throws RemoteException {
+            public void stopOneTimePermissionSession(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1097,7 +1228,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public List<String> getAutoRevokeExemptionRequestedPackages(int userId) throws RemoteException {
+            public List<String> getAutoRevokeExemptionRequestedPackages(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1114,7 +1246,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public List<String> getAutoRevokeExemptionGrantedPackages(int userId) throws RemoteException {
+            public List<String> getAutoRevokeExemptionGrantedPackages(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1131,7 +1264,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public boolean setAutoRevokeExempted(String packageName, boolean exempted, int userId) throws RemoteException {
+            public boolean setAutoRevokeExempted(String packageName, boolean exempted, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1150,7 +1284,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public boolean isAutoRevokeExempted(String packageName, int userId) throws RemoteException {
+            public boolean isAutoRevokeExempted(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1168,7 +1303,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public IBinder registerAttributionSource(AttributionSourceState source) throws RemoteException {
+            public IBinder registerAttributionSource(AttributionSourceState source)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1202,7 +1338,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public boolean isRegisteredAttributionSource(AttributionSourceState source) throws RemoteException {
+            public boolean isRegisteredAttributionSource(AttributionSourceState source)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1219,7 +1356,12 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public int checkPermission(String packageName, String permissionName, String persistentDeviceId, int userId) throws RemoteException {
+            public int checkPermission(
+                    String packageName,
+                    String permissionName,
+                    String persistentDeviceId,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1239,7 +1381,8 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public int checkUidPermission(int uid, String permissionName, int deviceId) throws RemoteException {
+            public int checkUidPermission(int uid, String permissionName, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1258,7 +1401,9 @@ public interface IPermissionManager extends IInterface {
             }
 
             @Override // android.permission.IPermissionManager
-            public Map<String, PermissionManager.PermissionState> getAllPermissionStates(String packageName, String persistentDeviceId, int userId) throws RemoteException {
+            public Map<String, PermissionManager.PermissionState> getAllPermissionStates(
+                    String packageName, String persistentDeviceId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 final Parcel _reply = Parcel.obtain();
                 try {
@@ -1269,13 +1414,19 @@ public interface IPermissionManager extends IInterface {
                     this.mRemote.transact(32, _data, _reply, 0);
                     _reply.readException();
                     int N = _reply.readInt();
-                    final Map<String, PermissionManager.PermissionState> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.permission.IPermissionManager$Stub$Proxy$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IPermissionManager.Stub.Proxy.lambda$getAllPermissionStates$0(Parcel.this, _result, i);
-                        }
-                    });
+                    final Map<String, PermissionManager.PermissionState> _result =
+                            N < 0 ? null : new HashMap<>();
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                                        // android.permission.IPermissionManager$Stub$Proxy$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IPermissionManager.Stub.Proxy
+                                                    .lambda$getAllPermissionStates$0(
+                                                            Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1283,19 +1434,28 @@ public interface IPermissionManager extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$getAllPermissionStates$0(Parcel _reply, Map _result, int i) {
+            static /* synthetic */ void lambda$getAllPermissionStates$0(
+                    Parcel _reply, Map _result, int i) {
                 String k = _reply.readString();
-                PermissionManager.PermissionState v = (PermissionManager.PermissionState) _reply.readTypedObject(PermissionManager.PermissionState.CREATOR);
+                PermissionManager.PermissionState v =
+                        (PermissionManager.PermissionState)
+                                _reply.readTypedObject(PermissionManager.PermissionState.CREATOR);
                 _result.put(k, v);
             }
         }
 
         protected void startOneTimePermissionSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ONE_TIME_PERMISSION_SESSIONS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ONE_TIME_PERMISSION_SESSIONS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void stopOneTimePermissionSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ONE_TIME_PERMISSION_SESSIONS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ONE_TIME_PERMISSION_SESSIONS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         @Override // android.os.Binder

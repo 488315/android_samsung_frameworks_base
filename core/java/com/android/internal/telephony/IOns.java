@@ -6,8 +6,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.AvailableNetworkInfo;
-import com.android.internal.telephony.ISetOpportunisticDataCallback;
-import com.android.internal.telephony.IUpdateAvailableNetworksCallback;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -20,9 +19,18 @@ public interface IOns extends IInterface {
 
     boolean setEnable(boolean z, String str) throws RemoteException;
 
-    void setPreferredDataSubscriptionId(int i, boolean z, ISetOpportunisticDataCallback iSetOpportunisticDataCallback, String str) throws RemoteException;
+    void setPreferredDataSubscriptionId(
+            int i,
+            boolean z,
+            ISetOpportunisticDataCallback iSetOpportunisticDataCallback,
+            String str)
+            throws RemoteException;
 
-    void updateAvailableNetworks(List<AvailableNetworkInfo> list, IUpdateAvailableNetworksCallback iUpdateAvailableNetworksCallback, String str) throws RemoteException;
+    void updateAvailableNetworks(
+            List<AvailableNetworkInfo> list,
+            IUpdateAvailableNetworksCallback iUpdateAvailableNetworksCallback,
+            String str)
+            throws RemoteException;
 
     public static class Default implements IOns {
         @Override // com.android.internal.telephony.IOns
@@ -36,17 +44,25 @@ public interface IOns extends IInterface {
         }
 
         @Override // com.android.internal.telephony.IOns
-        public void setPreferredDataSubscriptionId(int subId, boolean needValidation, ISetOpportunisticDataCallback callbackStub, String callingPackage) throws RemoteException {
-        }
+        public void setPreferredDataSubscriptionId(
+                int subId,
+                boolean needValidation,
+                ISetOpportunisticDataCallback callbackStub,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IOns
-        public int getPreferredDataSubscriptionId(String callingPackage, String callingFeatureId) throws RemoteException {
+        public int getPreferredDataSubscriptionId(String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.telephony.IOns
-        public void updateAvailableNetworks(List<AvailableNetworkInfo> availableNetworks, IUpdateAvailableNetworksCallback callbackStub, String callingPackage) throws RemoteException {
-        }
+        public void updateAvailableNetworks(
+                List<AvailableNetworkInfo> availableNetworks,
+                IUpdateAvailableNetworksCallback callbackStub,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -54,7 +70,7 @@ public interface IOns extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOns {
+    public abstract static class Stub extends Binder implements IOns {
         static final int TRANSACTION_getPreferredDataSubscriptionId = 4;
         static final int TRANSACTION_isEnabled = 2;
         static final int TRANSACTION_setEnable = 1;
@@ -104,7 +120,8 @@ public interface IOns extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOns.DESCRIPTOR);
             }
@@ -131,7 +148,8 @@ public interface IOns extends IInterface {
                 case 3:
                     int _arg03 = data.readInt();
                     boolean _arg12 = data.readBoolean();
-                    ISetOpportunisticDataCallback _arg2 = ISetOpportunisticDataCallback.Stub.asInterface(data.readStrongBinder());
+                    ISetOpportunisticDataCallback _arg2 =
+                            ISetOpportunisticDataCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg3 = data.readString();
                     data.enforceNoDataAvail();
                     setPreferredDataSubscriptionId(_arg03, _arg12, _arg2, _arg3);
@@ -146,8 +164,11 @@ public interface IOns extends IInterface {
                     reply.writeInt(_result3);
                     return true;
                 case 5:
-                    List<AvailableNetworkInfo> _arg05 = data.createTypedArrayList(AvailableNetworkInfo.CREATOR);
-                    IUpdateAvailableNetworksCallback _arg14 = IUpdateAvailableNetworksCallback.Stub.asInterface(data.readStrongBinder());
+                    List<AvailableNetworkInfo> _arg05 =
+                            data.createTypedArrayList(AvailableNetworkInfo.CREATOR);
+                    IUpdateAvailableNetworksCallback _arg14 =
+                            IUpdateAvailableNetworksCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg22 = data.readString();
                     data.enforceNoDataAvail();
                     updateAvailableNetworks(_arg05, _arg14, _arg22);
@@ -210,7 +231,12 @@ public interface IOns extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IOns
-            public void setPreferredDataSubscriptionId(int subId, boolean needValidation, ISetOpportunisticDataCallback callbackStub, String callingPackage) throws RemoteException {
+            public void setPreferredDataSubscriptionId(
+                    int subId,
+                    boolean needValidation,
+                    ISetOpportunisticDataCallback callbackStub,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -228,7 +254,8 @@ public interface IOns extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IOns
-            public int getPreferredDataSubscriptionId(String callingPackage, String callingFeatureId) throws RemoteException {
+            public int getPreferredDataSubscriptionId(
+                    String callingPackage, String callingFeatureId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -246,7 +273,11 @@ public interface IOns extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IOns
-            public void updateAvailableNetworks(List<AvailableNetworkInfo> availableNetworks, IUpdateAvailableNetworksCallback callbackStub, String callingPackage) throws RemoteException {
+            public void updateAvailableNetworks(
+                    List<AvailableNetworkInfo> availableNetworks,
+                    IUpdateAvailableNetworksCallback callbackStub,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

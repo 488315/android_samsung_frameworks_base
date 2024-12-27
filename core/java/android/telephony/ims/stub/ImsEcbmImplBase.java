@@ -3,11 +3,12 @@ package android.telephony.ims.stub;
 import android.annotation.SystemApi;
 import android.app.PendingIntent$$ExternalSyntheticLambda0;
 import android.os.RemoteException;
-import android.telephony.ims.stub.ImsEcbmImplBase;
 import android.util.Log;
+
 import com.android.ims.internal.IImsEcbm;
 import com.android.ims.internal.IImsEcbmListener;
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import java.util.Objects;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
@@ -25,26 +26,32 @@ public class ImsEcbmImplBase {
 
     /* renamed from: android.telephony.ims.stub.ImsEcbmImplBase$1, reason: invalid class name */
     class AnonymousClass1 extends IImsEcbm.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // com.android.ims.internal.IImsEcbm
         public void setListener(final IImsEcbmListener listener) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsEcbmImplBase$1$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsEcbmImplBase.AnonymousClass1.this.lambda$setListener$0(listener);
-                }
-            }, "setListener");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsEcbmImplBase$1$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsEcbmImplBase.AnonymousClass1.this.lambda$setListener$0(listener);
+                        }
+                    },
+                    "setListener");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$setListener$0(IImsEcbmListener listener) {
-            if (ImsEcbmImplBase.this.mListener != null && !ImsEcbmImplBase.this.mListener.asBinder().isBinderAlive()) {
+            if (ImsEcbmImplBase.this.mListener != null
+                    && !ImsEcbmImplBase.this.mListener.asBinder().isBinderAlive()) {
                 Log.w(ImsEcbmImplBase.TAG, "setListener: discarding dead Binder");
                 ImsEcbmImplBase.this.mListener = null;
             }
-            if (ImsEcbmImplBase.this.mListener != null && listener != null && Objects.equals(ImsEcbmImplBase.this.mListener.asBinder(), listener.asBinder())) {
+            if (ImsEcbmImplBase.this.mListener != null
+                    && listener != null
+                    && Objects.equals(
+                            ImsEcbmImplBase.this.mListener.asBinder(), listener.asBinder())) {
                 return;
             }
             if (listener == null) {
@@ -52,7 +59,9 @@ public class ImsEcbmImplBase {
             } else if (listener != null && ImsEcbmImplBase.this.mListener == null) {
                 ImsEcbmImplBase.this.mListener = listener;
             } else {
-                Log.w(ImsEcbmImplBase.TAG, "setListener is being called when there is already an active listener");
+                Log.w(
+                        ImsEcbmImplBase.TAG,
+                        "setListener is being called when there is already an active listener");
                 ImsEcbmImplBase.this.mListener = listener;
             }
         }
@@ -64,24 +73,37 @@ public class ImsEcbmImplBase {
 
         @Override // com.android.ims.internal.IImsEcbm
         public void exitEmergencyCallbackMode() {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsEcbmImplBase$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsEcbmImplBase.AnonymousClass1.this.lambda$exitEmergencyCallbackMode$1();
-                }
-            }, "exitEmergencyCallbackMode");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsEcbmImplBase$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsEcbmImplBase.AnonymousClass1.this
+                                    .lambda$exitEmergencyCallbackMode$1();
+                        }
+                    },
+                    "exitEmergencyCallbackMode");
         }
 
         private void executeMethodAsync(final Runnable r, String errorLogName) {
             try {
-                CompletableFuture.runAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsEcbmImplBase$1$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        TelephonyUtils.runWithCleanCallingIdentity(r);
-                    }
-                }, ImsEcbmImplBase.this.mExecutor).join();
+                CompletableFuture.runAsync(
+                                new Runnable() { // from class:
+                                                 // android.telephony.ims.stub.ImsEcbmImplBase$1$$ExternalSyntheticLambda1
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        TelephonyUtils.runWithCleanCallingIdentity(r);
+                                    }
+                                },
+                                ImsEcbmImplBase.this.mExecutor)
+                        .join();
             } catch (CancellationException | CompletionException e) {
-                Log.w(ImsEcbmImplBase.TAG, "ImsEcbmImplBase Binder - " + errorLogName + " exception: " + e.getMessage());
+                Log.w(
+                        ImsEcbmImplBase.TAG,
+                        "ImsEcbmImplBase Binder - "
+                                + errorLogName
+                                + " exception: "
+                                + e.getMessage());
             }
         }
     }

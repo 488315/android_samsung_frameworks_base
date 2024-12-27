@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.SurroundingText;
 import android.view.inputmethod.TextAttribute;
+
 import com.android.internal.inputmethod.IAccessibilityInputMethodSessionCallback;
 import com.android.internal.inputmethod.IRemoteAccessibilityInputConnection;
 import com.android.internal.inputmethod.RemoteAccessibilityInputConnection;
@@ -38,17 +39,22 @@ public class InputMethod {
         return this.mInputEditorInfo;
     }
 
-    public void onStartInput(EditorInfo attribute, boolean restarting) {
-    }
+    public void onStartInput(EditorInfo attribute, boolean restarting) {}
 
-    public void onFinishInput() {
-    }
+    public void onFinishInput() {}
 
-    public void onUpdateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd, int candidatesStart, int candidatesEnd) {
-    }
+    public void onUpdateSelection(
+            int oldSelStart,
+            int oldSelEnd,
+            int newSelStart,
+            int newSelEnd,
+            int candidatesStart,
+            int candidatesEnd) {}
 
     final void createImeSession(IAccessibilityInputMethodSessionCallback callback) {
-        AccessibilityInputMethodSessionWrapper wrapper = new AccessibilityInputMethodSessionWrapper(this.mService.getMainLooper(), new SessionImpl());
+        AccessibilityInputMethodSessionWrapper wrapper =
+                new AccessibilityInputMethodSessionWrapper(
+                        this.mService.getMainLooper(), new SessionImpl());
         try {
             callback.sessionCreated(wrapper, this.mService.getConnectionId());
         } catch (RemoteException e) {
@@ -69,7 +75,8 @@ public class InputMethod {
         Trace.traceEnd(32L);
     }
 
-    final void doStartInput(RemoteAccessibilityInputConnection ic, EditorInfo attribute, boolean restarting) {
+    final void doStartInput(
+            RemoteAccessibilityInputConnection ic, EditorInfo attribute, boolean restarting) {
         if ((ic == null || !restarting) && this.mInputStarted) {
             doFinishInput();
             if (ic == null) {
@@ -101,7 +108,8 @@ public class InputMethod {
             this.mIc = ic;
         }
 
-        public void commitText(CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
+        public void commitText(
+                CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
             if (this.mIc != null) {
                 this.mIc.commitText(text, newCursorPosition, textAttribute);
             }
@@ -178,19 +186,40 @@ public class InputMethod {
         }
 
         @Override // android.accessibilityservice.AccessibilityInputMethodSession
-        public void updateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd, int candidatesStart, int candidatesEnd) {
+        public void updateSelection(
+                int oldSelStart,
+                int oldSelEnd,
+                int newSelStart,
+                int newSelEnd,
+                int candidatesStart,
+                int candidatesEnd) {
             if (this.mEnabled) {
-                InputMethod.this.onUpdateSelection(oldSelEnd, oldSelEnd, newSelStart, newSelEnd, candidatesStart, candidatesEnd);
+                InputMethod.this.onUpdateSelection(
+                        oldSelEnd,
+                        oldSelEnd,
+                        newSelStart,
+                        newSelEnd,
+                        candidatesStart,
+                        candidatesEnd);
             }
         }
 
         @Override // android.accessibilityservice.AccessibilityInputMethodSession
-        public void invalidateInput(EditorInfo editorInfo, IRemoteAccessibilityInputConnection connection, int sessionId) {
-            if (!this.mEnabled || InputMethod.this.mStartedInputConnection == null || !InputMethod.this.mStartedInputConnection.isSameConnection(connection)) {
+        public void invalidateInput(
+                EditorInfo editorInfo,
+                IRemoteAccessibilityInputConnection connection,
+                int sessionId) {
+            if (!this.mEnabled
+                    || InputMethod.this.mStartedInputConnection == null
+                    || !InputMethod.this.mStartedInputConnection.isSameConnection(connection)) {
                 return;
             }
-            editorInfo.makeCompatible(InputMethod.this.mService.getApplicationInfo().targetSdkVersion);
-            InputMethod.this.restartInput(new RemoteAccessibilityInputConnection(InputMethod.this.mStartedInputConnection, sessionId), editorInfo);
+            editorInfo.makeCompatible(
+                    InputMethod.this.mService.getApplicationInfo().targetSdkVersion);
+            InputMethod.this.restartInput(
+                    new RemoteAccessibilityInputConnection(
+                            InputMethod.this.mStartedInputConnection, sessionId),
+                    editorInfo);
         }
     }
 }

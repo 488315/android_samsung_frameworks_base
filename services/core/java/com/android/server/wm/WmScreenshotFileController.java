@@ -3,7 +3,9 @@ package com.android.server.wm;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.util.Log;
+
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -17,10 +19,14 @@ public final class WmScreenshotFileController {
     public WindowManagerService mService;
     public int mTargetWindowNumber;
 
-    public final void saveBitmapToScreenshotFile(String str, Bitmap bitmap, PrintWriter printWriter, int i) {
+    public final void saveBitmapToScreenshotFile(
+            String str, Bitmap bitmap, PrintWriter printWriter, int i) {
         String m;
         int i2;
-        File file = new File(Environment.getDataSystemCeDirectory(this.mService.mCurrentUserId), "screenshot");
+        File file =
+                new File(
+                        Environment.getDataSystemCeDirectory(this.mService.mCurrentUserId),
+                        "screenshot");
         if (!file.exists() && !file.mkdir()) {
             if (printWriter == null) {
                 Log.e("WindowManager", "Failed create directory");

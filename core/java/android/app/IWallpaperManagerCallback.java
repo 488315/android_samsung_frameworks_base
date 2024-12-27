@@ -13,32 +13,33 @@ public interface IWallpaperManagerCallback extends IInterface {
 
     void onSemWallpaperColorsAnalysisRequested(int i, int i2) throws RemoteException;
 
-    void onSemWallpaperColorsChanged(SemWallpaperColors semWallpaperColors, int i, int i2) throws RemoteException;
+    void onSemWallpaperColorsChanged(SemWallpaperColors semWallpaperColors, int i, int i2)
+            throws RemoteException;
 
     void onWallpaperChanged() throws RemoteException;
 
-    void onWallpaperColorsChanged(WallpaperColors wallpaperColors, int i, int i2) throws RemoteException;
+    void onWallpaperColorsChanged(WallpaperColors wallpaperColors, int i, int i2)
+            throws RemoteException;
 
     public static class Default implements IWallpaperManagerCallback {
         @Override // android.app.IWallpaperManagerCallback
-        public void onWallpaperChanged() throws RemoteException {
-        }
+        public void onWallpaperChanged() throws RemoteException {}
 
         @Override // android.app.IWallpaperManagerCallback
-        public void onWallpaperColorsChanged(WallpaperColors colors, int which, int userId) throws RemoteException {
-        }
+        public void onWallpaperColorsChanged(WallpaperColors colors, int which, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManagerCallback
-        public void onSemWallpaperColorsChanged(SemWallpaperColors colors, int which, int userId) throws RemoteException {
-        }
+        public void onSemWallpaperColorsChanged(SemWallpaperColors colors, int which, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManagerCallback
-        public void onSemWallpaperColorsAnalysisRequested(int which, int userId) throws RemoteException {
-        }
+        public void onSemWallpaperColorsAnalysisRequested(int which, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IWallpaperManagerCallback
-        public void onSemWallpaperChanged(int type, int which, Bundle extras) throws RemoteException {
-        }
+        public void onSemWallpaperChanged(int type, int which, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -46,7 +47,7 @@ public interface IWallpaperManagerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWallpaperManagerCallback {
+    public abstract static class Stub extends Binder implements IWallpaperManagerCallback {
         public static final String DESCRIPTOR = "android.app.IWallpaperManagerCallback";
         static final int TRANSACTION_onSemWallpaperChanged = 5;
         static final int TRANSACTION_onSemWallpaperColorsAnalysisRequested = 4;
@@ -97,7 +98,8 @@ public interface IWallpaperManagerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -110,14 +112,16 @@ public interface IWallpaperManagerCallback extends IInterface {
                     onWallpaperChanged();
                     return true;
                 case 2:
-                    WallpaperColors _arg0 = (WallpaperColors) data.readTypedObject(WallpaperColors.CREATOR);
+                    WallpaperColors _arg0 =
+                            (WallpaperColors) data.readTypedObject(WallpaperColors.CREATOR);
                     int _arg1 = data.readInt();
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     onWallpaperColorsChanged(_arg0, _arg1, _arg2);
                     return true;
                 case 3:
-                    SemWallpaperColors _arg02 = (SemWallpaperColors) data.readTypedObject(SemWallpaperColors.CREATOR);
+                    SemWallpaperColors _arg02 =
+                            (SemWallpaperColors) data.readTypedObject(SemWallpaperColors.CREATOR);
                     int _arg12 = data.readInt();
                     int _arg22 = data.readInt();
                     data.enforceNoDataAvail();
@@ -169,7 +173,8 @@ public interface IWallpaperManagerCallback extends IInterface {
             }
 
             @Override // android.app.IWallpaperManagerCallback
-            public void onWallpaperColorsChanged(WallpaperColors colors, int which, int userId) throws RemoteException {
+            public void onWallpaperColorsChanged(WallpaperColors colors, int which, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -183,7 +188,8 @@ public interface IWallpaperManagerCallback extends IInterface {
             }
 
             @Override // android.app.IWallpaperManagerCallback
-            public void onSemWallpaperColorsChanged(SemWallpaperColors colors, int which, int userId) throws RemoteException {
+            public void onSemWallpaperColorsChanged(
+                    SemWallpaperColors colors, int which, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -197,7 +203,8 @@ public interface IWallpaperManagerCallback extends IInterface {
             }
 
             @Override // android.app.IWallpaperManagerCallback
-            public void onSemWallpaperColorsAnalysisRequested(int which, int userId) throws RemoteException {
+            public void onSemWallpaperColorsAnalysisRequested(int which, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -210,7 +217,8 @@ public interface IWallpaperManagerCallback extends IInterface {
             }
 
             @Override // android.app.IWallpaperManagerCallback
-            public void onSemWallpaperChanged(int type, int which, Bundle extras) throws RemoteException {
+            public void onSemWallpaperChanged(int type, int which, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

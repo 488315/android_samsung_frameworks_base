@@ -3,11 +3,13 @@ package com.samsung.android.allshare.extension.impl;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
+
 import com.samsung.android.allshare.Caption;
 import com.samsung.android.allshare.Item;
 import com.samsung.android.allshare.Subtitle;
 import com.sec.android.allshare.iface.IBundleHolder;
 import com.sec.android.allshare.iface.message.AllShareKey;
+
 import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
@@ -29,12 +31,17 @@ public class SimpleAudioItem extends Item implements IBundleHolder {
 
     @Override // com.samsung.android.allshare.Item
     public String getTitle() {
-        return this.mBundle == null ? "" : this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_TITLE);
+        return this.mBundle == null
+                ? ""
+                : this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_TITLE);
     }
 
     @Override // com.samsung.android.allshare.Item
     public Uri getURI() {
-        return (Uri) (this.mBundle == null ? null : this.mBundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM_URI));
+        return (Uri)
+                (this.mBundle == null
+                        ? null
+                        : this.mBundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM_URI));
     }
 
     @Override // android.os.Parcelable
@@ -97,7 +104,9 @@ public class SimpleAudioItem extends Item implements IBundleHolder {
 
     @Override // com.samsung.android.allshare.Item
     public String getMimetype() {
-        return this.mBundle == null ? "" : this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
+        return this.mBundle == null
+                ? ""
+                : this.mBundle.getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
     }
 
     @Override // com.samsung.android.allshare.Item

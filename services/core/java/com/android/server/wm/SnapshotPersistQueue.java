@@ -6,9 +6,11 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.os.Trace;
 import android.window.TaskSnapshot;
+
 import com.android.server.LocalServices;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.pm.UserManagerInternal;
+
 import java.io.File;
 import java.util.ArrayDeque;
 
@@ -21,56 +23,64 @@ public final class SnapshotPersistQueue {
     public final ArrayDeque mWriteQueue = new ArrayDeque();
     public final ArrayDeque mStoreQueueItems = new ArrayDeque();
     public final Object mLock = new Object();
-    public final AnonymousClass1 mPersister = new Thread() { // from class: com.android.server.wm.SnapshotPersistQueue.1
-        @Override // java.lang.Thread, java.lang.Runnable
-        public final void run() {
-            WriteQueueItem writeQueueItem;
-            boolean z;
-            Process.setThreadPriority(10);
-            while (true) {
-                synchronized (SnapshotPersistQueue.this.mLock) {
-                    try {
-                        SnapshotPersistQueue snapshotPersistQueue = SnapshotPersistQueue.this;
-                        if (snapshotPersistQueue.mPaused) {
-                            writeQueueItem = null;
-                        } else {
-                            writeQueueItem = (WriteQueueItem) snapshotPersistQueue.mWriteQueue.poll();
-                            if (writeQueueItem != null) {
-                                if (writeQueueItem.isReady(SnapshotPersistQueue.this.mUserManagerInternal)) {
-                                    writeQueueItem.onDequeuedLocked();
-                                    z = true;
+    public final AnonymousClass1 mPersister =
+            new Thread() { // from class: com.android.server.wm.SnapshotPersistQueue.1
+                @Override // java.lang.Thread, java.lang.Runnable
+                public final void run() {
+                    WriteQueueItem writeQueueItem;
+                    boolean z;
+                    Process.setThreadPriority(10);
+                    while (true) {
+                        synchronized (SnapshotPersistQueue.this.mLock) {
+                            try {
+                                SnapshotPersistQueue snapshotPersistQueue =
+                                        SnapshotPersistQueue.this;
+                                if (snapshotPersistQueue.mPaused) {
+                                    writeQueueItem = null;
                                 } else {
-                                    SnapshotPersistQueue.this.mWriteQueue.addLast(writeQueueItem);
+                                    writeQueueItem =
+                                            (WriteQueueItem)
+                                                    snapshotPersistQueue.mWriteQueue.poll();
+                                    if (writeQueueItem != null) {
+                                        if (writeQueueItem.isReady(
+                                                SnapshotPersistQueue.this.mUserManagerInternal)) {
+                                            writeQueueItem.onDequeuedLocked();
+                                            z = true;
+                                        } else {
+                                            SnapshotPersistQueue.this.mWriteQueue.addLast(
+                                                    writeQueueItem);
+                                        }
+                                    }
+                                }
+                                z = false;
+                            } catch (Throwable th) {
+                                throw th;
+                            }
+                        }
+                        if (writeQueueItem != null) {
+                            if (z) {
+                                writeQueueItem.write();
+                            }
+                            SystemClock.sleep(100L);
+                        }
+                        synchronized (SnapshotPersistQueue.this.mLock) {
+                            boolean isEmpty = SnapshotPersistQueue.this.mWriteQueue.isEmpty();
+                            if (isEmpty || SnapshotPersistQueue.this.mPaused) {
+                                try {
+                                    SnapshotPersistQueue snapshotPersistQueue2 =
+                                            SnapshotPersistQueue.this;
+                                    snapshotPersistQueue2.mQueueIdling = isEmpty;
+                                    snapshotPersistQueue2.mLock.wait();
+                                    SnapshotPersistQueue.this.mQueueIdling = false;
+                                } catch (InterruptedException unused) {
                                 }
                             }
                         }
-                        z = false;
-                    } catch (Throwable th) {
-                        throw th;
                     }
                 }
-                if (writeQueueItem != null) {
-                    if (z) {
-                        writeQueueItem.write();
-                    }
-                    SystemClock.sleep(100L);
-                }
-                synchronized (SnapshotPersistQueue.this.mLock) {
-                    boolean isEmpty = SnapshotPersistQueue.this.mWriteQueue.isEmpty();
-                    if (isEmpty || SnapshotPersistQueue.this.mPaused) {
-                        try {
-                            SnapshotPersistQueue snapshotPersistQueue2 = SnapshotPersistQueue.this;
-                            snapshotPersistQueue2.mQueueIdling = isEmpty;
-                            snapshotPersistQueue2.mLock.wait();
-                            SnapshotPersistQueue.this.mQueueIdling = false;
-                        } catch (InterruptedException unused) {
-                        }
-                    }
-                }
-            }
-        }
-    };
-    public final UserManagerInternal mUserManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+            };
+    public final UserManagerInternal mUserManagerInternal =
+            (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CloseBufferWriteQueueItem extends WriteQueueItem {
@@ -90,7 +100,11 @@ public final class SnapshotPersistQueue {
     public final class DeleteWriteQueueItem extends WriteQueueItem {
         public final int mId;
 
-        public DeleteWriteQueueItem(int i, int i2, BaseAppSnapshotPersister$PersistInfoProvider baseAppSnapshotPersister$PersistInfoProvider) {
+        public DeleteWriteQueueItem(
+                int i,
+                int i2,
+                BaseAppSnapshotPersister$PersistInfoProvider
+                        baseAppSnapshotPersister$PersistInfoProvider) {
             super(baseAppSnapshotPersister$PersistInfoProvider, i2);
             this.mId = i;
         }
@@ -116,7 +130,12 @@ public final class SnapshotPersistQueue {
         public final int mId;
         public final TaskSnapshot mSnapshot;
 
-        public StoreWriteQueueItem(int i, int i2, TaskSnapshot taskSnapshot, BaseAppSnapshotPersister$PersistInfoProvider baseAppSnapshotPersister$PersistInfoProvider) {
+        public StoreWriteQueueItem(
+                int i,
+                int i2,
+                TaskSnapshot taskSnapshot,
+                BaseAppSnapshotPersister$PersistInfoProvider
+                        baseAppSnapshotPersister$PersistInfoProvider) {
             super(baseAppSnapshotPersister$PersistInfoProvider, i2);
             this.mId = i;
             taskSnapshot.addReference(4);
@@ -128,7 +147,9 @@ public final class SnapshotPersistQueue {
                 return false;
             }
             StoreWriteQueueItem storeWriteQueueItem = (StoreWriteQueueItem) obj;
-            return this.mId == storeWriteQueueItem.mId && this.mUserId == storeWriteQueueItem.mUserId && this.mPersistInfoProvider == storeWriteQueueItem.mPersistInfoProvider;
+            return this.mId == storeWriteQueueItem.mId
+                    && this.mUserId == storeWriteQueueItem.mUserId
+                    && this.mPersistInfoProvider == storeWriteQueueItem.mPersistInfoProvider;
         }
 
         @Override // com.android.server.wm.SnapshotPersistQueue.WriteQueueItem
@@ -161,7 +182,9 @@ public final class SnapshotPersistQueue {
                 Method dump skipped, instructions count: 598
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.SnapshotPersistQueue.StoreWriteQueueItem.write():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.wm.SnapshotPersistQueue.StoreWriteQueueItem.write():void");
         }
     }
 
@@ -170,7 +193,10 @@ public final class SnapshotPersistQueue {
         public final BaseAppSnapshotPersister$PersistInfoProvider mPersistInfoProvider;
         public final int mUserId;
 
-        public WriteQueueItem(BaseAppSnapshotPersister$PersistInfoProvider baseAppSnapshotPersister$PersistInfoProvider, int i) {
+        public WriteQueueItem(
+                BaseAppSnapshotPersister$PersistInfoProvider
+                        baseAppSnapshotPersister$PersistInfoProvider,
+                int i) {
             this.mPersistInfoProvider = baseAppSnapshotPersister$PersistInfoProvider;
             this.mUserId = i;
         }
@@ -179,25 +205,29 @@ public final class SnapshotPersistQueue {
             return userManagerInternal.isUserUnlocked(this.mUserId);
         }
 
-        public void onDequeuedLocked() {
-        }
+        public void onDequeuedLocked() {}
 
-        public void onQueuedLocked() {
-        }
+        public void onQueuedLocked() {}
 
         public abstract void write();
     }
 
-    public static void deleteSnapshot(int i, int i2, BaseAppSnapshotPersister$PersistInfoProvider baseAppSnapshotPersister$PersistInfoProvider) {
+    public static void deleteSnapshot(
+            int i,
+            int i2,
+            BaseAppSnapshotPersister$PersistInfoProvider
+                    baseAppSnapshotPersister$PersistInfoProvider) {
         File protoFile = baseAppSnapshotPersister$PersistInfoProvider.getProtoFile(i, i2);
-        File lowResolutionBitmapFile = baseAppSnapshotPersister$PersistInfoProvider.getLowResolutionBitmapFile(i, i2);
+        File lowResolutionBitmapFile =
+                baseAppSnapshotPersister$PersistInfoProvider.getLowResolutionBitmapFile(i, i2);
         if (protoFile.exists()) {
             protoFile.delete();
         }
         if (lowResolutionBitmapFile.exists()) {
             lowResolutionBitmapFile.delete();
         }
-        File highResolutionBitmapFile = baseAppSnapshotPersister$PersistInfoProvider.getHighResolutionBitmapFile(i, i2);
+        File highResolutionBitmapFile =
+                baseAppSnapshotPersister$PersistInfoProvider.getHighResolutionBitmapFile(i, i2);
         if (highResolutionBitmapFile.exists()) {
             highResolutionBitmapFile.delete();
         }
@@ -212,9 +242,13 @@ public final class SnapshotPersistQueue {
         }
         writeQueueItem.onQueuedLocked();
         while (this.mStoreQueueItems.size() > 2) {
-            StoreWriteQueueItem storeWriteQueueItem = (StoreWriteQueueItem) this.mStoreQueueItems.poll();
+            StoreWriteQueueItem storeWriteQueueItem =
+                    (StoreWriteQueueItem) this.mStoreQueueItems.poll();
             this.mWriteQueue.remove(storeWriteQueueItem);
-            SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("Queue is too deep! Purged item with index="), storeWriteQueueItem.mId, "WindowManager");
+            SystemServiceManager$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Queue is too deep! Purged item with index="),
+                    storeWriteQueueItem.mId,
+                    "WindowManager");
         }
         if (this.mPaused) {
             return;

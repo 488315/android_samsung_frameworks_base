@@ -3,6 +3,7 @@ package vendor.samsung.hardware.radio.V2_2;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -21,18 +22,33 @@ public final class SehEriInfo {
             return false;
         }
         SehEriInfo other = (SehEriInfo) otherObject;
-        if (this.roamingIndicator == other.roamingIndicator && this.iconIndex == other.iconIndex && this.iconMode == other.iconMode && HidlSupport.deepEquals(this.eriText, other.eriText)) {
+        if (this.roamingIndicator == other.roamingIndicator
+                && this.iconIndex == other.iconIndex
+                && this.iconMode == other.iconMode
+                && HidlSupport.deepEquals(this.eriText, other.eriText)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.roamingIndicator))), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.iconIndex))), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.iconMode))), Integer.valueOf(HidlSupport.deepHashCode(this.eriText)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.roamingIndicator))),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.iconIndex))),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.iconMode))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.eriText)));
     }
 
     public final String toString() {
-        return "{.roamingIndicator = " + ((int) this.roamingIndicator) + ", .iconIndex = " + ((int) this.iconIndex) + ", .iconMode = " + ((int) this.iconMode) + ", .eriText = " + this.eriText + "}";
+        return "{.roamingIndicator = "
+                + ((int) this.roamingIndicator)
+                + ", .iconIndex = "
+                + ((int) this.iconIndex)
+                + ", .iconMode = "
+                + ((int) this.iconMode)
+                + ", .eriText = "
+                + this.eriText
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -44,7 +60,8 @@ public final class SehEriInfo {
         ArrayList<SehEriInfo> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SehEriInfo _hidl_vec_element = new SehEriInfo();
@@ -54,12 +71,17 @@ public final class SehEriInfo {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.roamingIndicator = _hidl_blob.getInt8(_hidl_offset + 0);
         this.iconIndex = _hidl_blob.getInt8(_hidl_offset + 1);
         this.iconMode = _hidl_blob.getInt8(_hidl_offset + 2);
         this.eriText = _hidl_blob.getString(_hidl_offset + 8);
-        parcel.readEmbeddedBuffer(this.eriText.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.eriText.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 8 + 0,
+                false);
     }
 
     public final void writeToParcel(HwParcel parcel) {

@@ -2,7 +2,9 @@ package com.samsung.android.service.ProtectedATCommand;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Slog;
+
 import com.samsung.android.service.ProtectedATCommand.list.ATCommands;
+
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -21,7 +23,13 @@ public class PACMClassifier {
         for (Object arg : args) {
             if (arg == null) {
                 StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
-                Slog.e(TAG, NavigationBarInflaterView.SIZE_MOD_START + stackTrace[2].getMethodName() + "] Parameter(" + idx + ") is null.");
+                Slog.e(
+                        TAG,
+                        NavigationBarInflaterView.SIZE_MOD_START
+                                + stackTrace[2].getMethodName()
+                                + "] Parameter("
+                                + idx
+                                + ") is null.");
                 isNull = true;
             }
             idx++;
@@ -29,7 +37,8 @@ public class PACMClassifier {
         return isNull;
     }
 
-    private static ATCommands findATCommands(LinkedHashMap<String, LinkedHashSet<ATCommands>> atMap, String name, ATCommands atCmd) {
+    private static ATCommands findATCommands(
+            LinkedHashMap<String, LinkedHashSet<ATCommands>> atMap, String name, ATCommands atCmd) {
         if (checkNullParameter(atMap, name, atCmd)) {
             return null;
         }
@@ -67,7 +76,8 @@ public class PACMClassifier {
         return null;
     }
 
-    public static ATCommands getCommand(LinkedHashMap<String, LinkedHashSet<ATCommands>> atMap, String cmd) {
+    public static ATCommands getCommand(
+            LinkedHashMap<String, LinkedHashSet<ATCommands>> atMap, String cmd) {
         Slog.i(TAG, "getCommand() is called.");
         if (checkNullParameter(atMap, cmd)) {
             return new ATCommands();
@@ -90,7 +100,9 @@ public class PACMClassifier {
                 }
             }
             if (cmdName == null) {
-                Slog.e(TAG, "Failed to get cmd name(" + cmd + NavigationBarInflaterView.KEY_CODE_END);
+                Slog.e(
+                        TAG,
+                        "Failed to get cmd name(" + cmd + NavigationBarInflaterView.KEY_CODE_END);
                 return new ATCommands();
             }
             LinkedHashSet<ATCommands> cmdPool = atMap.get(cmdName);
@@ -115,7 +127,10 @@ public class PACMClassifier {
         }
     }
 
-    public static int putCommandList(LinkedHashMap<String, LinkedHashSet<ATCommands>> atMap, String cmdName, ATCommands atCmd) {
+    public static int putCommandList(
+            LinkedHashMap<String, LinkedHashSet<ATCommands>> atMap,
+            String cmdName,
+            ATCommands atCmd) {
         if (checkNullParameter(atMap, cmdName, atCmd)) {
             return -268435456;
         }
@@ -133,7 +148,8 @@ public class PACMClassifier {
         return 1;
     }
 
-    public static int putCommandList(LinkedHashMap<String, LinkedHashSet<ATCommands>> atMap, List<ATCommands> list) {
+    public static int putCommandList(
+            LinkedHashMap<String, LinkedHashSet<ATCommands>> atMap, List<ATCommands> list) {
         if (checkNullParameter(atMap, list)) {
             return -268435456;
         }

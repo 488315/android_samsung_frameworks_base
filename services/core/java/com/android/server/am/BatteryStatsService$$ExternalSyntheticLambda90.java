@@ -5,7 +5,8 @@ import com.android.server.power.stats.BatteryStatsImpl;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda90 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda90
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ int f$1;
@@ -13,7 +14,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda9
     public final /* synthetic */ long f$3;
     public final /* synthetic */ long f$4;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda90(int i, int i2, long j, long j2, long j3, BatteryStatsService batteryStatsService) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda90(
+            int i, int i2, long j, long j2, long j3, BatteryStatsService batteryStatsService) {
         this.$r8$classId = i2;
         this.f$0 = batteryStatsService;
         this.f$1 = i;
@@ -43,12 +45,14 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda9
                 long j6 = this.f$4;
                 synchronized (batteryStatsService2.mStats) {
                     BatteryStatsImpl batteryStatsImpl = batteryStatsService2.mStats;
-                    BatteryStatsImpl.Uid uidStatsLocked = batteryStatsImpl.getUidStatsLocked(batteryStatsImpl.mapUid(i2), j5, j6);
+                    BatteryStatsImpl.Uid uidStatsLocked =
+                            batteryStatsImpl.getUidStatsLocked(batteryStatsImpl.mapUid(i2), j5, j6);
                     if (uidStatsLocked.mVibratorOnTimer == null) {
                         BatteryStatsImpl batteryStatsImpl2 = uidStatsLocked.mBsi;
                         Clock clock = batteryStatsImpl2.mClock;
                         BatteryStatsImpl.TimeBase timeBase = batteryStatsImpl2.mOnBatteryTimeBase;
-                        BatteryStatsImpl.BatchTimer batchTimer = new BatteryStatsImpl.BatchTimer(clock, timeBase);
+                        BatteryStatsImpl.BatchTimer batchTimer =
+                                new BatteryStatsImpl.BatchTimer(clock, timeBase);
                         batchTimer.mInDischarge = timeBase.mRunning;
                         uidStatsLocked.mVibratorOnTimer = batchTimer;
                     }

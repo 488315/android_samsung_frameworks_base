@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -33,9 +34,12 @@ public class PreferenceFrameLayout extends FrameLayout {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public PreferenceFrameLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public PreferenceFrameLayout(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PreferenceFrameLayout, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.PreferenceFrameLayout, defStyleAttr, defStyleRes);
         float density = context.getResources().getDisplayMetrics().density;
         int defaultBorderTop = (int) ((density * 0.0f) + 0.5f);
         int defaultBottomPadding = (int) ((density * 0.0f) + 0.5f);
@@ -60,7 +64,8 @@ public class PreferenceFrameLayout extends FrameLayout {
         int borderLeft = getPaddingLeft();
         int borderRight = getPaddingRight();
         ViewGroup.LayoutParams params = child.getLayoutParams();
-        LayoutParams layoutParams = params instanceof LayoutParams ? (LayoutParams) child.getLayoutParams() : null;
+        LayoutParams layoutParams =
+                params instanceof LayoutParams ? (LayoutParams) child.getLayoutParams() : null;
         if (layoutParams != null && layoutParams.removeBorders) {
             if (this.mPaddingApplied) {
                 borderTop -= this.mBorderTop;
@@ -80,7 +85,10 @@ public class PreferenceFrameLayout extends FrameLayout {
         int previousBottom = getPaddingBottom();
         int previousLeft = getPaddingLeft();
         int previousRight = getPaddingRight();
-        if (previousTop != borderTop || previousBottom != borderBottom || previousLeft != borderLeft || previousRight != borderRight) {
+        if (previousTop != borderTop
+                || previousBottom != borderBottom
+                || previousLeft != borderLeft
+                || previousRight != borderRight) {
             setPadding(borderLeft, borderTop, borderRight, borderBottom);
         }
         super.addView(child);
@@ -92,7 +100,8 @@ public class PreferenceFrameLayout extends FrameLayout {
         public LayoutParams(Context c, AttributeSet attrs) {
             super(c, attrs);
             this.removeBorders = false;
-            TypedArray a = c.obtainStyledAttributes(attrs, R.styleable.PreferenceFrameLayout_Layout);
+            TypedArray a =
+                    c.obtainStyledAttributes(attrs, R.styleable.PreferenceFrameLayout_Layout);
             this.removeBorders = a.getBoolean(0, false);
             a.recycle();
         }

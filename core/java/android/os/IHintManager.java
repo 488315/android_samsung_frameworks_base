@@ -2,7 +2,6 @@ package android.os;
 
 import android.hardware.power.ChannelConfig;
 import android.hardware.power.SessionConfig;
-import android.os.IHintSession;
 
 /* loaded from: classes3.dex */
 public interface IHintManager extends IInterface {
@@ -10,7 +9,9 @@ public interface IHintManager extends IInterface {
 
     void closeSessionChannel() throws RemoteException;
 
-    IHintSession createHintSessionWithConfig(IBinder iBinder, int[] iArr, long j, int i, SessionConfig sessionConfig) throws RemoteException;
+    IHintSession createHintSessionWithConfig(
+            IBinder iBinder, int[] iArr, long j, int i, SessionConfig sessionConfig)
+            throws RemoteException;
 
     long getHintSessionPreferredRate() throws RemoteException;
 
@@ -22,7 +23,9 @@ public interface IHintManager extends IInterface {
 
     public static class Default implements IHintManager {
         @Override // android.os.IHintManager
-        public IHintSession createHintSessionWithConfig(IBinder token, int[] threadIds, long durationNanos, int tag, SessionConfig config) throws RemoteException {
+        public IHintSession createHintSessionWithConfig(
+                IBinder token, int[] threadIds, long durationNanos, int tag, SessionConfig config)
+                throws RemoteException {
             return null;
         }
 
@@ -32,8 +35,8 @@ public interface IHintManager extends IInterface {
         }
 
         @Override // android.os.IHintManager
-        public void setHintSessionThreads(IHintSession hintSession, int[] tids) throws RemoteException {
-        }
+        public void setHintSessionThreads(IHintSession hintSession, int[] tids)
+                throws RemoteException {}
 
         @Override // android.os.IHintManager
         public int[] getHintSessionThreadIds(IHintSession hintSession) throws RemoteException {
@@ -46,8 +49,7 @@ public interface IHintManager extends IInterface {
         }
 
         @Override // android.os.IHintManager
-        public void closeSessionChannel() throws RemoteException {
-        }
+        public void closeSessionChannel() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -55,7 +57,7 @@ public interface IHintManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHintManager {
+    public abstract static class Stub extends Binder implements IHintManager {
         static final int TRANSACTION_closeSessionChannel = 6;
         static final int TRANSACTION_createHintSessionWithConfig = 1;
         static final int TRANSACTION_getHintSessionPreferredRate = 2;
@@ -108,7 +110,8 @@ public interface IHintManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IHintManager.DESCRIPTOR);
             }
@@ -124,7 +127,8 @@ public interface IHintManager extends IInterface {
                     int _arg3 = data.readInt();
                     SessionConfig _arg4 = new SessionConfig();
                     data.enforceNoDataAvail();
-                    IHintSession _result = createHintSessionWithConfig(_arg0, _arg1, _arg2, _arg3, _arg4);
+                    IHintSession _result =
+                            createHintSessionWithConfig(_arg0, _arg1, _arg2, _arg3, _arg4);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result);
                     reply.writeTypedObject(_arg4, 1);
@@ -181,7 +185,13 @@ public interface IHintManager extends IInterface {
             }
 
             @Override // android.os.IHintManager
-            public IHintSession createHintSessionWithConfig(IBinder token, int[] threadIds, long durationNanos, int tag, SessionConfig config) throws RemoteException {
+            public IHintSession createHintSessionWithConfig(
+                    IBinder token,
+                    int[] threadIds,
+                    long durationNanos,
+                    int tag,
+                    SessionConfig config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -220,7 +230,8 @@ public interface IHintManager extends IInterface {
             }
 
             @Override // android.os.IHintManager
-            public void setHintSessionThreads(IHintSession hintSession, int[] tids) throws RemoteException {
+            public void setHintSessionThreads(IHintSession hintSession, int[] tids)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -261,7 +272,8 @@ public interface IHintManager extends IInterface {
                     _data.writeStrongBinder(token);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    ChannelConfig _result = (ChannelConfig) _reply.readTypedObject(ChannelConfig.CREATOR);
+                    ChannelConfig _result =
+                            (ChannelConfig) _reply.readTypedObject(ChannelConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

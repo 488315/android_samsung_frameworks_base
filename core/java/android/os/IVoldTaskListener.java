@@ -8,12 +8,10 @@ public interface IVoldTaskListener extends IInterface {
 
     public static class Default implements IVoldTaskListener {
         @Override // android.os.IVoldTaskListener
-        public void onStatus(int status, PersistableBundle extras) throws RemoteException {
-        }
+        public void onStatus(int status, PersistableBundle extras) throws RemoteException {}
 
         @Override // android.os.IVoldTaskListener
-        public void onFinished(int status, PersistableBundle extras) throws RemoteException {
-        }
+        public void onFinished(int status, PersistableBundle extras) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +19,7 @@ public interface IVoldTaskListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVoldTaskListener {
+    public abstract static class Stub extends Binder implements IVoldTaskListener {
         public static final String DESCRIPTOR = "android.os.IVoldTaskListener";
         static final int TRANSACTION_onFinished = 2;
         static final int TRANSACTION_onStatus = 1;
@@ -63,7 +61,8 @@ public interface IVoldTaskListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -74,13 +73,15 @@ public interface IVoldTaskListener extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    PersistableBundle _arg1 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg1 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     onStatus(_arg0, _arg1);
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    PersistableBundle _arg12 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg12 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     onFinished(_arg02, _arg12);
                     return true;

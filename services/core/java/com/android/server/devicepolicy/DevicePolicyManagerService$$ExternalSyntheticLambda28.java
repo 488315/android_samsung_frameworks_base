@@ -1,25 +1,34 @@
 package com.android.server.devicepolicy;
 
 import android.os.PowerManagerInternal;
+
 import com.android.internal.util.FunctionalUtils;
 import com.android.server.LocalServices;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda28 implements FunctionalUtils.ThrowingRunnable {
+public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda28
+        implements FunctionalUtils.ThrowingRunnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ DevicePolicyManagerService f$0;
     public final /* synthetic */ DevicePolicyData f$1;
     public final /* synthetic */ int f$2;
 
-    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda28(DevicePolicyManagerService devicePolicyManagerService, int i, DevicePolicyData devicePolicyData) {
+    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda28(
+            DevicePolicyManagerService devicePolicyManagerService,
+            int i,
+            DevicePolicyData devicePolicyData) {
         this.$r8$classId = 1;
         this.f$0 = devicePolicyManagerService;
         this.f$2 = i;
         this.f$1 = devicePolicyData;
     }
 
-    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda28(DevicePolicyManagerService devicePolicyManagerService, DevicePolicyData devicePolicyData, int i, int i2) {
+    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda28(
+            DevicePolicyManagerService devicePolicyManagerService,
+            DevicePolicyData devicePolicyData,
+            int i,
+            int i2) {
         this.$r8$classId = i2;
         this.f$0 = devicePolicyManagerService;
         this.f$1 = devicePolicyData;
@@ -42,7 +51,8 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                 devicePolicyData.mPasswordOwner = -1;
                 devicePolicyManagerService.saveSettingsLocked(i, false, false, false);
                 if (devicePolicyManagerService.mHasFeature) {
-                    devicePolicyManagerService.sendAdminCommandForLockscreenPoliciesLocked(1, i, "android.app.action.ACTION_PASSWORD_SUCCEEDED");
+                    devicePolicyManagerService.sendAdminCommandForLockscreenPoliciesLocked(
+                            1, i, "android.app.action.ACTION_PASSWORD_SUCCEEDED");
                     break;
                 }
                 break;
@@ -51,7 +61,9 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                 int i2 = this.f$2;
                 DevicePolicyData devicePolicyData2 = this.f$1;
                 devicePolicyManagerService2.mInjector.getClass();
-                ((PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class)).setMaximumScreenOffTimeoutFromDeviceAdmin(i2, devicePolicyData2.mLastMaximumTimeToLock);
+                ((PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class))
+                        .setMaximumScreenOffTimeoutFromDeviceAdmin(
+                                i2, devicePolicyData2.mLastMaximumTimeToLock);
                 break;
             default:
                 DevicePolicyManagerService devicePolicyManagerService3 = this.f$0;

@@ -12,6 +12,7 @@ import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.ECU
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.internal.org.bouncycastle.jce.spec.ECNamedCurveSpec;
 import com.android.internal.org.bouncycastle.math.ec.ECCurve;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.spec.AlgorithmParameterSpec;
@@ -29,16 +30,24 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
     }
 
     @Override // java.security.AlgorithmParametersSpi
-    protected void engineInit(AlgorithmParameterSpec algorithmParameterSpec) throws InvalidParameterSpecException {
+    protected void engineInit(AlgorithmParameterSpec algorithmParameterSpec)
+            throws InvalidParameterSpecException {
         if (algorithmParameterSpec instanceof ECGenParameterSpec) {
             ECGenParameterSpec ecGenParameterSpec = (ECGenParameterSpec) algorithmParameterSpec;
             X9ECParameters params = ECUtils.getDomainParametersFromGenSpec(ecGenParameterSpec);
             if (params == null) {
-                throw new InvalidParameterSpecException("EC curve name not recognized: " + ecGenParameterSpec.getName());
+                throw new InvalidParameterSpecException(
+                        "EC curve name not recognized: " + ecGenParameterSpec.getName());
             }
             this.curveName = ecGenParameterSpec.getName();
             ECParameterSpec baseSpec = EC5Util.convertToSpec(params);
-            this.ecParameterSpec = new ECNamedCurveSpec(this.curveName, baseSpec.getCurve(), baseSpec.getGenerator(), baseSpec.getOrder(), BigInteger.valueOf(baseSpec.getCofactor()));
+            this.ecParameterSpec =
+                    new ECNamedCurveSpec(
+                            this.curveName,
+                            baseSpec.getCurve(),
+                            baseSpec.getGenerator(),
+                            baseSpec.getOrder(),
+                            BigInteger.valueOf(baseSpec.getCofactor()));
             return;
         }
         if (algorithmParameterSpec instanceof ECParameterSpec) {
@@ -50,7 +59,9 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
             this.ecParameterSpec = (ECParameterSpec) algorithmParameterSpec;
             return;
         }
-        throw new InvalidParameterSpecException("AlgorithmParameterSpec class not recognized: " + algorithmParameterSpec.getClass().getName());
+        throw new InvalidParameterSpecException(
+                "AlgorithmParameterSpec class not recognized: "
+                        + algorithmParameterSpec.getClass().getName());
     }
 
     @Override // java.security.AlgorithmParametersSpi
@@ -64,7 +75,8 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
             X962Parameters params = X962Parameters.getInstance(bytes);
             ECCurve curve = EC5Util.getCurve(BouncyCastleProvider.CONFIGURATION, params);
             if (params.isNamedCurve()) {
-                ASN1ObjectIdentifier curveId = ASN1ObjectIdentifier.getInstance(params.getParameters());
+                ASN1ObjectIdentifier curveId =
+                        ASN1ObjectIdentifier.getInstance(params.getParameters());
                 this.curveName = ECNamedCurveTable.getName(curveId);
                 if (this.curveName == null) {
                     this.curveName = curveId.getId();
@@ -73,12 +85,15 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
             this.ecParameterSpec = EC5Util.convertToSpec(params, curve);
             return;
         }
-        throw new IOException("Unknown encoded parameters format in AlgorithmParameters object: " + format);
+        throw new IOException(
+                "Unknown encoded parameters format in AlgorithmParameters object: " + format);
     }
 
     @Override // java.security.AlgorithmParametersSpi
-    protected <T extends AlgorithmParameterSpec> T engineGetParameterSpec(Class<T> paramSpec) throws InvalidParameterSpecException {
-        if (ECParameterSpec.class.isAssignableFrom(paramSpec) || paramSpec == AlgorithmParameterSpec.class) {
+    protected <T extends AlgorithmParameterSpec> T engineGetParameterSpec(Class<T> paramSpec)
+            throws InvalidParameterSpecException {
+        if (ECParameterSpec.class.isAssignableFrom(paramSpec)
+                || paramSpec == AlgorithmParameterSpec.class) {
             return this.ecParameterSpec;
         }
         if (ECGenParameterSpec.class.isAssignableFrom(paramSpec)) {
@@ -89,12 +104,14 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
                 }
                 return new ECGenParameterSpec(this.curveName);
             }
-            ASN1ObjectIdentifier namedCurveOid2 = ECUtil.getNamedCurveOid(EC5Util.convertSpec(this.ecParameterSpec));
+            ASN1ObjectIdentifier namedCurveOid2 =
+                    ECUtil.getNamedCurveOid(EC5Util.convertSpec(this.ecParameterSpec));
             if (namedCurveOid2 != null) {
                 return new ECGenParameterSpec(namedCurveOid2.getId());
             }
         }
-        throw new InvalidParameterSpecException("EC AlgorithmParameters cannot convert to " + paramSpec.getName());
+        throw new InvalidParameterSpecException(
+                "EC AlgorithmParameters cannot convert to " + paramSpec.getName());
     }
 
     @Override // java.security.AlgorithmParametersSpi
@@ -111,8 +128,15 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
             } else if (this.curveName != null) {
                 params = new X962Parameters(ECUtil.getNamedCurveOid(this.curveName));
             } else {
-                com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec ecSpec = EC5Util.convertSpec(this.ecParameterSpec);
-                X9ECParameters ecP = new X9ECParameters(ecSpec.getCurve(), new X9ECPoint(ecSpec.getG(), false), ecSpec.getN(), ecSpec.getH(), ecSpec.getSeed());
+                com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec ecSpec =
+                        EC5Util.convertSpec(this.ecParameterSpec);
+                X9ECParameters ecP =
+                        new X9ECParameters(
+                                ecSpec.getCurve(),
+                                new X9ECPoint(ecSpec.getG(), false),
+                                ecSpec.getN(),
+                                ecSpec.getH(),
+                                ecSpec.getSeed());
                 params = new X962Parameters(ecP);
             }
             return params.getEncoded();

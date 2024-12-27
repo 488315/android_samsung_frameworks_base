@@ -3,6 +3,7 @@ package com.android.server.sepunion;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.os.ShellCallback;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
@@ -15,6 +16,11 @@ public interface AbsSemSystemService {
 
     void onCreate(Bundle bundle);
 
-    default void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-    }
+    default void onShellCommand(
+            FileDescriptor fileDescriptor,
+            FileDescriptor fileDescriptor2,
+            FileDescriptor fileDescriptor3,
+            String[] strArr,
+            ShellCallback shellCallback,
+            ResultReceiver resultReceiver) {}
 }

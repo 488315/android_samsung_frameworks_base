@@ -6,9 +6,11 @@ import android.os.ServiceManager;
 import android.util.ArrayMap;
 import android.util.LongSparseArray;
 import android.util.Pair;
+
 import com.android.internal.compat.IPlatformCompat;
 import com.android.server.compat.CompatChange;
 import com.android.server.compat.PlatformCompat;
+
 import java.lang.ref.WeakReference;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -35,7 +37,12 @@ public final class PlatformCompatCache {
         }
 
         public final boolean fetchLocked(ApplicationInfo applicationInfo, int i) {
-            Pair pair = new Pair(Boolean.valueOf(this.mPlatformCompat.isChangeEnabledInternalNoLogging(this.mChangeId, applicationInfo)), new WeakReference(applicationInfo));
+            Pair pair =
+                    new Pair(
+                            Boolean.valueOf(
+                                    this.mPlatformCompat.isChangeEnabledInternalNoLogging(
+                                            this.mChangeId, applicationInfo)),
+                            new WeakReference(applicationInfo));
             if (i >= 0) {
                 this.mCache.setValueAt(i, pair);
             } else {
@@ -68,7 +75,12 @@ public final class PlatformCompatCache {
                 try {
                     int indexOfKey = this.mCache.indexOfKey(str);
                     if (indexOfKey >= 0) {
-                        ApplicationInfo applicationInfo = (ApplicationInfo) ((WeakReference) ((Pair) this.mCache.valueAt(indexOfKey)).second).get();
+                        ApplicationInfo applicationInfo =
+                                (ApplicationInfo)
+                                        ((WeakReference)
+                                                        ((Pair) this.mCache.valueAt(indexOfKey))
+                                                                .second)
+                                                .get();
                         if (applicationInfo != null) {
                             fetchLocked(applicationInfo, indexOfKey);
                         } else {
@@ -100,7 +112,8 @@ public final class PlatformCompatCache {
 
     public static PlatformCompatCache getInstance() {
         if (sPlatformCompatCache == null) {
-            sPlatformCompatCache = new PlatformCompatCache(new long[]{136274596, 136219221, 183972877});
+            sPlatformCompatCache =
+                    new PlatformCompatCache(new long[] {136274596, 136219221, 183972877});
         }
         return sPlatformCompatCache;
     }

@@ -1,6 +1,7 @@
 package android.util;
 
 import android.os.SystemClock;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.time.Instant;
@@ -33,7 +34,12 @@ public final class LocalLog {
         if (this.mUseLocalTimestamps) {
             logLine = LocalDateTime.now() + " - " + msg;
         } else {
-            logLine = java.time.Duration.ofMillis(SystemClock.elapsedRealtime()) + " / " + Instant.now() + " - " + msg;
+            logLine =
+                    java.time.Duration.ofMillis(SystemClock.elapsedRealtime())
+                            + " / "
+                            + Instant.now()
+                            + " - "
+                            + msg;
         }
         append(logLine);
     }

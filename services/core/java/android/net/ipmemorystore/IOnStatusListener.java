@@ -9,7 +9,8 @@ import android.os.RemoteException;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public interface IOnStatusListener extends IInterface {
-    public static final String DESCRIPTOR = "android$net$ipmemorystore$IOnStatusListener".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$net$ipmemorystore$IOnStatusListener".replace('$', '.');
     public static final String HASH = "d5ea5eb3ddbdaa9a986ce6ba70b0804ca3e39b0c";
     public static final int VERSION = 10;
 
@@ -31,8 +32,7 @@ public interface IOnStatusListener extends IInterface {
         }
 
         @Override // android.net.ipmemorystore.IOnStatusListener
-        public void onComplete(StatusParcelable statusParcelable) throws RemoteException {
-        }
+        public void onComplete(StatusParcelable statusParcelable) throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -60,7 +60,8 @@ public interface IOnStatusListener extends IInterface {
                         Parcel obtain2 = Parcel.obtain();
                         try {
                             obtain.writeInterfaceToken(IOnStatusListener.DESCRIPTOR);
-                            this.mRemote.transact(Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
+                            this.mRemote.transact(
+                                    Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
                             obtain2.readException();
                             this.mCachedHash = obtain2.readString();
                             obtain2.recycle();
@@ -84,7 +85,8 @@ public interface IOnStatusListener extends IInterface {
                     Parcel obtain2 = Parcel.obtain();
                     try {
                         obtain.writeInterfaceToken(IOnStatusListener.DESCRIPTOR);
-                        this.mRemote.transact(Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
+                        this.mRemote.transact(
+                                Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
                         obtain2.readException();
                         this.mCachedVersion = obtain2.readInt();
                     } finally {
@@ -119,7 +121,8 @@ public interface IOnStatusListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOnStatusListener.DESCRIPTOR);
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(IOnStatusListener.DESCRIPTOR);
             if (queryLocalInterface != null && (queryLocalInterface instanceof IOnStatusListener)) {
                 return (IOnStatusListener) queryLocalInterface;
             }
@@ -136,7 +139,8 @@ public interface IOnStatusListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             String str = IOnStatusListener.DESCRIPTOR;
             if (i >= 1 && i <= TRANSACTION_getInterfaceVersion) {
                 parcel.enforceInterface(str);

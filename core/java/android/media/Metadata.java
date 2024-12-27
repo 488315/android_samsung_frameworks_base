@@ -3,6 +3,7 @@ package android.media;
 import android.os.Parcel;
 import android.util.Log;
 import android.util.MathUtils;
+
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -91,7 +92,8 @@ public class Metadata {
                 error = true;
                 break;
             }
-            this.mKeyToPosMap.put(Integer.valueOf(metadataId), Integer.valueOf(parcel.dataPosition()));
+            this.mKeyToPosMap.put(
+                    Integer.valueOf(metadataId), Integer.valueOf(parcel.dataPosition()));
             metadataType = parcel.readInt();
             if (metadataType <= 0 || metadataType > 7) {
                 break;

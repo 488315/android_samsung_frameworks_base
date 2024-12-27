@@ -3,6 +3,7 @@ package com.android.server.inputmethod;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.view.inputmethod.EditorInfo;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -25,7 +26,19 @@ public final class StartInputInfo {
     public final long mTimestamp = SystemClock.uptimeMillis();
     public final long mWallTime = System.currentTimeMillis();
 
-    public StartInputInfo(int i, IBinder iBinder, int i2, String str, int i3, boolean z, int i4, int i5, IBinder iBinder2, EditorInfo editorInfo, int i6, int i7) {
+    public StartInputInfo(
+            int i,
+            IBinder iBinder,
+            int i2,
+            String str,
+            int i3,
+            boolean z,
+            int i4,
+            int i5,
+            IBinder iBinder2,
+            EditorInfo editorInfo,
+            int i6,
+            int i7) {
         this.mImeUserId = i;
         this.mImeToken = iBinder;
         this.mImeDisplayId = i2;

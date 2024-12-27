@@ -2,6 +2,7 @@ package com.android.server.signedconfig;
 
 import android.os.Build;
 import android.util.Slog;
+
 import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -20,14 +21,21 @@ public final class SignatureVerifier {
 
     public SignatureVerifier(SignedConfigEvent signedConfigEvent) {
         this.mEvent = signedConfigEvent;
-        this.mDebugKey = Build.IS_DEBUGGABLE ? createKey("MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmJKs4lSn+XRhMQmMid+Zbhbu13YrU1haIhVC5296InRu1x7A8PV1ejQyisBODGgRY6pqkAHRncBCYcgg5wIIJg==") : null;
-        this.mProdKey = createKey("MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+lky6wKyGL6lE1VrD0YTMHwb0Xwc+tzC8MvnrzVxodvTpVY/jV7V+Zktcx+pry43XPABFRXtbhTo+qykhyBA1g==");
+        this.mDebugKey =
+                Build.IS_DEBUGGABLE
+                        ? createKey(
+                                "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmJKs4lSn+XRhMQmMid+Zbhbu13YrU1haIhVC5296InRu1x7A8PV1ejQyisBODGgRY6pqkAHRncBCYcgg5wIIJg==")
+                        : null;
+        this.mProdKey =
+                createKey(
+                        "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+lky6wKyGL6lE1VrD0YTMHwb0Xwc+tzC8MvnrzVxodvTpVY/jV7V+Zktcx+pry43XPABFRXtbhTo+qykhyBA1g==");
     }
 
     public static PublicKey createKey(String str) {
         try {
             try {
-                return KeyFactory.getInstance("EC").generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(str)));
+                return KeyFactory.getInstance("EC")
+                        .generatePublic(new X509EncodedKeySpec(Base64.getDecoder().decode(str)));
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
                 Slog.e("SignedConfig", "Failed to construct public key", e);
                 return null;

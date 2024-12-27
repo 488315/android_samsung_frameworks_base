@@ -6,23 +6,26 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.window.WindowContextInfo;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class WindowContextInfoChangeItem extends ClientTransactionItem {
-    public static final Parcelable.Creator<WindowContextInfoChangeItem> CREATOR = new Parcelable.Creator<WindowContextInfoChangeItem>() { // from class: android.app.servertransaction.WindowContextInfoChangeItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContextInfoChangeItem createFromParcel(Parcel in) {
-            return new WindowContextInfoChangeItem(in);
-        }
+    public static final Parcelable.Creator<WindowContextInfoChangeItem> CREATOR =
+            new Parcelable.Creator<WindowContextInfoChangeItem>() { // from class:
+                // android.app.servertransaction.WindowContextInfoChangeItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContextInfoChangeItem createFromParcel(Parcel in) {
+                    return new WindowContextInfoChangeItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowContextInfoChangeItem[] newArray(int size) {
-            return new WindowContextInfoChangeItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowContextInfoChangeItem[] newArray(int size) {
+                    return new WindowContextInfoChangeItem[size];
+                }
+            };
     private IBinder mClientToken;
     private WindowContextInfo mInfo;
 
@@ -31,11 +34,12 @@ public class WindowContextInfoChangeItem extends ClientTransactionItem {
         client.handleWindowContextInfoChanged(this.mClientToken, this.mInfo);
     }
 
-    private WindowContextInfoChangeItem() {
-    }
+    private WindowContextInfoChangeItem() {}
 
-    public static WindowContextInfoChangeItem obtain(IBinder clientToken, Configuration config, int displayId) {
-        WindowContextInfoChangeItem instance = (WindowContextInfoChangeItem) ObjectPool.obtain(WindowContextInfoChangeItem.class);
+    public static WindowContextInfoChangeItem obtain(
+            IBinder clientToken, Configuration config, int displayId) {
+        WindowContextInfoChangeItem instance =
+                (WindowContextInfoChangeItem) ObjectPool.obtain(WindowContextInfoChangeItem.class);
         if (instance == null) {
             instance = new WindowContextInfoChangeItem();
         }
@@ -70,7 +74,8 @@ public class WindowContextInfoChangeItem extends ClientTransactionItem {
             return false;
         }
         WindowContextInfoChangeItem other = (WindowContextInfoChangeItem) o;
-        if (Objects.equals(this.mClientToken, other.mClientToken) && Objects.equals(this.mInfo, other.mInfo)) {
+        if (Objects.equals(this.mClientToken, other.mClientToken)
+                && Objects.equals(this.mInfo, other.mInfo)) {
             return true;
         }
         return false;
@@ -82,6 +87,10 @@ public class WindowContextInfoChangeItem extends ClientTransactionItem {
     }
 
     public String toString() {
-        return "WindowContextInfoChangeItem{clientToken=" + this.mClientToken + ", info=" + this.mInfo + "}";
+        return "WindowContextInfoChangeItem{clientToken="
+                + this.mClientToken
+                + ", info="
+                + this.mInfo
+                + "}";
     }
 }

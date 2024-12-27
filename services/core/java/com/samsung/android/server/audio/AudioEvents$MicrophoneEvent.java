@@ -10,8 +10,7 @@ public final class AudioEvents$MicrophoneEvent extends EventLogger.Event {
     public String mPackage;
     public int mRequesterPid;
 
-    public /* synthetic */ AudioEvents$MicrophoneEvent() {
-    }
+    public /* synthetic */ AudioEvents$MicrophoneEvent() {}
 
     public AudioEvents$MicrophoneEvent(int i, String str, boolean z) {
         this.mPackage = str;
@@ -23,9 +22,19 @@ public final class AudioEvents$MicrophoneEvent extends EventLogger.Event {
     public final String eventToString() {
         switch (this.$r8$classId) {
             case 0:
-                return "setMicrophoneMute() from package=" + this.mPackage + " pid=" + this.mRequesterPid + " isisEnableMute=" + this.mIsEnableMute;
+                return "setMicrophoneMute() from package="
+                        + this.mPackage
+                        + " pid="
+                        + this.mRequesterPid
+                        + " isisEnableMute="
+                        + this.mIsEnableMute;
             default:
-                return "setRingerMode(mode:" + this.mRequesterPid + " external:" + this.mIsEnableMute + ") from " + this.mPackage;
+                return "setRingerMode(mode:"
+                        + this.mRequesterPid
+                        + " external:"
+                        + this.mIsEnableMute
+                        + ") from "
+                        + this.mPackage;
         }
     }
 }

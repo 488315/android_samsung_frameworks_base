@@ -2,29 +2,34 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telephony.DctConstants;
 import com.android.internal.telephony.RILConstants;
+
 import com.samsung.android.vibrator.SemHapticFeedbackConstants;
+
 import java.util.Locale;
 
 /* loaded from: classes4.dex */
 public class RadioAccessFamily implements Parcelable {
     private static final int CDMA = 72;
-    public static final Parcelable.Creator<RadioAccessFamily> CREATOR = new Parcelable.Creator<RadioAccessFamily>() { // from class: android.telephony.RadioAccessFamily.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioAccessFamily createFromParcel(Parcel in) {
-            int phoneId = in.readInt();
-            int radioAccessFamily = in.readInt();
-            return new RadioAccessFamily(phoneId, radioAccessFamily);
-        }
+    public static final Parcelable.Creator<RadioAccessFamily> CREATOR =
+            new Parcelable.Creator<
+                    RadioAccessFamily>() { // from class: android.telephony.RadioAccessFamily.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioAccessFamily createFromParcel(Parcel in) {
+                    int phoneId = in.readInt();
+                    int radioAccessFamily = in.readInt();
+                    return new RadioAccessFamily(phoneId, radioAccessFamily);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioAccessFamily[] newArray(int size) {
-            return new RadioAccessFamily[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioAccessFamily[] newArray(int size) {
+                    return new RadioAccessFamily[size];
+                }
+            };
     private static final int EVDO = 10288;
     private static final int GSM = 32771;
     private static final int HS = 17280;
@@ -68,7 +73,12 @@ public class RadioAccessFamily implements Parcelable {
     }
 
     public String toString() {
-        String ret = "{ mPhoneId = " + this.mPhoneId + ", mRadioAccessFamily = " + this.mRadioAccessFamily + "}";
+        String ret =
+                "{ mPhoneId = "
+                        + this.mPhoneId
+                        + ", mRadioAccessFamily = "
+                        + this.mRadioAccessFamily
+                        + "}";
         return ret;
     }
 
@@ -406,7 +416,12 @@ public class RadioAccessFamily implements Parcelable {
     }
 
     public static int compare(long networkTypeBitmaskL, long networkTypeBitmaskR) {
-        long[] prioritizedNetworkClassBitmasks = {524288, TelephonyManager.NETWORK_CLASS_BITMASK_4G, TelephonyManager.NETWORK_CLASS_BITMASK_3G, TelephonyManager.NETWORK_CLASS_BITMASK_2G};
+        long[] prioritizedNetworkClassBitmasks = {
+            524288,
+            TelephonyManager.NETWORK_CLASS_BITMASK_4G,
+            TelephonyManager.NETWORK_CLASS_BITMASK_3G,
+            TelephonyManager.NETWORK_CLASS_BITMASK_2G
+        };
         long lhsUnique = (~networkTypeBitmaskR) & networkTypeBitmaskL;
         long rhsUnique = (~networkTypeBitmaskL) & networkTypeBitmaskR;
         for (long classBitmask : prioritizedNetworkClassBitmasks) {

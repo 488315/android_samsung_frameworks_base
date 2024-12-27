@@ -2,23 +2,27 @@ package android.view.contentcapture;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes4.dex */
 public final class ContentCaptureSessionId implements Parcelable {
-    public static final Parcelable.Creator<ContentCaptureSessionId> CREATOR = new Parcelable.Creator<ContentCaptureSessionId>() { // from class: android.view.contentcapture.ContentCaptureSessionId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentCaptureSessionId createFromParcel(Parcel parcel) {
-            return new ContentCaptureSessionId(parcel.readInt());
-        }
+    public static final Parcelable.Creator<ContentCaptureSessionId> CREATOR =
+            new Parcelable.Creator<
+                    ContentCaptureSessionId>() { // from class:
+                                                 // android.view.contentcapture.ContentCaptureSessionId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentCaptureSessionId createFromParcel(Parcel parcel) {
+                    return new ContentCaptureSessionId(parcel.readInt());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentCaptureSessionId[] newArray(int size) {
-            return new ContentCaptureSessionId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentCaptureSessionId[] newArray(int size) {
+                    return new ContentCaptureSessionId[size];
+                }
+            };
     private final int mValue;
 
     public ContentCaptureSessionId(int value) {

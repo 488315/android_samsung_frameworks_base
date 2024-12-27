@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -23,7 +24,8 @@ public class SemHEIFRegionDecoder {
 
     private static native void nativeClean(long j);
 
-    private static native Bitmap nativeDecodeRegion(long j, int i, int i2, int i3, int i4, BitmapFactory.Options options);
+    private static native Bitmap nativeDecodeRegion(
+            long j, int i, int i2, int i3, int i4, BitmapFactory.Options options);
 
     private static native int nativeGetHeight(long j);
 
@@ -55,7 +57,8 @@ public class SemHEIFRegionDecoder {
         return nativeNewInstance(pathName);
     }
 
-    public static SemHEIFRegionDecoder newInstance(byte[] data, int offset, int length, boolean isShareable) throws IOException {
+    public static SemHEIFRegionDecoder newInstance(
+            byte[] data, int offset, int length, boolean isShareable) throws IOException {
         if (data == null) {
             throw new IOException("data is null");
         }
@@ -65,7 +68,8 @@ public class SemHEIFRegionDecoder {
         return nativeNewInstance(data, offset, length);
     }
 
-    public static SemHEIFRegionDecoder newInstance(FileDescriptor fd, boolean isShareable) throws IOException {
+    public static SemHEIFRegionDecoder newInstance(FileDescriptor fd, boolean isShareable)
+            throws IOException {
         if (fd == null) {
             throw new IOException("fd is null");
         }
@@ -84,7 +88,8 @@ public class SemHEIFRegionDecoder {
         }
     }
 
-    public static SemHEIFRegionDecoder newInstance(InputStream is, boolean isShareable) throws IOException {
+    public static SemHEIFRegionDecoder newInstance(InputStream is, boolean isShareable)
+            throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         byte[] buffer = new byte[8192];
         while (true) {
@@ -106,7 +111,10 @@ public class SemHEIFRegionDecoder {
     public Bitmap decodeRegion(Rect rect, BitmapFactory.Options opt) {
         synchronized (this.mNativeLock) {
             checkRecycled("decodeRegion called on recycled region decoder");
-            if (rect.right <= 0 || rect.bottom <= 0 || rect.left >= getWidth() || rect.top >= getHeight()) {
+            if (rect.right <= 0
+                    || rect.bottom <= 0
+                    || rect.left >= getWidth()
+                    || rect.top >= getHeight()) {
                 throw new IllegalArgumentException("rectangle is outside the image");
             }
             if (opt != null) {
@@ -119,12 +127,20 @@ public class SemHEIFRegionDecoder {
                 int tile_height = rect.height();
                 int tile_width2 = ((tile_width + sample_size) - 1) / sample_size;
                 int tile_height2 = ((tile_height + sample_size) - 1) / sample_size;
-                if (opt.inBitmap != null && (opt.inBitmap.getWidth() != tile_width2 || opt.inBitmap.getHeight() != tile_height2)) {
+                if (opt.inBitmap != null
+                        && (opt.inBitmap.getWidth() != tile_width2
+                                || opt.inBitmap.getHeight() != tile_height2)) {
                     Log.w(TAG, "RegionDecode Input Bitmap error");
                     return opt.inBitmap;
                 }
             }
-            return nativeDecodeRegion(this.mNativeBitmapRegionDecoder, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, opt);
+            return nativeDecodeRegion(
+                    this.mNativeBitmapRegionDecoder,
+                    rect.left,
+                    rect.top,
+                    rect.right - rect.left,
+                    rect.bottom - rect.top,
+                    opt);
         }
     }
 

@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IVirtualHal extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$biometrics$fingerprint$IVirtualHal".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$biometrics$fingerprint$IVirtualHal".replace('$', '.');
     public static final String HASH = "41a730a7a6b5aa9cebebce70ee5b5e509b0af6fb";
     public static final int STATUS_INVALID_PARAMETER = 1;
     public static final int VERSION = 4;
@@ -49,7 +50,8 @@ public interface IVirtualHal extends IInterface {
 
     void setNextEnrollment(NextEnrollment nextEnrollment) throws RemoteException;
 
-    void setOperationAuthenticateAcquired(AcquiredInfoAndVendorCode[] acquiredInfoAndVendorCodeArr) throws RemoteException;
+    void setOperationAuthenticateAcquired(AcquiredInfoAndVendorCode[] acquiredInfoAndVendorCodeArr)
+            throws RemoteException;
 
     void setOperationAuthenticateDuration(int i) throws RemoteException;
 
@@ -59,7 +61,8 @@ public interface IVirtualHal extends IInterface {
 
     void setOperationAuthenticateLatency(int[] iArr) throws RemoteException;
 
-    void setOperationDetectInteractionAcquired(AcquiredInfoAndVendorCode[] acquiredInfoAndVendorCodeArr) throws RemoteException;
+    void setOperationDetectInteractionAcquired(
+            AcquiredInfoAndVendorCode[] acquiredInfoAndVendorCodeArr) throws RemoteException;
 
     void setOperationDetectInteractionDuration(int i) throws RemoteException;
 
@@ -81,128 +84,99 @@ public interface IVirtualHal extends IInterface {
 
     public static class Default implements IVirtualHal {
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setEnrollments(int[] id) throws RemoteException {
-        }
+        public void setEnrollments(int[] id) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setEnrollmentHit(int hit_id) throws RemoteException {
-        }
+        public void setEnrollmentHit(int hit_id) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setNextEnrollment(NextEnrollment next_enrollment) throws RemoteException {
-        }
+        public void setNextEnrollment(NextEnrollment next_enrollment) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setAuthenticatorId(long id) throws RemoteException {
-        }
+        public void setAuthenticatorId(long id) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setChallenge(long challenge) throws RemoteException {
-        }
+        public void setChallenge(long challenge) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setOperationAuthenticateFails(boolean fail) throws RemoteException {
-        }
+        public void setOperationAuthenticateFails(boolean fail) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setOperationAuthenticateLatency(int[] latencyMs) throws RemoteException {
-        }
+        public void setOperationAuthenticateLatency(int[] latencyMs) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setOperationAuthenticateDuration(int durationMs) throws RemoteException {
-        }
+        public void setOperationAuthenticateDuration(int durationMs) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setOperationAuthenticateError(int error) throws RemoteException {
-        }
+        public void setOperationAuthenticateError(int error) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setOperationAuthenticateAcquired(AcquiredInfoAndVendorCode[] acquired) throws RemoteException {
-        }
+        public void setOperationAuthenticateAcquired(AcquiredInfoAndVendorCode[] acquired)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setOperationEnrollError(int error) throws RemoteException {
-        }
+        public void setOperationEnrollError(int error) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setOperationEnrollLatency(int[] latencyMs) throws RemoteException {
-        }
+        public void setOperationEnrollLatency(int[] latencyMs) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setOperationDetectInteractionLatency(int[] latencyMs) throws RemoteException {
-        }
+        public void setOperationDetectInteractionLatency(int[] latencyMs) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setOperationDetectInteractionError(int error) throws RemoteException {
-        }
+        public void setOperationDetectInteractionError(int error) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setOperationDetectInteractionDuration(int durationMs) throws RemoteException {
-        }
+        public void setOperationDetectInteractionDuration(int durationMs) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setOperationDetectInteractionAcquired(AcquiredInfoAndVendorCode[] acquired) throws RemoteException {
-        }
+        public void setOperationDetectInteractionAcquired(AcquiredInfoAndVendorCode[] acquired)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setLockout(boolean lockout) throws RemoteException {
-        }
+        public void setLockout(boolean lockout) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setLockoutEnable(boolean enable) throws RemoteException {
-        }
+        public void setLockoutEnable(boolean enable) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setLockoutTimedThreshold(int threshold) throws RemoteException {
-        }
+        public void setLockoutTimedThreshold(int threshold) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setLockoutTimedDuration(int durationMs) throws RemoteException {
-        }
+        public void setLockoutTimedDuration(int durationMs) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setLockoutPermanentThreshold(int threshold) throws RemoteException {
-        }
+        public void setLockoutPermanentThreshold(int threshold) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void resetConfigurations() throws RemoteException {
-        }
+        public void resetConfigurations() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setType(byte type) throws RemoteException {
-        }
+        public void setType(byte type) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setSensorId(int id) throws RemoteException {
-        }
+        public void setSensorId(int id) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setSensorStrength(byte strength) throws RemoteException {
-        }
+        public void setSensorStrength(byte strength) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setMaxEnrollmentPerUser(int max) throws RemoteException {
-        }
+        public void setMaxEnrollmentPerUser(int max) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setSensorLocation(SensorLocation loc) throws RemoteException {
-        }
+        public void setSensorLocation(SensorLocation loc) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setNavigationGuesture(boolean v) throws RemoteException {
-        }
+        public void setNavigationGuesture(boolean v) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setDetectInteraction(boolean v) throws RemoteException {
-        }
+        public void setDetectInteraction(boolean v) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setDisplayTouch(boolean v) throws RemoteException {
-        }
+        public void setDisplayTouch(boolean v) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-        public void setControlIllumination(boolean v) throws RemoteException {
-        }
+        public void setControlIllumination(boolean v) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.IVirtualHal
         public int getInterfaceVersion() {
@@ -220,7 +194,7 @@ public interface IVirtualHal extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualHal {
+    public abstract static class Stub extends Binder implements IVirtualHal {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_resetConfigurations = 22;
@@ -355,7 +329,8 @@ public interface IVirtualHal extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -386,7 +361,8 @@ public interface IVirtualHal extends IInterface {
                     setEnrollmentHit(_arg02);
                     return true;
                 case 3:
-                    NextEnrollment _arg03 = (NextEnrollment) data.readTypedObject(NextEnrollment.CREATOR);
+                    NextEnrollment _arg03 =
+                            (NextEnrollment) data.readTypedObject(NextEnrollment.CREATOR);
                     data.enforceNoDataAvail();
                     setNextEnrollment(_arg03);
                     return true;
@@ -421,7 +397,9 @@ public interface IVirtualHal extends IInterface {
                     setOperationAuthenticateError(_arg09);
                     return true;
                 case 10:
-                    AcquiredInfoAndVendorCode[] _arg010 = (AcquiredInfoAndVendorCode[]) data.createTypedArray(AcquiredInfoAndVendorCode.CREATOR);
+                    AcquiredInfoAndVendorCode[] _arg010 =
+                            (AcquiredInfoAndVendorCode[])
+                                    data.createTypedArray(AcquiredInfoAndVendorCode.CREATOR);
                     data.enforceNoDataAvail();
                     setOperationAuthenticateAcquired(_arg010);
                     return true;
@@ -451,7 +429,9 @@ public interface IVirtualHal extends IInterface {
                     setOperationDetectInteractionDuration(_arg015);
                     return true;
                 case 16:
-                    AcquiredInfoAndVendorCode[] _arg016 = (AcquiredInfoAndVendorCode[]) data.createTypedArray(AcquiredInfoAndVendorCode.CREATOR);
+                    AcquiredInfoAndVendorCode[] _arg016 =
+                            (AcquiredInfoAndVendorCode[])
+                                    data.createTypedArray(AcquiredInfoAndVendorCode.CREATOR);
                     data.enforceNoDataAvail();
                     setOperationDetectInteractionAcquired(_arg016);
                     return true;
@@ -504,7 +484,8 @@ public interface IVirtualHal extends IInterface {
                     setMaxEnrollmentPerUser(_arg025);
                     return true;
                 case 27:
-                    SensorLocation _arg026 = (SensorLocation) data.readTypedObject(SensorLocation.CREATOR);
+                    SensorLocation _arg026 =
+                            (SensorLocation) data.readTypedObject(SensorLocation.CREATOR);
                     data.enforceNoDataAvail();
                     setSensorLocation(_arg026);
                     return true;
@@ -634,7 +615,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeBoolean(fail);
                     boolean _status = this.mRemote.transact(6, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setOperationAuthenticateFails is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOperationAuthenticateFails is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -649,7 +631,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeIntArray(latencyMs);
                     boolean _status = this.mRemote.transact(7, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setOperationAuthenticateLatency is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOperationAuthenticateLatency is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -664,7 +647,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeInt(durationMs);
                     boolean _status = this.mRemote.transact(8, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setOperationAuthenticateDuration is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOperationAuthenticateDuration is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -679,7 +663,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeInt(error);
                     boolean _status = this.mRemote.transact(9, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setOperationAuthenticateError is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOperationAuthenticateError is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -687,14 +672,16 @@ public interface IVirtualHal extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-            public void setOperationAuthenticateAcquired(AcquiredInfoAndVendorCode[] acquired) throws RemoteException {
+            public void setOperationAuthenticateAcquired(AcquiredInfoAndVendorCode[] acquired)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedArray(acquired, 0);
                     boolean _status = this.mRemote.transact(10, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setOperationAuthenticateAcquired is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOperationAuthenticateAcquired is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -709,7 +696,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeInt(error);
                     boolean _status = this.mRemote.transact(11, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setOperationEnrollError is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOperationEnrollError is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -724,7 +712,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeIntArray(latencyMs);
                     boolean _status = this.mRemote.transact(12, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setOperationEnrollLatency is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOperationEnrollLatency is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -732,14 +721,16 @@ public interface IVirtualHal extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-            public void setOperationDetectInteractionLatency(int[] latencyMs) throws RemoteException {
+            public void setOperationDetectInteractionLatency(int[] latencyMs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeIntArray(latencyMs);
                     boolean _status = this.mRemote.transact(13, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setOperationDetectInteractionLatency is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOperationDetectInteractionLatency is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -754,7 +745,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeInt(error);
                     boolean _status = this.mRemote.transact(14, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setOperationDetectInteractionError is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOperationDetectInteractionError is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -762,14 +754,16 @@ public interface IVirtualHal extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-            public void setOperationDetectInteractionDuration(int durationMs) throws RemoteException {
+            public void setOperationDetectInteractionDuration(int durationMs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeInt(durationMs);
                     boolean _status = this.mRemote.transact(15, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setOperationDetectInteractionDuration is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOperationDetectInteractionDuration is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -777,14 +771,16 @@ public interface IVirtualHal extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.IVirtualHal
-            public void setOperationDetectInteractionAcquired(AcquiredInfoAndVendorCode[] acquired) throws RemoteException {
+            public void setOperationDetectInteractionAcquired(AcquiredInfoAndVendorCode[] acquired)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeTypedArray(acquired, 0);
                     boolean _status = this.mRemote.transact(16, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setOperationDetectInteractionAcquired is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOperationDetectInteractionAcquired is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -829,7 +825,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeInt(threshold);
                     boolean _status = this.mRemote.transact(19, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setLockoutTimedThreshold is unimplemented.");
+                        throw new RemoteException(
+                                "Method setLockoutTimedThreshold is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -844,7 +841,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeInt(durationMs);
                     boolean _status = this.mRemote.transact(20, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setLockoutTimedDuration is unimplemented.");
+                        throw new RemoteException(
+                                "Method setLockoutTimedDuration is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -859,7 +857,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeInt(threshold);
                     boolean _status = this.mRemote.transact(21, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setLockoutPermanentThreshold is unimplemented.");
+                        throw new RemoteException(
+                                "Method setLockoutPermanentThreshold is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -933,7 +932,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeInt(max);
                     boolean _status = this.mRemote.transact(26, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setMaxEnrollmentPerUser is unimplemented.");
+                        throw new RemoteException(
+                                "Method setMaxEnrollmentPerUser is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1008,7 +1008,8 @@ public interface IVirtualHal extends IInterface {
                     _data.writeBoolean(v);
                     boolean _status = this.mRemote.transact(31, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setControlIllumination is unimplemented.");
+                        throw new RemoteException(
+                                "Method setControlIllumination is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

@@ -1,6 +1,7 @@
 package com.android.server.net;
 
 import android.net.LinkProperties;
+
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -54,7 +55,9 @@ class DnsServerRepository {
         boolean changed;
         long now = System.currentTimeMillis();
         changed = false;
-        for (int i = this.mAllServers.size() - 1; i >= 0 && (i >= 12 || this.mAllServers.get(i).expiry < now); i--) {
+        for (int i = this.mAllServers.size() - 1;
+                i >= 0 && (i >= 12 || this.mAllServers.get(i).expiry < now);
+                i--) {
             DnsServerEntry removed = this.mAllServers.remove(i);
             this.mIndex.remove(removed.address);
             changed |= this.mCurrentServers.remove(removed.address);

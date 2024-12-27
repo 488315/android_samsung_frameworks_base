@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.DdmSyncState;
 import java.util.Arrays;
 import java.util.function.Function;
 
@@ -20,7 +19,8 @@ public final class DdmSyncState {
 
         Stage(String label) {
             if (label.length() != 4) {
-                throw new IllegalStateException("Bad stage id '" + label + "'. Must be four letters");
+                throw new IllegalStateException(
+                        "Bad stage id '" + label + "'. Must be four letters");
             }
             this.mLabel = label;
         }
@@ -54,7 +54,8 @@ public final class DdmSyncState {
                 rover++;
             }
             if (rover == stages.length || stages[rover] != nextStage) {
-                throw new IllegalStateException("Cannot go to " + nextStage + " from:" + getInternalState());
+                throw new IllegalStateException(
+                        "Cannot go to " + nextStage + " from:" + getInternalState());
             }
             sCurrentStageIndex = rover;
         }
@@ -65,12 +66,18 @@ public final class DdmSyncState {
         sb.append("level = ").append(sCurrentStageIndex);
         sb.append("\n");
         sb.append("stages = ");
-        sb.append(Arrays.toString(Arrays.stream(Stage.values()).map(new Function() { // from class: android.os.DdmSyncState$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((DdmSyncState.Stage) obj).name();
-            }
-        }).toArray()));
+        sb.append(
+                Arrays.toString(
+                        Arrays.stream(Stage.values())
+                                .map(
+                                        new Function() { // from class:
+                                                         // android.os.DdmSyncState$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return ((DdmSyncState.Stage) obj).name();
+                                            }
+                                        })
+                                .toArray()));
         sb.append("\n");
         return sb.toString();
     }

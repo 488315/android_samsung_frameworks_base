@@ -1,6 +1,5 @@
 package com.android.internal.app;
 
-import com.android.internal.app.ChooserActivityLogger;
 import com.android.internal.logging.InstanceId;
 import com.android.internal.logging.InstanceIdSequence;
 import com.android.internal.logging.UiEventLogger;
@@ -15,13 +14,41 @@ public class ChooserActivityLoggerImpl implements ChooserActivityLogger {
     private UiEventLogger mUiEventLogger = new UiEventLoggerImpl();
 
     @Override // com.android.internal.app.ChooserActivityLogger
-    public void logShareStarted(int eventId, String packageName, String mimeType, int appProvidedDirect, int appProvidedApp, boolean isWorkprofile, int previewType, String intent) {
-        FrameworkStatsLog.write(259, ChooserActivityLogger.SharesheetStartedEvent.SHARE_STARTED.getId(), packageName, getInstanceId().getId(), mimeType, appProvidedDirect, appProvidedApp, isWorkprofile, typeFromPreviewInt(previewType), typeFromIntentString(intent), 0, false);
+    public void logShareStarted(
+            int eventId,
+            String packageName,
+            String mimeType,
+            int appProvidedDirect,
+            int appProvidedApp,
+            boolean isWorkprofile,
+            int previewType,
+            String intent) {
+        FrameworkStatsLog.write(
+                259,
+                ChooserActivityLogger.SharesheetStartedEvent.SHARE_STARTED.getId(),
+                packageName,
+                getInstanceId().getId(),
+                mimeType,
+                appProvidedDirect,
+                appProvidedApp,
+                isWorkprofile,
+                typeFromPreviewInt(previewType),
+                typeFromIntentString(intent),
+                0,
+                false);
     }
 
     @Override // com.android.internal.app.ChooserActivityLogger
-    public void logShareTargetSelected(int targetType, String packageName, int positionPicked, boolean isPinned) {
-        FrameworkStatsLog.write(260, ChooserActivityLogger.SharesheetTargetSelectedEvent.fromTargetType(targetType).getId(), packageName, getInstanceId().getId(), positionPicked, isPinned);
+    public void logShareTargetSelected(
+            int targetType, String packageName, int positionPicked, boolean isPinned) {
+        FrameworkStatsLog.write(
+                260,
+                ChooserActivityLogger.SharesheetTargetSelectedEvent.fromTargetType(targetType)
+                        .getId(),
+                packageName,
+                getInstanceId().getId(),
+                positionPicked,
+                isPinned);
     }
 
     @Override // com.android.internal.app.ChooserActivityLogger

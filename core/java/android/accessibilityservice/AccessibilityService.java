@@ -1,9 +1,5 @@
 package android.accessibilityservice;
 
-import android.accessibilityservice.AccessibilityService;
-import android.accessibilityservice.GestureDescription;
-import android.accessibilityservice.IAccessibilityServiceClient;
-import android.accessibilityservice.MagnificationConfig;
 import android.app.Service;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -38,14 +34,17 @@ import android.view.accessibility.AccessibilityInteractionClient;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityWindowInfo;
 import android.view.inputmethod.EditorInfo;
+
 import com.android.internal.inputmethod.CancellationGroup;
 import com.android.internal.inputmethod.IAccessibilityInputMethodSession;
 import com.android.internal.inputmethod.IAccessibilityInputMethodSessionCallback;
 import com.android.internal.inputmethod.IRemoteAccessibilityInputConnection;
 import com.android.internal.inputmethod.RemoteAccessibilityInputConnection;
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.knox.zt.internal.IKnoxZtInternalService;
 import com.samsung.android.knox.zt.internal.KnoxZtInternalConst;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -132,14 +131,16 @@ public abstract class AccessibilityService extends Service {
     public static final int GLOBAL_ACTION_TAKE_SCREENSHOT = 9;
     public static final int GLOBAL_ACTION_TOGGLE_SPLIT_SCREEN = 7;
     public static final String KEY_ACCESSIBILITY_SCREENSHOT_COLORSPACE = "screenshot_colorSpace";
-    public static final String KEY_ACCESSIBILITY_SCREENSHOT_HARDWAREBUFFER = "screenshot_hardwareBuffer";
+    public static final String KEY_ACCESSIBILITY_SCREENSHOT_HARDWAREBUFFER =
+            "screenshot_hardwareBuffer";
     public static final String KEY_ACCESSIBILITY_SCREENSHOT_STATUS = "screenshot_status";
     public static final String KEY_ACCESSIBILITY_SCREENSHOT_TIMESTAMP = "screenshot_timestamp";
     private static final String LOG_TAG = "AccessibilityService";
     public static final int OVERLAY_RESULT_INTERNAL_ERROR = 1;
     public static final int OVERLAY_RESULT_INVALID = 2;
     public static final int OVERLAY_RESULT_SUCCESS = 0;
-    public static final String SERVICE_INTERFACE = "android.accessibilityservice.AccessibilityService";
+    public static final String SERVICE_INTERFACE =
+            "android.accessibilityservice.AccessibilityService";
     public static final String SERVICE_META_DATA = "android.accessibilityservice";
     public static final int SHOW_MODE_AUTO = 0;
     public static final int SHOW_MODE_HARD_KEYBOARD_ORIGINAL_VALUE = 536870912;
@@ -159,18 +160,21 @@ public abstract class AccessibilityService extends Service {
     private WindowManager mWindowManager;
     private IBinder mWindowToken;
     private int mConnectionId = -1;
-    private final SparseArray<MagnificationController> mMagnificationControllers = new SparseArray<>(0);
-    private final SparseArray<TouchInteractionController> mTouchInteractionControllers = new SparseArray<>(0);
+    private final SparseArray<MagnificationController> mMagnificationControllers =
+            new SparseArray<>(0);
+    private final SparseArray<TouchInteractionController> mTouchInteractionControllers =
+            new SparseArray<>(0);
     private boolean mInputMethodInitialized = false;
-    private final SparseArray<AccessibilityButtonController> mAccessibilityButtonControllers = new SparseArray<>(0);
+    private final SparseArray<AccessibilityButtonController> mAccessibilityButtonControllers =
+            new SparseArray<>(0);
     private final Object mLock = new Object();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AttachOverlayResult {
-    }
+    public @interface AttachOverlayResult {}
 
     public interface Callbacks {
-        void createImeSession(IAccessibilityInputMethodSessionCallback iAccessibilityInputMethodSessionCallback);
+        void createImeSession(
+                IAccessibilityInputMethodSessionCallback iAccessibilityInputMethodSessionCallback);
 
         void init(int i, IBinder iBinder);
 
@@ -204,16 +208,17 @@ public abstract class AccessibilityService extends Service {
 
         void onTouchStateChanged(int i, int i2);
 
-        void startInput(RemoteAccessibilityInputConnection remoteAccessibilityInputConnection, EditorInfo editorInfo, boolean z);
+        void startInput(
+                RemoteAccessibilityInputConnection remoteAccessibilityInputConnection,
+                EditorInfo editorInfo,
+                boolean z);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScreenshotErrorCode {
-    }
+    public @interface ScreenshotErrorCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SoftKeyboardShowMode {
-    }
+    public @interface SoftKeyboardShowMode {}
 
     public interface TakeScreenshotCallback {
         void onFailure(int i);
@@ -258,8 +263,7 @@ public abstract class AccessibilityService extends Service {
         }
     }
 
-    protected void onServiceConnected() {
-    }
+    protected void onServiceConnected() {}
 
     @Deprecated
     protected boolean onGesture(int gestureId) {
@@ -278,8 +282,7 @@ public abstract class AccessibilityService extends Service {
         return false;
     }
 
-    public void onMotionEvent(MotionEvent event) {
-    }
+    public void onMotionEvent(MotionEvent event) {}
 
     public List<AccessibilityWindowInfo> getWindows() {
         notifyKnoxZtInternalService(19);
@@ -288,7 +291,8 @@ public abstract class AccessibilityService extends Service {
 
     public final SparseArray<List<AccessibilityWindowInfo>> getWindowsOnAllDisplays() {
         notifyKnoxZtInternalService(20);
-        return AccessibilityInteractionClient.getInstance(this).getWindowsOnAllDisplays(this.mConnectionId);
+        return AccessibilityInteractionClient.getInstance(this)
+                .getWindowsOnAllDisplays(this.mConnectionId);
     }
 
     public AccessibilityNodeInfo getRootInActiveWindow() {
@@ -298,13 +302,15 @@ public abstract class AccessibilityService extends Service {
 
     public AccessibilityNodeInfo getRootInActiveWindow(int prefetchingStrategy) {
         notifyKnoxZtInternalService(13);
-        return AccessibilityInteractionClient.getInstance(this).getRootInActiveWindow(this.mConnectionId, prefetchingStrategy);
+        return AccessibilityInteractionClient.getInstance(this)
+                .getRootInActiveWindow(this.mConnectionId, prefetchingStrategy);
     }
 
     public final void disableSelf() {
         notifyKnoxZtInternalService(6);
         AccessibilityInteractionClient.getInstance(this);
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (connection != null) {
             try {
                 connection.disableSelf();
@@ -362,20 +368,26 @@ public abstract class AccessibilityService extends Service {
         notifyKnoxZtInternalService(10);
         if (this.mFingerprintGestureController == null) {
             AccessibilityInteractionClient.getInstance(this);
-            this.mFingerprintGestureController = new FingerprintGestureController(AccessibilityInteractionClient.getConnection(this.mConnectionId));
+            this.mFingerprintGestureController =
+                    new FingerprintGestureController(
+                            AccessibilityInteractionClient.getConnection(this.mConnectionId));
         }
         return this.mFingerprintGestureController;
     }
 
-    public final boolean dispatchGesture(GestureDescription gesture, GestureResultCallback callback, Handler handler) {
+    public final boolean dispatchGesture(
+            GestureDescription gesture, GestureResultCallback callback, Handler handler) {
         notifyKnoxZtInternalService(7);
         AccessibilityInteractionClient.getInstance(this);
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (connection == null) {
             return false;
         }
         int sampleTimeMs = calculateGestureSampleTimeMs(gesture.getDisplayId());
-        List<GestureDescription.GestureStep> steps = GestureDescription.MotionEventGenerator.getGestureStepsFromGestureDescription(gesture, sampleTimeMs);
+        List<GestureDescription.GestureStep> steps =
+                GestureDescription.MotionEventGenerator.getGestureStepsFromGestureDescription(
+                        gesture, sampleTimeMs);
         try {
             synchronized (this.mLock) {
                 this.mGestureStatusCallbackSequence++;
@@ -383,10 +395,15 @@ public abstract class AccessibilityService extends Service {
                     if (this.mGestureStatusCallbackInfos == null) {
                         this.mGestureStatusCallbackInfos = new SparseArray<>();
                     }
-                    GestureResultCallbackInfo callbackInfo = new GestureResultCallbackInfo(gesture, callback, handler);
-                    this.mGestureStatusCallbackInfos.put(this.mGestureStatusCallbackSequence, callbackInfo);
+                    GestureResultCallbackInfo callbackInfo =
+                            new GestureResultCallbackInfo(gesture, callback, handler);
+                    this.mGestureStatusCallbackInfos.put(
+                            this.mGestureStatusCallbackSequence, callbackInfo);
                 }
-                connection.dispatchGesture(this.mGestureStatusCallbackSequence, new ParceledListSlice(steps), gesture.getDisplayId());
+                connection.dispatchGesture(
+                        this.mGestureStatusCallbackSequence,
+                        new ParceledListSlice(steps),
+                        gesture.getDisplayId());
             }
             return true;
         } catch (RemoteException re) {
@@ -397,7 +414,12 @@ public abstract class AccessibilityService extends Service {
     private int calculateGestureSampleTimeMs(int displayId) {
         Display display;
         int sampleTimeMs;
-        if (getApplicationInfo().targetSdkVersion > 29 && (display = ((DisplayManager) getSystemService(DisplayManager.class)).getDisplay(displayId)) != null && (sampleTimeMs = (int) (1000 / display.getRefreshRate())) >= 1) {
+        if (getApplicationInfo().targetSdkVersion > 29
+                && (display =
+                                ((DisplayManager) getSystemService(DisplayManager.class))
+                                        .getDisplay(displayId))
+                        != null
+                && (sampleTimeMs = (int) (1000 / display.getRefreshRate())) >= 1) {
             return sampleTimeMs;
         }
         return 100;
@@ -412,18 +434,24 @@ public abstract class AccessibilityService extends Service {
             callbackInfo = this.mGestureStatusCallbackInfos.get(sequence);
             this.mGestureStatusCallbackInfos.remove(sequence);
         }
-        if (callbackInfo != null && callbackInfo.gestureDescription != null && callbackInfo.callback != null) {
+        if (callbackInfo != null
+                && callbackInfo.gestureDescription != null
+                && callbackInfo.callback != null) {
             if (callbackInfo.handler != null) {
-                callbackInfo.handler.post(new Runnable() { // from class: android.accessibilityservice.AccessibilityService.1
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        if (completedSuccessfully) {
-                            callbackInfo.callback.onCompleted(callbackInfo.gestureDescription);
-                        } else {
-                            callbackInfo.callback.onCancelled(callbackInfo.gestureDescription);
-                        }
-                    }
-                });
+                callbackInfo.handler.post(
+                        new Runnable() { // from class:
+                            // android.accessibilityservice.AccessibilityService.1
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                if (completedSuccessfully) {
+                                    callbackInfo.callback.onCompleted(
+                                            callbackInfo.gestureDescription);
+                                } else {
+                                    callbackInfo.callback.onCancelled(
+                                            callbackInfo.gestureDescription);
+                                }
+                            }
+                        });
             } else if (completedSuccessfully) {
                 callbackInfo.callback.onCompleted(callbackInfo.gestureDescription);
             } else {
@@ -512,7 +540,8 @@ public abstract class AccessibilityService extends Service {
 
         private void setMagnificationCallbackEnabled(boolean enabled) {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     connection.setMagnificationCallbackEnabled(this.mDisplayId, enabled);
@@ -525,37 +554,48 @@ public abstract class AccessibilityService extends Service {
         void dispatchMagnificationChanged(final Region region, final MagnificationConfig config) {
             synchronized (this.mLock) {
                 if (this.mListeners != null && !this.mListeners.isEmpty()) {
-                    ArrayMap<OnMagnificationChangedListener, Handler> entries = new ArrayMap<>(this.mListeners);
+                    ArrayMap<OnMagnificationChangedListener, Handler> entries =
+                            new ArrayMap<>(this.mListeners);
                     int count = entries.size();
                     for (int i = 0; i < count; i++) {
                         final OnMagnificationChangedListener listener = entries.keyAt(i);
                         Handler handler = entries.valueAt(i);
                         if (handler != null) {
-                            handler.post(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$MagnificationController$$ExternalSyntheticLambda0
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    AccessibilityService.MagnificationController.this.lambda$dispatchMagnificationChanged$0(listener, region, config);
-                                }
-                            });
+                            handler.post(
+                                    new Runnable() { // from class:
+                                        // android.accessibilityservice.AccessibilityService$MagnificationController$$ExternalSyntheticLambda0
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            AccessibilityService.MagnificationController.this
+                                                    .lambda$dispatchMagnificationChanged$0(
+                                                            listener, region, config);
+                                        }
+                                    });
                         } else {
                             listener.onMagnificationChanged(this, region, config);
                         }
                     }
                     return;
                 }
-                Slog.d("AccessibilityService", "Received magnification changed callback with no listeners registered!");
+                Slog.d(
+                        "AccessibilityService",
+                        "Received magnification changed callback with no listeners registered!");
                 setMagnificationCallbackEnabled(false);
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$dispatchMagnificationChanged$0(OnMagnificationChangedListener listener, Region region, MagnificationConfig config) {
+        public /* synthetic */ void lambda$dispatchMagnificationChanged$0(
+                OnMagnificationChangedListener listener,
+                Region region,
+                MagnificationConfig config) {
             listener.onMagnificationChanged(this, region, config);
         }
 
         public MagnificationConfig getMagnificationConfig() {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.getMagnificationConfig(this.mDisplayId);
@@ -571,7 +611,8 @@ public abstract class AccessibilityService extends Service {
         @Deprecated
         public float getScale() {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.getMagnificationScale(this.mDisplayId);
@@ -587,7 +628,8 @@ public abstract class AccessibilityService extends Service {
         @Deprecated
         public float getCenterX() {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.getMagnificationCenterX(this.mDisplayId);
@@ -603,7 +645,8 @@ public abstract class AccessibilityService extends Service {
         @Deprecated
         public float getCenterY() {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.getMagnificationCenterY(this.mDisplayId);
@@ -619,7 +662,8 @@ public abstract class AccessibilityService extends Service {
         @Deprecated
         public Region getMagnificationRegion() {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.getMagnificationRegion(this.mDisplayId);
@@ -633,12 +677,16 @@ public abstract class AccessibilityService extends Service {
 
         public Region getCurrentMagnificationRegion() {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.getCurrentMagnificationRegion(this.mDisplayId);
                 } catch (RemoteException re) {
-                    Log.w("AccessibilityService", "Failed to obtain the current magnified region", re);
+                    Log.w(
+                            "AccessibilityService",
+                            "Failed to obtain the current magnified region",
+                            re);
                     re.rethrowFromSystemServer();
                 }
             }
@@ -647,7 +695,8 @@ public abstract class AccessibilityService extends Service {
 
         public boolean reset(boolean animate) {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.resetMagnification(this.mDisplayId, animate);
@@ -662,7 +711,8 @@ public abstract class AccessibilityService extends Service {
 
         public boolean resetCurrentMagnification(boolean animate) {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.resetCurrentMagnification(this.mDisplayId, animate);
@@ -677,7 +727,8 @@ public abstract class AccessibilityService extends Service {
 
         public boolean setMagnificationConfig(MagnificationConfig config, boolean animate) {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.setMagnificationConfig(this.mDisplayId, config, animate);
@@ -693,10 +744,12 @@ public abstract class AccessibilityService extends Service {
         @Deprecated
         public boolean setScale(float scale, boolean animate) {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
-                    MagnificationConfig config = new MagnificationConfig.Builder().setMode(1).setScale(scale).build();
+                    MagnificationConfig config =
+                            new MagnificationConfig.Builder().setMode(1).setScale(scale).build();
                     return connection.setMagnificationConfig(this.mDisplayId, config, animate);
                 } catch (RemoteException re) {
                     Log.w("AccessibilityService", "Failed to set scale", re);
@@ -710,10 +763,16 @@ public abstract class AccessibilityService extends Service {
         @Deprecated
         public boolean setCenter(float centerX, float centerY, boolean animate) {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
-                    MagnificationConfig config = new MagnificationConfig.Builder().setMode(1).setCenterX(centerX).setCenterY(centerY).build();
+                    MagnificationConfig config =
+                            new MagnificationConfig.Builder()
+                                    .setMode(1)
+                                    .setCenterX(centerX)
+                                    .setCenterY(centerY)
+                                    .build();
                     return connection.setMagnificationConfig(this.mDisplayId, config, animate);
                 } catch (RemoteException re) {
                     Log.w("AccessibilityService", "Failed to set center", re);
@@ -726,11 +785,22 @@ public abstract class AccessibilityService extends Service {
 
         public interface OnMagnificationChangedListener {
             @Deprecated
-            void onMagnificationChanged(MagnificationController magnificationController, Region region, float f, float f2, float f3);
+            void onMagnificationChanged(
+                    MagnificationController magnificationController,
+                    Region region,
+                    float f,
+                    float f2,
+                    float f3);
 
-            default void onMagnificationChanged(MagnificationController controller, Region region, MagnificationConfig config) {
+            default void onMagnificationChanged(
+                    MagnificationController controller, Region region, MagnificationConfig config) {
                 if (config.getMode() == 1) {
-                    onMagnificationChanged(controller, region, config.getScale(), config.getCenterX(), config.getCenterY());
+                    onMagnificationChanged(
+                            controller,
+                            region,
+                            config.getScale(),
+                            config.getCenterX(),
+                            config.getCenterY());
                 }
             }
         }
@@ -773,8 +843,7 @@ public abstract class AccessibilityService extends Service {
         private final AccessibilityService mService;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface EnableImeResult {
-        }
+        public @interface EnableImeResult {}
 
         public interface OnShowModeChangedListener {
             void onShowModeChanged(SoftKeyboardController softKeyboardController, int i);
@@ -797,7 +866,8 @@ public abstract class AccessibilityService extends Service {
             addOnShowModeChangedListener(listener, null);
         }
 
-        public void addOnShowModeChangedListener(OnShowModeChangedListener listener, Handler handler) {
+        public void addOnShowModeChangedListener(
+                OnShowModeChangedListener listener, Handler handler) {
             synchronized (this.mLock) {
                 if (this.mListeners == null) {
                     this.mListeners = new ArrayMap<>();
@@ -830,7 +900,8 @@ public abstract class AccessibilityService extends Service {
 
         private void setSoftKeyboardCallbackEnabled(boolean enabled) {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     connection.setSoftKeyboardCallbackEnabled(enabled);
@@ -843,32 +914,40 @@ public abstract class AccessibilityService extends Service {
         void dispatchSoftKeyboardShowModeChanged(final int showMode) {
             synchronized (this.mLock) {
                 if (this.mListeners != null && !this.mListeners.isEmpty()) {
-                    ArrayMap<OnShowModeChangedListener, Handler> entries = new ArrayMap<>(this.mListeners);
+                    ArrayMap<OnShowModeChangedListener, Handler> entries =
+                            new ArrayMap<>(this.mListeners);
                     int count = entries.size();
                     for (int i = 0; i < count; i++) {
                         final OnShowModeChangedListener listener = entries.keyAt(i);
                         Handler handler = entries.valueAt(i);
                         if (handler != null) {
-                            handler.post(new Runnable() { // from class: android.accessibilityservice.AccessibilityService.SoftKeyboardController.1
-                                @Override // java.lang.Runnable
-                                public void run() {
-                                    listener.onShowModeChanged(SoftKeyboardController.this, showMode);
-                                }
-                            });
+                            handler.post(
+                                    new Runnable() { // from class:
+                                        // android.accessibilityservice.AccessibilityService.SoftKeyboardController.1
+                                        @Override // java.lang.Runnable
+                                        public void run() {
+                                            listener.onShowModeChanged(
+                                                    SoftKeyboardController.this, showMode);
+                                        }
+                                    });
                         } else {
                             listener.onShowModeChanged(this, showMode);
                         }
                     }
                     return;
                 }
-                Slog.w("AccessibilityService", "Received soft keyboard show mode changed callback with no listeners registered!");
+                Slog.w(
+                        "AccessibilityService",
+                        "Received soft keyboard show mode changed callback with no listeners"
+                                + " registered!");
                 setSoftKeyboardCallbackEnabled(false);
             }
         }
 
         public int getShowMode() {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.getSoftKeyboardShowMode();
@@ -883,7 +962,8 @@ public abstract class AccessibilityService extends Service {
 
         public boolean setShowMode(int showMode) {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.setSoftKeyboardShowMode(showMode);
@@ -898,7 +978,8 @@ public abstract class AccessibilityService extends Service {
 
         public boolean switchToInputMethod(String imeId) {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.switchToInputMethod(imeId);
@@ -911,7 +992,8 @@ public abstract class AccessibilityService extends Service {
 
         public int setInputMethodEnabled(String imeId, boolean enabled) throws SecurityException {
             AccessibilityInteractionClient.getInstance(this.mService);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mService.mConnectionId);
             if (connection != null) {
                 try {
                     return connection.setInputMethodEnabled(imeId, enabled);
@@ -935,7 +1017,9 @@ public abstract class AccessibilityService extends Service {
             controller = this.mAccessibilityButtonControllers.get(displayId);
             if (controller == null) {
                 AccessibilityInteractionClient.getInstance(this);
-                controller = new AccessibilityButtonController(AccessibilityInteractionClient.getConnection(this.mConnectionId));
+                controller =
+                        new AccessibilityButtonController(
+                                AccessibilityInteractionClient.getConnection(this.mConnectionId));
                 this.mAccessibilityButtonControllers.put(displayId, controller);
             }
         }
@@ -949,14 +1033,17 @@ public abstract class AccessibilityService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void onAccessibilityButtonAvailabilityChanged(boolean available) {
-        getAccessibilityButtonController().dispatchAccessibilityButtonAvailabilityChanged(available);
+        getAccessibilityButtonController()
+                .dispatchAccessibilityButtonAvailabilityChanged(available);
     }
 
     public boolean setCacheEnabled(boolean enabled) {
         IAccessibilityServiceConnection connection;
         notifyKnoxZtInternalService(32);
         AccessibilityCache cache = AccessibilityInteractionClient.getCache(this.mConnectionId);
-        if (cache == null || (connection = AccessibilityInteractionClient.getConnection(this.mConnectionId)) == null) {
+        if (cache == null
+                || (connection = AccessibilityInteractionClient.getConnection(this.mConnectionId))
+                        == null) {
             return false;
         }
         try {
@@ -1007,13 +1094,13 @@ public abstract class AccessibilityService extends Service {
         return cache.isEnabled();
     }
 
-    public void onSystemActionsChanged() {
-    }
+    public void onSystemActionsChanged() {}
 
     public final List<AccessibilityNodeInfo.AccessibilityAction> getSystemActions() {
         notifyKnoxZtInternalService(16);
         AccessibilityInteractionClient.getInstance(this);
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (connection != null) {
             try {
                 return connection.getSystemActions();
@@ -1030,7 +1117,8 @@ public abstract class AccessibilityService extends Service {
         bundle.putInt("action", action);
         notifyKnoxZtInternalService(29, bundle);
         AccessibilityInteractionClient.getInstance(this);
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (connection != null) {
             try {
                 return connection.performGlobalAction(action);
@@ -1045,13 +1133,15 @@ public abstract class AccessibilityService extends Service {
 
     public AccessibilityNodeInfo findFocus(int focus) {
         notifyKnoxZtInternalService(8);
-        return AccessibilityInteractionClient.getInstance(this).findFocus(this.mConnectionId, -2, AccessibilityNodeInfo.ROOT_NODE_ID, focus);
+        return AccessibilityInteractionClient.getInstance(this)
+                .findFocus(this.mConnectionId, -2, AccessibilityNodeInfo.ROOT_NODE_ID, focus);
     }
 
     public final AccessibilityServiceInfo getServiceInfo() {
         notifyKnoxZtInternalService(14);
         AccessibilityInteractionClient.getInstance(this);
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (connection != null) {
             try {
                 return connection.getServiceInfo();
@@ -1074,7 +1164,8 @@ public abstract class AccessibilityService extends Service {
 
     private void sendServiceInfo() {
         AccessibilityInteractionClient.getInstance(this);
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (this.mInfo != null && connection != null) {
             try {
                 connection.setServiceInfo(this.mInfo);
@@ -1091,7 +1182,8 @@ public abstract class AccessibilityService extends Service {
     public Object getSystemService(String name) {
         notifyKnoxZtInternalService(17);
         if (getBaseContext() == null) {
-            throw new IllegalStateException("System services not available to Activities before onCreate()");
+            throw new IllegalStateException(
+                    "System services not available to Activities before onCreate()");
         }
         if (Context.WINDOW_SERVICE.equals(name)) {
             if (this.mWindowManager == null) {
@@ -1104,55 +1196,82 @@ public abstract class AccessibilityService extends Service {
         return super.getSystemService(name);
     }
 
-    public void takeScreenshot(int displayId, final Executor executor, final TakeScreenshotCallback callback) {
+    public void takeScreenshot(
+            int displayId, final Executor executor, final TakeScreenshotCallback callback) {
         Preconditions.checkNotNull(executor, "executor cannot be null");
         Preconditions.checkNotNull(callback, "callback cannot be null");
         notifyKnoxZtInternalService(36);
         AccessibilityInteractionClient.getInstance(this);
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (connection == null) {
             sendScreenshotFailure(1, executor, callback);
             return;
         }
         try {
-            connection.takeScreenshot(displayId, new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: android.accessibilityservice.AccessibilityService$$ExternalSyntheticLambda2
-                @Override // android.os.RemoteCallback.OnResultListener
-                public final void onResult(Bundle bundle) {
-                    AccessibilityService.this.lambda$takeScreenshot$0(executor, callback, bundle);
-                }
-            }));
+            connection.takeScreenshot(
+                    displayId,
+                    new RemoteCallback(
+                            new RemoteCallback.OnResultListener() { // from class:
+                                // android.accessibilityservice.AccessibilityService$$ExternalSyntheticLambda2
+                                @Override // android.os.RemoteCallback.OnResultListener
+                                public final void onResult(Bundle bundle) {
+                                    AccessibilityService.this.lambda$takeScreenshot$0(
+                                            executor, callback, bundle);
+                                }
+                            }));
         } catch (RemoteException re) {
             throw new RuntimeException(re);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$takeScreenshot$0(Executor executor, TakeScreenshotCallback callback, Bundle result) {
+    public /* synthetic */ void lambda$takeScreenshot$0(
+            Executor executor, TakeScreenshotCallback callback, Bundle result) {
         int status = result.getInt(KEY_ACCESSIBILITY_SCREENSHOT_STATUS);
         if (status != 0) {
             sendScreenshotFailure(status, executor, callback);
             return;
         }
-        HardwareBuffer hardwareBuffer = (HardwareBuffer) result.getParcelable(KEY_ACCESSIBILITY_SCREENSHOT_HARDWAREBUFFER, HardwareBuffer.class);
-        ParcelableColorSpace colorSpace = (ParcelableColorSpace) result.getParcelable(KEY_ACCESSIBILITY_SCREENSHOT_COLORSPACE, ParcelableColorSpace.class);
-        ScreenshotResult screenshot = new ScreenshotResult(hardwareBuffer, colorSpace.getColorSpace(), result.getLong(KEY_ACCESSIBILITY_SCREENSHOT_TIMESTAMP));
+        HardwareBuffer hardwareBuffer =
+                (HardwareBuffer)
+                        result.getParcelable(
+                                KEY_ACCESSIBILITY_SCREENSHOT_HARDWAREBUFFER, HardwareBuffer.class);
+        ParcelableColorSpace colorSpace =
+                (ParcelableColorSpace)
+                        result.getParcelable(
+                                KEY_ACCESSIBILITY_SCREENSHOT_COLORSPACE,
+                                ParcelableColorSpace.class);
+        ScreenshotResult screenshot =
+                new ScreenshotResult(
+                        hardwareBuffer,
+                        colorSpace.getColorSpace(),
+                        result.getLong(KEY_ACCESSIBILITY_SCREENSHOT_TIMESTAMP));
         sendScreenshotSuccess(screenshot, executor, callback);
     }
 
-    public void takeScreenshotOfWindow(int accessibilityWindowId, Executor executor, TakeScreenshotCallback callback) {
+    public void takeScreenshotOfWindow(
+            int accessibilityWindowId, Executor executor, TakeScreenshotCallback callback) {
         notifyKnoxZtInternalService(37);
-        AccessibilityInteractionClient.getInstance(this).takeScreenshotOfWindow(this.mConnectionId, accessibilityWindowId, executor, callback);
+        AccessibilityInteractionClient.getInstance(this)
+                .takeScreenshotOfWindow(
+                        this.mConnectionId, accessibilityWindowId, executor, callback);
     }
 
     public void setAccessibilityFocusAppearance(int strokeWidth, int color) {
         notifyKnoxZtInternalService(30);
         AccessibilityInteractionClient.getInstance(this);
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (connection != null) {
             try {
                 connection.setFocusAppearance(strokeWidth, color);
             } catch (RemoteException re) {
-                Log.w("AccessibilityService", "Error while setting the strokeWidth and color of the accessibility focus rectangle", re);
+                Log.w(
+                        "AccessibilityService",
+                        "Error while setting the strokeWidth and color of the accessibility focus"
+                                + " rectangle",
+                        re);
                 re.rethrowFromSystemServer();
             }
         }
@@ -1161,126 +1280,142 @@ public abstract class AccessibilityService extends Service {
     @Override // android.app.Service
     public final IBinder onBind(Intent intent) {
         notifyKnoxZtInternalService(24);
-        return new IAccessibilityServiceClientWrapper(this, getMainExecutor(), new Callbacks() { // from class: android.accessibilityservice.AccessibilityService.2
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onServiceConnected() {
-                AccessibilityService.this.dispatchServiceConnected();
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onInterrupt() {
-                AccessibilityService.this.notifyKnoxZtInternalService(26);
-                AccessibilityService.this.onInterrupt();
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onAccessibilityEvent(AccessibilityEvent event) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("eventType", event.getEventType());
-                AccessibilityService.this.notifyKnoxZtInternalService(23, bundle);
-                AccessibilityService.this.onAccessibilityEvent(event);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void init(int connectionId, IBinder windowToken) {
-                AccessibilityService.this.mConnectionId = connectionId;
-                AccessibilityService.this.mWindowToken = windowToken;
-                if (AccessibilityService.this.mWindowManager != null) {
-                    WindowManagerImpl wm = (WindowManagerImpl) AccessibilityService.this.mWindowManager;
-                    wm.setDefaultToken(AccessibilityService.this.mWindowToken);
-                }
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public boolean onGesture(AccessibilityGestureEvent gestureEvent) {
-                AccessibilityService.this.notifyKnoxZtInternalService(25);
-                return AccessibilityService.this.onGesture(gestureEvent);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public boolean onKeyEvent(KeyEvent event) {
-                return AccessibilityService.this.onKeyEvent(event);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onMagnificationChanged(int displayId, Region region, MagnificationConfig config) {
-                AccessibilityService.this.onMagnificationChanged(displayId, region, config);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onMotionEvent(MotionEvent event) {
-                AccessibilityService.this.sendMotionEventToCallback(event);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onTouchStateChanged(int displayId, int state) {
-                AccessibilityService.this.onTouchStateChanged(displayId, state);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onSoftKeyboardShowModeChanged(int showMode) {
-                AccessibilityService.this.onSoftKeyboardShowModeChanged(showMode);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onPerformGestureResult(int sequence, boolean completedSuccessfully) {
-                AccessibilityService.this.onPerformGestureResult(sequence, completedSuccessfully);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onFingerprintCapturingGesturesChanged(boolean active) {
-                AccessibilityService.this.onFingerprintCapturingGesturesChanged(active);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onFingerprintGesture(int gesture) {
-                AccessibilityService.this.onFingerprintGesture(gesture);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onAccessibilityButtonClicked(int displayId) {
-                AccessibilityService.this.onAccessibilityButtonClicked(displayId);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onAccessibilityButtonAvailabilityChanged(boolean available) {
-                AccessibilityService.this.onAccessibilityButtonAvailabilityChanged(available);
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void onSystemActionsChanged() {
-                AccessibilityService.this.notifyKnoxZtInternalService(28);
-                AccessibilityService.this.onSystemActionsChanged();
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void createImeSession(IAccessibilityInputMethodSessionCallback callback) {
-                if (AccessibilityService.this.mInputMethod != null) {
-                    AccessibilityService.this.mInputMethod.createImeSession(callback);
-                }
-            }
-
-            @Override // android.accessibilityservice.AccessibilityService.Callbacks
-            public void startInput(RemoteAccessibilityInputConnection connection, EditorInfo editorInfo, boolean restarting) {
-                if (AccessibilityService.this.mInputMethod != null) {
-                    if (restarting) {
-                        AccessibilityService.this.mInputMethod.restartInput(connection, editorInfo);
-                    } else {
-                        AccessibilityService.this.mInputMethod.startInput(connection, editorInfo);
+        return new IAccessibilityServiceClientWrapper(
+                this,
+                getMainExecutor(),
+                new Callbacks() { // from class: android.accessibilityservice.AccessibilityService.2
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onServiceConnected() {
+                        AccessibilityService.this.dispatchServiceConnected();
                     }
-                }
-            }
-        });
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onInterrupt() {
+                        AccessibilityService.this.notifyKnoxZtInternalService(26);
+                        AccessibilityService.this.onInterrupt();
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onAccessibilityEvent(AccessibilityEvent event) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("eventType", event.getEventType());
+                        AccessibilityService.this.notifyKnoxZtInternalService(23, bundle);
+                        AccessibilityService.this.onAccessibilityEvent(event);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void init(int connectionId, IBinder windowToken) {
+                        AccessibilityService.this.mConnectionId = connectionId;
+                        AccessibilityService.this.mWindowToken = windowToken;
+                        if (AccessibilityService.this.mWindowManager != null) {
+                            WindowManagerImpl wm =
+                                    (WindowManagerImpl) AccessibilityService.this.mWindowManager;
+                            wm.setDefaultToken(AccessibilityService.this.mWindowToken);
+                        }
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public boolean onGesture(AccessibilityGestureEvent gestureEvent) {
+                        AccessibilityService.this.notifyKnoxZtInternalService(25);
+                        return AccessibilityService.this.onGesture(gestureEvent);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public boolean onKeyEvent(KeyEvent event) {
+                        return AccessibilityService.this.onKeyEvent(event);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onMagnificationChanged(
+                            int displayId, Region region, MagnificationConfig config) {
+                        AccessibilityService.this.onMagnificationChanged(displayId, region, config);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onMotionEvent(MotionEvent event) {
+                        AccessibilityService.this.sendMotionEventToCallback(event);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onTouchStateChanged(int displayId, int state) {
+                        AccessibilityService.this.onTouchStateChanged(displayId, state);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onSoftKeyboardShowModeChanged(int showMode) {
+                        AccessibilityService.this.onSoftKeyboardShowModeChanged(showMode);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onPerformGestureResult(
+                            int sequence, boolean completedSuccessfully) {
+                        AccessibilityService.this.onPerformGestureResult(
+                                sequence, completedSuccessfully);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onFingerprintCapturingGesturesChanged(boolean active) {
+                        AccessibilityService.this.onFingerprintCapturingGesturesChanged(active);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onFingerprintGesture(int gesture) {
+                        AccessibilityService.this.onFingerprintGesture(gesture);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onAccessibilityButtonClicked(int displayId) {
+                        AccessibilityService.this.onAccessibilityButtonClicked(displayId);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onAccessibilityButtonAvailabilityChanged(boolean available) {
+                        AccessibilityService.this.onAccessibilityButtonAvailabilityChanged(
+                                available);
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void onSystemActionsChanged() {
+                        AccessibilityService.this.notifyKnoxZtInternalService(28);
+                        AccessibilityService.this.onSystemActionsChanged();
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void createImeSession(
+                            IAccessibilityInputMethodSessionCallback callback) {
+                        if (AccessibilityService.this.mInputMethod != null) {
+                            AccessibilityService.this.mInputMethod.createImeSession(callback);
+                        }
+                    }
+
+                    @Override // android.accessibilityservice.AccessibilityService.Callbacks
+                    public void startInput(
+                            RemoteAccessibilityInputConnection connection,
+                            EditorInfo editorInfo,
+                            boolean restarting) {
+                        if (AccessibilityService.this.mInputMethod != null) {
+                            if (restarting) {
+                                AccessibilityService.this.mInputMethod.restartInput(
+                                        connection, editorInfo);
+                            } else {
+                                AccessibilityService.this.mInputMethod.startInput(
+                                        connection, editorInfo);
+                            }
+                        }
+                    }
+                });
     }
 
-    public static class IAccessibilityServiceClientWrapper extends IAccessibilityServiceClient.Stub {
+    public static class IAccessibilityServiceClientWrapper
+            extends IAccessibilityServiceClient.Stub {
         private final Callbacks mCallback;
         CancellationGroup mCancellationGroup;
         private int mConnectionId;
         private final Context mContext;
         private final Executor mExecutor;
 
-        public IAccessibilityServiceClientWrapper(Context context, Executor executor, Callbacks callback) {
+        public IAccessibilityServiceClientWrapper(
+                Context context, Executor executor, Callbacks callback) {
             this.mConnectionId = -1;
             this.mCancellationGroup = null;
             this.mCallback = callback;
@@ -1288,22 +1423,30 @@ public abstract class AccessibilityService extends Service {
             this.mExecutor = executor;
         }
 
-        public IAccessibilityServiceClientWrapper(Context context, Looper looper, Callbacks callback) {
+        public IAccessibilityServiceClientWrapper(
+                Context context, Looper looper, Callbacks callback) {
             this(context, new HandlerExecutor(new Handler(looper)), callback);
         }
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void init(final IAccessibilityServiceConnection connection, final int connectionId, final IBinder windowToken) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda12
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$init$0(connectionId, connection, windowToken);
-                }
-            });
+        public void init(
+                final IAccessibilityServiceConnection connection,
+                final int connectionId,
+                final IBinder windowToken) {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda12
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$init$0(connectionId, connection, windowToken);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$init$0(int connectionId, IAccessibilityServiceConnection connection, IBinder windowToken) {
+        public /* synthetic */ void lambda$init$0(
+                int connectionId, IAccessibilityServiceConnection connection, IBinder windowToken) {
             this.mConnectionId = connectionId;
             if (connection != null) {
                 AccessibilityInteractionClient.getInstance(this.mContext);
@@ -1320,7 +1463,8 @@ public abstract class AccessibilityService extends Service {
                 this.mCallback.onServiceConnected();
                 return;
             }
-            AccessibilityInteractionClient.getInstance(this.mContext).clearCache(this.mConnectionId);
+            AccessibilityInteractionClient.getInstance(this.mContext)
+                    .clearCache(this.mConnectionId);
             AccessibilityInteractionClient.getInstance(this.mContext);
             AccessibilityInteractionClient.removeConnection(this.mConnectionId);
             this.mConnectionId = -1;
@@ -1329,12 +1473,15 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onInterrupt() {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda10
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onInterrupt$1();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda10
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onInterrupt$1();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1345,19 +1492,25 @@ public abstract class AccessibilityService extends Service {
         }
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onAccessibilityEvent(final AccessibilityEvent event, final boolean serviceWantsEvent) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda8
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onAccessibilityEvent$2(event, serviceWantsEvent);
-                }
-            });
+        public void onAccessibilityEvent(
+                final AccessibilityEvent event, final boolean serviceWantsEvent) {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda8
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onAccessibilityEvent$2(event, serviceWantsEvent);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onAccessibilityEvent$2(AccessibilityEvent event, boolean serviceWantsEvent) {
+        public /* synthetic */ void lambda$onAccessibilityEvent$2(
+                AccessibilityEvent event, boolean serviceWantsEvent) {
             if (event != null) {
-                AccessibilityInteractionClient.getInstance(this.mContext).onAccessibilityEvent(event, this.mConnectionId);
+                AccessibilityInteractionClient.getInstance(this.mContext)
+                        .onAccessibilityEvent(event, this.mConnectionId);
                 if (serviceWantsEvent && this.mConnectionId != -1) {
                     this.mCallback.onAccessibilityEvent(event);
                 }
@@ -1366,12 +1519,15 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onGesture(final AccessibilityGestureEvent gestureInfo) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda7
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onGesture$3(gestureInfo);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda7
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onGesture$3(gestureInfo);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1383,34 +1539,42 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void clearAccessibilityCache() {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda15
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$clearAccessibilityCache$4();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda15
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$clearAccessibilityCache$4();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$clearAccessibilityCache$4() {
-            AccessibilityInteractionClient.getInstance(this.mContext).clearCache(this.mConnectionId);
+            AccessibilityInteractionClient.getInstance(this.mContext)
+                    .clearCache(this.mConnectionId);
         }
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onKeyEvent(final KeyEvent event, final int sequence) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onKeyEvent$5(event, sequence);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onKeyEvent$5(event, sequence);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onKeyEvent$5(KeyEvent event, int sequence) {
             try {
                 AccessibilityInteractionClient.getInstance(this.mContext);
-                IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+                IAccessibilityServiceConnection connection =
+                        AccessibilityInteractionClient.getConnection(this.mConnectionId);
                 if (connection != null) {
                     boolean result = this.mCallback.onKeyEvent(event);
                     try {
@@ -1432,17 +1596,22 @@ public abstract class AccessibilityService extends Service {
         }
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onMagnificationChanged(final int displayId, final Region region, final MagnificationConfig config) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda17
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onMagnificationChanged$6(displayId, region, config);
-                }
-            });
+        public void onMagnificationChanged(
+                final int displayId, final Region region, final MagnificationConfig config) {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda17
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onMagnificationChanged$6(displayId, region, config);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onMagnificationChanged$6(int displayId, Region region, MagnificationConfig config) {
+        public /* synthetic */ void lambda$onMagnificationChanged$6(
+                int displayId, Region region, MagnificationConfig config) {
             if (this.mConnectionId != -1) {
                 this.mCallback.onMagnificationChanged(displayId, region, config);
             }
@@ -1450,12 +1619,15 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onSoftKeyboardShowModeChanged(final int showMode) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onSoftKeyboardShowModeChanged$7(showMode);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onSoftKeyboardShowModeChanged$7(showMode);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1467,16 +1639,20 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onPerformGestureResult(final int sequence, final boolean successfully) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onPerformGestureResult$8(sequence, successfully);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onPerformGestureResult$8(sequence, successfully);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onPerformGestureResult$8(int sequence, boolean successfully) {
+        public /* synthetic */ void lambda$onPerformGestureResult$8(
+                int sequence, boolean successfully) {
             if (this.mConnectionId != -1) {
                 this.mCallback.onPerformGestureResult(sequence, successfully);
             }
@@ -1484,12 +1660,15 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onFingerprintCapturingGesturesChanged(final boolean active) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda9
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onFingerprintCapturingGesturesChanged$9(active);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda9
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onFingerprintCapturingGesturesChanged$9(active);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1501,12 +1680,15 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onFingerprintGesture(final int gesture) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onFingerprintGesture$10(gesture);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onFingerprintGesture$10(gesture);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1518,12 +1700,15 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onAccessibilityButtonClicked(final int displayId) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onAccessibilityButtonClicked$11(displayId);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onAccessibilityButtonClicked$11(displayId);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1535,16 +1720,20 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onAccessibilityButtonAvailabilityChanged(final boolean available) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda14
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onAccessibilityButtonAvailabilityChanged$12(available);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda14
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onAccessibilityButtonAvailabilityChanged$12(available);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onAccessibilityButtonAvailabilityChanged$12(boolean available) {
+        public /* synthetic */ void lambda$onAccessibilityButtonAvailabilityChanged$12(
+                boolean available) {
             if (this.mConnectionId != -1) {
                 this.mCallback.onAccessibilityButtonAvailabilityChanged(available);
             }
@@ -1552,12 +1741,15 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onSystemActionsChanged() {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda18
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onSystemActionsChanged$13();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda18
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onSystemActionsChanged$13();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1569,42 +1761,55 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void createImeSession(final IAccessibilityInputMethodSessionCallback callback) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda16
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$createImeSession$14(callback);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda16
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$createImeSession$14(callback);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$createImeSession$14(IAccessibilityInputMethodSessionCallback callback) {
+        public /* synthetic */ void lambda$createImeSession$14(
+                IAccessibilityInputMethodSessionCallback callback) {
             if (this.mConnectionId != -1) {
                 this.mCallback.createImeSession(callback);
             }
         }
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void setImeSessionEnabled(IAccessibilityInputMethodSession session, final boolean enabled) {
+        public void setImeSessionEnabled(
+                IAccessibilityInputMethodSession session, final boolean enabled) {
             try {
-                final AccessibilityInputMethodSession ls = ((AccessibilityInputMethodSessionWrapper) session).getSession();
+                final AccessibilityInputMethodSession ls =
+                        ((AccessibilityInputMethodSessionWrapper) session).getSession();
                 if (ls == null) {
                     Log.w("AccessibilityService", "Session is already finished: " + session);
                 } else {
-                    this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda11
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$setImeSessionEnabled$15(ls, enabled);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda11
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                            .lambda$setImeSessionEnabled$15(ls, enabled);
+                                }
+                            });
                 }
             } catch (ClassCastException e) {
-                Log.w("AccessibilityService", "Incoming session not of correct type: " + session, e);
+                Log.w(
+                        "AccessibilityService",
+                        "Incoming session not of correct type: " + session,
+                        e);
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$setImeSessionEnabled$15(AccessibilityInputMethodSession ls, boolean enabled) {
+        public /* synthetic */ void lambda$setImeSessionEnabled$15(
+                AccessibilityInputMethodSession ls, boolean enabled) {
             if (this.mConnectionId != -1) {
                 ls.setEnabled(enabled);
             }
@@ -1629,23 +1834,36 @@ public abstract class AccessibilityService extends Service {
         }
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void startInput(final IRemoteAccessibilityInputConnection connection, final EditorInfo editorInfo, final boolean restarting) {
+        public void startInput(
+                final IRemoteAccessibilityInputConnection connection,
+                final EditorInfo editorInfo,
+                final boolean restarting) {
             if (this.mCancellationGroup == null) {
                 Log.e("AccessibilityService", "startInput must be called after bindInput.");
                 this.mCancellationGroup = new CancellationGroup();
             }
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda13
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$startInput$16(connection, editorInfo, restarting);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda13
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$startInput$16(connection, editorInfo, restarting);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$startInput$16(IRemoteAccessibilityInputConnection connection, EditorInfo editorInfo, boolean restarting) {
+        public /* synthetic */ void lambda$startInput$16(
+                IRemoteAccessibilityInputConnection connection,
+                EditorInfo editorInfo,
+                boolean restarting) {
             if (this.mConnectionId != -1) {
-                RemoteAccessibilityInputConnection ic = connection == null ? null : new RemoteAccessibilityInputConnection(connection, this.mCancellationGroup);
+                RemoteAccessibilityInputConnection ic =
+                        connection == null
+                                ? null
+                                : new RemoteAccessibilityInputConnection(
+                                        connection, this.mCancellationGroup);
                 editorInfo.makeCompatible(this.mContext.getApplicationInfo().targetSdkVersion);
                 this.mCallback.startInput(ic, editorInfo, restarting);
             }
@@ -1653,12 +1871,15 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onMotionEvent(final MotionEvent event) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda6
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onMotionEvent$17(event);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda6
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onMotionEvent$17(event);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1668,12 +1889,15 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
         public void onTouchStateChanged(final int displayId, final int state) {
-            this.mExecutor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AccessibilityService.IAccessibilityServiceClientWrapper.this.lambda$onTouchStateChanged$18(displayId, state);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.accessibilityservice.AccessibilityService$IAccessibilityServiceClientWrapper$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AccessibilityService.IAccessibilityServiceClientWrapper.this
+                                    .lambda$onTouchStateChanged$18(displayId, state);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1682,12 +1906,10 @@ public abstract class AccessibilityService extends Service {
         }
     }
 
-    public static abstract class GestureResultCallback {
-        public void onCompleted(GestureDescription gestureDescription) {
-        }
+    public abstract static class GestureResultCallback {
+        public void onCompleted(GestureDescription gestureDescription) {}
 
-        public void onCancelled(GestureDescription gestureDescription) {
-        }
+        public void onCancelled(GestureDescription gestureDescription) {}
     }
 
     private static class GestureResultCallbackInfo {
@@ -1695,29 +1917,40 @@ public abstract class AccessibilityService extends Service {
         GestureDescription gestureDescription;
         Handler handler;
 
-        GestureResultCallbackInfo(GestureDescription gestureDescription, GestureResultCallback callback, Handler handler) {
+        GestureResultCallbackInfo(
+                GestureDescription gestureDescription,
+                GestureResultCallback callback,
+                Handler handler) {
             this.gestureDescription = gestureDescription;
             this.callback = callback;
             this.handler = handler;
         }
     }
 
-    private void sendScreenshotSuccess(final ScreenshotResult screenshot, Executor executor, final TakeScreenshotCallback callback) {
-        executor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                AccessibilityService.TakeScreenshotCallback.this.onSuccess(screenshot);
-            }
-        });
+    private void sendScreenshotSuccess(
+            final ScreenshotResult screenshot,
+            Executor executor,
+            final TakeScreenshotCallback callback) {
+        executor.execute(
+                new Runnable() { // from class:
+                    // android.accessibilityservice.AccessibilityService$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        AccessibilityService.TakeScreenshotCallback.this.onSuccess(screenshot);
+                    }
+                });
     }
 
-    private void sendScreenshotFailure(final int errorCode, Executor executor, final TakeScreenshotCallback callback) {
-        executor.execute(new Runnable() { // from class: android.accessibilityservice.AccessibilityService$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                AccessibilityService.TakeScreenshotCallback.this.onFailure(errorCode);
-            }
-        });
+    private void sendScreenshotFailure(
+            final int errorCode, Executor executor, final TakeScreenshotCallback callback) {
+        executor.execute(
+                new Runnable() { // from class:
+                    // android.accessibilityservice.AccessibilityService$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        AccessibilityService.TakeScreenshotCallback.this.onFailure(errorCode);
+                    }
+                });
     }
 
     public static final class ScreenshotResult {
@@ -1725,7 +1958,8 @@ public abstract class AccessibilityService extends Service {
         private final HardwareBuffer mHardwareBuffer;
         private final long mTimestamp;
 
-        public ScreenshotResult(HardwareBuffer hardwareBuffer, ColorSpace colorSpace, long timestamp) {
+        public ScreenshotResult(
+                HardwareBuffer hardwareBuffer, ColorSpace colorSpace, long timestamp) {
             Preconditions.checkNotNull(hardwareBuffer, "hardwareBuffer cannot be null");
             Preconditions.checkNotNull(colorSpace, "colorSpace cannot be null");
             this.mHardwareBuffer = hardwareBuffer;
@@ -1750,7 +1984,8 @@ public abstract class AccessibilityService extends Service {
         notifyKnoxZtInternalService(33);
         Preconditions.checkNotNull(region, "region cannot be null");
         AccessibilityInteractionClient.getInstance(this);
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (connection != null) {
             try {
                 connection.setGestureDetectionPassthroughRegion(displayId, region);
@@ -1764,7 +1999,8 @@ public abstract class AccessibilityService extends Service {
         Preconditions.checkNotNull(region, "region cannot be null");
         notifyKnoxZtInternalService(35);
         AccessibilityInteractionClient.getInstance(this);
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (connection != null) {
             try {
                 connection.setTouchExplorationPassthroughRegion(displayId, region);
@@ -1777,7 +2013,8 @@ public abstract class AccessibilityService extends Service {
     public void setAnimationScale(float scale) {
         notifyKnoxZtInternalService(31);
         AccessibilityInteractionClient.getInstance(this);
-        IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+        IAccessibilityServiceConnection connection =
+                AccessibilityInteractionClient.getConnection(this.mConnectionId);
         if (connection != null) {
             try {
                 connection.setAnimationScale(scale);
@@ -1798,7 +2035,8 @@ public abstract class AccessibilityService extends Service {
 
         @Override // android.content.ContextWrapper, android.content.Context
         public Context createDisplayContext(Display display) {
-            return new AccessibilityContext(super.createDisplayContext(display), this.mConnectionId);
+            return new AccessibilityContext(
+                    super.createDisplayContext(display), this.mConnectionId);
         }
 
         @Override // android.content.ContextWrapper, android.content.Context
@@ -1820,8 +2058,10 @@ public abstract class AccessibilityService extends Service {
         }
 
         private void setDefaultTokenInternal(Context context, int displayId) {
-            WindowManagerImpl wm = (WindowManagerImpl) context.getSystemService(Context.WINDOW_SERVICE);
-            IAccessibilityServiceConnection connection = AccessibilityInteractionClient.getConnection(this.mConnectionId);
+            WindowManagerImpl wm =
+                    (WindowManagerImpl) context.getSystemService(Context.WINDOW_SERVICE);
+            IAccessibilityServiceConnection connection =
+                    AccessibilityInteractionClient.getConnection(this.mConnectionId);
             IBinder token = null;
             if (connection != null) {
                 try {
@@ -1862,7 +2102,8 @@ public abstract class AccessibilityService extends Service {
             }
         }
         int eventSourceWithoutClass = event.getSource() & (-256);
-        if ((this.mMotionEventSources & eventSourceWithoutClass) != 0 && !sendingTouchEventToTouchInteractionController) {
+        if ((this.mMotionEventSources & eventSourceWithoutClass) != 0
+                && !sendingTouchEventToTouchInteractionController) {
             notifyKnoxZtInternalService(27);
             onMotionEvent(event);
         }
@@ -1881,18 +2122,24 @@ public abstract class AccessibilityService extends Service {
     public void attachAccessibilityOverlayToDisplay(int displayId, SurfaceControl sc) {
         notifyKnoxZtInternalService(0);
         Preconditions.checkNotNull(sc, "SurfaceControl cannot be null");
-        AccessibilityInteractionClient.getInstance(this).attachAccessibilityOverlayToDisplay(this.mConnectionId, displayId, sc, null, null);
+        AccessibilityInteractionClient.getInstance(this)
+                .attachAccessibilityOverlayToDisplay(this.mConnectionId, displayId, sc, null, null);
     }
 
-    public final void attachAccessibilityOverlayToDisplay(int displayId, SurfaceControl sc, Executor executor, IntConsumer callback) {
+    public final void attachAccessibilityOverlayToDisplay(
+            int displayId, SurfaceControl sc, Executor executor, IntConsumer callback) {
         Preconditions.checkNotNull(sc, "SurfaceControl cannot be null");
-        AccessibilityInteractionClient.getInstance(this).attachAccessibilityOverlayToDisplay(this.mConnectionId, displayId, sc, executor, callback);
+        AccessibilityInteractionClient.getInstance(this)
+                .attachAccessibilityOverlayToDisplay(
+                        this.mConnectionId, displayId, sc, executor, callback);
     }
 
     public void attachAccessibilityOverlayToWindow(int accessibilityWindowId, SurfaceControl sc) {
         notifyKnoxZtInternalService(1);
         Preconditions.checkNotNull(sc, "SurfaceControl cannot be null");
-        AccessibilityInteractionClient.getInstance(this).attachAccessibilityOverlayToWindow(this.mConnectionId, accessibilityWindowId, sc, null, null);
+        AccessibilityInteractionClient.getInstance(this)
+                .attachAccessibilityOverlayToWindow(
+                        this.mConnectionId, accessibilityWindowId, sc, null, null);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1903,7 +2150,10 @@ public abstract class AccessibilityService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public void notifyKnoxZtInternalService(int what, Bundle bundle) {
         try {
-            IKnoxZtInternalService service = IKnoxZtInternalService.Stub.asInterface(ServiceManager.getService(KnoxZtInternalConst.SERVICE_KNOX_ZT_INTERNAL));
+            IKnoxZtInternalService service =
+                    IKnoxZtInternalService.Stub.asInterface(
+                            ServiceManager.getService(
+                                    KnoxZtInternalConst.SERVICE_KNOX_ZT_INTERNAL));
             if (service != null) {
                 service.notifyFrameworkEvent(0, what, bundle);
             }
@@ -1912,9 +2162,12 @@ public abstract class AccessibilityService extends Service {
         }
     }
 
-    public final void attachAccessibilityOverlayToWindow(int accessibilityWindowId, SurfaceControl sc, Executor executor, IntConsumer callback) {
+    public final void attachAccessibilityOverlayToWindow(
+            int accessibilityWindowId, SurfaceControl sc, Executor executor, IntConsumer callback) {
         Preconditions.checkNotNull(sc, "SurfaceControl cannot be null");
-        AccessibilityInteractionClient.getInstance(this).attachAccessibilityOverlayToWindow(this.mConnectionId, accessibilityWindowId, sc, executor, callback);
+        AccessibilityInteractionClient.getInstance(this)
+                .attachAccessibilityOverlayToWindow(
+                        this.mConnectionId, accessibilityWindowId, sc, executor, callback);
     }
 
     public final BrailleDisplayController getBrailleDisplayController() {

@@ -19,7 +19,8 @@ public class SemWifiDisplayParameter implements Parcelable {
     public static final String KEY_POINTER_ICON_INDEX = "wfd_sec_pointer_icon_idx";
     public static final String KEY_SAMSUNG_ACCOUNT = "samsung_account";
     public static final String KEY_SCAMBLE_SUPPORT = "scramble_support";
-    public static final String KEY_SOURCE_DISPLAY_ORIENTATION = "wfd_sec_source_display_orientation";
+    public static final String KEY_SOURCE_DISPLAY_ORIENTATION =
+            "wfd_sec_source_display_orientation";
     public static final String KEY_TIZEN_VERSION = "tizenVer";
     public static final String KEY_TV_BLE_IRK = "tv_ble_irk";
     public static final String KEY_TV_BLE_MAC = "wfd_sec_tv_ble_mac";
@@ -32,7 +33,8 @@ public class SemWifiDisplayParameter implements Parcelable {
     public static final String VALUE_DISABLE = "disable";
     public static final String VALUE_DMR_SUPPORT_TYPE_IMAGE = "image";
     public static final String VALUE_DMR_SUPPORT_TYPE_VIDEO = "video";
-    public static final String VALUE_DMR_SUPPORT_TYPE_VIDEO_HEVC_SUPER_SLOW_MOTION = "video_hevc_super_slow_motion";
+    public static final String VALUE_DMR_SUPPORT_TYPE_VIDEO_HEVC_SUPER_SLOW_MOTION =
+            "video_hevc_super_slow_motion";
     public static final String VALUE_ENABLE = "enable";
     public static final String VALUE_MIRRORING_MODE_DEX = "dex";
     public static final String VALUE_MIRRORING_MODE_MIRRORING = "mirroring";
@@ -42,7 +44,8 @@ public class SemWifiDisplayParameter implements Parcelable {
     public static final String VALUE_ON = "on";
     public static final String VALUE_SOURCE_DISPLAY_ORIENTATION_LANDSCAPE = "landscape";
     public static final String VALUE_SOURCE_DISPLAY_ORIENTATION_PORTRAIT = "portrait";
-    public static final String VALUE_SOURCE_DISPLAY_ORIENTATION_PRESENTATION_OFF = "presentation=off";
+    public static final String VALUE_SOURCE_DISPLAY_ORIENTATION_PRESENTATION_OFF =
+            "presentation=off";
     public static final String VALUE_SOURCE_DISPLAY_ORIENTATION_PRESENTATION_ON = "presentation=on";
     public static final String VALUE_SUPPORT = "support";
     public static final String VALUE_VIEW_MODE_FULL = "full";
@@ -51,22 +54,25 @@ public class SemWifiDisplayParameter implements Parcelable {
     private String mKey;
     private String mValue;
     public static final SemWifiDisplayParameter[] EMPTY_ARRAY = new SemWifiDisplayParameter[0];
-    public static final Parcelable.Creator<SemWifiDisplayParameter> CREATOR = new Parcelable.Creator<SemWifiDisplayParameter>() { // from class: android.hardware.display.SemWifiDisplayParameter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiDisplayParameter createFromParcel(Parcel in) {
-            return new SemWifiDisplayParameter(in);
-        }
+    public static final Parcelable.Creator<SemWifiDisplayParameter> CREATOR =
+            new Parcelable.Creator<SemWifiDisplayParameter>() { // from class:
+                // android.hardware.display.SemWifiDisplayParameter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiDisplayParameter createFromParcel(Parcel in) {
+                    return new SemWifiDisplayParameter(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiDisplayParameter[] newArray(int size) {
-            return size == 0 ? SemWifiDisplayParameter.EMPTY_ARRAY : new SemWifiDisplayParameter[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiDisplayParameter[] newArray(int size) {
+                    return size == 0
+                            ? SemWifiDisplayParameter.EMPTY_ARRAY
+                            : new SemWifiDisplayParameter[size];
+                }
+            };
 
-    public SemWifiDisplayParameter() {
-    }
+    public SemWifiDisplayParameter() {}
 
     public SemWifiDisplayParameter(String key, String value) {
         this.mKey = key;
@@ -120,7 +126,10 @@ public class SemWifiDisplayParameter implements Parcelable {
     }
 
     public boolean equals(Object obj) {
-        if (obj != null && (obj instanceof SemWifiDisplayParameter) && !TextUtils.isEmpty(getKey()) && !TextUtils.isEmpty(((SemWifiDisplayParameter) obj).getKey())) {
+        if (obj != null
+                && (obj instanceof SemWifiDisplayParameter)
+                && !TextUtils.isEmpty(getKey())
+                && !TextUtils.isEmpty(((SemWifiDisplayParameter) obj).getKey())) {
             return ((SemWifiDisplayParameter) obj).getKey().equals(getKey());
         }
         return false;
@@ -128,7 +137,8 @@ public class SemWifiDisplayParameter implements Parcelable {
 
     public String toString() {
         String str = "";
-        StringBuilder append = new StringBuilder().append(TextUtils.isEmpty(this.mKey) ? "" : this.mKey);
+        StringBuilder append =
+                new StringBuilder().append(TextUtils.isEmpty(this.mKey) ? "" : this.mKey);
         if (!TextUtils.isEmpty(this.mValue) && !KEY_TV_DEVICE_ID.equals(this.mKey)) {
             str = ": " + this.mValue;
         }

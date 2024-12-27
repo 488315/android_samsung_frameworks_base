@@ -1,6 +1,7 @@
 package android.os;
 
 import android.annotation.SystemApi;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
 
@@ -11,8 +12,7 @@ public final class Trace {
     public static final long TRACE_TAG_ACTIVITY_MANAGER = 64;
     public static final long TRACE_TAG_ADB = 4194304;
 
-    @SystemApi
-    public static final long TRACE_TAG_AIDL = 16777216;
+    @SystemApi public static final long TRACE_TAG_AIDL = 16777216;
     public static final long TRACE_TAG_ALWAYS = 1;
     public static final long TRACE_TAG_APP = 4096;
     public static final long TRACE_TAG_AUDIO = 256;
@@ -26,6 +26,7 @@ public final class Trace {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final long TRACE_TAG_NETWORK = 2097152;
+
     public static final long TRACE_TAG_NEVER = 0;
     public static final long TRACE_TAG_NNAPI = 33554432;
     private static final long TRACE_TAG_NOT_READY = Long.MIN_VALUE;
@@ -52,7 +53,8 @@ public final class Trace {
     private static native void nativeAsyncTraceEnd(long j, String str, int i);
 
     @FastNative
-    private static native void nativeAsyncTraceForTrackBegin(long j, String str, String str2, int i);
+    private static native void nativeAsyncTraceForTrackBegin(
+            long j, String str, String str2, int i);
 
     @FastNative
     private static native void nativeAsyncTraceForTrackEnd(long j, String str, int i);
@@ -86,14 +88,11 @@ public final class Trace {
         return false;
     }
 
-    private static void nativeSetAppTracingAllowed$ravenwood(boolean allowed) {
-    }
+    private static void nativeSetAppTracingAllowed$ravenwood(boolean allowed) {}
 
-    private static void nativeSetTracingEnabled$ravenwood(boolean allowed) {
-    }
+    private static void nativeSetTracingEnabled$ravenwood(boolean allowed) {}
 
-    private Trace() {
-    }
+    private Trace() {}
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static boolean isTagEnabled(long traceTag) {
@@ -144,7 +143,8 @@ public final class Trace {
         }
     }
 
-    public static void asyncTraceForTrackBegin(long traceTag, String trackName, String methodName, int cookie) {
+    public static void asyncTraceForTrackBegin(
+            long traceTag, String trackName, String methodName, int cookie) {
         if (isTagEnabled(traceTag)) {
             nativeAsyncTraceForTrackBegin(traceTag, trackName, methodName, cookie);
         }

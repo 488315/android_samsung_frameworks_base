@@ -35,7 +35,8 @@ public class StreamPort extends InputPort {
                 this.mFrame.release();
             }
         } else if (this.mFrame != null) {
-            throw new RuntimeException("Attempting to push more than one frame on port: " + this + "!");
+            throw new RuntimeException(
+                    "Attempting to push more than one frame on port: " + this + "!");
         }
         this.mFrame = frame.retain();
         this.mFrame.markReadOnly();

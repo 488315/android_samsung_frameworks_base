@@ -7,6 +7,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
+
 import java.math.BigInteger;
 import java.util.Enumeration;
 
@@ -34,10 +35,19 @@ public class RSAPrivateKeyStructure extends ASN1Object {
         if (obj instanceof ASN1Sequence) {
             return new RSAPrivateKeyStructure((ASN1Sequence) obj);
         }
-        throw new IllegalArgumentException("unknown object in factory: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in factory: " + obj.getClass().getName());
     }
 
-    public RSAPrivateKeyStructure(BigInteger modulus, BigInteger publicExponent, BigInteger privateExponent, BigInteger prime1, BigInteger prime2, BigInteger exponent1, BigInteger exponent2, BigInteger coefficient) {
+    public RSAPrivateKeyStructure(
+            BigInteger modulus,
+            BigInteger publicExponent,
+            BigInteger privateExponent,
+            BigInteger prime1,
+            BigInteger prime2,
+            BigInteger exponent1,
+            BigInteger exponent2,
+            BigInteger coefficient) {
         this.otherPrimeInfos = null;
         this.version = 0;
         this.modulus = modulus;
@@ -108,7 +118,8 @@ public class RSAPrivateKeyStructure extends ASN1Object {
         return this.coefficient;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(10);
         v.add(new ASN1Integer(this.version));

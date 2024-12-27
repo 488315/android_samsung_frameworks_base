@@ -2,7 +2,7 @@ package android.os;
 
 import android.Manifest;
 import android.app.ActivityThread;
-import android.os.IVibratorStateListener;
+
 import com.samsung.android.edge.EdgeManagerInternal;
 import com.samsung.android.vibrator.VibrationDebugInfo;
 
@@ -12,7 +12,8 @@ public interface IVibratorManagerService extends IInterface {
 
     void cancelVibrate(int i, IBinder iBinder) throws RemoteException;
 
-    String executeVibrationDebugCommand(VibrationDebugInfo vibrationDebugInfo) throws RemoteException;
+    String executeVibrationDebugCommand(VibrationDebugInfo vibrationDebugInfo)
+            throws RemoteException;
 
     int getSupportedVibratorGroup() throws RemoteException;
 
@@ -22,17 +23,35 @@ public interface IVibratorManagerService extends IInterface {
 
     boolean isVibrating(int i) throws RemoteException;
 
-    void performHapticFeedback(int i, int i2, String str, int i3, boolean z, String str2, boolean z2) throws RemoteException;
+    void performHapticFeedback(
+            int i, int i2, String str, int i3, boolean z, String str2, boolean z2)
+            throws RemoteException;
 
-    boolean registerVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener) throws RemoteException;
+    boolean registerVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener)
+            throws RemoteException;
 
     int semGetNumberOfSupportedPatterns() throws RemoteException;
 
-    boolean setAlwaysOnEffect(int i, String str, int i2, CombinedVibration combinedVibration, VibrationAttributes vibrationAttributes) throws RemoteException;
+    boolean setAlwaysOnEffect(
+            int i,
+            String str,
+            int i2,
+            CombinedVibration combinedVibration,
+            VibrationAttributes vibrationAttributes)
+            throws RemoteException;
 
-    boolean unregisterVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener) throws RemoteException;
+    boolean unregisterVibratorStateListener(int i, IVibratorStateListener iVibratorStateListener)
+            throws RemoteException;
 
-    void vibrate(int i, int i2, String str, CombinedVibration combinedVibration, VibrationAttributes vibrationAttributes, String str2, IBinder iBinder) throws RemoteException;
+    void vibrate(
+            int i,
+            int i2,
+            String str,
+            CombinedVibration combinedVibration,
+            VibrationAttributes vibrationAttributes,
+            String str2,
+            IBinder iBinder)
+            throws RemoteException;
 
     public static class Default implements IVibratorManagerService {
         @Override // android.os.IVibratorManagerService
@@ -51,31 +70,52 @@ public interface IVibratorManagerService extends IInterface {
         }
 
         @Override // android.os.IVibratorManagerService
-        public boolean registerVibratorStateListener(int vibratorId, IVibratorStateListener listener) throws RemoteException {
+        public boolean registerVibratorStateListener(
+                int vibratorId, IVibratorStateListener listener) throws RemoteException {
             return false;
         }
 
         @Override // android.os.IVibratorManagerService
-        public boolean unregisterVibratorStateListener(int vibratorId, IVibratorStateListener listener) throws RemoteException {
+        public boolean unregisterVibratorStateListener(
+                int vibratorId, IVibratorStateListener listener) throws RemoteException {
             return false;
         }
 
         @Override // android.os.IVibratorManagerService
-        public boolean setAlwaysOnEffect(int uid, String opPkg, int alwaysOnId, CombinedVibration vibration, VibrationAttributes attributes) throws RemoteException {
+        public boolean setAlwaysOnEffect(
+                int uid,
+                String opPkg,
+                int alwaysOnId,
+                CombinedVibration vibration,
+                VibrationAttributes attributes)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IVibratorManagerService
-        public void vibrate(int uid, int deviceId, String opPkg, CombinedVibration vibration, VibrationAttributes attributes, String reason, IBinder token) throws RemoteException {
-        }
+        public void vibrate(
+                int uid,
+                int deviceId,
+                String opPkg,
+                CombinedVibration vibration,
+                VibrationAttributes attributes,
+                String reason,
+                IBinder token)
+                throws RemoteException {}
 
         @Override // android.os.IVibratorManagerService
-        public void cancelVibrate(int usageFilter, IBinder token) throws RemoteException {
-        }
+        public void cancelVibrate(int usageFilter, IBinder token) throws RemoteException {}
 
         @Override // android.os.IVibratorManagerService
-        public void performHapticFeedback(int uid, int deviceId, String opPkg, int constant, boolean always, String reason, boolean fromIme) throws RemoteException {
-        }
+        public void performHapticFeedback(
+                int uid,
+                int deviceId,
+                String opPkg,
+                int constant,
+                boolean always,
+                String reason,
+                boolean fromIme)
+                throws RemoteException {}
 
         @Override // android.os.IVibratorManagerService
         public int semGetNumberOfSupportedPatterns() throws RemoteException {
@@ -88,7 +128,8 @@ public interface IVibratorManagerService extends IInterface {
         }
 
         @Override // android.os.IVibratorManagerService
-        public String executeVibrationDebugCommand(VibrationDebugInfo param) throws RemoteException {
+        public String executeVibrationDebugCommand(VibrationDebugInfo param)
+                throws RemoteException {
             return null;
         }
 
@@ -98,7 +139,7 @@ public interface IVibratorManagerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVibratorManagerService {
+    public abstract static class Stub extends Binder implements IVibratorManagerService {
         static final int TRANSACTION_cancelVibrate = 8;
         static final int TRANSACTION_executeVibrationDebugCommand = 12;
         static final int TRANSACTION_getSupportedVibratorGroup = 11;
@@ -123,7 +164,9 @@ public interface IVibratorManagerService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IVibratorManagerService asInterface(IBinder obj) {
@@ -179,7 +222,8 @@ public interface IVibratorManagerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVibratorManagerService.DESCRIPTOR);
             }
@@ -209,7 +253,8 @@ public interface IVibratorManagerService extends IInterface {
                     return true;
                 case 4:
                     int _arg03 = data.readInt();
-                    IVibratorStateListener _arg1 = IVibratorStateListener.Stub.asInterface(data.readStrongBinder());
+                    IVibratorStateListener _arg1 =
+                            IVibratorStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result4 = registerVibratorStateListener(_arg03, _arg1);
                     reply.writeNoException();
@@ -217,7 +262,8 @@ public interface IVibratorManagerService extends IInterface {
                     return true;
                 case 5:
                     int _arg04 = data.readInt();
-                    IVibratorStateListener _arg12 = IVibratorStateListener.Stub.asInterface(data.readStrongBinder());
+                    IVibratorStateListener _arg12 =
+                            IVibratorStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result5 = unregisterVibratorStateListener(_arg04, _arg12);
                     reply.writeNoException();
@@ -227,8 +273,10 @@ public interface IVibratorManagerService extends IInterface {
                     int _arg05 = data.readInt();
                     String _arg13 = data.readString();
                     int _arg2 = data.readInt();
-                    CombinedVibration _arg3 = (CombinedVibration) data.readTypedObject(CombinedVibration.CREATOR);
-                    VibrationAttributes _arg4 = (VibrationAttributes) data.readTypedObject(VibrationAttributes.CREATOR);
+                    CombinedVibration _arg3 =
+                            (CombinedVibration) data.readTypedObject(CombinedVibration.CREATOR);
+                    VibrationAttributes _arg4 =
+                            (VibrationAttributes) data.readTypedObject(VibrationAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result6 = setAlwaysOnEffect(_arg05, _arg13, _arg2, _arg3, _arg4);
                     reply.writeNoException();
@@ -238,8 +286,10 @@ public interface IVibratorManagerService extends IInterface {
                     int _arg06 = data.readInt();
                     int _arg14 = data.readInt();
                     String _arg22 = data.readString();
-                    CombinedVibration _arg32 = (CombinedVibration) data.readTypedObject(CombinedVibration.CREATOR);
-                    VibrationAttributes _arg42 = (VibrationAttributes) data.readTypedObject(VibrationAttributes.CREATOR);
+                    CombinedVibration _arg32 =
+                            (CombinedVibration) data.readTypedObject(CombinedVibration.CREATOR);
+                    VibrationAttributes _arg42 =
+                            (VibrationAttributes) data.readTypedObject(VibrationAttributes.CREATOR);
                     String _arg5 = data.readString();
                     IBinder _arg6 = data.readStrongBinder();
                     data.enforceNoDataAvail();
@@ -275,7 +325,8 @@ public interface IVibratorManagerService extends IInterface {
                     reply.writeInt(_result8);
                     return true;
                 case 12:
-                    VibrationDebugInfo _arg09 = (VibrationDebugInfo) data.readTypedObject(VibrationDebugInfo.CREATOR);
+                    VibrationDebugInfo _arg09 =
+                            (VibrationDebugInfo) data.readTypedObject(VibrationDebugInfo.CREATOR);
                     data.enforceNoDataAvail();
                     String _result9 = executeVibrationDebugCommand(_arg09);
                     reply.writeNoException();
@@ -327,7 +378,8 @@ public interface IVibratorManagerService extends IInterface {
                     _data.writeInt(vibratorId);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    VibratorInfo _result = (VibratorInfo) _reply.readTypedObject(VibratorInfo.CREATOR);
+                    VibratorInfo _result =
+                            (VibratorInfo) _reply.readTypedObject(VibratorInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -353,7 +405,8 @@ public interface IVibratorManagerService extends IInterface {
             }
 
             @Override // android.os.IVibratorManagerService
-            public boolean registerVibratorStateListener(int vibratorId, IVibratorStateListener listener) throws RemoteException {
+            public boolean registerVibratorStateListener(
+                    int vibratorId, IVibratorStateListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -371,7 +424,8 @@ public interface IVibratorManagerService extends IInterface {
             }
 
             @Override // android.os.IVibratorManagerService
-            public boolean unregisterVibratorStateListener(int vibratorId, IVibratorStateListener listener) throws RemoteException {
+            public boolean unregisterVibratorStateListener(
+                    int vibratorId, IVibratorStateListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -389,7 +443,13 @@ public interface IVibratorManagerService extends IInterface {
             }
 
             @Override // android.os.IVibratorManagerService
-            public boolean setAlwaysOnEffect(int uid, String opPkg, int alwaysOnId, CombinedVibration vibration, VibrationAttributes attributes) throws RemoteException {
+            public boolean setAlwaysOnEffect(
+                    int uid,
+                    String opPkg,
+                    int alwaysOnId,
+                    CombinedVibration vibration,
+                    VibrationAttributes attributes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -410,7 +470,15 @@ public interface IVibratorManagerService extends IInterface {
             }
 
             @Override // android.os.IVibratorManagerService
-            public void vibrate(int uid, int deviceId, String opPkg, CombinedVibration vibration, VibrationAttributes attributes, String reason, IBinder token) throws RemoteException {
+            public void vibrate(
+                    int uid,
+                    int deviceId,
+                    String opPkg,
+                    CombinedVibration vibration,
+                    VibrationAttributes attributes,
+                    String reason,
+                    IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -447,7 +515,15 @@ public interface IVibratorManagerService extends IInterface {
             }
 
             @Override // android.os.IVibratorManagerService
-            public void performHapticFeedback(int uid, int deviceId, String opPkg, int constant, boolean always, String reason, boolean fromIme) throws RemoteException {
+            public void performHapticFeedback(
+                    int uid,
+                    int deviceId,
+                    String opPkg,
+                    int constant,
+                    boolean always,
+                    String reason,
+                    boolean fromIme)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IVibratorManagerService.DESCRIPTOR);
@@ -497,7 +573,8 @@ public interface IVibratorManagerService extends IInterface {
             }
 
             @Override // android.os.IVibratorManagerService
-            public String executeVibrationDebugCommand(VibrationDebugInfo param) throws RemoteException {
+            public String executeVibrationDebugCommand(VibrationDebugInfo param)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -515,15 +592,19 @@ public interface IVibratorManagerService extends IInterface {
         }
 
         protected void isVibrating_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VIBRATOR_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VIBRATOR_STATE, getCallingPid(), getCallingUid());
         }
 
         protected void registerVibratorStateListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VIBRATOR_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VIBRATOR_STATE, getCallingPid(), getCallingUid());
         }
 
-        protected void unregisterVibratorStateListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_VIBRATOR_STATE, getCallingPid(), getCallingUid());
+        protected void unregisterVibratorStateListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_VIBRATOR_STATE, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

@@ -1,6 +1,7 @@
 package org.apache.http.conn.ssl;
 
 import android.provider.DocumentsContract;
+
 import java.io.IOException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateParsingException;
@@ -14,6 +15,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
+
 import javax.net.ssl.SSLException;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
@@ -21,8 +23,25 @@ import javax.net.ssl.SSLSocket;
 @Deprecated
 /* loaded from: classes6.dex */
 public abstract class AbstractVerifier implements X509HostnameVerifier {
-    private static final Pattern IPV4_PATTERN = Pattern.compile("^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$");
-    private static final String[] BAD_COUNTRY_2LDS = {"ac", "co", "com", "ed", "edu", "go", "gouv", "gov", DocumentsContract.EXTRA_INFO, "lg", "ne", "net", "or", "org"};
+    private static final Pattern IPV4_PATTERN =
+            Pattern.compile(
+                    "^(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}$");
+    private static final String[] BAD_COUNTRY_2LDS = {
+        "ac",
+        "co",
+        "com",
+        "ed",
+        "edu",
+        "go",
+        "gouv",
+        "gov",
+        DocumentsContract.EXTRA_INFO,
+        "lg",
+        "ne",
+        "net",
+        "or",
+        "org"
+    };
 
     static {
         Arrays.sort(BAD_COUNTRY_2LDS);
@@ -58,7 +77,9 @@ public abstract class AbstractVerifier implements X509HostnameVerifier {
         verify(host, cns, subjectAlts);
     }
 
-    public final void verify(String host, String[] cns, String[] subjectAlts, boolean strictWithSubDomains) throws SSLException {
+    public final void verify(
+            String host, String[] cns, String[] subjectAlts, boolean strictWithSubDomains)
+            throws SSLException {
         LinkedList<String> names = new LinkedList<>();
         if (cns != null && cns.length > 0 && cns[0] != null) {
             names.add(cns[0]);
@@ -86,7 +107,11 @@ public abstract class AbstractVerifier implements X509HostnameVerifier {
             if (it.hasNext()) {
                 buf.append(" OR");
             }
-            boolean doWildcard = cn.startsWith("*.") && cn.indexOf(46, 2) != -1 && acceptableCountryWildcard(cn) && !isIPv4Address(host);
+            boolean doWildcard =
+                    cn.startsWith("*.")
+                            && cn.indexOf(46, 2) != -1
+                            && acceptableCountryWildcard(cn)
+                            && !isIPv4Address(host);
             if (doWildcard) {
                 match = hostName.endsWith(cn.substring(1));
                 if (match && strictWithSubDomains) {
@@ -100,7 +125,8 @@ public abstract class AbstractVerifier implements X509HostnameVerifier {
             }
         }
         if (!match) {
-            throw new SSLException("hostname in certificate didn't match: <" + host + "> !=" + ((Object) buf));
+            throw new SSLException(
+                    "hostname in certificate didn't match: <" + host + "> !=" + ((Object) buf));
         }
     }
 
@@ -115,7 +141,8 @@ public abstract class AbstractVerifier implements X509HostnameVerifier {
     }
 
     public static String[] getCNs(X509Certificate cert) {
-        AndroidDistinguishedNameParser dnParser = new AndroidDistinguishedNameParser(cert.getSubjectX500Principal());
+        AndroidDistinguishedNameParser dnParser =
+                new AndroidDistinguishedNameParser(cert.getSubjectX500Principal());
         List<String> cnList = dnParser.getAllMostSpecificFirst("cn");
         if (!cnList.isEmpty()) {
             String[] cns = new String[cnList.size()];
@@ -131,7 +158,8 @@ public abstract class AbstractVerifier implements X509HostnameVerifier {
         try {
             c = cert.getSubjectAlternativeNames();
         } catch (CertificateParsingException cpe) {
-            Logger.getLogger(AbstractVerifier.class.getName()).log(Level.FINE, "Error parsing certificate.", (Throwable) cpe);
+            Logger.getLogger(AbstractVerifier.class.getName())
+                    .log(Level.FINE, "Error parsing certificate.", (Throwable) cpe);
         }
         if (c != null) {
             for (List<?> aC : c) {

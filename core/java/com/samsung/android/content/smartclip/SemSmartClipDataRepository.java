@@ -10,10 +10,12 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
-import java.util.Iterator;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Iterator;
 
 /* loaded from: classes5.dex */
 public class SemSmartClipDataRepository implements Parcelable {
@@ -23,22 +25,27 @@ public class SemSmartClipDataRepository implements Parcelable {
     public static final String CONTENT_TYPE_VIDEO = "video";
     public static final String CONTENT_TYPE_WEB = "web";
     public static final String CONTENT_TYPE_YOUTUBE = "youtube";
-    public static final Parcelable.Creator<SemSmartClipDataRepository> CREATOR = new Parcelable.Creator<SemSmartClipDataRepository>() { // from class: com.samsung.android.content.smartclip.SemSmartClipDataRepository.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSmartClipDataRepository createFromParcel(Parcel in) {
-            Log.d(SemSmartClipDataRepository.TAG, "SemSmartClipDataRepository.createFromParcel called");
-            SemSmartClipDataRepository data = new SemSmartClipDataRepository();
-            data.readFromParcel(in);
-            return data;
-        }
+    public static final Parcelable.Creator<SemSmartClipDataRepository> CREATOR =
+            new Parcelable.Creator<
+                    SemSmartClipDataRepository>() { // from class:
+                                                    // com.samsung.android.content.smartclip.SemSmartClipDataRepository.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSmartClipDataRepository createFromParcel(Parcel in) {
+                    Log.d(
+                            SemSmartClipDataRepository.TAG,
+                            "SemSmartClipDataRepository.createFromParcel called");
+                    SemSmartClipDataRepository data = new SemSmartClipDataRepository();
+                    data.readFromParcel(in);
+                    return data;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSmartClipDataRepository[] newArray(int size) {
-            return new SemSmartClipDataRepository[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSmartClipDataRepository[] newArray(int size) {
+                    return new SemSmartClipDataRepository[size];
+                }
+            };
     protected static final String FIELD_CAPTURED_IMAGE_PATH = "captured_image_path";
     protected static final String FIELD_CAPTURED_IMAGE_STYLE = "captured_image_style";
     protected static final String FIELD_CONTENT_RECT = "content_rect";
@@ -85,11 +92,16 @@ public class SemSmartClipDataRepository implements Parcelable {
         this(cropper, new Rect(0, 0, 0, 0), new RectF(0.0f, 0.0f, 1.0f, 1.0f));
     }
 
-    public SemSmartClipDataRepository(SemSmartClipDataCropper cropper, Rect winFrameRect, RectF scaleRect) {
+    public SemSmartClipDataRepository(
+            SemSmartClipDataCropper cropper, Rect winFrameRect, RectF scaleRect) {
         this(cropper, new Rect(0, 0, 0, 0), new RectF(0.0f, 0.0f, 1.0f, 1.0f), 0);
     }
 
-    public SemSmartClipDataRepository(SemSmartClipDataCropper cropper, Rect winFrameRect, RectF scaleRect, int penWindowBorderWidth) {
+    public SemSmartClipDataRepository(
+            SemSmartClipDataCropper cropper,
+            Rect winFrameRect,
+            RectF scaleRect,
+            int penWindowBorderWidth) {
         this.mRootElement = new SmartClipDataRootElement();
         this.mContentType = null;
         this.mContentRect = null;
@@ -173,9 +185,24 @@ public class SemSmartClipDataRepository implements Parcelable {
                     bHaveImageFilePath = true;
                 }
                 if (bHaveUrlTag) {
-                    if ((view instanceof WebView) || view.getClass().getName().equals("android.webkitsec.WebView") || view.getClass().getName().equals("org.chromium.content.browser.ChromeView") || view.getClass().getName().equals("org.samsung.content.sbrowser.SbrContentView") || view.getClass().getName().equals("com.sec.chromium.content.browser.SbrContentView") || view.getClass().getName().equals("org.chromium.content.browser.JellyBeanContentView")) {
+                    if ((view instanceof WebView)
+                            || view.getClass().getName().equals("android.webkitsec.WebView")
+                            || view.getClass()
+                                    .getName()
+                                    .equals("org.chromium.content.browser.ChromeView")
+                            || view.getClass()
+                                    .getName()
+                                    .equals("org.samsung.content.sbrowser.SbrContentView")
+                            || view.getClass()
+                                    .getName()
+                                    .equals("com.sec.chromium.content.browser.SbrContentView")
+                            || view.getClass()
+                                    .getName()
+                                    .equals("org.chromium.content.browser.JellyBeanContentView")) {
                         bHaveBrowserView = true;
-                    } else if (this.mAppPackageName != null && this.mAppPackageName.equals("com.google.android.youtube") && view.getClass().getName().endsWith("PlayerView")) {
+                    } else if (this.mAppPackageName != null
+                            && this.mAppPackageName.equals("com.google.android.youtube")
+                            && view.getClass().getName().endsWith("PlayerView")) {
                         bHaveYoutubeView = true;
                     }
                 }
@@ -246,7 +273,9 @@ public class SemSmartClipDataRepository implements Parcelable {
         while (element != null) {
             if (element.getChildCount() != 1) {
                 if (element.getChildCount() > 1) {
-                    for (SmartClipDataElementImpl child = element.getFirstChild(); child != null; child = child.getNextSibling()) {
+                    for (SmartClipDataElementImpl child = element.getFirstChild();
+                            child != null;
+                            child = child.getNextSibling()) {
                         Rect rect = child.getMetaAreaRect();
                         if (rect != null) {
                             if (contentRect.left > rect.left && rect.width() > 0) {
@@ -293,8 +322,16 @@ public class SemSmartClipDataRepository implements Parcelable {
                 Rect unScaledWinFrame = new Rect();
                 unScaledWinFrame.left = this.mWinFrameRect.left;
                 unScaledWinFrame.top = this.mWinFrameRect.top;
-                unScaledWinFrame.right = (int) (this.mWinFrameRect.left + (this.mWinFrameRect.width() / hScale) + 0.5f);
-                unScaledWinFrame.bottom = (int) (this.mWinFrameRect.top + (this.mWinFrameRect.height() / vScale) + 0.5f);
+                unScaledWinFrame.right =
+                        (int)
+                                (this.mWinFrameRect.left
+                                        + (this.mWinFrameRect.width() / hScale)
+                                        + 0.5f);
+                unScaledWinFrame.bottom =
+                        (int)
+                                (this.mWinFrameRect.top
+                                        + (this.mWinFrameRect.height() / vScale)
+                                        + 0.5f);
                 if (this.mPenWindowBorder > 0) {
                     if (contentRect.left < this.mPenWindowBorder) {
                         contentRect.left += this.mPenWindowBorder;
@@ -325,7 +362,9 @@ public class SemSmartClipDataRepository implements Parcelable {
             return this.mTags;
         }
         SmartClipMetaTagArrayImpl metaList = new SmartClipMetaTagArrayImpl();
-        for (SmartClipDataElementImpl element = this.mRootElement; element != null; element = element.traverseNextElement(null)) {
+        for (SmartClipDataElementImpl element = this.mRootElement;
+                element != null;
+                element = element.traverseNextElement(null)) {
             SmartClipMetaTagArrayImpl tags = (SmartClipMetaTagArrayImpl) element.getTagTable();
             if (tags != null) {
                 int tagCount = tags.size();
@@ -339,7 +378,8 @@ public class SemSmartClipDataRepository implements Parcelable {
         }
         String plainText = getMergedPlainTextTag();
         if (plainText != null) {
-            metaList.add(new SemSmartClipExtendedMetaTag(SemSmartClipMetaTagType.PLAIN_TEXT, plainText));
+            metaList.add(
+                    new SemSmartClipExtendedMetaTag(SemSmartClipMetaTagType.PLAIN_TEXT, plainText));
         }
         return metaList;
     }
@@ -357,10 +397,14 @@ public class SemSmartClipDataRepository implements Parcelable {
         } else if (SemSmartClipMetaTagType.PLAIN_TEXT.equals(tagType)) {
             String plainText = getMergedPlainTextTag();
             if (plainText != null) {
-                metaList.add(new SemSmartClipExtendedMetaTag(SemSmartClipMetaTagType.PLAIN_TEXT, plainText));
+                metaList.add(
+                        new SemSmartClipExtendedMetaTag(
+                                SemSmartClipMetaTagType.PLAIN_TEXT, plainText));
             }
         } else {
-            for (SmartClipDataElementImpl element = this.mRootElement; element != null; element = element.traverseNextElement(null)) {
+            for (SmartClipDataElementImpl element = this.mRootElement;
+                    element != null;
+                    element = element.traverseNextElement(null)) {
                 SmartClipMetaTagArrayImpl tags = (SmartClipMetaTagArrayImpl) element.getTagTable();
                 if (tags != null) {
                     int tagCount2 = tags.size();
@@ -431,7 +475,9 @@ public class SemSmartClipDataRepository implements Parcelable {
         this.mCapturedImageFileStyle = in.readInt();
         this.mAppPackageName = in.readString();
         this.mTargetWindowLayer = in.readInt();
-        SmartClipMetaTagArrayImpl listArray = (SmartClipMetaTagArrayImpl) in.readParcelable(SemSmartClipExtendedMetaTag.class.getClassLoader());
+        SmartClipMetaTagArrayImpl listArray =
+                (SmartClipMetaTagArrayImpl)
+                        in.readParcelable(SemSmartClipExtendedMetaTag.class.getClassLoader());
         this.mTags = listArray;
     }
 
@@ -448,10 +494,16 @@ public class SemSmartClipDataRepository implements Parcelable {
                 }
                 if (json_repository.has(FIELD_CONTENT_RECT)) {
                     JSONArray json_rect = json_repository.getJSONArray(FIELD_CONTENT_RECT);
-                    repository.mContentRect = new Rect(json_rect.getInt(0), json_rect.getInt(1), json_rect.getInt(2), json_rect.getInt(3));
+                    repository.mContentRect =
+                            new Rect(
+                                    json_rect.getInt(0),
+                                    json_rect.getInt(1),
+                                    json_rect.getInt(2),
+                                    json_rect.getInt(3));
                 }
                 if (json_repository.has(FIELD_CAPTURED_IMAGE_PATH)) {
-                    String capturedImageFilePath = json_repository.getString(FIELD_CAPTURED_IMAGE_PATH);
+                    String capturedImageFilePath =
+                            json_repository.getString(FIELD_CAPTURED_IMAGE_PATH);
                     int capturedImageFileStyle = json_repository.getInt(FIELD_CAPTURED_IMAGE_STYLE);
                     if (capturedImageFilePath != null) {
                         repository.setCapturedImage(capturedImageFilePath, capturedImageFileStyle);
@@ -523,11 +575,13 @@ public class SemSmartClipDataRepository implements Parcelable {
                     json_tag.put(FIELD_META_TAG_TYPE, curTag.getType());
                     json_tag.put(FIELD_META_TAG_VALUE, curTag.getValue());
                     if (curTag instanceof SemSmartClipExtendedMetaTag) {
-                        SemSmartClipExtendedMetaTag curTagImpl = (SemSmartClipExtendedMetaTag) curTag;
+                        SemSmartClipExtendedMetaTag curTagImpl =
+                                (SemSmartClipExtendedMetaTag) curTag;
                         if (curTagImpl.getExtraData() != null) {
                             byte[] extraData = curTagImpl.getExtraData();
                             Log.d(TAG, "Encoding : Length of extra data = " + extraData.length);
-                            json_tag.put(FIELD_META_TAG_EXTRA_DATA, Base64.encodeToString(extraData, 0));
+                            json_tag.put(
+                                    FIELD_META_TAG_EXTRA_DATA, Base64.encodeToString(extraData, 0));
                         }
                     }
                     json_tagArray.put(json_tag);

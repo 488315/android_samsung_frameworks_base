@@ -7,8 +7,7 @@ public class Int3 {
     public int y;
     public int z;
 
-    public Int3() {
-    }
+    public Int3() {}
 
     public Int3(int i) {
         this.z = i;

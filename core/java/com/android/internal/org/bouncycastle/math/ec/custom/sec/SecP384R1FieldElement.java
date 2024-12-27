@@ -4,11 +4,16 @@ import com.android.internal.org.bouncycastle.math.ec.ECFieldElement;
 import com.android.internal.org.bouncycastle.math.raw.Nat;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
 public class SecP384R1FieldElement extends ECFieldElement.AbstractFp {
-    public static final BigInteger Q = new BigInteger(1, Hex.decodeStrict("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFF0000000000000000FFFFFFFF"));
+    public static final BigInteger Q =
+            new BigInteger(
+                    1,
+                    Hex.decodeStrict(
+                            "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFF0000000000000000FFFFFFFF"));
     protected int[] x;
 
     public SecP384R1FieldElement(BigInteger x) {

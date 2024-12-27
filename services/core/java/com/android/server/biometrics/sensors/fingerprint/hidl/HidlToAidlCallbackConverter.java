@@ -12,6 +12,7 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.util.Slog;
+
 import com.android.server.biometrics.HardwareAuthTokenUtils;
 import com.android.server.biometrics.sensors.EnumerateConsumer;
 import com.android.server.biometrics.sensors.ErrorConsumer;
@@ -20,13 +21,16 @@ import com.android.server.biometrics.sensors.fingerprint.aidl.AidlResponseHandle
 import com.android.server.biometrics.sensors.fingerprint.aidl.AidlResponseHandler$$ExternalSyntheticLambda10;
 import com.android.server.biometrics.sensors.fingerprint.aidl.SemFpAidlResponseHandler;
 import com.android.server.biometrics.sensors.fingerprint.aidl.SemFpAidlResponseHandler$$ExternalSyntheticLambda11;
+
 import com.att.iqi.lib.metrics.hw.HwConstants;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class HidlToAidlCallbackConverter extends HwBinder implements IBiometricsFingerprintClientCallback {
+public final class HidlToAidlCallbackConverter extends HwBinder
+        implements IBiometricsFingerprintClientCallback {
     public final SemFpAidlResponseHandler mAidlResponseHandler;
 
     public HidlToAidlCallbackConverter(SemFpAidlResponseHandler semFpAidlResponseHandler) {
@@ -39,8 +43,7 @@ public final class HidlToAidlCallbackConverter extends HwBinder implements IBiom
     }
 
     @Override // android.hidl.base.V1_0.IBase
-    public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-    }
+    public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {}
 
     @Override // android.hidl.base.V1_0.IBase
     public final DebugInfo getDebugInfo() {
@@ -53,12 +56,90 @@ public final class HidlToAidlCallbackConverter extends HwBinder implements IBiom
 
     @Override // android.hidl.base.V1_0.IBase
     public final ArrayList getHashChain() {
-        return new ArrayList(Arrays.asList(new byte[]{-126, -54, -39, -97, 95, -21, 46, -87, -68, -44, 87, -112, 85, -19, -12, -81, -113, -21, -97, -58, 2, -90, -28, -126, 125, -35, 114, 125, 37, 77, 73, -111}, new byte[]{-86, -69, 92, 60, 88, 85, -110, -41, 30, -27, 123, 119, 41, -116, 20, -103, 61, 119, -111, 77, -34, -86, 100, -78, -59, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED, -102, 96, 43, 2, -22, 71}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, -48, 45, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, 36, -13, -51, 105, 87, 19, -109, 36, -72, 59, 24, -54, 76}));
+        return new ArrayList(
+                Arrays.asList(
+                        new byte[] {
+                            -126, -54, -39, -97, 95, -21, 46, -87, -68, -44, 87, -112, 85, -19, -12,
+                            -81, -113, -21, -97, -58, 2, -90, -28, -126, 125, -35, 114, 125, 37, 77,
+                            73, -111
+                        },
+                        new byte[] {
+                            -86,
+                            -69,
+                            92,
+                            60,
+                            88,
+                            85,
+                            -110,
+                            -41,
+                            30,
+                            -27,
+                            123,
+                            119,
+                            41,
+                            -116,
+                            20,
+                            -103,
+                            61,
+                            119,
+                            -111,
+                            77,
+                            -34,
+                            -86,
+                            100,
+                            -78,
+                            -59,
+                            HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED,
+                            -102,
+                            96,
+                            43,
+                            2,
+                            -22,
+                            71
+                        },
+                        new byte[] {
+                            -20,
+                            Byte.MAX_VALUE,
+                            -41,
+                            -98,
+                            -48,
+                            45,
+                            -6,
+                            -123,
+                            -68,
+                            73,
+                            -108,
+                            38,
+                            -83,
+                            -82,
+                            62,
+                            -66,
+                            35,
+                            -17,
+                            5,
+                            36,
+                            -13,
+                            -51,
+                            105,
+                            87,
+                            19,
+                            -109,
+                            36,
+                            -72,
+                            59,
+                            24,
+                            -54,
+                            76
+                        }));
     }
 
     @Override // android.hidl.base.V1_0.IBase
     public final ArrayList interfaceChain() {
-        return new ArrayList(Arrays.asList("android.hardware.biometrics.fingerprint@2.2::IBiometricsFingerprintClientCallback", "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback", IBase.kInterfaceName));
+        return new ArrayList(
+                Arrays.asList(
+                        "android.hardware.biometrics.fingerprint@2.2::IBiometricsFingerprintClientCallback",
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback",
+                        IBase.kInterfaceName));
     }
 
     @Override // android.hidl.base.V1_0.IBase
@@ -91,7 +172,8 @@ public final class HidlToAidlCallbackConverter extends HwBinder implements IBiom
         for (int i3 = 0; i3 < arrayList.size(); i3++) {
             bArr[i3] = ((Byte) arrayList.get(i3)).byteValue();
         }
-        this.mAidlResponseHandler.onAuthenticationSucceeded(i, HardwareAuthTokenUtils.toHardwareAuthToken(bArr));
+        this.mAidlResponseHandler.onAuthenticationSucceeded(
+                i, HardwareAuthTokenUtils.toHardwareAuthToken(bArr));
     }
 
     @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprintClientCallback
@@ -103,52 +185,88 @@ public final class HidlToAidlCallbackConverter extends HwBinder implements IBiom
     public final void onEnumerate(int i, int i2, int i3, long j) {
         SemFpAidlResponseHandler semFpAidlResponseHandler = this.mAidlResponseHandler;
         semFpAidlResponseHandler.getClass();
-        semFpAidlResponseHandler.handleResponse(EnumerateConsumer.class, new AidlResponseHandler$$ExternalSyntheticLambda10(new Fingerprint("", i, semFpAidlResponseHandler.mSensorId), i3, 1), null);
+        semFpAidlResponseHandler.handleResponse(
+                EnumerateConsumer.class,
+                new AidlResponseHandler$$ExternalSyntheticLambda10(
+                        new Fingerprint("", i, semFpAidlResponseHandler.mSensorId), i3, 1),
+                null);
     }
 
     @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprintClientCallback
     public final void onError(int i, int i2, long j) {
         SemFpAidlResponseHandler semFpAidlResponseHandler = this.mAidlResponseHandler;
         semFpAidlResponseHandler.getClass();
-        semFpAidlResponseHandler.handleResponse(ErrorConsumer.class, new SemFpAidlResponseHandler$$ExternalSyntheticLambda11(semFpAidlResponseHandler, i, i2, 1), null, 0L);
+        semFpAidlResponseHandler.handleResponse(
+                ErrorConsumer.class,
+                new SemFpAidlResponseHandler$$ExternalSyntheticLambda11(
+                        semFpAidlResponseHandler, i, i2, 1),
+                null,
+                0L);
     }
 
     @Override // android.hardware.biometrics.fingerprint.V2_1.IBiometricsFingerprintClientCallback
     public final void onRemoved(int i, int i2, int i3, long j) {
         SemFpAidlResponseHandler semFpAidlResponseHandler = this.mAidlResponseHandler;
         semFpAidlResponseHandler.getClass();
-        semFpAidlResponseHandler.handleResponse(RemovalConsumer.class, new AidlResponseHandler$$ExternalSyntheticLambda10(new Fingerprint("", i, semFpAidlResponseHandler.mSensorId), i3, 0), null);
+        semFpAidlResponseHandler.handleResponse(
+                RemovalConsumer.class,
+                new AidlResponseHandler$$ExternalSyntheticLambda10(
+                        new Fingerprint("", i, semFpAidlResponseHandler.mSensorId), i3, 0),
+                null);
     }
 
     public final void onTransact(int i, HwParcel hwParcel, HwParcel hwParcel2, int i2) {
         switch (i) {
             case 1:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
-                onEnrollResult(hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt64());
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+                onEnrollResult(
+                        hwParcel.readInt32(),
+                        hwParcel.readInt32(),
+                        hwParcel.readInt32(),
+                        hwParcel.readInt64());
                 return;
             case 2:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
                 hwParcel.readInt64();
                 this.mAidlResponseHandler.onAcquired(hwParcel.readInt32(), hwParcel.readInt32());
                 return;
             case 3:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
-                onAuthenticated(hwParcel.readInt64(), hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt8Vector());
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+                onAuthenticated(
+                        hwParcel.readInt64(),
+                        hwParcel.readInt32(),
+                        hwParcel.readInt32(),
+                        hwParcel.readInt8Vector());
                 return;
             case 4:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
                 onError(hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt64());
                 return;
             case 5:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
-                onRemoved(hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt64());
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+                onRemoved(
+                        hwParcel.readInt32(),
+                        hwParcel.readInt32(),
+                        hwParcel.readInt32(),
+                        hwParcel.readInt64());
                 return;
             case 6:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
-                onEnumerate(hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt32(), hwParcel.readInt64());
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprintClientCallback");
+                onEnumerate(
+                        hwParcel.readInt32(),
+                        hwParcel.readInt32(),
+                        hwParcel.readInt32(),
+                        hwParcel.readInt64());
                 return;
             case 7:
-                hwParcel.enforceInterface("android.hardware.biometrics.fingerprint@2.2::IBiometricsFingerprintClientCallback");
+                hwParcel.enforceInterface(
+                        "android.hardware.biometrics.fingerprint@2.2::IBiometricsFingerprintClientCallback");
                 hwParcel.readInt64();
                 this.mAidlResponseHandler.onAcquired(hwParcel.readInt32(), hwParcel.readInt32());
                 return;
@@ -171,7 +289,8 @@ public final class HidlToAidlCallbackConverter extends HwBinder implements IBiom
                     case 256136003:
                         hwParcel.enforceInterface(IBase.kInterfaceName);
                         hwParcel2.writeStatus(0);
-                        hwParcel2.writeString("android.hardware.biometrics.fingerprint@2.2::IBiometricsFingerprintClientCallback");
+                        hwParcel2.writeString(
+                                "android.hardware.biometrics.fingerprint@2.2::IBiometricsFingerprintClientCallback");
                         hwParcel2.send();
                         return;
                     case 256398152:
@@ -187,7 +306,8 @@ public final class HidlToAidlCallbackConverter extends HwBinder implements IBiom
                             long j = i3 * 32;
                             byte[] bArr = (byte[]) hashChain.get(i3);
                             if (bArr == null || bArr.length != 32) {
-                                throw new IllegalArgumentException("Array element is not of the expected length");
+                                throw new IllegalArgumentException(
+                                        "Array element is not of the expected length");
                             }
                             hwBlob2.putInt8Array(j, bArr);
                         }
@@ -221,19 +341,18 @@ public final class HidlToAidlCallbackConverter extends HwBinder implements IBiom
     }
 
     @Override // android.hidl.base.V1_0.IBase
-    public final void ping() {
-    }
+    public final void ping() {}
 
     public final IHwInterface queryLocalInterface(String str) {
-        if ("android.hardware.biometrics.fingerprint@2.2::IBiometricsFingerprintClientCallback".equals(str)) {
+        if ("android.hardware.biometrics.fingerprint@2.2::IBiometricsFingerprintClientCallback"
+                .equals(str)) {
             return this;
         }
         return null;
     }
 
     @Override // android.hidl.base.V1_0.IBase
-    public final void setHALInstrumentation() {
-    }
+    public final void setHALInstrumentation() {}
 
     public final String toString() {
         return "android.hardware.biometrics.fingerprint@2.2::IBiometricsFingerprintClientCallback@Stub";
@@ -248,6 +367,7 @@ public final class HidlToAidlCallbackConverter extends HwBinder implements IBiom
         SemFpAidlResponseHandler semFpAidlResponseHandler = this.mAidlResponseHandler;
         semFpAidlResponseHandler.getClass();
         Slog.e("AidlResponseHandler", cls + " is not supported in the HAL.");
-        semFpAidlResponseHandler.handleResponse(cls, new AidlResponseHandler$$ExternalSyntheticLambda0(3), null);
+        semFpAidlResponseHandler.handleResponse(
+                cls, new AidlResponseHandler$$ExternalSyntheticLambda0(3), null);
     }
 }

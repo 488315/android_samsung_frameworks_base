@@ -10,7 +10,8 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 
 /* loaded from: classes5.dex */
-public class X509CertificateStructure extends ASN1Object implements X509ObjectIdentifiers, PKCSObjectIdentifiers {
+public class X509CertificateStructure extends ASN1Object
+        implements X509ObjectIdentifiers, PKCSObjectIdentifiers {
     ASN1Sequence seq;
     DERBitString sig;
     AlgorithmIdentifier sigAlgId;
@@ -81,7 +82,8 @@ public class X509CertificateStructure extends ASN1Object implements X509ObjectId
         return this.sig;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.seq;
     }

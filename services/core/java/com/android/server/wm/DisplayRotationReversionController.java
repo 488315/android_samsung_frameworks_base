@@ -59,7 +59,8 @@ public final class DisplayRotationReversionController {
         }
         if (z) {
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ORIENTATION_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ORIENTATION, -4296736202875980050L, 0, null, null);
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_ORIENTATION, -4296736202875980050L, 0, null, null);
             }
             return false;
         }

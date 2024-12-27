@@ -11,21 +11,23 @@ public class SyncInfo implements Parcelable {
     public final int authorityId;
     public final long startTime;
     private static final Account REDACTED_ACCOUNT = new Account("*****", "*****");
-    public static final Parcelable.Creator<SyncInfo> CREATOR = new Parcelable.Creator<SyncInfo>() { // from class: android.content.SyncInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncInfo createFromParcel(Parcel in) {
-            return new SyncInfo(in);
-        }
+    public static final Parcelable.Creator<SyncInfo> CREATOR =
+            new Parcelable.Creator<SyncInfo>() { // from class: android.content.SyncInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncInfo createFromParcel(Parcel in) {
+                    return new SyncInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncInfo[] newArray(int size) {
-            return new SyncInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncInfo[] newArray(int size) {
+                    return new SyncInfo[size];
+                }
+            };
 
-    public static SyncInfo createAccountRedacted(int authorityId, String authority, long startTime) {
+    public static SyncInfo createAccountRedacted(
+            int authorityId, String authority, long startTime) {
         return new SyncInfo(authorityId, REDACTED_ACCOUNT, authority, startTime);
     }
 
@@ -58,7 +60,8 @@ public class SyncInfo implements Parcelable {
 
     SyncInfo(Parcel parcel) {
         this.authorityId = parcel.readInt();
-        this.account = (Account) parcel.readParcelable(Account.class.getClassLoader(), Account.class);
+        this.account =
+                (Account) parcel.readParcelable(Account.class.getClassLoader(), Account.class);
         this.authority = parcel.readString();
         this.startTime = parcel.readLong();
     }

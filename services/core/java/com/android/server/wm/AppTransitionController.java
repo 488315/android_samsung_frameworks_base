@@ -12,11 +12,11 @@ import android.util.Pair;
 import android.view.RemoteAnimationDefinition;
 import android.view.SurfaceControl;
 import android.view.WindowManager;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
-import com.android.server.wm.AccessibilityController;
-import com.android.server.wm.ScreenRotationAnimation;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,13 +33,20 @@ public final class AppTransitionController {
     public final ArrayMap mTempTransitionReasons = new ArrayMap();
     public final ArrayList mTempTransitionWindows = new ArrayList();
 
-    public AppTransitionController(WindowManagerService windowManagerService, DisplayContent displayContent) {
+    public AppTransitionController(
+            WindowManagerService windowManagerService, DisplayContent displayContent) {
         this.mService = windowManagerService;
         this.mDisplayContent = displayContent;
         this.mWallpaperControllerLocked = displayContent.mWallpaperController;
     }
 
-    public static void applyAnimations(ArraySet arraySet, ArraySet arraySet2, int i, boolean z, WindowManager.LayoutParams layoutParams, boolean z2) {
+    public static void applyAnimations(
+            ArraySet arraySet,
+            ArraySet arraySet2,
+            int i,
+            boolean z,
+            WindowManager.LayoutParams layoutParams,
+            boolean z2) {
         int size = arraySet.size();
         for (int i2 = 0; i2 < size; i2++) {
             WindowContainer windowContainer = (WindowContainer) arraySet.valueAt(i2);
@@ -61,10 +68,19 @@ public final class AppTransitionController {
         for (int i = 0; i < arraySet3.size(); i++) {
             ActivityRecord activityRecord = (ActivityRecord) arraySet3.valueAt(i);
             boolean z3 = activityRecord.mVisible;
-            if (z3 != z || activityRecord.mRequestForceTransition || (!z3 && activityRecord.mIsExiting)) {
+            if (z3 != z
+                    || activityRecord.mRequestForceTransition
+                    || (!z3 && activityRecord.mIsExiting)) {
                 arrayDeque.add(activityRecord);
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_APP_TRANSITIONS_enabled[1]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS, -3156084190956669377L, 60, null, String.valueOf(activityRecord), Boolean.valueOf(activityRecord.mVisible), Boolean.FALSE);
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS,
+                            -3156084190956669377L,
+                            60,
+                            null,
+                            String.valueOf(activityRecord),
+                            Boolean.valueOf(activityRecord.mVisible),
+                            Boolean.FALSE);
                 }
             }
         }
@@ -73,7 +89,9 @@ public final class AppTransitionController {
         }
         ArraySet arraySet4 = new ArraySet();
         for (int i2 = 0; i2 < arraySet.size(); i2++) {
-            for (WindowContainer windowContainer = (WindowContainer) arraySet.valueAt(i2); windowContainer != null; windowContainer = windowContainer.getParent()) {
+            for (WindowContainer windowContainer = (WindowContainer) arraySet.valueAt(i2);
+                    windowContainer != null;
+                    windowContainer = windowContainer.getParent()) {
                 arraySet4.add(windowContainer);
             }
         }
@@ -85,11 +103,16 @@ public final class AppTransitionController {
             arrayList.clear();
             arrayList.add(windowContainer2);
             if (!isTaskViewTask(windowContainer2)) {
-                if (parent == null || !parent.canCreateRemoteAnimationTarget() || ((windowContainer2.asTask() != null && windowContainer2.asTask().mInRemoveTask) || parent.isChangingAppTransition())) {
+                if (parent == null
+                        || !parent.canCreateRemoteAnimationTarget()
+                        || ((windowContainer2.asTask() != null
+                                        && windowContainer2.asTask().mInRemoveTask)
+                                || parent.isChangingAppTransition())) {
                     z2 = false;
                 } else {
                     z2 = !arraySet4.contains(parent);
-                    if (windowContainer2.asTask() != null && windowContainer2.asTask().getAdjacentTask() != null) {
+                    if (windowContainer2.asTask() != null
+                            && windowContainer2.asTask().getAdjacentTask() != null) {
                         z2 = false;
                     }
                     for (int i3 = 0; i3 < parent.getChildCount(); i3++) {
@@ -111,13 +134,21 @@ public final class AppTransitionController {
             }
         }
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_APP_TRANSITIONS_ANIM_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS_ANIM, -8226278785414579647L, 0, null, String.valueOf(arraySet3), String.valueOf(arraySet5));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS_ANIM,
+                    -8226278785414579647L,
+                    0,
+                    null,
+                    String.valueOf(arraySet3),
+                    String.valueOf(arraySet5));
         }
         return arraySet5;
     }
 
     public static ActivityRecord getAppFromContainer(WindowContainer windowContainer) {
-        return windowContainer.asTaskFragment() != null ? windowContainer.asTaskFragment().getTopNonFinishingActivity(true, true) : windowContainer.asActivityRecord();
+        return windowContainer.asTaskFragment() != null
+                ? windowContainer.asTaskFragment().getTopNonFinishingActivity(true, true)
+                : windowContainer.asActivityRecord();
     }
 
     public static ActivityRecord getTopApp(ArraySet arraySet, boolean z) {
@@ -125,8 +156,11 @@ public final class AppTransitionController {
         int i = Integer.MIN_VALUE;
         ActivityRecord activityRecord = null;
         for (int size = arraySet.size() - 1; size >= 0; size--) {
-            ActivityRecord appFromContainer = getAppFromContainer((WindowContainer) arraySet.valueAt(size));
-            if (appFromContainer != null && ((!z || appFromContainer.mVisible) && (prefixOrderIndex = appFromContainer.getPrefixOrderIndex()) > i)) {
+            ActivityRecord appFromContainer =
+                    getAppFromContainer((WindowContainer) arraySet.valueAt(size));
+            if (appFromContainer != null
+                    && ((!z || appFromContainer.mVisible)
+                            && (prefixOrderIndex = appFromContainer.getPrefixOrderIndex()) > i)) {
                 activityRecord = appFromContainer;
                 i = prefixOrderIndex;
             }
@@ -148,14 +182,18 @@ public final class AppTransitionController {
     }
 
     public static boolean isTaskViewTask(WindowContainer windowContainer) {
-        if ((windowContainer instanceof Task) && ((Task) windowContainer).mRemoveWithTaskOrganizer) {
+        if ((windowContainer instanceof Task)
+                && ((Task) windowContainer).mRemoveWithTaskOrganizer) {
             return true;
         }
         WindowContainer parent = windowContainer.getParent();
-        return parent != null && (parent instanceof Task) && ((Task) parent).mRemoveWithTaskOrganizer;
+        return parent != null
+                && (parent instanceof Task)
+                && ((Task) parent).mRemoveWithTaskOrganizer;
     }
 
-    public static ActivityRecord lookForHighestTokenWithFilter(ArraySet arraySet, ArraySet arraySet2, ArraySet arraySet3, Predicate predicate) {
+    public static ActivityRecord lookForHighestTokenWithFilter(
+            ArraySet arraySet, ArraySet arraySet2, ArraySet arraySet3, Predicate predicate) {
         int size = arraySet.size();
         int size2 = arraySet2.size() + size;
         int size3 = arraySet3.size() + size2;
@@ -163,10 +201,17 @@ public final class AppTransitionController {
         ActivityRecord activityRecord = null;
         int i2 = 0;
         while (i2 < size3) {
-            WindowContainer windowContainer = i2 < size ? (WindowContainer) arraySet.valueAt(i2) : i2 < size2 ? (WindowContainer) arraySet2.valueAt(i2 - size) : (WindowContainer) arraySet3.valueAt(i2 - size2);
+            WindowContainer windowContainer =
+                    i2 < size
+                            ? (WindowContainer) arraySet.valueAt(i2)
+                            : i2 < size2
+                                    ? (WindowContainer) arraySet2.valueAt(i2 - size)
+                                    : (WindowContainer) arraySet3.valueAt(i2 - size2);
             int prefixOrderIndex = windowContainer.getPrefixOrderIndex();
             ActivityRecord appFromContainer = getAppFromContainer(windowContainer);
-            if (appFromContainer != null && predicate.test(appFromContainer) && prefixOrderIndex > i) {
+            if (appFromContainer != null
+                    && predicate.test(appFromContainer)
+                    && prefixOrderIndex > i) {
                 activityRecord = appFromContainer;
                 i = prefixOrderIndex;
             }
@@ -175,8 +220,14 @@ public final class AppTransitionController {
         return activityRecord;
     }
 
-    public final void applyAnimations(ArraySet arraySet, ArraySet arraySet2, int i, WindowManager.LayoutParams layoutParams, boolean z) {
-        RecentsAnimationController recentsAnimationController = this.mService.mRecentsAnimationController;
+    public final void applyAnimations(
+            ArraySet arraySet,
+            ArraySet arraySet2,
+            int i,
+            WindowManager.LayoutParams layoutParams,
+            boolean z) {
+        RecentsAnimationController recentsAnimationController =
+                this.mService.mRecentsAnimationController;
         if (i == -1 || (arraySet.isEmpty() && arraySet2.isEmpty())) {
             if (recentsAnimationController != null) {
                 recentsAnimationController.sendTasksAppeared();
@@ -223,25 +274,41 @@ public final class AppTransitionController {
             ((ActivityRecord) arraySet2.valueAtUnchecked(i5)).mOverrideTaskTransition = false;
         }
         DisplayContent displayContent = this.mDisplayContent;
-        AccessibilityController accessibilityController = displayContent.mWmService.mAccessibilityController;
+        AccessibilityController accessibilityController =
+                displayContent.mWmService.mAccessibilityController;
         if (accessibilityController.hasCallbacks()) {
             int i6 = displayContent.mDisplayId;
-            AccessibilityController.AccessibilityControllerInternalImpl accessibilityControllerInternalImpl = accessibilityController.mAccessibilityTracing;
+            AccessibilityController.AccessibilityControllerInternalImpl
+                    accessibilityControllerInternalImpl =
+                            accessibilityController.mAccessibilityTracing;
             if (accessibilityControllerInternalImpl.isTracingEnabled(2048L)) {
-                accessibilityControllerInternalImpl.logTrace("AccessibilityController.onAppWindowTransition", 2048L, ArrayUtils$$ExternalSyntheticOutline0.m(i6, i, "displayId=", "; transition="));
+                accessibilityControllerInternalImpl.logTrace(
+                        "AccessibilityController.onAppWindowTransition",
+                        2048L,
+                        ArrayUtils$$ExternalSyntheticOutline0.m(
+                                i6, i, "displayId=", "; transition="));
             }
-            AccessibilityController.DisplayMagnifier displayMagnifier = (AccessibilityController.DisplayMagnifier) accessibilityController.mDisplayMagnifiers.get(i6);
+            AccessibilityController.DisplayMagnifier displayMagnifier =
+                    (AccessibilityController.DisplayMagnifier)
+                            accessibilityController.mDisplayMagnifiers.get(i6);
             if (displayMagnifier != null) {
-                AccessibilityController.AccessibilityControllerInternalImpl accessibilityControllerInternalImpl2 = displayMagnifier.mAccessibilityTracing;
+                AccessibilityController.AccessibilityControllerInternalImpl
+                        accessibilityControllerInternalImpl2 =
+                                displayMagnifier.mAccessibilityTracing;
                 if (accessibilityControllerInternalImpl2.isTracingEnabled(2048L)) {
-                    accessibilityControllerInternalImpl2.logTrace("WindowManager.onAppWindowTransition", 2048L, ArrayUtils$$ExternalSyntheticOutline0.m(i6, i, "displayId=", "; transition="));
+                    accessibilityControllerInternalImpl2.logTrace(
+                            "WindowManager.onAppWindowTransition",
+                            2048L,
+                            ArrayUtils$$ExternalSyntheticOutline0.m(
+                                    i6, i, "displayId=", "; transition="));
                 }
                 if (displayMagnifier.isFullscreenMagnificationActivated()) {
                     if (i != 6 && i != 8 && i != 10 && i != 28) {
                         switch (i) {
                         }
                     }
-                    displayMagnifier.mUserContextChangedNotifier.sendUserContextChangedNotification();
+                    displayMagnifier.mUserContextChangedNotifier
+                            .sendUserContextChangedNotification();
                 }
             }
         }
@@ -254,7 +321,12 @@ public final class AppTransitionController {
         for (int i = 0; i < size; i++) {
             ActivityRecord activityRecord = (ActivityRecord) arraySet.valueAt(i);
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_APP_TRANSITIONS_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS, -8367738619313176909L, 0, null, String.valueOf(activityRecord));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS,
+                        -8367738619313176909L,
+                        0,
+                        null,
+                        String.valueOf(activityRecord));
             }
             activityRecord.commitVisibility(false, false, false);
             activityRecord.updateReportedVisibilityLocked();
@@ -277,15 +349,23 @@ public final class AppTransitionController {
         for (int i = 0; i < size; i++) {
             ActivityRecord activityRecord = (ActivityRecord) arraySet.valueAt(i);
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_APP_TRANSITIONS_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS, 4418653408751596915L, 0, null, String.valueOf(activityRecord));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS,
+                        4418653408751596915L,
+                        0,
+                        null,
+                        String.valueOf(activityRecord));
             }
             activityRecord.commitVisibility(true, false, false);
             WindowContainer animatingContainer = activityRecord.getAnimatingContainer(2, 1);
-            if (animatingContainer == null || !animatingContainer.getAnimationSources().contains(activityRecord)) {
-                ((ArrayList) displayContent.mNoAnimationNotifyOnTransitionFinished).add(activityRecord.token);
+            if (animatingContainer == null
+                    || !animatingContainer.getAnimationSources().contains(activityRecord)) {
+                ((ArrayList) displayContent.mNoAnimationNotifyOnTransitionFinished)
+                        .add(activityRecord.token);
             }
             activityRecord.updateReportedVisibilityLocked();
-            activityRecord.forAllWindows((Consumer) new ActivityRecord$$ExternalSyntheticLambda3(0), false);
+            activityRecord.forAllWindows(
+                    (Consumer) new ActivityRecord$$ExternalSyntheticLambda3(0), false);
             int i2 = displayContent.mAppTransition.mNextAppTransitionType;
             if (i2 == 3 || i2 == 5) {
                 activityRecord.attachThumbnailAnimation();
@@ -295,11 +375,46 @@ public final class AppTransitionController {
                 if (findMainWindow != null) {
                     Rect rect = findMainWindow.mWindowFrames.mRelFrame;
                     Context context = activityRecord.mAtmService.mUiContext;
-                    HardwareBuffer createCrossProfileAppsThumbnail = activityRecord.getDisplayContent().mAppTransition.mTransitionAnimation.createCrossProfileAppsThumbnail(activityRecord.task.mUserId == activityRecord.mWmService.mCurrentUserId ? context.getDrawable(R.drawable.ic_btn_search_go) : ((DevicePolicyManager) context.getSystemService(DevicePolicyManager.class)).getResources().getDrawable("WORK_PROFILE_ICON", "OUTLINE", "PROFILE_SWITCH_ANIMATION", new ActivityRecord$$ExternalSyntheticLambda23(1, context)), rect);
+                    HardwareBuffer createCrossProfileAppsThumbnail =
+                            activityRecord
+                                    .getDisplayContent()
+                                    .mAppTransition
+                                    .mTransitionAnimation
+                                    .createCrossProfileAppsThumbnail(
+                                            activityRecord.task.mUserId
+                                                            == activityRecord
+                                                                    .mWmService
+                                                                    .mCurrentUserId
+                                                    ? context.getDrawable(
+                                                            R.drawable.ic_btn_search_go)
+                                                    : ((DevicePolicyManager)
+                                                                    context.getSystemService(
+                                                                            DevicePolicyManager
+                                                                                    .class))
+                                                            .getResources()
+                                                            .getDrawable(
+                                                                    "WORK_PROFILE_ICON",
+                                                                    "OUTLINE",
+                                                                    "PROFILE_SWITCH_ANIMATION",
+                                                                    new ActivityRecord$$ExternalSyntheticLambda23(
+                                                                            1, context)),
+                                            rect);
                     if (createCrossProfileAppsThumbnail != null) {
-                        SurfaceControl.Transaction pendingTransaction = activityRecord.getPendingTransaction();
-                        activityRecord.mThumbnail = new WindowContainerThumbnail(pendingTransaction, activityRecord.task, createCrossProfileAppsThumbnail);
-                        activityRecord.mThumbnail.startAnimation(pendingTransaction, activityRecord.getDisplayContent().mAppTransition.mTransitionAnimation.createCrossProfileAppsThumbnailAnimationLocked(rect), new Point(rect.left, rect.top));
+                        SurfaceControl.Transaction pendingTransaction =
+                                activityRecord.getPendingTransaction();
+                        activityRecord.mThumbnail =
+                                new WindowContainerThumbnail(
+                                        pendingTransaction,
+                                        activityRecord.task,
+                                        createCrossProfileAppsThumbnail);
+                        activityRecord.mThumbnail.startAnimation(
+                                pendingTransaction,
+                                activityRecord
+                                        .getDisplayContent()
+                                        .mAppTransition
+                                        .mTransitionAnimation
+                                        .createCrossProfileAppsThumbnailAnimationLocked(rect),
+                                new Point(rect.left, rect.top));
                     }
                 }
             }
@@ -332,57 +447,106 @@ public final class AppTransitionController {
     }
 
     public final boolean transitionGoodToGo(ArraySet arraySet, ArrayMap arrayMap) {
-        ScreenRotationAnimation.SurfaceRotationAnimationController surfaceRotationAnimationController;
+        ScreenRotationAnimation.SurfaceRotationAnimationController
+                surfaceRotationAnimationController;
         boolean[] zArr = ProtoLogImpl_54989576.Cache.WM_DEBUG_APP_TRANSITIONS_enabled;
         boolean z = zArr[1];
         WindowManagerService windowManagerService = this.mService;
         DisplayContent displayContent = this.mDisplayContent;
         if (z) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS, 2951634988136738868L, 61, null, Long.valueOf(arraySet.size()), Boolean.valueOf(windowManagerService.mDisplayFrozen), Boolean.valueOf(displayContent.mAppTransition.mAppTransitionState == 3));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS,
+                    2951634988136738868L,
+                    61,
+                    null,
+                    Long.valueOf(arraySet.size()),
+                    Boolean.valueOf(windowManagerService.mDisplayFrozen),
+                    Boolean.valueOf(displayContent.mAppTransition.mAppTransitionState == 3));
         }
         if (displayContent.mAppTransition.mAppTransitionState == 3) {
             return true;
         }
-        ScreenRotationAnimation screenRotationAnimation = windowManagerService.mRoot.getDisplayContent(0).mScreenRotationAnimation;
-        if (screenRotationAnimation != null && (surfaceRotationAnimationController = screenRotationAnimation.mSurfaceRotationAnimationController) != null && surfaceRotationAnimationController.isAnimating()) {
+        ScreenRotationAnimation screenRotationAnimation =
+                windowManagerService.mRoot.getDisplayContent(0).mScreenRotationAnimation;
+        if (screenRotationAnimation != null
+                && (surfaceRotationAnimationController =
+                                screenRotationAnimation.mSurfaceRotationAnimationController)
+                        != null
+                && surfaceRotationAnimationController.isAnimating()) {
             DisplayRotation displayRotation = displayContent.mDisplayRotation;
             int i = displayRotation.mRotation;
             if (i != displayRotation.rotationForOrientation(displayRotation.mLastOrientation, i)) {
                 if (zArr[1]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS, 4963754906024950916L, 0, null, null);
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS,
+                            4963754906024950916L,
+                            0,
+                            null,
+                            null);
                 }
                 return false;
             }
         }
         for (int i2 = 0; i2 < arraySet.size(); i2++) {
-            ActivityRecord appFromContainer = getAppFromContainer((WindowContainer) arraySet.valueAt(i2));
+            ActivityRecord appFromContainer =
+                    getAppFromContainer((WindowContainer) arraySet.valueAt(i2));
             if (appFromContainer != null) {
                 if (zArr[1]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS, 5073676463280304697L, 1020, null, String.valueOf(appFromContainer), Boolean.valueOf(appFromContainer.allDrawn), Boolean.valueOf(appFromContainer.isStartingWindowDisplayed()), Boolean.valueOf(appFromContainer.startingMoved), Boolean.valueOf(appFromContainer.isRelaunching()), String.valueOf(appFromContainer.mStartingWindow));
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS,
+                            5073676463280304697L,
+                            1020,
+                            null,
+                            String.valueOf(appFromContainer),
+                            Boolean.valueOf(appFromContainer.allDrawn),
+                            Boolean.valueOf(appFromContainer.isStartingWindowDisplayed()),
+                            Boolean.valueOf(appFromContainer.startingMoved),
+                            Boolean.valueOf(appFromContainer.isRelaunching()),
+                            String.valueOf(appFromContainer.mStartingWindow));
                 }
                 boolean z2 = appFromContainer.allDrawn && !appFromContainer.isRelaunching();
-                if (!z2 && !appFromContainer.isStartingWindowDisplayed() && !appFromContainer.startingMoved) {
+                if (!z2
+                        && !appFromContainer.isStartingWindowDisplayed()
+                        && !appFromContainer.startingMoved) {
                     return false;
                 }
                 if (z2) {
                     arrayMap.put(appFromContainer, 2);
                 } else {
-                    arrayMap.put(appFromContainer, Integer.valueOf(appFromContainer.mStartingData instanceof SplashScreenStartingData ? 1 : 4));
+                    arrayMap.put(
+                            appFromContainer,
+                            Integer.valueOf(
+                                    appFromContainer.mStartingData
+                                                    instanceof SplashScreenStartingData
+                                            ? 1
+                                            : 4));
                 }
             }
         }
         if (displayContent.mAppTransition.mNextAppTransitionAnimationsSpecsPending) {
             if (zArr[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS, 3437142041296647115L, 0, null, null);
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS,
+                        3437142041296647115L,
+                        0,
+                        null,
+                        null);
             }
             return false;
         }
         if (displayContent.mUnknownAppVisibilityController.mUnknownApps.isEmpty()) {
             WallpaperController wallpaperController = this.mWallpaperControllerLocked;
-            return !wallpaperController.isWallpaperVisible() || wallpaperController.wallpaperTransitionReady();
+            return !wallpaperController.isWallpaperVisible()
+                    || wallpaperController.wallpaperTransitionReady();
         }
         if (zArr[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS, 1461079689316480707L, 0, null, String.valueOf(displayContent.mUnknownAppVisibilityController.getDebugMessage()));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_APP_TRANSITIONS,
+                    1461079689316480707L,
+                    0,
+                    null,
+                    String.valueOf(
+                            displayContent.mUnknownAppVisibilityController.getDebugMessage()));
         }
         return false;
     }

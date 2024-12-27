@@ -3,27 +3,30 @@ package android.hardware.radio.sim;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class ImsiEncryptionInfo implements Parcelable {
-    public static final Parcelable.Creator<ImsiEncryptionInfo> CREATOR = new Parcelable.Creator<ImsiEncryptionInfo>() { // from class: android.hardware.radio.sim.ImsiEncryptionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsiEncryptionInfo createFromParcel(Parcel _aidl_source) {
-            ImsiEncryptionInfo _aidl_out = new ImsiEncryptionInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ImsiEncryptionInfo> CREATOR =
+            new Parcelable.Creator<ImsiEncryptionInfo>() { // from class:
+                // android.hardware.radio.sim.ImsiEncryptionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsiEncryptionInfo createFromParcel(Parcel _aidl_source) {
+                    ImsiEncryptionInfo _aidl_out = new ImsiEncryptionInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsiEncryptionInfo[] newArray(int _aidl_size) {
-            return new ImsiEncryptionInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsiEncryptionInfo[] newArray(int _aidl_size) {
+                    return new ImsiEncryptionInfo[_aidl_size];
+                }
+            };
     public static final byte PUBLIC_KEY_TYPE_EPDG = 1;
     public static final byte PUBLIC_KEY_TYPE_WLAN = 2;
     public byte[] carrierKey;

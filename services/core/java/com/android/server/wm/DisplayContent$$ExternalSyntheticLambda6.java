@@ -7,7 +7,8 @@ public final /* synthetic */ class DisplayContent$$ExternalSyntheticLambda6 impl
     public final /* synthetic */ int f$1;
     public final /* synthetic */ int f$2;
 
-    public /* synthetic */ DisplayContent$$ExternalSyntheticLambda6(DisplayContent displayContent, int i, int i2) {
+    public /* synthetic */ DisplayContent$$ExternalSyntheticLambda6(
+            DisplayContent displayContent, int i, int i2) {
         this.f$0 = displayContent;
         this.f$1 = i;
         this.f$2 = i2;

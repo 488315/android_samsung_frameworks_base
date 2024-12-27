@@ -2,7 +2,7 @@ package com.android.server.people.data;
 
 import android.net.Uri;
 import android.util.ArrayMap;
-import com.android.server.people.data.DataManager;
+
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -35,11 +35,18 @@ public final /* synthetic */ class DataManager$$ExternalSyntheticLambda12 implem
                 return;
             default:
                 Uri uri = (Uri) this.f$0;
-                DataManager.ContactsContentObserver.ConversationSelector conversationSelector = (DataManager.ContactsContentObserver.ConversationSelector) this.f$1;
+                DataManager.ContactsContentObserver.ConversationSelector conversationSelector =
+                        (DataManager.ContactsContentObserver.ConversationSelector) this.f$1;
                 PackageData packageData2 = (PackageData) obj;
                 ConversationStore conversationStore = packageData2.mConversationStore;
                 synchronized (conversationStore) {
-                    conversation = conversationStore.getConversation((String) ((ArrayMap) conversationStore.mContactUriToShortcutIdMap).get(uri));
+                    conversation =
+                            conversationStore.getConversation(
+                                    (String)
+                                            ((ArrayMap)
+                                                            conversationStore
+                                                                    .mContactUriToShortcutIdMap)
+                                                    .get(uri));
                 }
                 if (conversation != null) {
                     conversationSelector.mConversationStore = packageData2.mConversationStore;

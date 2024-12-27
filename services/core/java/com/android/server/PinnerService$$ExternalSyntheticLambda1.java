@@ -1,6 +1,7 @@
 package com.android.server;
 
 import android.app.ActivityManager;
+
 import java.util.function.BiConsumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -25,7 +26,9 @@ public final /* synthetic */ class PinnerService$$ExternalSyntheticLambda1 imple
                 pinnerService.updateActiveState(intValue, false);
                 synchronized (pinnerService) {
                     try {
-                        int intValue2 = ((Integer) pinnerService.mPendingRepin.getOrDefault(num, -1)).intValue();
+                        int intValue2 =
+                                ((Integer) pinnerService.mPendingRepin.getOrDefault(num, -1))
+                                        .intValue();
                         if (intValue2 == -1) {
                             return;
                         }

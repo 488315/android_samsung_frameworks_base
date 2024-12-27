@@ -1,6 +1,7 @@
 package com.android.net.module.util;
 
 import android.text.TextUtils;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -10,17 +11,21 @@ import java.util.regex.Pattern;
 
 /* loaded from: classes5.dex */
 public final class ProxyUtils {
-    private static final String EXCL_REGEX = "[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*";
-    private static final String NAME_IP_REGEX = "[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*";
+    private static final String EXCL_REGEX =
+            "[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*";
+    private static final String NAME_IP_REGEX =
+            "[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*";
     public static final int PROXY_EXCLLIST_INVALID = 5;
     public static final int PROXY_HOSTNAME_EMPTY = 1;
     public static final int PROXY_HOSTNAME_INVALID = 2;
     public static final int PROXY_PORT_EMPTY = 3;
     public static final int PROXY_PORT_INVALID = 4;
     public static final int PROXY_VALID = 0;
-    private static final String HOSTNAME_REGEXP = "^$|^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*$";
+    private static final String HOSTNAME_REGEXP =
+            "^$|^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*$";
     private static final Pattern HOSTNAME_PATTERN = Pattern.compile(HOSTNAME_REGEXP);
-    private static final String EXCLLIST_REGEXP = "^$|^[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*(,[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*)*$";
+    private static final String EXCLLIST_REGEXP =
+            "^$|^[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*(,[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*)*$";
     private static final Pattern EXCLLIST_PATTERN = Pattern.compile(EXCLLIST_REGEXP);
 
     public static List<String> exclusionStringAsList(String exclusionList) {

@@ -1,6 +1,7 @@
 package android.sysprop;
 
 import android.os.SystemProperties;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,8 +12,7 @@ import java.util.function.Function;
 
 /* loaded from: classes3.dex */
 public final class CarProperties {
-    private CarProperties() {
-    }
+    private CarProperties() {}
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Boolean tryParseBoolean(String str) {
@@ -185,7 +185,8 @@ public final class CarProperties {
         return joiner.toString();
     }
 
-    private static <T extends Enum<T>> String formatEnumList(List<T> list, Function<T, String> elementFormatter) {
+    private static <T extends Enum<T>> String formatEnumList(
+            List<T> list, Function<T, String> elementFormatter) {
         StringJoiner joiner = new StringJoiner(",");
         Iterator<T> it = list.iterator();
         while (it.hasNext()) {
@@ -201,7 +202,8 @@ public final class CarProperties {
     }
 
     public static void boot_user_override_id(Integer value) {
-        SystemProperties.set("android.car.systemuser.bootuseroverrideid", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "android.car.systemuser.bootuseroverrideid", value == null ? "" : value.toString());
     }
 
     public static Optional<String> trusted_device_device_name_prefix() {
@@ -215,7 +217,8 @@ public final class CarProperties {
     }
 
     public static void number_pre_created_users(Integer value) {
-        SystemProperties.set("android.car.number_pre_created_users", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "android.car.number_pre_created_users", value == null ? "" : value.toString());
     }
 
     public static Optional<Integer> number_pre_created_guests() {
@@ -224,7 +227,8 @@ public final class CarProperties {
     }
 
     public static void number_pre_created_guests(Integer value) {
-        SystemProperties.set("android.car.number_pre_created_guests", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "android.car.number_pre_created_guests", value == null ? "" : value.toString());
     }
 
     public static Optional<Boolean> user_hal_enabled() {
@@ -251,6 +255,7 @@ public final class CarProperties {
     }
 
     public static void device_policy_manager_timeout(Integer value) {
-        SystemProperties.set("android.car.device_policy_manager_timeout", value == null ? "" : value.toString());
+        SystemProperties.set(
+                "android.car.device_policy_manager_timeout", value == null ? "" : value.toString());
     }
 }

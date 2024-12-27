@@ -8,7 +8,9 @@ import android.util.ArrayMap;
 import android.util.IndentingPrintWriter;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,7 +23,10 @@ public final class AppOpsRestrictionsImpl implements AppOpsRestrictions {
     public final ArrayMap mUserRestrictions = new ArrayMap();
     public final ArrayMap mUserRestrictionExcludedPackageTags = new ArrayMap();
 
-    public AppOpsRestrictionsImpl(Context context, Handler handler, AppOpsService$$ExternalSyntheticLambda6 appOpsService$$ExternalSyntheticLambda6) {
+    public AppOpsRestrictionsImpl(
+            Context context,
+            Handler handler,
+            AppOpsService$$ExternalSyntheticLambda6 appOpsService$$ExternalSyntheticLambda6) {
         this.mContext = context;
         this.mHandler = handler;
         this.mAppOpsRestrictionRemovedListener = appOpsService$$ExternalSyntheticLambda6;
@@ -33,24 +38,31 @@ public final class AppOpsRestrictionsImpl implements AppOpsRestrictions {
         if (sparseArray != null) {
             int size = sparseArray.size();
             for (int i = 0; i < size; i++) {
-                SparseBooleanArray sparseBooleanArray2 = (SparseBooleanArray) sparseArray.valueAt(i);
+                SparseBooleanArray sparseBooleanArray2 =
+                        (SparseBooleanArray) sparseArray.valueAt(i);
                 int size2 = sparseBooleanArray2.size();
                 for (int i2 = 0; i2 < size2; i2++) {
                     sparseBooleanArray.put(sparseBooleanArray2.keyAt(i2), true);
                 }
             }
         }
-        boolean z = (this.mUserRestrictions.remove(obj) != null) | (this.mUserRestrictionExcludedPackageTags.remove(obj) != null);
+        boolean z =
+                (this.mUserRestrictions.remove(obj) != null)
+                        | (this.mUserRestrictionExcludedPackageTags.remove(obj) != null);
         int size3 = sparseBooleanArray.size();
         for (int i3 = 0; i3 < size3; i3++) {
             final int keyAt = sparseBooleanArray.keyAt(i3);
-            this.mHandler.post(new Runnable() { // from class: com.android.server.appop.AppOpsRestrictionsImpl$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AppOpsRestrictionsImpl appOpsRestrictionsImpl = AppOpsRestrictionsImpl.this;
-                    appOpsRestrictionsImpl.mAppOpsRestrictionRemovedListener.f$0.notifyWatchersOnDefaultDevice(keyAt, -2);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.appop.AppOpsRestrictionsImpl$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AppOpsRestrictionsImpl appOpsRestrictionsImpl =
+                                    AppOpsRestrictionsImpl.this;
+                            appOpsRestrictionsImpl.mAppOpsRestrictionRemovedListener.f$0
+                                    .notifyWatchersOnDefaultDevice(keyAt, -2);
+                        }
+                    });
         }
         return z;
     }
@@ -76,7 +88,8 @@ public final class AppOpsRestrictionsImpl implements AppOpsRestrictions {
                 break;
             }
             Object keyAt = appOpsRestrictionsImpl.mGlobalRestrictions.keyAt(i5);
-            SparseBooleanArray sparseBooleanArray = (SparseBooleanArray) appOpsRestrictionsImpl.mGlobalRestrictions.valueAt(i5);
+            SparseBooleanArray sparseBooleanArray =
+                    (SparseBooleanArray) appOpsRestrictionsImpl.mGlobalRestrictions.valueAt(i5);
             printWriter2.println("  Global restrictions for token " + keyAt + ":");
             StringBuilder sb = new StringBuilder();
             sb.append("[");
@@ -95,8 +108,11 @@ public final class AppOpsRestrictionsImpl implements AppOpsRestrictions {
         int i7 = 0;
         while (i7 < size3) {
             Object keyAt2 = appOpsRestrictionsImpl.mUserRestrictions.keyAt(i7);
-            SparseArray sparseArray2 = (SparseArray) appOpsRestrictionsImpl.mUserRestrictions.get(keyAt2);
-            SparseArray sparseArray3 = (SparseArray) appOpsRestrictionsImpl.mUserRestrictionExcludedPackageTags.get(keyAt2);
+            SparseArray sparseArray2 =
+                    (SparseArray) appOpsRestrictionsImpl.mUserRestrictions.get(keyAt2);
+            SparseArray sparseArray3 =
+                    (SparseArray)
+                            appOpsRestrictionsImpl.mUserRestrictionExcludedPackageTags.get(keyAt2);
             int size4 = sparseArray2 != null ? sparseArray2.size() : 0;
             if (size4 <= 0 || str != null) {
                 i2 = size3;
@@ -109,7 +125,8 @@ public final class AppOpsRestrictionsImpl implements AppOpsRestrictions {
                 while (i8 < size4) {
                     int keyAt3 = sparseArray2.keyAt(i8);
                     int i9 = size3;
-                    SparseBooleanArray sparseBooleanArray2 = (SparseBooleanArray) sparseArray2.valueAt(i8);
+                    SparseBooleanArray sparseBooleanArray2 =
+                            (SparseBooleanArray) sparseArray2.valueAt(i8);
                     if (sparseBooleanArray2 != null && (i < 0 || sparseBooleanArray2.get(i))) {
                         sparseArray = sparseArray2;
                         if (z2) {
@@ -172,7 +189,8 @@ public final class AppOpsRestrictionsImpl implements AppOpsRestrictions {
                         if (str != null ? packageTagsList.includes(str) : true) {
                             i3 = size6;
                             if (!z2) {
-                                indentingPrintWriter.println("User restrictions for token " + keyAt2 + ":");
+                                indentingPrintWriter.println(
+                                        "User restrictions for token " + keyAt2 + ":");
                                 z2 = true;
                             }
                             indentingPrintWriter.increaseIndent();

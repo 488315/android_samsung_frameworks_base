@@ -10,8 +10,12 @@ import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.R;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -21,23 +25,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class LocaleConfig implements Parcelable {
-    public static final Parcelable.Creator<LocaleConfig> CREATOR = new Parcelable.Creator<LocaleConfig>() { // from class: android.app.LocaleConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LocaleConfig createFromParcel(Parcel source) {
-            return new LocaleConfig(source);
-        }
+    public static final Parcelable.Creator<LocaleConfig> CREATOR =
+            new Parcelable.Creator<LocaleConfig>() { // from class: android.app.LocaleConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LocaleConfig createFromParcel(Parcel source) {
+                    return new LocaleConfig(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LocaleConfig[] newArray(int size) {
-            return new LocaleConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LocaleConfig[] newArray(int size) {
+                    return new LocaleConfig[size];
+                }
+            };
     public static final int STATUS_NOT_SPECIFIED = 1;
     public static final int STATUS_PARSING_FAILED = 2;
     public static final int STATUS_SUCCESS = 0;
@@ -49,8 +53,7 @@ public class LocaleConfig implements Parcelable {
     private int mStatus;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+    public @interface Status {}
 
     public LocaleConfig(Context context) {
         this(context, true);
@@ -63,7 +66,8 @@ public class LocaleConfig implements Parcelable {
     private LocaleConfig(Context context, boolean allowOverride) {
         this.mStatus = 1;
         if (allowOverride) {
-            LocaleManager localeManager = (LocaleManager) context.getSystemService(LocaleManager.class);
+            LocaleManager localeManager =
+                    (LocaleManager) context.getSystemService(LocaleManager.class);
             if (localeManager == null) {
                 Slog.w(TAG, "LocaleManager is null, cannot get the override LocaleConfig");
                 this.mStatus = 1;
@@ -90,7 +94,10 @@ public class LocaleConfig implements Parcelable {
             Slog.w(TAG, "The resource file pointed to by the given resource ID isn't found.");
             this.mStatus = 1;
         } catch (IOException | XmlPullParserException e2) {
-            Slog.w(TAG, "Failed to parse XML configuration from " + res.getResourceEntryName(resId), e2);
+            Slog.w(
+                    TAG,
+                    "Failed to parse XML configuration from " + res.getResourceEntryName(resId),
+                    e2);
             this.mStatus = 2;
         }
     }
@@ -107,7 +114,8 @@ public class LocaleConfig implements Parcelable {
         this.mLocales = (LocaleList) in.readTypedObject(LocaleList.CREATOR);
     }
 
-    private void parseLocaleConfig(XmlResourceParser parser, Resources res) throws IOException, XmlPullParserException {
+    private void parseLocaleConfig(XmlResourceParser parser, Resources res)
+            throws IOException, XmlPullParserException {
         XmlUtils.beginDocument(parser, TAG_LOCALE_CONFIG);
         int outerDepth = parser.getDepth();
         AttributeSet attrs = Xml.asAttributeSet(parser);
@@ -120,7 +128,8 @@ public class LocaleConfig implements Parcelable {
         Set<String> localeNames = new HashSet<>();
         while (XmlUtils.nextElementWithin(parser, outerDepth)) {
             if ("locale".equals(parser.getName())) {
-                TypedArray attributes = res.obtainAttributes(attrs, R.styleable.LocaleConfig_Locale);
+                TypedArray attributes =
+                        res.obtainAttributes(attrs, R.styleable.LocaleConfig_Locale);
                 String nameAttr = attributes.getString(0);
                 localeNames.add(nameAttr);
                 attributes.recycle();
@@ -134,7 +143,10 @@ public class LocaleConfig implements Parcelable {
             if (localeNames.contains(defaultLocale)) {
                 this.mDefaultLocale = Locale.forLanguageTag(defaultLocale);
             } else {
-                Slog.w(TAG, "Default locale specified that is not contained in the list: " + defaultLocale);
+                Slog.w(
+                        TAG,
+                        "Default locale specified that is not contained in the list: "
+                                + defaultLocale);
                 this.mStatus = 2;
             }
         }

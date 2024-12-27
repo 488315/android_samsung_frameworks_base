@@ -3,18 +3,23 @@ package com.android.server.powerstats;
 import android.hardware.power.stats.EnergyConsumer;
 import android.hardware.power.stats.EnergyConsumerResult;
 import android.util.Slog;
-import com.android.server.powerstats.PowerStatsService;
+
 import java.util.concurrent.CompletableFuture;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class PowerStatsService$LocalService$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class PowerStatsService$LocalService$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ PowerStatsService.LocalService f$0;
     public final /* synthetic */ CompletableFuture f$1;
     public final /* synthetic */ int[] f$2;
 
-    public /* synthetic */ PowerStatsService$LocalService$$ExternalSyntheticLambda0(PowerStatsService.LocalService localService, CompletableFuture completableFuture, int[] iArr, int i) {
+    public /* synthetic */ PowerStatsService$LocalService$$ExternalSyntheticLambda0(
+            PowerStatsService.LocalService localService,
+            CompletableFuture completableFuture,
+            int[] iArr,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = localService;
         this.f$1 = completableFuture;
@@ -29,7 +34,8 @@ public final /* synthetic */ class PowerStatsService$LocalService$$ExternalSynth
                 CompletableFuture completableFuture = this.f$1;
                 int[] iArr = this.f$2;
                 PowerStatsService powerStatsService = localService.this$0;
-                EnergyConsumerResult[] energyConsumed = powerStatsService.getPowerStatsHal().getEnergyConsumed(iArr);
+                EnergyConsumerResult[] energyConsumed =
+                        powerStatsService.getPowerStatsHal().getEnergyConsumed(iArr);
                 EnergyConsumer[] energyConsumerInfo = powerStatsService.getEnergyConsumerInfo();
                 if (energyConsumerInfo != null) {
                     int length = iArr.length == 0 ? energyConsumerInfo.length : iArr.length;
@@ -75,7 +81,10 @@ public final /* synthetic */ class PowerStatsService$LocalService$$ExternalSynth
                             }
                             sb.append("]");
                         }
-                        Slog.wtf("PowerStatsService", "Missing result from getEnergyConsumedAsync call. " + ((Object) sb));
+                        Slog.wtf(
+                                "PowerStatsService",
+                                "Missing result from getEnergyConsumedAsync call. "
+                                        + ((Object) sb));
                     }
                 }
                 completableFuture.complete(energyConsumed);

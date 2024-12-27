@@ -2,9 +2,11 @@ package com.android.server.inputmethod;
 
 import android.app.ActivityManager;
 import android.view.inputmethod.EditorInfo;
+
 import com.android.internal.inputmethod.InputMethodDebug;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -60,7 +62,9 @@ public final class StartInputHistory {
     }
 
     public final void dump(PrintWriter printWriter) {
-        DateTimeFormatter withZone = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS", Locale.US).withZone(ZoneId.systemDefault());
+        DateTimeFormatter withZone =
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS", Locale.US)
+                        .withZone(ZoneId.systemDefault());
         int i = 0;
         while (true) {
             Entry[] entryArr = this.mEntries;
@@ -69,12 +73,22 @@ public final class StartInputHistory {
             }
             Entry entry = entryArr[(this.mNextIndex + i) % entryArr.length];
             if (entry != null) {
-                StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "    ", "StartInput #");
+                StringBuilder m =
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                printWriter, "    ", "StartInput #");
                 m.append(entry.mSequenceNumber);
                 m.append(":");
                 printWriter.println(m.toString());
                 printWriter.print("    ");
-                printWriter.println("  time=" + withZone.format(Instant.ofEpochMilli(entry.mWallTime)) + " (timestamp=" + entry.mTimestamp + ") reason=" + InputMethodDebug.startInputReasonToString(entry.mStartInputReason) + " restarting=" + entry.mRestarting);
+                printWriter.println(
+                        "  time="
+                                + withZone.format(Instant.ofEpochMilli(entry.mWallTime))
+                                + " (timestamp="
+                                + entry.mTimestamp
+                                + ") reason="
+                                + InputMethodDebug.startInputReasonToString(entry.mStartInputReason)
+                                + " restarting="
+                                + entry.mRestarting);
                 printWriter.print("    ");
                 StringBuilder sb = new StringBuilder("  imeToken=");
                 sb.append(entry.mImeTokenString);
@@ -85,16 +99,30 @@ public final class StartInputHistory {
                 printWriter.print(" imeUserId=" + entry.mImeUserId);
                 printWriter.println(" imeDisplayId=" + entry.mImeDisplayId);
                 printWriter.print("    ");
-                printWriter.println("  targetWin=" + entry.mTargetWindowString + " [" + entry.mEditorInfo.packageName + "] targetUserId=" + entry.mTargetUserId + " targetDisplayId=" + entry.mTargetDisplayId + " clientBindSeq=" + entry.mClientBindSequenceNumber);
+                printWriter.println(
+                        "  targetWin="
+                                + entry.mTargetWindowString
+                                + " ["
+                                + entry.mEditorInfo.packageName
+                                + "] targetUserId="
+                                + entry.mTargetUserId
+                                + " targetDisplayId="
+                                + entry.mTargetDisplayId
+                                + " clientBindSeq="
+                                + entry.mClientBindSequenceNumber);
                 printWriter.print("    ");
                 StringBuilder sb2 = new StringBuilder("  softInputMode=");
-                sb2.append(InputMethodDebug.softInputModeToString(entry.mTargetWindowSoftInputMode));
+                sb2.append(
+                        InputMethodDebug.softInputModeToString(entry.mTargetWindowSoftInputMode));
                 printWriter.println(sb2.toString());
                 printWriter.print("    ");
                 StringBuilder sb3 = new StringBuilder("  inputType=0x");
-                BatteryService$$ExternalSyntheticOutline0.m(entry.mEditorInfo.inputType, sb3, " imeOptions=0x");
-                BatteryService$$ExternalSyntheticOutline0.m(entry.mEditorInfo.imeOptions, sb3, " fieldId=0x");
-                BatteryService$$ExternalSyntheticOutline0.m(entry.mEditorInfo.fieldId, sb3, " fieldName=");
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        entry.mEditorInfo.inputType, sb3, " imeOptions=0x");
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        entry.mEditorInfo.imeOptions, sb3, " fieldId=0x");
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        entry.mEditorInfo.fieldId, sb3, " fieldName=");
                 sb3.append(entry.mEditorInfo.fieldName);
                 sb3.append(" actionId=");
                 sb3.append(entry.mEditorInfo.actionId);

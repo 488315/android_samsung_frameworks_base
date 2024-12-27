@@ -4,6 +4,7 @@ import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.params.StreamConfiguration;
 import android.hardware.camera2.utils.TypeReference;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
@@ -11,7 +12,8 @@ public class MarshalQueryableStreamConfiguration implements MarshalQueryable<Str
     private static final int SIZE = 16;
 
     private class MarshalerStreamConfiguration extends Marshaler<StreamConfiguration> {
-        protected MarshalerStreamConfiguration(TypeReference<StreamConfiguration> typeReference, int nativeType) {
+        protected MarshalerStreamConfiguration(
+                TypeReference<StreamConfiguration> typeReference, int nativeType) {
             super(MarshalQueryableStreamConfiguration.this, typeReference, nativeType);
         }
 
@@ -40,12 +42,14 @@ public class MarshalQueryableStreamConfiguration implements MarshalQueryable<Str
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public Marshaler<StreamConfiguration> createMarshaler(TypeReference<StreamConfiguration> managedType, int nativeType) {
+    public Marshaler<StreamConfiguration> createMarshaler(
+            TypeReference<StreamConfiguration> managedType, int nativeType) {
         return new MarshalerStreamConfiguration(managedType, nativeType);
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public boolean isTypeMappingSupported(TypeReference<StreamConfiguration> managedType, int nativeType) {
+    public boolean isTypeMappingSupported(
+            TypeReference<StreamConfiguration> managedType, int nativeType) {
         return nativeType == 1 && managedType.getType().equals(StreamConfiguration.class);
     }
 }

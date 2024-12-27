@@ -12,8 +12,9 @@ import android.view.animation.AnimationSet;
 import android.view.animation.Interpolator;
 import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.wm.LocalAnimationAdapter;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,10 +35,12 @@ public final class WindowAnimationSpec implements LocalAnimationAdapter.Animatio
         public final float[] floats = new float[9];
     }
 
-    public WindowAnimationSpec(Animation animation, Point point, Rect rect, boolean z, int i, float f) {
+    public WindowAnimationSpec(
+            Animation animation, Point point, Rect rect, boolean z, int i, float f) {
         Point point2 = new Point();
         this.mPosition = point2;
-        this.mThreadLocalTmps = ThreadLocal.withInitial(new WindowAnimationSpec$$ExternalSyntheticLambda0());
+        this.mThreadLocalTmps =
+                ThreadLocal.withInitial(new WindowAnimationSpec$$ExternalSyntheticLambda0());
         Rect rect2 = new Rect();
         this.mRootTaskBounds = rect2;
         this.mTmpRect = new Rect();
@@ -57,7 +60,8 @@ public final class WindowAnimationSpec implements LocalAnimationAdapter.Animatio
         this(animation, point, null, z, 1, f);
     }
 
-    public static float findInterpolationAdjustedTargetFraction(Interpolator interpolator, float f) {
+    public static float findInterpolationAdjustedTargetFraction(
+            Interpolator interpolator, float f) {
         float f2 = 0.5f;
         for (float f3 = 0.25f; f3 >= 0.01f; f3 /= 2.0f) {
             f2 = interpolator.getInterpolation(f2) < f ? f2 + f3 : f2 - f3;
@@ -83,14 +87,16 @@ public final class WindowAnimationSpec implements LocalAnimationAdapter.Animatio
     }
 
     @Override // com.android.server.wm.LocalAnimationAdapter.AnimationSpec
-    public final void apply(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, long j) {
+    public final void apply(
+            SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, long j) {
         TmpValues tmpValues = (TmpValues) this.mThreadLocalTmps.get();
         tmpValues.transformation.clear();
         this.mAnimation.getTransformation(j, tmpValues.transformation);
         Matrix matrix = tmpValues.transformation.getMatrix();
         Point point = this.mPosition;
         matrix.postTranslate(point.x, point.y);
-        transaction.setMatrix(surfaceControl, tmpValues.transformation.getMatrix(), tmpValues.floats);
+        transaction.setMatrix(
+                surfaceControl, tmpValues.transformation.getMatrix(), tmpValues.floats);
         transaction.setAlpha(surfaceControl, tmpValues.transformation.getAlpha());
         if (this.mRootTaskClipMode != 1) {
             this.mTmpRect.set(this.mRootTaskBounds);
@@ -140,11 +146,26 @@ public final class WindowAnimationSpec implements LocalAnimationAdapter.Animatio
         if (findTranslateAnimation == null) {
             return SystemClock.uptimeMillis();
         }
-        if (findTranslateAnimation.isXAxisTransition() && findTranslateAnimation.isFullWidthTranslate()) {
-            startOffset = findTranslateAnimation.getStartOffset() + SystemClock.uptimeMillis() + ((long) (findTranslateAnimation.getDuration() * findInterpolationAdjustedTargetFraction(findTranslateAnimation.getInterpolator(), 0.5f)));
+        if (findTranslateAnimation.isXAxisTransition()
+                && findTranslateAnimation.isFullWidthTranslate()) {
+            startOffset =
+                    findTranslateAnimation.getStartOffset()
+                            + SystemClock.uptimeMillis()
+                            + ((long)
+                                    (findTranslateAnimation.getDuration()
+                                            * findInterpolationAdjustedTargetFraction(
+                                                    findTranslateAnimation.getInterpolator(),
+                                                    0.5f)));
             j = 60;
         } else {
-            startOffset = findTranslateAnimation.getStartOffset() + SystemClock.uptimeMillis() + ((long) (findTranslateAnimation.getDuration() * findInterpolationAdjustedTargetFraction(findTranslateAnimation.getInterpolator(), 0.99f)));
+            startOffset =
+                    findTranslateAnimation.getStartOffset()
+                            + SystemClock.uptimeMillis()
+                            + ((long)
+                                    (findTranslateAnimation.getDuration()
+                                            * findInterpolationAdjustedTargetFraction(
+                                                    findTranslateAnimation.getInterpolator(),
+                                                    0.99f)));
             j = 120;
         }
         return startOffset - j;

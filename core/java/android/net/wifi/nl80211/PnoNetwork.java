@@ -3,35 +3,38 @@ package android.net.wifi.nl80211;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class PnoNetwork implements Parcelable {
-    public static final Parcelable.Creator<PnoNetwork> CREATOR = new Parcelable.Creator<PnoNetwork>() { // from class: android.net.wifi.nl80211.PnoNetwork.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PnoNetwork createFromParcel(Parcel in) {
-            PnoNetwork result = new PnoNetwork();
-            result.mIsHidden = in.readInt() != 0;
-            result.mSsid = in.createByteArray();
-            if (result.mSsid == null) {
-                result.mSsid = new byte[0];
-            }
-            result.mFrequencies = in.createIntArray();
-            if (result.mFrequencies == null) {
-                result.mFrequencies = new int[0];
-            }
-            return result;
-        }
+    public static final Parcelable.Creator<PnoNetwork> CREATOR =
+            new Parcelable.Creator<
+                    PnoNetwork>() { // from class: android.net.wifi.nl80211.PnoNetwork.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PnoNetwork createFromParcel(Parcel in) {
+                    PnoNetwork result = new PnoNetwork();
+                    result.mIsHidden = in.readInt() != 0;
+                    result.mSsid = in.createByteArray();
+                    if (result.mSsid == null) {
+                        result.mSsid = new byte[0];
+                    }
+                    result.mFrequencies = in.createIntArray();
+                    if (result.mFrequencies == null) {
+                        result.mFrequencies = new int[0];
+                    }
+                    return result;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PnoNetwork[] newArray(int size) {
-            return new PnoNetwork[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PnoNetwork[] newArray(int size) {
+                    return new PnoNetwork[size];
+                }
+            };
     private int[] mFrequencies;
     private boolean mIsHidden;
     private byte[] mSsid;
@@ -74,11 +77,16 @@ public final class PnoNetwork implements Parcelable {
             return false;
         }
         PnoNetwork network = (PnoNetwork) rhs;
-        return Arrays.equals(this.mSsid, network.mSsid) && Arrays.equals(this.mFrequencies, network.mFrequencies) && this.mIsHidden == network.mIsHidden;
+        return Arrays.equals(this.mSsid, network.mSsid)
+                && Arrays.equals(this.mFrequencies, network.mFrequencies)
+                && this.mIsHidden == network.mIsHidden;
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mIsHidden), Integer.valueOf(Arrays.hashCode(this.mSsid)), Integer.valueOf(Arrays.hashCode(this.mFrequencies)));
+        return Objects.hash(
+                Boolean.valueOf(this.mIsHidden),
+                Integer.valueOf(Arrays.hashCode(this.mSsid)),
+                Integer.valueOf(Arrays.hashCode(this.mFrequencies)));
     }
 
     @Override // android.os.Parcelable

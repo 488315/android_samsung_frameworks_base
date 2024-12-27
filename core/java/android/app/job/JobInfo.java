@@ -16,7 +16,9 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.NtpTrustedTime;
 import android.util.TimeUtils;
+
 import com.android.internal.hidden_from_bootclasspath.android.app.job.Flags;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -63,8 +65,7 @@ public class JobInfo implements Parcelable {
     public static final int NETWORK_TYPE_ANY = 1;
     public static final int NETWORK_TYPE_CELLULAR = 4;
 
-    @Deprecated
-    public static final int NETWORK_TYPE_METERED = 4;
+    @Deprecated public static final int NETWORK_TYPE_METERED = 4;
     public static final int NETWORK_TYPE_NONE = 0;
     public static final int NETWORK_TYPE_NOT_ROAMING = 3;
     public static final int NETWORK_TYPE_UNMETERED = 2;
@@ -108,31 +109,29 @@ public class JobInfo implements Parcelable {
     private final long triggerContentUpdateDelay;
     private final TriggerContentUri[] triggerContentUris;
     private static String TAG = "JobInfo";
-    public static final Parcelable.Creator<JobInfo> CREATOR = new Parcelable.Creator<JobInfo>() { // from class: android.app.job.JobInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public JobInfo createFromParcel(Parcel in) {
-            return new JobInfo(in);
-        }
+    public static final Parcelable.Creator<JobInfo> CREATOR =
+            new Parcelable.Creator<JobInfo>() { // from class: android.app.job.JobInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public JobInfo createFromParcel(Parcel in) {
+                    return new JobInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public JobInfo[] newArray(int size) {
-            return new JobInfo[size];
-        }
-    };
-
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface BackoffPolicy {
-    }
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public JobInfo[] newArray(int size) {
+                    return new JobInfo[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NetworkType {
-    }
+    public @interface BackoffPolicy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Priority {
-    }
+    public @interface NetworkType {}
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Priority {}
 
     public static final long getMinPeriodMillis() {
         return AlarmManager.INTERVAL_FIFTEEN_MINUTES;
@@ -324,7 +323,35 @@ public class JobInfo implements Parcelable {
             return false;
         }
         JobInfo j = (JobInfo) o;
-        return this.jobId == j.jobId && BaseBundle.kindofEquals(this.extras, j.extras) && BaseBundle.kindofEquals(this.transientExtras, j.transientExtras) && this.clipData == j.clipData && this.clipGrantFlags == j.clipGrantFlags && Objects.equals(this.service, j.service) && this.constraintFlags == j.constraintFlags && Arrays.equals(this.triggerContentUris, j.triggerContentUris) && this.triggerContentUpdateDelay == j.triggerContentUpdateDelay && this.triggerContentMaxDelay == j.triggerContentMaxDelay && this.hasEarlyConstraint == j.hasEarlyConstraint && this.hasLateConstraint == j.hasLateConstraint && Objects.equals(this.networkRequest, j.networkRequest) && this.networkDownloadBytes == j.networkDownloadBytes && this.networkUploadBytes == j.networkUploadBytes && this.minimumNetworkChunkBytes == j.minimumNetworkChunkBytes && this.minLatencyMillis == j.minLatencyMillis && this.maxExecutionDelayMillis == j.maxExecutionDelayMillis && this.isPeriodic == j.isPeriodic && this.isPersisted == j.isPersisted && this.intervalMillis == j.intervalMillis && this.flexMillis == j.flexMillis && this.initialBackoffMillis == j.initialBackoffMillis && this.backoffPolicy == j.backoffPolicy && this.mBias == j.mBias && this.mPriority == j.mPriority && this.flags == j.flags && this.mDebugTags.equals(j.mDebugTags) && Objects.equals(this.mTraceTag, j.mTraceTag);
+        return this.jobId == j.jobId
+                && BaseBundle.kindofEquals(this.extras, j.extras)
+                && BaseBundle.kindofEquals(this.transientExtras, j.transientExtras)
+                && this.clipData == j.clipData
+                && this.clipGrantFlags == j.clipGrantFlags
+                && Objects.equals(this.service, j.service)
+                && this.constraintFlags == j.constraintFlags
+                && Arrays.equals(this.triggerContentUris, j.triggerContentUris)
+                && this.triggerContentUpdateDelay == j.triggerContentUpdateDelay
+                && this.triggerContentMaxDelay == j.triggerContentMaxDelay
+                && this.hasEarlyConstraint == j.hasEarlyConstraint
+                && this.hasLateConstraint == j.hasLateConstraint
+                && Objects.equals(this.networkRequest, j.networkRequest)
+                && this.networkDownloadBytes == j.networkDownloadBytes
+                && this.networkUploadBytes == j.networkUploadBytes
+                && this.minimumNetworkChunkBytes == j.minimumNetworkChunkBytes
+                && this.minLatencyMillis == j.minLatencyMillis
+                && this.maxExecutionDelayMillis == j.maxExecutionDelayMillis
+                && this.isPeriodic == j.isPeriodic
+                && this.isPersisted == j.isPersisted
+                && this.intervalMillis == j.intervalMillis
+                && this.flexMillis == j.flexMillis
+                && this.initialBackoffMillis == j.initialBackoffMillis
+                && this.backoffPolicy == j.backoffPolicy
+                && this.mBias == j.mBias
+                && this.mPriority == j.mPriority
+                && this.flags == j.flags
+                && this.mDebugTags.equals(j.mDebugTags)
+                && Objects.equals(this.mTraceTag, j.mTraceTag);
     }
 
     public int hashCode() {
@@ -346,11 +373,76 @@ public class JobInfo implements Parcelable {
         if (this.triggerContentUris != null) {
             hashCode3 = (hashCode3 * 31) + Arrays.hashCode(this.triggerContentUris);
         }
-        int hashCode4 = (((((((hashCode3 * 31) + Long.hashCode(this.triggerContentUpdateDelay)) * 31) + Long.hashCode(this.triggerContentMaxDelay)) * 31) + Boolean.hashCode(this.hasEarlyConstraint)) * 31) + Boolean.hashCode(this.hasLateConstraint);
+        int hashCode4 =
+                (((((((hashCode3 * 31) + Long.hashCode(this.triggerContentUpdateDelay)) * 31)
+                                                        + Long.hashCode(
+                                                                this.triggerContentMaxDelay))
+                                                * 31)
+                                        + Boolean.hashCode(this.hasEarlyConstraint))
+                                * 31)
+                        + Boolean.hashCode(this.hasLateConstraint);
         if (this.networkRequest != null) {
             hashCode4 = (hashCode4 * 31) + this.networkRequest.hashCode();
         }
-        int hashCode5 = (((((((((((((((((((((((((((hashCode4 * 31) + Long.hashCode(this.networkDownloadBytes)) * 31) + Long.hashCode(this.networkUploadBytes)) * 31) + Long.hashCode(this.minimumNetworkChunkBytes)) * 31) + Long.hashCode(this.minLatencyMillis)) * 31) + Long.hashCode(this.maxExecutionDelayMillis)) * 31) + Boolean.hashCode(this.isPeriodic)) * 31) + Boolean.hashCode(this.isPersisted)) * 31) + Long.hashCode(this.intervalMillis)) * 31) + Long.hashCode(this.flexMillis)) * 31) + Long.hashCode(this.initialBackoffMillis)) * 31) + this.backoffPolicy) * 31) + this.mBias) * 31) + this.mPriority) * 31) + this.flags;
+        int hashCode5 =
+                (((((((((((((((((((((((((((hashCode4 * 31)
+                                                                                                                                                                                                                                        + Long
+                                                                                                                                                                                                                                                .hashCode(
+                                                                                                                                                                                                                                                        this
+                                                                                                                                                                                                                                                                .networkDownloadBytes))
+                                                                                                                                                                                                                                * 31)
+                                                                                                                                                                                                                        + Long
+                                                                                                                                                                                                                                .hashCode(
+                                                                                                                                                                                                                                        this
+                                                                                                                                                                                                                                                .networkUploadBytes))
+                                                                                                                                                                                                                * 31)
+                                                                                                                                                                                                        + Long
+                                                                                                                                                                                                                .hashCode(
+                                                                                                                                                                                                                        this
+                                                                                                                                                                                                                                .minimumNetworkChunkBytes))
+                                                                                                                                                                                                * 31)
+                                                                                                                                                                                        + Long
+                                                                                                                                                                                                .hashCode(
+                                                                                                                                                                                                        this
+                                                                                                                                                                                                                .minLatencyMillis))
+                                                                                                                                                                                * 31)
+                                                                                                                                                                        + Long
+                                                                                                                                                                                .hashCode(
+                                                                                                                                                                                        this
+                                                                                                                                                                                                .maxExecutionDelayMillis))
+                                                                                                                                                                * 31)
+                                                                                                                                                        + Boolean
+                                                                                                                                                                .hashCode(
+                                                                                                                                                                        this
+                                                                                                                                                                                .isPeriodic))
+                                                                                                                                                * 31)
+                                                                                                                                        + Boolean
+                                                                                                                                                .hashCode(
+                                                                                                                                                        this
+                                                                                                                                                                .isPersisted))
+                                                                                                                                * 31)
+                                                                                                                        + Long
+                                                                                                                                .hashCode(
+                                                                                                                                        this
+                                                                                                                                                .intervalMillis))
+                                                                                                                * 31)
+                                                                                                        + Long
+                                                                                                                .hashCode(
+                                                                                                                        this
+                                                                                                                                .flexMillis))
+                                                                                                * 31)
+                                                                                        + Long
+                                                                                                .hashCode(
+                                                                                                        this
+                                                                                                                .initialBackoffMillis))
+                                                                                * 31)
+                                                                        + this.backoffPolicy)
+                                                                * 31)
+                                                        + this.mBias)
+                                                * 31)
+                                        + this.mPriority)
+                                * 31)
+                        + this.flags;
         if (this.mDebugTags.size() > 0) {
             hashCode5 = (hashCode5 * 31) + this.mDebugTags.hashCode();
         }
@@ -374,7 +466,8 @@ public class JobInfo implements Parcelable {
         }
         this.service = (ComponentName) in.readParcelable(null);
         this.constraintFlags = in.readInt();
-        this.triggerContentUris = (TriggerContentUri[]) in.createTypedArray(TriggerContentUri.CREATOR);
+        this.triggerContentUris =
+                (TriggerContentUri[]) in.createTypedArray(TriggerContentUri.CREATOR);
         this.triggerContentUpdateDelay = in.readLong();
         this.triggerContentMaxDelay = in.readLong();
         if (in.readInt() != 0) {
@@ -421,7 +514,10 @@ public class JobInfo implements Parcelable {
         this.service = b.mJobService;
         this.constraintFlags = b.mConstraintFlags;
         if (b.mTriggerContentUris != null) {
-            triggerContentUriArr = (TriggerContentUri[]) b.mTriggerContentUris.toArray(new TriggerContentUri[b.mTriggerContentUris.size()]);
+            triggerContentUriArr =
+                    (TriggerContentUri[])
+                            b.mTriggerContentUris.toArray(
+                                    new TriggerContentUri[b.mTriggerContentUris.size()]);
         } else {
             triggerContentUriArr = null;
         }
@@ -502,30 +598,35 @@ public class JobInfo implements Parcelable {
     }
 
     public String toString() {
-        return "(job:" + this.jobId + "/" + this.service.flattenToShortString() + NavigationBarInflaterView.KEY_CODE_END;
+        return "(job:"
+                + this.jobId
+                + "/"
+                + this.service.flattenToShortString()
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public static final class TriggerContentUri implements Parcelable {
-        public static final Parcelable.Creator<TriggerContentUri> CREATOR = new Parcelable.Creator<TriggerContentUri>() { // from class: android.app.job.JobInfo.TriggerContentUri.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TriggerContentUri createFromParcel(Parcel in) {
-                return new TriggerContentUri(in);
-            }
+        public static final Parcelable.Creator<TriggerContentUri> CREATOR =
+                new Parcelable.Creator<TriggerContentUri>() { // from class:
+                    // android.app.job.JobInfo.TriggerContentUri.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TriggerContentUri createFromParcel(Parcel in) {
+                        return new TriggerContentUri(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TriggerContentUri[] newArray(int size) {
-                return new TriggerContentUri[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TriggerContentUri[] newArray(int size) {
+                        return new TriggerContentUri[size];
+                    }
+                };
         public static final int FLAG_NOTIFY_FOR_DESCENDANTS = 1;
         private final int mFlags;
         private final Uri mUri;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Flags {
-        }
+        public @interface Flags {}
 
         public TriggerContentUri(Uri uri, int flags) {
             this.mUri = (Uri) Objects.requireNonNull(uri);
@@ -646,7 +747,10 @@ public class JobInfo implements Parcelable {
             this.mNetworkDownloadBytes = job.getEstimatedNetworkDownloadBytes();
             this.mNetworkUploadBytes = job.getEstimatedNetworkUploadBytes();
             this.mMinimumNetworkChunkBytes = job.getMinimumNetworkChunkBytes();
-            this.mTriggerContentUris = job.getTriggerContentUris() != null ? new ArrayList<>(Arrays.asList(job.getTriggerContentUris())) : null;
+            this.mTriggerContentUris =
+                    job.getTriggerContentUris() != null
+                            ? new ArrayList<>(Arrays.asList(job.getTriggerContentUris()))
+                            : null;
             this.mTriggerContentUpdateDelay = job.getTriggerContentUpdateDelay();
             this.mTriggerContentMaxDelay = job.getTriggerContentMaxDelay();
             this.mIsPersisted = job.isPersisted();
@@ -798,13 +902,27 @@ public class JobInfo implements Parcelable {
         public Builder setPeriodic(long intervalMillis, long flexMillis) {
             long minPeriod = JobInfo.getMinPeriodMillis();
             if (intervalMillis < minPeriod) {
-                Log.w(JobInfo.TAG, "Requested interval " + TimeUtils.formatDuration(intervalMillis) + " for job " + this.mJobId + " is too small; raising to " + TimeUtils.formatDuration(minPeriod));
+                Log.w(
+                        JobInfo.TAG,
+                        "Requested interval "
+                                + TimeUtils.formatDuration(intervalMillis)
+                                + " for job "
+                                + this.mJobId
+                                + " is too small; raising to "
+                                + TimeUtils.formatDuration(minPeriod));
                 intervalMillis = minPeriod;
             }
             long percentClamp = (5 * intervalMillis) / 100;
             long minFlex = Math.max(percentClamp, JobInfo.getMinFlexMillis());
             if (flexMillis < minFlex) {
-                Log.w(JobInfo.TAG, "Requested flex " + TimeUtils.formatDuration(flexMillis) + " for job " + this.mJobId + " is too small; raising to " + TimeUtils.formatDuration(minFlex));
+                Log.w(
+                        JobInfo.TAG,
+                        "Requested flex "
+                                + TimeUtils.formatDuration(flexMillis)
+                                + " for job "
+                                + this.mJobId
+                                + " is too small; raising to "
+                                + TimeUtils.formatDuration(minFlex));
                 flexMillis = minFlex;
             }
             this.mIsPeriodic = true;
@@ -830,7 +948,14 @@ public class JobInfo implements Parcelable {
         public Builder setBackoffCriteria(long initialBackoffMillis, int backoffPolicy) {
             long minBackoff = JobInfo.getMinBackoffMillis();
             if (initialBackoffMillis < minBackoff) {
-                Log.w(JobInfo.TAG, "Requested backoff " + TimeUtils.formatDuration(initialBackoffMillis) + " for job " + this.mJobId + " is too small; raising to " + TimeUtils.formatDuration(minBackoff));
+                Log.w(
+                        JobInfo.TAG,
+                        "Requested backoff "
+                                + TimeUtils.formatDuration(initialBackoffMillis)
+                                + " for job "
+                                + this.mJobId
+                                + " is too small; raising to "
+                                + TimeUtils.formatDuration(minBackoff));
                 initialBackoffMillis = minBackoff;
             }
             this.mBackoffPolicySet = true;
@@ -905,15 +1030,29 @@ public class JobInfo implements Parcelable {
         }
 
         public JobInfo build() {
-            return build(Compatibility.isChangeEnabled(JobInfo.DISALLOW_DEADLINES_FOR_PREFETCH_JOBS), Compatibility.isChangeEnabled(JobInfo.REJECT_NEGATIVE_NETWORK_ESTIMATES), Compatibility.isChangeEnabled(JobInfo.ENFORCE_MINIMUM_TIME_WINDOWS), Compatibility.isChangeEnabled(JobInfo.REJECT_NEGATIVE_DELAYS_AND_DEADLINES));
+            return build(
+                    Compatibility.isChangeEnabled(JobInfo.DISALLOW_DEADLINES_FOR_PREFETCH_JOBS),
+                    Compatibility.isChangeEnabled(JobInfo.REJECT_NEGATIVE_NETWORK_ESTIMATES),
+                    Compatibility.isChangeEnabled(JobInfo.ENFORCE_MINIMUM_TIME_WINDOWS),
+                    Compatibility.isChangeEnabled(JobInfo.REJECT_NEGATIVE_DELAYS_AND_DEADLINES));
         }
 
-        public JobInfo build(boolean disallowPrefetchDeadlines, boolean rejectNegativeNetworkEstimates, boolean enforceMinimumTimeWindows, boolean rejectNegativeDelaysAndDeadlines) {
+        public JobInfo build(
+                boolean disallowPrefetchDeadlines,
+                boolean rejectNegativeNetworkEstimates,
+                boolean enforceMinimumTimeWindows,
+                boolean rejectNegativeDelaysAndDeadlines) {
             if (this.mBackoffPolicySet && (this.mConstraintFlags & 4) != 0) {
-                throw new IllegalArgumentException("An idle mode job will not respect any back-off policy, so calling setBackoffCriteria with setRequiresDeviceIdle is an error.");
+                throw new IllegalArgumentException(
+                        "An idle mode job will not respect any back-off policy, so calling"
+                                + " setBackoffCriteria with setRequiresDeviceIdle is an error.");
             }
             JobInfo jobInfo = new JobInfo(this);
-            jobInfo.enforceValidity(disallowPrefetchDeadlines, rejectNegativeNetworkEstimates, enforceMinimumTimeWindows, rejectNegativeDelaysAndDeadlines);
+            jobInfo.enforceValidity(
+                    disallowPrefetchDeadlines,
+                    rejectNegativeNetworkEstimates,
+                    enforceMinimumTimeWindows,
+                    rejectNegativeDelaysAndDeadlines);
             return jobInfo;
         }
 
@@ -928,64 +1067,88 @@ public class JobInfo implements Parcelable {
         }
     }
 
-    public final void enforceValidity(boolean disallowPrefetchDeadlines, boolean rejectNegativeNetworkEstimates, boolean enforceMinimumTimeWindows, boolean rejectNegativeDelaysAndDeadlines) {
+    public final void enforceValidity(
+            boolean disallowPrefetchDeadlines,
+            boolean rejectNegativeNetworkEstimates,
+            boolean enforceMinimumTimeWindows,
+            boolean rejectNegativeDelaysAndDeadlines) {
         long estimatedTransfer;
-        if ((this.networkDownloadBytes > 0 || this.networkUploadBytes > 0 || this.minimumNetworkChunkBytes > 0) && this.networkRequest == null) {
-            throw new IllegalArgumentException("Can't provide estimated network usage without requiring a network");
+        if ((this.networkDownloadBytes > 0
+                        || this.networkUploadBytes > 0
+                        || this.minimumNetworkChunkBytes > 0)
+                && this.networkRequest == null) {
+            throw new IllegalArgumentException(
+                    "Can't provide estimated network usage without requiring a network");
         }
         if (this.networkRequest != null && rejectNegativeNetworkEstimates) {
             if (this.networkUploadBytes != -1 && this.networkUploadBytes < 0) {
-                throw new IllegalArgumentException("Invalid network upload bytes: " + this.networkUploadBytes);
+                throw new IllegalArgumentException(
+                        "Invalid network upload bytes: " + this.networkUploadBytes);
             }
             if (this.networkDownloadBytes != -1 && this.networkDownloadBytes < 0) {
-                throw new IllegalArgumentException("Invalid network download bytes: " + this.networkDownloadBytes);
+                throw new IllegalArgumentException(
+                        "Invalid network download bytes: " + this.networkDownloadBytes);
             }
         }
         if (this.networkUploadBytes == -1) {
             estimatedTransfer = this.networkDownloadBytes;
         } else {
             long estimatedTransfer2 = this.networkUploadBytes;
-            estimatedTransfer = estimatedTransfer2 + (this.networkDownloadBytes == -1 ? 0L : this.networkDownloadBytes);
+            estimatedTransfer =
+                    estimatedTransfer2
+                            + (this.networkDownloadBytes == -1 ? 0L : this.networkDownloadBytes);
         }
-        if (this.minimumNetworkChunkBytes != -1 && estimatedTransfer != -1 && this.minimumNetworkChunkBytes > estimatedTransfer) {
-            throw new IllegalArgumentException("Minimum chunk size can't be greater than estimated network usage");
+        if (this.minimumNetworkChunkBytes != -1
+                && estimatedTransfer != -1
+                && this.minimumNetworkChunkBytes > estimatedTransfer) {
+            throw new IllegalArgumentException(
+                    "Minimum chunk size can't be greater than estimated network usage");
         }
         if (this.minimumNetworkChunkBytes != -1 && this.minimumNetworkChunkBytes <= 0) {
             throw new IllegalArgumentException("Minimum chunk size must be positive");
         }
         if (rejectNegativeDelaysAndDeadlines) {
             if (this.minLatencyMillis < 0) {
-                throw new IllegalArgumentException("Minimum latency is negative: " + this.minLatencyMillis);
+                throw new IllegalArgumentException(
+                        "Minimum latency is negative: " + this.minLatencyMillis);
             }
             if (this.maxExecutionDelayMillis < 0) {
-                throw new IllegalArgumentException("Override deadline is negative: " + this.maxExecutionDelayMillis);
+                throw new IllegalArgumentException(
+                        "Override deadline is negative: " + this.maxExecutionDelayMillis);
             }
         }
         boolean hasFunctionalConstraint = false;
         boolean hasDeadline = this.maxExecutionDelayMillis != 0;
         if (this.isPeriodic) {
             if (hasDeadline) {
-                throw new IllegalArgumentException("Can't call setOverrideDeadline() on a periodic job.");
+                throw new IllegalArgumentException(
+                        "Can't call setOverrideDeadline() on a periodic job.");
             }
             if (this.minLatencyMillis != 0) {
-                throw new IllegalArgumentException("Can't call setMinimumLatency() on a periodic job");
+                throw new IllegalArgumentException(
+                        "Can't call setMinimumLatency() on a periodic job");
             }
             if (this.triggerContentUris != null) {
-                throw new IllegalArgumentException("Can't call addTriggerContentUri() on a periodic job");
+                throw new IllegalArgumentException(
+                        "Can't call addTriggerContentUri() on a periodic job");
             }
         }
         if (disallowPrefetchDeadlines && hasDeadline && (this.flags & 4) != 0) {
-            throw new IllegalArgumentException("Can't call setOverrideDeadline() on a prefetch job.");
+            throw new IllegalArgumentException(
+                    "Can't call setOverrideDeadline() on a prefetch job.");
         }
         if (this.isPersisted) {
             if (this.networkRequest != null && this.networkRequest.getNetworkSpecifier() != null) {
-                throw new IllegalArgumentException("Network specifiers aren't supported for persistent jobs");
+                throw new IllegalArgumentException(
+                        "Network specifiers aren't supported for persistent jobs");
             }
             if (this.triggerContentUris != null) {
-                throw new IllegalArgumentException("Can't call addTriggerContentUri() on a persisted job");
+                throw new IllegalArgumentException(
+                        "Can't call addTriggerContentUri() on a persisted job");
             }
             if (!this.transientExtras.isEmpty()) {
-                throw new IllegalArgumentException("Can't call setTransientExtras() on a persisted job");
+                throw new IllegalArgumentException(
+                        "Can't call setTransientExtras() on a persisted job");
             }
             if (this.clipData != null) {
                 throw new IllegalArgumentException("Can't call setClipData() on a persisted job");
@@ -993,10 +1156,13 @@ public class JobInfo implements Parcelable {
         }
         if ((this.flags & 2) != 0) {
             if (this.hasEarlyConstraint) {
-                throw new IllegalArgumentException("An important while foreground job cannot have a time delay");
+                throw new IllegalArgumentException(
+                        "An important while foreground job cannot have a time delay");
             }
             if (this.mPriority != 400 && this.mPriority != 300) {
-                throw new IllegalArgumentException("An important while foreground job must be high or default priority. Don't mark unimportant tasks as important while foreground.");
+                throw new IllegalArgumentException(
+                        "An important while foreground job must be high or default priority. Don't"
+                                + " mark unimportant tasks as important while foreground.");
             }
         }
         boolean isExpedited = (this.flags & 16) != 0;
@@ -1016,25 +1182,61 @@ public class JobInfo implements Parcelable {
                 break;
             case 500:
                 if (!isExpedited && !isUserInitiated) {
-                    throw new IllegalArgumentException("Only expedited or user-initiated jobs can have max priority");
+                    throw new IllegalArgumentException(
+                            "Only expedited or user-initiated jobs can have max priority");
                 }
                 break;
             default:
-                throw new IllegalArgumentException("Invalid priority level provided: " + this.mPriority);
+                throw new IllegalArgumentException(
+                        "Invalid priority level provided: " + this.mPriority);
         }
-        if (this.networkRequest != null || this.constraintFlags != 0 || (this.triggerContentUris != null && this.triggerContentUris.length > 0)) {
+        if (this.networkRequest != null
+                || this.constraintFlags != 0
+                || (this.triggerContentUris != null && this.triggerContentUris.length > 0)) {
             hasFunctionalConstraint = true;
         }
         if (this.hasLateConstraint && !this.isPeriodic) {
             if (!hasFunctionalConstraint) {
-                Log.w(TAG, "Job '" + this.service.flattenToShortString() + "#" + this.jobId + "' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.");
+                Log.w(
+                        TAG,
+                        "Job '"
+                                + this.service.flattenToShortString()
+                                + "#"
+                                + this.jobId
+                                + "' has a deadline with no functional constraints. The deadline"
+                                + " won't improve job execution latency. Consider removing the"
+                                + " deadline.");
             } else {
                 long windowStart = this.hasEarlyConstraint ? this.minLatencyMillis : 0L;
-                if (this.maxExecutionDelayMillis - windowStart < AlarmManager.INTERVAL_FIFTEEN_MINUTES) {
+                if (this.maxExecutionDelayMillis - windowStart
+                        < AlarmManager.INTERVAL_FIFTEEN_MINUTES) {
                     if (!enforceMinimumTimeWindows || !Flags.enforceMinimumTimeWindows()) {
-                        Log.w(TAG, "Job '" + this.service.flattenToShortString() + "#" + this.jobId + "' has a deadline with functional constraints and an extremely short time window of " + (this.maxExecutionDelayMillis - windowStart) + " ms (delay=" + windowStart + ", deadline=" + this.maxExecutionDelayMillis + "). The functional constraints are not likely to be satisfied when the job runs.");
+                        Log.w(
+                                TAG,
+                                "Job '"
+                                        + this.service.flattenToShortString()
+                                        + "#"
+                                        + this.jobId
+                                        + "' has a deadline with functional constraints and an"
+                                        + " extremely short time window of "
+                                        + (this.maxExecutionDelayMillis - windowStart)
+                                        + " ms (delay="
+                                        + windowStart
+                                        + ", deadline="
+                                        + this.maxExecutionDelayMillis
+                                        + "). The functional constraints are not likely to be"
+                                        + " satisfied when the job runs.");
                     } else {
-                        throw new IllegalArgumentException("Time window too short. Constraints unlikely to be satisfied. Increase deadline to a reasonable duration. Job '" + this.service.flattenToShortString() + "#" + this.jobId + "' has delay=" + windowStart + ", deadline=" + this.maxExecutionDelayMillis);
+                        throw new IllegalArgumentException(
+                                "Time window too short. Constraints unlikely to be satisfied."
+                                        + " Increase deadline to a reasonable duration. Job '"
+                                        + this.service.flattenToShortString()
+                                        + "#"
+                                        + this.jobId
+                                        + "' has delay="
+                                        + windowStart
+                                        + ", deadline="
+                                        + this.maxExecutionDelayMillis);
                     }
                 }
             }
@@ -1051,13 +1253,18 @@ public class JobInfo implements Parcelable {
             }
             if (!isUserInitiated) {
                 if (this.mPriority != 500 && this.mPriority != 400) {
-                    throw new IllegalArgumentException("An expedited job must be high or max priority. Don't use expedited jobs for unimportant tasks.");
+                    throw new IllegalArgumentException(
+                            "An expedited job must be high or max priority. Don't use expedited"
+                                    + " jobs for unimportant tasks.");
                 }
                 if ((this.constraintFlags & (-9)) != 0 || (this.flags & (-25)) != 0) {
-                    throw new IllegalArgumentException("An expedited job can only have network and storage-not-low constraints");
+                    throw new IllegalArgumentException(
+                            "An expedited job can only have network and storage-not-low"
+                                    + " constraints");
                 }
                 if (this.triggerContentUris != null && this.triggerContentUris.length > 0) {
-                    throw new IllegalArgumentException("Can't call addTriggerContentUri() on an expedited job");
+                    throw new IllegalArgumentException(
+                            "Can't call addTriggerContentUri() on an expedited job");
                 }
             } else {
                 throw new IllegalArgumentException("An expedited job cannot be user-initiated");
@@ -1075,19 +1282,24 @@ public class JobInfo implements Parcelable {
             }
             if ((this.flags & 4) == 0) {
                 if (this.mPriority != 500) {
-                    throw new IllegalArgumentException("A user-initiated job must be max priority.");
+                    throw new IllegalArgumentException(
+                            "A user-initiated job must be max priority.");
                 }
                 if ((this.constraintFlags & 4) != 0) {
-                    throw new IllegalArgumentException("A user-initiated job cannot have a device-idle constraint");
+                    throw new IllegalArgumentException(
+                            "A user-initiated job cannot have a device-idle constraint");
                 }
                 if (this.triggerContentUris != null && this.triggerContentUris.length > 0) {
-                    throw new IllegalArgumentException("Can't call addTriggerContentUri() on a user-initiated job");
+                    throw new IllegalArgumentException(
+                            "Can't call addTriggerContentUri() on a user-initiated job");
                 }
                 if (this.networkRequest == null) {
-                    throw new IllegalArgumentException("A user-initiated data transfer job must specify a valid network type");
+                    throw new IllegalArgumentException(
+                            "A user-initiated data transfer job must specify a valid network type");
                 }
             } else {
-                throw new IllegalArgumentException("A user-initiated job cannot also be a prefetch job");
+                throw new IllegalArgumentException(
+                        "A user-initiated job cannot also be a prefetch job");
             }
         }
         if (this.mDebugTags.size() > 32) {
@@ -1127,7 +1339,9 @@ public class JobInfo implements Parcelable {
         if (traceTag2.length() > 127) {
             throw new IllegalArgumentException("traceTag tag cannot be more than 127 characters");
         }
-        if (traceTag2.contains(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER) || traceTag2.contains("\n") || traceTag2.contains("\u0000")) {
+        if (traceTag2.contains(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                || traceTag2.contains("\n")
+                || traceTag2.contains("\u0000")) {
             throw new IllegalArgumentException("Trace tag cannot contain |, \\n, or \\0");
         }
         return traceTag2.intern();

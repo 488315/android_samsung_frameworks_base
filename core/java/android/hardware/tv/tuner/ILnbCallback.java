@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ILnbCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$tv$tuner$ILnbCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$tv$tuner$ILnbCallback".replace('$', '.');
     public static final String HASH = "f8d74c149f04e76b6d622db2bd8e465dae24b08c";
     public static final int VERSION = 2;
 
@@ -22,12 +23,10 @@ public interface ILnbCallback extends IInterface {
 
     public static class Default implements ILnbCallback {
         @Override // android.hardware.tv.tuner.ILnbCallback
-        public void onDiseqcMessage(byte[] diseqcMessage) throws RemoteException {
-        }
+        public void onDiseqcMessage(byte[] diseqcMessage) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ILnbCallback
-        public void onEvent(int lnbEventType) throws RemoteException {
-        }
+        public void onEvent(int lnbEventType) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.ILnbCallback
         public int getInterfaceVersion() {
@@ -45,7 +44,7 @@ public interface ILnbCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILnbCallback {
+    public abstract static class Stub extends Binder implements ILnbCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_onDiseqcMessage = 1;
@@ -73,7 +72,8 @@ public interface ILnbCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);

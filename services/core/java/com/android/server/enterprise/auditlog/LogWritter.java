@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -20,8 +21,7 @@ public final class LogWritter {
     public final class LooperThread extends Thread {
         public SaveLogHandler mHandler;
 
-        public LooperThread() {
-        }
+        public LooperThread() {}
 
         @Override // java.lang.Thread, java.lang.Runnable
         public final void run() {
@@ -35,8 +35,7 @@ public final class LogWritter {
     public final class SaveLogHandler extends Handler {
         public Bundle data;
 
-        public SaveLogHandler() {
-        }
+        public SaveLogHandler() {}
 
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
@@ -76,7 +75,8 @@ public final class LogWritter {
                 dumper.mEnd = j2;
                 dumper.mDumpResult = true;
                 dumper.mIsFullDump = false;
-                dumper.mTemporaryPath = ((PartialFileNode) arrayList.get(0)).mFile.getParent() + "/temp/";
+                dumper.mTemporaryPath =
+                        ((PartialFileNode) arrayList.get(0)).mFile.getParent() + "/temp/";
                 Filter filter = admin.mDumpFilter;
                 if (filter != null) {
                     dumper.mFilter = filter;
@@ -97,8 +97,11 @@ public final class LogWritter {
                 }
                 if (partialFileNode != null) {
                     ContentValues contentValues = new ContentValues();
-                    contentValues.put("auditLogLastTimestamp", Long.valueOf(Long.parseLong(partialFileNode.mFile.getName())));
-                    circularBuffer3.mEdmStorageProvider.putValues(circularBuffer3.mUid, 0, "AUDITLOG", contentValues);
+                    contentValues.put(
+                            "auditLogLastTimestamp",
+                            Long.valueOf(Long.parseLong(partialFileNode.mFile.getName())));
+                    circularBuffer3.mEdmStorageProvider.putValues(
+                            circularBuffer3.mUid, 0, "AUDITLOG", contentValues);
                 }
             }
         }

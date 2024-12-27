@@ -2,6 +2,7 @@ package android.util;
 
 import android.content.res.Resources;
 import android.view.Display;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -36,7 +37,8 @@ public class DisplayUtils {
         return target;
     }
 
-    public static float getPhysicalPixelDisplaySizeRatio(int physicalWidth, int physicalHeight, int currentWidth, int currentHeight) {
+    public static float getPhysicalPixelDisplaySizeRatio(
+            int physicalWidth, int physicalHeight, int currentWidth, int currentHeight) {
         if (physicalWidth == currentWidth && physicalHeight == currentHeight) {
             return 1.0f;
         }

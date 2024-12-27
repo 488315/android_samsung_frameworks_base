@@ -17,28 +17,40 @@ public interface INetdEventCallback extends IInterface {
 
     void onConnectEvent(String str, int i, long j, int i2) throws RemoteException;
 
-    void onDnsEvent(int i, int i2, int i3, String str, String[] strArr, int i4, long j, int i5) throws RemoteException;
+    void onDnsEvent(int i, int i2, int i3, String str, String[] strArr, int i4, long j, int i5)
+            throws RemoteException;
 
     void onNat64PrefixEvent(int i, boolean z, String str, int i2) throws RemoteException;
 
-    void onPrivateDnsValidationEvent(int i, String str, String str2, boolean z) throws RemoteException;
+    void onPrivateDnsValidationEvent(int i, String str, String str2, boolean z)
+            throws RemoteException;
 
     public static class Default implements INetdEventCallback {
         @Override // android.net.INetdEventCallback
-        public void onDnsEvent(int netId, int eventType, int returnCode, String hostname, String[] ipAddresses, int ipAddressesCount, long timestamp, int uid) throws RemoteException {
-        }
+        public void onDnsEvent(
+                int netId,
+                int eventType,
+                int returnCode,
+                String hostname,
+                String[] ipAddresses,
+                int ipAddressesCount,
+                long timestamp,
+                int uid)
+                throws RemoteException {}
 
         @Override // android.net.INetdEventCallback
-        public void onNat64PrefixEvent(int netId, boolean added, String prefixString, int prefixLength) throws RemoteException {
-        }
+        public void onNat64PrefixEvent(
+                int netId, boolean added, String prefixString, int prefixLength)
+                throws RemoteException {}
 
         @Override // android.net.INetdEventCallback
-        public void onPrivateDnsValidationEvent(int netId, String ipAddress, String hostname, boolean validated) throws RemoteException {
-        }
+        public void onPrivateDnsValidationEvent(
+                int netId, String ipAddress, String hostname, boolean validated)
+                throws RemoteException {}
 
         @Override // android.net.INetdEventCallback
-        public void onConnectEvent(String ipAddr, int port, long timestamp, int uid) throws RemoteException {
-        }
+        public void onConnectEvent(String ipAddr, int port, long timestamp, int uid)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -46,7 +58,7 @@ public interface INetdEventCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INetdEventCallback {
+    public abstract static class Stub extends Binder implements INetdEventCallback {
         public static final String DESCRIPTOR = "android.net.INetdEventCallback";
         static final int TRANSACTION_onConnectEvent = 4;
         static final int TRANSACTION_onDnsEvent = 1;
@@ -94,7 +106,8 @@ public interface INetdEventCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -161,7 +174,16 @@ public interface INetdEventCallback extends IInterface {
             }
 
             @Override // android.net.INetdEventCallback
-            public void onDnsEvent(int netId, int eventType, int returnCode, String hostname, String[] ipAddresses, int ipAddressesCount, long timestamp, int uid) throws RemoteException {
+            public void onDnsEvent(
+                    int netId,
+                    int eventType,
+                    int returnCode,
+                    String hostname,
+                    String[] ipAddresses,
+                    int ipAddressesCount,
+                    long timestamp,
+                    int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -180,7 +202,9 @@ public interface INetdEventCallback extends IInterface {
             }
 
             @Override // android.net.INetdEventCallback
-            public void onNat64PrefixEvent(int netId, boolean added, String prefixString, int prefixLength) throws RemoteException {
+            public void onNat64PrefixEvent(
+                    int netId, boolean added, String prefixString, int prefixLength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -195,7 +219,9 @@ public interface INetdEventCallback extends IInterface {
             }
 
             @Override // android.net.INetdEventCallback
-            public void onPrivateDnsValidationEvent(int netId, String ipAddress, String hostname, boolean validated) throws RemoteException {
+            public void onPrivateDnsValidationEvent(
+                    int netId, String ipAddress, String hostname, boolean validated)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -210,7 +236,8 @@ public interface INetdEventCallback extends IInterface {
             }
 
             @Override // android.net.INetdEventCallback
-            public void onConnectEvent(String ipAddr, int port, long timestamp, int uid) throws RemoteException {
+            public void onConnectEvent(String ipAddr, int port, long timestamp, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

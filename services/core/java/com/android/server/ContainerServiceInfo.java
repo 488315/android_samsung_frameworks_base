@@ -18,7 +18,9 @@ public final class ContainerServiceInfo {
             try {
                 ContainerServiceInfo containerServiceInfo = (ContainerServiceInfo) obj;
                 if (this.userid == containerServiceInfo.userid) {
-                    if (this.name.flattenToString().equals(containerServiceInfo.name.flattenToString())) {
+                    if (this.name
+                            .flattenToString()
+                            .equals(containerServiceInfo.name.flattenToString())) {
                         return true;
                     }
                 }

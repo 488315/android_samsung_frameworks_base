@@ -12,9 +12,10 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewStructure;
 import android.view.autofill.AutofillId;
-import android.view.contentcapture.ViewNode;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Preconditions;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -64,8 +65,7 @@ public abstract class ContentCaptureSession implements AutoCloseable {
     private static final SecureRandom ID_GENERATOR = new SecureRandom();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FlushReason {
-    }
+    public @interface FlushReason {}
 
     abstract void flush(int i);
 
@@ -73,7 +73,8 @@ public abstract class ContentCaptureSession implements AutoCloseable {
 
     abstract void internalNotifyChildSessionFinished(int i, int i2);
 
-    abstract void internalNotifyChildSessionStarted(int i, int i2, ContentCaptureContext contentCaptureContext);
+    abstract void internalNotifyChildSessionStarted(
+            int i, int i2, ContentCaptureContext contentCaptureContext);
 
     abstract void internalNotifyContextUpdated(int i, ContentCaptureContext contentCaptureContext);
 
@@ -87,7 +88,8 @@ public abstract class ContentCaptureSession implements AutoCloseable {
 
     abstract void internalNotifyViewInsetsChanged(int i, Insets insets);
 
-    abstract void internalNotifyViewTextChanged(int i, AutofillId autofillId, CharSequence charSequence);
+    abstract void internalNotifyViewTextChanged(
+            int i, AutofillId autofillId, CharSequence charSequence);
 
     abstract void internalNotifyViewTreeEvent(int i, boolean z);
 
@@ -137,7 +139,14 @@ public abstract class ContentCaptureSession implements AutoCloseable {
     public final ContentCaptureSession createContentCaptureSession(ContentCaptureContext context) {
         ContentCaptureSession child = newChild(context);
         if (ContentCaptureHelper.sDebug) {
-            Log.d(TAG, "createContentCaptureSession(" + context + ": parent=" + this.mId + ", child=" + child.mId);
+            Log.d(
+                    TAG,
+                    "createContentCaptureSession("
+                            + context
+                            + ": parent="
+                            + this.mId
+                            + ", child="
+                            + child.mId);
         }
         synchronized (this.mLock) {
             if (this.mChildren == null) {
@@ -169,7 +178,9 @@ public abstract class ContentCaptureSession implements AutoCloseable {
             }
             this.mDestroyed = true;
             if (ContentCaptureHelper.sVerbose) {
-                Log.v(TAG, "destroy(): state=" + getStateAsString(this.mState) + ", mId=" + this.mId);
+                Log.v(
+                        TAG,
+                        "destroy(): state=" + getStateAsString(this.mState) + ", mId=" + this.mId);
             }
             if (this.mChildren != null) {
                 int numberChildren = this.mChildren.size();
@@ -223,7 +234,8 @@ public abstract class ContentCaptureSession implements AutoCloseable {
             int i2 = this.mId;
             internalNotifyViewTreeEvent(i2, true);
             for (int i3 = 0; i3 < appearedNodes.size(); i3++) {
-                internalNotifyViewAppeared(this.mId, (ViewNode.ViewStructureImpl) appearedNodes.get(i3));
+                internalNotifyViewAppeared(
+                        this.mId, (ViewNode.ViewStructureImpl) appearedNodes.get(i3));
             }
             int i4 = this.mId;
             internalNotifyViewTreeEvent(i4, false);
@@ -333,7 +345,12 @@ public abstract class ContentCaptureSession implements AutoCloseable {
     }
 
     protected static String getStateAsString(int state) {
-        return state + " (" + (state == 0 ? "UNKNOWN" : DebugUtils.flagsToString(ContentCaptureSession.class, "STATE_", state)) + NavigationBarInflaterView.KEY_CODE_END;
+        return state
+                + " ("
+                + (state == 0
+                        ? "UNKNOWN"
+                        : DebugUtils.flagsToString(ContentCaptureSession.class, "STATE_", state))
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public static String getFlushReasonAsString(int reason) {

@@ -1,13 +1,14 @@
 package android.media;
 
 import android.annotation.SystemApi;
-import android.media.VolumeShaper;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.IntArray;
 import android.util.SparseArray;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -18,19 +19,21 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes2.dex */
 public final class FadeManagerConfiguration implements Parcelable {
-    public static final Parcelable.Creator<FadeManagerConfiguration> CREATOR = new Parcelable.Creator<FadeManagerConfiguration>() { // from class: android.media.FadeManagerConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FadeManagerConfiguration createFromParcel(Parcel in) {
-            return new FadeManagerConfiguration(in);
-        }
+    public static final Parcelable.Creator<FadeManagerConfiguration> CREATOR =
+            new Parcelable.Creator<FadeManagerConfiguration>() { // from class:
+                // android.media.FadeManagerConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FadeManagerConfiguration createFromParcel(Parcel in) {
+                    return new FadeManagerConfiguration(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FadeManagerConfiguration[] newArray(int size) {
-            return new FadeManagerConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FadeManagerConfiguration[] newArray(int size) {
+                    return new FadeManagerConfiguration[size];
+                }
+            };
     private static final long DEFAULT_FADE_IN_DURATION_MS = 1000;
     private static final long DEFAULT_FADE_OUT_DURATION_MS = 2000;
     public static final long DURATION_NOT_SET = 0;
@@ -51,21 +54,56 @@ public final class FadeManagerConfiguration implements Parcelable {
     private final SparseArray<FadeVolumeShaperConfigsWrapper> mUsageToFadeWrapperMap;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FadeStateEnum {
-    }
+    public @interface FadeStateEnum {}
 
-    private FadeManagerConfiguration(int fadeState, long fadeOutDurationMillis, long fadeInDurationMillis, long offendersFadeInDelayMillis, SparseArray<FadeVolumeShaperConfigsWrapper> usageToFadeWrapperMap, ArrayMap<AudioAttributes, FadeVolumeShaperConfigsWrapper> attrToFadeWrapperMap, IntArray fadeableUsages, IntArray unfadeableContentTypes, IntArray unfadeablePlayerTypes, IntArray unfadeableUids, List<AudioAttributes> unfadeableAudioAttributes) {
+    private FadeManagerConfiguration(
+            int fadeState,
+            long fadeOutDurationMillis,
+            long fadeInDurationMillis,
+            long offendersFadeInDelayMillis,
+            SparseArray<FadeVolumeShaperConfigsWrapper> usageToFadeWrapperMap,
+            ArrayMap<AudioAttributes, FadeVolumeShaperConfigsWrapper> attrToFadeWrapperMap,
+            IntArray fadeableUsages,
+            IntArray unfadeableContentTypes,
+            IntArray unfadeablePlayerTypes,
+            IntArray unfadeableUids,
+            List<AudioAttributes> unfadeableAudioAttributes) {
         this.mFadeState = fadeState;
         this.mFadeOutDurationMillis = fadeOutDurationMillis;
         this.mFadeInDurationMillis = fadeInDurationMillis;
         this.mFadeInDelayForOffendersMillis = offendersFadeInDelayMillis;
-        this.mUsageToFadeWrapperMap = (SparseArray) Objects.requireNonNull(usageToFadeWrapperMap, "Usage to fade wrapper map cannot be null");
-        this.mAttrToFadeWrapperMap = (ArrayMap) Objects.requireNonNull(attrToFadeWrapperMap, "Attribute to fade wrapper map cannot be null");
-        this.mFadeableUsages = (IntArray) Objects.requireNonNull(fadeableUsages, "List of fadeable usages cannot be null");
-        this.mUnfadeableContentTypes = (IntArray) Objects.requireNonNull(unfadeableContentTypes, "List of unfadeable content types cannot be null");
-        this.mUnfadeablePlayerTypes = (IntArray) Objects.requireNonNull(unfadeablePlayerTypes, "List of unfadeable player types cannot be null");
-        this.mUnfadeableUids = (IntArray) Objects.requireNonNull(unfadeableUids, "List of unfadeable uids cannot be null");
-        this.mUnfadeableAudioAttributes = (List) Objects.requireNonNull(unfadeableAudioAttributes, "List of unfadeable audio attributes cannot be null");
+        this.mUsageToFadeWrapperMap =
+                (SparseArray)
+                        Objects.requireNonNull(
+                                usageToFadeWrapperMap, "Usage to fade wrapper map cannot be null");
+        this.mAttrToFadeWrapperMap =
+                (ArrayMap)
+                        Objects.requireNonNull(
+                                attrToFadeWrapperMap,
+                                "Attribute to fade wrapper map cannot be null");
+        this.mFadeableUsages =
+                (IntArray)
+                        Objects.requireNonNull(
+                                fadeableUsages, "List of fadeable usages cannot be null");
+        this.mUnfadeableContentTypes =
+                (IntArray)
+                        Objects.requireNonNull(
+                                unfadeableContentTypes,
+                                "List of unfadeable content types cannot be null");
+        this.mUnfadeablePlayerTypes =
+                (IntArray)
+                        Objects.requireNonNull(
+                                unfadeablePlayerTypes,
+                                "List of unfadeable player types cannot be null");
+        this.mUnfadeableUids =
+                (IntArray)
+                        Objects.requireNonNull(
+                                unfadeableUids, "List of unfadeable uids cannot be null");
+        this.mUnfadeableAudioAttributes =
+                (List)
+                        Objects.requireNonNull(
+                                unfadeableAudioAttributes,
+                                "List of unfadeable audio attributes cannot be null");
     }
 
     public int getFadeState() {
@@ -100,13 +138,15 @@ public final class FadeManagerConfiguration implements Parcelable {
     public long getFadeOutDurationForUsage(int usage) {
         ensureFadingIsEnabled();
         validateUsage(usage);
-        return getDurationForVolumeShaperConfig(getVolumeShaperConfigFromWrapper(this.mUsageToFadeWrapperMap.get(usage), false));
+        return getDurationForVolumeShaperConfig(
+                getVolumeShaperConfigFromWrapper(this.mUsageToFadeWrapperMap.get(usage), false));
     }
 
     public long getFadeInDurationForUsage(int usage) {
         ensureFadingIsEnabled();
         validateUsage(usage);
-        return getDurationForVolumeShaperConfig(getVolumeShaperConfigFromWrapper(this.mUsageToFadeWrapperMap.get(usage), true));
+        return getDurationForVolumeShaperConfig(
+                getVolumeShaperConfigFromWrapper(this.mUsageToFadeWrapperMap.get(usage), true));
     }
 
     public VolumeShaper.Configuration getFadeOutVolumeShaperConfigForUsage(int usage) {
@@ -123,24 +163,32 @@ public final class FadeManagerConfiguration implements Parcelable {
 
     public long getFadeOutDurationForAudioAttributes(AudioAttributes audioAttributes) {
         ensureFadingIsEnabled();
-        return getDurationForVolumeShaperConfig(getVolumeShaperConfigFromWrapper(this.mAttrToFadeWrapperMap.get(audioAttributes), false));
+        return getDurationForVolumeShaperConfig(
+                getVolumeShaperConfigFromWrapper(
+                        this.mAttrToFadeWrapperMap.get(audioAttributes), false));
     }
 
     public long getFadeInDurationForAudioAttributes(AudioAttributes audioAttributes) {
         ensureFadingIsEnabled();
-        return getDurationForVolumeShaperConfig(getVolumeShaperConfigFromWrapper(this.mAttrToFadeWrapperMap.get(audioAttributes), true));
+        return getDurationForVolumeShaperConfig(
+                getVolumeShaperConfigFromWrapper(
+                        this.mAttrToFadeWrapperMap.get(audioAttributes), true));
     }
 
-    public VolumeShaper.Configuration getFadeOutVolumeShaperConfigForAudioAttributes(AudioAttributes audioAttributes) {
+    public VolumeShaper.Configuration getFadeOutVolumeShaperConfigForAudioAttributes(
+            AudioAttributes audioAttributes) {
         Objects.requireNonNull(audioAttributes, "Audio attributes cannot be null");
         ensureFadingIsEnabled();
-        return getVolumeShaperConfigFromWrapper(this.mAttrToFadeWrapperMap.get(audioAttributes), false);
+        return getVolumeShaperConfigFromWrapper(
+                this.mAttrToFadeWrapperMap.get(audioAttributes), false);
     }
 
-    public VolumeShaper.Configuration getFadeInVolumeShaperConfigForAudioAttributes(AudioAttributes audioAttributes) {
+    public VolumeShaper.Configuration getFadeInVolumeShaperConfigForAudioAttributes(
+            AudioAttributes audioAttributes) {
         Objects.requireNonNull(audioAttributes, "Audio attributes cannot be null");
         ensureFadingIsEnabled();
-        return getVolumeShaperConfigFromWrapper(this.mAttrToFadeWrapperMap.get(audioAttributes), true);
+        return getVolumeShaperConfigFromWrapper(
+                this.mAttrToFadeWrapperMap.get(audioAttributes), true);
     }
 
     public List<AudioAttributes> getAudioAttributesWithVolumeShaperConfigs() {
@@ -200,7 +248,27 @@ public final class FadeManagerConfiguration implements Parcelable {
     }
 
     public String toString() {
-        return "FadeManagerConfiguration { fade state = " + fadeStateToString(this.mFadeState) + ", fade out duration = " + this.mFadeOutDurationMillis + ", fade in duration = " + this.mFadeInDurationMillis + ", offenders fade in delay = " + this.mFadeInDelayForOffendersMillis + ", fade volume shapers for audio attributes = " + this.mAttrToFadeWrapperMap + ", fadeable usages = " + this.mFadeableUsages.toString() + ", unfadeable content types = " + this.mUnfadeableContentTypes.toString() + ", unfadeable player types = " + this.mUnfadeablePlayerTypes.toString() + ", unfadeable uids = " + this.mUnfadeableUids.toString() + ", unfadeable audio attributes = " + this.mUnfadeableAudioAttributes + "}";
+        return "FadeManagerConfiguration { fade state = "
+                + fadeStateToString(this.mFadeState)
+                + ", fade out duration = "
+                + this.mFadeOutDurationMillis
+                + ", fade in duration = "
+                + this.mFadeInDurationMillis
+                + ", offenders fade in delay = "
+                + this.mFadeInDelayForOffendersMillis
+                + ", fade volume shapers for audio attributes = "
+                + this.mAttrToFadeWrapperMap
+                + ", fadeable usages = "
+                + this.mFadeableUsages.toString()
+                + ", unfadeable content types = "
+                + this.mUnfadeableContentTypes.toString()
+                + ", unfadeable player types = "
+                + this.mUnfadeablePlayerTypes.toString()
+                + ", unfadeable uids = "
+                + this.mUnfadeableUids.toString()
+                + ", unfadeable audio attributes = "
+                + this.mUnfadeableAudioAttributes
+                + "}";
     }
 
     public static String fadeStateToString(int fadeState) {
@@ -227,11 +295,35 @@ public final class FadeManagerConfiguration implements Parcelable {
             return false;
         }
         FadeManagerConfiguration rhs = (FadeManagerConfiguration) o;
-        return this.mUsageToFadeWrapperMap.contentEquals(rhs.mUsageToFadeWrapperMap) && this.mAttrToFadeWrapperMap.equals(rhs.mAttrToFadeWrapperMap) && Arrays.equals(this.mFadeableUsages.toArray(), rhs.mFadeableUsages.toArray()) && Arrays.equals(this.mUnfadeableContentTypes.toArray(), rhs.mUnfadeableContentTypes.toArray()) && Arrays.equals(this.mUnfadeablePlayerTypes.toArray(), rhs.mUnfadeablePlayerTypes.toArray()) && Arrays.equals(this.mUnfadeableUids.toArray(), rhs.mUnfadeableUids.toArray()) && this.mUnfadeableAudioAttributes.equals(rhs.mUnfadeableAudioAttributes) && this.mFadeState == rhs.mFadeState && this.mFadeOutDurationMillis == rhs.mFadeOutDurationMillis && this.mFadeInDurationMillis == rhs.mFadeInDurationMillis && this.mFadeInDelayForOffendersMillis == rhs.mFadeInDelayForOffendersMillis;
+        return this.mUsageToFadeWrapperMap.contentEquals(rhs.mUsageToFadeWrapperMap)
+                && this.mAttrToFadeWrapperMap.equals(rhs.mAttrToFadeWrapperMap)
+                && Arrays.equals(this.mFadeableUsages.toArray(), rhs.mFadeableUsages.toArray())
+                && Arrays.equals(
+                        this.mUnfadeableContentTypes.toArray(),
+                        rhs.mUnfadeableContentTypes.toArray())
+                && Arrays.equals(
+                        this.mUnfadeablePlayerTypes.toArray(), rhs.mUnfadeablePlayerTypes.toArray())
+                && Arrays.equals(this.mUnfadeableUids.toArray(), rhs.mUnfadeableUids.toArray())
+                && this.mUnfadeableAudioAttributes.equals(rhs.mUnfadeableAudioAttributes)
+                && this.mFadeState == rhs.mFadeState
+                && this.mFadeOutDurationMillis == rhs.mFadeOutDurationMillis
+                && this.mFadeInDurationMillis == rhs.mFadeInDurationMillis
+                && this.mFadeInDelayForOffendersMillis == rhs.mFadeInDelayForOffendersMillis;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mUsageToFadeWrapperMap, this.mAttrToFadeWrapperMap, this.mFadeableUsages, this.mUnfadeableContentTypes, this.mUnfadeablePlayerTypes, this.mUnfadeableAudioAttributes, this.mUnfadeableUids, Integer.valueOf(this.mFadeState), Long.valueOf(this.mFadeOutDurationMillis), Long.valueOf(this.mFadeInDurationMillis), Long.valueOf(this.mFadeInDelayForOffendersMillis));
+        return Objects.hash(
+                this.mUsageToFadeWrapperMap,
+                this.mAttrToFadeWrapperMap,
+                this.mFadeableUsages,
+                this.mUnfadeableContentTypes,
+                this.mUnfadeablePlayerTypes,
+                this.mUnfadeableAudioAttributes,
+                this.mUnfadeableUids,
+                Integer.valueOf(this.mFadeState),
+                Long.valueOf(this.mFadeOutDurationMillis),
+                Long.valueOf(this.mFadeInDurationMillis),
+                Long.valueOf(this.mFadeInDelayForOffendersMillis));
     }
 
     @Override // android.os.Parcelable
@@ -254,9 +346,15 @@ public final class FadeManagerConfiguration implements Parcelable {
         long fadeOutDurationMillis = in.readLong();
         long fadeInDurationMillis = in.readLong();
         long fadeInDelayForOffenders = in.readLong();
-        SparseArray<FadeVolumeShaperConfigsWrapper> usageToWrapperMap = in.createTypedSparseArray(FadeVolumeShaperConfigsWrapper.CREATOR);
-        ArrayMap<AudioAttributes, FadeVolumeShaperConfigsWrapper> attrToFadeWrapperMap = new ArrayMap<>();
-        in.readMap(attrToFadeWrapperMap, getClass().getClassLoader(), AudioAttributes.class, FadeVolumeShaperConfigsWrapper.class);
+        SparseArray<FadeVolumeShaperConfigsWrapper> usageToWrapperMap =
+                in.createTypedSparseArray(FadeVolumeShaperConfigsWrapper.CREATOR);
+        ArrayMap<AudioAttributes, FadeVolumeShaperConfigsWrapper> attrToFadeWrapperMap =
+                new ArrayMap<>();
+        in.readMap(
+                attrToFadeWrapperMap,
+                getClass().getClassLoader(),
+                AudioAttributes.class,
+                FadeVolumeShaperConfigsWrapper.class);
         int[] fadeableUsages = in.createIntArray();
         int[] unfadeableContentTypes = in.createIntArray();
         int[] unfadeablePlayerTypes = in.createIntArray();
@@ -283,7 +381,8 @@ public final class FadeManagerConfiguration implements Parcelable {
         return 0L;
     }
 
-    private VolumeShaper.Configuration getVolumeShaperConfigFromWrapper(FadeVolumeShaperConfigsWrapper wrapper, boolean isFadeIn) {
+    private VolumeShaper.Configuration getVolumeShaperConfigFromWrapper(
+            FadeVolumeShaperConfigsWrapper wrapper, boolean isFadeIn) {
         if (wrapper == null) {
             return null;
         }
@@ -302,7 +401,9 @@ public final class FadeManagerConfiguration implements Parcelable {
     }
 
     private static boolean isUsageValid(int usage) {
-        return AudioAttributes.isSdkUsage(usage) || AudioAttributes.isSystemUsage(usage) || AudioAttributes.isHiddenUsage(usage);
+        return AudioAttributes.isSdkUsage(usage)
+                || AudioAttributes.isSystemUsage(usage)
+                || AudioAttributes.isHiddenUsage(usage);
     }
 
     private void ensureFadingIsEnabled() {
@@ -313,7 +414,8 @@ public final class FadeManagerConfiguration implements Parcelable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static void validateUsage(int usage) {
-        Preconditions.checkArgument(isUsageValid(usage), "Invalid usage: %s", Integer.valueOf(usage));
+        Preconditions.checkArgument(
+                isUsageValid(usage), "Invalid usage: %s", Integer.valueOf(usage));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -357,9 +459,11 @@ public final class FadeManagerConfiguration implements Parcelable {
         private IntArray mUnfadeablePlayerTypes;
         private IntArray mUnfadeableUids;
         private SparseArray<FadeVolumeShaperConfigsWrapper> mUsageToFadeWrapperMap;
-        private static final IntArray DEFAULT_UNFADEABLE_PLAYER_TYPES = IntArray.wrap(new int[]{13, 3});
-        private static final IntArray DEFAULT_UNFADEABLE_CONTENT_TYPES = IntArray.wrap(new int[]{1});
-        private static final IntArray DEFAULT_FADEABLE_USAGES = IntArray.wrap(new int[]{14, 1});
+        private static final IntArray DEFAULT_UNFADEABLE_PLAYER_TYPES =
+                IntArray.wrap(new int[] {13, 3});
+        private static final IntArray DEFAULT_UNFADEABLE_CONTENT_TYPES =
+                IntArray.wrap(new int[] {1});
+        private static final IntArray DEFAULT_FADEABLE_USAGES = IntArray.wrap(new int[] {14, 1});
 
         public Builder() {
             this.mFadeState = 1;
@@ -419,58 +523,72 @@ public final class FadeManagerConfiguration implements Parcelable {
             return this;
         }
 
-        public Builder setFadeOutVolumeShaperConfigForUsage(int usage, VolumeShaper.Configuration fadeOutVShaperConfig) {
+        public Builder setFadeOutVolumeShaperConfigForUsage(
+                int usage, VolumeShaper.Configuration fadeOutVShaperConfig) {
             FadeManagerConfiguration.validateUsage(usage);
-            getFadeVolShaperConfigWrapperForUsage(usage).setFadeOutVolShaperConfig(fadeOutVShaperConfig);
+            getFadeVolShaperConfigWrapperForUsage(usage)
+                    .setFadeOutVolShaperConfig(fadeOutVShaperConfig);
             cleanupInactiveWrapperEntries(usage);
             return this;
         }
 
-        public Builder setFadeInVolumeShaperConfigForUsage(int usage, VolumeShaper.Configuration fadeInVShaperConfig) {
+        public Builder setFadeInVolumeShaperConfigForUsage(
+                int usage, VolumeShaper.Configuration fadeInVShaperConfig) {
             FadeManagerConfiguration.validateUsage(usage);
-            getFadeVolShaperConfigWrapperForUsage(usage).setFadeInVolShaperConfig(fadeInVShaperConfig);
+            getFadeVolShaperConfigWrapperForUsage(usage)
+                    .setFadeInVolShaperConfig(fadeInVShaperConfig);
             cleanupInactiveWrapperEntries(usage);
             return this;
         }
 
         public Builder setFadeOutDurationForUsage(int usage, long fadeOutDurationMillis) {
             FadeManagerConfiguration.validateUsage(usage);
-            VolumeShaper.Configuration fadeOutVShaperConfig = createVolShaperConfigForDuration(fadeOutDurationMillis, false);
+            VolumeShaper.Configuration fadeOutVShaperConfig =
+                    createVolShaperConfigForDuration(fadeOutDurationMillis, false);
             setFadeOutVolumeShaperConfigForUsage(usage, fadeOutVShaperConfig);
             return this;
         }
 
         public Builder setFadeInDurationForUsage(int usage, long fadeInDurationMillis) {
             FadeManagerConfiguration.validateUsage(usage);
-            VolumeShaper.Configuration fadeInVShaperConfig = createVolShaperConfigForDuration(fadeInDurationMillis, true);
+            VolumeShaper.Configuration fadeInVShaperConfig =
+                    createVolShaperConfigForDuration(fadeInDurationMillis, true);
             setFadeInVolumeShaperConfigForUsage(usage, fadeInVShaperConfig);
             return this;
         }
 
-        public Builder setFadeOutVolumeShaperConfigForAudioAttributes(AudioAttributes audioAttributes, VolumeShaper.Configuration fadeOutVShaperConfig) {
+        public Builder setFadeOutVolumeShaperConfigForAudioAttributes(
+                AudioAttributes audioAttributes, VolumeShaper.Configuration fadeOutVShaperConfig) {
             Objects.requireNonNull(audioAttributes, "Audio attribute cannot be null");
-            getFadeVolShaperConfigWrapperForAttr(audioAttributes).setFadeOutVolShaperConfig(fadeOutVShaperConfig);
+            getFadeVolShaperConfigWrapperForAttr(audioAttributes)
+                    .setFadeOutVolShaperConfig(fadeOutVShaperConfig);
             cleanupInactiveWrapperEntries(audioAttributes);
             return this;
         }
 
-        public Builder setFadeInVolumeShaperConfigForAudioAttributes(AudioAttributes audioAttributes, VolumeShaper.Configuration fadeInVShaperConfig) {
+        public Builder setFadeInVolumeShaperConfigForAudioAttributes(
+                AudioAttributes audioAttributes, VolumeShaper.Configuration fadeInVShaperConfig) {
             Objects.requireNonNull(audioAttributes, "Audio attribute cannot be null");
-            getFadeVolShaperConfigWrapperForAttr(audioAttributes).setFadeInVolShaperConfig(fadeInVShaperConfig);
+            getFadeVolShaperConfigWrapperForAttr(audioAttributes)
+                    .setFadeInVolShaperConfig(fadeInVShaperConfig);
             cleanupInactiveWrapperEntries(audioAttributes);
             return this;
         }
 
-        public Builder setFadeOutDurationForAudioAttributes(AudioAttributes audioAttributes, long fadeOutDurationMillis) {
+        public Builder setFadeOutDurationForAudioAttributes(
+                AudioAttributes audioAttributes, long fadeOutDurationMillis) {
             Objects.requireNonNull(audioAttributes, "Audio attribute cannot be null");
-            VolumeShaper.Configuration fadeOutVShaperConfig = createVolShaperConfigForDuration(fadeOutDurationMillis, false);
+            VolumeShaper.Configuration fadeOutVShaperConfig =
+                    createVolShaperConfigForDuration(fadeOutDurationMillis, false);
             setFadeOutVolumeShaperConfigForAudioAttributes(audioAttributes, fadeOutVShaperConfig);
             return this;
         }
 
-        public Builder setFadeInDurationForAudioAttributes(AudioAttributes audioAttributes, long fadeInDurationMillis) {
+        public Builder setFadeInDurationForAudioAttributes(
+                AudioAttributes audioAttributes, long fadeInDurationMillis) {
             Objects.requireNonNull(audioAttributes, "Audio attribute cannot be null");
-            VolumeShaper.Configuration fadeInVShaperConfig = createVolShaperConfigForDuration(fadeInDurationMillis, true);
+            VolumeShaper.Configuration fadeInVShaperConfig =
+                    createVolShaperConfigForDuration(fadeInDurationMillis, true);
             setFadeInVolumeShaperConfigForAudioAttributes(audioAttributes, fadeInVShaperConfig);
             return this;
         }
@@ -480,7 +598,8 @@ public final class FadeManagerConfiguration implements Parcelable {
             validateUsages(usages);
             setFlag(2L);
             this.mFadeableUsages.clear();
-            this.mFadeableUsages.addAll(FadeManagerConfiguration.convertIntegerListToIntArray(usages));
+            this.mFadeableUsages.addAll(
+                    FadeManagerConfiguration.convertIntegerListToIntArray(usages));
             return this;
         }
 
@@ -504,7 +623,8 @@ public final class FadeManagerConfiguration implements Parcelable {
             validateContentTypes(contentTypes);
             setFlag(4L);
             this.mUnfadeableContentTypes.clear();
-            this.mUnfadeableContentTypes.addAll(FadeManagerConfiguration.convertIntegerListToIntArray(contentTypes));
+            this.mUnfadeableContentTypes.addAll(
+                    FadeManagerConfiguration.convertIntegerListToIntArray(contentTypes));
             return this;
         }
 
@@ -526,7 +646,8 @@ public final class FadeManagerConfiguration implements Parcelable {
         public Builder setUnfadeableUids(List<Integer> uids) {
             Objects.requireNonNull(uids, "List of uids cannot be null");
             this.mUnfadeableUids.clear();
-            this.mUnfadeableUids.addAll(FadeManagerConfiguration.convertIntegerListToIntArray(uids));
+            this.mUnfadeableUids.addAll(
+                    FadeManagerConfiguration.convertIntegerListToIntArray(uids));
             return this;
         }
 
@@ -570,7 +691,8 @@ public final class FadeManagerConfiguration implements Parcelable {
 
         public FadeManagerConfiguration build() {
             if (!checkNotSet(1L)) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
             setFlag(1L);
             if (checkNotSet(2L)) {
@@ -581,7 +703,18 @@ public final class FadeManagerConfiguration implements Parcelable {
                 this.mUnfadeableContentTypes = DEFAULT_UNFADEABLE_CONTENT_TYPES;
             }
             validateFadeConfigurations();
-            return new FadeManagerConfiguration(this.mFadeState, this.mFadeOutDurationMillis, this.mFadeInDurationMillis, this.mFadeInDelayForOffendersMillis, this.mUsageToFadeWrapperMap, this.mAttrToFadeWrapperMap, this.mFadeableUsages, this.mUnfadeableContentTypes, this.mUnfadeablePlayerTypes, this.mUnfadeableUids, this.mUnfadeableAudioAttributes);
+            return new FadeManagerConfiguration(
+                    this.mFadeState,
+                    this.mFadeOutDurationMillis,
+                    this.mFadeInDurationMillis,
+                    this.mFadeInDelayForOffendersMillis,
+                    this.mUsageToFadeWrapperMap,
+                    this.mAttrToFadeWrapperMap,
+                    this.mFadeableUsages,
+                    this.mUnfadeableContentTypes,
+                    this.mUnfadeablePlayerTypes,
+                    this.mUnfadeableUids,
+                    this.mUnfadeableAudioAttributes);
         }
 
         private void setFlag(long flag) {
@@ -599,22 +732,28 @@ public final class FadeManagerConfiguration implements Parcelable {
             return this.mUsageToFadeWrapperMap.get(usage);
         }
 
-        private FadeVolumeShaperConfigsWrapper getFadeVolShaperConfigWrapperForAttr(AudioAttributes attr) {
+        private FadeVolumeShaperConfigsWrapper getFadeVolShaperConfigWrapperForAttr(
+                AudioAttributes attr) {
             if (!this.mAttrToFadeWrapperMap.containsKey(attr)) {
                 this.mAttrToFadeWrapperMap.put(attr, new FadeVolumeShaperConfigsWrapper());
             }
             return this.mAttrToFadeWrapperMap.get(attr);
         }
 
-        private VolumeShaper.Configuration createVolShaperConfigForDuration(long duration, boolean isFadeIn) {
+        private VolumeShaper.Configuration createVolShaperConfigForDuration(
+                long duration, boolean isFadeIn) {
             if (duration == 0) {
                 return null;
             }
-            VolumeShaper.Configuration.Builder builder = new VolumeShaper.Configuration.Builder().setId(2).setOptionFlags(2).setDuration(duration);
+            VolumeShaper.Configuration.Builder builder =
+                    new VolumeShaper.Configuration.Builder()
+                            .setId(2)
+                            .setOptionFlags(2)
+                            .setDuration(duration);
             if (isFadeIn) {
-                builder.setCurve(new float[]{0.0f, 0.5f, 1.0f}, new float[]{0.0f, 0.3f, 1.0f});
+                builder.setCurve(new float[] {0.0f, 0.5f, 1.0f}, new float[] {0.0f, 0.3f, 1.0f});
             } else {
-                builder.setCurve(new float[]{0.0f, 0.25f, 1.0f}, new float[]{1.0f, 0.65f, 0.0f});
+                builder.setCurve(new float[] {0.0f, 0.25f, 1.0f}, new float[] {1.0f, 0.65f, 0.0f});
             }
             return builder.build();
         }
@@ -635,22 +774,28 @@ public final class FadeManagerConfiguration implements Parcelable {
 
         private void setVolShaperConfigsForUsages(IntArray usages) {
             for (int index = 0; index < usages.size(); index++) {
-                setMissingVolShaperConfigsForWrapper(getFadeVolShaperConfigWrapperForUsage(usages.get(index)));
+                setMissingVolShaperConfigsForWrapper(
+                        getFadeVolShaperConfigWrapperForUsage(usages.get(index)));
             }
         }
 
         private void setMissingVolShaperConfigsForWrapper(FadeVolumeShaperConfigsWrapper wrapper) {
             if (!wrapper.isFadeOutConfigActive()) {
-                wrapper.setFadeOutVolShaperConfig(createVolShaperConfigForDuration(this.mFadeOutDurationMillis, false));
+                wrapper.setFadeOutVolShaperConfig(
+                        createVolShaperConfigForDuration(this.mFadeOutDurationMillis, false));
             }
             if (!wrapper.isFadeInConfigActive()) {
-                wrapper.setFadeInVolShaperConfig(createVolShaperConfigForDuration(this.mFadeInDurationMillis, true));
+                wrapper.setFadeInVolShaperConfig(
+                        createVolShaperConfigForDuration(this.mFadeInDurationMillis, true));
             }
         }
 
-        private void copyUsageToFadeWrapperMapInternal(SparseArray<FadeVolumeShaperConfigsWrapper> usageToFadeWrapperMap) {
+        private void copyUsageToFadeWrapperMapInternal(
+                SparseArray<FadeVolumeShaperConfigsWrapper> usageToFadeWrapperMap) {
             for (int index = 0; index < usageToFadeWrapperMap.size(); index++) {
-                this.mUsageToFadeWrapperMap.put(usageToFadeWrapperMap.keyAt(index), new FadeVolumeShaperConfigsWrapper(usageToFadeWrapperMap.valueAt(index)));
+                this.mUsageToFadeWrapperMap.put(
+                        usageToFadeWrapperMap.keyAt(index),
+                        new FadeVolumeShaperConfigsWrapper(usageToFadeWrapperMap.valueAt(index)));
             }
         }
 
@@ -677,7 +822,10 @@ public final class FadeManagerConfiguration implements Parcelable {
         }
 
         private void validateContentType(int contentType) {
-            Preconditions.checkArgument(AudioAttributes.isSdkContentType(contentType), "Invalid content type: ", Integer.valueOf(contentType));
+            Preconditions.checkArgument(
+                    AudioAttributes.isSdkContentType(contentType),
+                    "Invalid content type: ",
+                    Integer.valueOf(contentType));
         }
 
         private void validateFadeConfigurations() {
@@ -687,18 +835,25 @@ public final class FadeManagerConfiguration implements Parcelable {
         }
 
         private void validateFadeableUsages() {
-            Preconditions.checkArgumentPositive(this.mFadeableUsages.size(), "Fadeable usage list cannot be empty when state set to enabled");
+            Preconditions.checkArgumentPositive(
+                    this.mFadeableUsages.size(),
+                    "Fadeable usage list cannot be empty when state set to enabled");
             for (int index = 0; index < this.mFadeableUsages.size(); index++) {
-                setMissingVolShaperConfigsForWrapper(getFadeVolShaperConfigWrapperForUsage(this.mFadeableUsages.get(index)));
+                setMissingVolShaperConfigsForWrapper(
+                        getFadeVolShaperConfigWrapperForUsage(this.mFadeableUsages.get(index)));
             }
         }
 
         private void validateFadeVolumeShaperConfigsWrappers() {
             for (int index = 0; index < this.mUsageToFadeWrapperMap.size(); index++) {
-                setMissingVolShaperConfigsForWrapper(getFadeVolShaperConfigWrapperForUsage(this.mUsageToFadeWrapperMap.keyAt(index)));
+                setMissingVolShaperConfigsForWrapper(
+                        getFadeVolShaperConfigWrapperForUsage(
+                                this.mUsageToFadeWrapperMap.keyAt(index)));
             }
             for (int index2 = 0; index2 < this.mAttrToFadeWrapperMap.size(); index2++) {
-                setMissingVolShaperConfigsForWrapper(getFadeVolShaperConfigWrapperForAttr(this.mAttrToFadeWrapperMap.keyAt(index2)));
+                setMissingVolShaperConfigsForWrapper(
+                        getFadeVolShaperConfigWrapperForAttr(
+                                this.mAttrToFadeWrapperMap.keyAt(index2)));
             }
         }
 
@@ -707,34 +862,40 @@ public final class FadeManagerConfiguration implements Parcelable {
                 AudioAttributes targetAttr = this.mUnfadeableAudioAttributes.get(index);
                 int usage = targetAttr.getSystemUsage();
                 boolean isFadeableUsage = this.mFadeableUsages.contains(usage);
-                Preconditions.checkArgument(!isFadeableUsage || (isFadeableUsage && !isGeneric(targetAttr)), "Unfadeable audio attributes cannot be generic of the fadeable usage");
+                Preconditions.checkArgument(
+                        !isFadeableUsage || (isFadeableUsage && !isGeneric(targetAttr)),
+                        "Unfadeable audio attributes cannot be generic of the fadeable usage");
             }
         }
 
         private static boolean isGeneric(AudioAttributes attr) {
-            return attr.getContentType() == 0 && attr.getFlags() == 0 && attr.getBundle() == null && attr.getTags().isEmpty();
+            return attr.getContentType() == 0
+                    && attr.getFlags() == 0
+                    && attr.getBundle() == null
+                    && attr.getTags().isEmpty();
         }
     }
 
     private static final class FadeVolumeShaperConfigsWrapper implements Parcelable {
-        public static final Parcelable.Creator<FadeVolumeShaperConfigsWrapper> CREATOR = new Parcelable.Creator<FadeVolumeShaperConfigsWrapper>() { // from class: android.media.FadeManagerConfiguration.FadeVolumeShaperConfigsWrapper.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FadeVolumeShaperConfigsWrapper createFromParcel(Parcel in) {
-                return new FadeVolumeShaperConfigsWrapper(in);
-            }
+        public static final Parcelable.Creator<FadeVolumeShaperConfigsWrapper> CREATOR =
+                new Parcelable.Creator<FadeVolumeShaperConfigsWrapper>() { // from class:
+                    // android.media.FadeManagerConfiguration.FadeVolumeShaperConfigsWrapper.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FadeVolumeShaperConfigsWrapper createFromParcel(Parcel in) {
+                        return new FadeVolumeShaperConfigsWrapper(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FadeVolumeShaperConfigsWrapper[] newArray(int size) {
-                return new FadeVolumeShaperConfigsWrapper[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FadeVolumeShaperConfigsWrapper[] newArray(int size) {
+                        return new FadeVolumeShaperConfigsWrapper[size];
+                    }
+                };
         private VolumeShaper.Configuration mFadeInVolShaperConfig;
         private VolumeShaper.Configuration mFadeOutVolShaperConfig;
 
-        FadeVolumeShaperConfigsWrapper() {
-        }
+        FadeVolumeShaperConfigsWrapper() {}
 
         FadeVolumeShaperConfigsWrapper(FadeVolumeShaperConfigsWrapper wrapper) {
             Objects.requireNonNull(wrapper, "Fade volume shaper configs wrapper cannot be null");
@@ -779,7 +940,10 @@ public final class FadeManagerConfiguration implements Parcelable {
                 return false;
             }
             FadeVolumeShaperConfigsWrapper rhs = (FadeVolumeShaperConfigsWrapper) o;
-            if (this.mFadeInVolShaperConfig == null && rhs.mFadeInVolShaperConfig == null && this.mFadeOutVolShaperConfig == null && rhs.mFadeOutVolShaperConfig == null) {
+            if (this.mFadeInVolShaperConfig == null
+                    && rhs.mFadeInVolShaperConfig == null
+                    && this.mFadeOutVolShaperConfig == null
+                    && rhs.mFadeOutVolShaperConfig == null) {
                 return true;
             }
             if (this.mFadeOutVolShaperConfig != null) {
@@ -791,7 +955,8 @@ public final class FadeManagerConfiguration implements Parcelable {
                 isEqual = true;
             }
             if (this.mFadeInVolShaperConfig != null) {
-                boolean isEqual2 = isEqual && this.mFadeInVolShaperConfig.equals(rhs.mFadeInVolShaperConfig);
+                boolean isEqual2 =
+                        isEqual && this.mFadeInVolShaperConfig.equals(rhs.mFadeInVolShaperConfig);
                 return isEqual2;
             }
             if (rhs.mFadeInVolShaperConfig != null) {

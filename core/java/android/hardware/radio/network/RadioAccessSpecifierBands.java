@@ -6,19 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class RadioAccessSpecifierBands implements Parcelable {
-    public static final Parcelable.Creator<RadioAccessSpecifierBands> CREATOR = new Parcelable.Creator<RadioAccessSpecifierBands>() { // from class: android.hardware.radio.network.RadioAccessSpecifierBands.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioAccessSpecifierBands createFromParcel(Parcel _aidl_source) {
-            return new RadioAccessSpecifierBands(_aidl_source);
-        }
+    public static final Parcelable.Creator<RadioAccessSpecifierBands> CREATOR =
+            new Parcelable.Creator<RadioAccessSpecifierBands>() { // from class:
+                // android.hardware.radio.network.RadioAccessSpecifierBands.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioAccessSpecifierBands createFromParcel(Parcel _aidl_source) {
+                    return new RadioAccessSpecifierBands(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioAccessSpecifierBands[] newArray(int _aidl_size) {
-            return new RadioAccessSpecifierBands[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioAccessSpecifierBands[] newArray(int _aidl_size) {
+                    return new RadioAccessSpecifierBands[_aidl_size];
+                }
+            };
     public static final int eutranBands = 3;
     public static final int geranBands = 1;
     public static final int ngranBands = 4;
@@ -182,15 +184,25 @@ public final class RadioAccessSpecifierBands implements Parcelable {
     public String toString() {
         switch (this._tag) {
             case 0:
-                return "RadioAccessSpecifierBands.noinit(" + getNoinit() + NavigationBarInflaterView.KEY_CODE_END;
+                return "RadioAccessSpecifierBands.noinit("
+                        + getNoinit()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "RadioAccessSpecifierBands.geranBands(" + GeranBands$$.arrayToString(getGeranBands()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "RadioAccessSpecifierBands.geranBands("
+                        + GeranBands$$.arrayToString(getGeranBands())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 2:
-                return "RadioAccessSpecifierBands.utranBands(" + UtranBands$$.arrayToString(getUtranBands()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "RadioAccessSpecifierBands.utranBands("
+                        + UtranBands$$.arrayToString(getUtranBands())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 3:
-                return "RadioAccessSpecifierBands.eutranBands(" + EutranBands$$.arrayToString(getEutranBands()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "RadioAccessSpecifierBands.eutranBands("
+                        + EutranBands$$.arrayToString(getEutranBands())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 4:
-                return "RadioAccessSpecifierBands.ngranBands(" + NgranBands$$.arrayToString(getNgranBands()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "RadioAccessSpecifierBands.ngranBands("
+                        + NgranBands$$.arrayToString(getNgranBands())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -198,7 +210,12 @@ public final class RadioAccessSpecifierBands implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

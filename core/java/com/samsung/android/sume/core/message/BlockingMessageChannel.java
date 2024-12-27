@@ -45,8 +45,7 @@ public class BlockingMessageChannel implements MessageChannel {
     }
 
     @Override // com.samsung.android.sume.core.channel.Channel
-    public void close() {
-    }
+    public void close() {}
 
     @Override // com.samsung.android.sume.core.channel.Channel
     public void cancel() {

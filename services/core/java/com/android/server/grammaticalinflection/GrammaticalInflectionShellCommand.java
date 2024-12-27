@@ -8,8 +8,10 @@ import android.os.RemoteException;
 import android.os.ShellCommand;
 import android.os.UserHandle;
 import android.util.SparseArray;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,7 +30,9 @@ public final class GrammaticalInflectionShellCommand extends ShellCommand {
         sparseArray.put(3, "Masculine (3)");
     }
 
-    public GrammaticalInflectionShellCommand(IGrammaticalInflectionManager iGrammaticalInflectionManager, AttributionSource attributionSource) {
+    public GrammaticalInflectionShellCommand(
+            IGrammaticalInflectionManager iGrammaticalInflectionManager,
+            AttributionSource attributionSource) {
         this.mBinderService = iGrammaticalInflectionManager;
         this.mAttributionSource = attributionSource;
     }
@@ -47,7 +51,8 @@ public final class GrammaticalInflectionShellCommand extends ShellCommand {
                         try {
                             this.mBinderService.setSystemWideGrammaticalGender(i, currentUser);
                         } catch (RemoteException e) {
-                            UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote Exception: ", e, getOutPrintWriter());
+                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                    "Remote Exception: ", e, getOutPrintWriter());
                         }
                         return 0;
                     }
@@ -57,7 +62,8 @@ public final class GrammaticalInflectionShellCommand extends ShellCommand {
                             String nextArg = getNextArg();
                             if (nextArg != null) {
                                 i = Integer.parseInt(nextArg);
-                                if (GrammaticalInflectionManager.VALID_GRAMMATICAL_GENDER_VALUES.contains(Integer.valueOf(i))) {
+                                if (GrammaticalInflectionManager.VALID_GRAMMATICAL_GENDER_VALUES
+                                        .contains(Integer.valueOf(i))) {
                                     break;
                                 }
                             } else {
@@ -68,7 +74,8 @@ public final class GrammaticalInflectionShellCommand extends ShellCommand {
                             currentUser = UserHandle.parseUserArg(getNextArgRequired());
                             break;
                         default:
-                            throw new IllegalArgumentException("Unknown option: ".concat(nextOption));
+                            throw new IllegalArgumentException(
+                                    "Unknown option: ".concat(nextOption));
                     }
                 }
             }
@@ -81,9 +88,17 @@ public final class GrammaticalInflectionShellCommand extends ShellCommand {
                 String nextOption2 = getNextOption();
                 if (nextOption2 == null) {
                     try {
-                        getOutPrintWriter().println((String) GRAMMATICAL_GENDER_MAP.get(this.mBinderService.getSystemGrammaticalGender(this.mAttributionSource, currentUser2)));
+                        getOutPrintWriter()
+                                .println(
+                                        (String)
+                                                GRAMMATICAL_GENDER_MAP.get(
+                                                        this.mBinderService
+                                                                .getSystemGrammaticalGender(
+                                                                        this.mAttributionSource,
+                                                                        currentUser2)));
                     } catch (RemoteException e2) {
-                        UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote Exception: ", e2, getOutPrintWriter());
+                        UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                "Remote Exception: ", e2, getOutPrintWriter());
                     }
                     return 0;
                 }
@@ -97,11 +112,26 @@ public final class GrammaticalInflectionShellCommand extends ShellCommand {
 
     public final void onHelp() {
         PrintWriter outPrintWriter = getOutPrintWriter();
-        outPrintWriter.println("Grammatical inflection manager (grammatical_inflection) shell commands:");
+        outPrintWriter.println(
+                "Grammatical inflection manager (grammatical_inflection) shell commands:");
         outPrintWriter.println("  help");
         outPrintWriter.println("      Print this help text.");
-        outPrintWriter.println("  set-system-grammatical-gender [--user <USER_ID>] [--grammaticalGender <GRAMMATICAL_GENDER>]");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      Set the system grammatical gender for system.", "      --user <USER_ID>: apply for the given user, the current user is used when unspecified.", "      --grammaticalGender <GRAMMATICAL_GENDER>: The terms of address the user preferred in system, not specified (0) is used when unspecified.", "                 eg. 0 = not_specified, 1 = neuter, 2 = feminine, 3 = masculine.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  get-system-grammatical-gender [--user <USER_ID>]", "      Get the system grammatical gender for system.", "      --user <USER_ID>: apply for the given user, the current user is used when unspecified.");
+        outPrintWriter.println(
+                "  set-system-grammatical-gender [--user <USER_ID>] [--grammaticalGender"
+                    + " <GRAMMATICAL_GENDER>]");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      Set the system grammatical gender for system.",
+                "      --user <USER_ID>: apply for the given user, the current user is used when"
+                    + " unspecified.",
+                "      --grammaticalGender <GRAMMATICAL_GENDER>: The terms of address the user"
+                    + " preferred in system, not specified (0) is used when unspecified.",
+                "                 eg. 0 = not_specified, 1 = neuter, 2 = feminine, 3 = masculine.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  get-system-grammatical-gender [--user <USER_ID>]",
+                "      Get the system grammatical gender for system.",
+                "      --user <USER_ID>: apply for the given user, the current user is used when"
+                    + " unspecified.");
     }
 }

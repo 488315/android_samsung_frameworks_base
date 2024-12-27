@@ -14,8 +14,7 @@ public interface IDisplayFoldListener extends IInterface {
 
     public static class Default implements IDisplayFoldListener {
         @Override // android.view.IDisplayFoldListener
-        public void onDisplayFoldChanged(int displayId, boolean folded) throws RemoteException {
-        }
+        public void onDisplayFoldChanged(int displayId, boolean folded) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IDisplayFoldListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDisplayFoldListener {
+    public abstract static class Stub extends Binder implements IDisplayFoldListener {
         static final int TRANSACTION_onDisplayFoldChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IDisplayFoldListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDisplayFoldListener.DESCRIPTOR);
             }

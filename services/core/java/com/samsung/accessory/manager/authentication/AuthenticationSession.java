@@ -8,9 +8,11 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.FlashNotificationsController$$ExternalSyntheticOutline0;
+
 import com.att.iqi.lib.metrics.hw.HwConstants;
 import com.samsung.accessory.manager.SAccessoryManager;
 import com.samsung.accessory.manager.authentication.msg.MsgHelper;
@@ -20,6 +22,7 @@ import com.samsung.accessory.manager.connectivity.Connectivity;
 import com.samsung.accessory.manager.connectivity.NfcConnectivity;
 import com.samsung.accessory.manager.connectivity.UsbConnectivity;
 import com.samsung.accessory.manager.connectivity.WirelessChargerConnectivity;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -49,8 +52,7 @@ public final class AuthenticationSession extends Thread {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.accessory.manager.authentication.AuthenticationSession$1, reason: invalid class name */
     public final class AnonymousClass1 {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         public final void onConnectionStateChanged() {
             AuthenticationSession.this.mSessionHandler.sendEmptyMessage(8);
@@ -97,20 +99,26 @@ public final class AuthenticationSession extends Thread {
                             if (authenticator.mConnectivity == null) {
                                 int i3 = authenticator.mType;
                                 if (i3 == 1) {
-                                    NfcConnectivity nfcConnectivity = new NfcConnectivity(authenticator.mContext);
+                                    NfcConnectivity nfcConnectivity =
+                                            new NfcConnectivity(authenticator.mContext);
                                     nfcConnectivity.mEnableRequest = new AtomicBoolean(false);
                                     authenticator.mConnectivity = nfcConnectivity;
                                 } else if (i3 == 2) {
-                                    authenticator.mConnectivity = new BTConnectivity(authenticator.mContext);
+                                    authenticator.mConnectivity =
+                                            new BTConnectivity(authenticator.mContext);
                                 } else if (i3 == 3) {
-                                    UsbConnectivity usbConnectivity = new UsbConnectivity(authenticator.mContext);
+                                    UsbConnectivity usbConnectivity =
+                                            new UsbConnectivity(authenticator.mContext);
                                     usbConnectivity.mMsgHelper = new MsgHelper();
                                     authenticator.mConnectivity = usbConnectivity;
                                 } else if (i3 == 4) {
-                                    authenticator.mConnectivity = new WirelessChargerConnectivity(authenticator.mContext);
+                                    authenticator.mConnectivity =
+                                            new WirelessChargerConnectivity(authenticator.mContext);
                                 }
                             }
-                            authenticationSession2.mAuthenticator.mConnectivity.setStateChangedCallback(authenticationSession2.mConnectivityStateCallback);
+                            authenticationSession2.mAuthenticator.mConnectivity
+                                    .setStateChangedCallback(
+                                            authenticationSession2.mConnectivityStateCallback);
                             authenticationSession2.mAuthenticator.setSessionState(2);
                             if (!authenticationSession2.mAuthenticator.mConnectivity.isEnabled()) {
                                 if (!authenticationSession2.mAuthenticator.mConnectivity.enable()) {
@@ -140,11 +148,13 @@ public final class AuthenticationSession extends Thread {
                 case 3:
                     if (!AuthenticationSession.this.mTeardownRequested.get()) {
                         if (AuthenticationSession.this.mConnectAfterEnable.get()) {
-                            AuthenticationSession authenticationSession3 = AuthenticationSession.this;
+                            AuthenticationSession authenticationSession3 =
+                                    AuthenticationSession.this;
                             authenticationSession3.getClass();
                             Log.i("SAccessoryManager_AuthenticationSession", "connect");
                             Authenticator authenticator2 = authenticationSession3.mAuthenticator;
-                            if (authenticator2 != null && (connectivity = authenticator2.mConnectivity) != null) {
+                            if (authenticator2 != null
+                                    && (connectivity = authenticator2.mConnectivity) != null) {
                                 connectivity.connect();
                             }
                             AuthenticationSession.this.mConnectAfterEnable.set(false);
@@ -152,9 +162,14 @@ public final class AuthenticationSession extends Thread {
                         }
                     } else {
                         Authenticator authenticator3 = AuthenticationSession.this.mAuthenticator;
-                        if (authenticator3 != null && (connectivity2 = authenticator3.mConnectivity) != null && connectivity2.isEnabledInternally() && !AuthenticationSession.this.mAuthenticator.mConnectivity.disable()) {
+                        if (authenticator3 != null
+                                && (connectivity2 = authenticator3.mConnectivity) != null
+                                && connectivity2.isEnabledInternally()
+                                && !AuthenticationSession.this.mAuthenticator.mConnectivity
+                                        .disable()) {
                             AuthenticationSession.this.replayAuthfail(12);
-                            AuthenticationSession.m1131$$Nest$mhandleTearDown(AuthenticationSession.this);
+                            AuthenticationSession.m1131$$Nest$mhandleTearDown(
+                                    AuthenticationSession.this);
                             break;
                         } else {
                             AuthenticationSession.this.mInternalState = 3;
@@ -164,7 +179,9 @@ public final class AuthenticationSession extends Thread {
                     break;
                 case 4:
                     if (!AuthenticationSession.this.mTeardownRequested.get()) {
-                        Log.i("SAccessoryManager_AuthenticationSession", "Connectivity is disabled by user");
+                        Log.i(
+                                "SAccessoryManager_AuthenticationSession",
+                                "Connectivity is disabled by user");
                         break;
                     } else {
                         AuthenticationSession.this.mTeardownRequested.set(false);
@@ -173,7 +190,9 @@ public final class AuthenticationSession extends Thread {
                     }
                 case 5:
                     if (AuthenticationSession.this.getSessionState() == 3) {
-                        Log.i("SAccessoryManager_AuthenticationSession", "Connectivity is turned off while authentication is running!");
+                        Log.i(
+                                "SAccessoryManager_AuthenticationSession",
+                                "Connectivity is turned off while authentication is running!");
                         AuthenticationSession.this.mTurnedOffWhileRunning = true;
                         break;
                     }
@@ -183,19 +202,22 @@ public final class AuthenticationSession extends Thread {
                     authenticationSession4.getClass();
                     Log.i("SAccessoryManager_AuthenticationSession", "connect");
                     Authenticator authenticator4 = authenticationSession4.mAuthenticator;
-                    if (authenticator4 != null && (connectivity3 = authenticator4.mConnectivity) != null) {
+                    if (authenticator4 != null
+                            && (connectivity3 = authenticator4.mConnectivity) != null) {
                         connectivity3.connect();
                         break;
                     }
                     break;
                 case 8:
                     AuthenticationSession authenticationSession5 = AuthenticationSession.this;
-                    SAccessoryManager.AnonymousClass1 anonymousClass1 = authenticationSession5.mSessionEventListener;
+                    SAccessoryManager.AnonymousClass1 anonymousClass1 =
+                            authenticationSession5.mSessionEventListener;
                     if (anonymousClass1 != null) {
                         anonymousClass1.onSessionEvent(2, authenticationSession5);
                     }
                     AuthenticationSession.this.mTurnedOffWhileRunning = false;
-                    AuthenticationSession.this.mSessionThread = new Thread(AuthenticationSession.this);
+                    AuthenticationSession.this.mSessionThread =
+                            new Thread(AuthenticationSession.this);
                     AuthenticationSession.this.mSessionThread.start();
                     Authenticator authenticator5 = AuthenticationSession.this.mAuthenticator;
                     if (authenticator5 != null) {
@@ -209,29 +231,40 @@ public final class AuthenticationSession extends Thread {
                     Log.i("SAccessoryManager_AuthenticationSession", "handleStartSession");
                     if (authenticationSession6.getSessionState() == 1) {
                         authenticationSession6.setState(2);
-                        SAccessoryManager.AnonymousClass1 anonymousClass12 = authenticationSession6.mSessionEventListener;
+                        SAccessoryManager.AnonymousClass1 anonymousClass12 =
+                                authenticationSession6.mSessionEventListener;
                         if (anonymousClass12 != null) {
                             anonymousClass12.onSessionEvent(1, authenticationSession6);
                         }
                         if (authenticationSession6.mAuthenticator == null) {
                             try {
-                                authenticationSession6.mAuthenticator = new AuthenticatorClientImpl(authenticationSession6.mContext, authenticationSession6.mResult.mConnectivityType);
+                                authenticationSession6.mAuthenticator =
+                                        new AuthenticatorClientImpl(
+                                                authenticationSession6.mContext,
+                                                authenticationSession6.mResult.mConnectivityType);
                             } catch (IllegalArgumentException e) {
                                 e.printStackTrace();
                             }
                         } else {
-                            Log.i("SAccessoryManager_AuthenticationSession", "authenticator is not null, so initialize interrupt parameter");
-                            ((AuthenticatorClientImpl) authenticationSession6.mAuthenticator).isInterrupted = false;
+                            Log.i(
+                                    "SAccessoryManager_AuthenticationSession",
+                                    "authenticator is not null, so initialize interrupt parameter");
+                            ((AuthenticatorClientImpl) authenticationSession6.mAuthenticator)
+                                            .isInterrupted =
+                                    false;
                         }
                         authenticationSession6.mSessionHandler.sendEmptyMessage(1);
                         break;
                     } else {
-                        Log.e("SAccessoryManager_AuthenticationSession", "can't start session, state = " + authenticationSession6.mState);
+                        Log.e(
+                                "SAccessoryManager_AuthenticationSession",
+                                "can't start session, state = " + authenticationSession6.mState);
                         authenticationSession6.replayAuthfail(30);
                         break;
                     }
                 case 12:
-                    AuthenticationSession.m1130$$Nest$mhandleStopSession(AuthenticationSession.this, false);
+                    AuthenticationSession.m1130$$Nest$mhandleStopSession(
+                            AuthenticationSession.this, false);
                     break;
                 case 13:
                     AuthenticationSession.m1131$$Nest$mhandleTearDown(AuthenticationSession.this);
@@ -239,19 +272,23 @@ public final class AuthenticationSession extends Thread {
                 case 14:
                     Log.e("SAccessoryManager_AuthenticationSession", "session is timed out!");
                     AuthenticationSession.this.replayAuthfail(31);
-                    AuthenticationSession.m1130$$Nest$mhandleStopSession(AuthenticationSession.this, true);
+                    AuthenticationSession.m1130$$Nest$mhandleStopSession(
+                            AuthenticationSession.this, true);
                     break;
             }
         }
     }
 
     /* renamed from: -$$Nest$mhandleStopSession, reason: not valid java name */
-    public static void m1130$$Nest$mhandleStopSession(AuthenticationSession authenticationSession, boolean z) {
+    public static void m1130$$Nest$mhandleStopSession(
+            AuthenticationSession authenticationSession, boolean z) {
         Connectivity connectivity;
         authenticationSession.getClass();
         Log.i("SAccessoryManager_AuthenticationSession", "handleStopSession, force? = " + z);
         if (authenticationSession.mSessionThread != null) {
-            Log.i("SAccessoryManager_AuthenticationSession", "waiting for session thread to terminate");
+            Log.i(
+                    "SAccessoryManager_AuthenticationSession",
+                    "waiting for session thread to terminate");
             try {
                 Authenticator authenticator = authenticationSession.mAuthenticator;
                 if (authenticator != null) {
@@ -259,7 +296,9 @@ public final class AuthenticationSession extends Thread {
                 }
                 authenticationSession.mSessionThread.join(3000L);
                 if (authenticationSession.mSessionThread.isAlive()) {
-                    Log.e("SAccessoryManager_AuthenticationSession", "Thread is still running.. force stop session!");
+                    Log.e(
+                            "SAccessoryManager_AuthenticationSession",
+                            "Thread is still running.. force stop session!");
                     z = true;
                 }
                 authenticationSession.mSessionThread = null;
@@ -282,15 +321,21 @@ public final class AuthenticationSession extends Thread {
         }
         authenticationSession.setState(4);
         Authenticator authenticator3 = authenticationSession.mAuthenticator;
-        if (authenticator3 != null && (connectivity = authenticator3.mConnectivity) != null && connectivity.isEnabledInternally()) {
-            if (authenticationSession.mAuthenticator.mConnectivity.isEnabled() && authenticationSession.mAuthenticator.mConnectivity.disable()) {
+        if (authenticator3 != null
+                && (connectivity = authenticator3.mConnectivity) != null
+                && connectivity.isEnabledInternally()) {
+            if (authenticationSession.mAuthenticator.mConnectivity.isEnabled()
+                    && authenticationSession.mAuthenticator.mConnectivity.disable()) {
                 authenticationSession.mTeardownRequested.set(true);
                 if (!z) {
-                    Log.i("SAccessoryManager_AuthenticationSession", "waiting for connectivity off");
+                    Log.i(
+                            "SAccessoryManager_AuthenticationSession",
+                            "waiting for connectivity off");
                     authenticationSession.mInternalState = 2;
                     return;
                 }
-            } else if (!authenticationSession.mTurnedOffWhileRunning && authenticationSession.mConnectAfterEnable.get()) {
+            } else if (!authenticationSession.mTurnedOffWhileRunning
+                    && authenticationSession.mConnectAfterEnable.get()) {
                 Log.i("SAccessoryManager_AuthenticationSession", "waiting for connectivity on");
                 if (!z) {
                     authenticationSession.mInternalState = 4;
@@ -331,7 +376,8 @@ public final class AuthenticationSession extends Thread {
             authenticationSession.mHandlerThread = null;
         }
         authenticationSession.setState(5);
-        SAccessoryManager.AnonymousClass1 anonymousClass1 = authenticationSession.mSessionEventListener;
+        SAccessoryManager.AnonymousClass1 anonymousClass1 =
+                authenticationSession.mSessionEventListener;
         if (anonymousClass1 != null) {
             anonymousClass1.onSessionEvent(4, authenticationSession);
         }
@@ -380,12 +426,20 @@ public final class AuthenticationSession extends Thread {
         }
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         Connectivity connectivity;
-        StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, " Current AuthenticationSession state:", "  state = ");
+        StringBuilder m$1 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                        printWriter, " Current AuthenticationSession state:", "  state = ");
         m$1.append(getSessionState());
         printWriter.println(m$1.toString());
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  internal state = "), this.mInternalState, printWriter, "  mConnectAfterEnable = ");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("  internal state = "),
+                        this.mInternalState,
+                        printWriter,
+                        "  mConnectAfterEnable = ");
         m.append(this.mConnectAfterEnable.get());
         printWriter.println(m.toString());
         printWriter.println("  mTeardownRequested = " + this.mTeardownRequested.get());
@@ -431,7 +485,10 @@ public final class AuthenticationSession extends Thread {
         }
         setState(1);
         if (this.mTurnedOffWhileRunning) {
-            FlashNotificationsController$$ExternalSyntheticOutline0.m("SAccessoryManager_AuthenticationSession", new StringBuilder("mTurnedOffWhileRunning ? "), this.mTurnedOffWhileRunning);
+            FlashNotificationsController$$ExternalSyntheticOutline0.m(
+                    "SAccessoryManager_AuthenticationSession",
+                    new StringBuilder("mTurnedOffWhileRunning ? "),
+                    this.mTurnedOffWhileRunning);
             this.mResult.setReason(12);
         }
         SAccessoryManager.AnonymousClass1 anonymousClass1 = this.mSessionEventListener;
@@ -442,7 +499,9 @@ public final class AuthenticationSession extends Thread {
 
     public final void setState(int i) {
         synchronized (this.mStateLock) {
-            Log.i("SAccessoryManager_AuthenticationSession", "Session state " + convertMsg(this.mState) + " -> " + convertMsg(i));
+            Log.i(
+                    "SAccessoryManager_AuthenticationSession",
+                    "Session state " + convertMsg(this.mState) + " -> " + convertMsg(i));
             this.mState = i;
         }
     }
@@ -457,21 +516,48 @@ public final class AuthenticationSession extends Thread {
         }
         AuthenticationResult authenticationResult = this.mResult;
         AuthenticatorClientImpl authenticatorClientImpl = (AuthenticatorClientImpl) authenticator;
-        SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("onAuthenticationChallenge, type ="), authenticatorClientImpl.mType, "SAccessoryManager_AuthenticatorClientImpl");
+        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                new StringBuilder("onAuthenticationChallenge, type ="),
+                authenticatorClientImpl.mType,
+                "SAccessoryManager_AuthenticatorClientImpl");
         int i = authenticatorClientImpl.mType;
         MsgParser msgParser = authenticatorClientImpl.mMsgParser;
         if (i != 1) {
             if (i != 3) {
                 if (i == 4) {
                     if (authenticatorClientImpl.mConnectivity == null) {
-                        Slog.e("SAccessoryManager_AuthenticatorClientImpl", "onAuthenticationChallenge, mConnection is null!");
+                        Slog.e(
+                                "SAccessoryManager_AuthenticatorClientImpl",
+                                "onAuthenticationChallenge, mConnection is null!");
                         authenticationResult.setReason(12);
                         return;
                     }
-                    msgParser.parseData(1, new byte[]{0, 85, 6, 8, 5, HwConstants.IQ_CONFIG_POS_WIFI_ENABLED, 29, 23, 0, 0, 2, 1, -98, -87, -127, 2}, false);
+                    msgParser.parseData(
+                            1,
+                            new byte[] {
+                                0,
+                                85,
+                                6,
+                                8,
+                                5,
+                                HwConstants.IQ_CONFIG_POS_WIFI_ENABLED,
+                                29,
+                                23,
+                                0,
+                                0,
+                                2,
+                                1,
+                                -98,
+                                -87,
+                                -127,
+                                2
+                            },
+                            false);
                     try {
                         openNode = authenticatorClientImpl.mConnectivity.openNode();
-                        Slog.i("SAccessoryManager_AuthenticatorClientImpl", "open wirelesscharger: null");
+                        Slog.i(
+                                "SAccessoryManager_AuthenticatorClientImpl",
+                                "open wirelesscharger: null");
                     } catch (IOException e) {
                         Slog.e("SAccessoryManager_AuthenticatorClientImpl", e.toString());
                         authenticationResult.setReason(14);
@@ -488,7 +574,9 @@ public final class AuthenticationSession extends Thread {
                             authenticatorClientImpl.stopAuthentication();
                             return;
                         }
-                        Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Success auth, call sendStopAuth()");
+                        Slog.i(
+                                "SAccessoryManager_AuthenticatorClientImpl",
+                                "Success auth, call sendStopAuth()");
                         authenticationResult.setReason(0);
                         authenticatorClientImpl.stopAuthentication();
                         return;
@@ -498,14 +586,19 @@ public final class AuthenticationSession extends Thread {
             }
             Connectivity connectivity = authenticatorClientImpl.mConnectivity;
             if (connectivity == null) {
-                Slog.e("SAccessoryManager_AuthenticatorClientImpl", "onAuthenticationChallenge, mConnection is null!");
+                Slog.e(
+                        "SAccessoryManager_AuthenticatorClientImpl",
+                        "onAuthenticationChallenge, mConnection is null!");
                 authenticationResult.setReason(12);
                 return;
             }
             try {
                 authenticationResult.apiState = 1;
                 sendStartAuth = connectivity.sendStartAuth(authenticationResult);
-                Slog.i("SAccessoryManager_AuthenticatorClientImpl", "response from ccic: " + AuthenticatorClientImpl.byteArrayToString(sendStartAuth));
+                Slog.i(
+                        "SAccessoryManager_AuthenticatorClientImpl",
+                        "response from ccic: "
+                                + AuthenticatorClientImpl.byteArrayToString(sendStartAuth));
             } catch (IOException e2) {
                 Slog.e("SAccessoryManager_AuthenticatorClientImpl", e2.toString());
                 authenticationResult.setReason(14);
@@ -516,7 +609,9 @@ public final class AuthenticationSession extends Thread {
             }
             if (!msgParser.parseData(1, sendStartAuth, false)) {
                 authenticationResult.setReason(26);
-                Slog.e("SAccessoryManager_AuthenticatorClientImpl", "atqS fail, call sendStopAuth()");
+                Slog.e(
+                        "SAccessoryManager_AuthenticatorClientImpl",
+                        "atqS fail, call sendStopAuth()");
                 authenticatorClientImpl.stopAuthentication();
                 return;
             }
@@ -551,7 +646,9 @@ public final class AuthenticationSession extends Thread {
                 authenticatorClientImpl.stopAuthentication();
                 return;
             }
-            Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Success auth, call sendStopAuth()");
+            Slog.i(
+                    "SAccessoryManager_AuthenticatorClientImpl",
+                    "Success auth, call sendStopAuth()");
             authenticatorClientImpl.stopAuthentication();
             authenticationResult.setReason(0);
             return;
@@ -559,7 +656,9 @@ public final class AuthenticationSession extends Thread {
         boolean isFactoryBinary = FactoryTest.isFactoryBinary();
         Connectivity connectivity2 = authenticatorClientImpl.mConnectivity;
         if (connectivity2 == null) {
-            Slog.e("SAccessoryManager_AuthenticatorClientImpl", "onAuthenticationChallenge, mConnection is null!");
+            Slog.e(
+                    "SAccessoryManager_AuthenticatorClientImpl",
+                    "onAuthenticationChallenge, mConnection is null!");
             authenticationResult.setReason(12);
             return;
         }
@@ -567,7 +666,10 @@ public final class AuthenticationSession extends Thread {
             authenticationResult.apiState = 1;
             byte[] sendStartAuth2 = connectivity2.sendStartAuth(authenticationResult);
             if (sendStartAuth2 != null) {
-                Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Received atqS Data: " + AuthenticatorClientImpl.byteArrayToString(sendStartAuth2));
+                Slog.i(
+                        "SAccessoryManager_AuthenticatorClientImpl",
+                        "Received atqS Data: "
+                                + AuthenticatorClientImpl.byteArrayToString(sendStartAuth2));
                 Arrays.equals(Connectivity.NOT_SUPPORT, sendStartAuth2);
                 if (sendStartAuth2.length == 1) {
                     byte b = sendStartAuth2[0];
@@ -612,7 +714,9 @@ public final class AuthenticationSession extends Thread {
             }
             if (!z) {
                 authenticationResult.setReason(26);
-                Slog.e("SAccessoryManager_AuthenticatorClientImpl", "atqS fail, call sendStopAuth()");
+                Slog.e(
+                        "SAccessoryManager_AuthenticatorClientImpl",
+                        "atqS fail, call sendStopAuth()");
                 authenticatorClientImpl.sendStopAuth();
                 return;
             }
@@ -647,14 +751,17 @@ public final class AuthenticationSession extends Thread {
                             return;
                         }
                     }
-                } else if (i3 == 3 && !authenticatorClientImpl.sendCommand(authenticationResult, 11)) {
+                } else if (i3 == 3
+                        && !authenticatorClientImpl.sendCommand(authenticationResult, 11)) {
                     Slog.e("SAccessoryManager_AuthenticatorClientImpl", "3rd data is not exist.");
                     if (!isFactoryBinary) {
                         authenticatorClientImpl.sendStopAuth();
                         return;
                     }
                 }
-                Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Success auth, call sendStopAuth()");
+                Slog.i(
+                        "SAccessoryManager_AuthenticatorClientImpl",
+                        "Success auth, call sendStopAuth()");
             }
             if (authenticationResult.isKeyChanged) {
                 if (!authenticatorClientImpl.sendCommand(authenticationResult, 8)) {
@@ -687,14 +794,17 @@ public final class AuthenticationSession extends Thread {
                             return;
                         }
                     }
-                } else if (i4 == 3 && !authenticatorClientImpl.sendCommand(authenticationResult, 11)) {
+                } else if (i4 == 3
+                        && !authenticatorClientImpl.sendCommand(authenticationResult, 11)) {
                     Slog.e("SAccessoryManager_AuthenticatorClientImpl", "3rd data is not exist.");
                     if (!isFactoryBinary) {
                         authenticatorClientImpl.sendStopAuth();
                         return;
                     }
                 }
-                Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Success auth, call sendStopAuth()");
+                Slog.i(
+                        "SAccessoryManager_AuthenticatorClientImpl",
+                        "Success auth, call sendStopAuth()");
             }
             authenticatorClientImpl.sendStopAuth();
             authenticationResult.setReason(0);

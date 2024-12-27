@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.crypto.generators;
 import com.android.internal.org.bouncycastle.crypto.params.DHParameters;
 import com.android.internal.org.bouncycastle.math.ec.WNafUtil;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -12,8 +13,7 @@ class DHKeyGeneratorHelper {
     private static final BigInteger ONE = BigInteger.valueOf(1);
     private static final BigInteger TWO = BigInteger.valueOf(2);
 
-    private DHKeyGeneratorHelper() {
-    }
+    private DHKeyGeneratorHelper() {}
 
     BigInteger calculatePrivate(DHParameters dhParams, SecureRandom random) {
         BigInteger x;

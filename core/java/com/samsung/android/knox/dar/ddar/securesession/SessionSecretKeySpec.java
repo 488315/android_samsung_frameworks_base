@@ -2,6 +2,7 @@ package com.samsung.android.knox.dar.ddar.securesession;
 
 import java.security.spec.KeySpec;
 import java.util.Arrays;
+
 import javax.crypto.SecretKey;
 import javax.security.auth.DestroyFailedException;
 
@@ -58,7 +59,8 @@ class SessionSecretKeySpec implements KeySpec, SecretKey {
             return false;
         }
         String thatAlg = ((SecretKey) obj).getAlgorithm();
-        if (!thatAlg.equalsIgnoreCase(this.algorithm) || this.isDestroyed != ((SecretKey) obj).isDestroyed()) {
+        if (!thatAlg.equalsIgnoreCase(this.algorithm)
+                || this.isDestroyed != ((SecretKey) obj).isDestroyed()) {
             return false;
         }
         byte[] thatKey = ((SecretKey) obj).getEncoded();

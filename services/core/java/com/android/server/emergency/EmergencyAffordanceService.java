@@ -16,12 +16,14 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.KnoxCaptureInputFilter$$ExternalSyntheticOutline0;
 import com.android.server.SystemService;
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
 import com.android.server.attention.AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -46,17 +48,44 @@ public final class EmergencyAffordanceService extends SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends Binder {
-        public BinderService() {
-        }
+        public BinderService() {}
 
         @Override // android.os.Binder
-        public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-            if (DumpUtils.checkDumpPermission(EmergencyAffordanceService.this.mContext, "EmergencyAffordanceService", printWriter)) {
-                EmergencyAffordanceService emergencyAffordanceService = EmergencyAffordanceService.this;
-                IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, "  ");
+        public final void dump(
+                FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+            if (DumpUtils.checkDumpPermission(
+                    EmergencyAffordanceService.this.mContext,
+                    "EmergencyAffordanceService",
+                    printWriter)) {
+                EmergencyAffordanceService emergencyAffordanceService =
+                        EmergencyAffordanceService.this;
+                IndentingPrintWriter indentingPrintWriter =
+                        new IndentingPrintWriter(printWriter, "  ");
                 emergencyAffordanceService.getClass();
-                indentingPrintWriter.println("EmergencyAffordanceService (dumpsys emergency_affordance) state:\n");
-                StringBuilder m = AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0.m(AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0.m(AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0.m(AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0.m(new StringBuilder("mEmergencyAffordanceNeeded="), emergencyAffordanceService.mEmergencyAffordanceNeeded, indentingPrintWriter, "mVoiceCapable="), emergencyAffordanceService.mVoiceCapable, indentingPrintWriter, "mAnySimNeedsEmergencyAffordance="), emergencyAffordanceService.mAnySimNeedsEmergencyAffordance, indentingPrintWriter, "mAnyNetworkNeedsEmergencyAffordance="), emergencyAffordanceService.mAnyNetworkNeedsEmergencyAffordance, indentingPrintWriter, "mEmergencyCallCountryIsos=");
+                indentingPrintWriter.println(
+                        "EmergencyAffordanceService (dumpsys emergency_affordance) state:\n");
+                StringBuilder m =
+                        AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0.m(
+                                AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0.m(
+                                        AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0
+                                                .m(
+                                                        AttentionManagerService$AttentionCheck$$ExternalSyntheticOutline0
+                                                                .m(
+                                                                        new StringBuilder(
+                                                                                "mEmergencyAffordanceNeeded="),
+                                                                        emergencyAffordanceService
+                                                                                .mEmergencyAffordanceNeeded,
+                                                                        indentingPrintWriter,
+                                                                        "mVoiceCapable="),
+                                                        emergencyAffordanceService.mVoiceCapable,
+                                                        indentingPrintWriter,
+                                                        "mAnySimNeedsEmergencyAffordance="),
+                                        emergencyAffordanceService.mAnySimNeedsEmergencyAffordance,
+                                        indentingPrintWriter,
+                                        "mAnyNetworkNeedsEmergencyAffordance="),
+                                emergencyAffordanceService.mAnyNetworkNeedsEmergencyAffordance,
+                                indentingPrintWriter,
+                                "mEmergencyCallCountryIsos=");
                 m.append(String.join(",", emergencyAffordanceService.mEmergencyCallCountryIsos));
                 indentingPrintWriter.println(m.toString());
             }
@@ -74,7 +103,12 @@ public final class EmergencyAffordanceService extends SystemService {
             int i = message.what;
             EmergencyAffordanceService emergencyAffordanceService = EmergencyAffordanceService.this;
             if (i == 1) {
-                emergencyAffordanceService.mAirplaneModeEnabled = Settings.Global.getInt(emergencyAffordanceService.mContext.getContentResolver(), "airplane_mode_on", 0) == 1;
+                emergencyAffordanceService.mAirplaneModeEnabled =
+                        Settings.Global.getInt(
+                                        emergencyAffordanceService.mContext.getContentResolver(),
+                                        "airplane_mode_on",
+                                        0)
+                                == 1;
                 emergencyAffordanceService.handleUpdateSimSubscriptionInfo();
                 emergencyAffordanceService.updateNetworkCountry();
                 emergencyAffordanceService.updateEmergencyAffordanceNeeded();
@@ -85,17 +119,28 @@ public final class EmergencyAffordanceService extends SystemService {
                     emergencyAffordanceService.handleUpdateSimSubscriptionInfo();
                     return;
                 } else if (i != 4) {
-                    VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("Unexpected message received: "), message.what, "EmergencyAffordanceService");
+                    VaultKeeperService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("Unexpected message received: "),
+                            message.what,
+                            "EmergencyAffordanceService");
                     return;
                 } else {
-                    emergencyAffordanceService.mAirplaneModeEnabled = Settings.Global.getInt(emergencyAffordanceService.mContext.getContentResolver(), "airplane_mode_on", 0) == 1;
+                    emergencyAffordanceService.mAirplaneModeEnabled =
+                            Settings.Global.getInt(
+                                            emergencyAffordanceService.mContext
+                                                    .getContentResolver(),
+                                            "airplane_mode_on",
+                                            0)
+                                    == 1;
                     return;
                 }
             }
             String str = (String) message.obj;
             emergencyAffordanceService.getClass();
             if (TextUtils.isEmpty(str) && emergencyAffordanceService.mAirplaneModeEnabled) {
-                Slog.w("EmergencyAffordanceService", "Ignore empty countryIso report when APM is on.");
+                Slog.w(
+                        "EmergencyAffordanceService",
+                        "Ignore empty countryIso report when APM is on.");
             } else {
                 emergencyAffordanceService.updateNetworkCountry();
                 emergencyAffordanceService.updateEmergencyAffordanceNeeded();
@@ -107,23 +152,43 @@ public final class EmergencyAffordanceService extends SystemService {
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.emergency.EmergencyAffordanceService$2] */
     public EmergencyAffordanceService(Context context) {
         super(context);
-        this.mBroadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.emergency.EmergencyAffordanceService.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                if ("android.telephony.action.NETWORK_COUNTRY_CHANGED".equals(intent.getAction())) {
-                    String stringExtra = intent.getStringExtra("android.telephony.extra.NETWORK_COUNTRY");
-                    EmergencyAffordanceService.this.mHandler.obtainMessage(2, intent.getIntExtra("android.telephony.extra.SLOT_INDEX", -1), 0, stringExtra).sendToTarget();
-                } else if ("android.intent.action.AIRPLANE_MODE".equals(intent.getAction())) {
-                    EmergencyAffordanceService.this.mHandler.obtainMessage(4).sendToTarget();
-                }
-            }
-        };
-        this.mSubscriptionChangedListener = new SubscriptionManager.OnSubscriptionsChangedListener() { // from class: com.android.server.emergency.EmergencyAffordanceService.2
-            @Override // android.telephony.SubscriptionManager.OnSubscriptionsChangedListener
-            public final void onSubscriptionsChanged() {
-                EmergencyAffordanceService.this.mHandler.obtainMessage(3).sendToTarget();
-            }
-        };
+        this.mBroadcastReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.emergency.EmergencyAffordanceService.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        if ("android.telephony.action.NETWORK_COUNTRY_CHANGED"
+                                .equals(intent.getAction())) {
+                            String stringExtra =
+                                    intent.getStringExtra(
+                                            "android.telephony.extra.NETWORK_COUNTRY");
+                            EmergencyAffordanceService.this
+                                    .mHandler
+                                    .obtainMessage(
+                                            2,
+                                            intent.getIntExtra(
+                                                    "android.telephony.extra.SLOT_INDEX", -1),
+                                            0,
+                                            stringExtra)
+                                    .sendToTarget();
+                        } else if ("android.intent.action.AIRPLANE_MODE"
+                                .equals(intent.getAction())) {
+                            EmergencyAffordanceService.this
+                                    .mHandler
+                                    .obtainMessage(4)
+                                    .sendToTarget();
+                        }
+                    }
+                };
+        this.mSubscriptionChangedListener =
+                new SubscriptionManager
+                        .OnSubscriptionsChangedListener() { // from class:
+                                                            // com.android.server.emergency.EmergencyAffordanceService.2
+                    @Override // android.telephony.SubscriptionManager.OnSubscriptionsChangedListener
+                    public final void onSubscriptionsChanged() {
+                        EmergencyAffordanceService.this.mHandler.obtainMessage(3).sendToTarget();
+                    }
+                };
         this.mContext = context;
         String[] stringArray = context.getResources().getStringArray(R.array.maps_starting_lat_lng);
         this.mEmergencyCallCountryIsos = new ArrayList(stringArray.length);
@@ -131,7 +196,10 @@ public final class EmergencyAffordanceService extends SystemService {
             this.mEmergencyCallCountryIsos.add(str);
         }
         if (Build.IS_DEBUGGABLE) {
-            String string = Settings.Global.getString(this.mContext.getContentResolver(), "emergency_affordance_override_iso");
+            String string =
+                    Settings.Global.getString(
+                            this.mContext.getContentResolver(),
+                            "emergency_affordance_override_iso");
             if (TextUtils.isEmpty(string)) {
                 return;
             }
@@ -142,7 +210,8 @@ public final class EmergencyAffordanceService extends SystemService {
 
     public final void handleUpdateSimSubscriptionInfo() {
         boolean z;
-        List<SubscriptionInfo> activeSubscriptionInfoList = this.mSubscriptionManager.getActiveSubscriptionInfoList();
+        List<SubscriptionInfo> activeSubscriptionInfoList =
+                this.mSubscriptionManager.getActiveSubscriptionInfoList();
         if (activeSubscriptionInfoList == null) {
             return;
         }
@@ -164,7 +233,8 @@ public final class EmergencyAffordanceService extends SystemService {
     @Override // com.android.server.SystemService
     public final void onBootPhase(int i) {
         if (i == 600) {
-            TelephonyManager telephonyManager = (TelephonyManager) this.mContext.getSystemService(TelephonyManager.class);
+            TelephonyManager telephonyManager =
+                    (TelephonyManager) this.mContext.getSystemService(TelephonyManager.class);
             this.mTelephonyManager = telephonyManager;
             boolean isVoiceCapable = telephonyManager.isVoiceCapable();
             this.mVoiceCapable = isVoiceCapable;
@@ -172,7 +242,11 @@ public final class EmergencyAffordanceService extends SystemService {
                 updateEmergencyAffordanceNeeded();
                 return;
             }
-            this.mHandler = new MyHandler(KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("EmergencyAffordanceService").getLooper());
+            this.mHandler =
+                    new MyHandler(
+                            KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(
+                                            "EmergencyAffordanceService")
+                                    .getLooper());
             SubscriptionManager from = SubscriptionManager.from(this.mContext);
             this.mSubscriptionManager = from;
             from.addOnSubscriptionsChangedListener(this.mSubscriptionChangedListener);
@@ -190,10 +264,16 @@ public final class EmergencyAffordanceService extends SystemService {
 
     public final void updateEmergencyAffordanceNeeded() {
         boolean z = this.mEmergencyAffordanceNeeded;
-        boolean z2 = this.mVoiceCapable && (this.mAnySimNeedsEmergencyAffordance || this.mAnyNetworkNeedsEmergencyAffordance);
+        boolean z2 =
+                this.mVoiceCapable
+                        && (this.mAnySimNeedsEmergencyAffordance
+                                || this.mAnyNetworkNeedsEmergencyAffordance);
         this.mEmergencyAffordanceNeeded = z2;
         if (z != z2) {
-            Settings.Global.putInt(this.mContext.getContentResolver(), "emergency_affordance_needed", this.mEmergencyAffordanceNeeded ? 1 : 0);
+            Settings.Global.putInt(
+                    this.mContext.getContentResolver(),
+                    "emergency_affordance_needed",
+                    this.mEmergencyAffordanceNeeded ? 1 : 0);
         }
     }
 
@@ -205,7 +285,8 @@ public final class EmergencyAffordanceService extends SystemService {
             if (i >= activeModemCount) {
                 break;
             }
-            if (this.mEmergencyCallCountryIsos.contains(this.mTelephonyManager.getNetworkCountryIso(i))) {
+            if (this.mEmergencyCallCountryIsos.contains(
+                    this.mTelephonyManager.getNetworkCountryIso(i))) {
                 z = true;
                 break;
             }

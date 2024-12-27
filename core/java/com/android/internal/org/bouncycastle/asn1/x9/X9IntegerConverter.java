@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.asn1.x9;
 
 import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.math.ec.ECFieldElement;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */

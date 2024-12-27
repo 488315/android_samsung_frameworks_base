@@ -11,8 +11,7 @@ import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.PBES
 
 /* loaded from: classes5.dex */
 public class SHA1 {
-    private SHA1() {
-    }
+    private SHA1() {}
 
     public static class Digest extends BCMessageDigest implements Cloneable {
         public Digest() {
@@ -59,9 +58,11 @@ public class SHA1 {
             provider.addAlgorithm("Mac.PBEWITHHMACSHA", PREFIX + "$SHA1Mac");
             provider.addAlgorithm("Mac.PBEWITHHMACSHA1", PREFIX + "$SHA1Mac");
             provider.addAlgorithm("Alg.Alias.SecretKeyFactory.PBEWITHHMACSHA", "PBEWITHHMACSHA1");
-            provider.addAlgorithm("Alg.Alias.SecretKeyFactory." + OIWObjectIdentifiers.idSHA1, "PBEWITHHMACSHA1");
+            provider.addAlgorithm(
+                    "Alg.Alias.SecretKeyFactory." + OIWObjectIdentifiers.idSHA1, "PBEWITHHMACSHA1");
             provider.addAlgorithm("Alg.Alias.Mac." + OIWObjectIdentifiers.idSHA1, "PBEWITHHMACSHA");
-            provider.addAlgorithm("SecretKeyFactory.PBEWITHHMACSHA1", PREFIX + "$PBEWithMacKeyFactory");
+            provider.addAlgorithm(
+                    "SecretKeyFactory.PBEWITHHMACSHA1", PREFIX + "$PBEWithMacKeyFactory");
         }
     }
 }

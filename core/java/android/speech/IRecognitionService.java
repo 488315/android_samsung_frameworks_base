@@ -7,42 +7,59 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.speech.IModelDownloadListener;
-import android.speech.IRecognitionListener;
-import android.speech.IRecognitionSupportCallback;
 
 /* loaded from: classes3.dex */
 public interface IRecognitionService extends IInterface {
     void cancel(IRecognitionListener iRecognitionListener, boolean z) throws RemoteException;
 
-    void checkRecognitionSupport(Intent intent, AttributionSource attributionSource, IRecognitionSupportCallback iRecognitionSupportCallback) throws RemoteException;
+    void checkRecognitionSupport(
+            Intent intent,
+            AttributionSource attributionSource,
+            IRecognitionSupportCallback iRecognitionSupportCallback)
+            throws RemoteException;
 
-    void startListening(Intent intent, IRecognitionListener iRecognitionListener, AttributionSource attributionSource) throws RemoteException;
+    void startListening(
+            Intent intent,
+            IRecognitionListener iRecognitionListener,
+            AttributionSource attributionSource)
+            throws RemoteException;
 
     void stopListening(IRecognitionListener iRecognitionListener) throws RemoteException;
 
-    void triggerModelDownload(Intent intent, AttributionSource attributionSource, IModelDownloadListener iModelDownloadListener) throws RemoteException;
+    void triggerModelDownload(
+            Intent intent,
+            AttributionSource attributionSource,
+            IModelDownloadListener iModelDownloadListener)
+            throws RemoteException;
 
     public static class Default implements IRecognitionService {
         @Override // android.speech.IRecognitionService
-        public void startListening(Intent recognizerIntent, IRecognitionListener listener, AttributionSource attributionSource) throws RemoteException {
-        }
+        public void startListening(
+                Intent recognizerIntent,
+                IRecognitionListener listener,
+                AttributionSource attributionSource)
+                throws RemoteException {}
 
         @Override // android.speech.IRecognitionService
-        public void stopListening(IRecognitionListener listener) throws RemoteException {
-        }
+        public void stopListening(IRecognitionListener listener) throws RemoteException {}
 
         @Override // android.speech.IRecognitionService
-        public void cancel(IRecognitionListener listener, boolean isShutdown) throws RemoteException {
-        }
+        public void cancel(IRecognitionListener listener, boolean isShutdown)
+                throws RemoteException {}
 
         @Override // android.speech.IRecognitionService
-        public void checkRecognitionSupport(Intent recognizerIntent, AttributionSource attributionSource, IRecognitionSupportCallback listener) throws RemoteException {
-        }
+        public void checkRecognitionSupport(
+                Intent recognizerIntent,
+                AttributionSource attributionSource,
+                IRecognitionSupportCallback listener)
+                throws RemoteException {}
 
         @Override // android.speech.IRecognitionService
-        public void triggerModelDownload(Intent recognizerIntent, AttributionSource attributionSource, IModelDownloadListener listener) throws RemoteException {
-        }
+        public void triggerModelDownload(
+                Intent recognizerIntent,
+                AttributionSource attributionSource,
+                IModelDownloadListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -50,7 +67,7 @@ public interface IRecognitionService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRecognitionService {
+    public abstract static class Stub extends Binder implements IRecognitionService {
         public static final String DESCRIPTOR = "android.speech.IRecognitionService";
         static final int TRANSACTION_cancel = 3;
         static final int TRANSACTION_checkRecognitionSupport = 4;
@@ -101,7 +118,8 @@ public interface IRecognitionService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -112,33 +130,41 @@ public interface IRecognitionService extends IInterface {
             switch (code) {
                 case 1:
                     Intent _arg0 = (Intent) data.readTypedObject(Intent.CREATOR);
-                    IRecognitionListener _arg1 = IRecognitionListener.Stub.asInterface(data.readStrongBinder());
-                    AttributionSource _arg2 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+                    IRecognitionListener _arg1 =
+                            IRecognitionListener.Stub.asInterface(data.readStrongBinder());
+                    AttributionSource _arg2 =
+                            (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
                     data.enforceNoDataAvail();
                     startListening(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    IRecognitionListener _arg02 = IRecognitionListener.Stub.asInterface(data.readStrongBinder());
+                    IRecognitionListener _arg02 =
+                            IRecognitionListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     stopListening(_arg02);
                     return true;
                 case 3:
-                    IRecognitionListener _arg03 = IRecognitionListener.Stub.asInterface(data.readStrongBinder());
+                    IRecognitionListener _arg03 =
+                            IRecognitionListener.Stub.asInterface(data.readStrongBinder());
                     boolean _arg12 = data.readBoolean();
                     data.enforceNoDataAvail();
                     cancel(_arg03, _arg12);
                     return true;
                 case 4:
                     Intent _arg04 = (Intent) data.readTypedObject(Intent.CREATOR);
-                    AttributionSource _arg13 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
-                    IRecognitionSupportCallback _arg22 = IRecognitionSupportCallback.Stub.asInterface(data.readStrongBinder());
+                    AttributionSource _arg13 =
+                            (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+                    IRecognitionSupportCallback _arg22 =
+                            IRecognitionSupportCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     checkRecognitionSupport(_arg04, _arg13, _arg22);
                     return true;
                 case 5:
                     Intent _arg05 = (Intent) data.readTypedObject(Intent.CREATOR);
-                    AttributionSource _arg14 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
-                    IModelDownloadListener _arg23 = IModelDownloadListener.Stub.asInterface(data.readStrongBinder());
+                    AttributionSource _arg14 =
+                            (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+                    IModelDownloadListener _arg23 =
+                            IModelDownloadListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     triggerModelDownload(_arg05, _arg14, _arg23);
                     return true;
@@ -164,7 +190,11 @@ public interface IRecognitionService extends IInterface {
             }
 
             @Override // android.speech.IRecognitionService
-            public void startListening(Intent recognizerIntent, IRecognitionListener listener, AttributionSource attributionSource) throws RemoteException {
+            public void startListening(
+                    Intent recognizerIntent,
+                    IRecognitionListener listener,
+                    AttributionSource attributionSource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -190,7 +220,8 @@ public interface IRecognitionService extends IInterface {
             }
 
             @Override // android.speech.IRecognitionService
-            public void cancel(IRecognitionListener listener, boolean isShutdown) throws RemoteException {
+            public void cancel(IRecognitionListener listener, boolean isShutdown)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -203,7 +234,11 @@ public interface IRecognitionService extends IInterface {
             }
 
             @Override // android.speech.IRecognitionService
-            public void checkRecognitionSupport(Intent recognizerIntent, AttributionSource attributionSource, IRecognitionSupportCallback listener) throws RemoteException {
+            public void checkRecognitionSupport(
+                    Intent recognizerIntent,
+                    AttributionSource attributionSource,
+                    IRecognitionSupportCallback listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -217,7 +252,11 @@ public interface IRecognitionService extends IInterface {
             }
 
             @Override // android.speech.IRecognitionService
-            public void triggerModelDownload(Intent recognizerIntent, AttributionSource attributionSource, IModelDownloadListener listener) throws RemoteException {
+            public void triggerModelDownload(
+                    Intent recognizerIntent,
+                    AttributionSource attributionSource,
+                    IModelDownloadListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

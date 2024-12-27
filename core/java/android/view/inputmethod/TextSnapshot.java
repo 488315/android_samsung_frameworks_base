@@ -9,23 +9,37 @@ public final class TextSnapshot {
     private final int mCursorCapsMode;
     private final SurroundingText mSurroundingText;
 
-    public TextSnapshot(SurroundingText surroundingText, int compositionStart, int compositionEnd, int cursorCapsMode) {
+    public TextSnapshot(
+            SurroundingText surroundingText,
+            int compositionStart,
+            int compositionEnd,
+            int cursorCapsMode) {
         Objects.requireNonNull(surroundingText);
         this.mSurroundingText = surroundingText;
         if (compositionStart < -1) {
-            throw new IllegalArgumentException("compositionStart must be -1 or higher but was " + compositionStart);
+            throw new IllegalArgumentException(
+                    "compositionStart must be -1 or higher but was " + compositionStart);
         }
         if (compositionEnd < -1) {
-            throw new IllegalArgumentException("compositionEnd must be -1 or higher but was " + compositionEnd);
+            throw new IllegalArgumentException(
+                    "compositionEnd must be -1 or higher but was " + compositionEnd);
         }
         if (compositionStart == -1 && compositionEnd != -1) {
-            throw new IllegalArgumentException("compositionEnd must be -1 if compositionStart is -1 but was " + compositionEnd);
+            throw new IllegalArgumentException(
+                    "compositionEnd must be -1 if compositionStart is -1 but was "
+                            + compositionEnd);
         }
         if (compositionStart != -1 && compositionEnd == -1) {
-            throw new IllegalArgumentException("compositionStart must be -1 if compositionEnd is -1 but was " + compositionStart);
+            throw new IllegalArgumentException(
+                    "compositionStart must be -1 if compositionEnd is -1 but was "
+                            + compositionStart);
         }
         if (compositionStart > compositionEnd) {
-            throw new IllegalArgumentException("compositionStart=" + compositionStart + " must be equal to or greater than compositionEnd=" + compositionEnd);
+            throw new IllegalArgumentException(
+                    "compositionStart="
+                            + compositionStart
+                            + " must be equal to or greater than compositionEnd="
+                            + compositionEnd);
         }
         this.mCompositionStart = compositionStart;
         this.mCompositionEnd = compositionEnd;

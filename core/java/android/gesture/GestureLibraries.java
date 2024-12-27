@@ -3,6 +3,7 @@ package android.gesture;
 import android.content.Context;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -13,8 +14,7 @@ import java.lang.ref.WeakReference;
 
 /* loaded from: classes.dex */
 public final class GestureLibraries {
-    private GestureLibraries() {
-    }
+    private GestureLibraries() {}
 
     public static GestureLibrary fromFile(String path) {
         return fromFile(new File(path));
@@ -74,7 +74,10 @@ public final class GestureLibraries {
                     this.mStore.save(new FileOutputStream(file), true);
                     return true;
                 } catch (IOException e) {
-                    Log.d(GestureConstants.LOG_TAG, "Could not save the gesture library in " + this.mPath, e);
+                    Log.d(
+                            GestureConstants.LOG_TAG,
+                            "Could not save the gesture library in " + this.mPath,
+                            e);
                     return false;
                 }
             }
@@ -98,7 +101,10 @@ public final class GestureLibraries {
                     this.mStore.load(new FileInputStream(file), true);
                     return true;
                 } catch (IOException e) {
-                    Log.d(GestureConstants.LOG_TAG, "Could not load the gesture library from " + this.mPath, e);
+                    Log.d(
+                            GestureConstants.LOG_TAG,
+                            "Could not load the gesture library from " + this.mPath,
+                            e);
                     return false;
                 }
             }
@@ -142,7 +148,11 @@ public final class GestureLibraries {
                 this.mStore.load(in, true);
                 return true;
             } catch (IOException e) {
-                Log.d(GestureConstants.LOG_TAG, "Could not load the gesture library from raw resource " + context.getResources().getResourceName(this.mResourceId), e);
+                Log.d(
+                        GestureConstants.LOG_TAG,
+                        "Could not load the gesture library from raw resource "
+                                + context.getResources().getResourceName(this.mResourceId),
+                        e);
                 return false;
             }
         }

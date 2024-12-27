@@ -1,6 +1,7 @@
 package com.samsung.vekit.Interface;
 
 import com.samsung.vekit.Common.Object.SpeakerIDInfo;
+
 import java.util.HashMap;
 
 /* loaded from: classes6.dex */

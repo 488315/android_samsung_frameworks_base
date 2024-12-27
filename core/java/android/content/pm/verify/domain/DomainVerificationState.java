@@ -15,8 +15,7 @@ public interface DomainVerificationState {
     public static final int STATE_SUCCESS = 1;
     public static final int STATE_SYS_CONFIG = 7;
 
-    public @interface State {
-    }
+    public @interface State {}
 
     static String stateToDebugString(int state) {
         switch (state) {

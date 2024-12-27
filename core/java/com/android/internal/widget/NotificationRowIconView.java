@@ -34,7 +34,8 @@ public class NotificationRowIconView extends CachingIconView {
         this.mApplyCircularCrop = false;
     }
 
-    public NotificationRowIconView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public NotificationRowIconView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mApplyCircularCrop = false;
     }
@@ -65,7 +66,8 @@ public class NotificationRowIconView extends CachingIconView {
 
     public Runnable setApplyCircularCropAsync(boolean applyCircularCrop) {
         this.mApplyCircularCrop = applyCircularCrop;
-        return new Runnable() { // from class: com.android.internal.widget.NotificationRowIconView$$ExternalSyntheticLambda0
+        return new Runnable() { // from class:
+                                // com.android.internal.widget.NotificationRowIconView$$ExternalSyntheticLambda0
             @Override // java.lang.Runnable
             public final void run() {
                 NotificationRowIconView.lambda$setApplyCircularCropAsync$0();
@@ -73,8 +75,7 @@ public class NotificationRowIconView extends CachingIconView {
         };
     }
 
-    static /* synthetic */ void lambda$setApplyCircularCropAsync$0() {
-    }
+    static /* synthetic */ void lambda$setApplyCircularCropAsync$0() {}
 
     private Drawable makeCircularDrawable(Drawable original) {
         if (original == null) {
@@ -105,7 +106,8 @@ public class NotificationRowIconView extends CachingIconView {
         int width = drawable.getIntrinsicWidth();
         int width2 = width > 0 ? width : 1;
         int height = drawable.getIntrinsicHeight();
-        Bitmap bitmap2 = Bitmap.createBitmap(width2, height > 0 ? height : 1, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap2 =
+                Bitmap.createBitmap(width2, height > 0 ? height : 1, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap2);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);

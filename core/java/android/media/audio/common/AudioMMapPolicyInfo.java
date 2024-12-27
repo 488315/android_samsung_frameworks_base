@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioMMapPolicyInfo implements Parcelable {
-    public static final Parcelable.Creator<AudioMMapPolicyInfo> CREATOR = new Parcelable.Creator<AudioMMapPolicyInfo>() { // from class: android.media.audio.common.AudioMMapPolicyInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioMMapPolicyInfo createFromParcel(Parcel _aidl_source) {
-            AudioMMapPolicyInfo _aidl_out = new AudioMMapPolicyInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioMMapPolicyInfo> CREATOR =
+            new Parcelable.Creator<AudioMMapPolicyInfo>() { // from class:
+                // android.media.audio.common.AudioMMapPolicyInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioMMapPolicyInfo createFromParcel(Parcel _aidl_source) {
+                    AudioMMapPolicyInfo _aidl_out = new AudioMMapPolicyInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioMMapPolicyInfo[] newArray(int _aidl_size) {
-            return new AudioMMapPolicyInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioMMapPolicyInfo[] newArray(int _aidl_size) {
+                    return new AudioMMapPolicyInfo[_aidl_size];
+                }
+            };
     public AudioDevice device;
     public int mmapPolicy = 0;
 
@@ -95,14 +98,17 @@ public class AudioMMapPolicyInfo implements Parcelable {
             return false;
         }
         AudioMMapPolicyInfo that = (AudioMMapPolicyInfo) other;
-        if (Objects.deepEquals(this.device, that.device) && Objects.deepEquals(Integer.valueOf(this.mmapPolicy), Integer.valueOf(that.mmapPolicy))) {
+        if (Objects.deepEquals(this.device, that.device)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.mmapPolicy), Integer.valueOf(that.mmapPolicy))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.device, Integer.valueOf(this.mmapPolicy)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(this.device, Integer.valueOf(this.mmapPolicy)).toArray());
     }
 
     @Override // android.os.Parcelable

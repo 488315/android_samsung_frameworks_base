@@ -3,6 +3,7 @@ package vendor.samsung.hardware.radio.V2_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,18 +23,37 @@ public final class SehPhonebookInfo {
             return false;
         }
         SehPhonebookInfo other = (SehPhonebookInfo) otherObject;
-        if (this.totalCount == other.totalCount && this.usedCount == other.usedCount && this.firstIndex == other.firstIndex && this.maxTextLength == other.maxTextLength && this.maxNumberLength == other.maxNumberLength) {
+        if (this.totalCount == other.totalCount
+                && this.usedCount == other.usedCount
+                && this.firstIndex == other.firstIndex
+                && this.maxTextLength == other.maxTextLength
+                && this.maxNumberLength == other.maxNumberLength) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.totalCount))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.usedCount))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.firstIndex))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxTextLength))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxNumberLength))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.totalCount))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.usedCount))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.firstIndex))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxTextLength))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.maxNumberLength))));
     }
 
     public final String toString() {
-        return "{.totalCount = " + this.totalCount + ", .usedCount = " + this.usedCount + ", .firstIndex = " + this.firstIndex + ", .maxTextLength = " + this.maxTextLength + ", .maxNumberLength = " + this.maxNumberLength + "}";
+        return "{.totalCount = "
+                + this.totalCount
+                + ", .usedCount = "
+                + this.usedCount
+                + ", .firstIndex = "
+                + this.firstIndex
+                + ", .maxTextLength = "
+                + this.maxTextLength
+                + ", .maxNumberLength = "
+                + this.maxNumberLength
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -45,7 +65,8 @@ public final class SehPhonebookInfo {
         ArrayList<SehPhonebookInfo> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 20, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 20, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SehPhonebookInfo _hidl_vec_element = new SehPhonebookInfo();
@@ -55,7 +76,8 @@ public final class SehPhonebookInfo {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.totalCount = _hidl_blob.getInt32(0 + _hidl_offset);
         this.usedCount = _hidl_blob.getInt32(4 + _hidl_offset);
         this.firstIndex = _hidl_blob.getInt32(8 + _hidl_offset);
@@ -69,7 +91,8 @@ public final class SehPhonebookInfo {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<SehPhonebookInfo> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<SehPhonebookInfo> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

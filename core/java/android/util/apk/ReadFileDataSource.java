@@ -2,6 +2,7 @@ package android.util.apk;
 
 import android.system.ErrnoException;
 import android.system.Os;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -26,7 +27,8 @@ class ReadFileDataSource implements DataSource {
     }
 
     @Override // android.util.apk.DataSource
-    public void feedIntoDataDigester(DataDigester md, long offset, int size) throws IOException, DigestException {
+    public void feedIntoDataDigester(DataDigester md, long offset, int size)
+            throws IOException, DigestException {
         try {
             byte[] buffer = new byte[Math.min(size, 1048576)];
             long start = this.mFilePosition + offset;

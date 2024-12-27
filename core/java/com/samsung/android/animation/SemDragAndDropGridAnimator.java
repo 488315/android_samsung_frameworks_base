@@ -13,8 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import com.samsung.android.animation.SemAbsDragAndDropAnimator;
-import com.samsung.android.animation.SemDragAndDropAnimationCore;
+
 import java.util.HashSet;
 
 @Deprecated
@@ -42,39 +41,53 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
     }
 
     private void initListeners() {
-        this.mItemAnimationListener = new SemDragAndDropAnimationCore.ItemAnimationListener() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.1
-            @Override // com.samsung.android.animation.SemDragAndDropAnimationCore.ItemAnimationListener
-            public void onItemAnimatorEnd() {
-                if (SemDragAndDropGridAnimator.this.mListItemSelectionAnimating) {
-                    SemDragAndDropGridAnimator.this.mListItemSelectionAnimating = false;
-                    SemDragAndDropGridAnimator.this.updateDragViewBitmap();
-                    return;
-                }
-                if (SemDragAndDropGridAnimator.this.mDropDonePending) {
-                    SemDragAndDropGridAnimator.this.mDropDonePending = false;
-                    if (SemDragAndDropGridAnimator.this.mDragPos != SemDragAndDropGridAnimator.this.mFirstDragPos) {
-                        SemDragAndDropGridAnimator.this.mDndController.dropDone(SemDragAndDropGridAnimator.this.mFirstDragPos, SemDragAndDropGridAnimator.this.mDragPos);
-                        SemDragAndDropGridAnimator.this.speakDragReleaseForAccessibility(SemDragAndDropGridAnimator.this.mDragPos);
+        this.mItemAnimationListener =
+                new SemDragAndDropAnimationCore.ItemAnimationListener() { // from class:
+                    // com.samsung.android.animation.SemDragAndDropGridAnimator.1
+                    @Override // com.samsung.android.animation.SemDragAndDropAnimationCore.ItemAnimationListener
+                    public void onItemAnimatorEnd() {
+                        if (SemDragAndDropGridAnimator.this.mListItemSelectionAnimating) {
+                            SemDragAndDropGridAnimator.this.mListItemSelectionAnimating = false;
+                            SemDragAndDropGridAnimator.this.updateDragViewBitmap();
+                            return;
+                        }
+                        if (SemDragAndDropGridAnimator.this.mDropDonePending) {
+                            SemDragAndDropGridAnimator.this.mDropDonePending = false;
+                            if (SemDragAndDropGridAnimator.this.mDragPos
+                                    != SemDragAndDropGridAnimator.this.mFirstDragPos) {
+                                SemDragAndDropGridAnimator.this.mDndController.dropDone(
+                                        SemDragAndDropGridAnimator.this.mFirstDragPos,
+                                        SemDragAndDropGridAnimator.this.mDragPos);
+                                SemDragAndDropGridAnimator.this.speakDragReleaseForAccessibility(
+                                        SemDragAndDropGridAnimator.this.mDragPos);
+                            }
+                            SemDragAndDropGridAnimator.this.mItemAnimator.removeAll();
+                            SemDragAndDropGridAnimator.this.resetDndPositionValues();
+                            if (SemDragAndDropGridAnimator.this.mDndListener != null) {
+                                Log.d(
+                                        SemDragAndDropGridAnimator.TAG,
+                                        "dndListener.onDragAndDropEnd() from"
+                                            + " onAllAnimationsFinished()");
+                                SemDragAndDropGridAnimator.this.mDndListener.onDragAndDropEnd();
+                            }
+                            SemDragAndDropGridAnimator.this.mGridView.setEnabled(true);
+                        }
                     }
-                    SemDragAndDropGridAnimator.this.mItemAnimator.removeAll();
-                    SemDragAndDropGridAnimator.this.resetDndPositionValues();
-                    if (SemDragAndDropGridAnimator.this.mDndListener != null) {
-                        Log.d(SemDragAndDropGridAnimator.TAG, "dndListener.onDragAndDropEnd() from onAllAnimationsFinished()");
-                        SemDragAndDropGridAnimator.this.mDndListener.onDragAndDropEnd();
+                };
+        this.mOnItemLongClickListener =
+                new AdapterView
+                        .OnItemLongClickListener() { // from class:
+                                                     // com.samsung.android.animation.SemDragAndDropGridAnimator.2
+                    @Override // android.widget.AdapterView.OnItemLongClickListener
+                    public boolean onItemLongClick(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        return SemDragAndDropGridAnimator.this.initDragIfNecessary(position);
                     }
-                    SemDragAndDropGridAnimator.this.mGridView.setEnabled(true);
-                }
-            }
-        };
-        this.mOnItemLongClickListener = new AdapterView.OnItemLongClickListener() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.2
-            @Override // android.widget.AdapterView.OnItemLongClickListener
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                return SemDragAndDropGridAnimator.this.initDragIfNecessary(position);
-            }
-        };
+                };
     }
 
-    public void setDragAndDropController(SemAbsDragAndDropAnimator.DragAndDropController dndController) {
+    public void setDragAndDropController(
+            SemAbsDragAndDropAnimator.DragAndDropController dndController) {
         this.mDndController = dndController;
     }
 
@@ -189,7 +202,9 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         L93:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.animation.SemDragAndDropGridAnimator.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.animation.SemDragAndDropGridAnimator.onInterceptTouchEvent(android.view.MotionEvent):boolean");
     }
 
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -203,7 +218,9 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
     /* JADX INFO: Access modifiers changed from: private */
     public boolean initDragIfNecessary(int position) {
         if (isDraggable() && activatedByLongPress() && this.mGridView.getCount() > 1) {
-            if (position >= 0 && position < this.mGridView.getCount() && checkStartDnd(this.mDndTouchX, this.mDndTouchY, position)) {
+            if (position >= 0
+                    && position < this.mGridView.getCount()
+                    && checkStartDnd(this.mDndTouchX, this.mDndTouchY, position)) {
                 return initDrag(position);
             }
             resetDndState();
@@ -214,7 +231,8 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
 
     private boolean initDrag(int itemPosition) {
         findMovingArrage();
-        this.mDragView = this.mGridView.getChildAt(itemPosition - this.mGridView.getFirstVisiblePosition());
+        this.mDragView =
+                this.mGridView.getChildAt(itemPosition - this.mGridView.getFirstVisiblePosition());
         if (this.mDragView == null) {
             return false;
         }
@@ -247,7 +265,8 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         Rect hitRect = new Rect();
         child.getHitRect(hitRect);
         this.mListItemSelectionAnimating = true;
-        this.mScaleUpAndDownAnimation = new SemDragAndDropAnimationCore.ItemSelectHighlightingAnimation(hitRect);
+        this.mScaleUpAndDownAnimation =
+                new SemDragAndDropAnimationCore.ItemSelectHighlightingAnimation(hitRect);
         this.mScaleUpAndDownAnimation.setStartAndDuration(0);
         this.mItemAnimator.putItemAnimation(this.mFirstDragPos, this.mScaleUpAndDownAnimation);
         this.mItemAnimator.start();
@@ -299,48 +318,78 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
             } else {
                 int numOfColumns2 = this.mGridView.getNumColumns();
                 if (childCount < numOfColumns2) {
-                    Log.e(TAG, "Child cound (" + this.mGridView.getChildCount() + ") is smaller than column count (" + numOfColumns2 + NavigationBarInflaterView.KEY_CODE_END);
+                    Log.e(
+                            TAG,
+                            "Child cound ("
+                                    + this.mGridView.getChildCount()
+                                    + ") is smaller than column count ("
+                                    + numOfColumns2
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                     resetDndState();
                     return;
                 } else if (this.mDragPos >= firstVisiblePosition) {
-                    int index2 = (this.mGridView.getChildCount() + (this.mDragPos % numOfColumns2)) - numOfColumns2;
+                    int index2 =
+                            (this.mGridView.getChildCount() + (this.mDragPos % numOfColumns2))
+                                    - numOfColumns2;
                     int distanceX = this.mGridView.getChildAt(index2).getLeft() - draggedBitmapLeft;
                     numOfColumns = distanceX;
                     index = this.mGridView.getHeight() - draggedBitmapTop;
                 } else {
                     int index3 = this.mDragPos % numOfColumns2;
-                    int distanceX2 = this.mGridView.getChildAt(index3).getLeft() - draggedBitmapLeft;
-                    index = ((-this.mGridView.getPaddingTop()) - draggedBitmapTop) - this.mDragViewRect.height();
+                    int distanceX2 =
+                            this.mGridView.getChildAt(index3).getLeft() - draggedBitmapLeft;
+                    index =
+                            ((-this.mGridView.getPaddingTop()) - draggedBitmapTop)
+                                    - this.mDragViewRect.height();
                     numOfColumns = distanceX2;
                 }
             }
             final int distanceX3 = index;
             final int distX = numOfColumns;
-            Log.v(TAG, "dndListener.onTouchUp() dragView == null, distanceX=" + numOfColumns + ", distanceY=" + index);
+            Log.v(
+                    TAG,
+                    "dndListener.onTouchUp() dragView == null, distanceX="
+                            + numOfColumns
+                            + ", distanceY="
+                            + index);
             ValueAnimator va = ValueAnimator.ofFloat(0.0f, 1.0f);
-            va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.3
-                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public void onAnimationUpdate(ValueAnimator animator) {
-                    SemDragAndDropGridAnimator.this.mDragViewBitmapTranslateX = (int) (distX * animator.getAnimatedFraction());
-                    SemDragAndDropGridAnimator.this.mDragViewBitmapTranslateY = (int) (distanceX3 * animator.getAnimatedFraction());
-                    SemDragAndDropGridAnimator.this.mGridView.invalidate();
-                }
-            });
-            va.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemDragAndDropGridAnimator.4
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator anim) {
-                    if (SemDragAndDropGridAnimator.this.mFirstDragPos != SemDragAndDropGridAnimator.this.mDragPos) {
-                        SemDragAndDropGridAnimator.this.mDndController.dropDone(SemDragAndDropGridAnimator.this.mFirstDragPos, SemDragAndDropGridAnimator.this.mDragPos);
-                        SemDragAndDropGridAnimator.this.speakDragReleaseForAccessibility(SemDragAndDropGridAnimator.this.mDragPos);
-                    }
-                    SemDragAndDropGridAnimator.this.mItemAnimator.removeAll();
-                    SemDragAndDropGridAnimator.this.resetDndState();
-                    if (SemDragAndDropGridAnimator.this.mDndListener != null) {
-                        Log.d(SemDragAndDropGridAnimator.TAG, "dndListener.onDragAndDropEnd() from AnimationEnd");
-                        SemDragAndDropGridAnimator.this.mDndListener.onDragAndDropEnd();
-                    }
-                }
-            });
+            va.addUpdateListener(
+                    new ValueAnimator
+                            .AnimatorUpdateListener() { // from class:
+                                                        // com.samsung.android.animation.SemDragAndDropGridAnimator.3
+                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                        public void onAnimationUpdate(ValueAnimator animator) {
+                            SemDragAndDropGridAnimator.this.mDragViewBitmapTranslateX =
+                                    (int) (distX * animator.getAnimatedFraction());
+                            SemDragAndDropGridAnimator.this.mDragViewBitmapTranslateY =
+                                    (int) (distanceX3 * animator.getAnimatedFraction());
+                            SemDragAndDropGridAnimator.this.mGridView.invalidate();
+                        }
+                    });
+            va.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // com.samsung.android.animation.SemDragAndDropGridAnimator.4
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator anim) {
+                            if (SemDragAndDropGridAnimator.this.mFirstDragPos
+                                    != SemDragAndDropGridAnimator.this.mDragPos) {
+                                SemDragAndDropGridAnimator.this.mDndController.dropDone(
+                                        SemDragAndDropGridAnimator.this.mFirstDragPos,
+                                        SemDragAndDropGridAnimator.this.mDragPos);
+                                SemDragAndDropGridAnimator.this.speakDragReleaseForAccessibility(
+                                        SemDragAndDropGridAnimator.this.mDragPos);
+                            }
+                            SemDragAndDropGridAnimator.this.mItemAnimator.removeAll();
+                            SemDragAndDropGridAnimator.this.resetDndState();
+                            if (SemDragAndDropGridAnimator.this.mDndListener != null) {
+                                Log.d(
+                                        SemDragAndDropGridAnimator.TAG,
+                                        "dndListener.onDragAndDropEnd() from AnimationEnd");
+                                SemDragAndDropGridAnimator.this.mDndListener.onDragAndDropEnd();
+                            }
+                        }
+                    });
             va.setDuration(210L);
             va.setInterpolator(SINE_IN_OUT_70);
             va.start();
@@ -355,7 +404,8 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
             int destOffsetY = dropView.getTop() - dragView.getTop();
             int deltaX2 = dropView.getLeft() - (this.mDndTouchX - this.mDndTouchOffsetX);
             int deltaY = dropView.getTop() - (this.mDndTouchY - this.mDndTouchOffsetY);
-            SemDragAndDropAnimationCore.TranslateItemAnimation t = new SemDragAndDropAnimationCore.TranslateItemAnimation();
+            SemDragAndDropAnimationCore.TranslateItemAnimation t =
+                    new SemDragAndDropAnimationCore.TranslateItemAnimation();
             t.translate(destOffsetX, deltaX2, destOffsetY, deltaY);
             t.setStartAndDuration(0.7f);
             this.mItemAnimator.putItemAnimation(this.mFirstDragPos, t);
@@ -386,7 +436,9 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
     private void onTouchMove(MotionEvent event) {
         this.mDndTouchX = (int) event.getX();
         this.mDndTouchY = (int) event.getY();
-        if (this.mListItemSelectionAnimating && this.mScaleUpAndDownAnimation != null && !this.mScaleUpAndDownAnimation.isFinished()) {
+        if (this.mListItemSelectionAnimating
+                && this.mScaleUpAndDownAnimation != null
+                && !this.mScaleUpAndDownAnimation.isFinished()) {
             int distanceX = Math.abs(this.mDndTouchX - this.mFirstTouchX);
             int distanceY = Math.abs(this.mDndTouchY - this.mFirstTouchY);
             if (Math.max(distanceX, distanceY) > 15.0f) {
@@ -399,7 +451,9 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         if (temp != null) {
             top += temp.getHeight() / 2;
         }
-        int bottom = (this.mGridView.getBottom() - this.mGridView.getPaddingBottom()) - this.mGridView.getTop();
+        int bottom =
+                (this.mGridView.getBottom() - this.mGridView.getPaddingBottom())
+                        - this.mGridView.getTop();
         View temp2 = this.mGridView.getChildAt(this.mGridView.getChildCount() - 1);
         if (temp2 != null) {
             bottom -= temp2.getHeight() / 2;
@@ -429,8 +483,10 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
     @Override // com.samsung.android.animation.SemAbsDragAndDropAnimator
     void reorderIfNeeded() {
         int prevDestPosition = this.mDragPos;
-        int adjustedX = (this.mDndTouchX - this.mDndTouchOffsetX) + (this.mDragViewRect.width() / 2);
-        int adjustedY = (this.mDndTouchY - this.mDndTouchOffsetY) + (this.mDragViewRect.height() / 2);
+        int adjustedX =
+                (this.mDndTouchX - this.mDndTouchOffsetX) + (this.mDragViewRect.width() / 2);
+        int adjustedY =
+                (this.mDndTouchY - this.mDndTouchOffsetY) + (this.mDragViewRect.height() / 2);
         int dragPos = this.mGridView.pointToPosition(adjustedX, adjustedY);
         if (dragPos != -1) {
             if (this.mDndController.canDrop(this.mFirstDragPos, dragPos)) {
@@ -485,12 +541,18 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
                 v.getHitRect(this.mTempRect);
                 int xPosAdjust = 0;
                 int yPosAdjust = 0;
-                SemDragAndDropAnimationCore.ItemAnimation ia = this.mItemAnimator.getItemAnimation(i + firstVisiblePosition);
+                SemDragAndDropAnimationCore.ItemAnimation ia =
+                        this.mItemAnimator.getItemAnimation(i + firstVisiblePosition);
                 if (ia instanceof SemDragAndDropAnimationCore.TranslateItemAnimation) {
-                    xPosAdjust = ((SemDragAndDropAnimationCore.TranslateItemAnimation) ia).getDestOffsetX();
-                    yPosAdjust = ((SemDragAndDropAnimationCore.TranslateItemAnimation) ia).getDestOffsetY();
+                    xPosAdjust =
+                            ((SemDragAndDropAnimationCore.TranslateItemAnimation) ia)
+                                    .getDestOffsetX();
+                    yPosAdjust =
+                            ((SemDragAndDropAnimationCore.TranslateItemAnimation) ia)
+                                    .getDestOffsetY();
                 }
-                if (i != this.mFirstDragPos - firstVisiblePosition && this.mTempRect.contains(x - xPosAdjust, y - yPosAdjust)) {
+                if (i != this.mFirstDragPos - firstVisiblePosition
+                        && this.mTempRect.contains(x - xPosAdjust, y - yPosAdjust)) {
                     return i + firstVisiblePosition;
                 }
             }
@@ -541,7 +603,9 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
                 if (i > this.mFirstDragPos) {
                     if (this.mDndController.canDrop(this.mFirstDragPos, i)) {
                         int skipCount = 0;
-                        for (int currentIdx = i - 1; this.mNonMovableItems.contains(Integer.valueOf(currentIdx)); currentIdx--) {
+                        for (int currentIdx = i - 1;
+                                this.mNonMovableItems.contains(Integer.valueOf(currentIdx));
+                                currentIdx--) {
                             skipCount++;
                         }
                         int startIndex = i;
@@ -576,7 +640,9 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
             if (i2 < this.mFirstDragPos) {
                 if (this.mDndController.canDrop(this.mFirstDragPos, i2)) {
                     int skipCount2 = 0;
-                    for (int currentIdx2 = i2 + 1; this.mNonMovableItems.contains(Integer.valueOf(currentIdx2)); currentIdx2++) {
+                    for (int currentIdx2 = i2 + 1;
+                            this.mNonMovableItems.contains(Integer.valueOf(currentIdx2));
+                            currentIdx2++) {
                         skipCount2++;
                     }
                     int startIndex2 = i2;
@@ -630,7 +696,11 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         }
         int destOffsetX = deltaX + currentDestOffsetX;
         int destOffsetY = deltaY + currentDestOffsetY;
-        t.translate(destOffsetX, destOffsetX - currentOffsetX, destOffsetY, destOffsetY - currentOffsetY);
+        t.translate(
+                destOffsetX,
+                destOffsetX - currentOffsetX,
+                destOffsetY,
+                destOffsetY - currentOffsetY);
         this.mItemAnimator.putItemAnimation(position, t);
     }
 
@@ -641,8 +711,14 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         int yPosAdjust = 0;
         if (a instanceof SemDragAndDropAnimationCore.TranslateItemAnimation) {
             t = (SemDragAndDropAnimationCore.TranslateItemAnimation) a;
-            xPosAdjust = (int) ((SemDragAndDropAnimationCore.TranslateItemAnimation) a).getCurrentTranslateX();
-            yPosAdjust = (int) ((SemDragAndDropAnimationCore.TranslateItemAnimation) a).getCurrentTranslateY();
+            xPosAdjust =
+                    (int)
+                            ((SemDragAndDropAnimationCore.TranslateItemAnimation) a)
+                                    .getCurrentTranslateX();
+            yPosAdjust =
+                    (int)
+                            ((SemDragAndDropAnimationCore.TranslateItemAnimation) a)
+                                    .getCurrentTranslateY();
         } else {
             t = new SemDragAndDropAnimationCore.TranslateItemAnimation();
         }
@@ -661,22 +737,36 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
                 childRect.top += this.mDragGrabHandlePadding.top;
                 childRect.right -= this.mDragGrabHandlePadding.left;
                 childRect.bottom += this.mDragGrabHandlePadding.bottom;
-                Gravity.apply(this.mDragGrabHandlePosGravity, drawableWidth, drawableHeight, childRect, outGrabHandleRect, 1);
+                Gravity.apply(
+                        this.mDragGrabHandlePosGravity,
+                        drawableWidth,
+                        drawableHeight,
+                        childRect,
+                        outGrabHandleRect,
+                        1);
                 return;
             }
             childRect.left += this.mDragGrabHandlePadding.left;
             childRect.top += this.mDragGrabHandlePadding.top;
             childRect.right += this.mDragGrabHandlePadding.right;
             childRect.bottom += this.mDragGrabHandlePadding.bottom;
-            Gravity.apply(this.mDragGrabHandlePosGravity, drawableWidth, drawableHeight, childRect, outGrabHandleRect, 0);
+            Gravity.apply(
+                    this.mDragGrabHandlePosGravity,
+                    drawableWidth,
+                    drawableHeight,
+                    childRect,
+                    outGrabHandleRect,
+                    0);
         }
     }
 
-    private void drawDragHandle(Canvas canvas, Rect childRect, boolean isDraggedItem, boolean isAllowDragItem) {
+    private void drawDragHandle(
+            Canvas canvas, Rect childRect, boolean isDraggedItem, boolean isAllowDragItem) {
         if (this.mDragGrabHandleDrawable != null && isAllowDragItem) {
             getDragGrabHandleHitRect(childRect, this.mTempRect);
             this.mDragGrabHandleDrawable.setBounds(this.mTempRect);
-            this.mDragGrabHandleDrawable.setState(isDraggedItem ? PRESSED_STATE_SET : EMPTY_STATE_SET);
+            this.mDragGrabHandleDrawable.setState(
+                    isDraggedItem ? PRESSED_STATE_SET : EMPTY_STATE_SET);
             this.mDragGrabHandleDrawable.setAlpha(this.mDragHandleAlpha);
             this.mDragGrabHandleDrawable.draw(canvas);
         }
@@ -685,7 +775,10 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
     public boolean preDrawChild(Canvas canvas, View child, long drawingTime) {
         int index = this.mGridView.indexOfChild(child);
         int pos = this.mGridView.getFirstVisiblePosition() + index;
-        if (isDraggable() && pos == this.mFirstDragPos && !this.mDropDonePending && !this.mListItemSelectionAnimating) {
+        if (isDraggable()
+                && pos == this.mFirstDragPos
+                && !this.mDropDonePending
+                && !this.mListItemSelectionAnimating) {
             return false;
         }
         SemDragAndDropAnimationCore.ItemAnimation ia = this.mItemAnimator.getItemAnimation(pos);
@@ -721,7 +814,11 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
         if (isDraggable() && this.mDragViewBitmap != null && !this.mListItemSelectionAnimating) {
             int draggedItemX = this.mDndTouchX - this.mDndTouchOffsetX;
             int draggedItemY = this.mDndTouchY - this.mDndTouchOffsetY;
-            canvas.drawBitmap(this.mDragViewBitmap, this.mDragViewBitmapTranslateX + draggedItemX, this.mDragViewBitmapTranslateY + draggedItemY, this.mDragViewBitmapPaint);
+            canvas.drawBitmap(
+                    this.mDragViewBitmap,
+                    this.mDragViewBitmapTranslateX + draggedItemX,
+                    this.mDragViewBitmapTranslateY + draggedItemY,
+                    this.mDragViewBitmapPaint);
             this.mTempRect.left = this.mDragViewBitmapTranslateX + draggedItemX;
             this.mTempRect.top = this.mDragViewBitmapTranslateY + draggedItemY;
             this.mTempRect.bottom = this.mTempRect.top + this.mDragViewRect.height();
@@ -733,7 +830,8 @@ public class SemDragAndDropGridAnimator extends SemAbsDragAndDropAnimator {
     /* JADX INFO: Access modifiers changed from: private */
     public void updateDragViewBitmap() {
         if (this.mDragView != null) {
-            this.mDragViewBitmap = SemAnimatorUtils.getBitmapDrawableFromView(this.mDragView).getBitmap();
+            this.mDragViewBitmap =
+                    SemAnimatorUtils.getBitmapDrawableFromView(this.mDragView).getBitmap();
         }
     }
 }

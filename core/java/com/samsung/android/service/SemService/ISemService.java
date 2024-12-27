@@ -26,7 +26,8 @@ public interface ISemService extends IInterface {
 
     int deactivate_Cards(int i, String[] strArr, int[] iArr, int i2) throws RemoteException;
 
-    int deactivate_CardsAID(int i, int i2, String[] strArr, int[] iArr, int i3) throws RemoteException;
+    int deactivate_CardsAID(int i, int i2, String[] strArr, int[] iArr, int i3)
+            throws RemoteException;
 
     int eSE_AidFactoryReset(byte[] bArr, int i) throws RemoteException;
 
@@ -84,7 +85,8 @@ public interface ISemService extends IInterface {
 
     int start_attestation(byte[] bArr, int i, byte[] bArr2, int i2) throws RemoteException;
 
-    int start_request_credentials(byte[] bArr, byte[] bArr2, String str, byte[] bArr3) throws RemoteException;
+    int start_request_credentials(byte[] bArr, byte[] bArr2, String str, byte[] bArr3)
+            throws RemoteException;
 
     void stop_SLOG() throws RemoteException;
 
@@ -102,8 +104,7 @@ public interface ISemService extends IInterface {
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public void sem_factory() throws RemoteException {
-        }
+        public void sem_factory() throws RemoteException {}
 
         @Override // com.samsung.android.service.SemService.ISemService
         public String[] handle_CCM(byte[] ccmData, int ccmDataLen) throws RemoteException {
@@ -111,7 +112,8 @@ public interface ISemService extends IInterface {
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public String[] handle_CCMCB(byte[] ccmData, int ccmDataLen, byte[] respData, int respLen) throws RemoteException {
+        public String[] handle_CCMCB(byte[] ccmData, int ccmDataLen, byte[] respData, int respLen)
+                throws RemoteException {
             return null;
         }
 
@@ -126,12 +128,16 @@ public interface ISemService extends IInterface {
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public int deactivate_Cards(int RequestType, String[] package_name, int[] package_len, int arrayLen) throws RemoteException {
+        public int deactivate_Cards(
+                int RequestType, String[] package_name, int[] package_len, int arrayLen)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public int deactivate_CardsAID(int RequestType, int bean, String[] package_name, int[] package_len, int arrayLen) throws RemoteException {
+        public int deactivate_CardsAID(
+                int RequestType, int bean, String[] package_name, int[] package_len, int arrayLen)
+                throws RemoteException {
             return 0;
         }
 
@@ -146,26 +152,25 @@ public interface ISemService extends IInterface {
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public int start_attestation(byte[] drRsp, int drLen, byte[] svRsp, int svLen) throws RemoteException {
+        public int start_attestation(byte[] drRsp, int drLen, byte[] svRsp, int svLen)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public int continue_attestation(String data, int dataLen, byte[] rspData) throws RemoteException {
+        public int continue_attestation(String data, int dataLen, byte[] rspData)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public void secureLog(String msg) throws RemoteException {
-        }
+        public void secureLog(String msg) throws RemoteException {}
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public void start_SLOG() throws RemoteException {
-        }
+        public void start_SLOG() throws RemoteException {}
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public void stop_SLOG() throws RemoteException {
-        }
+        public void stop_SLOG() throws RemoteException {}
 
         @Override // com.samsung.android.service.SemService.ISemService
         public int getAtr_Spi() throws RemoteException {
@@ -188,7 +193,8 @@ public interface ISemService extends IInterface {
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public int send_Data(byte[] baCmd, int cLen, byte[] baRsp, int flag) throws RemoteException {
+        public int send_Data(byte[] baCmd, int cLen, byte[] baRsp, int flag)
+                throws RemoteException {
             return 0;
         }
 
@@ -198,13 +204,14 @@ public interface ISemService extends IInterface {
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public int start_request_credentials(byte[] appletAid, byte[] associatedAid, String serviceName, byte[] key_blob) throws RemoteException {
+        public int start_request_credentials(
+                byte[] appletAid, byte[] associatedAid, String serviceName, byte[] key_blob)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public void stop_request_credentials() throws RemoteException {
-        }
+        public void stop_request_credentials() throws RemoteException {}
 
         @Override // com.samsung.android.service.SemService.ISemService
         public int grdm_get_session() throws RemoteException {
@@ -267,8 +274,7 @@ public interface ISemService extends IInterface {
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public void check_Network(int type) throws RemoteException {
-        }
+        public void check_Network(int type) throws RemoteException {}
 
         @Override // com.samsung.android.service.SemService.ISemService
         public int handle_CCMScp11c(byte[] ccmData, int ccmDataLen) throws RemoteException {
@@ -281,8 +287,7 @@ public interface ISemService extends IInterface {
         }
 
         @Override // com.samsung.android.service.SemService.ISemService
-        public void agent_SLOG(String log) throws RemoteException {
-        }
+        public void agent_SLOG(String log) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -290,7 +295,7 @@ public interface ISemService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemService {
+    public abstract static class Stub extends Binder implements ISemService {
         static final int TRANSACTION_ICD = 11;
         static final int TRANSACTION_agent_SLOG = 40;
         static final int TRANSACTION_check_Network = 37;
@@ -445,7 +450,8 @@ public interface ISemService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemService.DESCRIPTOR);
             }
@@ -812,7 +818,9 @@ public interface ISemService extends IInterface {
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
-            public String[] handle_CCMCB(byte[] ccmData, int ccmDataLen, byte[] respData, int respLen) throws RemoteException {
+            public String[] handle_CCMCB(
+                    byte[] ccmData, int ccmDataLen, byte[] respData, int respLen)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -868,7 +876,9 @@ public interface ISemService extends IInterface {
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
-            public int deactivate_Cards(int RequestType, String[] package_name, int[] package_len, int arrayLen) throws RemoteException {
+            public int deactivate_Cards(
+                    int RequestType, String[] package_name, int[] package_len, int arrayLen)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -888,7 +898,13 @@ public interface ISemService extends IInterface {
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
-            public int deactivate_CardsAID(int RequestType, int bean, String[] package_name, int[] package_len, int arrayLen) throws RemoteException {
+            public int deactivate_CardsAID(
+                    int RequestType,
+                    int bean,
+                    String[] package_name,
+                    int[] package_len,
+                    int arrayLen)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -941,7 +957,8 @@ public interface ISemService extends IInterface {
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
-            public int start_attestation(byte[] drRsp, int drLen, byte[] svRsp, int svLen) throws RemoteException {
+            public int start_attestation(byte[] drRsp, int drLen, byte[] svRsp, int svLen)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -963,7 +980,8 @@ public interface ISemService extends IInterface {
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
-            public int continue_attestation(String data, int dataLen, byte[] rspData) throws RemoteException {
+            public int continue_attestation(String data, int dataLen, byte[] rspData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1092,7 +1110,8 @@ public interface ISemService extends IInterface {
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
-            public int send_Data(byte[] baCmd, int cLen, byte[] baRsp, int flag) throws RemoteException {
+            public int send_Data(byte[] baCmd, int cLen, byte[] baRsp, int flag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1114,7 +1133,8 @@ public interface ISemService extends IInterface {
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
-            public int check_SeState(byte[] appletAid, byte[] associatedAid) throws RemoteException {
+            public int check_SeState(byte[] appletAid, byte[] associatedAid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1132,7 +1152,9 @@ public interface ISemService extends IInterface {
             }
 
             @Override // com.samsung.android.service.SemService.ISemService
-            public int start_request_credentials(byte[] appletAid, byte[] associatedAid, String serviceName, byte[] key_blob) throws RemoteException {
+            public int start_request_credentials(
+                    byte[] appletAid, byte[] associatedAid, String serviceName, byte[] key_blob)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

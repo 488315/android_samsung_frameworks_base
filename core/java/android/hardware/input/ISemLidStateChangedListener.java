@@ -14,8 +14,7 @@ public interface ISemLidStateChangedListener extends IInterface {
 
     public static class Default implements ISemLidStateChangedListener {
         @Override // android.hardware.input.ISemLidStateChangedListener
-        public void onLidStateChanged(long whenNanos, boolean lidOpen) throws RemoteException {
-        }
+        public void onLidStateChanged(long whenNanos, boolean lidOpen) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface ISemLidStateChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemLidStateChangedListener {
+    public abstract static class Stub extends Binder implements ISemLidStateChangedListener {
         static final int TRANSACTION_onLidStateChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface ISemLidStateChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemLidStateChangedListener.DESCRIPTOR);
             }

@@ -1,7 +1,5 @@
 package android.net.wifi.nl80211;
 
-import android.net.wifi.nl80211.ISendMgmtFrameEvent;
-import android.net.wifi.nl80211.IWifiScannerImpl;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -12,7 +10,8 @@ import android.os.RemoteException;
 public interface IClientInterface extends IInterface {
     public static final String DESCRIPTOR = "android.net.wifi.nl80211.IClientInterface";
 
-    void SendMgmtFrame(byte[] bArr, ISendMgmtFrameEvent iSendMgmtFrameEvent, int i) throws RemoteException;
+    void SendMgmtFrame(byte[] bArr, ISendMgmtFrameEvent iSendMgmtFrameEvent, int i)
+            throws RemoteException;
 
     String getInterfaceName() throws RemoteException;
 
@@ -51,8 +50,8 @@ public interface IClientInterface extends IInterface {
         }
 
         @Override // android.net.wifi.nl80211.IClientInterface
-        public void SendMgmtFrame(byte[] frame, ISendMgmtFrameEvent callback, int mcs) throws RemoteException {
-        }
+        public void SendMgmtFrame(byte[] frame, ISendMgmtFrameEvent callback, int mcs)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -60,7 +59,7 @@ public interface IClientInterface extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IClientInterface {
+    public abstract static class Stub extends Binder implements IClientInterface {
         static final int TRANSACTION_SendMgmtFrame = 6;
         static final int TRANSACTION_getInterfaceName = 4;
         static final int TRANSACTION_getMacAddress = 3;
@@ -113,7 +112,8 @@ public interface IClientInterface extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IClientInterface.DESCRIPTOR);
             }
@@ -149,7 +149,8 @@ public interface IClientInterface extends IInterface {
                     return true;
                 case 6:
                     byte[] _arg0 = data.createByteArray();
-                    ISendMgmtFrameEvent _arg1 = ISendMgmtFrameEvent.Stub.asInterface(data.readStrongBinder());
+                    ISendMgmtFrameEvent _arg1 =
+                            ISendMgmtFrameEvent.Stub.asInterface(data.readStrongBinder());
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     SendMgmtFrame(_arg0, _arg1, _arg2);
@@ -247,7 +248,8 @@ public interface IClientInterface extends IInterface {
                     _data.writeInterfaceToken(IClientInterface.DESCRIPTOR);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    IWifiScannerImpl _result = IWifiScannerImpl.Stub.asInterface(_reply.readStrongBinder());
+                    IWifiScannerImpl _result =
+                            IWifiScannerImpl.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -256,7 +258,8 @@ public interface IClientInterface extends IInterface {
             }
 
             @Override // android.net.wifi.nl80211.IClientInterface
-            public void SendMgmtFrame(byte[] frame, ISendMgmtFrameEvent callback, int mcs) throws RemoteException {
+            public void SendMgmtFrame(byte[] frame, ISendMgmtFrameEvent callback, int mcs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IClientInterface.DESCRIPTOR);

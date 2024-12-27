@@ -5,6 +5,7 @@ import android.hardware.scontext.SContextConstants;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -22,18 +23,29 @@ public final class GnssSignalType {
             return false;
         }
         GnssSignalType other = (GnssSignalType) otherObject;
-        if (this.constellation == other.constellation && this.carrierFrequencyHz == other.carrierFrequencyHz && HidlSupport.deepEquals(this.codeType, other.codeType)) {
+        if (this.constellation == other.constellation
+                && this.carrierFrequencyHz == other.carrierFrequencyHz
+                && HidlSupport.deepEquals(this.codeType, other.codeType)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.constellation))), Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.carrierFrequencyHz))), Integer.valueOf(HidlSupport.deepHashCode(this.codeType)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.constellation))),
+                Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.carrierFrequencyHz))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.codeType)));
     }
 
     public final String toString() {
-        return "{.constellation = " + GnssConstellationType.toString(this.constellation) + ", .carrierFrequencyHz = " + this.carrierFrequencyHz + ", .codeType = " + this.codeType + "}";
+        return "{.constellation = "
+                + GnssConstellationType.toString(this.constellation)
+                + ", .carrierFrequencyHz = "
+                + this.carrierFrequencyHz
+                + ", .codeType = "
+                + this.codeType
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -45,7 +57,8 @@ public final class GnssSignalType {
         ArrayList<GnssSignalType> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             GnssSignalType _hidl_vec_element = new GnssSignalType();
@@ -55,11 +68,16 @@ public final class GnssSignalType {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.constellation = _hidl_blob.getInt8(_hidl_offset + 0);
         this.carrierFrequencyHz = _hidl_blob.getDouble(_hidl_offset + 8);
         this.codeType = _hidl_blob.getString(_hidl_offset + 16);
-        parcel.readEmbeddedBuffer(this.codeType.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 16 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.codeType.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 16 + 0,
+                false);
     }
 
     public final void writeToParcel(HwParcel parcel) {
@@ -68,7 +86,8 @@ public final class GnssSignalType {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<GnssSignalType> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<GnssSignalType> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

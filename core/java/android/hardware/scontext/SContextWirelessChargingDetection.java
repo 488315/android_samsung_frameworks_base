@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextWirelessChargingDetection extends SContextEventContext {
-    public static final Parcelable.Creator<SContextWirelessChargingDetection> CREATOR = new Parcelable.Creator<SContextWirelessChargingDetection>() { // from class: android.hardware.scontext.SContextWirelessChargingDetection.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextWirelessChargingDetection createFromParcel(Parcel in) {
-            return new SContextWirelessChargingDetection(in);
-        }
+    public static final Parcelable.Creator<SContextWirelessChargingDetection> CREATOR =
+            new Parcelable.Creator<SContextWirelessChargingDetection>() { // from class:
+                // android.hardware.scontext.SContextWirelessChargingDetection.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextWirelessChargingDetection createFromParcel(Parcel in) {
+                    return new SContextWirelessChargingDetection(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextWirelessChargingDetection[] newArray(int size) {
-            return new SContextWirelessChargingDetection[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextWirelessChargingDetection[] newArray(int size) {
+                    return new SContextWirelessChargingDetection[size];
+                }
+            };
     private Bundle mContext;
 
     SContextWirelessChargingDetection() {
@@ -34,7 +36,8 @@ public class SContextWirelessChargingDetection extends SContextEventContext {
         return this.mContext.getInt("Status");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

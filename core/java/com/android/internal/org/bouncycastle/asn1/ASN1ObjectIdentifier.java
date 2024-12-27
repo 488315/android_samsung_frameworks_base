@@ -1,7 +1,9 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import android.media.MediaMetrics;
+
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
@@ -11,7 +13,8 @@ import java.util.concurrent.ConcurrentMap;
 /* loaded from: classes5.dex */
 public class ASN1ObjectIdentifier extends ASN1Primitive {
     private static final long LONG_LIMIT = 72057594037927808L;
-    private static final ConcurrentMap<OidHandle, ASN1ObjectIdentifier> pool = new ConcurrentHashMap();
+    private static final ConcurrentMap<OidHandle, ASN1ObjectIdentifier> pool =
+            new ConcurrentHashMap();
     private byte[] body;
     private final String identifier;
 
@@ -30,10 +33,12 @@ public class ASN1ObjectIdentifier extends ASN1Primitive {
             try {
                 return (ASN1ObjectIdentifier) fromByteArray(enc);
             } catch (IOException e) {
-                throw new IllegalArgumentException("failed to construct object identifier from byte[]: " + e.getMessage());
+                throw new IllegalArgumentException(
+                        "failed to construct object identifier from byte[]: " + e.getMessage());
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public static ASN1ObjectIdentifier getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -73,7 +78,9 @@ public class ASN1ObjectIdentifier extends ASN1Primitive {
                     value = value2 << 7;
                 }
             } else {
-                BigInteger bigValue2 = (bigValue == null ? BigInteger.valueOf(value) : bigValue).or(BigInteger.valueOf(b & 127));
+                BigInteger bigValue2 =
+                        (bigValue == null ? BigInteger.valueOf(value) : bigValue)
+                                .or(BigInteger.valueOf(b & 127));
                 if ((b & 128) == 0) {
                     if (first) {
                         objId.append('2');
@@ -121,7 +128,9 @@ public class ASN1ObjectIdentifier extends ASN1Primitive {
     public boolean on(ASN1ObjectIdentifier stem) {
         String id = getId();
         String stemId = stem.getId();
-        return id.length() > stemId.length() && id.charAt(stemId.length()) == '.' && id.startsWith(stemId);
+        return id.length() > stemId.length()
+                && id.charAt(stemId.length()) == '.'
+                && id.startsWith(stemId);
     }
 
     private void writeField(ByteArrayOutputStream out, long fieldValue) {
@@ -197,7 +206,8 @@ public class ASN1ObjectIdentifier extends ASN1Primitive {
         out.writeEncoded(withTag, 6, getBody());
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         return this.identifier.hashCode();
     }
@@ -218,9 +228,9 @@ public class ASN1ObjectIdentifier extends ASN1Primitive {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:14:0x002e, code lost:
-    
-        return false;
-     */
+
+       return false;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -270,12 +280,18 @@ public class ASN1ObjectIdentifier extends ASN1Primitive {
         L3d:
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier.isValidBranchID(java.lang.String, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier.isValidBranchID(java.lang.String,"
+                    + " int):boolean");
     }
 
     private static boolean isValidIdentifier(String identifier) {
         char first;
-        if (identifier.length() < 3 || identifier.charAt(1) != '.' || (first = identifier.charAt(0)) < '0' || first > '2') {
+        if (identifier.length() < 3
+                || identifier.charAt(1) != '.'
+                || (first = identifier.charAt(0)) < '0'
+                || first > '2') {
             return false;
         }
         return isValidBranchID(identifier, 2);

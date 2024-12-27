@@ -12,7 +12,14 @@ public class ClipRectTBAnimation extends ClipRectAnimation {
     private final int mToTranslateY;
     private final Interpolator mTranslateInterpolator;
 
-    public ClipRectTBAnimation(int fromT, int fromB, int toT, int toB, int fromTranslateY, int toTranslateY, Interpolator translateInterpolator) {
+    public ClipRectTBAnimation(
+            int fromT,
+            int fromB,
+            int toT,
+            int toB,
+            int fromTranslateY,
+            int toTranslateY,
+            Interpolator translateInterpolator) {
         super(0, fromT, 0, fromB, 0, toT, 0, toB);
         this.mFromTranslateY = fromTranslateY;
         this.mToTranslateY = toTranslateY;
@@ -36,8 +43,17 @@ public class ClipRectTBAnimation extends ClipRectAnimation {
     @Override // android.view.animation.ClipRectAnimation, android.view.animation.Animation
     protected void applyTransformation(float it, Transformation tr) {
         float translationT = this.mTranslateInterpolator.getInterpolation(this.mNormalizedTime);
-        int translation = (int) (this.mFromTranslateY + ((this.mToTranslateY - this.mFromTranslateY) * translationT));
+        int translation =
+                (int)
+                        (this.mFromTranslateY
+                                + ((this.mToTranslateY - this.mFromTranslateY) * translationT));
         Rect oldClipRect = tr.getClipRect();
-        tr.setClipRect(oldClipRect.left, (this.mFromRect.top - translation) + ((int) ((this.mToRect.top - this.mFromRect.top) * it)), oldClipRect.right, (this.mFromRect.bottom - translation) + ((int) ((this.mToRect.bottom - this.mFromRect.bottom) * it)));
+        tr.setClipRect(
+                oldClipRect.left,
+                (this.mFromRect.top - translation)
+                        + ((int) ((this.mToRect.top - this.mFromRect.top) * it)),
+                oldClipRect.right,
+                (this.mFromRect.bottom - translation)
+                        + ((int) ((this.mToRect.bottom - this.mFromRect.bottom) * it)));
     }
 }

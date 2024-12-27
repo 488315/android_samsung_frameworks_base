@@ -20,18 +20,20 @@ public abstract class AudioExecutor {
             }
         }
         final String caller = Debug.getCaller();
-        sExecutor.execute(new Runnable() { // from class: com.samsung.android.server.audio.AudioExecutor$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                Runnable runnable2 = runnable;
-                String str = caller;
-                long uptimeMillis = SystemClock.uptimeMillis();
-                runnable2.run();
-                long uptimeMillis2 = SystemClock.uptimeMillis() - uptimeMillis;
-                if (uptimeMillis2 > 100) {
-                    Log.w("AS.AudioExecutor", "Slow " + uptimeMillis2 + " in " + str);
-                }
-            }
-        });
+        sExecutor.execute(
+                new Runnable() { // from class:
+                                 // com.samsung.android.server.audio.AudioExecutor$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        Runnable runnable2 = runnable;
+                        String str = caller;
+                        long uptimeMillis = SystemClock.uptimeMillis();
+                        runnable2.run();
+                        long uptimeMillis2 = SystemClock.uptimeMillis() - uptimeMillis;
+                        if (uptimeMillis2 > 100) {
+                            Log.w("AS.AudioExecutor", "Slow " + uptimeMillis2 + " in " + str);
+                        }
+                    }
+                });
     }
 }

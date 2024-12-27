@@ -1,16 +1,15 @@
 package android.app.people;
 
 import android.annotation.SystemApi;
-import android.app.people.IConversationListener;
-import android.app.people.IPeopleManager;
-import android.app.people.PeopleManager;
 import android.content.Context;
 import android.content.pm.ParceledListSlice;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +27,9 @@ public final class PeopleManager {
     public PeopleManager(Context context) throws ServiceManager.ServiceNotFoundException {
         this.mConversationListeners = new HashMap();
         this.mContext = context;
-        this.mService = IPeopleManager.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.PEOPLE_SERVICE));
+        this.mService =
+                IPeopleManager.Stub.asInterface(
+                        ServiceManager.getServiceOrThrow(Context.PEOPLE_SERVICE));
     }
 
     public PeopleManager(Context context, IPeopleManager service) {
@@ -52,7 +53,11 @@ public final class PeopleManager {
         Preconditions.checkStringNotEmpty(conversationId);
         Objects.requireNonNull(status);
         try {
-            this.mService.addOrUpdateStatus(this.mContext.getPackageName(), this.mContext.getUserId(), conversationId, status);
+            this.mService.addOrUpdateStatus(
+                    this.mContext.getPackageName(),
+                    this.mContext.getUserId(),
+                    conversationId,
+                    status);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -62,7 +67,11 @@ public final class PeopleManager {
         Preconditions.checkStringNotEmpty(conversationId);
         Preconditions.checkStringNotEmpty(statusId);
         try {
-            this.mService.clearStatus(this.mContext.getPackageName(), this.mContext.getUserId(), conversationId, statusId);
+            this.mService.clearStatus(
+                    this.mContext.getPackageName(),
+                    this.mContext.getUserId(),
+                    conversationId,
+                    statusId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -71,7 +80,8 @@ public final class PeopleManager {
     public void clearStatuses(String conversationId) {
         Preconditions.checkStringNotEmpty(conversationId);
         try {
-            this.mService.clearStatuses(this.mContext.getPackageName(), this.mContext.getUserId(), conversationId);
+            this.mService.clearStatuses(
+                    this.mContext.getPackageName(), this.mContext.getUserId(), conversationId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -79,7 +89,11 @@ public final class PeopleManager {
 
     public List<ConversationStatus> getStatuses(String conversationId) {
         try {
-            ParceledListSlice<ConversationStatus> parceledList = this.mService.getStatuses(this.mContext.getPackageName(), this.mContext.getUserId(), conversationId);
+            ParceledListSlice<ConversationStatus> parceledList =
+                    this.mService.getStatuses(
+                            this.mContext.getPackageName(),
+                            this.mContext.getUserId(),
+                            conversationId);
             if (parceledList != null) {
                 return parceledList.getList();
             }
@@ -90,11 +104,15 @@ public final class PeopleManager {
     }
 
     public interface ConversationListener {
-        default void onConversationUpdate(ConversationChannel conversation) {
-        }
+        default void onConversationUpdate(ConversationChannel conversation) {}
     }
 
-    public void registerConversationListener(String packageName, int userId, String shortcutId, ConversationListener listener, Executor executor) {
+    public void registerConversationListener(
+            String packageName,
+            int userId,
+            String shortcutId,
+            ConversationListener listener,
+            Executor executor) {
         Objects.requireNonNull(listener, "Listener cannot be null");
         Objects.requireNonNull(packageName, "Package name cannot be null");
         Objects.requireNonNull(shortcutId, "Shortcut ID cannot be null");
@@ -138,17 +156,21 @@ public final class PeopleManager {
             if (this.mListener == null || this.mExecutor == null) {
                 Slog.e(PeopleManager.LOG_TAG, "Binder is dead");
             } else {
-                this.mExecutor.execute(new Runnable() { // from class: android.app.people.PeopleManager$ConversationListenerProxy$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        PeopleManager.ConversationListenerProxy.this.lambda$onConversationUpdate$0(conversation);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.app.people.PeopleManager$ConversationListenerProxy$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                PeopleManager.ConversationListenerProxy.this
+                                        .lambda$onConversationUpdate$0(conversation);
+                            }
+                        });
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onConversationUpdate$0(ConversationChannel conversation) {
+        public /* synthetic */ void lambda$onConversationUpdate$0(
+                ConversationChannel conversation) {
             this.mListener.onConversationUpdate(conversation);
         }
     }

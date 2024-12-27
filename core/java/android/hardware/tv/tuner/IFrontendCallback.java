@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IFrontendCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$tv$tuner$IFrontendCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$tv$tuner$IFrontendCallback".replace('$', '.');
     public static final String HASH = "f8d74c149f04e76b6d622db2bd8e465dae24b08c";
     public static final int VERSION = 2;
 
@@ -22,12 +23,10 @@ public interface IFrontendCallback extends IInterface {
 
     public static class Default implements IFrontendCallback {
         @Override // android.hardware.tv.tuner.IFrontendCallback
-        public void onEvent(int frontendEventType) throws RemoteException {
-        }
+        public void onEvent(int frontendEventType) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFrontendCallback
-        public void onScanMessage(int type, FrontendScanMessage message) throws RemoteException {
-        }
+        public void onScanMessage(int type, FrontendScanMessage message) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFrontendCallback
         public int getInterfaceVersion() {
@@ -45,7 +44,7 @@ public interface IFrontendCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFrontendCallback {
+    public abstract static class Stub extends Binder implements IFrontendCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_onEvent = 1;
@@ -73,7 +72,8 @@ public interface IFrontendCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -100,7 +100,8 @@ public interface IFrontendCallback extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    FrontendScanMessage _arg1 = (FrontendScanMessage) data.readTypedObject(FrontendScanMessage.CREATOR);
+                    FrontendScanMessage _arg1 =
+                            (FrontendScanMessage) data.readTypedObject(FrontendScanMessage.CREATOR);
                     data.enforceNoDataAvail();
                     onScanMessage(_arg02, _arg1);
                     return true;
@@ -143,7 +144,8 @@ public interface IFrontendCallback extends IInterface {
             }
 
             @Override // android.hardware.tv.tuner.IFrontendCallback
-            public void onScanMessage(int type, FrontendScanMessage message) throws RemoteException {
+            public void onScanMessage(int type, FrontendScanMessage message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);

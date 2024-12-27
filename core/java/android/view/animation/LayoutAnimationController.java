@@ -5,8 +5,9 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
+
 import com.android.internal.R;
+
 import java.util.Random;
 
 /* loaded from: classes4.dex */
@@ -116,7 +117,8 @@ public class LayoutAnimationController {
     }
 
     public boolean isDone() {
-        return AnimationUtils.currentAnimationTimeMillis() > (this.mAnimation.getStartTime() + this.mMaxDelay) + this.mDuration;
+        return AnimationUtils.currentAnimationTimeMillis()
+                > (this.mAnimation.getStartTime() + this.mMaxDelay) + this.mDuration;
     }
 
     protected long getDelayForView(View view) {

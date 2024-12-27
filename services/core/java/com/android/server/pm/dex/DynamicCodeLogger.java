@@ -5,9 +5,10 @@ import android.content.pm.PackageInfo;
 import android.os.FileUtils;
 import android.os.ServiceManager;
 import android.util.EventLog;
+
 import com.android.server.pm.Installer;
-import com.android.server.pm.dex.PackageDynamicCodeLoading;
 import com.android.server.utils.WatchedArrayMap;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -23,7 +24,10 @@ public final class DynamicCodeLogger {
     public final PackageDynamicCodeLoading mPackageDynamicCodeLoading;
     public IPackageManager mPackageManager;
 
-    public DynamicCodeLogger(IPackageManager iPackageManager, Installer installer, PackageDynamicCodeLoading packageDynamicCodeLoading) {
+    public DynamicCodeLogger(
+            IPackageManager iPackageManager,
+            Installer installer,
+            PackageDynamicCodeLoading packageDynamicCodeLoading) {
         this.mPackageManager = iPackageManager;
         this.mInstaller = installer;
         this.mPackageDynamicCodeLoading = packageDynamicCodeLoading;
@@ -39,7 +43,8 @@ public final class DynamicCodeLogger {
             return false;
         }
         try {
-            return FileUtils.contains(new File(str2).getCanonicalPath(), new File(str).getCanonicalPath());
+            return FileUtils.contains(
+                    new File(str2).getCanonicalPath(), new File(str).getCanonicalPath());
         } catch (IOException unused) {
             return false;
         }
@@ -49,15 +54,21 @@ public final class DynamicCodeLogger {
         PackageDynamicCodeLoading.PackageDynamicCode packageDynamicCode;
         PackageDynamicCodeLoading packageDynamicCodeLoading = this.mPackageDynamicCodeLoading;
         synchronized (packageDynamicCodeLoading.mLock) {
-            PackageDynamicCodeLoading.PackageDynamicCode packageDynamicCode2 = (PackageDynamicCodeLoading.PackageDynamicCode) ((HashMap) packageDynamicCodeLoading.mPackageMap).get(str);
-            packageDynamicCode = packageDynamicCode2 == null ? null : new PackageDynamicCodeLoading.PackageDynamicCode(packageDynamicCode2);
+            PackageDynamicCodeLoading.PackageDynamicCode packageDynamicCode2 =
+                    (PackageDynamicCodeLoading.PackageDynamicCode)
+                            ((HashMap) packageDynamicCodeLoading.mPackageMap).get(str);
+            packageDynamicCode =
+                    packageDynamicCode2 == null
+                            ? null
+                            : new PackageDynamicCodeLoading.PackageDynamicCode(packageDynamicCode2);
         }
         return packageDynamicCode;
     }
 
     public final IPackageManager getPackageManager() {
         if (this.mPackageManager == null) {
-            this.mPackageManager = IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
+            this.mPackageManager =
+                    IPackageManager.Stub.asInterface(ServiceManager.getService("package"));
         }
         return this.mPackageManager;
     }
@@ -70,22 +81,29 @@ public final class DynamicCodeLogger {
             num.getClass();
             Iterator it = list.iterator();
             while (it.hasNext()) {
-                ((Set) hashMap.computeIfAbsent(((PackageInfo) it.next()).packageName, new DynamicCodeLogger$$ExternalSyntheticLambda0())).add(num);
+                ((Set)
+                                hashMap.computeIfAbsent(
+                                        ((PackageInfo) it.next()).packageName,
+                                        new DynamicCodeLogger$$ExternalSyntheticLambda0()))
+                        .add(num);
             }
         }
         this.mPackageDynamicCodeLoading.read((WatchedArrayMap) null);
         PackageDynamicCodeLoading packageDynamicCodeLoading = this.mPackageDynamicCodeLoading;
         synchronized (packageDynamicCodeLoading.mLock) {
             try {
-                Iterator it2 = ((HashMap) packageDynamicCodeLoading.mPackageMap).entrySet().iterator();
+                Iterator it2 =
+                        ((HashMap) packageDynamicCodeLoading.mPackageMap).entrySet().iterator();
                 while (it2.hasNext()) {
                     Map.Entry entry2 = (Map.Entry) it2.next();
                     Set set = (Set) hashMap.get(entry2.getKey());
                     if (set == null) {
                         it2.remove();
                     } else {
-                        PackageDynamicCodeLoading.PackageDynamicCode packageDynamicCode = (PackageDynamicCodeLoading.PackageDynamicCode) entry2.getValue();
-                        PackageDynamicCodeLoading.PackageDynamicCode.m783$$Nest$msyncData(packageDynamicCode, hashMap, set);
+                        PackageDynamicCodeLoading.PackageDynamicCode packageDynamicCode =
+                                (PackageDynamicCodeLoading.PackageDynamicCode) entry2.getValue();
+                        PackageDynamicCodeLoading.PackageDynamicCode.m783$$Nest$msyncData(
+                                packageDynamicCode, hashMap, set);
                         if (((HashMap) packageDynamicCode.mFileUsageMap).isEmpty()) {
                             it2.remove();
                         }

@@ -3,6 +3,7 @@ package android.hardware.thermal.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -21,18 +22,33 @@ public final class CpuUsage {
             return false;
         }
         CpuUsage other = (CpuUsage) otherObject;
-        if (HidlSupport.deepEquals(this.name, other.name) && this.active == other.active && this.total == other.total && this.isOnline == other.isOnline) {
+        if (HidlSupport.deepEquals(this.name, other.name)
+                && this.active == other.active
+                && this.total == other.total
+                && this.isOnline == other.isOnline) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.name)), Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.active))), Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.total))), Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isOnline))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.name)),
+                Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.active))),
+                Integer.valueOf(HidlSupport.deepHashCode(Long.valueOf(this.total))),
+                Integer.valueOf(HidlSupport.deepHashCode(Boolean.valueOf(this.isOnline))));
     }
 
     public final String toString() {
-        return "{.name = " + this.name + ", .active = " + this.active + ", .total = " + this.total + ", .isOnline = " + this.isOnline + "}";
+        return "{.name = "
+                + this.name
+                + ", .active = "
+                + this.active
+                + ", .total = "
+                + this.total
+                + ", .isOnline = "
+                + this.isOnline
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -44,7 +60,8 @@ public final class CpuUsage {
         ArrayList<CpuUsage> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CpuUsage _hidl_vec_element = new CpuUsage();
@@ -54,9 +71,11 @@ public final class CpuUsage {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.name = _hidl_blob.getString(_hidl_offset + 0);
-        parcel.readEmbeddedBuffer(this.name.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 0 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.name.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 0 + 0, false);
         this.active = _hidl_blob.getInt64(16 + _hidl_offset);
         this.total = _hidl_blob.getInt64(24 + _hidl_offset);
         this.isOnline = _hidl_blob.getBool(32 + _hidl_offset);

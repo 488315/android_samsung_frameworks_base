@@ -3,28 +3,33 @@ package android.view.inputmethod;
 import android.graphics.RectF;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class DeleteRangeGesture extends PreviewableHandwritingGesture implements Parcelable {
-    public static final Parcelable.Creator<DeleteRangeGesture> CREATOR = new Parcelable.Creator<DeleteRangeGesture>() { // from class: android.view.inputmethod.DeleteRangeGesture.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DeleteRangeGesture createFromParcel(Parcel source) {
-            return new DeleteRangeGesture(source);
-        }
+    public static final Parcelable.Creator<DeleteRangeGesture> CREATOR =
+            new Parcelable.Creator<
+                    DeleteRangeGesture>() { // from class:
+                                            // android.view.inputmethod.DeleteRangeGesture.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DeleteRangeGesture createFromParcel(Parcel source) {
+                    return new DeleteRangeGesture(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DeleteRangeGesture[] newArray(int size) {
-            return new DeleteRangeGesture[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DeleteRangeGesture[] newArray(int size) {
+                    return new DeleteRangeGesture[size];
+                }
+            };
     private RectF mEndArea;
     private int mGranularity;
     private RectF mStartArea;
 
-    private DeleteRangeGesture(int granularity, RectF startArea, RectF endArea, String fallbackText) {
+    private DeleteRangeGesture(
+            int granularity, RectF startArea, RectF endArea, String fallbackText) {
         this.mType = 64;
         this.mStartArea = startArea;
         this.mEndArea = endArea;
@@ -79,18 +84,26 @@ public final class DeleteRangeGesture extends PreviewableHandwritingGesture impl
         }
 
         public DeleteRangeGesture build() {
-            if (this.mStartArea == null || this.mStartArea.isEmpty() || this.mEndArea == null || this.mEndArea.isEmpty()) {
+            if (this.mStartArea == null
+                    || this.mStartArea.isEmpty()
+                    || this.mEndArea == null
+                    || this.mEndArea.isEmpty()) {
                 throw new IllegalArgumentException("Deletion area must be set.");
             }
             if (this.mGranularity <= 0) {
                 throw new IllegalArgumentException("Deletion granularity must be set.");
             }
-            return new DeleteRangeGesture(this.mGranularity, this.mStartArea, this.mEndArea, this.mFallbackText);
+            return new DeleteRangeGesture(
+                    this.mGranularity, this.mStartArea, this.mEndArea, this.mFallbackText);
         }
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mGranularity), this.mStartArea, this.mEndArea, this.mFallbackText);
+        return Objects.hash(
+                Integer.valueOf(this.mGranularity),
+                this.mStartArea,
+                this.mEndArea,
+                this.mFallbackText);
     }
 
     public boolean equals(Object o) {
@@ -98,7 +111,9 @@ public final class DeleteRangeGesture extends PreviewableHandwritingGesture impl
             return false;
         }
         DeleteRangeGesture that = (DeleteRangeGesture) o;
-        if (this.mGranularity == that.mGranularity && Objects.equals(this.mFallbackText, that.mFallbackText) && Objects.equals(this.mStartArea, that.mStartArea)) {
+        if (this.mGranularity == that.mGranularity
+                && Objects.equals(this.mFallbackText, that.mFallbackText)
+                && Objects.equals(this.mStartArea, that.mStartArea)) {
             return Objects.equals(this.mEndArea, that.mEndArea);
         }
         return false;

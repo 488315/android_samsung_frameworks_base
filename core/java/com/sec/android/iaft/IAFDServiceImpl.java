@@ -14,8 +14,10 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.Window;
+
 import com.samsung.android.core.AppJumpBlockTool;
 import com.samsung.android.feature.SemFloatingFeature;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -51,7 +53,9 @@ class IAFDServiceImpl {
     private int getDualUserIdAndIsNoSettingsProvidersOfDual() {
         int maxcnt = 1000;
         int dualuserid = 0;
-        String[] cmdArr = {"/system/bin/sh", "-c", "dumpsys package com.android.providers.settings | grep User"};
+        String[] cmdArr = {
+            "/system/bin/sh", "-c", "dumpsys package com.android.providers.settings | grep User"
+        };
         try {
             Process p = Runtime.getRuntime().exec(cmdArr);
             p.waitFor();
@@ -62,7 +66,9 @@ class IAFDServiceImpl {
                     break;
                 }
                 maxcnt--;
-                if (line.startsWith("    User ") && !line.startsWith("    User 0") && line.contains("installed=false")) {
+                if (line.startsWith("    User ")
+                        && !line.startsWith("    User 0")
+                        && line.contains("installed=false")) {
                     int posEnd = line.indexOf(58);
                     String strTmp = line.substring(9, posEnd);
                     dualuserid = Integer.parseInt(strTmp);
@@ -98,7 +104,9 @@ class IAFDServiceImpl {
                     break;
                 case 2:
                     Bundle bundle2 = msg.getData();
-                    boolean repairResult = IAFDServiceImpl.this.mIAFDRepair.repairHandle(IAFDServiceImpl.this.mContext, bundle2);
+                    boolean repairResult =
+                            IAFDServiceImpl.this.mIAFDRepair.repairHandle(
+                                    IAFDServiceImpl.this.mContext, bundle2);
                     String trigApp = bundle2.getString("repairTrigAPP", "vocApp");
                     if (trigApp.equals("vocApp")) {
                         int OneKeyRepairMode = bundle2.getInt("OneKeyRepairMode");
@@ -123,7 +131,8 @@ class IAFDServiceImpl {
                     IAFDServiceImpl.this.IAFDstartApp(msg.getData(), true);
                     break;
                 case 9:
-                    IAFDServiceImpl.this.mIAFDGetHotfixDataService.getDataFromClient(msg.getData().getString("hotfixdata"));
+                    IAFDServiceImpl.this.mIAFDGetHotfixDataService.getDataFromClient(
+                            msg.getData().getString("hotfixdata"));
                     break;
             }
         }
@@ -167,7 +176,11 @@ class IAFDServiceImpl {
             return true;
         }
         Intent intent2 = new Intent("com.samsung.android.sm.ACTION_START_THIRD_APP_ERROR_DIALOG");
-        intent2.setPackage(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME", "com.samsung.android.lool"));
+        intent2.setPackage(
+                SemFloatingFeature.getInstance()
+                        .getString(
+                                "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME",
+                                "com.samsung.android.lool"));
         intent2.putExtras(bundle);
         this.mContext.startService(intent2);
         Log.d(TAG, "ShowAppErrorUiExt start sm app");
@@ -177,27 +190,41 @@ class IAFDServiceImpl {
     private void showSystemAppDiaglog(final Bundle bundle, final String trigApp) {
         try {
             AlertDialog.Builder builder = new AlertDialog.Builder(this.mContext);
-            builder.setTitle("System hint").setMessage("Happened exception in the running application, you can try to resolve it with the button of [Try to resolve]").setCancelable(true).setPositiveButton("Try to resolve", new DialogInterface.OnClickListener() { // from class: com.sec.android.iaft.IAFDServiceImpl.2
-                @Override // android.content.DialogInterface.OnClickListener
-                public void onClick(DialogInterface dialog, int which) {
-                    if (trigApp.equals("SmartMApp")) {
-                        Intent intent = new Intent("com.samsung.android.sm.ACTION_START_THIRD_APP_ERROR_DIALOG");
-                        intent.setPackage("com.samsung.android.sm_cn");
-                        intent.putExtras(bundle);
-                        IAFDServiceImpl.this.mContext.startService(intent);
-                        return;
-                    }
-                    Message msg = new Message();
-                    msg.setData(bundle);
-                    msg.what = 2;
-                    IAFDServiceImpl.this.mHandler.sendMessage(msg);
-                }
-            }).setNegativeButton(AppJumpBlockTool.BlockDialogReceiver.RESULT_CANCEL, new DialogInterface.OnClickListener() { // from class: com.sec.android.iaft.IAFDServiceImpl.1
-                @Override // android.content.DialogInterface.OnClickListener
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
+            builder.setTitle("System hint")
+                    .setMessage(
+                            "Happened exception in the running application, you can try to resolve"
+                                + " it with the button of [Try to resolve]")
+                    .setCancelable(true)
+                    .setPositiveButton(
+                            "Try to resolve",
+                            new DialogInterface.OnClickListener() { // from class:
+                                // com.sec.android.iaft.IAFDServiceImpl.2
+                                @Override // android.content.DialogInterface.OnClickListener
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (trigApp.equals("SmartMApp")) {
+                                        Intent intent =
+                                                new Intent(
+                                                        "com.samsung.android.sm.ACTION_START_THIRD_APP_ERROR_DIALOG");
+                                        intent.setPackage("com.samsung.android.sm_cn");
+                                        intent.putExtras(bundle);
+                                        IAFDServiceImpl.this.mContext.startService(intent);
+                                        return;
+                                    }
+                                    Message msg = new Message();
+                                    msg.setData(bundle);
+                                    msg.what = 2;
+                                    IAFDServiceImpl.this.mHandler.sendMessage(msg);
+                                }
+                            })
+                    .setNegativeButton(
+                            AppJumpBlockTool.BlockDialogReceiver.RESULT_CANCEL,
+                            new DialogInterface.OnClickListener() { // from class:
+                                // com.sec.android.iaft.IAFDServiceImpl.1
+                                @Override // android.content.DialogInterface.OnClickListener
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
             AlertDialog alert = builder.create();
             Window window = alert.getWindow();
             window.setBackgroundDrawable(new ColorDrawable(0));
@@ -218,16 +245,24 @@ class IAFDServiceImpl {
     /* JADX INFO: Access modifiers changed from: private */
     public void checkUpdate(final Bundle bundle) {
         try {
-            this.apiSMManager.checkUpdate(bundle.getString(SmLib_IafdConstant.KEY_PACKAGE_NAME), bundle.getLong(SmLib_IafdConstant.KEY_VERSION_CODE), new SmLib_CheckUpdateCallback() { // from class: com.sec.android.iaft.IAFDServiceImpl.3
-                @Override // com.sec.android.iaft.SmLib_CheckUpdateCallback
-                public void onResult(int resultCode, long versionCode, String versionName, String pkgName) {
-                    Message msg = new Message();
-                    bundle.putBoolean("hasUpdate", resultCode == 2);
-                    msg.setData(bundle);
-                    msg.what = 6;
-                    IAFDServiceImpl.this.mHandler.sendMessage(msg);
-                }
-            });
+            this.apiSMManager.checkUpdate(
+                    bundle.getString(SmLib_IafdConstant.KEY_PACKAGE_NAME),
+                    bundle.getLong(SmLib_IafdConstant.KEY_VERSION_CODE),
+                    new SmLib_CheckUpdateCallback() { // from class:
+                                                      // com.sec.android.iaft.IAFDServiceImpl.3
+                        @Override // com.sec.android.iaft.SmLib_CheckUpdateCallback
+                        public void onResult(
+                                int resultCode,
+                                long versionCode,
+                                String versionName,
+                                String pkgName) {
+                            Message msg = new Message();
+                            bundle.putBoolean("hasUpdate", resultCode == 2);
+                            msg.setData(bundle);
+                            msg.what = 6;
+                            IAFDServiceImpl.this.mHandler.sendMessage(msg);
+                        }
+                    });
         } catch (Exception e) {
             Message msg = new Message();
             bundle.putBoolean("hasUpdate", false);
@@ -247,7 +282,15 @@ class IAFDServiceImpl {
             long versionCode = bundle.getLong(SmLib_IafdConstant.KEY_VERSION_CODE);
             String appName = bundle.getString("appName");
             String versionName = bundle.getString("versionName");
-            this.apiSMManager.reportErrorDataToServer(pkgName, userId, errorType, errorStack, errorComponent, versionCode, appName, versionName);
+            this.apiSMManager.reportErrorDataToServer(
+                    pkgName,
+                    userId,
+                    errorType,
+                    errorStack,
+                    errorComponent,
+                    versionCode,
+                    appName,
+                    versionName);
         } catch (Exception e) {
             e.printStackTrace();
         }

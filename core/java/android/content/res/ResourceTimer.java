@@ -8,8 +8,10 @@ import android.os.Process;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.util.FastPrintWriter;
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -41,8 +43,7 @@ public final class ResourceTimer {
         int maxTimer;
         String[] timers;
 
-        private Config() {
-        }
+        private Config() {}
     }
 
     private static class Timer {
@@ -53,11 +54,15 @@ public final class ResourceTimer {
         int[] percentile;
         long total;
 
-        private Timer() {
-        }
+        private Timer() {}
 
         public String toString() {
-            return TextUtils.formatSimple("%d:%d:%d:%d", Integer.valueOf(this.count), Long.valueOf(this.total), Integer.valueOf(this.mintime), Integer.valueOf(this.maxtime));
+            return TextUtils.formatSimple(
+                    "%d:%d:%d:%d",
+                    Integer.valueOf(this.count),
+                    Long.valueOf(this.total),
+                    Integer.valueOf(this.mintime),
+                    Integer.valueOf(this.maxtime));
         }
     }
 
@@ -74,12 +79,14 @@ public final class ResourceTimer {
                 if (Looper.getMainLooper() == null) {
                     throw new RuntimeException("ResourceTimer started too early");
                 }
-                mHandler = new Handler(Looper.getMainLooper()) { // from class: android.content.res.ResourceTimer.1
-                    @Override // android.os.Handler
-                    public void handleMessage(Message msg) {
-                        ResourceTimer.handleMessage(msg);
-                    }
-                };
+                mHandler =
+                        new Handler(Looper.getMainLooper()) { // from class:
+                            // android.content.res.ResourceTimer.1
+                            @Override // android.os.Handler
+                            public void handleMessage(Message msg) {
+                                ResourceTimer.handleMessage(msg);
+                            }
+                        };
                 byte b = 0;
                 sConfig = new Config();
                 nativeEnableTimers(sConfig);
@@ -139,9 +146,28 @@ public final class ResourceTimer {
         for (int i = 0; i < sTimers.length; i++) {
             Timer timer = sTimers[i];
             if (timer.count > 0) {
-                Log.i(TAG, TextUtils.formatSimple("%s count=%d pvalues=%s", sConfig.timers[i], Integer.valueOf(timer.count), packedString(timer.percentile)));
+                Log.i(
+                        TAG,
+                        TextUtils.formatSimple(
+                                "%s count=%d pvalues=%s",
+                                sConfig.timers[i],
+                                Integer.valueOf(timer.count),
+                                packedString(timer.percentile)));
                 if (sApiMap[i] != 0) {
-                    FrameworkStatsLog.write(517, sApiMap[i], timer.count, timer.total, timer.percentile[0], timer.percentile[1], timer.percentile[2], timer.percentile[3], timer.largest[0], timer.largest[1], timer.largest[2], timer.largest[3], timer.largest[4]);
+                    FrameworkStatsLog.write(
+                            517,
+                            sApiMap[i],
+                            timer.count,
+                            timer.total,
+                            timer.percentile[0],
+                            timer.percentile[1],
+                            timer.percentile[2],
+                            timer.percentile[3],
+                            timer.largest[0],
+                            timer.largest[1],
+                            timer.largest[2],
+                            timer.largest[3],
+                            timer.largest[4]);
                 }
             }
         }
@@ -162,12 +188,23 @@ public final class ResourceTimer {
                 synchronized (sLock) {
                     update(refresh);
                     long runtime = sLastUpdated - sProcessStart;
-                    pw.format("  config runtime=%d proc=%s\n", Long.valueOf(runtime), Process.myProcessName());
+                    pw.format(
+                            "  config runtime=%d proc=%s\n",
+                            Long.valueOf(runtime), Process.myProcessName());
                     for (int i = 0; i < sTimers.length; i++) {
                         Timer t = sTimers[i];
                         if (t.count != 0) {
                             String name = sConfig.timers[i];
-                            pw.format("  stats timer=%s cnt=%d avg=%d min=%d max=%d pval=%s largest=%s\n", name, Integer.valueOf(t.count), Long.valueOf(t.total / t.count), Integer.valueOf(t.mintime), Integer.valueOf(t.maxtime), packedString(t.percentile), packedString(t.largest));
+                            pw.format(
+                                    "  stats timer=%s cnt=%d avg=%d min=%d max=%d pval=%s"
+                                            + " largest=%s\n",
+                                    name,
+                                    Integer.valueOf(t.count),
+                                    Long.valueOf(t.total / t.count),
+                                    Integer.valueOf(t.mintime),
+                                    Integer.valueOf(t.maxtime),
+                                    packedString(t.percentile),
+                                    packedString(t.largest));
                         }
                     }
                 }

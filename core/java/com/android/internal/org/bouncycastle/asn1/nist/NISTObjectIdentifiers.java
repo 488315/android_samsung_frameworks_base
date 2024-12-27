@@ -1,11 +1,13 @@
 package com.android.internal.org.bouncycastle.asn1.nist;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
+
 import com.samsung.android.media.AudioParameter;
 
 /* loaded from: classes5.dex */
 public interface NISTObjectIdentifiers {
-    public static final ASN1ObjectIdentifier nistAlgorithm = new ASN1ObjectIdentifier("2.16.840.1.101.3.4");
+    public static final ASN1ObjectIdentifier nistAlgorithm =
+            new ASN1ObjectIdentifier("2.16.840.1.101.3.4");
     public static final ASN1ObjectIdentifier hashAlgs = nistAlgorithm.branch("2");
     public static final ASN1ObjectIdentifier id_sha256 = hashAlgs.branch("1");
     public static final ASN1ObjectIdentifier id_sha384 = hashAlgs.branch("2");
@@ -18,7 +20,8 @@ public interface NISTObjectIdentifiers {
     public static final ASN1ObjectIdentifier id_sha3_384 = hashAlgs.branch("9");
     public static final ASN1ObjectIdentifier id_sha3_512 = hashAlgs.branch("10");
     public static final ASN1ObjectIdentifier id_shake128 = hashAlgs.branch("11");
-    public static final ASN1ObjectIdentifier id_shake256 = hashAlgs.branch(AudioParameter.VALUE_VM_CSD_500_WARNING);
+    public static final ASN1ObjectIdentifier id_shake256 =
+            hashAlgs.branch(AudioParameter.VALUE_VM_CSD_500_WARNING);
     public static final ASN1ObjectIdentifier id_hmacWithSHA3_224 = hashAlgs.branch("13");
     public static final ASN1ObjectIdentifier id_hmacWithSHA3_256 = hashAlgs.branch("14");
     public static final ASN1ObjectIdentifier id_hmacWithSHA3_384 = hashAlgs.branch("15");
@@ -65,9 +68,14 @@ public interface NISTObjectIdentifiers {
     public static final ASN1ObjectIdentifier id_ecdsa_with_sha3_224 = sigAlgs.branch("9");
     public static final ASN1ObjectIdentifier id_ecdsa_with_sha3_256 = sigAlgs.branch("10");
     public static final ASN1ObjectIdentifier id_ecdsa_with_sha3_384 = sigAlgs.branch("11");
-    public static final ASN1ObjectIdentifier id_ecdsa_with_sha3_512 = sigAlgs.branch(AudioParameter.VALUE_VM_CSD_500_WARNING);
-    public static final ASN1ObjectIdentifier id_rsassa_pkcs1_v1_5_with_sha3_224 = sigAlgs.branch("13");
-    public static final ASN1ObjectIdentifier id_rsassa_pkcs1_v1_5_with_sha3_256 = sigAlgs.branch("14");
-    public static final ASN1ObjectIdentifier id_rsassa_pkcs1_v1_5_with_sha3_384 = sigAlgs.branch("15");
-    public static final ASN1ObjectIdentifier id_rsassa_pkcs1_v1_5_with_sha3_512 = sigAlgs.branch("16");
+    public static final ASN1ObjectIdentifier id_ecdsa_with_sha3_512 =
+            sigAlgs.branch(AudioParameter.VALUE_VM_CSD_500_WARNING);
+    public static final ASN1ObjectIdentifier id_rsassa_pkcs1_v1_5_with_sha3_224 =
+            sigAlgs.branch("13");
+    public static final ASN1ObjectIdentifier id_rsassa_pkcs1_v1_5_with_sha3_256 =
+            sigAlgs.branch("14");
+    public static final ASN1ObjectIdentifier id_rsassa_pkcs1_v1_5_with_sha3_384 =
+            sigAlgs.branch("15");
+    public static final ASN1ObjectIdentifier id_rsassa_pkcs1_v1_5_with_sha3_512 =
+            sigAlgs.branch("16");
 }

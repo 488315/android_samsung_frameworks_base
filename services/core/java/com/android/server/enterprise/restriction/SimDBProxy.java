@@ -3,6 +3,7 @@ package com.android.server.enterprise.restriction;
 import android.content.ContentValues;
 import android.content.Context;
 import android.text.TextUtils;
+
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.container.KnoxMUMContainerPolicy$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.storage.EdmStorageProvider;
@@ -27,17 +28,21 @@ public final class SimDBProxy {
             return false;
         }
         ContentValues contentValues = new ContentValues();
-        KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(i, contentValues, "adminUid", "SimIccId", str);
+        KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(
+                i, contentValues, "adminUid", "SimIccId", str);
         contentValues.put("SimPinCode", str2);
         return edmStorageProvider.putValuesNoUpdate("SimTable", contentValues);
     }
 
     public final String getPincode(String str) {
-        String string = this.mEdmStorageProvider.getString("SimTable", "SimIccId", str, "SimPinCode");
+        String string =
+                this.mEdmStorageProvider.getString("SimTable", "SimIccId", str, "SimPinCode");
         if (TextUtils.isEmpty(string)) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("Could not find pincode for iccId ", str, "SimDBProxy");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "Could not find pincode for iccId ", str, "SimDBProxy");
         } else {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("Successfully found pincode for iccId ", str, "SimDBProxy");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "Successfully found pincode for iccId ", str, "SimDBProxy");
         }
         return string;
     }

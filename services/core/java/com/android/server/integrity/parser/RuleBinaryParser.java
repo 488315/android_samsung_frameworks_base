@@ -6,7 +6,9 @@ import android.content.integrity.InstallerAllowedByManifestFormula;
 import android.content.integrity.IntegrityFormula;
 import android.content.integrity.Rule;
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
+
 import com.android.server.integrity.model.BitInputStream;
+
 import java.io.BufferedInputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,14 +30,23 @@ public final class RuleBinaryParser implements RuleParser {
                 case 7:
                 case 8:
                     boolean z = bitInputStream.getNext(1) == 1;
-                    return new AtomicFormula.StringAtomicFormula(next2, BinaryFileOperations.getStringValue(bitInputStream, bitInputStream.getNext(8), z), z);
+                    return new AtomicFormula.StringAtomicFormula(
+                            next2,
+                            BinaryFileOperations.getStringValue(
+                                    bitInputStream, bitInputStream.getNext(8), z),
+                            z);
                 case 4:
-                    return new AtomicFormula.LongAtomicFormula(next2, next3, (bitInputStream.getNext(32) << 32) | bitInputStream.getNext(32));
+                    return new AtomicFormula.LongAtomicFormula(
+                            next2,
+                            next3,
+                            (bitInputStream.getNext(32) << 32) | bitInputStream.getNext(32));
                 case 5:
                 case 6:
-                    return new AtomicFormula.BooleanAtomicFormula(next2, bitInputStream.getNext(1) == 1);
+                    return new AtomicFormula.BooleanAtomicFormula(
+                            next2, bitInputStream.getNext(1) == 1);
                 default:
-                    throw new IllegalArgumentException(String.format("Unknown key: %d", Integer.valueOf(next2)));
+                    throw new IllegalArgumentException(
+                            String.format("Unknown key: %d", Integer.valueOf(next2)));
             }
         }
         if (next != 1) {
@@ -45,7 +56,9 @@ public final class RuleBinaryParser implements RuleParser {
             if (next == 3) {
                 return new InstallerAllowedByManifestFormula();
             }
-            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(next, "Unknown formula separator: "));
+            throw new IllegalArgumentException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(
+                            next, "Unknown formula separator: "));
         }
         int next4 = bitInputStream.getNext(2);
         ArrayList arrayList = new ArrayList();
@@ -61,7 +74,8 @@ public final class RuleBinaryParser implements RuleParser {
         randomAccessInputStream.skip(1L);
         if (list.isEmpty()) {
             ArrayList arrayList = new ArrayList();
-            BitInputStream bitInputStream = new BitInputStream(new BufferedInputStream(randomAccessInputStream));
+            BitInputStream bitInputStream =
+                    new BitInputStream(new BufferedInputStream(randomAccessInputStream));
             while (bitInputStream.mInputStream.available() > 0) {
                 if (bitInputStream.getNext(1) == 1) {
                     IntegrityFormula parseFormula = parseFormula(bitInputStream);
@@ -81,7 +95,13 @@ public final class RuleBinaryParser implements RuleParser {
             int i = ruleIndexRange.mStartIndex;
             randomAccessInputStream.mRandomAccessObject.mRandomAccessFile.seek(i);
             randomAccessInputStream.mPosition = i;
-            BitInputStream bitInputStream2 = new BitInputStream(new BufferedInputStream(new LimitInputStream(randomAccessInputStream, ruleIndexRange.mEndIndex - ruleIndexRange.mStartIndex)));
+            BitInputStream bitInputStream2 =
+                    new BitInputStream(
+                            new BufferedInputStream(
+                                    new LimitInputStream(
+                                            randomAccessInputStream,
+                                            ruleIndexRange.mEndIndex
+                                                    - ruleIndexRange.mStartIndex)));
             while (bitInputStream2.mInputStream.available() > 0) {
                 if (bitInputStream2.getNext(1) == 1) {
                     IntegrityFormula parseFormula2 = parseFormula(bitInputStream2);

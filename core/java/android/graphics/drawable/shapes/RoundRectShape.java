@@ -5,6 +5,7 @@ import android.graphics.Outline;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -53,7 +54,12 @@ public class RoundRectShape extends RectShape {
             }
         }
         RectF rect = rect();
-        outline.setRoundRect((int) Math.ceil(rect.left), (int) Math.ceil(rect.top), (int) Math.floor(rect.right), (int) Math.floor(rect.bottom), radius);
+        outline.setRoundRect(
+                (int) Math.ceil(rect.left),
+                (int) Math.ceil(rect.top),
+                (int) Math.floor(rect.right),
+                (int) Math.floor(rect.bottom),
+                radius);
     }
 
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape
@@ -67,7 +73,11 @@ public class RoundRectShape extends RectShape {
             this.mPath.addRect(r, Path.Direction.CW);
         }
         if (this.mInnerRect != null) {
-            this.mInnerRect.set(r.left + this.mInset.left, r.top + this.mInset.top, r.right - this.mInset.right, r.bottom - this.mInset.bottom);
+            this.mInnerRect.set(
+                    r.left + this.mInset.left,
+                    r.top + this.mInset.top,
+                    r.right - this.mInset.right,
+                    r.bottom - this.mInset.bottom);
             if (this.mInnerRect.width() < w && this.mInnerRect.height() < h) {
                 if (this.mInnerRadii != null) {
                     this.mPath.addRoundRect(this.mInnerRect, this.mInnerRadii, Path.Direction.CCW);
@@ -99,7 +109,11 @@ public class RoundRectShape extends RectShape {
             return false;
         }
         RoundRectShape that = (RoundRectShape) o;
-        if (Arrays.equals(this.mOuterRadii, that.mOuterRadii) && Objects.equals(this.mInset, that.mInset) && Arrays.equals(this.mInnerRadii, that.mInnerRadii) && Objects.equals(this.mInnerRect, that.mInnerRect) && Objects.equals(this.mPath, that.mPath)) {
+        if (Arrays.equals(this.mOuterRadii, that.mOuterRadii)
+                && Objects.equals(this.mInset, that.mInset)
+                && Arrays.equals(this.mInnerRadii, that.mInnerRadii)
+                && Objects.equals(this.mInnerRect, that.mInnerRect)
+                && Objects.equals(this.mPath, that.mPath)) {
             return true;
         }
         return false;
@@ -107,7 +121,13 @@ public class RoundRectShape extends RectShape {
 
     @Override // android.graphics.drawable.shapes.RectShape, android.graphics.drawable.shapes.Shape
     public int hashCode() {
-        int result = Objects.hash(Integer.valueOf(super.hashCode()), this.mInset, this.mInnerRect, this.mPath);
-        return (((result * 31) + Arrays.hashCode(this.mOuterRadii)) * 31) + Arrays.hashCode(this.mInnerRadii);
+        int result =
+                Objects.hash(
+                        Integer.valueOf(super.hashCode()),
+                        this.mInset,
+                        this.mInnerRect,
+                        this.mPath);
+        return (((result * 31) + Arrays.hashCode(this.mOuterRadii)) * 31)
+                + Arrays.hashCode(this.mInnerRadii);
     }
 }

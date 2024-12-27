@@ -9,19 +9,22 @@ public class OverheatReasonInternal implements Parcelable {
     public static final int CHARGER_TYPE_AFC = 8;
     public static final int CHARGER_TYPE_USB = 2;
     public static final int CHARGER_TYPE_WIRELESS = 4;
-    public static final Parcelable.Creator<OverheatReasonInternal> CREATOR = new Parcelable.Creator<OverheatReasonInternal>() { // from class: com.sec.android.sdhms.OverheatReasonInternal.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverheatReasonInternal createFromParcel(Parcel in) {
-            return new OverheatReasonInternal(in);
-        }
+    public static final Parcelable.Creator<OverheatReasonInternal> CREATOR =
+            new Parcelable.Creator<
+                    OverheatReasonInternal>() { // from class:
+                                                // com.sec.android.sdhms.OverheatReasonInternal.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverheatReasonInternal createFromParcel(Parcel in) {
+                    return new OverheatReasonInternal(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverheatReasonInternal[] newArray(int size) {
-            return new OverheatReasonInternal[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverheatReasonInternal[] newArray(int size) {
+                    return new OverheatReasonInternal[size];
+                }
+            };
     public static final int ENVIRONMENT_TYPE_AMBIENT = 4;
     public static final int ENVIRONMENT_TYPE_BLANKET = 2;
     public static final int ENVIRONMENT_TYPE_SUNLIGHT = 1;
@@ -42,7 +45,16 @@ public class OverheatReasonInternal implements Parcelable {
     private String networkApp;
     private String processApp;
 
-    public OverheatReasonInternal(long begin, long end, int charger, String camera, String game, String navigation, String network, String process, int environment) {
+    public OverheatReasonInternal(
+            long begin,
+            long end,
+            int charger,
+            String camera,
+            String game,
+            String navigation,
+            String network,
+            String process,
+            int environment) {
         this.beginTime = begin;
         this.endTime = end;
         this.chargerType = charger;

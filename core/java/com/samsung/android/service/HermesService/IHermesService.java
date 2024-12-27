@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IHermesService extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.service.HermesService.IHermesService";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.service.HermesService.IHermesService";
 
     int getFailureCount(int i) throws RemoteException;
 
@@ -115,7 +116,7 @@ public interface IHermesService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHermesService {
+    public abstract static class Stub extends Binder implements IHermesService {
         static final int TRANSACTION_getFailureCount = 14;
         static final int TRANSACTION_hermesCosPatchTest = 12;
         static final int TRANSACTION_hermesGetSeId = 13;
@@ -192,7 +193,8 @@ public interface IHermesService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IHermesService.DESCRIPTOR);
             }

@@ -6,19 +6,31 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.multiuser.Flags;
+
 import com.android.internal.R;
 import com.android.internal.pm.pkg.parsing.ParsingPackage;
 import com.android.internal.pm.pkg.parsing.ParsingPackageUtils;
 import com.android.internal.pm.pkg.parsing.ParsingUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public class ParsedServiceUtils {
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Multi-variable type inference failed */
-    public static ParseResult<ParsedService> parseService(String[] strArr, ParsingPackage parsingPackage, Resources resources, XmlResourceParser xmlResourceParser, int i, boolean z, String str, ParseInput parseInput) throws XmlPullParserException, IOException {
+    public static ParseResult<ParsedService> parseService(
+            String[] strArr,
+            ParsingPackage parsingPackage,
+            Resources resources,
+            XmlResourceParser xmlResourceParser,
+            int i,
+            boolean z,
+            String str,
+            ParseInput parseInput)
+            throws XmlPullParserException, IOException {
         TypedArray typedArray;
         ParsedServiceImpl parsedServiceImpl;
         ParsingPackage parsingPackage2;
@@ -35,10 +47,33 @@ public class ParsedServiceUtils {
         String packageName = parsingPackage.getPackageName();
         ParsedServiceImpl parsedServiceImpl2 = new ParsedServiceImpl();
         String name = xmlResourceParser.getName();
-        TypedArray obtainAttributes = resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestService);
+        TypedArray obtainAttributes =
+                resources.obtainAttributes(xmlResourceParser, R.styleable.AndroidManifestService);
         String str5 = name;
         try {
-            ParseResult<?> parseMainComponent = ParsedMainComponentUtils.parseMainComponent(parsedServiceImpl2, name, strArr, parsingPackage, obtainAttributes, i, z, str, parseInput, 12, 7, 13, 4, 1, 0, 8, 2, 6, 15, 17, 20);
+            ParseResult<?> parseMainComponent =
+                    ParsedMainComponentUtils.parseMainComponent(
+                            parsedServiceImpl2,
+                            name,
+                            strArr,
+                            parsingPackage,
+                            obtainAttributes,
+                            i,
+                            z,
+                            str,
+                            parseInput,
+                            12,
+                            7,
+                            13,
+                            4,
+                            1,
+                            0,
+                            8,
+                            2,
+                            6,
+                            15,
+                            17,
+                            20);
             if (parseMainComponent.isError()) {
                 try {
                     ParseResult<ParsedService> error = parseInput.error(parseMainComponent);
@@ -71,12 +106,27 @@ public class ParsedServiceUtils {
                     int i8 = 3;
                     try {
                         String nonConfigurationString = typedArray.getNonConfigurationString(3, 0);
-                        parsedServiceImpl.setPermission(nonConfigurationString != null ? nonConfigurationString : parsingPackage.getPermission());
+                        parsedServiceImpl.setPermission(
+                                nonConfigurationString != null
+                                        ? nonConfigurationString
+                                        : parsingPackage.getPermission());
                         int i9 = 1;
                         int i10 = 2;
-                        parsedServiceImpl.setForegroundServiceType(typedArray.getInt(19, 0)).setFlags(parsedServiceImpl.getFlags() | ComponentParseUtils.flag(1, 9, typedArray) | ComponentParseUtils.flag(2, 10, typedArray) | ComponentParseUtils.flag(4, 14, typedArray) | ComponentParseUtils.flag(8, 18, typedArray) | ComponentParseUtils.flag(16, 21, typedArray) | ComponentParseUtils.flag(1073741824, 11, typedArray));
+                        parsedServiceImpl
+                                .setForegroundServiceType(typedArray.getInt(19, 0))
+                                .setFlags(
+                                        parsedServiceImpl.getFlags()
+                                                | ComponentParseUtils.flag(1, 9, typedArray)
+                                                | ComponentParseUtils.flag(2, 10, typedArray)
+                                                | ComponentParseUtils.flag(4, 14, typedArray)
+                                                | ComponentParseUtils.flag(8, 18, typedArray)
+                                                | ComponentParseUtils.flag(16, 21, typedArray)
+                                                | ComponentParseUtils.flag(
+                                                        1073741824, 11, typedArray));
                         if (Flags.enableSystemUserOnlyForServicesAndProviders()) {
-                            parsedServiceImpl.setFlags(parsedServiceImpl.getFlags() | ComponentParseUtils.flag(536870912, 22, typedArray));
+                            parsedServiceImpl.setFlags(
+                                    parsedServiceImpl.getFlags()
+                                            | ComponentParseUtils.flag(536870912, 22, typedArray));
                         }
                         boolean z2 = typedArray.getBoolean(16, false);
                         if (z2) {
@@ -98,7 +148,9 @@ public class ParsedServiceUtils {
                         if (parsingPackage.isSaveStateDisallowed()) {
                             str2 = packageName;
                             if (Objects.equals(parsedServiceImpl.getProcessName(), str2)) {
-                                return parseInput.error("Heavy-weight applications can not have services in main process");
+                                return parseInput.error(
+                                        "Heavy-weight applications can not have services in main"
+                                            + " process");
                             }
                         } else {
                             str2 = packageName;
@@ -110,7 +162,9 @@ public class ParsedServiceUtils {
                                 i2 = i9;
                             } else if (next == i8 && xmlResourceParser.getDepth() <= depth) {
                                 i2 = i9;
-                            } else if (next == i10 && !ParsingPackageUtils.getAconfigFlags().skipCurrentElement(xmlResourceParser)) {
+                            } else if (next == i10
+                                    && !ParsingPackageUtils.getAconfigFlags()
+                                            .skipCurrentElement(xmlResourceParser)) {
                                 String name2 = xmlResourceParser.getName();
                                 switch (name2.hashCode()) {
                                     case -1115949454:
@@ -144,10 +198,25 @@ public class ParsedServiceUtils {
                                         i4 = i10;
                                         i5 = i9;
                                         i6 = i8;
-                                        ParseResult<ParsedIntentInfoImpl> parseIntentFilter = ParsedMainComponentUtils.parseIntentFilter(parsedServiceImpl, parsingPackage, resources, xmlResourceParser, z2, true, false, false, false, parseInput);
+                                        ParseResult<ParsedIntentInfoImpl> parseIntentFilter =
+                                                ParsedMainComponentUtils.parseIntentFilter(
+                                                        parsedServiceImpl,
+                                                        parsingPackage,
+                                                        resources,
+                                                        xmlResourceParser,
+                                                        z2,
+                                                        true,
+                                                        false,
+                                                        false,
+                                                        false,
+                                                        parseInput);
                                         if (parseIntentFilter.isSuccess()) {
-                                            ParsedIntentInfoImpl result = parseIntentFilter.getResult();
-                                            parsedServiceImpl.setOrder(Math.max(result.getIntentFilter().getOrder(), parsedServiceImpl.getOrder()));
+                                            ParsedIntentInfoImpl result =
+                                                    parseIntentFilter.getResult();
+                                            parsedServiceImpl.setOrder(
+                                                    Math.max(
+                                                            result.getIntentFilter().getOrder(),
+                                                            parsedServiceImpl.getOrder()));
                                             parsedServiceImpl.addIntent(result);
                                         }
                                         parsingPackage3 = parsingPackage;
@@ -155,7 +224,13 @@ public class ParsedServiceUtils {
                                         str4 = str5;
                                         break;
                                     case 1:
-                                        parseResult = ParsedComponentUtils.addMetaData(parsedServiceImpl, parsingPackage2, resources, xmlResourceParser, parseInput);
+                                        parseResult =
+                                                ParsedComponentUtils.addMetaData(
+                                                        parsedServiceImpl,
+                                                        parsingPackage2,
+                                                        resources,
+                                                        xmlResourceParser,
+                                                        parseInput);
                                         str3 = str2;
                                         parsingPackage3 = parsingPackage2;
                                         i4 = i10;
@@ -164,7 +239,13 @@ public class ParsedServiceUtils {
                                         str4 = str5;
                                         break;
                                     case 2:
-                                        parseResult = ParsedComponentUtils.addProperty(parsedServiceImpl, parsingPackage2, resources, xmlResourceParser, parseInput);
+                                        parseResult =
+                                                ParsedComponentUtils.addProperty(
+                                                        parsedServiceImpl,
+                                                        parsingPackage2,
+                                                        resources,
+                                                        xmlResourceParser,
+                                                        parseInput);
                                         str3 = str2;
                                         parsingPackage3 = parsingPackage2;
                                         i4 = i10;
@@ -179,7 +260,12 @@ public class ParsedServiceUtils {
                                         i6 = i8;
                                         parsingPackage3 = parsingPackage;
                                         str4 = str5;
-                                        parseResult = ParsingUtils.unknownTag(str4, parsingPackage3, xmlResourceParser, parseInput);
+                                        parseResult =
+                                                ParsingUtils.unknownTag(
+                                                        str4,
+                                                        parsingPackage3,
+                                                        xmlResourceParser,
+                                                        parseInput);
                                         break;
                                 }
                                 if (parseResult.isError()) {
@@ -200,7 +286,14 @@ public class ParsedServiceUtils {
                             }
                             boolean z3 = i2;
                             if (z3 != 0) {
-                                ParseResult<?> deferError = parseInput.deferError(parsedServiceImpl.getName() + ": Targeting S+ (version 31 and above) requires that an explicit value for android:exported be defined when intent filters are present", ParseInput.DeferredError.MISSING_EXPORTED_FLAG);
+                                ParseResult<?> deferError =
+                                        parseInput.deferError(
+                                                parsedServiceImpl.getName()
+                                                        + ": Targeting S+ (version 31 and above)"
+                                                        + " requires that an explicit value for"
+                                                        + " android:exported be defined when intent"
+                                                        + " filters are present",
+                                                ParseInput.DeferredError.MISSING_EXPORTED_FLAG);
                                 if (deferError.isError()) {
                                     return parseInput.error(deferError);
                                 }

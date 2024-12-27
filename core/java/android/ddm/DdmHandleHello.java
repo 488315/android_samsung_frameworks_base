@@ -1,16 +1,18 @@
 package android.ddm;
 
-import android.ddm.DdmHandleAppName;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.DdmSyncState;
 import android.os.Debug;
 import android.os.Process;
 import android.os.UserHandle;
+
 import dalvik.system.VMRuntime;
-import java.nio.ByteBuffer;
+
 import org.apache.harmony.dalvik.ddmc.Chunk;
 import org.apache.harmony.dalvik.ddmc.ChunkHandler;
 import org.apache.harmony.dalvik.ddmc.DdmServer;
+
+import java.nio.ByteBuffer;
 
 /* loaded from: classes.dex */
 public class DdmHandleHello extends DdmHandle {
@@ -20,19 +22,16 @@ public class DdmHandleHello extends DdmHandle {
     public static final int CHUNK_FEAT = ChunkHandler.type("FEAT");
     private static DdmHandleHello mInstance = new DdmHandleHello();
 
-    private DdmHandleHello() {
-    }
+    private DdmHandleHello() {}
 
     public static void register() {
         DdmServer.registerHandler(CHUNK_HELO, mInstance);
         DdmServer.registerHandler(CHUNK_FEAT, mInstance);
     }
 
-    public void onConnected() {
-    }
+    public void onConnected() {}
 
-    public void onDisconnected() {
-    }
+    public void onDisconnected() {}
 
     public Chunk handleChunk(Chunk request) {
         int type = request.type;
@@ -47,7 +46,10 @@ public class DdmHandleHello extends DdmHandle {
 
     private Chunk handleHELO(Chunk chunk) {
         wrapChunk(chunk).getInt();
-        String str = System.getProperty("java.vm.name", "?") + " v" + System.getProperty("java.vm.version", "?");
+        String str =
+                System.getProperty("java.vm.name", "?")
+                        + " v"
+                        + System.getProperty("java.vm.version", "?");
         DdmHandleAppName.Names names = DdmHandleAppName.getNames();
         String appName = names.getAppName();
         String pkgName = names.getPkgName();
@@ -59,7 +61,16 @@ public class DdmHandleHello extends DdmHandle {
         }
         String str3 = "CheckJNI=" + (runtime.isCheckJniEnabled() ? "true" : "false");
         boolean isNativeDebuggable = runtime.isNativeDebuggable();
-        ByteBuffer allocate = ByteBuffer.allocate((str.length() * 2) + 32 + (appName.length() * 2) + (str2.length() * 2) + (str3.length() * 2) + 1 + (pkgName.length() * 2) + 4);
+        ByteBuffer allocate =
+                ByteBuffer.allocate(
+                        (str.length() * 2)
+                                + 32
+                                + (appName.length() * 2)
+                                + (str2.length() * 2)
+                                + (str3.length() * 2)
+                                + 1
+                                + (pkgName.length() * 2)
+                                + 4);
         allocate.order(ChunkHandler.CHUNK_ORDER);
         allocate.putInt(1);
         allocate.putInt(Process.myPid());

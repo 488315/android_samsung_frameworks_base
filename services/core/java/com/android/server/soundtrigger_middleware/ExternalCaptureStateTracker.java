@@ -1,7 +1,7 @@
 package com.android.server.soundtrigger_middleware;
 
 import android.util.Slog;
-import com.android.server.soundtrigger_middleware.ICaptureStateNotifier;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,12 +16,15 @@ class ExternalCaptureStateTracker implements ICaptureStateNotifier {
     public final Semaphore mNeedToConnect = new Semaphore(1);
 
     public ExternalCaptureStateTracker() {
-        new Thread(new Runnable() { // from class: com.android.server.soundtrigger_middleware.ExternalCaptureStateTracker$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                ExternalCaptureStateTracker.this.run();
-            }
-        }).start();
+        new Thread(
+                        new Runnable() { // from class:
+                                         // com.android.server.soundtrigger_middleware.ExternalCaptureStateTracker$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ExternalCaptureStateTracker.this.run();
+                            }
+                        })
+                .start();
     }
 
     private native void connect();
@@ -54,14 +57,22 @@ class ExternalCaptureStateTracker implements ICaptureStateNotifier {
                     this.mCaptureActive = z;
                     Iterator it = this.mListeners.iterator();
                     while (it.hasNext()) {
-                        SoundTriggerHalConcurrentCaptureHandler soundTriggerHalConcurrentCaptureHandler = (SoundTriggerHalConcurrentCaptureHandler) ((ICaptureStateNotifier.Listener) it.next());
+                        SoundTriggerHalConcurrentCaptureHandler
+                                soundTriggerHalConcurrentCaptureHandler =
+                                        (SoundTriggerHalConcurrentCaptureHandler)
+                                                ((ICaptureStateNotifier.Listener) it.next());
                         synchronized (soundTriggerHalConcurrentCaptureHandler.mStartStopLock) {
                             if (z) {
                                 soundTriggerHalConcurrentCaptureHandler.abortAllActiveModels();
                             } else {
-                                SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0 soundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0 = soundTriggerHalConcurrentCaptureHandler.mGlobalCallback;
-                                if (soundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0 != null) {
-                                    soundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0.onResourcesAvailable();
+                                SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0
+                                        soundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0 =
+                                                soundTriggerHalConcurrentCaptureHandler
+                                                        .mGlobalCallback;
+                                if (soundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0
+                                        != null) {
+                                    soundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda0
+                                            .onResourcesAvailable();
                                 }
                             }
                             soundTriggerHalConcurrentCaptureHandler.mCaptureState = z;

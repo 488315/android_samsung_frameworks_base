@@ -1,14 +1,15 @@
 package android.media;
 
-import android.media.SubtitleTrack;
 import android.util.Log;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.Vector;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: TtmlRenderer.java */
 /* loaded from: classes2.dex */
@@ -42,7 +43,11 @@ class TtmlTrack extends SubtitleTrack implements TtmlNodeListener {
             String str = new String(data, "UTF-8");
             synchronized (this.mParser) {
                 if (this.mCurrentRunID != null && runID != this.mCurrentRunID.longValue()) {
-                    throw new IllegalStateException("Run #" + this.mCurrentRunID + " in progress.  Cannot process run #" + runID);
+                    throw new IllegalStateException(
+                            "Run #"
+                                    + this.mCurrentRunID
+                                    + " in progress.  Cannot process run #"
+                                    + runID);
                 }
                 this.mCurrentRunID = Long.valueOf(runID);
                 this.mParsingData += str;
@@ -93,7 +98,11 @@ class TtmlTrack extends SubtitleTrack implements TtmlNodeListener {
         }
         if (this.DEBUG && this.mTimeProvider != null) {
             try {
-                Log.d(TAG, "at " + (this.mTimeProvider.getCurrentTimeUs(false, true) / 1000) + " ms the active cues are:");
+                Log.d(
+                        TAG,
+                        "at "
+                                + (this.mTimeProvider.getCurrentTimeUs(false, true) / 1000)
+                                + " ms the active cues are:");
             } catch (IllegalStateException e) {
                 Log.d(TAG, "at (illegal state) the active cues are:");
             }
@@ -107,7 +116,12 @@ class TtmlTrack extends SubtitleTrack implements TtmlNodeListener {
             long end = this.mTimeEvents.first().longValue();
             List<TtmlNode> activeCues = getActiveNodes(start, end);
             if (!activeCues.isEmpty()) {
-                return new TtmlCue(start, end, TtmlUtils.extractText(this.mRootNode, start, end), null, this.mCurrentRunID.longValue());
+                return new TtmlCue(
+                        start,
+                        end,
+                        TtmlUtils.extractText(this.mRootNode, start, end),
+                        null,
+                        this.mCurrentRunID.longValue());
             }
         }
         return null;

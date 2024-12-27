@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.OperationCanceledException;
 import android.os.SystemClock;
 import android.util.TimeUtils;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.concurrent.CountDownLatch;
@@ -28,8 +29,7 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
         private final CountDownLatch mDone = new CountDownLatch(1);
         boolean waiting;
 
-        LoadTask() {
-        }
+        LoadTask() {}
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
@@ -132,8 +132,7 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
         return cancelled;
     }
 
-    public void onCanceled(D data) {
-    }
+    public void onCanceled(D data) {}
 
     void executePendingTask() {
         if (this.mCancellingTask == null && this.mTask != null) {
@@ -145,7 +144,8 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
                 long now = SystemClock.uptimeMillis();
                 if (now < this.mLastLoadCompleteTime + this.mUpdateThrottle) {
                     this.mTask.waiting = true;
-                    this.mHandler.postAtTime(this.mTask, this.mLastLoadCompleteTime + this.mUpdateThrottle);
+                    this.mHandler.postAtTime(
+                            this.mTask, this.mLastLoadCompleteTime + this.mUpdateThrottle);
                     return;
                 }
             }
@@ -183,8 +183,7 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
         return loadInBackground();
     }
 
-    public void cancelLoadInBackground() {
-    }
+    public void cancelLoadInBackground() {}
 
     public boolean isLoadInBackgroundCanceled() {
         return this.mCancellingTask != null;
@@ -219,7 +218,8 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
             writer.print("mUpdateThrottle=");
             TimeUtils.formatDuration(this.mUpdateThrottle, writer);
             writer.print(" mLastLoadCompleteTime=");
-            TimeUtils.formatDuration(this.mLastLoadCompleteTime, SystemClock.uptimeMillis(), writer);
+            TimeUtils.formatDuration(
+                    this.mLastLoadCompleteTime, SystemClock.uptimeMillis(), writer);
             writer.println();
         }
     }

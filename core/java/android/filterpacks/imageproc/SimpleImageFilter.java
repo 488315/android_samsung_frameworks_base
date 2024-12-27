@@ -6,6 +6,7 @@ import android.filterfw.core.Frame;
 import android.filterfw.core.FrameFormat;
 import android.filterfw.core.Program;
 import android.filterfw.format.ImageFormat;
+
 import java.lang.reflect.Field;
 
 /* loaded from: classes.dex */
@@ -29,7 +30,8 @@ public abstract class SimpleImageFilter extends Filter {
         if (this.mParameterName != null) {
             try {
                 Field programField = SimpleImageFilter.class.getDeclaredField("mProgram");
-                addProgramPort(this.mParameterName, this.mParameterName, programField, Float.TYPE, false);
+                addProgramPort(
+                        this.mParameterName, this.mParameterName, programField, Float.TYPE, false);
             } catch (NoSuchFieldException e) {
                 throw new RuntimeException("Internal Error: mProgram field not found!");
             }
@@ -68,7 +70,8 @@ public abstract class SimpleImageFilter extends Filter {
                     break;
             }
             if (this.mProgram == null) {
-                throw new RuntimeException("Could not create a program for image filter " + this + "!");
+                throw new RuntimeException(
+                        "Could not create a program for image filter " + this + "!");
             }
             initProgramInputs(this.mProgram, context);
             this.mCurrentTarget = target;

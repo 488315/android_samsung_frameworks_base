@@ -4,7 +4,9 @@ import android.hardware.hdmi.HdmiDeviceInfo;
 import android.media.AudioDeviceAttributes;
 import android.media.VolumeInfo;
 import android.util.Slog;
+
 import com.android.server.hdmi.HdmiControlService.AbsoluteVolumeChangedListener;
+
 import java.util.Iterator;
 import java.util.Map;
 
@@ -50,24 +52,52 @@ public final class AbsoluteVolumeAudioStatusAction extends HdmiCecFeatureAction 
             HdmiCecLocalDevice hdmiCecLocalDevice = this.mSource;
             if (i2 == 1) {
                 HdmiControlService hdmiControlService = hdmiCecLocalDevice.mService;
-                HdmiCecLocalDevice playback = hdmiControlService.isPlaybackDevice() ? hdmiControlService.playback() : hdmiControlService.tv();
+                HdmiCecLocalDevice playback =
+                        hdmiControlService.isPlaybackDevice()
+                                ? hdmiControlService.playback()
+                                : hdmiControlService.tv();
                 int findAudioReceiverAddress = playback.findAudioReceiverAddress();
                 hdmiControlService.assertRunOnServiceThread();
-                HdmiDeviceInfo cecDeviceInfo = hdmiControlService.mHdmiCecNetwork.getCecDeviceInfo(findAudioReceiverAddress);
-                VolumeInfo build = new VolumeInfo.Builder(3).setMuted(z2).setVolumeIndex(i).setMaxVolumeIndex(100).setMinVolumeIndex(0).build();
-                hdmiControlService.mAbsoluteVolumeChangedListener = hdmiControlService.new AbsoluteVolumeChangedListener(playback, cecDeviceInfo);
+                HdmiDeviceInfo cecDeviceInfo =
+                        hdmiControlService.mHdmiCecNetwork.getCecDeviceInfo(
+                                findAudioReceiverAddress);
+                VolumeInfo build =
+                        new VolumeInfo.Builder(3)
+                                .setMuted(z2)
+                                .setVolumeIndex(i)
+                                .setMaxVolumeIndex(100)
+                                .setMinVolumeIndex(0)
+                                .build();
+                hdmiControlService.mAbsoluteVolumeChangedListener =
+                        hdmiControlService
+                        .new AbsoluteVolumeChangedListener(playback, cecDeviceInfo);
                 hdmiControlService.notifyAvbMuteChange(z2);
                 if (cecDeviceInfo.getDeviceFeatures().getSetAudioVolumeLevelSupport() == 1) {
                     Slog.d("HdmiControlService", "Enabling absolute volume behavior");
                     Iterator it = hdmiControlService.getAvbCapableAudioOutputDevices().iterator();
                     while (it.hasNext()) {
-                        ((DefaultAudioDeviceVolumeManagerWrapper) hdmiControlService.mAudioDeviceVolumeManager).mAudioDeviceVolumeManager.setDeviceAbsoluteVolumeBehavior((AudioDeviceAttributes) it.next(), build, hdmiControlService.mServiceThreadExecutor, hdmiControlService.mAbsoluteVolumeChangedListener, true);
+                        ((DefaultAudioDeviceVolumeManagerWrapper)
+                                        hdmiControlService.mAudioDeviceVolumeManager)
+                                .mAudioDeviceVolumeManager.setDeviceAbsoluteVolumeBehavior(
+                                        (AudioDeviceAttributes) it.next(),
+                                        build,
+                                        hdmiControlService.mServiceThreadExecutor,
+                                        hdmiControlService.mAbsoluteVolumeChangedListener,
+                                        true);
                     }
                 } else if (hdmiControlService.tv() != null) {
                     Slog.d("HdmiControlService", "Enabling adjust-only absolute volume behavior");
                     Iterator it2 = hdmiControlService.getAvbCapableAudioOutputDevices().iterator();
                     while (it2.hasNext()) {
-                        ((DefaultAudioDeviceVolumeManagerWrapper) hdmiControlService.mAudioDeviceVolumeManager).mAudioDeviceVolumeManager.setDeviceAbsoluteVolumeAdjustOnlyBehavior((AudioDeviceAttributes) it2.next(), build, hdmiControlService.mServiceThreadExecutor, hdmiControlService.mAbsoluteVolumeChangedListener, true);
+                        ((DefaultAudioDeviceVolumeManagerWrapper)
+                                        hdmiControlService.mAudioDeviceVolumeManager)
+                                .mAudioDeviceVolumeManager
+                                        .setDeviceAbsoluteVolumeAdjustOnlyBehavior(
+                                                (AudioDeviceAttributes) it2.next(),
+                                                build,
+                                                hdmiControlService.mServiceThreadExecutor,
+                                                hdmiControlService.mAbsoluteVolumeChangedListener,
+                                                true);
                     }
                 }
                 this.mState = 2;
@@ -76,18 +106,32 @@ public final class AbsoluteVolumeAudioStatusAction extends HdmiCecFeatureAction 
                 if (z3) {
                     HdmiControlService hdmiControlService2 = hdmiCecLocalDevice.mService;
                     if (hdmiControlService2.isAbsoluteVolumeBehaviorEnabled()) {
-                        Iterator it3 = ((DefaultAudioManagerWrapper) hdmiControlService2.mAudioManager).mAudioManager.getDevicesForAttributes(HdmiControlService.STREAM_MUSIC_ATTRIBUTES).iterator();
+                        Iterator it3 =
+                                ((DefaultAudioManagerWrapper) hdmiControlService2.mAudioManager)
+                                        .mAudioManager
+                                        .getDevicesForAttributes(
+                                                HdmiControlService.STREAM_MUSIC_ATTRIBUTES)
+                                        .iterator();
                         while (true) {
                             if (!it3.hasNext()) {
                                 break;
                             }
-                            if (hdmiControlService2.getAvbCapableAudioOutputDevices().contains((AudioDeviceAttributes) it3.next())) {
-                                ((DefaultAudioManagerWrapper) hdmiControlService2.mAudioManager).mAudioManager.setStreamVolume(3, (i * hdmiControlService2.mStreamMusicMaxVolume) / 100, hdmiControlService2.isTvDevice() ? 8193 : 8192);
+                            if (hdmiControlService2
+                                    .getAvbCapableAudioOutputDevices()
+                                    .contains((AudioDeviceAttributes) it3.next())) {
+                                ((DefaultAudioManagerWrapper) hdmiControlService2.mAudioManager)
+                                        .mAudioManager.setStreamVolume(
+                                                3,
+                                                (i * hdmiControlService2.mStreamMusicMaxVolume)
+                                                        / 100,
+                                                hdmiControlService2.isTvDevice() ? 8193 : 8192);
                             }
                         }
                     }
                 }
-                if (z2 != this.mLastAudioStatus.mMute || z3 || hdmiCecLocalDevice.mService.isTvDevice()) {
+                if (z2 != this.mLastAudioStatus.mMute
+                        || z3
+                        || hdmiCecLocalDevice.mService.isTvDevice()) {
                     hdmiCecLocalDevice.mService.notifyAvbMuteChange(z2);
                 }
             }
@@ -98,7 +142,8 @@ public final class AbsoluteVolumeAudioStatusAction extends HdmiCecFeatureAction 
 
     public final void sendGiveAudioStatus() {
         addTimer(this.mState, 2000);
-        this.mService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), this.mTargetAddress, 113), null);
+        this.mService.sendCecCommand(
+                HdmiCecMessage.build(getSourceAddress(), this.mTargetAddress, 113), null);
     }
 
     @Override // com.android.server.hdmi.HdmiCecFeatureAction

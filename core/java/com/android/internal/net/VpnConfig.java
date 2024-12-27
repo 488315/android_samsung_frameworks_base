@@ -16,7 +16,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.internal.R;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -60,54 +62,61 @@ public class VpnConfig implements Parcelable {
     public Network[] underlyingNetworks;
     public String user;
     private static ArrayList<VpnConfig> mConfigsReceived = new ArrayList<>();
-    private static ConcurrentHashMap<Integer, ArrayList<VpnConfig>> mConfigByUserMap = new ConcurrentHashMap<>();
-    public static final Parcelable.Creator<VpnConfig> CREATOR = new Parcelable.Creator<VpnConfig>() { // from class: com.android.internal.net.VpnConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VpnConfig createFromParcel(Parcel in) {
-            VpnConfig config = new VpnConfig();
-            config.user = in.readString();
-            config.interfaze = in.readString();
-            config.session = in.readString();
-            config.mtu = in.readInt();
-            in.readTypedList(config.addresses, LinkAddress.CREATOR);
-            in.readTypedList(config.routes, RouteInfo.CREATOR);
-            config.dnsServers = in.createStringArrayList();
-            config.searchDomains = in.createStringArrayList();
-            config.allowedApplications = in.createStringArrayList();
-            config.disallowedApplications = in.createStringArrayList();
-            config.allowPortBypass = in.readInt() != 0;
-            config.dport = in.readInt();
-            config.fwmark = in.readInt();
-            config.priority = in.readInt();
-            config.netTableId = in.readInt();
-            config.netIfaceName = in.readString();
-            config.netIfaceAddress = in.readString();
-            config.configureIntent = (PendingIntent) in.readParcelable(null, PendingIntent.class);
-            config.startTime = in.readLong();
-            config.legacy = in.readInt() != 0;
-            config.blocking = in.readInt() != 0;
-            config.allowBypass = in.readInt() != 0;
-            config.allowIPv4 = in.readInt() != 0;
-            config.allowIPv6 = in.readInt() != 0;
-            config.isMetered = in.readInt() != 0;
-            config.requiresInternetValidation = in.readInt() != 0;
-            config.excludeLocalRoutes = in.readInt() != 0;
-            config.underlyingNetworks = (Network[]) in.createTypedArray(Network.CREATOR);
-            config.proxyInfo = (ProxyInfo) in.readParcelable(null, ProxyInfo.class);
-            return config;
-        }
+    private static ConcurrentHashMap<Integer, ArrayList<VpnConfig>> mConfigByUserMap =
+            new ConcurrentHashMap<>();
+    public static final Parcelable.Creator<VpnConfig> CREATOR =
+            new Parcelable.Creator<
+                    VpnConfig>() { // from class: com.android.internal.net.VpnConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VpnConfig createFromParcel(Parcel in) {
+                    VpnConfig config = new VpnConfig();
+                    config.user = in.readString();
+                    config.interfaze = in.readString();
+                    config.session = in.readString();
+                    config.mtu = in.readInt();
+                    in.readTypedList(config.addresses, LinkAddress.CREATOR);
+                    in.readTypedList(config.routes, RouteInfo.CREATOR);
+                    config.dnsServers = in.createStringArrayList();
+                    config.searchDomains = in.createStringArrayList();
+                    config.allowedApplications = in.createStringArrayList();
+                    config.disallowedApplications = in.createStringArrayList();
+                    config.allowPortBypass = in.readInt() != 0;
+                    config.dport = in.readInt();
+                    config.fwmark = in.readInt();
+                    config.priority = in.readInt();
+                    config.netTableId = in.readInt();
+                    config.netIfaceName = in.readString();
+                    config.netIfaceAddress = in.readString();
+                    config.configureIntent =
+                            (PendingIntent) in.readParcelable(null, PendingIntent.class);
+                    config.startTime = in.readLong();
+                    config.legacy = in.readInt() != 0;
+                    config.blocking = in.readInt() != 0;
+                    config.allowBypass = in.readInt() != 0;
+                    config.allowIPv4 = in.readInt() != 0;
+                    config.allowIPv6 = in.readInt() != 0;
+                    config.isMetered = in.readInt() != 0;
+                    config.requiresInternetValidation = in.readInt() != 0;
+                    config.excludeLocalRoutes = in.readInt() != 0;
+                    config.underlyingNetworks = (Network[]) in.createTypedArray(Network.CREATOR);
+                    config.proxyInfo = (ProxyInfo) in.readParcelable(null, ProxyInfo.class);
+                    return config;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VpnConfig[] newArray(int size) {
-            return new VpnConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VpnConfig[] newArray(int size) {
+                    return new VpnConfig[size];
+                }
+            };
 
     public static Intent getIntentForConfirmation() {
         Intent intent = new Intent();
-        ComponentName componentName = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.config_customVpnConfirmDialogComponent));
+        ComponentName componentName =
+                ComponentName.unflattenFromString(
+                        Resources.getSystem()
+                                .getString(R.string.config_customVpnConfirmDialogComponent));
         intent.setClassName(componentName.getPackageName(), componentName.getClassName());
         return intent;
     }
@@ -116,10 +125,12 @@ public class VpnConfig implements Parcelable {
         Intent intent = new Intent();
         intent.setClassName(DIALOGS_PACKAGE, "com.android.vpndialogs.ManageDialog");
         intent.addFlags(1350565888);
-        return PendingIntent.getActivityAsUser(context, 0, intent, 67108864, null, UserHandle.CURRENT);
+        return PendingIntent.getActivityAsUser(
+                context, 0, intent, 67108864, null, UserHandle.CURRENT);
     }
 
-    public static CharSequence getVpnLabel(Context context, String packageName) throws PackageManager.NameNotFoundException {
+    public static CharSequence getVpnLabel(Context context, String packageName)
+            throws PackageManager.NameNotFoundException {
         PackageManager pm = context.getPackageManager();
         Intent intent = new Intent("android.net.VpnService");
         intent.setPackage(packageName);
@@ -130,7 +141,8 @@ public class VpnConfig implements Parcelable {
         return pm.getApplicationInfo(packageName, 0).loadLabel(pm);
     }
 
-    public static PendingIntent getIntentForStatusPanelEnterpriseVpn(Context context, VpnConfig config, boolean configOption) {
+    public static PendingIntent getIntentForStatusPanelEnterpriseVpn(
+            Context context, VpnConfig config, boolean configOption) {
         Intent intent = new Intent();
         if (!configOption) {
             String configSession = config.session;
@@ -141,26 +153,42 @@ public class VpnConfig implements Parcelable {
                 }
                 VpnConfig configLocal = iterator.next();
                 if (configLocal.session.equals(configSession)) {
-                    Log.d(TAG, "getIntentForStatusPanelEnterpriseVpn : Removing iterator for profile : " + configSession);
+                    Log.d(
+                            TAG,
+                            "getIntentForStatusPanelEnterpriseVpn : Removing iterator for profile :"
+                                + " "
+                                    + configSession);
                     iterator.remove();
                     break;
                 }
             }
-            Log.d(TAG, "getIntentForStatusPanelEnterpriseVpn : config size =  " + mConfigsReceived.size());
+            Log.d(
+                    TAG,
+                    "getIntentForStatusPanelEnterpriseVpn : config size =  "
+                            + mConfigsReceived.size());
             if (mConfigsReceived.size() == 0) {
                 Log.d(TAG, "getIntentForStatusPanelEnterpriseVpn : Returning null");
                 return null;
             }
         } else {
             if (config != null) {
-                Log.d(TAG, "getIntentForStatusPanelEnterpriseVpn : Adding iterator for profile : " + config.session);
+                Log.d(
+                        TAG,
+                        "getIntentForStatusPanelEnterpriseVpn : Adding iterator for profile : "
+                                + config.session);
             }
             mConfigsReceived.add(config);
         }
         intent.setClassName(DIALOGS_PACKAGE, "com.android.vpndialogs.EnterpriseVpnDialog");
         intent.putParcelableArrayListExtra("config", mConfigsReceived);
         intent.addFlags(1350565888);
-        return PendingIntent.getActivityAsUser(context, 0, intent, config == null ? 536870912 : 301989888, null, UserHandle.CURRENT);
+        return PendingIntent.getActivityAsUser(
+                context,
+                0,
+                intent,
+                config == null ? 536870912 : 301989888,
+                null,
+                UserHandle.CURRENT);
     }
 
     public static PendingIntent getIntentForStatusPanelRefresh(Context context) {
@@ -168,10 +196,12 @@ public class VpnConfig implements Parcelable {
         intent.setClassName(DIALOGS_PACKAGE, "com.android.vpndialogs.EnterpriseVpnDialog");
         intent.putParcelableArrayListExtra("config", mConfigsReceived);
         intent.addFlags(1350565888);
-        return PendingIntent.getActivityAsUser(context, 0, intent, 301989888, null, UserHandle.CURRENT);
+        return PendingIntent.getActivityAsUser(
+                context, 0, intent, 301989888, null, UserHandle.CURRENT);
     }
 
-    public static PendingIntent getIntentForStatusPanelEnterpriseVpnAsUser(Context context, VpnConfig config, boolean configOption, int domain) {
+    public static PendingIntent getIntentForStatusPanelEnterpriseVpnAsUser(
+            Context context, VpnConfig config, boolean configOption, int domain) {
         ArrayList<VpnConfig> receivedConfig;
         Intent intent = new Intent();
         ArrayList<VpnConfig> receivedConfig2 = mConfigByUserMap.get(Integer.valueOf(domain));
@@ -192,19 +222,29 @@ public class VpnConfig implements Parcelable {
                 }
                 VpnConfig configLocal = iterator.next();
                 if (configLocal.session.equals(configSession)) {
-                    Log.d(TAG, "getIntentForStatusPanelEnterpriseVpn : Removing iterator for profile : " + configSession);
+                    Log.d(
+                            TAG,
+                            "getIntentForStatusPanelEnterpriseVpn : Removing iterator for profile :"
+                                + " "
+                                    + configSession);
                     iterator.remove();
                     break;
                 }
             }
-            Log.d(TAG, "getIntentForStatusPanelEnterpriseVpn : config size =  " + mConfigsReceived.size());
+            Log.d(
+                    TAG,
+                    "getIntentForStatusPanelEnterpriseVpn : config size =  "
+                            + mConfigsReceived.size());
             if (receivedConfig.size() == 0) {
                 Log.d(TAG, "getIntentForStatusPanelEnterpriseVpn : Returning null");
                 return null;
             }
         } else {
             if (config != null) {
-                Log.d(TAG, "getIntentForStatusPanelEnterpriseVpn : Adding iterator for profile : " + config.session);
+                Log.d(
+                        TAG,
+                        "getIntentForStatusPanelEnterpriseVpn : Adding iterator for profile : "
+                                + config.session);
             }
             boolean isFoundProfile = false;
             int i = 0;
@@ -228,7 +268,8 @@ public class VpnConfig implements Parcelable {
         intent.setClassName(DIALOGS_PACKAGE, "com.android.vpndialogs.EnterpriseVpnDialog");
         intent.putParcelableArrayListExtra("config", receivedConfig);
         intent.addFlags(1350565888);
-        return PendingIntent.getActivityAsUser(context, 0, intent, 301989888, null, new UserHandle(domain));
+        return PendingIntent.getActivityAsUser(
+                context, 0, intent, 301989888, null, new UserHandle(domain));
     }
 
     public static PendingIntent getIntentForStatusPanelRefreshAsUser(Context context, int domain) {
@@ -236,14 +277,16 @@ public class VpnConfig implements Parcelable {
         intent.setClassName(DIALOGS_PACKAGE, "com.android.vpndialogs.EnterpriseVpnDialog");
         intent.putParcelableArrayListExtra("config", mConfigByUserMap.get(Integer.valueOf(domain)));
         intent.addFlags(1350565888);
-        return PendingIntent.getActivityAsUser(context, 0, intent, 301989888, null, new UserHandle(domain));
+        return PendingIntent.getActivityAsUser(
+                context, 0, intent, 301989888, null, new UserHandle(domain));
     }
 
     public static PendingIntent getIntentForStatusPanelAsUser(Context context, int user) {
         Intent intent = new Intent();
         intent.setClassName(DIALOGS_PACKAGE, "com.android.vpndialogs.ManageDialog");
         intent.addFlags(1350565888);
-        return PendingIntent.getActivityAsUser(context, 0, intent, 33554432, null, new UserHandle(user));
+        return PendingIntent.getActivityAsUser(
+                context, 0, intent, 33554432, null, new UserHandle(user));
     }
 
     public VpnConfig() {
@@ -284,7 +327,12 @@ public class VpnConfig implements Parcelable {
         this.isMetered = other.isMetered;
         this.requiresInternetValidation = other.requiresInternetValidation;
         this.excludeLocalRoutes = other.excludeLocalRoutes;
-        this.underlyingNetworks = other.underlyingNetworks != null ? (Network[]) Arrays.copyOf(other.underlyingNetworks, other.underlyingNetworks.length) : null;
+        this.underlyingNetworks =
+                other.underlyingNetworks != null
+                        ? (Network[])
+                                Arrays.copyOf(
+                                        other.underlyingNetworks, other.underlyingNetworks.length)
+                        : null;
         this.proxyInfo = other.proxyInfo;
     }
 
@@ -356,7 +404,52 @@ public class VpnConfig implements Parcelable {
     }
 
     public String toString() {
-        return TAG + "{ user=" + this.user + ", interface=" + this.interfaze + ", session=" + this.session + ", mtu=" + this.mtu + ", addresses=" + toString(this.addresses) + ", routes=" + toString(this.routes) + ", dns=" + toString(this.dnsServers) + ", searchDomains=" + toString(this.searchDomains) + ", allowedApps=" + toString(this.allowedApplications) + ", disallowedApps=" + toString(this.disallowedApplications) + ", configureIntent=" + this.configureIntent + ", startTime=" + this.startTime + ", legacy=" + this.legacy + ", blocking=" + this.blocking + ", allowBypass=" + this.allowBypass + ", allowIPv4=" + this.allowIPv4 + ", allowIPv6=" + this.allowIPv6 + ", isMetered=" + this.isMetered + ", requiresInternetValidation=" + this.requiresInternetValidation + ", excludeLocalRoutes=" + this.excludeLocalRoutes + ", underlyingNetworks=" + Arrays.toString(this.underlyingNetworks) + ", proxyInfo=" + this.proxyInfo + "}";
+        return TAG
+                + "{ user="
+                + this.user
+                + ", interface="
+                + this.interfaze
+                + ", session="
+                + this.session
+                + ", mtu="
+                + this.mtu
+                + ", addresses="
+                + toString(this.addresses)
+                + ", routes="
+                + toString(this.routes)
+                + ", dns="
+                + toString(this.dnsServers)
+                + ", searchDomains="
+                + toString(this.searchDomains)
+                + ", allowedApps="
+                + toString(this.allowedApplications)
+                + ", disallowedApps="
+                + toString(this.disallowedApplications)
+                + ", configureIntent="
+                + this.configureIntent
+                + ", startTime="
+                + this.startTime
+                + ", legacy="
+                + this.legacy
+                + ", blocking="
+                + this.blocking
+                + ", allowBypass="
+                + this.allowBypass
+                + ", allowIPv4="
+                + this.allowIPv4
+                + ", allowIPv6="
+                + this.allowIPv6
+                + ", isMetered="
+                + this.isMetered
+                + ", requiresInternetValidation="
+                + this.requiresInternetValidation
+                + ", excludeLocalRoutes="
+                + this.excludeLocalRoutes
+                + ", underlyingNetworks="
+                + Arrays.toString(this.underlyingNetworks)
+                + ", proxyInfo="
+                + this.proxyInfo
+                + "}";
     }
 
     static <T> String toString(List<T> ls) {

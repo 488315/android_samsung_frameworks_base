@@ -16,16 +16,14 @@ public final class BatteryUsageStatsAtomsProto {
         public static final long SLICES = 2246267895811L;
         public static final long TOTAL_CONSUMED_POWER_DECI_COULOMBS = 1112396529665L;
 
-        public BatteryConsumerData() {
-        }
+        public BatteryConsumerData() {}
 
         public final class PowerComponentUsage {
             public static final long COMPONENT = 1120986464257L;
             public static final long DURATION_MILLIS = 1112396529667L;
             public static final long POWER_DECI_COULOMBS = 1112396529666L;
 
-            public PowerComponentUsage() {
-            }
+            public PowerComponentUsage() {}
         }
 
         public final class PowerComponentUsageSlice {
@@ -37,8 +35,7 @@ public final class BatteryUsageStatsAtomsProto {
             public static final long PROCESS_STATE = 1159641169922L;
             public static final int UNSPECIFIED = 0;
 
-            public PowerComponentUsageSlice() {
-            }
+            public PowerComponentUsageSlice() {}
         }
     }
 
@@ -49,8 +46,7 @@ public final class BatteryUsageStatsAtomsProto {
         public static final long TIME_IN_STATE = 2246267895813L;
         public static final long UID = 1120986464257L;
 
-        public UidBatteryConsumer() {
-        }
+        public UidBatteryConsumer() {}
 
         public final class TimeInState {
             public static final int BACKGROUND = 2;
@@ -60,8 +56,7 @@ public final class BatteryUsageStatsAtomsProto {
             public static final long TIME_IN_STATE_MILLIS = 1112396529666L;
             public static final int UNSPECIFIED = 0;
 
-            public TimeInState() {
-            }
+            public TimeInState() {}
         }
     }
 
@@ -72,7 +67,6 @@ public final class BatteryUsageStatsAtomsProto {
         public static final int POWER_PROFILE = 1;
         public static final int UNDEFINED = 0;
 
-        public PowerComponentModel() {
-        }
+        public PowerComponentModel() {}
     }
 }

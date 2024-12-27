@@ -6,29 +6,34 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class IntentFilterPolicyKey extends PolicyKey {
-    public static final Parcelable.Creator<IntentFilterPolicyKey> CREATOR = new Parcelable.Creator<IntentFilterPolicyKey>() { // from class: android.app.admin.IntentFilterPolicyKey.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IntentFilterPolicyKey createFromParcel(Parcel source) {
-            return new IntentFilterPolicyKey(source);
-        }
+    public static final Parcelable.Creator<IntentFilterPolicyKey> CREATOR =
+            new Parcelable.Creator<IntentFilterPolicyKey>() { // from class:
+                // android.app.admin.IntentFilterPolicyKey.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IntentFilterPolicyKey createFromParcel(Parcel source) {
+                    return new IntentFilterPolicyKey(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IntentFilterPolicyKey[] newArray(int size) {
-            return new IntentFilterPolicyKey[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IntentFilterPolicyKey[] newArray(int size) {
+                    return new IntentFilterPolicyKey[size];
+                }
+            };
     private static final String TAG = "IntentFilterPolicyKey";
     private static final String TAG_INTENT_FILTER_ENTRY = "filter";
     private final IntentFilter mFilter;
@@ -61,13 +66,15 @@ public final class IntentFilterPolicyKey extends PolicyKey {
     }
 
     @Override // android.app.admin.PolicyKey
-    public IntentFilterPolicyKey readFromXml(TypedXmlPullParser parser) throws XmlPullParserException, IOException {
+    public IntentFilterPolicyKey readFromXml(TypedXmlPullParser parser)
+            throws XmlPullParserException, IOException {
         String identifier = parser.getAttributeValue(null, "policy-identifier");
         IntentFilter filter = readIntentFilterFromXml(parser);
         return new IntentFilterPolicyKey(identifier, filter);
     }
 
-    private IntentFilter readIntentFilterFromXml(TypedXmlPullParser parser) throws XmlPullParserException, IOException {
+    private IntentFilter readIntentFilterFromXml(TypedXmlPullParser parser)
+            throws XmlPullParserException, IOException {
         int outerDepth = parser.getDepth();
         while (XmlUtils.nextElementWithin(parser, outerDepth)) {
             String tag = parser.getName();
@@ -99,7 +106,8 @@ public final class IntentFilterPolicyKey extends PolicyKey {
             return false;
         }
         IntentFilterPolicyKey other = (IntentFilterPolicyKey) o;
-        if (Objects.equals(getIdentifier(), other.getIdentifier()) && IntentFilter.filterEquals(this.mFilter, other.mFilter)) {
+        if (Objects.equals(getIdentifier(), other.getIdentifier())
+                && IntentFilter.filterEquals(this.mFilter, other.mFilter)) {
             return true;
         }
         return false;
@@ -111,7 +119,11 @@ public final class IntentFilterPolicyKey extends PolicyKey {
     }
 
     public String toString() {
-        return "IntentFilterPolicyKey{mKey= " + getIdentifier() + "; mFilter= " + this.mFilter + "}";
+        return "IntentFilterPolicyKey{mKey= "
+                + getIdentifier()
+                + "; mFilter= "
+                + this.mFilter
+                + "}";
     }
 
     @Override // android.os.Parcelable

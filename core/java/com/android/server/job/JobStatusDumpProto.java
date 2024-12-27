@@ -76,15 +76,13 @@ public final class JobStatusDumpProto {
         public static final long TRIGGER_CONTENT_UPDATE_DELAY_MS = 1112396529676L;
         public static final long TRIGGER_CONTENT_URIS = 2246267895819L;
 
-        public JobInfo() {
-        }
+        public JobInfo() {}
 
         public final class TriggerContentUri {
             public static final long FLAGS = 1120986464257L;
             public static final long URI = 1138166333442L;
 
-            public TriggerContentUri() {
-            }
+            public TriggerContentUri() {}
         }
 
         public final class Backoff {
@@ -93,8 +91,7 @@ public final class JobStatusDumpProto {
             public static final long INITIAL_BACKOFF_MS = 1112396529666L;
             public static final long POLICY = 1159641169921L;
 
-            public Backoff() {
-            }
+            public Backoff() {}
         }
     }
 
@@ -103,8 +100,7 @@ public final class JobStatusDumpProto {
         public static final long IS_NOT_DOZING = 1133871366145L;
         public static final long IS_NOT_RESTRICTED_IN_BG = 1133871366146L;
 
-        public ImplicitConstraints() {
-        }
+        public ImplicitConstraints() {}
     }
 
     public final class JobWorkItem {
@@ -113,7 +109,6 @@ public final class JobStatusDumpProto {
         public static final long URI_GRANTS = 1146756268036L;
         public static final long WORK_ID = 1120986464257L;
 
-        public JobWorkItem() {
-        }
+        public JobWorkItem() {}
     }
 }

@@ -117,7 +117,9 @@ public class NumericTextView extends TextView {
         CharSequence previousText = getText();
         int maxWidth = 0;
         for (int i = 0; i < this.mMaxValue; i++) {
-            lambda$setTextAsync$0(String.format("%0" + this.mMaxCount + XmlTags.ATTR_DESCRIPTION, Integer.valueOf(i)));
+            lambda$setTextAsync$0(
+                    String.format(
+                            "%0" + this.mMaxCount + XmlTags.ATTR_DESCRIPTION, Integer.valueOf(i)));
             measure(0, 0);
             int width = getMeasuredWidth();
             if (width > maxWidth) {
@@ -144,7 +146,9 @@ public class NumericTextView extends TextView {
 
     @Override // android.widget.TextView, android.view.View, android.view.KeyEvent.Callback
     public boolean onKeyMultiple(int keyCode, int repeatCount, KeyEvent event) {
-        return isKeyCodeNumeric(keyCode) || keyCode == 67 || super.onKeyMultiple(keyCode, repeatCount, event);
+        return isKeyCodeNumeric(keyCode)
+                || keyCode == 67
+                || super.onKeyMultiple(keyCode, repeatCount, event);
     }
 
     @Override // android.widget.TextView, android.view.View, android.view.KeyEvent.Callback
@@ -173,7 +177,10 @@ public class NumericTextView extends TextView {
             }
         }
         if (this.mCount > 0) {
-            formattedValue = String.format("%0" + this.mCount + XmlTags.ATTR_DESCRIPTION, Integer.valueOf(this.mValue));
+            formattedValue =
+                    String.format(
+                            "%0" + this.mCount + XmlTags.ATTR_DESCRIPTION,
+                            Integer.valueOf(this.mValue));
         } else {
             formattedValue = "";
         }
@@ -187,7 +194,16 @@ public class NumericTextView extends TextView {
     }
 
     private static boolean isKeyCodeNumeric(int keyCode) {
-        return keyCode == 7 || keyCode == 8 || keyCode == 9 || keyCode == 10 || keyCode == 11 || keyCode == 12 || keyCode == 13 || keyCode == 14 || keyCode == 15 || keyCode == 16;
+        return keyCode == 7
+                || keyCode == 8
+                || keyCode == 9
+                || keyCode == 10
+                || keyCode == 11
+                || keyCode == 12
+                || keyCode == 13
+                || keyCode == 14
+                || keyCode == 15
+                || keyCode == 16;
     }
 
     private static int numericKeyCodeToInt(int keyCode) {

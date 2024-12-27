@@ -3,6 +3,7 @@ package com.android.internal.util;
 import android.os.SystemClock;
 import android.util.Log;
 import android.util.SparseLongArray;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -18,7 +19,9 @@ public class PerfettoTrigger {
             long lastTrigger = sLastInvocationPerTrigger.get(triggerName.hashCode());
             long sinceLastTrigger = SystemClock.elapsedRealtime() - lastTrigger;
             if (sinceLastTrigger < 300000) {
-                Log.v(TAG, "Not triggering " + triggerName + " - not enough time since last trigger");
+                Log.v(
+                        TAG,
+                        "Not triggering " + triggerName + " - not enough time since last trigger");
                 return;
             }
             sLastInvocationPerTrigger.put(triggerName.hashCode(), SystemClock.elapsedRealtime());

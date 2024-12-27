@@ -2,6 +2,7 @@ package android.app.compat;
 
 import android.annotation.SystemApi;
 import android.os.Parcel;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -17,8 +18,7 @@ public final class PackageOverride {
     private final long mMinVersionCode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EvaluatedOverride {
-    }
+    public @interface EvaluatedOverride {}
 
     private PackageOverride(long minVersionCode, long maxVersionCode, boolean enabled) {
         this.mMinVersionCode = minVersionCode;
@@ -70,21 +70,30 @@ public final class PackageOverride {
             return false;
         }
         PackageOverride that = (PackageOverride) o;
-        if (this.mMinVersionCode == that.mMinVersionCode && this.mMaxVersionCode == that.mMaxVersionCode && this.mEnabled == that.mEnabled) {
+        if (this.mMinVersionCode == that.mMinVersionCode
+                && this.mMaxVersionCode == that.mMaxVersionCode
+                && this.mEnabled == that.mEnabled) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Long.valueOf(this.mMinVersionCode), Long.valueOf(this.mMaxVersionCode), Boolean.valueOf(this.mEnabled));
+        return Objects.hash(
+                Long.valueOf(this.mMinVersionCode),
+                Long.valueOf(this.mMaxVersionCode),
+                Boolean.valueOf(this.mEnabled));
     }
 
     public String toString() {
         if (this.mMinVersionCode == Long.MIN_VALUE && this.mMaxVersionCode == Long.MAX_VALUE) {
             return Boolean.toString(this.mEnabled);
         }
-        return String.format("[%d,%d,%b]", Long.valueOf(this.mMinVersionCode), Long.valueOf(this.mMaxVersionCode), Boolean.valueOf(this.mEnabled));
+        return String.format(
+                "[%d,%d,%b]",
+                Long.valueOf(this.mMinVersionCode),
+                Long.valueOf(this.mMaxVersionCode),
+                Boolean.valueOf(this.mEnabled));
     }
 
     public static final class Builder {
@@ -109,7 +118,8 @@ public final class PackageOverride {
 
         public PackageOverride build() {
             if (this.mMinVersionCode > this.mMaxVersionCode) {
-                throw new IllegalArgumentException("minVersionCode must not be larger than maxVersionCode");
+                throw new IllegalArgumentException(
+                        "minVersionCode must not be larger than maxVersionCode");
             }
             return new PackageOverride(this.mMinVersionCode, this.mMaxVersionCode, this.mEnabled);
         }

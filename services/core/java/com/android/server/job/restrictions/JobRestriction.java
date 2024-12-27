@@ -1,6 +1,7 @@
 package com.android.server.job.restrictions;
 
 import android.util.IndentingPrintWriter;
+
 import com.android.server.job.JobSchedulerService;
 import com.android.server.job.controllers.JobStatus;
 
@@ -23,6 +24,5 @@ public abstract class JobRestriction {
 
     public abstract boolean isJobRestricted(JobStatus jobStatus, int i);
 
-    public void onSystemServicesReady() {
-    }
+    public void onSystemServicesReady() {}
 }

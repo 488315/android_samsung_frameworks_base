@@ -52,7 +52,8 @@ public class CertStatus extends ASN1Object implements ASN1Choice {
         if (obj instanceof ASN1TaggedObject) {
             return new CertStatus((ASN1TaggedObject) obj);
         }
-        throw new IllegalArgumentException("unknown object in factory: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in factory: " + obj.getClass().getName());
     }
 
     public static CertStatus getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -67,7 +68,8 @@ public class CertStatus extends ASN1Object implements ASN1Choice {
         return this.value;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return new DERTaggedObject(false, this.tagNo, this.value);
     }

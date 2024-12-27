@@ -16,8 +16,7 @@ import java.util.StringTokenizer;
 public class Properties {
     private static final ThreadLocal threadProperties = new ThreadLocal();
 
-    private Properties() {
-    }
+    private Properties() {}
 
     public static boolean isOverrideSet(String propertyName) {
         try {
@@ -84,12 +83,16 @@ public class Properties {
 
     public static String getPropertyValue(final String propertyName) {
         String p;
-        String val = (String) AccessController.doPrivileged(new PrivilegedAction() { // from class: com.android.internal.org.bouncycastle.util.Properties.1
-            @Override // java.security.PrivilegedAction
-            public Object run() {
-                return Security.getProperty(propertyName);
-            }
-        });
+        String val =
+                (String)
+                        AccessController.doPrivileged(
+                                new PrivilegedAction() { // from class:
+                                                         // com.android.internal.org.bouncycastle.util.Properties.1
+                                    @Override // java.security.PrivilegedAction
+                                    public Object run() {
+                                        return Security.getProperty(propertyName);
+                                    }
+                                });
         if (val != null) {
             return val;
         }
@@ -97,12 +100,15 @@ public class Properties {
         if (localProps != null && (p = (String) localProps.get(propertyName)) != null) {
             return p;
         }
-        return (String) AccessController.doPrivileged(new PrivilegedAction() { // from class: com.android.internal.org.bouncycastle.util.Properties.2
-            @Override // java.security.PrivilegedAction
-            public Object run() {
-                return System.getProperty(propertyName);
-            }
-        });
+        return (String)
+                AccessController.doPrivileged(
+                        new PrivilegedAction() { // from class:
+                                                 // com.android.internal.org.bouncycastle.util.Properties.2
+                            @Override // java.security.PrivilegedAction
+                            public Object run() {
+                                return System.getProperty(propertyName);
+                            }
+                        });
     }
 
     private static boolean isSetFalse(String p) {

@@ -5,25 +5,28 @@ import android.graphics.Point;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TaskFragmentInfo implements Parcelable {
-    public static final Parcelable.Creator<TaskFragmentInfo> CREATOR = new Parcelable.Creator<TaskFragmentInfo>() { // from class: android.window.TaskFragmentInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TaskFragmentInfo createFromParcel(Parcel in) {
-            return new TaskFragmentInfo(in);
-        }
+    public static final Parcelable.Creator<TaskFragmentInfo> CREATOR =
+            new Parcelable.Creator<
+                    TaskFragmentInfo>() { // from class: android.window.TaskFragmentInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TaskFragmentInfo createFromParcel(Parcel in) {
+                    return new TaskFragmentInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TaskFragmentInfo[] newArray(int size) {
-            return new TaskFragmentInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TaskFragmentInfo[] newArray(int size) {
+                    return new TaskFragmentInfo[size];
+                }
+            };
     private final List<IBinder> mActivities;
     private final Configuration mConfiguration;
     private final IBinder mFragmentToken;
@@ -37,7 +40,19 @@ public final class TaskFragmentInfo implements Parcelable {
     private final int mRunningActivityCount;
     private final WindowContainerToken mToken;
 
-    public TaskFragmentInfo(IBinder fragmentToken, WindowContainerToken token, Configuration configuration, int runningActivityCount, boolean isVisible, List<IBinder> activities, List<IBinder> inRequestedTaskFragmentActivities, Point positionInParent, boolean isTaskClearedForReuse, boolean isTaskFragmentClearedForPip, boolean isClearedForReorderActivityToFront, Point minimumDimensions) {
+    public TaskFragmentInfo(
+            IBinder fragmentToken,
+            WindowContainerToken token,
+            Configuration configuration,
+            int runningActivityCount,
+            boolean isVisible,
+            List<IBinder> activities,
+            List<IBinder> inRequestedTaskFragmentActivities,
+            Point positionInParent,
+            boolean isTaskClearedForReuse,
+            boolean isTaskFragmentClearedForPip,
+            boolean isClearedForReorderActivityToFront,
+            Point minimumDimensions) {
         this.mConfiguration = new Configuration();
         this.mActivities = new ArrayList();
         this.mInRequestedTaskFragmentActivities = new ArrayList();
@@ -122,7 +137,21 @@ public final class TaskFragmentInfo implements Parcelable {
     }
 
     public boolean equalsForTaskFragmentOrganizer(TaskFragmentInfo that) {
-        return that != null && this.mFragmentToken.equals(that.mFragmentToken) && this.mToken.equals(that.mToken) && this.mRunningActivityCount == that.mRunningActivityCount && this.mIsVisible == that.mIsVisible && getWindowingMode() == that.getWindowingMode() && this.mActivities.equals(that.mActivities) && this.mInRequestedTaskFragmentActivities.equals(that.mInRequestedTaskFragmentActivities) && this.mPositionInParent.equals(that.mPositionInParent) && this.mIsTaskClearedForReuse == that.mIsTaskClearedForReuse && this.mIsTaskFragmentClearedForPip == that.mIsTaskFragmentClearedForPip && this.mIsClearedForReorderActivityToFront == that.mIsClearedForReorderActivityToFront && this.mMinimumDimensions.equals(that.mMinimumDimensions);
+        return that != null
+                && this.mFragmentToken.equals(that.mFragmentToken)
+                && this.mToken.equals(that.mToken)
+                && this.mRunningActivityCount == that.mRunningActivityCount
+                && this.mIsVisible == that.mIsVisible
+                && getWindowingMode() == that.getWindowingMode()
+                && this.mActivities.equals(that.mActivities)
+                && this.mInRequestedTaskFragmentActivities.equals(
+                        that.mInRequestedTaskFragmentActivities)
+                && this.mPositionInParent.equals(that.mPositionInParent)
+                && this.mIsTaskClearedForReuse == that.mIsTaskClearedForReuse
+                && this.mIsTaskFragmentClearedForPip == that.mIsTaskFragmentClearedForPip
+                && this.mIsClearedForReorderActivityToFront
+                        == that.mIsClearedForReorderActivityToFront
+                && this.mMinimumDimensions.equals(that.mMinimumDimensions);
     }
 
     private TaskFragmentInfo(Parcel in) {
@@ -162,7 +191,29 @@ public final class TaskFragmentInfo implements Parcelable {
     }
 
     public String toString() {
-        return "TaskFragmentInfo{ fragmentToken=" + this.mFragmentToken + " token=" + this.mToken + " runningActivityCount=" + this.mRunningActivityCount + " isVisible=" + this.mIsVisible + " activities=" + this.mActivities + " inRequestedTaskFragmentActivities" + this.mInRequestedTaskFragmentActivities + " positionInParent=" + this.mPositionInParent + " isTaskClearedForReuse=" + this.mIsTaskClearedForReuse + " isTaskFragmentClearedForPip=" + this.mIsTaskFragmentClearedForPip + " mIsClearedForReorderActivityToFront=" + this.mIsClearedForReorderActivityToFront + " minimumDimensions=" + this.mMinimumDimensions + "}";
+        return "TaskFragmentInfo{ fragmentToken="
+                + this.mFragmentToken
+                + " token="
+                + this.mToken
+                + " runningActivityCount="
+                + this.mRunningActivityCount
+                + " isVisible="
+                + this.mIsVisible
+                + " activities="
+                + this.mActivities
+                + " inRequestedTaskFragmentActivities"
+                + this.mInRequestedTaskFragmentActivities
+                + " positionInParent="
+                + this.mPositionInParent
+                + " isTaskClearedForReuse="
+                + this.mIsTaskClearedForReuse
+                + " isTaskFragmentClearedForPip="
+                + this.mIsTaskFragmentClearedForPip
+                + " mIsClearedForReorderActivityToFront="
+                + this.mIsClearedForReorderActivityToFront
+                + " minimumDimensions="
+                + this.mMinimumDimensions
+                + "}";
     }
 
     @Override // android.os.Parcelable

@@ -4,16 +4,20 @@ import android.app.SemWallpaperColors;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
+
 import com.samsung.android.wallpaper.utils.WallpaperExtraBundleHelper;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -66,12 +70,13 @@ public final class SemWallpaperData implements Cloneable {
                     str = AnyMotionDetector$$ExternalSyntheticOutline0.m(str, "::", str2);
                 }
                 String str3 = this.pkgName;
-                return !TextUtils.isEmpty(str3) ? AnyMotionDetector$$ExternalSyntheticOutline0.m(str, "::", str3) : str;
+                return !TextUtils.isEmpty(str3)
+                        ? AnyMotionDetector$$ExternalSyntheticOutline0.m(str, "::", str3)
+                        : str;
             }
         }
 
-        public WallpaperHistroy() {
-        }
+        public WallpaperHistroy() {}
 
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
         public final WallpaperHistroy m1238clone() {
@@ -89,7 +94,11 @@ public final class SemWallpaperData implements Cloneable {
                     sb.append("\n\thistory - [time]::[callingPkg]::[type]::[contents]");
                     int size = this.wallpaperHistoryDataList.size();
                     for (int i = 0; i < size; i++) {
-                        sb.append("\n\t" + ((WallpaperHistoryData) this.wallpaperHistoryDataList.get(i)).getWallpaperHistoryData());
+                        sb.append(
+                                "\n\t"
+                                        + ((WallpaperHistoryData)
+                                                        this.wallpaperHistoryDataList.get(i))
+                                                .getWallpaperHistoryData());
                     }
                 } catch (NullPointerException e) {
                     e.printStackTrace();
@@ -108,7 +117,8 @@ public final class SemWallpaperData implements Cloneable {
         try {
             SemWallpaperData semWallpaperData = (SemWallpaperData) super.clone();
             semWallpaperData.mLastCallingPackage = this.mLastCallingPackage;
-            semWallpaperData.mLastClearCallstackWithNullPackage = this.mLastClearCallstackWithNullPackage;
+            semWallpaperData.mLastClearCallstackWithNullPackage =
+                    this.mLastClearCallstackWithNullPackage;
             semWallpaperData.mUri = this.mUri;
             semWallpaperData.mWallpaperHistory = this.mWallpaperHistory.m1238clone();
             semWallpaperData.mTimeCreated = this.mTimeCreated;
@@ -142,7 +152,8 @@ public final class SemWallpaperData implements Cloneable {
             }
             SemWallpaperColors[] semWallpaperColorsArr = this.mLandscapeColors;
             if (semWallpaperColorsArr != null) {
-                semWallpaperData.mLandscapeColors = new SemWallpaperColors[semWallpaperColorsArr.length];
+                semWallpaperData.mLandscapeColors =
+                        new SemWallpaperColors[semWallpaperColorsArr.length];
                 int i2 = 0;
                 while (true) {
                     SemWallpaperColors[] semWallpaperColorsArr2 = this.mLandscapeColors;
@@ -173,7 +184,10 @@ public final class SemWallpaperData implements Cloneable {
         }
         try {
             int length = this.mLastCallingPackage.length();
-            int indexOf = this.mLastCallingPackage.contains("]") ? this.mLastCallingPackage.indexOf("]") + 1 : 0;
+            int indexOf =
+                    this.mLastCallingPackage.contains("]")
+                            ? this.mLastCallingPackage.indexOf("]") + 1
+                            : 0;
             if (this.mLastCallingPackage.contains("(")) {
                 length = this.mLastCallingPackage.indexOf("(");
             }
@@ -192,7 +206,12 @@ public final class SemWallpaperData implements Cloneable {
                 if (wallpaperHistroy.wallpaperHistoryDataList.isEmpty()) {
                     str = "";
                 } else {
-                    str = ((WallpaperHistroy.WallpaperHistoryData) wallpaperHistroy.wallpaperHistoryDataList.get(wallpaperHistroy.wallpaperHistoryDataList.size() - 1)).callingPackageName;
+                    str =
+                            ((WallpaperHistroy.WallpaperHistoryData)
+                                            wallpaperHistroy.wallpaperHistoryDataList.get(
+                                                    wallpaperHistroy.wallpaperHistoryDataList.size()
+                                                            - 1))
+                                    .callingPackageName;
                 }
             } finally {
             }
@@ -210,7 +229,8 @@ public final class SemWallpaperData implements Cloneable {
                 }
                 Iterator it = wallpaperHistroy.wallpaperHistoryDataList.iterator();
                 while (it.hasNext()) {
-                    WallpaperHistroy.WallpaperHistoryData wallpaperHistoryData = (WallpaperHistroy.WallpaperHistoryData) it.next();
+                    WallpaperHistroy.WallpaperHistoryData wallpaperHistoryData =
+                            (WallpaperHistroy.WallpaperHistoryData) it.next();
                     if (wallpaperHistoryData != null) {
                         arrayList.add(wallpaperHistoryData.getWallpaperHistoryData());
                     }
@@ -229,7 +249,11 @@ public final class SemWallpaperData implements Cloneable {
             }
             for (String str : nextText.split(";")) {
                 String[] split = str.split("::");
-                setWallpaperHistory(split[1], split[0], split.length > 2 ? split[2] : "", split.length > 3 ? split[3] : "");
+                setWallpaperHistory(
+                        split[1],
+                        split[0],
+                        split.length > 2 ? split[2] : "",
+                        split.length > 3 ? split[3] : "");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -244,11 +268,14 @@ public final class SemWallpaperData implements Cloneable {
         synchronized (wallpaperHistroy.wallpaperHistoryDataList) {
             try {
                 ArrayList arrayList = wallpaperHistroy.wallpaperHistoryDataList;
-                WallpaperHistroy.WallpaperHistoryData wallpaperHistoryData = new WallpaperHistroy.WallpaperHistoryData();
+                WallpaperHistroy.WallpaperHistoryData wallpaperHistoryData =
+                        new WallpaperHistroy.WallpaperHistoryData();
                 wallpaperHistoryData.callingPackageName = str;
                 if (str2 == null) {
                     SemWallpaperData.this.getClass();
-                    wallpaperHistoryData.time = SimpleDateFormat.getDateTimeInstance().format(new Date(System.currentTimeMillis()));
+                    wallpaperHistoryData.time =
+                            SimpleDateFormat.getDateTimeInstance()
+                                    .format(new Date(System.currentTimeMillis()));
                 } else {
                     wallpaperHistoryData.time = str2;
                 }

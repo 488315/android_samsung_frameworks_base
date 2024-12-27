@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IAGnssCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$gnss$IAGnssCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$IAGnssCallback".replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";
     public static final int VERSION = 2;
 
@@ -35,8 +36,7 @@ public interface IAGnssCallback extends IInterface {
 
     public static class Default implements IAGnssCallback {
         @Override // android.hardware.gnss.IAGnssCallback
-        public void agnssStatusCb(int type, int status) throws RemoteException {
-        }
+        public void agnssStatusCb(int type, int status) throws RemoteException {}
 
         @Override // android.hardware.gnss.IAGnssCallback
         public int getInterfaceVersion() {
@@ -54,7 +54,7 @@ public interface IAGnssCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAGnssCallback {
+    public abstract static class Stub extends Binder implements IAGnssCallback {
         static final int TRANSACTION_agnssStatusCb = 1;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -99,7 +99,8 @@ public interface IAGnssCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);

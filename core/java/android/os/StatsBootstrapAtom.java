@@ -1,24 +1,25 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class StatsBootstrapAtom implements Parcelable {
-    public static final Parcelable.Creator<StatsBootstrapAtom> CREATOR = new Parcelable.Creator<StatsBootstrapAtom>() { // from class: android.os.StatsBootstrapAtom.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatsBootstrapAtom createFromParcel(Parcel _aidl_source) {
-            StatsBootstrapAtom _aidl_out = new StatsBootstrapAtom();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<StatsBootstrapAtom> CREATOR =
+            new Parcelable.Creator<
+                    StatsBootstrapAtom>() { // from class: android.os.StatsBootstrapAtom.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatsBootstrapAtom createFromParcel(Parcel _aidl_source) {
+                    StatsBootstrapAtom _aidl_out = new StatsBootstrapAtom();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatsBootstrapAtom[] newArray(int _aidl_size) {
-            return new StatsBootstrapAtom[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatsBootstrapAtom[] newArray(int _aidl_size) {
+                    return new StatsBootstrapAtom[_aidl_size];
+                }
+            };
     public int atomId = 0;
     public StatsBootstrapAtomValue[] values;
 
@@ -55,7 +56,9 @@ public class StatsBootstrapAtom implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.values = (StatsBootstrapAtomValue[]) _aidl_parcel.createTypedArray(StatsBootstrapAtomValue.CREATOR);
+                this.values =
+                        (StatsBootstrapAtomValue[])
+                                _aidl_parcel.createTypedArray(StatsBootstrapAtomValue.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

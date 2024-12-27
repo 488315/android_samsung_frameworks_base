@@ -10,10 +10,11 @@ import android.util.Log;
 public class SemColorDisplayManager {
     private static final String TAG = SemColorDisplayManager.class.getSimpleName();
     private static SemColorDisplayManager sInstance;
-    private final IColorDisplayManager mColorDisplayManager = IColorDisplayManager.Stub.asInterface(ServiceManager.getService(Context.COLOR_DISPLAY_SERVICE));
+    private final IColorDisplayManager mColorDisplayManager =
+            IColorDisplayManager.Stub.asInterface(
+                    ServiceManager.getService(Context.COLOR_DISPLAY_SERVICE));
 
-    private SemColorDisplayManager() {
-    }
+    private SemColorDisplayManager() {}
 
     public static synchronized SemColorDisplayManager getInstance() {
         SemColorDisplayManager semColorDisplayManager;

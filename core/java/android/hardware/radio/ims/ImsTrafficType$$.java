@@ -1,13 +1,28 @@
 package android.hardware.radio.ims;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.lang.reflect.Array;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public interface ImsTrafficType$$ {
     static String toString(int _aidl_v) {
-        return _aidl_v == 0 ? "EMERGENCY" : _aidl_v == 1 ? "EMERGENCY_SMS" : _aidl_v == 2 ? "VOICE" : _aidl_v == 3 ? "VIDEO" : _aidl_v == 4 ? "SMS" : _aidl_v == 5 ? "REGISTRATION" : _aidl_v == 6 ? "UT_XCAP" : Integer.toString(_aidl_v);
+        return _aidl_v == 0
+                ? "EMERGENCY"
+                : _aidl_v == 1
+                        ? "EMERGENCY_SMS"
+                        : _aidl_v == 2
+                                ? "VOICE"
+                                : _aidl_v == 3
+                                        ? "VIDEO"
+                                        : _aidl_v == 4
+                                                ? "SMS"
+                                                : _aidl_v == 5
+                                                        ? "REGISTRATION"
+                                                        : _aidl_v == 6
+                                                                ? "UT_XCAP"
+                                                                : Integer.toString(_aidl_v);
     }
 
     static String arrayToString(Object _aidl_v) {
@@ -19,7 +34,11 @@ public interface ImsTrafficType$$ {
             throw new IllegalArgumentException("not an array: " + _aidl_v);
         }
         Class<?> comp = _aidl_cls.getComponentType();
-        StringJoiner _aidl_sj = new StringJoiner(", ", NavigationBarInflaterView.SIZE_MOD_START, NavigationBarInflaterView.SIZE_MOD_END);
+        StringJoiner _aidl_sj =
+                new StringJoiner(
+                        ", ",
+                        NavigationBarInflaterView.SIZE_MOD_START,
+                        NavigationBarInflaterView.SIZE_MOD_END);
         if (comp.isArray()) {
             for (int _aidl_i = 0; _aidl_i < Array.getLength(_aidl_v); _aidl_i++) {
                 _aidl_sj.add(arrayToString(Array.get(_aidl_v, _aidl_i)));

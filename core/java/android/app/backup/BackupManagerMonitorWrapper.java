@@ -1,6 +1,5 @@
 package android.app.backup;
 
-import android.app.backup.IBackupManagerMonitor;
 import android.os.Bundle;
 import android.os.RemoteException;
 

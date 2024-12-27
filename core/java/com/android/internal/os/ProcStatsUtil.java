@@ -1,6 +1,7 @@
 package com.android.internal.os;
 
 import android.os.StrictMode;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,8 +12,7 @@ public final class ProcStatsUtil {
     private static final int READ_SIZE = 1024;
     private static final String TAG = "ProcStatsUtil";
 
-    private ProcStatsUtil() {
-    }
+    private ProcStatsUtil() {}
 
     public static String readNullSeparatedFile(String path) {
         String contents = readSingleLineProcFile(path);

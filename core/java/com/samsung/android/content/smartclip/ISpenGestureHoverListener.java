@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ISpenGestureHoverListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.content.smartclip.ISpenGestureHoverListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.content.smartclip.ISpenGestureHoverListener";
 
     void onBackPressed() throws RemoteException;
 
@@ -22,24 +23,19 @@ public interface ISpenGestureHoverListener extends IInterface {
 
     public static class Default implements ISpenGestureHoverListener {
         @Override // com.samsung.android.content.smartclip.ISpenGestureHoverListener
-        public void onHoverEnter() throws RemoteException {
-        }
+        public void onHoverEnter() throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureHoverListener
-        public void onHoverExit() throws RemoteException {
-        }
+        public void onHoverExit() throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureHoverListener
-        public void onHoverExitTowardBack() throws RemoteException {
-        }
+        public void onHoverExitTowardBack() throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureHoverListener
-        public void onBackPressed() throws RemoteException {
-        }
+        public void onBackPressed() throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.ISpenGestureHoverListener
-        public void onHoverStay(int x, int y) throws RemoteException {
-        }
+        public void onHoverStay(int x, int y) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +43,7 @@ public interface ISpenGestureHoverListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISpenGestureHoverListener {
+    public abstract static class Stub extends Binder implements ISpenGestureHoverListener {
         static final int TRANSACTION_onBackPressed = 4;
         static final int TRANSACTION_onHoverEnter = 1;
         static final int TRANSACTION_onHoverExit = 2;
@@ -97,7 +93,8 @@ public interface ISpenGestureHoverListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISpenGestureHoverListener.DESCRIPTOR);
             }

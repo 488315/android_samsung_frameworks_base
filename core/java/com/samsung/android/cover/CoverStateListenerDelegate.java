@@ -5,8 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import com.samsung.android.cover.CoverManager;
-import com.samsung.android.cover.ICoverStateListenerCallback;
 
 /* loaded from: classes6.dex */
 class CoverStateListenerDelegate extends ICoverStateListenerCallback.Stub {
@@ -16,7 +14,8 @@ class CoverStateListenerDelegate extends ICoverStateListenerCallback.Stub {
     private ListenerDelegateHandler mHandler;
     private final CoverManager.CoverStateListener mListener;
 
-    CoverStateListenerDelegate(CoverManager.CoverStateListener listener, Handler handler, Context context) {
+    CoverStateListenerDelegate(
+            CoverManager.CoverStateListener listener, Handler handler, Context context) {
         this.mListener = listener;
         Looper looper = handler == null ? context.getMainLooper() : handler.getLooper();
         this.mHandler = new ListenerDelegateHandler(looper, this.mListener);

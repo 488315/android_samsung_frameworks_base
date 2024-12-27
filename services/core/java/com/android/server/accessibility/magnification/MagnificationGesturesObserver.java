@@ -3,9 +3,9 @@ package com.android.server.accessibility.magnification;
 import android.util.Log;
 import android.util.Slog;
 import android.view.MotionEvent;
+
 import com.android.server.accessibility.gestures.GestureMatcher;
-import com.android.server.accessibility.magnification.GesturesObserver;
-import com.android.server.accessibility.magnification.WindowMagnificationGestureHandler;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,7 +19,9 @@ public final class MagnificationGesturesObserver implements GesturesObserver.Lis
     public long mLastDownEventTime = 0;
     public MotionEvent mLastEvent;
 
-    public MagnificationGesturesObserver(WindowMagnificationGestureHandler.DetectingState detectingState, GestureMatcher... gestureMatcherArr) {
+    public MagnificationGesturesObserver(
+            WindowMagnificationGestureHandler.DetectingState detectingState,
+            GestureMatcher... gestureMatcherArr) {
         this.mGesturesObserver = new GesturesObserver(this, gestureMatcherArr);
         this.mCallback = detectingState;
     }
@@ -61,13 +63,19 @@ public final class MagnificationGesturesObserver implements GesturesObserver.Lis
         WindowMagnificationGestureHandler.DetectingState detectingState = this.mCallback;
         detectingState.getClass();
         boolean z = WindowMagnificationGestureHandler.DEBUG_DETECTING;
-        WindowMagnificationGestureHandler windowMagnificationGestureHandler = WindowMagnificationGestureHandler.this;
+        WindowMagnificationGestureHandler windowMagnificationGestureHandler =
+                WindowMagnificationGestureHandler.this;
         if (z) {
-            Slog.d(windowMagnificationGestureHandler.mLogTag, "onGestureCancelled : delayedEventQueue = " + list);
+            Slog.d(
+                    windowMagnificationGestureHandler.mLogTag,
+                    "onGestureCancelled : delayedEventQueue = " + list);
         }
-        windowMagnificationGestureHandler.mMotionEventDispatcherDelegate.sendDelayedMotionEvents(j, list);
-        if (motionEvent == null || (motionEvent.getActionMasked() != 1 && motionEvent.getActionMasked() != 3)) {
-            windowMagnificationGestureHandler.transitionTo(windowMagnificationGestureHandler.mDelegatingState);
+        windowMagnificationGestureHandler.mMotionEventDispatcherDelegate.sendDelayedMotionEvents(
+                j, list);
+        if (motionEvent == null
+                || (motionEvent.getActionMasked() != 1 && motionEvent.getActionMasked() != 3)) {
+            windowMagnificationGestureHandler.transitionTo(
+                    windowMagnificationGestureHandler.mDelegatingState);
         }
         clear();
     }

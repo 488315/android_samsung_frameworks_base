@@ -4,14 +4,15 @@ import android.os.Binder;
 import android.os.SystemClock;
 import android.util.Slog;
 import android.util.TimeUtils;
+
 import com.android.internal.app.procstats.AssociationState;
 import com.android.internal.app.procstats.ProcessStats;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
-import com.android.server.am.OomAdjusterModernImpl;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class ContentProviderConnection extends Binder implements OomAdjusterModernImpl.Connection {
+public final class ContentProviderConnection extends Binder
+        implements OomAdjusterModernImpl.Connection {
     public AssociationState.SourceState association;
     public final ProcessRecord client;
     public final String clientPackage;
@@ -27,7 +28,11 @@ public final class ContentProviderConnection extends Binder implements OomAdjust
     public final Object mLock = new Object();
     public final long createTime = SystemClock.elapsedRealtime();
 
-    public ContentProviderConnection(ContentProviderRecord contentProviderRecord, ProcessRecord processRecord, String str, int i) {
+    public ContentProviderConnection(
+            ContentProviderRecord contentProviderRecord,
+            ProcessRecord processRecord,
+            String str,
+            int i) {
         this.provider = contentProviderRecord;
         this.client = processRecord;
         this.clientPackage = str;
@@ -55,7 +60,8 @@ public final class ContentProviderConnection extends Binder implements OomAdjust
                 throw new IllegalStateException("unstableCount < 0: " + i4);
             }
             if (i3 + i4 <= 0) {
-                throw new IllegalStateException("ref counts can't go to zero here: stable=" + i3 + " unstable=" + i4);
+                throw new IllegalStateException(
+                        "ref counts can't go to zero here: stable=" + i3 + " unstable=" + i4);
             }
             this.mStableCount = i3;
             this.mUnstableCount = i4;
@@ -63,8 +69,27 @@ public final class ContentProviderConnection extends Binder implements OomAdjust
     }
 
     @Override // com.android.server.am.OomAdjusterModernImpl.Connection
-    public final void computeHostOomAdjLSP(OomAdjuster oomAdjuster, ProcessRecord processRecord, ProcessRecord processRecord2, long j, ProcessRecord processRecord3, boolean z, int i) {
-        oomAdjuster.computeProviderHostOomAdjLSP(this, processRecord, processRecord2, j, processRecord3, z, false, false, i, 1001, false, false);
+    public final void computeHostOomAdjLSP(
+            OomAdjuster oomAdjuster,
+            ProcessRecord processRecord,
+            ProcessRecord processRecord2,
+            long j,
+            ProcessRecord processRecord3,
+            boolean z,
+            int i) {
+        oomAdjuster.computeProviderHostOomAdjLSP(
+                this,
+                processRecord,
+                processRecord2,
+                j,
+                processRecord3,
+                z,
+                false,
+                false,
+                i,
+                1001,
+                false,
+                false);
     }
 
     public final int decrementCount(boolean z) {
@@ -98,25 +123,45 @@ public final class ContentProviderConnection extends Binder implements OomAdjust
             if (contentProviderRecord.proc != null) {
                 int i = contentProviderRecord.appInfo.uid;
                 ProcessRecord processRecord = this.client;
-                if (i == processRecord.uid && contentProviderRecord.info.processName.equals(processRecord.processName)) {
+                if (i == processRecord.uid
+                        && contentProviderRecord.info.processName.equals(
+                                processRecord.processName)) {
                     return;
                 }
                 ContentProviderRecord contentProviderRecord2 = this.provider;
-                ProcessStats.ProcessStateHolder processStateHolder = contentProviderRecord2.proc.mPkgList.get(contentProviderRecord2.name.getPackageName());
+                ProcessStats.ProcessStateHolder processStateHolder =
+                        contentProviderRecord2.proc.mPkgList.get(
+                                contentProviderRecord2.name.getPackageName());
                 if (processStateHolder == null) {
-                    Slog.wtf("ActivityManager", "No package in referenced provider " + this.provider.name.toShortString() + ": proc=" + this.provider.proc);
+                    Slog.wtf(
+                            "ActivityManager",
+                            "No package in referenced provider "
+                                    + this.provider.name.toShortString()
+                                    + ": proc="
+                                    + this.provider.proc);
                     return;
                 }
                 if (processStateHolder.pkg == null) {
-                    Slog.wtf("ActivityManager", "Inactive holder in referenced provider " + this.provider.name.toShortString() + ": proc=" + this.provider.proc);
+                    Slog.wtf(
+                            "ActivityManager",
+                            "Inactive holder in referenced provider "
+                                    + this.provider.name.toShortString()
+                                    + ": proc="
+                                    + this.provider.proc);
                     return;
                 }
                 Object obj = this.provider.proc.mService.mProcessStats.mLock;
                 this.mProcStatsLock = obj;
                 synchronized (obj) {
-                    AssociationState associationStateLocked = processStateHolder.pkg.getAssociationStateLocked(processStateHolder.state, this.provider.name.getClassName());
+                    AssociationState associationStateLocked =
+                            processStateHolder.pkg.getAssociationStateLocked(
+                                    processStateHolder.state, this.provider.name.getClassName());
                     ProcessRecord processRecord2 = this.client;
-                    this.association = associationStateLocked.startSource(processRecord2.uid, processRecord2.processName, this.clientPackage);
+                    this.association =
+                            associationStateLocked.startSource(
+                                    processRecord2.uid,
+                                    processRecord2.processName,
+                                    this.clientPackage);
                 }
             }
         }
@@ -146,7 +191,8 @@ public final class ContentProviderConnection extends Binder implements OomAdjust
     }
 
     public final String toString() {
-        StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m(128, "ContentProviderConnection{");
+        StringBuilder m =
+                BootReceiver$$ExternalSyntheticOutline0.m(128, "ContentProviderConnection{");
         m.append(this.provider.toShortString());
         m.append("->");
         toClientString(m);

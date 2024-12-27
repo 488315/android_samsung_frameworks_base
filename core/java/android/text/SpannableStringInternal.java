@@ -1,10 +1,13 @@
 package android.text;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
-import java.lang.reflect.Array;
+
 import libcore.util.EmptyArray;
+
+import java.lang.reflect.Array;
 
 /* JADX INFO: Access modifiers changed from: package-private */
 /* loaded from: classes4.dex */
@@ -20,7 +23,8 @@ public abstract class SpannableStringInternal {
     private String mText;
 
     /* JADX WARN: Multi-variable type inference failed */
-    SpannableStringInternal(CharSequence charSequence, int start, int end, boolean ignoreNoCopySpan) {
+    SpannableStringInternal(
+            CharSequence charSequence, int start, int end, boolean ignoreNoCopySpan) {
         if (start == 0 && end == charSequence.length()) {
             this.mText = charSequence.toString();
         } else {
@@ -30,7 +34,8 @@ public abstract class SpannableStringInternal {
         this.mSpanData = EmptyArray.INT;
         if (charSequence instanceof Spanned) {
             if (charSequence instanceof SpannableStringInternal) {
-                copySpansFromInternal((SpannableStringInternal) charSequence, start, end, ignoreNoCopySpan);
+                copySpansFromInternal(
+                        (SpannableStringInternal) charSequence, start, end, ignoreNoCopySpan);
             } else {
                 copySpansFromSpanned((Spanned) charSequence, start, end, ignoreNoCopySpan);
             }
@@ -59,7 +64,8 @@ public abstract class SpannableStringInternal {
         }
     }
 
-    private void copySpansFromInternal(SpannableStringInternal src, int start, int end, boolean ignoreNoCopySpan) {
+    private void copySpansFromInternal(
+            SpannableStringInternal src, int start, int end, boolean ignoreNoCopySpan) {
         int count = 0;
         int[] srcData = src.mSpanData;
         Object[] srcSpans = src.mSpans;
@@ -69,8 +75,7 @@ public abstract class SpannableStringInternal {
             if (!isOutOfCopyRange(start, end, srcData[(i * 3) + 0], srcData[(i * 3) + 1])) {
                 if (srcSpans[i] instanceof NoCopySpan) {
                     hasNoCopySpan = true;
-                    if (ignoreNoCopySpan) {
-                    }
+                    if (ignoreNoCopySpan) {}
                 }
                 count++;
             }
@@ -93,7 +98,8 @@ public abstract class SpannableStringInternal {
         for (int i2 = 0; i2 < limit; i2++) {
             int spanStart = srcData[(i2 * 3) + 0];
             int spanEnd = srcData[(i2 * 3) + 1];
-            if (!isOutOfCopyRange(start, end, spanStart, spanEnd) && (!ignoreNoCopySpan || !(srcSpans[i2] instanceof NoCopySpan))) {
+            if (!isOutOfCopyRange(start, end, spanStart, spanEnd)
+                    && (!ignoreNoCopySpan || !(srcSpans[i2] instanceof NoCopySpan))) {
                 if (spanStart < start) {
                     spanStart = start;
                 }
@@ -154,13 +160,23 @@ public abstract class SpannableStringInternal {
                 if (!enforceParagraph) {
                     return;
                 } else {
-                    throw new RuntimeException("PARAGRAPH span must start at paragraph boundary (" + start + " follows " + charAt(start - 1) + NavigationBarInflaterView.KEY_CODE_END);
+                    throw new RuntimeException(
+                            "PARAGRAPH span must start at paragraph boundary ("
+                                    + start
+                                    + " follows "
+                                    + charAt(start - 1)
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                 }
             } else if (isIndexFollowsNextLine(end)) {
                 if (!enforceParagraph) {
                     return;
                 } else {
-                    throw new RuntimeException("PARAGRAPH span must end at paragraph boundary (" + end + " follows " + charAt(end - 1) + NavigationBarInflaterView.KEY_CODE_END);
+                    throw new RuntimeException(
+                            "PARAGRAPH span must end at paragraph boundary ("
+                                    + end
+                                    + " follows "
+                                    + charAt(end - 1)
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                 }
             }
         }
@@ -179,7 +195,8 @@ public abstract class SpannableStringInternal {
             }
         }
         if (this.mSpanCount + 1 >= this.mSpans.length) {
-            Object[] newtags = ArrayUtils.newUnpaddedObjectArray(GrowingArrayUtils.growSize(this.mSpanCount));
+            Object[] newtags =
+                    ArrayUtils.newUnpaddedObjectArray(GrowingArrayUtils.growSize(this.mSpanCount));
             int[] newdata = new int[newtags.length * 3];
             System.arraycopy(this.mSpans, 0, newtags, 0, this.mSpanCount);
             System.arraycopy(this.mSpanData, 0, newdata, 0, this.mSpanCount * 3);
@@ -271,19 +288,26 @@ public abstract class SpannableStringInternal {
         while (i6 < i5) {
             int i7 = iArr[(i6 * 3) + 0];
             int i8 = iArr[(i6 * 3) + 1];
-            if (i7 <= i2 && i8 >= i3 && ((i7 == i8 || i3 == i2 || (i7 != i2 && i8 != i3)) && (cls == null || cls == Object.class || cls.isInstance(objArr[i6])))) {
+            if (i7 <= i2
+                    && i8 >= i3
+                    && ((i7 == i8 || i3 == i2 || (i7 != i2 && i8 != i3))
+                            && (cls == null
+                                    || cls == Object.class
+                                    || cls.isInstance(objArr[i6])))) {
                 if (i4 == 0) {
                     obj = objArr[i6];
                     i4++;
                 } else {
                     if (i4 == 1) {
-                        objArr2 = (T[]) ((Object[]) Array.newInstance((Class<?>) cls, (i5 - i6) + 1));
+                        objArr2 =
+                                (T[]) ((Object[]) Array.newInstance((Class<?>) cls, (i5 - i6) + 1));
                         objArr2[0] = obj;
                     }
                     int i9 = iArr[(i6 * 3) + 2] & Spanned.SPAN_PRIORITY;
                     if (i9 != 0) {
                         int i10 = 0;
-                        while (i10 < i4 && i9 <= (getSpanFlags(objArr2[i10]) & Spanned.SPAN_PRIORITY)) {
+                        while (i10 < i4
+                                && i9 <= (getSpanFlags(objArr2[i10]) & Spanned.SPAN_PRIORITY)) {
                             i10++;
                         }
                         System.arraycopy(objArr2, i10, objArr2, i10 + 1, i4 - i10);
@@ -352,26 +376,34 @@ public abstract class SpannableStringInternal {
 
     /* JADX WARN: Multi-variable type inference failed */
     private void sendSpanChanged(Object what, int s, int e, int st, int en) {
-        SpanWatcher[] recip = (SpanWatcher[]) getSpans(Math.min(s, st), Math.max(e, en), SpanWatcher.class);
+        SpanWatcher[] recip =
+                (SpanWatcher[]) getSpans(Math.min(s, st), Math.max(e, en), SpanWatcher.class);
         for (SpanWatcher spanWatcher : recip) {
             spanWatcher.onSpanChanged((Spannable) this, what, s, e, st, en);
         }
     }
 
     private static String region(int start, int end) {
-        return NavigationBarInflaterView.KEY_CODE_START + start + " ... " + end + NavigationBarInflaterView.KEY_CODE_END;
+        return NavigationBarInflaterView.KEY_CODE_START
+                + start
+                + " ... "
+                + end
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     private void checkRange(String operation, int start, int end) {
         if (end < start) {
-            throw new IndexOutOfBoundsException(operation + " " + region(start, end) + " has end before start");
+            throw new IndexOutOfBoundsException(
+                    operation + " " + region(start, end) + " has end before start");
         }
         int len = length();
         if (start > len || end > len) {
-            throw new IndexOutOfBoundsException(operation + " " + region(start, end) + " ends beyond length " + len);
+            throw new IndexOutOfBoundsException(
+                    operation + " " + region(start, end) + " ends beyond length " + len);
         }
         if (start < 0 || end < 0) {
-            throw new IndexOutOfBoundsException(operation + " " + region(start, end) + " starts before 0");
+            throw new IndexOutOfBoundsException(
+                    operation + " " + region(start, end) + " starts before 0");
         }
     }
 
@@ -385,10 +417,16 @@ public abstract class SpannableStringInternal {
                     Object thisSpan = thisSpans[i];
                     Object otherSpan = otherSpans[i];
                     if (thisSpan == this) {
-                        if (other != otherSpan || getSpanStart(thisSpan) != other.getSpanStart(otherSpan) || getSpanEnd(thisSpan) != other.getSpanEnd(otherSpan) || getSpanFlags(thisSpan) != other.getSpanFlags(otherSpan)) {
+                        if (other != otherSpan
+                                || getSpanStart(thisSpan) != other.getSpanStart(otherSpan)
+                                || getSpanEnd(thisSpan) != other.getSpanEnd(otherSpan)
+                                || getSpanFlags(thisSpan) != other.getSpanFlags(otherSpan)) {
                             return false;
                         }
-                    } else if (!thisSpan.equals(otherSpan) || getSpanStart(thisSpan) != other.getSpanStart(otherSpan) || getSpanEnd(thisSpan) != other.getSpanEnd(otherSpan) || getSpanFlags(thisSpan) != other.getSpanFlags(otherSpan)) {
+                    } else if (!thisSpan.equals(otherSpan)
+                            || getSpanStart(thisSpan) != other.getSpanStart(otherSpan)
+                            || getSpanEnd(thisSpan) != other.getSpanEnd(otherSpan)
+                            || getSpanFlags(thisSpan) != other.getSpanFlags(otherSpan)) {
                         return false;
                     }
                 }
@@ -406,7 +444,9 @@ public abstract class SpannableStringInternal {
             if (span != this) {
                 hash2 = (hash2 * 31) + span.hashCode();
             }
-            hash2 = (((((hash2 * 31) + getSpanStart(span)) * 31) + getSpanEnd(span)) * 31) + getSpanFlags(span);
+            hash2 =
+                    (((((hash2 * 31) + getSpanStart(span)) * 31) + getSpanEnd(span)) * 31)
+                            + getSpanFlags(span);
         }
         return hash2;
     }

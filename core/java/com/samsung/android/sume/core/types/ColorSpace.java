@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.types;
 
 import android.graphics.Bitmap;
+
 import com.samsung.android.sume.core.Def;
 
 /* loaded from: classes6.dex */
@@ -38,7 +39,10 @@ public enum ColorSpace implements NumericEnum {
     }
 
     private static int makeColorSpace(ColorSpace colorSpace, ColorSpaceRange range) {
-        Def.require((colorSpace == NONE || range == ColorSpaceRange.NONE) ? false : true, "color-space is none", new Object[0]);
+        Def.require(
+                (colorSpace == NONE || range == ColorSpaceRange.NONE) ? false : true,
+                "color-space is none",
+                new Object[0]);
         return (colorSpace.getValue() & 15) + (range.getValue() << 4);
     }
 

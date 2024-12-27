@@ -6,28 +6,30 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class ConfigurationStats implements Parcelable {
-    public static final Parcelable.Creator<ConfigurationStats> CREATOR = new Parcelable.Creator<ConfigurationStats>() { // from class: android.app.usage.ConfigurationStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConfigurationStats createFromParcel(Parcel source) {
-            ConfigurationStats stats = new ConfigurationStats();
-            if (source.readInt() != 0) {
-                stats.mConfiguration = Configuration.CREATOR.createFromParcel(source);
-            }
-            stats.mBeginTimeStamp = source.readLong();
-            stats.mEndTimeStamp = source.readLong();
-            stats.mLastTimeActive = source.readLong();
-            stats.mTotalTimeActive = source.readLong();
-            stats.mActivationCount = source.readInt();
-            return stats;
-        }
+    public static final Parcelable.Creator<ConfigurationStats> CREATOR =
+            new Parcelable.Creator<
+                    ConfigurationStats>() { // from class: android.app.usage.ConfigurationStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConfigurationStats createFromParcel(Parcel source) {
+                    ConfigurationStats stats = new ConfigurationStats();
+                    if (source.readInt() != 0) {
+                        stats.mConfiguration = Configuration.CREATOR.createFromParcel(source);
+                    }
+                    stats.mBeginTimeStamp = source.readLong();
+                    stats.mEndTimeStamp = source.readLong();
+                    stats.mLastTimeActive = source.readLong();
+                    stats.mTotalTimeActive = source.readLong();
+                    stats.mActivationCount = source.readInt();
+                    return stats;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConfigurationStats[] newArray(int size) {
-            return new ConfigurationStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConfigurationStats[] newArray(int size) {
+                    return new ConfigurationStats[size];
+                }
+            };
     public int mActivationCount;
     public long mBeginTimeStamp;
     public Configuration mConfiguration;
@@ -35,8 +37,7 @@ public final class ConfigurationStats implements Parcelable {
     public long mLastTimeActive;
     public long mTotalTimeActive;
 
-    public ConfigurationStats() {
-    }
+    public ConfigurationStats() {}
 
     public ConfigurationStats(ConfigurationStats stats) {
         this.mConfiguration = stats.mConfiguration;

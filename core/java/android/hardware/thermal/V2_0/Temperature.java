@@ -3,6 +3,7 @@ package android.hardware.thermal.V2_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -21,18 +22,33 @@ public final class Temperature {
             return false;
         }
         Temperature other = (Temperature) otherObject;
-        if (this.type == other.type && HidlSupport.deepEquals(this.name, other.name) && this.value == other.value && this.throttlingStatus == other.throttlingStatus) {
+        if (this.type == other.type
+                && HidlSupport.deepEquals(this.name, other.name)
+                && this.value == other.value
+                && this.throttlingStatus == other.throttlingStatus) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))), Integer.valueOf(HidlSupport.deepHashCode(this.name)), Integer.valueOf(HidlSupport.deepHashCode(Float.valueOf(this.value))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.throttlingStatus))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.name)),
+                Integer.valueOf(HidlSupport.deepHashCode(Float.valueOf(this.value))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.throttlingStatus))));
     }
 
     public final String toString() {
-        return "{.type = " + TemperatureType.toString(this.type) + ", .name = " + this.name + ", .value = " + this.value + ", .throttlingStatus = " + ThrottlingSeverity.toString(this.throttlingStatus) + "}";
+        return "{.type = "
+                + TemperatureType.toString(this.type)
+                + ", .name = "
+                + this.name
+                + ", .value = "
+                + this.value
+                + ", .throttlingStatus = "
+                + ThrottlingSeverity.toString(this.throttlingStatus)
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -44,7 +60,8 @@ public final class Temperature {
         ArrayList<Temperature> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             Temperature _hidl_vec_element = new Temperature();
@@ -54,10 +71,12 @@ public final class Temperature {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.type = _hidl_blob.getInt32(_hidl_offset + 0);
         this.name = _hidl_blob.getString(_hidl_offset + 8);
-        parcel.readEmbeddedBuffer(this.name.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.name.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
         this.value = _hidl_blob.getFloat(_hidl_offset + 24);
         this.throttlingStatus = _hidl_blob.getInt32(_hidl_offset + 28);
     }
@@ -68,7 +87,8 @@ public final class Temperature {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<Temperature> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<Temperature> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

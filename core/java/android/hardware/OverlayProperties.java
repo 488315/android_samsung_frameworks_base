@@ -2,6 +2,7 @@ package android.hardware;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
@@ -9,23 +10,28 @@ public final class OverlayProperties implements Parcelable {
     private static OverlayProperties sDefaultOverlayProperties;
     private Runnable mCloser;
     private long mNativeObject;
-    private static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(OverlayProperties.class.getClassLoader(), nGetDestructor());
-    public static final Parcelable.Creator<OverlayProperties> CREATOR = new Parcelable.Creator<OverlayProperties>() { // from class: android.hardware.OverlayProperties.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverlayProperties createFromParcel(Parcel in) {
-            if (in.readInt() != 0) {
-                return new OverlayProperties(OverlayProperties.nReadOverlayPropertiesFromParcel(in));
-            }
-            return null;
-        }
+    private static final NativeAllocationRegistry sRegistry =
+            NativeAllocationRegistry.createMalloced(
+                    OverlayProperties.class.getClassLoader(), nGetDestructor());
+    public static final Parcelable.Creator<OverlayProperties> CREATOR =
+            new Parcelable.Creator<
+                    OverlayProperties>() { // from class: android.hardware.OverlayProperties.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverlayProperties createFromParcel(Parcel in) {
+                    if (in.readInt() != 0) {
+                        return new OverlayProperties(
+                                OverlayProperties.nReadOverlayPropertiesFromParcel(in));
+                    }
+                    return null;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverlayProperties[] newArray(int size) {
-            return new OverlayProperties[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverlayProperties[] newArray(int size) {
+                    return new OverlayProperties[size];
+                }
+            };
 
     private static native long nCreateDefault();
 

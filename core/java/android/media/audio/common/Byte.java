@@ -3,27 +3,29 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class Byte implements Parcelable {
-    public static final Parcelable.Creator<Byte> CREATOR = new Parcelable.Creator<Byte>() { // from class: android.media.audio.common.Byte.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Byte createFromParcel(Parcel _aidl_source) {
-            Byte _aidl_out = new Byte();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Byte> CREATOR =
+            new Parcelable.Creator<Byte>() { // from class: android.media.audio.common.Byte.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Byte createFromParcel(Parcel _aidl_source) {
+                    Byte _aidl_out = new Byte();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Byte[] newArray(int _aidl_size) {
-            return new Byte[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Byte[] newArray(int _aidl_size) {
+                    return new Byte[_aidl_size];
+                }
+            };
     public byte value = 0;
 
     @Override // android.os.Parcelable
@@ -84,7 +86,8 @@ public class Byte implements Parcelable {
             return false;
         }
         Byte that = (Byte) other;
-        if (Objects.deepEquals(java.lang.Byte.valueOf(this.value), java.lang.Byte.valueOf(that.value))) {
+        if (Objects.deepEquals(
+                java.lang.Byte.valueOf(this.value), java.lang.Byte.valueOf(that.value))) {
             return true;
         }
         return false;

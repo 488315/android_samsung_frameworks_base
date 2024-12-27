@@ -5,8 +5,10 @@ import android.app.WindowConfiguration;
 import android.graphics.Rect;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -26,28 +28,38 @@ public final class DexDockingController implements IController {
     }
 
     public final void clearAllTasks(String str) {
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m("clearAllTasks reason=", str, "DexDockingController");
-        this.mAtm.mRootWindowContainer.forAllTasks(new DexDockingController$$ExternalSyntheticLambda4());
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                "clearAllTasks reason=", str, "DexDockingController");
+        this.mAtm.mRootWindowContainer.forAllTasks(
+                new DexDockingController$$ExternalSyntheticLambda4());
     }
 
     @Override // com.android.server.wm.IController
-    public final void dumpLocked(PrintWriter printWriter) {
-    }
+    public final void dumpLocked(PrintWriter printWriter) {}
 
     @Override // com.android.server.wm.IController
-    public final void initialize() {
-    }
+    public final void initialize() {}
 
     public final boolean isValidDockingBounds(int i, Rect rect) {
         Rect rect2 = (Rect) this.mDockingBounds.get(i);
         if (rect2 == null) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "dockingBounds is null. docking=", "DexDockingController");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "dockingBounds is null. docking=", "DexDockingController");
             return false;
         }
-        if (rect.top == rect2.top && rect.bottom == rect2.bottom && ((i != 1 || rect.left == rect2.left) && (i != 2 || rect.right == rect2.right))) {
+        if (rect.top == rect2.top
+                && rect.bottom == rect2.bottom
+                && ((i != 1 || rect.left == rect2.left) && (i != 2 || rect.right == rect2.right))) {
             return true;
         }
-        Slog.d("DexDockingController", "isValidDockingBounds docking=" + WindowConfiguration.dexTaskDockingStateToString(i) + "   bounds=" + rect + "   dockingBounds=" + rect2);
+        Slog.d(
+                "DexDockingController",
+                "isValidDockingBounds docking="
+                        + WindowConfiguration.dexTaskDockingStateToString(i)
+                        + "   bounds="
+                        + rect
+                        + "   dockingBounds="
+                        + rect2);
         return false;
     }
 
@@ -56,34 +68,38 @@ public final class DexDockingController implements IController {
         int dexTaskDockingState = task.getDexTaskDockingState();
         if (isValidDockingBounds(dexTaskDockingState, rect)) {
             final int i = dexTaskDockingState == 1 ? 2 : 1;
-            this.mAtm.mRootWindowContainer.forAllTasks(new Consumer() { // from class: com.android.server.wm.DexDockingController$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    DexDockingController dexDockingController = DexDockingController.this;
-                    int i2 = i;
-                    Task task2 = task;
-                    Rect rect2 = rect;
-                    Task task3 = (Task) obj;
-                    dexDockingController.getClass();
-                    if (task3.getDexTaskDockingState() != i2) {
-                        return;
-                    }
-                    int freeformThickness = task2.getFreeformThickness();
-                    Rect rect3 = new Rect(rect2);
-                    if (i2 == 1) {
-                        rect3.left = 0;
-                        rect3.right = rect2.left - freeformThickness;
-                    } else if (i2 == 2) {
-                        rect3.left = rect2.right + freeformThickness;
-                        rect3.right = dexDockingController.mDisplayWidth;
-                    }
-                    if (rect3.isEmpty()) {
-                        return;
-                    }
-                    Slog.d("DexDockingController", "Resize other task=" + task3 + "  bounds=" + rect3);
-                    dexDockingController.mAtm.resizeTask(task3.mTaskId, rect3, 3);
-                }
-            });
+            this.mAtm.mRootWindowContainer.forAllTasks(
+                    new Consumer() { // from class:
+                                     // com.android.server.wm.DexDockingController$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            DexDockingController dexDockingController = DexDockingController.this;
+                            int i2 = i;
+                            Task task2 = task;
+                            Rect rect2 = rect;
+                            Task task3 = (Task) obj;
+                            dexDockingController.getClass();
+                            if (task3.getDexTaskDockingState() != i2) {
+                                return;
+                            }
+                            int freeformThickness = task2.getFreeformThickness();
+                            Rect rect3 = new Rect(rect2);
+                            if (i2 == 1) {
+                                rect3.left = 0;
+                                rect3.right = rect2.left - freeformThickness;
+                            } else if (i2 == 2) {
+                                rect3.left = rect2.right + freeformThickness;
+                                rect3.right = dexDockingController.mDisplayWidth;
+                            }
+                            if (rect3.isEmpty()) {
+                                return;
+                            }
+                            Slog.d(
+                                    "DexDockingController",
+                                    "Resize other task=" + task3 + "  bounds=" + rect3);
+                            dexDockingController.mAtm.resizeTask(task3.mTaskId, rect3, 3);
+                        }
+                    });
         } else {
             Slog.d("DexDockingController", "Invalid task=" + task);
             clearAllTasks("invalid bounds");
@@ -91,7 +107,10 @@ public final class DexDockingController implements IController {
     }
 
     public final void setOtherTaskIfNeeded(Task task, ActivityOptions activityOptions) {
-        if (!task.isDexMode() || activityOptions == null || activityOptions.getLaunchBounds() == null || activityOptions.getLaunchBounds().isEmpty()) {
+        if (!task.isDexMode()
+                || activityOptions == null
+                || activityOptions.getLaunchBounds() == null
+                || activityOptions.getLaunchBounds().isEmpty()) {
             return;
         }
         WeakReference weakReference = this.mCandidateTask;
@@ -109,13 +128,21 @@ public final class DexDockingController implements IController {
                 Task task2 = (Task) this.mCandidateTask.get();
                 task2.setDexTaskDocking(i);
                 this.mCandidateTask = null;
-                Slog.d("DexDockingController", "addOtherTask - [" + WindowConfiguration.dexTaskDockingStateToString(i) + "]=" + task2 + "\n[" + WindowConfiguration.dexTaskDockingStateToString(keyAt) + "]=" + task);
+                Slog.d(
+                        "DexDockingController",
+                        "addOtherTask - ["
+                                + WindowConfiguration.dexTaskDockingStateToString(i)
+                                + "]="
+                                + task2
+                                + "\n["
+                                + WindowConfiguration.dexTaskDockingStateToString(keyAt)
+                                + "]="
+                                + task);
                 return;
             }
         }
     }
 
     @Override // com.android.server.wm.IController
-    public final void setWindowManager(WindowManagerService windowManagerService) {
-    }
+    public final void setWindowManager(WindowManagerService windowManagerService) {}
 }

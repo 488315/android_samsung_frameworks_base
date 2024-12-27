@@ -5,6 +5,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -30,19 +31,21 @@ public final class NanoAppBinary implements Parcelable {
     private byte mTargetChreApiMajorVersion;
     private byte mTargetChreApiMinorVersion;
     private static final ByteOrder HEADER_ORDER = ByteOrder.LITTLE_ENDIAN;
-    public static final Parcelable.Creator<NanoAppBinary> CREATOR = new Parcelable.Creator<NanoAppBinary>() { // from class: android.hardware.location.NanoAppBinary.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppBinary createFromParcel(Parcel in) {
-            return new NanoAppBinary(in);
-        }
+    public static final Parcelable.Creator<NanoAppBinary> CREATOR =
+            new Parcelable.Creator<
+                    NanoAppBinary>() { // from class: android.hardware.location.NanoAppBinary.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppBinary createFromParcel(Parcel in) {
+                    return new NanoAppBinary(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppBinary[] newArray(int size) {
-            return new NanoAppBinary[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppBinary[] newArray(int size) {
+                    return new NanoAppBinary[size];
+                }
+            };
 
     public NanoAppBinary(byte[] appBinary) {
         this.mHasValidHeader = false;
@@ -56,7 +59,12 @@ public final class NanoAppBinary implements Parcelable {
         try {
             this.mHeaderVersion = buf.getInt();
             if (this.mHeaderVersion != 1) {
-                Log.e(TAG, "Unexpected header version " + this.mHeaderVersion + " while parsing header (expected 1" + NavigationBarInflaterView.KEY_CODE_END);
+                Log.e(
+                        TAG,
+                        "Unexpected header version "
+                                + this.mHeaderVersion
+                                + " while parsing header (expected 1"
+                                + NavigationBarInflaterView.KEY_CODE_END);
                 return;
             }
             this.mMagic = buf.getInt();
@@ -67,7 +75,13 @@ public final class NanoAppBinary implements Parcelable {
             this.mTargetChreApiMajorVersion = buf.get();
             this.mTargetChreApiMinorVersion = buf.get();
             if (this.mMagic != EXPECTED_MAGIC_VALUE) {
-                Log.e(TAG, "Unexpected magic value " + String.format("0x%08X", Integer.valueOf(this.mMagic)) + "while parsing header (expected " + String.format("0x%08X", Integer.valueOf(EXPECTED_MAGIC_VALUE)) + NavigationBarInflaterView.KEY_CODE_END);
+                Log.e(
+                        TAG,
+                        "Unexpected magic value "
+                                + String.format("0x%08X", Integer.valueOf(this.mMagic))
+                                + "while parsing header (expected "
+                                + String.format("0x%08X", Integer.valueOf(EXPECTED_MAGIC_VALUE))
+                                + NavigationBarInflaterView.KEY_CODE_END);
             } else {
                 this.mHasValidHeader = true;
             }
@@ -82,7 +96,11 @@ public final class NanoAppBinary implements Parcelable {
 
     public byte[] getBinaryNoHeader() {
         if (this.mNanoAppBinary.length < 40) {
-            throw new IndexOutOfBoundsException("NanoAppBinary binary byte size (" + this.mNanoAppBinary.length + ") is less than header size (40" + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IndexOutOfBoundsException(
+                    "NanoAppBinary binary byte size ("
+                            + this.mNanoAppBinary.length
+                            + ") is less than header size (40"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         return Arrays.copyOfRange(this.mNanoAppBinary, 40, this.mNanoAppBinary.length);
     }

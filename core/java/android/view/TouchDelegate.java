@@ -58,7 +58,8 @@ public class TouchDelegate {
             return false;
         }
         if (hit) {
-            event.setLocation(this.mDelegateView.getWidth() / 2, this.mDelegateView.getHeight() / 2);
+            event.setLocation(
+                    this.mDelegateView.getWidth() / 2, this.mDelegateView.getHeight() / 2);
         } else {
             int slop = this.mSlop;
             event.setLocation(-(slop * 2), -(slop * 2));
@@ -96,7 +97,8 @@ public class TouchDelegate {
             return false;
         }
         if (hit) {
-            event.setLocation(this.mDelegateView.getWidth() / 2, this.mDelegateView.getHeight() / 2);
+            event.setLocation(
+                    this.mDelegateView.getWidth() / 2, this.mDelegateView.getHeight() / 2);
         } else {
             this.mDelegateTargeted = false;
         }

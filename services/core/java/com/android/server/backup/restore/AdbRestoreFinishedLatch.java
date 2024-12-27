@@ -1,11 +1,13 @@
 package com.android.server.backup.restore;
 
 import android.util.Slog;
+
 import com.android.server.backup.BackupAgentTimeoutParameters;
 import com.android.server.backup.BackupRestoreTask;
 import com.android.server.backup.OperationStorage;
 import com.android.server.backup.UserBackupManagerService;
 import com.android.server.backup.internal.LifecycleOperationStorage;
+
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 
@@ -17,17 +19,20 @@ public final class AdbRestoreFinishedLatch implements BackupRestoreTask {
     public final CountDownLatch mLatch = new CountDownLatch(1);
     public final OperationStorage mOperationStorage;
 
-    public AdbRestoreFinishedLatch(UserBackupManagerService userBackupManagerService, OperationStorage operationStorage, int i) {
+    public AdbRestoreFinishedLatch(
+            UserBackupManagerService userBackupManagerService,
+            OperationStorage operationStorage,
+            int i) {
         this.mOperationStorage = operationStorage;
         this.mCurrentOpToken = i;
-        BackupAgentTimeoutParameters backupAgentTimeoutParameters = userBackupManagerService.mAgentTimeoutParameters;
+        BackupAgentTimeoutParameters backupAgentTimeoutParameters =
+                userBackupManagerService.mAgentTimeoutParameters;
         Objects.requireNonNull(backupAgentTimeoutParameters, "Timeout parameters cannot be null");
         this.mAgentTimeoutParameters = backupAgentTimeoutParameters;
     }
 
     @Override // com.android.server.backup.BackupRestoreTask
-    public final void execute() {
-    }
+    public final void execute() {}
 
     @Override // com.android.server.backup.BackupRestoreTask
     public final void handleCancel(boolean z) {

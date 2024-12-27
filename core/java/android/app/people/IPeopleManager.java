@@ -1,6 +1,5 @@
 package android.app.people;
 
-import android.app.people.IConversationListener;
 import android.content.pm.ParceledListSlice;
 import android.os.Binder;
 import android.os.IBinder;
@@ -12,7 +11,8 @@ import android.os.RemoteException;
 public interface IPeopleManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.people.IPeopleManager";
 
-    void addOrUpdateStatus(String str, int i, String str2, ConversationStatus conversationStatus) throws RemoteException;
+    void addOrUpdateStatus(String str, int i, String str2, ConversationStatus conversationStatus)
+            throws RemoteException;
 
     void clearStatus(String str, int i, String str2, String str3) throws RemoteException;
 
@@ -28,17 +28,21 @@ public interface IPeopleManager extends IInterface {
 
     boolean isConversation(String str, int i, String str2) throws RemoteException;
 
-    void registerConversationListener(String str, int i, String str2, IConversationListener iConversationListener) throws RemoteException;
+    void registerConversationListener(
+            String str, int i, String str2, IConversationListener iConversationListener)
+            throws RemoteException;
 
     void removeAllRecentConversations() throws RemoteException;
 
     void removeRecentConversation(String str, int i, String str2) throws RemoteException;
 
-    void unregisterConversationListener(IConversationListener iConversationListener) throws RemoteException;
+    void unregisterConversationListener(IConversationListener iConversationListener)
+            throws RemoteException;
 
     public static class Default implements IPeopleManager {
         @Override // android.app.people.IPeopleManager
-        public ConversationChannel getConversation(String packageName, int userId, String shortcutId) throws RemoteException {
+        public ConversationChannel getConversation(
+                String packageName, int userId, String shortcutId) throws RemoteException {
             return null;
         }
 
@@ -48,47 +52,52 @@ public interface IPeopleManager extends IInterface {
         }
 
         @Override // android.app.people.IPeopleManager
-        public void removeRecentConversation(String packageName, int userId, String shortcutId) throws RemoteException {
-        }
+        public void removeRecentConversation(String packageName, int userId, String shortcutId)
+                throws RemoteException {}
 
         @Override // android.app.people.IPeopleManager
-        public void removeAllRecentConversations() throws RemoteException {
-        }
+        public void removeAllRecentConversations() throws RemoteException {}
 
         @Override // android.app.people.IPeopleManager
-        public boolean isConversation(String packageName, int userId, String shortcutId) throws RemoteException {
+        public boolean isConversation(String packageName, int userId, String shortcutId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.people.IPeopleManager
-        public long getLastInteraction(String packageName, int userId, String shortcutId) throws RemoteException {
+        public long getLastInteraction(String packageName, int userId, String shortcutId)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.app.people.IPeopleManager
-        public void addOrUpdateStatus(String packageName, int userId, String conversationId, ConversationStatus status) throws RemoteException {
-        }
+        public void addOrUpdateStatus(
+                String packageName, int userId, String conversationId, ConversationStatus status)
+                throws RemoteException {}
 
         @Override // android.app.people.IPeopleManager
-        public void clearStatus(String packageName, int userId, String conversationId, String statusId) throws RemoteException {
-        }
+        public void clearStatus(
+                String packageName, int userId, String conversationId, String statusId)
+                throws RemoteException {}
 
         @Override // android.app.people.IPeopleManager
-        public void clearStatuses(String packageName, int userId, String conversationId) throws RemoteException {
-        }
+        public void clearStatuses(String packageName, int userId, String conversationId)
+                throws RemoteException {}
 
         @Override // android.app.people.IPeopleManager
-        public ParceledListSlice getStatuses(String packageName, int userId, String conversationId) throws RemoteException {
+        public ParceledListSlice getStatuses(String packageName, int userId, String conversationId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.people.IPeopleManager
-        public void registerConversationListener(String packageName, int userId, String shortcutId, IConversationListener callback) throws RemoteException {
-        }
+        public void registerConversationListener(
+                String packageName, int userId, String shortcutId, IConversationListener callback)
+                throws RemoteException {}
 
         @Override // android.app.people.IPeopleManager
-        public void unregisterConversationListener(IConversationListener callback) throws RemoteException {
-        }
+        public void unregisterConversationListener(IConversationListener callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -96,7 +105,7 @@ public interface IPeopleManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPeopleManager {
+    public abstract static class Stub extends Binder implements IPeopleManager {
         static final int TRANSACTION_addOrUpdateStatus = 7;
         static final int TRANSACTION_clearStatus = 8;
         static final int TRANSACTION_clearStatuses = 9;
@@ -167,7 +176,8 @@ public interface IPeopleManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPeopleManager.DESCRIPTOR);
             }
@@ -224,7 +234,8 @@ public interface IPeopleManager extends IInterface {
                     String _arg05 = data.readString();
                     int _arg15 = data.readInt();
                     String _arg25 = data.readString();
-                    ConversationStatus _arg3 = (ConversationStatus) data.readTypedObject(ConversationStatus.CREATOR);
+                    ConversationStatus _arg3 =
+                            (ConversationStatus) data.readTypedObject(ConversationStatus.CREATOR);
                     data.enforceNoDataAvail();
                     addOrUpdateStatus(_arg05, _arg15, _arg25, _arg3);
                     reply.writeNoException();
@@ -259,13 +270,15 @@ public interface IPeopleManager extends IInterface {
                     String _arg09 = data.readString();
                     int _arg19 = data.readInt();
                     String _arg29 = data.readString();
-                    IConversationListener _arg33 = IConversationListener.Stub.asInterface(data.readStrongBinder());
+                    IConversationListener _arg33 =
+                            IConversationListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerConversationListener(_arg09, _arg19, _arg29, _arg33);
                     reply.writeNoException();
                     return true;
                 case 12:
-                    IConversationListener _arg010 = IConversationListener.Stub.asInterface(data.readStrongBinder());
+                    IConversationListener _arg010 =
+                            IConversationListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterConversationListener(_arg010);
                     reply.writeNoException();
@@ -292,7 +305,8 @@ public interface IPeopleManager extends IInterface {
             }
 
             @Override // android.app.people.IPeopleManager
-            public ConversationChannel getConversation(String packageName, int userId, String shortcutId) throws RemoteException {
+            public ConversationChannel getConversation(
+                    String packageName, int userId, String shortcutId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -302,7 +316,9 @@ public interface IPeopleManager extends IInterface {
                     _data.writeString(shortcutId);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ConversationChannel _result = (ConversationChannel) _reply.readTypedObject(ConversationChannel.CREATOR);
+                    ConversationChannel _result =
+                            (ConversationChannel)
+                                    _reply.readTypedObject(ConversationChannel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -318,7 +334,8 @@ public interface IPeopleManager extends IInterface {
                     _data.writeInterfaceToken(IPeopleManager.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -327,7 +344,8 @@ public interface IPeopleManager extends IInterface {
             }
 
             @Override // android.app.people.IPeopleManager
-            public void removeRecentConversation(String packageName, int userId, String shortcutId) throws RemoteException {
+            public void removeRecentConversation(String packageName, int userId, String shortcutId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -358,7 +376,8 @@ public interface IPeopleManager extends IInterface {
             }
 
             @Override // android.app.people.IPeopleManager
-            public boolean isConversation(String packageName, int userId, String shortcutId) throws RemoteException {
+            public boolean isConversation(String packageName, int userId, String shortcutId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -377,7 +396,8 @@ public interface IPeopleManager extends IInterface {
             }
 
             @Override // android.app.people.IPeopleManager
-            public long getLastInteraction(String packageName, int userId, String shortcutId) throws RemoteException {
+            public long getLastInteraction(String packageName, int userId, String shortcutId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -396,7 +416,12 @@ public interface IPeopleManager extends IInterface {
             }
 
             @Override // android.app.people.IPeopleManager
-            public void addOrUpdateStatus(String packageName, int userId, String conversationId, ConversationStatus status) throws RemoteException {
+            public void addOrUpdateStatus(
+                    String packageName,
+                    int userId,
+                    String conversationId,
+                    ConversationStatus status)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -414,7 +439,9 @@ public interface IPeopleManager extends IInterface {
             }
 
             @Override // android.app.people.IPeopleManager
-            public void clearStatus(String packageName, int userId, String conversationId, String statusId) throws RemoteException {
+            public void clearStatus(
+                    String packageName, int userId, String conversationId, String statusId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -432,7 +459,8 @@ public interface IPeopleManager extends IInterface {
             }
 
             @Override // android.app.people.IPeopleManager
-            public void clearStatuses(String packageName, int userId, String conversationId) throws RemoteException {
+            public void clearStatuses(String packageName, int userId, String conversationId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -449,7 +477,8 @@ public interface IPeopleManager extends IInterface {
             }
 
             @Override // android.app.people.IPeopleManager
-            public ParceledListSlice getStatuses(String packageName, int userId, String conversationId) throws RemoteException {
+            public ParceledListSlice getStatuses(
+                    String packageName, int userId, String conversationId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -459,7 +488,8 @@ public interface IPeopleManager extends IInterface {
                     _data.writeString(conversationId);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -468,7 +498,12 @@ public interface IPeopleManager extends IInterface {
             }
 
             @Override // android.app.people.IPeopleManager
-            public void registerConversationListener(String packageName, int userId, String shortcutId, IConversationListener callback) throws RemoteException {
+            public void registerConversationListener(
+                    String packageName,
+                    int userId,
+                    String shortcutId,
+                    IConversationListener callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -486,7 +521,8 @@ public interface IPeopleManager extends IInterface {
             }
 
             @Override // android.app.people.IPeopleManager
-            public void unregisterConversationListener(IConversationListener callback) throws RemoteException {
+            public void unregisterConversationListener(IConversationListener callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

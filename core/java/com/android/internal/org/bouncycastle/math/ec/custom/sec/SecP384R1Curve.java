@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.math.ec.ECLookupTable;
 import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.math.raw.Nat;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -16,14 +17,30 @@ public class SecP384R1Curve extends ECCurve.AbstractFp {
     private static final int SECP384R1_DEFAULT_COORDS = 2;
     protected SecP384R1Point infinity;
     public static final BigInteger q = SecP384R1FieldElement.Q;
-    private static final ECFieldElement[] SECP384R1_AFFINE_ZS = {new SecP384R1FieldElement(ECConstants.ONE)};
+    private static final ECFieldElement[] SECP384R1_AFFINE_ZS = {
+        new SecP384R1FieldElement(ECConstants.ONE)
+    };
 
     public SecP384R1Curve() {
         super(q);
         this.infinity = new SecP384R1Point(this, null, null);
-        this.a = fromBigInteger(new BigInteger(1, Hex.decodeStrict("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFF0000000000000000FFFFFFFC")));
-        this.b = fromBigInteger(new BigInteger(1, Hex.decodeStrict("B3312FA7E23EE7E4988E056BE3F82D19181D9C6EFE8141120314088F5013875AC656398D8A2ED19D2A85C8EDD3EC2AEF")));
-        this.order = new BigInteger(1, Hex.decodeStrict("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7634D81F4372DDF581A0DB248B0A77AECEC196ACCC52973"));
+        this.a =
+                fromBigInteger(
+                        new BigInteger(
+                                1,
+                                Hex.decodeStrict(
+                                        "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFF0000000000000000FFFFFFFC")));
+        this.b =
+                fromBigInteger(
+                        new BigInteger(
+                                1,
+                                Hex.decodeStrict(
+                                        "B3312FA7E23EE7E4988E056BE3F82D19181D9C6EFE8141120314088F5013875AC656398D8A2ED19D2A85C8EDD3EC2AEF")));
+        this.order =
+                new BigInteger(
+                        1,
+                        Hex.decodeStrict(
+                                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7634D81F4372DDF581A0DB248B0A77AECEC196ACCC52973"));
         this.cofactor = BigInteger.valueOf(1L);
         this.coord = 2;
     }
@@ -83,7 +100,8 @@ public class SecP384R1Curve extends ECCurve.AbstractFp {
             Nat.copy(12, ((SecP384R1FieldElement) p.getRawYCoord()).x, 0, table, pos2);
             pos = pos2 + 12;
         }
-        return new AbstractECLookupTable() { // from class: com.android.internal.org.bouncycastle.math.ec.custom.sec.SecP384R1Curve.1
+        return new AbstractECLookupTable() { // from class:
+                                             // com.android.internal.org.bouncycastle.math.ec.custom.sec.SecP384R1Curve.1
             @Override // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
             public int getSize() {
                 return len;
@@ -105,7 +123,8 @@ public class SecP384R1Curve extends ECCurve.AbstractFp {
                 return createPoint(x, y);
             }
 
-            @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable, com.android.internal.org.bouncycastle.math.ec.ECLookupTable
+            @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable,
+                      // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
             public ECPoint lookupVar(int index) {
                 int[] x = Nat.create(12);
                 int[] y = Nat.create(12);
@@ -118,19 +137,24 @@ public class SecP384R1Curve extends ECCurve.AbstractFp {
             }
 
             private ECPoint createPoint(int[] x, int[] y) {
-                return SecP384R1Curve.this.createRawPoint(new SecP384R1FieldElement(x), new SecP384R1FieldElement(y), SecP384R1Curve.SECP384R1_AFFINE_ZS);
+                return SecP384R1Curve.this.createRawPoint(
+                        new SecP384R1FieldElement(x),
+                        new SecP384R1FieldElement(y),
+                        SecP384R1Curve.SECP384R1_AFFINE_ZS);
             }
         };
     }
 
-    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp, com.android.internal.org.bouncycastle.math.ec.ECCurve
+    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp,
+              // com.android.internal.org.bouncycastle.math.ec.ECCurve
     public ECFieldElement randomFieldElement(SecureRandom r) {
         int[] x = Nat.create(12);
         SecP384R1Field.random(r, x);
         return new SecP384R1FieldElement(x);
     }
 
-    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp, com.android.internal.org.bouncycastle.math.ec.ECCurve
+    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp,
+              // com.android.internal.org.bouncycastle.math.ec.ECCurve
     public ECFieldElement randomFieldElementMult(SecureRandom r) {
         int[] x = Nat.create(12);
         SecP384R1Field.randomMult(r, x);

@@ -5,8 +5,14 @@ import android.graphics.ColorSpace;
 
 /* loaded from: classes5.dex */
 public class LABPointProvider implements PointProvider {
-    final ColorSpace.Connector mRgbToLab = ColorSpace.connect(ColorSpace.get(ColorSpace.Named.SRGB), ColorSpace.get(ColorSpace.Named.CIE_LAB));
-    final ColorSpace.Connector mLabToRgb = ColorSpace.connect(ColorSpace.get(ColorSpace.Named.CIE_LAB), ColorSpace.get(ColorSpace.Named.SRGB));
+    final ColorSpace.Connector mRgbToLab =
+            ColorSpace.connect(
+                    ColorSpace.get(ColorSpace.Named.SRGB),
+                    ColorSpace.get(ColorSpace.Named.CIE_LAB));
+    final ColorSpace.Connector mLabToRgb =
+            ColorSpace.connect(
+                    ColorSpace.get(ColorSpace.Named.CIE_LAB),
+                    ColorSpace.get(ColorSpace.Named.SRGB));
 
     @Override // com.android.internal.graphics.palette.PointProvider
     public float[] fromInt(int color) {

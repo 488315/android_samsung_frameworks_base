@@ -9,6 +9,7 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,7 +37,9 @@ public interface IBase extends IHwInterface {
 
         @Override // android.hidl.base.V1_0.IBase
         public void debug(NativeHandle nativeHandle, ArrayList arrayList) throws RemoteException {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -78,7 +81,8 @@ public interface IBase extends IHwInterface {
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -124,7 +128,8 @@ public interface IBase extends IHwInterface {
         }
 
         @Override // android.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j) throws RemoteException {
+        public boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j)
+                throws RemoteException {
             return this.mRemote.linkToDeath(deathRecipient, j);
         }
 
@@ -174,7 +179,8 @@ public interface IBase extends IHwInterface {
         }
 
         @Override // android.hidl.base.V1_0.IBase
-        public boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient) throws RemoteException {
+        public boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient)
+                throws RemoteException {
             return this.mRemote.unlinkToDeath(deathRecipient);
         }
     }
@@ -187,8 +193,7 @@ public interface IBase extends IHwInterface {
         }
 
         @Override // android.hidl.base.V1_0.IBase
-        public void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-        }
+        public void debug(NativeHandle nativeHandle, ArrayList arrayList) {}
 
         @Override // android.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
@@ -201,7 +206,42 @@ public interface IBase extends IHwInterface {
 
         @Override // android.hidl.base.V1_0.IBase
         public final ArrayList getHashChain() {
-            return new ArrayList(Collections.singletonList(new byte[]{-20, Byte.MAX_VALUE, -41, -98, -48, 45, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, 36, -13, -51, 105, 87, 19, -109, 36, -72, 59, 24, -54, 76}));
+            return new ArrayList(
+                    Collections.singletonList(
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                -48,
+                                45,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                36,
+                                -13,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                36,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
         @Override // android.hidl.base.V1_0.IBase
@@ -224,7 +264,8 @@ public interface IBase extends IHwInterface {
             HwBinder.enableInstrumentation();
         }
 
-        public void onTransact(int i, HwParcel hwParcel, HwParcel hwParcel2, int i2) throws RemoteException {
+        public void onTransact(int i, HwParcel hwParcel, HwParcel hwParcel2, int i2)
+                throws RemoteException {
             switch (i) {
                 case 256067662:
                     hwParcel.enforceInterface(IBase.kInterfaceName);
@@ -259,7 +300,8 @@ public interface IBase extends IHwInterface {
                         long j = i3 * 32;
                         byte[] bArr = (byte[]) hashChain.get(i3);
                         if (bArr == null || bArr.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         hwBlob2.putInt8Array(j, bArr);
                     }
@@ -294,8 +336,7 @@ public interface IBase extends IHwInterface {
         }
 
         @Override // android.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        public final void ping() {}
 
         public IHwInterface queryLocalInterface(String str) {
             if (IBase.kInterfaceName.equals(str)) {
@@ -309,8 +350,7 @@ public interface IBase extends IHwInterface {
         }
 
         @Override // android.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        public final void setHALInstrumentation() {}
 
         public String toString() {
             return interfaceDescriptor() + "@Stub";

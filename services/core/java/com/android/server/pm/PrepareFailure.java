@@ -17,7 +17,11 @@ final class PrepareFailure extends PackageManagerException {
     }
 
     public PrepareFailure(Exception exc, String str) {
-        super(exc instanceof PackageManagerException ? ((PackageManagerException) exc).error : -110, ExceptionUtils.getCompleteMessage(str, exc));
+        super(
+                exc instanceof PackageManagerException
+                        ? ((PackageManagerException) exc).error
+                        : -110,
+                ExceptionUtils.getCompleteMessage(str, exc));
     }
 
     public final void conflictsWithExistingPermission(String str, String str2) {

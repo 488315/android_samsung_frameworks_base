@@ -13,8 +13,7 @@ public final class TextBoundsInfoResult {
     private final TextBoundsInfo mTextBoundsInfo;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResultCode {
-    }
+    public @interface ResultCode {}
 
     public TextBoundsInfoResult(int resultCode) {
         this(resultCode, null);
@@ -22,7 +21,8 @@ public final class TextBoundsInfoResult {
 
     public TextBoundsInfoResult(int resultCode, TextBoundsInfo textBoundsInfo) {
         if (resultCode == 1 && textBoundsInfo == null) {
-            throw new IllegalStateException("TextBoundsInfo must be provided when the resultCode is CODE_SUCCESS.");
+            throw new IllegalStateException(
+                    "TextBoundsInfo must be provided when the resultCode is CODE_SUCCESS.");
         }
         this.mResultCode = resultCode;
         this.mTextBoundsInfo = textBoundsInfo;

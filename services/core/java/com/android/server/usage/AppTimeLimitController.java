@@ -11,9 +11,10 @@ import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
-import com.android.server.usage.UsageStatsService;
+
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -51,7 +52,14 @@ public final class AppTimeLimitController {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppUsageLimitGroup extends UsageGroup {
-        public AppUsageLimitGroup(UserData userData, ObserverAppData observerAppData, int i, String[] strArr, long j, long j2, PendingIntent pendingIntent) {
+        public AppUsageLimitGroup(
+                UserData userData,
+                ObserverAppData observerAppData,
+                int i,
+                String[] strArr,
+                long j,
+                long j2,
+                PendingIntent pendingIntent) {
             super(userData, observerAppData, i, strArr, j, pendingIntent);
             this.mUsageTimeMs = j2;
         }
@@ -80,8 +88,7 @@ public final class AppTimeLimitController {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class Lock {
-    }
+    public final class Lock {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyHandler extends Handler {
@@ -94,7 +101,8 @@ public final class AppTimeLimitController {
             int i = message.what;
             if (i == 1) {
                 synchronized (AppTimeLimitController.this.mLock) {
-                    ((UsageGroup) message.obj).checkTimeout(AppTimeLimitController.this.getElapsedRealtime());
+                    ((UsageGroup) message.obj)
+                            .checkTimeout(AppTimeLimitController.this.getElapsedRealtime());
                 }
             } else {
                 if (i != 2) {
@@ -140,11 +148,20 @@ public final class AppTimeLimitController {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class SessionUsageGroup extends UsageGroup implements AlarmManager.OnAlarmListener {
+    public final class SessionUsageGroup extends UsageGroup
+            implements AlarmManager.OnAlarmListener {
         public final long mNewSessionThresholdMs;
         public PendingIntent mSessionEndCallback;
 
-        public SessionUsageGroup(UserData userData, ObserverAppData observerAppData, int i, String[] strArr, long j, PendingIntent pendingIntent, long j2, PendingIntent pendingIntent2) {
+        public SessionUsageGroup(
+                UserData userData,
+                ObserverAppData observerAppData,
+                int i,
+                String[] strArr,
+                long j,
+                PendingIntent pendingIntent,
+                long j2,
+                PendingIntent pendingIntent2) {
             super(userData, observerAppData, i, strArr, j, pendingIntent);
             this.mNewSessionThresholdMs = j2;
             this.mSessionEndCallback = pendingIntent2;
@@ -176,7 +193,15 @@ public final class AppTimeLimitController {
             if (this.mActives != 0 || this.mUsageTimeMs < this.mTimeLimitMs) {
                 return;
             }
-            AppTimeLimitController.this.getAlarmManager().setExact(3, AppTimeLimitController.this.getElapsedRealtime() + this.mNewSessionThresholdMs, "AppTimeLimitController", this, AppTimeLimitController.this.mHandler);
+            AppTimeLimitController.this
+                    .getAlarmManager()
+                    .setExact(
+                            3,
+                            AppTimeLimitController.this.getElapsedRealtime()
+                                    + this.mNewSessionThresholdMs,
+                            "AppTimeLimitController",
+                            this,
+                            AppTimeLimitController.this.mHandler);
         }
 
         @Override // android.app.AlarmManager.OnAlarmListener
@@ -188,7 +213,8 @@ public final class AppTimeLimitController {
 
         public final void onSessionEnd() {
             UsageStatsService.AnonymousClass2 anonymousClass2;
-            if (((UserData) this.mUserRef.get()) == null || (anonymousClass2 = AppTimeLimitController.this.mListener) == null) {
+            if (((UserData) this.mUserRef.get()) == null
+                    || (anonymousClass2 = AppTimeLimitController.this.mListener) == null) {
                 return;
             }
             long j = this.mUsageTimeMs;
@@ -231,7 +257,13 @@ public final class AppTimeLimitController {
         public long mUsageTimeMs;
         public final WeakReference mUserRef;
 
-        public UsageGroup(UserData userData, ObserverAppData observerAppData, int i, String[] strArr, long j, PendingIntent pendingIntent) {
+        public UsageGroup(
+                UserData userData,
+                ObserverAppData observerAppData,
+                int i,
+                String[] strArr,
+                long j,
+                PendingIntent pendingIntent) {
             this.mUserRef = new WeakReference(userData);
             this.mObserverAppRef = new WeakReference(observerAppData);
             this.mObserverId = i;
@@ -295,7 +327,12 @@ public final class AppTimeLimitController {
                     if (userData == null) {
                         return;
                     }
-                    Slog.e("AppTimeLimitController", "Too many noted usage starts! Observed entities: " + Arrays.toString(strArr) + "   Active Entities: " + Arrays.toString(userData.currentlyActive.keySet().toArray()));
+                    Slog.e(
+                            "AppTimeLimitController",
+                            "Too many noted usage starts! Observed entities: "
+                                    + Arrays.toString(strArr)
+                                    + "   Active Entities: "
+                                    + Arrays.toString(userData.currentlyActive.keySet().toArray()));
                     return;
                 }
                 return;
@@ -313,9 +350,11 @@ public final class AppTimeLimitController {
                 sb.append(this.mObserverId);
                 sb.append(" for ");
                 sb.append(j6);
-                BootReceiver$$ExternalSyntheticOutline0.m(sb, "ms ,mTimeLimitMs : ", j5, " ,mUsageTimeMs : ");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        sb, "ms ,mTimeLimitMs : ", j5, " ,mUsageTimeMs : ");
                 sb.append(this.mUsageTimeMs);
-                BootReceiver$$ExternalSyntheticOutline0.m(sb, " ,currentTimeMs : ", j2, " ,startTimeMs : ");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        sb, " ,currentTimeMs : ", j2, " ,startTimeMs : ");
                 BatteryService$$ExternalSyntheticOutline0.m(sb, j, "AppTimeLimitController");
                 MyHandler myHandler = AppTimeLimitController.this.mHandler;
                 myHandler.sendMessageDelayed(myHandler.obtainMessage(1, this), j6);
@@ -332,7 +371,12 @@ public final class AppTimeLimitController {
                     if (userData == null) {
                         return;
                     }
-                    Slog.e("AppTimeLimitController", "Too many noted usage stops! Observed entities: " + Arrays.toString(this.mObserved) + "   Active Entities: " + Arrays.toString(userData.currentlyActive.keySet().toArray()));
+                    Slog.e(
+                            "AppTimeLimitController",
+                            "Too many noted usage stops! Observed entities: "
+                                    + Arrays.toString(this.mObserved)
+                                    + "   Active Entities: "
+                                    + Arrays.toString(userData.currentlyActive.keySet().toArray()));
                     return;
                 }
                 return;
@@ -355,13 +399,15 @@ public final class AppTimeLimitController {
             sb.append(" ,mUsageTimeMs : ");
             sb.append(this.mUsageTimeMs);
             sb.append(" ,mLastUsageEndTimeMs : ");
-            BatteryService$$ExternalSyntheticOutline0.m(sb, this.mLastUsageEndTimeMs, "AppTimeLimitController");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    sb, this.mLastUsageEndTimeMs, "AppTimeLimitController");
             appTimeLimitController.mHandler.removeMessages(1, this);
         }
 
         public void onLimitReached() {
             UsageStatsService.AnonymousClass2 anonymousClass2;
-            if (((UserData) this.mUserRef.get()) == null || (anonymousClass2 = AppTimeLimitController.this.mListener) == null) {
+            if (((UserData) this.mUserRef.get()) == null
+                    || (anonymousClass2 = AppTimeLimitController.this.mListener) == null) {
                 return;
             }
             long j = this.mUsageTimeMs;
@@ -442,7 +488,8 @@ public final class AppTimeLimitController {
         }
     }
 
-    public AppTimeLimitController(Context context, UsageStatsService.AnonymousClass2 anonymousClass2, Looper looper) {
+    public AppTimeLimitController(
+            Context context, UsageStatsService.AnonymousClass2 anonymousClass2, Looper looper) {
         this.mContext = context;
         this.mHandler = new MyHandler(looper);
         this.mListener = anonymousClass2;
@@ -465,7 +512,8 @@ public final class AppTimeLimitController {
                         try {
                             int size = this.mUsers.size();
                             for (int i = 0; i < size; i++) {
-                                ArrayMap arrayMap = ((UserData) this.mUsers.valueAt(i)).currentlyActive;
+                                ArrayMap arrayMap =
+                                        ((UserData) this.mUsers.valueAt(i)).currentlyActive;
                                 int size2 = arrayMap.size();
                                 for (int i2 = 0; i2 < size2; i2++) {
                                     printWriter.println((String) arrayMap.keyAt(i2));
@@ -507,7 +555,8 @@ public final class AppTimeLimitController {
     public AppUsageGroup getAppUsageGroup(int i, int i2) {
         AppUsageGroup appUsageGroup;
         synchronized (this.mLock) {
-            appUsageGroup = (AppUsageGroup) getOrCreateObserverAppDataLocked(i).appUsageGroups.get(i2);
+            appUsageGroup =
+                    (AppUsageGroup) getOrCreateObserverAppDataLocked(i).appUsageGroups.get(i2);
         }
         return appUsageGroup;
     }
@@ -515,7 +564,9 @@ public final class AppTimeLimitController {
     public AppUsageLimitGroup getAppUsageLimitGroup(int i, int i2) {
         AppUsageLimitGroup appUsageLimitGroup;
         synchronized (this.mLock) {
-            appUsageLimitGroup = (AppUsageLimitGroup) getOrCreateObserverAppDataLocked(i).appUsageLimitGroups.get(i2);
+            appUsageLimitGroup =
+                    (AppUsageLimitGroup)
+                            getOrCreateObserverAppDataLocked(i).appUsageLimitGroups.get(i2);
         }
         return appUsageLimitGroup;
     }
@@ -563,7 +614,9 @@ public final class AppTimeLimitController {
     public SessionUsageGroup getSessionUsageGroup(int i, int i2) {
         SessionUsageGroup sessionUsageGroup;
         synchronized (this.mLock) {
-            sessionUsageGroup = (SessionUsageGroup) getOrCreateObserverAppDataLocked(i).sessionUsageGroups.get(i2);
+            sessionUsageGroup =
+                    (SessionUsageGroup)
+                            getOrCreateObserverAppDataLocked(i).sessionUsageGroups.get(i2);
         }
         return sessionUsageGroup;
     }
@@ -578,8 +631,14 @@ public final class AppTimeLimitController {
             try {
                 UserData orCreateUserDataLocked = getOrCreateUserDataLocked(i);
                 int indexOfKey = orCreateUserDataLocked.currentlyActive.indexOfKey(str);
-                if (indexOfKey >= 0 && (num = (Integer) orCreateUserDataLocked.currentlyActive.valueAt(indexOfKey)) != null) {
-                    orCreateUserDataLocked.currentlyActive.setValueAt(indexOfKey, Integer.valueOf(num.intValue() + 1));
+                if (indexOfKey >= 0
+                        && (num =
+                                        (Integer)
+                                                orCreateUserDataLocked.currentlyActive.valueAt(
+                                                        indexOfKey))
+                                != null) {
+                    orCreateUserDataLocked.currentlyActive.setValueAt(
+                            indexOfKey, Integer.valueOf(num.intValue() + 1));
                     return;
                 }
                 long elapsedRealtime = getElapsedRealtime();
@@ -590,7 +649,8 @@ public final class AppTimeLimitController {
                 }
                 int size = arrayList.size();
                 for (int i2 = 0; i2 < size; i2++) {
-                    ((UsageGroup) arrayList.get(i2)).noteUsageStart(elapsedRealtime - j, elapsedRealtime);
+                    ((UsageGroup) arrayList.get(i2))
+                            .noteUsageStart(elapsedRealtime - j, elapsedRealtime);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -604,10 +664,13 @@ public final class AppTimeLimitController {
                 UserData orCreateUserDataLocked = getOrCreateUserDataLocked(i);
                 int indexOfKey = orCreateUserDataLocked.currentlyActive.indexOfKey(str);
                 if (indexOfKey < 0) {
-                    throw new IllegalArgumentException("Unable to stop usage for " + str + ", not in use");
+                    throw new IllegalArgumentException(
+                            "Unable to stop usage for " + str + ", not in use");
                 }
-                if (!((Integer) orCreateUserDataLocked.currentlyActive.valueAt(indexOfKey)).equals(ONE)) {
-                    orCreateUserDataLocked.currentlyActive.setValueAt(indexOfKey, Integer.valueOf(r0.intValue() - 1));
+                if (!((Integer) orCreateUserDataLocked.currentlyActive.valueAt(indexOfKey))
+                        .equals(ONE)) {
+                    orCreateUserDataLocked.currentlyActive.setValueAt(
+                            indexOfKey, Integer.valueOf(r0.intValue() - 1));
                     return;
                 }
                 orCreateUserDataLocked.currentlyActive.removeAt(indexOfKey);

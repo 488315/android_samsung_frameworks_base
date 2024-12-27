@@ -6,6 +6,9 @@ import android.os.ServiceSpecificException;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.util.ArrayMap;
 import android.util.Log;
+
+import libcore.util.HexEncoding;
+
 import java.security.Key;
 import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
@@ -14,7 +17,6 @@ import java.security.cert.CertificateException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import libcore.util.HexEncoding;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -40,10 +42,26 @@ public class RecoverySession implements AutoCloseable {
         return HexEncoding.encodeToString(sessionId, false);
     }
 
-    public byte[] start(String rootCertificateAlias, CertPath verifierCertPath, byte[] vaultParams, byte[] vaultChallenge, List<KeyChainProtectionParams> secrets) throws CertificateException, InternalRecoveryServiceException {
-        RecoveryCertPath recoveryCertPath = RecoveryCertPath.createRecoveryCertPath(verifierCertPath);
+    public byte[] start(
+            String rootCertificateAlias,
+            CertPath verifierCertPath,
+            byte[] vaultParams,
+            byte[] vaultChallenge,
+            List<KeyChainProtectionParams> secrets)
+            throws CertificateException, InternalRecoveryServiceException {
+        RecoveryCertPath recoveryCertPath =
+                RecoveryCertPath.createRecoveryCertPath(verifierCertPath);
         try {
-            byte[] recoveryClaim = this.mRecoveryController.getBinder().startRecoverySessionWithCertPath(this.mSessionId, rootCertificateAlias, recoveryCertPath, vaultParams, vaultChallenge, secrets);
+            byte[] recoveryClaim =
+                    this.mRecoveryController
+                            .getBinder()
+                            .startRecoverySessionWithCertPath(
+                                    this.mSessionId,
+                                    rootCertificateAlias,
+                                    recoveryCertPath,
+                                    vaultParams,
+                                    vaultChallenge,
+                                    secrets);
             return recoveryClaim;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -55,9 +73,17 @@ public class RecoverySession implements AutoCloseable {
         }
     }
 
-    public Map<String, Key> recoverKeyChainSnapshot(byte[] recoveryKeyBlob, List<WrappedApplicationKey> applicationKeys) throws SessionExpiredException, DecryptionFailedException, InternalRecoveryServiceException {
+    public Map<String, Key> recoverKeyChainSnapshot(
+            byte[] recoveryKeyBlob, List<WrappedApplicationKey> applicationKeys)
+            throws SessionExpiredException,
+                    DecryptionFailedException,
+                    InternalRecoveryServiceException {
         try {
-            Map grantAliases = this.mRecoveryController.getBinder().recoverKeyChainSnapshot(this.mSessionId, recoveryKeyBlob, applicationKeys);
+            Map grantAliases =
+                    this.mRecoveryController
+                            .getBinder()
+                            .recoverKeyChainSnapshot(
+                                    this.mSessionId, recoveryKeyBlob, applicationKeys);
             return getKeysFromGrants(grantAliases);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -72,7 +98,8 @@ public class RecoverySession implements AutoCloseable {
         }
     }
 
-    private Map<String, Key> getKeysFromGrants(Map<String, String> grantAliases) throws InternalRecoveryServiceException {
+    private Map<String, Key> getKeysFromGrants(Map<String, String> grantAliases)
+            throws InternalRecoveryServiceException {
         ArrayMap<String, Key> keysByAlias = new ArrayMap<>(grantAliases.size());
         for (String alias : grantAliases.keySet()) {
             String grantAlias = grantAliases.get(alias);
@@ -80,7 +107,13 @@ public class RecoverySession implements AutoCloseable {
                 Key key = this.mRecoveryController.getKeyFromGrant(grantAlias);
                 keysByAlias.put(alias, key);
             } catch (KeyPermanentlyInvalidatedException | UnrecoverableKeyException e) {
-                throw new InternalRecoveryServiceException(String.format(Locale.US, "Failed to get key '%s' from grant '%s'", alias, grantAlias), e);
+                throw new InternalRecoveryServiceException(
+                        String.format(
+                                Locale.US,
+                                "Failed to get key '%s' from grant '%s'",
+                                alias,
+                                grantAlias),
+                        e);
             }
         }
         return keysByAlias;

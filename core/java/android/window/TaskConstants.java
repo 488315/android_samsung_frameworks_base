@@ -14,6 +14,5 @@ public class TaskConstants {
     public static final int TASK_CHILD_LAYER_WINDOW_DRAG_RESIZE_INPUT = 20001;
     public static final int TASK_CHILD_LAYER_WINDOW_STASH_DIM_LAYER = 20002;
 
-    public @interface TaskChildLayer {
-    }
+    public @interface TaskChildLayer {}
 }

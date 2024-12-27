@@ -2,12 +2,14 @@ package android.media;
 
 import android.text.TextUtils;
 import android.util.Log;
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.ArrayDeque;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayDeque;
 
 /* compiled from: TtmlRenderer.java */
 /* loaded from: classes2.dex */
@@ -75,7 +77,15 @@ class TtmlParser {
                         active = active2;
                     } else if (parent != null) {
                         active = active2;
-                        parent.mChildren.add(new TtmlNode(TtmlUtils.PCDATA, "", text, 0L, Long.MAX_VALUE, parent, this.mCurrentRunId));
+                        parent.mChildren.add(
+                                new TtmlNode(
+                                        TtmlUtils.PCDATA,
+                                        "",
+                                        text,
+                                        0L,
+                                        Long.MAX_VALUE,
+                                        parent,
+                                        this.mCurrentRunId));
                     } else {
                         active = active2;
                     }
@@ -127,7 +137,10 @@ class TtmlParser {
             dur = 0;
         } else {
             int i = 0;
-            for (long j = 0; i < this.mParser.getAttributeCount() && (start2 == j || ((end2 == j && dur2 == j) || i <= 1)); j = 0) {
+            for (long j = 0;
+                    i < this.mParser.getAttributeCount()
+                            && (start2 == j || ((end2 == j && dur2 == j) || i <= 1));
+                    j = 0) {
                 String attr = this.mParser.getAttributeName(i);
                 String value = this.mParser.getAttributeValue(i);
                 String attr2 = attr.replaceFirst("^.*:", "");
@@ -155,16 +168,24 @@ class TtmlParser {
         }
         if (dur > 0) {
             if (end2 != Long.MAX_VALUE) {
-                Log.e(TAG, "'dur' and 'end' attributes are defined at the same time.'end' value is ignored.");
+                Log.e(
+                        TAG,
+                        "'dur' and 'end' attributes are defined at the same time.'end' value is"
+                                + " ignored.");
             }
             end2 = start + dur;
         }
-        if (parent != null && end2 == Long.MAX_VALUE && parent.mEndTimeMs != Long.MAX_VALUE && end2 > parent.mEndTimeMs) {
+        if (parent != null
+                && end2 == Long.MAX_VALUE
+                && parent.mEndTimeMs != Long.MAX_VALUE
+                && end2 > parent.mEndTimeMs) {
             end = parent.mEndTimeMs;
         } else {
             end = end2;
         }
-        TtmlNode node = new TtmlNode(this.mParser.getName(), null, null, start, end, parent, this.mCurrentRunId);
+        TtmlNode node =
+                new TtmlNode(
+                        this.mParser.getName(), null, null, start, end, parent, this.mCurrentRunId);
         return node;
     }
 
@@ -173,7 +194,13 @@ class TtmlParser {
     }
 
     private static boolean isSupportedTag(String tag) {
-        if (tag.equals(TtmlUtils.TAG_TT) || tag.equals(TtmlUtils.TAG_HEAD) || tag.equals("body") || tag.equals(TtmlUtils.TAG_DIV) || tag.equals("p") || tag.equals(TtmlUtils.TAG_SPAN) || tag.equals(TtmlUtils.TAG_BR)) {
+        if (tag.equals(TtmlUtils.TAG_TT)
+                || tag.equals(TtmlUtils.TAG_HEAD)
+                || tag.equals("body")
+                || tag.equals(TtmlUtils.TAG_DIV)
+                || tag.equals("p")
+                || tag.equals(TtmlUtils.TAG_SPAN)
+                || tag.equals(TtmlUtils.TAG_BR)) {
             return true;
         }
         return false;

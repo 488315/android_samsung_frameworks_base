@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -16,19 +17,22 @@ public final class ImsRegistrationAttributes implements Parcelable {
     public static final int ATTR_EPDG_OVER_CELL_INTERNET = 1;
     public static final int ATTR_REGISTRATION_TYPE_EMERGENCY = 2;
     public static final int ATTR_VIRTUAL_FOR_ANONYMOUS_EMERGENCY_CALL = 4;
-    public static final Parcelable.Creator<ImsRegistrationAttributes> CREATOR = new Parcelable.Creator<ImsRegistrationAttributes>() { // from class: android.telephony.ims.ImsRegistrationAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsRegistrationAttributes createFromParcel(Parcel source) {
-            return new ImsRegistrationAttributes(source);
-        }
+    public static final Parcelable.Creator<ImsRegistrationAttributes> CREATOR =
+            new Parcelable.Creator<
+                    ImsRegistrationAttributes>() { // from class:
+                                                   // android.telephony.ims.ImsRegistrationAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsRegistrationAttributes createFromParcel(Parcel source) {
+                    return new ImsRegistrationAttributes(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsRegistrationAttributes[] newArray(int size) {
-            return new ImsRegistrationAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsRegistrationAttributes[] newArray(int size) {
+                    return new ImsRegistrationAttributes[size];
+                }
+            };
     private final ArrayList<String> mFeatureTags;
     private final int mImsAttributeFlags;
     private final int mRegistrationTech;
@@ -36,8 +40,7 @@ public final class ImsRegistrationAttributes implements Parcelable {
     private final int mTransportType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ImsAttributeFlag {
-    }
+    public @interface ImsAttributeFlag {}
 
     @SystemApi
     public static final class Builder {
@@ -77,11 +80,20 @@ public final class ImsRegistrationAttributes implements Parcelable {
         }
 
         public ImsRegistrationAttributes build() {
-            return new ImsRegistrationAttributes(this.mRegistrationTech, RegistrationManager.getAccessType(this.mRegistrationTech), this.mAttributeFlags, this.mFeatureTags, this.mSipDetails);
+            return new ImsRegistrationAttributes(
+                    this.mRegistrationTech,
+                    RegistrationManager.getAccessType(this.mRegistrationTech),
+                    this.mAttributeFlags,
+                    this.mFeatureTags,
+                    this.mSipDetails);
         }
     }
 
-    public ImsRegistrationAttributes(int registrationTech, int transportType, int imsAttributeFlags, Set<String> featureTags) {
+    public ImsRegistrationAttributes(
+            int registrationTech,
+            int transportType,
+            int imsAttributeFlags,
+            Set<String> featureTags) {
         this.mRegistrationTech = registrationTech;
         this.mTransportType = transportType;
         this.mImsAttributeFlags = imsAttributeFlags;
@@ -89,7 +101,12 @@ public final class ImsRegistrationAttributes implements Parcelable {
         this.mSipDetails = null;
     }
 
-    public ImsRegistrationAttributes(int registrationTech, int transportType, int imsAttributeFlags, Set<String> featureTags, SipDetails details) {
+    public ImsRegistrationAttributes(
+            int registrationTech,
+            int transportType,
+            int imsAttributeFlags,
+            Set<String> featureTags,
+            SipDetails details) {
         this.mRegistrationTech = registrationTech;
         this.mTransportType = transportType;
         this.mImsAttributeFlags = imsAttributeFlags;
@@ -160,17 +177,34 @@ public final class ImsRegistrationAttributes implements Parcelable {
             return false;
         }
         ImsRegistrationAttributes that = (ImsRegistrationAttributes) o;
-        if (this.mRegistrationTech == that.mRegistrationTech && this.mTransportType == that.mTransportType && this.mImsAttributeFlags == that.mImsAttributeFlags && Objects.equals(this.mFeatureTags, that.mFeatureTags) && Objects.equals(this.mSipDetails, that.mSipDetails)) {
+        if (this.mRegistrationTech == that.mRegistrationTech
+                && this.mTransportType == that.mTransportType
+                && this.mImsAttributeFlags == that.mImsAttributeFlags
+                && Objects.equals(this.mFeatureTags, that.mFeatureTags)
+                && Objects.equals(this.mSipDetails, that.mSipDetails)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mRegistrationTech), Integer.valueOf(this.mTransportType), Integer.valueOf(this.mImsAttributeFlags), this.mFeatureTags, this.mSipDetails);
+        return Objects.hash(
+                Integer.valueOf(this.mRegistrationTech),
+                Integer.valueOf(this.mTransportType),
+                Integer.valueOf(this.mImsAttributeFlags),
+                this.mFeatureTags,
+                this.mSipDetails);
     }
 
     public String toString() {
-        return "ImsRegistrationAttributes { transportType= " + this.mTransportType + ", attributeFlags=" + this.mImsAttributeFlags + ", featureTags=[" + this.mFeatureTags + "],SipDetails=" + this.mSipDetails + "}";
+        return "ImsRegistrationAttributes { transportType= "
+                + this.mTransportType
+                + ", attributeFlags="
+                + this.mImsAttributeFlags
+                + ", featureTags=["
+                + this.mFeatureTags
+                + "],SipDetails="
+                + this.mSipDetails
+                + "}";
     }
 }

@@ -12,20 +12,24 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
-import android.service.ondeviceintelligence.IRemoteProcessingService;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes3.dex */
 public interface IOnDeviceIntelligenceService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.ondeviceintelligence.IOnDeviceIntelligenceService";
+    public static final String DESCRIPTOR =
+            "android.service.ondeviceintelligence.IOnDeviceIntelligenceService";
 
     void getFeature(int i, int i2, IFeatureCallback iFeatureCallback) throws RemoteException;
 
-    void getFeatureDetails(int i, Feature feature, IFeatureDetailsCallback iFeatureDetailsCallback) throws RemoteException;
+    void getFeatureDetails(int i, Feature feature, IFeatureDetailsCallback iFeatureDetailsCallback)
+            throws RemoteException;
 
-    void getReadOnlyFeatureFileDescriptorMap(Feature feature, RemoteCallback remoteCallback) throws RemoteException;
+    void getReadOnlyFeatureFileDescriptorMap(Feature feature, RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void getReadOnlyFileDescriptor(String str, AndroidFuture<ParcelFileDescriptor> androidFuture) throws RemoteException;
+    void getReadOnlyFileDescriptor(String str, AndroidFuture<ParcelFileDescriptor> androidFuture)
+            throws RemoteException;
 
     void getVersion(RemoteCallback remoteCallback) throws RemoteException;
 
@@ -37,54 +41,62 @@ public interface IOnDeviceIntelligenceService extends IInterface {
 
     void ready() throws RemoteException;
 
-    void registerRemoteServices(IRemoteProcessingService iRemoteProcessingService) throws RemoteException;
+    void registerRemoteServices(IRemoteProcessingService iRemoteProcessingService)
+            throws RemoteException;
 
-    void requestFeatureDownload(int i, Feature feature, AndroidFuture androidFuture, IDownloadCallback iDownloadCallback) throws RemoteException;
+    void requestFeatureDownload(
+            int i,
+            Feature feature,
+            AndroidFuture androidFuture,
+            IDownloadCallback iDownloadCallback)
+            throws RemoteException;
 
     public static class Default implements IOnDeviceIntelligenceService {
         @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-        public void getVersion(RemoteCallback remoteCallback) throws RemoteException {
-        }
+        public void getVersion(RemoteCallback remoteCallback) throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-        public void getFeature(int callerUid, int featureId, IFeatureCallback featureCallback) throws RemoteException {
-        }
+        public void getFeature(int callerUid, int featureId, IFeatureCallback featureCallback)
+                throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-        public void listFeatures(int callerUid, IListFeaturesCallback listFeaturesCallback) throws RemoteException {
-        }
+        public void listFeatures(int callerUid, IListFeaturesCallback listFeaturesCallback)
+                throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-        public void getFeatureDetails(int callerUid, Feature feature, IFeatureDetailsCallback featureDetailsCallback) throws RemoteException {
-        }
+        public void getFeatureDetails(
+                int callerUid, Feature feature, IFeatureDetailsCallback featureDetailsCallback)
+                throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-        public void getReadOnlyFileDescriptor(String fileName, AndroidFuture<ParcelFileDescriptor> future) throws RemoteException {
-        }
+        public void getReadOnlyFileDescriptor(
+                String fileName, AndroidFuture<ParcelFileDescriptor> future)
+                throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-        public void getReadOnlyFeatureFileDescriptorMap(Feature feature, RemoteCallback remoteCallback) throws RemoteException {
-        }
+        public void getReadOnlyFeatureFileDescriptorMap(
+                Feature feature, RemoteCallback remoteCallback) throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-        public void requestFeatureDownload(int callerUid, Feature feature, AndroidFuture cancellationSignal, IDownloadCallback downloadCallback) throws RemoteException {
-        }
+        public void requestFeatureDownload(
+                int callerUid,
+                Feature feature,
+                AndroidFuture cancellationSignal,
+                IDownloadCallback downloadCallback)
+                throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-        public void registerRemoteServices(IRemoteProcessingService remoteProcessingService) throws RemoteException {
-        }
+        public void registerRemoteServices(IRemoteProcessingService remoteProcessingService)
+                throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-        public void notifyInferenceServiceConnected() throws RemoteException {
-        }
+        public void notifyInferenceServiceConnected() throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-        public void notifyInferenceServiceDisconnected() throws RemoteException {
-        }
+        public void notifyInferenceServiceDisconnected() throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-        public void ready() throws RemoteException {
-        }
+        public void ready() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -92,7 +104,7 @@ public interface IOnDeviceIntelligenceService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnDeviceIntelligenceService {
+    public abstract static class Stub extends Binder implements IOnDeviceIntelligenceService {
         static final int TRANSACTION_getFeature = 2;
         static final int TRANSACTION_getFeatureDetails = 4;
         static final int TRANSACTION_getReadOnlyFeatureFileDescriptorMap = 6;
@@ -160,7 +172,8 @@ public interface IOnDeviceIntelligenceService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOnDeviceIntelligenceService.DESCRIPTOR);
             }
@@ -170,52 +183,61 @@ public interface IOnDeviceIntelligenceService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RemoteCallback _arg0 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg0 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     getVersion(_arg0);
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
                     int _arg1 = data.readInt();
-                    IFeatureCallback _arg2 = IFeatureCallback.Stub.asInterface(data.readStrongBinder());
+                    IFeatureCallback _arg2 =
+                            IFeatureCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getFeature(_arg02, _arg1, _arg2);
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    IListFeaturesCallback _arg12 = IListFeaturesCallback.Stub.asInterface(data.readStrongBinder());
+                    IListFeaturesCallback _arg12 =
+                            IListFeaturesCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     listFeatures(_arg03, _arg12);
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
                     Feature _arg13 = (Feature) data.readTypedObject(Feature.CREATOR);
-                    IFeatureDetailsCallback _arg22 = IFeatureDetailsCallback.Stub.asInterface(data.readStrongBinder());
+                    IFeatureDetailsCallback _arg22 =
+                            IFeatureDetailsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getFeatureDetails(_arg04, _arg13, _arg22);
                     return true;
                 case 5:
                     String _arg05 = data.readString();
-                    AndroidFuture<ParcelFileDescriptor> _arg14 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<ParcelFileDescriptor> _arg14 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getReadOnlyFileDescriptor(_arg05, _arg14);
                     return true;
                 case 6:
                     Feature _arg06 = (Feature) data.readTypedObject(Feature.CREATOR);
-                    RemoteCallback _arg15 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg15 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     getReadOnlyFeatureFileDescriptorMap(_arg06, _arg15);
                     return true;
                 case 7:
                     int _arg07 = data.readInt();
                     Feature _arg16 = (Feature) data.readTypedObject(Feature.CREATOR);
-                    AndroidFuture _arg23 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
-                    IDownloadCallback _arg3 = IDownloadCallback.Stub.asInterface(data.readStrongBinder());
+                    AndroidFuture _arg23 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    IDownloadCallback _arg3 =
+                            IDownloadCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestFeatureDownload(_arg07, _arg16, _arg23, _arg3);
                     return true;
                 case 8:
-                    IRemoteProcessingService _arg08 = IRemoteProcessingService.Stub.asInterface(data.readStrongBinder());
+                    IRemoteProcessingService _arg08 =
+                            IRemoteProcessingService.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerRemoteServices(_arg08);
                     return true;
@@ -262,7 +284,8 @@ public interface IOnDeviceIntelligenceService extends IInterface {
             }
 
             @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-            public void getFeature(int callerUid, int featureId, IFeatureCallback featureCallback) throws RemoteException {
+            public void getFeature(int callerUid, int featureId, IFeatureCallback featureCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOnDeviceIntelligenceService.DESCRIPTOR);
@@ -276,7 +299,8 @@ public interface IOnDeviceIntelligenceService extends IInterface {
             }
 
             @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-            public void listFeatures(int callerUid, IListFeaturesCallback listFeaturesCallback) throws RemoteException {
+            public void listFeatures(int callerUid, IListFeaturesCallback listFeaturesCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOnDeviceIntelligenceService.DESCRIPTOR);
@@ -289,7 +313,9 @@ public interface IOnDeviceIntelligenceService extends IInterface {
             }
 
             @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-            public void getFeatureDetails(int callerUid, Feature feature, IFeatureDetailsCallback featureDetailsCallback) throws RemoteException {
+            public void getFeatureDetails(
+                    int callerUid, Feature feature, IFeatureDetailsCallback featureDetailsCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOnDeviceIntelligenceService.DESCRIPTOR);
@@ -303,7 +329,9 @@ public interface IOnDeviceIntelligenceService extends IInterface {
             }
 
             @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-            public void getReadOnlyFileDescriptor(String fileName, AndroidFuture<ParcelFileDescriptor> future) throws RemoteException {
+            public void getReadOnlyFileDescriptor(
+                    String fileName, AndroidFuture<ParcelFileDescriptor> future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOnDeviceIntelligenceService.DESCRIPTOR);
@@ -316,7 +344,8 @@ public interface IOnDeviceIntelligenceService extends IInterface {
             }
 
             @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-            public void getReadOnlyFeatureFileDescriptorMap(Feature feature, RemoteCallback remoteCallback) throws RemoteException {
+            public void getReadOnlyFeatureFileDescriptorMap(
+                    Feature feature, RemoteCallback remoteCallback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOnDeviceIntelligenceService.DESCRIPTOR);
@@ -329,7 +358,12 @@ public interface IOnDeviceIntelligenceService extends IInterface {
             }
 
             @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-            public void requestFeatureDownload(int callerUid, Feature feature, AndroidFuture cancellationSignal, IDownloadCallback downloadCallback) throws RemoteException {
+            public void requestFeatureDownload(
+                    int callerUid,
+                    Feature feature,
+                    AndroidFuture cancellationSignal,
+                    IDownloadCallback downloadCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOnDeviceIntelligenceService.DESCRIPTOR);
@@ -344,7 +378,8 @@ public interface IOnDeviceIntelligenceService extends IInterface {
             }
 
             @Override // android.service.ondeviceintelligence.IOnDeviceIntelligenceService
-            public void registerRemoteServices(IRemoteProcessingService remoteProcessingService) throws RemoteException {
+            public void registerRemoteServices(IRemoteProcessingService remoteProcessingService)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOnDeviceIntelligenceService.DESCRIPTOR);

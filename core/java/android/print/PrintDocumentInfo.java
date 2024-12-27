@@ -3,7 +3,9 @@ package android.print;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -12,19 +14,21 @@ public final class PrintDocumentInfo implements Parcelable {
     public static final int CONTENT_TYPE_DOCUMENT = 0;
     public static final int CONTENT_TYPE_PHOTO = 1;
     public static final int CONTENT_TYPE_UNKNOWN = -1;
-    public static final Parcelable.Creator<PrintDocumentInfo> CREATOR = new Parcelable.Creator<PrintDocumentInfo>() { // from class: android.print.PrintDocumentInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrintDocumentInfo createFromParcel(Parcel parcel) {
-            return new PrintDocumentInfo(parcel);
-        }
+    public static final Parcelable.Creator<PrintDocumentInfo> CREATOR =
+            new Parcelable.Creator<
+                    PrintDocumentInfo>() { // from class: android.print.PrintDocumentInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrintDocumentInfo createFromParcel(Parcel parcel) {
+                    return new PrintDocumentInfo(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrintDocumentInfo[] newArray(int size) {
-            return new PrintDocumentInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrintDocumentInfo[] newArray(int size) {
+                    return new PrintDocumentInfo[size];
+                }
+            };
     public static final int PAGE_COUNT_UNKNOWN = -1;
     private int mContentType;
     private long mDataSize;
@@ -32,11 +36,9 @@ public final class PrintDocumentInfo implements Parcelable {
     private int mPageCount;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ContentType {
-    }
+    public @interface ContentType {}
 
-    private PrintDocumentInfo() {
-    }
+    private PrintDocumentInfo() {}
 
     private PrintDocumentInfo(PrintDocumentInfo prototype) {
         this.mName = prototype.mName;
@@ -88,7 +90,10 @@ public final class PrintDocumentInfo implements Parcelable {
 
     public int hashCode() {
         int result = (1 * 31) + (this.mName != null ? this.mName.hashCode() : 0);
-        return (((((((result * 31) + this.mContentType) * 31) + this.mPageCount) * 31) + ((int) this.mDataSize)) * 31) + ((int) (this.mDataSize >> 32));
+        return (((((((result * 31) + this.mContentType) * 31) + this.mPageCount) * 31)
+                                + ((int) this.mDataSize))
+                        * 31)
+                + ((int) (this.mDataSize >> 32));
     }
 
     public boolean equals(Object obj) {
@@ -99,7 +104,10 @@ public final class PrintDocumentInfo implements Parcelable {
             return false;
         }
         PrintDocumentInfo other = (PrintDocumentInfo) obj;
-        if (TextUtils.equals(this.mName, other.mName) && this.mContentType == other.mContentType && this.mPageCount == other.mPageCount && this.mDataSize == other.mDataSize) {
+        if (TextUtils.equals(this.mName, other.mName)
+                && this.mContentType == other.mContentType
+                && this.mPageCount == other.mPageCount
+                && this.mDataSize == other.mDataSize) {
             return true;
         }
         return false;
@@ -140,7 +148,9 @@ public final class PrintDocumentInfo implements Parcelable {
 
         public Builder setPageCount(int pageCount) {
             if (pageCount < 0 && pageCount != -1) {
-                throw new IllegalArgumentException("pageCount must be greater than or equal to zero or DocumentInfo#PAGE_COUNT_UNKNOWN");
+                throw new IllegalArgumentException(
+                        "pageCount must be greater than or equal to zero or"
+                            + " DocumentInfo#PAGE_COUNT_UNKNOWN");
             }
             this.mPrototype.mPageCount = pageCount;
             return this;

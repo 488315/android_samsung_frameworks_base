@@ -8,6 +8,7 @@ import android.os.IRemoteCallback;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -23,7 +24,10 @@ public final class LockoutResetDispatcher implements IBinder.DeathRecipient {
         public final String mOpPackageName;
         public final PowerManager.WakeLock mWakeLock;
 
-        public ClientCallback(Context context, IBiometricServiceLockoutResetCallback iBiometricServiceLockoutResetCallback, String str) {
+        public ClientCallback(
+                Context context,
+                IBiometricServiceLockoutResetCallback iBiometricServiceLockoutResetCallback,
+                String str) {
             PowerManager powerManager = (PowerManager) context.getSystemService(PowerManager.class);
             this.mOpPackageName = str;
             this.mCallback = iBiometricServiceLockoutResetCallback;
@@ -41,12 +45,15 @@ public final class LockoutResetDispatcher implements IBinder.DeathRecipient {
         this.mContext = context;
     }
 
-    public final synchronized void addCallback(IBiometricServiceLockoutResetCallback iBiometricServiceLockoutResetCallback, String str) {
+    public final synchronized void addCallback(
+            IBiometricServiceLockoutResetCallback iBiometricServiceLockoutResetCallback,
+            String str) {
         if (iBiometricServiceLockoutResetCallback == null) {
             Slog.w("LockoutResetTracker", "Callback from : " + str + " is null");
             return;
         }
-        this.mClientCallbacks.add(new ClientCallback(this.mContext, iBiometricServiceLockoutResetCallback, str));
+        this.mClientCallbacks.add(
+                new ClientCallback(this.mContext, iBiometricServiceLockoutResetCallback, str));
         try {
             iBiometricServiceLockoutResetCallback.asBinder().linkToDeath(this, 0);
         } catch (RemoteException e) {
@@ -55,8 +62,7 @@ public final class LockoutResetDispatcher implements IBinder.DeathRecipient {
     }
 
     @Override // android.os.IBinder.DeathRecipient
-    public final void binderDied() {
-    }
+    public final void binderDied() {}
 
     @Override // android.os.IBinder.DeathRecipient
     public final synchronized void binderDied(IBinder iBinder) {
@@ -65,7 +71,9 @@ public final class LockoutResetDispatcher implements IBinder.DeathRecipient {
         while (it.hasNext()) {
             ClientCallback clientCallback = (ClientCallback) it.next();
             if (clientCallback.mCallback.asBinder().equals(iBinder)) {
-                Slog.e("LockoutResetTracker", "Removing dead callback for: " + clientCallback.mOpPackageName);
+                Slog.e(
+                        "LockoutResetTracker",
+                        "Removing dead callback for: " + clientCallback.mOpPackageName);
                 clientCallback.releaseWakelock();
                 it.remove();
             }
@@ -79,11 +87,15 @@ public final class LockoutResetDispatcher implements IBinder.DeathRecipient {
             if (clientCallback.mCallback != null) {
                 try {
                     clientCallback.mWakeLock.acquire(2000L);
-                    clientCallback.mCallback.onLockoutReset(i, new IRemoteCallback.Stub() { // from class: com.android.server.biometrics.sensors.LockoutResetDispatcher.ClientCallback.1
-                        public final void sendResult(Bundle bundle) {
-                            ClientCallback.this.releaseWakelock();
-                        }
-                    });
+                    clientCallback.mCallback.onLockoutReset(
+                            i,
+                            new IRemoteCallback
+                                    .Stub() { // from class:
+                                              // com.android.server.biometrics.sensors.LockoutResetDispatcher.ClientCallback.1
+                                public final void sendResult(Bundle bundle) {
+                                    ClientCallback.this.releaseWakelock();
+                                }
+                            });
                 } catch (RemoteException e) {
                     Slog.w("LockoutResetTracker", "Failed to invoke onLockoutReset: ", e);
                     clientCallback.releaseWakelock();

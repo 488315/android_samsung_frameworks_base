@@ -14,12 +14,18 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml;
 import android.view.PointerIcon;
+
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.util.FastXmlSerializer;
 import com.android.internal.util.JournaledFile;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -28,46 +34,59 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class SpenThemeManager {
     public final Context mContext;
-    public final AnonymousClass1 mMonitor = new PackageMonitor() { // from class: com.android.server.smartclip.SpenThemeManager.1
-        public final void onPackageRemoved(String str, int i) {
-            super.onPackageRemoved(str, i);
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("package removed = ", str, "SpenThemeManager");
-            AnonymousClass2 anonymousClass2 = SpenThemeManager.this.mPackageRemovedHandler;
-            anonymousClass2.sendMessage(anonymousClass2.obtainMessage(0, str));
-        }
-    };
-    public final AnonymousClass2 mPackageRemovedHandler = new Handler() { // from class: com.android.server.smartclip.SpenThemeManager.2
-        @Override // android.os.Handler
-        public final void handleMessage(Message message) {
-            String str = (String) message.obj;
-            if (TextUtils.isEmpty(str)) {
-                return;
-            }
-            SpenThemeManager spenThemeManager = SpenThemeManager.this;
-            spenThemeManager.getClass();
-            if ("com.samsung.android.pentastic".equals(str)) {
-                Settings.Global.putInt(spenThemeManager.mContext.getContentResolver(), "pen_custom_double_tap_action_enabled", 0);
-                Settings.Global.putString(spenThemeManager.mContext.getContentResolver(), "pen_custom_double_tap_action_shortcut", "");
-            }
-            if (!TextUtils.isEmpty(str) && str.equals(spenThemeManager.mThemeData.packageNameList[0])) {
-                spenThemeManager.setPenHoverIcon(str, null, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE);
-            }
-            if (!TextUtils.isEmpty(str) && str.equals(spenThemeManager.mThemeData.packageNameList[1])) {
-                spenThemeManager.setPenAttachSound(null, str, null);
-            }
-            if (!TextUtils.isEmpty(str) && str.equals(spenThemeManager.mThemeData.packageNameList[2])) {
-                spenThemeManager.setPenDetachSound(null, str, null);
-            }
-        }
-    };
+    public final AnonymousClass1 mMonitor =
+            new PackageMonitor() { // from class: com.android.server.smartclip.SpenThemeManager.1
+                public final void onPackageRemoved(String str, int i) {
+                    super.onPackageRemoved(str, i);
+                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                            "package removed = ", str, "SpenThemeManager");
+                    AnonymousClass2 anonymousClass2 = SpenThemeManager.this.mPackageRemovedHandler;
+                    anonymousClass2.sendMessage(anonymousClass2.obtainMessage(0, str));
+                }
+            };
+    public final AnonymousClass2 mPackageRemovedHandler =
+            new Handler() { // from class: com.android.server.smartclip.SpenThemeManager.2
+                @Override // android.os.Handler
+                public final void handleMessage(Message message) {
+                    String str = (String) message.obj;
+                    if (TextUtils.isEmpty(str)) {
+                        return;
+                    }
+                    SpenThemeManager spenThemeManager = SpenThemeManager.this;
+                    spenThemeManager.getClass();
+                    if ("com.samsung.android.pentastic".equals(str)) {
+                        Settings.Global.putInt(
+                                spenThemeManager.mContext.getContentResolver(),
+                                "pen_custom_double_tap_action_enabled",
+                                0);
+                        Settings.Global.putString(
+                                spenThemeManager.mContext.getContentResolver(),
+                                "pen_custom_double_tap_action_shortcut",
+                                "");
+                    }
+                    if (!TextUtils.isEmpty(str)
+                            && str.equals(spenThemeManager.mThemeData.packageNameList[0])) {
+                        spenThemeManager.setPenHoverIcon(
+                                str,
+                                null,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE);
+                    }
+                    if (!TextUtils.isEmpty(str)
+                            && str.equals(spenThemeManager.mThemeData.packageNameList[1])) {
+                        spenThemeManager.setPenAttachSound(null, str, null);
+                    }
+                    if (!TextUtils.isEmpty(str)
+                            && str.equals(spenThemeManager.mThemeData.packageNameList[2])) {
+                        spenThemeManager.setPenDetachSound(null, str, null);
+                    }
+                }
+            };
     public final boolean mRegistered;
     public final ThemeData mThemeData;
 
@@ -75,29 +94,41 @@ public final class SpenThemeManager {
     public final class SoundPathInfo {
         public String attachSoundPath;
         public String detachSoundPath;
-        public final AnonymousClass1 mWriteSettingHandler = new Handler() { // from class: com.android.server.smartclip.SpenThemeManager.SoundPathInfo.1
-            @Override // android.os.Handler
-            public final void handleMessage(Message message) {
-                Object obj = message.obj;
-                if (obj instanceof Context) {
-                    Context context = (Context) obj;
-                    SoundPathInfo soundPathInfo = SoundPathInfo.this;
-                    if (context == null) {
-                        soundPathInfo.getClass();
-                        return;
+        public final AnonymousClass1 mWriteSettingHandler =
+                new Handler() { // from class:
+                                // com.android.server.smartclip.SpenThemeManager.SoundPathInfo.1
+                    @Override // android.os.Handler
+                    public final void handleMessage(Message message) {
+                        Object obj = message.obj;
+                        if (obj instanceof Context) {
+                            Context context = (Context) obj;
+                            SoundPathInfo soundPathInfo = SoundPathInfo.this;
+                            if (context == null) {
+                                soundPathInfo.getClass();
+                                return;
+                            }
+                            StringBuilder m =
+                                    BootReceiver$$ExternalSyntheticOutline0.m(
+                                            ConnectivityModuleConnector$$ExternalSyntheticOutline0
+                                                    .m$1("" + soundPathInfo.attachSoundPath, ","));
+                            m.append(soundPathInfo.detachSoundPath);
+                            String sb = m.toString();
+                            Log.i("SpenThemeManager", "get paths = " + sb);
+                            Log.i("SpenThemeManager", "write setting paths = " + sb);
+                            Settings.System.putStringForUser(
+                                    context.getContentResolver(),
+                                    "pen_detachment_notification",
+                                    sb,
+                                    -2);
+                        }
                     }
-                    StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1("" + soundPathInfo.attachSoundPath, ","));
-                    m.append(soundPathInfo.detachSoundPath);
-                    String sb = m.toString();
-                    Log.i("SpenThemeManager", "get paths = " + sb);
-                    Log.i("SpenThemeManager", "write setting paths = " + sb);
-                    Settings.System.putStringForUser(context.getContentResolver(), "pen_detachment_notification", sb, -2);
-                }
-            }
-        };
+                };
 
         public final String toString() {
-            return "attach sound = " + this.attachSoundPath + ", detach sound = " + this.detachSoundPath;
+            return "attach sound = "
+                    + this.attachSoundPath
+                    + ", detach sound = "
+                    + this.detachSoundPath;
         }
     }
 
@@ -121,10 +152,14 @@ public final class SpenThemeManager {
             this.hotspotY = FullScreenMagnificationGestureHandler.MAX_SCALE;
             this.mContext = context;
             if (context != null) {
-                String stringForUser = Settings.System.getStringForUser(context.getContentResolver(), "pen_detachment_notification", -2);
+                String stringForUser =
+                        Settings.System.getStringForUser(
+                                context.getContentResolver(), "pen_detachment_notification", -2);
                 Log.i("SpenThemeManager", "read setting paths = " + stringForUser);
                 Log.i("SpenThemeManager", "set paths = " + stringForUser);
-                if (!TextUtils.isEmpty(stringForUser) && (split = stringForUser.split(",")) != null && split.length >= 2) {
+                if (!TextUtils.isEmpty(stringForUser)
+                        && (split = stringForUser.split(",")) != null
+                        && split.length >= 2) {
                     soundPathInfo.attachSoundPath = split[0];
                     soundPathInfo.detachSoundPath = split[1];
                 }
@@ -135,8 +170,14 @@ public final class SpenThemeManager {
 
         public final JournaledFile makeJournaledFile() {
             SpenThemeManager.this.getClass();
-            String absolutePath = new File(SpenThemeManager.getRootDir(), "spen_theme_data_file").getAbsolutePath();
-            return new JournaledFile(new File(absolutePath), new File(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(absolutePath, ".tmp")));
+            String absolutePath =
+                    new File(SpenThemeManager.getRootDir(), "spen_theme_data_file")
+                            .getAbsolutePath();
+            return new JournaledFile(
+                    new File(absolutePath),
+                    new File(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                                    absolutePath, ".tmp")));
         }
 
         public final void parseHoverIconData(XmlPullParser xmlPullParser) {
@@ -285,7 +326,11 @@ public final class SpenThemeManager {
     }
 
     public static File getRootDir() {
-        File file = new File(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(Environment.getDataDirectory().getAbsolutePath() + "/overlays", "/spen_theme"));
+        File file =
+                new File(
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                                Environment.getDataDirectory().getAbsolutePath() + "/overlays",
+                                "/spen_theme"));
         if (!file.exists()) {
             file.mkdir();
             FileUtils.setPermissions(file.getPath(), 505, -1, -1);
@@ -294,11 +339,17 @@ public final class SpenThemeManager {
     }
 
     public static File getThemeFile(int i, String str) {
-        String m = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("spen_theme_pen_hover_icon", str);
+        String m =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                        "spen_theme_pen_hover_icon", str);
         if (i == 1) {
-            m = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("spen_theme_pen_attach_sound", str);
+            m =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            "spen_theme_pen_attach_sound", str);
         } else if (i == 2) {
-            m = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("spen_theme_pen_detach_sound", str);
+            m =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            "spen_theme_pen_detach_sound", str);
         }
         return new File(getRootDir(), m);
     }
@@ -306,7 +357,8 @@ public final class SpenThemeManager {
     public static void setPenHoverIcon(FileDescriptor fileDescriptor, float f, float f2) {
         PointerIcon pointerIcon = null;
         if (fileDescriptor != null) {
-            Bitmap decodeFileDescriptor = BitmapFactory.decodeFileDescriptor(fileDescriptor, null, null);
+            Bitmap decodeFileDescriptor =
+                    BitmapFactory.decodeFileDescriptor(fileDescriptor, null, null);
             Log.i("SpenThemeManager", "set icon image = " + decodeFileDescriptor);
             if (decodeFileDescriptor != null) {
                 pointerIcon = PointerIcon.create(decodeFileDescriptor, f, f2);
@@ -316,7 +368,8 @@ public final class SpenThemeManager {
         PointerIcon.setDefaultPointerIconInternal(2, pointerIcon, true);
     }
 
-    public final boolean applyChanges(String str, FileDescriptor fileDescriptor, int i, String str2) {
+    public final boolean applyChanges(
+            String str, FileDescriptor fileDescriptor, int i, String str2) {
         boolean z;
         FileOutputStream fileOutputStream;
         BufferedOutputStream bufferedOutputStream;
@@ -389,7 +442,14 @@ public final class SpenThemeManager {
     }
 
     public final void setPenAttachSound(FileDescriptor fileDescriptor, String str, String str2) {
-        Log.i("SpenThemeManager", "set attach sound package = " + str + ", file = " + fileDescriptor + ", file name = " + str2);
+        Log.i(
+                "SpenThemeManager",
+                "set attach sound package = "
+                        + str
+                        + ", file = "
+                        + fileDescriptor
+                        + ", file name = "
+                        + str2);
         if (TextUtils.isEmpty(str)) {
             return;
         }
@@ -406,7 +466,14 @@ public final class SpenThemeManager {
     }
 
     public final void setPenDetachSound(FileDescriptor fileDescriptor, String str, String str2) {
-        Log.i("SpenThemeManager", "set detach sound package = " + str + ", file = " + fileDescriptor + ", file name = " + str2);
+        Log.i(
+                "SpenThemeManager",
+                "set detach sound package = "
+                        + str
+                        + ", file = "
+                        + fileDescriptor
+                        + ", file name = "
+                        + str2);
         if (TextUtils.isEmpty(str)) {
             return;
         }
@@ -417,7 +484,8 @@ public final class SpenThemeManager {
         }
     }
 
-    public final void setPenHoverIcon(String str, FileDescriptor fileDescriptor, float f, float f2) {
+    public final void setPenHoverIcon(
+            String str, FileDescriptor fileDescriptor, float f, float f2) {
         Log.i("SpenThemeManager", "set icon package = " + str + ", file = " + fileDescriptor);
         if (TextUtils.isEmpty(str)) {
             return;
@@ -427,7 +495,10 @@ public final class SpenThemeManager {
         themeData.hotspotY = f2;
         FileDescriptor fileDescriptor2 = null;
         if (!applyChanges(str, fileDescriptor, 0, null)) {
-            setPenHoverIcon(null, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE);
+            setPenHoverIcon(
+                    null,
+                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                    FullScreenMagnificationGestureHandler.MAX_SCALE);
             return;
         }
         try {

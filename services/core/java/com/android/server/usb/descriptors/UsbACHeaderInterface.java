@@ -13,11 +13,13 @@ public abstract class UsbACHeaderInterface extends UsbACInterface {
         this.mADCRelease = i3;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbACInterface, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbACInterface,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
         textReportCanvas.openList();
-        textReportCanvas.writeListItem("Release: " + TextReportCanvas.getBCDString(this.mADCRelease));
+        textReportCanvas.writeListItem(
+                "Release: " + TextReportCanvas.getBCDString(this.mADCRelease));
         textReportCanvas.writeListItem("Total Length: " + this.mTotalLength);
         textReportCanvas.closeList();
     }

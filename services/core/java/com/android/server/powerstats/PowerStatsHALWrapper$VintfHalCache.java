@@ -7,6 +7,7 @@ import android.os.IInterface;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Slog;
+
 import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,9 +29,15 @@ public final class PowerStatsHALWrapper$VintfHalCache implements Supplier, IBind
         IBinder allowBlocking;
         IPowerStats.Stub.Proxy proxy;
         synchronized (this) {
-            if (this.mInstance == null && (allowBlocking = Binder.allowBlocking(ServiceManager.waitForDeclaredService("android.hardware.power.stats.IPowerStats/default"))) != null) {
+            if (this.mInstance == null
+                    && (allowBlocking =
+                                    Binder.allowBlocking(
+                                            ServiceManager.waitForDeclaredService(
+                                                    "android.hardware.power.stats.IPowerStats/default")))
+                            != null) {
                 int i = IPowerStats.Stub.$r8$clinit;
-                IInterface queryLocalInterface = allowBlocking.queryLocalInterface(IPowerStats.DESCRIPTOR);
+                IInterface queryLocalInterface =
+                        allowBlocking.queryLocalInterface(IPowerStats.DESCRIPTOR);
                 if (queryLocalInterface == null || !(queryLocalInterface instanceof IPowerStats)) {
                     IPowerStats.Stub.Proxy proxy2 = new IPowerStats.Stub.Proxy();
                     proxy2.mRemote = allowBlocking;
@@ -42,7 +49,9 @@ public final class PowerStatsHALWrapper$VintfHalCache implements Supplier, IBind
                 try {
                     allowBlocking.linkToDeath(this, 0);
                 } catch (RemoteException unused) {
-                    Slog.e("PowerStatsHALWrapper", "Unable to register DeathRecipient for " + this.mInstance);
+                    Slog.e(
+                            "PowerStatsHALWrapper",
+                            "Unable to register DeathRecipient for " + this.mInstance);
                 }
             }
             iPowerStats = this.mInstance;

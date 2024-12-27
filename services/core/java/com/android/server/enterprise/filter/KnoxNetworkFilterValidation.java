@@ -7,12 +7,15 @@ import android.os.Debug;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
 import com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticOutline0;
-import java.util.ArrayList;
-import java.util.Iterator;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -29,16 +32,32 @@ public final class KnoxNetworkFilterValidation {
         KnoxNetworkFilterHelper knoxNetworkFilterHelper = this.mKnoxNwFilterHelper;
         knoxNetworkFilterHelper.getClass();
         String packageNameForUid = KnoxNetworkFilterHelper.getPackageNameForUid(i);
-        boolean isAppRegistered = knoxNetworkFilterHelper.isAppRegistered(userId, packageNameForUid, knoxNetworkFilterHelper.getSignature(userId, packageNameForUid));
+        boolean isAppRegistered =
+                knoxNetworkFilterHelper.isAppRegistered(
+                        userId,
+                        packageNameForUid,
+                        knoxNetworkFilterHelper.getSignature(userId, packageNameForUid));
         if (knoxNetworkFilterHelper.isAppAuthorized(i, packageNameForUid)) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "getInstanceValidation: isAppAuthorized returns true for ", packageNameForUid, "knoxNwFilter-KnoxNetworkFilterValidation");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i,
+                    "getInstanceValidation: isAppAuthorized returns true for ",
+                    packageNameForUid,
+                    "knoxNwFilter-KnoxNetworkFilterValidation");
             return 0;
         }
         if (isAppRegistered) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "getInstanceValidation: isAppRegistered returns true for ", packageNameForUid, "knoxNwFilter-KnoxNetworkFilterValidation");
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i,
+                    "getInstanceValidation: isAppRegistered returns true for ",
+                    packageNameForUid,
+                    "knoxNwFilter-KnoxNetworkFilterValidation");
             return 0;
         }
-        AudioDeviceInventory$$ExternalSyntheticOutline0.m(i, "getInstanceValidation: isAppRegistered/isAppAuthorized returns false for ", packageNameForUid, "knoxNwFilter-KnoxNetworkFilterValidation");
+        AudioDeviceInventory$$ExternalSyntheticOutline0.m(
+                i,
+                "getInstanceValidation: isAppRegistered/isAppAuthorized returns false for ",
+                packageNameForUid,
+                "knoxNwFilter-KnoxNetworkFilterValidation");
         return -5;
     }
 
@@ -50,15 +69,19 @@ public final class KnoxNetworkFilterValidation {
             long clearCallingIdentity2 = Binder.clearCallingIdentity();
             boolean z = false;
             try {
-                PackageInfo packageInfo = AppGlobals.getPackageManager().getPackageInfo(str, 4096L, i);
-                if (packageInfo != null && (strArr = packageInfo.requestedPermissions) != null && strArr.length > 0) {
+                PackageInfo packageInfo =
+                        AppGlobals.getPackageManager().getPackageInfo(str, 4096L, i);
+                if (packageInfo != null
+                        && (strArr = packageInfo.requestedPermissions) != null
+                        && strArr.length > 0) {
                     int length = strArr.length;
                     int i2 = 0;
                     while (true) {
                         if (i2 >= length) {
                             break;
                         }
-                        if (strArr[i2].equalsIgnoreCase("com.samsung.android.knox.permission.KNOX_NETWORK_FILTER_SERVICE_PROVIDER")) {
+                        if (strArr[i2].equalsIgnoreCase(
+                                "com.samsung.android.knox.permission.KNOX_NETWORK_FILTER_SERVICE_PROVIDER")) {
                             z = true;
                             break;
                         }
@@ -74,7 +97,9 @@ public final class KnoxNetworkFilterValidation {
             if (z) {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             } else {
-                Log.e("knoxNwFilter-KnoxNetworkFilterValidation", "prepare filtering failed since permission not included in manifest");
+                Log.e(
+                        "knoxNwFilter-KnoxNetworkFilterValidation",
+                        "prepare filtering failed since permission not included in manifest");
                 throw new SecurityException("manifest permission not present");
             }
         } catch (Throwable th2) {
@@ -96,7 +121,8 @@ public final class KnoxNetworkFilterValidation {
         if (vendorUidByProfile != -1 && vendorUidByProfile != Binder.getCallingUid()) {
             return -12;
         }
-        ArrayList arrayList = (ArrayList) KnoxNetworkFilterHelper.getProfileListByVendor(Binder.getCallingUid());
+        ArrayList arrayList =
+                (ArrayList) KnoxNetworkFilterHelper.getProfileListByVendor(Binder.getCallingUid());
         if (arrayList.isEmpty()) {
             return -2;
         }
@@ -104,7 +130,9 @@ public final class KnoxNetworkFilterValidation {
         while (it.hasNext()) {
             String str3 = (String) it.next();
             if (!str.equalsIgnoreCase(str3)) {
-                Log.e("knoxNwFilter-KnoxNetworkFilterValidation", "profile mismatch occurred between: " + str + " " + str3);
+                Log.e(
+                        "knoxNwFilter-KnoxNetworkFilterValidation",
+                        "profile mismatch occurred between: " + str + " " + str3);
                 return -6;
             }
         }
@@ -119,13 +147,13 @@ public final class KnoxNetworkFilterValidation {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0076, code lost:
-    
-        if (r6.isEmpty() == false) goto L35;
-     */
+
+       if (r6.isEmpty() == false) goto L35;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x0058, code lost:
-    
-        if (r6.isEmpty() == false) goto L26;
-     */
+
+       if (r6.isEmpty() == false) goto L26;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -211,7 +239,10 @@ public final class KnoxNetworkFilterValidation {
             r4.<init>()
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.filter.KnoxNetworkFilterValidation.setConfigValidation(java.lang.String, java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.filter.KnoxNetworkFilterValidation.setConfigValidation(java.lang.String,"
+                    + " java.lang.String):int");
     }
 
     public final int startValidation(String str) {
@@ -227,7 +258,8 @@ public final class KnoxNetworkFilterValidation {
         if (vendorUidByProfile != -1 && vendorUidByProfile != Binder.getCallingUid()) {
             return -12;
         }
-        ArrayList arrayList = (ArrayList) KnoxNetworkFilterHelper.getProfileListByVendor(Binder.getCallingUid());
+        ArrayList arrayList =
+                (ArrayList) KnoxNetworkFilterHelper.getProfileListByVendor(Binder.getCallingUid());
         if (arrayList.isEmpty()) {
             instanceValidation = -2;
         } else {
@@ -245,7 +277,9 @@ public final class KnoxNetworkFilterValidation {
         if (retrieveListenersFromCache != null && !retrieveListenersFromCache.isEmpty()) {
             return instanceValidation;
         }
-        Log.e("knoxNwFilter-KnoxNetworkFilterValidation", "start API failed for profile " + str + " since listener config is not set");
+        Log.e(
+                "knoxNwFilter-KnoxNetworkFilterValidation",
+                "start API failed for profile " + str + " since listener config is not set");
         return -8;
     }
 
@@ -281,7 +315,8 @@ public final class KnoxNetworkFilterValidation {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int unregisterApplicationValidation(com.samsung.android.knox.ContextInfo r9, java.lang.String r10) {
+    public final int unregisterApplicationValidation(
+            com.samsung.android.knox.ContextInfo r9, java.lang.String r10) {
         /*
             r8 = this;
             if (r10 == 0) goto La7
@@ -362,6 +397,9 @@ public final class KnoxNetworkFilterValidation {
             r8 = -10
             return r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.filter.KnoxNetworkFilterValidation.unregisterApplicationValidation(com.samsung.android.knox.ContextInfo, java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.filter.KnoxNetworkFilterValidation.unregisterApplicationValidation(com.samsung.android.knox.ContextInfo,"
+                    + " java.lang.String):int");
     }
 }

@@ -2,6 +2,7 @@ package com.android.server.hdmi;
 
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
 import android.util.SparseArray;
+
 import com.android.internal.util.FrameworkStatsLog;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,7 +31,8 @@ public final class HdmiCecStandbyModeHandler {
         public final boolean handle(HdmiCecMessage hdmiCecMessage) {
             HdmiControlService hdmiControlService = HdmiCecStandbyModeHandler.this.mService;
             hdmiControlService.assertRunOnServiceThread();
-            hdmiControlService.mCecController.maySendFeatureAbortCommand(this.mReason, hdmiCecMessage);
+            hdmiControlService.mCecController.maySendFeatureAbortCommand(
+                    this.mReason, hdmiCecMessage);
             return true;
         }
     }
@@ -40,7 +42,8 @@ public final class HdmiCecStandbyModeHandler {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ HdmiCecStandbyModeHandler this$0;
 
-        public /* synthetic */ AutoOnHandler(HdmiCecStandbyModeHandler hdmiCecStandbyModeHandler, int i) {
+        public /* synthetic */ AutoOnHandler(
+                HdmiCecStandbyModeHandler hdmiCecStandbyModeHandler, int i) {
             this.$r8$classId = i;
             this.this$0 = hdmiCecStandbyModeHandler;
         }
@@ -50,7 +53,8 @@ public final class HdmiCecStandbyModeHandler {
             switch (this.$r8$classId) {
                 case 0:
                     HdmiCecStandbyModeHandler hdmiCecStandbyModeHandler = this.this$0;
-                    if (!((HdmiCecLocalDeviceTv) hdmiCecStandbyModeHandler.mDevice).getAutoWakeup()) {
+                    if (!((HdmiCecLocalDeviceTv) hdmiCecStandbyModeHandler.mDevice)
+                            .getAutoWakeup()) {
                         hdmiCecStandbyModeHandler.mAborterRefused.handle(hdmiCecMessage);
                         break;
                     }
@@ -92,7 +96,8 @@ public final class HdmiCecStandbyModeHandler {
         boolean handle(HdmiCecMessage hdmiCecMessage);
     }
 
-    public HdmiCecStandbyModeHandler(HdmiControlService hdmiControlService, HdmiCecLocalDevice hdmiCecLocalDevice) {
+    public HdmiCecStandbyModeHandler(
+            HdmiControlService hdmiControlService, HdmiCecLocalDevice hdmiCecLocalDevice) {
         Aborter aborter = new Aborter(0);
         Aborter aborter2 = new Aborter(1);
         this.mAborterIncorrectMode = aborter2;
@@ -117,7 +122,10 @@ public final class HdmiCecStandbyModeHandler {
         addHandler(50, bypasser2);
         addHandler(69, bypasser2);
         addHandler(0, bypasser2);
-        addHandler(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__RESOLVER_EMPTY_STATE_WORK_APPS_DISABLED, bypasser2);
+        addHandler(
+                FrameworkStatsLog
+                        .DEVICE_POLICY_EVENT__EVENT_ID__RESOLVER_EMPTY_STATE_WORK_APPS_DISABLED,
+                bypasser2);
         addHandler(126, bypasser2);
         addHandler(122, bypasser2);
         addHandler(131, bypasser);
@@ -128,10 +136,16 @@ public final class HdmiCecStandbyModeHandler {
         addHandler(71, bypasser);
         addHandler(135, bypasser);
         addHandler(144, bypasser);
-        addHandler(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_MISSING_WORK_APP, bypasser);
+        addHandler(
+                FrameworkStatsLog
+                        .DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_MISSING_WORK_APP,
+                bypasser);
         addHandler(143, bypasser);
         addHandler(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT, bypasser);
-        addHandler(FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__RESOLVER_EMPTY_STATE_NO_SHARING_TO_WORK, bypasser);
+        addHandler(
+                FrameworkStatsLog
+                        .DEVICE_POLICY_EVENT__EVENT_ID__RESOLVER_EMPTY_STATE_NO_SHARING_TO_WORK,
+                bypasser);
         addHandler(160, aborter2);
         addHandler(114, aborter2);
         addHandler(4, autoOnHandler);

@@ -6,23 +6,26 @@ import android.text.TextUtils;
 
 /* loaded from: classes4.dex */
 public final class SurroundingText implements Parcelable {
-    public static final Parcelable.Creator<SurroundingText> CREATOR = new Parcelable.Creator<SurroundingText>() { // from class: android.view.inputmethod.SurroundingText.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SurroundingText createFromParcel(Parcel in) {
-            CharSequence text = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
-            int selectionHead = in.readInt();
-            int selectionEnd = in.readInt();
-            int offset = in.readInt();
-            return new SurroundingText(text == null ? "" : text, selectionHead, selectionEnd, offset);
-        }
+    public static final Parcelable.Creator<SurroundingText> CREATOR =
+            new Parcelable.Creator<
+                    SurroundingText>() { // from class: android.view.inputmethod.SurroundingText.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SurroundingText createFromParcel(Parcel in) {
+                    CharSequence text = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(in);
+                    int selectionHead = in.readInt();
+                    int selectionEnd = in.readInt();
+                    int offset = in.readInt();
+                    return new SurroundingText(
+                            text == null ? "" : text, selectionHead, selectionEnd, offset);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SurroundingText[] newArray(int size) {
-            return new SurroundingText[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SurroundingText[] newArray(int size) {
+                    return new SurroundingText[size];
+                }
+            };
     private final int mOffset;
     private final int mSelectionEnd;
     private final int mSelectionStart;
@@ -88,7 +91,10 @@ public final class SurroundingText implements Parcelable {
         if (this == that) {
             return true;
         }
-        if (this.mSelectionStart != that.mSelectionStart || this.mSelectionEnd != that.mSelectionEnd || this.mOffset != that.mOffset || !TextUtils.equals(this.mText, that.mText)) {
+        if (this.mSelectionStart != that.mSelectionStart
+                || this.mSelectionEnd != that.mSelectionEnd
+                || this.mOffset != that.mOffset
+                || !TextUtils.equals(this.mText, that.mText)) {
             return false;
         }
         return true;

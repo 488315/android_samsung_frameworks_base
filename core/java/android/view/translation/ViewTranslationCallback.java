@@ -10,9 +10,7 @@ public interface ViewTranslationCallback {
 
     boolean onShowTranslation(View view);
 
-    default void enableContentPadding() {
-    }
+    default void enableContentPadding() {}
 
-    default void setAnimationDurationMillis(int durationMillis) {
-    }
+    default void setAnimationDurationMillis(int durationMillis) {}
 }

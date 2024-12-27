@@ -1,6 +1,5 @@
 package android.hardware;
 
-import android.hardware.IRemoteDeviceCallback;
 import android.hardware.camera2.impl.CameraMetadataNative;
 import android.hardware.camera2.params.OutputConfiguration;
 import android.os.Binder;
@@ -30,7 +29,8 @@ public interface IRemoteDevice extends IInterface {
 
     void setCallback(IRemoteDeviceCallback iRemoteDeviceCallback) throws RemoteException;
 
-    void submitRequest(CameraMetadataNative cameraMetadataNative, int[] iArr, boolean z) throws RemoteException;
+    void submitRequest(CameraMetadataNative cameraMetadataNative, int[] iArr, boolean z)
+            throws RemoteException;
 
     public static class Default implements IRemoteDevice {
         @Override // android.hardware.IRemoteDevice
@@ -49,8 +49,7 @@ public interface IRemoteDevice extends IInterface {
         }
 
         @Override // android.hardware.IRemoteDevice
-        public void deleteStream(int streamId) throws RemoteException {
-        }
+        public void deleteStream(int streamId) throws RemoteException {}
 
         @Override // android.hardware.IRemoteDevice
         public CameraMetadataNative createDefaultRequest() throws RemoteException {
@@ -58,20 +57,18 @@ public interface IRemoteDevice extends IInterface {
         }
 
         @Override // android.hardware.IRemoteDevice
-        public void submitRequest(CameraMetadataNative request, int[] outputStreams, boolean streaming) throws RemoteException {
-        }
+        public void submitRequest(
+                CameraMetadataNative request, int[] outputStreams, boolean streaming)
+                throws RemoteException {}
 
         @Override // android.hardware.IRemoteDevice
-        public void clearRequest() throws RemoteException {
-        }
+        public void clearRequest() throws RemoteException {}
 
         @Override // android.hardware.IRemoteDevice
-        public void setCallback(IRemoteDeviceCallback callback) throws RemoteException {
-        }
+        public void setCallback(IRemoteDeviceCallback callback) throws RemoteException {}
 
         @Override // android.hardware.IRemoteDevice
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -79,7 +76,7 @@ public interface IRemoteDevice extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteDevice {
+    public abstract static class Stub extends Binder implements IRemoteDevice {
         static final int TRANSACTION_clearRequest = 7;
         static final int TRANSACTION_close = 9;
         static final int TRANSACTION_createDefaultRequest = 5;
@@ -141,7 +138,8 @@ public interface IRemoteDevice extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteDevice.DESCRIPTOR);
             }
@@ -164,7 +162,8 @@ public interface IRemoteDevice extends IInterface {
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 3:
-                    OutputConfiguration _arg02 = (OutputConfiguration) data.readTypedObject(OutputConfiguration.CREATOR);
+                    OutputConfiguration _arg02 =
+                            (OutputConfiguration) data.readTypedObject(OutputConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     int _result3 = createStream(_arg02);
                     reply.writeNoException();
@@ -182,7 +181,9 @@ public interface IRemoteDevice extends IInterface {
                     reply.writeTypedObject(_result4, 1);
                     return true;
                 case 6:
-                    CameraMetadataNative _arg04 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg04 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     int[] _arg12 = data.createIntArray();
                     boolean _arg2 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -194,7 +195,8 @@ public interface IRemoteDevice extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 8:
-                    IRemoteDeviceCallback _arg05 = IRemoteDeviceCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteDeviceCallback _arg05 =
+                            IRemoteDeviceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg05);
                     reply.writeNoException();
@@ -250,7 +252,9 @@ public interface IRemoteDevice extends IInterface {
                     _data.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    CameraMetadataNative _result = (CameraMetadataNative) _reply.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _result =
+                            (CameraMetadataNative)
+                                    _reply.readTypedObject(CameraMetadataNative.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -259,7 +263,8 @@ public interface IRemoteDevice extends IInterface {
             }
 
             @Override // android.hardware.IRemoteDevice
-            public int createStream(OutputConfiguration outputConfiguration) throws RemoteException {
+            public int createStream(OutputConfiguration outputConfiguration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -298,7 +303,9 @@ public interface IRemoteDevice extends IInterface {
                     _data.writeInterfaceToken(IRemoteDevice.DESCRIPTOR);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    CameraMetadataNative _result = (CameraMetadataNative) _reply.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _result =
+                            (CameraMetadataNative)
+                                    _reply.readTypedObject(CameraMetadataNative.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -307,7 +314,9 @@ public interface IRemoteDevice extends IInterface {
             }
 
             @Override // android.hardware.IRemoteDevice
-            public void submitRequest(CameraMetadataNative request, int[] outputStreams, boolean streaming) throws RemoteException {
+            public void submitRequest(
+                    CameraMetadataNative request, int[] outputStreams, boolean streaming)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

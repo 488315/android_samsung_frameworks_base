@@ -6,7 +6,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.service.notification.ZenDeviceEffects;
 import android.service.notification.ZenPolicy;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -14,19 +16,21 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class AutomaticZenRule implements Parcelable {
-    public static final Parcelable.Creator<AutomaticZenRule> CREATOR = new Parcelable.Creator<AutomaticZenRule>() { // from class: android.app.AutomaticZenRule.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AutomaticZenRule createFromParcel(Parcel source) {
-            return new AutomaticZenRule(source);
-        }
+    public static final Parcelable.Creator<AutomaticZenRule> CREATOR =
+            new Parcelable.Creator<
+                    AutomaticZenRule>() { // from class: android.app.AutomaticZenRule.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AutomaticZenRule createFromParcel(Parcel source) {
+                    return new AutomaticZenRule(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AutomaticZenRule[] newArray(int size) {
-            return new AutomaticZenRule[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AutomaticZenRule[] newArray(int size) {
+                    return new AutomaticZenRule[size];
+                }
+            };
     private static final int DISABLED = 0;
     private static final int ENABLED = 1;
     public static final int FIELD_ICON = 4;
@@ -60,19 +64,29 @@ public final class AutomaticZenRule implements Parcelable {
     private ComponentName owner;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ModifiableField {
-    }
+    public @interface ModifiableField {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     @Deprecated
-    public AutomaticZenRule(String name, ComponentName owner, Uri conditionId, int interruptionFilter, boolean enabled) {
+    public AutomaticZenRule(
+            String name,
+            ComponentName owner,
+            Uri conditionId,
+            int interruptionFilter,
+            boolean enabled) {
         this(name, owner, null, conditionId, null, interruptionFilter, enabled);
     }
 
-    public AutomaticZenRule(String name, ComponentName owner, ComponentName configurationActivity, Uri conditionId, ZenPolicy policy, int interruptionFilter, boolean enabled) {
+    public AutomaticZenRule(
+            String name,
+            ComponentName owner,
+            ComponentName configurationActivity,
+            Uri conditionId,
+            ZenPolicy policy,
+            int interruptionFilter,
+            boolean enabled) {
         this.mModified = false;
         this.mType = Flags.modesApi() ? -1 : 0;
         this.name = getTrimmedString(name);
@@ -84,7 +98,15 @@ public final class AutomaticZenRule implements Parcelable {
         this.mZenPolicy = policy;
     }
 
-    public AutomaticZenRule(String name, ComponentName owner, ComponentName configurationActivity, Uri conditionId, ZenPolicy policy, int interruptionFilter, boolean enabled, long creationTime) {
+    public AutomaticZenRule(
+            String name,
+            ComponentName owner,
+            ComponentName configurationActivity,
+            Uri conditionId,
+            ZenPolicy policy,
+            int interruptionFilter,
+            boolean enabled,
+            long creationTime) {
         this(name, owner, configurationActivity, conditionId, policy, interruptionFilter, enabled);
         this.creationTime = creationTime;
     }
@@ -98,14 +120,19 @@ public final class AutomaticZenRule implements Parcelable {
         }
         this.interruptionFilter = source.readInt();
         this.conditionId = getTrimmedUri((Uri) source.readParcelable(null, Uri.class));
-        this.owner = getTrimmedComponentName((ComponentName) source.readParcelable(null, ComponentName.class));
-        this.configurationActivity = getTrimmedComponentName((ComponentName) source.readParcelable(null, ComponentName.class));
+        this.owner =
+                getTrimmedComponentName(
+                        (ComponentName) source.readParcelable(null, ComponentName.class));
+        this.configurationActivity =
+                getTrimmedComponentName(
+                        (ComponentName) source.readParcelable(null, ComponentName.class));
         this.creationTime = source.readLong();
         this.mZenPolicy = (ZenPolicy) source.readParcelable(null, ZenPolicy.class);
         this.mModified = source.readInt() == 1;
         this.mPkg = source.readString();
         if (Flags.modesApi()) {
-            this.mDeviceEffects = (ZenDeviceEffects) source.readParcelable(null, ZenDeviceEffects.class);
+            this.mDeviceEffects =
+                    (ZenDeviceEffects) source.readParcelable(null, ZenDeviceEffects.class);
             this.mAllowManualInvocation = source.readBoolean();
             this.mIconResId = source.readInt();
             this.mTriggerDescription = getTrimmedString(source.readString(), 150);
@@ -239,7 +266,11 @@ public final class AutomaticZenRule implements Parcelable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int checkValidType(int type) {
-        Preconditions.checkArgument(type >= -1 && type <= 7, "Rule type must be one of TYPE_UNKNOWN, TYPE_OTHER, TYPE_SCHEDULE_TIME, TYPE_SCHEDULE_CALENDAR, TYPE_BEDTIME, TYPE_DRIVING, TYPE_IMMERSIVE, TYPE_THEATER, or TYPE_MANAGED");
+        Preconditions.checkArgument(
+                type >= -1 && type <= 7,
+                "Rule type must be one of TYPE_UNKNOWN, TYPE_OTHER, TYPE_SCHEDULE_TIME,"
+                        + " TYPE_SCHEDULE_CALENDAR, TYPE_BEDTIME, TYPE_DRIVING, TYPE_IMMERSIVE,"
+                        + " TYPE_THEATER, or TYPE_MANAGED");
         return type;
     }
 
@@ -275,9 +306,38 @@ public final class AutomaticZenRule implements Parcelable {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder(AutomaticZenRule.class.getSimpleName()).append('[').append("enabled=").append(this.enabled).append(",name=").append(this.name).append(",interruptionFilter=").append(this.interruptionFilter).append(",pkg=").append(this.mPkg).append(",conditionId=").append(this.conditionId).append(",owner=").append(this.owner).append(",configActivity=").append(this.configurationActivity).append(",creationTime=").append(this.creationTime).append(",mZenPolicy=").append(this.mZenPolicy);
+        StringBuilder sb =
+                new StringBuilder(AutomaticZenRule.class.getSimpleName())
+                        .append('[')
+                        .append("enabled=")
+                        .append(this.enabled)
+                        .append(",name=")
+                        .append(this.name)
+                        .append(",interruptionFilter=")
+                        .append(this.interruptionFilter)
+                        .append(",pkg=")
+                        .append(this.mPkg)
+                        .append(",conditionId=")
+                        .append(this.conditionId)
+                        .append(",owner=")
+                        .append(this.owner)
+                        .append(",configActivity=")
+                        .append(this.configurationActivity)
+                        .append(",creationTime=")
+                        .append(this.creationTime)
+                        .append(",mZenPolicy=")
+                        .append(this.mZenPolicy);
         if (Flags.modesApi()) {
-            sb.append(",deviceEffects=").append(this.mDeviceEffects).append(",allowManualInvocation=").append(this.mAllowManualInvocation).append(",iconResId=").append(this.mIconResId).append(",triggerDescription=").append(this.mTriggerDescription).append(",type=").append(this.mType);
+            sb.append(",deviceEffects=")
+                    .append(this.mDeviceEffects)
+                    .append(",allowManualInvocation=")
+                    .append(this.mAllowManualInvocation)
+                    .append(",iconResId=")
+                    .append(this.mIconResId)
+                    .append(",triggerDescription=")
+                    .append(this.mTriggerDescription)
+                    .append(",type=")
+                    .append(this.mType);
         }
         return sb.append(']').toString();
     }
@@ -304,25 +364,66 @@ public final class AutomaticZenRule implements Parcelable {
             return true;
         }
         AutomaticZenRule other = (AutomaticZenRule) o;
-        boolean finalEquals = other.enabled == this.enabled && other.mModified == this.mModified && Objects.equals(other.name, this.name) && other.interruptionFilter == this.interruptionFilter && Objects.equals(other.conditionId, this.conditionId) && Objects.equals(other.owner, this.owner) && Objects.equals(other.mZenPolicy, this.mZenPolicy) && Objects.equals(other.configurationActivity, this.configurationActivity) && Objects.equals(other.mPkg, this.mPkg) && other.creationTime == this.creationTime;
+        boolean finalEquals =
+                other.enabled == this.enabled
+                        && other.mModified == this.mModified
+                        && Objects.equals(other.name, this.name)
+                        && other.interruptionFilter == this.interruptionFilter
+                        && Objects.equals(other.conditionId, this.conditionId)
+                        && Objects.equals(other.owner, this.owner)
+                        && Objects.equals(other.mZenPolicy, this.mZenPolicy)
+                        && Objects.equals(other.configurationActivity, this.configurationActivity)
+                        && Objects.equals(other.mPkg, this.mPkg)
+                        && other.creationTime == this.creationTime;
         if (Flags.modesApi()) {
-            return finalEquals && Objects.equals(other.mDeviceEffects, this.mDeviceEffects) && other.mAllowManualInvocation == this.mAllowManualInvocation && other.mIconResId == this.mIconResId && Objects.equals(other.mTriggerDescription, this.mTriggerDescription) && other.mType == this.mType;
+            return finalEquals
+                    && Objects.equals(other.mDeviceEffects, this.mDeviceEffects)
+                    && other.mAllowManualInvocation == this.mAllowManualInvocation
+                    && other.mIconResId == this.mIconResId
+                    && Objects.equals(other.mTriggerDescription, this.mTriggerDescription)
+                    && other.mType == this.mType;
         }
         return finalEquals;
     }
 
     public int hashCode() {
         if (Flags.modesApi()) {
-            return Objects.hash(Boolean.valueOf(this.enabled), this.name, Integer.valueOf(this.interruptionFilter), this.conditionId, this.owner, this.configurationActivity, this.mZenPolicy, this.mDeviceEffects, Boolean.valueOf(this.mModified), Long.valueOf(this.creationTime), this.mPkg, Boolean.valueOf(this.mAllowManualInvocation), Integer.valueOf(this.mIconResId), this.mTriggerDescription, Integer.valueOf(this.mType));
+            return Objects.hash(
+                    Boolean.valueOf(this.enabled),
+                    this.name,
+                    Integer.valueOf(this.interruptionFilter),
+                    this.conditionId,
+                    this.owner,
+                    this.configurationActivity,
+                    this.mZenPolicy,
+                    this.mDeviceEffects,
+                    Boolean.valueOf(this.mModified),
+                    Long.valueOf(this.creationTime),
+                    this.mPkg,
+                    Boolean.valueOf(this.mAllowManualInvocation),
+                    Integer.valueOf(this.mIconResId),
+                    this.mTriggerDescription,
+                    Integer.valueOf(this.mType));
         }
-        return Objects.hash(Boolean.valueOf(this.enabled), this.name, Integer.valueOf(this.interruptionFilter), this.conditionId, this.owner, this.configurationActivity, this.mZenPolicy, Boolean.valueOf(this.mModified), Long.valueOf(this.creationTime), this.mPkg);
+        return Objects.hash(
+                Boolean.valueOf(this.enabled),
+                this.name,
+                Integer.valueOf(this.interruptionFilter),
+                this.conditionId,
+                this.owner,
+                this.configurationActivity,
+                this.mZenPolicy,
+                Boolean.valueOf(this.mModified),
+                Long.valueOf(this.creationTime),
+                this.mPkg);
     }
 
     private static ComponentName getTrimmedComponentName(ComponentName cn) {
         if (cn == null) {
             return null;
         }
-        return new ComponentName(getTrimmedString(cn.getPackageName()), getTrimmedString(cn.getClassName()));
+        return new ComponentName(
+                getTrimmedString(cn.getPackageName()), getTrimmedString(cn.getClassName()));
     }
 
     private static String getTrimmedString(String input) {
@@ -464,7 +565,15 @@ public final class AutomaticZenRule implements Parcelable {
         }
 
         public AutomaticZenRule build() {
-            AutomaticZenRule rule = new AutomaticZenRule(this.mName, this.mOwner, this.mConfigurationActivity, this.mConditionId, this.mPolicy, this.mInterruptionFilter, this.mEnabled);
+            AutomaticZenRule rule =
+                    new AutomaticZenRule(
+                            this.mName,
+                            this.mOwner,
+                            this.mConfigurationActivity,
+                            this.mConditionId,
+                            this.mPolicy,
+                            this.mInterruptionFilter,
+                            this.mEnabled);
             rule.mDeviceEffects = this.mDeviceEffects;
             rule.creationTime = this.mCreationTime;
             rule.mType = this.mType;

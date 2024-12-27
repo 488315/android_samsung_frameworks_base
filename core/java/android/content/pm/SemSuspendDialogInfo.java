@@ -3,23 +3,26 @@ package android.content.pm;
 import android.content.res.ResourceId;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes.dex */
 public final class SemSuspendDialogInfo implements Parcelable {
-    public static final Parcelable.Creator<SemSuspendDialogInfo> CREATOR = new Parcelable.Creator<SemSuspendDialogInfo>() { // from class: android.content.pm.SemSuspendDialogInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSuspendDialogInfo createFromParcel(Parcel source) {
-            return new SemSuspendDialogInfo(source);
-        }
+    public static final Parcelable.Creator<SemSuspendDialogInfo> CREATOR =
+            new Parcelable.Creator<SemSuspendDialogInfo>() { // from class:
+                // android.content.pm.SemSuspendDialogInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSuspendDialogInfo createFromParcel(Parcel source) {
+                    return new SemSuspendDialogInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSuspendDialogInfo[] newArray(int size) {
-            return new SemSuspendDialogInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSuspendDialogInfo[] newArray(int size) {
+                    return new SemSuspendDialogInfo[size];
+                }
+            };
     static final int ID_NULL = 0;
     private final String mDialogMessage;
     private final int mDialogMessageResId;

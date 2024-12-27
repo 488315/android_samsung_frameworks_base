@@ -6,21 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class GsiProgress implements Parcelable {
-    public static final Parcelable.Creator<GsiProgress> CREATOR = new Parcelable.Creator<GsiProgress>() { // from class: android.gsi.GsiProgress.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GsiProgress createFromParcel(Parcel _aidl_source) {
-            GsiProgress _aidl_out = new GsiProgress();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GsiProgress> CREATOR =
+            new Parcelable.Creator<GsiProgress>() { // from class: android.gsi.GsiProgress.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GsiProgress createFromParcel(Parcel _aidl_source) {
+                    GsiProgress _aidl_out = new GsiProgress();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GsiProgress[] newArray(int _aidl_size) {
-            return new GsiProgress[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GsiProgress[] newArray(int _aidl_size) {
+                    return new GsiProgress[_aidl_size];
+                }
+            };
     public String step;
     public int status = 0;
     public long bytes_processed = 0;

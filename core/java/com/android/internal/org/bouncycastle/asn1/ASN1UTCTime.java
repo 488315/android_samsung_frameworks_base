@@ -1,8 +1,10 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import android.hardware.gnss.GnssSignalType;
+
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,10 +25,12 @@ public class ASN1UTCTime extends ASN1Primitive {
             try {
                 return (ASN1UTCTime) fromByteArray((byte[]) obj);
             } catch (Exception e) {
-                throw new IllegalArgumentException("encoding error in getInstance: " + e.toString());
+                throw new IllegalArgumentException(
+                        "encoding error in getInstance: " + e.toString());
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public static ASN1UTCTime getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -96,7 +100,9 @@ public class ASN1UTCTime extends ASN1Primitive {
         if (index == stime.length() - 3) {
             d = d + "00";
         }
-        return index == 10 ? d.substring(0, 10) + "00GMT" + d.substring(10, 13) + ":" + d.substring(13, 15) : d.substring(0, 12) + "GMT" + d.substring(12, 15) + ":" + d.substring(15, 17);
+        return index == 10
+                ? d.substring(0, 10) + "00GMT" + d.substring(10, 13) + ":" + d.substring(13, 15)
+                : d.substring(0, 12) + "GMT" + d.substring(12, 15) + ":" + d.substring(15, 17);
     }
 
     public String getAdjustedTime() {
@@ -135,7 +141,8 @@ public class ASN1UTCTime extends ASN1Primitive {
         return Arrays.areEqual(this.time, ((ASN1UTCTime) o).time);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         return Arrays.hashCode(this.time);
     }

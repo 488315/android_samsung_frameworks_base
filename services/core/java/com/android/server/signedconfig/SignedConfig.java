@@ -2,15 +2,17 @@ package com.android.server.signedconfig;
 
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -53,7 +55,8 @@ public final class SignedConfig {
         }
     }
 
-    public static PerSdkConfig parsePerSdkConfig(JSONObject jSONObject, Set set, Map map) throws JSONException, InvalidConfigException {
+    public static PerSdkConfig parsePerSdkConfig(JSONObject jSONObject, Set set, Map map)
+            throws JSONException, InvalidConfigException {
         int i = jSONObject.getInt("min_sdk");
         int i2 = jSONObject.getInt("max_sdk");
         JSONObject jSONObject2 = jSONObject.getJSONObject("values");
@@ -62,12 +65,16 @@ public final class SignedConfig {
             Object obj = jSONObject2.get(str);
             String obj2 = (obj == JSONObject.NULL || obj == null) ? null : obj.toString();
             if (!set.contains(str)) {
-                throw new InvalidConfigException(XmlUtils$$ExternalSyntheticOutline0.m("Config key ", str, " is not allowed"));
+                throw new InvalidConfigException(
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "Config key ", str, " is not allowed"));
             }
             if (map.containsKey(str)) {
                 Map map2 = (Map) map.get(str);
                 if (!map2.containsKey(obj2)) {
-                    StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Config key ", str, " contains unsupported value ");
+                    StringBuilder m =
+                            DumpUtils$$ExternalSyntheticOutline0.m(
+                                    "Config key ", str, " contains unsupported value ");
                     m.append((Object) (obj2 == null ? "null" : "\"" + ((Object) obj2) + "\""));
                     throw new InvalidConfigException(m.toString());
                 }

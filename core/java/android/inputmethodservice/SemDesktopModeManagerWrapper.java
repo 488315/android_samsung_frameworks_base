@@ -9,13 +9,17 @@ import android.util.Log;
 import android.util.Printer;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 
 /* loaded from: classes2.dex */
 final class SemDesktopModeManagerWrapper {
-    static final Uri DEX_CONTENT_URI = Uri.parse("content://0@com.sec.android.desktopmode.uiservice.SettingsProvider/settings");
-    static final Uri DEX_CONTENT_URI_FOR_ON_CHANGE = Uri.parse("content://com.sec.android.desktopmode.uiservice.SettingsProvider/settings");
+    static final Uri DEX_CONTENT_URI =
+            Uri.parse(
+                    "content://0@com.sec.android.desktopmode.uiservice.SettingsProvider/settings");
+    static final Uri DEX_CONTENT_URI_FOR_ON_CHANGE =
+            Uri.parse("content://com.sec.android.desktopmode.uiservice.SettingsProvider/settings");
     static final String SETTINGS_KEY_KEYBOARD_DEX = "keyboard_dex";
     static final String SETTINGS_KEY_TOUCH_KEYBOARD = "touch_keyboard";
     static final String TAG = "InputMethodService";
@@ -24,7 +28,8 @@ final class SemDesktopModeManagerWrapper {
     final SemDesktopModeManager mSemDesktopModeManager;
 
     SemDesktopModeManagerWrapper(Context context) {
-        this.mSemDesktopModeManager = (SemDesktopModeManager) context.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
+        this.mSemDesktopModeManager =
+                (SemDesktopModeManager) context.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
         this.mImm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
@@ -47,14 +52,23 @@ final class SemDesktopModeManagerWrapper {
     void updateClientDisplayId(EditorInfo editorInfo) {
         if (editorInfo != null && editorInfo.extras != null) {
             int displayId = editorInfo.extras.getInt("displayId");
-            Log.d(TAG, "updateClientDisplayId: displayId=" + displayId + ", mClientDisplayId=" + this.mClientDisplayId);
+            Log.d(
+                    TAG,
+                    "updateClientDisplayId: displayId="
+                            + displayId
+                            + ", mClientDisplayId="
+                            + this.mClientDisplayId);
             this.mClientDisplayId = displayId;
         }
     }
 
     boolean getOnscreenKeyboardForDEXValue() {
-        boolean showImeWithHardKeyboardForDEX = this.mImm.getDexSettingsValue(SETTINGS_KEY_KEYBOARD_DEX, "0");
-        Log.d(TAG, "getOnscreenKeyboardForDEXValue: showImeWithHardKeyboardForDEX() : " + showImeWithHardKeyboardForDEX);
+        boolean showImeWithHardKeyboardForDEX =
+                this.mImm.getDexSettingsValue(SETTINGS_KEY_KEYBOARD_DEX, "0");
+        Log.d(
+                TAG,
+                "getOnscreenKeyboardForDEXValue: showImeWithHardKeyboardForDEX() : "
+                        + showImeWithHardKeyboardForDEX);
         return showImeWithHardKeyboardForDEX;
     }
 
@@ -106,12 +120,17 @@ final class SemDesktopModeManagerWrapper {
 
     private boolean isUiServiceExist(Context context) {
         try {
-            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(SemDesktopModeManager.UI_SERVICE_PACKAGE, 0);
+            ApplicationInfo appInfo =
+                    context.getPackageManager()
+                            .getApplicationInfo(SemDesktopModeManager.UI_SERVICE_PACKAGE, 0);
             if (appInfo != null) {
                 return appInfo.enabled;
             }
         } catch (PackageManager.NameNotFoundException e) {
-            Log.w(TAG, "isPackageExists failed: unknown package com.sec.android.desktopmode.uiservice");
+            Log.w(
+                    TAG,
+                    "isPackageExists failed: unknown package"
+                            + " com.sec.android.desktopmode.uiservice");
         }
         return false;
     }

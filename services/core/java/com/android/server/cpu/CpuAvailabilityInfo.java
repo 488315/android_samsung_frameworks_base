@@ -1,6 +1,7 @@
 package com.android.server.cpu;
 
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,14 +29,35 @@ public final class CpuAvailabilityInfo {
             return false;
         }
         CpuAvailabilityInfo cpuAvailabilityInfo = (CpuAvailabilityInfo) obj;
-        return this.cpuset == cpuAvailabilityInfo.cpuset && this.dataTimestampUptimeMillis == cpuAvailabilityInfo.dataTimestampUptimeMillis && this.latestAvgAvailabilityPercent == cpuAvailabilityInfo.latestAvgAvailabilityPercent && this.pastNMillisAvgAvailabilityPercent == cpuAvailabilityInfo.pastNMillisAvgAvailabilityPercent && this.pastNMillisDuration == cpuAvailabilityInfo.pastNMillisDuration;
+        return this.cpuset == cpuAvailabilityInfo.cpuset
+                && this.dataTimestampUptimeMillis == cpuAvailabilityInfo.dataTimestampUptimeMillis
+                && this.latestAvgAvailabilityPercent
+                        == cpuAvailabilityInfo.latestAvgAvailabilityPercent
+                && this.pastNMillisAvgAvailabilityPercent
+                        == cpuAvailabilityInfo.pastNMillisAvgAvailabilityPercent
+                && this.pastNMillisDuration == cpuAvailabilityInfo.pastNMillisDuration;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(this.cpuset), Long.valueOf(this.dataTimestampUptimeMillis), Integer.valueOf(this.latestAvgAvailabilityPercent), Integer.valueOf(this.pastNMillisAvgAvailabilityPercent), Long.valueOf(this.pastNMillisDuration));
+        return Objects.hash(
+                Integer.valueOf(this.cpuset),
+                Long.valueOf(this.dataTimestampUptimeMillis),
+                Integer.valueOf(this.latestAvgAvailabilityPercent),
+                Integer.valueOf(this.pastNMillisAvgAvailabilityPercent),
+                Long.valueOf(this.pastNMillisDuration));
     }
 
     public final String toString() {
-        return "CpuAvailabilityInfo{cpuset = " + this.cpuset + ", dataTimestampUptimeMillis = " + this.dataTimestampUptimeMillis + ", latestAvgAvailabilityPercent = " + this.latestAvgAvailabilityPercent + ", pastNMillisAvgAvailabilityPercent = " + this.pastNMillisAvgAvailabilityPercent + ", pastNMillisDuration = " + this.pastNMillisDuration + '}';
+        return "CpuAvailabilityInfo{cpuset = "
+                + this.cpuset
+                + ", dataTimestampUptimeMillis = "
+                + this.dataTimestampUptimeMillis
+                + ", latestAvgAvailabilityPercent = "
+                + this.latestAvgAvailabilityPercent
+                + ", pastNMillisAvgAvailabilityPercent = "
+                + this.pastNMillisAvgAvailabilityPercent
+                + ", pastNMillisDuration = "
+                + this.pastNMillisDuration
+                + '}';
     }
 }

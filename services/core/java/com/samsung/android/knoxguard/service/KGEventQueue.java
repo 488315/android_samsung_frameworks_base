@@ -6,7 +6,6 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.os.MessageQueue;
 import android.util.Slog;
-import com.samsung.android.knoxguard.service.KGEventHandler;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -28,14 +27,17 @@ public final class KGEventQueue {
 
     public final void addIdleHandler() {
         if (this.idleHandler == null) {
-            this.idleHandler = new MessageQueue.IdleHandler() { // from class: com.samsung.android.knoxguard.service.KGEventQueue.1
-                @Override // android.os.MessageQueue.IdleHandler
-                public final boolean queueIdle() {
-                    Slog.d(KGEventQueue.TAG, "@queueIdle called");
-                    KGEventQueue.this.stopThread();
-                    return false;
-                }
-            };
+            this.idleHandler =
+                    new MessageQueue
+                            .IdleHandler() { // from class:
+                                             // com.samsung.android.knoxguard.service.KGEventQueue.1
+                        @Override // android.os.MessageQueue.IdleHandler
+                        public final boolean queueIdle() {
+                            Slog.d(KGEventQueue.TAG, "@queueIdle called");
+                            KGEventQueue.this.stopThread();
+                            return false;
+                        }
+                    };
             this.eventHandlerThread.getLooper().getQueue().addIdleHandler(this.idleHandler);
         }
     }
@@ -44,7 +46,8 @@ public final class KGEventQueue {
         enqueueEvent(context, systemEvent, null);
     }
 
-    public final void enqueueEvent(Context context, KGEventHandler.SystemEvent systemEvent, Bundle bundle) {
+    public final void enqueueEvent(
+            Context context, KGEventHandler.SystemEvent systemEvent, Bundle bundle) {
         synchronized (this.mEventLock) {
             try {
                 if (context == null || systemEvent == null) {

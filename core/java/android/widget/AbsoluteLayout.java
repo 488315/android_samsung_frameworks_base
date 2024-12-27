@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -20,7 +20,8 @@ public class AbsoluteLayout extends ViewGroup {
         public int x;
         public int y;
 
-        public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<LayoutParams> {
+        public final class InspectionCompanion
+                implements android.view.inspector.InspectionCompanion<LayoutParams> {
             private int mLayout_xId;
             private int mLayout_yId;
             private boolean mPropertiesMapped = false;
@@ -62,7 +63,16 @@ public class AbsoluteLayout extends ViewGroup {
 
         @Override // android.view.ViewGroup.LayoutParams
         public String debug(String output) {
-            return output + "Absolute.LayoutParams={width=" + sizeToString(this.width) + ", height=" + sizeToString(this.height) + " x=" + this.x + " y=" + this.y + "}";
+            return output
+                    + "Absolute.LayoutParams={width="
+                    + sizeToString(this.width)
+                    + ", height="
+                    + sizeToString(this.height)
+                    + " x="
+                    + this.x
+                    + " y="
+                    + this.y
+                    + "}";
         }
     }
 
@@ -99,7 +109,17 @@ public class AbsoluteLayout extends ViewGroup {
             }
         }
         int i2 = this.mPaddingLeft;
-        setMeasuredDimension(resolveSizeAndState(Math.max(maxWidth + i2 + this.mPaddingRight, getSuggestedMinimumWidth()), widthMeasureSpec, 0), resolveSizeAndState(Math.max(maxHeight + this.mPaddingTop + this.mPaddingBottom, getSuggestedMinimumHeight()), heightMeasureSpec, 0));
+        setMeasuredDimension(
+                resolveSizeAndState(
+                        Math.max(maxWidth + i2 + this.mPaddingRight, getSuggestedMinimumWidth()),
+                        widthMeasureSpec,
+                        0),
+                resolveSizeAndState(
+                        Math.max(
+                                maxHeight + this.mPaddingTop + this.mPaddingBottom,
+                                getSuggestedMinimumHeight()),
+                        heightMeasureSpec,
+                        0));
     }
 
     @Override // android.view.ViewGroup
@@ -116,7 +136,11 @@ public class AbsoluteLayout extends ViewGroup {
                 LayoutParams lp = (LayoutParams) child.getLayoutParams();
                 int childLeft = this.mPaddingLeft + lp.x;
                 int childTop = this.mPaddingTop + lp.y;
-                child.layout(childLeft, childTop, child.getMeasuredWidth() + childLeft, child.getMeasuredHeight() + childTop);
+                child.layout(
+                        childLeft,
+                        childTop,
+                        child.getMeasuredWidth() + childLeft,
+                        child.getMeasuredHeight() + childTop);
             }
         }
     }

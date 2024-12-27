@@ -5,19 +5,24 @@ import android.app.admin.PolicyValue;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class BundlePolicySerializer extends PolicySerializer {
-    public static void readBundle(Bundle bundle, ArrayList arrayList, TypedXmlPullParser typedXmlPullParser) {
-        if (typedXmlPullParser.getEventType() == 2 && typedXmlPullParser.getName().equals("entry")) {
+    public static void readBundle(
+            Bundle bundle, ArrayList arrayList, TypedXmlPullParser typedXmlPullParser) {
+        if (typedXmlPullParser.getEventType() == 2
+                && typedXmlPullParser.getName().equals("entry")) {
             String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "key");
             String attributeValue2 = typedXmlPullParser.getAttributeValue((String) null, "type");
             int attributeInt = typedXmlPullParser.getAttributeInt((String) null, "m", -1);
@@ -70,7 +75,9 @@ public final class BundlePolicySerializer extends PolicySerializer {
                 }
                 arrayList2.add(bundle3);
             }
-            bundle.putParcelableArray(attributeValue, (Parcelable[]) arrayList2.toArray(new Bundle[arrayList2.size()]));
+            bundle.putParcelableArray(
+                    attributeValue,
+                    (Parcelable[]) arrayList2.toArray(new Bundle[arrayList2.size()]));
         }
     }
 
@@ -100,7 +107,8 @@ public final class BundlePolicySerializer extends PolicySerializer {
                     while (i < length) {
                         Parcelable parcelable = parcelableArr[i];
                         if (!(parcelable instanceof Bundle)) {
-                            throw new IllegalArgumentException("bundle-array can only hold Bundles");
+                            throw new IllegalArgumentException(
+                                    "bundle-array can only hold Bundles");
                         }
                         typedXmlSerializer.startTag((String) null, "entry");
                         typedXmlSerializer.attribute((String) null, "type", "B");

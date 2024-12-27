@@ -12,22 +12,22 @@ public interface ISemWifiAiService extends IInterface {
 
     void nsdTerminate() throws RemoteException;
 
-    void serviceTypeQuery(float[][] fArr, String[] strArr, int[] iArr, int i) throws RemoteException;
+    void serviceTypeQuery(float[][] fArr, String[] strArr, int[] iArr, int i)
+            throws RemoteException;
 
     void toggleDebugMode(boolean z) throws RemoteException;
 
     public static class Default implements ISemWifiAiService {
         @Override // com.samsung.android.wifi.ai.ISemWifiAiService
-        public void nsdTerminate() throws RemoteException {
-        }
+        public void nsdTerminate() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ai.ISemWifiAiService
-        public void serviceTypeQuery(float[][] trfDataArr, String[] convArr, int[] timeStepArr, int convCnt) throws RemoteException {
-        }
+        public void serviceTypeQuery(
+                float[][] trfDataArr, String[] convArr, int[] timeStepArr, int convCnt)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ai.ISemWifiAiService
-        public void toggleDebugMode(boolean debug) throws RemoteException {
-        }
+        public void toggleDebugMode(boolean debug) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +35,7 @@ public interface ISemWifiAiService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemWifiAiService {
+    public abstract static class Stub extends Binder implements ISemWifiAiService {
         static final int TRANSACTION_nsdTerminate = 1;
         static final int TRANSACTION_serviceTypeQuery = 2;
         static final int TRANSACTION_toggleDebugMode = 3;
@@ -79,7 +79,8 @@ public interface ISemWifiAiService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemWifiAiService.DESCRIPTOR);
             }
@@ -137,7 +138,9 @@ public interface ISemWifiAiService extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ai.ISemWifiAiService
-            public void serviceTypeQuery(float[][] trfDataArr, String[] convArr, int[] timeStepArr, int convCnt) throws RemoteException {
+            public void serviceTypeQuery(
+                    float[][] trfDataArr, String[] convArr, int[] timeStepArr, int convCnt)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiAiService.DESCRIPTOR);

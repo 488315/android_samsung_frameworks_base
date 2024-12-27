@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AudioMixerAttributesInternal implements Parcelable {
-    public static final Parcelable.Creator<AudioMixerAttributesInternal> CREATOR = new Parcelable.Creator<AudioMixerAttributesInternal>() { // from class: android.media.AudioMixerAttributesInternal.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioMixerAttributesInternal createFromParcel(Parcel _aidl_source) {
-            AudioMixerAttributesInternal _aidl_out = new AudioMixerAttributesInternal();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioMixerAttributesInternal> CREATOR =
+            new Parcelable.Creator<AudioMixerAttributesInternal>() { // from class:
+                // android.media.AudioMixerAttributesInternal.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioMixerAttributesInternal createFromParcel(Parcel _aidl_source) {
+                    AudioMixerAttributesInternal _aidl_out = new AudioMixerAttributesInternal();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioMixerAttributesInternal[] newArray(int _aidl_size) {
-            return new AudioMixerAttributesInternal[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioMixerAttributesInternal[] newArray(int _aidl_size) {
+                    return new AudioMixerAttributesInternal[_aidl_size];
+                }
+            };
     public AudioConfigBase config;
     public int mixerBehavior;
 

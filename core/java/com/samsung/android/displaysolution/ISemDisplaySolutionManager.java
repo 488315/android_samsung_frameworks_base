@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISemDisplaySolutionManager extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.displaysolution.ISemDisplaySolutionManager";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.displaysolution.ISemDisplaySolutionManager";
 
     float getAlphaMaskLevel(float f, float f2, float f3) throws RemoteException;
 
@@ -126,7 +127,9 @@ public interface ISemDisplaySolutionManager extends IInterface {
         }
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public float getAlphaMaskLevel(float CurrentPlatformBrightnessValue, float FingerPrintPlatformValue, float br_ctrl) throws RemoteException {
+        public float getAlphaMaskLevel(
+                float CurrentPlatformBrightnessValue, float FingerPrintPlatformValue, float br_ctrl)
+                throws RemoteException {
             return 0.0f;
         }
 
@@ -136,100 +139,80 @@ public interface ISemDisplaySolutionManager extends IInterface {
         }
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setHighDynamicRangeMode(boolean enable) throws RemoteException {
-        }
+        public void setHighDynamicRangeMode(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void updateAutoBrightnessLux(int id, int lux) throws RemoteException {
-        }
+        public void updateAutoBrightnessLux(int id, int lux) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setIRCompensationMode(boolean enable) throws RemoteException {
-        }
+        public void setIRCompensationMode(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void onDetailVeiwStateChanged(boolean enable) throws RemoteException {
-        }
+        public void onDetailVeiwStateChanged(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void onAutoCurrentLimitStateChanged(boolean enable) throws RemoteException {
-        }
+        public void onAutoCurrentLimitStateChanged(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void onAutoCurrentLimitStateChangedWithBrightness(boolean enable) throws RemoteException {
-        }
+        public void onAutoCurrentLimitStateChangedWithBrightness(boolean enable)
+                throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void onAutoCurrentLimitStateChangedInt(int value) throws RemoteException {
-        }
+        public void onAutoCurrentLimitStateChangedInt(int value) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void onAutoCurrentLimitOffMode(boolean enable) throws RemoteException {
-        }
+        public void onAutoCurrentLimitOffMode(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void onBurnInPreventionDisabled(boolean enable) throws RemoteException {
-        }
+        public void onBurnInPreventionDisabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setVideoModeEnable(boolean enable) throws RemoteException {
-        }
+        public void setVideoModeEnable(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setGalleryModeEnable(boolean enable) throws RemoteException {
-        }
+        public void setGalleryModeEnable(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setCameraModeEnable(boolean enable) throws RemoteException {
-        }
+        public void setCameraModeEnable(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setDouAppModeEnable(boolean enable) throws RemoteException {
-        }
+        public void setDouAppModeEnable(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setAutoCurrentLimitOffModeEnabled(boolean enable) throws RemoteException {
-        }
+        public void setAutoCurrentLimitOffModeEnabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setMdnieScenarioControlServiceEnable(boolean enable) throws RemoteException {
-        }
+        public void setMdnieScenarioControlServiceEnable(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setScreenBrightnessForPreview(int settingValue) throws RemoteException {
-        }
+        public void setScreenBrightnessForPreview(int settingValue) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setMultipleScreenBrightness(String name) throws RemoteException {
-        }
+        public void setMultipleScreenBrightness(String name) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setOnPixelRatioValueForPMS(String value) throws RemoteException {
-        }
+        public void setOnPixelRatioValueForPMS(String value) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setMultipleScreenBrightnessValueForHDR(float scalefactorValueHDR) throws RemoteException {
-        }
+        public void setMultipleScreenBrightnessValueForHDR(float scalefactorValueHDR)
+                throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setEyeComfortWeightingFactor(float scaleValue) throws RemoteException {
-        }
+        public void setEyeComfortWeightingFactor(float scaleValue) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setVideoEnhancerSettingState(String name, int state) throws RemoteException {
-        }
+        public void setVideoEnhancerSettingState(String name, int state) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setSleepPatternBLF(String mWeekType, long mBedtime, long mWakeupTime, float mConfidence) throws RemoteException {
-        }
+        public void setSleepPatternBLF(
+                String mWeekType, long mBedtime, long mWakeupTime, float mConfidence)
+                throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setBlfEnableTimeBySchedule(boolean enable, int index) throws RemoteException {
-        }
+        public void setBlfEnableTimeBySchedule(boolean enable, int index) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setmDNIeModeState(String mode) throws RemoteException {
-        }
+        public void setmDNIeModeState(String mode) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
         public boolean isBlueLightFilterScheduledTime() throws RemoteException {
@@ -237,8 +220,7 @@ public interface ISemDisplaySolutionManager extends IInterface {
         }
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-        public void setEadIndexOffset(int offset) throws RemoteException {
-        }
+        public void setEadIndexOffset(int offset) throws RemoteException {}
 
         @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
         public int getBlfAdaptiveCurrentIndex() throws RemoteException {
@@ -251,7 +233,7 @@ public interface ISemDisplaySolutionManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemDisplaySolutionManager {
+    public abstract static class Stub extends Binder implements ISemDisplaySolutionManager {
         static final int TRANSACTION_getAlphaMaskLevel = 9;
         static final int TRANSACTION_getAutoCurrentLimitOffModeEnabled = 5;
         static final int TRANSACTION_getBlfAdaptiveCurrentIndex = 37;
@@ -397,7 +379,8 @@ public interface ISemDisplaySolutionManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemDisplaySolutionManager.DESCRIPTOR);
             }
@@ -782,7 +765,11 @@ public interface ISemDisplaySolutionManager extends IInterface {
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-            public float getAlphaMaskLevel(float CurrentPlatformBrightnessValue, float FingerPrintPlatformValue, float br_ctrl) throws RemoteException {
+            public float getAlphaMaskLevel(
+                    float CurrentPlatformBrightnessValue,
+                    float FingerPrintPlatformValue,
+                    float br_ctrl)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -893,7 +880,8 @@ public interface ISemDisplaySolutionManager extends IInterface {
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-            public void onAutoCurrentLimitStateChangedWithBrightness(boolean enable) throws RemoteException {
+            public void onAutoCurrentLimitStateChangedWithBrightness(boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1028,7 +1016,8 @@ public interface ISemDisplaySolutionManager extends IInterface {
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-            public void setMdnieScenarioControlServiceEnable(boolean enable) throws RemoteException {
+            public void setMdnieScenarioControlServiceEnable(boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1088,7 +1077,8 @@ public interface ISemDisplaySolutionManager extends IInterface {
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-            public void setMultipleScreenBrightnessValueForHDR(float scalefactorValueHDR) throws RemoteException {
+            public void setMultipleScreenBrightnessValueForHDR(float scalefactorValueHDR)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1118,7 +1108,8 @@ public interface ISemDisplaySolutionManager extends IInterface {
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-            public void setVideoEnhancerSettingState(String name, int state) throws RemoteException {
+            public void setVideoEnhancerSettingState(String name, int state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1134,7 +1125,9 @@ public interface ISemDisplaySolutionManager extends IInterface {
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-            public void setSleepPatternBLF(String mWeekType, long mBedtime, long mWakeupTime, float mConfidence) throws RemoteException {
+            public void setSleepPatternBLF(
+                    String mWeekType, long mBedtime, long mWakeupTime, float mConfidence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1152,7 +1145,8 @@ public interface ISemDisplaySolutionManager extends IInterface {
             }
 
             @Override // com.samsung.android.displaysolution.ISemDisplaySolutionManager
-            public void setBlfEnableTimeBySchedule(boolean enable, int index) throws RemoteException {
+            public void setBlfEnableTimeBySchedule(boolean enable, int index)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

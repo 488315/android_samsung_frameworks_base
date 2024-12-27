@@ -13,7 +13,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.knox.IBasicCommand;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -28,7 +28,15 @@ public interface ISemPersonaManager extends IInterface {
 
     boolean appliedPasswordPolicy(int i) throws RemoteException;
 
-    boolean bindCoreServiceAsUser(ComponentName componentName, IApplicationThread iApplicationThread, IBinder iBinder, Intent intent, IServiceConnection iServiceConnection, int i, int i2) throws RemoteException;
+    boolean bindCoreServiceAsUser(
+            ComponentName componentName,
+            IApplicationThread iApplicationThread,
+            IBinder iBinder,
+            Intent intent,
+            IServiceConnection iServiceConnection,
+            int i,
+            int i2)
+            throws RemoteException;
 
     boolean broadcastIntentThroughPersona(Intent intent, int i) throws RemoteException;
 
@@ -132,7 +140,8 @@ public interface ISemPersonaManager extends IInterface {
 
     void refreshLockTimer(int i) throws RemoteException;
 
-    boolean registerSystemPersonaObserver(ISystemPersonaObserver iSystemPersonaObserver) throws RemoteException;
+    boolean registerSystemPersonaObserver(ISystemPersonaObserver iSystemPersonaObserver)
+            throws RemoteException;
 
     int resetUCMProfile() throws RemoteException;
 
@@ -179,18 +188,19 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public List<UserInfo> getProfiles(int userHandle, boolean includeParent) throws RemoteException {
+        public List<UserInfo> getProfiles(int userHandle, boolean includeParent)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public boolean registerSystemPersonaObserver(ISystemPersonaObserver mISystemPersonaObserver) throws RemoteException {
+        public boolean registerSystemPersonaObserver(ISystemPersonaObserver mISystemPersonaObserver)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void setFocusedLauncherId(int userId) throws RemoteException {
-        }
+        public void setFocusedLauncherId(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
         public boolean isFotaUpgradeVersionChanged() throws RemoteException {
@@ -213,7 +223,8 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public String getWorkspaceName(UserInfo uInfo, boolean isWorkProfile) throws RemoteException {
+        public String getWorkspaceName(UserInfo uInfo, boolean isWorkProfile)
+                throws RemoteException {
             return null;
         }
 
@@ -243,7 +254,8 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public boolean isPossibleAddAppsToContainer(String pkgName, int personaId) throws RemoteException {
+        public boolean isPossibleAddAppsToContainer(String pkgName, int personaId)
+                throws RemoteException {
             return false;
         }
 
@@ -263,16 +275,18 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public List getUpdatedListWithAppSeparation(List<ResolveInfo> originalList) throws RemoteException {
+        public List getUpdatedListWithAppSeparation(List<ResolveInfo> originalList)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void notifyApplicationChanged(String packageName, int userId) throws RemoteException {
-        }
+        public void notifyApplicationChanged(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public boolean isKnoxWindowExist(int personaId, int visibleFlag, int stackId) throws RemoteException {
+        public boolean isKnoxWindowExist(int personaId, int visibleFlag, int stackId)
+                throws RemoteException {
             return false;
         }
 
@@ -292,7 +306,8 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public boolean broadcastIntentThroughPersona(Intent intent, int userId) throws RemoteException {
+        public boolean broadcastIntentThroughPersona(Intent intent, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -317,8 +332,8 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void addAppPackageNameToAllowList(int containerId, List<String> appInstallationList) throws RemoteException {
-        }
+        public void addAppPackageNameToAllowList(int containerId, List<String> appInstallationList)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
         public int getFocusedLauncherId() throws RemoteException {
@@ -346,36 +361,44 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public byte[] getKnoxIcon(String packageName, String className, int userId) throws RemoteException {
+        public byte[] getKnoxIcon(String packageName, String className, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public boolean setPackageSettingInstalled(String packageName, boolean installed, int userId) throws RemoteException {
+        public boolean setPackageSettingInstalled(String packageName, boolean installed, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void refreshLockTimer(int userId) throws RemoteException {
-        }
+        public void refreshLockTimer(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public Bundle sendProxyMessage(String category, String name, Bundle args) throws RemoteException {
+        public Bundle sendProxyMessage(String category, String name, Bundle args)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void hideMultiWindows(int userId) throws RemoteException {
-        }
+        public void hideMultiWindows(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public boolean bindCoreServiceAsUser(ComponentName admin, IApplicationThread caller, IBinder token, Intent service, IServiceConnection connection, int flags, int targetUserId) throws RemoteException {
+        public boolean bindCoreServiceAsUser(
+                ComponentName admin,
+                IApplicationThread caller,
+                IBinder token,
+                Intent service,
+                IServiceConnection connection,
+                int flags,
+                int targetUserId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void sendRequestKeyStatus(int containerId) throws RemoteException {
-        }
+        public void sendRequestKeyStatus(int containerId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
         public List<Bundle> getMoveToKnoxMenuList(int appUserId) throws RemoteException {
@@ -388,12 +411,14 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public boolean isKnoxProfileActivePasswordSufficientForParent(int userId) throws RemoteException {
+        public boolean isKnoxProfileActivePasswordSufficientForParent(int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public boolean isPasswordSufficientAfterKnoxProfileUnification(int profileUser) throws RemoteException {
+        public boolean isPasswordSufficientAfterKnoxProfileUnification(int profileUser)
+                throws RemoteException {
             return false;
         }
 
@@ -433,17 +458,20 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public String getRCPDataPolicy(String appName, String policyProperty) throws RemoteException {
+        public String getRCPDataPolicy(String appName, String policyProperty)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public String getRCPDataPolicyForUser(int userId, String appName, String policyProperty) throws RemoteException {
+        public String getRCPDataPolicyForUser(int userId, String appName, String policyProperty)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public boolean setRCPDataPolicy(String appName, String policyProperty, String value) throws RemoteException {
+        public boolean setRCPDataPolicy(String appName, String policyProperty, String value)
+                throws RemoteException {
             return false;
         }
 
@@ -463,8 +491,7 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void logDpmsKA(Bundle b) throws RemoteException {
-        }
+        public void logDpmsKA(Bundle b) throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
         public boolean isShareClipboardDataToContainerAllowed(int userId) throws RemoteException {
@@ -477,17 +504,16 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public boolean setSecureFolderPolicy(String key, List<String> pkgList, int userId) throws RemoteException {
+        public boolean setSecureFolderPolicy(String key, List<String> pkgList, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void CMFALock(int userId) throws RemoteException {
-        }
+        public void CMFALock(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void CMFAUnLock(int userId) throws RemoteException {
-        }
+        public void CMFAUnLock(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
         public Bundle getSeparationConfigfromCache() throws RemoteException {
@@ -495,12 +521,11 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void setAppSeparationDefaultPolicy(int userId) throws RemoteException {
-        }
+        public void setAppSeparationDefaultPolicy(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void updateProfileActivityTimeFromKnox(int userId, long eventTime) throws RemoteException {
-        }
+        public void updateProfileActivityTimeFromKnox(int userId, long eventTime)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
         public boolean isContainerCorePackageUID(int uid) throws RemoteException {
@@ -508,16 +533,13 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void startCountrySelectionActivity(boolean isUnified) throws RemoteException {
-        }
+        public void startCountrySelectionActivity(boolean isUnified) throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void startTermsActivity() throws RemoteException {
-        }
+        public void startTermsActivity() throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
-        public void postPwdChangeNotificationForDeviceOwner(int userId) throws RemoteException {
-        }
+        public void postPwdChangeNotificationForDeviceOwner(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.ISemPersonaManager
         public boolean isContainerService(int pid) throws RemoteException {
@@ -545,7 +567,7 @@ public interface ISemPersonaManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemPersonaManager {
+    public abstract static class Stub extends Binder implements ISemPersonaManager {
         static final int TRANSACTION_CMFALock = 64;
         static final int TRANSACTION_CMFAUnLock = 65;
         static final int TRANSACTION_addAppPackageNameToAllowList = 30;
@@ -808,7 +830,8 @@ public interface ISemPersonaManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemPersonaManager.DESCRIPTOR);
             }
@@ -831,7 +854,8 @@ public interface ISemPersonaManager extends IInterface {
                     reply.writeTypedList(_result2, 1);
                     return true;
                 case 3:
-                    ISystemPersonaObserver _arg02 = ISystemPersonaObserver.Stub.asInterface(data.readStrongBinder());
+                    ISystemPersonaObserver _arg02 =
+                            ISystemPersonaObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result3 = registerSystemPersonaObserver(_arg02);
                     reply.writeNoException();
@@ -1097,15 +1121,20 @@ public interface ISemPersonaManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 41:
-                    ComponentName _arg033 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-                    IApplicationThread _arg117 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    ComponentName _arg033 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    IApplicationThread _arg117 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg25 = data.readStrongBinder();
                     Intent _arg3 = (Intent) data.readTypedObject(Intent.CREATOR);
-                    IServiceConnection _arg4 = IServiceConnection.Stub.asInterface(data.readStrongBinder());
+                    IServiceConnection _arg4 =
+                            IServiceConnection.Stub.asInterface(data.readStrongBinder());
                     int _arg5 = data.readInt();
                     int _arg6 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result36 = bindCoreServiceAsUser(_arg033, _arg117, _arg25, _arg3, _arg4, _arg5, _arg6);
+                    boolean _result36 =
+                            bindCoreServiceAsUser(
+                                    _arg033, _arg117, _arg25, _arg3, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeBoolean(_result36);
                     return true;
@@ -1379,7 +1408,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public List<UserInfo> getProfiles(int userHandle, boolean includeParent) throws RemoteException {
+            public List<UserInfo> getProfiles(int userHandle, boolean includeParent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1397,7 +1427,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean registerSystemPersonaObserver(ISystemPersonaObserver mISystemPersonaObserver) throws RemoteException {
+            public boolean registerSystemPersonaObserver(
+                    ISystemPersonaObserver mISystemPersonaObserver) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1494,7 +1525,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public String getWorkspaceName(UserInfo uInfo, boolean isWorkProfile) throws RemoteException {
+            public String getWorkspaceName(UserInfo uInfo, boolean isWorkProfile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1599,7 +1631,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean isPossibleAddAppsToContainer(String pkgName, int personaId) throws RemoteException {
+            public boolean isPossibleAddAppsToContainer(String pkgName, int personaId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1666,7 +1699,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public List getUpdatedListWithAppSeparation(List<ResolveInfo> originalList) throws RemoteException {
+            public List getUpdatedListWithAppSeparation(List<ResolveInfo> originalList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1684,7 +1718,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public void notifyApplicationChanged(String packageName, int userId) throws RemoteException {
+            public void notifyApplicationChanged(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1700,7 +1735,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean isKnoxWindowExist(int personaId, int visibleFlag, int stackId) throws RemoteException {
+            public boolean isKnoxWindowExist(int personaId, int visibleFlag, int stackId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1770,7 +1806,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean broadcastIntentThroughPersona(Intent intent, int userId) throws RemoteException {
+            public boolean broadcastIntentThroughPersona(Intent intent, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1847,7 +1884,8 @@ public interface ISemPersonaManager extends IInterface {
                     _data.writeInt(containerId);
                     this.mRemote.transact(29, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1856,7 +1894,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public void addAppPackageNameToAllowList(int containerId, List<String> appInstallationList) throws RemoteException {
+            public void addAppPackageNameToAllowList(
+                    int containerId, List<String> appInstallationList) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1941,7 +1980,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public String getCustomResource(int userId, String resourceType) throws RemoteException {
+            public String getCustomResource(int userId, String resourceType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1959,7 +1999,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public byte[] getKnoxIcon(String packageName, String className, int userId) throws RemoteException {
+            public byte[] getKnoxIcon(String packageName, String className, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1978,7 +2019,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean setPackageSettingInstalled(String packageName, boolean installed, int userId) throws RemoteException {
+            public boolean setPackageSettingInstalled(
+                    String packageName, boolean installed, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2012,7 +2054,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public Bundle sendProxyMessage(String category, String name, Bundle args) throws RemoteException {
+            public Bundle sendProxyMessage(String category, String name, Bundle args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2046,7 +2089,15 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean bindCoreServiceAsUser(ComponentName admin, IApplicationThread caller, IBinder token, Intent service, IServiceConnection connection, int flags, int targetUserId) throws RemoteException {
+            public boolean bindCoreServiceAsUser(
+                    ComponentName admin,
+                    IApplicationThread caller,
+                    IBinder token,
+                    Intent service,
+                    IServiceConnection connection,
+                    int flags,
+                    int targetUserId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2117,7 +2168,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean isKnoxProfileActivePasswordSufficientForParent(int userId) throws RemoteException {
+            public boolean isKnoxProfileActivePasswordSufficientForParent(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2134,7 +2186,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean isPasswordSufficientAfterKnoxProfileUnification(int profileUser) throws RemoteException {
+            public boolean isPasswordSufficientAfterKnoxProfileUnification(int profileUser)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2233,7 +2286,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean getPersonaUserHasBeenShutdownBefore(int personaId) throws RemoteException {
+            public boolean getPersonaUserHasBeenShutdownBefore(int personaId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2267,7 +2321,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public String getRCPDataPolicy(String appName, String policyProperty) throws RemoteException {
+            public String getRCPDataPolicy(String appName, String policyProperty)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2285,7 +2340,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public String getRCPDataPolicyForUser(int userId, String appName, String policyProperty) throws RemoteException {
+            public String getRCPDataPolicyForUser(int userId, String appName, String policyProperty)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2304,7 +2360,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean setRCPDataPolicy(String appName, String policyProperty, String value) throws RemoteException {
+            public boolean setRCPDataPolicy(String appName, String policyProperty, String value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2389,7 +2446,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean isShareClipboardDataToContainerAllowed(int userId) throws RemoteException {
+            public boolean isShareClipboardDataToContainerAllowed(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2406,7 +2464,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public List<String> getSecureFolderPolicy(String key, int userId) throws RemoteException {
+            public List<String> getSecureFolderPolicy(String key, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2424,7 +2483,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public boolean setSecureFolderPolicy(String key, List<String> pkgList, int userId) throws RemoteException {
+            public boolean setSecureFolderPolicy(String key, List<String> pkgList, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2504,7 +2564,8 @@ public interface ISemPersonaManager extends IInterface {
             }
 
             @Override // com.samsung.android.knox.ISemPersonaManager
-            public void updateProfileActivityTimeFromKnox(int userId, long eventTime) throws RemoteException {
+            public void updateProfileActivityTimeFromKnox(int userId, long eventTime)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2640,7 +2701,8 @@ public interface ISemPersonaManager extends IInterface {
                     _data.writeInterfaceToken(ISemPersonaManager.DESCRIPTOR);
                     this.mRemote.transact(76, _data, _reply, 0);
                     _reply.readException();
-                    IBasicCommand _result = IBasicCommand.Stub.asInterface(_reply.readStrongBinder());
+                    IBasicCommand _result =
+                            IBasicCommand.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

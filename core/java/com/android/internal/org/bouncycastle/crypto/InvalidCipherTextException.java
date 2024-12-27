@@ -2,8 +2,7 @@ package com.android.internal.org.bouncycastle.crypto;
 
 /* loaded from: classes5.dex */
 public class InvalidCipherTextException extends CryptoException {
-    public InvalidCipherTextException() {
-    }
+    public InvalidCipherTextException() {}
 
     public InvalidCipherTextException(String message) {
         super(message);

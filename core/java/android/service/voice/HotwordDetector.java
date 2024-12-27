@@ -5,7 +5,7 @@ import android.media.AudioFormat;
 import android.os.ParcelFileDescriptor;
 import android.os.PersistableBundle;
 import android.os.SharedMemory;
-import android.service.voice.AlwaysOnHotwordDetector;
+
 import java.io.PrintWriter;
 
 @SystemApi
@@ -18,7 +18,10 @@ public interface HotwordDetector {
 
     boolean startRecognition();
 
-    boolean startRecognition(ParcelFileDescriptor parcelFileDescriptor, AudioFormat audioFormat, PersistableBundle persistableBundle);
+    boolean startRecognition(
+            ParcelFileDescriptor parcelFileDescriptor,
+            AudioFormat audioFormat,
+            PersistableBundle persistableBundle);
 
     boolean stopRecognition();
 

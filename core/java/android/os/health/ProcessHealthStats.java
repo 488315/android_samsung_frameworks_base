@@ -1,10 +1,10 @@
 package android.os.health;
 
-import android.os.health.HealthKeys;
 
 /* loaded from: classes3.dex */
 public final class ProcessHealthStats {
-    public static final HealthKeys.Constants CONSTANTS = new HealthKeys.Constants(ProcessHealthStats.class);
+    public static final HealthKeys.Constants CONSTANTS =
+            new HealthKeys.Constants(ProcessHealthStats.class);
 
     @HealthKeys.Constant(type = 1)
     public static final int MEASUREMENT_ANR_COUNT = 30005;
@@ -24,6 +24,5 @@ public final class ProcessHealthStats {
     @HealthKeys.Constant(type = 1)
     public static final int MEASUREMENT_USER_TIME_MS = 30001;
 
-    private ProcessHealthStats() {
-    }
+    private ProcessHealthStats() {}
 }

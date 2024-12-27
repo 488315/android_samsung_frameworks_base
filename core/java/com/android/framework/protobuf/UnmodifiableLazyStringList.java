@@ -9,7 +9,8 @@ import java.util.ListIterator;
 import java.util.RandomAccess;
 
 /* loaded from: classes3.dex */
-public class UnmodifiableLazyStringList extends AbstractList<String> implements LazyStringList, RandomAccess {
+public class UnmodifiableLazyStringList extends AbstractList<String>
+        implements LazyStringList, RandomAccess {
     private final LazyStringList list;
 
     public UnmodifiableLazyStringList(LazyStringList list) {
@@ -73,7 +74,9 @@ public class UnmodifiableLazyStringList extends AbstractList<String> implements 
 
     @Override // java.util.AbstractList, java.util.List
     public ListIterator<String> listIterator(final int index) {
-        return new ListIterator<String>() { // from class: com.android.framework.protobuf.UnmodifiableLazyStringList.1
+        return new ListIterator<
+                String>() { // from class:
+                            // com.android.framework.protobuf.UnmodifiableLazyStringList.1
             ListIterator<String> iter;
 
             {
@@ -127,9 +130,12 @@ public class UnmodifiableLazyStringList extends AbstractList<String> implements 
         };
     }
 
-    @Override // java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.List
+    @Override // java.util.AbstractList, java.util.AbstractCollection, java.util.Collection,
+              // java.lang.Iterable, java.util.List
     public Iterator<String> iterator() {
-        return new Iterator<String>() { // from class: com.android.framework.protobuf.UnmodifiableLazyStringList.2
+        return new Iterator<
+                String>() { // from class:
+                            // com.android.framework.protobuf.UnmodifiableLazyStringList.2
             Iterator<String> iter;
 
             {

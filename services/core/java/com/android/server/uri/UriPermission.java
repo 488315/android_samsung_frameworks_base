@@ -5,9 +5,11 @@ import android.os.UserHandle;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -34,7 +36,9 @@ public final class UriPermission {
     public final class PersistedTimeComparator implements Comparator {
         @Override // java.util.Comparator
         public final int compare(Object obj, Object obj2) {
-            return Long.compare(((UriPermission) obj).persistedCreateTime, ((UriPermission) obj2).persistedCreateTime);
+            return Long.compare(
+                    ((UriPermission) obj).persistedCreateTime,
+                    ((UriPermission) obj2).persistedCreateTime);
         }
     }
 
@@ -66,7 +70,9 @@ public final class UriPermission {
     }
 
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, "      ", "targetUserId=");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        printWriter, "      ", "targetUserId=");
         m.append(this.targetUserId);
         printWriter.print(m.toString());
         printWriter.print(" sourcePkg=" + this.sourcePkg);
@@ -260,6 +266,20 @@ public final class UriPermission {
         if (!Log.isLoggable("UriPermission", 2) || this.modeFlags == i) {
             return;
         }
-        Slog.d("UriPermission", "Permission for " + this.targetPkg + " to " + this.uri + " is changing from 0x" + Integer.toHexString(i) + " to 0x" + Integer.toHexString(this.modeFlags) + " via calling UID " + Binder.getCallingUid() + " PID " + Binder.getCallingPid(), new Throwable());
+        Slog.d(
+                "UriPermission",
+                "Permission for "
+                        + this.targetPkg
+                        + " to "
+                        + this.uri
+                        + " is changing from 0x"
+                        + Integer.toHexString(i)
+                        + " to 0x"
+                        + Integer.toHexString(this.modeFlags)
+                        + " via calling UID "
+                        + Binder.getCallingUid()
+                        + " PID "
+                        + Binder.getCallingPid(),
+                new Throwable());
     }
 }

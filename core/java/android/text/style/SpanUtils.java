@@ -2,14 +2,14 @@ package android.text.style;
 
 import android.text.Spannable;
 import android.util.LongArray;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public class SpanUtils {
-    private SpanUtils() {
-    }
+    private SpanUtils() {}
 
     public static boolean toggleBold(Spannable spannable, int min, int max) {
         if (min == max) {
@@ -113,7 +113,8 @@ public class SpanUtils {
         if (min == max) {
             return false;
         }
-        List<UnderlineSpan> spans = Arrays.asList((UnderlineSpan[]) spannable.getSpans(min, max, UnderlineSpan.class));
+        List<UnderlineSpan> spans =
+                Arrays.asList((UnderlineSpan[]) spannable.getSpans(min, max, UnderlineSpan.class));
         if (!isCovered(spannable, spans, min, max)) {
             spannable.setSpan(new UnderlineSpan(), min, max, 17);
             return true;

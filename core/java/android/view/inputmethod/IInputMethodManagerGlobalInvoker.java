@@ -6,8 +6,8 @@ import android.os.RemoteException;
 import android.os.ResultReceiver;
 import android.os.ServiceManager;
 import android.util.ExceptionUtils;
-import android.view.inputmethod.ImeTracker;
 import android.window.ImeOnBackInvokedDispatcher;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.inputmethod.IBooleanListener;
 import com.android.internal.inputmethod.IConnectionlessHandwritingCallback;
@@ -18,6 +18,7 @@ import com.android.internal.inputmethod.IRemoteInputConnection;
 import com.android.internal.inputmethod.InputBindResult;
 import com.android.internal.inputmethod.InputMethodInfoSafeList;
 import com.android.internal.view.IInputMethodManager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -30,8 +31,7 @@ final class IInputMethodManagerGlobalInvoker {
     private static volatile IImeTracker sTrackerServiceCache = null;
     private static int sCurStartInputSeq = 0;
 
-    IInputMethodManagerGlobalInvoker() {
-    }
+    IInputMethodManagerGlobalInvoker() {}
 
     static boolean isAvailable() {
         return getService() != null;
@@ -40,7 +40,12 @@ final class IInputMethodManagerGlobalInvoker {
     static IInputMethodManager getService() {
         IInputMethodManager service = sServiceCache;
         if (service == null) {
-            if (InputMethodManager.isInEditModeInternal() || (service = IInputMethodManager.Stub.asInterface(ServiceManager.getService(Context.INPUT_METHOD_SERVICE))) == null) {
+            if (InputMethodManager.isInEditModeInternal()
+                    || (service =
+                                    IInputMethodManager.Stub.asInterface(
+                                            ServiceManager.getService(
+                                                    Context.INPUT_METHOD_SERVICE)))
+                            == null) {
                 return null;
             }
             sServiceCache = service;
@@ -48,7 +53,8 @@ final class IInputMethodManagerGlobalInvoker {
         return service;
     }
 
-    private static void handleRemoteExceptionOrRethrow(RemoteException e, Consumer<RemoteException> exceptionHandler) {
+    private static void handleRemoteExceptionOrRethrow(
+            RemoteException e, Consumer<RemoteException> exceptionHandler) {
         if (exceptionHandler != null) {
             exceptionHandler.accept(e);
             return;
@@ -56,7 +62,11 @@ final class IInputMethodManagerGlobalInvoker {
         throw e.rethrowFromSystemServer();
     }
 
-    static void startProtoDump(byte[] protoDump, int source, String where, Consumer<RemoteException> exceptionHandler) {
+    static void startProtoDump(
+            byte[] protoDump,
+            int source,
+            String where,
+            Consumer<RemoteException> exceptionHandler) {
         IInputMethodManager service = getService();
         if (service == null) {
             return;
@@ -116,7 +126,10 @@ final class IInputMethodManagerGlobalInvoker {
         }
     }
 
-    static void addClient(IInputMethodClient client, IRemoteInputConnection fallbackInputConnection, int untrustedDisplayId) {
+    static void addClient(
+            IInputMethodClient client,
+            IRemoteInputConnection fallbackInputConnection,
+            int untrustedDisplayId) {
         IInputMethodManager service = getService();
         if (service == null) {
             return;
@@ -147,7 +160,8 @@ final class IInputMethodManagerGlobalInvoker {
         }
         try {
             if (Flags.useInputMethodInfoSafeList()) {
-                return InputMethodInfoSafeList.extractFrom(service.getInputMethodList(userId, directBootAwareness));
+                return InputMethodInfoSafeList.extractFrom(
+                        service.getInputMethodList(userId, directBootAwareness));
             }
             return service.getInputMethodListLegacy(userId, directBootAwareness);
         } catch (RemoteException e) {
@@ -162,7 +176,8 @@ final class IInputMethodManagerGlobalInvoker {
         }
         try {
             if (Flags.useInputMethodInfoSafeList()) {
-                return InputMethodInfoSafeList.extractFrom(service.getEnabledInputMethodList(userId));
+                return InputMethodInfoSafeList.extractFrom(
+                        service.getEnabledInputMethodList(userId));
             }
             return service.getEnabledInputMethodListLegacy(userId);
         } catch (RemoteException e) {
@@ -170,13 +185,15 @@ final class IInputMethodManagerGlobalInvoker {
         }
     }
 
-    static List<InputMethodSubtype> getEnabledInputMethodSubtypeList(String imiId, boolean allowsImplicitlyEnabledSubtypes, int userId) {
+    static List<InputMethodSubtype> getEnabledInputMethodSubtypeList(
+            String imiId, boolean allowsImplicitlyEnabledSubtypes, int userId) {
         IInputMethodManager service = getService();
         if (service == null) {
             return new ArrayList();
         }
         try {
-            return service.getEnabledInputMethodSubtypeList(imiId, allowsImplicitlyEnabledSubtypes, userId);
+            return service.getEnabledInputMethodSubtypeList(
+                    imiId, allowsImplicitlyEnabledSubtypes, userId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -194,25 +211,46 @@ final class IInputMethodManagerGlobalInvoker {
         }
     }
 
-    static boolean showSoftInput(IInputMethodClient client, IBinder windowToken, ImeTracker.Token statsToken, int flags, int lastClickToolType, ResultReceiver resultReceiver, int reason) {
+    static boolean showSoftInput(
+            IInputMethodClient client,
+            IBinder windowToken,
+            ImeTracker.Token statsToken,
+            int flags,
+            int lastClickToolType,
+            ResultReceiver resultReceiver,
+            int reason) {
         IInputMethodManager service = getService();
         if (service == null) {
             return false;
         }
         try {
-            return service.showSoftInput(client, windowToken, statsToken, flags, lastClickToolType, resultReceiver, reason);
+            return service.showSoftInput(
+                    client,
+                    windowToken,
+                    statsToken,
+                    flags,
+                    lastClickToolType,
+                    resultReceiver,
+                    reason);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    static boolean hideSoftInput(IInputMethodClient client, IBinder windowToken, ImeTracker.Token statsToken, int flags, ResultReceiver resultReceiver, int reason) {
+    static boolean hideSoftInput(
+            IInputMethodClient client,
+            IBinder windowToken,
+            ImeTracker.Token statsToken,
+            int flags,
+            ResultReceiver resultReceiver,
+            int reason) {
         IInputMethodManager service = getService();
         if (service == null) {
             return false;
         }
         try {
-            return service.hideSoftInput(client, windowToken, statsToken, flags, resultReceiver, reason);
+            return service.hideSoftInput(
+                    client, windowToken, statsToken, flags, resultReceiver, reason);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -230,25 +268,74 @@ final class IInputMethodManagerGlobalInvoker {
         }
     }
 
-    static InputBindResult startInputOrWindowGainedFocus(int startInputReason, IInputMethodClient client, IBinder windowToken, int startInputFlags, int softInputMode, int windowFlags, EditorInfo editorInfo, IRemoteInputConnection remoteInputConnection, IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection, int unverifiedTargetSdkVersion, int userId, ImeOnBackInvokedDispatcher imeDispatcher) {
+    static InputBindResult startInputOrWindowGainedFocus(
+            int startInputReason,
+            IInputMethodClient client,
+            IBinder windowToken,
+            int startInputFlags,
+            int softInputMode,
+            int windowFlags,
+            EditorInfo editorInfo,
+            IRemoteInputConnection remoteInputConnection,
+            IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection,
+            int unverifiedTargetSdkVersion,
+            int userId,
+            ImeOnBackInvokedDispatcher imeDispatcher) {
         IInputMethodManager service = getService();
         if (service == null) {
             return InputBindResult.NULL;
         }
         try {
-            return service.startInputOrWindowGainedFocus(startInputReason, client, windowToken, startInputFlags, softInputMode, windowFlags, editorInfo, remoteInputConnection, remoteAccessibilityInputConnection, unverifiedTargetSdkVersion, userId, imeDispatcher);
+            return service.startInputOrWindowGainedFocus(
+                    startInputReason,
+                    client,
+                    windowToken,
+                    startInputFlags,
+                    softInputMode,
+                    windowFlags,
+                    editorInfo,
+                    remoteInputConnection,
+                    remoteAccessibilityInputConnection,
+                    unverifiedTargetSdkVersion,
+                    userId,
+                    imeDispatcher);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    static int startInputOrWindowGainedFocusAsync(int startInputReason, IInputMethodClient client, IBinder windowToken, int startInputFlags, int softInputMode, int windowFlags, EditorInfo editorInfo, IRemoteInputConnection remoteInputConnection, IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection, int unverifiedTargetSdkVersion, int userId, ImeOnBackInvokedDispatcher imeDispatcher) {
+    static int startInputOrWindowGainedFocusAsync(
+            int startInputReason,
+            IInputMethodClient client,
+            IBinder windowToken,
+            int startInputFlags,
+            int softInputMode,
+            int windowFlags,
+            EditorInfo editorInfo,
+            IRemoteInputConnection remoteInputConnection,
+            IRemoteAccessibilityInputConnection remoteAccessibilityInputConnection,
+            int unverifiedTargetSdkVersion,
+            int userId,
+            ImeOnBackInvokedDispatcher imeDispatcher) {
         IInputMethodManager service = getService();
         if (service == null) {
             return -1;
         }
         try {
-            service.startInputOrWindowGainedFocusAsync(startInputReason, client, windowToken, startInputFlags, softInputMode, windowFlags, editorInfo, remoteInputConnection, remoteAccessibilityInputConnection, unverifiedTargetSdkVersion, userId, imeDispatcher, advanceAngGetStartInputSequenceNumber());
+            service.startInputOrWindowGainedFocusAsync(
+                    startInputReason,
+                    client,
+                    windowToken,
+                    startInputFlags,
+                    softInputMode,
+                    windowFlags,
+                    editorInfo,
+                    remoteInputConnection,
+                    remoteAccessibilityInputConnection,
+                    unverifiedTargetSdkVersion,
+                    userId,
+                    imeDispatcher,
+                    advanceAngGetStartInputSequenceNumber());
             return sCurStartInputSeq;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -261,7 +348,8 @@ final class IInputMethodManagerGlobalInvoker {
         return i;
     }
 
-    static void showInputMethodPickerFromClient(IInputMethodClient client, int auxiliarySubtypeMode) {
+    static void showInputMethodPickerFromClient(
+            IInputMethodClient client, int auxiliarySubtypeMode) {
         IInputMethodManager service = getService();
         if (service == null) {
             return;
@@ -309,7 +397,8 @@ final class IInputMethodManagerGlobalInvoker {
         }
     }
 
-    static void setAdditionalInputMethodSubtypes(String imeId, InputMethodSubtype[] subtypes, int userId) {
+    static void setAdditionalInputMethodSubtypes(
+            String imeId, InputMethodSubtype[] subtypes, int userId) {
         IInputMethodManager service = getService();
         if (service == null) {
             return;
@@ -321,7 +410,8 @@ final class IInputMethodManagerGlobalInvoker {
         }
     }
 
-    static void setExplicitlyEnabledInputMethodSubtypes(String imeId, int[] subtypeHashCodes, int userId) {
+    static void setExplicitlyEnabledInputMethodSubtypes(
+            String imeId, int[] subtypeHashCodes, int userId) {
         IInputMethodManager service = getService();
         if (service == null) {
             return;
@@ -381,50 +471,80 @@ final class IInputMethodManagerGlobalInvoker {
         }
     }
 
-    static boolean startConnectionlessStylusHandwriting(IInputMethodClient client, int userId, CursorAnchorInfo cursorAnchorInfo, String delegatePackageName, String delegatorPackageName, IConnectionlessHandwritingCallback callback) {
+    static boolean startConnectionlessStylusHandwriting(
+            IInputMethodClient client,
+            int userId,
+            CursorAnchorInfo cursorAnchorInfo,
+            String delegatePackageName,
+            String delegatorPackageName,
+            IConnectionlessHandwritingCallback callback) {
         IInputMethodManager service = getService();
         if (service == null) {
             return false;
         }
         try {
-            service.startConnectionlessStylusHandwriting(client, userId, cursorAnchorInfo, delegatePackageName, delegatorPackageName, callback);
+            service.startConnectionlessStylusHandwriting(
+                    client,
+                    userId,
+                    cursorAnchorInfo,
+                    delegatePackageName,
+                    delegatorPackageName,
+                    callback);
             return true;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    static void prepareStylusHandwritingDelegation(IInputMethodClient client, int userId, String delegatePackageName, String delegatorPackageName) {
+    static void prepareStylusHandwritingDelegation(
+            IInputMethodClient client,
+            int userId,
+            String delegatePackageName,
+            String delegatorPackageName) {
         IInputMethodManager service = getService();
         if (service == null) {
             return;
         }
         try {
-            service.prepareStylusHandwritingDelegation(client, userId, delegatePackageName, delegatorPackageName);
+            service.prepareStylusHandwritingDelegation(
+                    client, userId, delegatePackageName, delegatorPackageName);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    static boolean acceptStylusHandwritingDelegation(IInputMethodClient client, int userId, String delegatePackageName, String delegatorPackageName, int flags) {
+    static boolean acceptStylusHandwritingDelegation(
+            IInputMethodClient client,
+            int userId,
+            String delegatePackageName,
+            String delegatorPackageName,
+            int flags) {
         IInputMethodManager service = getService();
         if (service == null) {
             return false;
         }
         try {
-            return service.acceptStylusHandwritingDelegation(client, userId, delegatePackageName, delegatorPackageName, flags);
+            return service.acceptStylusHandwritingDelegation(
+                    client, userId, delegatePackageName, delegatorPackageName, flags);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    static boolean acceptStylusHandwritingDelegationAsync(IInputMethodClient client, int userId, String delegatePackageName, String delegatorPackageName, int flags, IBooleanListener callback) {
+    static boolean acceptStylusHandwritingDelegationAsync(
+            IInputMethodClient client,
+            int userId,
+            String delegatePackageName,
+            String delegatorPackageName,
+            int flags,
+            IBooleanListener callback) {
         IInputMethodManager service = getService();
         if (service == null) {
             return false;
         }
         try {
-            service.acceptStylusHandwritingDelegationAsync(client, userId, delegatePackageName, delegatorPackageName, flags, callback);
+            service.acceptStylusHandwritingDelegationAsync(
+                    client, userId, delegatePackageName, delegatorPackageName, flags, callback);
             return true;
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -467,7 +587,8 @@ final class IInputMethodManagerGlobalInvoker {
         }
     }
 
-    static ImeTracker.Token onStart(String tag, int uid, int type, int origin, int reason, boolean fromUser) {
+    static ImeTracker.Token onStart(
+            String tag, int uid, int type, int origin, int reason, boolean fromUser) {
         IImeTracker service = getImeTrackerService();
         if (service == null) {
             return ImeTracker.Token.empty(tag);

@@ -5,6 +5,7 @@ import android.os.VibrationEffect;
 import android.os.vibrator.PrimitiveSegment;
 import android.os.vibrator.VibrationEffectSegment;
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,8 @@ public final class ComposePrimitivesVibratorStep extends AbstractVibratorStep {
                     }
                     i = repeatIndex;
                 }
-                PrimitiveSegment primitiveSegment = (VibrationEffectSegment) composed.getSegments().get(i);
+                PrimitiveSegment primitiveSegment =
+                        (VibrationEffectSegment) composed.getSegments().get(i);
                 if (!(primitiveSegment instanceof PrimitiveSegment)) {
                     break;
                 }
@@ -40,11 +42,17 @@ public final class ComposePrimitivesVibratorStep extends AbstractVibratorStep {
                 i++;
             }
             if (arrayList.isEmpty()) {
-                Slog.w("VibrationThread", "Ignoring wrong segment for a ComposePrimitivesStep: " + this.effect.getSegments().get(this.segmentIndex));
+                Slog.w(
+                        "VibrationThread",
+                        "Ignoring wrong segment for a ComposePrimitivesStep: "
+                                + this.effect.getSegments().get(this.segmentIndex));
                 return nextSteps(1);
             }
-            Slog.d("VibrationThread", "Compose " + arrayList + " primitives on vibrator " + getVibratorId());
-            PrimitiveSegment[] primitiveSegmentArr = (PrimitiveSegment[]) arrayList.toArray(new PrimitiveSegment[arrayList.size()]);
+            Slog.d(
+                    "VibrationThread",
+                    "Compose " + arrayList + " primitives on vibrator " + getVibratorId());
+            PrimitiveSegment[] primitiveSegmentArr =
+                    (PrimitiveSegment[]) arrayList.toArray(new PrimitiveSegment[arrayList.size()]);
             VibratorController vibratorController = this.controller;
             long j = this.conductor.mVibration.id;
             long j2 = 0;

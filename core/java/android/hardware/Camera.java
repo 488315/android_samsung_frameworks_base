@@ -22,9 +22,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
+
 import com.android.internal.R;
 import com.android.internal.app.IAppOpsCallback;
 import com.android.internal.app.IAppOpsService;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -169,7 +171,8 @@ public class Camera {
 
     private final native void native_setParameters(String str);
 
-    private native int native_setup(Object obj, int i, String str, int i2, boolean z, int i3, int i4);
+    private native int native_setup(
+            Object obj, int i, String str, int i2, boolean z, int i3, int i4);
 
     private final native void native_takePicture(int i);
 
@@ -216,8 +219,14 @@ public class Camera {
         getCameraInfo(cameraId, context, rotationOverride, cameraInfo);
     }
 
-    public static void getCameraInfo(int cameraId, Context context, int rotationOverride, CameraInfo cameraInfo) {
-        _getCameraInfo(cameraId, rotationOverride, context.getDeviceId(), getDevicePolicyFromContext(context), cameraInfo);
+    public static void getCameraInfo(
+            int cameraId, Context context, int rotationOverride, CameraInfo cameraInfo) {
+        _getCameraInfo(
+                cameraId,
+                rotationOverride,
+                context.getDeviceId(),
+                getDevicePolicyFromContext(context),
+                cameraInfo);
         IBinder b = ServiceManager.getService("audio");
         IAudioService audioService = IAudioService.Stub.asInterface(b);
         try {
@@ -233,7 +242,8 @@ public class Camera {
         if (context.getDeviceId() == 0 || !Flags.virtualCamera()) {
             return 0;
         }
-        VirtualDeviceManager virtualDeviceManager = (VirtualDeviceManager) context.getSystemService(VirtualDeviceManager.class);
+        VirtualDeviceManager virtualDeviceManager =
+                (VirtualDeviceManager) context.getSystemService(VirtualDeviceManager.class);
         return virtualDeviceManager.getDevicePolicy(context.getDeviceId(), 5);
     }
 
@@ -286,12 +296,22 @@ public class Camera {
             }
         }
         boolean forceSlowJpegMode = shouldForceSlowJpegMode();
-        return native_setup(new WeakReference(this), cameraId, ActivityThread.currentOpPackageName(), rotationOverride, forceSlowJpegMode, context.getDeviceId(), getDevicePolicyFromContext(context));
+        return native_setup(
+                new WeakReference(this),
+                cameraId,
+                ActivityThread.currentOpPackageName(),
+                rotationOverride,
+                forceSlowJpegMode,
+                context.getDeviceId(),
+                getDevicePolicyFromContext(context));
     }
 
     private boolean shouldForceSlowJpegMode() {
         Context applicationContext = ActivityThread.currentApplication().getApplicationContext();
-        String[] slowJpegPackageNames = applicationContext.getResources().getStringArray(R.array.config_forceSlowJpegModeList);
+        String[] slowJpegPackageNames =
+                applicationContext
+                        .getResources()
+                        .getStringArray(R.array.config_forceSlowJpegModeList);
         String callingPackageName = applicationContext.getPackageName();
         for (String packageName : slowJpegPackageNames) {
             if (TextUtils.equals(packageName, callingPackageName)) {
@@ -324,8 +344,7 @@ public class Camera {
         return new Camera();
     }
 
-    Camera() {
-    }
+    Camera() {}
 
     private void initAppOps() {
         IBinder b = ServiceManager.getService(Context.APP_OPS_SERVICE);
@@ -333,7 +352,8 @@ public class Camera {
         updateAppOpsPlayAudio();
         this.mAppOpsCallback = new IAppOpsCallbackWrapper(this);
         try {
-            this.mAppOps.startWatchingMode(28, ActivityThread.currentPackageName(), this.mAppOpsCallback);
+            this.mAppOps.startWatchingMode(
+                    28, ActivityThread.currentPackageName(), this.mAppOpsCallback);
         } catch (RemoteException e) {
             Log.e("Camera", "Error registering appOps callback", e);
             this.mHasAppOpsPlayAudio = false;
@@ -502,13 +522,15 @@ public class Camera {
                     return;
                 case 64:
                     if (Camera.this.mPostviewCallback != null) {
-                        Camera.this.mPostviewCallback.onPictureTaken((byte[]) msg.obj, this.mCamera);
+                        Camera.this.mPostviewCallback.onPictureTaken(
+                                (byte[]) msg.obj, this.mCamera);
                         return;
                     }
                     return;
                 case 128:
                     if (Camera.this.mRawImageCallback != null) {
-                        Camera.this.mRawImageCallback.onPictureTaken((byte[]) msg.obj, this.mCamera);
+                        Camera.this.mRawImageCallback.onPictureTaken(
+                                (byte[]) msg.obj, this.mCamera);
                         return;
                     }
                     return;
@@ -526,7 +548,8 @@ public class Camera {
                     return;
                 case 2048:
                     if (Camera.this.mAutoFocusMoveCallback != null) {
-                        AutoFocusMoveCallback autoFocusMoveCallback = Camera.this.mAutoFocusMoveCallback;
+                        AutoFocusMoveCallback autoFocusMoveCallback =
+                                Camera.this.mAutoFocusMoveCallback;
                         success = msg.arg1 != 0;
                         autoFocusMoveCallback.onAutoFocusMoving(success, this.mCamera);
                         return;
@@ -539,7 +562,8 @@ public class Camera {
         }
     }
 
-    private static void postEventFromNative(Object camera_ref, int what, int arg1, int arg2, Object obj) {
+    private static void postEventFromNative(
+            Object camera_ref, int what, int arg1, int arg2, Object obj) {
         Camera c = (Camera) ((WeakReference) camera_ref).get();
         if (c != null && c.mEventHandler != null) {
             Message m = c.mEventHandler.obtainMessage(what, arg1, arg2, obj);
@@ -567,11 +591,16 @@ public class Camera {
         enableFocusMoveCallback(this.mAutoFocusMoveCallback != null ? 1 : 0);
     }
 
-    public final void takePicture(ShutterCallback shutter, PictureCallback raw, PictureCallback jpeg) {
+    public final void takePicture(
+            ShutterCallback shutter, PictureCallback raw, PictureCallback jpeg) {
         takePicture(shutter, raw, null, jpeg);
     }
 
-    public final void takePicture(ShutterCallback shutter, PictureCallback raw, PictureCallback postview, PictureCallback jpeg) {
+    public final void takePicture(
+            ShutterCallback shutter,
+            PictureCallback raw,
+            PictureCallback postview,
+            PictureCallback jpeg) {
         this.mShutterCallback = shutter;
         this.mRawImageCallback = raw;
         this.mPostviewCallback = postview;
@@ -648,7 +677,9 @@ public class Camera {
             int mode = 1;
             try {
                 if (this.mAppOps != null) {
-                    mode = this.mAppOps.checkAudioOperation(28, 13, Process.myUid(), ActivityThread.currentPackageName());
+                    mode =
+                            this.mAppOps.checkAudioOperation(
+                                    28, 13, Process.myUid(), ActivityThread.currentPackageName());
                 }
                 this.mHasAppOpsPlayAudio = mode == 0;
             } catch (RemoteException e) {
@@ -707,8 +738,10 @@ public class Camera {
         if (this.mUsingPreviewAllocation) {
             Size newPreviewSize = params.getPreviewSize();
             Size currentPreviewSize = getParameters().getPreviewSize();
-            if (newPreviewSize.width != currentPreviewSize.width || newPreviewSize.height != currentPreviewSize.height) {
-                throw new IllegalStateException("Cannot change preview size while a preview allocation is configured.");
+            if (newPreviewSize.width != currentPreviewSize.width
+                    || newPreviewSize.height != currentPreviewSize.height) {
+                throw new IllegalStateException(
+                        "Cannot change preview size while a preview allocation is configured.");
             }
         }
         native_setParameters(params.flatten());
@@ -820,9 +853,11 @@ public class Camera {
         public static final String FOCUS_MODE_MACRO = "macro";
         private static final String KEY_ANTIBANDING = "antibanding";
         private static final String KEY_AUTO_EXPOSURE_LOCK = "auto-exposure-lock";
-        private static final String KEY_AUTO_EXPOSURE_LOCK_SUPPORTED = "auto-exposure-lock-supported";
+        private static final String KEY_AUTO_EXPOSURE_LOCK_SUPPORTED =
+                "auto-exposure-lock-supported";
         private static final String KEY_AUTO_WHITEBALANCE_LOCK = "auto-whitebalance-lock";
-        private static final String KEY_AUTO_WHITEBALANCE_LOCK_SUPPORTED = "auto-whitebalance-lock-supported";
+        private static final String KEY_AUTO_WHITEBALANCE_LOCK_SUPPORTED =
+                "auto-whitebalance-lock-supported";
         private static final String KEY_EFFECT = "effect";
         private static final String KEY_EXPOSURE_COMPENSATION = "exposure-compensation";
         private static final String KEY_EXPOSURE_COMPENSATION_STEP = "exposure-compensation-step";
@@ -852,7 +887,8 @@ public class Camera {
         private static final String KEY_MIN_EXPOSURE_COMPENSATION = "min-exposure-compensation";
         private static final String KEY_PICTURE_FORMAT = "picture-format";
         private static final String KEY_PICTURE_SIZE = "picture-size";
-        private static final String KEY_PREFERRED_PREVIEW_SIZE_FOR_VIDEO = "preferred-preview-size-for-video";
+        private static final String KEY_PREFERRED_PREVIEW_SIZE_FOR_VIDEO =
+                "preferred-preview-size-for-video";
         private static final String KEY_PREVIEW_FORMAT = "preview-format";
         private static final String KEY_PREVIEW_FPS_RANGE = "preview-fps-range";
         private static final String KEY_PREVIEW_FRAME_RATE = "preview-frame-rate";
@@ -865,7 +901,8 @@ public class Camera {
         private static final String KEY_VIDEO_SIZE = "video-size";
         private static final String KEY_VIDEO_SNAPSHOT_SUPPORTED = "video-snapshot-supported";
         private static final String KEY_VIDEO_STABILIZATION = "video-stabilization";
-        private static final String KEY_VIDEO_STABILIZATION_SUPPORTED = "video-stabilization-supported";
+        private static final String KEY_VIDEO_STABILIZATION_SUPPORTED =
+                "video-stabilization-supported";
         private static final String KEY_WHITE_BALANCE = "whitebalance";
         private static final String KEY_ZOOM = "zoom";
         private static final String KEY_ZOOM_RATIOS = "zoom-ratios";
@@ -972,8 +1009,12 @@ public class Camera {
         public void set(String key, String value) {
             if (key.indexOf(61) != -1 || key.indexOf(59) != -1 || key.indexOf(0) != -1) {
                 Log.e("Camera", "Key \"" + key + "\" contains invalid character (= or ; or \\0)");
-            } else if (value.indexOf(61) != -1 || value.indexOf(59) != -1 || value.indexOf(0) != -1) {
-                Log.e("Camera", "Value \"" + value + "\" contains invalid character (= or ; or \\0)");
+            } else if (value.indexOf(61) != -1
+                    || value.indexOf(59) != -1
+                    || value.indexOf(0) != -1) {
+                Log.e(
+                        "Camera",
+                        "Value \"" + value + "\" contains invalid character (= or ; or \\0)");
             } else {
                 put(key, value);
             }
@@ -1054,7 +1095,8 @@ public class Camera {
         }
 
         public Size getJpegThumbnailSize() {
-            return Camera.this.new Size(getInt(KEY_JPEG_THUMBNAIL_WIDTH), getInt(KEY_JPEG_THUMBNAIL_HEIGHT));
+            return Camera.this
+            .new Size(getInt(KEY_JPEG_THUMBNAIL_WIDTH), getInt(KEY_JPEG_THUMBNAIL_HEIGHT));
         }
 
         public List<Size> getSupportedJpegThumbnailSizes() {
@@ -1428,7 +1470,8 @@ public class Camera {
 
         public void getFocusDistances(float[] output) {
             if (output == null || output.length != 3) {
-                throw new IllegalArgumentException("output must be a float array with three elements.");
+                throw new IllegalArgumentException(
+                        "output must be a float array with three elements.");
             }
             splitFloat(get(KEY_FOCUS_DISTANCES), output);
         }
@@ -1636,7 +1679,11 @@ public class Camera {
             if (result.size() == 1) {
                 Area area = result.get(0);
                 Rect rect = area.rect;
-                if (rect.left == 0 && rect.top == 0 && rect.right == 0 && rect.bottom == 0 && area.weight == 0) {
+                if (rect.left == 0
+                        && rect.top == 0
+                        && rect.right == 0
+                        && rect.bottom == 0
+                        && area.weight == 0) {
                     return null;
                 }
             }

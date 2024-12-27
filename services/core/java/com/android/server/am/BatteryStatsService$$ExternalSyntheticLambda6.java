@@ -4,7 +4,8 @@ import com.android.server.power.stats.BatteryStatsImpl;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda6 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda6
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ int f$1;
@@ -13,7 +14,14 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda6
     public final /* synthetic */ long f$4;
     public final /* synthetic */ long f$5;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda6(BatteryStatsService batteryStatsService, int i, String str, String str2, long j, long j2, int i2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda6(
+            BatteryStatsService batteryStatsService,
+            int i,
+            String str,
+            String str2,
+            long j,
+            long j2,
+            int i2) {
         this.$r8$classId = i2;
         this.f$0 = batteryStatsService;
         this.f$1 = i;
@@ -23,7 +31,14 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda6
         this.f$5 = j2;
     }
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda6(BatteryStatsService batteryStatsService, String str, String str2, int i, long j, long j2, int i2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda6(
+            BatteryStatsService batteryStatsService,
+            String str,
+            String str2,
+            int i,
+            long j,
+            long j2,
+            int i2) {
         this.$r8$classId = i2;
         this.f$0 = batteryStatsService;
         this.f$2 = str;
@@ -54,9 +69,14 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda6
         long j2 = this.f$5;
         synchronized (batteryStatsService.mStats) {
             BatteryStatsImpl batteryStatsImpl = batteryStatsService.mStats;
-            BatteryStatsImpl.Uid.Pkg.Serv serviceStatsLocked = batteryStatsImpl.getUidStatsLocked(batteryStatsImpl.mapUid(i), j, j2).getServiceStatsLocked(str, str2);
+            BatteryStatsImpl.Uid.Pkg.Serv serviceStatsLocked =
+                    batteryStatsImpl
+                            .getUidStatsLocked(batteryStatsImpl.mapUid(i), j, j2)
+                            .getServiceStatsLocked(str, str2);
             if (serviceStatsLocked.mRunning) {
-                long uptime = (serviceStatsLocked.mBsi.mOnBatteryTimeBase.getUptime(j2 * 1000) / 1000) - serviceStatsLocked.mRunningSinceMs;
+                long uptime =
+                        (serviceStatsLocked.mBsi.mOnBatteryTimeBase.getUptime(j2 * 1000) / 1000)
+                                - serviceStatsLocked.mRunningSinceMs;
                 if (uptime > 0) {
                     serviceStatsLocked.mStartTimeMs += uptime;
                 } else {
@@ -79,9 +99,14 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda6
                 long j2 = this.f$5;
                 synchronized (batteryStatsService.mStats) {
                     BatteryStatsImpl batteryStatsImpl = batteryStatsService.mStats;
-                    BatteryStatsImpl.Uid.Pkg.Serv serviceStatsLocked = batteryStatsImpl.getUidStatsLocked(batteryStatsImpl.mapUid(i), j, j2).getServiceStatsLocked(str, str2);
+                    BatteryStatsImpl.Uid.Pkg.Serv serviceStatsLocked =
+                            batteryStatsImpl
+                                    .getUidStatsLocked(batteryStatsImpl.mapUid(i), j, j2)
+                                    .getServiceStatsLocked(str, str2);
                     if (serviceStatsLocked.mLaunched) {
-                        if ((serviceStatsLocked.mBsi.mOnBatteryTimeBase.getUptime(j2 * 1000) / 1000) - serviceStatsLocked.mLaunchedSinceMs <= 0) {
+                        if ((serviceStatsLocked.mBsi.mOnBatteryTimeBase.getUptime(j2 * 1000) / 1000)
+                                        - serviceStatsLocked.mLaunchedSinceMs
+                                <= 0) {
                             serviceStatsLocked.mLaunches--;
                         }
                         serviceStatsLocked.mLaunched = false;
@@ -97,10 +122,15 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda6
                 long j4 = this.f$5;
                 synchronized (batteryStatsService2.mStats) {
                     BatteryStatsImpl batteryStatsImpl2 = batteryStatsService2.mStats;
-                    BatteryStatsImpl.Uid.Pkg.Serv serviceStatsLocked2 = batteryStatsImpl2.getUidStatsLocked(batteryStatsImpl2.mapUid(i2), j3, j4).getServiceStatsLocked(str3, str4);
+                    BatteryStatsImpl.Uid.Pkg.Serv serviceStatsLocked2 =
+                            batteryStatsImpl2
+                                    .getUidStatsLocked(batteryStatsImpl2.mapUid(i2), j3, j4)
+                                    .getServiceStatsLocked(str3, str4);
                     if (!serviceStatsLocked2.mRunning) {
                         serviceStatsLocked2.mStarts++;
-                        serviceStatsLocked2.mRunningSinceMs = serviceStatsLocked2.mBsi.mOnBatteryTimeBase.getUptime(j4 * 1000) / 1000;
+                        serviceStatsLocked2.mRunningSinceMs =
+                                serviceStatsLocked2.mBsi.mOnBatteryTimeBase.getUptime(j4 * 1000)
+                                        / 1000;
                         serviceStatsLocked2.mRunning = true;
                     }
                 }
@@ -114,10 +144,15 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda6
                 long j6 = this.f$5;
                 synchronized (batteryStatsService3.mStats) {
                     BatteryStatsImpl batteryStatsImpl3 = batteryStatsService3.mStats;
-                    BatteryStatsImpl.Uid.Pkg.Serv serviceStatsLocked3 = batteryStatsImpl3.getUidStatsLocked(batteryStatsImpl3.mapUid(i3), j5, j6).getServiceStatsLocked(str5, str6);
+                    BatteryStatsImpl.Uid.Pkg.Serv serviceStatsLocked3 =
+                            batteryStatsImpl3
+                                    .getUidStatsLocked(batteryStatsImpl3.mapUid(i3), j5, j6)
+                                    .getServiceStatsLocked(str5, str6);
                     if (!serviceStatsLocked3.mLaunched) {
                         serviceStatsLocked3.mLaunches++;
-                        serviceStatsLocked3.mLaunchedSinceMs = serviceStatsLocked3.mBsi.mOnBatteryTimeBase.getUptime(j6 * 1000) / 1000;
+                        serviceStatsLocked3.mLaunchedSinceMs =
+                                serviceStatsLocked3.mBsi.mOnBatteryTimeBase.getUptime(j6 * 1000)
+                                        / 1000;
                         serviceStatsLocked3.mLaunched = true;
                     }
                 }
@@ -136,7 +171,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda6
                 long j7 = this.f$4;
                 long j8 = this.f$5;
                 synchronized (batteryStatsService4.mStats) {
-                    batteryStatsService4.mStats.noteLongPartialWakeLockFinishInternal(i4, str7, str8, j7, j8);
+                    batteryStatsService4.mStats.noteLongPartialWakeLockFinishInternal(
+                            i4, str7, str8, j7, j8);
                 }
                 return;
         }

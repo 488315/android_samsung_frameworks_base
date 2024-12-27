@@ -24,9 +24,7 @@ public final class FaceEnrollStages {
     public static final int WAITING_FOR_CENTERING = 2;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FaceEnrollStage {
-    }
+    public @interface FaceEnrollStage {}
 
-    private FaceEnrollStages() {
-    }
+    private FaceEnrollStages() {}
 }

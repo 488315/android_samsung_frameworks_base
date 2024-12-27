@@ -29,6 +29,7 @@ import android.util.EventLog;
 import android.util.MathUtils;
 import android.util.SparseArray;
 import android.view.Display;
+
 import com.android.internal.display.BrightnessSynchronizer;
 import com.android.internal.os.BackgroundThread;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -42,12 +43,15 @@ import com.android.server.power.HqmDataDispatcher;
 import com.android.server.power.PowerHistorian;
 import com.android.server.power.PowerManagerUtil;
 import com.android.server.power.Slog;
+
 import com.samsung.android.displayquality.SemDisplayQualityManager;
 import com.samsung.android.displaysolution.SemDisplaySolutionManager;
-import java.util.List;
-import java.util.Locale;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
+import java.util.Locale;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -153,7 +157,8 @@ public final class AutomaticBrightnessController {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ AutomaticBrightnessController this$0;
 
-        public /* synthetic */ AnonymousClass2(AutomaticBrightnessController automaticBrightnessController, int i) {
+        public /* synthetic */ AnonymousClass2(
+                AutomaticBrightnessController automaticBrightnessController, int i) {
             this.$r8$classId = i;
             this.this$0 = automaticBrightnessController;
         }
@@ -165,18 +170,25 @@ public final class AutomaticBrightnessController {
             switch (this.$r8$classId) {
                 case 0:
                     try {
-                        ActivityTaskManager.RootTaskInfo focusedRootTaskInfo = this.this$0.mActivityTaskManager.getFocusedRootTaskInfo();
-                        if (focusedRootTaskInfo != null && (componentName = focusedRootTaskInfo.topActivity) != null) {
+                        ActivityTaskManager.RootTaskInfo focusedRootTaskInfo =
+                                this.this$0.mActivityTaskManager.getFocusedRootTaskInfo();
+                        if (focusedRootTaskInfo != null
+                                && (componentName = focusedRootTaskInfo.topActivity) != null) {
                             String packageName = componentName.getPackageName();
                             String str = this.this$0.mForegroundAppPackageName;
                             if (str != null && str.equals(packageName)) {
                                 break;
                             } else {
-                                AutomaticBrightnessController automaticBrightnessController = this.this$0;
-                                automaticBrightnessController.mPendingForegroundAppPackageName = packageName;
+                                AutomaticBrightnessController automaticBrightnessController =
+                                        this.this$0;
+                                automaticBrightnessController.mPendingForegroundAppPackageName =
+                                        packageName;
                                 automaticBrightnessController.mPendingForegroundAppCategory = -1;
                                 try {
-                                    this.this$0.mPendingForegroundAppCategory = automaticBrightnessController.mPackageManager.getApplicationInfo(packageName, 4194304).category;
+                                    this.this$0.mPendingForegroundAppCategory =
+                                            automaticBrightnessController.mPackageManager
+                                                    .getApplicationInfo(packageName, 4194304)
+                                                    .category;
                                 } catch (PackageManager.NameNotFoundException unused) {
                                 }
                                 this.this$0.mHandler.sendEmptyMessage(5);
@@ -189,7 +201,8 @@ public final class AutomaticBrightnessController {
                     break;
                 default:
                     AutomaticBrightnessController automaticBrightnessController2 = this.this$0;
-                    if (automaticBrightnessController2.mProximitySensorEnabled && (i = automaticBrightnessController2.mPendingProximity) != -1) {
+                    if (automaticBrightnessController2.mProximitySensorEnabled
+                            && (i = automaticBrightnessController2.mPendingProximity) != -1) {
                         automaticBrightnessController2.mProximity = i;
                         break;
                     }
@@ -311,11 +324,15 @@ public final class AutomaticBrightnessController {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             int i = message.what;
-            AutomaticBrightnessController automaticBrightnessController = AutomaticBrightnessController.this;
+            AutomaticBrightnessController automaticBrightnessController =
+                    AutomaticBrightnessController.this;
             switch (i) {
                 case 1:
-                    long sensorEventScaleTime = automaticBrightnessController.mClock.getSensorEventScaleTime();
-                    automaticBrightnessController.mAmbientLightRingBuffer.prune(sensorEventScaleTime - automaticBrightnessController.mAmbientLightHorizonLong);
+                    long sensorEventScaleTime =
+                            automaticBrightnessController.mClock.getSensorEventScaleTime();
+                    automaticBrightnessController.mAmbientLightRingBuffer.prune(
+                            sensorEventScaleTime
+                                    - automaticBrightnessController.mAmbientLightHorizonLong);
                     automaticBrightnessController.updateAmbientLux(sensorEventScaleTime);
                     break;
                 case 2:
@@ -323,11 +340,32 @@ public final class AutomaticBrightnessController {
                         automaticBrightnessController.mBrightnessAdjustmentSamplePending = false;
                         if (automaticBrightnessController.mAmbientLuxValid) {
                             float f = automaticBrightnessController.mScreenAutoBrightness;
-                            if (f >= FullScreenMagnificationGestureHandler.MAX_SCALE || f == -1.0f) {
+                            if (f >= FullScreenMagnificationGestureHandler.MAX_SCALE
+                                    || f == -1.0f) {
                                 if (automaticBrightnessController.mLoggingEnabled) {
-                                    Slog.d("AutomaticBrightnessController", "Auto-brightness adjustment changed by user: lux=" + automaticBrightnessController.mAmbientLux + ", brightness=" + automaticBrightnessController.mScreenAutoBrightness + ", ring=" + automaticBrightnessController.mAmbientLightRingBuffer);
+                                    Slog.d(
+                                            "AutomaticBrightnessController",
+                                            "Auto-brightness adjustment changed by user: lux="
+                                                    + automaticBrightnessController.mAmbientLux
+                                                    + ", brightness="
+                                                    + automaticBrightnessController
+                                                            .mScreenAutoBrightness
+                                                    + ", ring="
+                                                    + automaticBrightnessController
+                                                            .mAmbientLightRingBuffer);
                                 }
-                                EventLog.writeEvent(35000, Float.valueOf(automaticBrightnessController.mBrightnessAdjustmentSampleOldLux), Float.valueOf(automaticBrightnessController.mBrightnessAdjustmentSampleOldBrightness), Float.valueOf(automaticBrightnessController.mAmbientLux), Float.valueOf(automaticBrightnessController.mScreenAutoBrightness));
+                                EventLog.writeEvent(
+                                        35000,
+                                        Float.valueOf(
+                                                automaticBrightnessController
+                                                        .mBrightnessAdjustmentSampleOldLux),
+                                        Float.valueOf(
+                                                automaticBrightnessController
+                                                        .mBrightnessAdjustmentSampleOldBrightness),
+                                        Float.valueOf(automaticBrightnessController.mAmbientLux),
+                                        Float.valueOf(
+                                                automaticBrightnessController
+                                                        .mScreenAutoBrightness));
                                 break;
                             }
                         }
@@ -339,21 +377,30 @@ public final class AutomaticBrightnessController {
                     break;
                 case 4:
                     if (automaticBrightnessController.mLoggingEnabled) {
-                        Slog.d("AutomaticBrightnessController", "Attempting to update foreground app");
+                        Slog.d(
+                                "AutomaticBrightnessController",
+                                "Attempting to update foreground app");
                     }
                     automaticBrightnessController.mInjector.getClass();
-                    BackgroundThread.getHandler().post(new AnonymousClass2(automaticBrightnessController, 0));
+                    BackgroundThread.getHandler()
+                            .post(new AnonymousClass2(automaticBrightnessController, 0));
                     break;
                 case 5:
                     if (automaticBrightnessController.mLoggingEnabled) {
-                        StringBuilder sb = new StringBuilder("Updating foreground app: packageName=");
+                        StringBuilder sb =
+                                new StringBuilder("Updating foreground app: packageName=");
                         sb.append(automaticBrightnessController.mPendingForegroundAppPackageName);
                         sb.append(", category=");
-                        BatteryService$$ExternalSyntheticOutline0.m(sb, automaticBrightnessController.mPendingForegroundAppCategory, "AutomaticBrightnessController");
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                sb,
+                                automaticBrightnessController.mPendingForegroundAppCategory,
+                                "AutomaticBrightnessController");
                     }
-                    automaticBrightnessController.mForegroundAppPackageName = automaticBrightnessController.mPendingForegroundAppPackageName;
+                    automaticBrightnessController.mForegroundAppPackageName =
+                            automaticBrightnessController.mPendingForegroundAppPackageName;
                     automaticBrightnessController.mPendingForegroundAppPackageName = null;
-                    automaticBrightnessController.mForegroundAppCategory = automaticBrightnessController.mPendingForegroundAppCategory;
+                    automaticBrightnessController.mForegroundAppCategory =
+                            automaticBrightnessController.mPendingForegroundAppCategory;
                     automaticBrightnessController.mPendingForegroundAppCategory = -1;
                     automaticBrightnessController.updateAutoBrightness(true);
                     break;
@@ -366,7 +413,9 @@ public final class AutomaticBrightnessController {
                     break;
                 case 8:
                     if (!automaticBrightnessController.mAmbientLuxValid) {
-                        Slog.e("AutomaticBrightnessController", "Light sensor update is timed out!");
+                        Slog.e(
+                                "AutomaticBrightnessController",
+                                "Light sensor update is timed out!");
                         automaticBrightnessController.mAmbientLuxValid = true;
                         automaticBrightnessController.updateAutoBrightness(true);
                         break;
@@ -377,8 +426,7 @@ public final class AutomaticBrightnessController {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Callbacks {
-    }
+    public interface Callbacks {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     interface Clock {
@@ -386,8 +434,7 @@ public final class AutomaticBrightnessController {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class Injector {
-    }
+    public final class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RealClock implements Clock {
@@ -399,7 +446,9 @@ public final class AutomaticBrightnessController {
 
         @Override // com.android.server.display.AutomaticBrightnessController.Clock
         public final long getSensorEventScaleTime() {
-            return this.mOffloadControlsDozeBrightness ? SystemClock.elapsedRealtime() : SystemClock.uptimeMillis();
+            return this.mOffloadControlsDozeBrightness
+                    ? SystemClock.elapsedRealtime()
+                    : SystemClock.uptimeMillis();
         }
     }
 
@@ -414,14 +463,19 @@ public final class AutomaticBrightnessController {
             if (!shortTermModel.mIsValid) {
                 float f2 = shortTermModel.mAnchor;
                 if (f2 != -1.0f) {
-                    AutomaticBrightnessController automaticBrightnessController = AutomaticBrightnessController.this;
-                    BrightnessMappingStrategy brightnessMappingStrategy = automaticBrightnessController.mCurrentBrightnessMapper;
-                    BrightnessConfiguration brightnessConfiguration = brightnessMappingStrategy.getBrightnessConfiguration();
+                    AutomaticBrightnessController automaticBrightnessController =
+                            AutomaticBrightnessController.this;
+                    BrightnessMappingStrategy brightnessMappingStrategy =
+                            automaticBrightnessController.mCurrentBrightnessMapper;
+                    BrightnessConfiguration brightnessConfiguration =
+                            brightnessMappingStrategy.getBrightnessConfiguration();
                     if (brightnessConfiguration != null) {
-                        if (!Float.isNaN(brightnessConfiguration.getShortTermModelLowerLuxMultiplier())) {
+                        if (!Float.isNaN(
+                                brightnessConfiguration.getShortTermModelLowerLuxMultiplier())) {
                             brightnessConfiguration.getShortTermModelLowerLuxMultiplier();
                         }
-                        if (!Float.isNaN(brightnessConfiguration.getShortTermModelUpperLuxMultiplier())) {
+                        if (!Float.isNaN(
+                                brightnessConfiguration.getShortTermModelUpperLuxMultiplier())) {
                             brightnessConfiguration.getShortTermModelUpperLuxMultiplier();
                         }
                     }
@@ -429,23 +483,48 @@ public final class AutomaticBrightnessController {
                     float f3 = f2 - max;
                     float f4 = f2 + max;
                     if (f3 >= f || f > f4) {
-                        android.util.Slog.d("BrightnessMappingStrategy", "ShortTermModel: reset data, ambient lux is " + f + "(" + f3 + ", " + f4 + ")");
+                        android.util.Slog.d(
+                                "BrightnessMappingStrategy",
+                                "ShortTermModel: reset data, ambient lux is "
+                                        + f
+                                        + "("
+                                        + f3
+                                        + ", "
+                                        + f4
+                                        + ")");
                         float f5 = shortTermModel.mAnchor;
-                        HysteresisLevels hysteresisLevels = automaticBrightnessController.mAmbientBrightnessThresholds;
+                        HysteresisLevels hysteresisLevels =
+                                automaticBrightnessController.mAmbientBrightnessThresholds;
                         float darkeningThreshold = hysteresisLevels.getDarkeningThreshold(f5);
-                        float brighteningThreshold = hysteresisLevels.getBrighteningThreshold(shortTermModel.mAnchor);
+                        float brighteningThreshold =
+                                hysteresisLevels.getBrighteningThreshold(shortTermModel.mAnchor);
                         float f6 = automaticBrightnessController.mAmbientLux;
                         if (f6 <= darkeningThreshold || f6 >= brighteningThreshold) {
-                            String str = "ShortTermModel: reset data, ambient lux is " + automaticBrightnessController.mAmbientLux + " ,hysteresis(" + darkeningThreshold + ", " + brighteningThreshold + ")";
+                            String str =
+                                    "ShortTermModel: reset data, ambient lux is "
+                                            + automaticBrightnessController.mAmbientLux
+                                            + " ,hysteresis("
+                                            + darkeningThreshold
+                                            + ", "
+                                            + brighteningThreshold
+                                            + ")";
                             Slog.d("AutomaticBrightnessController", str);
-                            PowerHistorian powerHistorian = automaticBrightnessController.mPowerHistorian;
+                            PowerHistorian powerHistorian =
+                                    automaticBrightnessController.mPowerHistorian;
                             powerHistorian.getClass();
                             powerHistorian.addRecord(3, new PowerHistorian.MessageRecord(str));
                             automaticBrightnessController.resetShortTermModel();
                         }
                     } else {
                         if (brightnessMappingStrategy.mLoggingEnabled) {
-                            android.util.Slog.d("BrightnessMappingStrategy", "ShortTermModel: re-validate user data, ambient lux is " + f3 + " < " + f + " < " + f4);
+                            android.util.Slog.d(
+                                    "BrightnessMappingStrategy",
+                                    "ShortTermModel: re-validate user data, ambient lux is "
+                                            + f3
+                                            + " < "
+                                            + f
+                                            + " < "
+                                            + f4);
                         }
                         shortTermModel.mIsValid = true;
                     }
@@ -455,18 +534,21 @@ public final class AutomaticBrightnessController {
             return false;
         }
 
-        public ShortTermModel() {
-        }
+        public ShortTermModel() {}
 
         public final String toString() {
-            return "mAnchor: " + this.mAnchor + "\n mBrightness: " + this.mBrightness + "\n mIsValid: " + this.mIsValid;
+            return "mAnchor: "
+                    + this.mAnchor
+                    + "\n mBrightness: "
+                    + this.mBrightness
+                    + "\n mIsValid: "
+                    + this.mIsValid;
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TaskStackListenerImpl extends TaskStackListener {
-        public TaskStackListenerImpl() {
-        }
+        public TaskStackListenerImpl() {}
 
         public final void onTaskStackChanged() {
             AutomaticBrightnessController.this.mHandler.sendEmptyMessage(4);
@@ -475,25 +557,65 @@ public final class AutomaticBrightnessController {
 
     /* JADX WARN: Type inference failed for: r12v3, types: [com.android.server.display.AutomaticBrightnessController$4] */
     /* JADX WARN: Type inference failed for: r12v4, types: [com.android.server.display.AutomaticBrightnessController$4] */
-    public AutomaticBrightnessController(Injector injector, Callbacks callbacks, Looper looper, SensorManager sensorManager, Sensor sensor, SparseArray sparseArray, int i, float f, float f2, float f3, int i2, int i3, long j, long j2, long j3, long j4, boolean z, HysteresisLevels hysteresisLevels, HysteresisLevels hysteresisLevels2, HysteresisLevels hysteresisLevels3, HysteresisLevels hysteresisLevels4, Context context, BrightnessRangeController brightnessRangeController, BrightnessThrottler brightnessThrottler, int i4, int i5, float f4, float f5, DisplayManagerFlags displayManagerFlags, HysteresisLevels hysteresisLevels5, HysteresisLevels hysteresisLevels6) {
+    public AutomaticBrightnessController(
+            Injector injector,
+            Callbacks callbacks,
+            Looper looper,
+            SensorManager sensorManager,
+            Sensor sensor,
+            SparseArray sparseArray,
+            int i,
+            float f,
+            float f2,
+            float f3,
+            int i2,
+            int i3,
+            long j,
+            long j2,
+            long j3,
+            long j4,
+            boolean z,
+            HysteresisLevels hysteresisLevels,
+            HysteresisLevels hysteresisLevels2,
+            HysteresisLevels hysteresisLevels3,
+            HysteresisLevels hysteresisLevels4,
+            Context context,
+            BrightnessRangeController brightnessRangeController,
+            BrightnessThrottler brightnessThrottler,
+            int i4,
+            int i5,
+            float f4,
+            float f5,
+            DisplayManagerFlags displayManagerFlags,
+            HysteresisLevels hysteresisLevels5,
+            HysteresisLevels hysteresisLevels6) {
         final int i6 = 1;
         final int i7 = 0;
         this.mIsCameraLightTypeSupported = false;
-        new BroadcastReceiver() { // from class: com.android.server.display.AutomaticBrightnessController.1
+        new BroadcastReceiver() { // from class:
+                                  // com.android.server.display.AutomaticBrightnessController.1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 String action = intent.getAction();
                 long uptimeMillis = SystemClock.uptimeMillis();
                 float floatExtra = intent.getFloatExtra("lux", -1.0f);
-                AutomaticBrightnessController automaticBrightnessController = AutomaticBrightnessController.this;
+                AutomaticBrightnessController automaticBrightnessController =
+                        AutomaticBrightnessController.this;
                 intent.getBooleanExtra("adaptive_brightness_service_start_extra", false);
                 automaticBrightnessController.getClass();
                 if (floatExtra < FullScreenMagnificationGestureHandler.MAX_SCALE) {
-                    Slog.d("AutomaticBrightnessController", "[CAB] lux value is not received lux: " + floatExtra + "  action: " + action);
+                    Slog.d(
+                            "AutomaticBrightnessController",
+                            "[CAB] lux value is not received lux: "
+                                    + floatExtra
+                                    + "  action: "
+                                    + action);
                     return;
                 }
                 if (PowerManagerUtil.SEC_FEATURE_USE_PMS_LOG || Build.IS_ENG) {
-                    Slog.d("AutomaticBrightnessController", "[CAB] onReceive lux: " + floatExtra + "  action: " + action);
+                    Slog.d(
+                            "AutomaticBrightnessController",
+                            "[CAB] onReceive lux: " + floatExtra + "  action: " + action);
                 }
                 AutomaticBrightnessController.this.handleLightSensorEvent(uptimeMillis, floatExtra);
             }
@@ -502,124 +624,190 @@ public final class AutomaticBrightnessController {
         this.mPendingProximity = -1;
         this.mPowerHistorian = PowerHistorian.INSTANCE;
         this.mOnProximityChangedRunnable = new AnonymousClass2(this, i6);
-        this.mProximitySensorListener = new SensorEventListener(this) { // from class: com.android.server.display.AutomaticBrightnessController.4
-            public final /* synthetic */ AutomaticBrightnessController this$0;
+        this.mProximitySensorListener =
+                new SensorEventListener(
+                        this) { // from class:
+                                // com.android.server.display.AutomaticBrightnessController.4
+                    public final /* synthetic */ AutomaticBrightnessController this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            private final void onAccuracyChanged$com$android$server$display$AutomaticBrightnessController$4(Sensor sensor2, int i8) {
-            }
+                    private final void
+                            onAccuracyChanged$com$android$server$display$AutomaticBrightnessController$4(
+                                    Sensor sensor2, int i8) {}
 
-            private final void onAccuracyChanged$com$android$server$display$AutomaticBrightnessController$5(Sensor sensor2, int i8) {
-            }
+                    private final void
+                            onAccuracyChanged$com$android$server$display$AutomaticBrightnessController$5(
+                                    Sensor sensor2, int i8) {}
 
-            @Override // android.hardware.SensorEventListener
-            public final void onAccuracyChanged(Sensor sensor2, int i8) {
-                int i9 = i7;
-            }
+                    @Override // android.hardware.SensorEventListener
+                    public final void onAccuracyChanged(Sensor sensor2, int i8) {
+                        int i9 = i7;
+                    }
 
-            @Override // android.hardware.SensorEventListener
-            public final void onSensorChanged(SensorEvent sensorEvent) {
-                switch (i7) {
-                    case 0:
-                        if (this.this$0.mProximitySensorEnabled) {
-                            SystemClock.uptimeMillis();
-                            float f6 = sensorEvent.values[0];
-                            boolean z2 = this.this$0.mProximitySensor.getType() != 8 ? !(this.this$0.mProximitySensor.getType() != 65640 || f6 < 21.0f) : !(f6 < FullScreenMagnificationGestureHandler.MAX_SCALE || f6 >= this.this$0.mProximityThreshold);
-                            Slog.d("AutomaticBrightnessController", "[api] onSensorChanged: proximity: " + z2);
-                            AutomaticBrightnessController automaticBrightnessController = this.this$0;
-                            if (automaticBrightnessController.mProximitySensorEnabled) {
-                                int i8 = automaticBrightnessController.mPendingProximity;
-                                if (i8 != 0 || z2) {
-                                    if (i8 != 1 || !z2) {
-                                        if (z2) {
-                                            automaticBrightnessController.mPendingProximity = 1;
-                                        } else {
-                                            automaticBrightnessController.mPendingProximity = 0;
+                    @Override // android.hardware.SensorEventListener
+                    public final void onSensorChanged(SensorEvent sensorEvent) {
+                        switch (i7) {
+                            case 0:
+                                if (this.this$0.mProximitySensorEnabled) {
+                                    SystemClock.uptimeMillis();
+                                    float f6 = sensorEvent.values[0];
+                                    boolean z2 =
+                                            this.this$0.mProximitySensor.getType() != 8
+                                                    ? !(this.this$0.mProximitySensor.getType()
+                                                                    != 65640
+                                                            || f6 < 21.0f)
+                                                    : !(f6
+                                                                    < FullScreenMagnificationGestureHandler
+                                                                            .MAX_SCALE
+                                                            || f6
+                                                                    >= this.this$0
+                                                                            .mProximityThreshold);
+                                    Slog.d(
+                                            "AutomaticBrightnessController",
+                                            "[api] onSensorChanged: proximity: " + z2);
+                                    AutomaticBrightnessController automaticBrightnessController =
+                                            this.this$0;
+                                    if (automaticBrightnessController.mProximitySensorEnabled) {
+                                        int i8 = automaticBrightnessController.mPendingProximity;
+                                        if (i8 != 0 || z2) {
+                                            if (i8 != 1 || !z2) {
+                                                if (z2) {
+                                                    automaticBrightnessController
+                                                                    .mPendingProximity =
+                                                            1;
+                                                } else {
+                                                    automaticBrightnessController
+                                                                    .mPendingProximity =
+                                                            0;
+                                                }
+                                                AutomaticBrightnessHandler
+                                                        automaticBrightnessHandler =
+                                                                automaticBrightnessController
+                                                                        .mHandler;
+                                                AnonymousClass2 anonymousClass2 =
+                                                        automaticBrightnessController
+                                                                .mOnProximityChangedRunnable;
+                                                automaticBrightnessHandler.removeCallbacks(
+                                                        anonymousClass2);
+                                                automaticBrightnessHandler.postDelayed(
+                                                        anonymousClass2, 200L);
+                                                break;
+                                            }
                                         }
-                                        AutomaticBrightnessHandler automaticBrightnessHandler = automaticBrightnessController.mHandler;
-                                        AnonymousClass2 anonymousClass2 = automaticBrightnessController.mOnProximityChangedRunnable;
-                                        automaticBrightnessHandler.removeCallbacks(anonymousClass2);
-                                        automaticBrightnessHandler.postDelayed(anonymousClass2, 200L);
-                                        break;
                                     }
                                 }
-                            }
+                                break;
+                            default:
+                                AutomaticBrightnessController automaticBrightnessController2 =
+                                        this.this$0;
+                                SensorEvent sensorEvent2 =
+                                        automaticBrightnessController2.mInjectedLuxEvent;
+                                if (sensorEvent2 != null) {
+                                    automaticBrightnessController2
+                                                    .mLastRealLuxEventDuringInjection =
+                                            sensorEvent;
+                                    sensorEvent = sensorEvent2;
+                                }
+                                automaticBrightnessController2.onSensorChangedInternal(sensorEvent);
+                                break;
                         }
-                        break;
-                    default:
-                        AutomaticBrightnessController automaticBrightnessController2 = this.this$0;
-                        SensorEvent sensorEvent2 = automaticBrightnessController2.mInjectedLuxEvent;
-                        if (sensorEvent2 != null) {
-                            automaticBrightnessController2.mLastRealLuxEventDuringInjection = sensorEvent;
-                            sensorEvent = sensorEvent2;
-                        }
-                        automaticBrightnessController2.onSensorChangedInternal(sensorEvent);
-                        break;
-                }
-            }
-        };
-        this.mLightSensorListener = new SensorEventListener(this) { // from class: com.android.server.display.AutomaticBrightnessController.4
-            public final /* synthetic */ AutomaticBrightnessController this$0;
+                    }
+                };
+        this.mLightSensorListener =
+                new SensorEventListener(
+                        this) { // from class:
+                                // com.android.server.display.AutomaticBrightnessController.4
+                    public final /* synthetic */ AutomaticBrightnessController this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            private final void onAccuracyChanged$com$android$server$display$AutomaticBrightnessController$4(Sensor sensor2, int i8) {
-            }
+                    private final void
+                            onAccuracyChanged$com$android$server$display$AutomaticBrightnessController$4(
+                                    Sensor sensor2, int i8) {}
 
-            private final void onAccuracyChanged$com$android$server$display$AutomaticBrightnessController$5(Sensor sensor2, int i8) {
-            }
+                    private final void
+                            onAccuracyChanged$com$android$server$display$AutomaticBrightnessController$5(
+                                    Sensor sensor2, int i8) {}
 
-            @Override // android.hardware.SensorEventListener
-            public final void onAccuracyChanged(Sensor sensor2, int i8) {
-                int i9 = i6;
-            }
+                    @Override // android.hardware.SensorEventListener
+                    public final void onAccuracyChanged(Sensor sensor2, int i8) {
+                        int i9 = i6;
+                    }
 
-            @Override // android.hardware.SensorEventListener
-            public final void onSensorChanged(SensorEvent sensorEvent) {
-                switch (i6) {
-                    case 0:
-                        if (this.this$0.mProximitySensorEnabled) {
-                            SystemClock.uptimeMillis();
-                            float f6 = sensorEvent.values[0];
-                            boolean z2 = this.this$0.mProximitySensor.getType() != 8 ? !(this.this$0.mProximitySensor.getType() != 65640 || f6 < 21.0f) : !(f6 < FullScreenMagnificationGestureHandler.MAX_SCALE || f6 >= this.this$0.mProximityThreshold);
-                            Slog.d("AutomaticBrightnessController", "[api] onSensorChanged: proximity: " + z2);
-                            AutomaticBrightnessController automaticBrightnessController = this.this$0;
-                            if (automaticBrightnessController.mProximitySensorEnabled) {
-                                int i8 = automaticBrightnessController.mPendingProximity;
-                                if (i8 != 0 || z2) {
-                                    if (i8 != 1 || !z2) {
-                                        if (z2) {
-                                            automaticBrightnessController.mPendingProximity = 1;
-                                        } else {
-                                            automaticBrightnessController.mPendingProximity = 0;
+                    @Override // android.hardware.SensorEventListener
+                    public final void onSensorChanged(SensorEvent sensorEvent) {
+                        switch (i6) {
+                            case 0:
+                                if (this.this$0.mProximitySensorEnabled) {
+                                    SystemClock.uptimeMillis();
+                                    float f6 = sensorEvent.values[0];
+                                    boolean z2 =
+                                            this.this$0.mProximitySensor.getType() != 8
+                                                    ? !(this.this$0.mProximitySensor.getType()
+                                                                    != 65640
+                                                            || f6 < 21.0f)
+                                                    : !(f6
+                                                                    < FullScreenMagnificationGestureHandler
+                                                                            .MAX_SCALE
+                                                            || f6
+                                                                    >= this.this$0
+                                                                            .mProximityThreshold);
+                                    Slog.d(
+                                            "AutomaticBrightnessController",
+                                            "[api] onSensorChanged: proximity: " + z2);
+                                    AutomaticBrightnessController automaticBrightnessController =
+                                            this.this$0;
+                                    if (automaticBrightnessController.mProximitySensorEnabled) {
+                                        int i8 = automaticBrightnessController.mPendingProximity;
+                                        if (i8 != 0 || z2) {
+                                            if (i8 != 1 || !z2) {
+                                                if (z2) {
+                                                    automaticBrightnessController
+                                                                    .mPendingProximity =
+                                                            1;
+                                                } else {
+                                                    automaticBrightnessController
+                                                                    .mPendingProximity =
+                                                            0;
+                                                }
+                                                AutomaticBrightnessHandler
+                                                        automaticBrightnessHandler =
+                                                                automaticBrightnessController
+                                                                        .mHandler;
+                                                AnonymousClass2 anonymousClass2 =
+                                                        automaticBrightnessController
+                                                                .mOnProximityChangedRunnable;
+                                                automaticBrightnessHandler.removeCallbacks(
+                                                        anonymousClass2);
+                                                automaticBrightnessHandler.postDelayed(
+                                                        anonymousClass2, 200L);
+                                                break;
+                                            }
                                         }
-                                        AutomaticBrightnessHandler automaticBrightnessHandler = automaticBrightnessController.mHandler;
-                                        AnonymousClass2 anonymousClass2 = automaticBrightnessController.mOnProximityChangedRunnable;
-                                        automaticBrightnessHandler.removeCallbacks(anonymousClass2);
-                                        automaticBrightnessHandler.postDelayed(anonymousClass2, 200L);
-                                        break;
                                     }
                                 }
-                            }
+                                break;
+                            default:
+                                AutomaticBrightnessController automaticBrightnessController2 =
+                                        this.this$0;
+                                SensorEvent sensorEvent2 =
+                                        automaticBrightnessController2.mInjectedLuxEvent;
+                                if (sensorEvent2 != null) {
+                                    automaticBrightnessController2
+                                                    .mLastRealLuxEventDuringInjection =
+                                            sensorEvent;
+                                    sensorEvent = sensorEvent2;
+                                }
+                                automaticBrightnessController2.onSensorChangedInternal(sensorEvent);
+                                break;
                         }
-                        break;
-                    default:
-                        AutomaticBrightnessController automaticBrightnessController2 = this.this$0;
-                        SensorEvent sensorEvent2 = automaticBrightnessController2.mInjectedLuxEvent;
-                        if (sensorEvent2 != null) {
-                            automaticBrightnessController2.mLastRealLuxEventDuringInjection = sensorEvent;
-                            sensorEvent = sensorEvent2;
-                        }
-                        automaticBrightnessController2.onSensorChangedInternal(sensorEvent);
-                        break;
-                }
-            }
-        };
+                    }
+                };
         this.mInjector = injector;
         boolean isEnabled = displayManagerFlags.mOffloadControlsDozeAutoBrightness.isEnabled();
         injector.getClass();
@@ -688,7 +876,8 @@ public final class AutomaticBrightnessController {
             Sensor defaultSensor = sensorManager.getDefaultSensor(8);
             this.mProximitySensor = defaultSensor;
             if (defaultSensor != null) {
-                if (defaultSensor.getName().contains("Palm") || defaultSensor.getName().contains("Ear")) {
+                if (defaultSensor.getName().contains("Palm")
+                        || defaultSensor.getName().contains("Ear")) {
                     this.mProximitySensor = null;
                 } else {
                     this.mUseLightSensorBlockingPrevention = true;
@@ -712,7 +901,8 @@ public final class AutomaticBrightnessController {
         this.mBrightnessRangeController = brightnessRangeController;
         this.mBrightnessThrottler = brightnessThrottler;
         this.mBrightnessMappingStrategyMap = sparseArray;
-        this.mDisplaySolutionManager = (SemDisplaySolutionManager) context.getSystemService("DisplaySolution");
+        this.mDisplaySolutionManager =
+                (SemDisplaySolutionManager) context.getSystemService("DisplaySolution");
         if (f5 != -1.0f) {
             setScreenBrightnessByUser(f4, this.mCurrentBrightnessMapper.getBrightnessFromNits(f5));
         }
@@ -722,7 +912,8 @@ public final class AutomaticBrightnessController {
         int i;
         long j3 = j;
         if (this.mLoggingEnabled) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("calculateAmbientLux(", j3, ", ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m("calculateAmbientLux(", j3, ", ");
             m.append(j2);
             m.append(")");
             Slog.d("AutomaticBrightnessController", m.toString());
@@ -730,7 +921,9 @@ public final class AutomaticBrightnessController {
         AmbientLightRingBuffer ambientLightRingBuffer = this.mAmbientLightRingBuffer;
         int i2 = ambientLightRingBuffer.mCount;
         if (i2 == 0) {
-            Slog.e("AutomaticBrightnessController", "calculateAmbientLux: No ambient light readings available");
+            Slog.e(
+                    "AutomaticBrightnessController",
+                    "calculateAmbientLux: No ambient light readings available");
             return -1.0f;
         }
         int i3 = PowerManagerUtil.AUTO_BRIGHTNESS_TYPE;
@@ -752,7 +945,9 @@ public final class AutomaticBrightnessController {
             i5++;
         }
         if (this.mLoggingEnabled) {
-            StringBuilder m2 = BatteryService$$ExternalSyntheticOutline0.m(i5, "calculateAmbientLux: selected endIndex=", ", point=(");
+            StringBuilder m2 =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i5, "calculateAmbientLux: selected endIndex=", ", point=(");
             m2.append(ambientLightRingBuffer.getTime(i5));
             m2.append(", ");
             m2.append(ambientLightRingBuffer.getLux(i5));
@@ -777,7 +972,9 @@ public final class AutomaticBrightnessController {
             float f6 = f4 - (((0.5f * f5) + i7) * f5);
             float lux = ambientLightRingBuffer.getLux(i6);
             if (this.mLoggingEnabled) {
-                StringBuilder m3 = BatteryService$$ExternalSyntheticOutline0.m("calculateAmbientLux: [", j6, ", ");
+                StringBuilder m3 =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                "calculateAmbientLux: [", j6, ", ");
                 m3.append(j5);
                 m3.append("]: lux=");
                 m3.append(lux);
@@ -793,25 +990,43 @@ public final class AutomaticBrightnessController {
             j4 = j7;
         }
         if (this.mLoggingEnabled) {
-            Slog.d("AutomaticBrightnessController", "calculateAmbientLux: totalWeight=" + f + ", newAmbientLux=" + (f2 / f));
+            Slog.d(
+                    "AutomaticBrightnessController",
+                    "calculateAmbientLux: totalWeight=" + f + ", newAmbientLux=" + (f2 / f));
         }
         return f2 / f;
     }
 
-    public final void configure(int i, BrightnessConfiguration brightnessConfiguration, float f, boolean z, float f2, boolean z2, int i2, int i3, boolean z3, boolean z4, int i4) {
+    public final void configure(
+            int i,
+            BrightnessConfiguration brightnessConfiguration,
+            float f,
+            boolean z,
+            float f2,
+            boolean z2,
+            int i2,
+            int i3,
+            boolean z3,
+            boolean z4,
+            int i4) {
         boolean z5;
         boolean z6;
         boolean lightSensorEnabled;
         boolean z7;
         boolean screenBrightnessByUser;
         this.mState = i;
-        boolean brightnessConfiguration2 = ((BrightnessMappingStrategy) this.mBrightnessMappingStrategyMap.get(0)).setBrightnessConfiguration(brightnessConfiguration);
+        boolean brightnessConfiguration2 =
+                ((BrightnessMappingStrategy) this.mBrightnessMappingStrategyMap.get(0))
+                        .setBrightnessConfiguration(brightnessConfiguration);
         boolean z8 = true;
         ShortTermModel shortTermModel = this.mShortTermModel;
         if (brightnessConfiguration2 || z4) {
             PowerHistorian powerHistorian = this.mPowerHistorian;
             powerHistorian.getClass();
-            powerHistorian.addRecord(3, new PowerHistorian.MessageRecord("ShortTermModel: reset data, change configuration"));
+            powerHistorian.addRecord(
+                    3,
+                    new PowerHistorian.MessageRecord(
+                            "ShortTermModel: reset data, change configuration"));
             if (!isInIdleMode() && z3) {
                 if (PowerManagerUtil.USE_SEC_LONG_TERM_MODEL) {
                     this.mCurrentBrightnessMapper.clearUserDataPoints();
@@ -833,7 +1048,9 @@ public final class AutomaticBrightnessController {
         } else {
             this.mDisplayPolicy = i2;
             if (this.mLoggingEnabled) {
-                Slog.d("AutomaticBrightnessController", "Display policy transitioning from " + i5 + " to " + i2);
+                Slog.d(
+                        "AutomaticBrightnessController",
+                        "Display policy transitioning from " + i5 + " to " + i2);
             }
             if (i2 != 3 && i2 != 2 && ((i5 == 3 || i5 == 2) && !isInIdleMode())) {
                 this.mNonInteractiveTime = SystemClock.elapsedRealtime();
@@ -842,7 +1059,13 @@ public final class AutomaticBrightnessController {
                 if (z9) {
                     this.mForceUpdateBrightness = true;
                 }
-                if (((BrightnessMappingStrategy) this.mBrightnessMappingStrategyMap.get(0)).getDefaultConfig() != null && SystemClock.elapsedRealtime() - this.mNonInteractiveTime > ((BrightnessMappingStrategy) this.mBrightnessMappingStrategyMap.get(0)).getShortTermModelTimeout()) {
+                if (((BrightnessMappingStrategy) this.mBrightnessMappingStrategyMap.get(0))
+                                        .getDefaultConfig()
+                                != null
+                        && SystemClock.elapsedRealtime() - this.mNonInteractiveTime
+                                > ((BrightnessMappingStrategy)
+                                                this.mBrightnessMappingStrategyMap.get(0))
+                                        .getShortTermModelTimeout()) {
                     shortTermModel.mIsValid = false;
                     Slog.d("AutomaticBrightnessController", "ShortTermModel: invalidate user data");
                 }
@@ -858,10 +1081,15 @@ public final class AutomaticBrightnessController {
         if (z && z11) {
             if (this.mAmbientLuxValid) {
                 float calculateAmbientLux = calculateAmbientLux(SystemClock.uptimeMillis(), 600L);
-                if (FullScreenMagnificationGestureHandler.MAX_SCALE <= calculateAmbientLux && (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM || calculateAmbientLux < PowerManagerUtil.HBM_LUX)) {
+                if (FullScreenMagnificationGestureHandler.MAX_SCALE <= calculateAmbientLux
+                        && (!PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM
+                                || calculateAmbientLux < PowerManagerUtil.HBM_LUX)) {
                     setAmbientLux(calculateAmbientLux);
-                } else if (PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM && this.mAmbientLux >= PowerManagerUtil.HBM_LUX) {
-                    Slog.d("AutomaticBrightnessController", "setScreenBrightnessByUser: cancel currentLux: " + calculateAmbientLux);
+                } else if (PowerManagerUtil.SEC_FEATURE_SUPPORT_HBM
+                        && this.mAmbientLux >= PowerManagerUtil.HBM_LUX) {
+                    Slog.d(
+                            "AutomaticBrightnessController",
+                            "setScreenBrightnessByUser: cancel currentLux: " + calculateAmbientLux);
                 }
                 screenBrightnessByUser = setScreenBrightnessByUser(this.mAmbientLux, f);
                 z10 |= screenBrightnessByUser;
@@ -876,7 +1104,8 @@ public final class AutomaticBrightnessController {
                 automaticBrightnessHandler.removeMessages(2);
             } else {
                 this.mBrightnessAdjustmentSamplePending = true;
-                this.mBrightnessAdjustmentSampleOldLux = this.mAmbientLuxValid ? this.mAmbientLux : -1.0f;
+                this.mBrightnessAdjustmentSampleOldLux =
+                        this.mAmbientLuxValid ? this.mAmbientLux : -1.0f;
                 this.mBrightnessAdjustmentSampleOldBrightness = this.mScreenAutoBrightness;
             }
             automaticBrightnessHandler.sendEmptyMessageDelayed(2, 10000L);
@@ -895,7 +1124,11 @@ public final class AutomaticBrightnessController {
                     int i8 = this.mInitialLightSensorRate;
                     this.mCurrentLightSensorRate = i8;
                     if (z9) {
-                        this.mSensorManager.registerListener(anonymousClass4, this.mLightSensor, i8 * 1000, automaticBrightnessHandler);
+                        this.mSensorManager.registerListener(
+                                anonymousClass4,
+                                this.mLightSensor,
+                                i8 * 1000,
+                                automaticBrightnessHandler);
                     }
                     Slog.d("AutomaticBrightnessController", "setLightSensorEnabledForCAB: true");
                     z7 = true;
@@ -926,15 +1159,23 @@ public final class AutomaticBrightnessController {
                 if (z13) {
                     if (!this.mProximitySensorEnabled) {
                         this.mProximitySensorEnabled = true;
-                        Slog.d("AutomaticBrightnessController", "setProximitySensorEnabled::registerListener");
-                        this.mSensorManager.registerListener(anonymousClass42, this.mProximitySensor, 3, automaticBrightnessHandler);
+                        Slog.d(
+                                "AutomaticBrightnessController",
+                                "setProximitySensorEnabled::registerListener");
+                        this.mSensorManager.registerListener(
+                                anonymousClass42,
+                                this.mProximitySensor,
+                                3,
+                                automaticBrightnessHandler);
                     }
                 } else if (this.mProximitySensorEnabled) {
                     this.mProximitySensorEnabled = false;
                     this.mProximity = -1;
                     this.mPendingProximity = -1;
                     automaticBrightnessHandler.removeCallbacks(this.mOnProximityChangedRunnable);
-                    Slog.d("AutomaticBrightnessController", "setProximitySensorEnabled::unregisterListener");
+                    Slog.d(
+                            "AutomaticBrightnessController",
+                            "setProximitySensorEnabled::unregisterListener");
                     this.mSensorManager.unregisterListener(anonymousClass42);
                 }
             }
@@ -969,14 +1210,18 @@ public final class AutomaticBrightnessController {
             brightnessEvent.mRecommendedBrightness = this.mScreenAutoBrightness;
             int i = 0;
             int i2 = (!z ? 2 : 0) | brightnessEvent.mFlags;
-            if (Display.isDozeState(this.mDisplayState) && this.mCurrentBrightnessMapper.getMode() != 2) {
+            if (Display.isDozeState(this.mDisplayState)
+                    && this.mCurrentBrightnessMapper.getMode() != 2) {
                 i = 4;
             }
             brightnessEvent.mFlags = i2 | i;
             brightnessEvent.mAutoBrightnessMode = this.mCurrentBrightnessMapper.getMode();
         }
         if (this.mAmbientLuxValid) {
-            return (!Display.isDozeState(this.mDisplayState) || this.mCurrentBrightnessMapper.getMode() == 2) ? this.mScreenAutoBrightness : this.mScreenAutoBrightness * this.mDozeScaleFactor;
+            return (!Display.isDozeState(this.mDisplayState)
+                            || this.mCurrentBrightnessMapper.getMode() == 2)
+                    ? this.mScreenAutoBrightness
+                    : this.mScreenAutoBrightness * this.mDozeScaleFactor;
         }
         return Float.NaN;
     }
@@ -995,13 +1240,19 @@ public final class AutomaticBrightnessController {
             int i2 = this.mNormalLightSensorRate;
             if (i2 != i) {
                 if (this.mLoggingEnabled) {
-                    Slog.d("AutomaticBrightnessController", "adjustLightSensorRate: previousRate=" + this.mCurrentLightSensorRate + ", currentRate=" + i2);
+                    Slog.d(
+                            "AutomaticBrightnessController",
+                            "adjustLightSensorRate: previousRate="
+                                    + this.mCurrentLightSensorRate
+                                    + ", currentRate="
+                                    + i2);
                 }
                 this.mCurrentLightSensorRate = i2;
                 SensorManager sensorManager = this.mSensorManager;
                 AnonymousClass4 anonymousClass4 = this.mLightSensorListener;
                 sensorManager.unregisterListener(anonymousClass4);
-                this.mSensorManager.registerListener(anonymousClass4, this.mLightSensor, i2 * 1000, automaticBrightnessHandler);
+                this.mSensorManager.registerListener(
+                        anonymousClass4, this.mLightSensor, i2 * 1000, automaticBrightnessHandler);
             }
         }
         this.mRecentLightSamples++;
@@ -1016,11 +1267,17 @@ public final class AutomaticBrightnessController {
             int i7 = ambientLightRingBuffer.mStart;
             int i8 = i5 - i7;
             System.arraycopy(ambientLightRingBuffer.mRingLux, i7, fArr, 0, i8);
-            System.arraycopy(ambientLightRingBuffer.mRingTime, ambientLightRingBuffer.mStart, jArr, 0, i8);
+            System.arraycopy(
+                    ambientLightRingBuffer.mRingTime, ambientLightRingBuffer.mStart, jArr, 0, i8);
             int i9 = ambientLightRingBuffer.mStart;
             if (i9 != 0) {
                 System.arraycopy(ambientLightRingBuffer.mRingLux, 0, fArr, i8, i9);
-                System.arraycopy(ambientLightRingBuffer.mRingTime, 0, jArr, i8, ambientLightRingBuffer.mStart);
+                System.arraycopy(
+                        ambientLightRingBuffer.mRingTime,
+                        0,
+                        jArr,
+                        i8,
+                        ambientLightRingBuffer.mStart);
             }
             ambientLightRingBuffer.mRingLux = fArr;
             ambientLightRingBuffer.mRingTime = jArr;
@@ -1050,12 +1307,19 @@ public final class AutomaticBrightnessController {
             setAmbientLux(calculateAmbientLux(j, 0L));
             this.mAmbientLuxValid = true;
             if (this.mLoggingEnabled) {
-                Slog.d("AutomaticBrightnessController", "updateAmbientLux: Initializing: mAmbientLightRingBuffer=" + ambientLightRingBuffer + ", mAmbientLux=" + this.mAmbientLux);
+                Slog.d(
+                        "AutomaticBrightnessController",
+                        "updateAmbientLux: Initializing: mAmbientLightRingBuffer="
+                                + ambientLightRingBuffer
+                                + ", mAmbientLux="
+                                + this.mAmbientLux);
             }
             updateAutoBrightness(true);
         }
         float calculateAmbientLux = calculateAmbientLux(j, 0L);
-        if (calculateAmbientLux >= this.mAmbientBrighteningThreshold || calculateAmbientLux <= this.mAmbientDarkeningThreshold || this.mForceUpdateBrightness) {
+        if (calculateAmbientLux >= this.mAmbientBrighteningThreshold
+                || calculateAmbientLux <= this.mAmbientDarkeningThreshold
+                || this.mForceUpdateBrightness) {
             this.mForceUpdateBrightness = false;
             setAmbientLux(calculateAmbientLux);
             if (this.mLoggingEnabled) {
@@ -1079,32 +1343,48 @@ public final class AutomaticBrightnessController {
 
     public final long nextAmbientLightBrighteningTransition(long j) {
         AmbientLightRingBuffer ambientLightRingBuffer = this.mAmbientLightRingBuffer;
-        for (int i = ambientLightRingBuffer.mCount - 1; i >= 0 && ambientLightRingBuffer.getLux(i) >= this.mAmbientBrighteningThreshold; i--) {
+        for (int i = ambientLightRingBuffer.mCount - 1;
+                i >= 0 && ambientLightRingBuffer.getLux(i) >= this.mAmbientBrighteningThreshold;
+                i--) {
             j = ambientLightRingBuffer.getTime(i);
         }
-        return j + (isInIdleMode() ? this.mBrighteningLightDebounceConfigIdle : this.mBrighteningLightDebounceConfig);
+        return j
+                + (isInIdleMode()
+                        ? this.mBrighteningLightDebounceConfigIdle
+                        : this.mBrighteningLightDebounceConfig);
     }
 
     public final long nextAmbientLightDarkeningTransition(long j) {
         AmbientLightRingBuffer ambientLightRingBuffer = this.mAmbientLightRingBuffer;
-        for (int i = ambientLightRingBuffer.mCount - 1; i >= 0 && ambientLightRingBuffer.getLux(i) <= this.mAmbientDarkeningThreshold; i--) {
+        for (int i = ambientLightRingBuffer.mCount - 1;
+                i >= 0 && ambientLightRingBuffer.getLux(i) <= this.mAmbientDarkeningThreshold;
+                i--) {
             j = ambientLightRingBuffer.getTime(i);
         }
-        return j + (isInIdleMode() ? this.mDarkeningLightDebounceConfigIdle : this.mDarkeningLightDebounceConfig);
+        return j
+                + (isInIdleMode()
+                        ? this.mDarkeningLightDebounceConfigIdle
+                        : this.mDarkeningLightDebounceConfig);
     }
 
     public final void notifyHbmInfo(boolean z) {
         List users = ((UserManager) this.mContext.getSystemService("user")).getUsers();
         for (int i = 0; i < users.size(); i++) {
             UserInfo userInfo = (UserInfo) users.get(i);
-            Settings.System.putIntForUser(this.mContext.getContentResolver(), "high_brightness_mode_pms_enter", z ? 1 : 0, userInfo.id);
+            Settings.System.putIntForUser(
+                    this.mContext.getContentResolver(),
+                    "high_brightness_mode_pms_enter",
+                    z ? 1 : 0,
+                    userInfo.id);
         }
     }
 
     public final void onSensorChangedInternal(SensorEvent sensorEvent) {
         boolean z = false;
         if (!this.mAmbientLuxValid) {
-            Slog.d("AutomaticBrightnessController", "onSensorChanged: 1st lux : " + sensorEvent.values[0]);
+            Slog.d(
+                    "AutomaticBrightnessController",
+                    "onSensorChanged: 1st lux : " + sensorEvent.values[0]);
         }
         if (this.mLightSensorEnabled) {
             this.mClock.getClass();
@@ -1119,17 +1399,22 @@ public final class AutomaticBrightnessController {
                     ambientLightRingBuffer.mStart = 0;
                     ambientLightRingBuffer.mEnd = 0;
                     ambientLightRingBuffer.mCount = 0;
-                    Slog.d("AutomaticBrightnessController", "onSensorChanged: min lux : " + sensorEvent.values[0]);
+                    Slog.d(
+                            "AutomaticBrightnessController",
+                            "onSensorChanged: min lux : " + sensorEvent.values[0]);
                 }
                 if (PowerManagerUtil.SEC_LIGHT_SENSOR_BLOCKING_PREVENTION_MULTI) {
-                    if (sensorEvent.values[2] > FullScreenMagnificationGestureHandler.MAX_SCALE && this.mDualScreenPolicy == 0) {
+                    if (sensorEvent.values[2] > FullScreenMagnificationGestureHandler.MAX_SCALE
+                            && this.mDualScreenPolicy == 0) {
                         z = true;
                     }
                     if (this.mIsRearLightSensor != z) {
                         this.mIsLightSensorPositionUpdated = true;
                         this.mLightSensorPositionUpdatedTime = uptimeMillis;
                         this.mIsRearLightSensor = z;
-                        Slog.d("AutomaticBrightnessController", "onSensorChanged: ".concat(z ? "Front -> Rear" : "Rear -> Front"));
+                        Slog.d(
+                                "AutomaticBrightnessController",
+                                "onSensorChanged: ".concat(z ? "Front -> Rear" : "Rear -> Front"));
                     }
                 }
             }
@@ -1145,11 +1430,13 @@ public final class AutomaticBrightnessController {
         shortTermModel.mBrightness = Float.NaN;
         shortTermModel.mIsValid = false;
         DisplayPowerController displayPowerController = (DisplayPowerController) this.mCallbacks;
-        AdaptiveBrightnessLongtermModelBuilder adaptiveBrightnessLongtermModelBuilder = displayPowerController.mAdaptiveBrightnessLongtermModelBuilder;
+        AdaptiveBrightnessLongtermModelBuilder adaptiveBrightnessLongtermModelBuilder =
+                displayPowerController.mAdaptiveBrightnessLongtermModelBuilder;
         if (adaptiveBrightnessLongtermModelBuilder == null) {
             displayPowerController.sendUpdatePowerState();
         } else {
-            android.util.Slog.d("AdaptiveBrightnessLongtermModelBuilder", "notifyShortTermResetValid()");
+            android.util.Slog.d(
+                    "AdaptiveBrightnessLongtermModelBuilder", "notifyShortTermResetValid()");
             adaptiveBrightnessLongtermModelBuilder.mBgHandler.obtainMessage(7).sendToTarget();
         }
     }
@@ -1162,15 +1449,24 @@ public final class AutomaticBrightnessController {
         }
         Slog.d("AutomaticBrightnessController", "sendAmbientLux(" + f + ")");
         this.mLastSentAmbientLux = f;
-        if (PowerManagerUtil.SEC_FEATURE_PAPAYA_DQE && (exynosDisplaySolutionManager = (ExynosDisplaySolutionManager) this.mContext.getSystemService("exynos_display")) != null) {
+        if (PowerManagerUtil.SEC_FEATURE_PAPAYA_DQE
+                && (exynosDisplaySolutionManager =
+                                (ExynosDisplaySolutionManager)
+                                        this.mContext.getSystemService("exynos_display"))
+                        != null) {
             exynosDisplaySolutionManager.setDisplayFeature("atc_user", 1, (int) f, (String) null);
         }
-        if (PowerManagerUtil.SEC_FEATURE_DISPLAY_QUALITY && (semDisplayQualityManager = (SemDisplayQualityManager) this.mContext.getSystemService("DisplayQuality")) != null) {
+        if (PowerManagerUtil.SEC_FEATURE_DISPLAY_QUALITY
+                && (semDisplayQualityManager =
+                                (SemDisplayQualityManager)
+                                        this.mContext.getSystemService("DisplayQuality"))
+                        != null) {
             semDisplayQualityManager.enhanceDisplayOutdoorVisibilityByLux((int) f);
         }
         if (this.mDisplaySolutionManager != null) {
             int i = this.mDualScreenPolicy != 1 ? 0 : 1;
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "sendAmbientLux(", ", ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(i, "sendAmbientLux(", ", ");
             int i2 = (int) f;
             m.append(i2);
             m.append(")");
@@ -1185,22 +1481,38 @@ public final class AutomaticBrightnessController {
             Slog.d("AutomaticBrightnessController", "setAmbientLux(" + f + ")");
         }
         if (f < FullScreenMagnificationGestureHandler.MAX_SCALE) {
-            Slog.w("AutomaticBrightnessController", "Ambient lux was negative, ignoring and setting to 0");
+            Slog.w(
+                    "AutomaticBrightnessController",
+                    "Ambient lux was negative, ignoring and setting to 0");
             f = 0.0f;
         }
         sendAmbientLux(f);
         this.mAmbientLux = f;
         int i = this.mBrightnessThresoldsType;
-        HysteresisLevels hysteresisLevels = i != 1 ? i != 2 ? this.mAmbientBrightnessThresholds : this.mAmbientBrightnessThresholdsTouchLow : this.mAmbientBrightnessThresholdsTouchHigh;
+        HysteresisLevels hysteresisLevels =
+                i != 1
+                        ? i != 2
+                                ? this.mAmbientBrightnessThresholds
+                                : this.mAmbientBrightnessThresholdsTouchLow
+                        : this.mAmbientBrightnessThresholdsTouchHigh;
         this.mAmbientBrighteningThreshold = hysteresisLevels.getBrighteningThreshold(f);
         this.mAmbientDarkeningThreshold = hysteresisLevels.getDarkeningThreshold(f);
         this.mBrightnessRangeController.onAmbientLuxChange(this.mAmbientLux);
         if (PowerManagerUtil.USE_SEC_LONG_TERM_MODEL) {
-            DisplayPowerController displayPowerController = (DisplayPowerController) this.mCallbacks;
+            DisplayPowerController displayPowerController =
+                    (DisplayPowerController) this.mCallbacks;
             displayPowerController.getClass();
-            if (PowerManagerUtil.USE_SEC_LONG_TERM_MODEL && (adaptiveBrightnessLongtermModelBuilder = displayPowerController.mAdaptiveBrightnessLongtermModelBuilder) != null) {
-                android.util.Slog.d("AdaptiveBrightnessLongtermModelBuilder", String.format("notifyAmbientLuxChanged(lux=%f)", Float.valueOf(f)));
-                adaptiveBrightnessLongtermModelBuilder.mBgHandler.obtainMessage(5, Float.floatToIntBits(f), 0).sendToTarget();
+            if (PowerManagerUtil.USE_SEC_LONG_TERM_MODEL
+                    && (adaptiveBrightnessLongtermModelBuilder =
+                                    displayPowerController.mAdaptiveBrightnessLongtermModelBuilder)
+                            != null) {
+                android.util.Slog.d(
+                        "AdaptiveBrightnessLongtermModelBuilder",
+                        String.format("notifyAmbientLuxChanged(lux=%f)", Float.valueOf(f)));
+                adaptiveBrightnessLongtermModelBuilder
+                        .mBgHandler
+                        .obtainMessage(5, Float.floatToIntBits(f), 0)
+                        .sendToTarget();
             }
         }
         ShortTermModel.m435$$Nest$mmaybeReset(this.mShortTermModel, this.mAmbientLux);
@@ -1220,7 +1532,11 @@ public final class AutomaticBrightnessController {
                 if (sensor == null) {
                     sensor = this.mLightSensor;
                 }
-                this.mSensorManager.registerListener(anonymousClass4, sensor, this.mCurrentLightSensorRate * 1000, automaticBrightnessHandler);
+                this.mSensorManager.registerListener(
+                        anonymousClass4,
+                        sensor,
+                        this.mCurrentLightSensorRate * 1000,
+                        automaticBrightnessHandler);
                 automaticBrightnessHandler.sendEmptyMessageDelayed(8, 800L);
                 return true;
             }
@@ -1268,16 +1584,31 @@ public final class AutomaticBrightnessController {
         }
         if (PowerManagerUtil.SEC_FEATURE_HQM_SEND_DPUC) {
             float f3 = this.mAmbientLux;
-            DisplayPowerController displayPowerController = (DisplayPowerController) this.mCallbacks;
+            DisplayPowerController displayPowerController =
+                    (DisplayPowerController) this.mCallbacks;
             HqmDataDispatcher hqmDataDispatcher = displayPowerController.mHqmDataDispatcher;
             if (hqmDataDispatcher != null) {
                 int i = (int) f3;
                 int i2 = (int) (displayPowerController.mPrevScreenBrightness * 255.0f);
                 int i3 = (int) (f2 * 255.0f);
-                int intForUser = Settings.System.getIntForUser(hqmDataDispatcher.mContext.getContentResolver(), "screen_brightness_mode", 0, -2);
+                int intForUser =
+                        Settings.System.getIntForUser(
+                                hqmDataDispatcher.mContext.getContentResolver(),
+                                "screen_brightness_mode",
+                                0,
+                                -2);
                 StringBuilder sb = new StringBuilder();
-                List<ActivityManager.RunningTaskInfo> runningTasks = ((ActivityManager) hqmDataDispatcher.mContext.getSystemService("activity")).getRunningTasks(1);
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(i2, runningTasks.isEmpty() ? "" : runningTasks.get(0).topActivity.getPackageName(), ",", ",", sb);
+                List<ActivityManager.RunningTaskInfo> runningTasks =
+                        ((ActivityManager) hqmDataDispatcher.mContext.getSystemService("activity"))
+                                .getRunningTasks(1);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i2,
+                        runningTasks.isEmpty()
+                                ? ""
+                                : runningTasks.get(0).topActivity.getPackageName(),
+                        ",",
+                        ",",
+                        sb);
                 sb.append(hqmDataDispatcher.mBatteryManagerInternal.getBatteryLevel());
                 String sb2 = sb.toString();
                 JSONObject jSONObject = new JSONObject();
@@ -1303,7 +1634,8 @@ public final class AutomaticBrightnessController {
                 }
                 HqmDataDispatcher.DispatchHandler dispatchHandler = hqmDataDispatcher.mHandler;
                 dispatchHandler.removeMessages(0);
-                String replaceAll = jSONObject.toString().replaceAll("\\{", "").replaceAll("\\}", "");
+                String replaceAll =
+                        jSONObject.toString().replaceAll("\\{", "").replaceAll("\\}", "");
                 Message obtain = Message.obtain(dispatchHandler, 0);
                 obtain.obj = replaceAll;
                 dispatchHandler.sendMessageDelayed(obtain, 10000);
@@ -1313,23 +1645,32 @@ public final class AutomaticBrightnessController {
     }
 
     public final void switchMode(int i, boolean z) {
-        if (this.mBrightnessMappingStrategyMap.contains(i) && this.mCurrentBrightnessMapper.getMode() != i) {
-            Slog.i("AutomaticBrightnessController", "Switching to mode " + DisplayBrightnessMappingConfig.autoBrightnessModeToString(i));
+        if (this.mBrightnessMappingStrategyMap.contains(i)
+                && this.mCurrentBrightnessMapper.getMode() != i) {
+            Slog.i(
+                    "AutomaticBrightnessController",
+                    "Switching to mode "
+                            + DisplayBrightnessMappingConfig.autoBrightnessModeToString(i));
             if (i == 1 || this.mCurrentBrightnessMapper.getMode() == 1) {
                 this.mCurrentBrightnessMapper.getClass();
                 this.mCurrentBrightnessMapper.getClass();
                 AutomaticBrightnessHandler automaticBrightnessHandler = this.mHandler;
                 automaticBrightnessHandler.removeMessages(7);
                 this.mClock.getClass();
-                automaticBrightnessHandler.sendEmptyMessageAtTime(7, this.mCurrentBrightnessMapper.getShortTermModelTimeout() + SystemClock.uptimeMillis());
+                automaticBrightnessHandler.sendEmptyMessageAtTime(
+                        7,
+                        this.mCurrentBrightnessMapper.getShortTermModelTimeout()
+                                + SystemClock.uptimeMillis());
                 StringBuilder sb = new StringBuilder("mPreviousShortTermModel: ");
                 ShortTermModel shortTermModel = this.mPausedShortTermModel;
                 sb.append(shortTermModel);
                 Slog.i("AutomaticBrightnessController", sb.toString());
-                this.mCurrentBrightnessMapper = (BrightnessMappingStrategy) this.mBrightnessMappingStrategyMap.get(i);
+                this.mCurrentBrightnessMapper =
+                        (BrightnessMappingStrategy) this.mBrightnessMappingStrategyMap.get(i);
                 if (shortTermModel != null) {
                     if (!ShortTermModel.m435$$Nest$mmaybeReset(shortTermModel, this.mAmbientLux)) {
-                        setScreenBrightnessByUser(shortTermModel.mAnchor, shortTermModel.mBrightness);
+                        setScreenBrightnessByUser(
+                                shortTermModel.mAnchor, shortTermModel.mBrightness);
                     }
                     shortTermModel.mAnchor = FullScreenMagnificationGestureHandler.MAX_SCALE;
                     shortTermModel.mBrightness = FullScreenMagnificationGestureHandler.MAX_SCALE;
@@ -1337,7 +1678,8 @@ public final class AutomaticBrightnessController {
                 }
             } else {
                 resetShortTermModel();
-                this.mCurrentBrightnessMapper = (BrightnessMappingStrategy) this.mBrightnessMappingStrategyMap.get(i);
+                this.mCurrentBrightnessMapper =
+                        (BrightnessMappingStrategy) this.mBrightnessMappingStrategyMap.get(i);
             }
             if (z) {
                 this.mHandler.sendEmptyMessage(6);
@@ -1348,13 +1690,13 @@ public final class AutomaticBrightnessController {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:94:0x021f, code lost:
-    
-        if (r10 == false) goto L105;
-     */
+
+       if (r10 == false) goto L105;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:95:0x0221, code lost:
-    
-        if (r3 == false) goto L113;
-     */
+
+       if (r3 == false) goto L113;
+    */
     /* JADX WARN: Removed duplicated region for block: B:90:0x0215  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1365,20 +1707,43 @@ public final class AutomaticBrightnessController {
             Method dump skipped, instructions count: 700
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.AutomaticBrightnessController.updateAmbientLux(long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.AutomaticBrightnessController.updateAmbientLux(long):void");
     }
 
     public final void updateAutoBrightness(boolean z) {
         if (this.mAmbientLuxValid) {
-            float brightness = this.mCurrentBrightnessMapper.getBrightness(this.mForegroundAppPackageName, this.mAmbientLux, this.mForegroundAppCategory);
+            float brightness =
+                    this.mCurrentBrightnessMapper.getBrightness(
+                            this.mForegroundAppPackageName,
+                            this.mAmbientLux,
+                            this.mForegroundAppCategory);
             this.mRawScreenAutoBrightness = brightness;
             BrightnessRangeController brightnessRangeController = this.mBrightnessRangeController;
-            float brightnessIntToFloat = BrightnessSynchronizer.brightnessIntToFloat(BrightnessSynchronizer.brightnessFloatToInt(MathUtils.constrain(brightness, brightnessRangeController.mHbmController.mBrightnessMin, brightnessRangeController.getCurrentBrightnessMax())));
+            float brightnessIntToFloat =
+                    BrightnessSynchronizer.brightnessIntToFloat(
+                            BrightnessSynchronizer.brightnessFloatToInt(
+                                    MathUtils.constrain(
+                                            brightness,
+                                            brightnessRangeController.mHbmController.mBrightnessMin,
+                                            brightnessRangeController.getCurrentBrightnessMax())));
             float f = this.mScreenAutoBrightness;
-            BrightnessSynchronizer.floatEquals(f, MathUtils.constrain(f, brightnessRangeController.mHbmController.mBrightnessMin, brightnessRangeController.getCurrentBrightnessMax()));
-            if (this.mScreenAutoBrightness != brightnessIntToFloat || this.mAmbientLux != this.mLoggedAmbientLux) {
+            BrightnessSynchronizer.floatEquals(
+                    f,
+                    MathUtils.constrain(
+                            f,
+                            brightnessRangeController.mHbmController.mBrightnessMin,
+                            brightnessRangeController.getCurrentBrightnessMax()));
+            if (this.mScreenAutoBrightness != brightnessIntToFloat
+                    || this.mAmbientLux != this.mLoggedAmbientLux) {
                 StringBuilder sb = new StringBuilder("updateAutoBrightness : ");
-                sb.append(String.format("%3d", Integer.valueOf(BrightnessSynchronizer.brightnessFloatToInt(brightnessIntToFloat))));
+                sb.append(
+                        String.format(
+                                "%3d",
+                                Integer.valueOf(
+                                        BrightnessSynchronizer.brightnessFloatToInt(
+                                                brightnessIntToFloat))));
                 sb.append("(");
                 Locale locale = Locale.US;
                 sb.append(String.format(locale, "%.2f", Float.valueOf(brightness)));
@@ -1389,7 +1754,13 @@ public final class AutomaticBrightnessController {
                 sb.append(" < ");
                 sb.append(String.format("%6.0f", Float.valueOf(this.mAmbientBrighteningThreshold)));
                 sb.append(" (adj:");
-                sb.append(String.format(locale, "%+.1f", Float.valueOf(this.mCurrentBrightnessMapper.getAutoBrightnessAdjustment())));
+                sb.append(
+                        String.format(
+                                locale,
+                                "%+.1f",
+                                Float.valueOf(
+                                        this.mCurrentBrightnessMapper
+                                                .getAutoBrightnessAdjustment())));
                 sb.append(")");
                 sb.append(Float.isNaN(this.mScreenAutoBrightness) ? " (1st)" : "");
                 String sb2 = sb.toString();
@@ -1412,15 +1783,27 @@ public final class AutomaticBrightnessController {
                     }
                 }
             }
-            if (BrightnessSynchronizer.floatEquals(this.mScreenAutoBrightness, brightnessIntToFloat)) {
+            if (BrightnessSynchronizer.floatEquals(
+                    this.mScreenAutoBrightness, brightnessIntToFloat)) {
                 return;
             }
             if (this.mLoggingEnabled) {
-                Slog.d("AutomaticBrightnessController", "updateAutoBrightness: mScreenAutoBrightness=" + this.mScreenAutoBrightness + ", newScreenAutoBrightness=" + brightnessIntToFloat);
+                Slog.d(
+                        "AutomaticBrightnessController",
+                        "updateAutoBrightness: mScreenAutoBrightness="
+                                + this.mScreenAutoBrightness
+                                + ", newScreenAutoBrightness="
+                                + brightnessIntToFloat);
             }
             this.mScreenAutoBrightness = brightnessIntToFloat;
             if (this.mIsUnderDisplayLightSensor) {
-                this.mSensorManager.setBrightnessHysteresisParameter(new float[]{BrightnessSynchronizer.brightnessFloatToInt(brightnessIntToFloat), this.mAmbientDarkeningThreshold, this.mAmbientLux, this.mAmbientBrighteningThreshold});
+                this.mSensorManager.setBrightnessHysteresisParameter(
+                        new float[] {
+                            BrightnessSynchronizer.brightnessFloatToInt(brightnessIntToFloat),
+                            this.mAmbientDarkeningThreshold,
+                            this.mAmbientLux,
+                            this.mAmbientBrighteningThreshold
+                        });
             }
             if (z) {
                 ((DisplayPowerController) this.mCallbacks).sendUpdatePowerState();

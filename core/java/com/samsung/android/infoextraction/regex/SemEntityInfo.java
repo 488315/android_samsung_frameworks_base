@@ -36,8 +36,7 @@ public class SemEntityInfo {
         @Deprecated(forRemoval = true, since = "15.0")
         public static final int URL = 7;
 
-        private Type() {
-        }
+        private Type() {}
     }
 
     @Deprecated(forRemoval = true, since = "15.0")

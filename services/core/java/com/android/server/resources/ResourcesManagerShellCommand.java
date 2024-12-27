@@ -9,7 +9,9 @@ import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.os.ShellCommand;
 import android.util.Slog;
+
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -28,11 +30,18 @@ public final class ResourcesManagerShellCommand extends ShellCommand {
             ParcelFileDescriptor dup = ParcelFileDescriptor.dup(getOutFileDescriptor());
             try {
                 final ConditionVariable conditionVariable = new ConditionVariable();
-                if (this.mInterface.dumpResources(nextArgRequired, dup, new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: com.android.server.resources.ResourcesManagerShellCommand$$ExternalSyntheticLambda0
-                    public final void onResult(Bundle bundle) {
-                        conditionVariable.open();
-                    }
-                }, (Handler) null))) {
+                if (this.mInterface.dumpResources(
+                        nextArgRequired,
+                        dup,
+                        new RemoteCallback(
+                                new RemoteCallback
+                                        .OnResultListener() { // from class:
+                                                              // com.android.server.resources.ResourcesManagerShellCommand$$ExternalSyntheticLambda0
+                                    public final void onResult(Bundle bundle) {
+                                        conditionVariable.open();
+                                    }
+                                },
+                                (Handler) null))) {
                     conditionVariable.block(5000L);
                     if (dup == null) {
                         return 0;
@@ -65,7 +74,8 @@ public final class ResourcesManagerShellCommand extends ShellCommand {
             }
             return handleDefaultCommands(str);
         } catch (RemoteException e) {
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote exception: ", e, errPrintWriter);
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    "Remote exception: ", e, errPrintWriter);
             return -1;
         } catch (IllegalArgumentException e2) {
             errPrintWriter.println("Error: " + e2.getMessage());
@@ -79,6 +89,7 @@ public final class ResourcesManagerShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println("  dump <PROCESS>");
-        outPrintWriter.println("    Dump the Resources objects in use as well as the history of Resources");
+        outPrintWriter.println(
+                "    Dump the Resources objects in use as well as the history of Resources");
     }
 }

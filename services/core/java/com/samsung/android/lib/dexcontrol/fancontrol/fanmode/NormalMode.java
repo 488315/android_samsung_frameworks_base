@@ -2,6 +2,7 @@ package com.samsung.android.lib.dexcontrol.fancontrol.fanmode;
 
 import com.samsung.android.lib.dexcontrol.fancontrol.DexFanControlManager;
 import com.samsung.android.lib.dexcontrol.utils.SLog;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,12 +61,12 @@ public final class NormalMode implements IFanMode {
                 ((HashMap) this.mFanLevelTable).put(siop_level, fan_level);
             }
         }
-        return (DexFanControlManager.FAN_LEVEL) ((HashMap) this.mFanLevelTable).get(this.mIDexFanModeControl.mSiopLevel);
+        return (DexFanControlManager.FAN_LEVEL)
+                ((HashMap) this.mFanLevelTable).get(this.mIDexFanModeControl.mSiopLevel);
     }
 
     @Override // com.samsung.android.lib.dexcontrol.fancontrol.fanmode.IFanMode
-    public final void onChangedDexMode() {
-    }
+    public final void onChangedDexMode() {}
 
     @Override // com.samsung.android.lib.dexcontrol.fancontrol.fanmode.IFanMode
     public final synchronized void onChangedFanHoldingRequestCount(int i) {

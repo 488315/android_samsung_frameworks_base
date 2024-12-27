@@ -12,17 +12,19 @@ import android.view.MotionEvent;
 final class DeadZone {
     private static final boolean CHATTY = true;
     public static final boolean DEBUG = false;
-    private static final FloatProperty<DeadZone> FLASH_PROPERTY = new FloatProperty<DeadZone>("DeadZoneFlash") { // from class: android.inputmethodservice.navigationbar.DeadZone.1
-        @Override // android.util.FloatProperty
-        public void setValue(DeadZone object, float value) {
-            object.setFlash(value);
-        }
+    private static final FloatProperty<DeadZone> FLASH_PROPERTY =
+            new FloatProperty<DeadZone>("DeadZoneFlash") { // from class:
+                // android.inputmethodservice.navigationbar.DeadZone.1
+                @Override // android.util.FloatProperty
+                public void setValue(DeadZone object, float value) {
+                    object.setFlash(value);
+                }
 
-        @Override // android.util.Property
-        public Float get(DeadZone object) {
-            return Float.valueOf(object.getFlash());
-        }
-    };
+                @Override // android.util.Property
+                public Float get(DeadZone object) {
+                    return Float.valueOf(object.getFlash());
+                }
+            };
     public static final int HORIZONTAL = 0;
     public static final String TAG = "DeadZone";
     public static final int VERTICAL = 1;
@@ -36,12 +38,15 @@ final class DeadZone {
     private int mSizeMin;
     private boolean mVertical;
     private float mFlashFrac = 0.0f;
-    private final Runnable mDebugFlash = new Runnable() { // from class: android.inputmethodservice.navigationbar.DeadZone.2
-        @Override // java.lang.Runnable
-        public void run() {
-            ObjectAnimator.ofFloat(DeadZone.this, DeadZone.FLASH_PROPERTY, 1.0f, 0.0f).setDuration(150L).start();
-        }
-    };
+    private final Runnable mDebugFlash =
+            new Runnable() { // from class: android.inputmethodservice.navigationbar.DeadZone.2
+                @Override // java.lang.Runnable
+                public void run() {
+                    ObjectAnimator.ofFloat(DeadZone.this, DeadZone.FLASH_PROPERTY, 1.0f, 0.0f)
+                            .setDuration(150L)
+                            .start();
+                }
+            };
 
     DeadZone(NavigationBarView view) {
         this.mNavigationBarView = view;
@@ -98,10 +103,20 @@ final class DeadZone {
             if (!this.mVertical) {
                 consumeEvent = event.getY() < ((float) size);
             } else {
-                consumeEvent = this.mDisplayRotation == 3 ? event.getX() > ((float) (this.mNavigationBarView.getWidth() - size)) : event.getX() < ((float) size);
+                consumeEvent =
+                        this.mDisplayRotation == 3
+                                ? event.getX()
+                                        > ((float) (this.mNavigationBarView.getWidth() - size))
+                                : event.getX() < ((float) size);
             }
             if (consumeEvent) {
-                Log.v(TAG, "consuming errant click: (" + event.getX() + "," + event.getY() + NavigationBarInflaterView.KEY_CODE_END);
+                Log.v(
+                        TAG,
+                        "consuming errant click: ("
+                                + event.getX()
+                                + ","
+                                + event.getY()
+                                + NavigationBarInflaterView.KEY_CODE_END);
                 if (this.mShouldFlash) {
                     this.mNavigationBarView.post(this.mDebugFlash);
                     this.mNavigationBarView.postInvalidate();

@@ -5,13 +5,15 @@ import com.android.server.power.stats.WifiPowerStatsCollector;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ long f$1;
     public final /* synthetic */ long f$2;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda0(BatteryStatsService batteryStatsService, long j, long j2, int i) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda0(
+            BatteryStatsService batteryStatsService, long j, long j2, int i) {
         this.$r8$classId = i;
         this.f$0 = batteryStatsService;
         this.f$1 = j;
@@ -29,7 +31,9 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda0
                 batteryStatsImpl.mHistory.recordStateStopEvent(j, j2, 4194304);
                 batteryStatsImpl.mAudioOnTimer.stopAllRunningLocked(j);
                 for (int i = 0; i < batteryStatsImpl.mUidStats.size(); i++) {
-                    BatteryStatsImpl.StopwatchTimer stopwatchTimer = ((BatteryStatsImpl.Uid) batteryStatsImpl.mUidStats.valueAt(i)).mAudioTurnedOnTimer;
+                    BatteryStatsImpl.StopwatchTimer stopwatchTimer =
+                            ((BatteryStatsImpl.Uid) batteryStatsImpl.mUidStats.valueAt(i))
+                                    .mAudioTurnedOnTimer;
                     if (stopwatchTimer != null) {
                         stopwatchTimer.stopAllRunningLocked(j);
                     }
@@ -48,7 +52,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda0
                 batteryStatsImpl.mHistory.recordState2StopEvent(j, j2, 268435456);
                 batteryStatsImpl.mWifiOn = false;
                 batteryStatsImpl.mWifiOnTimer.stopRunningLocked(j);
-                WifiPowerStatsCollector wifiPowerStatsCollector = batteryStatsImpl.mWifiPowerStatsCollector;
+                WifiPowerStatsCollector wifiPowerStatsCollector =
+                        batteryStatsImpl.mWifiPowerStatsCollector;
                 if (wifiPowerStatsCollector.mEnabled) {
                     wifiPowerStatsCollector.schedule();
                 } else {
@@ -68,7 +73,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda0
                 batteryStatsImpl.mHistory.recordState2StartEvent(j, j2, 268435456);
                 batteryStatsImpl.mWifiOn = true;
                 batteryStatsImpl.mWifiOnTimer.startRunningLocked(j);
-                WifiPowerStatsCollector wifiPowerStatsCollector = batteryStatsImpl.mWifiPowerStatsCollector;
+                WifiPowerStatsCollector wifiPowerStatsCollector =
+                        batteryStatsImpl.mWifiPowerStatsCollector;
                 if (wifiPowerStatsCollector.mEnabled) {
                     wifiPowerStatsCollector.schedule();
                 } else {
@@ -118,7 +124,9 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda0
                         batteryStatsImpl.mHistory.recordState2StopEvent(j3, j4, 134217728);
                         batteryStatsImpl.mFlashlightOnTimer.stopAllRunningLocked(j3);
                         for (int i = 0; i < batteryStatsImpl.mUidStats.size(); i++) {
-                            BatteryStatsImpl.StopwatchTimer stopwatchTimer = ((BatteryStatsImpl.Uid) batteryStatsImpl.mUidStats.valueAt(i)).mFlashlightTurnedOnTimer;
+                            BatteryStatsImpl.StopwatchTimer stopwatchTimer =
+                                    ((BatteryStatsImpl.Uid) batteryStatsImpl.mUidStats.valueAt(i))
+                                            .mFlashlightTurnedOnTimer;
                             if (stopwatchTimer != null) {
                                 stopwatchTimer.stopAllRunningLocked(j3);
                             }
@@ -137,7 +145,9 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda0
                         batteryStatsImpl2.mHistory.recordState2StopEvent(j5, j6, 1073741824);
                         batteryStatsImpl2.mVideoOnTimer.stopAllRunningLocked(j5);
                         for (int i2 = 0; i2 < batteryStatsImpl2.mUidStats.size(); i2++) {
-                            BatteryStatsImpl.StopwatchTimer stopwatchTimer2 = ((BatteryStatsImpl.Uid) batteryStatsImpl2.mUidStats.valueAt(i2)).mVideoTurnedOnTimer;
+                            BatteryStatsImpl.StopwatchTimer stopwatchTimer2 =
+                                    ((BatteryStatsImpl.Uid) batteryStatsImpl2.mUidStats.valueAt(i2))
+                                            .mVideoTurnedOnTimer;
                             if (stopwatchTimer2 != null) {
                                 stopwatchTimer2.stopAllRunningLocked(j5);
                             }

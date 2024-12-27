@@ -1,6 +1,7 @@
 package com.samsung.android.motionphoto.utils;
 
 import android.util.Log;
+
 import java.io.InputStream;
 import java.util.Vector;
 
@@ -38,8 +39,7 @@ public class HEIFParser {
         int itemID;
         Vector<Integer> referenceItems = new Vector<>();
 
-        ItemReference() {
-        }
+        ItemReference() {}
     }
 
     class ItemLocation {
@@ -49,16 +49,19 @@ public class HEIFParser {
         public long length;
         public long offset;
 
-        ItemLocation() {
-        }
+        ItemLocation() {}
     }
 
     private long byte2toUInt32(byte[] input) {
-        return ((input[0] < 0 ? input[0] + 256 : input[0]) << 24) + ((input[1] < 0 ? input[1] + 256 : input[1]) << 16) + ((input[2] < 0 ? input[2] + 256 : input[2]) << 8) + (input[3] < 0 ? input[3] + 256 : input[3]);
+        return ((input[0] < 0 ? input[0] + 256 : input[0]) << 24)
+                + ((input[1] < 0 ? input[1] + 256 : input[1]) << 16)
+                + ((input[2] < 0 ? input[2] + 256 : input[2]) << 8)
+                + (input[3] < 0 ? input[3] + 256 : input[3]);
     }
 
     private int bytetoUInt16(byte[] input) {
-        return ((input[0] < 0 ? input[0] + 256 : input[0]) << 8) + ((input[1] < 0 ? input[1] + 256 : input[1]) << 0);
+        return ((input[0] < 0 ? input[0] + 256 : input[0]) << 8)
+                + ((input[1] < 0 ? input[1] + 256 : input[1]) << 0);
     }
 
     private int parseFullBoxHeader() {
@@ -143,7 +146,8 @@ public class HEIFParser {
                                     }
                                     ItemReference itemReference = new ItemReference();
                                     itemReference.itemID = byte2toUInt32;
-                                    itemReference.referenceItems.add(Integer.valueOf(byte2toUInt322));
+                                    itemReference.referenceItems.add(
+                                            Integer.valueOf(byte2toUInt322));
                                     this.referenceList.add(itemReference);
                                     bArr = bArr2;
                                 } catch (Exception e2) {
@@ -286,7 +290,8 @@ public class HEIFParser {
                                         if (!new String(bArr).equals("mime")) {
                                             this.mOffset += j7;
                                         } else {
-                                            this.mXMPMetadataIDs.add(Integer.valueOf(byte2toUInt322));
+                                            this.mXMPMetadataIDs.add(
+                                                    Integer.valueOf(byte2toUInt322));
                                             this.mOffset += j7;
                                         }
                                         try {
@@ -503,7 +508,10 @@ public class HEIFParser {
         this.mData = buf;
         byte[] bArr = new byte[4];
         while (true) {
-            if (this.mFoundiinfChunk != 1 || this.mFoundpitmChunk != 1 || this.mFoundirefChunk != 1 || this.mFoundilocChunk != 1) {
+            if (this.mFoundiinfChunk != 1
+                    || this.mFoundpitmChunk != 1
+                    || this.mFoundirefChunk != 1
+                    || this.mFoundilocChunk != 1) {
                 try {
                     if (this.mData.read(bArr, 0, 4) != 4) {
                         return null;
@@ -557,11 +565,14 @@ public class HEIFParser {
                     ItemReference itemReference = this.referenceList.get(i);
                     int intValue = itemReference.referenceItems.get(0).intValue();
                     int i2 = itemReference.itemID;
-                    if (intValue == this.mCoverImageID && this.mXMPMetadataIDs.contains(Integer.valueOf(i2))) {
+                    if (intValue == this.mCoverImageID
+                            && this.mXMPMetadataIDs.contains(Integer.valueOf(i2))) {
                         for (int i3 = 0; i3 < this.locationList.size(); i3++) {
                             ItemLocation itemLocation = this.locationList.get(i3);
                             if (itemLocation.itemID == i2) {
-                                return new XMPInformation(itemLocation.base_offset + itemLocation.offset, itemLocation.length);
+                                return new XMPInformation(
+                                        itemLocation.base_offset + itemLocation.offset,
+                                        itemLocation.length);
                             }
                         }
                     }

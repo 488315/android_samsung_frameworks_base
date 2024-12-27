@@ -3,6 +3,7 @@ package android.hardware.radio;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collection;
@@ -12,19 +13,21 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes2.dex */
 public final class Announcement implements Parcelable {
-    public static final Parcelable.Creator<Announcement> CREATOR = new Parcelable.Creator<Announcement>() { // from class: android.hardware.radio.Announcement.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Announcement createFromParcel(Parcel in) {
-            return new Announcement(in);
-        }
+    public static final Parcelable.Creator<Announcement> CREATOR =
+            new Parcelable.Creator<
+                    Announcement>() { // from class: android.hardware.radio.Announcement.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Announcement createFromParcel(Parcel in) {
+                    return new Announcement(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Announcement[] newArray(int size) {
-            return new Announcement[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Announcement[] newArray(int size) {
+                    return new Announcement[size];
+                }
+            };
     public static final int TYPE_EMERGENCY = 1;
     public static final int TYPE_EVENT = 6;
     public static final int TYPE_MISC = 8;
@@ -42,11 +45,12 @@ public final class Announcement implements Parcelable {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     public Announcement(ProgramSelector selector, int type, Map<String, String> vendorInfo) {
-        this.mSelector = (ProgramSelector) Objects.requireNonNull(selector, "Program selector cannot be null");
+        this.mSelector =
+                (ProgramSelector)
+                        Objects.requireNonNull(selector, "Program selector cannot be null");
         this.mType = type;
         this.mVendorInfo = (Map) Objects.requireNonNull(vendorInfo, "Vendor info cannot be null");
     }

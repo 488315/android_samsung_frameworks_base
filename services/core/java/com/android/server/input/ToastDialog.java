@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.widget.Toast;
+
 import com.android.internal.os.SomeArgs;
 import com.android.server.DisplayThread;
 
@@ -16,7 +17,8 @@ import com.android.server.DisplayThread;
 public final class ToastDialog {
     public AlertDialog mAlertDialog;
     public final Context mContext;
-    public final ToastDialogHandler mHandler = new ToastDialogHandler(DisplayThread.get().getLooper());
+    public final ToastDialogHandler mHandler =
+            new ToastDialogHandler(DisplayThread.get().getLooper());
     public Toast mToast;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -59,24 +61,38 @@ public final class ToastDialog {
                         alertDialog2.dismiss();
                         toastDialog.mAlertDialog = null;
                     }
-                    if (toastDialog.mContext.getResources().getConfiguration().isNightModeActive()) {
+                    if (toastDialog
+                            .mContext
+                            .getResources()
+                            .getConfiguration()
+                            .isNightModeActive()) {
                         i2 = 16974545;
                     }
-                    AlertDialog.Builder message2 = new AlertDialog.Builder(toastDialog.mContext, i2).setTitle(str).setMessage(str2);
+                    AlertDialog.Builder message2 =
+                            new AlertDialog.Builder(toastDialog.mContext, i2)
+                                    .setTitle(str)
+                                    .setMessage(str2);
                     final int i3 = 0;
-                    AlertDialog create = message2.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() { // from class: com.android.server.input.ToastDialog.1
-                        @Override // android.content.DialogInterface.OnClickListener
-                        public final void onClick(DialogInterface dialogInterface, int i4) {
-                            switch (i3) {
-                                case 0:
-                                    dialogInterface.dismiss();
-                                    break;
-                                default:
-                                    dialogInterface.dismiss();
-                                    break;
-                            }
-                        }
-                    }).create();
+                    AlertDialog create =
+                            message2.setPositiveButton(
+                                            R.string.ok,
+                                            new DialogInterface
+                                                    .OnClickListener() { // from class:
+                                                                         // com.android.server.input.ToastDialog.1
+                                                @Override // android.content.DialogInterface.OnClickListener
+                                                public final void onClick(
+                                                        DialogInterface dialogInterface, int i4) {
+                                                    switch (i3) {
+                                                        case 0:
+                                                            dialogInterface.dismiss();
+                                                            break;
+                                                        default:
+                                                            dialogInterface.dismiss();
+                                                            break;
+                                                    }
+                                                }
+                                            })
+                                    .create();
                     toastDialog.mAlertDialog = create;
                     create.getWindow().setType(2008);
                     toastDialog.mAlertDialog.show();
@@ -92,24 +108,39 @@ public final class ToastDialog {
                         toastDialog.mAlertDialog = null;
                     }
                     if (i4 == 1) {
-                        if (toastDialog.mContext.getResources().getConfiguration().isNightModeActive()) {
+                        if (toastDialog
+                                .mContext
+                                .getResources()
+                                .getConfiguration()
+                                .isNightModeActive()) {
                             i2 = 16974545;
                         }
-                        AlertDialog.Builder message3 = new AlertDialog.Builder(toastDialog.mContext, i2).setTitle(str3).setMessage(str4);
+                        AlertDialog.Builder message3 =
+                                new AlertDialog.Builder(toastDialog.mContext, i2)
+                                        .setTitle(str3)
+                                        .setMessage(str4);
                         final int i5 = 1;
-                        AlertDialog create2 = message3.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() { // from class: com.android.server.input.ToastDialog.1
-                            @Override // android.content.DialogInterface.OnClickListener
-                            public final void onClick(DialogInterface dialogInterface, int i42) {
-                                switch (i5) {
-                                    case 0:
-                                        dialogInterface.dismiss();
-                                        break;
-                                    default:
-                                        dialogInterface.dismiss();
-                                        break;
-                                }
-                            }
-                        }).create();
+                        AlertDialog create2 =
+                                message3.setPositiveButton(
+                                                R.string.ok,
+                                                new DialogInterface
+                                                        .OnClickListener() { // from class:
+                                                                             // com.android.server.input.ToastDialog.1
+                                                    @Override // android.content.DialogInterface.OnClickListener
+                                                    public final void onClick(
+                                                            DialogInterface dialogInterface,
+                                                            int i42) {
+                                                        switch (i5) {
+                                                            case 0:
+                                                                dialogInterface.dismiss();
+                                                                break;
+                                                            default:
+                                                                dialogInterface.dismiss();
+                                                                break;
+                                                        }
+                                                    }
+                                                })
+                                        .create();
                         toastDialog.mAlertDialog = create2;
                         create2.getWindow().setType(2008);
                         toastDialog.mAlertDialog.show();

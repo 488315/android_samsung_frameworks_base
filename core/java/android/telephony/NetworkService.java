@@ -9,8 +9,8 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import android.telephony.INetworkService;
 import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +34,8 @@ public abstract class NetworkService extends Service {
     public abstract NetworkServiceProvider onCreateNetworkServiceProvider(int i);
 
     public abstract class NetworkServiceProvider implements AutoCloseable {
-        private final List<INetworkServiceCallback> mNetworkRegistrationInfoChangedCallbacks = new ArrayList();
+        private final List<INetworkServiceCallback> mNetworkRegistrationInfoChangedCallbacks =
+                new ArrayList();
         private final int mSlotIndex;
 
         @Override // java.lang.AutoCloseable
@@ -90,11 +91,14 @@ public abstract class NetworkService extends Service {
         public void handleMessage(Message message) {
             int slotIndex = message.arg1;
             INetworkServiceCallback callback = (INetworkServiceCallback) message.obj;
-            NetworkServiceProvider serviceProvider = (NetworkServiceProvider) NetworkService.this.mServiceMap.get(slotIndex);
+            NetworkServiceProvider serviceProvider =
+                    (NetworkServiceProvider) NetworkService.this.mServiceMap.get(slotIndex);
             switch (message.what) {
                 case 1:
                     if (serviceProvider == null) {
-                        NetworkService.this.mServiceMap.put(slotIndex, NetworkService.this.onCreateNetworkServiceProvider(slotIndex));
+                        NetworkService.this.mServiceMap.put(
+                                slotIndex,
+                                NetworkService.this.onCreateNetworkServiceProvider(slotIndex));
                         break;
                     }
                     break;
@@ -107,7 +111,8 @@ public abstract class NetworkService extends Service {
                     break;
                 case 3:
                     for (int i = 0; i < NetworkService.this.mServiceMap.size(); i++) {
-                        NetworkServiceProvider serviceProvider2 = (NetworkServiceProvider) NetworkService.this.mServiceMap.get(i);
+                        NetworkServiceProvider serviceProvider2 =
+                                (NetworkServiceProvider) NetworkService.this.mServiceMap.get(i);
                         if (serviceProvider2 != null) {
                             serviceProvider2.close();
                         }
@@ -117,7 +122,8 @@ public abstract class NetworkService extends Service {
                 case 4:
                     if (serviceProvider != null) {
                         int domainId = message.arg2;
-                        serviceProvider.requestNetworkRegistrationInfo(domainId, new NetworkServiceCallback(callback));
+                        serviceProvider.requestNetworkRegistrationInfo(
+                                domainId, new NetworkServiceCallback(callback));
                         break;
                     }
                     break;
@@ -171,8 +177,7 @@ public abstract class NetworkService extends Service {
     }
 
     private class INetworkServiceWrapper extends INetworkService.Stub {
-        private INetworkServiceWrapper() {
-        }
+        private INetworkServiceWrapper() {}
 
         @Override // android.telephony.INetworkService
         public void createNetworkServiceProvider(int slotIndex) {
@@ -185,17 +190,23 @@ public abstract class NetworkService extends Service {
         }
 
         @Override // android.telephony.INetworkService
-        public void requestNetworkRegistrationInfo(int slotIndex, int domain, INetworkServiceCallback callback) {
-            NetworkService.this.mHandler.obtainMessage(4, slotIndex, domain, callback).sendToTarget();
+        public void requestNetworkRegistrationInfo(
+                int slotIndex, int domain, INetworkServiceCallback callback) {
+            NetworkService.this
+                    .mHandler
+                    .obtainMessage(4, slotIndex, domain, callback)
+                    .sendToTarget();
         }
 
         @Override // android.telephony.INetworkService
-        public void registerForNetworkRegistrationInfoChanged(int slotIndex, INetworkServiceCallback callback) {
+        public void registerForNetworkRegistrationInfoChanged(
+                int slotIndex, INetworkServiceCallback callback) {
             NetworkService.this.mHandler.obtainMessage(5, slotIndex, 0, callback).sendToTarget();
         }
 
         @Override // android.telephony.INetworkService
-        public void unregisterForNetworkRegistrationInfoChanged(int slotIndex, INetworkServiceCallback callback) {
+        public void unregisterForNetworkRegistrationInfoChanged(
+                int slotIndex, INetworkServiceCallback callback) {
             NetworkService.this.mHandler.obtainMessage(6, slotIndex, 0, callback).sendToTarget();
         }
     }

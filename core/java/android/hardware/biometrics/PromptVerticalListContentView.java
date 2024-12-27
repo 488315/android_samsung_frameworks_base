@@ -2,37 +2,44 @@ package android.hardware.biometrics;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public final class PromptVerticalListContentView implements PromptContentViewParcelable {
-    public static final Parcelable.Creator<PromptVerticalListContentView> CREATOR = new Parcelable.Creator<PromptVerticalListContentView>() { // from class: android.hardware.biometrics.PromptVerticalListContentView.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PromptVerticalListContentView createFromParcel(Parcel in) {
-            return new PromptVerticalListContentView(in);
-        }
+    public static final Parcelable.Creator<PromptVerticalListContentView> CREATOR =
+            new Parcelable.Creator<PromptVerticalListContentView>() { // from class:
+                // android.hardware.biometrics.PromptVerticalListContentView.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PromptVerticalListContentView createFromParcel(Parcel in) {
+                    return new PromptVerticalListContentView(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PromptVerticalListContentView[] newArray(int size) {
-            return new PromptVerticalListContentView[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PromptVerticalListContentView[] newArray(int size) {
+                    return new PromptVerticalListContentView[size];
+                }
+            };
     static final int MAX_DESCRIPTION_CHARACTER_NUMBER = 225;
     static final int MAX_EACH_ITEM_CHARACTER_NUMBER = 640;
     static final int MAX_ITEM_NUMBER = 20;
     private final List<PromptContentItemParcelable> mContentList;
     private final String mDescription;
 
-    private PromptVerticalListContentView(List<PromptContentItemParcelable> contentList, String description) {
+    private PromptVerticalListContentView(
+            List<PromptContentItemParcelable> contentList, String description) {
         this.mContentList = contentList;
         this.mDescription = description;
     }
 
     private PromptVerticalListContentView(Parcel in) {
-        this.mContentList = in.readArrayList(PromptContentItemParcelable.class.getClassLoader(), PromptContentItemParcelable.class);
+        this.mContentList =
+                in.readArrayList(
+                        PromptContentItemParcelable.class.getClassLoader(),
+                        PromptContentItemParcelable.class);
         this.mDescription = in.readString();
     }
 
@@ -69,7 +76,8 @@ public final class PromptVerticalListContentView implements PromptContentViewPar
 
         public Builder setDescription(String description) {
             if (description.length() > 225) {
-                throw new IllegalArgumentException("The character number of description exceeds 225");
+                throw new IllegalArgumentException(
+                        "The character number of description exceeds 225");
             }
             this.mDescription = description;
             return this;
@@ -97,7 +105,10 @@ public final class PromptVerticalListContentView implements PromptContentViewPar
         }
 
         private boolean doesListItemExceedsCharLimit(PromptContentItem listItem) {
-            return listItem instanceof PromptContentItemPlainText ? ((PromptContentItemPlainText) listItem).getText().length() > 640 : (listItem instanceof PromptContentItemBulletedText) && ((PromptContentItemBulletedText) listItem).getText().length() > 640;
+            return listItem instanceof PromptContentItemPlainText
+                    ? ((PromptContentItemPlainText) listItem).getText().length() > 640
+                    : (listItem instanceof PromptContentItemBulletedText)
+                            && ((PromptContentItemBulletedText) listItem).getText().length() > 640;
         }
 
         public PromptVerticalListContentView build() {

@@ -1,13 +1,11 @@
 package com.samsung.android.wallpaper.legibilitycolors.utils.interpolater;
 
-import com.samsung.android.wallpaper.legibilitycolors.utils.interpolater.IEasing;
 
 /* loaded from: classes6.dex */
 public class EasingSineFunc implements IEasing {
     private static EasingSineFunc mInstance = null;
 
-    private EasingSineFunc() {
-    }
+    private EasingSineFunc() {}
 
     public static EasingSineFunc getInstance() {
         if (mInstance == null) {
@@ -33,7 +31,12 @@ public class EasingSineFunc implements IEasing {
 
     @Override // com.samsung.android.wallpaper.legibilitycolors.utils.interpolater.IEasing
     public float easeOutIn(float t, float b, float c, float d) {
-        return t < d / 2.0f ? ((c / 2.0f) * ((float) Math.sin(((2.0f * t) / d) * 1.5707963267948966d))) + b : ((-(c / 2.0f)) * ((float) Math.cos((((t * 2.0f) - d) / d) * 1.5707963267948966d))) + (c / 2.0f) + (c / 2.0f) + b;
+        return t < d / 2.0f
+                ? ((c / 2.0f) * ((float) Math.sin(((2.0f * t) / d) * 1.5707963267948966d))) + b
+                : ((-(c / 2.0f)) * ((float) Math.cos((((t * 2.0f) - d) / d) * 1.5707963267948966d)))
+                        + (c / 2.0f)
+                        + (c / 2.0f)
+                        + b;
     }
 
     @Override // com.samsung.android.wallpaper.legibilitycolors.utils.interpolater.IEasing

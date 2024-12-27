@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class RecordClientInfo implements Parcelable {
-    public static final Parcelable.Creator<RecordClientInfo> CREATOR = new Parcelable.Creator<RecordClientInfo>() { // from class: android.media.RecordClientInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecordClientInfo createFromParcel(Parcel _aidl_source) {
-            RecordClientInfo _aidl_out = new RecordClientInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RecordClientInfo> CREATOR =
+            new Parcelable.Creator<
+                    RecordClientInfo>() { // from class: android.media.RecordClientInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecordClientInfo createFromParcel(Parcel _aidl_source) {
+                    RecordClientInfo _aidl_out = new RecordClientInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecordClientInfo[] newArray(int _aidl_size) {
-            return new RecordClientInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecordClientInfo[] newArray(int _aidl_size) {
+                    return new RecordClientInfo[_aidl_size];
+                }
+            };
     public int source;
     public int riid = 0;
     public int uid = 0;

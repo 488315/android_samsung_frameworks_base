@@ -15,8 +15,7 @@ public interface DisplayHashResultCallback {
     public static final String EXTRA_DISPLAY_HASH_ERROR_CODE = "DISPLAY_HASH_ERROR_CODE";
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DisplayHashErrorCode {
-    }
+    public @interface DisplayHashErrorCode {}
 
     void onDisplayHashError(int i);
 

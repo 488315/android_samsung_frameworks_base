@@ -4,6 +4,7 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.security.legacykeystore.ILegacyKeystore;
 import android.util.Log;
+
 import com.android.internal.net.ConnectivityBlobStore;
 
 /* loaded from: classes3.dex */
@@ -19,7 +20,9 @@ public class WifiBlobStore extends ConnectivityBlobStore {
     }
 
     private static boolean isVendorApiLevelGreaterThanT() {
-        String[] vendorApiLevelProps = {"ro.board.api_level", "ro.board.first_api_level", "ro.vndk.version"};
+        String[] vendorApiLevelProps = {
+            "ro.board.api_level", "ro.board.first_api_level", "ro.vndk.version"
+        };
         for (String propertyName : vendorApiLevelProps) {
             int apiLevel = SystemProperties.getInt(propertyName, -1);
             if (apiLevel != -1) {
@@ -43,6 +46,7 @@ public class WifiBlobStore extends ConnectivityBlobStore {
     }
 
     public static ILegacyKeystore getLegacyKeystore() {
-        return ILegacyKeystore.Stub.asInterface(ServiceManager.checkService(LEGACY_KEYSTORE_SERVICE_NAME));
+        return ILegacyKeystore.Stub.asInterface(
+                ServiceManager.checkService(LEGACY_KEYSTORE_SERVICE_NAME));
     }
 }

@@ -5,6 +5,7 @@ import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.PaintContext;
 import com.android.internal.widget.remotecompose.core.PaintOperation;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -28,8 +29,7 @@ public class DrawPath extends PaintOperation {
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public void read(WireBuffer buffer, List<Operation> operations) {

@@ -10,13 +10,16 @@ public class BaseAppStateTimeEvents$BaseTimeEvent implements Cloneable {
     }
 
     public Object clone() {
-        BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent = new BaseAppStateTimeEvents$BaseTimeEvent();
+        BaseAppStateTimeEvents$BaseTimeEvent baseAppStateTimeEvents$BaseTimeEvent =
+                new BaseAppStateTimeEvents$BaseTimeEvent();
         baseAppStateTimeEvents$BaseTimeEvent.mTimestamp = this.mTimestamp;
         return baseAppStateTimeEvents$BaseTimeEvent;
     }
 
     public boolean equals(Object obj) {
-        return obj != null && obj.getClass() == BaseAppStateTimeEvents$BaseTimeEvent.class && ((BaseAppStateTimeEvents$BaseTimeEvent) obj).mTimestamp == this.mTimestamp;
+        return obj != null
+                && obj.getClass() == BaseAppStateTimeEvents$BaseTimeEvent.class
+                && ((BaseAppStateTimeEvents$BaseTimeEvent) obj).mTimestamp == this.mTimestamp;
     }
 
     public int hashCode() {

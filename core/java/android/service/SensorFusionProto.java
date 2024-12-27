@@ -19,7 +19,6 @@ public final class SensorFusionProto {
         public static final long ESTIMATED_GYRO_RATE = 1108101562371L;
         public static final long NUM_CLIENTS = 1120986464258L;
 
-        public FusionProto() {
-        }
+        public FusionProto() {}
     }
 }

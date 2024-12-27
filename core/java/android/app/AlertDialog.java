@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
 import com.android.internal.R;
 import com.android.internal.app.AlertController;
 
@@ -24,27 +25,23 @@ public class AlertDialog extends Dialog implements DialogInterface {
     public static final int LAYOUT_HINT_NONE = 0;
     public static final int LAYOUT_HINT_SIDE = 1;
 
-    @Deprecated
-    public static final int THEME_DEVICE_DEFAULT_DARK = 4;
+    @Deprecated public static final int THEME_DEVICE_DEFAULT_DARK = 4;
 
-    @Deprecated
-    public static final int THEME_DEVICE_DEFAULT_LIGHT = 5;
+    @Deprecated public static final int THEME_DEVICE_DEFAULT_LIGHT = 5;
 
-    @Deprecated
-    public static final int THEME_HOLO_DARK = 2;
+    @Deprecated public static final int THEME_HOLO_DARK = 2;
 
-    @Deprecated
-    public static final int THEME_HOLO_LIGHT = 3;
+    @Deprecated public static final int THEME_HOLO_LIGHT = 3;
 
-    @Deprecated
-    public static final int THEME_TRADITIONAL = 1;
+    @Deprecated public static final int THEME_TRADITIONAL = 1;
     private AlertController mAlert;
 
     protected AlertDialog(Context context) {
         this(context, 0);
     }
 
-    protected AlertDialog(Context context, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
+    protected AlertDialog(
+            Context context, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
         this(context, 0);
         setCancelable(cancelable);
         setOnCancelListener(cancelListener);
@@ -55,7 +52,10 @@ public class AlertDialog extends Dialog implements DialogInterface {
     }
 
     AlertDialog(Context context, int themeResId, boolean createContextThemeWrapper) {
-        super(context, createContextThemeWrapper ? resolveDialogTheme(context, themeResId) : 0, createContextThemeWrapper);
+        super(
+                context,
+                createContextThemeWrapper ? resolveDialogTheme(context, themeResId) : 0,
+                createContextThemeWrapper);
         this.mWindow.alwaysReadCloseOnTouchAttr();
         this.mAlert = AlertController.create(getContext(), this, getWindow());
     }
@@ -122,8 +122,14 @@ public class AlertDialog extends Dialog implements DialogInterface {
         this.mAlert.setView(view);
     }
 
-    public void setView(View view, int viewSpacingLeft, int viewSpacingTop, int viewSpacingRight, int viewSpacingBottom) {
-        this.mAlert.setView(view, viewSpacingLeft, viewSpacingTop, viewSpacingRight, viewSpacingBottom);
+    public void setView(
+            View view,
+            int viewSpacingLeft,
+            int viewSpacingTop,
+            int viewSpacingRight,
+            int viewSpacingBottom) {
+        this.mAlert.setView(
+                view, viewSpacingLeft, viewSpacingTop, viewSpacingRight, viewSpacingBottom);
     }
 
     void setButtonPanelLayoutHint(int layoutHint) {
@@ -134,7 +140,8 @@ public class AlertDialog extends Dialog implements DialogInterface {
         this.mAlert.setButton(whichButton, text, null, msg);
     }
 
-    public void setButton(int whichButton, CharSequence text, DialogInterface.OnClickListener listener) {
+    public void setButton(
+            int whichButton, CharSequence text, DialogInterface.OnClickListener listener) {
         this.mAlert.setButton(whichButton, text, listener, null);
     }
 
@@ -218,7 +225,10 @@ public class AlertDialog extends Dialog implements DialogInterface {
         }
 
         public Builder(Context context, int themeResId) {
-            this.P = new AlertController.AlertParams(new ContextThemeWrapper(context, AlertDialog.resolveDialogTheme(context, themeResId)));
+            this.P =
+                    new AlertController.AlertParams(
+                            new ContextThemeWrapper(
+                                    context, AlertDialog.resolveDialogTheme(context, themeResId)));
             TypedValue themeValue = new TypedValue();
             context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, themeValue, false);
             if (themeValue.data != 0) {
@@ -279,7 +289,8 @@ public class AlertDialog extends Dialog implements DialogInterface {
             return this;
         }
 
-        public Builder setPositiveButton(CharSequence text, DialogInterface.OnClickListener listener) {
+        public Builder setPositiveButton(
+                CharSequence text, DialogInterface.OnClickListener listener) {
             this.P.mPositiveButtonText = text;
             this.P.mPositiveButtonListener = listener;
             return this;
@@ -291,7 +302,8 @@ public class AlertDialog extends Dialog implements DialogInterface {
             return this;
         }
 
-        public Builder setNegativeButton(CharSequence text, DialogInterface.OnClickListener listener) {
+        public Builder setNegativeButton(
+                CharSequence text, DialogInterface.OnClickListener listener) {
             this.P.mNegativeButtonText = text;
             this.P.mNegativeButtonListener = listener;
             return this;
@@ -303,7 +315,8 @@ public class AlertDialog extends Dialog implements DialogInterface {
             return this;
         }
 
-        public Builder setNeutralButton(CharSequence text, DialogInterface.OnClickListener listener) {
+        public Builder setNeutralButton(
+                CharSequence text, DialogInterface.OnClickListener listener) {
             this.P.mNeutralButtonText = text;
             this.P.mNeutralButtonListener = listener;
             return this;
@@ -347,14 +360,18 @@ public class AlertDialog extends Dialog implements DialogInterface {
             return this;
         }
 
-        public Builder setCursor(Cursor cursor, DialogInterface.OnClickListener listener, String labelColumn) {
+        public Builder setCursor(
+                Cursor cursor, DialogInterface.OnClickListener listener, String labelColumn) {
             this.P.mCursor = cursor;
             this.P.mLabelColumn = labelColumn;
             this.P.mOnClickListener = listener;
             return this;
         }
 
-        public Builder setMultiChoiceItems(int itemsId, boolean[] checkedItems, DialogInterface.OnMultiChoiceClickListener listener) {
+        public Builder setMultiChoiceItems(
+                int itemsId,
+                boolean[] checkedItems,
+                DialogInterface.OnMultiChoiceClickListener listener) {
             this.P.mItems = this.P.mContext.getResources().getTextArray(itemsId);
             this.P.mOnCheckboxClickListener = listener;
             this.P.mCheckedItems = checkedItems;
@@ -362,7 +379,10 @@ public class AlertDialog extends Dialog implements DialogInterface {
             return this;
         }
 
-        public Builder setMultiChoiceItems(CharSequence[] items, boolean[] checkedItems, DialogInterface.OnMultiChoiceClickListener listener) {
+        public Builder setMultiChoiceItems(
+                CharSequence[] items,
+                boolean[] checkedItems,
+                DialogInterface.OnMultiChoiceClickListener listener) {
             this.P.mItems = items;
             this.P.mOnCheckboxClickListener = listener;
             this.P.mCheckedItems = checkedItems;
@@ -370,7 +390,11 @@ public class AlertDialog extends Dialog implements DialogInterface {
             return this;
         }
 
-        public Builder setMultiChoiceItems(Cursor cursor, String isCheckedColumn, String labelColumn, DialogInterface.OnMultiChoiceClickListener listener) {
+        public Builder setMultiChoiceItems(
+                Cursor cursor,
+                String isCheckedColumn,
+                String labelColumn,
+                DialogInterface.OnMultiChoiceClickListener listener) {
             this.P.mCursor = cursor;
             this.P.mOnCheckboxClickListener = listener;
             this.P.mIsCheckedColumn = isCheckedColumn;
@@ -379,7 +403,8 @@ public class AlertDialog extends Dialog implements DialogInterface {
             return this;
         }
 
-        public Builder setSingleChoiceItems(int itemsId, int checkedItem, DialogInterface.OnClickListener listener) {
+        public Builder setSingleChoiceItems(
+                int itemsId, int checkedItem, DialogInterface.OnClickListener listener) {
             this.P.mItems = this.P.mContext.getResources().getTextArray(itemsId);
             this.P.mOnClickListener = listener;
             this.P.mCheckedItem = checkedItem;
@@ -387,7 +412,11 @@ public class AlertDialog extends Dialog implements DialogInterface {
             return this;
         }
 
-        public Builder setSingleChoiceItems(Cursor cursor, int checkedItem, String labelColumn, DialogInterface.OnClickListener listener) {
+        public Builder setSingleChoiceItems(
+                Cursor cursor,
+                int checkedItem,
+                String labelColumn,
+                DialogInterface.OnClickListener listener) {
             this.P.mCursor = cursor;
             this.P.mOnClickListener = listener;
             this.P.mCheckedItem = checkedItem;
@@ -396,7 +425,8 @@ public class AlertDialog extends Dialog implements DialogInterface {
             return this;
         }
 
-        public Builder setSingleChoiceItems(CharSequence[] items, int checkedItem, DialogInterface.OnClickListener listener) {
+        public Builder setSingleChoiceItems(
+                CharSequence[] items, int checkedItem, DialogInterface.OnClickListener listener) {
             this.P.mItems = items;
             this.P.mOnClickListener = listener;
             this.P.mCheckedItem = checkedItem;
@@ -404,7 +434,8 @@ public class AlertDialog extends Dialog implements DialogInterface {
             return this;
         }
 
-        public Builder setSingleChoiceItems(ListAdapter adapter, int checkedItem, DialogInterface.OnClickListener listener) {
+        public Builder setSingleChoiceItems(
+                ListAdapter adapter, int checkedItem, DialogInterface.OnClickListener listener) {
             this.P.mAdapter = adapter;
             this.P.mOnClickListener = listener;
             this.P.mCheckedItem = checkedItem;
@@ -432,7 +463,12 @@ public class AlertDialog extends Dialog implements DialogInterface {
         }
 
         @Deprecated
-        public Builder setView(View view, int viewSpacingLeft, int viewSpacingTop, int viewSpacingRight, int viewSpacingBottom) {
+        public Builder setView(
+                View view,
+                int viewSpacingLeft,
+                int viewSpacingTop,
+                int viewSpacingRight,
+                int viewSpacingBottom) {
             this.P.mView = view;
             this.P.mViewLayoutResId = 0;
             this.P.mViewSpacingSpecified = true;
@@ -455,7 +491,9 @@ public class AlertDialog extends Dialog implements DialogInterface {
         }
 
         public AlertDialog create() {
-            AlertDialog dialog = new AlertDialog(this.P.mContext, this.mIsDeviceDefault ? this.mThemeResId : 0, false);
+            AlertDialog dialog =
+                    new AlertDialog(
+                            this.P.mContext, this.mIsDeviceDefault ? this.mThemeResId : 0, false);
             this.P.apply(dialog.mAlert);
             dialog.setCancelable(this.P.mCancelable);
             if (this.P.mCancelable) {

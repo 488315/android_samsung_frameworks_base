@@ -10,13 +10,16 @@ import android.os.RemoteException;
 /* loaded from: classes2.dex */
 public interface IKeyMintDevice extends IInterface {
     public static final int AUTH_TOKEN_MAC_LENGTH = 32;
-    public static final String DESCRIPTOR = "android$hardware$security$keymint$IKeyMintDevice".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$security$keymint$IKeyMintDevice".replace('$', '.');
     public static final String HASH = "74a538630d5d90f732f361a2313cbb69b09eb047";
     public static final int VERSION = 3;
 
     void addRngEntropy(byte[] bArr) throws RemoteException;
 
-    BeginResult begin(int i, byte[] bArr, KeyParameter[] keyParameterArr, HardwareAuthToken hardwareAuthToken) throws RemoteException;
+    BeginResult begin(
+            int i, byte[] bArr, KeyParameter[] keyParameterArr, HardwareAuthToken hardwareAuthToken)
+            throws RemoteException;
 
     byte[] convertStorageKeyToEphemeral(byte[] bArr) throws RemoteException;
 
@@ -30,7 +33,8 @@ public interface IKeyMintDevice extends IInterface {
 
     void earlyBootEnded() throws RemoteException;
 
-    KeyCreationResult generateKey(KeyParameter[] keyParameterArr, AttestationKey attestationKey) throws RemoteException;
+    KeyCreationResult generateKey(KeyParameter[] keyParameterArr, AttestationKey attestationKey)
+            throws RemoteException;
 
     KeyMintHardwareInfo getHardwareInfo() throws RemoteException;
 
@@ -38,15 +42,25 @@ public interface IKeyMintDevice extends IInterface {
 
     int getInterfaceVersion() throws RemoteException;
 
-    KeyCharacteristics[] getKeyCharacteristics(byte[] bArr, byte[] bArr2, byte[] bArr3) throws RemoteException;
+    KeyCharacteristics[] getKeyCharacteristics(byte[] bArr, byte[] bArr2, byte[] bArr3)
+            throws RemoteException;
 
     byte[] getRootOfTrust(byte[] bArr) throws RemoteException;
 
     byte[] getRootOfTrustChallenge() throws RemoteException;
 
-    KeyCreationResult importKey(KeyParameter[] keyParameterArr, int i, byte[] bArr, AttestationKey attestationKey) throws RemoteException;
+    KeyCreationResult importKey(
+            KeyParameter[] keyParameterArr, int i, byte[] bArr, AttestationKey attestationKey)
+            throws RemoteException;
 
-    KeyCreationResult importWrappedKey(byte[] bArr, byte[] bArr2, byte[] bArr3, KeyParameter[] keyParameterArr, long j, long j2) throws RemoteException;
+    KeyCreationResult importWrappedKey(
+            byte[] bArr,
+            byte[] bArr2,
+            byte[] bArr3,
+            KeyParameter[] keyParameterArr,
+            long j,
+            long j2)
+            throws RemoteException;
 
     void sendRootOfTrust(byte[] bArr) throws RemoteException;
 
@@ -59,53 +73,64 @@ public interface IKeyMintDevice extends IInterface {
         }
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public void addRngEntropy(byte[] data) throws RemoteException {
-        }
+        public void addRngEntropy(byte[] data) throws RemoteException {}
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public KeyCreationResult generateKey(KeyParameter[] keyParams, AttestationKey attestationKey) throws RemoteException {
+        public KeyCreationResult generateKey(
+                KeyParameter[] keyParams, AttestationKey attestationKey) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public KeyCreationResult importKey(KeyParameter[] keyParams, int keyFormat, byte[] keyData, AttestationKey attestationKey) throws RemoteException {
+        public KeyCreationResult importKey(
+                KeyParameter[] keyParams,
+                int keyFormat,
+                byte[] keyData,
+                AttestationKey attestationKey)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public KeyCreationResult importWrappedKey(byte[] wrappedKeyData, byte[] wrappingKeyBlob, byte[] maskingKey, KeyParameter[] unwrappingParams, long passwordSid, long biometricSid) throws RemoteException {
+        public KeyCreationResult importWrappedKey(
+                byte[] wrappedKeyData,
+                byte[] wrappingKeyBlob,
+                byte[] maskingKey,
+                KeyParameter[] unwrappingParams,
+                long passwordSid,
+                long biometricSid)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public byte[] upgradeKey(byte[] keyBlobToUpgrade, KeyParameter[] upgradeParams) throws RemoteException {
+        public byte[] upgradeKey(byte[] keyBlobToUpgrade, KeyParameter[] upgradeParams)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public void deleteKey(byte[] keyBlob) throws RemoteException {
-        }
+        public void deleteKey(byte[] keyBlob) throws RemoteException {}
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public void deleteAllKeys() throws RemoteException {
-        }
+        public void deleteAllKeys() throws RemoteException {}
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public void destroyAttestationIds() throws RemoteException {
-        }
+        public void destroyAttestationIds() throws RemoteException {}
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public BeginResult begin(int purpose, byte[] keyBlob, KeyParameter[] params, HardwareAuthToken authToken) throws RemoteException {
+        public BeginResult begin(
+                int purpose, byte[] keyBlob, KeyParameter[] params, HardwareAuthToken authToken)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public void deviceLocked(boolean passwordOnly, TimeStampToken timestampToken) throws RemoteException {
-        }
+        public void deviceLocked(boolean passwordOnly, TimeStampToken timestampToken)
+                throws RemoteException {}
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public void earlyBootEnded() throws RemoteException {
-        }
+        public void earlyBootEnded() throws RemoteException {}
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
         public byte[] convertStorageKeyToEphemeral(byte[] storageKeyBlob) throws RemoteException {
@@ -113,7 +138,8 @@ public interface IKeyMintDevice extends IInterface {
         }
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public KeyCharacteristics[] getKeyCharacteristics(byte[] keyBlob, byte[] appId, byte[] appData) throws RemoteException {
+        public KeyCharacteristics[] getKeyCharacteristics(
+                byte[] keyBlob, byte[] appId, byte[] appData) throws RemoteException {
             return null;
         }
 
@@ -128,8 +154,7 @@ public interface IKeyMintDevice extends IInterface {
         }
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
-        public void sendRootOfTrust(byte[] rootOfTrust) throws RemoteException {
-        }
+        public void sendRootOfTrust(byte[] rootOfTrust) throws RemoteException {}
 
         @Override // android.hardware.security.keymint.IKeyMintDevice
         public int getInterfaceVersion() {
@@ -147,7 +172,7 @@ public interface IKeyMintDevice extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyMintDevice {
+    public abstract static class Stub extends Binder implements IKeyMintDevice {
         static final int TRANSACTION_addRngEntropy = 2;
         static final int TRANSACTION_begin = 10;
         static final int TRANSACTION_convertStorageKeyToEphemeral = 13;
@@ -240,7 +265,8 @@ public interface IKeyMintDevice extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -272,18 +298,22 @@ public interface IKeyMintDevice extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 3:
-                    KeyParameter[] _arg02 = (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
-                    AttestationKey _arg1 = (AttestationKey) data.readTypedObject(AttestationKey.CREATOR);
+                    KeyParameter[] _arg02 =
+                            (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
+                    AttestationKey _arg1 =
+                            (AttestationKey) data.readTypedObject(AttestationKey.CREATOR);
                     data.enforceNoDataAvail();
                     KeyCreationResult _result2 = generateKey(_arg02, _arg1);
                     reply.writeNoException();
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 4:
-                    KeyParameter[] _arg03 = (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
+                    KeyParameter[] _arg03 =
+                            (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
                     int _arg12 = data.readInt();
                     byte[] _arg2 = data.createByteArray();
-                    AttestationKey _arg3 = (AttestationKey) data.readTypedObject(AttestationKey.CREATOR);
+                    AttestationKey _arg3 =
+                            (AttestationKey) data.readTypedObject(AttestationKey.CREATOR);
                     data.enforceNoDataAvail();
                     KeyCreationResult _result3 = importKey(_arg03, _arg12, _arg2, _arg3);
                     reply.writeNoException();
@@ -293,17 +323,20 @@ public interface IKeyMintDevice extends IInterface {
                     byte[] _arg04 = data.createByteArray();
                     byte[] _arg13 = data.createByteArray();
                     byte[] _arg22 = data.createByteArray();
-                    KeyParameter[] _arg32 = (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
+                    KeyParameter[] _arg32 =
+                            (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
                     long _arg4 = data.readLong();
                     long _arg5 = data.readLong();
                     data.enforceNoDataAvail();
-                    KeyCreationResult _result4 = importWrappedKey(_arg04, _arg13, _arg22, _arg32, _arg4, _arg5);
+                    KeyCreationResult _result4 =
+                            importWrappedKey(_arg04, _arg13, _arg22, _arg32, _arg4, _arg5);
                     reply.writeNoException();
                     reply.writeTypedObject(_result4, 1);
                     return true;
                 case 6:
                     byte[] _arg05 = data.createByteArray();
-                    KeyParameter[] _arg14 = (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
+                    KeyParameter[] _arg14 =
+                            (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
                     data.enforceNoDataAvail();
                     byte[] _result5 = upgradeKey(_arg05, _arg14);
                     reply.writeNoException();
@@ -326,8 +359,10 @@ public interface IKeyMintDevice extends IInterface {
                 case 10:
                     int _arg07 = data.readInt();
                     byte[] _arg15 = data.createByteArray();
-                    KeyParameter[] _arg23 = (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
-                    HardwareAuthToken _arg33 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    KeyParameter[] _arg23 =
+                            (KeyParameter[]) data.createTypedArray(KeyParameter.CREATOR);
+                    HardwareAuthToken _arg33 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
                     data.enforceNoDataAvail();
                     BeginResult _result6 = begin(_arg07, _arg15, _arg23, _arg33);
                     reply.writeNoException();
@@ -335,7 +370,8 @@ public interface IKeyMintDevice extends IInterface {
                     return true;
                 case 11:
                     boolean _arg08 = data.readBoolean();
-                    TimeStampToken _arg16 = (TimeStampToken) data.readTypedObject(TimeStampToken.CREATOR);
+                    TimeStampToken _arg16 =
+                            (TimeStampToken) data.readTypedObject(TimeStampToken.CREATOR);
                     data.enforceNoDataAvail();
                     deviceLocked(_arg08, _arg16);
                     reply.writeNoException();
@@ -413,7 +449,9 @@ public interface IKeyMintDevice extends IInterface {
                         throw new RemoteException("Method getHardwareInfo is unimplemented.");
                     }
                     _reply.readException();
-                    KeyMintHardwareInfo _result = (KeyMintHardwareInfo) _reply.readTypedObject(KeyMintHardwareInfo.CREATOR);
+                    KeyMintHardwareInfo _result =
+                            (KeyMintHardwareInfo)
+                                    _reply.readTypedObject(KeyMintHardwareInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -441,7 +479,9 @@ public interface IKeyMintDevice extends IInterface {
             }
 
             @Override // android.hardware.security.keymint.IKeyMintDevice
-            public KeyCreationResult generateKey(KeyParameter[] keyParams, AttestationKey attestationKey) throws RemoteException {
+            public KeyCreationResult generateKey(
+                    KeyParameter[] keyParams, AttestationKey attestationKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -454,7 +494,8 @@ public interface IKeyMintDevice extends IInterface {
                         throw new RemoteException("Method generateKey is unimplemented.");
                     }
                     _reply.readException();
-                    KeyCreationResult _result = (KeyCreationResult) _reply.readTypedObject(KeyCreationResult.CREATOR);
+                    KeyCreationResult _result =
+                            (KeyCreationResult) _reply.readTypedObject(KeyCreationResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -463,7 +504,12 @@ public interface IKeyMintDevice extends IInterface {
             }
 
             @Override // android.hardware.security.keymint.IKeyMintDevice
-            public KeyCreationResult importKey(KeyParameter[] keyParams, int keyFormat, byte[] keyData, AttestationKey attestationKey) throws RemoteException {
+            public KeyCreationResult importKey(
+                    KeyParameter[] keyParams,
+                    int keyFormat,
+                    byte[] keyData,
+                    AttestationKey attestationKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -478,7 +524,8 @@ public interface IKeyMintDevice extends IInterface {
                         throw new RemoteException("Method importKey is unimplemented.");
                     }
                     _reply.readException();
-                    KeyCreationResult _result = (KeyCreationResult) _reply.readTypedObject(KeyCreationResult.CREATOR);
+                    KeyCreationResult _result =
+                            (KeyCreationResult) _reply.readTypedObject(KeyCreationResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -487,7 +534,14 @@ public interface IKeyMintDevice extends IInterface {
             }
 
             @Override // android.hardware.security.keymint.IKeyMintDevice
-            public KeyCreationResult importWrappedKey(byte[] wrappedKeyData, byte[] wrappingKeyBlob, byte[] maskingKey, KeyParameter[] unwrappingParams, long passwordSid, long biometricSid) throws RemoteException {
+            public KeyCreationResult importWrappedKey(
+                    byte[] wrappedKeyData,
+                    byte[] wrappingKeyBlob,
+                    byte[] maskingKey,
+                    KeyParameter[] unwrappingParams,
+                    long passwordSid,
+                    long biometricSid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -504,7 +558,8 @@ public interface IKeyMintDevice extends IInterface {
                         throw new RemoteException("Method importWrappedKey is unimplemented.");
                     }
                     _reply.readException();
-                    KeyCreationResult _result = (KeyCreationResult) _reply.readTypedObject(KeyCreationResult.CREATOR);
+                    KeyCreationResult _result =
+                            (KeyCreationResult) _reply.readTypedObject(KeyCreationResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -513,7 +568,8 @@ public interface IKeyMintDevice extends IInterface {
             }
 
             @Override // android.hardware.security.keymint.IKeyMintDevice
-            public byte[] upgradeKey(byte[] keyBlobToUpgrade, KeyParameter[] upgradeParams) throws RemoteException {
+            public byte[] upgradeKey(byte[] keyBlobToUpgrade, KeyParameter[] upgradeParams)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -590,7 +646,9 @@ public interface IKeyMintDevice extends IInterface {
             }
 
             @Override // android.hardware.security.keymint.IKeyMintDevice
-            public BeginResult begin(int purpose, byte[] keyBlob, KeyParameter[] params, HardwareAuthToken authToken) throws RemoteException {
+            public BeginResult begin(
+                    int purpose, byte[] keyBlob, KeyParameter[] params, HardwareAuthToken authToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -614,7 +672,8 @@ public interface IKeyMintDevice extends IInterface {
             }
 
             @Override // android.hardware.security.keymint.IKeyMintDevice
-            public void deviceLocked(boolean passwordOnly, TimeStampToken timestampToken) throws RemoteException {
+            public void deviceLocked(boolean passwordOnly, TimeStampToken timestampToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -652,7 +711,8 @@ public interface IKeyMintDevice extends IInterface {
             }
 
             @Override // android.hardware.security.keymint.IKeyMintDevice
-            public byte[] convertStorageKeyToEphemeral(byte[] storageKeyBlob) throws RemoteException {
+            public byte[] convertStorageKeyToEphemeral(byte[] storageKeyBlob)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -661,7 +721,8 @@ public interface IKeyMintDevice extends IInterface {
                     _data.writeByteArray(storageKeyBlob);
                     boolean _status = this.mRemote.transact(13, _data, _reply, 32);
                     if (!_status) {
-                        throw new RemoteException("Method convertStorageKeyToEphemeral is unimplemented.");
+                        throw new RemoteException(
+                                "Method convertStorageKeyToEphemeral is unimplemented.");
                     }
                     _reply.readException();
                     byte[] _result = _reply.createByteArray();
@@ -673,7 +734,8 @@ public interface IKeyMintDevice extends IInterface {
             }
 
             @Override // android.hardware.security.keymint.IKeyMintDevice
-            public KeyCharacteristics[] getKeyCharacteristics(byte[] keyBlob, byte[] appId, byte[] appData) throws RemoteException {
+            public KeyCharacteristics[] getKeyCharacteristics(
+                    byte[] keyBlob, byte[] appId, byte[] appData) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -687,7 +749,9 @@ public interface IKeyMintDevice extends IInterface {
                         throw new RemoteException("Method getKeyCharacteristics is unimplemented.");
                     }
                     _reply.readException();
-                    KeyCharacteristics[] _result = (KeyCharacteristics[]) _reply.createTypedArray(KeyCharacteristics.CREATOR);
+                    KeyCharacteristics[] _result =
+                            (KeyCharacteristics[])
+                                    _reply.createTypedArray(KeyCharacteristics.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -704,7 +768,8 @@ public interface IKeyMintDevice extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(15, _data, _reply, 32);
                     if (!_status) {
-                        throw new RemoteException("Method getRootOfTrustChallenge is unimplemented.");
+                        throw new RemoteException(
+                                "Method getRootOfTrustChallenge is unimplemented.");
                     }
                     _reply.readException();
                     byte[] _result = (byte[]) _reply.createFixedArray(byte[].class, 16);

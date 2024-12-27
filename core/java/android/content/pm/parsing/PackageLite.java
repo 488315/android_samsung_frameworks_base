@@ -4,8 +4,10 @@ import android.content.pm.ArchivedPackageParcel;
 import android.content.pm.PackageInfo;
 import android.content.pm.SigningDetails;
 import android.content.pm.VerifierInfo;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -45,7 +47,19 @@ public class PackageLite {
     private final int mVersionCode;
     private final int mVersionCodeMajor;
 
-    public PackageLite(String path, String baseApkPath, ApkLite baseApk, String[] splitNames, boolean[] isFeatureSplits, String[] usesSplitNames, String[] configForSplit, String[] splitApkPaths, int[] splitRevisionCodes, int targetSdk, Set<String>[] requiredSplitTypes, Set<String>[] splitTypes) {
+    public PackageLite(
+            String path,
+            String baseApkPath,
+            ApkLite baseApk,
+            String[] splitNames,
+            boolean[] isFeatureSplits,
+            String[] usesSplitNames,
+            String[] configForSplit,
+            String[] splitApkPaths,
+            int[] splitRevisionCodes,
+            int targetSdk,
+            Set<String>[] requiredSplitTypes,
+            Set<String>[] splitTypes) {
         this.mPath = path;
         this.mBaseApkPath = baseApkPath;
         this.mPackageName = baseApk.getPackageName();
@@ -92,12 +106,21 @@ public class PackageLite {
     }
 
     private boolean hasAnyRequiredSplitTypes() {
-        return (CollectionUtils.isEmpty(this.mBaseRequiredSplitTypes) && ArrayUtils.find(this.mRequiredSplitTypes, new Predicate() { // from class: android.content.pm.parsing.PackageLite$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return PackageLite.lambda$hasAnyRequiredSplitTypes$0((Set) obj);
-            }
-        }) == null) ? false : true;
+        return (CollectionUtils.isEmpty(this.mBaseRequiredSplitTypes)
+                        && ArrayUtils.find(
+                                        this.mRequiredSplitTypes,
+                                        new Predicate() { // from class:
+                                            // android.content.pm.parsing.PackageLite$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Predicate
+                                            public final boolean test(Object obj) {
+                                                return PackageLite
+                                                        .lambda$hasAnyRequiredSplitTypes$0(
+                                                                (Set) obj);
+                                            }
+                                        })
+                                == null)
+                ? false
+                : true;
     }
 
     static /* synthetic */ boolean lambda$hasAnyRequiredSplitTypes$0(Set r) {
@@ -225,6 +248,5 @@ public class PackageLite {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

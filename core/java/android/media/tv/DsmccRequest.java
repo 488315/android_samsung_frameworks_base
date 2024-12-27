@@ -6,20 +6,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class DsmccRequest extends BroadcastInfoRequest implements Parcelable {
-    public static final Parcelable.Creator<DsmccRequest> CREATOR = new Parcelable.Creator<DsmccRequest>() { // from class: android.media.tv.DsmccRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DsmccRequest createFromParcel(Parcel source) {
-            source.readInt();
-            return DsmccRequest.createFromParcelBody(source);
-        }
+    public static final Parcelable.Creator<DsmccRequest> CREATOR =
+            new Parcelable.Creator<DsmccRequest>() { // from class: android.media.tv.DsmccRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DsmccRequest createFromParcel(Parcel source) {
+                    source.readInt();
+                    return DsmccRequest.createFromParcelBody(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DsmccRequest[] newArray(int size) {
-            return new DsmccRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DsmccRequest[] newArray(int size) {
+                    return new DsmccRequest[size];
+                }
+            };
     private static final int REQUEST_TYPE = 6;
     private final Uri mUri;
 

@@ -6,8 +6,7 @@ import android.media.soundtrigger.Properties;
 import android.media.soundtrigger.RecognitionConfig;
 import android.media.soundtrigger.SoundModel;
 import android.os.IBinder;
-import com.android.server.soundtrigger_middleware.ISoundTriggerHal;
-import com.android.server.soundtrigger_middleware.SoundTriggerDuplicateModelHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,12 +36,18 @@ public final class SoundTriggerDuplicateModelHandler implements ISoundTriggerHal
     }
 
     public final void checkDuplicateModelUuid(final String str) {
-        Optional findFirst = this.mModelList.stream().filter(new Predicate() { // from class: com.android.server.soundtrigger_middleware.SoundTriggerDuplicateModelHandler$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((SoundTriggerDuplicateModelHandler.ModelData) obj).mUuid.equals(str);
-            }
-        }).findFirst();
+        Optional findFirst =
+                this.mModelList.stream()
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.android.server.soundtrigger_middleware.SoundTriggerDuplicateModelHandler$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return ((SoundTriggerDuplicateModelHandler.ModelData) obj)
+                                                .mUuid.equals(str);
+                                    }
+                                })
+                        .findFirst();
         if (findFirst.isPresent()) {
             ((ModelData) findFirst.get()).mWasContended = true;
             throw new RecoverableException(1);
@@ -85,18 +90,22 @@ public final class SoundTriggerDuplicateModelHandler implements ISoundTriggerHal
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadPhraseSoundModel(PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+    public final int loadPhraseSoundModel(
+            PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
         int loadPhraseSoundModel;
         synchronized (this) {
             checkDuplicateModelUuid(phraseSoundModel.common.uuid);
-            loadPhraseSoundModel = this.mDelegate.loadPhraseSoundModel(phraseSoundModel, modelCallback);
-            ((ArrayList) this.mModelList).add(new ModelData(loadPhraseSoundModel, phraseSoundModel.common.uuid));
+            loadPhraseSoundModel =
+                    this.mDelegate.loadPhraseSoundModel(phraseSoundModel, modelCallback);
+            ((ArrayList) this.mModelList)
+                    .add(new ModelData(loadPhraseSoundModel, phraseSoundModel.common.uuid));
         }
         return loadPhraseSoundModel;
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadSoundModel(SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+    public final int loadSoundModel(
+            SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
         int loadSoundModel;
         synchronized (this) {
             checkDuplicateModelUuid(soundModel.uuid);

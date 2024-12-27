@@ -5,11 +5,13 @@ import android.content.Context;
 
 /* loaded from: classes5.dex */
 class VolumeShortcutToggleAccessibilityServiceTarget extends AccessibilityServiceTarget {
-    VolumeShortcutToggleAccessibilityServiceTarget(Context context, int shortcutType, AccessibilityServiceInfo serviceInfo) {
+    VolumeShortcutToggleAccessibilityServiceTarget(
+            Context context, int shortcutType, AccessibilityServiceInfo serviceInfo) {
         super(context, shortcutType, 0, serviceInfo);
     }
 
-    @Override // com.android.internal.accessibility.dialog.AccessibilityTarget, com.android.internal.accessibility.dialog.OnTargetCheckedChangeListener
+    @Override // com.android.internal.accessibility.dialog.AccessibilityTarget,
+              // com.android.internal.accessibility.dialog.OnTargetCheckedChangeListener
     public void onCheckedChanged(boolean isChecked) {
         if (getShortcutType() == 2) {
             super.onCheckedChanged(isChecked);

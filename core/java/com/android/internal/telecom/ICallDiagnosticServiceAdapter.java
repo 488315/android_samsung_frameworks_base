@@ -9,11 +9,13 @@ import android.text.TextUtils;
 
 /* loaded from: classes5.dex */
 public interface ICallDiagnosticServiceAdapter extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telecom.ICallDiagnosticServiceAdapter";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telecom.ICallDiagnosticServiceAdapter";
 
     void clearDiagnosticMessage(String str, int i) throws RemoteException;
 
-    void displayDiagnosticMessage(String str, int i, CharSequence charSequence) throws RemoteException;
+    void displayDiagnosticMessage(String str, int i, CharSequence charSequence)
+            throws RemoteException;
 
     void overrideDisconnectMessage(String str, CharSequence charSequence) throws RemoteException;
 
@@ -21,20 +23,19 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
 
     public static class Default implements ICallDiagnosticServiceAdapter {
         @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
-        public void displayDiagnosticMessage(String callId, int messageId, CharSequence message) throws RemoteException {
-        }
+        public void displayDiagnosticMessage(String callId, int messageId, CharSequence message)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
-        public void clearDiagnosticMessage(String callId, int messageId) throws RemoteException {
-        }
+        public void clearDiagnosticMessage(String callId, int messageId) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
-        public void sendDeviceToDeviceMessage(String callId, int message, int value) throws RemoteException {
-        }
+        public void sendDeviceToDeviceMessage(String callId, int message, int value)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
-        public void overrideDisconnectMessage(String callId, CharSequence message) throws RemoteException {
-        }
+        public void overrideDisconnectMessage(String callId, CharSequence message)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +43,7 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICallDiagnosticServiceAdapter {
+    public abstract static class Stub extends Binder implements ICallDiagnosticServiceAdapter {
         static final int TRANSACTION_clearDiagnosticMessage = 2;
         static final int TRANSACTION_displayDiagnosticMessage = 1;
         static final int TRANSACTION_overrideDisconnectMessage = 4;
@@ -89,7 +90,8 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICallDiagnosticServiceAdapter.DESCRIPTOR);
             }
@@ -101,7 +103,8 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
                 case 1:
                     String _arg0 = data.readString();
                     int _arg1 = data.readInt();
-                    CharSequence _arg2 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg2 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     displayDiagnosticMessage(_arg0, _arg1, _arg2);
                     return true;
@@ -120,7 +123,8 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
                     return true;
                 case 4:
                     String _arg04 = data.readString();
-                    CharSequence _arg14 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg14 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     overrideDisconnectMessage(_arg04, _arg14);
                     return true;
@@ -146,7 +150,8 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
-            public void displayDiagnosticMessage(String callId, int messageId, CharSequence message) throws RemoteException {
+            public void displayDiagnosticMessage(String callId, int messageId, CharSequence message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);
@@ -165,7 +170,8 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
-            public void clearDiagnosticMessage(String callId, int messageId) throws RemoteException {
+            public void clearDiagnosticMessage(String callId, int messageId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);
@@ -178,7 +184,8 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
-            public void sendDeviceToDeviceMessage(String callId, int message, int value) throws RemoteException {
+            public void sendDeviceToDeviceMessage(String callId, int message, int value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);
@@ -192,7 +199,8 @@ public interface ICallDiagnosticServiceAdapter extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallDiagnosticServiceAdapter
-            public void overrideDisconnectMessage(String callId, CharSequence message) throws RemoteException {
+            public void overrideDisconnectMessage(String callId, CharSequence message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallDiagnosticServiceAdapter.DESCRIPTOR);

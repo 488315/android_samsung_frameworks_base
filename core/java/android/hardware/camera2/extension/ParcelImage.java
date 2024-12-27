@@ -9,21 +9,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class ParcelImage implements Parcelable {
-    public static final Parcelable.Creator<ParcelImage> CREATOR = new Parcelable.Creator<ParcelImage>() { // from class: android.hardware.camera2.extension.ParcelImage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelImage createFromParcel(Parcel _aidl_source) {
-            ParcelImage _aidl_out = new ParcelImage();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ParcelImage> CREATOR =
+            new Parcelable.Creator<
+                    ParcelImage>() { // from class: android.hardware.camera2.extension.ParcelImage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelImage createFromParcel(Parcel _aidl_source) {
+                    ParcelImage _aidl_out = new ParcelImage();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelImage[] newArray(int _aidl_size) {
-            return new ParcelImage[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelImage[] newArray(int _aidl_size) {
+                    return new ParcelImage[_aidl_size];
+                }
+            };
     public HardwareBuffer buffer;
     public Rect crop;
     public ParcelFileDescriptor fence;
@@ -140,7 +142,9 @@ public class ParcelImage implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.fence = (ParcelFileDescriptor) _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+                this.fence =
+                        (ParcelFileDescriptor)
+                                _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

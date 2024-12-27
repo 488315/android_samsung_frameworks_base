@@ -13,8 +13,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
-import com.android.server.soundtrigger_middleware.ISoundTriggerHal;
-import com.android.server.soundtrigger_middleware.SoundTriggerMiddlewareImpl;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,7 +24,8 @@ import java.util.Set;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundTriggerHal.GlobalCallback {
+public final class SoundTriggerModule
+        implements IBinder.DeathRecipient, ISoundTriggerHal.GlobalCallback {
     public final Set mActiveSessions = new HashSet();
     public final SoundTriggerMiddlewareImpl.AudioSessionProvider mAudioSessionProvider;
     public final HalFactory mHalFactory;
@@ -48,7 +48,7 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
             LOADED = modelState2;
             ModelState modelState3 = new ModelState("ACTIVE", 2);
             ACTIVE = modelState3;
-            $VALUES = new ModelState[]{modelState, modelState2, modelState3};
+            $VALUES = new ModelState[] {modelState, modelState2, modelState3};
         }
 
         public static ModelState valueOf(String str) {
@@ -75,41 +75,53 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
             public boolean mIsStopping = false;
 
             /* renamed from: -$$Nest$mload, reason: not valid java name */
-            public static int m900$$Nest$mload(Model model, PhraseSoundModel phraseSoundModel, SoundTriggerMiddlewareImpl.AudioSessionProvider.AudioSession audioSession) {
+            public static int m900$$Nest$mload(
+                    Model model,
+                    PhraseSoundModel phraseSoundModel,
+                    SoundTriggerMiddlewareImpl.AudioSessionProvider.AudioSession audioSession) {
                 model.mSession = audioSession;
                 Session session = Session.this;
-                model.mHandle = SoundTriggerModule.this.mHalService.loadPhraseSoundModel(phraseSoundModel, model);
+                model.mHandle =
+                        SoundTriggerModule.this.mHalService.loadPhraseSoundModel(
+                                phraseSoundModel, model);
                 model.setState(ModelState.LOADED);
                 ((HashMap) session.mLoadedModels).put(Integer.valueOf(model.mHandle), model);
                 return model.mHandle;
             }
 
             /* renamed from: -$$Nest$mload, reason: not valid java name */
-            public static int m901$$Nest$mload(Model model, SoundModel soundModel, SoundTriggerMiddlewareImpl.AudioSessionProvider.AudioSession audioSession) {
+            public static int m901$$Nest$mload(
+                    Model model,
+                    SoundModel soundModel,
+                    SoundTriggerMiddlewareImpl.AudioSessionProvider.AudioSession audioSession) {
                 model.mSession = audioSession;
                 Session session = Session.this;
-                model.mHandle = SoundTriggerModule.this.mHalService.loadSoundModel(soundModel, model);
+                model.mHandle =
+                        SoundTriggerModule.this.mHalService.loadSoundModel(soundModel, model);
                 model.setState(ModelState.LOADED);
                 ((HashMap) session.mLoadedModels).put(Integer.valueOf(model.mHandle), model);
                 return model.mHandle;
             }
 
             /* renamed from: -$$Nest$mstartRecognition, reason: not valid java name */
-            public static IBinder m902$$Nest$mstartRecognition(Model model, RecognitionConfig recognitionConfig) {
+            public static IBinder m902$$Nest$mstartRecognition(
+                    Model model, RecognitionConfig recognitionConfig) {
                 if (model.mIsStopping) {
                     throw new RecoverableException(5, "Race occurred");
                 }
-                SoundTriggerHalEnforcer soundTriggerHalEnforcer = SoundTriggerModule.this.mHalService;
+                SoundTriggerHalEnforcer soundTriggerHalEnforcer =
+                        SoundTriggerModule.this.mHalService;
                 int i = model.mHandle;
-                SoundTriggerMiddlewareImpl.AudioSessionProvider.AudioSession audioSession = model.mSession;
-                soundTriggerHalEnforcer.startRecognition(i, audioSession.mDeviceHandle, audioSession.mIoHandle, recognitionConfig);
+                SoundTriggerMiddlewareImpl.AudioSessionProvider.AudioSession audioSession =
+                        model.mSession;
+                soundTriggerHalEnforcer.startRecognition(
+                        i, audioSession.mDeviceHandle, audioSession.mIoHandle, recognitionConfig);
                 model.mRecognitionToken = new Binder();
                 model.setState(ModelState.ACTIVE);
                 return model.mRecognitionToken;
             }
 
-            public Model() {
-            }
+            public Model() {}
 
             @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal.ModelCallback
             public final void modelUnloaded(int i) {
@@ -127,7 +139,8 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
             }
 
             @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal.ModelCallback
-            public final void phraseRecognitionCallback(int i, PhraseRecognitionEventSys phraseRecognitionEventSys) {
+            public final void phraseRecognitionCallback(
+                    int i, PhraseRecognitionEventSys phraseRecognitionEventSys) {
                 synchronized (SoundTriggerModule.this) {
                     try {
                         IBinder iBinder = this.mRecognitionToken;
@@ -135,14 +148,20 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
                             return;
                         }
                         phraseRecognitionEventSys.token = iBinder;
-                        if (!phraseRecognitionEventSys.phraseRecognitionEvent.common.recognitionStillActive) {
+                        if (!phraseRecognitionEventSys
+                                .phraseRecognitionEvent
+                                .common
+                                .recognitionStillActive) {
                             setState(ModelState.LOADED);
                             this.mRecognitionToken = null;
                         }
                         ISoundTriggerCallback iSoundTriggerCallback = Session.this.mCallback;
                         if (iSoundTriggerCallback != null) {
                             try {
-                                iSoundTriggerCallback.onPhraseRecognition(this.mHandle, phraseRecognitionEventSys, this.mSession.mSessionHandle);
+                                iSoundTriggerCallback.onPhraseRecognition(
+                                        this.mHandle,
+                                        phraseRecognitionEventSys,
+                                        this.mSession.mSessionHandle);
                             } catch (RemoteException e) {
                                 throw e.rethrowAsRuntimeException();
                             }
@@ -169,7 +188,10 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
                         ISoundTriggerCallback iSoundTriggerCallback = Session.this.mCallback;
                         if (iSoundTriggerCallback != null) {
                             try {
-                                iSoundTriggerCallback.onRecognition(this.mHandle, recognitionEventSys, this.mSession.mSessionHandle);
+                                iSoundTriggerCallback.onRecognition(
+                                        this.mHandle,
+                                        recognitionEventSys,
+                                        this.mSession.mSessionHandle);
                             } catch (RemoteException e) {
                                 throw e.rethrowAsRuntimeException();
                             }
@@ -195,7 +217,8 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
         }
 
         public final IBinder asBinder() {
-            throw new UnsupportedOperationException("This implementation is not intended to be used directly with Binder.");
+            throw new UnsupportedOperationException(
+                    "This implementation is not intended to be used directly with Binder.");
         }
 
         public final void checkValid() {
@@ -234,7 +257,9 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
             synchronized (SoundTriggerModule.this) {
                 checkValid();
                 Model model = (Model) ((HashMap) this.mLoadedModels).get(Integer.valueOf(i));
-                modelParameter = SoundTriggerModule.this.mHalService.getModelParameter(model.mHandle, i2 != 0 ? -1 : 0);
+                modelParameter =
+                        SoundTriggerModule.this.mHalService.getModelParameter(
+                                model.mHandle, i2 != 0 ? -1 : 0);
             }
             return modelParameter;
         }
@@ -242,13 +267,16 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
         public final int loadModel(SoundModel soundModel) {
             int m901$$Nest$mload;
             synchronized (SoundTriggerModule.this) {
-                SoundTriggerMiddlewareImpl.AudioSessionProvider.AudioSession acquireSession = SoundTriggerModule.this.mAudioSessionProvider.acquireSession();
+                SoundTriggerMiddlewareImpl.AudioSessionProvider.AudioSession acquireSession =
+                        SoundTriggerModule.this.mAudioSessionProvider.acquireSession();
                 try {
                     checkValid();
-                    m901$$Nest$mload = Model.m901$$Nest$mload(new Model(), soundModel, acquireSession);
+                    m901$$Nest$mload =
+                            Model.m901$$Nest$mload(new Model(), soundModel, acquireSession);
                 } catch (Exception e) {
                     try {
-                        SoundTriggerModule.this.mAudioSessionProvider.releaseSession(acquireSession.mSessionHandle);
+                        SoundTriggerModule.this.mAudioSessionProvider.releaseSession(
+                                acquireSession.mSessionHandle);
                     } catch (Exception e2) {
                         Slog.e("SoundTriggerModule", "Failed to release session.", e2);
                     }
@@ -261,14 +289,20 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
         public final int loadPhraseModel(PhraseSoundModel phraseSoundModel) {
             int m900$$Nest$mload;
             synchronized (SoundTriggerModule.this) {
-                SoundTriggerMiddlewareImpl.AudioSessionProvider.AudioSession acquireSession = SoundTriggerModule.this.mAudioSessionProvider.acquireSession();
+                SoundTriggerMiddlewareImpl.AudioSessionProvider.AudioSession acquireSession =
+                        SoundTriggerModule.this.mAudioSessionProvider.acquireSession();
                 try {
                     checkValid();
-                    m900$$Nest$mload = Model.m900$$Nest$mload(new Model(), phraseSoundModel, acquireSession);
-                    Slog.d("SoundTriggerModule", String.format("loadPhraseModel()->%d", Integer.valueOf(m900$$Nest$mload)));
+                    m900$$Nest$mload =
+                            Model.m900$$Nest$mload(new Model(), phraseSoundModel, acquireSession);
+                    Slog.d(
+                            "SoundTriggerModule",
+                            String.format(
+                                    "loadPhraseModel()->%d", Integer.valueOf(m900$$Nest$mload)));
                 } catch (Exception e) {
                     try {
-                        SoundTriggerModule.this.mAudioSessionProvider.releaseSession(acquireSession.mSessionHandle);
+                        SoundTriggerModule.this.mAudioSessionProvider.releaseSession(
+                                acquireSession.mSessionHandle);
                     } catch (Exception e2) {
                         Slog.e("SoundTriggerModule", "Failed to release session.", e2);
                     }
@@ -283,7 +317,8 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
             synchronized (SoundTriggerModule.this) {
                 checkValid();
                 Model model = (Model) ((HashMap) this.mLoadedModels).get(Integer.valueOf(i));
-                queryParameter = SoundTriggerModule.this.mHalService.queryParameter(model.mHandle, i2);
+                queryParameter =
+                        SoundTriggerModule.this.mHalService.queryParameter(model.mHandle, i2);
             }
             return queryParameter;
         }
@@ -292,7 +327,8 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
             synchronized (SoundTriggerModule.this) {
                 checkValid();
                 Model model = (Model) ((HashMap) this.mLoadedModels).get(Integer.valueOf(i));
-                SoundTriggerModule.this.mHalService.setModelParameter(model.mHandle, i2 != 0 ? -1 : 0, i3);
+                SoundTriggerModule.this.mHalService.setModelParameter(
+                        model.mHandle, i2 != 0 ? -1 : 0, i3);
             }
         }
 
@@ -300,7 +336,10 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
             IBinder m902$$Nest$mstartRecognition;
             synchronized (SoundTriggerModule.this) {
                 checkValid();
-                m902$$Nest$mstartRecognition = Model.m902$$Nest$mstartRecognition((Model) ((HashMap) this.mLoadedModels).get(Integer.valueOf(i)), recognitionConfig);
+                m902$$Nest$mstartRecognition =
+                        Model.m902$$Nest$mstartRecognition(
+                                (Model) ((HashMap) this.mLoadedModels).get(Integer.valueOf(i)),
+                                recognitionConfig);
             }
             return m902$$Nest$mstartRecognition;
         }
@@ -337,12 +376,15 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
                 Session session = Session.this;
                 SoundTriggerModule.this.mHalService.unloadSoundModel(model.mHandle);
                 ((HashMap) session.mLoadedModels).remove(Integer.valueOf(model.mHandle));
-                SoundTriggerModule.this.mAudioSessionProvider.releaseSession(model.mSession.mSessionHandle);
+                SoundTriggerModule.this.mAudioSessionProvider.releaseSession(
+                        model.mSession.mSessionHandle);
             }
         }
     }
 
-    public SoundTriggerModule(HalFactory halFactory, SoundTriggerMiddlewareImpl.AudioSessionProvider audioSessionProvider) {
+    public SoundTriggerModule(
+            HalFactory halFactory,
+            SoundTriggerMiddlewareImpl.AudioSessionProvider audioSessionProvider) {
         Objects.requireNonNull(halFactory);
         this.mHalFactory = halFactory;
         this.mAudioSessionProvider = audioSessionProvider;
@@ -360,7 +402,11 @@ public final class SoundTriggerModule implements IBinder.DeathRecipient, ISoundT
                 return;
             } else {
                 try {
-                    this.mHalService = new SoundTriggerHalEnforcer(new SoundTriggerHalWatchdog(new SoundTriggerDuplicateModelHandler(this.mHalFactory.create())));
+                    this.mHalService =
+                            new SoundTriggerHalEnforcer(
+                                    new SoundTriggerHalWatchdog(
+                                            new SoundTriggerDuplicateModelHandler(
+                                                    this.mHalFactory.create())));
                 } catch (RuntimeException e) {
                     if (!(e.getCause() instanceof RemoteException)) {
                         throw e;

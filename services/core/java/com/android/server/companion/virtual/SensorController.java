@@ -14,13 +14,14 @@ import android.os.SharedMemory;
 import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.modules.expresslog.Counter;
 import com.android.server.LocalServices;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
-import com.android.server.companion.virtual.SensorController;
 import com.android.server.sensors.SensorManagerInternal$RuntimeSensorCallback;
 import com.android.server.sensors.SensorService;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -39,11 +40,15 @@ public final class SensorController {
     public final ArrayMap mSensorDescriptors = new ArrayMap();
     public final SparseArray mVirtualSensors = new SparseArray();
     public List mVirtualSensorList = null;
-    public final SensorService.LocalService mSensorManagerInternal = (SensorService.LocalService) LocalServices.getService(SensorService.LocalService.class);
-    public final VirtualDeviceManagerInternal mVdmInternal = (VirtualDeviceManagerInternal) LocalServices.getService(VirtualDeviceManagerInternal.class);
+    public final SensorService.LocalService mSensorManagerInternal =
+            (SensorService.LocalService) LocalServices.getService(SensorService.LocalService.class);
+    public final VirtualDeviceManagerInternal mVdmInternal =
+            (VirtualDeviceManagerInternal)
+                    LocalServices.getService(VirtualDeviceManagerInternal.class);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class RuntimeSensorCallbackWrapper implements SensorManagerInternal$RuntimeSensorCallback {
+    public final class RuntimeSensorCallbackWrapper
+            implements SensorManagerInternal$RuntimeSensorCallback {
         public final IVirtualSensorCallback mCallback;
 
         public RuntimeSensorCallbackWrapper(IVirtualSensorCallback iVirtualSensorCallback) {
@@ -53,11 +58,14 @@ public final class SensorController {
         @Override // com.android.server.sensors.SensorManagerInternal$RuntimeSensorCallback
         public final int onConfigurationChanged(int i, boolean z, int i2, int i3) {
             if (this.mCallback == null) {
-                NandswapManager$$ExternalSyntheticOutline0.m(i, "No sensor callback configured for sensor handle ", "SensorController");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        i, "No sensor callback configured for sensor handle ", "SensorController");
                 return -22;
             }
             SensorController sensorController = SensorController.this;
-            VirtualSensor virtualSensor = sensorController.mVdmInternal.getVirtualSensor(sensorController.mVirtualDeviceId, i);
+            VirtualSensor virtualSensor =
+                    sensorController.mVdmInternal.getVirtualSensor(
+                            sensorController.mVirtualDeviceId, i);
             if (virtualSensor != null) {
                 try {
                     this.mCallback.onConfigurationChanged(virtualSensor, z, i2, i3);
@@ -67,7 +75,12 @@ public final class SensorController {
                     return Integer.MIN_VALUE;
                 }
             }
-            Slog.e("SensorController", "No sensor found for deviceId=" + sensorController.mVirtualDeviceId + " and sensor handle=" + i);
+            Slog.e(
+                    "SensorController",
+                    "No sensor found for deviceId="
+                            + sensorController.mVirtualDeviceId
+                            + " and sensor handle="
+                            + i);
             return -22;
         }
 
@@ -78,9 +91,16 @@ public final class SensorController {
                 return -22;
             }
             SensorController sensorController = SensorController.this;
-            VirtualSensor virtualSensor = sensorController.mVdmInternal.getVirtualSensor(sensorController.mVirtualDeviceId, i2);
+            VirtualSensor virtualSensor =
+                    sensorController.mVdmInternal.getVirtualSensor(
+                            sensorController.mVirtualDeviceId, i2);
             if (virtualSensor == null) {
-                Slog.e("SensorController", "No sensor found for deviceId=" + sensorController.mVirtualDeviceId + " and sensor handle=" + i2);
+                Slog.e(
+                        "SensorController",
+                        "No sensor found for deviceId="
+                                + sensorController.mVirtualDeviceId
+                                + " and sensor handle="
+                                + i2);
                 return -22;
             }
             try {
@@ -98,7 +118,10 @@ public final class SensorController {
         @Override // com.android.server.sensors.SensorManagerInternal$RuntimeSensorCallback
         public final int onDirectChannelCreated(ParcelFileDescriptor parcelFileDescriptor) {
             if (this.mCallback == null) {
-                VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("No sensor callback for virtual deviceId "), SensorController.this.mVirtualDeviceId, "SensorController");
+                VaultKeeperService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("No sensor callback for virtual deviceId "),
+                        SensorController.this.mVirtualDeviceId,
+                        "SensorController");
                 return -22;
             }
             if (parcelFileDescriptor == null) {
@@ -107,7 +130,8 @@ public final class SensorController {
             }
             int andIncrement = SensorController.sNextDirectChannelHandle.getAndIncrement();
             try {
-                this.mCallback.onDirectChannelCreated(andIncrement, SharedMemory.fromFileDescriptor(parcelFileDescriptor));
+                this.mCallback.onDirectChannelCreated(
+                        andIncrement, SharedMemory.fromFileDescriptor(parcelFileDescriptor));
                 return andIncrement;
             } catch (RemoteException e) {
                 Slog.e("SensorController", "Failed to call sensor callback: " + e);
@@ -119,7 +143,10 @@ public final class SensorController {
         public final void onDirectChannelDestroyed(int i) {
             IVirtualSensorCallback iVirtualSensorCallback = this.mCallback;
             if (iVirtualSensorCallback == null) {
-                VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("No sensor callback for virtual deviceId "), SensorController.this.mVirtualDeviceId, "SensorController");
+                VaultKeeperService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("No sensor callback for virtual deviceId "),
+                        SensorController.this.mVirtualDeviceId,
+                        "SensorController");
                 return;
             }
             try {
@@ -150,7 +177,12 @@ public final class SensorController {
         }
     }
 
-    public SensorController(IVirtualDevice iVirtualDevice, int i, AttributionSource attributionSource, IVirtualSensorCallback iVirtualSensorCallback, List list) {
+    public SensorController(
+            IVirtualDevice iVirtualDevice,
+            int i,
+            AttributionSource attributionSource,
+            IVirtualSensorCallback iVirtualSensorCallback,
+            List list) {
         this.mVirtualDeviceId = i;
         this.mAttributionSource = attributionSource;
         this.mRuntimeSensorCallback = new RuntimeSensorCallbackWrapper(iVirtualSensorCallback);
@@ -178,40 +210,53 @@ public final class SensorController {
 
     public final void close() {
         synchronized (this.mLock) {
-            this.mSensorDescriptors.values().forEach(new Consumer() { // from class: com.android.server.companion.virtual.SensorController$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    SensorService.LocalService localService = SensorController.this.mSensorManagerInternal;
-                    int i = ((SensorController.SensorDescriptor) obj).mHandle;
-                    synchronized (SensorService.this.mLock) {
-                        try {
-                            if (SensorService.this.mRuntimeSensorHandles.contains(Integer.valueOf(i))) {
-                                SensorService.this.mRuntimeSensorHandles.remove(Integer.valueOf(i));
-                                SensorService.unregisterRuntimeSensorNative(SensorService.this.mPtr, i);
-                            }
-                        } catch (Throwable th) {
-                            throw th;
-                        }
-                    }
-                }
-            });
+            this.mSensorDescriptors
+                    .values()
+                    .forEach(
+                            new Consumer() { // from class:
+                                             // com.android.server.companion.virtual.SensorController$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    SensorService.LocalService localService =
+                                            SensorController.this.mSensorManagerInternal;
+                                    int i = ((SensorController.SensorDescriptor) obj).mHandle;
+                                    synchronized (SensorService.this.mLock) {
+                                        try {
+                                            if (SensorService.this.mRuntimeSensorHandles.contains(
+                                                    Integer.valueOf(i))) {
+                                                SensorService.this.mRuntimeSensorHandles.remove(
+                                                        Integer.valueOf(i));
+                                                SensorService.unregisterRuntimeSensorNative(
+                                                        SensorService.this.mPtr, i);
+                                            }
+                                        } catch (Throwable th) {
+                                            throw th;
+                                        }
+                                    }
+                                }
+                            });
             this.mSensorDescriptors.clear();
             this.mVirtualSensors.clear();
             this.mVirtualSensorList = null;
         }
     }
 
-    public final void createSensorInternal(IVirtualDevice iVirtualDevice, VirtualSensorConfig virtualSensorConfig) {
+    public final void createSensorInternal(
+            IVirtualDevice iVirtualDevice, VirtualSensorConfig virtualSensorConfig) {
         int registerRuntimeSensorNative;
         Objects.requireNonNull(virtualSensorConfig);
         if (virtualSensorConfig.getType() <= 0) {
-            throw new SensorCreationException("Received an invalid virtual sensor type (config name '" + virtualSensorConfig.getName() + "').");
+            throw new SensorCreationException(
+                    "Received an invalid virtual sensor type (config name '"
+                            + virtualSensorConfig.getName()
+                            + "').");
         }
         SensorService.LocalService localService = this.mSensorManagerInternal;
         int i = this.mVirtualDeviceId;
         int type = virtualSensorConfig.getType();
         String name = virtualSensorConfig.getName();
-        String vendor2 = virtualSensorConfig.getVendor() == null ? "" : virtualSensorConfig.getVendor();
+        String vendor2 =
+                virtualSensorConfig.getVendor() == null ? "" : virtualSensorConfig.getVendor();
         float maximumRange = virtualSensorConfig.getMaximumRange();
         float resolution = virtualSensorConfig.getResolution();
         float power = virtualSensorConfig.getPower();
@@ -220,21 +265,52 @@ public final class SensorController {
         int flags = virtualSensorConfig.getFlags();
         RuntimeSensorCallbackWrapper runtimeSensorCallbackWrapper = this.mRuntimeSensorCallback;
         synchronized (SensorService.this.mLock) {
-            registerRuntimeSensorNative = SensorService.registerRuntimeSensorNative(SensorService.this.mPtr, i, type, name, vendor2, maximumRange, resolution, power, minDelay, maxDelay, flags, runtimeSensorCallbackWrapper);
-            SensorService.this.mRuntimeSensorHandles.add(Integer.valueOf(registerRuntimeSensorNative));
+            registerRuntimeSensorNative =
+                    SensorService.registerRuntimeSensorNative(
+                            SensorService.this.mPtr,
+                            i,
+                            type,
+                            name,
+                            vendor2,
+                            maximumRange,
+                            resolution,
+                            power,
+                            minDelay,
+                            maxDelay,
+                            flags,
+                            runtimeSensorCallbackWrapper);
+            SensorService.this.mRuntimeSensorHandles.add(
+                    Integer.valueOf(registerRuntimeSensorNative));
         }
         if (registerRuntimeSensorNative <= 0) {
-            throw new SensorCreationException("Received an invalid virtual sensor handle '" + virtualSensorConfig.getName() + "'.");
+            throw new SensorCreationException(
+                    "Received an invalid virtual sensor handle '"
+                            + virtualSensorConfig.getName()
+                            + "'.");
         }
-        SensorDescriptor sensorDescriptor = new SensorDescriptor(registerRuntimeSensorNative, virtualSensorConfig.getType(), virtualSensorConfig.getName());
-        Binder binder = new Binder("android.hardware.sensor.VirtualSensor:" + virtualSensorConfig.getName());
-        VirtualSensor virtualSensor = new VirtualSensor(registerRuntimeSensorNative, virtualSensorConfig.getType(), virtualSensorConfig.getName(), iVirtualDevice, binder);
+        SensorDescriptor sensorDescriptor =
+                new SensorDescriptor(
+                        registerRuntimeSensorNative,
+                        virtualSensorConfig.getType(),
+                        virtualSensorConfig.getName());
+        Binder binder =
+                new Binder(
+                        "android.hardware.sensor.VirtualSensor:" + virtualSensorConfig.getName());
+        VirtualSensor virtualSensor =
+                new VirtualSensor(
+                        registerRuntimeSensorNative,
+                        virtualSensorConfig.getType(),
+                        virtualSensorConfig.getName(),
+                        iVirtualDevice,
+                        binder);
         synchronized (this.mLock) {
             this.mSensorDescriptors.put(binder, sensorDescriptor);
             this.mVirtualSensors.put(registerRuntimeSensorNative, virtualSensor);
         }
         if (android.companion.virtualdevice.flags.Flags.metricsCollection()) {
-            Counter.logIncrementWithUid("virtual_devices.value_virtual_sensors_created_count", this.mAttributionSource.getUid());
+            Counter.logIncrementWithUid(
+                    "virtual_devices.value_virtual_sensors_created_count",
+                    this.mAttributionSource.getUid());
         }
     }
 
@@ -251,7 +327,8 @@ public final class SensorController {
         Objects.requireNonNull(iBinder);
         Objects.requireNonNull(virtualSensorEvent);
         synchronized (this.mLock) {
-            SensorDescriptor sensorDescriptor = (SensorDescriptor) this.mSensorDescriptors.get(iBinder);
+            SensorDescriptor sensorDescriptor =
+                    (SensorDescriptor) this.mSensorDescriptors.get(iBinder);
             if (sensorDescriptor == null) {
                 throw new IllegalArgumentException("Could not send sensor event for given token");
             }
@@ -262,7 +339,11 @@ public final class SensorController {
             float[] values = virtualSensorEvent.getValues();
             synchronized (SensorService.this.mLock) {
                 try {
-                    sendRuntimeSensorEventNative = !SensorService.this.mRuntimeSensorHandles.contains(Integer.valueOf(i)) ? false : SensorService.sendRuntimeSensorEventNative(SensorService.this.mPtr, i, i2, timestampNanos, values);
+                    sendRuntimeSensorEventNative =
+                            !SensorService.this.mRuntimeSensorHandles.contains(Integer.valueOf(i))
+                                    ? false
+                                    : SensorService.sendRuntimeSensorEventNative(
+                                            SensorService.this.mPtr, i, i2, timestampNanos, values);
                 } finally {
                 }
             }

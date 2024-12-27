@@ -26,32 +26,26 @@ public interface IBiometricServiceReceiver extends IInterface {
 
     public static class Default implements IBiometricServiceReceiver {
         @Override // android.hardware.biometrics.IBiometricServiceReceiver
-        public void onAuthenticationSucceeded(int authenticationType) throws RemoteException {
-        }
+        public void onAuthenticationSucceeded(int authenticationType) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricServiceReceiver
-        public void onAuthenticationFailed() throws RemoteException {
-        }
+        public void onAuthenticationFailed() throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricServiceReceiver
-        public void onError(int modality, int error, int vendorCode) throws RemoteException {
-        }
+        public void onError(int modality, int error, int vendorCode) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricServiceReceiver
-        public void onAcquired(int acquiredInfo, String message) throws RemoteException {
-        }
+        public void onAcquired(int acquiredInfo, String message) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricServiceReceiver
-        public void onDialogDismissed(int reason) throws RemoteException {
-        }
+        public void onDialogDismissed(int reason) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricServiceReceiver
-        public void onSystemEvent(int event) throws RemoteException {
-        }
+        public void onSystemEvent(int event) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricServiceReceiver
-        public void onSemAuthenticationSucceeded(int authenticationType, int id, byte[] challengeToken) throws RemoteException {
-        }
+        public void onSemAuthenticationSucceeded(
+                int authenticationType, int id, byte[] challengeToken) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -59,7 +53,7 @@ public interface IBiometricServiceReceiver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBiometricServiceReceiver {
+    public abstract static class Stub extends Binder implements IBiometricServiceReceiver {
         static final int TRANSACTION_onAcquired = 4;
         static final int TRANSACTION_onAuthenticationFailed = 2;
         static final int TRANSACTION_onAuthenticationSucceeded = 1;
@@ -115,7 +109,8 @@ public interface IBiometricServiceReceiver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBiometricServiceReceiver.DESCRIPTOR);
             }
@@ -258,7 +253,8 @@ public interface IBiometricServiceReceiver extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricServiceReceiver
-            public void onSemAuthenticationSucceeded(int authenticationType, int id, byte[] challengeToken) throws RemoteException {
+            public void onSemAuthenticationSucceeded(
+                    int authenticationType, int id, byte[] challengeToken) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBiometricServiceReceiver.DESCRIPTOR);

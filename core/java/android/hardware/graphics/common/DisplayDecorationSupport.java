@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class DisplayDecorationSupport implements Parcelable {
-    public static final Parcelable.Creator<DisplayDecorationSupport> CREATOR = new Parcelable.Creator<DisplayDecorationSupport>() { // from class: android.hardware.graphics.common.DisplayDecorationSupport.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisplayDecorationSupport createFromParcel(Parcel _aidl_source) {
-            DisplayDecorationSupport _aidl_out = new DisplayDecorationSupport();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DisplayDecorationSupport> CREATOR =
+            new Parcelable.Creator<DisplayDecorationSupport>() { // from class:
+                // android.hardware.graphics.common.DisplayDecorationSupport.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisplayDecorationSupport createFromParcel(Parcel _aidl_source) {
+                    DisplayDecorationSupport _aidl_out = new DisplayDecorationSupport();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisplayDecorationSupport[] newArray(int _aidl_size) {
-            return new DisplayDecorationSupport[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisplayDecorationSupport[] newArray(int _aidl_size) {
+                    return new DisplayDecorationSupport[_aidl_size];
+                }
+            };
     public int alphaInterpretation;
     public int format;
 

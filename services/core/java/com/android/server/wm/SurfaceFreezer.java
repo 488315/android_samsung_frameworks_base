@@ -35,12 +35,14 @@ public final class SurfaceFreezer {
         }
     }
 
-    public SurfaceFreezer(WindowContainer windowContainer, WindowManagerService windowManagerService) {
+    public SurfaceFreezer(
+            WindowContainer windowContainer, WindowManagerService windowManagerService) {
         this.mAnimatable = windowContainer;
         this.mWmService = windowManagerService;
     }
 
-    public static ScreenCapture.ScreenshotHardwareBuffer createSnapshotBuffer(SurfaceControl surfaceControl, Rect rect) {
+    public static ScreenCapture.ScreenshotHardwareBuffer createSnapshotBuffer(
+            SurfaceControl surfaceControl, Rect rect) {
         Rect rect2;
         if (rect != null) {
             rect2 = new Rect(rect);
@@ -48,14 +50,21 @@ public final class SurfaceFreezer {
         } else {
             rect2 = null;
         }
-        return ScreenCapture.captureLayers(new ScreenCapture.LayerCaptureArgs.Builder(surfaceControl).setSourceCrop(rect2).setCaptureSecureLayers(true).setAllowProtected(true).build());
+        return ScreenCapture.captureLayers(
+                new ScreenCapture.LayerCaptureArgs.Builder(surfaceControl)
+                        .setSourceCrop(rect2)
+                        .setCaptureSecureLayers(true)
+                        .setAllowProtected(true)
+                        .build());
     }
 
-    public GraphicBuffer createFromHardwareBufferInner(ScreenCapture.ScreenshotHardwareBuffer screenshotHardwareBuffer) {
+    public GraphicBuffer createFromHardwareBufferInner(
+            ScreenCapture.ScreenshotHardwareBuffer screenshotHardwareBuffer) {
         return GraphicBuffer.createFromHardwareBuffer(screenshotHardwareBuffer.getHardwareBuffer());
     }
 
-    public ScreenCapture.ScreenshotHardwareBuffer createSnapshotBufferInner(SurfaceControl surfaceControl, Rect rect) {
+    public ScreenCapture.ScreenshotHardwareBuffer createSnapshotBufferInner(
+            SurfaceControl surfaceControl, Rect rect) {
         return createSnapshotBuffer(surfaceControl, rect);
     }
 

@@ -4,7 +4,9 @@ import android.os.VibratorInfo;
 import android.os.vibrator.RampSegment;
 import android.os.vibrator.StepSegment;
 import android.os.vibrator.VibrationEffectSegment;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,24 +23,37 @@ public final class RampDownAdapter implements VibrationSegmentsAdapter {
     }
 
     public static boolean endsWithNonZeroAmplitude(VibrationEffectSegment vibrationEffectSegment) {
-        return vibrationEffectSegment instanceof StepSegment ? ((StepSegment) vibrationEffectSegment).getAmplitude() != FullScreenMagnificationGestureHandler.MAX_SCALE : (vibrationEffectSegment instanceof RampSegment) && ((RampSegment) vibrationEffectSegment).getEndAmplitude() != FullScreenMagnificationGestureHandler.MAX_SCALE;
+        return vibrationEffectSegment instanceof StepSegment
+                ? ((StepSegment) vibrationEffectSegment).getAmplitude()
+                        != FullScreenMagnificationGestureHandler.MAX_SCALE
+                : (vibrationEffectSegment instanceof RampSegment)
+                        && ((RampSegment) vibrationEffectSegment).getEndAmplitude()
+                                != FullScreenMagnificationGestureHandler.MAX_SCALE;
     }
 
     public static boolean isOffSegment(VibrationEffectSegment vibrationEffectSegment) {
         if (vibrationEffectSegment instanceof StepSegment) {
-            return ((StepSegment) vibrationEffectSegment).getAmplitude() == FullScreenMagnificationGestureHandler.MAX_SCALE;
+            return ((StepSegment) vibrationEffectSegment).getAmplitude()
+                    == FullScreenMagnificationGestureHandler.MAX_SCALE;
         }
         if (!(vibrationEffectSegment instanceof RampSegment)) {
             return false;
         }
         RampSegment rampSegment = (RampSegment) vibrationEffectSegment;
-        return rampSegment.getStartAmplitude() == FullScreenMagnificationGestureHandler.MAX_SCALE && rampSegment.getEndAmplitude() == FullScreenMagnificationGestureHandler.MAX_SCALE;
+        return rampSegment.getStartAmplitude() == FullScreenMagnificationGestureHandler.MAX_SCALE
+                && rampSegment.getEndAmplitude() == FullScreenMagnificationGestureHandler.MAX_SCALE;
     }
 
-    public static VibrationEffectSegment updateDuration(VibrationEffectSegment vibrationEffectSegment, long j) {
+    public static VibrationEffectSegment updateDuration(
+            VibrationEffectSegment vibrationEffectSegment, long j) {
         if (vibrationEffectSegment instanceof RampSegment) {
             RampSegment rampSegment = (RampSegment) vibrationEffectSegment;
-            return new RampSegment(rampSegment.getStartAmplitude(), rampSegment.getEndAmplitude(), rampSegment.getStartFrequencyHz(), rampSegment.getEndFrequencyHz(), (int) j);
+            return new RampSegment(
+                    rampSegment.getStartAmplitude(),
+                    rampSegment.getEndAmplitude(),
+                    rampSegment.getStartFrequencyHz(),
+                    rampSegment.getEndFrequencyHz(),
+                    (int) j);
         }
         if (!(vibrationEffectSegment instanceof StepSegment)) {
             return vibrationEffectSegment;
@@ -60,23 +75,50 @@ public final class RampDownAdapter implements VibrationSegmentsAdapter {
         int i4 = i;
         while (i3 < size) {
             StepSegment stepSegment = (VibrationEffectSegment) arrayList.get(i3 - 1);
-            if (isOffSegment((VibrationEffectSegment) arrayList.get(i3)) && endsWithNonZeroAmplitude(stepSegment)) {
+            if (isOffSegment((VibrationEffectSegment) arrayList.get(i3))
+                    && endsWithNonZeroAmplitude(stepSegment)) {
                 long duration = ((VibrationEffectSegment) arrayList.get(i3)).getDuration();
                 if (stepSegment instanceof StepSegment) {
                     StepSegment stepSegment2 = stepSegment;
-                    list2 = createStepsDown(stepSegment2.getAmplitude(), stepSegment2.getFrequencyHz(), duration);
+                    list2 =
+                            createStepsDown(
+                                    stepSegment2.getAmplitude(),
+                                    stepSegment2.getFrequencyHz(),
+                                    duration);
                 } else if (stepSegment instanceof RampSegment) {
                     RampSegment rampSegment = (RampSegment) stepSegment;
                     float endAmplitude = rampSegment.getEndAmplitude();
                     float endFrequencyHz = rampSegment.getEndFrequencyHz();
                     long j = i2;
-                    list2 = duration <= j ? Arrays.asList(new RampSegment(endAmplitude, FullScreenMagnificationGestureHandler.MAX_SCALE, endFrequencyHz, endFrequencyHz, (int) duration)) : Arrays.asList(new RampSegment(endAmplitude, FullScreenMagnificationGestureHandler.MAX_SCALE, endFrequencyHz, endFrequencyHz, (int) j), new RampSegment(FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, endFrequencyHz, endFrequencyHz, (int) (duration - j)));
+                    list2 =
+                            duration <= j
+                                    ? Arrays.asList(
+                                            new RampSegment(
+                                                    endAmplitude,
+                                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                                    endFrequencyHz,
+                                                    endFrequencyHz,
+                                                    (int) duration))
+                                    : Arrays.asList(
+                                            new RampSegment(
+                                                    endAmplitude,
+                                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                                    endFrequencyHz,
+                                                    endFrequencyHz,
+                                                    (int) j),
+                                            new RampSegment(
+                                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                                    endFrequencyHz,
+                                                    endFrequencyHz,
+                                                    (int) (duration - j)));
                 } else {
                     list2 = null;
                 }
                 if (list2 != null) {
                     int size2 = list2.size() - 1;
-                    VibrationEffectSegment vibrationEffectSegment = (VibrationEffectSegment) arrayList.remove(i3);
+                    VibrationEffectSegment vibrationEffectSegment =
+                            (VibrationEffectSegment) arrayList.remove(i3);
                     arrayList.addAll(i3, list2);
                     if (i4 >= i3) {
                         if (i4 == i3) {
@@ -94,9 +136,11 @@ public final class RampDownAdapter implements VibrationSegmentsAdapter {
         }
         if (i4 >= 0) {
             int size3 = arrayList.size() - 1;
-            if (endsWithNonZeroAmplitude((VibrationEffectSegment) arrayList.get(size3)) && isOffSegment((VibrationEffectSegment) arrayList.get(i4))) {
+            if (endsWithNonZeroAmplitude((VibrationEffectSegment) arrayList.get(size3))
+                    && isOffSegment((VibrationEffectSegment) arrayList.get(i4))) {
                 StepSegment stepSegment3 = (VibrationEffectSegment) arrayList.get(size3);
-                VibrationEffectSegment vibrationEffectSegment2 = (VibrationEffectSegment) arrayList.get(i4);
+                VibrationEffectSegment vibrationEffectSegment2 =
+                        (VibrationEffectSegment) arrayList.get(i4);
                 long duration2 = vibrationEffectSegment2.getDuration();
                 long j2 = i2;
                 if (duration2 > j2) {
@@ -106,12 +150,22 @@ public final class RampDownAdapter implements VibrationSegmentsAdapter {
                 i4++;
                 if (stepSegment3 instanceof StepSegment) {
                     StepSegment stepSegment4 = stepSegment3;
-                    arrayList.addAll(createStepsDown(stepSegment4.getAmplitude(), stepSegment4.getFrequencyHz(), Math.min(duration2, j2)));
+                    arrayList.addAll(
+                            createStepsDown(
+                                    stepSegment4.getAmplitude(),
+                                    stepSegment4.getFrequencyHz(),
+                                    Math.min(duration2, j2)));
                 } else if (stepSegment3 instanceof RampSegment) {
                     RampSegment rampSegment2 = (RampSegment) stepSegment3;
                     float endAmplitude2 = rampSegment2.getEndAmplitude();
                     float endFrequencyHz2 = rampSegment2.getEndFrequencyHz();
-                    arrayList.add(new RampSegment(endAmplitude2, FullScreenMagnificationGestureHandler.MAX_SCALE, endFrequencyHz2, endFrequencyHz2, (int) Math.min(duration2, j2)));
+                    arrayList.add(
+                            new RampSegment(
+                                    endAmplitude2,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    endFrequencyHz2,
+                                    endFrequencyHz2,
+                                    (int) Math.min(duration2, j2)));
                 }
             }
         }
@@ -127,7 +181,11 @@ public final class RampDownAdapter implements VibrationSegmentsAdapter {
         for (int i3 = 1; i3 < i2; i3++) {
             arrayList.add(new StepSegment(f - (i3 * f3), f2, i));
         }
-        arrayList.add(new StepSegment(FullScreenMagnificationGestureHandler.MAX_SCALE, f2, ((int) j) - ((i2 - 1) * i)));
+        arrayList.add(
+                new StepSegment(
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        f2,
+                        ((int) j) - ((i2 - 1) * i)));
         return arrayList;
     }
 }

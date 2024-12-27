@@ -9,7 +9,9 @@ import android.os.Binder;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.samsung.android.multiwindow.MultiWindowManager;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,7 +41,9 @@ public abstract class AudioUtils {
             Binder.restoreCallingIdentity(clearCallingIdentity);
             int size = visibleTasks.size();
             for (int i = 0; i < size; i++) {
-                if (str.equals(((ActivityManager.RunningTaskInfo) visibleTasks.get(i)).topActivity.getPackageName())) {
+                if (str.equals(
+                        ((ActivityManager.RunningTaskInfo) visibleTasks.get(i))
+                                .topActivity.getPackageName())) {
                     Log.d("AS.AudioUtils", "checkRunningBackground : visible Tasks =".concat(str));
                     return false;
                 }
@@ -68,14 +72,17 @@ public abstract class AudioUtils {
 
     public static int getUidForPackage(Context context, String str) {
         try {
-            return context.getPackageManager().getApplicationInfoAsUser(str, 0, getCurrentUserId()).uid;
+            return context.getPackageManager()
+                    .getApplicationInfoAsUser(str, 0, getCurrentUserId())
+                    .uid;
         } catch (PackageManager.NameNotFoundException unused) {
             return 0;
         }
     }
 
     public static boolean isUsingAudioForUid(int i) {
-        return "true".equalsIgnoreCase(AudioSystem.getParameters("l_multi_sound_active_track_uid=" + i));
+        return "true"
+                .equalsIgnoreCase(AudioSystem.getParameters("l_multi_sound_active_track_uid=" + i));
     }
 
     public static boolean isWiredDeviceType(int i) {
@@ -194,6 +201,9 @@ public abstract class AudioUtils {
         La9:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.audio.utils.AudioUtils.wakeUpDeviceByWiredHeadset(android.content.Context, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.audio.utils.AudioUtils.wakeUpDeviceByWiredHeadset(android.content.Context,"
+                    + " int):void");
     }
 }

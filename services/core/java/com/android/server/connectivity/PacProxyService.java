@@ -27,12 +27,13 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 import android.webkit.URLUtil;
+
 import com.android.net.IProxyCallback;
 import com.android.net.IProxyPortListener;
 import com.android.net.IProxyService;
 import com.android.net.module.util.PermissionUtils;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
-import com.android.server.connectivity.PacProxyService;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.Proxy;
@@ -57,63 +58,66 @@ public final class PacProxyService extends IPacProxyManager.Stub {
     public final RemoteCallbackList mCallbacks = new RemoteCallbackList();
     public final Object mProxyLock = new Object();
     public final Object mBroadcastStateLock = new Object();
-    public final AnonymousClass1 mPacDownloader = new Runnable() { // from class: com.android.server.connectivity.PacProxyService.1
-        @Override // java.lang.Runnable
-        public final void run() {
-            String str;
-            Uri uri = PacProxyService.this.mPacUrl;
-            if (Uri.EMPTY.equals(uri)) {
-                return;
-            }
-            int andSetThreadStatsTag = TrafficStats.getAndSetThreadStatsTag(-187);
-            try {
-                try {
-                    str = PacProxyService.m370$$Nest$smget(uri);
-                } catch (IOException e) {
-                    Log.w("PacProxyService", "Failed to load PAC file: " + e);
-                    TrafficStats.setThreadStatsTag(andSetThreadStatsTag);
-                    str = null;
-                }
-                if (str == null) {
-                    PacProxyService pacProxyService = PacProxyService.this;
-                    int i = pacProxyService.mCurrentDelay + 1;
-                    if (i > 3) {
-                        i = 3;
+    public final AnonymousClass1 mPacDownloader =
+            new Runnable() { // from class: com.android.server.connectivity.PacProxyService.1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    String str;
+                    Uri uri = PacProxyService.this.mPacUrl;
+                    if (Uri.EMPTY.equals(uri)) {
+                        return;
                     }
-                    pacProxyService.mCurrentDelay = i;
-                    pacProxyService.setDownloadIn(i);
-                    return;
-                }
-                synchronized (PacProxyService.this.mProxyLock) {
+                    int andSetThreadStatsTag = TrafficStats.getAndSetThreadStatsTag(-187);
                     try {
-                        if (!str.equals(PacProxyService.this.mCurrentPac)) {
-                            PacProxyService pacProxyService2 = PacProxyService.this;
-                            IProxyService iProxyService = pacProxyService2.mProxyService;
-                            if (iProxyService == null) {
-                                Log.e("PacProxyService", "setCurrentProxyScript: no proxy service");
-                            } else {
-                                try {
-                                    iProxyService.setPacFile(str);
-                                    pacProxyService2.mCurrentPac = str;
-                                } catch (RemoteException e2) {
-                                    Log.e("PacProxyService", "Unable to set PAC file", e2);
+                        try {
+                            str = PacProxyService.m370$$Nest$smget(uri);
+                        } catch (IOException e) {
+                            Log.w("PacProxyService", "Failed to load PAC file: " + e);
+                            TrafficStats.setThreadStatsTag(andSetThreadStatsTag);
+                            str = null;
+                        }
+                        if (str == null) {
+                            PacProxyService pacProxyService = PacProxyService.this;
+                            int i = pacProxyService.mCurrentDelay + 1;
+                            if (i > 3) {
+                                i = 3;
+                            }
+                            pacProxyService.mCurrentDelay = i;
+                            pacProxyService.setDownloadIn(i);
+                            return;
+                        }
+                        synchronized (PacProxyService.this.mProxyLock) {
+                            try {
+                                if (!str.equals(PacProxyService.this.mCurrentPac)) {
+                                    PacProxyService pacProxyService2 = PacProxyService.this;
+                                    IProxyService iProxyService = pacProxyService2.mProxyService;
+                                    if (iProxyService == null) {
+                                        Log.e(
+                                                "PacProxyService",
+                                                "setCurrentProxyScript: no proxy service");
+                                    } else {
+                                        try {
+                                            iProxyService.setPacFile(str);
+                                            pacProxyService2.mCurrentPac = str;
+                                        } catch (RemoteException e2) {
+                                            Log.e("PacProxyService", "Unable to set PAC file", e2);
+                                        }
+                                    }
                                 }
+                            } catch (Throwable th) {
+                                throw th;
                             }
                         }
-                    } catch (Throwable th) {
-                        throw th;
+                        PacProxyService.this.mHasDownloaded = true;
+                        PacProxyService.m369$$Nest$msendProxyIfNeeded(PacProxyService.this);
+                        PacProxyService pacProxyService3 = PacProxyService.this;
+                        pacProxyService3.mCurrentDelay = 0;
+                        pacProxyService3.setDownloadIn(4);
+                    } finally {
+                        TrafficStats.setThreadStatsTag(andSetThreadStatsTag);
                     }
                 }
-                PacProxyService.this.mHasDownloaded = true;
-                PacProxyService.m369$$Nest$msendProxyIfNeeded(PacProxyService.this);
-                PacProxyService pacProxyService3 = PacProxyService.this;
-                pacProxyService3.mCurrentDelay = 0;
-                pacProxyService3.setDownloadIn(4);
-            } finally {
-                TrafficStats.setThreadStatsTag(andSetThreadStatsTag);
-            }
-        }
-    };
+            };
     public int mLastPort = -1;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -127,8 +131,8 @@ public final class PacProxyService extends IPacProxyManager.Stub {
             this.this$0 = pacProxyService;
         }
 
-        private final void onServiceDisconnected$com$android$server$connectivity$PacProxyService$3(ComponentName componentName) {
-        }
+        private final void onServiceDisconnected$com$android$server$connectivity$PacProxyService$3(
+                ComponentName componentName) {}
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -136,7 +140,10 @@ public final class PacProxyService extends IPacProxyManager.Stub {
                 case 0:
                     synchronized (this.this$0.mProxyLock) {
                         try {
-                            Log.d("PacProxyService", "Adding service com.android.net.IProxyService " + iBinder.getInterfaceDescriptor());
+                            Log.d(
+                                    "PacProxyService",
+                                    "Adding service com.android.net.IProxyService "
+                                            + iBinder.getInterfaceDescriptor());
                         } catch (RemoteException e) {
                             Log.e("PacProxyService", "Remote Exception", e);
                         }
@@ -149,7 +156,8 @@ public final class PacProxyService extends IPacProxyManager.Stub {
                         } else {
                             String str = pacProxyService.mCurrentPac;
                             if (str == null) {
-                                pacProxyService.mNetThreadHandler.post(pacProxyService.mPacDownloader);
+                                pacProxyService.mNetThreadHandler.post(
+                                        pacProxyService.mPacDownloader);
                             } else if (iProxyService == null) {
                                 Log.e("PacProxyService", "setCurrentProxyScript: no proxy service");
                             } else {
@@ -167,21 +175,34 @@ public final class PacProxyService extends IPacProxyManager.Stub {
                     IProxyCallback asInterface = IProxyCallback.Stub.asInterface(iBinder);
                     if (asInterface != null) {
                         try {
-                            asInterface.getProxyPort(new IProxyPortListener.Stub() { // from class: com.android.server.connectivity.PacProxyService$3$1
-                                public final void setProxyPort(int i) {
-                                    PacProxyService pacProxyService2 = PacProxyService.AnonymousClass2.this.this$0;
-                                    if (pacProxyService2.mLastPort != -1) {
-                                        pacProxyService2.mHasSentBroadcast = false;
-                                    }
-                                    PacProxyService.AnonymousClass2.this.this$0.mLastPort = i;
-                                    if (i == -1) {
-                                        Log.e("PacProxyService", "Received invalid port from Local Proxy, PAC will not be operational");
-                                    } else {
-                                        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "Local proxy is bound on ", "PacProxyService");
-                                        PacProxyService.m369$$Nest$msendProxyIfNeeded(PacProxyService.AnonymousClass2.this.this$0);
-                                    }
-                                }
-                            });
+                            asInterface.getProxyPort(
+                                    new IProxyPortListener.Stub() { // from class:
+                                        // com.android.server.connectivity.PacProxyService$3$1
+                                        public final void setProxyPort(int i) {
+                                            PacProxyService pacProxyService2 =
+                                                    PacProxyService.AnonymousClass2.this.this$0;
+                                            if (pacProxyService2.mLastPort != -1) {
+                                                pacProxyService2.mHasSentBroadcast = false;
+                                            }
+                                            PacProxyService.AnonymousClass2.this.this$0.mLastPort =
+                                                    i;
+                                            if (i == -1) {
+                                                Log.e(
+                                                        "PacProxyService",
+                                                        "Received invalid port from Local Proxy,"
+                                                            + " PAC will not be operational");
+                                            } else {
+                                                NetworkScorerAppManager$$ExternalSyntheticOutline0
+                                                        .m(
+                                                                i,
+                                                                "Local proxy is bound on ",
+                                                                "PacProxyService");
+                                                PacProxyService.m369$$Nest$msendProxyIfNeeded(
+                                                        PacProxyService.AnonymousClass2.this
+                                                                .this$0);
+                                            }
+                                        }
+                                    });
                             return;
                         } catch (RemoteException e3) {
                             e3.printStackTrace();
@@ -208,8 +229,7 @@ public final class PacProxyService extends IPacProxyManager.Stub {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PacRefreshIntentReceiver extends BroadcastReceiver {
-        public PacRefreshIntentReceiver() {
-        }
+        public PacRefreshIntentReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -224,13 +244,17 @@ public final class PacProxyService extends IPacProxyManager.Stub {
             try {
                 if (pacProxyService.mHasDownloaded && pacProxyService.mLastPort != -1) {
                     if (!pacProxyService.mHasSentBroadcast) {
-                        ProxyInfo buildPacProxy = ProxyInfo.buildPacProxy(pacProxyService.mPacUrl, pacProxyService.mLastPort);
+                        ProxyInfo buildPacProxy =
+                                ProxyInfo.buildPacProxy(
+                                        pacProxyService.mPacUrl, pacProxyService.mLastPort);
                         int beginBroadcast = pacProxyService.mCallbacks.beginBroadcast();
                         for (int i = 0; i < beginBroadcast; i++) {
-                            IPacProxyInstalledListener broadcastItem = pacProxyService.mCallbacks.getBroadcastItem(i);
+                            IPacProxyInstalledListener broadcastItem =
+                                    pacProxyService.mCallbacks.getBroadcastItem(i);
                             if (broadcastItem != null) {
                                 try {
-                                    broadcastItem.onPacProxyInstalled((Network) null, buildPacProxy);
+                                    broadcastItem.onPacProxyInstalled(
+                                            (Network) null, buildPacProxy);
                                 } catch (RemoteException unused) {
                                 }
                             }
@@ -283,12 +307,16 @@ public final class PacProxyService extends IPacProxyManager.Stub {
         HandlerThread handlerThread = new HandlerThread("android.pacproxyservice", 0);
         handlerThread.start();
         this.mNetThreadHandler = new Handler(handlerThread.getLooper());
-        this.mPacRefreshIntent = PendingIntent.getBroadcast(context, 0, new Intent("android.net.proxy.PAC_REFRESH"), 67108864);
-        context.registerReceiver(new PacRefreshIntentReceiver(), new IntentFilter("android.net.proxy.PAC_REFRESH"));
+        this.mPacRefreshIntent =
+                PendingIntent.getBroadcast(
+                        context, 0, new Intent("android.net.proxy.PAC_REFRESH"), 67108864);
+        context.registerReceiver(
+                new PacRefreshIntentReceiver(), new IntentFilter("android.net.proxy.PAC_REFRESH"));
     }
 
     public final void addListener(IPacProxyInstalledListener iPacProxyInstalledListener) {
-        PermissionUtils.enforceNetworkStackPermissionOr(this.mContext, new String[]{"android.permission.NETWORK_SETTINGS"});
+        PermissionUtils.enforceNetworkStackPermissionOr(
+                this.mContext, new String[] {"android.permission.NETWORK_SETTINGS"});
         this.mCallbacks.register(iPacProxyInstalledListener);
     }
 
@@ -312,7 +340,8 @@ public final class PacProxyService extends IPacProxyManager.Stub {
         intent2.setClassName("com.android.proxyhandler", "com.android.proxyhandler.ProxyService");
         AnonymousClass2 anonymousClass22 = new AnonymousClass2(this, 1);
         this.mProxyConnection = anonymousClass22;
-        this.mContext.bindServiceAsUser(intent2, anonymousClass22, 1073741829, this.mNetThreadHandler, userHandle);
+        this.mContext.bindServiceAsUser(
+                intent2, anonymousClass22, 1073741829, this.mNetThreadHandler, userHandle);
     }
 
     public final AlarmManager getAlarmManager() {
@@ -323,17 +352,20 @@ public final class PacProxyService extends IPacProxyManager.Stub {
     }
 
     public final void removeListener(IPacProxyInstalledListener iPacProxyInstalledListener) {
-        PermissionUtils.enforceNetworkStackPermissionOr(this.mContext, new String[]{"android.permission.NETWORK_SETTINGS"});
+        PermissionUtils.enforceNetworkStackPermissionOr(
+                this.mContext, new String[] {"android.permission.NETWORK_SETTINGS"});
         this.mCallbacks.unregister(iPacProxyInstalledListener);
     }
 
     public final void setCurrentProxyScriptUrl(ProxyInfo proxyInfo) {
-        PermissionUtils.enforceNetworkStackPermissionOr(this.mContext, new String[]{"android.permission.NETWORK_SETTINGS"});
+        PermissionUtils.enforceNetworkStackPermissionOr(
+                this.mContext, new String[] {"android.permission.NETWORK_SETTINGS"});
         synchronized (this.mBroadcastStateLock) {
             if (proxyInfo != null) {
                 try {
                     if (!Uri.EMPTY.equals(proxyInfo.getPacFileUrl())) {
-                        if (!proxyInfo.getPacFileUrl().equals(this.mPacUrl) || proxyInfo.getPort() <= 0) {
+                        if (!proxyInfo.getPacFileUrl().equals(this.mPacUrl)
+                                || proxyInfo.getPort() <= 0) {
                             this.mPacUrl = proxyInfo.getPacFileUrl();
                             this.mCurrentDelay = 0;
                             this.mHasSentBroadcast = false;
@@ -378,6 +410,7 @@ public final class PacProxyService extends IPacProxyManager.Stub {
         }
         String[] split = str.split(" ");
         long parseLong = i < split.length ? Long.parseLong(split[i]) : 0L;
-        getAlarmManager().set(3, SystemClock.elapsedRealtime() + (parseLong * 1000), this.mPacRefreshIntent);
+        getAlarmManager()
+                .set(3, SystemClock.elapsedRealtime() + (parseLong * 1000), this.mPacRefreshIntent);
     }
 }

@@ -224,13 +224,30 @@ public class GLES31Ext {
 
     public static native void glColorMaskiEXT(int i, boolean z, boolean z2, boolean z3, boolean z4);
 
-    public static native void glCopyImageSubDataEXT(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15);
+    public static native void glCopyImageSubDataEXT(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            int i11,
+            int i12,
+            int i13,
+            int i14,
+            int i15);
 
     public static native void glDebugMessageCallbackKHR(DebugProcKHR debugProcKHR);
 
-    public static native void glDebugMessageControlKHR(int i, int i2, int i3, int i4, IntBuffer intBuffer, boolean z);
+    public static native void glDebugMessageControlKHR(
+            int i, int i2, int i3, int i4, IntBuffer intBuffer, boolean z);
 
-    public static native void glDebugMessageControlKHR(int i, int i2, int i3, int i4, int[] iArr, int i5, boolean z);
+    public static native void glDebugMessageControlKHR(
+            int i, int i2, int i3, int i4, int[] iArr, int i5, boolean z);
 
     public static native void glDebugMessageInsertKHR(int i, int i2, int i3, int i4, String str);
 
@@ -242,13 +259,48 @@ public class GLES31Ext {
 
     public static native DebugProcKHR glGetDebugMessageCallbackKHR();
 
-    public static native int glGetDebugMessageLogKHR(int i, int i2, int[] iArr, int i3, int[] iArr2, int i4, int[] iArr3, int i5, int[] iArr4, int i6, int[] iArr5, int i7, byte[] bArr, int i8);
+    public static native int glGetDebugMessageLogKHR(
+            int i,
+            int i2,
+            int[] iArr,
+            int i3,
+            int[] iArr2,
+            int i4,
+            int[] iArr3,
+            int i5,
+            int[] iArr4,
+            int i6,
+            int[] iArr5,
+            int i7,
+            byte[] bArr,
+            int i8);
 
-    public static native int glGetDebugMessageLogKHR(int i, IntBuffer intBuffer, IntBuffer intBuffer2, IntBuffer intBuffer3, IntBuffer intBuffer4, IntBuffer intBuffer5, ByteBuffer byteBuffer);
+    public static native int glGetDebugMessageLogKHR(
+            int i,
+            IntBuffer intBuffer,
+            IntBuffer intBuffer2,
+            IntBuffer intBuffer3,
+            IntBuffer intBuffer4,
+            IntBuffer intBuffer5,
+            ByteBuffer byteBuffer);
 
-    public static native String[] glGetDebugMessageLogKHR(int i, IntBuffer intBuffer, IntBuffer intBuffer2, IntBuffer intBuffer3, IntBuffer intBuffer4);
+    public static native String[] glGetDebugMessageLogKHR(
+            int i,
+            IntBuffer intBuffer,
+            IntBuffer intBuffer2,
+            IntBuffer intBuffer3,
+            IntBuffer intBuffer4);
 
-    public static native String[] glGetDebugMessageLogKHR(int i, int[] iArr, int i2, int[] iArr2, int i3, int[] iArr3, int i4, int[] iArr4, int i5);
+    public static native String[] glGetDebugMessageLogKHR(
+            int i,
+            int[] iArr,
+            int i2,
+            int[] iArr2,
+            int i3,
+            int[] iArr3,
+            int i4,
+            int[] iArr4,
+            int i5);
 
     public static native String glGetObjectLabelKHR(int i, int i2);
 
@@ -282,7 +334,8 @@ public class GLES31Ext {
 
     public static native void glPopDebugGroupKHR();
 
-    public static native void glPrimitiveBoundingBoxEXT(float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8);
+    public static native void glPrimitiveBoundingBoxEXT(
+            float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8);
 
     public static native void glPushDebugGroupKHR(int i, int i2, int i3, String str);
 
@@ -306,12 +359,12 @@ public class GLES31Ext {
 
     public static native void glTexParameterIuivEXT(int i, int i2, int[] iArr, int i3);
 
-    public static native void glTexStorage3DMultisampleOES(int i, int i2, int i3, int i4, int i5, int i6, boolean z);
+    public static native void glTexStorage3DMultisampleOES(
+            int i, int i2, int i3, int i4, int i5, int i6, boolean z);
 
     static {
         _nativeClassInit();
     }
 
-    private GLES31Ext() {
-    }
+    private GLES31Ext() {}
 }

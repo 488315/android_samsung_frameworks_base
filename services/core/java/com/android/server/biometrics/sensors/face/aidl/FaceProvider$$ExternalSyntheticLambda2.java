@@ -2,6 +2,7 @@ package com.android.server.biometrics.sensors.face.aidl;
 
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.HermesService$3$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.Utils;
@@ -9,9 +10,8 @@ import com.android.server.biometrics.sensors.AuthenticationClient;
 import com.android.server.biometrics.sensors.BaseClientMonitor;
 import com.android.server.biometrics.sensors.ErrorConsumer;
 import com.android.server.biometrics.sensors.PerformanceTracker;
-import com.android.server.biometrics.sensors.face.aidl.FaceProvider;
-import com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl;
 import com.android.server.biometrics.sensors.face.hidl.HidlToAidlSessionAdapter;
+
 import vendor.samsung.hardware.biometrics.face.ISehSession;
 import vendor.samsung.hardware.biometrics.face.V3_0.ISehBiometricsFace;
 
@@ -43,15 +43,22 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                 faceProvider.mDaemon = null;
                 for (int i2 = 0; i2 < faceProvider.mFaceSensors.mSensors.size(); i2++) {
                     Sensor sensor = (Sensor) faceProvider.mFaceSensors.mSensors.valueAt(i2);
-                    PerformanceTracker instanceForSensorId = PerformanceTracker.getInstanceForSensorId(faceProvider.mFaceSensors.mSensors.keyAt(i2));
+                    PerformanceTracker instanceForSensorId =
+                            PerformanceTracker.getInstanceForSensorId(
+                                    faceProvider.mFaceSensors.mSensors.keyAt(i2));
                     if (instanceForSensorId != null) {
                         instanceForSensorId.mHALDeathCount++;
                     } else {
-                        Slog.w(faceProvider.getTag(), "Performance tracker is null. Not counting HAL death.");
+                        Slog.w(
+                                faceProvider.getTag(),
+                                "Performance tracker is null. Not counting HAL death.");
                     }
                     BaseClientMonitor currentClient = sensor.mScheduler.getCurrentClient();
                     if (currentClient != 0 && currentClient.isInterruptable()) {
-                        Slog.e("Sensor", "Sending face hardware unavailable error for client: " + currentClient);
+                        Slog.e(
+                                "Sensor",
+                                "Sending face hardware unavailable error for client: "
+                                        + currentClient);
                         ((ErrorConsumer) currentClient).onError(1, 0);
                         FrameworkStatsLog.write(148, 4, 1, -1);
                     } else if (currentClient != 0) {
@@ -66,16 +73,25 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                 SemFaceServiceExImpl serviceExtImpl = ((FaceProvider) obj).getServiceExtImpl();
                 serviceExtImpl.getClass();
                 long currentTimeMillis = System.currentTimeMillis();
-                if (!(serviceExtImpl.mScheduler.getCurrentClient() instanceof FaceAuthenticationClient)) {
+                if (!(serviceExtImpl.mScheduler.getCurrentClient()
+                        instanceof FaceAuthenticationClient)) {
                     Slog.w("SemFace", "daemonPauseAuth : client is not Auth");
                     break;
                 } else {
                     try {
                         if (serviceExtImpl.mIsHIDL) {
-                            HidlToAidlSessionAdapter hidlToAidlSessionAdapter = (HidlToAidlSessionAdapter) ((AidlSession) serviceExtImpl.mSensor.mLazySession.get()).mSession;
+                            HidlToAidlSessionAdapter hidlToAidlSessionAdapter =
+                                    (HidlToAidlSessionAdapter)
+                                            ((AidlSession)
+                                                            serviceExtImpl.mSensor.mLazySession
+                                                                    .get())
+                                                    .mSession;
                             hidlToAidlSessionAdapter.getClass();
                             try {
-                                pause = ((ISehBiometricsFace) hidlToAidlSessionAdapter.mSession.get()).sehPauseEnrollment();
+                                pause =
+                                        ((ISehBiometricsFace)
+                                                        hidlToAidlSessionAdapter.mSession.get())
+                                                .sehPauseEnrollment();
                             } catch (RemoteException e) {
                                 Slog.e("HidlToAidlSessionAdapter", "semPauseEnroll HIDL : ", e);
                                 pause = -1;
@@ -89,7 +105,12 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                                 pause = ((ISehSession.Stub.Proxy) iSehSession).pause();
                             }
                         }
-                        Slog.w("SemFace", "pause FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms) RESULT: " + pause);
+                        Slog.w(
+                                "SemFace",
+                                "pause FINISH ("
+                                        + (System.currentTimeMillis() - currentTimeMillis)
+                                        + "ms) RESULT: "
+                                        + pause);
                         break;
                     } catch (Exception e2) {
                         Slog.e("SemFace", "daemonPauseAuth: ", e2);
@@ -104,10 +125,15 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                 long currentTimeMillis2 = System.currentTimeMillis();
                 try {
                     if (serviceExtImpl2.mIsHIDL) {
-                        HidlToAidlSessionAdapter hidlToAidlSessionAdapter2 = (HidlToAidlSessionAdapter) ((AidlSession) serviceExtImpl2.mSensor.mLazySession.get()).mSession;
+                        HidlToAidlSessionAdapter hidlToAidlSessionAdapter2 =
+                                (HidlToAidlSessionAdapter)
+                                        ((AidlSession) serviceExtImpl2.mSensor.mLazySession.get())
+                                                .mSession;
                         hidlToAidlSessionAdapter2.getClass();
                         try {
-                            loadTA = ((ISehBiometricsFace) hidlToAidlSessionAdapter2.mSession.get()).sehOpenTaSession();
+                            loadTA =
+                                    ((ISehBiometricsFace) hidlToAidlSessionAdapter2.mSession.get())
+                                            .sehOpenTaSession();
                         } catch (RemoteException e3) {
                             Slog.e("HidlToAidlSessionAdapter", "semOpenTaSession HIDL : ", e3);
                             loadTA = -1;
@@ -121,7 +147,12 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                             loadTA = ((ISehSession.Stub.Proxy) iSehSession2).loadTA();
                         }
                     }
-                    Slog.w("SemFace", "sehOpenTaSession FINISH (" + (System.currentTimeMillis() - currentTimeMillis2) + "ms) RESULT: " + loadTA);
+                    Slog.w(
+                            "SemFace",
+                            "sehOpenTaSession FINISH ("
+                                    + (System.currentTimeMillis() - currentTimeMillis2)
+                                    + "ms) RESULT: "
+                                    + loadTA);
                     break;
                 } catch (Exception e4) {
                     Slog.e("SemFace", "daemonSessionOpen: ", e4);
@@ -131,13 +162,20 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                 SemFaceServiceExImpl serviceExtImpl3 = ((FaceProvider) obj).getServiceExtImpl();
                 serviceExtImpl3.getClass();
                 long currentTimeMillis3 = System.currentTimeMillis();
-                if (!(serviceExtImpl3.mScheduler.getCurrentClient() instanceof FaceAuthenticationClient)) {
+                if (!(serviceExtImpl3.mScheduler.getCurrentClient()
+                        instanceof FaceAuthenticationClient)) {
                     Slog.w("SemFace", "daemonResumeAuth : client is not Auth");
                     break;
                 } else {
                     try {
                         if (serviceExtImpl3.mIsHIDL) {
-                            resume = ((HidlToAidlSessionAdapter) ((AidlSession) serviceExtImpl3.mSensor.mLazySession.get()).mSession).semResumeEnroll();
+                            resume =
+                                    ((HidlToAidlSessionAdapter)
+                                                    ((AidlSession)
+                                                                    serviceExtImpl3.mSensor
+                                                                            .mLazySession.get())
+                                                            .mSession)
+                                            .semResumeEnroll();
                         } else {
                             ISehSession iSehSession3 = serviceExtImpl3.mISehSession;
                             if (iSehSession3 == null) {
@@ -147,7 +185,12 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                                 resume = ((ISehSession.Stub.Proxy) iSehSession3).resume();
                             }
                         }
-                        Slog.w("SemFace", "resume FINISH (" + (System.currentTimeMillis() - currentTimeMillis3) + "ms) RESULT: " + resume);
+                        Slog.w(
+                                "SemFace",
+                                "resume FINISH ("
+                                        + (System.currentTimeMillis() - currentTimeMillis3)
+                                        + "ms) RESULT: "
+                                        + resume);
                         break;
                     } catch (Exception e5) {
                         Slog.e("SemFace", "daemonResumeAuth: ", e5);
@@ -161,7 +204,13 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                 if (serviceExtImpl4.mScheduler.getCurrentClient() instanceof FaceEnrollClient) {
                     try {
                         if (serviceExtImpl4.mIsHIDL) {
-                            pause2 = ((HidlToAidlSessionAdapter) ((AidlSession) serviceExtImpl4.mSensor.mLazySession.get()).mSession).semResumeEnroll();
+                            pause2 =
+                                    ((HidlToAidlSessionAdapter)
+                                                    ((AidlSession)
+                                                                    serviceExtImpl4.mSensor
+                                                                            .mLazySession.get())
+                                                            .mSession)
+                                            .semResumeEnroll();
                         } else {
                             ISehSession iSehSession4 = serviceExtImpl4.mISehSession;
                             if (iSehSession4 == null) {
@@ -171,7 +220,12 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                                 pause2 = ((ISehSession.Stub.Proxy) iSehSession4).pause();
                             }
                         }
-                        Slog.w("SemFace", "pause FINISH (" + (System.currentTimeMillis() - currentTimeMillis4) + "ms) RESULT: " + pause2);
+                        Slog.w(
+                                "SemFace",
+                                "pause FINISH ("
+                                        + (System.currentTimeMillis() - currentTimeMillis4)
+                                        + "ms) RESULT: "
+                                        + pause2);
                     } catch (Exception e6) {
                         Slog.e("SemFace", "daemonPauseEnroll: ", e6);
                     }
@@ -190,7 +244,13 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                 if (serviceExtImpl5.mScheduler.getCurrentClient() instanceof FaceEnrollClient) {
                     try {
                         if (serviceExtImpl5.mIsHIDL) {
-                            resume2 = ((HidlToAidlSessionAdapter) ((AidlSession) serviceExtImpl5.mSensor.mLazySession.get()).mSession).semResumeEnroll();
+                            resume2 =
+                                    ((HidlToAidlSessionAdapter)
+                                                    ((AidlSession)
+                                                                    serviceExtImpl5.mSensor
+                                                                            .mLazySession.get())
+                                                            .mSession)
+                                            .semResumeEnroll();
                         } else {
                             ISehSession iSehSession5 = serviceExtImpl5.mISehSession;
                             if (iSehSession5 == null) {
@@ -200,14 +260,21 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                                 resume2 = ((ISehSession.Stub.Proxy) iSehSession5).resume();
                             }
                         }
-                        Slog.w("SemFace", "resume FINISH (" + (System.currentTimeMillis() - currentTimeMillis5) + "ms) RESULT: " + resume2);
+                        Slog.w(
+                                "SemFace",
+                                "resume FINISH ("
+                                        + (System.currentTimeMillis() - currentTimeMillis5)
+                                        + "ms) RESULT: "
+                                        + resume2);
                     } catch (Exception e7) {
                         Slog.e("SemFace", "daemonResumeEnroll: ", e7);
                     }
                     serviceExtImpl5.mIsEnrollPausing = false;
                     int i3 = Utils.isTalkBackEnabled(serviceExtImpl5.mContext) ? 60000 : 30000;
-                    HermesService$3$$ExternalSyntheticOutline0.m(i3, "resumeEnrollExt : ", "SemFace");
-                    SemFaceServiceExImpl.AnonymousClass1 anonymousClass1 = serviceExtImpl5.mHandlerMain;
+                    HermesService$3$$ExternalSyntheticOutline0.m(
+                            i3, "resumeEnrollExt : ", "SemFace");
+                    SemFaceServiceExImpl.AnonymousClass1 anonymousClass1 =
+                            serviceExtImpl5.mHandlerMain;
                     anonymousClass1.removeMessages(1);
                     anonymousClass1.sendEmptyMessageDelayed(1, i3);
                     serviceExtImpl5.acquireDVFS(i3, 1);
@@ -224,10 +291,15 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                 long currentTimeMillis6 = System.currentTimeMillis();
                 try {
                     if (serviceExtImpl6.mIsHIDL) {
-                        HidlToAidlSessionAdapter hidlToAidlSessionAdapter3 = (HidlToAidlSessionAdapter) ((AidlSession) serviceExtImpl6.mSensor.mLazySession.get()).mSession;
+                        HidlToAidlSessionAdapter hidlToAidlSessionAdapter3 =
+                                (HidlToAidlSessionAdapter)
+                                        ((AidlSession) serviceExtImpl6.mSensor.mLazySession.get())
+                                                .mSession;
                         hidlToAidlSessionAdapter3.getClass();
                         try {
-                            unloadTA = ((ISehBiometricsFace) hidlToAidlSessionAdapter3.mSession.get()).sehCloseTaSession();
+                            unloadTA =
+                                    ((ISehBiometricsFace) hidlToAidlSessionAdapter3.mSession.get())
+                                            .sehCloseTaSession();
                         } catch (RemoteException e8) {
                             Slog.e("HidlToAidlSessionAdapter", "semCloseTaSession HIDL : ", e8);
                             unloadTA = -1;
@@ -241,21 +313,39 @@ public final /* synthetic */ class FaceProvider$$ExternalSyntheticLambda2 implem
                             unloadTA = ((ISehSession.Stub.Proxy) iSehSession6).unloadTA();
                         }
                     }
-                    Slog.w("SemFace", "sehCloseTaSession FINISH (" + (System.currentTimeMillis() - currentTimeMillis6) + "ms) RESULT: " + unloadTA);
+                    Slog.w(
+                            "SemFace",
+                            "sehCloseTaSession FINISH ("
+                                    + (System.currentTimeMillis() - currentTimeMillis6)
+                                    + "ms) RESULT: "
+                                    + unloadTA);
                     break;
                 } catch (Exception e9) {
                     Slog.e("SemFace", "daemonSessionClose: ", e9);
                     return;
                 }
             default:
-                FaceProvider.BiometricTaskStackListener biometricTaskStackListener = (FaceProvider.BiometricTaskStackListener) obj;
+                FaceProvider.BiometricTaskStackListener biometricTaskStackListener =
+                        (FaceProvider.BiometricTaskStackListener) obj;
                 for (int i4 = 0; i4 < FaceProvider.this.mFaceSensors.mSensors.size(); i4++) {
-                    BaseClientMonitor currentClient2 = ((Sensor) FaceProvider.this.mFaceSensors.mSensors.valueAt(i4)).mScheduler.getCurrentClient();
+                    BaseClientMonitor currentClient2 =
+                            ((Sensor) FaceProvider.this.mFaceSensors.mSensors.valueAt(i4))
+                                    .mScheduler.getCurrentClient();
                     if (!(currentClient2 instanceof AuthenticationClient)) {
-                        Slog.e(FaceProvider.this.getTag(), "Task stack changed for client: " + currentClient2);
-                    } else if (!Utils.isKeyguard(FaceProvider.this.mContext, currentClient2.mOwner) && !Utils.isSystem(FaceProvider.this.mContext, currentClient2.mOwner) && Utils.isBackground(currentClient2.mOwner) && !currentClient2.mAlreadyDone) {
-                        Slog.e(FaceProvider.this.getTag(), "Stopping background authentication, currentClient: " + currentClient2);
-                        ((Sensor) FaceProvider.this.mFaceSensors.mSensors.valueAt(i4)).mScheduler.cancelAuthenticationOrDetection(currentClient2.mToken, currentClient2.mRequestId);
+                        Slog.e(
+                                FaceProvider.this.getTag(),
+                                "Task stack changed for client: " + currentClient2);
+                    } else if (!Utils.isKeyguard(FaceProvider.this.mContext, currentClient2.mOwner)
+                            && !Utils.isSystem(FaceProvider.this.mContext, currentClient2.mOwner)
+                            && Utils.isBackground(currentClient2.mOwner)
+                            && !currentClient2.mAlreadyDone) {
+                        Slog.e(
+                                FaceProvider.this.getTag(),
+                                "Stopping background authentication, currentClient: "
+                                        + currentClient2);
+                        ((Sensor) FaceProvider.this.mFaceSensors.mSensors.valueAt(i4))
+                                .mScheduler.cancelAuthenticationOrDetection(
+                                        currentClient2.mToken, currentClient2.mRequestId);
                     }
                 }
                 break;

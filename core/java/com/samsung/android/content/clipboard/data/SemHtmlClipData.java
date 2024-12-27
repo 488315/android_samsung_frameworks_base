@@ -16,13 +16,16 @@ import android.sec.clipboard.util.FileHelper;
 import android.sec.clipboard.util.Log;
 import android.text.Html;
 import android.text.TextUtils;
+
 import com.samsung.android.content.clipboard.provider.SemImageClipDataProvider;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
 /* loaded from: classes5.dex */
 public class SemHtmlClipData extends SemClipData {
-    private static final String REGEX = "(?i)<[^/bpd][^>]*>|<p[a-z][^>]*>|<br[a-z][^>]*>|<d[^i][^v][^>]*>|<div[a-z][^>]*>|</[^bpd]+?>|</p[a-z]+>|</br[a-z]+>|</d[^i][^v]+>|</div[a-z]+>";
+    private static final String REGEX =
+            "(?i)<[^/bpd][^>]*>|<p[a-z][^>]*>|<br[a-z][^>]*>|<d[^i][^v][^>]*>|<div[a-z][^>]*>|</[^bpd]+?>|</p[a-z]+>|</br[a-z]+>|</d[^i][^v]+>|</div[a-z]+>";
     private static final String TAG = "SemHtmlClipData";
     private static final long serialVersionUID = 1;
     private String mHtml;
@@ -71,7 +74,9 @@ public class SemHtmlClipData extends SemClipData {
                 boolean result2 = ((SemTextClipData) altData).setText(this.mPlainText);
                 return result2;
             case 4:
-                ((SemHtmlClipData) altData).setHtmlWithImagePathInternal(this.mPlainText, this.mHtml, this.mThumbnailImagePath);
+                ((SemHtmlClipData) altData)
+                        .setHtmlWithImagePathInternal(
+                                this.mPlainText, this.mHtml, this.mThumbnailImagePath);
                 boolean result3 = this.mHtml.length() > 0;
                 return result3;
             default:
@@ -81,7 +86,12 @@ public class SemHtmlClipData extends SemClipData {
 
     private void setClipData() {
         String[] mimeType = {"text/html"};
-        ClipData.Item item = new ClipData.Item(this.mPlainText, this.mHtml, null, Uri.fromFile(new File(this.mThumbnailImagePath)));
+        ClipData.Item item =
+                new ClipData.Item(
+                        this.mPlainText,
+                        this.mHtml,
+                        null,
+                        Uri.fromFile(new File(this.mThumbnailImagePath)));
         setClipData(mimeType, item);
     }
 
@@ -119,7 +129,8 @@ public class SemHtmlClipData extends SemClipData {
         return true;
     }
 
-    public boolean setHtmlWithImagePathInternal(CharSequence text, CharSequence html, CharSequence filePath) {
+    public boolean setHtmlWithImagePathInternal(
+            CharSequence text, CharSequence html, CharSequence filePath) {
         if (text != null && text.toString().length() > 0) {
             this.mPlainText = text.toString();
         }
@@ -164,12 +175,17 @@ public class SemHtmlClipData extends SemClipData {
             Log.secW(TAG, "getThumbnailBitmap : FileName is empty.");
             return null;
         }
-        if (sFileName != null && sFileName.length() > 7 && sFileName.substring(0, 7).compareTo("http://") == 0) {
+        if (sFileName != null
+                && sFileName.length() > 7
+                && sFileName.substring(0, 7).compareTo("http://") == 0) {
             return null;
         }
-        if (sFileName != null && sFileName.length() > 7 && sFileName.substring(0, 7).compareTo("file://") == 0) {
+        if (sFileName != null
+                && sFileName.length() > 7
+                && sFileName.substring(0, 7).compareTo("file://") == 0) {
             String substring = sFileName.substring(7, sFileName.length());
-            Bitmap result = ClipboardDataBitmapUtil.getFilePathBitmap(substring, reqWidth, reqHeight);
+            Bitmap result =
+                    ClipboardDataBitmapUtil.getFilePathBitmap(substring, reqWidth, reqHeight);
             return result;
         }
         Bitmap result2 = ClipboardDataBitmapUtil.getFilePathBitmap(sFileName, reqWidth, reqHeight);
@@ -249,13 +265,14 @@ public class SemHtmlClipData extends SemClipData {
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void toSave() {
-    }
+    public void toSave() {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
     public void toLoad() {
-        if (this.mThumbnailImagePath != null && this.mThumbnailImagePath.contains(CompatabilityHelper.OLD_CLIPBOARD_ROOT_PATH)) {
-            this.mThumbnailImagePath = CompatabilityHelper.replacePathForCompatability(this.mThumbnailImagePath);
+        if (this.mThumbnailImagePath != null
+                && this.mThumbnailImagePath.contains(CompatabilityHelper.OLD_CLIPBOARD_ROOT_PATH)) {
+            this.mThumbnailImagePath =
+                    CompatabilityHelper.replacePathForCompatability(this.mThumbnailImagePath);
             setClipData();
         }
         Log.secD(TAG, "htmlclipdata toLoad called");
@@ -279,8 +296,10 @@ public class SemHtmlClipData extends SemClipData {
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
     public void convertForRemote() {
-        if (this.mThumbnailImagePath != null && this.mThumbnailImagePath.contains(ClipboardConstants.CLIPBOARD_ROOT_PATH)) {
-            this.mThumbnailImagePath = "/data/semclipboard/remote/previewhtmlclipboarditem_thum.jpg";
+        if (this.mThumbnailImagePath != null
+                && this.mThumbnailImagePath.contains(ClipboardConstants.CLIPBOARD_ROOT_PATH)) {
+            this.mThumbnailImagePath =
+                    "/data/semclipboard/remote/previewhtmlclipboarditem_thum.jpg";
             setClipData();
             Log.d(TAG, "success converting");
         }
@@ -293,7 +312,9 @@ public class SemHtmlClipData extends SemClipData {
             try {
                 ContentValues values = new ContentValues();
                 values.put("_data", path);
-                Uri contentUri = context.getContentResolver().insert(SemImageClipDataProvider.CONTENT_URI, values);
+                Uri contentUri =
+                        context.getContentResolver()
+                                .insert(SemImageClipDataProvider.CONTENT_URI, values);
                 int pos = path.lastIndexOf("/");
                 String before = ClipboardConstants.CLIPBOARD_REMOTE_SEND_PATH + path.substring(pos);
                 setHtml(this.mHtml.replace(before, contentUri.toString()));
@@ -310,7 +331,9 @@ public class SemHtmlClipData extends SemClipData {
         File remoteUriFiles = new File(path);
         if (remoteUriFiles.exists()) {
             for (File remoteUriFile : remoteUriFiles.listFiles()) {
-                if (remoteUriFile.getAbsolutePath().contains(ClipboardConstants.CLIPBOARD_REMOTE_FILE)) {
+                if (remoteUriFile
+                        .getAbsolutePath()
+                        .contains(ClipboardConstants.CLIPBOARD_REMOTE_FILE)) {
                     deleteContentUriInternal(context, remoteUriFile.getAbsolutePath());
                 }
             }

@@ -12,8 +12,8 @@ public interface IDexModuleRegisterCallback extends IInterface {
 
     public static class Default implements IDexModuleRegisterCallback {
         @Override // android.content.pm.IDexModuleRegisterCallback
-        public void onDexModuleRegistered(String dexModulePath, boolean success, String message) throws RemoteException {
-        }
+        public void onDexModuleRegistered(String dexModulePath, boolean success, String message)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +21,7 @@ public interface IDexModuleRegisterCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDexModuleRegisterCallback {
+    public abstract static class Stub extends Binder implements IDexModuleRegisterCallback {
         public static final String DESCRIPTOR = "android.content.pm.IDexModuleRegisterCallback";
         static final int TRANSACTION_onDexModuleRegistered = 1;
 
@@ -60,7 +60,8 @@ public interface IDexModuleRegisterCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -98,7 +99,8 @@ public interface IDexModuleRegisterCallback extends IInterface {
             }
 
             @Override // android.content.pm.IDexModuleRegisterCallback
-            public void onDexModuleRegistered(String dexModulePath, boolean success, String message) throws RemoteException {
+            public void onDexModuleRegistered(String dexModulePath, boolean success, String message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

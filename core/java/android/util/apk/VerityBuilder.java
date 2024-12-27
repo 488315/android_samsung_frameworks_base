@@ -20,8 +20,7 @@ public abstract class VerityBuilder {
     private static final int ZIP_EOCD_CENTRAL_DIR_OFFSET_FIELD_OFFSET = 16;
     private static final int ZIP_EOCD_CENTRAL_DIR_OFFSET_FIELD_SIZE = 4;
 
-    private VerityBuilder() {
-    }
+    private VerityBuilder() {}
 
     public static class VerityResult {
         public final int merkleTreeSize;
@@ -35,30 +34,45 @@ public abstract class VerityBuilder {
         }
     }
 
-    public static VerityResult generateApkVerityTree(RandomAccessFile apk, SignatureInfo signatureInfo, ByteBufferFactory bufferFactory) throws IOException, SecurityException, NoSuchAlgorithmException, DigestException {
+    public static VerityResult generateApkVerityTree(
+            RandomAccessFile apk, SignatureInfo signatureInfo, ByteBufferFactory bufferFactory)
+            throws IOException, SecurityException, NoSuchAlgorithmException, DigestException {
         return generateVerityTreeInternal(apk, bufferFactory, signatureInfo);
     }
 
-    private static VerityResult generateVerityTreeInternal(RandomAccessFile apk, ByteBufferFactory bufferFactory, SignatureInfo signatureInfo) throws IOException, SecurityException, NoSuchAlgorithmException, DigestException {
-        long signingBlockSize = signatureInfo.centralDirOffset - signatureInfo.apkSigningBlockOffset;
+    private static VerityResult generateVerityTreeInternal(
+            RandomAccessFile apk, ByteBufferFactory bufferFactory, SignatureInfo signatureInfo)
+            throws IOException, SecurityException, NoSuchAlgorithmException, DigestException {
+        long signingBlockSize =
+                signatureInfo.centralDirOffset - signatureInfo.apkSigningBlockOffset;
         long dataSize = apk.getChannel().size() - signingBlockSize;
         int[] levelOffset = calculateVerityLevelOffset(dataSize);
         int merkleTreeSize = levelOffset[levelOffset.length - 1];
         ByteBuffer output = bufferFactory.create(merkleTreeSize + 4096);
         output.order(ByteOrder.LITTLE_ENDIAN);
         ByteBuffer tree = slice(output, 0, merkleTreeSize);
-        byte[] apkRootHash = generateVerityTreeInternal(apk, signatureInfo, DEFAULT_SALT, levelOffset, tree);
+        byte[] apkRootHash =
+                generateVerityTreeInternal(apk, signatureInfo, DEFAULT_SALT, levelOffset, tree);
         return new VerityResult(output, merkleTreeSize, apkRootHash);
     }
 
-    static void generateApkVerityFooter(RandomAccessFile apk, SignatureInfo signatureInfo, ByteBuffer footerOutput) throws IOException {
+    static void generateApkVerityFooter(
+            RandomAccessFile apk, SignatureInfo signatureInfo, ByteBuffer footerOutput)
+            throws IOException {
         footerOutput.order(ByteOrder.LITTLE_ENDIAN);
         generateApkVerityHeader(footerOutput, apk.getChannel().size(), DEFAULT_SALT);
-        long signingBlockSize = signatureInfo.centralDirOffset - signatureInfo.apkSigningBlockOffset;
-        generateApkVerityExtensions(footerOutput, signatureInfo.apkSigningBlockOffset, signingBlockSize, signatureInfo.eocdOffset);
+        long signingBlockSize =
+                signatureInfo.centralDirOffset - signatureInfo.apkSigningBlockOffset;
+        generateApkVerityExtensions(
+                footerOutput,
+                signatureInfo.apkSigningBlockOffset,
+                signingBlockSize,
+                signatureInfo.eocdOffset);
     }
 
-    public static byte[] generateFsVerityRootHash(String apkPath, byte[] salt, ByteBufferFactory bufferFactory) throws IOException, NoSuchAlgorithmException, DigestException {
+    public static byte[] generateFsVerityRootHash(
+            String apkPath, byte[] salt, ByteBufferFactory bufferFactory)
+            throws IOException, NoSuchAlgorithmException, DigestException {
         RandomAccessFile apk = new RandomAccessFile(apkPath, "r");
         try {
             int[] levelOffset = calculateVerityLevelOffset(apk.length());
@@ -66,7 +80,8 @@ public abstract class VerityBuilder {
             ByteBuffer output = bufferFactory.create(merkleTreeSize + 4096);
             output.order(ByteOrder.LITTLE_ENDIAN);
             ByteBuffer tree = slice(output, 0, merkleTreeSize);
-            byte[] generateFsVerityTreeInternal = generateFsVerityTreeInternal(apk, salt, levelOffset, tree);
+            byte[] generateFsVerityTreeInternal =
+                    generateFsVerityTreeInternal(apk, salt, levelOffset, tree);
             apk.close();
             return generateFsVerityTreeInternal;
         } catch (Throwable th) {
@@ -79,11 +94,18 @@ public abstract class VerityBuilder {
         }
     }
 
-    static byte[] generateApkVerity(String apkPath, ByteBufferFactory bufferFactory, SignatureInfo signatureInfo) throws IOException, SignatureNotFoundException, SecurityException, DigestException, NoSuchAlgorithmException {
+    static byte[] generateApkVerity(
+            String apkPath, ByteBufferFactory bufferFactory, SignatureInfo signatureInfo)
+            throws IOException,
+                    SignatureNotFoundException,
+                    SecurityException,
+                    DigestException,
+                    NoSuchAlgorithmException {
         RandomAccessFile apk = new RandomAccessFile(apkPath, "r");
         try {
             VerityResult result = generateVerityTreeInternal(apk, bufferFactory, signatureInfo);
-            ByteBuffer footer = slice(result.verityData, result.merkleTreeSize, result.verityData.limit());
+            ByteBuffer footer =
+                    slice(result.verityData, result.merkleTreeSize, result.verityData.limit());
             generateApkVerityFooter(apk, signatureInfo, footer);
             footer.putInt(footer.position() + 4);
             result.verityData.limit(result.merkleTreeSize + footer.position());
@@ -143,7 +165,8 @@ public abstract class VerityBuilder {
 
         public void assertEmptyBuffer() throws DigestException {
             if (this.mBytesDigestedSinceReset != 0) {
-                throw new IllegalStateException("Buffer is not empty: " + this.mBytesDigestedSinceReset);
+                throw new IllegalStateException(
+                        "Buffer is not empty: " + this.mBytesDigestedSinceReset);
             }
         }
 
@@ -157,7 +180,8 @@ public abstract class VerityBuilder {
         }
     }
 
-    private static void consumeByChunk(DataDigester digester, DataSource source, int chunkSize) throws IOException, DigestException {
+    private static void consumeByChunk(DataDigester digester, DataSource source, int chunkSize)
+            throws IOException, DigestException {
         long inputRemaining = source.size();
         long inputOffset = 0;
         while (inputRemaining > 0) {
@@ -168,7 +192,9 @@ public abstract class VerityBuilder {
         }
     }
 
-    private static void generateFsVerityDigestAtLeafLevel(RandomAccessFile file, byte[] salt, ByteBuffer output) throws IOException, NoSuchAlgorithmException, DigestException {
+    private static void generateFsVerityDigestAtLeafLevel(
+            RandomAccessFile file, byte[] salt, ByteBuffer output)
+            throws IOException, NoSuchAlgorithmException, DigestException {
         BufferedDigester digester = new BufferedDigester(salt, output);
         consumeByChunk(digester, DataSource.create(file.getFD(), 0L, file.length()), 1048576);
         int lastIncompleteChunkSize = (int) (file.length() % 4096);
@@ -179,17 +205,35 @@ public abstract class VerityBuilder {
         digester.fillUpLastOutputChunk();
     }
 
-    private static void generateApkVerityDigestAtLeafLevel(RandomAccessFile apk, SignatureInfo signatureInfo, byte[] salt, ByteBuffer output) throws IOException, NoSuchAlgorithmException, DigestException {
+    private static void generateApkVerityDigestAtLeafLevel(
+            RandomAccessFile apk, SignatureInfo signatureInfo, byte[] salt, ByteBuffer output)
+            throws IOException, NoSuchAlgorithmException, DigestException {
         BufferedDigester digester = new BufferedDigester(salt, output);
-        consumeByChunk(digester, DataSource.create(apk.getFD(), 0L, signatureInfo.apkSigningBlockOffset), 1048576);
+        consumeByChunk(
+                digester,
+                DataSource.create(apk.getFD(), 0L, signatureInfo.apkSigningBlockOffset),
+                1048576);
         long eocdCdOffsetFieldPosition = signatureInfo.eocdOffset + 16;
-        consumeByChunk(digester, DataSource.create(apk.getFD(), signatureInfo.centralDirOffset, eocdCdOffsetFieldPosition - signatureInfo.centralDirOffset), 1048576);
-        ByteBuffer alternativeCentralDirOffset = ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
+        consumeByChunk(
+                digester,
+                DataSource.create(
+                        apk.getFD(),
+                        signatureInfo.centralDirOffset,
+                        eocdCdOffsetFieldPosition - signatureInfo.centralDirOffset),
+                1048576);
+        ByteBuffer alternativeCentralDirOffset =
+                ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN);
         alternativeCentralDirOffset.putInt(Math.toIntExact(signatureInfo.apkSigningBlockOffset));
         alternativeCentralDirOffset.flip();
         digester.consume(alternativeCentralDirOffset);
         long offsetAfterEocdCdOffsetField = 4 + eocdCdOffsetFieldPosition;
-        consumeByChunk(digester, DataSource.create(apk.getFD(), offsetAfterEocdCdOffsetField, apk.getChannel().size() - offsetAfterEocdCdOffsetField), 1048576);
+        consumeByChunk(
+                digester,
+                DataSource.create(
+                        apk.getFD(),
+                        offsetAfterEocdCdOffsetField,
+                        apk.getChannel().size() - offsetAfterEocdCdOffsetField),
+                1048576);
         int lastIncompleteChunkSize = (int) (apk.getChannel().size() % 4096);
         if (lastIncompleteChunkSize != 0) {
             digester.consume(ByteBuffer.allocate(4096 - lastIncompleteChunkSize));
@@ -198,12 +242,21 @@ public abstract class VerityBuilder {
         digester.fillUpLastOutputChunk();
     }
 
-    private static byte[] generateFsVerityTreeInternal(RandomAccessFile apk, byte[] salt, int[] levelOffset, ByteBuffer output) throws IOException, NoSuchAlgorithmException, DigestException {
-        generateFsVerityDigestAtLeafLevel(apk, salt, slice(output, levelOffset[levelOffset.length - 2], levelOffset[levelOffset.length - 1]));
+    private static byte[] generateFsVerityTreeInternal(
+            RandomAccessFile apk, byte[] salt, int[] levelOffset, ByteBuffer output)
+            throws IOException, NoSuchAlgorithmException, DigestException {
+        generateFsVerityDigestAtLeafLevel(
+                apk,
+                salt,
+                slice(
+                        output,
+                        levelOffset[levelOffset.length - 2],
+                        levelOffset[levelOffset.length - 1]));
         int level = levelOffset.length - 3;
         while (true) {
             if (level >= 0) {
-                ByteBuffer inputBuffer = slice(output, levelOffset[level + 1], levelOffset[level + 2]);
+                ByteBuffer inputBuffer =
+                        slice(output, levelOffset[level + 1], levelOffset[level + 2]);
                 ByteBuffer outputBuffer = slice(output, levelOffset[level], levelOffset[level + 1]);
                 DataSource source = new ByteBufferDataSource(inputBuffer);
                 BufferedDigester digester = new BufferedDigester(salt, outputBuffer);
@@ -221,13 +274,27 @@ public abstract class VerityBuilder {
         }
     }
 
-    private static byte[] generateVerityTreeInternal(RandomAccessFile apk, SignatureInfo signatureInfo, byte[] salt, int[] levelOffset, ByteBuffer output) throws IOException, NoSuchAlgorithmException, DigestException {
+    private static byte[] generateVerityTreeInternal(
+            RandomAccessFile apk,
+            SignatureInfo signatureInfo,
+            byte[] salt,
+            int[] levelOffset,
+            ByteBuffer output)
+            throws IOException, NoSuchAlgorithmException, DigestException {
         assertSigningBlockAlignedAndHasFullPages(signatureInfo);
-        generateApkVerityDigestAtLeafLevel(apk, signatureInfo, salt, slice(output, levelOffset[levelOffset.length - 2], levelOffset[levelOffset.length - 1]));
+        generateApkVerityDigestAtLeafLevel(
+                apk,
+                signatureInfo,
+                salt,
+                slice(
+                        output,
+                        levelOffset[levelOffset.length - 2],
+                        levelOffset[levelOffset.length - 1]));
         int level = levelOffset.length - 3;
         while (true) {
             if (level >= 0) {
-                ByteBuffer inputBuffer = slice(output, levelOffset[level + 1], levelOffset[level + 2]);
+                ByteBuffer inputBuffer =
+                        slice(output, levelOffset[level + 1], levelOffset[level + 2]);
                 ByteBuffer outputBuffer = slice(output, levelOffset[level], levelOffset[level + 1]);
                 DataSource source = new ByteBufferDataSource(inputBuffer);
                 BufferedDigester digester = new BufferedDigester(salt, outputBuffer);
@@ -245,7 +312,8 @@ public abstract class VerityBuilder {
         }
     }
 
-    private static ByteBuffer generateApkVerityHeader(ByteBuffer buffer, long fileSize, byte[] salt) {
+    private static ByteBuffer generateApkVerityHeader(
+            ByteBuffer buffer, long fileSize, byte[] salt) {
         if (salt.length != 8) {
             throw new IllegalArgumentException("salt is not 8 bytes long");
         }
@@ -266,7 +334,8 @@ public abstract class VerityBuilder {
         return buffer;
     }
 
-    private static ByteBuffer generateApkVerityExtensions(ByteBuffer buffer, long signingBlockOffset, long signingBlockSize, long eocdOffset) {
+    private static ByteBuffer generateApkVerityExtensions(
+            ByteBuffer buffer, long signingBlockOffset, long signingBlockSize, long eocdOffset) {
         buffer.putInt(24);
         buffer.putShort((short) 1);
         skip(buffer, 2);
@@ -299,17 +368,25 @@ public abstract class VerityBuilder {
         int[] levelOffset = new int[levelSize.size() + 1];
         levelOffset[0] = 0;
         for (int i = 0; i < levelSize.size(); i++) {
-            levelOffset[i + 1] = levelOffset[i] + Math.toIntExact(levelSize.get((levelSize.size() - i) - 1).longValue());
+            levelOffset[i + 1] =
+                    levelOffset[i]
+                            + Math.toIntExact(
+                                    levelSize.get((levelSize.size() - i) - 1).longValue());
         }
         return levelOffset;
     }
 
     private static void assertSigningBlockAlignedAndHasFullPages(SignatureInfo signatureInfo) {
         if (signatureInfo.apkSigningBlockOffset % 4096 != 0) {
-            throw new IllegalArgumentException("APK Signing Block does not start at the page boundary: " + signatureInfo.apkSigningBlockOffset);
+            throw new IllegalArgumentException(
+                    "APK Signing Block does not start at the page boundary: "
+                            + signatureInfo.apkSigningBlockOffset);
         }
         if ((signatureInfo.centralDirOffset - signatureInfo.apkSigningBlockOffset) % 4096 != 0) {
-            throw new IllegalArgumentException("Size of APK Signing Block is not a multiple of 4096: " + (signatureInfo.centralDirOffset - signatureInfo.apkSigningBlockOffset));
+            throw new IllegalArgumentException(
+                    "Size of APK Signing Block is not a multiple of 4096: "
+                            + (signatureInfo.centralDirOffset
+                                    - signatureInfo.apkSigningBlockOffset));
         }
     }
 

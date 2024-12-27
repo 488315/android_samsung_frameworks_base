@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IDexTransientCaptionDelayListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.multiwindow.IDexTransientCaptionDelayListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.multiwindow.IDexTransientCaptionDelayListener";
 
     void onDelayChanged(int i) throws RemoteException;
 
     public static class Default implements IDexTransientCaptionDelayListener {
         @Override // com.samsung.android.multiwindow.IDexTransientCaptionDelayListener
-        public void onDelayChanged(int delay) throws RemoteException {
-        }
+        public void onDelayChanged(int delay) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IDexTransientCaptionDelayListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDexTransientCaptionDelayListener {
+    public abstract static class Stub extends Binder implements IDexTransientCaptionDelayListener {
         static final int TRANSACTION_onDelayChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IDexTransientCaptionDelayListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDexTransientCaptionDelayListener.DESCRIPTOR);
             }

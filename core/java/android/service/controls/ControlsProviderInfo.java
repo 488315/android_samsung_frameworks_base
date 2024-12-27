@@ -7,19 +7,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class ControlsProviderInfo implements Parcelable {
-    public static final Parcelable.Creator<ControlsProviderInfo> CREATOR = new Parcelable.Creator<ControlsProviderInfo>() { // from class: android.service.controls.ControlsProviderInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ControlsProviderInfo createFromParcel(Parcel in) {
-            return new ControlsProviderInfo(in);
-        }
+    public static final Parcelable.Creator<ControlsProviderInfo> CREATOR =
+            new Parcelable.Creator<
+                    ControlsProviderInfo>() { // from class:
+                                              // android.service.controls.ControlsProviderInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ControlsProviderInfo createFromParcel(Parcel in) {
+                    return new ControlsProviderInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ControlsProviderInfo[] newArray(int size) {
-            return new ControlsProviderInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ControlsProviderInfo[] newArray(int size) {
+                    return new ControlsProviderInfo[size];
+                }
+            };
     private static final String TAG = "ControlsProviderInfo";
     private final PendingIntent mAppIntent;
     private final boolean mAutoRemove;

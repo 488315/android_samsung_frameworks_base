@@ -1,9 +1,11 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import android.hardware.gnss.GnssSignalType;
+
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,10 +27,12 @@ public class ASN1GeneralizedTime extends ASN1Primitive {
             try {
                 return (ASN1GeneralizedTime) fromByteArray((byte[]) obj);
             } catch (Exception e) {
-                throw new IllegalArgumentException("encoding error in getInstance: " + e.toString());
+                throw new IllegalArgumentException(
+                        "encoding error in getInstance: " + e.toString());
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public static ASN1GeneralizedTime getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -88,7 +92,11 @@ public class ASN1GeneralizedTime extends ASN1Primitive {
         int signPos2 = stime.length() - 5;
         char sign2 = stime.charAt(signPos2);
         if (sign2 == '-' || sign2 == '+') {
-            return stime.substring(0, signPos2) + "GMT" + stime.substring(signPos2, signPos2 + 3) + ":" + stime.substring(signPos2 + 3);
+            return stime.substring(0, signPos2)
+                    + "GMT"
+                    + stime.substring(signPos2, signPos2 + 3)
+                    + ":"
+                    + stime.substring(signPos2 + 3);
         }
         int signPos3 = stime.length() - 3;
         char sign3 = stime.charAt(signPos3);
@@ -114,7 +122,9 @@ public class ASN1GeneralizedTime extends ASN1Primitive {
                     stime = pruneFractionalSeconds(stime);
                 }
                 SimpleDateFormat dateF = calculateGMTDateFormat();
-                if (timeZone.inDaylightTime(dateF.parse(stime + "GMT" + sign + convert(hours) + ":" + convert(minutes)))) {
+                if (timeZone.inDaylightTime(
+                        dateF.parse(
+                                stime + "GMT" + sign + convert(hours) + ":" + convert(minutes)))) {
                     hours += sign.equals("+") ? 1 : -1;
                 }
             }
@@ -149,10 +159,12 @@ public class ASN1GeneralizedTime extends ASN1Primitive {
             return origTime.substring(0, 14) + (frac.substring(0, 4) + frac.substring(index));
         }
         if (index - 1 == 1) {
-            return origTime.substring(0, 14) + (frac.substring(0, index) + "00" + frac.substring(index));
+            return origTime.substring(0, 14)
+                    + (frac.substring(0, index) + "00" + frac.substring(index));
         }
         if (index - 1 == 2) {
-            return origTime.substring(0, 14) + (frac.substring(0, index) + "0" + frac.substring(index));
+            return origTime.substring(0, 14)
+                    + (frac.substring(0, index) + "0" + frac.substring(index));
         }
         return origTime;
     }
@@ -255,7 +267,8 @@ public class ASN1GeneralizedTime extends ASN1Primitive {
         return Arrays.areEqual(this.time, ((ASN1GeneralizedTime) o).time);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         return Arrays.hashCode(this.time);
     }

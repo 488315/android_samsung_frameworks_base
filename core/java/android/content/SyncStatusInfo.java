@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -12,19 +14,21 @@ import java.util.Iterator;
 
 /* loaded from: classes.dex */
 public class SyncStatusInfo implements Parcelable {
-    public static final Parcelable.Creator<SyncStatusInfo> CREATOR = new Parcelable.Creator<SyncStatusInfo>() { // from class: android.content.SyncStatusInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncStatusInfo createFromParcel(Parcel in) {
-            return new SyncStatusInfo(in);
-        }
+    public static final Parcelable.Creator<SyncStatusInfo> CREATOR =
+            new Parcelable.Creator<
+                    SyncStatusInfo>() { // from class: android.content.SyncStatusInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncStatusInfo createFromParcel(Parcel in) {
+                    return new SyncStatusInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncStatusInfo[] newArray(int size) {
-            return new SyncStatusInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncStatusInfo[] newArray(int size) {
+                    return new SyncStatusInfo[size];
+                }
+            };
     private static final int MAX_EVENT_COUNT = 10;
     private static final int SOURCE_COUNT = 6;
     private static final String TAG = "Sync";
@@ -231,7 +235,11 @@ public class SyncStatusInfo implements Parcelable {
             }
         }
         if (version < 4) {
-            this.totalStats.numSourcePeriodic = (((this.totalStats.numSyncs - this.totalStats.numSourceLocal) - this.totalStats.numSourcePoll) - this.totalStats.numSourceOther) - this.totalStats.numSourceUser;
+            this.totalStats.numSourcePeriodic =
+                    (((this.totalStats.numSyncs - this.totalStats.numSourceLocal)
+                                            - this.totalStats.numSourcePoll)
+                                    - this.totalStats.numSourceOther)
+                            - this.totalStats.numSourceUser;
             if (this.totalStats.numSourcePeriodic < 0) {
                 this.totalStats.numSourcePeriodic = 0;
             }

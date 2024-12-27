@@ -8,7 +8,13 @@ import android.provider.Telephony;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.telephony.Rlog;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -18,9 +24,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 /* loaded from: classes4.dex */
 public final class RcsConfig {
@@ -131,7 +134,9 @@ public final class RcsConfig {
                 return false;
             }
             Characteristic o = (Characteristic) obj;
-            return TextUtils.equals(this.mType, o.mType) && this.mParms.equals(o.mParms) && this.mSubs.equals(o.mSubs);
+            return TextUtils.equals(this.mType, o.mType)
+                    && this.mParms.equals(o.mParms)
+                    && this.mSubs.equals(o.mSubs);
         }
 
         public int hashCode() {
@@ -156,7 +161,8 @@ public final class RcsConfig {
                     int eventType = newPullParser.getEventType();
                     for (int i = 1; eventType != i && characteristic != null; i = 1) {
                         if (eventType == 2) {
-                            String lowerCase = newPullParser.getName().trim().toLowerCase(Locale.ROOT);
+                            String lowerCase =
+                                    newPullParser.getName().trim().toLowerCase(Locale.ROOT);
                             if (TAG_CHARACTERISTIC.equals(lowerCase)) {
                                 int attributeCount = newPullParser.getAttributeCount();
                                 String str = null;
@@ -166,16 +172,29 @@ public final class RcsConfig {
                                         if (i2 >= attributeCount) {
                                             break;
                                         }
-                                        String lowerCase2 = newPullParser.getAttributeName(i2).trim().toLowerCase(Locale.ROOT);
+                                        String lowerCase2 =
+                                                newPullParser
+                                                        .getAttributeName(i2)
+                                                        .trim()
+                                                        .toLowerCase(Locale.ROOT);
                                         if (!"type".equals(lowerCase2)) {
                                             i2++;
                                         } else {
-                                            str = newPullParser.getAttributeValue(newPullParser.getAttributeNamespace(i2), lowerCase2).trim().toLowerCase(Locale.ROOT);
+                                            str =
+                                                    newPullParser
+                                                            .getAttributeValue(
+                                                                    newPullParser
+                                                                            .getAttributeNamespace(
+                                                                                    i2),
+                                                                    lowerCase2)
+                                                            .trim()
+                                                            .toLowerCase(Locale.ROOT);
                                             break;
                                         }
                                     }
                                 }
-                                Characteristic characteristic2 = new Characteristic(str, characteristic);
+                                Characteristic characteristic2 =
+                                        new Characteristic(str, characteristic);
                                 characteristic.getSubs().add(characteristic2);
                                 characteristic = characteristic2;
                             } else if (TAG_PARM.equals(lowerCase)) {
@@ -184,11 +203,30 @@ public final class RcsConfig {
                                 String str3 = null;
                                 if (attributeCount2 > 1) {
                                     for (int i3 = 0; i3 < attributeCount2; i3++) {
-                                        String lowerCase3 = newPullParser.getAttributeName(i3).trim().toLowerCase(Locale.ROOT);
+                                        String lowerCase3 =
+                                                newPullParser
+                                                        .getAttributeName(i3)
+                                                        .trim()
+                                                        .toLowerCase(Locale.ROOT);
                                         if ("name".equals(lowerCase3)) {
-                                            str2 = newPullParser.getAttributeValue(newPullParser.getAttributeNamespace(i3), lowerCase3).trim().toLowerCase(Locale.ROOT);
+                                            str2 =
+                                                    newPullParser
+                                                            .getAttributeValue(
+                                                                    newPullParser
+                                                                            .getAttributeNamespace(
+                                                                                    i3),
+                                                                    lowerCase3)
+                                                            .trim()
+                                                            .toLowerCase(Locale.ROOT);
                                         } else if ("value".equals(lowerCase3)) {
-                                            str3 = newPullParser.getAttributeValue(newPullParser.getAttributeNamespace(i3), lowerCase3).trim();
+                                            str3 =
+                                                    newPullParser
+                                                            .getAttributeValue(
+                                                                    newPullParser
+                                                                            .getAttributeNamespace(
+                                                                                    i3),
+                                                                    lowerCase3)
+                                                            .trim();
                                         }
                                     }
                                 }
@@ -197,7 +235,14 @@ public final class RcsConfig {
                                 }
                             }
                         } else if (eventType == 3) {
-                            characteristic = TAG_CHARACTERISTIC.equals(newPullParser.getName().trim().toLowerCase(Locale.ROOT)) ? characteristic.getParent() : characteristic;
+                            characteristic =
+                                    TAG_CHARACTERISTIC.equals(
+                                                    newPullParser
+                                                            .getName()
+                                                            .trim()
+                                                            .toLowerCase(Locale.ROOT))
+                                            ? characteristic.getParent()
+                                            : characteristic;
                         }
                         eventType = newPullParser.next();
                         characteristicIA = null;
@@ -339,7 +384,9 @@ public final class RcsConfig {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             GZIPInputStream gzipDecompressingStream = new GZIPInputStream(inputStream);
             byte[] buf = new byte[1024];
-            for (int size = gzipDecompressingStream.read(buf); size >= 0; size = gzipDecompressingStream.read(buf)) {
+            for (int size = gzipDecompressingStream.read(buf);
+                    size >= 0;
+                    size = gzipDecompressingStream.read(buf)) {
                 outputStream.write(buf, 0, size);
             }
             gzipDecompressingStream.close();
@@ -353,37 +400,39 @@ public final class RcsConfig {
         }
     }
 
-    public static void updateConfigForSub(Context cxt, int subId, byte[] config, boolean isCompressed) {
+    public static void updateConfigForSub(
+            Context cxt, int subId, byte[] config, boolean isCompressed) {
         byte[] data = isCompressed ? config : compressGzip(config);
         ContentValues values = new ContentValues();
         values.put(Telephony.SimInfo.COLUMN_RCS_CONFIG, data);
-        cxt.getContentResolver().update(Telephony.SimInfo.CONTENT_URI, values, "_id=" + subId, null);
+        cxt.getContentResolver()
+                .update(Telephony.SimInfo.CONTENT_URI, values, "_id=" + subId, null);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0070, code lost:
-    
-        return decompressGzip(r0);
-     */
+
+       return decompressGzip(r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:11:0x005b, code lost:
-    
-        r1.close();
-     */
+
+       r1.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0059, code lost:
-    
-        if (r1 == null) goto L19;
-     */
+
+       if (r1 == null) goto L19;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:4:0x0065, code lost:
-    
-        if (r1 != null) goto L13;
-     */
+
+       if (r1 != null) goto L13;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:5:0x0068, code lost:
-    
-        if (r9 == false) goto L21;
-     */
+
+       if (r9 == false) goto L21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:7:?, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -447,7 +496,10 @@ public final class RcsConfig {
         L70:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.telephony.ims.RcsConfig.loadRcsConfigForSub(android.content.Context, int, boolean):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.telephony.ims.RcsConfig.loadRcsConfigForSub(android.content.Context,"
+                    + " int, boolean):byte[]");
     }
 
     private static void logd(String msg) {

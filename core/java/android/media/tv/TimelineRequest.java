@@ -5,20 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class TimelineRequest extends BroadcastInfoRequest implements Parcelable {
-    public static final Parcelable.Creator<TimelineRequest> CREATOR = new Parcelable.Creator<TimelineRequest>() { // from class: android.media.tv.TimelineRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimelineRequest createFromParcel(Parcel source) {
-            source.readInt();
-            return TimelineRequest.createFromParcelBody(source);
-        }
+    public static final Parcelable.Creator<TimelineRequest> CREATOR =
+            new Parcelable.Creator<
+                    TimelineRequest>() { // from class: android.media.tv.TimelineRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimelineRequest createFromParcel(Parcel source) {
+                    source.readInt();
+                    return TimelineRequest.createFromParcelBody(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimelineRequest[] newArray(int size) {
-            return new TimelineRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimelineRequest[] newArray(int size) {
+                    return new TimelineRequest[size];
+                }
+            };
     private static final int REQUEST_TYPE = 8;
     private final int mIntervalMillis;
     private final String mSelector;

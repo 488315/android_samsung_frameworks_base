@@ -36,56 +36,47 @@ public interface ITvRemoteServiceInput extends IInterface {
 
     public static class Default implements ITvRemoteServiceInput {
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void openInputBridge(IBinder token, String name, int width, int height, int maxPointers) throws RemoteException {
-        }
+        public void openInputBridge(
+                IBinder token, String name, int width, int height, int maxPointers)
+                throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void closeInputBridge(IBinder token) throws RemoteException {
-        }
+        public void closeInputBridge(IBinder token) throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void clearInputBridge(IBinder token) throws RemoteException {
-        }
+        public void clearInputBridge(IBinder token) throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void sendTimestamp(IBinder token, long timestamp) throws RemoteException {
-        }
+        public void sendTimestamp(IBinder token, long timestamp) throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void sendKeyDown(IBinder token, int keyCode) throws RemoteException {
-        }
+        public void sendKeyDown(IBinder token, int keyCode) throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void sendKeyUp(IBinder token, int keyCode) throws RemoteException {
-        }
+        public void sendKeyUp(IBinder token, int keyCode) throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void sendPointerDown(IBinder token, int pointerId, int x, int y) throws RemoteException {
-        }
+        public void sendPointerDown(IBinder token, int pointerId, int x, int y)
+                throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void sendPointerUp(IBinder token, int pointerId) throws RemoteException {
-        }
+        public void sendPointerUp(IBinder token, int pointerId) throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void sendPointerSync(IBinder token) throws RemoteException {
-        }
+        public void sendPointerSync(IBinder token) throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void openGamepadBridge(IBinder token, String name) throws RemoteException {
-        }
+        public void openGamepadBridge(IBinder token, String name) throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void sendGamepadKeyDown(IBinder token, int keyCode) throws RemoteException {
-        }
+        public void sendGamepadKeyDown(IBinder token, int keyCode) throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void sendGamepadKeyUp(IBinder token, int keyCode) throws RemoteException {
-        }
+        public void sendGamepadKeyUp(IBinder token, int keyCode) throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteServiceInput
-        public void sendGamepadAxisValue(IBinder token, int axis, float value) throws RemoteException {
-        }
+        public void sendGamepadAxisValue(IBinder token, int axis, float value)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -93,7 +84,7 @@ public interface ITvRemoteServiceInput extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvRemoteServiceInput {
+    public abstract static class Stub extends Binder implements ITvRemoteServiceInput {
         public static final String DESCRIPTOR = "android.media.tv.ITvRemoteServiceInput";
         static final int TRANSACTION_clearInputBridge = 3;
         static final int TRANSACTION_closeInputBridge = 2;
@@ -168,7 +159,8 @@ public interface ITvRemoteServiceInput extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -280,7 +272,9 @@ public interface ITvRemoteServiceInput extends IInterface {
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
-            public void openInputBridge(IBinder token, String name, int width, int height, int maxPointers) throws RemoteException {
+            public void openInputBridge(
+                    IBinder token, String name, int width, int height, int maxPointers)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -359,7 +353,8 @@ public interface ITvRemoteServiceInput extends IInterface {
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
-            public void sendPointerDown(IBinder token, int pointerId, int x, int y) throws RemoteException {
+            public void sendPointerDown(IBinder token, int pointerId, int x, int y)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -438,7 +433,8 @@ public interface ITvRemoteServiceInput extends IInterface {
             }
 
             @Override // android.media.tv.ITvRemoteServiceInput
-            public void sendGamepadAxisValue(IBinder token, int axis, float value) throws RemoteException {
+            public void sendGamepadAxisValue(IBinder token, int axis, float value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

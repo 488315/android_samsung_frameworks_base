@@ -1,6 +1,7 @@
 package android.app.servertransaction;
 
 import com.android.window.flags.Flags;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,8 +12,7 @@ class ObjectPool {
     private static final Object sPoolSync = new Object();
     private static final Map<Class, ArrayList<? extends ObjectPoolItem>> sPoolMap = new HashMap();
 
-    ObjectPool() {
-    }
+    ObjectPool() {}
 
     public static <T extends ObjectPoolItem> T obtain(Class<T> itemClass) {
         if (Flags.disableObjectPool()) {

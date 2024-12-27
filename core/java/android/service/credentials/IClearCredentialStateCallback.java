@@ -10,7 +10,8 @@ import android.text.TextUtils;
 
 /* loaded from: classes3.dex */
 public interface IClearCredentialStateCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.credentials.IClearCredentialStateCallback";
+    public static final String DESCRIPTOR =
+            "android.service.credentials.IClearCredentialStateCallback";
 
     void onCancellable(ICancellationSignal iCancellationSignal) throws RemoteException;
 
@@ -20,16 +21,13 @@ public interface IClearCredentialStateCallback extends IInterface {
 
     public static class Default implements IClearCredentialStateCallback {
         @Override // android.service.credentials.IClearCredentialStateCallback
-        public void onSuccess() throws RemoteException {
-        }
+        public void onSuccess() throws RemoteException {}
 
         @Override // android.service.credentials.IClearCredentialStateCallback
-        public void onFailure(String errorType, CharSequence message) throws RemoteException {
-        }
+        public void onFailure(String errorType, CharSequence message) throws RemoteException {}
 
         @Override // android.service.credentials.IClearCredentialStateCallback
-        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {
-        }
+        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,7 +35,7 @@ public interface IClearCredentialStateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IClearCredentialStateCallback {
+    public abstract static class Stub extends Binder implements IClearCredentialStateCallback {
         static final int TRANSACTION_onCancellable = 3;
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
@@ -81,7 +79,8 @@ public interface IClearCredentialStateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IClearCredentialStateCallback.DESCRIPTOR);
             }
@@ -95,12 +94,14 @@ public interface IClearCredentialStateCallback extends IInterface {
                     return true;
                 case 2:
                     String _arg0 = data.readString();
-                    CharSequence _arg1 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg1 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg0, _arg1);
                     return true;
                 case 3:
-                    ICancellationSignal _arg02 = ICancellationSignal.Stub.asInterface(data.readStrongBinder());
+                    ICancellationSignal _arg02 =
+                            ICancellationSignal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCancellable(_arg02);
                     return true;

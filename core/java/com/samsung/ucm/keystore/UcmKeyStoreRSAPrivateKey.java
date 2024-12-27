@@ -18,16 +18,22 @@ public class UcmKeyStoreRSAPrivateKey extends UcmKeyStorePrivateKey implements R
         return this.mModulus;
     }
 
-    @Override // com.samsung.ucm.keystore.UcmKeyStorePrivateKey, com.samsung.ucm.keystore.UcmKeyStoreKey
+    @Override // com.samsung.ucm.keystore.UcmKeyStorePrivateKey,
+              // com.samsung.ucm.keystore.UcmKeyStoreKey
     public boolean equals(Object obj) {
         if (!(obj instanceof UcmKeyStoreRSAPrivateKey) || !super.equals(obj)) {
             return false;
         }
         UcmKeyStoreRSAPrivateKey objKey = (UcmKeyStoreRSAPrivateKey) obj;
-        return (this.mModulus == null || objKey.mModulus == null || !this.mModulus.equals(objKey.mModulus)) ? false : true;
+        return (this.mModulus == null
+                        || objKey.mModulus == null
+                        || !this.mModulus.equals(objKey.mModulus))
+                ? false
+                : true;
     }
 
-    @Override // com.samsung.ucm.keystore.UcmKeyStorePrivateKey, com.samsung.ucm.keystore.UcmKeyStoreKey
+    @Override // com.samsung.ucm.keystore.UcmKeyStorePrivateKey,
+              // com.samsung.ucm.keystore.UcmKeyStoreKey
     public int hashCode() {
         if (this.mModulus == null) {
             return 1;

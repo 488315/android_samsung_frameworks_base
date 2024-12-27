@@ -3,25 +3,29 @@ package vendor.samsung.hardware.radio.messaging;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehCdmaSmsMessage implements Parcelable {
-    public static final Parcelable.Creator<SehCdmaSmsMessage> CREATOR = new Parcelable.Creator<SehCdmaSmsMessage>() { // from class: vendor.samsung.hardware.radio.messaging.SehCdmaSmsMessage.1
-        @Override // android.os.Parcelable.Creator
-        public SehCdmaSmsMessage createFromParcel(Parcel _aidl_source) {
-            SehCdmaSmsMessage _aidl_out = new SehCdmaSmsMessage();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehCdmaSmsMessage> CREATOR =
+            new Parcelable.Creator<
+                    SehCdmaSmsMessage>() { // from class:
+                                           // vendor.samsung.hardware.radio.messaging.SehCdmaSmsMessage.1
+                @Override // android.os.Parcelable.Creator
+                public SehCdmaSmsMessage createFromParcel(Parcel _aidl_source) {
+                    SehCdmaSmsMessage _aidl_out = new SehCdmaSmsMessage();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehCdmaSmsMessage[] newArray(int _aidl_size) {
-            return new SehCdmaSmsMessage[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehCdmaSmsMessage[] newArray(int _aidl_size) {
+                    return new SehCdmaSmsMessage[_aidl_size];
+                }
+            };
     public SehCdmaSmsAddress address;
     public byte[] bearerData;
     public SehCdmaSmsSubaddress subAddress;
@@ -88,7 +92,8 @@ public class SehCdmaSmsMessage implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.address = (SehCdmaSmsAddress) _aidl_parcel.readTypedObject(SehCdmaSmsAddress.CREATOR);
+            this.address =
+                    (SehCdmaSmsAddress) _aidl_parcel.readTypedObject(SehCdmaSmsAddress.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -96,7 +101,9 @@ public class SehCdmaSmsMessage implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.subAddress = (SehCdmaSmsSubaddress) _aidl_parcel.readTypedObject(SehCdmaSmsSubaddress.CREATOR);
+            this.subAddress =
+                    (SehCdmaSmsSubaddress)
+                            _aidl_parcel.readTypedObject(SehCdmaSmsSubaddress.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

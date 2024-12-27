@@ -13,20 +13,25 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+
 import com.android.internal.R;
-import com.android.internal.widget.NotificationActionListLayout;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
 @RemoteViews.RemoteView
 /* loaded from: classes5.dex */
 public class NotificationActionListLayout extends LinearLayout {
-    public static final Comparator<TextViewInfo> MEASURE_ORDER_COMPARATOR = new Comparator() { // from class: com.android.internal.widget.NotificationActionListLayout$$ExternalSyntheticLambda0
-        @Override // java.util.Comparator
-        public final int compare(Object obj, Object obj2) {
-            return NotificationActionListLayout.lambda$static$0((NotificationActionListLayout.TextViewInfo) obj, (NotificationActionListLayout.TextViewInfo) obj2);
-        }
-    };
+    public static final Comparator<TextViewInfo> MEASURE_ORDER_COMPARATOR =
+            new Comparator() { // from class:
+                               // com.android.internal.widget.NotificationActionListLayout$$ExternalSyntheticLambda0
+                @Override // java.util.Comparator
+                public final int compare(Object obj, Object obj2) {
+                    return NotificationActionListLayout.lambda$static$0(
+                            (NotificationActionListLayout.TextViewInfo) obj,
+                            (NotificationActionListLayout.TextViewInfo) obj2);
+                }
+            };
     private static final String TAG = "NotificationActionListLayout";
     private int mCollapsibleIndentDimen;
     private int mDefaultPaddingBottom;
@@ -53,7 +58,8 @@ public class NotificationActionListLayout extends LinearLayout {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public NotificationActionListLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public NotificationActionListLayout(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mTotalWidth = 0;
         this.mExtraStartPadding = 0;
@@ -68,7 +74,8 @@ public class NotificationActionListLayout extends LinearLayout {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static boolean isPriority(View actionView) {
-        return (actionView instanceof EmphasizedNotificationButton) && ((EmphasizedNotificationButton) actionView).isPriority();
+        return (actionView instanceof EmphasizedNotificationButton)
+                && ((EmphasizedNotificationButton) actionView).isPriority();
     }
 
     private void countAndRebuildMeasureOrder() {
@@ -92,7 +99,8 @@ public class NotificationActionListLayout extends LinearLayout {
             }
         }
         int i2 = 0;
-        if (textViews != this.mMeasureOrderTextViews.size() || otherViews != this.mMeasureOrderOther.size()) {
+        if (textViews != this.mMeasureOrderTextViews.size()
+                || otherViews != this.mMeasureOrderOther.size()) {
             i2 = 1;
         }
         if (i2 == 0) {
@@ -121,14 +129,28 @@ public class NotificationActionListLayout extends LinearLayout {
         for (int i = 0; i < numChildren; i++) {
             View child = getChildAt(i);
             if (child.getVisibility() != 8) {
-                ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
+                ViewGroup.MarginLayoutParams lp =
+                        (ViewGroup.MarginLayoutParams) child.getLayoutParams();
                 childMarginSum += lp.leftMargin + lp.rightMargin;
             }
         }
         int i2 = innerWidth - childMarginSum;
         int childWidth = i2 / this.mNumNotGoneChildren;
         int childWidthMeasureSpec = View.MeasureSpec.makeMeasureSpec(childWidth, 1073741824);
-        Log.v(TAG, "measuring evenly divided width: numChildren = " + numChildren + ", innerWidth = " + innerWidth + "px, childMarginSum = " + childMarginSum + "px, innerWidthMinusChildMargins = " + i2 + "px, childWidth = " + childWidth + "px, childWidthMeasureSpec = " + View.MeasureSpec.toString(childWidthMeasureSpec));
+        Log.v(
+                TAG,
+                "measuring evenly divided width: numChildren = "
+                        + numChildren
+                        + ", innerWidth = "
+                        + innerWidth
+                        + "px, childMarginSum = "
+                        + childMarginSum
+                        + "px, innerWidthMinusChildMargins = "
+                        + i2
+                        + "px, childWidth = "
+                        + childWidth
+                        + "px, childWidthMeasureSpec = "
+                        + View.MeasureSpec.toString(childWidthMeasureSpec));
         for (int i3 = 0; i3 < numChildren; i3++) {
             View child2 = getChildAt(i3);
             if (child2.getVisibility() != 8) {
@@ -138,7 +160,11 @@ public class NotificationActionListLayout extends LinearLayout {
         return innerWidth;
     }
 
-    private int measureAndGetUsedWidth(int widthMeasureSpec, int heightMeasureSpec, int innerWidth, boolean collapsePriorityActions) {
+    private int measureAndGetUsedWidth(
+            int widthMeasureSpec,
+            int heightMeasureSpec,
+            int innerWidth,
+            boolean collapsePriorityActions) {
         int i;
         View c;
         boolean isPriority;
@@ -167,7 +193,8 @@ public class NotificationActionListLayout extends LinearLayout {
             if (c.getVisibility() == 8) {
                 numChildren = numChildren2;
             } else {
-                ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) c.getLayoutParams();
+                ViewGroup.MarginLayoutParams lp =
+                        (ViewGroup.MarginLayoutParams) c.getLayoutParams();
                 int usedWidthForChild2 = usedWidth;
                 if (!constrained) {
                     usedWidthForChild = usedWidthForChild2;
@@ -178,22 +205,31 @@ public class NotificationActionListLayout extends LinearLayout {
                     int maxWidthForChild = availableWidth / unmeasuredChildren;
                     if (isPriority && collapsePriorityActions) {
                         if (maxPriorityWidth2 == 0) {
-                            maxPriorityWidth2 = getResources().getDimensionPixelSize(R.dimen.notification_actions_collapsed_priority_width);
+                            maxPriorityWidth2 =
+                                    getResources()
+                                            .getDimensionPixelSize(
+                                                    R.dimen
+                                                            .notification_actions_collapsed_priority_width);
                         }
                         int usedWidthForChild3 = lp.leftMargin;
                         maxWidthForChild = usedWidthForChild3 + maxPriorityWidth2 + lp.rightMargin;
                     } else if (isPriority) {
-                        int unmeasuredPriorityChildren = this.mNumPriorityChildren - measuredPriorityChildren;
-                        int unmeasuredOtherChildren = unmeasuredChildren - unmeasuredPriorityChildren;
-                        int widthReservedForOtherChildren = (innerWidth * unmeasuredOtherChildren) / 4;
-                        int widthAvailableForPriority = availableWidth - widthReservedForOtherChildren;
+                        int unmeasuredPriorityChildren =
+                                this.mNumPriorityChildren - measuredPriorityChildren;
+                        int unmeasuredOtherChildren =
+                                unmeasuredChildren - unmeasuredPriorityChildren;
+                        int widthReservedForOtherChildren =
+                                (innerWidth * unmeasuredOtherChildren) / 4;
+                        int widthAvailableForPriority =
+                                availableWidth - widthReservedForOtherChildren;
                         maxWidthForChild = widthAvailableForPriority / unmeasuredPriorityChildren;
                     }
                     usedWidthForChild = innerWidth - maxWidthForChild;
                     maxPriorityWidth = maxPriorityWidth2;
                 }
                 numChildren = numChildren2;
-                measureChildWithMargins(c, widthMeasureSpec, usedWidthForChild, heightMeasureSpec, 0);
+                measureChildWithMargins(
+                        c, widthMeasureSpec, usedWidthForChild, heightMeasureSpec, 0);
                 usedWidth += c.getMeasuredWidth() + lp.rightMargin + lp.leftMargin;
                 measuredChildren++;
                 if (!isPriority) {
@@ -206,7 +242,10 @@ public class NotificationActionListLayout extends LinearLayout {
             i2++;
             numChildren2 = numChildren;
         }
-        int collapsibleIndent = this.mCollapsibleIndentDimen == 0 ? 0 : getResources().getDimensionPixelOffset(this.mCollapsibleIndentDimen);
+        int collapsibleIndent =
+                this.mCollapsibleIndentDimen == 0
+                        ? 0
+                        : getResources().getDimensionPixelOffset(this.mCollapsibleIndentDimen);
         if (innerWidth - usedWidth > collapsibleIndent) {
             this.mExtraStartPadding = collapsibleIndent;
             i = 0;
@@ -224,17 +263,25 @@ public class NotificationActionListLayout extends LinearLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int usedWidth;
         countAndRebuildMeasureOrder();
-        int innerWidth = (View.MeasureSpec.getSize(widthMeasureSpec) - this.mPaddingLeft) - this.mPaddingRight;
+        int innerWidth =
+                (View.MeasureSpec.getSize(widthMeasureSpec) - this.mPaddingLeft)
+                        - this.mPaddingRight;
         if (this.mEvenlyDividedMode) {
             usedWidth = measureAndReturnEvenlyDividedWidth(heightMeasureSpec, innerWidth);
         } else {
-            usedWidth = measureAndGetUsedWidth(widthMeasureSpec, heightMeasureSpec, innerWidth, false);
+            usedWidth =
+                    measureAndGetUsedWidth(widthMeasureSpec, heightMeasureSpec, innerWidth, false);
             if (this.mNumPriorityChildren != 0 && usedWidth >= innerWidth) {
-                usedWidth = measureAndGetUsedWidth(widthMeasureSpec, heightMeasureSpec, innerWidth, true);
+                usedWidth =
+                        measureAndGetUsedWidth(
+                                widthMeasureSpec, heightMeasureSpec, innerWidth, true);
             }
         }
-        this.mTotalWidth = this.mPaddingRight + usedWidth + this.mPaddingLeft + this.mExtraStartPadding;
-        setMeasuredDimension(resolveSize(getSuggestedMinimumWidth(), widthMeasureSpec), resolveSize(getSuggestedMinimumHeight(), heightMeasureSpec));
+        this.mTotalWidth =
+                this.mPaddingRight + usedWidth + this.mPaddingLeft + this.mExtraStartPadding;
+        setMeasuredDimension(
+                resolveSize(getSuggestedMinimumWidth(), widthMeasureSpec),
+                resolveSize(getSuggestedMinimumHeight(), heightMeasureSpec));
     }
 
     private void rebuildMeasureOrder(int capacityText, int capacityOther) {
@@ -283,18 +330,22 @@ public class NotificationActionListLayout extends LinearLayout {
         int paddingTop2 = notificationActionListLayout.mPaddingTop;
         boolean centerAligned = (notificationActionListLayout.mGravity & 1) != 0;
         if (centerAligned) {
-            childLeft = ((notificationActionListLayout.mPaddingLeft + left) + ((right - left) / 2)) - (notificationActionListLayout.mTotalWidth / 2);
+            childLeft =
+                    ((notificationActionListLayout.mPaddingLeft + left) + ((right - left) / 2))
+                            - (notificationActionListLayout.mTotalWidth / 2);
         } else {
             int childLeft2 = notificationActionListLayout.mPaddingLeft;
             int absoluteGravity = Gravity.getAbsoluteGravity(Gravity.START, getLayoutDirection());
             if (absoluteGravity == 5) {
-                childLeft = childLeft2 + ((right - left) - notificationActionListLayout.mTotalWidth);
+                childLeft =
+                        childLeft2 + ((right - left) - notificationActionListLayout.mTotalWidth);
             } else {
                 childLeft = childLeft2 + notificationActionListLayout.mExtraStartPadding;
             }
         }
         int absoluteGravity2 = bottom - top;
-        int innerHeight = (absoluteGravity2 - paddingTop2) - notificationActionListLayout.mPaddingBottom;
+        int innerHeight =
+                (absoluteGravity2 - paddingTop2) - notificationActionListLayout.mPaddingBottom;
         int count = getChildCount();
         int start = 0;
         int dir = 1;
@@ -313,8 +364,11 @@ public class NotificationActionListLayout extends LinearLayout {
             } else {
                 int childWidth = child.getMeasuredWidth();
                 int childHeight = child.getMeasuredHeight();
-                ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
-                int childTop = ((paddingTop2 + ((innerHeight - childHeight) / 2)) + lp.topMargin) - lp.bottomMargin;
+                ViewGroup.MarginLayoutParams lp =
+                        (ViewGroup.MarginLayoutParams) child.getLayoutParams();
+                int childTop =
+                        ((paddingTop2 + ((innerHeight - childHeight) / 2)) + lp.topMargin)
+                                - lp.bottomMargin;
                 isLayoutRtl = isLayoutRtl2;
                 int childLeft3 = childLeft + lp.leftMargin;
                 paddingTop = paddingTop2;
@@ -338,10 +392,19 @@ public class NotificationActionListLayout extends LinearLayout {
 
     private void updateHeights() {
         int inset = getResources().getDimensionPixelSize(R.dimen.button_inset_vertical_material);
-        this.mEmphasizedPaddingTop = getResources().getDimensionPixelSize(R.dimen.notification_content_margin) - inset;
-        this.mEmphasizedPaddingBottom = getResources().getDimensionPixelSize(R.dimen.notification_content_margin_end) - inset;
-        this.mEmphasizedHeight = this.mEmphasizedPaddingTop + this.mEmphasizedPaddingBottom + getResources().getDimensionPixelSize(R.dimen.notification_action_emphasized_height);
-        this.mRegularHeight = getResources().getDimensionPixelSize(R.dimen.notification_action_list_height);
+        this.mEmphasizedPaddingTop =
+                getResources().getDimensionPixelSize(R.dimen.notification_content_margin) - inset;
+        this.mEmphasizedPaddingBottom =
+                getResources().getDimensionPixelSize(R.dimen.notification_content_margin_end)
+                        - inset;
+        this.mEmphasizedHeight =
+                this.mEmphasizedPaddingTop
+                        + this.mEmphasizedPaddingBottom
+                        + getResources()
+                                .getDimensionPixelSize(
+                                        R.dimen.notification_action_emphasized_height);
+        this.mRegularHeight =
+                getResources().getDimensionPixelSize(R.dimen.notification_action_list_height);
     }
 
     @RemotableViewMethod
@@ -355,7 +418,10 @@ public class NotificationActionListLayout extends LinearLayout {
     @RemotableViewMethod
     public void setEvenlyDividedMode(boolean evenlyDividedMode) {
         if (evenlyDividedMode && !Flags.evenlyDividedCallStyleActionLayout()) {
-            Log.e(TAG, "setEvenlyDividedMode(true) called with new action layout disabled; leaving evenly divided mode disabled");
+            Log.e(
+                    TAG,
+                    "setEvenlyDividedMode(true) called with new action layout disabled; leaving"
+                        + " evenly divided mode disabled");
         } else if (evenlyDividedMode != this.mEvenlyDividedMode) {
             Log.v(TAG, "evenlyDividedMode changed to " + evenlyDividedMode + "; requesting layout");
             this.mEvenlyDividedMode = evenlyDividedMode;
@@ -369,12 +435,17 @@ public class NotificationActionListLayout extends LinearLayout {
         this.mEmphasizedMode = emphasizedMode;
         setShowDividers(this.mEmphasizedMode ? 0 : 2);
         if (emphasizedMode) {
-            setPaddingRelative(getPaddingStart(), this.mEmphasizedPaddingTop, getPaddingEnd(), this.mEmphasizedPaddingBottom);
+            setPaddingRelative(
+                    getPaddingStart(),
+                    this.mEmphasizedPaddingTop,
+                    getPaddingEnd(),
+                    this.mEmphasizedPaddingBottom);
             setMinimumHeight(this.mEmphasizedHeight);
             height = -2;
         } else {
             int height2 = getPaddingStart();
-            setPaddingRelative(height2, this.mDefaultPaddingTop, getPaddingEnd(), this.mDefaultPaddingBottom);
+            setPaddingRelative(
+                    height2, this.mDefaultPaddingTop, getPaddingEnd(), this.mDefaultPaddingBottom);
             height = this.mRegularHeight;
         }
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
@@ -414,7 +485,11 @@ public class NotificationActionListLayout extends LinearLayout {
         }
 
         boolean needsRebuild() {
-            return (this.mTextView.getText().length() == this.mTextLength && NotificationActionListLayout.isPriority(this.mTextView) == this.mIsPriority) ? false : true;
+            return (this.mTextView.getText().length() == this.mTextLength
+                            && NotificationActionListLayout.isPriority(this.mTextView)
+                                    == this.mIsPriority)
+                    ? false
+                    : true;
         }
     }
 }

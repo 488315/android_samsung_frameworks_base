@@ -6,23 +6,26 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ParcelableException;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class ContentProviderResult implements Parcelable {
-    public static final Parcelable.Creator<ContentProviderResult> CREATOR = new Parcelable.Creator<ContentProviderResult>() { // from class: android.content.ContentProviderResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentProviderResult createFromParcel(Parcel source) {
-            return new ContentProviderResult(source);
-        }
+    public static final Parcelable.Creator<ContentProviderResult> CREATOR =
+            new Parcelable.Creator<ContentProviderResult>() { // from class:
+                // android.content.ContentProviderResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentProviderResult createFromParcel(Parcel source) {
+                    return new ContentProviderResult(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentProviderResult[] newArray(int size) {
-            return new ContentProviderResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentProviderResult[] newArray(int size) {
+                    return new ContentProviderResult[size];
+                }
+            };
     public final Integer count;
     public final Throwable exception;
     public final Bundle extras;

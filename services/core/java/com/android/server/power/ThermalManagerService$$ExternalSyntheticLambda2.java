@@ -7,12 +7,14 @@ import android.os.Temperature;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class ThermalManagerService$$ExternalSyntheticLambda2 implements Runnable {
+public final /* synthetic */ class ThermalManagerService$$ExternalSyntheticLambda2
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ ThermalManagerService$$ExternalSyntheticLambda2(int i, Object obj, Object obj2) {
+    public /* synthetic */ ThermalManagerService$$ExternalSyntheticLambda2(
+            int i, Object obj, Object obj2) {
         this.$r8$classId = i;
         this.f$0 = obj;
         this.f$1 = obj2;
@@ -26,7 +28,8 @@ public final /* synthetic */ class ThermalManagerService$$ExternalSyntheticLambd
                     ((IThermalEventListener) this.f$0).notifyThrottling((Temperature) this.f$1);
                     break;
                 } catch (RemoteException | RuntimeException e) {
-                    android.util.Slog.e("ThermalManagerService", "Thermal callback failed to call", e);
+                    android.util.Slog.e(
+                            "ThermalManagerService", "Thermal callback failed to call", e);
                     return;
                 }
             default:
@@ -37,7 +40,8 @@ public final /* synthetic */ class ThermalManagerService$$ExternalSyntheticLambd
                     iThermalStatusListener.onStatusChange(thermalManagerService.mStatus);
                     break;
                 } catch (RemoteException | RuntimeException e2) {
-                    android.util.Slog.e("ThermalManagerService", "Thermal callback failed to call", e2);
+                    android.util.Slog.e(
+                            "ThermalManagerService", "Thermal callback failed to call", e2);
                 }
         }
     }

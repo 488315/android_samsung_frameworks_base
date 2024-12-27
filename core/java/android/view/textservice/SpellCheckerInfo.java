@@ -15,11 +15,14 @@ import android.util.AttributeSet;
 import android.util.PrintWriterPrinter;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.R;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes4.dex */
 public final class SpellCheckerInfo implements Parcelable {
@@ -29,21 +32,24 @@ public final class SpellCheckerInfo implements Parcelable {
     private final String mSettingsActivityName;
     private final ArrayList<SpellCheckerSubtype> mSubtypes = new ArrayList<>();
     private static final String TAG = SpellCheckerInfo.class.getSimpleName();
-    public static final Parcelable.Creator<SpellCheckerInfo> CREATOR = new Parcelable.Creator<SpellCheckerInfo>() { // from class: android.view.textservice.SpellCheckerInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SpellCheckerInfo createFromParcel(Parcel source) {
-            return new SpellCheckerInfo(source);
-        }
+    public static final Parcelable.Creator<SpellCheckerInfo> CREATOR =
+            new Parcelable.Creator<
+                    SpellCheckerInfo>() { // from class: android.view.textservice.SpellCheckerInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SpellCheckerInfo createFromParcel(Parcel source) {
+                    return new SpellCheckerInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SpellCheckerInfo[] newArray(int size) {
-            return new SpellCheckerInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SpellCheckerInfo[] newArray(int size) {
+                    return new SpellCheckerInfo[size];
+                }
+            };
 
-    public SpellCheckerInfo(Context context, ResolveInfo service) throws XmlPullParserException, IOException {
+    public SpellCheckerInfo(Context context, ResolveInfo service)
+            throws XmlPullParserException, IOException {
         int type;
         int i;
         Resources res;
@@ -69,7 +75,8 @@ public final class SpellCheckerInfo implements Parcelable {
                 } while (type != 2);
                 String nodeName = parser.getName();
                 if (!"spell-checker".equals(nodeName)) {
-                    throw new XmlPullParserException("Meta-data does not start with spell-checker tag");
+                    throw new XmlPullParserException(
+                            "Meta-data does not start with spell-checker tag");
                 }
                 TypedArray sa = res2.obtainAttributes(attrs, R.styleable.SpellChecker);
                 int label = sa.getResourceId(0, 0);
@@ -86,11 +93,19 @@ public final class SpellCheckerInfo implements Parcelable {
                     } else {
                         String subtypeNodeName = parser.getName();
                         if (!"subtype".equals(subtypeNodeName)) {
-                            throw new XmlPullParserException("Meta-data in spell-checker does not start with subtype tag");
+                            throw new XmlPullParserException(
+                                    "Meta-data in spell-checker does not start with subtype tag");
                         }
-                        TypedArray a = res2.obtainAttributes(attrs, R.styleable.SpellChecker_Subtype);
+                        TypedArray a =
+                                res2.obtainAttributes(attrs, R.styleable.SpellChecker_Subtype);
                         res = res2;
-                        SpellCheckerSubtype subtype = new SpellCheckerSubtype(a.getResourceId(0, 0), a.getString(1), a.getString(4), a.getString(2), a.getInt(3, 0));
+                        SpellCheckerSubtype subtype =
+                                new SpellCheckerSubtype(
+                                        a.getResourceId(0, 0),
+                                        a.getString(1),
+                                        a.getString(4),
+                                        a.getString(2),
+                                        a.getInt(3, 0));
                         a.recycle();
                         this.mSubtypes.add(subtype);
                     }
@@ -123,7 +138,8 @@ public final class SpellCheckerInfo implements Parcelable {
     }
 
     public ComponentName getComponent() {
-        return new ComponentName(this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
+        return new ComponentName(
+                this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
     }
 
     public String getPackageName() {
@@ -180,7 +196,12 @@ public final class SpellCheckerInfo implements Parcelable {
         for (int i = 0; i < N; i++) {
             SpellCheckerSubtype st = getSubtypeAt(i);
             pw.println(prefix + "  Subtype #" + i + ":");
-            pw.println(prefix + "    locale=" + st.getLocale() + " languageTag=" + st.getLanguageTag());
+            pw.println(
+                    prefix
+                            + "    locale="
+                            + st.getLocale()
+                            + " languageTag="
+                            + st.getLanguageTag());
             pw.println(prefix + "    extraValue=" + st.getExtraValue());
         }
     }

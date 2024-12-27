@@ -9,6 +9,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.AttributeCertificate;
 import com.android.internal.org.bouncycastle.asn1.x509.Extension;
 import com.android.internal.org.bouncycastle.asn1.x509.Extensions;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,8 +58,10 @@ public class X509V2AttributeCertificate implements X509AttributeCertificate {
     X509V2AttributeCertificate(AttributeCertificate cert) throws IOException {
         this.cert = cert;
         try {
-            this.notAfter = cert.getAcinfo().getAttrCertValidityPeriod().getNotAfterTime().getDate();
-            this.notBefore = cert.getAcinfo().getAttrCertValidityPeriod().getNotBeforeTime().getDate();
+            this.notAfter =
+                    cert.getAcinfo().getAttrCertValidityPeriod().getNotAfterTime().getDate();
+            this.notBefore =
+                    cert.getAcinfo().getAttrCertValidityPeriod().getNotBeforeTime().getDate();
         } catch (ParseException e) {
             throw new IOException("invalid data structure in certificate!");
         }
@@ -76,7 +79,8 @@ public class X509V2AttributeCertificate implements X509AttributeCertificate {
 
     @Override // com.android.internal.org.bouncycastle.x509.X509AttributeCertificate
     public AttributeCertificateHolder getHolder() {
-        return new AttributeCertificateHolder((ASN1Sequence) this.cert.getAcinfo().getHolder().toASN1Primitive());
+        return new AttributeCertificateHolder(
+                (ASN1Sequence) this.cert.getAcinfo().getHolder().toASN1Primitive());
     }
 
     @Override // com.android.internal.org.bouncycastle.x509.X509AttributeCertificate
@@ -109,17 +113,20 @@ public class X509V2AttributeCertificate implements X509AttributeCertificate {
     }
 
     @Override // com.android.internal.org.bouncycastle.x509.X509AttributeCertificate
-    public void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity()
+            throws CertificateExpiredException, CertificateNotYetValidException {
         checkValidity(new Date());
     }
 
     @Override // com.android.internal.org.bouncycastle.x509.X509AttributeCertificate
-    public void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity(Date date)
+            throws CertificateExpiredException, CertificateNotYetValidException {
         if (date.after(getNotAfter())) {
             throw new CertificateExpiredException("certificate expired on " + getNotAfter());
         }
         if (date.before(getNotBefore())) {
-            throw new CertificateNotYetValidException("certificate not valid till " + getNotBefore());
+            throw new CertificateNotYetValidException(
+                    "certificate not valid till " + getNotBefore());
         }
     }
 
@@ -129,11 +136,19 @@ public class X509V2AttributeCertificate implements X509AttributeCertificate {
     }
 
     @Override // com.android.internal.org.bouncycastle.x509.X509AttributeCertificate
-    public final void verify(PublicKey key, String provider) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public final void verify(PublicKey key, String provider)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    NoSuchProviderException,
+                    SignatureException {
         if (!this.cert.getSignatureAlgorithm().equals(this.cert.getAcinfo().getSignature())) {
-            throw new CertificateException("Signature algorithm in certificate info not same as outer certificate");
+            throw new CertificateException(
+                    "Signature algorithm in certificate info not same as outer certificate");
         }
-        Signature signature = Signature.getInstance(this.cert.getSignatureAlgorithm().getAlgorithm().getId(), provider);
+        Signature signature =
+                Signature.getInstance(
+                        this.cert.getSignatureAlgorithm().getAlgorithm().getId(), provider);
         signature.initVerify(key);
         try {
             signature.update(this.cert.getAcinfo().getEncoded());
@@ -154,7 +169,8 @@ public class X509V2AttributeCertificate implements X509AttributeCertificate {
     public byte[] getExtensionValue(String oid) {
         Extension ext;
         Extensions extensions = this.cert.getAcinfo().getExtensions();
-        if (extensions != null && (ext = extensions.getExtension(new ASN1ObjectIdentifier(oid))) != null) {
+        if (extensions != null
+                && (ext = extensions.getExtension(new ASN1ObjectIdentifier(oid))) != null) {
             try {
                 return ext.getExtnValue().getEncoded(ASN1Encoding.DER);
             } catch (Exception e) {

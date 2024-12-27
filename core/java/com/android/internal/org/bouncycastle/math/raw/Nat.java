@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.math.raw;
 
 import com.android.internal.org.bouncycastle.util.Pack;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -76,7 +77,11 @@ public abstract class Nat {
     public static int addBothTo(int len, int[] x, int xOff, int[] y, int yOff, int[] z, int zOff) {
         long c = 0;
         for (int i = 0; i < len; i++) {
-            long c2 = c + (x[xOff + i] & 4294967295L) + (y[yOff + i] & 4294967295L) + (4294967295L & z[zOff + i]);
+            long c2 =
+                    c
+                            + (x[xOff + i] & 4294967295L)
+                            + (y[yOff + i] & 4294967295L)
+                            + (4294967295L & z[zOff + i]);
             z[zOff + i] = (int) c2;
             c = c2 >>> 32;
         }
@@ -303,7 +308,8 @@ public abstract class Nat {
         return (int) c;
     }
 
-    public static int csub(int len, int mask, int[] x, int xOff, int[] y, int yOff, int[] z, int zOff) {
+    public static int csub(
+            int len, int mask, int[] x, int xOff, int[] y, int yOff, int[] z, int zOff) {
         long MASK = (-(mask & 1)) & 4294967295L;
         long c = 0;
         for (int i = 0; i < len; i++) {
@@ -608,7 +614,8 @@ public abstract class Nat {
         }
     }
 
-    public static void mul(int[] x, int xOff, int xLen, int[] y, int yOff, int yLen, int[] zz, int zzOff) {
+    public static void mul(
+            int[] x, int xOff, int xLen, int[] y, int yOff, int yLen, int[] zz, int zzOff) {
         zz[zzOff + yLen] = mulWord(yLen, x[xOff], y, yOff, zz, zzOff);
         for (int i = 1; i < xLen; i++) {
             zz[zzOff + i + yLen] = mulWordAddTo(yLen, x[xOff + i], y, yOff, zz, zzOff + i);
@@ -618,7 +625,10 @@ public abstract class Nat {
     public static int mulAddTo(int len, int[] x, int[] y, int[] zz) {
         long zc = 0;
         for (int i = 0; i < len; i++) {
-            long zc2 = zc + (mulWordAddTo(len, x[i], y, 0, zz, i) & 4294967295L) + (zz[i + len] & 4294967295L);
+            long zc2 =
+                    zc
+                            + (mulWordAddTo(len, x[i], y, 0, zz, i) & 4294967295L)
+                            + (zz[i + len] & 4294967295L);
             zz[i + len] = (int) zc2;
             zc = zc2 >>> 32;
         }
@@ -628,7 +638,10 @@ public abstract class Nat {
     public static int mulAddTo(int len, int[] x, int xOff, int[] y, int yOff, int[] zz, int zzOff) {
         long zc = 0;
         for (int i = 0; i < len; i++) {
-            long zc2 = zc + (mulWordAddTo(len, x[xOff + i], y, yOff, zz, zzOff) & 4294967295L) + (zz[zzOff + len] & 4294967295L);
+            long zc2 =
+                    zc
+                            + (mulWordAddTo(len, x[xOff + i], y, yOff, zz, zzOff) & 4294967295L)
+                            + (zz[zzOff + len] & 4294967295L);
             zz[zzOff + len] = (int) zc2;
             zc = zc2 >>> 32;
             zzOff++;
@@ -643,7 +656,11 @@ public abstract class Nat {
         long bVal = b & 4294967295L;
         int i = 0;
         do {
-            long c2 = c + ((x[i] & 4294967295L) * aVal) + ((y[i] & 4294967295L) * bVal) + (z[zOff + i] & 4294967295L);
+            long c2 =
+                    c
+                            + ((x[i] & 4294967295L) * aVal)
+                            + ((y[i] & 4294967295L) * bVal)
+                            + (z[zOff + i] & 4294967295L);
             z[zOff + i] = (int) c2;
             c = c2 >>> 32;
             i++;
@@ -802,7 +819,8 @@ public abstract class Nat {
         }
     }
 
-    public static int shiftDownBits(int len, int[] x, int xOff, int bits, int c, int[] z, int zOff) {
+    public static int shiftDownBits(
+            int len, int[] x, int xOff, int bits, int c, int[] z, int zOff) {
         int i = len;
         while (true) {
             i--;
@@ -929,7 +947,8 @@ public abstract class Nat {
         return c >>> i2;
     }
 
-    public static long shiftUpBits64(int len, long[] x, int xOff, int bits, long c, long[] z, int zOff) {
+    public static long shiftUpBits64(
+            int len, long[] x, int xOff, int bits, long c, long[] z, int zOff) {
         for (int i = 0; i < len; i++) {
             long next = x[xOff + i];
             z[zOff + i] = (next << bits) | (c >>> (-bits));
@@ -994,7 +1013,10 @@ public abstract class Nat {
         int zzPos = zzOff + 2;
         int i = 1;
         while (i < len) {
-            long d2 = d + (squareWordAddTo(x, xOff, i, zz, zzOff) & 4294967295L) + (zz[zzPos] & 4294967295L);
+            long d2 =
+                    d
+                            + (squareWordAddTo(x, xOff, i, zz, zzOff) & 4294967295L)
+                            + (zz[zzPos] & 4294967295L);
             int zzPos2 = zzPos + 1;
             zz[zzPos] = (int) d2;
             long d3 = (d2 >>> 32) + (zz[zzPos2] & 4294967295L);
@@ -1138,10 +1160,14 @@ public abstract class Nat {
         return i2;
     }
 
-    public static int subBothFrom(int len, int[] x, int xOff, int[] y, int yOff, int[] z, int zOff) {
+    public static int subBothFrom(
+            int len, int[] x, int xOff, int[] y, int yOff, int[] z, int zOff) {
         long c = 0;
         for (int i = 0; i < len; i++) {
-            long c2 = c + (((z[zOff + i] & 4294967295L) - (x[xOff + i] & 4294967295L)) - (4294967295L & y[yOff + i]));
+            long c2 =
+                    c
+                            + (((z[zOff + i] & 4294967295L) - (x[xOff + i] & 4294967295L))
+                                    - (4294967295L & y[yOff + i]));
             z[zOff + i] = (int) c2;
             c = c2 >> 32;
         }

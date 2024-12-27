@@ -17,12 +17,12 @@ import android.text.style.ClickableSpan;
 import android.util.Slog;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.ArrayUtils;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.UiThread;
 import com.android.server.autofill.Helper;
-import com.android.server.autofill.ui.AutoFillUI;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -59,14 +59,16 @@ public final class SaveUi {
         public final void onCheckedChanged(CompoundButton compoundButton, boolean z) {
             if (compoundButton.isChecked()) {
                 this.val$yesButton.setText(R.string.config_dataUsageSummaryComponent);
-                this.val$yesButton.setOnClickListener(new SaveUi$$ExternalSyntheticLambda7(1, this, this.val$info));
+                this.val$yesButton.setOnClickListener(
+                        new SaveUi$$ExternalSyntheticLambda7(1, this, this.val$info));
             } else {
                 if (this.val$isUpdate) {
                     this.val$yesButton.setText(R.string.config_defaultDisplayCompatHostActivity);
                 } else {
                     this.val$yesButton.setText(R.string.config_defaultContentSuggestionsService);
                 }
-                this.val$yesButton.setOnClickListener(new SaveUi$$ExternalSyntheticLambda0(1, this));
+                this.val$yesButton.setOnClickListener(
+                        new SaveUi$$ExternalSyntheticLambda0(1, this));
             }
         }
     }
@@ -94,7 +96,8 @@ public final class SaveUi {
         @Override // com.android.server.autofill.ui.SaveUi.OnSaveListener
         public final void onCancel(IntentSender intentSender) {
             if (Helper.sDebug) {
-                AnyMotionDetector$$ExternalSyntheticOutline0.m("SaveUi", new StringBuilder("OneTimeListener.onCancel(): "), this.mDone);
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        "SaveUi", new StringBuilder("OneTimeListener.onCancel(): "), this.mDone);
             }
             if (this.mDone) {
                 return;
@@ -105,7 +108,8 @@ public final class SaveUi {
         @Override // com.android.server.autofill.ui.SaveUi.OnSaveListener
         public final void onDestroy() {
             if (Helper.sDebug) {
-                AnyMotionDetector$$ExternalSyntheticOutline0.m("SaveUi", new StringBuilder("OneTimeListener.onDestroy(): "), this.mDone);
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        "SaveUi", new StringBuilder("OneTimeListener.onDestroy(): "), this.mDone);
             }
             if (this.mDone) {
                 return;
@@ -117,7 +121,8 @@ public final class SaveUi {
         @Override // com.android.server.autofill.ui.SaveUi.OnSaveListener
         public final void onSave() {
             if (Helper.sDebug) {
-                AnyMotionDetector$$ExternalSyntheticOutline0.m("SaveUi", new StringBuilder("OneTimeListener.onSave(): "), this.mDone);
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        "SaveUi", new StringBuilder("OneTimeListener.onSave(): "), this.mDone);
             }
             if (this.mDone) {
                 return;
@@ -128,7 +133,10 @@ public final class SaveUi {
         @Override // com.android.server.autofill.ui.SaveUi.OnSaveListener
         public final void startIntentSender(IntentSender intentSender, Intent intent) {
             if (Helper.sDebug) {
-                AnyMotionDetector$$ExternalSyntheticOutline0.m("SaveUi", new StringBuilder("OneTimeListener.startIntentSender(): "), this.mDone);
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        "SaveUi",
+                        new StringBuilder("OneTimeListener.startIntentSender(): "),
+                        this.mDone);
             }
             if (this.mDone) {
                 return;
@@ -146,12 +154,34 @@ public final class SaveUi {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public SaveUi(android.content.Context r20, com.android.server.autofill.ui.PendingUi r21, java.lang.CharSequence r22, android.graphics.drawable.Drawable r23, java.lang.String r24, android.content.ComponentName r25, final android.service.autofill.SaveInfo r26, com.android.server.autofill.Session r27, com.android.server.autofill.ui.OverlayControl r28, com.android.server.autofill.ui.AutoFillUI.AnonymousClass1 r29, boolean r30, boolean r31, boolean r32) {
+    public SaveUi(
+            android.content.Context r20,
+            com.android.server.autofill.ui.PendingUi r21,
+            java.lang.CharSequence r22,
+            android.graphics.drawable.Drawable r23,
+            java.lang.String r24,
+            android.content.ComponentName r25,
+            final android.service.autofill.SaveInfo r26,
+            com.android.server.autofill.Session r27,
+            com.android.server.autofill.ui.OverlayControl r28,
+            com.android.server.autofill.ui.AutoFillUI.AnonymousClass1 r29,
+            boolean r30,
+            boolean r31,
+            boolean r32) {
         /*
             Method dump skipped, instructions count: 1618
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.autofill.ui.SaveUi.<init>(android.content.Context, com.android.server.autofill.ui.PendingUi, java.lang.CharSequence, android.graphics.drawable.Drawable, java.lang.String, android.content.ComponentName, android.service.autofill.SaveInfo, com.android.server.autofill.Session, com.android.server.autofill.ui.OverlayControl, com.android.server.autofill.ui.AutoFillUI$1, boolean, boolean, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.autofill.ui.SaveUi.<init>(android.content.Context,"
+                    + " com.android.server.autofill.ui.PendingUi, java.lang.CharSequence,"
+                    + " android.graphics.drawable.Drawable, java.lang.String,"
+                    + " android.content.ComponentName, android.service.autofill.SaveInfo,"
+                    + " com.android.server.autofill.Session,"
+                    + " com.android.server.autofill.ui.OverlayControl,"
+                    + " com.android.server.autofill.ui.AutoFillUI$1, boolean, boolean,"
+                    + " boolean):void");
     }
 
     public static void applyMovementMethodIfNeed(TextView textView) {
@@ -160,7 +190,10 @@ public final class SaveUi {
             return;
         }
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(text);
-        if (ArrayUtils.isEmpty((ClickableSpan[]) spannableStringBuilder.getSpans(0, spannableStringBuilder.length(), ClickableSpan.class))) {
+        if (ArrayUtils.isEmpty(
+                (ClickableSpan[])
+                        spannableStringBuilder.getSpans(
+                                0, spannableStringBuilder.length(), ClickableSpan.class))) {
             return;
         }
         textView.setMovementMethod(LinkMovementMethod.getInstance());
@@ -200,7 +233,14 @@ public final class SaveUi {
             Slog.d("SaveUi", "hiding UI until restored with token " + iBinder);
         }
         hide();
-        LogMaker addTaggedData = Helper.newLogMaker(1132, this.mComponentName, this.mServicePackageName, pendingUi.sessionId, this.mCompatMode).addTaggedData(1130, Integer.valueOf(this.mType));
+        LogMaker addTaggedData =
+                Helper.newLogMaker(
+                                1132,
+                                this.mComponentName,
+                                this.mServicePackageName,
+                                pendingUi.sessionId,
+                                this.mCompatMode)
+                        .addTaggedData(1130, Integer.valueOf(this.mType));
         addTaggedData.setType(1);
         this.mMetricsLogger.write(addTaggedData);
     }

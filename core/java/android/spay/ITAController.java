@@ -6,6 +6,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -16,7 +17,8 @@ public interface ITAController extends IInterface {
 
     boolean clearDeviceCertificates(String str) throws RemoteException;
 
-    boolean loadTA(ParcelFileDescriptor parcelFileDescriptor, long j, long j2) throws RemoteException;
+    boolean loadTA(ParcelFileDescriptor parcelFileDescriptor, long j, long j2)
+            throws RemoteException;
 
     boolean makeSystemCall(int i) throws RemoteException;
 
@@ -26,13 +28,13 @@ public interface ITAController extends IInterface {
 
     public static class Default implements ITAController {
         @Override // android.spay.ITAController
-        public boolean loadTA(ParcelFileDescriptor pfd, long offset, long len) throws RemoteException {
+        public boolean loadTA(ParcelFileDescriptor pfd, long offset, long len)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.spay.ITAController
-        public void unloadTA() throws RemoteException {
-        }
+        public void unloadTA() throws RemoteException {}
 
         @Override // android.spay.ITAController
         public TACommandResponse processTACommand(TACommandRequest request) throws RemoteException {
@@ -60,7 +62,7 @@ public interface ITAController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITAController {
+    public abstract static class Stub extends Binder implements ITAController {
         static final int TRANSACTION_checkCertInfo = 6;
         static final int TRANSACTION_clearDeviceCertificates = 5;
         static final int TRANSACTION_loadTA = 1;
@@ -113,7 +115,8 @@ public interface ITAController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITAController.DESCRIPTOR);
             }
@@ -123,7 +126,9 @@ public interface ITAController extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg1 = data.readLong();
                     long _arg2 = data.readLong();
                     data.enforceNoDataAvail();
@@ -136,7 +141,8 @@ public interface ITAController extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 3:
-                    TACommandRequest _arg02 = (TACommandRequest) data.readTypedObject(TACommandRequest.CREATOR);
+                    TACommandRequest _arg02 =
+                            (TACommandRequest) data.readTypedObject(TACommandRequest.CREATOR);
                     data.enforceNoDataAvail();
                     TACommandResponse _result2 = processTACommand(_arg02);
                     reply.writeNoException();
@@ -185,7 +191,8 @@ public interface ITAController extends IInterface {
             }
 
             @Override // android.spay.ITAController
-            public boolean loadTA(ParcelFileDescriptor pfd, long offset, long len) throws RemoteException {
+            public boolean loadTA(ParcelFileDescriptor pfd, long offset, long len)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -218,7 +225,8 @@ public interface ITAController extends IInterface {
             }
 
             @Override // android.spay.ITAController
-            public TACommandResponse processTACommand(TACommandRequest request) throws RemoteException {
+            public TACommandResponse processTACommand(TACommandRequest request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -226,7 +234,8 @@ public interface ITAController extends IInterface {
                     _data.writeTypedObject(request, 0);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    TACommandResponse _result = (TACommandResponse) _reply.readTypedObject(TACommandResponse.CREATOR);
+                    TACommandResponse _result =
+                            (TACommandResponse) _reply.readTypedObject(TACommandResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

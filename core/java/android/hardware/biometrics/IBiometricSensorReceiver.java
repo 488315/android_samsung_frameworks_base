@@ -23,24 +23,22 @@ public interface IBiometricSensorReceiver extends IInterface {
 
     public static class Default implements IBiometricSensorReceiver {
         @Override // android.hardware.biometrics.IBiometricSensorReceiver
-        public void onAuthenticationSucceeded(int sensorId, byte[] token) throws RemoteException {
-        }
+        public void onAuthenticationSucceeded(int sensorId, byte[] token) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricSensorReceiver
-        public void onAuthenticationFailed(int sensorId) throws RemoteException {
-        }
+        public void onAuthenticationFailed(int sensorId) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricSensorReceiver
-        public void onError(int sensorId, int cookie, int error, int vendorCode) throws RemoteException {
-        }
+        public void onError(int sensorId, int cookie, int error, int vendorCode)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricSensorReceiver
-        public void onAcquired(int sensorId, int acquiredInfo, int vendorCode) throws RemoteException {
-        }
+        public void onAcquired(int sensorId, int acquiredInfo, int vendorCode)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricSensorReceiver
-        public void onSemAuthenticationSucceeded(int sensorId, byte[] token, Bundle extraData) throws RemoteException {
-        }
+        public void onSemAuthenticationSucceeded(int sensorId, byte[] token, Bundle extraData)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -48,7 +46,7 @@ public interface IBiometricSensorReceiver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBiometricSensorReceiver {
+    public abstract static class Stub extends Binder implements IBiometricSensorReceiver {
         static final int TRANSACTION_onAcquired = 4;
         static final int TRANSACTION_onAuthenticationFailed = 2;
         static final int TRANSACTION_onAuthenticationSucceeded = 1;
@@ -98,7 +96,8 @@ public interface IBiometricSensorReceiver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBiometricSensorReceiver.DESCRIPTOR);
             }
@@ -162,7 +161,8 @@ public interface IBiometricSensorReceiver extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricSensorReceiver
-            public void onAuthenticationSucceeded(int sensorId, byte[] token) throws RemoteException {
+            public void onAuthenticationSucceeded(int sensorId, byte[] token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBiometricSensorReceiver.DESCRIPTOR);
@@ -187,7 +187,8 @@ public interface IBiometricSensorReceiver extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricSensorReceiver
-            public void onError(int sensorId, int cookie, int error, int vendorCode) throws RemoteException {
+            public void onError(int sensorId, int cookie, int error, int vendorCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBiometricSensorReceiver.DESCRIPTOR);
@@ -202,7 +203,8 @@ public interface IBiometricSensorReceiver extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricSensorReceiver
-            public void onAcquired(int sensorId, int acquiredInfo, int vendorCode) throws RemoteException {
+            public void onAcquired(int sensorId, int acquiredInfo, int vendorCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBiometricSensorReceiver.DESCRIPTOR);
@@ -216,7 +218,8 @@ public interface IBiometricSensorReceiver extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricSensorReceiver
-            public void onSemAuthenticationSucceeded(int sensorId, byte[] token, Bundle extraData) throws RemoteException {
+            public void onSemAuthenticationSucceeded(int sensorId, byte[] token, Bundle extraData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBiometricSensorReceiver.DESCRIPTOR);

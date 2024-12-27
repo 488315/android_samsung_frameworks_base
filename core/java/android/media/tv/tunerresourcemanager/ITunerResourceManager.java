@@ -1,6 +1,5 @@
 package android.media.tv.tunerresourcemanager;
 
-import android.media.tv.tunerresourcemanager.IResourcesReclaimListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface ITunerResourceManager extends IInterface {
-    public static final String DESCRIPTOR = "android.media.tv.tunerresourcemanager.ITunerResourceManager";
+    public static final String DESCRIPTOR =
+            "android.media.tv.tunerresourcemanager.ITunerResourceManager";
 
     boolean acquireLock(int i, long j) throws RemoteException;
 
@@ -23,11 +23,18 @@ public interface ITunerResourceManager extends IInterface {
 
     boolean hasUnusedFrontend(int i) throws RemoteException;
 
-    boolean isHigherPriority(ResourceClientProfile resourceClientProfile, ResourceClientProfile resourceClientProfile2) throws RemoteException;
+    boolean isHigherPriority(
+            ResourceClientProfile resourceClientProfile,
+            ResourceClientProfile resourceClientProfile2)
+            throws RemoteException;
 
     boolean isLowestPriority(int i, int i2) throws RemoteException;
 
-    void registerClientProfile(ResourceClientProfile resourceClientProfile, IResourcesReclaimListener iResourcesReclaimListener, int[] iArr) throws RemoteException;
+    void registerClientProfile(
+            ResourceClientProfile resourceClientProfile,
+            IResourcesReclaimListener iResourcesReclaimListener,
+            int[] iArr)
+            throws RemoteException;
 
     void releaseCasSession(int i, int i2) throws RemoteException;
 
@@ -43,15 +50,18 @@ public interface ITunerResourceManager extends IInterface {
 
     boolean releaseLock(int i) throws RemoteException;
 
-    boolean requestCasSession(CasSessionRequest casSessionRequest, int[] iArr) throws RemoteException;
+    boolean requestCasSession(CasSessionRequest casSessionRequest, int[] iArr)
+            throws RemoteException;
 
     boolean requestCiCam(TunerCiCamRequest tunerCiCamRequest, int[] iArr) throws RemoteException;
 
     boolean requestDemux(TunerDemuxRequest tunerDemuxRequest, int[] iArr) throws RemoteException;
 
-    boolean requestDescrambler(TunerDescramblerRequest tunerDescramblerRequest, int[] iArr) throws RemoteException;
+    boolean requestDescrambler(TunerDescramblerRequest tunerDescramblerRequest, int[] iArr)
+            throws RemoteException;
 
-    boolean requestFrontend(TunerFrontendRequest tunerFrontendRequest, int[] iArr) throws RemoteException;
+    boolean requestFrontend(TunerFrontendRequest tunerFrontendRequest, int[] iArr)
+            throws RemoteException;
 
     boolean requestLnb(TunerLnbRequest tunerLnbRequest, int[] iArr) throws RemoteException;
 
@@ -79,15 +89,16 @@ public interface ITunerResourceManager extends IInterface {
 
     public static class Default implements ITunerResourceManager {
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void registerClientProfile(ResourceClientProfile profile, IResourcesReclaimListener listener, int[] clientId) throws RemoteException {
-        }
+        public void registerClientProfile(
+                ResourceClientProfile profile, IResourcesReclaimListener listener, int[] clientId)
+                throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void unregisterClientProfile(int clientId) throws RemoteException {
-        }
+        public void unregisterClientProfile(int clientId) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public boolean updateClientPriority(int clientId, int priority, int niceValue) throws RemoteException {
+        public boolean updateClientPriority(int clientId, int priority, int niceValue)
+                throws RemoteException {
             return false;
         }
 
@@ -102,28 +113,26 @@ public interface ITunerResourceManager extends IInterface {
         }
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void setFrontendInfoList(TunerFrontendInfo[] infos) throws RemoteException {
-        }
+        public void setFrontendInfoList(TunerFrontendInfo[] infos) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void updateCasInfo(int casSystemId, int maxSessionNum) throws RemoteException {
-        }
+        public void updateCasInfo(int casSystemId, int maxSessionNum) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void setDemuxInfoList(TunerDemuxInfo[] infos) throws RemoteException {
-        }
+        public void setDemuxInfoList(TunerDemuxInfo[] infos) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void setLnbInfoList(int[] lnbIds) throws RemoteException {
-        }
+        public void setLnbInfoList(int[] lnbIds) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public boolean requestFrontend(TunerFrontendRequest request, int[] frontendHandle) throws RemoteException {
+        public boolean requestFrontend(TunerFrontendRequest request, int[] frontendHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public boolean setMaxNumberOfFrontends(int frontendType, int maxNum) throws RemoteException {
+        public boolean setMaxNumberOfFrontends(int frontendType, int maxNum)
+                throws RemoteException {
             return false;
         }
 
@@ -133,31 +142,35 @@ public interface ITunerResourceManager extends IInterface {
         }
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void shareFrontend(int selfClientId, int targetClientId) throws RemoteException {
-        }
+        public void shareFrontend(int selfClientId, int targetClientId) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public boolean transferOwner(int resourceType, int currentOwnerId, int newOwnerId) throws RemoteException {
+        public boolean transferOwner(int resourceType, int currentOwnerId, int newOwnerId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public boolean requestDemux(TunerDemuxRequest request, int[] demuxHandle) throws RemoteException {
+        public boolean requestDemux(TunerDemuxRequest request, int[] demuxHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public boolean requestDescrambler(TunerDescramblerRequest request, int[] descramblerHandle) throws RemoteException {
+        public boolean requestDescrambler(TunerDescramblerRequest request, int[] descramblerHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public boolean requestCasSession(CasSessionRequest request, int[] casSessionHandle) throws RemoteException {
+        public boolean requestCasSession(CasSessionRequest request, int[] casSessionHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public boolean requestCiCam(TunerCiCamRequest request, int[] ciCamHandle) throws RemoteException {
+        public boolean requestCiCam(TunerCiCamRequest request, int[] ciCamHandle)
+                throws RemoteException {
             return false;
         }
 
@@ -167,45 +180,39 @@ public interface ITunerResourceManager extends IInterface {
         }
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void releaseFrontend(int frontendHandle, int clientId) throws RemoteException {
-        }
+        public void releaseFrontend(int frontendHandle, int clientId) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void releaseDemux(int demuxHandle, int clientId) throws RemoteException {
-        }
+        public void releaseDemux(int demuxHandle, int clientId) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void releaseDescrambler(int descramblerHandle, int clientId) throws RemoteException {
-        }
+        public void releaseDescrambler(int descramblerHandle, int clientId)
+                throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void releaseCasSession(int casSessionHandle, int clientId) throws RemoteException {
-        }
+        public void releaseCasSession(int casSessionHandle, int clientId) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void releaseCiCam(int ciCamHandle, int clientId) throws RemoteException {
-        }
+        public void releaseCiCam(int ciCamHandle, int clientId) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void releaseLnb(int lnbHandle, int clientId) throws RemoteException {
-        }
+        public void releaseLnb(int lnbHandle, int clientId) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public boolean isHigherPriority(ResourceClientProfile challengerProfile, ResourceClientProfile holderProfile) throws RemoteException {
+        public boolean isHigherPriority(
+                ResourceClientProfile challengerProfile, ResourceClientProfile holderProfile)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void storeResourceMap(int resourceType) throws RemoteException {
-        }
+        public void storeResourceMap(int resourceType) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void clearResourceMap(int resourceType) throws RemoteException {
-        }
+        public void clearResourceMap(int resourceType) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-        public void restoreResourceMap(int resourceType) throws RemoteException {
-        }
+        public void restoreResourceMap(int resourceType) throws RemoteException {}
 
         @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
         public boolean acquireLock(int clientId, long clientThreadId) throws RemoteException {
@@ -233,7 +240,7 @@ public interface ITunerResourceManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITunerResourceManager {
+    public abstract static class Stub extends Binder implements ITunerResourceManager {
         static final int TRANSACTION_acquireLock = 30;
         static final int TRANSACTION_clearResourceMap = 28;
         static final int TRANSACTION_getClientPriority = 32;
@@ -289,7 +296,8 @@ public interface ITunerResourceManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             int[] _arg2;
             int[] _arg1;
             int[] _arg12;
@@ -306,8 +314,11 @@ public interface ITunerResourceManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ResourceClientProfile _arg0 = (ResourceClientProfile) data.readTypedObject(ResourceClientProfile.CREATOR);
-                    IResourcesReclaimListener _arg17 = IResourcesReclaimListener.Stub.asInterface(data.readStrongBinder());
+                    ResourceClientProfile _arg0 =
+                            (ResourceClientProfile)
+                                    data.readTypedObject(ResourceClientProfile.CREATOR);
+                    IResourcesReclaimListener _arg17 =
+                            IResourcesReclaimListener.Stub.asInterface(data.readStrongBinder());
                     int _arg2_length = data.readInt();
                     if (_arg2_length < 0) {
                         _arg2 = null;
@@ -350,7 +361,8 @@ public interface ITunerResourceManager extends IInterface {
                     reply.writeBoolean(_result3);
                     return true;
                 case 6:
-                    TunerFrontendInfo[] _arg06 = (TunerFrontendInfo[]) data.createTypedArray(TunerFrontendInfo.CREATOR);
+                    TunerFrontendInfo[] _arg06 =
+                            (TunerFrontendInfo[]) data.createTypedArray(TunerFrontendInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setFrontendInfoList(_arg06);
                     reply.writeNoException();
@@ -363,7 +375,8 @@ public interface ITunerResourceManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 8:
-                    TunerDemuxInfo[] _arg08 = (TunerDemuxInfo[]) data.createTypedArray(TunerDemuxInfo.CREATOR);
+                    TunerDemuxInfo[] _arg08 =
+                            (TunerDemuxInfo[]) data.createTypedArray(TunerDemuxInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setDemuxInfoList(_arg08);
                     reply.writeNoException();
@@ -375,7 +388,9 @@ public interface ITunerResourceManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 10:
-                    TunerFrontendRequest _arg010 = (TunerFrontendRequest) data.readTypedObject(TunerFrontendRequest.CREATOR);
+                    TunerFrontendRequest _arg010 =
+                            (TunerFrontendRequest)
+                                    data.readTypedObject(TunerFrontendRequest.CREATOR);
                     int _arg1_length = data.readInt();
                     if (_arg1_length < 0) {
                         _arg1 = null;
@@ -420,7 +435,8 @@ public interface ITunerResourceManager extends IInterface {
                     reply.writeBoolean(_result7);
                     return true;
                 case 15:
-                    TunerDemuxRequest _arg015 = (TunerDemuxRequest) data.readTypedObject(TunerDemuxRequest.CREATOR);
+                    TunerDemuxRequest _arg015 =
+                            (TunerDemuxRequest) data.readTypedObject(TunerDemuxRequest.CREATOR);
                     int _arg1_length2 = data.readInt();
                     if (_arg1_length2 < 0) {
                         _arg12 = null;
@@ -434,7 +450,9 @@ public interface ITunerResourceManager extends IInterface {
                     reply.writeIntArray(_arg12);
                     return true;
                 case 16:
-                    TunerDescramblerRequest _arg016 = (TunerDescramblerRequest) data.readTypedObject(TunerDescramblerRequest.CREATOR);
+                    TunerDescramblerRequest _arg016 =
+                            (TunerDescramblerRequest)
+                                    data.readTypedObject(TunerDescramblerRequest.CREATOR);
                     int _arg1_length3 = data.readInt();
                     if (_arg1_length3 < 0) {
                         _arg13 = null;
@@ -448,7 +466,8 @@ public interface ITunerResourceManager extends IInterface {
                     reply.writeIntArray(_arg13);
                     return true;
                 case 17:
-                    CasSessionRequest _arg017 = (CasSessionRequest) data.readTypedObject(CasSessionRequest.CREATOR);
+                    CasSessionRequest _arg017 =
+                            (CasSessionRequest) data.readTypedObject(CasSessionRequest.CREATOR);
                     int _arg1_length4 = data.readInt();
                     if (_arg1_length4 < 0) {
                         _arg14 = null;
@@ -462,7 +481,8 @@ public interface ITunerResourceManager extends IInterface {
                     reply.writeIntArray(_arg14);
                     return true;
                 case 18:
-                    TunerCiCamRequest _arg018 = (TunerCiCamRequest) data.readTypedObject(TunerCiCamRequest.CREATOR);
+                    TunerCiCamRequest _arg018 =
+                            (TunerCiCamRequest) data.readTypedObject(TunerCiCamRequest.CREATOR);
                     int _arg1_length5 = data.readInt();
                     if (_arg1_length5 < 0) {
                         _arg15 = null;
@@ -476,7 +496,8 @@ public interface ITunerResourceManager extends IInterface {
                     reply.writeIntArray(_arg15);
                     return true;
                 case 19:
-                    TunerLnbRequest _arg019 = (TunerLnbRequest) data.readTypedObject(TunerLnbRequest.CREATOR);
+                    TunerLnbRequest _arg019 =
+                            (TunerLnbRequest) data.readTypedObject(TunerLnbRequest.CREATOR);
                     int _arg1_length6 = data.readInt();
                     if (_arg1_length6 < 0) {
                         _arg16 = null;
@@ -532,8 +553,12 @@ public interface ITunerResourceManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 26:
-                    ResourceClientProfile _arg026 = (ResourceClientProfile) data.readTypedObject(ResourceClientProfile.CREATOR);
-                    ResourceClientProfile _arg120 = (ResourceClientProfile) data.readTypedObject(ResourceClientProfile.CREATOR);
+                    ResourceClientProfile _arg026 =
+                            (ResourceClientProfile)
+                                    data.readTypedObject(ResourceClientProfile.CREATOR);
+                    ResourceClientProfile _arg120 =
+                            (ResourceClientProfile)
+                                    data.readTypedObject(ResourceClientProfile.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result13 = isHigherPriority(_arg026, _arg120);
                     reply.writeNoException();
@@ -610,7 +635,11 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public void registerClientProfile(ResourceClientProfile profile, IResourcesReclaimListener listener, int[] clientId) throws RemoteException {
+            public void registerClientProfile(
+                    ResourceClientProfile profile,
+                    IResourcesReclaimListener listener,
+                    int[] clientId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -643,7 +672,8 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public boolean updateClientPriority(int clientId, int priority, int niceValue) throws RemoteException {
+            public boolean updateClientPriority(int clientId, int priority, int niceValue)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -758,7 +788,8 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public boolean requestFrontend(TunerFrontendRequest request, int[] frontendHandle) throws RemoteException {
+            public boolean requestFrontend(TunerFrontendRequest request, int[] frontendHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -777,7 +808,8 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public boolean setMaxNumberOfFrontends(int frontendType, int maxNum) throws RemoteException {
+            public boolean setMaxNumberOfFrontends(int frontendType, int maxNum)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -828,7 +860,8 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public boolean transferOwner(int resourceType, int currentOwnerId, int newOwnerId) throws RemoteException {
+            public boolean transferOwner(int resourceType, int currentOwnerId, int newOwnerId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -847,7 +880,8 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public boolean requestDemux(TunerDemuxRequest request, int[] demuxHandle) throws RemoteException {
+            public boolean requestDemux(TunerDemuxRequest request, int[] demuxHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -866,7 +900,9 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public boolean requestDescrambler(TunerDescramblerRequest request, int[] descramblerHandle) throws RemoteException {
+            public boolean requestDescrambler(
+                    TunerDescramblerRequest request, int[] descramblerHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -885,7 +921,8 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public boolean requestCasSession(CasSessionRequest request, int[] casSessionHandle) throws RemoteException {
+            public boolean requestCasSession(CasSessionRequest request, int[] casSessionHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -904,7 +941,8 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public boolean requestCiCam(TunerCiCamRequest request, int[] ciCamHandle) throws RemoteException {
+            public boolean requestCiCam(TunerCiCamRequest request, int[] ciCamHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -923,7 +961,8 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public boolean requestLnb(TunerLnbRequest request, int[] lnbHandle) throws RemoteException {
+            public boolean requestLnb(TunerLnbRequest request, int[] lnbHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -974,7 +1013,8 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public void releaseDescrambler(int descramblerHandle, int clientId) throws RemoteException {
+            public void releaseDescrambler(int descramblerHandle, int clientId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -990,7 +1030,8 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public void releaseCasSession(int casSessionHandle, int clientId) throws RemoteException {
+            public void releaseCasSession(int casSessionHandle, int clientId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1038,7 +1079,9 @@ public interface ITunerResourceManager extends IInterface {
             }
 
             @Override // android.media.tv.tunerresourcemanager.ITunerResourceManager
-            public boolean isHigherPriority(ResourceClientProfile challengerProfile, ResourceClientProfile holderProfile) throws RemoteException {
+            public boolean isHigherPriority(
+                    ResourceClientProfile challengerProfile, ResourceClientProfile holderProfile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

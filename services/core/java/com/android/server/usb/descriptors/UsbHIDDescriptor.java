@@ -25,8 +25,10 @@ public final class UsbHIDDescriptor extends UsbDescriptor {
         super.report(textReportCanvas);
         textReportCanvas.openList();
         textReportCanvas.writeListItem("Spec: " + TextReportCanvas.getBCDString(this.mRelease));
-        textReportCanvas.writeListItem("Type: " + TextReportCanvas.getBCDString(this.mDescriptorType));
-        textReportCanvas.writeListItem("" + ((int) this.mNumDescriptors) + " Descriptors Len: " + this.mDescriptorLen);
+        textReportCanvas.writeListItem(
+                "Type: " + TextReportCanvas.getBCDString(this.mDescriptorType));
+        textReportCanvas.writeListItem(
+                "" + ((int) this.mNumDescriptors) + " Descriptors Len: " + this.mDescriptorLen);
         textReportCanvas.closeList();
     }
 }

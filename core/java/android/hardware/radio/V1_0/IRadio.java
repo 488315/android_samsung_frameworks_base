@@ -10,8 +10,11 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -92,7 +95,8 @@ public interface IRadio extends IBase {
 
     void getDeviceIdentity(int i) throws RemoteException;
 
-    void getFacilityLockForApp(int i, String str, String str2, int i2, String str3) throws RemoteException;
+    void getFacilityLockForApp(int i, String str, String str2, int i2, String str3)
+            throws RemoteException;
 
     void getGsmBroadcastConfig(int i) throws RemoteException;
 
@@ -218,7 +222,8 @@ public interface IRadio extends IBase {
 
     void separateConnection(int i, int i2) throws RemoteException;
 
-    void setAllowedCarriers(int i, boolean z, CarrierRestrictions carrierRestrictions) throws RemoteException;
+    void setAllowedCarriers(int i, boolean z, CarrierRestrictions carrierRestrictions)
+            throws RemoteException;
 
     void setBandMode(int i, int i2) throws RemoteException;
 
@@ -230,7 +235,8 @@ public interface IRadio extends IBase {
 
     void setCdmaBroadcastActivation(int i, boolean z) throws RemoteException;
 
-    void setCdmaBroadcastConfig(int i, ArrayList<CdmaBroadcastSmsConfigInfo> arrayList) throws RemoteException;
+    void setCdmaBroadcastConfig(int i, ArrayList<CdmaBroadcastSmsConfigInfo> arrayList)
+            throws RemoteException;
 
     void setCdmaRoamingPreference(int i, int i2) throws RemoteException;
 
@@ -242,20 +248,24 @@ public interface IRadio extends IBase {
 
     void setDataAllowed(int i, boolean z) throws RemoteException;
 
-    void setDataProfile(int i, ArrayList<DataProfileInfo> arrayList, boolean z) throws RemoteException;
+    void setDataProfile(int i, ArrayList<DataProfileInfo> arrayList, boolean z)
+            throws RemoteException;
 
-    void setFacilityLockForApp(int i, String str, boolean z, String str2, int i2, String str3) throws RemoteException;
+    void setFacilityLockForApp(int i, String str, boolean z, String str2, int i2, String str3)
+            throws RemoteException;
 
     void setGsmBroadcastActivation(int i, boolean z) throws RemoteException;
 
-    void setGsmBroadcastConfig(int i, ArrayList<GsmBroadcastSmsConfigInfo> arrayList) throws RemoteException;
+    void setGsmBroadcastConfig(int i, ArrayList<GsmBroadcastSmsConfigInfo> arrayList)
+            throws RemoteException;
 
     @Override // android.internal.hidl.base.V1_0.IBase
     void setHALInstrumentation() throws RemoteException;
 
     void setIndicationFilter(int i, int i2) throws RemoteException;
 
-    void setInitialAttachApn(int i, DataProfileInfo dataProfileInfo, boolean z, boolean z2) throws RemoteException;
+    void setInitialAttachApn(int i, DataProfileInfo dataProfileInfo, boolean z, boolean z2)
+            throws RemoteException;
 
     void setLocationUpdates(int i, boolean z) throws RemoteException;
 
@@ -273,7 +283,8 @@ public interface IRadio extends IBase {
 
     void setRadioPower(int i, boolean z) throws RemoteException;
 
-    void setResponseFunctions(IRadioResponse iRadioResponse, IRadioIndication iRadioIndication) throws RemoteException;
+    void setResponseFunctions(IRadioResponse iRadioResponse, IRadioIndication iRadioIndication)
+            throws RemoteException;
 
     void setSimCardPower(int i, boolean z) throws RemoteException;
 
@@ -285,7 +296,9 @@ public interface IRadio extends IBase {
 
     void setUiccSubscription(int i, SelectUiccSub selectUiccSub) throws RemoteException;
 
-    void setupDataCall(int i, int i2, DataProfileInfo dataProfileInfo, boolean z, boolean z2, boolean z3) throws RemoteException;
+    void setupDataCall(
+            int i, int i2, DataProfileInfo dataProfileInfo, boolean z, boolean z2, boolean z3)
+            throws RemoteException;
 
     void startDtmf(int i, String str) throws RemoteException;
 
@@ -368,7 +381,8 @@ public interface IRadio extends IBase {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase,
+        // android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -390,11 +404,15 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setResponseFunctions(IRadioResponse radioResponse, IRadioIndication radioIndication) throws RemoteException {
+        public void setResponseFunctions(
+                IRadioResponse radioResponse, IRadioIndication radioIndication)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
-            _hidl_request.writeStrongBinder(radioResponse == null ? null : radioResponse.asBinder());
-            _hidl_request.writeStrongBinder(radioIndication != null ? radioIndication.asBinder() : null);
+            _hidl_request.writeStrongBinder(
+                    radioResponse == null ? null : radioResponse.asBinder());
+            _hidl_request.writeStrongBinder(
+                    radioIndication != null ? radioIndication.asBinder() : null);
             HwParcel _hidl_reply = new HwParcel();
             try {
                 this.mRemote.transact(1, _hidl_request, _hidl_reply, 0);
@@ -436,7 +454,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void supplyIccPukForApp(int serial, String puk, String pin, String aid) throws RemoteException {
+        public void supplyIccPukForApp(int serial, String puk, String pin, String aid)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -453,7 +472,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void supplyIccPin2ForApp(int serial, String pin2, String aid) throws RemoteException {
+        public void supplyIccPin2ForApp(int serial, String pin2, String aid)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -469,7 +489,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void supplyIccPuk2ForApp(int serial, String puk2, String pin2, String aid) throws RemoteException {
+        public void supplyIccPuk2ForApp(int serial, String puk2, String pin2, String aid)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -486,7 +507,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void changeIccPinForApp(int serial, String oldPin, String newPin, String aid) throws RemoteException {
+        public void changeIccPinForApp(int serial, String oldPin, String newPin, String aid)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -503,7 +525,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void changeIccPin2ForApp(int serial, String oldPin2, String newPin2, String aid) throws RemoteException {
+        public void changeIccPin2ForApp(int serial, String oldPin2, String newPin2, String aid)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -520,7 +543,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void supplyNetworkDepersonalization(int serial, String netPin) throws RemoteException {
+        public void supplyNetworkDepersonalization(int serial, String netPin)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -794,7 +818,14 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setupDataCall(int serial, int radioTechnology, DataProfileInfo dataProfileInfo, boolean modemCognitive, boolean roamingAllowed, boolean isRoaming) throws RemoteException {
+        public void setupDataCall(
+                int serial,
+                int radioTechnology,
+                DataProfileInfo dataProfileInfo,
+                boolean modemCognitive,
+                boolean roamingAllowed,
+                boolean isRoaming)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -886,7 +917,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void getCallForwardStatus(int serial, CallForwardInfo callInfo) throws RemoteException {
+        public void getCallForwardStatus(int serial, CallForwardInfo callInfo)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -931,7 +963,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setCallWaiting(int serial, boolean enable, int serviceClass) throws RemoteException {
+        public void setCallWaiting(int serial, boolean enable, int serviceClass)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -947,7 +980,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void acknowledgeLastIncomingGsmSms(int serial, boolean success, int cause) throws RemoteException {
+        public void acknowledgeLastIncomingGsmSms(int serial, boolean success, int cause)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -977,7 +1011,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void deactivateDataCall(int serial, int cid, boolean reasonRadioShutDown) throws RemoteException {
+        public void deactivateDataCall(int serial, int cid, boolean reasonRadioShutDown)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -993,7 +1028,9 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void getFacilityLockForApp(int serial, String facility, String password, int serviceClass, String appId) throws RemoteException {
+        public void getFacilityLockForApp(
+                int serial, String facility, String password, int serviceClass, String appId)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1011,7 +1048,14 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setFacilityLockForApp(int serial, String facility, boolean lockState, String password, int serviceClass, String appId) throws RemoteException {
+        public void setFacilityLockForApp(
+                int serial,
+                String facility,
+                boolean lockState,
+                String password,
+                int serviceClass,
+                String appId)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1030,7 +1074,9 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setBarringPassword(int serial, String facility, String oldPassword, String newPassword) throws RemoteException {
+        public void setBarringPassword(
+                int serial, String facility, String oldPassword, String newPassword)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1075,7 +1121,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setNetworkSelectionModeManual(int serial, String operatorNumeric) throws RemoteException {
+        public void setNetworkSelectionModeManual(int serial, String operatorNumeric)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1308,7 +1355,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void sendTerminalResponseToSim(int serial, String commandResponse) throws RemoteException {
+        public void sendTerminalResponseToSim(int serial, String commandResponse)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1323,7 +1371,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void handleStkCallSetupRequestFromSim(int serial, boolean accept) throws RemoteException {
+        public void handleStkCallSetupRequestFromSim(int serial, boolean accept)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1559,7 +1608,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void acknowledgeLastIncomingCdmaSms(int serial, CdmaSmsAck smsAck) throws RemoteException {
+        public void acknowledgeLastIncomingCdmaSms(int serial, CdmaSmsAck smsAck)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1588,7 +1638,9 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setGsmBroadcastConfig(int serial, ArrayList<GsmBroadcastSmsConfigInfo> configInfo) throws RemoteException {
+        public void setGsmBroadcastConfig(
+                int serial, ArrayList<GsmBroadcastSmsConfigInfo> configInfo)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1632,7 +1684,9 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setCdmaBroadcastConfig(int serial, ArrayList<CdmaBroadcastSmsConfigInfo> configInfo) throws RemoteException {
+        public void setCdmaBroadcastConfig(
+                int serial, ArrayList<CdmaBroadcastSmsConfigInfo> configInfo)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1647,7 +1701,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setCdmaBroadcastActivation(int serial, boolean activate) throws RemoteException {
+        public void setCdmaBroadcastActivation(int serial, boolean activate)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1821,7 +1876,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void acknowledgeIncomingGsmSmsWithPdu(int serial, boolean success, String ackPdu) throws RemoteException {
+        public void acknowledgeIncomingGsmSmsWithPdu(int serial, boolean success, String ackPdu)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1895,7 +1951,12 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setInitialAttachApn(int serial, DataProfileInfo dataProfileInfo, boolean modemCognitive, boolean isRoaming) throws RemoteException {
+        public void setInitialAttachApn(
+                int serial,
+                DataProfileInfo dataProfileInfo,
+                boolean modemCognitive,
+                boolean isRoaming)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1941,7 +2002,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void iccTransmitApduBasicChannel(int serial, SimApdu message) throws RemoteException {
+        public void iccTransmitApduBasicChannel(int serial, SimApdu message)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -1987,7 +2049,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void iccTransmitApduLogicalChannel(int serial, SimApdu message) throws RemoteException {
+        public void iccTransmitApduLogicalChannel(int serial, SimApdu message)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -2106,7 +2169,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void requestIccSimAuthentication(int serial, int authContext, String authData, String aid) throws RemoteException {
+        public void requestIccSimAuthentication(
+                int serial, int authContext, String authData, String aid) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -2123,7 +2187,9 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setDataProfile(int serial, ArrayList<DataProfileInfo> profiles, boolean isRoaming) throws RemoteException {
+        public void setDataProfile(
+                int serial, ArrayList<DataProfileInfo> profiles, boolean isRoaming)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -2182,7 +2248,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void startLceService(int serial, int reportInterval, boolean pullMode) throws RemoteException {
+        public void startLceService(int serial, int reportInterval, boolean pullMode)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -2240,7 +2307,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void setAllowedCarriers(int serial, boolean allAllowed, CarrierRestrictions carriers) throws RemoteException {
+        public void setAllowedCarriers(int serial, boolean allAllowed, CarrierRestrictions carriers)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -2270,7 +2338,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio
-        public void sendDeviceState(int serial, int deviceStateType, boolean state) throws RemoteException {
+        public void sendDeviceState(int serial, int deviceStateType, boolean state)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IRadio.kInterfaceName);
             _hidl_request.writeInt32(serial);
@@ -2388,7 +2457,9 @@ public interface IRadio extends IBase {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -2416,7 +2487,8 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
@@ -2470,8 +2542,9 @@ public interface IRadio extends IBase {
         }
     }
 
-    public static abstract class Stub extends HwBinder implements IRadio {
-        @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements IRadio {
+        @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase,
+        // android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
@@ -2482,8 +2555,7 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
         @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
@@ -2492,21 +2564,89 @@ public interface IRadio extends IBase {
 
         @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{-49, -86, MidiConstants.STATUS_CONTROL_CHANGE, -28, 92, 93, 123, 53, -107, 3, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, 100, -99, -94, -98, -41, 18, -23, 32, -7, 86, -63, 54, 113, -17, -45, 86, 2, -6, -127, -55, 35}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                -49,
+                                -86,
+                                MidiConstants.STATUS_CONTROL_CHANGE,
+                                -28,
+                                92,
+                                93,
+                                123,
+                                53,
+                                -107,
+                                3,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                100,
+                                -99,
+                                -94,
+                                -98,
+                                -41,
+                                18,
+                                -23,
+                                32,
+                                -7,
+                                86,
+                                -63,
+                                54,
+                                113,
+                                -17,
+                                -45,
+                                86,
+                                2,
+                                -6,
+                                -127,
+                                -55,
+                                35
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
         @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
         @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        public final void ping() {}
 
         @Override // android.hardware.radio.V1_0.IRadio, android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
@@ -2522,7 +2662,8 @@ public interface IRadio extends IBase {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -2544,12 +2685,16 @@ public interface IRadio extends IBase {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(IRadio.kInterfaceName);
-                    IRadioResponse radioResponse = IRadioResponse.asInterface(_hidl_request.readStrongBinder());
-                    IRadioIndication radioIndication = IRadioIndication.asInterface(_hidl_request.readStrongBinder());
+                    IRadioResponse radioResponse =
+                            IRadioResponse.asInterface(_hidl_request.readStrongBinder());
+                    IRadioIndication radioIndication =
+                            IRadioIndication.asInterface(_hidl_request.readStrongBinder());
                     setResponseFunctions(radioResponse, radioIndication);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.send();
@@ -2720,7 +2865,13 @@ public interface IRadio extends IBase {
                     boolean modemCognitive = _hidl_request.readBool();
                     boolean roamingAllowed = _hidl_request.readBool();
                     boolean isRoaming = _hidl_request.readBool();
-                    setupDataCall(serial27, radioTechnology, dataProfileInfo, modemCognitive, roamingAllowed, isRoaming);
+                    setupDataCall(
+                            serial27,
+                            radioTechnology,
+                            dataProfileInfo,
+                            modemCognitive,
+                            roamingAllowed,
+                            isRoaming);
                     return;
                 case 29:
                     _hidl_request.enforceInterface(IRadio.kInterfaceName);
@@ -2814,7 +2965,8 @@ public interface IRadio extends IBase {
                     String password2 = _hidl_request.readString();
                     int serviceClass4 = _hidl_request.readInt32();
                     String appId2 = _hidl_request.readString();
-                    setFacilityLockForApp(serial41, facility2, lockState, password2, serviceClass4, appId2);
+                    setFacilityLockForApp(
+                            serial41, facility2, lockState, password2, serviceClass4, appId2);
                     return;
                 case 43:
                     _hidl_request.enforceInterface(IRadio.kInterfaceName);
@@ -3038,7 +3190,8 @@ public interface IRadio extends IBase {
                 case 81:
                     _hidl_request.enforceInterface(IRadio.kInterfaceName);
                     int serial80 = _hidl_request.readInt32();
-                    ArrayList<GsmBroadcastSmsConfigInfo> configInfo = GsmBroadcastSmsConfigInfo.readVectorFromParcel(_hidl_request);
+                    ArrayList<GsmBroadcastSmsConfigInfo> configInfo =
+                            GsmBroadcastSmsConfigInfo.readVectorFromParcel(_hidl_request);
                     setGsmBroadcastConfig(serial80, configInfo);
                     return;
                 case 82:
@@ -3055,7 +3208,8 @@ public interface IRadio extends IBase {
                 case 84:
                     _hidl_request.enforceInterface(IRadio.kInterfaceName);
                     int serial83 = _hidl_request.readInt32();
-                    ArrayList<CdmaBroadcastSmsConfigInfo> configInfo2 = CdmaBroadcastSmsConfigInfo.readVectorFromParcel(_hidl_request);
+                    ArrayList<CdmaBroadcastSmsConfigInfo> configInfo2 =
+                            CdmaBroadcastSmsConfigInfo.readVectorFromParcel(_hidl_request);
                     setCdmaBroadcastConfig(serial83, configInfo2);
                     return;
                 case 85:
@@ -3256,7 +3410,8 @@ public interface IRadio extends IBase {
                 case 117:
                     _hidl_request.enforceInterface(IRadio.kInterfaceName);
                     int serial116 = _hidl_request.readInt32();
-                    ArrayList<DataProfileInfo> profiles = DataProfileInfo.readVectorFromParcel(_hidl_request);
+                    ArrayList<DataProfileInfo> profiles =
+                            DataProfileInfo.readVectorFromParcel(_hidl_request);
                     boolean isRoaming3 = _hidl_request.readBool();
                     setDataProfile(serial116, profiles, isRoaming3);
                     return;
@@ -3370,7 +3525,8 @@ public interface IRadio extends IBase {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

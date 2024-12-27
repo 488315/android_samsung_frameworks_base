@@ -58,7 +58,8 @@ final class UserRestrictionsDetector extends BroadcastReceiver {
                 }
                 this.mIsUnmuteMicDisallowed = isUnmuteMicDisallowed;
                 if (this.mUserRestrictionsCallback != null) {
-                    this.mUserRestrictionsCallback.onMicrophoneRestrictionChanged(isUnmuteMicDisallowed);
+                    this.mUserRestrictionsCallback.onMicrophoneRestrictionChanged(
+                            isUnmuteMicDisallowed);
                 }
             }
         }

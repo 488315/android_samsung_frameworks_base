@@ -13,7 +13,12 @@ public final class InputMethodDialogWindowContext {
     public Context get(int i) {
         Context context = this.mDialogWindowContext;
         if (context == null || context.getDisplayId() != i) {
-            this.mDialogWindowContext = new ContextThemeWrapper(ActivityThread.currentActivityThread().getSystemUiContext(i).createWindowContext(2012, null), R.style.Theme.DeviceDefault.Settings);
+            this.mDialogWindowContext =
+                    new ContextThemeWrapper(
+                            ActivityThread.currentActivityThread()
+                                    .getSystemUiContext(i)
+                                    .createWindowContext(2012, null),
+                            R.style.Theme.DeviceDefault.Settings);
         }
         return this.mDialogWindowContext;
     }

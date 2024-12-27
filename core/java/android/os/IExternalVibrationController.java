@@ -27,7 +27,7 @@ public interface IExternalVibrationController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IExternalVibrationController {
+    public abstract static class Stub extends Binder implements IExternalVibrationController {
         static final int TRANSACTION_mute = 1;
         static final int TRANSACTION_unmute = 2;
 
@@ -68,7 +68,8 @@ public interface IExternalVibrationController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IExternalVibrationController.DESCRIPTOR);
             }

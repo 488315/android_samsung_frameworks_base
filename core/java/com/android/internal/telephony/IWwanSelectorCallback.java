@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.telephony.IWwanSelectorResultCallback;
 
 /* loaded from: classes5.dex */
 public interface IWwanSelectorCallback extends IInterface {
@@ -15,20 +14,24 @@ public interface IWwanSelectorCallback extends IInterface {
 
     void onDomainSelected(int i, boolean z) throws RemoteException;
 
-    void onRequestEmergencyNetworkScan(int[] iArr, int i, boolean z, IWwanSelectorResultCallback iWwanSelectorResultCallback) throws RemoteException;
+    void onRequestEmergencyNetworkScan(
+            int[] iArr, int i, boolean z, IWwanSelectorResultCallback iWwanSelectorResultCallback)
+            throws RemoteException;
 
     public static class Default implements IWwanSelectorCallback {
         @Override // com.android.internal.telephony.IWwanSelectorCallback
-        public void onRequestEmergencyNetworkScan(int[] preferredNetworks, int scanType, boolean resetScan, IWwanSelectorResultCallback cb) throws RemoteException {
-        }
+        public void onRequestEmergencyNetworkScan(
+                int[] preferredNetworks,
+                int scanType,
+                boolean resetScan,
+                IWwanSelectorResultCallback cb)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IWwanSelectorCallback
-        public void onDomainSelected(int domain, boolean useEmergencyPdn) throws RemoteException {
-        }
+        public void onDomainSelected(int domain, boolean useEmergencyPdn) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IWwanSelectorCallback
-        public void onCancel() throws RemoteException {
-        }
+        public void onCancel() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +39,7 @@ public interface IWwanSelectorCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWwanSelectorCallback {
+    public abstract static class Stub extends Binder implements IWwanSelectorCallback {
         static final int TRANSACTION_onCancel = 3;
         static final int TRANSACTION_onDomainSelected = 2;
         static final int TRANSACTION_onRequestEmergencyNetworkScan = 1;
@@ -80,7 +83,8 @@ public interface IWwanSelectorCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWwanSelectorCallback.DESCRIPTOR);
             }
@@ -93,7 +97,8 @@ public interface IWwanSelectorCallback extends IInterface {
                     int[] _arg0 = data.createIntArray();
                     int _arg1 = data.readInt();
                     boolean _arg2 = data.readBoolean();
-                    IWwanSelectorResultCallback _arg3 = IWwanSelectorResultCallback.Stub.asInterface(data.readStrongBinder());
+                    IWwanSelectorResultCallback _arg3 =
+                            IWwanSelectorResultCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onRequestEmergencyNetworkScan(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -128,7 +133,12 @@ public interface IWwanSelectorCallback extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IWwanSelectorCallback
-            public void onRequestEmergencyNetworkScan(int[] preferredNetworks, int scanType, boolean resetScan, IWwanSelectorResultCallback cb) throws RemoteException {
+            public void onRequestEmergencyNetworkScan(
+                    int[] preferredNetworks,
+                    int scanType,
+                    boolean resetScan,
+                    IWwanSelectorResultCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWwanSelectorCallback.DESCRIPTOR);
@@ -143,7 +153,8 @@ public interface IWwanSelectorCallback extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IWwanSelectorCallback
-            public void onDomainSelected(int domain, boolean useEmergencyPdn) throws RemoteException {
+            public void onDomainSelected(int domain, boolean useEmergencyPdn)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWwanSelectorCallback.DESCRIPTOR);

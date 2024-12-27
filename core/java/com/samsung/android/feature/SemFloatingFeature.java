@@ -2,6 +2,7 @@ package com.samsung.android.feature;
 
 import android.os.SystemProperties;
 import android.util.Log;
+
 import java.util.Hashtable;
 
 /* loaded from: classes6.dex */
@@ -65,7 +66,12 @@ public final class SemFloatingFeature implements IFloatingFeature {
     @Override // com.samsung.android.feature.IFloatingFeature
     @Deprecated
     public boolean getBoolean(String tag, boolean defaultValue) {
-        logw("You called API `boolean getBoolean(String tag, String defaultValue)` with feature [" + tag + "].It has been deprecated after android Q. Instead, please Use `boolean getBoolean(String tag)`");
+        logw(
+                "You called API `boolean getBoolean(String tag, String defaultValue)` with feature"
+                    + " ["
+                        + tag
+                        + "].It has been deprecated after android Q. Instead, please Use `boolean"
+                        + " getBoolean(String tag)`");
         if (tag == null) {
             loge("The first argument of getBoolean() cannot be null.");
             return false;
@@ -87,7 +93,11 @@ public final class SemFloatingFeature implements IFloatingFeature {
     @Override // com.samsung.android.feature.IFloatingFeature
     @Deprecated
     public String getString(String tag, String defaultValue) {
-        logw("You called API `String getString(String tag, String defaultValue)` with feature [" + tag + "].It has been deprecated after android Q. Instead, please Use `String getString(String tag)`");
+        logw(
+                "You called API `String getString(String tag, String defaultValue)` with feature ["
+                        + tag
+                        + "].It has been deprecated after android Q. Instead, please Use `String"
+                        + " getString(String tag)`");
         if (tag == null) {
             loge("The first argument of getString() cannot be null.");
             return "";
@@ -126,7 +136,11 @@ public final class SemFloatingFeature implements IFloatingFeature {
     @Override // com.samsung.android.feature.IFloatingFeature
     @Deprecated
     public int getInt(String tag, int defaultValue) {
-        logw("You called API `int getInt(String tag, int defaultValue)` with feature [" + tag + "].It has been deprecated after android Q. Instead, please Use `int getInt(String tag)`");
+        logw(
+                "You called API `int getInt(String tag, int defaultValue)` with feature ["
+                        + tag
+                        + "].It has been deprecated after android Q. Instead, please Use `int"
+                        + " getInt(String tag)`");
         if (tag == null) {
             loge("The first argument of getInt() cannot be null.");
             return defaultValue;
@@ -145,13 +159,13 @@ public final class SemFloatingFeature implements IFloatingFeature {
 
     /* JADX WARN: Can't wrap try/catch for region: R(8:11|(2:44|45)(2:13|(2:15|(2:18|(6:20|21|23|24|25|26)(2:30|31))))|35|36|38|39|40|26) */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x0086, code lost:
-    
-        r8 = move-exception;
-     */
+
+       r8 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:42:0x0087, code lost:
-    
-        loge(r8.toString());
-     */
+
+       loge(r8.toString());
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -161,6 +175,8 @@ public final class SemFloatingFeature implements IFloatingFeature {
             Method dump skipped, instructions count: 253
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.feature.SemFloatingFeature.loadFeatureFile():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.feature.SemFloatingFeature.loadFeatureFile():void");
     }
 }

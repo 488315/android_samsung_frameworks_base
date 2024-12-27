@@ -2,6 +2,7 @@ package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerVersionChecker;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -88,38 +89,44 @@ public class DvbtFrontendSettings extends FrontendSettings {
     private int mTransmissionMode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Bandwidth {
-    }
+    public @interface Bandwidth {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CodeRate {
-    }
+    public @interface CodeRate {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Constellation {
-    }
+    public @interface Constellation {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GuardInterval {
-    }
+    public @interface GuardInterval {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Hierarchy {
-    }
+    public @interface Hierarchy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PlpMode {
-    }
+    public @interface PlpMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Standard {
-    }
+    public @interface Standard {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TransmissionMode {
-    }
+    public @interface TransmissionMode {}
 
-    private DvbtFrontendSettings(long frequency, int transmissionMode, int bandwidth, int constellation, int hierarchy, int hpCodeRate, int lpCodeRate, int guardInterval, boolean isHighPriority, int standard, boolean isMiso, int plpMode, int plpId, int plpGroupId) {
+    private DvbtFrontendSettings(
+            long frequency,
+            int transmissionMode,
+            int bandwidth,
+            int constellation,
+            int hierarchy,
+            int hpCodeRate,
+            int lpCodeRate,
+            int guardInterval,
+            boolean isHighPriority,
+            int standard,
+            boolean isMiso,
+            int plpMode,
+            int plpId,
+            int plpGroupId) {
         super(frequency);
         this.mTransmissionMode = transmissionMode;
         this.mBandwidth = bandwidth;
@@ -195,7 +202,10 @@ public class DvbtFrontendSettings extends FrontendSettings {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static boolean isExtendedConstellation(int constellation) {
-        return constellation == 32 || constellation == 64 || constellation == 128 || constellation == 256;
+        return constellation == 32
+                || constellation == 64
+                || constellation == 128
+                || constellation == 256;
     }
 
     public static Builder builder() {
@@ -246,7 +256,9 @@ public class DvbtFrontendSettings extends FrontendSettings {
         }
 
         public Builder setTransmissionMode(int transmissionMode) {
-            if (!DvbtFrontendSettings.isExtendedTransmissionMode(transmissionMode) || TunerVersionChecker.checkHigherOrEqualVersionTo(65537, "set TransmissionMode Ext")) {
+            if (!DvbtFrontendSettings.isExtendedTransmissionMode(transmissionMode)
+                    || TunerVersionChecker.checkHigherOrEqualVersionTo(
+                            65537, "set TransmissionMode Ext")) {
                 this.mTransmissionMode = transmissionMode;
             }
             return this;
@@ -258,7 +270,9 @@ public class DvbtFrontendSettings extends FrontendSettings {
         }
 
         public Builder setConstellation(int constellation) {
-            if (!DvbtFrontendSettings.isExtendedConstellation(constellation) || TunerVersionChecker.checkHigherOrEqualVersionTo(65537, "set Constellation Ext")) {
+            if (!DvbtFrontendSettings.isExtendedConstellation(constellation)
+                    || TunerVersionChecker.checkHigherOrEqualVersionTo(
+                            65537, "set Constellation Ext")) {
                 this.mConstellation = constellation;
             }
             return this;
@@ -315,7 +329,21 @@ public class DvbtFrontendSettings extends FrontendSettings {
         }
 
         public DvbtFrontendSettings build() {
-            return new DvbtFrontendSettings(this.mFrequency, this.mTransmissionMode, this.mBandwidth, this.mConstellation, this.mHierarchy, this.mHpCodeRate, this.mLpCodeRate, this.mGuardInterval, this.mIsHighPriority, this.mStandard, this.mIsMiso, this.mPlpMode, this.mPlpId, this.mPlpGroupId);
+            return new DvbtFrontendSettings(
+                    this.mFrequency,
+                    this.mTransmissionMode,
+                    this.mBandwidth,
+                    this.mConstellation,
+                    this.mHierarchy,
+                    this.mHpCodeRate,
+                    this.mLpCodeRate,
+                    this.mGuardInterval,
+                    this.mIsHighPriority,
+                    this.mStandard,
+                    this.mIsMiso,
+                    this.mPlpMode,
+                    this.mPlpId,
+                    this.mPlpGroupId);
         }
     }
 

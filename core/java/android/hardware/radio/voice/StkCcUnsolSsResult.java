@@ -4,26 +4,29 @@ import android.hardware.radio.RadioError$$;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class StkCcUnsolSsResult implements Parcelable {
-    public static final Parcelable.Creator<StkCcUnsolSsResult> CREATOR = new Parcelable.Creator<StkCcUnsolSsResult>() { // from class: android.hardware.radio.voice.StkCcUnsolSsResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StkCcUnsolSsResult createFromParcel(Parcel _aidl_source) {
-            StkCcUnsolSsResult _aidl_out = new StkCcUnsolSsResult();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<StkCcUnsolSsResult> CREATOR =
+            new Parcelable.Creator<StkCcUnsolSsResult>() { // from class:
+                // android.hardware.radio.voice.StkCcUnsolSsResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StkCcUnsolSsResult createFromParcel(Parcel _aidl_source) {
+                    StkCcUnsolSsResult _aidl_out = new StkCcUnsolSsResult();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StkCcUnsolSsResult[] newArray(int _aidl_size) {
-            return new StkCcUnsolSsResult[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StkCcUnsolSsResult[] newArray(int _aidl_size) {
+                    return new StkCcUnsolSsResult[_aidl_size];
+                }
+            };
     public static final int REQUEST_TYPE_ACTIVATION = 0;
     public static final int REQUEST_TYPE_DEACTIVATION = 1;
     public static final int REQUEST_TYPE_ERASURE = 4;

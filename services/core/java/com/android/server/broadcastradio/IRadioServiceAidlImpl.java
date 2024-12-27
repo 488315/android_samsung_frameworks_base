@@ -13,11 +13,13 @@ import android.os.Binder;
 import android.util.ArrayMap;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
+
 import com.android.server.broadcastradio.aidl.AnnouncementAggregator;
 import com.android.server.broadcastradio.aidl.BroadcastRadioServiceImpl;
 import com.android.server.broadcastradio.aidl.RadioModule;
 import com.android.server.broadcastradio.aidl.TunerSession;
 import com.android.server.utils.Slogf;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -36,17 +38,25 @@ public final class IRadioServiceAidlImpl extends IRadioService.Stub {
     static {
         StringBuilder sb = new StringBuilder();
         String str = IBroadcastRadio.DESCRIPTOR;
-        SERVICE_NAMES = Arrays.asList(AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, str, "/amfm"), ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, "/dab"));
+        SERVICE_NAMES =
+                Arrays.asList(
+                        AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, str, "/amfm"),
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, "/dab"));
     }
 
-    public IRadioServiceAidlImpl(BroadcastRadioService broadcastRadioService, BroadcastRadioServiceImpl broadcastRadioServiceImpl) {
+    public IRadioServiceAidlImpl(
+            BroadcastRadioService broadcastRadioService,
+            BroadcastRadioServiceImpl broadcastRadioServiceImpl) {
         Objects.requireNonNull(broadcastRadioService, "Broadcast radio service cannot be null");
         this.mService = broadcastRadioService;
-        Objects.requireNonNull(broadcastRadioServiceImpl, "Broadcast radio service implementation for AIDL HAL cannot be null");
+        Objects.requireNonNull(
+                broadcastRadioServiceImpl,
+                "Broadcast radio service implementation for AIDL HAL cannot be null");
         this.mAidlHalClient = broadcastRadioServiceImpl;
     }
 
-    public final ICloseHandle addAnnouncementListener(int[] iArr, IAnnouncementListener iAnnouncementListener) {
+    public final ICloseHandle addAnnouncementListener(
+            int[] iArr, IAnnouncementListener iAnnouncementListener) {
         boolean z;
         if (Log.isLoggable("BcRadioSrvAidl", 3)) {
             Slogf.d("BcRadioSrvAidl", "Adding announcement listener for %s", Arrays.toString(iArr));
@@ -57,17 +67,26 @@ public final class IRadioServiceAidlImpl extends IRadioService.Stub {
         BroadcastRadioServiceImpl broadcastRadioServiceImpl = this.mAidlHalClient;
         broadcastRadioServiceImpl.getClass();
         if (BroadcastRadioServiceImpl.DEBUG) {
-            Slogf.d("BcRadioAidlSrv", "Add AnnouncementListener with enable types %s", Arrays.toString(iArr));
+            Slogf.d(
+                    "BcRadioAidlSrv",
+                    "Add AnnouncementListener with enable types %s",
+                    Arrays.toString(iArr));
         }
-        AnnouncementAggregator announcementAggregator = new AnnouncementAggregator(iAnnouncementListener, broadcastRadioServiceImpl.mLock);
+        AnnouncementAggregator announcementAggregator =
+                new AnnouncementAggregator(iAnnouncementListener, broadcastRadioServiceImpl.mLock);
         synchronized (broadcastRadioServiceImpl.mLock) {
             z = false;
             for (int i = 0; i < broadcastRadioServiceImpl.mModules.size(); i++) {
                 try {
-                    announcementAggregator.watchModule((RadioModule) broadcastRadioServiceImpl.mModules.valueAt(i), iArr);
+                    announcementAggregator.watchModule(
+                            (RadioModule) broadcastRadioServiceImpl.mModules.valueAt(i), iArr);
                     z = true;
                 } catch (UnsupportedOperationException e) {
-                    Slogf.w("BcRadioAidlSrv", e, "Announcements not supported for this module", new Object[0]);
+                    Slogf.w(
+                            "BcRadioAidlSrv",
+                            e,
+                            "Announcements not supported for this module",
+                            new Object[0]);
                 }
             }
         }
@@ -77,9 +96,16 @@ public final class IRadioServiceAidlImpl extends IRadioService.Stub {
         return announcementAggregator;
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-        if (this.mService.getContext().checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
-            printWriter.println("Permission Denial: can't dump AIDL BroadcastRadioService from from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid() + " without permission android.permission.DUMP");
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+        if (this.mService.getContext().checkCallingOrSelfPermission("android.permission.DUMP")
+                != 0) {
+            printWriter.println(
+                    "Permission Denial: can't dump AIDL BroadcastRadioService from from pid="
+                            + Binder.getCallingPid()
+                            + ", uid="
+                            + Binder.getCallingUid()
+                            + " without permission android.permission.DUMP");
             return;
         }
         IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter);
@@ -90,19 +116,32 @@ public final class IRadioServiceAidlImpl extends IRadioService.Stub {
         BroadcastRadioServiceImpl broadcastRadioServiceImpl = this.mAidlHalClient;
         synchronized (broadcastRadioServiceImpl.mLock) {
             try {
-                indentingPrintWriter.printf("Next module id available: %d\n", new Object[]{Integer.valueOf(broadcastRadioServiceImpl.mNextModuleId)});
+                indentingPrintWriter.printf(
+                        "Next module id available: %d\n",
+                        new Object[] {Integer.valueOf(broadcastRadioServiceImpl.mNextModuleId)});
                 indentingPrintWriter.printf("ServiceName to module id map:\n", new Object[0]);
                 indentingPrintWriter.increaseIndent();
-                for (Map.Entry entry : ((ArrayMap) broadcastRadioServiceImpl.mServiceNameToModuleIdMap).entrySet()) {
-                    indentingPrintWriter.printf("Service name: %s, module id: %d\n", new Object[]{entry.getKey(), entry.getValue()});
+                for (Map.Entry entry :
+                        ((ArrayMap) broadcastRadioServiceImpl.mServiceNameToModuleIdMap)
+                                .entrySet()) {
+                    indentingPrintWriter.printf(
+                            "Service name: %s, module id: %d\n",
+                            new Object[] {entry.getKey(), entry.getValue()});
                 }
                 indentingPrintWriter.decreaseIndent();
-                indentingPrintWriter.printf("Radio modules [%d]:\n", new Object[]{Integer.valueOf(broadcastRadioServiceImpl.mModules.size())});
+                indentingPrintWriter.printf(
+                        "Radio modules [%d]:\n",
+                        new Object[] {Integer.valueOf(broadcastRadioServiceImpl.mModules.size())});
                 indentingPrintWriter.increaseIndent();
                 for (int i = 0; i < broadcastRadioServiceImpl.mModules.size(); i++) {
-                    indentingPrintWriter.printf("Module id=%d:\n", new Object[]{Integer.valueOf(broadcastRadioServiceImpl.mModules.keyAt(i))});
+                    indentingPrintWriter.printf(
+                            "Module id=%d:\n",
+                            new Object[] {
+                                Integer.valueOf(broadcastRadioServiceImpl.mModules.keyAt(i))
+                            });
                     indentingPrintWriter.increaseIndent();
-                    ((RadioModule) broadcastRadioServiceImpl.mModules.valueAt(i)).dumpInfo(indentingPrintWriter);
+                    ((RadioModule) broadcastRadioServiceImpl.mModules.valueAt(i))
+                            .dumpInfo(indentingPrintWriter);
                     indentingPrintWriter.decreaseIndent();
                 }
                 indentingPrintWriter.decreaseIndent();
@@ -122,7 +161,9 @@ public final class IRadioServiceAidlImpl extends IRadioService.Stub {
             try {
                 arrayList = new ArrayList(broadcastRadioServiceImpl.mModules.size());
                 for (int i = 0; i < broadcastRadioServiceImpl.mModules.size(); i++) {
-                    arrayList.add(((RadioModule) broadcastRadioServiceImpl.mModules.valueAt(i)).mProperties);
+                    arrayList.add(
+                            ((RadioModule) broadcastRadioServiceImpl.mModules.valueAt(i))
+                                    .mProperties);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -131,7 +172,8 @@ public final class IRadioServiceAidlImpl extends IRadioService.Stub {
         return arrayList;
     }
 
-    public final ITuner openTuner(int i, RadioManager.BandConfig bandConfig, boolean z, ITunerCallback iTunerCallback) {
+    public final ITuner openTuner(
+            int i, RadioManager.BandConfig bandConfig, boolean z, ITunerCallback iTunerCallback) {
         TunerSession tunerSession;
         Boolean bool;
         RadioManager.ProgramInfo programInfo;
@@ -165,12 +207,14 @@ public final class IRadioServiceAidlImpl extends IRadioService.Stub {
                 synchronized (radioModule.mLock) {
                     try {
                         boolean isEmpty = radioModule.mAidlTunerSessions.isEmpty();
-                        tunerSession = new TunerSession(radioModule, radioModule.mService, iTunerCallback);
+                        tunerSession =
+                                new TunerSession(radioModule, radioModule.mService, iTunerCallback);
                         radioModule.mAidlTunerSessions.add(tunerSession);
                         bool = radioModule.mAntennaConnected;
                         programInfo = radioModule.mCurrentProgramInfo;
                         if (isEmpty) {
-                            ((IBroadcastRadio.Stub.Proxy) radioModule.mService).setTunerCallback(radioModule.mHalTunerCallback);
+                            ((IBroadcastRadio.Stub.Proxy) radioModule.mService)
+                                    .setTunerCallback(radioModule.mHalTunerCallback);
                         }
                     } finally {
                     }

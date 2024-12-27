@@ -16,7 +16,8 @@ public final class RollingBuffer {
         if (i >= 0 && i < this.mCount) {
             return (this.mStart + i) % this.mSize;
         }
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "invalid index: ", ", mCount= ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(i, "invalid index: ", ", mCount= ");
         m.append(this.mCount);
         throw new ArrayIndexOutOfBoundsException(m.toString());
     }

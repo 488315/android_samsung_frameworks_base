@@ -16,12 +16,7 @@ import android.view.inputmethod.ImeTracker;
 import android.view.inputmethod.InputBinding;
 import android.view.inputmethod.InputMethodSubtype;
 import android.window.ImeOnBackInvokedDispatcher;
-import com.android.internal.inputmethod.IConnectionlessHandwritingCallback;
-import com.android.internal.inputmethod.IInlineSuggestionsRequestCallback;
-import com.android.internal.inputmethod.IInputMethodPrivilegedOperations;
-import com.android.internal.inputmethod.IInputMethodSession;
-import com.android.internal.inputmethod.IInputMethodSessionCallback;
-import com.android.internal.inputmethod.IRemoteInputConnection;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -30,19 +25,28 @@ public interface IInputMethod extends IInterface {
 
     void bindInput(InputBinding inputBinding) throws RemoteException;
 
-    void canStartStylusHandwriting(int i, IConnectionlessHandwritingCallback iConnectionlessHandwritingCallback, CursorAnchorInfo cursorAnchorInfo, boolean z) throws RemoteException;
+    void canStartStylusHandwriting(
+            int i,
+            IConnectionlessHandwritingCallback iConnectionlessHandwritingCallback,
+            CursorAnchorInfo cursorAnchorInfo,
+            boolean z)
+            throws RemoteException;
 
     void changeInputMethodSubtype(InputMethodSubtype inputMethodSubtype) throws RemoteException;
 
     void commitHandwritingDelegationTextIfAvailable() throws RemoteException;
 
-    void createSession(InputChannel inputChannel, IInputMethodSessionCallback iInputMethodSessionCallback) throws RemoteException;
+    void createSession(
+            InputChannel inputChannel, IInputMethodSessionCallback iInputMethodSessionCallback)
+            throws RemoteException;
 
     void discardHandwritingDelegationText() throws RemoteException;
 
     void finishStylusHandwriting() throws RemoteException;
 
-    void hideSoftInput(IBinder iBinder, ImeTracker.Token token, int i, ResultReceiver resultReceiver) throws RemoteException;
+    void hideSoftInput(
+            IBinder iBinder, ImeTracker.Token token, int i, ResultReceiver resultReceiver)
+            throws RemoteException;
 
     void initInkWindow() throws RemoteException;
 
@@ -50,21 +54,28 @@ public interface IInputMethod extends IInterface {
 
     void minimizeSoftInput(int i) throws RemoteException;
 
-    void onCreateInlineSuggestionsRequest(InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo, IInlineSuggestionsRequestCallback iInlineSuggestionsRequestCallback) throws RemoteException;
+    void onCreateInlineSuggestionsRequest(
+            InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo,
+            IInlineSuggestionsRequestCallback iInlineSuggestionsRequestCallback)
+            throws RemoteException;
 
     void onNavButtonFlagsChanged(int i) throws RemoteException;
 
     void removeStylusHandwritingWindow() throws RemoteException;
 
-    void setSessionEnabled(IInputMethodSession iInputMethodSession, boolean z) throws RemoteException;
+    void setSessionEnabled(IInputMethodSession iInputMethodSession, boolean z)
+            throws RemoteException;
 
     void setStylusWindowIdleTimeoutForTest(long j) throws RemoteException;
 
-    void showSoftInput(IBinder iBinder, ImeTracker.Token token, int i, ResultReceiver resultReceiver) throws RemoteException;
+    void showSoftInput(
+            IBinder iBinder, ImeTracker.Token token, int i, ResultReceiver resultReceiver)
+            throws RemoteException;
 
     void startInput(StartInputParams startInputParams) throws RemoteException;
 
-    void startStylusHandwriting(int i, InputChannel inputChannel, List<MotionEvent> list) throws RemoteException;
+    void startStylusHandwriting(int i, InputChannel inputChannel, List<MotionEvent> list)
+            throws RemoteException;
 
     void unbindInput() throws RemoteException;
 
@@ -74,92 +85,91 @@ public interface IInputMethod extends IInterface {
 
     public static class Default implements IInputMethod {
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void initializeInternal(InitParams params) throws RemoteException {
-        }
+        public void initializeInternal(InitParams params) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void onCreateInlineSuggestionsRequest(InlineSuggestionsRequestInfo requestInfo, IInlineSuggestionsRequestCallback cb) throws RemoteException {
-        }
+        public void onCreateInlineSuggestionsRequest(
+                InlineSuggestionsRequestInfo requestInfo, IInlineSuggestionsRequestCallback cb)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void bindInput(InputBinding binding) throws RemoteException {
-        }
+        public void bindInput(InputBinding binding) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void unbindInput() throws RemoteException {
-        }
+        public void unbindInput() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void startInput(StartInputParams params) throws RemoteException {
-        }
+        public void startInput(StartInputParams params) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void onNavButtonFlagsChanged(int navButtonFlags) throws RemoteException {
-        }
+        public void onNavButtonFlagsChanged(int navButtonFlags) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void createSession(InputChannel channel, IInputMethodSessionCallback callback) throws RemoteException {
-        }
+        public void createSession(InputChannel channel, IInputMethodSessionCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void setSessionEnabled(IInputMethodSession session, boolean enabled) throws RemoteException {
-        }
+        public void setSessionEnabled(IInputMethodSession session, boolean enabled)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void showSoftInput(IBinder showInputToken, ImeTracker.Token statsToken, int flags, ResultReceiver resultReceiver) throws RemoteException {
-        }
+        public void showSoftInput(
+                IBinder showInputToken,
+                ImeTracker.Token statsToken,
+                int flags,
+                ResultReceiver resultReceiver)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void hideSoftInput(IBinder hideInputToken, ImeTracker.Token statsToken, int flags, ResultReceiver resultReceiver) throws RemoteException {
-        }
+        public void hideSoftInput(
+                IBinder hideInputToken,
+                ImeTracker.Token statsToken,
+                int flags,
+                ResultReceiver resultReceiver)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void updateEditorToolType(int toolType) throws RemoteException {
-        }
+        public void updateEditorToolType(int toolType) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void changeInputMethodSubtype(InputMethodSubtype subtype) throws RemoteException {
-        }
+        public void changeInputMethodSubtype(InputMethodSubtype subtype) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void canStartStylusHandwriting(int requestId, IConnectionlessHandwritingCallback connectionlessCallback, CursorAnchorInfo cursorAnchorInfo, boolean isConnectionlessForDelegation) throws RemoteException {
-        }
+        public void canStartStylusHandwriting(
+                int requestId,
+                IConnectionlessHandwritingCallback connectionlessCallback,
+                CursorAnchorInfo cursorAnchorInfo,
+                boolean isConnectionlessForDelegation)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void startStylusHandwriting(int requestId, InputChannel channel, List<MotionEvent> events) throws RemoteException {
-        }
+        public void startStylusHandwriting(
+                int requestId, InputChannel channel, List<MotionEvent> events)
+                throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void commitHandwritingDelegationTextIfAvailable() throws RemoteException {
-        }
+        public void commitHandwritingDelegationTextIfAvailable() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void discardHandwritingDelegationText() throws RemoteException {
-        }
+        public void discardHandwritingDelegationText() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void initInkWindow() throws RemoteException {
-        }
+        public void initInkWindow() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void finishStylusHandwriting() throws RemoteException {
-        }
+        public void finishStylusHandwriting() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void removeStylusHandwritingWindow() throws RemoteException {
-        }
+        public void removeStylusHandwritingWindow() throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void setStylusWindowIdleTimeoutForTest(long timeout) throws RemoteException {
-        }
+        public void setStylusWindowIdleTimeoutForTest(long timeout) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void minimizeSoftInput(int height) throws RemoteException {
-        }
+        public void minimizeSoftInput(int height) throws RemoteException {}
 
         @Override // com.android.internal.inputmethod.IInputMethod
-        public void undoMinimizeSoftInput() throws RemoteException {
-        }
+        public void undoMinimizeSoftInput() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -167,7 +177,7 @@ public interface IInputMethod extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputMethod {
+    public abstract static class Stub extends Binder implements IInputMethod {
         static final int TRANSACTION_bindInput = 3;
         static final int TRANSACTION_canStartStylusHandwriting = 13;
         static final int TRANSACTION_changeInputMethodSubtype = 12;
@@ -268,7 +278,8 @@ public interface IInputMethod extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInputMethod.DESCRIPTOR);
             }
@@ -283,8 +294,12 @@ public interface IInputMethod extends IInterface {
                     initializeInternal(_arg0);
                     return true;
                 case 2:
-                    InlineSuggestionsRequestInfo _arg02 = (InlineSuggestionsRequestInfo) data.readTypedObject(InlineSuggestionsRequestInfo.CREATOR);
-                    IInlineSuggestionsRequestCallback _arg1 = IInlineSuggestionsRequestCallback.Stub.asInterface(data.readStrongBinder());
+                    InlineSuggestionsRequestInfo _arg02 =
+                            (InlineSuggestionsRequestInfo)
+                                    data.readTypedObject(InlineSuggestionsRequestInfo.CREATOR);
+                    IInlineSuggestionsRequestCallback _arg1 =
+                            IInlineSuggestionsRequestCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCreateInlineSuggestionsRequest(_arg02, _arg1);
                     return true;
@@ -297,7 +312,8 @@ public interface IInputMethod extends IInterface {
                     unbindInput();
                     return true;
                 case 5:
-                    StartInputParams _arg04 = (StartInputParams) data.readTypedObject(StartInputParams.CREATOR);
+                    StartInputParams _arg04 =
+                            (StartInputParams) data.readTypedObject(StartInputParams.CREATOR);
                     data.enforceNoDataAvail();
                     startInput(_arg04);
                     return true;
@@ -308,7 +324,8 @@ public interface IInputMethod extends IInterface {
                     return true;
                 case 7:
                     InputChannel _arg06 = (InputChannel) data.readTypedObject(InputChannel.CREATOR);
-                    IInputMethodSessionCallback _arg12 = IInputMethodSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    IInputMethodSessionCallback _arg12 =
+                            IInputMethodSessionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     createSession(_arg06, _arg12);
                     return true;
@@ -321,17 +338,21 @@ public interface IInputMethod extends IInterface {
                     return true;
                 case 9:
                     IBinder _arg09 = data.readStrongBinder();
-                    ImeTracker.Token _arg14 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg14 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     int _arg2 = data.readInt();
-                    ResultReceiver _arg3 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg3 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     showSoftInput(_arg09, _arg14, _arg2, _arg3);
                     return true;
                 case 10:
                     IBinder _arg010 = data.readStrongBinder();
-                    ImeTracker.Token _arg15 = (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
+                    ImeTracker.Token _arg15 =
+                            (ImeTracker.Token) data.readTypedObject(ImeTracker.Token.CREATOR);
                     int _arg22 = data.readInt();
-                    ResultReceiver _arg32 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg32 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     hideSoftInput(_arg010, _arg15, _arg22, _arg32);
                     return true;
@@ -341,14 +362,18 @@ public interface IInputMethod extends IInterface {
                     updateEditorToolType(_arg011);
                     return true;
                 case 12:
-                    InputMethodSubtype _arg012 = (InputMethodSubtype) data.readTypedObject(InputMethodSubtype.CREATOR);
+                    InputMethodSubtype _arg012 =
+                            (InputMethodSubtype) data.readTypedObject(InputMethodSubtype.CREATOR);
                     data.enforceNoDataAvail();
                     changeInputMethodSubtype(_arg012);
                     return true;
                 case 13:
                     int _arg013 = data.readInt();
-                    IConnectionlessHandwritingCallback _arg16 = IConnectionlessHandwritingCallback.Stub.asInterface(data.readStrongBinder());
-                    CursorAnchorInfo _arg23 = (CursorAnchorInfo) data.readTypedObject(CursorAnchorInfo.CREATOR);
+                    IConnectionlessHandwritingCallback _arg16 =
+                            IConnectionlessHandwritingCallback.Stub.asInterface(
+                                    data.readStrongBinder());
+                    CursorAnchorInfo _arg23 =
+                            (CursorAnchorInfo) data.readTypedObject(CursorAnchorInfo.CREATOR);
                     boolean _arg33 = data.readBoolean();
                     data.enforceNoDataAvail();
                     canStartStylusHandwriting(_arg013, _arg16, _arg23, _arg33);
@@ -422,7 +447,9 @@ public interface IInputMethod extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
-            public void onCreateInlineSuggestionsRequest(InlineSuggestionsRequestInfo requestInfo, IInlineSuggestionsRequestCallback cb) throws RemoteException {
+            public void onCreateInlineSuggestionsRequest(
+                    InlineSuggestionsRequestInfo requestInfo, IInlineSuggestionsRequestCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethod.DESCRIPTOR);
@@ -482,7 +509,8 @@ public interface IInputMethod extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
-            public void createSession(InputChannel channel, IInputMethodSessionCallback callback) throws RemoteException {
+            public void createSession(InputChannel channel, IInputMethodSessionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethod.DESCRIPTOR);
@@ -495,7 +523,8 @@ public interface IInputMethod extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
-            public void setSessionEnabled(IInputMethodSession session, boolean enabled) throws RemoteException {
+            public void setSessionEnabled(IInputMethodSession session, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethod.DESCRIPTOR);
@@ -508,7 +537,12 @@ public interface IInputMethod extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
-            public void showSoftInput(IBinder showInputToken, ImeTracker.Token statsToken, int flags, ResultReceiver resultReceiver) throws RemoteException {
+            public void showSoftInput(
+                    IBinder showInputToken,
+                    ImeTracker.Token statsToken,
+                    int flags,
+                    ResultReceiver resultReceiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethod.DESCRIPTOR);
@@ -523,7 +557,12 @@ public interface IInputMethod extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
-            public void hideSoftInput(IBinder hideInputToken, ImeTracker.Token statsToken, int flags, ResultReceiver resultReceiver) throws RemoteException {
+            public void hideSoftInput(
+                    IBinder hideInputToken,
+                    ImeTracker.Token statsToken,
+                    int flags,
+                    ResultReceiver resultReceiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethod.DESCRIPTOR);
@@ -550,7 +589,8 @@ public interface IInputMethod extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
-            public void changeInputMethodSubtype(InputMethodSubtype subtype) throws RemoteException {
+            public void changeInputMethodSubtype(InputMethodSubtype subtype)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethod.DESCRIPTOR);
@@ -562,7 +602,12 @@ public interface IInputMethod extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
-            public void canStartStylusHandwriting(int requestId, IConnectionlessHandwritingCallback connectionlessCallback, CursorAnchorInfo cursorAnchorInfo, boolean isConnectionlessForDelegation) throws RemoteException {
+            public void canStartStylusHandwriting(
+                    int requestId,
+                    IConnectionlessHandwritingCallback connectionlessCallback,
+                    CursorAnchorInfo cursorAnchorInfo,
+                    boolean isConnectionlessForDelegation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethod.DESCRIPTOR);
@@ -577,7 +622,9 @@ public interface IInputMethod extends IInterface {
             }
 
             @Override // com.android.internal.inputmethod.IInputMethod
-            public void startStylusHandwriting(int requestId, InputChannel channel, List<MotionEvent> events) throws RemoteException {
+            public void startStylusHandwriting(
+                    int requestId, InputChannel channel, List<MotionEvent> events)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethod.DESCRIPTOR);
@@ -688,21 +735,24 @@ public interface IInputMethod extends IInterface {
     }
 
     public static class InitParams implements Parcelable {
-        public static final Parcelable.Creator<InitParams> CREATOR = new Parcelable.Creator<InitParams>() { // from class: com.android.internal.inputmethod.IInputMethod.InitParams.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public InitParams createFromParcel(Parcel _aidl_source) {
-                InitParams _aidl_out = new InitParams();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<InitParams> CREATOR =
+                new Parcelable.Creator<
+                        InitParams>() { // from class:
+                                        // com.android.internal.inputmethod.IInputMethod.InitParams.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public InitParams createFromParcel(Parcel _aidl_source) {
+                        InitParams _aidl_out = new InitParams();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public InitParams[] newArray(int _aidl_size) {
-                return new InitParams[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public InitParams[] newArray(int _aidl_size) {
+                        return new InitParams[_aidl_size];
+                    }
+                };
         public int navigationBarFlags = 0;
         public IInputMethodPrivilegedOperations privilegedOperations;
         public IBinder token;
@@ -742,7 +792,9 @@ public interface IInputMethod extends IInterface {
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                     return;
                 }
-                this.privilegedOperations = IInputMethodPrivilegedOperations.Stub.asInterface(_aidl_parcel.readStrongBinder());
+                this.privilegedOperations =
+                        IInputMethodPrivilegedOperations.Stub.asInterface(
+                                _aidl_parcel.readStrongBinder());
                 if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
@@ -771,21 +823,24 @@ public interface IInputMethod extends IInterface {
     }
 
     public static class StartInputParams implements Parcelable {
-        public static final Parcelable.Creator<StartInputParams> CREATOR = new Parcelable.Creator<StartInputParams>() { // from class: com.android.internal.inputmethod.IInputMethod.StartInputParams.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public StartInputParams createFromParcel(Parcel _aidl_source) {
-                StartInputParams _aidl_out = new StartInputParams();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<StartInputParams> CREATOR =
+                new Parcelable.Creator<
+                        StartInputParams>() { // from class:
+                                              // com.android.internal.inputmethod.IInputMethod.StartInputParams.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public StartInputParams createFromParcel(Parcel _aidl_source) {
+                        StartInputParams _aidl_out = new StartInputParams();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public StartInputParams[] newArray(int _aidl_size) {
-                return new StartInputParams[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public StartInputParams[] newArray(int _aidl_size) {
+                        return new StartInputParams[_aidl_size];
+                    }
+                };
         public EditorInfo editorInfo;
         public ImeOnBackInvokedDispatcher imeDispatcher;
         public IRemoteInputConnection remoteInputConnection;
@@ -831,7 +886,8 @@ public interface IInputMethod extends IInterface {
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                     return;
                 }
-                this.remoteInputConnection = IRemoteInputConnection.Stub.asInterface(_aidl_parcel.readStrongBinder());
+                this.remoteInputConnection =
+                        IRemoteInputConnection.Stub.asInterface(_aidl_parcel.readStrongBinder());
                 if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
@@ -862,7 +918,10 @@ public interface IInputMethod extends IInterface {
                     }
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 } else {
-                    this.imeDispatcher = (ImeOnBackInvokedDispatcher) _aidl_parcel.readTypedObject(ImeOnBackInvokedDispatcher.CREATOR);
+                    this.imeDispatcher =
+                            (ImeOnBackInvokedDispatcher)
+                                    _aidl_parcel.readTypedObject(
+                                            ImeOnBackInvokedDispatcher.CREATOR);
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }

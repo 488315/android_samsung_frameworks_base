@@ -2,7 +2,7 @@ package com.android.internal.widget;
 
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.internal.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,14 +135,17 @@ class ChildHelper {
         for (int i = 0; i < count; i++) {
             View view = this.mHiddenViews.get(i);
             RecyclerView.ViewHolder holder = this.mCallback.getChildViewHolder(view);
-            if (holder.getLayoutPosition() == position && !holder.isInvalid() && !holder.isRemoved()) {
+            if (holder.getLayoutPosition() == position
+                    && !holder.isInvalid()
+                    && !holder.isRemoved()) {
                 return view;
             }
         }
         return null;
     }
 
-    void attachViewToParent(View child, int index, ViewGroup.LayoutParams layoutParams, boolean hidden) {
+    void attachViewToParent(
+            View child, int index, ViewGroup.LayoutParams layoutParams, boolean hidden) {
         int offset;
         if (index < 0) {
             offset = this.mCallback.getChildCount();
@@ -232,8 +235,7 @@ class ChildHelper {
         long mData = 0;
         Bucket mNext;
 
-        Bucket() {
-        }
+        Bucket() {}
 
         void set(int index) {
             if (index >= 64) {
@@ -333,7 +335,9 @@ class ChildHelper {
         }
 
         public String toString() {
-            return this.mNext == null ? Long.toBinaryString(this.mData) : this.mNext.toString() + "xx" + Long.toBinaryString(this.mData);
+            return this.mNext == null
+                    ? Long.toBinaryString(this.mData)
+                    : this.mNext.toString() + "xx" + Long.toBinaryString(this.mData);
         }
     }
 }

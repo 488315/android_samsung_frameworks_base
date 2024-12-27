@@ -8,7 +8,10 @@ public abstract class BackupHelperWithLogger implements BackupHelper {
     private BackupRestoreEventLogger mLogger;
 
     @Override // android.app.backup.BackupHelper
-    public abstract void performBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2);
+    public abstract void performBackup(
+            ParcelFileDescriptor parcelFileDescriptor,
+            BackupDataOutput backupDataOutput,
+            ParcelFileDescriptor parcelFileDescriptor2);
 
     @Override // android.app.backup.BackupHelper
     public abstract void restoreEntity(BackupDataInputStream backupDataInputStream);

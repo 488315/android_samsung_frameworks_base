@@ -10,16 +10,13 @@ public interface IProgressListener extends IInterface {
 
     public static class Default implements IProgressListener {
         @Override // android.os.IProgressListener
-        public void onStarted(int id, Bundle extras) throws RemoteException {
-        }
+        public void onStarted(int id, Bundle extras) throws RemoteException {}
 
         @Override // android.os.IProgressListener
-        public void onProgress(int id, int progress, Bundle extras) throws RemoteException {
-        }
+        public void onProgress(int id, int progress, Bundle extras) throws RemoteException {}
 
         @Override // android.os.IProgressListener
-        public void onFinished(int id, Bundle extras) throws RemoteException {
-        }
+        public void onFinished(int id, Bundle extras) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +24,7 @@ public interface IProgressListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProgressListener {
+    public abstract static class Stub extends Binder implements IProgressListener {
         public static final String DESCRIPTOR = "android.os.IProgressListener";
         static final int TRANSACTION_onFinished = 3;
         static final int TRANSACTION_onProgress = 2;
@@ -72,7 +69,8 @@ public interface IProgressListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

@@ -6,13 +6,15 @@ import android.app.job.JobScheduler;
 import android.app.job.JobService;
 import android.content.ComponentName;
 import android.util.Slog;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public class SmartStorageMaintIdler extends JobService {
-    public static final ComponentName SMART_STORAGE_MAINT_SERVICE = new ComponentName("android", SmartStorageMaintIdler.class.getName());
+    public static final ComponentName SMART_STORAGE_MAINT_SERVICE =
+            new ComponentName("android", SmartStorageMaintIdler.class.getName());
     public JobParameters mJobParams;
     public final AtomicBoolean mStarted = new AtomicBoolean(false);
     public final AnonymousClass1 mFinishCallback = new AnonymousClass1();
@@ -20,12 +22,13 @@ public class SmartStorageMaintIdler extends JobService {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.SmartStorageMaintIdler$1, reason: invalid class name */
     public final class AnonymousClass1 implements Runnable {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // java.lang.Runnable
         public final void run() {
-            Slog.i("SmartStorageMaintIdler", "Got smart storage maintenance service completion callback");
+            Slog.i(
+                    "SmartStorageMaintIdler",
+                    "Got smart storage maintenance service completion callback");
             if (SmartStorageMaintIdler.this.mStarted.get()) {
                 SmartStorageMaintIdler smartStorageMaintIdler = SmartStorageMaintIdler.this;
                 smartStorageMaintIdler.jobFinished(smartStorageMaintIdler.mJobParams, false);
@@ -37,9 +40,11 @@ public class SmartStorageMaintIdler extends JobService {
             if (storageManagerService == null || storageManagerService.mPassedLifetimeThresh) {
                 return;
             }
-            JobScheduler jobScheduler = (JobScheduler) smartStorageMaintIdler2.getSystemService(JobScheduler.class);
+            JobScheduler jobScheduler =
+                    (JobScheduler) smartStorageMaintIdler2.getSystemService(JobScheduler.class);
             long millis = TimeUnit.MINUTES.toMillis(i);
-            JobInfo.Builder builder = new JobInfo.Builder(2808, SmartStorageMaintIdler.SMART_STORAGE_MAINT_SERVICE);
+            JobInfo.Builder builder =
+                    new JobInfo.Builder(2808, SmartStorageMaintIdler.SMART_STORAGE_MAINT_SERVICE);
             builder.setMinimumLatency(millis);
             jobScheduler.schedule(builder.build());
         }
@@ -53,21 +58,21 @@ public class SmartStorageMaintIdler extends JobService {
         }
         new Thread() { // from class: com.android.server.SmartStorageMaintIdler.2
             /* JADX WARN: Code restructure failed: missing block: B:22:0x00b0, code lost:
-            
-                if (r0 != null) goto L33;
-             */
+
+               if (r0 != null) goto L33;
+            */
             /* JADX WARN: Code restructure failed: missing block: B:23:0x00b2, code lost:
-            
-                r0.run();
-             */
+
+               r0.run();
+            */
             /* JADX WARN: Code restructure failed: missing block: B:25:?, code lost:
-            
-                return;
-             */
+
+               return;
+            */
             /* JADX WARN: Code restructure failed: missing block: B:40:0x00bb, code lost:
-            
-                if (r0 == null) goto L38;
-             */
+
+               if (r0 == null) goto L38;
+            */
             @Override // java.lang.Thread, java.lang.Runnable
             /*
                 Code decompiled incorrectly, please refer to instructions dump.
@@ -194,7 +199,9 @@ public class SmartStorageMaintIdler extends JobService {
                 Lce:
                     return
                 */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.SmartStorageMaintIdler.AnonymousClass2.run():void");
+                throw new UnsupportedOperationException(
+                        "Method not decompiled:"
+                            + " com.android.server.SmartStorageMaintIdler.AnonymousClass2.run():void");
             }
         }.start();
         return storageManagerService != null;

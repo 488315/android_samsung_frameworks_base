@@ -9,19 +9,22 @@ public class SemContextSensorStatusCheck extends SemContextEventContext {
     public static final int ACC_DATA_DEFAULT = 40000;
     public static final int ACC_DATA_OFFSET = 2;
     public static final int ACC_DATA_STUCK = 1;
-    public static final Parcelable.Creator<SemContextSensorStatusCheck> CREATOR = new Parcelable.Creator<SemContextSensorStatusCheck>() { // from class: com.samsung.android.hardware.context.SemContextSensorStatusCheck.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSensorStatusCheck createFromParcel(Parcel in) {
-            return new SemContextSensorStatusCheck(in);
-        }
+    public static final Parcelable.Creator<SemContextSensorStatusCheck> CREATOR =
+            new Parcelable.Creator<
+                    SemContextSensorStatusCheck>() { // from class:
+                                                     // com.samsung.android.hardware.context.SemContextSensorStatusCheck.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSensorStatusCheck createFromParcel(Parcel in) {
+                    return new SemContextSensorStatusCheck(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSensorStatusCheck[] newArray(int size) {
-            return new SemContextSensorStatusCheck[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSensorStatusCheck[] newArray(int size) {
+                    return new SemContextSensorStatusCheck[size];
+                }
+            };
     public static final int SENSORHUB_RESET = 3;
     public static final int SENSOR_DATA_NORMAL = 0;
     private Bundle mContext;

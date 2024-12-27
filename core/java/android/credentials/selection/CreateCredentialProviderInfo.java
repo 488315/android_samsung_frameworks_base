@@ -1,7 +1,9 @@
 package android.credentials.selection;
 
 import android.annotation.SystemApi;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +53,8 @@ public final class CreateCredentialProviderInfo {
         }
 
         public CreateCredentialProviderInfo build() {
-            return new CreateCredentialProviderInfo(this.mProviderName, this.mSaveEntries, this.mRemoteEntry);
+            return new CreateCredentialProviderInfo(
+                    this.mProviderName, this.mSaveEntries, this.mRemoteEntry);
         }
     }
 }

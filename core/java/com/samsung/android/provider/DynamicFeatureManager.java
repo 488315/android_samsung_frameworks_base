@@ -2,7 +2,7 @@ package com.samsung.android.provider;
 
 import android.os.RemoteException;
 import android.util.Slog;
-import com.samsung.android.provider.SemDynamicFeature;
+
 import java.util.ArrayList;
 
 /* loaded from: classes6.dex */
@@ -32,7 +32,9 @@ public class DynamicFeatureManager {
             return false;
         }
         if (message.length() > 10000) {
-            Slog.e(this.TAG, "Too long text has been entered. Please reduce it under 1000 characters ");
+            Slog.e(
+                    this.TAG,
+                    "Too long text has been entered. Please reduce it under 1000 characters ");
         }
         try {
             return this.mService.sendAbTestResult(namespace, name, message);

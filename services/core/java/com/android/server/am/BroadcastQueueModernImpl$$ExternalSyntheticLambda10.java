@@ -1,11 +1,13 @@
 package com.android.server.am;
 
 import android.content.Intent;
+
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BroadcastQueueModernImpl$$ExternalSyntheticLambda10 implements Predicate {
+public final /* synthetic */ class BroadcastQueueModernImpl$$ExternalSyntheticLambda10
+        implements Predicate {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -27,7 +29,14 @@ public final /* synthetic */ class BroadcastQueueModernImpl$$ExternalSyntheticLa
                 Intent intent = (Intent) obj2;
                 BroadcastProcessQueue broadcastProcessQueue = (BroadcastProcessQueue) obj;
                 BroadcastRecord broadcastRecord = broadcastProcessQueue.mActive;
-                return ((broadcastRecord == null || !intent.filterEquals(broadcastRecord.intent)) && BroadcastProcessQueue.isDispatchedInQueue(broadcastProcessQueue.mPending, intent) && BroadcastProcessQueue.isDispatchedInQueue(broadcastProcessQueue.mPendingUrgent, intent) && BroadcastProcessQueue.isDispatchedInQueue(broadcastProcessQueue.mPendingOffload, intent)) || broadcastProcessQueue.isDeferredUntilActive();
+                return ((broadcastRecord == null || !intent.filterEquals(broadcastRecord.intent))
+                                && BroadcastProcessQueue.isDispatchedInQueue(
+                                        broadcastProcessQueue.mPending, intent)
+                                && BroadcastProcessQueue.isDispatchedInQueue(
+                                        broadcastProcessQueue.mPendingUrgent, intent)
+                                && BroadcastProcessQueue.isDispatchedInQueue(
+                                        broadcastProcessQueue.mPendingOffload, intent))
+                        || broadcastProcessQueue.isDeferredUntilActive();
         }
     }
 }

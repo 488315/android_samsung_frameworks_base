@@ -14,12 +14,10 @@ public interface ISyncContext extends IInterface {
 
     public static class Default implements ISyncContext {
         @Override // android.content.ISyncContext
-        public void sendHeartbeat() throws RemoteException {
-        }
+        public void sendHeartbeat() throws RemoteException {}
 
         @Override // android.content.ISyncContext
-        public void onFinished(SyncResult result) throws RemoteException {
-        }
+        public void onFinished(SyncResult result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +25,7 @@ public interface ISyncContext extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISyncContext {
+    public abstract static class Stub extends Binder implements ISyncContext {
         public static final String DESCRIPTOR = "android.content.ISyncContext";
         static final int TRANSACTION_onFinished = 2;
         static final int TRANSACTION_sendHeartbeat = 1;
@@ -69,7 +67,8 @@ public interface ISyncContext extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

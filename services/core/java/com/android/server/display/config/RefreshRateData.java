@@ -36,7 +36,9 @@ public final class RefreshRateData {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.display.config.RefreshRateData loadRefreshRateData(com.android.server.display.config.DisplayConfiguration r9, android.content.res.Resources r10) {
+    public static com.android.server.display.config.RefreshRateData loadRefreshRateData(
+            com.android.server.display.config.DisplayConfiguration r9,
+            android.content.res.Resources r10) {
         /*
             r0 = 0
             if (r9 != 0) goto L5
@@ -143,10 +145,25 @@ public final class RefreshRateData {
             r2.<init>(r3, r4, r5, r6, r7, r8)
             return r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.config.RefreshRateData.loadRefreshRateData(com.android.server.display.config.DisplayConfiguration, android.content.res.Resources):com.android.server.display.config.RefreshRateData");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.config.RefreshRateData.loadRefreshRateData(com.android.server.display.config.DisplayConfiguration,"
+                    + " android.content.res.Resources):com.android.server.display.config.RefreshRateData");
     }
 
     public final String toString() {
-        return "RefreshRateData {defaultRefreshRate: " + this.defaultRefreshRate + ", defaultPeakRefreshRate: " + this.defaultPeakRefreshRate + ", defaultRefreshRateInHbmHdr: " + this.defaultRefreshRateInHbmHdr + ", defaultRefreshRateInHbmSunlight: " + this.defaultRefreshRateInHbmSunlight + ", lowPowerSupportedModes=" + this.lowPowerSupportedModes + ", lowLightBlockingZoneSupportedModes=" + this.lowLightBlockingZoneSupportedModes + "} ";
+        return "RefreshRateData {defaultRefreshRate: "
+                + this.defaultRefreshRate
+                + ", defaultPeakRefreshRate: "
+                + this.defaultPeakRefreshRate
+                + ", defaultRefreshRateInHbmHdr: "
+                + this.defaultRefreshRateInHbmHdr
+                + ", defaultRefreshRateInHbmSunlight: "
+                + this.defaultRefreshRateInHbmSunlight
+                + ", lowPowerSupportedModes="
+                + this.lowPowerSupportedModes
+                + ", lowLightBlockingZoneSupportedModes="
+                + this.lowLightBlockingZoneSupportedModes
+                + "} ";
     }
 }

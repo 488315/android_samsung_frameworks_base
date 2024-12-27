@@ -6,7 +6,7 @@ import android.icu.text.NumberingSystem;
 import android.icu.util.ULocale;
 import android.os.LocaleList;
 import android.text.TextUtils;
-import com.android.internal.app.LocaleStore;
+
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.Locale;
@@ -24,7 +24,11 @@ public class LocaleHelper {
     private static boolean shouldUseDialectName(Locale locale) {
         String lang = locale.getLanguage();
         String country = locale.getCountry();
-        return "fa".equals(lang) || "ro".equals(lang) || "zh".equals(lang) || "my".equals(lang) || "ZG".equals(country);
+        return "fa".equals(lang)
+                || "ro".equals(lang)
+                || "zh".equals(lang)
+                || "my".equals(lang)
+                || "ZG".equals(country);
     }
 
     public static String getDisplayName(Locale locale, Locale displayLocale, boolean sentenceCase) {
@@ -48,7 +52,10 @@ public class LocaleHelper {
         String country = ULocale.getDisplayCountry(languageTag, uDisplayLocale);
         String numberingSystem = locale.getUnicodeLocaleType("nu");
         if (numberingSystem != null) {
-            return String.format("%s (%s)", country, ULocale.getDisplayKeywordValue(languageTag, "numbers", uDisplayLocale));
+            return String.format(
+                    "%s (%s)",
+                    country,
+                    ULocale.getDisplayKeywordValue(languageTag, "numbers", uDisplayLocale));
         }
         return country;
     }
@@ -57,7 +64,8 @@ public class LocaleHelper {
         return ULocale.getDisplayCountry(locale.toLanguageTag(), ULocale.getDefault());
     }
 
-    public static String getDisplayLocaleList(LocaleList locales, Locale displayLocale, int maxLocales) {
+    public static String getDisplayLocaleList(
+            LocaleList locales, Locale displayLocale, int maxLocales) {
         int localeCount;
         int localeCount2;
         Locale dispLocale = displayLocale == null ? Locale.getDefault() : displayLocale;
@@ -81,7 +89,11 @@ public class LocaleHelper {
     }
 
     public static String getDisplayNumberingSystemKeyValue(Locale locale, Locale displayLocale) {
-        ULocale uLocale = new ULocale.Builder().setUnicodeLocaleKeyword("nu", NumberingSystem.getInstance(locale).getName()).build();
+        ULocale uLocale =
+                new ULocale.Builder()
+                        .setUnicodeLocaleKeyword(
+                                "nu", NumberingSystem.getInstance(locale).getName())
+                        .build();
         return uLocale.getDisplayKeywordValue("numbers", ULocale.forLocale(displayLocale));
     }
 
@@ -99,7 +111,8 @@ public class LocaleHelper {
             this(sortLocale, countryMode, false);
         }
 
-        public LocaleInfoComparator(Locale sortLocale, boolean countryMode, boolean useSecSuggestion) {
+        public LocaleInfoComparator(
+                Locale sortLocale, boolean countryMode, boolean useSecSuggestion) {
             this.mCollator = Collator.getInstance(sortLocale);
             this.mCountryMode = countryMode;
             this.mUseSecSuggestion = useSecSuggestion;
@@ -134,7 +147,9 @@ public class LocaleHelper {
                 return lhs.isPriorityLocale() ? -1 : 1;
             }
             if (!this.mUseSecSuggestion || lhs.isSecSuggested() == rhs.isSecSuggested()) {
-                return this.mCollator.compare(removePrefixForCompare(lhs.getLocale(), lhs.getLabel(this.mCountryMode)), removePrefixForCompare(rhs.getLocale(), rhs.getLabel(this.mCountryMode)));
+                return this.mCollator.compare(
+                        removePrefixForCompare(lhs.getLocale(), lhs.getLabel(this.mCountryMode)),
+                        removePrefixForCompare(rhs.getLocale(), rhs.getLabel(this.mCountryMode)));
             }
             return lhs.isSecSuggested() ? -1 : 1;
         }

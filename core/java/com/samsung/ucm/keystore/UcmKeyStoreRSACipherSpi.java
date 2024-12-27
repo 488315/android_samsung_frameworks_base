@@ -1,9 +1,11 @@
 package com.samsung.ucm.keystore;
 
 import android.security.keystore.KeyProperties;
+
 import java.math.BigInteger;
 import java.security.Key;
 import java.util.Arrays;
+
 import javax.crypto.IllegalBlockSizeException;
 
 /* loaded from: classes6.dex */
@@ -87,12 +89,18 @@ public class UcmKeyStoreRSACipherSpi extends UcmKeyStoreGenericCipher {
             throw new IllegalBlockSizeException("Invalid input data");
         }
         if (this.mIsInputTooLarge) {
-            throw new IllegalBlockSizeException("Input must be under " + this.mBuffer.length + " bytes");
+            throw new IllegalBlockSizeException(
+                    "Input must be under " + this.mBuffer.length + " bytes");
         }
         if (this.mBufferOffset != this.mBuffer.length) {
             if (padding == 1) {
                 retBuffer = new byte[this.mBuffer.length];
-                System.arraycopy(this.mBuffer, 0, retBuffer, this.mBuffer.length - this.mBufferOffset, this.mBufferOffset);
+                System.arraycopy(
+                        this.mBuffer,
+                        0,
+                        retBuffer,
+                        this.mBuffer.length - this.mBufferOffset,
+                        this.mBufferOffset);
             } else {
                 byte[] retBuffer2 = this.mBuffer;
                 retBuffer = Arrays.copyOf(retBuffer2, this.mBufferOffset);

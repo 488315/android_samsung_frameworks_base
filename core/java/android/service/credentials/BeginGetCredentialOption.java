@@ -4,25 +4,30 @@ import android.annotation.NonNull;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes3.dex */
 public final class BeginGetCredentialOption implements Parcelable {
-    private static final String BUNDLE_ID_KEY = "android.service.credentials.BeginGetCredentialOption.BUNDLE_ID_KEY";
-    public static final Parcelable.Creator<BeginGetCredentialOption> CREATOR = new Parcelable.Creator<BeginGetCredentialOption>() { // from class: android.service.credentials.BeginGetCredentialOption.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BeginGetCredentialOption[] newArray(int size) {
-            return new BeginGetCredentialOption[size];
-        }
+    private static final String BUNDLE_ID_KEY =
+            "android.service.credentials.BeginGetCredentialOption.BUNDLE_ID_KEY";
+    public static final Parcelable.Creator<BeginGetCredentialOption> CREATOR =
+            new Parcelable.Creator<
+                    BeginGetCredentialOption>() { // from class:
+                                                  // android.service.credentials.BeginGetCredentialOption.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BeginGetCredentialOption[] newArray(int size) {
+                    return new BeginGetCredentialOption[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BeginGetCredentialOption createFromParcel(Parcel in) {
-            return new BeginGetCredentialOption(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BeginGetCredentialOption createFromParcel(Parcel in) {
+                    return new BeginGetCredentialOption(in);
+                }
+            };
     private final Bundle mCandidateQueryData;
     private final String mId;
     private final String mType;
@@ -52,7 +57,13 @@ public final class BeginGetCredentialOption implements Parcelable {
     }
 
     public String toString() {
-        return "GetCredentialOption {type=" + this.mType + ", candidateQueryData=" + this.mCandidateQueryData + ", id=" + this.mId + "}";
+        return "GetCredentialOption {type="
+                + this.mType
+                + ", candidateQueryData="
+                + this.mCandidateQueryData
+                + ", id="
+                + this.mId
+                + "}";
     }
 
     public BeginGetCredentialOption(String id, String type, Bundle candidateQueryData) {
@@ -73,9 +84,11 @@ public final class BeginGetCredentialOption implements Parcelable {
         Bundle candidateQueryData = in.readBundle();
         String id = in.readString8();
         this.mType = type;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mType);
         this.mCandidateQueryData = candidateQueryData;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCandidateQueryData);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCandidateQueryData);
         this.mId = id;
     }
 }

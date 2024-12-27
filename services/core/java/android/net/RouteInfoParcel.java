@@ -51,7 +51,8 @@ public class RouteInfoParcel implements Parcelable {
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             this.mtu = parcel.readInt();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                             parcel.setDataPosition(dataPosition + readInt);
                             return;
@@ -85,7 +86,9 @@ public class RouteInfoParcel implements Parcelable {
         parcel.writeString(this.destination);
         parcel.writeString(this.ifName);
         parcel.writeString(this.nextHop);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.mtu, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.mtu, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

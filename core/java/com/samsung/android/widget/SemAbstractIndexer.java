@@ -5,6 +5,7 @@ import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseIntArray;
+
 import java.text.Collator;
 import java.util.HashMap;
 
@@ -79,7 +80,8 @@ public abstract class SemAbstractIndexer extends DataSetObserver {
         initIndexer(indexCharacters);
     }
 
-    public SemAbstractIndexer(String[] indexCharacters, int aLangIndex, int profileCount, int favoriteCount) {
+    public SemAbstractIndexer(
+            String[] indexCharacters, int aLangIndex, int profileCount, int favoriteCount) {
         this.mProfileItemCount = 0;
         this.mFavoriteItemCount = 0;
         this.mUseFavoriteIndex = false;
@@ -117,13 +119,15 @@ public abstract class SemAbstractIndexer extends DataSetObserver {
         int langIndex = 0;
         while (langIndex < this.mLangAlphabetArray.length) {
             for (int j = 0; j < this.mLangAlphabetArray[langIndex].length(); j++) {
-                this.mLangIndexMap.put(Integer.valueOf(indexerString.length()), Integer.valueOf(langIndex));
+                this.mLangIndexMap.put(
+                        Integer.valueOf(indexerString.length()), Integer.valueOf(langIndex));
                 indexerString.append(this.mLangAlphabetArray[langIndex].charAt(j));
             }
             langIndex++;
         }
         if (this.mUseDigitIndex) {
-            this.mLangIndexMap.put(Integer.valueOf(indexerString.length()), Integer.valueOf(langIndex - 1));
+            this.mLangIndexMap.put(
+                    Integer.valueOf(indexerString.length()), Integer.valueOf(langIndex - 1));
             indexerString.append(DIGIT_CHAR);
         }
         initIndexer(indexerString.toString());
@@ -211,7 +215,9 @@ public abstract class SemAbstractIndexer extends DataSetObserver {
             return;
         }
         this.mBundle = getBundle();
-        if (this.mBundle != null && this.mBundle.containsKey("indexscroll_index_titles") && this.mBundle.containsKey("indexscroll_index_counts")) {
+        if (this.mBundle != null
+                && this.mBundle.containsKey("indexscroll_index_titles")
+                && this.mBundle.containsKey("indexscroll_index_counts")) {
             getBundleInfo();
             return;
         }
@@ -246,7 +252,8 @@ public abstract class SemAbstractIndexer extends DataSetObserver {
                     start = Math.abs(prevLetterPos);
                 }
             }
-            if (sectionIndex < this.mAlphabet.length() - 1 && letter < this.mAlphabet.charAt(sectionIndex + 1)) {
+            if (sectionIndex < this.mAlphabet.length() - 1
+                    && letter < this.mAlphabet.charAt(sectionIndex + 1)) {
                 int nextLetter = this.mAlphabet.charAt(sectionIndex + 1);
                 int nextLetterPos = alphaMap.get(nextLetter, Integer.MIN_VALUE);
                 if (nextLetterPos != Integer.MIN_VALUE) {
@@ -268,7 +275,8 @@ public abstract class SemAbstractIndexer extends DataSetObserver {
             if (start < this.mProfileItemCount + this.mFavoriteItemCount) {
                 start = this.mProfileItemCount + this.mFavoriteItemCount;
             }
-        } else if (start < this.mProfileItemCount + this.mFavoriteItemCount + this.mGroupItemCount) {
+        } else if (start
+                < this.mProfileItemCount + this.mFavoriteItemCount + this.mGroupItemCount) {
             start = this.mProfileItemCount + this.mFavoriteItemCount + this.mGroupItemCount;
         }
         int end2 = end - this.mDigitItemCount;
@@ -325,7 +333,14 @@ public abstract class SemAbstractIndexer extends DataSetObserver {
         for (int index = 0; index < this.mAlphabetLength; index++) {
             char targetChar = this.mAlphabet.charAt(index);
             this.mCachingValue[index] = basePosition;
-            Log.d("SemAbstractIndexer", "Get index info from bundle (" + index + ") : " + targetChar + " = " + basePosition);
+            Log.d(
+                    "SemAbstractIndexer",
+                    "Get index info from bundle ("
+                            + index
+                            + ") : "
+                            + targetChar
+                            + " = "
+                            + basePosition);
             if (targetChar == 9733) {
                 basePosition += this.mFavoriteItemCount;
             } else if (targetChar == 55357) {
@@ -345,7 +360,8 @@ public abstract class SemAbstractIndexer extends DataSetObserver {
                 }
             }
             if (targetChar == "#".charAt(0)) {
-                this.mCachingValue[index] = (getItemCount() + this.mProfileItemCount) - this.mDigitItemCount;
+                this.mCachingValue[index] =
+                        (getItemCount() + this.mProfileItemCount) - this.mDigitItemCount;
             }
         }
     }
@@ -382,9 +398,7 @@ public abstract class SemAbstractIndexer extends DataSetObserver {
         }
     }
 
-    protected void onBeginTransaction() {
-    }
+    protected void onBeginTransaction() {}
 
-    protected void onEndTransaction() {
-    }
+    protected void onEndTransaction() {}
 }

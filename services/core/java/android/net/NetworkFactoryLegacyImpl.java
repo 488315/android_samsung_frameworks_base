@@ -5,6 +5,7 @@ import android.hardware.biometrics.face.V1_0.OptionalBool$$ExternalSyntheticOutl
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -43,7 +44,11 @@ public class NetworkFactoryLegacyImpl extends Handler implements NetworkFactoryS
         }
     }
 
-    public NetworkFactoryLegacyImpl(NetworkFactory networkFactory, Looper looper, Context context, NetworkCapabilities networkCapabilities) {
+    public NetworkFactoryLegacyImpl(
+            NetworkFactory networkFactory,
+            Looper looper,
+            Context context,
+            NetworkCapabilities networkCapabilities) {
         super(looper);
         this.mNetworkRequests = new LinkedHashMap();
         this.mProvider = null;
@@ -63,11 +68,18 @@ public class NetworkFactoryLegacyImpl extends Handler implements NetworkFactoryS
     public final void evalRequest(NetworkRequestInfo networkRequestInfo) {
         boolean z = networkRequestInfo.requested;
         NetworkFactory networkFactory = this.mParent;
-        if (!z && ((networkRequestInfo.score < this.mScore || networkRequestInfo.providerId == this.mProvider.getProviderId()) && networkRequestInfo.request.canBeSatisfiedBy(this.mCapabilityFilter) && networkFactory.acceptRequest(networkRequestInfo.request))) {
+        if (!z
+                && ((networkRequestInfo.score < this.mScore
+                                || networkRequestInfo.providerId == this.mProvider.getProviderId())
+                        && networkRequestInfo.request.canBeSatisfiedBy(this.mCapabilityFilter)
+                        && networkFactory.acceptRequest(networkRequestInfo.request))) {
             networkFactory.needNetworkFor(networkRequestInfo.request);
             networkRequestInfo.requested = true;
         } else if (networkRequestInfo.requested) {
-            if ((networkRequestInfo.score <= this.mScore || networkRequestInfo.providerId == this.mProvider.getProviderId()) && networkRequestInfo.request.canBeSatisfiedBy(this.mCapabilityFilter) && networkFactory.acceptRequest(networkRequestInfo.request)) {
+            if ((networkRequestInfo.score <= this.mScore
+                            || networkRequestInfo.providerId == this.mProvider.getProviderId())
+                    && networkRequestInfo.request.canBeSatisfiedBy(this.mCapabilityFilter)
+                    && networkFactory.acceptRequest(networkRequestInfo.request)) {
                 return;
             }
             networkFactory.releaseNetworkFor(networkRequestInfo.request);
@@ -87,9 +99,11 @@ public class NetworkFactoryLegacyImpl extends Handler implements NetworkFactoryS
     }
 
     public void handleAddRequest(NetworkRequest networkRequest, int i, int i2) {
-        NetworkRequestInfo networkRequestInfo = (NetworkRequestInfo) ((LinkedHashMap) this.mNetworkRequests).get(networkRequest);
+        NetworkRequestInfo networkRequestInfo =
+                (NetworkRequestInfo) ((LinkedHashMap) this.mNetworkRequests).get(networkRequest);
         if (networkRequestInfo == null) {
-            this.mParent.log("got request " + networkRequest + " with score " + i + " and providerId " + i2);
+            this.mParent.log(
+                    "got request " + networkRequest + " with score " + i + " and providerId " + i2);
             networkRequestInfo = new NetworkRequestInfo(networkRequest, i, i2);
             this.mNetworkRequests.put(networkRequest, networkRequestInfo);
         } else {
@@ -123,7 +137,8 @@ public class NetworkFactoryLegacyImpl extends Handler implements NetworkFactoryS
     }
 
     public final void handleRemoveRequest$1(NetworkRequest networkRequest) {
-        NetworkRequestInfo networkRequestInfo = (NetworkRequestInfo) ((LinkedHashMap) this.mNetworkRequests).get(networkRequest);
+        NetworkRequestInfo networkRequestInfo =
+                (NetworkRequestInfo) ((LinkedHashMap) this.mNetworkRequests).get(networkRequest);
         if (networkRequestInfo != null) {
             this.mNetworkRequests.remove(networkRequest);
             if (networkRequestInfo.requested) {
@@ -133,12 +148,14 @@ public class NetworkFactoryLegacyImpl extends Handler implements NetworkFactoryS
     }
 
     public void reevaluateAllRequests() {
-        post(new Runnable() { // from class: android.net.NetworkFactoryLegacyImpl$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                NetworkFactoryLegacyImpl.this.evalRequests();
-            }
-        });
+        post(
+                new Runnable() { // from class:
+                                 // android.net.NetworkFactoryLegacyImpl$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        NetworkFactoryLegacyImpl.this.evalRequests();
+                    }
+                });
     }
 
     public void register(String str) {
@@ -146,16 +163,22 @@ public class NetworkFactoryLegacyImpl extends Handler implements NetworkFactoryS
             throw new IllegalStateException("A NetworkFactory must only be registered once");
         }
         this.mParent.log("Registering NetworkFactory");
-        this.mProvider = new NetworkProvider(this.mContext, getLooper(), str) { // from class: android.net.NetworkFactoryLegacyImpl.1
-            public final void onNetworkRequestWithdrawn(NetworkRequest networkRequest) {
-                NetworkFactoryLegacyImpl.this.handleRemoveRequest$1(networkRequest);
-            }
+        this.mProvider =
+                new NetworkProvider(
+                        this.mContext,
+                        getLooper(),
+                        str) { // from class: android.net.NetworkFactoryLegacyImpl.1
+                    public final void onNetworkRequestWithdrawn(NetworkRequest networkRequest) {
+                        NetworkFactoryLegacyImpl.this.handleRemoveRequest$1(networkRequest);
+                    }
 
-            public final void onNetworkRequested(NetworkRequest networkRequest, int i, int i2) {
-                NetworkFactoryLegacyImpl.this.handleAddRequest(networkRequest, i, i2);
-            }
-        };
-        ((ConnectivityManager) this.mContext.getSystemService("connectivity")).registerNetworkProvider(this.mProvider);
+                    public final void onNetworkRequested(
+                            NetworkRequest networkRequest, int i, int i2) {
+                        NetworkFactoryLegacyImpl.this.handleAddRequest(networkRequest, i, i2);
+                    }
+                };
+        ((ConnectivityManager) this.mContext.getSystemService("connectivity"))
+                .registerNetworkProvider(this.mProvider);
     }
 
     public void setCapabilityFilter(NetworkCapabilities networkCapabilities) {
@@ -174,7 +197,10 @@ public class NetworkFactoryLegacyImpl extends Handler implements NetworkFactoryS
     public String toString() {
         StringBuilder sb = new StringBuilder("providerId=");
         NetworkProvider networkProvider = this.mProvider;
-        sb.append(networkProvider != null ? Integer.valueOf(networkProvider.getProviderId()) : "null");
+        sb.append(
+                networkProvider != null
+                        ? Integer.valueOf(networkProvider.getProviderId())
+                        : "null");
         sb.append(", ScoreFilter=");
         sb.append(this.mScore);
         sb.append(", Filter=");

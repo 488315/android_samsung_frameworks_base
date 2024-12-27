@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -141,7 +142,8 @@ public final class NSUtLogger extends Handler {
         String name = file.getName();
         long length = file.length();
         if (((HashMap) this.mFileSizeMap).containsKey(name)) {
-            this.mDirectorySize += length - ((Long) ((HashMap) this.mFileSizeMap).get(name)).longValue();
+            this.mDirectorySize +=
+                    length - ((Long) ((HashMap) this.mFileSizeMap).get(name)).longValue();
         } else {
             this.mDirectorySize += length;
             this.mFileCount++;
@@ -163,6 +165,8 @@ public final class NSUtLogger extends Handler {
             Method dump skipped, instructions count: 2386
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.location.nsflp.NSUtLogger.writeData(int, java.io.File, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.location.nsflp.NSUtLogger.writeData(int,"
+                    + " java.io.File, java.lang.String):void");
     }
 }

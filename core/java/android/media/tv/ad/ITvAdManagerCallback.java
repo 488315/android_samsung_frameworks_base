@@ -18,16 +18,13 @@ public interface ITvAdManagerCallback extends IInterface {
 
     public static class Default implements ITvAdManagerCallback {
         @Override // android.media.tv.ad.ITvAdManagerCallback
-        public void onAdServiceAdded(String serviceId) throws RemoteException {
-        }
+        public void onAdServiceAdded(String serviceId) throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManagerCallback
-        public void onAdServiceRemoved(String serviceId) throws RemoteException {
-        }
+        public void onAdServiceRemoved(String serviceId) throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdManagerCallback
-        public void onAdServiceUpdated(String serviceId) throws RemoteException {
-        }
+        public void onAdServiceUpdated(String serviceId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +32,7 @@ public interface ITvAdManagerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvAdManagerCallback {
+    public abstract static class Stub extends Binder implements ITvAdManagerCallback {
         static final int TRANSACTION_onAdServiceAdded = 1;
         static final int TRANSACTION_onAdServiceRemoved = 2;
         static final int TRANSACTION_onAdServiceUpdated = 3;
@@ -79,7 +76,8 @@ public interface ITvAdManagerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITvAdManagerCallback.DESCRIPTOR);
             }

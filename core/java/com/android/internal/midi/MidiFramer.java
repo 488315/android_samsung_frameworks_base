@@ -1,6 +1,7 @@
 package com.android.internal.midi;
 
 import android.media.midi.MidiReceiver;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -45,7 +46,11 @@ public class MidiFramer extends MidiReceiver {
                         sysExStartOffset3 = sysExStartOffset4;
                     } else if (currentInt == 247) {
                         if (this.mInSysEx) {
-                            this.mReceiver.send(data, sysExStartOffset3, (sysExStartOffset4 - sysExStartOffset3) + 1, timestamp);
+                            this.mReceiver.send(
+                                    data,
+                                    sysExStartOffset3,
+                                    (sysExStartOffset4 - sysExStartOffset3) + 1,
+                                    timestamp);
                             this.mInSysEx = false;
                             sysExStartOffset3 = -1;
                         }
@@ -59,7 +64,11 @@ public class MidiFramer extends MidiReceiver {
                     if (!this.mInSysEx) {
                         sysExStartOffset = sysExStartOffset3;
                     } else {
-                        this.mReceiver.send(data, sysExStartOffset3, sysExStartOffset4 - sysExStartOffset3, timestamp);
+                        this.mReceiver.send(
+                                data,
+                                sysExStartOffset3,
+                                sysExStartOffset4 - sysExStartOffset3,
+                                timestamp);
                         sysExStartOffset = sysExStartOffset4 + 1;
                     }
                     this.mReceiver.send(data, sysExStartOffset4, 1, timestamp);
@@ -89,7 +98,8 @@ public class MidiFramer extends MidiReceiver {
             sysExStartOffset4++;
         }
         if (sysExStartOffset3 >= 0 && sysExStartOffset3 < sysExStartOffset4) {
-            this.mReceiver.send(data, sysExStartOffset3, sysExStartOffset4 - sysExStartOffset3, timestamp);
+            this.mReceiver.send(
+                    data, sysExStartOffset3, sysExStartOffset4 - sysExStartOffset3, timestamp);
         }
     }
 }

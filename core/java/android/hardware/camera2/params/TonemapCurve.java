@@ -3,7 +3,9 @@ package android.hardware.camera2.params;
 import android.graphics.PointF;
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 
 /* loaded from: classes2.dex */
@@ -42,9 +44,11 @@ public final class TonemapCurve {
         this.mBlue = Arrays.copyOf(blue, blue.length);
     }
 
-    private static void checkArgumentArrayLengthDivisibleBy(float[] array, int divisible, String arrayName) {
+    private static void checkArgumentArrayLengthDivisibleBy(
+            float[] array, int divisible, String arrayName) {
         if (array.length % divisible != 0) {
-            throw new IllegalArgumentException(arrayName + " size must be divisible by " + divisible);
+            throw new IllegalArgumentException(
+                    arrayName + " size must be divisible by " + divisible);
         }
     }
 
@@ -59,7 +63,8 @@ public final class TonemapCurve {
         }
     }
 
-    private static void checkArgumentArrayLengthNoLessThan(float[] array, int minLength, String arrayName) {
+    private static void checkArgumentArrayLengthNoLessThan(
+            float[] array, int minLength, String arrayName) {
         if (array.length < minLength) {
             throw new IllegalArgumentException(arrayName + " size must be at least " + minLength);
         }
@@ -102,7 +107,9 @@ public final class TonemapCurve {
             return false;
         }
         TonemapCurve other = (TonemapCurve) obj;
-        if (!Arrays.equals(this.mRed, other.mRed) || !Arrays.equals(this.mGreen, other.mGreen) || !Arrays.equals(this.mBlue, other.mBlue)) {
+        if (!Arrays.equals(this.mRed, other.mRed)
+                || !Arrays.equals(this.mGreen, other.mGreen)
+                || !Arrays.equals(this.mBlue, other.mBlue)) {
             return false;
         }
         return true;
@@ -118,7 +125,13 @@ public final class TonemapCurve {
     }
 
     public String toString() {
-        return "TonemapCurve{R:" + curveToString(0) + ", G:" + curveToString(1) + ", B:" + curveToString(2) + "}";
+        return "TonemapCurve{R:"
+                + curveToString(0)
+                + ", G:"
+                + curveToString(1)
+                + ", B:"
+                + curveToString(2)
+                + "}";
     }
 
     private String curveToString(int colorChannel) {

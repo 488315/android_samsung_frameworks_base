@@ -7,14 +7,14 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.view.ISurfaceControlViewHostParent;
 import android.window.ISurfaceSyncGroup;
 
 /* loaded from: classes4.dex */
 public interface ISurfaceControlViewHost extends IInterface {
     public static final String DESCRIPTOR = "android.view.ISurfaceControlViewHost";
 
-    void attachParentInterface(ISurfaceControlViewHostParent iSurfaceControlViewHostParent) throws RemoteException;
+    void attachParentInterface(ISurfaceControlViewHostParent iSurfaceControlViewHostParent)
+            throws RemoteException;
 
     ISurfaceSyncGroup getSurfaceSyncGroup() throws RemoteException;
 
@@ -26,16 +26,13 @@ public interface ISurfaceControlViewHost extends IInterface {
 
     public static class Default implements ISurfaceControlViewHost {
         @Override // android.view.ISurfaceControlViewHost
-        public void onConfigurationChanged(Configuration newConfig) throws RemoteException {
-        }
+        public void onConfigurationChanged(Configuration newConfig) throws RemoteException {}
 
         @Override // android.view.ISurfaceControlViewHost
-        public void onDispatchDetachedFromWindow() throws RemoteException {
-        }
+        public void onDispatchDetachedFromWindow() throws RemoteException {}
 
         @Override // android.view.ISurfaceControlViewHost
-        public void onInsetsChanged(InsetsState state, Rect insetFrame) throws RemoteException {
-        }
+        public void onInsetsChanged(InsetsState state, Rect insetFrame) throws RemoteException {}
 
         @Override // android.view.ISurfaceControlViewHost
         public ISurfaceSyncGroup getSurfaceSyncGroup() throws RemoteException {
@@ -43,8 +40,8 @@ public interface ISurfaceControlViewHost extends IInterface {
         }
 
         @Override // android.view.ISurfaceControlViewHost
-        public void attachParentInterface(ISurfaceControlViewHostParent parentInterface) throws RemoteException {
-        }
+        public void attachParentInterface(ISurfaceControlViewHostParent parentInterface)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -52,7 +49,7 @@ public interface ISurfaceControlViewHost extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISurfaceControlViewHost {
+    public abstract static class Stub extends Binder implements ISurfaceControlViewHost {
         static final int TRANSACTION_attachParentInterface = 5;
         static final int TRANSACTION_getSurfaceSyncGroup = 4;
         static final int TRANSACTION_onConfigurationChanged = 1;
@@ -102,7 +99,8 @@ public interface ISurfaceControlViewHost extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISurfaceControlViewHost.DESCRIPTOR);
             }
@@ -112,7 +110,8 @@ public interface ISurfaceControlViewHost extends IInterface {
             }
             switch (code) {
                 case 1:
-                    Configuration _arg0 = (Configuration) data.readTypedObject(Configuration.CREATOR);
+                    Configuration _arg0 =
+                            (Configuration) data.readTypedObject(Configuration.CREATOR);
                     data.enforceNoDataAvail();
                     onConfigurationChanged(_arg0);
                     return true;
@@ -131,7 +130,8 @@ public interface ISurfaceControlViewHost extends IInterface {
                     reply.writeStrongInterface(_result);
                     return true;
                 case 5:
-                    ISurfaceControlViewHostParent _arg03 = ISurfaceControlViewHostParent.Stub.asInterface(data.readStrongBinder());
+                    ISurfaceControlViewHostParent _arg03 =
+                            ISurfaceControlViewHostParent.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     attachParentInterface(_arg03);
                     return true;
@@ -200,7 +200,8 @@ public interface ISurfaceControlViewHost extends IInterface {
                     _data.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ISurfaceSyncGroup _result = ISurfaceSyncGroup.Stub.asInterface(_reply.readStrongBinder());
+                    ISurfaceSyncGroup _result =
+                            ISurfaceSyncGroup.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -209,7 +210,8 @@ public interface ISurfaceControlViewHost extends IInterface {
             }
 
             @Override // android.view.ISurfaceControlViewHost
-            public void attachParentInterface(ISurfaceControlViewHostParent parentInterface) throws RemoteException {
+            public void attachParentInterface(ISurfaceControlViewHostParent parentInterface)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISurfaceControlViewHost.DESCRIPTOR);

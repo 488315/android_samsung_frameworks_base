@@ -3,6 +3,7 @@ package android.graphics.text;
 import android.app.ActivityThread;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
@@ -27,35 +28,35 @@ public final class LineBreakConfig implements Parcelable {
     private final int mHyphenation;
     private final int mLineBreakStyle;
     private final int mLineBreakWordStyle;
-    public static final LineBreakConfig NONE = new Builder().setLineBreakStyle(0).setLineBreakWordStyle(0).build();
-    public static final Parcelable.Creator<LineBreakConfig> CREATOR = new Parcelable.Creator<LineBreakConfig>() { // from class: android.graphics.text.LineBreakConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LineBreakConfig createFromParcel(Parcel source) {
-            int lineBreakStyle = source.readInt();
-            int lineBreakWordStyle = source.readInt();
-            int hyphenation = source.readInt();
-            return new LineBreakConfig(lineBreakStyle, lineBreakWordStyle, hyphenation);
-        }
+    public static final LineBreakConfig NONE =
+            new Builder().setLineBreakStyle(0).setLineBreakWordStyle(0).build();
+    public static final Parcelable.Creator<LineBreakConfig> CREATOR =
+            new Parcelable.Creator<
+                    LineBreakConfig>() { // from class: android.graphics.text.LineBreakConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LineBreakConfig createFromParcel(Parcel source) {
+                    int lineBreakStyle = source.readInt();
+                    int lineBreakWordStyle = source.readInt();
+                    int hyphenation = source.readInt();
+                    return new LineBreakConfig(lineBreakStyle, lineBreakWordStyle, hyphenation);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LineBreakConfig[] newArray(int size) {
-            return new LineBreakConfig[size];
-        }
-    };
-
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Hyphenation {
-    }
-
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface LineBreakStyle {
-    }
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LineBreakConfig[] newArray(int size) {
+                    return new LineBreakConfig[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LineBreakWordStyle {
-    }
+    public @interface Hyphenation {}
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface LineBreakStyle {}
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface LineBreakWordStyle {}
 
     public static final class Builder {
         private int mLineBreakStyle = -1;
@@ -98,7 +99,10 @@ public final class LineBreakConfig implements Parcelable {
         }
 
         public Builder setLineBreakWordStyle(int lineBreakWordStyle) {
-            this.mLineBreakWordStyle = "ko".equalsIgnoreCase(Locale.getDefault().getLanguage()) ? 1 : lineBreakWordStyle;
+            this.mLineBreakWordStyle =
+                    "ko".equalsIgnoreCase(Locale.getDefault().getLanguage())
+                            ? 1
+                            : lineBreakWordStyle;
             return this;
         }
 
@@ -108,13 +112,16 @@ public final class LineBreakConfig implements Parcelable {
         }
 
         public LineBreakConfig build() {
-            return new LineBreakConfig(this.mLineBreakStyle, this.mLineBreakWordStyle, this.mHyphenation);
+            return new LineBreakConfig(
+                    this.mLineBreakStyle, this.mLineBreakWordStyle, this.mHyphenation);
         }
     }
 
     public static LineBreakConfig getLineBreakConfig(int lineBreakStyle, int lineBreakWordStyle) {
         Builder builder = new Builder();
-        return builder.setLineBreakStyle(lineBreakStyle).setLineBreakWordStyle(lineBreakWordStyle).build();
+        return builder.setLineBreakStyle(lineBreakStyle)
+                .setLineBreakWordStyle(lineBreakWordStyle)
+                .build();
     }
 
     public LineBreakConfig(int lineBreakStyle, int lineBreakWordStyle, int hyphenation) {
@@ -129,7 +136,8 @@ public final class LineBreakConfig implements Parcelable {
 
     public static int getResolvedLineBreakStyle(LineBreakConfig config) {
         int defaultStyle;
-        int targetSdkVersion = ActivityThread.currentApplication().getApplicationInfo().targetSdkVersion;
+        int targetSdkVersion =
+                ActivityThread.currentApplication().getApplicationInfo().targetSdkVersion;
         if (targetSdkVersion >= 35) {
             defaultStyle = 5;
         } else {
@@ -147,7 +155,8 @@ public final class LineBreakConfig implements Parcelable {
 
     public static int getResolvedLineBreakWordStyle(LineBreakConfig config) {
         int defaultWordStyle;
-        int targetSdkVersion = ActivityThread.currentApplication().getApplicationInfo().targetSdkVersion;
+        int targetSdkVersion =
+                ActivityThread.currentApplication().getApplicationInfo().targetSdkVersion;
         if (targetSdkVersion >= 35) {
             defaultWordStyle = 2;
         } else {
@@ -171,7 +180,12 @@ public final class LineBreakConfig implements Parcelable {
     }
 
     public LineBreakConfig merge(LineBreakConfig config) {
-        return new LineBreakConfig(config.mLineBreakStyle == -1 ? this.mLineBreakStyle : config.mLineBreakStyle, config.mLineBreakWordStyle == -1 ? this.mLineBreakWordStyle : config.mLineBreakWordStyle, config.mHyphenation == -1 ? this.mHyphenation : config.mHyphenation);
+        return new LineBreakConfig(
+                config.mLineBreakStyle == -1 ? this.mLineBreakStyle : config.mLineBreakStyle,
+                config.mLineBreakWordStyle == -1
+                        ? this.mLineBreakWordStyle
+                        : config.mLineBreakWordStyle,
+                config.mHyphenation == -1 ? this.mHyphenation : config.mHyphenation);
     }
 
     public boolean equals(Object o) {
@@ -185,18 +199,29 @@ public final class LineBreakConfig implements Parcelable {
             return false;
         }
         LineBreakConfig that = (LineBreakConfig) o;
-        if (this.mLineBreakStyle != that.mLineBreakStyle || this.mLineBreakWordStyle != that.mLineBreakWordStyle || this.mHyphenation != that.mHyphenation) {
+        if (this.mLineBreakStyle != that.mLineBreakStyle
+                || this.mLineBreakWordStyle != that.mLineBreakWordStyle
+                || this.mHyphenation != that.mHyphenation) {
             return false;
         }
         return true;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mLineBreakStyle), Integer.valueOf(this.mLineBreakWordStyle), Integer.valueOf(this.mHyphenation));
+        return Objects.hash(
+                Integer.valueOf(this.mLineBreakStyle),
+                Integer.valueOf(this.mLineBreakWordStyle),
+                Integer.valueOf(this.mHyphenation));
     }
 
     public String toString() {
-        return "LineBreakConfig{mLineBreakStyle=" + this.mLineBreakStyle + ", mLineBreakWordStyle=" + this.mLineBreakWordStyle + ", mHyphenation= " + this.mHyphenation + '}';
+        return "LineBreakConfig{mLineBreakStyle="
+                + this.mLineBreakStyle
+                + ", mLineBreakWordStyle="
+                + this.mLineBreakWordStyle
+                + ", mHyphenation= "
+                + this.mHyphenation
+                + '}';
     }
 
     @Override // android.os.Parcelable

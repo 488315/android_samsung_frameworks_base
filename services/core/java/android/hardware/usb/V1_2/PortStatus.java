@@ -6,6 +6,7 @@ import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOut
 import android.hardware.usb.V1_1.PortStatus_1_1;
 import android.hardware.usb.V1_1.PortStatus_1_1$$ExternalSyntheticOutline0;
 import android.os.HidlSupport;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -27,11 +28,28 @@ public final class PortStatus {
             return false;
         }
         PortStatus portStatus = (PortStatus) obj;
-        return HidlSupport.deepEquals(this.status_1_1, portStatus.status_1_1) && HidlSupport.deepEquals(Integer.valueOf(this.supportedContaminantProtectionModes), Integer.valueOf(portStatus.supportedContaminantProtectionModes)) && this.supportsEnableContaminantPresenceProtection == portStatus.supportsEnableContaminantPresenceProtection && this.contaminantProtectionStatus == portStatus.contaminantProtectionStatus && this.supportsEnableContaminantPresenceDetection == portStatus.supportsEnableContaminantPresenceDetection && this.contaminantDetectionStatus == portStatus.contaminantDetectionStatus;
+        return HidlSupport.deepEquals(this.status_1_1, portStatus.status_1_1)
+                && HidlSupport.deepEquals(
+                        Integer.valueOf(this.supportedContaminantProtectionModes),
+                        Integer.valueOf(portStatus.supportedContaminantProtectionModes))
+                && this.supportsEnableContaminantPresenceProtection
+                        == portStatus.supportsEnableContaminantPresenceProtection
+                && this.contaminantProtectionStatus == portStatus.contaminantProtectionStatus
+                && this.supportsEnableContaminantPresenceDetection
+                        == portStatus.supportsEnableContaminantPresenceDetection
+                && this.contaminantDetectionStatus == portStatus.contaminantDetectionStatus;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.status_1_1)), AudioConfig$$ExternalSyntheticOutline0.m(this.supportedContaminantProtectionModes), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.supportsEnableContaminantPresenceProtection), AudioConfig$$ExternalSyntheticOutline0.m(this.contaminantProtectionStatus), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.supportsEnableContaminantPresenceDetection), AudioConfig$$ExternalSyntheticOutline0.m(this.contaminantDetectionStatus));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.status_1_1)),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.supportedContaminantProtectionModes),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                        this.supportsEnableContaminantPresenceProtection),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.contaminantProtectionStatus),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                        this.supportsEnableContaminantPresenceDetection),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.contaminantDetectionStatus));
     }
 
     public final String toString() {
@@ -64,7 +82,19 @@ public final class PortStatus {
         sb.append(", .contaminantProtectionStatus = ");
         int i3 = this.contaminantProtectionStatus;
         String str = "DISABLED";
-        sb.append(i3 != 0 ? i3 == 1 ? "FORCE_SINK" : i3 == 2 ? "FORCE_SOURCE" : i3 == 4 ? "FORCE_DISABLE" : i3 == 8 ? "DISABLED" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i3) : "NONE");
+        sb.append(
+                i3 != 0
+                        ? i3 == 1
+                                ? "FORCE_SINK"
+                                : i3 == 2
+                                        ? "FORCE_SOURCE"
+                                        : i3 == 4
+                                                ? "FORCE_DISABLE"
+                                                : i3 == 8
+                                                        ? "DISABLED"
+                                                        : AudioChannelMask$$ExternalSyntheticOutline0
+                                                                .m(new StringBuilder("0x"), i3)
+                        : "NONE");
         sb.append(", .supportsEnableContaminantPresenceDetection = ");
         sb.append(this.supportsEnableContaminantPresenceDetection);
         sb.append(", .contaminantDetectionStatus = ");
@@ -72,7 +102,13 @@ public final class PortStatus {
         if (i4 == 0) {
             str = "NOT_SUPPORTED";
         } else if (i4 != 1) {
-            str = i4 == 2 ? "NOT_DETECTED" : i4 == 3 ? "DETECTED" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i4);
+            str =
+                    i4 == 2
+                            ? "NOT_DETECTED"
+                            : i4 == 3
+                                    ? "DETECTED"
+                                    : AudioChannelMask$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder("0x"), i4);
         }
         return AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, str, "}");
     }

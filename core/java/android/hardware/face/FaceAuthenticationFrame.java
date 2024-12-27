@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class FaceAuthenticationFrame implements Parcelable {
-    public static final Parcelable.Creator<FaceAuthenticationFrame> CREATOR = new Parcelable.Creator<FaceAuthenticationFrame>() { // from class: android.hardware.face.FaceAuthenticationFrame.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceAuthenticationFrame createFromParcel(Parcel source) {
-            return new FaceAuthenticationFrame(source);
-        }
+    public static final Parcelable.Creator<FaceAuthenticationFrame> CREATOR =
+            new Parcelable.Creator<FaceAuthenticationFrame>() { // from class:
+                // android.hardware.face.FaceAuthenticationFrame.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceAuthenticationFrame createFromParcel(Parcel source) {
+                    return new FaceAuthenticationFrame(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceAuthenticationFrame[] newArray(int size) {
-            return new FaceAuthenticationFrame[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceAuthenticationFrame[] newArray(int size) {
+                    return new FaceAuthenticationFrame[size];
+                }
+            };
     private final FaceDataFrame mData;
 
     public FaceAuthenticationFrame(FaceDataFrame data) {
@@ -29,7 +31,10 @@ public final class FaceAuthenticationFrame implements Parcelable {
     }
 
     private FaceAuthenticationFrame(Parcel source) {
-        this.mData = (FaceDataFrame) source.readParcelable(FaceDataFrame.class.getClassLoader(), FaceDataFrame.class);
+        this.mData =
+                (FaceDataFrame)
+                        source.readParcelable(
+                                FaceDataFrame.class.getClassLoader(), FaceDataFrame.class);
     }
 
     @Override // android.os.Parcelable

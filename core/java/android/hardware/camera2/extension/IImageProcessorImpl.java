@@ -8,14 +8,17 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IImageProcessorImpl extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.camera2.extension.IImageProcessorImpl";
+    public static final String DESCRIPTOR =
+            "android.hardware.camera2.extension.IImageProcessorImpl";
 
-    void onNextImageAvailable(OutputConfigId outputConfigId, ParcelImage parcelImage, String str) throws RemoteException;
+    void onNextImageAvailable(OutputConfigId outputConfigId, ParcelImage parcelImage, String str)
+            throws RemoteException;
 
     public static class Default implements IImageProcessorImpl {
         @Override // android.hardware.camera2.extension.IImageProcessorImpl
-        public void onNextImageAvailable(OutputConfigId outputConfigId, ParcelImage image, String physicalCameraId) throws RemoteException {
-        }
+        public void onNextImageAvailable(
+                OutputConfigId outputConfigId, ParcelImage image, String physicalCameraId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +26,7 @@ public interface IImageProcessorImpl extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImageProcessorImpl {
+    public abstract static class Stub extends Binder implements IImageProcessorImpl {
         static final int TRANSACTION_onNextImageAvailable = 1;
 
         public Stub() {
@@ -61,7 +64,8 @@ public interface IImageProcessorImpl extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImageProcessorImpl.DESCRIPTOR);
             }
@@ -71,7 +75,8 @@ public interface IImageProcessorImpl extends IInterface {
             }
             switch (code) {
                 case 1:
-                    OutputConfigId _arg0 = (OutputConfigId) data.readTypedObject(OutputConfigId.CREATOR);
+                    OutputConfigId _arg0 =
+                            (OutputConfigId) data.readTypedObject(OutputConfigId.CREATOR);
                     ParcelImage _arg1 = (ParcelImage) data.readTypedObject(ParcelImage.CREATOR);
                     String _arg2 = data.readString();
                     data.enforceNoDataAvail();
@@ -100,7 +105,9 @@ public interface IImageProcessorImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IImageProcessorImpl
-            public void onNextImageAvailable(OutputConfigId outputConfigId, ParcelImage image, String physicalCameraId) throws RemoteException {
+            public void onNextImageAvailable(
+                    OutputConfigId outputConfigId, ParcelImage image, String physicalCameraId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

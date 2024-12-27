@@ -21,7 +21,8 @@ public final class SamsungNotesService extends Binder {
             if (intent == null || (action = intent.getAction()) == null) {
                 return;
             }
-            if (action.equals("android.intent.action.PACKAGE_REPLACED") || action.equals("android.intent.action.PACKAGE_ADDED")) {
+            if (action.equals("android.intent.action.PACKAGE_REPLACED")
+                    || action.equals("android.intent.action.PACKAGE_ADDED")) {
                 SamsungNotesService.backgroundAllowlist(context);
             }
         }
@@ -40,7 +41,10 @@ public final class SamsungNotesService extends Binder {
 
     public static void backgroundAllowlist(Context context) {
         try {
-            int i = context.getPackageManager().getApplicationInfo("com.samsung.android.app.notes", 0).uid;
+            int i =
+                    context.getPackageManager()
+                            .getApplicationInfo("com.samsung.android.app.notes", 0)
+                            .uid;
             String num = Integer.toString(i);
             if (i >= 1000 && num != null) {
                 if (hasValidSignature(context)) {
@@ -50,7 +54,9 @@ public final class SamsungNotesService extends Binder {
                 }
                 return;
             }
-            Log.e("SamsungNotesService", "backgroundAllowlist: bad uid: " + i + ", uidString: " + num);
+            Log.e(
+                    "SamsungNotesService",
+                    "backgroundAllowlist: bad uid: " + i + ", uidString: " + num);
         } catch (Exception e) {
             Log.e("SamsungNotesService", "backgroundAllowlist exception ", e);
         }
@@ -59,8 +65,15 @@ public final class SamsungNotesService extends Binder {
     public static boolean hasValidSignature(Context context) {
         try {
             PackageManager packageManager = context.getPackageManager();
-            if (packageManager.getPackageInfo("android", 64).signatures[0].equals(packageManager.getPackageInfo("com.samsung.android.app.notes", 64).signatures[0])) {
-                Log.d("SamsungNotesService", "hasValidSignature, VALID : com.samsung.android.app.notes");
+            if (packageManager
+                    .getPackageInfo("android", 64)
+                    .signatures[0]
+                    .equals(
+                            packageManager.getPackageInfo("com.samsung.android.app.notes", 64)
+                                    .signatures[0])) {
+                Log.d(
+                        "SamsungNotesService",
+                        "hasValidSignature, VALID : com.samsung.android.app.notes");
                 return true;
             }
         } catch (PackageManager.NameNotFoundException | NullPointerException e) {

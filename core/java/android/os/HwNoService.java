@@ -5,14 +5,14 @@ import android.internal.hidl.manager.V1_0.IServiceManager;
 import android.internal.hidl.manager.V1_0.IServiceNotification;
 import android.internal.hidl.manager.V1_2.IServiceManager;
 import android.util.Log;
+
 import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
 final class HwNoService extends IServiceManager.Stub implements IHwBinder, IHwInterface {
     private static final String TAG = "HwNoService";
 
-    HwNoService() {
-    }
+    HwNoService() {}
 
     @Override // android.internal.hidl.manager.V1_2.IServiceManager.Stub
     public String toString() {
@@ -50,7 +50,8 @@ final class HwNoService extends IServiceManager.Stub implements IHwBinder, IHwIn
     }
 
     @Override // android.internal.hidl.manager.V1_0.IServiceManager
-    public boolean registerForNotifications(String fqName, String name, IServiceNotification callback) throws RemoteException {
+    public boolean registerForNotifications(
+            String fqName, String name, IServiceNotification callback) throws RemoteException {
         Log.i(TAG, "registerForNotifications with no hwservicemanager");
         return true;
     }
@@ -67,25 +68,36 @@ final class HwNoService extends IServiceManager.Stub implements IHwBinder, IHwIn
     }
 
     @Override // android.internal.hidl.manager.V1_1.IServiceManager
-    public boolean unregisterForNotifications(String fqName, String name, IServiceNotification callback) throws RemoteException {
+    public boolean unregisterForNotifications(
+            String fqName, String name, IServiceNotification callback) throws RemoteException {
         Log.i(TAG, "unregisterForNotifications with no hwservicemanager");
         return true;
     }
 
     @Override // android.internal.hidl.manager.V1_2.IServiceManager
-    public boolean registerClientCallback(String fqName, String name, IBase server, android.internal.hidl.manager.V1_2.IClientCallback cb) throws RemoteException {
-        Log.i(TAG, "registerClientCallback for " + fqName + "/" + name + " with no hwservicemanager");
+    public boolean registerClientCallback(
+            String fqName,
+            String name,
+            IBase server,
+            android.internal.hidl.manager.V1_2.IClientCallback cb)
+            throws RemoteException {
+        Log.i(
+                TAG,
+                "registerClientCallback for " + fqName + "/" + name + " with no hwservicemanager");
         return true;
     }
 
     @Override // android.internal.hidl.manager.V1_2.IServiceManager
-    public boolean unregisterClientCallback(IBase server, android.internal.hidl.manager.V1_2.IClientCallback cb) throws RemoteException {
+    public boolean unregisterClientCallback(
+            IBase server, android.internal.hidl.manager.V1_2.IClientCallback cb)
+            throws RemoteException {
         Log.i(TAG, "unregisterClientCallback with no hwservicemanager");
         return true;
     }
 
     @Override // android.internal.hidl.manager.V1_2.IServiceManager
-    public boolean addWithChain(String name, IBase service, ArrayList<String> chain) throws RemoteException {
+    public boolean addWithChain(String name, IBase service, ArrayList<String> chain)
+            throws RemoteException {
         Log.i(TAG, "addWithChain with no hwservicemanager");
         return true;
     }

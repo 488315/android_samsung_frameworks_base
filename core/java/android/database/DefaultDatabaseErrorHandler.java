@@ -36,9 +36,18 @@ public final class DefaultDatabaseErrorHandler implements DatabaseErrorHandler {
 
     @Override // android.database.DatabaseErrorHandler
     public void onCorruption(SQLiteDatabase dbObj) {
-        this.mDbDump.logAndDump(TAG, "Corruption reported by sqlite on database: " + dbObj.getPath());
+        this.mDbDump.logAndDump(
+                TAG, "Corruption reported by sqlite on database: " + dbObj.getPath());
         SQLiteDatabase.wipeDetected(dbObj.getPath(), "corruption");
-        this.mDbDump.addDumpLog(TAG, "DB wipe detected: package= reason=corruption file=" + dbObj.getPath() + " " + SQLiteDatabase.getFileTimestamps(dbObj.getPath()) + " checkfile " + SQLiteDatabase.getFileTimestamps(dbObj.getPath() + "-wipecheck"), Log.getStackTraceString(new Throwable("STACKTRACE")));
+        this.mDbDump.addDumpLog(
+                TAG,
+                "DB wipe detected: package= reason=corruption file="
+                        + dbObj.getPath()
+                        + " "
+                        + SQLiteDatabase.getFileTimestamps(dbObj.getPath())
+                        + " checkfile "
+                        + SQLiteDatabase.getFileTimestamps(dbObj.getPath() + "-wipecheck"),
+                Log.getStackTraceString(new Throwable("STACKTRACE")));
         ErrorHandler errorHandler = getErrorHandler(dbObj);
         if (!this.mDeleteDatabaseIfCorrupted) {
             this.mDbDump.logAndDump(TAG, "This application uses own corruption handler.");
@@ -48,7 +57,8 @@ public final class DefaultDatabaseErrorHandler implements DatabaseErrorHandler {
 
     private ErrorHandler getErrorHandler(SQLiteDatabase dbObj) {
         String path = dbObj.getPath();
-        if (path.equalsIgnoreCase(SQLiteDatabaseConfiguration.MEMORY_DB_PATH) || path.trim().length() == 0) {
+        if (path.equalsIgnoreCase(SQLiteDatabaseConfiguration.MEMORY_DB_PATH)
+                || path.trim().length() == 0) {
             return new DummyDatabaseErrorHandler(this.mDbDump);
         }
         if (!dbObj.isOpen()) {

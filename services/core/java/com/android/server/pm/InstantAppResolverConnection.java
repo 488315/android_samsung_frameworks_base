@@ -17,8 +17,10 @@ import android.os.RemoteException;
 import android.os.SystemClock;
 import android.util.Slog;
 import android.util.TimedRemoteCaller;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeoutException;
@@ -33,7 +35,8 @@ public final class InstantAppResolverConnection implements IBinder.DeathRecipien
     public final Intent mIntent;
     public IInstantAppResolver mRemoteInstance;
     public final Object mLock = new Object();
-    public final GetInstantAppResolveInfoCaller mGetInstantAppResolveInfoCaller = new GetInstantAppResolveInfoCaller();
+    public final GetInstantAppResolveInfoCaller mGetInstantAppResolveInfoCaller =
+            new GetInstantAppResolveInfoCaller();
     public final MyServiceConnection mServiceConnection = new MyServiceConnection();
     public int mBindState = 0;
     public final Handler mBgHandler = BackgroundThread.getHandler();
@@ -54,24 +57,33 @@ public final class InstantAppResolverConnection implements IBinder.DeathRecipien
         /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.pm.InstantAppResolverConnection$GetInstantAppResolveInfoCaller$1] */
         public GetInstantAppResolveInfoCaller() {
             super(InstantAppResolverConnection.CALL_SERVICE_TIMEOUT_MS);
-            this.mCallback = new IRemoteCallback.Stub() { // from class: com.android.server.pm.InstantAppResolverConnection.GetInstantAppResolveInfoCaller.1
-                public final void sendResult(Bundle bundle) {
-                    GetInstantAppResolveInfoCaller.this.onRemoteMethodResult(bundle.getParcelableArrayList("android.app.extra.RESOLVE_INFO", InstantAppResolveInfo.class), bundle.getInt("android.app.extra.SEQUENCE", -1));
-                }
-            };
+            this.mCallback =
+                    new IRemoteCallback
+                            .Stub() { // from class:
+                                      // com.android.server.pm.InstantAppResolverConnection.GetInstantAppResolveInfoCaller.1
+                        public final void sendResult(Bundle bundle) {
+                            GetInstantAppResolveInfoCaller.this.onRemoteMethodResult(
+                                    bundle.getParcelableArrayList(
+                                            "android.app.extra.RESOLVE_INFO",
+                                            InstantAppResolveInfo.class),
+                                    bundle.getInt("android.app.extra.SEQUENCE", -1));
+                        }
+                    };
         }
 
-        public final List getInstantAppResolveInfoList(IInstantAppResolver iInstantAppResolver, InstantAppRequestInfo instantAppRequestInfo) {
+        public final List getInstantAppResolveInfoList(
+                IInstantAppResolver iInstantAppResolver,
+                InstantAppRequestInfo instantAppRequestInfo) {
             int onBeforeRemoteCall = onBeforeRemoteCall();
-            iInstantAppResolver.getInstantAppResolveInfoList(instantAppRequestInfo, onBeforeRemoteCall, this.mCallback);
+            iInstantAppResolver.getInstantAppResolveInfoList(
+                    instantAppRequestInfo, onBeforeRemoteCall, this.mCallback);
             return (List) getResultTimed(onBeforeRemoteCall);
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyServiceConnection implements ServiceConnection {
-        public MyServiceConnection() {
-        }
+        public MyServiceConnection() {}
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -79,8 +91,10 @@ public final class InstantAppResolverConnection implements IBinder.DeathRecipien
                 Slog.d("PackageManager", "Connected to instant app resolver");
             }
             synchronized (InstantAppResolverConnection.this.mLock) {
-                InstantAppResolverConnection.this.mRemoteInstance = IInstantAppResolver.Stub.asInterface(iBinder);
-                InstantAppResolverConnection instantAppResolverConnection = InstantAppResolverConnection.this;
+                InstantAppResolverConnection.this.mRemoteInstance =
+                        IInstantAppResolver.Stub.asInterface(iBinder);
+                InstantAppResolverConnection instantAppResolverConnection =
+                        InstantAppResolverConnection.this;
                 if (instantAppResolverConnection.mBindState == 2) {
                     instantAppResolverConnection.mBindState = 0;
                 }
@@ -113,7 +127,9 @@ public final class InstantAppResolverConnection implements IBinder.DeathRecipien
 
     public InstantAppResolverConnection(Context context, ComponentName componentName) {
         this.mContext = context;
-        this.mIntent = new Intent("android.intent.action.RESOLVE_INSTANT_APP_PACKAGE").setComponent(componentName);
+        this.mIntent =
+                new Intent("android.intent.action.RESOLVE_INSTANT_APP_PACKAGE")
+                        .setComponent(componentName);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:45:0x012a A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -126,7 +142,9 @@ public final class InstantAppResolverConnection implements IBinder.DeathRecipien
             Method dump skipped, instructions count: 320
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.InstantAppResolverConnection.bind(java.lang.String):android.app.IInstantAppResolver");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.InstantAppResolverConnection.bind(java.lang.String):android.app.IInstantAppResolver");
     }
 
     @Override // android.os.IBinder.DeathRecipient
@@ -151,7 +169,10 @@ public final class InstantAppResolverConnection implements IBinder.DeathRecipien
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
                         try {
-                            List instantAppResolveInfoList = this.mGetInstantAppResolveInfoCaller.getInstantAppResolveInfoList(bind(token), instantAppRequestInfo);
+                            List instantAppResolveInfoList =
+                                    this.mGetInstantAppResolveInfoCaller
+                                            .getInstantAppResolveInfoList(
+                                                    bind(token), instantAppRequestInfo);
                             synchronized (this.mLock) {
                                 this.mLock.notifyAll();
                             }
@@ -199,9 +220,12 @@ public final class InstantAppResolverConnection implements IBinder.DeathRecipien
     public final void waitForBindLocked(String str) {
         long uptimeMillis = SystemClock.uptimeMillis();
         while (this.mBindState != 0 && this.mRemoteInstance == null) {
-            long uptimeMillis2 = BIND_SERVICE_TIMEOUT_MS - (SystemClock.uptimeMillis() - uptimeMillis);
+            long uptimeMillis2 =
+                    BIND_SERVICE_TIMEOUT_MS - (SystemClock.uptimeMillis() - uptimeMillis);
             if (uptimeMillis2 <= 0) {
-                throw new TimeoutException(XmlUtils$$ExternalSyntheticOutline0.m("[", str, "] Didn't bind to resolver in time!"));
+                throw new TimeoutException(
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "[", str, "] Didn't bind to resolver in time!"));
             }
             this.mLock.wait(uptimeMillis2);
         }

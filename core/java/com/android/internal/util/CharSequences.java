@@ -91,7 +91,9 @@ public class CharSequences {
         while (myPos < end) {
             int myPos2 = myPos + 1;
             int anotherPos = result + 1;
-            int result2 = Character.toLowerCase(me.charAt(myPos)) - Character.toLowerCase(another.charAt(result));
+            int result2 =
+                    Character.toLowerCase(me.charAt(myPos))
+                            - Character.toLowerCase(another.charAt(result));
             if (result2 != 0) {
                 return result2;
             }

@@ -8,12 +8,21 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IAppOpsActiveCallback extends IInterface {
-    void opActiveChanged(int i, int i2, String str, String str2, int i3, boolean z, int i4, int i5) throws RemoteException;
+    void opActiveChanged(int i, int i2, String str, String str2, int i3, boolean z, int i4, int i5)
+            throws RemoteException;
 
     public static class Default implements IAppOpsActiveCallback {
         @Override // com.android.internal.app.IAppOpsActiveCallback
-        public void opActiveChanged(int op, int uid, String packageName, String attributionTag, int virtualDeviceId, boolean active, int attributionFlags, int attributionChainId) throws RemoteException {
-        }
+        public void opActiveChanged(
+                int op,
+                int uid,
+                String packageName,
+                String attributionTag,
+                int virtualDeviceId,
+                boolean active,
+                int attributionFlags,
+                int attributionChainId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +30,7 @@ public interface IAppOpsActiveCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppOpsActiveCallback {
+    public abstract static class Stub extends Binder implements IAppOpsActiveCallback {
         public static final String DESCRIPTOR = "com.android.internal.app.IAppOpsActiveCallback";
         static final int TRANSACTION_opActiveChanged = 1;
 
@@ -60,7 +69,8 @@ public interface IAppOpsActiveCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -103,7 +113,16 @@ public interface IAppOpsActiveCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsActiveCallback
-            public void opActiveChanged(int op, int uid, String packageName, String attributionTag, int virtualDeviceId, boolean active, int attributionFlags, int attributionChainId) throws RemoteException {
+            public void opActiveChanged(
+                    int op,
+                    int uid,
+                    String packageName,
+                    String attributionTag,
+                    int virtualDeviceId,
+                    boolean active,
+                    int attributionFlags,
+                    int attributionChainId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

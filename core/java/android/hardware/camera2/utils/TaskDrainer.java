@@ -1,6 +1,7 @@
 package android.hardware.camera2.utils;
 
 import com.android.internal.util.Preconditions;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executor;
@@ -29,8 +30,10 @@ public class TaskDrainer<T> {
         this.mLock = new Object();
         this.mDraining = false;
         this.mDrainFinished = false;
-        this.mExecutor = (Executor) Preconditions.checkNotNull(executor, "executor must not be null");
-        this.mListener = (DrainListener) Preconditions.checkNotNull(listener, "listener must not be null");
+        this.mExecutor =
+                (Executor) Preconditions.checkNotNull(executor, "executor must not be null");
+        this.mListener =
+                (DrainListener) Preconditions.checkNotNull(listener, "listener must not be null");
         this.mName = null;
     }
 
@@ -41,8 +44,10 @@ public class TaskDrainer<T> {
         this.mLock = new Object();
         this.mDraining = false;
         this.mDrainFinished = false;
-        this.mExecutor = (Executor) Preconditions.checkNotNull(executor, "executor must not be null");
-        this.mListener = (DrainListener) Preconditions.checkNotNull(listener, "listener must not be null");
+        this.mExecutor =
+                (Executor) Preconditions.checkNotNull(executor, "executor must not be null");
+        this.mListener =
+                (DrainListener) Preconditions.checkNotNull(listener, "listener must not be null");
         this.mName = name;
     }
 
@@ -83,12 +88,14 @@ public class TaskDrainer<T> {
     }
 
     private void postDrained() {
-        this.mExecutor.execute(new Runnable() { // from class: android.hardware.camera2.utils.TaskDrainer$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                TaskDrainer.this.lambda$postDrained$0();
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                    // android.hardware.camera2.utils.TaskDrainer$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        TaskDrainer.this.lambda$postDrained$0();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */

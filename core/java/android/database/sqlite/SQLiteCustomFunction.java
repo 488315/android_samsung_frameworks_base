@@ -1,7 +1,5 @@
 package android.database.sqlite;
 
-import android.database.sqlite.SQLiteDatabase;
-
 /* loaded from: classes.dex */
 public final class SQLiteCustomFunction {
     public final SQLiteDatabase.CustomFunction callback;

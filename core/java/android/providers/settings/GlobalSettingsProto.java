@@ -158,8 +158,7 @@ public final class GlobalSettingsProto {
         public static final long RADIOS = 1146756268034L;
         public static final long TOGGLEABLE_RADIOS = 1146756268035L;
 
-        public AirplaneMode() {
-        }
+        public AirplaneMode() {}
     }
 
     public final class Anomaly {
@@ -167,16 +166,14 @@ public final class GlobalSettingsProto {
         public static final long CONFIG_VERSION = 1146756268034L;
         public static final long DETECTION_CONSTANTS = 1146756268033L;
 
-        public Anomaly() {
-        }
+        public Anomaly() {}
     }
 
     public final class ApnDb {
         public static final long UPDATE_CONTENT_URL = 1146756268033L;
         public static final long UPDATE_METADATA_URL = 1146756268034L;
 
-        public ApnDb() {
-        }
+        public ApnDb() {}
     }
 
     public final class App {
@@ -185,8 +182,7 @@ public final class GlobalSettingsProto {
         public static final long FORCED_APP_STANDBY_FOR_SMALL_BATTERY_ENABLED = 1146756268037L;
         public static final long STANDBY_ENABLED = 1146756268034L;
 
-        public App() {
-        }
+        public App() {}
     }
 
     public final class Autofill {
@@ -195,15 +191,13 @@ public final class GlobalSettingsProto {
         public static final long MAX_PARTITIONS_SIZE = 1146756268035L;
         public static final long MAX_VISIBLE_DATASETS = 1146756268036L;
 
-        public Autofill() {
-        }
+        public Autofill() {}
     }
 
     public final class Backup {
         public static final long BACKUP_AGENT_TIMEOUT_PARAMETERS = 1146756268033L;
 
-        public Backup() {
-        }
+        public Backup() {}
     }
 
     public final class Battery {
@@ -214,8 +208,7 @@ public final class GlobalSettingsProto {
         public static final long STATS_CONSTANTS = 1146756268037L;
         public static final long TIP_CONSTANTS = 1146756268038L;
 
-        public Battery() {
-        }
+        public Battery() {}
     }
 
     public final class BleScan {
@@ -228,8 +221,7 @@ public final class GlobalSettingsProto {
         public static final long LOW_POWER_INTERVAL_MS = 1146756268037L;
         public static final long LOW_POWER_WINDOW_MS = 1146756268034L;
 
-        public BleScan() {
-        }
+        public BleScan() {}
     }
 
     public final class Bluetooth {
@@ -250,8 +242,7 @@ public final class GlobalSettingsProto {
         public static final long PBAP_CLIENT_PRIORITIES = 2246267895821L;
         public static final long SAP_PRIORITIES = 2246267895822L;
 
-        public Bluetooth() {
-        }
+        public Bluetooth() {}
     }
 
     public final class CaptivePortal {
@@ -265,8 +256,7 @@ public final class GlobalSettingsProto {
         public static final long USER_AGENT = 1146756268041L;
         public static final long USE_HTTPS = 1146756268040L;
 
-        public CaptivePortal() {
-        }
+        public CaptivePortal() {}
     }
 
     public final class Carrier {
@@ -275,8 +265,7 @@ public final class GlobalSettingsProto {
         public static final long INSTALL_CARRIER_APP_NOTIFICATION_PERSISTENT = 1146756268035L;
         public static final long INSTALL_CARRIER_APP_NOTIFICATION_SLEEP_MILLIS = 1146756268036L;
 
-        public Carrier() {
-        }
+        public Carrier() {}
     }
 
     public final class Cdma {
@@ -284,16 +273,14 @@ public final class GlobalSettingsProto {
         public static final long ROAMING_MODE = 1146756268034L;
         public static final long SUBSCRIPTION_MODE = 1146756268035L;
 
-        public Cdma() {
-        }
+        public Cdma() {}
     }
 
     public final class CertPin {
         public static final long UPDATE_CONTENT_URL = 1146756268033L;
         public static final long UPDATE_METADATA_URL = 1146756268034L;
 
-        public CertPin() {
-        }
+        public CertPin() {}
     }
 
     public final class Connectivity {
@@ -301,8 +288,7 @@ public final class GlobalSettingsProto {
         public static final long METRICS_BUFFER_SIZE = 1146756268033L;
         public static final long SAMPLING_INTERVAL_IN_SECONDS = 1146756268035L;
 
-        public Connectivity() {
-        }
+        public Connectivity() {}
     }
 
     public final class Data {
@@ -312,24 +298,21 @@ public final class GlobalSettingsProto {
         public static final long STALL_ALARM_AGGRESSIVE_DELAY_IN_MS = 1146756268037L;
         public static final long STALL_ALARM_NON_AGGRESSIVE_DELAY_IN_MS = 1146756268036L;
 
-        public Data() {
-        }
+        public Data() {}
     }
 
     public final class Database {
         public static final long CREATION_BUILDID = 1146756268034L;
         public static final long DOWNGRADE_REASON = 1146756268033L;
 
-        public Database() {
-        }
+        public Database() {}
     }
 
     public final class DateTime {
         public static final long AUTO_TIME = 1146756268033L;
         public static final long AUTO_TIME_ZONE = 1146756268034L;
 
-        public DateTime() {
-        }
+        public DateTime() {}
     }
 
     public final class Debug {
@@ -337,16 +320,14 @@ public final class GlobalSettingsProto {
         public static final long VIEW_ATTRIBUTES = 1146756268034L;
         public static final long VIEW_ATTRIBUTES_APPLICATION_PACKAGE = 1146756268035L;
 
-        public Debug() {
-        }
+        public Debug() {}
     }
 
     public final class Default {
         public static final long DNS_SERVER = 1146756268034L;
         public static final long INSTALL_LOCATION = 1146756268033L;
 
-        public Default() {
-        }
+        public Default() {}
     }
 
     public final class Development {
@@ -360,8 +341,7 @@ public final class GlobalSettingsProto {
         public static final long FORCE_RTL = 1146756268036L;
         public static final long SETTINGS_ENABLED = 1146756268033L;
 
-        public Development() {
-        }
+        public Development() {}
     }
 
     public final class Device {
@@ -371,8 +351,7 @@ public final class GlobalSettingsProto {
         public static final long PROVISIONED = 1146756268034L;
         public static final long PROVISIONING_MOBILE_DATA_ENABLED = 1146756268035L;
 
-        public Device() {
-        }
+        public Device() {}
     }
 
     public final class Display {
@@ -380,8 +359,7 @@ public final class GlobalSettingsProto {
         public static final long SCALING_FORCE = 1146756268034L;
         public static final long SIZE_FORCED = 1146756268033L;
 
-        public Display() {
-        }
+        public Display() {}
     }
 
     public final class DnsResolver {
@@ -390,16 +368,14 @@ public final class GlobalSettingsProto {
         public static final long SAMPLE_VALIDITY_SECONDS = 1146756268033L;
         public static final long SUCCESS_THRESHOLD_PERCENT = 1146756268034L;
 
-        public DnsResolver() {
-        }
+        public DnsResolver() {}
     }
 
     public final class Download {
         public static final long MAX_BYTES_OVER_MOBILE = 1146756268033L;
         public static final long RECOMMENDED_MAX_BYTES_OVER_MOBILE = 1146756268034L;
 
-        public Download() {
-        }
+        public Download() {}
     }
 
     public final class Dropbox {
@@ -410,24 +386,21 @@ public final class GlobalSettingsProto {
         public static final long RESERVE_PERCENT = 1146756268037L;
         public static final long SETTINGS = 2246267895814L;
 
-        public Dropbox() {
-        }
+        public Dropbox() {}
     }
 
     public final class DynamicPowerSavings {
         public static final long DISABLE_THRESHOLD = 1146756268033L;
         public static final long ENABLED = 1146756268034L;
 
-        public DynamicPowerSavings() {
-        }
+        public DynamicPowerSavings() {}
     }
 
     public final class Emergency {
         public static final long AFFORDANCE_NEEDED = 1146756268034L;
         public static final long TONE = 1146756268033L;
 
-        public Emergency() {
-        }
+        public Emergency() {}
     }
 
     public final class Enable {
@@ -440,16 +413,14 @@ public final class GlobalSettingsProto {
         public static final long GNSS_RAW_MEAS_FULL_TRACKING = 1146756268040L;
         public static final long GPU_DEBUG_LAYERS = 1146756268034L;
 
-        public Enable() {
-        }
+        public Enable() {}
     }
 
     public final class Euicc {
         public static final long FACTORY_RESET_TIMEOUT_MILLIS = 1146756268034L;
         public static final long PROVISIONED = 1146756268033L;
 
-        public Euicc() {
-        }
+        public Euicc() {}
     }
 
     public final class GlobalHttpProxy {
@@ -459,8 +430,7 @@ public final class GlobalSettingsProto {
         public static final long PORT = 1146756268034L;
         public static final long SETTING_UI_ENABLED = 1146756268037L;
 
-        public GlobalHttpProxy() {
-        }
+        public GlobalHttpProxy() {}
     }
 
     public final class Gpu {
@@ -484,8 +454,7 @@ public final class GlobalSettingsProto {
         public static final long UPDATABLE_DRIVER_PRODUCTION_OPT_OUT_APPS = 1146756268042L;
         public static final long UPDATABLE_DRIVER_SPHAL_LIBRARIES = 1146756268048L;
 
-        public Gpu() {
-        }
+        public Gpu() {}
     }
 
     public final class Hdmi {
@@ -494,16 +463,14 @@ public final class GlobalSettingsProto {
         public static final long CONTROL_ENABLED = 1146756268033L;
         public static final long SYSTEM_AUDIO_CONTROL_ENABLED = 1146756268034L;
 
-        public Hdmi() {
-        }
+        public Hdmi() {}
     }
 
     public final class InetCondition {
         public static final long DEBOUNCE_DOWN_DELAY = 1146756268034L;
         public static final long DEBOUNCE_UP_DELAY = 1146756268033L;
 
-        public InetCondition() {
-        }
+        public InetCondition() {}
     }
 
     public final class InstantApp {
@@ -514,24 +481,21 @@ public final class GlobalSettingsProto {
         public static final long UNINSTALLED_MAX_CACHE_PERIOD = 1146756268038L;
         public static final long UNINSTALLED_MIN_CACHE_PERIOD = 1146756268037L;
 
-        public InstantApp() {
-        }
+        public InstantApp() {}
     }
 
     public final class IntentFirewall {
         public static final long UPDATE_CONTENT_URL = 1146756268033L;
         public static final long UPDATE_METADATA_URL = 1146756268034L;
 
-        public IntentFirewall() {
-        }
+        public IntentFirewall() {}
     }
 
     public final class LangId {
         public static final long UPDATE_CONTENT_URL = 1146756268033L;
         public static final long UPDATE_METADATA_URL = 1146756268034L;
 
-        public LangId() {
-        }
+        public LangId() {}
     }
 
     public final class Location {
@@ -544,8 +508,7 @@ public final class GlobalSettingsProto {
         public static final long IGNORE_SETTINGS_PACKAGE_WHITELIST = 1146756268040L;
         public static final long SETTINGS_LINK_TO_PERMISSIONS_ENABLED = 1146756268036L;
 
-        public Location() {
-        }
+        public Location() {}
     }
 
     public final class LowPowerMode {
@@ -557,31 +520,28 @@ public final class GlobalSettingsProto {
         public static final long TRIGGER_LEVEL = 1146756268034L;
         public static final long TRIGGER_LEVEL_MAX = 1146756268035L;
 
-        public LowPowerMode() {
-        }
+        public LowPowerMode() {}
     }
 
     public final class ManagedDeviceProvisioning {
-        public static final long MANAGED_PROVISIONING_DEFER_PROVISIONING_TO_ROLE_HOLDER = 1146756268033L;
+        public static final long MANAGED_PROVISIONING_DEFER_PROVISIONING_TO_ROLE_HOLDER =
+                1146756268033L;
 
-        public ManagedDeviceProvisioning() {
-        }
+        public ManagedDeviceProvisioning() {}
     }
 
     public final class Mhl {
         public static final long INPUT_SWITCHING_ENABLED = 1146756268033L;
         public static final long POWER_CHARGE_ENABLED = 1146756268034L;
 
-        public Mhl() {
-        }
+        public Mhl() {}
     }
 
     public final class MobileData {
         public static final long ALLOWED = 1146756268033L;
         public static final long ALWAYS_ON = 1146756268034L;
 
-        public MobileData() {
-        }
+        public MobileData() {}
     }
 
     public final class MultiSim {
@@ -591,8 +551,7 @@ public final class GlobalSettingsProto {
         public static final long VOICE_CALL_SUBSCRIPTION = 1146756268033L;
         public static final long VOICE_PROMPT = 1146756268034L;
 
-        public MultiSim() {
-        }
+        public MultiSim() {}
     }
 
     public final class Netstats {
@@ -615,8 +574,7 @@ public final class GlobalSettingsProto {
         public static final long UID_TAG_PERSIST_BYTES = 1146756268048L;
         public static final long UID_TAG_ROTATE_AGE = 1146756268049L;
 
-        public Netstats() {
-        }
+        public Netstats() {}
     }
 
     public final class Network {
@@ -637,8 +595,7 @@ public final class GlobalSettingsProto {
         public static final long WATCHLIST_ENABLED = 1146756268045L;
         public static final long WATCHLIST_LAST_REPORT_TIME = 1146756268040L;
 
-        public Network() {
-        }
+        public Network() {}
     }
 
     public final class Nitz {
@@ -646,37 +603,34 @@ public final class GlobalSettingsProto {
         public static final long UPDATE_DIFF = 1146756268033L;
         public static final long UPDATE_SPACING = 1146756268034L;
 
-        public Nitz() {
-        }
+        public Nitz() {}
     }
 
     public final class Notification {
         public static final long BUBBLES = 1146756268038L;
-        public static final long DISABLE_SCREEN_SHARE_PROTECTIONS_FOR_APPS_AND_NOTIFICATIONS = 1146756268039L;
+        public static final long DISABLE_SCREEN_SHARE_PROTECTIONS_FOR_APPS_AND_NOTIFICATIONS =
+                1146756268039L;
         public static final long MAX_NOTIFICATION_ENQUEUE_RATE = 1146756268033L;
         public static final long SHOW_NOTIFICATION_CHANNEL_WARNINGS = 1146756268034L;
         public static final long SMART_REPLIES_IN_NOTIFICATIONS_FLAGS = 1146756268036L;
         public static final long SMART_SUGGESTIONS_IN_NOTIFICATIONS_FLAGS = 1146756268037L;
         public static final long SNOOZE_OPTIONS = 1146756268035L;
 
-        public Notification() {
-        }
+        public Notification() {}
     }
 
     public final class Ntp {
         public static final long SERVER = 1146756268033L;
         public static final long TIMEOUT_MS = 1146756268034L;
 
-        public Ntp() {
-        }
+        public Ntp() {}
     }
 
     public final class UserAbsentSmallBattery {
         public static final long RADIOS_OFF_ENABLED = 1146756268033L;
         public static final long TOUCH_OFF_ENABLED = 1146756268034L;
 
-        public UserAbsentSmallBattery() {
-        }
+        public UserAbsentSmallBattery() {}
     }
 
     public final class PackageVerifier {
@@ -686,8 +640,7 @@ public final class GlobalSettingsProto {
         public static final long SETTING_VISIBLE = 1146756268036L;
         public static final long TIMEOUT = 1146756268034L;
 
-        public PackageVerifier() {
-        }
+        public PackageVerifier() {}
     }
 
     public final class PdpWatchdog {
@@ -698,8 +651,7 @@ public final class GlobalSettingsProto {
         public static final long POLL_INTERVAL_MS = 1146756268033L;
         public static final long TRIGGER_PACKET_COUNT = 1146756268036L;
 
-        public PdpWatchdog() {
-        }
+        public PdpWatchdog() {}
     }
 
     public final class PrepaidSetup {
@@ -707,16 +659,14 @@ public final class GlobalSettingsProto {
         public static final long DETECTION_REDIR_HOST = 1146756268035L;
         public static final long DETECTION_TARGET_URL = 1146756268034L;
 
-        public PrepaidSetup() {
-        }
+        public PrepaidSetup() {}
     }
 
     public final class Private {
         public static final long DNS_MODE = 1146756268033L;
         public static final long DNS_SPECIFIER = 1146756268034L;
 
-        public Private() {
-        }
+        public Private() {}
     }
 
     public final class Selinux {
@@ -724,16 +674,14 @@ public final class GlobalSettingsProto {
         public static final long UPDATE_CONTENT_URL = 1146756268033L;
         public static final long UPDATE_METADATA_URL = 1146756268034L;
 
-        public Selinux() {
-        }
+        public Selinux() {}
     }
 
     public final class SmartSelection {
         public static final long UPDATE_CONTENT_URL = 1146756268033L;
         public static final long UPDATE_METADATA_URL = 1146756268034L;
 
-        public SmartSelection() {
-        }
+        public SmartSelection() {}
     }
 
     public final class Sms {
@@ -745,8 +693,7 @@ public final class GlobalSettingsProto {
         public static final long SHORT_CODE_CONFIRMATION = 1146756268035L;
         public static final long SHORT_CODE_RULE = 1146756268036L;
 
-        public Sms() {
-        }
+        public Sms() {}
     }
 
     public final class Sounds {
@@ -765,32 +712,28 @@ public final class GlobalSettingsProto {
         public static final long UNLOCK = 1146756268046L;
         public static final long WIRELESS_CHARGING_STARTED = 1146756268047L;
 
-        public Sounds() {
-        }
+        public Sounds() {}
     }
 
     public final class SoundTrigger {
         public static final long DETECTION_SERVICE_OP_TIMEOUT_MS = 1146756268034L;
         public static final long MAX_SOUND_TRIGGER_DETECTION_SERVICE_OPS_PER_DAY = 1146756268033L;
 
-        public SoundTrigger() {
-        }
+        public SoundTrigger() {}
     }
 
     public final class Storage {
         public static final long BENCHMARK_INTERVAL = 1146756268033L;
         public static final long SETTINGS_CLOBBER_THRESHOLD = 1146756268034L;
 
-        public Storage() {
-        }
+        public Storage() {}
     }
 
     public final class Sync {
         public static final long MANAGER_CONSTANTS = 1146756268034L;
         public static final long MAX_RETRY_DELAY_IN_SECONDS = 1146756268033L;
 
-        public Sync() {
-        }
+        public Sync() {}
     }
 
     public final class Sys {
@@ -802,8 +745,7 @@ public final class GlobalSettingsProto {
         public static final long STORAGE_THRESHOLD_PERCENTAGE = 1146756268034L;
         public static final long UIDCPUPOWER = 1146756268040L;
 
-        public Sys() {
-        }
+        public Sys() {}
     }
 
     public final class TemperatureWarning {
@@ -811,8 +753,7 @@ public final class GlobalSettingsProto {
         public static final long SHOW_USB_TEMPERATURE_ALARM = 1146756268035L;
         public static final long WARNING_TEMPERATURE_LEVEL = 1146756268034L;
 
-        public TemperatureWarning() {
-        }
+        public TemperatureWarning() {}
     }
 
     public final class Tether {
@@ -822,16 +763,14 @@ public final class GlobalSettingsProto {
         public static final long SUPPORTED = 1146756268033L;
         public static final long TIMEOUT_ENABLED = 1146756268144L;
 
-        public Tether() {
-        }
+        public Tether() {}
     }
 
     public final class Tzinfo {
         public static final long UPDATE_CONTENT_URL = 1146756268033L;
         public static final long UPDATE_METADATA_URL = 1146756268034L;
 
-        public Tzinfo() {
-        }
+        public Tzinfo() {}
     }
 
     public final class Webview {
@@ -840,8 +779,7 @@ public final class GlobalSettingsProto {
         public static final long MULTIPROCESS = 1146756268036L;
         public static final long PROVIDER = 1146756268035L;
 
-        public Webview() {
-        }
+        public Webview() {}
     }
 
     public final class Wfc {
@@ -850,8 +788,7 @@ public final class GlobalSettingsProto {
         public static final long IMS_ROAMING_ENABLED = 1146756268036L;
         public static final long IMS_ROAMING_MODE = 1146756268035L;
 
-        public Wfc() {
-        }
+        public Wfc() {}
     }
 
     public final class Wifi {
@@ -887,8 +824,7 @@ public final class GlobalSettingsProto {
         public static final long WATCHDOG_ON = 1146756268053L;
         public static final long WATCHDOG_POOR_NETWORK_TEST_ENABLED = 1146756268054L;
 
-        public Wifi() {
-        }
+        public Wifi() {}
     }
 
     public final class Zen {
@@ -896,7 +832,6 @@ public final class GlobalSettingsProto {
         public static final long MODE_CONFIG_ETAG = 1146756268035L;
         public static final long MODE_RINGER_LEVEL = 1146756268034L;
 
-        public Zen() {
-        }
+        public Zen() {}
     }
 }

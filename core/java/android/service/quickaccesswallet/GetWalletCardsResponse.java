@@ -2,24 +2,28 @@ package android.service.quickaccesswallet;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public final class GetWalletCardsResponse implements Parcelable {
-    public static final Parcelable.Creator<GetWalletCardsResponse> CREATOR = new Parcelable.Creator<GetWalletCardsResponse>() { // from class: android.service.quickaccesswallet.GetWalletCardsResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetWalletCardsResponse createFromParcel(Parcel source) {
-            return GetWalletCardsResponse.readFromParcel(source);
-        }
+    public static final Parcelable.Creator<GetWalletCardsResponse> CREATOR =
+            new Parcelable.Creator<
+                    GetWalletCardsResponse>() { // from class:
+                                                // android.service.quickaccesswallet.GetWalletCardsResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetWalletCardsResponse createFromParcel(Parcel source) {
+                    return GetWalletCardsResponse.readFromParcel(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetWalletCardsResponse[] newArray(int size) {
-            return new GetWalletCardsResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetWalletCardsResponse[] newArray(int size) {
+                    return new GetWalletCardsResponse[size];
+                }
+            };
     private final int mSelectedIndex;
     private final List<WalletCard> mWalletCards;
 
@@ -43,7 +47,9 @@ public final class GetWalletCardsResponse implements Parcelable {
     /* JADX INFO: Access modifiers changed from: private */
     public static GetWalletCardsResponse readFromParcel(Parcel source) {
         int size = source.readInt();
-        List<WalletCard> walletCards = source.readParcelableList(new ArrayList(size), WalletCard.class.getClassLoader(), WalletCard.class);
+        List<WalletCard> walletCards =
+                source.readParcelableList(
+                        new ArrayList(size), WalletCard.class.getClassLoader(), WalletCard.class);
         int selectedIndex = source.readInt();
         return new GetWalletCardsResponse(walletCards, selectedIndex);
     }

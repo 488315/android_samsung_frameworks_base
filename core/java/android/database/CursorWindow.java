@@ -4,7 +4,9 @@ import android.content.res.Resources;
 import android.database.sqlite.SQLiteClosable;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.R;
+
 import dalvik.annotation.optimization.FastNative;
 import dalvik.system.CloseGuard;
 
@@ -18,19 +20,20 @@ public class CursorWindow extends SQLiteClosable implements Parcelable {
     private int mTotalRows;
     public long mWindowPtr;
     private static int sCursorWindowSize = -1;
-    public static final Parcelable.Creator<CursorWindow> CREATOR = new Parcelable.Creator<CursorWindow>() { // from class: android.database.CursorWindow.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CursorWindow createFromParcel(Parcel source) {
-            return new CursorWindow(source);
-        }
+    public static final Parcelable.Creator<CursorWindow> CREATOR =
+            new Parcelable.Creator<CursorWindow>() { // from class: android.database.CursorWindow.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CursorWindow createFromParcel(Parcel source) {
+                    return new CursorWindow(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CursorWindow[] newArray(int size) {
-            return new CursorWindow[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CursorWindow[] newArray(int size) {
+                    return new CursorWindow[size];
+                }
+            };
 
     @FastNative
     private static native boolean nativeAllocRow(long j);
@@ -38,7 +41,8 @@ public class CursorWindow extends SQLiteClosable implements Parcelable {
     @FastNative
     private static native void nativeClear(long j);
 
-    private static native void nativeCopyStringToBuffer(long j, int i, int i2, CharArrayBuffer charArrayBuffer);
+    private static native void nativeCopyStringToBuffer(
+            long j, int i, int i2, CharArrayBuffer charArrayBuffer);
 
     private static native long nativeCreate(String str, int i);
 
@@ -365,8 +369,7 @@ public class CursorWindow extends SQLiteClosable implements Parcelable {
             dest.writeInt(this.mStartPos);
             nativeWriteToParcel(this.mWindowPtr, dest);
             releaseReference();
-            if ((flags & 1) != 0) {
-            }
+            if ((flags & 1) != 0) {}
         } finally {
             releaseReference();
         }
@@ -379,7 +382,8 @@ public class CursorWindow extends SQLiteClosable implements Parcelable {
 
     private static int getCursorWindowSize() {
         if (sCursorWindowSize < 0) {
-            sCursorWindowSize = Resources.getSystem().getInteger(R.integer.config_cursorWindowSize) * 1024;
+            sCursorWindowSize =
+                    Resources.getSystem().getInteger(R.integer.config_cursorWindowSize) * 1024;
         }
         return sCursorWindowSize;
     }

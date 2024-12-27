@@ -15,8 +15,7 @@ public interface IWindowlessStartingSurfaceCallback extends IInterface {
 
     public static class Default implements IWindowlessStartingSurfaceCallback {
         @Override // android.window.IWindowlessStartingSurfaceCallback
-        public void onSurfaceAdded(SurfaceControl addedSurface) throws RemoteException {
-        }
+        public void onSurfaceAdded(SurfaceControl addedSurface) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +23,7 @@ public interface IWindowlessStartingSurfaceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWindowlessStartingSurfaceCallback {
+    public abstract static class Stub extends Binder implements IWindowlessStartingSurfaceCallback {
         static final int TRANSACTION_onSurfaceAdded = 1;
 
         public Stub() {
@@ -62,7 +61,8 @@ public interface IWindowlessStartingSurfaceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWindowlessStartingSurfaceCallback.DESCRIPTOR);
             }
@@ -72,7 +72,8 @@ public interface IWindowlessStartingSurfaceCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SurfaceControl _arg0 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _arg0 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     data.enforceNoDataAvail();
                     onSurfaceAdded(_arg0);
                     reply.writeNoException();

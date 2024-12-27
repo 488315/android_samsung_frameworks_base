@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.RemoteException;
+
 import com.android.internal.R;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.internal.util.Preconditions;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -20,10 +22,13 @@ import java.util.List;
 /* loaded from: classes3.dex */
 public class VpnManager {
     public static final String ACTION_VPN_MANAGER_EVENT = "android.net.action.VPN_MANAGER_EVENT";
-    public static final String CATEGORY_EVENT_ALWAYS_ON_STATE_CHANGED = "android.net.category.EVENT_ALWAYS_ON_STATE_CHANGED";
-    public static final String CATEGORY_EVENT_DEACTIVATED_BY_USER = "android.net.category.EVENT_DEACTIVATED_BY_USER";
+    public static final String CATEGORY_EVENT_ALWAYS_ON_STATE_CHANGED =
+            "android.net.category.EVENT_ALWAYS_ON_STATE_CHANGED";
+    public static final String CATEGORY_EVENT_DEACTIVATED_BY_USER =
+            "android.net.category.EVENT_DEACTIVATED_BY_USER";
     public static final String CATEGORY_EVENT_IKE_ERROR = "android.net.category.EVENT_IKE_ERROR";
-    public static final String CATEGORY_EVENT_NETWORK_ERROR = "android.net.category.EVENT_NETWORK_ERROR";
+    public static final String CATEGORY_EVENT_NETWORK_ERROR =
+            "android.net.category.EVENT_NETWORK_ERROR";
     public static final int ERROR_CLASS_NOT_RECOVERABLE = 1;
     public static final int ERROR_CLASS_RECOVERABLE = 2;
     public static final int ERROR_CODE_NETWORK_IO = 3;
@@ -34,9 +39,11 @@ public class VpnManager {
     public static final String EXTRA_ERROR_CODE = "android.net.extra.ERROR_CODE";
     public static final String EXTRA_SESSION_KEY = "android.net.extra.SESSION_KEY";
     public static final String EXTRA_TIMESTAMP_MILLIS = "android.net.extra.TIMESTAMP_MILLIS";
-    public static final String EXTRA_UNDERLYING_LINK_PROPERTIES = "android.net.extra.UNDERLYING_LINK_PROPERTIES";
+    public static final String EXTRA_UNDERLYING_LINK_PROPERTIES =
+            "android.net.extra.UNDERLYING_LINK_PROPERTIES";
     public static final String EXTRA_UNDERLYING_NETWORK = "android.net.extra.UNDERLYING_NETWORK";
-    public static final String EXTRA_UNDERLYING_NETWORK_CAPABILITIES = "android.net.extra.UNDERLYING_NETWORK_CAPABILITIES";
+    public static final String EXTRA_UNDERLYING_NETWORK_CAPABILITIES =
+            "android.net.extra.UNDERLYING_NETWORK_CAPABILITIES";
     public static final String EXTRA_VPN_PROFILE_STATE = "android.net.extra.VPN_PROFILE_STATE";
     public static final String NOTIFICATION_CHANNEL_VPN = "VPN";
 
@@ -54,16 +61,19 @@ public class VpnManager {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final int TYPE_VPN_SERVICE = 1;
+
     private final Context mContext;
     private final IVpnManager mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VpnType {
-    }
+    public @interface VpnType {}
 
     private static Intent getIntentForConfirmation() {
         Intent intent = new Intent();
-        ComponentName componentName = ComponentName.unflattenFromString(Resources.getSystem().getString(R.string.config_platformVpnConfirmDialogComponent));
+        ComponentName componentName =
+                ComponentName.unflattenFromString(
+                        Resources.getSystem()
+                                .getString(R.string.config_platformVpnConfirmDialogComponent));
         intent.setComponent(componentName);
         return intent;
     }
@@ -77,7 +87,8 @@ public class VpnManager {
         try {
             VpnProfile internalProfile = profile.toVpnProfile();
             try {
-                if (this.mService.provisionVpnProfile(internalProfile, this.mContext.getOpPackageName())) {
+                if (this.mService.provisionVpnProfile(
+                        internalProfile, this.mContext.getOpPackageName())) {
                     return null;
                 }
                 return getIntentForConfirmation();
@@ -166,9 +177,14 @@ public class VpnManager {
         }
     }
 
-    public boolean setAlwaysOnVpnPackageForUser(int userId, String vpnPackage, boolean lockdownEnabled, List<String> lockdownAllowlist) {
+    public boolean setAlwaysOnVpnPackageForUser(
+            int userId,
+            String vpnPackage,
+            boolean lockdownEnabled,
+            List<String> lockdownAllowlist) {
         try {
-            return this.mService.setAlwaysOnVpnPackage(userId, vpnPackage, lockdownEnabled, lockdownAllowlist);
+            return this.mService.setAlwaysOnVpnPackage(
+                    userId, vpnPackage, lockdownEnabled, lockdownAllowlist);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

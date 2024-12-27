@@ -3,12 +3,15 @@ package android.view.inputmethod;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.text.Editable;
 import android.view.View;
+
 import java.util.Locale;
 
 /* loaded from: classes4.dex */
 public class SemBaseInputConnectionUtil {
-    public static CharSequence convertAllBrackets(CharSequence text, int newCursorPosition, Editable content, View targetView) {
-        if (isAllBracketChars(text) && isRTLText(content.toString(), newCursorPosition, targetView)) {
+    public static CharSequence convertAllBrackets(
+            CharSequence text, int newCursorPosition, Editable content, View targetView) {
+        if (isAllBracketChars(text)
+                && isRTLText(content.toString(), newCursorPosition, targetView)) {
             return convertAllBrackets(text);
         }
         return text;
@@ -24,7 +27,10 @@ public class SemBaseInputConnectionUtil {
             Method dump skipped, instructions count: 270
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.inputmethod.SemBaseInputConnectionUtil.isRTLText(java.lang.String, int, android.view.View):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.inputmethod.SemBaseInputConnectionUtil.isRTLText(java.lang.String,"
+                    + " int, android.view.View):boolean");
     }
 
     private static boolean isAllBracketChars(CharSequence text) {
@@ -115,6 +121,9 @@ public class SemBaseInputConnectionUtil {
     private static boolean isRtlLanguage() {
         Locale locale = Locale.getDefault();
         String curLanguage = locale.getLanguage();
-        return "ar".equals(curLanguage) || "fa".equals(curLanguage) || "ur".equals(curLanguage) || "iw".equals(curLanguage);
+        return "ar".equals(curLanguage)
+                || "fa".equals(curLanguage)
+                || "ur".equals(curLanguage)
+                || "iw".equals(curLanguage);
     }
 }

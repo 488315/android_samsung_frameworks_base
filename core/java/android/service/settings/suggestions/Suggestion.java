@@ -6,25 +6,28 @@ import android.graphics.drawable.Icon;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class Suggestion implements Parcelable {
-    public static final Parcelable.Creator<Suggestion> CREATOR = new Parcelable.Creator<Suggestion>() { // from class: android.service.settings.suggestions.Suggestion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Suggestion createFromParcel(Parcel in) {
-            return new Suggestion(in);
-        }
+    public static final Parcelable.Creator<Suggestion> CREATOR =
+            new Parcelable.Creator<
+                    Suggestion>() { // from class: android.service.settings.suggestions.Suggestion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Suggestion createFromParcel(Parcel in) {
+                    return new Suggestion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Suggestion[] newArray(int size) {
-            return new Suggestion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Suggestion[] newArray(int size) {
+                    return new Suggestion[size];
+                }
+            };
     public static final int FLAG_HAS_BUTTON = 1;
     public static final int FLAG_ICON_TINTABLE = 2;
     private final int mFlags;
@@ -35,8 +38,7 @@ public final class Suggestion implements Parcelable {
     private final CharSequence mTitle;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Flags {
-    }
+    public @interface Flags {}
 
     public String getId() {
         return this.mId;
@@ -77,7 +79,10 @@ public final class Suggestion implements Parcelable {
         this.mSummary = in.readCharSequence();
         this.mIcon = (Icon) in.readParcelable(Icon.class.getClassLoader(), Icon.class);
         this.mFlags = in.readInt();
-        this.mPendingIntent = (PendingIntent) in.readParcelable(PendingIntent.class.getClassLoader(), PendingIntent.class);
+        this.mPendingIntent =
+                (PendingIntent)
+                        in.readParcelable(
+                                PendingIntent.class.getClassLoader(), PendingIntent.class);
     }
 
     @Override // android.os.Parcelable

@@ -18,11 +18,13 @@ public class CropRectFilter extends Filter {
 
     @GenerateFieldPort(name = "width")
     private int mOutputWidth;
+
     private Program mProgram;
     private int mTarget;
 
     @GenerateFieldPort(hasDefault = true, name = "tile_size")
     private int mTileSize;
+
     private int mWidth;
 
     @GenerateFieldPort(name = "xorigin")
@@ -54,7 +56,8 @@ public class CropRectFilter extends Filter {
                 this.mTarget = target;
                 return;
             default:
-                throw new RuntimeException("Filter Sharpen does not support frames of target " + target + "!");
+                throw new RuntimeException(
+                        "Filter Sharpen does not support frames of target " + target + "!");
         }
     }
 
@@ -85,6 +88,11 @@ public class CropRectFilter extends Filter {
     void updateSourceRect(int width, int height) {
         this.mWidth = width;
         this.mHeight = height;
-        ((ShaderProgram) this.mProgram).setSourceRect(this.mXorigin / this.mWidth, this.mYorigin / this.mHeight, this.mOutputWidth / this.mWidth, this.mOutputHeight / this.mHeight);
+        ((ShaderProgram) this.mProgram)
+                .setSourceRect(
+                        this.mXorigin / this.mWidth,
+                        this.mYorigin / this.mHeight,
+                        this.mOutputWidth / this.mWidth,
+                        this.mOutputHeight / this.mHeight);
     }
 }

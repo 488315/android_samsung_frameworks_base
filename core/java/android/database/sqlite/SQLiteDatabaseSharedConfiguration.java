@@ -3,7 +3,8 @@ package android.database.sqlite;
 /* loaded from: classes.dex */
 public final class SQLiteDatabaseSharedConfiguration {
     private static final long MEDIA_STORE_AUTOCHECK_POINT = 256;
-    private static final String MEDIA_STORE_EXTERNAL_DB = "providers.media.module/databases/external.db";
+    private static final String MEDIA_STORE_EXTERNAL_DB =
+            "providers.media.module/databases/external.db";
     private static final long MEDIA_STORE_JOURNAL_SIZE_LIMIT = 1048576;
     public static final long MEDIA_STORE_WAL_RESERVE_SPACE = 1;
     public final boolean isMediaStoreDb;
@@ -15,10 +16,18 @@ public final class SQLiteDatabaseSharedConfiguration {
     public boolean useUserDataRecovery;
     public final boolean useWalModeByDefault;
     private static final String[] DEFAULT_WAL_ALLOWLIST = {"/com.samsung.", "/com.sec."};
-    private static final String[] DEFAULT_WAL_BLOCKLIST = {"/EmailProvider.db", "/EmailProviderBody.db", "/iwlansettings.db"};
-    private static final String[] QUERY_COLLECT_PACKAGES = {"/com.samsung.", "/com.sec.", "/data/system/", "/com.google.", "/com.android.providers."};
-    private static final String[] DEFAULT_SINGLE_CONNECTION_WAL_LIST = {"/data/system/notification_log.db"};
-    private static final String[] DEFAULT_DUMP_CORRUPT_ALLOWLIST = {"contacts2.db", "SecureHealthData.db"};
+    private static final String[] DEFAULT_WAL_BLOCKLIST = {
+        "/EmailProvider.db", "/EmailProviderBody.db", "/iwlansettings.db"
+    };
+    private static final String[] QUERY_COLLECT_PACKAGES = {
+        "/com.samsung.", "/com.sec.", "/data/system/", "/com.google.", "/com.android.providers."
+    };
+    private static final String[] DEFAULT_SINGLE_CONNECTION_WAL_LIST = {
+        "/data/system/notification_log.db"
+    };
+    private static final String[] DEFAULT_DUMP_CORRUPT_ALLOWLIST = {
+        "contacts2.db", "SecureHealthData.db"
+    };
 
     public SQLiteDatabaseSharedConfiguration(SQLiteDatabaseConfiguration config) {
         this.isSecureDb = (config.openFlags & 512) != 0;

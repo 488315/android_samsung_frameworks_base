@@ -3,6 +3,7 @@ package android.hardware.location;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,19 +12,21 @@ import java.util.List;
 @SystemApi
 /* loaded from: classes2.dex */
 public final class NanoAppState implements Parcelable {
-    public static final Parcelable.Creator<NanoAppState> CREATOR = new Parcelable.Creator<NanoAppState>() { // from class: android.hardware.location.NanoAppState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppState createFromParcel(Parcel in) {
-            return new NanoAppState(in);
-        }
+    public static final Parcelable.Creator<NanoAppState> CREATOR =
+            new Parcelable.Creator<
+                    NanoAppState>() { // from class: android.hardware.location.NanoAppState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppState createFromParcel(Parcel in) {
+                    return new NanoAppState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppState[] newArray(int size) {
-            return new NanoAppState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppState[] newArray(int size) {
+                    return new NanoAppState[size];
+                }
+            };
     private boolean mIsEnabled;
     private long mNanoAppId;
     private List<String> mNanoAppPermissions;
@@ -38,7 +41,8 @@ public final class NanoAppState implements Parcelable {
         this.mIsEnabled = enabled;
     }
 
-    public NanoAppState(long nanoAppId, int appVersion, boolean enabled, List<String> nanoAppPermissions) {
+    public NanoAppState(
+            long nanoAppId, int appVersion, boolean enabled, List<String> nanoAppPermissions) {
         this.mNanoAppPermissions = new ArrayList();
         this.mNanoAppRpcServiceList = new ArrayList();
         this.mNanoAppId = nanoAppId;
@@ -47,7 +51,12 @@ public final class NanoAppState implements Parcelable {
         this.mNanoAppPermissions = Collections.unmodifiableList(nanoAppPermissions);
     }
 
-    public NanoAppState(long nanoAppId, int appVersion, boolean enabled, List<String> nanoAppPermissions, List<NanoAppRpcService> nanoAppRpcServiceList) {
+    public NanoAppState(
+            long nanoAppId,
+            int appVersion,
+            boolean enabled,
+            List<String> nanoAppPermissions,
+            List<NanoAppRpcService> nanoAppRpcServiceList) {
         this.mNanoAppPermissions = new ArrayList();
         this.mNanoAppRpcServiceList = new ArrayList();
         this.mNanoAppId = nanoAppId;
@@ -85,7 +94,13 @@ public final class NanoAppState implements Parcelable {
         this.mIsEnabled = in.readInt() == 1;
         this.mNanoAppPermissions = new ArrayList();
         in.readStringList(this.mNanoAppPermissions);
-        this.mNanoAppRpcServiceList = Collections.unmodifiableList(Arrays.asList((NanoAppRpcService[]) in.readParcelableArray(NanoAppRpcService.class.getClassLoader(), NanoAppRpcService.class)));
+        this.mNanoAppRpcServiceList =
+                Collections.unmodifiableList(
+                        Arrays.asList(
+                                (NanoAppRpcService[])
+                                        in.readParcelableArray(
+                                                NanoAppRpcService.class.getClassLoader(),
+                                                NanoAppRpcService.class)));
     }
 
     @Override // android.os.Parcelable
@@ -99,6 +114,8 @@ public final class NanoAppState implements Parcelable {
         parcel.writeInt(this.mNanoAppVersion);
         parcel.writeInt(this.mIsEnabled ? 1 : 0);
         parcel.writeStringList(this.mNanoAppPermissions);
-        parcel.writeParcelableArray((NanoAppRpcService[]) this.mNanoAppRpcServiceList.toArray(new NanoAppRpcService[0]), 0);
+        parcel.writeParcelableArray(
+                (NanoAppRpcService[]) this.mNanoAppRpcServiceList.toArray(new NanoAppRpcService[0]),
+                0);
     }
 }

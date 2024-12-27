@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.crypto.params;
 
 import com.android.internal.org.bouncycastle.math.raw.Nat;
 import com.android.internal.org.bouncycastle.util.Integers;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */

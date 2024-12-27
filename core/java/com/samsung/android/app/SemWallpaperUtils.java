@@ -6,7 +6,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapRegionDecoder;
 import android.graphics.Rect;
 import android.util.Log;
+
 import com.samsung.android.wallpaperbackup.WallpaperBackupRestoreManager;
+
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,18 +20,19 @@ import java.lang.reflect.Method;
 public class SemWallpaperUtils {
     private static final String TAG = "SemWallpaperUtils";
 
-    private SemWallpaperUtils() {
-    }
+    private SemWallpaperUtils() {}
 
     @Deprecated
     public static void startBackup(Context context, String pathValue, String source) {
-        WallpaperBackupRestoreManager wallpaperBackupRestoreManager = new WallpaperBackupRestoreManager();
+        WallpaperBackupRestoreManager wallpaperBackupRestoreManager =
+                new WallpaperBackupRestoreManager();
         wallpaperBackupRestoreManager.startBackupWallpaper(context, pathValue, source);
     }
 
     @Deprecated
     public static void startRestore(Context context, String pathValue, String source) {
-        WallpaperBackupRestoreManager wallpaperBackupRestoreManager = new WallpaperBackupRestoreManager();
+        WallpaperBackupRestoreManager wallpaperBackupRestoreManager =
+                new WallpaperBackupRestoreManager();
         wallpaperBackupRestoreManager.startRestoreWallpaper(context, pathValue, source);
     }
 
@@ -68,12 +71,18 @@ public class SemWallpaperUtils {
         }
     }
 
-    public static Bitmap decodeStreamConsiderQMG(InputStream is, Rect rect, BitmapFactory.Options options) {
+    public static Bitmap decodeStreamConsiderQMG(
+            InputStream is, Rect rect, BitmapFactory.Options options) {
         BufferedInputStream bis = new BufferedInputStream(is);
         if (isQmgImage(bis)) {
             try {
                 Class<?> c = Class.forName("android.graphics.BitmapFactory");
-                Method method = c.getMethod("decodeStreamQMG", InputStream.class, Rect.class, BitmapFactory.Options.class);
+                Method method =
+                        c.getMethod(
+                                "decodeStreamQMG",
+                                InputStream.class,
+                                Rect.class,
+                                BitmapFactory.Options.class);
                 method.setAccessible(true);
                 Bitmap result = (Bitmap) method.invoke(null, bis, rect, options);
                 return result;
@@ -98,9 +107,12 @@ public class SemWallpaperUtils {
                 if (isQmgImage(bis2)) {
                     try {
                         Class<?> c = Class.forName("android.graphics.BitmapRegionDecoder");
-                        Method method = c.getMethod("newInstanceQMG", InputStream.class, Boolean.TYPE);
+                        Method method =
+                                c.getMethod("newInstanceQMG", InputStream.class, Boolean.TYPE);
                         method.setAccessible(true);
-                        decoder = (BitmapRegionDecoder) method.invoke(null, bis2, Boolean.valueOf(isShareable));
+                        decoder =
+                                (BitmapRegionDecoder)
+                                        method.invoke(null, bis2, Boolean.valueOf(isShareable));
                     } catch (NoSuchMethodException e) {
                         decoder = BitmapRegionDecoder.newInstance(bis2, isShareable);
                     } catch (Exception e2) {

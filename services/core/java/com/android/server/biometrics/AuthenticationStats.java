@@ -33,10 +33,22 @@ public final class AuthenticationStats {
             return false;
         }
         AuthenticationStats authenticationStats = (AuthenticationStats) obj;
-        return this.mUserId == authenticationStats.mUserId && this.mTotalAttempts == authenticationStats.mTotalAttempts && this.mRejectedAttempts == authenticationStats.mRejectedAttempts && this.mEnrollmentNotifications == authenticationStats.mEnrollmentNotifications && this.mModality == authenticationStats.mModality;
+        return this.mUserId == authenticationStats.mUserId
+                && this.mTotalAttempts == authenticationStats.mTotalAttempts
+                && this.mRejectedAttempts == authenticationStats.mRejectedAttempts
+                && this.mEnrollmentNotifications == authenticationStats.mEnrollmentNotifications
+                && this.mModality == authenticationStats.mModality;
     }
 
     public final int hashCode() {
-        return String.format("userId: %d, totalAttempts: %d, rejectedAttempts: %d, enrollmentNotifications: %d, modality: %d", Integer.valueOf(this.mUserId), Integer.valueOf(this.mTotalAttempts), Integer.valueOf(this.mRejectedAttempts), Integer.valueOf(this.mEnrollmentNotifications), Integer.valueOf(this.mModality)).hashCode();
+        return String.format(
+                        "userId: %d, totalAttempts: %d, rejectedAttempts: %d,"
+                            + " enrollmentNotifications: %d, modality: %d",
+                        Integer.valueOf(this.mUserId),
+                        Integer.valueOf(this.mTotalAttempts),
+                        Integer.valueOf(this.mRejectedAttempts),
+                        Integer.valueOf(this.mEnrollmentNotifications),
+                        Integer.valueOf(this.mModality))
+                .hashCode();
     }
 }

@@ -13,6 +13,7 @@ import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.flags.Flags;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -48,8 +49,7 @@ public class ViewConfiguration {
     private static final int JUMP_TAP_TIMEOUT = 500;
     private static final int LONG_PRESS_TOOLTIP_HIDE_TIMEOUT = 1500;
 
-    @Deprecated
-    private static final int MAXIMUM_DRAWING_CACHE_SIZE = 1536000;
+    @Deprecated private static final int MAXIMUM_DRAWING_CACHE_SIZE = 1536000;
     private static final int MAXIMUM_FLING_VELOCITY = 8000;
     private static final int MINIMUM_FLING_VELOCITY = 50;
     private static final int MIN_SCROLLBAR_TOUCH_TARGET = 48;
@@ -205,16 +205,20 @@ public class ViewConfiguration {
         }
         this.mFadingMarqueeEnabled = res.getBoolean(R.bool.config_ui_enableFadingMarquee);
         this.mTouchSlop = res.getDimensionPixelSize(R.dimen.config_viewConfigurationTouchSlop);
-        this.mHandwritingSlop = res.getDimensionPixelSize(R.dimen.config_viewConfigurationHandwritingSlop);
+        this.mHandwritingSlop =
+                res.getDimensionPixelSize(R.dimen.config_viewConfigurationHandwritingSlop);
         this.mHoverSlop = res.getDimensionPixelSize(R.dimen.config_viewConfigurationHoverSlop);
-        this.mMinScrollbarTouchTarget = res.getDimensionPixelSize(R.dimen.config_minScrollbarTouchTarget);
+        this.mMinScrollbarTouchTarget =
+                res.getDimensionPixelSize(R.dimen.config_minScrollbarTouchTarget);
         this.mPagingTouchSlop = this.mTouchSlop * 2;
         this.mDoubleTapTouchSlop = this.mTouchSlop;
         this.mHandwritingGestureLineMargin = res.getDimensionPixelSize(17104906);
         this.mMinimumFlingVelocity = res.getDimensionPixelSize(R.dimen.config_viewMinFlingVelocity);
         this.mMaximumFlingVelocity = res.getDimensionPixelSize(R.dimen.config_viewMaxFlingVelocity);
-        int configMinRotaryEncoderFlingVelocity = res.getDimensionPixelSize(R.dimen.config_viewMinRotaryEncoderFlingVelocity);
-        int configMaxRotaryEncoderFlingVelocity = res.getDimensionPixelSize(R.dimen.config_viewMaxRotaryEncoderFlingVelocity);
+        int configMinRotaryEncoderFlingVelocity =
+                res.getDimensionPixelSize(R.dimen.config_viewMinRotaryEncoderFlingVelocity);
+        int configMaxRotaryEncoderFlingVelocity =
+                res.getDimensionPixelSize(R.dimen.config_viewMaxRotaryEncoderFlingVelocity);
         if (configMinRotaryEncoderFlingVelocity < 0 || configMaxRotaryEncoderFlingVelocity < 0) {
             this.mMinimumRotaryEncoderFlingVelocity = Integer.MAX_VALUE;
             this.mMaximumRotaryEncoderFlingVelocity = Integer.MIN_VALUE;
@@ -222,26 +226,39 @@ public class ViewConfiguration {
             this.mMinimumRotaryEncoderFlingVelocity = configMinRotaryEncoderFlingVelocity;
             this.mMaximumRotaryEncoderFlingVelocity = configMaxRotaryEncoderFlingVelocity;
         }
-        int configRotaryEncoderHapticScrollFeedbackTickIntervalPixels = res.getDimensionPixelSize(R.dimen.config_rotaryEncoderAxisScrollTickInterval);
-        this.mRotaryEncoderHapticScrollFeedbackTickIntervalPixels = configRotaryEncoderHapticScrollFeedbackTickIntervalPixels > 0 ? configRotaryEncoderHapticScrollFeedbackTickIntervalPixels : Integer.MAX_VALUE;
-        this.mRotaryEncoderHapticScrollFeedbackEnabled = res.getBoolean(R.bool.config_viewRotaryEncoderHapticScrollFedbackEnabled);
+        int configRotaryEncoderHapticScrollFeedbackTickIntervalPixels =
+                res.getDimensionPixelSize(R.dimen.config_rotaryEncoderAxisScrollTickInterval);
+        this.mRotaryEncoderHapticScrollFeedbackTickIntervalPixels =
+                configRotaryEncoderHapticScrollFeedbackTickIntervalPixels > 0
+                        ? configRotaryEncoderHapticScrollFeedbackTickIntervalPixels
+                        : Integer.MAX_VALUE;
+        this.mRotaryEncoderHapticScrollFeedbackEnabled =
+                res.getBoolean(R.bool.config_viewRotaryEncoderHapticScrollFedbackEnabled);
         this.mGlobalActionsKeyTimeout = res.getInteger(R.integer.config_globalActionsKeyTimeout);
-        this.mHorizontalScrollFactor = res.getDimensionPixelSize(R.dimen.config_horizontalScrollFactor);
+        this.mHorizontalScrollFactor =
+                res.getDimensionPixelSize(R.dimen.config_horizontalScrollFactor);
         this.mVerticalScrollFactor = res.getDimensionPixelSize(R.dimen.config_verticalScrollFactor);
-        this.mShowMenuShortcutsWhenKeyboardPresent = res.getBoolean(R.bool.config_showMenuShortcutsWhenKeyboardPresent);
+        this.mShowMenuShortcutsWhenKeyboardPresent =
+                res.getBoolean(R.bool.config_showMenuShortcutsWhenKeyboardPresent);
         this.mMinScalingSpan = res.getDimensionPixelSize(R.dimen.config_minScalingSpan);
-        this.mScreenshotChordKeyTimeout = res.getInteger(R.integer.config_screenshotChordKeyTimeout);
-        this.mSmartSelectionInitializedTimeout = res.getInteger(R.integer.config_smartSelectionInitializedTimeoutMillis);
-        this.mSmartSelectionInitializingTimeout = res.getInteger(R.integer.config_smartSelectionInitializingTimeoutMillis);
-        this.mPreferKeepClearForFocusEnabled = res.getBoolean(R.bool.config_preferKeepClearForFocus);
-        this.mViewBasedRotaryEncoderScrollHapticsEnabledConfig = res.getBoolean(R.bool.config_viewBasedRotaryEncoderHapticsEnabled);
+        this.mScreenshotChordKeyTimeout =
+                res.getInteger(R.integer.config_screenshotChordKeyTimeout);
+        this.mSmartSelectionInitializedTimeout =
+                res.getInteger(R.integer.config_smartSelectionInitializedTimeoutMillis);
+        this.mSmartSelectionInitializingTimeout =
+                res.getInteger(R.integer.config_smartSelectionInitializingTimeoutMillis);
+        this.mPreferKeepClearForFocusEnabled =
+                res.getBoolean(R.bool.config_preferKeepClearForFocus);
+        this.mViewBasedRotaryEncoderScrollHapticsEnabledConfig =
+                res.getBoolean(R.bool.config_viewBasedRotaryEncoderHapticsEnabled);
     }
 
     public static ViewConfiguration get(Context context) {
         StrictMode.assertConfigurationContext(context, TAG);
         int density = getDisplayDensity(context);
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        int screenFactor = ((metrics.widthPixels / 10) << 21) | ((metrics.heightPixels / 10) << 10) | density;
+        int screenFactor =
+                ((metrics.widthPixels / 10) << 21) | ((metrics.heightPixels / 10) << 10) | density;
         ViewConfiguration configuration = sConfigurations.get(screenFactor);
         if (configuration == null) {
             ViewConfiguration configuration2 = new ViewConfiguration(context);
@@ -488,34 +505,44 @@ public class ViewConfiguration {
 
     public int getScaledMinimumFlingVelocity(int inputDeviceId, int axis, int source) {
         if (isInputDeviceInfoValid(inputDeviceId, axis, source)) {
-            return source == 4194304 ? this.mMinimumRotaryEncoderFlingVelocity : this.mMinimumFlingVelocity;
+            return source == 4194304
+                    ? this.mMinimumRotaryEncoderFlingVelocity
+                    : this.mMinimumFlingVelocity;
         }
         return Integer.MAX_VALUE;
     }
 
     public int getScaledMaximumFlingVelocity(int inputDeviceId, int axis, int source) {
         if (isInputDeviceInfoValid(inputDeviceId, axis, source)) {
-            return source == 4194304 ? this.mMaximumRotaryEncoderFlingVelocity : this.mMaximumFlingVelocity;
+            return source == 4194304
+                    ? this.mMaximumRotaryEncoderFlingVelocity
+                    : this.mMaximumFlingVelocity;
         }
         return Integer.MIN_VALUE;
     }
 
     public boolean isHapticScrollFeedbackEnabled(int inputDeviceId, int axis, int source) {
-        if (isInputDeviceInfoValid(inputDeviceId, axis, source) && source == 4194304 && axis == 26) {
+        if (isInputDeviceInfoValid(inputDeviceId, axis, source)
+                && source == 4194304
+                && axis == 26) {
             return this.mRotaryEncoderHapticScrollFeedbackEnabled;
         }
         return false;
     }
 
     public int getHapticScrollFeedbackTickInterval(int inputDeviceId, int axis, int source) {
-        if (this.mRotaryEncoderHapticScrollFeedbackEnabled && isInputDeviceInfoValid(inputDeviceId, axis, source) && source == 4194304 && axis == 26) {
+        if (this.mRotaryEncoderHapticScrollFeedbackEnabled
+                && isInputDeviceInfoValid(inputDeviceId, axis, source)
+                && source == 4194304
+                && axis == 26) {
             return this.mRotaryEncoderHapticScrollFeedbackTickIntervalPixels;
         }
         return Integer.MAX_VALUE;
     }
 
     public boolean isViewBasedRotaryEncoderHapticScrollFeedbackEnabled() {
-        return this.mViewBasedRotaryEncoderScrollHapticsEnabledConfig && Flags.useViewBasedRotaryEncoderScrollHaptics();
+        return this.mViewBasedRotaryEncoderScrollHapticsEnabledConfig
+                && Flags.useViewBasedRotaryEncoderScrollHaptics();
     }
 
     private static boolean isInputDeviceInfoValid(int id, int axis, int source) {
@@ -529,7 +556,10 @@ public class ViewConfiguration {
 
     public int getScaledMinimumScalingSpan() {
         if (!this.mConstructedWithContext) {
-            throw new IllegalStateException("Min scaling span cannot be determined when this method is called on a ViewConfiguration that was instantiated using a constructor with no Context parameter");
+            throw new IllegalStateException(
+                    "Min scaling span cannot be determined when this method is called on a"
+                        + " ViewConfiguration that was instantiated using a constructor with no"
+                        + " Context parameter");
         }
         return this.mMinScalingSpan;
     }

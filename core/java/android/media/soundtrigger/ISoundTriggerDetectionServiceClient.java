@@ -12,8 +12,7 @@ public interface ISoundTriggerDetectionServiceClient extends IInterface {
 
     public static class Default implements ISoundTriggerDetectionServiceClient {
         @Override // android.media.soundtrigger.ISoundTriggerDetectionServiceClient
-        public void onOpFinished(int opId) throws RemoteException {
-        }
+        public void onOpFinished(int opId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +20,10 @@ public interface ISoundTriggerDetectionServiceClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISoundTriggerDetectionServiceClient {
-        public static final String DESCRIPTOR = "android.media.soundtrigger.ISoundTriggerDetectionServiceClient";
+    public abstract static class Stub extends Binder
+            implements ISoundTriggerDetectionServiceClient {
+        public static final String DESCRIPTOR =
+                "android.media.soundtrigger.ISoundTriggerDetectionServiceClient";
         static final int TRANSACTION_onOpFinished = 1;
 
         public Stub() {
@@ -60,7 +61,8 @@ public interface ISoundTriggerDetectionServiceClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

@@ -1,7 +1,5 @@
 package com.android.internal.org.bouncycastle.math.ec;
 
-import com.android.internal.org.bouncycastle.math.ec.ECCurve;
-import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -11,7 +9,8 @@ public class WTauNafMultiplier extends AbstractECMultiplier {
     @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECMultiplier
     protected ECPoint multiplyPositive(ECPoint point, BigInteger k) {
         if (!(point instanceof ECPoint.AbstractF2m)) {
-            throw new IllegalArgumentException("Only ECPoint.AbstractF2m can be used in WTauNafMultiplier");
+            throw new IllegalArgumentException(
+                    "Only ECPoint.AbstractF2m can be used in WTauNafMultiplier");
         }
         ECPoint.AbstractF2m p = (ECPoint.AbstractF2m) point;
         ECCurve.AbstractF2m curve = (ECCurve.AbstractF2m) p.getCurve();
@@ -23,7 +22,8 @@ public class WTauNafMultiplier extends AbstractECMultiplier {
         return multiplyWTnaf(p, rho, a, mu);
     }
 
-    private ECPoint.AbstractF2m multiplyWTnaf(ECPoint.AbstractF2m p, ZTauElement lambda, byte a, byte mu) {
+    private ECPoint.AbstractF2m multiplyWTnaf(
+            ECPoint.AbstractF2m p, ZTauElement lambda, byte a, byte mu) {
         ZTauElement[] alpha = a == 0 ? Tnaf.alpha0 : Tnaf.alpha1;
         BigInteger tw = Tnaf.getTw(mu, 4);
         byte[] u = Tnaf.tauAdicWNaf(mu, lambda, (byte) 4, BigInteger.valueOf(16L), tw, alpha);
@@ -33,17 +33,24 @@ public class WTauNafMultiplier extends AbstractECMultiplier {
     private static ECPoint.AbstractF2m multiplyFromWTnaf(final ECPoint.AbstractF2m p, byte[] u) {
         ECCurve.AbstractF2m curve = (ECCurve.AbstractF2m) p.getCurve();
         final byte a = curve.getA().toBigInteger().byteValue();
-        WTauNafPreCompInfo preCompInfo = (WTauNafPreCompInfo) curve.precompute(p, PRECOMP_NAME, new PreCompCallback() { // from class: com.android.internal.org.bouncycastle.math.ec.WTauNafMultiplier.1
-            @Override // com.android.internal.org.bouncycastle.math.ec.PreCompCallback
-            public PreCompInfo precompute(PreCompInfo existing) {
-                if (existing instanceof WTauNafPreCompInfo) {
-                    return existing;
-                }
-                WTauNafPreCompInfo result = new WTauNafPreCompInfo();
-                result.setPreComp(Tnaf.getPreComp(ECPoint.AbstractF2m.this, a));
-                return result;
-            }
-        });
+        WTauNafPreCompInfo preCompInfo =
+                (WTauNafPreCompInfo)
+                        curve.precompute(
+                                p,
+                                PRECOMP_NAME,
+                                new PreCompCallback() { // from class:
+                                                        // com.android.internal.org.bouncycastle.math.ec.WTauNafMultiplier.1
+                                    @Override // com.android.internal.org.bouncycastle.math.ec.PreCompCallback
+                                    public PreCompInfo precompute(PreCompInfo existing) {
+                                        if (existing instanceof WTauNafPreCompInfo) {
+                                            return existing;
+                                        }
+                                        WTauNafPreCompInfo result = new WTauNafPreCompInfo();
+                                        result.setPreComp(
+                                                Tnaf.getPreComp(ECPoint.AbstractF2m.this, a));
+                                        return result;
+                                    }
+                                });
         ECPoint[] pu = preCompInfo.getPreComp();
         ECPoint[] puNeg = new ECPoint.AbstractF2m[pu.length];
         for (int i = 0; i < pu.length; i++) {

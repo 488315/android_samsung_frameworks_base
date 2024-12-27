@@ -5,10 +5,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewParent;
+
 import com.android.internal.view.menu.ShowableListMenu;
 
 /* loaded from: classes4.dex */
-public abstract class ForwardingListener implements View.OnTouchListener, View.OnAttachStateChangeListener {
+public abstract class ForwardingListener
+        implements View.OnTouchListener, View.OnAttachStateChangeListener {
     private int mActivePointerId;
     private Runnable mDisallowIntercept;
     private boolean mForwarding;
@@ -49,8 +51,7 @@ public abstract class ForwardingListener implements View.OnTouchListener, View.O
     }
 
     @Override // android.view.View.OnAttachStateChangeListener
-    public void onViewAttachedToWindow(View v) {
-    }
+    public void onViewAttachedToWindow(View v) {}
 
     @Override // android.view.View.OnAttachStateChangeListener
     public void onViewDetachedFromWindow(View v) {
@@ -104,7 +105,11 @@ public abstract class ForwardingListener implements View.OnTouchListener, View.O
                 return false;
             case 2:
                 int findPointerIndex = motionEvent.findPointerIndex(this.mActivePointerId);
-                if (findPointerIndex >= 0 && !view.pointInView(motionEvent.getX(findPointerIndex), motionEvent.getY(findPointerIndex), this.mScaledTouchSlop)) {
+                if (findPointerIndex >= 0
+                        && !view.pointInView(
+                                motionEvent.getX(findPointerIndex),
+                                motionEvent.getY(findPointerIndex),
+                                this.mScaledTouchSlop)) {
                     clearCallbacks();
                     view.getParent().requestDisallowInterceptTouchEvent(true);
                     return true;
@@ -144,7 +149,10 @@ public abstract class ForwardingListener implements View.OnTouchListener, View.O
         boolean keepForwarding;
         View src = this.mSrc;
         ShowableListMenu popup = getPopup();
-        if (popup == null || !popup.isShowing() || (dst = (DropDownListView) popup.getListView()) == null || !dst.isShown()) {
+        if (popup == null
+                || !popup.isShowing()
+                || (dst = (DropDownListView) popup.getListView()) == null
+                || !dst.isShown()) {
             return false;
         }
         MotionEvent dstEvent = MotionEvent.obtainNoHistory(srcEvent);
@@ -165,8 +173,7 @@ public abstract class ForwardingListener implements View.OnTouchListener, View.O
     }
 
     private class DisallowIntercept implements Runnable {
-        private DisallowIntercept() {
-        }
+        private DisallowIntercept() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -178,8 +185,7 @@ public abstract class ForwardingListener implements View.OnTouchListener, View.O
     }
 
     private class TriggerLongPress implements Runnable {
-        private TriggerLongPress() {
-        }
+        private TriggerLongPress() {}
 
         @Override // java.lang.Runnable
         public void run() {

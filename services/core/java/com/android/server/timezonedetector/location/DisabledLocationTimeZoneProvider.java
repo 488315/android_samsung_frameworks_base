@@ -1,6 +1,7 @@
 package com.android.server.timezonedetector.location;
 
 import android.util.IndentingPrintWriter;
+
 import java.time.Duration;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -16,8 +17,7 @@ public final class DisabledLocationTimeZoneProvider extends LocationTimeZoneProv
     }
 
     @Override // com.android.server.timezonedetector.location.LocationTimeZoneProvider
-    public final void onDestroy() {
-    }
+    public final void onDestroy() {}
 
     @Override // com.android.server.timezonedetector.location.LocationTimeZoneProvider
     public final boolean onInitialize() {
@@ -37,7 +37,12 @@ public final class DisabledLocationTimeZoneProvider extends LocationTimeZoneProv
     public final String toString() {
         String str;
         synchronized (this.mSharedLock) {
-            str = "DisabledLocationTimeZoneProvider{mProviderName=" + this.mProviderName + ", mCurrentState=" + this.mCurrentState + '}';
+            str =
+                    "DisabledLocationTimeZoneProvider{mProviderName="
+                            + this.mProviderName
+                            + ", mCurrentState="
+                            + this.mCurrentState
+                            + '}';
         }
         return str;
     }

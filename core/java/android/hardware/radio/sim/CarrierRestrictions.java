@@ -3,32 +3,33 @@ package android.hardware.radio.sim;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CarrierRestrictions implements Parcelable {
-    public static final Parcelable.Creator<CarrierRestrictions> CREATOR = new Parcelable.Creator<CarrierRestrictions>() { // from class: android.hardware.radio.sim.CarrierRestrictions.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CarrierRestrictions createFromParcel(Parcel _aidl_source) {
-            CarrierRestrictions _aidl_out = new CarrierRestrictions();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CarrierRestrictions> CREATOR =
+            new Parcelable.Creator<CarrierRestrictions>() { // from class:
+                // android.hardware.radio.sim.CarrierRestrictions.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CarrierRestrictions createFromParcel(Parcel _aidl_source) {
+                    CarrierRestrictions _aidl_out = new CarrierRestrictions();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CarrierRestrictions[] newArray(int _aidl_size) {
-            return new CarrierRestrictions[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CarrierRestrictions[] newArray(int _aidl_size) {
+                    return new CarrierRestrictions[_aidl_size];
+                }
+            };
 
-    @Deprecated
-    public Carrier[] allowedCarriers;
+    @Deprecated public Carrier[] allowedCarriers;
 
-    @Deprecated
-    public Carrier[] excludedCarriers;
+    @Deprecated public Carrier[] excludedCarriers;
     public int status;
     public boolean allowedCarriersPrioritized = false;
     public CarrierInfo[] allowedCarrierInfoList = new CarrierInfo[0];
@@ -107,14 +108,16 @@ public class CarrierRestrictions implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.allowedCarrierInfoList = (CarrierInfo[]) _aidl_parcel.createTypedArray(CarrierInfo.CREATOR);
+            this.allowedCarrierInfoList =
+                    (CarrierInfo[]) _aidl_parcel.createTypedArray(CarrierInfo.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.excludedCarrierInfoList = (CarrierInfo[]) _aidl_parcel.createTypedArray(CarrierInfo.CREATOR);
+                this.excludedCarrierInfoList =
+                        (CarrierInfo[]) _aidl_parcel.createTypedArray(CarrierInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -143,7 +146,10 @@ public class CarrierRestrictions implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.allowedCarriers);
-        return _mask | describeContents(this.excludedCarriers) | describeContents(this.allowedCarrierInfoList) | describeContents(this.excludedCarrierInfoList);
+        return _mask
+                | describeContents(this.excludedCarriers)
+                | describeContents(this.allowedCarrierInfoList)
+                | describeContents(this.excludedCarrierInfoList);
     }
 
     private int describeContents(Object _v) {

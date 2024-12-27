@@ -3,30 +3,38 @@ package android.net;
 import android.content.ComponentName;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class NetworkScorerAppData implements Parcelable {
-    public static final Parcelable.Creator<NetworkScorerAppData> CREATOR = new Parcelable.Creator<NetworkScorerAppData>() { // from class: android.net.NetworkScorerAppData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkScorerAppData createFromParcel(Parcel in) {
-            return new NetworkScorerAppData(in);
-        }
+    public static final Parcelable.Creator<NetworkScorerAppData> CREATOR =
+            new Parcelable.Creator<
+                    NetworkScorerAppData>() { // from class: android.net.NetworkScorerAppData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkScorerAppData createFromParcel(Parcel in) {
+                    return new NetworkScorerAppData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkScorerAppData[] newArray(int size) {
-            return new NetworkScorerAppData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkScorerAppData[] newArray(int size) {
+                    return new NetworkScorerAppData[size];
+                }
+            };
     private final ComponentName mEnableUseOpenWifiActivity;
     private final String mNetworkAvailableNotificationChannelId;
     private final ComponentName mRecommendationService;
     private final String mRecommendationServiceLabel;
     public final int packageUid;
 
-    public NetworkScorerAppData(int packageUid, ComponentName recommendationServiceComp, String recommendationServiceLabel, ComponentName enableUseOpenWifiActivity, String networkAvailableNotificationChannelId) {
+    public NetworkScorerAppData(
+            int packageUid,
+            ComponentName recommendationServiceComp,
+            String recommendationServiceLabel,
+            ComponentName enableUseOpenWifiActivity,
+            String networkAvailableNotificationChannelId) {
         this.packageUid = packageUid;
         this.mRecommendationService = recommendationServiceComp;
         this.mRecommendationServiceLabel = recommendationServiceLabel;
@@ -77,7 +85,17 @@ public final class NetworkScorerAppData implements Parcelable {
     }
 
     public String toString() {
-        return "NetworkScorerAppData{packageUid=" + this.packageUid + ", mRecommendationService=" + this.mRecommendationService + ", mRecommendationServiceLabel=" + this.mRecommendationServiceLabel + ", mEnableUseOpenWifiActivity=" + this.mEnableUseOpenWifiActivity + ", mNetworkAvailableNotificationChannelId=" + this.mNetworkAvailableNotificationChannelId + '}';
+        return "NetworkScorerAppData{packageUid="
+                + this.packageUid
+                + ", mRecommendationService="
+                + this.mRecommendationService
+                + ", mRecommendationServiceLabel="
+                + this.mRecommendationServiceLabel
+                + ", mEnableUseOpenWifiActivity="
+                + this.mEnableUseOpenWifiActivity
+                + ", mNetworkAvailableNotificationChannelId="
+                + this.mNetworkAvailableNotificationChannelId
+                + '}';
     }
 
     public boolean equals(Object o) {
@@ -88,13 +106,25 @@ public final class NetworkScorerAppData implements Parcelable {
             return false;
         }
         NetworkScorerAppData that = (NetworkScorerAppData) o;
-        if (this.packageUid == that.packageUid && Objects.equals(this.mRecommendationService, that.mRecommendationService) && Objects.equals(this.mRecommendationServiceLabel, that.mRecommendationServiceLabel) && Objects.equals(this.mEnableUseOpenWifiActivity, that.mEnableUseOpenWifiActivity) && Objects.equals(this.mNetworkAvailableNotificationChannelId, that.mNetworkAvailableNotificationChannelId)) {
+        if (this.packageUid == that.packageUid
+                && Objects.equals(this.mRecommendationService, that.mRecommendationService)
+                && Objects.equals(
+                        this.mRecommendationServiceLabel, that.mRecommendationServiceLabel)
+                && Objects.equals(this.mEnableUseOpenWifiActivity, that.mEnableUseOpenWifiActivity)
+                && Objects.equals(
+                        this.mNetworkAvailableNotificationChannelId,
+                        that.mNetworkAvailableNotificationChannelId)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.packageUid), this.mRecommendationService, this.mRecommendationServiceLabel, this.mEnableUseOpenWifiActivity, this.mNetworkAvailableNotificationChannelId);
+        return Objects.hash(
+                Integer.valueOf(this.packageUid),
+                this.mRecommendationService,
+                this.mRecommendationServiceLabel,
+                this.mEnableUseOpenWifiActivity,
+                this.mNetworkAvailableNotificationChannelId);
     }
 }

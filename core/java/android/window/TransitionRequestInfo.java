@@ -5,24 +5,28 @@ import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.WindowManager;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 
 /* loaded from: classes4.dex */
 public final class TransitionRequestInfo implements Parcelable {
-    public static final Parcelable.Creator<TransitionRequestInfo> CREATOR = new Parcelable.Creator<TransitionRequestInfo>() { // from class: android.window.TransitionRequestInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TransitionRequestInfo[] newArray(int size) {
-            return new TransitionRequestInfo[size];
-        }
+    public static final Parcelable.Creator<TransitionRequestInfo> CREATOR =
+            new Parcelable.Creator<
+                    TransitionRequestInfo>() { // from class: android.window.TransitionRequestInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TransitionRequestInfo[] newArray(int size) {
+                    return new TransitionRequestInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TransitionRequestInfo createFromParcel(Parcel in) {
-            return new TransitionRequestInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TransitionRequestInfo createFromParcel(Parcel in) {
+                    return new TransitionRequestInfo(in);
+                }
+            };
     private final int mDebugId;
     private DisplayChange mDisplayChange;
     private final int mFlags;
@@ -31,19 +35,37 @@ public final class TransitionRequestInfo implements Parcelable {
     private ActivityManager.RunningTaskInfo mTriggerTask;
     private final int mType;
 
-    public TransitionRequestInfo(int type, ActivityManager.RunningTaskInfo triggerTask, RemoteTransition remoteTransition) {
+    public TransitionRequestInfo(
+            int type,
+            ActivityManager.RunningTaskInfo triggerTask,
+            RemoteTransition remoteTransition) {
         this(type, triggerTask, null, remoteTransition, null, 0, -1);
     }
 
-    public TransitionRequestInfo(int type, ActivityManager.RunningTaskInfo triggerTask, RemoteTransition remoteTransition, int flags) {
+    public TransitionRequestInfo(
+            int type,
+            ActivityManager.RunningTaskInfo triggerTask,
+            RemoteTransition remoteTransition,
+            int flags) {
         this(type, triggerTask, null, remoteTransition, null, flags, -1);
     }
 
-    public TransitionRequestInfo(int type, ActivityManager.RunningTaskInfo triggerTask, RemoteTransition remoteTransition, DisplayChange displayChange, int flags) {
+    public TransitionRequestInfo(
+            int type,
+            ActivityManager.RunningTaskInfo triggerTask,
+            RemoteTransition remoteTransition,
+            DisplayChange displayChange,
+            int flags) {
         this(type, triggerTask, null, remoteTransition, displayChange, flags, -1);
     }
 
-    public TransitionRequestInfo(int type, ActivityManager.RunningTaskInfo triggerTask, ActivityManager.RunningTaskInfo pipTask, RemoteTransition remoteTransition, DisplayChange displayChange, int flags) {
+    public TransitionRequestInfo(
+            int type,
+            ActivityManager.RunningTaskInfo triggerTask,
+            ActivityManager.RunningTaskInfo pipTask,
+            RemoteTransition remoteTransition,
+            DisplayChange displayChange,
+            int flags) {
         this(type, triggerTask, pipTask, remoteTransition, displayChange, flags, -1);
     }
 
@@ -52,19 +74,22 @@ public final class TransitionRequestInfo implements Parcelable {
     }
 
     public static final class DisplayChange implements Parcelable {
-        public static final Parcelable.Creator<DisplayChange> CREATOR = new Parcelable.Creator<DisplayChange>() { // from class: android.window.TransitionRequestInfo.DisplayChange.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public DisplayChange[] newArray(int size) {
-                return new DisplayChange[size];
-            }
+        public static final Parcelable.Creator<DisplayChange> CREATOR =
+                new Parcelable.Creator<
+                        DisplayChange>() { // from class:
+                                           // android.window.TransitionRequestInfo.DisplayChange.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public DisplayChange[] newArray(int size) {
+                        return new DisplayChange[size];
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public DisplayChange createFromParcel(Parcel in) {
-                return new DisplayChange(in);
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public DisplayChange createFromParcel(Parcel in) {
+                        return new DisplayChange(in);
+                    }
+                };
         private final int mDisplayId;
         private Rect mEndAbsBounds;
         private int mEndRotation;
@@ -142,7 +167,19 @@ public final class TransitionRequestInfo implements Parcelable {
         }
 
         public String toString() {
-            return "DisplayChange { displayId = " + this.mDisplayId + ", startAbsBounds = " + this.mStartAbsBounds + ", endAbsBounds = " + this.mEndAbsBounds + ", startRotation = " + this.mStartRotation + ", endRotation = " + this.mEndRotation + ", physicalDisplayChanged = " + this.mPhysicalDisplayChanged + " }";
+            return "DisplayChange { displayId = "
+                    + this.mDisplayId
+                    + ", startAbsBounds = "
+                    + this.mStartAbsBounds
+                    + ", endAbsBounds = "
+                    + this.mEndAbsBounds
+                    + ", startRotation = "
+                    + this.mStartRotation
+                    + ", endRotation = "
+                    + this.mEndRotation
+                    + ", physicalDisplayChanged = "
+                    + this.mPhysicalDisplayChanged
+                    + " }";
         }
 
         @Override // android.os.Parcelable
@@ -193,13 +230,22 @@ public final class TransitionRequestInfo implements Parcelable {
         }
 
         @Deprecated
-        private void __metadata() {
-        }
+        private void __metadata() {}
     }
 
-    public TransitionRequestInfo(int type, ActivityManager.RunningTaskInfo triggerTask, ActivityManager.RunningTaskInfo pipTask, RemoteTransition remoteTransition, DisplayChange displayChange, int flags, int debugId) {
+    public TransitionRequestInfo(
+            int type,
+            ActivityManager.RunningTaskInfo triggerTask,
+            ActivityManager.RunningTaskInfo pipTask,
+            RemoteTransition remoteTransition,
+            DisplayChange displayChange,
+            int flags,
+            int debugId) {
         this.mType = type;
-        AnnotationValidations.validate((Class<? extends Annotation>) WindowManager.TransitionType.class, (Annotation) null, this.mType);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) WindowManager.TransitionType.class,
+                (Annotation) null,
+                this.mType);
         this.mTriggerTask = triggerTask;
         this.mPipTask = pipTask;
         this.mRemoteTransition = remoteTransition;
@@ -257,7 +303,21 @@ public final class TransitionRequestInfo implements Parcelable {
     }
 
     public String toString() {
-        return "TransitionRequestInfo { type = " + typeToString() + ", triggerTask = " + this.mTriggerTask + ", pipTask = " + this.mPipTask + ", remoteTransition = " + this.mRemoteTransition + ", displayChange = " + this.mDisplayChange + ", flags = " + this.mFlags + ", debugId = " + this.mDebugId + " }";
+        return "TransitionRequestInfo { type = "
+                + typeToString()
+                + ", triggerTask = "
+                + this.mTriggerTask
+                + ", pipTask = "
+                + this.mPipTask
+                + ", remoteTransition = "
+                + this.mRemoteTransition
+                + ", displayChange = "
+                + this.mDisplayChange
+                + ", flags = "
+                + this.mFlags
+                + ", debugId = "
+                + this.mDebugId
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -298,14 +358,29 @@ public final class TransitionRequestInfo implements Parcelable {
     TransitionRequestInfo(Parcel in) {
         byte flg = in.readByte();
         int type = in.readInt();
-        ActivityManager.RunningTaskInfo triggerTask = (flg & 2) == 0 ? null : (ActivityManager.RunningTaskInfo) in.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
-        ActivityManager.RunningTaskInfo pipTask = (flg & 4) == 0 ? null : (ActivityManager.RunningTaskInfo) in.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
-        RemoteTransition remoteTransition = (flg & 8) == 0 ? null : (RemoteTransition) in.readTypedObject(RemoteTransition.CREATOR);
-        DisplayChange displayChange = (flg & 16) == 0 ? null : (DisplayChange) in.readTypedObject(DisplayChange.CREATOR);
+        ActivityManager.RunningTaskInfo triggerTask =
+                (flg & 2) == 0
+                        ? null
+                        : (ActivityManager.RunningTaskInfo)
+                                in.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+        ActivityManager.RunningTaskInfo pipTask =
+                (flg & 4) == 0
+                        ? null
+                        : (ActivityManager.RunningTaskInfo)
+                                in.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+        RemoteTransition remoteTransition =
+                (flg & 8) == 0
+                        ? null
+                        : (RemoteTransition) in.readTypedObject(RemoteTransition.CREATOR);
+        DisplayChange displayChange =
+                (flg & 16) == 0 ? null : (DisplayChange) in.readTypedObject(DisplayChange.CREATOR);
         int flags = in.readInt();
         int debugId = in.readInt();
         this.mType = type;
-        AnnotationValidations.validate((Class<? extends Annotation>) WindowManager.TransitionType.class, (Annotation) null, this.mType);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) WindowManager.TransitionType.class,
+                (Annotation) null,
+                this.mType);
         this.mTriggerTask = triggerTask;
         this.mPipTask = pipTask;
         this.mRemoteTransition = remoteTransition;
@@ -315,6 +390,5 @@ public final class TransitionRequestInfo implements Parcelable {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

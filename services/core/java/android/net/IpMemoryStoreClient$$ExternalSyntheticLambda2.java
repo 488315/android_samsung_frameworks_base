@@ -1,18 +1,25 @@
 package android.net;
 
 import android.net.ipmemorystore.OnDeleteStatusListener;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class IpMemoryStoreClient$$ExternalSyntheticLambda2 implements Consumer {
+public final /* synthetic */ class IpMemoryStoreClient$$ExternalSyntheticLambda2
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ IpMemoryStoreClient f$0;
     public final /* synthetic */ String f$1;
     public final /* synthetic */ boolean f$2;
     public final /* synthetic */ OnDeleteStatusListener f$3;
 
-    public /* synthetic */ IpMemoryStoreClient$$ExternalSyntheticLambda2(IpMemoryStoreClient ipMemoryStoreClient, String str, boolean z, OnDeleteStatusListener onDeleteStatusListener, int i) {
+    public /* synthetic */ IpMemoryStoreClient$$ExternalSyntheticLambda2(
+            IpMemoryStoreClient ipMemoryStoreClient,
+            String str,
+            boolean z,
+            OnDeleteStatusListener onDeleteStatusListener,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = ipMemoryStoreClient;
         this.f$1 = str;
@@ -27,7 +34,8 @@ public final /* synthetic */ class IpMemoryStoreClient$$ExternalSyntheticLambda2
                 this.f$0.lambda$delete$19(this.f$1, this.f$2, this.f$3, (IIpMemoryStore) obj);
                 break;
             default:
-                this.f$0.lambda$deleteCluster$22(this.f$1, this.f$2, this.f$3, (IIpMemoryStore) obj);
+                this.f$0.lambda$deleteCluster$22(
+                        this.f$1, this.f$2, this.f$3, (IIpMemoryStore) obj);
                 break;
         }
     }

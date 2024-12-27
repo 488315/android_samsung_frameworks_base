@@ -15,7 +15,9 @@ public final class DexPersistBoundsParams {
         }
         if (obj != null && DexPersistBoundsParams.class == obj.getClass()) {
             DexPersistBoundsParams dexPersistBoundsParams = (DexPersistBoundsParams) obj;
-            if (this.mDexWindowingMode == dexPersistBoundsParams.mDexWindowingMode && this.mDexStandAloneBounds.equals(dexPersistBoundsParams.mDexStandAloneBounds) && this.mDexDualBounds.equals(dexPersistBoundsParams.mDexDualBounds)) {
+            if (this.mDexWindowingMode == dexPersistBoundsParams.mDexWindowingMode
+                    && this.mDexStandAloneBounds.equals(dexPersistBoundsParams.mDexStandAloneBounds)
+                    && this.mDexDualBounds.equals(dexPersistBoundsParams.mDexDualBounds)) {
                 return true;
             }
         }
@@ -23,7 +25,8 @@ public final class DexPersistBoundsParams {
     }
 
     public final int hashCode() {
-        return ((this.mDexDualBounds.hashCode() + (this.mDexStandAloneBounds.hashCode() * 31)) * 31) + this.mDexWindowingMode;
+        return ((this.mDexDualBounds.hashCode() + (this.mDexStandAloneBounds.hashCode() * 31)) * 31)
+                + this.mDexWindowingMode;
     }
 
     public final String toString() {

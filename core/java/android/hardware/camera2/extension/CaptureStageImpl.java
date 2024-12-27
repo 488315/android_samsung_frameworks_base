@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class CaptureStageImpl implements Parcelable {
-    public static final Parcelable.Creator<CaptureStageImpl> CREATOR = new Parcelable.Creator<CaptureStageImpl>() { // from class: android.hardware.camera2.extension.CaptureStageImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CaptureStageImpl createFromParcel(Parcel _aidl_source) {
-            CaptureStageImpl _aidl_out = new CaptureStageImpl();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CaptureStageImpl> CREATOR =
+            new Parcelable.Creator<CaptureStageImpl>() { // from class:
+                // android.hardware.camera2.extension.CaptureStageImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CaptureStageImpl createFromParcel(Parcel _aidl_source) {
+                    CaptureStageImpl _aidl_out = new CaptureStageImpl();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CaptureStageImpl[] newArray(int _aidl_size) {
-            return new CaptureStageImpl[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CaptureStageImpl[] newArray(int _aidl_size) {
+                    return new CaptureStageImpl[_aidl_size];
+                }
+            };
     public int id = 0;
     public CameraMetadataNative parameters;
 
@@ -58,7 +60,9 @@ public class CaptureStageImpl implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.parameters = (CameraMetadataNative) _aidl_parcel.readTypedObject(CameraMetadataNative.CREATOR);
+                this.parameters =
+                        (CameraMetadataNative)
+                                _aidl_parcel.readTypedObject(CameraMetadataNative.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

@@ -10,9 +10,11 @@ import android.graphics.drawable.Icon;
 import android.hardware.scontext.SContextConstants;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+
 import com.android.internal.R;
 import com.android.internal.graphics.ColorUtils;
 import com.android.internal.util.ContrastColorUtil;
+
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -21,7 +23,8 @@ import java.util.regex.Pattern;
 public class PeopleHelper {
     private static final float COLOR_SHIFT_AMOUNT = 60.0f;
     private static final Pattern IGNORABLE_CHAR_PATTERN = Pattern.compile("[\\p{C}\\p{Z}]");
-    private static final Pattern SPECIAL_CHAR_PATTERN = Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
+    private static final Pattern SPECIAL_CHAR_PATTERN =
+            Pattern.compile("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
     private int mAvatarSize;
     private Context mContext;
     private Paint mPaint = new Paint(1);
@@ -29,7 +32,8 @@ public class PeopleHelper {
 
     public void init(Context context) {
         this.mContext = context;
-        this.mAvatarSize = context.getResources().getDimensionPixelSize(R.dimen.messaging_avatar_size);
+        this.mAvatarSize =
+                context.getResources().getDimensionPixelSize(R.dimen.messaging_avatar_size);
         this.mTextPaint.setTextAlign(Paint.Align.CENTER);
         this.mTextPaint.setAntiAlias(true);
     }
@@ -41,16 +45,27 @@ public class PeopleHelper {
         }
         view.animate().cancel();
         view.setWillBeForceHidden(forceHidden);
-        view.animate().scaleX(forceHidden ? 0.5f : 1.0f).scaleY(forceHidden ? 0.5f : 1.0f).alpha(forceHidden ? 0.0f : 1.0f).setInterpolator(forceHidden ? MessagingPropertyAnimator.ALPHA_OUT : MessagingPropertyAnimator.ALPHA_IN).setDuration(160L);
+        view.animate()
+                .scaleX(forceHidden ? 0.5f : 1.0f)
+                .scaleY(forceHidden ? 0.5f : 1.0f)
+                .alpha(forceHidden ? 0.0f : 1.0f)
+                .setInterpolator(
+                        forceHidden
+                                ? MessagingPropertyAnimator.ALPHA_OUT
+                                : MessagingPropertyAnimator.ALPHA_IN)
+                .setDuration(160L);
         if (view.getVisibility() != 0) {
             view.setForceHidden(forceHidden);
         } else {
-            view.animate().withEndAction(new Runnable() { // from class: com.android.internal.widget.PeopleHelper$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    CachingIconView.this.setForceHidden(forceHidden);
-                }
-            });
+            view.animate()
+                    .withEndAction(
+                            new Runnable() { // from class:
+                                             // com.android.internal.widget.PeopleHelper$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    CachingIconView.this.setForceHidden(forceHidden);
+                                }
+                            });
         }
         view.animate().start();
     }
@@ -58,12 +73,15 @@ public class PeopleHelper {
     public Icon createAvatarSymbol(CharSequence name, String symbol, int layoutColor) {
         float f;
         float f2;
-        if (symbol.isEmpty() || TextUtils.isDigitsOnly(symbol) || SPECIAL_CHAR_PATTERN.matcher(symbol).find()) {
+        if (symbol.isEmpty()
+                || TextUtils.isDigitsOnly(symbol)
+                || SPECIAL_CHAR_PATTERN.matcher(symbol).find()) {
             Icon avatarIcon = Icon.createWithResource(this.mContext, R.drawable.messaging_user);
             avatarIcon.setTint(findColor(name, layoutColor));
             return avatarIcon;
         }
-        Bitmap bitmap = Bitmap.createBitmap(this.mAvatarSize, this.mAvatarSize, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap =
+                Bitmap.createBitmap(this.mAvatarSize, this.mAvatarSize, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         float radius = this.mAvatarSize / 2.0f;
         int color = findColor(name, layoutColor);
@@ -88,7 +106,22 @@ public class PeopleHelper {
     private int findColor(CharSequence senderName, int layoutColor) {
         double luminance = ContrastColorUtil.calculateLuminance(layoutColor);
         float shift = ((Math.abs(senderName.hashCode()) % 5) / 4.0f) - 0.5f;
-        return ContrastColorUtil.getShiftedColor(layoutColor, (int) (60.0f * ((float) (((float) (shift + Math.max(0.30000001192092896d - luminance, SContextConstants.ENVIRONMENT_VALUE_UNKNOWN))) - Math.max(0.30000001192092896d - (1.0d - luminance), SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)))));
+        return ContrastColorUtil.getShiftedColor(
+                layoutColor,
+                (int)
+                        (60.0f
+                                * ((float)
+                                        (((float)
+                                                        (shift
+                                                                + Math.max(
+                                                                        0.30000001192092896d
+                                                                                - luminance,
+                                                                        SContextConstants
+                                                                                .ENVIRONMENT_VALUE_UNKNOWN)))
+                                                - Math.max(
+                                                        0.30000001192092896d - (1.0d - luminance),
+                                                        SContextConstants
+                                                                .ENVIRONMENT_VALUE_UNKNOWN)))));
     }
 
     private String getPureName(CharSequence name) {
@@ -127,7 +160,10 @@ public class PeopleHelper {
         for (int i = 0; i < groups.size(); i++) {
             MessagingGroup group = groups.get(i);
             CharSequence senderName = group.getSenderName();
-            if (group.needsGeneratedAvatar() && !TextUtils.isEmpty(senderName) && !uniqueNames.containsKey(senderName) && (charPrefix = findNamePrefix(senderName, null)) != null) {
+            if (group.needsGeneratedAvatar()
+                    && !TextUtils.isEmpty(senderName)
+                    && !uniqueNames.containsKey(senderName)
+                    && (charPrefix = findNamePrefix(senderName, null)) != null) {
                 if (uniqueCharacters.containsKey(charPrefix)) {
                     CharSequence existingName = uniqueCharacters.get(charPrefix);
                     if (existingName != null) {
@@ -156,7 +192,8 @@ public class PeopleHelper {
         }
     }
 
-    public NameToPrefixMap mapUniqueNamesToPrefixWithGroupList(List<List<Notification.MessagingStyle.Message>> groups) {
+    public NameToPrefixMap mapUniqueNamesToPrefixWithGroupList(
+            List<List<Notification.MessagingStyle.Message>> groups) {
         Person sender;
         String charPrefix;
         ArrayMap<String, String> uniqueNames = new ArrayMap<>();
@@ -167,11 +204,13 @@ public class PeopleHelper {
                 CharSequence senderName = sender.getName();
                 if (sender.getIcon() == null && !TextUtils.isEmpty(senderName)) {
                     String senderNameString = senderName.toString();
-                    if (!uniqueNames.containsKey(senderNameString) && (charPrefix = findNamePrefix(senderName, null)) != null) {
+                    if (!uniqueNames.containsKey(senderNameString)
+                            && (charPrefix = findNamePrefix(senderName, null)) != null) {
                         if (uniqueCharacters.containsKey(charPrefix)) {
                             CharSequence existingName = uniqueCharacters.get(charPrefix);
                             if (existingName != null) {
-                                uniqueNames.put(existingName.toString(), findNameSplit(existingName));
+                                uniqueNames.put(
+                                        existingName.toString(), findNameSplit(existingName));
                                 uniqueCharacters.put(charPrefix, null);
                             }
                             uniqueNames.put(senderNameString, findNameSplit(senderName));
@@ -186,7 +225,8 @@ public class PeopleHelper {
         return new NameToPrefixMap(uniqueNames);
     }
 
-    public void maybeHideFirstSenderName(List<MessagingGroup> groups, boolean isOneToOne, CharSequence conversationTitle) {
+    public void maybeHideFirstSenderName(
+            List<MessagingGroup> groups, boolean isOneToOne, CharSequence conversationTitle) {
         for (int i = groups.size() - 1; i >= 0; i--) {
             MessagingGroup messagingGroup = groups.get(i);
             CharSequence messageSender = messagingGroup.getSenderName();

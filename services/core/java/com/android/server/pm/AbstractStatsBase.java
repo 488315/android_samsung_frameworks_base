@@ -3,7 +3,9 @@ package com.android.server.pm;
 import android.os.Environment;
 import android.os.SystemClock;
 import android.util.AtomicFile;
+
 import com.android.server.utils.WatchedArrayMap;
+
 import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
@@ -25,14 +27,19 @@ public abstract class AbstractStatsBase {
     }
 
     public final AtomicFile getFile() {
-        return new AtomicFile(new File(new File(Environment.getDataDirectory(), "system"), this.mFileName));
+        return new AtomicFile(
+                new File(new File(Environment.getDataDirectory(), "system"), this.mFileName));
     }
 
     public final boolean maybeWriteAsync(final Object obj) {
-        if (SystemClock.elapsedRealtime() - this.mLastTimeWritten.get() < 1800000 || !this.mBackgroundWriteRunning.compareAndSet(false, true)) {
+        if (SystemClock.elapsedRealtime() - this.mLastTimeWritten.get() < 1800000
+                || !this.mBackgroundWriteRunning.compareAndSet(false, true)) {
             return false;
         }
-        new Thread(this.mBackgroundThreadName) { // from class: com.android.server.pm.AbstractStatsBase.1
+        new Thread(
+                this
+                        .mBackgroundThreadName) { // from class:
+                                                  // com.android.server.pm.AbstractStatsBase.1
             @Override // java.lang.Thread, java.lang.Runnable
             public final void run() {
                 try {

@@ -5,6 +5,7 @@ import android.media.ExifInterface;
 import android.media.MediaMetrics;
 import android.telecom.Logging.Session;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.MetaDataUtil;
 import com.samsung.android.sume.core.UniExifInterface;
@@ -15,6 +16,7 @@ import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.DataType;
 import com.samsung.android.sume.core.types.MediaType;
 import com.samsung.android.sume.solution.filter.UniImgp;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -127,20 +129,45 @@ public class MediaBufferFileWriter {
         }
         if (this.ext != null) {
             fullPath = Def.fmtstr("%s/%s%s.%s", this.path, this.prefix, index, this.ext);
-            success = ((Boolean) ((BiFunction) Optional.ofNullable(this.compressImageWriter).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda3
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    return MediaBufferFileWriter.lambda$writeSingle$1();
-                }
-            })).apply(buffer2, fullPath)).booleanValue();
+            success =
+                    ((Boolean)
+                                    ((BiFunction)
+                                                    Optional.ofNullable(this.compressImageWriter)
+                                                            .orElseGet(
+                                                                    new Supplier() { // from class:
+                                                                                     // com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda3
+                                                                        @Override // java.util.function.Supplier
+                                                                        public final Object get() {
+                                                                            return MediaBufferFileWriter
+                                                                                    .lambda$writeSingle$1();
+                                                                        }
+                                                                    }))
+                                            .apply(buffer2, fullPath))
+                            .booleanValue();
         } else {
-            this.ext = (String) Optional.ofNullable(buffer2.getFormat().getColorFormat()).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda4
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return MediaBufferFileWriter.lambda$writeSingle$2((ColorFormat) obj);
-                }
-            }).orElse("raw");
-            fullPath = Def.fmtstr("%s/%s_%dx%d%s.%s", this.path, this.prefix, Integer.valueOf(buffer2.getStride() / buffer2.getChannels()), Integer.valueOf(buffer2.getScanline()), index, this.ext);
+            this.ext =
+                    (String)
+                            Optional.ofNullable(buffer2.getFormat().getColorFormat())
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda4
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return MediaBufferFileWriter
+                                                            .lambda$writeSingle$2(
+                                                                    (ColorFormat) obj);
+                                                }
+                                            })
+                                    .orElse("raw");
+            fullPath =
+                    Def.fmtstr(
+                            "%s/%s_%dx%d%s.%s",
+                            this.path,
+                            this.prefix,
+                            Integer.valueOf(buffer2.getStride() / buffer2.getChannels()),
+                            Integer.valueOf(buffer2.getScanline()),
+                            index,
+                            this.ext);
             success = writeRawImageSingle(buffer2, fullPath);
         }
         if (success && this.exifSupplier != null && (src = this.exifSupplier.get()) != null) {
@@ -166,7 +193,8 @@ public class MediaBufferFileWriter {
     }
 
     static /* synthetic */ BiFunction lambda$writeSingle$1() {
-        return new BiFunction() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda5
+        return new BiFunction() { // from class:
+                                  // com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda5
             @Override // java.util.function.BiFunction
             public final Object apply(Object obj, Object obj2) {
                 return MediaBufferFileWriter.lambda$writeSingle$0((MediaBuffer) obj, (String) obj2);
@@ -193,12 +221,16 @@ public class MediaBufferFileWriter {
     private boolean writeRawImageSingle(MediaBuffer buffer, String name) {
         MediaBuffer mediaBuffer = buffer;
         final DataType dataType = buffer.getFormat().getDataType();
-        if (Arrays.stream(new DataType[]{DataType.U8, DataType.S8}).noneMatch(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return MediaBufferFileWriter.lambda$writeRawImageSingle$3(DataType.this, (DataType) obj);
-            }
-        })) {
+        if (Arrays.stream(new DataType[] {DataType.U8, DataType.S8})
+                .noneMatch(
+                        new Predicate() { // from class:
+                                          // com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return MediaBufferFileWriter.lambda$writeRawImageSingle$3(
+                                        DataType.this, (DataType) obj);
+                            }
+                        })) {
             MutableMediaFormat fmt = MediaFormat.mutableImageOf(new Object[0]);
             fmt.setDataType(DataType.of(DataType.U8, buffer.getChannels()));
             mediaBuffer = MediaBuffer.mutableOf(fmt.toMediaFormat());
@@ -226,12 +258,15 @@ public class MediaBufferFileWriter {
     }
 
     private void extractMetaBuffers(MediaBuffer buffer) {
-        buffer.asList().forEach(new Consumer() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                MediaBufferFileWriter.this.m9113xaf869f87((MediaBuffer) obj);
-            }
-        });
+        buffer.asList()
+                .forEach(
+                        new Consumer() { // from class:
+                                         // com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                MediaBufferFileWriter.this.m9113xaf869f87((MediaBuffer) obj);
+                            }
+                        });
     }
 
     /* renamed from: lambda$extractMetaBuffers$5$com-samsung-android-sume-core-buffer-MediaBufferFileWriter, reason: not valid java name */
@@ -239,15 +274,19 @@ public class MediaBufferFileWriter {
         if (it.getFormat().getMediaType() == MediaType.META) {
             if (it.getFormat().contains("exif")) {
                 if (it.getData() instanceof UniExifInterface) {
-                    this.uniExifInterface = (UniExifInterface) it.getTypedData(UniExifInterface.class);
+                    this.uniExifInterface =
+                            (UniExifInterface) it.getTypedData(UniExifInterface.class);
                     return;
                 } else if (it.getData() instanceof ExifInterface) {
-                    this.exifSupplier = new Supplier() { // from class: com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda2
-                        @Override // java.util.function.Supplier
-                        public final Object get() {
-                            return MediaBufferFileWriter.lambda$extractMetaBuffers$4(MediaBuffer.this);
-                        }
-                    };
+                    this.exifSupplier =
+                            new Supplier() { // from class:
+                                             // com.samsung.android.sume.core.buffer.MediaBufferFileWriter$$ExternalSyntheticLambda2
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    return MediaBufferFileWriter.lambda$extractMetaBuffers$4(
+                                            MediaBuffer.this);
+                                }
+                            };
                     return;
                 } else {
                     if (it.getData() instanceof ByteBuffer) {
@@ -271,7 +310,8 @@ public class MediaBufferFileWriter {
         return (ExifInterface) it.getTypedData(ExifInterface.class);
     }
 
-    public MediaBufferFileWriter setCompressImageWriter(BiFunction<MediaBuffer, String, Boolean> compressImageWriter) {
+    public MediaBufferFileWriter setCompressImageWriter(
+            BiFunction<MediaBuffer, String, Boolean> compressImageWriter) {
         this.compressImageWriter = compressImageWriter;
         return this;
     }

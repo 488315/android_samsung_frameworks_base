@@ -2,10 +2,9 @@ package android.media.musicrecognition;
 
 import android.annotation.SystemApi;
 import android.media.MediaMetadata;
-import android.media.musicrecognition.IMusicRecognitionManagerCallback;
-import android.media.musicrecognition.MusicRecognitionManager;
 import android.os.Bundle;
 import android.os.RemoteException;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -28,21 +27,29 @@ public class MusicRecognitionManager {
 
         void onRecognitionFailed(RecognitionRequest recognitionRequest, int i);
 
-        void onRecognitionSucceeded(RecognitionRequest recognitionRequest, MediaMetadata mediaMetadata, Bundle bundle);
+        void onRecognitionSucceeded(
+                RecognitionRequest recognitionRequest, MediaMetadata mediaMetadata, Bundle bundle);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RecognitionFailureCode {
-    }
+    public @interface RecognitionFailureCode {}
 
     public MusicRecognitionManager(IMusicRecognitionManager service) {
         this.mService = service;
     }
 
     @SystemApi
-    public void beginStreamingSearch(RecognitionRequest recognitionRequest, Executor callbackExecutor, RecognitionCallback callback) {
+    public void beginStreamingSearch(
+            RecognitionRequest recognitionRequest,
+            Executor callbackExecutor,
+            RecognitionCallback callback) {
         try {
-            this.mService.beginRecognition((RecognitionRequest) Objects.requireNonNull(recognitionRequest), new MusicRecognitionCallbackWrapper((RecognitionRequest) Objects.requireNonNull(recognitionRequest), (RecognitionCallback) Objects.requireNonNull(callback), (Executor) Objects.requireNonNull(callbackExecutor)));
+            this.mService.beginRecognition(
+                    (RecognitionRequest) Objects.requireNonNull(recognitionRequest),
+                    new MusicRecognitionCallbackWrapper(
+                            (RecognitionRequest) Objects.requireNonNull(recognitionRequest),
+                            (RecognitionCallback) Objects.requireNonNull(callback),
+                            (Executor) Objects.requireNonNull(callbackExecutor)));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -54,7 +61,10 @@ public class MusicRecognitionManager {
         private final Executor mCallbackExecutor;
         private final RecognitionRequest mRecognitionRequest;
 
-        MusicRecognitionCallbackWrapper(RecognitionRequest recognitionRequest, RecognitionCallback callback, Executor callbackExecutor) {
+        MusicRecognitionCallbackWrapper(
+                RecognitionRequest recognitionRequest,
+                RecognitionCallback callback,
+                Executor callbackExecutor) {
             this.mRecognitionRequest = recognitionRequest;
             this.mCallback = callback;
             this.mCallbackExecutor = callbackExecutor;
@@ -62,27 +72,34 @@ public class MusicRecognitionManager {
 
         @Override // android.media.musicrecognition.IMusicRecognitionManagerCallback
         public void onRecognitionSucceeded(final MediaMetadata result, final Bundle extras) {
-            this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.musicrecognition.MusicRecognitionManager$MusicRecognitionCallbackWrapper$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    MusicRecognitionManager.MusicRecognitionCallbackWrapper.this.lambda$onRecognitionSucceeded$0(result, extras);
-                }
-            });
+            this.mCallbackExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.media.musicrecognition.MusicRecognitionManager$MusicRecognitionCallbackWrapper$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            MusicRecognitionManager.MusicRecognitionCallbackWrapper.this
+                                    .lambda$onRecognitionSucceeded$0(result, extras);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onRecognitionSucceeded$0(MediaMetadata result, Bundle extras) {
+        public /* synthetic */ void lambda$onRecognitionSucceeded$0(
+                MediaMetadata result, Bundle extras) {
             this.mCallback.onRecognitionSucceeded(this.mRecognitionRequest, result, extras);
         }
 
         @Override // android.media.musicrecognition.IMusicRecognitionManagerCallback
         public void onRecognitionFailed(final int failureCode) {
-            this.mCallbackExecutor.execute(new Runnable() { // from class: android.media.musicrecognition.MusicRecognitionManager$MusicRecognitionCallbackWrapper$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    MusicRecognitionManager.MusicRecognitionCallbackWrapper.this.lambda$onRecognitionFailed$1(failureCode);
-                }
-            });
+            this.mCallbackExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.media.musicrecognition.MusicRecognitionManager$MusicRecognitionCallbackWrapper$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            MusicRecognitionManager.MusicRecognitionCallbackWrapper.this
+                                    .lambda$onRecognitionFailed$1(failureCode);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -95,12 +112,14 @@ public class MusicRecognitionManager {
             Executor executor = this.mCallbackExecutor;
             final RecognitionCallback recognitionCallback = this.mCallback;
             Objects.requireNonNull(recognitionCallback);
-            executor.execute(new Runnable() { // from class: android.media.musicrecognition.MusicRecognitionManager$MusicRecognitionCallbackWrapper$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    MusicRecognitionManager.RecognitionCallback.this.onAudioStreamClosed();
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                        // android.media.musicrecognition.MusicRecognitionManager$MusicRecognitionCallbackWrapper$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            MusicRecognitionManager.RecognitionCallback.this.onAudioStreamClosed();
+                        }
+                    });
         }
     }
 }

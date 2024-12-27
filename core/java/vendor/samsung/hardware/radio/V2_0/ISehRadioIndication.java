@@ -10,8 +10,11 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -19,7 +22,8 @@ import java.util.Objects;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioIndication extends IBase {
-    public static final String kInterfaceName = "vendor.samsung.hardware.radio@2.0::ISehRadioIndication";
+    public static final String kInterfaceName =
+            "vendor.samsung.hardware.radio@2.0::ISehRadioIndication";
 
     @FunctionalInterface
     public interface needPacketUsageCallback {
@@ -31,7 +35,8 @@ public interface ISehRadioIndication extends IBase {
     @Override // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
     IHwBinder asBinder();
 
-    void configModemCapabilityChangeNoti(int i, SehConfigModemCapability sehConfigModemCapability) throws RemoteException;
+    void configModemCapabilityChangeNoti(int i, SehConfigModemCapability sehConfigModemCapability)
+            throws RemoteException;
 
     void csFallback(int i, int i2) throws RemoteException;
 
@@ -42,7 +47,8 @@ public interface ISehRadioIndication extends IBase {
 
     void execute(int i, String str) throws RemoteException;
 
-    void extendedRegistrationState(int i, SehExtendedRegStateResult sehExtendedRegStateResult) throws RemoteException;
+    void extendedRegistrationState(int i, SehExtendedRegStateResult sehExtendedRegStateResult)
+            throws RemoteException;
 
     @Override // android.internal.hidl.base.V1_0.IBase
     DebugInfo getDebugInfo() throws RemoteException;
@@ -65,7 +71,8 @@ public interface ISehRadioIndication extends IBase {
 
     SehApnProfile needApnProfileIndication(String str) throws RemoteException;
 
-    void needPacketUsage(String str, needPacketUsageCallback needpacketusagecallback) throws RemoteException;
+    void needPacketUsage(String str, needPacketUsageCallback needpacketusagecallback)
+            throws RemoteException;
 
     int needSettingValueIndication(String str, String str2) throws RemoteException;
 
@@ -83,7 +90,8 @@ public interface ISehRadioIndication extends IBase {
     @Override // android.internal.hidl.base.V1_0.IBase
     void ping() throws RemoteException;
 
-    void releaseCompleteMessageIndication(int i, SehSsReleaseComplete sehSsReleaseComplete) throws RemoteException;
+    void releaseCompleteMessageIndication(int i, SehSsReleaseComplete sehSsReleaseComplete)
+            throws RemoteException;
 
     void rrcStateChanged(int i, SehRrcStateInfo sehRrcStateInfo) throws RemoteException;
 
@@ -142,7 +150,8 @@ public interface ISehRadioIndication extends IBase {
         return asInterface(iface.asBinder());
     }
 
-    static ISehRadioIndication getService(String serviceName, boolean retry) throws RemoteException {
+    static ISehRadioIndication getService(String serviceName, boolean retry)
+            throws RemoteException {
         return asInterface(HwBinder.getService(kInterfaceName, serviceName, retry));
     }
 
@@ -167,7 +176,8 @@ public interface ISehRadioIndication extends IBase {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -176,7 +186,8 @@ public interface ISehRadioIndication extends IBase {
             try {
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException e) {
-                return "[class or subclass of vendor.samsung.hardware.radio@2.0::ISehRadioIndication]@Proxy";
+                return "[class or subclass of"
+                           + " vendor.samsung.hardware.radio@2.0::ISehRadioIndication]@Proxy";
             }
         }
 
@@ -219,7 +230,8 @@ public interface ISehRadioIndication extends IBase {
         }
 
         @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication
-        public void imsPreferenceChanged(int type, ArrayList<Integer> imsPref) throws RemoteException {
+        public void imsPreferenceChanged(int type, ArrayList<Integer> imsPref)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISehRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -234,7 +246,8 @@ public interface ISehRadioIndication extends IBase {
         }
 
         @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication
-        public void voiceRadioBearerHandoverStatusChanged(int type, int state) throws RemoteException {
+        public void voiceRadioBearerHandoverStatusChanged(int type, int state)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISehRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -249,7 +262,8 @@ public interface ISehRadioIndication extends IBase {
         }
 
         @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication
-        public void timerStatusChangedInd(int type, ArrayList<Integer> eventNoti) throws RemoteException {
+        public void timerStatusChangedInd(int type, ArrayList<Integer> eventNoti)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISehRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -264,7 +278,8 @@ public interface ISehRadioIndication extends IBase {
         }
 
         @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication
-        public void modemCapabilityIndication(int type, ArrayList<Byte> data) throws RemoteException {
+        public void modemCapabilityIndication(int type, ArrayList<Byte> data)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISehRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -410,7 +425,8 @@ public interface ISehRadioIndication extends IBase {
         }
 
         @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication
-        public void releaseCompleteMessageIndication(int type, SehSsReleaseComplete result) throws RemoteException {
+        public void releaseCompleteMessageIndication(int type, SehSsReleaseComplete result)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISehRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -485,7 +501,8 @@ public interface ISehRadioIndication extends IBase {
         }
 
         @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication
-        public void configModemCapabilityChangeNoti(int type, SehConfigModemCapability configModemCapa) throws RemoteException {
+        public void configModemCapabilityChangeNoti(
+                int type, SehConfigModemCapability configModemCapa) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISehRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -551,7 +568,8 @@ public interface ISehRadioIndication extends IBase {
         }
 
         @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication
-        public void signalLevelInfoChanged(int type, SehSignalBar signalBarInfo) throws RemoteException {
+        public void signalLevelInfoChanged(int type, SehSignalBar signalBarInfo)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISehRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -567,7 +585,8 @@ public interface ISehRadioIndication extends IBase {
         }
 
         @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication
-        public void extendedRegistrationState(int type, SehExtendedRegStateResult state) throws RemoteException {
+        public void extendedRegistrationState(int type, SehExtendedRegStateResult state)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISehRadioIndication.kInterfaceName);
             _hidl_request.writeInt32(type);
@@ -583,7 +602,8 @@ public interface ISehRadioIndication extends IBase {
         }
 
         @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication
-        public void needPacketUsage(String iface, needPacketUsageCallback _hidl_cb) throws RemoteException {
+        public void needPacketUsage(String iface, needPacketUsageCallback _hidl_cb)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ISehRadioIndication.kInterfaceName);
             _hidl_request.writeString(iface);
@@ -601,7 +621,8 @@ public interface ISehRadioIndication extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -617,7 +638,8 @@ public interface ISehRadioIndication extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -633,7 +655,8 @@ public interface ISehRadioIndication extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -649,7 +672,8 @@ public interface ISehRadioIndication extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -661,7 +685,9 @@ public interface ISehRadioIndication extends IBase {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -675,7 +701,8 @@ public interface ISehRadioIndication extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -688,12 +715,15 @@ public interface ISehRadioIndication extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -707,7 +737,8 @@ public interface ISehRadioIndication extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -724,7 +755,8 @@ public interface ISehRadioIndication extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -737,51 +769,128 @@ public interface ISehRadioIndication extends IBase {
             }
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements ISehRadioIndication {
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements ISehRadioIndication {
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(ISehRadioIndication.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(ISehRadioIndication.kInterfaceName, IBase.kInterfaceName));
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return ISehRadioIndication.kInterfaceName;
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{120, 15, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, -11, -123, -62, 87, 84, -52, 99, 67, -65, 0, -34, -27, 21, 126, -4, -10, -8, 82, 107, -63, 121, 122, -84, -72, 126, -115, 55, 95, -92}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                120,
+                                15,
+                                MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH,
+                                -11,
+                                -123,
+                                -62,
+                                87,
+                                84,
+                                -52,
+                                99,
+                                67,
+                                -65,
+                                0,
+                                -34,
+                                -27,
+                                21,
+                                126,
+                                -4,
+                                -10,
+                                -8,
+                                82,
+                                107,
+                                -63,
+                                121,
+                                122,
+                                -84,
+                                -72,
+                                126,
+                                -115,
+                                55,
+                                95,
+                                -92
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+                  // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -790,12 +899,14 @@ public interface ISehRadioIndication extends IBase {
             return info;
         }
 
-        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication, android.internal.hidl.base.V1_0.IBase
+        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication,
+                  // android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+                  // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -817,7 +928,9 @@ public interface ISehRadioIndication extends IBase {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, final HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, final HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(ISehRadioIndication.kInterfaceName);
@@ -987,15 +1100,18 @@ public interface ISehRadioIndication extends IBase {
                 case 27:
                     _hidl_request.enforceInterface(ISehRadioIndication.kInterfaceName);
                     String iface = _hidl_request.readString();
-                    needPacketUsage(iface, new needPacketUsageCallback() { // from class: vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.Stub.1
-                        @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.needPacketUsageCallback
-                        public void onValues(int error, SehPacketUsage usage) {
-                            _hidl_reply.writeStatus(0);
-                            _hidl_reply.writeInt32(error);
-                            usage.writeToParcel(_hidl_reply);
-                            _hidl_reply.send();
-                        }
-                    });
+                    needPacketUsage(
+                            iface,
+                            new needPacketUsageCallback() { // from class:
+                                                            // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.Stub.1
+                                @Override // vendor.samsung.hardware.radio.V2_0.ISehRadioIndication.needPacketUsageCallback
+                                public void onValues(int error, SehPacketUsage usage) {
+                                    _hidl_reply.writeStatus(0);
+                                    _hidl_reply.writeInt32(error);
+                                    usage.writeToParcel(_hidl_reply);
+                                    _hidl_reply.send();
+                                }
+                            });
                     return;
                 case 256067662:
                     _hidl_request.enforceInterface(IBase.kInterfaceName);
@@ -1032,7 +1148,8 @@ public interface ISehRadioIndication extends IBase {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

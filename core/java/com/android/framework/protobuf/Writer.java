@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.MapEntryLite;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +66,8 @@ interface Writer {
 
     void writeInt64List(int i, List<Long> list, boolean z) throws IOException;
 
-    <K, V> void writeMap(int i, MapEntryLite.Metadata<K, V> metadata, Map<K, V> map) throws IOException;
+    <K, V> void writeMap(int i, MapEntryLite.Metadata<K, V> metadata, Map<K, V> map)
+            throws IOException;
 
     void writeMessage(int i, Object obj) throws IOException;
 

@@ -5,18 +5,21 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.autofill.IConvertCredentialCallback;
-import android.service.autofill.IFillCallback;
-import android.service.autofill.ISaveCallback;
+
 import com.android.internal.os.IResultReceiver;
 
 /* loaded from: classes3.dex */
 public interface IAutoFillService extends IInterface {
     void onConnectedStateChanged(boolean z) throws RemoteException;
 
-    void onConvertCredentialRequest(ConvertCredentialRequest convertCredentialRequest, IConvertCredentialCallback iConvertCredentialCallback) throws RemoteException;
+    void onConvertCredentialRequest(
+            ConvertCredentialRequest convertCredentialRequest,
+            IConvertCredentialCallback iConvertCredentialCallback)
+            throws RemoteException;
 
-    void onFillCredentialRequest(FillRequest fillRequest, IFillCallback iFillCallback, IBinder iBinder) throws RemoteException;
+    void onFillCredentialRequest(
+            FillRequest fillRequest, IFillCallback iFillCallback, IBinder iBinder)
+            throws RemoteException;
 
     void onFillRequest(FillRequest fillRequest, IFillCallback iFillCallback) throws RemoteException;
 
@@ -26,28 +29,29 @@ public interface IAutoFillService extends IInterface {
 
     public static class Default implements IAutoFillService {
         @Override // android.service.autofill.IAutoFillService
-        public void onConnectedStateChanged(boolean connected) throws RemoteException {
-        }
+        public void onConnectedStateChanged(boolean connected) throws RemoteException {}
 
         @Override // android.service.autofill.IAutoFillService
-        public void onFillRequest(FillRequest request, IFillCallback callback) throws RemoteException {
-        }
+        public void onFillRequest(FillRequest request, IFillCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.autofill.IAutoFillService
-        public void onFillCredentialRequest(FillRequest request, IFillCallback callback, IBinder client) throws RemoteException {
-        }
+        public void onFillCredentialRequest(
+                FillRequest request, IFillCallback callback, IBinder client)
+                throws RemoteException {}
 
         @Override // android.service.autofill.IAutoFillService
-        public void onSaveRequest(SaveRequest request, ISaveCallback callback) throws RemoteException {
-        }
+        public void onSaveRequest(SaveRequest request, ISaveCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.autofill.IAutoFillService
-        public void onSavedPasswordCountRequest(IResultReceiver receiver) throws RemoteException {
-        }
+        public void onSavedPasswordCountRequest(IResultReceiver receiver) throws RemoteException {}
 
         @Override // android.service.autofill.IAutoFillService
-        public void onConvertCredentialRequest(ConvertCredentialRequest convertCredentialRequest, IConvertCredentialCallback convertCredentialCallback) throws RemoteException {
-        }
+        public void onConvertCredentialRequest(
+                ConvertCredentialRequest convertCredentialRequest,
+                IConvertCredentialCallback convertCredentialCallback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -55,7 +59,7 @@ public interface IAutoFillService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAutoFillService {
+    public abstract static class Stub extends Binder implements IAutoFillService {
         public static final String DESCRIPTOR = "android.service.autofill.IAutoFillService";
         static final int TRANSACTION_onConnectedStateChanged = 1;
         static final int TRANSACTION_onConvertCredentialRequest = 6;
@@ -109,7 +113,8 @@ public interface IAutoFillService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -143,13 +148,17 @@ public interface IAutoFillService extends IInterface {
                     onSaveRequest(_arg04, _arg13);
                     return true;
                 case 5:
-                    IResultReceiver _arg05 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg05 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onSavedPasswordCountRequest(_arg05);
                     return true;
                 case 6:
-                    ConvertCredentialRequest _arg06 = (ConvertCredentialRequest) data.readTypedObject(ConvertCredentialRequest.CREATOR);
-                    IConvertCredentialCallback _arg14 = IConvertCredentialCallback.Stub.asInterface(data.readStrongBinder());
+                    ConvertCredentialRequest _arg06 =
+                            (ConvertCredentialRequest)
+                                    data.readTypedObject(ConvertCredentialRequest.CREATOR);
+                    IConvertCredentialCallback _arg14 =
+                            IConvertCredentialCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onConvertCredentialRequest(_arg06, _arg14);
                     return true;
@@ -187,7 +196,8 @@ public interface IAutoFillService extends IInterface {
             }
 
             @Override // android.service.autofill.IAutoFillService
-            public void onFillRequest(FillRequest request, IFillCallback callback) throws RemoteException {
+            public void onFillRequest(FillRequest request, IFillCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -200,7 +210,9 @@ public interface IAutoFillService extends IInterface {
             }
 
             @Override // android.service.autofill.IAutoFillService
-            public void onFillCredentialRequest(FillRequest request, IFillCallback callback, IBinder client) throws RemoteException {
+            public void onFillCredentialRequest(
+                    FillRequest request, IFillCallback callback, IBinder client)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -214,7 +226,8 @@ public interface IAutoFillService extends IInterface {
             }
 
             @Override // android.service.autofill.IAutoFillService
-            public void onSaveRequest(SaveRequest request, ISaveCallback callback) throws RemoteException {
+            public void onSaveRequest(SaveRequest request, ISaveCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -227,7 +240,8 @@ public interface IAutoFillService extends IInterface {
             }
 
             @Override // android.service.autofill.IAutoFillService
-            public void onSavedPasswordCountRequest(IResultReceiver receiver) throws RemoteException {
+            public void onSavedPasswordCountRequest(IResultReceiver receiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -239,7 +253,10 @@ public interface IAutoFillService extends IInterface {
             }
 
             @Override // android.service.autofill.IAutoFillService
-            public void onConvertCredentialRequest(ConvertCredentialRequest convertCredentialRequest, IConvertCredentialCallback convertCredentialCallback) throws RemoteException {
+            public void onConvertCredentialRequest(
+                    ConvertCredentialRequest convertCredentialRequest,
+                    IConvertCredentialCallback convertCredentialCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

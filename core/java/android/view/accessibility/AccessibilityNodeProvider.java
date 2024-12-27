@@ -1,6 +1,7 @@
 package android.view.accessibility;
 
 import android.os.Bundle;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -11,14 +12,15 @@ public abstract class AccessibilityNodeProvider {
         return null;
     }
 
-    public void addExtraDataToAccessibilityNodeInfo(int virtualViewId, AccessibilityNodeInfo info, String extraDataKey, Bundle arguments) {
-    }
+    public void addExtraDataToAccessibilityNodeInfo(
+            int virtualViewId, AccessibilityNodeInfo info, String extraDataKey, Bundle arguments) {}
 
     public boolean performAction(int virtualViewId, int action, Bundle arguments) {
         return false;
     }
 
-    public List<AccessibilityNodeInfo> findAccessibilityNodeInfosByText(String text, int virtualViewId) {
+    public List<AccessibilityNodeInfo> findAccessibilityNodeInfosByText(
+            String text, int virtualViewId) {
         return null;
     }
 

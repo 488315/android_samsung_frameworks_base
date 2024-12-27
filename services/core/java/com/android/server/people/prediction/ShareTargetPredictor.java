@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.people.PeopleService$LocalService$$ExternalSyntheticLambda0;
 import com.android.server.people.SessionInfo$$ExternalSyntheticLambda0;
@@ -37,8 +38,10 @@ import com.android.server.people.data.PackageData;
 import com.android.server.people.data.UsageStatsQueryHelper$$ExternalSyntheticLambda0;
 import com.android.server.people.data.UserData;
 import com.android.server.people.data.UserData$$ExternalSyntheticLambda0;
-import com.android.server.people.prediction.ShareTargetPredictor;
 import com.android.server.usage.UsageStatsService;
+
+import libcore.util.EmptyArray;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,7 +50,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import libcore.util.EmptyArray;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -64,7 +66,8 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
         public final EventHistory mEventHistory;
         public float mScore = FullScreenMagnificationGestureHandler.MAX_SCALE;
 
-        public ShareTarget(AppTarget appTarget, EventHistory eventHistory, ConversationInfo conversationInfo) {
+        public ShareTarget(
+                AppTarget appTarget, EventHistory eventHistory, ConversationInfo conversationInfo) {
             this.mAppTarget = appTarget;
             this.mEventHistory = eventHistory;
             this.mConversationInfo = conversationInfo;
@@ -91,17 +94,35 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
         }
     }
 
-    public ShareTargetPredictor(AppPredictionContext appPredictionContext, SessionInfo$$ExternalSyntheticLambda0 sessionInfo$$ExternalSyntheticLambda0, DataManager dataManager, int i, Context context) {
+    public ShareTargetPredictor(
+            AppPredictionContext appPredictionContext,
+            SessionInfo$$ExternalSyntheticLambda0 sessionInfo$$ExternalSyntheticLambda0,
+            DataManager dataManager,
+            int i,
+            Context context) {
         super(appPredictionContext, sessionInfo$$ExternalSyntheticLambda0, dataManager, i);
-        this.mIntentFilter = (IntentFilter) appPredictionContext.getExtras().getParcelable("intent_filter", IntentFilter.class);
-        if (DeviceConfig.getBoolean("systemui", "dark_launch_remote_prediction_service_enabled", false)) {
+        this.mIntentFilter =
+                (IntentFilter)
+                        appPredictionContext
+                                .getExtras()
+                                .getParcelable("intent_filter", IntentFilter.class);
+        if (DeviceConfig.getBoolean(
+                "systemui", "dark_launch_remote_prediction_service_enabled", false)) {
             appPredictionContext.getExtras().putBoolean("remote_app_predictor", true);
-            this.mRemoteAppPredictor = ((AppPredictionManager) context.createContextAsUser(UserHandle.of(i), 0).getSystemService(AppPredictionManager.class)).createAppPredictionSession(appPredictionContext);
+            this.mRemoteAppPredictor =
+                    ((AppPredictionManager)
+                                    context.createContextAsUser(UserHandle.of(i), 0)
+                                            .getSystemService(AppPredictionManager.class))
+                            .createAppPredictionSession(appPredictionContext);
         } else {
             this.mRemoteAppPredictor = null;
         }
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(context.getResources().getString(R.string.crossSimFormat_spn_cross_sim_calling));
-        this.mChooserActivity = unflattenFromString != null ? unflattenFromString.getShortClassName() : null;
+        ComponentName unflattenFromString =
+                ComponentName.unflattenFromString(
+                        context.getResources()
+                                .getString(R.string.crossSimFormat_spn_cross_sim_calling));
+        this.mChooserActivity =
+                unflattenFromString != null ? unflattenFromString.getShortClassName() : null;
     }
 
     @Override // com.android.server.people.prediction.AppTargetPredictor
@@ -121,17 +142,30 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
         ArrayList arrayList = new ArrayList();
         IntentFilter intentFilter = this.mIntentFilter;
         DataManager dataManager = this.mDataManager;
-        Iterator it = dataManager.mShortcutServiceInternal.getShareTargets(dataManager.mContext.getPackageName(), intentFilter, this.mCallingUserId).iterator();
+        Iterator it =
+                dataManager
+                        .mShortcutServiceInternal
+                        .getShareTargets(
+                                dataManager.mContext.getPackageName(),
+                                intentFilter,
+                                this.mCallingUserId)
+                        .iterator();
         while (true) {
             r4 = null;
             AggregateEventHistoryImpl aggregateEventHistoryImpl = null;
             if (!it.hasNext()) {
                 break;
             }
-            ShortcutManager.ShareShortcutInfo shareShortcutInfo = (ShortcutManager.ShareShortcutInfo) it.next();
+            ShortcutManager.ShareShortcutInfo shareShortcutInfo =
+                    (ShortcutManager.ShareShortcutInfo) it.next();
             ShortcutInfo shortcutInfo = shareShortcutInfo.getShortcutInfo();
-            AppTarget build = new AppTarget.Builder(new AppTargetId(shortcutInfo.getId()), shortcutInfo).setClassName(shareShortcutInfo.getTargetComponent().getClassName()).setRank(shortcutInfo.getRank()).build();
-            PackageData packageData = dataManager.getPackage(shortcutInfo.getUserId(), shortcutInfo.getPackage());
+            AppTarget build =
+                    new AppTarget.Builder(new AppTargetId(shortcutInfo.getId()), shortcutInfo)
+                            .setClassName(shareShortcutInfo.getTargetComponent().getClassName())
+                            .setRank(shortcutInfo.getRank())
+                            .build();
+            PackageData packageData =
+                    dataManager.getPackage(shortcutInfo.getUserId(), shortcutInfo.getPackage());
             if (packageData != null) {
                 String id = shortcutInfo.getId();
                 ConversationStore conversationStore = packageData.mConversationStore;
@@ -143,21 +177,31 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
                         EventStore eventStore = packageData.mEventStore;
                         EventHistory eventHistory4 = eventStore.getEventHistory(0, id);
                         if (eventHistory4 != null) {
-                            ((ArrayList) aggregateEventHistoryImpl.mEventHistoryList).add(eventHistory4);
+                            ((ArrayList) aggregateEventHistoryImpl.mEventHistoryList)
+                                    .add(eventHistory4);
                         }
                         LocusId locusId = conversation.mLocusId;
-                        if (locusId != null && (eventHistory3 = eventStore.getEventHistory(1, locusId.getId())) != null) {
-                            ((ArrayList) aggregateEventHistoryImpl.mEventHistoryList).add(eventHistory3);
+                        if (locusId != null
+                                && (eventHistory3 = eventStore.getEventHistory(1, locusId.getId()))
+                                        != null) {
+                            ((ArrayList) aggregateEventHistoryImpl.mEventHistoryList)
+                                    .add(eventHistory3);
                         }
                         String str = conversation.mContactPhoneNumber;
                         if (!TextUtils.isEmpty(str)) {
                             Predicate predicate = packageData.mIsDefaultDialerPredicate;
                             String str2 = packageData.mPackageName;
-                            if (predicate.test(str2) && (eventHistory2 = eventStore.getEventHistory(2, str)) != null) {
-                                ((ArrayList) aggregateEventHistoryImpl.mEventHistoryList).add(eventHistory2);
+                            if (predicate.test(str2)
+                                    && (eventHistory2 = eventStore.getEventHistory(2, str))
+                                            != null) {
+                                ((ArrayList) aggregateEventHistoryImpl.mEventHistoryList)
+                                        .add(eventHistory2);
                             }
-                            if (packageData.mIsDefaultSmsAppPredicate.test(str2) && (eventHistory = eventStore.getEventHistory(3, str)) != null) {
-                                ((ArrayList) aggregateEventHistoryImpl.mEventHistoryList).add(eventHistory);
+                            if (packageData.mIsDefaultSmsAppPredicate.test(str2)
+                                    && (eventHistory = eventStore.getEventHistory(3, str))
+                                            != null) {
+                                ((ArrayList) aggregateEventHistoryImpl.mEventHistoryList)
+                                        .add(eventHistory);
                             }
                         }
                     }
@@ -170,34 +214,51 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
         IntentFilter intentFilter2 = this.mIntentFilter;
         String dataType = intentFilter2 != null ? intentFilter2.getDataType(0) : null;
         dataManager.getClass();
-        SharesheetModelScorer.computeScore(arrayList, DataManager.mimeTypeToShareEventType(dataType), System.currentTimeMillis());
+        SharesheetModelScorer.computeScore(
+                arrayList,
+                DataManager.mimeTypeToShareEventType(dataType),
+                System.currentTimeMillis());
         final int i2 = 0;
         final int i3 = 1;
-        Collections.sort(arrayList, Comparator.comparing(new Function() { // from class: com.android.server.people.prediction.ShareTargetPredictor$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                ShareTargetPredictor.ShareTarget shareTarget = (ShareTargetPredictor.ShareTarget) obj;
-                switch (i2) {
-                    case 0:
-                        return Float.valueOf(shareTarget.getScore());
-                    default:
-                        return Integer.valueOf(shareTarget.getAppTarget().getRank());
-                }
-            }
-        }, Collections.reverseOrder()).thenComparing(new Function() { // from class: com.android.server.people.prediction.ShareTargetPredictor$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                ShareTargetPredictor.ShareTarget shareTarget = (ShareTargetPredictor.ShareTarget) obj;
-                switch (i3) {
-                    case 0:
-                        return Float.valueOf(shareTarget.getScore());
-                    default:
-                        return Integer.valueOf(shareTarget.getAppTarget().getRank());
-                }
-            }
-        }));
+        Collections.sort(
+                arrayList,
+                Comparator.comparing(
+                                new Function() { // from class:
+                                                 // com.android.server.people.prediction.ShareTargetPredictor$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        ShareTargetPredictor.ShareTarget shareTarget =
+                                                (ShareTargetPredictor.ShareTarget) obj;
+                                        switch (i2) {
+                                            case 0:
+                                                return Float.valueOf(shareTarget.getScore());
+                                            default:
+                                                return Integer.valueOf(
+                                                        shareTarget.getAppTarget().getRank());
+                                        }
+                                    }
+                                },
+                                Collections.reverseOrder())
+                        .thenComparing(
+                                new Function() { // from class:
+                                                 // com.android.server.people.prediction.ShareTargetPredictor$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        ShareTargetPredictor.ShareTarget shareTarget =
+                                                (ShareTargetPredictor.ShareTarget) obj;
+                                        switch (i3) {
+                                            case 0:
+                                                return Float.valueOf(shareTarget.getScore());
+                                            default:
+                                                return Integer.valueOf(
+                                                        shareTarget.getAppTarget().getRank());
+                                        }
+                                    }
+                                }));
         ArrayList arrayList2 = new ArrayList();
-        for (i = 0; i < Math.min(this.mPredictionContext.getPredictedTargetCount(), arrayList.size()); i++) {
+        for (i = 0;
+                i < Math.min(this.mPredictionContext.getPredictedTargetCount(), arrayList.size());
+                i++) {
             arrayList2.add(((ShareTarget) arrayList.get(i)).getAppTarget());
         }
         this.mUpdatePredictionsMethod.accept(arrayList2);
@@ -215,22 +276,37 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
             DataManager dataManager = this.mDataManager;
             dataManager.getClass();
             AppTarget target = appTargetEvent.getTarget();
-            if (target != null && appTargetEvent.getAction() == 1 && (unlockedUserData = dataManager.getUnlockedUserData(target.getUser().getIdentifier())) != null) {
+            if (target != null
+                    && appTargetEvent.getAction() == 1
+                    && (unlockedUserData =
+                                    dataManager.getUnlockedUserData(
+                                            target.getUser().getIdentifier()))
+                            != null) {
                 String packageName = target.getPackageName();
-                PackageData packageData = (PackageData) unlockedUserData.mPackageDataMap.computeIfAbsent(packageName, new UserData$$ExternalSyntheticLambda0(unlockedUserData, packageName));
-                int mimeTypeToShareEventType = DataManager.mimeTypeToShareEventType(intentFilter.getDataType(0));
+                PackageData packageData =
+                        (PackageData)
+                                unlockedUserData.mPackageDataMap.computeIfAbsent(
+                                        packageName,
+                                        new UserData$$ExternalSyntheticLambda0(
+                                                unlockedUserData, packageName));
+                int mimeTypeToShareEventType =
+                        DataManager.mimeTypeToShareEventType(intentFilter.getDataType(0));
                 if (!"direct_share".equals(appTargetEvent.getLaunchLocation())) {
-                    orCreateEventHistory = packageData.mEventStore.getOrCreateEventHistory(4, target.getClassName());
+                    orCreateEventHistory =
+                            packageData.mEventStore.getOrCreateEventHistory(
+                                    4, target.getClassName());
                 } else if (target.getShortcutInfo() != null) {
                     String id = target.getShortcutInfo().getId();
                     if (!"chooser_target".equals(id)) {
                         if (packageData.mConversationStore.getConversation(id) == null) {
                             dataManager.addOrUpdateConversationInfo(target.getShortcutInfo());
                         }
-                        orCreateEventHistory = packageData.mEventStore.getOrCreateEventHistory(0, id);
+                        orCreateEventHistory =
+                                packageData.mEventStore.getOrCreateEventHistory(0, id);
                     }
                 }
-                orCreateEventHistory.addEvent(new Event(System.currentTimeMillis(), mimeTypeToShareEventType));
+                orCreateEventHistory.addEvent(
+                        new Event(System.currentTimeMillis(), mimeTypeToShareEventType));
             }
         }
         AppPredictor appPredictor = this.mRemoteAppPredictor;
@@ -240,7 +316,10 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
     }
 
     @Override // com.android.server.people.prediction.AppTargetPredictor
-    public final void sortTargets(List list, PeopleService$LocalService$$ExternalSyntheticLambda0 peopleService$LocalService$$ExternalSyntheticLambda0) {
+    public final void sortTargets(
+            List list,
+            PeopleService$LocalService$$ExternalSyntheticLambda0
+                    peopleService$LocalService$$ExternalSyntheticLambda0) {
         DataManager dataManager;
         String str;
         int i;
@@ -263,7 +342,9 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
                 break;
             }
             AppTarget appTarget = (AppTarget) it.next();
-            PackageData packageData = dataManager.getPackage(appTarget.getUser().getIdentifier(), appTarget.getPackageName());
+            PackageData packageData =
+                    dataManager.getPackage(
+                            appTarget.getUser().getIdentifier(), appTarget.getPackageName());
             if (packageData == null) {
                 eventHistory = null;
             } else {
@@ -280,29 +361,34 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
         dataManager.getClass();
         int mimeTypeToShareEventType = DataManager.mimeTypeToShareEventType(dataType);
         int predictedTargetCount = this.mPredictionContext.getPredictedTargetCount();
-        SharesheetModelScorer.computeScore(arrayList, mimeTypeToShareEventType, System.currentTimeMillis());
+        SharesheetModelScorer.computeScore(
+                arrayList, mimeTypeToShareEventType, System.currentTimeMillis());
         ArrayMap arrayMap = new ArrayMap();
         Iterator it2 = arrayList.iterator();
         while (it2.hasNext()) {
             ShareTarget shareTarget = (ShareTarget) it2.next();
             String packageName = shareTarget.getAppTarget().getPackageName();
             final int i3 = 0;
-            arrayMap.computeIfAbsent(packageName, new Function() { // from class: com.android.server.people.prediction.SharesheetModelScorer$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    switch (i3) {
-                        case 0:
-                            return new ArrayList();
-                        case 1:
-                            return Integer.valueOf(((AppUsageStatsData) obj).mChosenCount);
-                        default:
-                            return Integer.valueOf(((AppUsageStatsData) obj).mLaunchCount);
-                    }
-                }
-            });
+            arrayMap.computeIfAbsent(
+                    packageName,
+                    new Function() { // from class:
+                                     // com.android.server.people.prediction.SharesheetModelScorer$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj) {
+                            switch (i3) {
+                                case 0:
+                                    return new ArrayList();
+                                case 1:
+                                    return Integer.valueOf(((AppUsageStatsData) obj).mChosenCount);
+                                default:
+                                    return Integer.valueOf(((AppUsageStatsData) obj).mLaunchCount);
+                            }
+                        }
+                    });
             List list2 = (List) arrayMap.get(packageName);
             int i4 = 0;
-            while (i4 < list2.size() && shareTarget.getScore() <= ((ShareTarget) list2.get(i4)).getScore()) {
+            while (i4 < list2.size()
+                    && shareTarget.getScore() <= ((ShareTarget) list2.get(i4)).getScore()) {
                 i4++;
             }
             list2.add(i4, shareTarget);
@@ -315,7 +401,9 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
         usageStatsService.getClass();
         int[] iArr = EmptyArray.INT;
         int i5 = this.mCallingUserId;
-        UsageEvents queryEventsWithQueryFilters = usageStatsService.queryEventsWithQueryFilters(i5, j, currentTimeMillis, 10, iArr, null);
+        UsageEvents queryEventsWithQueryFilters =
+                usageStatsService.queryEventsWithQueryFilters(
+                        i5, j, currentTimeMillis, 10, iArr, null);
         if (queryEventsWithQueryFilters != null) {
             while (queryEventsWithQueryFilters.hasNextEvent()) {
                 UsageEvents.Event event = new UsageEvents.Event();
@@ -333,7 +421,10 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
             }
             String className = ((UsageEvents.Event) arrayList2.get(size)).getClassName();
             String packageName2 = ((UsageEvents.Event) arrayList2.get(size)).getPackageName();
-            if (packageName2 != null && (className == null || (str2 = this.mChooserActivity) == null || !className.contains(str2))) {
+            if (packageName2 != null
+                    && (className == null
+                            || (str2 = this.mChooserActivity) == null
+                            || !className.contains(str2))) {
                 if (str3 == null) {
                     str3 = packageName2;
                 } else if (!packageName2.equals(str3) && arrayMap.containsKey(packageName2)) {
@@ -362,13 +453,18 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
             long currentTimeMillis2 = System.currentTimeMillis();
             long j2 = currentTimeMillis2 - SharesheetModelScorer.ONE_MONTH_WINDOW;
             Set keySet = arrayMap.keySet();
-            List<UsageStats> queryUsageStats = UsageStatsService.this.queryUsageStats(i5, j2, currentTimeMillis2, 4, false);
+            List<UsageStats> queryUsageStats =
+                    UsageStatsService.this.queryUsageStats(i5, j2, currentTimeMillis2, 4, false);
             ArrayMap arrayMap2 = new ArrayMap();
             if (queryUsageStats != null) {
                 for (UsageStats usageStats : queryUsageStats) {
                     String packageName3 = usageStats.getPackageName();
                     if (keySet.contains(packageName3)) {
-                        AppUsageStatsData appUsageStatsData = (AppUsageStatsData) arrayMap2.computeIfAbsent(packageName3, new UsageStatsQueryHelper$$ExternalSyntheticLambda0());
+                        AppUsageStatsData appUsageStatsData =
+                                (AppUsageStatsData)
+                                        arrayMap2.computeIfAbsent(
+                                                packageName3,
+                                                new UsageStatsQueryHelper$$ExternalSyntheticLambda0());
                         ArrayMap arrayMap3 = usageStats.mChooserCounts;
                         if (arrayMap3 == null) {
                             i = i2;
@@ -394,33 +490,48 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
                 }
             }
             final int i9 = 1;
-            float promoteApp = SharesheetModelScorer.promoteApp(arrayMap, arrayMap2, new Function() { // from class: com.android.server.people.prediction.SharesheetModelScorer$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    switch (i9) {
-                        case 0:
-                            return new ArrayList();
-                        case 1:
-                            return Integer.valueOf(((AppUsageStatsData) obj).mChosenCount);
-                        default:
-                            return Integer.valueOf(((AppUsageStatsData) obj).mLaunchCount);
-                    }
-                }
-            }, 0.9f * f, f);
+            float promoteApp =
+                    SharesheetModelScorer.promoteApp(
+                            arrayMap,
+                            arrayMap2,
+                            new Function() { // from class:
+                                             // com.android.server.people.prediction.SharesheetModelScorer$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Function
+                                public final Object apply(Object obj) {
+                                    switch (i9) {
+                                        case 0:
+                                            return new ArrayList();
+                                        case 1:
+                                            return Integer.valueOf(
+                                                    ((AppUsageStatsData) obj).mChosenCount);
+                                        default:
+                                            return Integer.valueOf(
+                                                    ((AppUsageStatsData) obj).mLaunchCount);
+                                    }
+                                }
+                            },
+                            0.9f * f,
+                            f);
             final int i10 = 2;
-            SharesheetModelScorer.promoteApp(arrayMap, arrayMap2, new Function() { // from class: com.android.server.people.prediction.SharesheetModelScorer$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    switch (i10) {
-                        case 0:
-                            return new ArrayList();
-                        case 1:
-                            return Integer.valueOf(((AppUsageStatsData) obj).mChosenCount);
-                        default:
-                            return Integer.valueOf(((AppUsageStatsData) obj).mLaunchCount);
-                    }
-                }
-            }, 0.3f * promoteApp, promoteApp);
+            SharesheetModelScorer.promoteApp(
+                    arrayMap,
+                    arrayMap2,
+                    new Function() { // from class:
+                                     // com.android.server.people.prediction.SharesheetModelScorer$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Function
+                        public final Object apply(Object obj) {
+                            switch (i10) {
+                                case 0:
+                                    return new ArrayList();
+                                case 1:
+                                    return Integer.valueOf(((AppUsageStatsData) obj).mChosenCount);
+                                default:
+                                    return Integer.valueOf(((AppUsageStatsData) obj).mLaunchCount);
+                            }
+                        }
+                    },
+                    0.3f * promoteApp,
+                    promoteApp);
         }
         Collections.sort(arrayList, new ShareTargetPredictor$$ExternalSyntheticLambda2());
         ArrayList arrayList3 = new ArrayList();
@@ -428,7 +539,19 @@ public final class ShareTargetPredictor extends AppTargetPredictor {
         while (it4.hasNext()) {
             ShareTarget shareTarget4 = (ShareTarget) it4.next();
             AppTarget appTarget2 = shareTarget4.getAppTarget();
-            arrayList3.add(new AppTarget.Builder(appTarget2.getId(), appTarget2.getPackageName(), appTarget2.getUser()).setClassName(appTarget2.getClassName()).setRank(shareTarget4.getScore() > FullScreenMagnificationGestureHandler.MAX_SCALE ? (int) (shareTarget4.getScore() * 1000.0f) : 0).build());
+            arrayList3.add(
+                    new AppTarget.Builder(
+                                    appTarget2.getId(),
+                                    appTarget2.getPackageName(),
+                                    appTarget2.getUser())
+                            .setClassName(appTarget2.getClassName())
+                            .setRank(
+                                    shareTarget4.getScore()
+                                                    > FullScreenMagnificationGestureHandler
+                                                            .MAX_SCALE
+                                            ? (int) (shareTarget4.getScore() * 1000.0f)
+                                            : 0)
+                            .build());
         }
         peopleService$LocalService$$ExternalSyntheticLambda0.accept(arrayList3);
     }

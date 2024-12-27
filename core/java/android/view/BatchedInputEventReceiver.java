@@ -14,14 +14,16 @@ public class BatchedInputEventReceiver extends InputEventReceiver {
     private final Handler mHandler;
     private final String mTag;
 
-    public BatchedInputEventReceiver(InputChannel inputChannel, Looper looper, Choreographer choreographer) {
+    public BatchedInputEventReceiver(
+            InputChannel inputChannel, Looper looper, Choreographer choreographer) {
         super(inputChannel, looper);
-        this.mConsumeBatchedInputEvents = new Runnable() { // from class: android.view.BatchedInputEventReceiver.1
-            @Override // java.lang.Runnable
-            public void run() {
-                BatchedInputEventReceiver.this.consumeBatchedInputEvents(-1L);
-            }
-        };
+        this.mConsumeBatchedInputEvents =
+                new Runnable() { // from class: android.view.BatchedInputEventReceiver.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        BatchedInputEventReceiver.this.consumeBatchedInputEvents(-1L);
+                    }
+                };
         this.mBatchedInputRunnable = new BatchedInputRunnable();
         this.mChoreographer = choreographer;
         this.mBatchingEnabled = true;
@@ -91,14 +93,14 @@ public class BatchedInputEventReceiver extends InputEventReceiver {
     }
 
     private final class BatchedInputRunnable implements Runnable {
-        private BatchedInputRunnable() {
-        }
+        private BatchedInputRunnable() {}
 
         @Override // java.lang.Runnable
         public void run() {
             try {
                 Trace.traceBegin(4L, BatchedInputEventReceiver.this.mTag);
-                BatchedInputEventReceiver.this.doConsumeBatchedInput(BatchedInputEventReceiver.this.mChoreographer.getFrameTimeNanos());
+                BatchedInputEventReceiver.this.doConsumeBatchedInput(
+                        BatchedInputEventReceiver.this.mChoreographer.getFrameTimeNanos());
             } finally {
                 Trace.traceEnd(4L);
             }
@@ -112,7 +114,11 @@ public class BatchedInputEventReceiver extends InputEventReceiver {
             boolean onInputEvent(InputEvent inputEvent);
         }
 
-        public SimpleBatchedInputEventReceiver(InputChannel inputChannel, Looper looper, Choreographer choreographer, InputEventListener listener) {
+        public SimpleBatchedInputEventReceiver(
+                InputChannel inputChannel,
+                Looper looper,
+                Choreographer choreographer,
+                InputEventListener listener) {
             super(inputChannel, looper, choreographer);
             this.mListener = listener;
         }

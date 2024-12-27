@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class EphemeralStorageKeyResponse implements Parcelable {
-    public static final Parcelable.Creator<EphemeralStorageKeyResponse> CREATOR = new Parcelable.Creator<EphemeralStorageKeyResponse>() { // from class: android.system.keystore2.EphemeralStorageKeyResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EphemeralStorageKeyResponse createFromParcel(Parcel _aidl_source) {
-            EphemeralStorageKeyResponse _aidl_out = new EphemeralStorageKeyResponse();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<EphemeralStorageKeyResponse> CREATOR =
+            new Parcelable.Creator<
+                    EphemeralStorageKeyResponse>() { // from class:
+                                                     // android.system.keystore2.EphemeralStorageKeyResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EphemeralStorageKeyResponse createFromParcel(Parcel _aidl_source) {
+                    EphemeralStorageKeyResponse _aidl_out = new EphemeralStorageKeyResponse();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EphemeralStorageKeyResponse[] newArray(int _aidl_size) {
-            return new EphemeralStorageKeyResponse[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EphemeralStorageKeyResponse[] newArray(int _aidl_size) {
+                    return new EphemeralStorageKeyResponse[_aidl_size];
+                }
+            };
     public byte[] ephemeralKey;
     public byte[] upgradedBlob;
 

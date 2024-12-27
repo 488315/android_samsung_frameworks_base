@@ -1,7 +1,6 @@
 package com.samsung.android.authenticator;
 
 import android.os.ParcelFileDescriptor;
-import com.samsung.android.authenticator.SemTrustedApplicationExecutor;
 
 /* loaded from: classes5.dex */
 final class DownloadedTrustedApplication implements TrustedApplication {
@@ -12,7 +11,12 @@ final class DownloadedTrustedApplication implements TrustedApplication {
     private final ParcelFileDescriptor mPfd;
     private final SemTrustedApplicationExecutor.TrustedAppAssetType mType;
 
-    DownloadedTrustedApplication(int handle, SemTrustedApplicationExecutor.TrustedAppAssetType type, ParcelFileDescriptor pfd, long offset, long len) {
+    DownloadedTrustedApplication(
+            int handle,
+            SemTrustedApplicationExecutor.TrustedAppAssetType type,
+            ParcelFileDescriptor pfd,
+            long offset,
+            long len) {
         this.mHandle = handle;
         this.mType = type;
         this.mPfd = pfd;

@@ -12,8 +12,10 @@ import android.service.autofill.UserData;
 import android.util.ArrayMap;
 import android.util.Slog;
 import android.view.autofill.AutofillId;
+
 import com.android.internal.util.function.TriConsumer;
 import com.android.server.am.PendingIntentController$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -27,7 +29,8 @@ public final /* synthetic */ class Session$$ExternalSyntheticLambda1 implements 
         this.$r8$classId = i;
     }
 
-    private final void accept$com$android$server$autofill$Session$$ExternalSyntheticLambda1(Object obj, Object obj2, Object obj3) {
+    private final void accept$com$android$server$autofill$Session$$ExternalSyntheticLambda1(
+            Object obj, Object obj2, Object obj3) {
         FillResponse lastResponseLocked;
         UserData userData;
         Collection values;
@@ -56,7 +59,8 @@ public final /* synthetic */ class Session$$ExternalSyntheticLambda1 implements 
                 userData2 = autofillManagerServiceImpl2.mUserData;
             }
         }
-        FieldClassificationStrategy fieldClassificationStrategy = session.mService.mFieldClassificationStrategy;
+        FieldClassificationStrategy fieldClassificationStrategy =
+                session.mService.mFieldClassificationStrategy;
         if (userData2 == null || fieldClassificationStrategy == null) {
             synchronized (session.mLock) {
                 session.logContextCommittedLocked(null, null, intValue, intValue2);
@@ -70,7 +74,12 @@ public final /* synthetic */ class Session$$ExternalSyntheticLambda1 implements 
         ArrayMap fieldClassificationAlgorithms = userData2.getFieldClassificationAlgorithms();
         ArrayMap fieldClassificationArgs = userData2.getFieldClassificationArgs();
         if (values2 == null || categoryIds == null || values2.length != categoryIds.length) {
-            PendingIntentController$$ExternalSyntheticOutline0.m(values2 == null ? -1 : values2.length, categoryIds != null ? categoryIds.length : -1, "setScores(): user data mismatch: values.length = ", ", ids.length = ", "AutofillSession");
+            PendingIntentController$$ExternalSyntheticOutline0.m(
+                    values2 == null ? -1 : values2.length,
+                    categoryIds != null ? categoryIds.length : -1,
+                    "setScores(): user data mismatch: values.length = ",
+                    ", ids.length = ",
+                    "AutofillSession");
             return;
         }
         int maxFieldClassificationIdsSize = UserData.getMaxFieldClassificationIdsSize();
@@ -93,13 +102,32 @@ public final /* synthetic */ class Session$$ExternalSyntheticLambda1 implements 
             i++;
             fieldClassificationArgs = fieldClassificationArgs;
         }
-        fieldClassificationStrategy.calculateScores(new RemoteCallback(new LogFieldClassificationScoreOnResultListener(session, intValue, intValue2, size, autofillIdArr, values2, categoryIds, arrayList, arrayList2)), arrayList3, values2, categoryIds, fieldClassificationAlgorithm, defaultFieldClassificationArgs, fieldClassificationAlgorithms, fieldClassificationArgs);
+        fieldClassificationStrategy.calculateScores(
+                new RemoteCallback(
+                        new LogFieldClassificationScoreOnResultListener(
+                                session,
+                                intValue,
+                                intValue2,
+                                size,
+                                autofillIdArr,
+                                values2,
+                                categoryIds,
+                                arrayList,
+                                arrayList2)),
+                arrayList3,
+                values2,
+                categoryIds,
+                fieldClassificationAlgorithm,
+                defaultFieldClassificationArgs,
+                fieldClassificationAlgorithms,
+                fieldClassificationArgs);
     }
 
     public final void accept(Object obj, Object obj2, Object obj3) {
         switch (this.$r8$classId) {
             case 0:
-                accept$com$android$server$autofill$Session$$ExternalSyntheticLambda1(obj, obj2, obj3);
+                accept$com$android$server$autofill$Session$$ExternalSyntheticLambda1(
+                        obj, obj2, obj3);
                 break;
             default:
                 Session session = (Session) obj;

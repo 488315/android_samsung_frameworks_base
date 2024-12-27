@@ -7,6 +7,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.GeneralName;
 import com.android.internal.org.bouncycastle.asn1.x509.GeneralNames;
 import com.android.internal.org.bouncycastle.asn1.x509.V2Form;
 import com.android.internal.org.bouncycastle.util.Selector;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +81,11 @@ public class AttributeCertificateIssuer implements Selector {
         if (this.form instanceof V2Form) {
             V2Form issuer = (V2Form) this.form;
             if (issuer.getBaseCertificateID() != null) {
-                return issuer.getBaseCertificateID().getSerial().hasValue(x509Cert.getSerialNumber()) && matchesDN(x509Cert.getIssuer(), issuer.getBaseCertificateID().getIssuer());
+                return issuer.getBaseCertificateID()
+                                .getSerial()
+                                .hasValue(x509Cert.getSerialNumber())
+                        && matchesDN(
+                                x509Cert.getIssuer(), issuer.getBaseCertificateID().getIssuer());
             }
             GeneralNames name = issuer.getIssuerName();
             if (matchesDN(x509Cert.getSubject(), name)) {

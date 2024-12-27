@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
+
 import com.samsung.android.graphics.spr.document.SprDocument;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeAnimatorSet;
@@ -12,6 +13,7 @@ import com.samsung.android.graphics.spr.document.attribute.SprAttributeFill;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeMatrix;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeStroke;
 import com.samsung.android.graphics.spr.document.shape.SprObjectBase;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -171,13 +173,22 @@ public class SprDrawableAnimationValue extends SprDrawableAnimation {
         }
         animatorData.matrix.reset();
         if (animatorData.updateParameter.isUpdatedScale) {
-            animatorData.matrix.matrix.postScale(animatorData.updateParameter.scaleX, animatorData.updateParameter.scaleY, animatorData.updateParameter.scalePivotX, animatorData.updateParameter.scalePivotY);
+            animatorData.matrix.matrix.postScale(
+                    animatorData.updateParameter.scaleX,
+                    animatorData.updateParameter.scaleY,
+                    animatorData.updateParameter.scalePivotX,
+                    animatorData.updateParameter.scalePivotY);
         }
         if (animatorData.updateParameter.isUpdatedRotate) {
-            animatorData.matrix.matrix.postRotate(animatorData.updateParameter.rotateDegree, animatorData.updateParameter.rotatePivotX, animatorData.updateParameter.rotatePivotY);
+            animatorData.matrix.matrix.postRotate(
+                    animatorData.updateParameter.rotateDegree,
+                    animatorData.updateParameter.rotatePivotX,
+                    animatorData.updateParameter.rotatePivotY);
         }
         if (animatorData.updateParameter.isUpdatedTranslate) {
-            animatorData.matrix.matrix.postTranslate(animatorData.updateParameter.translateDx, animatorData.updateParameter.translateDy);
+            animatorData.matrix.matrix.postTranslate(
+                    animatorData.updateParameter.translateDx,
+                    animatorData.updateParameter.translateDy);
         }
         if (animatorData.updateParameter.isUpdatedFillColor) {
             animatorData.fillPaint.color = animatorData.updateParameter.fillColor;

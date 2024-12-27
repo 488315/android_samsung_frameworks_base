@@ -10,14 +10,15 @@ import android.util.proto.ProtoOutputStream;
 import android.view.SurfaceControl;
 import android.window.DisplayAreaInfo;
 import android.window.IDisplayAreaOrganizer;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.policy.PhoneWindowManager;
-import com.android.server.wm.Dimmer;
-import com.android.server.wm.WindowContainer;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.function.BiFunction;
@@ -66,7 +67,9 @@ public class DisplayArea extends WindowContainer {
                 getBounds(rect);
                 rect.offsetTo(0, 0);
             }
-            if (!this.mTransitionController.isShellTransitionsEnabled() && forAllTasks(new DisplayArea$$ExternalSyntheticLambda0(1)) && (dimState = this.mDimmer.mDimState) != null) {
+            if (!this.mTransitionController.isShellTransitionsEnabled()
+                    && forAllTasks(new DisplayArea$$ExternalSyntheticLambda0(1))
+                    && (dimState = this.mDimmer.mDimState) != null) {
                 dimState.mLastDimmingWindow = null;
             }
             if (rect == null || !this.mDimmer.updateDims(getSyncTransaction())) {
@@ -86,86 +89,91 @@ public class DisplayArea extends WindowContainer {
         public Tokens(WindowManagerService windowManagerService, Type type, String str, int i) {
             super(windowManagerService, type, str, i);
             this.mLastKeyguardForcedOrientation = -1;
-            this.mWindowComparator = Comparator.comparingInt(new DisplayArea$Tokens$$ExternalSyntheticLambda0());
-            this.mGetOrientingWindow = new Predicate() { // from class: com.android.server.wm.DisplayArea$Tokens$$ExternalSyntheticLambda1
-                /* JADX WARN: Code restructure failed: missing block: B:22:0x0060, code lost:
-                
-                    if (r5 == false) goto L26;
-                 */
-                @Override // java.util.function.Predicate
-                /*
-                    Code decompiled incorrectly, please refer to instructions dump.
-                    To view partially-correct code enable 'Show inconsistent code' option in preferences
-                */
-                public final boolean test(java.lang.Object r6) {
-                    /*
-                        r5 = this;
-                        com.android.server.wm.DisplayArea$Tokens r5 = com.android.server.wm.DisplayArea.Tokens.this
-                        com.android.server.wm.WindowState r6 = (com.android.server.wm.WindowState) r6
-                        r5.getClass()
-                        boolean r0 = r6.isVisible()
-                        r1 = 0
-                        if (r0 == 0) goto L71
-                        boolean r0 = r6.mLegacyPolicyVisibilityAfterAnim
-                        if (r0 != 0) goto L13
-                        goto L71
-                    L13:
-                        com.android.server.wm.WindowManagerService r0 = r5.mWmService
-                        com.android.server.policy.WindowManagerPolicy r0 = r0.mPolicy
-                        android.view.WindowManager$LayoutParams r2 = r6.mAttrs
-                        com.android.server.policy.PhoneWindowManager r0 = (com.android.server.policy.PhoneWindowManager) r0
-                        boolean r2 = r0.isKeyguardHostWindow(r2)
-                        r3 = 1
-                        if (r2 == 0) goto L64
-                        com.android.server.wm.DisplayContent r2 = r5.mDisplayContent
-                        boolean r2 = r2.isKeyguardLocked()
-                        if (r2 != 0) goto L39
-                        com.android.server.wm.DisplayContent r2 = r5.mDisplayContent
-                        com.android.server.wm.DisplayPolicy r2 = r2.mDisplayPolicy
-                        boolean r2 = r2.mAwake
-                        if (r2 == 0) goto L39
-                        boolean r2 = r0.okToAnimate(r3)
-                        if (r2 == 0) goto L39
-                        goto L71
-                    L39:
-                        com.android.server.wm.DisplayContent r2 = r5.mDisplayContent
-                        com.android.server.wm.AppTransition r2 = r2.mAppTransition
-                        java.util.ArrayList r2 = r2.mNextAppTransitionRequests
-                        r4 = 9
-                        java.lang.Integer r4 = java.lang.Integer.valueOf(r4)
-                        boolean r2 = r2.contains(r4)
-                        if (r2 == 0) goto L59
-                        com.android.server.wm.DisplayContent r5 = r5.mDisplayContent
-                        com.android.server.wm.UnknownAppVisibilityController r5 = r5.mUnknownAppVisibilityController
-                        android.util.ArrayMap r5 = r5.mUnknownApps
-                        boolean r5 = r5.isEmpty()
-                        if (r5 == 0) goto L59
-                        r5 = r3
-                        goto L5a
-                    L59:
-                        r5 = r1
-                    L5a:
-                        boolean r0 = r0.isKeyguardShowingAndNotOccluded()
-                        if (r0 != 0) goto L62
-                        if (r5 == 0) goto L64
-                    L62:
-                        r1 = r3
-                        goto L71
-                    L64:
-                        android.view.WindowManager$LayoutParams r5 = r6.mAttrs
-                        int r5 = r5.screenOrientation
-                        r6 = -1
-                        if (r5 == r6) goto L71
-                        r6 = 3
-                        if (r5 == r6) goto L71
-                        r6 = -2
-                        if (r5 != r6) goto L62
-                    L71:
-                        return r1
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DisplayArea$Tokens$$ExternalSyntheticLambda1.test(java.lang.Object):boolean");
-                }
-            };
+            this.mWindowComparator =
+                    Comparator.comparingInt(new DisplayArea$Tokens$$ExternalSyntheticLambda0());
+            this.mGetOrientingWindow =
+                    new Predicate() { // from class:
+                        // com.android.server.wm.DisplayArea$Tokens$$ExternalSyntheticLambda1
+                        /* JADX WARN: Code restructure failed: missing block: B:22:0x0060, code lost:
+
+                           if (r5 == false) goto L26;
+                        */
+                        @Override // java.util.function.Predicate
+                        /*
+                            Code decompiled incorrectly, please refer to instructions dump.
+                            To view partially-correct code enable 'Show inconsistent code' option in preferences
+                        */
+                        public final boolean test(java.lang.Object r6) {
+                            /*
+                                r5 = this;
+                                com.android.server.wm.DisplayArea$Tokens r5 = com.android.server.wm.DisplayArea.Tokens.this
+                                com.android.server.wm.WindowState r6 = (com.android.server.wm.WindowState) r6
+                                r5.getClass()
+                                boolean r0 = r6.isVisible()
+                                r1 = 0
+                                if (r0 == 0) goto L71
+                                boolean r0 = r6.mLegacyPolicyVisibilityAfterAnim
+                                if (r0 != 0) goto L13
+                                goto L71
+                            L13:
+                                com.android.server.wm.WindowManagerService r0 = r5.mWmService
+                                com.android.server.policy.WindowManagerPolicy r0 = r0.mPolicy
+                                android.view.WindowManager$LayoutParams r2 = r6.mAttrs
+                                com.android.server.policy.PhoneWindowManager r0 = (com.android.server.policy.PhoneWindowManager) r0
+                                boolean r2 = r0.isKeyguardHostWindow(r2)
+                                r3 = 1
+                                if (r2 == 0) goto L64
+                                com.android.server.wm.DisplayContent r2 = r5.mDisplayContent
+                                boolean r2 = r2.isKeyguardLocked()
+                                if (r2 != 0) goto L39
+                                com.android.server.wm.DisplayContent r2 = r5.mDisplayContent
+                                com.android.server.wm.DisplayPolicy r2 = r2.mDisplayPolicy
+                                boolean r2 = r2.mAwake
+                                if (r2 == 0) goto L39
+                                boolean r2 = r0.okToAnimate(r3)
+                                if (r2 == 0) goto L39
+                                goto L71
+                            L39:
+                                com.android.server.wm.DisplayContent r2 = r5.mDisplayContent
+                                com.android.server.wm.AppTransition r2 = r2.mAppTransition
+                                java.util.ArrayList r2 = r2.mNextAppTransitionRequests
+                                r4 = 9
+                                java.lang.Integer r4 = java.lang.Integer.valueOf(r4)
+                                boolean r2 = r2.contains(r4)
+                                if (r2 == 0) goto L59
+                                com.android.server.wm.DisplayContent r5 = r5.mDisplayContent
+                                com.android.server.wm.UnknownAppVisibilityController r5 = r5.mUnknownAppVisibilityController
+                                android.util.ArrayMap r5 = r5.mUnknownApps
+                                boolean r5 = r5.isEmpty()
+                                if (r5 == 0) goto L59
+                                r5 = r3
+                                goto L5a
+                            L59:
+                                r5 = r1
+                            L5a:
+                                boolean r0 = r0.isKeyguardShowingAndNotOccluded()
+                                if (r0 != 0) goto L62
+                                if (r5 == 0) goto L64
+                            L62:
+                                r1 = r3
+                                goto L71
+                            L64:
+                                android.view.WindowManager$LayoutParams r5 = r6.mAttrs
+                                int r5 = r5.screenOrientation
+                                r6 = -1
+                                if (r5 == r6) goto L71
+                                r6 = 3
+                                if (r5 == r6) goto L71
+                                r6 = -2
+                                if (r5 != r6) goto L62
+                            L71:
+                                return r1
+                            */
+                            throw new UnsupportedOperationException(
+                                    "Method not decompiled:"
+                                        + " com.android.server.wm.DisplayArea$Tokens$$ExternalSyntheticLambda1.test(java.lang.Object):boolean");
+                        }
+                    };
         }
 
         @Override // com.android.server.wm.DisplayArea
@@ -182,9 +190,17 @@ public class DisplayArea extends WindowContainer {
             }
             int i2 = window.mAttrs.screenOrientation;
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ORIENTATION_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ORIENTATION, 2230151187668089583L, 20, null, String.valueOf(window), Long.valueOf(i2), Long.valueOf(this.mDisplayContent.mDisplayId));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_ORIENTATION,
+                        2230151187668089583L,
+                        20,
+                        null,
+                        String.valueOf(window),
+                        Long.valueOf(i2),
+                        Long.valueOf(this.mDisplayContent.mDisplayId));
             }
-            if (((PhoneWindowManager) this.mWmService.mPolicy).isKeyguardHostWindow(window.mAttrs)) {
+            if (((PhoneWindowManager) this.mWmService.mPolicy)
+                    .isKeyguardHostWindow(window.mAttrs)) {
                 if (i2 == -2 || i2 == -1) {
                     i2 = this.mLastKeyguardForcedOrientation;
                 } else {
@@ -195,7 +211,8 @@ public class DisplayArea extends WindowContainer {
             return i2;
         }
 
-        @Override // com.android.server.wm.DisplayArea, com.android.server.wm.WindowContainer, com.android.server.wm.ConfigurationContainer
+        @Override // com.android.server.wm.DisplayArea, com.android.server.wm.WindowContainer,
+                  // com.android.server.wm.ConfigurationContainer
         public final void resolveOverrideConfiguration(Configuration configuration) {
             super.resolveOverrideConfiguration(configuration);
             if (configuration.windowConfiguration.getWindowingMode() == 5) {
@@ -220,15 +237,18 @@ public class DisplayArea extends WindowContainer {
             BELOW_TASKS = type2;
             Type type3 = new Type("ANY", 2);
             ANY = type3;
-            $VALUES = new Type[]{type, type2, type3};
+            $VALUES = new Type[] {type, type2, type3};
         }
 
         public static Type typeOf(WindowContainer windowContainer) {
             if (windowContainer.asDisplayArea() != null) {
                 return ((DisplayArea) windowContainer).mType;
             }
-            if ((windowContainer instanceof WindowToken) && !(windowContainer instanceof ActivityRecord)) {
-                return ((WindowToken) windowContainer).getWindowLayerFromType() < 2 ? BELOW_TASKS : ABOVE_TASKS;
+            if ((windowContainer instanceof WindowToken)
+                    && !(windowContainer instanceof ActivityRecord)) {
+                return ((WindowToken) windowContainer).getWindowLayerFromType() < 2
+                        ? BELOW_TASKS
+                        : ABOVE_TASKS;
             }
             if (windowContainer instanceof Task) {
                 return ANY;
@@ -253,7 +273,11 @@ public class DisplayArea extends WindowContainer {
         this.mName = str;
         this.mFeatureId = i;
         this.mRemoteToken = new WindowContainer.RemoteToken(this);
-        this.mOrganizerController = windowManagerService.mAtmService.mWindowOrganizerController.mDisplayAreaOrganizerController;
+        this.mOrganizerController =
+                windowManagerService
+                        .mAtmService
+                        .mWindowOrganizerController
+                        .mDisplayAreaOrganizerController;
     }
 
     @Override // com.android.server.wm.WindowContainer
@@ -273,7 +297,8 @@ public class DisplayArea extends WindowContainer {
         return this instanceof ActivityRecord;
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
     public void commitPendingTransaction() {
         scheduleAnimation();
     }
@@ -416,7 +441,8 @@ public class DisplayArea extends WindowContainer {
         while (i >= 0 && i < size) {
             WindowContainer windowContainer = (WindowContainer) this.mChildren.get(i);
             int i2 = 1;
-            if (windowContainer.asDisplayArea() != null && windowContainer.asDisplayArea().forAllTaskDisplayAreas(predicate, z)) {
+            if (windowContainer.asDisplayArea() != null
+                    && windowContainer.asDisplayArea().forAllTaskDisplayAreas(predicate, z)) {
                 return true;
             }
             if (z) {
@@ -436,19 +462,22 @@ public class DisplayArea extends WindowContainer {
     }
 
     @Override // com.android.server.wm.WindowContainer
-    public ActivityRecord getActivity(Predicate predicate, boolean z, ActivityRecord activityRecord) {
+    public ActivityRecord getActivity(
+            Predicate predicate, boolean z, ActivityRecord activityRecord) {
         if (this.mType == Type.ABOVE_TASKS) {
             return null;
         }
         return super.getActivity(predicate, z, activityRecord);
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
     public /* bridge */ /* synthetic */ SurfaceControl getAnimationLeash() {
         return super.getAnimationLeash();
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
     public SurfaceControl getAnimationLeashParent() {
         return getParentSurfaceControl();
     }
@@ -459,7 +488,11 @@ public class DisplayArea extends WindowContainer {
     }
 
     public DisplayAreaInfo getDisplayAreaInfo() {
-        DisplayAreaInfo displayAreaInfo = new DisplayAreaInfo(this.mRemoteToken.toWindowContainerToken(), getDisplayContent().mDisplayId, this.mFeatureId);
+        DisplayAreaInfo displayAreaInfo =
+                new DisplayAreaInfo(
+                        this.mRemoteToken.toWindowContainerToken(),
+                        getDisplayContent().mDisplayId,
+                        this.mFeatureId);
         RootDisplayArea rootDisplayArea = getRootDisplayArea();
         if (rootDisplayArea == null) {
             rootDisplayArea = getDisplayContent();
@@ -477,7 +510,9 @@ public class DisplayArea extends WindowContainer {
     public boolean getIgnoreOrientationRequest() {
         if (this.mSetIgnoreOrientationRequest) {
             WindowManagerService windowManagerService = this.mWmService;
-            if (!windowManagerService.mIsIgnoreOrientationRequestDisabled && windowManagerService.mAppCompatConfiguration.mDeviceConfig.getFlagValue("allow_ignore_orientation_request")) {
+            if (!windowManagerService.mIsIgnoreOrientationRequestDisabled
+                    && windowManagerService.mAppCompatConfiguration.mDeviceConfig.getFlagValue(
+                            "allow_ignore_orientation_request")) {
                 return true;
             }
         }
@@ -505,7 +540,12 @@ public class DisplayArea extends WindowContainer {
         int i = z ? size - 1 : 0;
         while (i >= 0 && i < size) {
             WindowContainer windowContainer = (WindowContainer) this.mChildren.get(i);
-            if (windowContainer.asDisplayArea() != null && (itemFromTaskDisplayAreas = windowContainer.asDisplayArea().getItemFromTaskDisplayAreas(function, z)) != null) {
+            if (windowContainer.asDisplayArea() != null
+                    && (itemFromTaskDisplayAreas =
+                                    windowContainer
+                                            .asDisplayArea()
+                                            .getItemFromTaskDisplayAreas(function, z))
+                            != null) {
                 return itemFromTaskDisplayAreas;
             }
             i += z ? -1 : 1;
@@ -528,7 +568,8 @@ public class DisplayArea extends WindowContainer {
         return -2;
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
     public /* bridge */ /* synthetic */ SurfaceControl getParentSurfaceControl() {
         return super.getParentSurfaceControl();
     }
@@ -561,22 +602,26 @@ public class DisplayArea extends WindowContainer {
         }
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
     public SurfaceControl getSurfaceControl() {
         return this.mSurfaceControl;
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
     public int getSurfaceHeight() {
         return this.mSurfaceControl.getHeight();
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
     public int getSurfaceWidth() {
         return this.mSurfaceControl.getWidth();
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
     public /* bridge */ /* synthetic */ SurfaceControl.Transaction getSyncTransaction() {
         return super.getSyncTransaction();
     }
@@ -591,7 +636,8 @@ public class DisplayArea extends WindowContainer {
 
     @Override // com.android.server.wm.WindowContainer
     public boolean handlesOrientationChangeFromDescendant(int i) {
-        return !shouldIgnoreOrientationRequest(i) && super.handlesOrientationChangeFromDescendant(i);
+        return !shouldIgnoreOrientationRequest(i)
+                && super.handlesOrientationChangeFromDescendant(i);
     }
 
     @Override // com.android.server.wm.WindowContainer
@@ -608,7 +654,8 @@ public class DisplayArea extends WindowContainer {
         return false;
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
     public /* bridge */ /* synthetic */ SurfaceControl.Builder makeAnimationLeash() {
         return super.makeAnimationLeash();
     }
@@ -616,7 +663,8 @@ public class DisplayArea extends WindowContainer {
     @Override // com.android.server.wm.WindowContainer
     public boolean needRemoteWallpaperAnim() {
         if (CoreRune.FW_REMOTE_WALLPAPER_ANIM && this.mFeatureId == 10002) {
-            return !this.mTransitionController.isCollecting() || (this.mTransitionController.mCollectingTransition.mFlags & 276736) == 0;
+            return !this.mTransitionController.isCollecting()
+                    || (this.mTransitionController.mCollectingTransition.mFlags & 276736) == 0;
         }
         return false;
     }
@@ -626,13 +674,17 @@ public class DisplayArea extends WindowContainer {
         return false;
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
-    public /* bridge */ /* synthetic */ void onAnimationLeashCreated(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl) {
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
+    public /* bridge */ /* synthetic */ void onAnimationLeashCreated(
+            SurfaceControl.Transaction transaction, SurfaceControl surfaceControl) {
         super.onAnimationLeashCreated(transaction, surfaceControl);
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
-    public /* bridge */ /* synthetic */ void onAnimationLeashLost(SurfaceControl.Transaction transaction) {
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
+    public /* bridge */ /* synthetic */ void onAnimationLeashLost(
+            SurfaceControl.Transaction transaction) {
         super.onAnimationLeashLost(transaction);
     }
 
@@ -657,8 +709,12 @@ public class DisplayArea extends WindowContainer {
             if (windowContainer == childAt || windowContainer == childAt2) {
                 Type typeOf2 = Type.typeOf(childAt);
                 Type typeOf3 = Type.typeOf(childAt2);
-                Preconditions.checkState(typeOf2 == type3 || typeOf3 != type3, typeOf2 + " must be above BELOW_TASKS");
-                Preconditions.checkState(typeOf2 != type2 || typeOf3 == type2, typeOf3 + " must be below ABOVE_TASKS");
+                Preconditions.checkState(
+                        typeOf2 == type3 || typeOf3 != type3,
+                        typeOf2 + " must be above BELOW_TASKS");
+                Preconditions.checkState(
+                        typeOf2 != type2 || typeOf3 == type2,
+                        typeOf3 + " must be below ABOVE_TASKS");
             }
         }
     }
@@ -676,11 +732,14 @@ public class DisplayArea extends WindowContainer {
 
     @Override // com.android.server.wm.WindowContainer
     public boolean onDescendantOrientationChanged(WindowContainer windowContainer) {
-        return !shouldIgnoreOrientationRequest(windowContainer != null ? windowContainer.getOverrideOrientation() : -2) && super.onDescendantOrientationChanged(windowContainer);
+        return !shouldIgnoreOrientationRequest(
+                        windowContainer != null ? windowContainer.getOverrideOrientation() : -2)
+                && super.onDescendantOrientationChanged(windowContainer);
     }
 
     @Override // com.android.server.wm.WindowContainer, com.android.server.wm.ConfigurationContainer
-    public /* bridge */ /* synthetic */ void onRequestedOverrideConfigurationChanged(Configuration configuration) {
+    public /* bridge */ /* synthetic */ void onRequestedOverrideConfigurationChanged(
+            Configuration configuration) {
         super.onRequestedOverrideConfigurationChanged(configuration);
     }
 
@@ -697,7 +756,13 @@ public class DisplayArea extends WindowContainer {
         }
         DisplayArea asDisplayArea = windowContainer.asDisplayArea();
         if (asDisplayArea.getParent() != this) {
-            throw new IllegalArgumentException("positionChildAt: container=" + asDisplayArea.getName() + " is not a child of container=" + getName() + " current parent=" + asDisplayArea.getParent());
+            throw new IllegalArgumentException(
+                    "positionChildAt: container="
+                            + asDisplayArea.getName()
+                            + " is not a child of container="
+                            + getName()
+                            + " current parent="
+                            + asDisplayArea.getParent());
         }
         Type typeOf = Type.typeOf(asDisplayArea);
         int size = this.mChildren.size() - 1;
@@ -759,7 +824,10 @@ public class DisplayArea extends WindowContainer {
         while (i >= 0 && i < size) {
             WindowContainer windowContainer = (WindowContainer) this.mChildren.get(i);
             if (windowContainer.asDisplayArea() != null) {
-                obj = windowContainer.asDisplayArea().reduceOnAllTaskDisplayAreas(biFunction, obj, z);
+                obj =
+                        windowContainer
+                                .asDisplayArea()
+                                .reduceOnAllTaskDisplayAreas(biFunction, obj, z);
             }
             i += z ? -1 : 1;
         }
@@ -782,7 +850,9 @@ public class DisplayArea extends WindowContainer {
         if (bounds.isEmpty()) {
             return;
         }
-        if ((appBounds != null && !appBounds.isEmpty()) || appBounds2 == null || appBounds2.isEmpty()) {
+        if ((appBounds != null && !appBounds.isEmpty())
+                || appBounds2 == null
+                || appBounds2.isEmpty()) {
             return;
         }
         Rect rect = new Rect(bounds);
@@ -797,10 +867,19 @@ public class DisplayArea extends WindowContainer {
         }
         this.mOrganizerController.getClass();
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, -4514772405648277945L, 0, null, String.valueOf(getName()));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                    -4514772405648277945L,
+                    0,
+                    null,
+                    String.valueOf(getName()));
         }
         try {
-            iDisplayAreaOrganizer.onDisplayAreaAppeared(getDisplayAreaInfo(), new SurfaceControl(getSurfaceControl(), "DisplayAreaOrganizerController.onDisplayAreaAppeared"));
+            iDisplayAreaOrganizer.onDisplayAreaAppeared(
+                    getDisplayAreaInfo(),
+                    new SurfaceControl(
+                            getSurfaceControl(),
+                            "DisplayAreaOrganizerController.onDisplayAreaAppeared"));
         } catch (RemoteException unused) {
         }
         this.mDisplayAreaAppearedSent = true;
@@ -813,7 +892,12 @@ public class DisplayArea extends WindowContainer {
         }
         this.mOrganizerController.getClass();
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, -1007032390526684388L, 0, null, String.valueOf(getName()));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                    -1007032390526684388L,
+                    0,
+                    null,
+                    String.valueOf(getName()));
         }
         try {
             iDisplayAreaOrganizer.onDisplayAreaInfoChanged(getDisplayAreaInfo());
@@ -828,7 +912,12 @@ public class DisplayArea extends WindowContainer {
         migrateToNewSurfaceControl(getSyncTransaction());
         this.mOrganizerController.getClass();
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_ORGANIZER_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER, 995846188225477231L, 0, null, String.valueOf(getName()));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_ORGANIZER,
+                    995846188225477231L,
+                    0,
+                    null,
+                    String.valueOf(getName()));
         }
         if (iDisplayAreaOrganizer.asBinder().isBinderAlive()) {
             try {
@@ -836,7 +925,9 @@ public class DisplayArea extends WindowContainer {
             } catch (RemoteException unused) {
             }
         } else {
-            Slog.d("DisplayAreaOrganizerController", "Organizer died before sending onDisplayAreaVanished");
+            Slog.d(
+                    "DisplayAreaOrganizerController",
+                    "Organizer died before sending onDisplayAreaVanished");
         }
         this.mDisplayAreaAppearedSent = false;
     }
@@ -890,7 +981,8 @@ public class DisplayArea extends WindowContainer {
         }
         DisplayContent displayContent = this.mDisplayContent;
         if (displayContent == null || !displayContent.mDisplay.isTrusted()) {
-            throw new IllegalStateException("Don't organize or trigger events for unavailable or untrusted display.");
+            throw new IllegalStateException(
+                    "Don't organize or trigger events for unavailable or untrusted display.");
         }
         IDisplayAreaOrganizer iDisplayAreaOrganizer2 = this.mOrganizer;
         this.mOrganizer = iDisplayAreaOrganizer;
@@ -903,11 +995,15 @@ public class DisplayArea extends WindowContainer {
     }
 
     public boolean shouldIgnoreOrientationRequest(int i) {
-        if ((CoreRune.MT_APP_COMPAT_ORIENTATION_POLICY && this.mSetIgnoreOrientationRequestOverride) || i == 14 || i == 5 || !getIgnoreOrientationRequest()) {
+        if ((CoreRune.MT_APP_COMPAT_ORIENTATION_POLICY && this.mSetIgnoreOrientationRequestOverride)
+                || i == 14
+                || i == 5
+                || !getIgnoreOrientationRequest()) {
             return false;
         }
         DisplayContent displayContent = this.mDisplayContent;
-        return displayContent == null || displayContent.getActivity(new DisplayArea$$ExternalSyntheticLambda0(0)) == null;
+        return displayContent == null
+                || displayContent.getActivity(new DisplayArea$$ExternalSyntheticLambda0(0)) == null;
     }
 
     public String toString() {

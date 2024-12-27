@@ -1,7 +1,9 @@
 package com.samsung.android.graphics.spr.document.attribute.impl;
 
 import android.graphics.Matrix;
+
 import com.samsung.android.graphics.spr.document.SprInputStream;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -15,7 +17,7 @@ public class SprMatrix {
         float D = in.readFloat();
         float E = in.readFloat();
         float F = in.readFloat();
-        matrix.setValues(new float[]{A, B, C, D, E, F, 0.0f, 0.0f, 1.0f});
+        matrix.setValues(new float[] {A, B, C, D, E, F, 0.0f, 0.0f, 1.0f});
         return matrix;
     }
 

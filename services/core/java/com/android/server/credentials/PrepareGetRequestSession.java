@@ -15,8 +15,7 @@ import android.os.RemoteException;
 import android.service.credentials.CallingAppInfo;
 import android.service.credentials.PermissionUtils;
 import android.util.Slog;
-import com.android.server.credentials.CredentialManagerService;
-import com.android.server.credentials.ProviderSession;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -32,20 +31,54 @@ public final class PrepareGetRequestSession extends GetRequestSession {
     public final IPrepareGetCredentialCallback mPrepareGetCredentialCallback;
     public final Set mPrimaryProviders;
 
-    public PrepareGetRequestSession(Context context, CredentialManagerService.SessionManager sessionManager, Object obj, int i, int i2, IGetCredentialCallback iGetCredentialCallback, GetCredentialRequest getCredentialRequest, CallingAppInfo callingAppInfo, Set set, Set set2, CancellationSignal cancellationSignal, long j, IPrepareGetCredentialCallback iPrepareGetCredentialCallback) {
-        super(context, sessionManager, obj, i, i2, iGetCredentialCallback, getCredentialRequest, callingAppInfo, set, set2, cancellationSignal, j);
+    public PrepareGetRequestSession(
+            Context context,
+            CredentialManagerService.SessionManager sessionManager,
+            Object obj,
+            int i,
+            int i2,
+            IGetCredentialCallback iGetCredentialCallback,
+            GetCredentialRequest getCredentialRequest,
+            CallingAppInfo callingAppInfo,
+            Set set,
+            Set set2,
+            CancellationSignal cancellationSignal,
+            long j,
+            IPrepareGetCredentialCallback iPrepareGetCredentialCallback) {
+        super(
+                context,
+                sessionManager,
+                obj,
+                i,
+                i2,
+                iGetCredentialCallback,
+                getCredentialRequest,
+                callingAppInfo,
+                set,
+                set2,
+                cancellationSignal,
+                j);
         this.mRequestSessionMetric.collectGetFlowInitialMetricInfo(getCredentialRequest);
         this.mPrepareGetCredentialCallback = iPrepareGetCredentialCallback;
         this.mPrimaryProviders = set2;
     }
 
-    @Override // com.android.server.credentials.GetRequestSession, com.android.server.credentials.ProviderSession.ProviderInternalCallback
-    public final void onProviderStatusChanged(ProviderSession.Status status, ComponentName componentName, ProviderSession.CredentialsSource credentialsSource) {
+    @Override // com.android.server.credentials.GetRequestSession,
+              // com.android.server.credentials.ProviderSession.ProviderInternalCallback
+    public final void onProviderStatusChanged(
+            ProviderSession.Status status,
+            ComponentName componentName,
+            ProviderSession.CredentialsSource credentialsSource) {
         Set set;
         boolean anyMatch;
         boolean anyMatch2;
         PendingIntent pendingIntent;
-        Slog.i("CredentialManager", "Provider Status changed with status: " + status + ", and source: " + credentialsSource);
+        Slog.i(
+                "CredentialManager",
+                "Provider Status changed with status: "
+                        + status
+                        + ", and source: "
+                        + credentialsSource);
         int ordinal = credentialsSource.ordinal();
         if (ordinal != 0) {
             if (ordinal != 2) {
@@ -65,81 +98,119 @@ public final class PrepareGetRequestSession extends GetRequestSession {
         if (isAnyProviderPending()) {
             return;
         }
-        boolean hasPermission = PermissionUtils.hasPermission(this.mContext, this.mClientAppInfo.getPackageName(), "android.permission.CREDENTIAL_MANAGER_QUERY_CANDIDATE_CREDENTIALS");
+        boolean hasPermission =
+                PermissionUtils.hasPermission(
+                        this.mContext,
+                        this.mClientAppInfo.getPackageName(),
+                        "android.permission.CREDENTIAL_MANAGER_QUERY_CANDIDATE_CREDENTIALS");
         if (isUiInvocationNeeded()) {
             ArrayList providerDataForUi = getProviderDataForUi();
             if (!providerDataForUi.isEmpty()) {
                 if (hasPermission) {
                     final int i = 0;
-                    Stream map = ((ConcurrentHashMap) this.mProviders).values().stream().map(new Function() { // from class: com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Function
-                        public final Object apply(Object obj) {
-                            switch (i) {
-                            }
-                            return (ProviderData) obj;
-                        }
-                    });
+                    Stream map =
+                            ((ConcurrentHashMap) this.mProviders)
+                                    .values().stream()
+                                            .map(
+                                                    new Function() { // from class:
+                                                                     // com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda0
+                                                        @Override // java.util.function.Function
+                                                        public final Object apply(Object obj) {
+                                                            switch (i) {
+                                                            }
+                                                            return (ProviderData) obj;
+                                                        }
+                                                    });
                     final int i2 = 1;
-                    set = (Set) map.flatMap(new Function() { // from class: com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Function
-                        public final Object apply(Object obj) {
-                            switch (i2) {
-                            }
-                            return (ProviderData) obj;
-                        }
-                    }).collect(Collectors.toSet());
+                    set =
+                            (Set)
+                                    map.flatMap(
+                                                    new Function() { // from class:
+                                                                     // com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda0
+                                                        @Override // java.util.function.Function
+                                                        public final Object apply(Object obj) {
+                                                            switch (i2) {
+                                                            }
+                                                            return (ProviderData) obj;
+                                                        }
+                                                    })
+                                            .collect(Collectors.toSet());
                 } else {
                     set = null;
                 }
                 if (hasPermission) {
                     final int i3 = 2;
-                    Stream map2 = providerDataForUi.stream().map(new Function() { // from class: com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Function
-                        public final Object apply(Object obj) {
-                            switch (i3) {
-                            }
-                            return (ProviderData) obj;
-                        }
-                    });
+                    Stream map2 =
+                            providerDataForUi.stream()
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    switch (i3) {
+                                                    }
+                                                    return (ProviderData) obj;
+                                                }
+                                            });
                     final int i4 = 0;
-                    anyMatch = map2.anyMatch(new Predicate() { // from class: com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda3
-                        @Override // java.util.function.Predicate
-                        public final boolean test(Object obj) {
-                            GetCredentialProviderData getCredentialProviderData = (GetCredentialProviderData) obj;
-                            switch (i4) {
-                                case 0:
-                                    return !getCredentialProviderData.getAuthenticationEntries().isEmpty();
-                                default:
-                                    return getCredentialProviderData.getRemoteEntry() != null;
-                            }
-                        }
-                    });
+                    anyMatch =
+                            map2.anyMatch(
+                                    new Predicate() { // from class:
+                                                      // com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda3
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            GetCredentialProviderData getCredentialProviderData =
+                                                    (GetCredentialProviderData) obj;
+                                            switch (i4) {
+                                                case 0:
+                                                    return !getCredentialProviderData
+                                                            .getAuthenticationEntries()
+                                                            .isEmpty();
+                                                default:
+                                                    return getCredentialProviderData
+                                                                    .getRemoteEntry()
+                                                            != null;
+                                            }
+                                        }
+                                    });
                 } else {
                     anyMatch = false;
                 }
                 if (hasPermission) {
                     final int i5 = 3;
-                    Stream map3 = providerDataForUi.stream().map(new Function() { // from class: com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Function
-                        public final Object apply(Object obj) {
-                            switch (i5) {
-                            }
-                            return (ProviderData) obj;
-                        }
-                    });
+                    Stream map3 =
+                            providerDataForUi.stream()
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    switch (i5) {
+                                                    }
+                                                    return (ProviderData) obj;
+                                                }
+                                            });
                     final int i6 = 1;
-                    anyMatch2 = map3.anyMatch(new Predicate() { // from class: com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda3
-                        @Override // java.util.function.Predicate
-                        public final boolean test(Object obj) {
-                            GetCredentialProviderData getCredentialProviderData = (GetCredentialProviderData) obj;
-                            switch (i6) {
-                                case 0:
-                                    return !getCredentialProviderData.getAuthenticationEntries().isEmpty();
-                                default:
-                                    return getCredentialProviderData.getRemoteEntry() != null;
-                            }
-                        }
-                    });
+                    anyMatch2 =
+                            map3.anyMatch(
+                                    new Predicate() { // from class:
+                                                      // com.android.server.credentials.PrepareGetRequestSession$$ExternalSyntheticLambda3
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            GetCredentialProviderData getCredentialProviderData =
+                                                    (GetCredentialProviderData) obj;
+                                            switch (i6) {
+                                                case 0:
+                                                    return !getCredentialProviderData
+                                                            .getAuthenticationEntries()
+                                                            .isEmpty();
+                                                default:
+                                                    return getCredentialProviderData
+                                                                    .getRemoteEntry()
+                                                            != null;
+                                            }
+                                        }
+                                    });
                 } else {
                     anyMatch2 = false;
                 }
@@ -159,10 +230,25 @@ public final class PrepareGetRequestSession extends GetRequestSession {
                     while (it2.hasNext()) {
                         arrayList2.add(((ComponentName) it2.next()).flattenToString());
                     }
-                    pendingIntent = this.mCredentialManagerUi.createPendingIntent(RequestInfo.newGetRequestInfo(this.mRequestId, (GetCredentialRequest) this.mClientRequest, this.mClientAppInfo.getPackageName(), PermissionUtils.hasPermission(this.mContext, this.mClientAppInfo.getPackageName(), "android.permission.CREDENTIAL_MANAGER_SET_ALLOWED_PROVIDERS"), arrayList2, false), arrayList, this.mRequestSessionMetric);
+                    pendingIntent =
+                            this.mCredentialManagerUi.createPendingIntent(
+                                    RequestInfo.newGetRequestInfo(
+                                            this.mRequestId,
+                                            (GetCredentialRequest) this.mClientRequest,
+                                            this.mClientAppInfo.getPackageName(),
+                                            PermissionUtils.hasPermission(
+                                                    this.mContext,
+                                                    this.mClientAppInfo.getPackageName(),
+                                                    "android.permission.CREDENTIAL_MANAGER_SET_ALLOWED_PROVIDERS"),
+                                            arrayList2,
+                                            false),
+                                    arrayList,
+                                    this.mRequestSessionMetric);
                 }
                 try {
-                    this.mPrepareGetCredentialCallback.onResponse(new PrepareGetCredentialResponseInternal(hasPermission, set, anyMatch, anyMatch2, pendingIntent));
+                    this.mPrepareGetCredentialCallback.onResponse(
+                            new PrepareGetCredentialResponseInternal(
+                                    hasPermission, set, anyMatch, anyMatch2, pendingIntent));
                     return;
                 } catch (RemoteException e) {
                     Slog.e("CredentialManager", "EXCEPTION while mPendingCallback.onResponse", e);
@@ -171,7 +257,9 @@ public final class PrepareGetRequestSession extends GetRequestSession {
             }
         }
         try {
-            this.mPrepareGetCredentialCallback.onResponse(new PrepareGetCredentialResponseInternal(hasPermission, (Set) null, false, false, (PendingIntent) null));
+            this.mPrepareGetCredentialCallback.onResponse(
+                    new PrepareGetCredentialResponseInternal(
+                            hasPermission, (Set) null, false, false, (PendingIntent) null));
         } catch (RemoteException e2) {
             Slog.e("CredentialManager", "EXCEPTION while mPendingCallback.onResponse", e2);
         }

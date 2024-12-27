@@ -2,24 +2,28 @@ package com.samsung.android.multiwindow.splitactivity;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes6.dex */
 public class SplitActivityInfo implements Parcelable {
     public static final String ANY_ACTIVITY = "*";
-    public static final Parcelable.Creator<SplitActivityInfo> CREATOR = new Parcelable.Creator<SplitActivityInfo>() { // from class: com.samsung.android.multiwindow.splitactivity.SplitActivityInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SplitActivityInfo createFromParcel(Parcel in) {
-            return new SplitActivityInfo(in);
-        }
+    public static final Parcelable.Creator<SplitActivityInfo> CREATOR =
+            new Parcelable.Creator<
+                    SplitActivityInfo>() { // from class:
+                                           // com.samsung.android.multiwindow.splitactivity.SplitActivityInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SplitActivityInfo createFromParcel(Parcel in) {
+                    return new SplitActivityInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SplitActivityInfo[] newArray(int size) {
-            return new SplitActivityInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SplitActivityInfo[] newArray(int size) {
+                    return new SplitActivityInfo[size];
+                }
+            };
     private final int mMode;
     private final String mSourceName;
     private final String mTargetName;
@@ -41,7 +45,8 @@ public class SplitActivityInfo implements Parcelable {
     }
 
     boolean matchWithWildcard(String sourceName, String targetName) {
-        return this.mSourceName.equals(sourceName) && (this.mTargetName.equals("*") || this.mTargetName.equals(targetName));
+        return this.mSourceName.equals(sourceName)
+                && (this.mTargetName.equals("*") || this.mTargetName.equals(targetName));
     }
 
     public String getSourceName() {
@@ -64,7 +69,9 @@ public class SplitActivityInfo implements Parcelable {
             return false;
         }
         SplitActivityInfo that = (SplitActivityInfo) o;
-        if (this.mMode == that.mMode && Objects.equals(this.mSourceName, that.mSourceName) && Objects.equals(this.mTargetName, that.mTargetName)) {
+        if (this.mMode == that.mMode
+                && Objects.equals(this.mSourceName, that.mSourceName)
+                && Objects.equals(this.mTargetName, that.mTargetName)) {
             return true;
         }
         return false;

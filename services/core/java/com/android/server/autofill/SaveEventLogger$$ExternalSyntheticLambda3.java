@@ -1,6 +1,5 @@
 package com.android.server.autofill;
 
-import com.android.server.autofill.SaveEventLogger;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -23,7 +22,8 @@ public final /* synthetic */ class SaveEventLogger$$ExternalSyntheticLambda3 imp
     public final void accept(Object obj) {
         int i = this.$r8$classId;
         boolean z = this.f$0;
-        SaveEventLogger.SaveEventInternal saveEventInternal = (SaveEventLogger.SaveEventInternal) obj;
+        SaveEventLogger.SaveEventInternal saveEventInternal =
+                (SaveEventLogger.SaveEventInternal) obj;
         switch (i) {
             case 0:
                 saveEventInternal.mIsNewField = z;

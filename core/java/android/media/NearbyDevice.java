@@ -3,6 +3,7 @@ package android.media;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -19,23 +20,23 @@ public final class NearbyDevice implements Parcelable {
     private final String mMediaRoute2Id;
     private final int mRangeZone;
     private static final List<Integer> RANGE_WEIGHT_LIST = Arrays.asList(0, 1, 2, 3, 4);
-    public static final Parcelable.Creator<NearbyDevice> CREATOR = new Parcelable.Creator<NearbyDevice>() { // from class: android.media.NearbyDevice.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NearbyDevice createFromParcel(Parcel in) {
-            return new NearbyDevice(in);
-        }
+    public static final Parcelable.Creator<NearbyDevice> CREATOR =
+            new Parcelable.Creator<NearbyDevice>() { // from class: android.media.NearbyDevice.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NearbyDevice createFromParcel(Parcel in) {
+                    return new NearbyDevice(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NearbyDevice[] newArray(int size) {
-            return new NearbyDevice[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NearbyDevice[] newArray(int size) {
+                    return new NearbyDevice[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RangeZone {
-    }
+    public @interface RangeZone {}
 
     public static String rangeZoneToString(int rangeZone) {
         switch (rangeZone) {
@@ -68,7 +69,10 @@ public final class NearbyDevice implements Parcelable {
         if (rangeZone == anotherRangeZone) {
             return 0;
         }
-        return RANGE_WEIGHT_LIST.indexOf(Integer.valueOf(rangeZone)) > RANGE_WEIGHT_LIST.indexOf(Integer.valueOf(anotherRangeZone)) ? -1 : 1;
+        return RANGE_WEIGHT_LIST.indexOf(Integer.valueOf(rangeZone))
+                        > RANGE_WEIGHT_LIST.indexOf(Integer.valueOf(anotherRangeZone))
+                ? -1
+                : 1;
     }
 
     @Override // android.os.Parcelable
@@ -77,7 +81,11 @@ public final class NearbyDevice implements Parcelable {
     }
 
     public String toString() {
-        return "NearbyDevice{mediaRoute2Id=" + this.mMediaRoute2Id + " rangeZone=" + rangeZoneToString(this.mRangeZone) + "}";
+        return "NearbyDevice{mediaRoute2Id="
+                + this.mMediaRoute2Id
+                + " rangeZone="
+                + rangeZoneToString(this.mRangeZone)
+                + "}";
     }
 
     @Override // android.os.Parcelable

@@ -1,6 +1,7 @@
 package com.android.server.pm.pkg;
 
 import android.util.SparseArray;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageInternal;
 import com.android.internal.pm.pkg.component.ParsedMainComponent;
 
@@ -13,7 +14,8 @@ public abstract class PackageStateUtils {
         }
         long j = Long.MAX_VALUE;
         for (int i = 0; i < sparseArray.size(); i++) {
-            long firstInstallTimeMillis = ((PackageUserStateInternal) sparseArray.valueAt(i)).getFirstInstallTimeMillis();
+            long firstInstallTimeMillis =
+                    ((PackageUserStateInternal) sparseArray.valueAt(i)).getFirstInstallTimeMillis();
             if (firstInstallTimeMillis != 0 && firstInstallTimeMillis < j) {
                 j = firstInstallTimeMillis;
             }
@@ -24,12 +26,23 @@ public abstract class PackageStateUtils {
         return j;
     }
 
-    public static boolean isEnabledAndMatches(PackageStateInternal packageStateInternal, ParsedMainComponent parsedMainComponent, long j, int i) {
+    public static boolean isEnabledAndMatches(
+            PackageStateInternal packageStateInternal,
+            ParsedMainComponent parsedMainComponent,
+            long j,
+            int i) {
         AndroidPackageInternal pkg = packageStateInternal.getPkg();
         if (pkg == null) {
             return false;
         }
-        return PackageUserStateUtils.isMatch(packageStateInternal.getUserStateOrDefault(i), packageStateInternal.isSystem(), pkg.isEnabled(), parsedMainComponent.isEnabled(), parsedMainComponent.isDirectBootAware(), parsedMainComponent.getName(), j);
+        return PackageUserStateUtils.isMatch(
+                packageStateInternal.getUserStateOrDefault(i),
+                packageStateInternal.isSystem(),
+                pkg.isEnabled(),
+                parsedMainComponent.isEnabled(),
+                parsedMainComponent.isDirectBootAware(),
+                parsedMainComponent.getName(),
+                j);
     }
 
     public static int[] queryInstalledUsers(PackageStateInternal packageStateInternal, int[] iArr) {

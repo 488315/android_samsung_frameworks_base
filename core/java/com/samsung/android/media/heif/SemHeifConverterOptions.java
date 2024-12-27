@@ -9,6 +9,5 @@ public class SemHeifConverterOptions {
     public static final int COLOR_FORMAT_RGBA8888 = 5;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ColorFormat {
-    }
+    public @interface ColorFormat {}
 }

@@ -24,9 +24,11 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
-import com.samsung.android.app.ISemExecuteManager;
+
 import com.samsung.android.sepunion.SemUnionManager;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -37,8 +39,10 @@ public class SemExecutableManager {
     public static final String EXTRA_EXECUTABLE_ICON = "com.samsung.android.execute.extra.ICON";
     public static final String EXTRA_EXECUTABLE_INTENT = "com.samsung.android.execute.extra.INTENT";
     public static final String EXTRA_EXECUTABLE_NAME = "com.samsung.android.execute.extra.NAME";
-    public static final String EXTRA_EXECUTABLE_SMALL_ICON = "com.samsung.android.execute.extra.SMALLICON";
-    public static final String EXTRA_SHORTCUT_PACKAGE_NAME = "com.samsung.android.shortcut.PACKAGE_NAME";
+    public static final String EXTRA_EXECUTABLE_SMALL_ICON =
+            "com.samsung.android.execute.extra.SMALLICON";
+    public static final String EXTRA_SHORTCUT_PACKAGE_NAME =
+            "com.samsung.android.shortcut.PACKAGE_NAME";
     public static final String EXTRA_SHORTCUT_USER_ID = "com.samsung.android.shortcut.USER_ID";
     private static final String TAG = "SemExecutableManager";
     private static ISemExecuteManager mService;
@@ -78,7 +82,8 @@ public class SemExecutableManager {
 
     private ISemExecuteManager getService() {
         if (mService == null) {
-            SemUnionManager um = (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
+            SemUnionManager um =
+                    (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
             IBinder b = um.getSemSystemService("execute");
             mService = ISemExecuteManager.Stub.asInterface(b);
             Log.i(TAG, "getService: retry to get service impl " + mService + b);
@@ -100,7 +105,13 @@ public class SemExecutableManager {
 
     public List<ShortcutInfo> getShortcuts(ShortcutQuery query, UserHandle user) {
         logErrorForInvalidProfileAccess(user);
-        Log.d(TAG, "getShortcuts: " + mService + " " + (this.mContext != null ? this.mContext.getPackageName() : "null") + query);
+        Log.d(
+                TAG,
+                "getShortcuts: "
+                        + mService
+                        + " "
+                        + (this.mContext != null ? this.mContext.getPackageName() : "null")
+                        + query);
         if (getService() == null) {
             Log.d(TAG, "getShortcuts: can not get service impl ");
             return null;
@@ -111,21 +122,46 @@ public class SemExecutableManager {
                 queryTargetPackage = this.mContext.getPackageName();
                 Log.d(TAG, "getShortcuts: can not launcher name ");
             }
-            return mService.getShortcuts(this.mContext.getPackageName(), queryTargetPackage, query.mChangedSince, query.mPackage, query.mShortcutIds, query.mActivity, query.mQueryFlags, user).getList();
+            return mService.getShortcuts(
+                            this.mContext.getPackageName(),
+                            queryTargetPackage,
+                            query.mChangedSince,
+                            query.mPackage,
+                            query.mShortcutIds,
+                            query.mActivity,
+                            query.mQueryFlags,
+                            user)
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public List<ShortcutInfo> getShortcuts(String queryTargetLauncherPackage, ShortcutQuery query, UserHandle user) {
+    public List<ShortcutInfo> getShortcuts(
+            String queryTargetLauncherPackage, ShortcutQuery query, UserHandle user) {
         logErrorForInvalidProfileAccess(user);
-        Log.d(TAG, "getShortcuts: " + mService + " " + (this.mContext != null ? this.mContext.getPackageName() : "null") + query);
+        Log.d(
+                TAG,
+                "getShortcuts: "
+                        + mService
+                        + " "
+                        + (this.mContext != null ? this.mContext.getPackageName() : "null")
+                        + query);
         if (getService() == null) {
             Log.d(TAG, "getShortcuts: can not get service impl ");
             return null;
         }
         try {
-            return mService.getShortcuts(this.mContext.getPackageName(), queryTargetLauncherPackage, query.mChangedSince, query.mPackage, query.mShortcutIds, query.mActivity, query.mQueryFlags, user).getList();
+            return mService.getShortcuts(
+                            this.mContext.getPackageName(),
+                            queryTargetLauncherPackage,
+                            query.mChangedSince,
+                            query.mPackage,
+                            query.mShortcutIds,
+                            query.mActivity,
+                            query.mQueryFlags,
+                            user)
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -144,7 +180,11 @@ public class SemExecutableManager {
     public Drawable getShortcutIconDrawable(ShortcutInfo shortcut, int density) {
         if (!shortcut.hasIconFile()) {
             if (shortcut.hasIconResource()) {
-                return loadDrawableResourceFromPackage(shortcut.getPackage(), shortcut.getIconResourceId(), shortcut.getUserHandle(), density);
+                return loadDrawableResourceFromPackage(
+                        shortcut.getPackage(),
+                        shortcut.getIconResourceId(),
+                        shortcut.getUserHandle(),
+                        density);
             }
             if (shortcut.getIcon() == null) {
                 return null;
@@ -155,7 +195,11 @@ public class SemExecutableManager {
                 case 5:
                     return icon.loadDrawable(this.mContext);
                 case 2:
-                    return loadDrawableResourceFromPackage(shortcut.getPackage(), icon.getResId(), shortcut.getUserHandle(), density);
+                    return loadDrawableResourceFromPackage(
+                            shortcut.getPackage(),
+                            icon.getResId(),
+                            shortcut.getUserHandle(),
+                            density);
                 case 3:
                 case 4:
                 default:
@@ -197,19 +241,38 @@ public class SemExecutableManager {
         if (originalIcon == null) {
             return null;
         }
-        return this.mContext.getPackageManager().getUserBadgedIcon(originalIcon, shortcut.getUserHandle());
+        return this.mContext
+                .getPackageManager()
+                .getUserBadgedIcon(originalIcon, shortcut.getUserHandle());
     }
 
-    public void startShortcut(String packageName, String shortcutId, Rect sourceBounds, Bundle startActivityOptions, UserHandle user) {
+    public void startShortcut(
+            String packageName,
+            String shortcutId,
+            Rect sourceBounds,
+            Bundle startActivityOptions,
+            UserHandle user) {
         logErrorForInvalidProfileAccess(user);
-        startShortcut(packageName, shortcutId, sourceBounds, startActivityOptions, user.getIdentifier());
+        startShortcut(
+                packageName, shortcutId, sourceBounds, startActivityOptions, user.getIdentifier());
     }
 
-    public void startShortcut(ShortcutInfo shortcut, Rect sourceBounds, Bundle startActivityOptions) {
-        startShortcut(shortcut.getPackage(), shortcut.getId(), sourceBounds, startActivityOptions, shortcut.getUserId());
+    public void startShortcut(
+            ShortcutInfo shortcut, Rect sourceBounds, Bundle startActivityOptions) {
+        startShortcut(
+                shortcut.getPackage(),
+                shortcut.getId(),
+                sourceBounds,
+                startActivityOptions,
+                shortcut.getUserId());
     }
 
-    private void startShortcut(String packageName, String shortcutId, Rect sourceBounds, Bundle startActivityOptions, int userId) {
+    private void startShortcut(
+            String packageName,
+            String shortcutId,
+            Rect sourceBounds,
+            Bundle startActivityOptions,
+            int userId) {
         String queryTargetPackage;
         if (getService() == null) {
             Log.d(TAG, "startShortcut: can not get service impl ");
@@ -224,7 +287,15 @@ public class SemExecutableManager {
             queryTargetPackage = queryTargetPackage3;
         }
         try {
-            boolean success = mService.startShortcut(this.mContext.getPackageName(), queryTargetPackage, packageName, shortcutId, sourceBounds, startActivityOptions, userId);
+            boolean success =
+                    mService.startShortcut(
+                            this.mContext.getPackageName(),
+                            queryTargetPackage,
+                            packageName,
+                            shortcutId,
+                            sourceBounds,
+                            startActivityOptions,
+                            userId);
             if (!success) {
                 throw new ActivityNotFoundException("Shortcut could not be started");
             }
@@ -234,12 +305,14 @@ public class SemExecutableManager {
     }
 
     private void logErrorForInvalidProfileAccess(UserHandle target) {
-        if (UserHandle.myUserId() != target.getIdentifier() && this.mUserManager.isManagedProfile()) {
+        if (UserHandle.myUserId() != target.getIdentifier()
+                && this.mUserManager.isManagedProfile()) {
             Log.w(TAG, "Accessing other profiles/users from managed profile is no longer allowed.");
         }
     }
 
-    private Drawable loadDrawableResourceFromPackage(String packageName, int resId, UserHandle user, int density) {
+    private Drawable loadDrawableResourceFromPackage(
+            String packageName, int resId, UserHandle user, int density) {
         if (resId == 0) {
             return null;
         }
@@ -260,27 +333,37 @@ public class SemExecutableManager {
         return getShortcutIconFd(shortcut.getPackage(), shortcut.getId(), shortcut.getUserId());
     }
 
-    private ParcelFileDescriptor getShortcutIconFd(String packageName, String shortcutId, int userId) {
+    private ParcelFileDescriptor getShortcutIconFd(
+            String packageName, String shortcutId, int userId) {
         String queryTargetPackage = getDefaultLauncherPackage();
         if (queryTargetPackage == null) {
             queryTargetPackage = this.mContext.getPackageName();
             Log.d(TAG, "getShortcuts: can not launcher name ");
         }
         try {
-            return mService.getShortcutIconFd(this.mContext.getPackageName(), queryTargetPackage, packageName, shortcutId, userId);
+            return mService.getShortcutIconFd(
+                    this.mContext.getPackageName(),
+                    queryTargetPackage,
+                    packageName,
+                    shortcutId,
+                    userId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public ApplicationInfo getApplicationInfo(String packageName, int flags, UserHandle user) throws PackageManager.NameNotFoundException {
+    public ApplicationInfo getApplicationInfo(String packageName, int flags, UserHandle user)
+            throws PackageManager.NameNotFoundException {
         Preconditions.checkNotNull(packageName, "packageName");
         Preconditions.checkNotNull(packageName, "user");
         logErrorForInvalidProfileAccess(user);
         try {
-            ApplicationInfo ai = mService.getApplicationInfo(this.mContext.getPackageName(), packageName, flags, user);
+            ApplicationInfo ai =
+                    mService.getApplicationInfo(
+                            this.mContext.getPackageName(), packageName, flags, user);
             if (ai == null) {
-                throw new PackageManager.NameNotFoundException("Package " + packageName + " not found for user " + user.getIdentifier());
+                throw new PackageManager.NameNotFoundException(
+                        "Package " + packageName + " not found for user " + user.getIdentifier());
             }
             return ai;
         } catch (RemoteException re) {
@@ -320,18 +403,14 @@ public class SemExecutableManager {
 
     public static class ShortcutQuery {
 
-        @Deprecated
-        public static final int FLAG_GET_ALL_KINDS = 11;
+        @Deprecated public static final int FLAG_GET_ALL_KINDS = 11;
 
-        @Deprecated
-        public static final int FLAG_GET_DYNAMIC = 1;
+        @Deprecated public static final int FLAG_GET_DYNAMIC = 1;
         public static final int FLAG_GET_KEY_FIELDS_ONLY = 4;
 
-        @Deprecated
-        public static final int FLAG_GET_MANIFEST = 8;
+        @Deprecated public static final int FLAG_GET_MANIFEST = 8;
 
-        @Deprecated
-        public static final int FLAG_GET_PINNED = 2;
+        @Deprecated public static final int FLAG_GET_PINNED = 2;
         public static final int FLAG_MATCH_ALL_KINDS = 11;
         public static final int FLAG_MATCH_DYNAMIC = 1;
         public static final int FLAG_MATCH_MANIFEST = 8;
@@ -343,8 +422,7 @@ public class SemExecutableManager {
         List<String> mShortcutIds;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface QueryFlags {
-        }
+        public @interface QueryFlags {}
 
         public ShortcutQuery setChangedSince(long changedSince) {
             this.mChangedSince = changedSince;

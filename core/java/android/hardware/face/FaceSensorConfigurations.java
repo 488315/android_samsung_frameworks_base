@@ -10,6 +10,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,19 +20,21 @@ import java.util.function.Predicate;
 
 /* loaded from: classes2.dex */
 public class FaceSensorConfigurations implements Parcelable {
-    public static final Parcelable.Creator<FaceSensorConfigurations> CREATOR = new Parcelable.Creator<FaceSensorConfigurations>() { // from class: android.hardware.face.FaceSensorConfigurations.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceSensorConfigurations createFromParcel(Parcel in) {
-            return new FaceSensorConfigurations(in);
-        }
+    public static final Parcelable.Creator<FaceSensorConfigurations> CREATOR =
+            new Parcelable.Creator<FaceSensorConfigurations>() { // from class:
+                // android.hardware.face.FaceSensorConfigurations.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceSensorConfigurations createFromParcel(Parcel in) {
+                    return new FaceSensorConfigurations(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceSensorConfigurations[] newArray(int size) {
-            return new FaceSensorConfigurations[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceSensorConfigurations[] newArray(int size) {
+                    return new FaceSensorConfigurations[size];
+                }
+            };
     private static final String TAG = "FaceSensorConfigurations";
     private final boolean mResetLockoutRequiresChallenge;
     private final Map<String, SensorProps[]> mSensorPropsMap;
@@ -65,7 +68,11 @@ public class FaceSensorConfigurations implements Parcelable {
                 Log.e(TAG, "HIDL sensor configuration format is incorrect.");
             }
         }
-        this.mSensorPropsMap.put("defaultHIDL", (SensorProps[]) hidlFaceSensorConfigs.toArray(new SensorProps[hidlFaceSensorConfigs.size()]));
+        this.mSensorPropsMap.put(
+                "defaultHIDL",
+                (SensorProps[])
+                        hidlFaceSensorConfigs.toArray(
+                                new SensorProps[hidlFaceSensorConfigs.size()]));
     }
 
     public boolean hasSensorConfigurations() {
@@ -81,16 +88,24 @@ public class FaceSensorConfigurations implements Parcelable {
     }
 
     public String getSensorNameNotForInstance(final String instance) {
-        Optional<String> notAVirtualInstance = this.mSensorPropsMap.keySet().stream().filter(new Predicate() { // from class: android.hardware.face.FaceSensorConfigurations$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return FaceSensorConfigurations.lambda$getSensorNameNotForInstance$0(instance, (String) obj);
-            }
-        }).findFirst();
+        Optional<String> notAVirtualInstance =
+                this.mSensorPropsMap.keySet().stream()
+                        .filter(
+                                new Predicate() { // from class:
+                                    // android.hardware.face.FaceSensorConfigurations$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return FaceSensorConfigurations
+                                                .lambda$getSensorNameNotForInstance$0(
+                                                        instance, (String) obj);
+                                    }
+                                })
+                        .findFirst();
         return notAVirtualInstance.orElse(null);
     }
 
-    static /* synthetic */ boolean lambda$getSensorNameNotForInstance$0(String instance, String instanceName) {
+    static /* synthetic */ boolean lambda$getSensorNameNotForInstance$0(
+            String instance, String instanceName) {
         return !instanceName.equals(instance);
     }
 
@@ -121,7 +136,9 @@ public class FaceSensorConfigurations implements Parcelable {
             return sensorPropsArr;
         }
         String str2 = IFace.DESCRIPTOR + "/" + str;
-        IFace asInterface = IFace.Stub.asInterface(Binder.allowBlocking(ServiceManager.waitForDeclaredService(str2)));
+        IFace asInterface =
+                IFace.Stub.asInterface(
+                        Binder.allowBlocking(ServiceManager.waitForDeclaredService(str2)));
         String str3 = TAG;
         try {
             if (asInterface == null) {

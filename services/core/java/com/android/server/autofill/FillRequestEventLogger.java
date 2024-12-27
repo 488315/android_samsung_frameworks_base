@@ -1,8 +1,10 @@
 package com.android.server.autofill;
 
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
+
 import java.util.Optional;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,10 +32,13 @@ public final class FillRequestEventLogger {
 
     public final void logAndEndEvent() {
         if (!this.mEventInternal.isPresent()) {
-            Slog.w("FillRequestEventLogger", "Shouldn't be logging AutofillFillRequestReported again for same event");
+            Slog.w(
+                    "FillRequestEventLogger",
+                    "Shouldn't be logging AutofillFillRequestReported again for same event");
             return;
         }
-        FillRequestEventInternal fillRequestEventInternal = (FillRequestEventInternal) this.mEventInternal.get();
+        FillRequestEventInternal fillRequestEventInternal =
+                (FillRequestEventInternal) this.mEventInternal.get();
         if (Helper.sVerbose) {
             StringBuilder sb = new StringBuilder("Log AutofillFillRequestReported: requestId=");
             sb.append(fillRequestEventInternal.mRequestId);
@@ -54,9 +59,22 @@ public final class FillRequestEventLogger {
             sb.append(" mLatencyFillRequestSentMillis=");
             sb.append(fillRequestEventInternal.mLatencyFillRequestSentMillis);
             sb.append(" mAppPackageUid=");
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb, fillRequestEventInternal.mAppPackageUid, "FillRequestEventLogger");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    sb, fillRequestEventInternal.mAppPackageUid, "FillRequestEventLogger");
         }
-        FrameworkStatsLog.write(FrameworkStatsLog.AUTOFILL_FILL_REQUEST_REPORTED, fillRequestEventInternal.mRequestId, this.mSessionId, fillRequestEventInternal.mAutofillServiceUid, fillRequestEventInternal.mInlineSuggestionHostUid, fillRequestEventInternal.mIsAugmented, false, fillRequestEventInternal.mIsFillDialogEligible, fillRequestEventInternal.mRequestTriggerReason, fillRequestEventInternal.mFlags, fillRequestEventInternal.mLatencyFillRequestSentMillis, fillRequestEventInternal.mAppPackageUid);
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.AUTOFILL_FILL_REQUEST_REPORTED,
+                fillRequestEventInternal.mRequestId,
+                this.mSessionId,
+                fillRequestEventInternal.mAutofillServiceUid,
+                fillRequestEventInternal.mInlineSuggestionHostUid,
+                fillRequestEventInternal.mIsAugmented,
+                false,
+                fillRequestEventInternal.mIsFillDialogEligible,
+                fillRequestEventInternal.mRequestTriggerReason,
+                fillRequestEventInternal.mFlags,
+                fillRequestEventInternal.mLatencyFillRequestSentMillis,
+                fillRequestEventInternal.mAppPackageUid);
         this.mEventInternal = Optional.empty();
     }
 
@@ -66,7 +84,9 @@ public final class FillRequestEventLogger {
 
     public final void startLogForNewRequest() {
         if (!this.mEventInternal.isEmpty()) {
-            Slog.w("FillRequestEventLogger", "FillRequestEventLogger is not empty before starting for a new request");
+            Slog.w(
+                    "FillRequestEventLogger",
+                    "FillRequestEventLogger is not empty before starting for a new request");
         }
         FillRequestEventInternal fillRequestEventInternal = new FillRequestEventInternal();
         fillRequestEventInternal.mAppPackageUid = -1;

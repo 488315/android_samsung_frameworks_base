@@ -3,17 +3,20 @@ package com.android.server.locksettings.recoverablekeystore.storage;
 import android.security.keystore.recovery.KeyChainSnapshot;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.locksettings.recoverablekeystore.serialization.KeyChainSnapshotDeserializer;
 import com.android.server.locksettings.recoverablekeystore.serialization.KeyChainSnapshotParserException;
 import com.android.server.locksettings.recoverablekeystore.serialization.KeyChainSnapshotSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.cert.CertificateEncodingException;
 import java.util.Locale;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -52,7 +55,8 @@ public final class RecoverySnapshotStorage {
             FileInputStream fileInputStream = new FileInputStream(snapshotFile);
             try {
                 try {
-                    KeyChainSnapshot deserializeInternal = KeyChainSnapshotDeserializer.deserializeInternal(fileInputStream);
+                    KeyChainSnapshot deserializeInternal =
+                            KeyChainSnapshotDeserializer.deserializeInternal(fileInputStream);
                     fileInputStream.close();
                     return deserializeInternal;
                 } catch (XmlPullParserException e) {

@@ -47,7 +47,10 @@ public abstract class MetaKeyKeyListener {
     }
 
     public static final int getMetaState(CharSequence text) {
-        return getActive(text, CAP, 1, 256) | getActive(text, ALT, 2, 512) | getActive(text, SYM, 4, 1024) | getActive(text, SELECTING, 2048, 2048);
+        return getActive(text, CAP, 1, 256)
+                | getActive(text, ALT, 2, 512)
+                | getActive(text, SYM, 4, 1024)
+                | getActive(text, SELECTING, 2048, 2048);
     }
 
     public static final int getMetaState(CharSequence text, KeyEvent event) {
@@ -309,16 +312,26 @@ public abstract class MetaKeyKeyListener {
         if (keyCode != 59 && keyCode != 60) {
             if (keyCode != 57 && keyCode != 58 && keyCode != 78) {
                 if (keyCode == 63) {
-                    return press(state, 4, META_SYM_MASK, 1024L, 4398046511104L, 1125899906842624L, 17179869184L);
+                    return press(
+                            state,
+                            4,
+                            META_SYM_MASK,
+                            1024L,
+                            4398046511104L,
+                            1125899906842624L,
+                            17179869184L);
                 }
                 return state;
             }
-            return press(state, 2, META_ALT_MASK, 512L, 2199023255552L, 562949953421312L, 8589934592L);
+            return press(
+                    state, 2, META_ALT_MASK, 512L, 2199023255552L, 562949953421312L, 8589934592L);
         }
-        return press(state, 1, META_SHIFT_MASK, 256L, 1099511627776L, 281474976710656L, 4294967296L);
+        return press(
+                state, 1, META_SHIFT_MASK, 256L, 1099511627776L, 281474976710656L, 4294967296L);
     }
 
-    private static long press(long state, int what, long mask, long locked, long pressed, long released, long used) {
+    private static long press(
+            long state, int what, long mask, long locked, long pressed, long released, long used) {
         if ((state & pressed) == 0) {
             if ((state & released) != 0) {
                 return ((~mask) & state) | what | locked;
@@ -337,16 +350,32 @@ public abstract class MetaKeyKeyListener {
         if (keyCode != 59 && keyCode != 60) {
             if (keyCode != 57 && keyCode != 58 && keyCode != 78) {
                 if (keyCode == 63) {
-                    return release(state, 4, META_SYM_MASK, 4398046511104L, 1125899906842624L, 17179869184L, event);
+                    return release(
+                            state,
+                            4,
+                            META_SYM_MASK,
+                            4398046511104L,
+                            1125899906842624L,
+                            17179869184L,
+                            event);
                 }
                 return state;
             }
-            return release(state, 2, META_ALT_MASK, 2199023255552L, 562949953421312L, 8589934592L, event);
+            return release(
+                    state, 2, META_ALT_MASK, 2199023255552L, 562949953421312L, 8589934592L, event);
         }
-        return release(state, 1, META_SHIFT_MASK, 1099511627776L, 281474976710656L, 4294967296L, event);
+        return release(
+                state, 1, META_SHIFT_MASK, 1099511627776L, 281474976710656L, 4294967296L, event);
     }
 
-    private static long release(long state, int what, long mask, long pressed, long released, long used, KeyEvent event) {
+    private static long release(
+            long state,
+            int what,
+            long mask,
+            long pressed,
+            long released,
+            long used,
+            KeyEvent event) {
         switch (event.getKeyCharacterMap().getModifierBehavior()) {
             case 1:
                 if ((state & used) != 0) {

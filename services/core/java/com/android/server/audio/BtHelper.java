@@ -25,15 +25,17 @@ import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
-import com.android.server.audio.AudioDeviceBroker;
 import com.android.server.utils.EventLogger;
 import com.android.server.vibrator.VibratorManagerInternal;
+
 import com.samsung.android.audio.Rune;
 import com.samsung.android.media.SemAudioSystem;
 import com.samsung.android.server.audio.DualA2dpVolumeManager;
 import com.samsung.android.server.audio.ScreenSharingHelper;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,38 +62,47 @@ public final class BtHelper {
     public int mLeAudioBroadcastCodec = 0;
     public boolean mAvrcpAbsVolSupported = false;
     public MyLeAudioCallback mLeAudioCallback = null;
-    public final AnonymousClass1 mBluetoothProfileServiceListener = new BluetoothProfile.ServiceListener() { // from class: com.android.server.audio.BtHelper.1
-        @Override // android.bluetooth.BluetoothProfile.ServiceListener
-        public final void onServiceConnected(int i, BluetoothProfile bluetoothProfile) {
-            if (i == 1 || i == 2 || i == 11 || i == 26 || i == 21 || i == 22) {
-                EventLogger eventLogger = AudioService.sDeviceLogger;
-                EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("BT profile service: connecting " + BluetoothProfile.getProfileName(i) + " profile");
-                stringEvent.printLog(0, "AS.BtHelper");
-                eventLogger.enqueue(stringEvent);
-                BtHelper.this.mDeviceBroker.sendILMsgNoDelay(23, i, bluetoothProfile);
-            }
-        }
+    public final AnonymousClass1 mBluetoothProfileServiceListener =
+            new BluetoothProfile
+                    .ServiceListener() { // from class: com.android.server.audio.BtHelper.1
+                @Override // android.bluetooth.BluetoothProfile.ServiceListener
+                public final void onServiceConnected(int i, BluetoothProfile bluetoothProfile) {
+                    if (i == 1 || i == 2 || i == 11 || i == 26 || i == 21 || i == 22) {
+                        EventLogger eventLogger = AudioService.sDeviceLogger;
+                        EventLogger.StringEvent stringEvent =
+                                new EventLogger.StringEvent(
+                                        "BT profile service: connecting "
+                                                + BluetoothProfile.getProfileName(i)
+                                                + " profile");
+                        stringEvent.printLog(0, "AS.BtHelper");
+                        eventLogger.enqueue(stringEvent);
+                        BtHelper.this.mDeviceBroker.sendILMsgNoDelay(23, i, bluetoothProfile);
+                    }
+                }
 
-        @Override // android.bluetooth.BluetoothProfile.ServiceListener
-        public final void onServiceDisconnected(int i) {
-            if (i == 1 || i == 2 || i == 11 || i == 26 || i == 21 || i == 22) {
-                EventLogger eventLogger = AudioService.sDeviceLogger;
-                EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("BT profile service: disconnecting " + BluetoothProfile.getProfileName(i) + " profile");
-                stringEvent.printLog(0, "AS.BtHelper");
-                eventLogger.enqueue(stringEvent);
-                BtHelper.this.mDeviceBroker.sendIMsgNoDelay(22, 2, i);
-            }
-        }
-    };
+                @Override // android.bluetooth.BluetoothProfile.ServiceListener
+                public final void onServiceDisconnected(int i) {
+                    if (i == 1 || i == 2 || i == 11 || i == 26 || i == 21 || i == 22) {
+                        EventLogger eventLogger = AudioService.sDeviceLogger;
+                        EventLogger.StringEvent stringEvent =
+                                new EventLogger.StringEvent(
+                                        "BT profile service: disconnecting "
+                                                + BluetoothProfile.getProfileName(i)
+                                                + " profile");
+                        stringEvent.printLog(0, "AS.BtHelper");
+                        eventLogger.enqueue(stringEvent);
+                        BtHelper.this.mDeviceBroker.sendIMsgNoDelay(22, 2, i);
+                    }
+                }
+            };
     public int mIsBtOffloadEnabled = 0;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyLeAudioCallback implements BluetoothLeAudio.Callback {
-        public MyLeAudioCallback() {
-        }
+        public MyLeAudioCallback() {}
 
-        public final void onCodecConfigChanged(int i, BluetoothLeAudioCodecStatus bluetoothLeAudioCodecStatus) {
-        }
+        public final void onCodecConfigChanged(
+                int i, BluetoothLeAudioCodecStatus bluetoothLeAudioCodecStatus) {}
 
         public final void onGroupNodeAdded(BluetoothDevice bluetoothDevice, int i) {
             BtHelper.this.mDeviceBroker.sendIMsgNoDelay(57, 2, i);
@@ -112,7 +123,8 @@ public final class BtHelper {
         this.mContext = context;
     }
 
-    public static AudioDeviceAttributes btHeadsetDeviceToAudioDevice(BluetoothDevice bluetoothDevice) {
+    public static AudioDeviceAttributes btHeadsetDeviceToAudioDevice(
+            BluetoothDevice bluetoothDevice) {
         int i = 16;
         if (bluetoothDevice == null) {
             return new AudioDeviceAttributes(16, "");
@@ -156,7 +168,10 @@ public final class BtHelper {
             return 0;
         }
         BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
-        BluetoothDevice remoteDevice = (defaultAdapter == null || !BluetoothAdapter.checkBluetoothAddress(str)) ? null : defaultAdapter.getRemoteDevice(str);
+        BluetoothDevice remoteDevice =
+                (defaultAdapter == null || !BluetoothAdapter.checkBluetoothAddress(str))
+                        ? null
+                        : defaultAdapter.getRemoteDevice(str);
         if (remoteDevice == null || (metadata = remoteDevice.getMetadata(17)) == null) {
             return 0;
         }
@@ -254,7 +269,14 @@ public final class BtHelper {
     }
 
     public static String scoAudioModeToString(int i) {
-        return i != -1 ? i != 0 ? i != 2 ? BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "SCO_MODE_(", ")") : "SCO_MODE_VR" : "SCO_MODE_VIRTUAL_CALL" : "SCO_MODE_UNDEFINED";
+        return i != -1
+                ? i != 0
+                        ? i != 2
+                                ? BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        i, "SCO_MODE_(", ")")
+                                : "SCO_MODE_VR"
+                        : "SCO_MODE_VIRTUAL_CALL"
+                : "SCO_MODE_UNDEFINED";
     }
 
     public final void broadcastScoConnectionState(int i) {
@@ -264,19 +286,30 @@ public final class BtHelper {
     public final void checkScoAudioState() {
         try {
             BluetoothHeadset bluetoothHeadset = this.mBluetoothHeadset;
-            if (bluetoothHeadset == null || this.mScoAudioState != 0 || bluetoothHeadset.getAudioState(this.mBluetoothHeadsetDevice) == 10) {
+            if (bluetoothHeadset == null
+                    || this.mScoAudioState != 0
+                    || bluetoothHeadset.getAudioState(this.mBluetoothHeadsetDevice) == 10) {
                 return;
             }
             this.mScoAudioState = 2;
         } catch (Exception e) {
-            Log.e("AS.BtHelper", "Exception while getting audio state of " + this.mBluetoothHeadsetDevice, e);
+            Log.e(
+                    "AS.BtHelper",
+                    "Exception while getting audio state of " + this.mBluetoothHeadsetDevice,
+                    e);
         }
     }
 
     public final boolean getBluetoothHeadset() {
         BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
         AudioDeviceBroker audioDeviceBroker = this.mDeviceBroker;
-        boolean profileProxy = defaultAdapter != null ? defaultAdapter.getProfileProxy(audioDeviceBroker.mContext, this.mBluetoothProfileServiceListener, 1) : false;
+        boolean profileProxy =
+                defaultAdapter != null
+                        ? defaultAdapter.getProfileProxy(
+                                audioDeviceBroker.mContext,
+                                this.mBluetoothProfileServiceListener,
+                                1)
+                        : false;
         audioDeviceBroker.sendIILMsg(9, 0, 0, 0, null, profileProxy ? 3000 : 0);
         return profileProxy;
     }
@@ -302,7 +335,9 @@ public final class BtHelper {
                 bluetoothCodecStatus = null;
             }
             if (bluetoothCodecStatus == null) {
-                Log.e("AS.BtHelper", "getCodec, null A2DP codec status for device: " + bluetoothDevice);
+                Log.e(
+                        "AS.BtHelper",
+                        "getCodec, null A2DP codec status for device: " + bluetoothDevice);
                 this.mA2dpCodecConfig = null;
                 return new Pair(0, Boolean.valueOf(z2));
             }
@@ -313,7 +348,11 @@ public final class BtHelper {
             }
             boolean z3 = !codecConfig.equals(this.mA2dpCodecConfig);
             this.mA2dpCodecConfig = codecConfig;
-            return new Pair(Integer.valueOf(AudioSystem.bluetoothA2dpCodecToAudioFormat(codecConfig.getCodecType())), Boolean.valueOf(z3));
+            return new Pair(
+                    Integer.valueOf(
+                            AudioSystem.bluetoothA2dpCodecToAudioFormat(
+                                    codecConfig.getCodecType())),
+                    Boolean.valueOf(z3));
         }
         if (i != 22) {
             if (i != 26) {
@@ -332,7 +371,8 @@ public final class BtHelper {
             return new Pair(0, Boolean.valueOf(z4));
         }
         try {
-            bluetoothLeAudioCodecStatus = this.mLeAudio.getCodecStatus(bluetoothLeAudio.getGroupId(bluetoothDevice));
+            bluetoothLeAudioCodecStatus =
+                    this.mLeAudio.getCodecStatus(bluetoothLeAudio.getGroupId(bluetoothDevice));
         } catch (Exception e2) {
             Log.e("AS.BtHelper", "Exception while getting status of " + bluetoothDevice, e2);
             bluetoothLeAudioCodecStatus = null;
@@ -342,17 +382,23 @@ public final class BtHelper {
             this.mLeAudioCodecConfig = null;
             return new Pair(0, Boolean.valueOf(z4));
         }
-        BluetoothLeAudioCodecConfig outputCodecConfig = bluetoothLeAudioCodecStatus.getOutputCodecConfig();
+        BluetoothLeAudioCodecConfig outputCodecConfig =
+                bluetoothLeAudioCodecStatus.getOutputCodecConfig();
         if (outputCodecConfig == null) {
             this.mLeAudioCodecConfig = null;
             return new Pair(0, Boolean.valueOf(z4));
         }
         boolean z5 = !outputCodecConfig.equals(this.mLeAudioCodecConfig);
         this.mLeAudioCodecConfig = outputCodecConfig;
-        return new Pair(Integer.valueOf(AudioSystem.bluetoothLeCodecToAudioFormat(outputCodecConfig.getCodecType())), Boolean.valueOf(z5));
+        return new Pair(
+                Integer.valueOf(
+                        AudioSystem.bluetoothLeCodecToAudioFormat(
+                                outputCodecConfig.getCodecType())),
+                Boolean.valueOf(z5));
     }
 
-    public final synchronized Pair getCodecWithFallback(BluetoothDevice bluetoothDevice, int i, boolean z, String str) {
+    public final synchronized Pair getCodecWithFallback(
+            BluetoothDevice bluetoothDevice, int i, boolean z, String str) {
         if (i != 2 && (!z || (i != 22 && i != 26))) {
             return new Pair(0, Boolean.FALSE);
         }
@@ -374,22 +420,41 @@ public final class BtHelper {
         if (bluetoothDevice == null) {
             return true;
         }
-        AudioDeviceAttributes btHeadsetDeviceToAudioDevice = btHeadsetDeviceToAudioDevice(bluetoothDevice);
+        AudioDeviceAttributes btHeadsetDeviceToAudioDevice =
+                btHeadsetDeviceToAudioDevice(bluetoothDevice);
         AudioDeviceBroker audioDeviceBroker = this.mDeviceBroker;
         if (z) {
-            z2 = audioDeviceBroker.handleDeviceConnection(btHeadsetDeviceToAudioDevice, z, bluetoothDevice);
+            z2 =
+                    audioDeviceBroker.handleDeviceConnection(
+                            btHeadsetDeviceToAudioDevice, z, bluetoothDevice);
         } else {
             int[] iArr = {16, 32, 64};
             boolean z3 = false;
             for (int i = 0; i < 3; i++) {
-                z3 |= audioDeviceBroker.handleDeviceConnection(new AudioDeviceAttributes(iArr[i], btHeadsetDeviceToAudioDevice.getAddress(), btHeadsetDeviceToAudioDevice.getName()), z, bluetoothDevice);
+                z3 |=
+                        audioDeviceBroker.handleDeviceConnection(
+                                new AudioDeviceAttributes(
+                                        iArr[i],
+                                        btHeadsetDeviceToAudioDevice.getAddress(),
+                                        btHeadsetDeviceToAudioDevice.getName()),
+                                z,
+                                bluetoothDevice);
             }
             z2 = z3;
         }
-        boolean z4 = audioDeviceBroker.handleDeviceConnection(new AudioDeviceAttributes(-2147483640, btHeadsetDeviceToAudioDevice.getAddress(), btHeadsetDeviceToAudioDevice.getName()), z, bluetoothDevice) && z2;
+        boolean z4 =
+                audioDeviceBroker.handleDeviceConnection(
+                                new AudioDeviceAttributes(
+                                        -2147483640,
+                                        btHeadsetDeviceToAudioDevice.getAddress(),
+                                        btHeadsetDeviceToAudioDevice.getName()),
+                                z,
+                                bluetoothDevice)
+                        && z2;
         if (z4) {
             if (z) {
-                ((HashMap) this.mResolvedScoAudioDevices).put(bluetoothDevice, btHeadsetDeviceToAudioDevice);
+                ((HashMap) this.mResolvedScoAudioDevices)
+                        .put(bluetoothDevice, btHeadsetDeviceToAudioDevice);
             } else {
                 ((HashMap) this.mResolvedScoAudioDevices).remove(bluetoothDevice);
             }
@@ -406,21 +471,32 @@ public final class BtHelper {
         try {
             return bluetoothHeadset.getAudioState(bluetoothDevice) == 12;
         } catch (Exception e) {
-            Log.e("AS.BtHelper", "Exception while getting audio state of " + this.mBluetoothHeadsetDevice, e);
+            Log.e(
+                    "AS.BtHelper",
+                    "Exception while getting audio state of " + this.mBluetoothHeadsetDevice,
+                    e);
             return false;
         }
     }
 
     public final synchronized boolean isBluetoothScoSupported() {
         BluetoothHeadset bluetoothHeadset = this.mBluetoothHeadset;
-        if (bluetoothHeadset != null && !bluetoothHeadset.getDevicesMatchingConnectionStates(new int[]{2, 1, 3}).isEmpty()) {
+        if (bluetoothHeadset != null
+                && !bluetoothHeadset
+                        .getDevicesMatchingConnectionStates(new int[] {2, 1, 3})
+                        .isEmpty()) {
             BluetoothDevice bluetoothDevice = this.mBluetoothHeadsetDevice;
             if (bluetoothDevice == null) {
                 return false;
             }
             int audioState = this.mBluetoothHeadset.getAudioState(bluetoothDevice);
             if (audioState != 11 && audioState != 12) {
-                Log.e("AS.BtHelper", "setBluetoothScoOn() wrong sco state:" + audioState + " mScoAudioState:" + this.mScoAudioState);
+                Log.e(
+                        "AS.BtHelper",
+                        "setBluetoothScoOn() wrong sco state:"
+                                + audioState
+                                + " mScoAudioState:"
+                                + this.mScoAudioState);
                 return false;
             }
         }
@@ -444,7 +520,8 @@ public final class BtHelper {
     }
 
     public final synchronized void onAudioServerDiedRestoreA2dp() {
-        this.mDeviceBroker.setForceUse_Async(1, this.mDeviceBroker.mBluetoothA2dpEnabled.get() ? 0 : 10, "onAudioServerDied()");
+        this.mDeviceBroker.setForceUse_Async(
+                1, this.mDeviceBroker.mBluetoothA2dpEnabled.get() ? 0 : 10, "onAudioServerDied()");
     }
 
     public final synchronized void onBroadcastScoConnectionState(int i) {
@@ -461,7 +538,12 @@ public final class BtHelper {
     public final synchronized void onBtProfileConnected(int i, BluetoothProfile bluetoothProfile) {
         MyLeAudioCallback myLeAudioCallback;
         EventLogger eventLogger = AudioService.sDeviceLogger;
-        EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("BT profile " + BluetoothProfile.getProfileName(i) + " connected to proxy " + bluetoothProfile);
+        EventLogger.StringEvent stringEvent =
+                new EventLogger.StringEvent(
+                        "BT profile "
+                                + BluetoothProfile.getProfileName(i)
+                                + " connected to proxy "
+                                + bluetoothProfile);
         stringEvent.printLog(0, "AS.BtHelper");
         eventLogger.enqueue(stringEvent);
         if (bluetoothProfile == null) {
@@ -482,28 +564,39 @@ public final class BtHelper {
             }
             if (i != 21) {
                 if (i != 22) {
-                    Log.e("AS.BtHelper", "onBtProfileConnected: Not a valid profile to connect " + BluetoothProfile.getProfileName(i));
+                    Log.e(
+                            "AS.BtHelper",
+                            "onBtProfileConnected: Not a valid profile to connect "
+                                    + BluetoothProfile.getProfileName(i));
                     return;
                 } else {
                     if (((BluetoothLeAudio) bluetoothProfile).equals(this.mLeAudio)) {
                         return;
                     }
                     BluetoothLeAudio bluetoothLeAudio = this.mLeAudio;
-                    if (bluetoothLeAudio != null && (myLeAudioCallback = this.mLeAudioCallback) != null) {
+                    if (bluetoothLeAudio != null
+                            && (myLeAudioCallback = this.mLeAudioCallback) != null) {
                         try {
                             bluetoothLeAudio.unregisterCallback(myLeAudioCallback);
                         } catch (Exception e) {
-                            Log.e("AS.BtHelper", "Exception while unregistering callback for LE audio", e);
+                            Log.e(
+                                    "AS.BtHelper",
+                                    "Exception while unregistering callback for LE audio",
+                                    e);
                         }
                     }
                     BluetoothLeAudio bluetoothLeAudio2 = (BluetoothLeAudio) bluetoothProfile;
                     this.mLeAudio = bluetoothLeAudio2;
                     this.mLeAudioCallback = new MyLeAudioCallback();
                     try {
-                        bluetoothLeAudio2.registerCallback(this.mContext.getMainExecutor(), this.mLeAudioCallback);
+                        bluetoothLeAudio2.registerCallback(
+                                this.mContext.getMainExecutor(), this.mLeAudioCallback);
                     } catch (Exception e2) {
                         this.mLeAudioCallback = null;
-                        Log.e("AS.BtHelper", "Exception while registering callback for LE audio", e2);
+                        Log.e(
+                                "AS.BtHelper",
+                                "Exception while registering callback for LE audio",
+                                e2);
                     }
                 }
             } else if (((BluetoothHearingAid) bluetoothProfile).equals(this.mHearingAid)) {
@@ -518,16 +611,22 @@ public final class BtHelper {
         }
         BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
         if (defaultAdapter == null) {
-            Log.e("AS.BtHelper", "onBtProfileConnected: Null BluetoothAdapter when connecting profile: " + BluetoothProfile.getProfileName(i));
+            Log.e(
+                    "AS.BtHelper",
+                    "onBtProfileConnected: Null BluetoothAdapter when connecting profile: "
+                            + BluetoothProfile.getProfileName(i));
             return;
         }
         List activeDevices = defaultAdapter.getActiveDevices(i);
         if (!activeDevices.isEmpty() && activeDevices.get(0) != null) {
             BluetoothDevice bluetoothDevice = (BluetoothDevice) activeDevices.get(0);
             if (i == 2) {
-                postBluetoothActiveDevice(bluetoothDevice, BluetoothProfileConnectionInfo.createA2dpInfo(false, -1));
+                postBluetoothActiveDevice(
+                        bluetoothDevice, BluetoothProfileConnectionInfo.createA2dpInfo(false, -1));
             } else if (i == 21) {
-                postBluetoothActiveDevice(bluetoothDevice, BluetoothProfileConnectionInfo.createHearingAidInfo(false));
+                postBluetoothActiveDevice(
+                        bluetoothDevice,
+                        BluetoothProfileConnectionInfo.createHearingAidInfo(false));
             } else if (i != 22) {
                 Log.wtf("AS.BtHelper", "Invalid profile! onBtProfileConnected");
             } else {
@@ -535,16 +634,32 @@ public final class BtHelper {
                 try {
                     bluetoothLeAudioCodecStatus = this.mLeAudio.getCodecStatus(groupId);
                 } catch (Exception e3) {
-                    Log.e("AS.BtHelper", "Exception while getting status of " + bluetoothDevice, e3);
+                    Log.e(
+                            "AS.BtHelper",
+                            "Exception while getting status of " + bluetoothDevice,
+                            e3);
                 }
                 if (bluetoothLeAudioCodecStatus == null) {
-                    Log.i("AS.BtHelper", "onBtProfileConnected null LE codec status for groupId: " + groupId + ", device: " + bluetoothDevice);
+                    Log.i(
+                            "AS.BtHelper",
+                            "onBtProfileConnected null LE codec status for groupId: "
+                                    + groupId
+                                    + ", device: "
+                                    + bluetoothDevice);
                 } else {
-                    if (!bluetoothLeAudioCodecStatus.getOutputCodecSelectableCapabilities().isEmpty()) {
-                        postBluetoothActiveDevice(bluetoothDevice, BluetoothProfileConnectionInfo.createLeAudioInfo(false, true));
+                    if (!bluetoothLeAudioCodecStatus
+                            .getOutputCodecSelectableCapabilities()
+                            .isEmpty()) {
+                        postBluetoothActiveDevice(
+                                bluetoothDevice,
+                                BluetoothProfileConnectionInfo.createLeAudioInfo(false, true));
                     }
-                    if (!bluetoothLeAudioCodecStatus.getInputCodecSelectableCapabilities().isEmpty()) {
-                        postBluetoothActiveDevice(bluetoothDevice, BluetoothProfileConnectionInfo.createLeAudioInfo(false, false));
+                    if (!bluetoothLeAudioCodecStatus
+                            .getInputCodecSelectableCapabilities()
+                            .isEmpty()) {
+                        postBluetoothActiveDevice(
+                                bluetoothDevice,
+                                BluetoothProfileConnectionInfo.createLeAudioInfo(false, false));
                     }
                 }
             }
@@ -555,7 +670,9 @@ public final class BtHelper {
         MyLeAudioCallback myLeAudioCallback;
         try {
             EventLogger eventLogger = AudioService.sDeviceLogger;
-            EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("BT profile " + BluetoothProfile.getProfileName(i) + " disconnected");
+            EventLogger.StringEvent stringEvent =
+                    new EventLogger.StringEvent(
+                            "BT profile " + BluetoothProfile.getProfileName(i) + " disconnected");
             stringEvent.printLog(0, "AS.BtHelper");
             eventLogger.enqueue(stringEvent);
             if (i == 1) {
@@ -569,14 +686,21 @@ public final class BtHelper {
                 } else if (i == 21) {
                     this.mHearingAid = null;
                 } else if (i != 22) {
-                    Log.e("AS.BtHelper", "onBtProfileDisconnected: Not a valid profile to disconnect " + BluetoothProfile.getProfileName(i));
+                    Log.e(
+                            "AS.BtHelper",
+                            "onBtProfileDisconnected: Not a valid profile to disconnect "
+                                    + BluetoothProfile.getProfileName(i));
                 } else {
                     BluetoothLeAudio bluetoothLeAudio = this.mLeAudio;
-                    if (bluetoothLeAudio != null && (myLeAudioCallback = this.mLeAudioCallback) != null) {
+                    if (bluetoothLeAudio != null
+                            && (myLeAudioCallback = this.mLeAudioCallback) != null) {
                         try {
                             bluetoothLeAudio.unregisterCallback(myLeAudioCallback);
                         } catch (Exception e) {
-                            Log.e("AS.BtHelper", "Exception while unregistering callback for LE audio", e);
+                            Log.e(
+                                    "AS.BtHelper",
+                                    "Exception while unregistering callback for LE audio",
+                                    e);
                         }
                     }
                     this.mLeAudio = null;
@@ -586,7 +710,10 @@ public final class BtHelper {
             } else if (i == 26) {
                 this.mLeBroadcast = null;
             } else if (i == 11) {
-                Log.e("AS.BtHelper", "onBtProfileDisconnected: Not a profile handled by BtHelper " + BluetoothProfile.getProfileName(i));
+                Log.e(
+                        "AS.BtHelper",
+                        "onBtProfileDisconnected: Not a profile handled by BtHelper "
+                                + BluetoothProfile.getProfileName(i));
             }
         } catch (Throwable th) {
             throw th;
@@ -684,7 +811,9 @@ public final class BtHelper {
         L85:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.audio.BtHelper.onHeadsetProfileConnected(android.bluetooth.BluetoothHeadset):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.audio.BtHelper.onHeadsetProfileConnected(android.bluetooth.BluetoothHeadset):void");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -698,9 +827,15 @@ public final class BtHelper {
                 case 10:
                     audioDeviceBroker.setBluetoothScoOn("BtHelper.onScoAudioStateChanged", false);
                     audioDeviceBroker.muteRingtoneDuringVibration();
-                    if (this.mScoAudioState == 1 && (bluetoothHeadset = this.mBluetoothHeadset) != null && (bluetoothDevice = this.mBluetoothHeadsetDevice) != null) {
+                    if (this.mScoAudioState == 1
+                            && (bluetoothHeadset = this.mBluetoothHeadset) != null
+                            && (bluetoothDevice = this.mBluetoothHeadsetDevice) != null) {
                         int i3 = this.mScoAudioMode;
-                        if (i3 != 0 ? i3 != 2 ? false : bluetoothHeadset.startVoiceRecognition(bluetoothDevice) : bluetoothHeadset.startScoUsingVirtualVoiceCall()) {
+                        if (i3 != 0
+                                ? i3 != 2
+                                        ? false
+                                        : bluetoothHeadset.startVoiceRecognition(bluetoothDevice)
+                                : bluetoothHeadset.startScoUsingVirtualVoiceCall()) {
                             this.mScoAudioState = 3;
                             i2 = 1;
                             r4 = 2;
@@ -725,8 +860,16 @@ public final class BtHelper {
                     if (i6 != 3 && i6 != 4) {
                         this.mScoAudioState = 2;
                     } else if (audioDeviceBroker.isDeviceRequestedForCommunication(7)) {
-                        if (Rune.SEC_AUDIO_REMOTE_MIC && Settings.System.getIntForUser(audioDeviceBroker.mContext.getContentResolver(), "run_amplify_ambient_sound", 0, -2) == 2) {
-                            Intent intent = new Intent("android.samsung.media.action.ACTION_AUDIO_REMOTEMIC_SCO_RESUME");
+                        if (Rune.SEC_AUDIO_REMOTE_MIC
+                                && Settings.System.getIntForUser(
+                                                audioDeviceBroker.mContext.getContentResolver(),
+                                                "run_amplify_ambient_sound",
+                                                0,
+                                                -2)
+                                        == 2) {
+                            Intent intent =
+                                    new Intent(
+                                            "android.samsung.media.action.ACTION_AUDIO_REMOTEMIC_SCO_RESUME");
                             intent.addFlags(67108864);
                             sendStickyBroadcastToAll(intent);
                             Log.i("AS.BtHelper", "broadcast remote mic resume intent");
@@ -764,7 +907,8 @@ public final class BtHelper {
         try {
             StringBuilder sb = new StringBuilder("onSetBtScoActiveDevice: ");
             BluetoothDevice bluetoothDevice2 = this.mBluetoothHeadsetDevice;
-            sb.append(bluetoothDevice2 == null ? "(null)" : bluetoothDevice2.getAnonymizedAddress());
+            sb.append(
+                    bluetoothDevice2 == null ? "(null)" : bluetoothDevice2.getAnonymizedAddress());
             sb.append(" -> ");
             sb.append(bluetoothDevice == null ? "(null)" : bluetoothDevice.getAnonymizedAddress());
             Log.i("AS.BtHelper", sb.toString());
@@ -777,13 +921,22 @@ public final class BtHelper {
                 this.mDeviceBroker.muteRingtoneDuringVibration();
             }
             if (!handleBtScoActiveDeviceChange(bluetoothDevice3, false)) {
-                StringBuilder sb2 = new StringBuilder("onSetBtScoActiveDevice() failed to remove previous device ");
-                sb2.append(bluetoothDevice3 == null ? "(null)" : bluetoothDevice3.getAnonymizedAddress());
+                StringBuilder sb2 =
+                        new StringBuilder(
+                                "onSetBtScoActiveDevice() failed to remove previous device ");
+                sb2.append(
+                        bluetoothDevice3 == null
+                                ? "(null)"
+                                : bluetoothDevice3.getAnonymizedAddress());
                 Log.w("AS.BtHelper", sb2.toString());
             }
             if (!handleBtScoActiveDeviceChange(bluetoothDevice, true)) {
-                StringBuilder sb3 = new StringBuilder("onSetBtScoActiveDevice() failed to add new device ");
-                sb3.append(bluetoothDevice == null ? "(null)" : bluetoothDevice.getAnonymizedAddress());
+                StringBuilder sb3 =
+                        new StringBuilder("onSetBtScoActiveDevice() failed to add new device ");
+                sb3.append(
+                        bluetoothDevice == null
+                                ? "(null)"
+                                : bluetoothDevice.getAnonymizedAddress());
                 Log.e("AS.BtHelper", sb3.toString());
                 bluetoothDevice = null;
             }
@@ -796,7 +949,9 @@ public final class BtHelper {
             }
             if (this.mBluetoothHeadsetDevice != null && ScreenSharingHelper.sSplitSoundEnabled) {
                 ScreenSharingHelper.sSplitSoundEnabled = false;
-                SemAudioSystem.setPolicyParameters("l_smart_view_split_sound_enable=" + ScreenSharingHelper.sSplitSoundEnabled);
+                SemAudioSystem.setPolicyParameters(
+                        "l_smart_view_split_sound_enable="
+                                + ScreenSharingHelper.sSplitSoundEnabled);
                 this.mDeviceBroker.sendIMsgNoDelay(12, 0, 32);
             }
         } catch (Throwable th) {
@@ -814,23 +969,43 @@ public final class BtHelper {
             sendStickyBroadcastToAll(intent);
             BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
             if (defaultAdapter != null) {
-                defaultAdapter.getProfileProxy(this.mDeviceBroker.mContext, this.mBluetoothProfileServiceListener, 2);
-                defaultAdapter.getProfileProxy(this.mDeviceBroker.mContext, this.mBluetoothProfileServiceListener, 11);
-                defaultAdapter.getProfileProxy(this.mDeviceBroker.mContext, this.mBluetoothProfileServiceListener, 21);
-                defaultAdapter.getProfileProxy(this.mDeviceBroker.mContext, this.mBluetoothProfileServiceListener, 22);
-                defaultAdapter.getProfileProxy(this.mDeviceBroker.mContext, this.mBluetoothProfileServiceListener, 26);
+                defaultAdapter.getProfileProxy(
+                        this.mDeviceBroker.mContext, this.mBluetoothProfileServiceListener, 2);
+                defaultAdapter.getProfileProxy(
+                        this.mDeviceBroker.mContext, this.mBluetoothProfileServiceListener, 11);
+                defaultAdapter.getProfileProxy(
+                        this.mDeviceBroker.mContext, this.mBluetoothProfileServiceListener, 21);
+                defaultAdapter.getProfileProxy(
+                        this.mDeviceBroker.mContext, this.mBluetoothProfileServiceListener, 22);
+                defaultAdapter.getProfileProxy(
+                        this.mDeviceBroker.mContext, this.mBluetoothProfileServiceListener, 26);
             }
-            this.mVibratorManagerInternal = (VibratorManagerInternal) LocalServices.getService(VibratorManagerInternal.class);
+            this.mVibratorManagerInternal =
+                    (VibratorManagerInternal)
+                            LocalServices.getService(VibratorManagerInternal.class);
         } catch (Throwable th) {
             throw th;
         }
     }
 
-    public final void postBluetoothActiveDevice(BluetoothDevice bluetoothDevice, BluetoothProfileConnectionInfo bluetoothProfileConnectionInfo) {
-        AudioDeviceBroker.BtDeviceChangedData btDeviceChangedData = new AudioDeviceBroker.BtDeviceChangedData(bluetoothDevice, null, bluetoothProfileConnectionInfo, "mBluetoothProfileServiceListener");
+    public final void postBluetoothActiveDevice(
+            BluetoothDevice bluetoothDevice,
+            BluetoothProfileConnectionInfo bluetoothProfileConnectionInfo) {
+        AudioDeviceBroker.BtDeviceChangedData btDeviceChangedData =
+                new AudioDeviceBroker.BtDeviceChangedData(
+                        bluetoothDevice,
+                        null,
+                        bluetoothProfileConnectionInfo,
+                        "mBluetoothProfileServiceListener");
         AudioDeviceBroker audioDeviceBroker = this.mDeviceBroker;
         audioDeviceBroker.getClass();
-        audioDeviceBroker.sendIILMsg(7, 2, 0, 0, AudioDeviceBroker.createBtDeviceInfo(btDeviceChangedData, bluetoothDevice, 2), 0);
+        audioDeviceBroker.sendIILMsg(
+                7,
+                2,
+                0,
+                0,
+                AudioDeviceBroker.createBtDeviceInfo(btDeviceChangedData, bluetoothDevice, 2),
+                0);
     }
 
     public final boolean requestScoState(int i, int i2) {
@@ -845,7 +1020,12 @@ public final class BtHelper {
                 if (i2 == -1) {
                     this.mScoAudioMode = 0;
                     if (this.mBluetoothHeadsetDevice != null) {
-                        int i4 = Settings.Global.getInt(this.mDeviceBroker.mAudioService.mContentResolver, "bluetooth_sco_channel_" + this.mBluetoothHeadsetDevice.getAddress(), 0);
+                        int i4 =
+                                Settings.Global.getInt(
+                                        this.mDeviceBroker.mAudioService.mContentResolver,
+                                        "bluetooth_sco_channel_"
+                                                + this.mBluetoothHeadsetDevice.getAddress(),
+                                        0);
                         this.mScoAudioMode = i4;
                         if (i4 > 2 || i4 < 0) {
                             this.mScoAudioMode = 0;
@@ -856,15 +1036,25 @@ public final class BtHelper {
                 if (bluetoothHeadset != null) {
                     BluetoothDevice bluetoothDevice = this.mBluetoothHeadsetDevice;
                     if (bluetoothDevice == null) {
-                        Log.w("AS.BtHelper", "requestScoState: no active device while connecting, mScoAudioMode=" + this.mScoAudioMode);
+                        Log.w(
+                                "AS.BtHelper",
+                                "requestScoState: no active device while connecting, mScoAudioMode="
+                                        + this.mScoAudioMode);
                         broadcastScoConnectionState(0);
                         return false;
                     }
                     int i5 = this.mScoAudioMode;
-                    if (!(i5 != 0 ? i5 != 2 ? false : bluetoothHeadset.startVoiceRecognition(bluetoothDevice) : bluetoothHeadset.startScoUsingVirtualVoiceCall())) {
+                    if (!(i5 != 0
+                            ? i5 != 2
+                                    ? false
+                                    : bluetoothHeadset.startVoiceRecognition(bluetoothDevice)
+                            : bluetoothHeadset.startScoUsingVirtualVoiceCall())) {
                         StringBuilder sb = new StringBuilder("requestScoState: connect to ");
                         BluetoothDevice bluetoothDevice2 = this.mBluetoothHeadsetDevice;
-                        sb.append(bluetoothDevice2 == null ? "(null)" : bluetoothDevice2.getAnonymizedAddress());
+                        sb.append(
+                                bluetoothDevice2 == null
+                                        ? "(null)"
+                                        : bluetoothDevice2.getAnonymizedAddress());
                         sb.append(" failed, mScoAudioMode=");
                         sb.append(this.mScoAudioMode);
                         Log.w("AS.BtHelper", sb.toString());
@@ -874,7 +1064,11 @@ public final class BtHelper {
                     this.mScoAudioState = 3;
                 } else {
                     if (!getBluetoothHeadset()) {
-                        Log.w("AS.BtHelper", "requestScoState: getBluetoothHeadset failed during connection, mScoAudioMode=" + this.mScoAudioMode);
+                        Log.w(
+                                "AS.BtHelper",
+                                "requestScoState: getBluetoothHeadset failed during connection,"
+                                    + " mScoAudioMode="
+                                        + this.mScoAudioMode);
                         broadcastScoConnectionState(0);
                         return false;
                     }
@@ -888,7 +1082,12 @@ public final class BtHelper {
                     broadcastScoConnectionState(1);
                 } else {
                     if (i3 != 5) {
-                        Log.w("AS.BtHelper", "requestScoState: failed to connect in state " + this.mScoAudioState + ", scoAudioMode=" + i2);
+                        Log.w(
+                                "AS.BtHelper",
+                                "requestScoState: failed to connect in state "
+                                        + this.mScoAudioState
+                                        + ", scoAudioMode="
+                                        + i2);
                         broadcastScoConnectionState(0);
                         return false;
                     }
@@ -902,7 +1101,12 @@ public final class BtHelper {
                 broadcastScoConnectionState(0);
             } else {
                 if (i6 != 3) {
-                    Log.w("AS.BtHelper", "requestScoState: failed to disconnect in state " + this.mScoAudioState + ", scoAudioMode=" + i2);
+                    Log.w(
+                            "AS.BtHelper",
+                            "requestScoState: failed to disconnect in state "
+                                    + this.mScoAudioState
+                                    + ", scoAudioMode="
+                                    + i2);
                     broadcastScoConnectionState(0);
                     return false;
                 }
@@ -914,7 +1118,11 @@ public final class BtHelper {
                         broadcastScoConnectionState(0);
                     } else {
                         int i7 = this.mScoAudioMode;
-                        if (i7 != 0 ? i7 != 2 ? false : bluetoothHeadset2.stopVoiceRecognition(bluetoothDevice3) : bluetoothHeadset2.stopScoUsingVirtualVoiceCall()) {
+                        if (i7 != 0
+                                ? i7 != 2
+                                        ? false
+                                        : bluetoothHeadset2.stopVoiceRecognition(bluetoothDevice3)
+                                : bluetoothHeadset2.stopScoUsingVirtualVoiceCall()) {
                             this.mScoAudioState = 5;
                         } else {
                             this.mScoAudioState = 0;
@@ -923,7 +1131,12 @@ public final class BtHelper {
                     }
                 } else {
                     if (!getBluetoothHeadset()) {
-                        AudioService$$ExternalSyntheticOutline0.m(new StringBuilder("requestScoState: getBluetoothHeadset failed during disconnection, mScoAudioMode="), this.mScoAudioMode, "AS.BtHelper");
+                        AudioService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(
+                                        "requestScoState: getBluetoothHeadset failed during"
+                                            + " disconnection, mScoAudioMode="),
+                                this.mScoAudioMode,
+                                "AS.BtHelper");
                         this.mScoAudioState = 0;
                         broadcastScoConnectionState(0);
                         return false;
@@ -956,14 +1169,18 @@ public final class BtHelper {
     public final synchronized void setAvrcpAbsoluteVolumeIndex(int i) {
         if (this.mA2dp == null) {
             EventLogger eventLogger = AudioService.sVolumeLogger;
-            EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("setAvrcpAbsoluteVolumeIndex: bailing due to null mA2dp");
+            EventLogger.StringEvent stringEvent =
+                    new EventLogger.StringEvent(
+                            "setAvrcpAbsoluteVolumeIndex: bailing due to null mA2dp");
             stringEvent.printLog(0, "AS.BtHelper");
             eventLogger.enqueue(stringEvent);
             return;
         }
         if (!this.mAvrcpAbsVolSupported) {
             EventLogger eventLogger2 = AudioService.sVolumeLogger;
-            EventLogger.StringEvent stringEvent2 = new EventLogger.StringEvent("setAvrcpAbsoluteVolumeIndex: abs vol not supported ");
+            EventLogger.StringEvent stringEvent2 =
+                    new EventLogger.StringEvent(
+                            "setAvrcpAbsoluteVolumeIndex: abs vol not supported ");
             stringEvent2.printLog(0, "AS.BtHelper");
             eventLogger2.enqueue(stringEvent2);
             return;
@@ -982,7 +1199,10 @@ public final class BtHelper {
                 if (dualA2dpVolumeManager.mDualModeEnabled) {
                     arrayMap.putAll(dualA2dpVolumeManager.mConnectedDevicesVolume);
                 } else {
-                    Integer num = (Integer) dualA2dpVolumeManager.mConnectedDevicesVolume.getOrDefault(dualA2dpVolumeManager.mActiveDevice, -1);
+                    Integer num =
+                            (Integer)
+                                    dualA2dpVolumeManager.mConnectedDevicesVolume.getOrDefault(
+                                            dualA2dpVolumeManager.mActiveDevice, -1);
                     if (num.intValue() != -1) {
                         arrayMap.put(dualA2dpVolumeManager.mActiveDevice, num);
                     }
@@ -999,7 +1219,8 @@ public final class BtHelper {
         for (int i2 = 0; i2 < arrayMap.size(); i2++) {
             BluetoothDevice bluetoothDevice = (BluetoothDevice) arrayMap.keyAt(i2);
             int intValue = ((Integer) arrayMap.valueAt(i2)).intValue();
-            this.mA2dp.setA2dpMediaVolume(bluetoothDevice, DualA2dpVolumeManager.FINE_VOLUME_TABLE[intValue], intValue);
+            this.mA2dp.setA2dpMediaVolume(
+                    bluetoothDevice, DualA2dpVolumeManager.FINE_VOLUME_TABLE[intValue], intValue);
         }
     }
 
@@ -1017,9 +1238,15 @@ public final class BtHelper {
         if (streamVolumeDB < -128) {
             streamVolumeDB = -128;
         }
-        Log.i("AS.BtHelper", "setHearingAidVolume: calling mHearingAid.setVolume idx=" + i + " gain=" + streamVolumeDB);
+        Log.i(
+                "AS.BtHelper",
+                "setHearingAidVolume: calling mHearingAid.setVolume idx="
+                        + i
+                        + " gain="
+                        + streamVolumeDB);
         if (z) {
-            AudioService.sVolumeLogger.enqueue(new AudioServiceEvents$VolumeEvent(i, streamVolumeDB));
+            AudioService.sVolumeLogger.enqueue(
+                    new AudioServiceEvents$VolumeEvent(i, streamVolumeDB));
         }
         try {
             this.mHearingAid.setVolume(streamVolumeDB);
@@ -1034,8 +1261,11 @@ public final class BtHelper {
             return;
         }
         int round = (int) Math.round((i * 255.0d) / i2);
-        Log.i("AS.BtHelper", "setLeAudioVolume: calling mLeAudio.setVolume idx=" + i + " volume=" + round);
-        AudioService.sVolumeLogger.enqueue(new AudioServiceEvents$VolumeEvent(10, i3, i, i2, (String) null));
+        Log.i(
+                "AS.BtHelper",
+                "setLeAudioVolume: calling mLeAudio.setVolume idx=" + i + " volume=" + round);
+        AudioService.sVolumeLogger.enqueue(
+                new AudioServiceEvents$VolumeEvent(10, i3, i, i2, (String) null));
         try {
             this.mLeAudio.setVolume(round);
         } catch (Exception e) {

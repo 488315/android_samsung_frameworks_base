@@ -25,16 +25,13 @@ public interface IGetKeyCallback extends IInterface {
 
     public static class Default implements IGetKeyCallback {
         @Override // android.security.rkp.IGetKeyCallback
-        public void onSuccess(RemotelyProvisionedKey key) throws RemoteException {
-        }
+        public void onSuccess(RemotelyProvisionedKey key) throws RemoteException {}
 
         @Override // android.security.rkp.IGetKeyCallback
-        public void onCancel() throws RemoteException {
-        }
+        public void onCancel() throws RemoteException {}
 
         @Override // android.security.rkp.IGetKeyCallback
-        public void onError(byte error, String description) throws RemoteException {
-        }
+        public void onError(byte error, String description) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +39,7 @@ public interface IGetKeyCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetKeyCallback {
+    public abstract static class Stub extends Binder implements IGetKeyCallback {
         static final int TRANSACTION_onCancel = 2;
         static final int TRANSACTION_onError = 3;
         static final int TRANSACTION_onSuccess = 1;
@@ -86,7 +83,8 @@ public interface IGetKeyCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGetKeyCallback.DESCRIPTOR);
             }
@@ -96,7 +94,9 @@ public interface IGetKeyCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RemotelyProvisionedKey _arg0 = (RemotelyProvisionedKey) data.readTypedObject(RemotelyProvisionedKey.CREATOR);
+                    RemotelyProvisionedKey _arg0 =
+                            (RemotelyProvisionedKey)
+                                    data.readTypedObject(RemotelyProvisionedKey.CREATOR);
                     data.enforceNoDataAvail();
                     onSuccess(_arg0);
                     return true;

@@ -2,24 +2,26 @@ package android.app;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes.dex */
 public final class GameState implements Parcelable {
-    public static final Parcelable.Creator<GameState> CREATOR = new Parcelable.Creator<GameState>() { // from class: android.app.GameState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GameState createFromParcel(Parcel in) {
-            return new GameState(in);
-        }
+    public static final Parcelable.Creator<GameState> CREATOR =
+            new Parcelable.Creator<GameState>() { // from class: android.app.GameState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GameState createFromParcel(Parcel in) {
+                    return new GameState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GameState[] newArray(int size) {
-            return new GameState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GameState[] newArray(int size) {
+                    return new GameState[size];
+                }
+            };
     public static final int MODE_CONTENT = 4;
     public static final int MODE_GAMEPLAY_INTERRUPTIBLE = 2;
     public static final int MODE_GAMEPLAY_UNINTERRUPTIBLE = 3;
@@ -31,8 +33,7 @@ public final class GameState implements Parcelable {
     private final int mQuality;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface GameStateMode {
-    }
+    @interface GameStateMode {}
 
     public GameState(boolean isLoading, int mode) {
         this(isLoading, mode, -1, -1);

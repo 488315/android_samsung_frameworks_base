@@ -1,9 +1,9 @@
 package com.android.server.display.mode;
 
 import com.android.server.display.config.SupportedModeData;
-import com.android.server.display.mode.RefreshRateVote;
-import com.android.server.display.mode.SupportedRefreshRatesVote;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,11 +12,16 @@ import java.util.List;
 /* loaded from: classes.dex */
 public interface Vote {
     static CombinedVote forPhysicalRefreshRates(float f, float f2) {
-        return new CombinedVote(List.of(new RefreshRateVote.PhysicalVote(f, f2), new DisableRefreshRateSwitchingVote(f == f2)));
+        return new CombinedVote(
+                List.of(
+                        new RefreshRateVote.PhysicalVote(f, f2),
+                        new DisableRefreshRateSwitchingVote(f == f2)));
     }
 
     static Vote forPolicyRate(float f, float f2) {
-        return CoreRune.FW_VRR_DISCRETE ? new RefreshRateVote.RenderVote(f, f2) : forPhysicalRefreshRates(f, f2);
+        return CoreRune.FW_VRR_DISCRETE
+                ? new RefreshRateVote.RenderVote(f, f2)
+                : forPhysicalRefreshRates(f, f2);
     }
 
     static SupportedRefreshRatesVote forSupportedRefreshRates(List list) {
@@ -27,7 +32,9 @@ public interface Vote {
         Iterator it = list.iterator();
         while (it.hasNext()) {
             SupportedModeData supportedModeData = (SupportedModeData) it.next();
-            arrayList.add(new SupportedRefreshRatesVote.RefreshRates(supportedModeData.refreshRate, supportedModeData.vsyncRate));
+            arrayList.add(
+                    new SupportedRefreshRatesVote.RefreshRates(
+                            supportedModeData.refreshRate, supportedModeData.vsyncRate));
         }
         return new SupportedRefreshRatesVote(arrayList);
     }

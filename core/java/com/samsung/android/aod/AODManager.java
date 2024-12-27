@@ -8,11 +8,9 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 import android.view.Display;
-import com.samsung.android.aod.AODManager;
-import com.samsung.android.aod.IAODCallback;
-import com.samsung.android.aod.IAODDozeCallback;
-import com.samsung.android.aod.IAODManager;
+
 import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
+
 import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.List;
@@ -40,7 +38,8 @@ public class AODManager {
     Context mContext;
     private IAODManager mService;
     private final Object mAODCallbackLock = new Object();
-    private CopyOnWriteArrayList<AODCallbackDelegate> mAODCallbackDelegates = new CopyOnWriteArrayList<>();
+    private CopyOnWriteArrayList<AODCallbackDelegate> mAODCallbackDelegates =
+            new CopyOnWriteArrayList<>();
 
     public interface AODChangeListener {
         void readyToScreenTurningOn();
@@ -168,7 +167,8 @@ public class AODManager {
         }
     }
 
-    public void writeAODCommand(String location, String cmd, String arg1, String arg2, String arg3) {
+    public void writeAODCommand(
+            String location, String cmd, String arg1, String arg2, String arg3) {
         if (getService() == null) {
             return;
         }
@@ -179,12 +179,22 @@ public class AODManager {
         }
     }
 
-    public int setLiveClockInfo(int type, long en, long interval, long hour, long min, long second, long ms, long pos_x, long pos_y) {
+    public int setLiveClockInfo(
+            int type,
+            long en,
+            long interval,
+            long hour,
+            long min,
+            long second,
+            long ms,
+            long pos_x,
+            long pos_y) {
         if (getService() == null) {
             return -1;
         }
         try {
-            return this.mService.setLiveClockInfo(type, en, interval, hour, min, second, ms, pos_x, pos_y);
+            return this.mService.setLiveClockInfo(
+                    type, en, interval, hour, min, second, ms, pos_x, pos_y);
         } catch (RemoteException e) {
             Log.w(TAG, "AODManagerService RuntimeException?\n" + Log.getStackTraceString(e));
             return -1;
@@ -288,7 +298,9 @@ public class AODManager {
                 try {
                     this.mService.registerAODListener(delegate2);
                 } catch (RemoteException e) {
-                    Log.w(TAG, "AODManagerService RuntimeException?\n" + Log.getStackTraceString(e));
+                    Log.w(
+                            TAG,
+                            "AODManagerService RuntimeException?\n" + Log.getStackTraceString(e));
                 }
                 return;
             }
@@ -342,12 +354,14 @@ public class AODManager {
 
         @Override // com.samsung.android.aod.IAODCallback
         public void onScreenTurningOn() {
-            this.mHandler.postAtFrontOfQueue(new Runnable() { // from class: com.samsung.android.aod.AODManager$AODCallbackDelegate$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AODManager.AODCallbackDelegate.this.lambda$onScreenTurningOn$0();
-                }
-            });
+            this.mHandler.postAtFrontOfQueue(
+                    new Runnable() { // from class:
+                                     // com.samsung.android.aod.AODManager$AODCallbackDelegate$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AODManager.AODCallbackDelegate.this.lambda$onScreenTurningOn$0();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -437,9 +451,12 @@ public class AODManager {
                     case 3:
                     case 4:
                         try {
-                            AODManager.this.mService.acquireDoze(this.mToken, this.mTag, this.mPackageName);
+                            AODManager.this.mService.acquireDoze(
+                                    this.mToken, this.mTag, this.mPackageName);
                         } catch (RemoteException e) {
-                            Log.w(AODManager.TAG, "AODDozeLock RuntimeException?\n" + Log.getStackTraceString(e));
+                            Log.w(
+                                    AODManager.TAG,
+                                    "AODDozeLock RuntimeException?\n" + Log.getStackTraceString(e));
                         }
                         this.mHeld = true;
                         return;
@@ -466,7 +483,10 @@ public class AODManager {
                             try {
                                 AODManager.this.mService.releaseDoze(this.mToken);
                             } catch (RemoteException e) {
-                                Log.w(AODManager.TAG, "AODDozeLock RuntimeException?\n" + Log.getStackTraceString(e));
+                                Log.w(
+                                        AODManager.TAG,
+                                        "AODDozeLock RuntimeException?\n"
+                                                + Log.getStackTraceString(e));
                             }
                             this.mHeld = false;
                         }
@@ -487,7 +507,8 @@ public class AODManager {
         }
 
         public AODDozeLock newAODDozeLock(String tag) {
-            return AODManager.this.new AODDozeLock(tag, AODManager.this.mContext.getOpPackageName());
+            return AODManager.this
+            .new AODDozeLock(tag, AODManager.this.mContext.getOpPackageName());
         }
     }
 
@@ -502,41 +523,50 @@ public class AODManager {
 
         @Override // com.samsung.android.aod.IAODDozeCallback
         public void onDozeAcquired() throws RemoteException {
-            this.mHandler.post(new Runnable() { // from class: com.samsung.android.aod.AODManager.AODDozeCallbackDelegate.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    AODDozeCallback callback = (AODDozeCallback) AODDozeCallbackDelegate.this.mCallback.get();
-                    if (callback != null) {
-                        callback.onDozeAcquired();
-                    }
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.samsung.android.aod.AODManager.AODDozeCallbackDelegate.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            AODDozeCallback callback =
+                                    (AODDozeCallback) AODDozeCallbackDelegate.this.mCallback.get();
+                            if (callback != null) {
+                                callback.onDozeAcquired();
+                            }
+                        }
+                    });
         }
 
         @Override // com.samsung.android.aod.IAODDozeCallback
         public void onDozeReleased() throws RemoteException {
-            this.mHandler.post(new Runnable() { // from class: com.samsung.android.aod.AODManager.AODDozeCallbackDelegate.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    AODDozeCallback callback = (AODDozeCallback) AODDozeCallbackDelegate.this.mCallback.get();
-                    if (callback != null) {
-                        callback.onDozeReleased();
-                    }
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.samsung.android.aod.AODManager.AODDozeCallbackDelegate.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            AODDozeCallback callback =
+                                    (AODDozeCallback) AODDozeCallbackDelegate.this.mCallback.get();
+                            if (callback != null) {
+                                callback.onDozeReleased();
+                            }
+                        }
+                    });
         }
 
         @Override // com.samsung.android.aod.IAODDozeCallback
         public void onAODToastRequested(final AODToast toast) throws RemoteException {
-            this.mHandler.post(new Runnable() { // from class: com.samsung.android.aod.AODManager.AODDozeCallbackDelegate.3
-                @Override // java.lang.Runnable
-                public void run() {
-                    AODDozeCallback callback = (AODDozeCallback) AODDozeCallbackDelegate.this.mCallback.get();
-                    if (callback != null) {
-                        callback.onAODToastRequested(toast);
-                    }
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.samsung.android.aod.AODManager.AODDozeCallbackDelegate.3
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            AODDozeCallback callback =
+                                    (AODDozeCallback) AODDozeCallbackDelegate.this.mCallback.get();
+                            if (callback != null) {
+                                callback.onAODToastRequested(toast);
+                            }
+                        }
+                    });
         }
     }
 }

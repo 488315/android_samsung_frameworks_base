@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class SystemSelectionSpecifier implements Parcelable {
-    public static final Parcelable.Creator<SystemSelectionSpecifier> CREATOR = new Parcelable.Creator<SystemSelectionSpecifier>() { // from class: android.telephony.satellite.stub.SystemSelectionSpecifier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SystemSelectionSpecifier createFromParcel(Parcel _aidl_source) {
-            SystemSelectionSpecifier _aidl_out = new SystemSelectionSpecifier();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SystemSelectionSpecifier> CREATOR =
+            new Parcelable.Creator<
+                    SystemSelectionSpecifier>() { // from class:
+                                                  // android.telephony.satellite.stub.SystemSelectionSpecifier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SystemSelectionSpecifier createFromParcel(Parcel _aidl_source) {
+                    SystemSelectionSpecifier _aidl_out = new SystemSelectionSpecifier();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SystemSelectionSpecifier[] newArray(int _aidl_size) {
-            return new SystemSelectionSpecifier[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SystemSelectionSpecifier[] newArray(int _aidl_size) {
+                    return new SystemSelectionSpecifier[_aidl_size];
+                }
+            };
     public int[] mBands;
     public int[] mEarfcs;
     public String mMccMnc;

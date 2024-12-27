@@ -22,16 +22,19 @@ import android.util.AndroidRuntimeException;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.Slog;
-import android.webkit.IWebViewUpdateService;
+
 import com.android.internal.content.NativeLibraryHelper;
+
 import com.samsung.android.ipm.SecIpmManager;
+
 import java.io.File;
 import java.lang.reflect.Method;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class WebViewFactory {
-    private static final String CHROMIUM_WEBVIEW_FACTORY = "com.android.webview.chromium.WebViewChromiumFactoryProviderForT";
+    private static final String CHROMIUM_WEBVIEW_FACTORY =
+            "com.android.webview.chromium.WebViewChromiumFactoryProviderForT";
     private static final String CHROMIUM_WEBVIEW_FACTORY_METHOD = "create";
     private static final boolean DEBUG = false;
     public static final int LIBLOAD_ADDRESS_SPACE_NOT_RESERVED = 2;
@@ -71,8 +74,7 @@ public final class WebViewFactory {
         long mProviderClassForNameStart;
         long mWebViewLoadStart;
 
-        StartupTimestamps() {
-        }
+        StartupTimestamps() {}
 
         public long getWebViewLoadStart() {
             return this.mWebViewLoadStart;
@@ -148,7 +150,11 @@ public final class WebViewFactory {
 
     private static boolean isWebViewSupported() {
         if (sWebViewSupported == null) {
-            sWebViewSupported = Boolean.valueOf(AppGlobals.getInitialApplication().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WEBVIEW));
+            sWebViewSupported =
+                    Boolean.valueOf(
+                            AppGlobals.getInitialApplication()
+                                    .getPackageManager()
+                                    .hasSystemFeature(PackageManager.FEATURE_WEBVIEW));
         }
         return sWebViewSupported.booleanValue();
     }
@@ -156,7 +162,8 @@ public final class WebViewFactory {
     static void disableWebView() {
         synchronized (sProviderLock) {
             if (sProviderInstance != null) {
-                throw new IllegalStateException("Can't disable WebView: WebView already initialized");
+                throw new IllegalStateException(
+                        "Can't disable WebView: WebView already initialized");
             }
             sWebViewDisabled = true;
         }
@@ -165,10 +172,12 @@ public final class WebViewFactory {
     static void setDataDirectorySuffix(String suffix) {
         synchronized (sProviderLock) {
             if (sProviderInstance != null) {
-                throw new IllegalStateException("Can't set data directory suffix: WebView already initialized");
+                throw new IllegalStateException(
+                        "Can't set data directory suffix: WebView already initialized");
             }
             if (suffix.indexOf(File.separatorChar) >= 0) {
-                throw new IllegalArgumentException("Suffix " + suffix + " contains a path separator");
+                throw new IllegalArgumentException(
+                        "Suffix " + suffix + " contains a path separator");
             }
             sDataDirectorySuffix = suffix;
             isSetDataDirectorySuffix = true;
@@ -198,11 +207,13 @@ public final class WebViewFactory {
         return packageInfo;
     }
 
-    public static Class<WebViewFactoryProvider> getWebViewProviderClass(ClassLoader clazzLoader) throws ClassNotFoundException {
+    public static Class<WebViewFactoryProvider> getWebViewProviderClass(ClassLoader clazzLoader)
+            throws ClassNotFoundException {
         return Class.forName(CHROMIUM_WEBVIEW_FACTORY, true, clazzLoader);
     }
 
-    public static int loadWebViewNativeLibraryFromPackage(String packageName, ClassLoader clazzLoader) {
+    public static int loadWebViewNativeLibraryFromPackage(
+            String packageName, ClassLoader clazzLoader) {
         WebViewProviderResponse response;
         if (!isWebViewSupported()) {
             return 1;
@@ -210,7 +221,11 @@ public final class WebViewFactory {
         Application initialApplication = AppGlobals.getInitialApplication();
         try {
             if (Flags.updateServiceIpcWrapper()) {
-                response = ((WebViewUpdateManager) initialApplication.getSystemService(WebViewUpdateManager.class)).waitForAndGetProvider();
+                response =
+                        ((WebViewUpdateManager)
+                                        initialApplication.getSystemService(
+                                                WebViewUpdateManager.class))
+                                .waitForAndGetProvider();
             } else {
                 response = getUpdateService().waitForAndGetProvider();
             }
@@ -224,7 +239,8 @@ public final class WebViewFactory {
             try {
                 PackageInfo packageInfo = packageManager.getPackageInfo(packageName, 268435584);
                 String libraryFileName = getWebViewLibrary(packageInfo.applicationInfo);
-                int loadNativeRet = WebViewLibraryLoader.loadNativeLibrary(clazzLoader, libraryFileName);
+                int loadNativeRet =
+                        WebViewLibraryLoader.loadNativeLibrary(clazzLoader, libraryFileName);
                 return loadNativeRet == 0 ? response.status : loadNativeRet;
             } catch (PackageManager.NameNotFoundException e) {
                 Log.e(LOGTAG, "Couldn't find package " + packageName);
@@ -244,32 +260,46 @@ public final class WebViewFactory {
             sTimestamps.mWebViewLoadStart = SystemClock.uptimeMillis();
             int uid = Process.myUid();
             String isKnoxVpnProxyEnabled = System.getProperty(WEBVIEW_PAC_PROPERTY);
-            if (uid == 1002 && isKnoxVpnProxyEnabled != null && isKnoxVpnProxyEnabled.equalsIgnoreCase("enable")) {
+            if (uid == 1002
+                    && isKnoxVpnProxyEnabled != null
+                    && isKnoxVpnProxyEnabled.equalsIgnoreCase("enable")) {
                 Log.d(LOGTAG, "enable webview for knox vpn proxy module");
             } else if (uid == 0 || uid == 1000 || uid == 1001 || uid == 1027 || uid == 1002) {
-                throw new UnsupportedOperationException("For security reasons, WebView is not allowed in privileged processes");
+                throw new UnsupportedOperationException(
+                        "For security reasons, WebView is not allowed in privileged processes");
             }
             if (!isWebViewSupported()) {
                 throw new UnsupportedOperationException();
             }
             if (sWebViewDisabled) {
-                throw new IllegalStateException("WebView.disableWebView() was called: WebView is disabled");
+                throw new IllegalStateException(
+                        "WebView.disableWebView() was called: WebView is disabled");
             }
             Trace.traceBegin(16L, "WebViewFactory.getProvider()");
             try {
                 try {
                     Class<WebViewFactoryProvider> providerClass = getProviderClass();
-                    Method staticFactory = providerClass.getMethod(CHROMIUM_WEBVIEW_FACTORY_METHOD, WebViewDelegate.class);
+                    Method staticFactory =
+                            providerClass.getMethod(
+                                    CHROMIUM_WEBVIEW_FACTORY_METHOD, WebViewDelegate.class);
                     Trace.traceBegin(16L, "WebViewFactoryProvider invocation");
                     try {
-                        sProviderInstance = (WebViewFactoryProvider) staticFactory.invoke(null, new WebViewDelegate());
+                        sProviderInstance =
+                                (WebViewFactoryProvider)
+                                        staticFactory.invoke(null, new WebViewDelegate());
                         if (!isSetDataDirectorySuffix) {
                             isSetDataDirectorySuffix = false;
-                            String needRecord = SystemProperties.get("persist.sys.app_webview_preload_need", "false");
+                            String needRecord =
+                                    SystemProperties.get(
+                                            "persist.sys.app_webview_preload_need", "false");
                             if (needRecord.startsWith("launching")) {
-                                String[] strs = needRecord.split(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
+                                String[] strs =
+                                        needRecord.split(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
                                 String processName = strs[1];
-                                SecIpmManager mSecIpmManager = (SecIpmManager) AppGlobals.getInitialApplication().getSystemService("PkgPredictorService");
+                                SecIpmManager mSecIpmManager =
+                                        (SecIpmManager)
+                                                AppGlobals.getInitialApplication()
+                                                        .getSystemService("PkgPredictorService");
                                 if (mSecIpmManager != null) {
                                     mSecIpmManager.setWebViewPreload("load-" + processName, -100);
                                 }
@@ -307,18 +337,29 @@ public final class WebViewFactory {
         return set1.equals(set2);
     }
 
-    private static void verifyPackageInfo(PackageInfo chosen, PackageInfo toUse) throws MissingWebViewPackageException {
+    private static void verifyPackageInfo(PackageInfo chosen, PackageInfo toUse)
+            throws MissingWebViewPackageException {
         if (!chosen.packageName.equals(toUse.packageName)) {
-            throw new MissingWebViewPackageException("Failed to verify WebView provider, packageName mismatch, expected: " + chosen.packageName + " actual: " + toUse.packageName);
+            throw new MissingWebViewPackageException(
+                    "Failed to verify WebView provider, packageName mismatch, expected: "
+                            + chosen.packageName
+                            + " actual: "
+                            + toUse.packageName);
         }
         if (chosen.getLongVersionCode() > toUse.getLongVersionCode()) {
-            throw new MissingWebViewPackageException("Failed to verify WebView provider, version code is lower than expected: " + chosen.getLongVersionCode() + " actual: " + toUse.getLongVersionCode());
+            throw new MissingWebViewPackageException(
+                    "Failed to verify WebView provider, version code is lower than expected: "
+                            + chosen.getLongVersionCode()
+                            + " actual: "
+                            + toUse.getLongVersionCode());
         }
         if (getWebViewLibrary(toUse.applicationInfo) == null) {
-            throw new MissingWebViewPackageException("Tried to load an invalid WebView provider: " + toUse.packageName);
+            throw new MissingWebViewPackageException(
+                    "Tried to load an invalid WebView provider: " + toUse.packageName);
         }
         if (!signaturesEquals(chosen.signatures, toUse.signatures)) {
-            throw new MissingWebViewPackageException("Failed to verify WebView provider, signature mismatch");
+            throw new MissingWebViewPackageException(
+                    "Failed to verify WebView provider, signature mismatch");
         }
     }
 
@@ -330,7 +371,11 @@ public final class WebViewFactory {
     }
 
     private static boolean isInstalledPackage(PackageInfo packageInfo) {
-        return (packageInfo == null || (packageInfo.applicationInfo.flags & 8388608) == 0 || (packageInfo.applicationInfo.privateFlags & 1) != 0) ? false : true;
+        return (packageInfo == null
+                        || (packageInfo.applicationInfo.flags & 8388608) == 0
+                        || (packageInfo.applicationInfo.privateFlags & 1) != 0)
+                ? false
+                : true;
     }
 
     private static Context getWebViewContextAndSetProvider() throws MissingWebViewPackageException {
@@ -340,35 +385,52 @@ public final class WebViewFactory {
             Trace.traceBegin(16L, "WebViewUpdateService.waitForAndGetProvider()");
             try {
                 if (Flags.updateServiceIpcWrapper()) {
-                    response = ((WebViewUpdateManager) initialApplication.getSystemService(WebViewUpdateManager.class)).waitForAndGetProvider();
+                    response =
+                            ((WebViewUpdateManager)
+                                            initialApplication.getSystemService(
+                                                    WebViewUpdateManager.class))
+                                    .waitForAndGetProvider();
                 } else {
                     response = getUpdateService().waitForAndGetProvider();
                 }
                 Trace.traceEnd(16L);
                 if (response.status != 0 && response.status != 3) {
-                    throw new MissingWebViewPackageException("Failed to load WebView provider: " + getWebViewPreparationErrorReason(response.status));
+                    throw new MissingWebViewPackageException(
+                            "Failed to load WebView provider: "
+                                    + getWebViewPreparationErrorReason(response.status));
                 }
                 Trace.traceBegin(16L, "ActivityManager.addPackageDependency()");
                 try {
-                    ActivityManager.getService().addPackageDependency(response.packageInfo.packageName);
+                    ActivityManager.getService()
+                            .addPackageDependency(response.packageInfo.packageName);
                     Trace.traceEnd(16L);
                     PackageManager pm = initialApplication.getPackageManager();
                     Trace.traceBegin(16L, "PackageManager.getPackageInfo()");
                     try {
-                        PackageInfo newPackageInfo = pm.getPackageInfo(response.packageInfo.packageName, 268444864);
+                        PackageInfo newPackageInfo =
+                                pm.getPackageInfo(response.packageInfo.packageName, 268444864);
                         Trace.traceEnd(16L);
                         if (Flags.updateServiceV2() && !isInstalledPackage(newPackageInfo)) {
-                            throw new MissingWebViewPackageException(TextUtils.formatSimple("Current WebView Package (%s) is not installed for the current user", newPackageInfo.packageName));
+                            throw new MissingWebViewPackageException(
+                                    TextUtils.formatSimple(
+                                            "Current WebView Package (%s) is not installed for the"
+                                                + " current user",
+                                            newPackageInfo.packageName));
                         }
                         if (Flags.updateServiceV2() && !isEnabledPackage(newPackageInfo)) {
-                            throw new MissingWebViewPackageException(TextUtils.formatSimple("Current WebView Package (%s) is not enabled for the current user", newPackageInfo.packageName));
+                            throw new MissingWebViewPackageException(
+                                    TextUtils.formatSimple(
+                                            "Current WebView Package (%s) is not enabled for the"
+                                                + " current user",
+                                            newPackageInfo.packageName));
                         }
                         verifyPackageInfo(response.packageInfo, newPackageInfo);
                         ApplicationInfo ai = newPackageInfo.applicationInfo;
                         Trace.traceBegin(16L, "initialApplication.createApplicationContext");
                         sTimestamps.mCreateContextStart = SystemClock.uptimeMillis();
                         try {
-                            Context webViewContext = initialApplication.createApplicationContext(ai, 3);
+                            Context webViewContext =
+                                    initialApplication.createApplicationContext(ai, 3);
                             sPackageInfo = newPackageInfo;
                             return webViewContext;
                         } finally {
@@ -393,15 +455,28 @@ public final class WebViewFactory {
                 Context webViewContext = getWebViewContextAndSetProvider();
                 try {
                     Trace.traceEnd(16L);
-                    Log.i(LOGTAG, "Loading " + sPackageInfo.packageName + " version " + sPackageInfo.versionName + " (code " + sPackageInfo.getLongVersionCode() + NavigationBarInflaterView.KEY_CODE_END);
+                    Log.i(
+                            LOGTAG,
+                            "Loading "
+                                    + sPackageInfo.packageName
+                                    + " version "
+                                    + sPackageInfo.versionName
+                                    + " (code "
+                                    + sPackageInfo.getLongVersionCode()
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                     Trace.traceBegin(16L, "WebViewFactory.getChromiumProviderClass()");
                     try {
                         sTimestamps.mAddAssetsStart = SystemClock.uptimeMillis();
                         if (android.content.res.Flags.registerResourcePaths()) {
-                            Resources.registerResourcePaths(webViewContext.getPackageName(), webViewContext.getApplicationInfo());
+                            Resources.registerResourcePaths(
+                                    webViewContext.getPackageName(),
+                                    webViewContext.getApplicationInfo());
                         } else {
-                            for (String newAssetPath : webViewContext.getApplicationInfo().getAllApkPaths()) {
-                                initialApplication.getAssets().addAssetPathAsSharedLibrary(newAssetPath);
+                            for (String newAssetPath :
+                                    webViewContext.getApplicationInfo().getAllApkPaths()) {
+                                initialApplication
+                                        .getAssets()
+                                        .addAssetPathAsSharedLibrary(newAssetPath);
                             }
                         }
                         StartupTimestamps startupTimestamps = sTimestamps;
@@ -416,7 +491,8 @@ public final class WebViewFactory {
                         long uptimeMillis2 = SystemClock.uptimeMillis();
                         startupTimestamps4.mNativeLoadStart = uptimeMillis2;
                         startupTimestamps3.mGetClassLoaderEnd = uptimeMillis2;
-                        WebViewLibraryLoader.loadNativeLibrary(clazzLoader, getWebViewLibrary(sPackageInfo.applicationInfo));
+                        WebViewLibraryLoader.loadNativeLibrary(
+                                clazzLoader, getWebViewLibrary(sPackageInfo.applicationInfo));
                         Trace.traceEnd(16L);
                         Trace.traceBegin(16L, "Class.forName()");
                         StartupTimestamps startupTimestamps5 = sTimestamps;
@@ -470,6 +546,7 @@ public final class WebViewFactory {
     }
 
     static IWebViewUpdateService getUpdateServiceUnchecked() {
-        return IWebViewUpdateService.Stub.asInterface(ServiceManager.getService(WEBVIEW_UPDATE_SERVICE_NAME));
+        return IWebViewUpdateService.Stub.asInterface(
+                ServiceManager.getService(WEBVIEW_UPDATE_SERVICE_NAME));
     }
 }

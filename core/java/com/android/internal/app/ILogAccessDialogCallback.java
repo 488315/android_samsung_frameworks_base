@@ -16,12 +16,10 @@ public interface ILogAccessDialogCallback extends IInterface {
 
     public static class Default implements ILogAccessDialogCallback {
         @Override // com.android.internal.app.ILogAccessDialogCallback
-        public void approveAccessForClient(int uid, String packageName) throws RemoteException {
-        }
+        public void approveAccessForClient(int uid, String packageName) throws RemoteException {}
 
         @Override // com.android.internal.app.ILogAccessDialogCallback
-        public void declineAccessForClient(int uid, String packageName) throws RemoteException {
-        }
+        public void declineAccessForClient(int uid, String packageName) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ILogAccessDialogCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILogAccessDialogCallback {
+    public abstract static class Stub extends Binder implements ILogAccessDialogCallback {
         static final int TRANSACTION_approveAccessForClient = 1;
         static final int TRANSACTION_declineAccessForClient = 2;
 
@@ -70,7 +68,8 @@ public interface ILogAccessDialogCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ILogAccessDialogCallback.DESCRIPTOR);
             }

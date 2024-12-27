@@ -12,8 +12,8 @@ public interface IHdmiMhlVendorCommandListener extends IInterface {
 
     public static class Default implements IHdmiMhlVendorCommandListener {
         @Override // android.hardware.hdmi.IHdmiMhlVendorCommandListener
-        public void onReceived(int portId, int offset, int length, byte[] data) throws RemoteException {
-        }
+        public void onReceived(int portId, int offset, int length, byte[] data)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +21,9 @@ public interface IHdmiMhlVendorCommandListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHdmiMhlVendorCommandListener {
-        public static final String DESCRIPTOR = "android.hardware.hdmi.IHdmiMhlVendorCommandListener";
+    public abstract static class Stub extends Binder implements IHdmiMhlVendorCommandListener {
+        public static final String DESCRIPTOR =
+                "android.hardware.hdmi.IHdmiMhlVendorCommandListener";
         static final int TRANSACTION_onReceived = 1;
 
         public Stub() {
@@ -60,7 +61,8 @@ public interface IHdmiMhlVendorCommandListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -99,7 +101,8 @@ public interface IHdmiMhlVendorCommandListener extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiMhlVendorCommandListener
-            public void onReceived(int portId, int offset, int length, byte[] data) throws RemoteException {
+            public void onReceived(int portId, int offset, int length, byte[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

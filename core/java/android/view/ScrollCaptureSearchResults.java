@@ -4,7 +4,7 @@ import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.CancellationSignal;
 import android.util.IndentingPrintWriter;
-import android.view.ScrollCaptureSearchResults;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -17,12 +17,15 @@ public final class ScrollCaptureSearchResults {
     private static final int AFTER = 1;
     private static final int BEFORE = -1;
     private static final int EQUAL = 0;
-    static final Comparator<ScrollCaptureTarget> PRIORITY_ORDER = new Comparator() { // from class: android.view.ScrollCaptureSearchResults$$ExternalSyntheticLambda0
-        @Override // java.util.Comparator
-        public final int compare(Object obj, Object obj2) {
-            return ScrollCaptureSearchResults.lambda$static$1((ScrollCaptureTarget) obj, (ScrollCaptureTarget) obj2);
-        }
-    };
+    static final Comparator<ScrollCaptureTarget> PRIORITY_ORDER =
+            new Comparator() { // from class:
+                               // android.view.ScrollCaptureSearchResults$$ExternalSyntheticLambda0
+                @Override // java.util.Comparator
+                public final int compare(Object obj, Object obj2) {
+                    return ScrollCaptureSearchResults.lambda$static$1(
+                            (ScrollCaptureTarget) obj, (ScrollCaptureTarget) obj2);
+                }
+            };
     private int mCompleted;
     private final Executor mExecutor;
     private Runnable mOnCompleteListener;
@@ -40,16 +43,19 @@ public final class ScrollCaptureSearchResults {
         this.mComplete = false;
         final ScrollCaptureCallback callback = target.getCallback();
         final Consumer<Rect> consumer = new SearchRequest(target);
-        this.mExecutor.execute(new Runnable() { // from class: android.view.ScrollCaptureSearchResults$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                ScrollCaptureSearchResults.this.lambda$addTarget$0(callback, consumer);
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.view.ScrollCaptureSearchResults$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ScrollCaptureSearchResults.this.lambda$addTarget$0(callback, consumer);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$addTarget$0(ScrollCaptureCallback callback, Consumer consumer) {
+    public /* synthetic */ void lambda$addTarget$0(
+            ScrollCaptureCallback callback, Consumer consumer) {
         callback.onScrollCaptureSearch(this.mCancel, consumer);
     }
 
@@ -111,12 +117,15 @@ public final class ScrollCaptureSearchResults {
             if (this.mTarget == null || ScrollCaptureSearchResults.this.mCancel.isCanceled()) {
                 return;
             }
-            ScrollCaptureSearchResults.this.mExecutor.execute(new Runnable() { // from class: android.view.ScrollCaptureSearchResults$SearchRequest$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ScrollCaptureSearchResults.SearchRequest.this.lambda$accept$0(scrollBounds);
-                }
-            });
+            ScrollCaptureSearchResults.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.view.ScrollCaptureSearchResults$SearchRequest$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ScrollCaptureSearchResults.SearchRequest.this.lambda$accept$0(
+                                    scrollBounds);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -131,7 +140,8 @@ public final class ScrollCaptureSearchResults {
             }
             ScrollCaptureSearchResults.this.mCompleted++;
             this.mTarget = null;
-            if (ScrollCaptureSearchResults.this.mCompleted == ScrollCaptureSearchResults.this.mTargets.size()) {
+            if (ScrollCaptureSearchResults.this.mCompleted
+                    == ScrollCaptureSearchResults.this.mTargets.size()) {
                 ScrollCaptureSearchResults.this.signalComplete();
             }
         }
@@ -205,7 +215,10 @@ public final class ScrollCaptureSearchResults {
             writer.println("None");
         } else {
             for (int i = 0; i < this.mTargets.size(); i++) {
-                writer.println(NavigationBarInflaterView.SIZE_MOD_START + i + NavigationBarInflaterView.SIZE_MOD_END);
+                writer.println(
+                        NavigationBarInflaterView.SIZE_MOD_START
+                                + i
+                                + NavigationBarInflaterView.SIZE_MOD_END);
                 writer.increaseIndent();
                 this.mTargets.get(i).dump(writer);
                 writer.decreaseIndent();

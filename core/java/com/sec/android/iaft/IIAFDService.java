@@ -10,19 +10,29 @@ import android.os.RemoteException;
 public interface IIAFDService extends IInterface {
     public static final String DESCRIPTOR = "com.sec.android.iaft.IIAFDService";
 
-    boolean IAFDParse(String str, String str2, int i, int i2, int i3, String str3, String str4, String str5) throws RemoteException;
+    boolean IAFDParse(
+            String str, String str2, int i, int i2, int i3, String str3, String str4, String str5)
+            throws RemoteException;
 
     void IAFDShow(int i, int i2, String str) throws RemoteException;
 
     public static class Default implements IIAFDService {
         @Override // com.sec.android.iaft.IIAFDService
-        public boolean IAFDParse(String packageName, String nativeLibraryDir, int puserId, int appuid, int flags, String exceptionClassName, String exceptionMessage, String stackTrace) throws RemoteException {
+        public boolean IAFDParse(
+                String packageName,
+                String nativeLibraryDir,
+                int puserId,
+                int appuid,
+                int flags,
+                String exceptionClassName,
+                String exceptionMessage,
+                String stackTrace)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.sec.android.iaft.IIAFDService
-        public void IAFDShow(int puserId, int appuid, String packageName) throws RemoteException {
-        }
+        public void IAFDShow(int puserId, int appuid, String packageName) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +40,7 @@ public interface IIAFDService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIAFDService {
+    public abstract static class Stub extends Binder implements IIAFDService {
         static final int TRANSACTION_IAFDParse = 1;
         static final int TRANSACTION_IAFDShow = 2;
 
@@ -71,7 +81,8 @@ public interface IIAFDService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIAFDService.DESCRIPTOR);
             }
@@ -90,7 +101,8 @@ public interface IIAFDService extends IInterface {
                     String _arg6 = data.readString();
                     String _arg7 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result = IAFDParse(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
+                    boolean _result =
+                            IAFDParse(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
                     reply.writeNoException();
                     reply.writeBoolean(_result);
                     return true;
@@ -124,7 +136,16 @@ public interface IIAFDService extends IInterface {
             }
 
             @Override // com.sec.android.iaft.IIAFDService
-            public boolean IAFDParse(String packageName, String nativeLibraryDir, int puserId, int appuid, int flags, String exceptionClassName, String exceptionMessage, String stackTrace) throws RemoteException {
+            public boolean IAFDParse(
+                    String packageName,
+                    String nativeLibraryDir,
+                    int puserId,
+                    int appuid,
+                    int flags,
+                    String exceptionClassName,
+                    String exceptionMessage,
+                    String stackTrace)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -148,7 +169,8 @@ public interface IIAFDService extends IInterface {
             }
 
             @Override // com.sec.android.iaft.IIAFDService
-            public void IAFDShow(int puserId, int appuid, String packageName) throws RemoteException {
+            public void IAFDShow(int puserId, int appuid, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

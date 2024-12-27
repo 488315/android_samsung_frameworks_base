@@ -1,12 +1,15 @@
 package android.content.pm;
 
 import android.content.Context;
-import android.content.pm.IASKSManager;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Slog;
 import android.util.Xml;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,8 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class ASKSManager {
@@ -64,7 +65,9 @@ public class ASKSManager {
             return false;
         }
         synchronized (mASKSRestrictedPackages) {
-            if (mASKSRestrictedPackages.containsKey(packageName) && type != null && type.equals(mASKSRestrictedPackages.get(packageName))) {
+            if (mASKSRestrictedPackages.containsKey(packageName)
+                    && type != null
+                    && type.equals(mASKSRestrictedPackages.get(packageName))) {
                 isTarget = true;
             }
         }
@@ -156,7 +159,11 @@ public class ASKSManager {
             }
         }
         if (isExactlyTargetDevice) {
-            if ((uid <= 10000 || "com.samsung.android.messaging".equals(packageName) || "com.wsomacp".equals(packageName) || "com.samsung.android.dialer".equals(packageName)) && !packageName.contains(Context.CAMERA_SERVICE)) {
+            if ((uid <= 10000
+                            || "com.samsung.android.messaging".equals(packageName)
+                            || "com.wsomacp".equals(packageName)
+                            || "com.samsung.android.dialer".equals(packageName))
+                    && !packageName.contains(Context.CAMERA_SERVICE)) {
                 return false;
             }
             return true;
@@ -193,7 +200,9 @@ public class ASKSManager {
                 parser.setInput(fileReader);
                 String keyName = "";
                 ArrayList<String> values = null;
-                for (int eventType = parser.getEventType(); eventType != 1; eventType = parser.next()) {
+                for (int eventType = parser.getEventType();
+                        eventType != 1;
+                        eventType = parser.next()) {
                     String name = parser.getName();
                     switch (eventType) {
                         case 2:
@@ -203,7 +212,9 @@ public class ASKSManager {
                                 }
                                 values = new ArrayList<>();
                                 break;
-                            } else if (features.contains(name) && parser.getAttributeValue(0) != null && values != null) {
+                            } else if (features.contains(name)
+                                    && parser.getAttributeValue(0) != null
+                                    && values != null) {
                                 values.add(parser.getAttributeValue(0));
                                 break;
                             }

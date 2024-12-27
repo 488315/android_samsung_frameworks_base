@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.sec.clipboard.util.Log;
+
 import java.net.URISyntaxException;
 
 /* loaded from: classes5.dex */
@@ -52,7 +53,9 @@ public class SemIntentClipData extends SemClipData {
         switch (type) {
             case 8:
                 try {
-                    boolean result2 = ((SemIntentClipData) altData).setIntent(Intent.parseUri(this.mValue, 1));
+                    boolean result2 =
+                            ((SemIntentClipData) altData)
+                                    .setIntent(Intent.parseUri(this.mValue, 1));
                     break;
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
@@ -123,26 +126,23 @@ public class SemIntentClipData extends SemClipData {
     }
 
     public String toString() {
-        return "SemIntentClipData class. Value is " + ((Object) (this.mValue.length() > 20 ? this.mValue.subSequence(0, 20) : this.mValue));
+        return "SemIntentClipData class. Value is "
+                + ((Object)
+                        (this.mValue.length() > 20 ? this.mValue.subSequence(0, 20) : this.mValue));
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void toSave() {
-    }
+    public void toSave() {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void toLoad() {
-    }
+    public void toLoad() {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void convertForRemote() {
-    }
+    public void convertForRemote() {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void insertContentUri(Context context, String path) {
-    }
+    public void insertContentUri(Context context, String path) {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void deleteContentUri(Context context, String path) {
-    }
+    public void deleteContentUri(Context context, String path) {}
 }

@@ -4,14 +4,18 @@ import android.graphics.BaseCanvas;
 import android.graphics.Paint;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
-import java.lang.reflect.Array;
-import java.util.IdentityHashMap;
+
 import libcore.util.EmptyArray;
 
+import java.lang.reflect.Array;
+import java.util.IdentityHashMap;
+
 /* loaded from: classes4.dex */
-public class SpannableStringBuilder implements CharSequence, GetChars, Spannable, Editable, Appendable, GraphicsOperations {
+public class SpannableStringBuilder
+        implements CharSequence, GetChars, Spannable, Editable, Appendable, GraphicsOperations {
     private static final int END_MASK = 15;
     private static final int MARK = 1;
     private static final int PARAGRAPH = 3;
@@ -41,7 +45,8 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
     private char[] mText;
     private int mTextWatcherDepth;
     private static final InputFilter[] NO_FILTERS = new InputFilter[0];
-    private static final int[][] sCachedIntBuffer = (int[][]) Array.newInstance((Class<?>) Integer.TYPE, 6, 0);
+    private static final int[][] sCachedIntBuffer =
+            (int[][]) Array.newInstance((Class<?>) Integer.TYPE, 6, 0);
 
     public SpannableStringBuilder() {
         this("");
@@ -168,10 +173,20 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         boolean atEnd = where == length();
         if (where < this.mGapStart) {
             int overlap = this.mGapStart - where;
-            System.arraycopy(this.mText, where, this.mText, (this.mGapStart + this.mGapLength) - overlap, overlap);
+            System.arraycopy(
+                    this.mText,
+                    where,
+                    this.mText,
+                    (this.mGapStart + this.mGapLength) - overlap,
+                    overlap);
         } else {
             int overlap2 = where - this.mGapStart;
-            System.arraycopy(this.mText, (this.mGapLength + where) - overlap2, this.mText, this.mGapStart, overlap2);
+            System.arraycopy(
+                    this.mText,
+                    (this.mGapLength + where) - overlap2,
+                    this.mText,
+                    this.mGapStart,
+                    overlap2);
         }
         if (this.mSpanCount != 0) {
             for (int i = 0; i < this.mSpanCount; i++) {
@@ -182,7 +197,9 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
                 }
                 if (start > where) {
                     start += this.mGapLength;
-                } else if (start == where && ((flag = (this.mSpanFlags[i] & 240) >> 4) == 2 || (atEnd && flag == 3))) {
+                } else if (start == where
+                        && ((flag = (this.mSpanFlags[i] & 240) >> 4) == 2
+                                || (atEnd && flag == 3))) {
                     start += this.mGapLength;
                 }
                 if (end > this.mGapStart) {
@@ -190,7 +207,8 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
                 }
                 if (end > where) {
                     end += this.mGapLength;
-                } else if (end == where && ((flag2 = this.mSpanFlags[i] & 15) == 2 || (atEnd && flag2 == 3))) {
+                } else if (end == where
+                        && ((flag2 = this.mSpanFlags[i] & 15) == 2 || (atEnd && flag2 == 3))) {
                     end += this.mGapLength;
                 }
                 this.mSpanStarts[i] = start;
@@ -274,14 +292,25 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
     }
 
     private boolean removeSpansForChange(int start, int end, boolean textIsRemoved, int i) {
-        if ((i & 1) != 0 && resolveGap(this.mSpanMax[i]) >= start && removeSpansForChange(start, end, textIsRemoved, leftChild(i))) {
+        if ((i & 1) != 0
+                && resolveGap(this.mSpanMax[i]) >= start
+                && removeSpansForChange(start, end, textIsRemoved, leftChild(i))) {
             return true;
         }
         if (i >= this.mSpanCount) {
             return false;
         }
-        if ((this.mSpanFlags[i] & 33) != 33 || this.mSpanStarts[i] < start || this.mSpanStarts[i] >= this.mGapStart + this.mGapLength || this.mSpanEnds[i] < start || this.mSpanEnds[i] >= this.mGapStart + this.mGapLength || (!textIsRemoved && this.mSpanStarts[i] <= start && this.mSpanEnds[i] >= this.mGapStart)) {
-            return resolveGap(this.mSpanStarts[i]) <= end && (i & 1) != 0 && removeSpansForChange(start, end, textIsRemoved, rightChild(i));
+        if ((this.mSpanFlags[i] & 33) != 33
+                || this.mSpanStarts[i] < start
+                || this.mSpanStarts[i] >= this.mGapStart + this.mGapLength
+                || this.mSpanEnds[i] < start
+                || this.mSpanEnds[i] >= this.mGapStart + this.mGapLength
+                || (!textIsRemoved
+                        && this.mSpanStarts[i] <= start
+                        && this.mSpanEnds[i] >= this.mGapStart)) {
+            return resolveGap(this.mSpanStarts[i]) <= end
+                    && (i & 1) != 0
+                    && removeSpansForChange(start, end, textIsRemoved, rightChild(i));
         }
         this.mIndexOfSpan.remove(this.mSpans[i]);
         removeSpan(i, 0);
@@ -315,7 +344,8 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
                 int clen = length();
                 if (spanStart > start && spanStart <= end) {
                     spanStart = end;
-                    while (spanStart < clen && (spanStart <= end || charAt(spanStart - 1) != '\n')) {
+                    while (spanStart < clen
+                            && (spanStart <= end || charAt(spanStart - 1) != '\n')) {
                         spanStart++;
                     }
                 }
@@ -365,8 +395,8 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         }
         boolean textIsRemoved = replacementLength == 0;
         if (replacedLength > 0) {
-            while (this.mSpanCount > 0 && removeSpansForChange(start, end, textIsRemoved, treeRoot())) {
-            }
+            while (this.mSpanCount > 0
+                    && removeSpansForChange(start, end, textIsRemoved, treeRoot())) {}
         }
         this.mGapStart += nbNewChars;
         this.mGapLength -= nbNewChars;
@@ -379,11 +409,25 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             int i6 = 0;
             while (i6 < this.mSpanCount) {
                 int startFlag = (this.mSpanFlags[i6] & 240) >> 4;
-                this.mSpanStarts[i6] = updatedIntervalBound(this.mSpanStarts[i6], start, nbNewChars, startFlag, atEnd, textIsRemoved);
+                this.mSpanStarts[i6] =
+                        updatedIntervalBound(
+                                this.mSpanStarts[i6],
+                                start,
+                                nbNewChars,
+                                startFlag,
+                                atEnd,
+                                textIsRemoved);
                 int endFlag = this.mSpanFlags[i6] & 15;
                 int i7 = i6;
                 boolean textIsRemoved2 = textIsRemoved;
-                this.mSpanEnds[i7] = updatedIntervalBound(this.mSpanEnds[i6], start, nbNewChars, endFlag, atEnd, textIsRemoved2);
+                this.mSpanEnds[i7] =
+                        updatedIntervalBound(
+                                this.mSpanEnds[i6],
+                                start,
+                                nbNewChars,
+                                endFlag,
+                                atEnd,
+                                textIsRemoved2);
                 i6 = i7 + 1;
                 i3 = i3;
                 i4 = i4;
@@ -428,7 +472,8 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         }
     }
 
-    private int updatedIntervalBound(int offset, int start, int nbNewChars, int flag, boolean atEnd, boolean textIsRemoved) {
+    private int updatedIntervalBound(
+            int offset, int start, int nbNewChars, int flag, boolean atEnd, boolean textIsRemoved) {
         if (offset >= start && offset < this.mGapStart + this.mGapLength) {
             if (flag == 2) {
                 if (textIsRemoved || offset > start) {
@@ -479,7 +524,8 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
     }
 
     @Override // android.text.Editable
-    public SpannableStringBuilder replace(int start, int end, CharSequence tb, int tbstart, int tbend) {
+    public SpannableStringBuilder replace(
+            int start, int end, CharSequence tb, int tbstart, int tbend) {
         int selectionStart;
         int selectionEnd;
         TextWatcher[] textWatchers;
@@ -501,7 +547,8 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         int i2 = end - start;
         int newLen = tbend2 - tbstart2;
         if (i2 != 0 || newLen != 0 || hasNonExclusiveExclusiveSpanAt(tb2, tbstart2)) {
-            TextWatcher[] textWatchers2 = (TextWatcher[]) getSpans(start, start + i2, TextWatcher.class);
+            TextWatcher[] textWatchers2 =
+                    (TextWatcher[]) getSpans(start, start + i2, TextWatcher.class);
             sendBeforeTextChanged(textWatchers2, start, i2, newLen);
             boolean adjustSelection = (i2 == 0 || newLen == 0) ? false : true;
             if (!adjustSelection) {
@@ -525,7 +572,13 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
                     int offset = Math.toIntExact((newLen * diff) / i2);
                     selectionStart2 = start + offset;
                     textWatchers = textWatchers2;
-                    setSpan(false, Selection.SELECTION_START, selectionStart2, selectionStart2, 34, true);
+                    setSpan(
+                            false,
+                            Selection.SELECTION_START,
+                            selectionStart2,
+                            selectionStart2,
+                            34,
+                            true);
                     changed2 = true;
                 } else {
                     textWatchers = textWatchers2;
@@ -581,7 +634,9 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             Method dump skipped, instructions count: 198
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.SpannableStringBuilder.sendToSpanWatchers(int, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.text.SpannableStringBuilder.sendToSpanWatchers(int,"
+                    + " int, int):void");
     }
 
     @Override // android.text.Spannable
@@ -589,7 +644,8 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         setSpan(true, what, start, end, flags, true);
     }
 
-    private void setSpan(boolean send, Object what, int start, int end, int flags, boolean enforceParagraph) {
+    private void setSpan(
+            boolean send, Object what, int start, int end, int flags, boolean enforceParagraph) {
         int start2;
         int end2;
         Integer index;
@@ -601,7 +657,12 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             if (!enforceParagraph) {
                 return;
             } else {
-                throw new RuntimeException("PARAGRAPH span must start at paragraph boundary (" + start + " follows " + charAt(start - 1) + NavigationBarInflaterView.KEY_CODE_END);
+                throw new RuntimeException(
+                        "PARAGRAPH span must start at paragraph boundary ("
+                                + start
+                                + " follows "
+                                + charAt(start - 1)
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
         }
         int flagsEnd = flags & 15;
@@ -609,7 +670,12 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             if (!enforceParagraph) {
                 return;
             } else {
-                throw new RuntimeException("PARAGRAPH span must end at paragraph boundary (" + end + " follows " + charAt(end - 1) + NavigationBarInflaterView.KEY_CODE_END);
+                throw new RuntimeException(
+                        "PARAGRAPH span must end at paragraph boundary ("
+                                + end
+                                + " follows "
+                                + charAt(end - 1)
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
         }
         if (flagsStart == 2 && flagsEnd == 1 && start == end) {
@@ -621,7 +687,8 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         }
         if (start > this.mGapStart) {
             start2 = start + this.mGapLength;
-        } else if (start == this.mGapStart && (flagsStart == 2 || (flagsStart == 3 && start == length()))) {
+        } else if (start == this.mGapStart
+                && (flagsStart == 2 || (flagsStart == 3 && start == length()))) {
             start2 = start + this.mGapLength;
         } else {
             start2 = start;
@@ -638,7 +705,9 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             this.mSpanStarts = GrowingArrayUtils.append(this.mSpanStarts, this.mSpanCount, start2);
             this.mSpanEnds = GrowingArrayUtils.append(this.mSpanEnds, this.mSpanCount, end2);
             this.mSpanFlags = GrowingArrayUtils.append(this.mSpanFlags, this.mSpanCount, flags);
-            this.mSpanOrder = GrowingArrayUtils.append(this.mSpanOrder, this.mSpanCount, this.mSpanInsertCount);
+            this.mSpanOrder =
+                    GrowingArrayUtils.append(
+                            this.mSpanOrder, this.mSpanCount, this.mSpanInsertCount);
             invalidateIndex(this.mSpanCount);
             this.mSpanCount++;
             this.mSpanInsertCount++;
@@ -676,7 +745,9 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
     }
 
     private boolean isInvalidParagraph(int index, int flag) {
-        return (flag != 3 || index == 0 || index == length() || charAt(index + (-1)) == '\n') ? false : true;
+        return (flag != 3 || index == 0 || index == length() || charAt(index + (-1)) == '\n')
+                ? false
+                : true;
     }
 
     @Override // android.text.Spannable
@@ -773,7 +844,11 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
                 if (spanEnd > this.mGapStart) {
                     spanEnd -= this.mGapLength;
                 }
-                if (spanEnd >= queryStart && ((spanStart == spanEnd || queryStart == queryEnd || (spanStart != queryEnd && spanEnd != queryStart)) && (Object.class == kind || kind.isInstance(this.mSpans[i])))) {
+                if (spanEnd >= queryStart
+                        && ((spanStart == spanEnd
+                                        || queryStart == queryEnd
+                                        || (spanStart != queryEnd && spanEnd != queryStart))
+                                && (Object.class == kind || kind.isInstance(this.mSpans[i])))) {
                     count++;
                 }
                 if ((i & 1) != 0) {
@@ -793,12 +868,23 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private <T> int getSpansRec(int r20, int r21, java.lang.Class<T> r22, int r23, T[] r24, int[] r25, int[] r26, int r27, boolean r28) {
+    private <T> int getSpansRec(
+            int r20,
+            int r21,
+            java.lang.Class<T> r22,
+            int r23,
+            T[] r24,
+            int[] r25,
+            int[] r26,
+            int r27,
+            boolean r28) {
         /*
             Method dump skipped, instructions count: 234
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.text.SpannableStringBuilder.getSpansRec(int, int, java.lang.Class, int, java.lang.Object[], int[], int[], int, boolean):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.text.SpannableStringBuilder.getSpansRec(int, int,"
+                    + " java.lang.Class, int, java.lang.Object[], int[], int[], int, boolean):int");
     }
 
     private static int[] obtain(int elementCount) {
@@ -832,8 +918,7 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
     private static void recycle(int[] buffer) {
         synchronized (sCachedIntBuffer) {
             for (int i = 0; i < sCachedIntBuffer.length; i++) {
-                if (sCachedIntBuffer[i] != null && buffer.length <= sCachedIntBuffer[i].length) {
-                }
+                if (sCachedIntBuffer[i] != null && buffer.length <= sCachedIntBuffer[i].length) {}
                 sCachedIntBuffer[i] = buffer;
             }
         }
@@ -865,7 +950,8 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
         }
     }
 
-    private final <T> void siftDown(int index, T[] array, int size, int[] priority, int[] insertionOrder) {
+    private final <T> void siftDown(
+            int index, T[] array, int size, int[] priority, int[] insertionOrder) {
         int left = (index * 2) + 1;
         while (left < size) {
             if (left < size - 1 && compareSpans(left, left + 1, priority, insertionOrder) < 0) {
@@ -947,7 +1033,12 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             System.arraycopy(this.mText, this.mGapLength + start, dest, destoff, end - start);
         } else {
             System.arraycopy(this.mText, start, dest, destoff, this.mGapStart - start);
-            System.arraycopy(this.mText, this.mGapStart + this.mGapLength, dest, (this.mGapStart - start) + destoff, end - this.mGapStart);
+            System.arraycopy(
+                    this.mText,
+                    this.mGapStart + this.mGapLength,
+                    dest,
+                    (this.mGapStart - start) + destoff,
+                    end - this.mGapStart);
         }
     }
 
@@ -1011,26 +1102,38 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
     }
 
     private void sendSpanChanged(Object what, int oldStart, int oldEnd, int start, int end) {
-        SpanWatcher[] spanWatchers = (SpanWatcher[]) getSpans(Math.min(oldStart, start), Math.min(Math.max(oldEnd, end), length()), SpanWatcher.class);
+        SpanWatcher[] spanWatchers =
+                (SpanWatcher[])
+                        getSpans(
+                                Math.min(oldStart, start),
+                                Math.min(Math.max(oldEnd, end), length()),
+                                SpanWatcher.class);
         for (SpanWatcher spanWatcher : spanWatchers) {
             spanWatcher.onSpanChanged(this, what, oldStart, oldEnd, start, end);
         }
     }
 
     private static String region(int start, int end) {
-        return NavigationBarInflaterView.KEY_CODE_START + start + " ... " + end + NavigationBarInflaterView.KEY_CODE_END;
+        return NavigationBarInflaterView.KEY_CODE_START
+                + start
+                + " ... "
+                + end
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     private void checkRange(String operation, int start, int end) {
         if (end < start) {
-            throw new IndexOutOfBoundsException(operation + " " + region(start, end) + " has end before start");
+            throw new IndexOutOfBoundsException(
+                    operation + " " + region(start, end) + " has end before start");
         }
         int len = length();
         if (start > len || end > len) {
-            throw new IndexOutOfBoundsException(operation + " " + region(start, end) + " ends beyond length " + len);
+            throw new IndexOutOfBoundsException(
+                    operation + " " + region(start, end) + " ends beyond length " + len);
         }
         if (start < 0 || end < 0) {
-            throw new IndexOutOfBoundsException(operation + " " + region(start, end) + " starts before 0");
+            throw new IndexOutOfBoundsException(
+                    operation + " " + region(start, end) + " starts before 0");
         }
     }
 
@@ -1052,7 +1155,16 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
     }
 
     @Override // android.text.GraphicsOperations
-    public void drawTextRun(BaseCanvas c, int start, int end, int contextStart, int contextEnd, float x, float y, boolean isRtl, Paint p) {
+    public void drawTextRun(
+            BaseCanvas c,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            float x,
+            float y,
+            boolean isRtl,
+            Paint p) {
         checkRange("drawTextRun", start, end);
         int contextLen = contextEnd - contextStart;
         int len = end - start;
@@ -1061,7 +1173,16 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             return;
         }
         if (contextStart >= this.mGapStart) {
-            c.drawTextRun(this.mText, start + this.mGapLength, len, contextStart + this.mGapLength, contextLen, x, y, isRtl, p);
+            c.drawTextRun(
+                    this.mText,
+                    start + this.mGapLength,
+                    len,
+                    contextStart + this.mGapLength,
+                    contextLen,
+                    x,
+                    y,
+                    isRtl,
+                    p);
             return;
         }
         char[] buf = TextUtils.obtain(contextLen);
@@ -1109,44 +1230,93 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
     }
 
     @Override // android.text.GraphicsOperations
-    public float getTextRunAdvances(int start, int end, int contextStart, int contextEnd, boolean isRtl, float[] advances, int advancesPos, Paint p) {
+    public float getTextRunAdvances(
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            boolean isRtl,
+            float[] advances,
+            int advancesPos,
+            Paint p) {
         int contextLen = contextEnd - contextStart;
         int len = end - start;
         if (end <= this.mGapStart) {
-            float ret = p.getTextRunAdvances(this.mText, start, len, contextStart, contextLen, isRtl, advances, advancesPos);
+            float ret =
+                    p.getTextRunAdvances(
+                            this.mText,
+                            start,
+                            len,
+                            contextStart,
+                            contextLen,
+                            isRtl,
+                            advances,
+                            advancesPos);
             return ret;
         }
         if (start >= this.mGapStart) {
-            float ret2 = p.getTextRunAdvances(this.mText, start + this.mGapLength, len, contextStart + this.mGapLength, contextLen, isRtl, advances, advancesPos);
+            float ret2 =
+                    p.getTextRunAdvances(
+                            this.mText,
+                            start + this.mGapLength,
+                            len,
+                            contextStart + this.mGapLength,
+                            contextLen,
+                            isRtl,
+                            advances,
+                            advancesPos);
             return ret2;
         }
         char[] buf = TextUtils.obtain(contextLen);
         getChars(contextStart, contextEnd, buf, 0);
-        float ret3 = p.getTextRunAdvances(buf, start - contextStart, len, 0, contextLen, isRtl, advances, advancesPos);
+        float ret3 =
+                p.getTextRunAdvances(
+                        buf,
+                        start - contextStart,
+                        len,
+                        0,
+                        contextLen,
+                        isRtl,
+                        advances,
+                        advancesPos);
         TextUtils.recycle(buf);
         return ret3;
     }
 
     @Deprecated
-    public int getTextRunCursor(int contextStart, int contextEnd, int dir, int offset, int cursorOpt, Paint p) {
+    public int getTextRunCursor(
+            int contextStart, int contextEnd, int dir, int offset, int cursorOpt, Paint p) {
         return getTextRunCursor(contextStart, contextEnd, dir == 1, offset, cursorOpt, p);
     }
 
     @Override // android.text.GraphicsOperations
-    public int getTextRunCursor(int contextStart, int contextEnd, boolean isRtl, int offset, int cursorOpt, Paint p) {
+    public int getTextRunCursor(
+            int contextStart, int contextEnd, boolean isRtl, int offset, int cursorOpt, Paint p) {
         int contextLen = contextEnd - contextStart;
         if (contextEnd <= this.mGapStart) {
-            int ret = p.getTextRunCursor(this.mText, contextStart, contextLen, isRtl, offset, cursorOpt);
+            int ret =
+                    p.getTextRunCursor(
+                            this.mText, contextStart, contextLen, isRtl, offset, cursorOpt);
             return ret;
         }
         int ret2 = this.mGapStart;
         if (contextStart >= ret2) {
-            int ret3 = p.getTextRunCursor(this.mText, contextStart + this.mGapLength, contextLen, isRtl, offset + this.mGapLength, cursorOpt) - this.mGapLength;
+            int ret3 =
+                    p.getTextRunCursor(
+                                    this.mText,
+                                    contextStart + this.mGapLength,
+                                    contextLen,
+                                    isRtl,
+                                    offset + this.mGapLength,
+                                    cursorOpt)
+                            - this.mGapLength;
             return ret3;
         }
         char[] buf = TextUtils.obtain(contextLen);
         getChars(contextStart, contextEnd, buf, 0);
-        int ret4 = p.getTextRunCursor(buf, 0, contextLen, isRtl, offset - contextStart, cursorOpt) + contextStart;
+        int ret4 =
+                p.getTextRunCursor(buf, 0, contextLen, isRtl, offset - contextStart, cursorOpt)
+                        + contextStart;
         TextUtils.recycle(buf);
         return ret4;
     }
@@ -1174,10 +1344,16 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
                     Object thisSpan = thisSpans[i];
                     Object otherSpan = otherSpans[i];
                     if (thisSpan == this) {
-                        if (other != otherSpan || getSpanStart(thisSpan) != other.getSpanStart(otherSpan) || getSpanEnd(thisSpan) != other.getSpanEnd(otherSpan) || getSpanFlags(thisSpan) != other.getSpanFlags(otherSpan)) {
+                        if (other != otherSpan
+                                || getSpanStart(thisSpan) != other.getSpanStart(otherSpan)
+                                || getSpanEnd(thisSpan) != other.getSpanEnd(otherSpan)
+                                || getSpanFlags(thisSpan) != other.getSpanFlags(otherSpan)) {
                             return false;
                         }
-                    } else if (!thisSpan.equals(otherSpan) || getSpanStart(thisSpan) != other.getSpanStart(otherSpan) || getSpanEnd(thisSpan) != other.getSpanEnd(otherSpan) || getSpanFlags(thisSpan) != other.getSpanFlags(otherSpan)) {
+                    } else if (!thisSpan.equals(otherSpan)
+                            || getSpanStart(thisSpan) != other.getSpanStart(otherSpan)
+                            || getSpanEnd(thisSpan) != other.getSpanEnd(otherSpan)
+                            || getSpanFlags(thisSpan) != other.getSpanFlags(otherSpan)) {
                         return false;
                     }
                 }
@@ -1195,7 +1371,9 @@ public class SpannableStringBuilder implements CharSequence, GetChars, Spannable
             if (span != this) {
                 hash2 = (hash2 * 31) + span.hashCode();
             }
-            hash2 = (((((hash2 * 31) + getSpanStart(span)) * 31) + getSpanEnd(span)) * 31) + getSpanFlags(span);
+            hash2 =
+                    (((((hash2 * 31) + getSpanStart(span)) * 31) + getSpanEnd(span)) * 31)
+                            + getSpanFlags(span);
         }
         return hash2;
     }

@@ -2,7 +2,9 @@ package com.android.server.backup.remote;
 
 import android.os.Handler;
 import android.os.Looper;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -24,18 +26,24 @@ public final class RemoteCall {
     }
 
     public final RemoteResult call() {
-        Preconditions.checkState(!Looper.getMainLooper().isCurrentThread(), "Can't call call() on main thread");
+        Preconditions.checkState(
+                !Looper.getMainLooper().isCurrentThread(), "Can't call call() on main thread");
         if (!this.mFuture.isDone()) {
             long j = this.mTimeoutMs;
             if (j == 0) {
                 this.mFuture.complete(RemoteResult.FAILED_TIMED_OUT);
             } else {
-                Handler.getMain().postDelayed(new Runnable() { // from class: com.android.server.backup.remote.RemoteCall$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        RemoteCall.this.mFuture.complete(RemoteResult.FAILED_TIMED_OUT);
-                    }
-                }, j);
+                Handler.getMain()
+                        .postDelayed(
+                                new Runnable() { // from class:
+                                                 // com.android.server.backup.remote.RemoteCall$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        RemoteCall.this.mFuture.complete(
+                                                RemoteResult.FAILED_TIMED_OUT);
+                                    }
+                                },
+                                j);
                 this.mCallable.call(new FutureBackupCallback(this.mFuture));
             }
         }

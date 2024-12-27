@@ -3,7 +3,7 @@ package android.view;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseIntArray;
-import android.view.KeyCharacterMap;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.TimeUnit;
@@ -12,8 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class KeyEvent extends InputEvent implements Parcelable {
     public static final int ACTION_DOWN = 0;
 
-    @Deprecated
-    public static final int ACTION_MULTIPLE = 2;
+    @Deprecated public static final int ACTION_MULTIPLE = 2;
     public static final int ACTION_UP = 1;
     static final boolean DEBUG = false;
     public static final int FLAG_CANCELED = 32;
@@ -34,8 +33,7 @@ public class KeyEvent extends InputEvent implements Parcelable {
     public static final int FLAG_TRACKING = 512;
     public static final int FLAG_VIRTUAL_HARD_KEY = 64;
 
-    @Deprecated
-    public static final int FLAG_WOKE_HERE = 1;
+    @Deprecated public static final int FLAG_WOKE_HERE = 1;
     public static final int KEYCODE_0 = 7;
     public static final int KEYCODE_1 = 8;
     public static final int KEYCODE_11 = 227;
@@ -397,8 +395,7 @@ public class KeyEvent extends InputEvent implements Parcelable {
     private static final String LABEL_PREFIX = "KEYCODE_";
     public static final int LAST_KEYCODE = 318;
 
-    @Deprecated
-    public static final int MAX_KEYCODE = 84;
+    @Deprecated public static final int MAX_KEYCODE = 84;
     private static final int MAX_RECYCLED = 10;
     private static final int META_ALL_MASK = 7827711;
     public static final int META_ALT_LEFT_ON = 16;
@@ -474,26 +471,59 @@ public class KeyEvent extends InputEvent implements Parcelable {
     private int mRepeatCount;
     private int mScanCode;
     private int mSource;
-    private static final String[] META_SYMBOLIC_NAMES = {"META_SHIFT_ON", "META_ALT_ON", "META_SYM_ON", "META_FUNCTION_ON", "META_ALT_LEFT_ON", "META_ALT_RIGHT_ON", "META_SHIFT_LEFT_ON", "META_SHIFT_RIGHT_ON", "META_CAP_LOCKED", "META_ALT_LOCKED", "META_SYM_LOCKED", "0x00000800", "META_CTRL_ON", "META_CTRL_LEFT_ON", "META_CTRL_RIGHT_ON", "0x00008000", "META_META_ON", "META_META_LEFT_ON", "META_META_RIGHT_ON", "0x00080000", "META_CAPS_LOCK_ON", "META_NUM_LOCK_ON", "META_SCROLL_LOCK_ON", "0x00800000", "0x01000000", "0x02000000", "0x04000000", "0x08000000", "0x10000000", "0x20000000", "0x40000000", "0x80000000"};
-    private static final Object gRecyclerLock = new Object();
-    public static final Parcelable.Creator<KeyEvent> CREATOR = new Parcelable.Creator<KeyEvent>() { // from class: android.view.KeyEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyEvent createFromParcel(Parcel in) {
-            in.readInt();
-            return KeyEvent.createFromParcelBody(in);
-        }
-
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyEvent[] newArray(int size) {
-            return new KeyEvent[size];
-        }
+    private static final String[] META_SYMBOLIC_NAMES = {
+        "META_SHIFT_ON",
+        "META_ALT_ON",
+        "META_SYM_ON",
+        "META_FUNCTION_ON",
+        "META_ALT_LEFT_ON",
+        "META_ALT_RIGHT_ON",
+        "META_SHIFT_LEFT_ON",
+        "META_SHIFT_RIGHT_ON",
+        "META_CAP_LOCKED",
+        "META_ALT_LOCKED",
+        "META_SYM_LOCKED",
+        "0x00000800",
+        "META_CTRL_ON",
+        "META_CTRL_LEFT_ON",
+        "META_CTRL_RIGHT_ON",
+        "0x00008000",
+        "META_META_ON",
+        "META_META_LEFT_ON",
+        "META_META_RIGHT_ON",
+        "0x00080000",
+        "META_CAPS_LOCK_ON",
+        "META_NUM_LOCK_ON",
+        "META_SCROLL_LOCK_ON",
+        "0x00800000",
+        "0x01000000",
+        "0x02000000",
+        "0x04000000",
+        "0x08000000",
+        "0x10000000",
+        "0x20000000",
+        "0x40000000",
+        "0x80000000"
     };
+    private static final Object gRecyclerLock = new Object();
+    public static final Parcelable.Creator<KeyEvent> CREATOR =
+            new Parcelable.Creator<KeyEvent>() { // from class: android.view.KeyEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyEvent createFromParcel(Parcel in) {
+                    in.readInt();
+                    return KeyEvent.createFromParcelBody(in);
+                }
+
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyEvent[] newArray(int size) {
+                    return new KeyEvent[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface Action {
-    }
+    @interface Action {}
 
     public interface Callback {
         boolean onKeyDown(int i, KeyEvent keyEvent);
@@ -506,12 +536,10 @@ public class KeyEvent extends InputEvent implements Parcelable {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface Flag {
-    }
+    @interface Flag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface MetaState {
-    }
+    @interface MetaState {}
 
     private static native int nativeKeyCodeFromString(String str);
 
@@ -547,23 +575,95 @@ public class KeyEvent extends InputEvent implements Parcelable {
         this(downTime, eventTime, action, code, repeat, 0, -1, 0, 0, 0, (String) null);
     }
 
-    public KeyEvent(long downTime, long eventTime, int action, int code, int repeat, int metaState) {
+    public KeyEvent(
+            long downTime, long eventTime, int action, int code, int repeat, int metaState) {
         this(downTime, eventTime, action, code, repeat, metaState, -1, 0, 0, 0, (String) null);
     }
 
-    public KeyEvent(long downTime, long eventTime, int action, int code, int repeat, int metaState, int deviceId, int scancode) {
-        this(downTime, eventTime, action, code, repeat, metaState, deviceId, scancode, 0, 0, (String) null);
+    public KeyEvent(
+            long downTime,
+            long eventTime,
+            int action,
+            int code,
+            int repeat,
+            int metaState,
+            int deviceId,
+            int scancode) {
+        this(
+                downTime,
+                eventTime,
+                action,
+                code,
+                repeat,
+                metaState,
+                deviceId,
+                scancode,
+                0,
+                0,
+                (String) null);
     }
 
-    public KeyEvent(long downTime, long eventTime, int action, int code, int repeat, int metaState, int deviceId, int scancode, int flags) {
-        this(downTime, eventTime, action, code, repeat, metaState, deviceId, scancode, flags, 0, (String) null);
+    public KeyEvent(
+            long downTime,
+            long eventTime,
+            int action,
+            int code,
+            int repeat,
+            int metaState,
+            int deviceId,
+            int scancode,
+            int flags) {
+        this(
+                downTime,
+                eventTime,
+                action,
+                code,
+                repeat,
+                metaState,
+                deviceId,
+                scancode,
+                flags,
+                0,
+                (String) null);
     }
 
-    public KeyEvent(long downTime, long eventTime, int action, int code, int repeat, int metaState, int deviceId, int scancode, int flags, int source) {
-        this(downTime, eventTime, action, code, repeat, metaState, deviceId, scancode, flags, source, (String) null);
+    public KeyEvent(
+            long downTime,
+            long eventTime,
+            int action,
+            int code,
+            int repeat,
+            int metaState,
+            int deviceId,
+            int scancode,
+            int flags,
+            int source) {
+        this(
+                downTime,
+                eventTime,
+                action,
+                code,
+                repeat,
+                metaState,
+                deviceId,
+                scancode,
+                flags,
+                source,
+                (String) null);
     }
 
-    private KeyEvent(long downTime, long eventTime, int action, int code, int repeat, int metaState, int deviceId, int scancode, int flags, int source, String characters) {
+    private KeyEvent(
+            long downTime,
+            long eventTime,
+            int action,
+            int code,
+            int repeat,
+            int metaState,
+            int deviceId,
+            int scancode,
+            int flags,
+            int source,
+            String characters) {
         this.mDisplayId = -1;
         this.mId = nativeNextId();
         this.mDownTime = TimeUnit.NANOSECONDS.convert(downTime, TimeUnit.MILLISECONDS);
@@ -579,7 +679,18 @@ public class KeyEvent extends InputEvent implements Parcelable {
         this.mCharacters = characters;
     }
 
-    public KeyEvent(long downTime, long eventTime, int action, int code, int repeat, int metaState, int deviceId, int scancode, int flags, int source, int displayId) {
+    public KeyEvent(
+            long downTime,
+            long eventTime,
+            int action,
+            int code,
+            int repeat,
+            int metaState,
+            int deviceId,
+            int scancode,
+            int flags,
+            int source,
+            int displayId) {
         this.mDisplayId = -1;
         this.mId = nativeNextId();
         this.mDownTime = downTime;
@@ -600,15 +711,36 @@ public class KeyEvent extends InputEvent implements Parcelable {
     }
 
     public KeyEvent(KeyEvent origEvent) {
-        this(origEvent, origEvent.mId, origEvent.mEventTime, origEvent.mAction, origEvent.mRepeatCount, origEvent.mHmac == null ? null : (byte[]) origEvent.mHmac.clone(), origEvent.mCharacters);
+        this(
+                origEvent,
+                origEvent.mId,
+                origEvent.mEventTime,
+                origEvent.mAction,
+                origEvent.mRepeatCount,
+                origEvent.mHmac == null ? null : (byte[]) origEvent.mHmac.clone(),
+                origEvent.mCharacters);
     }
 
     @Deprecated
     public KeyEvent(KeyEvent origEvent, long eventTime, int newRepeat) {
-        this(origEvent, nativeNextId(), TimeUnit.NANOSECONDS.convert(eventTime, TimeUnit.MILLISECONDS), origEvent.mAction, newRepeat, null, origEvent.mCharacters);
+        this(
+                origEvent,
+                nativeNextId(),
+                TimeUnit.NANOSECONDS.convert(eventTime, TimeUnit.MILLISECONDS),
+                origEvent.mAction,
+                newRepeat,
+                null,
+                origEvent.mCharacters);
     }
 
-    private KeyEvent(KeyEvent origEvent, int id, long eventTime, int action, int newRepeat, byte[] hmac, String characters) {
+    private KeyEvent(
+            KeyEvent origEvent,
+            int id,
+            long eventTime,
+            int action,
+            int newRepeat,
+            byte[] hmac,
+            String characters) {
         this.mDisplayId = -1;
         this.mId = id;
         this.mDownTime = origEvent.mDownTime;
@@ -640,7 +772,21 @@ public class KeyEvent extends InputEvent implements Parcelable {
         }
     }
 
-    private static KeyEvent obtain(int id, long downTimeNanos, long eventTimeNanos, int action, int code, int repeat, int metaState, int deviceId, int scancode, int flags, int source, int displayId, byte[] hmac, String characters) {
+    private static KeyEvent obtain(
+            int id,
+            long downTimeNanos,
+            long eventTimeNanos,
+            int action,
+            int code,
+            int repeat,
+            int metaState,
+            int deviceId,
+            int scancode,
+            int flags,
+            int source,
+            int displayId,
+            byte[] hmac,
+            String characters) {
         KeyEvent ev = obtain();
         ev.mId = id;
         ev.mDownTime = downTimeNanos;
@@ -659,12 +805,61 @@ public class KeyEvent extends InputEvent implements Parcelable {
         return ev;
     }
 
-    public static KeyEvent obtain(long downTime, long eventTime, int action, int code, int repeat, int metaState, int deviceId, int scanCode, int flags, int source, int displayId, String characters) {
-        return obtain(nativeNextId(), TimeUnit.NANOSECONDS.convert(downTime, TimeUnit.MILLISECONDS), TimeUnit.NANOSECONDS.convert(eventTime, TimeUnit.MILLISECONDS), action, code, repeat, metaState, deviceId, scanCode, flags, source, displayId, null, characters);
+    public static KeyEvent obtain(
+            long downTime,
+            long eventTime,
+            int action,
+            int code,
+            int repeat,
+            int metaState,
+            int deviceId,
+            int scanCode,
+            int flags,
+            int source,
+            int displayId,
+            String characters) {
+        return obtain(
+                nativeNextId(),
+                TimeUnit.NANOSECONDS.convert(downTime, TimeUnit.MILLISECONDS),
+                TimeUnit.NANOSECONDS.convert(eventTime, TimeUnit.MILLISECONDS),
+                action,
+                code,
+                repeat,
+                metaState,
+                deviceId,
+                scanCode,
+                flags,
+                source,
+                displayId,
+                null,
+                characters);
     }
 
-    public static KeyEvent obtain(long downTime, long eventTime, int action, int code, int repeat, int metaState, int deviceId, int scancode, int flags, int source, String characters) {
-        return obtain(downTime, eventTime, action, code, repeat, metaState, deviceId, scancode, flags, source, -1, characters);
+    public static KeyEvent obtain(
+            long downTime,
+            long eventTime,
+            int action,
+            int code,
+            int repeat,
+            int metaState,
+            int deviceId,
+            int scancode,
+            int flags,
+            int source,
+            String characters) {
+        return obtain(
+                downTime,
+                eventTime,
+                action,
+                code,
+                repeat,
+                metaState,
+                deviceId,
+                scancode,
+                flags,
+                source,
+                -1,
+                characters);
     }
 
     public static KeyEvent obtain(KeyEvent other) {
@@ -705,8 +900,7 @@ public class KeyEvent extends InputEvent implements Parcelable {
     }
 
     @Override // android.view.InputEvent
-    public final void recycleIfNeededAfterDispatch() {
-    }
+    public final void recycleIfNeededAfterDispatch() {}
 
     @Override // android.view.InputEvent
     public int getId() {
@@ -717,7 +911,8 @@ public class KeyEvent extends InputEvent implements Parcelable {
         return new KeyEvent(event, eventTime, newRepeat);
     }
 
-    public static KeyEvent changeTimeRepeat(KeyEvent event, long eventTime, int newRepeat, int newFlags) {
+    public static KeyEvent changeTimeRepeat(
+            KeyEvent event, long eventTime, int newRepeat, int newFlags) {
         KeyEvent ret = new KeyEvent(event);
         ret.mId = nativeNextId();
         ret.mEventTime = TimeUnit.NANOSECONDS.convert(eventTime, TimeUnit.MILLISECONDS);
@@ -727,7 +922,14 @@ public class KeyEvent extends InputEvent implements Parcelable {
     }
 
     private KeyEvent(KeyEvent origEvent, int action) {
-        this(origEvent, nativeNextId(), origEvent.mEventTime, action, origEvent.mRepeatCount, null, null);
+        this(
+                origEvent,
+                nativeNextId(),
+                origEvent.mEventTime,
+                action,
+                origEvent.mRepeatCount,
+                null,
+                null);
     }
 
     public static KeyEvent changeAction(KeyEvent event, int action) {
@@ -1010,18 +1212,50 @@ public class KeyEvent extends InputEvent implements Parcelable {
 
     public static boolean metaStateHasModifiers(int metaState, int modifiers) {
         if ((META_INVALID_MODIFIER_MASK & modifiers) == 0) {
-            return metaStateFilterDirectionalModifiers(metaStateFilterDirectionalModifiers(metaStateFilterDirectionalModifiers(metaStateFilterDirectionalModifiers(normalizeMetaState(metaState) & META_MODIFIER_MASK, modifiers, 1, 64, 128), modifiers, 2, 16, 32), modifiers, 4096, 8192, 16384), modifiers, 65536, 131072, 262144) == modifiers;
+            return metaStateFilterDirectionalModifiers(
+                            metaStateFilterDirectionalModifiers(
+                                    metaStateFilterDirectionalModifiers(
+                                            metaStateFilterDirectionalModifiers(
+                                                    normalizeMetaState(metaState)
+                                                            & META_MODIFIER_MASK,
+                                                    modifiers,
+                                                    1,
+                                                    64,
+                                                    128),
+                                            modifiers,
+                                            2,
+                                            16,
+                                            32),
+                                    modifiers,
+                                    4096,
+                                    8192,
+                                    16384),
+                            modifiers,
+                            65536,
+                            131072,
+                            262144)
+                    == modifiers;
         }
-        throw new IllegalArgumentException("modifiers must not contain META_CAPS_LOCK_ON, META_NUM_LOCK_ON, META_SCROLL_LOCK_ON, META_CAP_LOCKED, META_ALT_LOCKED, META_SYM_LOCKED, or META_SELECTING");
+        throw new IllegalArgumentException(
+                "modifiers must not contain META_CAPS_LOCK_ON, META_NUM_LOCK_ON,"
+                    + " META_SCROLL_LOCK_ON, META_CAP_LOCKED, META_ALT_LOCKED, META_SYM_LOCKED, or"
+                    + " META_SELECTING");
     }
 
-    private static int metaStateFilterDirectionalModifiers(int metaState, int modifiers, int basic, int left, int right) {
+    private static int metaStateFilterDirectionalModifiers(
+            int metaState, int modifiers, int basic, int left, int right) {
         boolean wantBasic = (modifiers & basic) != 0;
         int directional = left | right;
         boolean wantLeftOrRight = (modifiers & directional) != 0;
         if (wantBasic) {
             if (wantLeftOrRight) {
-                throw new IllegalArgumentException("modifiers must not contain " + metaStateToString(basic) + " combined with " + metaStateToString(left) + " or " + metaStateToString(right));
+                throw new IllegalArgumentException(
+                        "modifiers must not contain "
+                                + metaStateToString(basic)
+                                + " combined with "
+                                + metaStateToString(left)
+                                + " or "
+                                + metaStateToString(right));
             }
             return (~directional) & metaState;
         }
@@ -1374,7 +1608,8 @@ public class KeyEvent extends InputEvent implements Parcelable {
     }
 
     private static boolean keyCodeIsValid(int keyCode) {
-        return ((keyCode >= 0 && keyCode <= 318) || (keyCode >= 1000 && keyCode <= 1103)) && keyCode != 1001;
+        return ((keyCode >= 0 && keyCode <= 318) || (keyCode >= 1000 && keyCode <= 1103))
+                && keyCode != 1001;
     }
 
     public static String metaStateToString(int metaState) {

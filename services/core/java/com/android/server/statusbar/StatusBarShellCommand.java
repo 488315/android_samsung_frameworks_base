@@ -9,9 +9,11 @@ import android.os.RemoteException;
 import android.os.ShellCommand;
 import android.service.quicksettings.TileService;
 import android.util.Pair;
+
 import com.android.internal.util.GcUtils;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,8 +24,7 @@ public final class StatusBarShellCommand extends ShellCommand {
     public final StatusBarManagerService mInterface;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class StatusBarShellCommandToken extends Binder {
-    }
+    public final class StatusBarShellCommandToken extends Binder {}
 
     public StatusBarShellCommand(StatusBarManagerService statusBarManagerService, Context context) {
         this.mInterface = statusBarManagerService;
@@ -165,10 +166,12 @@ public final class StatusBarShellCommand extends ShellCommand {
                     this.mInterface.collapsePanels();
                     return 0;
                 case 3:
-                    this.mInterface.addTile(ComponentName.unflattenFromString(getNextArgRequired()));
+                    this.mInterface.addTile(
+                            ComponentName.unflattenFromString(getNextArgRequired()));
                     return 0;
                 case 4:
-                    this.mInterface.remTile(ComponentName.unflattenFromString(getNextArgRequired()));
+                    this.mInterface.remTile(
+                            ComponentName.unflattenFromString(getNextArgRequired()));
                     return 0;
                 case 5:
                     StatusBarManagerService statusBarManagerService = this.mInterface;
@@ -182,14 +185,17 @@ public final class StatusBarShellCommand extends ShellCommand {
                     }
                     return 0;
                 case 6:
-                    this.mInterface.clickTile(ComponentName.unflattenFromString(getNextArgRequired()));
+                    this.mInterface.clickTile(
+                            ComponentName.unflattenFromString(getNextArgRequired()));
                     return 0;
                 case 7:
-                    getOutPrintWriter().println(String.valueOf(TileService.isQuickSettingsSupported()));
+                    getOutPrintWriter()
+                            .println(String.valueOf(TileService.isQuickSettingsSupported()));
                     return 0;
                 case '\b':
                     PrintWriter outPrintWriter = getOutPrintWriter();
-                    for (String str2 : this.mInterface.mContext.getResources().getStringArray(17236322)) {
+                    for (String str2 :
+                            this.mInterface.mContext.getResources().getStringArray(17236322)) {
                         outPrintWriter.println(str2);
                     }
                     return 0;
@@ -199,12 +205,14 @@ public final class StatusBarShellCommand extends ShellCommand {
                     if (Boolean.parseBoolean(nextArgRequired2)) {
                         StatusBarManagerService statusBarManagerService2 = this.mInterface;
                         StatusBarShellCommandToken statusBarShellCommandToken = sToken;
-                        statusBarManagerService2.disable(61145088, statusBarShellCommandToken, packageName);
+                        statusBarManagerService2.disable(
+                                61145088, statusBarShellCommandToken, packageName);
                         this.mInterface.disable2(0, statusBarShellCommandToken, packageName);
                     } else {
                         StatusBarManagerService statusBarManagerService3 = this.mInterface;
                         StatusBarShellCommandToken statusBarShellCommandToken2 = sToken;
-                        statusBarManagerService3.disable(0, statusBarShellCommandToken2, packageName);
+                        statusBarManagerService3.disable(
+                                0, statusBarShellCommandToken2, packageName);
                         this.mInterface.disable2(0, statusBarShellCommandToken2, packageName);
                     }
                     return 0;
@@ -245,7 +253,8 @@ public final class StatusBarShellCommand extends ShellCommand {
                     return 0;
             }
         } catch (RemoteException e) {
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote exception: ", e, getOutPrintWriter());
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    "Remote exception: ", e, getOutPrintWriter());
             return -1;
         }
     }
@@ -256,18 +265,78 @@ public final class StatusBarShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println("");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  expand-notifications", "    Open the notifications panel.", "", "  expand-settings");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Open the notifications panel and expand quick settings if present.", "", "  collapse", "    Collapse the notifications and settings panel.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "", "  add-tile COMPONENT", "    Add a TileService of the specified component", "");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  remove-tile COMPONENT", "    Remove a TileService of the specified component", "", "  set-tiles LIST-OF-TILES");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Sets the list of tiles as the current Quick Settings tiles", "", "  click-tile COMPONENT", "    Click on a TileService of the specified component");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "", "  check-support", "    Check if this device supports QS + APIs", "");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  get-status-icons", "    Print the list of status bar icons and the order they appear in", "", "  disable-for-setup DISABLE");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    If true, disable status bar components unsuitable for device setup", "", "  send-disable-flag FLAG...", "    Send zero or more disable flags (parsed individually) to StatusBarManager");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Valid options:", "        <blank>             - equivalent to \"none\"", "        none                - re-enables all components", "        search              - disable search");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "        home                - disable naviagation home", "        recents             - disable recents/overview", "        notification-peek   - disable notification peeking", "        statusbar-expansion - disable status bar expansion");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "        system-icons        - disable system icons appearing in status bar", "        clock               - disable clock appearing in status bar", "        notification-icons  - disable notification icons from status bar", "");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  tracing (start | stop)", "    Start or stop SystemUI tracing", "", "  NOTE: any command not listed here will be passed through to IStatusBar");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  expand-notifications",
+                "    Open the notifications panel.",
+                "",
+                "  expand-settings");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Open the notifications panel and expand quick settings if present.",
+                "",
+                "  collapse",
+                "    Collapse the notifications and settings panel.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "",
+                "  add-tile COMPONENT",
+                "    Add a TileService of the specified component",
+                "");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  remove-tile COMPONENT",
+                "    Remove a TileService of the specified component",
+                "",
+                "  set-tiles LIST-OF-TILES");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Sets the list of tiles as the current Quick Settings tiles",
+                "",
+                "  click-tile COMPONENT",
+                "    Click on a TileService of the specified component");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "",
+                "  check-support",
+                "    Check if this device supports QS + APIs",
+                "");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  get-status-icons",
+                "    Print the list of status bar icons and the order they appear in",
+                "",
+                "  disable-for-setup DISABLE");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    If true, disable status bar components unsuitable for device setup",
+                "",
+                "  send-disable-flag FLAG...",
+                "    Send zero or more disable flags (parsed individually) to StatusBarManager");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Valid options:",
+                "        <blank>             - equivalent to \"none\"",
+                "        none                - re-enables all components",
+                "        search              - disable search");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "        home                - disable naviagation home",
+                "        recents             - disable recents/overview",
+                "        notification-peek   - disable notification peeking",
+                "        statusbar-expansion - disable status bar expansion");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "        system-icons        - disable system icons appearing in status bar",
+                "        clock               - disable clock appearing in status bar",
+                "        notification-icons  - disable notification icons from status bar",
+                "");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  tracing (start | stop)",
+                "    Start or stop SystemUI tracing",
+                "",
+                "  NOTE: any command not listed here will be passed through to IStatusBar");
         outPrintWriter.println("");
         outPrintWriter.println("  Commands implemented in SystemUI:");
         outPrintWriter.flush();
@@ -312,6 +381,7 @@ public final class StatusBarShellCommand extends ShellCommand {
         int intValue = ((Integer) flags.first).intValue();
         StatusBarShellCommandToken statusBarShellCommandToken = sToken;
         statusBarManagerService.disable(intValue, statusBarShellCommandToken, packageName);
-        this.mInterface.disable2(((Integer) flags.second).intValue(), statusBarShellCommandToken, packageName);
+        this.mInterface.disable2(
+                ((Integer) flags.second).intValue(), statusBarShellCommandToken, packageName);
     }
 }

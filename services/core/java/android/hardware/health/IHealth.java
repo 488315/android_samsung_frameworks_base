@@ -110,7 +110,8 @@ public interface IHealth extends IInterface {
                 try {
                     obtain.writeInterfaceToken(IHealth.DESCRIPTOR);
                     if (!this.mRemote.transact(6, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method getCurrentAverageMicroamps is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCurrentAverageMicroamps is unimplemented.");
                     }
                     obtain2.readException();
                     return obtain2.readInt();
@@ -126,7 +127,8 @@ public interface IHealth extends IInterface {
                 try {
                     obtain.writeInterfaceToken(IHealth.DESCRIPTOR);
                     if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method getCurrentNowMicroamps is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCurrentNowMicroamps is unimplemented.");
                     }
                     obtain2.readException();
                     return obtain2.readInt();

@@ -7,17 +7,18 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes4.dex */
 public final class VoLteServiceState implements Parcelable {
-    public static final Parcelable.Creator<VoLteServiceState> CREATOR = new Parcelable.Creator() { // from class: android.telephony.VoLteServiceState.1
-        @Override // android.os.Parcelable.Creator
-        public VoLteServiceState createFromParcel(Parcel in) {
-            return new VoLteServiceState(in);
-        }
+    public static final Parcelable.Creator<VoLteServiceState> CREATOR =
+            new Parcelable.Creator() { // from class: android.telephony.VoLteServiceState.1
+                @Override // android.os.Parcelable.Creator
+                public VoLteServiceState createFromParcel(Parcel in) {
+                    return new VoLteServiceState(in);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public VoLteServiceState[] newArray(int size) {
-            return new VoLteServiceState[size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public VoLteServiceState[] newArray(int size) {
+                    return new VoLteServiceState[size];
+                }
+            };
     private static final boolean DBG = false;
     public static final int HANDOVER_CANCELED = 3;
     public static final int HANDOVER_COMPLETED = 1;
@@ -70,8 +71,7 @@ public final class VoLteServiceState implements Parcelable {
         return 0;
     }
 
-    public void validateInput() {
-    }
+    public void validateInput() {}
 
     public int hashCode() {
         return this.mSrvccState * 31;

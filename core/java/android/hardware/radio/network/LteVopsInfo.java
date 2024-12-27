@@ -3,25 +3,28 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class LteVopsInfo implements Parcelable {
-    public static final Parcelable.Creator<LteVopsInfo> CREATOR = new Parcelable.Creator<LteVopsInfo>() { // from class: android.hardware.radio.network.LteVopsInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LteVopsInfo createFromParcel(Parcel _aidl_source) {
-            LteVopsInfo _aidl_out = new LteVopsInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<LteVopsInfo> CREATOR =
+            new Parcelable.Creator<
+                    LteVopsInfo>() { // from class: android.hardware.radio.network.LteVopsInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LteVopsInfo createFromParcel(Parcel _aidl_source) {
+                    LteVopsInfo _aidl_out = new LteVopsInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LteVopsInfo[] newArray(int _aidl_size) {
-            return new LteVopsInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LteVopsInfo[] newArray(int _aidl_size) {
+                    return new LteVopsInfo[_aidl_size];
+                }
+            };
     public boolean isVopsSupported = false;
     public boolean isEmcBearerSupported = false;
 

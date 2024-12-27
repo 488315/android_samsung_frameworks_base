@@ -1,6 +1,5 @@
 package android.media.session;
 
-import android.media.session.MediaSession;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,14 +9,17 @@ import android.view.KeyEvent;
 
 /* loaded from: classes2.dex */
 public interface IOnMediaKeyEventDispatchedListener extends IInterface {
-    public static final String DESCRIPTOR = "android.media.session.IOnMediaKeyEventDispatchedListener";
+    public static final String DESCRIPTOR =
+            "android.media.session.IOnMediaKeyEventDispatchedListener";
 
-    void onMediaKeyEventDispatched(KeyEvent keyEvent, String str, MediaSession.Token token) throws RemoteException;
+    void onMediaKeyEventDispatched(KeyEvent keyEvent, String str, MediaSession.Token token)
+            throws RemoteException;
 
     public static class Default implements IOnMediaKeyEventDispatchedListener {
         @Override // android.media.session.IOnMediaKeyEventDispatchedListener
-        public void onMediaKeyEventDispatched(KeyEvent event, String packageName, MediaSession.Token sessionToken) throws RemoteException {
-        }
+        public void onMediaKeyEventDispatched(
+                KeyEvent event, String packageName, MediaSession.Token sessionToken)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +27,7 @@ public interface IOnMediaKeyEventDispatchedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnMediaKeyEventDispatchedListener {
+    public abstract static class Stub extends Binder implements IOnMediaKeyEventDispatchedListener {
         static final int TRANSACTION_onMediaKeyEventDispatched = 1;
 
         public Stub() {
@@ -63,7 +65,8 @@ public interface IOnMediaKeyEventDispatchedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOnMediaKeyEventDispatchedListener.DESCRIPTOR);
             }
@@ -75,7 +78,8 @@ public interface IOnMediaKeyEventDispatchedListener extends IInterface {
                 case 1:
                     KeyEvent _arg0 = (KeyEvent) data.readTypedObject(KeyEvent.CREATOR);
                     String _arg1 = data.readString();
-                    MediaSession.Token _arg2 = (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
+                    MediaSession.Token _arg2 =
+                            (MediaSession.Token) data.readTypedObject(MediaSession.Token.CREATOR);
                     data.enforceNoDataAvail();
                     onMediaKeyEventDispatched(_arg0, _arg1, _arg2);
                     return true;
@@ -101,7 +105,9 @@ public interface IOnMediaKeyEventDispatchedListener extends IInterface {
             }
 
             @Override // android.media.session.IOnMediaKeyEventDispatchedListener
-            public void onMediaKeyEventDispatched(KeyEvent event, String packageName, MediaSession.Token sessionToken) throws RemoteException {
+            public void onMediaKeyEventDispatched(
+                    KeyEvent event, String packageName, MediaSession.Token sessionToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOnMediaKeyEventDispatchedListener.DESCRIPTOR);

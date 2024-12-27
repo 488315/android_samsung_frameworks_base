@@ -7,6 +7,7 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
+
 import java.util.Calendar;
 
 @Deprecated
@@ -42,23 +43,29 @@ public class DigitalClock extends TextView {
         this.mTickerStopped = false;
         super.onAttachedToWindow();
         this.mFormatChangeObserver = new FormatChangeObserver();
-        getContext().getContentResolver().registerContentObserver(Settings.System.CONTENT_URI, true, this.mFormatChangeObserver);
+        getContext()
+                .getContentResolver()
+                .registerContentObserver(
+                        Settings.System.CONTENT_URI, true, this.mFormatChangeObserver);
         setFormat();
         this.mHandler = new Handler();
-        this.mTicker = new Runnable() { // from class: android.widget.DigitalClock.1
-            @Override // java.lang.Runnable
-            public void run() {
-                if (DigitalClock.this.mTickerStopped) {
-                    return;
-                }
-                DigitalClock.this.mCalendar.setTimeInMillis(System.currentTimeMillis());
-                DigitalClock.this.lambda$setTextAsync$0(DateFormat.format(DigitalClock.this.mFormat, DigitalClock.this.mCalendar));
-                DigitalClock.this.invalidate();
-                long now = SystemClock.uptimeMillis();
-                long next = (1000 - (now % 1000)) + now;
-                DigitalClock.this.mHandler.postAtTime(DigitalClock.this.mTicker, next);
-            }
-        };
+        this.mTicker =
+                new Runnable() { // from class: android.widget.DigitalClock.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        if (DigitalClock.this.mTickerStopped) {
+                            return;
+                        }
+                        DigitalClock.this.mCalendar.setTimeInMillis(System.currentTimeMillis());
+                        DigitalClock.this.lambda$setTextAsync$0(
+                                DateFormat.format(
+                                        DigitalClock.this.mFormat, DigitalClock.this.mCalendar));
+                        DigitalClock.this.invalidate();
+                        long now = SystemClock.uptimeMillis();
+                        long next = (1000 - (now % 1000)) + now;
+                        DigitalClock.this.mHandler.postAtTime(DigitalClock.this.mTicker, next);
+                    }
+                };
         this.mTicker.run();
     }
 

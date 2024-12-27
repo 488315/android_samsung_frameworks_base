@@ -5,7 +5,9 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.telephony.SipMessageParsingUtils;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Objects;
@@ -20,19 +22,20 @@ public final class SipMessage implements Parcelable {
     private final String mStartLine;
     private final String mViaBranchParam;
     private static final boolean IS_DEBUGGING = Build.IS_ENG;
-    public static final Parcelable.Creator<SipMessage> CREATOR = new Parcelable.Creator<SipMessage>() { // from class: android.telephony.ims.SipMessage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SipMessage createFromParcel(Parcel source) {
-            return new SipMessage(source);
-        }
+    public static final Parcelable.Creator<SipMessage> CREATOR =
+            new Parcelable.Creator<SipMessage>() { // from class: android.telephony.ims.SipMessage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SipMessage createFromParcel(Parcel source) {
+                    return new SipMessage(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SipMessage[] newArray(int size) {
-            return new SipMessage[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SipMessage[] newArray(int size) {
+                    return new SipMessage[size];
+                }
+            };
 
     public SipMessage(String startLine, String headerSection, byte[] content) {
         Objects.requireNonNull(startLine, "Required parameter is null: startLine");
@@ -43,7 +46,8 @@ public final class SipMessage implements Parcelable {
         this.mContent = content;
         this.mViaBranchParam = SipMessageParsingUtils.getTransactionId(this.mHeaderSection);
         if (TextUtils.isEmpty(this.mViaBranchParam)) {
-            throw new IllegalArgumentException("header section MUST contain a branch parameter inside of the Via header.");
+            throw new IllegalArgumentException(
+                    "header section MUST contain a branch parameter inside of the Via header.");
         }
         this.mCallIdParam = SipMessageParsingUtils.getCallId(this.mHeaderSection);
     }
@@ -127,7 +131,9 @@ public final class SipMessage implements Parcelable {
             return false;
         }
         SipMessage that = (SipMessage) o;
-        if (this.mStartLine.equals(that.mStartLine) && this.mHeaderSection.equals(that.mHeaderSection) && Arrays.equals(this.mContent, that.mContent)) {
+        if (this.mStartLine.equals(that.mStartLine)
+                && this.mHeaderSection.equals(that.mHeaderSection)
+                && Arrays.equals(this.mContent, that.mContent)) {
             return true;
         }
         return false;
@@ -139,7 +145,8 @@ public final class SipMessage implements Parcelable {
     }
 
     public byte[] toEncodedMessage() {
-        byte[] header = (this.mStartLine + this.mHeaderSection + CRLF).getBytes(StandardCharsets.UTF_8);
+        byte[] header =
+                (this.mStartLine + this.mHeaderSection + CRLF).getBytes(StandardCharsets.UTF_8);
         byte[] sipMessage = new byte[header.length + this.mContent.length];
         System.arraycopy(header, 0, sipMessage, 0, header.length);
         System.arraycopy(this.mContent, 0, sipMessage, header.length, this.mContent.length);

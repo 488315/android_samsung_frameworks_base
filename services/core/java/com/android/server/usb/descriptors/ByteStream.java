@@ -59,7 +59,10 @@ public final class ByteStream {
         }
         int unsignedByte = getUnsignedByte();
         int unsignedByte2 = getUnsignedByte();
-        return (getUnsignedByte() << 24) | (getUnsignedByte() << 16) | (unsignedByte2 << 8) | unsignedByte;
+        return (getUnsignedByte() << 24)
+                | (getUnsignedByte() << 16)
+                | (unsignedByte2 << 8)
+                | unsignedByte;
     }
 
     public final int unpackUsbShort() {

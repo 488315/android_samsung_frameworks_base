@@ -2,7 +2,9 @@ package com.android.server.pm;
 
 import android.content.pm.UserInfo;
 import android.util.SparseArray;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -86,11 +88,13 @@ public final class UserJourneyLogger {
         synchronized (this.mLock) {
             try {
                 int userJourneyKey = getUserJourneyKey(i, i2);
-                UserJourneySession userJourneySession = (UserJourneySession) this.mUserIdToUserJourneyMap.get(userJourneyKey);
+                UserJourneySession userJourneySession =
+                        (UserJourneySession) this.mUserIdToUserJourneyMap.get(userJourneyKey);
                 if (userJourneySession == null) {
                     return null;
                 }
-                logUserLifecycleEventOccurred(userJourneySession, i, journeyToEvent(userJourneySession.mJourney), 4, 2);
+                logUserLifecycleEventOccurred(
+                        userJourneySession, i, journeyToEvent(userJourneySession.mJourney), 4, 2);
                 logUserLifecycleJourneyReported(userJourneySession, i2, -1, i, 0, -1, 2);
                 this.mUserIdToUserJourneyMap.remove(userJourneyKey);
                 return userJourneySession;
@@ -104,9 +108,17 @@ public final class UserJourneyLogger {
         synchronized (this.mLock) {
             try {
                 int userJourneyKey = getUserJourneyKey(userInfo.id, 9);
-                UserJourneySession userJourneySession = (UserJourneySession) this.mUserIdToUserJourneyMap.get(userJourneyKey);
+                UserJourneySession userJourneySession =
+                        (UserJourneySession) this.mUserIdToUserJourneyMap.get(userJourneyKey);
                 if (userJourneySession != null) {
-                    logUserLifecycleJourneyReported(userJourneySession, 9, i, userInfo.id, getUserTypeForStatsd(userInfo.userType), userInfo.flags, i2);
+                    logUserLifecycleJourneyReported(
+                            userJourneySession,
+                            9,
+                            i,
+                            userInfo.id,
+                            getUserTypeForStatsd(userInfo.userType),
+                            userInfo.flags,
+                            i2);
                     this.mUserIdToUserJourneyMap.remove(userJourneyKey);
                 }
             } catch (Throwable th) {
@@ -118,9 +130,11 @@ public final class UserJourneyLogger {
     public final void logNullUserJourneyError(int i, int i2, int i3, int i4, String str) {
         synchronized (this.mLock) {
             int userJourneyKey = getUserJourneyKey(i3, i);
-            UserJourneySession userJourneySession = (UserJourneySession) this.mUserIdToUserJourneyMap.get(userJourneyKey);
+            UserJourneySession userJourneySession =
+                    (UserJourneySession) this.mUserIdToUserJourneyMap.get(userJourneyKey);
             logUserLifecycleEventOccurred(userJourneySession, i3, journeyToEvent(i), 4, 4);
-            logUserLifecycleJourneyReported(userJourneySession, i, i2, i3, getUserTypeForStatsd(str), i4, 4);
+            logUserLifecycleJourneyReported(
+                    userJourneySession, i, i2, i3, getUserTypeForStatsd(str), i4, 4);
             this.mUserIdToUserJourneyMap.remove(userJourneyKey);
         }
     }
@@ -132,12 +146,14 @@ public final class UserJourneyLogger {
             int userJourneyKey = getUserJourneyKey(i, i2);
             userJourneySession = new UserJourneySession(nextLong, i2);
             this.mUserIdToUserJourneyMap.append(userJourneyKey, userJourneySession);
-            logUserLifecycleEventOccurred(userJourneySession, i, journeyToEvent(userJourneySession.mJourney), 1, -1);
+            logUserLifecycleEventOccurred(
+                    userJourneySession, i, journeyToEvent(userJourneySession.mJourney), 1, -1);
         }
         return userJourneySession;
     }
 
-    public final UserJourneySession logUserJourneyFinishWithError(int i, UserInfo userInfo, int i2, int i3) {
+    public final UserJourneySession logUserJourneyFinishWithError(
+            int i, UserInfo userInfo, int i2, int i3) {
         int i4;
         synchronized (this.mLock) {
             if (i3 != -1) {
@@ -151,12 +167,25 @@ public final class UserJourneyLogger {
             int i5 = i4;
             try {
                 int userJourneyKey = getUserJourneyKey(userInfo.id, i2);
-                UserJourneySession userJourneySession = (UserJourneySession) this.mUserIdToUserJourneyMap.get(userJourneyKey);
+                UserJourneySession userJourneySession =
+                        (UserJourneySession) this.mUserIdToUserJourneyMap.get(userJourneyKey);
                 if (userJourneySession == null) {
                     return null;
                 }
-                logUserLifecycleEventOccurred(userJourneySession, userInfo.id, journeyToEvent(userJourneySession.mJourney), i5, i3);
-                logUserLifecycleJourneyReported(userJourneySession, i2, i, userInfo.id, getUserTypeForStatsd(userInfo.userType), userInfo.flags, i3);
+                logUserLifecycleEventOccurred(
+                        userJourneySession,
+                        userInfo.id,
+                        journeyToEvent(userJourneySession.mJourney),
+                        i5,
+                        i3);
+                logUserLifecycleJourneyReported(
+                        userJourneySession,
+                        i2,
+                        i,
+                        userInfo.id,
+                        getUserTypeForStatsd(userInfo.userType),
+                        userInfo.flags,
+                        i3);
                 this.mUserIdToUserJourneyMap.remove(userJourneyKey);
                 return userJourneySession;
             } catch (Throwable th) {
@@ -178,7 +207,8 @@ public final class UserJourneyLogger {
                     }
                     int keyAt = this.mUserIdToUserJourneyMap.keyAt(i4);
                     if (keyAt / 100 == i) {
-                        userJourneySession = (UserJourneySession) this.mUserIdToUserJourneyMap.get(keyAt);
+                        userJourneySession =
+                                (UserJourneySession) this.mUserIdToUserJourneyMap.get(keyAt);
                         break;
                     }
                     i4++;
@@ -189,7 +219,8 @@ public final class UserJourneyLogger {
         logUserLifecycleEventOccurred(userJourneySession, i, i2, i3, -1);
     }
 
-    public void logUserLifecycleEventOccurred(UserJourneySession userJourneySession, int i, int i2, int i3, int i4) {
+    public void logUserLifecycleEventOccurred(
+            UserJourneySession userJourneySession, int i, int i2, int i3, int i4) {
         if (userJourneySession == null) {
             writeUserLifecycleEventOccurred(-1L, i, i2, 4, 0);
         } else {
@@ -197,11 +228,20 @@ public final class UserJourneyLogger {
         }
     }
 
-    public void logUserLifecycleJourneyReported(UserJourneySession userJourneySession, int i, int i2, int i3, int i4, int i5, int i6) {
+    public void logUserLifecycleJourneyReported(
+            UserJourneySession userJourneySession, int i, int i2, int i3, int i4, int i5, int i6) {
         if (userJourneySession == null) {
             writeUserLifecycleJourneyReported(-1L, i, i2, i3, i4, i5, 0, -1L);
         } else {
-            writeUserLifecycleJourneyReported(userJourneySession.mSessionId, i, i2, i3, i4, i5, i6, System.currentTimeMillis() - userJourneySession.mStartTimeInMills);
+            writeUserLifecycleJourneyReported(
+                    userJourneySession.mSessionId,
+                    i,
+                    i2,
+                    i3,
+                    i4,
+                    i5,
+                    i6,
+                    System.currentTimeMillis() - userJourneySession.mStartTimeInMills);
         }
     }
 
@@ -227,7 +267,8 @@ public final class UserJourneyLogger {
         FrameworkStatsLog.write(FrameworkStatsLog.USER_LIFECYCLE_EVENT_OCCURRED, j, i, i2, i3, i4);
     }
 
-    public void writeUserLifecycleJourneyReported(long j, int i, int i2, int i3, int i4, int i5, int i6, long j2) {
+    public void writeUserLifecycleJourneyReported(
+            long j, int i, int i2, int i3, int i4, int i5, int i6, long j2) {
         FrameworkStatsLog.write(264, j, i, i2, i3, i4, i5, i6, j2);
     }
 }

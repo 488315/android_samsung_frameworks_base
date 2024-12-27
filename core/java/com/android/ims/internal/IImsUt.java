@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.ims.internal.IImsUtListener;
 
 /* loaded from: classes5.dex */
 public interface IImsUt extends IInterface {
@@ -44,9 +43,11 @@ public interface IImsUt extends IInterface {
 
     int updateCallBarring(int i, int i2, String[] strArr) throws RemoteException;
 
-    int updateCallBarringForServiceClass(int i, int i2, String[] strArr, int i3) throws RemoteException;
+    int updateCallBarringForServiceClass(int i, int i2, String[] strArr, int i3)
+            throws RemoteException;
 
-    int updateCallBarringWithPassword(int i, int i2, String[] strArr, int i3, String str) throws RemoteException;
+    int updateCallBarringWithPassword(int i, int i2, String[] strArr, int i3, String str)
+            throws RemoteException;
 
     int updateCallForward(int i, int i2, String str, int i3, int i4) throws RemoteException;
 
@@ -54,8 +55,7 @@ public interface IImsUt extends IInterface {
 
     public static class Default implements IImsUt {
         @Override // com.android.ims.internal.IImsUt
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsUt
         public int queryCallBarring(int cbType) throws RemoteException {
@@ -98,12 +98,15 @@ public interface IImsUt extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsUt
-        public int updateCallBarring(int cbType, int action, String[] barrList) throws RemoteException {
+        public int updateCallBarring(int cbType, int action, String[] barrList)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.ims.internal.IImsUt
-        public int updateCallForward(int action, int condition, String number, int serviceClass, int timeSeconds) throws RemoteException {
+        public int updateCallForward(
+                int action, int condition, String number, int serviceClass, int timeSeconds)
+                throws RemoteException {
             return 0;
         }
 
@@ -133,21 +136,25 @@ public interface IImsUt extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsUt
-        public void setListener(IImsUtListener listener) throws RemoteException {
-        }
+        public void setListener(IImsUtListener listener) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsUt
-        public int queryCallBarringForServiceClass(int cbType, int serviceClass) throws RemoteException {
+        public int queryCallBarringForServiceClass(int cbType, int serviceClass)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.ims.internal.IImsUt
-        public int updateCallBarringForServiceClass(int cbType, int action, String[] barrList, int serviceClass) throws RemoteException {
+        public int updateCallBarringForServiceClass(
+                int cbType, int action, String[] barrList, int serviceClass)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.ims.internal.IImsUt
-        public int updateCallBarringWithPassword(int cbType, int action, String[] barrList, int serviceClass, String password) throws RemoteException {
+        public int updateCallBarringWithPassword(
+                int cbType, int action, String[] barrList, int serviceClass, String password)
+                throws RemoteException {
             return 0;
         }
 
@@ -162,7 +169,7 @@ public interface IImsUt extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsUt {
+    public abstract static class Stub extends Binder implements IImsUt {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsUt";
         static final int TRANSACTION_close = 1;
         static final int TRANSACTION_isUssdEnabled = 21;
@@ -261,7 +268,8 @@ public interface IImsUt extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -378,7 +386,8 @@ public interface IImsUt extends IInterface {
                     reply.writeInt(_result15);
                     return true;
                 case 17:
-                    IImsUtListener _arg011 = IImsUtListener.Stub.asInterface(data.readStrongBinder());
+                    IImsUtListener _arg011 =
+                            IImsUtListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setListener(_arg011);
                     reply.writeNoException();
@@ -397,7 +406,8 @@ public interface IImsUt extends IInterface {
                     String[] _arg23 = data.createStringArray();
                     int _arg32 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result17 = updateCallBarringForServiceClass(_arg013, _arg16, _arg23, _arg32);
+                    int _result17 =
+                            updateCallBarringForServiceClass(_arg013, _arg16, _arg23, _arg32);
                     reply.writeNoException();
                     reply.writeInt(_result17);
                     return true;
@@ -408,7 +418,8 @@ public interface IImsUt extends IInterface {
                     int _arg33 = data.readInt();
                     String _arg42 = data.readString();
                     data.enforceNoDataAvail();
-                    int _result18 = updateCallBarringWithPassword(_arg014, _arg17, _arg24, _arg33, _arg42);
+                    int _result18 =
+                            updateCallBarringWithPassword(_arg014, _arg17, _arg24, _arg33, _arg42);
                     reply.writeNoException();
                     reply.writeInt(_result18);
                     return true;
@@ -585,7 +596,8 @@ public interface IImsUt extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUt
-            public int updateCallBarring(int cbType, int action, String[] barrList) throws RemoteException {
+            public int updateCallBarring(int cbType, int action, String[] barrList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -604,7 +616,9 @@ public interface IImsUt extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUt
-            public int updateCallForward(int action, int condition, String number, int serviceClass, int timeSeconds) throws RemoteException {
+            public int updateCallForward(
+                    int action, int condition, String number, int serviceClass, int timeSeconds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -726,7 +740,8 @@ public interface IImsUt extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUt
-            public int queryCallBarringForServiceClass(int cbType, int serviceClass) throws RemoteException {
+            public int queryCallBarringForServiceClass(int cbType, int serviceClass)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -744,7 +759,9 @@ public interface IImsUt extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUt
-            public int updateCallBarringForServiceClass(int cbType, int action, String[] barrList, int serviceClass) throws RemoteException {
+            public int updateCallBarringForServiceClass(
+                    int cbType, int action, String[] barrList, int serviceClass)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -764,7 +781,9 @@ public interface IImsUt extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUt
-            public int updateCallBarringWithPassword(int cbType, int action, String[] barrList, int serviceClass, String password) throws RemoteException {
+            public int updateCallBarringWithPassword(
+                    int cbType, int action, String[] barrList, int serviceClass, String password)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

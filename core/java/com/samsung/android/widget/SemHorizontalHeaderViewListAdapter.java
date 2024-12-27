@@ -8,6 +8,7 @@ import android.widget.Filterable;
 import android.widget.ListAdapter;
 import android.widget.SemHorizontalListView;
 import android.widget.WrapperListAdapter;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -20,7 +21,10 @@ public class SemHorizontalHeaderViewListAdapter implements WrapperListAdapter, F
     ArrayList<SemHorizontalListView.FixedViewInfo> mHeaderViewInfos;
     private final boolean mIsFilterable;
 
-    public SemHorizontalHeaderViewListAdapter(ArrayList<SemHorizontalListView.FixedViewInfo> headerViewInfos, ArrayList<SemHorizontalListView.FixedViewInfo> footerViewInfos, ListAdapter adapter) {
+    public SemHorizontalHeaderViewListAdapter(
+            ArrayList<SemHorizontalListView.FixedViewInfo> headerViewInfos,
+            ArrayList<SemHorizontalListView.FixedViewInfo> footerViewInfos,
+            ListAdapter adapter) {
         this.mAdapter = adapter;
         this.mIsFilterable = adapter instanceof Filterable;
         if (headerViewInfos == null) {
@@ -33,7 +37,9 @@ public class SemHorizontalHeaderViewListAdapter implements WrapperListAdapter, F
         } else {
             this.mFooterViewInfos = footerViewInfos;
         }
-        this.mAreAllFixedViewsSelectable = areAllListInfosSelectable(this.mHeaderViewInfos) && areAllListInfosSelectable(this.mFooterViewInfos);
+        this.mAreAllFixedViewsSelectable =
+                areAllListInfosSelectable(this.mHeaderViewInfos)
+                        && areAllListInfosSelectable(this.mFooterViewInfos);
     }
 
     public int getHeadersCount() {
@@ -49,7 +55,8 @@ public class SemHorizontalHeaderViewListAdapter implements WrapperListAdapter, F
         return this.mAdapter == null || this.mAdapter.isEmpty();
     }
 
-    private boolean areAllListInfosSelectable(ArrayList<SemHorizontalListView.FixedViewInfo> infos) {
+    private boolean areAllListInfosSelectable(
+            ArrayList<SemHorizontalListView.FixedViewInfo> infos) {
         if (infos != null) {
             Iterator<SemHorizontalListView.FixedViewInfo> it = infos.iterator();
             while (it.hasNext()) {
@@ -75,7 +82,8 @@ public class SemHorizontalHeaderViewListAdapter implements WrapperListAdapter, F
                 i++;
             } else {
                 this.mHeaderViewInfos.remove(i);
-                if (areAllListInfosSelectable(this.mHeaderViewInfos) && areAllListInfosSelectable(this.mFooterViewInfos)) {
+                if (areAllListInfosSelectable(this.mHeaderViewInfos)
+                        && areAllListInfosSelectable(this.mFooterViewInfos)) {
                     z = true;
                 }
                 this.mAreAllFixedViewsSelectable = z;
@@ -96,7 +104,8 @@ public class SemHorizontalHeaderViewListAdapter implements WrapperListAdapter, F
                 i++;
             } else {
                 this.mFooterViewInfos.remove(i);
-                if (areAllListInfosSelectable(this.mHeaderViewInfos) && areAllListInfosSelectable(this.mFooterViewInfos)) {
+                if (areAllListInfosSelectable(this.mHeaderViewInfos)
+                        && areAllListInfosSelectable(this.mFooterViewInfos)) {
                     z = true;
                 }
                 this.mAreAllFixedViewsSelectable = z;

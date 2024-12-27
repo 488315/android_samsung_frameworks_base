@@ -9,6 +9,7 @@ import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
+
 import java.io.PrintWriter;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -22,7 +23,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class AudioSystemAdapter implements AudioSystem.RoutingUpdateCallback, AudioSystem.VolumeRangeInitRequestCallback {
+public final class AudioSystemAdapter
+        implements AudioSystem.RoutingUpdateCallback, AudioSystem.VolumeRangeInitRequestCallback {
     public static OnRoutingUpdatedListener sRoutingListener;
     public static AudioSystemAdapter sSingletonDefaultAdapter;
     public static OnVolRangeInitRequestListener sVolRangeInitReqListener;
@@ -56,7 +58,8 @@ public final class AudioSystemAdapter implements AudioSystem.RoutingUpdateCallba
                     AudioSystem.setRoutingCallback(audioSystemAdapter2);
                     AudioSystem.setVolumeRangeInitRequestCallback(sSingletonDefaultAdapter);
                     synchronized (sDeviceCacheLock) {
-                        sSingletonDefaultAdapter.mDevicesForAttrCache = new ConcurrentHashMap(AudioSystem.getNumStreamTypes());
+                        sSingletonDefaultAdapter.mDevicesForAttrCache =
+                                new ConcurrentHashMap(AudioSystem.getNumStreamTypes());
                         sSingletonDefaultAdapter.mMethodCacheHit = new int[1];
                     }
                 }
@@ -70,17 +73,34 @@ public final class AudioSystemAdapter implements AudioSystem.RoutingUpdateCallba
 
     public final void dump(PrintWriter printWriter) {
         printWriter.println("\nAudioSystemAdapter:");
-        DateTimeFormatter withZone = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss:SSS").withLocale(Locale.US).withZone(ZoneId.systemDefault());
+        DateTimeFormatter withZone =
+                DateTimeFormatter.ofPattern("MM-dd HH:mm:ss:SSS")
+                        .withLocale(Locale.US)
+                        .withZone(ZoneId.systemDefault());
         synchronized (sDeviceCacheLock) {
-            printWriter.println(" last cache clear time: " + withZone.format(Instant.ofEpochMilli(this.mDevicesForAttributesCacheClearTimeMs)));
+            printWriter.println(
+                    " last cache clear time: "
+                            + withZone.format(
+                                    Instant.ofEpochMilli(
+                                            this.mDevicesForAttributesCacheClearTimeMs)));
             printWriter.println(" mDevicesForAttrCache:");
             ConcurrentHashMap concurrentHashMap = this.mDevicesForAttrCache;
             if (concurrentHashMap != null) {
                 for (Map.Entry entry : concurrentHashMap.entrySet()) {
-                    AudioAttributes audioAttributes = (AudioAttributes) ((Pair) entry.getKey()).first;
+                    AudioAttributes audioAttributes =
+                            (AudioAttributes) ((Pair) entry.getKey()).first;
                     try {
                         int volumeControlStream = audioAttributes.getVolumeControlStream();
-                        printWriter.println("\t" + audioAttributes + " forVolume: " + ((Pair) entry.getKey()).second + " stream: " + AudioSystem.STREAM_NAMES[volumeControlStream] + "(" + volumeControlStream + ")");
+                        printWriter.println(
+                                "\t"
+                                        + audioAttributes
+                                        + " forVolume: "
+                                        + ((Pair) entry.getKey()).second
+                                        + " stream: "
+                                        + AudioSystem.STREAM_NAMES[volumeControlStream]
+                                        + "("
+                                        + volumeControlStream
+                                        + ")");
                         Iterator it = ((ArrayList) entry.getValue()).iterator();
                         while (it.hasNext()) {
                             printWriter.println("\t\t" + ((AudioDeviceAttributes) it.next()));
@@ -139,13 +159,18 @@ public final class AudioSystemAdapter implements AudioSystem.RoutingUpdateCallba
         synchronized (this.mRegisteredAttributesMap) {
             int beginBroadcast = this.mDevicesForAttributesCallbacks.beginBroadcast();
             for (int i = 0; i < beginBroadcast; i++) {
-                IDevicesForAttributesCallback broadcastItem = this.mDevicesForAttributesCallbacks.getBroadcastItem(i);
-                List<Pair> list = (List) this.mRegisteredAttributesMap.get(broadcastItem.asBinder());
+                IDevicesForAttributesCallback broadcastItem =
+                        this.mDevicesForAttributesCallbacks.getBroadcastItem(i);
+                List<Pair> list =
+                        (List) this.mRegisteredAttributesMap.get(broadcastItem.asBinder());
                 if (list == null) {
                     throw new IllegalStateException("Attribute list must not be null");
                 }
                 for (Pair pair : list) {
-                    ArrayList devicesForAttributes = getDevicesForAttributes((AudioAttributes) pair.first, ((Boolean) pair.second).booleanValue());
+                    ArrayList devicesForAttributes =
+                            getDevicesForAttributes(
+                                    (AudioAttributes) pair.first,
+                                    ((Boolean) pair.second).booleanValue());
                     if (this.mLastDevicesForAttr.containsKey(pair)) {
                         List list2 = (List) this.mLastDevicesForAttr.get(pair);
                         Iterator it = devicesForAttributes.iterator();
@@ -159,14 +184,18 @@ public final class AudioSystemAdapter implements AudioSystem.RoutingUpdateCallba
                                 while (true) {
                                     if (!it2.hasNext()) {
                                         break;
-                                    } else if (devicesForAttributes.contains((AudioDeviceAttributes) it2.next())) {
+                                    } else if (devicesForAttributes.contains(
+                                            (AudioDeviceAttributes) it2.next())) {
                                     }
                                 }
                             }
                         }
                     }
                     try {
-                        broadcastItem.onDevicesForAttributesChanged((AudioAttributes) pair.first, ((Boolean) pair.second).booleanValue(), devicesForAttributes);
+                        broadcastItem.onDevicesForAttributesChanged(
+                                (AudioAttributes) pair.first,
+                                ((Boolean) pair.second).booleanValue(),
+                                devicesForAttributes);
                         break;
                     } catch (RemoteException unused) {
                     }
@@ -186,7 +215,8 @@ public final class AudioSystemAdapter implements AudioSystem.RoutingUpdateCallba
         }
     }
 
-    public final int setDeviceConnectionState(AudioDeviceAttributes audioDeviceAttributes, int i, int i2) {
+    public final int setDeviceConnectionState(
+            AudioDeviceAttributes audioDeviceAttributes, int i, int i2) {
         invalidateRoutingCache();
         return AudioSystem.setDeviceConnectionState(audioDeviceAttributes, i, i2);
     }

@@ -14,8 +14,7 @@ public interface IRequestFinishCallback extends IInterface {
 
     public static class Default implements IRequestFinishCallback {
         @Override // android.app.IRequestFinishCallback
-        public void requestFinish() throws RemoteException {
-        }
+        public void requestFinish() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IRequestFinishCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRequestFinishCallback {
+    public abstract static class Stub extends Binder implements IRequestFinishCallback {
         static final int TRANSACTION_requestFinish = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IRequestFinishCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRequestFinishCallback.DESCRIPTOR);
             }

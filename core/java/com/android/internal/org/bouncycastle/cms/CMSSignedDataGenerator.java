@@ -10,6 +10,7 @@ import com.android.internal.org.bouncycastle.asn1.cms.CMSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.cms.ContentInfo;
 import com.android.internal.org.bouncycastle.asn1.cms.SignedData;
 import com.android.internal.org.bouncycastle.asn1.cms.SignerInfo;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -27,7 +28,8 @@ public class CMSSignedDataGenerator extends CMSSignedGenerator {
     public CMSSignedData generate(CMSTypedData content, boolean encapsulate) throws CMSException {
         ASN1Set certrevlist;
         if (!this.signerInfs.isEmpty()) {
-            throw new IllegalStateException("this method can only be used with SignerInfoGenerator");
+            throw new IllegalStateException(
+                    "this method can only be used with SignerInfoGenerator");
         }
         ASN1EncodableVector digestAlgs = new ASN1EncodableVector();
         ASN1EncodableVector signerInfos = new ASN1EncodableVector();
@@ -43,7 +45,9 @@ public class CMSSignedDataGenerator extends CMSSignedGenerator {
             if (encapsulate) {
                 bOut = new ByteArrayOutputStream();
             }
-            OutputStream cOut = CMSUtils.getSafeOutputStream(CMSUtils.attachSignersToOutputStream(this.signerGens, bOut));
+            OutputStream cOut =
+                    CMSUtils.getSafeOutputStream(
+                            CMSUtils.attachSignersToOutputStream(this.signerGens, bOut));
             try {
                 content.write(cOut);
                 cOut.close();
@@ -74,12 +78,20 @@ public class CMSSignedDataGenerator extends CMSSignedGenerator {
             certrevlist = certrevlist2;
         }
         ContentInfo encInfo = new ContentInfo(contentTypeOID, octs);
-        SignedData sd = new SignedData(new DERSet(digestAlgs), encInfo, certificates, certrevlist, new DERSet(signerInfos));
+        SignedData sd =
+                new SignedData(
+                        new DERSet(digestAlgs),
+                        encInfo,
+                        certificates,
+                        certrevlist,
+                        new DERSet(signerInfos));
         ContentInfo contentInfo = new ContentInfo(CMSObjectIdentifiers.signedData, sd);
         return new CMSSignedData(content, contentInfo);
     }
 
-    public SignerInformationStore generateCounterSigners(SignerInformation signer) throws CMSException {
-        return generate(new CMSProcessableByteArray(null, signer.getSignature()), false).getSignerInfos();
+    public SignerInformationStore generateCounterSigners(SignerInformation signer)
+            throws CMSException {
+        return generate(new CMSProcessableByteArray(null, signer.getSignature()), false)
+                .getSignerInfos();
     }
 }

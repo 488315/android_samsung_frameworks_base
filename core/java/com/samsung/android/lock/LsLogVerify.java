@@ -3,6 +3,7 @@ package com.samsung.android.lock;
 import android.os.Debug;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -104,20 +105,52 @@ public class LsLogVerify {
         String req = byteToText(this.mPackage != null ? this.mPackage : this.mReason);
         String msg = byteToText(this.mMessage);
         if (this.mResponse == 0) {
-            String result = String.format("User %d(%d) %s [%s]%s(%dms)", Integer.valueOf(this.mUserId), Integer.valueOf(this.mSlot), msg, req, LsUtil.gethashStr(this.mSalt), Integer.valueOf(this.mElapsedTime));
+            String result =
+                    String.format(
+                            "User %d(%d) %s [%s]%s(%dms)",
+                            Integer.valueOf(this.mUserId),
+                            Integer.valueOf(this.mSlot),
+                            msg,
+                            req,
+                            LsUtil.gethashStr(this.mSalt),
+                            Integer.valueOf(this.mElapsedTime));
             return result;
         }
-        String result2 = String.format("User %d(%d) %s(%d) [%s]%s(%d/%d)(%dms)", Integer.valueOf(this.mUserId), Integer.valueOf(this.mSlot), msg, Integer.valueOf(this.mResponse), req, LsUtil.gethashStr(this.mSalt), Integer.valueOf(this.mFailCount), Long.valueOf(this.mTimeout), Integer.valueOf(this.mElapsedTime));
+        String result2 =
+                String.format(
+                        "User %d(%d) %s(%d) [%s]%s(%d/%d)(%dms)",
+                        Integer.valueOf(this.mUserId),
+                        Integer.valueOf(this.mSlot),
+                        msg,
+                        Integer.valueOf(this.mResponse),
+                        req,
+                        LsUtil.gethashStr(this.mSalt),
+                        Integer.valueOf(this.mFailCount),
+                        Long.valueOf(this.mTimeout),
+                        Integer.valueOf(this.mElapsedTime));
         return result2;
     }
 
     public String toSummary() {
         String req = byteToText(this.mPackage != null ? this.mPackage : this.mReason);
         if (this.mResponse == 0) {
-            String result = String.format("%s V:S(%d) [%s]\n", LsUtil.getTimeForSummary(this.mReqTime), Integer.valueOf(this.mUserId), req);
+            String result =
+                    String.format(
+                            "%s V:S(%d) [%s]\n",
+                            LsUtil.getTimeForSummary(this.mReqTime),
+                            Integer.valueOf(this.mUserId),
+                            req);
             return result;
         }
-        String result2 = String.format("%s V:F(%d-%d) [%s](%d/%d)]\n", LsUtil.getTimeForSummary(this.mReqTime), Integer.valueOf(this.mUserId), Integer.valueOf(this.mResponse), req, Integer.valueOf(this.mFailCount), Long.valueOf(this.mTimeout));
+        String result2 =
+                String.format(
+                        "%s V:F(%d-%d) [%s](%d/%d)]\n",
+                        LsUtil.getTimeForSummary(this.mReqTime),
+                        Integer.valueOf(this.mUserId),
+                        Integer.valueOf(this.mResponse),
+                        req,
+                        Integer.valueOf(this.mFailCount),
+                        Long.valueOf(this.mTimeout));
         return result2;
     }
 
@@ -293,11 +326,20 @@ public class LsLogVerify {
                 Log.e(TAG, "loadRequestor failed ", e);
             }
             if (mVerifyResult == null) {
-                Log.w(TAG, "No verify data for user " + userId + ". Unknown requestor :\n" + Debug.getCallers(10, "    "));
+                Log.w(
+                        TAG,
+                        "No verify data for user "
+                                + userId
+                                + ". Unknown requestor :\n"
+                                + Debug.getCallers(10, "    "));
                 mVerifyResult = new LsLogVerify(userId);
             }
         } else {
-            LsLog.verify("No verify data for user " + userId + ". Unknown requestor :\n" + Debug.getCallers(10, "    "));
+            LsLog.verify(
+                    "No verify data for user "
+                            + userId
+                            + ". Unknown requestor :\n"
+                            + Debug.getCallers(10, "    "));
             mVerifyResult = new LsLogVerify(0);
         }
         return mVerifyResult;
@@ -336,14 +378,24 @@ public class LsLogVerify {
         int savedUserId = buffer.getInt();
         int savedPid = buffer.getInt();
         if (savedUserId != userId) {
-            Log.w(TAG, String.format("mismatch enroll data, Req User %d, Saved User %d, pid %d)", Integer.valueOf(userId), Integer.valueOf(savedUserId), Integer.valueOf(savedPid)));
+            Log.w(
+                    TAG,
+                    String.format(
+                            "mismatch enroll data, Req User %d, Saved User %d, pid %d)",
+                            Integer.valueOf(userId),
+                            Integer.valueOf(savedUserId),
+                            Integer.valueOf(savedPid)));
             saveRequestor(null);
             return null;
         }
         long reqTime = buffer.getLong();
         long curTime = System.currentTimeMillis();
         if (1000 + reqTime < curTime) {
-            Log.w(TAG, String.format("request data is too old, req = %s, cur = %s", LsUtil.getTimeForLog(reqTime), LsUtil.getTimeForLog(curTime)));
+            Log.w(
+                    TAG,
+                    String.format(
+                            "request data is too old, req = %s, cur = %s",
+                            LsUtil.getTimeForLog(reqTime), LsUtil.getTimeForLog(curTime)));
             saveRequestor(null);
             return null;
         }

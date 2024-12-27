@@ -2,6 +2,7 @@ package android.media;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -19,24 +20,26 @@ public final class AudioHalVersionInfo implements Parcelable, Comparable<AudioHa
     public static final AudioHalVersionInfo HIDL_5_0 = new AudioHalVersionInfo(0, 5, 0);
     public static final AudioHalVersionInfo HIDL_4_0 = new AudioHalVersionInfo(0, 4, 0);
     public static final AudioHalVersionInfo HIDL_2_0 = new AudioHalVersionInfo(0, 2, 0);
-    public static final List<AudioHalVersionInfo> VERSIONS = List.of(AIDL_1_0, HIDL_7_1, HIDL_7_0, HIDL_6_0, HIDL_5_0);
-    public static final Parcelable.Creator<AudioHalVersionInfo> CREATOR = new Parcelable.Creator<AudioHalVersionInfo>() { // from class: android.media.AudioHalVersionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalVersionInfo createFromParcel(Parcel in) {
-            return new AudioHalVersionInfo(in);
-        }
+    public static final List<AudioHalVersionInfo> VERSIONS =
+            List.of(AIDL_1_0, HIDL_7_1, HIDL_7_0, HIDL_6_0, HIDL_5_0);
+    public static final Parcelable.Creator<AudioHalVersionInfo> CREATOR =
+            new Parcelable.Creator<
+                    AudioHalVersionInfo>() { // from class: android.media.AudioHalVersionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalVersionInfo createFromParcel(Parcel in) {
+                    return new AudioHalVersionInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalVersionInfo[] newArray(int size) {
-            return new AudioHalVersionInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalVersionInfo[] newArray(int size) {
+                    return new AudioHalVersionInfo[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioHalType {
-    }
+    public @interface AudioHalType {}
 
     public int getHalType() {
         return this.mHalVersion.type;
@@ -61,7 +64,11 @@ public final class AudioHalVersionInfo implements Parcelable, Comparable<AudioHa
     }
 
     private static String toString(int type, int major, int minor) {
-        return typeToString(type) + ":" + Integer.toString(major) + MediaMetrics.SEPARATOR + Integer.toString(minor);
+        return typeToString(type)
+                + ":"
+                + Integer.toString(major)
+                + MediaMetrics.SEPARATOR
+                + Integer.toString(minor);
     }
 
     private AudioHalVersionInfo(int type, int major, int minor) {

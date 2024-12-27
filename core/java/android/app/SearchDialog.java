@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 /* loaded from: classes.dex */
@@ -67,47 +68,52 @@ public class SearchDialog extends Dialog {
 
     public SearchDialog(Context context, SearchManager searchManager) {
         super(context, resolveDialogTheme(context));
-        this.mConfChangeListener = new BroadcastReceiver() { // from class: android.app.SearchDialog.1
-            @Override // android.content.BroadcastReceiver
-            public void onReceive(Context context2, Intent intent) {
-                if (intent.getAction().equals(Intent.ACTION_CONFIGURATION_CHANGED)) {
-                    SearchDialog.this.onConfigurationChanged();
-                }
-            }
-        };
-        this.mOnCloseListener = new SearchView.OnCloseListener() { // from class: android.app.SearchDialog.3
-            @Override // android.widget.SearchView.OnCloseListener
-            public boolean onClose() {
-                return SearchDialog.this.onClosePressed();
-            }
-        };
-        this.mOnQueryChangeListener = new SearchView.OnQueryTextListener() { // from class: android.app.SearchDialog.4
-            @Override // android.widget.SearchView.OnQueryTextListener
-            public boolean onQueryTextSubmit(String query) {
-                SearchDialog.this.dismiss();
-                return false;
-            }
+        this.mConfChangeListener =
+                new BroadcastReceiver() { // from class: android.app.SearchDialog.1
+                    @Override // android.content.BroadcastReceiver
+                    public void onReceive(Context context2, Intent intent) {
+                        if (intent.getAction().equals(Intent.ACTION_CONFIGURATION_CHANGED)) {
+                            SearchDialog.this.onConfigurationChanged();
+                        }
+                    }
+                };
+        this.mOnCloseListener =
+                new SearchView.OnCloseListener() { // from class: android.app.SearchDialog.3
+                    @Override // android.widget.SearchView.OnCloseListener
+                    public boolean onClose() {
+                        return SearchDialog.this.onClosePressed();
+                    }
+                };
+        this.mOnQueryChangeListener =
+                new SearchView.OnQueryTextListener() { // from class: android.app.SearchDialog.4
+                    @Override // android.widget.SearchView.OnQueryTextListener
+                    public boolean onQueryTextSubmit(String query) {
+                        SearchDialog.this.dismiss();
+                        return false;
+                    }
 
-            @Override // android.widget.SearchView.OnQueryTextListener
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        };
-        this.mOnSuggestionSelectionListener = new SearchView.OnSuggestionListener() { // from class: android.app.SearchDialog.5
-            @Override // android.widget.SearchView.OnSuggestionListener
-            public boolean onSuggestionSelect(int position) {
-                return false;
-            }
+                    @Override // android.widget.SearchView.OnQueryTextListener
+                    public boolean onQueryTextChange(String newText) {
+                        return false;
+                    }
+                };
+        this.mOnSuggestionSelectionListener =
+                new SearchView.OnSuggestionListener() { // from class: android.app.SearchDialog.5
+                    @Override // android.widget.SearchView.OnSuggestionListener
+                    public boolean onSuggestionSelect(int position) {
+                        return false;
+                    }
 
-            @Override // android.widget.SearchView.OnSuggestionListener
-            public boolean onSuggestionClick(int position) {
-                SearchDialog.this.dismiss();
-                return false;
-            }
-        };
+                    @Override // android.widget.SearchView.OnSuggestionListener
+                    public boolean onSuggestionClick(int position) {
+                        SearchDialog.this.dismiss();
+                        return false;
+                    }
+                };
         this.mVoiceWebSearchIntent = new Intent(RecognizerIntent.ACTION_WEB_SEARCH);
         this.mVoiceWebSearchIntent.addFlags(268435456);
-        this.mVoiceWebSearchIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
+        this.mVoiceWebSearchIntent.putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_WEB_SEARCH);
         this.mVoiceAppSearchIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         this.mVoiceAppSearchIntent.addFlags(268435456);
     }
@@ -134,14 +140,16 @@ public class SearchDialog extends Dialog {
         this.mSearchView.setOnSuggestionListener(this.mOnSuggestionSelectionListener);
         this.mSearchView.onActionViewExpanded();
         this.mCloseSearch = findViewById(16908327);
-        this.mCloseSearch.setOnClickListener(new View.OnClickListener() { // from class: android.app.SearchDialog.2
-            @Override // android.view.View.OnClickListener
-            public void onClick(View v) {
-                SearchDialog.this.dismiss();
-            }
-        });
+        this.mCloseSearch.setOnClickListener(
+                new View.OnClickListener() { // from class: android.app.SearchDialog.2
+                    @Override // android.view.View.OnClickListener
+                    public void onClick(View v) {
+                        SearchDialog.this.dismiss();
+                    }
+                });
         this.mBadgeLabel = (TextView) this.mSearchView.findViewById(R.id.search_badge);
-        this.mSearchAutoComplete = (AutoCompleteTextView) this.mSearchView.findViewById(R.id.search_src_text);
+        this.mSearchAutoComplete =
+                (AutoCompleteTextView) this.mSearchView.findViewById(R.id.search_src_text);
         this.mAppIcon = (ImageView) findViewById(R.id.search_app_icon);
         this.mSearchPlate = this.mSearchView.findViewById(R.id.search_plate);
         this.mWorkingSpinner = getContext().getDrawable(R.drawable.search_spinner);
@@ -150,7 +158,11 @@ public class SearchDialog extends Dialog {
         this.mSearchAutoCompleteImeOptions = this.mSearchAutoComplete.getImeOptions();
     }
 
-    public boolean show(String initialQuery, boolean selectInitialQuery, ComponentName componentName, Bundle appSearchData) {
+    public boolean show(
+            String initialQuery,
+            boolean selectInitialQuery,
+            ComponentName componentName,
+            Bundle appSearchData) {
         boolean success = doShow(initialQuery, selectInitialQuery, componentName, appSearchData);
         if (success) {
             this.mSearchAutoComplete.showDropDownAfterLayout();
@@ -158,7 +170,11 @@ public class SearchDialog extends Dialog {
         return success;
     }
 
-    private boolean doShow(String initialQuery, boolean selectInitialQuery, ComponentName componentName, Bundle appSearchData) {
+    private boolean doShow(
+            String initialQuery,
+            boolean selectInitialQuery,
+            ComponentName componentName,
+            Bundle appSearchData) {
         if (!show(componentName, appSearchData)) {
             return false;
         }
@@ -230,7 +246,10 @@ public class SearchDialog extends Dialog {
         if (savedInstanceState == null) {
             return;
         }
-        ComponentName launchComponent = (ComponentName) savedInstanceState.getParcelable(INSTANCE_KEY_COMPONENT, ComponentName.class);
+        ComponentName launchComponent =
+                (ComponentName)
+                        savedInstanceState.getParcelable(
+                                INSTANCE_KEY_COMPONENT, ComponentName.class);
         Bundle appSearchData = savedInstanceState.getBundle("data");
         String userQuery = savedInstanceState.getString(INSTANCE_KEY_USER_QUERY);
         doShow(userQuery, false, launchComponent, appSearchData);
@@ -303,7 +322,11 @@ public class SearchDialog extends Dialog {
         }
         this.mAppIcon.lambda$setImageURIAsync$2(icon);
         this.mAppIcon.setVisibility(0);
-        this.mSearchPlate.setPadding(7, this.mSearchPlate.getPaddingTop(), this.mSearchPlate.getPaddingRight(), this.mSearchPlate.getPaddingBottom());
+        this.mSearchPlate.setPadding(
+                7,
+                this.mSearchPlate.getPaddingTop(),
+                this.mSearchPlate.getPaddingRight(),
+                this.mSearchPlate.getPaddingBottom());
     }
 
     private void updateSearchBadge() {
@@ -314,10 +337,15 @@ public class SearchDialog extends Dialog {
             icon = this.mActivityContext.getDrawable(this.mSearchable.getIconId());
             visibility = 0;
         } else if (this.mSearchable.useBadgeLabel()) {
-            text = this.mActivityContext.getResources().getText(this.mSearchable.getLabelId()).toString();
+            text =
+                    this.mActivityContext
+                            .getResources()
+                            .getText(this.mSearchable.getLabelId())
+                            .toString();
             visibility = 0;
         }
-        this.mBadgeLabel.setCompoundDrawablesWithIntrinsicBounds(icon, (Drawable) null, (Drawable) null, (Drawable) null);
+        this.mBadgeLabel.setCompoundDrawablesWithIntrinsicBounds(
+                icon, (Drawable) null, (Drawable) null, (Drawable) null);
         this.mBadgeLabel.lambda$setTextAsync$0(text);
         this.mBadgeLabel.setVisibility(visibility);
     }
@@ -341,7 +369,8 @@ public class SearchDialog extends Dialog {
     @Override // android.app.Dialog
     public void hide() {
         if (isShowing()) {
-            InputMethodManager imm = (InputMethodManager) getContext().getSystemService(InputMethodManager.class);
+            InputMethodManager imm =
+                    (InputMethodManager) getContext().getSystemService(InputMethodManager.class);
             if (imm != null) {
                 imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
             }
@@ -376,7 +405,13 @@ public class SearchDialog extends Dialog {
         this.mSearchAutoComplete.setListSelection(index);
     }
 
-    private Intent createIntent(String action, Uri data, String extraData, String query, int actionKey, String actionMsg) {
+    private Intent createIntent(
+            String action,
+            Uri data,
+            String extraData,
+            String query,
+            int actionKey,
+            String actionMsg) {
         Intent intent = new Intent(action);
         intent.addFlags(268435456);
         if (data != null) {
@@ -410,7 +445,8 @@ public class SearchDialog extends Dialog {
         }
 
         @Override // android.view.ViewGroup, android.view.ViewParent
-        public ActionMode startActionModeForChild(View child, ActionMode.Callback callback, int type) {
+        public ActionMode startActionModeForChild(
+                View child, ActionMode.Callback callback, int type) {
             if (type != 0) {
                 return super.startActionModeForChild(child, callback, type);
             }
@@ -424,8 +460,11 @@ public class SearchDialog extends Dialog {
 
     @Override // android.app.Dialog
     public void onBackPressed() {
-        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(InputMethodManager.class);
-        if (imm != null && imm.isFullscreenMode() && imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0)) {
+        InputMethodManager imm =
+                (InputMethodManager) getContext().getSystemService(InputMethodManager.class);
+        if (imm != null
+                && imm.isFullscreenMode()
+                && imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0)) {
             return;
         }
         cancel();

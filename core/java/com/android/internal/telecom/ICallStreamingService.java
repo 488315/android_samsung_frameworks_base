@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.telecom.StreamingCall;
-import com.android.internal.telecom.IStreamingCallAdapter;
 
 /* loaded from: classes5.dex */
 public interface ICallStreamingService extends IInterface {
@@ -18,24 +17,22 @@ public interface ICallStreamingService extends IInterface {
 
     void onCallStreamingStopped() throws RemoteException;
 
-    void setStreamingCallAdapter(IStreamingCallAdapter iStreamingCallAdapter) throws RemoteException;
+    void setStreamingCallAdapter(IStreamingCallAdapter iStreamingCallAdapter)
+            throws RemoteException;
 
     public static class Default implements ICallStreamingService {
         @Override // com.android.internal.telecom.ICallStreamingService
-        public void setStreamingCallAdapter(IStreamingCallAdapter streamingCallAdapter) throws RemoteException {
-        }
+        public void setStreamingCallAdapter(IStreamingCallAdapter streamingCallAdapter)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallStreamingService
-        public void onCallStreamingStarted(StreamingCall call) throws RemoteException {
-        }
+        public void onCallStreamingStarted(StreamingCall call) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallStreamingService
-        public void onCallStreamingStopped() throws RemoteException {
-        }
+        public void onCallStreamingStopped() throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallStreamingService
-        public void onCallStreamingStateChanged(int state) throws RemoteException {
-        }
+        public void onCallStreamingStateChanged(int state) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -43,7 +40,7 @@ public interface ICallStreamingService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICallStreamingService {
+    public abstract static class Stub extends Binder implements ICallStreamingService {
         static final int TRANSACTION_onCallStreamingStarted = 2;
         static final int TRANSACTION_onCallStreamingStateChanged = 4;
         static final int TRANSACTION_onCallStreamingStopped = 3;
@@ -90,7 +87,8 @@ public interface ICallStreamingService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICallStreamingService.DESCRIPTOR);
             }
@@ -100,12 +98,14 @@ public interface ICallStreamingService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IStreamingCallAdapter _arg0 = IStreamingCallAdapter.Stub.asInterface(data.readStrongBinder());
+                    IStreamingCallAdapter _arg0 =
+                            IStreamingCallAdapter.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setStreamingCallAdapter(_arg0);
                     return true;
                 case 2:
-                    StreamingCall _arg02 = (StreamingCall) data.readTypedObject(StreamingCall.CREATOR);
+                    StreamingCall _arg02 =
+                            (StreamingCall) data.readTypedObject(StreamingCall.CREATOR);
                     data.enforceNoDataAvail();
                     onCallStreamingStarted(_arg02);
                     return true;
@@ -139,7 +139,8 @@ public interface ICallStreamingService extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallStreamingService
-            public void setStreamingCallAdapter(IStreamingCallAdapter streamingCallAdapter) throws RemoteException {
+            public void setStreamingCallAdapter(IStreamingCallAdapter streamingCallAdapter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallStreamingService.DESCRIPTOR);

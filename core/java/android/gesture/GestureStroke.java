@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -38,7 +39,12 @@ public class GestureStroke {
                 bx.bottom = p.y;
                 len = 0.0f;
             } else {
-                len = (float) (len + Math.hypot(p.x - tmpPoints[(i - 1) * 2], p.y - tmpPoints[((i - 1) * 2) + 1]));
+                len =
+                        (float)
+                                (len
+                                        + Math.hypot(
+                                                p.x - tmpPoints[(i - 1) * 2],
+                                                p.y - tmpPoints[((i - 1) * 2) + 1]));
                 bx.union(p.x, p.y);
             }
             index++;

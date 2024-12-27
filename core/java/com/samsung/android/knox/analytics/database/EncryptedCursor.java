@@ -4,7 +4,9 @@ import android.database.AbstractCursor;
 import android.database.Cursor;
 import android.hardware.scontext.SContextConstants;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.samsung.android.knox.analytics.util.Log;
+
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
@@ -44,9 +46,12 @@ class EncryptedCursor extends AbstractCursor {
                 int bulkColumn = this.mDatabaseCursor.getColumnIndex("bulk");
                 int eventCounter = this.mDatabaseCursor.getInt(bulkColumn);
                 if (eventCounter > 1) {
-                    decrypted = this.mCryptoHandler.decryptBulk(this.mDatabaseCursor.getBlob(column));
+                    decrypted =
+                            this.mCryptoHandler.decryptBulk(this.mDatabaseCursor.getBlob(column));
                 } else {
-                    decrypted = this.mCryptoHandler.decrypt(this.mDatabaseCursor.getBlob(column), useLegacyKey());
+                    decrypted =
+                            this.mCryptoHandler.decrypt(
+                                    this.mDatabaseCursor.getBlob(column), useLegacyKey());
                 }
             } catch (UnsupportedEncodingException e) {
                 Log.e(this.TAG, "getString(): UnsupportedEncodingException", e);
@@ -74,7 +79,8 @@ class EncryptedCursor extends AbstractCursor {
             Log.d(this.TAG, "useLegacyKey(): There is no marked event ID");
             return false;
         }
-        if (this.mDatabaseCursor.getInt(this.mDatabaseCursor.getColumnIndex("id")) > this.mSyntheticRowId) {
+        if (this.mDatabaseCursor.getInt(this.mDatabaseCursor.getColumnIndex("id"))
+                > this.mSyntheticRowId) {
             this.mCryptoHandler.deleteAnalyticsLegacyKey();
             return false;
         }
@@ -101,7 +107,8 @@ class EncryptedCursor extends AbstractCursor {
         return this.mDatabaseCursor.isNull(column);
     }
 
-    @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable, java.lang.AutoCloseable
+    @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable,
+              // java.lang.AutoCloseable
     public void close() {
         super.close();
         this.mDatabaseCursor.close();

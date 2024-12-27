@@ -1,6 +1,7 @@
 package com.google.android.mms.pdu;
 
 import com.google.android.mms.InvalidHeaderValueException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -137,9 +138,11 @@ public class PduHeaders {
     public static final int RESPONSE_STATUS_ERROR_PERMANENT_MESSAGE_FORMAT_CORRUPT = 226;
     public static final int RESPONSE_STATUS_ERROR_PERMANENT_MESSAGE_NOT_FOUND = 228;
     public static final int RESPONSE_STATUS_ERROR_PERMANENT_REPLY_CHARGING_FORWARDING_DENIED = 232;
-    public static final int RESPONSE_STATUS_ERROR_PERMANENT_REPLY_CHARGING_LIMITATIONS_NOT_MET = 230;
+    public static final int RESPONSE_STATUS_ERROR_PERMANENT_REPLY_CHARGING_LIMITATIONS_NOT_MET =
+            230;
     public static final int RESPONSE_STATUS_ERROR_PERMANENT_REPLY_CHARGING_NOT_SUPPORTED = 233;
-    public static final int RESPONSE_STATUS_ERROR_PERMANENT_REPLY_CHARGING_REQUEST_NOT_ACCEPTED = 230;
+    public static final int RESPONSE_STATUS_ERROR_PERMANENT_REPLY_CHARGING_REQUEST_NOT_ACCEPTED =
+            230;
     public static final int RESPONSE_STATUS_ERROR_PERMANENT_SENDING_ADDRESS_UNRESOLVED = 227;
     public static final int RESPONSE_STATUS_ERROR_PERMANENT_SERVICE_DENIED = 225;
     public static final int RESPONSE_STATUS_ERROR_SENDING_ADDRESS_UNRESOLVED = 132;
@@ -251,7 +254,9 @@ public class PduHeaders {
                 if (value > 196 && value < 224) {
                     value = 192;
                     break;
-                } else if ((value > 235 && value <= 255) || value < 128 || ((value > 136 && value < 192) || value > 255)) {
+                } else if ((value > 235 && value <= 255)
+                        || value < 128
+                        || ((value > 136 && value < 192) || value > 255)) {
                     value = 224;
                     break;
                 }
@@ -348,7 +353,8 @@ public class PduHeaders {
     }
 
     protected EncodedStringValue[] getEncodedStringValues(int field) {
-        ArrayList<EncodedStringValue> list = (ArrayList) this.mHeaderMap.get(Integer.valueOf(field));
+        ArrayList<EncodedStringValue> list =
+                (ArrayList) this.mHeaderMap.get(Integer.valueOf(field));
         if (list == null) {
             return null;
         }
@@ -404,7 +410,8 @@ public class PduHeaders {
             case 129:
             case 130:
             case 151:
-                ArrayList<EncodedStringValue> list = (ArrayList) this.mHeaderMap.get(Integer.valueOf(field));
+                ArrayList<EncodedStringValue> list =
+                        (ArrayList) this.mHeaderMap.get(Integer.valueOf(field));
                 if (list == null) {
                     list = new ArrayList<>();
                 }

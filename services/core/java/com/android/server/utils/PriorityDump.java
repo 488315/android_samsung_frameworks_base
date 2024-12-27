@@ -10,23 +10,40 @@ public abstract class PriorityDump {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface PriorityDumper {
-        default void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr, boolean z) {
+        default void dump(
+                FileDescriptor fileDescriptor,
+                PrintWriter printWriter,
+                String[] strArr,
+                boolean z) {
             dumpCritical(fileDescriptor, printWriter, strArr, z);
             dumpHigh(fileDescriptor, printWriter, strArr, z);
             dumpNormal(fileDescriptor, printWriter, strArr, z);
         }
 
-        default void dumpCritical(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr, boolean z) {
-        }
+        default void dumpCritical(
+                FileDescriptor fileDescriptor,
+                PrintWriter printWriter,
+                String[] strArr,
+                boolean z) {}
 
-        default void dumpHigh(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr, boolean z) {
-        }
+        default void dumpHigh(
+                FileDescriptor fileDescriptor,
+                PrintWriter printWriter,
+                String[] strArr,
+                boolean z) {}
 
-        default void dumpNormal(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr, boolean z) {
-        }
+        default void dumpNormal(
+                FileDescriptor fileDescriptor,
+                PrintWriter printWriter,
+                String[] strArr,
+                boolean z) {}
     }
 
-    public static void dump(PriorityDumper priorityDumper, FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public static void dump(
+            PriorityDumper priorityDumper,
+            FileDescriptor fileDescriptor,
+            PrintWriter printWriter,
+            String[] strArr) {
         if (strArr == null) {
             priorityDumper.dump(fileDescriptor, printWriter, strArr, false);
             return;

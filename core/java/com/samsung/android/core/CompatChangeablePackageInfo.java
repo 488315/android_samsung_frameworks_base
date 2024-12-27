@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class CompatChangeablePackageInfo implements Parcelable {
-    public static final Parcelable.Creator<CompatChangeablePackageInfo> CREATOR = new Parcelable.Creator<CompatChangeablePackageInfo>() { // from class: com.samsung.android.core.CompatChangeablePackageInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatChangeablePackageInfo createFromParcel(Parcel in) {
-            return new CompatChangeablePackageInfo(in);
-        }
+    public static final Parcelable.Creator<CompatChangeablePackageInfo> CREATOR =
+            new Parcelable.Creator<
+                    CompatChangeablePackageInfo>() { // from class:
+                                                     // com.samsung.android.core.CompatChangeablePackageInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatChangeablePackageInfo createFromParcel(Parcel in) {
+                    return new CompatChangeablePackageInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatChangeablePackageInfo[] newArray(int size) {
-            return new CompatChangeablePackageInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatChangeablePackageInfo[] newArray(int size) {
+                    return new CompatChangeablePackageInfo[size];
+                }
+            };
     final boolean mHasGameCategory;
     final boolean mHasLauncherActivity;
     final boolean mIsActivityEmbeddingSplitsEnabled;
@@ -27,7 +30,15 @@ public class CompatChangeablePackageInfo implements Parcelable {
     final String mPackageName;
     final int mUid;
 
-    private CompatChangeablePackageInfo(String packageName, int uid, boolean hasLauncherActivity, boolean hasGameCategory, boolean isResizeableActivityOverrideDisallowed, boolean isOrientationOverrideDisallowed, boolean isMinAspectRatioOverrideDisallowed, boolean isActivityEmbeddingSplitsEnabled) {
+    private CompatChangeablePackageInfo(
+            String packageName,
+            int uid,
+            boolean hasLauncherActivity,
+            boolean hasGameCategory,
+            boolean isResizeableActivityOverrideDisallowed,
+            boolean isOrientationOverrideDisallowed,
+            boolean isMinAspectRatioOverrideDisallowed,
+            boolean isActivityEmbeddingSplitsEnabled) {
         this.mPackageName = packageName != null ? packageName : "";
         this.mUid = uid;
         this.mHasLauncherActivity = hasLauncherActivity;
@@ -39,7 +50,15 @@ public class CompatChangeablePackageInfo implements Parcelable {
     }
 
     public CompatChangeablePackageInfo(Parcel in) {
-        this(in.readString(), in.readInt(), in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean());
+        this(
+                in.readString(),
+                in.readInt(),
+                in.readBoolean(),
+                in.readBoolean(),
+                in.readBoolean(),
+                in.readBoolean(),
+                in.readBoolean(),
+                in.readBoolean());
     }
 
     @Override // android.os.Parcelable
@@ -89,7 +108,8 @@ public class CompatChangeablePackageInfo implements Parcelable {
             return this;
         }
 
-        public Builder setIsResizeableActivityOverrideDisallowed(boolean isResizeableActivityOverrideDisallowed) {
+        public Builder setIsResizeableActivityOverrideDisallowed(
+                boolean isResizeableActivityOverrideDisallowed) {
             this.mIsResizeableActivityOverrideDisallowed = isResizeableActivityOverrideDisallowed;
             return this;
         }
@@ -99,18 +119,28 @@ public class CompatChangeablePackageInfo implements Parcelable {
             return this;
         }
 
-        public Builder setIsMinAspectRatioOverrideDisallowed(boolean isMinAspectRatioOverrideDisallowed) {
+        public Builder setIsMinAspectRatioOverrideDisallowed(
+                boolean isMinAspectRatioOverrideDisallowed) {
             this.mIsMinAspectRatioOverrideDisallowed = isMinAspectRatioOverrideDisallowed;
             return this;
         }
 
-        public Builder setIsActivityEmbeddingSplitsEnabled(boolean isActivityEmbeddingSplitsEnabled) {
+        public Builder setIsActivityEmbeddingSplitsEnabled(
+                boolean isActivityEmbeddingSplitsEnabled) {
             this.mIsActivityEmbeddingSplitsEnabled = isActivityEmbeddingSplitsEnabled;
             return this;
         }
 
         public CompatChangeablePackageInfo build() {
-            return new CompatChangeablePackageInfo(this.mPackageName, this.mUid, this.mHasLauncherActivity, this.mHasGameCategory, this.mIsResizeableActivityOverrideDisallowed, this.mIsOrientationOverrideDisallowed, this.mIsMinAspectRatioOverrideDisallowed, this.mIsActivityEmbeddingSplitsEnabled);
+            return new CompatChangeablePackageInfo(
+                    this.mPackageName,
+                    this.mUid,
+                    this.mHasLauncherActivity,
+                    this.mHasGameCategory,
+                    this.mIsResizeableActivityOverrideDisallowed,
+                    this.mIsOrientationOverrideDisallowed,
+                    this.mIsMinAspectRatioOverrideDisallowed,
+                    this.mIsActivityEmbeddingSplitsEnabled);
         }
     }
 }

@@ -3,8 +3,6 @@ package android.media.tv.ad;
 import android.content.Context;
 import android.graphics.Rect;
 import android.media.tv.TvTrackInfo;
-import android.media.tv.ad.ITvAdSession;
-import android.media.tv.ad.TvAdService;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -16,8 +14,10 @@ import android.view.InputChannel;
 import android.view.InputEvent;
 import android.view.InputEventReceiver;
 import android.view.Surface;
+
 import com.android.internal.os.HandlerCaller;
 import com.android.internal.os.SomeArgs;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -47,7 +47,8 @@ public class ITvAdSessionWrapper extends ITvAdSession.Stub implements HandlerCal
     private TvAdEventReceiver mReceiver;
     private TvAdService.Session mSessionImpl;
 
-    public ITvAdSessionWrapper(Context context, TvAdService.Session mSessionImpl, InputChannel channel) {
+    public ITvAdSessionWrapper(
+            Context context, TvAdService.Session mSessionImpl, InputChannel channel) {
         this.mSessionImpl = mSessionImpl;
         this.mCaller = new HandlerCaller(context, null, this, true);
         this.mChannel = channel;
@@ -87,7 +88,10 @@ public class ITvAdSessionWrapper extends ITvAdSession.Stub implements HandlerCal
                 break;
             case 3:
                 SomeArgs args = (SomeArgs) msg.obj;
-                this.mSessionImpl.dispatchSurfaceChanged(Integer.valueOf(args.argi1).intValue(), Integer.valueOf(args.argi2).intValue(), Integer.valueOf(args.argi3).intValue());
+                this.mSessionImpl.dispatchSurfaceChanged(
+                        Integer.valueOf(args.argi1).intValue(),
+                        Integer.valueOf(args.argi2).intValue(),
+                        Integer.valueOf(args.argi3).intValue());
                 args.recycle();
                 break;
             case 4:
@@ -134,12 +138,14 @@ public class ITvAdSessionWrapper extends ITvAdSession.Stub implements HandlerCal
                 break;
             case 16:
                 SomeArgs args5 = (SomeArgs) msg.obj;
-                this.mSessionImpl.notifyTvMessage(((Integer) args5.arg1).intValue(), (Bundle) args5.arg2);
+                this.mSessionImpl.notifyTvMessage(
+                        ((Integer) args5.arg1).intValue(), (Bundle) args5.arg2);
                 args5.recycle();
                 break;
             case 17:
                 SomeArgs args6 = (SomeArgs) msg.obj;
-                this.mSessionImpl.notifyTvInputSessionData((String) args6.arg1, (Bundle) args6.arg2);
+                this.mSessionImpl.notifyTvInputSessionData(
+                        (String) args6.arg1, (Bundle) args6.arg2);
                 args6.recycle();
                 break;
             default:
@@ -148,7 +154,13 @@ public class ITvAdSessionWrapper extends ITvAdSession.Stub implements HandlerCal
         }
         long durationMs = (System.nanoTime() - startTime) / 1000000;
         if (durationMs > 1000) {
-            Log.w(TAG, "Handling message (" + msg.what + ") took too long time (duration=" + durationMs + "ms)");
+            Log.w(
+                    TAG,
+                    "Handling message ("
+                            + msg.what
+                            + ") took too long time (duration="
+                            + durationMs
+                            + "ms)");
         }
     }
 
@@ -174,7 +186,8 @@ public class ITvAdSessionWrapper extends ITvAdSession.Stub implements HandlerCal
 
     @Override // android.media.tv.ad.ITvAdSession
     public void dispatchSurfaceChanged(int format, int width, int height) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageIIII(3, format, width, height, 0));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageIIII(3, format, width, height, 0));
     }
 
     @Override // android.media.tv.ad.ITvAdSession
@@ -209,7 +222,8 @@ public class ITvAdSessionWrapper extends ITvAdSession.Stub implements HandlerCal
 
     @Override // android.media.tv.ad.ITvAdSession
     public void notifyTvMessage(int type, Bundle data) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(16, Integer.valueOf(type), data));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(16, Integer.valueOf(type), data));
     }
 
     @Override // android.media.tv.ad.ITvAdSession

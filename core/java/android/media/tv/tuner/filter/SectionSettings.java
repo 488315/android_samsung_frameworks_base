@@ -11,7 +11,12 @@ public abstract class SectionSettings extends Settings {
     final boolean mIsRaw;
     final boolean mIsRepeat;
 
-    SectionSettings(int mainType, boolean crcEnabled, boolean isRepeat, boolean isRaw, int bitWidthOfLengthField) {
+    SectionSettings(
+            int mainType,
+            boolean crcEnabled,
+            boolean isRepeat,
+            boolean isRaw,
+            int bitWidthOfLengthField) {
         super(TunerUtils.getFilterSubtype(mainType, 1));
         this.mCrcEnabled = crcEnabled;
         this.mIsRepeat = isRepeat;
@@ -35,7 +40,7 @@ public abstract class SectionSettings extends Settings {
         return this.mBitWidthOfLengthField;
     }
 
-    public static abstract class Builder<T extends Builder<T>> {
+    public abstract static class Builder<T extends Builder<T>> {
         int mBitWidthOfLengthField;
         boolean mCrcEnabled;
         boolean mIsRaw;

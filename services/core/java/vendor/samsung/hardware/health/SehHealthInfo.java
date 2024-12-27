@@ -35,7 +35,8 @@ public final class SehHealthInfo implements Parcelable {
                     throw new BadParcelableException("Parcelable too small");
                 }
                 if (parcel.dataPosition() - dataPosition < readInt) {
-                    sehHealthInfo.aospHealthInfo = (HealthInfo) parcel.readTypedObject(HealthInfo.CREATOR);
+                    sehHealthInfo.aospHealthInfo =
+                            (HealthInfo) parcel.readTypedObject(HealthInfo.CREATOR);
                     if (parcel.dataPosition() - dataPosition < readInt) {
                         sehHealthInfo.batteryCurrentNow = parcel.readInt();
                         if (parcel.dataPosition() - dataPosition < readInt) {
@@ -47,41 +48,65 @@ public final class SehHealthInfo implements Parcelable {
                                     if (parcel.dataPosition() - dataPosition < readInt) {
                                         sehHealthInfo.chargerPogoOnline = parcel.readBoolean();
                                         if (parcel.dataPosition() - dataPosition < readInt) {
-                                            sehHealthInfo.batteryHighVoltageCharger = parcel.readInt();
+                                            sehHealthInfo.batteryHighVoltageCharger =
+                                                    parcel.readInt();
                                             if (parcel.dataPosition() - dataPosition < readInt) {
                                                 sehHealthInfo.batteryEvent = parcel.readInt();
-                                                if (parcel.dataPosition() - dataPosition < readInt) {
-                                                    sehHealthInfo.batteryCurrentEvent = parcel.readInt();
-                                                    if (parcel.dataPosition() - dataPosition < readInt) {
-                                                        sehHealthInfo.chargerOtgOnline = parcel.readBoolean();
-                                                        if (parcel.dataPosition() - dataPosition < readInt) {
-                                                            sehHealthInfo.wirelessPowerSharingTxEvent = parcel.readInt();
-                                                            if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                if (parcel.dataPosition() - dataPosition
+                                                        < readInt) {
+                                                    sehHealthInfo.batteryCurrentEvent =
+                                                            parcel.readInt();
+                                                    if (parcel.dataPosition() - dataPosition
+                                                            < readInt) {
+                                                        sehHealthInfo.chargerOtgOnline =
+                                                                parcel.readBoolean();
+                                                        if (parcel.dataPosition() - dataPosition
+                                                                < readInt) {
+                                                            sehHealthInfo
+                                                                            .wirelessPowerSharingTxEvent =
+                                                                    parcel.readInt();
+                                                            if (dataPosition
+                                                                    > Integer.MAX_VALUE - readInt) {
+                                                                throw new BadParcelableException(
+                                                                        "Overflow in the size of"
+                                                                            + " parcelable");
                                                             }
-                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                        } else if (dataPosition
+                                                                > Integer.MAX_VALUE - readInt) {
+                                                            throw new BadParcelableException(
+                                                                    "Overflow in the size of"
+                                                                        + " parcelable");
                                                         }
-                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                    } else if (dataPosition
+                                                            > Integer.MAX_VALUE - readInt) {
+                                                        throw new BadParcelableException(
+                                                                "Overflow in the size of"
+                                                                    + " parcelable");
                                                     }
-                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                } else if (dataPosition
+                                                        > Integer.MAX_VALUE - readInt) {
+                                                    throw new BadParcelableException(
+                                                            "Overflow in the size of parcelable");
                                                 }
                                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                throw new BadParcelableException(
+                                                        "Overflow in the size of parcelable");
                                             }
                                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -136,7 +161,9 @@ public final class SehHealthInfo implements Parcelable {
         parcel.writeInt(this.batteryEvent);
         parcel.writeInt(this.batteryCurrentEvent);
         parcel.writeBoolean(this.chargerOtgOnline);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.wirelessPowerSharingTxEvent, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.wirelessPowerSharingTxEvent, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

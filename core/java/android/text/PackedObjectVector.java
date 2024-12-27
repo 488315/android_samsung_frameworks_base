@@ -1,8 +1,10 @@
 package android.text;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
+
 import libcore.util.EmptyArray;
 
 /* loaded from: classes4.dex */
@@ -65,11 +67,18 @@ class PackedObjectVector<E> {
     }
 
     private void growBuffer() {
-        Object[] newvalues = ArrayUtils.newUnpaddedObjectArray(GrowingArrayUtils.growSize(size()) * this.mColumns);
+        Object[] newvalues =
+                ArrayUtils.newUnpaddedObjectArray(
+                        GrowingArrayUtils.growSize(size()) * this.mColumns);
         int newsize = newvalues.length / this.mColumns;
         int after = this.mRows - (this.mRowGapStart + this.mRowGapLength);
         System.arraycopy(this.mValues, 0, newvalues, 0, this.mColumns * this.mRowGapStart);
-        System.arraycopy(this.mValues, (this.mRows - after) * this.mColumns, newvalues, (newsize - after) * this.mColumns, this.mColumns * after);
+        System.arraycopy(
+                this.mValues,
+                (this.mRows - after) * this.mColumns,
+                newvalues,
+                (newsize - after) * this.mColumns,
+                this.mColumns * after);
         this.mRowGapLength += newsize - this.mRows;
         this.mRows = newsize;
         this.mValues = newvalues;
@@ -81,7 +90,9 @@ class PackedObjectVector<E> {
         }
         if (where > this.mRowGapStart) {
             int moving = (this.mRowGapLength + where) - (this.mRowGapStart + this.mRowGapLength);
-            for (int i = this.mRowGapStart + this.mRowGapLength; i < this.mRowGapStart + this.mRowGapLength + moving; i++) {
+            for (int i = this.mRowGapStart + this.mRowGapLength;
+                    i < this.mRowGapStart + this.mRowGapLength + moving;
+                    i++) {
                 int destrow = (i - (this.mRowGapStart + this.mRowGapLength)) + this.mRowGapStart;
                 for (int j = 0; j < this.mColumns; j++) {
                     Object val = this.mValues[(this.mColumns * i) + j];

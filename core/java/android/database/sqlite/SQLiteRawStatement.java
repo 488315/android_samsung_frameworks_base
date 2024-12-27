@@ -1,8 +1,9 @@
 package android.database.sqlite;
 
-import android.database.sqlite.SQLiteConnection;
 import android.util.Log;
+
 import dalvik.annotation.optimization.FastNative;
+
 import java.io.Closeable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -30,8 +31,7 @@ public final class SQLiteRawStatement implements Closeable {
     private Thread mThread = Thread.currentThread();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SQLiteDataType {
-    }
+    public @interface SQLiteDataType {}
 
     @FastNative
     private static native void nativeBindBlob(long j, int i, byte[] bArr, int i2, int i3);
@@ -67,7 +67,8 @@ public final class SQLiteRawStatement implements Closeable {
     private static native byte[] nativeColumnBlob(long j, int i);
 
     @FastNative
-    private static native int nativeColumnBuffer(long j, int i, byte[] bArr, int i2, int i3, int i4);
+    private static native int nativeColumnBuffer(
+            long j, int i, byte[] bArr, int i2, int i3, int i4);
 
     @FastNative
     private static native int nativeColumnBytes(long j, int i);
@@ -120,10 +121,17 @@ public final class SQLiteRawStatement implements Closeable {
             throw new IllegalArgumentException("invalid array length " + arrayLength);
         }
         if (offset < 0 || offset >= arrayLength) {
-            throw new IllegalArgumentException("invalid offset " + offset + " for array length " + arrayLength);
+            throw new IllegalArgumentException(
+                    "invalid offset " + offset + " for array length " + arrayLength);
         }
         if (length <= 0 || arrayLength - offset < length) {
-            throw new IllegalArgumentException("invalid offset " + offset + " and length " + length + " for array length " + arrayLength);
+            throw new IllegalArgumentException(
+                    "invalid offset "
+                            + offset
+                            + " and length "
+                            + length
+                            + " for array length "
+                            + arrayLength);
         }
     }
 
@@ -148,7 +156,8 @@ public final class SQLiteRawStatement implements Closeable {
                 case 5:
                     throw new SQLiteDatabaseLockedException("database " + this.mDatabase + " busy");
                 case 6:
-                    throw new SQLiteDatabaseLockedException("database " + this.mDatabase + " locked");
+                    throw new SQLiteDatabaseLockedException(
+                            "database " + this.mDatabase + " locked");
                 case 100:
                     return true;
                 case 101:
@@ -333,12 +342,14 @@ public final class SQLiteRawStatement implements Closeable {
         }
     }
 
-    public int readColumnBlob(int columnIndex, byte[] buffer, int offset, int length, int srcOffset) {
+    public int readColumnBlob(
+            int columnIndex, byte[] buffer, int offset, int length, int srcOffset) {
         Objects.requireNonNull(buffer);
         throwIfInvalid();
         throwIfInvalidBounds(buffer.length, offset, length);
         try {
-            return nativeColumnBuffer(this.mStatement, columnIndex, buffer, offset, length, srcOffset);
+            return nativeColumnBuffer(
+                    this.mStatement, columnIndex, buffer, offset, length, srcOffset);
         } finally {
             Reference.reachabilityFence(this);
         }

@@ -5,6 +5,7 @@ import android.hardware.audio.common.V2_0.AudioConfig$$ExternalSyntheticOutline0
 import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOutline0;
 import android.hardware.usb.V1_0.PortStatus;
 import android.os.HidlSupport;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -23,11 +24,18 @@ public final class PortStatus_1_1 {
             return false;
         }
         PortStatus_1_1 portStatus_1_1 = (PortStatus_1_1) obj;
-        return HidlSupport.deepEquals(this.status, portStatus_1_1.status) && HidlSupport.deepEquals(Integer.valueOf(this.supportedModes), Integer.valueOf(portStatus_1_1.supportedModes)) && this.currentMode == portStatus_1_1.currentMode;
+        return HidlSupport.deepEquals(this.status, portStatus_1_1.status)
+                && HidlSupport.deepEquals(
+                        Integer.valueOf(this.supportedModes),
+                        Integer.valueOf(portStatus_1_1.supportedModes))
+                && this.currentMode == portStatus_1_1.currentMode;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.status)), AudioConfig$$ExternalSyntheticOutline0.m(this.supportedModes), AudioConfig$$ExternalSyntheticOutline0.m(this.currentMode));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.status)),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.supportedModes),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.currentMode));
     }
 
     public final String toString() {
@@ -74,6 +82,29 @@ public final class PortStatus_1_1 {
         sb.append(String.join(" | ", m));
         sb.append(", .currentMode = ");
         int i4 = this.currentMode;
-        return AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, i4 != 0 ? i4 == 1 ? "UFP" : i4 == 2 ? "DFP" : i4 == 3 ? "DRP" : i4 == 4 ? "NUM_MODES" : i4 == 4 ? "AUDIO_ACCESSORY" : i4 == 8 ? "DEBUG_ACCESSORY" : i4 == 16 ? "NUM_MODES_1_1" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i4) : "NONE", "}");
+        return AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                sb,
+                i4 != 0
+                        ? i4 == 1
+                                ? "UFP"
+                                : i4 == 2
+                                        ? "DFP"
+                                        : i4 == 3
+                                                ? "DRP"
+                                                : i4 == 4
+                                                        ? "NUM_MODES"
+                                                        : i4 == 4
+                                                                ? "AUDIO_ACCESSORY"
+                                                                : i4 == 8
+                                                                        ? "DEBUG_ACCESSORY"
+                                                                        : i4 == 16
+                                                                                ? "NUM_MODES_1_1"
+                                                                                : AudioChannelMask$$ExternalSyntheticOutline0
+                                                                                        .m(
+                                                                                                new StringBuilder(
+                                                                                                        "0x"),
+                                                                                                i4)
+                        : "NONE",
+                "}");
     }
 }

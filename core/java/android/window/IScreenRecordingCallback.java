@@ -14,8 +14,8 @@ public interface IScreenRecordingCallback extends IInterface {
 
     public static class Default implements IScreenRecordingCallback {
         @Override // android.window.IScreenRecordingCallback
-        public void onScreenRecordingStateChanged(boolean visibleInScreenRecording) throws RemoteException {
-        }
+        public void onScreenRecordingStateChanged(boolean visibleInScreenRecording)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IScreenRecordingCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IScreenRecordingCallback {
+    public abstract static class Stub extends Binder implements IScreenRecordingCallback {
         static final int TRANSACTION_onScreenRecordingStateChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IScreenRecordingCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IScreenRecordingCallback.DESCRIPTOR);
             }
@@ -97,7 +98,8 @@ public interface IScreenRecordingCallback extends IInterface {
             }
 
             @Override // android.window.IScreenRecordingCallback
-            public void onScreenRecordingStateChanged(boolean visibleInScreenRecording) throws RemoteException {
+            public void onScreenRecordingStateChanged(boolean visibleInScreenRecording)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IScreenRecordingCallback.DESCRIPTOR);

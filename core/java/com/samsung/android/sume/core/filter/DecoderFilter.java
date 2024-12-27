@@ -7,6 +7,7 @@ import android.media.MediaCrypto;
 import android.media.MediaFormat;
 import android.util.Log;
 import android.view.Surface;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
@@ -17,6 +18,7 @@ import com.samsung.android.sume.core.exception.StreamFilterExitException;
 import com.samsung.android.sume.core.functional.BufferSupplier;
 import com.samsung.android.sume.core.message.Message;
 import com.samsung.android.sume.core.types.MediaType;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.concurrent.CancellationException;
@@ -72,7 +74,10 @@ public class DecoderFilter extends MediaCodecFilter implements BufferSupplier {
         BufferChannel outputChannel = this.sendChannelQuery.apply(mediaType);
         this.reachedInputEos = false;
         this.reachedOutputEos = false;
-        this.codecTag = "[dec: " + this.mediaCodec.getCodecInfo().getCanonicalName() + NavigationBarInflaterView.SIZE_MOD_END;
+        this.codecTag =
+                "[dec: "
+                        + this.mediaCodec.getCodecInfo().getCanonicalName()
+                        + NavigationBarInflaterView.SIZE_MOD_END;
         MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
         while (true) {
             if (!this.reachedInputEos || !this.reachedOutputEos) {
@@ -90,11 +95,16 @@ public class DecoderFilter extends MediaCodecFilter implements BufferSupplier {
                     }
                     mediaBuffer.release();
                 }
-                int status = this.mediaCodec.dequeueOutputBuffer(bufferInfo, JobInfo.MIN_BACKOFF_MILLIS);
+                int status =
+                        this.mediaCodec.dequeueOutputBuffer(bufferInfo, JobInfo.MIN_BACKOFF_MILLIS);
                 if (status == -1) {
                     Log.d(TAG, tagged("retry dequeue output buffer", new Object[0]));
                 } else if (status == -2) {
-                    Log.d(TAG, tagged("output format changed: " + this.mediaCodec.getOutputFormat(), new Object[0]));
+                    Log.d(
+                            TAG,
+                            tagged(
+                                    "output format changed: " + this.mediaCodec.getOutputFormat(),
+                                    new Object[0]));
                 } else if (status < 0) {
                     continue;
                 } else {
@@ -102,17 +112,31 @@ public class DecoderFilter extends MediaCodecFilter implements BufferSupplier {
                         Log.d(TAG, tagged("reached EOS", new Object[0]));
                         this.reachedOutputEos = true;
                         if (outputChannel instanceof SurfaceChannel) {
-                            this.messageProducer.newMessage(5, "last-timestampUs", Long.valueOf(this.lastTimestampUs.get())).post();
+                            this.messageProducer
+                                    .newMessage(
+                                            5,
+                                            "last-timestampUs",
+                                            Long.valueOf(this.lastTimestampUs.get()))
+                                    .post();
                         } else {
-                            MutableMediaBuffer mutableOf = MediaBuffer.mutableOf(com.samsung.android.sume.core.format.MediaFormat.mutableImageOf(new Object[0]));
+                            MutableMediaBuffer mutableOf =
+                                    MediaBuffer.mutableOf(
+                                            com.samsung.android.sume.core.format.MediaFormat
+                                                    .mutableImageOf(new Object[0]));
                             mutableOf.setExtra("reached-eos", true);
                             outputChannel.send(mutableOf);
                         }
                     }
                     if (bufferInfo.size == 0) {
                         continue;
-                    } else if (this.startTimeUs.get() > 0 && bufferInfo.presentationTimeUs < this.startTimeUs.get()) {
-                        Log.d(TAG, "drop sample of " + bufferInfo.presentationTimeUs + " before " + this.startTimeUs.get());
+                    } else if (this.startTimeUs.get() > 0
+                            && bufferInfo.presentationTimeUs < this.startTimeUs.get()) {
+                        Log.d(
+                                TAG,
+                                "drop sample of "
+                                        + bufferInfo.presentationTimeUs
+                                        + " before "
+                                        + this.startTimeUs.get());
                         this.mediaCodec.releaseOutputBuffer(status, false);
                     } else {
                         if (outputChannel instanceof SurfaceChannel) {
@@ -124,13 +148,21 @@ public class DecoderFilter extends MediaCodecFilter implements BufferSupplier {
                             if (outputChannel.isClosedForSend()) {
                                 throw new CancellationException("output channel is already closed");
                             }
-                            this.mediaCodec.releaseOutputBuffer(status, bufferInfo.presentationTimeUs * 1000);
+                            this.mediaCodec.releaseOutputBuffer(
+                                    status, bufferInfo.presentationTimeUs * 1000);
                         } else {
                             ByteBuffer decodedBuffer = this.mediaCodec.getOutputBuffer(status);
                             decodedBuffer.rewind();
-                            MediaBuffer mediaBuffer2 = MediaBuffer.of(com.samsung.android.sume.core.format.MediaFormat.mutableAudioOf(Integer.valueOf(decodedBuffer.limit())));
-                            ((ByteBuffer) mediaBuffer2.getTypedData(ByteBuffer.class)).put(decodedBuffer);
-                            mediaBuffer2.setExtra("timestampUs", Long.valueOf(bufferInfo.presentationTimeUs));
+                            MediaBuffer mediaBuffer2 =
+                                    MediaBuffer.of(
+                                            com.samsung.android.sume.core.format.MediaFormat
+                                                    .mutableAudioOf(
+                                                            Integer.valueOf(
+                                                                    decodedBuffer.limit())));
+                            ((ByteBuffer) mediaBuffer2.getTypedData(ByteBuffer.class))
+                                    .put(decodedBuffer);
+                            mediaBuffer2.setExtra(
+                                    "timestampUs", Long.valueOf(bufferInfo.presentationTimeUs));
                             outputChannel.send(mediaBuffer2);
                             this.mediaCodec.releaseOutputBuffer(status, false);
                         }
@@ -166,7 +198,9 @@ public class DecoderFilter extends MediaCodecFilter implements BufferSupplier {
                     Thread.sleep(50L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    Log.d(TAG, tagged("retry to dequeue input buffer: " + bufferIdx, new Object[0]));
+                    Log.d(
+                            TAG,
+                            tagged("retry to dequeue input buffer: " + bufferIdx, new Object[0]));
                 }
             } else {
                 Log.d(TAG, tagged("success to dequeue input buffer: " + bufferIdx, new Object[0]));
@@ -181,7 +215,8 @@ public class DecoderFilter extends MediaCodecFilter implements BufferSupplier {
 
     @Override // com.samsung.android.sume.core.functional.BufferSupplier
     public Supplier<MediaBuffer> getBufferSupplier() {
-        return new Supplier() { // from class: com.samsung.android.sume.core.filter.DecoderFilter$$ExternalSyntheticLambda0
+        return new Supplier() { // from class:
+                                // com.samsung.android.sume.core.filter.DecoderFilter$$ExternalSyntheticLambda0
             @Override // java.util.function.Supplier
             public final Object get() {
                 MediaBuffer supplyMediaBuffer;

@@ -79,6 +79,7 @@ import android.widget.TextView;
 import android.window.OnBackInvokedDispatcher;
 import android.window.ProxyOnBackInvokedDispatcher;
 import android.window.TaskConstants;
+
 import com.android.internal.R;
 import com.android.internal.view.menu.ContextMenuBuilder;
 import com.android.internal.view.menu.IconMenuPresenter;
@@ -90,7 +91,9 @@ import com.android.internal.view.menu.MenuPresenter;
 import com.android.internal.view.menu.MenuView;
 import com.android.internal.widget.DecorContentParent;
 import com.android.window.flags.Flags;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
@@ -205,14 +208,18 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     private int mUiOptions;
     private boolean mUseDecorContext;
     private int mVolumeControlStreamType;
-    private static final Window.OnContentApplyWindowInsetsListener sDefaultContentInsetsApplier = new Window.OnContentApplyWindowInsetsListener() { // from class: com.android.internal.policy.PhoneWindow$$ExternalSyntheticLambda1
-        @Override // android.view.Window.OnContentApplyWindowInsetsListener
-        public final Pair onContentApplyWindowInsets(View view, WindowInsets windowInsets) {
-            return PhoneWindow.lambda$static$0(view, windowInsets);
-        }
-    };
+    private static final Window.OnContentApplyWindowInsetsListener sDefaultContentInsetsApplier =
+            new Window
+                    .OnContentApplyWindowInsetsListener() { // from class:
+                                                            // com.android.internal.policy.PhoneWindow$$ExternalSyntheticLambda1
+                @Override // android.view.Window.OnContentApplyWindowInsetsListener
+                public final Pair onContentApplyWindowInsets(View view, WindowInsets windowInsets) {
+                    return PhoneWindow.lambda$static$0(view, windowInsets);
+                }
+            };
     private static final Transition USE_DEFAULT_TRANSITION = new TransitionSet();
-    private static final int ENFORCE_EDGE_TO_EDGE_SDK_VERSION = SystemProperties.getInt("persist.wm.debug.default_e2e_since_sdk", Integer.MAX_VALUE);
+    private static final int ENFORCE_EDGE_TO_EDGE_SDK_VERSION =
+            SystemProperties.getInt("persist.wm.debug.default_e2e_since_sdk", Integer.MAX_VALUE);
     static final RotationWatcher sRotationWatcher = new RotationWatcher();
 
     static /* synthetic */ Pair lambda$static$0(View view, WindowInsets insets) {
@@ -224,10 +231,10 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     }
 
     static class WindowManagerHolder {
-        static final IWindowManager sWindowManager = IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
+        static final IWindowManager sWindowManager =
+                IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
 
-        WindowManagerHolder() {
-        }
+        WindowManagerHolder() {}
     }
 
     public PhoneWindow(Context context) {
@@ -255,18 +262,19 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         this.mVolumeControlStreamType = Integer.MIN_VALUE;
         this.mAudioMode = 0;
         this.mUiOptions = 0;
-        this.mInvalidatePanelMenuRunnable = new Runnable() { // from class: com.android.internal.policy.PhoneWindow.1
-            @Override // java.lang.Runnable
-            public void run() {
-                for (int i = 0; i <= 13; i++) {
-                    if ((PhoneWindow.this.mInvalidatePanelMenuFeatures & (1 << i)) != 0) {
-                        PhoneWindow.this.doInvalidatePanelMenu(i);
+        this.mInvalidatePanelMenuRunnable =
+                new Runnable() { // from class: com.android.internal.policy.PhoneWindow.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        for (int i = 0; i <= 13; i++) {
+                            if ((PhoneWindow.this.mInvalidatePanelMenuFeatures & (1 << i)) != 0) {
+                                PhoneWindow.this.doInvalidatePanelMenu(i);
+                            }
+                        }
+                        PhoneWindow.this.mInvalidatePanelMenuPosted = false;
+                        PhoneWindow.this.mInvalidatePanelMenuFeatures = 0;
                     }
-                }
-                PhoneWindow.this.mInvalidatePanelMenuPosted = false;
-                PhoneWindow.this.mInvalidatePanelMenuFeatures = 0;
-            }
-        };
+                };
         this.mEnterTransition = null;
         this.mReturnTransition = USE_DEFAULT_TRANSITION;
         this.mExitTransition = null;
@@ -281,15 +289,26 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         this.mDecorFitsSystemWindows = true;
         this.mActivityCurrentConfig = null;
         this.mLayoutInflater = LayoutInflater.from(context);
-        this.mRenderShadowsInCompositor = Settings.Global.getInt(context.getContentResolver(), Settings.Global.DEVELOPMENT_RENDER_SHADOWS_IN_COMPOSITOR, 1) != 0;
+        this.mRenderShadowsInCompositor =
+                Settings.Global.getInt(
+                                context.getContentResolver(),
+                                Settings.Global.DEVELOPMENT_RENDER_SHADOWS_IN_COMPOSITOR,
+                                1)
+                        != 0;
         this.mProxyOnBackInvokedDispatcher = new ProxyOnBackInvokedDispatcher(context);
-        this.mAllowFloatingWindowsFillScreen = Boolean.valueOf(context.getResources().getBoolean(R.bool.config_allowFloatingWindowsFillScreen));
+        this.mAllowFloatingWindowsFillScreen =
+                Boolean.valueOf(
+                        context.getResources()
+                                .getBoolean(R.bool.config_allowFloatingWindowsFillScreen));
         updateDeviceDefaultNavigationBarColor();
         this.mDefaultNavigationBarColor = this.mDeviceDefaultNavigationBarColor;
         this.mSettingsNavigationBarColor = this.mDeviceDefaultNavigationBarColor;
     }
 
-    public PhoneWindow(Context context, Window preservedWindow, ViewRootImpl.ActivityConfigCallback activityConfigCallback) {
+    public PhoneWindow(
+            Context context,
+            Window preservedWindow,
+            ViewRootImpl.ActivityConfigCallback activityConfigCallback) {
         this(context);
         boolean forceResizable;
         boolean z = true;
@@ -308,19 +327,26 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             }
             setPreserved(true);
         }
-        if (Settings.Global.getInt(context.getContentResolver(), Settings.Global.DEVELOPMENT_FORCE_RESIZABLE_ACTIVITIES, 0) != 0) {
+        if (Settings.Global.getInt(
+                        context.getContentResolver(),
+                        Settings.Global.DEVELOPMENT_FORCE_RESIZABLE_ACTIVITIES,
+                        0)
+                != 0) {
             forceResizable = true;
         } else {
             forceResizable = false;
         }
-        if (!forceResizable && !context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)) {
+        if (!forceResizable
+                && !context.getPackageManager()
+                        .hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)) {
             z = false;
         }
         this.mSupportsPictureInPicture = z;
         this.mActivityConfigCallback = activityConfigCallback;
     }
 
-    public static boolean isEdgeToEdgeEnforced(ApplicationInfo info, boolean local, TypedArray windowStyle) {
+    public static boolean isEdgeToEdgeEnforced(
+            ApplicationInfo info, boolean local, TypedArray windowStyle) {
         if (windowStyle.getBoolean(63, false)) {
             return false;
         }
@@ -347,12 +373,14 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     @Override // android.view.Window
     public boolean requestFeature(int featureId) {
         if (this.mContentParentExplicitlySet) {
-            throw new AndroidRuntimeException("requestFeature() must be called before adding content");
+            throw new AndroidRuntimeException(
+                    "requestFeature() must be called before adding content");
         }
         int features = getFeatures();
         int newFeatures = (1 << featureId) | features;
         if ((newFeatures & 128) != 0 && (newFeatures & (-13506)) != 0) {
-            throw new AndroidRuntimeException("You cannot combine custom titles with other title features");
+            throw new AndroidRuntimeException(
+                    "You cannot combine custom titles with other title features");
         }
         if ((features & 2) != 0 && featureId == 8) {
             return false;
@@ -360,7 +388,10 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         if ((features & 256) != 0 && featureId == 1) {
             removeFeature(8);
         }
-        if (featureId == 5 && getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH)) {
+        if (featureId == 5
+                && getContext()
+                        .getPackageManager()
+                        .hasSystemFeature(PackageManager.FEATURE_WATCH)) {
             throw new AndroidRuntimeException("You cannot use indeterminate progress on a watch.");
         }
         return super.requestFeature(featureId);
@@ -399,7 +430,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             this.mContentParent.removeAllViews();
         }
         if (hasFeature(12)) {
-            Scene newScene = Scene.getSceneForLayout(this.mContentParent, layoutResID, getContext());
+            Scene newScene =
+                    Scene.getSceneForLayout(this.mContentParent, layoutResID, getContext());
             transitionTo(newScene);
         } else {
             this.mLayoutInflater.inflate(layoutResID, this.mContentParent);
@@ -621,7 +653,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     @Override // android.view.Window
     public void onConfigurationChanged(Configuration newConfig) {
         PanelFeatureState st;
-        if (this.mDecorContentParent == null && (st = getPanelState(0, false)) != null && st.menu != null) {
+        if (this.mDecorContentParent == null
+                && (st = getPanelState(0, false)) != null
+                && st.menu != null) {
             if (st.isOpen) {
                 Bundle state = new Bundle();
                 if (st.iconMenuPresenter != null) {
@@ -667,7 +701,10 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     @Override // android.view.Window
     public final void openPanel(int featureId, KeyEvent event) {
-        if (featureId == 0 && this.mDecorContentParent != null && this.mDecorContentParent.canShowOverflowMenu() && !ViewConfiguration.get(getContext()).hasPermanentMenuKey()) {
+        if (featureId == 0
+                && this.mDecorContentParent != null
+                && this.mDecorContentParent.canShowOverflowMenu()
+                && !ViewConfiguration.get(getContext()).hasPermanentMenuKey()) {
             this.mDecorContentParent.showOverflowMenu();
         } else {
             openPanel(getPanelState(featureId, true), event);
@@ -731,14 +768,18 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             }
         } else if (!st.isInListMode()) {
             width = -1;
-        } else if (st.createdPanelView != null && (lp = st.createdPanelView.getLayoutParams()) != null && lp.width == -1) {
+        } else if (st.createdPanelView != null
+                && (lp = st.createdPanelView.getLayoutParams()) != null
+                && lp.width == -1) {
             width = -1;
         }
         if (!st.hasPanelItems()) {
             return;
         }
         st.isHandled = false;
-        WindowManager.LayoutParams lp3 = new WindowManager.LayoutParams(width, -2, st.x, st.y, 1003, 8519680, st.decorView.mDefaultOpacity);
+        WindowManager.LayoutParams lp3 =
+                new WindowManager.LayoutParams(
+                        width, -2, st.x, st.y, 1003, 8519680, st.decorView.mDefaultOpacity);
         if (st.isCompact) {
             lp3.gravity = getOptionsPanelGravity();
             sRotationWatcher.addWindow(this);
@@ -752,7 +793,10 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     @Override // android.view.Window
     public final void closePanel(int featureId) {
-        if (featureId == 0 && this.mDecorContentParent != null && this.mDecorContentParent.canShowOverflowMenu() && !ViewConfiguration.get(getContext()).hasPermanentMenuKey()) {
+        if (featureId == 0
+                && this.mDecorContentParent != null
+                && this.mDecorContentParent.canShowOverflowMenu()
+                && !ViewConfiguration.get(getContext()).hasPermanentMenuKey()) {
             this.mDecorContentParent.hideOverflowMenu();
         } else if (featureId == 6) {
             closeContextMenu();
@@ -762,7 +806,10 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     }
 
     public final void closePanel(PanelFeatureState st, boolean doCallback) {
-        if (doCallback && st.featureId == 0 && this.mDecorContentParent != null && this.mDecorContentParent.isOverflowMenuShowing()) {
+        if (doCallback
+                && st.featureId == 0
+                && this.mDecorContentParent != null
+                && this.mDecorContentParent.isOverflowMenuShowing()) {
             checkCloseActionMenu(st.menu);
             return;
         }
@@ -848,7 +895,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
         st2.refreshMenuContent = true;
         st2.refreshDecorView = true;
-        if ((featureId == 8 || featureId == 0) && this.mDecorContentParent != null && (st = getPanelState(0, false)) != null) {
+        if ((featureId == 8 || featureId == 0)
+                && this.mDecorContentParent != null
+                && (st = getPanelState(0, false)) != null) {
             st.isPrepared = false;
             preparePanel(st, null);
         }
@@ -877,7 +926,10 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                 return;
             }
             boolean playSoundEffect = false;
-            if (featureId == 0 && this.mDecorContentParent != null && this.mDecorContentParent.canShowOverflowMenu() && !ViewConfiguration.get(getContext()).hasPermanentMenuKey()) {
+            if (featureId == 0
+                    && this.mDecorContentParent != null
+                    && this.mDecorContentParent.canShowOverflowMenu()
+                    && !ViewConfiguration.get(getContext()).hasPermanentMenuKey()) {
                 if (!this.mDecorContentParent.isOverflowMenuShowing()) {
                     if (!isDestroyed() && preparePanel(st, event)) {
                         playSoundEffect = this.mDecorContentParent.showOverflowMenu();
@@ -1007,16 +1059,23 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     }
 
     private void reopenMenu(boolean toggleMenuMode) {
-        if (this.mDecorContentParent != null && this.mDecorContentParent.canShowOverflowMenu() && (!ViewConfiguration.get(getContext()).hasPermanentMenuKey() || this.mDecorContentParent.isOverflowMenuShowPending())) {
+        if (this.mDecorContentParent != null
+                && this.mDecorContentParent.canShowOverflowMenu()
+                && (!ViewConfiguration.get(getContext()).hasPermanentMenuKey()
+                        || this.mDecorContentParent.isOverflowMenuShowPending())) {
             Window.Callback cb = getCallback();
             if (!this.mDecorContentParent.isOverflowMenuShowing() || !toggleMenuMode) {
                 if (cb != null && !isDestroyed()) {
-                    if (this.mInvalidatePanelMenuPosted && (1 & this.mInvalidatePanelMenuFeatures) != 0) {
+                    if (this.mInvalidatePanelMenuPosted
+                            && (1 & this.mInvalidatePanelMenuFeatures) != 0) {
                         this.mDecor.removeCallbacks(this.mInvalidatePanelMenuRunnable);
                         this.mInvalidatePanelMenuRunnable.run();
                     }
                     PanelFeatureState st = getPanelState(0, false);
-                    if (st != null && st.menu != null && !st.refreshMenuContent && cb.onPreparePanel(0, st.createdPanelView, st.menu)) {
+                    if (st != null
+                            && st.menu != null
+                            && !st.refreshMenuContent
+                            && cb.onPreparePanel(0, st.createdPanelView, st.menu)) {
                         cb.onMenuOpened(8, st.menu);
                         this.mDecorContentParent.showOverflowMenu();
                         return;
@@ -1084,7 +1143,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         st.decorView = generateDecor(st.featureId);
         st.gravity = 81;
         st.setStyle(getContext());
-        TypedArray a = getContext().obtainStyledAttributes(null, R.styleable.Window, 0, st.listPresenterTheme);
+        TypedArray a =
+                getContext()
+                        .obtainStyledAttributes(null, R.styleable.Window, 0, st.listPresenterTheme);
         float elevation = a.getDimension(37, 0.0f);
         if (elevation != 0.0f) {
             st.decorView.setElevation(elevation);
@@ -1095,7 +1156,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     private int getOptionsPanelGravity() {
         try {
-            return WindowManagerHolder.sWindowManager.getPreferredOptionsPanelGravity(getContext().getDisplayId());
+            return WindowManagerHolder.sWindowManager.getPreferredOptionsPanelGravity(
+                    getContext().getDisplayId());
         } catch (RemoteException ex) {
             Log.e(TAG, "Couldn't getOptionsPanelGravity; using default", ex);
             return 81;
@@ -1107,7 +1169,10 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         if (st == null) {
             return;
         }
-        WindowManager.LayoutParams lp = st.decorView != null ? (WindowManager.LayoutParams) st.decorView.getLayoutParams() : null;
+        WindowManager.LayoutParams lp =
+                st.decorView != null
+                        ? (WindowManager.LayoutParams) st.decorView.getLayoutParams()
+                        : null;
         if (lp != null) {
             lp.gravity = getOptionsPanelGravity();
             ViewManager wm = getWindowManager();
@@ -1185,7 +1250,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                 this.mDecor.startChanging();
                 this.mDecor.setWindowBackground(drawable);
                 if (this.mBackgroundFallbackDrawable != null) {
-                    this.mDecor.setBackgroundFallback(drawable != null ? null : this.mBackgroundFallbackDrawable);
+                    this.mDecor.setBackgroundFallback(
+                            drawable != null ? null : this.mBackgroundFallbackDrawable);
                 }
                 this.mDecor.finishChanging();
             }
@@ -1195,7 +1261,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     @Override // android.view.Window
     public final void setBackgroundBlurRadius(int blurRadius) {
         super.setBackgroundBlurRadius(blurRadius);
-        if (CrossWindowBlurListeners.CROSS_WINDOW_BLUR_SUPPORTED && this.mBackgroundBlurRadius != Math.max(blurRadius, 0)) {
+        if (CrossWindowBlurListeners.CROSS_WINDOW_BLUR_SUPPORTED
+                && this.mBackgroundBlurRadius != Math.max(blurRadius, 0)) {
             this.mBackgroundBlurRadius = Math.max(blurRadius, 0);
             this.mDecor.setBackgroundBlurRadius(this.mBackgroundBlurRadius);
         }
@@ -1295,7 +1362,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         FrameLayout titleContainer;
         if (featureId == 2 || featureId == 5) {
             updateProgressBars(value);
-        } else if (featureId == 7 && (titleContainer = (FrameLayout) findViewById(R.id.title_container)) != null) {
+        } else if (featureId == 7
+                && (titleContainer = (FrameLayout) findViewById(R.id.title_container)) != null) {
             this.mLayoutInflater.inflate(value, titleContainer);
         }
     }
@@ -1308,7 +1376,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             if ((features & 4) != 0) {
                 if (horizontalProgressBar != null) {
                     int level = horizontalProgressBar.getProgress();
-                    int visibility = (horizontalProgressBar.isIndeterminate() || level < 10000) ? 0 : 4;
+                    int visibility =
+                            (horizontalProgressBar.isIndeterminate() || level < 10000) ? 0 : 4;
                     horizontalProgressBar.setVisibility(visibility);
                 } else {
                     Log.e(TAG, "Horizontal progress bar not located in current window decor");
@@ -1378,7 +1447,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
         if (20000 <= value && value <= 30000) {
             if (horizontalProgressBar != null) {
-                horizontalProgressBar.setSecondaryProgress(value + TaskConstants.TASK_CHILD_LAYER_LETTERBOX_BACKGROUND);
+                horizontalProgressBar.setSecondaryProgress(
+                        value + TaskConstants.TASK_CHILD_LAYER_LETTERBOX_BACKGROUND);
             } else {
                 Log.e(TAG, "Horizontal progress bar not located in current window decor");
             }
@@ -1386,25 +1456,35 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
     }
 
-    private void showProgressBars(ProgressBar horizontalProgressBar, ProgressBar spinnyProgressBar) {
+    private void showProgressBars(
+            ProgressBar horizontalProgressBar, ProgressBar spinnyProgressBar) {
         int features = getLocalFeatures();
-        if ((features & 32) != 0 && spinnyProgressBar != null && spinnyProgressBar.getVisibility() == 4) {
+        if ((features & 32) != 0
+                && spinnyProgressBar != null
+                && spinnyProgressBar.getVisibility() == 4) {
             spinnyProgressBar.setVisibility(0);
         }
-        if ((features & 4) != 0 && horizontalProgressBar != null && horizontalProgressBar.getProgress() < 10000) {
+        if ((features & 4) != 0
+                && horizontalProgressBar != null
+                && horizontalProgressBar.getProgress() < 10000) {
             horizontalProgressBar.setVisibility(0);
         }
     }
 
-    private void hideProgressBars(ProgressBar horizontalProgressBar, ProgressBar spinnyProgressBar) {
+    private void hideProgressBars(
+            ProgressBar horizontalProgressBar, ProgressBar spinnyProgressBar) {
         int features = getLocalFeatures();
         Animation anim = AnimationUtils.loadAnimation(getContext(), 17432577);
         anim.setDuration(1000L);
-        if ((features & 32) != 0 && spinnyProgressBar != null && spinnyProgressBar.getVisibility() == 0) {
+        if ((features & 32) != 0
+                && spinnyProgressBar != null
+                && spinnyProgressBar.getVisibility() == 0) {
             spinnyProgressBar.startAnimation(anim);
             spinnyProgressBar.setVisibility(4);
         }
-        if ((features & 4) != 0 && horizontalProgressBar != null && horizontalProgressBar.getVisibility() == 0) {
+        if ((features & 4) != 0
+                && horizontalProgressBar != null
+                && horizontalProgressBar.getVisibility() == 0) {
             horizontalProgressBar.startAnimation(anim);
             horizontalProgressBar.setVisibility(4);
         }
@@ -1432,7 +1512,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                     this.mDecorContentParent.setIcon(resId);
                     this.mResourcesSetFlags &= -5;
                 } else {
-                    this.mDecorContentParent.setIcon(getContext().getPackageManager().getDefaultActivityIcon());
+                    this.mDecorContentParent.setIcon(
+                            getContext().getPackageManager().getDefaultActivityIcon());
                     this.mResourcesSetFlags |= 4;
                 }
             }
@@ -1518,7 +1599,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     protected boolean onKeyDown(int featureId, int keyCode, KeyEvent event) {
-        KeyEvent.DispatcherState dispatcher = this.mDecor != null ? this.mDecor.getKeyDispatcherState() : null;
+        KeyEvent.DispatcherState dispatcher =
+                this.mDecor != null ? this.mDecor.getKeyDispatcherState() : null;
         switch (keyCode) {
             case 4:
                 if (event.getRepeatCount() <= 0 && featureId >= 0) {
@@ -1532,9 +1614,13 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             case 25:
             case 164:
                 if (this.mMediaController != null && !isActivePhoneCallOngoing()) {
-                    getMediaSessionManager().dispatchVolumeKeyEventToSessionAsSystemService(event, this.mMediaController.getSessionToken());
+                    getMediaSessionManager()
+                            .dispatchVolumeKeyEventToSessionAsSystemService(
+                                    event, this.mMediaController.getSessionToken());
                 } else {
-                    getMediaSessionManager().dispatchVolumeKeyEventAsSystemService(event, this.mVolumeControlStreamType);
+                    getMediaSessionManager()
+                            .dispatchVolumeKeyEventAsSystemService(
+                                    event, this.mVolumeControlStreamType);
                 }
                 return true;
             case 79:
@@ -1548,7 +1634,10 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             case 126:
             case 127:
             case 130:
-                return this.mMediaController != null && getMediaSessionManager().dispatchMediaKeyEventToSessionAsSystemService(event, this.mMediaController.getSessionToken());
+                return this.mMediaController != null
+                        && getMediaSessionManager()
+                                .dispatchMediaKeyEventToSessionAsSystemService(
+                                        event, this.mMediaController.getSessionToken());
             case 82:
                 onKeyDownPanel(featureId >= 0 ? featureId : 0, event);
                 return true;
@@ -1563,7 +1652,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     private KeyguardManager getKeyguardManager() {
         if (this.mKeyguardManager == null) {
-            this.mKeyguardManager = (KeyguardManager) getContext().getSystemService(Context.KEYGUARD_SERVICE);
+            this.mKeyguardManager =
+                    (KeyguardManager) getContext().getSystemService(Context.KEYGUARD_SERVICE);
         }
         return this.mKeyguardManager;
     }
@@ -1577,7 +1667,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     private MediaSessionManager getMediaSessionManager() {
         if (this.mMediaSessionManager == null) {
-            this.mMediaSessionManager = (MediaSessionManager) getContext().getSystemService(Context.MEDIA_SESSION_SERVICE);
+            this.mMediaSessionManager =
+                    (MediaSessionManager)
+                            getContext().getSystemService(Context.MEDIA_SESSION_SERVICE);
         }
         return this.mMediaSessionManager;
     }
@@ -1585,14 +1677,17 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     protected boolean onKeyUp(int featureId, int keyCode, KeyEvent event) {
         PanelFeatureState st;
-        KeyEvent.DispatcherState dispatcher = this.mDecor != null ? this.mDecor.getKeyDispatcherState() : null;
+        KeyEvent.DispatcherState dispatcher =
+                this.mDecor != null ? this.mDecor.getKeyDispatcherState() : null;
         if (dispatcher != null) {
             dispatcher.handleUpEvent(event);
         }
         switch (keyCode) {
             case 4:
                 if (featureId >= 0 && event.isTracking() && !event.isCanceled()) {
-                    if (featureId == 0 && (st = getPanelState(featureId, false)) != null && st.isInExpandedMode) {
+                    if (featureId == 0
+                            && (st = getPanelState(featureId, false)) != null
+                            && st.isInExpandedMode) {
                         reopenMenu(true);
                         return true;
                     }
@@ -1603,9 +1698,13 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             case 24:
             case 25:
                 if (this.mMediaController != null) {
-                    getMediaSessionManager().dispatchVolumeKeyEventToSessionAsSystemService(event, this.mMediaController.getSessionToken());
+                    getMediaSessionManager()
+                            .dispatchVolumeKeyEventToSessionAsSystemService(
+                                    event, this.mMediaController.getSessionToken());
                 } else {
-                    getMediaSessionManager().dispatchVolumeKeyEventAsSystemService(event, this.mVolumeControlStreamType);
+                    getMediaSessionManager()
+                            .dispatchVolumeKeyEventAsSystemService(
+                                    event, this.mVolumeControlStreamType);
                 }
                 return true;
             case 79:
@@ -1619,12 +1718,16 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             case 126:
             case 127:
             case 130:
-                return this.mMediaController != null && getMediaSessionManager().dispatchMediaKeyEventToSessionAsSystemService(event, this.mMediaController.getSessionToken());
+                return this.mMediaController != null
+                        && getMediaSessionManager()
+                                .dispatchMediaKeyEventToSessionAsSystemService(
+                                        event, this.mMediaController.getSessionToken());
             case 82:
                 onKeyUpPanel(featureId >= 0 ? featureId : 0, event);
                 return true;
             case 84:
-                if (!isNotInstantAppAndKeyguardRestricted() && (getContext().getResources().getConfiguration().uiMode & 15) != 6) {
+                if (!isNotInstantAppAndKeyguardRestricted()
+                        && (getContext().getResources().getConfiguration().uiMode & 15) != 6) {
                     if (event.isTracking() && !event.isCanceled()) {
                         launchDefaultSearch(event);
                     }
@@ -1632,7 +1735,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                 }
                 return false;
             case 164:
-                getMediaSessionManager().dispatchVolumeKeyEventAsSystemService(event, Integer.MIN_VALUE);
+                getMediaSessionManager()
+                        .dispatchVolumeKeyEventAsSystemService(event, Integer.MIN_VALUE);
                 return true;
             case 171:
                 if (this.mSupportsPictureInPicture && !event.isCanceled()) {
@@ -1645,12 +1749,12 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     }
 
     private boolean isNotInstantAppAndKeyguardRestricted() {
-        return !getContext().getPackageManager().isInstantApp() && getKeyguardManager().inKeyguardRestrictedInputMode();
+        return !getContext().getPackageManager().isInstantApp()
+                && getKeyguardManager().inKeyguardRestrictedInputMode();
     }
 
     @Override // android.view.Window
-    protected void onActive() {
-    }
+    protected void onActive() {}
 
     @Override // android.view.Window
     public final View getDecorView() {
@@ -1668,7 +1772,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     void onViewRootImplSet(ViewRootImpl viewRoot) {
         viewRoot.setActivityConfigCallback(this.mActivityConfigCallback);
         viewRoot.getOnBackInvokedDispatcher().updateContext(getContext());
-        this.mProxyOnBackInvokedDispatcher.setActualDispatcher(viewRoot.getOnBackInvokedDispatcher());
+        this.mProxyOnBackInvokedDispatcher.setActualDispatcher(
+                viewRoot.getOnBackInvokedDispatcher());
         applyDecorFitsSystemWindows();
     }
 
@@ -1703,7 +1808,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         if (this.mContentParent == null) {
             return;
         }
-        SparseArray<Parcelable> savedStates = savedInstanceState.getSparseParcelableArray(VIEWS_TAG);
+        SparseArray<Parcelable> savedStates =
+                savedInstanceState.getSparseParcelableArray(VIEWS_TAG);
         if (savedStates != null) {
             this.mContentParent.restoreHierarchyState(savedStates);
         }
@@ -1711,19 +1817,28 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         if (focusedViewId != -1) {
             View needsFocus = this.mContentParent.findViewById(focusedViewId);
             if (needsFocus == null) {
-                Log.w(TAG, "Previously focused view reported id " + focusedViewId + " during save, but can't be found during restore.");
+                Log.w(
+                        TAG,
+                        "Previously focused view reported id "
+                                + focusedViewId
+                                + " during save, but can't be found during restore.");
             } else {
                 needsFocus.requestFocus();
             }
         }
-        SparseArray<Parcelable> panelStates = savedInstanceState.getSparseParcelableArray(PANELS_TAG);
+        SparseArray<Parcelable> panelStates =
+                savedInstanceState.getSparseParcelableArray(PANELS_TAG);
         if (panelStates != null) {
             restorePanelState(panelStates);
         }
         if (this.mDecorContentParent != null) {
-            SparseArray<Parcelable> actionBarStates = savedInstanceState.getSparseParcelableArray(ACTION_BAR_TAG);
+            SparseArray<Parcelable> actionBarStates =
+                    savedInstanceState.getSparseParcelableArray(ACTION_BAR_TAG);
             if (actionBarStates == null) {
-                Log.w(TAG, "Missing saved instance states for action bar views! State will not be restored.");
+                Log.w(
+                        TAG,
+                        "Missing saved instance states for action bar views! State will not be"
+                            + " restored.");
             } else {
                 doPendingInvalidatePanelMenu();
                 this.mDecorContentParent.restoreToolbarHierarchyState(actionBarStates);
@@ -1780,8 +1895,7 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     }
 
     private class PanelMenuPresenterCallback implements MenuPresenter.Callback {
-        private PanelMenuPresenterCallback() {
-        }
+        private PanelMenuPresenterCallback() {}
 
         @Override // com.android.internal.view.menu.MenuPresenter.Callback
         public void onCloseMenu(MenuBuilder menu, boolean allMenusAreClosing) {
@@ -1801,7 +1915,10 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         @Override // com.android.internal.view.menu.MenuPresenter.Callback
         public boolean onOpenSubMenu(MenuBuilder subMenu) {
             Window.Callback cb;
-            if (subMenu == null && PhoneWindow.this.hasFeature(8) && (cb = PhoneWindow.this.getCallback()) != null && !PhoneWindow.this.isDestroyed()) {
+            if (subMenu == null
+                    && PhoneWindow.this.hasFeature(8)
+                    && (cb = PhoneWindow.this.getCallback()) != null
+                    && !PhoneWindow.this.isDestroyed()) {
                 cb.onMenuOpened(8, subMenu);
                 return true;
             }
@@ -1810,8 +1927,7 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     }
 
     private final class ActionMenuPresenterCallback implements MenuPresenter.Callback {
-        private ActionMenuPresenterCallback() {
-        }
+        private ActionMenuPresenterCallback() {}
 
         @Override // com.android.internal.view.menu.MenuPresenter.Callback
         public boolean onOpenSubMenu(MenuBuilder subMenu) {
@@ -1862,7 +1978,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             this.mStatusBarColor = 0;
             this.mNavigationBarDividerColor = 0;
         }
-        if (CompatChanges.isChangeEnabled(OVERRIDE_LAYOUT_IN_DISPLAY_CUTOUT_MODE) && !a.getBoolean(63, false)) {
+        if (CompatChanges.isChangeEnabled(OVERRIDE_LAYOUT_IN_DISPLAY_CUTOUT_MODE)
+                && !a.getBoolean(63, false)) {
             getAttributes().privateFlags |= 262144;
         }
         this.mIsFloating = a.getBoolean(4, false);
@@ -1949,7 +2066,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             int navBarDefaultColor = context.getColor(R.color.navigation_bar_default);
             int navBarColor = a.getColor(35, navBarDefaultColor);
             boolean navigationBarColorSpecified = navBarColor != navBarDefaultColor;
-            if (!navigationBarColorSpecified && !this.mEdgeToEdgeEnforced && !context.getResources().getBoolean(R.bool.config_navBarDefaultTransparent)) {
+            if (!navigationBarColorSpecified
+                    && !this.mEdgeToEdgeEnforced
+                    && !context.getResources().getBoolean(R.bool.config_navBarDefaultTransparent)) {
                 i = navBarCompatibleColor;
             } else {
                 i = navBarColor;
@@ -1965,12 +2084,16 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             this.mEnsureNavigationBarContrastWhenTransparent = a.getBoolean(52, true);
         }
         int appColor = a.getColor(35, this.mDeviceDefaultNavigationBarColor);
-        boolean appUseDeviceDefault = this.mDeviceDefaultNavigationBarColor == appColor || context.getColor(R.color.navigation_bar_default) == appColor;
+        boolean appUseDeviceDefault =
+                this.mDeviceDefaultNavigationBarColor == appColor
+                        || context.getColor(R.color.navigation_bar_default) == appColor;
         this.mDefaultNavigationBarColor = getDefaultNavigationBarColor();
         if (!this.mForcedNavigationBarColor) {
-            this.mNavigationBarColor = appUseDeviceDefault ? this.mDefaultNavigationBarColor : appColor;
+            this.mNavigationBarColor =
+                    appUseDeviceDefault ? this.mDefaultNavigationBarColor : appColor;
         }
-        if (this.mNavigationBarColor == this.mDefaultNavigationBarColor && needLightNavigationBar(this.mNavigationBarColor)) {
+        if (this.mNavigationBarColor == this.mDefaultNavigationBarColor
+                && needLightNavigationBar(this.mNavigationBarColor)) {
             params.samsungFlags |= 1048576;
         }
         if (!this.mIsFloating) {
@@ -1980,7 +2103,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             if (this.mDecor.mForceWindowDrawsBarBackgrounds) {
                 params.privateFlags |= 32768;
             }
-            if (this.mActivityCurrentConfig == null || !this.mActivityCurrentConfig.semIsPopOver()) {
+            if (this.mActivityCurrentConfig == null
+                    || !this.mActivityCurrentConfig.semIsPopOver()) {
                 params.privateFlags |= 64;
             }
         }
@@ -1989,25 +2113,36 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
         boolean lightStatus = a.getBoolean(45, false);
         boolean lightNav = a.getBoolean(48, false);
-        decor.setSystemUiVisibility((decor.getSystemUiVisibility() & (-8209)) | (lightStatus ? 8192 : 0) | (lightNav ? 16 : 0));
-        decor.getWindowInsetsController().setSystemBarsAppearanceFromResource((lightStatus ? 8 : 0) | (lightNav ? 16 : 0), 24);
+        decor.setSystemUiVisibility(
+                (decor.getSystemUiVisibility() & (-8209))
+                        | (lightStatus ? 8192 : 0)
+                        | (lightNav ? 16 : 0));
+        decor.getWindowInsetsController()
+                .setSystemBarsAppearanceFromResource(
+                        (lightStatus ? 8 : 0) | (lightNav ? 16 : 0), 24);
         try {
             if (context.getResources().getAssets().getSamsungThemeOverlays().size() > 0) {
                 TypedValue isDeviceDefault = new TypedValue();
-                context.getTheme().resolveAttribute(R.attr.parentIsDeviceDefault, isDeviceDefault, false);
-                if (isDeviceDefault.data != 0 && a.getBoolean(45, true) && this.mStatusBarColor != 0) {
+                context.getTheme()
+                        .resolveAttribute(R.attr.parentIsDeviceDefault, isDeviceDefault, false);
+                if (isDeviceDefault.data != 0
+                        && a.getBoolean(45, true)
+                        && this.mStatusBarColor != 0) {
                     if (context.getResources().getBoolean(R.bool.sem_window_light_status_bar)) {
                         decor.setSystemUiVisibility(decor.getSystemUiVisibility() | 8192);
                     } else {
                         decor.setSystemUiVisibility(decor.getSystemUiVisibility() & (-8193));
                     }
-                    this.mStatusBarColor = context.getResources().getColor(R.color.tw_status_bar_color);
+                    this.mStatusBarColor =
+                            context.getResources().getColor(R.color.tw_status_bar_color);
                 }
             }
-            if (context.getResources().getAssets().getSamsungThemeOverlays().size() > 0 || WallpaperThemeUtils.hasWallpaperThemeOverlays(context)) {
+            if (context.getResources().getAssets().getSamsungThemeOverlays().size() > 0
+                    || WallpaperThemeUtils.hasWallpaperThemeOverlays(context)) {
                 this.mThemeApplied = true;
                 int themeColor = getDefaultNavigationBarColor();
-                if (this.mNavigationBarColor == this.mDefaultNavigationBarColor && !this.mForcedNavigationBarColor) {
+                if (this.mNavigationBarColor == this.mDefaultNavigationBarColor
+                        && !this.mForcedNavigationBarColor) {
                     this.mNavigationBarColor = themeColor;
                 }
                 if (this.mNavigationBarColor == themeColor && !needLightNavigationBar(themeColor)) {
@@ -2021,11 +2156,14 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         if (a.hasValue(50)) {
             int mode = a.getInt(50, -1);
             if (mode < 0 || mode > 3) {
-                throw new UnsupportedOperationException("Unknown windowLayoutInDisplayCutoutMode: " + a.getString(50));
+                throw new UnsupportedOperationException(
+                        "Unknown windowLayoutInDisplayCutoutMode: " + a.getString(50));
             }
             params.layoutInDisplayCutoutMode = mode;
         }
-        if ((this.mAlwaysReadCloseOnTouchAttr || getContext().getApplicationInfo().targetSdkVersion >= 11) && a.getBoolean(21, false)) {
+        if ((this.mAlwaysReadCloseOnTouchAttr
+                        || getContext().getApplicationInfo().targetSdkVersion >= 11)
+                && a.getBoolean(21, false)) {
             setCloseOnTouchOutsideIfNotSet(true);
         }
         if (!hasSoftInputMode()) {
@@ -2065,7 +2203,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             if (this.mLoadElevation) {
                 if (this.mDecor.isDialogInPopOver()) {
                     this.mElevation = 0.0f;
-                } else if (!CoreRune.MW_SHELL_FREEFORM_SHADOW_WITH_VIEW_ELEVATION || !this.mDecor.isNonFullscreenWindowInFreeform()) {
+                } else if (!CoreRune.MW_SHELL_FREEFORM_SHADOW_WITH_VIEW_ELEVATION
+                        || !this.mDecor.isNonFullscreenWindowInFreeform()) {
                     this.mElevation = a.getDimension(37, 0.0f);
                 } else {
                     this.mElevation = 0.0f;
@@ -2078,7 +2217,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         if ((features & 24) != 0) {
             if (this.mIsFloating) {
                 TypedValue res = new TypedValue();
-                getContext().getTheme().resolveAttribute(R.attr.dialogTitleIconsDecorLayout, res, true);
+                getContext()
+                        .getTheme()
+                        .resolveAttribute(R.attr.dialogTitleIconsDecorLayout, res, true);
                 layoutResource = res.resourceId;
             } else {
                 layoutResource = R.layout.screen_title_icons;
@@ -2093,7 +2234,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                 if (layoutResource3 != 0) {
                     if (this.mIsFloating) {
                         TypedValue res2 = new TypedValue();
-                        getContext().getTheme().resolveAttribute(R.attr.dialogCustomTitleDecorLayout, res2, true);
+                        getContext()
+                                .getTheme()
+                                .resolveAttribute(R.attr.dialogCustomTitleDecorLayout, res2, true);
                         layoutResource = res2.resourceId;
                     } else {
                         layoutResource = R.layout.screen_custom_title;
@@ -2104,7 +2247,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                     if (layoutResource4 == 0) {
                         if (this.mIsFloating) {
                             TypedValue res3 = new TypedValue();
-                            getContext().getTheme().resolveAttribute(R.attr.dialogTitleDecorLayout, res3, true);
+                            getContext()
+                                    .getTheme()
+                                    .resolveAttribute(R.attr.dialogTitleDecorLayout, res3, true);
                             layoutResource = res3.resourceId;
                         } else {
                             int layoutResource5 = features & 256;
@@ -2176,7 +2321,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         if (this.mContentParent == null) {
             this.mContentParent = generateLayout(this.mDecor);
             this.mDecor.makeFrameworkOptionalFitsSystemWindows();
-            DecorContentParent decorContentParent = (DecorContentParent) this.mDecor.findViewById(R.id.decor_content_parent);
+            DecorContentParent decorContentParent =
+                    (DecorContentParent) this.mDecor.findViewById(R.id.decor_content_parent);
             if (decorContentParent != null) {
                 this.mDecorContentParent = decorContentParent;
                 this.mDecorContentParent.setWindowCallback(getCallback());
@@ -2190,17 +2336,23 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                     }
                 }
                 this.mDecorContentParent.setUiOptions(this.mUiOptions);
-                if ((this.mResourcesSetFlags & 1) != 0 || (this.mIconRes != 0 && !this.mDecorContentParent.hasIcon())) {
+                if ((this.mResourcesSetFlags & 1) != 0
+                        || (this.mIconRes != 0 && !this.mDecorContentParent.hasIcon())) {
                     this.mDecorContentParent.setIcon(this.mIconRes);
-                } else if ((this.mResourcesSetFlags & 1) == 0 && this.mIconRes == 0 && !this.mDecorContentParent.hasIcon()) {
-                    this.mDecorContentParent.setIcon(getContext().getPackageManager().getDefaultActivityIcon());
+                } else if ((this.mResourcesSetFlags & 1) == 0
+                        && this.mIconRes == 0
+                        && !this.mDecorContentParent.hasIcon()) {
+                    this.mDecorContentParent.setIcon(
+                            getContext().getPackageManager().getDefaultActivityIcon());
                     this.mResourcesSetFlags |= 4;
                 }
-                if ((this.mResourcesSetFlags & 2) != 0 || (this.mLogoRes != 0 && !this.mDecorContentParent.hasLogo())) {
+                if ((this.mResourcesSetFlags & 2) != 0
+                        || (this.mLogoRes != 0 && !this.mDecorContentParent.hasLogo())) {
                     this.mDecorContentParent.setLogo(this.mLogoRes);
                 }
                 PanelFeatureState st = getPanelState(0, false);
-                if (!isDestroyed() && ((st == null || st.menu == null) && !this.mIsStartingWindow)) {
+                if (!isDestroyed()
+                        && ((st == null || st.menu == null) && !this.mIsStartingWindow)) {
                     invalidatePanelMenu(8);
                 }
             } else {
@@ -2227,30 +2379,43 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                     int transitionRes = getWindowStyle().getResourceId(26, 0);
                     if (transitionRes != 0) {
                         TransitionInflater inflater = TransitionInflater.from(getContext());
-                        this.mTransitionManager = inflater.inflateTransitionManager(transitionRes, this.mContentParent);
+                        this.mTransitionManager =
+                                inflater.inflateTransitionManager(
+                                        transitionRes, this.mContentParent);
                     } else {
                         this.mTransitionManager = new TransitionManager();
                     }
                 }
                 this.mEnterTransition = getTransition(this.mEnterTransition, null, 27);
-                this.mReturnTransition = getTransition(this.mReturnTransition, USE_DEFAULT_TRANSITION, 39);
+                this.mReturnTransition =
+                        getTransition(this.mReturnTransition, USE_DEFAULT_TRANSITION, 39);
                 this.mExitTransition = getTransition(this.mExitTransition, null, 28);
-                this.mReenterTransition = getTransition(this.mReenterTransition, USE_DEFAULT_TRANSITION, 40);
-                this.mSharedElementEnterTransition = getTransition(this.mSharedElementEnterTransition, null, 29);
-                this.mSharedElementReturnTransition = getTransition(this.mSharedElementReturnTransition, USE_DEFAULT_TRANSITION, 41);
-                this.mSharedElementExitTransition = getTransition(this.mSharedElementExitTransition, null, 30);
-                this.mSharedElementReenterTransition = getTransition(this.mSharedElementReenterTransition, USE_DEFAULT_TRANSITION, 42);
+                this.mReenterTransition =
+                        getTransition(this.mReenterTransition, USE_DEFAULT_TRANSITION, 40);
+                this.mSharedElementEnterTransition =
+                        getTransition(this.mSharedElementEnterTransition, null, 29);
+                this.mSharedElementReturnTransition =
+                        getTransition(
+                                this.mSharedElementReturnTransition, USE_DEFAULT_TRANSITION, 41);
+                this.mSharedElementExitTransition =
+                        getTransition(this.mSharedElementExitTransition, null, 30);
+                this.mSharedElementReenterTransition =
+                        getTransition(
+                                this.mSharedElementReenterTransition, USE_DEFAULT_TRANSITION, 42);
                 if (this.mAllowEnterTransitionOverlap == null) {
-                    this.mAllowEnterTransitionOverlap = Boolean.valueOf(getWindowStyle().getBoolean(32, true));
+                    this.mAllowEnterTransitionOverlap =
+                            Boolean.valueOf(getWindowStyle().getBoolean(32, true));
                 }
                 if (this.mAllowReturnTransitionOverlap == null) {
-                    this.mAllowReturnTransitionOverlap = Boolean.valueOf(getWindowStyle().getBoolean(31, true));
+                    this.mAllowReturnTransitionOverlap =
+                            Boolean.valueOf(getWindowStyle().getBoolean(31, true));
                 }
                 if (this.mBackgroundFadeDurationMillis < 0) {
                     this.mBackgroundFadeDurationMillis = getWindowStyle().getInteger(36, 300);
                 }
                 if (this.mSharedElementsUseOverlay == null) {
-                    this.mSharedElementsUseOverlay = Boolean.valueOf(getWindowStyle().getBoolean(43, true));
+                    this.mSharedElementsUseOverlay =
+                            Boolean.valueOf(getWindowStyle().getBoolean(43, true));
                 }
             }
         }
@@ -2266,7 +2431,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
         TransitionInflater inflater = TransitionInflater.from(getContext());
         Transition transition = inflater.inflateTransition(transitionId);
-        if ((transition instanceof TransitionSet) && ((TransitionSet) transition).getTransitionCount() == 0) {
+        if ((transition instanceof TransitionSet)
+                && ((TransitionSet) transition).getTransitionCount() == 0) {
             return null;
         }
         return transition;
@@ -2274,7 +2440,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     private Drawable loadImageURI(Uri uri) {
         try {
-            return Drawable.createFromStream(getContext().getContentResolver().openInputStream(uri), null);
+            return Drawable.createFromStream(
+                    getContext().getContentResolver().openInputStream(uri), null);
         } catch (Exception e) {
             Log.w(TAG, "Unable to open content: " + uri);
             return null;
@@ -2311,7 +2478,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         return getPanelState(featureId, required, null);
     }
 
-    private PanelFeatureState getPanelState(int featureId, boolean required, PanelFeatureState convertPanelState) {
+    private PanelFeatureState getPanelState(
+            int featureId, boolean required, PanelFeatureState convertPanelState) {
         PanelFeatureState panelFeatureState;
         if ((getFeatures() & (1 << featureId)) == 0) {
             if (!required) {
@@ -2358,7 +2526,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     @Override // android.view.Window
     public boolean isShortcutKey(int keyCode, KeyEvent event) {
         PanelFeatureState st = getPanelState(0, false);
-        return (st == null || st.menu == null || !st.menu.isShortcutKey(keyCode, event)) ? false : true;
+        return (st == null || st.menu == null || !st.menu.isShortcutKey(keyCode, event))
+                ? false
+                : true;
     }
 
     private void updateDrawable(int featureId, DrawableFeatureState st, boolean fromResume) {
@@ -2496,13 +2666,24 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     }
 
     private boolean isTvUserSetupComplete() {
-        boolean isTvSetupComplete = Settings.Secure.getInt(getContext().getContentResolver(), Settings.Secure.USER_SETUP_COMPLETE, 0) != 0;
-        return isTvSetupComplete & (Settings.Secure.getInt(getContext().getContentResolver(), Settings.Secure.TV_USER_SETUP_COMPLETE, 0) != 0);
+        boolean isTvSetupComplete =
+                Settings.Secure.getInt(
+                                getContext().getContentResolver(),
+                                Settings.Secure.USER_SETUP_COMPLETE,
+                                0)
+                        != 0;
+        return isTvSetupComplete
+                & (Settings.Secure.getInt(
+                                getContext().getContentResolver(),
+                                Settings.Secure.TV_USER_SETUP_COMPLETE,
+                                0)
+                        != 0);
     }
 
     private boolean launchDefaultSearch(KeyEvent event) {
         boolean result;
-        if (getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK) && !isTvUserSetupComplete()) {
+        if (getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK)
+                && !isTvUserSetupComplete()) {
             return false;
         }
         Window.Callback cb = getCallback();
@@ -2517,7 +2698,12 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             try {
                 result = cb.onSearchRequested(searchEvent);
             } catch (AbstractMethodError e) {
-                Log.e(TAG, "WindowCallback " + cb.getClass().getName() + " does not implement method onSearchRequested(SearchEvent); fa", e);
+                Log.e(
+                        TAG,
+                        "WindowCallback "
+                                + cb.getClass().getName()
+                                + " does not implement method onSearchRequested(SearchEvent); fa",
+                        e);
                 result = cb.onSearchRequested();
             }
         }
@@ -2546,13 +2732,18 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         this.mMediaController = controller;
         if (controller != null && this.mOnModeChangedListener == null) {
             this.mAudioMode = getAudioManager().getMode();
-            this.mOnModeChangedListener = new AudioManager.OnModeChangedListener() { // from class: com.android.internal.policy.PhoneWindow$$ExternalSyntheticLambda0
-                @Override // android.media.AudioManager.OnModeChangedListener
-                public final void onModeChanged(int i) {
-                    PhoneWindow.this.lambda$setMediaController$1(i);
-                }
-            };
-            getAudioManager().addOnModeChangedListener(getContext().getMainExecutor(), this.mOnModeChangedListener);
+            this.mOnModeChangedListener =
+                    new AudioManager
+                            .OnModeChangedListener() { // from class:
+                                                       // com.android.internal.policy.PhoneWindow$$ExternalSyntheticLambda0
+                        @Override // android.media.AudioManager.OnModeChangedListener
+                        public final void onModeChanged(int i) {
+                            PhoneWindow.this.lambda$setMediaController$1(i);
+                        }
+                    };
+            getAudioManager()
+                    .addOnModeChangedListener(
+                            getContext().getMainExecutor(), this.mOnModeChangedListener);
         } else if (this.mOnModeChangedListener != null && controller == null) {
             getAudioManager().removeOnModeChangedListener(this.mOnModeChangedListener);
             this.mOnModeChangedListener = null;
@@ -2616,7 +2807,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     @Override // android.view.Window
     public Transition getReturnTransition() {
-        return this.mReturnTransition == USE_DEFAULT_TRANSITION ? getEnterTransition() : this.mReturnTransition;
+        return this.mReturnTransition == USE_DEFAULT_TRANSITION
+                ? getEnterTransition()
+                : this.mReturnTransition;
     }
 
     @Override // android.view.Window
@@ -2626,7 +2819,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     @Override // android.view.Window
     public Transition getReenterTransition() {
-        return this.mReenterTransition == USE_DEFAULT_TRANSITION ? getExitTransition() : this.mReenterTransition;
+        return this.mReenterTransition == USE_DEFAULT_TRANSITION
+                ? getExitTransition()
+                : this.mReenterTransition;
     }
 
     @Override // android.view.Window
@@ -2636,7 +2831,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     @Override // android.view.Window
     public Transition getSharedElementReturnTransition() {
-        return this.mSharedElementReturnTransition == USE_DEFAULT_TRANSITION ? getSharedElementEnterTransition() : this.mSharedElementReturnTransition;
+        return this.mSharedElementReturnTransition == USE_DEFAULT_TRANSITION
+                ? getSharedElementEnterTransition()
+                : this.mSharedElementReturnTransition;
     }
 
     @Override // android.view.Window
@@ -2646,7 +2843,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     @Override // android.view.Window
     public Transition getSharedElementReenterTransition() {
-        return this.mSharedElementReenterTransition == USE_DEFAULT_TRANSITION ? getSharedElementExitTransition() : this.mSharedElementReenterTransition;
+        return this.mSharedElementReenterTransition == USE_DEFAULT_TRANSITION
+                ? getSharedElementExitTransition()
+                : this.mSharedElementReenterTransition;
     }
 
     @Override // android.view.Window
@@ -2763,7 +2962,9 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             if (this.createdPanelView != null) {
                 return true;
             }
-            return (this.isCompact || this.isInExpandedMode) ? this.listMenuPresenter.getAdapter().getCount() > 0 : ((ViewGroup) this.shownPanelView).getChildCount() > 0;
+            return (this.isCompact || this.isInExpandedMode)
+                    ? this.listMenuPresenter.getAdapter().getCount() > 0
+                    : ((ViewGroup) this.shownPanelView).getChildCount() > 0;
         }
 
         public void clearMenuPresenters() {
@@ -2812,13 +3013,16 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
                 getIconMenuView(context, cb);
             }
             if (this.listMenuPresenter == null) {
-                this.listMenuPresenter = new ListMenuPresenter(R.layout.list_menu_item_layout, this.listPresenterTheme);
+                this.listMenuPresenter =
+                        new ListMenuPresenter(
+                                R.layout.list_menu_item_layout, this.listPresenterTheme);
                 this.listMenuPresenter.setCallback(cb);
                 this.listMenuPresenter.setId(R.id.list_menu_presenter);
                 this.menu.addMenuPresenter(this.listMenuPresenter);
             }
             if (this.iconMenuPresenter != null) {
-                this.listMenuPresenter.setItemIndexOffset(this.iconMenuPresenter.getNumActualItemsShown());
+                this.listMenuPresenter.setItemIndexOffset(
+                        this.iconMenuPresenter.getNumActualItemsShown());
             }
             MenuView result = this.listMenuPresenter.getMenuView(this.decorView);
             return result;
@@ -2869,26 +3073,28 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
 
         private static class SavedState implements Parcelable {
-            public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: com.android.internal.policy.PhoneWindow.PanelFeatureState.SavedState.1
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public SavedState createFromParcel(Parcel in) {
-                    return SavedState.readFromParcel(in);
-                }
+            public static final Parcelable.Creator<SavedState> CREATOR =
+                    new Parcelable.Creator<
+                            SavedState>() { // from class:
+                                            // com.android.internal.policy.PhoneWindow.PanelFeatureState.SavedState.1
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public SavedState createFromParcel(Parcel in) {
+                            return SavedState.readFromParcel(in);
+                        }
 
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public SavedState[] newArray(int size) {
-                    return new SavedState[size];
-                }
-            };
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public SavedState[] newArray(int size) {
+                            return new SavedState[size];
+                        }
+                    };
             int featureId;
             boolean isInExpandedMode;
             boolean isOpen;
             Bundle menuState;
 
-            private SavedState() {
-            }
+            private SavedState() {}
 
             @Override // android.os.Parcelable
             public int describeContents() {
@@ -2922,16 +3128,17 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     static class RotationWatcher extends IRotationWatcher.Stub {
         private Handler mHandler;
         private boolean mIsWatching;
-        private final Runnable mRotationChanged = new Runnable() { // from class: com.android.internal.policy.PhoneWindow.RotationWatcher.1
-            @Override // java.lang.Runnable
-            public void run() {
-                RotationWatcher.this.dispatchRotationChanged();
-            }
-        };
+        private final Runnable mRotationChanged =
+                new Runnable() { // from class:
+                                 // com.android.internal.policy.PhoneWindow.RotationWatcher.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        RotationWatcher.this.dispatchRotationChanged();
+                    }
+                };
         private final ArrayList<WeakReference<PhoneWindow>> mWindows = new ArrayList<>();
 
-        RotationWatcher() {
-        }
+        RotationWatcher() {}
 
         @Override // android.view.IRotationWatcher
         public void onRotationChanged(int rotation) throws RemoteException {
@@ -2942,7 +3149,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             synchronized (this.mWindows) {
                 if (!this.mIsWatching) {
                     try {
-                        WindowManagerHolder.sWindowManager.watchRotation(this, phoneWindow.getContext().getDisplayId());
+                        WindowManagerHolder.sWindowManager.watchRotation(
+                                this, phoneWindow.getContext().getDisplayId());
                         this.mHandler = new Handler();
                         this.mIsWatching = true;
                     } catch (RemoteException ex) {
@@ -2984,7 +3192,8 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         }
     }
 
-    public static final class PhoneWindowMenuCallback implements MenuBuilder.Callback, MenuPresenter.Callback {
+    public static final class PhoneWindowMenuCallback
+            implements MenuBuilder.Callback, MenuPresenter.Callback {
         private static final int FEATURE_ID = 6;
         private boolean mShowDialogForSubmenu;
         private MenuDialogHelper mSubMenuHelper;
@@ -3024,12 +3233,15 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         @Override // com.android.internal.view.menu.MenuBuilder.Callback
         public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
             Window.Callback callback = this.mWindow.getCallback();
-            return (callback == null || this.mWindow.isDestroyed() || !callback.onMenuItemSelected(6, item)) ? false : true;
+            return (callback == null
+                            || this.mWindow.isDestroyed()
+                            || !callback.onMenuItemSelected(6, item))
+                    ? false
+                    : true;
         }
 
         @Override // com.android.internal.view.menu.MenuBuilder.Callback
-        public void onMenuModeChange(MenuBuilder menu) {
-        }
+        public void onMenuModeChange(MenuBuilder menu) {}
 
         @Override // com.android.internal.view.menu.MenuPresenter.Callback
         public boolean onOpenSubMenu(MenuBuilder subMenu) {
@@ -3201,12 +3413,10 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     }
 
     @Override // android.view.Window
-    public void setResizingCaptionDrawable(Drawable drawable) {
-    }
+    public void setResizingCaptionDrawable(Drawable drawable) {}
 
     @Override // android.view.Window
-    public void setDecorCaptionShade(int decorCaptionShade) {
-    }
+    public void setDecorCaptionShade(int decorCaptionShade) {}
 
     @Override // android.view.Window
     public void setAttributes(WindowManager.LayoutParams params) {
@@ -3305,7 +3515,12 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     public void updateDefaultNavigationBarColor() {
         int defaultColor = getDefaultNavigationBarColor();
-        boolean needUpdate = (this.mNavigationBarColor != this.mDefaultNavigationBarColor || this.mNavigationBarColor == defaultColor || this.mForcedNavigationBarColor) ? false : true;
+        boolean needUpdate =
+                (this.mNavigationBarColor != this.mDefaultNavigationBarColor
+                                || this.mNavigationBarColor == defaultColor
+                                || this.mForcedNavigationBarColor)
+                        ? false
+                        : true;
         this.mDefaultNavigationBarColor = defaultColor;
         if (needUpdate) {
             this.mNavigationBarColor = defaultColor;
@@ -3318,7 +3533,12 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
     private int getDefaultNavigationBarColor() {
         if (this.mThemeApplied) {
-            boolean useThemeDefault = Settings.Global.getInt(getContext().getContentResolver(), "navigationbar_use_theme_default", 0) != 0;
+            boolean useThemeDefault =
+                    Settings.Global.getInt(
+                                    getContext().getContentResolver(),
+                                    "navigationbar_use_theme_default",
+                                    0)
+                            != 0;
             if (useThemeDefault) {
                 return getContext().getResources().getColor(R.color.tw_navigation_bar_color);
             }
@@ -3367,16 +3587,26 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
     }
 
     void updateDeviceDefaultNavigationBarColor() {
-        this.mDeviceDefaultNavigationBarColor = getContext().getResources().getColor(R.color.navbar_light_theme_color, null);
+        this.mDeviceDefaultNavigationBarColor =
+                getContext().getResources().getColor(R.color.navbar_light_theme_color, null);
     }
 
     private boolean needLightNavigationBar(int color) {
         if (this.mThemeApplied) {
-            boolean useThemeDefault = Settings.Global.getInt(getContext().getContentResolver(), "navigationbar_use_theme_default", 0) != 0;
+            boolean useThemeDefault =
+                    Settings.Global.getInt(
+                                    getContext().getContentResolver(),
+                                    "navigationbar_use_theme_default",
+                                    0)
+                            != 0;
             if (useThemeDefault) {
-                boolean needLight = getContext().getResources().getBoolean(R.bool.sem_window_light_navigation_bar);
+                boolean needLight =
+                        getContext()
+                                .getResources()
+                                .getBoolean(R.bool.sem_window_light_navigation_bar);
                 if (!needLight) {
-                    getDecorView().setSystemUiVisibility(getDecorView().getSystemUiVisibility() & (-17));
+                    getDecorView()
+                            .setSystemUiVisibility(getDecorView().getSystemUiVisibility() & (-17));
                 }
                 return needLight;
             }
@@ -3395,7 +3625,14 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             attr.samsungFlags &= -1048577;
         }
         if (oldValue != attr.samsungFlags) {
-            Log.d(TAG, "forceLight changed to " + enable + " [" + ((Object) attr.getTitle()) + "] from " + Debug.getCallers(5));
+            Log.d(
+                    TAG,
+                    "forceLight changed to "
+                            + enable
+                            + " ["
+                            + ((Object) attr.getTitle())
+                            + "] from "
+                            + Debug.getCallers(5));
             setAttributes(attr);
             if (this.mDecor != null && this.mDecor.getViewRootImpl() != null) {
                 this.mDecor.getViewRootImpl().requestRecomputeViewAttributes();
@@ -3426,11 +3663,14 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
             oldWindowingMode = 0;
         }
         this.mActivityCurrentConfig = config;
-        if (this.mDecor != null && oldWindowingMode != config.windowConfiguration.getWindowingMode()) {
-            if (config.windowConfiguration.getWindowingMode() == 6 && WindowConfiguration.isSplitScreenWindowingMode(config.windowConfiguration)) {
+        if (this.mDecor != null
+                && oldWindowingMode != config.windowConfiguration.getWindowingMode()) {
+            if (config.windowConfiguration.getWindowingMode() == 6
+                    && WindowConfiguration.isSplitScreenWindowingMode(config.windowConfiguration)) {
                 split = true;
             }
-            this.mDecor.onWindowingModeChanged(config.windowConfiguration.getWindowingMode(), split);
+            this.mDecor.onWindowingModeChanged(
+                    config.windowConfiguration.getWindowingMode(), split);
         }
     }
 }

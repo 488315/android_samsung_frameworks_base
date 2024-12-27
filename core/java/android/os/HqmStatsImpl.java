@@ -1,24 +1,24 @@
 package android.os;
 
-import android.os.Parcelable;
 import android.util.ArrayMap;
 
 /* loaded from: classes3.dex */
 public class HqmStatsImpl implements Parcelable {
     public static final int CF_SERVER = 1;
-    public static final Parcelable.Creator<HqmStatsImpl> CREATOR = new Parcelable.Creator<HqmStatsImpl>() { // from class: android.os.HqmStatsImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HqmStatsImpl createFromParcel(Parcel in) {
-            return new HqmStatsImpl(in);
-        }
+    public static final Parcelable.Creator<HqmStatsImpl> CREATOR =
+            new Parcelable.Creator<HqmStatsImpl>() { // from class: android.os.HqmStatsImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HqmStatsImpl createFromParcel(Parcel in) {
+                    return new HqmStatsImpl(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HqmStatsImpl[] newArray(int size) {
-            return new HqmStatsImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HqmStatsImpl[] newArray(int size) {
+                    return new HqmStatsImpl[size];
+                }
+            };
     public static final int DV_SERVER = 0;
     public static final int HQM_INTERFACE_API = 1;
     public static final int HQM_INTERFACE_INTENT = 2;

@@ -10,12 +10,14 @@ import android.os.UserHandle;
 import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.SparseLongArray;
+
 import com.android.modules.utils.BinaryXmlSerializer;
 import com.android.server.permission.access.immutable.MutableIntMap;
 import com.android.server.permission.access.immutable.MutableIntReferenceMap;
 import com.android.server.permission.jarjar.kotlin.io.CloseableKt;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Ref$ObjectRef;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -51,11 +53,15 @@ public final class AccessPersistence {
         MutableIntReferenceMap userStates = mutableAccessState.getUserStates();
         int size = userStates.array.size();
         for (int i = 0; i < size; i++) {
-            write((MutableUserState) userStates.valueAt(i), mutableAccessState, userStates.array.keyAt(i));
+            write(
+                    (MutableUserState) userStates.valueAt(i),
+                    mutableAccessState,
+                    userStates.array.keyAt(i));
         }
     }
 
-    public final void write(WritableState writableState, MutableAccessState mutableAccessState, int i) {
+    public final void write(
+            WritableState writableState, MutableAccessState mutableAccessState, int i) {
         long j;
         int writeMode = writableState.getWriteMode();
         if (writeMode != 0) {
@@ -149,7 +155,11 @@ public final class AccessPersistence {
 
     public final void writeSystemState(AccessState accessState) {
         File file;
-        File file2 = new File(ApexEnvironment.getApexEnvironment("com.android.permission").getDeviceProtectedDataDir(), "access.abx");
+        File file2 =
+                new File(
+                        ApexEnvironment.getApexEnvironment("com.android.permission")
+                                .getDeviceProtectedDataDir(),
+                        "access.abx");
         try {
             AtomicFile atomicFile = new AtomicFile(file2);
             FileOutputStream startWrite = atomicFile.startWrite();
@@ -161,7 +171,10 @@ public final class AccessPersistence {
                 binaryXmlSerializer.endDocument();
                 atomicFile.finishWrite(startWrite);
                 CloseableKt.closeFinally(startWrite, null);
-                file = new File(atomicFile.getBaseFile().getParentFile(), atomicFile.getBaseFile().getName() + ".reservecopy");
+                file =
+                        new File(
+                                atomicFile.getBaseFile().getParentFile(),
+                                atomicFile.getBaseFile().getName() + ".reservecopy");
             } finally {
             }
             try {
@@ -186,7 +199,11 @@ public final class AccessPersistence {
     }
 
     public final void writeUserState(AccessState accessState, int i) {
-        File file = new File(ApexEnvironment.getApexEnvironment("com.android.permission").getDeviceProtectedDataDirForUser(UserHandle.of(i)), "access.abx");
+        File file =
+                new File(
+                        ApexEnvironment.getApexEnvironment("com.android.permission")
+                                .getDeviceProtectedDataDirForUser(UserHandle.of(i)),
+                        "access.abx");
         try {
             AtomicFile atomicFile = new AtomicFile(file);
             FileOutputStream startWrite = atomicFile.startWrite();
@@ -198,7 +215,10 @@ public final class AccessPersistence {
                 binaryXmlSerializer.endDocument();
                 atomicFile.finishWrite(startWrite);
                 CloseableKt.closeFinally(startWrite, null);
-                File file2 = new File(atomicFile.getBaseFile().getParentFile(), atomicFile.getBaseFile().getName() + ".reservecopy");
+                File file2 =
+                        new File(
+                                atomicFile.getBaseFile().getParentFile(),
+                                atomicFile.getBaseFile().getName() + ".reservecopy");
                 try {
                     FileInputStream fileInputStream = new FileInputStream(atomicFile.getBaseFile());
                     try {

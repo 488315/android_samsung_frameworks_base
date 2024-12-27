@@ -13,6 +13,7 @@ import android.os.Process;
 import android.os.UserHandle;
 import android.sec.enterprise.auditlog.AuditLog;
 import android.util.Log;
+
 import com.android.server.DirEncryptService$$ExternalSyntheticOutline0;
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
@@ -25,10 +26,12 @@ import com.android.server.enterprise.adapterlayer.PersonaManagerAdapter;
 import com.android.server.enterprise.adapterlayer.SystemUIAdapter;
 import com.android.server.enterprise.storage.EdmStorageProvider;
 import com.android.server.enterprise.utils.Utils;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.location.ILocationPolicy;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -38,7 +41,8 @@ import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class LocationPolicy extends ILocationPolicy.Stub implements EnterpriseServiceCallback {
+public final class LocationPolicy extends ILocationPolicy.Stub
+        implements EnterpriseServiceCallback {
     public final Context mContext;
     public EnterpriseDeviceManager mEDM = null;
     public final EdmStorageProvider mEdmStorageProvider;
@@ -46,21 +50,31 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
     public final AnonymousClass1 mReceiver;
 
     public LocationPolicy(Context context) {
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.enterprise.location.LocationPolicy.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL".equals(intent.getAction())) {
-                    LocationPolicy.this.updateSystemUIMonitor$4(intent.getIntExtra("com.samsung.android.knox.intent.extra.USER_ID_INTERNAL", 0));
-                }
-            }
-        };
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class:
+                    // com.android.server.enterprise.location.LocationPolicy.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"
+                                .equals(intent.getAction())) {
+                            LocationPolicy.this.updateSystemUIMonitor$4(
+                                    intent.getIntExtra(
+                                            "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL",
+                                            0));
+                        }
+                    }
+                };
         this.mContext = context;
         context.getContentResolver();
         this.mEdmStorageProvider = new EdmStorageProvider(context);
-        context.registerReceiver(broadcastReceiver, new IntentFilter("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"), 2);
+        context.registerReceiver(
+                broadcastReceiver,
+                new IntentFilter(
+                        "com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"),
+                2);
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
             printWriter.println("Permission Denial: can't dump LocationPolicyService");
             return;
@@ -78,10 +92,18 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
                 if (allLocationProviders != null && allLocationProviders.size() > 0) {
                     sb.append("   LocationProviderState : " + System.lineSeparator());
                     for (String str : allLocationProviders) {
-                        sb.append("    " + str + " - " + (!isLocationProviderBlockedAsUser(str, 0)) + System.lineSeparator());
+                        sb.append(
+                                "    "
+                                        + str
+                                        + " - "
+                                        + (!isLocationProviderBlockedAsUser(str, 0))
+                                        + System.lineSeparator());
                     }
                 }
-                sb.append("   isGPSStateChangeAllowed : " + isGPSStateChangeAllowedAsUser(i) + System.lineSeparator());
+                sb.append(
+                        "   isGPSStateChangeAllowed : "
+                                + isGPSStateChangeAllowedAsUser(i)
+                                + System.lineSeparator());
                 sb.append("   isGPSOn : " + isGPSOn(i) + System.lineSeparator());
             }
         } catch (Exception unused) {
@@ -97,18 +119,23 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        return this.mEDM.enforceActiveAdminPermissionByContext(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_LOCATION")));
+        return this.mEDM.enforceActiveAdminPermissionByContext(
+                contextInfo,
+                new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_LOCATION")));
     }
 
     public final List getAllLocationProviders(ContextInfo contextInfo) {
         enforceLocationPermission(contextInfo);
-        LocationManager locationManager = (LocationManager) this.mContext.getSystemService("location");
+        LocationManager locationManager =
+                (LocationManager) this.mContext.getSystemService("location");
         this.mLM = locationManager;
         return locationManager.getAllProviders();
     }
 
     public final boolean getIndividualLocationProvider(ContextInfo contextInfo, String str) {
-        Log.w("LocationPolicyService", "LocationPolicy.getIndividualLocationProvider - Deprecated API LEVEL 30");
+        Log.w(
+                "LocationPolicyService",
+                "LocationPolicy.getIndividualLocationProvider - Deprecated API LEVEL 30");
         return true;
     }
 
@@ -148,7 +175,10 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
     public final boolean isGPSStateChangeAllowedAsUser(int i) {
         boolean z = false;
         try {
-            Iterator it = this.mEdmStorageProvider.getIntListAsUser(0, i, "LOCATION", "forceProviders").iterator();
+            Iterator it =
+                    this.mEdmStorageProvider
+                            .getIntListAsUser(0, i, "LOCATION", "forceProviders")
+                            .iterator();
             while (true) {
                 if (!it.hasNext()) {
                     break;
@@ -159,20 +189,28 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
                 }
             }
         } catch (Exception e) {
-            Log.e("LocationPolicyService", "isGPSStateChangeAllowedAsUser() : failed to get value.", e);
+            Log.e(
+                    "LocationPolicyService",
+                    "isGPSStateChangeAllowedAsUser() : failed to get value.",
+                    e);
         }
         if (z) {
-            DirEncryptService$$ExternalSyntheticOutline0.m(i, "isGPSStateChangeAllowedAsUser() : blocked. userId = ", "LocationPolicyService");
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    i,
+                    "isGPSStateChangeAllowedAsUser() : blocked. userId = ",
+                    "LocationPolicyService");
         }
         return !z;
     }
 
     public final boolean isLocationProviderBlocked(String str) {
-        return isLocationProviderBlockedAsUser(str, Utils.getCallingOrCurrentUserId(new ContextInfo(Process.myUid())));
+        return isLocationProviderBlockedAsUser(
+                str, Utils.getCallingOrCurrentUserId(new ContextInfo(Process.myUid())));
     }
 
     public final boolean isLocationProviderBlockedAsUser(String str, int i) {
-        List stringListAsUser = this.mEdmStorageProvider.getStringListAsUser(i, "LOCATION", "blockedProviders");
+        List stringListAsUser =
+                this.mEdmStorageProvider.getStringListAsUser(i, "LOCATION", "blockedProviders");
         ArrayList arrayList = new ArrayList();
         Iterator it = ((ArrayList) stringListAsUser).iterator();
         while (it.hasNext()) {
@@ -186,12 +224,10 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     public final void onAdminRemoved(int i) {
@@ -202,23 +238,36 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onPreAdminRemoval(int i) {
-    }
+    public final void onPreAdminRemoval(int i) {}
 
     public final boolean setGPSStateChangeAllowed(ContextInfo contextInfo, boolean z) {
         ContextInfo enforceLocationPermission = enforceLocationPermission(contextInfo);
         int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceLocationPermission);
-        ((PersonaManagerAdapter) ((IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class))).getClass();
+        ((PersonaManagerAdapter)
+                        ((IPersonaManagerAdapter)
+                                AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class)))
+                .getClass();
         if (SemPersonaManager.isKnoxId(callingOrCurrentUserId)) {
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(callingOrCurrentUserId, "setGPSStateChangeAllowed() :failed because userid ", "LocationPolicyService");
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    callingOrCurrentUserId,
+                    "setGPSStateChangeAllowed() :failed because userid ",
+                    "LocationPolicyService");
             return false;
         }
-        boolean putInt = this.mEdmStorageProvider.putInt(enforceLocationPermission.mCallerUid, 0, !z ? 1 : 0, "LOCATION", "forceProviders");
-        boolean isGPSStateChangeAllowedAsUser = isGPSStateChangeAllowedAsUser(callingOrCurrentUserId);
+        boolean putInt =
+                this.mEdmStorageProvider.putInt(
+                        enforceLocationPermission.mCallerUid,
+                        0,
+                        !z ? 1 : 0,
+                        "LOCATION",
+                        "forceProviders");
+        boolean isGPSStateChangeAllowedAsUser =
+                isGPSStateChangeAllowedAsUser(callingOrCurrentUserId);
         if (putInt) {
             setGPSStateChangeAllowedSystemUI(callingOrCurrentUserId, isGPSStateChangeAllowedAsUser);
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("setGPSStateChangeAllowed() ret = ", "LocationPolicyService", putInt);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "setGPSStateChangeAllowed() ret = ", "LocationPolicyService", putInt);
         return putInt;
     }
 
@@ -235,8 +284,11 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
         }
     }
 
-    public final boolean setIndividualLocationProvider(ContextInfo contextInfo, String str, boolean z) {
-        Log.w("LocationPolicyService", "LocationPolicy.setLocationProviderState - Deprecated API LEVEL 30");
+    public final boolean setIndividualLocationProvider(
+            ContextInfo contextInfo, String str, boolean z) {
+        Log.w(
+                "LocationPolicyService",
+                "LocationPolicy.setLocationProviderState - Deprecated API LEVEL 30");
         return false;
     }
 
@@ -244,7 +296,8 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                SystemUIAdapter.getInstance(this.mContext).setLocationProviderAllowedAsUser(i, str, z);
+                SystemUIAdapter.getInstance(this.mContext)
+                        .setLocationProviderAllowedAsUser(i, str, z);
             } catch (Exception e) {
                 Log.e("LocationPolicyService", "setLocationProviderAllowedSystemUI() failed. ", e);
             }
@@ -263,18 +316,27 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
             Log.i("LocationPolicyService", "startGPS() failed. invalid provider = gps");
             return false;
         }
-        ((PersonaManagerAdapter) ((IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class))).getClass();
-        if (SemPersonaManager.isKnoxId(callingOrCurrentUserId) && !isGPSStateChangeAllowedAsUser(0)) {
-            DirEncryptService$$ExternalSyntheticOutline0.m(callingOrCurrentUserId, "startGPS() failed in container. userId = ", "LocationPolicyService");
+        ((PersonaManagerAdapter)
+                        ((IPersonaManagerAdapter)
+                                AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class)))
+                .getClass();
+        if (SemPersonaManager.isKnoxId(callingOrCurrentUserId)
+                && !isGPSStateChangeAllowedAsUser(0)) {
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    callingOrCurrentUserId,
+                    "startGPS() failed in container. userId = ",
+                    "LocationPolicyService");
             return false;
         }
         if (!isGPSStateChangeAllowed(enforceLocationPermission)) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("startGPS() failed. start = ", "LocationPolicyService", z);
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    "startGPS() failed. start = ", "LocationPolicyService", z);
             return false;
         }
         boolean isGPSOn = isGPSOn(enforceLocationPermission);
         if ((z && isGPSOn) || (!z && !isGPSOn)) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("startGPS() failed. same state has requested. = ", "LocationPolicyService", z);
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    "startGPS() failed. same state has requested. = ", "LocationPolicyService", z);
             return false;
         }
         synchronized (this) {
@@ -292,7 +354,10 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
         }
         clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            AuditLog.logEventAsUser(callingOrCurrentUserId, z ? 40 : 41, new Object[]{Integer.valueOf(enforceLocationPermission.mCallerUid)});
+            AuditLog.logEventAsUser(
+                    callingOrCurrentUserId,
+                    z ? 40 : 41,
+                    new Object[] {Integer.valueOf(enforceLocationPermission.mCallerUid)});
             Binder.restoreCallingIdentity(clearCallingIdentity);
             Log.i("LocationPolicyService", "startGPS() ret = " + z2);
             return z2;
@@ -301,8 +366,7 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void systemReady() {
-    }
+    public final void systemReady() {}
 
     public final void updateSystemUIMonitor$4(int i) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -313,7 +377,8 @@ public final class LocationPolicy extends ILocationPolicy.Stub implements Enterp
                 if (allLocationProviders != null) {
                     Iterator it = allLocationProviders.iterator();
                     while (it.hasNext()) {
-                        setLocationProviderAllowedSystemUI(i, (String) it.next(), !isLocationProviderBlockedAsUser(r3, i));
+                        setLocationProviderAllowedSystemUI(
+                                i, (String) it.next(), !isLocationProviderBlockedAsUser(r3, i));
                     }
                 }
             } catch (Exception e) {

@@ -11,7 +11,8 @@ import android.view.SurfaceControl;
 public interface IDisplayAreaOrganizer extends IInterface {
     public static final String DESCRIPTOR = "android.window.IDisplayAreaOrganizer";
 
-    void onDisplayAreaAppeared(DisplayAreaInfo displayAreaInfo, SurfaceControl surfaceControl) throws RemoteException;
+    void onDisplayAreaAppeared(DisplayAreaInfo displayAreaInfo, SurfaceControl surfaceControl)
+            throws RemoteException;
 
     void onDisplayAreaInfoChanged(DisplayAreaInfo displayAreaInfo) throws RemoteException;
 
@@ -19,16 +20,15 @@ public interface IDisplayAreaOrganizer extends IInterface {
 
     public static class Default implements IDisplayAreaOrganizer {
         @Override // android.window.IDisplayAreaOrganizer
-        public void onDisplayAreaAppeared(DisplayAreaInfo displayAreaInfo, SurfaceControl leash) throws RemoteException {
-        }
+        public void onDisplayAreaAppeared(DisplayAreaInfo displayAreaInfo, SurfaceControl leash)
+                throws RemoteException {}
 
         @Override // android.window.IDisplayAreaOrganizer
-        public void onDisplayAreaVanished(DisplayAreaInfo displayAreaInfo) throws RemoteException {
-        }
+        public void onDisplayAreaVanished(DisplayAreaInfo displayAreaInfo) throws RemoteException {}
 
         @Override // android.window.IDisplayAreaOrganizer
-        public void onDisplayAreaInfoChanged(DisplayAreaInfo displayAreaInfo) throws RemoteException {
-        }
+        public void onDisplayAreaInfoChanged(DisplayAreaInfo displayAreaInfo)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +36,7 @@ public interface IDisplayAreaOrganizer extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDisplayAreaOrganizer {
+    public abstract static class Stub extends Binder implements IDisplayAreaOrganizer {
         static final int TRANSACTION_onDisplayAreaAppeared = 1;
         static final int TRANSACTION_onDisplayAreaInfoChanged = 3;
         static final int TRANSACTION_onDisplayAreaVanished = 2;
@@ -80,7 +80,8 @@ public interface IDisplayAreaOrganizer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDisplayAreaOrganizer.DESCRIPTOR);
             }
@@ -90,18 +91,22 @@ public interface IDisplayAreaOrganizer extends IInterface {
             }
             switch (code) {
                 case 1:
-                    DisplayAreaInfo _arg0 = (DisplayAreaInfo) data.readTypedObject(DisplayAreaInfo.CREATOR);
-                    SurfaceControl _arg1 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    DisplayAreaInfo _arg0 =
+                            (DisplayAreaInfo) data.readTypedObject(DisplayAreaInfo.CREATOR);
+                    SurfaceControl _arg1 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     data.enforceNoDataAvail();
                     onDisplayAreaAppeared(_arg0, _arg1);
                     return true;
                 case 2:
-                    DisplayAreaInfo _arg02 = (DisplayAreaInfo) data.readTypedObject(DisplayAreaInfo.CREATOR);
+                    DisplayAreaInfo _arg02 =
+                            (DisplayAreaInfo) data.readTypedObject(DisplayAreaInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onDisplayAreaVanished(_arg02);
                     return true;
                 case 3:
-                    DisplayAreaInfo _arg03 = (DisplayAreaInfo) data.readTypedObject(DisplayAreaInfo.CREATOR);
+                    DisplayAreaInfo _arg03 =
+                            (DisplayAreaInfo) data.readTypedObject(DisplayAreaInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onDisplayAreaInfoChanged(_arg03);
                     return true;
@@ -127,7 +132,8 @@ public interface IDisplayAreaOrganizer extends IInterface {
             }
 
             @Override // android.window.IDisplayAreaOrganizer
-            public void onDisplayAreaAppeared(DisplayAreaInfo displayAreaInfo, SurfaceControl leash) throws RemoteException {
+            public void onDisplayAreaAppeared(DisplayAreaInfo displayAreaInfo, SurfaceControl leash)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayAreaOrganizer.DESCRIPTOR);
@@ -140,7 +146,8 @@ public interface IDisplayAreaOrganizer extends IInterface {
             }
 
             @Override // android.window.IDisplayAreaOrganizer
-            public void onDisplayAreaVanished(DisplayAreaInfo displayAreaInfo) throws RemoteException {
+            public void onDisplayAreaVanished(DisplayAreaInfo displayAreaInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayAreaOrganizer.DESCRIPTOR);
@@ -152,7 +159,8 @@ public interface IDisplayAreaOrganizer extends IInterface {
             }
 
             @Override // android.window.IDisplayAreaOrganizer
-            public void onDisplayAreaInfoChanged(DisplayAreaInfo displayAreaInfo) throws RemoteException {
+            public void onDisplayAreaInfoChanged(DisplayAreaInfo displayAreaInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayAreaOrganizer.DESCRIPTOR);

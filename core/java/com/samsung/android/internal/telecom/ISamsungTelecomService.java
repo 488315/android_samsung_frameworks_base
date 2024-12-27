@@ -10,85 +10,129 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.telecom.PhoneAccount;
+
 import com.samsung.android.telecom.SemPhoneAccount;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public interface ISamsungTelecomService extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.internal.telecom.ISamsungTelecomService";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.internal.telecom.ISamsungTelecomService";
 
     void acceptRingingCall(int i, Bundle bundle, String str, String str2) throws RemoteException;
 
-    void acceptRingingCallWithVideoState(int i, int i2, Bundle bundle, String str, String str2) throws RemoteException;
+    void acceptRingingCallWithVideoState(int i, int i2, Bundle bundle, String str, String str2)
+            throws RemoteException;
 
-    void addConferenceParticipants(List<Uri> list, Bundle bundle, String str, String str2) throws RemoteException;
+    void addConferenceParticipants(List<Uri> list, Bundle bundle, String str, String str2)
+            throws RemoteException;
 
     boolean endCall(int i, Bundle bundle, String str, String str2) throws RemoteException;
 
-    ParceledListSlice<Bundle> getAllowedPhoneAccountInfo(String str, String str2) throws RemoteException;
+    ParceledListSlice<Bundle> getAllowedPhoneAccountInfo(String str, String str2)
+            throws RemoteException;
 
-    ParceledListSlice<Bundle> getAllowedPhoneAccountInfos(boolean z, boolean z2, String str, String str2) throws RemoteException;
+    ParceledListSlice<Bundle> getAllowedPhoneAccountInfos(
+            boolean z, boolean z2, String str, String str2) throws RemoteException;
 
-    ParceledListSlice<SemPhoneAccount> getAllowedPhoneAccounts(boolean z, boolean z2, String str, String str2) throws RemoteException;
+    ParceledListSlice<SemPhoneAccount> getAllowedPhoneAccounts(
+            boolean z, boolean z2, String str, String str2) throws RemoteException;
 
-    ParceledListSlice<PhoneAccount> getAllowedSelfManagedPhoneAccounts(String str, String str2) throws RemoteException;
+    ParceledListSlice<PhoneAccount> getAllowedSelfManagedPhoneAccounts(String str, String str2)
+            throws RemoteException;
 
     boolean isInCall(int i, boolean z, String str, String str2) throws RemoteException;
 
-    void showInCallScreen(boolean z, UserHandle userHandle, String str, String str2) throws RemoteException;
+    void showInCallScreen(boolean z, UserHandle userHandle, String str, String str2)
+            throws RemoteException;
 
     void silenceRinger(int i, Bundle bundle, String str, String str2) throws RemoteException;
 
     public static class Default implements ISamsungTelecomService {
         @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-        public ParceledListSlice<PhoneAccount> getAllowedSelfManagedPhoneAccounts(String callingPackage, String callingFeatureId) throws RemoteException {
+        public ParceledListSlice<PhoneAccount> getAllowedSelfManagedPhoneAccounts(
+                String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-        public ParceledListSlice<Bundle> getAllowedPhoneAccountInfo(String callingPackage, String callingFeatureId) throws RemoteException {
+        public ParceledListSlice<Bundle> getAllowedPhoneAccountInfo(
+                String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-        public ParceledListSlice<Bundle> getAllowedPhoneAccountInfos(boolean includeRegisteredAccounts, boolean includeSimSubscriptionAccounts, String callingPackage, String callingFeatureId) throws RemoteException {
+        public ParceledListSlice<Bundle> getAllowedPhoneAccountInfos(
+                boolean includeRegisteredAccounts,
+                boolean includeSimSubscriptionAccounts,
+                String callingPackage,
+                String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-        public ParceledListSlice<SemPhoneAccount> getAllowedPhoneAccounts(boolean includeRegisteredAccounts, boolean includeSimSubscriptionAccounts, String callingPackage, String callingFeatureId) throws RemoteException {
+        public ParceledListSlice<SemPhoneAccount> getAllowedPhoneAccounts(
+                boolean includeRegisteredAccounts,
+                boolean includeSimSubscriptionAccounts,
+                String callingPackage,
+                String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-        public void addConferenceParticipants(List<Uri> participants, Bundle extras, String callingPackage, String callingFeatureId) throws RemoteException {
-        }
+        public void addConferenceParticipants(
+                List<Uri> participants,
+                Bundle extras,
+                String callingPackage,
+                String callingFeatureId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-        public void silenceRinger(int keyCode, Bundle reason, String callingPackage, String callingFeatureId) throws RemoteException {
-        }
+        public void silenceRinger(
+                int keyCode, Bundle reason, String callingPackage, String callingFeatureId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-        public boolean endCall(int keyCode, Bundle reason, String callingPackage, String callingFeatureId) throws RemoteException {
+        public boolean endCall(
+                int keyCode, Bundle reason, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-        public void acceptRingingCall(int keyCode, Bundle reason, String callingPackage, String callingFeatureId) throws RemoteException {
-        }
+        public void acceptRingingCall(
+                int keyCode, Bundle reason, String callingPackage, String callingFeatureId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-        public void acceptRingingCallWithVideoState(int videoState, int keyCode, Bundle reason, String callingPackage, String callingFeatureId) throws RemoteException {
-        }
+        public void acceptRingingCallWithVideoState(
+                int videoState,
+                int keyCode,
+                Bundle reason,
+                String callingPackage,
+                String callingFeatureId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-        public boolean isInCall(int callFilter, boolean includeExternalCall, String callingPackage, String callingFeatureId) throws RemoteException {
+        public boolean isInCall(
+                int callFilter,
+                boolean includeExternalCall,
+                String callingPackage,
+                String callingFeatureId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-        public void showInCallScreen(boolean showDialpad, UserHandle callingUser, String callingPackage, String callingFeatureId) throws RemoteException {
-        }
+        public void showInCallScreen(
+                boolean showDialpad,
+                UserHandle callingUser,
+                String callingPackage,
+                String callingFeatureId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -96,7 +140,7 @@ public interface ISamsungTelecomService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISamsungTelecomService {
+    public abstract static class Stub extends Binder implements ISamsungTelecomService {
         static final int TRANSACTION_acceptRingingCall = 8;
         static final int TRANSACTION_acceptRingingCallWithVideoState = 9;
         static final int TRANSACTION_addConferenceParticipants = 5;
@@ -164,7 +208,8 @@ public interface ISamsungTelecomService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISamsungTelecomService.DESCRIPTOR);
             }
@@ -177,7 +222,8 @@ public interface ISamsungTelecomService extends IInterface {
                     String _arg0 = data.readString();
                     String _arg1 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<PhoneAccount> _result = getAllowedSelfManagedPhoneAccounts(_arg0, _arg1);
+                    ParceledListSlice<PhoneAccount> _result =
+                            getAllowedSelfManagedPhoneAccounts(_arg0, _arg1);
                     reply.writeNoException();
                     reply.writeTypedObject(_result, 1);
                     return true;
@@ -195,7 +241,8 @@ public interface ISamsungTelecomService extends IInterface {
                     String _arg2 = data.readString();
                     String _arg3 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<Bundle> _result3 = getAllowedPhoneAccountInfos(_arg03, _arg13, _arg2, _arg3);
+                    ParceledListSlice<Bundle> _result3 =
+                            getAllowedPhoneAccountInfos(_arg03, _arg13, _arg2, _arg3);
                     reply.writeNoException();
                     reply.writeTypedObject(_result3, 1);
                     return true;
@@ -205,7 +252,8 @@ public interface ISamsungTelecomService extends IInterface {
                     String _arg22 = data.readString();
                     String _arg32 = data.readString();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<SemPhoneAccount> _result4 = getAllowedPhoneAccounts(_arg04, _arg14, _arg22, _arg32);
+                    ParceledListSlice<SemPhoneAccount> _result4 =
+                            getAllowedPhoneAccounts(_arg04, _arg14, _arg22, _arg32);
                     reply.writeNoException();
                     reply.writeTypedObject(_result4, 1);
                     return true;
@@ -297,7 +345,8 @@ public interface ISamsungTelecomService extends IInterface {
             }
 
             @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-            public ParceledListSlice<PhoneAccount> getAllowedSelfManagedPhoneAccounts(String callingPackage, String callingFeatureId) throws RemoteException {
+            public ParceledListSlice<PhoneAccount> getAllowedSelfManagedPhoneAccounts(
+                    String callingPackage, String callingFeatureId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -306,7 +355,8 @@ public interface ISamsungTelecomService extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<PhoneAccount> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<PhoneAccount> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -315,7 +365,8 @@ public interface ISamsungTelecomService extends IInterface {
             }
 
             @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-            public ParceledListSlice<Bundle> getAllowedPhoneAccountInfo(String callingPackage, String callingFeatureId) throws RemoteException {
+            public ParceledListSlice<Bundle> getAllowedPhoneAccountInfo(
+                    String callingPackage, String callingFeatureId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -324,7 +375,8 @@ public interface ISamsungTelecomService extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<Bundle> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<Bundle> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -333,7 +385,12 @@ public interface ISamsungTelecomService extends IInterface {
             }
 
             @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-            public ParceledListSlice<Bundle> getAllowedPhoneAccountInfos(boolean includeRegisteredAccounts, boolean includeSimSubscriptionAccounts, String callingPackage, String callingFeatureId) throws RemoteException {
+            public ParceledListSlice<Bundle> getAllowedPhoneAccountInfos(
+                    boolean includeRegisteredAccounts,
+                    boolean includeSimSubscriptionAccounts,
+                    String callingPackage,
+                    String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -344,7 +401,8 @@ public interface ISamsungTelecomService extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<Bundle> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<Bundle> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -353,7 +411,12 @@ public interface ISamsungTelecomService extends IInterface {
             }
 
             @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-            public ParceledListSlice<SemPhoneAccount> getAllowedPhoneAccounts(boolean includeRegisteredAccounts, boolean includeSimSubscriptionAccounts, String callingPackage, String callingFeatureId) throws RemoteException {
+            public ParceledListSlice<SemPhoneAccount> getAllowedPhoneAccounts(
+                    boolean includeRegisteredAccounts,
+                    boolean includeSimSubscriptionAccounts,
+                    String callingPackage,
+                    String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -364,7 +427,8 @@ public interface ISamsungTelecomService extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<SemPhoneAccount> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<SemPhoneAccount> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -373,7 +437,12 @@ public interface ISamsungTelecomService extends IInterface {
             }
 
             @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-            public void addConferenceParticipants(List<Uri> participants, Bundle extras, String callingPackage, String callingFeatureId) throws RemoteException {
+            public void addConferenceParticipants(
+                    List<Uri> participants,
+                    Bundle extras,
+                    String callingPackage,
+                    String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -391,7 +460,9 @@ public interface ISamsungTelecomService extends IInterface {
             }
 
             @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-            public void silenceRinger(int keyCode, Bundle reason, String callingPackage, String callingFeatureId) throws RemoteException {
+            public void silenceRinger(
+                    int keyCode, Bundle reason, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -409,7 +480,9 @@ public interface ISamsungTelecomService extends IInterface {
             }
 
             @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-            public boolean endCall(int keyCode, Bundle reason, String callingPackage, String callingFeatureId) throws RemoteException {
+            public boolean endCall(
+                    int keyCode, Bundle reason, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -429,7 +502,9 @@ public interface ISamsungTelecomService extends IInterface {
             }
 
             @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-            public void acceptRingingCall(int keyCode, Bundle reason, String callingPackage, String callingFeatureId) throws RemoteException {
+            public void acceptRingingCall(
+                    int keyCode, Bundle reason, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -447,7 +522,13 @@ public interface ISamsungTelecomService extends IInterface {
             }
 
             @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-            public void acceptRingingCallWithVideoState(int videoState, int keyCode, Bundle reason, String callingPackage, String callingFeatureId) throws RemoteException {
+            public void acceptRingingCallWithVideoState(
+                    int videoState,
+                    int keyCode,
+                    Bundle reason,
+                    String callingPackage,
+                    String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -466,7 +547,12 @@ public interface ISamsungTelecomService extends IInterface {
             }
 
             @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-            public boolean isInCall(int callFilter, boolean includeExternalCall, String callingPackage, String callingFeatureId) throws RemoteException {
+            public boolean isInCall(
+                    int callFilter,
+                    boolean includeExternalCall,
+                    String callingPackage,
+                    String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -486,7 +572,12 @@ public interface ISamsungTelecomService extends IInterface {
             }
 
             @Override // com.samsung.android.internal.telecom.ISamsungTelecomService
-            public void showInCallScreen(boolean showDialpad, UserHandle callingUser, String callingPackage, String callingFeatureId) throws RemoteException {
+            public void showInCallScreen(
+                    boolean showDialpad,
+                    UserHandle callingUser,
+                    String callingPackage,
+                    String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

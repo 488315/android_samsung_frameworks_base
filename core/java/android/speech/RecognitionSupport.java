@@ -3,44 +3,62 @@ package android.speech;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class RecognitionSupport implements Parcelable {
-    public static final Parcelable.Creator<RecognitionSupport> CREATOR = new Parcelable.Creator<RecognitionSupport>() { // from class: android.speech.RecognitionSupport.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionSupport[] newArray(int size) {
-            return new RecognitionSupport[size];
-        }
+    public static final Parcelable.Creator<RecognitionSupport> CREATOR =
+            new Parcelable.Creator<
+                    RecognitionSupport>() { // from class: android.speech.RecognitionSupport.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionSupport[] newArray(int size) {
+                    return new RecognitionSupport[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RecognitionSupport createFromParcel(Parcel in) {
-            return new RecognitionSupport(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RecognitionSupport createFromParcel(Parcel in) {
+                    return new RecognitionSupport(in);
+                }
+            };
     private List<String> mInstalledOnDeviceLanguages;
     private List<String> mOnlineLanguages;
     private List<String> mPendingOnDeviceLanguages;
     private List<String> mSupportedOnDeviceLanguages;
 
-    RecognitionSupport(List<String> installedOnDeviceLanguages, List<String> pendingOnDeviceLanguages, List<String> supportedOnDeviceLanguages, List<String> onlineLanguages) {
+    RecognitionSupport(
+            List<String> installedOnDeviceLanguages,
+            List<String> pendingOnDeviceLanguages,
+            List<String> supportedOnDeviceLanguages,
+            List<String> onlineLanguages) {
         this.mInstalledOnDeviceLanguages = List.of();
         this.mPendingOnDeviceLanguages = List.of();
         this.mSupportedOnDeviceLanguages = List.of();
         this.mOnlineLanguages = List.of();
         this.mInstalledOnDeviceLanguages = installedOnDeviceLanguages;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInstalledOnDeviceLanguages);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mInstalledOnDeviceLanguages);
         this.mPendingOnDeviceLanguages = pendingOnDeviceLanguages;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPendingOnDeviceLanguages);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mPendingOnDeviceLanguages);
         this.mSupportedOnDeviceLanguages = supportedOnDeviceLanguages;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSupportedOnDeviceLanguages);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mSupportedOnDeviceLanguages);
         this.mOnlineLanguages = onlineLanguages;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mOnlineLanguages);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mOnlineLanguages);
     }
 
     public List<String> getInstalledOnDeviceLanguages() {
@@ -60,7 +78,15 @@ public final class RecognitionSupport implements Parcelable {
     }
 
     public String toString() {
-        return "RecognitionSupport { installedOnDeviceLanguages = " + this.mInstalledOnDeviceLanguages + ", pendingOnDeviceLanguages = " + this.mPendingOnDeviceLanguages + ", supportedOnDeviceLanguages = " + this.mSupportedOnDeviceLanguages + ", onlineLanguages = " + this.mOnlineLanguages + " }";
+        return "RecognitionSupport { installedOnDeviceLanguages = "
+                + this.mInstalledOnDeviceLanguages
+                + ", pendingOnDeviceLanguages = "
+                + this.mPendingOnDeviceLanguages
+                + ", supportedOnDeviceLanguages = "
+                + this.mSupportedOnDeviceLanguages
+                + ", onlineLanguages = "
+                + this.mOnlineLanguages
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -71,7 +97,11 @@ public final class RecognitionSupport implements Parcelable {
             return false;
         }
         RecognitionSupport that = (RecognitionSupport) o;
-        if (Objects.equals(this.mInstalledOnDeviceLanguages, that.mInstalledOnDeviceLanguages) && Objects.equals(this.mPendingOnDeviceLanguages, that.mPendingOnDeviceLanguages) && Objects.equals(this.mSupportedOnDeviceLanguages, that.mSupportedOnDeviceLanguages) && Objects.equals(this.mOnlineLanguages, that.mOnlineLanguages)) {
+        if (Objects.equals(this.mInstalledOnDeviceLanguages, that.mInstalledOnDeviceLanguages)
+                && Objects.equals(this.mPendingOnDeviceLanguages, that.mPendingOnDeviceLanguages)
+                && Objects.equals(
+                        this.mSupportedOnDeviceLanguages, that.mSupportedOnDeviceLanguages)
+                && Objects.equals(this.mOnlineLanguages, that.mOnlineLanguages)) {
             return true;
         }
         return false;
@@ -79,7 +109,10 @@ public final class RecognitionSupport implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + Objects.hashCode(this.mInstalledOnDeviceLanguages);
-        return (((((_hash * 31) + Objects.hashCode(this.mPendingOnDeviceLanguages)) * 31) + Objects.hashCode(this.mSupportedOnDeviceLanguages)) * 31) + Objects.hashCode(this.mOnlineLanguages);
+        return (((((_hash * 31) + Objects.hashCode(this.mPendingOnDeviceLanguages)) * 31)
+                                + Objects.hashCode(this.mSupportedOnDeviceLanguages))
+                        * 31)
+                + Objects.hashCode(this.mOnlineLanguages);
     }
 
     @Override // android.os.Parcelable
@@ -109,13 +142,23 @@ public final class RecognitionSupport implements Parcelable {
         List<String> onlineLanguages = new ArrayList<>();
         in.readStringList(onlineLanguages);
         this.mInstalledOnDeviceLanguages = installedOnDeviceLanguages;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInstalledOnDeviceLanguages);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mInstalledOnDeviceLanguages);
         this.mPendingOnDeviceLanguages = pendingOnDeviceLanguages;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPendingOnDeviceLanguages);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mPendingOnDeviceLanguages);
         this.mSupportedOnDeviceLanguages = supportedOnDeviceLanguages;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSupportedOnDeviceLanguages);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mSupportedOnDeviceLanguages);
         this.mOnlineLanguages = onlineLanguages;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mOnlineLanguages);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mOnlineLanguages);
     }
 
     public static final class Builder {
@@ -200,18 +243,23 @@ public final class RecognitionSupport implements Parcelable {
             if ((this.mBuilderFieldsSet & 8) == 0) {
                 this.mOnlineLanguages = List.of();
             }
-            RecognitionSupport o = new RecognitionSupport(this.mInstalledOnDeviceLanguages, this.mPendingOnDeviceLanguages, this.mSupportedOnDeviceLanguages, this.mOnlineLanguages);
+            RecognitionSupport o =
+                    new RecognitionSupport(
+                            this.mInstalledOnDeviceLanguages,
+                            this.mPendingOnDeviceLanguages,
+                            this.mSupportedOnDeviceLanguages,
+                            this.mOnlineLanguages);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 16) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

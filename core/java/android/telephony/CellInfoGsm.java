@@ -5,20 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public final class CellInfoGsm extends CellInfo implements Parcelable {
-    public static final Parcelable.Creator<CellInfoGsm> CREATOR = new Parcelable.Creator<CellInfoGsm>() { // from class: android.telephony.CellInfoGsm.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoGsm createFromParcel(Parcel in) {
-            in.readInt();
-            return CellInfoGsm.createFromParcelBody(in);
-        }
+    public static final Parcelable.Creator<CellInfoGsm> CREATOR =
+            new Parcelable.Creator<CellInfoGsm>() { // from class: android.telephony.CellInfoGsm.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoGsm createFromParcel(Parcel in) {
+                    in.readInt();
+                    return CellInfoGsm.createFromParcelBody(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoGsm[] newArray(int size) {
-            return new CellInfoGsm[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoGsm[] newArray(int size) {
+                    return new CellInfoGsm[size];
+                }
+            };
     private static final boolean DBG = false;
     private static final String LOG_TAG = "CellInfoGsm";
     private CellIdentityGsm mCellIdentityGsm;
@@ -35,7 +36,12 @@ public final class CellInfoGsm extends CellInfo implements Parcelable {
         this.mCellSignalStrengthGsm = ci.mCellSignalStrengthGsm.copy();
     }
 
-    public CellInfoGsm(int cellConnectionStatus, boolean registered, long timeStamp, CellIdentityGsm cellIdentityGsm, CellSignalStrengthGsm cellSignalStrengthGsm) {
+    public CellInfoGsm(
+            int cellConnectionStatus,
+            boolean registered,
+            long timeStamp,
+            CellIdentityGsm cellIdentityGsm,
+            CellSignalStrengthGsm cellSignalStrengthGsm) {
         super(cellConnectionStatus, registered, timeStamp);
         this.mCellIdentityGsm = cellIdentityGsm;
         this.mCellSignalStrengthGsm = cellSignalStrengthGsm;
@@ -68,7 +74,9 @@ public final class CellInfoGsm extends CellInfo implements Parcelable {
 
     @Override // android.telephony.CellInfo
     public int hashCode() {
-        return super.hashCode() + this.mCellIdentityGsm.hashCode() + this.mCellSignalStrengthGsm.hashCode();
+        return super.hashCode()
+                + this.mCellIdentityGsm.hashCode()
+                + this.mCellSignalStrengthGsm.hashCode();
     }
 
     @Override // android.telephony.CellInfo

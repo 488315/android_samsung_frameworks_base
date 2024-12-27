@@ -3,10 +3,12 @@ package android.telephony.ims.aidl;
 import android.os.RemoteException;
 import android.telephony.ims.ImsException;
 import android.telephony.ims.stub.RcsCapabilityExchangeImplBase;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
-public class RcsOptionsResponseAidlWrapper implements RcsCapabilityExchangeImplBase.OptionsResponseCallback {
+public class RcsOptionsResponseAidlWrapper
+        implements RcsCapabilityExchangeImplBase.OptionsResponseCallback {
     private final IOptionsResponseCallback mResponseBinder;
 
     public RcsOptionsResponseAidlWrapper(IOptionsResponseCallback responseBinder) {
@@ -22,7 +24,8 @@ public class RcsOptionsResponseAidlWrapper implements RcsCapabilityExchangeImplB
     }
 
     @Override // android.telephony.ims.stub.RcsCapabilityExchangeImplBase.OptionsResponseCallback
-    public void onNetworkResponse(int code, String reason, List<String> theirCaps) throws ImsException {
+    public void onNetworkResponse(int code, String reason, List<String> theirCaps)
+            throws ImsException {
         try {
             this.mResponseBinder.onNetworkResponse(code, reason, theirCaps);
         } catch (RemoteException e) {

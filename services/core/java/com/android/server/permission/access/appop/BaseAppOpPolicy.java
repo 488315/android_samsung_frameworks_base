@@ -21,12 +21,14 @@ public abstract class BaseAppOpPolicy extends SchemePolicy {
     }
 
     @Override // com.android.server.permission.access.SchemePolicy
-    public final void parseUserState(BinaryXmlPullParser binaryXmlPullParser, MutableAccessState mutableAccessState, int i) {
+    public final void parseUserState(
+            BinaryXmlPullParser binaryXmlPullParser, MutableAccessState mutableAccessState, int i) {
         this.persistence.parseUserState(binaryXmlPullParser, mutableAccessState, i);
     }
 
     @Override // com.android.server.permission.access.SchemePolicy
-    public final void serializeUserState(BinaryXmlSerializer binaryXmlSerializer, AccessState accessState, int i) {
+    public final void serializeUserState(
+            BinaryXmlSerializer binaryXmlSerializer, AccessState accessState, int i) {
         this.persistence.serializeUserState(binaryXmlSerializer, accessState, i);
     }
 }

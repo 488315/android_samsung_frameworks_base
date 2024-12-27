@@ -7,21 +7,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class GnssData implements Parcelable {
-    public static final Parcelable.Creator<GnssData> CREATOR = new Parcelable.Creator<GnssData>() { // from class: android.hardware.gnss.GnssData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GnssData createFromParcel(Parcel _aidl_source) {
-            GnssData _aidl_out = new GnssData();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GnssData> CREATOR =
+            new Parcelable.Creator<GnssData>() { // from class: android.hardware.gnss.GnssData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GnssData createFromParcel(Parcel _aidl_source) {
+                    GnssData _aidl_out = new GnssData();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GnssData[] newArray(int _aidl_size) {
-            return new GnssData[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GnssData[] newArray(int _aidl_size) {
+                    return new GnssData[_aidl_size];
+                }
+            };
     public GnssClock clock;
     public ElapsedRealtime elapsedRealtime;
     public GnssAgc[] gnssAgcs = new GnssAgc[0];
@@ -60,7 +61,8 @@ public class GnssData implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.measurements = (GnssMeasurement[]) _aidl_parcel.createTypedArray(GnssMeasurement.CREATOR);
+            this.measurements =
+                    (GnssMeasurement[]) _aidl_parcel.createTypedArray(GnssMeasurement.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -76,7 +78,8 @@ public class GnssData implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.elapsedRealtime = (ElapsedRealtime) _aidl_parcel.readTypedObject(ElapsedRealtime.CREATOR);
+            this.elapsedRealtime =
+                    (ElapsedRealtime) _aidl_parcel.readTypedObject(ElapsedRealtime.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -101,7 +104,10 @@ public class GnssData implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.measurements);
-        return _mask | describeContents(this.clock) | describeContents(this.elapsedRealtime) | describeContents(this.gnssAgcs);
+        return _mask
+                | describeContents(this.clock)
+                | describeContents(this.elapsedRealtime)
+                | describeContents(this.gnssAgcs);
     }
 
     private int describeContents(Object _v) {
@@ -122,21 +128,23 @@ public class GnssData implements Parcelable {
     }
 
     public static class GnssAgc implements Parcelable {
-        public static final Parcelable.Creator<GnssAgc> CREATOR = new Parcelable.Creator<GnssAgc>() { // from class: android.hardware.gnss.GnssData.GnssAgc.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GnssAgc createFromParcel(Parcel _aidl_source) {
-                GnssAgc _aidl_out = new GnssAgc();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<GnssAgc> CREATOR =
+                new Parcelable.Creator<
+                        GnssAgc>() { // from class: android.hardware.gnss.GnssData.GnssAgc.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GnssAgc createFromParcel(Parcel _aidl_source) {
+                        GnssAgc _aidl_out = new GnssAgc();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GnssAgc[] newArray(int _aidl_size) {
-                return new GnssAgc[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GnssAgc[] newArray(int _aidl_size) {
+                        return new GnssAgc[_aidl_size];
+                    }
+                };
         public double agcLevelDb = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         public int constellation = 0;
         public long carrierFrequencyHz = 0;

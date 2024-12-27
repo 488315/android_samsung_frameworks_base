@@ -29,7 +29,8 @@ public class AttCertIssuer extends ASN1Object implements ASN1Choice {
         if (obj instanceof ASN1Sequence) {
             return new AttCertIssuer(GeneralNames.getInstance(obj));
         }
-        throw new IllegalArgumentException("unknown object in factory: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "unknown object in factory: " + obj.getClass().getName());
     }
 
     public static AttCertIssuer getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -50,7 +51,8 @@ public class AttCertIssuer extends ASN1Object implements ASN1Choice {
         return this.obj;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.choiceObj;
     }

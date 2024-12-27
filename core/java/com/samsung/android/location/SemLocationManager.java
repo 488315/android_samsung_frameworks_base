@@ -8,7 +8,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
-import com.samsung.android.location.ISLocationListener;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -55,8 +55,7 @@ public class SemLocationManager {
     private final ISLocationManager mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SemLocationManagerModule {
-    }
+    public @interface SemLocationManagerModule {}
 
     private class LocListenerTransport extends ISLocationListener.Stub {
         public static final int TYPE_LOCATION_CHANGED_ADDRESS = 2;
@@ -65,12 +64,14 @@ public class SemLocationManager {
 
         LocListenerTransport(SemLocationListener listener) {
             this.mListener = listener;
-            this.mListenerHandler = new Handler() { // from class: com.samsung.android.location.SemLocationManager.LocListenerTransport.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    LocListenerTransport.this._handleMessage(msg);
-                }
-            };
+            this.mListenerHandler =
+                    new Handler() { // from class:
+                                    // com.samsung.android.location.SemLocationManager.LocListenerTransport.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            LocListenerTransport.this._handleMessage(msg);
+                        }
+                    };
         }
 
         @Override // com.samsung.android.location.ISLocationListener
@@ -86,7 +87,10 @@ public class SemLocationManager {
                 try {
                     SemLocationManager.this.removeLocationUpdates(this.mListener);
                 } catch (Exception e) {
-                    Log.e(SemLocationManager.TAG, "sendCallbackMessage removeLocationUpdates occur exception " + e.toString());
+                    Log.e(
+                            SemLocationManager.TAG,
+                            "sendCallbackMessage removeLocationUpdates occur exception "
+                                    + e.toString());
                     e.printStackTrace();
                 }
             }
@@ -113,7 +117,8 @@ public class SemLocationManager {
             return false;
         }
         try {
-            return this.mService.isAvailable(module, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.isAvailable(
+                    module, this.mContext.getPackageName(), this.mContext.getAttributionTag());
         } catch (RemoteException ex) {
             Log.e(TAG, "isAvailable : RemoteException " + ex.toString());
             return false;
@@ -126,14 +131,16 @@ public class SemLocationManager {
             return -1;
         }
         try {
-            return this.mService.removeGeofencesPendingIntent(intent, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.removeGeofencesPendingIntent(
+                    intent, this.mContext.getPackageName(), this.mContext.getAttributionTag());
         } catch (RemoteException ex) {
             Log.e(TAG, "removeGeofence: RemoteException " + ex.toString());
             return -4;
         }
     }
 
-    public int requestSingleLocation(int accuracy, int timeout, boolean isAddress, PendingIntent intent) {
+    public int requestSingleLocation(
+            int accuracy, int timeout, boolean isAddress, PendingIntent intent) {
         if (this.mService == null) {
             Log.e(TAG, "SLocationService is not supported");
             return -1;
@@ -143,14 +150,22 @@ public class SemLocationManager {
             return -2;
         }
         try {
-            return this.mService.requestSingleLocation(accuracy, timeout, isAddress, intent, null, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.requestSingleLocation(
+                    accuracy,
+                    timeout,
+                    isAddress,
+                    intent,
+                    null,
+                    this.mContext.getPackageName(),
+                    this.mContext.getAttributionTag());
         } catch (RemoteException ex) {
             Log.e(TAG, "requestSingleLocation: RemoteException " + ex.toString());
             return -4;
         }
     }
 
-    public int requestSingleLocation(int accuracy, int timeout, boolean isAddress, SemLocationListener listener) {
+    public int requestSingleLocation(
+            int accuracy, int timeout, boolean isAddress, SemLocationListener listener) {
         int requestSingleLocation;
         if (this.mService == null) {
             Log.e(TAG, "SLocationService is not supported");
@@ -167,7 +182,15 @@ public class SemLocationManager {
                     transport = new LocListenerTransport(listener);
                 }
                 this.mLocListeners.put(listener, transport);
-                requestSingleLocation = this.mService.requestSingleLocation(accuracy, timeout, isAddress, null, transport, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+                requestSingleLocation =
+                        this.mService.requestSingleLocation(
+                                accuracy,
+                                timeout,
+                                isAddress,
+                                null,
+                                transport,
+                                this.mContext.getPackageName(),
+                                this.mContext.getAttributionTag());
             }
             return requestSingleLocation;
         } catch (RemoteException ex) {
@@ -191,7 +214,11 @@ public class SemLocationManager {
                 Log.e(TAG, "Already stopped location");
                 return -3;
             }
-            return this.mService.removeSingleLocation(null, transport, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.removeSingleLocation(
+                    null,
+                    transport,
+                    this.mContext.getPackageName(),
+                    this.mContext.getAttributionTag());
         } catch (RemoteException ex) {
             Log.e(TAG, "removeSingleLocation: RemoteException " + ex.toString());
             return -4;
@@ -215,7 +242,12 @@ public class SemLocationManager {
                     transport = new LocListenerTransport(listener);
                 }
                 this.mLocListeners.put(listener, transport);
-                requestLocation = this.mService.requestLocation(isAddress, transport, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+                requestLocation =
+                        this.mService.requestLocation(
+                                isAddress,
+                                transport,
+                                this.mContext.getPackageName(),
+                                this.mContext.getAttributionTag());
             }
             return requestLocation;
         } catch (RemoteException ex) {
@@ -239,7 +271,8 @@ public class SemLocationManager {
                 Log.e(TAG, "Already stopped location");
                 return -3;
             }
-            return this.mService.removeLocation(transport, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.removeLocation(
+                    transport, this.mContext.getPackageName(), this.mContext.getAttributionTag());
         } catch (RemoteException ex) {
             Log.e(TAG, "removeLocationUpdates: RemoteException " + ex.toString());
             return -4;
@@ -256,7 +289,11 @@ public class SemLocationManager {
             return;
         }
         try {
-            this.mService.requestPassiveLocation(intent, null, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            this.mService.requestPassiveLocation(
+                    intent,
+                    null,
+                    this.mContext.getPackageName(),
+                    this.mContext.getAttributionTag());
         } catch (Throwable ex) {
             Log.e(TAG, "requestLocationToPoi: RemoteException " + ex.toString());
         }
@@ -272,7 +309,11 @@ public class SemLocationManager {
             return;
         }
         try {
-            this.mService.removePassiveLocation(intent, null, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            this.mService.removePassiveLocation(
+                    intent,
+                    null,
+                    this.mContext.getPackageName(),
+                    this.mContext.getAttributionTag());
         } catch (Throwable ex) {
             Log.e(TAG, "requestLocationToPoi: RemoteException " + ex.toString());
         }
@@ -288,14 +329,20 @@ public class SemLocationManager {
             return -2;
         }
         try {
-            return this.mService.requestBatchedLocations(request, intent, null, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.requestBatchedLocations(
+                    request,
+                    intent,
+                    null,
+                    this.mContext.getPackageName(),
+                    this.mContext.getAttributionTag());
         } catch (Throwable ex) {
             Log.e(TAG, "requestLocationBatchingUpdates: RemoteException " + ex.toString());
             return -4;
         }
     }
 
-    public int requestBatchedLocations(SemLocationBatchingRequest request, SemLocationBatchingListener listener) {
+    public int requestBatchedLocations(
+            SemLocationBatchingRequest request, SemLocationBatchingListener listener) {
         if (this.mService == null) {
             Log.e(TAG, "SLocationService is not supported");
             return -1;
@@ -317,7 +364,11 @@ public class SemLocationManager {
             return -2;
         }
         try {
-            return this.mService.removeBatchedLocations(intent, null, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.removeBatchedLocations(
+                    intent,
+                    null,
+                    this.mContext.getPackageName(),
+                    this.mContext.getAttributionTag());
         } catch (Throwable ex) {
             Log.e(TAG, "requestLocationBatchingUpdates: RemoteException " + ex.toString());
             return -4;
@@ -342,7 +393,8 @@ public class SemLocationManager {
             return;
         }
         try {
-            this.mService.flushBatchedLocations(this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            this.mService.flushBatchedLocations(
+                    this.mContext.getPackageName(), this.mContext.getAttributionTag());
         } catch (Throwable ex) {
             Log.e(TAG, "flushLocations: RemoteException " + ex.toString());
         }
@@ -366,11 +418,21 @@ public class SemLocationManager {
             return -2;
         }
         try {
-            SemGeofence geofence = new SemGeofence(1, param.getLatitude(), param.getLongitude(), param.getRadius(), param.getWifiBssidList());
+            SemGeofence geofence =
+                    new SemGeofence(
+                            1,
+                            param.getLatitude(),
+                            param.getLongitude(),
+                            param.getRadius(),
+                            param.getWifiBssidList());
             geofence.setRequestId(param.getRequestId());
             List<SemGeofence> list = new ArrayList<>();
             list.add(geofence);
-            return this.mService.addGeofences(list, intent, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.addGeofences(
+                    list,
+                    intent,
+                    this.mContext.getPackageName(),
+                    this.mContext.getAttributionTag());
         } catch (RemoteException ex) {
             Log.e(TAG, "addGeofence : RemoteException " + ex.toString());
             return -4;
@@ -399,7 +461,11 @@ public class SemLocationManager {
             geofence.setRequestId(param.getRequestId());
             List<SemGeofence> list = new ArrayList<>();
             list.add(geofence);
-            return this.mService.addGeofences(list, intent, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.addGeofences(
+                    list,
+                    intent,
+                    this.mContext.getPackageName(),
+                    this.mContext.getAttributionTag());
         } catch (RemoteException ex) {
             Log.e(TAG, "addGeofence : RemoteException " + ex.toString());
             return -4;
@@ -428,7 +494,11 @@ public class SemLocationManager {
             geofence.setRequestId(param.getRequestId());
             List<SemGeofence> list = new ArrayList<>();
             list.add(geofence);
-            return this.mService.addGeofences(list, intent, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.addGeofences(
+                    list,
+                    intent,
+                    this.mContext.getPackageName(),
+                    this.mContext.getAttributionTag());
         } catch (RemoteException ex) {
             Log.e(TAG, "addGeofence : RemoteException " + ex.toString());
             return -4;
@@ -453,11 +523,17 @@ public class SemLocationManager {
             return -2;
         }
         try {
-            SemGeofence geofence = new SemGeofence(5, param.getAddress(), param.getLatitude(), param.getLongitude());
+            SemGeofence geofence =
+                    new SemGeofence(
+                            5, param.getAddress(), param.getLatitude(), param.getLongitude());
             geofence.setRequestId(param.getRequestId());
             List<SemGeofence> list = new ArrayList<>();
             list.add(geofence);
-            return this.mService.addGeofences(list, intent, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.addGeofences(
+                    list,
+                    intent,
+                    this.mContext.getPackageName(),
+                    this.mContext.getAttributionTag());
         } catch (RemoteException ex) {
             Log.e(TAG, "addGeofence : RemoteException " + ex.toString());
             return -4;
@@ -472,7 +548,8 @@ public class SemLocationManager {
         try {
             List<String> requestIds = new ArrayList<>();
             requestIds.add(requestId);
-            return this.mService.removeGeofences(requestIds, this.mContext.getPackageName(), this.mContext.getAttributionTag());
+            return this.mService.removeGeofences(
+                    requestIds, this.mContext.getPackageName(), this.mContext.getAttributionTag());
         } catch (RemoteException ex) {
             Log.e(TAG, "removeGeofence: RemoteException " + ex.toString());
             return -4;

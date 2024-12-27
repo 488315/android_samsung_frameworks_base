@@ -5,18 +5,17 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.telephony.IWwanSelectorCallback;
 
 /* loaded from: classes5.dex */
 public interface ITransportSelectorResultCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.ITransportSelectorResultCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.ITransportSelectorResultCallback";
 
     void onCompleted(IWwanSelectorCallback iWwanSelectorCallback) throws RemoteException;
 
     public static class Default implements ITransportSelectorResultCallback {
         @Override // com.android.internal.telephony.ITransportSelectorResultCallback
-        public void onCompleted(IWwanSelectorCallback cb) throws RemoteException {
-        }
+        public void onCompleted(IWwanSelectorCallback cb) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +23,7 @@ public interface ITransportSelectorResultCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITransportSelectorResultCallback {
+    public abstract static class Stub extends Binder implements ITransportSelectorResultCallback {
         static final int TRANSACTION_onCompleted = 1;
 
         public Stub() {
@@ -62,7 +61,8 @@ public interface ITransportSelectorResultCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITransportSelectorResultCallback.DESCRIPTOR);
             }
@@ -72,7 +72,8 @@ public interface ITransportSelectorResultCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IWwanSelectorCallback _arg0 = IWwanSelectorCallback.Stub.asInterface(data.readStrongBinder());
+                    IWwanSelectorCallback _arg0 =
+                            IWwanSelectorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCompleted(_arg0);
                     return true;

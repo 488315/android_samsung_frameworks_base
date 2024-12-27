@@ -33,7 +33,8 @@ public class ImageSwitcher extends ViewSwitcher {
         showNext();
     }
 
-    @Override // android.widget.ViewSwitcher, android.widget.ViewAnimator, android.widget.FrameLayout, android.view.ViewGroup, android.view.View
+    @Override // android.widget.ViewSwitcher, android.widget.ViewAnimator,
+              // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
     public CharSequence getAccessibilityClassName() {
         return ImageSwitcher.class.getName();
     }

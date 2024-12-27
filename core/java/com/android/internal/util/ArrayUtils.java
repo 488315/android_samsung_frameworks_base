@@ -2,7 +2,9 @@ package com.android.internal.util;
 
 import android.util.ArraySet;
 import android.util.EmptyArray;
+
 import dalvik.system.VMRuntime;
+
 import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -21,8 +23,7 @@ public class ArrayUtils {
     private static Object[] sCache = new Object[73];
     public static final File[] EMPTY_FILE = new File[0];
 
-    private ArrayUtils() {
-    }
+    private ArrayUtils() {}
 
     public static byte[] newUnpaddedByteArray(int minLen) {
         return (byte[]) VMRuntime.getRuntime().newUnpaddedArray(Byte.TYPE, minLen);
@@ -400,7 +401,7 @@ public class ArrayUtils {
 
     public static int[] appendInt(int[] cur, int val, boolean allowDuplicates) {
         if (cur == null) {
-            return new int[]{val};
+            return new int[] {val};
         }
         int N = cur.length;
         if (!allowDuplicates) {
@@ -463,7 +464,7 @@ public class ArrayUtils {
 
     public static long[] appendLong(long[] cur, long val, boolean allowDuplicates) {
         if (cur == null) {
-            return new long[]{val};
+            return new long[] {val};
         }
         int N = cur.length;
         if (!allowDuplicates) {
@@ -482,7 +483,7 @@ public class ArrayUtils {
 
     public static boolean[] appendBoolean(boolean[] cur, boolean val) {
         if (cur == null) {
-            return new boolean[]{val};
+            return new boolean[] {val};
         }
         int N = cur.length;
         boolean[] ret = new boolean[N + 1];
@@ -683,7 +684,8 @@ public class ArrayUtils {
             throw new ArrayIndexOutOfBoundsException("Negative length: " + len);
         }
         if ((offset | count) < 0 || offset > len - count) {
-            throw new ArrayIndexOutOfBoundsException("length=" + len + "; regionStart=" + offset + "; regionLength=" + count);
+            throw new ArrayIndexOutOfBoundsException(
+                    "length=" + len + "; regionStart=" + offset + "; regionLength=" + count);
         }
     }
 
@@ -709,7 +711,8 @@ public class ArrayUtils {
         return result;
     }
 
-    public static <T> T[] filter(T[] items, IntFunction<T[]> arrayConstructor, Predicate<T> predicate) {
+    public static <T> T[] filter(
+            T[] items, IntFunction<T[]> arrayConstructor, Predicate<T> predicate) {
         if (isEmpty(items)) {
             return items;
         }

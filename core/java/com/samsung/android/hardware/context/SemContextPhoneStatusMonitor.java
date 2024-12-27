@@ -7,19 +7,22 @@ import android.os.Parcelable;
 @Deprecated(forRemoval = true, since = "15.5")
 /* loaded from: classes6.dex */
 public class SemContextPhoneStatusMonitor extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextPhoneStatusMonitor> CREATOR = new Parcelable.Creator<SemContextPhoneStatusMonitor>() { // from class: com.samsung.android.hardware.context.SemContextPhoneStatusMonitor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextPhoneStatusMonitor createFromParcel(Parcel in) {
-            return new SemContextPhoneStatusMonitor(in);
-        }
+    public static final Parcelable.Creator<SemContextPhoneStatusMonitor> CREATOR =
+            new Parcelable.Creator<
+                    SemContextPhoneStatusMonitor>() { // from class:
+                                                      // com.samsung.android.hardware.context.SemContextPhoneStatusMonitor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextPhoneStatusMonitor createFromParcel(Parcel in) {
+                    return new SemContextPhoneStatusMonitor(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextPhoneStatusMonitor[] newArray(int size) {
-            return new SemContextPhoneStatusMonitor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextPhoneStatusMonitor[] newArray(int size) {
+                    return new SemContextPhoneStatusMonitor[size];
+                }
+            };
     public static final int PROXIMITY_CLOSE = 2;
     public static final int PROXIMITY_NONE = 0;
     public static final int PROXIMITY_OPEN = 1;

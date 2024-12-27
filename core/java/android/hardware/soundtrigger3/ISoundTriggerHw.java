@@ -1,7 +1,5 @@
 package android.hardware.soundtrigger3;
 
-import android.hardware.soundtrigger3.ISoundTriggerHwCallback;
-import android.hardware.soundtrigger3.ISoundTriggerHwGlobalCallback;
 import android.media.soundtrigger.ModelParameterRange;
 import android.media.soundtrigger.PhraseSoundModel;
 import android.media.soundtrigger.Properties;
@@ -15,7 +13,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISoundTriggerHw extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$soundtrigger3$ISoundTriggerHw".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$soundtrigger3$ISoundTriggerHw".replace('$', '.');
     public static final String HASH = "6b24e60ad261e3ff56106efd86ce6aa7ef5621b0";
     public static final int VERSION = 2;
 
@@ -29,17 +28,22 @@ public interface ISoundTriggerHw extends IInterface {
 
     Properties getProperties() throws RemoteException;
 
-    int loadPhraseSoundModel(PhraseSoundModel phraseSoundModel, ISoundTriggerHwCallback iSoundTriggerHwCallback) throws RemoteException;
+    int loadPhraseSoundModel(
+            PhraseSoundModel phraseSoundModel, ISoundTriggerHwCallback iSoundTriggerHwCallback)
+            throws RemoteException;
 
-    int loadSoundModel(SoundModel soundModel, ISoundTriggerHwCallback iSoundTriggerHwCallback) throws RemoteException;
+    int loadSoundModel(SoundModel soundModel, ISoundTriggerHwCallback iSoundTriggerHwCallback)
+            throws RemoteException;
 
     ModelParameterRange queryParameter(int i, int i2) throws RemoteException;
 
-    void registerGlobalCallback(ISoundTriggerHwGlobalCallback iSoundTriggerHwGlobalCallback) throws RemoteException;
+    void registerGlobalCallback(ISoundTriggerHwGlobalCallback iSoundTriggerHwGlobalCallback)
+            throws RemoteException;
 
     void setParameter(int i, int i2, int i3) throws RemoteException;
 
-    void startRecognition(int i, int i2, int i3, RecognitionConfig recognitionConfig) throws RemoteException;
+    void startRecognition(int i, int i2, int i3, RecognitionConfig recognitionConfig)
+            throws RemoteException;
 
     void stopRecognition(int i) throws RemoteException;
 
@@ -52,37 +56,39 @@ public interface ISoundTriggerHw extends IInterface {
         }
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-        public void registerGlobalCallback(ISoundTriggerHwGlobalCallback callback) throws RemoteException {
-        }
+        public void registerGlobalCallback(ISoundTriggerHwGlobalCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-        public int loadSoundModel(SoundModel soundModel, ISoundTriggerHwCallback callback) throws RemoteException {
+        public int loadSoundModel(SoundModel soundModel, ISoundTriggerHwCallback callback)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-        public int loadPhraseSoundModel(PhraseSoundModel soundModel, ISoundTriggerHwCallback callback) throws RemoteException {
+        public int loadPhraseSoundModel(
+                PhraseSoundModel soundModel, ISoundTriggerHwCallback callback)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-        public void unloadSoundModel(int modelHandle) throws RemoteException {
-        }
+        public void unloadSoundModel(int modelHandle) throws RemoteException {}
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-        public void startRecognition(int modelHandle, int deviceHandle, int ioHandle, RecognitionConfig config) throws RemoteException {
-        }
+        public void startRecognition(
+                int modelHandle, int deviceHandle, int ioHandle, RecognitionConfig config)
+                throws RemoteException {}
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-        public void stopRecognition(int modelHandle) throws RemoteException {
-        }
+        public void stopRecognition(int modelHandle) throws RemoteException {}
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-        public void forceRecognitionEvent(int modelHandle) throws RemoteException {
-        }
+        public void forceRecognitionEvent(int modelHandle) throws RemoteException {}
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-        public ModelParameterRange queryParameter(int modelHandle, int modelParam) throws RemoteException {
+        public ModelParameterRange queryParameter(int modelHandle, int modelParam)
+                throws RemoteException {
             return null;
         }
 
@@ -92,8 +98,8 @@ public interface ISoundTriggerHw extends IInterface {
         }
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-        public void setParameter(int modelHandle, int modelParam, int value) throws RemoteException {
-        }
+        public void setParameter(int modelHandle, int modelParam, int value)
+                throws RemoteException {}
 
         @Override // android.hardware.soundtrigger3.ISoundTriggerHw
         public int getInterfaceVersion() {
@@ -111,7 +117,7 @@ public interface ISoundTriggerHw extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISoundTriggerHw {
+    public abstract static class Stub extends Binder implements ISoundTriggerHw {
         static final int TRANSACTION_forceRecognitionEvent = 8;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -148,7 +154,8 @@ public interface ISoundTriggerHw extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -174,22 +181,26 @@ public interface ISoundTriggerHw extends IInterface {
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 2:
-                    ISoundTriggerHwGlobalCallback _arg0 = ISoundTriggerHwGlobalCallback.Stub.asInterface(data.readStrongBinder());
+                    ISoundTriggerHwGlobalCallback _arg0 =
+                            ISoundTriggerHwGlobalCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerGlobalCallback(_arg0);
                     reply.writeNoException();
                     return true;
                 case 3:
                     SoundModel _arg02 = (SoundModel) data.readTypedObject(SoundModel.CREATOR);
-                    ISoundTriggerHwCallback _arg1 = ISoundTriggerHwCallback.Stub.asInterface(data.readStrongBinder());
+                    ISoundTriggerHwCallback _arg1 =
+                            ISoundTriggerHwCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result2 = loadSoundModel(_arg02, _arg1);
                     reply.writeNoException();
                     reply.writeInt(_result2);
                     return true;
                 case 4:
-                    PhraseSoundModel _arg03 = (PhraseSoundModel) data.readTypedObject(PhraseSoundModel.CREATOR);
-                    ISoundTriggerHwCallback _arg12 = ISoundTriggerHwCallback.Stub.asInterface(data.readStrongBinder());
+                    PhraseSoundModel _arg03 =
+                            (PhraseSoundModel) data.readTypedObject(PhraseSoundModel.CREATOR);
+                    ISoundTriggerHwCallback _arg12 =
+                            ISoundTriggerHwCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result3 = loadPhraseSoundModel(_arg03, _arg12);
                     reply.writeNoException();
@@ -205,7 +216,8 @@ public interface ISoundTriggerHw extends IInterface {
                     int _arg05 = data.readInt();
                     int _arg13 = data.readInt();
                     int _arg2 = data.readInt();
-                    RecognitionConfig _arg3 = (RecognitionConfig) data.readTypedObject(RecognitionConfig.CREATOR);
+                    RecognitionConfig _arg3 =
+                            (RecognitionConfig) data.readTypedObject(RecognitionConfig.CREATOR);
                     data.enforceNoDataAvail();
                     startRecognition(_arg05, _arg13, _arg2, _arg3);
                     reply.writeNoException();
@@ -289,7 +301,8 @@ public interface ISoundTriggerHw extends IInterface {
             }
 
             @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-            public void registerGlobalCallback(ISoundTriggerHwGlobalCallback callback) throws RemoteException {
+            public void registerGlobalCallback(ISoundTriggerHwGlobalCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -297,7 +310,8 @@ public interface ISoundTriggerHw extends IInterface {
                     _data.writeStrongInterface(callback);
                     boolean _status = this.mRemote.transact(2, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method registerGlobalCallback is unimplemented.");
+                        throw new RemoteException(
+                                "Method registerGlobalCallback is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -307,7 +321,8 @@ public interface ISoundTriggerHw extends IInterface {
             }
 
             @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-            public int loadSoundModel(SoundModel soundModel, ISoundTriggerHwCallback callback) throws RemoteException {
+            public int loadSoundModel(SoundModel soundModel, ISoundTriggerHwCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -328,7 +343,9 @@ public interface ISoundTriggerHw extends IInterface {
             }
 
             @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-            public int loadPhraseSoundModel(PhraseSoundModel soundModel, ISoundTriggerHwCallback callback) throws RemoteException {
+            public int loadPhraseSoundModel(
+                    PhraseSoundModel soundModel, ISoundTriggerHwCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -367,7 +384,9 @@ public interface ISoundTriggerHw extends IInterface {
             }
 
             @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-            public void startRecognition(int modelHandle, int deviceHandle, int ioHandle, RecognitionConfig config) throws RemoteException {
+            public void startRecognition(
+                    int modelHandle, int deviceHandle, int ioHandle, RecognitionConfig config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -424,7 +443,8 @@ public interface ISoundTriggerHw extends IInterface {
             }
 
             @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-            public ModelParameterRange queryParameter(int modelHandle, int modelParam) throws RemoteException {
+            public ModelParameterRange queryParameter(int modelHandle, int modelParam)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -436,7 +456,9 @@ public interface ISoundTriggerHw extends IInterface {
                         throw new RemoteException("Method queryParameter is unimplemented.");
                     }
                     _reply.readException();
-                    ModelParameterRange _result = (ModelParameterRange) _reply.readTypedObject(ModelParameterRange.CREATOR);
+                    ModelParameterRange _result =
+                            (ModelParameterRange)
+                                    _reply.readTypedObject(ModelParameterRange.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -466,7 +488,8 @@ public interface ISoundTriggerHw extends IInterface {
             }
 
             @Override // android.hardware.soundtrigger3.ISoundTriggerHw
-            public void setParameter(int modelHandle, int modelParam, int value) throws RemoteException {
+            public void setParameter(int modelHandle, int modelParam, int value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

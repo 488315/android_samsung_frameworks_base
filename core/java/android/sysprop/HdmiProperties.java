@@ -1,6 +1,7 @@
 package android.sysprop;
 
 import android.os.SystemProperties;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,8 +12,7 @@ import java.util.function.Function;
 
 /* loaded from: classes3.dex */
 public final class HdmiProperties {
-    private HdmiProperties() {
-    }
+    private HdmiProperties() {}
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     private static Boolean tryParseBoolean(String str) {
@@ -186,7 +186,8 @@ public final class HdmiProperties {
         return joiner.toString();
     }
 
-    private static <T extends Enum<T>> String formatEnumList(List<T> list, Function<T, String> elementFormatter) {
+    private static <T extends Enum<T>> String formatEnumList(
+            List<T> list, Function<T, String> elementFormatter) {
         StringJoiner joiner = new StringJoiner(",");
         Iterator<T> it = list.iterator();
         while (it.hasNext()) {
@@ -199,14 +200,17 @@ public final class HdmiProperties {
     @Deprecated
     public static List<Integer> device_type() {
         String value = SystemProperties.get("ro.hdmi.device_type");
-        return tryParseList(new Function() { // from class: android.sysprop.HdmiProperties$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Integer tryParseInteger;
-                tryParseInteger = HdmiProperties.tryParseInteger((String) obj);
-                return tryParseInteger;
-            }
-        }, value);
+        return tryParseList(
+                new Function() { // from class:
+                                 // android.sysprop.HdmiProperties$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Function
+                    public final Object apply(Object obj) {
+                        Integer tryParseInteger;
+                        tryParseInteger = HdmiProperties.tryParseInteger((String) obj);
+                        return tryParseInteger;
+                    }
+                },
+                value);
     }
 
     public enum cec_device_types_values {
@@ -241,7 +245,9 @@ public final class HdmiProperties {
     }
 
     public static Optional<Boolean> forward_volume_keys_when_system_audio_mode_off() {
-        String value = SystemProperties.get("ro.hdmi.cec_audio_device_forward_volume_keys_system_audio_mode_off");
+        String value =
+                SystemProperties.get(
+                        "ro.hdmi.cec_audio_device_forward_volume_keys_system_audio_mode_off");
         return Optional.ofNullable(tryParseBoolean(value));
     }
 
@@ -266,8 +272,14 @@ public final class HdmiProperties {
         }
     }
 
-    public static Optional<playback_device_action_on_routing_control_values> playback_device_action_on_routing_control() {
-        String value = SystemProperties.get("ro.hdmi.cec.source.playback_device_action_on_routing_control");
-        return Optional.ofNullable((playback_device_action_on_routing_control_values) tryParseEnum(playback_device_action_on_routing_control_values.class, value));
+    public static Optional<playback_device_action_on_routing_control_values>
+            playback_device_action_on_routing_control() {
+        String value =
+                SystemProperties.get(
+                        "ro.hdmi.cec.source.playback_device_action_on_routing_control");
+        return Optional.ofNullable(
+                (playback_device_action_on_routing_control_values)
+                        tryParseEnum(
+                                playback_device_action_on_routing_control_values.class, value));
     }
 }

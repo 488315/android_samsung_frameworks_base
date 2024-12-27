@@ -3,26 +3,30 @@ package com.samsung.android.infoextraction;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public class KerykeionRequest implements Parcelable {
-    public static final Parcelable.Creator<KerykeionRequest> CREATOR = new Parcelable.Creator<KerykeionRequest>() { // from class: com.samsung.android.infoextraction.KerykeionRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KerykeionRequest createFromParcel(Parcel in) {
-            KerykeionRequest data = new KerykeionRequest();
-            data.readFromParcel(in);
-            return data;
-        }
+    public static final Parcelable.Creator<KerykeionRequest> CREATOR =
+            new Parcelable.Creator<
+                    KerykeionRequest>() { // from class:
+                                          // com.samsung.android.infoextraction.KerykeionRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KerykeionRequest createFromParcel(Parcel in) {
+                    KerykeionRequest data = new KerykeionRequest();
+                    data.readFromParcel(in);
+                    return data;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KerykeionRequest[] newArray(int size) {
-            return new KerykeionRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KerykeionRequest[] newArray(int size) {
+                    return new KerykeionRequest[size];
+                }
+            };
     private List<Object> mPrimitive;
     private int nType;
     private int nPatternType = 0;

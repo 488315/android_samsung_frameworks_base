@@ -5,25 +5,28 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
+
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TextLanguage implements Parcelable {
-    public static final Parcelable.Creator<TextLanguage> CREATOR = new Parcelable.Creator<TextLanguage>() { // from class: android.view.textclassifier.TextLanguage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextLanguage createFromParcel(Parcel in) {
-            return TextLanguage.readFromParcel(in);
-        }
+    public static final Parcelable.Creator<TextLanguage> CREATOR =
+            new Parcelable.Creator<
+                    TextLanguage>() { // from class: android.view.textclassifier.TextLanguage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextLanguage createFromParcel(Parcel in) {
+                    return TextLanguage.readFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextLanguage[] newArray(int size) {
-            return new TextLanguage[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextLanguage[] newArray(int size) {
+                    return new TextLanguage[size];
+                }
+            };
     static final TextLanguage EMPTY = new Builder().build();
     private final Bundle mBundle;
     private final EntityConfidence mEntityConfidence;
@@ -56,7 +59,12 @@ public final class TextLanguage implements Parcelable {
     }
 
     public String toString() {
-        return String.format(Locale.US, "TextLanguage {id=%s, locales=%s, bundle=%s}", this.mId, this.mEntityConfidence, this.mBundle);
+        return String.format(
+                Locale.US,
+                "TextLanguage {id=%s, locales=%s, bundle=%s}",
+                this.mId,
+                this.mEntityConfidence,
+                this.mBundle);
     }
 
     @Override // android.os.Parcelable
@@ -73,7 +81,8 @@ public final class TextLanguage implements Parcelable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static TextLanguage readFromParcel(Parcel in) {
-        return new TextLanguage(in.readString(), EntityConfidence.CREATOR.createFromParcel(in), in.readBundle());
+        return new TextLanguage(
+                in.readString(), EntityConfidence.CREATOR.createFromParcel(in), in.readBundle());
     }
 
     public static final class Builder {
@@ -99,24 +108,28 @@ public final class TextLanguage implements Parcelable {
 
         public TextLanguage build() {
             this.mBundle = this.mBundle == null ? Bundle.EMPTY : this.mBundle;
-            return new TextLanguage(this.mId, new EntityConfidence(this.mEntityConfidenceMap), this.mBundle);
+            return new TextLanguage(
+                    this.mId, new EntityConfidence(this.mEntityConfidenceMap), this.mBundle);
         }
     }
 
     public static final class Request implements Parcelable {
-        public static final Parcelable.Creator<Request> CREATOR = new Parcelable.Creator<Request>() { // from class: android.view.textclassifier.TextLanguage.Request.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Request createFromParcel(Parcel in) {
-                return Request.readFromParcel(in);
-            }
+        public static final Parcelable.Creator<Request> CREATOR =
+                new Parcelable.Creator<
+                        Request>() { // from class:
+                                     // android.view.textclassifier.TextLanguage.Request.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Request createFromParcel(Parcel in) {
+                        return Request.readFromParcel(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Request[] newArray(int size) {
-                return new Request[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Request[] newArray(int size) {
+                        return new Request[size];
+                    }
+                };
         private final Bundle mExtra;
         private SystemTextClassifierMetadata mSystemTcMetadata;
         private final CharSequence mText;
@@ -165,7 +178,9 @@ public final class TextLanguage implements Parcelable {
         public static Request readFromParcel(Parcel in) {
             CharSequence text = in.readCharSequence();
             Bundle extra = in.readBundle();
-            SystemTextClassifierMetadata systemTcMetadata = (SystemTextClassifierMetadata) in.readParcelable(null, SystemTextClassifierMetadata.class);
+            SystemTextClassifierMetadata systemTcMetadata =
+                    (SystemTextClassifierMetadata)
+                            in.readParcelable(null, SystemTextClassifierMetadata.class);
             Request request = new Request(text, extra);
             request.setSystemTextClassifierMetadata(systemTcMetadata);
             return request;
@@ -185,7 +200,8 @@ public final class TextLanguage implements Parcelable {
             }
 
             public Request build() {
-                return new Request(this.mText.toString(), this.mBundle == null ? Bundle.EMPTY : this.mBundle);
+                return new Request(
+                        this.mText.toString(), this.mBundle == null ? Bundle.EMPTY : this.mBundle);
             }
         }
     }

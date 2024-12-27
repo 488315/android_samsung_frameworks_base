@@ -5,7 +5,9 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.SparseArray;
+
 import com.sec.android.sdhms.ISamsungDeviceHealthManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,8 +57,7 @@ public class SemTemperatureManager {
         }
     }
 
-    private SemTemperatureManager() {
-    }
+    private SemTemperatureManager() {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public static synchronized ISamsungDeviceHealthManager getService() {
@@ -67,12 +68,16 @@ public class SemTemperatureManager {
                 mService = ISamsungDeviceHealthManager.Stub.asInterface(b);
                 if (mService != null) {
                     try {
-                        b.linkToDeath(new IBinder.DeathRecipient() { // from class: com.samsung.android.os.SemTemperatureManager.1
-                            @Override // android.os.IBinder.DeathRecipient
-                            public void binderDied() {
-                                SemTemperatureManager.mService = null;
-                            }
-                        }, 0);
+                        b.linkToDeath(
+                                new IBinder
+                                        .DeathRecipient() { // from class:
+                                                            // com.samsung.android.os.SemTemperatureManager.1
+                                    @Override // android.os.IBinder.DeathRecipient
+                                    public void binderDied() {
+                                        SemTemperatureManager.mService = null;
+                                    }
+                                },
+                                0);
                     } catch (RemoteException e) {
                         e.printStackTrace();
                     }

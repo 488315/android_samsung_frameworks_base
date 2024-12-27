@@ -4,7 +4,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.util.ArrayMap;
 import android.util.ArraySet;
-import android.view.FocusFinder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,14 +14,15 @@ import java.util.List;
 
 /* loaded from: classes4.dex */
 public class FocusFinder {
-    private static final ThreadLocal<FocusFinder> tlFocusFinder = new ThreadLocal<FocusFinder>() { // from class: android.view.FocusFinder.1
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // java.lang.ThreadLocal
-        public FocusFinder initialValue() {
-            return new FocusFinder();
-        }
-    };
+    private static final ThreadLocal<FocusFinder> tlFocusFinder =
+            new ThreadLocal<FocusFinder>() { // from class: android.view.FocusFinder.1
+                /* JADX INFO: Access modifiers changed from: protected */
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // java.lang.ThreadLocal
+                public FocusFinder initialValue() {
+                    return new FocusFinder();
+                }
+            };
     final Rect mBestCandidateRect;
     private final FocusSorter mFocusSorter;
     final Rect mFocusedRect;
@@ -52,18 +53,26 @@ public class FocusFinder {
         this.mFocusedRect = new Rect();
         this.mOtherRect = new Rect();
         this.mBestCandidateRect = new Rect();
-        this.mUserSpecifiedFocusComparator = new UserSpecifiedFocusComparator(new UserSpecifiedFocusComparator.NextFocusGetter() { // from class: android.view.FocusFinder$$ExternalSyntheticLambda0
-            @Override // android.view.FocusFinder.UserSpecifiedFocusComparator.NextFocusGetter
-            public final View get(View view, View view2) {
-                return FocusFinder.lambda$new$0(view, view2);
-            }
-        });
-        this.mUserSpecifiedClusterComparator = new UserSpecifiedFocusComparator(new UserSpecifiedFocusComparator.NextFocusGetter() { // from class: android.view.FocusFinder$$ExternalSyntheticLambda1
-            @Override // android.view.FocusFinder.UserSpecifiedFocusComparator.NextFocusGetter
-            public final View get(View view, View view2) {
-                return FocusFinder.lambda$new$1(view, view2);
-            }
-        });
+        this.mUserSpecifiedFocusComparator =
+                new UserSpecifiedFocusComparator(
+                        new UserSpecifiedFocusComparator
+                                .NextFocusGetter() { // from class:
+                                                     // android.view.FocusFinder$$ExternalSyntheticLambda0
+                            @Override // android.view.FocusFinder.UserSpecifiedFocusComparator.NextFocusGetter
+                            public final View get(View view, View view2) {
+                                return FocusFinder.lambda$new$0(view, view2);
+                            }
+                        });
+        this.mUserSpecifiedClusterComparator =
+                new UserSpecifiedFocusComparator(
+                        new UserSpecifiedFocusComparator
+                                .NextFocusGetter() { // from class:
+                                                     // android.view.FocusFinder$$ExternalSyntheticLambda1
+                            @Override // android.view.FocusFinder.UserSpecifiedFocusComparator.NextFocusGetter
+                            public final View get(View view, View view2) {
+                                return FocusFinder.lambda$new$1(view, view2);
+                            }
+                        });
         this.mFocusSorter = new FocusSorter();
         this.mTempList = new ArrayList<>();
     }
@@ -104,12 +113,18 @@ public class FocusFinder {
             return root;
         }
         ViewGroup effective = null;
-        for (ViewParent nextParent = focused.getParent(); nextParent instanceof ViewGroup; nextParent = nextParent.getParent()) {
+        for (ViewParent nextParent = focused.getParent();
+                nextParent instanceof ViewGroup;
+                nextParent = nextParent.getParent()) {
             if (nextParent == root) {
                 return effective != null ? effective : root;
             }
             ViewGroup vg = (ViewGroup) nextParent;
-            if (vg.getTouchscreenBlocksFocus() && focused.getContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN) && vg.isKeyboardNavigationCluster()) {
+            if (vg.getTouchscreenBlocksFocus()
+                    && focused.getContext()
+                            .getPackageManager()
+                            .hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN)
+                    && vg.isKeyboardNavigationCluster()) {
                 effective = vg;
             }
         }
@@ -118,7 +133,11 @@ public class FocusFinder {
 
     public View findNextKeyboardNavigationCluster(View root, View currentCluster, int direction) {
         View next = null;
-        if (currentCluster != null && (next = findNextUserSpecifiedKeyboardNavigationCluster(root, currentCluster, direction)) != null) {
+        if (currentCluster != null
+                && (next =
+                                findNextUserSpecifiedKeyboardNavigationCluster(
+                                        root, currentCluster, direction))
+                        != null) {
             return next;
         }
         ArrayList<View> clusters = this.mTempList;
@@ -134,8 +153,10 @@ public class FocusFinder {
         }
     }
 
-    private View findNextUserSpecifiedKeyboardNavigationCluster(View root, View currentCluster, int direction) {
-        View userSetNextCluster = currentCluster.findUserSetNextKeyboardNavigationCluster(root, direction);
+    private View findNextUserSpecifiedKeyboardNavigationCluster(
+            View root, View currentCluster, int direction) {
+        View userSetNextCluster =
+                currentCluster.findUserSetNextKeyboardNavigationCluster(root, direction);
         if (userSetNextCluster != null && userSetNextCluster.hasFocusable()) {
             return userSetNextCluster;
         }
@@ -147,20 +168,30 @@ public class FocusFinder {
         View cycleCheck = userSetNextFocus;
         boolean cycleStep = true;
         while (userSetNextFocus != null) {
-            if (userSetNextFocus.isFocusable() && userSetNextFocus.getVisibility() == 0 && (!userSetNextFocus.isInTouchMode() || userSetNextFocus.isFocusableInTouchMode())) {
+            if (userSetNextFocus.isFocusable()
+                    && userSetNextFocus.getVisibility() == 0
+                    && (!userSetNextFocus.isInTouchMode()
+                            || userSetNextFocus.isFocusableInTouchMode())) {
                 return userSetNextFocus;
             }
             userSetNextFocus = userSetNextFocus.findUserSetNextFocus(root, direction);
             boolean z = !cycleStep;
             cycleStep = z;
-            if (z && (cycleCheck = cycleCheck.findUserSetNextFocus(root, direction)) == userSetNextFocus) {
+            if (z
+                    && (cycleCheck = cycleCheck.findUserSetNextFocus(root, direction))
+                            == userSetNextFocus) {
                 return null;
             }
         }
         return null;
     }
 
-    private View findNextFocus(ViewGroup root, View focused, Rect focusedRect, int direction, ArrayList<View> focusables) {
+    private View findNextFocus(
+            ViewGroup root,
+            View focused,
+            Rect focusedRect,
+            int direction,
+            ArrayList<View> focusables) {
         if (focused != null) {
             if (focusedRect == null) {
                 focusedRect = this.mFocusedRect;
@@ -199,18 +230,21 @@ public class FocusFinder {
         switch (direction) {
             case 1:
             case 2:
-                return findNextFocusInRelativeDirection(focusables, root, focused, focusedRect, direction);
+                return findNextFocusInRelativeDirection(
+                        focusables, root, focused, focusedRect, direction);
             case 17:
             case 33:
             case 66:
             case 130:
-                return findNextFocusInAbsoluteDirection(focusables, root, focused, focusedRect, direction);
+                return findNextFocusInAbsoluteDirection(
+                        focusables, root, focused, focusedRect, direction);
             default:
                 throw new IllegalArgumentException("Unknown direction: " + direction);
         }
     }
 
-    private View findNextKeyboardNavigationCluster(View root, View currentCluster, List<View> clusters, int direction) {
+    private View findNextKeyboardNavigationCluster(
+            View root, View currentCluster, List<View> clusters, int direction) {
         try {
             this.mUserSpecifiedClusterComparator.setFocusables(clusters, root);
             Collections.sort(clusters, this.mUserSpecifiedClusterComparator);
@@ -220,7 +254,8 @@ public class FocusFinder {
                 case 1:
                 case 17:
                 case 33:
-                    return getPreviousKeyboardNavigationCluster(root, currentCluster, clusters, count);
+                    return getPreviousKeyboardNavigationCluster(
+                            root, currentCluster, clusters, count);
                 case 2:
                 case 66:
                 case 130:
@@ -234,7 +269,12 @@ public class FocusFinder {
         }
     }
 
-    private View findNextFocusInRelativeDirection(ArrayList<View> focusables, ViewGroup root, View focused, Rect focusedRect, int direction) {
+    private View findNextFocusInRelativeDirection(
+            ArrayList<View> focusables,
+            ViewGroup root,
+            View focused,
+            Rect focusedRect,
+            int direction) {
         try {
             this.mUserSpecifiedFocusComparator.setFocusables(focusables, root);
             Collections.sort(focusables, this.mUserSpecifiedFocusComparator);
@@ -275,7 +315,12 @@ public class FocusFinder {
         focusedRect.set(rootLeft, rootTop, rootLeft, rootTop);
     }
 
-    View findNextFocusInAbsoluteDirection(ArrayList<View> focusables, ViewGroup root, View focused, Rect focusedRect, int direction) {
+    View findNextFocusInAbsoluteDirection(
+            ArrayList<View> focusables,
+            ViewGroup root,
+            View focused,
+            Rect focusedRect,
+            int direction) {
         this.mBestCandidateRect.set(focusedRect);
         switch (direction) {
             case 17:
@@ -298,7 +343,8 @@ public class FocusFinder {
             if (focusable != focused && focusable != root) {
                 focusable.getFocusedRect(this.mOtherRect);
                 root.offsetDescendantRectToMyCoords(focusable, this.mOtherRect);
-                if (isBetterCandidate(direction, focusedRect, this.mOtherRect, this.mBestCandidateRect)) {
+                if (isBetterCandidate(
+                        direction, focusedRect, this.mOtherRect, this.mBestCandidateRect)) {
                     this.mBestCandidateRect.set(this.mOtherRect);
                     closest = focusable;
                 }
@@ -307,19 +353,23 @@ public class FocusFinder {
         return closest;
     }
 
-    private static View getNextFocusable(View focused, ArrayList<View> focusables, int count, boolean[] outLooped) {
+    private static View getNextFocusable(
+            View focused, ArrayList<View> focusables, int count, boolean[] outLooped) {
         int position;
         if (count < 2) {
             return null;
         }
-        if (focused != null && (position = focusables.lastIndexOf(focused)) >= 0 && position + 1 < count) {
+        if (focused != null
+                && (position = focusables.lastIndexOf(focused)) >= 0
+                && position + 1 < count) {
             return focusables.get(position + 1);
         }
         outLooped[0] = true;
         return focusables.get(0);
     }
 
-    private static View getPreviousFocusable(View focused, ArrayList<View> focusables, int count, boolean[] outLooped) {
+    private static View getPreviousFocusable(
+            View focused, ArrayList<View> focusables, int count, boolean[] outLooped) {
         int position;
         if (count < 2) {
             return null;
@@ -331,7 +381,8 @@ public class FocusFinder {
         return focusables.get(count - 1);
     }
 
-    private static View getNextKeyboardNavigationCluster(View root, View currentCluster, List<View> clusters, int count) {
+    private static View getNextKeyboardNavigationCluster(
+            View root, View currentCluster, List<View> clusters, int count) {
         if (currentCluster == null) {
             return clusters.get(0);
         }
@@ -342,7 +393,8 @@ public class FocusFinder {
         return root;
     }
 
-    private static View getPreviousKeyboardNavigationCluster(View root, View currentCluster, List<View> clusters, int count) {
+    private static View getPreviousKeyboardNavigationCluster(
+            View root, View currentCluster, List<View> clusters, int count) {
         if (currentCluster == null) {
             return clusters.get(count - 1);
         }
@@ -358,7 +410,13 @@ public class FocusFinder {
             return false;
         }
         if (isCandidate(source, rect2, direction) && !beamBeats(direction, source, rect1, rect2)) {
-            return !beamBeats(direction, source, rect2, rect1) && getWeightedDistanceFor((long) majorAxisDistance(direction, source, rect1), (long) minorAxisDistance(direction, source, rect1)) < getWeightedDistanceFor((long) majorAxisDistance(direction, source, rect2), (long) minorAxisDistance(direction, source, rect2));
+            return !beamBeats(direction, source, rect2, rect1)
+                    && getWeightedDistanceFor(
+                                    (long) majorAxisDistance(direction, source, rect1),
+                                    (long) minorAxisDistance(direction, source, rect1))
+                            < getWeightedDistanceFor(
+                                    (long) majorAxisDistance(direction, source, rect2),
+                                    (long) minorAxisDistance(direction, source, rect2));
         }
         return true;
     }
@@ -369,25 +427,36 @@ public class FocusFinder {
         if (rect2InSrcBeam || !rect1InSrcBeam) {
             return false;
         }
-        return !isToDirectionOf(direction, source, rect2) || direction == 17 || direction == 66 || majorAxisDistance(direction, source, rect1) < majorAxisDistanceToFarEdge(direction, source, rect2);
+        return !isToDirectionOf(direction, source, rect2)
+                || direction == 17
+                || direction == 66
+                || majorAxisDistance(direction, source, rect1)
+                        < majorAxisDistanceToFarEdge(direction, source, rect2);
     }
 
     long getWeightedDistanceFor(long majorAxisDistance, long minorAxisDistance) {
-        return (13 * majorAxisDistance * majorAxisDistance) + (minorAxisDistance * minorAxisDistance);
+        return (13 * majorAxisDistance * majorAxisDistance)
+                + (minorAxisDistance * minorAxisDistance);
     }
 
     boolean isCandidate(Rect srcRect, Rect destRect, int direction) {
         switch (direction) {
             case 17:
-                return (srcRect.right > destRect.right || srcRect.left >= destRect.right) && srcRect.left > destRect.left;
+                return (srcRect.right > destRect.right || srcRect.left >= destRect.right)
+                        && srcRect.left > destRect.left;
             case 33:
-                return (srcRect.bottom > destRect.bottom || srcRect.top >= destRect.bottom) && srcRect.top > destRect.top;
+                return (srcRect.bottom > destRect.bottom || srcRect.top >= destRect.bottom)
+                        && srcRect.top > destRect.top;
             case 66:
-                return (srcRect.left < destRect.left || srcRect.right <= destRect.left) && srcRect.right < destRect.right;
+                return (srcRect.left < destRect.left || srcRect.right <= destRect.left)
+                        && srcRect.right < destRect.right;
             case 130:
-                return (srcRect.top < destRect.top || srcRect.bottom <= destRect.top) && srcRect.bottom < destRect.bottom;
+                return (srcRect.top < destRect.top || srcRect.bottom <= destRect.top)
+                        && srcRect.bottom < destRect.bottom;
             default:
-                throw new IllegalArgumentException("direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, FOCUS_RIGHT}.");
+                throw new IllegalArgumentException(
+                        "direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT,"
+                            + " FOCUS_RIGHT}.");
         }
     }
 
@@ -400,7 +469,9 @@ public class FocusFinder {
             case 130:
                 return rect2.right > rect1.left && rect2.left < rect1.right;
             default:
-                throw new IllegalArgumentException("direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, FOCUS_RIGHT}.");
+                throw new IllegalArgumentException(
+                        "direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT,"
+                            + " FOCUS_RIGHT}.");
         }
     }
 
@@ -415,7 +486,9 @@ public class FocusFinder {
             case 130:
                 return src.bottom <= dest.top;
             default:
-                throw new IllegalArgumentException("direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, FOCUS_RIGHT}.");
+                throw new IllegalArgumentException(
+                        "direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT,"
+                            + " FOCUS_RIGHT}.");
         }
     }
 
@@ -434,7 +507,9 @@ public class FocusFinder {
             case 130:
                 return dest.top - source.bottom;
             default:
-                throw new IllegalArgumentException("direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, FOCUS_RIGHT}.");
+                throw new IllegalArgumentException(
+                        "direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT,"
+                            + " FOCUS_RIGHT}.");
         }
     }
 
@@ -453,7 +528,9 @@ public class FocusFinder {
             case 130:
                 return dest.bottom - source.bottom;
             default:
-                throw new IllegalArgumentException("direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, FOCUS_RIGHT}.");
+                throw new IllegalArgumentException(
+                        "direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT,"
+                            + " FOCUS_RIGHT}.");
         }
     }
 
@@ -461,12 +538,16 @@ public class FocusFinder {
         switch (direction) {
             case 17:
             case 66:
-                return Math.abs((source.top + (source.height() / 2)) - (dest.top + (dest.height() / 2)));
+                return Math.abs(
+                        (source.top + (source.height() / 2)) - (dest.top + (dest.height() / 2)));
             case 33:
             case 130:
-                return Math.abs((source.left + (source.width() / 2)) - (dest.left + (dest.width() / 2)));
+                return Math.abs(
+                        (source.left + (source.width() / 2)) - (dest.left + (dest.width() / 2)));
             default:
-                throw new IllegalArgumentException("direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, FOCUS_RIGHT}.");
+                throw new IllegalArgumentException(
+                        "direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT,"
+                            + " FOCUS_RIGHT}.");
         }
     }
 
@@ -500,7 +581,11 @@ public class FocusFinder {
                         distance = touchableBounds.top;
                         break;
                 }
-                if (distance < edgeSlop && (closest == null || closestBounds.contains(touchableBounds) || (!touchableBounds.contains(closestBounds) && distance < minDistance))) {
+                if (distance < edgeSlop
+                        && (closest == null
+                                || closestBounds.contains(touchableBounds)
+                                || (!touchableBounds.contains(closestBounds)
+                                        && distance < minDistance))) {
                     int minDistance2 = distance;
                     closestBounds.set(touchableBounds);
                     switch (direction) {
@@ -538,7 +623,9 @@ public class FocusFinder {
             case 130:
                 return destRect.top >= y && destRect.left <= x && x <= destRect.right;
             default:
-                throw new IllegalArgumentException("direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT, FOCUS_RIGHT}.");
+                throw new IllegalArgumentException(
+                        "direction must be one of {FOCUS_UP, FOCUS_DOWN, FOCUS_LEFT,"
+                            + " FOCUS_RIGHT}.");
         }
     }
 
@@ -551,25 +638,30 @@ public class FocusFinder {
         private int mRtlMult;
         private ArrayList<Rect> mRectPool = new ArrayList<>();
         private HashMap<View, Rect> mRectByView = null;
-        private Comparator<View> mTopsComparator = new Comparator() { // from class: android.view.FocusFinder$FocusSorter$$ExternalSyntheticLambda0
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int lambda$new$0;
-                lambda$new$0 = FocusFinder.FocusSorter.this.lambda$new$0((View) obj, (View) obj2);
-                return lambda$new$0;
-            }
-        };
-        private Comparator<View> mSidesComparator = new Comparator() { // from class: android.view.FocusFinder$FocusSorter$$ExternalSyntheticLambda1
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int lambda$new$1;
-                lambda$new$1 = FocusFinder.FocusSorter.this.lambda$new$1((View) obj, (View) obj2);
-                return lambda$new$1;
-            }
-        };
+        private Comparator<View> mTopsComparator =
+                new Comparator() { // from class:
+                                   // android.view.FocusFinder$FocusSorter$$ExternalSyntheticLambda0
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        int lambda$new$0;
+                        lambda$new$0 =
+                                FocusFinder.FocusSorter.this.lambda$new$0((View) obj, (View) obj2);
+                        return lambda$new$0;
+                    }
+                };
+        private Comparator<View> mSidesComparator =
+                new Comparator() { // from class:
+                                   // android.view.FocusFinder$FocusSorter$$ExternalSyntheticLambda1
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        int lambda$new$1;
+                        lambda$new$1 =
+                                FocusFinder.FocusSorter.this.lambda$new$1((View) obj, (View) obj2);
+                        return lambda$new$1;
+                    }
+                };
 
-        FocusSorter() {
-        }
+        FocusSorter() {}
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ int lambda$new$0(View first, View second) {
@@ -736,7 +828,10 @@ public class FocusFinder {
                 involvesChain = true;
             }
             if (involvesChain) {
-                return this.mOriginalOrdinal.get(first).intValue() < this.mOriginalOrdinal.get(second).intValue() ? -1 : 1;
+                return this.mOriginalOrdinal.get(first).intValue()
+                                < this.mOriginalOrdinal.get(second).intValue()
+                        ? -1
+                        : 1;
             }
             return 0;
         }

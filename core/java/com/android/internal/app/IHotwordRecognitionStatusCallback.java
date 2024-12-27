@@ -11,19 +11,27 @@ import android.service.voice.HotwordDetectionServiceFailure;
 import android.service.voice.HotwordRejectedResult;
 import android.service.voice.SoundTriggerFailure;
 import android.service.voice.VisualQueryDetectionServiceFailure;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes5.dex */
 public interface IHotwordRecognitionStatusCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.app.IHotwordRecognitionStatusCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.app.IHotwordRecognitionStatusCallback";
 
-    void onGenericSoundTriggerDetected(SoundTrigger.GenericRecognitionEvent genericRecognitionEvent) throws RemoteException;
+    void onGenericSoundTriggerDetected(SoundTrigger.GenericRecognitionEvent genericRecognitionEvent)
+            throws RemoteException;
 
-    void onHotwordDetectionServiceFailure(HotwordDetectionServiceFailure hotwordDetectionServiceFailure) throws RemoteException;
+    void onHotwordDetectionServiceFailure(
+            HotwordDetectionServiceFailure hotwordDetectionServiceFailure) throws RemoteException;
 
-    void onKeyphraseDetected(SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent, HotwordDetectedResult hotwordDetectedResult) throws RemoteException;
+    void onKeyphraseDetected(
+            SoundTrigger.KeyphraseRecognitionEvent keyphraseRecognitionEvent,
+            HotwordDetectedResult hotwordDetectedResult)
+            throws RemoteException;
 
-    void onKeyphraseDetectedFromExternalSource(HotwordDetectedResult hotwordDetectedResult) throws RemoteException;
+    void onKeyphraseDetectedFromExternalSource(HotwordDetectedResult hotwordDetectedResult)
+            throws RemoteException;
 
     void onOpenFile(String str, AndroidFuture androidFuture) throws RemoteException;
 
@@ -41,60 +49,59 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
 
     void onUnknownFailure(String str) throws RemoteException;
 
-    void onVisualQueryDetectionServiceFailure(VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) throws RemoteException;
+    void onVisualQueryDetectionServiceFailure(
+            VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
+            throws RemoteException;
 
     public static class Default implements IHotwordRecognitionStatusCallback {
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onKeyphraseDetected(SoundTrigger.KeyphraseRecognitionEvent recognitionEvent, HotwordDetectedResult result) throws RemoteException {
-        }
+        public void onKeyphraseDetected(
+                SoundTrigger.KeyphraseRecognitionEvent recognitionEvent,
+                HotwordDetectedResult result)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onKeyphraseDetectedFromExternalSource(HotwordDetectedResult result) throws RemoteException {
-        }
+        public void onKeyphraseDetectedFromExternalSource(HotwordDetectedResult result)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onGenericSoundTriggerDetected(SoundTrigger.GenericRecognitionEvent recognitionEvent) throws RemoteException {
-        }
+        public void onGenericSoundTriggerDetected(
+                SoundTrigger.GenericRecognitionEvent recognitionEvent) throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onRejected(HotwordRejectedResult result) throws RemoteException {
-        }
+        public void onRejected(HotwordRejectedResult result) throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onHotwordDetectionServiceFailure(HotwordDetectionServiceFailure hotwordDetectionServiceFailure) throws RemoteException {
-        }
+        public void onHotwordDetectionServiceFailure(
+                HotwordDetectionServiceFailure hotwordDetectionServiceFailure)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onVisualQueryDetectionServiceFailure(VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) throws RemoteException {
-        }
+        public void onVisualQueryDetectionServiceFailure(
+                VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onSoundTriggerFailure(SoundTriggerFailure soundTriggerFailure) throws RemoteException {
-        }
+        public void onSoundTriggerFailure(SoundTriggerFailure soundTriggerFailure)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onUnknownFailure(String errorMessage) throws RemoteException {
-        }
+        public void onUnknownFailure(String errorMessage) throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onRecognitionPaused() throws RemoteException {
-        }
+        public void onRecognitionPaused() throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onRecognitionResumed() throws RemoteException {
-        }
+        public void onRecognitionResumed() throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onStatusReported(int status) throws RemoteException {
-        }
+        public void onStatusReported(int status) throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onProcessRestarted() throws RemoteException {
-        }
+        public void onProcessRestarted() throws RemoteException {}
 
         @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-        public void onOpenFile(String filename, AndroidFuture future) throws RemoteException {
-        }
+        public void onOpenFile(String filename, AndroidFuture future) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -102,7 +109,7 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHotwordRecognitionStatusCallback {
+    public abstract static class Stub extends Binder implements IHotwordRecognitionStatusCallback {
         static final int TRANSACTION_onGenericSoundTriggerDetected = 3;
         static final int TRANSACTION_onHotwordDetectionServiceFailure = 5;
         static final int TRANSACTION_onKeyphraseDetected = 1;
@@ -176,7 +183,8 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IHotwordRecognitionStatusCallback.DESCRIPTOR);
             }
@@ -186,38 +194,56 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SoundTrigger.KeyphraseRecognitionEvent _arg0 = (SoundTrigger.KeyphraseRecognitionEvent) data.readTypedObject(SoundTrigger.KeyphraseRecognitionEvent.CREATOR);
-                    HotwordDetectedResult _arg1 = (HotwordDetectedResult) data.readTypedObject(HotwordDetectedResult.CREATOR);
+                    SoundTrigger.KeyphraseRecognitionEvent _arg0 =
+                            (SoundTrigger.KeyphraseRecognitionEvent)
+                                    data.readTypedObject(
+                                            SoundTrigger.KeyphraseRecognitionEvent.CREATOR);
+                    HotwordDetectedResult _arg1 =
+                            (HotwordDetectedResult)
+                                    data.readTypedObject(HotwordDetectedResult.CREATOR);
                     data.enforceNoDataAvail();
                     onKeyphraseDetected(_arg0, _arg1);
                     return true;
                 case 2:
-                    HotwordDetectedResult _arg02 = (HotwordDetectedResult) data.readTypedObject(HotwordDetectedResult.CREATOR);
+                    HotwordDetectedResult _arg02 =
+                            (HotwordDetectedResult)
+                                    data.readTypedObject(HotwordDetectedResult.CREATOR);
                     data.enforceNoDataAvail();
                     onKeyphraseDetectedFromExternalSource(_arg02);
                     return true;
                 case 3:
-                    SoundTrigger.GenericRecognitionEvent _arg03 = (SoundTrigger.GenericRecognitionEvent) data.readTypedObject(SoundTrigger.GenericRecognitionEvent.CREATOR);
+                    SoundTrigger.GenericRecognitionEvent _arg03 =
+                            (SoundTrigger.GenericRecognitionEvent)
+                                    data.readTypedObject(
+                                            SoundTrigger.GenericRecognitionEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onGenericSoundTriggerDetected(_arg03);
                     return true;
                 case 4:
-                    HotwordRejectedResult _arg04 = (HotwordRejectedResult) data.readTypedObject(HotwordRejectedResult.CREATOR);
+                    HotwordRejectedResult _arg04 =
+                            (HotwordRejectedResult)
+                                    data.readTypedObject(HotwordRejectedResult.CREATOR);
                     data.enforceNoDataAvail();
                     onRejected(_arg04);
                     return true;
                 case 5:
-                    HotwordDetectionServiceFailure _arg05 = (HotwordDetectionServiceFailure) data.readTypedObject(HotwordDetectionServiceFailure.CREATOR);
+                    HotwordDetectionServiceFailure _arg05 =
+                            (HotwordDetectionServiceFailure)
+                                    data.readTypedObject(HotwordDetectionServiceFailure.CREATOR);
                     data.enforceNoDataAvail();
                     onHotwordDetectionServiceFailure(_arg05);
                     return true;
                 case 6:
-                    VisualQueryDetectionServiceFailure _arg06 = (VisualQueryDetectionServiceFailure) data.readTypedObject(VisualQueryDetectionServiceFailure.CREATOR);
+                    VisualQueryDetectionServiceFailure _arg06 =
+                            (VisualQueryDetectionServiceFailure)
+                                    data.readTypedObject(
+                                            VisualQueryDetectionServiceFailure.CREATOR);
                     data.enforceNoDataAvail();
                     onVisualQueryDetectionServiceFailure(_arg06);
                     return true;
                 case 7:
-                    SoundTriggerFailure _arg07 = (SoundTriggerFailure) data.readTypedObject(SoundTriggerFailure.CREATOR);
+                    SoundTriggerFailure _arg07 =
+                            (SoundTriggerFailure) data.readTypedObject(SoundTriggerFailure.CREATOR);
                     data.enforceNoDataAvail();
                     onSoundTriggerFailure(_arg07);
                     return true;
@@ -242,7 +268,8 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
                     return true;
                 case 13:
                     String _arg010 = data.readString();
-                    AndroidFuture _arg12 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg12 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     onOpenFile(_arg010, _arg12);
                     return true;
@@ -268,7 +295,10 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-            public void onKeyphraseDetected(SoundTrigger.KeyphraseRecognitionEvent recognitionEvent, HotwordDetectedResult result) throws RemoteException {
+            public void onKeyphraseDetected(
+                    SoundTrigger.KeyphraseRecognitionEvent recognitionEvent,
+                    HotwordDetectedResult result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
@@ -281,7 +311,8 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-            public void onKeyphraseDetectedFromExternalSource(HotwordDetectedResult result) throws RemoteException {
+            public void onKeyphraseDetectedFromExternalSource(HotwordDetectedResult result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
@@ -293,7 +324,8 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-            public void onGenericSoundTriggerDetected(SoundTrigger.GenericRecognitionEvent recognitionEvent) throws RemoteException {
+            public void onGenericSoundTriggerDetected(
+                    SoundTrigger.GenericRecognitionEvent recognitionEvent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
@@ -317,7 +349,9 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-            public void onHotwordDetectionServiceFailure(HotwordDetectionServiceFailure hotwordDetectionServiceFailure) throws RemoteException {
+            public void onHotwordDetectionServiceFailure(
+                    HotwordDetectionServiceFailure hotwordDetectionServiceFailure)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
@@ -329,7 +363,9 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-            public void onVisualQueryDetectionServiceFailure(VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) throws RemoteException {
+            public void onVisualQueryDetectionServiceFailure(
+                    VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);
@@ -341,7 +377,8 @@ public interface IHotwordRecognitionStatusCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IHotwordRecognitionStatusCallback
-            public void onSoundTriggerFailure(SoundTriggerFailure soundTriggerFailure) throws RemoteException {
+            public void onSoundTriggerFailure(SoundTriggerFailure soundTriggerFailure)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IHotwordRecognitionStatusCallback.DESCRIPTOR);

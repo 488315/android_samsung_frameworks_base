@@ -5,26 +5,29 @@ import android.annotation.IntRange;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class AsyncNotedAppOp implements Parcelable {
-    public static final Parcelable.Creator<AsyncNotedAppOp> CREATOR = new Parcelable.Creator<AsyncNotedAppOp>() { // from class: android.app.AsyncNotedAppOp.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AsyncNotedAppOp[] newArray(int size) {
-            return new AsyncNotedAppOp[size];
-        }
+    public static final Parcelable.Creator<AsyncNotedAppOp> CREATOR =
+            new Parcelable.Creator<AsyncNotedAppOp>() { // from class: android.app.AsyncNotedAppOp.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AsyncNotedAppOp[] newArray(int size) {
+                    return new AsyncNotedAppOp[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AsyncNotedAppOp createFromParcel(Parcel in) {
-            return new AsyncNotedAppOp(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AsyncNotedAppOp createFromParcel(Parcel in) {
+                    return new AsyncNotedAppOp(in);
+                }
+            };
     private final String mAttributionTag;
     private final String mMessage;
     private final int mNotingUid;
@@ -43,16 +46,23 @@ public final class AsyncNotedAppOp implements Parcelable {
         return getOp();
     }
 
-    public AsyncNotedAppOp(int opCode, int notingUid, String attributionTag, String message, long time) {
+    public AsyncNotedAppOp(
+            int opCode, int notingUid, String attributionTag, String message, long time) {
         this.mOpCode = opCode;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, this.mOpCode, "from", 0L);
+        AnnotationValidations.validate(
+                (Class<IntRange>) IntRange.class, (IntRange) null, this.mOpCode, "from", 0L);
         this.mNotingUid = notingUid;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, this.mNotingUid, "from", 0L);
+        AnnotationValidations.validate(
+                (Class<IntRange>) IntRange.class, (IntRange) null, this.mNotingUid, "from", 0L);
         this.mAttributionTag = attributionTag;
         this.mMessage = message;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMessage);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMessage);
         this.mTime = time;
-        AnnotationValidations.validate((Class<? extends Annotation>) CurrentTimeMillisLong.class, (Annotation) null, this.mTime);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) CurrentTimeMillisLong.class,
+                (Annotation) null,
+                this.mTime);
         onConstructed();
     }
 
@@ -73,7 +83,17 @@ public final class AsyncNotedAppOp implements Parcelable {
     }
 
     public String toString() {
-        return "AsyncNotedAppOp { opCode = " + opCodeToString() + ", notingUid = " + this.mNotingUid + ", attributionTag = " + this.mAttributionTag + ", message = " + this.mMessage + ", time = " + this.mTime + " }";
+        return "AsyncNotedAppOp { opCode = "
+                + opCodeToString()
+                + ", notingUid = "
+                + this.mNotingUid
+                + ", attributionTag = "
+                + this.mAttributionTag
+                + ", message = "
+                + this.mMessage
+                + ", time = "
+                + this.mTime
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -84,7 +104,11 @@ public final class AsyncNotedAppOp implements Parcelable {
             return false;
         }
         AsyncNotedAppOp that = (AsyncNotedAppOp) o;
-        if (this.mOpCode == that.mOpCode && this.mNotingUid == that.mNotingUid && Objects.equals(this.mAttributionTag, that.mAttributionTag) && Objects.equals(this.mMessage, that.mMessage) && this.mTime == that.mTime) {
+        if (this.mOpCode == that.mOpCode
+                && this.mNotingUid == that.mNotingUid
+                && Objects.equals(this.mAttributionTag, that.mAttributionTag)
+                && Objects.equals(this.mMessage, that.mMessage)
+                && this.mTime == that.mTime) {
             return true;
         }
         return false;
@@ -92,7 +116,11 @@ public final class AsyncNotedAppOp implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + this.mOpCode;
-        return (((((((_hash * 31) + this.mNotingUid) * 31) + Objects.hashCode(this.mAttributionTag)) * 31) + Objects.hashCode(this.mMessage)) * 31) + Long.hashCode(this.mTime);
+        return (((((((_hash * 31) + this.mNotingUid) * 31) + Objects.hashCode(this.mAttributionTag))
+                                        * 31)
+                                + Objects.hashCode(this.mMessage))
+                        * 31)
+                + Long.hashCode(this.mTime);
     }
 
     @Override // android.os.Parcelable
@@ -121,18 +149,23 @@ public final class AsyncNotedAppOp implements Parcelable {
         String message = in.readString();
         long time = in.readLong();
         this.mOpCode = opCode;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, this.mOpCode, "from", 0L);
+        AnnotationValidations.validate(
+                (Class<IntRange>) IntRange.class, (IntRange) null, this.mOpCode, "from", 0L);
         this.mNotingUid = notingUid;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, this.mNotingUid, "from", 0L);
+        AnnotationValidations.validate(
+                (Class<IntRange>) IntRange.class, (IntRange) null, this.mNotingUid, "from", 0L);
         this.mAttributionTag = attributionTag;
         this.mMessage = message;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMessage);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMessage);
         this.mTime = time;
-        AnnotationValidations.validate((Class<? extends Annotation>) CurrentTimeMillisLong.class, (Annotation) null, this.mTime);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) CurrentTimeMillisLong.class,
+                (Annotation) null,
+                this.mTime);
         onConstructed();
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

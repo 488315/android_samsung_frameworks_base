@@ -7,7 +7,6 @@ import android.os.ICancellationSignal;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.view.IScrollCaptureCallbacks;
 
 /* loaded from: classes4.dex */
 public interface IScrollCaptureConnection extends IInterface {
@@ -19,11 +18,14 @@ public interface IScrollCaptureConnection extends IInterface {
 
     ICancellationSignal requestImage(Rect rect) throws RemoteException;
 
-    ICancellationSignal startCapture(Surface surface, IScrollCaptureCallbacks iScrollCaptureCallbacks) throws RemoteException;
+    ICancellationSignal startCapture(
+            Surface surface, IScrollCaptureCallbacks iScrollCaptureCallbacks)
+            throws RemoteException;
 
     public static class Default implements IScrollCaptureConnection {
         @Override // android.view.IScrollCaptureConnection
-        public ICancellationSignal startCapture(Surface surface, IScrollCaptureCallbacks callbacks) throws RemoteException {
+        public ICancellationSignal startCapture(Surface surface, IScrollCaptureCallbacks callbacks)
+                throws RemoteException {
             return null;
         }
 
@@ -38,8 +40,7 @@ public interface IScrollCaptureConnection extends IInterface {
         }
 
         @Override // android.view.IScrollCaptureConnection
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +48,7 @@ public interface IScrollCaptureConnection extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IScrollCaptureConnection {
+    public abstract static class Stub extends Binder implements IScrollCaptureConnection {
         static final int TRANSACTION_close = 4;
         static final int TRANSACTION_endCapture = 3;
         static final int TRANSACTION_requestImage = 2;
@@ -94,7 +95,8 @@ public interface IScrollCaptureConnection extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IScrollCaptureConnection.DESCRIPTOR);
             }
@@ -105,7 +107,8 @@ public interface IScrollCaptureConnection extends IInterface {
             switch (code) {
                 case 1:
                     Surface _arg0 = (Surface) data.readTypedObject(Surface.CREATOR);
-                    IScrollCaptureCallbacks _arg1 = IScrollCaptureCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IScrollCaptureCallbacks _arg1 =
+                            IScrollCaptureCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     ICancellationSignal _result = startCapture(_arg0, _arg1);
                     reply.writeNoException();
@@ -148,7 +151,8 @@ public interface IScrollCaptureConnection extends IInterface {
             }
 
             @Override // android.view.IScrollCaptureConnection
-            public ICancellationSignal startCapture(Surface surface, IScrollCaptureCallbacks callbacks) throws RemoteException {
+            public ICancellationSignal startCapture(
+                    Surface surface, IScrollCaptureCallbacks callbacks) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -157,7 +161,8 @@ public interface IScrollCaptureConnection extends IInterface {
                     _data.writeStrongInterface(callbacks);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -174,7 +179,8 @@ public interface IScrollCaptureConnection extends IInterface {
                     _data.writeTypedObject(captureArea, 0);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -190,7 +196,8 @@ public interface IScrollCaptureConnection extends IInterface {
                     _data.writeInterfaceToken(IScrollCaptureConnection.DESCRIPTOR);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

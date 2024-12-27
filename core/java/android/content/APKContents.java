@@ -8,6 +8,7 @@ import android.content.res.ResourcesImpl;
 import android.os.Trace;
 import android.util.DisplayMetrics;
 import android.view.DisplayAdjustments;
+
 import java.io.IOException;
 
 /* loaded from: classes.dex */
@@ -28,7 +29,9 @@ public class APKContents {
                 metrics.setToDefaults();
                 Configuration config = new Configuration();
                 config.setToDefaults();
-                ResourcesImpl mResourcesImpl = new ResourcesImpl(this.mAssetManager, metrics, config, new DisplayAdjustments());
+                ResourcesImpl mResourcesImpl =
+                        new ResourcesImpl(
+                                this.mAssetManager, metrics, config, new DisplayAdjustments());
                 this.mResources.setImpl(mResourcesImpl);
             } catch (IOException e) {
                 e.printStackTrace();

@@ -9,6 +9,7 @@ import android.media.MediaMetrics;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -54,8 +55,7 @@ public final class PhysicalChannelConfig {
                 }
             }
 
-            private hidl_discriminator() {
-            }
+            private hidl_discriminator() {}
         }
 
         public void geranBand(int geranBand) {
@@ -66,7 +66,15 @@ public final class PhysicalChannelConfig {
         public int geranBand() {
             if (this.hidl_d != 0) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Integer.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -82,7 +90,15 @@ public final class PhysicalChannelConfig {
         public int utranBand() {
             if (this.hidl_d != 1) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Integer.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -98,7 +114,15 @@ public final class PhysicalChannelConfig {
         public int eutranBand() {
             if (this.hidl_d != 2) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Integer.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -114,7 +138,15 @@ public final class PhysicalChannelConfig {
         public int ngranBand() {
             if (this.hidl_d != 3) {
                 String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-                throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+                throw new IllegalStateException(
+                        "Read access to inactive union components is disallowed. Discriminator"
+                                + " value is "
+                                + ((int) this.hidl_d)
+                                + " (corresponding to "
+                                + hidl_discriminator.getName(this.hidl_d)
+                                + "), and hidl_o is of type "
+                                + className
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.hidl_o != null && !Integer.class.isInstance(this.hidl_o)) {
                 throw new Error("Union is in a corrupted state.");
@@ -141,7 +173,9 @@ public final class PhysicalChannelConfig {
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)), Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)),
+                    Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
         }
 
         public final String toString() {
@@ -165,7 +199,8 @@ public final class PhysicalChannelConfig {
                     builder.append(NgranBands.toString(ngranBand()));
                     break;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
             builder.append("}");
             return builder.toString();
@@ -180,7 +215,8 @@ public final class PhysicalChannelConfig {
             ArrayList<Band> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 8, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 8, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 Band _hidl_vec_element = new Band();
@@ -190,7 +226,8 @@ public final class PhysicalChannelConfig {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.hidl_d = _hidl_blob.getInt8(0 + _hidl_offset);
             switch (this.hidl_d) {
                 case 0:
@@ -210,7 +247,8 @@ public final class PhysicalChannelConfig {
                     this.hidl_o = Integer.valueOf(_hidl_blob.getInt32(4 + _hidl_offset));
                     return;
                 default:
-                    throw new IllegalStateException("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new IllegalStateException(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
 
@@ -249,7 +287,8 @@ public final class PhysicalChannelConfig {
                     _hidl_blob.putInt32(4 + _hidl_offset, ngranBand());
                     return;
                 default:
-                    throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                    throw new Error(
+                            "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
             }
         }
     }
@@ -262,18 +301,57 @@ public final class PhysicalChannelConfig {
             return false;
         }
         PhysicalChannelConfig other = (PhysicalChannelConfig) otherObject;
-        if (this.status == other.status && this.rat == other.rat && this.downlinkChannelNumber == other.downlinkChannelNumber && this.uplinkChannelNumber == other.uplinkChannelNumber && this.cellBandwidthDownlinkKhz == other.cellBandwidthDownlinkKhz && this.cellBandwidthUplinkKhz == other.cellBandwidthUplinkKhz && HidlSupport.deepEquals(this.contextIds, other.contextIds) && this.physicalCellId == other.physicalCellId && HidlSupport.deepEquals(this.band, other.band)) {
+        if (this.status == other.status
+                && this.rat == other.rat
+                && this.downlinkChannelNumber == other.downlinkChannelNumber
+                && this.uplinkChannelNumber == other.uplinkChannelNumber
+                && this.cellBandwidthDownlinkKhz == other.cellBandwidthDownlinkKhz
+                && this.cellBandwidthUplinkKhz == other.cellBandwidthUplinkKhz
+                && HidlSupport.deepEquals(this.contextIds, other.contextIds)
+                && this.physicalCellId == other.physicalCellId
+                && HidlSupport.deepEquals(this.band, other.band)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.status))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.rat))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.downlinkChannelNumber))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.uplinkChannelNumber))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cellBandwidthDownlinkKhz))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cellBandwidthUplinkKhz))), Integer.valueOf(HidlSupport.deepHashCode(this.contextIds)), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.physicalCellId))), Integer.valueOf(HidlSupport.deepHashCode(this.band)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.status))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.rat))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.downlinkChannelNumber))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.uplinkChannelNumber))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.cellBandwidthDownlinkKhz))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.cellBandwidthUplinkKhz))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.contextIds)),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.physicalCellId))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.band)));
     }
 
     public final String toString() {
-        return "{.status = " + CellConnectionStatus.toString(this.status) + ", .rat = " + RadioTechnology.toString(this.rat) + ", .downlinkChannelNumber = " + this.downlinkChannelNumber + ", .uplinkChannelNumber = " + this.uplinkChannelNumber + ", .cellBandwidthDownlinkKhz = " + this.cellBandwidthDownlinkKhz + ", .cellBandwidthUplinkKhz = " + this.cellBandwidthUplinkKhz + ", .contextIds = " + this.contextIds + ", .physicalCellId = " + this.physicalCellId + ", .band = " + this.band + "}";
+        return "{.status = "
+                + CellConnectionStatus.toString(this.status)
+                + ", .rat = "
+                + RadioTechnology.toString(this.rat)
+                + ", .downlinkChannelNumber = "
+                + this.downlinkChannelNumber
+                + ", .uplinkChannelNumber = "
+                + this.uplinkChannelNumber
+                + ", .cellBandwidthDownlinkKhz = "
+                + this.cellBandwidthDownlinkKhz
+                + ", .cellBandwidthUplinkKhz = "
+                + this.cellBandwidthUplinkKhz
+                + ", .contextIds = "
+                + this.contextIds
+                + ", .physicalCellId = "
+                + this.physicalCellId
+                + ", .band = "
+                + this.band
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -285,7 +363,8 @@ public final class PhysicalChannelConfig {
         ArrayList<PhysicalChannelConfig> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 56, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 56, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             PhysicalChannelConfig _hidl_vec_element = new PhysicalChannelConfig();
@@ -295,7 +374,8 @@ public final class PhysicalChannelConfig {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.status = _hidl_blob.getInt32(_hidl_offset + 0);
         this.rat = _hidl_blob.getInt32(_hidl_offset + 4);
         this.downlinkChannelNumber = _hidl_blob.getInt32(_hidl_offset + 8);
@@ -303,7 +383,9 @@ public final class PhysicalChannelConfig {
         this.cellBandwidthDownlinkKhz = _hidl_blob.getInt32(_hidl_offset + 16);
         this.cellBandwidthUplinkKhz = _hidl_blob.getInt32(_hidl_offset + 20);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 24 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 4, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 4, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
         this.contextIds.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             int _hidl_vec_element = childBlob.getInt32(_hidl_index_0 * 4);
@@ -319,7 +401,8 @@ public final class PhysicalChannelConfig {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<PhysicalChannelConfig> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<PhysicalChannelConfig> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

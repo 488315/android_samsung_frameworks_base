@@ -1,6 +1,5 @@
 package android.database.sqlite;
 
-import android.database.sqlite.SQLiteDebug;
 import android.hardware.scontext.SContextConstants;
 import android.os.CancellationSignal;
 import android.os.Handler;
@@ -13,8 +12,10 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.PrefixPrinter;
 import android.util.Printer;
+
 import dalvik.annotation.optimization.NeverCompile;
 import dalvik.system.CloseGuard;
+
 import java.io.Closeable;
 import java.io.File;
 import java.security.SecureRandom;
@@ -25,6 +26,7 @@ import java.util.WeakHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.LockSupport;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
@@ -61,7 +63,8 @@ public final class SQLiteConnectionPool implements Closeable {
     private long mDatabaseSeqNum = 1;
     private final AtomicLong mTotalStatementsTime = new AtomicLong(0);
     private final AtomicLong mTotalStatementsCount = new AtomicLong(0);
-    private final WeakHashMap<SQLiteConnection, AcquiredConnectionStatus> mAcquiredConnections = new WeakHashMap<>();
+    private final WeakHashMap<SQLiteConnection, AcquiredConnectionStatus> mAcquiredConnections =
+            new WeakHashMap<>();
 
     enum AcquiredConnectionStatus {
         NORMAL,
@@ -75,9 +78,13 @@ public final class SQLiteConnectionPool implements Closeable {
         this.mConfiguration = new SQLiteDatabaseConfiguration(configuration);
         setMaxConnectionPoolSizeLocked();
         if (this.mConfiguration.idleConnectionTimeoutMs != Long.MAX_VALUE) {
-            setupIdleConnectionHandler(Looper.getMainLooper(), this.mConfiguration.idleConnectionTimeoutMs, null);
+            setupIdleConnectionHandler(
+                    Looper.getMainLooper(), this.mConfiguration.idleConnectionTimeoutMs, null);
         } else if (this.mConfiguration.idleConnectionShrinkTimeoutMs != Long.MAX_VALUE) {
-            setupIdleConnectionShrinkHandler(Looper.getMainLooper(), this.mConfiguration.idleConnectionShrinkTimeoutMs, null);
+            setupIdleConnectionShrinkHandler(
+                    Looper.getMainLooper(),
+                    this.mConfiguration.idleConnectionShrinkTimeoutMs,
+                    null);
         }
         if (this.mConfiguration.sharedConfig.isSecureDb) {
             try {
@@ -102,7 +109,8 @@ public final class SQLiteConnectionPool implements Closeable {
         }
     }
 
-    public static SQLiteConnectionPool open(SQLiteDatabase db, SQLiteDatabaseConfiguration configuration) {
+    public static SQLiteConnectionPool open(
+            SQLiteDatabase db, SQLiteDatabaseConfiguration configuration) {
         if (db == null) {
             throw new IllegalArgumentException("database must not be null.");
         }
@@ -114,7 +122,8 @@ public final class SQLiteConnectionPool implements Closeable {
         return pool;
     }
 
-    public static SQLiteConnectionPool openSecure(SQLiteDatabase db, SQLiteDatabaseConfiguration configuration, byte[] password) {
+    public static SQLiteConnectionPool openSecure(
+            SQLiteDatabase db, SQLiteDatabaseConfiguration configuration, byte[] password) {
         if (db == null) {
             throw new IllegalArgumentException("database must not be null.");
         }
@@ -138,7 +147,8 @@ public final class SQLiteConnectionPool implements Closeable {
     }
 
     private void openSecure(byte[] password) {
-        this.mAvailablePrimaryConnection = openSecureConnectionLocked(this.mConfiguration, true, password);
+        this.mAvailablePrimaryConnection =
+                openSecureConnectionLocked(this.mConfiguration, true, password);
         synchronized (this.mLock) {
             if (this.mIdleConnectionHandler != null) {
                 this.mIdleConnectionHandler.connectionReleased(this.mAvailablePrimaryConnection);
@@ -168,7 +178,14 @@ public final class SQLiteConnectionPool implements Closeable {
                 closeAvailableConnectionsAndLogExceptionsLocked();
                 int pendingCount = this.mAcquiredConnections.size();
                 if (pendingCount != 0) {
-                    Log.i(TAG, "The connection pool for " + this.mConfiguration.label + " has been closed but there are still " + pendingCount + " connections in use.  They will be closed as they are released back to the pool.");
+                    Log.i(
+                            TAG,
+                            "The connection pool for "
+                                    + this.mConfiguration.label
+                                    + " has been closed but there are still "
+                                    + pendingCount
+                                    + " connections in use.  They will be closed as they are"
+                                    + " released back to the pool.");
                 }
                 wakeConnectionWaitersLocked();
             }
@@ -202,7 +219,8 @@ public final class SQLiteConnectionPool implements Closeable {
     byte[] getConnectionKey() {
         if (this.mConfiguration.sharedConfig.isSecureDb && this.mConnectionKey != null) {
             try {
-                return this.mConnectionKey.decryptAndGet(SQLiteGlobal.getRandArray(this.mRandArrPtr));
+                return this.mConnectionKey.decryptAndGet(
+                        SQLiteGlobal.getRandArray(this.mRandArrPtr));
             } catch (Exception e) {
                 Log.e(TAG, "Could not get ConnectionKey");
                 return null;
@@ -216,7 +234,8 @@ public final class SQLiteConnectionPool implements Closeable {
         synchronized (this.mLock) {
             if (!this.mConfiguration.sharedConfig.isSecureDb) {
                 Log.e(TAG, "Could not change password of normal db" + this.mConfiguration.label);
-                throw new IllegalStateException("Could not change password of normal db" + this.mConfiguration.label);
+                throw new IllegalStateException(
+                        "Could not change password of normal db" + this.mConfiguration.label);
             }
             markAcquiredConnectionsLocked(AcquiredConnectionStatus.DISCARD, false);
             closeAvailableNonPrimaryConnectionsAndLogExceptionsLocked();
@@ -243,15 +262,19 @@ public final class SQLiteConnectionPool implements Closeable {
             if (this.mAvailablePrimaryConnection != null) {
                 this.mAvailablePrimaryConnection.setCheckpointOnClose(set);
             } else {
-                Log.e(TAG, "Could not change 'checkpointOnClose' to " + set + " because the primary connection is on used.");
+                Log.e(
+                        TAG,
+                        "Could not change 'checkpointOnClose' to "
+                                + set
+                                + " because the primary connection is on used.");
             }
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0084, code lost:
-    
-        closeAvailableConnectionsAndLogExceptionsLocked();
-     */
+
+       closeAvailableConnectionsAndLogExceptionsLocked();
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -261,21 +284,25 @@ public final class SQLiteConnectionPool implements Closeable {
             Method dump skipped, instructions count: 214
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.database.sqlite.SQLiteConnectionPool.reconfigure(android.database.sqlite.SQLiteDatabaseConfiguration):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.database.sqlite.SQLiteConnectionPool.reconfigure(android.database.sqlite.SQLiteDatabaseConfiguration):void");
     }
 
     public void exportDB(String attachedDB) {
         synchronized (this.mLock) {
             throwIfClosedLocked();
             if (!this.mAcquiredConnections.isEmpty()) {
-                throw new IllegalStateException("Release all active connections before starting DB export");
+                throw new IllegalStateException(
+                        "Release all active connections before starting DB export");
             }
             closeAvailableNonPrimaryConnectionsAndLogExceptionsLocked();
             this.mAvailablePrimaryConnection.exportDB(attachedDB);
         }
     }
 
-    public SQLiteConnection acquireConnection(String sql, int connectionFlags, CancellationSignal cancellationSignal) {
+    public SQLiteConnection acquireConnection(
+            String sql, int connectionFlags, CancellationSignal cancellationSignal) {
         SQLiteConnection con = waitForConnection(sql, connectionFlags, cancellationSignal);
         synchronized (this.mLock) {
             if (this.mIdleConnectionHandler != null) {
@@ -292,7 +319,9 @@ public final class SQLiteConnectionPool implements Closeable {
             }
             AcquiredConnectionStatus status = this.mAcquiredConnections.remove(connection);
             if (status == null) {
-                throw new IllegalStateException("Cannot perform this operation because the specified connection was not acquired from this pool or has already been released.");
+                throw new IllegalStateException(
+                        "Cannot perform this operation because the specified connection was not"
+                                + " acquired from this pool or has already been released.");
             }
             if (!this.mIsOpen) {
                 closeConnectionAndLogExceptionsLocked(connection);
@@ -301,7 +330,8 @@ public final class SQLiteConnectionPool implements Closeable {
                     this.mAvailablePrimaryConnection = connection;
                 }
                 wakeConnectionWaitersLocked();
-            } else if (this.mAvailableNonPrimaryConnections.size() >= this.mMaxConnectionPoolSize - 1) {
+            } else if (this.mAvailableNonPrimaryConnections.size()
+                    >= this.mMaxConnectionPoolSize - 1) {
                 closeConnectionAndLogExceptionsLocked(connection);
             } else {
                 if (recycleConnectionLocked(connection, status)) {
@@ -312,12 +342,16 @@ public final class SQLiteConnectionPool implements Closeable {
         }
     }
 
-    private boolean recycleConnectionLocked(SQLiteConnection connection, AcquiredConnectionStatus status) {
+    private boolean recycleConnectionLocked(
+            SQLiteConnection connection, AcquiredConnectionStatus status) {
         if (status == AcquiredConnectionStatus.RECONFIGURE) {
             try {
                 connection.reconfigure(this.mConfiguration);
             } catch (RuntimeException ex) {
-                Log.e(TAG, "Failed to reconfigure released connection, closing it: " + connection, ex);
+                Log.e(
+                        TAG,
+                        "Failed to reconfigure released connection, closing it: " + connection,
+                        ex);
                 status = AcquiredConnectionStatus.DISCARD;
             }
         }
@@ -339,12 +373,15 @@ public final class SQLiteConnectionPool implements Closeable {
     public boolean shouldYieldConnection(SQLiteConnection connection, int connectionFlags) {
         synchronized (this.mLock) {
             if (!this.mAcquiredConnections.containsKey(connection)) {
-                throw new IllegalStateException("Cannot perform this operation because the specified connection was not acquired from this pool or has already been released.");
+                throw new IllegalStateException(
+                        "Cannot perform this operation because the specified connection was not"
+                                + " acquired from this pool or has already been released.");
             }
             if (!this.mIsOpen) {
                 return false;
             }
-            return isSessionBlockingImportantConnectionWaitersLocked(connection.isPrimaryConnection(), connectionFlags);
+            return isSessionBlockingImportantConnectionWaitersLocked(
+                    connection.isPrimaryConnection(), connectionFlags);
         }
     }
 
@@ -361,15 +398,26 @@ public final class SQLiteConnectionPool implements Closeable {
             for (SQLiteConnection connection2 : this.mAcquiredConnections.keySet()) {
                 connection2.collectDbStatsUnsafe(dbStatsList);
             }
-            SQLiteDebug.DbStats poolStats = new SQLiteDebug.DbStats(this.mConfiguration.path, 0L, 0L, 0, this.mTotalPrepareStatements - this.mTotalPrepareStatementCacheMiss, this.mTotalPrepareStatementCacheMiss, this.mTotalPrepareStatements, true);
+            SQLiteDebug.DbStats poolStats =
+                    new SQLiteDebug.DbStats(
+                            this.mConfiguration.path,
+                            0L,
+                            0L,
+                            0,
+                            this.mTotalPrepareStatements - this.mTotalPrepareStatementCacheMiss,
+                            this.mTotalPrepareStatementCacheMiss,
+                            this.mTotalPrepareStatements,
+                            true);
             dbStatsList.add(poolStats);
         }
     }
 
-    private SQLiteConnection openConnectionLocked(SQLiteDatabaseConfiguration configuration, boolean primaryConnection) {
+    private SQLiteConnection openConnectionLocked(
+            SQLiteDatabaseConfiguration configuration, boolean primaryConnection) {
         int connectionId = this.mNextConnectionId;
         this.mNextConnectionId = connectionId + 1;
-        SQLiteConnection connection = SQLiteConnection.open(this, configuration, connectionId, primaryConnection);
+        SQLiteConnection connection =
+                SQLiteConnection.open(this, configuration, connectionId, primaryConnection);
         if (primaryConnection && connection.isForcedReadOnlyConnection()) {
             this.mMaxConnectionPoolSize = 1;
             this.mIsPoolSizeFixed = true;
@@ -378,10 +426,13 @@ public final class SQLiteConnectionPool implements Closeable {
         return connection;
     }
 
-    private SQLiteConnection openSecureConnectionLocked(SQLiteDatabaseConfiguration configuration, boolean primaryConnection, byte[] password) {
+    private SQLiteConnection openSecureConnectionLocked(
+            SQLiteDatabaseConfiguration configuration, boolean primaryConnection, byte[] password) {
         int connectionId = this.mNextConnectionId;
         this.mNextConnectionId = connectionId + 1;
-        SQLiteConnection connection = SQLiteConnection.openSecure(this, configuration, connectionId, primaryConnection, password);
+        SQLiteConnection connection =
+                SQLiteConnection.openSecure(
+                        this, configuration, connectionId, primaryConnection, password);
         if (primaryConnection && connection.isForcedReadOnlyConnection()) {
             this.mMaxConnectionPoolSize = 1;
             this.mIsPoolSizeFixed = true;
@@ -391,7 +442,13 @@ public final class SQLiteConnectionPool implements Closeable {
     }
 
     void onConnectionLeaked() {
-        Log.w(TAG, "A SQLiteConnection object for database '" + this.mConfiguration.label + "' was leaked!  Please fix your application to end transactions in progress properly and to close the database when it is no longer needed.");
+        Log.w(
+                TAG,
+                "A SQLiteConnection object for database '"
+                        + this.mConfiguration.label
+                        + "' was leaked!  Please fix your application to end transactions in"
+                        + " progress properly and to close the database when it is no longer"
+                        + " needed.");
         this.mConnectionLeaked.set(true);
     }
 
@@ -419,7 +476,8 @@ public final class SQLiteConnectionPool implements Closeable {
                 return true;
             }
         }
-        if (this.mAvailablePrimaryConnection != null && this.mAvailablePrimaryConnection.getConnectionId() == connectionId) {
+        if (this.mAvailablePrimaryConnection != null
+                && this.mAvailablePrimaryConnection.getConnectionId() == connectionId) {
             closeConnectionAndLogExceptionsLocked(this.mAvailablePrimaryConnection);
             this.mAvailablePrimaryConnection = null;
             return true;
@@ -446,7 +504,8 @@ public final class SQLiteConnectionPool implements Closeable {
         while (true) {
             int availableCount2 = availableCount - 1;
             if (availableCount > this.mMaxConnectionPoolSize - 1) {
-                SQLiteConnection connection = this.mAvailableNonPrimaryConnections.remove(availableCount2);
+                SQLiteConnection connection =
+                        this.mAvailableNonPrimaryConnections.remove(availableCount2);
                 closeConnectionAndLogExceptionsLocked(connection);
                 availableCount = availableCount2;
             } else {
@@ -462,7 +521,11 @@ public final class SQLiteConnectionPool implements Closeable {
                 this.mIdleConnectionHandler.connectionClosed(connection);
             }
         } catch (RuntimeException ex) {
-            Log.e(TAG, "Failed to close connection, its fate is now in the hands of the merciful GC: " + connection, ex);
+            Log.e(
+                    TAG,
+                    "Failed to close connection, its fate is now in the hands of the merciful GC: "
+                            + connection,
+                    ex);
         }
     }
 
@@ -475,7 +538,11 @@ public final class SQLiteConnectionPool implements Closeable {
             try {
                 this.mAvailablePrimaryConnection.reconfigure(this.mConfiguration);
             } catch (RuntimeException ex) {
-                Log.e(TAG, "Failed to reconfigure available primary connection, closing it: " + this.mAvailablePrimaryConnection, ex);
+                Log.e(
+                        TAG,
+                        "Failed to reconfigure available primary connection, closing it: "
+                                + this.mAvailablePrimaryConnection,
+                        ex);
                 closeConnectionAndLogExceptionsLocked(this.mAvailablePrimaryConnection);
                 this.mAvailablePrimaryConnection = null;
             }
@@ -487,7 +554,11 @@ public final class SQLiteConnectionPool implements Closeable {
             try {
                 connection.reconfigure(this.mConfiguration);
             } catch (RuntimeException ex2) {
-                Log.e(TAG, "Failed to reconfigure available non-primary connection, closing it: " + connection, ex2);
+                Log.e(
+                        TAG,
+                        "Failed to reconfigure available non-primary connection, closing it: "
+                                + connection,
+                        ex2);
                 closeConnectionAndLogExceptionsLocked(connection);
                 this.mAvailableNonPrimaryConnections.remove(i);
                 count--;
@@ -502,12 +573,17 @@ public final class SQLiteConnectionPool implements Closeable {
         markAcquiredConnectionsLocked(status, true);
     }
 
-    private void markAcquiredConnectionsLocked(AcquiredConnectionStatus status, boolean markPrimaryConnection) {
+    private void markAcquiredConnectionsLocked(
+            AcquiredConnectionStatus status, boolean markPrimaryConnection) {
         if (!this.mAcquiredConnections.isEmpty()) {
-            ArrayList<SQLiteConnection> keysToUpdate = new ArrayList<>(this.mAcquiredConnections.size());
-            for (Map.Entry<SQLiteConnection, AcquiredConnectionStatus> entry : this.mAcquiredConnections.entrySet()) {
+            ArrayList<SQLiteConnection> keysToUpdate =
+                    new ArrayList<>(this.mAcquiredConnections.size());
+            for (Map.Entry<SQLiteConnection, AcquiredConnectionStatus> entry :
+                    this.mAcquiredConnections.entrySet()) {
                 AcquiredConnectionStatus oldStatus = entry.getValue();
-                if (status != oldStatus && oldStatus != AcquiredConnectionStatus.DISCARD && (!entry.getKey().isPrimaryConnection() || markPrimaryConnection)) {
+                if (status != oldStatus
+                        && oldStatus != AcquiredConnectionStatus.DISCARD
+                        && (!entry.getKey().isPrimaryConnection() || markPrimaryConnection)) {
                     keysToUpdate.add(entry.getKey());
                 }
             }
@@ -525,12 +601,17 @@ public final class SQLiteConnectionPool implements Closeable {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.database.sqlite.SQLiteConnection waitForConnection(java.lang.String r22, int r23, android.os.CancellationSignal r24) {
+    private android.database.sqlite.SQLiteConnection waitForConnection(
+            java.lang.String r22, int r23, android.os.CancellationSignal r24) {
         /*
             Method dump skipped, instructions count: 245
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.database.sqlite.SQLiteConnectionPool.waitForConnection(java.lang.String, int, android.os.CancellationSignal):android.database.sqlite.SQLiteConnection");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.database.sqlite.SQLiteConnectionPool.waitForConnection(java.lang.String,"
+                    + " int,"
+                    + " android.os.CancellationSignal):android.database.sqlite.SQLiteConnection");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -539,7 +620,9 @@ public final class SQLiteConnectionPool implements Closeable {
             return;
         }
         ConnectionWaiter predecessor = null;
-        for (ConnectionWaiter current = this.mConnectionWaiterQueue; current != waiter; current = current.mNext) {
+        for (ConnectionWaiter current = this.mConnectionWaiterQueue;
+                current != waiter;
+                current = current.mNext) {
             predecessor = current;
         }
         if (predecessor != null) {
@@ -604,10 +687,21 @@ public final class SQLiteConnectionPool implements Closeable {
             } else {
                 SQLiteConnection connection = null;
                 try {
-                    if (!waiter.mWantPrimaryConnection && !nonPrimaryConnectionNotAvailable && (connection = tryAcquireNonPrimaryConnectionLocked(waiter.mSql, waiter.mConnectionFlags)) == null && isPrimaryConnectionExistsLocked()) {
+                    if (!waiter.mWantPrimaryConnection
+                            && !nonPrimaryConnectionNotAvailable
+                            && (connection =
+                                            tryAcquireNonPrimaryConnectionLocked(
+                                                    waiter.mSql, waiter.mConnectionFlags))
+                                    == null
+                            && isPrimaryConnectionExistsLocked()) {
                         nonPrimaryConnectionNotAvailable = true;
                     }
-                    if (connection == null && !primaryConnectionNotAvailable && (connection = tryAcquirePrimaryConnectionLocked(waiter.mConnectionFlags)) == null) {
+                    if (connection == null
+                            && !primaryConnectionNotAvailable
+                            && (connection =
+                                            tryAcquirePrimaryConnectionLocked(
+                                                    waiter.mConnectionFlags))
+                                    == null) {
                         primaryConnectionNotAvailable = true;
                     }
                     if (connection != null) {
@@ -644,20 +738,27 @@ public final class SQLiteConnectionPool implements Closeable {
         try {
             synchronized (this.mLock) {
                 if (this.mAvailablePrimaryConnection != null) {
-                    dbDump.mTeePrinter.println("The recent request on avilable primary connection for corruption debug.");
+                    dbDump.mTeePrinter.println(
+                            "The recent request on avilable primary connection for corruption"
+                                    + " debug.");
                     this.mAvailablePrimaryConnection.dump(dbDump.mTeePrinter, false);
                 }
                 if (!this.mAvailableNonPrimaryConnections.isEmpty()) {
                     int count = this.mAvailableNonPrimaryConnections.size();
                     for (int i = 0; i < count; i++) {
-                        dbDump.mTeePrinter.println("The recent request on avilable connection for corruption debug.");
+                        dbDump.mTeePrinter.println(
+                                "The recent request on avilable connection for corruption debug.");
                         this.mAvailableNonPrimaryConnections.get(i).dump(dbDump.mTeePrinter, false);
                     }
                 }
                 if (!this.mAcquiredConnections.isEmpty()) {
-                    for (Map.Entry<SQLiteConnection, AcquiredConnectionStatus> entry : this.mAcquiredConnections.entrySet()) {
+                    for (Map.Entry<SQLiteConnection, AcquiredConnectionStatus> entry :
+                            this.mAcquiredConnections.entrySet()) {
                         SQLiteConnection connection = entry.getKey();
-                        dbDump.mTeePrinter.println("The recent request on acquired " + (connection.isPrimaryConnection() ? "primary" : "") + " connection for corruption debug.");
+                        dbDump.mTeePrinter.println(
+                                "The recent request on acquired "
+                                        + (connection.isPrimaryConnection() ? "primary" : "")
+                                        + " connection for corruption debug.");
                         connection.dumpUnsafe(dbDump.mTeePrinter, false);
                     }
                 }
@@ -683,9 +784,15 @@ public final class SQLiteConnectionPool implements Closeable {
         }
         if (this.mConfiguration.sharedConfig.isSecureDb) {
             if (this.mConnectionKey == null) {
-                throw new IllegalStateException("Could not open a new primary connection due to the lack of password.");
+                throw new IllegalStateException(
+                        "Could not open a new primary connection due to the lack of password.");
             }
-            connection = openSecureConnectionLocked(this.mConfiguration, true, this.mConnectionKey.decryptAndGet(SQLiteGlobal.getRandArray(this.mRandArrPtr)));
+            connection =
+                    openSecureConnectionLocked(
+                            this.mConfiguration,
+                            true,
+                            this.mConnectionKey.decryptAndGet(
+                                    SQLiteGlobal.getRandArray(this.mRandArrPtr)));
         } else {
             connection = openConnectionLocked(this.mConfiguration, true);
         }
@@ -722,7 +829,8 @@ public final class SQLiteConnectionPool implements Closeable {
             }
         }
         if (availableCount > 0) {
-            SQLiteConnection connection3 = this.mAvailableNonPrimaryConnections.remove(availableCount - 1);
+            SQLiteConnection connection3 =
+                    this.mAvailableNonPrimaryConnections.remove(availableCount - 1);
             finishAcquireConnectionLocked(connection3, connectionFlags);
             return connection3;
         }
@@ -735,7 +843,12 @@ public final class SQLiteConnectionPool implements Closeable {
         }
         if (this.mConfiguration.sharedConfig.isSecureDb) {
             try {
-                connection = openSecureConnectionLocked(this.mConfiguration, false, this.mConnectionKey.decryptAndGet(SQLiteGlobal.getRandArray(this.mRandArrPtr)));
+                connection =
+                        openSecureConnectionLocked(
+                                this.mConfiguration,
+                                false,
+                                this.mConnectionKey.decryptAndGet(
+                                        SQLiteGlobal.getRandArray(this.mRandArrPtr)));
             } catch (SQLiteException se) {
                 throw se;
             } catch (Exception e) {
@@ -758,13 +871,19 @@ public final class SQLiteConnectionPool implements Closeable {
             connection.setOnlyAllowReadOnlyOperations(readOnly);
             this.mAcquiredConnections.put(connection, AcquiredConnectionStatus.NORMAL);
         } catch (RuntimeException ex) {
-            Log.e(TAG, "Failed to prepare acquired connection for session, closing it: " + connection + ", connectionFlags=" + connectionFlags);
+            Log.e(
+                    TAG,
+                    "Failed to prepare acquired connection for session, closing it: "
+                            + connection
+                            + ", connectionFlags="
+                            + connectionFlags);
             closeConnectionAndLogExceptionsLocked(connection);
             throw ex;
         }
     }
 
-    private boolean isSessionBlockingImportantConnectionWaitersLocked(boolean holdingPrimaryConnection, int connectionFlags) {
+    private boolean isSessionBlockingImportantConnectionWaitersLocked(
+            boolean holdingPrimaryConnection, int connectionFlags) {
         ConnectionWaiter waiter = this.mConnectionWaiterQueue;
         if (waiter != null) {
             int priority = getPriority(connectionFlags);
@@ -792,22 +911,28 @@ public final class SQLiteConnectionPool implements Closeable {
         }
         if (this.mConfiguration.sharedConfig.useSingleConnectionWal) {
             this.mMaxConnectionPoolSize = 1;
-        } else if (this.mConfiguration.resolveJournalMode().equalsIgnoreCase(SQLiteDatabase.JOURNAL_MODE_WAL)) {
+        } else if (this.mConfiguration
+                .resolveJournalMode()
+                .equalsIgnoreCase(SQLiteDatabase.JOURNAL_MODE_WAL)) {
             this.mMaxConnectionPoolSize = SQLiteGlobal.getWALConnectionPoolSize();
         } else {
             this.mMaxConnectionPoolSize = 1;
         }
     }
 
-    public void setupIdleConnectionHandler(Looper looper, long timeoutMs, Runnable onAllConnectionsIdle) {
+    public void setupIdleConnectionHandler(
+            Looper looper, long timeoutMs, Runnable onAllConnectionsIdle) {
         synchronized (this.mLock) {
-            this.mIdleConnectionHandler = new IdleConnectionHandler(looper, timeoutMs, onAllConnectionsIdle);
+            this.mIdleConnectionHandler =
+                    new IdleConnectionHandler(looper, timeoutMs, onAllConnectionsIdle);
         }
     }
 
-    public void setupIdleConnectionShrinkHandler(Looper looper, long timeoutMs, Runnable onAllConnectionsIdle) {
+    public void setupIdleConnectionShrinkHandler(
+            Looper looper, long timeoutMs, Runnable onAllConnectionsIdle) {
         synchronized (this.mLock) {
-            this.mIdleConnectionHandler = new IdleConnectionShrinkHandler(looper, timeoutMs, onAllConnectionsIdle);
+            this.mIdleConnectionHandler =
+                    new IdleConnectionShrinkHandler(looper, timeoutMs, onAllConnectionsIdle);
         }
     }
 
@@ -819,11 +944,18 @@ public final class SQLiteConnectionPool implements Closeable {
 
     private void throwIfClosedLocked() {
         if (!this.mIsOpen) {
-            throw new IllegalStateException("Cannot perform this operation because the connection pool has been closed.");
+            throw new IllegalStateException(
+                    "Cannot perform this operation because the connection pool has been closed.");
         }
     }
 
-    private ConnectionWaiter obtainConnectionWaiterLocked(Thread thread, long startTime, int priority, boolean wantPrimaryConnection, String sql, int connectionFlags) {
+    private ConnectionWaiter obtainConnectionWaiterLocked(
+            Thread thread,
+            long startTime,
+            int priority,
+            boolean wantPrimaryConnection,
+            String sql,
+            int connectionFlags) {
         ConnectionWaiter waiter = this.mConnectionWaiterPool;
         if (waiter != null) {
             this.mConnectionWaiterPool = waiter.mNext;
@@ -898,7 +1030,8 @@ public final class SQLiteConnectionPool implements Closeable {
                 return true;
             }
         }
-        if (this.mAvailablePrimaryConnection != null && this.mAvailablePrimaryConnection.getConnectionId() == connectionId) {
+        if (this.mAvailablePrimaryConnection != null
+                && this.mAvailablePrimaryConnection.getConnectionId() == connectionId) {
             this.mAvailablePrimaryConnection.releaseConnectionMemory();
             return true;
         }
@@ -924,7 +1057,12 @@ public final class SQLiteConnectionPool implements Closeable {
                 this.mAvailablePrimaryConnection = null;
                 discardAcquiredConnectionsLocked();
                 if (this.mConfiguration.sharedConfig.isSecureDb) {
-                    newPrimaryConnection = openSecureConnectionLocked(this.mConfiguration, true, this.mConnectionKey.decryptAndGet(SQLiteGlobal.getRandArray(this.mRandArrPtr)));
+                    newPrimaryConnection =
+                            openSecureConnectionLocked(
+                                    this.mConfiguration,
+                                    true,
+                                    this.mConnectionKey.decryptAndGet(
+                                            SQLiteGlobal.getRandArray(this.mRandArrPtr)));
                 } else {
                     newPrimaryConnection = openConnectionLocked(this.mConfiguration, true);
                 }
@@ -964,35 +1102,61 @@ public final class SQLiteConnectionPool implements Closeable {
                     directories.add(parent);
                 }
             }
-            boolean isCompatibilityWalEnabled = this.mConfiguration.isLegacyCompatibilityWalEnabled();
+            boolean isCompatibilityWalEnabled =
+                    this.mConfiguration.isLegacyCompatibilityWalEnabled();
             printer.println("Connection pool for " + this.mConfiguration.path + ":");
             printer.println("  Open: " + this.mIsOpen);
             SQLiteDatabase db = getDatabase();
-            if (db != null && db.isUdrEnabled() && SQLiteUserDataRecovery.isDbUdrRecovered(this.mConfiguration.path)) {
+            if (db != null
+                    && db.isUdrEnabled()
+                    && SQLiteUserDataRecovery.isDbUdrRecovered(this.mConfiguration.path)) {
                 printer.println("  UDR: true");
             }
             printer.println("  Max connections: " + this.mMaxConnectionPoolSize);
             printer.println("  Total execution time (ms): " + this.mTotalStatementsTime);
             printer.println("  Total statements executed: " + this.mTotalStatementsCount);
             if (this.mTotalStatementsCount.get() > 0) {
-                printer.println("  Average time per statement (ms): " + (this.mTotalStatementsTime.get() / this.mTotalStatementsCount.get()));
+                printer.println(
+                        "  Average time per statement (ms): "
+                                + (this.mTotalStatementsTime.get()
+                                        / this.mTotalStatementsCount.get()));
             }
-            printer.println("  Configuration: openFlags=" + this.mConfiguration.openFlags + ", isLegacyCompatibilityWalEnabled=" + isCompatibilityWalEnabled + ", journalMode=" + TextUtils.emptyIfNull(this.mConfiguration.resolveJournalMode()) + ", syncMode=" + TextUtils.emptyIfNull(this.mConfiguration.resolveSyncMode()));
+            printer.println(
+                    "  Configuration: openFlags="
+                            + this.mConfiguration.openFlags
+                            + ", isLegacyCompatibilityWalEnabled="
+                            + isCompatibilityWalEnabled
+                            + ", journalMode="
+                            + TextUtils.emptyIfNull(this.mConfiguration.resolveJournalMode())
+                            + ", syncMode="
+                            + TextUtils.emptyIfNull(this.mConfiguration.resolveSyncMode()));
             printer.println("  IsReadOnlyDatabase=" + this.mConfiguration.isReadOnlyDatabase());
             if (isCompatibilityWalEnabled) {
-                printer.println("  Compatibility WAL enabled: wal_syncmode=" + SQLiteCompatibilityWalFlags.getWALSyncMode());
+                printer.println(
+                        "  Compatibility WAL enabled: wal_syncmode="
+                                + SQLiteCompatibilityWalFlags.getWALSyncMode());
             }
             if (this.mConfiguration.isLookasideConfigSet()) {
-                printer.println("  Lookaside config: sz=" + this.mConfiguration.lookasideSlotSize + " cnt=" + this.mConfiguration.lookasideSlotCount);
+                printer.println(
+                        "  Lookaside config: sz="
+                                + this.mConfiguration.lookasideSlotSize
+                                + " cnt="
+                                + this.mConfiguration.lookasideSlotCount);
             }
             if (this.mConfiguration.idleConnectionTimeoutMs != Long.MAX_VALUE) {
-                printer.println("  Idle connection timeout: " + this.mConfiguration.idleConnectionTimeoutMs);
+                printer.println(
+                        "  Idle connection timeout: "
+                                + this.mConfiguration.idleConnectionTimeoutMs);
             }
             if (this.mConfiguration.idleConnectionShrinkTimeoutMs != Long.MAX_VALUE) {
-                printer.println("  Idle connection shrink timeout: " + this.mConfiguration.idleConnectionShrinkTimeoutMs);
+                printer.println(
+                        "  Idle connection shrink timeout: "
+                                + this.mConfiguration.idleConnectionShrinkTimeoutMs);
             }
             printer.println("  Secure db: " + this.mConfiguration.sharedConfig.isSecureDb);
-            if (this.mConfiguration.resolveJournalMode().equalsIgnoreCase(SQLiteDatabase.JOURNAL_MODE_WAL)) {
+            if (this.mConfiguration
+                    .resolveJournalMode()
+                    .equalsIgnoreCase(SQLiteDatabase.JOURNAL_MODE_WAL)) {
                 printer.println("  Use WAL mode. ");
             }
             printer.println("  Available primary connection:");
@@ -1012,7 +1176,8 @@ public final class SQLiteConnectionPool implements Closeable {
             }
             printer.println("  Acquired connections:");
             if (!this.mAcquiredConnections.isEmpty()) {
-                for (Map.Entry<SQLiteConnection, AcquiredConnectionStatus> entry : this.mAcquiredConnections.entrySet()) {
+                for (Map.Entry<SQLiteConnection, AcquiredConnectionStatus> entry :
+                        this.mAcquiredConnections.entrySet()) {
                     SQLiteConnection connection = entry.getKey();
                     connection.dumpUnsafe(indentedPrinter, verbose);
                     indentedPrinter.println("  Status: " + entry.getValue());
@@ -1026,7 +1191,17 @@ public final class SQLiteConnectionPool implements Closeable {
                 long now = SystemClock.uptimeMillis();
                 ConnectionWaiter waiter = this.mConnectionWaiterQueue;
                 while (waiter != null) {
-                    indentedPrinter.println(i2 + ": waited for " + ((now - waiter.mStartTime) * 0.001f) + " ms - thread=" + waiter.mThread + ", priority=" + waiter.mPriority + ", sql='" + waiter.mSql + "'");
+                    indentedPrinter.println(
+                            i2
+                                    + ": waited for "
+                                    + ((now - waiter.mStartTime) * 0.001f)
+                                    + " ms - thread="
+                                    + waiter.mThread
+                                    + ", priority="
+                                    + waiter.mPriority
+                                    + ", sql='"
+                                    + waiter.mSql
+                                    + "'");
                     waiter = waiter.mNext;
                     i2++;
                 }
@@ -1072,8 +1247,7 @@ public final class SQLiteConnectionPool implements Closeable {
         public Thread mThread;
         public boolean mWantPrimaryConnection;
 
-        private ConnectionWaiter() {
-        }
+        private ConnectionWaiter() {}
     }
 
     private class IdleConnectionHandler extends Handler {
@@ -1092,8 +1266,16 @@ public final class SQLiteConnectionPool implements Closeable {
                 if (this != SQLiteConnectionPool.this.mIdleConnectionHandler) {
                     return;
                 }
-                if (SQLiteConnectionPool.this.closeAvailableConnectionLocked(msg.what) && Log.isLoggable(SQLiteConnectionPool.TAG, 3)) {
-                    Log.d(SQLiteConnectionPool.TAG, "Closed idle connection " + SQLiteConnectionPool.this.mConfiguration.label + " " + msg.what + " after " + this.mTimeout);
+                if (SQLiteConnectionPool.this.closeAvailableConnectionLocked(msg.what)
+                        && Log.isLoggable(SQLiteConnectionPool.TAG, 3)) {
+                    Log.d(
+                            SQLiteConnectionPool.TAG,
+                            "Closed idle connection "
+                                    + SQLiteConnectionPool.this.mConfiguration.label
+                                    + " "
+                                    + msg.what
+                                    + " after "
+                                    + this.mTimeout);
                 }
                 if (this.mOnAllConnectionsIdle != null) {
                     this.mOnAllConnectionsIdle.run();
@@ -1119,14 +1301,23 @@ public final class SQLiteConnectionPool implements Closeable {
             super(looper, timeout, onAllConnectionsIdle);
         }
 
-        @Override // android.database.sqlite.SQLiteConnectionPool.IdleConnectionHandler, android.os.Handler
+        @Override // android.database.sqlite.SQLiteConnectionPool.IdleConnectionHandler,
+        // android.os.Handler
         public void handleMessage(Message msg) {
             synchronized (SQLiteConnectionPool.this.mLock) {
                 if (this != SQLiteConnectionPool.this.mIdleConnectionHandler) {
                     return;
                 }
-                if (SQLiteConnectionPool.this.releaseAvailableConnectionMemoryLocked(msg.what) && Log.isLoggable(SQLiteConnectionPool.TAG, 3)) {
-                    Log.d(SQLiteConnectionPool.TAG, "Released idle connection's memory " + SQLiteConnectionPool.this.mConfiguration.label + " " + msg.what + " after " + this.mTimeout);
+                if (SQLiteConnectionPool.this.releaseAvailableConnectionMemoryLocked(msg.what)
+                        && Log.isLoggable(SQLiteConnectionPool.TAG, 3)) {
+                    Log.d(
+                            SQLiteConnectionPool.TAG,
+                            "Released idle connection's memory "
+                                    + SQLiteConnectionPool.this.mConfiguration.label
+                                    + " "
+                                    + msg.what
+                                    + " after "
+                                    + this.mTimeout);
                 }
             }
         }
@@ -1158,7 +1349,8 @@ public final class SQLiteConnectionPool implements Closeable {
                 pbeKeySpec.clearPassword();
                 return keySpec;
             } catch (Exception e) {
-                throw new RuntimeException("Fail to generate the data of " + this.mConfiguration.label, e);
+                throw new RuntimeException(
+                        "Fail to generate the data of " + this.mConfiguration.label, e);
             }
         }
 
@@ -1168,7 +1360,8 @@ public final class SQLiteConnectionPool implements Closeable {
                     throw new IllegalArgumentException("password should not be null");
                 }
                 if (data == null) {
-                    throw new IllegalArgumentException("data that will be encrypted should not be null");
+                    throw new IllegalArgumentException(
+                            "data that will be encrypted should not be null");
                 }
                 if (this.mEncryptedData != null) {
                     return;
@@ -1182,8 +1375,11 @@ public final class SQLiteConnectionPool implements Closeable {
                     this.mEncryptedData = cipher.doFinal(data);
                 } catch (Exception e) {
                     this.mEncryptedData = null;
-                    Log.e(SQLiteConnectionPool.TAG, "Could not encrypt the data of " + this.mConfiguration.label);
-                    throw new RuntimeException("Fail to encrpyt the data of " + this.mConfiguration.label, e);
+                    Log.e(
+                            SQLiteConnectionPool.TAG,
+                            "Could not encrypt the data of " + this.mConfiguration.label);
+                    throw new RuntimeException(
+                            "Fail to encrpyt the data of " + this.mConfiguration.label, e);
                 }
             }
         }
@@ -1204,8 +1400,11 @@ public final class SQLiteConnectionPool implements Closeable {
                         cipher.init(2, key, new IvParameterSpec(this.mIV));
                         data = cipher.doFinal(this.mEncryptedData);
                     } catch (Exception e) {
-                        Log.e(SQLiteConnectionPool.TAG, "Could not decrypt the data of " + this.mConfiguration.label);
-                        throw new RuntimeException("Fail to decrypt the data of " + this.mConfiguration.label, e);
+                        Log.e(
+                                SQLiteConnectionPool.TAG,
+                                "Could not decrypt the data of " + this.mConfiguration.label);
+                        throw new RuntimeException(
+                                "Fail to decrypt the data of " + this.mConfiguration.label, e);
                     }
                 } catch (Throwable th) {
                     throw th;

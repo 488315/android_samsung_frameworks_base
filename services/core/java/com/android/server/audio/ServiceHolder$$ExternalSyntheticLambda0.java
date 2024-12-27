@@ -1,6 +1,7 @@
 package com.android.server.audio;
 
 import android.os.IInterface;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -10,7 +11,8 @@ public final /* synthetic */ class ServiceHolder$$ExternalSyntheticLambda0 imple
     public final /* synthetic */ Consumer f$0;
     public final /* synthetic */ IInterface f$1;
 
-    public /* synthetic */ ServiceHolder$$ExternalSyntheticLambda0(Consumer consumer, IInterface iInterface, int i) {
+    public /* synthetic */ ServiceHolder$$ExternalSyntheticLambda0(
+            Consumer consumer, IInterface iInterface, int i) {
         this.$r8$classId = i;
         this.f$0 = consumer;
         this.f$1 = iInterface;

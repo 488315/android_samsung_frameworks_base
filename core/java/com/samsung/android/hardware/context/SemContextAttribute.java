@@ -6,23 +6,25 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextAttribute implements Parcelable {
-    public static final Parcelable.Creator<SemContextAttribute> CREATOR = new Parcelable.Creator<SemContextAttribute>() { // from class: com.samsung.android.hardware.context.SemContextAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextAttribute createFromParcel(Parcel in) {
-            return new SemContextAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextAttribute>() { // from class:
+                                             // com.samsung.android.hardware.context.SemContextAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextAttribute createFromParcel(Parcel in) {
+                    return new SemContextAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextAttribute[] newArray(int size) {
-            return new SemContextAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextAttribute[] newArray(int size) {
+                    return new SemContextAttribute[size];
+                }
+            };
     private Bundle mAttribute = new Bundle();
 
-    public SemContextAttribute() {
-    }
+    public SemContextAttribute() {}
 
     public SemContextAttribute(Parcel src) {
         readFromParcel(src);

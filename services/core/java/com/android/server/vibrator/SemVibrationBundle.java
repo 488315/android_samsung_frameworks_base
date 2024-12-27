@@ -3,7 +3,9 @@ package com.android.server.vibrator;
 import android.os.CombinedVibration;
 import android.os.IBinder;
 import android.os.VibrationAttributes;
+
 import com.android.server.accessibility.magnification.WindowMagnificationGestureHandler$$ExternalSyntheticOutline0;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,7 +30,16 @@ public final class SemVibrationBundle {
             return false;
         }
         SemVibrationBundle semVibrationBundle = (SemVibrationBundle) obj;
-        return this.mUid == semVibrationBundle.mUid && this.mDeviceId == semVibrationBundle.mDeviceId && this.mIndex == semVibrationBundle.mIndex && this.mRepeat == semVibrationBundle.mRepeat && this.mMagnitude == semVibrationBundle.mMagnitude && Objects.equals(this.mToken, semVibrationBundle.mToken) && Objects.equals(this.mAttrs, semVibrationBundle.mAttrs) && Objects.equals(this.mOpPkg, semVibrationBundle.mOpPkg) && Objects.equals(this.mReason, semVibrationBundle.mReason) && Objects.equals(this.mEffect, semVibrationBundle.mEffect);
+        return this.mUid == semVibrationBundle.mUid
+                && this.mDeviceId == semVibrationBundle.mDeviceId
+                && this.mIndex == semVibrationBundle.mIndex
+                && this.mRepeat == semVibrationBundle.mRepeat
+                && this.mMagnitude == semVibrationBundle.mMagnitude
+                && Objects.equals(this.mToken, semVibrationBundle.mToken)
+                && Objects.equals(this.mAttrs, semVibrationBundle.mAttrs)
+                && Objects.equals(this.mOpPkg, semVibrationBundle.mOpPkg)
+                && Objects.equals(this.mReason, semVibrationBundle.mReason)
+                && Objects.equals(this.mEffect, semVibrationBundle.mEffect);
     }
 
     public final String toString() {
@@ -51,6 +62,7 @@ public final class SemVibrationBundle {
         sb.append(", mRepeat=");
         sb.append(this.mRepeat);
         sb.append(", mMagnitude=");
-        return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(sb, this.mMagnitude, '}');
+        return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                sb, this.mMagnitude, '}');
     }
 }

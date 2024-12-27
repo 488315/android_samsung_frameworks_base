@@ -1,6 +1,5 @@
 package android.app.wallpapereffectsgeneration;
 
-import android.app.wallpapereffectsgeneration.ICinematicEffectListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,20 +8,26 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IWallpaperEffectsGenerationManager extends IInterface {
-    public static final String DESCRIPTOR = "android.app.wallpapereffectsgeneration.IWallpaperEffectsGenerationManager";
+    public static final String DESCRIPTOR =
+            "android.app.wallpapereffectsgeneration.IWallpaperEffectsGenerationManager";
 
-    void generateCinematicEffect(CinematicEffectRequest cinematicEffectRequest, ICinematicEffectListener iCinematicEffectListener) throws RemoteException;
+    void generateCinematicEffect(
+            CinematicEffectRequest cinematicEffectRequest,
+            ICinematicEffectListener iCinematicEffectListener)
+            throws RemoteException;
 
-    void returnCinematicEffectResponse(CinematicEffectResponse cinematicEffectResponse) throws RemoteException;
+    void returnCinematicEffectResponse(CinematicEffectResponse cinematicEffectResponse)
+            throws RemoteException;
 
     public static class Default implements IWallpaperEffectsGenerationManager {
         @Override // android.app.wallpapereffectsgeneration.IWallpaperEffectsGenerationManager
-        public void generateCinematicEffect(CinematicEffectRequest request, ICinematicEffectListener listener) throws RemoteException {
-        }
+        public void generateCinematicEffect(
+                CinematicEffectRequest request, ICinematicEffectListener listener)
+                throws RemoteException {}
 
         @Override // android.app.wallpapereffectsgeneration.IWallpaperEffectsGenerationManager
-        public void returnCinematicEffectResponse(CinematicEffectResponse response) throws RemoteException {
-        }
+        public void returnCinematicEffectResponse(CinematicEffectResponse response)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +35,7 @@ public interface IWallpaperEffectsGenerationManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWallpaperEffectsGenerationManager {
+    public abstract static class Stub extends Binder implements IWallpaperEffectsGenerationManager {
         static final int TRANSACTION_generateCinematicEffect = 1;
         static final int TRANSACTION_returnCinematicEffectResponse = 2;
 
@@ -71,7 +76,8 @@ public interface IWallpaperEffectsGenerationManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWallpaperEffectsGenerationManager.DESCRIPTOR);
             }
@@ -81,13 +87,18 @@ public interface IWallpaperEffectsGenerationManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    CinematicEffectRequest _arg0 = (CinematicEffectRequest) data.readTypedObject(CinematicEffectRequest.CREATOR);
-                    ICinematicEffectListener _arg1 = ICinematicEffectListener.Stub.asInterface(data.readStrongBinder());
+                    CinematicEffectRequest _arg0 =
+                            (CinematicEffectRequest)
+                                    data.readTypedObject(CinematicEffectRequest.CREATOR);
+                    ICinematicEffectListener _arg1 =
+                            ICinematicEffectListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     generateCinematicEffect(_arg0, _arg1);
                     return true;
                 case 2:
-                    CinematicEffectResponse _arg02 = (CinematicEffectResponse) data.readTypedObject(CinematicEffectResponse.CREATOR);
+                    CinematicEffectResponse _arg02 =
+                            (CinematicEffectResponse)
+                                    data.readTypedObject(CinematicEffectResponse.CREATOR);
                     data.enforceNoDataAvail();
                     returnCinematicEffectResponse(_arg02);
                     return true;
@@ -113,7 +124,9 @@ public interface IWallpaperEffectsGenerationManager extends IInterface {
             }
 
             @Override // android.app.wallpapereffectsgeneration.IWallpaperEffectsGenerationManager
-            public void generateCinematicEffect(CinematicEffectRequest request, ICinematicEffectListener listener) throws RemoteException {
+            public void generateCinematicEffect(
+                    CinematicEffectRequest request, ICinematicEffectListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWallpaperEffectsGenerationManager.DESCRIPTOR);
@@ -126,7 +139,8 @@ public interface IWallpaperEffectsGenerationManager extends IInterface {
             }
 
             @Override // android.app.wallpapereffectsgeneration.IWallpaperEffectsGenerationManager
-            public void returnCinematicEffectResponse(CinematicEffectResponse response) throws RemoteException {
+            public void returnCinematicEffectResponse(CinematicEffectResponse response)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWallpaperEffectsGenerationManager.DESCRIPTOR);

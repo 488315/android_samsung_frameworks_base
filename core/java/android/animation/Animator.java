@@ -1,9 +1,8 @@
 package android.animation;
 
-import android.animation.Animator;
-import android.animation.ValueAnimator;
 import android.content.res.ConstantState;
 import android.util.LongArray;
+
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -50,14 +49,11 @@ public abstract class Animator implements Cloneable {
         AnimationHandler.setOverrideAnimatorPausingSystemProperty(!enable);
     }
 
-    public void start() {
-    }
+    public void start() {}
 
-    public void cancel() {
-    }
+    public void cancel() {}
 
-    public void end() {
-    }
+    public void end() {}
 
     public void pause() {
         if ((isStarted() || this.mStartListenersCalled) && !this.mPaused) {
@@ -158,7 +154,7 @@ public abstract class Animator implements Cloneable {
         return new AnimatorConstantState(this);
     }
 
-    @Override // 
+    @Override //
     /* renamed from: clone */
     public Animator mo77clone() {
         try {
@@ -177,14 +173,11 @@ public abstract class Animator implements Cloneable {
         }
     }
 
-    public void setupStartValues() {
-    }
+    public void setupStartValues() {}
 
-    public void setupEndValues() {
-    }
+    public void setupEndValues() {}
 
-    public void setTarget(Object target) {
-    }
+    public void setTarget(Object target) {}
 
     public boolean canReverse() {
         return false;
@@ -206,18 +199,15 @@ public abstract class Animator implements Cloneable {
         }
     }
 
-    void skipToEndValue(boolean inReverse) {
-    }
+    void skipToEndValue(boolean inReverse) {}
 
     boolean isInitialized() {
         return true;
     }
 
-    void animateValuesInRange(long currentPlayTime, long lastPlayTime) {
-    }
+    void animateValuesInRange(long currentPlayTime, long lastPlayTime) {}
 
-    void animateSkipToEnds(long currentPlayTime, long lastPlayTime) {
-    }
+    void animateSkipToEnds(long currentPlayTime, long lastPlayTime) {}
 
     void getStartAndEndTimes(LongArray times, long offset) {
         long startTime = getStartDelay() + offset;
@@ -233,7 +223,8 @@ public abstract class Animator implements Cloneable {
         }
     }
 
-    void notifyListeners(AnimatorCaller<AnimatorListener, Animator> notification, boolean isReverse) {
+    void notifyListeners(
+            AnimatorCaller<AnimatorListener, Animator> notification, boolean isReverse) {
         callOnList(this.mListeners, notification, this, isReverse);
     }
 
@@ -258,7 +249,8 @@ public abstract class Animator implements Cloneable {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    <T, A> void callOnList(ArrayList<T> list, AnimatorCaller<T, A> animatorCaller, A animator, boolean isReverse) {
+    <T, A> void callOnList(
+            ArrayList<T> list, AnimatorCaller<T, A> animatorCaller, A animator, boolean isReverse) {
         int size = list == null ? 0 : list.size();
         if (size > 0) {
             Object[] array = this.mCachedList.getAndSet(null);
@@ -292,8 +284,7 @@ public abstract class Animator implements Cloneable {
         }
     }
 
-    public void setAllowRunningAsynchronously(boolean mayRunAsync) {
-    }
+    public void setAllowRunningAsynchronously(boolean mayRunAsync) {}
 
     private static class AnimatorConstantState extends ConstantState<Animator> {
         final Animator mAnimator;
@@ -320,48 +311,63 @@ public abstract class Animator implements Cloneable {
     }
 
     interface AnimatorCaller<T, A> {
-        public static final AnimatorCaller<AnimatorListener, Animator> ON_START = new AnimatorCaller() { // from class: android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda0
-            @Override // android.animation.Animator.AnimatorCaller
-            public final void call(Object obj, Object obj2, boolean z) {
-                ((Animator.AnimatorListener) obj).onAnimationStart((Animator) obj2, z);
-            }
-        };
-        public static final AnimatorCaller<AnimatorListener, Animator> ON_END = new AnimatorCaller() { // from class: android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda1
-            @Override // android.animation.Animator.AnimatorCaller
-            public final void call(Object obj, Object obj2, boolean z) {
-                ((Animator.AnimatorListener) obj).onAnimationEnd((Animator) obj2, z);
-            }
-        };
-        public static final AnimatorCaller<AnimatorListener, Animator> ON_CANCEL = new AnimatorCaller() { // from class: android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda2
-            @Override // android.animation.Animator.AnimatorCaller
-            public final void call(Object obj, Object obj2, boolean z) {
-                ((Animator.AnimatorListener) obj).onAnimationCancel((Animator) obj2);
-            }
-        };
-        public static final AnimatorCaller<AnimatorListener, Animator> ON_REPEAT = new AnimatorCaller() { // from class: android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda3
-            @Override // android.animation.Animator.AnimatorCaller
-            public final void call(Object obj, Object obj2, boolean z) {
-                ((Animator.AnimatorListener) obj).onAnimationRepeat((Animator) obj2);
-            }
-        };
-        public static final AnimatorCaller<AnimatorPauseListener, Animator> ON_PAUSE = new AnimatorCaller() { // from class: android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda4
-            @Override // android.animation.Animator.AnimatorCaller
-            public final void call(Object obj, Object obj2, boolean z) {
-                ((Animator.AnimatorPauseListener) obj).onAnimationPause((Animator) obj2);
-            }
-        };
-        public static final AnimatorCaller<AnimatorPauseListener, Animator> ON_RESUME = new AnimatorCaller() { // from class: android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda5
-            @Override // android.animation.Animator.AnimatorCaller
-            public final void call(Object obj, Object obj2, boolean z) {
-                ((Animator.AnimatorPauseListener) obj).onAnimationResume((Animator) obj2);
-            }
-        };
-        public static final AnimatorCaller<ValueAnimator.AnimatorUpdateListener, ValueAnimator> ON_UPDATE = new AnimatorCaller() { // from class: android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda6
-            @Override // android.animation.Animator.AnimatorCaller
-            public final void call(Object obj, Object obj2, boolean z) {
-                ((ValueAnimator.AnimatorUpdateListener) obj).onAnimationUpdate((ValueAnimator) obj2);
-            }
-        };
+        public static final AnimatorCaller<AnimatorListener, Animator> ON_START =
+                new AnimatorCaller() { // from class:
+                    // android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda0
+                    @Override // android.animation.Animator.AnimatorCaller
+                    public final void call(Object obj, Object obj2, boolean z) {
+                        ((Animator.AnimatorListener) obj).onAnimationStart((Animator) obj2, z);
+                    }
+                };
+        public static final AnimatorCaller<AnimatorListener, Animator> ON_END =
+                new AnimatorCaller() { // from class:
+                    // android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda1
+                    @Override // android.animation.Animator.AnimatorCaller
+                    public final void call(Object obj, Object obj2, boolean z) {
+                        ((Animator.AnimatorListener) obj).onAnimationEnd((Animator) obj2, z);
+                    }
+                };
+        public static final AnimatorCaller<AnimatorListener, Animator> ON_CANCEL =
+                new AnimatorCaller() { // from class:
+                    // android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda2
+                    @Override // android.animation.Animator.AnimatorCaller
+                    public final void call(Object obj, Object obj2, boolean z) {
+                        ((Animator.AnimatorListener) obj).onAnimationCancel((Animator) obj2);
+                    }
+                };
+        public static final AnimatorCaller<AnimatorListener, Animator> ON_REPEAT =
+                new AnimatorCaller() { // from class:
+                    // android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda3
+                    @Override // android.animation.Animator.AnimatorCaller
+                    public final void call(Object obj, Object obj2, boolean z) {
+                        ((Animator.AnimatorListener) obj).onAnimationRepeat((Animator) obj2);
+                    }
+                };
+        public static final AnimatorCaller<AnimatorPauseListener, Animator> ON_PAUSE =
+                new AnimatorCaller() { // from class:
+                    // android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda4
+                    @Override // android.animation.Animator.AnimatorCaller
+                    public final void call(Object obj, Object obj2, boolean z) {
+                        ((Animator.AnimatorPauseListener) obj).onAnimationPause((Animator) obj2);
+                    }
+                };
+        public static final AnimatorCaller<AnimatorPauseListener, Animator> ON_RESUME =
+                new AnimatorCaller() { // from class:
+                    // android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda5
+                    @Override // android.animation.Animator.AnimatorCaller
+                    public final void call(Object obj, Object obj2, boolean z) {
+                        ((Animator.AnimatorPauseListener) obj).onAnimationResume((Animator) obj2);
+                    }
+                };
+        public static final AnimatorCaller<ValueAnimator.AnimatorUpdateListener, ValueAnimator>
+                ON_UPDATE = new AnimatorCaller() { // from class:
+                            // android.animation.Animator$AnimatorCaller$$ExternalSyntheticLambda6
+                            @Override // android.animation.Animator.AnimatorCaller
+                            public final void call(Object obj, Object obj2, boolean z) {
+                                ((ValueAnimator.AnimatorUpdateListener) obj)
+                                        .onAnimationUpdate((ValueAnimator) obj2);
+                            }
+                        };
 
         void call(T t, A a, boolean z);
     }

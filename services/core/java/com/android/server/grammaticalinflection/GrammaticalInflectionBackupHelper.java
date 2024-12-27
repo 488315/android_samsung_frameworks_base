@@ -3,6 +3,7 @@ package com.android.server.grammaticalinflection;
 import android.content.pm.PackageManager;
 import android.util.Log;
 import android.util.SparseArray;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -30,7 +31,9 @@ public final class GrammaticalInflectionBackupHelper {
         }
     }
 
-    public GrammaticalInflectionBackupHelper(GrammaticalInflectionService grammaticalInflectionService, PackageManager packageManager) {
+    public GrammaticalInflectionBackupHelper(
+            GrammaticalInflectionService grammaticalInflectionService,
+            PackageManager packageManager) {
         this.mGrammaticalGenderService = grammaticalInflectionService;
         this.mPackageManager = packageManager;
     }
@@ -51,7 +54,10 @@ public final class GrammaticalInflectionBackupHelper {
                         } catch (IOException | ClassNotFoundException e) {
                             e = e;
                             hashMap = hashMap2;
-                            Log.e("GrammaticalInflectionBackupHelper", "cannot convert payload to HashMap.", e);
+                            Log.e(
+                                    "GrammaticalInflectionBackupHelper",
+                                    "cannot convert payload to HashMap.",
+                                    e);
                             e.printStackTrace();
                             return hashMap;
                         }
@@ -84,7 +90,8 @@ public final class GrammaticalInflectionBackupHelper {
     public final void cleanStagedDataForOldEntries() {
         int i = 0;
         while (i < this.mCache.size()) {
-            if (((StagedData) this.mCache.valueAt(this.mCache.keyAt(i))).mCreationTimeMillis < this.mClock.millis() - STAGE_DATA_RETENTION_PERIOD.toMillis()) {
+            if (((StagedData) this.mCache.valueAt(this.mCache.keyAt(i))).mCreationTimeMillis
+                    < this.mClock.millis() - STAGE_DATA_RETENTION_PERIOD.toMillis()) {
                 this.mCache.removeAt(i);
                 i--;
             }

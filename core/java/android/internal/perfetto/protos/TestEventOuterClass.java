@@ -10,8 +10,7 @@ public final class TestEventOuterClass {
         public static final long SEQ_VALUE = 1155346202626L;
         public static final long STR = 1138166333441L;
 
-        public TestEvent() {
-        }
+        public TestEvent() {}
 
         public final class TestPayload {
             public static final long DEBUG_ANNOTATIONS = 2246267895815L;
@@ -22,8 +21,7 @@ public final class TestEventOuterClass {
             public static final long SINGLE_STRING = 1138166333444L;
             public static final long STR = 2237677961217L;
 
-            public TestPayload() {
-            }
+            public TestPayload() {}
         }
     }
 }

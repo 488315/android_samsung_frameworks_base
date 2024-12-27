@@ -13,7 +13,10 @@ public class EmergencyNumberDbInstallReceiver extends ConfigUpdateInstallReceive
 
     @Override // com.android.server.updates.ConfigUpdateInstallReceiver
     public final void postInstall(Context context) {
-        Slog.i("EmergencyNumberDbInstallReceiver", "Emergency number database is updated in file partition");
-        ((TelephonyManager) context.getSystemService("phone")).notifyOtaEmergencyNumberDbInstalled();
+        Slog.i(
+                "EmergencyNumberDbInstallReceiver",
+                "Emergency number database is updated in file partition");
+        ((TelephonyManager) context.getSystemService("phone"))
+                .notifyOtaEmergencyNumberDbInstalled();
     }
 }

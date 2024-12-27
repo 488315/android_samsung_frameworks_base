@@ -3,11 +3,12 @@ package android.database.sqlite;
 import android.database.AbstractWindowedCursor;
 import android.database.CursorWindow;
 import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDebug;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.StrictMode;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +27,8 @@ public class SQLiteCursor extends AbstractWindowedCursor {
     private final SQLiteQuery mQuery;
 
     @Deprecated
-    public SQLiteCursor(SQLiteDatabase db, SQLiteCursorDriver driver, String editTable, SQLiteQuery query) {
+    public SQLiteCursor(
+            SQLiteDatabase db, SQLiteCursorDriver driver, String editTable, SQLiteQuery query) {
         this(driver, editTable, query);
     }
 
@@ -48,12 +50,24 @@ public class SQLiteCursor extends AbstractWindowedCursor {
 
     @Override // android.database.AbstractCursor, android.database.CrossProcessCursor
     public boolean onMove(int oldPosition, int newPosition) {
-        if (this.mWindow == null || newPosition < this.mWindow.getStartPosition() || newPosition >= this.mWindow.getStartPosition() + this.mWindow.getNumRows()) {
+        if (this.mWindow == null
+                || newPosition < this.mWindow.getStartPosition()
+                || newPosition >= this.mWindow.getStartPosition() + this.mWindow.getNumRows()) {
             fillWindow(newPosition);
             int startPos = this.mWindow.getStartPosition();
             int numRows = this.mWindow.getNumRows();
             if (newPosition < startPos || newPosition >= startPos + numRows) {
-                Log.e(TAG, "onMove() return false. RequiredPos: " + newPosition + " WindowStartPos: " + startPos + " WindowRowCount: " + numRows + "(original count of query: " + this.mCount + NavigationBarInflaterView.KEY_CODE_END);
+                Log.e(
+                        TAG,
+                        "onMove() return false. RequiredPos: "
+                                + newPosition
+                                + " WindowStartPos: "
+                                + startPos
+                                + " WindowRowCount: "
+                                + numRows
+                                + "(original count of query: "
+                                + this.mCount
+                                + NavigationBarInflaterView.KEY_CODE_END);
                 return false;
             }
             return true;
@@ -82,7 +96,11 @@ public class SQLiteCursor extends AbstractWindowedCursor {
                 }
                 return;
             }
-            int startPos = this.mFillWindowForwardOnly ? requiredPos : DatabaseUtils.cursorPickFillWindowStartPosition(requiredPos, this.mCursorWindowCapacity);
+            int startPos =
+                    this.mFillWindowForwardOnly
+                            ? requiredPos
+                            : DatabaseUtils.cursorPickFillWindowStartPosition(
+                                    requiredPos, this.mCursorWindowCapacity);
             this.mQuery.fillWindow(this.mWindow, startPos, requiredPos, false);
         } catch (RuntimeException ex) {
             closeWindow();
@@ -125,7 +143,8 @@ public class SQLiteCursor extends AbstractWindowedCursor {
         this.mDriver.cursorDeactivated();
     }
 
-    @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable, java.lang.AutoCloseable
+    @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable,
+    // java.lang.AutoCloseable
     public void close() {
         super.close();
         synchronized (this) {
@@ -178,12 +197,21 @@ public class SQLiteCursor extends AbstractWindowedCursor {
             if (this.mWindow != null && StrictMode.vmSqliteObjectLeaksEnabled()) {
                 String sql = this.mQuery.getSql();
                 int len = sql.length();
-                StringBuilder append = new StringBuilder().append("Finalizing a Cursor that has not been deactivated or closed. database = ").append(this.mQuery.getDatabase().getLabel()).append(", table = ").append(this.mEditTable).append(", query = ");
+                StringBuilder append =
+                        new StringBuilder()
+                                .append(
+                                        "Finalizing a Cursor that has not been deactivated or"
+                                                + " closed. database = ")
+                                .append(this.mQuery.getDatabase().getLabel())
+                                .append(", table = ")
+                                .append(this.mEditTable)
+                                .append(", query = ");
                 int i = 1000;
                 if (len <= 1000) {
                     i = len;
                 }
-                StrictMode.onSqliteObjectLeaked(append.append(sql.substring(0, i)).toString(), null);
+                StrictMode.onSqliteObjectLeaked(
+                        append.append(sql.substring(0, i)).toString(), null);
             }
         } finally {
             super.finalize();

@@ -4,7 +4,8 @@ import java.io.UTFDataFormatException;
 
 /* loaded from: classes5.dex */
 public class ModifiedUtf8 {
-    public static String decode(byte[] in, char[] out, int offset, int utfSize) throws UTFDataFormatException {
+    public static String decode(byte[] in, char[] out, int offset, int utfSize)
+            throws UTFDataFormatException {
         int count = 0;
         int s = 0;
         while (count < utfSize) {
@@ -37,7 +38,8 @@ public class ModifiedUtf8 {
                     int count5 = count4 + 1;
                     int c3 = in[count4 + offset];
                     if ((b2 & 192) != 128 || (c3 & 192) != 128) {
-                        throw new UTFDataFormatException("bad second or third byte at " + (count5 - 2));
+                        throw new UTFDataFormatException(
+                                "bad second or third byte at " + (count5 - 2));
                     }
                     out[s] = (char) (((c2 & 15) << 12) | ((b2 & 63) << 6) | (c3 & 63));
                     s++;
@@ -92,6 +94,5 @@ public class ModifiedUtf8 {
         }
     }
 
-    private ModifiedUtf8() {
-    }
+    private ModifiedUtf8() {}
 }

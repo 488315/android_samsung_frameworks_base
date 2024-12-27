@@ -21,14 +21,29 @@ public class FMRadioServiceFeature {
     public static final boolean FEATURE_USE_CHIPSET_VOLUME;
     public static final boolean FEATURE_WAIT_PID_DURING_SCAN = false;
     public static SemCscFeature sCscFeature = SemCscFeature.getInstance();
-    public static final String FEATURE_BANDWIDTH = sCscFeature.getString("CscFeature_FMRadio_BandWidthAs");
-    public static final int FEATURE_FREQUENCYSPACE = sCscFeature.getInteger("CscFeature_FMRadio_FrequencySpaceAs");
-    public static final String MEDIATEK_DESENSE_LIST = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_MEDIATEK_DESENSE_LIST");
-    public static final String BLEND_SINR_HI = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_QUALCOMM_BLEND_SINR_HI");
-    public static final String BLEND_RMSSI_HI = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_QUALCOMM_BLEND_RMSSI_HI");
-    public static final String FEATURE_CONFIG_SOFTMUTE = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_COMMON_SOFTMUTE_TH");
-    public static final boolean FEATURE_SUPPORT_SOFTMUTE = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FMRADIO_SUPPORT_SOFTMUTE");
-    public static final int CHIP_VENDOR = Integer.parseInt(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_CHIP_VENDOR"));
+    public static final String FEATURE_BANDWIDTH =
+            sCscFeature.getString("CscFeature_FMRadio_BandWidthAs");
+    public static final int FEATURE_FREQUENCYSPACE =
+            sCscFeature.getInteger("CscFeature_FMRadio_FrequencySpaceAs");
+    public static final String MEDIATEK_DESENSE_LIST =
+            SemFloatingFeature.getInstance()
+                    .getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_MEDIATEK_DESENSE_LIST");
+    public static final String BLEND_SINR_HI =
+            SemFloatingFeature.getInstance()
+                    .getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_QUALCOMM_BLEND_SINR_HI");
+    public static final String BLEND_RMSSI_HI =
+            SemFloatingFeature.getInstance()
+                    .getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_QUALCOMM_BLEND_RMSSI_HI");
+    public static final String FEATURE_CONFIG_SOFTMUTE =
+            SemFloatingFeature.getInstance()
+                    .getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_COMMON_SOFTMUTE_TH");
+    public static final boolean FEATURE_SUPPORT_SOFTMUTE =
+            SemFloatingFeature.getInstance()
+                    .getBoolean("SEC_FLOATING_FEATURE_FMRADIO_SUPPORT_SOFTMUTE");
+    public static final int CHIP_VENDOR =
+            Integer.parseInt(
+                    SemFloatingFeature.getInstance()
+                            .getString("SEC_FLOATING_FEATURE_FMRADIO_CONFIG_CHIP_VENDOR"));
 
     static {
         boolean z = true;
@@ -36,6 +51,8 @@ public class FMRadioServiceFeature {
             z = false;
         }
         FEATURE_USE_CHIPSET_VOLUME = z;
-        FEATURE_FMRADIO_SUPPORT_EXTERNAL_RADIO_CHIPSET = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_FMRADIO_SUPPORT_EXTERNAL_RADIO_CHIPSET");
+        FEATURE_FMRADIO_SUPPORT_EXTERNAL_RADIO_CHIPSET =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_FMRADIO_SUPPORT_EXTERNAL_RADIO_CHIPSET");
     }
 }

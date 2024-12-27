@@ -1,28 +1,30 @@
 package android.app.smartspace.uitemplatedata;
 
 import android.annotation.SystemApi;
-import android.app.smartspace.uitemplatedata.BaseTemplateData;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.List;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class SubListTemplateData extends BaseTemplateData {
-    public static final Parcelable.Creator<SubListTemplateData> CREATOR = new Parcelable.Creator<SubListTemplateData>() { // from class: android.app.smartspace.uitemplatedata.SubListTemplateData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SubListTemplateData createFromParcel(Parcel in) {
-            return new SubListTemplateData(in);
-        }
+    public static final Parcelable.Creator<SubListTemplateData> CREATOR =
+            new Parcelable.Creator<SubListTemplateData>() { // from class:
+                // android.app.smartspace.uitemplatedata.SubListTemplateData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SubListTemplateData createFromParcel(Parcel in) {
+                    return new SubListTemplateData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SubListTemplateData[] newArray(int size) {
-            return new SubListTemplateData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SubListTemplateData[] newArray(int size) {
+                    return new SubListTemplateData[size];
+                }
+            };
     private final TapAction mSubListAction;
     private final Icon mSubListIcon;
     private final List<Text> mSubListTexts;
@@ -34,8 +36,25 @@ public final class SubListTemplateData extends BaseTemplateData {
         this.mSubListAction = (TapAction) in.readTypedObject(TapAction.CREATOR);
     }
 
-    private SubListTemplateData(int templateType, BaseTemplateData.SubItemInfo primaryItem, BaseTemplateData.SubItemInfo subtitleItem, BaseTemplateData.SubItemInfo subtitleSupplementalItem, BaseTemplateData.SubItemInfo supplementalLineItem, BaseTemplateData.SubItemInfo supplementalAlarmItem, int layoutWeight, Icon subListIcon, List<Text> subListTexts, TapAction subListAction) {
-        super(templateType, primaryItem, subtitleItem, subtitleSupplementalItem, supplementalLineItem, supplementalAlarmItem, layoutWeight);
+    private SubListTemplateData(
+            int templateType,
+            BaseTemplateData.SubItemInfo primaryItem,
+            BaseTemplateData.SubItemInfo subtitleItem,
+            BaseTemplateData.SubItemInfo subtitleSupplementalItem,
+            BaseTemplateData.SubItemInfo supplementalLineItem,
+            BaseTemplateData.SubItemInfo supplementalAlarmItem,
+            int layoutWeight,
+            Icon subListIcon,
+            List<Text> subListTexts,
+            TapAction subListAction) {
+        super(
+                templateType,
+                primaryItem,
+                subtitleItem,
+                subtitleSupplementalItem,
+                supplementalLineItem,
+                supplementalAlarmItem,
+                layoutWeight);
         this.mSubListIcon = subListIcon;
         this.mSubListTexts = subListTexts;
         this.mSubListAction = subListAction;
@@ -75,17 +94,30 @@ public final class SubListTemplateData extends BaseTemplateData {
             return false;
         }
         SubListTemplateData that = (SubListTemplateData) o;
-        return Objects.equals(this.mSubListIcon, that.mSubListIcon) && Objects.equals(this.mSubListTexts, that.mSubListTexts) && Objects.equals(this.mSubListAction, that.mSubListAction);
+        return Objects.equals(this.mSubListIcon, that.mSubListIcon)
+                && Objects.equals(this.mSubListTexts, that.mSubListTexts)
+                && Objects.equals(this.mSubListAction, that.mSubListAction);
     }
 
     @Override // android.app.smartspace.uitemplatedata.BaseTemplateData
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(super.hashCode()), this.mSubListIcon, this.mSubListTexts, this.mSubListAction);
+        return Objects.hash(
+                Integer.valueOf(super.hashCode()),
+                this.mSubListIcon,
+                this.mSubListTexts,
+                this.mSubListAction);
     }
 
     @Override // android.app.smartspace.uitemplatedata.BaseTemplateData
     public String toString() {
-        return super.toString() + " + SmartspaceSubListUiTemplateData{mSubListIcon=" + this.mSubListIcon + ", mSubListTexts=" + this.mSubListTexts + ", mSubListAction=" + this.mSubListAction + '}';
+        return super.toString()
+                + " + SmartspaceSubListUiTemplateData{mSubListIcon="
+                + this.mSubListIcon
+                + ", mSubListTexts="
+                + this.mSubListTexts
+                + ", mSubListAction="
+                + this.mSubListAction
+                + '}';
     }
 
     @SystemApi
@@ -111,7 +143,17 @@ public final class SubListTemplateData extends BaseTemplateData {
 
         @Override // android.app.smartspace.uitemplatedata.BaseTemplateData.Builder
         public SubListTemplateData build() {
-            return new SubListTemplateData(getTemplateType(), getPrimaryItem(), getSubtitleItem(), getSubtitleSupplemtnalItem(), getSupplementalLineItem(), getSupplementalAlarmItem(), getLayoutWeight(), this.mSubListIcon, this.mSubListTexts, this.mSubListAction);
+            return new SubListTemplateData(
+                    getTemplateType(),
+                    getPrimaryItem(),
+                    getSubtitleItem(),
+                    getSubtitleSupplemtnalItem(),
+                    getSupplementalLineItem(),
+                    getSupplementalAlarmItem(),
+                    getLayoutWeight(),
+                    this.mSubListIcon,
+                    this.mSubListTexts,
+                    this.mSubListAction);
         }
     }
 }

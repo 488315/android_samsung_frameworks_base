@@ -4,6 +4,7 @@ import android.net.wifi.WifiSsid;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -11,27 +12,28 @@ import java.util.Set;
 
 /* loaded from: classes.dex */
 public final class WifiSsidPolicy implements Parcelable {
-    public static final Parcelable.Creator<WifiSsidPolicy> CREATOR = new Parcelable.Creator<WifiSsidPolicy>() { // from class: android.app.admin.WifiSsidPolicy.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WifiSsidPolicy createFromParcel(Parcel source) {
-            return new WifiSsidPolicy(source);
-        }
+    public static final Parcelable.Creator<WifiSsidPolicy> CREATOR =
+            new Parcelable.Creator<
+                    WifiSsidPolicy>() { // from class: android.app.admin.WifiSsidPolicy.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WifiSsidPolicy createFromParcel(Parcel source) {
+                    return new WifiSsidPolicy(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WifiSsidPolicy[] newArray(int size) {
-            return new WifiSsidPolicy[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WifiSsidPolicy[] newArray(int size) {
+                    return new WifiSsidPolicy[size];
+                }
+            };
     public static final int WIFI_SSID_POLICY_TYPE_ALLOWLIST = 0;
     public static final int WIFI_SSID_POLICY_TYPE_DENYLIST = 1;
     private int mPolicyType;
     private ArraySet<WifiSsid> mSsids;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WifiSsidPolicyType {
-    }
+    public @interface WifiSsidPolicyType {}
 
     public WifiSsidPolicy(int policyType, Set<WifiSsid> ssids) {
         if (ssids.isEmpty()) {

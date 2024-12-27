@@ -21,7 +21,12 @@ public class ZygoteConfig {
     public static final int USAP_POOL_SIZE_MIN_LIMIT = 1;
 
     private static String getDeviceConfig(String name) {
-        return SystemProperties.get(String.join(MediaMetrics.SEPARATOR, PROPERTY_PREFIX_DEVICE_CONFIG, "runtime_native", name));
+        return SystemProperties.get(
+                String.join(
+                        MediaMetrics.SEPARATOR,
+                        PROPERTY_PREFIX_DEVICE_CONFIG,
+                        "runtime_native",
+                        name));
     }
 
     public static int getInt(String name, int defaultValue) {

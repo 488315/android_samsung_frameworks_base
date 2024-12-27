@@ -14,8 +14,8 @@ public interface ITransitionMetricsReporter extends IInterface {
 
     public static class Default implements ITransitionMetricsReporter {
         @Override // android.window.ITransitionMetricsReporter
-        public void reportAnimationStart(IBinder transitionToken, long startTime) throws RemoteException {
-        }
+        public void reportAnimationStart(IBinder transitionToken, long startTime)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ITransitionMetricsReporter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITransitionMetricsReporter {
+    public abstract static class Stub extends Binder implements ITransitionMetricsReporter {
         static final int TRANSACTION_reportAnimationStart = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ITransitionMetricsReporter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITransitionMetricsReporter.DESCRIPTOR);
             }
@@ -98,7 +99,8 @@ public interface ITransitionMetricsReporter extends IInterface {
             }
 
             @Override // android.window.ITransitionMetricsReporter
-            public void reportAnimationStart(IBinder transitionToken, long startTime) throws RemoteException {
+            public void reportAnimationStart(IBinder transitionToken, long startTime)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITransitionMetricsReporter.DESCRIPTOR);

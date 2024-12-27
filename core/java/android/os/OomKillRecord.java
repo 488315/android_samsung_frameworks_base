@@ -15,7 +15,17 @@ public final class OomKillRecord {
     private long mTotalVmInKb;
     private int mUid;
 
-    public OomKillRecord(long timeStampInMillis, int pid, int uid, String processName, short oomScoreAdj, long totalVmInKb, long anonRssInKb, long fileRssInKb, long shmemRssInKb, long pgTablesInKb) {
+    public OomKillRecord(
+            long timeStampInMillis,
+            int pid,
+            int uid,
+            String processName,
+            short oomScoreAdj,
+            long totalVmInKb,
+            long anonRssInKb,
+            long fileRssInKb,
+            long shmemRssInKb,
+            long pgTablesInKb) {
         this.mTimeStampInMillis = timeStampInMillis;
         this.mPid = pid;
         this.mUid = uid;
@@ -29,7 +39,18 @@ public final class OomKillRecord {
     }
 
     public void logKillOccurred() {
-        FrameworkStatsLog.write(754, this.mUid, this.mPid, this.mOomScoreAdj, this.mTimeStampInMillis, this.mProcessName, this.mTotalVmInKb, this.mAnonRssInKb, this.mFileRssInKb, this.mShmemRssInKb, this.mPgTablesInKb);
+        FrameworkStatsLog.write(
+                754,
+                this.mUid,
+                this.mPid,
+                this.mOomScoreAdj,
+                this.mTimeStampInMillis,
+                this.mProcessName,
+                this.mTotalVmInKb,
+                this.mAnonRssInKb,
+                this.mFileRssInKb,
+                this.mShmemRssInKb,
+                this.mPgTablesInKb);
     }
 
     public long getTimestampMilli() {

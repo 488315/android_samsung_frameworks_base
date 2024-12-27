@@ -16,8 +16,7 @@ public class HapticFeedbackConstants {
     public static final int EDGE_RELEASE = 15;
     public static final int EDGE_SQUEEZE = 14;
 
-    @Deprecated
-    public static final int FLAG_IGNORE_GLOBAL_SETTING = 2;
+    @Deprecated public static final int FLAG_IGNORE_GLOBAL_SETTING = 2;
     public static final int FLAG_IGNORE_VIEW_SETTING = 1;
     public static final int GESTURE_END = 13;
     public static final int GESTURE_START = 12;
@@ -43,8 +42,7 @@ public class HapticFeedbackConstants {
     public static final int VIRTUAL_KEY = 1;
     public static final int VIRTUAL_KEY_RELEASE = 8;
 
-    private HapticFeedbackConstants() {
-    }
+    private HapticFeedbackConstants() {}
 
     public static int semGetVibrationIndex(int auiHapticPatternIndex) {
         return SemHapticFeedbackConstants.semGetVibrationIndex(auiHapticPatternIndex);

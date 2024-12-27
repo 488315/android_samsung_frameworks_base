@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import com.samsung.android.service.EngineeringMode.EngineeringModeManager;
 
 /* loaded from: classes5.dex */
@@ -75,12 +76,14 @@ public class UserDeviceATCmd implements IWorkOnAt {
                 Slog.i(TAG, "AT+URDEVICE=1,0,0,0");
                 String devStatus = "0";
                 String emProp = SystemProperties.get(EM_PROPERTY);
-                if (!emProp.equals(EM_PROPERTY_STATE_USR) && !emProp.equals(EM_PROPERTY_STATE_USR_WITH_EM)) {
+                if (!emProp.equals(EM_PROPERTY_STATE_USR)
+                        && !emProp.equals(EM_PROPERTY_STATE_USR_WITH_EM)) {
                     if (emProp.equals(EM_PROPERTY_STATE_DEV)) {
                         devStatus = "1";
                     }
                     tokStatus = "NONE";
-                    if (Build.VERSION.DEVICE_INITIAL_SDK_INT < 28 && this.mEMMgr.isTokenInstalled() == 1) {
+                    if (Build.VERSION.DEVICE_INITIAL_SDK_INT < 28
+                            && this.mEMMgr.isTokenInstalled() == 1) {
                         tokStatus = AT_RESPONSE_EXIST_EM_TOKEN;
                     }
                     String result4 = result3 + makeResCmd(devStatus, tokStatus);
@@ -143,6 +146,7 @@ public class UserDeviceATCmd implements IWorkOnAt {
     }
 
     private boolean isFactoryBinary() {
-        return "factory".equalsIgnoreCase(SystemProperties.get("ro.factory.factory_binary", "Unknown"));
+        return "factory"
+                .equalsIgnoreCase(SystemProperties.get("ro.factory.factory_binary", "Unknown"));
     }
 }

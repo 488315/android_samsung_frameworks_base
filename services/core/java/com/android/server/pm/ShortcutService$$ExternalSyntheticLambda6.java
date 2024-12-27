@@ -3,7 +3,9 @@ package com.android.server.pm;
 import android.content.pm.ShortcutInfo;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -31,7 +33,8 @@ public final /* synthetic */ class ShortcutService$$ExternalSyntheticLambda6 imp
                 ShortcutPackage shortcutPackage = (ShortcutPackage) obj;
                 synchronized (shortcutPackage.mPackageItemLock) {
                     arraySet = new ArraySet(1);
-                    shortcutPackage.forEachShortcut(new ShortcutPackage$$ExternalSyntheticLambda24(1, arraySet));
+                    shortcutPackage.forEachShortcut(
+                            new ShortcutPackage$$ExternalSyntheticLambda24(1, arraySet));
                 }
                 Iterator it = arraySet.iterator();
                 while (it.hasNext()) {
@@ -44,14 +47,19 @@ public final /* synthetic */ class ShortcutService$$ExternalSyntheticLambda6 imp
                 return;
             case 2:
                 ShortcutInfo shortcutInfo = (ShortcutInfo) obj;
-                ((AndroidFuture) obj2).complete(shortcutInfo == null ? null : shortcutInfo.getIntents());
+                ((AndroidFuture) obj2)
+                        .complete(shortcutInfo == null ? null : shortcutInfo.getIntents());
                 return;
             case 3:
                 ((ArraySet) obj2).remove((String) obj);
                 return;
             default:
                 List list = (List) obj;
-                ((Consumer) obj2).accept((list == null || list.isEmpty()) ? null : (ShortcutInfo) list.get(0));
+                ((Consumer) obj2)
+                        .accept(
+                                (list == null || list.isEmpty())
+                                        ? null
+                                        : (ShortcutInfo) list.get(0));
                 return;
         }
     }

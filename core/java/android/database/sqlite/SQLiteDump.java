@@ -5,6 +5,7 @@ import android.telecom.Logging.Session;
 import android.util.Log;
 import android.util.LogPrinter;
 import android.util.Printer;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -59,16 +60,23 @@ public class SQLiteDump {
             this.mDumpDirPath = createDumpDir();
             boolean ret = createCorruptFile(this.mDumpDirPath);
             if (ret) {
-                this.mOutPutStream = new BufferedOutputStream(new FileOutputStream(this.mDumpFile.getAbsoluteFile()));
+                this.mOutPutStream =
+                        new BufferedOutputStream(
+                                new FileOutputStream(this.mDumpFile.getAbsoluteFile()));
                 this.mDumpFilePrinter = new PrintStream((OutputStream) this.mOutPutStream, true);
                 Printer printer = new LogPrinter(5, TAG);
                 SimpleDateFormat opDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
                 String formattedCorruptTime = opDF.format(new Date(System.currentTimeMillis()));
                 this.mTeePrinter = new TeePrinter(printer, this.mDumpFilePrinter);
                 if (this.mDumpFilePrinter != null) {
-                    this.mDumpFilePrinter.println("===== corrupt db name: " + new File(this.mDbPath).getName() + " =====");
-                    this.mDumpFilePrinter.println("===== corrupt time:    " + formattedCorruptTime + " =====");
-                    this.mDumpFilePrinter.println("===== dump file name:  " + this.mDumpFile.getName() + " =====");
+                    this.mDumpFilePrinter.println(
+                            "===== corrupt db name: "
+                                    + new File(this.mDbPath).getName()
+                                    + " =====");
+                    this.mDumpFilePrinter.println(
+                            "===== corrupt time:    " + formattedCorruptTime + " =====");
+                    this.mDumpFilePrinter.println(
+                            "===== dump file name:  " + this.mDumpFile.getName() + " =====");
                 }
             }
             deleteOldDumpFiles();
@@ -216,7 +224,11 @@ public class SQLiteDump {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
             Path path = file.toPath();
             try {
-                BasicFileAttributes attr = Files.readAttributes(path, (Class<BasicFileAttributes>) BasicFileAttributes.class, new LinkOption[0]);
+                BasicFileAttributes attr =
+                        Files.readAttributes(
+                                path,
+                                (Class<BasicFileAttributes>) BasicFileAttributes.class,
+                                new LinkOption[0]);
                 return sdf.format(Long.valueOf(attr.lastAccessTime().toMillis()));
             } catch (Exception e) {
                 return null;
@@ -228,7 +240,12 @@ public class SQLiteDump {
     private File getDumpFile(String dumpDir) {
         String dbCreateTime = getDbCreateTime(this.mDbPath);
         String dbName = this.mDbPath.substring(this.mDbPath.lastIndexOf(47) + 1).replace('.', '_');
-        String corruptFileName = "dbcorrupt_dump_" + dbName + Session.SESSION_SEPARATION_CHAR_CHILD + dbCreateTime + ".log";
+        String corruptFileName =
+                "dbcorrupt_dump_"
+                        + dbName
+                        + Session.SESSION_SEPARATION_CHAR_CHILD
+                        + dbCreateTime
+                        + ".log";
         this.mDumpFile = new File(dumpDir, corruptFileName);
         return this.mDumpFile;
     }
@@ -239,16 +256,18 @@ public class SQLiteDump {
         if (dumpFiles == null || dumpFiles.length <= 5) {
             return;
         }
-        Arrays.sort(dumpFiles, new Comparator<File>() { // from class: android.database.sqlite.SQLiteDump.1
-            @Override // java.util.Comparator
-            public int compare(File f1, File f2) {
-                long diff = f1.lastModified() - f2.lastModified();
-                if (diff > 0) {
-                    return 1;
-                }
-                return diff == 0 ? 0 : -1;
-            }
-        });
+        Arrays.sort(
+                dumpFiles,
+                new Comparator<File>() { // from class: android.database.sqlite.SQLiteDump.1
+                    @Override // java.util.Comparator
+                    public int compare(File f1, File f2) {
+                        long diff = f1.lastModified() - f2.lastModified();
+                        if (diff > 0) {
+                            return 1;
+                        }
+                        return diff == 0 ? 0 : -1;
+                    }
+                });
         dumpFiles[0].delete();
     }
 

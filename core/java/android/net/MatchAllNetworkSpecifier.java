@@ -7,23 +7,27 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class MatchAllNetworkSpecifier extends NetworkSpecifier implements Parcelable {
-    public static final Parcelable.Creator<MatchAllNetworkSpecifier> CREATOR = new Parcelable.Creator<MatchAllNetworkSpecifier>() { // from class: android.net.MatchAllNetworkSpecifier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MatchAllNetworkSpecifier createFromParcel(Parcel in) {
-            return new MatchAllNetworkSpecifier();
-        }
+    public static final Parcelable.Creator<MatchAllNetworkSpecifier> CREATOR =
+            new Parcelable.Creator<
+                    MatchAllNetworkSpecifier>() { // from class:
+                                                  // android.net.MatchAllNetworkSpecifier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MatchAllNetworkSpecifier createFromParcel(Parcel in) {
+                    return new MatchAllNetworkSpecifier();
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MatchAllNetworkSpecifier[] newArray(int size) {
-            return new MatchAllNetworkSpecifier[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MatchAllNetworkSpecifier[] newArray(int size) {
+                    return new MatchAllNetworkSpecifier[size];
+                }
+            };
 
     @Override // android.net.NetworkSpecifier
     public boolean canBeSatisfiedBy(NetworkSpecifier other) {
-        throw new IllegalStateException("MatchAllNetworkSpecifier must not be used in NetworkRequests");
+        throw new IllegalStateException(
+                "MatchAllNetworkSpecifier must not be used in NetworkRequests");
     }
 
     public boolean equals(Object o) {
@@ -40,6 +44,5 @@ public final class MatchAllNetworkSpecifier extends NetworkSpecifier implements 
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-    }
+    public void writeToParcel(Parcel dest, int flags) {}
 }

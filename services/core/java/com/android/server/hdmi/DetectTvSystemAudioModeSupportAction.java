@@ -1,7 +1,5 @@
 package com.android.server.hdmi;
 
-import com.android.server.hdmi.HdmiCecFeatureAction;
-import com.android.server.hdmi.HdmiCecLocalDeviceAudioSystem;
 import java.util.Map;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -12,7 +10,8 @@ public final class DetectTvSystemAudioModeSupportAction extends HdmiCecFeatureAc
 
     public final void finishAction(boolean z) {
         this.mCallback.onResult(z);
-        ((HdmiCecLocalDeviceAudioSystem) this.mSource).mTvSystemAudioModeSupport = Boolean.valueOf(z);
+        ((HdmiCecLocalDeviceAudioSystem) this.mSource).mTvSystemAudioModeSupport =
+                Boolean.valueOf(z);
         finish(true);
     }
 
@@ -37,7 +36,10 @@ public final class DetectTvSystemAudioModeSupportAction extends HdmiCecFeatureAc
         }
         this.mState = 1;
         addTimer(1, 2000);
-        sendCommand(HdmiCecMessageBuilder.buildCommandWithBooleanParam(getSourceAddress(), 0, 114, true), new DetectTvSystemAudioModeSupportAction$$ExternalSyntheticLambda0(this));
+        sendCommand(
+                HdmiCecMessageBuilder.buildCommandWithBooleanParam(
+                        getSourceAddress(), 0, 114, true),
+                new DetectTvSystemAudioModeSupportAction$$ExternalSyntheticLambda0(this));
     }
 
     @Override // com.android.server.hdmi.HdmiCecFeatureAction
@@ -64,6 +66,9 @@ public final class DetectTvSystemAudioModeSupportAction extends HdmiCecFeatureAc
     public final void start() {
         this.mState = 1;
         addTimer(1, 2000);
-        sendCommand(HdmiCecMessageBuilder.buildCommandWithBooleanParam(getSourceAddress(), 0, 114, true), new DetectTvSystemAudioModeSupportAction$$ExternalSyntheticLambda0(this));
+        sendCommand(
+                HdmiCecMessageBuilder.buildCommandWithBooleanParam(
+                        getSourceAddress(), 0, 114, true),
+                new DetectTvSystemAudioModeSupportAction$$ExternalSyntheticLambda0(this));
     }
 }

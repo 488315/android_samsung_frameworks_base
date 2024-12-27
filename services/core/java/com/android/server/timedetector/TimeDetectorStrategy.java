@@ -1,6 +1,7 @@
 package com.android.server.timedetector;
 
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
+
 import com.android.server.timezonedetector.Dumpable;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,6 +23,7 @@ public interface TimeDetectorStrategy extends Dumpable {
         if (i == 5) {
             return "external";
         }
-        throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "origin="));
+        throw new IllegalArgumentException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "origin="));
     }
 }

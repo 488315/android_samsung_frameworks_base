@@ -2,7 +2,6 @@ package android.media;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.media.SubtitleTrack;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.view.accessibility.CaptioningManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import java.util.LinkedList;
 import java.util.Vector;
 
@@ -35,11 +35,13 @@ class TtmlRenderingWidget extends LinearLayout implements SubtitleTrack.Renderin
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public TtmlRenderingWidget(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public TtmlRenderingWidget(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mTextViewSet = new LinkedList<>();
         setLayerType(1, null);
-        this.mCaptionManager = (CaptioningManager) context.getSystemService(Context.CAPTIONING_SERVICE);
+        this.mCaptionManager =
+                (CaptioningManager) context.getSystemService(Context.CAPTIONING_SERVICE);
         this.mCaptionStyle = this.mCaptionManager.getUserStyle();
         CustomTextView customTextView = new CustomTextView(context);
         customTextView.setGravity(81);
@@ -89,7 +91,8 @@ class TtmlRenderingWidget extends LinearLayout implements SubtitleTrack.Renderin
     }
 
     public int applyOpacity(int color, int opacity) {
-        return Color.argb((opacity * 255) / 100, Color.red(color), Color.green(color), Color.blue(color));
+        return Color.argb(
+                (opacity * 255) / 100, Color.red(color), Color.green(color), Color.blue(color));
     }
 
     public void setActiveCues(Vector<SubtitleTrack.Cue> activeCues) {

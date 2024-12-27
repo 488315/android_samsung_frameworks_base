@@ -1,8 +1,9 @@
 package android.database.sqlite;
 
-import android.database.sqlite.SQLiteDebug;
 import android.util.Log;
+
 import com.samsung.android.lock.LsConstants;
+
 import java.io.File;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -16,7 +17,11 @@ public final class SQLiteWalBackgroundCheckpoint {
 
     public void tryBackgroundCheckpoint(SQLiteDatabase db, File walFile) {
         long now = System.currentTimeMillis();
-        if ((this.mLastCheckpointTime > 0 && now - this.mLastCheckpointTime < LsConstants.SKT_LOCKOUT_ATTEMPT_DEFAULT_TIMEOUT) || walFile.length() <= HUGE_WAL_SIZE_THRESHOLD || !this.mIsCheckpointRunning.compareAndSet(false, true)) {
+        if ((this.mLastCheckpointTime > 0
+                        && now - this.mLastCheckpointTime
+                                < LsConstants.SKT_LOCKOUT_ATTEMPT_DEFAULT_TIMEOUT)
+                || walFile.length() <= HUGE_WAL_SIZE_THRESHOLD
+                || !this.mIsCheckpointRunning.compareAndSet(false, true)) {
             return;
         }
         try {
@@ -39,10 +44,13 @@ public final class SQLiteWalBackgroundCheckpoint {
         public void run() {
             try {
                 try {
-                    SQLiteStatement statement = new SQLiteStatement(this.mDatabase, "PRAGMA wal_checkpoint(ADAPTIVE)", null);
+                    SQLiteStatement statement =
+                            new SQLiteStatement(
+                                    this.mDatabase, "PRAGMA wal_checkpoint(ADAPTIVE)", null);
                     try {
                         statement.simpleQueryForLong();
-                        SQLiteWalBackgroundCheckpoint.this.mLastCheckpointTime = System.currentTimeMillis();
+                        SQLiteWalBackgroundCheckpoint.this.mLastCheckpointTime =
+                                System.currentTimeMillis();
                         statement.close();
                     } catch (Throwable th) {
                         try {

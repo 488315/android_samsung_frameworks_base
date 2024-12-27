@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsConfigListener;
 import com.android.ims.internal.IImsConfig;
+
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
@@ -35,21 +37,19 @@ public class ImsConfigImplBase {
         return 1;
     }
 
-    public void getFeatureValue(int feature, int network, ImsConfigListener listener) throws RemoteException {
-    }
+    public void getFeatureValue(int feature, int network, ImsConfigListener listener)
+            throws RemoteException {}
 
-    public void setFeatureValue(int feature, int network, int value, ImsConfigListener listener) throws RemoteException {
-    }
+    public void setFeatureValue(int feature, int network, int value, ImsConfigListener listener)
+            throws RemoteException {}
 
     public boolean getVolteProvisioned() throws RemoteException {
         return false;
     }
 
-    public void getVideoQuality(ImsConfigListener listener) throws RemoteException {
-    }
+    public void getVideoQuality(ImsConfigListener listener) throws RemoteException {}
 
-    public void setVideoQuality(int quality, ImsConfigListener listener) throws RemoteException {
-    }
+    public void setVideoQuality(int quality, ImsConfigListener listener) throws RemoteException {}
 
     public IImsConfig getIImsConfig() {
         return this.mImsConfigStub;
@@ -106,13 +106,21 @@ public class ImsConfigImplBase {
             if (retVal == 0) {
                 updateCachedValue(item, value, true);
             } else {
-                Log.d(ImsConfigImplBase.TAG, "Set provision value of " + item + " to " + value + " failed with error code " + retVal);
+                Log.d(
+                        ImsConfigImplBase.TAG,
+                        "Set provision value of "
+                                + item
+                                + " to "
+                                + value
+                                + " failed with error code "
+                                + retVal);
             }
             return retVal;
         }
 
         @Override // com.android.ims.internal.IImsConfig
-        public synchronized int setProvisionedStringValue(int item, String value) throws RemoteException {
+        public synchronized int setProvisionedStringValue(int item, String value)
+                throws RemoteException {
             int retVal;
             this.mProvisionedStringValue.remove(Integer.valueOf(item));
             retVal = getImsConfigImpl().setProvisionedStringValue(item, value);
@@ -123,12 +131,14 @@ public class ImsConfigImplBase {
         }
 
         @Override // com.android.ims.internal.IImsConfig
-        public void getFeatureValue(int feature, int network, ImsConfigListener listener) throws RemoteException {
+        public void getFeatureValue(int feature, int network, ImsConfigListener listener)
+                throws RemoteException {
             getImsConfigImpl().getFeatureValue(feature, network, listener);
         }
 
         @Override // com.android.ims.internal.IImsConfig
-        public void setFeatureValue(int feature, int network, int value, ImsConfigListener listener) throws RemoteException {
+        public void setFeatureValue(int feature, int network, int value, ImsConfigListener listener)
+                throws RemoteException {
             getImsConfigImpl().setFeatureValue(feature, network, value, listener);
         }
 
@@ -143,7 +153,8 @@ public class ImsConfigImplBase {
         }
 
         @Override // com.android.ims.internal.IImsConfig
-        public void setVideoQuality(int quality, ImsConfigListener listener) throws RemoteException {
+        public void setVideoQuality(int quality, ImsConfigListener listener)
+                throws RemoteException {
             getImsConfigImpl().setVideoQuality(quality, listener);
         }
 
@@ -175,7 +186,8 @@ public class ImsConfigImplBase {
             }
         }
 
-        protected synchronized void updateCachedValue(int item, String value, boolean notifyChange) {
+        protected synchronized void updateCachedValue(
+                int item, String value, boolean notifyChange) {
             this.mProvisionedStringValue.put(Integer.valueOf(item), value);
             if (notifyChange) {
                 sendImsConfigChangedIntent(item, value);

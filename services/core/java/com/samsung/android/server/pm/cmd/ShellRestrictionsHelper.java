@@ -1,6 +1,7 @@
 package com.samsung.android.server.pm.cmd;
 
 import android.os.Binder;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,8 @@ public final class ShellRestrictionsHelper {
         if (Binder.getCallingUid() == 0) {
             return false;
         }
-        if (((i & 4) == 0 || !((ArrayList) this.mCmdBlockClearOnlyList).contains(str)) && !((ArrayList) this.mCmdKnoxBlockList).contains(str)) {
+        if (((i & 4) == 0 || !((ArrayList) this.mCmdBlockClearOnlyList).contains(str))
+                && !((ArrayList) this.mCmdKnoxBlockList).contains(str)) {
             return (i & 2) != 0 && ((ArrayList) this.mCmdBlockList).contains(str);
         }
         return true;

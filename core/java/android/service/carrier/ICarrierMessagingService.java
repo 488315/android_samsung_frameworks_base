@@ -6,47 +6,96 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.carrier.ICarrierMessagingCallback;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface ICarrierMessagingService extends IInterface {
-    void downloadMms(Uri uri, int i, Uri uri2, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException;
+    void downloadMms(Uri uri, int i, Uri uri2, ICarrierMessagingCallback iCarrierMessagingCallback)
+            throws RemoteException;
 
-    void filterSms(MessagePdu messagePdu, String str, int i, int i2, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException;
+    void filterSms(
+            MessagePdu messagePdu,
+            String str,
+            int i,
+            int i2,
+            ICarrierMessagingCallback iCarrierMessagingCallback)
+            throws RemoteException;
 
-    void sendDataSms(byte[] bArr, int i, String str, int i2, int i3, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException;
+    void sendDataSms(
+            byte[] bArr,
+            int i,
+            String str,
+            int i2,
+            int i3,
+            ICarrierMessagingCallback iCarrierMessagingCallback)
+            throws RemoteException;
 
-    void sendMms(Uri uri, int i, Uri uri2, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException;
+    void sendMms(Uri uri, int i, Uri uri2, ICarrierMessagingCallback iCarrierMessagingCallback)
+            throws RemoteException;
 
-    void sendMultipartTextSms(List<String> list, int i, String str, int i2, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException;
+    void sendMultipartTextSms(
+            List<String> list,
+            int i,
+            String str,
+            int i2,
+            ICarrierMessagingCallback iCarrierMessagingCallback)
+            throws RemoteException;
 
-    void sendTextSms(String str, int i, String str2, int i2, ICarrierMessagingCallback iCarrierMessagingCallback) throws RemoteException;
+    void sendTextSms(
+            String str,
+            int i,
+            String str2,
+            int i2,
+            ICarrierMessagingCallback iCarrierMessagingCallback)
+            throws RemoteException;
 
     public static class Default implements ICarrierMessagingService {
         @Override // android.service.carrier.ICarrierMessagingService
-        public void filterSms(MessagePdu pdu, String format, int destPort, int subId, ICarrierMessagingCallback callback) throws RemoteException {
-        }
+        public void filterSms(
+                MessagePdu pdu,
+                String format,
+                int destPort,
+                int subId,
+                ICarrierMessagingCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.carrier.ICarrierMessagingService
-        public void sendTextSms(String text, int subId, String destAddress, int sendSmsFlag, ICarrierMessagingCallback callback) throws RemoteException {
-        }
+        public void sendTextSms(
+                String text,
+                int subId,
+                String destAddress,
+                int sendSmsFlag,
+                ICarrierMessagingCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.carrier.ICarrierMessagingService
-        public void sendDataSms(byte[] data, int subId, String destAddress, int destPort, int sendSmsFlag, ICarrierMessagingCallback callback) throws RemoteException {
-        }
+        public void sendDataSms(
+                byte[] data,
+                int subId,
+                String destAddress,
+                int destPort,
+                int sendSmsFlag,
+                ICarrierMessagingCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.carrier.ICarrierMessagingService
-        public void sendMultipartTextSms(List<String> parts, int subId, String destAddress, int sendSmsFlag, ICarrierMessagingCallback callback) throws RemoteException {
-        }
+        public void sendMultipartTextSms(
+                List<String> parts,
+                int subId,
+                String destAddress,
+                int sendSmsFlag,
+                ICarrierMessagingCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.carrier.ICarrierMessagingService
-        public void sendMms(Uri pduUri, int subId, Uri location, ICarrierMessagingCallback callback) throws RemoteException {
-        }
+        public void sendMms(Uri pduUri, int subId, Uri location, ICarrierMessagingCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.carrier.ICarrierMessagingService
-        public void downloadMms(Uri pduUri, int subId, Uri location, ICarrierMessagingCallback callback) throws RemoteException {
-        }
+        public void downloadMms(
+                Uri pduUri, int subId, Uri location, ICarrierMessagingCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -54,7 +103,7 @@ public interface ICarrierMessagingService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICarrierMessagingService {
+    public abstract static class Stub extends Binder implements ICarrierMessagingService {
         public static final String DESCRIPTOR = "android.service.carrier.ICarrierMessagingService";
         static final int TRANSACTION_downloadMms = 6;
         static final int TRANSACTION_filterSms = 1;
@@ -108,7 +157,8 @@ public interface ICarrierMessagingService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -122,7 +172,8 @@ public interface ICarrierMessagingService extends IInterface {
                     String _arg1 = data.readString();
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
-                    ICarrierMessagingCallback _arg4 = ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
+                    ICarrierMessagingCallback _arg4 =
+                            ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     filterSms(_arg0, _arg1, _arg2, _arg3, _arg4);
                     return true;
@@ -131,7 +182,8 @@ public interface ICarrierMessagingService extends IInterface {
                     int _arg12 = data.readInt();
                     String _arg22 = data.readString();
                     int _arg32 = data.readInt();
-                    ICarrierMessagingCallback _arg42 = ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
+                    ICarrierMessagingCallback _arg42 =
+                            ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     sendTextSms(_arg02, _arg12, _arg22, _arg32, _arg42);
                     return true;
@@ -141,7 +193,8 @@ public interface ICarrierMessagingService extends IInterface {
                     String _arg23 = data.readString();
                     int _arg33 = data.readInt();
                     int _arg43 = data.readInt();
-                    ICarrierMessagingCallback _arg5 = ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
+                    ICarrierMessagingCallback _arg5 =
+                            ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     sendDataSms(_arg03, _arg13, _arg23, _arg33, _arg43, _arg5);
                     return true;
@@ -150,7 +203,8 @@ public interface ICarrierMessagingService extends IInterface {
                     int _arg14 = data.readInt();
                     String _arg24 = data.readString();
                     int _arg34 = data.readInt();
-                    ICarrierMessagingCallback _arg44 = ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
+                    ICarrierMessagingCallback _arg44 =
+                            ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     sendMultipartTextSms(_arg04, _arg14, _arg24, _arg34, _arg44);
                     return true;
@@ -158,7 +212,8 @@ public interface ICarrierMessagingService extends IInterface {
                     Uri _arg05 = (Uri) data.readTypedObject(Uri.CREATOR);
                     int _arg15 = data.readInt();
                     Uri _arg25 = (Uri) data.readTypedObject(Uri.CREATOR);
-                    ICarrierMessagingCallback _arg35 = ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
+                    ICarrierMessagingCallback _arg35 =
+                            ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     sendMms(_arg05, _arg15, _arg25, _arg35);
                     return true;
@@ -166,7 +221,8 @@ public interface ICarrierMessagingService extends IInterface {
                     Uri _arg06 = (Uri) data.readTypedObject(Uri.CREATOR);
                     int _arg16 = data.readInt();
                     Uri _arg26 = (Uri) data.readTypedObject(Uri.CREATOR);
-                    ICarrierMessagingCallback _arg36 = ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
+                    ICarrierMessagingCallback _arg36 =
+                            ICarrierMessagingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     downloadMms(_arg06, _arg16, _arg26, _arg36);
                     return true;
@@ -192,7 +248,13 @@ public interface ICarrierMessagingService extends IInterface {
             }
 
             @Override // android.service.carrier.ICarrierMessagingService
-            public void filterSms(MessagePdu pdu, String format, int destPort, int subId, ICarrierMessagingCallback callback) throws RemoteException {
+            public void filterSms(
+                    MessagePdu pdu,
+                    String format,
+                    int destPort,
+                    int subId,
+                    ICarrierMessagingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -208,7 +270,13 @@ public interface ICarrierMessagingService extends IInterface {
             }
 
             @Override // android.service.carrier.ICarrierMessagingService
-            public void sendTextSms(String text, int subId, String destAddress, int sendSmsFlag, ICarrierMessagingCallback callback) throws RemoteException {
+            public void sendTextSms(
+                    String text,
+                    int subId,
+                    String destAddress,
+                    int sendSmsFlag,
+                    ICarrierMessagingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -224,7 +292,14 @@ public interface ICarrierMessagingService extends IInterface {
             }
 
             @Override // android.service.carrier.ICarrierMessagingService
-            public void sendDataSms(byte[] data, int subId, String destAddress, int destPort, int sendSmsFlag, ICarrierMessagingCallback callback) throws RemoteException {
+            public void sendDataSms(
+                    byte[] data,
+                    int subId,
+                    String destAddress,
+                    int destPort,
+                    int sendSmsFlag,
+                    ICarrierMessagingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -241,7 +316,13 @@ public interface ICarrierMessagingService extends IInterface {
             }
 
             @Override // android.service.carrier.ICarrierMessagingService
-            public void sendMultipartTextSms(List<String> parts, int subId, String destAddress, int sendSmsFlag, ICarrierMessagingCallback callback) throws RemoteException {
+            public void sendMultipartTextSms(
+                    List<String> parts,
+                    int subId,
+                    String destAddress,
+                    int sendSmsFlag,
+                    ICarrierMessagingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -257,7 +338,9 @@ public interface ICarrierMessagingService extends IInterface {
             }
 
             @Override // android.service.carrier.ICarrierMessagingService
-            public void sendMms(Uri pduUri, int subId, Uri location, ICarrierMessagingCallback callback) throws RemoteException {
+            public void sendMms(
+                    Uri pduUri, int subId, Uri location, ICarrierMessagingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -272,7 +355,9 @@ public interface ICarrierMessagingService extends IInterface {
             }
 
             @Override // android.service.carrier.ICarrierMessagingService
-            public void downloadMms(Uri pduUri, int subId, Uri location, ICarrierMessagingCallback callback) throws RemoteException {
+            public void downloadMms(
+                    Uri pduUri, int subId, Uri location, ICarrierMessagingCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

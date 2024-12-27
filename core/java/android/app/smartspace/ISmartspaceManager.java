@@ -1,6 +1,5 @@
 package android.app.smartspace;
 
-import android.app.smartspace.ISmartspaceCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -11,42 +10,55 @@ import android.os.RemoteException;
 public interface ISmartspaceManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.smartspace.ISmartspaceManager";
 
-    void createSmartspaceSession(SmartspaceConfig smartspaceConfig, SmartspaceSessionId smartspaceSessionId, IBinder iBinder) throws RemoteException;
+    void createSmartspaceSession(
+            SmartspaceConfig smartspaceConfig,
+            SmartspaceSessionId smartspaceSessionId,
+            IBinder iBinder)
+            throws RemoteException;
 
     void destroySmartspaceSession(SmartspaceSessionId smartspaceSessionId) throws RemoteException;
 
-    void notifySmartspaceEvent(SmartspaceSessionId smartspaceSessionId, SmartspaceTargetEvent smartspaceTargetEvent) throws RemoteException;
+    void notifySmartspaceEvent(
+            SmartspaceSessionId smartspaceSessionId, SmartspaceTargetEvent smartspaceTargetEvent)
+            throws RemoteException;
 
-    void registerSmartspaceUpdates(SmartspaceSessionId smartspaceSessionId, ISmartspaceCallback iSmartspaceCallback) throws RemoteException;
+    void registerSmartspaceUpdates(
+            SmartspaceSessionId smartspaceSessionId, ISmartspaceCallback iSmartspaceCallback)
+            throws RemoteException;
 
     void requestSmartspaceUpdate(SmartspaceSessionId smartspaceSessionId) throws RemoteException;
 
-    void unregisterSmartspaceUpdates(SmartspaceSessionId smartspaceSessionId, ISmartspaceCallback iSmartspaceCallback) throws RemoteException;
+    void unregisterSmartspaceUpdates(
+            SmartspaceSessionId smartspaceSessionId, ISmartspaceCallback iSmartspaceCallback)
+            throws RemoteException;
 
     public static class Default implements ISmartspaceManager {
         @Override // android.app.smartspace.ISmartspaceManager
-        public void createSmartspaceSession(SmartspaceConfig config, SmartspaceSessionId sessionId, IBinder token) throws RemoteException {
-        }
+        public void createSmartspaceSession(
+                SmartspaceConfig config, SmartspaceSessionId sessionId, IBinder token)
+                throws RemoteException {}
 
         @Override // android.app.smartspace.ISmartspaceManager
-        public void notifySmartspaceEvent(SmartspaceSessionId sessionId, SmartspaceTargetEvent event) throws RemoteException {
-        }
+        public void notifySmartspaceEvent(
+                SmartspaceSessionId sessionId, SmartspaceTargetEvent event)
+                throws RemoteException {}
 
         @Override // android.app.smartspace.ISmartspaceManager
-        public void requestSmartspaceUpdate(SmartspaceSessionId sessionId) throws RemoteException {
-        }
+        public void requestSmartspaceUpdate(SmartspaceSessionId sessionId) throws RemoteException {}
 
         @Override // android.app.smartspace.ISmartspaceManager
-        public void registerSmartspaceUpdates(SmartspaceSessionId sessionId, ISmartspaceCallback callback) throws RemoteException {
-        }
+        public void registerSmartspaceUpdates(
+                SmartspaceSessionId sessionId, ISmartspaceCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.smartspace.ISmartspaceManager
-        public void unregisterSmartspaceUpdates(SmartspaceSessionId sessionId, ISmartspaceCallback callback) throws RemoteException {
-        }
+        public void unregisterSmartspaceUpdates(
+                SmartspaceSessionId sessionId, ISmartspaceCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.smartspace.ISmartspaceManager
-        public void destroySmartspaceSession(SmartspaceSessionId sessionId) throws RemoteException {
-        }
+        public void destroySmartspaceSession(SmartspaceSessionId sessionId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -54,7 +66,7 @@ public interface ISmartspaceManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISmartspaceManager {
+    public abstract static class Stub extends Binder implements ISmartspaceManager {
         static final int TRANSACTION_createSmartspaceSession = 1;
         static final int TRANSACTION_destroySmartspaceSession = 6;
         static final int TRANSACTION_notifySmartspaceEvent = 2;
@@ -107,7 +119,8 @@ public interface ISmartspaceManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISmartspaceManager.DESCRIPTOR);
             }
@@ -117,37 +130,48 @@ public interface ISmartspaceManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SmartspaceConfig _arg0 = (SmartspaceConfig) data.readTypedObject(SmartspaceConfig.CREATOR);
-                    SmartspaceSessionId _arg1 = (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
+                    SmartspaceConfig _arg0 =
+                            (SmartspaceConfig) data.readTypedObject(SmartspaceConfig.CREATOR);
+                    SmartspaceSessionId _arg1 =
+                            (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
                     IBinder _arg2 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     createSmartspaceSession(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    SmartspaceSessionId _arg02 = (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
-                    SmartspaceTargetEvent _arg12 = (SmartspaceTargetEvent) data.readTypedObject(SmartspaceTargetEvent.CREATOR);
+                    SmartspaceSessionId _arg02 =
+                            (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
+                    SmartspaceTargetEvent _arg12 =
+                            (SmartspaceTargetEvent)
+                                    data.readTypedObject(SmartspaceTargetEvent.CREATOR);
                     data.enforceNoDataAvail();
                     notifySmartspaceEvent(_arg02, _arg12);
                     return true;
                 case 3:
-                    SmartspaceSessionId _arg03 = (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
+                    SmartspaceSessionId _arg03 =
+                            (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
                     data.enforceNoDataAvail();
                     requestSmartspaceUpdate(_arg03);
                     return true;
                 case 4:
-                    SmartspaceSessionId _arg04 = (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
-                    ISmartspaceCallback _arg13 = ISmartspaceCallback.Stub.asInterface(data.readStrongBinder());
+                    SmartspaceSessionId _arg04 =
+                            (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
+                    ISmartspaceCallback _arg13 =
+                            ISmartspaceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerSmartspaceUpdates(_arg04, _arg13);
                     return true;
                 case 5:
-                    SmartspaceSessionId _arg05 = (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
-                    ISmartspaceCallback _arg14 = ISmartspaceCallback.Stub.asInterface(data.readStrongBinder());
+                    SmartspaceSessionId _arg05 =
+                            (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
+                    ISmartspaceCallback _arg14 =
+                            ISmartspaceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterSmartspaceUpdates(_arg05, _arg14);
                     return true;
                 case 6:
-                    SmartspaceSessionId _arg06 = (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
+                    SmartspaceSessionId _arg06 =
+                            (SmartspaceSessionId) data.readTypedObject(SmartspaceSessionId.CREATOR);
                     data.enforceNoDataAvail();
                     destroySmartspaceSession(_arg06);
                     return true;
@@ -173,7 +197,9 @@ public interface ISmartspaceManager extends IInterface {
             }
 
             @Override // android.app.smartspace.ISmartspaceManager
-            public void createSmartspaceSession(SmartspaceConfig config, SmartspaceSessionId sessionId, IBinder token) throws RemoteException {
+            public void createSmartspaceSession(
+                    SmartspaceConfig config, SmartspaceSessionId sessionId, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISmartspaceManager.DESCRIPTOR);
@@ -187,7 +213,9 @@ public interface ISmartspaceManager extends IInterface {
             }
 
             @Override // android.app.smartspace.ISmartspaceManager
-            public void notifySmartspaceEvent(SmartspaceSessionId sessionId, SmartspaceTargetEvent event) throws RemoteException {
+            public void notifySmartspaceEvent(
+                    SmartspaceSessionId sessionId, SmartspaceTargetEvent event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISmartspaceManager.DESCRIPTOR);
@@ -200,7 +228,8 @@ public interface ISmartspaceManager extends IInterface {
             }
 
             @Override // android.app.smartspace.ISmartspaceManager
-            public void requestSmartspaceUpdate(SmartspaceSessionId sessionId) throws RemoteException {
+            public void requestSmartspaceUpdate(SmartspaceSessionId sessionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISmartspaceManager.DESCRIPTOR);
@@ -212,7 +241,9 @@ public interface ISmartspaceManager extends IInterface {
             }
 
             @Override // android.app.smartspace.ISmartspaceManager
-            public void registerSmartspaceUpdates(SmartspaceSessionId sessionId, ISmartspaceCallback callback) throws RemoteException {
+            public void registerSmartspaceUpdates(
+                    SmartspaceSessionId sessionId, ISmartspaceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISmartspaceManager.DESCRIPTOR);
@@ -225,7 +256,9 @@ public interface ISmartspaceManager extends IInterface {
             }
 
             @Override // android.app.smartspace.ISmartspaceManager
-            public void unregisterSmartspaceUpdates(SmartspaceSessionId sessionId, ISmartspaceCallback callback) throws RemoteException {
+            public void unregisterSmartspaceUpdates(
+                    SmartspaceSessionId sessionId, ISmartspaceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISmartspaceManager.DESCRIPTOR);
@@ -238,7 +271,8 @@ public interface ISmartspaceManager extends IInterface {
             }
 
             @Override // android.app.smartspace.ISmartspaceManager
-            public void destroySmartspaceSession(SmartspaceSessionId sessionId) throws RemoteException {
+            public void destroySmartspaceSession(SmartspaceSessionId sessionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISmartspaceManager.DESCRIPTOR);

@@ -10,7 +10,8 @@ public final /* synthetic */ class LocationEventLog$$ExternalSyntheticLambda0 {
     public final /* synthetic */ long f$2;
     public final /* synthetic */ Consumer f$3;
 
-    public /* synthetic */ LocationEventLog$$ExternalSyntheticLambda0(String str, StringBuilder sb, long j, Consumer consumer) {
+    public /* synthetic */ LocationEventLog$$ExternalSyntheticLambda0(
+            String str, StringBuilder sb, long j, Consumer consumer) {
         this.f$0 = str;
         this.f$1 = sb;
         this.f$2 = j;

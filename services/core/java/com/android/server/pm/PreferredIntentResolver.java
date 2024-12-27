@@ -1,8 +1,10 @@
 package com.android.server.pm;
 
 import android.content.IntentFilter;
+
 import com.android.server.am.ProcessList$$ExternalSyntheticOutline0;
 import com.android.server.utils.SnapshotCache;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -36,7 +38,8 @@ public final class PreferredIntentResolver extends WatchedIntentResolver {
         printWriter.print(str);
         printWriter.print(Integer.toHexString(System.identityHashCode(preferredActivity)));
         printWriter.print(' ');
-        ProcessList$$ExternalSyntheticOutline0.m(printWriter, preferredComponent.mShortComponent, str, " mMatch=0x");
+        ProcessList$$ExternalSyntheticOutline0.m(
+                printWriter, preferredComponent.mShortComponent, str, " mMatch=0x");
         printWriter.print(Integer.toHexString(preferredComponent.mMatch));
         printWriter.print(" mAlways=");
         printWriter.println(preferredComponent.mAlways);

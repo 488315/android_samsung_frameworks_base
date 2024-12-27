@@ -15,12 +15,11 @@ public interface IPackageDeleteObserver2 extends IInterface {
 
     public static class Default implements IPackageDeleteObserver2 {
         @Override // android.content.pm.IPackageDeleteObserver2
-        public void onUserActionRequired(Intent intent) throws RemoteException {
-        }
+        public void onUserActionRequired(Intent intent) throws RemoteException {}
 
         @Override // android.content.pm.IPackageDeleteObserver2
-        public void onPackageDeleted(String packageName, int returnCode, String msg) throws RemoteException {
-        }
+        public void onPackageDeleted(String packageName, int returnCode, String msg)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +27,7 @@ public interface IPackageDeleteObserver2 extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPackageDeleteObserver2 {
+    public abstract static class Stub extends Binder implements IPackageDeleteObserver2 {
         public static final String DESCRIPTOR = "android.content.pm.IPackageDeleteObserver2";
         static final int TRANSACTION_onPackageDeleted = 2;
         static final int TRANSACTION_onUserActionRequired = 1;
@@ -70,7 +69,8 @@ public interface IPackageDeleteObserver2 extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -125,7 +125,8 @@ public interface IPackageDeleteObserver2 extends IInterface {
             }
 
             @Override // android.content.pm.IPackageDeleteObserver2
-            public void onPackageDeleted(String packageName, int returnCode, String msg) throws RemoteException {
+            public void onPackageDeleted(String packageName, int returnCode, String msg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

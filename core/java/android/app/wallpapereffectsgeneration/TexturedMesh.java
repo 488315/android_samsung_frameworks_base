@@ -4,25 +4,28 @@ import android.annotation.SystemApi;
 import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class TexturedMesh implements Parcelable {
-    public static final Parcelable.Creator<TexturedMesh> CREATOR = new Parcelable.Creator<TexturedMesh>() { // from class: android.app.wallpapereffectsgeneration.TexturedMesh.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TexturedMesh createFromParcel(Parcel in) {
-            return new TexturedMesh(in);
-        }
+    public static final Parcelable.Creator<TexturedMesh> CREATOR =
+            new Parcelable.Creator<TexturedMesh>() { // from class:
+                // android.app.wallpapereffectsgeneration.TexturedMesh.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TexturedMesh createFromParcel(Parcel in) {
+                    return new TexturedMesh(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TexturedMesh[] newArray(int size) {
-            return new TexturedMesh[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TexturedMesh[] newArray(int size) {
+                    return new TexturedMesh[size];
+                }
+            };
     public static final int INDICES_LAYOUT_TRIANGLES = 1;
     public static final int INDICES_LAYOUT_UNDEFINED = 0;
     public static final int VERTICES_LAYOUT_POSITION3_UV2 = 1;
@@ -34,12 +37,10 @@ public final class TexturedMesh implements Parcelable {
     private int mVerticesLayoutType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface IndicesLayoutType {
-    }
+    public @interface IndicesLayoutType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VerticesLayoutType {
-    }
+    public @interface VerticesLayoutType {}
 
     private TexturedMesh(Parcel in) {
         this.mIndicesLayoutType = in.readInt();
@@ -57,7 +58,12 @@ public final class TexturedMesh implements Parcelable {
         }
     }
 
-    private TexturedMesh(Bitmap bitmap, int[] indices, float[] vertices, int indicesLayoutType, int verticesLayoutType) {
+    private TexturedMesh(
+            Bitmap bitmap,
+            int[] indices,
+            float[] vertices,
+            int indicesLayoutType,
+            int verticesLayoutType) {
         this.mBitmap = bitmap;
         this.mIndices = indices;
         this.mVertices = vertices;
@@ -139,7 +145,12 @@ public final class TexturedMesh implements Parcelable {
         }
 
         public TexturedMesh build() {
-            return new TexturedMesh(this.mBitmap, this.mIndices, this.mVertices, this.mIndicesLayoutType, this.mVerticesLayouttype);
+            return new TexturedMesh(
+                    this.mBitmap,
+                    this.mIndices,
+                    this.mVertices,
+                    this.mIndicesLayoutType,
+                    this.mVerticesLayouttype);
         }
     }
 }

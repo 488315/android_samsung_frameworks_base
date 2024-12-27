@@ -1,12 +1,14 @@
 package com.android.modules.utils;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import org.xmlpull.v1.XmlSerializer;
 
 /* loaded from: classes5.dex */
 public class BinaryXmlSerializer implements TypedXmlSerializer {
@@ -105,7 +107,9 @@ public class BinaryXmlSerializer implements TypedXmlSerializer {
             throw illegalNamespace();
         }
         if (this.mTagCount == this.mTagNames.length) {
-            this.mTagNames = (String[]) Arrays.copyOf(this.mTagNames, this.mTagCount + (this.mTagCount >> 1));
+            this.mTagNames =
+                    (String[])
+                            Arrays.copyOf(this.mTagNames, this.mTagCount + (this.mTagCount >> 1));
         }
         String[] strArr = this.mTagNames;
         int i = this.mTagCount;
@@ -139,7 +143,8 @@ public class BinaryXmlSerializer implements TypedXmlSerializer {
     }
 
     @Override // com.android.modules.utils.TypedXmlSerializer
-    public XmlSerializer attributeInterned(String namespace, String name, String value) throws IOException {
+    public XmlSerializer attributeInterned(String namespace, String name, String value)
+            throws IOException {
         if (namespace != null && !namespace.isEmpty()) {
             throw illegalNamespace();
         }
@@ -150,14 +155,19 @@ public class BinaryXmlSerializer implements TypedXmlSerializer {
     }
 
     @Override // com.android.modules.utils.TypedXmlSerializer
-    public XmlSerializer attributeBytesHex(String namespace, String name, byte[] value) throws IOException {
+    public XmlSerializer attributeBytesHex(String namespace, String name, byte[] value)
+            throws IOException {
         if (namespace != null && !namespace.isEmpty()) {
             throw illegalNamespace();
         }
         this.mOut.writeByte(79);
         this.mOut.writeInternedUTF(name);
         if (value.length > 65535) {
-            throw new IOException("attributeBytesHex: input size (" + value.length + ") exceeds maximum allowed size (65535" + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IOException(
+                    "attributeBytesHex: input size ("
+                            + value.length
+                            + ") exceeds maximum allowed size (65535"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mOut.writeShort(value.length);
         this.mOut.write(value);
@@ -165,14 +175,19 @@ public class BinaryXmlSerializer implements TypedXmlSerializer {
     }
 
     @Override // com.android.modules.utils.TypedXmlSerializer
-    public XmlSerializer attributeBytesBase64(String namespace, String name, byte[] value) throws IOException {
+    public XmlSerializer attributeBytesBase64(String namespace, String name, byte[] value)
+            throws IOException {
         if (namespace != null && !namespace.isEmpty()) {
             throw illegalNamespace();
         }
         this.mOut.writeByte(95);
         this.mOut.writeInternedUTF(name);
         if (value.length > 65535) {
-            throw new IOException("attributeBytesBase64: input size (" + value.length + ") exceeds maximum allowed size (65535" + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IOException(
+                    "attributeBytesBase64: input size ("
+                            + value.length
+                            + ") exceeds maximum allowed size (65535"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mOut.writeShort(value.length);
         this.mOut.write(value);
@@ -191,7 +206,8 @@ public class BinaryXmlSerializer implements TypedXmlSerializer {
     }
 
     @Override // com.android.modules.utils.TypedXmlSerializer
-    public XmlSerializer attributeIntHex(String namespace, String name, int value) throws IOException {
+    public XmlSerializer attributeIntHex(String namespace, String name, int value)
+            throws IOException {
         if (namespace != null && !namespace.isEmpty()) {
             throw illegalNamespace();
         }
@@ -202,7 +218,8 @@ public class BinaryXmlSerializer implements TypedXmlSerializer {
     }
 
     @Override // com.android.modules.utils.TypedXmlSerializer
-    public XmlSerializer attributeLong(String namespace, String name, long value) throws IOException {
+    public XmlSerializer attributeLong(String namespace, String name, long value)
+            throws IOException {
         if (namespace != null && !namespace.isEmpty()) {
             throw illegalNamespace();
         }
@@ -213,7 +230,8 @@ public class BinaryXmlSerializer implements TypedXmlSerializer {
     }
 
     @Override // com.android.modules.utils.TypedXmlSerializer
-    public XmlSerializer attributeLongHex(String namespace, String name, long value) throws IOException {
+    public XmlSerializer attributeLongHex(String namespace, String name, long value)
+            throws IOException {
         if (namespace != null && !namespace.isEmpty()) {
             throw illegalNamespace();
         }
@@ -224,7 +242,8 @@ public class BinaryXmlSerializer implements TypedXmlSerializer {
     }
 
     @Override // com.android.modules.utils.TypedXmlSerializer
-    public XmlSerializer attributeFloat(String namespace, String name, float value) throws IOException {
+    public XmlSerializer attributeFloat(String namespace, String name, float value)
+            throws IOException {
         if (namespace != null && !namespace.isEmpty()) {
             throw illegalNamespace();
         }
@@ -235,7 +254,8 @@ public class BinaryXmlSerializer implements TypedXmlSerializer {
     }
 
     @Override // com.android.modules.utils.TypedXmlSerializer
-    public XmlSerializer attributeDouble(String namespace, String name, double value) throws IOException {
+    public XmlSerializer attributeDouble(String namespace, String name, double value)
+            throws IOException {
         if (namespace != null && !namespace.isEmpty()) {
             throw illegalNamespace();
         }
@@ -246,7 +266,8 @@ public class BinaryXmlSerializer implements TypedXmlSerializer {
     }
 
     @Override // com.android.modules.utils.TypedXmlSerializer
-    public XmlSerializer attributeBoolean(String namespace, String name, boolean value) throws IOException {
+    public XmlSerializer attributeBoolean(String namespace, String name, boolean value)
+            throws IOException {
         if (namespace != null && !namespace.isEmpty()) {
             throw illegalNamespace();
         }

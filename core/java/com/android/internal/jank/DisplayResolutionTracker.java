@@ -6,6 +6,7 @@ import android.hardware.display.DisplayManagerGlobal;
 import android.os.Handler;
 import android.util.SparseArray;
 import android.view.DisplayInfo;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -22,8 +23,7 @@ public class DisplayResolutionTracker {
     private final SparseArray<Integer> mResolutions;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Resolution {
-    }
+    public @interface Resolution {}
 
     public DisplayResolutionTracker(Handler handler) {
         this(DisplayInterface.getDefault(handler));
@@ -33,21 +33,23 @@ public class DisplayResolutionTracker {
         this.mResolutions = new SparseArray<>();
         this.mLock = new Object();
         this.mManager = manager;
-        this.mManager.registerDisplayListener(new DisplayManager.DisplayListener() { // from class: com.android.internal.jank.DisplayResolutionTracker.1
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public void onDisplayAdded(int displayId) {
-                DisplayResolutionTracker.this.updateDisplay(displayId);
-            }
+        this.mManager.registerDisplayListener(
+                new DisplayManager
+                        .DisplayListener() { // from class:
+                                             // com.android.internal.jank.DisplayResolutionTracker.1
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public void onDisplayAdded(int displayId) {
+                        DisplayResolutionTracker.this.updateDisplay(displayId);
+                    }
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public void onDisplayChanged(int displayId) {
-                DisplayResolutionTracker.this.updateDisplay(displayId);
-            }
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public void onDisplayChanged(int displayId) {
+                        DisplayResolutionTracker.this.updateDisplay(displayId);
+                    }
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public void onDisplayRemoved(int displayId) {
-            }
-        });
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public void onDisplayRemoved(int displayId) {}
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -88,10 +90,12 @@ public class DisplayResolutionTracker {
 
         static DisplayInterface getDefault(final Handler handler) {
             final DisplayManagerGlobal manager = DisplayManagerGlobal.getInstance();
-            return new DisplayInterface() { // from class: com.android.internal.jank.DisplayResolutionTracker.DisplayInterface.1
+            return new DisplayInterface() { // from class:
+                                            // com.android.internal.jank.DisplayResolutionTracker.DisplayInterface.1
                 @Override // com.android.internal.jank.DisplayResolutionTracker.DisplayInterface
                 public void registerDisplayListener(DisplayManager.DisplayListener listener) {
-                    DisplayManagerGlobal.this.registerDisplayListener(listener, handler, 5L, ActivityThread.currentPackageName());
+                    DisplayManagerGlobal.this.registerDisplayListener(
+                            listener, handler, 5L, ActivityThread.currentPackageName());
                 }
 
                 @Override // com.android.internal.jank.DisplayResolutionTracker.DisplayInterface

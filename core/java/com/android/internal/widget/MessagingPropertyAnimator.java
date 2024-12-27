@@ -7,8 +7,7 @@ import android.util.IntProperty;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
-import com.android.internal.widget.MessagingLinearLayout;
-import com.android.internal.widget.ViewClippingUtil;
+
 import com.samsung.android.wallpaperbackup.GenerateXML;
 
 /* loaded from: classes5.dex */
@@ -21,30 +20,46 @@ public class MessagingPropertyAnimator implements View.OnLayoutChangeListener {
     private static final int TAG_TOP_ANIMATOR = 16909854;
     public static final Interpolator ALPHA_IN = new PathInterpolator(0.4f, 0.0f, 1.0f, 1.0f);
     public static final Interpolator ALPHA_OUT = new PathInterpolator(0.0f, 0.0f, 0.8f, 1.0f);
-    private static final ViewClippingUtil.ClippingParameters CLIPPING_PARAMETERS = new ViewClippingUtil.ClippingParameters() { // from class: com.android.internal.widget.MessagingPropertyAnimator$$ExternalSyntheticLambda0
-        @Override // com.android.internal.widget.ViewClippingUtil.ClippingParameters
-        public final boolean shouldFinish(View view) {
-            return MessagingPropertyAnimator.lambda$static$0(view);
-        }
-    };
-    private static final IntProperty<View> TOP = new IntProperty<View>(GenerateXML.TOP) { // from class: com.android.internal.widget.MessagingPropertyAnimator.1
-        @Override // android.util.IntProperty
-        public void setValue(View object, int value) {
-            MessagingPropertyAnimator.setTop(object, value);
-        }
+    private static final ViewClippingUtil.ClippingParameters CLIPPING_PARAMETERS =
+            new ViewClippingUtil
+                    .ClippingParameters() { // from class:
+                                            // com.android.internal.widget.MessagingPropertyAnimator$$ExternalSyntheticLambda0
+                @Override // com.android.internal.widget.ViewClippingUtil.ClippingParameters
+                public final boolean shouldFinish(View view) {
+                    return MessagingPropertyAnimator.lambda$static$0(view);
+                }
+            };
+    private static final IntProperty<View> TOP =
+            new IntProperty<View>(
+                    GenerateXML
+                            .TOP) { // from class:
+                                    // com.android.internal.widget.MessagingPropertyAnimator.1
+                @Override // android.util.IntProperty
+                public void setValue(View object, int value) {
+                    MessagingPropertyAnimator.setTop(object, value);
+                }
 
-        @Override // android.util.Property
-        public Integer get(View object) {
-            return Integer.valueOf(MessagingPropertyAnimator.getTop(object));
-        }
-    };
+                @Override // android.util.Property
+                public Integer get(View object) {
+                    return Integer.valueOf(MessagingPropertyAnimator.getTop(object));
+                }
+            };
 
     static /* synthetic */ boolean lambda$static$0(View view) {
         return view.getId() == 16909415;
     }
 
     @Override // android.view.View.OnLayoutChangeListener
-    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+    public void onLayoutChange(
+            View v,
+            int left,
+            int top,
+            int right,
+            int bottom,
+            int oldLeft,
+            int oldTop,
+            int oldRight,
+            int oldBottom) {
         setLayoutTop(v, top);
         if (isFirstLayout(v)) {
             setFirstLayout(v, false);
@@ -82,11 +97,13 @@ public class MessagingPropertyAnimator implements View.OnLayoutChangeListener {
         return tag.intValue();
     }
 
-    public static void startLocalTranslationFrom(View view, int startTranslation, Interpolator interpolator) {
+    public static void startLocalTranslationFrom(
+            View view, int startTranslation, Interpolator interpolator) {
         startTopAnimation(view, getTop(view) + startTranslation, getLayoutTop(view), interpolator);
     }
 
-    public static void startLocalTranslationTo(View view, int endTranslation, Interpolator interpolator) {
+    public static void startLocalTranslationTo(
+            View view, int endTranslation, Interpolator interpolator) {
         int top = getTop(view);
         startTopAnimation(view, top, top + endTranslation, interpolator);
     }
@@ -112,12 +129,15 @@ public class MessagingPropertyAnimator implements View.OnLayoutChangeListener {
         v.setBottom(height + top);
     }
 
-    private static void startTopAnimation(final View v, int start, int end, Interpolator interpolator) {
+    private static void startTopAnimation(
+            final View v, int start, int end, Interpolator interpolator) {
         ObjectAnimator existing = (ObjectAnimator) v.getTag(16909854);
         if (existing != null) {
             existing.cancel();
         }
-        if (!v.isShown() || start == end || (MessagingLinearLayout.isGone(v) && !isHidingAnimated(v))) {
+        if (!v.isShown()
+                || start == end
+                || (MessagingLinearLayout.isGone(v) && !isHidingAnimated(v))) {
             setTop(v, end);
             return;
         }
@@ -125,20 +145,24 @@ public class MessagingPropertyAnimator implements View.OnLayoutChangeListener {
         setTop(v, start);
         animator.setInterpolator(interpolator);
         animator.setDuration(APPEAR_ANIMATION_LENGTH);
-        animator.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.MessagingPropertyAnimator.2
-            public boolean mCancelled;
+        animator.addListener(
+                new AnimatorListenerAdapter() { // from class:
+                                                // com.android.internal.widget.MessagingPropertyAnimator.2
+                    public boolean mCancelled;
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                View.this.setTagInternal(16909854, null);
-                MessagingPropertyAnimator.setClippingDeactivated(View.this, false);
-            }
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        View.this.setTagInternal(16909854, null);
+                        MessagingPropertyAnimator.setClippingDeactivated(View.this, false);
+                    }
 
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationCancel(Animator animation) {
-                this.mCancelled = true;
-            }
-        });
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationCancel(Animator animation) {
+                        this.mCancelled = true;
+                    }
+                });
         setClippingDeactivated(v, true);
         v.setTagInternal(16909854, animator);
         animator.start();
@@ -164,13 +188,16 @@ public class MessagingPropertyAnimator implements View.OnLayoutChangeListener {
         v.setAlpha(0.0f);
         animator.setInterpolator(ALPHA_IN);
         animator.setDuration(APPEAR_ANIMATION_LENGTH);
-        animator.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.MessagingPropertyAnimator.3
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                View.this.setTagInternal(16909848, null);
-                MessagingPropertyAnimator.updateLayerType(View.this, false);
-            }
-        });
+        animator.addListener(
+                new AnimatorListenerAdapter() { // from class:
+                                                // com.android.internal.widget.MessagingPropertyAnimator.3
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        View.this.setTagInternal(16909848, null);
+                        MessagingPropertyAnimator.updateLayerType(View.this, false);
+                    }
+                });
         updateLayerType(v, true);
         v.setTagInternal(16909848, animator);
         animator.start();
@@ -201,16 +228,19 @@ public class MessagingPropertyAnimator implements View.OnLayoutChangeListener {
         ObjectAnimator animator = ObjectAnimator.ofFloat(view, View.ALPHA, view.getAlpha(), 0.0f);
         animator.setInterpolator(ALPHA_OUT);
         animator.setDuration(APPEAR_ANIMATION_LENGTH);
-        animator.addListener(new AnimatorListenerAdapter() { // from class: com.android.internal.widget.MessagingPropertyAnimator.4
-            @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animation) {
-                View.this.setTagInternal(16909848, null);
-                MessagingPropertyAnimator.updateLayerType(View.this, false);
-                if (endAction != null) {
-                    endAction.run();
-                }
-            }
-        });
+        animator.addListener(
+                new AnimatorListenerAdapter() { // from class:
+                                                // com.android.internal.widget.MessagingPropertyAnimator.4
+                    @Override // android.animation.AnimatorListenerAdapter,
+                              // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animation) {
+                        View.this.setTagInternal(16909848, null);
+                        MessagingPropertyAnimator.updateLayerType(View.this, false);
+                        if (endAction != null) {
+                            endAction.run();
+                        }
+                    }
+                });
         updateLayerType(view, true);
         view.setTagInternal(16909848, animator);
         animator.start();

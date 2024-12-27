@@ -16,16 +16,13 @@ public interface IMidiDeviceListener extends IInterface {
 
     public static class Default implements IMidiDeviceListener {
         @Override // android.media.midi.IMidiDeviceListener
-        public void onDeviceAdded(MidiDeviceInfo device) throws RemoteException {
-        }
+        public void onDeviceAdded(MidiDeviceInfo device) throws RemoteException {}
 
         @Override // android.media.midi.IMidiDeviceListener
-        public void onDeviceRemoved(MidiDeviceInfo device) throws RemoteException {
-        }
+        public void onDeviceRemoved(MidiDeviceInfo device) throws RemoteException {}
 
         @Override // android.media.midi.IMidiDeviceListener
-        public void onDeviceStatusChanged(MidiDeviceStatus status) throws RemoteException {
-        }
+        public void onDeviceStatusChanged(MidiDeviceStatus status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +30,7 @@ public interface IMidiDeviceListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMidiDeviceListener {
+    public abstract static class Stub extends Binder implements IMidiDeviceListener {
         public static final String DESCRIPTOR = "android.media.midi.IMidiDeviceListener";
         static final int TRANSACTION_onDeviceAdded = 1;
         static final int TRANSACTION_onDeviceRemoved = 2;
@@ -78,7 +75,8 @@ public interface IMidiDeviceListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -88,17 +86,20 @@ public interface IMidiDeviceListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    MidiDeviceInfo _arg0 = (MidiDeviceInfo) data.readTypedObject(MidiDeviceInfo.CREATOR);
+                    MidiDeviceInfo _arg0 =
+                            (MidiDeviceInfo) data.readTypedObject(MidiDeviceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onDeviceAdded(_arg0);
                     return true;
                 case 2:
-                    MidiDeviceInfo _arg02 = (MidiDeviceInfo) data.readTypedObject(MidiDeviceInfo.CREATOR);
+                    MidiDeviceInfo _arg02 =
+                            (MidiDeviceInfo) data.readTypedObject(MidiDeviceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onDeviceRemoved(_arg02);
                     return true;
                 case 3:
-                    MidiDeviceStatus _arg03 = (MidiDeviceStatus) data.readTypedObject(MidiDeviceStatus.CREATOR);
+                    MidiDeviceStatus _arg03 =
+                            (MidiDeviceStatus) data.readTypedObject(MidiDeviceStatus.CREATOR);
                     data.enforceNoDataAvail();
                     onDeviceStatusChanged(_arg03);
                     return true;

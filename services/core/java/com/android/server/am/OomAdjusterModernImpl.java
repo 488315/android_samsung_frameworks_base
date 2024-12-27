@@ -4,8 +4,10 @@ import android.os.SystemClock;
 import android.os.Trace;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.ServiceThread;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.BiConsumer;
@@ -15,8 +17,28 @@ import java.util.function.ToIntFunction;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class OomAdjusterModernImpl extends OomAdjuster {
-    public static final int[] ADJ_SLOT_VALUES = {-1000, -900, -800, -700, 0, 50, 100, 200, 225, FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE, 300, 400, 500, 600, 700, 800, FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT, 1001};
-    public final ComputeConnectionIgnoringReachableClientsConsumer mComputeConnectionIgnoringReachableClientsConsumer;
+    public static final int[] ADJ_SLOT_VALUES = {
+        -1000,
+        -900,
+        -800,
+        -700,
+        0,
+        50,
+        100,
+        200,
+        225,
+        FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT,
+        1001
+    };
+    public final ComputeConnectionIgnoringReachableClientsConsumer
+            mComputeConnectionIgnoringReachableClientsConsumer;
     public final ComputeConnectionsConsumer mComputeConnectionsConsumer;
     public final ComputeHostConsumer mComputeHostConsumer;
     public final ProcessRecordNodes mProcessRecordAdjNodes;
@@ -29,8 +51,7 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
         public boolean hasReachableClient;
         public OomAdjusterArgs mArgs = null;
 
-        public ComputeConnectionIgnoringReachableClientsConsumer() {
-        }
+        public ComputeConnectionIgnoringReachableClientsConsumer() {}
 
         @Override // java.util.function.BiConsumer
         public final void accept(Object obj, Object obj2) {
@@ -45,14 +66,20 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
                 return;
             }
             Flags.skipUnimportantConnections();
-            connection.computeHostOomAdjLSP(OomAdjusterModernImpl.this, processRecord2, processRecord, j, processRecord3, false, i);
+            connection.computeHostOomAdjLSP(
+                    OomAdjusterModernImpl.this,
+                    processRecord2,
+                    processRecord,
+                    j,
+                    processRecord3,
+                    false,
+                    i);
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ComputeConnectionsConsumer implements Consumer {
-        public ComputeConnectionsConsumer() {
-        }
+        public ComputeConnectionsConsumer() {}
 
         @Override // java.util.function.Consumer
         public final void accept(OomAdjusterArgs oomAdjusterArgs) {
@@ -63,7 +90,8 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
             if (activeUids != null && (uidRecord = processRecord.mUidRecord) != null) {
                 activeUids.put(uidRecord.mUid, uidRecord);
             }
-            ComputeHostConsumer computeHostConsumer = OomAdjusterModernImpl.this.mComputeHostConsumer;
+            ComputeHostConsumer computeHostConsumer =
+                    OomAdjusterModernImpl.this.mComputeHostConsumer;
             computeHostConsumer.args = oomAdjusterArgs;
             OomAdjusterModernImpl.forEachConnectionLSP(processRecord, computeHostConsumer);
         }
@@ -73,8 +101,7 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
     public final class ComputeHostConsumer implements BiConsumer {
         public OomAdjusterArgs args = null;
 
-        public ComputeHostConsumer() {
-        }
+        public ComputeHostConsumer() {}
 
         @Override // java.util.function.BiConsumer
         public final void accept(Object obj, Object obj2) {
@@ -90,7 +117,14 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
             int i2 = processStateRecord.mCurProcState;
             int i3 = processStateRecord.mCurRawAdj;
             Flags.skipUnimportantConnections();
-            connection.computeHostOomAdjLSP(OomAdjusterModernImpl.this, processRecord, processRecord2, j, processRecord3, z, i);
+            connection.computeHostOomAdjLSP(
+                    OomAdjusterModernImpl.this,
+                    processRecord,
+                    processRecord2,
+                    j,
+                    processRecord3,
+                    z,
+                    i);
             OomAdjusterModernImpl oomAdjusterModernImpl = OomAdjusterModernImpl.this;
             oomAdjusterModernImpl.getClass();
             if (processRecord.mState.mCurProcState != i2) {
@@ -108,7 +142,14 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Connection {
-        void computeHostOomAdjLSP(OomAdjuster oomAdjuster, ProcessRecord processRecord, ProcessRecord processRecord2, long j, ProcessRecord processRecord3, boolean z, int i);
+        void computeHostOomAdjLSP(
+                OomAdjuster oomAdjuster,
+                ProcessRecord processRecord,
+                ProcessRecord processRecord2,
+                long j,
+                ProcessRecord processRecord3,
+                boolean z,
+                int i);
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -206,181 +247,205 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
             this.mType = i;
             if (i == 0) {
                 final int i3 = 0;
-                toIntFunction = new ToIntFunction() { // from class: com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
-                    @Override // java.util.function.ToIntFunction
-                    public final int applyAsInt(Object obj) {
-                        ProcessRecord processRecord = (ProcessRecord) obj;
-                        switch (i3) {
-                            case 0:
-                                return processRecord.mState.mCurProcState;
-                            case 1:
-                                int i4 = processRecord.mState.mCurProcState;
-                                if (i4 < 0 || i4 > 19) {
-                                    return 20;
+                toIntFunction =
+                        new ToIntFunction() { // from class:
+                                              // com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
+                            @Override // java.util.function.ToIntFunction
+                            public final int applyAsInt(Object obj) {
+                                ProcessRecord processRecord = (ProcessRecord) obj;
+                                switch (i3) {
+                                    case 0:
+                                        return processRecord.mState.mCurProcState;
+                                    case 1:
+                                        int i4 = processRecord.mState.mCurProcState;
+                                        if (i4 < 0 || i4 > 19) {
+                                            return 20;
+                                        }
+                                        return i4;
+                                    case 2:
+                                        return processRecord.mState.mCurRawAdj;
+                                    case 3:
+                                        int i5 = processRecord.mState.mCurRawAdj;
+                                        int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
+                                        if (i5 < iArr[0] || i5 > iArr[17]) {
+                                            return 17;
+                                        }
+                                        int binarySearch = Arrays.binarySearch(iArr, i5);
+                                        return binarySearch >= 0
+                                                ? binarySearch
+                                                : (-(binarySearch + 1)) - 1;
+                                    default:
+                                        return 0;
                                 }
-                                return i4;
-                            case 2:
-                                return processRecord.mState.mCurRawAdj;
-                            case 3:
-                                int i5 = processRecord.mState.mCurRawAdj;
-                                int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
-                                if (i5 < iArr[0] || i5 > iArr[17]) {
-                                    return 17;
-                                }
-                                int binarySearch = Arrays.binarySearch(iArr, i5);
-                                return binarySearch >= 0 ? binarySearch : (-(binarySearch + 1)) - 1;
-                            default:
-                                return 0;
-                        }
-                    }
-                };
+                            }
+                        };
                 final int i4 = 1;
-                this.mSlotFunction = new ToIntFunction() { // from class: com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
-                    @Override // java.util.function.ToIntFunction
-                    public final int applyAsInt(Object obj) {
-                        ProcessRecord processRecord = (ProcessRecord) obj;
-                        switch (i4) {
-                            case 0:
-                                return processRecord.mState.mCurProcState;
-                            case 1:
-                                int i42 = processRecord.mState.mCurProcState;
-                                if (i42 < 0 || i42 > 19) {
-                                    return 20;
+                this.mSlotFunction =
+                        new ToIntFunction() { // from class:
+                                              // com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
+                            @Override // java.util.function.ToIntFunction
+                            public final int applyAsInt(Object obj) {
+                                ProcessRecord processRecord = (ProcessRecord) obj;
+                                switch (i4) {
+                                    case 0:
+                                        return processRecord.mState.mCurProcState;
+                                    case 1:
+                                        int i42 = processRecord.mState.mCurProcState;
+                                        if (i42 < 0 || i42 > 19) {
+                                            return 20;
+                                        }
+                                        return i42;
+                                    case 2:
+                                        return processRecord.mState.mCurRawAdj;
+                                    case 3:
+                                        int i5 = processRecord.mState.mCurRawAdj;
+                                        int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
+                                        if (i5 < iArr[0] || i5 > iArr[17]) {
+                                            return 17;
+                                        }
+                                        int binarySearch = Arrays.binarySearch(iArr, i5);
+                                        return binarySearch >= 0
+                                                ? binarySearch
+                                                : (-(binarySearch + 1)) - 1;
+                                    default:
+                                        return 0;
                                 }
-                                return i42;
-                            case 2:
-                                return processRecord.mState.mCurRawAdj;
-                            case 3:
-                                int i5 = processRecord.mState.mCurRawAdj;
-                                int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
-                                if (i5 < iArr[0] || i5 > iArr[17]) {
-                                    return 17;
-                                }
-                                int binarySearch = Arrays.binarySearch(iArr, i5);
-                                return binarySearch >= 0 ? binarySearch : (-(binarySearch + 1)) - 1;
-                            default:
-                                return 0;
-                        }
-                    }
-                };
+                            }
+                        };
             } else if (i != 1) {
                 final int i5 = 4;
-                toIntFunction = new ToIntFunction() { // from class: com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
-                    @Override // java.util.function.ToIntFunction
-                    public final int applyAsInt(Object obj) {
-                        ProcessRecord processRecord = (ProcessRecord) obj;
-                        switch (i5) {
-                            case 0:
-                                return processRecord.mState.mCurProcState;
-                            case 1:
-                                int i42 = processRecord.mState.mCurProcState;
-                                if (i42 < 0 || i42 > 19) {
-                                    return 20;
+                toIntFunction =
+                        new ToIntFunction() { // from class:
+                                              // com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
+                            @Override // java.util.function.ToIntFunction
+                            public final int applyAsInt(Object obj) {
+                                ProcessRecord processRecord = (ProcessRecord) obj;
+                                switch (i5) {
+                                    case 0:
+                                        return processRecord.mState.mCurProcState;
+                                    case 1:
+                                        int i42 = processRecord.mState.mCurProcState;
+                                        if (i42 < 0 || i42 > 19) {
+                                            return 20;
+                                        }
+                                        return i42;
+                                    case 2:
+                                        return processRecord.mState.mCurRawAdj;
+                                    case 3:
+                                        int i52 = processRecord.mState.mCurRawAdj;
+                                        int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
+                                        if (i52 < iArr[0] || i52 > iArr[17]) {
+                                            return 17;
+                                        }
+                                        int binarySearch = Arrays.binarySearch(iArr, i52);
+                                        return binarySearch >= 0
+                                                ? binarySearch
+                                                : (-(binarySearch + 1)) - 1;
+                                    default:
+                                        return 0;
                                 }
-                                return i42;
-                            case 2:
-                                return processRecord.mState.mCurRawAdj;
-                            case 3:
-                                int i52 = processRecord.mState.mCurRawAdj;
-                                int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
-                                if (i52 < iArr[0] || i52 > iArr[17]) {
-                                    return 17;
-                                }
-                                int binarySearch = Arrays.binarySearch(iArr, i52);
-                                return binarySearch >= 0 ? binarySearch : (-(binarySearch + 1)) - 1;
-                            default:
-                                return 0;
-                        }
-                    }
-                };
+                            }
+                        };
                 final int i6 = 4;
-                this.mSlotFunction = new ToIntFunction() { // from class: com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
-                    @Override // java.util.function.ToIntFunction
-                    public final int applyAsInt(Object obj) {
-                        ProcessRecord processRecord = (ProcessRecord) obj;
-                        switch (i6) {
-                            case 0:
-                                return processRecord.mState.mCurProcState;
-                            case 1:
-                                int i42 = processRecord.mState.mCurProcState;
-                                if (i42 < 0 || i42 > 19) {
-                                    return 20;
+                this.mSlotFunction =
+                        new ToIntFunction() { // from class:
+                                              // com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
+                            @Override // java.util.function.ToIntFunction
+                            public final int applyAsInt(Object obj) {
+                                ProcessRecord processRecord = (ProcessRecord) obj;
+                                switch (i6) {
+                                    case 0:
+                                        return processRecord.mState.mCurProcState;
+                                    case 1:
+                                        int i42 = processRecord.mState.mCurProcState;
+                                        if (i42 < 0 || i42 > 19) {
+                                            return 20;
+                                        }
+                                        return i42;
+                                    case 2:
+                                        return processRecord.mState.mCurRawAdj;
+                                    case 3:
+                                        int i52 = processRecord.mState.mCurRawAdj;
+                                        int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
+                                        if (i52 < iArr[0] || i52 > iArr[17]) {
+                                            return 17;
+                                        }
+                                        int binarySearch = Arrays.binarySearch(iArr, i52);
+                                        return binarySearch >= 0
+                                                ? binarySearch
+                                                : (-(binarySearch + 1)) - 1;
+                                    default:
+                                        return 0;
                                 }
-                                return i42;
-                            case 2:
-                                return processRecord.mState.mCurRawAdj;
-                            case 3:
-                                int i52 = processRecord.mState.mCurRawAdj;
-                                int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
-                                if (i52 < iArr[0] || i52 > iArr[17]) {
-                                    return 17;
-                                }
-                                int binarySearch = Arrays.binarySearch(iArr, i52);
-                                return binarySearch >= 0 ? binarySearch : (-(binarySearch + 1)) - 1;
-                            default:
-                                return 0;
-                        }
-                    }
-                };
+                            }
+                        };
             } else {
                 final int i7 = 2;
-                toIntFunction = new ToIntFunction() { // from class: com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
-                    @Override // java.util.function.ToIntFunction
-                    public final int applyAsInt(Object obj) {
-                        ProcessRecord processRecord = (ProcessRecord) obj;
-                        switch (i7) {
-                            case 0:
-                                return processRecord.mState.mCurProcState;
-                            case 1:
-                                int i42 = processRecord.mState.mCurProcState;
-                                if (i42 < 0 || i42 > 19) {
-                                    return 20;
+                toIntFunction =
+                        new ToIntFunction() { // from class:
+                                              // com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
+                            @Override // java.util.function.ToIntFunction
+                            public final int applyAsInt(Object obj) {
+                                ProcessRecord processRecord = (ProcessRecord) obj;
+                                switch (i7) {
+                                    case 0:
+                                        return processRecord.mState.mCurProcState;
+                                    case 1:
+                                        int i42 = processRecord.mState.mCurProcState;
+                                        if (i42 < 0 || i42 > 19) {
+                                            return 20;
+                                        }
+                                        return i42;
+                                    case 2:
+                                        return processRecord.mState.mCurRawAdj;
+                                    case 3:
+                                        int i52 = processRecord.mState.mCurRawAdj;
+                                        int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
+                                        if (i52 < iArr[0] || i52 > iArr[17]) {
+                                            return 17;
+                                        }
+                                        int binarySearch = Arrays.binarySearch(iArr, i52);
+                                        return binarySearch >= 0
+                                                ? binarySearch
+                                                : (-(binarySearch + 1)) - 1;
+                                    default:
+                                        return 0;
                                 }
-                                return i42;
-                            case 2:
-                                return processRecord.mState.mCurRawAdj;
-                            case 3:
-                                int i52 = processRecord.mState.mCurRawAdj;
-                                int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
-                                if (i52 < iArr[0] || i52 > iArr[17]) {
-                                    return 17;
-                                }
-                                int binarySearch = Arrays.binarySearch(iArr, i52);
-                                return binarySearch >= 0 ? binarySearch : (-(binarySearch + 1)) - 1;
-                            default:
-                                return 0;
-                        }
-                    }
-                };
+                            }
+                        };
                 final int i8 = 3;
-                this.mSlotFunction = new ToIntFunction() { // from class: com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
-                    @Override // java.util.function.ToIntFunction
-                    public final int applyAsInt(Object obj) {
-                        ProcessRecord processRecord = (ProcessRecord) obj;
-                        switch (i8) {
-                            case 0:
-                                return processRecord.mState.mCurProcState;
-                            case 1:
-                                int i42 = processRecord.mState.mCurProcState;
-                                if (i42 < 0 || i42 > 19) {
-                                    return 20;
+                this.mSlotFunction =
+                        new ToIntFunction() { // from class:
+                                              // com.android.server.am.OomAdjusterModernImpl$ProcessRecordNodes$$ExternalSyntheticLambda0
+                            @Override // java.util.function.ToIntFunction
+                            public final int applyAsInt(Object obj) {
+                                ProcessRecord processRecord = (ProcessRecord) obj;
+                                switch (i8) {
+                                    case 0:
+                                        return processRecord.mState.mCurProcState;
+                                    case 1:
+                                        int i42 = processRecord.mState.mCurProcState;
+                                        if (i42 < 0 || i42 > 19) {
+                                            return 20;
+                                        }
+                                        return i42;
+                                    case 2:
+                                        return processRecord.mState.mCurRawAdj;
+                                    case 3:
+                                        int i52 = processRecord.mState.mCurRawAdj;
+                                        int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
+                                        if (i52 < iArr[0] || i52 > iArr[17]) {
+                                            return 17;
+                                        }
+                                        int binarySearch = Arrays.binarySearch(iArr, i52);
+                                        return binarySearch >= 0
+                                                ? binarySearch
+                                                : (-(binarySearch + 1)) - 1;
+                                    default:
+                                        return 0;
                                 }
-                                return i42;
-                            case 2:
-                                return processRecord.mState.mCurRawAdj;
-                            case 3:
-                                int i52 = processRecord.mState.mCurRawAdj;
-                                int[] iArr = OomAdjusterModernImpl.ADJ_SLOT_VALUES;
-                                if (i52 < iArr[0] || i52 > iArr[17]) {
-                                    return 17;
-                                }
-                                int binarySearch = Arrays.binarySearch(iArr, i52);
-                                return binarySearch >= 0 ? binarySearch : (-(binarySearch + 1)) - 1;
-                            default:
-                                return 0;
-                        }
-                    }
-                };
+                            }
+                        };
             }
             this.mProcessRecordNodes = new LinkedProcessRecordList[i2];
             for (int i9 = 0; i9 < i2; i9++) {
@@ -399,9 +464,12 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
             }
             processRecordNode.unlink();
             LinkedProcessRecordList linkedProcessRecordList = this.mProcessRecordNodes[applyAsInt];
-            int applyAsInt2 = linkedProcessRecordList.mValueFunction.applyAsInt(processRecordNode.mApp);
+            int applyAsInt2 =
+                    linkedProcessRecordList.mValueFunction.applyAsInt(processRecordNode.mApp);
             ProcessRecordNode processRecordNode2 = linkedProcessRecordList.TAIL.mPrev;
-            while (processRecordNode2 != linkedProcessRecordList.HEAD && linkedProcessRecordList.mValueFunction.applyAsInt(processRecordNode2.mApp) > applyAsInt2) {
+            while (processRecordNode2 != linkedProcessRecordList.HEAD
+                    && linkedProcessRecordList.mValueFunction.applyAsInt(processRecordNode2.mApp)
+                            > applyAsInt2) {
                 processRecordNode2 = processRecordNode2.mPrev;
             }
             processRecordNode.mPrev = processRecordNode2;
@@ -498,12 +566,17 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
         }
     }
 
-    public OomAdjusterModernImpl(ActivityManagerService activityManagerService, ProcessList processList, ActiveUids activeUids, ServiceThread serviceThread) {
+    public OomAdjusterModernImpl(
+            ActivityManagerService activityManagerService,
+            ProcessList processList,
+            ActiveUids activeUids,
+            ServiceThread serviceThread) {
         super(activityManagerService, processList, activeUids, serviceThread);
         ReachableCollectingConsumer reachableCollectingConsumer = new ReachableCollectingConsumer();
         reachableCollectingConsumer.mReachables = null;
         this.mReachableCollectingConsumer = reachableCollectingConsumer;
-        this.mComputeConnectionIgnoringReachableClientsConsumer = new ComputeConnectionIgnoringReachableClientsConsumer();
+        this.mComputeConnectionIgnoringReachableClientsConsumer =
+                new ComputeConnectionIgnoringReachableClientsConsumer();
         this.mComputeHostConsumer = new ComputeHostConsumer();
         this.mComputeConnectionsConsumer = new ComputeConnectionsConsumer();
         this.mProcessRecordProcStateNodes = new ProcessRecordNodes(this, 0, 21);
@@ -528,25 +601,48 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
             ConnectionRecord connectionAt = processServiceRecord.getConnectionAt(size);
             boolean hasFlag = connectionAt.hasFlag(2);
             AppBindRecord appBindRecord = connectionAt.binding;
-            ProcessRecord processRecord2 = hasFlag ? appBindRecord.service.isolationHostProc : appBindRecord.service.app;
-            if (processRecord2 != null && processRecord2 != processRecord && (((i3 = (processStateRecord3 = processRecord2.mState).mMaxAdj) < -900 || i3 >= 0) && ((processStateRecord3.mCurAdj > 0 || processStateRecord3.mCurSchedGroup <= 0 || processStateRecord3.mCurProcState > 2) && (!processRecord2.isSdkSandbox || appBindRecord.attributedClient == null)))) {
+            ProcessRecord processRecord2 =
+                    hasFlag ? appBindRecord.service.isolationHostProc : appBindRecord.service.app;
+            if (processRecord2 != null
+                    && processRecord2 != processRecord
+                    && (((i3 = (processStateRecord3 = processRecord2.mState).mMaxAdj) < -900
+                                    || i3 >= 0)
+                            && ((processStateRecord3.mCurAdj > 0
+                                            || processStateRecord3.mCurSchedGroup <= 0
+                                            || processStateRecord3.mCurProcState > 2)
+                                    && (!processRecord2.isSdkSandbox
+                                            || appBindRecord.attributedClient == null)))) {
                 biConsumer.accept(connectionAt, processRecord2);
             }
         }
         ArraySet arraySet = processServiceRecord.mSdkSandboxConnections;
         for (int size2 = (arraySet != null ? arraySet.size() : 0) - 1; size2 >= 0; size2--) {
             ArraySet arraySet2 = processServiceRecord.mSdkSandboxConnections;
-            ConnectionRecord connectionRecord = arraySet2 != null ? (ConnectionRecord) arraySet2.valueAt(size2) : null;
+            ConnectionRecord connectionRecord =
+                    arraySet2 != null ? (ConnectionRecord) arraySet2.valueAt(size2) : null;
             ProcessRecord processRecord3 = connectionRecord.binding.service.app;
-            if (processRecord3 != null && processRecord3 != processRecord && (((i2 = (processStateRecord2 = processRecord3.mState).mMaxAdj) < -900 || i2 >= 0) && (processStateRecord2.mCurAdj > 0 || processStateRecord2.mCurSchedGroup <= 0 || processStateRecord2.mCurProcState > 2))) {
+            if (processRecord3 != null
+                    && processRecord3 != processRecord
+                    && (((i2 = (processStateRecord2 = processRecord3.mState).mMaxAdj) < -900
+                                    || i2 >= 0)
+                            && (processStateRecord2.mCurAdj > 0
+                                    || processStateRecord2.mCurSchedGroup <= 0
+                                    || processStateRecord2.mCurProcState > 2))) {
                 biConsumer.accept(connectionRecord, processRecord3);
             }
         }
         ProcessProviderRecord processProviderRecord = processRecord.mProviders;
         for (int size3 = processProviderRecord.mConProviders.size() - 1; size3 >= 0; size3--) {
-            ContentProviderConnection contentProviderConnection = (ContentProviderConnection) processProviderRecord.mConProviders.get(size3);
+            ContentProviderConnection contentProviderConnection =
+                    (ContentProviderConnection) processProviderRecord.mConProviders.get(size3);
             ProcessRecord processRecord4 = contentProviderConnection.provider.proc;
-            if (processRecord4 != null && processRecord4 != processRecord && (((i = (processStateRecord = processRecord4.mState).mMaxAdj) < -900 || i >= 0) && (processStateRecord.mCurAdj > 0 || processStateRecord.mCurSchedGroup <= 0 || processStateRecord.mCurProcState > 2))) {
+            if (processRecord4 != null
+                    && processRecord4 != processRecord
+                    && (((i = (processStateRecord = processRecord4.mState).mMaxAdj) < -900
+                                    || i >= 0)
+                            && (processStateRecord.mCurAdj > 0
+                                    || processStateRecord.mCurSchedGroup <= 0
+                                    || processStateRecord.mCurProcState > 2))) {
                 biConsumer.accept(contentProviderConnection, processRecord4);
             }
         }
@@ -569,7 +665,9 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
             poll = processRecordNodes.poll();
         }
         ProcessRecordNodes processRecordNodes2 = this.mProcessRecordAdjNodes;
-        for (ProcessRecord poll2 = processRecordNodes2.poll(); poll2 != null; poll2 = processRecordNodes2.poll()) {
+        for (ProcessRecord poll2 = processRecordNodes2.poll();
+                poll2 != null;
+                poll2 = processRecordNodes2.poll()) {
             oomAdjusterArgs.mApp = poll2;
             computeConnectionsConsumer.accept(oomAdjusterArgs);
         }
@@ -598,7 +696,9 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
     @Override // com.android.server.am.OomAdjuster
     public final void onProcessEndLocked(ProcessRecord processRecord) {
         ProcessRecordNode processRecordNode = processRecord.mLinkedNodes[0];
-        if (processRecordNode == null || processRecordNode.mPrev == null || processRecordNode.mNext == null) {
+        if (processRecordNode == null
+                || processRecordNode.mPrev == null
+                || processRecordNode.mNext == null) {
             return;
         }
         this.mProcessRecordProcStateNodes.unlink(processRecord);
@@ -674,8 +774,19 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
             OomAdjusterArgs oomAdjusterArgs3 = oomAdjusterArgs2;
             long j2 = elapsedRealtime;
             ActiveUids activeUids2 = activeUids;
-            computeOomAdjLSP(processRecord2, 1001, oomAdjusterArgs2.mTopApp, false, oomAdjusterArgs2.mNow, false, false, oomAdjusterArgs2.mOomAdjReason, false);
-            ComputeConnectionIgnoringReachableClientsConsumer computeConnectionIgnoringReachableClientsConsumer = this.mComputeConnectionIgnoringReachableClientsConsumer;
+            computeOomAdjLSP(
+                    processRecord2,
+                    1001,
+                    oomAdjusterArgs2.mTopApp,
+                    false,
+                    oomAdjusterArgs2.mNow,
+                    false,
+                    false,
+                    oomAdjusterArgs2.mOomAdjReason,
+                    false);
+            ComputeConnectionIgnoringReachableClientsConsumer
+                    computeConnectionIgnoringReachableClientsConsumer =
+                            this.mComputeConnectionIgnoringReachableClientsConsumer;
             computeConnectionIgnoringReachableClientsConsumer.mArgs = oomAdjusterArgs3;
             computeConnectionIgnoringReachableClientsConsumer.hasReachableClient = false;
             ProcessServiceRecord processServiceRecord = processRecord2.mServices;
@@ -684,22 +795,31 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
                 for (int size4 = arrayMap.size() - 1; size4 >= 0; size4--) {
                     ArrayList arrayList3 = (ArrayList) arrayMap.valueAt(size4);
                     for (int size5 = arrayList3.size() - 1; size5 >= 0; size5--) {
-                        ConnectionRecord connectionRecord = (ConnectionRecord) arrayList3.get(size5);
-                        if (!processRecord2.isSdkSandbox || (obj = connectionRecord.binding.attributedClient) == null) {
+                        ConnectionRecord connectionRecord =
+                                (ConnectionRecord) arrayList3.get(size5);
+                        if (!processRecord2.isSdkSandbox
+                                || (obj = connectionRecord.binding.attributedClient) == null) {
                             obj = connectionRecord.binding.client;
                         }
                         if (obj != null && obj != processRecord2) {
-                            computeConnectionIgnoringReachableClientsConsumer.accept(connectionRecord, obj);
+                            computeConnectionIgnoringReachableClientsConsumer.accept(
+                                    connectionRecord, obj);
                         }
                     }
                 }
             }
             ProcessProviderRecord processProviderRecord = processRecord2.mProviders;
             for (int size6 = processProviderRecord.mPubProviders.size() - 1; size6 >= 0; size6--) {
-                ContentProviderRecord contentProviderRecord = (ContentProviderRecord) processProviderRecord.mPubProviders.valueAt(size6);
-                for (int size7 = contentProviderRecord.connections.size() - 1; size7 >= 0; size7--) {
-                    ContentProviderConnection contentProviderConnection = (ContentProviderConnection) contentProviderRecord.connections.get(size7);
-                    computeConnectionIgnoringReachableClientsConsumer.accept(contentProviderConnection, contentProviderConnection.client);
+                ContentProviderRecord contentProviderRecord =
+                        (ContentProviderRecord) processProviderRecord.mPubProviders.valueAt(size6);
+                for (int size7 = contentProviderRecord.connections.size() - 1;
+                        size7 >= 0;
+                        size7--) {
+                    ContentProviderConnection contentProviderConnection =
+                            (ContentProviderConnection)
+                                    contentProviderRecord.connections.get(size7);
+                    computeConnectionIgnoringReachableClientsConsumer.accept(
+                            contentProviderConnection, contentProviderConnection.client);
                 }
             }
             Flags.simplifyProcessTraversal();
@@ -748,7 +868,11 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
             valueAt.mCurCapability = z2 ? 1 : 0;
             for (int size10 = valueAt.mProcRecords.size() - 1; size10 >= 0; size10--) {
                 ProcessRecord processRecord3 = (ProcessRecord) valueAt.mProcRecords.valueAt(size10);
-                if (!processRecord3.mKilledByAm && processRecord3.mThread != null && (!processRecord3.isolated || processRecord3.mServices.mServices.size() > 0 || processRecord3.mIsolatedEntryPoint != null)) {
+                if (!processRecord3.mKilledByAm
+                        && processRecord3.mThread != null
+                        && (!processRecord3.isolated
+                                || processRecord3.mServices.mServices.size() > 0
+                                || processRecord3.mIsolatedEntryPoint != null)) {
                     OomAdjuster.updateAppUidRecLSP(processRecord3);
                 }
             }
@@ -792,7 +916,8 @@ public final class OomAdjusterModernImpl extends OomAdjuster {
                 uidRecord.mForegroundServices = z;
                 uidRecord.mCurCapability = z;
             }
-            computeOomAdjLSP(processRecord, 1001, topApp, true, uptimeMillis, false, false, i, false);
+            computeOomAdjLSP(
+                    processRecord, 1001, topApp, true, uptimeMillis, false, false, i, false);
             Flags.simplifyProcessTraversal();
             this.mProcessRecordProcStateNodes.offer(processRecord);
             size--;

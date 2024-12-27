@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SehSatStatusReport implements Parcelable {
-    public static final Parcelable.Creator<SehSatStatusReport> CREATOR = new Parcelable.Creator<SehSatStatusReport>() { // from class: vendor.samsung.hardware.radio.satellite.SehSatStatusReport.1
-        @Override // android.os.Parcelable.Creator
-        public SehSatStatusReport createFromParcel(Parcel _aidl_source) {
-            SehSatStatusReport _aidl_out = new SehSatStatusReport();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehSatStatusReport> CREATOR =
+            new Parcelable.Creator<
+                    SehSatStatusReport>() { // from class:
+                                            // vendor.samsung.hardware.radio.satellite.SehSatStatusReport.1
+                @Override // android.os.Parcelable.Creator
+                public SehSatStatusReport createFromParcel(Parcel _aidl_source) {
+                    SehSatStatusReport _aidl_out = new SehSatStatusReport();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehSatStatusReport[] newArray(int _aidl_size) {
-            return new SehSatStatusReport[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehSatStatusReport[] newArray(int _aidl_size) {
+                    return new SehSatStatusReport[_aidl_size];
+                }
+            };
     public int messageRef = 0;
     public int smStatus = 0;
     public int tpStatus = 0;

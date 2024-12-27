@@ -5,13 +5,16 @@ import android.content.om.wallpapertheme.MetaDataManager;
 import android.content.pm.overlay.OverlayPaths;
 import android.net.shared.InitialConfiguration$$ExternalSyntheticOutline0;
 import android.util.Slog;
+
 import com.android.server.om.OverlayPolicyManager;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class SemWallpaperThemeOverlayPolicy implements OverlayPolicyManager.OverlayPackagePolicy {
+public final class SemWallpaperThemeOverlayPolicy
+        implements OverlayPolicyManager.OverlayPackagePolicy {
     public final SemWallpaperThemeManager mWallpaperThemeManager;
 
     public SemWallpaperThemeOverlayPolicy(SemWallpaperThemeManager semWallpaperThemeManager) {
@@ -23,7 +26,9 @@ public final class SemWallpaperThemeOverlayPolicy implements OverlayPolicyManage
         if (!str.startsWith("/data/resource-cache/android-SemWT")) {
             return true;
         }
-        StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("for ", str2, " checking ", str, " with existing ");
+        StringBuilder m =
+                InitialConfiguration$$ExternalSyntheticOutline0.m(
+                        "for ", str2, " checking ", str, " with existing ");
         m.append(overlayPaths);
         Slog.e("SemWallpaperThemeOverlayPolicy", m.toString());
         if ("android".equals(str2)) {

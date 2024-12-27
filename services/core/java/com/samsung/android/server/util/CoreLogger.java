@@ -1,6 +1,7 @@
 package com.samsung.android.server.util;
 
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -48,7 +49,17 @@ public final class CoreLogger {
         }
         if (this.mUseTimeline) {
             Calendar calendar = Calendar.getInstance();
-            str = String.format(Locale.US, "%02d-%02d %02d:%02d:%02d.%03d %s", Integer.valueOf(calendar.get(2) + 1), Integer.valueOf(calendar.get(5)), Integer.valueOf(calendar.get(11)), Integer.valueOf(calendar.get(12)), Integer.valueOf(calendar.get(13)), Integer.valueOf(calendar.get(14)), str);
+            str =
+                    String.format(
+                            Locale.US,
+                            "%02d-%02d %02d:%02d:%02d.%03d %s",
+                            Integer.valueOf(calendar.get(2) + 1),
+                            Integer.valueOf(calendar.get(5)),
+                            Integer.valueOf(calendar.get(11)),
+                            Integer.valueOf(calendar.get(12)),
+                            Integer.valueOf(calendar.get(13)),
+                            Integer.valueOf(calendar.get(14)),
+                            str);
         }
         try {
             synchronized (this.mBuffer) {

@@ -5,13 +5,14 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.ims.internal.uce.common.StatusCode;
 import com.android.ims.internal.uce.common.UceLong;
-import com.android.ims.internal.uce.presence.IPresenceListener;
 
 /* loaded from: classes5.dex */
 public interface IPresenceService extends IInterface {
-    StatusCode addListener(int i, IPresenceListener iPresenceListener, UceLong uceLong) throws RemoteException;
+    StatusCode addListener(int i, IPresenceListener iPresenceListener, UceLong uceLong)
+            throws RemoteException;
 
     StatusCode getContactCap(int i, String str, int i2) throws RemoteException;
 
@@ -25,7 +26,8 @@ public interface IPresenceService extends IInterface {
 
     StatusCode removeListener(int i, UceLong uceLong) throws RemoteException;
 
-    StatusCode setNewFeatureTag(int i, String str, PresServiceInfo presServiceInfo, int i2) throws RemoteException;
+    StatusCode setNewFeatureTag(int i, String str, PresServiceInfo presServiceInfo, int i2)
+            throws RemoteException;
 
     public static class Default implements IPresenceService {
         @Override // com.android.ims.internal.uce.presence.IPresenceService
@@ -34,37 +36,52 @@ public interface IPresenceService extends IInterface {
         }
 
         @Override // com.android.ims.internal.uce.presence.IPresenceService
-        public StatusCode addListener(int presenceServiceHdl, IPresenceListener presenceServiceListener, UceLong presenceServiceListenerHdl) throws RemoteException {
+        public StatusCode addListener(
+                int presenceServiceHdl,
+                IPresenceListener presenceServiceListener,
+                UceLong presenceServiceListenerHdl)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.presence.IPresenceService
-        public StatusCode removeListener(int presenceServiceHdl, UceLong presenceServiceListenerHdl) throws RemoteException {
+        public StatusCode removeListener(int presenceServiceHdl, UceLong presenceServiceListenerHdl)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.presence.IPresenceService
-        public StatusCode reenableService(int presenceServiceHdl, int userData) throws RemoteException {
+        public StatusCode reenableService(int presenceServiceHdl, int userData)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.presence.IPresenceService
-        public StatusCode publishMyCap(int presenceServiceHdl, PresCapInfo myCapInfo, int userData) throws RemoteException {
+        public StatusCode publishMyCap(int presenceServiceHdl, PresCapInfo myCapInfo, int userData)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.presence.IPresenceService
-        public StatusCode getContactCap(int presenceServiceHdl, String remoteUri, int userData) throws RemoteException {
+        public StatusCode getContactCap(int presenceServiceHdl, String remoteUri, int userData)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.presence.IPresenceService
-        public StatusCode getContactListCap(int presenceServiceHdl, String[] remoteUriList, int userData) throws RemoteException {
+        public StatusCode getContactListCap(
+                int presenceServiceHdl, String[] remoteUriList, int userData)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.presence.IPresenceService
-        public StatusCode setNewFeatureTag(int presenceServiceHdl, String featureTag, PresServiceInfo serviceInfo, int userData) throws RemoteException {
+        public StatusCode setNewFeatureTag(
+                int presenceServiceHdl,
+                String featureTag,
+                PresServiceInfo serviceInfo,
+                int userData)
+                throws RemoteException {
             return null;
         }
 
@@ -74,8 +91,9 @@ public interface IPresenceService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPresenceService {
-        public static final String DESCRIPTOR = "com.android.ims.internal.uce.presence.IPresenceService";
+    public abstract static class Stub extends Binder implements IPresenceService {
+        public static final String DESCRIPTOR =
+                "com.android.ims.internal.uce.presence.IPresenceService";
         static final int TRANSACTION_addListener = 2;
         static final int TRANSACTION_getContactCap = 6;
         static final int TRANSACTION_getContactListCap = 7;
@@ -134,7 +152,8 @@ public interface IPresenceService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -152,7 +171,8 @@ public interface IPresenceService extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    IPresenceListener _arg1 = IPresenceListener.Stub.asInterface(data.readStrongBinder());
+                    IPresenceListener _arg1 =
+                            IPresenceListener.Stub.asInterface(data.readStrongBinder());
                     UceLong _arg2 = (UceLong) data.readTypedObject(UceLong.CREATOR);
                     data.enforceNoDataAvail();
                     StatusCode _result2 = addListener(_arg02, _arg1, _arg2);
@@ -206,7 +226,8 @@ public interface IPresenceService extends IInterface {
                 case 8:
                     int _arg08 = data.readInt();
                     String _arg17 = data.readString();
-                    PresServiceInfo _arg25 = (PresServiceInfo) data.readTypedObject(PresServiceInfo.CREATOR);
+                    PresServiceInfo _arg25 =
+                            (PresServiceInfo) data.readTypedObject(PresServiceInfo.CREATOR);
                     int _arg3 = data.readInt();
                     data.enforceNoDataAvail();
                     StatusCode _result8 = setNewFeatureTag(_arg08, _arg17, _arg25, _arg3);
@@ -252,7 +273,11 @@ public interface IPresenceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.presence.IPresenceService
-            public StatusCode addListener(int presenceServiceHdl, IPresenceListener presenceServiceListener, UceLong presenceServiceListenerHdl) throws RemoteException {
+            public StatusCode addListener(
+                    int presenceServiceHdl,
+                    IPresenceListener presenceServiceListener,
+                    UceLong presenceServiceListenerHdl)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -274,7 +299,9 @@ public interface IPresenceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.presence.IPresenceService
-            public StatusCode removeListener(int presenceServiceHdl, UceLong presenceServiceListenerHdl) throws RemoteException {
+            public StatusCode removeListener(
+                    int presenceServiceHdl, UceLong presenceServiceListenerHdl)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -292,7 +319,8 @@ public interface IPresenceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.presence.IPresenceService
-            public StatusCode reenableService(int presenceServiceHdl, int userData) throws RemoteException {
+            public StatusCode reenableService(int presenceServiceHdl, int userData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -310,7 +338,9 @@ public interface IPresenceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.presence.IPresenceService
-            public StatusCode publishMyCap(int presenceServiceHdl, PresCapInfo myCapInfo, int userData) throws RemoteException {
+            public StatusCode publishMyCap(
+                    int presenceServiceHdl, PresCapInfo myCapInfo, int userData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -329,7 +359,8 @@ public interface IPresenceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.presence.IPresenceService
-            public StatusCode getContactCap(int presenceServiceHdl, String remoteUri, int userData) throws RemoteException {
+            public StatusCode getContactCap(int presenceServiceHdl, String remoteUri, int userData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -348,7 +379,9 @@ public interface IPresenceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.presence.IPresenceService
-            public StatusCode getContactListCap(int presenceServiceHdl, String[] remoteUriList, int userData) throws RemoteException {
+            public StatusCode getContactListCap(
+                    int presenceServiceHdl, String[] remoteUriList, int userData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -367,7 +400,12 @@ public interface IPresenceService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.presence.IPresenceService
-            public StatusCode setNewFeatureTag(int presenceServiceHdl, String featureTag, PresServiceInfo serviceInfo, int userData) throws RemoteException {
+            public StatusCode setNewFeatureTag(
+                    int presenceServiceHdl,
+                    String featureTag,
+                    PresServiceInfo serviceInfo,
+                    int userData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

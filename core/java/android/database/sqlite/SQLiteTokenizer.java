@@ -3,11 +3,14 @@ package android.database.sqlite;
 import android.security.Credentials;
 import android.telephony.PhoneNumberUtils;
 import android.text.format.DateFormat;
+
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.transition.EpicenterTranslateClipReveal;
+
 import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
 import com.samsung.android.knox.analytics.database.Contract;
 import com.samsung.android.os.SemDvfsManager;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -49,12 +52,16 @@ public class SQLiteTokenizer {
     public static List<String> tokenize(String sql, int options) {
         final ArrayList<String> res = new ArrayList<>();
         Objects.requireNonNull(res);
-        tokenize(sql, options, new Consumer() { // from class: android.database.sqlite.SQLiteTokenizer$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                res.add((String) obj);
-            }
-        });
+        tokenize(
+                sql,
+                options,
+                new Consumer() { // from class:
+                    // android.database.sqlite.SQLiteTokenizer$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        res.add((String) obj);
+                    }
+                });
         return res;
     }
 
@@ -89,7 +96,9 @@ public class SQLiteTokenizer {
                         if (ch != '\'') {
                             String tokenUnquoted = sql.substring(quoteStart + 1, pos3);
                             if (tokenUnquoted.indexOf(ch) >= 0) {
-                                token = tokenUnquoted.replaceAll(String.valueOf(ch) + ch, String.valueOf(ch));
+                                token =
+                                        tokenUnquoted.replaceAll(
+                                                String.valueOf(ch) + ch, String.valueOf(ch));
                             } else {
                                 token = tokenUnquoted;
                             }

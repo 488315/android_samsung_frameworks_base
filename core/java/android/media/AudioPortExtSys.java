@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class AudioPortExtSys implements Parcelable {
-    public static final Parcelable.Creator<AudioPortExtSys> CREATOR = new Parcelable.Creator<AudioPortExtSys>() { // from class: android.media.AudioPortExtSys.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortExtSys createFromParcel(Parcel _aidl_source) {
-            return new AudioPortExtSys(_aidl_source);
-        }
+    public static final Parcelable.Creator<AudioPortExtSys> CREATOR =
+            new Parcelable.Creator<
+                    AudioPortExtSys>() { // from class: android.media.AudioPortExtSys.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortExtSys createFromParcel(Parcel _aidl_source) {
+                    return new AudioPortExtSys(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortExtSys[] newArray(int _aidl_size) {
-            return new AudioPortExtSys[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortExtSys[] newArray(int _aidl_size) {
+                    return new AudioPortExtSys[_aidl_size];
+                }
+            };
     public static final int device = 1;
     public static final int mix = 2;
     public static final int session = 3;
@@ -129,11 +131,15 @@ public final class AudioPortExtSys implements Parcelable {
                 _set(_aidl_tag, Boolean.valueOf(_aidl_value));
                 return;
             case 1:
-                AudioPortDeviceExtSys _aidl_value2 = (AudioPortDeviceExtSys) _aidl_parcel.readTypedObject(AudioPortDeviceExtSys.CREATOR);
+                AudioPortDeviceExtSys _aidl_value2 =
+                        (AudioPortDeviceExtSys)
+                                _aidl_parcel.readTypedObject(AudioPortDeviceExtSys.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
-                AudioPortMixExtSys _aidl_value3 = (AudioPortMixExtSys) _aidl_parcel.readTypedObject(AudioPortMixExtSys.CREATOR);
+                AudioPortMixExtSys _aidl_value3 =
+                        (AudioPortMixExtSys)
+                                _aidl_parcel.readTypedObject(AudioPortMixExtSys.CREATOR);
                 _set(_aidl_tag, _aidl_value3);
                 return;
             case 3:
@@ -168,7 +174,12 @@ public final class AudioPortExtSys implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

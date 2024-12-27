@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.AppOpsManager;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -17,7 +16,18 @@ class AppOpInfo {
     public final String simpleName;
     public final int switchCode;
 
-    AppOpInfo(int code, int switchCode, String name, String simpleName, String permission, String restriction, AppOpsManager.RestrictionBypass allowSystemRestrictionBypass, int defaultMode, boolean disableReset, boolean restrictRead, boolean forceCollectNotes) {
+    AppOpInfo(
+            int code,
+            int switchCode,
+            String name,
+            String simpleName,
+            String permission,
+            String restriction,
+            AppOpsManager.RestrictionBypass allowSystemRestrictionBypass,
+            int defaultMode,
+            boolean disableReset,
+            boolean restrictRead,
+            boolean forceCollectNotes) {
         if (code < -1) {
             throw new IllegalArgumentException();
         }
@@ -120,7 +130,18 @@ class AppOpInfo {
         }
 
         public AppOpInfo build() {
-            return new AppOpInfo(this.mCode, this.mSwitchCode, this.mName, this.mSimpleName, this.mPermission, this.mRestriction, this.mAllowSystemRestrictionBypass, this.mDefaultMode, this.mDisableReset, this.mRestrictRead, this.mForceCollectNotes);
+            return new AppOpInfo(
+                    this.mCode,
+                    this.mSwitchCode,
+                    this.mName,
+                    this.mSimpleName,
+                    this.mPermission,
+                    this.mRestriction,
+                    this.mAllowSystemRestrictionBypass,
+                    this.mDefaultMode,
+                    this.mDisableReset,
+                    this.mRestrictRead,
+                    this.mForceCollectNotes);
         }
     }
 }

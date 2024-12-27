@@ -16,12 +16,10 @@ public interface IPnoScanEvent extends IInterface {
 
     public static class Default implements IPnoScanEvent {
         @Override // android.net.wifi.nl80211.IPnoScanEvent
-        public void OnPnoNetworkFound() throws RemoteException {
-        }
+        public void OnPnoNetworkFound() throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IPnoScanEvent
-        public void OnPnoScanFailed() throws RemoteException {
-        }
+        public void OnPnoScanFailed() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IPnoScanEvent extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPnoScanEvent {
+    public abstract static class Stub extends Binder implements IPnoScanEvent {
         static final int TRANSACTION_OnPnoNetworkFound = 1;
         static final int TRANSACTION_OnPnoScanFailed = 2;
 
@@ -70,7 +68,8 @@ public interface IPnoScanEvent extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPnoScanEvent.DESCRIPTOR);
             }

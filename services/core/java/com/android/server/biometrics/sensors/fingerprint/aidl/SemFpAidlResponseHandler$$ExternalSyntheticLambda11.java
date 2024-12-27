@@ -1,6 +1,7 @@
 package com.android.server.biometrics.sensors.fingerprint.aidl;
 
 import android.util.Slog;
+
 import com.android.server.biometrics.sensors.AcquisitionClient;
 import com.android.server.biometrics.sensors.BaseClientMonitor;
 import com.android.server.biometrics.sensors.ErrorConsumer;
@@ -8,19 +9,22 @@ import com.android.server.biometrics.sensors.fingerprint.SemFpAuthenticationList
 import com.android.server.biometrics.sensors.fingerprint.SemFpCallbackDispatcher;
 import com.android.server.biometrics.sensors.fingerprint.SemFpEnrollmentListener;
 import com.android.server.biometrics.sensors.fingerprint.SemFpEventListener;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class SemFpAidlResponseHandler$$ExternalSyntheticLambda11 implements Consumer {
+public final /* synthetic */ class SemFpAidlResponseHandler$$ExternalSyntheticLambda11
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ SemFpAidlResponseHandler f$0;
     public final /* synthetic */ int f$1;
     public final /* synthetic */ int f$2;
 
-    public /* synthetic */ SemFpAidlResponseHandler$$ExternalSyntheticLambda11(SemFpAidlResponseHandler semFpAidlResponseHandler, int i, int i2, int i3) {
+    public /* synthetic */ SemFpAidlResponseHandler$$ExternalSyntheticLambda11(
+            SemFpAidlResponseHandler semFpAidlResponseHandler, int i, int i2, int i3) {
         this.$r8$classId = i3;
         this.f$0 = semFpAidlResponseHandler;
         this.f$1 = i;
@@ -38,7 +42,8 @@ public final /* synthetic */ class SemFpAidlResponseHandler$$ExternalSyntheticLa
                 AcquisitionClient acquisitionClient = (AcquisitionClient) obj;
                 semFpAidlResponseHandler.getClass();
                 acquisitionClient.onAcquired(i, i2);
-                SemFpCallbackDispatcher semFpCallbackDispatcher = semFpAidlResponseHandler.mHalCallbackEx;
+                SemFpCallbackDispatcher semFpCallbackDispatcher =
+                        semFpAidlResponseHandler.mHalCallbackEx;
                 int i3 = semFpAidlResponseHandler.mUserId;
                 int protoEnum = acquisitionClient.getProtoEnum();
                 if (protoEnum != 3) {
@@ -46,16 +51,20 @@ public final /* synthetic */ class SemFpAidlResponseHandler$$ExternalSyntheticLa
                         semFpCallbackDispatcher.getClass();
                         break;
                     } else {
-                        Iterator it = ((ArrayList) semFpCallbackDispatcher.mEnrollListeners).iterator();
+                        Iterator it =
+                                ((ArrayList) semFpCallbackDispatcher.mEnrollListeners).iterator();
                         while (it.hasNext()) {
                             ((SemFpEnrollmentListener) it.next()).onEnrollAcquire(i, i2);
                         }
                         break;
                     }
                 } else {
-                    Iterator it2 = ((ArrayList) semFpCallbackDispatcher.mAuthenticationListeners).iterator();
+                    Iterator it2 =
+                            ((ArrayList) semFpCallbackDispatcher.mAuthenticationListeners)
+                                    .iterator();
                     while (it2.hasNext()) {
-                        ((SemFpAuthenticationListener) it2.next()).onAuthenticationAcquire(i3, i, i2);
+                        ((SemFpAuthenticationListener) it2.next())
+                                .onAuthenticationAcquire(i3, i, i2);
                     }
                     break;
                 }
@@ -70,15 +79,19 @@ public final /* synthetic */ class SemFpAidlResponseHandler$$ExternalSyntheticLa
                 if (i4 == 1) {
                     semFpAidlResponseHandler2.mAidlResponseHandlerCallback.onHardwareUnavailable();
                 }
-                SemFpCallbackDispatcher semFpCallbackDispatcher2 = semFpAidlResponseHandler2.mHalCallbackEx;
+                SemFpCallbackDispatcher semFpCallbackDispatcher2 =
+                        semFpAidlResponseHandler2.mHalCallbackEx;
                 int protoEnum2 = ((BaseClientMonitor) errorConsumer).getProtoEnum();
                 if (protoEnum2 == 3) {
-                    Iterator it3 = ((ArrayList) semFpCallbackDispatcher2.mAuthenticationListeners).iterator();
+                    Iterator it3 =
+                            ((ArrayList) semFpCallbackDispatcher2.mAuthenticationListeners)
+                                    .iterator();
                     while (it3.hasNext()) {
                         ((SemFpAuthenticationListener) it3.next()).getClass();
                     }
                 } else if (protoEnum2 == 2) {
-                    Iterator it4 = ((ArrayList) semFpCallbackDispatcher2.mEnrollListeners).iterator();
+                    Iterator it4 =
+                            ((ArrayList) semFpCallbackDispatcher2.mEnrollListeners).iterator();
                     while (it4.hasNext()) {
                         ((SemFpEnrollmentListener) it4.next()).getClass();
                     }

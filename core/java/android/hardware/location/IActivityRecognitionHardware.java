@@ -2,7 +2,6 @@ package android.hardware.location;
 
 import android.Manifest;
 import android.app.ActivityThread;
-import android.hardware.location.IActivityRecognitionHardwareSink;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -22,9 +21,11 @@ public interface IActivityRecognitionHardware extends IInterface {
 
     boolean isActivitySupported(String str) throws RemoteException;
 
-    boolean registerSink(IActivityRecognitionHardwareSink iActivityRecognitionHardwareSink) throws RemoteException;
+    boolean registerSink(IActivityRecognitionHardwareSink iActivityRecognitionHardwareSink)
+            throws RemoteException;
 
-    boolean unregisterSink(IActivityRecognitionHardwareSink iActivityRecognitionHardwareSink) throws RemoteException;
+    boolean unregisterSink(IActivityRecognitionHardwareSink iActivityRecognitionHardwareSink)
+            throws RemoteException;
 
     public static class Default implements IActivityRecognitionHardware {
         @Override // android.hardware.location.IActivityRecognitionHardware
@@ -43,17 +44,20 @@ public interface IActivityRecognitionHardware extends IInterface {
         }
 
         @Override // android.hardware.location.IActivityRecognitionHardware
-        public boolean unregisterSink(IActivityRecognitionHardwareSink sink) throws RemoteException {
+        public boolean unregisterSink(IActivityRecognitionHardwareSink sink)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.location.IActivityRecognitionHardware
-        public boolean enableActivityEvent(String activityType, int eventType, long reportLatencyNs) throws RemoteException {
+        public boolean enableActivityEvent(String activityType, int eventType, long reportLatencyNs)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.location.IActivityRecognitionHardware
-        public boolean disableActivityEvent(String activityType, int eventType) throws RemoteException {
+        public boolean disableActivityEvent(String activityType, int eventType)
+                throws RemoteException {
             return false;
         }
 
@@ -68,8 +72,9 @@ public interface IActivityRecognitionHardware extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IActivityRecognitionHardware {
-        public static final String DESCRIPTOR = "android.hardware.location.IActivityRecognitionHardware";
+    public abstract static class Stub extends Binder implements IActivityRecognitionHardware {
+        public static final String DESCRIPTOR =
+                "android.hardware.location.IActivityRecognitionHardware";
         static final int TRANSACTION_disableActivityEvent = 6;
         static final int TRANSACTION_enableActivityEvent = 5;
         static final int TRANSACTION_flush = 7;
@@ -89,7 +94,9 @@ public interface IActivityRecognitionHardware extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IActivityRecognitionHardware asInterface(IBinder obj) {
@@ -135,7 +142,8 @@ public interface IActivityRecognitionHardware extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -157,14 +165,18 @@ public interface IActivityRecognitionHardware extends IInterface {
                     reply.writeBoolean(_result2);
                     return true;
                 case 3:
-                    IActivityRecognitionHardwareSink _arg02 = IActivityRecognitionHardwareSink.Stub.asInterface(data.readStrongBinder());
+                    IActivityRecognitionHardwareSink _arg02 =
+                            IActivityRecognitionHardwareSink.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result3 = registerSink(_arg02);
                     reply.writeNoException();
                     reply.writeBoolean(_result3);
                     return true;
                 case 4:
-                    IActivityRecognitionHardwareSink _arg03 = IActivityRecognitionHardwareSink.Stub.asInterface(data.readStrongBinder());
+                    IActivityRecognitionHardwareSink _arg03 =
+                            IActivityRecognitionHardwareSink.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result4 = unregisterSink(_arg03);
                     reply.writeNoException();
@@ -247,7 +259,8 @@ public interface IActivityRecognitionHardware extends IInterface {
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardware
-            public boolean registerSink(IActivityRecognitionHardwareSink sink) throws RemoteException {
+            public boolean registerSink(IActivityRecognitionHardwareSink sink)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -264,7 +277,8 @@ public interface IActivityRecognitionHardware extends IInterface {
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardware
-            public boolean unregisterSink(IActivityRecognitionHardwareSink sink) throws RemoteException {
+            public boolean unregisterSink(IActivityRecognitionHardwareSink sink)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -281,7 +295,9 @@ public interface IActivityRecognitionHardware extends IInterface {
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardware
-            public boolean enableActivityEvent(String activityType, int eventType, long reportLatencyNs) throws RemoteException {
+            public boolean enableActivityEvent(
+                    String activityType, int eventType, long reportLatencyNs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -300,7 +316,8 @@ public interface IActivityRecognitionHardware extends IInterface {
             }
 
             @Override // android.hardware.location.IActivityRecognitionHardware
-            public boolean disableActivityEvent(String activityType, int eventType) throws RemoteException {
+            public boolean disableActivityEvent(String activityType, int eventType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -335,31 +352,38 @@ public interface IActivityRecognitionHardware extends IInterface {
         }
 
         protected void getSupportedActivities_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         protected void isActivitySupported_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         protected void registerSink_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         protected void unregisterSink_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         protected void enableActivityEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         protected void disableActivityEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         protected void flush_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.LOCATION_HARDWARE, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

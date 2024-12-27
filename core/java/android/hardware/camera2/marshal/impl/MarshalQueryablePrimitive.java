@@ -5,6 +5,7 @@ import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.utils.TypeReference;
 import android.util.Rational;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
@@ -61,7 +62,8 @@ public final class MarshalQueryablePrimitive<T> implements MarshalQueryable<T> {
                     marshalPrimitive(val5, buffer);
                     return;
                 }
-                throw new UnsupportedOperationException("Can't marshal managed type " + this.mTypeReference);
+                throw new UnsupportedOperationException(
+                        "Can't marshal managed type " + this.mTypeReference);
             }
         }
 
@@ -107,7 +109,8 @@ public final class MarshalQueryablePrimitive<T> implements MarshalQueryable<T> {
                     int denominator = buffer.getInt();
                     return new Rational(numerator, denominator);
                 default:
-                    throw new UnsupportedOperationException("Can't unmarshal native type " + this.mNativeType);
+                    throw new UnsupportedOperationException(
+                            "Can't unmarshal native type " + this.mNativeType);
             }
         }
 
@@ -126,7 +129,17 @@ public final class MarshalQueryablePrimitive<T> implements MarshalQueryable<T> {
     public boolean isTypeMappingSupported(TypeReference<T> managedType, int nativeType) {
         if (managedType.getType() instanceof Class) {
             Class<?> klass = (Class) managedType.getType();
-            return (klass == Byte.TYPE || klass == Byte.class) ? nativeType == 0 : (klass == Integer.TYPE || klass == Integer.class) ? nativeType == 1 : (klass == Float.TYPE || klass == Float.class) ? nativeType == 2 : (klass == Long.TYPE || klass == Long.class) ? nativeType == 3 : (klass == Double.TYPE || klass == Double.class) ? nativeType == 4 : klass == Rational.class && nativeType == 5;
+            return (klass == Byte.TYPE || klass == Byte.class)
+                    ? nativeType == 0
+                    : (klass == Integer.TYPE || klass == Integer.class)
+                            ? nativeType == 1
+                            : (klass == Float.TYPE || klass == Float.class)
+                                    ? nativeType == 2
+                                    : (klass == Long.TYPE || klass == Long.class)
+                                            ? nativeType == 3
+                                            : (klass == Double.TYPE || klass == Double.class)
+                                                    ? nativeType == 4
+                                                    : klass == Rational.class && nativeType == 5;
         }
         return false;
     }

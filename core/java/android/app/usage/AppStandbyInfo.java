@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class AppStandbyInfo implements Parcelable {
-    public static final Parcelable.Creator<AppStandbyInfo> CREATOR = new Parcelable.Creator<AppStandbyInfo>() { // from class: android.app.usage.AppStandbyInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppStandbyInfo createFromParcel(Parcel source) {
-            return new AppStandbyInfo(source);
-        }
+    public static final Parcelable.Creator<AppStandbyInfo> CREATOR =
+            new Parcelable.Creator<
+                    AppStandbyInfo>() { // from class: android.app.usage.AppStandbyInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppStandbyInfo createFromParcel(Parcel source) {
+                    return new AppStandbyInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppStandbyInfo[] newArray(int size) {
-            return new AppStandbyInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppStandbyInfo[] newArray(int size) {
+                    return new AppStandbyInfo[size];
+                }
+            };
     public String mPackageName;
     public int mStandbyBucket;
 

@@ -1,7 +1,7 @@
 package android.media.browse;
 
-import android.media.browse.MediaBrowser;
 import android.os.Bundle;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -12,18 +12,23 @@ public class MediaBrowserUtils {
             return true;
         }
         if (options1 == null) {
-            if (options2.getInt(MediaBrowser.EXTRA_PAGE, -1) == -1 && options2.getInt(MediaBrowser.EXTRA_PAGE_SIZE, -1) == -1) {
+            if (options2.getInt(MediaBrowser.EXTRA_PAGE, -1) == -1
+                    && options2.getInt(MediaBrowser.EXTRA_PAGE_SIZE, -1) == -1) {
                 return true;
             }
             return false;
         }
         if (options2 == null) {
-            if (options1.getInt(MediaBrowser.EXTRA_PAGE, -1) == -1 && options1.getInt(MediaBrowser.EXTRA_PAGE_SIZE, -1) == -1) {
+            if (options1.getInt(MediaBrowser.EXTRA_PAGE, -1) == -1
+                    && options1.getInt(MediaBrowser.EXTRA_PAGE_SIZE, -1) == -1) {
                 return true;
             }
             return false;
         }
-        if (options1.getInt(MediaBrowser.EXTRA_PAGE, -1) == options2.getInt(MediaBrowser.EXTRA_PAGE, -1) && options1.getInt(MediaBrowser.EXTRA_PAGE_SIZE, -1) == options2.getInt(MediaBrowser.EXTRA_PAGE_SIZE, -1)) {
+        if (options1.getInt(MediaBrowser.EXTRA_PAGE, -1)
+                        == options2.getInt(MediaBrowser.EXTRA_PAGE, -1)
+                && options1.getInt(MediaBrowser.EXTRA_PAGE_SIZE, -1)
+                        == options2.getInt(MediaBrowser.EXTRA_PAGE_SIZE, -1)) {
             return true;
         }
         return false;
@@ -61,7 +66,8 @@ public class MediaBrowserUtils {
         return false;
     }
 
-    public static List<MediaBrowser.MediaItem> applyPagingOptions(List<MediaBrowser.MediaItem> list, Bundle options) {
+    public static List<MediaBrowser.MediaItem> applyPagingOptions(
+            List<MediaBrowser.MediaItem> list, Bundle options) {
         if (list == null) {
             return null;
         }

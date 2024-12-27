@@ -1,7 +1,7 @@
 package android.os;
 
-import android.os.PowerManager;
 import android.view.KeyEvent;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes3.dex */
@@ -63,7 +63,8 @@ public abstract class PowerManagerInternal {
 
     public abstract void registerLowPowerModeObserver(LowPowerModeListener lowPowerModeListener);
 
-    public abstract void registerUserActivityStateListener(UserActivityStateListener userActivityStateListener);
+    public abstract void registerUserActivityStateListener(
+            UserActivityStateListener userActivityStateListener);
 
     public abstract boolean setDeviceIdleMode(boolean z);
 
@@ -119,7 +120,8 @@ public abstract class PowerManagerInternal {
 
     public abstract void uidIdle(int i);
 
-    public abstract void unregisterUserActivityStateListener(UserActivityStateListener userActivityStateListener);
+    public abstract void unregisterUserActivityStateListener(
+            UserActivityStateListener userActivityStateListener);
 
     public abstract void updateProfileActivityTimeFromKnox(int i, long j);
 
@@ -161,17 +163,19 @@ public abstract class PowerManagerInternal {
         return wakefulness == 1 || wakefulness == 2;
     }
 
-    public void registerLowPowerModeObserver(final int serviceType, final Consumer<PowerSaveState> listener) {
-        registerLowPowerModeObserver(new LowPowerModeListener() { // from class: android.os.PowerManagerInternal.1
-            @Override // android.os.PowerManagerInternal.LowPowerModeListener
-            public int getServiceType() {
-                return serviceType;
-            }
+    public void registerLowPowerModeObserver(
+            final int serviceType, final Consumer<PowerSaveState> listener) {
+        registerLowPowerModeObserver(
+                new LowPowerModeListener() { // from class: android.os.PowerManagerInternal.1
+                    @Override // android.os.PowerManagerInternal.LowPowerModeListener
+                    public int getServiceType() {
+                        return serviceType;
+                    }
 
-            @Override // android.os.PowerManagerInternal.LowPowerModeListener
-            public void onLowPowerModeChanged(PowerSaveState state) {
-                listener.accept(state);
-            }
-        });
+                    @Override // android.os.PowerManagerInternal.LowPowerModeListener
+                    public void onLowPowerModeChanged(PowerSaveState state) {
+                        listener.accept(state);
+                    }
+                });
     }
 }

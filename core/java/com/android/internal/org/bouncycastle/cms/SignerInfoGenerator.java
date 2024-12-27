@@ -18,6 +18,7 @@ import com.android.internal.org.bouncycastle.operator.DigestCalculatorProvider;
 import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.io.TeeOutputStream;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collections;
@@ -36,17 +37,29 @@ public class SignerInfoGenerator {
     private final SignerIdentifier signerIdentifier;
     private final CMSAttributeTableGenerator unsAttrGen;
 
-    SignerInfoGenerator(SignerIdentifier signerIdentifier, ContentSigner signer, DigestCalculatorProvider digesterProvider, CMSSignatureEncryptionAlgorithmFinder sigEncAlgFinder) throws OperatorCreationException {
+    SignerInfoGenerator(
+            SignerIdentifier signerIdentifier,
+            ContentSigner signer,
+            DigestCalculatorProvider digesterProvider,
+            CMSSignatureEncryptionAlgorithmFinder sigEncAlgFinder)
+            throws OperatorCreationException {
         this(signerIdentifier, signer, digesterProvider, sigEncAlgFinder, false);
     }
 
-    SignerInfoGenerator(SignerIdentifier signerIdentifier, ContentSigner signer, DigestCalculatorProvider digesterProvider, CMSSignatureEncryptionAlgorithmFinder sigEncAlgFinder, boolean isDirectSignature) throws OperatorCreationException {
+    SignerInfoGenerator(
+            SignerIdentifier signerIdentifier,
+            ContentSigner signer,
+            DigestCalculatorProvider digesterProvider,
+            CMSSignatureEncryptionAlgorithmFinder sigEncAlgFinder,
+            boolean isDirectSignature)
+            throws OperatorCreationException {
         this.digAlgFinder = new DefaultDigestAlgorithmIdentifierFinder();
         this.calculatedDigest = null;
         this.signerIdentifier = signerIdentifier;
         this.signer = signer;
         if (digesterProvider != null) {
-            this.digester = digesterProvider.get(this.digAlgFinder.find(signer.getAlgorithmIdentifier()));
+            this.digester =
+                    digesterProvider.get(this.digAlgFinder.find(signer.getAlgorithmIdentifier()));
         } else {
             this.digester = null;
         }
@@ -60,7 +73,10 @@ public class SignerInfoGenerator {
         this.sigEncAlgFinder = sigEncAlgFinder;
     }
 
-    public SignerInfoGenerator(SignerInfoGenerator original, CMSAttributeTableGenerator sAttrGen, CMSAttributeTableGenerator unsAttrGen) {
+    public SignerInfoGenerator(
+            SignerInfoGenerator original,
+            CMSAttributeTableGenerator sAttrGen,
+            CMSAttributeTableGenerator unsAttrGen) {
         this.digAlgFinder = new DefaultDigestAlgorithmIdentifierFinder();
         this.calculatedDigest = null;
         this.signerIdentifier = original.signerIdentifier;
@@ -71,13 +87,21 @@ public class SignerInfoGenerator {
         this.unsAttrGen = unsAttrGen;
     }
 
-    SignerInfoGenerator(SignerIdentifier signerIdentifier, ContentSigner signer, DigestCalculatorProvider digesterProvider, CMSSignatureEncryptionAlgorithmFinder sigEncAlgFinder, CMSAttributeTableGenerator sAttrGen, CMSAttributeTableGenerator unsAttrGen) throws OperatorCreationException {
+    SignerInfoGenerator(
+            SignerIdentifier signerIdentifier,
+            ContentSigner signer,
+            DigestCalculatorProvider digesterProvider,
+            CMSSignatureEncryptionAlgorithmFinder sigEncAlgFinder,
+            CMSAttributeTableGenerator sAttrGen,
+            CMSAttributeTableGenerator unsAttrGen)
+            throws OperatorCreationException {
         this.digAlgFinder = new DefaultDigestAlgorithmIdentifierFinder();
         this.calculatedDigest = null;
         this.signerIdentifier = signerIdentifier;
         this.signer = signer;
         if (digesterProvider != null) {
-            this.digester = digesterProvider.get(this.digAlgFinder.find(signer.getAlgorithmIdentifier()));
+            this.digester =
+                    digesterProvider.get(this.digAlgFinder.find(signer.getAlgorithmIdentifier()));
         } else {
             this.digester = null;
         }
@@ -112,7 +136,8 @@ public class SignerInfoGenerator {
     public OutputStream getCalculatingOutputStream() {
         if (this.digester != null) {
             if (this.sAttrGen == null) {
-                return new TeeOutputStream(this.digester.getOutputStream(), this.signer.getOutputStream());
+                return new TeeOutputStream(
+                        this.digester.getOutputStream(), this.signer.getOutputStream());
             }
             return this.digester.getOutputStream();
         }
@@ -124,11 +149,20 @@ public class SignerInfoGenerator {
         ASN1Set unsignedAttr;
         ASN1Set signedAttr = null;
         try {
-            AlgorithmIdentifier digestEncryptionAlgorithm = this.sigEncAlgFinder.findEncryptionAlgorithm(this.signer.getAlgorithmIdentifier());
+            AlgorithmIdentifier digestEncryptionAlgorithm =
+                    this.sigEncAlgFinder.findEncryptionAlgorithm(
+                            this.signer.getAlgorithmIdentifier());
             if (this.sAttrGen != null) {
                 AlgorithmIdentifier digestAlg2 = this.digester.getAlgorithmIdentifier();
                 this.calculatedDigest = this.digester.getDigest();
-                AttributeTable signed = this.sAttrGen.getAttributes(Collections.unmodifiableMap(getBaseParameters(contentType, this.digester.getAlgorithmIdentifier(), digestEncryptionAlgorithm, this.calculatedDigest)));
+                AttributeTable signed =
+                        this.sAttrGen.getAttributes(
+                                Collections.unmodifiableMap(
+                                        getBaseParameters(
+                                                contentType,
+                                                this.digester.getAlgorithmIdentifier(),
+                                                digestEncryptionAlgorithm,
+                                                this.calculatedDigest)));
                 signedAttr = getAttributeSet(signed);
                 OutputStream sOut = this.signer.getOutputStream();
                 sOut.write(signedAttr.getEncoded(ASN1Encoding.DER));
@@ -139,7 +173,8 @@ public class SignerInfoGenerator {
                 this.calculatedDigest = this.digester.getDigest();
                 digestAlg = digestAlg3;
             } else {
-                AlgorithmIdentifier digestAlg4 = this.digAlgFinder.find(this.signer.getAlgorithmIdentifier());
+                AlgorithmIdentifier digestAlg4 =
+                        this.digAlgFinder.find(this.signer.getAlgorithmIdentifier());
                 this.calculatedDigest = null;
                 digestAlg = digestAlg4;
             }
@@ -147,13 +182,25 @@ public class SignerInfoGenerator {
             if (this.unsAttrGen == null) {
                 unsignedAttr = null;
             } else {
-                Map parameters = getBaseParameters(contentType, digestAlg, digestEncryptionAlgorithm, this.calculatedDigest);
+                Map parameters =
+                        getBaseParameters(
+                                contentType,
+                                digestAlg,
+                                digestEncryptionAlgorithm,
+                                this.calculatedDigest);
                 parameters.put(CMSAttributeTableGenerator.SIGNATURE, Arrays.clone(sigBytes));
-                AttributeTable unsigned = this.unsAttrGen.getAttributes(Collections.unmodifiableMap(parameters));
+                AttributeTable unsigned =
+                        this.unsAttrGen.getAttributes(Collections.unmodifiableMap(parameters));
                 ASN1Set unsignedAttr2 = getAttributeSet(unsigned);
                 unsignedAttr = unsignedAttr2;
             }
-            return new SignerInfo(this.signerIdentifier, digestAlg, signedAttr, digestEncryptionAlgorithm, new DEROctetString(sigBytes), unsignedAttr);
+            return new SignerInfo(
+                    this.signerIdentifier,
+                    digestAlg,
+                    signedAttr,
+                    digestEncryptionAlgorithm,
+                    new DEROctetString(sigBytes),
+                    unsignedAttr);
         } catch (IOException e) {
             throw new CMSException("encoding error.", e);
         }
@@ -170,7 +217,11 @@ public class SignerInfoGenerator {
         return null;
     }
 
-    private Map getBaseParameters(ASN1ObjectIdentifier contentType, AlgorithmIdentifier digAlgId, AlgorithmIdentifier sigAlgId, byte[] hash) {
+    private Map getBaseParameters(
+            ASN1ObjectIdentifier contentType,
+            AlgorithmIdentifier digAlgId,
+            AlgorithmIdentifier sigAlgId,
+            byte[] hash) {
         Map param = new HashMap();
         if (contentType != null) {
             param.put("contentType", contentType);

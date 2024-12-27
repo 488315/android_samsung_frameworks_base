@@ -18,16 +18,13 @@ public interface IGroupCallCallback extends IInterface {
 
     public static class Default implements IGroupCallCallback {
         @Override // android.telephony.mbms.IGroupCallCallback
-        public void onError(int errorCode, String message) throws RemoteException {
-        }
+        public void onError(int errorCode, String message) throws RemoteException {}
 
         @Override // android.telephony.mbms.IGroupCallCallback
-        public void onGroupCallStateChanged(int state, int reason) throws RemoteException {
-        }
+        public void onGroupCallStateChanged(int state, int reason) throws RemoteException {}
 
         @Override // android.telephony.mbms.IGroupCallCallback
-        public void onBroadcastSignalStrengthUpdated(int signalStrength) throws RemoteException {
-        }
+        public void onBroadcastSignalStrengthUpdated(int signalStrength) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +32,7 @@ public interface IGroupCallCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGroupCallCallback {
+    public abstract static class Stub extends Binder implements IGroupCallCallback {
         static final int TRANSACTION_onBroadcastSignalStrengthUpdated = 3;
         static final int TRANSACTION_onError = 1;
         static final int TRANSACTION_onGroupCallStateChanged = 2;
@@ -79,7 +76,8 @@ public interface IGroupCallCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGroupCallCallback.DESCRIPTOR);
             }
@@ -153,7 +151,8 @@ public interface IGroupCallCallback extends IInterface {
             }
 
             @Override // android.telephony.mbms.IGroupCallCallback
-            public void onBroadcastSignalStrengthUpdated(int signalStrength) throws RemoteException {
+            public void onBroadcastSignalStrengthUpdated(int signalStrength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IGroupCallCallback.DESCRIPTOR);

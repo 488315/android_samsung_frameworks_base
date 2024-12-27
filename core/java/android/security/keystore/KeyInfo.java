@@ -29,7 +29,30 @@ public class KeyInfo implements KeySpec {
     private final int mUserAuthenticationValidityDurationSeconds;
     private final boolean mUserConfirmationRequired;
 
-    public KeyInfo(String keystoreKeyAlias, boolean insideSecureHardware, int origin, int keySize, Date keyValidityStart, Date keyValidityForOriginationEnd, Date keyValidityForConsumptionEnd, int purposes, String[] encryptionPaddings, String[] signaturePaddings, String[] digests, String[] blockModes, boolean userAuthenticationRequired, int userAuthenticationValidityDurationSeconds, int userAuthenticationType, boolean userAuthenticationRequirementEnforcedBySecureHardware, boolean userAuthenticationValidWhileOnBody, boolean unlockedDeviceRequired, boolean trustedUserPresenceRequired, boolean invalidatedByBiometricEnrollment, boolean userConfirmationRequired, int securityLevel, int remainingUsageCount) {
+    public KeyInfo(
+            String keystoreKeyAlias,
+            boolean insideSecureHardware,
+            int origin,
+            int keySize,
+            Date keyValidityStart,
+            Date keyValidityForOriginationEnd,
+            Date keyValidityForConsumptionEnd,
+            int purposes,
+            String[] encryptionPaddings,
+            String[] signaturePaddings,
+            String[] digests,
+            String[] blockModes,
+            boolean userAuthenticationRequired,
+            int userAuthenticationValidityDurationSeconds,
+            int userAuthenticationType,
+            boolean userAuthenticationRequirementEnforcedBySecureHardware,
+            boolean userAuthenticationValidWhileOnBody,
+            boolean unlockedDeviceRequired,
+            boolean trustedUserPresenceRequired,
+            boolean invalidatedByBiometricEnrollment,
+            boolean userConfirmationRequired,
+            int securityLevel,
+            int remainingUsageCount) {
         this.mKeystoreAlias = keystoreKeyAlias;
         this.mInsideSecureHardware = insideSecureHardware;
         this.mOrigin = origin;
@@ -38,14 +61,17 @@ public class KeyInfo implements KeySpec {
         this.mKeyValidityForOriginationEnd = Utils.cloneIfNotNull(keyValidityForOriginationEnd);
         this.mKeyValidityForConsumptionEnd = Utils.cloneIfNotNull(keyValidityForConsumptionEnd);
         this.mPurposes = purposes;
-        this.mEncryptionPaddings = ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(encryptionPaddings));
-        this.mSignaturePaddings = ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(signaturePaddings));
+        this.mEncryptionPaddings =
+                ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(encryptionPaddings));
+        this.mSignaturePaddings =
+                ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(signaturePaddings));
         this.mDigests = ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(digests));
         this.mBlockModes = ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(blockModes));
         this.mUserAuthenticationRequired = userAuthenticationRequired;
         this.mUserAuthenticationValidityDurationSeconds = userAuthenticationValidityDurationSeconds;
         this.mUserAuthenticationType = userAuthenticationType;
-        this.mUserAuthenticationRequirementEnforcedBySecureHardware = userAuthenticationRequirementEnforcedBySecureHardware;
+        this.mUserAuthenticationRequirementEnforcedBySecureHardware =
+                userAuthenticationRequirementEnforcedBySecureHardware;
         this.mUserAuthenticationValidWhileOnBody = userAuthenticationValidWhileOnBody;
         this.mUnlockedDeviceRequired = unlockedDeviceRequired;
         this.mTrustedUserPresenceRequired = trustedUserPresenceRequired;

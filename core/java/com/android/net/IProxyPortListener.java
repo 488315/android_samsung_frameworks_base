@@ -14,8 +14,7 @@ public interface IProxyPortListener extends IInterface {
 
     public static class Default implements IProxyPortListener {
         @Override // com.android.net.IProxyPortListener
-        public void setProxyPort(int port) throws RemoteException {
-        }
+        public void setProxyPort(int port) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IProxyPortListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProxyPortListener {
+    public abstract static class Stub extends Binder implements IProxyPortListener {
         static final int TRANSACTION_setProxyPort = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IProxyPortListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IProxyPortListener.DESCRIPTOR);
             }

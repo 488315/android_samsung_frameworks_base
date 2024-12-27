@@ -8,7 +8,9 @@ import android.os.Build;
 import android.os.RemoteException;
 import android.security.keymaster.KeymasterArguments;
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.security.AlgorithmParameters;
 import java.security.NoSuchAlgorithmException;
 import java.security.ProviderException;
@@ -28,8 +30,7 @@ public abstract class KeymasterUtils {
     private static int mIsTEEKeyMintDevice = 0;
     private static int mIsQCDeivce = 0;
 
-    private KeymasterUtils() {
-    }
+    private KeymasterUtils() {}
 
     static int getDigestOutputSizeBits(int keymasterDigest) {
         switch (keymasterDigest) {
@@ -65,7 +66,8 @@ public abstract class KeymasterUtils {
         }
     }
 
-    static boolean isKeymasterPaddingSchemeIndCpaCompatibleWithAsymmetricCrypto(int keymasterPadding) {
+    static boolean isKeymasterPaddingSchemeIndCpaCompatibleWithAsymmetricCrypto(
+            int keymasterPadding) {
         switch (keymasterPadding) {
             case 1:
                 return false;
@@ -74,11 +76,16 @@ public abstract class KeymasterUtils {
                 return true;
             case 3:
             default:
-                throw new IllegalArgumentException("Unsupported asymmetric encryption padding scheme: " + keymasterPadding);
+                throw new IllegalArgumentException(
+                        "Unsupported asymmetric encryption padding scheme: " + keymasterPadding);
         }
     }
 
-    public static void addMinMacLengthAuthorizationIfNecessary(KeymasterArguments args, int keymasterAlgorithm, int[] keymasterBlockModes, int[] keymasterDigests) {
+    public static void addMinMacLengthAuthorizationIfNecessary(
+            KeymasterArguments args,
+            int keymasterAlgorithm,
+            int[] keymasterBlockModes,
+            int[] keymasterDigests) {
         switch (keymasterAlgorithm) {
             case 32:
                 if (ArrayUtils.contains(keymasterBlockModes, 32)) {
@@ -88,7 +95,10 @@ public abstract class KeymasterUtils {
                 return;
             case 128:
                 if (keymasterDigests.length != 1) {
-                    throw new ProviderException("Unsupported number of authorized digests for HMAC key: " + keymasterDigests.length + ". Exactly one digest must be authorized");
+                    throw new ProviderException(
+                            "Unsupported number of authorized digests for HMAC key: "
+                                    + keymasterDigests.length
+                                    + ". Exactly one digest must be authorized");
                 }
                 int keymasterDigest = keymasterDigests[0];
                 int digestOutputSizeBits = getDigestOutputSizeBits(keymasterDigest);
@@ -96,7 +106,9 @@ public abstract class KeymasterUtils {
                     args.addUnsignedInt(805306376, digestOutputSizeBits);
                     return;
                 }
-                throw new ProviderException("HMAC key authorized for unsupported digest: " + KeyProperties.Digest.fromKeymaster(keymasterDigest));
+                throw new ProviderException(
+                        "HMAC key authorized for unsupported digest: "
+                                + KeyProperties.Digest.fromKeymaster(keymasterDigest));
             default:
                 return;
         }
@@ -133,8 +145,10 @@ public abstract class KeymasterUtils {
         return -1;
     }
 
-    static ECParameterSpec getCurveSpec(String name) throws NoSuchAlgorithmException, InvalidParameterSpecException {
-        AlgorithmParameters parameters = AlgorithmParameters.getInstance(KeyProperties.KEY_ALGORITHM_EC);
+    static ECParameterSpec getCurveSpec(String name)
+            throws NoSuchAlgorithmException, InvalidParameterSpecException {
+        AlgorithmParameters parameters =
+                AlgorithmParameters.getInstance(KeyProperties.KEY_ALGORITHM_EC);
         parameters.init(new ECGenParameterSpec(name));
         return (ECParameterSpec) parameters.getParameterSpec(ECParameterSpec.class);
     }
@@ -158,7 +172,8 @@ public abstract class KeymasterUtils {
     private static boolean isECParameterSpecOfCurve(ECParameterSpec spec, String curveName) {
         try {
             ECParameterSpec curveSpec = getCurveSpec(curveName);
-            if (curveSpec.getCurve().equals(spec.getCurve()) && curveSpec.getOrder().equals(spec.getOrder())) {
+            if (curveSpec.getCurve().equals(spec.getCurve())
+                    && curveSpec.getOrder().equals(spec.getOrder())) {
                 if (curveSpec.getGenerator().equals(spec.getGenerator())) {
                     return true;
                 }
@@ -181,7 +196,8 @@ public abstract class KeymasterUtils {
             switch (securityLevel) {
                 case 1:
                     if (mIsTEEKeyMintDevice == 0) {
-                        int currentTEEVersion = getKeyMintVersion(PackageManager.FEATURE_HARDWARE_KEYSTORE);
+                        int currentTEEVersion =
+                                getKeyMintVersion(PackageManager.FEATURE_HARDWARE_KEYSTORE);
                         mIsTEEKeyMintDevice = currentTEEVersion >= 100 ? 2 : 1;
                     }
                     if (mIsTEEKeyMintDevice != 2) {
@@ -190,7 +206,8 @@ public abstract class KeymasterUtils {
                     break;
                 case 2:
                     if (mIsStrongBoxKeyMintDevice == 0) {
-                        int currentStrongboxVersion = getKeyMintVersion(PackageManager.FEATURE_STRONGBOX_KEYSTORE);
+                        int currentStrongboxVersion =
+                                getKeyMintVersion(PackageManager.FEATURE_STRONGBOX_KEYSTORE);
                         mIsStrongBoxKeyMintDevice = currentStrongboxVersion >= 100 ? 2 : 1;
                     }
                     if (mIsStrongBoxKeyMintDevice != 2) {
@@ -209,7 +226,8 @@ public abstract class KeymasterUtils {
     private static int getKeyMintVersion(String featureName) {
         try {
             ActivityThread.currentActivityThread();
-            ParceledListSlice<FeatureInfo> parceledList = ActivityThread.getPackageManager().getSystemAvailableFeatures();
+            ParceledListSlice<FeatureInfo> parceledList =
+                    ActivityThread.getPackageManager().getSystemAvailableFeatures();
             if (parceledList == null) {
                 return -1;
             }

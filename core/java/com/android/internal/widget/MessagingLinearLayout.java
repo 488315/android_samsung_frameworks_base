@@ -10,6 +10,7 @@ import android.view.RemotableViewMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RemoteViews;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -22,7 +23,8 @@ public class MessagingLinearLayout extends ViewGroup {
     public MessagingLinearLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mMaxDisplayedLines = Integer.MAX_VALUE;
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MessagingLinearLayout, 0, 0);
+        TypedArray a =
+                context.obtainStyledAttributes(attrs, R.styleable.MessagingLinearLayout, 0, 0);
         int N = a.getIndexCount();
         for (int i = 0; i < N; i++) {
             int attr = a.getIndex(i);
@@ -48,7 +50,10 @@ public class MessagingLinearLayout extends ViewGroup {
             Method dump skipped, instructions count: 472
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.widget.MessagingLinearLayout.onMeasure(int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.widget.MessagingLinearLayout.onMeasure(int,"
+                    + " int):void");
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -87,7 +92,11 @@ public class MessagingLinearLayout extends ViewGroup {
                         width = width2;
                     } else {
                         width = width2;
-                        childAt.layout(childLeft, childTop, childLeft + childWidth, lp.lastVisibleHeight + childTop);
+                        childAt.layout(
+                                childLeft,
+                                childTop,
+                                childLeft + childWidth,
+                                lp.lastVisibleHeight + childTop);
                         messagingChild.hideAnimated();
                     }
                     lp.visibleBefore = false;
@@ -99,7 +108,8 @@ public class MessagingLinearLayout extends ViewGroup {
                         childTop += this.mSpacing;
                     }
                     int childTop2 = childTop + lp.topMargin;
-                    childAt.layout(childLeft, childTop2, childLeft + childWidth, childTop2 + childHeight);
+                    childAt.layout(
+                            childLeft, childTop2, childLeft + childWidth, childTop2 + childHeight);
                     childTop = childTop2 + lp.bottomMargin + childHeight;
                     first = false;
                 }
@@ -202,7 +212,8 @@ public class MessagingLinearLayout extends ViewGroup {
                 if (childBaseline == -1) {
                     return -1;
                 }
-                ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) child.getLayoutParams();
+                ViewGroup.MarginLayoutParams lp =
+                        (ViewGroup.MarginLayoutParams) child.getLayoutParams();
                 return lp.topMargin + childBaseline;
             }
         }
@@ -227,8 +238,7 @@ public class MessagingLinearLayout extends ViewGroup {
 
         void setMaxDisplayedLines(int i);
 
-        default void setIsFirstInLayout(boolean first) {
-        }
+        default void setIsFirstInLayout(boolean first) {}
 
         default boolean hasDifferentHeightWhenFirst() {
             return false;

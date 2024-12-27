@@ -1,7 +1,9 @@
 package android.hardware.radio.V1_2;
 
 import android.security.keystore.KeyProperties;
+
 import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
+
 import java.util.ArrayList;
 
 /* loaded from: classes2.dex */

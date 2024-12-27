@@ -61,19 +61,23 @@ public class TetherOffloadRuleParcel implements Parcelable {
                                     if (parcel.dataPosition() - dataPosition < readInt) {
                                         this.pmtu = parcel.readInt();
                                         if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                         parcel.setDataPosition(dataPosition + readInt);
                                         return;
                                     }
                                     if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -107,7 +111,9 @@ public class TetherOffloadRuleParcel implements Parcelable {
         parcel.writeInt(this.prefixLength);
         parcel.writeByteArray(this.srcL2Address);
         parcel.writeByteArray(this.dstL2Address);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.pmtu, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.pmtu, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

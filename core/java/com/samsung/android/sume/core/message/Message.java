@@ -4,9 +4,11 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.os.Messenger;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.GenericMediaBuffer;
 import com.samsung.android.sume.core.descriptor.nn.NNDescriptor$$ExternalSyntheticLambda0;
+
 import java.io.Serializable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -126,12 +128,10 @@ public class Message {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MessageType {
-    }
+    public @interface MessageType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RequestType {
-    }
+    public @interface RequestType {}
 
     public Message(android.os.Message message) {
         this.data = new HashMap();
@@ -184,7 +184,14 @@ public class Message {
 
     Message(int type, int code) {
         this.data = new HashMap();
-        Def.require(isValidCode(type, code), "invalid code(" + code + ") for message(" + type + NavigationBarInflaterView.KEY_CODE_END, new Object[0]);
+        Def.require(
+                isValidCode(type, code),
+                "invalid code("
+                        + code
+                        + ") for message("
+                        + type
+                        + NavigationBarInflaterView.KEY_CODE_END,
+                new Object[0]);
         this.type = type;
         this.code = code;
     }
@@ -204,22 +211,30 @@ public class Message {
         final int typeOfCode = typeOf(code);
         switch (type) {
             case 990:
-                return Stream.of((Object[]) new Integer[]{990, 994, 995, 993}).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda4
-                    @Override // java.util.function.Predicate
-                    public final boolean test(Object obj) {
-                        return Message.lambda$isValidCode$1(typeOfCode, (Integer) obj);
-                    }
-                });
+                return Stream.of((Object[]) new Integer[] {990, 994, 995, 993})
+                        .anyMatch(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda4
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return Message.lambda$isValidCode$1(
+                                                typeOfCode, (Integer) obj);
+                                    }
+                                });
             case 991:
             default:
                 return type == typeOfCode;
             case 992:
-                return Stream.of((Object[]) new Integer[]{992, 990, 991, 993, 995}).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda3
-                    @Override // java.util.function.Predicate
-                    public final boolean test(Object obj) {
-                        return Message.lambda$isValidCode$0(typeOfCode, (Integer) obj);
-                    }
-                });
+                return Stream.of((Object[]) new Integer[] {992, 990, 991, 993, 995})
+                        .anyMatch(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda3
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return Message.lambda$isValidCode$0(
+                                                typeOfCode, (Integer) obj);
+                                    }
+                                });
         }
     }
 
@@ -244,12 +259,15 @@ public class Message {
     }
 
     public boolean containsAll(String... keys) {
-        return Arrays.stream(keys).allMatch(new Predicate() { // from class: com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return Message.this.m9187xc0a52838((String) obj);
-            }
-        });
+        return Arrays.stream(keys)
+                .allMatch(
+                        new Predicate() { // from class:
+                                          // com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return Message.this.m9187xc0a52838((String) obj);
+                            }
+                        });
     }
 
     /* renamed from: lambda$containsAll$2$com-samsung-android-sume-core-message-Message, reason: not valid java name */
@@ -258,12 +276,15 @@ public class Message {
     }
 
     public boolean containsAny(String... keys) {
-        return Arrays.stream(keys).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return Message.this.m9188x136f6cc4((String) obj);
-            }
-        });
+        return Arrays.stream(keys)
+                .anyMatch(
+                        new Predicate() { // from class:
+                                          // com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return Message.this.m9188x136f6cc4((String) obj);
+                            }
+                        });
     }
 
     /* renamed from: lambda$containsAny$3$com-samsung-android-sume-core-message-Message, reason: not valid java name */
@@ -319,18 +340,25 @@ public class Message {
     public Message post() {
         MessagePublisher publisher = this.messagePublisher.get();
         if (publisher != null) {
-            publisher.getChannels(this.code).forEach(new Consumer() { // from class: com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda2
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    Message.this.m9189lambda$post$4$comsamsungandroidsumecoremessageMessage((MessageChannel) obj);
-                }
-            });
+            publisher
+                    .getChannels(this.code)
+                    .forEach(
+                            new Consumer() { // from class:
+                                             // com.samsung.android.sume.core.message.Message$$ExternalSyntheticLambda2
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    Message.this
+                                            .m9189lambda$post$4$comsamsungandroidsumecoremessageMessage(
+                                                    (MessageChannel) obj);
+                                }
+                            });
         }
         return this;
     }
 
     /* renamed from: lambda$post$4$com-samsung-android-sume-core-message-Message, reason: not valid java name */
-    /* synthetic */ void m9189lambda$post$4$comsamsungandroidsumecoremessageMessage(MessageChannel it) {
+    /* synthetic */ void m9189lambda$post$4$comsamsungandroidsumecoremessageMessage(
+            MessageChannel it) {
         Log.d(TAG, "post: " + this.code + " to channel[" + it.getId() + "]: " + it);
         it.send(this);
     }
@@ -361,7 +389,9 @@ public class Message {
     }
 
     public boolean isError() {
-        return this.type == 993 || isError(this.code) || ((Integer) get(KEY_STATUS, -1)).intValue() == 993;
+        return this.type == 993
+                || isError(this.code)
+                || ((Integer) get(KEY_STATUS, -1)).intValue() == 993;
     }
 
     public boolean isErrorThen(Consumer<Integer> errorConsumer) {
@@ -373,7 +403,9 @@ public class Message {
     }
 
     public boolean isWarn() {
-        return this.type == 995 || isWarn(this.code) || ((Integer) get(KEY_STATUS, -1)).intValue() == 995;
+        return this.type == 995
+                || isWarn(this.code)
+                || ((Integer) get(KEY_STATUS, -1)).intValue() == 995;
     }
 
     public boolean isOk() {
@@ -420,6 +452,21 @@ public class Message {
     }
 
     public String contentToString(Object obj, Supplier<String> appended) {
-        return Def.tagOf(Optional.ofNullable(obj).orElse("")) + Def.contentToStringln("\t", NavigationBarInflaterView.SIZE_MOD_START + Def.contentToString("type=" + this.type, "code=" + this.code, "extra=" + this.extra, "exception=" + this.exception, "bundledDataHandler=" + this.bundledDataHandler) + NavigationBarInflaterView.SIZE_MOD_END, "data=" + this.data, (String) Optional.ofNullable(appended).map(new NNDescriptor$$ExternalSyntheticLambda0()).orElse(""));
+        return Def.tagOf(Optional.ofNullable(obj).orElse(""))
+                + Def.contentToStringln(
+                        "\t",
+                        NavigationBarInflaterView.SIZE_MOD_START
+                                + Def.contentToString(
+                                        "type=" + this.type,
+                                        "code=" + this.code,
+                                        "extra=" + this.extra,
+                                        "exception=" + this.exception,
+                                        "bundledDataHandler=" + this.bundledDataHandler)
+                                + NavigationBarInflaterView.SIZE_MOD_END,
+                        "data=" + this.data,
+                        (String)
+                                Optional.ofNullable(appended)
+                                        .map(new NNDescriptor$$ExternalSyntheticLambda0())
+                                        .orElse(""));
     }
 }

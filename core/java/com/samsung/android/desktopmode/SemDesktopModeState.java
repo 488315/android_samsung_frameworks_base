@@ -3,25 +3,29 @@ package com.samsung.android.desktopmode;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes6.dex */
 public class SemDesktopModeState implements Parcelable {
-    public static final Parcelable.Creator<SemDesktopModeState> CREATOR = new Parcelable.Creator<SemDesktopModeState>() { // from class: com.samsung.android.desktopmode.SemDesktopModeState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemDesktopModeState createFromParcel(Parcel parcel) {
-            return new SemDesktopModeState(parcel);
-        }
+    public static final Parcelable.Creator<SemDesktopModeState> CREATOR =
+            new Parcelable.Creator<
+                    SemDesktopModeState>() { // from class:
+                                             // com.samsung.android.desktopmode.SemDesktopModeState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemDesktopModeState createFromParcel(Parcel parcel) {
+                    return new SemDesktopModeState(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemDesktopModeState[] newArray(int size) {
-            return new SemDesktopModeState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemDesktopModeState[] newArray(int size) {
+                    return new SemDesktopModeState[size];
+                }
+            };
     public static final int DISABLED = 2;
     public static final int DISABLING = 1;
     public static final int DISPLAY_TYPE_DUAL = 102;
@@ -40,16 +44,13 @@ public class SemDesktopModeState implements Parcelable {
     public int state;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DisplayType {
-    }
+    public @interface DisplayType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Enabled {
-    }
+    public @interface Enabled {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-    }
+    public @interface State {}
 
     public static String enabledToString(int enabled) {
         switch (enabled) {
@@ -165,7 +166,10 @@ public class SemDesktopModeState implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.enabled), Integer.valueOf(this.state), Integer.valueOf(this.displayType));
+        return Objects.hash(
+                Integer.valueOf(this.enabled),
+                Integer.valueOf(this.state),
+                Integer.valueOf(this.displayType));
     }
 
     public boolean compareTo(int enabled, int state) {
@@ -177,7 +181,13 @@ public class SemDesktopModeState implements Parcelable {
     }
 
     public String toString() {
-        return "SemDesktopModeState(" + enabledToString(this.enabled) + ", " + stateToString(this.state) + ", " + displayTypeToString(this.displayType) + NavigationBarInflaterView.KEY_CODE_END;
+        return "SemDesktopModeState("
+                + enabledToString(this.enabled)
+                + ", "
+                + stateToString(this.state)
+                + ", "
+                + displayTypeToString(this.displayType)
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public SemDesktopModeState(Parcel src) {

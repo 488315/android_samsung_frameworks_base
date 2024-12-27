@@ -108,7 +108,12 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
                         sTwiceBaseCacheSize--;
                         return;
                     } else {
-                        Slog.wtf(TAG, "Found corrupt ArraySet cache: [0]=" + array[0] + " [1]=" + array[1]);
+                        Slog.wtf(
+                                TAG,
+                                "Found corrupt ArraySet cache: [0]="
+                                        + array[0]
+                                        + " [1]="
+                                        + array[1]);
                         sTwiceBaseCache = null;
                         sTwiceBaseCacheSize = 0;
                     }
@@ -130,7 +135,12 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
                         sBaseCacheSize--;
                         return;
                     } else {
-                        Slog.wtf(TAG, "Found corrupt ArraySet cache: [0]=" + array2[0] + " [1]=" + array2[1]);
+                        Slog.wtf(
+                                TAG,
+                                "Found corrupt ArraySet cache: [0]="
+                                        + array2[0]
+                                        + " [1]="
+                                        + array2[1]);
                         sBaseCache = null;
                         sBaseCacheSize = 0;
                     }
@@ -574,52 +584,53 @@ public final class ArraySet<E> implements Collection<E>, Set<E> {
 
     private MapCollections<E, E> getCollection() {
         if (this.mCollections == null) {
-            this.mCollections = new MapCollections<E, E>() { // from class: android.util.ArraySet.1
-                @Override // android.util.MapCollections
-                protected int colGetSize() {
-                    return ArraySet.this.mSize;
-                }
+            this.mCollections =
+                    new MapCollections<E, E>() { // from class: android.util.ArraySet.1
+                        @Override // android.util.MapCollections
+                        protected int colGetSize() {
+                            return ArraySet.this.mSize;
+                        }
 
-                @Override // android.util.MapCollections
-                protected Object colGetEntry(int index, int offset) {
-                    return ArraySet.this.mArray[index];
-                }
+                        @Override // android.util.MapCollections
+                        protected Object colGetEntry(int index, int offset) {
+                            return ArraySet.this.mArray[index];
+                        }
 
-                @Override // android.util.MapCollections
-                protected int colIndexOfKey(Object key) {
-                    return ArraySet.this.indexOf(key);
-                }
+                        @Override // android.util.MapCollections
+                        protected int colIndexOfKey(Object key) {
+                            return ArraySet.this.indexOf(key);
+                        }
 
-                @Override // android.util.MapCollections
-                protected int colIndexOfValue(Object value) {
-                    return ArraySet.this.indexOf(value);
-                }
+                        @Override // android.util.MapCollections
+                        protected int colIndexOfValue(Object value) {
+                            return ArraySet.this.indexOf(value);
+                        }
 
-                @Override // android.util.MapCollections
-                protected Map<E, E> colGetMap() {
-                    throw new UnsupportedOperationException("not a map");
-                }
+                        @Override // android.util.MapCollections
+                        protected Map<E, E> colGetMap() {
+                            throw new UnsupportedOperationException("not a map");
+                        }
 
-                @Override // android.util.MapCollections
-                protected void colPut(E key, E value) {
-                    ArraySet.this.add(key);
-                }
+                        @Override // android.util.MapCollections
+                        protected void colPut(E key, E value) {
+                            ArraySet.this.add(key);
+                        }
 
-                @Override // android.util.MapCollections
-                protected E colSetValue(int index, E value) {
-                    throw new UnsupportedOperationException("not a map");
-                }
+                        @Override // android.util.MapCollections
+                        protected E colSetValue(int index, E value) {
+                            throw new UnsupportedOperationException("not a map");
+                        }
 
-                @Override // android.util.MapCollections
-                protected void colRemoveAt(int index) {
-                    ArraySet.this.removeAt(index);
-                }
+                        @Override // android.util.MapCollections
+                        protected void colRemoveAt(int index) {
+                            ArraySet.this.removeAt(index);
+                        }
 
-                @Override // android.util.MapCollections
-                protected void colClear() {
-                    ArraySet.this.clear();
-                }
-            };
+                        @Override // android.util.MapCollections
+                        protected void colClear() {
+                            ArraySet.this.clear();
+                        }
+                    };
         }
         return this.mCollections;
     }

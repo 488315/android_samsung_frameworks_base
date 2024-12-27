@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class IccOpenLogicalChannelResponse implements Parcelable {
-    public static final Parcelable.Creator<IccOpenLogicalChannelResponse> CREATOR = new Parcelable.Creator<IccOpenLogicalChannelResponse>() { // from class: android.telephony.IccOpenLogicalChannelResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IccOpenLogicalChannelResponse createFromParcel(Parcel in) {
-            return new IccOpenLogicalChannelResponse(in);
-        }
+    public static final Parcelable.Creator<IccOpenLogicalChannelResponse> CREATOR =
+            new Parcelable.Creator<
+                    IccOpenLogicalChannelResponse>() { // from class:
+                                                       // android.telephony.IccOpenLogicalChannelResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IccOpenLogicalChannelResponse createFromParcel(Parcel in) {
+                    return new IccOpenLogicalChannelResponse(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IccOpenLogicalChannelResponse[] newArray(int size) {
-            return new IccOpenLogicalChannelResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IccOpenLogicalChannelResponse[] newArray(int size) {
+                    return new IccOpenLogicalChannelResponse[size];
+                }
+            };
     public static final int INVALID_CHANNEL = -1;
     public static final int STATUS_MISSING_RESOURCE = 2;
     public static final int STATUS_NO_ERROR = 1;

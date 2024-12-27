@@ -9,19 +9,22 @@ import android.util.Log;
 @Deprecated(forRemoval = true, since = "15.5")
 /* loaded from: classes6.dex */
 public class SemContextSedentaryTimerAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextSedentaryTimerAttribute> CREATOR = new Parcelable.Creator<SemContextSedentaryTimerAttribute>() { // from class: com.samsung.android.hardware.context.SemContextSedentaryTimerAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSedentaryTimerAttribute createFromParcel(Parcel in) {
-            return new SemContextSedentaryTimerAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextSedentaryTimerAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextSedentaryTimerAttribute>() { // from class:
+                                                           // com.samsung.android.hardware.context.SemContextSedentaryTimerAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSedentaryTimerAttribute createFromParcel(Parcel in) {
+                    return new SemContextSedentaryTimerAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSedentaryTimerAttribute[] newArray(int size) {
-            return new SemContextSedentaryTimerAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSedentaryTimerAttribute[] newArray(int size) {
+                    return new SemContextSedentaryTimerAttribute[size];
+                }
+            };
     private static final String TAG = "SemContextSedentaryTimerAttribute";
     private int mAlertCount;
     private int mDeviceType;
@@ -47,7 +50,8 @@ public class SemContextSedentaryTimerAttribute extends SemContextAttribute {
         this.mEndTime = 1500;
     }
 
-    public SemContextSedentaryTimerAttribute(int deviceType, int duration, int alertCount, int startTime, int endTime) {
+    public SemContextSedentaryTimerAttribute(
+            int deviceType, int duration, int alertCount, int startTime, int endTime) {
         this.mDeviceType = 1;
         this.mDuration = 3600;
         this.mAlertCount = 1;

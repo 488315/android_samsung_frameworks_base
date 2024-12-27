@@ -2,6 +2,7 @@ package com.android.internal.util;
 
 import com.android.modules.utils.BinaryXmlPullParser;
 import com.android.modules.utils.FastDataInput;
+
 import java.io.InputStream;
 
 /* loaded from: classes5.dex */

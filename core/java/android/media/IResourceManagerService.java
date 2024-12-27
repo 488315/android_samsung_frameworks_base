@@ -1,11 +1,11 @@
 package android.media;
 
-import android.media.IResourceManagerClient;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.samsung.android.media.IResourceManagerObserver;
 import com.samsung.android.media.IResourceManagerObserverClient;
 import com.samsung.android.media.MediaInfoParcel;
@@ -13,16 +13,29 @@ import com.samsung.android.media.MediaInfoParcel;
 /* loaded from: classes2.dex */
 public interface IResourceManagerService extends IInterface {
     public static final String DESCRIPTOR = "android.media.IResourceManagerService";
-    public static final String kPolicySupportsMultipleSecureCodecs = "supports-multiple-secure-codecs";
-    public static final String kPolicySupportsSecureWithNonSecureCodec = "supports-secure-with-non-secure-codec";
+    public static final String kPolicySupportsMultipleSecureCodecs =
+            "supports-multiple-secure-codecs";
+    public static final String kPolicySupportsSecureWithNonSecureCodec =
+            "supports-secure-with-non-secure-codec";
 
-    void addMediaInfo(int i, int i2, long j, IResourceManagerClient iResourceManagerClient, MediaInfoParcel[] mediaInfoParcelArr) throws RemoteException;
+    void addMediaInfo(
+            int i,
+            int i2,
+            long j,
+            IResourceManagerClient iResourceManagerClient,
+            MediaInfoParcel[] mediaInfoParcelArr)
+            throws RemoteException;
 
-    void addResource(ClientInfoParcel clientInfoParcel, IResourceManagerClient iResourceManagerClient, MediaResourceParcel[] mediaResourceParcelArr) throws RemoteException;
+    void addResource(
+            ClientInfoParcel clientInfoParcel,
+            IResourceManagerClient iResourceManagerClient,
+            MediaResourceParcel[] mediaResourceParcelArr)
+            throws RemoteException;
 
     void config(MediaResourcePolicyParcel[] mediaResourcePolicyParcelArr) throws RemoteException;
 
-    IResourceManagerObserver createResourceObserver(IResourceManagerObserverClient iResourceManagerObserverClient) throws RemoteException;
+    IResourceManagerObserver createResourceObserver(
+            IResourceManagerObserverClient iResourceManagerObserverClient) throws RemoteException;
 
     float getRemainedFrameRateFor(String str, int i, int i2) throws RemoteException;
 
@@ -40,98 +53,122 @@ public interface IResourceManagerService extends IInterface {
 
     void overridePid(int i, int i2) throws RemoteException;
 
-    void overrideProcessInfo(IResourceManagerClient iResourceManagerClient, int i, int i2, int i3) throws RemoteException;
+    void overrideProcessInfo(IResourceManagerClient iResourceManagerClient, int i, int i2, int i3)
+            throws RemoteException;
 
-    boolean reclaimResource(ClientInfoParcel clientInfoParcel, MediaResourceParcel[] mediaResourceParcelArr) throws RemoteException;
+    boolean reclaimResource(
+            ClientInfoParcel clientInfoParcel, MediaResourceParcel[] mediaResourceParcelArr)
+            throws RemoteException;
 
     void reclaimResourcesFromClientsPendingRemoval(int i) throws RemoteException;
 
     void removeClient(ClientInfoParcel clientInfoParcel) throws RemoteException;
 
-    void removeResource(ClientInfoParcel clientInfoParcel, MediaResourceParcel[] mediaResourceParcelArr) throws RemoteException;
+    void removeResource(
+            ClientInfoParcel clientInfoParcel, MediaResourceParcel[] mediaResourceParcelArr)
+            throws RemoteException;
 
-    void sendCapacityError(int i, int i2, long j, IResourceManagerClient iResourceManagerClient, MediaInfoParcel[] mediaInfoParcelArr) throws RemoteException;
+    void sendCapacityError(
+            int i,
+            int i2,
+            long j,
+            IResourceManagerClient iResourceManagerClient,
+            MediaInfoParcel[] mediaInfoParcelArr)
+            throws RemoteException;
 
-    void setCodecState(int i, int i2, long j, IResourceManagerClient iResourceManagerClient, int i3) throws RemoteException;
+    void setCodecState(int i, int i2, long j, IResourceManagerClient iResourceManagerClient, int i3)
+            throws RemoteException;
 
     public static class Default implements IResourceManagerService {
         @Override // android.media.IResourceManagerService
-        public void config(MediaResourcePolicyParcel[] policies) throws RemoteException {
-        }
+        public void config(MediaResourcePolicyParcel[] policies) throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void addResource(ClientInfoParcel clientInfo, IResourceManagerClient client, MediaResourceParcel[] resources) throws RemoteException {
-        }
+        public void addResource(
+                ClientInfoParcel clientInfo,
+                IResourceManagerClient client,
+                MediaResourceParcel[] resources)
+                throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void removeResource(ClientInfoParcel clientInfo, MediaResourceParcel[] resources) throws RemoteException {
-        }
+        public void removeResource(ClientInfoParcel clientInfo, MediaResourceParcel[] resources)
+                throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void removeClient(ClientInfoParcel clientInfo) throws RemoteException {
-        }
+        public void removeClient(ClientInfoParcel clientInfo) throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public boolean reclaimResource(ClientInfoParcel clientInfo, MediaResourceParcel[] resources) throws RemoteException {
+        public boolean reclaimResource(ClientInfoParcel clientInfo, MediaResourceParcel[] resources)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.IResourceManagerService
-        public void overridePid(int originalPid, int newPid) throws RemoteException {
-        }
+        public void overridePid(int originalPid, int newPid) throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void overrideProcessInfo(IResourceManagerClient client, int pid, int procState, int oomScore) throws RemoteException {
-        }
+        public void overrideProcessInfo(
+                IResourceManagerClient client, int pid, int procState, int oomScore)
+                throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void markClientForPendingRemoval(ClientInfoParcel clientInfo) throws RemoteException {
-        }
+        public void markClientForPendingRemoval(ClientInfoParcel clientInfo)
+                throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void reclaimResourcesFromClientsPendingRemoval(int pid) throws RemoteException {
-        }
+        public void reclaimResourcesFromClientsPendingRemoval(int pid) throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void notifyClientCreated(ClientInfoParcel clientInfo) throws RemoteException {
-        }
+        public void notifyClientCreated(ClientInfoParcel clientInfo) throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void notifyClientStarted(ClientConfigParcel clientConfig) throws RemoteException {
-        }
+        public void notifyClientStarted(ClientConfigParcel clientConfig) throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void notifyClientStopped(ClientConfigParcel clientConfig) throws RemoteException {
-        }
+        public void notifyClientStopped(ClientConfigParcel clientConfig) throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void notifyClientConfigChanged(ClientConfigParcel clientConfig) throws RemoteException {
-        }
+        public void notifyClientConfigChanged(ClientConfigParcel clientConfig)
+                throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public IResourceManagerObserver createResourceObserver(IResourceManagerObserverClient client) throws RemoteException {
+        public IResourceManagerObserver createResourceObserver(
+                IResourceManagerObserverClient client) throws RemoteException {
             return null;
         }
 
         @Override // android.media.IResourceManagerService
-        public void addMediaInfo(int uid, int pid, long clientId, IResourceManagerClient client, MediaInfoParcel[] mediaInfo) throws RemoteException {
-        }
+        public void addMediaInfo(
+                int uid,
+                int pid,
+                long clientId,
+                IResourceManagerClient client,
+                MediaInfoParcel[] mediaInfo)
+                throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void setCodecState(int uid, int pid, long clientId, IResourceManagerClient client, int state) throws RemoteException {
-        }
+        public void setCodecState(
+                int uid, int pid, long clientId, IResourceManagerClient client, int state)
+                throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public void sendCapacityError(int uid, int pid, long clientId, IResourceManagerClient client, MediaInfoParcel[] mediaInfo) throws RemoteException {
-        }
+        public void sendCapacityError(
+                int uid,
+                int pid,
+                long clientId,
+                IResourceManagerClient client,
+                MediaInfoParcel[] mediaInfo)
+                throws RemoteException {}
 
         @Override // android.media.IResourceManagerService
-        public float getSupportedFrameRateFor(String componentName, int width, int height) throws RemoteException {
+        public float getSupportedFrameRateFor(String componentName, int width, int height)
+                throws RemoteException {
             return 0.0f;
         }
 
         @Override // android.media.IResourceManagerService
-        public float getRemainedFrameRateFor(String componentName, int width, int height) throws RemoteException {
+        public float getRemainedFrameRateFor(String componentName, int width, int height)
+                throws RemoteException {
             return 0.0f;
         }
 
@@ -141,7 +178,7 @@ public interface IResourceManagerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IResourceManagerService {
+    public abstract static class Stub extends Binder implements IResourceManagerService {
         static final int TRANSACTION_addMediaInfo = 15;
         static final int TRANSACTION_addResource = 2;
         static final int TRANSACTION_config = 1;
@@ -233,7 +270,8 @@ public interface IResourceManagerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IResourceManagerService.DESCRIPTOR);
             }
@@ -243,35 +281,48 @@ public interface IResourceManagerService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    MediaResourcePolicyParcel[] _arg0 = (MediaResourcePolicyParcel[]) data.createTypedArray(MediaResourcePolicyParcel.CREATOR);
+                    MediaResourcePolicyParcel[] _arg0 =
+                            (MediaResourcePolicyParcel[])
+                                    data.createTypedArray(MediaResourcePolicyParcel.CREATOR);
                     data.enforceNoDataAvail();
                     config(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    ClientInfoParcel _arg02 = (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
-                    IResourceManagerClient _arg1 = IResourceManagerClient.Stub.asInterface(data.readStrongBinder());
-                    MediaResourceParcel[] _arg2 = (MediaResourceParcel[]) data.createTypedArray(MediaResourceParcel.CREATOR);
+                    ClientInfoParcel _arg02 =
+                            (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
+                    IResourceManagerClient _arg1 =
+                            IResourceManagerClient.Stub.asInterface(data.readStrongBinder());
+                    MediaResourceParcel[] _arg2 =
+                            (MediaResourceParcel[])
+                                    data.createTypedArray(MediaResourceParcel.CREATOR);
                     data.enforceNoDataAvail();
                     addResource(_arg02, _arg1, _arg2);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    ClientInfoParcel _arg03 = (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
-                    MediaResourceParcel[] _arg12 = (MediaResourceParcel[]) data.createTypedArray(MediaResourceParcel.CREATOR);
+                    ClientInfoParcel _arg03 =
+                            (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
+                    MediaResourceParcel[] _arg12 =
+                            (MediaResourceParcel[])
+                                    data.createTypedArray(MediaResourceParcel.CREATOR);
                     data.enforceNoDataAvail();
                     removeResource(_arg03, _arg12);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    ClientInfoParcel _arg04 = (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
+                    ClientInfoParcel _arg04 =
+                            (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
                     data.enforceNoDataAvail();
                     removeClient(_arg04);
                     reply.writeNoException();
                     return true;
                 case 5:
-                    ClientInfoParcel _arg05 = (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
-                    MediaResourceParcel[] _arg13 = (MediaResourceParcel[]) data.createTypedArray(MediaResourceParcel.CREATOR);
+                    ClientInfoParcel _arg05 =
+                            (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
+                    MediaResourceParcel[] _arg13 =
+                            (MediaResourceParcel[])
+                                    data.createTypedArray(MediaResourceParcel.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result = reclaimResource(_arg05, _arg13);
                     reply.writeNoException();
@@ -285,7 +336,8 @@ public interface IResourceManagerService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 7:
-                    IResourceManagerClient _arg07 = IResourceManagerClient.Stub.asInterface(data.readStrongBinder());
+                    IResourceManagerClient _arg07 =
+                            IResourceManagerClient.Stub.asInterface(data.readStrongBinder());
                     int _arg15 = data.readInt();
                     int _arg22 = data.readInt();
                     int _arg3 = data.readInt();
@@ -294,7 +346,8 @@ public interface IResourceManagerService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 8:
-                    ClientInfoParcel _arg08 = (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
+                    ClientInfoParcel _arg08 =
+                            (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
                     data.enforceNoDataAvail();
                     markClientForPendingRemoval(_arg08);
                     reply.writeNoException();
@@ -306,31 +359,37 @@ public interface IResourceManagerService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 10:
-                    ClientInfoParcel _arg010 = (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
+                    ClientInfoParcel _arg010 =
+                            (ClientInfoParcel) data.readTypedObject(ClientInfoParcel.CREATOR);
                     data.enforceNoDataAvail();
                     notifyClientCreated(_arg010);
                     reply.writeNoException();
                     return true;
                 case 11:
-                    ClientConfigParcel _arg011 = (ClientConfigParcel) data.readTypedObject(ClientConfigParcel.CREATOR);
+                    ClientConfigParcel _arg011 =
+                            (ClientConfigParcel) data.readTypedObject(ClientConfigParcel.CREATOR);
                     data.enforceNoDataAvail();
                     notifyClientStarted(_arg011);
                     reply.writeNoException();
                     return true;
                 case 12:
-                    ClientConfigParcel _arg012 = (ClientConfigParcel) data.readTypedObject(ClientConfigParcel.CREATOR);
+                    ClientConfigParcel _arg012 =
+                            (ClientConfigParcel) data.readTypedObject(ClientConfigParcel.CREATOR);
                     data.enforceNoDataAvail();
                     notifyClientStopped(_arg012);
                     reply.writeNoException();
                     return true;
                 case 13:
-                    ClientConfigParcel _arg013 = (ClientConfigParcel) data.readTypedObject(ClientConfigParcel.CREATOR);
+                    ClientConfigParcel _arg013 =
+                            (ClientConfigParcel) data.readTypedObject(ClientConfigParcel.CREATOR);
                     data.enforceNoDataAvail();
                     notifyClientConfigChanged(_arg013);
                     reply.writeNoException();
                     return true;
                 case 14:
-                    IResourceManagerObserverClient _arg014 = IResourceManagerObserverClient.Stub.asInterface(data.readStrongBinder());
+                    IResourceManagerObserverClient _arg014 =
+                            IResourceManagerObserverClient.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     IResourceManagerObserver _result2 = createResourceObserver(_arg014);
                     reply.writeNoException();
@@ -340,8 +399,10 @@ public interface IResourceManagerService extends IInterface {
                     int _arg015 = data.readInt();
                     int _arg16 = data.readInt();
                     long _arg23 = data.readLong();
-                    IResourceManagerClient _arg32 = IResourceManagerClient.Stub.asInterface(data.readStrongBinder());
-                    MediaInfoParcel[] _arg4 = (MediaInfoParcel[]) data.createTypedArray(MediaInfoParcel.CREATOR);
+                    IResourceManagerClient _arg32 =
+                            IResourceManagerClient.Stub.asInterface(data.readStrongBinder());
+                    MediaInfoParcel[] _arg4 =
+                            (MediaInfoParcel[]) data.createTypedArray(MediaInfoParcel.CREATOR);
                     data.enforceNoDataAvail();
                     addMediaInfo(_arg015, _arg16, _arg23, _arg32, _arg4);
                     reply.writeNoException();
@@ -350,7 +411,8 @@ public interface IResourceManagerService extends IInterface {
                     int _arg016 = data.readInt();
                     int _arg17 = data.readInt();
                     long _arg24 = data.readLong();
-                    IResourceManagerClient _arg33 = IResourceManagerClient.Stub.asInterface(data.readStrongBinder());
+                    IResourceManagerClient _arg33 =
+                            IResourceManagerClient.Stub.asInterface(data.readStrongBinder());
                     int _arg42 = data.readInt();
                     data.enforceNoDataAvail();
                     setCodecState(_arg016, _arg17, _arg24, _arg33, _arg42);
@@ -360,8 +422,10 @@ public interface IResourceManagerService extends IInterface {
                     int _arg017 = data.readInt();
                     int _arg18 = data.readInt();
                     long _arg25 = data.readLong();
-                    IResourceManagerClient _arg34 = IResourceManagerClient.Stub.asInterface(data.readStrongBinder());
-                    MediaInfoParcel[] _arg43 = (MediaInfoParcel[]) data.createTypedArray(MediaInfoParcel.CREATOR);
+                    IResourceManagerClient _arg34 =
+                            IResourceManagerClient.Stub.asInterface(data.readStrongBinder());
+                    MediaInfoParcel[] _arg43 =
+                            (MediaInfoParcel[]) data.createTypedArray(MediaInfoParcel.CREATOR);
                     data.enforceNoDataAvail();
                     sendCapacityError(_arg017, _arg18, _arg25, _arg34, _arg43);
                     reply.writeNoException();
@@ -421,7 +485,11 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public void addResource(ClientInfoParcel clientInfo, IResourceManagerClient client, MediaResourceParcel[] resources) throws RemoteException {
+            public void addResource(
+                    ClientInfoParcel clientInfo,
+                    IResourceManagerClient client,
+                    MediaResourceParcel[] resources)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -438,7 +506,8 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public void removeResource(ClientInfoParcel clientInfo, MediaResourceParcel[] resources) throws RemoteException {
+            public void removeResource(ClientInfoParcel clientInfo, MediaResourceParcel[] resources)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -469,7 +538,9 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public boolean reclaimResource(ClientInfoParcel clientInfo, MediaResourceParcel[] resources) throws RemoteException {
+            public boolean reclaimResource(
+                    ClientInfoParcel clientInfo, MediaResourceParcel[] resources)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -503,7 +574,9 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public void overrideProcessInfo(IResourceManagerClient client, int pid, int procState, int oomScore) throws RemoteException {
+            public void overrideProcessInfo(
+                    IResourceManagerClient client, int pid, int procState, int oomScore)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -521,7 +594,8 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public void markClientForPendingRemoval(ClientInfoParcel clientInfo) throws RemoteException {
+            public void markClientForPendingRemoval(ClientInfoParcel clientInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -566,7 +640,8 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public void notifyClientStarted(ClientConfigParcel clientConfig) throws RemoteException {
+            public void notifyClientStarted(ClientConfigParcel clientConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -581,7 +656,8 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public void notifyClientStopped(ClientConfigParcel clientConfig) throws RemoteException {
+            public void notifyClientStopped(ClientConfigParcel clientConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -596,7 +672,8 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public void notifyClientConfigChanged(ClientConfigParcel clientConfig) throws RemoteException {
+            public void notifyClientConfigChanged(ClientConfigParcel clientConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -611,7 +688,8 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public IResourceManagerObserver createResourceObserver(IResourceManagerObserverClient client) throws RemoteException {
+            public IResourceManagerObserver createResourceObserver(
+                    IResourceManagerObserverClient client) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -619,7 +697,8 @@ public interface IResourceManagerService extends IInterface {
                     _data.writeStrongInterface(client);
                     this.mRemote.transact(14, _data, _reply, 0);
                     _reply.readException();
-                    IResourceManagerObserver _result = IResourceManagerObserver.Stub.asInterface(_reply.readStrongBinder());
+                    IResourceManagerObserver _result =
+                            IResourceManagerObserver.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -628,7 +707,13 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public void addMediaInfo(int uid, int pid, long clientId, IResourceManagerClient client, MediaInfoParcel[] mediaInfo) throws RemoteException {
+            public void addMediaInfo(
+                    int uid,
+                    int pid,
+                    long clientId,
+                    IResourceManagerClient client,
+                    MediaInfoParcel[] mediaInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -647,7 +732,9 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public void setCodecState(int uid, int pid, long clientId, IResourceManagerClient client, int state) throws RemoteException {
+            public void setCodecState(
+                    int uid, int pid, long clientId, IResourceManagerClient client, int state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -666,7 +753,13 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public void sendCapacityError(int uid, int pid, long clientId, IResourceManagerClient client, MediaInfoParcel[] mediaInfo) throws RemoteException {
+            public void sendCapacityError(
+                    int uid,
+                    int pid,
+                    long clientId,
+                    IResourceManagerClient client,
+                    MediaInfoParcel[] mediaInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -685,7 +778,8 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public float getSupportedFrameRateFor(String componentName, int width, int height) throws RemoteException {
+            public float getSupportedFrameRateFor(String componentName, int width, int height)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -704,7 +798,8 @@ public interface IResourceManagerService extends IInterface {
             }
 
             @Override // android.media.IResourceManagerService
-            public float getRemainedFrameRateFor(String componentName, int width, int height) throws RemoteException {
+            public float getRemainedFrameRateFor(String componentName, int width, int height)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
